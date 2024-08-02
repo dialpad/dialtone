@@ -688,6 +688,12 @@
         "audio",
         "stop"
       ],
+      "pause-circle-filled": [
+        "music",
+        "audio",
+        "stop",
+        "filled"
+      ],
       "pause": [
         "music",
         "audio",
@@ -717,9 +723,21 @@
         "lock",
         "fix"
       ],
+      "pin-filled": [
+        "save",
+        "map",
+        "lock",
+        "fix",
+        "filled"
+      ],
       "play-circle": [
         "music",
         "start"
+      ],
+      "play-circle-filled": [
+        "music",
+        "start",
+        "filled"
       ],
       "play-filled": [
         "music",
@@ -733,6 +751,12 @@
         "add",
         "new",
         "maths"
+      ],
+      "plus-circle-filled": [
+        "add",
+        "new",
+        "maths",
+        "filled"
       ],
       "plus": [
         "add",
@@ -1435,6 +1459,13 @@
         "marker",
         "tag"
       ],
+      "bookmark-filled": [
+        "read",
+        "clip",
+        "marker",
+        "tag",
+        "filled"
+      ],
       "box-select": [
         "selection",
         "square",
@@ -1504,6 +1535,10 @@
       ],
       "dissatisfied": [
         "unhappy"
+      ],
+      "dissatisfied-filled": [
+        "unhappy",
+        "filled"
       ],
       "double-check": [
         "read"
@@ -1642,6 +1677,14 @@
         "great",
         "good"
       ],
+      "satisfied-filled": [
+        "happy",
+        "pleased",
+        "smile",
+        "great",
+        "good",
+        "filled"
+      ],
       "scroll": [
         "paper",
         "log",
@@ -1695,6 +1738,18 @@
         "pleased",
         "good",
         "face"
+      ],
+      "somewhat-dissatisfied-filled": [
+        "face",
+        "filled"
+      ],
+      "somewhat-satisfied-filled": [
+        "smile",
+        "happy",
+        "pleased",
+        "good",
+        "face",
+        "filled"
       ],
       "sparkle": [
         "stars",
@@ -2093,6 +2148,13 @@
         "navigation",
         "travel",
         "marker"
+      ],
+      "map-pin-filled": [
+        "location",
+        "navigation",
+        "travel",
+        "marker",
+        "filled"
       ],
       "map": [
         "location",
