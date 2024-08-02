@@ -10,10 +10,12 @@
     :importance="importance"
     :kind="kind"
     :class="`d-split-btn__omega d-split-btn__omega--${size}`"
-    @click="(e) => $emit('click', e)"
   >
     <template #icon>
-      <slot name="icon">
+      <slot
+        name="icon"
+        :size="SPLIT_BUTTON_ICON_SIZES[size]"
+      >
         <dt-icon-chevron-down :size="SPLIT_BUTTON_ICON_SIZES[size]" />
       </slot>
     </template>

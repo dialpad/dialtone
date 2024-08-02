@@ -2,7 +2,7 @@
   <span
     data-qa="dt-split-button"
     class="d-split-btn"
-    :style="{ width: width }"
+    :style="{ width }"
   >
     <dt-button
       v-dt-tooltip="alphaTooltipText"
@@ -33,11 +33,14 @@
         <template #anchor="{ attrs }">
           <split-button-omega
             v-bind="{ ...attrs, ...omegaButtonProps }"
-            @click="(e) => $emit('omega-clicked', e)"
+            @click.native="(e) => $emit('omega-clicked', e)"
           >
-            <template #icon>
+            <template #icon="{ size: iconSize }">
               <!-- @slot Omega (right) button icon slot -->
-              <slot name="omegaIcon" />
+              <slot
+                name="omegaIcon"
+                :size="iconSize"
+              />
             </template>
           </split-button-omega>
         </template>
@@ -50,11 +53,14 @@
       <split-button-omega
         v-else
         v-bind="omegaButtonProps"
-        @click="(e) => $emit('omega-clicked', e)"
+        @click.native="(e) => $emit('omega-clicked', e)"
       >
-        <template #icon>
+        <template #icon="{ size: iconSize }">
           <!-- @slot Omega (right) button icon slot -->
-          <slot name="omegaIcon" />
+          <slot
+            name="omegaIcon"
+            :size="iconSize"
+          />
         </template>
       </split-button-omega>
     </slot>
