@@ -23,6 +23,7 @@ export const argsData = {
   onSelect: action('select'),
   onRemove: action('remove'),
   onMaxSelected: action('maxSelected'),
+  onComboboxHighlight: action('comboboxHighlight'),
   visuallyHiddenCloseLabel: 'Close Combobox',
 };
 
@@ -121,6 +122,12 @@ export const argTypesData = {
     description: 'Select item event',
     table: {
       type: { summary: 'event' },
+    },
+  },
+
+  onComboboxHighlight: {
+    table: {
+      disable: true,
     },
   },
 };

@@ -4,6 +4,7 @@
     :label="label"
     :show-list="showList"
     :max-height="listMaxHeight"
+    :max-width="listMaxWidth"
     :popover-offset="popoverOffset"
     :has-suggestion-list="hasSuggestionList"
     :visually-hidden-close-label="visuallyHiddenCloseLabel"
@@ -12,6 +13,7 @@
     :append-to="appendTo"
     :transition="transition"
     @select="onComboboxSelect"
+    @highlight="comboboxHighlight"
   >
     <template #input="{ onInput }">
       <span
@@ -303,6 +305,15 @@ export default {
       type: Boolean,
       default: false,
     },
+
+    /**
+     * Determines maximum width for the popover before overflow.
+     * Possible units rem|px|em
+     */
+    listMaxWidth: {
+      type: String,
+      default: '',
+    },
   },
 
   emits: [
@@ -345,6 +356,14 @@ export default {
      * @type {KeyboardEvent}
       */
     'keyup',
+
+    /**
+     * Event fired when combobox item is highlighted
+     *
+     * @event combobox-highlight
+     * @type {Object}
+     */
+    'combobox-highlight',
   ],
 
   data () {
@@ -452,6 +471,10 @@ export default {
   },
 
   methods: {
+    comboboxHighlight (highlightIndex) {
+      this.$emit('combobox-highlight', highlightIndex);
+    },
+
     async initSelectedItems () {
       await this.$nextTick();
       this.setInputPadding();
