@@ -686,12 +686,24 @@
       "pause-circle": [
         "music",
         "audio",
-        "stop"
+        "stop",
+        "video",
+        "media"
+
+      ],
+      "pause-circle-filled": [
+        "music",
+        "audio",
+        "stop",
+        "video",
+        "media"
       ],
       "pause": [
         "music",
         "audio",
-        "stop"
+        "stop",
+        "video",
+        "media"
       ],
       "phone-hang-up": [
         "disconnect",
@@ -717,13 +729,30 @@
         "lock",
         "fix"
       ],
+      "pin-filled": [
+        "save",
+        "location",
+        "map",
+        "lock",
+        "fix"
+      ],
       "play-circle": [
         "music",
-        "start"
+        "start",
+        "video",
+        "media"
+      ],
+      "play-circle-filled": [
+        "music",
+        "start",
+        "video",
+        "media"
       ],
       "play-filled": [
         "music",
-        "start"
+        "start",
+        "video",
+        "media"
       ],
       "play": [
         "music",
@@ -733,6 +762,12 @@
         "add",
         "new",
         "maths"
+      ],
+      "plus-circle-filled": [
+        "add",
+        "new",
+        "maths"
+
       ],
       "plus": [
         "add",
@@ -835,6 +870,10 @@
         "label"
       ],
       "stop-circle": [
+        "media",
+        "music"
+      ],
+      "stop-circle-filled": [
         "media",
         "music"
       ],
@@ -1435,6 +1474,12 @@
         "marker",
         "tag"
       ],
+      "bookmark-filled": [
+        "read",
+        "clip",
+        "marker",
+        "tag"
+      ],
       "box-select": [
         "selection",
         "square",
@@ -1504,6 +1549,14 @@
       ],
       "dissatisfied": [
         "unhappy"
+      ],
+      "dissatisfied-filled": [
+        "unhappy",
+        "rating",
+        "rate",
+        "vote",
+        "voting",
+        "review"
       ],
       "double-check": [
         "read"
@@ -1640,8 +1693,24 @@
         "pleased",
         "smile",
         "great",
-        "good"
+        "good",
+        "rating",
+        "rate",
+        "vote",
+        "voting",
+        "review"
       ],
+      "satisfied-filled": [
+        "happy",
+        "pleased",
+        "smile",
+        "great",
+        "good",
+        "rating",
+        "rate",
+        "vote",
+        "voting",
+        "review"      ],
       "scroll": [
         "paper",
         "log",
@@ -1687,16 +1756,52 @@
         "secure"
       ],
       "somewhat-dissatisfied": [
-        "face"
+        "face",
+        "rating",
+        "rate",
+        "vote",
+        "voting",
+        "review"
       ],
       "somewhat-satisfied": [
         "smile",
         "happy",
         "pleased",
         "good",
-        "face"
+        "face",
+        "rating",
+        "rate",
+        "vote",
+        "voting",
+        "review"
       ],
+      "somewhat-dissatisfied-filled": [
+        "face",
+        "rating",
+        "rate",
+        "vote",
+        "voting",
+        "review"
+      ],
+      "somewhat-satisfied-filled": [
+        "smile",
+        "happy",
+        "pleased",
+        "good",
+        "face",
+        "rating",
+        "rate",
+        "vote",
+        "voting",
+        "review"
+            ],
       "sparkle": [
+        "stars",
+        "magic",
+        "help",
+        "ai"
+      ],
+      "sparkle-filled": [
         "stars",
         "magic",
         "help",
@@ -1783,6 +1888,22 @@
         "face"
       ],
       "very-satisfied": [
+        "happy",
+        "smile",
+        "face",
+        "great",
+        "pleased",
+        "good"
+      ],
+      "very-dissatisfied-filled": [
+        "sad",
+        "frown",
+        "unhappy",
+        "bad",
+        "poor",
+        "face"
+      ],
+      "very-satisfied-filled": [
         "happy",
         "smile",
         "face",
@@ -2089,6 +2210,12 @@
         "living"
       ],
       "map-pin": [
+        "location",
+        "navigation",
+        "travel",
+        "marker"
+      ],
+      "map-pin-filled": [
         "location",
         "navigation",
         "travel",
