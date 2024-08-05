@@ -1,49 +1,11 @@
-import { Canvas, Story, Subtitle, Controls, Meta } from '@storybook/blocks';
+import { Meta } from '@storybook/blocks';
 import DtImageViewer from './image_viewer.vue';
 
 import * as ImageViewerStories from './image_viewer.stories';
+import RedirectToDocs from "@/common/snippets/redirect-to-docs.mdx"
 
 <Meta of={ImageViewerStories}/>
 
 # Image Viewer
 
-<Subtitle>
-  Image Viewer lets the user click on an image to see it in a full screen modal.
-</Subtitle>
-
-## Base Style
-
-<Canvas>
-  <Story of={ImageViewerStories.Default} />
-</Canvas>
-
-## Variants
-
-<Canvas>
-  <Story of={ImageViewerStories.Variants} />
-</Canvas>
-
-## Slots, Props & Events
-
-<Controls />
-
-## Usage
-
-### Import
-
-```jsx
-import { DtImageViewer } from '@dialpad/dialtone-vue';
-```
-
-### With Props
-
-```jsx
-<dt-image-viewer
-  image-src="imageSrc"
-  image-alt="imageAlt"
-  image-button-class="imageButtonClass"
-  aria-label="ariaLabel"
-  close-aria-label="closeAriaLabel"
-  open="open"
-/>
-```
+<RedirectToDocs name="image-viewer" />
