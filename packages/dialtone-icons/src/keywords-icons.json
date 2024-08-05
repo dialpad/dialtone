@@ -686,18 +686,24 @@
       "pause-circle": [
         "music",
         "audio",
-        "stop"
+        "stop",
+        "video",
+        "media"
+
       ],
       "pause-circle-filled": [
         "music",
         "audio",
         "stop",
-        "filled"
+        "video",
+        "media"
       ],
       "pause": [
         "music",
         "audio",
-        "stop"
+        "stop",
+        "video",
+        "media"
       ],
       "phone-hang-up": [
         "disconnect",
@@ -725,23 +731,28 @@
       ],
       "pin-filled": [
         "save",
+        "location",
         "map",
         "lock",
-        "fix",
-        "filled"
+        "fix"
       ],
       "play-circle": [
         "music",
-        "start"
+        "start",
+        "video",
+        "media"
       ],
       "play-circle-filled": [
         "music",
         "start",
-        "filled"
+        "video",
+        "media"
       ],
       "play-filled": [
         "music",
-        "start"
+        "start",
+        "video",
+        "media"
       ],
       "play": [
         "music",
@@ -755,8 +766,8 @@
       "plus-circle-filled": [
         "add",
         "new",
-        "maths",
-        "filled"
+        "maths"
+
       ],
       "plus": [
         "add",
@@ -859,6 +870,10 @@
         "label"
       ],
       "stop-circle": [
+        "media",
+        "music"
+      ],
+      "stop-circle-filled": [
         "media",
         "music"
       ],
@@ -1463,8 +1478,7 @@
         "read",
         "clip",
         "marker",
-        "tag",
-        "filled"
+        "tag"
       ],
       "box-select": [
         "selection",
@@ -1538,7 +1552,11 @@
       ],
       "dissatisfied-filled": [
         "unhappy",
-        "filled"
+        "rating",
+        "rate",
+        "vote",
+        "voting",
+        "review"
       ],
       "double-check": [
         "read"
@@ -1675,7 +1693,12 @@
         "pleased",
         "smile",
         "great",
-        "good"
+        "good",
+        "rating",
+        "rate",
+        "vote",
+        "voting",
+        "review"
       ],
       "satisfied-filled": [
         "happy",
@@ -1683,8 +1706,11 @@
         "smile",
         "great",
         "good",
-        "filled"
-      ],
+        "rating",
+        "rate",
+        "vote",
+        "voting",
+        "review"      ],
       "scroll": [
         "paper",
         "log",
@@ -1730,18 +1756,32 @@
         "secure"
       ],
       "somewhat-dissatisfied": [
-        "face"
+        "face",
+        "rating",
+        "rate",
+        "vote",
+        "voting",
+        "review"
       ],
       "somewhat-satisfied": [
         "smile",
         "happy",
         "pleased",
         "good",
-        "face"
+        "face",
+        "rating",
+        "rate",
+        "vote",
+        "voting",
+        "review"
       ],
       "somewhat-dissatisfied-filled": [
         "face",
-        "filled"
+        "rating",
+        "rate",
+        "vote",
+        "voting",
+        "review"
       ],
       "somewhat-satisfied-filled": [
         "smile",
@@ -1749,9 +1789,19 @@
         "pleased",
         "good",
         "face",
-        "filled"
-      ],
+        "rating",
+        "rate",
+        "vote",
+        "voting",
+        "review"
+            ],
       "sparkle": [
+        "stars",
+        "magic",
+        "help",
+        "ai"
+      ],
+      "sparkle-filled": [
         "stars",
         "magic",
         "help",
@@ -1838,6 +1888,22 @@
         "face"
       ],
       "very-satisfied": [
+        "happy",
+        "smile",
+        "face",
+        "great",
+        "pleased",
+        "good"
+      ],
+      "very-dissatisfied-filled": [
+        "sad",
+        "frown",
+        "unhappy",
+        "bad",
+        "poor",
+        "face"
+      ],
+      "very-satisfied-filled": [
         "happy",
         "smile",
         "face",
@@ -2153,8 +2219,7 @@
         "location",
         "navigation",
         "travel",
-        "marker",
-        "filled"
+        "marker"
       ],
       "map": [
         "location",
