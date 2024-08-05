@@ -4,13 +4,33 @@
     class="d-split-btn"
     :style="{ width }"
   >
-    <split-button-alpha v-bind="alphaButtonProps" />
+    <split-button-alpha
+      v-bind="alphaButtonProps"
+      @click.native="(e) => $emit('alpha-clicked', e)"
+    >
+      <template #icon="{ size: iconSize }">
+        <!-- @slot Alpha (left) button icon slot -->
+        <slot
+          name="alphaIcon"
+          :size="iconSize"
+        />
+      </template>
+      <!-- @slot Default content slot -->
+      <slot name="default" />
+    </split-button-alpha>
     <!-- @slot Omega (right) content slot -->
     <slot name="omega">
-      <dt-dropdown v-if="!omegaId && $slots.dropdownList">
+      <dt-dropdown
+        v-if="$slots.dropdownList"
+        :placement="dropdownPlacement"
+        fallback-placements="bottom-end"
+        @click="isDropdownOpen = true"
+        @opened="open => isDropdownOpen = open"
+      >
         <template #anchor="{ attrs }">
           <split-button-omega
             v-bind="{ ...attrs, ...omegaButtonProps }"
+            :active="isDropdownOpen"
             @click.native="(e) => $emit('omega-clicked', e)"
           >
             <template #icon="{ size: iconSize }">
@@ -22,9 +42,12 @@
             </template>
           </split-button-omega>
         </template>
-        <template #list>
+        <template #list="{ close }">
           <!-- @slot Built-in dropdown contents -->
-          <slot name="dropdownList" />
+          <slot
+            name="dropdownList"
+            :close="close"
+          />
         </template>
       </dt-dropdown>
 
@@ -116,7 +139,7 @@ export default {
      */
     alphaTooltipText: {
       type: String,
-      default: '',
+      required: true,
     },
 
     /**
@@ -144,6 +167,15 @@ export default {
     disabled: {
       type: Boolean,
       default: false,
+    },
+
+    /**
+     * The direction the dropdown displays relative to the anchor.
+     * @values top, top-start, top-end, right, right-start, right-end, left, left-start, left-end, bottom, bottom-start, bottom-end, auto, auto-start, auto-end
+     */
+    dropdownPlacement: {
+      type: String,
+      default: 'bottom-end',
     },
 
     /**
@@ -242,34 +274,39 @@ export default {
     'omega-clicked',
   ],
 
+  data () {
+    return {
+      isDropdownOpen: false,
+    };
+  },
+
   computed: {
     alphaButtonProps () {
       return {
-        size: this.size,
-        alphaActive: this.alphaActive,
-        alphaAriaLabel: this.alphaAriaLabel,
-        alphaIconPosition: this.alphaIconPosition,
-        alphaLabelClass: this.alphaLabelClass,
-        alphaLoading: this.alphaLoading,
+        active: this.alphaActive,
+        ariaLabel: this.alphaAriaLabel,
         assertiveOnFocus: this.assertiveOnFocus,
         disabled: this.disabled,
+        iconPosition: this.alphaIconPosition,
+        labelClass: this.alphaLabelClass,
+        loading: this.alphaLoading,
         importance: this.importance,
         kind: this.kind,
-        alphaTooltipText: this.alphaTooltipText,
-        handleClick: this.handleClick,
+        size: this.size,
+        tooltipText: this.alphaTooltipText,
       };
     },
 
     omegaButtonProps () {
       return {
         id: this.omegaId,
-        tooltipText: this.omegaTooltipText,
-        size: this.size,
         active: this.omegaActive,
         ariaLabel: this.omegaAriaLabel,
         disabled: this.disabled,
         importance: this.importance,
         kind: this.kind,
+        size: this.size,
+        tooltipText: this.omegaTooltipText,
       };
     },
   },

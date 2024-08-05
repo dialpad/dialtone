@@ -6,6 +6,7 @@
     :alpha-label-class="$attrs.alphaLabelClass"
     :alpha-loading="$attrs.alphaLoading"
     :alpha-tooltip-text="$attrs.alphaTooltipText"
+    :dropdown-placement="$attrs.dropdownPlacement"
     :assertive-on-focus="$attrs.assertiveOnFocus"
     :disabled="$attrs.disabled"
     :importance="$attrs.importance"
@@ -27,15 +28,21 @@
     </template>
     <template
       v-if="$attrs.alphaIcon"
-      #alphaIcon
+      #alphaIcon="{ size }"
     >
-      <dt-icon :name="$attrs.alphaIcon" />
+      <dt-icon
+        :name="$attrs.alphaIcon"
+        :size="size"
+      />
     </template>
     <template
       v-if="$attrs.omegaIcon"
-      #omegaIcon
+      #omegaIcon="{ size }"
     >
-      <dt-icon :name="$attrs.omegaIcon" />
+      <dt-icon
+        :name="$attrs.omegaIcon"
+        :size="size"
+      />
     </template>
     <template #dropdownList>
       <ul>

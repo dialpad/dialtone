@@ -3,13 +3,13 @@
     :id="id"
     v-dt-tooltip="tooltipText"
     data-qa="dt-split-button-omega"
-    :size="size"
     :active="active"
     :aria-label="ariaLabel"
+    :class="`d-split-btn__omega d-split-btn__omega--${size}`"
     :disabled="disabled"
     :importance="importance"
     :kind="kind"
-    :class="`d-split-btn__omega d-split-btn__omega--${size}`"
+    :size="size"
   >
     <template #icon>
       <slot

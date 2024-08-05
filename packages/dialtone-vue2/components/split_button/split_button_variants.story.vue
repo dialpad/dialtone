@@ -1,3 +1,4 @@
+<!-- eslint-disable max-lines -->
 <template>
   <dt-stack
     gap="500"
@@ -64,7 +65,8 @@
                     <dt-list-item
                       v-for="item in listItems"
                       :key="item.id"
-                      navigation-type="tab"
+                      role="menuitem"
+                      navigation-type="arrow-keys"
                     >
                       {{ item.text }}
                     </dt-list-item>
@@ -79,7 +81,7 @@
     <dt-stack
       direction="row"
       gap="500"
-      class="d-ai-stretch d-jc-center"
+      class="d-ai-stretch d-jc-flex-start d-fw-wrap"
     >
       <!-- Sizes  -->
       <dt-stack
@@ -100,15 +102,6 @@
                 class="d-tt-capitalize"
                 v-text="sizes[size]"
               />
-              <template #dropdownList>
-                <dt-list-item
-                  v-for="item in listItems"
-                  :key="item.id"
-                  navigation-type="tab"
-                >
-                  {{ item.text }}
-                </dt-list-item>
-              </template>
             </dt-split-button>
           </div>
         </dt-stack>
@@ -133,15 +126,6 @@
                 class="d-tt-capitalize"
                 v-text="position"
               />
-              <template #dropdownList>
-                <dt-list-item
-                  v-for="item in listItems"
-                  :key="item.id"
-                  navigation-type="tab"
-                >
-                  {{ item.text }}
-                </dt-list-item>
-              </template>
               <template #alphaIcon>
                 <dt-icon
                   name="accessibility"
@@ -164,23 +148,12 @@
             :key="size"
             class="d-ta-center"
           >
-            <dt-split-button
-              :size="size"
-            >
+            <dt-split-button :size="size">
               Place call
-              <template #dropdownList>
-                <dt-list-item
-                  v-for="item in listItems"
-                  :key="item.id"
-                  navigation-type="tab"
-                >
-                  {{ item.text }}
-                </dt-list-item>
-              </template>
-              <template #omegaIcon>
+              <template #omegaIcon="{ size: iconSize }">
                 <dt-icon
-                  name="phone"
-                  :size="iconSizes[size]"
+                  name="close"
+                  :size="iconSize"
                 />
               </template>
             </dt-split-button>
@@ -196,21 +169,18 @@
         <dt-stack gap="500">
           <dt-split-button
             size="xs"
-
             :alpha-active="true"
           >
             Alpha active
           </dt-split-button>
           <dt-split-button
             size="xs"
-
             :omega-active="true"
           >
             Omega active
           </dt-split-button>
           <dt-split-button
             size="xs"
-
             :alpha-active="true"
             :omega-active="true"
           >
@@ -218,8 +188,8 @@
           </dt-split-button>
           <dt-split-button
             size="xs"
-
             :alpha-loading="true"
+            alpha-tooltip-text="loading"
           >
             Place call
           </dt-split-button>
@@ -234,21 +204,18 @@
         <dt-stack gap="500">
           <dt-split-button
             size="xs"
-
             alpha-tooltip-text="Alpha tooltip"
           >
             Hover me
           </dt-split-button>
           <dt-split-button
             size="xs"
-
             omega-tooltip-text="Omega tooltip"
           >
             Hover omega
           </dt-split-button>
           <dt-split-button
             size="xs"
-
             alpha-tooltip-text="Alpha tooltip"
             omega-tooltip-text="Omega tooltip"
           >
@@ -256,28 +223,52 @@
           </dt-split-button>
         </dt-stack>
       </dt-stack>
-    </dt-stack>
-    <dt-stack>
-      <h2>External anchor</h2>
-      <div>
-        <dt-split-button
-          omega-id="external-anchor-example"
-          @omega-clicked="isPopoverShown = true"
-        >
-          External anchor example
-        </dt-split-button>
-      </div>
-
-      <dt-popover
-        external-anchor="external-anchor-example"
-        :open.sync="isPopoverShown"
+      <!-- Icon-only  -->
+      <dt-stack
+        gap="500"
+        class="d-br d-bc-default d-pr16"
       >
-        <template #content>
-          <ul>
-            <li>Custom popover Content</li>
-          </ul>
-        </template>
-      </dt-popover>
+        <h2>Icon only</h2>
+        <dt-stack gap="500">
+          <div
+            v-for="size in Object.keys(sizes)"
+            :key="`icon-only-${size}`"
+            class="d-ta-center"
+          >
+            <dt-split-button :size="size">
+              <template #alphaIcon="{ size: iconSize }">
+                <dt-icon
+                  name="phone"
+                  :size="iconSize"
+                />
+              </template>
+            </dt-split-button>
+          </div>
+        </dt-stack>
+      </dt-stack>
+      <!-- External anchor -->
+      <dt-stack>
+        <h2>External anchor</h2>
+        <div>
+          <dt-split-button
+            omega-id="external-anchor-example"
+            @omega-clicked="isPopoverShown = true"
+          >
+            External anchor example
+          </dt-split-button>
+        </div>
+
+        <dt-popover
+          external-anchor="external-anchor-example"
+          :open.sync="isPopoverShown"
+        >
+          <template #content>
+            <ul>
+              <li>Custom popover Content</li>
+            </ul>
+          </template>
+        </dt-popover>
+      </dt-stack>
     </dt-stack>
   </dt-stack>
 </template>
@@ -305,18 +296,11 @@ export default {
       sizes: { xs: 'extra small', sm: 'small', md: 'medium', lg: 'large', xl: 'extra large' },
       kinds: ['default', 'danger', 'inverted', 'muted'],
       importances: ['clear', 'outlined', 'primary'],
-      iconSizes: {
-        xs: '200',
-        sm: '200',
-        md: '300',
-        lg: '400',
-        xl: '500',
-      },
-
       iconPositions: ['left', 'right', 'top', 'bottom'],
       listItems: [
         { id: 1, text: 'First item' },
         { id: 2, text: 'Second item' },
+        { id: 3, text: 'Third item' },
       ],
 
       isPopoverShown: false,

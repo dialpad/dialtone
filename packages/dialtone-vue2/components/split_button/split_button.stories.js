@@ -9,6 +9,7 @@ import {
   BUTTON_IMPORTANCE_MODIFIERS,
   ICON_POSITION_MODIFIERS,
 } from '@/components/button';
+import { POPOVER_DIRECTIONS } from '../popover/popover_constants';
 
 const iconsList = getIconNames();
 
@@ -18,6 +19,7 @@ export const argsData = {
   onOmegaClicked: action('omega-clicked'),
   omegaAriaLabel: 'Open dropdown',
   default: 'Place call',
+  dropdownPlacement: 'bottom-end',
   alphaIcon: undefined,
   omegaIcon: undefined,
 };
@@ -62,6 +64,12 @@ export const argTypesData = {
     },
   },
 
+  default: {
+    table: {
+      type: { summary: 'VNode' },
+    },
+  },
+
   // Props
   assertiveOnFocus: {
     control: 'boolean',
@@ -103,6 +111,18 @@ export const argTypesData = {
     control: 'boolean',
   },
 
+  dropdownPlacement: {
+    options: POPOVER_DIRECTIONS,
+    control: {
+      type: 'select',
+    },
+    table: {
+      defaultValue: {
+        summary: 'bottom',
+      },
+    },
+  },
+
   // Action Event Handlers
   onAlphaClicked: {
     table: {
@@ -130,6 +150,11 @@ export default {
 export const Default = {
   render: (argsData) => createRenderConfig(DtSplitButton, DtSplitButtonDefaultTemplate, argsData),
   args: {},
+  decorators: [
+    () => ({
+      template: `<div class="d-d-flex d-jc-center d-ai-center d-h164"><story /></div>`,
+    }),
+  ],
 };
 
 export const Variants = {
