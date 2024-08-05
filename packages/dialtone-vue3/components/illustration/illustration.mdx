@@ -1,35 +1,10 @@
-import { Canvas, Story, Subtitle, Controls, Meta } from '@storybook/blocks';
+import { Meta } from '@storybook/blocks';
 
 import * as IllustrationStories from './illustration.stories';
+import RedirectToDocs from "@/common/snippets/redirect-to-docs.mdx"
 
 <Meta of={IllustrationStories}/>
 
 # Illustration
 
-<Subtitle>
-  The Illustration component provides a set of images to provide context to your application.
-</Subtitle>
-
-## Base Style
-
-<Canvas>
-  <Story of={IllustrationStories.Default} />
-</Canvas>
-
-## Slots, Props & Events
-
-<Controls />
-
-## Usage
-
-### Import
-
-```js
-import { DtIllustration } from '@dialpad/dialtone-vue';
-```
-
-### Default
-
-```html
-<dt-illustration name="mind" />
-```
+<RedirectToDocs name="illustration" />
