@@ -57,11 +57,11 @@ const value = 'some value';
 
 The Vue model is dependant on the child component(s) implementing the provided `groupContext` and calling the provided `setGroupValue` method which will handle updating the provided `groupContext` and Vue model in the parent.
 
-```vue
+```js
 import {
   DtInputMixin,
   DtGroupableInputMixin,
-} from '@dialpad/dialtone-vue';
+} from '@dialpad/dialtone/vue2';
 
 export default {
   name: 'MyInputElement',
@@ -279,7 +279,7 @@ If your input(s) require additional logic in order to be grouped then you can ex
 
 ```vue
 <script>
-import { DtInputGroup } from '@dialpad/dialtone-vue';
+import { DtInputGroup } from '@dialpad/dialtone/vue2';
 
 export default {
   name: "MyComponent",
