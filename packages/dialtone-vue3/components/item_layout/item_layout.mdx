@@ -1,47 +1,9 @@
-import { Canvas, Story, Subtitle, Controls, Meta } from '@storybook/blocks';
+import { Meta } from '@storybook/blocks';
 import * as DtItemLayoutStories from './item_layout.stories.js';
+import RedirectToDocs from "@/common/snippets/redirect-to-docs.mdx"
 
 <Meta of={DtItemLayoutStories}/>
 
 # Item Layout
 
-<Subtitle>
-  Custom layout to enable developer to use list-item like stack.
-  It is used as base for `dt-list-item` component
-</Subtitle>
-
-## Base Style
-
-<Canvas of={DtItemLayoutStories.Default} />
-
-## Slots, Props & Events
-
-<Controls />
-
-## Usage
-
-### Import
-
-```jsx
-import { DtItemLayout } from '@dialpad/dialtone-vue';
-```
-
-### With default styling
-
-By default, item layout includes custom styling, like paddings, sizes, colors, etc.
-
-```html
-<dt-item-layout />
-```
-
-### Without styling
-
-Setting the `unstyled` property will add `dt-item-layout--custom` class.
-This will change the item-layout from flexbox to grid,
-removing all the custom styling while maintaining the slots positions.
-
-This way you can utilize the layout and customize your own styling using utility classes.
-
-```html
-<dt-item-layout unstyled />
-```
+<RedirectToDocs name="item-layout" />
