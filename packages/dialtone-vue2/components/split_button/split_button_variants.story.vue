@@ -45,7 +45,7 @@
           >
             <abbr
               v-if="isInvalidCombination({ kind, importance })"
-              class="d-fc-muted d-td-none d-fs-100"
+              class="d-td-none d-fs-100"
               title="Not applicable"
             >N/A</abbr>
             <dt-stack
@@ -58,7 +58,6 @@
                   size="xs"
                   :kind="kind"
                   :importance="importance"
-                  aria-label="Open dropdown"
                 >
                   Place call
                   <template #dropdownList>

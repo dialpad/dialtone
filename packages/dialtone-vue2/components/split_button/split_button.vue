@@ -27,7 +27,7 @@
         @click="isDropdownOpen = true"
         @opened="open => isDropdownOpen = open"
       >
-        <template #anchor="{ attrs }">
+        <template #anchor="attrs">
           <split-button-omega
             v-bind="{ ...attrs, ...omegaButtonProps }"
             :active="isDropdownOpen"
