@@ -1,3 +1,15 @@
+# [3.142.0](https://github.com/dialpad/dialtone/compare/dialtone-vue3/v3.141.0...dialtone-vue3/v3.142.0) (2024-08-06)
+
+
+### Bug Fixes
+
+* **Avatar:** NO-JIRA make color 000 available ([#431](https://github.com/dialpad/dialtone/issues/431)) ([f86bad3](https://github.com/dialpad/dialtone/commit/f86bad322cd7747efaad6b701c3a62bc415e5b45))
+
+
+### Features
+
+* **Multiselect:** DP-106266 add maxListWidth prop and highlight event ([#427](https://github.com/dialpad/dialtone/issues/427)) ([18fc8a3](https://github.com/dialpad/dialtone/commit/18fc8a3fe650c103446f33ce6f7935feda1d1432))
+
 # [3.141.0](https://github.com/dialpad/dialtone/compare/dialtone-vue3/v3.140.0...dialtone-vue3/v3.141.0) (2024-08-01)
 
 
