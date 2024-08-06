@@ -1,3 +1,10 @@
+# [4.26.0](https://github.com/dialpad/dialtone/compare/dialtone-icons/v4.25.0...dialtone-icons/v4.26.0) (2024-08-06)
+
+
+### Features
+
+* **Icon:** DLT-1842 new filled icons ([#430](https://github.com/dialpad/dialtone/issues/430)) ([a759c45](https://github.com/dialpad/dialtone/commit/a759c4594df7915e4c4fa086926a204a49480a16))
+
 # [4.25.0](https://github.com/dialpad/dialtone/compare/dialtone-icons/v4.24.0...dialtone-icons/v4.25.0) (2024-07-25)
 
 
