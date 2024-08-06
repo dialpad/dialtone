@@ -7,6 +7,7 @@ import DpDark from '@/../../common/themes/dp-dark.js';
 import { MINIMAL_VIEWPORTS } from '@storybook/addon-viewport';
 import { DocsContainer } from '@storybook/addon-docs';
 import { useDarkMode, DARK_MODE_EVENT_NAME } from "storybook-dark-mode";
+import React from 'react';
 import Vue from 'vue';
 import { setEmojiAssetUrlSmall, setEmojiAssetUrlLarge, setCustomEmojiUrl, setCustomEmojiJson } from '@/common/emoji';
 import customEmojiJson from '@/common/custom-emoji.json';
