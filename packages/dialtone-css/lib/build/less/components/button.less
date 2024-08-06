@@ -674,8 +674,13 @@
     &.d-btn:disabled::before,
     &.d-btn--outlined::before,
     &.d-btn--primary::before {
-      top: var(--dt-size-50-negative);
+      top: var(--dt-size-100-negative);
       bottom: var(--dt-size-100-negative);
+    }
+
+    &.d-btn--outlined::before {
+      top: var(--dt-size-50-negative);
+      bottom: var(--dt-size-50-negative);
     }
   }
 
