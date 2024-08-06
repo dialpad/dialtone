@@ -6,6 +6,7 @@
   >
     <split-button-alpha
       v-bind="alphaButtonProps"
+      ref="alphaButton"
       @click.native="(e) => $emit('alpha-clicked', e)"
     >
       <template #icon="{ size: iconSize }">
@@ -23,7 +24,7 @@
       <dt-dropdown
         v-if="$slots.dropdownList"
         :placement="dropdownPlacement"
-        fallback-placements="bottom-end"
+        :fallback-placements="['bottom-end']"
         @click="isDropdownOpen = true"
         @opened="open => isDropdownOpen = open"
       >
@@ -139,7 +140,7 @@ export default {
      */
     alphaTooltipText: {
       type: String,
-      required: true,
+      default: undefined,
     },
 
     /**
@@ -230,7 +231,7 @@ export default {
      */
     omegaTooltipText: {
       type: String,
-      default: '',
+      default: undefined,
     },
 
     /**
@@ -309,11 +310,51 @@ export default {
         tooltipText: this.omegaTooltipText,
       };
     },
+
+    defaultSlotHasContent () {
+      return this.$scopedSlots.default && this.$scopedSlots.default() && this.$scopedSlots.default()[0]?.text?.trim();
+    },
+
+    omegaSlotIsSet() {
+      return this.$scopedSlots.omega && this.$scopedSlots.omega();
+    }
+  },
+
+  created () {
+    this.validateProps();
+  },
+
+  updated () {
+    this.validateProps();
   },
 
   methods: {
     handleClick (side, event) {
       this.$emit(`${side}-clicked`, event);
+    },
+
+    validateProps () {
+      this.validateAlphaButtonProps();
+      this.validateOmegaButtonProps();
+    },
+
+    validateAlphaButtonProps () {
+      if (this.defaultSlotHasContent) return;
+
+      // This can't be a computed prop due to reactivity issues.
+      const isAlphaIconSet = this.$refs.alphaButton?.$scopedSlots.icon();
+
+      if (isAlphaIconSet && !this.alphaTooltipText) {
+        console.warn('alpha-tooltip-text prop must be set if alpha button has an icon only');
+      }
+    },
+
+    validateOmegaButtonProps () {
+      if (this.omegaSlotIsSet) return;
+
+      if (!this.omegaTooltipText) {
+        console.warn('omega-tooltip-text prop is required as it is an icon-only button');
+      }
     },
   },
 };

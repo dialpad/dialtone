@@ -20,6 +20,7 @@ export const argsData = {
   omegaAriaLabel: 'Open dropdown',
   default: 'Place call',
   dropdownPlacement: 'bottom-end',
+  omegaTooltipText: 'More calling options',
   alphaIcon: undefined,
   omegaIcon: undefined,
 };
