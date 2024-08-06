@@ -1,3 +1,17 @@
+# [9.62.0](https://github.com/dialpad/dialtone/compare/dialtone/v9.61.0...dialtone/v9.62.0) (2024-08-06)
+
+
+### Bug Fixes
+
+* **Avatar:** NO-JIRA make color 000 available ([#431](https://github.com/dialpad/dialtone/issues/431)) ([f86bad3](https://github.com/dialpad/dialtone/commit/f86bad322cd7747efaad6b701c3a62bc415e5b45))
+
+
+### Features
+
+* **Badge:** DLT-1930 spacing refinement ([#428](https://github.com/dialpad/dialtone/issues/428)) ([eb7ae1f](https://github.com/dialpad/dialtone/commit/eb7ae1f0a3dcf29304e047d002c0208994a19f9a))
+* **Icon:** DLT-1842 new filled icons ([#430](https://github.com/dialpad/dialtone/issues/430)) ([a759c45](https://github.com/dialpad/dialtone/commit/a759c4594df7915e4c4fa086926a204a49480a16))
+* **Multiselect:** DP-106266 add maxListWidth prop and highlight event ([#427](https://github.com/dialpad/dialtone/issues/427)) ([18fc8a3](https://github.com/dialpad/dialtone/commit/18fc8a3fe650c103446f33ce6f7935feda1d1432))
+
 # [9.61.0](https://github.com/dialpad/dialtone/compare/dialtone/v9.60.0...dialtone/v9.61.0) (2024-08-01)
 
 
