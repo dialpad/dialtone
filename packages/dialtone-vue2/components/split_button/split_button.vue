@@ -24,7 +24,6 @@
       <dt-dropdown
         v-if="$slots.dropdownList"
         :placement="dropdownPlacement"
-        :fallback-placements="['bottom-end']"
         @click="isDropdownOpen = true"
         @opened="open => isDropdownOpen = open"
       >
@@ -342,7 +341,7 @@ export default {
       if (this.defaultSlotHasContent) return;
 
       // This can't be a computed prop due to reactivity issues.
-      const isAlphaIconSet = this.$refs.alphaButton?.$scopedSlots.icon();
+      const isAlphaIconSet = this.$refs.alphaButton?.$scopedSlots.icon && this.$refs.alphaButton.$scopedSlots.icon();
 
       if (isAlphaIconSet && !this.alphaTooltipText) {
         console.warn('alpha-tooltip-text prop must be set if alpha button has an icon only');
