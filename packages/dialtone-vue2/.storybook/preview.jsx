@@ -8,7 +8,6 @@ import { MINIMAL_VIEWPORTS } from '@storybook/addon-viewport';
 import { DocsContainer } from '@storybook/addon-docs';
 import { useDarkMode, DARK_MODE_EVENT_NAME } from "storybook-dark-mode";
 import Vue from 'vue';
-import React from 'react';
 import { setEmojiAssetUrlSmall, setEmojiAssetUrlLarge, setCustomEmojiUrl, setCustomEmojiJson } from '@/common/emoji';
 import customEmojiJson from '@/common/custom-emoji.json';
 import { dialtoneDarkTheme, dialtoneLightTheme } from './dialtone-themes.js';
