@@ -8,10 +8,9 @@
     <table class="d-table d-bt d-bb d-bbw2 d-bc-default">
       <thead>
         <tr>
-          <th
-            class="d-ba d-bc-default"
-            v-text="''"
-          />
+          <td class="d-ba d-bc-default">
+            &nbsp;
+          </td>
           <th
             v-for="importance in importances"
             :key="importance"
@@ -59,6 +58,7 @@
                   :kind="kind"
                   :importance="importance"
                   :omega-tooltip-text="omegaTooltipText"
+                  :omega-aria-label="omegaAriaLabel"
                 >
                   Place call
                   <template #dropdownList>
@@ -98,6 +98,7 @@
             <dt-split-button
               :size="size"
               :omega-tooltip-text="omegaTooltipText"
+              :omega-aria-label="omegaAriaLabel"
             >
               <span
                 class="d-tt-capitalize"
@@ -123,6 +124,7 @@
               size="xs"
               :alpha-icon-position="position"
               :omega-tooltip-text="omegaTooltipText"
+              :omega-aria-label="omegaAriaLabel"
             >
               <span
                 class="d-tt-capitalize"
@@ -153,6 +155,7 @@
             <dt-split-button
               :size="size"
               omega-tooltip-text="Close"
+              :omega-aria-label="omegaAriaLabel"
             >
               Place call
               <template #omegaIcon="{ size: iconSize }">
@@ -176,6 +179,7 @@
             size="xs"
             :alpha-active="true"
             :omega-tooltip-text="omegaTooltipText"
+            :omega-aria-label="omegaAriaLabel"
           >
             Alpha active
           </dt-split-button>
@@ -183,6 +187,7 @@
             size="xs"
             :omega-active="true"
             :omega-tooltip-text="omegaTooltipText"
+            :omega-aria-label="omegaAriaLabel"
           >
             Omega active
           </dt-split-button>
@@ -191,13 +196,16 @@
             :alpha-active="true"
             :omega-active="true"
             :omega-tooltip-text="omegaTooltipText"
+            :omega-aria-label="omegaAriaLabel"
           >
             Both active
           </dt-split-button>
           <dt-split-button
             size="xs"
             :alpha-loading="true"
+            alpha-aria-label="loading"
             :omega-tooltip-text="omegaTooltipText"
+            :omega-aria-label="omegaAriaLabel"
           />
         </dt-stack>
       </dt-stack>
@@ -212,12 +220,14 @@
             size="xs"
             alpha-tooltip-text="Hover text"
             :omega-tooltip-text="omegaTooltipText"
+            :omega-aria-label="omegaAriaLabel"
           >
             Hover me
           </dt-split-button>
           <dt-split-button
             size="xs"
             :omega-tooltip-text="omegaTooltipText"
+            :omega-aria-label="omegaAriaLabel"
           >
             Hover omega
           </dt-split-button>
@@ -225,6 +235,7 @@
             size="xs"
             alpha-tooltip-text="Alpha tooltip"
             :omega-tooltip-text="omegaTooltipText"
+            :omega-aria-label="omegaAriaLabel"
           >
             Hover both
           </dt-split-button>
@@ -244,8 +255,10 @@
           >
             <dt-split-button
               alpha-tooltip-text="Call"
+              alpha-aria-label="Call"
               :omega-tooltip-text="omegaTooltipText"
               :size="size"
+              :omega-aria-label="omegaAriaLabel"
             >
               <template #alphaIcon="{ size: iconSize }">
                 <dt-icon
@@ -264,6 +277,7 @@
           <dt-split-button
             omega-id="external-anchor-example"
             omega-tooltip-text="Open popover"
+            :omega-aria-label="omegaAriaLabel"
             @omega-clicked="isPopoverShown = true"
           >
             External anchor example
@@ -317,6 +331,7 @@ export default {
 
       isPopoverShown: false,
       omegaTooltipText: 'More calling options',
+      omegaAriaLabel: 'More calling options',
     };
   },
 
