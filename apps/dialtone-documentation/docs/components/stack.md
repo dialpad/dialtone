@@ -156,6 +156,22 @@ vueCode='
 '
 showHtmlWarning />
 
+Set gap to 600 at extra large screen size, 500 for large screen size, 400 for medium screen size, and 300 for small screen size
+
+<code-well-header>
+    <dt-stack :gap="{ xl: '600', lg: '500', md: '400', sm: '300' }">
+      <div class="d-bgc-magenta-100">
+        Stack item 1
+      </div>
+      <div class="d-bgc-magenta-100">
+        Stack item 2
+      </div>
+      <div class="d-bgc-magenta-100">
+        Stack item 3
+      </div>
+    </dt-stack>
+</code-well-header>
+
 Stacks row with gap 300 and stacks in row reverse the second element with gap 600
 
 <code-well-header>
