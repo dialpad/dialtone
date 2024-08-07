@@ -129,6 +129,7 @@
       </div>
       <!-- Right content -->
       <div class="dt-message-input__bottom-section-right">
+        <!-- @slot Slot for sms count -->
         <slot name="smsCount" />
 
         <!-- Optionally displayed remaining character counter -->
