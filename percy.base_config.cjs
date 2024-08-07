@@ -37,6 +37,7 @@ module.exports = {
       'Components/Root Layout',
       'Components/Select Menu: Default',
       'Components/Skeleton: Default',
+      'Components/Split Button: Default',
       'Components/Tabs: Tab',
       'Components/Tabs: Tab Panel',
       'Components/Tabs: Default',

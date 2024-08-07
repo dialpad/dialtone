@@ -340,7 +340,7 @@ export default {
     },
 
     shouldRenderIcon () {
-      return this.$scopedSlots.icon && !this.link;
+      return this.$scopedSlots.icon && this.$scopedSlots.icon() && !this.link;
     },
 
     isIconOnly () {
