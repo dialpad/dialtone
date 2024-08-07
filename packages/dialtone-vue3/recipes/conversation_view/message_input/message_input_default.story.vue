@@ -69,6 +69,12 @@
       >
         <span v-html="$attrs.sendButton" />
       </template>
+      <template
+        v-if="$attrs.smsCount"
+        #smsCount
+      >
+        <span v-html="$attrs.smsCount" />
+      </template>
     </dt-recipe-message-input>
   </div>
 </template>
