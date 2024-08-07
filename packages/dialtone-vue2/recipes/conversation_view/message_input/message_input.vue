@@ -131,6 +131,11 @@
       </div>
       <!-- Right content -->
       <div class="dt-message-input__bottom-section-right">
+        <!-- @slot Slot for sms count -->
+        <div class="d-d-flex d-ai-center">
+          <slot name="smsCount" />
+        </div>
+
         <!-- Optionally displayed remaining character counter -->
         <dt-tooltip
           v-if="Boolean(showCharacterLimit)"
