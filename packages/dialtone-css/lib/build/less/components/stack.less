@@ -8,8 +8,8 @@
 //  TABLE OF CONTENTS
 //  • BASE STYLE
 //  • VISUAL STYLES
-//  • RESPONSIVE STYLE
 //  • SIZES
+//  • RESPONSIVE STYLE
 
 //  @@  BASE STYLE
 //  ----------------------------------------------------------------------------
@@ -39,6 +39,36 @@
 
     align-items: center;
     justify-content: normal;
+  }
+}
+
+.gap-options() {
+  &--gap-100 {
+    .d-stack--gap-100();
+  }
+
+  &--gap-200 {
+    .d-stack--gap-200();
+  }
+
+  &--gap-300 {
+    .d-stack--gap-300();
+  }
+
+  &--gap-400 {
+    .d-stack--gap-400();
+  }
+
+  &--gap-450 {
+    .d-stack--gap-450();
+  }
+
+  &--gap-500 {
+    .d-stack--gap-500();
+  }
+
+  &--gap-600 {
+    .d-stack--gap-600();
   }
 }
 
@@ -84,41 +114,6 @@
 }
 
 //  ============================================================================
-//  $   RESPONSIVE
-//  ----------------------------------------------------------------------------
-//  $$  EXTRA LARGE
-//  ----------------------------------------------------------------------------
-.d-stack--xl {
-  @media screen and (max-width: 1264px) {
-    .direction-options();
-  }
-}
-
-//  $$  LARGE
-//  ----------------------------------------------------------------------------
-.d-stack--lg {
-  @media screen and (max-width: 980px) {
-    .direction-options();
-  }
-}
-
-//  $$  MEDIUM
-//  ----------------
-.d-stack--md {
-  @media screen and (max-width: 640px) {
-    .direction-options();
-  }
-}
-
-//  $$ SMALL
-//  ----------------------------------------------------------------------------
-.d-stack--sm {
-  @media screen and (max-width: 480px) {
-    .direction-options();
-  }
-}
-
-//  ============================================================================
 //  $   SIZES
 //  ----------------------------------------------------------------------------
 .d-stack--gap-100 { --stack-gap: var(--dt-space-100); }
@@ -128,3 +123,43 @@
 .d-stack--gap-450 { --stack-gap: var(--dt-space-450); }
 .d-stack--gap-500 { --stack-gap: var(--dt-space-500); }
 .d-stack--gap-600 { --stack-gap: var(--dt-space-600); }
+
+
+//  ============================================================================
+//  $   RESPONSIVE
+//  ----------------------------------------------------------------------------
+//  $$  EXTRA LARGE
+//  ----------------------------------------------------------------------------
+.d-stack--xl {
+  @media screen and (max-width: 1264px) {
+    .direction-options();
+    .gap-options();
+  }
+}
+
+//  $$  LARGE
+//  ----------------------------------------------------------------------------
+.d-stack--lg {
+  @media screen and (max-width: 980px) {
+    .direction-options();
+    .gap-options();
+  }
+}
+
+//  $$  MEDIUM
+//  ----------------
+.d-stack--md {
+  @media screen and (max-width: 640px) {
+    .direction-options();
+    .gap-options();
+  }
+}
+
+//  $$ SMALL
+//  ----------------------------------------------------------------------------
+.d-stack--sm {
+  @media screen and (max-width: 480px) {
+    .direction-options();
+    .gap-options();
+  }
+}
