@@ -335,11 +335,11 @@ export default {
     },
 
     shouldRenderIcon () {
-      return this.$slots.icon && !this.link;
+      return hasSlotContent(this.$slots.icon) && !this.link;
     },
 
     isIconOnly () {
-      return this.shouldRenderIcon() && !this.$slots.default;
+      return this.shouldRenderIcon() && !hasSlotContent(this.$slots.default);
     },
 
     isVerticalIconLayout () {
