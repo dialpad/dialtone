@@ -130,13 +130,7 @@ export default {
 
     /**
      * HTML button disabled attribute
-     * <a
-     *   class="d-link"
-     *   href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/button#disabled"
-     *   target="_blank"
-     * >
-     *   (Reference)
-     * </a>
+     * <a class="d-link" href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/button#disabled" target="_blank"> (Reference) </a>
      * @values true, false
      */
     disabled: {
