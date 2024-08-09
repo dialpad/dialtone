@@ -19,7 +19,7 @@
       <!-- @slot Default content slot -->
       <slot name="default" />
     </split-button-alpha>
-    <!-- @slot Omega (right) content slot -->
+    <!-- @slot Omega (right) content slot, overrides omega button styling and functionality completely -->
     <slot name="omega">
       <dt-dropdown
         v-if="$slots.dropdownList"
@@ -43,7 +43,7 @@
           </split-button-omega>
         </template>
         <template #list="{ close }">
-          <!-- @slot Built-in dropdown contents -->
+          <!-- @slot Built-in dropdown content slot, use of dt-list-item is highly recommended here. -->
           <slot
             name="dropdownList"
             :close="close"
@@ -89,10 +89,11 @@ export default {
     SplitButtonAlpha,
   },
 
+  inheritAttrs: false,
+
   props: {
     /**
      * Determines whether the alpha button should have active styling
-     * default is false.
      * @values true, false
      */
     alphaActive: {
@@ -136,7 +137,8 @@ export default {
     },
 
     /**
-     * Text shown in tooltip when you hover the alpha button
+     * Text shown in tooltip when you hover the alpha button,
+     * required if no content is passed to default slot
      */
     alphaTooltipText: {
       type: String,
@@ -146,7 +148,7 @@ export default {
     /**
      * Determines whether a screenreader reads live updates of
      * the button content to the user while the button
-     * is in focus. default is to not.
+     * is in focus.
      * @values true, false
      */
     assertiveOnFocus: {
@@ -197,7 +199,6 @@ export default {
 
     /**
      * Determines whether the omega button should have active styling
-     * default is false.
      * @values true, false
      */
     omegaActive: {
@@ -215,7 +216,7 @@ export default {
 
     /**
      * Element ID, useful in case you need to reference the button
-     * as an external anchor for popover
+     * as an external anchor for popover.
      */
     omegaId: {
       type: String,
@@ -223,7 +224,8 @@ export default {
     },
 
     /**
-     * Text shown in tooltip when you hover the omega button
+     * Text shown in tooltip when you hover the omega button,
+     * required as it is an icon only button
      */
     omegaTooltipText: {
       type: String,
@@ -291,6 +293,7 @@ export default {
         kind: this.kind,
         size: this.size,
         tooltipText: this.alphaTooltipText,
+        class: this.$attrs.class,
       };
     },
 
@@ -304,6 +307,7 @@ export default {
         kind: this.kind,
         size: this.size,
         tooltipText: this.omegaTooltipText,
+        class: this.$attrs.class,
       };
     },
   },
@@ -317,10 +321,6 @@ export default {
   },
 
   methods: {
-    handleClick (side, event) {
-      this.$emit(`${side}-clicked`, event);
-    },
-
     validateProps () {
       this.validateAlphaButtonProps();
       this.validateOmegaButtonProps();
