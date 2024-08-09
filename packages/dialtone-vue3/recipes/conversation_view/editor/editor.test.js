@@ -546,5 +546,20 @@ describe('DtRecipeEditor tests', () => {
         expect('quick-replies-click' in wrapper.emitted()).toBeTruthy();
       });
     });
+
+    describe('When enter key is pressed', () => {
+      beforeEach(async () => {
+        wrapper.vm.$refs.richTextEditor?.editor.commands.focus('end');
+      });
+
+      it('editor should add br tag html content', async () => {
+        let editorHtmlOutput = editor.html();
+        expect(editorHtmlOutput).not.toContain('<br>');
+        await wrapper.vm.$refs.richTextEditor?.editor.commands.enter();
+        await wrapper.vm.$nextTick();
+        editorHtmlOutput = editor.html();
+        expect(editorHtmlOutput).toContain('<br>');
+      });
+    });
   });
 });
