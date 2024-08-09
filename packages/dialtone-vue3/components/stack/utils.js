@@ -17,7 +17,7 @@ function _getValidDirection (direction) {
 function _getValidGap (gap) {
   if (typeof gap === 'string') {
     return gap;
-  } else if (directionPropType(gap) === 'object') {
+  } else if (typeof gap === 'object') {
     return gap.default;
   } else { return null; }
 }
@@ -37,14 +37,14 @@ function getResposiveDirectionClasses (direction) {
     return [
       ...DT_STACK_RESPONSIVE_BREAKPOINTS.map((breakpoint) => {
         return direction[breakpoint]
-          ? `d-stack--${breakpoint}--${DT_STACK_DIRECTION[direction[breakpoint]]}`
+          ? `d-stack--${breakpoint}-${direction[breakpoint]}`
           : null;
       })];
   } else { return []; }
 }
 
 function getResposiveGapClasses (gap) {
-  if (directionPropType(gap) === 'object') {
+  if (typeof gap === 'object') {
     return [
       ...DT_STACK_RESPONSIVE_BREAKPOINTS.map((breakpoint) => {
         return DT_STACK_GAP.includes(gap[breakpoint])
