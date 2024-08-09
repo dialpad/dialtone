@@ -4,27 +4,32 @@ description: A split button offers a default action paired with a secondary acti
 status: beta
 thumb: true
 image: assets/images/components/split-button.png
-storybook:
+storybook: https://dialtone.dialpad.com/vue/?path=/story/components-split-button--default
 ---
 
 <code-well-header>
-  <dt-split-button>
+  <dt-split-button
+    omega-tooltip-text="More calling options"
+  >
     Place call
+    <template #dropdownList>
+      <dt-list-item role="menuitem" navigation-type="arrow-keys"> Option 1 </dt-list-item>
+      <dt-list-item role="menuitem" navigation-type="arrow-keys"> Option 2 </dt-list-item>
+      <dt-list-item role="menuitem" navigation-type="arrow-keys"> Option 3 </dt-list-item>
+    </template>
   </dt-split-button>
 </code-well-header>
-
-## Usage
 
 ## Variants
 
 ### Base
 
 <code-well-header>
-  <div class="d-d-flex d-flow8">
-      <dt-split-button> Place Call </dt-split-button>
-      <dt-split-button importance="outlined"> Place Call </dt-split-button>
-      <dt-split-button importance="clear"> Place Call </dt-split-button>
-  </div>
+  <dt-stack direction="row" gap="400">
+      <dt-split-button omega-tooltip-text="More calling options"> Place Call </dt-split-button>
+      <dt-split-button importance="outlined" omega-tooltip-text="More calling options"> Place Call </dt-split-button>
+      <dt-split-button importance="clear" omega-tooltip-text="More calling options"> Place Call </dt-split-button>
+  </dt-stack>
 </code-well-header>
 
 <code-example-tabs
@@ -55,20 +60,20 @@ htmlCode='
 </span>
 '
 vueCode='
-<dt-split-button> Place Call </dt-button>
-<dt-split-button importance="outlined"> Place Call </dt-button>
-<dt-split-button importance="clear"> Place Call </dt-button>
+<dt-split-button omega-tooltip-text="More calling options"> Place Call </dt-button>
+<dt-split-button importance="outlined" omega-tooltip-text="More calling options"> Place Call </dt-button>
+<dt-split-button importance="clear" omega-tooltip-text="More calling options"> Place Call </dt-button>
 '
 showHtmlWarning />
 
 ### Danger
 
 <code-well-header>
-  <div class="d-d-flex d-flow8">
-      <dt-split-button kind="danger"> Place Call </dt-split-button>
-      <dt-split-button importance="outlined" kind="danger"> Place Call </dt-split-button>
-      <dt-split-button importance="clear" kind="danger"> Place Call </dt-split-button>
-  </div>
+  <dt-stack direction="row" gap="400">
+      <dt-split-button kind="danger" omega-tooltip-text="More calling options"> Place Call </dt-split-button>
+      <dt-split-button importance="outlined" kind="danger" omega-tooltip-text="More calling options"> Place Call </dt-split-button>
+      <dt-split-button importance="clear" kind="danger" omega-tooltip-text="More calling options"> Place Call </dt-split-button>
+  </dt-stack>
 </code-well-header>
 
 <code-example-tabs
@@ -99,20 +104,20 @@ htmlCode='
 </span>
 '
 vueCode='
-<dt-split-button kind="danger"> Place Call </dt-button>
-<dt-split-button importance="outlined" kind="danger"> Place Call </dt-button>
-<dt-split-button importance="clear" kind="danger"> Place Call </dt-button>
+<dt-split-button kind="danger" omega-tooltip-text="More calling options"> Place Call </dt-button>
+<dt-split-button importance="outlined" kind="danger" omega-tooltip-text="More calling options"> Place Call </dt-button>
+<dt-split-button importance="clear" kind="danger" omega-tooltip-text="More calling options"> Place Call </dt-button>
 '
 showHtmlWarning />
 
 ### Inverted
 
 <code-well-header bgclass="d-bgc-contrast">
-  <div class="d-d-flex d-flow8">
-      <dt-split-button kind="inverted"> Place Call </dt-split-button>
-      <dt-split-button importance="outlined" kind="inverted"> Place Call </dt-split-button>
-      <dt-split-button importance="clear" kind="inverted"> Place Call </dt-split-button>
-  </div>
+  <dt-stack direction="row" gap="400">
+      <dt-split-button kind="inverted" omega-tooltip-text="More calling options"> Place Call </dt-split-button>
+      <dt-split-button importance="outlined" kind="inverted" omega-tooltip-text="More calling options"> Place Call </dt-split-button>
+      <dt-split-button importance="clear" kind="inverted" omega-tooltip-text="More calling options"> Place Call </dt-split-button>
+  </dt-stack>
 </code-well-header>
 
 <code-example-tabs
@@ -143,19 +148,19 @@ htmlCode='
 </span>
 '
 vueCode='
-<dt-split-button kind="inverted"> Place Call </dt-split-button>
-<dt-split-button importance="outlined" kind="inverted"> Place Call </dt-split-button>
-<dt-split-button importance="clear" kind="inverted"> Place Call </dt-split-button>
+<dt-split-button kind="inverted" omega-tooltip-text="More calling options"> Place Call </dt-split-button>
+<dt-split-button importance="outlined" kind="inverted" omega-tooltip-text="More calling options"> Place Call </dt-split-button>
+<dt-split-button importance="clear" kind="inverted" omega-tooltip-text="More calling options"> Place Call </dt-split-button>
 '
 showHtmlWarning />
 
 ### Muted
 
 <code-well-header>
-  <div class="d-d-flex d-flow8">
-      <dt-split-button importance="outlined" kind="muted"> Place Call </dt-split-button>
-      <dt-split-button importance="clear" kind="muted"> Place Call </dt-split-button>
-  </div>
+  <dt-stack direction="row" gap="400">
+      <dt-split-button importance="outlined" kind="muted" omega-tooltip-text="More calling options"> Place Call </dt-split-button>
+      <dt-split-button importance="clear" kind="muted" omega-tooltip-text="More calling options"> Place Call </dt-split-button>
+  </dt-stack>
 </code-well-header>
 
 <code-example-tabs
@@ -178,20 +183,20 @@ htmlCode='
 </span>
 '
 vueCode='
-<dt-split-button importance="outlined" kind="muted"> Place Call </dt-split-button>
-<dt-split-button importance="clear" kind="muted"> Place Call </dt-split-button>
+<dt-split-button importance="outlined" kind="muted" omega-tooltip-text="More calling options"> Place Call </dt-split-button>
+<dt-split-button importance="clear" kind="muted" omega-tooltip-text="More calling options"> Place Call </dt-split-button>
 '
 showHtmlWarning />
 
 ### Disabled
 
 <code-well-header>
-  <div class="d-d-flex d-flow8">
-      <dt-split-button disabled> Place Call (disable attribute)</dt-split-button>
+  <dt-stack direction="row" gap="400">
+      <dt-split-button disabled omega-tooltip-text="More calling options"> Place Call (disable attribute)</dt-split-button>
       <span class="d-c-not-allowed">
-        <dt-split-button class="d-btn--disabled"> Place Call (disabled class) </dt-split-button>
+        <dt-split-button class="d-btn--disabled" omega-tooltip-text="More calling options"> Place Call (disabled class) </dt-split-button>
       </span>
-  </div>
+  </dt-stack>
 </code-well-header>
 
 <code-example-tabs
@@ -224,11 +229,10 @@ showHtmlWarning />
 ### Active
 
 <code-well-header>
-  <div class="d-d-flex d-flow8">
-    <dt-split-button alpha-active> Alpha active </dt-split-button>
-    <dt-split-button omega-active importance="outlined"> Omega active </dt-split-button>
-    <dt-split-button alpha-active omega-active importance="clear"> Both active </dt-split-button>
-  </div>
+  <dt-stack direction="row" gap="400">
+    <dt-split-button alpha-active omega-tooltip-text="More calling options"> Alpha active </dt-split-button>
+    <dt-split-button omega-active omega-tooltip-text="More calling options"> Omega active </dt-split-button>
+  </dt-stack>
 </code-well-header>
 
 <code-example-tabs
@@ -259,22 +263,21 @@ htmlCode='
 </span>
 '
 vueCode='
-<dt-split-button alpha-active> Alpha active </dt-split-button>
-<dt-split-button omega-active importance="outlined"> Omega active </dt-split-button>
-<dt-split-button alpha-active omega-active importance="clear"> Both active </dt-split-button>
+<dt-split-button alpha-active omega-tooltip-text="More calling options"> Alpha active </dt-split-button>
+<dt-split-button omega-active omega-tooltip-text="More calling options"> Omega active </dt-split-button>
 '
 showHtmlWarning />
 
 ### Sizes
 
 <code-well-header>
-  <div class="d-d-flex d-flow8 d-ai-center">
-    <dt-split-button size="xs"> xs </dt-split-button>
-    <dt-split-button size="sm"> sm </dt-split-button>
-    <dt-split-button size="md"> md </dt-split-button>
-    <dt-split-button size="lg"> lg </dt-split-button>
-    <dt-split-button size="xl"> xl </dt-split-button>
-  </div>
+  <dt-stack direction="row" gap="400">
+    <dt-split-button size="xs" omega-tooltip-text="More calling options"> xs </dt-split-button>
+    <dt-split-button size="sm" omega-tooltip-text="More calling options"> sm </dt-split-button>
+    <dt-split-button size="md" omega-tooltip-text="More calling options"> md </dt-split-button>
+    <dt-split-button size="lg" omega-tooltip-text="More calling options"> lg </dt-split-button>
+    <dt-split-button size="xl" omega-tooltip-text="More calling options"> xl </dt-split-button>
+  </dt-stack>
 </code-well-header>
 
 <code-example-tabs
@@ -321,22 +324,22 @@ htmlCode='
 </span>
 '
 vueCode='
-<dt-split-button size="xs"> xs </dt-split-button>
-<dt-split-button size="sm"> sm </dt-split-button>
-<dt-split-button size="md"> md </dt-split-button>
-<dt-split-button size="lg"> lg </dt-split-button>
-<dt-split-button size="xl"> xl </dt-split-button>
+<dt-split-button size="xs" omega-tooltip-text="More calling options"> xs </dt-split-button>
+<dt-split-button size="sm" omega-tooltip-text="More calling options"> sm </dt-split-button>
+<dt-split-button size="md" omega-tooltip-text="More calling options"> md </dt-split-button>
+<dt-split-button size="lg" omega-tooltip-text="More calling options"> lg </dt-split-button>
+<dt-split-button size="xl" omega-tooltip-text="More calling options"> xl </dt-split-button>
 '
 showHtmlWarning />
 
 ### Loading
 
 <code-well-header>
-  <div class="d-d-flex d-flow8 d-ai-center">
-    <dt-split-button alpha-loading> Place call </dt-split-button>
-    <dt-split-button alpha-loading importance="outlined"> Place call </dt-split-button>
-    <dt-split-button alpha-loading importance="clear"> Place call </dt-split-button>
-  </div>
+  <dt-stack direction="row" gap="400">
+    <dt-split-button alpha-loading omega-tooltip-text="More calling options"> Place call </dt-split-button>
+    <dt-split-button alpha-loading importance="outlined" omega-tooltip-text="More calling options"> Place call </dt-split-button>
+    <dt-split-button alpha-loading importance="clear" omega-tooltip-text="More calling options"> Place call </dt-split-button>
+  </dt-stack>
 </code-well-header>
 
 <code-example-tabs
@@ -367,9 +370,9 @@ htmlCode='
 </span>
 '
 vueCode='
-<dt-split-button alpha-loading> Place call </dt-split-button>
-<dt-split-button alpha-loading importance="outlined"> Place call </dt-split-button>
-<dt-split-button alpha-loading importance="clear"> Place call </dt-split-button>
+<dt-split-button alpha-loading omega-tooltip-text="More calling options"> Place call </dt-split-button>
+<dt-split-button alpha-loading importance="outlined" omega-tooltip-text="More calling options"> Place call </dt-split-button>
+<dt-split-button alpha-loading importance="clear" omega-tooltip-text="More calling options"> Place call </dt-split-button>
 '
 showHtmlWarning />
 
@@ -378,32 +381,32 @@ showHtmlWarning />
 #### Icon and label
 
 <code-well-header>
-  <div class="d-d-flex d-flow8 d-ai-center">
-    <dt-split-button importance="outlined">
+  <dt-stack direction="row" gap="400">
+    <dt-split-button importance="outlined" omega-tooltip-text="More calling options">
       <template #alphaIcon="{ size }">
         <dt-icon name="phone" :size="size" />
       </template>
       Place call
     </dt-split-button>
-    <dt-split-button importance="outlined" alpha-icon-position="top">
+    <dt-split-button importance="outlined" alpha-icon-position="top" omega-tooltip-text="More calling options">
       <template #alphaIcon="{ size }">
         <dt-icon name="phone" :size="size" />
       </template>
       Place call
     </dt-split-button>
-    <dt-split-button importance="outlined" alpha-icon-position="right">
+    <dt-split-button importance="outlined" alpha-icon-position="right" omega-tooltip-text="More calling options">
       <template #alphaIcon="{ size }">
         <dt-icon name="phone" :size="size" />
       </template>
       Place call
     </dt-split-button>
-    <dt-split-button importance="outlined" alpha-icon-position="bottom">
+    <dt-split-button importance="outlined" alpha-icon-position="bottom" omega-tooltip-text="More calling options">
       <template #alphaIcon="{ size }">
         <dt-icon name="phone" :size="size" />
       </template>
       Place call
     </dt-split-button>
-  </div>
+  </dt-stack>
 </code-well-header>
 
 <code-example-tabs
@@ -454,25 +457,25 @@ htmlCode='
 </span>
 '
 vueCode='
-<dt-split-button importance="outlined">
+<dt-split-button importance="outlined" omega-tooltip-text="More calling options">
   <template #alphaIcon="{ size }">
     <dt-icon name="phone" :size="size" />
   </template>
   Place call
 </dt-split-button>
-<dt-split-button importance="outlined" alpha-icon-position="top">
+<dt-split-button importance="outlined" alpha-icon-position="top" omega-tooltip-text="More calling options">
   <template #alphaIcon="{ size }">
     <dt-icon name="phone" :size="size" />
   </template>
   Place call
 </dt-split-button>
-<dt-split-button importance="outlined" alpha-icon-position="right">
+<dt-split-button importance="outlined" alpha-icon-position="right" omega-tooltip-text="More calling options">
   <template #alphaIcon="{ size }">
     <dt-icon name="phone" :size="size" />
   </template>
   Place call
 </dt-split-button>
-<dt-split-button importance="outlined" alpha-icon-position="bottom">
+<dt-split-button importance="outlined" alpha-icon-position="bottom" omega-tooltip-text="More calling options">
   <template #alphaIcon="{ size }">
     <dt-icon name="phone" :size="size" />
   </template>
@@ -484,23 +487,23 @@ showHtmlWarning />
 #### Icon only
 
 <code-well-header>
-  <div class="d-d-flex d-flow8 d-ai-center">
-    <dt-split-button>
+  <dt-stack direction="row" gap="400">
+    <dt-split-button omega-tooltip-text="More calling options" alpha-tooltip-text="Place call">
       <template #alphaIcon="{ size }">
         <dt-icon name="phone" :size="size" />
       </template>
     </dt-split-button>
-    <dt-split-button importance="outlined" kind="muted">
+    <dt-split-button importance="outlined" kind="muted" omega-tooltip-text="More calling options" alpha-tooltip-text="Place call">
       <template #alphaIcon="{ size }">
         <dt-icon name="phone" :size="size" />
       </template>
     </dt-split-button>
-    <dt-split-button importance="clear" kind="danger">
+    <dt-split-button importance="clear" kind="danger" omega-tooltip-text="More calling options" alpha-tooltip-text="Place call">
       <template #alphaIcon="{ size }">
         <dt-icon name="phone" :size="size" />
       </template>
     </dt-split-button>
-  </div>
+  </dt-stack>
 </code-well-header>
 
 <code-example-tabs
@@ -537,17 +540,17 @@ htmlCode='
 </span>
 '
 vueCode='
-<dt-split-button>
+<dt-split-button omega-tooltip-text="More calling options" alpha-tooltip-text="Place call">
   <template #alphaIcon="{ size }">
     <dt-icon name="phone" :size="size" />
   </template>
 </dt-split-button>
-<dt-split-button importance="outlined" kind="muted">
+<dt-split-button importance="outlined" kind="muted" omega-tooltip-text="More calling options" alpha-tooltip-text="Place call">
   <template #alphaIcon="{ size }">
     <dt-icon name="phone" :size="size" />
   </template>
 </dt-split-button>
-<dt-split-button importance="clear" kind="danger">
+<dt-split-button importance="clear" kind="danger" omega-tooltip-text="More calling options" alpha-tooltip-text="Place call">
   <template #alphaIcon="{ size }">
     <dt-icon name="phone" :size="size" />
   </template>
@@ -556,23 +559,23 @@ vueCode='
 showHtmlWarning />
 
 <code-well-header bgclass="d-bgc-contrast">
-  <div class="d-d-flex d-flow8 d-ai-center">
-    <dt-split-button kind="inverted">
+  <dt-stack direction="row" gap="400">
+    <dt-split-button kind="inverted" omega-tooltip-text="More calling options" alpha-tooltip-text="Place call">
       <template #alphaIcon="{ size }">
         <dt-icon name="phone" :size="size" />
       </template>
     </dt-split-button>
-    <dt-split-button importance="outlined" kind="inverted">
+    <dt-split-button importance="outlined" kind="inverted" omega-tooltip-text="More calling options" alpha-tooltip-text="Place call">
       <template #alphaIcon="{ size }">
         <dt-icon name="phone" :size="size" />
       </template>
     </dt-split-button>
-    <dt-split-button importance="clear" kind="inverted">
+    <dt-split-button importance="clear" kind="inverted" omega-tooltip-text="More calling options" alpha-tooltip-text="Place call">
       <template #alphaIcon="{ size }">
         <dt-icon name="phone" :size="size" />
       </template>
     </dt-split-button>
-  </div>
+  </dt-stack>
 </code-well-header>
 
 <code-example-tabs
@@ -609,17 +612,17 @@ htmlCode='
 </span>
 '
 vueCode='
-<dt-split-button kind="inverted">
+<dt-split-button kind="inverted" omega-tooltip-text="More calling options" alpha-tooltip-text="Place call">
   <template #alphaIcon="{ size }">
     <dt-icon name="phone" :size="size" />
   </template>
 </dt-split-button>
-<dt-split-button importance="outlined" kind="inverted">
+<dt-split-button importance="outlined" kind="inverted" omega-tooltip-text="More calling options" alpha-tooltip-text="Place call">
   <template #alphaIcon="{ size }">
     <dt-icon name="phone" :size="size" />
   </template>
 </dt-split-button>
-<dt-split-button importance="clear" kind="inverted">
+<dt-split-button importance="clear" kind="inverted" omega-tooltip-text="More calling options" alpha-tooltip-text="Place call">
   <template #alphaIcon="{ size }">
     <dt-icon name="phone" :size="size" />
   </template>
