@@ -25,7 +25,7 @@
 <script>
 import { SPLIT_BUTTON_ICON_SIZES } from './split_button_constants';
 import { DtButton } from '@/components/button';
-import { DtIconChevronDown } from '@dialpad/dialtone-icons/vue2';
+import { DtIconChevronDown } from '@dialpad/dialtone-icons/vue3';
 import { getUniqueString } from '@/common/utils';
 
 export default {

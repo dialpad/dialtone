@@ -7,7 +7,7 @@
     <split-button-alpha
       v-bind="alphaButtonProps"
       ref="alphaButton"
-      @click.native="$emit('alpha-clicked')"
+      @click="$emit('alpha-clicked')"
     >
       <template #icon="{ size: iconSize }">
         <!-- @slot Alpha (left) button icon slot -->
@@ -31,7 +31,7 @@
           <split-button-omega
             v-bind="{ ...attrs, ...omegaButtonProps }"
             :active="isDropdownOpen"
-            @click.native="$emit('omega-clicked')"
+            @click="$emit('omega-clicked')"
           >
             <template #icon="{ size: iconSize }">
               <!-- @slot Omega (right) button icon slot -->
@@ -54,7 +54,7 @@
       <split-button-omega
         v-else
         v-bind="omegaButtonProps"
-        @click.native="$emit('omega-clicked')"
+        @click="$emit('omega-clicked')"
       >
         <template #icon="{ size: iconSize }">
           <!-- @slot Omega (right) button icon slot -->
@@ -78,6 +78,7 @@ import {
 import SplitButtonAlpha from './split_button-alpha.vue';
 import SplitButtonOmega from './split_button-omega.vue';
 import { DtDropdown } from '@/components/dropdown';
+import { hasSlotContent } from '@/common/utils';
 
 export default {
   name: 'DtSplitButton',
@@ -215,7 +216,7 @@ export default {
 
     /**
      * Element ID, useful in case you need to reference the button
-     * as an external anchor for popover
+     * as an external anchor for popover.
      */
     omegaId: {
       type: String,
@@ -309,14 +310,6 @@ export default {
         class: this.$attrs.class,
       };
     },
-
-    defaultSlotHasContent () {
-      return this.$scopedSlots.default && this.$scopedSlots.default() && this.$scopedSlots.default()[0]?.text?.trim();
-    },
-
-    omegaSlotIsSet () {
-      return this.$scopedSlots.omega && this.$scopedSlots.omega();
-    },
   },
 
   created () {
@@ -334,18 +327,15 @@ export default {
     },
 
     validateAlphaButtonProps () {
-      if (this.defaultSlotHasContent) return;
+      if (hasSlotContent(this.$slots.default)) return;
 
-      // This can't be a computed prop due to reactivity issues.
-      const isAlphaIconSet = this.$refs.alphaButton?.$scopedSlots.icon && this.$refs.alphaButton.$scopedSlots.icon();
-
-      if (isAlphaIconSet && !this.alphaTooltipText) {
+      if (hasSlotContent(this.$slots.alphaIcon) && !this.alphaTooltipText) {
         console.warn('alpha-tooltip-text prop must be set if alpha button has an icon only');
       }
     },
 
     validateOmegaButtonProps () {
-      if (this.omegaSlotIsSet) return;
+      if (hasSlotContent(this.$slots.omega)) return;
 
       if (!this.omegaTooltipText) {
         console.warn('omega-tooltip-text prop is required as it is an icon-only button');

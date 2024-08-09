@@ -21,10 +21,10 @@
     @omega-clicked="$attrs.onOmegaClicked"
   >
     <template
-      v-if="$attrs.default"
+      v-if="defaultSlot"
       #default
     >
-      {{ $attrs.default }}
+      {{ defaultSlot }}
     </template>
     <template
       v-if="$attrs.alphaIcon"
