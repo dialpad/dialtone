@@ -8,7 +8,7 @@
   >
     <span
       v-if="screenReaderText"
-      class="sr-only"
+      class="d-keyboard-shortcut--sr-only"
     >
       {{ screenReaderText }}
     </span>
