@@ -17,6 +17,8 @@ import { DtTooltipDirective } from "@/directives/tooltip";
 import { faker } from '@faker-js/faker';
 import { DtScrollbarDirective } from "@/directives/scrollbar";
 
+setTheme(DpLight);
+
 const channel = addons.getChannel();
 
 channel.on(DARK_MODE_EVENT_NAME, (isDark) => {
