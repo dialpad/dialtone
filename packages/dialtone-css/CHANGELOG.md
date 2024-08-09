@@ -1,3 +1,22 @@
+# [8.40.0](https://github.com/dialpad/dialtone/compare/dialtone-css/v8.39.0...dialtone-css/v8.40.0) (2024-08-06)
+
+
+### Bug Fixes
+
+* **Avatar:** NO-JIRA make color 000 available ([#431](https://github.com/dialpad/dialtone/issues/431)) ([f86bad3](https://github.com/dialpad/dialtone/commit/f86bad322cd7747efaad6b701c3a62bc415e5b45))
+
+
+### Features
+
+* **Badge:** DLT-1930 spacing refinement ([#428](https://github.com/dialpad/dialtone/issues/428)) ([eb7ae1f](https://github.com/dialpad/dialtone/commit/eb7ae1f0a3dcf29304e047d002c0208994a19f9a))
+
+# [8.39.0](https://github.com/dialpad/dialtone/compare/dialtone-css/v8.38.2...dialtone-css/v8.39.0) (2024-08-01)
+
+
+### Features
+
+* **Tokens:** DLT-1696 theme and brand tokens ([#416](https://github.com/dialpad/dialtone/issues/416)) ([11085dc](https://github.com/dialpad/dialtone/commit/11085dc9aeb0698f8f9f277c9b66b9f5869bec71))
+
 ## [8.38.2](https://github.com/dialpad/dialtone/compare/dialtone-css/v8.38.1...dialtone-css/v8.38.2) (2024-07-24)
 
 

@@ -176,6 +176,14 @@ export const Branch = {
   },
 };
 
+export const Assign = {
+  render: DefaultTemplate,
+
+  args: {
+    nodeType: 'assign',
+  },
+};
+
 export const Transfer = {
   render: DefaultTemplate,
 

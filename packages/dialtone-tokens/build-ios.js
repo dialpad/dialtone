@@ -5,10 +5,21 @@
  */
 import fs from 'fs';
 
-import { THEMES } from './build-token-transformer.js';
+const THEMES = [
+  'base-light',
+  'base-dark',
+  'dp-light',
+  'dp-dark',
+  'tmo-light',
+  'tmo-dark',
+  'expressive-light',
+  'expressive-dark',
+  'expressive-sm-light',
+  'expressive-sm-dark',
+];
 
 if (!fs.existsSync('dist_ios/Sources/DialtoneTokens')) {
-  fs.mkdirSync( 'dist_ios/Sources/DialtoneTokens', { recursive: true })
+  fs.mkdirSync('dist_ios/Sources/DialtoneTokens', { recursive: true });
 }
 
 THEMES.forEach(theme => {

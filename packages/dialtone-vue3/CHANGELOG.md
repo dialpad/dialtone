@@ -1,3 +1,54 @@
+# [3.142.0](https://github.com/dialpad/dialtone/compare/dialtone-vue3/v3.141.0...dialtone-vue3/v3.142.0) (2024-08-06)
+
+
+### Bug Fixes
+
+* **Avatar:** NO-JIRA make color 000 available ([#431](https://github.com/dialpad/dialtone/issues/431)) ([f86bad3](https://github.com/dialpad/dialtone/commit/f86bad322cd7747efaad6b701c3a62bc415e5b45))
+
+
+### Features
+
+* **Multiselect:** DP-106266 add maxListWidth prop and highlight event ([#427](https://github.com/dialpad/dialtone/issues/427)) ([18fc8a3](https://github.com/dialpad/dialtone/commit/18fc8a3fe650c103446f33ce6f7935feda1d1432))
+
+# [3.141.0](https://github.com/dialpad/dialtone/compare/dialtone-vue3/v3.140.0...dialtone-vue3/v3.141.0) (2024-08-01)
+
+
+### Features
+
+* **Tokens:** DLT-1696 theme and brand tokens ([#416](https://github.com/dialpad/dialtone/issues/416)) ([11085dc](https://github.com/dialpad/dialtone/commit/11085dc9aeb0698f8f9f277c9b66b9f5869bec71))
+
+# [3.140.0](https://github.com/dialpad/dialtone/compare/dialtone-vue3/v3.139.0...dialtone-vue3/v3.140.0) (2024-07-31)
+
+
+### Bug Fixes
+
+* **Ivr Node Assign:** DP-95641 fix constant export ([#426](https://github.com/dialpad/dialtone/issues/426)) ([5e72815](https://github.com/dialpad/dialtone/commit/5e7281586872f2cb39b7a4add42d11e16d8c738d))
+* **Tooltip:** DLT-1921 enabled prop not working - vue 3 ([#425](https://github.com/dialpad/dialtone/issues/425)) ([b5552e7](https://github.com/dialpad/dialtone/commit/b5552e7aec38cf5cca4eef95288cd564354b7c7b))
+
+
+### Features
+
+* **Leftbar:** DLT-1929 add scheduled icon ([#423](https://github.com/dialpad/dialtone/issues/423)) ([65c6e02](https://github.com/dialpad/dialtone/commit/65c6e02275c99d816b1dbaa7ed34d97ce5669c2a))
+
+# [3.139.0](https://github.com/dialpad/dialtone/compare/dialtone-vue3/v3.138.0...dialtone-vue3/v3.139.0) (2024-07-31)
+
+
+### Features
+
+* **Ivr Node Assign:** DP-95641 add assign step type ([#422](https://github.com/dialpad/dialtone/issues/422)) ([3da6278](https://github.com/dialpad/dialtone/commit/3da62787bf7b9861a9a1786462ef62bab1e65c85))
+
+# [3.138.0](https://github.com/dialpad/dialtone/compare/dialtone-vue3/v3.137.2...dialtone-vue3/v3.138.0) (2024-07-30)
+
+
+### Documentation
+
+* DLT-1897 move storybook to doc site - Emoji to Emoji Text Wrapper ([#412](https://github.com/dialpad/dialtone/issues/412)) ([dedb229](https://github.com/dialpad/dialtone/commit/dedb229c6e5ebbea8638c0537a8a31c37bf7ef3c))
+
+
+### Features
+
+* **Message Input:** DLT-1912 add slot for split button ([#419](https://github.com/dialpad/dialtone/issues/419)) ([e50139e](https://github.com/dialpad/dialtone/commit/e50139e659988b70aa349bf492213d81947e5538))
+
 ## [3.137.2](https://github.com/dialpad/dialtone/compare/dialtone-vue3/v3.137.1...dialtone-vue3/v3.137.2) (2024-07-24)
 
 

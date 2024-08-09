@@ -6,8 +6,10 @@ const docTokens = {};
 
 // Recurse through style dictionary object and pick out
 // bottom level token values.
+// eslint-disable-next-line complexity
 export function buildDocs (platformName, theme, currentObj) {
-  if (currentObj === null || typeof currentObj !== 'object') {
+  // tokens marked as "source" should not be output.
+  if (currentObj === null || typeof currentObj !== 'object' || currentObj.isSource === false) {
     return null;
   }
 
@@ -16,6 +18,7 @@ export function buildDocs (platformName, theme, currentObj) {
   const tokenValue = currentObj.value;
   const tokenDescription = currentObj?.description;
   const tokenPath = currentObj?.path;
+  const isCompositionToken = currentObj?.isCompositionToken ?? undefined;
 
   if (tokenValue && tokenPath) {
     const tokenKey = tokenPath.join('/');
@@ -27,6 +30,7 @@ export function buildDocs (platformName, theme, currentObj) {
         value: tokenValue,
         description: tokenDescription,
         keywords: getTokenKeywords(keywordsJson, tokenPath),
+        isCompositionToken,
       },
     };
     return null;
@@ -46,6 +50,7 @@ export function buildDocs (platformName, theme, currentObj) {
  * @param {Array} keywords Array with the keywords. Is completed by recursively looping through obj
  * @returns {Array|undefined} Array with the keywords, or undefined if there are none
  */
+// eslint-disable-next-line complexity
 function getTokenKeywords (obj, tokenPath, keywords = []) {
   if (tokenPath.legth === 0 || !obj) return;
   const currentCategory = tokenPath[0];

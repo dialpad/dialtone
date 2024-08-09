@@ -1,7 +1,8 @@
 {
   "name": "@dialpad/dialtone",
-  "version": "9.57.0",
+  "version": "9.62.0",
   "description": "Dialpad's Dialtone design system monorepo",
+  "type": "module",
   "scripts": {
     "test:all": "nx run-many --target=test",
     "build:all": "nx run-many --target=build",
@@ -66,6 +67,7 @@
   "exports": {
     "./CHANGELOG.json": "./CHANGELOG.json",
     "./css": "./dist/css/dialtone.min.css",
+    "./css-default-theme": "./dist/css/dialtone-default-theme.min.css",
     "./tokens/*.css": "./dist/tokens/css/*.css",
     "./tokens/*.less": "./dist/tokens/less/*.less",
     "./vue2": {
@@ -90,11 +92,16 @@
       "import": "./dist/vue3/*.js",
       "require": "./dist/vue3/*.cjs"
     },
+    "./themes": {
+      "import": "./dist/themes/*.js",
+      "require": "./dist/themes/*.cjs"
+    },
     "./*": "./dist/*"
   },
   "dependencies": {
     "@dialpad/dialtone-emojis": "workspace:*",
     "@dialpad/dialtone-icons": "workspace:*",
+    "@dialpad/dialtone-tokens": "workspace:*",
     "@tiptap/core": "2.3.0",
     "@tiptap/extension-blockquote": "2.3.0",
     "@tiptap/extension-bold": "2.3.0",
@@ -163,6 +170,7 @@
     "stylelint-config-standard": "^33.0.0",
     "stylelint-less": "1.0.4",
     "stylelint-no-px": "^1.0.1",
+    "vite": "^5.0.0",
     "vitest": "^1.0.4",
     "vue-docgen-api": "^4.75.0",
     "wait-on": "^7.2.0"

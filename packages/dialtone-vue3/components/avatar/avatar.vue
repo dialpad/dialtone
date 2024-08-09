@@ -80,7 +80,7 @@ import {
   AVATAR_SIZE_MODIFIERS,
   AVATAR_PRESENCE_SIZE_MODIFIERS,
   AVATAR_PRESENCE_STATES,
-  AVATAR_COLORS,
+  AVATAR_RANDOM_COLORS,
   AVATAR_GROUP_VALIDATOR,
   AVATAR_ICON_SIZES,
 } from './avatar_constants';
@@ -406,7 +406,7 @@ export default {
     },
 
     getColor () {
-      return this.color ?? getRandomElement(AVATAR_COLORS, this.seed);
+      return this.color ?? getRandomElement(AVATAR_RANDOM_COLORS, this.seed);
     },
 
     _loadedImageEventHandler (el) {

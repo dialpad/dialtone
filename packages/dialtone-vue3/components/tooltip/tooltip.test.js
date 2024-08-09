@@ -181,5 +181,20 @@ describe('DtTooltip tests', () => {
         });
       });
     });
+
+    describe('When enabled prop is false', () => {
+      describe('When mouseenter on anchor', () => {
+        it('should not display tooltip', async () => {
+          mockProps = { enabled: false };
+          updateWrapper();
+
+          await anchor.trigger('mouseenter');
+          await flushPromises();
+          tippyContent = document.body.querySelector('.tippy-content');
+
+          expect(tippyContent).toBeNull();
+        });
+      });
+    });
   });
 });

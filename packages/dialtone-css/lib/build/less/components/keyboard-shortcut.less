@@ -27,6 +27,21 @@
     border-color: var(--dt-color-border-moderate-inverted);
   }
 
+  /* Hiding class, making content visible only to screen readers but not visually */
+
+  /* "sr" meaning "screen-reader" */
+
+  /* https://css-tricks.com/inclusively-hidden/ */
+  &--sr-only:not(:focus, :active) {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    white-space: nowrap;
+    clip: rect(0 0 0 0);
+    clip-path: inset(50%);
+  }
+
   &__icon,
   &__item {
     margin-right: var(--dt-space-200);

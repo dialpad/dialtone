@@ -27,10 +27,12 @@ This component combines both the `input` and `textarea` elements as options with
 - When using another type of input will make answering more difficult. For example, birthdays and other known dates are easier to type in than they are to select from a calendar picker.
 - When users want to be able to paste in a response.
 </template>
+
 <template #dont>
 
 - When users are choosing from a specific set of options. Consider [Select](select-menu.md), [Radio](radio.md), or [Checkbox](checkbox.md).
 </template>
+
 </dialtone-usage>
 
 ### Best practices
@@ -211,6 +213,139 @@ vueCode='
 <dt-input label="Label" type="textarea" value="Value" :messages="[messages.warning]"/>
 '
 showHtmlWarning />
+
+### With multiple validation messages
+
+<code-well-header>
+  <div class="d-w100p">
+    <dt-input ref="multipleMessages" label="Label" type="email" value="Value" :messages="multipleMessages" />
+  </div>
+</code-well-header>
+
+<code-example-tabs
+:htmlCode='() => $refs.multipleMessages'
+vueCode='
+<dt-input label="Label" type="email" value="Value" :messages="multipleMessages" />
+'
+/>
+
+### With maximum length validation
+
+Adds validation for the input length. Make sure to provide the following props:
+
+- `currentLength`: the current character length that the user has entered into the input. This must be input manually as sometimes characters do not count as 1 character. For example an emoji could take up many characters in the input, but should only count as 1 character. If you don't pass `currentLength`, the component will use a built-in length calculation.
+- `validate`: should be an object with the validation rules to apply to the input. Maximum length validation is supported with the following configuration:
+
+```js
+length: {
+  // describes the maximum length allowed and shown in the label
+  description: string,        // Required
+  // maximum length allowed to enter
+  max: number,                // Required
+  // message to show in the warning or error validation message
+  message: string,            // Required
+  // length from which the validation message will be shown as a warning,
+  // when the maximum length is reached, the validation message will be shown as an error
+  warn: number,               // Optional
+  // set maxlength attribute, defaults to false
+  limitMaxLength: boolean,    // Optional
+},
+```
+
+If the input is invalid due to the validation, the validation message will be shown even when the input lost focus, otherwise the validation message will be hidden when the user unfocuses the input.
+
+<code-well-header>
+  <div class="d-w100p">
+    <dt-input
+      v-model="inputValue"
+      ref="maxLength"
+      label="Label"
+      placeholder="placeholder"
+      :validate="{
+        length: {
+          description: 'Max 25 characters.',
+          message: 'Max 25 characters allowed.',
+          max: 25,
+          warn: 15,
+          limitMaxLength: false,
+        }
+      }"
+    />
+  </div>
+</code-well-header>
+
+<code-example-tabs
+:htmlCode='() => $refs.maxLength'
+vueCode='
+<dt-input
+  label="Label"
+  placeholder="placeholder"
+  :validate="{
+    length: {
+      description: `Max 25 characters.`,
+      message: `Max 25 characters allowed.`,
+      max: 25,
+      warn: 15,
+      limitMaxLength: false,
+    }
+  }"
+/>
+'
+/>
+
+### With custom maximum length validation message
+
+<code-well-header>
+  <div class="d-w100p">
+    <dt-input
+      v-model="inputValue"
+      label="Label"
+      placeholder="placeholder"
+      :validate="validate()"
+    />
+  </div>
+</code-well-header>
+
+<code-example-tabs
+vueCode='
+<dt-input
+  label="Label"
+  placeholder="placeholder"
+  :validate="validate()"
+  v-model="inputValue"
+/>
+'
+/>
+
+```js
+const validateData = {
+  length: {
+    description: 'Max 25 characters.',
+    max: 25,
+    warn: 15,
+    limitMaxLength: false,
+  }
+};
+
+const validationMessage = () => {
+  const remainingCharacters = validateData.length.max - currentLength.value.length;
+
+  if (remainingCharacters < 0) {
+    return `${Math.abs(remainingCharacters)} characters over limit`;
+  } else {
+    return `${remainingCharacters} characters left`;
+  }
+};
+
+const validate = () => {
+  return {
+    length: {
+      ...validateData.length,
+      message: validationMessage(),
+    }
+  };
+};
+```
 
 ### With icons
 
@@ -628,9 +763,47 @@ showHtmlWarning />
 - Placeholder text should not include critical information. Use description text for any information that helps the user successfully interact with the input.
 
 <script setup>
-  const messages = {
-    warning: { "message": "Warning validation message", "type": "warning" },
-    error: { "message": "Error validation message", "type": "error" },
-    success: { "message": "Success validation message", "type": "success" },
+import { ref } from 'vue';
+
+const inputValue = ref('');
+
+const messages = {
+  warning: { "message": "Warning validation message", "type": "warning" },
+  error: { "message": "Error validation message", "type": "error" },
+  success: { "message": "Success validation message", "type": "success" },
+};
+
+const multipleMessages = [
+  { message: 'This is the first message', type: 'error' },
+  { message: 'This is the second message', type: 'error' },
+  { message: 'This is the third message', type: 'error' },
+];
+
+const validateData = {
+  length: {
+    description: 'Max 25 characters.',
+    max: 25,
+    warn: 15,
+    limitMaxLength: false,
+  }
+};
+
+const validationMessage = () => {
+  const remainingCharacters = validateData.length.max - inputValue.value.length;
+
+  if (remainingCharacters < 0) {
+    return `${Math.abs(remainingCharacters)} characters over limit`;
+  } else {
+    return `${remainingCharacters} characters left`;
+  }
+};
+
+const validate = () => {
+  return {
+    length: {
+      ...validateData.length,
+      message: validationMessage(),
+    }
   };
+};
 </script>

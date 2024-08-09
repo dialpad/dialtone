@@ -48,6 +48,14 @@
         :options="THEMES"
         @change="updateTheme"
       />
+      <dt-select-menu
+        name="brand-select"
+        label="Brand"
+        select-class="d-w128"
+        :value="brand"
+        :options="BRANDS"
+        @change="updateBrand"
+      />
       <dt-button
         v-dt-tooltip:top-end="shareLinkTooltip"
         importance="clear"
@@ -69,7 +77,7 @@
 
 <script setup>
 import { computed, ref } from 'vue';
-import { FORMAT_MAP, THEMES } from './constants';
+import { FORMAT_MAP, THEMES, BRANDS } from './constants';
 import { debounce } from '../../common/utilities';
 import { useRoute, useRouter } from 'vue-router';
 
@@ -86,12 +94,16 @@ const props = defineProps({
     type: String,
     required: true,
   },
+  brand: {
+    type: String,
+    required: true,
+  },
 });
 
 const route = useRoute();
 const router = useRouter();
 
-const emit = defineEmits(['filter', 'update:search', 'update:format', 'update:theme']);
+const emit = defineEmits(['filter', 'update:search', 'update:format', 'update:theme', 'update:brand']);
 const searchCriteria = ref(props.search?.trim());
 const shareLinkTooltip = ref('Copy URL to clipboard');
 
@@ -130,6 +142,13 @@ const updateTheme = async (newTheme) => {
   if (props.theme === newTheme) return;
   await router.replace({ path: route.path, hash: route.hash, query: { ...route.query, theme: newTheme } });
   emit('update:theme', newTheme);
+  emit('filter');
+};
+
+const updateBrand = async (newBrand) => {
+  if (props.brand === newBrand) return;
+  await router.replace({ path: route.path, hash: route.hash, query: { ...route.query, brand: newBrand } });
+  emit('update:brand', newBrand);
   emit('filter');
 };
 

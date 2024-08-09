@@ -18,7 +18,7 @@ const baseSlots = {
 
 const connector = '<div data-qa="dt-connector-element"> connector content </div>';
 
-describe('DtPagination Tests', () => {
+describe('DtRecipeIvrNode Tests', () => {
   // Wrappers
   let wrapper;
   let topConnector;

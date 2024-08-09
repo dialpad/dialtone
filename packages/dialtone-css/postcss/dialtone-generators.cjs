@@ -1,8 +1,10 @@
 /* eslint-disable max-lines */
 /* eslint-disable max-len */
 
-// eslint-disable-next-line no-unused-vars
-const { Rule, Declaration, Source } = require('postcss');
+const TokensBaseLight = require('@dialpad/dialtone-tokens/dist/tokens-base-light.json');
+const TokensDpLight = require('@dialpad/dialtone-tokens/dist/tokens-dp-light.json');
+
+const { Rule } = require('postcss');
 
 // TODO: Move these constants to the _data directory
 const {
@@ -15,19 +17,12 @@ const {
   PADDING_SIZES,
   GAP_SPACES,
   WIDTH_HEIGHTS,
-  PLATFORM_FONT_SIZES, Z_INDEX,
 } = require('./constants.cjs');
 const {
-  extractColors,
   appendHoverFocusSelectors,
-  extractShadows,
-  extractTypographies,
+  processColors,
   removePrefixFromColor,
 } = require('./helpers.cjs');
-const tinycolor = require('tinycolor2');
-const bodyCSSVariables = [];
-const lightCSSVariables = [];
-const darkCSSVariables = [];
 // This constant determines the order in which classes are going to be added to the root CSS
 const generatedRules = {
   fontColor: [],
@@ -100,13 +95,19 @@ const generatedRules = {
  *  - Background Color
  *  - Divider Color
  *  - Gradient Colors
- * @param { Rule } Rule
  * @param { Source } clonedSource
  * @param { Declaration } declaration
  */
-function colorUtilities (Rule, clonedSource, declaration) {
-  const dialtoneColors = extractColors(false);
-  dialtoneColors.light.forEach(({ colorName: color }) => {
+function colorUtilities (clonedSource, declaration) {
+  const colorsRegex = new RegExp(`dtColor(Neutral)?(${REGEX_OPTIONS.COLORS})([0-9]{3})?`);
+
+  const tokens = { ...TokensBaseLight, ...TokensDpLight };
+
+  const colors = Object.entries(tokens)
+    .filter(([key]) => colorsRegex.test(key))
+    .reduce(processColors, []);
+
+  colors.forEach(({ colorName: color }) => {
     const hslaColor = `hsla(var(${color}-h) var(${color}-s) var(${color}-l)`;
     const colorNoPrefix = removePrefixFromColor(color);
     generatedRules.fontColor.push(new Rule({
@@ -169,11 +170,10 @@ function colorUtilities (Rule, clonedSource, declaration) {
  *  - Background Opacity
  *  - Background Gradient Opacity Starting Stop
  *  - Background Gradient Opacity Ending Stop
- * @param { Rule } Rule
  * @param { Source } clonedSource
  * @param { Declaration } declaration
  */
-function opacityUtilities (Rule, clonedSource, declaration) {
+function opacityUtilities (clonedSource, declaration) {
   OPACITIES.forEach(opacity => {
     generatedRules.fontOpacity.push(new Rule({
       source: clonedSource,
@@ -222,11 +222,10 @@ function opacityUtilities (Rule, clonedSource, declaration) {
 
 /**
  * Generate flex column utility classes.
- * @param { Rule } Rule
  * @param { Source } clonedSource
  * @param { Declaration } declaration
  */
-function flexColumnsUtilities (Rule, clonedSource, declaration) {
+function flexColumnsUtilities (clonedSource, declaration) {
   for (let i = 1; i <= FLEX_COLUMNS; i++) {
     generatedRules.flexColumn.push(new Rule({
       source: clonedSource,
@@ -265,11 +264,10 @@ function flexColumnsUtilities (Rule, clonedSource, declaration) {
 
 /**
  * Generate border utility classes.
- * @param { Rule } Rule
  * @param { Source } clonedSource
  * @param { Declaration } declaration
  */
-function borderUtilities (Rule, clonedSource, declaration) {
+function borderUtilities (clonedSource, declaration) {
   Object.keys(BORDER_RADIUS_SIZES)
     .forEach(size => {
       generatedRules.borderAllRadius.push(new Rule({
@@ -316,11 +314,10 @@ function borderUtilities (Rule, clonedSource, declaration) {
 
 /**
  * Generate Grid column and row utility classes.
- * @param { Rule } Rule
  * @param { Source } clonedSource
  * @param { Declaration } declaration
  */
-function gridUtilities (Rule, clonedSource, declaration) {
+function gridUtilities (clonedSource, declaration) {
   for (let i = 1; i <= FLEX_COLUMNS; i++) {
     generatedRules.gridColumns.push(new Rule({
       source: clonedSource,
@@ -383,11 +380,10 @@ function gridUtilities (Rule, clonedSource, declaration) {
 
 /**
  * Generate Grid gap utility classes.
- * @param { Rule } Rule
  * @param { Source } clonedSource
  * @param { Declaration } declaration
  */
-function gapUtilities (Rule, clonedSource, declaration) {
+function gapUtilities (clonedSource, declaration) {
   Object.keys(GAP_SPACES)
     .forEach(stop => {
       generatedRules.gridGap.push(new Rule({
@@ -416,11 +412,10 @@ function gapUtilities (Rule, clonedSource, declaration) {
 
 /**
  * Generate Layout utility classes.
- * @param { Rule } Rule
  * @param { Source } clonedSource
  * @param { Declaration } declaration
  */
-function layoutUtilities (Rule, clonedSource, declaration) {
+function layoutUtilities (clonedSource, declaration) {
   Object.keys(LAYOUT_SIZES)
     .forEach(size => {
       generatedRules.positionTop.push(new Rule({
@@ -482,11 +477,10 @@ function layoutUtilities (Rule, clonedSource, declaration) {
 
 /**
  * Generate Sizing utility classes.
- * @param { Rule } Rule
  * @param { Source } clonedSource
  * @param { Declaration } declaration
  */
-function sizingUtilities (Rule, clonedSource, declaration) {
+function sizingUtilities (clonedSource, declaration) {
   Object.keys(WIDTH_HEIGHTS)
     .forEach(size => {
       generatedRules.fixedHeight.push(new Rule({
@@ -536,11 +530,10 @@ function sizingUtilities (Rule, clonedSource, declaration) {
 
 /**
  * Generate Margin utility classes.
- * @param { Rule } Rule
  * @param { Source } clonedSource
  * @param { Declaration } declaration
  */
-function marginUtilities (Rule, clonedSource, declaration) {
+function marginUtilities (clonedSource, declaration) {
   Object.keys(MARGIN_SIZES).forEach(size => {
     generatedRules.marginTop.push(new Rule({
       source: clonedSource,
@@ -598,11 +591,10 @@ function marginUtilities (Rule, clonedSource, declaration) {
 
 /**
  * Generate Padding utility classes.
- * @param { Rule } Rule
  * @param { Source } clonedSource
  * @param { Declaration } declaration
  */
-function paddingUtilities (Rule, clonedSource, declaration) {
+function paddingUtilities (clonedSource, declaration) {
   Object.keys(PADDING_SIZES)
     .forEach(size => {
       generatedRules.paddingTop.push(new Rule({
@@ -661,156 +653,21 @@ function paddingUtilities (Rule, clonedSource, declaration) {
 
 /**
  *
- * @param { Rule } rule
  * @param { Source } clonedSource
  * @param { Declaration } declaration
  * @private
  */
-function _generateUtilities (rule, clonedSource, declaration) {
-  colorUtilities(rule, clonedSource, declaration);
-  opacityUtilities(rule, clonedSource, declaration);
-  flexColumnsUtilities(rule, clonedSource, declaration);
-  borderUtilities(rule, clonedSource, declaration);
-  gridUtilities(rule, clonedSource, declaration);
-  gapUtilities(rule, clonedSource, declaration);
-  layoutUtilities(rule, clonedSource, declaration);
-  sizingUtilities(rule, clonedSource, declaration);
-  marginUtilities(rule, clonedSource, declaration);
-  paddingUtilities(rule, clonedSource, declaration);
-}
-
-//        Variables generation        //
-
-/**
- * Generate HSL CSS Variables.
- * @param { Declaration } declaration
- */
-function colorVariables (declaration) {
-  const dialtoneColors = extractColors();
-  dialtoneColors.light.forEach(({ colorName, hexValue }) => {
-    const color = tinycolor(hexValue);
-    const { h: hue, s: saturation, l: lightness } = color.toHsl();
-    lightCSSVariables.push([
-      declaration.clone({ prop: `${colorName}-h`, value: `${hue}` }),
-      declaration.clone({ prop: `${colorName}-s`, value: `${saturation * 100}%` }),
-      declaration.clone({ prop: `${colorName}-l`, value: `${lightness * 100}%` }),
-      declaration.clone({ prop: `${colorName}-hsl`, value: `var(${colorName}-h) var(${colorName}-s) var(${colorName}-l)` }),
-      declaration.clone({ prop: `${colorName}-hsla`, value: `hsla(var(${colorName}-h) var(${colorName}-s) var(${colorName}-l) / var(--alpha, 100%))` }),
-    ]);
-  });
-  lightCSSVariables.push({ prop: 'color-scheme', value: 'light' });
-  dialtoneColors.dark.forEach(({ colorName, hexValue }) => {
-    const color = tinycolor(hexValue);
-    const { h: hue, s: saturation, l: lightness } = color.toHsl();
-    darkCSSVariables.push([
-      declaration.clone({ prop: `${colorName}-h`, value: `${hue}` }),
-      declaration.clone({ prop: `${colorName}-s`, value: `${saturation * 100}%` }),
-      declaration.clone({ prop: `${colorName}-l`, value: `${lightness * 100}%` }),
-      declaration.clone({ prop: `${colorName}-hsl`, value: `var(${colorName}-h) var(${colorName}-s) var(${colorName}-l)` }),
-      declaration.clone({ prop: `${colorName}-hsla`, value: `hsla(var(${colorName}-h) var(${colorName}-s) var(${colorName}-l) / var(--alpha, 100%))` }),
-    ]);
-  });
-  darkCSSVariables.push({ prop: 'color-scheme', value: 'dark' });
-}
-
-/**
- * Generates font sizes for specific platforms
- * TV, TC8 and Mobile
- * @param { Declaration } declaration
- */
-function platformSpecificFontSizes (declaration) {
-  Object.keys(PLATFORM_FONT_SIZES).forEach(stop => {
-    const fontSizeVar = `--dt-font-size-${stop}`;
-    bodyCSSVariables.push([
-      declaration.clone({ prop: fontSizeVar, value: PLATFORM_FONT_SIZES[stop] }),
-    ]);
-  });
-}
-
-/**
- * Generate z-index Variables.
- * @param { Declaration } declaration
- */
-function layoutVariables (declaration) {
-  Object.keys(Z_INDEX).forEach(name => {
-    const zIndexVar = `--zi-${name}`;
-    bodyCSSVariables.push([
-      declaration.clone({ prop: zIndexVar, value: Z_INDEX[name] }),
-    ]);
-  });
-}
-
-/**
- *
- * @param { Declaration } declaration
- * @private
- */
-function _generateVariables (declaration) {
-  colorVariables(declaration);
-  platformSpecificFontSizes(declaration);
-  layoutVariables(declaration);
-}
-
-//        Composition tokens          //
-
-/**
- * Compose box shadow tokens
- * @param { Declaration } declaration
- * @param { string } [mode=light]
- */
-function boxShadows (declaration, mode = 'light') {
-  const dialtoneShadows = extractShadows(mode);
-
-  Object
-    .keys(dialtoneShadows)
-    .forEach(shadowName => {
-      const shadowVar = `--dt-shadow-${shadowName}`;
-      // in css inset shadows are defined by adding the inset keyword
-      const isInset = shadowName.includes('inset');
-      const times = dialtoneShadows[shadowName];
-      const value = Array(times)
-        .fill(undefined)
-        .map((val, i) => {
-          const shadowNumber = i + 1;
-          return `var(${shadowVar}-${shadowNumber}-x) var(${shadowVar}-${shadowNumber}-y) var(${shadowVar}-${shadowNumber}-blur) var(${shadowVar}-${shadowNumber}-spread) var(${shadowVar}-${shadowNumber}-color)${isInset ? ' inset' : ''}`;
-        }).join(', ');
-
-      if (mode === 'light') {
-        lightCSSVariables.push([
-          declaration.clone({ prop: shadowVar, value }),
-        ]);
-      } else {
-        darkCSSVariables.push([
-          declaration.clone({ prop: shadowVar, value }),
-        ]);
-      }
-    });
-}
-
-/**
- * Compose typography tokens
- * @param { Declaration } declaration
- */
-function typography (declaration) {
-  const dialtoneTypographies = extractTypographies();
-  dialtoneTypographies
-    .forEach(typographyName => {
-      const composedVar = `--dt-typography-${typographyName}`;
-      const value = `var(${composedVar}-font-weight) var(${composedVar}-font-size)/var(${composedVar}-line-height) var(${composedVar}-font-family)`;
-      bodyCSSVariables.push([
-        declaration.clone({ prop: composedVar, value }),
-      ]);
-    });
-}
-
-/**
- *
- * @param { Declaration } declaration
- */
-function _generateCompositionTokens (declaration) {
-  boxShadows(declaration);
-  boxShadows(declaration, 'dark');
-  typography(declaration);
+function _generateUtilities (clonedSource, declaration) {
+  colorUtilities(clonedSource, declaration);
+  opacityUtilities(clonedSource, declaration);
+  flexColumnsUtilities(clonedSource, declaration);
+  borderUtilities(clonedSource, declaration);
+  gridUtilities(clonedSource, declaration);
+  gapUtilities(clonedSource, declaration);
+  layoutUtilities(clonedSource, declaration);
+  sizingUtilities(clonedSource, declaration);
+  marginUtilities(clonedSource, declaration);
+  paddingUtilities(clonedSource, declaration);
 }
 
 //        Selector variations         //
@@ -849,19 +706,14 @@ function _generateHoverFocusVariations (rule) {
 module.exports = () => {
   return {
     postcssPlugin: 'postcss-dialtone-generators',
-    Once (root, { Rule }) {
-      const lastRule = root.last;
-      const clonedSource = lastRule.source;
-      const declaration = lastRule.first;
+    Once (root) {
+      const rootSelector = root.last.prev().prev();
+      const clonedSource = rootSelector.source;
+      const declaration = rootSelector.first;
 
-      _generateUtilities(Rule, clonedSource, declaration);
-      _generateVariables(declaration);
-      _generateCompositionTokens(declaration);
+      _generateUtilities(clonedSource, declaration);
 
-      root.insertAfter(lastRule, new Rule({ selector: '.dialtone-theme-light', nodes: lightCSSVariables, source: clonedSource }));
-      root.insertAfter(lastRule, new Rule({ selector: '.dialtone-theme-dark', nodes: darkCSSVariables, source: clonedSource }));
-      root.insertAfter(lastRule, new Rule({ selector: 'body', nodes: bodyCSSVariables, source: clonedSource }));
-      root.insertAfter(lastRule, Object.values(generatedRules).flat());
+      root.insertAfter(rootSelector, Object.values(generatedRules).flat());
     },
     Root (root) {
       root.walkRules(rule => {

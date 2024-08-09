@@ -1,81 +1,5 @@
-import Helpers from '@dialpad/dialtone-css/postcss/helpers.cjs';
 import tokensJson from '@dialpad/dialtone-tokens/dist/doc.json';
-import { CATEGORY_MAP, SUBCATEGORY_MAP, FORMAT_MAP, THEMES, getTokensStructure } from './constants';
-
-/**
- * Compose typography tokens
- */
-function getComposedTypographyTokens () {
-  const tokens = [];
-  const dialtoneTypographies = Helpers.extractTypographies();
-  dialtoneTypographies
-    .forEach(typographyName => {
-      const composedVar = `--dt-typography-${typographyName}`;
-      const weight = `var(${composedVar}-font-weight)`;
-      const sizeLineHeight = `var(${composedVar}-font-size) / var(${composedVar}-line-height)`;
-      const fontFamily = `var(${composedVar}-font-family)`;
-      tokens.push({
-        exampleValue: `${weight} ${sizeLineHeight} ${fontFamily}`,
-        name: `var(${composedVar})`,
-        tokenValue: [weight, sizeLineHeight, fontFamily],
-      });
-    });
-  return tokens;
-}
-
-/**
- * Compose box shadow tokens
- * @param { string } [theme=light]
- */
-function getComposedShadowTokens (theme) {
-  const tokens = [];
-  const dialtoneShadows = Helpers.extractShadows(theme);
-  Object
-    .keys(dialtoneShadows)
-    .forEach(shadowName => {
-      const shadowVar = `--dt-shadow-${shadowName}`;
-      const times = dialtoneShadows[shadowName];
-      const tokenValue = Array(times)
-        .fill(undefined)
-        .map((val, i) => {
-          const shadowNumber = i + 1;
-          // eslint-disable-next-line max-len
-          return `var(${shadowVar}-${shadowNumber}-x) var(${shadowVar}-${shadowNumber}-y) var(${shadowVar}-${shadowNumber}-blur) var(${shadowVar}-${shadowNumber}-spread) var(${shadowVar}-${shadowNumber}-color)`;
-        }).join(', ');
-
-      tokens.push({ exampleValue: tokenValue, name: `var(${shadowVar})`, tokenValue: tokenValue.split(' ') });
-    });
-  return tokens;
-}
-
-/**
-* Tokens that are a combination of other tokens.
-* Only apply for the categories typography and shadow, and only in CSS format.
-* @param { object } structure Structure where to add the tokens
-*/
-export const addComposedTokens = (structure) => {
-  const composedTypographyTokens = getComposedTypographyTokens();
-  THEMES.forEach((themeObj) => {
-    const theme = themeObj.value;
-    if (!structure.CSS || !structure.CSS[theme]) return;
-
-    const composedShadowTokens = getComposedShadowTokens(theme);
-
-    if (structure.CSS[theme].typography['font style']) {
-      structure.CSS[theme].typography['font style']._children = [
-        ...composedTypographyTokens,
-        ...structure.CSS[theme].typography['font style']._children,
-      ];
-    }
-
-    if (structure.CSS[theme].shadow) {
-      structure.CSS[theme].shadow._children = [
-        ...composedShadowTokens,
-        ...structure.CSS[theme].shadow._children,
-      ];
-    }
-  });
-};
+import { CATEGORY_MAP, SUBCATEGORY_MAP, FORMAT_MAP, THEMES, BRANDS, getTokensStructure } from './constants';
 
 /**
   Process the file tokensJson and fill processedTokens with the data we want to show.
@@ -88,12 +12,33 @@ export const addTokensToStructure = (structure) => {
   Object.keys(FORMAT_MAP).forEach(format => {
     structure[format] = {};
     for (const theme of THEMES) {
-      structure[format][theme.value] = getTokensStructure();
-      Object.entries(tokensJson[theme.value]).forEach((token) => {
-        addTokensToCategories(token, format, structure[format][theme.value]);
-      });
+      const baseThemeKey = `base-${theme.value}`;
+
+      for (const brand of BRANDS) {
+        const brandThemeKey = `${brand.value}-${theme.value}`;
+        structure[format][brandThemeKey] = getTokensStructure();
+
+        const combined = { ...tokensJson[baseThemeKey], ...tokensJson[brandThemeKey] };
+
+        // merge base and semantic tokens into one object per theme
+        Object.entries(combined).forEach((token) => {
+          addTokensToCategories(token, format, structure[format][brandThemeKey]);
+        });
+      }
     }
   });
+};
+
+/**
+ * split a composition token into an array based on a slash or a css var() function
+ */
+const splitCompositionTokenIntoArray = (value) => {
+  const regex = /var\([^)]+\)|\//g;
+  const matches = value.match(regex);
+  if (matches) {
+    return matches;
+  }
+  return value;
 };
 
 // eslint-disable-next-line complexity
@@ -101,9 +46,13 @@ const addTokensToCategories = (token, format, structure) => {
   const [key, value] = token;
   if (!value[FORMAT_MAP[format]] || !value[FORMAT_MAP.CSS] || isBaseToken(key)) return;
 
-  const { name, value: tokenValue, description, keywords } = value[FORMAT_MAP[format]];
+  const { name, value: tokenValue, description, keywords, isCompositionToken } = value[FORMAT_MAP[format]];
   const { value: exampleValue, name: exampleName } = value[FORMAT_MAP.CSS];
   const displayToken = { exampleValue, exampleName, name, tokenValue, description, keywords };
+
+  if (isCompositionToken) {
+    displayToken.tokenValue = splitCompositionTokenIntoArray(tokenValue);
+  }
 
   const splitKeys = key.split('/');
 
@@ -136,7 +85,7 @@ const addTokensToCategories = (token, format, structure) => {
 
   // TYPOGRAPHY
   if (key.startsWith('typography')) {
-    structure.typography['font style']._children.push({ ...displayToken, hidden: true });
+    structure.typography['font style']._children.push({ ...displayToken, hidden: !isCompositionToken });
     return;
   }
 
@@ -164,7 +113,7 @@ const addTokensToCategories = (token, format, structure) => {
 
   // SHADOW
   if (key.startsWith('shadow')) {
-    structure.shadow._children.push({ ...displayToken, hidden: true });
+    structure.shadow._children.push({ ...displayToken, hidden: !isCompositionToken });
     return;
   }
 

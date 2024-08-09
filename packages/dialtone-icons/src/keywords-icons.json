@@ -683,15 +683,26 @@
       "park": [
         "call"
       ],
+      "pause-circle-filled": [
+        "music",
+        "audio",
+        "stop",
+        "video",
+        "media"
+      ],
       "pause-circle": [
         "music",
         "audio",
-        "stop"
+        "stop",
+        "video",
+        "media"
       ],
       "pause": [
         "music",
         "audio",
-        "stop"
+        "stop",
+        "video",
+        "media"
       ],
       "phone-hang-up": [
         "disconnect",
@@ -703,6 +714,13 @@
         "overlay",
         "miniature",
         "window"
+      ],
+      "pin-filled": [
+        "save",
+        "location",
+        "map",
+        "lock",
+        "fix"
       ],
       "pin-off": [
         "unpin",
@@ -717,17 +735,32 @@
         "lock",
         "fix"
       ],
+      "play-circle-filled": [
+        "music",
+        "start",
+        "video",
+        "media"
+      ],
       "play-circle": [
         "music",
-        "start"
+        "start",
+        "video",
+        "media"
       ],
       "play-filled": [
         "music",
-        "start"
+        "start",
+        "video",
+        "media"
       ],
       "play": [
         "music",
         "start"
+      ],
+      "plus-circle-filled": [
+        "add",
+        "new",
+        "maths"
       ],
       "plus-circle": [
         "add",
@@ -833,6 +866,10 @@
       ],
       "sticker": [
         "label"
+      ],
+      "stop-circle-filled": [
+        "media",
+        "music"
       ],
       "stop-circle": [
         "media",
@@ -1422,6 +1459,12 @@
         "magazine",
         "library"
       ],
+      "bookmark-filled": [
+        "read",
+        "clip",
+        "marker",
+        "tag"
+      ],
       "bookmark-minus": [
         "delete",
         "remove"
@@ -1501,6 +1544,14 @@
         "purchase",
         "payment",
         "cc"
+      ],
+      "dissatisfied-filled": [
+        "unhappy",
+        "rating",
+        "rate",
+        "vote",
+        "voting",
+        "review"
       ],
       "dissatisfied": [
         "unhappy"
@@ -1635,12 +1686,29 @@
         "version",
         "science"
       ],
+      "satisfied-filled": [
+        "happy",
+        "pleased",
+        "smile",
+        "great",
+        "good",
+        "rating",
+        "rate",
+        "vote",
+        "voting",
+        "review"
+      ],
       "satisfied": [
         "happy",
         "pleased",
         "smile",
         "great",
-        "good"
+        "good",
+        "rating",
+        "rate",
+        "vote",
+        "voting",
+        "review"
       ],
       "scroll": [
         "paper",
@@ -1686,15 +1754,51 @@
         "security",
         "secure"
       ],
+      "somewhat-dissatisfied-filled": [
+        "face",
+        "rating",
+        "rate",
+        "vote",
+        "voting",
+        "review"
+      ],
       "somewhat-dissatisfied": [
-        "face"
+        "face",
+        "rating",
+        "rate",
+        "vote",
+        "voting",
+        "review"
+      ],
+      "somewhat-satisfied-filled": [
+        "smile",
+        "happy",
+        "pleased",
+        "good",
+        "face",
+        "rating",
+        "rate",
+        "vote",
+        "voting",
+        "review"
       ],
       "somewhat-satisfied": [
         "smile",
         "happy",
         "pleased",
         "good",
-        "face"
+        "face",
+        "rating",
+        "rate",
+        "vote",
+        "voting",
+        "review"
+      ],
+      "sparkle-filled": [
+        "stars",
+        "magic",
+        "help",
+        "ai"
       ],
       "sparkle": [
         "stars",
@@ -1774,6 +1878,14 @@
         "delta",
         "shape"
       ],
+      "very-dissatisfied-filled": [
+        "sad",
+        "frown",
+        "unhappy",
+        "bad",
+        "poor",
+        "face"
+      ],
       "very-dissatisfied": [
         "sad",
         "frown",
@@ -1781,6 +1893,14 @@
         "bad",
         "poor",
         "face"
+      ],
+      "very-satisfied-filled": [
+        "happy",
+        "smile",
+        "face",
+        "great",
+        "pleased",
+        "good"
       ],
       "very-satisfied": [
         "happy",
@@ -2087,6 +2207,12 @@
       "home": [
         "house",
         "living"
+      ],
+      "map-pin-filled": [
+        "location",
+        "navigation",
+        "travel",
+        "marker"
       ],
       "map-pin": [
         "location",

@@ -12,6 +12,7 @@ export const LEFTBAR_GENERAL_ROW_TYPES = {
   DIALBOT: 'dialbot',
   ASSIGNED: 'assigned',
   DIGITAL: 'digital',
+  SCHEDULED: 'scheduled',
 };
 
 export const LEFTBAR_GENERAL_ROW_ICON_MAPPING = {
@@ -28,6 +29,7 @@ export const LEFTBAR_GENERAL_ROW_ICON_MAPPING = {
   'channel unread': 'hash-bold',
   [LEFTBAR_GENERAL_ROW_TYPES.ASSIGNED]: 'at-sign',
   [LEFTBAR_GENERAL_ROW_TYPES.DIGITAL]: 'laptop-2',
+  [LEFTBAR_GENERAL_ROW_TYPES.SCHEDULED]: 'calendar-clock',
 };
 
 export const LEFTBAR_GENERAL_ROW_CONTACT_CENTER_COLORS = {

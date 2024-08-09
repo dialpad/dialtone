@@ -611,8 +611,20 @@
           "link": "/components/icon.html"
         },
         {
+          "text": "Illustration",
+          "link": "/components/illustration.html"
+        },
+        {
+          "text": "Image Viewer",
+          "link": "/components/image-viewer.html"
+        },
+        {
           "text": "Input",
           "link": "/components/input.html"
+        },
+        {
+          "text": "Input Group",
+          "link": "/components/input-group.html"
         },
         {
           "text": "Item Layout",

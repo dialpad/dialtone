@@ -100,6 +100,8 @@ vueCode='
 
 ### Initials
 
+If `color` is not provided, the avatar will display a random color. This can be deterministic, see [seeded](#seeded). The default color '000' is not included in randomized colors and can only be set manually.
+
 <code-well-header>
     <dt-stack direction="row" gap="500" class="d-wmx50p d-fw-wrap">
       <dt-avatar v-for="color in colors" :color="color" full-name="DP" />
@@ -115,7 +117,7 @@ htmlCode='
 </div>
 '
 vueCode='
-<!-- colors 100 to 1800 are valid -->
+<!-- colors 000 to 1800 are valid, note 000 is the default grey color. -->
 <dt-avatar
   full-name="DP"
   color="100"

@@ -1,13 +1,10 @@
 {
   "name": "@dialpad/dialtone-tokens",
-  "version": "1.32.0",
+  "version": "1.33.0",
   "description": "Design tokens for Dialtone.",
   "type": "module",
   "scripts": {
-    "build": "pnpm run build:token-transformer && node ./build.js",
-    "build:token-transformer": "pnpm run build:token-transformer:light && pnpm run build:token-transformer:dark",
-    "build:token-transformer:light": "token-transformer tokens token_transformer/tokens-light.json root,base/default,semantic/dp/default,components/checkbox,components/avatar/default,components/badge/default,components/checkbox/default,components/icon/default,components/radio/default root --expandTypography=true --expandShadow=true",
-    "build:token-transformer:dark": "token-transformer tokens token_transformer/tokens-dark.json root,base/default,base/dark,semantic/dp/default,semantic/dp/dark,components/avatar/default,components/badge/default,components/checkbox/default,components/checkbox/dark,components/icon/default,components/radio/default,components/radio/dark root --expandTypography=true --expandShadow=true",
+    "build": "node ./build.js",
     "publish:external-packages": "pnpm run publish:android-package && pnpm run publish:ios-package",
     "publish:android-package": "cp ./AndroidManifest.xml dist/android && ./gradlew publishToMavenLocal -Pversion=$npm_package_version",
     "publish:ios-package": "./build-ios.js",
@@ -23,18 +20,19 @@
   },
   "homepage": "https://dialtone.dialpad.com/",
   "devDependencies": {
-    "@tokens-studio/sd-transforms": "^0.14.2",
+    "@tokens-studio/sd-transforms": "^1.2.1",
     "@types/node": "^20.4.5",
+    "@typescript-eslint/eslint-plugin": "^7.0.1",
+    "@typescript-eslint/parser": "^7.0.1",
     "axios": "^1.6.0",
     "dotenv": "^16.3.1",
     "maven": "^5.0.0",
-    "style-dictionary": "^3.8.0",
+    "postcss": "8.4.39",
+    "postcss-cli": "11.0.0",
+    "style-dictionary": "^4.0.1",
     "tinycolor2": "^1.6.0",
-    "token-transformer": "^0.0.31",
     "tsx": "^4.7.0",
-    "typescript": "^5.1.6",
-    "@typescript-eslint/parser": "^7.0.1",
-    "@typescript-eslint/eslint-plugin": "^7.0.1"
+    "typescript": "^5.1.6"
   },
   "contributors": [
     {
