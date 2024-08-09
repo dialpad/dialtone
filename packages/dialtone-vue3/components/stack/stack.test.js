@@ -69,10 +69,10 @@ describe('DtStack Tests', () => {
         });
 
         expect(wrapper.classes(
-          'd-stack--sm--column',
-          'd-stack--md--row-reverse',
-          'd-stack--lg--column-reverse',
-          'd-stack--xl--row',
+          'd-stack--sm-column',
+          'd-stack--md-row-reverse',
+          'd-stack--lg-column-reverse',
+          'd-stack--xl-row',
         )).toBe(true);
       });
 
@@ -90,7 +90,7 @@ describe('DtStack Tests', () => {
         it('should do not add inexistent breakpoint class', async () => {
           await wrapper.setProps({ direction: { invalid: 'column' } });
 
-          expect(wrapper.classes().includes('d-stack--invalid--column')).toBe(false);
+          expect(wrapper.classes().includes('d-stack--invalid-column')).toBe(false);
         });
       });
 
@@ -141,10 +141,10 @@ describe('DtStack Tests', () => {
         });
 
         expect(wrapper.classes(
-          'd-stack--sm--gap-200',
-          'd-stack--md--gap-400',
-          'd-stack--lg--gap-500',
-          'd-stack--xl--gap-600',
+          'd-stack--sm-gap-200',
+          'd-stack--md-gap-400',
+          'd-stack--lg-gap-500',
+          'd-stack--xl-gap-600',
         )).toBe(true);
       });
 
@@ -162,7 +162,7 @@ describe('DtStack Tests', () => {
         it('should do not add inexistent breakpoint class', async () => {
           await wrapper.setProps({ gap: { invalid: '400' } });
 
-          expect(wrapper.classes().includes('d-stack--invalid--gap-400')).toBe(false);
+          expect(wrapper.classes().includes('d-stack--invalid-gap-400')).toBe(false);
         });
       });
 

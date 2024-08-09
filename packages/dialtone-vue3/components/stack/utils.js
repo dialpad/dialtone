@@ -48,7 +48,7 @@ function getResposiveGapClasses (gap) {
     return [
       ...DT_STACK_RESPONSIVE_BREAKPOINTS.map((breakpoint) => {
         return DT_STACK_GAP.includes(gap[breakpoint])
-          ? `d-stack--${breakpoint}--gap-${gap[breakpoint]}`
+          ? `d-stack--${breakpoint}-gap-${gap[breakpoint]}`
           : null;
       })];
   } else { return []; }
