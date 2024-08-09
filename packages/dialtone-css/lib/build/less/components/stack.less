@@ -128,19 +128,11 @@
 //  ============================================================================
 //  $   RESPONSIVE
 //  ----------------------------------------------------------------------------
-//  $$  EXTRA LARGE
-//  ----------------------------------------------------------------------------
-.d-stack--xl {
-  @media screen and (max-width: 1264px) {
-    .direction-options();
-    .gap-options();
-  }
-}
 
-//  $$  LARGE
+//  $$ SMALL
 //  ----------------------------------------------------------------------------
-.d-stack--lg {
-  @media screen and (max-width: 980px) {
+.d-stack--sm {
+  @media screen and (min-width: 0) and (max-width: 480px) {
     .direction-options();
     .gap-options();
   }
@@ -149,16 +141,25 @@
 //  $$  MEDIUM
 //  ----------------
 .d-stack--md {
-  @media screen and (max-width: 640px) {
+  @media screen and (min-width: 480px) and (max-width: 640px) {
     .direction-options();
     .gap-options();
   }
 }
 
-//  $$ SMALL
+//  $$  LARGE
 //  ----------------------------------------------------------------------------
-.d-stack--sm {
-  @media screen and (max-width: 480px) {
+.d-stack--lg {
+  @media screen and (min-width: 640px) and (max-width: 980px) {
+    .direction-options();
+    .gap-options();
+  }
+}
+
+//  $$  EXTRA LARGE
+//  ----------------------------------------------------------------------------
+.d-stack--xl {
+  @media screen and (min-width: 980px) {
     .direction-options();
     .gap-options();
   }
