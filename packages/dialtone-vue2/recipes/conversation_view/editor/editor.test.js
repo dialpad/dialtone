@@ -580,6 +580,18 @@ describe('DtRecipeEditor tests', () => {
       });
     });
 
+    describe('When enter key is pressed', () => {
+      it('editor should add br tag html content', async () => {
+        let editorHtmlOutput = editor.html();
+        expect(editorHtmlOutput).not.toContain('<br>');
+        await editor.trigger('keydown.enter');
+        await wrapper.vm.$nextTick();
+
+        editorHtmlOutput = editor.html();
+        expect(editorHtmlOutput).toContain('<br>');
+      });
+    });
+
     describe('When quick replies button is clicked', () => {
       it('quick replies clicked event should be fired', async () => {
         await quickRepliesBtn.trigger('click');

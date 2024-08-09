@@ -411,7 +411,15 @@ export default {
           }),
         );
       } else {
-        extensions.push(HardBreak);
+        extensions.push(HardBreak.extend({
+          addKeyboardShortcuts () {
+            return {
+              Enter: () => {
+                this.editor.commands.setHardBreak();
+              },
+            };
+          },
+        }));
       }
 
       if (this.mentionSuggestion) {
