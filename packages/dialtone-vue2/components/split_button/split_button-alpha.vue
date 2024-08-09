@@ -14,9 +14,7 @@
     :loading="loading"
     :size="size"
   >
-    <template
-      #icon
-    >
+    <template #icon>
       <slot
         name="icon"
         :size="BUTTON_ICON_SIZES[size]"

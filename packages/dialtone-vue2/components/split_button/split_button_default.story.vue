@@ -44,12 +44,16 @@
         :size="size"
       />
     </template>
-    <template #dropdownList>
-      <ul>
-        <dt-list-item navigation-type="tab">
-          Some text
-        </dt-list-item>
-      </ul>
+    <template #dropdownList="{ close }">
+      <dt-list-item
+        v-for="option in options"
+        :key="option"
+        role="menuitem"
+        navigation-type="arrow-keys"
+        @click="close"
+      >
+        {{ option }}
+      </dt-list-item>
     </template>
     <template
       v-if="$attrs.omega"
@@ -68,5 +72,10 @@ import { DtListItem } from '@/components/list_item';
 export default {
   name: 'DtSplitButtonDefault',
   components: { DtSplitButton, DtIcon, DtListItem },
+  data () {
+    return {
+      options: ['Option 1', 'Option 2', 'Option 3'],
+    };
+  },
 };
 </script>

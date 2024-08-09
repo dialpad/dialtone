@@ -1,4 +1,3 @@
-<!-- eslint-disable max-lines -->
 <template>
   <dt-stack
     gap="500"
