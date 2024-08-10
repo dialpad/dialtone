@@ -1,3 +1,10 @@
+## [4.26.1](https://github.com/dialpad/dialtone/compare/dialtone-icons/v4.26.0...dialtone-icons/v4.26.1) (2024-08-10)
+
+
+### Documentation
+
+* DLT-1933 move storybook to doc site - Item layout to Lazy show ([#432](https://github.com/dialpad/dialtone/issues/432)) ([90dea53](https://github.com/dialpad/dialtone/commit/90dea538a6bee176ecf56005d71ceb82f0d31b45))
+
 # [4.26.0](https://github.com/dialpad/dialtone/compare/dialtone-icons/v4.25.0...dialtone-icons/v4.26.0) (2024-08-06)
 
 
