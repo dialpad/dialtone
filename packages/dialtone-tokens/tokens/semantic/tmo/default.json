@@ -11,6 +11,10 @@
         "background": {
           "value": "#E20074",
           "type": "color"
+        },
+        "background-strong": {
+          "value": "#770141",
+          "type": "color"
         }
       }
     }
