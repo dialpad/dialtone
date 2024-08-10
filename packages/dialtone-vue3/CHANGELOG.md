@@ -1,3 +1,24 @@
+# [3.143.0](https://github.com/dialpad/dialtone/compare/dialtone-vue3/v3.142.0...dialtone-vue3/v3.143.0) (2024-08-10)
+
+
+### Bug Fixes
+
+* **Docs:** set initial theme vue3 ([443ab19](https://github.com/dialpad/dialtone/commit/443ab1954272c307d726003aaa245844661c80b7))
+* **General Row:** DLT-1919 use theme colors for badge ([#437](https://github.com/dialpad/dialtone/issues/437)) ([e263188](https://github.com/dialpad/dialtone/commit/e263188bb4a7cfc2d22a2cf2d006d74eb23702d4))
+* NO-JIRA dark mode in storybook ([#433](https://github.com/dialpad/dialtone/issues/433)) ([afae296](https://github.com/dialpad/dialtone/commit/afae296da78f30124a103001f5fa4ea00634d5a1))
+* **Rich Text Editor:** DLT-1822 fix hard break default configuration for rich text editor ([#436](https://github.com/dialpad/dialtone/issues/436)) ([2e311c4](https://github.com/dialpad/dialtone/commit/2e311c4f3d183a4bd0b84e2e903041ee0dc98823))
+
+
+### Documentation
+
+* DLT-1795 move storybook to doc site - Icon to Input Group ([#429](https://github.com/dialpad/dialtone/issues/429)) ([972fa47](https://github.com/dialpad/dialtone/commit/972fa470008c97396169ca33ae97af547e685020))
+* DLT-1933 move storybook to doc site - Item layout to Lazy show ([#432](https://github.com/dialpad/dialtone/issues/432)) ([90dea53](https://github.com/dialpad/dialtone/commit/90dea538a6bee176ecf56005d71ceb82f0d31b45))
+
+
+### Features
+
+* **Message Input:** DLT-1947 add slot for sms count badge ([#434](https://github.com/dialpad/dialtone/issues/434)) ([b24d49f](https://github.com/dialpad/dialtone/commit/b24d49fcec840276158ea9a68df75b9cb57b6313))
+
 # [3.142.0](https://github.com/dialpad/dialtone/compare/dialtone-vue3/v3.141.0...dialtone-vue3/v3.142.0) (2024-08-06)
 
 
