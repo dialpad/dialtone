@@ -414,7 +414,7 @@ export default {
 
     /**
      * When a channel in 'always' setting, meaning the user should see both unread count and unread mention count,
-     * if there are only mention messages, we should apply the custom background with var(--dt-color-purple-500).
+     * if there are only mention messages, we should apply the theme design tokens var(--dt-theme-mention-color-[background||foreground]-strong).
      * @returns {boolean}
      */
     shouldApplyCustomStyleForMentionOnly () {
