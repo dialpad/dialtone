@@ -18,90 +18,119 @@
 
 .d-btn,
 .d-btn--md {
-    //  Component specific CSS Vars
-    //  ------------------------------------------------------------------------
-    --button-color-text: var(--dt-action-color-foreground-base-default);
-    --button-color-background: var(--dt-action-color-background-base-default);
-    --button-color-border: transparent;
-    --button-gap: calc(var(--button-padding-x) / 2);
-    --button-border-radius: var(--dt-size-400);
-    --button-border-width: var(--dt-size-100);
-    --button-font-size: var(--dt-font-size-200);
-    --button-font-weight: var(--dt-font-weight-medium);
-    --button-line-height-xs: var(--dt-font-line-height-200); // TODO: these used to vary, remove if all wind up all the same
-    --button-line-height-sm: var(--dt-font-line-height-200); // TODO: these used to vary, remove if all wind up all the same
-    --button-line-height-md: var(--dt-font-line-height-200); // TODO: these used to vary, remove if all wind up all the same
-    --button-line-height-lg: var(--dt-font-line-height-200); // TODO: these used to vary, remove if all wind up all the same
-    --button-line-height-xl: var(--dt-font-line-height-200); // TODO: these used to vary, remove if all wind up all the same
-    --button-line-height: var(--button-line-height-md);
-    --button-padding-y-xs: calc(calc(var(--dt-space-400) - var(--dt-space-100)) - var(--button-border-width)); // ((8 - 1) - border-width)
-    --button-padding-x-xs: calc(var(--dt-space-400) - var(--button-border-width)); // 8 minus border-width
-    --button-padding-y-sm: calc(var(--dt-space-400) - var(--button-border-width)); // 8 minus border-width
-    --button-padding-x-sm: calc(var(--dt-space-450) - var(--button-border-width)); // 12 minus border-width
-    --button-padding-y-md: calc(var(--dt-space-400) - var(--button-border-width)); // 8 minus border-width
-    --button-padding-x-md: calc(var(--dt-space-450) - var(--button-border-width)); // 12 minus border-width
-    --button-padding-y-lg: calc((var(--dt-space-400) + var(--dt-space-200)) - var(--button-border-width)); // 10 minus border-width
-    --button-padding-x-lg: calc(var(--dt-space-500) - var(--button-border-width)); // 16 minus border-width
-    --button-padding-y-xl: calc(var(--dt-space-450) - var(--button-border-width)); // 12 minus border-width
-    --button-padding-x-xl: calc(var(--dt-space-500) - var(--button-border-width)); // 16 minus border-width
-    --button-padding-y: var(--button-padding-y-md);
-    --button-padding-x: var(--button-padding-x-md);
+  //  Component specific CSS Vars
+  //  ------------------------------------------------------------------------
+  --button-color-text: var(--dt-action-color-foreground-base-default);
+  --button-color-background: var(--dt-action-color-background-base-default);
+  --button-color-border: transparent;
+  --button-gap: calc(var(--button-padding-x) / 2);
+  --button-border-radius: var(--dt-size-400);
+  --button-border-width: var(--dt-size-100);
+  --button-font-size: var(--dt-font-size-200);
+  --button-font-weight: var(--dt-font-weight-medium);
+  --button-line-height: var(--dt-font-line-height-200);
+  --button-padding-y-xs: calc(
+    calc(var(--dt-space-400) - var(--dt-space-100)) - var(--button-border-width)
+  ); // ((8 - 1) - border-width)
 
-    position: relative;
-    display: inline-flex;
-    gap: var(--button-gap);
-    align-items: center;
-    justify-content: center;
-    box-sizing: border-box;
-    padding: var(--button-padding-y) var(--button-padding-x);
-    color: var(--button-color-text);
-    font-weight: var(--button-font-weight);
-    font-size: var(--button-font-size);
-    font-family: inherit;
-    line-height: var(--button-line-height);
-    text-transform: inherit;
-    text-decoration: none;
-    vertical-align: middle;
-    background-color: var(--button-color-background);
-    border-color: var(--button-color-border);
-    border-style: solid;
-    border-width: var(--button-border-width);
-    border-radius: var(--button-border-radius);
-    box-shadow: var(--button--bs);
-    cursor: pointer;
-    transition-timing-function: var(--ttf-out-quint);
-    transition-duration: var(--td200);
-    transition-property: background-color, border, box-shadow;
-    user-select: none;
-    fill: currentColor;
+  --button-padding-x-xs: calc(
+    var(--dt-space-400) - var(--button-border-width)
+  ); // 8 minus border-width
 
-    //  --  STATES
-    //  ------------------------------------------------------------------------
-    &:hover:not([disabled]) {
-        --button-color-text: var(--dt-action-color-foreground-base-hover);
-        --button-color-background: var(--dt-action-color-background-base-hover);
-    }
+  --button-padding-y-sm: calc(
+    var(--dt-space-400) - var(--button-border-width)
+  ); // 8 minus border-width
 
-    &:active:not([disabled]),
-    &.d-btn--active:not([disabled]),
-    &.d-btn--active:active:not([disabled]) {
-        --button-color-text: var(--dt-action-color-foreground-base-active);
-        --button-color-background: var(--dt-action-color-background-base-active);
-    }
+  --button-padding-x-sm: calc(
+    var(--dt-space-450) - var(--button-border-width)
+  ); // 12 minus border-width
 
-    &:focus-visible {
-      outline: none;
-      box-shadow: var(--dt-shadow-focus);
-    }
+  --button-padding-y-md: calc(
+    var(--dt-space-400) - var(--button-border-width)
+  ); // 8 minus border-width
 
-    &[disabled] {
-        --button-color-border: transparent !important;
-        --button-color-text: var(--dt-action-color-foreground-disabled-default) !important;
-        --button-color-background: var(--dt-action-color-background-disabled-default) !important;
+  --button-padding-x-md: calc(
+    var(--dt-space-450) - var(--button-border-width)
+  ); // 12 minus border-width
 
-        cursor: not-allowed;
-        transition: none;
-    }
+  --button-padding-y-lg: calc(
+    (var(--dt-space-400) + var(--dt-space-200)) - var(--button-border-width)
+  ); // 10 minus border-width
+
+  --button-padding-x-lg: calc(
+    var(--dt-space-500) - var(--button-border-width)
+  ); // 16 minus border-width
+
+  --button-padding-y-xl: calc(
+    var(--dt-space-450) - var(--button-border-width)
+  ); // 12 minus border-width
+
+  --button-padding-x-xl: calc(
+    var(--dt-space-500) - var(--button-border-width)
+  ); // 16 minus border-width
+
+  --button-padding-y: var(--button-padding-y-md);
+  --button-padding-x: var(--button-padding-x-md);
+
+  position: relative;
+  display: inline-flex;
+  gap: var(--button-gap);
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  padding: var(--button-padding-y) var(--button-padding-x);
+  color: var(--button-color-text);
+  font-weight: var(--button-font-weight);
+  font-size: var(--button-font-size);
+  font-family: inherit;
+  line-height: var(--button-line-height);
+  text-transform: inherit;
+  text-decoration: none;
+  vertical-align: middle;
+  background-color: var(--button-color-background);
+  border-color: var(--button-color-border);
+  border-style: solid;
+  border-width: var(--button-border-width);
+  border-radius: var(--button-border-radius);
+  box-shadow: var(--button--bs);
+  cursor: pointer;
+  transition-timing-function: var(--ttf-out-quint);
+  transition-duration: var(--td200);
+  transition-property: background-color, border, box-shadow;
+  user-select: none;
+  fill: currentColor;
+
+  //  --  STATES
+  //  ------------------------------------------------------------------------
+  &:hover:not([disabled]) {
+    --button-color-text: var(--dt-action-color-foreground-base-hover);
+    --button-color-background: var(--dt-action-color-background-base-hover);
+  }
+
+  &:active:not([disabled]),
+  &.d-btn--active:not([disabled]),
+  &.d-btn--active:active:not([disabled]) {
+    --button-color-text: var(--dt-action-color-foreground-base-active);
+    --button-color-background: var(--dt-action-color-background-base-active);
+  }
+
+  &:focus-visible {
+    outline: none;
+    box-shadow: var(--dt-shadow-focus);
+  }
+
+  &[disabled] {
+    --button-color-border: transparent !important;
+    --button-color-text: var(
+      --dt-action-color-foreground-disabled-default
+    ) !important;
+    --button-color-background: var(
+      --dt-action-color-background-disabled-default
+    ) !important;
+
+    cursor: not-allowed;
+    transition: none;
+  }
 }
 
 //  ============================================================================
@@ -110,94 +139,89 @@
 //  $$  EXTRA SMALL
 //  ----------------------------------------------------------------------------
 .d-btn--xs {
-    --button-padding-y: var(--button-padding-y-xs);
-    --button-padding-x: var(--button-padding-x-xs);
-    --button-font-size: var(--dt-font-size-100);
-    --button-line-height: var(--button-line-height-xs);
-    --button-border-radius: var(--dt-size-300);
+  --button-padding-y: var(--button-padding-y-xs);
+  --button-padding-x: var(--button-padding-x-xs);
+  --button-font-size: var(--dt-font-size-100);
+  --button-border-radius: var(--dt-size-300);
 }
 
 //  $$ SMALL
 //  ----------------------------------------------------------------------------
 .d-btn--sm {
-    --button-padding-y: var(--button-padding-y-sm);
-    --button-padding-x: var(--button-padding-x-sm);
-    --button-font-size: var(--dt-font-size-100);
-    --button-line-height: var(--button-line-height-sm);
+  --button-padding-y: var(--button-padding-y-sm);
+  --button-padding-x: var(--button-padding-x-sm);
+  --button-font-size: var(--dt-font-size-100);
 }
 
 //  $$  MEDIUM
 //  ----------------
 .d-btn--md {
-    //
+  //
 }
 
 //  $$  LARGE
 //  ----------------------------------------------------------------------------
 .d-btn--lg {
-    --button-padding-y: var(--button-padding-y-lg);
-    --button-padding-x: var(--button-padding-x-lg);
-    --button-font-size: var(--dt-font-size-300);
-    --button-line-height: var(--button-line-height-lg);
-    --button-border-radius: var(--dt-size-450);
+  --button-padding-y: var(--button-padding-y-lg);
+  --button-padding-x: var(--button-padding-x-lg);
+  --button-font-size: var(--dt-font-size-300);
+  --button-border-radius: var(--dt-size-450);
 }
 
 //  $$  EXTRA LARGE
 //  ----------------------------------------------------------------------------
 .d-btn--xl {
-    --button-padding-y: var(--button-padding-y-xl);
-    --button-padding-x: var(--button-padding-x-xl);
-    --button-font-size: var(--dt-font-size-400);
-    --button-font-weight: var(--dt-font-weight-normal);
-    --button-line-height: var(--button-line-height-xl);
-    --button-border-radius: var(--dt-size-500);
+  --button-padding-y: var(--button-padding-y-xl);
+  --button-padding-x: var(--button-padding-x-xl);
+  --button-font-size: var(--dt-font-size-400);
+  --button-font-weight: var(--dt-font-weight-normal);
+  --button-border-radius: var(--dt-size-500);
 }
 
 //  ============================================================================
 //  $   BUTTON LABEL
 //  ----------------------------------------------------------------------------
 .d-btn__label {
-    display: inline-flex;
-    flex: 1 auto;
-    align-items: center;
-    justify-content: center;
-    // background-color: rgba(0,0,0,.5);
+  display: inline-flex;
+  flex: 1 auto;
+  align-items: center;
+  justify-content: center;
+  // background-color: rgba(0,0,0,.5);
 }
 
 //  ============================================================================
 //  $   BUTTON WITH ICON
 //  ----------------------------------------------------------------------------
 .d-btn--vertical {
-    flex-direction: column;
+  flex-direction: column;
 }
 
 .d-btn__icon {
-    display: flex;
-    // background-color: rgba(0,0,0,.5);
+  display: flex;
+  // background-color: rgba(0,0,0,.5);
 
-    .d-icon {
-        // outline: 1px solid red;
-        // opacity: 0;
-    }
+  .d-icon {
+    // outline: 1px solid red;
+    // opacity: 0;
+  }
 }
-
 
 .d-btn__icon--left,
 .d-btn__icon--top {
-    order: -1;
+  order: -1;
 }
 
 .d-btn__icon--right,
 .d-btn__icon--bottom {
-    order: 1;
+  order: 1;
 }
 
 .d-btn__icon--left:not(:only-child) {
-    margin-left: var(--dt-space-200-negative);
+  margin-left: var(--dt-space-200-negative);
 }
 
 .d-btn__icon--right:not(:only-child) {
-    margin-right: var(--dt-space-200-negative);
+  margin-right: var(--dt-space-200-negative);
 }
 
 //  ============================================================================
@@ -206,302 +230,357 @@
 //  $$  CIRCLE BUTTONS
 //  ----------------------------------------------------------------------------
 .d-btn--circle {
+  --button-padding-x: var(--button-padding-y-md);
+  --button-padding-y: var(--button-padding-y-md);
+  --button-color-text: var(--dt-action-color-foreground-muted-default);
+  --button-border-radius: var(--dt-size-radius-circle);
+
+  &:hover:not([disabled]) {
+    --button-color-text: var(--dt-action-color-foreground-muted-hover);
+    --button-color-background: var(--dt-action-color-background-muted-hover);
+  }
+
+  &:active:not([disabled]),
+  &.d-btn--active:not([disabled]),
+  &.d-btn--active:active:not([disabled]) {
+    --button-color-text: var(--dt-action-color-foreground-muted-active);
+    --button-color-background: var(--dt-action-color-background-muted-active);
+  }
+
+  .d-btn__icon {
+    margin: unset;
+  }
+
+  &.d-btn__label {
+    display: none;
+  }
+
+  &.d-btn--outlined {
+    --button-color-border: var(--dt-action-color-border-muted-outlined-default);
+  }
+
+  // Adjust padding based on sizes
+  &.d-btn--xs {
+    --button-padding-y: var(--button-padding-y-xs);
+    --button-padding-x: var(--button-padding-y-xs);
+  }
+
+  &.d-btn--sm {
+    --button-padding-y: var(--button-padding-y-sm);
+    --button-padding-x: var(--button-padding-y-sm);
+  }
+
+  &.d-btn--md {
     --button-padding-x: var(--button-padding-y-md);
     --button-padding-y: var(--button-padding-y-md);
-    --button-color-text: var(--dt-action-color-foreground-muted-default);
-    --button-border-radius: var(--dt-size-radius-circle);
+  }
 
-    &:hover:not([disabled]) {
-        --button-color-text: var(--dt-action-color-foreground-muted-hover);
-        --button-color-background: var(--dt-action-color-background-muted-hover);
-    }
+  &.d-btn--lg {
+    --button-padding-x: calc(var(--button-padding-y-lg) + var(--dt-space-100));
+    --button-padding-y: calc(var(--button-padding-y-lg) + var(--dt-space-100));
+  }
 
-    &:active:not([disabled]),
-    &.d-btn--active:not([disabled]),
-    &.d-btn--active:active:not([disabled]) {
-        --button-color-text: var(--dt-action-color-foreground-muted-active);
-        --button-color-background: var(--dt-action-color-background-muted-active);
-    }
-
-    .d-btn__icon {
-        margin: unset;
-    }
-
-    &.d-btn__label {
-        display: none;
-    }
-
-    &.d-btn--outlined {
-        --button-color-border: var(--dt-action-color-border-muted-outlined-default);
-    }
-
-    // Adjust padding based on sizes
-    &.d-btn--xs {
-        --button-padding-y: var(--button-padding-y-xs);
-        --button-padding-x: var(--button-padding-y-xs);
-    }
-
-    &.d-btn--sm {
-        --button-padding-y: var(--button-padding-y-sm);
-        --button-padding-x: var(--button-padding-y-sm);
-    }
-
-    &.d-btn--md {
-        --button-padding-x: var(--button-padding-y-md);
-        --button-padding-y: var(--button-padding-y-md);
-    }
-
-    &.d-btn--lg {
-        --button-padding-x: calc(var(--button-padding-y-lg) + var(--dt-space-100));
-        --button-padding-y: calc(var(--button-padding-y-lg) + var(--dt-space-100));
-    }
-
-    &.d-btn--xl {
-        --button-padding-x: calc(var(--button-padding-y-xl) + var(--dt-space-300));
-        --button-padding-y: calc(var(--button-padding-y-xl) + var(--dt-space-300));
-    }
+  &.d-btn--xl {
+    --button-padding-x: calc(var(--button-padding-y-xl) + var(--dt-space-300));
+    --button-padding-y: calc(var(--button-padding-y-xl) + var(--dt-space-300));
+  }
 }
 
 //  $$  OUTLINED BUTTON
 //  ----------------------------------------------------------------------------
 .d-btn--outlined {
-    --button-color-border: var(--dt-action-color-border-base-outlined-default);
+  --button-color-border: var(--dt-action-color-border-base-outlined-default);
 }
 
 //  $$  PRIMARY BUTTON
 //  ----------------------------------------------------------------------------
 .d-btn--primary {
+  --button-color-text: var(--dt-action-color-foreground-base-primary-default);
+  --button-color-background: var(
+    --dt-action-color-background-base-primary-default
+  );
+
+  &:hover:not([disabled]) {
     --button-color-text: var(--dt-action-color-foreground-base-primary-default);
-    --button-color-background: var(--dt-action-color-background-base-primary-default);
+    --button-color-background: var(
+      --dt-action-color-background-base-primary-hover
+    );
+  }
 
-    &:hover:not([disabled]) {
-      --button-color-text: var(--dt-action-color-foreground-base-primary-default);
-      --button-color-background: var(--dt-action-color-background-base-primary-hover);
-    }
-
-    &:active:not([disabled]),
-    &.d-btn--active:not([disabled]),
-    &.d-btn--active:active:not([disabled]) {
-      --button-color-text: var(--dt-action-color-foreground-base-primary-default);
-      --button-color-background: var(--dt-action-color-background-base-primary-active);
-    }
+  &:active:not([disabled]),
+  &.d-btn--active:not([disabled]),
+  &.d-btn--active:active:not([disabled]) {
+    --button-color-text: var(--dt-action-color-foreground-base-primary-default);
+    --button-color-background: var(
+      --dt-action-color-background-base-primary-active
+    );
+  }
 }
 
 //  $$  MUTED BUTTON
 //  ----------------------------------------------------------------------------
 .d-btn--muted {
-    --button-color-text: var(--dt-action-color-foreground-muted-default);
+  --button-color-text: var(--dt-action-color-foreground-muted-default);
 
-    &:hover:not([disabled]) {
-        --button-color-text: var(--dt-action-color-foreground-muted-hover);
-        --button-color-background: var(--dt-action-color-background-muted-hover);
-    }
+  &:hover:not([disabled]) {
+    --button-color-text: var(--dt-action-color-foreground-muted-hover);
+    --button-color-background: var(--dt-action-color-background-muted-hover);
+  }
 
-    &:active:not([disabled]),
-    &.d-btn--active:not([disabled]),
-    &.d-btn--active:active:not([disabled]) {
-        --button-color-text: var(--dt-action-color-foreground-muted-active);
-        --button-color-background: var(--dt-action-color-background-muted-active);
-    }
+  &:active:not([disabled]),
+  &.d-btn--active:not([disabled]),
+  &.d-btn--active:active:not([disabled]) {
+    --button-color-text: var(--dt-action-color-foreground-muted-active);
+    --button-color-background: var(--dt-action-color-background-muted-active);
+  }
 
-    &.d-btn--outlined {
-        --button-color-border: var(--dt-action-color-border-muted-outlined-default);
-    }
+  &.d-btn--outlined {
+    --button-color-border: var(--dt-action-color-border-muted-outlined-default);
+  }
 }
 
 //  $$  DANGER BUTTON
 //  ----------------------------------------------------------------------------
 .d-btn--danger {
-    --button-color-text: var(--dt-action-color-foreground-critical-default);
-    --button-color-background: var(--dt-action-color-background-critical-default);
+  --button-color-text: var(--dt-action-color-foreground-critical-default);
+  --button-color-background: var(--dt-action-color-background-critical-default);
+
+  &:hover:not([disabled]) {
+    --button-color-text: var(--dt-action-color-foreground-critical-hover);
+    --button-color-background: var(--dt-action-color-background-critical-hover);
+  }
+
+  &:active:not([disabled]),
+  &.d-btn--active:not([disabled]),
+  &.d-btn--active:active:not([disabled]) {
+    --button-color-text: var(--dt-action-color-foreground-critical-active);
+    --button-color-background: var(
+      --dt-action-color-background-critical-active
+    );
+  }
+
+  &.d-btn--outlined {
+    --button-color-border: var(
+      --dt-action-color-border-critical-outlined-default
+    );
+  }
+
+  &.d-btn--primary {
+    --button-color-text: var(
+      --dt-action-color-foreground-critical-primary-default
+    );
+    --button-color-background: var(
+      --dt-action-color-background-critical-primary-default
+    );
 
     &:hover:not([disabled]) {
-        --button-color-text: var(--dt-action-color-foreground-critical-hover);
-        --button-color-background: var(--dt-action-color-background-critical-hover);
+      --button-color-text: var(
+        --dt-action-color-foreground-critical-primary-default
+      );
+      --button-color-background: var(
+        --dt-action-color-background-critical-primary-hover
+      );
     }
 
     &:active:not([disabled]),
     &.d-btn--active:not([disabled]),
     &.d-btn--active:active:not([disabled]) {
-        --button-color-text: var(--dt-action-color-foreground-critical-active);
-        --button-color-background: var(--dt-action-color-background-critical-active);
+      --button-color-text: var(
+        --dt-action-color-foreground-critical-primary-default
+      );
+      --button-color-background: var(
+        --dt-action-color-background-critical-primary-active
+      );
     }
-
-    &.d-btn--outlined {
-        --button-color-border: var(--dt-action-color-border-critical-outlined-default);
-    }
-
-    &.d-btn--primary {
-        --button-color-text: var(--dt-action-color-foreground-critical-primary-default);
-        --button-color-background: var(--dt-action-color-background-critical-primary-default);
-
-        &:hover:not([disabled]) {
-            --button-color-text: var(--dt-action-color-foreground-critical-primary-default);
-            --button-color-background: var(--dt-action-color-background-critical-primary-hover);
-        }
-
-        &:active:not([disabled]),
-        &.d-btn--active:not([disabled]),
-        &.d-btn--active:active:not([disabled]) {
-            --button-color-text: var(--dt-action-color-foreground-critical-primary-default);
-            --button-color-background: var(--dt-action-color-background-critical-primary-active);
-        }
-    }
+  }
 }
 
 //  $$  INVERTED BUTTON
 //  ----------------------------------------------------------------------------
 //  --  Base, clear inverted button
 .d-btn--inverted {
-    --button-color-text: var(--dt-action-color-foreground-inverted-default);
-    --button-color-background: var(--dt-action-color-background-inverted-default);
+  --button-color-text: var(--dt-action-color-foreground-inverted-default);
+  --button-color-background: var(--dt-action-color-background-inverted-default);
+
+  &:hover:not([disabled]) {
+    --button-color-text: var(--dt-action-color-foreground-inverted-hover);
+    --button-color-background: var(--dt-action-color-background-inverted-hover);
+  }
+
+  &:active:not([disabled]),
+  &.d-btn--active:not([disabled]),
+  &.d-btn--active:active:not([disabled]) {
+    --button-color-text: var(--dt-action-color-foreground-inverted-active);
+    --button-color-background: var(
+      --dt-action-color-background-inverted-active
+    );
+  }
+
+  //  --  OUTLINED
+  &.d-btn--outlined {
+    --button-color-border: var(
+      --dt-action-color-border-inverted-outlined-default
+    );
+  }
+
+  //  --  PRIMARY
+  &.d-btn--primary {
+    --button-color-text: var(
+      --dt-action-color-foreground-inverted-primary-default
+    );
+    --button-color-background: var(
+      --dt-action-color-background-inverted-primary-default
+    );
 
     &:hover:not([disabled]) {
-        --button-color-text: var(--dt-action-color-foreground-inverted-hover);
-        --button-color-background: var(--dt-action-color-background-inverted-hover);
+      --button-color-text: var(
+        --dt-action-color-foreground-inverted-primary-hover
+      );
+      --button-color-background: var(
+        --dt-action-color-background-inverted-primary-hover
+      );
     }
 
     &:active:not([disabled]),
     &.d-btn--active:not([disabled]),
     &.d-btn--active:active:not([disabled]) {
-        --button-color-text: var(--dt-action-color-foreground-inverted-active);
-        --button-color-background: var(--dt-action-color-background-inverted-active);
+      --button-color-text: var(
+        --dt-action-color-foreground-inverted-primary-active
+      );
+      --button-color-background: var(
+        --dt-action-color-background-inverted-primary-active
+      );
     }
-
-    //  --  OUTLINED
-    &.d-btn--outlined {
-        --button-color-border: var(--dt-action-color-border-inverted-outlined-default);
-    }
-
-    //  --  PRIMARY
-    &.d-btn--primary {
-        --button-color-text: var(--dt-action-color-foreground-inverted-primary-default);
-        --button-color-background: var(--dt-action-color-background-inverted-primary-default);
-
-        &:hover:not([disabled]) {
-            --button-color-text: var(--dt-action-color-foreground-inverted-primary-hover);
-            --button-color-background: var(--dt-action-color-background-inverted-primary-hover);
-        }
-
-        &:active:not([disabled]),
-        &.d-btn--active:not([disabled]),
-        &.d-btn--active:active:not([disabled]) {
-            --button-color-text: var(--dt-action-color-foreground-inverted-primary-active);
-            --button-color-background: var(--dt-action-color-background-inverted-primary-active);
-        }
-    }
+  }
 }
 
 //  $$  ICON ONLY
 //  ----------------------------------------------------------------------------
 .d-btn--icon-only {
+  --button-padding-x: var(--button-padding-y-md);
+  --button-padding-y: var(--button-padding-y-md);
+
+  .d-btn__icon {
+    margin: unset;
+  }
+
+  //  Adjust padding based on sizes
+  &.d-btn--xs {
+    --button-padding-y: var(--button-padding-y-xs);
+    --button-padding-x: var(--button-padding-y-xs);
+  }
+
+  &.d-btn--sm {
+    --button-padding-y: var(--button-padding-y-sm);
+    --button-padding-x: var(--button-padding-y-sm);
+  }
+
+  &.d-btn--md {
     --button-padding-x: var(--button-padding-y-md);
     --button-padding-y: var(--button-padding-y-md);
+  }
 
-    .d-btn__icon {
-        margin: unset;
-    }
+  &.d-btn--lg {
+    --button-padding-x: calc(var(--button-padding-y-lg) + var(--dt-space-100));
+    --button-padding-y: calc(var(--button-padding-y-lg) + var(--dt-space-100));
+  }
 
-    //  Adjust padding based on sizes
-    &.d-btn--xs {
-        --button-padding-y: var(--button-padding-y-xs);
-        --button-padding-x: var(--button-padding-y-xs);
-    }
-
-    &.d-btn--sm {
-        --button-padding-y: var(--button-padding-y-sm);
-        --button-padding-x: var(--button-padding-y-sm);
-    }
-
-    &.d-btn--md {
-        --button-padding-x: var(--button-padding-y-md);
-        --button-padding-y: var(--button-padding-y-md);
-    }
-
-    &.d-btn--lg {
-        --button-padding-x: calc(var(--button-padding-y-lg) + var(--dt-space-100));
-        --button-padding-y: calc(var(--button-padding-y-lg) + var(--dt-space-100));
-    }
-
-    &.d-btn--xl {
-        --button-padding-x: calc(var(--button-padding-y-xl) + var(--dt-space-300));
-        --button-padding-y: calc(var(--button-padding-y-xl) + var(--dt-space-300));
-    }
+  &.d-btn--xl {
+    --button-padding-x: calc(var(--button-padding-y-xl) + var(--dt-space-300));
+    --button-padding-y: calc(var(--button-padding-y-xl) + var(--dt-space-300));
+  }
 }
 
 //  $$  LOADING STATE
 //  ----------------------------------------------------------------------------
 .d-btn--loading {
-    .d-btn-loading();
+  .d-btn-loading();
 }
 
 //  $$  DISABLED STATE
 //  ----------------------------------------------------------------------------
 .d-btn--disabled {
-    --button-color-text: var(--dt-action-color-foreground-disabled-default) !important;
-    --button-color-background: var(--dt-action-color-background-disabled-default) !important;
-    --button-color-border: transparent !important;
+  --button-color-text: var(
+    --dt-action-color-foreground-disabled-default
+  ) !important;
+  --button-color-background: var(
+    --dt-action-color-background-disabled-default
+  ) !important;
+  --button-color-border: transparent !important;
 
-    cursor: not-allowed;
-    transition: none;
-    pointer-events: none;
+  cursor: not-allowed;
+  transition: none;
+  pointer-events: none;
 }
 
 //  $$  BRAND BUTTONS
 //  ----------------------------------------------------------------------------
 .d-btn--brand {
-    --button-color-text: var(--dt-color-neutral-white);
-    --button-color-background: hsl(var(--brand-color-h) var(--brand-color-s) var(--brand-color-l));
+  --button-color-text: var(--dt-color-neutral-white);
+  --button-color-background: hsl(
+    var(--brand-color-h) var(--brand-color-s) var(--brand-color-l)
+  );
 
-    display: flex;
+  display: flex;
 
-    &:hover:not([disabled]),
-    &:active:not([disabled]) {
-        --button-color-text: hsla(var(--dt-color-neutral-white-hsl) ~' / ' 90%);
-        --button-color-background: hsl(var(--brand-color-h) calc(var(--brand-color-s) + 2.5%) calc(var(--brand-color-l) - 5%));
-    }
+  &:hover:not([disabled]),
+  &:active:not([disabled]) {
+    --button-color-text: hsla(var(--dt-color-neutral-white-hsl) ~" / " 90%);
+    --button-color-background: hsl(
+      var(--brand-color-h) calc(var(--brand-color-s) + 2.5%)
+        calc(var(--brand-color-l) - 5%)
+    );
+  }
 
-    &:focus-visible {
-        box-shadow: 0 0 0 var(--dt-space-100) var(--dt-color-neutral-white), 0 0 0 0.25em hsla(var(--brand-color-h) var(--brand-color-s) var(--brand-color-l) ~' / ' 90%);
-    }
+  &:focus-visible {
+    box-shadow:
+      0 0 0 var(--dt-space-100) var(--dt-color-neutral-white),
+      0 0 0 0.25em
+        hsla(
+          var(--brand-color-h) var(--brand-color-s) var(--brand-color-l) ~" / " 90%
+        );
+  }
 
-    &:active:not([disabled]) {
-        --button-color-background: hsl(var(--brand-color-h) calc(var(--brand-color-s) + 5%) calc(var(--brand-color-l) - 10%));
-    }
+  &:active:not([disabled]) {
+    --button-color-background: hsl(
+      var(--brand-color-h) calc(var(--brand-color-s) + 5%)
+        calc(var(--brand-color-l) - 10%)
+    );
+  }
 
-    .d-btn__icon {
-      align-items: center;
-      justify-content: center;
-      width: 2em;
-      height: 2em;
-      margin-right: var(--dt-space-400);
-      margin-left: var(--dt-space-300-negative);
-      background-color: var(--dt-color-neutral-white);
-      border-radius: var(--dt-size-radius-200);
-    }
+  .d-btn__icon {
+    align-items: center;
+    justify-content: center;
+    width: 2em;
+    height: 2em;
+    margin-right: var(--dt-space-400);
+    margin-left: var(--dt-space-300-negative);
+    background-color: var(--dt-color-neutral-white);
+    border-radius: var(--dt-size-radius-200);
+  }
 
-    .d-btn__label {
-        flex: 1 auto;
-    }
+  .d-btn__label {
+    flex: 1 auto;
+  }
 }
 
 //  --  GOOGLE
 .d-btn--google {
-    --brand-color-h: 217;
-    --brand-color-s: 89%;
-    --brand-color-l: 61%;
+  --brand-color-h: 217;
+  --brand-color-s: 89%;
+  --brand-color-l: 61%;
 }
 //  --  OFFICE 365
 .d-btn--o365 {
-    --brand-color-h: 15;
-    --brand-color-s: 99%;
-    --brand-color-l: 46%;
+  --brand-color-h: 15;
+  --brand-color-s: 99%;
+  --brand-color-l: 46%;
 }
 //  --  LINKEDIN
 .d-btn--linkedin {
-    --brand-color-h: 197;
-    --brand-color-s: 100%;
-    --brand-color-l: 26%;
+  --brand-color-h: 197;
+  --brand-color-s: 100%;
+  --brand-color-l: 26%;
 }
 
 //  ============================================================================
@@ -511,44 +590,156 @@
 //  @@  BASE STYLE
 //  ----------------------------------------------------------------------------
 .d-btn-loading() {
-    //  Disable clicking while the loader is in place
-    pointer-events: none;
+  //  Disable clicking while the loader is in place
+  pointer-events: none;
 
-    //  Hide anything that was there before
-    .d-btn__icon,
-    .d-btn__label {
-        opacity: 0;
-        transition: opacity 50ms var(--ttf-in-out);
+  //  Hide anything that was there before
+  .d-btn__icon,
+  .d-btn__label {
+    opacity: 0;
+    transition: opacity 50ms var(--ttf-in-out);
+  }
+
+  //  Show the loading animation
+  &::before {
+    position: absolute;
+    width: var(--dt-size-500);
+    height: var(--dt-size-500);
+    border: var(--dt-size-200) solid currentColor;
+    border-left-color: transparent !important;
+    border-radius: var(--dt-size-radius-circle);
+    animation: d-loading-circle 900ms infinite linear;
+    content: "";
+  }
+}
+
+//  ============================================================================
+//  $   SPLIT BUTTON
+//  ----------------------------------------------------------------------------
+
+.d-split-btn {
+  display: inline-flex;
+  gap: var(--dt-space-0);
+  align-items: stretch;
+  justify-content: center;
+
+  .d-popover,
+  .d-popover div,
+  .d-popover &__omega {
+    height: 100%;
+  }
+
+  &__alpha,
+  &__omega {
+    position: relative;
+
+    &:focus-visible {
+      z-index: var(--zi-active);
     }
+  }
 
-    //  Show the loading animation
+  &__alpha {
+    flex-grow: 1;
+  }
+
+  &__omega {
+    // vertical divider between the two buttons
     &::before {
-        position: absolute;
-        width: var(--dt-size-500);
-        height: var(--dt-size-500);
-        border: var(--dt-size-200) solid currentColor;
-        border-left-color: transparent !important;
-        border-radius: var(--dt-size-radius-circle);
-        animation: d-loading-circle 900ms infinite linear;
-        content: '';
+      position: absolute;
+      top: var(--button-border-radius);
+      bottom: var(--button-border-radius);
+      left: var(--dt-size-100-negative);
+      width: var(--dt-size-100);
+      background-color: var(
+        --button-color-text
+      ); // use text color for divider line
+
+      opacity: var(--dt-opacity-600); // soften it
+      content: "";
+
+      // hide divider line when hovering or focusing any button within the split button
+      .d-split-btn:has(:focus-visible, :hover, .d-btn--active) & {
+        opacity: 0;
+      }
+
+      // DO NOT hide divider line for primary, outlined, or disabled buttons
+      .d-split-btn:has(:disabled) &,
+      .d-split-btn:has(.d-btn--outlined:focus-visible, .d-btn--outlined:hover, .d-btn--outlined.d-btn--active) &,
+      .d-split-btn:has(.d-btn--primary:focus-visible, .d-btn--primary:hover, .d-btn--primary.d-btn--active) & {
+        opacity: var(--dt-opacity-600);
+      }
     }
+
+    // bleed divider line to absolute top and bottom of the button
+    &.d-btn:disabled::before,
+    &.d-btn--outlined::before,
+    &.d-btn--primary::before {
+      top: var(--dt-size-100-negative);
+      bottom: var(--dt-size-100-negative);
+    }
+
+    &.d-btn--outlined::before {
+      top: var(--dt-size-50-negative);
+      bottom: var(--dt-size-50-negative);
+    }
+  }
+
+  &__alpha:disabled:not(.d-btn--outlined),
+  &__alpha:disabled:not(.d-btn--primary),
+  &__alpha.d-btn--primary,
+  &__alpha.d-btn--outlined {
+    border-right: 0;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+  }
+
+  &__omega:disabled:not(.d-btn--outlined),
+  &__omega:disabled:not(.d-btn--primary),
+  &__omega.d-btn--primary,
+  &__omega.d-btn--outlined {
+    border-left: 0;
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+  }
+
+  // adjust x-padding for icon-only button at each size
+  &__omega--xs.d-btn--icon-only {
+    --button-padding-x: var(--dt-space-300);
+  }
+
+  &__omega--sm.d-btn--icon-only {
+    --button-padding-x: var(--dt-space-300);
+  }
+
+  &__omega--md.d-btn--icon-only {
+    --button-padding-x: var(--dt-space-350);
+  }
+
+  &__omega--lg.d-btn--icon-only {
+    --button-padding-x: var(--dt-space-400);
+  }
+
+  &__omega--xl.d-btn--icon-only {
+    --button-padding-x: var(--dt-space-450);
+  }
 }
 
 //  ============================================================================
 //  $   BUTTON GROUP
 //  ----------------------------------------------------------------------------
+
 .d-btn-group {
-    display: flex;
+  display: flex;
 
-    &--start {
-        justify-content: flex-start;
-    }
+  &--start {
+    justify-content: flex-start;
+  }
 
-    &--end {
-        justify-content: flex-end;
-    }
+  &--end {
+    justify-content: flex-end;
+  }
 
-    &--space-between {
-        justify-content: space-between;
-    }
+  &--space-between {
+    justify-content: space-between;
+  }
 }

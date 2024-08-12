@@ -74,26 +74,13 @@ export default {
   excludeStories: /.*Data$/,
 };
 
-// Templates
-const DefaultTemplate = (args, { argTypes }) => createRenderConfig(
-  args,
-  argTypes,
-  <%= componentName %>DefaultTemplate,
-);
-
 // Stories
 export const Default = {
-  render: DefaultTemplate,
+  render: (argsData) => createRenderConfig(<%= componentName %>, <%= componentName %>DefaultTemplate, argsData),
   args: {},
 };
 
-const VariantsTemplate = (args, { argTypes }) => createRenderConfig(
-  args,
-  argTypes,
-  <%= componentName %>VariantsTemplate,
-);
-
 export const Variants = {
-  render: VariantsTemplate,
+  render: (argsData) => createRenderConfig(<%= componentName %>, <%= componentName %>VariantsTemplate, argsData),
   args: {},
 };

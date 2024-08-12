@@ -60,6 +60,7 @@ export * from './components/root_layout';
 export * from './components/scroller';
 export * from './components/select_menu';
 export * from './components/skeleton';
+export * from './components/split_button';
 export * from './components/stack';
 export * from './components/tabs';
 export * from './components/toast';

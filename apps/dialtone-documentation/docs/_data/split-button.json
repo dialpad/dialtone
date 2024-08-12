@@ -1,0 +1,39 @@
+{
+  "classes": [
+    {
+      "class": "d-split-btn",
+      "applies": "N/A",
+      "description": "Base split button style."
+    },
+    {
+      "class": "d-split-btn__alpha",
+      "applies": "N/A",
+      "description": "Alpha button style."
+    },
+    {
+      "class": "d-split-btn__omega",
+      "applies": "N/A",
+      "description": "Omega button style."
+    },
+    {
+      "class": "d-split-btn__omega--xs",
+      "applies": ".d-split-btn__omega",
+      "description": "Applies extra small size."
+    },
+    {
+      "class": "d-split-btn__omega--sm",
+      "applies": ".d-split-btn__omega",
+      "description": "Applies small size."
+    },
+    {
+      "class": "d-split-btn__omega--lg",
+      "applies": ".d-split-btn__omega",
+      "description": "Applies large size."
+    },
+    {
+      "class": "d-split-btn__omega--xl",
+      "applies": ".d-split-btn__omega",
+      "description": "Applies extra large size."
+    }
+  ]
+}

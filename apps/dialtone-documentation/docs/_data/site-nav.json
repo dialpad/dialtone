@@ -695,6 +695,10 @@
           "link": "/components/skeleton.html"
         },
         {
+          "text": "Split Button",
+          "link": "/components/split-button.html"
+        },
+        {
           "text": "Stack",
           "link": "/components/stack.html"
         },
