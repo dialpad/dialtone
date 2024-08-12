@@ -2154,8 +2154,16 @@
           "value": "{color.neutral.white}",
           "type": "color"
         },
+        "foreground-strong": {
+          "value": "{color.foreground.primary-inverted}",
+          "type": "color"
+        },
         "background": {
           "value": "{color.brand.purple}",
+          "type": "color"
+        },
+        "background-strong": {
+          "value": "{color.purple.500}",
           "type": "color"
         }
       }

@@ -5,6 +5,14 @@
         "value": "#F285BC",
         "type": "color"
       }
+    },
+    "mention": {
+      "color": {
+        "background-strong": {
+          "value": "#FFCEE7",
+          "type": "color"
+        }
+      }
     }
   }
 }
