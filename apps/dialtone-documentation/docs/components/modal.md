@@ -143,6 +143,8 @@ showHtmlWarning />
 
 ### Fixed header and footer
 
+This is the default behavior that adds the scroll automatically in the modal content and leaves the header and footer fixed.
+
 <code-well-header>
   <example-modal kind="fixed" />
 </code-well-header>
@@ -226,6 +228,8 @@ showHtmlWarning />
 
 ### Danger
 
+A modal style for destructive or irreversible actions.
+
 <code-well-header>
   <example-modal kind="danger" />
 </code-well-header>
@@ -308,6 +312,8 @@ vueCode='
 showHtmlWarning />
 
 ### Full Screen
+
+To make this modal take up as much of the screen as possible.
 
 <code-well-header>
   <example-modal kind="full-screen" />
@@ -474,6 +480,55 @@ vueCode='
 '
 showHtmlWarning />
 
+### Custom header and content
+
+You're not limited to using plain title and copy text.
+
+In addition to the footer, custom elements can be inserted into the header and body sections of the dialog via slots.
+
+**Please note:** supplied header or body slots will take the place of any provided "title" or "copy" text, respectively.
+
+<code-well-header>
+  <dt-modal
+    :close-button-props="{ ariaLabel: 'Close' }"
+    :show="isOpen"
+    @update:show="updateShow"
+  >
+    <template #header>
+      <div class="d-fl-center d-p12 d-bgc-purple-100">
+        <div>Custom header</div>
+      </div>
+    </template>
+    <div class="d-fl-center d-p32 d-bgc-gold-200">
+      <h2>Custom content</h2>
+    </div>
+  </dt-modal>
+  <dt-button
+    @click="openModal"
+  >
+    Click to open
+  </dt-button>
+</code-well-header>
+
+<code-example-tabs
+vueCode='
+<dt-modal
+  :close-button-props="{ ariaLabel: `Close` }"
+  :show="isOpen"
+  @update:show="updateShow"
+>
+  <template #header>
+    <div class="d-fl-center d-p12 d-bgc-purple-100">
+      <div>Custom header</div>
+    </div>
+  </template>
+  <div class="d-fl-center d-p32 d-bgc-gold-200">
+    <h2>Custom content</h2>
+  </div>
+</dt-modal>
+'
+/>
+
 ## Vue API
 
 <component-vue-api component-name="modal" />
@@ -486,4 +541,15 @@ At minimum, modals contain a title and one button. They could also contain body 
 
 <script setup>
   import ExampleModal from '@exampleComponents/ExampleModal.vue';
+  import { ref } from 'vue';
+
+  const isOpen = ref(false);
+
+  const openModal = () => {
+    isOpen.value = true;
+  };
+
+  const updateShow = (value) => {
+    if (!value) isOpen.value = false;
+  };
 </script>
