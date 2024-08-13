@@ -1,3 +1,10 @@
+## [9.64.1](https://github.com/dialpad/dialtone/compare/dialtone/v9.64.0...dialtone/v9.64.1) (2024-08-13)
+
+
+### Bug Fixes
+
+* NO-JIRA es6 errors with json imports ([#444](https://github.com/dialpad/dialtone/issues/444)) ([7394e27](https://github.com/dialpad/dialtone/commit/7394e276c16433ec5b4a93154871a152230e14a0))
+
 # [9.64.0](https://github.com/dialpad/dialtone/compare/dialtone/v9.63.0...dialtone/v9.64.0) (2024-08-13)
 
 
