@@ -1,3 +1,11 @@
+# [2.151.0](https://github.com/dialpad/dialtone/compare/dialtone-vue2/v2.150.0...dialtone-vue2/v2.151.0) (2024-08-13)
+
+
+### Features
+
+* **Split Button:** DLT-1817 new component ([#373](https://github.com/dialpad/dialtone/issues/373)) ([1c768fe](https://github.com/dialpad/dialtone/commit/1c768fe7db44ba94b4de2a1693ef320741e1c3ad))
+* **Theme:** DLT-1838 split unread design tokens ([#439](https://github.com/dialpad/dialtone/issues/439)) ([c13777c](https://github.com/dialpad/dialtone/commit/c13777cd0bce117fd7f94b8098647542dfc7103b))
+
 # [2.150.0](https://github.com/dialpad/dialtone/compare/dialtone-vue2/v2.149.0...dialtone-vue2/v2.150.0) (2024-08-10)
 
 
