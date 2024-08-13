@@ -1,19 +1,3 @@
-# dependencies
-node_modules
-
-# storybook
-storybook-static
-
-# tests
-tests/.cache
-tests/compiled
-
-# ejs files
-**/*.ejs
-
-# builds
-dist
-
 # TEMPORARY can be removed once we upgrade to eslint 9
 **/common/emoji/index.js
 **/common/storybook_utils.js
