@@ -1,3 +1,10 @@
+# [1.34.0](https://github.com/dialpad/dialtone/compare/dialtone-tokens/v1.33.0...dialtone-tokens/v1.34.0) (2024-08-13)
+
+
+### Features
+
+* **Theme:** DLT-1838 split unread design tokens ([#439](https://github.com/dialpad/dialtone/issues/439)) ([c13777c](https://github.com/dialpad/dialtone/commit/c13777cd0bce117fd7f94b8098647542dfc7103b))
+
 # [1.33.0](https://github.com/dialpad/dialtone/compare/dialtone-tokens/v1.32.0...dialtone-tokens/v1.33.0) (2024-08-01)
 
 
