@@ -1,3 +1,10 @@
+## [3.144.1](https://github.com/dialpad/dialtone/compare/dialtone-vue3/v3.144.0...dialtone-vue3/v3.144.1) (2024-08-13)
+
+
+### Bug Fixes
+
+* NO-JIRA es6 errors with json imports ([#444](https://github.com/dialpad/dialtone/issues/444)) ([7394e27](https://github.com/dialpad/dialtone/commit/7394e276c16433ec5b4a93154871a152230e14a0))
+
 # [3.144.0](https://github.com/dialpad/dialtone/compare/dialtone-vue3/v3.143.0...dialtone-vue3/v3.144.0) (2024-08-13)
 
 
