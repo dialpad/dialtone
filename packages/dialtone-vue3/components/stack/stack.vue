@@ -4,8 +4,8 @@
     :class="[
       'd-stack',
       defaultDirection,
+      defaultGap,
       stackResponsive,
-      stackGap,
     ]"
   >
     <!-- @slot Slot for main content -->
@@ -16,7 +16,7 @@
 <script>
 import { DT_STACK_DIRECTION, DT_STACK_GAP, DT_STACK_RESPONSIVE_BREAKPOINTS } from './stack_constants';
 import { directionValidator, gapValidator } from './validators';
-import { getDefaultDirectionClass, getResponsiveClasses, getGapClass } from './utils';
+import { getDefaultDirectionClass, getResponsiveClasses, getDefaultGapClass } from './utils';
 
 export default {
   name: 'DtStack',
@@ -45,11 +45,15 @@ export default {
     },
 
     /**
-     * Set this prop to have the space between each stack item
-     * @values 0, 100, 200, 300, 400, 500, 600
+     * The gap property controls the spacing between items in the stack.
+     * The gap can be set to a string, or object with breakpoints.
+     * All the undefined breakpoints will have the 'default' value.
+     * You can override the default gap with 'default' key.
+     * In case of string, it will be applied to all the breakpoints.
+     * Valid values are '0', '100', '200', '300', '400', '450', '500', '600'.
      */
     gap: {
-      type: String,
+      type: [String, Object],
       default: '0',
       validator: (gap) => gapValidator(gap),
     },
@@ -64,8 +68,8 @@ export default {
   },
 
   computed: {
-    stackGap () {
-      return getGapClass(this.gap);
+    defaultGap () {
+      return getDefaultGapClass(this.gap);
     },
 
     defaultDirection () {
@@ -73,7 +77,7 @@ export default {
     },
 
     stackResponsive () {
-      return getResponsiveClasses(this.direction);
+      return getResponsiveClasses(this.direction, this.gap);
     },
   },
 };
