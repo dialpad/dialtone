@@ -1,3 +1,15 @@
+# [8.41.0](https://github.com/dialpad/dialtone/compare/dialtone-css/v8.40.0...dialtone-css/v8.41.0) (2024-08-13)
+
+
+### Documentation
+
+* DLT-1933 move storybook to doc site - Item layout to Lazy show ([#432](https://github.com/dialpad/dialtone/issues/432)) ([90dea53](https://github.com/dialpad/dialtone/commit/90dea538a6bee176ecf56005d71ceb82f0d31b45))
+
+
+### Features
+
+* **Split Button:** DLT-1817 new component ([#373](https://github.com/dialpad/dialtone/issues/373)) ([1c768fe](https://github.com/dialpad/dialtone/commit/1c768fe7db44ba94b4de2a1693ef320741e1c3ad))
+
 # [8.40.0](https://github.com/dialpad/dialtone/compare/dialtone-css/v8.39.0...dialtone-css/v8.40.0) (2024-08-06)
 
 
