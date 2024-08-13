@@ -37,7 +37,10 @@
           </dt-emoji-text-wrapper>
         </div>
       </a>
-      <div class="dt-leftbar-row__omega">
+      <div
+        v-show="!hideActions"
+        class="dt-leftbar-row__omega"
+      >
         <slot name="right" />
         <div class="dt-leftbar-row__action-container">
           <dt-badge
@@ -72,15 +75,15 @@
 </template>
 
 <script>
+import { safeConcatStrings } from '@/common/utils';
 import { DtBadge } from '@/components/badge';
 import { DtButton } from '@/components/button';
-import DtIconHeadphones from '@dialpad/dialtone-icons/vue2/headphones';
-import DtIconChevronDown from '@dialpad/dialtone-icons/vue2/chevron-down';
 import DtEmojiTextWrapper from '@/components/emoji_text_wrapper/emoji_text_wrapper.vue';
-import { safeConcatStrings } from '@/common/utils';
+import DtIconChevronDown from '@dialpad/dialtone-icons/vue2/chevron-down';
+import DtIconHeadphones from '@dialpad/dialtone-icons/vue2/headphones';
 
 export default {
-  name: 'DtRecipeGeneralRow',
+  name: 'DtRecipeContactCentersRow',
 
   components: {
     DtButton,
@@ -113,6 +116,14 @@ export default {
      * Determines if the row is selected
      */
     selected: {
+      type: Boolean,
+      default: false,
+    },
+
+    /**
+     * Making this true will hide the unread count badge, the chevron button, and the right slot
+     */
+    hideActions: {
       type: Boolean,
       default: false,
     },
@@ -184,7 +195,8 @@ export default {
   watch: {
     $props: {
       deep: true,
-      handler () {
+      async handler () {
+        await this.$nextTick();
         this.adjustLabelWidth();
       },
     },
