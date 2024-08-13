@@ -1,3 +1,10 @@
+## [2.151.1](https://github.com/dialpad/dialtone/compare/dialtone-vue2/v2.151.0...dialtone-vue2/v2.151.1) (2024-08-13)
+
+
+### Bug Fixes
+
+* NO-JIRA es6 errors with json imports ([#444](https://github.com/dialpad/dialtone/issues/444)) ([7394e27](https://github.com/dialpad/dialtone/commit/7394e276c16433ec5b4a93154871a152230e14a0))
+
 # [2.151.0](https://github.com/dialpad/dialtone/compare/dialtone-vue2/v2.150.0...dialtone-vue2/v2.151.0) (2024-08-13)
 
 
