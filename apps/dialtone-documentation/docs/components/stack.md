@@ -156,7 +156,7 @@ vueCode='
 '
 showHtmlWarning />
 
-Set gap to 300 at default size, 600 at extra large screen size, 500 for large screen size, 400 for medium screen size, and 300 for small screen size. Check how our breakpoints work [here](/utilities/responsive/breakpoints.html).
+Set 300 as the default gap, 600 at <= XL, 500 at <= L, 400 at <= M, and 300 at <= SM. Check how our breakpoints work [here](/utilities/responsive/breakpoints.html).
 
 <code-well-header>
   <dt-stack :gap="{ default: '300', xl: '600', lg: '500', md: '400', sm: '300' }">
