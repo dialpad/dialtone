@@ -5,6 +5,7 @@
     :aria-label="$attrs.ariaLabel"
     :menu-button-aria-label="$attrs.menuButtonAriaLabel"
     :selected="$attrs.selected"
+    :hide-actions="$attrs.hideActions"
     @click="$attrs.click"
     @click-menu="$attrs.clickMenu"
   >
@@ -51,8 +52,8 @@
 
 <script>
 import { DtButton } from '@/components/button';
-import DtRecipeContactCentersRow from './contact_centers_row.vue';
 import DtIconBellRing from '@dialpad/dialtone-icons/vue3/bell-ring';
+import DtRecipeContactCentersRow from './contact_centers_row.vue';
 
 export default {
   name: 'DtRecipeContactCentersRowDefault',
