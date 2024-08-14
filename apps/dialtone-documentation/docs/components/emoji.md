@@ -77,7 +77,7 @@ vueCode='
 ### Sizes
 
 <code-well-header>
-  <div class="d-d-inline-flex d-ai-center d-flow8 sizesExample" ref="exampleSizes">
+  <div class="d-d-inline-flex d-ai-center d-flow8" ref="exampleSizes">
     <dt-emoji v-for="size in sizes" :size="size" code=":smile:" />
   </div>
 </code-well-header>
@@ -230,15 +230,3 @@ By default the emoji will be rendered with an aria-label attribute describing th
 const sizes = ['100', '200', '300', '400', '500', '600', '700', '800'];
 
 </script>
-
-<style scoped lang="less">
-.sizesExample .d-emoji {
-  position: relative;
-  &:deep(.d-icon) {
-    position: absolute;
-    top: calc(50% - 1px);
-    transform: translateY(-50%);
-  }
-}
-
-</style>
