@@ -400,6 +400,23 @@ Example:
 nx build dialtone-documentation
 ```
 
+##### Use local package in another project
+
+A way to see local Dialtone changes in a local running frontend is to use a local package.
+
+To create a Dialtone package, first run (in Dialtone repo):
+
+```bash
+pnpm pack
+```
+
+This will generate a `.tgz` file, with the same format as the one published on npm. To use this package on another project you can run:
+
+```bash
+npm install <path to previously generated tgz file>
+npm run dev
+```
+
 ### Releasing
 
 Currently, Dialtone packages are being released in two different ways: `scheduled` and `manually`.
