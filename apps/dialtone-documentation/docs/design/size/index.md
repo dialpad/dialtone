@@ -119,12 +119,12 @@ To ensure clickable and interactive areas are easily accessible, we recommend a 
 
 Here are some frequently used tokens. For a complete list, visit the [Size Tokens](/tokens/size/) section.
 
-<token-table category="size" :tokenList="true" :tokens="tokens" />
+<token-table category="size" :tokenList="true" :tokens="tokens" theme="light" />
 
 <dt-notice
   kind="info"
   title="Figma Variables"
-  hideClose="true"
+  :hideClose="true"
 >
   <template #default>
     By April 2024, we aim to integrate sizing units into Figma Variables. This will simplify the process of setting these tokens on width, min-width, height, min-height in your Figma files, making it easier for engineers to obtain the correct variable for each case.
@@ -141,7 +141,7 @@ import { ref } from 'vue';
 import tokensJson from '@dialpad/dialtone-tokens/dist/doc.json';
 
 const sizes = ["size/300", "size/450", "size/400", "size/500", "size/550", "size/600"];
-const theme = "light";
+const theme = "base-light";
 const tokens = Object.keys(tokensJson[theme]).reduce((acc, curr) => {
   if (sizes.includes(curr)) {
     const { name, value, description } = tokensJson[theme][curr]["css/variables"];
