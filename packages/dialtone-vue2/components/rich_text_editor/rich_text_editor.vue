@@ -76,7 +76,8 @@ export default {
     },
 
     /**
-     * Whether the input allows for line breaks to be introduced in the text.
+     * Whether the input allows for line breaks to be introduced in the text by pressing enter. If this is disabled,
+     * line breaks can still be entered by pressing shift+enter.
      */
     allowLineBreaks: {
       type: Boolean,
@@ -397,13 +398,7 @@ export default {
                   return true;
                 },
                 'Shift-Enter': () => {
-                  this.editor.commands.first(({ commands }) => [
-                    () => commands.newlineInCode(),
-                    () => self.allowBulletList && commands.splitListItem('listItem'),
-                    () => commands.createParagraphNear(),
-                    () => commands.liftEmptyBlock(),
-                    () => commands.splitBlock(),
-                  ]);
+                  this.editor.commands.setHardBreak();
                   return true;
                 },
               };
