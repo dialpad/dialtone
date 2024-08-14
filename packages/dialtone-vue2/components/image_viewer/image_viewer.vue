@@ -13,7 +13,10 @@
         :alt="imageAlt"
       >
     </dt-button>
-    <portal v-if="isOpen">
+    <portal
+     v-if="isOpen"
+     :selector="appendTo"
+    >
       <div
         :aria-hidden="!isOpen ? 'true' : 'false'"
         class="d-modal"
@@ -82,6 +85,15 @@ export default {
   mixins: [Modal],
 
   props: {
+    /**
+     * By default the portal appends to the body. We can modify
+     * this behaviour by passing an appendTo prop that points to an id.
+    */
+    appendTo: {
+      type: String,
+      default: 'body',
+    },
+
     /**
      * Controls whether the image modal is shown. Leaving this null will have the image modal
      * trigger on click by default.

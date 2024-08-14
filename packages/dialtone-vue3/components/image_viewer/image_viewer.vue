@@ -15,7 +15,7 @@
     </dt-button>
     <Teleport
       v-if="isOpen"
-      to="body"
+      :to="appendTo"
     >
       <div
         :aria-hidden="!isOpen ? 'true' : 'false'"
@@ -83,6 +83,14 @@ export default {
   mixins: [Modal],
 
   props: {
+    /**
+     * By default the teleport appends to the body. We can modify
+     * this behaviour by passing an appendTo prop that points to an id.
+    */
+    appendTo: {
+      type: String,
+      default: 'body',
+    },
     /**
      * Controls whether the image modal is shown. Leaving this null will have the image modal
      * trigger on click by default.
