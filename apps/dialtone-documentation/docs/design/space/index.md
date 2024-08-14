@@ -157,12 +157,12 @@ Avoid using `margin`, which adds space outside the element and can affect the la
 
 Here are some frequently used tokens, don't use values outside the recommended range for specific types of spacing. For a complete list, visit the [Spacing Tokens](/tokens/space) section.
 
-<token-table category="space" :tokenList="true" :tokens="tokens" />
+<token-table category="space" :tokenList="true" :tokens="tokens" theme="light" />
 
 <dt-notice
   kind="info"
   title="Figma Variables"
-  hideClose="true"
+  :hideClose="true"
 >
   <template #default>
     By April 2024, we aim to integrate sizing units into Figma Variables. This will simplify the process of setting these tokens on width, min-width, height, min-height in your Figma files, making it easier for engineers to obtain the correct variable for each case.
@@ -194,8 +194,8 @@ const spaces = {
   "space/600": {},
   "space/650": {}
 };
-const theme = "light";
-const tokens = Object.keys(tokensJson[theme]).reduce((acc, curr) => {
+const theme = "base-light";
+const tokens = Object.keys(tokensJson[theme] ?? {}).reduce((acc, curr) => {
   if (Object.keys(spaces).includes(curr)) {
     const { name, value, description } = tokensJson[theme][curr]["css/variables"];
     acc.push({
