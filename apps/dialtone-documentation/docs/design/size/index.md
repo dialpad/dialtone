@@ -142,7 +142,7 @@ import tokensJson from '@dialpad/dialtone-tokens/dist/doc.json';
 
 const sizes = ["size/300", "size/450", "size/400", "size/500", "size/550", "size/600"];
 const theme = "base-light";
-const tokens = Object.keys(tokensJson[theme]).reduce((acc, curr) => {
+const tokens = Object.keys(tokensJson[theme] ?? {}).reduce((acc, curr) => {
   if (sizes.includes(curr)) {
     const { name, value, description } = tokensJson[theme][curr]["css/variables"];
     acc.push({

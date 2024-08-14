@@ -195,7 +195,7 @@ const spaces = {
   "space/650": {}
 };
 const theme = "base-light";
-const tokens = Object.keys(tokensJson[theme]).reduce((acc, curr) => {
+const tokens = Object.keys(tokensJson[theme] ?? {}).reduce((acc, curr) => {
   if (Object.keys(spaces).includes(curr)) {
     const { name, value, description } = tokensJson[theme][curr]["css/variables"];
     acc.push({
