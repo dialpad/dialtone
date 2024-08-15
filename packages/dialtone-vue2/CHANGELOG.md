@@ -1,3 +1,11 @@
+## [2.152.1](https://github.com/dialpad/dialtone/compare/dialtone-vue2/v2.152.0...dialtone-vue2/v2.152.1) (2024-08-15)
+
+
+### Bug Fixes
+
+* **Message Input:** DLT-1937 set input focus area correctly ([#446](https://github.com/dialpad/dialtone/issues/446)) ([36c5bbe](https://github.com/dialpad/dialtone/commit/36c5bbedf54fead53222210218b71c842688b9b0))
+* **Message Input:** DP-107570 fix long names on mentions ([#451](https://github.com/dialpad/dialtone/issues/451)) ([5e5dea3](https://github.com/dialpad/dialtone/commit/5e5dea3a97454cb71d6f796a4262a79986d29231))
+
 # [2.152.0](https://github.com/dialpad/dialtone/compare/dialtone-vue2/v2.151.1...dialtone-vue2/v2.152.0) (2024-08-14)
 
 
