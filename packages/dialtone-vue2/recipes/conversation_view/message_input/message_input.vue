@@ -4,10 +4,10 @@
     data-qa="dt-message-input"
     role="presentation"
     :class="['dt-message-input']"
-    @drag-enter="onDrag"
-    @drag-over="onDrag"
-    @drop="onDrop"
+    @dragover.prevent
+    @drop.prevent="onDrop"
     @paste="onPaste"
+    @mousedown="onMousedown"
   >
     <!-- @slot Renders above the input, but still within the borders. -->
     <slot name="top" />
@@ -40,8 +40,6 @@
         :allow-underline="allowUnderline"
         :additional-extensions="additionalExtensions"
         v-bind="$attrs"
-        @focus="onFocus"
-        @blur="onBlur"
         @input="onInput"
         @enter="onSend"
         v-on="$listeners"
@@ -668,15 +666,20 @@ export default {
   },
 
   methods: {
-    onDrag (e) {
-      e.stopPropagation();
-      e.preventDefault();
+    // Mousedown instead of click because it fires before the blur event.
+    onMousedown (e) {
+      const isWithinInput = this.$refs.richTextEditor.$el.querySelector('.tiptap').contains(e.target);
+
+      // If the click is not within the tiptap rich text editor input itself, but still within the wrapping div,
+      // focus the editor.
+      if (!isWithinInput) {
+        // Prevent default prevents blurring the rich text editor input when it is already focused.
+        e.preventDefault();
+        this.$refs.richTextEditor.focusEditor();
+      }
     },
 
     onDrop (e) {
-      e.stopPropagation();
-      e.preventDefault();
-
       const dt = e.dataTransfer;
       const files = Array.from(dt.files);
       this.$emit('add-media', files);

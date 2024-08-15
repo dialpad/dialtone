@@ -31,7 +31,6 @@ export const CustomLink = Mark.create({
         HTMLAttributes,
         defaultAttributes,
       ),
-      0,
     ];
   },
 

@@ -47,11 +47,6 @@ export const argTypesData = {
   outputFormat: {
     control: 'select',
     options: Object.values(RICH_TEXT_EDITOR_OUTPUT_FORMATS),
-    table: {
-      defaultValue: {
-        summary: 'text',
-      },
-    },
   },
 
   value: {
