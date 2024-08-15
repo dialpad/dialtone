@@ -1,3 +1,18 @@
+# [2.152.0](https://github.com/dialpad/dialtone/compare/dialtone-vue2/v2.151.1...dialtone-vue2/v2.152.0) (2024-08-14)
+
+
+### Features
+
+* DP-107407 add new prop to hide the actions in leftbar contact centers recipe ([#445](https://github.com/dialpad/dialtone/issues/445)) ([27b80f0](https://github.com/dialpad/dialtone/commit/27b80f03c3bf56d5826d64befdc928e982b0e47d))
+* **Stack:** DLT-1805 add responsive gap prop ([#435](https://github.com/dialpad/dialtone/issues/435)) ([7827570](https://github.com/dialpad/dialtone/commit/782757039954a1b05c9ff1673aaf51eb58027535))
+
+## [2.151.1](https://github.com/dialpad/dialtone/compare/dialtone-vue2/v2.151.0...dialtone-vue2/v2.151.1) (2024-08-13)
+
+
+### Bug Fixes
+
+* NO-JIRA es6 errors with json imports ([#444](https://github.com/dialpad/dialtone/issues/444)) ([7394e27](https://github.com/dialpad/dialtone/commit/7394e276c16433ec5b4a93154871a152230e14a0))
+
 # [2.151.0](https://github.com/dialpad/dialtone/compare/dialtone-vue2/v2.150.0...dialtone-vue2/v2.151.0) (2024-08-13)
 
 

@@ -11,7 +11,7 @@ import {
 export const argsData = {
   direction: { default: 'column' },
   as: 'div',
-  gap: '400',
+  gap: { default: '400' },
 };
 
 export const argTypesData = {
@@ -50,9 +50,15 @@ Object: { "default": "row", "sm": "column", "lg": "column-reverse" }`,
     control: 'text',
   },
   gap: {
-    options: DT_STACK_GAP,
-    control: {
-      type: 'select',
+    control: 'object',
+    table: {
+      type: {
+        detail: `
+        Gaps: "${DT_STACK_GAP}"
+Breakpoints: "${DT_STACK_RESPONSIVE_BREAKPOINTS}"
+String: "400"
+Object: { "default": "400", "sm": "200", "lg": "450" }`,
+      },
     },
   },
 };

@@ -12,5 +12,12 @@ export function directionValidator (direction) {
 }
 
 export function gapValidator (gap) {
-  return DT_STACK_GAP.includes(gap);
+  if (typeof gap === 'string') {
+    return DT_STACK_GAP.includes(gap);
+  }
+  if (typeof gap === 'object') {
+    const { default: defaultStyle } = gap;
+
+    return DT_STACK_GAP.includes(defaultStyle);
+  }
 }

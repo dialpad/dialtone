@@ -118,7 +118,7 @@ showHtmlWarning />
 Stacks column at small screen size and column reverse at large screen
 
 <code-well-header>
-    <div class="d-stack d-stack--row d-stack--sm--column d-stack--lg--column-reverse d-stack--gap-100">
+    <div class="d-stack d-stack--row d-stack--sm-column d-stack--lg-column-reverse d-stack--gap-100">
       <div class="d-bgc-magenta-100">
         Stack item 1
       </div>
@@ -133,7 +133,7 @@ Stacks column at small screen size and column reverse at large screen
 
 <code-example-tabs
 htmlCode='
-<div class="d-stack d-stack--row d-stack--sm--column d-stack--lg--column-reverse d-stack--gap-0">
+<div class="d-stack d-stack--row d-stack--sm-column d-stack--lg-column-reverse d-stack--gap-0">
   <div class="d-bgc-magenta-100">Stack item 1</div>
   <div class="d-bgc-magenta-100">Stack item 2</div>
   <div class="d-bgc-magenta-100">Stack item 3</div>
@@ -155,6 +155,45 @@ vueCode='
 </dt-stack>
 '
 showHtmlWarning />
+
+Set 300 as the default gap, 600 at <= XL, 500 at <= L, 400 at <= M, and 300 at <= SM. Check how our breakpoints work [here](/utilities/responsive/breakpoints.html).
+
+<code-well-header>
+  <dt-stack :gap="{ default: '300', xl: '600', lg: '500', md: '400', sm: '300' }">
+    <div class="d-bgc-magenta-100">
+      Stack item 1
+    </div>
+    <div class="d-bgc-magenta-100">
+      Stack item 2
+    </div>
+    <div class="d-bgc-magenta-100">
+      Stack item 3
+    </div>
+  </dt-stack>
+</code-well-header>
+
+<code-example-tabs
+htmlCode='
+<div class="d-stack d-stack--gap-300 d-stack--sm-gap-300 d-stack--md-gap-400 d-stack--lg-gap-500 d-stack--xl-gap-600">
+  <div class="d-bgc-magenta-100">Stack item 1</div>
+  <div class="d-bgc-magenta-100">Stack item 2</div>
+  <div class="d-bgc-magenta-100">Stack item 3</div>
+</div>
+'
+vueCode='
+<dt-stack :gap="{ default: `300`, xl: `600`, lg: `500`, md: `400`, sm: `300` }">
+  <div class="d-bgc-magenta-100">
+    Stack item 1
+  </div>
+  <div class="d-bgc-magenta-100">
+    Stack item 2
+  </div>
+  <div class="d-bgc-magenta-100">
+    Stack item 3
+  </div>
+</dt-stack>
+'
+/>
 
 Stacks row with gap 300 and stacks in row reverse the second element with gap 600
 

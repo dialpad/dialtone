@@ -69,10 +69,10 @@ describe('DtStack Tests', () => {
         });
 
         expect(wrapper.classes(
-          'd-stack--sm--column',
-          'd-stack--md--row-reverse',
-          'd-stack--lg--column-reverse',
-          'd-stack--xl--row',
+          'd-stack--sm-column',
+          'd-stack--md-row-reverse',
+          'd-stack--lg-column-reverse',
+          'd-stack--xl-row',
         )).toBe(true);
       });
 
@@ -90,7 +90,7 @@ describe('DtStack Tests', () => {
         it('should do not add inexistent breakpoint class', async () => {
           await wrapper.setProps({ direction: { invalid: 'column' } });
 
-          expect(wrapper.classes().includes('d-stack--invalid--column')).toBe(false);
+          expect(wrapper.classes().includes('d-stack--invalid-column')).toBe(false);
         });
       });
 
@@ -112,8 +112,8 @@ describe('DtStack Tests', () => {
     });
   });
 
-  describe('When `gap` prop is provided as', () => {
-    describe('valid value', () => {
+  describe('When `gap` prop is provided with', () => {
+    describe('valid string value', () => {
       it('should set proper gap class', async () => {
         await wrapper.setProps({ gap: '300' });
 
@@ -121,11 +121,57 @@ describe('DtStack Tests', () => {
       });
     });
 
-    describe('non valid value', () => {
+    describe('non valid string value', () => {
       it('should not set gap class', async () => {
         await wrapper.setProps({ gap: '123' });
 
         expect(wrapper.classes().includes('d-stack--gap-123')).toBe(false);
+      });
+    });
+
+    describe('expected object value', () => {
+      it('should set proper responsive classes', async () => {
+        await wrapper.setProps({
+          gap: {
+            sm: '200',
+            md: '400',
+            lg: '500',
+            xl: '600',
+          },
+        });
+
+        expect(wrapper.classes(
+          'd-stack--sm-gap-200',
+          'd-stack--md-gap-400',
+          'd-stack--lg-gap-500',
+          'd-stack--xl-gap-600',
+        )).toBe(true);
+      });
+
+      describe('When `default` is provided', () => {
+        it('should override the default value', async () => {
+          await wrapper.setProps({ gap: { default: '500' } });
+
+          expect(wrapper.classes('d-stack', 'd-stack--gap-500')).toBe(true);
+        });
+      });
+    });
+
+    describe('non expected object value', () => {
+      describe('When is provided with non expected breakpoint value', () => {
+        it('should do not add inexistent breakpoint class', async () => {
+          await wrapper.setProps({ gap: { invalid: '400' } });
+
+          expect(wrapper.classes().includes('d-stack--invalid-gap-400')).toBe(false);
+        });
+      });
+
+      describe('When `default` is provided with non expected direction value', () => {
+        it('should do not add inexistent direction class', async () => {
+          await wrapper.setProps({ gap: { default: '900' } });
+
+          expect(wrapper.classes().includes('d-stack--gap-900')).toBe(false);
+        });
       });
     });
   });

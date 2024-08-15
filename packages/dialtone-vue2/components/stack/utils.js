@@ -14,6 +14,14 @@ function _getValidDirection (direction) {
   } else { return null; }
 }
 
+function _getValidGap (gap) {
+  if (typeof gap === 'string') {
+    return gap;
+  } else if (typeof gap === 'object') {
+    return gap.default;
+  } else { return null; }
+}
+
 export function directionPropType (value) {
   return typeof value;
 }
@@ -24,17 +32,36 @@ export function getDefaultDirectionClass (direction) {
     : null;
 }
 
-export function getResponsiveClasses (direction) {
+function getResposiveDirectionClasses (direction) {
   if (directionPropType(direction) === 'object') {
     return [
       ...DT_STACK_RESPONSIVE_BREAKPOINTS.map((breakpoint) => {
         return direction[breakpoint]
-          ? `d-stack--${breakpoint}--${direction[breakpoint]}`
+          ? `d-stack--${breakpoint}-${direction[breakpoint]}`
           : null;
       })];
-  } else { return null; }
+  } else { return []; }
 }
 
-export function getGapClass (gap) {
-  return DT_STACK_GAP.includes(gap) ? `d-stack--gap-${gap}` : null;
+function getResposiveGapClasses (gap) {
+  if (typeof gap === 'object') {
+    return [
+      ...DT_STACK_RESPONSIVE_BREAKPOINTS.map((breakpoint) => {
+        return DT_STACK_GAP.includes(gap[breakpoint])
+          ? `d-stack--${breakpoint}-gap-${gap[breakpoint]}`
+          : null;
+      })];
+  } else { return []; }
+}
+
+export function getResponsiveClasses (direction, gap) {
+  return [
+    ...getResposiveDirectionClasses(direction),
+    ...getResposiveGapClasses(gap),
+  ];
+}
+
+export function getDefaultGapClass (gap) {
+  const validGap = _getValidGap(gap);
+  return DT_STACK_GAP.includes(validGap) ? `d-stack--gap-${validGap}` : null;
 }
