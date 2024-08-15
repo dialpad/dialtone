@@ -15,7 +15,7 @@
     </dt-button>
     <Teleport
       v-if="isOpen"
-      to="body"
+      :to="appendTo"
     >
       <div
         :aria-hidden="!isOpen ? 'true' : 'false'"
@@ -83,6 +83,16 @@ export default {
   mixins: [Modal],
 
   props: {
+    /**
+     * By default the portal appends to the body of the root parent. We can modify
+     * this behaviour by passing an appendTo prop that points to an id or an html tag from the root of the parent.
+     * The appendTo prop expects a CSS selector string or an actual DOM node.
+     * type: string | HTMLElement, default: 'body'
+    */
+    appendTo: {
+      type: String,
+      default: 'body',
+    },
     /**
      * Controls whether the image modal is shown. Leaving this null will have the image modal
      * trigger on click by default.
