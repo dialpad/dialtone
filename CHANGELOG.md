@@ -1,3 +1,13 @@
+## [9.65.1](https://github.com/dialpad/dialtone/compare/dialtone/v9.65.0...dialtone/v9.65.1) (2024-08-15)
+
+
+### Bug Fixes
+
+* **Emoji:** DLT-1913 alignment issue ([#453](https://github.com/dialpad/dialtone/issues/453)) ([edef45d](https://github.com/dialpad/dialtone/commit/edef45d210dcb4a4e301c9452b7bdbb9c8f17a3b))
+* **Message Input:** DLT-1937 set input focus area correctly ([#446](https://github.com/dialpad/dialtone/issues/446)) ([36c5bbe](https://github.com/dialpad/dialtone/commit/36c5bbedf54fead53222210218b71c842688b9b0))
+* **Message Input:** DP-107570 fix long names on mentions ([#451](https://github.com/dialpad/dialtone/issues/451)) ([5e5dea3](https://github.com/dialpad/dialtone/commit/5e5dea3a97454cb71d6f796a4262a79986d29231))
+* **Tokens:** DLT-1961 make typography tokens rem instead of px ([#450](https://github.com/dialpad/dialtone/issues/450)) ([385aa0a](https://github.com/dialpad/dialtone/commit/385aa0a7d49a4626b2077c87c6acce01d730db18))
+
 # [9.65.0](https://github.com/dialpad/dialtone/compare/dialtone/v9.64.1...dialtone/v9.65.0) (2024-08-14)
 
 
