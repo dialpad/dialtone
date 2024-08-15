@@ -1,3 +1,10 @@
+## [8.42.1](https://github.com/dialpad/dialtone/compare/dialtone-css/v8.42.0...dialtone-css/v8.42.1) (2024-08-15)
+
+
+### Bug Fixes
+
+* **Emoji:** DLT-1913 alignment issue ([#453](https://github.com/dialpad/dialtone/issues/453)) ([edef45d](https://github.com/dialpad/dialtone/commit/edef45d210dcb4a4e301c9452b7bdbb9c8f17a3b))
+
 # [8.42.0](https://github.com/dialpad/dialtone/compare/dialtone-css/v8.41.0...dialtone-css/v8.42.0) (2024-08-14)
 
 
