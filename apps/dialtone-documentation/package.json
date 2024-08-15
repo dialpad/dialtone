@@ -50,7 +50,8 @@
   "dependencies": {
     "@dialpad/dialtone": "workspace:*",
     "@dialpad/dialtone-css": "workspace:*",
-    "@dialpad/dialtone-icons": "workspace:*"
+    "@dialpad/dialtone-icons": "workspace:*",
+    "overlayscrollbars": "2.9.1"
   },
   "devDependencies": {
     "@dialpad/dialtone-combinator": "^0.3.1",

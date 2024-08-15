@@ -251,6 +251,9 @@ importers:
       '@dialpad/dialtone-icons':
         specifier: workspace:*
         version: link:../../packages/dialtone-icons
+      overlayscrollbars:
+        specifier: 2.9.1
+        version: 2.9.1
     devDependencies:
       '@dialpad/dialtone-combinator':
         specifier: ^0.3.1
