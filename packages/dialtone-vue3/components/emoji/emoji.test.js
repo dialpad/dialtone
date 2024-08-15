@@ -1,7 +1,7 @@
 import { mount } from '@vue/test-utils';
 import DtEmoji from './emoji.vue';
 import { setEmojiAssetUrlSmall, setEmojiAssetUrlLarge, setCustomEmojiUrl, setCustomEmojiJson } from '@/common/emoji';
-import customEmojiJson from '@/common/custom-emoji.json' with { type: 'json' };
+const customEmojiJson = require('@/common/custom-emoji.json');
 
 setEmojiAssetUrlSmall('https://mockstorage.com/emojis/', '.png');
 setEmojiAssetUrlLarge('https://mockstorage.com/emojis/', '.svg');

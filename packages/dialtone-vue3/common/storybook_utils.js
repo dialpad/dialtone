@@ -1,5 +1,5 @@
-import iconNames from '@dialpad/dialtone-icons/icons.json' with { type: 'json' };
-import illustrationNames from '@dialpad/dialtone-icons/illustrations.json' with { type: 'json' };
+const iconNames = require('@dialpad/dialtone-icons/icons.json');
+const illustrationNames = require('@dialpad/dialtone-icons/illustrations.json');
 
 /**
  * Will use a Vue SFC to render the template rather than a template string.
