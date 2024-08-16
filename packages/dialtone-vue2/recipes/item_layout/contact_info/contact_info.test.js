@@ -120,8 +120,6 @@ describe('DtRecipeContactInfo Tests', () => {
         await wrapper.setProps({
           avatarColor: '000',
         });
-        await wrapper.vm.$nextTick();
-        _setChildWrappers();
       });
       it('Avatar should display', () => {
         expect(avatarElement.exists()).toBe(true);
