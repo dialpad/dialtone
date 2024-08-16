@@ -1,3 +1,26 @@
+# [2.154.0](https://github.com/dialpad/dialtone/compare/dialtone-vue2/v2.153.0...dialtone-vue2/v2.154.0) (2024-08-16)
+
+
+### Bug Fixes
+
+* **Docs:** DLT-1994 use dialtone scrollbar in docsite ([#456](https://github.com/dialpad/dialtone/issues/456)) ([7db2c8c](https://github.com/dialpad/dialtone/commit/7db2c8cacfee31b9d73b906df82c37829ffd8488))
+
+
+### Documentation
+
+* DLT-1796 move storybook to doc site - Link to Pagination ([#441](https://github.com/dialpad/dialtone/issues/441)) ([bc2d57d](https://github.com/dialpad/dialtone/commit/bc2d57d232d6aeb32e62497767c8ee9bb29ccc72))
+
+
+### Features
+
+* **Contact Info:** NO-JIRA add `avatarColor` prop to contact info recipe ([#448](https://github.com/dialpad/dialtone/issues/448)) ([77ea808](https://github.com/dialpad/dialtone/commit/77ea80843fa228bd89b66003dbe268d7334734a3))
+* **Input:** DLT-1945 add clear slot prop to rightIcon ([#455](https://github.com/dialpad/dialtone/issues/455)) ([0f90dd4](https://github.com/dialpad/dialtone/commit/0f90dd46885c92469e3f02baff716eb8cbb6694f))
+
+
+### Reverts
+
+* NO-JIRA use require for json imports ([#454](https://github.com/dialpad/dialtone/issues/454)) ([606cfb3](https://github.com/dialpad/dialtone/commit/606cfb31e2a1271203b9cee7415ac08a9d5787aa))
+
 # [2.153.0](https://github.com/dialpad/dialtone/compare/dialtone-vue2/v2.152.1...dialtone-vue2/v2.153.0) (2024-08-16)
 
 
