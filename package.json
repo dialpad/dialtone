@@ -127,7 +127,7 @@
     "docopt": "0.6.2",
     "emoji-regex": "10.3.0",
     "emoji-toolkit": "8.0.0",
-    "overlayscrollbars": "2.2.0",
+    "overlayscrollbars": "2.10.0",
     "requireindex": "1.2.0",
     "stylelint": "15.11.0",
     "tippy.js": "6.3.7"
