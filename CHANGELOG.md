@@ -1,3 +1,15 @@
+# [9.66.0](https://github.com/dialpad/dialtone/compare/dialtone/v9.65.1...dialtone/v9.66.0) (2024-08-16)
+
+
+### Bug Fixes
+
+* NO-JIRA use require for json imports ([#454](https://github.com/dialpad/dialtone/issues/454)) ([64aeb6b](https://github.com/dialpad/dialtone/commit/64aeb6b9ec8b0c59fee2812b37528f330b606a1d))
+
+
+### Features
+
+* NO-JIRA introduce appendTo prop to image viewer ([#452](https://github.com/dialpad/dialtone/issues/452)) ([a5bcde8](https://github.com/dialpad/dialtone/commit/a5bcde8e404d1f5186cc04b1ba15d22401bed90c))
+
 ## [9.65.1](https://github.com/dialpad/dialtone/compare/dialtone/v9.65.0...dialtone/v9.65.1) (2024-08-15)
 
 
