@@ -1,3 +1,31 @@
+# [2.153.0](https://github.com/dialpad/dialtone/compare/dialtone-vue2/v2.152.1...dialtone-vue2/v2.153.0) (2024-08-16)
+
+
+### Bug Fixes
+
+* NO-JIRA use require for json imports ([#454](https://github.com/dialpad/dialtone/issues/454)) ([64aeb6b](https://github.com/dialpad/dialtone/commit/64aeb6b9ec8b0c59fee2812b37528f330b606a1d))
+
+
+### Features
+
+* NO-JIRA introduce appendTo prop to image viewer ([#452](https://github.com/dialpad/dialtone/issues/452)) ([a5bcde8](https://github.com/dialpad/dialtone/commit/a5bcde8e404d1f5186cc04b1ba15d22401bed90c))
+
+## [2.152.1](https://github.com/dialpad/dialtone/compare/dialtone-vue2/v2.152.0...dialtone-vue2/v2.152.1) (2024-08-15)
+
+
+### Bug Fixes
+
+* **Message Input:** DLT-1937 set input focus area correctly ([#446](https://github.com/dialpad/dialtone/issues/446)) ([36c5bbe](https://github.com/dialpad/dialtone/commit/36c5bbedf54fead53222210218b71c842688b9b0))
+* **Message Input:** DP-107570 fix long names on mentions ([#451](https://github.com/dialpad/dialtone/issues/451)) ([5e5dea3](https://github.com/dialpad/dialtone/commit/5e5dea3a97454cb71d6f796a4262a79986d29231))
+
+# [2.152.0](https://github.com/dialpad/dialtone/compare/dialtone-vue2/v2.151.1...dialtone-vue2/v2.152.0) (2024-08-14)
+
+
+### Features
+
+* DP-107407 add new prop to hide the actions in leftbar contact centers recipe ([#445](https://github.com/dialpad/dialtone/issues/445)) ([27b80f0](https://github.com/dialpad/dialtone/commit/27b80f03c3bf56d5826d64befdc928e982b0e47d))
+* **Stack:** DLT-1805 add responsive gap prop ([#435](https://github.com/dialpad/dialtone/issues/435)) ([7827570](https://github.com/dialpad/dialtone/commit/782757039954a1b05c9ff1673aaf51eb58027535))
+
 ## [2.151.1](https://github.com/dialpad/dialtone/compare/dialtone-vue2/v2.151.0...dialtone-vue2/v2.151.1) (2024-08-13)
 
 

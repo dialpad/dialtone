@@ -40,6 +40,16 @@ const CONTACT_LIST = [
     name: 'Nina Repetto',
     avatarSrc: 'https://avatars.githubusercontent.com/u/13851061?s=460&u=1f1b5b0b5b2b2b2b2b2b2b2b2b2b2b2b2b2b2b&v=4',
   },
+  {
+    id: 'long.name',
+    name: 'LongnameLongnameLongnameLongnameLongnameLongnameLongnameLongnameLongnameLongnameLongnameLongnameLongnameLongnameLongname',
+    avatarSrc: 'https://avatars.githubusercontent.com/u/13851061?s=460&u=1f1b5b0b5b2b2b2b2b2b2b2b2b2b2b2b2b2b2b&v=4',
+  },
+  {
+    id: 'long.name.with.spaces',
+    name: 'Long Name Long Name Long Name Long NameLong Name Long Name Long Name Long NameLong Name Long Name Long Name Long NameLong Name Long Name Long Name Long NameLong Name Long Name Long Name Long Name ',
+    avatarSrc: 'https://avatars.githubusercontent.com/u/13851061?s=460&u=1f1b5b0b5b2b2b2b2b2b2b2b2b2b2b2b2b2b2b&v=4',
+  },
 ];
 
 export default {

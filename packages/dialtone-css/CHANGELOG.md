@@ -1,3 +1,17 @@
+## [8.42.1](https://github.com/dialpad/dialtone/compare/dialtone-css/v8.42.0...dialtone-css/v8.42.1) (2024-08-15)
+
+
+### Bug Fixes
+
+* **Emoji:** DLT-1913 alignment issue ([#453](https://github.com/dialpad/dialtone/issues/453)) ([edef45d](https://github.com/dialpad/dialtone/commit/edef45d210dcb4a4e301c9452b7bdbb9c8f17a3b))
+
+# [8.42.0](https://github.com/dialpad/dialtone/compare/dialtone-css/v8.41.0...dialtone-css/v8.42.0) (2024-08-14)
+
+
+### Features
+
+* **Stack:** DLT-1805 add responsive gap prop ([#435](https://github.com/dialpad/dialtone/issues/435)) ([7827570](https://github.com/dialpad/dialtone/commit/782757039954a1b05c9ff1673aaf51eb58027535))
+
 # [8.41.0](https://github.com/dialpad/dialtone/compare/dialtone-css/v8.40.0...dialtone-css/v8.41.0) (2024-08-13)
 
 

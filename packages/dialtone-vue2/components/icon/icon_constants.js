@@ -1,4 +1,4 @@
-import iconNames from '@dialpad/dialtone-icons/icons.json' with { type: 'json' };
+const iconNames = require('@dialpad/dialtone-icons/icons.json');
 export const ICON_SIZE_MODIFIERS = {
   100: 'd-icon--size-100',
   200: 'd-icon--size-200',

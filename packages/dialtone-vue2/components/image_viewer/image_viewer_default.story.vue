@@ -1,5 +1,6 @@
 <template>
   <dt-image-viewer
+    :append-to="$attrs.appendTo"
     :image-src="$attrs.imageSrc"
     :image-alt="$attrs.imageAlt"
     :close-aria-label="$attrs.closeAriaLabel"

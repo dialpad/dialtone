@@ -1,6 +1,7 @@
 <template>
   <dt-image-viewer
     v-model:open="isOpen"
+    :append-to="$attrs.appendTo"
     :image-src="$attrs.imageSrc"
     :image-alt="$attrs.imageAlt"
     :close-aria-label="$attrs.closeAriaLabel"

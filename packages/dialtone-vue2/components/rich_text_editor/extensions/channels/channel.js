@@ -40,7 +40,7 @@ export const ChannelPlugin = Mention.extend({
   },
 
   renderHTML ({ HTMLAttributes }) {
-    return ['channel-component', mergeAttributes(this.options.HTMLAttributes, HTMLAttributes), 0];
+    return ['channel-component', mergeAttributes(this.options.HTMLAttributes, HTMLAttributes)];
   },
 
 }).configure({

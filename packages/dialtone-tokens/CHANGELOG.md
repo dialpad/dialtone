@@ -1,3 +1,10 @@
+## [1.34.1](https://github.com/dialpad/dialtone/compare/dialtone-tokens/v1.34.0...dialtone-tokens/v1.34.1) (2024-08-15)
+
+
+### Bug Fixes
+
+* **Tokens:** DLT-1961 make typography tokens rem instead of px ([#450](https://github.com/dialpad/dialtone/issues/450)) ([385aa0a](https://github.com/dialpad/dialtone/commit/385aa0a7d49a4626b2077c87c6acce01d730db18))
+
 # [1.34.0](https://github.com/dialpad/dialtone/compare/dialtone-tokens/v1.33.0...dialtone-tokens/v1.34.0) (2024-08-13)
 
 

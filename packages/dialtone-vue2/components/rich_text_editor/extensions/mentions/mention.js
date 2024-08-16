@@ -39,7 +39,7 @@ export const MentionPlugin = Mention.extend({
   },
 
   renderHTML ({ HTMLAttributes }) {
-    return ['mention-component', mergeAttributes(this.options.HTMLAttributes, HTMLAttributes), 0];
+    return ['mention-component', mergeAttributes(this.options.HTMLAttributes, HTMLAttributes)];
   },
 
 }).configure({

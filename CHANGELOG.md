@@ -1,3 +1,38 @@
+# [9.66.0](https://github.com/dialpad/dialtone/compare/dialtone/v9.65.1...dialtone/v9.66.0) (2024-08-16)
+
+
+### Bug Fixes
+
+* NO-JIRA use require for json imports ([#454](https://github.com/dialpad/dialtone/issues/454)) ([64aeb6b](https://github.com/dialpad/dialtone/commit/64aeb6b9ec8b0c59fee2812b37528f330b606a1d))
+
+
+### Features
+
+* NO-JIRA introduce appendTo prop to image viewer ([#452](https://github.com/dialpad/dialtone/issues/452)) ([a5bcde8](https://github.com/dialpad/dialtone/commit/a5bcde8e404d1f5186cc04b1ba15d22401bed90c))
+
+## [9.65.1](https://github.com/dialpad/dialtone/compare/dialtone/v9.65.0...dialtone/v9.65.1) (2024-08-15)
+
+
+### Bug Fixes
+
+* **Emoji:** DLT-1913 alignment issue ([#453](https://github.com/dialpad/dialtone/issues/453)) ([edef45d](https://github.com/dialpad/dialtone/commit/edef45d210dcb4a4e301c9452b7bdbb9c8f17a3b))
+* **Message Input:** DLT-1937 set input focus area correctly ([#446](https://github.com/dialpad/dialtone/issues/446)) ([36c5bbe](https://github.com/dialpad/dialtone/commit/36c5bbedf54fead53222210218b71c842688b9b0))
+* **Message Input:** DP-107570 fix long names on mentions ([#451](https://github.com/dialpad/dialtone/issues/451)) ([5e5dea3](https://github.com/dialpad/dialtone/commit/5e5dea3a97454cb71d6f796a4262a79986d29231))
+* **Tokens:** DLT-1961 make typography tokens rem instead of px ([#450](https://github.com/dialpad/dialtone/issues/450)) ([385aa0a](https://github.com/dialpad/dialtone/commit/385aa0a7d49a4626b2077c87c6acce01d730db18))
+
+# [9.65.0](https://github.com/dialpad/dialtone/compare/dialtone/v9.64.1...dialtone/v9.65.0) (2024-08-14)
+
+
+### Bug Fixes
+
+* NO-JIRA size and space pages in doc site ([#447](https://github.com/dialpad/dialtone/issues/447)) ([75be846](https://github.com/dialpad/dialtone/commit/75be846107be0f78d6098b265f97de8a612cf1e5))
+
+
+### Features
+
+* DP-107407 add new prop to hide the actions in leftbar contact centers recipe ([#445](https://github.com/dialpad/dialtone/issues/445)) ([27b80f0](https://github.com/dialpad/dialtone/commit/27b80f03c3bf56d5826d64befdc928e982b0e47d))
+* **Stack:** DLT-1805 add responsive gap prop ([#435](https://github.com/dialpad/dialtone/issues/435)) ([7827570](https://github.com/dialpad/dialtone/commit/782757039954a1b05c9ff1673aaf51eb58027535))
+
 ## [9.64.1](https://github.com/dialpad/dialtone/compare/dialtone/v9.64.0...dialtone/v9.64.1) (2024-08-13)
 
 
