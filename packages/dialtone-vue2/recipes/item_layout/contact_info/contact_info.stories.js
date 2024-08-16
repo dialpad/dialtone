@@ -5,7 +5,7 @@ import DtRecipeContactInfo from './contact_info.vue';
 
 import DtRecipeContactInfoDefaultTemplate from './contact_info_default.story.vue';
 import DtRecipeContactInfoVariantsTemplate from './contact_info_variants.story.vue';
-import { AVATAR_SIZE_MODIFIERS } from '@/components/avatar';
+import { AVATAR_SIZE_MODIFIERS, AVATAR_COLORS } from '@/components/avatar';
 import { PRESENCE_STATES_LIST } from '@/components/presence';
 
 import avatarImage from '@/common/assets/avatar1.png';
@@ -40,6 +40,19 @@ export const argTypesData = {
 
   avatarIcon: {
     options: iconsList,
+    control: {
+      type: 'select',
+      labels: {
+        undefined: '(empty)',
+      },
+    },
+  },
+
+  avatarColor: {
+    options: [
+      undefined,
+      ...AVATAR_COLORS,
+    ],
     control: {
       type: 'select',
       labels: {
@@ -138,6 +151,7 @@ export const Default = {
     avatarFullName: 'Joseph Lumaban',
     avatarSize: 'lg',
     avatarLabelledBy: 'contact-name',
+    avatarColor: '',
     presence: 'active',
     header: `<div class="d-fs-200 d-fw-bold" id="contact-name"> Joseph Lumaban </div>`,
     subtitle: `<div class="d-fs-100 d-mt2"> +1 (415) 123-4567 </div>`,

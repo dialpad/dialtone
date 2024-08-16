@@ -115,6 +115,20 @@ describe('DtRecipeContactInfo Tests', () => {
       });
     });
 
+    describe('When `avatarColor` is defined', () => {
+      beforeEach(async () => {
+        await wrapper.setProps({
+          avatarColor: '000',
+        });
+      });
+      it('Avatar should display', () => {
+        expect(avatarElement.exists()).toBe(true);
+      });
+      it('Should display correct color', () => {
+        expect(avatarElement.classes()).toContain('d-avatar--color-000');
+      });
+    });
+
     describe('When `showAvatar` is false', () => {
       beforeEach(async () => {
         await wrapper.setProps({

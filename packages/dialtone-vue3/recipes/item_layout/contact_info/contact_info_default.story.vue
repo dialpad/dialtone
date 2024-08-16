@@ -7,6 +7,7 @@
     :avatar-icon="$attrs.avatarIcon"
     :avatar-size="$attrs.avatarSize"
     :avatar-seed="$attrs.avatarSeed"
+    :avatar-color="$attrs.avatarColor"
     :presence="$attrs.presence"
     @avatar-click="$attrs.onAvatarClick"
   >

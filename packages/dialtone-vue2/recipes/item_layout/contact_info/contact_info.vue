@@ -40,6 +40,7 @@
           image-alt=""
           :icon-name="avatarIcon"
           :seed="avatarSeed"
+          :color="avatarColor"
           :presence="presence"
         />
       </button>
@@ -163,6 +164,14 @@ export default {
     avatarLabelledBy: {
       type: String,
       default: '',
+    },
+
+    /**
+     * Avatar color to display if `avatarSrc` is empty.
+     */
+    avatarColor: {
+      type: String,
+      default: null,
     },
 
     /**
