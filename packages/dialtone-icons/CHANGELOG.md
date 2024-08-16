@@ -1,3 +1,10 @@
+## [4.26.3](https://github.com/dialpad/dialtone/compare/dialtone-icons/v4.26.2...dialtone-icons/v4.26.3) (2024-08-16)
+
+
+### Reverts
+
+* NO-JIRA use require for json imports ([#454](https://github.com/dialpad/dialtone/issues/454)) ([606cfb3](https://github.com/dialpad/dialtone/commit/606cfb31e2a1271203b9cee7415ac08a9d5787aa))
+
 ## [4.26.2](https://github.com/dialpad/dialtone/compare/dialtone-icons/v4.26.1...dialtone-icons/v4.26.2) (2024-08-16)
 
 
