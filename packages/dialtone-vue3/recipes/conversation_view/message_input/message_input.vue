@@ -664,8 +664,8 @@ export default {
   },
 
   created () {
-    if (this.value && this.outputFormat === 'text') {
-      this.internalInputValue = this.value.replace(/\n/g, '<br>');
+    if (this.modelValue && this.outputFormat === 'text') {
+      this.internalInputValue = this.modelValue.replace(/\n/g, '<br>');
     }
   },
 
