@@ -103,6 +103,9 @@ importers:
       emoji-toolkit:
         specifier: 8.0.0
         version: 8.0.0
+      overlayscrollbars:
+        specifier: 2.2.0
+        version: 2.2.0
       requireindex:
         specifier: 1.2.0
         version: 1.2.0
@@ -251,9 +254,6 @@ importers:
       '@dialpad/dialtone-icons':
         specifier: workspace:*
         version: link:../../packages/dialtone-icons
-      overlayscrollbars:
-        specifier: 2.9.1
-        version: 2.9.1
     devDependencies:
       '@dialpad/dialtone-combinator':
         specifier: ^0.3.1
@@ -657,9 +657,6 @@ importers:
       emoji-toolkit:
         specifier: 8.0.0
         version: 8.0.0
-      overlayscrollbars:
-        specifier: 2.9.1
-        version: 2.9.1
       regex-combined-emojis:
         specifier: 1.6.0
         version: 1.6.0
@@ -892,9 +889,6 @@ importers:
       emoji-toolkit:
         specifier: 8.0.0
         version: 8.0.0
-      overlayscrollbars:
-        specifier: 2.9.1
-        version: 2.9.1
       regex-combined-emojis:
         specifier: 1.6.0
         version: 1.6.0
@@ -11685,8 +11679,8 @@ packages:
     resolution: {integrity: sha512-eqaVuDxnxDO55+pncqTTphbeq6O5XHMyrSfWQoL48mG2rUjr2ZBzvkFkcxIiG3l7IaIY6/L1oX1AJIDdZyzuPQ==}
     engines: {node: '>= 10.0'}
 
-  overlayscrollbars@2.9.1:
-    resolution: {integrity: sha512-BY3hfQcQVZvi25e3YcYe06HPy9yn0lE3akBnUE02fGu3S8OyJmGFx/LDC9rjFJg6Im+YdweXLYEFJTuEhVLMvA==}
+  overlayscrollbars@2.2.0:
+    resolution: {integrity: sha512-Sx7gI2TEx+TFvFXJq4BUYM5R4bfWQR2ertdxyzAQ589ouPKKifMBU0/opdCb1bUC7x6sMiSNI1u9ngC0RbMnBg==}
 
   p-any@2.1.0:
     resolution: {integrity: sha512-JAERcaMBLYKMq+voYw36+x5Dgh47+/o7yuv2oQYuSSUml4YeqJEFznBrY2UeEkoSHqBua6hz518n/PsowTYLLg==}
@@ -29422,7 +29416,7 @@ snapshots:
       domino: 2.1.6
       validator: 13.11.0
 
-  overlayscrollbars@2.9.1: {}
+  overlayscrollbars@2.2.0: {}
 
   p-any@2.1.0:
     dependencies:
@@ -31602,7 +31596,7 @@ snapshots:
     dependencies:
       chokidar: 3.5.3
       immutable: 4.3.4
-      source-map-js: 1.0.2
+      source-map-js: 1.2.0
 
   sax@1.3.0: {}
 
