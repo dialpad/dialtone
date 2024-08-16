@@ -1,6 +1,6 @@
 {
   "name": "@dialpad/dialtone",
-  "version": "9.66.0",
+  "version": "9.67.0",
   "description": "Dialpad's Dialtone design system monorepo",
   "type": "module",
   "scripts": {
