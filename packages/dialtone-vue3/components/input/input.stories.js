@@ -5,6 +5,7 @@ import DtInput from './input.vue';
 import { INPUT_SIZES, INPUT_TYPES } from './input_constants';
 
 import InputDefault from './input_default.story.vue';
+import InputSearchVariant from './input_search_variant.story.vue';
 
 const iconsList = getIconNames();
 
@@ -364,4 +365,14 @@ export const WithLengthValidation = {
       },
     },
   },
+};
+
+const SearchVariantTemplate = (args, { argTypes }) => createTemplateFromVueFile(
+  args,
+  argTypes,
+  InputSearchVariant,
+);
+
+export const SearchVariant = {
+  render: SearchVariantTemplate,
 };
