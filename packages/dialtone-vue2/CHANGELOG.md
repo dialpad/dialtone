@@ -1,3 +1,15 @@
+# [2.153.0](https://github.com/dialpad/dialtone/compare/dialtone-vue2/v2.152.1...dialtone-vue2/v2.153.0) (2024-08-16)
+
+
+### Bug Fixes
+
+* NO-JIRA use require for json imports ([#454](https://github.com/dialpad/dialtone/issues/454)) ([64aeb6b](https://github.com/dialpad/dialtone/commit/64aeb6b9ec8b0c59fee2812b37528f330b606a1d))
+
+
+### Features
+
+* NO-JIRA introduce appendTo prop to image viewer ([#452](https://github.com/dialpad/dialtone/issues/452)) ([a5bcde8](https://github.com/dialpad/dialtone/commit/a5bcde8e404d1f5186cc04b1ba15d22401bed90c))
+
 ## [2.152.1](https://github.com/dialpad/dialtone/compare/dialtone-vue2/v2.152.0...dialtone-vue2/v2.152.1) (2024-08-15)
 
 
