@@ -8,7 +8,7 @@ storybook: https://dialtone.dialpad.com/vue/?path=/story/components-list-item-gr
 <code-well-header>
   <dt-list-item-group
     heading="Example Heading"
-    headingClass="d-fw-bold"
+    heading-class="d-fw-bold"
   >
     <dt-list-item
       navigation-type="tab"
@@ -32,12 +32,12 @@ storybook: https://dialtone.dialpad.com/vue/?path=/story/components-list-item-gr
 
 You should use this component when you have multiple list items you would like to group into different categories.
 
-The heading is unstyled by default. You will likely have to pass utility classes to the headingClass prop to make the heading look how you wish.
+The heading is unstyled by default. You will likely have to pass utility classes to the heading-class prop to make the heading look how you wish.
 
 <code-well-header>
   <dt-list-item-group
     heading="Example Heading"
-    headingClass="d-fw-bold"
+    heading-class="d-fw-bold"
     ref="listItemGroup"
   >
     <dt-list-item
@@ -63,7 +63,7 @@ The heading is unstyled by default. You will likely have to pass utility classes
 vueCode='
 <dt-list-item-group
   heading="Example Heading"
-  headingClass="d-fw-bold"
+  heading-class="d-fw-bold"
 >
   <dt-list-item
     navigation-type="tab"

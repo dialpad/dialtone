@@ -10,7 +10,7 @@ figma_url: https://www.figma.com/file/2adf7JhZOncRyjYiy2joil/DT-Core%3A-Componen
 
 <code-well-header class="d-d-block">
   <ul>
-    <dt-list-item navigationType="tab">
+    <dt-list-item navigation-type="tab">
       <template #left>
         <dt-icon name="check" />
       </template>
@@ -46,7 +46,7 @@ The **bottom** slot can be used to display content below the subtitle slot.
 
 <code-well-header class="d-d-block">
   <ul>
-    <dt-list-item navigationType="tab">
+    <dt-list-item navigation-type="tab">
       <template #left>
         <dt-icon name="check" />
       </template>
@@ -105,7 +105,7 @@ htmlCode='
 '
 vueCode='
 <ul>
-  <dt-list-item navigationType="tab">
+  <dt-list-item navigation-type="tab">
     <template #left>
       <dt-icon name="check" />
     </template>
