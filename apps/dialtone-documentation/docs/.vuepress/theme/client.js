@@ -2,27 +2,53 @@ import { defineClientConfig } from '@vuepress/client';
 import Layout from './layouts/Layout.vue';
 import NotFound from './layouts/NotFound.vue';
 import customEmojis from '@data/custom-emoji.json';
+import { OverlayScrollbars, ClickScrollPlugin } from 'overlayscrollbars';
+import { onBeforeMount, provide, ref } from 'vue';
+import { flushPromises } from '@workspaceRoot/common/utils';
 
 // CSS
 import '@dialpad/dialtone-css/lib/dist/dialtone.css';
 import '@dialpad/dialtone/vue3/css';
 import './assets/less/dialtone-docs.less';
 import './assets/less/dialtone-syntax.less';
-import { onBeforeMount, provide, ref } from 'vue';
+
+// The default scrollbar exists outside of the vue instance on the body so
+// we cannot use the vue directive for our custom scrollbar. Init it manually here.
+const initOverlayScrollbars = () => {
+  return new Promise((resolve) => {
+    const body = document.body;
+    document.documentElement.setAttribute('data-overlayscrollbars-initialize', '');
+    body.setAttribute('data-overlayscrollbars-initialize', '');
+    body.classList.add('scrollbar');
+
+    OverlayScrollbars.plugin(ClickScrollPlugin);
+    OverlayScrollbars(body, {
+      scrollbars: {
+        clickScroll: true,
+      },
+    }, {
+      initialized: (instance) => {
+        resolve(instance);
+      },
+    });
+  });
+};
 
 export default defineClientConfig({
   async enhance ({ app, router }) {
     // Register libraries
     if (!__VUEPRESS_SSR__) {
+      await initOverlayScrollbars();
       await registerDialtoneVue(app);
       // await registerDialtoneCombinator(app);
     }
-    router.options.scrollBehavior = (to, from, savedPosition) => {
+    router.options.scrollBehavior = async (to, from, savedPosition) => {
       if (to.hash) {
         const html = document.querySelector('html');
         // vue-router does not incorporate scroll-padding-top on its own.
         if (html) {
           const top = parseFloat(getComputedStyle(html).scrollPaddingTop);
+          await flushPromises();
           return {
             el: to.hash,
             behavior: 'smooth',
