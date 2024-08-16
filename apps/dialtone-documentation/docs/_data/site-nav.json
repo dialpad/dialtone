@@ -647,6 +647,10 @@
           "link": "/components/list-item.html"
         },
         {
+          "text": "List Item Group",
+          "link": "/components/list-item-group.html"
+        },
+        {
           "text": "Modal",
           "link": "/components/modal.html"
         },

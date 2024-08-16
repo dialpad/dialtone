@@ -14,7 +14,7 @@ figma_url: https://www.figma.com/file/2adf7JhZOncRyjYiy2joil/DT-Core%3A-Componen
     aria-label="Pagination"
     prev-aria-label="Previous page"
     next-aria-label="Next page"
-    :page-number-aria-label="() => {}"
+    :page-number-aria-label="(page) => `Page ${page}`"
   />
 </code-well-header>
 
@@ -93,9 +93,68 @@ vueCode='
   aria-label="Pagination"
   prev-aria-label="Previous page"
   next-aria-label="Next page"
+  :page-number-aria-label="(page) => `Page ${page}`"
 />
 '
 showHtmlWarning />
+
+## Variants
+
+### With active page
+
+<code-well-header>
+  <dt-pagination
+    ref="activePage"
+    :total-pages="25"
+    :active-page="5"
+    aria-label="Pagination"
+    prev-aria-label="Previous page"
+    next-aria-label="Next page"
+    :page-number-aria-label="(page) => `Page ${page}`"
+  />
+</code-well-header>
+
+<code-example-tabs
+:htmlCode='() => $refs.activePage'
+vueCode='
+<dt-pagination
+  :total-pages="25"
+  :active-page="5"
+  aria-label="Pagination"
+  prev-aria-label="Previous page"
+  next-aria-label="Next page"
+  :page-number-aria-label="(page) => `Page ${page}`"
+/>
+'
+/>
+
+### With max-visible
+
+<code-well-header>
+  <dt-pagination
+    ref="maxVisible"
+    :total-pages="25"
+    :max-visible="7"
+    aria-label="Pagination"
+    prev-aria-label="Previous page"
+    next-aria-label="Next page"
+    :page-number-aria-label="(page) => `Page ${page}`"
+  />
+</code-well-header>
+
+<code-example-tabs
+:htmlCode='() => $refs.maxVisible'
+vueCode='
+<dt-pagination
+  :total-pages="25"
+  :max-visible="7"
+  aria-label="Pagination"
+  prev-aria-label="Previous page"
+  next-aria-label="Next page"
+  :page-number-aria-label="(page) => `Page ${page}`"
+/>
+'
+/>
 
 ## Vue API
 

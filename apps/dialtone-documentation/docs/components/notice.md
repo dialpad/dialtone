@@ -660,6 +660,41 @@ vueCode='
 </dt-notice>
 '
 showHtmlWarning />
+
+### Truncate text
+
+Truncates the text instead of wrapping it. Useful when the Notice needs to have a fixed height.
+
+<code-well-header bgclass="d-bgc-primary">
+  <dt-notice
+    ref="htmlTruncateText"
+    :truncate-text="true"
+    title="Lorem ipsum dolor sit amet, consectetur adipiscing elit,
+      sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+  >
+    <span>
+      Duis aute irure dolor in reprehenderit in voluptate velit
+      esse cillum dolore eu fugiat nulla pariatur.
+    </span>
+  </dt-notice>
+</code-well-header>
+
+<code-example-tabs
+:htmlCode='() => $refs.htmlTruncateText'
+vueCode='
+<dt-notice
+  :truncate-text="true"
+  title="Lorem ipsum dolor sit amet, consectetur adipiscing elit,
+    sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+>
+  <span>
+    Duis aute irure dolor in reprehenderit in voluptate velit
+    esse cillum dolore eu fugiat nulla pariatur.
+  </span>
+</dt-notice>
+'
+/>
+
 ## Vue API
 
 <component-vue-api component-name="notice" />
