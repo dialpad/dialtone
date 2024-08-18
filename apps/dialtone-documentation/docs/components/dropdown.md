@@ -57,13 +57,10 @@ figma_url: https://www.figma.com/file/2adf7JhZOncRyjYiy2joil/DT-Core%3A-Componen
 
 Use the Dropdown component when you have a list of links or actions that can be performed. Use the [Select Menu](/components/select-menu.html) component to allow the users to choose one option from the list.
 
-The dropdown component provides accessibility controls when using with List item component.
-
-The dropdown has two major pieces that are provided as required named slots: the anchor and the list.
-
-The **anchor** slot contains the element that controls the dropdown's visibility.
-
-The **list** slot contains a list of items to show as dropdown menu items.
+- The dropdown component provides accessibility controls when using with List item component.
+- The dropdown has two major pieces that are provided as required named slots: the anchor and the list.
+- The **anchor** slot contains the element that controls the dropdown's visibility.
+- The **list** slot contains a list of items to show as dropdown menu items.
 
 ## Variants and examples
 
