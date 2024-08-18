@@ -5,6 +5,7 @@ status: beta
 thumb: true
 image: assets/images/components/split-button.png
 storybook: https://dialtone.dialpad.com/vue/?path=/story/components-split-button--default
+figma_url: https://www.figma.com/design/2adf7JhZOncRyjYiy2joil/DT9-Component-Library?node-id=17597-8212&t=zQhkLLjFhis5qtDn-11
 ---
 
 <code-well-header>
@@ -19,7 +20,31 @@ storybook: https://dialtone.dialpad.com/vue/?path=/story/components-split-button
     </template>
   </dt-split-button>
 </code-well-header>
+
+## Usage
+
 This dual-functionality allows for surfacing variations of the default action. It conserves space in the interface and reduces cognitive load. While versatile, they should be used judiciously to avoild ovewhelming users or cluttering the UI.
+
+In addition to the [Button component's](button.md) documentation:
+
+- The default button supports text or icons, while the secondary action is always an icon.
+- The secondary action selected from its menu replaces the primary action.
+- Ensure that primary and secondary actions are clearly labeled to avoid user confusion.
+
+<dialtone-usage>
+<template #do>
+
+- Use Split Buttons when you need to offer a default action paired with closely related actions, such as "Save" with secondary actions like "Save as Draft" or “Save all.”
+- Reserve for scenarios where multiple related actions can reasonably be grouped within the same context via the secondary action.
+
+</template>
+<template #dont>
+
+- Avoid using if the secondary action is unrelated or distantly related.
+- Refrain from grouping multiple Split Buttons together, as this can lead to a cluttered and confusing interface.
+
+</template>
+</dialtone-usage>
 
 ## Variants
 
@@ -269,7 +294,7 @@ vueCode='
 '
 showHtmlWarning />
 
-### Sizes
+## Sizes
 
 <code-well-header>
   <dt-stack direction="row" gap="400">
@@ -333,7 +358,7 @@ vueCode='
 '
 showHtmlWarning />
 
-### Loading
+## Loading
 
 <code-well-header>
   <dt-stack direction="row" gap="400">
@@ -377,9 +402,9 @@ vueCode='
 '
 showHtmlWarning />
 
-### Icon support
+## Icon support
 
-#### Icon and label
+### Icon and label
 
 <code-well-header>
   <dt-stack direction="row" gap="400">
@@ -485,7 +510,7 @@ vueCode='
 '
 showHtmlWarning />
 
-#### Icon only
+### Icon only
 
 <code-well-header>
   <dt-stack direction="row" gap="400">
@@ -634,7 +659,13 @@ showHtmlWarning />
 ## Vue API
 
 <component-vue-api component-name="splitButton" />
+
+## Accessibility
+
 In addition to the [Button component's](button.md#accessibility) accessibility documentation:
+
+- An icon-only primary action and the secondary action require a [Tooltip](tooltip.md) to indicate its function.
+- While the secondary action is focused, pressing `Enter` or `Space` triggers its action, displaying a [Dropdown component](dropdown.md) or [Popover component](popover.md).z
 
 ## Classes
 
