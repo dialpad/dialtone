@@ -1,6 +1,6 @@
 ---
 title: Split Button
-description: A split button offers a default action paired with a secondary action to reveal alternate, but related actions.
+description: A Split Button offers a default action paired with a secondary action to reveal alternate or related actions.
 status: beta
 thumb: true
 image: assets/images/components/split-button.png
@@ -19,6 +19,7 @@ storybook: https://dialtone.dialpad.com/vue/?path=/story/components-split-button
     </template>
   </dt-split-button>
 </code-well-header>
+This dual-functionality allows for surfacing variations of the default action. It conserves space in the interface and reduces cognitive load. While versatile, they should be used judiciously to avoild ovewhelming users or cluttering the UI.
 
 ## Variants
 
@@ -633,6 +634,7 @@ showHtmlWarning />
 ## Vue API
 
 <component-vue-api component-name="splitButton" />
+In addition to the [Button component's](button.md#accessibility) accessibility documentation:
 
 ## Classes
 
