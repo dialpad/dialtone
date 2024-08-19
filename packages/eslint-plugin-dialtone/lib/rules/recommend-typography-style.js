@@ -21,7 +21,8 @@ module.exports = {
     messages: {
       recommendTypographyStyle: `Utilities to set Font family, Font weight, Font size, and Line height separately are
       discouraged in favor of composed typography utilities. Checkout the available classes here:
-      https://dialtone.dialpad.com/design/typography/#api`,
+      https://dialtone.dialpad.com/design/typography/#api. There can be cases where using these utilities is intentional and valid,
+      in which case you can ignore this lint warning.`,
     }, // Add messageId and message
   },
 
