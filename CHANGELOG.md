@@ -1,3 +1,15 @@
+## [9.67.1](https://github.com/dialpad/dialtone/compare/dialtone/v9.67.0...dialtone/v9.67.1) (2024-08-19)
+
+
+### Bug Fixes
+
+* **Message Input:** DLT-1996 fix line breaks when initializing input value ([#457](https://github.com/dialpad/dialtone/issues/457)) ([1ec4cf0](https://github.com/dialpad/dialtone/commit/1ec4cf03ccadfc0bf07174dc0e599cab35c0e676))
+
+
+### Documentation
+
+* **Split Button:** DLT-1821 split button usage ([#458](https://github.com/dialpad/dialtone/issues/458)) ([317679a](https://github.com/dialpad/dialtone/commit/317679a52b11faa617ef5332d0201d5ff50ecec4))
+
 # [9.67.0](https://github.com/dialpad/dialtone/compare/dialtone/v9.66.0...dialtone/v9.67.0) (2024-08-16)
 
 
