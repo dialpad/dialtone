@@ -23,7 +23,7 @@ figma_url: https://www.figma.com/design/2adf7JhZOncRyjYiy2joil/DT9-Component-Lib
 
 ## Usage
 
-This dual-functionality allows for surfacing variations of the default action. It conserves space in the interface and reduces cognitive load. While versatile, they should be used judiciously to avoild ovewhelming users or cluttering the UI.
+This dual-functionality allows for surfacing variations of the default action. It conserves space in the interface and reduces cognitive load. While versatile, they should be used judiciously to avoid overwhelming users or cluttering the UI.
 
 In addition to the [Button component's](button.md) documentation:
 
