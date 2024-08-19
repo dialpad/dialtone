@@ -1,3 +1,10 @@
+## [3.147.1](https://github.com/dialpad/dialtone/compare/dialtone-vue3/v3.147.0...dialtone-vue3/v3.147.1) (2024-08-19)
+
+
+### Bug Fixes
+
+* **Message Input:** DLT-1996 fix line breaks when initializing input value ([#457](https://github.com/dialpad/dialtone/issues/457)) ([1ec4cf0](https://github.com/dialpad/dialtone/commit/1ec4cf03ccadfc0bf07174dc0e599cab35c0e676))
+
 # [3.147.0](https://github.com/dialpad/dialtone/compare/dialtone-vue3/v3.146.0...dialtone-vue3/v3.147.0) (2024-08-16)
 
 
