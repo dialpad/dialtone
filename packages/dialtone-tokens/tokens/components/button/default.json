@@ -1,0 +1,33 @@
+{
+  "button": {
+    "font": {
+      "size": {
+        "xs": {
+          "value": "{font.size.100}",
+          "type": "fontSizes",
+          "description": "Extra small Button text size"
+        },
+        "sm": {
+          "value": "{font.size.100}",
+          "type": "fontSizes",
+          "description": "Small Button text size"
+        },
+        "md": {
+          "value": "{font.size.200}",
+          "type": "fontSizes",
+          "description": "Medium Button text size"
+        },
+        "lg": {
+          "value": "{font.size.300}",
+          "type": "fontSizes",
+          "description": "Large Button text size"
+        },
+        "xl": {
+          "value": "{font.size.400}",
+          "type": "fontSizes",
+          "description": "Extra large Button text size"
+        }
+      }
+    }
+  }
+}

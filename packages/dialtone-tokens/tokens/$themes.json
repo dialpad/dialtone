@@ -360,7 +360,8 @@
       "components/checkbox/default": "enabled",
       "components/icon/default": "enabled",
       "components/radio/default": "enabled",
-      "root": "source"
+      "root": "source",
+      "components/button/default": "enabled"
     },
     "$figmaCollectionId": "VariableCollectionId:406:18994",
     "$figmaModeId": "406:0",
@@ -1274,7 +1275,8 @@
       "components/icon/default": "enabled",
       "components/radio/default": "enabled",
       "root": "source",
-      "components/badge/dark": "enabled"
+      "components/badge/dark": "enabled",
+      "components/button/default": "disabled"
     },
     "$figmaCollectionId": "VariableCollectionId:406:18994",
     "$figmaModeId": "406:1",
@@ -2177,7 +2179,8 @@
       "components/checkbox/default": "enabled",
       "components/icon/default": "enabled",
       "components/radio/default": "enabled",
-      "root": "source"
+      "root": "source",
+      "components/button/default": "disabled"
     },
     "$figmaCollectionId": "VariableCollectionId:406:19535",
     "$figmaModeId": "406:2",
@@ -2743,7 +2746,8 @@
       "components/checkbox/default": "enabled",
       "components/icon/default": "enabled",
       "components/radio/default": "enabled",
-      "root": "source"
+      "root": "source",
+      "components/button/default": "disabled"
     },
     "$figmaCollectionId": "VariableCollectionId:406:19535",
     "$figmaModeId": "406:3",
@@ -3651,7 +3655,8 @@
       "components/checkbox/default": "enabled",
       "components/icon/default": "enabled",
       "components/radio/default": "enabled",
-      "semantic/dp/default": "enabled"
+      "semantic/dp/default": "enabled",
+      "components/button/default": "disabled"
     },
     "group": "expressive"
   },
@@ -3672,7 +3677,8 @@
       "components/checkbox/dark": "enabled",
       "components/icon/default": "enabled",
       "components/radio/default": "enabled",
-      "components/radio/dark": "enabled"
+      "components/radio/dark": "enabled",
+      "components/button/default": "disabled"
     },
     "group": "expressive"
   },
@@ -3690,7 +3696,8 @@
       "components/checkbox/default": "enabled",
       "components/icon/default": "enabled",
       "components/radio/default": "enabled",
-      "semantic/expressive/default": "enabled"
+      "semantic/expressive/default": "enabled",
+      "components/button/default": "disabled"
     },
     "group": "expressive-sm"
   },
@@ -3712,7 +3719,8 @@
       "components/icon/default": "enabled",
       "components/radio/default": "enabled",
       "components/radio/dark": "enabled",
-      "semantic/expressive/default": "enabled"
+      "semantic/expressive/default": "enabled",
+      "components/button/default": "disabled"
     },
     "group": "expressive-sm"
   },
@@ -3782,7 +3790,8 @@
     },
     "selectedTokenSets": {
       "root": "source",
-      "base/default": "enabled"
+      "base/default": "enabled",
+      "components/button/default": "disabled"
     },
     "group": "base"
   },
@@ -3853,7 +3862,8 @@
     "selectedTokenSets": {
       "root": "source",
       "base/default": "enabled",
-      "base/dark": "enabled"
+      "base/dark": "enabled",
+      "components/button/default": "disabled"
     },
     "group": "base"
   }
