@@ -2,6 +2,7 @@ import { defineClientConfig } from '@vuepress/client';
 import Layout from './layouts/Layout.vue';
 import NotFound from './layouts/NotFound.vue';
 import customEmojis from '@data/custom-emoji.json';
+import 'overlayscrollbars/overlayscrollbars.css';
 import { OverlayScrollbars, ClickScrollPlugin } from 'overlayscrollbars';
 import { onBeforeMount, provide, ref } from 'vue';
 import { flushPromises } from '@workspaceRoot/common/utils';
@@ -19,7 +20,7 @@ const initOverlayScrollbars = () => {
     const body = document.body;
     document.documentElement.setAttribute('data-overlayscrollbars-initialize', '');
     body.setAttribute('data-overlayscrollbars-initialize', '');
-    body.classList.add('scrollbar');
+    body.classList.add('d-scrollbar');
 
     OverlayScrollbars.plugin(ClickScrollPlugin);
     OverlayScrollbars(body, {
