@@ -224,6 +224,13 @@ export const Default = {
   args: {},
 };
 
+export const InitializeWithLineBreaks = {
+  render: DefaultTemplate,
+  args: {
+    modelValue: 'Always the Padawan,\n never the Jedi.',
+  },
+};
+
 export const WithoutExtensions = {
   render: DefaultTemplate,
   args: {

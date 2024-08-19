@@ -216,6 +216,13 @@ export const Default = {
   render: (argsData) => createRenderConfig(DtRecipeMessageInput, DtRecipeMessageInputDefaultTemplate, argsData),
 };
 
+export const InitializeWithLineBreaks = {
+  render: (argsData) => createRenderConfig(DtRecipeMessageInput, DtRecipeMessageInputDefaultTemplate, argsData),
+  args: {
+    value: 'Always the Padawan,\n never the Jedi.',
+  },
+};
+
 export const WithoutExtensions = {
   render: (argsData) => createRenderConfig(DtRecipeMessageInput, DtRecipeMessageInputDefaultTemplate, argsData),
   args: {
