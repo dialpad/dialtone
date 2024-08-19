@@ -1276,7 +1276,7 @@
       "components/radio/default": "enabled",
       "root": "source",
       "components/badge/dark": "enabled",
-      "components/button/default": "disabled"
+      "components/button/default": "enabled"
     },
     "$figmaCollectionId": "VariableCollectionId:406:18994",
     "$figmaModeId": "406:1",
@@ -2179,8 +2179,7 @@
       "components/checkbox/default": "enabled",
       "components/icon/default": "enabled",
       "components/radio/default": "enabled",
-      "root": "source",
-      "components/button/default": "disabled"
+      "root": "source"
     },
     "$figmaCollectionId": "VariableCollectionId:406:19535",
     "$figmaModeId": "406:2",
@@ -2746,8 +2745,7 @@
       "components/checkbox/default": "enabled",
       "components/icon/default": "enabled",
       "components/radio/default": "enabled",
-      "root": "source",
-      "components/button/default": "disabled"
+      "root": "source"
     },
     "$figmaCollectionId": "VariableCollectionId:406:19535",
     "$figmaModeId": "406:3",
@@ -3655,8 +3653,7 @@
       "components/checkbox/default": "enabled",
       "components/icon/default": "enabled",
       "components/radio/default": "enabled",
-      "semantic/dp/default": "enabled",
-      "components/button/default": "disabled"
+      "semantic/dp/default": "enabled"
     },
     "group": "expressive"
   },
@@ -3677,8 +3674,7 @@
       "components/checkbox/dark": "enabled",
       "components/icon/default": "enabled",
       "components/radio/default": "enabled",
-      "components/radio/dark": "enabled",
-      "components/button/default": "disabled"
+      "components/radio/dark": "enabled"
     },
     "group": "expressive"
   },
@@ -3696,8 +3692,7 @@
       "components/checkbox/default": "enabled",
       "components/icon/default": "enabled",
       "components/radio/default": "enabled",
-      "semantic/expressive/default": "enabled",
-      "components/button/default": "disabled"
+      "semantic/expressive/default": "enabled"
     },
     "group": "expressive-sm"
   },
@@ -3719,8 +3714,7 @@
       "components/icon/default": "enabled",
       "components/radio/default": "enabled",
       "components/radio/dark": "enabled",
-      "semantic/expressive/default": "enabled",
-      "components/button/default": "disabled"
+      "semantic/expressive/default": "enabled"
     },
     "group": "expressive-sm"
   },
@@ -3790,8 +3784,7 @@
     },
     "selectedTokenSets": {
       "root": "source",
-      "base/default": "enabled",
-      "components/button/default": "disabled"
+      "base/default": "enabled"
     },
     "group": "base"
   },
@@ -3862,8 +3855,7 @@
     "selectedTokenSets": {
       "root": "source",
       "base/default": "enabled",
-      "base/dark": "enabled",
-      "components/button/default": "disabled"
+      "base/dark": "enabled"
     },
     "group": "base"
   }
