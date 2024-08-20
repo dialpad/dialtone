@@ -35,6 +35,7 @@ Your popover should be non-modal when:
 - Dialogs that should be positioned relative to the anchor.
 - Dialogs that contain interactive components.
 </template>
+
 <template #dont>
 
 - Content that is displayed on hover. Instead, use a [Tooltip](tooltip.md).
@@ -42,6 +43,7 @@ Your popover should be non-modal when:
 - Dialogs that are very large.
 - Alerts.
 </template>
+
 </dialtone-usage>
 
 ### Best practices

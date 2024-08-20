@@ -1,0 +1,120 @@
+@import (reference) './components/modal';
+// Vue transition classes for code samples.
+.fade-enter-active, .fade-leave-active {
+  transition: opacity 0.18s ease-in-out;
+}
+
+.fade-enter-from, .fade-leave-to {
+  opacity: 0 !important;
+}
+
+.fade-enter-to, .fade-leave-from {
+  opacity: 1 !important;
+}
+
+.slide-down-enter-active {
+  transition: transform 0.28s ease-out;
+}
+
+.slide-down-leave-active {
+  transition: transform 0.28s ease-in;
+}
+
+.slide-down-enter-from {
+  transform: translateY(-100%);
+}
+
+.slide-down-leave-to {
+  transform: translateY(100%);
+}
+
+.pop-enter-active {
+  animation: pop .5s;
+}
+
+.pop-leave-active {
+  animation: pop .5s reverse;
+}
+
+@keyframes pop {
+  50%  { transform: scale(1.2); }
+}
+
+.shake-enter-active {
+  transform: translate3d(0, 0, 0);
+  animation: shake 0.82s cubic-bezier(.36,.07,.19,.97) both;
+}
+
+@keyframes shake {
+  10%, 90% {
+    transform: translate3d(var(--dt-size-300-negative), 0, 0);
+  }
+
+  20%, 80% {
+    transform: translate3d(var(--dt-size-400), 0, 0);
+  }
+
+  30%, 50%, 70% {
+    transform: translate3d(var(--dt-size-500-negative), 0, 0);
+  }
+
+  40%, 60% {
+    transform: translate3d(var(--dt-size-500), 0, 0);
+  }
+}
+
+@keyframes fade-in {
+  0% {
+    opacity: 0
+  }
+
+  50% {
+    opacity: 0.5
+  }
+
+  100% {
+    opacity: 1
+  }
+}
+
+@keyframes fade-out {
+  0% {
+    opacity: 1
+  }
+
+  50% {
+    opacity: 0.5
+  }
+
+  100% {
+    opacity: 0
+  }
+}
+
+.fade-in {
+  animation: fade-in 0.18s ease-in-out;
+}
+
+.fade-out {
+  animation: fade-out 0.18s ease-in-out;
+}
+
+.d-zoom-enter-from, .d-zoom-leave-to {
+  .d-modal--animate();
+}
+
+.d-zoom__dialog-enter-from, .d-zoom__dialog-leave-to {
+  .d-modal__dialog--animate();
+}
+
+.d-zoom-enter-active, .d-zoom__dialog-enter-active {
+  .d-modal--animate-in();
+}
+
+.d-zoom-leave-active {
+  .d-modal--animate-out();
+}
+
+.d-zoom__dialog-leave-active {
+  .d-modal__dialog--animate-out();
+}

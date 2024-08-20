@@ -22,7 +22,7 @@ Allows to add overlay scrollbars that will look the same for every browser. The 
 
 <code-example-tabs
 htmlCode='
-<div class="d-hmx164 d-w30p d-bar8 d-ba d-bc-default scrollbar" data-overlayscrollbars="host"
+<div class="d-hmx164 d-w30p d-bar8 d-ba d-bc-default d-scrollbar" data-overlayscrollbars="host"
   data-overlayscrollbars-initialize="true">
   <div class="os-size-observer">
     <div class="os-size-observer-listener"></div>
