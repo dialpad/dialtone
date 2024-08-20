@@ -92,7 +92,8 @@
       "import": "./dist/vue3/*.js",
       "require": "./dist/vue3/*.cjs"
     },
-    "./themes": {
+    "./themes/*": {
+      "types": "./dist/themes/types/*.d.ts",
       "import": "./dist/themes/*.js",
       "require": "./dist/themes/*.cjs"
     },
@@ -130,7 +131,8 @@
     "overlayscrollbars": "2.10.0",
     "requireindex": "1.2.0",
     "stylelint": "15.11.0",
-    "tippy.js": "6.3.7"
+    "tippy.js": "6.3.7",
+    "vite-plugin-dts": "4.0.3"
   },
   "devDependencies": {
     "@commitlint/cli": "^18.4.3",
