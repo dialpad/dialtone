@@ -12,10 +12,5 @@
     "paths": {
       "@/*": ["./*"]
     }
-  },
-  "references": [
-    {
-      "path": "./tsconfig.config.json"
-    }
-  ]
+  }
 }

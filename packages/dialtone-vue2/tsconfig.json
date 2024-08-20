@@ -2,7 +2,6 @@
   "extends": "@vue/tsconfig/tsconfig.dom.json",
   "include": [
     "**/*.ts",
-    "**/*.d.ts",
     "components/**/*",
     "components/**/*.vue",
     "recipes/**/*",
@@ -15,7 +14,8 @@
   "exclude": [
     "**/*.story.vue",
     "**/*.stories.js",
-    "**/*.test.js"
+    "**/*.test.js",
+    "**/*.d.ts"
   ],
   "compilerOptions": {
     "baseUrl": ".",
@@ -28,10 +28,5 @@
     "paths": {
       "@/*": ["./*"]
     }
-  },
-  "references": [
-    {
-      "path": "./tsconfig.config.json"
-    }
-  ]
+  }
 }
