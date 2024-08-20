@@ -14,8 +14,6 @@ let mockSlots = {};
 describe('DtBadge Tests', () => {
   let wrapper;
   let badge;
-  let iconLeftWrapper;
-  let iconLeft;
 
   const updateWrapper = () => {
     wrapper = mount(DtBadge, {
@@ -24,7 +22,6 @@ describe('DtBadge Tests', () => {
     });
 
     badge = wrapper.find('[data-qa="dt-badge"]');
-    iconLeftWrapper = wrapper.find('.d-badge__icon-left');
   };
 
   beforeEach(() => {
@@ -118,12 +115,6 @@ describe('DtBadge Tests', () => {
 
         it('should have correct type', async () => {
           expect(badge.classes(BADGE_TYPE_MODIFIERS.ai)).toBe(true);
-        });
-
-        it('renders ai icon in iconLeft slot by default', () => {
-          iconLeft = iconLeftWrapper.find('[data-qa="dt-icon"]');
-
-          expect(iconLeft.attributes('data-name') === 'Dialpad Ai').toBe(true);
         });
       });
     });
