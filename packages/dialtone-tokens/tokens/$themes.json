@@ -355,7 +355,12 @@
       "typography.button.sm": "S:53a2af33a04175e6aec85458ea41ae62dff904f9,",
       "typography.button.md": "S:d10235a1b57019ddc60259fb4439114510afe4bb,",
       "typography.button.lg": "S:b173098ab5c803206a353e1c28fd76bd2fb816f2,",
-      "typography.button.xl": "S:fe8c46d1218f4ae0b48ded87bd4c4efb66867640,"
+      "typography.button.xl": "S:fe8c46d1218f4ae0b48ded87bd4c4efb66867640,",
+      "typography.inputs.xs": "S:1457a4c4bac05d58dd308dfc0fadf818bb24d56c,",
+      "typography.inputs.sm": "S:1d24092f05dcd62ba0c90e6790e78e8b6207032a,",
+      "typography.inputs.md": "S:36c3ab10c677829159e0fb2907b28939f4d5be3f,",
+      "typography.inputs.lg": "S:3b97cecb39dbc717065cde0b1e77636752743590,",
+      "typography.inputs.xl": "S:e1be518c006a03f9e2c04dc33bc2bccfedc2106f,"
     },
     "selectedTokenSets": {
       "base/default": "source",
