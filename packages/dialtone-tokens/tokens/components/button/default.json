@@ -94,7 +94,7 @@
           "lineHeight": "{button.lineHeight.xs}"
         },
         "type": "typography",
-        "description": "Text style for XS button"
+        "description": "Text style for extra small button"
       },
       "sm": {
         "value": {
@@ -104,7 +104,7 @@
           "lineHeight": "{button.lineHeight.sm}"
         },
         "type": "typography",
-        "description": "Text style for SM button"
+        "description": "Text style for small button"
       },
       "md": {
         "value": {
@@ -114,7 +114,7 @@
           "lineHeight": "{button.lineHeight.md}"
         },
         "type": "typography",
-        "description": "Text style for MD button"
+        "description": "Text style for medium button"
       },
       "lg": {
         "value": {
@@ -124,7 +124,7 @@
           "lineHeight": "{button.lineHeight.lg}"
         },
         "type": "typography",
-        "description": "Text style for LG button"
+        "description": "Text style for large button"
       },
       "xl": {
         "value": {
@@ -134,7 +134,7 @@
           "lineHeight": "{button.lineHeight.xl}"
         },
         "type": "typography",
-        "description": "Text style for XL button"
+        "description": "Text style for extra large button"
       }
     }
   }

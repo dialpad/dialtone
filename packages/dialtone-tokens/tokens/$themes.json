@@ -350,7 +350,12 @@
       "badge.color.border.bulletin-subtle": "S:c390f0a63586ca48aac6566934330ee1847e2ca3,",
       "color.brand.gold": "S:a93609c07d43bca028d6298b018416a767db8e0f,",
       "theme.mention.color.foreground-strong": "S:f140617ad26ac60a0bdd5a7e2a6b45b3ef4458f3,",
-      "theme.mention.color.background-strong": "S:9167dd3c2301abc86096e84b28e94ec351332053,"
+      "theme.mention.color.background-strong": "S:9167dd3c2301abc86096e84b28e94ec351332053,",
+      "typography.button.xs": "S:5847d6b641a16663c9d550808418e2af0f5b7d61,",
+      "typography.button.sm": "S:53a2af33a04175e6aec85458ea41ae62dff904f9,",
+      "typography.button.md": "S:d10235a1b57019ddc60259fb4439114510afe4bb,",
+      "typography.button.lg": "S:b173098ab5c803206a353e1c28fd76bd2fb816f2,",
+      "typography.button.xl": "S:fe8c46d1218f4ae0b48ded87bd4c4efb66867640,"
     },
     "selectedTokenSets": {
       "base/default": "source",
