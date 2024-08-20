@@ -1145,6 +1145,58 @@
         "type": "typography",
         "description": "Smaller text size for monospace code, suitable for inline references or less prominent code examples."
       }
+    },
+    "inputs": {
+      "xs": {
+        "value": {
+          "fontFamily": "{font.family.body}",
+          "fontWeight": "{inputs.font.weight.xs}",
+          "fontSize": "{inputs.font.size.xs}",
+          "lineHeight": "{inputs.lineHeight.xs}"
+        },
+        "type": "typography",
+        "description": "Text style for extra small inputs (e.g. input and textarea)"
+      },
+      "sm": {
+        "value": {
+          "fontFamily": "{font.family.body}",
+          "fontWeight": "{inputs.font.weight.sm}",
+          "fontSize": "{inputs.font.size.sm}",
+          "lineHeight": "{inputs.lineHeight.sm}"
+        },
+        "type": "typography",
+        "description": "Text style for small inputs (e.g. input and textarea)"
+      },
+      "md": {
+        "value": {
+          "fontFamily": "{font.family.body}",
+          "fontWeight": "{inputs.font.weight.md}",
+          "fontSize": "{inputs.font.size.md}",
+          "lineHeight": "{inputs.lineHeight.md}"
+        },
+        "type": "typography",
+        "description": "Text style for medium inputs (e.g. input and textarea)"
+      },
+      "lg": {
+        "value": {
+          "fontFamily": "{font.family.body}",
+          "fontWeight": "{inputs.font.weight.lg}",
+          "fontSize": "{inputs.font.size.lg}",
+          "lineHeight": "{inputs.lineHeight.lg}"
+        },
+        "type": "typography",
+        "description": "Text style for large inputs (e.g. input and textarea)"
+      },
+      "xl": {
+        "value": {
+          "fontFamily": "{font.family.body}",
+          "fontWeight": "{inputs.font.weight.xl}",
+          "fontSize": "{inputs.font.size.xl}",
+          "lineHeight": "{inputs.lineHeight.xl}"
+        },
+        "type": "typography",
+        "description": "Text style for extra large inputs (e.g. input and textarea)"
+      }
     }
   },
   "size": {
