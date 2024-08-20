@@ -27,6 +27,114 @@
           "type": "fontSizes",
           "description": "Extra large Button text size"
         }
+      },
+      "weight": {
+        "xs": {
+          "value": "{font.weight.medium}",
+          "type": "fontWeights",
+          "description": "Font weight for XS button"
+        },
+        "sm": {
+          "value": "{font.weight.medium}",
+          "type": "fontWeights",
+          "description": "Font weight for SM button"
+        },
+        "md": {
+          "value": "{font.weight.medium}",
+          "type": "fontWeights",
+          "description": "Font weight for MD button"
+        },
+        "lg": {
+          "value": "{font.weight.medium}",
+          "type": "fontWeights",
+          "description": "Font weight for LG button"
+        },
+        "xl": {
+          "value": "{font.weight.normal}",
+          "type": "fontWeights",
+          "description": "Font weight for XL button"
+        }
+      }
+    },
+    "lineHeight": {
+      "xs": {
+        "value": "{font.lineHeight.200}",
+        "type": "lineHeights",
+        "description": "Line-height for XS button"
+      },
+      "sm": {
+        "value": "{font.lineHeight.200}",
+        "type": "lineHeights",
+        "description": "Line-height for SM button"
+      },
+      "md": {
+        "value": "{font.lineHeight.200}",
+        "type": "lineHeights",
+        "description": "Line-height for MD button"
+      },
+      "lg": {
+        "value": "{font.lineHeight.200}",
+        "type": "lineHeights",
+        "description": "Line-height for LG button"
+      },
+      "xl": {
+        "value": "{font.lineHeight.200}",
+        "type": "lineHeights",
+        "description": "Line-height for XL button"
+      }
+    }
+  },
+  "typography": {
+    "button": {
+      "xs": {
+        "value": {
+          "fontFamily": "{font.family.body}",
+          "fontWeight": "{button.font.weight.xs}",
+          "fontSize": "{button.font.size.xs}",
+          "lineHeight": "{button.lineHeight.xs}"
+        },
+        "type": "typography",
+        "description": "Text style for XS button"
+      },
+      "sm": {
+        "value": {
+          "fontFamily": "{font.family.body}",
+          "fontWeight": "{button.font.weight.sm}",
+          "fontSize": "{button.font.size.sm}",
+          "lineHeight": "{button.lineHeight.sm}"
+        },
+        "type": "typography",
+        "description": "Text style for SM button"
+      },
+      "md": {
+        "value": {
+          "fontFamily": "{font.family.body}",
+          "fontWeight": "{button.font.weight.md}",
+          "fontSize": "{button.font.size.md}",
+          "lineHeight": "{button.lineHeight.md}"
+        },
+        "type": "typography",
+        "description": "Text style for MD button"
+      },
+      "lg": {
+        "value": {
+          "fontFamily": "{font.family.body}",
+          "fontWeight": "{button.font.weight.lg}",
+          "fontSize": "{button.font.size.lg}",
+          "lineHeight": "{button.lineHeight.lg}"
+        },
+        "type": "typography",
+        "description": "Text style for LG button"
+      },
+      "xl": {
+        "value": {
+          "fontFamily": "{font.family.body}",
+          "fontWeight": "{button.font.weight.xl}",
+          "fontSize": "{button.font.size.xl}",
+          "lineHeight": "{button.lineHeight.xl}"
+        },
+        "type": "typography",
+        "description": "Text style for XL button"
       }
     }
   }
