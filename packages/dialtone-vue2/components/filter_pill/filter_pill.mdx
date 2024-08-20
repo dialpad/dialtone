@@ -1,0 +1,48 @@
+import { Canvas, Subtitle, Controls, Meta } from '@storybook/blocks';
+import * as DtFilterPillStories from './filter_pill.stories.js';
+
+<Meta of={DtFilterPillStories}/>
+
+# DtFilterPill
+
+<Subtitle>
+  Some description of the component functionality.
+</Subtitle>
+
+## Base Style
+
+Some description of how to use the base component, potential gotchas and limitations.
+
+<Canvas of={DtFilterPillStories.Default} />
+
+## Variants
+
+<Canvas of={DtFilterPillStories.Variants} />
+
+## Slots, Props & Events
+
+<Controls />
+
+## Usage
+
+### Import
+
+```jsx
+import { DtFilterPill } from '@dialpad/dialtone-vue';
+```
+
+### With Some Variant
+
+```jsx
+<dt-filter-pill
+  some="variant"
+/>
+```
+
+### With Some Other Variant
+
+```jsx
+<dt-filter-pill
+  some-other="variant"
+/>
+```
