@@ -35,8 +35,16 @@
           :seed="$attrs.seed"
           :size="size"
           full-name="Avatar Icon"
-          icon-name="user"
-        />
+        >
+          <template #icon="{ iconSize, iconClass, dataQa, ariaLabel }">
+            <dt-icon-user
+              :size="iconSize"
+              :class="iconClass"
+              :data-qa="dataQa"
+              :aria-label="ariaLabel"
+            />
+          </template>
+        </dt-avatar>
       </div>
     </div>
     <div>
@@ -64,7 +72,11 @@
           :image-src="$attrs.imageSrc"
           :image-alt="$attrs.imageAlt"
           overlay-icon="hear"
-        />
+        >
+          <template #overlayIcon>
+            <dt-icon-hear />
+          </template>
+        </dt-avatar>
         <dt-avatar
           :seed="$attrs.seed"
           size="xl"
@@ -85,10 +97,18 @@
         />
         <dt-avatar
           :seed="$attrs.seed"
-          icon-name="user"
           icon-aria-label="user icon"
           clickable
-        />
+        >
+          <template #icon="{ iconSize, iconClass, dataQa, ariaLabel }">
+            <dt-icon-user
+              :size="iconSize"
+              :class="iconClass"
+              :data-qa="dataQa"
+              :aria-label="ariaLabel"
+            />
+          </template>
+        </dt-avatar>
         <dt-avatar
           :seed="$attrs.seed"
           full-name="Person avatar"
@@ -108,9 +128,17 @@
         />
         <dt-avatar
           :seed="$attrs.seed"
-          icon-name="user"
           :group="10"
-        />
+        >
+          <template #icon="{ iconSize, iconClass, dataQa, ariaLabel }">
+            <dt-icon-user
+              :size="iconSize"
+              :class="iconClass"
+              :data-qa="dataQa"
+              :aria-label="ariaLabel"
+            />
+          </template>
+        </dt-avatar>
         <dt-avatar
           :seed="$attrs.seed"
           full-name="Person avatar"
@@ -124,12 +152,13 @@
 </template>
 
 <script>
+import { DtIconUser, DtIconHear } from '@dialpad/dialtone-icons/vue3';
 import DtAvatar from './avatar.vue';
 import { AVATAR_PRESENCE_STATES, AVATAR_SIZE_MODIFIERS } from './avatar_constants.js';
 
 export default {
   name: 'DtAvatarVariants',
-  components: { DtAvatar },
+  components: { DtAvatar, DtIconUser, DtIconHear },
   data () {
     return {
       avatarSizes: Object.keys(AVATAR_SIZE_MODIFIERS),

@@ -22,13 +22,14 @@
         :src="imageSrc"
         :alt="imageAlt"
       >
-      <dt-icon
-        v-else-if="iconName"
-        :name="iconName"
+      <!-- @slot Slot for avatar icon. It will display if no imageSrc is provided -->
+      <slot
+        v-else-if="hasSlotContent($slots.icon)"
+        name="icon"
         :aria-label="iconAriaLabel"
-        :size="iconSize || AVATAR_ICON_SIZES[size]"
-        :class="[iconClass, AVATAR_KIND_MODIFIERS.icon]"
-        data-qa="dt-avatar-icon"
+        :icon-size="iconSize || AVATAR_ICON_SIZES[size]"
+        :icon-class="[iconClass, AVATAR_KIND_MODIFIERS.icon]"
+        :data-qa="iconDataQa"
       />
       <span
         v-else
@@ -38,13 +39,13 @@
       </span>
     </div>
     <div
-      v-if="overlayIcon || overlayText"
+      v-if="hasOverlayIcon || overlayText"
       :class="overlayClasses"
     >
-      <dt-icon
-        v-if="overlayIcon"
-        class="d-avatar__overlay-icon"
-        :name="overlayIcon"
+      <!-- @slot Slot for overlay icon. -->
+      <slot
+        v-if="hasOverlayIcon"
+        name="overlayIcon"
       />
       <p
         v-else-if="overlayText"
@@ -72,9 +73,8 @@
 </template>
 
 <script>
-import { getUniqueString, getRandomElement } from '@/common/utils';
+import { getUniqueString, getRandomElement, hasSlotContent } from '@/common/utils';
 import { DtPresence } from '../presence';
-import { DtIcon } from '@/components/icon';
 import {
   AVATAR_KIND_MODIFIERS,
   AVATAR_SIZE_MODIFIERS,
@@ -84,11 +84,8 @@ import {
   AVATAR_GROUP_VALIDATOR,
   AVATAR_ICON_SIZES,
 } from './avatar_constants';
-import { getIconNames } from '@/common/storybook_utils.js';
 import { ICON_SIZE_MODIFIERS } from '@/components/icon/icon_constants.js';
 import { extractInitialsFromName } from './utils';
-
-const ICONS_LIST = getIconNames();
 
 /**
  * An avatar is a visual representation of a user or object.
@@ -96,7 +93,7 @@ const ICONS_LIST = getIconNames();
  */
 export default {
   name: 'DtAvatar',
-  components: { DtPresence, DtIcon },
+  components: { DtPresence },
 
   inheritAttrs: false,
 
@@ -195,14 +192,6 @@ export default {
     },
 
     /**
-     * The icon that overlays the avatar
-     */
-    overlayIcon: {
-      type: String,
-      default: '',
-    },
-
-    /**
      * The text that overlays the avatar
      */
     overlayText: {
@@ -234,15 +223,6 @@ export default {
     imageAlt: {
       type: String,
       default: undefined,
-    },
-
-    /**
-     * Icon name to be displayed on the avatar
-     */
-    iconName: {
-      type: String,
-      default: undefined,
-      validator: (name) => ICONS_LIST.includes(name),
     },
 
     /**
@@ -301,12 +281,21 @@ export default {
       imageLoadedSuccessfully: null,
       formattedInitials: '',
       initializing: false,
+      hasSlotContent,
     };
   },
 
   computed: {
-    isNotIconType () {
-      return !this.iconName;
+    isIconType () {
+      return hasSlotContent(this.$slots.icon);
+    },
+
+    hasOverlayIcon () {
+      return hasSlotContent(this.$slots.overlayIcon);
+    },
+
+    iconDataQa () {
+      return 'dt-avatar-icon';
     },
 
     avatarClasses () {
@@ -316,7 +305,7 @@ export default {
         this.avatarClass,
         {
           'd-avatar--group': this.showGroup,
-          [`d-avatar--color-${this.getColor()}`]: this.isNotIconType,
+          [`d-avatar--color-${this.getColor()}`]: !this.isIconType,
           'd-avatar--clickable': this.clickable,
         },
       ];
@@ -326,6 +315,7 @@ export default {
       return [
         'd-avatar__overlay',
         this.overlayClass,
+        { 'd-avatar__overlay-icon': this.hasOverlayIcon },
       ];
     },
 
