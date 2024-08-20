@@ -15,11 +15,11 @@
       class="d-badge__decorative"
     />
     <span
-      v-if="iconLeft || type === 'ai'"
+      v-if="iconLeft"
       class="d-badge__icon-left"
     >
       <dt-icon
-        :name="iconLeft || 'dialpad-ai'"
+        :name="iconLeft"
         size="200"
       />
     </span>
