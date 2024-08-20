@@ -92,19 +92,19 @@
       class="d-d-flex d-gg8 d-ai-center"
     >
       <dt-badge
-        text="Notes"
+        text="Ai Notes"
         type="ai"
       />
       <dt-badge
-        text="Suggestion"
+        text="Ai Suggestion"
         type="ai"
       />
       <dt-badge
-        text="on"
+        text="Ai on"
         type="ai"
       />
       <dt-badge
-        text="Transcript"
+        text="Ai Transcript"
         type="ai"
       />
     </div>
