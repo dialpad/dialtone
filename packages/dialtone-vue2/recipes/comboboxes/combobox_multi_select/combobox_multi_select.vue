@@ -46,6 +46,7 @@
           ref="input"
           v-model="value"
           class="combobox__input"
+          :class="{ 'combobox__input--hide_text': hideInputText }"
           :aria-label="label"
           :label="labelVisible ? label : ''"
           :description="description"
@@ -375,6 +376,7 @@ export default {
       initialInputHeight: null,
       CHIP_SIZES,
       inputFocused: false,
+      hideInputText: false,
     };
   },
 
@@ -670,6 +672,7 @@ export default {
       if (this.collapseOnFocusOut) {
         await this.$nextTick();
         this.setInputPadding();
+        this.hideInputText = false;
       }
     },
 
@@ -678,6 +681,10 @@ export default {
       if (this.collapseOnFocusOut) {
         const input = this.getInput();
         if (!input) return;
+        // Hide the input text when is not on first line
+        if (input.style.paddingBottom !== '') {
+          this.hideInputText = true;
+        }
         this.revertInputPadding(input);
       }
     },
@@ -722,6 +729,10 @@ export default {
 
 .combobox__input {
   flex-grow: 1;
+}
+
+.combobox__input--hide_text {
+  color: transparent;
 }
 
 .combobox__list--loading {
