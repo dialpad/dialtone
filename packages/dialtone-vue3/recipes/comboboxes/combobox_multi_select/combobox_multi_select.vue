@@ -46,6 +46,7 @@
           ref="input"
           v-model="value"
           class="combobox__input"
+          :input-class="{ 'd-fc-transparent': hideInputText }"
           :aria-label="label"
           :label="labelVisible ? label : ''"
           :description="description"
@@ -376,6 +377,7 @@ export default {
       CHIP_SIZES,
       hasSlotContent,
       inputFocused: false,
+      hideInputText: false,
     };
   },
 
@@ -663,6 +665,7 @@ export default {
       if (this.collapseOnFocusOut) {
         await this.$nextTick();
         this.setInputPadding();
+        this.hideInputText = false;
       }
     },
 
@@ -671,6 +674,11 @@ export default {
       if (this.collapseOnFocusOut) {
         const input = this.getInput();
         if (!input) return;
+        // Hide the input text when is not on first line
+        if (!input.style.paddingTop) {
+          return;
+        }
+        this.hideInputText = true;
         this.revertInputPadding(input);
       }
     },
