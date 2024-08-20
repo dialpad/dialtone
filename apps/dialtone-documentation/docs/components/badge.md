@@ -147,7 +147,7 @@ showHtmlWarning />
     <tr>
       <th class="d-ta-left">Ai</th>
       <td>
-        <dt-badge type="ai" text="Label" kind="label" icon-left="dialpad-ai"/>
+        <dt-badge type="ai" text="Label" kind="label" />
       </td>
       <td><abbr class="d-fc-black-400 d-td-none d-fs-100" title="Not applicable">N/A</abbr></td>
       <td>To call out Dialpad Ai features.</td>
@@ -183,7 +183,7 @@ vueCode='
 <dt-badge type="warning" kind="label" text="Label" />
 <dt-badge type="critical" kind="label" text="Label" />
 <dt-badge type="bulletin" kind="label" text="Label" />
-<dt-badge type="ai" text="Label" kind="label" icon-left="dialpad-ai" />
+<dt-badge type="ai" text="Label" kind="label" />
 <dt-badge type="default" text="1" kind="count" />
 <dt-badge type="info" text="2" kind="count" />
 <dt-badge type="success" text="3" kind="count" />
@@ -451,34 +451,10 @@ showHtmlWarning />
       <span class="d-badge d-badge--bulletin"><span class="d-badge__label">Presenter</span></span>
     </dt-stack>
     <dt-stack direction="row" gap="400">
-      <span class="d-badge d-badge--ai">
-        <span class="d-badge__icon-left">
-          <dt-icon name="dialpad-ai" size="200" />
-        </span>
-        <span class="d-vi-visible-sr">Ai</span>
-        <span class="d-badge__label">Notes</span>
-      </span>
-      <span class="d-badge d-badge--ai">
-        <span class="d-badge__icon-left">
-          <dt-icon name="dialpad-ai" size="200" />
-        </span>
-        <span class="d-vi-visible-sr">Ai</span>
-        <span class="d-badge__label">Suggestion</span>
-      </span>
-      <span class="d-badge d-badge--ai">
-        <span class="d-badge__icon-left">
-          <dt-icon name="dialpad-ai" size="200" />
-        </span>
-        <span class="d-vi-visible-sr">Ai</span>
-        <span class="d-badge__label">enabled</span>
-      </span>
-      <span class="d-badge d-badge--ai">
-        <span class="d-badge__icon-left">
-          <dt-icon name="dialpad-ai" size="200" />
-        </span>
-        <span class="d-vi-visible-sr">Ai</span>
-        <span class="d-badge__label">Transcript</span>
-      </span>
+      <dt-badge type="ai" text="Ai Notes" />
+      <dt-badge type="ai" text="Ai Suggestion" />
+      <dt-badge type="ai" text="Ai enabled" />
+      <dt-badge type="ai" text="Ai Transcript" />
     </dt-stack>
   </dt-stack>
 </code-well-header>
