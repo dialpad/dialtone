@@ -9,9 +9,10 @@ figma_url: https://www.figma.com/file/2adf7JhZOncRyjYiy2joil/DT-Core%3A-Componen
 ---
 
 <code-well-header>
-  <div class="d-w100p">
+  <dt-stack gap="500" class="d-w100p">
     <dt-input label="Label" placeholder="Placeholder" />
-  </div>
+    <dt-input label="Label" type="textarea" placeholder="Placeholder" />
+  </dt-stack>
 </code-well-header>
 
 <!-- <component-combinator component-name="DtInput" /> -->
@@ -42,7 +43,123 @@ This component combines both the `input` and `textarea` elements as options with
 - Do not use placeholder text (i.e. `placeholder` attribute) in place of an accessible `label`.
 - Consider the type of content a user may enter to aid mobile device entry; mobile devices typically surface a keyboard UI attuned to the type. For example, type="tel" will surface a [phone keyboard](http://html5doctor.com/html5-forms-input-types/#input-tel).
 
-## Variants and examples
+## Sizes
+
+We offer different sizes for instances in which the interface requires a smaller or larger input. In general, though, use the base (medium) size input as much as possible, especially in forms.
+
+<code-well-header>
+  <div class="d-d-grid d-gg16 d-g-cols2 d-w100p">
+    <dt-input label="Extra Small" type="text" placeholder="Placeholder" size="xs" />
+    <dt-input label="Extra Small" type="textarea" placeholder="Placeholder" size="xs" />
+    <dt-input label="Small" type="text" placeholder="Placeholder" size="sm" />
+    <dt-input label="Small" type="textarea" placeholder="Placeholder" size="sm" />
+    <dt-input label="Medium" type="text" placeholder="Placeholder" size="md" />
+    <dt-input label="Medium" type="textarea" placeholder="Placeholder" size="md" />
+    <dt-input label="Large" type="text" placeholder="Placeholder" size="lg" />
+    <dt-input label="Large" type="textarea" placeholder="Placeholder" size="lg" />
+    <dt-input label="Extra large" type="text" placeholder="Placeholder" size="xl" />
+    <dt-input label="Extra large" type="textarea" placeholder="Placeholder" size="xl" />
+  </div>
+</code-well-header>
+
+<code-example-tabs
+htmlCode='
+<div>
+  <label>
+    <div class="d-label d-label--xs">Extra small</div>
+    <div class="d-input__wrapper">
+      <input type="text" class="d-input d-input--xs" placeholder="Placeholder">
+    </div>
+  </label>
+</div>
+<div>
+  <label>
+    <div class="d-label d-label--sm">Small</div>
+    <div class="d-input__wrapper">
+      <input type="text" class="d-input d-input--sm" placeholder="Placeholder">
+    </div>
+  </label>
+</div>
+<div>
+  <label>
+    <div class="d-label d-label--md">Medium</div>
+    <div class="d-input__wrapper">
+      <input type="text" class="d-input" placeholder="Placeholder">
+    </div>
+  </label>
+</div>
+<div>
+  <label>
+    <div class="d-label d-label--lg">Large</div>
+    <div class="d-input__wrapper">
+      <input type="text" class="d-input d-input--lg" placeholder="Placeholder">
+    </div>
+  </label>
+</div>
+<div>
+  <label>
+    <div class="d-label d-label--xl">Extra large</div>
+    <div class="d-input__wrapper">
+      <input type="text" class="d-input d-input--xl" placeholder="Placeholder">
+    </div>
+  </label>
+</div>
+<div>
+  <label>
+    <div class="d-label d-label--xs">Extra small</div>
+    <div class="d-input__wrapper">
+      <textarea class="d-textarea d-textarea--xs" placeholder="Placeholder" />
+    </div>
+  </label>
+</div>
+<div>
+  <label>
+    <div class="d-label d-label--sm">Small</div>
+    <div class="d-input__wrapper">
+      <textarea class="d-textarea d-textarea--sm" placeholder="Placeholder" />
+    </div>
+  </label>
+</div>
+<div>
+  <label>
+    <div class="d-label d-label--md">Medium</div>
+    <div class="d-input__wrapper">
+      <textarea class="d-textarea" placeholder="Placeholder" />
+    </div>
+  </label>
+</div>
+<div>
+  <label>
+    <div class="d-label d-label--lg">Large</div>
+    <div class="d-input__wrapper">
+      <textarea class="d-textarea d-textarea--lg" placeholder="Placeholder" />
+    </div>
+  </label>
+</div>
+<div>
+  <label>
+    <div class="d-label d-label--xl">Extra large</div>
+    <div class="d-input__wrapper">
+      <textarea class="d-textarea d-textarea--xl" placeholder="Placeholder" />
+    </div>
+  </label>
+</div>
+'
+vueCode='
+<dt-input label="Extra Small" type="text" placeholder="Placeholder" size="xs" />
+<dt-input label="Extra Small" type="textarea" placeholder="Placeholder" size="xs" />
+<dt-input label="Small" type="text" placeholder="Placeholder" size="sm" />
+<dt-input label="Small" type="textarea" placeholder="Placeholder" size="sm" />
+<dt-input label="Medium" type="text" placeholder="Placeholder" size="md" />
+<dt-input label="Medium" type="textarea" placeholder="Placeholder" size="md" />
+<dt-input label="Large" type="text" placeholder="Placeholder" size="lg" />
+<dt-input label="Large" type="textarea" placeholder="Placeholder" size="lg" />
+<dt-input label="Extra large" type="text" placeholder="Placeholder" size="xl" />
+<dt-input label="Extra large" type="textarea" placeholder="Placeholder" size="xl" />
+'
+showHtmlWarning />
+
+## Examples
 
 ### Base Styles
 
@@ -347,19 +464,19 @@ const validate = () => {
 };
 ```
 
-### Search input
+### Search
 
 <dt-notice
   kind="warning"
   :hide-close="true"
-  class="d-wmx100p d-mb24"
+  class="d-wmx100p d-my16"
 >
   <template #default>
-  Note: The usage of <code>type="search"</code> is not recommended for this component as it may cause unintended styling issues in Chrome. Instead, refer to the provided example code if you need to implement a search input.
+    The use of <code>type="search"</code> is not recommended as it may cause a style collision with a browser's native Shadow DOM, e.g. its clearing functionality. Instead, refer to the below example code if you need to implement a search input with clearing functionality.
   </template>
 </dt-notice>
 
-In this example we show a search input with a clear button on the right side. The clear button is a button with a close icon that clears the input field when clicked. The clear button is only visible when the input field is not empty.
+Use `type="text"` with a clear button in the `icon` slot. When the input is not empty, the clear button will render and will clears the input field when triggered.
 
 <code-well-header>
   <div class="d-w100p">
@@ -427,134 +544,6 @@ vueCode='
     </dt-button>
   </template>
 </dt-input>
-'
-showHtmlWarning />
-
-## Sizes
-
-We offer different sizes for instances in which the interface requires a smaller or larger input. In general, though, use the base (medium) size input as much as possible, especially in forms.
-
-<code-well-header>
-  <div class="d-stack16 d-w100p">
-    <dt-input label="Extra Small" type="text" placeholder="Placeholder" size="xs" />
-    <dt-input label="Small" type="text" placeholder="Placeholder" size="sm" />
-    <dt-input label="Medium" type="text" placeholder="Placeholder" size="md" />
-    <dt-input label="Large" type="text" placeholder="Placeholder" size="lg" />
-    <dt-input label="Extra large" type="text" placeholder="Placeholder" size="xl" />
-  </div>
-</code-well-header>
-
-<code-example-tabs
-htmlCode='
-<div>
-  <label>
-    <div class="d-label d-label--xs">Extra small</div>
-    <div class="d-input__wrapper">
-      <input type="text" class="d-input d-input--xs" placeholder="Placeholder">
-    </div>
-  </label>
-</div>
-<div>
-  <label>
-    <div class="d-label d-label--sm">Small</div>
-    <div class="d-input__wrapper">
-      <input type="text" class="d-input d-input--sm" placeholder="Placeholder">
-    </div>
-  </label>
-</div>
-<div>
-  <label>
-    <div class="d-label d-label--md">Medium</div>
-    <div class="d-input__wrapper">
-      <input type="text" class="d-input" placeholder="Placeholder">
-    </div>
-  </label>
-</div>
-<div>
-  <label>
-    <div class="d-label d-label--lg">Large</div>
-    <div class="d-input__wrapper">
-      <input type="text" class="d-input d-input--lg" placeholder="Placeholder">
-    </div>
-  </label>
-</div>
-<div>
-  <label>
-    <div class="d-label d-label--xl">Extra large</div>
-    <div class="d-input__wrapper">
-      <input type="text" class="d-input d-input--xl" placeholder="Placeholder">
-    </div>
-  </label>
-</div>
-'
-vueCode='
-<dt-input label="Extra Small" type="text" placeholder="Placeholder" size="xs" />
-<dt-input label="Small" type="text" placeholder="Placeholder" size="sm" />
-<dt-input label="Medium" type="text" placeholder="Placeholder" size="md" />
-<dt-input label="Large" type="text" placeholder="Placeholder" size="lg" />
-<dt-input label="Extra large" type="text" placeholder="Placeholder" size="xl" />
-'
-showHtmlWarning />
-
-<code-well-header>
-  <div class="d-stack16 d-w100p">
-    <dt-input label="Extra Small" type="textarea" placeholder="Placeholder" size="xs" />
-    <dt-input label="Small" type="textarea" placeholder="Placeholder" size="sm" />
-    <dt-input label="Medium" type="textarea" placeholder="Placeholder" size="md" />
-    <dt-input label="Large" type="textarea" placeholder="Placeholder" size="lg" />
-    <dt-input label="Extra large" type="textarea" placeholder="Placeholder" size="xl" />
-  </div>
-</code-well-header>
-
-<code-example-tabs
-htmlCode='
-<div>
-  <label>
-    <div class="d-label d-label--xs">Extra small</div>
-    <div class="d-input__wrapper">
-      <textarea class="d-textarea d-textarea--xs" placeholder="Placeholder" />
-    </div>
-  </label>
-</div>
-<div>
-  <label>
-    <div class="d-label d-label--sm">Small</div>
-    <div class="d-input__wrapper">
-      <textarea class="d-textarea d-textarea--sm" placeholder="Placeholder" />
-    </div>
-  </label>
-</div>
-<div>
-  <label>
-    <div class="d-label d-label--md">Medium</div>
-    <div class="d-input__wrapper">
-      <textarea class="d-textarea" placeholder="Placeholder" />
-    </div>
-  </label>
-</div>
-<div>
-  <label>
-    <div class="d-label d-label--lg">Large</div>
-    <div class="d-input__wrapper">
-      <textarea class="d-textarea d-textarea--lg" placeholder="Placeholder" />
-    </div>
-  </label>
-</div>
-<div>
-  <label>
-    <div class="d-label d-label--xl">Extra large</div>
-    <div class="d-input__wrapper">
-      <textarea class="d-textarea d-textarea--xl" placeholder="Placeholder" />
-    </div>
-  </label>
-</div>
-'
-vueCode='
-<dt-input label="Extra Small" type="textarea" placeholder="Placeholder" size="xs" />
-<dt-input label="Small" type="textarea" placeholder="Placeholder" size="sm" />
-<dt-input label="Medium" type="textarea" placeholder="Placeholder" size="md" />
-<dt-input label="Large" type="textarea" placeholder="Placeholder" size="lg" />
-<dt-input label="Extra large" type="textarea" placeholder="Placeholder" size="xl" />
 '
 showHtmlWarning />
 
@@ -653,7 +642,7 @@ showHtmlWarning />
 
 ### Icon Sizes
 
-You may use different icon sizes in different sized inputs
+Each Text Input size has a default icon size, keeping it proportional. While rare, customizing the icon size is possible.
 
 <code-well-header>
   <div class="d-stack16 d-w100p">
