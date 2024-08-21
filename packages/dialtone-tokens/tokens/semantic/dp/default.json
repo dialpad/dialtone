@@ -1233,7 +1233,7 @@
           "type": "borderRadius"
         },
         "lg": {
-          "value": "{size.radius.300} * 3",
+          "value": "{size.radius.450}",
           "type": "borderRadius"
         },
         "xl": {

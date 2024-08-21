@@ -82,6 +82,35 @@
         "type": "lineHeights",
         "description": "Line-height for XL button"
       }
+    },
+    "size": {
+      "radius": {
+        "xs": {
+          "value": "{size.radius.300}",
+          "type": "borderRadius",
+          "description": "Border radius for extra small button"
+        },
+        "sm": {
+          "value": "{size.radius.400}",
+          "type": "borderRadius",
+          "description": "Border radius for small button"
+        },
+        "md": {
+          "value": "{size.radius.400}",
+          "type": "borderRadius",
+          "description": "Border radius for medium button."
+        },
+        "lg": {
+          "value": "{size.radius.450}",
+          "type": "borderRadius",
+          "description": "Border radius for large button."
+        },
+        "xl": {
+          "value": "{size.radius.500}",
+          "type": "borderRadius",
+          "description": "Border radius for extra large button."
+        }
+      }
     }
   },
   "typography": {
