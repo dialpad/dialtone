@@ -1,3 +1,10 @@
+## [8.42.2](https://github.com/dialpad/dialtone/compare/dialtone-css/v8.42.1...dialtone-css/v8.42.2) (2024-08-21)
+
+
+### Bug Fixes
+
+* **Docs:** NO-JIRA popover with dt-scrollbar ([#461](https://github.com/dialpad/dialtone/issues/461)) ([806078f](https://github.com/dialpad/dialtone/commit/806078f74bc8ce3bc23ffec91c86147fc0d60dae))
+
 ## [8.42.1](https://github.com/dialpad/dialtone/compare/dialtone-css/v8.42.0...dialtone-css/v8.42.1) (2024-08-15)
 
 
