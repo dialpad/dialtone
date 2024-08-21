@@ -1,3 +1,20 @@
+# [9.68.0](https://github.com/dialpad/dialtone/compare/dialtone/v9.67.1...dialtone/v9.68.0) (2024-08-21)
+
+
+### Bug Fixes
+
+* **Docs:** NO-JIRA popover with dt-scrollbar ([#461](https://github.com/dialpad/dialtone/issues/461)) ([806078f](https://github.com/dialpad/dialtone/commit/806078f74bc8ce3bc23ffec91c86147fc0d60dae))
+* **Icon:** DLT-1784 flatten icons with multiple paths into single path ([#442](https://github.com/dialpad/dialtone/issues/442)) ([f654120](https://github.com/dialpad/dialtone/commit/f65412010b385227d33731e166de184802036ed0))
+* **Icon:** NO-JIRA correct tmo logomark placement within canvas ([#464](https://github.com/dialpad/dialtone/issues/464)) ([94e9dd5](https://github.com/dialpad/dialtone/commit/94e9dd5cd715772034987242118db9dc90b8473e))
+* **Multi Select:** DLT-2001 avoid overlap between input text and pills ([#465](https://github.com/dialpad/dialtone/issues/465)) ([1f774f5](https://github.com/dialpad/dialtone/commit/1f774f5fd6d2fdfd8a84189db044bca7f0e88ca1))
+
+
+### Features
+
+* **Badge:** DLT-1907 remove ai logomark for type ai ([#463](https://github.com/dialpad/dialtone/issues/463)) ([803877c](https://github.com/dialpad/dialtone/commit/803877c5c251385a5007b9d83e313f55a546f67e))
+* DLT-1844 create linter warning for usage of text utilities ([#459](https://github.com/dialpad/dialtone/issues/459)) ([59730e1](https://github.com/dialpad/dialtone/commit/59730e1fe9193af94b7db2de93bb9c7b38e744c9))
+* DLT-1999 create stylelint warning for usage of text utilities ([#460](https://github.com/dialpad/dialtone/issues/460)) ([42dd3ee](https://github.com/dialpad/dialtone/commit/42dd3ee7aa7d412cd8a357d518b19a8bb6238bcf))
+
 ## [9.67.1](https://github.com/dialpad/dialtone/compare/dialtone/v9.67.0...dialtone/v9.67.1) (2024-08-19)
 
 
