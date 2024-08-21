@@ -5,8 +5,6 @@ import DtFilterPillDefaultTemplate from './filter_pill_default.story.vue';
 import DtFilterPillVariantsTemplate from './filter_pill_variants.story.vue';
 
 export const argTypesData = {
-  // Props: only define things here that cannot be set by jsdoc comments on the component itself.
-
   // Slots
   content: {
     control: 'text',

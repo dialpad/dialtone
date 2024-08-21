@@ -54,7 +54,6 @@
 </template>
 
 <script>
-// import { DEFAULT_CONSTANTS } from './filter_pill_constants';
 import { DtPopover } from '@/components/popover';
 import { DtSkeleton } from '@/components/skeleton';
 import { DtButton } from '@/components/button';
