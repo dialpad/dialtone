@@ -1,3 +1,11 @@
+## [4.26.4](https://github.com/dialpad/dialtone/compare/dialtone-icons/v4.26.3...dialtone-icons/v4.26.4) (2024-08-21)
+
+
+### Bug Fixes
+
+* **Icon:** DLT-1784 flatten icons with multiple paths into single path ([#442](https://github.com/dialpad/dialtone/issues/442)) ([f654120](https://github.com/dialpad/dialtone/commit/f65412010b385227d33731e166de184802036ed0))
+* **Icon:** NO-JIRA correct tmo logomark placement within canvas ([#464](https://github.com/dialpad/dialtone/issues/464)) ([94e9dd5](https://github.com/dialpad/dialtone/commit/94e9dd5cd715772034987242118db9dc90b8473e))
+
 ## [4.26.3](https://github.com/dialpad/dialtone/compare/dialtone-icons/v4.26.2...dialtone-icons/v4.26.3) (2024-08-16)
 
 
