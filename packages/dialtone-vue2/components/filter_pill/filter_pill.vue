@@ -46,9 +46,17 @@
         </dt-button>
       </div>
     </template>
+    <template #headerContent>
+      <!-- @slot Header content of the opened popover -->
+      <slot name="headerContent" />
+    </template>
     <template #content>
-      <!-- @slot Content of the opened popover -->
+      <!-- @slot Main content of the opened popover -->
       <slot name="content" />
+    </template>
+    <template #footerContent>
+      <!-- @slot Footer content of the opened popover -->
+      <slot name="footerContent" />
     </template>
   </dt-popover>
 </template>
