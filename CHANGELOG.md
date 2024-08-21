@@ -1,3 +1,10 @@
+# [9.69.0](https://github.com/dialpad/dialtone/compare/dialtone/v9.68.0...dialtone/v9.69.0) (2024-08-21)
+
+
+### Features
+
+* NO-JIRA add types to themes ([#462](https://github.com/dialpad/dialtone/issues/462)) ([92e4acf](https://github.com/dialpad/dialtone/commit/92e4acf7a28960e0407cde91f6c4564a68d513aa))
+
 # [9.68.0](https://github.com/dialpad/dialtone/compare/dialtone/v9.67.1...dialtone/v9.68.0) (2024-08-21)
 
 
