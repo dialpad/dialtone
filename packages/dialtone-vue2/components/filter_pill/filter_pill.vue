@@ -1,13 +1,14 @@
 <template>
   <dt-popover
     class="d-filter-pill"
+    data-qa="dt-filter-pill"
     :open="isPopoverOpen"
     @update:open="isPopoverOpen = $event"
-    @opened="$emit('open', $event)"
   >
     <template #anchor>
       <div class="d-filter-pill__wrapper">
         <dt-button
+          data-qa="dt-filter-pill__button"
           icon-position="right"
           importance="outlined"
           kind="muted"
@@ -26,6 +27,7 @@
             #icon
           >
             <dt-icon-chevron-down
+              data-qa="dt-filter-pill__icon"
               class="d-filter-pill__icon"
               size="200"
             />
@@ -33,6 +35,7 @@
         </dt-button>
         <dt-button
           v-if="showReset"
+          data-qa="dt-filter-pill__reset-button"
           class="d-filter-pill__reset"
           circle
           importance="clear"
@@ -153,6 +156,12 @@ export default {
     return {
       isPopoverOpen: false,
     };
+  },
+
+  watch: {
+    isPopoverOpen (isOpen) {
+      this.$emit('open', isOpen);
+    },
   },
 };
 </script>
