@@ -347,99 +347,6 @@ const validate = () => {
 };
 ```
 
-### With icons
-
-<code-well-header>
-  <div class="d-stack16 d-w100p">
-    <dt-input label="Left icon" type="text" placeholder="Placeholder">
-      <template #leftIcon="{ iconSize }">
-        <dt-icon name="send" :size="iconSize" />
-      </template>
-    </dt-input>
-    <dt-input label="Right icon" type="text" placeholder="Placeholder">
-      <template #rightIcon="{ iconSize }">
-        <dt-icon name="lock" :size="iconSize" />
-      </template>
-    </dt-input>
-  </div>
-</code-well-header>
-
-<code-example-tabs
-htmlCode='
-<div>
-  <label class="d-label" for="Dialtone--InputExample--IconLeft">Label</label>
-  <div class="d-input__wrapper">
-    <span class="d-input-icon d-input-icon--left">
-      <svg class="d-icon d-icon--size-200">...</svg>
-    </span>
-    <input class="d-input" id="Dialtone--InputExample--IconLeft" type="text" placeholder="Placeholder" />
-  </div>
-</div>
-<div>
-  <label class="d-label" for="Dialtone--InputExample--IconRight">Label</label>
-  <div class="d-input__wrapper">
-    <input class="d-input" id="Dialtone--InputExample--IconRight" type="text" placeholder="Placeholder" />
-    <span class="d-input-icon d-input-icon--right">
-      <svg class="d-icon d-icon--size-200">...</svg>
-    </span>
-  </div>
-</div>
-'
-vueCode='
-<dt-input label="Left icon" type="text" placeholder="Placeholder">
-  <template #leftIcon="{ iconSize }">
-    <dt-icon name="send" :size="iconSize" />
-  </template>
-</dt-input>
-<dt-input label="Right icon" type="text" placeholder="Placeholder">
-  <template #rightIcon="{ iconSize }">
-    <dt-icon name="lock" :size="iconSize" />
-  </template>
-</dt-input>
-'
-showHtmlWarning />
-
-<code-well-header>
-  <div class="d-stack16 d-w100p">
-    <dt-input label="Left icon" type="textarea" placeholder="Placeholder">
-      <template #leftIcon="{ iconSize }">
-        <dt-icon name="send" :size="iconSize" />
-      </template>
-    </dt-input>
-    <dt-input label="Right icon" type="textarea" placeholder="Placeholder">
-      <template #rightIcon="{ iconSize }">
-        <dt-icon name="lock" :size="iconSize" />
-      </template>
-    </dt-input>
-  </div>
-</code-well-header>
-
-<code-example-tabs
-htmlCode='
-<div>
-  <label class="d-label" for="Dialtone--InputExample--IconLeft">...</label>
-  <div class="d-input__wrapper">
-    <span class="d-input-icon d-input-icon--left">
-      <svg class="d-icon d-icon--size-200">...</svg>
-    </span>
-    <textarea class="d-textarea" id="Dialtone--InputExample--IconLeft" type="text" placeholder="..."></textarea>
-  </div>
-</div>
-'
-vueCode='
-<dt-input label="Left icon" type="textarea" placeholder="Placeholder">
-  <template #leftIcon="{ iconSize }">
-    <dt-icon name="send" :size="iconSize" />
-  </template>
-</dt-input>
-<dt-input label="Right icon" type="textarea" placeholder="Placeholder">
-  <template #rightIcon="{ iconSize }">
-    <dt-icon name="lock" :size="iconSize" />
-  </template>
-</dt-input>
-'
-showHtmlWarning />
-
 ### Search input
 
 <dt-notice
@@ -523,7 +430,7 @@ vueCode='
 '
 showHtmlWarning />
 
-### Input sizes
+## Sizes
 
 We offer different sizes for instances in which the interface requires a smaller or larger input. In general, though, use the base (medium) size input as much as possible, especially in forms.
 
@@ -648,6 +555,99 @@ vueCode='
 <dt-input label="Medium" type="textarea" placeholder="Placeholder" size="md" />
 <dt-input label="Large" type="textarea" placeholder="Placeholder" size="lg" />
 <dt-input label="Extra large" type="textarea" placeholder="Placeholder" size="xl" />
+'
+showHtmlWarning />
+
+## Icon support
+
+<code-well-header>
+  <div class="d-stack16 d-w100p">
+    <dt-input label="Left icon" type="text" placeholder="Placeholder">
+      <template #leftIcon="{ iconSize }">
+        <dt-icon name="send" :size="iconSize" />
+      </template>
+    </dt-input>
+    <dt-input label="Right icon" type="text" placeholder="Placeholder">
+      <template #rightIcon="{ iconSize }">
+        <dt-icon name="lock" :size="iconSize" />
+      </template>
+    </dt-input>
+  </div>
+</code-well-header>
+
+<code-example-tabs
+htmlCode='
+<div>
+  <label class="d-label" for="Dialtone--InputExample--IconLeft">Label</label>
+  <div class="d-input__wrapper">
+    <span class="d-input-icon d-input-icon--left">
+      <svg class="d-icon d-icon--size-200">...</svg>
+    </span>
+    <input class="d-input" id="Dialtone--InputExample--IconLeft" type="text" placeholder="Placeholder" />
+  </div>
+</div>
+<div>
+  <label class="d-label" for="Dialtone--InputExample--IconRight">Label</label>
+  <div class="d-input__wrapper">
+    <input class="d-input" id="Dialtone--InputExample--IconRight" type="text" placeholder="Placeholder" />
+    <span class="d-input-icon d-input-icon--right">
+      <svg class="d-icon d-icon--size-200">...</svg>
+    </span>
+  </div>
+</div>
+'
+vueCode='
+<dt-input label="Left icon" type="text" placeholder="Placeholder">
+  <template #leftIcon="{ iconSize }">
+    <dt-icon name="send" :size="iconSize" />
+  </template>
+</dt-input>
+<dt-input label="Right icon" type="text" placeholder="Placeholder">
+  <template #rightIcon="{ iconSize }">
+    <dt-icon name="lock" :size="iconSize" />
+  </template>
+</dt-input>
+'
+showHtmlWarning />
+
+<code-well-header>
+  <div class="d-stack16 d-w100p">
+    <dt-input label="Left icon" type="textarea" placeholder="Placeholder">
+      <template #leftIcon="{ iconSize }">
+        <dt-icon name="send" :size="iconSize" />
+      </template>
+    </dt-input>
+    <dt-input label="Right icon" type="textarea" placeholder="Placeholder">
+      <template #rightIcon="{ iconSize }">
+        <dt-icon name="lock" :size="iconSize" />
+      </template>
+    </dt-input>
+  </div>
+</code-well-header>
+
+<code-example-tabs
+htmlCode='
+<div>
+  <label class="d-label" for="Dialtone--InputExample--IconLeft">...</label>
+  <div class="d-input__wrapper">
+    <span class="d-input-icon d-input-icon--left">
+      <svg class="d-icon d-icon--size-200">...</svg>
+    </span>
+    <textarea class="d-textarea" id="Dialtone--InputExample--IconLeft" type="text" placeholder="..."></textarea>
+  </div>
+</div>
+'
+vueCode='
+<dt-input label="Left icon" type="textarea" placeholder="Placeholder">
+  <template #leftIcon="{ iconSize }">
+    <dt-icon name="send" :size="iconSize" />
+  </template>
+</dt-input>
+<dt-input label="Right icon" type="textarea" placeholder="Placeholder">
+  <template #rightIcon="{ iconSize }">
+    <dt-icon name="lock" :size="iconSize" />
+  </template>
+</dt-input>
 '
 showHtmlWarning />
 
