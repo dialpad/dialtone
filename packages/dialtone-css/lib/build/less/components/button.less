@@ -26,9 +26,7 @@
   --button-gap: calc(var(--button-padding-x) / 2);
   --button-border-radius: var(--dt-size-400);
   --button-border-width: var(--dt-size-100);
-  --button-font-size: var(--dt-font-size-200);
-  --button-font-weight: var(--dt-font-weight-medium);
-  --button-line-height: var(--dt-font-line-height-200);
+  --button-font-style: var(--dt-typography-button-md);
   --button-padding-y-xs: calc(
     calc(var(--dt-space-400) - var(--dt-space-100)) - var(--button-border-width)
   ); // ((8 - 1) - border-width)
@@ -80,10 +78,7 @@
   box-sizing: border-box;
   padding: var(--button-padding-y) var(--button-padding-x);
   color: var(--button-color-text);
-  font-weight: var(--button-font-weight);
-  font-size: var(--button-font-size);
-  font-family: inherit;
-  line-height: var(--button-line-height);
+  font: var(--button-font-style);
   text-transform: inherit;
   text-decoration: none;
   vertical-align: middle;
@@ -139,18 +134,18 @@
 //  $$  EXTRA SMALL
 //  ----------------------------------------------------------------------------
 .d-btn--xs {
+  --button-font-style: var(--dt-typography-button-xs);
   --button-padding-y: var(--button-padding-y-xs);
   --button-padding-x: var(--button-padding-x-xs);
-  --button-font-size: var(--dt-font-size-100);
   --button-border-radius: var(--dt-size-300);
 }
 
 //  $$ SMALL
 //  ----------------------------------------------------------------------------
 .d-btn--sm {
+  --button-font-style: var(--dt-typography-button-sm);
   --button-padding-y: var(--button-padding-y-sm);
   --button-padding-x: var(--button-padding-x-sm);
-  --button-font-size: var(--dt-font-size-100);
 }
 
 //  $$  MEDIUM
@@ -162,19 +157,18 @@
 //  $$  LARGE
 //  ----------------------------------------------------------------------------
 .d-btn--lg {
+  --button-font-style: var(--dt-typography-button-lg);
   --button-padding-y: var(--button-padding-y-lg);
   --button-padding-x: var(--button-padding-x-lg);
-  --button-font-size: var(--dt-font-size-300);
   --button-border-radius: var(--dt-size-450);
 }
 
 //  $$  EXTRA LARGE
 //  ----------------------------------------------------------------------------
 .d-btn--xl {
+  --button-font-style: var(--dt-typography-button-xl);
   --button-padding-y: var(--button-padding-y-xl);
   --button-padding-x: var(--button-padding-x-xl);
-  --button-font-size: var(--dt-font-size-400);
-  --button-font-weight: var(--dt-font-weight-normal);
   --button-border-radius: var(--dt-size-500);
 }
 
