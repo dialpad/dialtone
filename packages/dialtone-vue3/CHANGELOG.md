@@ -1,3 +1,16 @@
+# [3.148.0](https://github.com/dialpad/dialtone/compare/dialtone-vue3/v3.147.1...dialtone-vue3/v3.148.0) (2024-08-21)
+
+
+### Bug Fixes
+
+* **Docs:** NO-JIRA popover with dt-scrollbar ([#461](https://github.com/dialpad/dialtone/issues/461)) ([806078f](https://github.com/dialpad/dialtone/commit/806078f74bc8ce3bc23ffec91c86147fc0d60dae))
+* **Multi Select:** DLT-2001 avoid overlap between input text and pills ([#465](https://github.com/dialpad/dialtone/issues/465)) ([1f774f5](https://github.com/dialpad/dialtone/commit/1f774f5fd6d2fdfd8a84189db044bca7f0e88ca1))
+
+
+### Features
+
+* **Badge:** DLT-1907 remove ai logomark for type ai ([#463](https://github.com/dialpad/dialtone/issues/463)) ([803877c](https://github.com/dialpad/dialtone/commit/803877c5c251385a5007b9d83e313f55a546f67e))
+
 ## [3.147.1](https://github.com/dialpad/dialtone/compare/dialtone-vue3/v3.147.0...dialtone-vue3/v3.147.1) (2024-08-19)
 
 
