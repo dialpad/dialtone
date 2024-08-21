@@ -3,6 +3,8 @@
     :active="$attrs.active"
     :disabled="$attrs.disabled"
     :label="$attrs.label"
+    :loading="$attrs.loading"
+    :loading-skeleton-width="$attrs.loadingSkeletonWidth"
     :show-reset="$attrs.showReset"
     @reset="$attrs.onReset"
     @open="$attrs.onOpen"

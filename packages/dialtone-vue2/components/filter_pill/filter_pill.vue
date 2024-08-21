@@ -1,5 +1,10 @@
 <template>
-  <dt-popover class="d-filter-pill">
+  <dt-popover
+    class="d-filter-pill"
+    :open="isPopoverOpen"
+    @update:open="isPopoverOpen = $event"
+    @opened="$emit('open', $event)"
+  >
     <template #anchor>
       <div class="d-filter-pill__wrapper">
         <dt-button
@@ -8,8 +13,15 @@
           kind="muted"
           :class="{ 'd-filter-pill--active': active }"
           :disabled="disabled"
+          @click="isPopoverOpen = true"
         >
-          {{ label }}
+          <span v-if="!loading">
+            {{ label }}
+          </span>
+          <dt-skeleton
+            v-else
+            :text-option="{ width: loadingSkeletonWidth }"
+          />
           <template
             #icon
           >
@@ -26,7 +38,7 @@
           importance="clear"
           kind="muted"
           size="sm"
-          @click.prevent="$emit('reset')"
+          @click="$emit('reset', $event)"
         >
           <template #icon>
             <dt-icon-close size="200" />
@@ -44,6 +56,7 @@
 <script>
 // import { DEFAULT_CONSTANTS } from './filter_pill_constants';
 import { DtPopover } from '@/components/popover';
+import { DtSkeleton } from '@/components/skeleton';
 import { DtButton } from '@/components/button';
 import { DtIconChevronDown, DtIconClose } from '@dialpad/dialtone-icons/vue2';
 
@@ -55,6 +68,7 @@ export default {
     DtButton,
     DtIconClose,
     DtIconChevronDown,
+    DtSkeleton,
   },
 
   inheritAttrs: false,
@@ -82,6 +96,23 @@ export default {
     label: {
       type: String,
       default: undefined,
+    },
+
+    /**
+     * Determines if the filter is loading
+     */
+    loading: {
+      type: Boolean,
+      default: false,
+    },
+
+    /**
+     * Sets the size of the skeleton
+     * accepts CSS width attribute values
+     */
+    loadingSkeletonWidth: {
+      type: String,
+      default: '128px',
     },
 
     /**
@@ -113,14 +144,8 @@ export default {
 
   data () {
     return {
-      //
+      isPopoverOpen: false,
     };
   },
-
-  computed: {},
-
-  watch: {},
-
-  methods: {},
 };
 </script>
