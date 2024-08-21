@@ -20,7 +20,7 @@ export const DtScrollbarDirective = {
           },
         });
         el.setAttribute('data-overlayscrollbars-initialize', true);
-        el.classList.add('scrollbar');
+        el.classList.add('d-scrollbar');
       },
     });
   },

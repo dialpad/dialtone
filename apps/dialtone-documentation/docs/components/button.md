@@ -60,17 +60,6 @@ Button labels should be clear and predictable so users have confidence in their 
 </template>
 </dialtone-usage>
 
-## Accessibility
-
-- Choosing between Link and Button elements is paramount for screenreaders to inform the user what will occur. For example: will it go somewhere (Link) or will something happen (Button)?
-- Do not rely on color alone to convey the intent of the button. Defer to the button text as primary way to convey the buttons intent.
-- Display a visible focus state when users tab to them.
-- Use standard semantic usage of HTML elements.
-- Be aware of how screenreaders handle buttons and links differently. For example, both the Enter and Spacebar keys triggers a button, while links are triggered only by the Enter key.
-- If a button cannot be used for an action and it must be an anchor link, two things are required:
-  - Add `role="button"` to the `<a>` to allow screenreaders to announce it as a `button`.
-  - Attach an event handler to detect Spacebar keypress. Buttons react to both Enter and Spacebar, but Link reacts only to Enter.
-
 ## Variants
 
 Dialtone provides four core button **types**, each with three levels of **importance**.
@@ -393,6 +382,23 @@ vueCode='
 '
 showHtmlWarning />
 
+### Split Button
+
+The [Split Button](split-button.md) is its own component containing multiple buttons.
+
+<code-well-header>
+  <dt-split-button
+    omega-tooltip-text="More calling options"
+  >
+    Place call
+    <template #dropdownList>
+      <dt-list-item role="menuitem" navigation-type="arrow-keys"> Option 1 </dt-list-item>
+      <dt-list-item role="menuitem" navigation-type="arrow-keys"> Option 2 </dt-list-item>
+      <dt-list-item role="menuitem" navigation-type="arrow-keys"> Option 3 </dt-list-item>
+    </template>
+  </dt-split-button>
+</code-well-header>
+
 ## Sizes
 
 The base button font size is 16px and should be used in most cases. Every button style can accept size classes, though we only provide a few possible examples.
@@ -706,6 +712,21 @@ We provide the following branded buttons for log-in and sign-up workflows.
 ## Vue API
 
 <component-vue-api component-name="button" />
+
+## Accessibility
+
+- Choosing between Link and Button elements is paramount for screenreaders to inform the user what will occur. For example: will it go somewhere (Link) or will something happen (Button)?
+- Do not rely on color alone to convey the intent of the button. Defer to the button text as primary way to convey the buttons intent.
+- Display a visible focus state when users tab to them.
+- Use standard semantic usage of HTML elements.
+- Be aware of how screenreaders handle buttons and links differently. For example, both the `Enter` and `Space` keys triggers a button, while links are triggered only by the `Enter` key.
+- If it is a button type while focused:
+  - Pressing the `Enter` or `Space` key should trigger the action.
+  - Pressing the `Tab` key moves focus to the next focusable element.
+  - Pressing the `Shift+Tab` key moves focus to the previous focusable element.
+- If a button cannot be used for an action and it must be an anchor link, two things are required:
+  - Add `role="button"` to the `<a>` to allow screenreaders to announce it as a `button`.
+  - Attach an event handler to detect Spacebar keypress. Buttons react to both Enter and Spacebar, but Link reacts only to Enter.
 
 ## Classes
 

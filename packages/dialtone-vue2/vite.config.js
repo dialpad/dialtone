@@ -1,6 +1,5 @@
 import { defineConfig } from 'vite';
 import vue from '@vitejs/plugin-vue2';
-import vitePluginRequire from 'vite-plugin-require';
 import path, { resolve } from 'path';
 import { fileURLToPath } from 'url';
 import { glob } from 'glob';
@@ -68,7 +67,7 @@ export default defineConfig({
     },
     minify: false,
   },
-  plugins: [vue(), vitePluginRequire.default()],
+  plugins: [vue()],
   resolve: {
     alias: {
       '@': fileURLToPath(new URL('.', import.meta.url)),

@@ -1,4 +1,4 @@
-.scrollbar {
+.d-scrollbar {
   .os-theme-dark {
     // main color for the scrollbars handle
     --os-handle-color: var(--dt-color-surface-contrast);
@@ -28,5 +28,14 @@
         opacity: var(--dt-opacity-900);
       }
     }
+  }
+}
+
+// put this class on html element to disable the scrollbar on body (useful for modals)
+:root.d-scrollbar-disabled {
+  overflow: hidden !important;
+
+  & .os-scrollbar {
+    display: none;
   }
 }

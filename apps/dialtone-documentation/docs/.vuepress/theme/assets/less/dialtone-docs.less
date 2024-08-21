@@ -282,8 +282,13 @@ a.header-anchor {
   float: left;
   margin-left: -0.87em;
   padding-right: 0.23em;
-  font-size: var(--dt-font-size-300);
+  font-size: inherit;
+  text-decoration: none;
   opacity: 0;
+
+  &:focus-visible {
+    opacity: 1;
+  }
 }
 
 .d-docsite--header-2 {
@@ -734,7 +739,7 @@ a.header-anchor {
 
 .dialtone-usage {
   --usage-item-color-border: var(--dt-color-border-default);
-  --usage-item-background-hd: var(--dt-color-surface-bold-opaque);
+  --usage-item-background-hd: var(--dt-color-surface-contrast-opaque);
 
   display: flex;
   flex-direction: column;
@@ -790,18 +795,8 @@ a.header-anchor {
   }
 
   &__bd {
-    font-size: var(--dt-font-size-200);
-    line-height: var(--dt-font-line-height-400);
-
     .d-docsite--unordered-list {
-      // unfortunate
       margin: 0;
-      margin-left: var(--dt-space-500);
-      padding: 0;
-
-      > *+* {
-        margin-top: var(--dt-space-400);
-      }
     }
   }
 }

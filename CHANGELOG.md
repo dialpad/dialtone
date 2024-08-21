@@ -1,3 +1,63 @@
+# [9.69.0](https://github.com/dialpad/dialtone/compare/dialtone/v9.68.0...dialtone/v9.69.0) (2024-08-21)
+
+
+### Features
+
+* NO-JIRA add types to themes ([#462](https://github.com/dialpad/dialtone/issues/462)) ([92e4acf](https://github.com/dialpad/dialtone/commit/92e4acf7a28960e0407cde91f6c4564a68d513aa))
+
+# [9.68.0](https://github.com/dialpad/dialtone/compare/dialtone/v9.67.1...dialtone/v9.68.0) (2024-08-21)
+
+
+### Bug Fixes
+
+* **Docs:** NO-JIRA popover with dt-scrollbar ([#461](https://github.com/dialpad/dialtone/issues/461)) ([806078f](https://github.com/dialpad/dialtone/commit/806078f74bc8ce3bc23ffec91c86147fc0d60dae))
+* **Icon:** DLT-1784 flatten icons with multiple paths into single path ([#442](https://github.com/dialpad/dialtone/issues/442)) ([f654120](https://github.com/dialpad/dialtone/commit/f65412010b385227d33731e166de184802036ed0))
+* **Icon:** NO-JIRA correct tmo logomark placement within canvas ([#464](https://github.com/dialpad/dialtone/issues/464)) ([94e9dd5](https://github.com/dialpad/dialtone/commit/94e9dd5cd715772034987242118db9dc90b8473e))
+* **Multi Select:** DLT-2001 avoid overlap between input text and pills ([#465](https://github.com/dialpad/dialtone/issues/465)) ([1f774f5](https://github.com/dialpad/dialtone/commit/1f774f5fd6d2fdfd8a84189db044bca7f0e88ca1))
+
+
+### Features
+
+* **Badge:** DLT-1907 remove ai logomark for type ai ([#463](https://github.com/dialpad/dialtone/issues/463)) ([803877c](https://github.com/dialpad/dialtone/commit/803877c5c251385a5007b9d83e313f55a546f67e))
+* DLT-1844 create linter warning for usage of text utilities ([#459](https://github.com/dialpad/dialtone/issues/459)) ([59730e1](https://github.com/dialpad/dialtone/commit/59730e1fe9193af94b7db2de93bb9c7b38e744c9))
+* DLT-1999 create stylelint warning for usage of text utilities ([#460](https://github.com/dialpad/dialtone/issues/460)) ([42dd3ee](https://github.com/dialpad/dialtone/commit/42dd3ee7aa7d412cd8a357d518b19a8bb6238bcf))
+
+## [9.67.1](https://github.com/dialpad/dialtone/compare/dialtone/v9.67.0...dialtone/v9.67.1) (2024-08-19)
+
+
+### Bug Fixes
+
+* **Message Input:** DLT-1996 fix line breaks when initializing input value ([#457](https://github.com/dialpad/dialtone/issues/457)) ([1ec4cf0](https://github.com/dialpad/dialtone/commit/1ec4cf03ccadfc0bf07174dc0e599cab35c0e676))
+
+
+### Documentation
+
+* **Split Button:** DLT-1821 split button usage ([#458](https://github.com/dialpad/dialtone/issues/458)) ([317679a](https://github.com/dialpad/dialtone/commit/317679a52b11faa617ef5332d0201d5ff50ecec4))
+
+# [9.67.0](https://github.com/dialpad/dialtone/compare/dialtone/v9.66.0...dialtone/v9.67.0) (2024-08-16)
+
+
+### Bug Fixes
+
+* **Docs:** DLT-1994 use dialtone scrollbar in docsite ([#456](https://github.com/dialpad/dialtone/issues/456)) ([7db2c8c](https://github.com/dialpad/dialtone/commit/7db2c8cacfee31b9d73b906df82c37829ffd8488))
+
+
+### Documentation
+
+* **Common Commands:** NO-JIRA add documentation about using local package ([#449](https://github.com/dialpad/dialtone/issues/449)) ([e9b8be1](https://github.com/dialpad/dialtone/commit/e9b8be120c1e7f4ba0128d9e4d9ab06cb2a97225))
+* DLT-1796 move storybook to doc site - Link to Pagination ([#441](https://github.com/dialpad/dialtone/issues/441)) ([bc2d57d](https://github.com/dialpad/dialtone/commit/bc2d57d232d6aeb32e62497767c8ee9bb29ccc72))
+
+
+### Features
+
+* **Contact Info:** NO-JIRA add `avatarColor` prop to contact info recipe ([#448](https://github.com/dialpad/dialtone/issues/448)) ([77ea808](https://github.com/dialpad/dialtone/commit/77ea80843fa228bd89b66003dbe268d7334734a3))
+* **Input:** DLT-1945 add clear slot prop to rightIcon ([#455](https://github.com/dialpad/dialtone/issues/455)) ([0f90dd4](https://github.com/dialpad/dialtone/commit/0f90dd46885c92469e3f02baff716eb8cbb6694f))
+
+
+### Reverts
+
+* NO-JIRA use require for json imports ([#454](https://github.com/dialpad/dialtone/issues/454)) ([606cfb3](https://github.com/dialpad/dialtone/commit/606cfb31e2a1271203b9cee7415ac08a9d5787aa))
+
 # [9.66.0](https://github.com/dialpad/dialtone/compare/dialtone/v9.65.1...dialtone/v9.66.0) (2024-08-16)
 
 

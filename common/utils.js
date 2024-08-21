@@ -15,7 +15,15 @@ export function kebabCaseToPascalCase (string) {
     .join('');
 }
 
+const scheduler = typeof setImmediate === 'function' ? setImmediate : setTimeout;
+export function flushPromises () {
+  return new Promise((resolve) => {
+    scheduler(resolve);
+  });
+}
+
 export default {
   getUniqueString,
   kebabCaseToPascalCase,
+  flushPromises,
 };

@@ -4,7 +4,15 @@ Dialtone ESLint plugin containing rules to help developers maintain dialtone rec
 
 ## Adding a new rule
 
-We use yeoman generator to generate new rules, simply run the command below and follow the steps.
+We use [yeoman generator](https://github.com/eslint/generator-eslint) to generate new rules.
+
+First, install it globally:
+
+```shell
+pnpm add -g yo generator-eslint mem-fs
+```
+
+Then, run the command below and follow the steps.
 
 ```shell
 yo eslint:rule

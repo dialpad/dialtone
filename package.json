@@ -1,6 +1,6 @@
 {
   "name": "@dialpad/dialtone",
-  "version": "9.66.0",
+  "version": "9.69.0",
   "description": "Dialpad's Dialtone design system monorepo",
   "type": "module",
   "scripts": {
@@ -92,7 +92,8 @@
       "import": "./dist/vue3/*.js",
       "require": "./dist/vue3/*.cjs"
     },
-    "./themes": {
+    "./themes/*": {
+      "types": "./dist/themes/types/*.d.ts",
       "import": "./dist/themes/*.js",
       "require": "./dist/themes/*.cjs"
     },
@@ -127,9 +128,11 @@
     "docopt": "0.6.2",
     "emoji-regex": "10.3.0",
     "emoji-toolkit": "8.0.0",
+    "overlayscrollbars": "2.10.0",
     "requireindex": "1.2.0",
     "stylelint": "15.11.0",
-    "tippy.js": "6.3.7"
+    "tippy.js": "6.3.7",
+    "vite-plugin-dts": "4.0.3"
   },
   "devDependencies": {
     "@commitlint/cli": "^18.4.3",

@@ -663,6 +663,12 @@ export default {
     },
   },
 
+  created () {
+    if (this.modelValue && this.outputFormat === 'text') {
+      this.internalInputValue = this.modelValue.replace(/\n/g, '<br>');
+    }
+  },
+
   methods: {
     // Mousedown instead of click because it fires before the blur event.
     onMousedown (e) {

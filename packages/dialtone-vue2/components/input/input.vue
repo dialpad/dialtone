@@ -100,6 +100,7 @@
           <slot
             name="rightIcon"
             :icon-size="iconSize"
+            :clear="clearInput"
           />
         </span>
       </div>
@@ -562,9 +563,10 @@ export default {
       }
     },
 
-    clear () {
+    emitClearEvents () {
       this.$emit('input', '');
       this.$emit('clear');
+      this.$emit('update:modelValue', '');
     },
 
     blur () {
@@ -585,6 +587,12 @@ export default {
 
     validateLength (length) {
       this.isInvalid = (length > this.validationProps.length.max);
+    },
+
+    clearInput () {
+      this.$refs.input.value = '';
+      this.$refs.input.focus();
+      this.emitClearEvents();
     },
   },
 };

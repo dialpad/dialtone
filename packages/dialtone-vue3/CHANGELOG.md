@@ -1,3 +1,53 @@
+# [3.149.0](https://github.com/dialpad/dialtone/compare/dialtone-vue3/v3.148.0...dialtone-vue3/v3.149.0) (2024-08-21)
+
+
+### Features
+
+* NO-JIRA add types to themes ([#462](https://github.com/dialpad/dialtone/issues/462)) ([92e4acf](https://github.com/dialpad/dialtone/commit/92e4acf7a28960e0407cde91f6c4564a68d513aa))
+
+# [3.148.0](https://github.com/dialpad/dialtone/compare/dialtone-vue3/v3.147.1...dialtone-vue3/v3.148.0) (2024-08-21)
+
+
+### Bug Fixes
+
+* **Docs:** NO-JIRA popover with dt-scrollbar ([#461](https://github.com/dialpad/dialtone/issues/461)) ([806078f](https://github.com/dialpad/dialtone/commit/806078f74bc8ce3bc23ffec91c86147fc0d60dae))
+* **Multi Select:** DLT-2001 avoid overlap between input text and pills ([#465](https://github.com/dialpad/dialtone/issues/465)) ([1f774f5](https://github.com/dialpad/dialtone/commit/1f774f5fd6d2fdfd8a84189db044bca7f0e88ca1))
+
+
+### Features
+
+* **Badge:** DLT-1907 remove ai logomark for type ai ([#463](https://github.com/dialpad/dialtone/issues/463)) ([803877c](https://github.com/dialpad/dialtone/commit/803877c5c251385a5007b9d83e313f55a546f67e))
+
+## [3.147.1](https://github.com/dialpad/dialtone/compare/dialtone-vue3/v3.147.0...dialtone-vue3/v3.147.1) (2024-08-19)
+
+
+### Bug Fixes
+
+* **Message Input:** DLT-1996 fix line breaks when initializing input value ([#457](https://github.com/dialpad/dialtone/issues/457)) ([1ec4cf0](https://github.com/dialpad/dialtone/commit/1ec4cf03ccadfc0bf07174dc0e599cab35c0e676))
+
+# [3.147.0](https://github.com/dialpad/dialtone/compare/dialtone-vue3/v3.146.0...dialtone-vue3/v3.147.0) (2024-08-16)
+
+
+### Bug Fixes
+
+* **Docs:** DLT-1994 use dialtone scrollbar in docsite ([#456](https://github.com/dialpad/dialtone/issues/456)) ([7db2c8c](https://github.com/dialpad/dialtone/commit/7db2c8cacfee31b9d73b906df82c37829ffd8488))
+
+
+### Documentation
+
+* DLT-1796 move storybook to doc site - Link to Pagination ([#441](https://github.com/dialpad/dialtone/issues/441)) ([bc2d57d](https://github.com/dialpad/dialtone/commit/bc2d57d232d6aeb32e62497767c8ee9bb29ccc72))
+
+
+### Features
+
+* **Contact Info:** NO-JIRA add `avatarColor` prop to contact info recipe ([#448](https://github.com/dialpad/dialtone/issues/448)) ([77ea808](https://github.com/dialpad/dialtone/commit/77ea80843fa228bd89b66003dbe268d7334734a3))
+* **Input:** DLT-1945 add clear slot prop to rightIcon ([#455](https://github.com/dialpad/dialtone/issues/455)) ([0f90dd4](https://github.com/dialpad/dialtone/commit/0f90dd46885c92469e3f02baff716eb8cbb6694f))
+
+
+### Reverts
+
+* NO-JIRA use require for json imports ([#454](https://github.com/dialpad/dialtone/issues/454)) ([606cfb3](https://github.com/dialpad/dialtone/commit/606cfb31e2a1271203b9cee7415ac08a9d5787aa))
+
 # [3.146.0](https://github.com/dialpad/dialtone/compare/dialtone-vue3/v3.145.1...dialtone-vue3/v3.146.0) (2024-08-16)
 
 

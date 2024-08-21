@@ -1,0 +1,16 @@
+{
+  "include": [
+    "common/themes/*.js",
+  ],
+  "compilerOptions": {
+    "baseUrl": ".",
+    "allowJs": true,
+    "declaration": true,
+    "emitDeclarationOnly": true,
+    "declarationMap": true,
+    "strict": true,
+    "paths": {
+      "@/*": ["./*"]
+    }
+  }
+}

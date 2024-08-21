@@ -444,7 +444,7 @@ showHtmlWarning />
 
 <dt-notice
   kind="warning"
-  hideClose="true"
+  :hide-close="true"
   class="d-wmx100p d-mb24"
 >
   <template #default>
@@ -452,23 +452,27 @@ showHtmlWarning />
   </template>
 </dt-notice>
 
+In this example we show a search input with a clear button on the right side. The clear button is a button with a close icon that clears the input field when clicked. The clear button is only visible when the input field is not empty.
+
 <code-well-header>
   <div class="d-w100p">
     <dt-input
       aria-label="Search items"
       placeholder="Search Items"
       type="text"
+      v-model="inputValue"
     >
       <template #leftIcon="{ iconSize }">
         <dt-icon name="search" :size="iconSize" />
       </template>
-      <template #rightIcon>
+      <template v-if="inputValue.length !== 0" #rightIcon="{ clear }">
         <dt-button
           kind="muted"
           importance="clear"
           size="xs"
           circle
           aria-label="Clear search"
+          @click="clear"
         >
         <template #icon="{ iconSize }">
             <dt-icon name="close" :size="iconSize" />
@@ -496,17 +500,19 @@ vueCode='
   aria-label="Search items"
   placeholder="Search Items"
   type="text"
+  v-model="inputValue"
 >
   <template #leftIcon="{ iconSize }">
     <dt-icon name="search" :size="iconSize" />
   </template>
-  <template #rightIcon>
+  <template v-if="inputValue.length !== 0" #rightIcon="{ clear }">
     <dt-button
       kind="muted"
       importance="clear"
       size="xs"
       circle
       aria-label="Clear search"
+      @click="clear"
     >
       <template #icon="{ iconSize }">
         <dt-icon name="close" :size="iconSize" />

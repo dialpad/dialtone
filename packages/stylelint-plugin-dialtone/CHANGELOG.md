@@ -1,3 +1,10 @@
+# [1.1.0](https://github.com/dialpad/dialtone/compare/stylelint-plugin-dialtone/v1.0.2...stylelint-plugin-dialtone/v1.1.0) (2024-08-21)
+
+
+### Features
+
+* DLT-1999 create stylelint warning for usage of text utilities ([#460](https://github.com/dialpad/dialtone/issues/460)) ([42dd3ee](https://github.com/dialpad/dialtone/commit/42dd3ee7aa7d412cd8a357d518b19a8bb6238bcf))
+
 ## [1.0.2](https://github.com/dialpad/dialtone/compare/stylelint-plugin-dialtone/v1.0.1...stylelint-plugin-dialtone/v1.0.2) (2024-03-26)
 
 
