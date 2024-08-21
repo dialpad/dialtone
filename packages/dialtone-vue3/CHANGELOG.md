@@ -1,3 +1,10 @@
+# [3.149.0](https://github.com/dialpad/dialtone/compare/dialtone-vue3/v3.148.0...dialtone-vue3/v3.149.0) (2024-08-21)
+
+
+### Features
+
+* NO-JIRA add types to themes ([#462](https://github.com/dialpad/dialtone/issues/462)) ([92e4acf](https://github.com/dialpad/dialtone/commit/92e4acf7a28960e0407cde91f6c4564a68d513aa))
+
 # [3.148.0](https://github.com/dialpad/dialtone/compare/dialtone-vue3/v3.147.1...dialtone-vue3/v3.148.0) (2024-08-21)
 
 
