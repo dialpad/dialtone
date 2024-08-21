@@ -10,6 +10,7 @@
     :call-button-tooltip="callButtonTooltip"
     :unread-count-tooltip="unreadCountTooltip"
     v-bind="$attrs"
+    data-qa="contact-row"
     v-on="$listeners"
   >
     <template #left>
