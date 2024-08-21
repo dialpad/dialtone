@@ -1,40 +1,133 @@
-<!-- Use this template story to allow the user control the component's props and slots -->
 <template>
-  <!--
-    We can bind the data that the user entered into the storybook controls to props by using a property of the same name
-    as the storybook control defined in the corresponding `.story.js` file.
-  -->
-  <dt-filter-pill
-    :generic-prop="$attrs.genericProp"
-    @generic-event="$attrs.onGenericEvent"
-  >
-    <!--
-      We can also bind any slot data that the user has entered into the storybook controls. In this example we
-      conditionally render slots using a custom storybook control defined in the corresponding `.story.js`.
-
-      The preferred naming scheme for storybook slot controls uses the following format `<SLOT_NAME>Slot`.
-
-      We use this storybook control naming scheme to prevent conflicts between controls for props and slots with the
-      same name.
-    -->
-    <span
-      v-if="$attrs.default"
-      v-html="$attrs.default"
+  <dt-stack gap="400">
+    <dt-filter-pill
+      label="With header, content and footer"
+    >
+      <template slot="headerContent">
+        <dt-input
+          v-model="inputValue"
+          aria-label="Search items"
+          placeholder="Search Items"
+          type="text"
+          class="d-mr16"
+        >
+          <template #leftIcon="{ iconSize }">
+            <dt-icon-search
+              :size="iconSize"
+            />
+          </template>
+          <template
+            #rightIcon="{ clear }"
+          >
+            <dt-button
+              kind="muted"
+              importance="clear"
+              size="xs"
+              circle
+              aria-label="Clear search"
+              @click="clear"
+            >
+              <template #icon="{ iconSize }">
+                <dt-icon-close
+                  :size="iconSize"
+                />
+              </template>
+            </dt-button>
+          </template>
+        </dt-input>
+      </template>
+      <template slot="content">
+        <dt-checkbox
+          v-for="option in options"
+          :key="option"
+          :label="option"
+        />
+      </template>
+      <template slot="footerContent">
+        <div class="d-ta-right d-pr16">
+          <dt-button
+            kind="muted"
+            importance="outlined"
+            size="sm"
+          >
+            Apply
+          </dt-button>
+        </div>
+      </template>
+    </dt-filter-pill>
+    <dt-filter-pill
+      active
+      label="Active filter"
+    >
+      <template #content>
+        Default content
+      </template>
+    </dt-filter-pill>
+    <dt-filter-pill
+      active
+      label="Active filter with reset"
+      show-reset
+    >
+      <template #content>
+        Default content
+      </template>
+    </dt-filter-pill>
+    <dt-filter-pill
+      disabled
+      label="Disabled"
     />
-    <template slot="namedSlot">
-      <span
-        v-if="$attrs.namedSlot"
-        v-html="$attrs.namedSlot"
-      />
-    </template>
-  </dt-filter-pill>
+    <!-- Loading -->
+    <dt-stack gap="300">
+      <h3>Loading</h3>
+      <dt-filter-pill loading>
+        <template #content>
+          Default content
+        </template>
+      </dt-filter-pill>
+      <h3>Loading with custom skeleton width</h3>
+      <dt-filter-pill
+        loading
+        loading-skeleton-width="50px"
+      >
+        <template #content>
+          Default content
+        </template>
+      </dt-filter-pill>
+    </dt-stack>
+  </dt-stack>
 </template>
 
 <script>
 import DtFilterPill from './filter_pill.vue';
+import { DtInput } from '@/components/input';
+import { DtCheckbox } from '@/components/checkbox';
+import { DtButton } from '@/components/button';
+import { DtStack } from '@/components/stack';
+import { DtIconClose, DtIconSearch } from '@dialpad/dialtone-icons/vue2';
 
 export default {
   name: 'DtFilterPillVariants',
-  components: { DtFilterPill },
+  components: {
+    DtFilterPill,
+    DtInput,
+    DtCheckbox,
+    DtButton,
+    DtIconSearch,
+    DtIconClose,
+    DtStack,
+  },
+
+  data () {
+    return {
+      inputValue: '',
+      options: [
+        'Option 1',
+        'Option 2',
+        'Option 3',
+        'Option 4',
+        'Option 5',
+      ],
+    };
+  },
 };
 </script>
