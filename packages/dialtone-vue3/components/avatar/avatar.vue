@@ -22,15 +22,19 @@
         :src="imageSrc"
         :alt="imageAlt"
       >
-      <!-- @slot Slot for avatar icon. It will display if no imageSrc is provided -->
-      <slot
-        v-else-if="hasSlotContent($slots.icon)"
-        name="icon"
-        :aria-label="iconAriaLabel"
-        :icon-size="iconSize || AVATAR_ICON_SIZES[size]"
-        :icon-class="[iconClass, AVATAR_KIND_MODIFIERS.icon]"
+      <div
+        v-else-if="isIconType"
+        :class="[iconClass, AVATAR_KIND_MODIFIERS.icon]"
+        :aria-label="clickable ? iconAriaLabel : ''"
         :data-qa="iconDataQa"
-      />
+        :role="clickable ? 'button' : ''"
+      >
+        <!-- @slot Slot for avatar icon. It will display if no imageSrc is provided -->
+        <slot
+          name="icon"
+          :icon-size="iconSize || AVATAR_ICON_SIZES[size]"
+        />
+      </div>
       <span
         v-else
         :class="[AVATAR_KIND_MODIFIERS.initials]"

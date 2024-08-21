@@ -36,13 +36,8 @@
           :size="size"
           full-name="Avatar Icon"
         >
-          <template #icon="{ iconSize, iconClass, dataQa, ariaLabel }">
-            <dt-icon-user
-              :size="iconSize"
-              :class="iconClass"
-              :data-qa="dataQa"
-              :aria-label="ariaLabel"
-            />
+          <template #icon="{ iconSize }">
+            <dt-icon-user :size="iconSize" />
           </template>
         </dt-avatar>
       </div>
@@ -100,13 +95,8 @@
           icon-aria-label="user icon"
           clickable
         >
-          <template #icon="{ iconSize, iconClass, dataQa, ariaLabel }">
-            <dt-icon-user
-              :size="iconSize"
-              :class="iconClass"
-              :data-qa="dataQa"
-              :aria-label="ariaLabel"
-            />
+          <template #icon="{ iconSize }">
+            <dt-icon-user :size="iconSize" />
           </template>
         </dt-avatar>
         <dt-avatar
@@ -130,13 +120,8 @@
           :seed="$attrs.seed"
           :group="10"
         >
-          <template #icon="{ iconSize, iconClass, dataQa, ariaLabel }">
-            <dt-icon-user
-              :size="iconSize"
-              :class="iconClass"
-              :data-qa="dataQa"
-              :aria-label="ariaLabel"
-            />
+          <template #icon="{ iconSize }">
+            <dt-icon-user :size="iconSize" />
           </template>
         </dt-avatar>
         <dt-avatar
