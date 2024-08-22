@@ -6,14 +6,9 @@
     v-model:brand="brand"
     @filter="filterTokens"
   />
-  <div
-    v-if="noSearchResults"
-    class="d-d-flex d-fl-center d-p16 d-gg4 d-fc-tertiary d-fs-300"
-  >
-    <span>No results found for</span>
-    <strong class="d-fw-semibold">
-      &OpenCurlyDoubleQuote;{{ searchCriteria }}&CloseCurlyDoubleQuote;
-    </strong>
+  <div v-if="noSearchResults" class="d-body d-fc-tertiary d-p16 d-ta-center">
+    No results found for
+    <strong class="d-fw-semibold"> &OpenCurlyDoubleQuote;{{ searchCriteria }}&CloseCurlyDoubleQuote;</strong>
   </div>
   <token-tree v-else :node="filteredTokens" :category="null" :level="2" :theme="theme" />
 </template>
