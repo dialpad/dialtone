@@ -9,10 +9,10 @@ figma_url: https://www.figma.com/file/2adf7JhZOncRyjYiy2joil/DT-Core%3A-Componen
 ---
 
 <code-well-header>
-  <dt-stack gap="500" class="d-w100p">
+  <div class="d-d-grid d-gg16 d-g-cols2 d-w100p">
     <dt-input label="Label" placeholder="Placeholder" />
     <dt-input label="Label" type="textarea" placeholder="Placeholder" />
-  </dt-stack>
+  </div>
 </code-well-header>
 
 <!-- <component-combinator component-name="DtInput" /> -->
