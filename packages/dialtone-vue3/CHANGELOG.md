@@ -1,3 +1,10 @@
+## [3.149.1](https://github.com/dialpad/dialtone/compare/dialtone-vue3/v3.149.0...dialtone-vue3/v3.149.1) (2024-08-22)
+
+
+### Bug Fixes
+
+* **Dt Icon:** NO-JIRA change icon import json to js ([#468](https://github.com/dialpad/dialtone/issues/468)) ([356e836](https://github.com/dialpad/dialtone/commit/356e8364189e431c224b783349e78d2e6215a6f9))
+
 # [3.149.0](https://github.com/dialpad/dialtone/compare/dialtone-vue3/v3.148.0...dialtone-vue3/v3.149.0) (2024-08-21)
 
 
