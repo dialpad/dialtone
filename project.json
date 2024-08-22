@@ -21,7 +21,11 @@
         "{projectRoot}/tsconfig.json"
       ],
       "outputs": [
-        "{projectRoot}/dist/*"
+        "{projectRoot}/dist/css",
+        "{projectRoot}/dist/themes",
+        "{projectRoot}/dist/tokens",
+        "{projectRoot}/dist/vue2",
+        "{projectRoot}/dist/vue3"
       ]
     },
     "publish": {

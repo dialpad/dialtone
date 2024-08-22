@@ -1,6 +1,17 @@
 {
   "name": "dialtone-css",
   "targets": {
+    "build": {
+      "executor": "nx:run-script",
+      "options": { "script": "build" },
+      "inputs": [
+        "{projectRoot}/lib/build/less/**/*",
+        "{projectRoot}/gulpfile.cjs"
+      ],
+      "outputs": [
+        "{projectRoot}/lib/dist"
+      ]
+    },
     "publish": {
       "executor": "nx:run-commands",
       "options": {
