@@ -1,6 +1,6 @@
 {
   "name": "@dialpad/dialtone-icons",
-  "version": "4.26.4",
+  "version": "4.26.5",
   "description": "Dialtone icon library",
   "files": [
     "dist",
