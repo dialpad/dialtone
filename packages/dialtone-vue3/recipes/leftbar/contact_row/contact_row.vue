@@ -18,12 +18,19 @@
         :full-name="name"
         :image-src="avatarSrc"
         image-alt=""
-        :icon-name="iconName"
-        icon-size="200"
         size="sm"
         :seed="avatarSeed"
         :presence="avatarPresence"
-      />
+      >
+        <template
+          v-if="noInitials"
+          #icon
+        >
+          <dt-icon-user
+            :size="200"
+          />
+        </template>
+      </dt-avatar>
     </template>
     <template #label>
       <dt-emoji-text-wrapper
@@ -60,6 +67,7 @@ import { DtRecipeGeneralRow } from '@/recipes/leftbar/general_row';
 import DtEmojiTextWrapper from '@/components/emoji_text_wrapper/emoji_text_wrapper.vue';
 import DtAvatar from '@/components/avatar/avatar.vue';
 import { extractVueListeners, safeConcatStrings } from '@/common/utils';
+import { DtIconUser } from '@dialpad/dialtone-icons/vue3';
 
 export default {
   name: 'DtRecipeContactRow',
@@ -68,6 +76,7 @@ export default {
     DtAvatar,
     DtRecipeGeneralRow,
     DtEmojiTextWrapper,
+    DtIconUser,
   },
 
   inheritAttrs: false,
@@ -230,10 +239,6 @@ export default {
 
     contactDescription () {
       return safeConcatStrings([this.name, this.presenceText, this.userStatus]);
-    },
-
-    iconName () {
-      return this.noInitials ? 'user' : null;
     },
   },
 };
