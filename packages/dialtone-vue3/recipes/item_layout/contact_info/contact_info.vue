@@ -26,11 +26,25 @@
             :full-name="avatar.fullName"
             :image-src="avatar.src"
             image-alt=""
-            :icon-name="avatarIcon"
-            :overlay-icon="avatar.icon"
             :overlay-text="avatar.text"
             :avatar-class="[{ 'd-mln24': index > 0, 'd-bc-brand': !!avatar.halo }]"
-          />
+          >
+            <template
+              v-if="avatarIcon"
+              #icon="{ iconSize }"
+            >
+              <component
+                :is="avatarIcon"
+                :size="iconSize"
+              />
+            </template>
+            <template
+              v-if="avatar.icon"
+              #overlayIcon
+            >
+              <component :is="avatar.icon" />
+            </template>
+          </dt-avatar>
         </span>
         <dt-avatar
           v-else
@@ -38,11 +52,20 @@
           :full-name="avatarFullName"
           :image-src="avatarSrc"
           image-alt=""
-          :icon-name="avatarIcon"
           :seed="avatarSeed"
           :color="avatarColor"
           :presence="presence"
-        />
+        >
+          <template
+            v-if="avatarIcon"
+            #icon="{ iconSize }"
+          >
+            <component
+              :is="avatarIcon"
+              :size="iconSize"
+            />
+          </template>
+        </dt-avatar>
       </button>
     </template>
     <template #default>
@@ -145,7 +168,7 @@ export default {
      * Avatar icon to display if `avatarSrc` is empty.
      */
     avatarIcon: {
-      type: String,
+      type: Object,
       default: null,
     },
 
