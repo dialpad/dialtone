@@ -8,7 +8,7 @@ storybook: https://dialtone.dialpad.com/vue/?path=/story/components-badge--defau
 figma_url: https://www.figma.com/file/2adf7JhZOncRyjYiy2joil/DT-Core%3A-Components-7?node-id=8914%3A21227&viewport=656%2C314%2C0.55&t=xHutRjwo1o5zMTgT-11
 ---
 
-<code-well-header bgclass="d-bgc-primary">
+<code-well-header>
   <dt-stack direction="row" gap="400" class="d-ai-center">
     <dt-badge text="Label" />
     <dt-badge kind="count" text="1" />

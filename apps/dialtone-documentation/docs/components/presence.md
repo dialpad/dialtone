@@ -7,7 +7,7 @@ image: assets/images/components/presence.png
 storybook: https://dialtone.dialpad.com/vue/?path=/docs/components-presence--default
 figma_url: https://www.figma.com/file/2adf7JhZOncRyjYiy2joil/DT-Core%3A-Components-7?node-id=9628%3A59018&viewport=-1353%2C1919%2C1.91&t=xHutRjwo1o5zMTgT-11
 ---
-<code-well-header bgclass="d-bgc-primary">
+<code-well-header>
   <example-presence presence="active"/>
 </code-well-header>
 
@@ -20,7 +20,7 @@ Located at the bottom right of an avatar, the `presence` indicator displays a us
 ### Active
 
 When a user is available.
-<code-well-header bgclass="d-bgc-primary">
+<code-well-header>
   <example-presence presence="active"/>
 </code-well-header>
 
@@ -40,7 +40,7 @@ showHtmlWarning />
 ### Busy
 
 When a user is unavailable, either due to being **'On a call'**, **'In a meeting'**, or set to **'DND (Do Not Disturb)'**. Additionally, a text label indicating their specific status will appear under the user's name.
-<code-well-header bgclass="d-bgc-primary">
+<code-well-header>
   <example-presence presence="busy"/>
 </code-well-header>
 
@@ -60,7 +60,7 @@ showHtmlWarning />
 ### Away
 
 When a user has a scheduled meeting on their synced calendar (Google G Suite or Microsoft Office 365) and is not actively participating in it through the app. Additionally, **'In a meeting'** will appear under the user's name.
-<code-well-header bgclass="d-bgc-primary">
+<code-well-header>
   <example-presence presence="away"/>
 </code-well-header>
 
@@ -80,7 +80,7 @@ showHtmlWarning />
 ### Offline
 
 When a user has not logged in for their first time.
-<code-well-header bgclass="d-bgc-primary">
+<code-well-header>
   <example-presence presence="offline"/>
 </code-well-header>
 

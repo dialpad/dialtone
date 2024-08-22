@@ -6,7 +6,7 @@ description: Tabs allow users to navigation between grouped content in different
 storybook: https://dialtone.dialpad.com/vue/?path=/story/components-tabs--default
 figma_url: https://www.figma.com/file/2adf7JhZOncRyjYiy2joil/DT-Core%3A-Components-7?node-id=8919%3A21321&viewport=306%2C-547%2C1.01&t=xHutRjwo1o5zMTgT-11
 ---
-<code-well-header bgclass="d-bgc-primary">
+<code-well-header>
   <example-tabs />
 </code-well-header>
 
@@ -17,7 +17,7 @@ figma_url: https://www.figma.com/file/2adf7JhZOncRyjYiy2joil/DT-Core%3A-Componen
 
 ### Base Styles
 
-<code-well-header bgclass="d-bgc-primary">
+<code-well-header>
   <example-tabs />
 </code-well-header>
 
@@ -73,7 +73,7 @@ showHtmlWarning />
 
 ### Sizes
 
-<code-well-header bgclass="d-bgc-primary">
+<code-well-header>
   <example-tabs hide-content size="small" />
 </code-well-header>
 
@@ -131,7 +131,7 @@ showHtmlWarning />
 
 Add a `d-tablist--no-border` to remove the bottom border of any tablist. Handy for small tablists and tablists serving as subtabs to a larger menu.
 
-<code-well-header bgclass="d-bgc-primary">
+<code-well-header>
   <example-tabs hide-content borderless />
 </code-well-header>
 

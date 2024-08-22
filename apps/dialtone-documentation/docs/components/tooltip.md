@@ -7,13 +7,9 @@ description: A tooltip is a floating label that briefly explains an action, func
 storybook: https://dialtone.dialpad.com/vue/?path=/story/components-tooltip--default
 figma_url: https://www.figma.com/file/2adf7JhZOncRyjYiy2joil/DT-Core%3A-Components-7?node-id=8919%3A21626&viewport=-614%2C359%2C0.86&t=xHutRjwo1o5zMTgT-11
 ---
-<code-well-header class='d-hmn164'>
-  <button class="d-btn d-btn--outlined d-tooltip--hover" type="button">
-    <div class="d-tooltip d-tooltip__arrow--bottom-center d-ps-absolute">
-      <span>Simple tooltip</span>
-    </div>
-    <span>Hover for Tooltip Example</span>
-  </button>
+
+<code-well-header>
+  <dt-button v-dt-tooltip="`Simple tooltip`">Hover me</dt-button>
 </code-well-header>
 
 ## Tooltip as a directive

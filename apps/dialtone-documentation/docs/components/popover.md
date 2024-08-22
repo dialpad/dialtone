@@ -7,7 +7,7 @@ image: assets/images/components/popover.png
 storybook: https://dialtone.dialpad.com/vue/?path=/story/components-popover--default
 figma_url: https://www.figma.com/file/2adf7JhZOncRyjYiy2joil/DT-Core%3A-Components-7?node-id=8921%3A22411&viewport=831%2C-269%2C0.43&t=xHutRjwo1o5zMTgT-11
 ---
-<code-well-header bgclass="d-bgc-primary">
+<code-well-header>
   <example-popover modal />
 </code-well-header>
 
@@ -58,7 +58,7 @@ Your popover should be non-modal when:
 
 ### Popover - Modal
 
-<code-well-header bgclass="d-bgc-primary">
+<code-well-header>
   <example-popover modal />
 </code-well-header>
 
@@ -113,7 +113,7 @@ showHtmlWarning />
 
 ### Popover - Non Modal
 
-<code-well-header bgclass="d-bgc-primary">
+<code-well-header>
   <example-popover />
 </code-well-header>
 
@@ -169,7 +169,7 @@ showHtmlWarning />
 
 ### With Header - Modal
 
-<code-well-header bgclass="d-bgc-primary">
+<code-well-header>
   <example-popover modal header>
     <template #content>
       <div class="d-mb8">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consequuntur delectus distinctio id iure labore, maiores mollitia reprehenderit sunt tempore veritatis. Aliquam delectus earum ex, expedita ipsam nobis obcaecati quibusdam repudiandae. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consequuntur delectus distinctio id iure labore, maiores mollitia reprehenderit sunt tempore veritatis. Aliquam delectus earum ex, expedita ipsam nobis obcaecati quibusdam repudiandae.<br></div>
@@ -249,7 +249,7 @@ showHtmlWarning />
 
 ### With Footer - Modal
 
-<code-well-header bgclass="d-bgc-primary">
+<code-well-header>
   <example-popover modal footer>
     <template #content>
       <div class="d-mb8">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consequuntur delectus distinctio id iure labore, maiores mollitia reprehenderit sunt tempore veritatis. Aliquam delectus earum ex, expedita ipsam nobis obcaecati quibusdam repudiandae. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consequuntur delectus distinctio id iure labore, maiores mollitia reprehenderit sunt tempore veritatis. Aliquam delectus earum ex, expedita ipsam nobis obcaecati quibusdam repudiandae.<br></div>
