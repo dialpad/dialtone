@@ -14,6 +14,17 @@
 //  $   WRAPPERS
 //  ----------------------------------------------------------------------------
 .d-tablist {
+    //  --  COMPONENT CSS VARS
+    //  ------------------------------------------------------------------------
+    --tab-color-background: var(--dt-action-color-background-base-default);
+    --tab-color-text: var(--dt-action-color-foreground-muted-default);
+    --tab-line-height: var(--dt-font-line-height-200);
+    --tab-font-weight: var(--dt-font-weight-medium);
+    --tab-border-radius-top: var(--dt-size-radius-400);
+    --tab-padding-x: var(--dt-space-450);
+    --tab-padding-y: var(--dt-space-400);
+    --tab-padding-bottom: calc(var(--tab-padding-y) + var(--dt-space-100));
+
     position: relative;
     display: flex;
     flex-wrap: wrap;
@@ -37,23 +48,6 @@
         content: '';
     }
 
-    //  ============================================================================
-    //  $   SIZES
-    //  ----------------------------------------------------------------------------
-    &--sm {
-        font-size: var(--dt-font-size-100);
-
-        .d-tab {
-            --tab-padding-x: var(--dt-space-400);
-            --tab-padding-y: var(--dt-space-400);
-            --tab-padding-bottom: calc(var(--tab-padding-y) + var(--dt-space-100));
-            --tab-border-radius-top: var(--dt-size-radius-300);
-
-            .d-tablist--no-border &:not(.d-tab--selected) {
-                border-radius: var(--tab-border-radius-top);
-            }
-        }
-    }
 }
 
 
@@ -61,17 +55,6 @@
 //  $   BASE STYLE
 //  ----------------------------------------------------------------------------
 .d-tab {
-    //  --  COMPONENT CSS VARS
-    //  ------------------------------------------------------------------------
-    --tab-color-background: var(--dt-action-color-background-base-default);
-    --tab-color-text: var(--dt-action-color-foreground-muted-default);
-    --tab-line-height: var(--dt-font-line-height-200);
-    --tab-font-weight: var(--dt-font-weight-medium);
-    --tab-border-radius-top: var(--dt-size-radius-400);
-    --tab-padding-x: var(--dt-space-450);
-    --tab-padding-y: var(--dt-space-400);
-    --tab-padding-bottom: calc(var(--tab-padding-y) + var(--dt-space-100));
-
     position: relative;
     display: inline-flex;
     gap: var(--dt-space-400);
@@ -144,6 +127,22 @@
     @media (prefers-reduced-motion) {
         transition: none;
     }
+
+    //  ============================================================================
+    //  $   SIZES
+    //  ----------------------------------------------------------------------------
+    .d-tablist--sm & {
+        --tab-padding-x: var(--dt-space-400);
+        --tab-padding-y: var(--dt-space-400);
+        --tab-padding-bottom: calc(var(--tab-padding-y) + var(--dt-space-100));
+        --tab-border-radius-top: var(--dt-size-radius-300);
+
+        font-size: var(--dt-font-size-100);
+
+        .d-tablist--no-border &:not(.d-tab--selected) {
+            border-radius: var(--tab-border-radius-top);
+        }
+    }
 }
 
 //  ============================================================================
@@ -173,7 +172,6 @@
         }
     }
 }
-
 
 //  ============================================================================
 //  $   INVERTED STYLE
