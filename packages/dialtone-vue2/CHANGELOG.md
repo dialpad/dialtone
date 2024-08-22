@@ -1,3 +1,10 @@
+## [2.156.1](https://github.com/dialpad/dialtone/compare/dialtone-vue2/v2.156.0...dialtone-vue2/v2.156.1) (2024-08-22)
+
+
+### Bug Fixes
+
+* **Dt Icon:** NO-JIRA change icon import json to js ([#468](https://github.com/dialpad/dialtone/issues/468)) ([356e836](https://github.com/dialpad/dialtone/commit/356e8364189e431c224b783349e78d2e6215a6f9))
+
 # [2.156.0](https://github.com/dialpad/dialtone/compare/dialtone-vue2/v2.155.0...dialtone-vue2/v2.156.0) (2024-08-21)
 
 
