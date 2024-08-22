@@ -48,14 +48,14 @@ import { illustrations } from '@dialpad/dialtone-icons/vue3'; // Vue 3+
 
 ```js
 import keywords from '@dialpad/dialtone-icons/keywords-icons.json';
-import iconsList from '@dialpad/dialtone-icons/icons.json';
+import iconsList from '@dialpad/dialtone-icons/icons.js';
 ```
 
 - Importing illustration related data
 
 ```js
 import keywords from '@dialpad/dialtone-icons/keywords-illustrations.json';
-import illustrationsList from '@dialpad/dialtone-icons/illustrations.json';
+import illustrationsList from '@dialpad/dialtone-icons/illustrations.js';
 ```
 
 ## Committing
