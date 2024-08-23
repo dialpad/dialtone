@@ -1,3 +1,10 @@
+# [3.150.0-beta.1](https://github.com/dialpad/dialtone/compare/dialtone-vue3/v3.149.1...dialtone-vue3/v3.150.0-beta.1) (2024-08-23)
+
+
+### Features
+
+* **Avatar:** DLT-1916 remove dt-icon ([#466](https://github.com/dialpad/dialtone/issues/466)) ([6ef90db](https://github.com/dialpad/dialtone/commit/6ef90db28f3c5164c4c9c9657b039a74a9b6daf5))
+
 ## [3.149.1](https://github.com/dialpad/dialtone/compare/dialtone-vue3/v3.149.0...dialtone-vue3/v3.149.1) (2024-08-22)
 
 
