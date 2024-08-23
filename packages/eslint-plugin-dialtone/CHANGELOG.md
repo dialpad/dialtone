@@ -1,3 +1,10 @@
+# [1.7.0](https://github.com/dialpad/dialtone/compare/eslint-plugin-dialtone/v1.6.0...eslint-plugin-dialtone/v1.7.0) (2024-08-23)
+
+
+### Features
+
+* DLT-1844 create linter warning for usage of text utilities ([#459](https://github.com/dialpad/dialtone/issues/459)) ([59730e1](https://github.com/dialpad/dialtone/commit/59730e1fe9193af94b7db2de93bb9c7b38e744c9))
+
 ## [1.0.2](https://github.com/dialpad/dialtone/compare/eslint-plugin-dialtone/v1.0.1...eslint-plugin-dialtone/v1.0.2) (2024-03-26)
 
 
