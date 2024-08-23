@@ -3,6 +3,7 @@ import { createRenderConfig } from '@/common/storybook_utils';
 import DtFilterPill from './filter_pill.vue';
 import DtFilterPillDefaultTemplate from './filter_pill_default.story.vue';
 import DtFilterPillVariantsTemplate from './filter_pill_variants.story.vue';
+import { action } from '@storybook/addon-actions';
 
 export const argTypesData = {
   // Slots
@@ -35,6 +36,8 @@ export const argTypesData = {
 export const argsData = {
   label: 'Users or groups',
   content: 'This is a named slot with it\'s default set at the story level.',
+  onOpen: action('open'),
+  onReset: action('reset'),
 };
 
 // Story Collection
@@ -49,10 +52,9 @@ export default {
 // Stories
 export const Default = {
   render: (argsData) => createRenderConfig(DtFilterPill, DtFilterPillDefaultTemplate, argsData),
-  args: {},
 };
 
 export const Variants = {
   render: (argsData) => createRenderConfig(DtFilterPill, DtFilterPillVariantsTemplate, argsData),
-  args: {},
+  parameters: { options: { showPanel: false }, controls: { disable: true } },
 };

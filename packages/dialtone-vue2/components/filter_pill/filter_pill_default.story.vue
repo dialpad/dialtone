@@ -9,7 +9,7 @@
     @reset="$attrs.onReset"
     @open="$attrs.onOpen"
   >
-    <template slot="content">
+    <template #content>
       <span
         v-if="$attrs.content"
         v-html="$attrs.content"

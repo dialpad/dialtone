@@ -1,7 +1,6 @@
 import { createLocalVue, mount } from '@vue/test-utils';
 import DtFilterPill from './filter_pill.vue';
 import { DtPopover } from '@/components/popover';
-import { beforeEach } from 'vitest';
 
 const MOCK_OPEN_STUB = vi.fn();
 const MOCK_RESET_STUB = vi.fn();
@@ -147,11 +146,6 @@ describe('DtFilterPill Tests', function () {
 
   describe('Interactivity Tests', () => {
     beforeEach(() => {
-      mockListeners = {
-        open: MOCK_OPEN_STUB,
-        reset: MOCK_RESET_STUB,
-      };
-
       mockProps = {
         showReset: true,
       };
@@ -221,7 +215,7 @@ describe('DtFilterPill Tests', function () {
 
         content = wrapper
           .findComponent(DtPopover)
-          .findComponent({ ref: 'popover__content' });
+          .findComponent({ ref: 'content' });
       });
 
       it('Renders the popover content', async () => {
