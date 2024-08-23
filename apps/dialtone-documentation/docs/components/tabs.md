@@ -6,6 +6,7 @@ description: Tabs allow users to navigation between grouped content in different
 storybook: https://dialtone.dialpad.com/vue/?path=/story/components-tabs--default
 figma_url: https://www.figma.com/file/2adf7JhZOncRyjYiy2joil/DT-Core%3A-Components-7?node-id=8919%3A21321&viewport=306%2C-547%2C1.01&t=xHutRjwo1o5zMTgT-11
 ---
+
 <code-well-header>
   <example-tabs />
 </code-well-header>
