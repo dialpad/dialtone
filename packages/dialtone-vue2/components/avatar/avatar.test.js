@@ -9,6 +9,7 @@ const MOCK_INITIALS = 'JN';
 const MOCK_SIZE = 'lg';
 const MOCK_GROUP = 25;
 const MOCK_CUSTOM_CLASS = 'my-custom-class';
+const MOCK_ICON_SLOT = '<template #icon=>Icon</template>';
 let MOCK_ELEMENT = null;
 
 const baseProps = {
@@ -20,6 +21,7 @@ const baseListeners = {};
 let mockProps = {};
 let mockListeners = {};
 const testContext = {};
+let mockSlots = {};
 
 describe('DtAvatar Tests', () => {
   let wrapper;
@@ -32,6 +34,7 @@ describe('DtAvatar Tests', () => {
       propsData: { ...baseProps, ...mockProps },
       listeners: { ...baseListeners, ...mockListeners },
       localVue: testContext.localVue,
+      slots: { ...mockSlots },
     });
 
     image = wrapper.find('[data-qa="dt-avatar-image"]');
@@ -50,6 +53,7 @@ describe('DtAvatar Tests', () => {
   afterEach(() => {
     mockProps = {};
     mockListeners = {};
+    mockSlots = {};
   });
 
   describe('Presentation Tests', () => {
@@ -83,19 +87,19 @@ describe('DtAvatar Tests', () => {
       });
     });
 
-    describe('When the iconName is provided', () => {
+    describe('When the icon slot is provided', () => {
       beforeEach(() => {
-        mockProps = { iconName: 'accessibility' };
+        mockSlots = { icon: MOCK_ICON_SLOT };
 
         updateWrapper();
       });
 
       it('icon should exist', () => {
-        expect(wrapper.find('svg').exists()).toBeTruthy();
+        expect(wrapper.find('[data-qa="dt-avatar-icon"]').exists()).toBeTruthy();
       });
 
       it('should have correct class', () => {
-        expect(wrapper.find('svg').classes(AVATAR_KIND_MODIFIERS.icon)).toBe(true);
+        expect(wrapper.find('[data-qa="dt-avatar-icon"]').classes(AVATAR_KIND_MODIFIERS.icon)).toBe(true);
       });
     });
 

@@ -6,7 +6,7 @@
       </p>
       <dt-recipe-contact-info
         avatar-labelled-by="contact-number1"
-        avatar-icon="user"
+        :avatar-icon="avatarIcon"
       >
         <template #header>
           <div class="d-d-flex d-ai-center d-mb2">
@@ -33,7 +33,7 @@
       </p>
       <dt-recipe-contact-info
         avatar-labelled-by="contact-number2"
-        avatar-icon="user"
+        :avatar-icon="avatarIcon"
       >
         <template #header>
           <div class="d-d-flex d-ai-center d-mb2">
@@ -68,7 +68,7 @@
       >
         <dt-recipe-contact-info
           avatar-labelled-by="contact-name1"
-          avatar-icon="user"
+          :avatar-icon="avatarIcon"
         >
           <template #header>
             <div class="d-d-flex d-ai-center d-mb2">
@@ -111,7 +111,7 @@
       </p>
       <dt-recipe-contact-info
         avatar-labelled-by="contact-name2"
-        avatar-icon="user"
+        :avatar-icon="avatarIcon"
       >
         <template #header>
           <div class="d-d-flex d-ai-center d-mb2">
@@ -290,6 +290,7 @@
 </template>
 
 <script>
+/* eslint-disable max-lines */
 import DtRecipeContactInfo from './contact_info.vue';
 import { DtButton } from '@/components/button';
 import { DtIcon } from '@/components/icon';
@@ -297,15 +298,17 @@ import { DtLink } from '@/components/link';
 
 import avatar1 from '@/common/assets/avatar1.png';
 import avatar2 from '@/common/assets/avatar2.png';
+import { DtIconHear, DtIconUser } from '@dialpad/dialtone-icons/vue2';
 
 export default {
   name: 'DtRecipeContactInfoVariants',
   components: { DtButton, DtRecipeContactInfo, DtIcon, DtLink },
+
   data () {
     return {
       adminListenInAvatars: [
         { src: avatar1, fullName: 'Jaqueline Nackos', seed: 'JN' },
-        { src: avatar2, fullName: 'Joseph Lumaban', icon: 'hear', seed: 'JL' },
+        { src: avatar2, fullName: 'Joseph Lumaban', icon: DtIconHear, seed: 'JL' },
       ],
 
       groupCallAvatars: [
@@ -313,6 +316,8 @@ export default {
         { src: avatar1, fullName: 'Jaqueline Nackos', seed: 'JN' },
         { src: avatar2, fullName: 'Natalie Woods', text: '+3', seed: 'NW' },
       ],
+
+      avatarIcon: DtIconUser,
     };
   },
 };
