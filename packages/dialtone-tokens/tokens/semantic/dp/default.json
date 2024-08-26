@@ -1758,7 +1758,7 @@
         "muted": {
           "outlined": {
             "default": {
-              "value": "{color.black.600}",
+              "value": "{color.border.moderate}",
               "type": "color"
             }
           }
