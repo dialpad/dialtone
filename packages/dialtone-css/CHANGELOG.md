@@ -1,3 +1,10 @@
+## [8.42.3](https://github.com/dialpad/dialtone/compare/dialtone-css/v8.42.2...dialtone-css/v8.42.3) (2024-08-22)
+
+
+### Bug Fixes
+
+* **Dt Icon:** NO-JIRA change icon import json to js ([#468](https://github.com/dialpad/dialtone/issues/468)) ([356e836](https://github.com/dialpad/dialtone/commit/356e8364189e431c224b783349e78d2e6215a6f9))
+
 ## [8.42.2](https://github.com/dialpad/dialtone/compare/dialtone-css/v8.42.1...dialtone-css/v8.42.2) (2024-08-21)
 
 

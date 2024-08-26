@@ -1,4 +1,4 @@
-# [1.1.0](https://github.com/dialpad/dialtone/compare/eslint-plugin-dialtone/v1.0.2...eslint-plugin-dialtone/v1.1.0) (2024-08-21)
+# [1.7.0](https://github.com/dialpad/dialtone/compare/eslint-plugin-dialtone/v1.6.0...eslint-plugin-dialtone/v1.7.0) (2024-08-23)
 
 
 ### Features

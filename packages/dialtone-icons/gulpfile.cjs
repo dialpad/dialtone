@@ -49,8 +49,8 @@ const paths = {
   exports: {
     keywordsIcons: './src/keywords-icons.json',
     keywordsIllustrations: './src/keywords-illustrations.json',
-    illustrationsList: './dist/illustrations.json',
-    iconsList: './dist/icons.json',
+    illustrationsList: './dist/illustrations.js',
+    iconsList: './dist/icons.js',
     index: './index.js',
   },
 };
@@ -196,9 +196,9 @@ const updateIconsJSON = function (done) {
   iconsList.sort();
 
   fs.writeFileSync(paths.exports.keywordsIcons, JSON.stringify({ categories: { ...updatedKeywords } }));
-  fs.writeFileSync(paths.exports.iconsList, JSON.stringify(iconsList));
+  fs.writeFileSync(paths.exports.iconsList, `export default ${JSON.stringify(iconsList)}`);
 
-  // Copies the icons.json and keywords-icons.json to dist/
+  // Copies the icons.js and keywords-icons.json to dist/
   src([paths.exports.keywordsIcons, paths.exports.iconsList])
     .pipe(dest('./dist/'));
 
@@ -229,9 +229,9 @@ const updateIllustrationsJSON = function (done) {
   illustrationsList.sort();
 
   fs.writeFileSync(paths.exports.keywordsIllustrations, JSON.stringify({ categories: { ...updatedKeywords } }));
-  fs.writeFileSync(paths.exports.illustrationsList, JSON.stringify(illustrationsList));
+  fs.writeFileSync(paths.exports.illustrationsList, `export default ${JSON.stringify(illustrationsList)}`);
 
-  // Copies the illustrations.json and keywords-illustrations.json to dist/
+  // Copies the illustrations.js and keywords-illustrations.json to dist/
   src([paths.exports.keywordsIllustrations, paths.exports.illustrationsList])
     .pipe(dest('./dist/'));
 
