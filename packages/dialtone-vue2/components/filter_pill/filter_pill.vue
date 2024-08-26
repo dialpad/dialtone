@@ -12,6 +12,8 @@
           icon-position="right"
           importance="outlined"
           kind="muted"
+          :aria-busy="loading"
+          :aria-label="label"
           :class="{ 'd-filter-pill--active': active }"
           :disabled="disabled"
           @click="isPopoverOpen = true"
@@ -41,6 +43,7 @@
           importance="clear"
           kind="muted"
           size="sm"
+          :aria-label="resetButtonAriaLabel"
           @click="$emit('reset', $event)"
         >
           <template #icon>
@@ -126,6 +129,15 @@ export default {
     },
 
     /**
+     * Aria label for reset/clear button,
+     * required if showReset is set
+     */
+    resetButtonAriaLabel: {
+      type: String,
+      default: undefined,
+    },
+
+    /**
      * Shows the reset/clear icon
      */
     showReset: {
@@ -161,6 +173,21 @@ export default {
   watch: {
     isPopoverOpen (isOpen) {
       this.$emit('open', isOpen);
+    },
+
+    showReset: {
+      immediate: true,
+      handler () {
+        this.validateProps();
+      },
+    },
+  },
+
+  methods: {
+    validateProps () {
+      if (this.showReset && !this.resetButtonAriaLabel) {
+        console.error('DtFilterPill a11y: reset-button-aria-label prop must be set if show-reset is set');
+      }
     },
   },
 };

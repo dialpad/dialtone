@@ -133,7 +133,10 @@ describe('DtFilterPill Tests', function () {
 
     describe('When show-reset is set', () => {
       it('Should render reset button', () => {
-        mockProps = { showReset: true };
+        mockProps = {
+          showReset: true,
+          resetButtonAriaLabel: 'Reset',
+        };
 
         updateWrapper();
 
@@ -146,6 +149,7 @@ describe('DtFilterPill Tests', function () {
     beforeEach(() => {
       mockProps = {
         showReset: true,
+        resetButtonAriaLabel: 'Reset',
       };
 
       updateWrapper();
@@ -244,6 +248,24 @@ describe('DtFilterPill Tests', function () {
 
       it('Renders the content on the popover footer', async () => {
         expect(footerContent.html()).toContain(MOCK_FOOTER_CONTENT);
+      });
+    });
+  });
+
+  describe('Validation Tests', () => {
+    describe('When show-reset is set and reset-button-aria-label is undefined', () => {
+      it('Should output console error', () => {
+        const message = 'DtFilterPill a11y: reset-button-aria-label prop must be set if show-reset is set';
+        let consoleError = vi.spyOn(console, 'error').mockClear();
+
+        mockProps = { showReset: true };
+
+        updateWrapper();
+
+        expect(consoleError).toHaveBeenCalledWith(message);
+
+        consoleError = null;
+        console.error.mockRestore();
       });
     });
   });

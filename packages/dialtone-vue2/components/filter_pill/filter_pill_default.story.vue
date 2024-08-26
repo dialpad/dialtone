@@ -5,6 +5,7 @@
     :label="$attrs.label"
     :loading="$attrs.loading"
     :loading-skeleton-width="$attrs.loadingSkeletonWidth"
+    :reset-button-aria-label="$attrs.resetButtonAriaLabel"
     :show-reset="$attrs.showReset"
     @reset="$attrs.onReset"
     @open="$attrs.onOpen"

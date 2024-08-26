@@ -67,6 +67,7 @@
     <dt-filter-pill
       active
       label="Active filter with reset"
+      reset-button-aria-label="Reset"
       show-reset
     >
       <template #content>
@@ -80,13 +81,17 @@
     <!-- Loading -->
     <dt-stack gap="300">
       <h3>Loading</h3>
-      <dt-filter-pill loading>
+      <dt-filter-pill
+        label="Loading"
+        loading
+      >
         <template #content>
           Default content
         </template>
       </dt-filter-pill>
       <h3>Loading with custom skeleton width</h3>
       <dt-filter-pill
+        label="Loading with custom skeleton width"
         loading
         loading-skeleton-width="50px"
       >
