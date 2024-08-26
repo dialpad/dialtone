@@ -1,3 +1,22 @@
+# [9.70.0](https://github.com/dialpad/dialtone/compare/dialtone/v9.69.1...dialtone/v9.70.0) (2024-08-26)
+
+
+### Bug Fixes
+
+* NO-JIRA eslint documentation links ([#472](https://github.com/dialpad/dialtone/issues/472)) ([32f606b](https://github.com/dialpad/dialtone/commit/32f606bd821ed23f10f3345370ea68dcc221ff2d))
+* **Tokens:** NO-JIRA move themes to tokens package ([#476](https://github.com/dialpad/dialtone/issues/476)) ([ea8d977](https://github.com/dialpad/dialtone/commit/ea8d9771edab34db8ef68ab5e8743bb4ba713f7e))
+
+
+### Features
+
+* **Contact Row:** NO-JIRA add `avatarColor` prop to contact row recipe ([#469](https://github.com/dialpad/dialtone/issues/469)) ([f0be39d](https://github.com/dialpad/dialtone/commit/f0be39d0735a36fb561233bc274cdd513c90cd22))
+* DP-108555 change prop type in contact centers recipe component ([#471](https://github.com/dialpad/dialtone/issues/471)) ([f45f302](https://github.com/dialpad/dialtone/commit/f45f3025b2f362b1b24f16022a32ef2fd5c8cb8c))
+
+
+### Reverts
+
+* Revert "chore(release): NO-JIRA eslint-plugin-dialtone/v1.1.0" ([22736cb](https://github.com/dialpad/dialtone/commit/22736cb896d365a1d712736e6c445e7f2509004a))
+
 ## [9.69.1](https://github.com/dialpad/dialtone/compare/dialtone/v9.69.0...dialtone/v9.69.1) (2024-08-22)
 
 
