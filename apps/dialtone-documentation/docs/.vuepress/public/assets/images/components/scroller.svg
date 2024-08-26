@@ -1,7 +1,15 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 264 107" fill="none">
-<rect x="187" y="13" width="8" height="82" rx="4" fill="var(--dt-color-surface-primary)" id="Rectangle 494"/>
-<rect x="68" y="28" width="96" height="12" rx="6" fill="var(--dt-color-surface-moderate)" id="Rectangle 490"/>
-<rect x="68" y="48" width="68" height="12" rx="6" fill="var(--dt-color-surface-moderate)" id="Rectangle 492"/>
-<rect x="68" y="68" width="80" height="12" rx="6" fill="var(--dt-color-surface-moderate)" id="Rectangle 493"/>
-<rect x="187" y="29" width="8" height="40" rx="4" fill="var(--dt-color-foreground-placeholder)" id="Rectangle 491"/>
+<svg width="264" height="107" viewBox="0 0 264 107" fill="none" xmlns="http://www.w3.org/2000/svg">
+<rect x="187" y="13" width="8" height="82" rx="4" fill="white"/>
+<g clip-path="url(#clip0_2878_630)">
+<rect x="68" y="6" width="96" height="28" rx="8" fill="#E9E9E9"/>
+<rect x="68" y="40" width="96" height="28" rx="8" fill="#E9E9E9"/>
+<rect x="68" y="74" width="96" height="28" rx="8" fill="#E9E9E9"/>
+</g>
+<rect x="187" y="29" width="8" height="40" rx="4" fill="#E9E9E9"/>
+<rect x="53" y="13" width="157" height="82" rx="16" stroke="black" stroke-opacity="0.18" stroke-linecap="round" stroke-dasharray="3 3"/>
+<defs>
+<clipPath id="clip0_2878_630">
+<rect width="96" height="82" fill="white" transform="translate(68 13)"/>
+</clipPath>
+</defs>
 </svg>
