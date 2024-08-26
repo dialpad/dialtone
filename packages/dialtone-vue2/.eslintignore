@@ -15,7 +15,7 @@ tests/compiled
 dist
 
 # TEMPORARY can be removed once we upgrade to eslint 9
-#**/common/emoji/index.js
+**/common/emoji/index.js
 **/common/storybook_utils.js
 **/components/emoji/emoji.test.js
 **/components/emoji_text_wrapper/emoji_text_wrapper.test.js
