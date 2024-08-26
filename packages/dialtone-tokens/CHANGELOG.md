@@ -1,3 +1,10 @@
+## [1.34.2](https://github.com/dialpad/dialtone/compare/dialtone-tokens/v1.34.1...dialtone-tokens/v1.34.2) (2024-08-26)
+
+
+### Bug Fixes
+
+* **Tokens:** NO-JIRA move themes to tokens package ([#476](https://github.com/dialpad/dialtone/issues/476)) ([ea8d977](https://github.com/dialpad/dialtone/commit/ea8d9771edab34db8ef68ab5e8743bb4ba713f7e))
+
 ## [1.34.1](https://github.com/dialpad/dialtone/compare/dialtone-tokens/v1.34.0...dialtone-tokens/v1.34.1) (2024-08-15)
 
 
