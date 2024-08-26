@@ -1750,7 +1750,7 @@
         "inverted": {
           "outlined": {
             "default": {
-              "value": "{color.black.100}",
+              "value": "{color.border.moderate-inverted}",
               "type": "color"
             }
           }
