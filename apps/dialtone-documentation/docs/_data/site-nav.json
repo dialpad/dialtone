@@ -603,6 +603,11 @@
           "link": "/components/empty-state.html"
         },
         {
+          "text": "Filter Pill",
+          "link": "/components/filter-pill.html",
+          "planned": true
+        },
+        {
           "text": "Hovercard",
           "link": "/components/hovercard.html"
         },
