@@ -4,7 +4,7 @@
   "description": "Design tokens for Dialtone.",
   "type": "module",
   "scripts": {
-    "build": "node ./build.js",
+    "build": "node ./build.js && vite build",
     "publish:external-packages": "pnpm run publish:android-package && pnpm run publish:ios-package",
     "publish:android-package": "cp ./AndroidManifest.xml dist/android && ./gradlew publishToMavenLocal -Pversion=$npm_package_version",
     "publish:ios-package": "./build-ios.js",
