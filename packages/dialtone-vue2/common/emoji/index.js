@@ -1,6 +1,8 @@
 import { emojiPattern } from 'regex-combined-emojis';
 import emojiJsonLocal from 'emoji-toolkit/emoji_strategy.json' with { type: 'json' };
 
+
+
 export const emojiRegex = new RegExp(emojiPattern, 'g');
 export const emojiVersion = '8.0';
 export const defaultEmojiAssetUrl = 'https://cdn.jsdelivr.net/joypixels/assets/' + emojiVersion + '/png/unicode/32/';
