@@ -12,13 +12,10 @@
     "build": {
       "executor": "nx:run-commands",
       "options": {
-        "command": "gulp && vite build"
+        "command": "gulp"
       },
       "inputs": [
-        "{projectRoot}/vite.config.js",
-        "{projectRoot}/common/themes/*.js",
-        "{projectRoot}/gulpfile.cjs",
-        "{projectRoot}/tsconfig.json"
+        "{projectRoot}/gulpfile.cjs"
       ],
       "outputs": [
         "{projectRoot}/dist/css",
