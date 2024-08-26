@@ -5,6 +5,7 @@
 import { register, getTransforms, expandTypesMap } from '@tokens-studio/sd-transforms';
 import StyleDictionary from 'style-dictionary';
 import { promises, readFileSync } from 'fs';
+import { kebabCaseToPascalCase } from '../../common/utils.mjs';
 
 import { registerDialtoneTransforms } from './dialtone-transforms.js';
 import { buildDocs } from './build-docs.js';
@@ -14,18 +15,6 @@ const BASE_FONT_SIZE = Root.font.size.root.value;
 register(StyleDictionary);
 
 registerDialtoneTransforms(StyleDictionary);
-
-/**
- * Transform a string from kebab-case to PascalCase
- * @param string
- * @returns {string}
- */
-function kebabCaseToPascalCase (string) {
-  return string?.toLowerCase()
-    .split('-')
-    .map(word => word.charAt(0).toUpperCase() + word.slice(1))
-    .join('');
-}
 
 StyleDictionary.registerAction({
   name: 'buildDocJson',
