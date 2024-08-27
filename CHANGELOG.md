@@ -1,3 +1,10 @@
+# [9.70.0-beta.2](https://github.com/dialpad/dialtone/compare/dialtone/v9.70.0-beta.1...dialtone/v9.70.0-beta.2) (2024-08-27)
+
+
+### Bug Fixes
+
+* NO-JIRA merge staging into beta ([#478](https://github.com/dialpad/dialtone/issues/478)) ([09f1165](https://github.com/dialpad/dialtone/commit/09f1165f4d4cffc00708aa18cd1067d8b84810aa))
+
 ## [9.70.1](https://github.com/dialpad/dialtone/compare/dialtone/v9.70.0...dialtone/v9.70.1) (2024-08-27)
 
 
