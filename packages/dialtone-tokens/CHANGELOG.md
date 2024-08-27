@@ -1,3 +1,10 @@
+## [1.34.2-beta.1](https://github.com/dialpad/dialtone/compare/dialtone-tokens/v1.34.1...dialtone-tokens/v1.34.2-beta.1) (2024-08-27)
+
+
+### Bug Fixes
+
+* NO-JIRA merge staging into beta ([#478](https://github.com/dialpad/dialtone/issues/478)) ([09f1165](https://github.com/dialpad/dialtone/commit/09f1165f4d4cffc00708aa18cd1067d8b84810aa))
+
 ## [1.34.3](https://github.com/dialpad/dialtone/compare/dialtone-tokens/v1.34.2...dialtone-tokens/v1.34.3) (2024-08-27)
 
 
