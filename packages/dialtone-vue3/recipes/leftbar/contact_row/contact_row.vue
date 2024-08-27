@@ -10,6 +10,7 @@
     :call-button-tooltip="callButtonTooltip"
     :unread-count-tooltip="unreadCountTooltip"
     v-bind="$attrs"
+    data-qa="contact-row"
     v-on="contactRowListeners"
     @call="$emit('call', $event)"
   >
@@ -17,6 +18,7 @@
       <dt-avatar
         :full-name="name"
         :image-src="avatarSrc"
+        :color="avatarColor"
         image-alt=""
         size="sm"
         :seed="avatarSeed"
@@ -107,6 +109,14 @@ export default {
      * Avatar seed, set this to the user's ID to get the same avatar background gradient each time it is displayed.
      */
     avatarSeed: {
+      type: String,
+      default: null,
+    },
+
+    /**
+     * Avatar color to display if `avatarSrc` is empty.
+     */
+    avatarColor: {
       type: String,
       default: null,
     },

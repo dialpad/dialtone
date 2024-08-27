@@ -4,6 +4,7 @@
     :avatar-src="$attrs.avatarSrc"
     :avatar-presence="$attrs.avatarPresence"
     :avatar-seed="$attrs.avatarSeed"
+    :avatar-color="$attrs.avatarColor"
     :presence-text="$attrs.presenceText"
     :unread-count="$attrs.unreadCount"
     :unread-count-tooltip="$attrs.unreadCountTooltip"

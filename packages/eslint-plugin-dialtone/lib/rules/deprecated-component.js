@@ -17,7 +17,7 @@ module.exports = {
     docs: {
       description: "Detects usages of deprecated components that should be replaced by Dialtone Vue components",
       recommended: false,
-      url: 'https://github.com/dialpad/eslint-plugin-dialtone/blob/main/docs/rules/deprecated-component.md', // URL to the documentation page for this rule
+      url: 'https://github.com/dialpad/dialtone/blob/staging/packages/eslint-plugin-dialtone/docs/rules/deprecated-component.md', // URL to the documentation page for this rule
     },
     fixable: null, // Or `code` or `whitespace`
     schema: [], // Add a schema if the rule has options
