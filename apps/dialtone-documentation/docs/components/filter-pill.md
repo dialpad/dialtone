@@ -194,6 +194,7 @@ the `reset` event when clicked, so you can handle the filter resetting.
       label="Clearable example"
       active
       show-reset
+      reset-button-aria-label="Reset filter"
       ref="clearableExample"
     >
       <template #content>
@@ -237,16 +238,12 @@ showHtmlWarning />
 </code-well-header>
 
 <code-example-tabs
-:htmlCode='() => $refs.clearableExample'
+:htmlCode='() => $refs.smExample[1]'
 vueCode='
-<dt-filter-pill
-label="Clearable example"
-active
-show-reset
->
-<template #content>
-Main content
-</template>
+<dt-filter-pill label="sm" size="sm">
+  <template #content>
+    Main content
+  </template>
 </dt-filter-pill>
 '
 showHtmlWarning />
