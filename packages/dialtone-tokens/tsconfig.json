@@ -1,20 +1,31 @@
 {
   "compilerOptions": {
-    "module": "esnext",
+    "module": "NodeNext",
     "target": "es2015",
+    "allowJs": true,
     "sourceMap": true,
-    "moduleResolution": "node16",
+    "baseUrl": ".",
+    "declaration": true,
+    "emitDeclarationOnly": true,
+    "declarationMap": true,
+    "strict": true,
+    "moduleResolution": "NodeNext",
     "forceConsistentCasingInFileNames": true,
     "noImplicitReturns": true,
     "noUnusedLocals": true,
-    "strict": true,
     "noFallthroughCasesInSwitch": true,
     "allowSyntheticDefaultImports": true,
     "esModuleInterop": true,
     "noUnusedParameters": true,
     "noEmitOnError": true,
     "removeComments": true,
-    "skipLibCheck": true
+    "skipLibCheck": true,
+    "paths": {
+      "@/*": ["./*"]
+    }
   },
+  "include": [
+    "themes/*.js",
+  ],
   "exclude": ["node_modules"]
 }

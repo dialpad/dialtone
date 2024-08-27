@@ -1,4 +1,4 @@
-const componentsList = require('../../common/components_list.cjs');
+const componentsList = require('../../common/components_list.js');
 componentsList.push('btn', 'select', 'validation-message', 'label', 'description', 'split-btn');
 const componentsNames = componentsList.map(name => name.replace('_', '-').replace('.vue', ''));
 

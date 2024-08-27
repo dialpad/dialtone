@@ -1,4 +1,11 @@
-# [1.1.0](https://github.com/dialpad/dialtone/compare/eslint-plugin-dialtone/v1.0.2...eslint-plugin-dialtone/v1.1.0) (2024-08-21)
+## [1.7.1](https://github.com/dialpad/dialtone/compare/eslint-plugin-dialtone/v1.7.0...eslint-plugin-dialtone/v1.7.1) (2024-08-26)
+
+
+### Bug Fixes
+
+* NO-JIRA eslint documentation links ([#472](https://github.com/dialpad/dialtone/issues/472)) ([32f606b](https://github.com/dialpad/dialtone/commit/32f606bd821ed23f10f3345370ea68dcc221ff2d))
+
+# [1.7.0](https://github.com/dialpad/dialtone/compare/eslint-plugin-dialtone/v1.6.0...eslint-plugin-dialtone/v1.7.0) (2024-08-23)
 
 
 ### Features

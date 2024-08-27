@@ -5,7 +5,7 @@
 import { register, getTransforms, expandTypesMap } from '@tokens-studio/sd-transforms';
 import StyleDictionary from 'style-dictionary';
 import { promises, readFileSync } from 'fs';
-import { kebabCaseToPascalCase } from '../../common/utils.js';
+import { kebabCaseToPascalCase } from '../../common/utils.mjs';
 
 import { registerDialtoneTransforms } from './dialtone-transforms.js';
 import { buildDocs } from './build-docs.js';

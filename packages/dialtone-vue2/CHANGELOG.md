@@ -1,3 +1,16 @@
+# [2.157.0](https://github.com/dialpad/dialtone/compare/dialtone-vue2/v2.156.1...dialtone-vue2/v2.157.0) (2024-08-26)
+
+
+### Bug Fixes
+
+* **Tokens:** NO-JIRA move themes to tokens package ([#476](https://github.com/dialpad/dialtone/issues/476)) ([ea8d977](https://github.com/dialpad/dialtone/commit/ea8d9771edab34db8ef68ab5e8743bb4ba713f7e))
+
+
+### Features
+
+* **Contact Row:** NO-JIRA add `avatarColor` prop to contact row recipe ([#469](https://github.com/dialpad/dialtone/issues/469)) ([f0be39d](https://github.com/dialpad/dialtone/commit/f0be39d0735a36fb561233bc274cdd513c90cd22))
+* DP-108555 change prop type in contact centers recipe component ([#471](https://github.com/dialpad/dialtone/issues/471)) ([f45f302](https://github.com/dialpad/dialtone/commit/f45f3025b2f362b1b24f16022a32ef2fd5c8cb8c))
+
 ## [2.156.1](https://github.com/dialpad/dialtone/compare/dialtone-vue2/v2.156.0...dialtone-vue2/v2.156.1) (2024-08-22)
 
 

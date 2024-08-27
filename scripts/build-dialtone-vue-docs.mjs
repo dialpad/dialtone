@@ -3,7 +3,7 @@ import path, { join } from 'path';
 import { fileURLToPath } from 'url';
 import { readdirSync, writeFile } from 'fs';
 
-import componentsList from '../common/components_list.cjs';
+import componentsList from '../common/components_list.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);

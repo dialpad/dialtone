@@ -5,12 +5,14 @@ import DtRecipeContactRow from './contact_row.vue';
 import DtRecipeContactRowDefaultTemplate from './contact_row_default.story.vue';
 import DtRecipeContactRowVariantsTemplate from './contact_row_variants.story.vue';
 import { AVATAR_PRESENCE_STATES } from '@/components/avatar/avatar_constants';
+import { AVATAR_COLORS } from '@/components/avatar';
 import defaultImage from '@/common/assets/avatar2.png';
 
 // Default Prop Values
 export const argsData = {
   name: 'Jaqueline Nackos',
   avatarSrc: defaultImage,
+  avatarColor: '',
   callButtonTooltip: 'Call',
   hasUnreads: true,
   unreadCount: '55',
@@ -29,6 +31,19 @@ export const argTypesData = {
     table: {
       defaultValue: {
         summary: 'null',
+      },
+    },
+  },
+
+  avatarColor: {
+    options: [
+      undefined,
+      ...AVATAR_COLORS,
+    ],
+    control: {
+      type: 'select',
+      labels: {
+        undefined: '(empty)',
       },
     },
   },

@@ -14,7 +14,7 @@ module.exports = {
     docs: {
       description: "Utilities to set Font family, Font weight, Font size, and Line height separately are discouraged in favor of composed typography utilities",
       recommended: false,
-      url: 'https://github.com/dialpad/eslint-plugin-dialtone/blob/main/docs/rules/recommend-typography-style.md', // URL to the documentation page for this rule
+      url: 'https://github.com/dialpad/dialtone/blob/staging/packages/eslint-plugin-dialtone/docs/rules/recommend-typography-style.md', // URL to the documentation page for this rule
     },
     fixable: null, // Or `code` or `whitespace`
     schema: [], // Add a schema if the rule has options
