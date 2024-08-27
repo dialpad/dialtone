@@ -4,6 +4,7 @@ import DtFilterPill from './filter_pill.vue';
 import DtFilterPillDefaultTemplate from './filter_pill_default.story.vue';
 import DtFilterPillVariantsTemplate from './filter_pill_variants.story.vue';
 import { action } from '@storybook/addon-actions';
+import { BUTTON_SIZE_MODIFIERS } from '@/components/button';
 
 export const argTypesData = {
   // Slots
@@ -14,6 +15,12 @@ export const argTypesData = {
         summary: 'VNode',
       },
     },
+  },
+
+  // Props
+  size: {
+    control: 'select',
+    options: Object.keys(BUTTON_SIZE_MODIFIERS),
   },
 
   // Events: Exclude this from the table as event names will automatically be added from the component itself.
@@ -38,6 +45,7 @@ export const argsData = {
   content: 'This is a named slot with it\'s default set at the story level.',
   onOpen: action('open'),
   onReset: action('reset'),
+  size: 'md',
 };
 
 // Story Collection

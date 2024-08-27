@@ -12,6 +12,7 @@
           icon-position="right"
           importance="outlined"
           kind="muted"
+          :size="size"
           :aria-busy="loading"
           :aria-label="label"
           :class="{ 'd-filter-pill--active': active }"
@@ -25,13 +26,11 @@
             v-else
             :text-option="{ width: loadingSkeletonWidth }"
           />
-          <template
-            #icon
-          >
+          <template #icon="{ iconSize }">
             <dt-icon-chevron-down
               data-qa="dt-filter-pill__icon"
               class="d-filter-pill__icon"
-              size="200"
+              :size="iconSize"
             />
           </template>
         </dt-button>
@@ -42,12 +41,12 @@
           circle
           importance="clear"
           kind="muted"
-          size="sm"
+          :size="size"
           :aria-label="resetButtonAriaLabel"
           @click="$emit('reset', $event)"
         >
-          <template #icon>
-            <dt-icon-close size="200" />
+          <template #icon="{ iconSize }">
+            <dt-icon-close :size="iconSize" />
           </template>
         </dt-button>
       </div>
@@ -70,7 +69,7 @@
 <script>
 import { DtPopover } from '@/components/popover';
 import { DtSkeleton } from '@/components/skeleton';
-import { DtButton } from '@/components/button';
+import { BUTTON_SIZE_MODIFIERS, DtButton } from '@/components/button';
 import { DtIconChevronDown, DtIconClose } from '@dialpad/dialtone-icons/vue2';
 
 export default {
@@ -143,6 +142,16 @@ export default {
     showReset: {
       type: Boolean,
       default: false,
+    },
+
+    /**
+     * The size of the button.
+     * @values xs, sm, md, lg, xl
+     */
+    size: {
+      type: String,
+      default: 'md',
+      validator: (s) => Object.keys(BUTTON_SIZE_MODIFIERS).includes(s),
     },
   },
 
