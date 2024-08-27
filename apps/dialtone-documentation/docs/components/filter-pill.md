@@ -218,6 +218,39 @@ vueCode='
 '
 showHtmlWarning />
 
+### Sizes
+
+<code-well-header>
+  <dt-stack direction="row" gap="300">
+    <dt-filter-pill
+      v-for="size in sizes"
+      :key="size"
+      :label="size"
+      :size="size"
+      ref="smExample"
+    >
+      <template #content>
+        {{ sizeNames[size] }} example
+      </template>
+    </dt-filter-pill>
+  </dt-stack>
+</code-well-header>
+
+<code-example-tabs
+:htmlCode='() => $refs.clearableExample'
+vueCode='
+<dt-filter-pill
+label="Clearable example"
+active
+show-reset
+>
+<template #content>
+Main content
+</template>
+</dt-filter-pill>
+'
+showHtmlWarning />
+
 ## Vue API
 
 <component-vue-api component-name="filterPill"></component-vue-api>
@@ -238,4 +271,12 @@ const options = [
   'Option 4',
   'Option 5',
 ];
+const sizes = Object.keys(window.DIALTONE_CONSTANTS.BUTTON_SIZE_MODIFIERS);
+const sizeNames = {
+  xs: 'Extra small',
+  sm: 'Small',
+  md: 'Medium',
+  lg: 'Large',
+  xl: 'Extra Large',
+};
 </script>
