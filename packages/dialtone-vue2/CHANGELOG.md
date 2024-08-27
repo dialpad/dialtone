@@ -1,3 +1,10 @@
+## [2.156.2-beta.1](https://github.com/dialpad/dialtone/compare/dialtone-vue2/v2.156.1...dialtone-vue2/v2.156.2-beta.1) (2024-08-27)
+
+
+### Bug Fixes
+
+* NO-JIRA merge staging into beta ([#478](https://github.com/dialpad/dialtone/issues/478)) ([09f1165](https://github.com/dialpad/dialtone/commit/09f1165f4d4cffc00708aa18cd1067d8b84810aa))
+
 # [2.157.0](https://github.com/dialpad/dialtone/compare/dialtone-vue2/v2.156.1...dialtone-vue2/v2.157.0) (2024-08-26)
 
 
