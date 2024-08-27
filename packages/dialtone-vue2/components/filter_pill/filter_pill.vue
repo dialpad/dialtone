@@ -14,7 +14,7 @@
           kind="muted"
           :size="size"
           :aria-busy="loading"
-          :aria-label="label"
+          :aria-label="loading ? label : undefined"
           :class="{ 'd-filter-pill--active': active }"
           :disabled="disabled"
           @click="isPopoverOpen = true"
