@@ -12,26 +12,26 @@ export default defineConfig({
     emptyOutDir: false,
     lib: {
       entry: {
-        'themes/config': resolve(__dirname, './common/themes/config.js'),
-        'themes/dp-light': resolve(__dirname, './common/themes/dp-light.js'),
-        'themes/dp-dark': resolve(__dirname, './common/themes/dp-dark.js'),
+        'themes/config': resolve(__dirname, './themes/config.js'),
+        'themes/dp-light': resolve(__dirname, './themes/dp-light.js'),
+        'themes/dp-dark': resolve(__dirname, './themes/dp-dark.js'),
         'themes/expressive-light': resolve(
           __dirname,
-          './common/themes/expressive-light.js',
+          './themes/expressive-light.js',
         ),
         'themes/expressive-dark': resolve(
           __dirname,
-          './common/themes/expressive-dark.js',
+          './themes/expressive-dark.js',
         ),
-        'themes/tmo-light': resolve(__dirname, './common/themes/tmo-light.js'),
-        'themes/tmo-dark': resolve(__dirname, './common/themes/tmo-dark.js'),
+        'themes/tmo-light': resolve(__dirname, './themes/tmo-light.js'),
+        'themes/tmo-dark': resolve(__dirname, './themes/tmo-dark.js'),
         'themes/expressive-sm-light': resolve(
           __dirname,
-          './common/themes/expressive-sm-light.js',
+          './themes/expressive-sm-light.js',
         ),
         'themes/expressive-sm-dark': resolve(
           __dirname,
-          './common/themes/expressive-sm-dark.js',
+          './themes/expressive-sm-dark.js',
         ),
       },
       formats: ['es', 'cjs'],

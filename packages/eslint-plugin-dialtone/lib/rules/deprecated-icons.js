@@ -15,7 +15,7 @@ module.exports = {
         docs: {
             description: 'Finds deprecated svg and vue icon imports from dialtone',
             recommended: false,
-            url: 'https://github.com/dialpad/eslint-plugin-dialtone/blob/main/docs/rules/deprecated-icons.md', // URL to the documentation page for this rule
+            url: 'https://github.com/dialpad/dialtone/blob/staging/packages/eslint-plugin-dialtone/docs/rules/deprecated-icons.md', // URL to the documentation page for this rule
         },
         fixable: null, // Or `code` or `whitespace`
         schema: [], // Add a schema if the rule has options
