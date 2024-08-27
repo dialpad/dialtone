@@ -1,3 +1,10 @@
+## [1.34.3](https://github.com/dialpad/dialtone/compare/dialtone-tokens/v1.34.2...dialtone-tokens/v1.34.3) (2024-08-27)
+
+
+### Bug Fixes
+
+* **Tokens:** DLT-1951 corrected muted outlined border color ([#477](https://github.com/dialpad/dialtone/issues/477)) ([0ab6b6c](https://github.com/dialpad/dialtone/commit/0ab6b6c9c953fb310729aa43a23ef4521648c152))
+
 ## [1.34.2](https://github.com/dialpad/dialtone/compare/dialtone-tokens/v1.34.1...dialtone-tokens/v1.34.2) (2024-08-26)
 
 
