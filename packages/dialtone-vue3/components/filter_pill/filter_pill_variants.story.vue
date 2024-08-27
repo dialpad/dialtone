@@ -100,6 +100,20 @@
         </template>
       </dt-filter-pill>
     </dt-stack>
+    <!-- Sizes -->
+    <dt-stack gap="300">
+      <h3>Sizes</h3>
+      <dt-filter-pill
+        v-for="size in sizes"
+        :key="size"
+        :label="sizeNames[size]"
+        :size="size"
+      >
+        <template #content>
+          Default content
+        </template>
+      </dt-filter-pill>
+    </dt-stack>
   </dt-stack>
 </template>
 
@@ -107,7 +121,7 @@
 import DtFilterPill from './filter_pill.vue';
 import { DtInput } from '@/components/input';
 import { DtCheckbox } from '@/components/checkbox';
-import { DtButton } from '@/components/button';
+import { BUTTON_SIZE_MODIFIERS, DtButton } from '@/components/button';
 import { DtStack } from '@/components/stack';
 import { DtIconClose, DtIconSearch } from '@dialpad/dialtone-icons/vue3';
 
@@ -133,6 +147,16 @@ export default {
         'Option 4',
         'Option 5',
       ],
+
+      sizes: Object.keys(BUTTON_SIZE_MODIFIERS),
+
+      sizeNames: {
+        xs: 'Extra small',
+        sm: 'Small',
+        md: 'Medium',
+        lg: 'Large',
+        xl: 'Extra Large',
+      },
     };
   },
 };
