@@ -29,8 +29,13 @@
           }"
           @click="defaultToggleOpen"
         >
-          <dt-icon
-            :name=" isOpen ? 'chevron-down' : 'chevron-right'"
+          <dt-icon-chevron-down
+            v-if="isOpen"
+            class="d-collapsible__icon"
+            size="300"
+          />
+          <dt-icon-chevron-right
+            v-else
             class="d-collapsible__icon"
             size="300"
           />
@@ -76,7 +81,7 @@ import { extractVueListeners, getUniqueString, hasSlotContent } from '@/common/u
 import DtCollapsibleLazyShow from './collapsible_lazy_show.vue';
 import { DtButton } from '@/components/button';
 import { DtLazyShow } from '@/components/lazy_show';
-import { DtIcon } from '@/components/icon';
+import { DtIconChevronDown, DtIconChevronRight } from '@dialpad/dialtone-icons/vue3';
 
 /**
  * A collapsible is a component consisting of an interactive anchor that toggled the expandable/collapsible element.
@@ -89,7 +94,8 @@ export default {
     DtButton,
     DtCollapsibleLazyShow,
     DtLazyShow,
-    DtIcon,
+    DtIconChevronDown,
+    DtIconChevronRight,
   },
 
   props: {
