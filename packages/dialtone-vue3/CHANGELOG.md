@@ -1,3 +1,15 @@
+# [3.151.0-beta.1](https://github.com/dialpad/dialtone/compare/dialtone-vue3/v3.150.0...dialtone-vue3/v3.151.0-beta.1) (2024-08-28)
+
+
+### Bug Fixes
+
+* NO-JIRA merge staging into beta ([#478](https://github.com/dialpad/dialtone/issues/478)) ([09f1165](https://github.com/dialpad/dialtone/commit/09f1165f4d4cffc00708aa18cd1067d8b84810aa))
+
+
+### Features
+
+* **Avatar:** DLT-1916 remove dt-icon ([#466](https://github.com/dialpad/dialtone/issues/466)) ([6ef90db](https://github.com/dialpad/dialtone/commit/6ef90db28f3c5164c4c9c9657b039a74a9b6daf5))
+
 # [3.150.0-beta.2](https://github.com/dialpad/dialtone/compare/dialtone-vue3/v3.150.0-beta.1...dialtone-vue3/v3.150.0-beta.2) (2024-08-27)
 
 
