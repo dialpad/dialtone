@@ -69,6 +69,10 @@
     "./css-default-theme": "./dist/css/dialtone-default-theme.min.css",
     "./tokens/*.css": "./dist/tokens/css/*.css",
     "./tokens/*.less": "./dist/tokens/less/*.less",
+    "./tokens/postcss/rem-to-px": {
+      "import": "./dist/tokens/postcss/rem-to-px.js",
+      "require": "./dist/tokens/postcss/rem-to-px.cjs"
+    },
     "./vue2": {
       "types": "./dist/vue2/types/index.d.ts",
       "import": "./dist/vue2/dialtone-vue.js",
