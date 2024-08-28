@@ -3,6 +3,8 @@
     "root",
     "base/default",
     "base/dark",
+    "base/neue-light",
+    "base/neue-dark",
     "semantic/dp/default",
     "semantic/dp/dark",
     "semantic/expressive/default",

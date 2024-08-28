@@ -83,7 +83,7 @@
     },
     "link": {
       "primary": {
-        "value": "{color.purple.400}",
+        "value": "{color.purple.300}",
         "type": "color",
         "$extensions": {
           "studio.tokens": {
@@ -583,7 +583,7 @@
       "background": {
         "base": {
           "hover": {
-            "value": "{color.purple.400}",
+            "value": "{color.purple.300}",
             "type": "color",
             "$extensions": {
               "studio.tokens": {
@@ -596,7 +596,7 @@
             }
           },
           "active": {
-            "value": "{color.purple.400}",
+            "value": "{color.purple.300}",
             "type": "color",
             "$extensions": {
               "studio.tokens": {
@@ -640,7 +640,7 @@
         "inverted": {
           "primary": {
             "active": {
-              "value": "{color.purple.200}",
+              "value": "{color.purple.500}",
               "type": "color"
             }
           }
