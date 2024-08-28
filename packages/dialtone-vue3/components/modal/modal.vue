@@ -98,8 +98,7 @@
           @click="close"
         >
           <template #icon>
-            <dt-icon
-              name="close"
+            <dt-icon-close
               size="400"
             />
           </template>
@@ -117,7 +116,7 @@
 <script>
 /* eslint-disable max-lines */
 import { DtButton } from '@/components/button';
-import { DtIcon } from '@/components/icon';
+import { DtIconClose } from '@dialpad/dialtone-icons/vue3';
 import Modal from '@/common/mixins/modal';
 import {
   MODAL_BANNER_KINDS,
@@ -142,7 +141,7 @@ export default {
   components: {
     DtLazyShow,
     DtButton,
-    DtIcon,
+    DtIconClose,
     SrOnlyCloseButton,
   },
 

@@ -23,8 +23,7 @@
             @click="close"
           >
             <template #icon>
-              <dt-icon
-                name="close"
+              <dt-icon-close
                 size="300"
               />
             </template>
@@ -38,7 +37,7 @@
 <script>
 import { NodeViewWrapper, nodeViewProps } from '@tiptap/vue-3';
 import { DtItemLayout } from '@/components/item_layout';
-import { DtIcon } from '@/components/icon';
+import { DtIconClose } from '@dialpad/dialtone-icons/vue3';
 import { DtButton } from '@/components/button';
 
 export default {
@@ -47,7 +46,7 @@ export default {
   components: {
     NodeViewWrapper,
     DtItemLayout,
-    DtIcon,
+    DtIconClose,
     DtButton,
   },
 

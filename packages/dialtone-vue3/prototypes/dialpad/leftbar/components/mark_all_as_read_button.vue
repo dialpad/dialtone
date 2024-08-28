@@ -9,8 +9,7 @@
     circle
   >
     <template #icon="{ iconSize }">
-      <dt-icon
-        name="double-check"
+      <dt-icon-double-check
         :size="iconSize"
       />
     </template>
@@ -19,5 +18,5 @@
 
 <script setup>
 import { DtButton } from '@/components/button';
-import { DtIcon } from '@/components/icon';
+import { DtIconDoubleCheck } from '@dialpad/dialtone-icons/vue3';
 </script>

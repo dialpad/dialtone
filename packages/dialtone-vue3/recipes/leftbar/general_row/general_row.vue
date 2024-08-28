@@ -71,9 +71,8 @@
         v-if="activeVoiceChat"
         class="dt-leftbar-row__active-voice"
       >
-        <dt-icon
+        <dt-icon-waveform
           size="300"
-          name="waveform"
         />
       </div>
       <dt-tooltip
@@ -130,8 +129,7 @@
               @click.stop="$emit('call', $event)"
             >
               <template #icon>
-                <dt-icon
-                  name="phone"
+                <dt-icon-phone
                   size="200"
                 />
               </template>
@@ -152,7 +150,7 @@ import {
   LEFTBAR_GENERAL_ROW_ICON_SIZES,
 } from './general_row_constants';
 import { DtBadge } from '@/components/badge';
-import { DtIcon } from '@/components/icon';
+import { DtIconPhone, DtIconWaveform } from '@dialpad/dialtone-icons/vue3';
 import { DtButton } from '@/components/button';
 import { DtTooltip } from '@/components/tooltip';
 import DtEmojiTextWrapper from '@/components/emoji_text_wrapper/emoji_text_wrapper.vue';
@@ -165,9 +163,10 @@ export default {
   components: {
     DtEmojiTextWrapper,
     DtBadge,
-    DtIcon,
     DtButton,
     DtTooltip,
+    DtIconPhone,
+    DtIconWaveform,
     DtRecipeLeftbarGeneralRowIcon,
   },
 
