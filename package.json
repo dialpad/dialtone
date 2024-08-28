@@ -171,7 +171,7 @@
     "stylelint-config-standard": "^33.0.0",
     "stylelint-less": "1.0.4",
     "stylelint-no-px": "^1.0.1",
-    "vite": "^5.0.0",
+    "vite": "^5.4.2",
     "vitest": "^1.0.4",
     "vue-docgen-api": "^4.75.0",
     "wait-on": "^7.2.0"
