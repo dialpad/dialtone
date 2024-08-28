@@ -1,6 +1,5 @@
 import { defineConfig } from 'vite';
 import vue from '@vitejs/plugin-vue';
-import path, { resolve } from 'path';
 import { fileURLToPath } from 'url';
 import { glob } from 'glob';
 
@@ -23,8 +22,6 @@ function _getEntries (pathPrefix, globRegex, entrySuffix = '') {
   }, {});
 }
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
 const commonEntries = _getEntries('common', 'common/*/index.js');
 const componentEntries = _getEntries('components', 'components/*/index.js');
 const directiveEntries = _getEntries('directives', 'directives/*/index.js', 'directive');
@@ -34,35 +31,35 @@ const recipeEntries = _getEntries('recipes', 'recipes/**/index.js');
 export default defineConfig({
   build: {
     sourcemap: true,
-    lib: {
-      entry: {
-        ...commonEntries,
-        ...componentEntries,
-        ...directiveEntries,
-        ...recipeEntries,
-        'dialtone-vue': resolve(__dirname, './index.js'),
-      },
-      formats: ['es', 'cjs'],
-    },
+    minify: false,
     rollupOptions: {
       external: [
-        /@dialpad/,
-        /@linusborg/,
-        /@tiptap/,
-        /date-fns/,
-        /emoji-regex/,
-        /emoji-toolkit/,
-        /tippy\.js/,
-        /prosemirror/,
+        /^@dialpad/,
+        /^@tiptap/,
+        /^date-fns/,
+        /^emoji-toolkit/,
+        /^tippy\.js/,
+        /^prosemirror/,
+        /^overlayscrollbars/,
         'vue',
+        'regex-combined-emojis',
       ],
       output: {
-        chunkFileNames: () => 'chunks/[name]-[hash].js',
+        preserveModules: true,
         minifyInternalExports: false,
       },
       treeshake: 'smallest',
     },
-    minify: false,
+    lib: {
+      entry: {
+        'dialtone-vue': './index.js',
+        ...commonEntries,
+        ...componentEntries,
+        ...directiveEntries,
+        ...recipeEntries,
+      },
+      formats: ['es', 'cjs'],
+    },
   },
   plugins: [vue()],
   resolve: {
