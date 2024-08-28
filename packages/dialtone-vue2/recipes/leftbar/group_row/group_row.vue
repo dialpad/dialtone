@@ -11,8 +11,7 @@
     v-on="$listeners"
   >
     <template #left>
-      <dt-icon
-        name="users"
+      <dt-icon-users
         size="300"
       />
     </template>
@@ -21,14 +20,14 @@
 
 <script>
 import { DtRecipeGeneralRow } from '@/recipes/leftbar/general_row';
-import DtIcon from '@/components/icon/icon.vue';
+import { DtIconUsers } from '@dialpad/dialtone-icons/vue2';
 import { safeConcatStrings } from '@/common/utils';
 
 export default {
   name: 'DtRecipeGroupRow',
 
   components: {
-    DtIcon,
+    DtIconUsers,
     DtRecipeGeneralRow,
   },
 
