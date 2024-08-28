@@ -1750,7 +1750,7 @@
         "inverted": {
           "outlined": {
             "default": {
-              "value": "{color.black.100}",
+              "value": "{color.border.moderate-inverted}",
               "type": "color"
             }
           }
@@ -1758,7 +1758,7 @@
         "muted": {
           "outlined": {
             "default": {
-              "value": "{color.black.600}",
+              "value": "{color.border.moderate}",
               "type": "color"
             }
           }
