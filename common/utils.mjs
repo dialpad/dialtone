@@ -3,6 +3,13 @@ export function getUniqueString (prefix = 'dt') {
   return `${prefix}${UNIQUE_ID_COUNTER++}`;
 }
 
+const scheduler = typeof setImmediate === 'function' ? setImmediate : setTimeout;
+export function flushPromises () {
+  return new Promise((resolve) => {
+    scheduler(resolve);
+  });
+}
+
 /**
  * Transform a string from kebab-case to PascalCase
  * @param string
@@ -13,13 +20,6 @@ export function kebabCaseToPascalCase (string) {
     .split('-')
     .map(word => word.charAt(0).toUpperCase() + word.slice(1))
     .join('');
-}
-
-const scheduler = typeof setImmediate === 'function' ? setImmediate : setTimeout;
-export function flushPromises () {
-  return new Promise((resolve) => {
-    scheduler(resolve);
-  });
 }
 
 export default {

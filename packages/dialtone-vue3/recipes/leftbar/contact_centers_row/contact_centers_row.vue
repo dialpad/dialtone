@@ -124,17 +124,17 @@ export default {
     /**
      * Making this true will hide the unread count badge, the chevron button, and the right slot
      */
-     hideActions: {
+    hideActions: {
       type: Boolean,
       default: false,
     },
 
     /**
-     * Number of unread messages
+     * Number of unread messages, could be a string to support '99+'
      */
     unreadCount: {
-      type: Number,
-      default: 0,
+      type: String,
+      default: null,
     },
 
     /**
@@ -193,7 +193,7 @@ export default {
     },
 
     showUnreadCount () {
-      return this.unreadCount > 0;
+      return !!this.unreadCount;
     },
   },
 

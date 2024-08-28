@@ -1,9 +1,9 @@
 import '../css/dialtone-globals.less';
 import '@dialpad/dialtone-css/lib/dist/dialtone.css';
 import { addons } from '@storybook/preview-api';
-import { setTheme } from '@/../../common/themes/config';
-import DpLight from '@/../../common/themes/dp-light.js';
-import DpDark from '@/../../common/themes/dp-dark.js';
+import { setTheme } from '@dialpad/dialtone-tokens/themes/config';
+import DpLight from '@dialpad/dialtone-tokens/themes/dp-light.js';
+import DpDark from '@dialpad/dialtone-tokens/themes/dp-dark.js';
 import { MINIMAL_VIEWPORTS } from '@storybook/addon-viewport';
 import { setup } from '@storybook/vue3';
 import React from 'react';
