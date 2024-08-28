@@ -6,7 +6,9 @@ module.exports = () => {
     postcssPlugin: 'postcss-dialtone-rem-to-px',
     Declaration (decl) {
       if (decl.value.includes('rem')) {
-        decl.assign({ value: decl.value.replace('rem', 'px') });
+        const numericValue = parseFloat(decl.value);
+        const newValue = numericValue * 10;
+        decl.assign({ value: `${newValue}px` });
       }
     },
   };
