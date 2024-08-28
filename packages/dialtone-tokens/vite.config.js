@@ -12,6 +12,7 @@ export default defineConfig({
     emptyOutDir: false,
     lib: {
       entry: {
+        'postcss/rem-to-px': resolve(__dirname, './postcss/rem-to-px.cjs'),
         'themes/config': resolve(__dirname, './themes/config.js'),
         'themes/dp-light': resolve(__dirname, './themes/dp-light.js'),
         'themes/dp-dark': resolve(__dirname, './themes/dp-dark.js'),

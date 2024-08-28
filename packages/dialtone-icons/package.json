@@ -88,5 +88,6 @@
     "Icon Library"
   ],
   "license": "MIT",
-  "type": "module"
+  "type": "module",
+  "sideEffects": false
 }
