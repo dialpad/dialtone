@@ -173,5 +173,6 @@
     "Vue",
     "Storybook"
   ],
-  "license": "MIT"
+  "license": "MIT",
+  "sideEffects": false
 }
