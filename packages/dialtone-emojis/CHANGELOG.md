@@ -1,3 +1,10 @@
+## [1.0.8](https://github.com/dialpad/dialtone/compare/dialtone-emojis/v1.0.7...dialtone-emojis/v1.0.8) (2024-08-29)
+
+
+### Bug Fixes
+
+* NO-JIRA tree-shaking ([#480](https://github.com/dialpad/dialtone/issues/480)) ([f24eb29](https://github.com/dialpad/dialtone/commit/f24eb29397918238cf12f5882e12f30745947a3c))
+
 ## [1.0.7](https://github.com/dialpad/dialtone/compare/dialtone-emojis/v1.0.6...dialtone-emojis/v1.0.7) (2024-05-31)
 
 ## [1.0.6](https://github.com/dialpad/dialtone/compare/dialtone-emojis/v1.0.5...dialtone-emojis/v1.0.6) (2024-05-30)
