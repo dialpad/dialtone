@@ -1,22 +1,5 @@
 {
   "color": {
-    "neutral": {
-      "white": {
-        "value": "#ffffff",
-        "type": "color",
-        "description": "White color independent of any theme."
-      },
-      "black": {
-        "value": "#000000",
-        "type": "color",
-        "description": "Black color independent of any theme."
-      },
-      "transparent": {
-        "value": "transparent",
-        "type": "color",
-        "description": "Transparent color independent of any theme."
-      }
-    },
     "black": {
       "100": {
         "value": "#F6F6F6",
@@ -27,7 +10,7 @@
         "type": "color"
       },
       "300": {
-        "value": "#ECECEE",
+        "value": "#D4D4D8",
         "type": "color"
       },
       "400": {
@@ -189,52 +172,6 @@
       "500": {
         "value": "#4C0303",
         "type": "color"
-      }
-    },
-    "tan": {
-      "100": {
-        "value": "#F2F0EE",
-        "type": "color"
-      },
-      "200": {
-        "value": "#CEC8C4",
-        "type": "color"
-      },
-      "300": {
-        "value": "#87807B",
-        "type": "color"
-      },
-      "400": {
-        "value": "#3F3D3C",
-        "type": "color"
-      },
-      "500": {
-        "value": "#121212",
-        "type": "color"
-      }
-    },
-    "gradient": {
-      "magenta-purple": {
-        "value": "linear-gradient(135deg, {color.brand.magenta} 10%, {color.brand.purple} 90%)",
-        "type": "color",
-        "description": "Gradient for Ai-oriented treatments."
-      }
-    },
-    "brand": {
-      "purple": {
-        "value": "{color.purple.300}",
-        "type": "color",
-        "description": "Primary brand color."
-      },
-      "magenta": {
-        "value": "{color.magenta.300}",
-        "type": "color",
-        "description": "Secondary brand color, typically used as an accent color."
-      },
-      "gold": {
-        "value": "{color.gold.300}",
-        "type": "color",
-        "description": "Secondary brand color, typically used as an accent color."
       }
     }
   },

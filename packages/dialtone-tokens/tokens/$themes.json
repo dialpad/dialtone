@@ -359,8 +359,7 @@
       "components/checkbox/default": "enabled",
       "components/icon/default": "enabled",
       "components/radio/default": "enabled",
-      "root": "source",
-      "base/neue-light": "source"
+      "root": "source"
     },
     "$figmaCollectionId": "VariableCollectionId:406:18994",
     "$figmaModeId": "406:0",
@@ -3923,7 +3922,8 @@
     },
     "selectedTokenSets": {
       "root": "source",
-      "base/neue-light": "enabled"
+      "base/neue-light": "enabled",
+      "base/default": "enabled"
     },
     "group": "base"
   },
@@ -3933,7 +3933,10 @@
     "$figmaStyleReferences": {},
     "selectedTokenSets": {
       "root": "source",
-      "base/neue-dark": "enabled"
+      "base/neue-dark": "enabled",
+      "base/default": "enabled",
+      "base/neue-light": "enabled",
+      "base/dark": "enabled"
     },
     "group": "base"
   }
