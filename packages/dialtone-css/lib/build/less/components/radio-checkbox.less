@@ -30,7 +30,7 @@
     --check-radio-color-background: var(--dt-inputs-color-background-default);
     --check-radio-color-background-checked: var(--dt-checkbox-color-background-checked);
     --check-radio-color-background-disabled: var(--dt-inputs-color-background-disabled);
-    --check-radio-border-width: calc(var(--dt-size-100) + var(--dt-size-50)); // 1.5
+    --check-radio-border-width: var(--dt-size-border-150);
 
     //  [1] Check to see if we can use custom styles, if so reset the defaults
     //  ------------------------------------------------------------------------
@@ -155,9 +155,7 @@
     flex-direction: column;
     align-items: flex-start;
     color: var(--dt-color-foreground-primary);
-    font-weight: var(--dt-font-weight-normal);
-    font-size: var(--dt-font-size-200);
-    line-height: var(--dt-font-line-height-400);
+    font: var(--dt-typography-label-md-plain);
     cursor: pointer;
 }
 
@@ -179,7 +177,7 @@
         background-repeat: no-repeat;
         background-position: center center;
         background-size: contain;
-        border-radius: var(--dt-size-300);
+        border-radius: var(--dt-size-radius-circle);
 
         &:focus-visible,
         &:checked:focus-visible {
