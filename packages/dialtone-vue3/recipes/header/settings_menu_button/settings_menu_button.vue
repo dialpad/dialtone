@@ -10,8 +10,7 @@
   >
     <slot />
     <template #icon>
-      <dt-icon
-        name="more-vertical"
+      <dt-icon-more-vertical
         size="300"
       />
     </template>
@@ -25,8 +24,7 @@
     v-bind="$attrs"
   >
     <template #icon>
-      <dt-icon
-        name="more-vertical"
+      <dt-icon-more-vertical
         size="300"
       />
     </template>
@@ -35,14 +33,14 @@
 
 <script>
 import DtButton from '@/components/button/button.vue';
-import { DtIcon } from '@/components/icon';
+import { DtIconMoreVertical } from '@dialpad/dialtone-icons/vue3';
 
 export default {
   name: 'DtRecipeSettingsMenuButton',
 
   components: {
     DtButton,
-    DtIcon,
+    DtIconMoreVertical,
   },
 
   inheritAttrs: false,
