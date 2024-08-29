@@ -1,5 +1,5 @@
 <template>
-  <div class="d-d-flex d-ai-flex-end d-jc-space-between d-w100p">
+  <div class="d-d-flex d-ai-flex-end d-jc-space-between">
     <div v-if="bannerTitle" class="d-w100p d-mr8">
       <dt-select-menu
         label="Kind of Banner"

@@ -8,7 +8,7 @@ storybook: https://dialtone.dialpad.com/vue/?path=/story/components-select-menu-
 figma_url: https://www.figma.com/file/2adf7JhZOncRyjYiy2joil/DT-Core%3A-Components-7?node-id=8919%3A21569&viewport=-1857%2C206%2C0.37&t=xHutRjwo1o5zMTgT-11
 ---
 
-<code-well-header bgclass="d-bgc-primary">
+<code-well-header>
   <div class="d-w100p">
     <div class="d-label">
       <label for="Dialtone--SelectExample1">Label</label>
@@ -121,7 +121,7 @@ vueCode='
         { value: ``, label: `Please select one` },
         { value: `1`, label: `Option 1` },
         { value: `2`, label: `Option 2` },
-        { value: `3`, label: `Option 3` },  
+        { value: `3`, label: `Option 3` },
       ]"
   label="Default"
   :value="value"
@@ -133,7 +133,7 @@ vueCode='
         { value: ``, label: `Please select one` },
         { value: `1`, label: `Option 1` },
         { value: `2`, label: `Option 2` },
-        { value: `3`, label: `Option 3` },  
+        { value: `3`, label: `Option 3` },
       ]"
   label="Disabled"
   disabled
@@ -188,7 +188,7 @@ vueCode='
         { value: ``, label: `Please select one` },
         { value: `1`, label: `Option 1` },
         { value: `2`, label: `Option 2` },
-        { value: `3`, label: `Option 3` },  
+        { value: `3`, label: `Option 3` },
       ]"
   label="Label"
   description="Optional description text"

@@ -1,6 +1,7 @@
 <template>
   <div class="d-emoji-picker__tabset">
     <dt-tab-group
+      size="sm"
       tab-list-class="d-emoji-picker__tabset-list"
       :selected="selectedTab"
     >
