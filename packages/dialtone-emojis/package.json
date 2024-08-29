@@ -41,5 +41,6 @@
   ],
   "main": "index.cjs",
   "module": "index.js",
-  "type": "module"
+  "type": "module",
+  "sideEffects": false
 }
