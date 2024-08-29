@@ -1,3 +1,10 @@
+## [2.157.1](https://github.com/dialpad/dialtone/compare/dialtone-vue2/v2.157.0...dialtone-vue2/v2.157.1) (2024-08-29)
+
+
+### Bug Fixes
+
+* NO-JIRA tree-shaking ([#480](https://github.com/dialpad/dialtone/issues/480)) ([f24eb29](https://github.com/dialpad/dialtone/commit/f24eb29397918238cf12f5882e12f30745947a3c))
+
 # [2.157.0](https://github.com/dialpad/dialtone/compare/dialtone-vue2/v2.156.1...dialtone-vue2/v2.157.0) (2024-08-26)
 
 
