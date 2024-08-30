@@ -1,12 +1,15 @@
 import DtEmptyState from './empty_state.vue';
 import { mount } from '@vue/test-utils';
+import { DtIllustration } from '@/components/illustration';
+import { DtIcon } from '@/components/icon';
 
 const MOCK_HEADER_TEXT = 'Nothing to see here';
 const MOCK_BODY_TEXT = 'Lorem ipsum dolor sit amet consectetur. Diam in aliquam arcu elit pulvinar morbi lorem ac neque.';
 const MOCK_BODY_SLOT = '<h2>Custom body slot</h2>';
+const MOCK_ICON_SLOT = '<dt-icon name="accessibility" />';
+const MOCK_ILLUSTRATION_SLOT = '<dt-illustration name="mind" />';
 
 const baseProps = {
-  illustrationName: 'mind',
   headerText: MOCK_HEADER_TEXT,
   bodyText: MOCK_BODY_TEXT,
 };
@@ -28,7 +31,12 @@ describe('DtIllustration Tests', () => {
     wrapper = mount(DtEmptyState, {
       propsData: { ...baseProps, ...mockProps },
       slots: { ...baseSlots, ...mockSlots },
+      components: {
+        DtIllustration,
+        DtIcon,
+      },
     });
+
     await vi.dynamicImportSettled();
 
     illustration = wrapper.find('[data-qa="dt-illustration"]');
@@ -44,14 +52,10 @@ describe('DtIllustration Tests', () => {
 
   afterEach(() => {
     mockProps = {};
+    mockSlots = {};
   });
 
   describe('Presentation Tests', () => {
-    it('Should render the mind illustration', () => {
-      expect(wrapper).toBeDefined();
-      expect(illustration.classes().includes('d-illustration--mind')).toBe(true);
-    });
-
     it('Should render the header text', () => {
       expect(headerText.text()).toBe(MOCK_HEADER_TEXT);
     });
@@ -107,8 +111,15 @@ describe('DtIllustration Tests', () => {
     });
 
     describe('With illustration and icon provided', () => {
+      beforeEach(() => {
+        mockSlots = {
+          illustration: MOCK_ILLUSTRATION_SLOT,
+          icon: MOCK_ICON_SLOT,
+        };
+      });
+
       it('Should render illustration component on `lg` size and not icon', () => {
-        mockProps = { size: 'lg', iconName: 'accessibility' };
+        mockProps = { size: 'lg' };
 
         updateWrapper();
 
@@ -120,7 +131,7 @@ describe('DtIllustration Tests', () => {
       });
 
       it('Should render illustration component on `md` size and not icon', () => {
-        mockProps = { size: 'md', iconName: 'accessibility' };
+        mockProps = { size: 'md' };
 
         updateWrapper();
 
@@ -132,7 +143,7 @@ describe('DtIllustration Tests', () => {
       });
 
       it('Should render icon component on `sm` size and not illustration', () => {
-        mockProps = { size: 'sm', iconName: 'accessibility' };
+        mockProps = { size: 'sm' };
 
         updateWrapper();
 
@@ -146,8 +157,14 @@ describe('DtIllustration Tests', () => {
     });
 
     describe('With icon provided but not illustration', () => {
+      beforeEach(() => {
+        mockSlots = {
+          icon: MOCK_ICON_SLOT,
+        };
+      });
+
       it('Should render icon component on `lg` size', () => {
-        mockProps = { illustrationName: undefined, size: 'lg', iconName: 'accessibility' };
+        mockProps = { size: 'lg' };
 
         updateWrapper();
 
@@ -159,7 +176,7 @@ describe('DtIllustration Tests', () => {
       });
 
       it('Should render icon component on `md` size', () => {
-        mockProps = { illustrationName: undefined, size: 'md', iconName: 'accessibility' };
+        mockProps = { size: 'md' };
 
         updateWrapper();
 
@@ -171,7 +188,7 @@ describe('DtIllustration Tests', () => {
       });
 
       it('Should render icon component on `sm` size', () => {
-        mockProps = { illustrationName: undefined, size: 'sm', iconName: 'accessibility' };
+        mockProps = { size: 'sm' };
 
         updateWrapper();
 
@@ -186,20 +203,20 @@ describe('DtIllustration Tests', () => {
 
   describe('Validation Tests', () => {
     describe('With no bodyText or body slot provided', () => {
-      it('Should console.warning', () => {
-        const message = `Dialtone Empty State component: You should provide either bodyText or content on body slot.`;
+      it('Should console.error', () => {
+        const message = `DtEmptyState: You should provide either bodyText or content on body slot.`;
 
-        let consoleWarn = vi.spyOn(console, 'warn').mockClear();
+        let consoleError = vi.spyOn(console, 'error').mockClear();
 
         mockProps = { bodyText: undefined };
         mockSlots = { body: '' };
 
         updateWrapper();
 
-        expect(consoleWarn).toHaveBeenCalledWith(message);
+        expect(consoleError).toHaveBeenCalledWith(message);
 
-        consoleWarn = null;
-        console.warn.mockRestore();
+        consoleError = null;
+        console.error.mockRestore();
       });
     });
   });
