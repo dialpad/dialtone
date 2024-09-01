@@ -277,11 +277,11 @@ All button styles and variations appear the same when disabled.
 <code-well-header>
   <div class="d-d-flex d-flow8">
     <div>
-      <button type="button" disabled="disabled" class="base-button__button d-btn d-btn--primary"><span class="d-btn__label base-button__label">Place Call (disabled attribute)</span></button>
+      <dt-button disabled>Place Call (disabled attribute)</dt-button>
     </div>
     <div>
       <span class="d-c-not-allowed">
-        <button type="button" class="base-button__button d-btn d-btn--primary d-btn--disabled"><span class="d-btn__label base-button__label">Place Call (disabled class)</span></button>
+        <dt-button class="d-btn--disabled" v-dt-tooltip="`Optional Tooltip`">Place Call (disabled class )</dt-button>
       </span>
     </div>
   </div>
@@ -301,7 +301,7 @@ vueCode='
 <dt-button disabled>Place Call</dt-button>
 <!-- disabled class -->
 <span class="d-c-not-allowed">
-  <dt-button class="d-btn--disabled">Place Call</dt-button>
+  <dt-button class="d-btn--disabled" v-dt-tooltip="`Optional Tooltip`">Place Call (disabled class)</dt-button>
 </span>
 '
 showHtmlWarning />
