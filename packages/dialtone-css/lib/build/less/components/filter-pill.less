@@ -31,20 +31,20 @@
 
   &__reset {
     position: absolute;
-    top: 50%;
-    right: 0;
+    top: var(--dt-space-50-percent);
+    right: var(--dt-space-0);
     color: var(--dt-color-foreground-primary);
     transform: translateY(-50%);
-    opacity: .5;
+    opacity: var(--dt-opacity-700);
 
     &:hover, &:focus-visible {
-      opacity: 1;
+      opacity: var(--dt-opacity-1300);
     }
   }
 
   &--active {
     background-color: var(--dt-action-color-background-base-hover);
-    border: 1px solid var(--dt-action-color-border-base-outlined-default);
+    border: var(--dt-size-border-100) solid var(--dt-action-color-border-base-outlined-default);
 
     &:hover, &:focus-visible {
       background-color: var(--dt-action-color-background-base-active);
