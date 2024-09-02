@@ -3,6 +3,12 @@
     v-model="isPopoverOpen"
     class="d-filter-pill"
     data-qa="dt-filter-pill"
+    :placement="placement"
+    :fallback-placements="fallbackPlacements"
+    :append-to="appendTo"
+    :max-height="maxHeight"
+    :max-width="maxWidth"
+    :padding="padding"
   >
     <template #anchor>
       <div class="d-filter-pill__wrapper">
@@ -66,7 +72,7 @@
 </template>
 
 <script>
-import { DtPopover } from '@/components/popover';
+import { DtPopover, POPOVER_APPEND_TO_VALUES, POPOVER_PADDING_CLASSES } from '@/components/popover';
 import { DtSkeleton } from '@/components/skeleton';
 import { BUTTON_SIZE_MODIFIERS, DtButton } from '@/components/button';
 import { DtIconChevronDown, DtIconClose } from '@dialpad/dialtone-icons/vue2';
@@ -94,11 +100,36 @@ export default {
     },
 
     /**
+     * Sets the element to which the
+     * <a class="d-link" href="https://dialtone.dialpad.com/components/popover.html#vue-api" target="_blank">popover component</a>
+     *  is going to append to
+     * @values 'body', 'parent', 'root', HTMLElement
+     */
+    appendTo: {
+      type: [HTMLElement, String],
+      default: 'body',
+      validator: appendTo => {
+        return POPOVER_APPEND_TO_VALUES.includes(appendTo) ||
+          (appendTo instanceof HTMLElement);
+      },
+    },
+
+    /**
      * HTML disabled attribute
      */
     disabled: {
       type: Boolean,
       default: false,
+    },
+
+    /**
+     * If the popover does not fit in the direction described by "placement",
+     * it will attempt to change its direction to the "fallbackPlacements".
+     * <a class="d-link" href="https://popper.js.org/docs/v2/modifiers/flip/#fallbackplacements" target="_blank">Popper.js docs</a>
+     * */
+    fallbackPlacements: {
+      type: Array,
+      default: () => ['top-start', 'auto'],
     },
 
     /**
@@ -124,6 +155,46 @@ export default {
     loadingSkeletonWidth: {
       type: String,
       default: '128px',
+    },
+
+    /**
+     * Determines maximum height for the popover before overflow.
+     * Possible units rem|px|em
+     */
+    maxHeight: {
+      type: String,
+      default: '',
+    },
+
+    /**
+     * Determines maximum width for the popover before overflow.
+     * Possible units rem|px|%|em
+     */
+    maxWidth: {
+      type: String,
+      default: '',
+    },
+
+    /**
+     * Padding size class for the popover content.
+     * @values none, small, medium, large
+     */
+    padding: {
+      type: String,
+      default: 'large',
+      validator: (padding) => {
+        return Object.keys(POPOVER_PADDING_CLASSES).some((item) => item === padding);
+      },
+    },
+
+    /**
+     * The direction the popover displays relative to the anchor.
+     * <a class="d-link" href="https://atomiks.github.io/tippyjs/v6/all-props/#placement" target="_blank">Tippy.js docs</a>
+     * @values top, top-start, top-end, right, right-start, right-end, left, left-start, left-end, bottom, bottom-start, bottom-end, auto, auto-start, auto-end
+     */
+    placement: {
+      type: String,
+      default: 'bottom-start',
     },
 
     /**
