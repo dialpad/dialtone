@@ -52,7 +52,8 @@ export const Emoji = Node.create({
   name: 'emoji',
   group: 'inline',
   inline: true,
-  selectable: true,
+  selectable: false,
+  atom: true,
 
   addNodeView () {
     return VueNodeViewRenderer(EmojiComponent);
@@ -89,15 +90,16 @@ export const Emoji = Node.create({
     return [
       // shortcode input
       nodeInputRule({
-        find: (text) => {
-          const match = text.match(inputShortCodeRegex);
-          if (!match) return;
-          return inputRuleMatch(match);
-        },
+        find: inputShortCodeRegex,
+        // find: (text) => {
+        //  const match = text.match(inputShortCodeRegex);
+        //  if (!match) return;
+        //  return inputRuleMatch(match);
+        // },
         type: this.type,
-        getAttributes (attrs) {
+        getAttributes (match) {
           return {
-            code: attrs[0],
+            code: match[0],
           };
         },
       }),

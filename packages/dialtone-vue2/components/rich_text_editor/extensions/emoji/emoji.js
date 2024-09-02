@@ -8,27 +8,29 @@ import Suggestion from '@tiptap/suggestion';
 import suggestionOptions from './suggestion';
 import { emojiPattern } from 'regex-combined-emojis';
 
-export const EmojiPluginKey = new PluginKey('emoji');
+const EmojiPluginKey = new PluginKey('emoji');
 
 const inputShortCodeRegex = /(^| |(?<=:))(:\w+:)$/;
 const inputUnicodeRegex = new RegExp(emojiPattern + '$');
 
 const inputRuleMatch = (match) => {
+  // console.log('input:', match);
   if (match && codeToEmojiData(match[0])) {
     const text = match[2] || match[0];
+    console.log(`text: "${match[2]}" "${match[0]}"`);
     // needs to be a dict returned
     // ref type InputRuleMatch:
     // https://github.com/ueberdosis/tiptap/blob/main/packages/core/src/InputRule.ts#L16
     return {
-      index: match.index,
       text,
-      match,
     };
   }
 };
 
 const shortCodePasteMatch = (text) => {
   const matches = [...text.matchAll(emojiShortCodeRegex)];
+
+  console.log('paste:', matches);
 
   return matches
     .filter(match => codeToEmojiData(match[0]))
@@ -39,7 +41,8 @@ const shortCodePasteMatch = (text) => {
     }));
 };
 
-export const Emoji = Node.create({
+const Emoji = Node.create({
+  name: 'emoji',
   addOptions () {
     return {
       HTMLAttributes: {},
@@ -49,10 +52,10 @@ export const Emoji = Node.create({
       },
     };
   },
-  name: 'emoji',
   group: 'inline',
   inline: true,
-  selectable: true,
+  selectable: false,
+  atom: true,
 
   addNodeView () {
     return VueNodeViewRenderer(EmojiComponent);
@@ -89,15 +92,17 @@ export const Emoji = Node.create({
     return [
       // shortcode input
       nodeInputRule({
-        find: (text) => {
-          const match = text.match(inputShortCodeRegex);
-          if (!match) return;
-          return inputRuleMatch(match);
-        },
+        find: inputShortCodeRegex,
+        // find: (text) => {
+        //  const match = text.match(inputShortCodeRegex);
+        //  if (!match) return false;
+        //
+        //  return inputRuleMatch(match);
+        // },
         type: this.type,
-        getAttributes (attrs) {
+        getAttributes (match) {
           return {
-            code: attrs[0],
+            code: match[0],
           };
         },
       }),
@@ -106,6 +111,7 @@ export const Emoji = Node.create({
         find: (text) => {
           const match = text.match(inputUnicodeRegex);
           if (!match) return;
+          console.log('input unicode regex match: ', match);
           return inputRuleMatch(match);
         },
         type: this.type,
@@ -151,4 +157,25 @@ export const Emoji = Node.create({
       }),
     ];
   },
+
+  addKeyboardShortcuts () {
+    return {
+      Backspace: () => this.editor.commands.command(({ tr, state }) => {
+        let isEmoji = false;
+        const { selection } = state;
+        const { empty, anchor } = selection;
+        if (!empty) { return false; }
+        state.doc.nodesBetween(anchor - 1, anchor, (node, pos) => {
+          if (node.type.name === this.name) {
+            isEmoji = true;
+            tr.insertText(this.options.deleteTriggerWithBackspace ? '' : this.options.suggestion.char || '', pos, pos + node.nodeSize);
+            return false;
+          }
+        });
+        return isEmoji;
+      }),
+    };
+  },
 });
+
+export { Emoji, EmojiPluginKey, Emoji as default };
