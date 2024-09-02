@@ -1,6 +1,2 @@
 export { default as DtKeyboardShortcut } from './keyboard_shortcut.vue';
-export {
-  SHORTCUTS_ICON_ALIASES,
-  SHORTCUTS_ALIASES_LIST,
-  SHORTCUTS_ICON_SEPARATOR,
-} from './keyboard_shortcut_constants';
+export { SHORTCUTS_ALIASES_LIST } from './keyboard_shortcut_constants';
