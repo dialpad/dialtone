@@ -1,9 +1,8 @@
 <template>
   <dt-popover
+    v-model="isPopoverOpen"
     class="d-filter-pill"
     data-qa="dt-filter-pill"
-    :open="isPopoverOpen"
-    @update:open="isPopoverOpen = $event"
   >
     <template #anchor>
       <div class="d-filter-pill__wrapper">
