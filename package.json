@@ -1,6 +1,7 @@
 {
   "name": "@dialpad/dialtone",
-  "version": "9.70.1",
+  "version": "9.71.0",
+  "packageManager": "pnpm@9.9.0",
   "description": "Dialpad's Dialtone design system monorepo",
   "scripts": {
     "test:all": "nx run-many --target=test",
@@ -10,7 +11,7 @@
     "start:dialtone-vue3": "nx run-many --target=start --projects=dialtone-css,dialtone-vue3",
     "start:dialtone-vue2": "nx run-many --target=start --projects=dialtone-css,dialtone-vue2",
     "prepare": "husky install",
-    "prepack": "nx build",
+    "prepack": "nx build --skip-nx-cache",
     "test:vue": "vitest run --test-timeout=10000"
   },
   "pnpm": {
@@ -69,6 +70,10 @@
     "./css-default-theme": "./dist/css/dialtone-default-theme.min.css",
     "./tokens/*.css": "./dist/tokens/css/*.css",
     "./tokens/*.less": "./dist/tokens/less/*.less",
+    "./tokens/postcss/rem-to-px": {
+      "import": "./dist/tokens/postcss/rem-to-px.js",
+      "require": "./dist/tokens/postcss/rem-to-px.cjs"
+    },
     "./vue2": {
       "types": "./dist/vue2/types/index.d.ts",
       "import": "./dist/vue2/dialtone-vue.js",
@@ -125,13 +130,11 @@
     "@tiptap/suggestion": "2.3.0",
     "date-fns": "2.30.0",
     "docopt": "0.6.2",
-    "emoji-regex": "10.3.0",
     "emoji-toolkit": "8.0.0",
     "overlayscrollbars": "2.10.0",
-    "requireindex": "1.2.0",
+    "regex-combined-emojis": "1.6.0",
     "stylelint": "15.11.0",
-    "tippy.js": "6.3.7",
-    "vite-plugin-dts": "4.0.3"
+    "tippy.js": "6.3.7"
   },
   "devDependencies": {
     "@commitlint/cli": "^18.4.3",
@@ -172,7 +175,7 @@
     "stylelint-config-standard": "^33.0.0",
     "stylelint-less": "1.0.4",
     "stylelint-no-px": "^1.0.1",
-    "vite": "^5.0.0",
+    "vite": "^5.4.2",
     "vitest": "^1.0.4",
     "vue-docgen-api": "^4.75.0",
     "wait-on": "^7.2.0"
@@ -212,5 +215,6 @@
   },
   "publishConfig": {
     "access": "public"
-  }
+  },
+  "sideEffects": false
 }

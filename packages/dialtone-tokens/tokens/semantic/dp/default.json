@@ -1145,6 +1145,58 @@
         "type": "typography",
         "description": "Smaller text size for monospace code, suitable for inline references or less prominent code examples."
       }
+    },
+    "inputs": {
+      "xs": {
+        "value": {
+          "fontFamily": "{font.family.body}",
+          "fontWeight": "{inputs.font.weight.xs}",
+          "fontSize": "{inputs.font.size.xs}",
+          "lineHeight": "{inputs.lineHeight.xs}"
+        },
+        "type": "typography",
+        "description": "Text style for extra small inputs (e.g. input and textarea)"
+      },
+      "sm": {
+        "value": {
+          "fontFamily": "{font.family.body}",
+          "fontWeight": "{inputs.font.weight.sm}",
+          "fontSize": "{inputs.font.size.sm}",
+          "lineHeight": "{inputs.lineHeight.sm}"
+        },
+        "type": "typography",
+        "description": "Text style for small inputs (e.g. input and textarea)"
+      },
+      "md": {
+        "value": {
+          "fontFamily": "{font.family.body}",
+          "fontWeight": "{inputs.font.weight.md}",
+          "fontSize": "{inputs.font.size.md}",
+          "lineHeight": "{inputs.lineHeight.md}"
+        },
+        "type": "typography",
+        "description": "Text style for medium inputs (e.g. input and textarea)"
+      },
+      "lg": {
+        "value": {
+          "fontFamily": "{font.family.body}",
+          "fontWeight": "{inputs.font.weight.lg}",
+          "fontSize": "{inputs.font.size.lg}",
+          "lineHeight": "{inputs.lineHeight.lg}"
+        },
+        "type": "typography",
+        "description": "Text style for large inputs (e.g. input and textarea)"
+      },
+      "xl": {
+        "value": {
+          "fontFamily": "{font.family.body}",
+          "fontWeight": "{inputs.font.weight.xl}",
+          "fontSize": "{inputs.font.size.xl}",
+          "lineHeight": "{inputs.lineHeight.xl}"
+        },
+        "type": "typography",
+        "description": "Text style for extra large inputs (e.g. input and textarea)"
+      }
     }
   },
   "size": {
@@ -1181,7 +1233,7 @@
           "type": "borderRadius"
         },
         "lg": {
-          "value": "{size.radius.300} * 3",
+          "value": "{size.radius.450}",
           "type": "borderRadius"
         },
         "xl": {
@@ -1191,32 +1243,85 @@
       }
     },
     "lineHeight": {
-      "default": {
+      "xs": {
         "value": "{font.lineHeight.200}",
-        "type": "lineHeights"
+        "type": "lineHeights",
+        "description": "Line height for extra small inputs (e.g. input and textarea)"
+      },
+      "sm": {
+        "value": "{font.lineHeight.200}",
+        "type": "lineHeights",
+        "description": "Line height for small inputs (e.g. input and textarea)"
+      },
+      "md": {
+        "value": "{font.lineHeight.200}",
+        "type": "lineHeights",
+        "description": "Line height for medium inputs (e.g. input and textarea)"
+      },
+      "lg": {
+        "value": "{font.lineHeight.200}",
+        "type": "lineHeights",
+        "description": "Line height for large inputs (e.g. input and textarea)"
+      },
+      "xl": {
+        "value": "{font.lineHeight.200}",
+        "type": "lineHeights",
+        "description": "Line height for extra large inputs (e.g. input and textarea)"
       }
     },
     "font": {
       "size": {
         "xs": {
           "value": "{font.size.100}",
-          "type": "fontSizes"
+          "type": "fontSizes",
+          "description": "Font size for extra small inputs (e.g. input and textarea)"
         },
         "sm": {
           "value": "{font.size.100}",
-          "type": "fontSizes"
+          "type": "fontSizes",
+          "description": "Font size for small inputs (e.g. input and textarea)"
         },
         "md": {
           "value": "{font.size.200}",
-          "type": "fontSizes"
+          "type": "fontSizes",
+          "description": "Font size for medium inputs (e.g. input and textarea)"
         },
         "lg": {
           "value": "{font.size.300}",
-          "type": "fontSizes"
+          "type": "fontSizes",
+          "description": "Font size for large inputs (e.g. input and textarea)"
         },
         "xl": {
           "value": "{font.size.400}",
-          "type": "fontSizes"
+          "type": "fontSizes",
+          "description": "Font size for extra large inputs (e.g. input and textarea)"
+        }
+      },
+      "weight": {
+        "xs": {
+          "value": "{font.weight.normal}",
+          "type": "fontWeights",
+          "description": "Font weight for extra small inputs (e.g. input and textarea)"
+        },
+        "sm": {
+          "value": "{font.weight.normal}",
+          "type": "fontWeights",
+          "description": "Font weight for small inputs (e.g. input and textarea)"
+        },
+        "md": {
+          "value": "{font.weight.normal}",
+          "type": "fontWeights",
+          "description": "Font weight for medium inputs (e.g. input and textarea)"
+        },
+        "lg": {
+          "value": "{font.weight.normal}",
+          "type": "fontWeights",
+          "description": "Font weight for large inputs (e.g. input and textarea)"
+        },
+        "xl": {
+          "value": "{font.weight.normal}",
+          "type": "fontWeights",
+          "description": "Font weight for extra large inputs (e.g. input and textarea)"
         }
       }
     },

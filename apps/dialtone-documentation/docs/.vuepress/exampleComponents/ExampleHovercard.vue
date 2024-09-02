@@ -1,8 +1,8 @@
 <template>
   <dt-hovercard placement="bottom-start" content-class="d-wmn332 ">
     <template #anchor>
-      <dt-button kind="muted" importance="outlined">
-        Hover for Example
+      <dt-button>
+        Hover for example
       </dt-button>
     </template>
     <template #content>

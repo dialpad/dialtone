@@ -10,7 +10,7 @@ figma_url: https://www.figma.com/design/2adf7JhZOncRyjYiy2joil/DT9-Component-Lib
 
 The hovercard will appear upon the mouse entering the anchor, with a delay of 300 milliseconds. It will remain open as long as the mouse cursor is over either the open card or the anchor.
 
-<code-well-header bgclass="d-bgc-primary" class="d-h264 d-jc-flex-start">
+<code-well-header>
   <example-hovercard />
 </code-well-header>
 

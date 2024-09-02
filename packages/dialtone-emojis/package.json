@@ -1,6 +1,6 @@
 {
   "name": "@dialpad/dialtone-emojis",
-  "version": "1.0.7",
+  "version": "1.0.8",
   "description": "Dialpad's emojis JSON data",
   "keywords": [
     "Dialpad",
@@ -41,5 +41,6 @@
   ],
   "main": "index.cjs",
   "module": "index.js",
-  "type": "module"
+  "type": "module",
+  "sideEffects": false
 }

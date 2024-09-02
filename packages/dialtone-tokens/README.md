@@ -25,6 +25,15 @@ npm install @dialpad/dialtone-tokens
 @import "@dialpad/dialtone-tokens/dist/tokens-base-dark.css";  // Dark variables
 ```
 
+dialtone-tokens provides a postcss plugin that you can use to convert all tokens using rem to px. This could be useful if you are using dialtone in an embedded situation where you don't have control over the root font size.
+
+You can reference this script from:
+
+- @dialpad/dialtone-tokens package: `@dialpad/dialtone-tokens/dist/postcss/rem-to-px.js`
+- @dialpad/dialtone package: `@dialpad/dialtone/tokens/postcss/rem-to-px.js`
+
+To use this script you will have to run it as part of your build process on the tokens files you are importing. There are various ways to run postcss as part of your build process, please see the documentation here: <https://github.com/postcss/postcss?tab=readme-ov-file#usage>
+
 #### Use CSS Token
 
 ```css

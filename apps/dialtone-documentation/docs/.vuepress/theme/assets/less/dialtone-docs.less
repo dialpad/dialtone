@@ -388,13 +388,12 @@ a.header-anchor {
 //      Styles our icon pages
 //  ----------------------------------------------------------------------------
 .d-gl-docsite-icons {
-  --icon-card-width: 12rem;
+  --icon-card-width: minmax(var(--dt-size-775), 1fr);
   --icon-grid-columns: auto-fit;
 
   display: grid;
-  grid-auto-rows: 12rem;
-  grid-gap: var(--dt-space-500);
   grid-template-columns: repeat(var(--icon-grid-columns), [col] var(--icon-card-width));
+  gap: var(--dt-space-400);
 
   &--large {
     grid-auto-rows: 18rem;
@@ -520,9 +519,7 @@ a.header-anchor {
   width: 100%;
   margin-bottom: 0;
   overflow: hidden;
-  font-size: var(--dt-font-size-100);
-  line-height: var(--lh-none);
-  white-space: nowrap;
+  font: var(--dt-typography-label-sm-plain);
   text-align: center;
   text-overflow: ellipsis;
 }
