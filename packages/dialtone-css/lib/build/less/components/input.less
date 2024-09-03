@@ -30,12 +30,11 @@
     --input-color-background: var(--dt-inputs-color-background-default);
     --input-color-background-disabled: var(--dt-inputs-color-background-disabled);
     --input-color-text: var(--dt-inputs-color-foreground-default);
-    --input-border-width: calc(var(--dt-size-100) + var(--dt-size-50)); // 1.5
-    --input-border-radius: var(--dt-size-400);
+    --input-border-width: var(--dt-size-border-150);
+    --input-border-radius: var(--dt-inputs-size-radius-md);
     --input-padding-y: calc(var(--dt-space-400) - var(--input-border-width));
     --input-padding-x: calc((var(--dt-space-500) - var(--dt-space-300)) - var(--input-border-width));
-    --input-font-size: var(--dt-font-size-200);
-    --input-line-height: var(--dt-font-line-height-200);
+    --input-typography: var(--dt-typography-inputs-md);
 
     position: relative;
     display: inline-flex;
@@ -45,20 +44,44 @@
     min-width: 0;
     padding: var(--input-padding-y) var(--input-padding-x);
     color: var(--input-color-text);
-    font-weight: inherit;
-    font-size: var(--input-font-size);
-    font-family: inherit;
-    line-height: var(--input-line-height);
+    font: var(--input-typography);
     background-color: var(--input-color-background);
     border: var(--input-border-width) solid var(--input-color-border);
     border-radius: var(--input-border-radius);
     outline: none;
     box-shadow: none;
-    transition-timing-function: var(--ttf-in-out);
-    transition-duration: var(--td100);
-    transition-property: box-shadow, background-color;
     appearance: none;
-    caret-color: var(--input-color-text);
+    caret-color: fieldtext;
+
+    &:has(.d-textarea) {
+        border-end-end-radius: var(--dt-inputs-size-radius-xs);
+    }
+
+    &:has(.d-input--xs),
+    &:has(.d-textarea--xs) {
+        --input-border-radius: var(--dt-inputs-size-radius-xs);
+    }
+
+    &:has(.d-input--sm),
+    &:has(.d-textarea--sm) {
+        --input-border-radius: var(--dt-inputs-size-radius-sm);
+    }
+
+    &:has(.d-input--md),
+    &:has(.d-textarea--md) {
+        --input-border-radius: var(--dt-inputs-size-radius-md);
+    }
+
+    &:has(.d-input--lg),
+    &:has(.d-textarea--lg) {
+        --input-border-radius: var(--dt-inputs-size-radius-lg);
+    }
+
+    &:has(.d-input--xl),
+    &:has(.d-textarea--xl) {
+        --input-border-radius: var(--dt-inputs-size-radius-xl);
+    }
+
 
     //  --  Placeholder copy
     &::placeholder {
@@ -74,7 +97,7 @@
         --input-color-background: var(--dt-inputs-color-background-focus);
         --input-color-border: var(--dt-inputs-color-border-focus) !important;
 
-        box-shadow: 0 0 0 var(--dt-size-100) var(--dt-inputs-color-border-focus) inset;
+        box-shadow: 0 0 0 var(--dt-size-border-100) var(--dt-inputs-color-border-focus) inset;
     }
     //  --  DISABLED / READ-ONLY
     &[disabled],
@@ -203,14 +226,12 @@
     #d-internal__input-and-select-xl();
 }
 
-
 //  ============================================================================
 //  $  TEXTAREAS
 //  ----------------------------------------------------------------------------
 .d-textarea {
     min-height: calc(var(--dt-size-300) * 20); // 80
     vertical-align: top;
-    border-bottom-right-radius: var(--dt-size-300);
     resize: vertical;
     scroll-padding-block: var(--input-padding-y);
 }

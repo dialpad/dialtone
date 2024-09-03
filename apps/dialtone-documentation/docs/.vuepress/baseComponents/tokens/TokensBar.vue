@@ -1,12 +1,12 @@
 <!-- eslint-disable vuejs-accessibility/no-autofocus -->
 <template>
-  <dt-stack gap="500">
+  <dt-stack gap="500" class="d-p16 d-bgc-secondary d-bar8">
     <dt-input
       id="search-input"
       v-model="searchCriteria"
+      label="Search Tokens / Value / Keyword"
       autofocus
       aria-label="Search tokens"
-      placeholder="Search Tokens / Value / Keyword"
       type="text"
       autocomplete="off"
       @keyup="searchToken"
@@ -60,10 +60,11 @@
         v-dt-tooltip:top-end="shareLinkTooltip"
         importance="clear"
         kind="muted"
-        icon-position="right"
+        icon-position="left"
+        class="d-ml-auto"
         @click="copyURLToClipboard"
       >
-        Share filter
+        Share Search Filter
         <template #icon="{ iconSize }">
           <dt-icon
             name="link-2"
