@@ -29,11 +29,13 @@ describe('DtIllustration Tests', () => {
 
   const updateWrapper = async () => {
     wrapper = mount(DtEmptyState, {
-      propsData: { ...baseProps, ...mockProps },
+      props: { ...baseProps, ...mockProps },
       slots: { ...baseSlots, ...mockSlots },
-      components: {
-        DtIllustration,
-        DtIcon,
+      global: {
+        components: {
+          DtIllustration,
+          DtIcon,
+        },
       },
     });
 
