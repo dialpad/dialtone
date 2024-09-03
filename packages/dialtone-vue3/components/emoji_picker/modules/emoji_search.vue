@@ -21,11 +21,14 @@
       >
         <dt-button
           importance="clear"
+          size="xs"
+          class="d-mrn4"
+          circle
           kind="muted"
           @click="clearSearch"
         >
           <template #icon>
-            <dt-icon-x-circle
+            <dt-icon-close
               size="200"
             />
           </template>

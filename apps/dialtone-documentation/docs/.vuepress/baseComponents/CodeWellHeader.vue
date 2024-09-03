@@ -1,6 +1,6 @@
 <template>
-  <aside class="d-bar8">
-    <header :class="classes">
+  <aside>
+    <header class="d-bar8" :class="classes">
       <slot />
     </header>
   </aside>

@@ -1,3 +1,10 @@
+## [4.26.6](https://github.com/dialpad/dialtone/compare/dialtone-icons/v4.26.5...dialtone-icons/v4.26.6) (2024-08-29)
+
+
+### Bug Fixes
+
+* NO-JIRA tree-shaking ([#480](https://github.com/dialpad/dialtone/issues/480)) ([f24eb29](https://github.com/dialpad/dialtone/commit/f24eb29397918238cf12f5882e12f30745947a3c))
+
 ## [4.26.5](https://github.com/dialpad/dialtone/compare/dialtone-icons/v4.26.4...dialtone-icons/v4.26.5) (2024-08-22)
 
 

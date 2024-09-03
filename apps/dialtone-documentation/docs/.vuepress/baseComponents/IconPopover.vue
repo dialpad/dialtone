@@ -12,7 +12,8 @@
   >
     <template #anchor>
       <dt-button
-        class="dialtone-icon-grid__item"
+        class="dialtone-icon-grid__item d-gg8"
+        label-class="d-fl-grow-unset"
         icon-position="top"
         importance="clear"
         kind="muted"
@@ -22,7 +23,6 @@
           <dt-icon
             :name="iconName"
             size="600"
-            class="d-mb8"
           />
         </template>
         <span

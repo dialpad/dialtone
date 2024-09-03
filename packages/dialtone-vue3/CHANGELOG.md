@@ -1,3 +1,17 @@
+# [3.151.0](https://github.com/dialpad/dialtone/compare/dialtone-vue3/v3.150.1...dialtone-vue3/v3.151.0) (2024-09-03)
+
+
+### Features
+
+* **Design Tokens:** DLT-2004 typography and radius design tokens for button, input, select, tabs ([#467](https://github.com/dialpad/dialtone/issues/467)) ([a0c10a2](https://github.com/dialpad/dialtone/commit/a0c10a2390c68e8185d2d78edfefa02d4e889a12))
+
+## [3.150.1](https://github.com/dialpad/dialtone/compare/dialtone-vue3/v3.150.0...dialtone-vue3/v3.150.1) (2024-08-29)
+
+
+### Bug Fixes
+
+* NO-JIRA tree-shaking ([#480](https://github.com/dialpad/dialtone/issues/480)) ([f24eb29](https://github.com/dialpad/dialtone/commit/f24eb29397918238cf12f5882e12f30745947a3c))
+
 # [3.150.0](https://github.com/dialpad/dialtone/compare/dialtone-vue3/v3.149.1...dialtone-vue3/v3.150.0) (2024-08-26)
 
 

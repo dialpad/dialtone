@@ -38,8 +38,11 @@ module.exports = {
       'label',
       'helper',
       'code',
+      'button',
+      'inputs',
     ].join('|'),
     TYPOGRAPHY_SIZES: [
+      'xs',
       'sm',
       'md',
       'lg',

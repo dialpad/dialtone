@@ -1,6 +1,6 @@
 <!-- eslint-disable vuejs-accessibility/no-autofocus -->
 <template>
-  <div class="d-d-grid d-gg16 d-g-cols6 d-mt32 d-mb16">
+  <div class="d-d-grid d-gg16 d-g-cols6 d-mt32 d-mb16 d-p16 d-bgc-secondary d-bar8">
     <div class="d-gc4">
       <dt-input
         id="search-input"
@@ -8,7 +8,7 @@
         v-model="search"
         autofocus
         aria-label="Search icon"
-        placeholder="Search for an icon"
+        label="Find an icon"
         class="d-input d-input-icon--left d-input-icon--right"
         type="text"
         autocomplete="off"
@@ -35,32 +35,31 @@
         </template>
       </dt-input>
     </div>
-    <div class="d-gc2 d-select">
-      <label
-        class="d-vi-visible-sr"
-        for="Dialtone--SelectCategory"
-      >
-        Categories
-      </label>
-      <select
-        id="Dialtone--SelectCategory"
-        v-model="selectedCategory"
-        class="d-select__input d-tt-capitalize"
-      >
-        <option
-          value=""
-          selected
+    <div class="d-gc2">
+      <div class="d-label">
+        <label for="Dialtone--SelectCategory"> Category</label>
+      </div>
+      <div class="d-select">
+        <select
+          id="Dialtone--SelectCategory"
+          v-model="selectedCategory"
+          class="d-select__input d-tt-capitalize"
         >
-          All categories
-        </option>
-        <option
-          v-for="(_, category) in categories"
-          :key="category"
-          :value="category"
-        >
-          {{ category }}
-        </option>
-      </select>
+          <option
+            value=""
+            selected
+          >
+            All
+          </option>
+          <option
+            v-for="(_, category) in categories"
+            :key="category"
+            :value="category"
+          >
+            {{ category }}
+          </option>
+        </select>
+      </div>
     </div>
   </div>
   <div
@@ -68,8 +67,8 @@
     :key="category"
     class="d-mb16"
   >
-    <span
-      class="d-headline--md d-tt-capitalize"
+    <div
+      class="d-headline--lg d-tt-capitalize d-mb4"
       v-text="category"
     />
     <div class="d-gl-docsite-icons">
@@ -85,10 +84,7 @@
       />
     </div>
   </div>
-  <div
-    v-if="!hasSearchResults"
-    class="d-d-flex d-fl-center d-p16 d-gg4 d-fc-tertiary d-fs-300"
-  >
+  <div v-if="!hasSearchResults" class="d-body d-fc-tertiary d-p16 d-pt0 d-ta-center">
     <span>No results found for</span>
     <strong class="d-fw-semibold">
       &OpenCurlyDoubleQuote;{{ search }}&CloseCurlyDoubleQuote;

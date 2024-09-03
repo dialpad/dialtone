@@ -28,6 +28,10 @@ export default {
     ariaHidden () {
       return !this.ariaLabel ? 'true' : 'false';
     },
+
+    dataQA () {
+      return this.$attrs['data-qa'] ?? 'dt-illustration';
+    },
   },
 
   created () {
