@@ -9,9 +9,7 @@ figma_url: https://www.figma.com/file/2adf7JhZOncRyjYiy2joil/DT-Core%3A-Componen
 ---
 
 <code-well-header>
-  <button class="d-btn d-btn--primary" type="button">
-    <span class="d-btn__label">Place Call</span>
-  </button>
+  <dt-button> Place Call </dt-button>
 </code-well-header>
 
 <!-- <component-combinator component-name="DtButton" /> -->
