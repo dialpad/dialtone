@@ -30,13 +30,11 @@
             :avatar-class="[{ 'd-mln24': index > 0, 'd-bc-brand': !!avatar.halo }]"
           >
             <template
-              v-if="avatarIcon"
+              v-if="hasAvatarIcon"
               #icon="{ iconSize }"
             >
-              <component
-                :is="avatarIcon"
-                :size="iconSize"
-              />
+              <!-- @slot Slot for avatar icon in a list -->
+              <slot name="avatarIcon" :icon-size="iconSize" />
             </template>
             <template
               v-if="avatar.icon"
@@ -57,13 +55,11 @@
           :presence="presence"
         >
           <template
-            v-if="avatarIcon"
+            v-if="hasAvatarIcon"
             #icon="{ iconSize }"
           >
-            <component
-              :is="avatarIcon"
-              :size="iconSize"
-            />
+            <!-- @slot Slot for avatar icon in a list -->
+            <slot name="avatarIcon" :icon-size="iconSize" />
           </template>
         </dt-avatar>
       </button>
@@ -165,14 +161,6 @@ export default {
     },
 
     /**
-     * Avatar icon to display if `avatarSrc` is empty.
-     */
-    avatarIcon: {
-      type: Object,
-      default: null,
-    },
-
-    /**
      * The size of the avatar
      * @values xs, sm, md, lg, xl
      */
@@ -226,6 +214,12 @@ export default {
   },
 
   emits: ['avatar-click'],
+
+  computed: {
+    hasAvatarIcon () {
+      return this.$scopedSlots.avatarIcon && this.$scopedSlots.avatarIcon();
+    },
+  },
 
   methods: {
     avatarClick () {
