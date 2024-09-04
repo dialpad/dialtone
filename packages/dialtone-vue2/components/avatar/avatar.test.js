@@ -1,4 +1,5 @@
 import { createLocalVue, mount } from '@vue/test-utils';
+import { DtIconUser } from '@dialpad/dialtone-icons/vue2';
 import DtAvatar from './avatar.vue';
 import { AVATAR_KIND_MODIFIERS, AVATAR_SIZE_MODIFIERS } from './avatar_constants';
 
@@ -9,7 +10,7 @@ const MOCK_INITIALS = 'JN';
 const MOCK_SIZE = 'lg';
 const MOCK_GROUP = 25;
 const MOCK_CUSTOM_CLASS = 'my-custom-class';
-const MOCK_ICON_SLOT = '<template #icon=>Icon</template>';
+const MOCK_ICON_SLOT = '<dt-icon-user />';
 let MOCK_ELEMENT = null;
 
 const baseProps = {
@@ -28,6 +29,7 @@ describe('DtAvatar Tests', () => {
   let image;
   let count;
   let presence;
+  let iconWrapper;
 
   const updateWrapper = () => {
     wrapper = mount(DtAvatar, {
@@ -35,11 +37,13 @@ describe('DtAvatar Tests', () => {
       listeners: { ...baseListeners, ...mockListeners },
       localVue: testContext.localVue,
       slots: { ...mockSlots },
+      components: { DtIconUser },
     });
 
     image = wrapper.find('[data-qa="dt-avatar-image"]');
     count = wrapper.find('[data-qa="dt-avatar-count"]');
     presence = wrapper.find('[data-qa="dt-presence"]');
+    iconWrapper = wrapper.find('[data-qa="dt-avatar-icon"]');
   };
 
   beforeAll(() => {
@@ -95,11 +99,15 @@ describe('DtAvatar Tests', () => {
       });
 
       it('icon should exist', () => {
-        expect(wrapper.find('[data-qa="dt-avatar-icon"]').exists()).toBeTruthy();
+        expect(iconWrapper.exists()).toBeTruthy();
       });
 
       it('should have correct class', () => {
-        expect(wrapper.find('[data-qa="dt-avatar-icon"]').classes(AVATAR_KIND_MODIFIERS.icon)).toBe(true);
+        expect(iconWrapper.classes(AVATAR_KIND_MODIFIERS.icon)).toBe(true);
+      });
+
+      it('should render the custom icon', () => {
+        expect(iconWrapper.findComponent(DtIconUser).exists()).toBe(true);
       });
     });
 
