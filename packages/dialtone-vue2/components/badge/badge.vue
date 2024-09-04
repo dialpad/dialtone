@@ -21,7 +21,7 @@
       <!-- @slot Slot for left icon, icon-size slot prop defaults to '200' -->
       <slot
         name="leftIcon"
-        :icon-size="iconSize"
+        :icon-size="'200'"
       />
     </span>
     <span :class="['d-badge__label', labelClass]">
@@ -37,7 +37,7 @@
       <!-- @slot Slot for right icon, icon-size slot prop defaults to '200' -->
       <slot
         name="rightIcon"
-        :icon-size="iconSize"
+        :icon-size="'200'"
       />
     </span>
   </span>
@@ -45,7 +45,6 @@
 
 <script>
 import { BADGE_TYPE_MODIFIERS, BADGE_KIND_MODIFIERS, BADGE_DECORATION_MODIFIERS } from './badge_constants';
-import { ICON_SIZE_MODIFIERS } from '@/components/icon';
 
 /**
  * A badge is a compact UI element that provides brief, descriptive information about an element.
@@ -56,16 +55,6 @@ export default {
   name: 'DtBadge',
 
   props: {
-    /**
-     * The size of the left and right icons.
-     * @values 100, 200, 300, 400, 500, 600, 700, 800
-     */
-    iconSize: {
-      type: String,
-      default: '200',
-      validator: (s) => Object.keys(ICON_SIZE_MODIFIERS).includes(s),
-    },
-
     /**
      * Text for the badge content
      */
