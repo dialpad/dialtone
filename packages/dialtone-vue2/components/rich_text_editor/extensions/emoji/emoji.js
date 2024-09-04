@@ -1,36 +1,28 @@
-import { mergeAttributes, Node, nodeInputRule, nodePasteRule } from '@tiptap/core';
-import { VueNodeViewRenderer } from '@tiptap/vue-2';
-import EmojiComponent from './EmojiComponent.vue';
-import { codeToEmojiData, emojiShortCodeRegex, emojiRegex, stringToUnicode } from '@/common/emoji';
+import { InputRule, mergeAttributes, Node, nodePasteRule } from '@tiptap/core';
 import { PluginKey } from '@tiptap/pm/state';
-
+import { VueNodeViewRenderer } from '@tiptap/vue-2';
 import Suggestion from '@tiptap/suggestion';
-import suggestionOptions from './suggestion';
 import { emojiPattern } from 'regex-combined-emojis';
 
-const EmojiPluginKey = new PluginKey('emoji');
+import EmojiComponent from './EmojiComponent.vue';
+import { codeToEmojiData, emojiShortCodeRegex, emojiRegex, stringToUnicode } from '@/common/emoji';
+import suggestionOptions from './suggestion';
 
-const inputShortCodeRegex = /(^| |(?<=:))(:\w+:)$/;
+const inputShortCodeRegex = /(:\w+:)$/;
 const inputUnicodeRegex = new RegExp(emojiPattern + '$');
 
 const inputRuleMatch = (match) => {
-  // console.log('input:', match);
   if (match && codeToEmojiData(match[0])) {
     const text = match[2] || match[0];
-    console.log(`text: "${match[2]}" "${match[0]}"`);
     // needs to be a dict returned
     // ref type InputRuleMatch:
     // https://github.com/ueberdosis/tiptap/blob/main/packages/core/src/InputRule.ts#L16
-    return {
-      text,
-    };
+    return { text };
   }
 };
 
 const shortCodePasteMatch = (text) => {
   const matches = [...text.matchAll(emojiShortCodeRegex)];
-
-  console.log('paste:', matches);
 
   return matches
     .filter(match => codeToEmojiData(match[0]))
@@ -41,15 +33,11 @@ const shortCodePasteMatch = (text) => {
     }));
 };
 
-const Emoji = Node.create({
+export const Emoji = Node.create({
   name: 'emoji',
   addOptions () {
     return {
       HTMLAttributes: {},
-      suggestion: {
-        char: ':',
-        pluginKey: EmojiPluginKey,
-      },
     };
   },
   group: 'inline',
@@ -90,36 +78,18 @@ const Emoji = Node.create({
 
   addInputRules () {
     return [
-      // shortcode input
-      nodeInputRule({
-        find: inputShortCodeRegex,
-        // find: (text) => {
-        //  const match = text.match(inputShortCodeRegex);
-        //  if (!match) return false;
-        //
-        //  return inputRuleMatch(match);
-        // },
-        type: this.type,
-        getAttributes (match) {
-          return {
-            code: match[0],
-          };
-        },
-      }),
-
-      nodeInputRule({
+      new InputRule({
         find: (text) => {
-          const match = text.match(inputUnicodeRegex);
+          const match = text.match(inputShortCodeRegex) || text.match(inputUnicodeRegex);
           if (!match) return;
-          console.log('input unicode regex match: ', match);
+
           return inputRuleMatch(match);
         },
-        type: this.type,
-        getAttributes (attrs) {
-          const emoji = codeToEmojiData(attrs[0]).shortname;
-          return {
-            code: emoji,
-          };
+        handler: ({ state, range, match, commands, chain, can }) => {
+          const { tr } = state;
+          const start = range.from;
+          const end = range.to;
+          tr.replaceWith(start, end, this.type.create({ code: match[0] }));
         },
       }),
     ];
@@ -151,6 +121,8 @@ const Emoji = Node.create({
   addProseMirrorPlugins () {
     return [
       Suggestion({
+        char: ':',
+        pluginKey: new PluginKey('emoji'),
         editor: this.editor,
         ...this.options.suggestion,
         ...suggestionOptions,
@@ -168,7 +140,7 @@ const Emoji = Node.create({
         state.doc.nodesBetween(anchor - 1, anchor, (node, pos) => {
           if (node.type.name === this.name) {
             isEmoji = true;
-            tr.insertText(this.options.deleteTriggerWithBackspace ? '' : this.options.suggestion.char || '', pos, pos + node.nodeSize);
+            tr.insertText('', pos, pos + node.nodeSize);
             return false;
           }
         });
@@ -177,5 +149,3 @@ const Emoji = Node.create({
     };
   },
 });
-
-export { Emoji, EmojiPluginKey, Emoji as default };
