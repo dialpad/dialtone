@@ -80,6 +80,9 @@ export async function run () {
           basePxFontSize: Number.parseFloat(BASE_FONT_SIZE),
           buildPath: 'dist/css/',
           theme: themeName,
+          options: {
+            outputReferences: true,
+          },
           files: [
             {
               destination: `tokens-${themeName}.css`,
