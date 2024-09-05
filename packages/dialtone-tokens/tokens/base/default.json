@@ -1372,6 +1372,10 @@
         "value": "8px",
         "type": "borderRadius"
       },
+      "450": {
+        "value": "12px",
+        "type": "borderRadius"
+      },
       "500": {
         "value": "16px",
         "type": "borderRadius"

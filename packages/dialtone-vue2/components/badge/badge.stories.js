@@ -15,6 +15,8 @@ export const argsData = {
   type: 'default',
   kind: 'label',
   decoration: undefined,
+  leftIcon: undefined,
+  rightIcon: undefined,
 };
 
 export const argTypesData = {
@@ -27,8 +29,11 @@ export const argTypesData = {
       },
     },
   },
-  iconLeft: {
+  leftIcon: {
     options: iconsList,
+    table: {
+      type: { summary: 'VNode' },
+    },
     control: {
       type: 'select',
       labels: {
@@ -36,8 +41,11 @@ export const argTypesData = {
       },
     },
   },
-  iconRight: {
+  rightIcon: {
     options: iconsList,
+    table: {
+      type: { summary: 'VNode' },
+    },
     control: {
       type: 'select',
       labels: {

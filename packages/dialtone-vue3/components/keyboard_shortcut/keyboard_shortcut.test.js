@@ -1,6 +1,5 @@
 import { mount } from '@vue/test-utils';
 import { DtKeyboardShortcut } from '@/components/keyboard_shortcut';
-import { DtIcon } from '@/components/icon';
 import { SHORTCUTS_ALIASES_LIST } from './keyboard_shortcut_constants';
 
 const baseProps = {
@@ -18,7 +17,7 @@ describe('DtKeyboardShortcut Tests', () => {
       propsData: { ...baseProps, ...mockProps },
     });
 
-    iconComponents = wrapper.findAllComponents(DtIcon);
+    iconComponents = wrapper.findAll('[data-qa="dt-icon"]');
   };
 
   beforeEach(() => {

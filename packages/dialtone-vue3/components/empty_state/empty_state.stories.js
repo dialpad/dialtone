@@ -1,8 +1,7 @@
-import DtEmptyState from './empty_state.vue';
-import { EMPTY_STATE_SIZE_MODIFIERS } from './empty_state_constants.js';
-import DtEmptyStateDefaultTemplate from './empty_state_default.story.vue';
 import { createTemplateFromVueFile, getIconNames, getIllustrationNames } from '@/common/storybook_utils';
-import DtIllustrationDefaultTemplate from '@/components/illustration/illustration_default.story.vue';
+import DtEmptyState from './empty_state.vue';
+import DtEmptyStateDefaultTemplate from './empty_state_default.story.vue';
+import { EMPTY_STATE_SIZE_MODIFIERS } from './empty_state_constants.js';
 
 const illustrationsList = getIllustrationNames();
 const iconsList = getIconNames();
@@ -17,30 +16,36 @@ export const argTypesData = {
       },
     },
   },
+  icon: {
+    options: iconsList,
+    table: {
+      type: { summary: 'VNode' },
+    },
+    control: {
+      type: 'select',
+      labels: {
+        undefined: '(empty)',
+      },
+    },
+  },
+  illustration: {
+    options: illustrationsList,
+    table: {
+      type: { summary: 'VNode' },
+    },
+    control: {
+      type: 'select',
+      labels: {
+        undefined: '(empty)',
+      },
+    },
+  },
 
   // Props
   size: {
     options: Object.keys(EMPTY_STATE_SIZE_MODIFIERS),
     control: {
       type: 'select',
-    },
-  },
-  illustrationName: {
-    options: illustrationsList,
-    control: {
-      type: 'select',
-      labels: {
-        undefined: '(empty)',
-      },
-    },
-  },
-  iconName: {
-    options: iconsList,
-    control: {
-      type: 'select',
-      labels: {
-        undefined: '(empty)',
-      },
     },
   },
   headerText: {
@@ -53,14 +58,12 @@ export const argTypesData = {
       type: 'text',
     },
   },
-  showIllustration: {
-    control: {
-      type: 'boolean',
-    },
-  },
 };
 
-export const argsData = {};
+export const argsData = {
+  icon: undefined,
+  illustration: undefined,
+};
 
 export default {
   title: 'Components/Empty State',
@@ -80,7 +83,7 @@ export const Default = {
   render: DefaultTemplate,
 
   args: {
-    illustrationName: 'mind',
+    illustration: 'mind',
     size: 'lg',
     headerText: 'Nothing to see here',
     bodyText: 'Lorem ipsum dolor sit amet consectetur. Diam in aliquam arcu elit pulvinar morbi lorem ac neque.',

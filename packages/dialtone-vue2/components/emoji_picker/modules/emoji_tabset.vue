@@ -1,6 +1,7 @@
 <template>
   <div class="d-emoji-picker__tabset">
     <dt-tab-group
+      size="sm"
       tab-list-class="d-emoji-picker__tabset-list"
       :selected="selectedTab"
     >
@@ -17,9 +18,9 @@
           @click.capture.stop="selectTabset(tab.id)"
           @keydown="handleKeyDown($event, tab.id)"
         >
-          <dt-icon
+          <component
+            :is="tab.icon"
             size="400"
-            :name="tab.icon"
           />
         </dt-tab>
       </template>
@@ -28,10 +29,19 @@
 </template>
 
 <script>
-import DtTabGroup from '@/components/tabs/tab_group.vue';
-import DtTab from '@/components/tabs/tab.vue';
-import DtIcon from '@/components/icon/icon.vue';
+import { DtTab, DtTabGroup } from '@/components/tabs';
 import { EMOJI_PICKER_CATEGORIES } from '@/components/emoji_picker';
+import {
+  DtIconClock,
+  DtIconSatisfied,
+  DtIconLivingThing,
+  DtIconFood,
+  DtIconObject,
+  DtIconTransportation,
+  DtIconLightbulb,
+  DtIconHeart,
+  DtIconFlag,
+} from '@dialpad/dialtone-icons/vue2';
 
 export default {
   name: 'EmojiTabset',
@@ -39,10 +49,14 @@ export default {
   components: {
     DtTabGroup,
     DtTab,
-    DtIcon,
   },
 
   props: {
+    /**
+     * Whether to show the recently used tab or not
+     * @type {Boolean}
+     * @default false
+     */
     showRecentlyUsedTab: {
       type: Boolean,
       default: false,
@@ -63,6 +77,11 @@ export default {
       default: '',
     },
 
+    /**
+     * The labels for the aria-label
+     * @type {Array}
+     * @required
+     */
     tabSetLabels: {
       type: Array,
       required: true,
@@ -74,15 +93,15 @@ export default {
       selectedTab: '1',
       tabsetRef: [],
       TABS_DATA: [
-        { label: EMOJI_PICKER_CATEGORIES.MOST_RECENTLY_USED, icon: 'clock' },
-        { label: EMOJI_PICKER_CATEGORIES.SMILEYS_AND_PEOPLE, icon: 'satisfied' },
-        { label: EMOJI_PICKER_CATEGORIES.NATURE, icon: 'living-thing' },
-        { label: EMOJI_PICKER_CATEGORIES.FOOD, icon: 'food' },
-        { label: EMOJI_PICKER_CATEGORIES.ACTIVITY, icon: 'object' },
-        { label: EMOJI_PICKER_CATEGORIES.TRAVEL, icon: 'transportation' },
-        { label: EMOJI_PICKER_CATEGORIES.OBJECTS, icon: 'lightbulb' },
-        { label: EMOJI_PICKER_CATEGORIES.SYMBOLS, icon: 'heart' },
-        { label: EMOJI_PICKER_CATEGORIES.FLAGS, icon: 'flag' },
+        { label: EMOJI_PICKER_CATEGORIES.MOST_RECENTLY_USED, icon: DtIconClock },
+        { label: EMOJI_PICKER_CATEGORIES.SMILEYS_AND_PEOPLE, icon: DtIconSatisfied },
+        { label: EMOJI_PICKER_CATEGORIES.NATURE, icon: DtIconLivingThing },
+        { label: EMOJI_PICKER_CATEGORIES.FOOD, icon: DtIconFood },
+        { label: EMOJI_PICKER_CATEGORIES.ACTIVITY, icon: DtIconObject },
+        { label: EMOJI_PICKER_CATEGORIES.TRAVEL, icon: DtIconTransportation },
+        { label: EMOJI_PICKER_CATEGORIES.OBJECTS, icon: DtIconLightbulb },
+        { label: EMOJI_PICKER_CATEGORIES.SYMBOLS, icon: DtIconHeart },
+        { label: EMOJI_PICKER_CATEGORIES.FLAGS, icon: DtIconFlag },
       ],
     };
   },

@@ -8,10 +8,10 @@ storybook: https://dialtone.dialpad.com/vue/?path=/story/components-badge--defau
 figma_url: https://www.figma.com/file/2adf7JhZOncRyjYiy2joil/DT-Core%3A-Components-7?node-id=8914%3A21227&viewport=656%2C314%2C0.55&t=xHutRjwo1o5zMTgT-11
 ---
 
-<code-well-header bgclass="d-bgc-primary">
+<code-well-header>
   <dt-stack direction="row" gap="400" class="d-ai-center">
-    <dt-badge text="Label" />
-    <dt-badge kind="count" text="1" />
+    <dt-badge text="Label"></dt-badge>
+    <dt-badge kind="count" text="1"></dt-badge>
   </dt-stack>
 </code-well-header>
 
@@ -47,7 +47,7 @@ figma_url: https://www.figma.com/file/2adf7JhZOncRyjYiy2joil/DT-Core%3A-Componen
 ### Label
 
 <code-well-header bgclass="d-bgc-primary">
-  <dt-badge text="Label" />
+  <dt-badge text="Label"></dt-badge>
 </code-well-header>
 
 <code-example-tabs
@@ -61,7 +61,7 @@ showHtmlWarning />
 ### Count
 
 <code-well-header bgclass="d-bgc-primary">
-  <span class="d-badge d-badge--count"><span class="d-badge__label">1</span></span>
+  <dt-badge kind="count" text="1"></dt-badge>
 </code-well-header>
 
 <code-example-tabs
@@ -87,67 +87,67 @@ showHtmlWarning />
     <tr>
       <th class="d-ta-left">Default</th>
       <td>
-        <dt-badge text="Label" />
+        <dt-badge text="Label"></dt-badge>
       </td>
       <td>
-        <dt-badge kind="count" text="1" />
+        <dt-badge kind="count" text="1"></dt-badge>
       </td>
       <td>Default general purpose callout when no implicit semantic meaning applies.</td>
     </tr>
     <tr>
       <th class="d-ta-left">Info</th>
       <td>
-        <dt-badge type="info" text="Label" />
+        <dt-badge type="info" text="Label"></dt-badge>
       </td>
       <td>
-        <dt-badge kind="count" type="info" text="2" />
+        <dt-badge kind="count" type="info" text="2"></dt-badge>
       </td>
       <td>Used to convey general information that isn’t critical or requires action on the user's part.</td>
     </tr>
     <tr>
       <th class="d-ta-left">Success</th>
       <td>
-        <dt-badge type="success" text="Label" />
+        <dt-badge type="success" text="Label"></dt-badge>
       </td>
       <td>
-        <dt-badge kind="count" type="success" text="3" />
+        <dt-badge kind="count" type="success" text="3"></dt-badge>
       </td>
       <td>Accompanying a successful or otherwise positive action or message</td>
     </tr>
     <tr>
       <th class="d-ta-left">Warning</th>
       <td>
-        <dt-badge type="warning" text="Label" />
+        <dt-badge type="warning" text="Label"></dt-badge>
       </td>
       <td>
-        <dt-badge kind="count" type="warning" text="4" />
+        <dt-badge kind="count" type="warning" text="4"></dt-badge>
       </td>
       <td>When a users attention is needed, or action may be required.</td>
     </tr>
     <tr>
       <th class="d-ta-left">Critical</th>
       <td>
-        <dt-badge type="critical" text="Label" />
+        <dt-badge type="critical" text="Label"></dt-badge>
       </td>
       <td>
-        <dt-badge kind="count" type="critical" text="5" />
+        <dt-badge kind="count" type="critical" text="5"></dt-badge>
       </td>
       <td>To communicate conditions deemed critical, negative, or dangerous. For example, sensitive state (e.g. recording), must be resolved, or something has failed.</td>
     </tr>
     <tr>
       <th class="d-ta-left">Bulletin</th>
       <td>
-        <dt-badge type="bulletin" text="Label" />
+        <dt-badge type="bulletin" text="Label"></dt-badge>
       </td>
       <td>
-        <dt-badge kind="count" type="bulletin" text="6" />
+        <dt-badge kind="count" type="bulletin" text="6"></dt-badge>
       </td>
       <td>Used to provide temporary feedback to specific items in the interface, like live activity, notifications, and unread counts. </td>
     </tr>
     <tr>
       <th class="d-ta-left">Ai</th>
       <td>
-        <dt-badge type="ai" text="Label" kind="label" />
+        <dt-badge type="ai" text="Label" kind="label"></dt-badge>
       </td>
       <td><abbr class="d-fc-black-400 d-td-none d-fs-100" title="Not applicable">N/A</abbr></td>
       <td>To call out Dialpad Ai features.</td>
@@ -197,16 +197,16 @@ showHtmlWarning />
 
 <code-well-header bgclass="d-bgc-primary">
   <dt-stack direction="row" gap="400">
-    <dt-badge text="Label" outlined />
-    <dt-badge text="Label" type="info" outlined />
-    <dt-badge text="Label" type="success" outlined />
-    <dt-badge text="Label" type="warning" outlined />
-    <dt-badge text="Label" type="critical" outlined />
-    <dt-badge text="1" kind="count" outlined />
-    <dt-badge text="1" type="info" kind="count" outlined />
-    <dt-badge text="1" type="success" kind="count" outlined />
-    <dt-badge text="1" type="warning" kind="count" outlined />
-    <dt-badge text="1" type="critical" kind="count" outlined />
+    <dt-badge text="Label" outlined></dt-badge>
+    <dt-badge text="Label" type="info" outlined></dt-badge>
+    <dt-badge text="Label" type="success" outlined></dt-badge>
+    <dt-badge text="Label" type="warning" outlined></dt-badge>
+    <dt-badge text="Label" type="critical" outlined></dt-badge>
+    <dt-badge text="1" kind="count" outlined></dt-badge>
+    <dt-badge text="1" type="info" kind="count" outlined></dt-badge>
+    <dt-badge text="1" type="success" kind="count" outlined></dt-badge>
+    <dt-badge text="1" type="warning" kind="count" outlined></dt-badge>
+    <dt-badge text="1" type="critical" kind="count" outlined></dt-badge>
   </dt-stack>
 </code-well-header>
 
@@ -243,10 +243,10 @@ At the moment, only the `bulletin` type has a subtle variant.
 
 <code-well-header>
   <dt-stack direction="row" gap="400">
-    <dt-badge text="Label" type="bulletin" subtle />
-    <dt-badge text="Label" type="bulletin" subtle outlined />
-    <dt-badge text="1" type="bulletin" subtle kind="count" />
-    <dt-badge text="1" type="bulletin" subtle kind="count" outlined />
+    <dt-badge text="Label" type="bulletin" subtle></dt-badge>
+    <dt-badge text="Label" type="bulletin" subtle outlined></dt-badge>
+    <dt-badge text="1" type="bulletin" subtle kind="count"></dt-badge>
+    <dt-badge text="1" type="bulletin" subtle kind="count" outlined></dt-badge>
   </dt-stack>
 </code-well-header>
 
@@ -269,30 +269,32 @@ showHtmlWarning />
 
 <code-well-header bgclass="d-bgc-primary">
   <dt-stack direction="row" gap="400">
-    <dt-badge type="default" text="Label" kind="label" icon-left="lightning-bolt"/>
-    <dt-badge type="default" text="Label" kind="label" icon-right="lightning-bolt"/>
+    <dt-badge ref="iconExample" type="default" text="Label" kind="label">
+      <template #leftIcon="{ iconSize }">
+        <dt-icon-lightning-bolt :size="iconSize"></dt-icon-lightning-bolt>
+      </template>
+    </dt-badge>
+    <dt-badge type="default" text="Label" kind="label">
+      <template #rightIcon="{ iconSize }">
+        <dt-icon-lightning-bolt :size="iconSize"></dt-icon-lightning-bolt>
+      </template>
+    </dt-badge>
   </dt-stack>
 </code-well-header>
 
 <code-example-tabs
-htmlCode='
-<span class="d-badge">
-  <span class="d-badge__icon-left">
-    <dt-icon name="lightning-bolt" size="200" />
-  </span>
-  <span class="d-badge__label">Label</span>
-</span>
-
-<span class="d-badge">
-  <span class="d-badge__label">Label</span>
-  <span class="d-badge__icon-right">
-    <dt-icon name="lightning-bolt" size="200" />
-  </span>
-</span>
-'
+:htmlCode='() => $refs.iconExample'
 vueCode='
-<dt-badge type="default" text="Label" kind="label" icon-left="lightning-bolt"/>
-<dt-badge type="default" text="Label" kind="label" icon-right="lightning-bolt"/>
+<dt-badge type="default" text="Label" kind="label">
+  <template #leftIcon="{ iconSize }">
+    <dt-icon-lightning-bolt :size="iconSize" />
+  </template>
+</dt-badge>
+<dt-badge type="default" text="Label" kind="label">
+  <template #rightIcon="{ iconSize }">
+    <dt-icon-lightning-bolt :size="iconSize" />
+  </template>
+</dt-badge>
 '
 showHtmlWarning />
 
@@ -304,46 +306,46 @@ Decorative badges label and classify items for quick recognition.
   <dt-stack direction="row" gap="500" class="d-ai-baseline">
     <dt-stack gap="500">
       <span class="d-label--md-compact">Black</span>
-      <dt-badge text="Label" decoration="black-400" />
-      <dt-badge text="Label" decoration="black-500" />
-      <dt-badge text="Label" decoration="black-900" />
+      <dt-badge text="Label" decoration="black-400"></dt-badge>
+      <dt-badge text="Label" decoration="black-500"></dt-badge>
+      <dt-badge text="Label" decoration="black-900"></dt-badge>
     </dt-stack>
     <dt-stack gap="500">
       <span class="d-label--md-compact">Red</span>
-      <dt-badge text="Label" decoration="red-200" />
-      <dt-badge text="Label" decoration="red-300" />
-      <dt-badge text="Label" decoration="red-400" />
+      <dt-badge text="Label" decoration="red-200"></dt-badge>
+      <dt-badge text="Label" decoration="red-300"></dt-badge>
+      <dt-badge text="Label" decoration="red-400"></dt-badge>
     </dt-stack>
     <dt-stack gap="500">
       <span class="d-label--md-compact">Purple</span>
-      <dt-badge text="Label" decoration="purple-200" />
-      <dt-badge text="Label" decoration="purple-300" />
-      <dt-badge text="Label" decoration="purple-400" />
-      <dt-badge text="Label" decoration="purple-500" />
+      <dt-badge text="Label" decoration="purple-200"></dt-badge>
+      <dt-badge text="Label" decoration="purple-300"></dt-badge>
+      <dt-badge text="Label" decoration="purple-400"></dt-badge>
+      <dt-badge text="Label" decoration="purple-500"></dt-badge>
     </dt-stack>
     <dt-stack gap="500">
       <span class="d-label--md-compact">Blue</span>
-      <dt-badge text="Label" decoration="blue-200" />
-      <dt-badge text="Label" decoration="blue-300" />
-      <dt-badge text="Label" decoration="blue-400" />
+      <dt-badge text="Label" decoration="blue-200"></dt-badge>
+      <dt-badge text="Label" decoration="blue-300"></dt-badge>
+      <dt-badge text="Label" decoration="blue-400"></dt-badge>
     </dt-stack>
     <dt-stack gap="500">
       <span class="d-label--md-compact">Green</span>
-      <dt-badge text="Label" decoration="green-300" />
-      <dt-badge text="Label" decoration="green-400" />
-      <dt-badge text="Label" decoration="green-500" />
+      <dt-badge text="Label" decoration="green-300"></dt-badge>
+      <dt-badge text="Label" decoration="green-400"></dt-badge>
+      <dt-badge text="Label" decoration="green-500"></dt-badge>
     </dt-stack>
     <dt-stack gap="500">
       <span class="d-label--md-compact">Gold</span>
-      <dt-badge text="Label" decoration="gold-300" />
-      <dt-badge text="Label" decoration="gold-400" />
-      <dt-badge text="Label" decoration="gold-500" />
+      <dt-badge text="Label" decoration="gold-300"></dt-badge>
+      <dt-badge text="Label" decoration="gold-400"></dt-badge>
+      <dt-badge text="Label" decoration="gold-500"></dt-badge>
     </dt-stack>
     <dt-stack gap="500">
       <span class="d-label--md-compact">Magenta</span>
-      <dt-badge text="Label" decoration="magenta-200" />
-      <dt-badge text="Label" decoration="magenta-300" />
-      <dt-badge text="Label" decoration="magenta-400" />
+      <dt-badge text="Label" decoration="magenta-200"></dt-badge>
+      <dt-badge text="Label" decoration="magenta-300"></dt-badge>
+      <dt-badge text="Label" decoration="magenta-400"></dt-badge>
     </dt-stack>
   </dt-stack>
 </code-well-header>
@@ -412,49 +414,46 @@ showHtmlWarning />
 <code-well-header bgclass="d-bgc-primary">
   <dt-stack gap="500">
     <dt-stack direction="row" gap="400">
-      <span class="d-badge">Co-host</span>
-      <span class="d-badge">Customer</span>
-      <span class="d-badge">
-        <span class="d-badge__icon-left">
-          <dt-icon name="lock" size="200" />
-        </span>
-        <span class="d-badge__label">Locked</span>
-      </span>
-      <span class="d-badge">
-        <span class="d-badge__icon-left">
-          <dt-icon name="message" size="200" />
-        </span>
-        <span class="d-badge__label">Chat log</span>
-      </span>
+      <dt-badge text="Co-host"></dt-badge>
+      <dt-badge text="Customer"></dt-badge>
+      <dt-badge text="Locked">
+        <template #leftIcon="{ iconSize }">
+          <dt-icon-lock :size="iconSize"></dt-icon-lock>
+        </template>
+      </dt-badge>
+      <dt-badge text="Chat log">
+        <template #leftIcon="{ iconSize }">
+          <dt-icon-message :size="iconSize"></dt-icon-message>
+        </template>
+      </dt-badge>
     </dt-stack>
     <dt-stack direction="row" gap="400">
-      <span class="d-badge d-badge--info"><span class="d-badge__label">In progress</span></span>
-      <span class="d-badge d-badge--info"><span class="d-badge__label">Beta</span></span>
-      <span class="d-badge d-badge--info"><span class="d-badge__label">Draft</span></span>
+      <dt-badge text="In progress" type="info"></dt-badge>
+      <dt-badge text="Beta" type="info"></dt-badge>
+      <dt-badge text="Draft" type="info"></dt-badge>
     </dt-stack>
     <dt-stack direction="row" gap="400">
-      <span class="d-badge d-badge--warning"><span class="d-badge__label">Overdue</span></span>
+      <dt-badge text="Overdue" type="warning"></dt-badge>
     </dt-stack>
     <dt-stack direction="row" gap="400">
-      <span class="d-badge d-badge--success"><span class="d-badge__label">Resolved</span></span>
+      <dt-badge text="Resolved" type="success"></dt-badge>
     </dt-stack>
     <dt-stack direction="row" gap="400">
-      <span class="d-badge d-badge--critical">
-        <span class="d-badge__icon-left">
-          <dt-icon name="record-filled" size="200" />
-        </span>
-        <span class="d-badge__label">Recording</span>
-      </span>
+      <dt-badge text="Recording" type="critical">
+        <template #leftIcon="{ iconSize }">
+          <dt-icon-record-filled :size="iconSize"></dt-icon-record-filled>
+        </template>
+      </dt-badge>
     </dt-stack>
     <dt-stack direction="row" gap="400">
-      <span class="d-badge d-badge--bulletin"><span class="d-badge__label">Live</span></span>
-      <span class="d-badge d-badge--bulletin"><span class="d-badge__label">Presenter</span></span>
+      <dt-badge text="Live" type="bulletin"></dt-badge>
+      <dt-badge text="Presenter" type="bulletin"></dt-badge>
     </dt-stack>
     <dt-stack direction="row" gap="400">
-      <dt-badge type="ai" text="Ai Notes" />
-      <dt-badge type="ai" text="Ai Suggestion" />
-      <dt-badge type="ai" text="Ai enabled" />
-      <dt-badge type="ai" text="Ai Transcript" />
+      <dt-badge type="ai" text="Ai Notes"></dt-badge>
+      <dt-badge type="ai" text="Ai Suggestion"></dt-badge>
+      <dt-badge type="ai" text="Ai enabled"></dt-badge>
+      <dt-badge type="ai" text="Ai Transcript"></dt-badge>
     </dt-stack>
   </dt-stack>
 </code-well-header>
@@ -464,37 +463,42 @@ showHtmlWarning />
 <code-well-header bgclass="d-bgc-primary">
   <dt-stack gap="500">
     <dt-stack direction="row" gap="400">
-      <span class="d-badge d-badge--count d-badge--success">
-        <span class="d-badge__icon-left">
-          <dt-icon name="arrow-up" size="200" />
-        </span>
-        <span class="d-badge__label">5%</span>
-      </span>
+      <dt-badge kind="count" type="success" text="5%">
+        <template #leftIcon="{ iconSize }">
+          <dt-icon-arrow-up :size="iconSize"></dt-icon-arrow-up>
+        </template>
+      </dt-badge>
     </dt-stack>
     <dt-stack direction="row" gap="400">
-      <span class="d-badge d-badge--count d-badge--critical">
-        <span class="d-badge__icon-left">
-          <dt-icon name="arrow-down" size="200" />
-        </span>
-        <span class="d-badge__label">-12%</span>
-      </span>
+      <dt-badge kind="count" type="critical" text="-12%">
+        <template #leftIcon="{ iconSize }">
+          <dt-icon-arrow-down :size="iconSize"></dt-icon-arrow-down>
+        </template>
+      </dt-badge>
     </dt-stack>
     <dt-stack direction="row" gap="400">
-      <span class="d-badge d-badge--count d-badge--bulletin"><span class="d-badge__label">1</span></span>
-      <span class="d-badge d-badge--count d-badge--bulletin"><span class="d-badge__label">18</span></span>
-      <span class="d-badge d-badge--count d-badge--bulletin"><span class="d-badge__label">99+</span></span>
+      <dt-badge kind="count" type="bulletin" text="1"></dt-badge>
+      <dt-badge kind="count" type="bulletin" text="18"></dt-badge>
+      <dt-badge kind="count" type="bulletin" text="99+"></dt-badge>
     </dt-stack>
   </dt-stack>
 </code-well-header>
 
 ## Vue API
 
-<component-vue-api component-name="badge" />
+<component-vue-api component-name="badge"></component-vue-api>
 
 ## Classes
 
 <component-class-table component-name="badge"></component-class-table>
 
 <script setup>
-  import { classes } from '@data/badge.json';
+  import {
+    DtIconLightningBolt,
+    DtIconLock,
+    DtIconMessage,
+    DtIconRecordFilled,
+    DtIconArrowUp,
+    DtIconArrowDown,
+  } from '@dialpad/dialtone-icons/vue3';
 </script>
