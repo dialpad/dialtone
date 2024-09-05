@@ -66,10 +66,7 @@ function boxShadows (shadowDeclarations, Declaration) {
         .fill(undefined)
         .map((val, i) => {
           let shadowNumber = `-${i + 1}`;
-          // tokens no longer get numbered if there is only a single one, so if this is the case, do not number it.
-          if (times === 1) {
-            shadowNumber = '';
-          }
+          if (isInset) shadowNumber = '';
           return `var(${shadowVar}${shadowNumber}-offset-x) var(${shadowVar}${shadowNumber}-offset-y) var(${shadowVar}${shadowNumber}-blur) var(${shadowVar}${shadowNumber}-spread) var(${shadowVar}${shadowNumber}-color)${isInset ? ' inset' : ''}`;
         }).join(', ');
 
