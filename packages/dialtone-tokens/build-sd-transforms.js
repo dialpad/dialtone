@@ -81,7 +81,13 @@ export async function run () {
           buildPath: 'dist/css/',
           theme: themeName,
           options: {
-            outputReferences: true,
+            outputReferences: (token) => {
+              // Don't output references for tokens that have been modified via studio tokens extension
+              if (token.$extensions?.['studio.tokens']?.modify) {
+                return false;
+              }
+              return true;
+            },
           },
           files: [
             {
