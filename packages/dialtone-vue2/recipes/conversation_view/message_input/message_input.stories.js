@@ -1,10 +1,12 @@
 import { action } from '@storybook/addon-actions';
-import { createRenderConfig } from '@/common/storybook_utils';
+import { createRenderConfig, getIconNames } from '@/common/storybook_utils';
 import DtRecipeMessageInput from './message_input.vue';
 import DtRecipeMessageInputDefaultTemplate from './message_input_default.story.vue';
 import mentionSuggestion from '@/components/rich_text_editor/mention_suggestion';
 import channelSuggestion from '@/components/rich_text_editor/channel_suggestion';
 import slashCommandSuggestion from '@/components/rich_text_editor/slash_command_suggestion';
+
+const iconsList = getIconNames();
 
 /*
   Controls
@@ -38,6 +40,18 @@ export const argTypesData = {
     },
     control: {
       type: 'text',
+    },
+  },
+  sendIcon: {
+    table: {
+      type: { summary: 'VNode' },
+    },
+    options: iconsList,
+    control: {
+      type: 'select',
+      labels: {
+        undefined: '(empty)',
+      },
     },
   },
   top: {
@@ -174,13 +188,13 @@ export const argsData = {
     ],
     skinTone: 'Default',
   },
+  sendIcon: 'send',
   showCharacterLimit: {
     count: 1000,
     warning: 500,
     message: 'You have exceeded the character limit',
   },
   showSend: {
-    icon: 'send',
     ariaLabel: 'send',
     tooltipLabel: 'Send',
   },
