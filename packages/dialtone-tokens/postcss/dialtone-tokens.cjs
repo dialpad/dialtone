@@ -76,6 +76,16 @@ function boxShadows (shadowDeclarations, Declaration) {
 }
 
 /**
+ * Wrap the value in a calc function if it is not already wrapped.
+ * @param { Declaration } declaration
+ */
+function wrapInCalc (declaration) {
+  if (declaration.value.includes(' * ') && !declaration.value.startsWith('calc')) {
+    declaration.value = `calc(${declaration.value})`;
+  }
+}
+
+/**
  * Generate HSL CSS Variables.
  * @param { Declaration } declaration
  */
@@ -203,6 +213,15 @@ module.exports = (opts = {}) => {
 
     Declaration (declaration) {
       generateColorHsla(declaration);
+
+      // A little hacky, but doesn't seem like there's a better way to do this currently.
+      // wraps calculated values in calc() for css if it contains a multiplication operator.
+      // This could cause issues if a value ever contains a * character that isn't for multiplication.
+      // There are many disucssions on this issue and it is yet unresolved:
+      // https://github.com/amzn/style-dictionary/issues/820
+      // https://github.com/tokens-studio/sd-transforms/issues/13
+      // https://github.com/amzn/style-dictionary/issues/1055
+      wrapInCalc(declaration);
     },
   };
 };
