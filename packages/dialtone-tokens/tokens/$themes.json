@@ -3793,7 +3793,7 @@
       "shadow.focus-inset": "S:29366c536f593d4cb9a786bd443db72cde44cc73,"
     },
     "selectedTokenSets": {
-      "root": "source",
+      "root": "enabled",
       "base/default": "enabled"
     },
     "group": "base"
@@ -3863,7 +3863,7 @@
       "shadow.focus-inset": "S:523c44305d23cf69c7273669569fd7f982366f0c,"
     },
     "selectedTokenSets": {
-      "root": "source",
+      "root": "enabled",
       "base/default": "enabled",
       "base/dark": "enabled"
     },
