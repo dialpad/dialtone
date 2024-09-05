@@ -18,9 +18,9 @@
           @click.capture.stop="selectTabset(tab.id)"
           @keydown="handleKeyDown($event, tab.id)"
         >
-          <dt-icon
+          <component
+            :is="tab.icon"
             size="400"
-            :name="tab.icon"
           />
         </dt-tab>
       </template>
@@ -31,8 +31,18 @@
 <script setup>
 import { computed, ref, toRefs, watch } from 'vue';
 import { DtTab, DtTabGroup } from '@/components/tabs';
-import { DtIcon } from '@/components/icon';
 import { EMOJI_PICKER_CATEGORIES } from '@/components/emoji_picker';
+import {
+  DtIconClock,
+  DtIconSatisfied,
+  DtIconLivingThing,
+  DtIconFood,
+  DtIconObject,
+  DtIconTransportation,
+  DtIconLightbulb,
+  DtIconHeart,
+  DtIconFlag,
+} from '@dialpad/dialtone-icons/vue3';
 
 const props = defineProps({
   /**
@@ -84,15 +94,15 @@ const emits = defineEmits([
 ]);
 
 const TABS_DATA = [
-  { label: EMOJI_PICKER_CATEGORIES.MOST_RECENTLY_USED, icon: 'clock' },
-  { label: EMOJI_PICKER_CATEGORIES.SMILEYS_AND_PEOPLE, icon: 'satisfied' },
-  { label: EMOJI_PICKER_CATEGORIES.NATURE, icon: 'living-thing' },
-  { label: EMOJI_PICKER_CATEGORIES.FOOD, icon: 'food' },
-  { label: EMOJI_PICKER_CATEGORIES.ACTIVITY, icon: 'object' },
-  { label: EMOJI_PICKER_CATEGORIES.TRAVEL, icon: 'transportation' },
-  { label: EMOJI_PICKER_CATEGORIES.OBJECTS, icon: 'lightbulb' },
-  { label: EMOJI_PICKER_CATEGORIES.SYMBOLS, icon: 'heart' },
-  { label: EMOJI_PICKER_CATEGORIES.FLAGS, icon: 'flag' },
+  { label: EMOJI_PICKER_CATEGORIES.MOST_RECENTLY_USED, icon: DtIconClock },
+  { label: EMOJI_PICKER_CATEGORIES.SMILEYS_AND_PEOPLE, icon: DtIconSatisfied },
+  { label: EMOJI_PICKER_CATEGORIES.NATURE, icon: DtIconLivingThing },
+  { label: EMOJI_PICKER_CATEGORIES.FOOD, icon: DtIconFood },
+  { label: EMOJI_PICKER_CATEGORIES.ACTIVITY, icon: DtIconObject },
+  { label: EMOJI_PICKER_CATEGORIES.TRAVEL, icon: DtIconTransportation },
+  { label: EMOJI_PICKER_CATEGORIES.OBJECTS, icon: DtIconLightbulb },
+  { label: EMOJI_PICKER_CATEGORIES.SYMBOLS, icon: DtIconHeart },
+  { label: EMOJI_PICKER_CATEGORIES.FLAGS, icon: DtIconFlag },
 ];
 
 const tabs = computed(() => {

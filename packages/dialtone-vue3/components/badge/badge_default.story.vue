@@ -4,24 +4,41 @@
     :type="$attrs.type"
     :kind="$attrs.kind"
     :decoration="$attrs.decoration"
-    :icon-left="$attrs.iconLeft"
-    :icon-right="$attrs.iconRight"
     :label-class="$attrs.labelClass"
     :subtle="$attrs.subtle"
     :outlined="$attrs.outlined"
   >
+    <template
+      #leftIcon="{ iconSize }"
+    >
+      <dt-icon
+        v-if="$attrs.leftIcon"
+        :name="$attrs.leftIcon"
+        :size="iconSize"
+      />
+    </template>
     <template v-if="defaultSlot">
       {{ defaultSlot }}
+    </template>
+    <template
+      #rightIcon="{ iconSize }"
+    >
+      <dt-icon
+        v-if="$attrs.rightIcon"
+        :name="$attrs.rightIcon"
+        :size="iconSize"
+      />
     </template>
   </dt-badge>
 </template>
 
 <script>
-import DtBadge from './badge.vue';
+import { DtBadge } from './';
+import { DtIcon } from '@/components/icon';
 
 export default {
   name: 'DtBadgeDefault',
 
-  components: { DtBadge },
+  components: { DtBadge, DtIcon },
 };
 </script>
