@@ -30,11 +30,14 @@
             :avatar-class="[{ 'd-mln24': index > 0, 'd-bc-brand': !!avatar.halo }]"
           >
             <template
-              v-if="hasAvatarIcon"
               #icon="{ iconSize }"
             >
               <!-- @slot Slot for avatar icon in a list -->
-              <slot name="avatarIcon" :icon-size="iconSize" />
+              <slot
+                v-if="hasAvatarIcon"
+                name="avatarIcon"
+                :icon-size="iconSize"
+              />
             </template>
             <template
               v-if="avatar.icon"
@@ -55,11 +58,15 @@
           :presence="presence"
         >
           <template
-            v-if="hasAvatarIcon"
             #icon="{ iconSize }"
           >
             <!-- @slot Slot for avatar icon in a list -->
-            <slot name="avatarIcon" :icon-size="iconSize" />
+            <slot
+
+              v-if="hasAvatarIcon"
+              name="avatarIcon"
+              :icon-size="iconSize"
+            />
           </template>
         </dt-avatar>
       </button>
