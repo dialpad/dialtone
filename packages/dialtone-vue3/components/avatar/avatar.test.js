@@ -37,7 +37,7 @@ describe('DtAvatar Tests', () => {
       slots: { ...mockSlots },
       global: {
         components: {
-          'dt-icon-user': DtIconUser,
+          DtIconUser,
         },
       },
     });
