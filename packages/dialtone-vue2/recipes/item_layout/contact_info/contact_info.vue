@@ -62,7 +62,6 @@
           >
             <!-- @slot Slot for avatar icon in a list -->
             <slot
-
               v-if="hasAvatarIcon"
               name="avatarIcon"
               :icon-size="iconSize"
