@@ -1,3 +1,22 @@
+# [3.152.0-beta.1](https://github.com/dialpad/dialtone/compare/dialtone-vue3/v3.151.0...dialtone-vue3/v3.152.0-beta.1) (2024-09-05)
+
+
+### Bug Fixes
+
+* NO-JIRA merge staging into beta ([#478](https://github.com/dialpad/dialtone/issues/478)) ([09f1165](https://github.com/dialpad/dialtone/commit/09f1165f4d4cffc00708aa18cd1067d8b84810aa))
+* **Rich Text Editor:** DLT-2017 emojis positioning ([#486](https://github.com/dialpad/dialtone/issues/486)) ([b857386](https://github.com/dialpad/dialtone/commit/b857386ab32425a1ee3ec58287265bc3c511b39f))
+
+
+### Code Refactoring
+
+* **Badge, Emoji Tabset, Empty State:** remove DtIcon ([#481](https://github.com/dialpad/dialtone/issues/481)) ([0fa1280](https://github.com/dialpad/dialtone/commit/0fa12804511cf588245a2ad59b3c5d01f4eccc84))
+
+
+### Features
+
+* **Avatar:** DLT-1916 remove dt-icon ([#466](https://github.com/dialpad/dialtone/issues/466)) ([6ef90db](https://github.com/dialpad/dialtone/commit/6ef90db28f3c5164c4c9c9657b039a74a9b6daf5))
+* **Keyboard Shortcut To Unread Pill:** DLT-1916 remove dt-icon ([#482](https://github.com/dialpad/dialtone/issues/482)) ([277ae13](https://github.com/dialpad/dialtone/commit/277ae138fbc2ed7aad0c5428ce3b8f3ba3de667a))
+
 # [3.151.0-beta.1](https://github.com/dialpad/dialtone/compare/dialtone-vue3/v3.150.0...dialtone-vue3/v3.151.0-beta.1) (2024-08-28)
 
 
