@@ -1,11 +1,12 @@
 import { mount } from '@vue/test-utils';
 import DtRecipeFeedItemPill from './feed_item_pill.vue';
+import { DtIconVideo } from '@dialpad/dialtone-icons/vue3';
 
 describe('DtRecipeFeedItemPill Tests', function () {
   let wrapper, feedItemPill, icon;
 
   const MOCK_ARIA_LABEL = 'Click to expand';
-  const MOCK_ICON_NAME = 'video';
+  const MOCK_ICON_SLOT = '<dt-icon-video />';
   const DATA_QA = {
     PILL: 'dt-recipe-feed-item-pill',
     PILL_ICON: 'dt-recipe-feed-item-pill__icon',
@@ -13,7 +14,6 @@ describe('DtRecipeFeedItemPill Tests', function () {
   };
 
   const baseProps = {
-    iconName: MOCK_ICON_NAME,
     title: 'This meeting has ended',
     ariaLabel: MOCK_ARIA_LABEL,
   };
@@ -35,6 +35,9 @@ describe('DtRecipeFeedItemPill Tests', function () {
       slots: { ...baseSlots, ...mockSlots },
       global: {
         provide: { ...baseProvide, ...mockProvide },
+        components: {
+          'dt-icon-video': DtIconVideo,
+        },
       },
     });
 
@@ -66,6 +69,18 @@ describe('DtRecipeFeedItemPill Tests', function () {
         expect(icon.exists()).toBe(true);
         // expect(icon.attributes('data-name')).toBe(MOCK_ICON_NAME);
         // expect(wrapper.find(`[data-qa="${DATA_QA.CONTENT_ELEMENT}"]`).exists()).toBe(false);
+      });
+    });
+
+    describe('When the icon slot is provided', () => {
+      beforeEach(async () => {
+        mockSlots = { leftIcon: MOCK_ICON_SLOT };
+
+        await updateWrapper();
+      });
+
+      it('should render the icon', () => {
+        expect(icon.findComponent(DtIconVideo).exists()).toBe(true);
       });
     });
   });
@@ -114,7 +129,7 @@ describe('DtRecipeFeedItemPill Tests', function () {
 
       it('should show a different icon', () => {
         expect(icon.exists()).toBe(true);
-        expect(icon.attributes('data-name')).toBe('Chevron Right');
+        expect(icon.find('[data-qa="dt-icon"]').attributes('data-name')).toBe('Chevron Right');
       });
     });
 

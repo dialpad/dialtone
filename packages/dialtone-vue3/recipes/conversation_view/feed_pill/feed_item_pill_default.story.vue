@@ -1,6 +1,5 @@
 <template>
   <dt-recipe-feed-item-pill
-    :icon-name="$attrs.iconName"
     :title="$attrs.title"
     :wrapper-class="$attrs.wrapperClass"
     :button-class="$attrs.buttonClass"
@@ -9,6 +8,14 @@
     :toggleable="$attrs.toggleable"
     :default-toggled="$attrs.defaultToggled"
   >
+    <template
+      #leftIcon="{ iconSize }"
+    >
+      <dt-icon
+        :name="$attrs.leftIcon"
+        :size="iconSize"
+      />
+    </template>
     <template #subtitle>
       Last 43 minutes - Ended at 5:04pm
     </template>
