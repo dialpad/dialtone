@@ -35,8 +35,8 @@
               @click="button.onClick()"
             >
               <template #icon>
-                <dt-icon
-                  :name="button.iconName"
+                <component
+                  :is="button.icon"
                   size="200"
                 />
               </template>
@@ -80,8 +80,8 @@
                   @click="linkButton.onClick()"
                 >
                   <template #icon>
-                    <dt-icon
-                      :name="linkButton.iconName"
+                    <component
+                      :is="linkButton.icon"
                       size="200"
                       class="d-fw-bold"
                     />
@@ -185,12 +185,27 @@ import {
   EDITOR_SUPPORTED_LINK_PROTOCOLS,
   EDITOR_DEFAULT_LINK_PREFIX,
 } from './editor_constants.js';
-import { DtIcon } from '@/components/icon';
 import { DtButton } from '@/components/button';
 import { DtPopover } from '@/components/popover';
 import { DtStack } from '@/components/stack';
 import { DtInput } from '@/components/input';
 import { DtTooltip } from '@/components/tooltip';
+import {
+  DtIconAlignCenter,
+  DtIconAlignJustify,
+  DtIconAlignLeft,
+  DtIconAlignRight,
+  DtIconBold,
+  DtIconCodeBlock,
+  DtIconItalic,
+  DtIconLightningBolt,
+  DtIconLink2,
+  DtIconListBullet,
+  DtIconListOrdered,
+  DtIconQuote,
+  DtIconStrikethrough,
+  DtIconUnderline,
+} from '@dialpad/dialtone-icons/vue2';
 
 export default {
   name: 'DtRecipeEditor',
@@ -198,11 +213,24 @@ export default {
   components: {
     DtRichTextEditor,
     DtButton,
-    DtIcon,
     DtPopover,
     DtStack,
     DtInput,
     DtTooltip,
+    DtIconLightningBolt,
+    DtIconBold,
+    DtIconItalic,
+    DtIconUnderline,
+    DtIconStrikethrough,
+    DtIconListBullet,
+    DtIconListOrdered,
+    DtIconAlignLeft,
+    DtIconAlignCenter,
+    DtIconAlignRight,
+    DtIconAlignJustify,
+    DtIconQuote,
+    DtIconCodeBlock,
+    DtIconLink2,
   },
 
   inheritAttrs: false,
@@ -514,44 +542,44 @@ export default {
 
     newButtons () {
       return [
-        { showBtn: this.showQuickRepliesButton, label: 'Quick reply', selector: 'quickReplies', iconName: 'lightning-bolt', dataQA: 'dt-editor-quick-replies-btn', tooltipMessage: 'Quick Reply', onClick: this.onQuickRepliesClick },
+        { showBtn: this.showQuickRepliesButton, label: 'Quick reply', selector: 'quickReplies', icon: DtIconLightningBolt, dataQA: 'dt-editor-quick-replies-btn', tooltipMessage: 'Quick Reply', onClick: this.onQuickRepliesClick },
       ].filter(button => button.showBtn);
     },
 
     textFormatButtons () {
       return [
-        { showBtn: this.showBoldButton, selector: 'bold', iconName: 'bold', dataQA: 'dt-editor-bold-btn', tooltipMessage: 'Bold', onClick: this.onBoldTextToggle },
-        { showBtn: this.showItalicsButton, selector: 'italic', iconName: 'italic', dataQA: 'dt-editor-italics-btn', tooltipMessage: 'Italics', onClick: this.onItalicTextToggle },
-        { showBtn: this.showUnderlineButton, selector: 'underline', iconName: 'underline', dataQA: 'dt-editor-underline-btn', tooltipMessage: 'Underline', onClick: this.onUnderlineTextToggle },
-        { showBtn: this.showStrikeButton, selector: 'strike', iconName: 'strikethrough', dataQA: 'dt-editor-strike-btn', tooltipMessage: 'Strike', onClick: this.onStrikethroughTextToggle },
+        { showBtn: this.showBoldButton, selector: 'bold', icon: DtIconBold, dataQA: 'dt-editor-bold-btn', tooltipMessage: 'Bold', onClick: this.onBoldTextToggle },
+        { showBtn: this.showItalicsButton, selector: 'italic', icon: DtIconItalic, dataQA: 'dt-editor-italics-btn', tooltipMessage: 'Italics', onClick: this.onItalicTextToggle },
+        { showBtn: this.showUnderlineButton, selector: 'underline', icon: DtIconUnderline, dataQA: 'dt-editor-underline-btn', tooltipMessage: 'Underline', onClick: this.onUnderlineTextToggle },
+        { showBtn: this.showStrikeButton, selector: 'strike', icon: DtIconStrikethrough, dataQA: 'dt-editor-strike-btn', tooltipMessage: 'Strike', onClick: this.onStrikethroughTextToggle },
       ].filter(button => button.showBtn);
     },
 
     alignmentButtons () {
       return [
-        { showBtn: this.showAlignLeftButton, selector: { textAlign: 'left' }, iconName: 'align-left', dataQA: 'dt-editor-align-left-btn', tooltipMessage: 'Align Left', onClick: () => this.onTextAlign('left') },
-        { showBtn: this.showAlignCenterButton, selector: { textAlign: 'center' }, iconName: 'align-center', dataQA: 'dt-editor-align-center-btn', tooltipMessage: 'Align Center', onClick: () => this.onTextAlign('center') },
-        { showBtn: this.showAlignRightButton, selector: { textAlign: 'right' }, iconName: 'align-right', dataQA: 'dt-editor-align-right-btn', tooltipMessage: 'Align Right', onClick: () => this.onTextAlign('right') },
-        { showBtn: this.showAlignJustifyButton, selector: { textAlign: 'justify' }, iconName: 'align-justify', dataQA: 'dt-editor-align-justify-btn', tooltipMessage: 'Align Justify', onClick: () => this.onTextAlign('justify') },
+        { showBtn: this.showAlignLeftButton, selector: { textAlign: 'left' }, icon: DtIconAlignLeft, dataQA: 'dt-editor-align-left-btn', tooltipMessage: 'Align Left', onClick: () => this.onTextAlign('left') },
+        { showBtn: this.showAlignCenterButton, selector: { textAlign: 'center' }, icon: DtIconAlignCenter, dataQA: 'dt-editor-align-center-btn', tooltipMessage: 'Align Center', onClick: () => this.onTextAlign('center') },
+        { showBtn: this.showAlignRightButton, selector: { textAlign: 'right' }, icon: DtIconAlignRight, dataQA: 'dt-editor-align-right-btn', tooltipMessage: 'Align Right', onClick: () => this.onTextAlign('right') },
+        { showBtn: this.showAlignJustifyButton, selector: { textAlign: 'justify' }, icon: DtIconAlignJustify, dataQA: 'dt-editor-align-justify-btn', tooltipMessage: 'Align Justify', onClick: () => this.onTextAlign('justify') },
       ].filter(button => button.showBtn);
     },
 
     listButtons () {
       return [
-        { showBtn: this.showListItemsButton, selector: 'bulletList', iconName: 'list-bullet', dataQA: 'dt-editor-list-items-btn', tooltipMessage: 'Bullet List', onClick: this.onBulletListToggle },
-        { showBtn: this.showOrderedListButton, selector: 'orderedList', iconName: 'list-ordered', dataQA: 'dt-editor-ordered-list-items-btn', tooltipMessage: 'Ordered List', onClick: this.onOrderedListToggle },
+        { showBtn: this.showListItemsButton, selector: 'bulletList', icon: DtIconListBullet, dataQA: 'dt-editor-list-items-btn', tooltipMessage: 'Bullet List', onClick: this.onBulletListToggle },
+        { showBtn: this.showOrderedListButton, selector: 'orderedList', icon: DtIconListOrdered, dataQA: 'dt-editor-ordered-list-items-btn', tooltipMessage: 'Ordered List', onClick: this.onOrderedListToggle },
       ].filter(button => button.showBtn);
     },
 
     individualButtons () {
       return [
-        { showBtn: this.showQuoteButton, selector: 'blockquote', iconName: 'quote', dataQA: 'dt-editor-blockquote-btn', tooltipMessage: 'Quote', onClick: this.onBlockquoteToggle },
-        { showBtn: this.showCodeBlockButton, selector: 'codeBlock', iconName: 'code-block', dataQA: 'dt-editor-code-block-btn', tooltipMessage: 'Code', onClick: this.onCodeBlockToggle },
+        { showBtn: this.showQuoteButton, selector: 'blockquote', icon: DtIconQuote, dataQA: 'dt-editor-blockquote-btn', tooltipMessage: 'Quote', onClick: this.onBlockquoteToggle },
+        { showBtn: this.showCodeBlockButton, selector: 'codeBlock', icon: DtIconCodeBlock, dataQA: 'dt-editor-code-block-btn', tooltipMessage: 'Code', onClick: this.onCodeBlockToggle },
       ].filter(button => button.showBtn);
     },
 
     linkButton () {
-      return { showBtn: this.showAddLink.showAddLinkButton, selector: 'link', iconName: 'link-2', dataQA: 'dt-editor-add-link-btn', tooltipMessage: 'Link', onClick: this.openLinkInput };
+      return { showBtn: this.showAddLink.showAddLinkButton, selector: 'link', icon: DtIconLink2, dataQA: 'dt-editor-add-link-btn', tooltipMessage: 'Link', onClick: this.openLinkInput };
     },
   },
 

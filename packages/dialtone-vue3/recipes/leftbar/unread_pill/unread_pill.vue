@@ -5,8 +5,12 @@
     data-qa="dt-leftbar-unread-pill"
     v-on="unreadChipListeners"
   >
-    <dt-icon
-      :name="`arrow-${direction}`"
+    <dt-icon-arrow-up
+      v-if="direction === 'up'"
+      size="300"
+    />
+    <dt-icon-arrow-down
+      v-else
       size="300"
     />
     <span data-qa="dt-leftbar-unread-pill__label">
@@ -16,13 +20,14 @@
 </template>
 
 <script>
-import { DtIcon } from '@/components/icon';
+import { DtIconArrowUp, DtIconArrowDown } from '@dialpad/dialtone-icons/vue3';
 import { UNREAD_PILL_DIRECTIONS, UNREAD_PILL_KINDS } from './unread_pill_constants';
 export default {
   name: 'DtRecipeUnreadPill',
 
   components: {
-    DtIcon,
+    DtIconArrowUp,
+    DtIconArrowDown,
   },
 
   props: {
