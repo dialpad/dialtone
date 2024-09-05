@@ -12,7 +12,7 @@
     :aria-label="loading ? 'loading' : $attrs['aria-label']"
     v-on="buttonListeners"
   >
-    <!-- NOTE(cormac): This span is needed since we can't apply styles to slots. -->
+    <!-- NOTE(cormac): This span is needed since we can't apply styles to slots. asdfsadfasdf -->
     <span
       v-if="shouldRenderIcon()"
       data-qa="dt-button-icon"
