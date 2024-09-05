@@ -10,7 +10,7 @@ const MOCK_INITIALS = 'JN';
 const MOCK_SIZE = 'lg';
 const MOCK_GROUP = 25;
 const MOCK_CUSTOM_CLASS = 'my-custom-class';
-const MOCK_ICON_SLOT = '<template #icon><dt-icon-user /></template>';
+const MOCK_ICON_SLOT = '<dt-icon-user />';
 let MOCK_ELEMENT = null;
 
 const baseProps = {
