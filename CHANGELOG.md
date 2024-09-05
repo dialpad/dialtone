@@ -1,3 +1,11 @@
+## [9.72.1](https://github.com/dialpad/dialtone/compare/dialtone/v9.72.0...dialtone/v9.72.1) (2024-09-04)
+
+
+### Bug Fixes
+
+* **Dialtone Icons:** NO-JIRA add data-qa to individual icon and illustration ([#483](https://github.com/dialpad/dialtone/issues/483)) ([28521d0](https://github.com/dialpad/dialtone/commit/28521d0fa2a420ee4239ac8bf862cc343239b92f))
+* **Docs:** NO-JIRA broken links in new content guidelines ([#485](https://github.com/dialpad/dialtone/issues/485)) ([c65e878](https://github.com/dialpad/dialtone/commit/c65e8782617d5965cbdd9596ba74c6bcdbb8d2e2))
+
 # [9.72.0](https://github.com/dialpad/dialtone/compare/dialtone/v9.71.0...dialtone/v9.72.0) (2024-09-03)
 
 
