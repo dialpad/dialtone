@@ -41,10 +41,6 @@ export default {
           type: 'emoji',
           attrs: props,
         },
-        {
-          type: 'text',
-          text: ' ',
-        },
       ])
       .run();
 
