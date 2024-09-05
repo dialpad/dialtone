@@ -1,7 +1,7 @@
 ---
 title: Inclusive language
 prev: { link: "/guides/content/help-content/", text: "Help content" }
-next: { link: "/guides/content/voice-tone/", text: "Voice and tone" }
+next: { link: "/guides/content/voice-and-tone/", text: "Voice and tone" }
 description: We aim to create the best experience for all our customers—and their customers. To do so, we need to be clear and concise in our language as well as welcomed and included.
 ---
 
