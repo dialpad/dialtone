@@ -9,18 +9,22 @@ figma_url: https://www.figma.com/file/2adf7JhZOncRyjYiy2joil/DT-Core%3A-Componen
 ---
 
 <code-well-header>
-    <div class="d-d-flex d-ai-center d-flow16">
-        <dt-avatar size="lg" icon-name="user" icon-size="500" />
-        <dt-avatar size="lg" full-name="dp" color="1000" presence="busy" />
-        <dt-avatar size="lg" image-src="/assets/images/person.png" image-alt="avatar user" presence="active" />
-    </div>
+  <div class="d-d-flex d-ai-center d-flow16">
+    <dt-avatar size="lg">
+      <template #icon="{ iconSize }">
+        <dt-icon-user :size="iconSize" />
+      </template>
+    </dt-avatar>
+    <dt-avatar size="lg" full-name="dp" color="1000" presence="busy" />
+    <dt-avatar size="lg" image-src="/assets/images/person.png" image-alt="avatar user" presence="active" />
+  </div>
 </code-well-header>
 
 <!-- <component-combinator component-name="DtAvatar" /> -->
 
 ## Usage
 
-The Avatar component is designed to prioritize different sources for content display. It will sequentially check for the availability of an image source (`image-src`) or an icon name (`icon-name`). If both properties are not provided, the avatar will extract and display initials from the full name (`full-name`). The resulting initials are extracted using the following logic:
+The Avatar component is designed to prioritize different sources for content display. It will sequentially check for the availability of an image source (`image-src`) or content through the icon slot. If both are not provided, the avatar will extract and display initials from the full name (`full-name`). The resulting initials are extracted using the following logic:
 
 * If the string contains two or more words, the result will be the first character of the first and last word capitalized. E.g.:
 `full-name: "Jaqueline Nackos"` will result in: `JN`.
@@ -45,7 +49,11 @@ The Avatar component is designed to prioritize different sources for content dis
     <tbody>
         <tr>
             <td>
-                <dt-avatar icon-name="user" icon-size="400" />
+                <dt-avatar>
+                  <template #icon="{ iconSize }">
+                    <dt-icon-user :size="iconSize" />
+                  </template>
+                </dt-avatar>
             </td>
             <th class="d-ta-left"><a class="d-link" href="#icon">Icon</a></th>
             <td>When no username can be associated with the Avatar.</td>
@@ -79,7 +87,11 @@ The Avatar component is designed to prioritize different sources for content dis
 ### Icon
 
 <code-well-header>
-    <dt-avatar icon-name="user" icon-size="300" />
+  <dt-avatar>
+    <template #icon="{ iconSize }">
+      <dt-icon-user :size="iconSize" />
+    </template>
+  </dt-avatar>
 </code-well-header>
 
 <code-example-tabs
@@ -92,9 +104,11 @@ htmlCode='
   </div>
 </div>'
 vueCode='
-<dt-avatar
-  icon-name="person"
-/>
+<dt-avatar>
+  <template #icon="{ iconSize }">
+    <dt-icon-user :size="iconSize" />
+  </template>
+</dt-avatar>
 '
 />
 
@@ -150,7 +164,11 @@ vueCode='
 
 <code-well-header>
     <div class="d-d-inline-flex d-ai-center d-flow8">
-        <dt-avatar v-for="size in sizes" :size="size" icon-name="user" />
+        <dt-avatar v-for="size in sizes" :size="size">
+          <template #icon="{ iconSize }">
+            <dt-icon-user :size="iconSize" />
+          </template>
+        </dt-avatar>
     </div>
 </code-well-header>
 
@@ -183,11 +201,31 @@ htmlCode='
 </div>
 '
 vueCode='
-<dt-avatar size="xs" icon-name="user" />
-<dt-avatar size="sm" icon-name="user" />
-<dt-avatar size="md" icon-name="user" />
-<dt-avatar size="lg" icon-name="user" />
-<dt-avatar size="xl" icon-name="user" />
+<dt-avatar size="xs">
+  <template #icon="{ iconSize }">
+    <dt-icon-user :size="iconSize" />
+  </template>
+</dt-avatar>
+<dt-avatar size="sm" icon-name="user">
+  <template #icon="{ iconSize }">
+    <dt-icon-user :size="iconSize" />
+  </template>
+</dt-avatar>
+<dt-avatar size="md" icon-name="user">
+  <template #icon="{ iconSize }">
+    <dt-icon-user :size="iconSize" />
+  </template>
+</dt-avatar>
+<dt-avatar size="lg" icon-name="user">
+  <template #icon="{ iconSize }">
+    <dt-icon-user :size="iconSize" />
+  </template>
+</dt-avatar>
+<dt-avatar size="xl" icon-name="user">
+  <template #icon="{ iconSize }">
+    <dt-icon-user :size="iconSize" />
+  </template>
+</dt-avatar>
 '
 />
 
@@ -273,7 +311,11 @@ vueCode='
 
 <code-well-header>
   <div class="d-d-flex d-ai-center d-flow16">
-    <dt-avatar size="lg" image-src="/assets/images/person.png" image-alt="avatar user" overlay-icon="hear" />
+    <dt-avatar size="lg" image-src="/assets/images/person.png" image-alt="avatar user">
+      <template #overlayIcon>
+        <dt-icon-hear />
+      </template>
+    </dt-avatar>
     <dt-avatar size="lg" image-src="/assets/images/person.png" image-alt="avatar user" overlay-text="+3" />
   </div>
 </code-well-header>
@@ -295,7 +337,11 @@ htmlCode='
   </div>
 </div>'
 vueCode='
-<dt-avatar size="lg" image-src="/assets/images/person.png" image-alt="avatar user" overlay-icon="hear" />
+<dt-avatar size="lg" image-src="/assets/images/person.png" image-alt="avatar user">
+  <template #overlayIcon>
+    <dt-icon-hear />
+  </template>
+</dt-avatar>
 <dt-avatar size="lg" image-src="/assets/images/person.png" image-alt="avatar user" overlay-text="+3" />
 '
 />
@@ -306,14 +352,22 @@ If you need to create a clickable avatar you can set the clickable prop. This wi
 
 <code-well-header>
   <div class="d-d-flex d-ai-center d-flow16">
-    <dt-avatar icon-name="user" clickable icon-aria-label="user" ref="example-clickable" />
+    <dt-avatar clickable icon-aria-label="user" ref="example-clickable">
+      <template #icon="{ iconSize }">
+        <dt-icon-user :size="iconSize" />
+      </template>
+    </dt-avatar>
   </div>
 </code-well-header>
 
 <code-example-tabs
 :htmlCode="() => $refs['example-clickable']"
 vueCode='
-<dt-avatar icon-name="user" clickable icon-aria-label="user" />
+<dt-avatar clickable icon-aria-label="user">
+  <template #icon="{ iconSize }">
+    <dt-icon-user :size="iconSize" />
+  </template>
+</dt-avatar>
 '
 />
 
@@ -355,6 +409,8 @@ to [WCAG](https://www.w3.org/WAI/tutorials/images/decorative) references for
 your specific usage.
 
 <script setup>
+import { DtIconUser, DtIconHear } from '@dialpad/dialtone-icons/vue3';
+
 const colors = ['100', '200', '300', '400', '500', '600', '700', '800', '900', '1000', '1100', '1200', '1300', '1400', '1500', '1600', '1700', '1800'];
 const sizes = ['xs', 'sm', 'md', 'lg', 'xl'];
 </script>

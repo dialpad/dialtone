@@ -21,9 +21,17 @@
             :full-name="displayName"
             :image-src="avatarImageUrl"
             image-alt=""
-            :icon-name="iconName"
             :seed="avatarSeed"
-          />
+          >
+            <template
+              v-if="noInitials"
+              #icon="{ iconSize }"
+            >
+              <dt-icon-user
+                :size="iconSize"
+              />
+            </template>
+          </dt-avatar>
         </slot>
       </div>
       <!-- show time instead of avatar when headers not present -->
@@ -118,6 +126,7 @@ import { DtLazyShow } from '@/components/lazy_show';
 import { DtListItem } from '@/components/list_item';
 import { DtBadge } from '@/components/badge';
 import Modal from '@/common/mixins/modal';
+import { DtIconUser } from '@dialpad/dialtone-icons/vue2';
 
 export default {
   name: 'DtRecipeFeedItemRow',
@@ -127,6 +136,7 @@ export default {
     DtLazyShow,
     DtListItem,
     DtBadge,
+    DtIconUser,
   },
 
   mixins: [Modal],
@@ -269,10 +279,6 @@ export default {
           this.$emit('keydown', event);
         },
       };
-    },
-
-    iconName () {
-      return this.noInitials ? 'user' : null;
     },
 
     listItemClasses () {

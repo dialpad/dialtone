@@ -29,7 +29,7 @@
           #icon
         >
           <dt-icon-user
-            :size="200"
+            size="200"
           />
         </template>
       </dt-avatar>
