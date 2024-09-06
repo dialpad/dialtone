@@ -82,8 +82,9 @@ export async function run () {
           theme: themeName,
           options: {
             outputReferences: (token) => {
-              // Don't output references for tokens that have been modified via studio tokens extension
-              if (token.$extensions?.['studio.tokens']?.modify) {
+              // Don't output references for tokens that have been modified via studio tokens extension, also
+              // for box shadow colors because they use rgb
+              if (token.$extensions?.['studio.tokens']?.modify || (token.$extensions?.['studio.tokens']?.originalType === 'boxShadow' && token.type === 'color')) {
                 return false;
               }
               return true;
