@@ -206,6 +206,9 @@ module.exports = (opts = {}) => {
       layoutVariables(rootSelector, Declaration);
 
       const shadows = rootSelector.nodes.filter(node => node.type === 'decl' && IS_SHADOW_REGEX.test(node.prop));
+      // for some reason when outputReferences is enabled the numbered shadows output in a backwards order. This messes
+      // up our algorithm to count the shadows in boxShadows() so we reverse the array to fix this.
+      shadows.reverse();
       boxShadows(shadows, Declaration);
       const typographies = rootSelector.nodes.filter(node => node.type === 'decl' && IS_TYPOGRAPHY_REGEX.test(node.prop));
       typography(typographies, Declaration);
