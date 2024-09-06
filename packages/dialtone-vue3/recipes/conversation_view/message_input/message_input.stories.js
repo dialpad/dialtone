@@ -188,7 +188,7 @@ export const argsData = {
     ],
     skinTone: 'Default',
   },
-  sendIcon: 'send',
+  sendIcon: undefined,
   showCharacterLimit: {
     count: 1000,
     warning: 500,
@@ -236,6 +236,15 @@ const DefaultTemplate = (args, { argTypes }) => createTemplateFromVueFile(
 export const Default = {
   render: DefaultTemplate,
   args: {},
+};
+
+export const SendButtonWithText = {
+  render: DefaultTemplate,
+  args: {
+    showSend: {
+      text: 'Save',
+    },
+  },
 };
 
 export const InitializeWithLineBreaks = {
