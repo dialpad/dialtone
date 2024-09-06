@@ -36,7 +36,7 @@ describe('DtRecipeFeedItemPill Tests', function () {
       global: {
         provide: { ...baseProvide, ...mockProvide },
         components: {
-          'dt-icon-video': DtIconVideo,
+          DtIconVideo,
         },
       },
     });
