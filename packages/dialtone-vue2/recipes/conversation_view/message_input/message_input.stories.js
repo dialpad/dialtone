@@ -188,7 +188,7 @@ export const argsData = {
     ],
     skinTone: 'Default',
   },
-  sendIcon: 'send',
+  sendIcon: undefined,
   showCharacterLimit: {
     count: 1000,
     warning: 500,
@@ -228,6 +228,16 @@ export default {
 // Stories
 export const Default = {
   render: (argsData) => createRenderConfig(DtRecipeMessageInput, DtRecipeMessageInputDefaultTemplate, argsData),
+};
+
+export const SendButtonWithText = {
+  render: (argsData) => createRenderConfig(DtRecipeMessageInput, DtRecipeMessageInputDefaultTemplate, argsData),
+  args: {
+    ...argsData,
+    showSend: {
+      text: 'Save',
+    },
+  },
 };
 
 export const InitializeWithLineBreaks = {

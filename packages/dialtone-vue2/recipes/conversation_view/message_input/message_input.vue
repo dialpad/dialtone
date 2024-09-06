@@ -185,7 +185,7 @@
             :class="[
               {
                 'dt-message-input__send-button--disabled': isSendDisabled,
-                'd-btn--circle': hasSendIcon,
+                'd-btn--circle': showSendIcon,
               },
             ]"
             :aria-label="showSend.ariaLabel"
@@ -193,14 +193,18 @@
             @click="onSend"
           >
             <template
-              v-if="hasSendIcon"
+              v-if="showSendIcon"
               #icon
             >
               <!-- @slot Slot for send button icon -->
               <slot
                 name="sendIcon"
-                :icon-size="'300'"
-              />
+                :icon-size="sendIconSize"
+              >
+                <dt-icon-send
+                  :size="sendIconSize"
+                />
+              </slot>
             </template>
             <template
               v-if="showSend.text"
@@ -227,7 +231,7 @@ import { DtEmojiPicker } from '@/components/emoji_picker';
 import { DtPopover } from '@/components/popover';
 import { DtInput } from '@/components/input';
 import { DtTooltip } from '@/components/tooltip';
-import { DtIconImage, DtIconVerySatisfied, DtIconSatisfied } from '@dialpad/dialtone-icons/vue2';
+import { DtIconImage, DtIconVerySatisfied, DtIconSatisfied, DtIconSend } from '@dialpad/dialtone-icons/vue2';
 
 export default {
   name: 'DtRecipeMessageInput',
@@ -242,6 +246,7 @@ export default {
     DtIconImage,
     DtIconVerySatisfied,
     DtIconSatisfied,
+    DtIconSend,
   },
 
   mixins: [],
@@ -630,8 +635,8 @@ export default {
   },
 
   computed: {
-    hasSendIcon () {
-      return this.$scopedSlots.sendIcon && this.$scopedSlots.sendIcon();
+    showSendIcon () {
+      return !this.showSend.text;
     },
 
     inputLength () {
@@ -660,6 +665,10 @@ export default {
 
     emojiPickerHovered () {
       return this.emojiPickerFocus || this.emojiPickerOpened;
+    },
+
+    sendIconSize () {
+      return '300';
     },
   },
 

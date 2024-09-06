@@ -65,6 +65,7 @@
           <span v-html="$attrs.top" />
         </template>
         <template
+          v-if="$attrs.sendIcon"
           #sendIcon="{ iconSize }"
         >
           <dt-icon
