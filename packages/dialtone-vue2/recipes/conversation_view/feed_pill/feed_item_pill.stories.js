@@ -1,11 +1,13 @@
-import { createRenderConfig } from '@/common/storybook_utils';
+import { createRenderConfig, getIconNames } from '@/common/storybook_utils';
 import DtRecipeFeedItemPill from './feed_item_pill.vue';
 import DtRecipeFeedItemPillDefaultTemplate from './feed_item_pill_default.story.vue';
 import DtRecipeFeedItemPillVariantsTemplate from './feed_item_pill_variants.story.vue';
 
+const iconsList = getIconNames();
+
 // Default Prop Values
 const args = {
-  iconName: 'video',
+  leftIcon: 'video',
   title: 'This meeting has ended',
   ariaLabel: 'Click to expand',
   wrapperClass: 'd-w628',
@@ -14,6 +16,18 @@ const args = {
 
 const argTypes = {
   // Slots
+  leftIcon: {
+    table: {
+      type: { summary: 'VNode' },
+    },
+    options: iconsList,
+    control: {
+      type: 'select',
+      labels: {
+        undefined: '(empty)',
+      },
+    },
+  },
   subtitle: {
     control: 'text',
     table: {
