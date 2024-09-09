@@ -12,13 +12,13 @@ Check out our complete icon collection in the [icon catalog](/design/icons/#icon
 
 ## Changing icons
 
-<div class="d-d-grid d-gg24 d-g-cols3 md:d-g-cols1">
+<div class="d-d-grid d-g24 d-g-cols3 md:d-g-cols1">
 
 To change an icon, modify the `name` prop to your desired icon. Explore the [icon catalog](/design/icons/) for options.
 
 <div class="d-gc2">
 <code-well-header>
-  <div class="d-d-grid d-gg24 d-g-cols2 md:d-g-cols1 d-w100p">
+  <div class="d-d-grid d-g24 d-g-cols2 md:d-g-cols1 d-w100p">
     <div class="d-fl-center">
       <dt-icon :name="selectedIcon"/>
     </div>
@@ -35,13 +35,13 @@ To change an icon, modify the `name` prop to your desired icon. Explore the [ico
 
 ## Changing Sizes
 
-<div class="d-d-grid d-gg24 d-g-cols3 md:d-g-cols1">
+<div class="d-d-grid d-g24 d-g-cols3 md:d-g-cols1">
 
 Adjust the size using the `size` prop. Note that sizes 600, 700, and 800 are exclusively for devices.
 
 <div class="d-gc2">
 <code-well-header>
-  <div class="d-d-grid d-gg24 d-g-cols2 md:d-g-cols1 d-w100p">
+  <div class="d-d-grid d-g24 d-g-cols2 md:d-g-cols1 d-w100p">
     <div class="d-fl-center">
       <dt-icon name="settings" :size="selectedSize" />
     </div>
@@ -58,13 +58,13 @@ Adjust the size using the `size` prop. Note that sizes 600, 700, and 800 are exc
 
 ## Changing color
 
-<div class="d-d-grid d-gg24 d-g-cols3 md:d-g-cols1">
+<div class="d-d-grid d-g24 d-g-cols3 md:d-g-cols1">
 
 The icon's color inherits from the parent's foreground color.
 
 <div class="d-gc2">
 <code-well-header>
-<div class="d-d-grid d-gg24 d-g-cols2 md:d-g-cols1 d-w100p">
+<div class="d-d-grid d-g24 d-g-cols2 md:d-g-cols1 d-w100p">
   <div class="d-fl-center">
     <dt-stack :class="selectedColor" direction="row" as="div" gap="300">
       <dt-icon name="settings" size="300" />
@@ -85,7 +85,7 @@ The icon's color inherits from the parent's foreground color.
 </div>
 </div>
 
-<div class="d-d-grid d-gg24 d-g-cols3 md:d-g-cols1">
+<div class="d-d-grid d-g24 d-g-cols3 md:d-g-cols1">
 
 When setting the color of an icon take these into considaration:
 
@@ -130,13 +130,13 @@ When setting the color of an icon take these into considaration:
 
 ## Icon and text aligment
 
-<div class="d-d-grid d-gg24 d-g-cols3 md:d-g-cols1">
+<div class="d-d-grid d-g24 d-g-cols3 md:d-g-cols1">
 
 We encourage utilizing the [Stack component](/components/stack/) for aligning elements both horizontally and vertically.
 
 <div class="d-gc2">
 <code-well-header>
-  <div class="d-d-grid d-gg24 d-g-cols2 md:d-g-cols1 d-w100p">
+  <div class="d-d-grid d-g24 d-g-cols2 md:d-g-cols1 d-w100p">
     <div class="d-fl-center">
       <dt-stack :direction="selectedDirection" class="d-fl-center" gap="300">
       <dt-icon name="settings" size="300" />

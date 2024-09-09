@@ -12,7 +12,7 @@ figma_url: https://www.figma.com/file/zz40wi0uW9MvaJ5RuhcRZR/DT-Core%3A-Icons-7?
 
 ### In Figma
 
-<div class="d-d-grid d-gg24 d-g-cols3 md:d-g-cols1">
+<div class="d-d-grid d-g24 d-g-cols3 md:d-g-cols1">
 
 Find a list of available icons in [DT Core: Icons](https://www.figma.com/file/zz40wi0uW9MvaJ5RuhcRZR/DT8-Icon-Library), or search the icons in the search library within your Figma file.
 
@@ -24,13 +24,13 @@ Find a list of available icons in [DT Core: Icons](https://www.figma.com/file/zz
 
 ### In Vue
 
-<div class="d-d-grid d-gg24 d-g-cols3 md:d-g-cols1">
+<div class="d-d-grid d-g24 d-g-cols3 md:d-g-cols1">
 
 For detailed instructions on using the icons, check the [Icon component](/components/icon.html).
 
 <div class="d-gc2">
 <code-well-header>
-  <div class="d-d-grid d-gg24 d-g-cols3 md:d-g-cols1 d-w100p">
+  <div class="d-d-grid d-g24 d-g-cols3 md:d-g-cols1 d-w100p">
     <div class="d-fl-center">
       <dt-icon :name="selectedIcon" :size="selectedSize" />
     </div>
@@ -53,7 +53,7 @@ Some icons are linked to specific actions, like the Settings gear <dt-icon name=
 
 ### Sizing
 
-<div class="d-d-grid d-gg24 d-g-cols3 md:d-g-cols1">
+<div class="d-d-grid d-g24 d-g-cols3 md:d-g-cols1">
 
 The icon size is defined based on the context and text size next to it. These are the only available size options and no overrides should be needed to properly size the icons.
 
@@ -77,7 +77,7 @@ Our icons are designed for easy recognition and understanding. They are a visual
 
 Go to the [Icon Builder page](https://www.figma.com/file/zz40wi0uW9MvaJ5RuhcRZR/DT8-Icon-Library?type=design&node-id=12057-3505&mode=design&t=CNADHg9I1bsKDPiB-4) in Figma and follow the instructions. Remember to work on a branch and send a review when the icons are ready.
 
-<div class="d-d-grid d-gg24 d-g-cols3 md:d-g-cols1">
+<div class="d-d-grid d-g24 d-g-cols3 md:d-g-cols1">
 
 <div>
 

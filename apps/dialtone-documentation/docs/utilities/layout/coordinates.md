@@ -9,7 +9,7 @@ description: Utility classes to assign an element’s top, right, bottom, or lef
 
 Use the `top|right|bottom|left|x|y|all` utility classes to absolutely position elements within the nearest positioned element.
 
-<code-well-header class="d-p24 d-bgc-purple-100 d-bgo50 d-w100p d-hmn216 d-d-grid d-g-cols4 d-gg24 d-pi-center sm:d-fs-100 xl:d-fs-200 d-fs-300 d-fw-bold" custom>
+<code-well-header class="d-p24 d-bgc-purple-100 d-bgo50 d-w100p d-hmn216 d-d-grid d-g-cols4 d-g24 d-pi-center sm:d-fs-100 xl:d-fs-200 d-fs-300 d-fw-bold" custom>
   <div class="d-ps-relative xl:d-h48 xl:d-w48 d-h128 d-w128 d-bar8 d-bgc-purple-200"><div class="d-fl-center d-ps-absolute d-x0 d-t0 d-bgc-purple-300 d-bar4 d-h50p">1</div></div>
   <div class="d-ps-relative xl:d-h48 xl:d-w48 d-h128 d-w128 d-bar8 d-bgc-purple-200"><div class="d-fl-center d-ps-absolute d-y0 d-r0 d-bgc-purple-300 d-bar4 d-w50p">2</div></div>
   <div class="d-ps-relative xl:d-h48 xl:d-w48 d-h128 d-w128 d-bar8 d-bgc-purple-200"><div class="d-fl-center d-ps-absolute d-x0 d-b0 d-bgc-purple-300 d-bar4 d-h50p">3</div></div>
@@ -107,7 +107,7 @@ Use the `top|right|bottom|left|x|y|all` utility classes to absolutely position e
 
 Use the `top|right|bottom|left|x|y|all` utility classes to absolutely position elements within the nearest positioned element.
 
-<code-well-header class="d-p24 d-bgc-gold-100 d-bgo50 d-w100p d-hmn216 d-d-grid d-g-cols4 d-gg24 d-pi-center sm:d-fs-100 xl:d-fs-200 d-fs-300 d-fw-bold" custom>
+<code-well-header class="d-p24 d-bgc-gold-100 d-bgo50 d-w100p d-hmn216 d-d-grid d-g-cols4 d-g24 d-pi-center sm:d-fs-100 xl:d-fs-200 d-fs-300 d-fw-bold" custom>
   <div class="d-ps-relative xl:d-h48 xl:d-w48 d-h128 d-w128 d-bar8 d-bgc-gold-100"><div class="d-fl-center d-ps-absolute d-xn2 d-tn2 d-bgc-gold-200 d-bar8 d-h50p">1</div></div>
   <div class="d-ps-relative xl:d-h48 xl:d-w48 d-h128 d-w128 d-bar8 d-bgc-gold-100"><div class="d-fl-center d-ps-absolute d-yn2 d-rn2 d-bgc-gold-200 d-bar8 d-w50p">2</div></div>
   <div class="d-ps-relative xl:d-h48 xl:d-w48 d-h128 d-w128 d-bar8 d-bgc-gold-100"><div class="d-fl-center d-ps-absolute d-xn2 d-bn2 d-bgc-gold-200 d-bar8 d-h50p">3</div></div>

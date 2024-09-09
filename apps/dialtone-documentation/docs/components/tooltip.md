@@ -147,7 +147,7 @@ showHtmlWarning />
 
 No arrow direction is assigned by default. You must select a direction. Twelve directions are offered: three on each face of the tooltip.
 
-<div class="d-d-grid d-gg16 d-g-cols3 sm:d-g-cols1 md:d-g-cols2">
+<div class="d-d-grid d-g16 d-g-cols3 sm:d-g-cols1 md:d-g-cols2">
   <div v-for="dir in directions" class="d-p32 d-bgc-secondary d-bar8">
     <div class="d-tooltip d-tooltip--show" :class="'d-tooltip__arrow--'+dir">
       <div class="d-tt-capitalize d-mb4">{{ capitalizeDirection(dir) }}</div>
