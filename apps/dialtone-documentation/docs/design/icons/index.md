@@ -39,9 +39,18 @@ For detailed instructions on using the icons, check the [Icon component](/compon
   </div>
 </code-well-header>
 
+#### Vue 2
+
 ```js
-import { DtIcon } from '@dialpad/dialtone-vue';
-<dt-icon name="icon-name" size="500" ariaLabel="Description" />
+import { DtIconCreditCard } from '@dialpad/dialtone-icons/vue2';
+<dt-icon-credit-card size="500" aria-label="Description" />
+```
+
+#### Vue 3
+
+```js
+import { DtIconCreditCard } from '@dialpad/dialtone-icons/vue3';
+<dt-icon-credit-card size="500" aria-label="Description" />
 ```
 
 </div>
@@ -126,4 +135,5 @@ const changeIcon = (newIcon) => {
 const changeIconSize = (newSize) => {
   selectedSize.value = newSize;
 };
+
 </script>
