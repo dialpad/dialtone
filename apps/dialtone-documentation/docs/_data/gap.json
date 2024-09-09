@@ -1,8 +1,9 @@
 {
+  "directions": ["both", "column", "row"],
   "values": [
     {
       "value": "0",
-      "output": "0"
+      "output": "0rem"
     },
     {
       "value": "1",
