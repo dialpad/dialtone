@@ -1,5 +1,5 @@
 import '../css/dialtone-globals.less';
-import '@dialpad/dialtone-css/lib/dist/dialtone.css';
+import '@dialpad/dialtone-css';
 import 'overlayscrollbars/overlayscrollbars.css';
 import { addons } from '@storybook/preview-api';
 import { setTheme } from '@dialpad/dialtone-tokens/themes/config';
