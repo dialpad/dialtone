@@ -79,6 +79,16 @@ function boxShadows (shadowDeclarations, Declaration) {
 }
 
 /**
+ * Wrap the value in a calc function if it is not already wrapped.
+ * @param { Declaration } declaration
+ */
+function wrapInCalc (declaration) {
+  if (declaration.value.includes(' * ') && !declaration.value.startsWith('calc')) {
+    declaration.value = `calc(${declaration.value})`;
+  }
+}
+
+/**
  * Generate HSL CSS Variables.
  * @param { Declaration } declaration
  */
@@ -196,6 +206,9 @@ module.exports = (opts = {}) => {
       layoutVariables(rootSelector, Declaration);
 
       const shadows = rootSelector.nodes.filter(node => node.type === 'decl' && IS_SHADOW_REGEX.test(node.prop));
+      // for some reason when outputReferences is enabled the numbered shadows output in a backwards order. This messes
+      // up our algorithm to count the shadows in boxShadows() so we reverse the array to fix this.
+      shadows.reverse();
       boxShadows(shadows, Declaration);
       const typographies = rootSelector.nodes.filter(node => node.type === 'decl' && IS_TYPOGRAPHY_REGEX.test(node.prop));
       typography(typographies, Declaration);
@@ -206,6 +219,15 @@ module.exports = (opts = {}) => {
 
     Declaration (declaration) {
       generateColorHsla(declaration);
+
+      // A little hacky, but doesn't seem like there's a better way to do this currently.
+      // wraps calculated values in calc() for css if it contains a multiplication operator.
+      // This could cause issues if a value ever contains a * character that isn't for multiplication.
+      // There are many disucssions on this issue and it is yet unresolved:
+      // https://github.com/amzn/style-dictionary/issues/820
+      // https://github.com/tokens-studio/sd-transforms/issues/13
+      // https://github.com/amzn/style-dictionary/issues/1055
+      wrapInCalc(declaration);
     },
   };
 };
