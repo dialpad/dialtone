@@ -8,7 +8,7 @@ description: Utilities for controlling how elements are placed across grid rows.
 Use `d-gr{#}` to span an element across multiple rows. This can be combined with `d-gc{#}` classes to span a set of columns.
 
 <code-well-header class="d-fl-center d-fd-column d-p24 d-bgc-purple-100 d-bgo50 d-w100p d-hmn216" custom>
-  <div class="d-d-grid d-gg16 d-g-cols3 d-g-rows3 d-p16 d-w100p d-hmn216 d-bar8 d-bgc-purple-100">
+  <div class="d-d-grid d-g16 d-g-cols3 d-g-rows3 d-p16 d-w100p d-hmn216 d-bar8 d-bgc-purple-100">
     <div class="d-gc2 d-gr2 d-fl-center d-p16 d-bgc-purple-300 d-bar4 d-fs-300 d-fw-bold">1</div>
     <div class="d-fl-center d-p16 d-bgc-purple-300 d-bar4 d-fs-300 d-fw-bold d-o50">2</div>
     <div class="d-gr2 d-fl-center d-p16 d-bgc-purple-300 d-bar4 d-fs-300 d-fw-bold">3</div>
@@ -17,7 +17,7 @@ Use `d-gr{#}` to span an element across multiple rows. This can be combined with
 </code-well-header>
 
 ```html
-<div class="d-d-grid d-gg16 d-g-cols3 d-g-rows3">
+<div class="d-d-grid d-g16 d-g-cols3 d-g-rows3">
   <div class="d-gc2 d-gr2">1</div>
   <div>2</div>
   <div class="d-gr2">3</div>
@@ -32,7 +32,7 @@ Use `d-grs{#}` to set the starting point for an element. This can be combined wi
 Use `d-gre{#}` to set an element's ending point. A reminder that CSS grid rows start at 1 and end at the number of rows + 1. For example in a 4-row grid, the starting line would be 1 and the ending line would be 5.
 
 <code-well-header class="d-fl-center d-fd-column d-p24 d-bgc-magenta-100 d-bgo50 d-w100p d-hmn216" custom>
-  <div class="d-d-grid d-gg16 d-g-cols3 d-g-rows4 d-p16 d-w100p d-hmn216 d-bar8 d-bgc-magenta-100">
+  <div class="d-d-grid d-g16 d-g-cols3 d-g-rows4 d-p16 d-w100p d-hmn216 d-bar8 d-bgc-magenta-100">
     <div class="d-gc2 d-grs1 d-gre3 d-fl-center d-p16 d-bgc-magenta-200 d-bar4 d-fs-300 d-fw-bold">1</div>
     <div class="d-fl-center d-p16 d-bgc-magenta-200 d-bar4 d-fs-300 d-fw-bold d-o50">2</div>
     <div class="d-grs2 d-gre5 d-fl-center d-p16 d-bgc-magenta-200 d-bar4 d-fs-300 d-fw-bold">3</div>
@@ -41,7 +41,7 @@ Use `d-gre{#}` to set an element's ending point. A reminder that CSS grid rows s
 </code-well-header>
 
 ```html
-<div class="d-d-grid d-gg16 d-g-cols3 d-g-rows4">
+<div class="d-d-grid d-g16 d-g-cols3 d-g-rows4">
   <div class="d-gc2 d-grs1 d-gre3">1</div>
   <div>2</div>
   <div class="d-grs2 d-gre5">3</div>

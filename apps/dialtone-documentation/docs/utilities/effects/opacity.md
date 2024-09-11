@@ -7,7 +7,7 @@ description: Utility classes for changing an element's opacity.
 
 Use `d-o{n}` to change the opacity of your element.
 
-<code-well-header class="d-fl-col5 d-flg8 d-fw-wrap d-p24 d-bgc-magenta-100 d-bgo50 d-w100p d-hmn102" custom>
+<code-well-header class="d-fl-col5 d-g8 d-fw-wrap d-p24 d-bgc-magenta-100 d-bgo50 d-w100p d-hmn102" custom>
   <div class="d-fl-center d-p16 d-bar8 d-bgc-magenta-100 d-fc-magenta-400 d-fs-200 d-fw-bold d-o100">.d-o100</div>
   <div class="d-fl-center d-p16 d-bar8 d-bgc-magenta-100 d-fc-magenta-400 d-fs-200 d-fw-bold d-o75">.d-o75</div>
   <div class="d-fl-center d-p16 d-bar8 d-bgc-magenta-100 d-fc-magenta-400 d-fs-200 d-fw-bold d-o50">.d-o50</div>
@@ -24,9 +24,10 @@ Use `d-o{n}` to change the opacity of your element.
 ```
 
 ## Hover
+
 Use `h:d-o{n}` to change an element's :hover state opacity.
 
-<code-well-header class="d-fl-col5 d-flg8 d-fw-wrap d-p24 d-bgc-magenta-100 d-bgo50 d-w100p d-hmn102" custom>
+<code-well-header class="d-fl-col5 d-g8 d-fw-wrap d-p24 d-bgc-magenta-100 d-bgo50 d-w100p d-hmn102" custom>
   <div class="d-fl-center d-p16 d-bar8 d-bgc-magenta-100 d-fc-magenta-400 d-fs-200 d-fw-bold h:d-o50">hover to opacity .d-o50</div>
 </code-well-header>
 
@@ -35,9 +36,10 @@ Use `h:d-o{n}` to change an element's :hover state opacity.
 ```
 
 ## Focus
+
 Use `f:d-o{n}` to change an element's :focus and :focus-within state opacity.
 
-<code-well-header class="d-fl-col5 d-flg8 d-fw-wrap d-p24 d-bgc-magenta-100 d-bgo50 d-w100p d-hmn102" custom>
+<code-well-header class="d-fl-col5 d-g8 d-fw-wrap d-p24 d-bgc-magenta-100 d-bgo50 d-w100p d-hmn102" custom>
   <button class="d-ba-none d-fl-center d-p16 d-bar8 d-bgc-magenta-100 d-fc-magenta-400 d-fs-200 d-fw-bold f:d-o50">Click me to opacity .d-o50</button>
 </code-well-header>
 
@@ -46,9 +48,10 @@ Use `f:d-o{n}` to change an element's :focus and :focus-within state opacity.
 ```
 
 ## Focus visible
+
 Use `fv:d-o{n}` to change an element's :focus-visible state opacity [only when focused by keyboard].
 
-<code-well-header class="d-fl-col5 d-flg8 d-fw-wrap d-p24 d-bgc-magenta-100 d-bgo50 d-w100p d-hmn102" custom>
+<code-well-header class="d-fl-col5 d-g8 d-fw-wrap d-p24 d-bgc-magenta-100 d-bgo50 d-w100p d-hmn102" custom>
   <button class="d-ba-none d-fl-center d-p16 d-bar8 d-bgc-magenta-100 d-fc-magenta-400 d-fs-200 d-fw-bold fv:d-o50">Focus me to opacity .d-o50</button>
 </code-well-header>
 
