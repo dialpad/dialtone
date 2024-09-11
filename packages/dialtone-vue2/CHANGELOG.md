@@ -1,3 +1,10 @@
+## [2.158.1](https://github.com/dialpad/dialtone/compare/dialtone-vue2/v2.158.0...dialtone-vue2/v2.158.1) (2024-09-09)
+
+
+### Bug Fixes
+
+* **Rich Text Editor:** DLT-2017 emojis positioning ([#486](https://github.com/dialpad/dialtone/issues/486)) ([b857386](https://github.com/dialpad/dialtone/commit/b857386ab32425a1ee3ec58287265bc3c511b39f))
+
 # [2.158.0](https://github.com/dialpad/dialtone/compare/dialtone-vue2/v2.157.1...dialtone-vue2/v2.158.0) (2024-09-03)
 
 

@@ -49,7 +49,8 @@ export function registerDialtoneTransforms (styleDictionary) {
     name: 'dt/size/pxToRem',
     type: 'value',
     filter: function (token) {
-      return [...FONT_SIZE_IDENTIFIERS, ...SIZE_IDENTIFIERS].includes(token.type);
+      return [...FONT_SIZE_IDENTIFIERS, ...SIZE_IDENTIFIERS].includes(token.type) &&
+      !(token.filePath === 'tokens/root.json');
     },
     transform: pxToRemTransformer,
   });

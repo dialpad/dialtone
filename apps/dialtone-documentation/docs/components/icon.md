@@ -8,30 +8,39 @@ storybook: https://dialtone.dialpad.com/vue/?path=/docs/components-icon--default
 figma_url: https://www.figma.com/file/zz40wi0uW9MvaJ5RuhcRZR/DT-Core%3A-Icons-7?node-id=1473%3A3757&viewport=-168%2C479%2C1&t=OhX4ilCDvb7Tqkx4-11
 ---
 
-Check out our complete icon collection in the [icon catalog](/design/icons/#icon-catalog).
-
-## Changing icons
-
-<div class="d-d-grid d-gg24 d-g-cols3 md:d-g-cols1">
-
-To change an icon, modify the `name` prop to your desired icon. Explore the [icon catalog](/design/icons/) for options.
-
-<div class="d-gc2">
 <code-well-header>
-  <div class="d-d-grid d-gg24 d-g-cols2 md:d-g-cols1 d-w100p">
-    <div class="d-fl-center">
-      <dt-icon :name="selectedIcon"/>
-    </div>
-    <dt-select-menu label="Name" :options="iconListOptions" @change="changeIcon" />
-  </div>
+  <dt-icon-user-plus />
 </code-well-header>
 
+Check out our complete icon collection in the [icon catalog](/design/icons/#icon-catalog).
+
+## Usage
+
+Here is an example that demonstrates how you can use the icon component in your project:
+
+### Vue 2
+
 ```js
-<dt-icon name="icon-name" size="500" />
+import { DtIconUserPlus } from '@dialpad/dialtone-icons/vue2';
+
+<dt-icon-user-plus size="500" />
 ```
 
-</div>
-</div>
+### Vue 3
+
+```js
+import { DtIconUserPlus } from '@dialpad/dialtone-icons/vue3';
+
+<dt-icon-user-plus size="500" />
+```
+
+### Without tree shaking (deprecated)
+
+```js
+import { DtIcon } from '@dialpad/dialtone'
+
+<dt-icon name="user-plus" size="500" />
+```
 
 ## Changing Sizes
 
@@ -43,14 +52,14 @@ Adjust the size using the `size` prop. Note that sizes 600, 700, and 800 are exc
 <code-well-header>
   <div class="d-d-grid d-gg24 d-g-cols2 md:d-g-cols1 d-w100p">
     <div class="d-fl-center">
-      <dt-icon name="settings" :size="selectedSize" />
+      <dt-icon-settings :size="selectedSize" />
     </div>
     <dt-select-menu label="Size" :options="sizeValues" @change="changeIconSize" />
   </div>
 </code-well-header>
 
 ```js
-<dt-icon name="settings" size="500" />
+<dt-icon-settings size="500" />
 ```
 
 </div>
@@ -67,7 +76,7 @@ The icon's color inherits from the parent's foreground color.
 <div class="d-d-grid d-gg24 d-g-cols2 md:d-g-cols1 d-w100p">
   <div class="d-fl-center">
     <dt-stack :class="selectedColor" direction="row" as="div" gap="300">
-      <dt-icon name="settings" size="300" />
+      <dt-icon-settings size="300" />
       <p>Settings</p>
     </dt-stack>
   </div>
@@ -77,7 +86,7 @@ The icon's color inherits from the parent's foreground color.
 
 ```js
 <dt-stack class="d-fc-success">
-  <dt-icon name="settings" size="300" />
+  <dt-icon-settings size="300" />
   <p>Settings</p>
 </dt-stack>
 ```
@@ -128,7 +137,7 @@ When setting the color of an icon take these into considaration:
 </div>
 </div>
 
-## Icon and text aligment
+## Icon and text alignment
 
 <div class="d-d-grid d-gg24 d-g-cols3 md:d-g-cols1">
 
@@ -139,7 +148,7 @@ We encourage utilizing the [Stack component](/components/stack/) for aligning el
   <div class="d-d-grid d-gg24 d-g-cols2 md:d-g-cols1 d-w100p">
     <div class="d-fl-center">
       <dt-stack :direction="selectedDirection" class="d-fl-center" gap="300">
-      <dt-icon name="settings" size="300" />
+      <dt-icon-settings size="300" />
       <p>Settings</p>
       </dt-stack>
     </div>
@@ -149,7 +158,7 @@ We encourage utilizing the [Stack component](/components/stack/) for aligning el
 
 ```js
 <dt-stack direction="row" class="d-fl-center" gap="300">
-  <dt-icon name="settings" size="300" />
+  <dt-icon-settings size="300" />
   <p>Settings</p>
 </dt-stack>
 ```
@@ -159,7 +168,7 @@ We encourage utilizing the [Stack component](/components/stack/) for aligning el
 
 ## Accessibility
 
-- If the icon serves a purpose beyond its visual representation, provide a clear description in the `aria-label` prop. This ensures all users understand its function, regardless of how they interact with it, e.g: `<dt-icon name="settings" aria-label="Edit your profile" />`
+- If the icon serves a purpose beyond its visual representation, provide a clear description in the `aria-label` prop. This ensures all users understand its function, regardless of how they interact with it, e.g: `<dt-icon-settings aria-label="Edit your profile" />`
 
 - Icons contrast guidelines are the same as Typography.
 
@@ -196,6 +205,7 @@ Dialtone provides eight sizes for icons. Each of the sizes represents the width 
 <script setup>
   import { ref } from 'vue';
   import sizes from '@data/icons-sizes.json';
+  import { DtIconUserPlus, DtIconSettings } from '@dialpad/dialtone-icons/vue3';
 
   const sizeValues = sizes.map(item => ({ value: item.size, label: item.size }));
 
