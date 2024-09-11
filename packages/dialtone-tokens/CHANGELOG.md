@@ -1,3 +1,10 @@
+## [1.36.1](https://github.com/dialpad/dialtone/compare/dialtone-tokens/v1.36.0...dialtone-tokens/v1.36.1) (2024-09-11)
+
+
+### Bug Fixes
+
+* **Tokens:** NO-JIRA keep references in css output ([#487](https://github.com/dialpad/dialtone/issues/487)) ([b019ff6](https://github.com/dialpad/dialtone/commit/b019ff67bbc2da4f33ad8dadf2da81150bbb1fc6))
+
 # [1.36.0](https://github.com/dialpad/dialtone/compare/dialtone-tokens/v1.35.0...dialtone-tokens/v1.36.0) (2024-09-03)
 
 
