@@ -1,3 +1,17 @@
+## [9.72.3](https://github.com/dialpad/dialtone/compare/dialtone/v9.72.2...dialtone/v9.72.3) (2024-09-11)
+
+
+### Bug Fixes
+
+* **Lint:** NO-JIRA fix linter rule for text styles ([#494](https://github.com/dialpad/dialtone/issues/494)) ([c6b5f3f](https://github.com/dialpad/dialtone/commit/c6b5f3f6fb3d79f2863bbfb6d303389da702cc5a))
+* **Scrollbar Directive:** NO-JIRA overlayscrollbars missing styles ([#493](https://github.com/dialpad/dialtone/issues/493)) ([d1a88e1](https://github.com/dialpad/dialtone/commit/d1a88e1889bb232adaeb263075b5641c7cd28c67))
+* **Tokens:** NO-JIRA keep references in css output ([#487](https://github.com/dialpad/dialtone/issues/487)) ([b019ff6](https://github.com/dialpad/dialtone/commit/b019ff67bbc2da4f33ad8dadf2da81150bbb1fc6))
+
+
+### Documentation
+
+* **Icon:** DLT-1916 update documentation to show tree shaking examples   ([#491](https://github.com/dialpad/dialtone/issues/491)) ([5b9d969](https://github.com/dialpad/dialtone/commit/5b9d969ebced275163d10929ef08b4a34ae4976b))
+
 ## [9.72.2](https://github.com/dialpad/dialtone/compare/dialtone/v9.72.1...dialtone/v9.72.2) (2024-09-09)
 
 
