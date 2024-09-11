@@ -1,3 +1,11 @@
+## [3.151.2](https://github.com/dialpad/dialtone/compare/dialtone-vue3/v3.151.1...dialtone-vue3/v3.151.2) (2024-09-11)
+
+
+### Bug Fixes
+
+* **Scrollbar Directive:** NO-JIRA overlayscrollbars missing styles ([#493](https://github.com/dialpad/dialtone/issues/493)) ([d1a88e1](https://github.com/dialpad/dialtone/commit/d1a88e1889bb232adaeb263075b5641c7cd28c67))
+* **Tokens:** NO-JIRA keep references in css output ([#487](https://github.com/dialpad/dialtone/issues/487)) ([b019ff6](https://github.com/dialpad/dialtone/commit/b019ff67bbc2da4f33ad8dadf2da81150bbb1fc6))
+
 ## [3.151.1](https://github.com/dialpad/dialtone/compare/dialtone-vue3/v3.151.0...dialtone-vue3/v3.151.1) (2024-09-09)
 
 
