@@ -38,7 +38,6 @@ module.exports = {
             'd-fw-medium',
             'd-fw-semibold',
             'd-fw-bold',
-            'd-fw-unset',
             'd-lh',
             'd-ff-custom',
             'd-ff-sans',
