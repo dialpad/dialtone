@@ -277,6 +277,10 @@
           "link": "/utilities/flex/flex-grow-shrink.html"
         },
         {
+          "text": "Gap",
+          "link": "/utilities/flex/gap.html"
+        },
+        {
           "text": "Justify Content",
           "link": "/utilities/flex/justify.html"
         },

@@ -46,6 +46,11 @@ const generatedRules = {
   borderRightRadius: [],
   borderBottomRadius: [],
   borderLeftRadius: [],
+  gap: [],
+  rowGap: [],
+  columnGap: [],
+  gapEveryChild: [],
+  columnGapEveryChild: [],
   gridColumns: [],
   gridColumnStart: [],
   gridColumnEnd: [],
@@ -227,6 +232,7 @@ function opacityUtilities (clonedSource, declaration) {
  */
 function flexColumnsUtilities (clonedSource, declaration) {
   for (let i = 1; i <= FLEX_COLUMNS; i++) {
+    // TODO: Update d-fl-col* implementation on our next migration. https://dialpad.atlassian.net/browse/DLT-1763
     generatedRules.flexColumn.push(new Rule({
       source: clonedSource,
       selector: `.d-fl-col${i}`,
@@ -238,7 +244,7 @@ function flexColumnsUtilities (clonedSource, declaration) {
       source: clonedSource,
       selector: `.d-fl-col${i} > *`,
       nodes: [
-        declaration.clone({ prop: '--fl-gap', value: 0 }),
+        declaration.clone({ prop: '--fl-gap', value: 'var(--dt-space-0)' }),
         declaration.clone({ prop: '--fl-basis', value: `calc(100% / ${i})` }),
         declaration.clone({ prop: 'display', value: 'inline-flex' }),
         declaration.clone({ prop: 'margin', value: 'var(--fl-gap)' }),
@@ -249,7 +255,7 @@ function flexColumnsUtilities (clonedSource, declaration) {
       source: clonedSource,
       selector: `.d-fl-col${i} > *:nth-child(-n + ${i})`,
       nodes: [
-        declaration.clone({ prop: 'margin-top', value: 0 }),
+        declaration.clone({ prop: 'margin-top', value: 'var(--dt-space-0)' }),
       ],
     }));
     generatedRules.flexDirectionColumn.push(new Rule({
@@ -379,13 +385,52 @@ function gridUtilities (clonedSource, declaration) {
 }
 
 /**
- * Generate Grid gap utility classes.
+ * Generate gap utility classes.
  * @param { Source } clonedSource
  * @param { Declaration } declaration
  */
 function gapUtilities (clonedSource, declaration) {
   Object.keys(GAP_SPACES)
     .forEach(stop => {
+      generatedRules.gap.push(new Rule({
+        source: clonedSource,
+        selector: `.d-g${stop}`,
+        nodes: [
+          declaration.clone({ prop: 'gap', value: `var(--dt-space-${GAP_SPACES[stop]}) !important` }),
+        ],
+      }));
+      generatedRules.rowGap.push(new Rule({
+        source: clonedSource,
+        selector: `.d-rg${stop}`,
+        nodes: [
+          declaration.clone({ prop: 'row-gap', value: `var(--dt-space-${GAP_SPACES[stop]}) !important` }),
+        ],
+      }));
+      generatedRules.columnGap.push(new Rule({
+        source: clonedSource,
+        selector: `.d-cg${stop}`,
+        nodes: [
+          declaration.clone({ prop: 'column-gap', value: `var(--dt-space-${GAP_SPACES[stop]}) !important` }),
+        ],
+      }));
+      generatedRules.gapEveryChild.push(new Rule({
+        source: clonedSource,
+        selector: `.d-g${stop} > *`,
+        nodes: [
+          declaration.clone({ prop: '--fl-gap', value: `var(--dt-space-${GAP_SPACES[stop]})` }),
+          declaration.clone({ prop: 'margin', value: 'unset' }),
+        ],
+      }));
+      generatedRules.columnGapEveryChild.push(new Rule({
+        source: clonedSource,
+        selector: `.d-cg${stop} > *`,
+        nodes: [
+          declaration.clone({ prop: '--fl-gap', value: `var(--dt-space-${GAP_SPACES[stop]})` }),
+          declaration.clone({ prop: 'margin', value: 'unset' }),
+        ],
+      }));
+
+      // TODO: Deprecated classes, remove on our next migration. https://dialpad.atlassian.net/browse/DLT-1763
       generatedRules.gridGap.push(new Rule({
         source: clonedSource,
         selector: `.d-gg${stop}`,

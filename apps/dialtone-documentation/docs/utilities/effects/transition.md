@@ -19,7 +19,7 @@ Use `d-t` to add a transition to an element.
 
 Use `d-td{n}` change an element's `transition-delay` from it's default `50ms` length.
 
-<code-well-header class="d-fl-col6 d-flg8 d-p24 d-bgc-magenta-100 d-bgo50 d-w100p d-hmn102 d-of-auto" custom>
+<code-well-header class="d-fl-col6 d-g8 d-p24 d-bgc-magenta-100 d-bgo50 d-w100p d-hmn102 d-of-auto" custom>
   <div class="d-fl-center d-p24 d-bar8 d-bgc-magenta-200 h:d-bgc-gold-200 h:d-bs-lg d-fs-200 d-fw-bold d-fc-primary-inverted h:d-fc-primary d-t d-td0 d-c-pointer">0ms</div>
   <div class="d-fl-center d-p24 d-bar8 d-bgc-magenta-200 h:d-bgc-gold-200 h:d-bs-lg d-fs-200 d-fw-bold d-fc-primary-inverted h:d-fc-primary d-t d-c-pointer">50ms</div>
   <div class="d-fl-center d-p24 d-bar8 d-bgc-magenta-200 h:d-bgc-gold-200 h:d-bs-lg d-fs-200 d-fw-bold d-fc-primary-inverted h:d-fc-primary d-t d-td100 d-c-pointer">100ms</div>
@@ -41,7 +41,7 @@ Use `d-td{n}` change an element's `transition-delay` from it's default `50ms` le
 
 Use `d-ttf-{n}` change an element's `transition-timing-function` (aka easing) from it's default Quad Ease In, Ease Out value.
 
-<code-well-header class="d-fl-col3 d-flg8 d-p24 d-bgc-green-100 d-bgo50 d-w100p d-hmn102" custom>
+<code-well-header class="d-fl-col3 d-g8 d-p24 d-bgc-green-100 d-bgo50 d-w100p d-hmn102" custom>
   <div class="d-fl-center d-p24 d-bar8 d-bgc-green-200 h:d-bgc-purple-100 h:d-bs-lg d-fs-200 d-fw-bold d-t d-td300 d-c-pointer">Ease In, Ease Out</div>
   <div class="d-fl-center d-p24 d-bar8 d-bgc-green-200 h:d-bgc-purple-100 h:d-bs-lg d-fs-200 d-fw-bold d-t d-td300 d-ttf-out d-c-pointer">Ease Out</div>
   <div class="d-fl-center d-p24 d-bar8 d-bgc-green-200 h:d-bgc-purple-100 h:d-bs-lg d-fs-200 d-fw-bold d-t d-td300 d-ttf-out-quint d-c-pointer">Ease Out Quint</div>
@@ -57,7 +57,7 @@ Use `d-ttf-{n}` change an element's `transition-timing-function` (aka easing) fr
 
 Use `d-tp-{n}` change an what items within an element are transitioned.
 
-<code-well-header class="d-fl-col6 d-flg8 d-p24 d-bgc-gold-100 d-bgo50 d-w100p d-hmn102 d-of-auto" custom>
+<code-well-header class="d-fl-col6 d-g8 d-p24 d-bgc-gold-100 d-bgo50 d-w100p d-hmn102 d-of-auto" custom>
   <div class="d-fl-center d-p24 d-bar8 d-bgc-gold-200 h:d-bgc-purple-100 h:d-bs-lg d-fs-200 d-fw-bold d-fc-primary h:d-fc-red-200 d-t d-td100 d-c-pointer">All</div>
   <div class="d-fl-center d-p24 d-bar8 d-bgc-gold-200 d-fs-200 d-fw-bold d-fc-primary d-t d-td100 d-tp-o d-c-pointer h:d-o50">Opacity</div>
   <div class="d-fl-center d-p24 d-bar8 d-bgc-gold-200 d-fs-200 d-fw-bold d-fc-primary d-t d-td100 d-tp-bs d-c-pointer d-bs-sm h:d-bs-lg">Box shadow</div>

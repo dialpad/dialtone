@@ -1,14 +1,14 @@
 ---
 title: Gap
-description: Utilities to control the spacing between columns, rows, or both in grids.
+description: Utilities to control the spacing between columns, rows, or both.
 ---
 
 ## Adding universal row and column gaps
 
-Use `d-g{#}` to universally change the row and column gap space in grid layouts.
+Use `d-g{#}` to universally change the row and column gap space.
 
-<code-well-header class="d-fl-center d-fd-column d-p24 d-bgc-purple-100 d-bgo50 d-w100p d-hmn216" custom>
-  <div class="d-d-grid d-g16 d-g-cols2 d-p16 d-w100p d-hmn216 d-bar8 d-bgc-purple-100">
+<code-well-header class="d-p24 d-bgc-purple-100 d-bgo50" custom>
+  <div class="d-fl-col2 d-fw-wrap d-g16 d-p16 d-hmn216 d-bar8 d-bgc-purple-100">
     <div class="d-fl-center d-p16 d-bgc-purple-300 d-bar4 d-fs-300 d-fw-bold">1</div>
     <div class="d-fl-center d-p16 d-bgc-purple-300 d-bar4 d-fs-300 d-fw-bold">2</div>
     <div class="d-fl-center d-p16 d-bgc-purple-300 d-bar4 d-fs-300 d-fw-bold">3</div>
@@ -17,7 +17,7 @@ Use `d-g{#}` to universally change the row and column gap space in grid layouts.
 </code-well-header>
 
 ```html
-<div class="d-d-grid d-g16 d-g-cols2">
+<div class="d-fl-col2 d-fw-wrap d-g16">
   <div>1</div>
   <div>2</div>
   <div>3</div>
@@ -25,35 +25,47 @@ Use `d-g{#}` to universally change the row and column gap space in grid layouts.
 </div>
 ```
 
-## Independently changing row and column gaps
+## Row gap
 
-Use `d-cg{#}` or `d-rg{#}` to independently change the row and column gap space in grid layouts.
+Use `d-rg{#}` to change the row gap space.
 
-<code-well-header class="d-fl-center d-fd-column d-p24 d-bgc-green-100 d-bgo50 d-w100p d-hmn216" custom>
-  <div class="d-d-grid d-cg24 d-rg8 d-g-cols3 d-p16 d-w100p d-hmn216 d-bar8 d-bgc-green-100">
+<code-well-header class="d-p24 d-bgc-green-100 d-bgo50" custom>
+  <div class="d-d-flex d-fd-column d-rg8 d-p16 d-bar8 d-bgc-green-100">
     <div class="d-fl-center d-p16 d-bgc-green-200 d-bar4 d-fs-300 d-fw-bold">1</div>
     <div class="d-fl-center d-p16 d-bgc-green-200 d-bar4 d-fs-300 d-fw-bold">2</div>
     <div class="d-fl-center d-p16 d-bgc-green-200 d-bar4 d-fs-300 d-fw-bold">3</div>
     <div class="d-fl-center d-p16 d-bgc-green-200 d-bar4 d-fs-300 d-fw-bold">4</div>
-    <div class="d-fl-center d-p16 d-bgc-green-200 d-bar4 d-fs-300 d-fw-bold">5</div>
-    <div class="d-fl-center d-p16 d-bgc-green-200 d-bar4 d-fs-300 d-fw-bold">6</div>
-    <div class="d-fl-center d-p16 d-bgc-green-200 d-bar4 d-fs-300 d-fw-bold">7</div>
-    <div class="d-fl-center d-p16 d-bgc-green-200 d-bar4 d-fs-300 d-fw-bold">8</div>
-    <div class="d-fl-center d-p16 d-bgc-green-200 d-bar4 d-fs-300 d-fw-bold">9</div>
   </div>
 </code-well-header>
 
 ```html
-<div class="d-d-grid d-cg24 d-rg8 d-g-cols3">
+<div class="d-d-flex d-fd-column d-rg8">
   <div>1</div>
   <div>2</div>
   <div>3</div>
   <div>4</div>
-  <div>5</div>
-  <div>6</div>
-  <div>7</div>
-  <div>8</div>
-  <div>9</div>
+</div>
+```
+
+## Column gap
+
+Use `d-cg{#}` to change the column gap space.
+
+<code-well-header class="d-p24 d-bgc-green-100 d-bgo50" custom>
+  <div class="d-fl-col4 d-cg16 d-p16 d-bar8 d-bgc-green-100">
+    <div class="d-fl-center d-p16 d-bgc-green-200 d-bar4 d-fs-300 d-fw-bold">1</div>
+    <div class="d-fl-center d-p16 d-bgc-green-200 d-bar4 d-fs-300 d-fw-bold">2</div>
+    <div class="d-fl-center d-p16 d-bgc-green-200 d-bar4 d-fs-300 d-fw-bold">3</div>
+    <div class="d-fl-center d-p16 d-bgc-green-200 d-bar4 d-fs-300 d-fw-bold">4</div>
+  </div>
+</code-well-header>
+
+```html
+<div class="d-fl-col4 d-cg16">
+  <div>1</div>
+  <div>2</div>
+  <div>3</div>
+  <div>4</div>
 </div>
 ```
 

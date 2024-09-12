@@ -80,6 +80,16 @@ export async function run () {
           basePxFontSize: Number.parseFloat(BASE_FONT_SIZE),
           buildPath: 'dist/css/',
           theme: themeName,
+          options: {
+            outputReferences: (token) => {
+              // Don't output references for tokens that have been modified via studio tokens extension, also
+              // for box shadow colors because they use rgb
+              if (token.$extensions?.['studio.tokens']?.modify || (token.$extensions?.['studio.tokens']?.originalType === 'boxShadow' && token.type === 'color')) {
+                return false;
+              }
+              return true;
+            },
+          },
           files: [
             {
               destination: `tokens-${themeName}.css`,
