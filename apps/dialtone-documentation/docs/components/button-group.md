@@ -7,7 +7,7 @@ storybook: https://dialtone.dialpad.com/vue/?path=/story/components-button-group
 ---
 
 <code-well-header class="d-d-block">
-  <dt-button-group alignment="start" class="d-gg8">
+  <dt-button-group alignment="start" class="d-g8">
     <dt-button importance="primary">Confirm</dt-button>
     <dt-button importance="outlined">Cancel</dt-button>
   </dt-button-group>
@@ -40,7 +40,7 @@ The alignment and the order of buttons within it can be customized to suit the s
 
 When aligned to `start`, the `primary` button is on the **left** side of the group.
 <code-well-header class="d-d-block">
-  <dt-button-group alignment="start" class="d-gg8">
+  <dt-button-group alignment="start" class="d-g8">
     <dt-button importance="primary">Confirm</dt-button>
     <dt-button importance="outlined">Cancel</dt-button>
   </dt-button-group>
@@ -69,7 +69,7 @@ showHtmlWarning />
 
 When aligned to `end`, the `primary` button is on the **right** side of the group.
 <code-well-header class="d-d-block">
-  <dt-button-group alignment="end" class="d-gg8">
+  <dt-button-group alignment="end" class="d-g8">
     <dt-button importance="outlined">Cancel</dt-button>
     <dt-button importance="primary">Confirm</dt-button>
   </dt-button-group>
@@ -98,7 +98,7 @@ showHtmlWarning />
 
 When set to `space-between`, the elements are evenly distributed within the row, creating a directional flow where the `primary` button is either on the **left** (regressive) or on the **right** (progressive).
 <code-well-header class="d-d-block">
-  <dt-button-group alignment="space-between" class="d-gg8">
+  <dt-button-group alignment="space-between" class="d-g8">
     <dt-button importance="outlined">Previous</dt-button>
     <dt-button importance="primary">Next</dt-button>
   </dt-button-group>

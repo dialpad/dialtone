@@ -5,7 +5,7 @@ description: Utilities for controlling how an element responds to mouse/touch ev
 
 ## Pointer event classes
 
-<code-well-header class="d-fl-col5 d-flg8 d-fw-wrap d-p24 d-bgc-magenta-100 d-bgo50 d-w100p d-hmn102" custom>
+<code-well-header class="d-fl-col5 d-g8 d-fw-wrap d-p24 d-bgc-magenta-100 d-bgo50 d-w100p d-hmn102" custom>
   <button v-for="{ class: className } in pointerEvents.slice(0, 3)" class="d-btn d-btn--filled d-code--sm" :class="className">.{{ className }}</button>
 </code-well-header>
 
@@ -19,7 +19,7 @@ description: Utilities for controlling how an element responds to mouse/touch ev
 
 Use the `user-select` property to control whether the user can select text.
 
-<code-well-header class="d-fl-col5 d-flg8 d-fw-wrap d-p24 d-bgc-purple-100 d-bgo50 d-w100p d-hmn102" custom>
+<code-well-header class="d-fl-col5 d-g8 d-fw-wrap d-p24 d-bgc-purple-100 d-bgo50 d-w100p d-hmn102" custom>
   <div v-for="{ class: className } in pointerEvents.slice(3)" class="d-fl-center d-m8 d-p16 d-w332 d-bgc-purple-300 d-code--sm" :class="className">.{{ className }}</div>
 </code-well-header>
 

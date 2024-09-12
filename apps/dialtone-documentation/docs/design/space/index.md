@@ -23,7 +23,7 @@ When setting the scale of an element, use [Size](/design/sizing/) units.
 
 ### Setting a specific spacing
 
-<div class="d-d-grid d-gg24 d-g-cols3 md:d-g-cols1">
+<div class="d-d-grid d-g24 d-g-cols3 md:d-g-cols1">
 
 <div>
 
@@ -37,7 +37,7 @@ When setting the gap between elements, utilize [Space Tokens](#tokens) for the g
 </div>
 <div class="d-gc2">
 <code-well-header>
-  <div class="d-d-grid d-gg24 d-g-cols2 md:d-g-cols1 d-w100p">
+  <div class="d-d-grid d-g24 d-g-cols2 md:d-g-cols1 d-w100p">
     <div class="d-d-flex d-fd-row" :style="{ gap: selectedSpace }">
       <div class="d-fl-center d-ba d-bc-purple-400 d-w100p">
         Element A
@@ -71,7 +71,7 @@ When setting the gap between elements, utilize [Space Tokens](#tokens) for the g
 
 ### Stacking
 
-<div class="d-d-grid d-gg24 d-g-cols3 md:d-g-cols1">
+<div class="d-d-grid d-g24 d-g-cols3 md:d-g-cols1">
 <div>
 
 When adding space between elements, both vertically and horizontally, we can use either `space-between` or `gap` to define the space that separates each element. The value is set as a variable in Figma and as a token in code.
@@ -98,7 +98,7 @@ When adding space between elements, both vertically and horizontally, we can use
 
 ### Padding
 
-<div class="d-d-grid d-gg24 d-g-cols3 md:d-g-cols1">
+<div class="d-d-grid d-g24 d-g-cols3 md:d-g-cols1">
 <div>
 
 When adding space around an element, use `padding` to create breathing room.
@@ -119,7 +119,7 @@ Avoid using `margin`, which adds space outside the element and can affect the la
 
 ### Grouping
 
-<div class="d-d-grid d-gg16 d-g-cols3 md:d-g-cols1" >
+<div class="d-d-grid d-g16 d-g-cols3 md:d-g-cols1" >
   <div>
 <dt-stack direction="column" gap="400">
 <p>Group and adjust the distance between elements to guide users understanding of their relationships. Closer elements appear more connected, while larger gaps indicate less association.</p>
@@ -136,7 +136,7 @@ Avoid using `margin`, which adds space outside the element and can affect the la
 
 ### Guiding the eye
 
-<div class="d-d-grid d-gg16 d-g-cols3 md:d-g-cols1" >
+<div class="d-d-grid d-g16 d-g-cols3 md:d-g-cols1" >
   <div>
     <dt-stack direction="column" gap="400">
       <div>

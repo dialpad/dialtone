@@ -1,3 +1,10 @@
+## [1.7.2](https://github.com/dialpad/dialtone/compare/eslint-plugin-dialtone/v1.7.1...eslint-plugin-dialtone/v1.7.2) (2024-09-11)
+
+
+### Bug Fixes
+
+* **Lint:** NO-JIRA fix linter rule for text styles ([#494](https://github.com/dialpad/dialtone/issues/494)) ([c6b5f3f](https://github.com/dialpad/dialtone/commit/c6b5f3f6fb3d79f2863bbfb6d303389da702cc5a))
+
 ## [1.7.1](https://github.com/dialpad/dialtone/compare/eslint-plugin-dialtone/v1.7.0...eslint-plugin-dialtone/v1.7.1) (2024-08-26)
 
 
