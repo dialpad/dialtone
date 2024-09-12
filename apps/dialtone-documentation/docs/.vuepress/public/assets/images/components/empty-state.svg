@@ -1,12 +1,8 @@
-<svg width="528" height="214" viewBox="0 0 528 214" fill="none" xmlns="http://www.w3.org/2000/svg">
-<g clip-path="url(#clip0_16562_824)">
-<rect width="528" height="214" fill="var(--dt-color-surface-primary)"/>
-<path fill-rule="evenodd" clip-rule="evenodd" d="M264 95C286.644 95 305 76.6437 305 54C305 31.3563 286.644 13 264 13C241.356 13 223 31.3563 223 54C223 76.6437 241.356 95 264 95ZM264 84C280.569 84 294 70.5685 294 54C294 37.4315 280.569 24 264 24C247.431 24 234 37.4315 234 54C234 70.5685 247.431 84 264 84Z" fill="var(--dt-color-foreground-tertiary)"/>
-<rect x="136" y="107" width="256" height="19" rx="7" fill="var(--dt-color-foreground-primary)"/>
-<rect x="157" y="138" width="214" height="10" rx="5" fill="var(--dt-color-foreground-secondary)"/>
-<rect x="157" y="157" width="154" height="10" rx="5" fill="var(--dt-color-foreground-secondary)"/>
-<rect x="157" y="176" width="178" height="10" rx="5" fill="var(--dt-color-foreground-secondary)"/>
-<rect x="157" y="195" width="102.5" height="33" rx="4" fill="var(--dt-color-surface-contrast)" fill-opacity="0.5"/>
-<rect x="268.5" y="195" width="102.5" height="33" rx="4" fill="var(--dt-color-brand-purple)"/>
-</g>
+<svg width="528" height="215" viewBox="0 0 528 215" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path fill-rule="evenodd" clip-rule="evenodd" d="M264.028 87.4753C280.597 87.4753 294.028 74.0439 294.028 57.4753C294.028 40.9068 280.597 27.4753 264.028 27.4753C247.46 27.4753 234.028 40.9068 234.028 57.4753C234.028 74.0439 247.46 87.4753 264.028 87.4753ZM264.028 79.5242C276.179 79.5242 286.028 69.6744 286.028 57.5242C286.028 45.3739 276.179 35.5242 264.028 35.5242C251.878 35.5242 242.028 45.3739 242.028 57.5242C242.028 69.6744 251.878 79.5242 264.028 79.5242Z" fill="var(--dt-color-foreground-tertiary)"/>
+<rect x="154.028" y="99.4753" width="220" height="16" rx="6" fill="var(--dt-color-foreground-primary)"/>
+<rect x="174.028" y="127.475" width="180" height="8" rx="4" fill="var(--dt-color-foreground-placeholder)"/>
+<rect x="174.028" y="143.475" width="130" height="8" rx="4" fill="var(--dt-color-foreground-placeholder)"/>
+<rect x="160.23" y="163.475" width="100" height="24" rx="4" fill="var(--dt-color-foreground-placeholder)"/>
+<rect x="267.826" y="163.475" width="100" height="24" rx="4" fill="var(--dt-color-brand-purple)"/>
 </svg>
