@@ -324,6 +324,12 @@
         "call",
         "dialpad"
       ],
+      "dialpad-spark": [
+        "ai",
+        "dialpad",
+        "spark",
+        "sparkle"
+      ],
       "waveform": [],
       "zoom-logo": [
         "video",
