@@ -18,12 +18,22 @@
                 <span class="dt-recipe-feed-item-pill__title">{{ title }}</span>
               </slot>
               <template #left>
-                <dt-icon
-                  data-qa="dt-recipe-feed-item-pill__icon"
-                  size="300"
+                <div
                   class="dt-recipe-feed-item-pill__icon"
-                  :name="computedIcon"
-                />
+                  data-qa="dt-recipe-feed-item-pill__icon"
+                >
+                  <component
+                    :is="toggleIcon"
+                    v-if="showChevronIcon"
+                    size="300"
+                  />
+                  <!-- @slot Slot for left icon, icon-size slot prop defaults to '300' -->
+                  <slot
+                    v-else
+                    name="leftIcon"
+                    :icon-size="'300'"
+                  />
+                </div>
               </template>
               <template #subtitle>
                 <slot name="subtitle" />
@@ -49,24 +59,16 @@
 
 <script>
 import { FEED_ITEM_PILL_BORDER_COLORS } from './feed_item_pill_constants';
-import { DtIcon } from '@/components/icon';
 import { DtItemLayout } from '@/components/item_layout';
 import { DtCollapsible } from '@/components/collapsible';
+import { DtIconChevronDown, DtIconChevronRight } from '@dialpad/dialtone-icons/vue3';
 
 export default {
   name: 'DtRecipeFeedItemPill',
 
-  components: { DtItemLayout, DtIcon, DtCollapsible },
+  components: { DtItemLayout, DtCollapsible },
 
   props: {
-    /**
-     * Accepts a DtIcon name to be shown in the left
-     */
-    iconName: {
-      type: String,
-      default: () => '',
-    },
-
     /**
      * Bolded primary text
      */
@@ -131,12 +133,12 @@ export default {
   },
 
   computed: {
-    computedIcon () {
-      if (this.toggleable && this.hover) {
-        return this.expanded ? 'chevron-down' : 'chevron-right';
-      } else {
-        return this.iconName;
-      }
+    toggleIcon () {
+      return this.expanded ? DtIconChevronDown : DtIconChevronRight;
+    },
+
+    showChevronIcon () {
+      return this.toggleable && this.hover;
     },
 
     toggleableClass () {
@@ -190,7 +192,10 @@ export default {
   }
 
   &__icon {
-    animation: fade 0.15s ease-in;
+    display: flex;
+    &:deep(svg) {
+      animation: fade 0.15s ease-in;
+    }
   }
 
   &__content {

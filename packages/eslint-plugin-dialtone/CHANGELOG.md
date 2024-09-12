@@ -3,6 +3,7 @@
 
 ### Bug Fixes
 
+<<<<<<< HEAD
 * NO-JIRA merge staging into beta ([#478](https://github.com/dialpad/dialtone/issues/478)) ([09f1165](https://github.com/dialpad/dialtone/commit/09f1165f4d4cffc00708aa18cd1067d8b84810aa))
 
 # [1.7.0-beta.1](https://github.com/dialpad/dialtone/compare/eslint-plugin-dialtone/v1.6.0...eslint-plugin-dialtone/v1.7.0-beta.1) (2024-08-27)
@@ -16,6 +17,9 @@
 ### Features
 
 * DLT-1844 create linter warning for usage of text utilities ([#459](https://github.com/dialpad/dialtone/issues/459)) ([59730e1](https://github.com/dialpad/dialtone/commit/59730e1fe9193af94b7db2de93bb9c7b38e744c9))
+=======
+* **Lint:** NO-JIRA fix linter rule for text styles ([#494](https://github.com/dialpad/dialtone/issues/494)) ([c6b5f3f](https://github.com/dialpad/dialtone/commit/c6b5f3f6fb3d79f2863bbfb6d303389da702cc5a))
+>>>>>>> remove/dt-icon
 
 ## [1.7.1](https://github.com/dialpad/dialtone/compare/eslint-plugin-dialtone/v1.7.0...eslint-plugin-dialtone/v1.7.1) (2024-08-26)
 

@@ -7,7 +7,7 @@ description: Utilities for controlling an element's background size.
 
 Use `d-bgs-{n}` to control the size of element's background image.
 
-<code-well-header class="d-fl-col4 d-fw-wrap d-flg12 d-p12 d-bgc-black-200 d-bgo50" custom>
+<code-well-header class="d-fl-col4 d-fw-wrap d-g12 d-p12 d-bgc-black-200 d-bgo50" custom>
   <div class="d-d-flex d-fd-column d-ai-center d-stack4" v-for="i in sizes">
       <div
         class="d-fl-center d-w128 d-h128 d-bgc-magenta-200 d-bar8 d-bc-purple-200 d-of-hidden d-bgr-none"

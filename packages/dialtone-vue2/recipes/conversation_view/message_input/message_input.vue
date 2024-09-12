@@ -67,8 +67,7 @@
           @blur="imagePickerFocus = false"
         >
           <template #icon>
-            <dt-icon
-              name="image"
+            <dt-icon-image
               size="300"
             />
           </template>
@@ -107,8 +106,12 @@
               @blur="emojiPickerFocus = false"
             >
               <template #icon>
-                <dt-icon
-                  :name="!emojiPickerHovered ? 'satisfied' : 'very-satisfied'"
+                <dt-icon-very-satisfied
+                  v-if="emojiPickerHovered"
+                  size="300"
+                />
+                <dt-icon-satisfied
+                  v-else
                   size="300"
                 />
               </template>
@@ -182,7 +185,7 @@
             :class="[
               {
                 'dt-message-input__send-button--disabled': isSendDisabled,
-                'd-btn--circle': showSend.icon,
+                'd-btn--circle': showSendIcon,
               },
             ]"
             :aria-label="showSend.ariaLabel"
@@ -190,13 +193,18 @@
             @click="onSend"
           >
             <template
-              v-if="showSend.icon"
+              v-if="showSendIcon"
               #icon
             >
-              <dt-icon
-                :name="showSend.icon"
-                size="300"
-              />
+              <!-- @slot Slot for send button icon -->
+              <slot
+                name="sendIcon"
+                :icon-size="sendIconSize"
+              >
+                <dt-icon-send
+                  :size="sendIconSize"
+                />
+              </slot>
             </template>
             <template
               v-if="showSend.text"
@@ -219,11 +227,11 @@ import {
 } from '@/components/rich_text_editor';
 import meetingPill from './meeting_pill/meeting_pill';
 import { DtButton } from '@/components/button';
-import { DtIcon } from '@/components/icon';
 import { DtEmojiPicker } from '@/components/emoji_picker';
 import { DtPopover } from '@/components/popover';
 import { DtInput } from '@/components/input';
 import { DtTooltip } from '@/components/tooltip';
+import { DtIconImage, DtIconVerySatisfied, DtIconSatisfied, DtIconSend } from '@dialpad/dialtone-icons/vue2';
 
 export default {
   name: 'DtRecipeMessageInput',
@@ -231,11 +239,14 @@ export default {
   components: {
     DtButton,
     DtEmojiPicker,
-    DtIcon,
     DtInput,
     DtPopover,
     DtRichTextEditor,
     DtTooltip,
+    DtIconImage,
+    DtIconVerySatisfied,
+    DtIconSatisfied,
+    DtIconSend,
   },
 
   mixins: [],
@@ -414,7 +425,7 @@ export default {
      */
     showSend: {
       type: [Boolean, Object],
-      default: () => ({ icon: 'send' }),
+      default: () => ({}),
     },
 
     /**
@@ -624,6 +635,10 @@ export default {
   },
 
   computed: {
+    showSendIcon () {
+      return !this.showSend.text;
+    },
+
     inputLength () {
       return this.internalInputValue.length;
     },
@@ -650,6 +665,10 @@ export default {
 
     emojiPickerHovered () {
       return this.emojiPickerFocus || this.emojiPickerOpened;
+    },
+
+    sendIconSize () {
+      return '300';
     },
   },
 

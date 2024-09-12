@@ -6,8 +6,16 @@
       </p>
       <dt-recipe-contact-info
         avatar-labelled-by="contact-number1"
-        :avatar-icon="avatarIcon"
       >
+        <template
+          #avatarIcon="{ iconSize }"
+        >
+          <dt-icon
+            v-if="$attrs.avatarIcon"
+            :name="$attrs.avatarIcon"
+            :size="iconSize"
+          />
+        </template>
         <template #header>
           <div class="d-d-flex d-ai-center d-mb2">
             <div
@@ -33,8 +41,16 @@
       </p>
       <dt-recipe-contact-info
         avatar-labelled-by="contact-number2"
-        :avatar-icon="avatarIcon"
       >
+        <template
+          #avatarIcon="{ iconSize }"
+        >
+          <dt-icon
+            v-if="$attrs.avatarIcon"
+            :name="$attrs.avatarIcon"
+            :size="iconSize"
+          />
+        </template>
         <template #header>
           <div class="d-d-flex d-ai-center d-mb2">
             <div
@@ -68,8 +84,16 @@
       >
         <dt-recipe-contact-info
           avatar-labelled-by="contact-name1"
-          :avatar-icon="avatarIcon"
         >
+          <template
+            #avatarIcon="{ iconSize }"
+          >
+            <dt-icon
+              v-if="$attrs.avatarIcon"
+              :name="$attrs.avatarIcon"
+              :size="iconSize"
+            />
+          </template>
           <template #header>
             <div class="d-d-flex d-ai-center d-mb2">
               <div
@@ -111,8 +135,16 @@
       </p>
       <dt-recipe-contact-info
         avatar-labelled-by="contact-name2"
-        :avatar-icon="avatarIcon"
       >
+        <template
+          #avatarIcon="{ iconSize }"
+        >
+          <dt-icon
+            v-if="$attrs.avatarIcon"
+            :name="$attrs.avatarIcon"
+            :size="iconSize"
+          />
+        </template>
         <template #header>
           <div class="d-d-flex d-ai-center d-mb2">
             <div
@@ -286,6 +318,36 @@
         </template>
       </dt-recipe-contact-info>
     </div>
+    <div class="d-m32">
+      <p class="d-my16 d-fs-200 d-fw-bold">
+        Group call with icon
+      </p>
+      <dt-recipe-contact-info
+        avatar-labelled-by="group-name"
+        :avatar-list="groupCallAvatars"
+      >
+        <template #header>
+          <div class="d-d-flex d-ai-center d-mb2">
+            <div
+              id="group-name"
+              class="d-fw-bold d-fs-200"
+            >
+              Group Call
+            </div>
+          </div>
+        </template>
+        <template #avatarIcon="{ iconSize }">
+          <dt-icon-user :size="iconSize" />
+        </template>
+        <template #subtitle>
+          <div class="d-d-flex d-ai-center">
+            <div class="d-fs-100 d-mr4">
+              Manage participants
+            </div>
+          </div>
+        </template>
+      </dt-recipe-contact-info>
+    </div>
   </div>
 </template>
 
@@ -302,7 +364,7 @@ import { DtIconHear, DtIconUser } from '@dialpad/dialtone-icons/vue3';
 
 export default {
   name: 'DtRecipeContactInfoVariants',
-  components: { DtButton, DtRecipeContactInfo, DtIcon, DtLink },
+  components: { DtButton, DtRecipeContactInfo, DtIcon, DtLink, DtIconUser },
 
   data () {
     return {

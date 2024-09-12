@@ -26,11 +26,26 @@
             :full-name="avatar.fullName"
             :image-src="avatar.src"
             image-alt=""
-            :icon-name="avatarIcon"
-            :overlay-icon="avatar.icon"
             :overlay-text="avatar.text"
             :avatar-class="[{ 'd-mln24': index > 0, 'd-bc-brand': !!avatar.halo }]"
-          />
+          >
+            <template
+              #icon="{ iconSize }"
+            >
+              <!-- @slot Slot for avatar icon in a list -->
+              <slot
+                v-if="hasAvatarIcon"
+                name="avatarIcon"
+                :icon-size="iconSize"
+              />
+            </template>
+            <template
+              v-if="avatar.icon"
+              #overlayIcon
+            >
+              <component :is="avatar.icon" />
+            </template>
+          </dt-avatar>
         </span>
         <dt-avatar
           v-else
@@ -38,11 +53,21 @@
           :full-name="avatarFullName"
           :image-src="avatarSrc"
           image-alt=""
-          :icon-name="avatarIcon"
           :seed="avatarSeed"
           :color="avatarColor"
           :presence="presence"
-        />
+        >
+          <template
+            #icon="{ iconSize }"
+          >
+            <!-- @slot Slot for avatar icon in a list -->
+            <slot
+              v-if="hasAvatarIcon"
+              name="avatarIcon"
+              :icon-size="iconSize"
+            />
+          </template>
+        </dt-avatar>
       </button>
     </template>
     <template #default>
@@ -142,14 +167,6 @@ export default {
     },
 
     /**
-     * Avatar icon to display if `avatarSrc` is empty.
-     */
-    avatarIcon: {
-      type: String,
-      default: null,
-    },
-
-    /**
      * The size of the avatar
      * @values xs, sm, md, lg, xl
      */
@@ -203,6 +220,12 @@ export default {
   },
 
   emits: ['avatar-click'],
+
+  computed: {
+    hasAvatarIcon () {
+      return this.$scopedSlots.avatarIcon && this.$scopedSlots.avatarIcon();
+    },
+  },
 
   methods: {
     avatarClick () {

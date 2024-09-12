@@ -7,7 +7,7 @@ description: Utilities for controlling an element's box shadows.
 
 Use `d-bs-{n}` to add an outer box shadow to an element.
 
-<code-well-header class="d-fl-col4 d-flg16 d-bgc-neutral-white d-fw-wrap d-p24 d-w100p d-hmn102" custom>
+<code-well-header class="d-fl-col4 d-g16 d-bgc-neutral-white d-fw-wrap d-p24 d-w100p d-hmn102" custom>
   <div v-for="className in boxShadowSizes" class="d-fl-center d-p16 d-bar8 d-bgc-secondary d-fs-200 d-fw-bold" :class="`d-bs-${className}`">.d-bs-{{ className }}</div>
 </code-well-header>
 

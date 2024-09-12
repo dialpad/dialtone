@@ -4,7 +4,6 @@
     :avatar-src="$attrs.avatarSrc"
     :avatar-full-name="$attrs.avatarFullName"
     :avatar-labelledby="$attrs.avatarLabelledby"
-    :avatar-icon="$attrs.avatarIcon"
     :avatar-size="$attrs.avatarSize"
     :avatar-seed="$attrs.avatarSeed"
     :avatar-color="$attrs.avatarColor"
@@ -16,6 +15,16 @@
       #header
     >
       <span v-html="$attrs.header" />
+    </template>
+
+    <template
+      #avatarIcon="{ iconSize }"
+    >
+      <dt-icon
+        v-if="$attrs.avatarIcon"
+        :name="$attrs.avatarIcon"
+        :size="iconSize"
+      />
     </template>
 
     <template
@@ -43,9 +52,10 @@
 
 <script>
 import DtRecipeContactInfo from './contact_info.vue';
+import { DtIcon } from '@/components/icon';
 
 export default {
   name: 'DtRecipeContactInfoDefault',
-  components: { DtRecipeContactInfo },
+  components: { DtRecipeContactInfo, DtIcon },
 };
 </script>

@@ -26,10 +26,16 @@
           :full-name="avatarFullName"
           :seed="avatarSeed"
           :clickable="clickable"
-          :overlay-icon="isOnHold ? 'pause' : null"
           size="sm"
           @click="handleClick"
-        />
+        >
+          <template
+            v-if="isOnHold"
+            #overlayIcon
+          >
+            <dt-icon-pause />
+          </template>
+        </dt-avatar>
         <div class="dt-recipe-callbox--content">
           <component
             :is="clickable ? 'button' : 'span'"
@@ -85,11 +91,12 @@
 import { CALLBOX_BADGE_COLORS, CALLBOX_BORDER_COLORS } from './callbox_constants';
 import DtAvatar from '@/components/avatar/avatar.vue';
 import DtBadge from '@/components/badge/badge.vue';
+import { DtIconPause } from '@dialpad/dialtone-icons/vue2';
 
 export default {
   name: 'DtRecipeCallbox',
 
-  components: { DtBadge, DtAvatar },
+  components: { DtBadge, DtAvatar, DtIconPause },
 
   inheritAttrs: false,
 
