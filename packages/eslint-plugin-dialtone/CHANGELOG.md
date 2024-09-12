@@ -1,3 +1,15 @@
+# [1.8.0-beta.1](https://github.com/dialpad/dialtone/compare/eslint-plugin-dialtone/v1.7.2...eslint-plugin-dialtone/v1.8.0-beta.1) (2024-09-12)
+
+
+### Bug Fixes
+
+* NO-JIRA merge staging into beta ([#478](https://github.com/dialpad/dialtone/issues/478)) ([09f1165](https://github.com/dialpad/dialtone/commit/09f1165f4d4cffc00708aa18cd1067d8b84810aa))
+
+
+### Features
+
+* **Utilities:** DLT-1763 add gap utility class ([#492](https://github.com/dialpad/dialtone/issues/492)) ([835d06f](https://github.com/dialpad/dialtone/commit/835d06fbeead4919dbe7683081b8b92d51031fc1))
+
 ## [1.7.2-beta.1](https://github.com/dialpad/dialtone/compare/eslint-plugin-dialtone/v1.7.1...eslint-plugin-dialtone/v1.7.2-beta.1) (2024-08-28)
 
 
