@@ -1,3 +1,10 @@
+# [8.44.0-beta.1](https://github.com/dialpad/dialtone/compare/dialtone-css/v8.43.0...dialtone-css/v8.44.0-beta.1) (2024-09-12)
+
+
+### Features
+
+* **Utilities:** DLT-1763 add gap utility class ([#492](https://github.com/dialpad/dialtone/issues/492)) ([835d06f](https://github.com/dialpad/dialtone/commit/835d06fbeead4919dbe7683081b8b92d51031fc1))
+
 # [8.43.0](https://github.com/dialpad/dialtone/compare/dialtone-css/v8.42.3...dialtone-css/v8.43.0) (2024-09-03)
 
 
