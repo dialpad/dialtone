@@ -315,6 +315,16 @@ export default {
       type: String,
       default: '',
     },
+
+    /**
+    * Amount of reserved space (in px) on the right side of the input
+    * before the chips and the input caret jump to the next line.
+    * default is 64
+    */
+    reservedRightSpace: {
+      type: Number,
+      default: 64,
+    },
   },
 
   emits: [
@@ -613,18 +623,25 @@ export default {
       // Get the position of the last chip
       // The input cursor should be the same "top" as that chip and next besides it
       const left = lastChip.offsetLeft + this.getFullWidth(lastChip);
-      input.style.paddingLeft = left + 'px';
+      const spaceLeft = input.getBoundingClientRect().width - left;
+      // input.style.paddingLeft = left + 'px';
 
-      // Get the chip size minus the 4px padding
-      const chipsSize = chipsWrapper.getBoundingClientRect().height - 4;
+      if (spaceLeft > this.reservedRightSpace) {
+        input.style.paddingLeft = left + 'px';
+      } else {
+        input.style.paddingLeft = '4px';
+      }
+
+      // Get the chip wrapper height minus the 4px padding
+      const chipsWrapperHeight = chipsWrapper.getBoundingClientRect().height - 4;
+      const lastChipHeight = lastChip.getBoundingClientRect().height - 4;
 
       // Get lastChip offsetTop plus 2px of the input padding.
-      const top = lastChip.offsetTop + 2;
+      const top = spaceLeft > this.reservedRightSpace
+        ? lastChip.offsetTop + 2
+        : (chipsWrapperHeight + lastChipHeight - 9);
 
-      // Add padding to Top only if the chips need more space
-      if (chipsSize > this.initialInputHeight) {
-        input.style.paddingTop = `${top}px`;
-      }
+      input.style.paddingTop = `${top}px`;
     },
 
     revertInputPadding (input) {
