@@ -1,0 +1,57 @@
+name: Deploy Preview
+
+on: pull_request
+
+env:
+  NODE_MODULES_CACHE_VERSION: v1
+
+jobs:
+  deploy:
+    concurrency:
+      group: ${{ github.workflow }}-${{ github.ref }}
+      cancel-in-progress: true
+      
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+      with:
+        ref: "refs/pull/${{ github.event.pull_request.number }}/merge"
+
+    - name: Setup Node.js environment
+      uses: actions/setup-node@v3.3.0
+      with:
+        node-version: '16.x'
+
+    - uses: actions/cache@v3
+      id: npm-cache
+      with:
+        path: |
+          **/node_modules/
+        key: ${{ format('{0}-cache-node-modules-{1}-{2}', runner.os, env.NODE_MODULES_CACHE_VERSION, hashFiles('**/package-lock.json')) }}
+
+    - name: Install dependencies
+      if: steps.npm-cache.outputs.cache-hit != 'true'
+      run: npm ci
+
+    - name: Build preview
+      run: npm run build:preview
+
+    - name: Deploy to GitHub Pages
+      uses: JamesIves/github-pages-deploy-action@v4.2.5
+      with:
+        branch: gh-pages
+        folder: dist/preview
+        target-folder: deploy-previews/pr-${{ github.event.pull_request.number }}
+
+    - name: Add message
+      uses: mshick/add-pr-comment@v1
+      env:
+        BUILD_URL: https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        message: |
+          ✔️ Deploy Preview ready!
+          😎 Browse the preview: https://dialpad.github.io/dialtone-combinator/deploy-previews/pr-${{ github.event.pull_request.number }}
+          🔨 If you experience an SSL issue then wait 2 minutes and try again.
+        allow-repeats: true
