@@ -1,3 +1,20 @@
+# [2.159.0](https://github.com/dialpad/dialtone/compare/dialtone-vue2/v2.158.2...dialtone-vue2/v2.159.0) (2024-09-13)
+
+
+### Bug Fixes
+
+* **Combobox Multiselect:** DLT-2015  add reservedRightSpace prop ([#496](https://github.com/dialpad/dialtone/issues/496)) ([7049a6f](https://github.com/dialpad/dialtone/commit/7049a6f77d5f556928b435225c0781cf74b7a242))
+
+
+### Documentation
+
+* NO-JIRA wrong dialtone-css import on local ([da5f7d6](https://github.com/dialpad/dialtone/commit/da5f7d6cd393bff8d93e5929836cec7f79f69c26))
+
+
+### Features
+
+* **Utilities:** DLT-1763 add gap utility class ([#492](https://github.com/dialpad/dialtone/issues/492)) ([835d06f](https://github.com/dialpad/dialtone/commit/835d06fbeead4919dbe7683081b8b92d51031fc1))
+
 ## [2.158.2](https://github.com/dialpad/dialtone/compare/dialtone-vue2/v2.158.1...dialtone-vue2/v2.158.2) (2024-09-11)
 
 
