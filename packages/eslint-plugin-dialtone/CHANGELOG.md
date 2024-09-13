@@ -1,3 +1,10 @@
+# [1.8.0](https://github.com/dialpad/dialtone/compare/eslint-plugin-dialtone/v1.7.2...eslint-plugin-dialtone/v1.8.0) (2024-09-13)
+
+
+### Features
+
+* **Utilities:** DLT-1763 add gap utility class ([#492](https://github.com/dialpad/dialtone/issues/492)) ([835d06f](https://github.com/dialpad/dialtone/commit/835d06fbeead4919dbe7683081b8b92d51031fc1))
+
 ## [1.7.2](https://github.com/dialpad/dialtone/compare/eslint-plugin-dialtone/v1.7.1...eslint-plugin-dialtone/v1.7.2) (2024-09-11)
 
 
