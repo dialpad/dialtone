@@ -320,13 +320,13 @@
         "voice"
       ],
       "dialpad-logomark": [],
-      "dp-phone": [
-        "call",
-        "dialpad"
-      ],
       "dialpad-sparkle": [
         "ai",
         "sparkle"
+      ],
+      "dp-phone": [
+        "call",
+        "dialpad"
       ],
       "waveform": [],
       "zoom-logo": [
