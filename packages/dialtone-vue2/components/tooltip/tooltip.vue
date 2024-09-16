@@ -502,19 +502,19 @@ export default {
 
     addExternalAnchorEventListeners () {
       ['focusin', 'mouseenter'].forEach(listener => {
-        this.anchor.addEventListener(listener, (event) => this.onEnterAnchor(event));
+        this.anchor?.addEventListener(listener, (event) => this.onEnterAnchor(event));
       });
       ['focusout', 'mouseleave', 'keydown'].forEach(listener => {
-        this.anchor.addEventListener(listener, (event) => this.onLeaveAnchor(event));
+        this.anchor?.addEventListener(listener, (event) => this.onLeaveAnchor(event));
       });
     },
 
     removeExternalAnchorEventListeners () {
       ['focusin', 'mouseenter'].forEach(listener => {
-        this.anchor.removeEventListener(listener, (event) => this.onEnterAnchor(event));
+        this.anchor?.removeEventListener(listener, (event) => this.onEnterAnchor(event));
       });
       ['focusout', 'mouseleave', 'keydown'].forEach(listener => {
-        this.anchor.removeEventListener(listener, (event) => this.onLeaveAnchor(event));
+        this.anchor?.removeEventListener(listener, (event) => this.onLeaveAnchor(event));
       });
     },
   },
