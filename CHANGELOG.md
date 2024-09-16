@@ -1,3 +1,15 @@
+## [9.74.1](https://github.com/dialpad/dialtone/compare/dialtone/v9.74.0...dialtone/v9.74.1) (2024-09-16)
+
+
+### Bug Fixes
+
+* **Tooltip:** DLT-2039 flush promises when external anchor ([#499](https://github.com/dialpad/dialtone/issues/499)) ([fa21401](https://github.com/dialpad/dialtone/commit/fa21401bbf12cbcc9ecdb4be4323f42a282dce70))
+
+
+### Reverts
+
+* Revert "fix(tooltip): DLT-2039 flush promises when external anchor (#499)" ([012a31f](https://github.com/dialpad/dialtone/commit/012a31f4d992e5640a48dc1b1911f68fde3f2689)), closes [#499](https://github.com/dialpad/dialtone/issues/499)
+
 # [9.74.0](https://github.com/dialpad/dialtone/compare/dialtone/v9.73.0...dialtone/v9.74.0) (2024-09-16)
 
 
