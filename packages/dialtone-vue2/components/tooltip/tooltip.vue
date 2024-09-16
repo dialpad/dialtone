@@ -51,7 +51,7 @@ import {
 import {
   POPOVER_APPEND_TO_VALUES,
 } from '../popover/popover_constants';
-import { getUniqueString } from '@/common/utils';
+import { flushPromises, getUniqueString } from '@/common/utils';
 import {
   createTippy,
   getAnchor,
@@ -351,12 +351,16 @@ export default {
     },
   },
 
-  mounted () {
+  async mounted () {
     if (!this.enabled && this.show != null) {
       console.warn('Tooltip: You cannot use both the enabled and show props at the same time.');
       console.warn('The show prop will be ignored.');
     }
-    this.externalAnchor && this.addExternalAnchorEventListeners();
+
+    if (this.externalAnchor) {
+      await flushPromises();
+      this.addExternalAnchorEventListeners();
+    }
     this.tip = createTippy(this.anchor, this.initOptions());
   },
 
