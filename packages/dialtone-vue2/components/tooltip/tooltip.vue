@@ -51,7 +51,7 @@ import {
 import {
   POPOVER_APPEND_TO_VALUES,
 } from '../popover/popover_constants';
-import { flushPromises, getUniqueString } from '@/common/utils';
+import { getUniqueString } from '@/common/utils';
 import {
   createTippy,
   getAnchor,
@@ -351,17 +351,13 @@ export default {
     },
   },
 
-  async mounted () {
+  mounted () {
     if (!this.enabled && this.show != null) {
       console.warn('Tooltip: You cannot use both the enabled and show props at the same time.');
       console.warn('The show prop will be ignored.');
     }
-
+    this.externalAnchor && this.addExternalAnchorEventListeners();
     this.tip = createTippy(this.anchor, this.initOptions());
-    if (this.externalAnchor) {
-      await flushPromises();
-      this.addExternalAnchorEventListeners();
-    }
   },
 
   beforeDestroy () {
@@ -502,19 +498,19 @@ export default {
 
     addExternalAnchorEventListeners () {
       ['focusin', 'mouseenter'].forEach(listener => {
-        this.anchor?.addEventListener(listener, (event) => this.onEnterAnchor(event));
+        this.anchor.addEventListener(listener, (event) => this.onEnterAnchor(event));
       });
       ['focusout', 'mouseleave', 'keydown'].forEach(listener => {
-        this.anchor?.addEventListener(listener, (event) => this.onLeaveAnchor(event));
+        this.anchor.addEventListener(listener, (event) => this.onLeaveAnchor(event));
       });
     },
 
     removeExternalAnchorEventListeners () {
       ['focusin', 'mouseenter'].forEach(listener => {
-        this.anchor?.removeEventListener(listener, (event) => this.onEnterAnchor(event));
+        this.anchor.removeEventListener(listener, (event) => this.onEnterAnchor(event));
       });
       ['focusout', 'mouseleave', 'keydown'].forEach(listener => {
-        this.anchor?.removeEventListener(listener, (event) => this.onLeaveAnchor(event));
+        this.anchor.removeEventListener(listener, (event) => this.onLeaveAnchor(event));
       });
     },
   },

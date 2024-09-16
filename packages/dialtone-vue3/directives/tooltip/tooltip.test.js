@@ -1,4 +1,4 @@
-import { flushPromises, mount } from '@vue/test-utils';
+import { mount } from '@vue/test-utils';
 import { DtTooltipDirective } from './tooltip.js';
 import { getUniqueString } from '@/common/utils';
 
@@ -72,7 +72,6 @@ describe('DtTooltipDirective Tests', () => {
     describe('when tooltip is open', () => {
       beforeEach(async () => {
         await updateWrapper();
-        await flushPromises();
         await anchor.trigger('mouseenter');
       });
 
