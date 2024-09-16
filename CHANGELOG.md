@@ -1,3 +1,15 @@
+# [9.74.0](https://github.com/dialpad/dialtone/compare/dialtone/v9.73.0...dialtone/v9.74.0) (2024-09-16)
+
+
+### Bug Fixes
+
+* **Tooltip:** DLT-2039 flush promises when external anchor ([#499](https://github.com/dialpad/dialtone/issues/499)) ([4966920](https://github.com/dialpad/dialtone/commit/4966920eb22e4faa706df1a6d7b31fd355eaee79))
+
+
+### Features
+
+* **Icon:** DLT-1991 add full color dialpad-sparkle ([#495](https://github.com/dialpad/dialtone/issues/495)) ([d20de6d](https://github.com/dialpad/dialtone/commit/d20de6d26f215e86caf197bb32a8586ac20a86ec))
+
 # [9.73.0](https://github.com/dialpad/dialtone/compare/dialtone/v9.72.3...dialtone/v9.73.0) (2024-09-13)
 
 
