@@ -1,3 +1,10 @@
+## [2.159.1](https://github.com/dialpad/dialtone/compare/dialtone-vue2/v2.159.0...dialtone-vue2/v2.159.1) (2024-09-16)
+
+
+### Bug Fixes
+
+* **Tooltip:** DLT-2039 flush promises when external anchor ([#499](https://github.com/dialpad/dialtone/issues/499)) ([4966920](https://github.com/dialpad/dialtone/commit/4966920eb22e4faa706df1a6d7b31fd355eaee79))
+
 # [2.159.0](https://github.com/dialpad/dialtone/compare/dialtone-vue2/v2.158.2...dialtone-vue2/v2.159.0) (2024-09-13)
 
 
