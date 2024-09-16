@@ -357,11 +357,11 @@ export default {
       console.warn('The show prop will be ignored.');
     }
 
+    this.tip = createTippy(this.anchor, this.initOptions());
     if (this.externalAnchor) {
       await flushPromises();
       this.addExternalAnchorEventListeners();
     }
-    this.tip = createTippy(this.anchor, this.initOptions());
   },
 
   beforeDestroy () {
