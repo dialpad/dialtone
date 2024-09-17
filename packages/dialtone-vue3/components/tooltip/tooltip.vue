@@ -367,7 +367,7 @@ export default {
   beforeUnmount () {
     this.externalAnchor && this.removeExternalAnchorEventListeners();
 
-    if (this.tip) {
+    if (this.anchor?._tippy) {
       this.tip?.destroy();
     }
   },
