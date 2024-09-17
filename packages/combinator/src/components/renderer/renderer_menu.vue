@@ -61,10 +61,9 @@
 </template>
 
 <script setup>
-import IconLeft from 'dialtone-icons/IconNotes';
-import IconCenter from 'dialtone-icons/IconMenu';
-import IconMenu from 'dialtone-icons/IconMenuVertical';
-import DtcButtonBar from '../tools/button_bar';
+import { DtIconArrowLeft } from '@dialpad/dialtone-icons/vue3'
+import { DtIconAlignCenter } from '@dialpad/dialtone-icons/vue3'
+import { DtIconMenu } from '@dialpad/dialtone-icons/vue3'
 import DtcButtonBar from '../tools/button_bar.vue';
 import { DtButton, DtPopover } from '@dialpad/dialtone-vue';
 import { SETTINGS_UPDATE_EVENT } from '@/src/lib/constants';
