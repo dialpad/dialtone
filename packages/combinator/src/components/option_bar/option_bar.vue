@@ -57,8 +57,8 @@
 </template>
 
 <script setup>
-import DtcOptionBarMemberGroup from './option_bar_member_group';
-import DtcSection from '../tools/section';
+import DtcOptionBarMemberGroup from './option_bar_member_group.vue';
+import DtcSection from '../tools/section.vue';
 
 import { OPTIONS_UPDATE_EVENT } from '@/src/lib/constants';
 import { getControlByMemberType, getControlByValue } from '@/src/lib/control';

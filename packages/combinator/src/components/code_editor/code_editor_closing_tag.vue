@@ -9,7 +9,7 @@
 </template>
 
 <script setup>
-import DtcCodeEditorTag from './code_editor_tag';
+import DtcCodeEditorTag from './code_editor_tag.vue';
 
 defineProps({
   name: {

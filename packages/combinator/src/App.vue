@@ -60,12 +60,12 @@
 <script setup>
 import documentation from '@/node_modules/@dialpad/dialtone-vue/dist/component-documentation.json';
 import * as modules from '@dialpad/dialtone-vue';
-import Combinator from './components/combinator';
+import Combinator from './components/combinator.vue';
 import { computed, markRaw, onMounted, ref } from 'vue';
 import { DIALTONE_PREFIX } from '@/src/lib/constants';
 import { DtBadge } from '@dialpad/dialtone-vue';
-import DtcButtonBar from '@/src/components/tools/button_bar';
-import DtcSuggestion from '@/src/components/controls/control_suggestion';
+import DtcButtonBar from '@/src/components/tools/button_bar.vue';
+import DtcSuggestion from '@/src/components/controls/control_suggestion.vue';
 import supportedComponentData from '@/src/supported_components.json';
 import variantBank from '@/src/variants/variants';
 import { getIcons } from '@/src/lib/utils';
@@ -139,7 +139,6 @@ onMounted(async () => {
 
 </script>
 
-<style lang="less" src="./assets/dialtone.less" />
 <style lang="less" src="./assets/transitions.less" />
 
 <style>

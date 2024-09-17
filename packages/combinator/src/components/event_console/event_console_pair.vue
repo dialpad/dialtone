@@ -14,12 +14,12 @@
 </template>
 
 <script setup>
-import DtcEventConsoleElement from './event_console_element';
-import DtcEventConsoleFunction from './event_console_function';
-import DtcEventConsoleArray from './event_console_array';
-import DtcEventConsoleObject from './event_console_object';
-import DtcEventConsoleString from './event_console_string';
-import DtcEventConsoleValue from './event_console_value';
+import DtcEventConsoleElement from './event_console_element.vue';
+import DtcEventConsoleFunction from './event_console_function.vue';
+import DtcEventConsoleArray from './event_console_array.vue';
+import DtcEventConsoleObject from './event_console_object.vue';
+import DtcEventConsoleString from './event_console_string.vue';
+import DtcEventConsoleValue from './event_console_value.vue';
 
 import { computed } from 'vue';
 

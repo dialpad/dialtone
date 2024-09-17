@@ -1,4 +1,4 @@
-import DtcControlBase from './control_base';
+import DtcControlBase from './control_base.vue';
 
 import { assert } from 'chai';
 import { mount } from '@vue/test-utils';

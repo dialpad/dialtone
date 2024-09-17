@@ -32,10 +32,10 @@
 </template>
 
 <script setup>
-import DtcCodeEditorElement from './code_editor_element';
-import DtcCodeEditorInput from './code_editor_input';
+import DtcCodeEditorElement from './code_editor_element.vue';
+import DtcCodeEditorInput from './code_editor_input.vue';
 import { DEFAULT_SLOT_NAME } from '@/src/lib/constants';
-import DtcCodeEditorIndent from '@/src/components/code_editor/code_editor_indent';
+import DtcCodeEditorIndent from '@/src/components/code_editor/code_editor_indent.vue';
 
 const props = defineProps({
   /**

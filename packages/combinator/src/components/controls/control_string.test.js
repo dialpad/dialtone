@@ -1,4 +1,4 @@
-import DtcControlString from './control_string';
+import DtcControlString from './control_string.vue';
 
 import { assert } from 'chai';
 import { mount } from '@vue/test-utils';

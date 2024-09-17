@@ -1,4 +1,4 @@
-import DtcControlObject from './control_object';
+import DtcControlObject from './control_object.vue';
 
 import { assert } from 'chai';
 import { mount } from '@vue/test-utils';

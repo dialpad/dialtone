@@ -65,6 +65,7 @@ import IconLeft from 'dialtone-icons/IconNotes';
 import IconCenter from 'dialtone-icons/IconMenu';
 import IconMenu from 'dialtone-icons/IconMenuVertical';
 import DtcButtonBar from '../tools/button_bar';
+import DtcButtonBar from '../tools/button_bar.vue';
 import { DtButton, DtPopover } from '@dialpad/dialtone-vue';
 import { SETTINGS_UPDATE_EVENT } from '@/src/lib/constants';
 import { ref } from 'vue';

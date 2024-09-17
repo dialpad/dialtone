@@ -75,6 +75,9 @@ import DtcCodeEditorTagAttributes from './code_editor_tag_attributes';
 import DtcCodeEditorElement from './code_editor_element';
 import DtcCodeEditorSlot from './code_editor_slot';
 import IconCopy from 'dialtone-icons/IconContentCopy';
+import DtcCodeEditorTagAttributes from './code_editor_tag_attributes.vue';
+import DtcCodeEditorElement from './code_editor_element.vue';
+import DtcCodeEditorSlot from './code_editor_slot.vue';
 import { DtButton, DtPopover } from '@dialpad/dialtone-vue';
 
 import { OPTIONS_UPDATE_EVENT, SETTINGS_INDENT_KEY } from '@/src/lib/constants';

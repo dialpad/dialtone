@@ -29,8 +29,8 @@
 </template>
 
 <script setup>
-import DtcControlIterable from './control_iterable';
-import DtcControlDynamic from './control_dynamic';
+import DtcControlIterable from './control_iterable.vue';
+import DtcControlDynamic from './control_dynamic.vue';
 import { VALUE_UPDATE_EVENT } from '@/src/lib/constants';
 import { serializeControlValue, deserializeControlValue } from '@/src/lib/control';
 

@@ -45,10 +45,10 @@
 <script setup>
 import { computed } from 'vue';
 import { SETTINGS_UPDATE_EVENT } from '@/src/lib/constants';
-import DtcRendererMenu from '@/src/components/renderer/renderer_menu';
-import DtcOverlay from '@/src/components/tools/overlay';
-import DtcRendererTarget from '@/src/components/renderer/renderer_target';
-import DtcNode from '@/src/components/tools/node';
+import DtcRendererMenu from '@/src/components/renderer/renderer_menu.vue';
+import DtcOverlay from '@/src/components/tools/overlay.vue';
+import DtcRendererTarget from '@/src/components/renderer/renderer_target.vue';
+import DtcNode from '@/src/components/tools/node.vue';
 
 const props = defineProps({
   /**
