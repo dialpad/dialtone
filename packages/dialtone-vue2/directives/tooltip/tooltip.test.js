@@ -1,6 +1,6 @@
 import { createLocalVue, mount } from '@vue/test-utils';
 import { DtTooltipDirective } from './tooltip.js';
-import { getUniqueString } from '@/common/utils';
+import { getUniqueString, flushPromises } from '@/common/utils';
 
 const MOCK_TOOLTIP_TEXT = 'Tooltip text content';
 const MOCK_ANCHOR_TEXT = 'Button placeholder';
@@ -71,6 +71,7 @@ describe('DtTooltipDirective Tests', () => {
     describe('when tooltip is open', () => {
       beforeEach(async () => {
         await updateWrapper();
+        await flushPromises();
         await anchor.trigger('mouseenter');
       });
 

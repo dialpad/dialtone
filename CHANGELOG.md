@@ -1,3 +1,51 @@
+## [9.74.2](https://github.com/dialpad/dialtone/compare/dialtone/v9.74.1...dialtone/v9.74.2) (2024-09-17)
+
+
+### Bug Fixes
+
+* **Tooltip:** NO-JIRA null protection on unmount ([7cc5748](https://github.com/dialpad/dialtone/commit/7cc57485eceb3f7fecce189665cc90c7c5b4d5fa))
+
+## [9.74.1](https://github.com/dialpad/dialtone/compare/dialtone/v9.74.0...dialtone/v9.74.1) (2024-09-16)
+
+
+### Bug Fixes
+
+* **Tooltip:** DLT-2039 flush promises when external anchor ([#499](https://github.com/dialpad/dialtone/issues/499)) ([fa21401](https://github.com/dialpad/dialtone/commit/fa21401bbf12cbcc9ecdb4be4323f42a282dce70))
+
+
+### Reverts
+
+* Revert "fix(tooltip): DLT-2039 flush promises when external anchor (#499)" ([012a31f](https://github.com/dialpad/dialtone/commit/012a31f4d992e5640a48dc1b1911f68fde3f2689)), closes [#499](https://github.com/dialpad/dialtone/issues/499)
+
+# [9.74.0](https://github.com/dialpad/dialtone/compare/dialtone/v9.73.0...dialtone/v9.74.0) (2024-09-16)
+
+
+### Bug Fixes
+
+* **Tooltip:** DLT-2039 flush promises when external anchor ([#499](https://github.com/dialpad/dialtone/issues/499)) ([4966920](https://github.com/dialpad/dialtone/commit/4966920eb22e4faa706df1a6d7b31fd355eaee79))
+
+
+### Features
+
+* **Icon:** DLT-1991 add full color dialpad-sparkle ([#495](https://github.com/dialpad/dialtone/issues/495)) ([d20de6d](https://github.com/dialpad/dialtone/commit/d20de6d26f215e86caf197bb32a8586ac20a86ec))
+
+# [9.73.0](https://github.com/dialpad/dialtone/compare/dialtone/v9.72.3...dialtone/v9.73.0) (2024-09-13)
+
+
+### Bug Fixes
+
+* **Combobox Multiselect:** DLT-2015  add reservedRightSpace prop ([#496](https://github.com/dialpad/dialtone/issues/496)) ([7049a6f](https://github.com/dialpad/dialtone/commit/7049a6f77d5f556928b435225c0781cf74b7a242))
+
+
+### Documentation
+
+* NO-JIRA wrong dialtone-css import on local ([da5f7d6](https://github.com/dialpad/dialtone/commit/da5f7d6cd393bff8d93e5929836cec7f79f69c26))
+
+
+### Features
+
+* **Utilities:** DLT-1763 add gap utility class ([#492](https://github.com/dialpad/dialtone/issues/492)) ([835d06f](https://github.com/dialpad/dialtone/commit/835d06fbeead4919dbe7683081b8b92d51031fc1))
+
 ## [9.72.3](https://github.com/dialpad/dialtone/compare/dialtone/v9.72.2...dialtone/v9.72.3) (2024-09-11)
 
 
