@@ -1,3 +1,10 @@
+## [3.152.3](https://github.com/dialpad/dialtone/compare/dialtone-vue3/v3.152.2...dialtone-vue3/v3.152.3) (2024-09-17)
+
+
+### Bug Fixes
+
+* **Tooltip:** NO-JIRA null protection on unmount ([7cc5748](https://github.com/dialpad/dialtone/commit/7cc57485eceb3f7fecce189665cc90c7c5b4d5fa))
+
 ## [3.152.2](https://github.com/dialpad/dialtone/compare/dialtone-vue3/v3.152.1...dialtone-vue3/v3.152.2) (2024-09-16)
 
 
