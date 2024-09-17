@@ -1,6 +1,6 @@
 <template>
   <div
-    class="dtc-preview d-d-flex d-fd-column d-ai-center d-py64 d-w100p"
+    class="dtc-preview d-d-flex d-fd-column d-ai-center d-w100p"
     :class="`d-bgc-${background}`"
   >
     <dtc-button-bar
@@ -18,7 +18,7 @@
         <div class="d-w16 d-h16 d-ba d-bc-black d-bgc-white" />
       </template>
     </dtc-button-bar>
-    <div class="d-mb64">
+    <div class="d-mb16">
       <dtc-suggestion
         :value="component.name"
         :suggestions="options"
@@ -68,7 +68,7 @@ import DtcButtonBar from '@/src/components/tools/button_bar.vue';
 import DtcSuggestion from '@/src/components/controls/control_suggestion.vue';
 import supportedComponentData from '@/src/supported_components.json';
 import variantBank from '@/src/variants/variants';
-//import { getIcons } from '@/src/lib/utils';
+// import { getIcons } from '@/src/lib/utils';
 
 const DEFAULT_COMPONENT = 'DtButton';
 
@@ -129,12 +129,12 @@ onMounted(async () => {
   });
 
   const promises = [];
-  //getIcons().forEach(icon => {
+  // getIcons().forEach(icon => {
   //  promises.push(import(`../node_modules/@dialpad/dialtone/lib/dist/vue/icons/${icon}.vue`).then(module => {
   //    return [icon, module.default];
   //  }));
-  //});
-  //icons.value = Object.fromEntries(await Promise.all(promises));
+  // });
+  // icons.value = Object.fromEntries(await Promise.all(promises));
 });
 
 </script>
