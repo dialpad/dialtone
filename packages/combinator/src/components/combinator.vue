@@ -29,7 +29,7 @@
     >
       May have unexpected behaviour.
     </dt-notice>
-    <div class="d-d-flex d-fl-grow1 d-hmn0">
+    <div class="d-d-flex d-fl-grow1 d-hmx464">
       <div
         class="dtc-root d-d-grid d-of-hidden d-ba d-bar4 d-w100p"
         :class="{
@@ -219,6 +219,8 @@ const info = computed(() => {
 
 /**
  * Gets the values for a given 'options' member group with the provided defaults.
+ *
+ * @param info
  */
 function getInitialValues (info) {
   const options = {};
@@ -258,6 +260,9 @@ const options = computedModel(
    * Catch errors when updating member values,
    * else vue can block the value from ever being changed,
    * keeping the value permanently in an invalid state
+   *
+   * @param e
+   * @param model
    */
   (e, model) => {
     try {
@@ -337,6 +342,10 @@ export default {
 
 .dtc-root {
   grid-template-rows: repeat(2, 1fr);
+}
+
+.dtc-root__sidebar {
+  grid-row: span 2 / span 2;
 }
 
 .dtc-root--blueprint {
