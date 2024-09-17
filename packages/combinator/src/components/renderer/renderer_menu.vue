@@ -19,8 +19,8 @@
         v-bind="attrs"
         @click="onOpen"
       >
-        <template #icon>
-          <icon-menu />
+        <template #icon="{ iconSize }">
+          <dt-icon-menu :size="iconSize" />
         </template>
       </dt-button>
     </template>
@@ -49,10 +49,10 @@
           @click="e => updateSettings('positioning', e)"
         >
           <template #native>
-            <icon-left />
+            <dt-icon-arrow-left />
           </template>
           <template #center>
-            <icon-center />
+            <dt-icon-align-center />
           </template>
         </dtc-button-bar>
       </div>

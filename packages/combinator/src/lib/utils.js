@@ -88,15 +88,15 @@ export function enumerateGroups (handler, groups) {
  *
  * @returns {Array} icon components.
  */
-export function getIcons () {
-  const requireContext = require.context(
-    '../../node_modules/@dialpad/dialtone/lib/dist/vue/icons',
-    false,
-    /[A-Z]\w+\.(vue|js)$/,
-  );
-
-  return getComponentFilesFromDir(requireContext).map(item => item.componentName);
-}
+// export function getIcons () {
+//  const requireContext = require.context(
+//    '../../node_modules/@dialpad/dialtone/lib/dist/vue/icons',
+//    false,
+//    /[A-Z]\w+\.(vue|js)$/,
+//  );
+//
+//  return getComponentFilesFromDir(requireContext).map(item => item.componentName);
+// }
 
 /**
  * Extracts filename and component name from all files in a directory.

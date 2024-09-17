@@ -13,7 +13,7 @@
         v-bind="attrs"
       >
         <template #icon>
-          <IconSettings />
+          <dt-icon-settings />
         </template>
       </dt-button>
     </template>
@@ -87,7 +87,7 @@
 </template>
 
 <script setup>
-import IconSettings from 'dialtone-icons/IconSettings';
+import { DtIconSettings } from '@dialpad/dialtone-icons/vue3'
 
 import {
   DtButton,

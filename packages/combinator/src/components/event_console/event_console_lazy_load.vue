@@ -8,8 +8,10 @@
         importance="clear"
         @click="toggle"
       >
-        <template #icon>
-          <IconExpand />
+        <template #icon="{ iconSize }">
+          <dt-icon-chevron-right
+            :size="iconSize"
+          />
         </template>
       </dt-button>
       <slot name="suffix" />
@@ -21,8 +23,10 @@
         importance="clear"
         @click="toggle"
       >
-        <template #icon>
-          <IconCollapse />
+        <template #icon="{ iconSize }">
+          <dt-icon-chevron-down
+            :size="iconSize"
+          />
         </template>
       </dt-button>
     </span>
@@ -33,10 +37,8 @@
 </template>
 
 <script setup>
-import IconExpand from 'dialtone-icons/IconMenuHorizontal';
-import IconCollapse from 'dialtone-icons/IconArrowAccordion';
-
 import { DtButton, DtLazyShow } from '@dialpad/dialtone-vue';
+import { DtIconChevronDown, DtIconChevronRight } from '@dialpad/dialtone-icons/vue3';
 
 import { ref } from 'vue';
 

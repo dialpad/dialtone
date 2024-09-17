@@ -33,7 +33,7 @@
               :disabled="disabled"
               @click="() => removeItem(index)"
             >
-              <IconRemove />
+              <dt-icon-close />
             </dt-button>
           </div>
         </div>
@@ -45,7 +45,7 @@
           :disabled="disabled"
           @click="addItem"
         >
-          <icon-add />
+          <dt-icon-plus />
         </dt-button>
       </div>
     </div>
@@ -56,8 +56,7 @@
 </template>
 
 <script setup>
-import IconAdd from 'dialtone-icons/IconAddCircleOutline';
-import IconRemove from 'dialtone-icons/IconRemove';
+import { DtIconPlus, DtIconClose } from '@dialpad/dialtone-icons/vue3'
 import { DtButton, DtListItem } from '@dialpad/dialtone-vue';
 import { DEFAULT_PREFIX, VALUE_UPDATE_EVENT } from '@/src/lib/constants';
 import { idMap } from '@/src/lib/utils_vue';

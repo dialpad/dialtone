@@ -12,7 +12,7 @@
         >
           {{ label }}
         </span>
-        <icon-lock
+        <dt-icon-lock
           v-if="locked"
           class="d-pr4 d-fs10 d-ps-relative d-t1"
         />
@@ -46,7 +46,7 @@
 </template>
 
 <script setup>
-import IconLock from 'dialtone-icons/IconLock';
+import { DtIconLock } from '@dialpad/dialtone-icons/vue3'
 import { DtBadge } from '@dialpad/dialtone-vue';
 import { VALUE_UPDATE_EVENT } from '@/src/lib/constants';
 import { computed } from 'vue';
