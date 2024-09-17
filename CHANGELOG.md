@@ -1,3 +1,10 @@
+## [9.74.2](https://github.com/dialpad/dialtone/compare/dialtone/v9.74.1...dialtone/v9.74.2) (2024-09-17)
+
+
+### Bug Fixes
+
+* **Tooltip:** NO-JIRA null protection on unmount ([7cc5748](https://github.com/dialpad/dialtone/commit/7cc57485eceb3f7fecce189665cc90c7c5b4d5fa))
+
 ## [9.74.1](https://github.com/dialpad/dialtone/compare/dialtone/v9.74.0...dialtone/v9.74.1) (2024-09-16)
 
 
