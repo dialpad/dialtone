@@ -18,7 +18,7 @@
     <dt-button
       class="d-fl-none"
       size="sm"
-      @click="isOpen = !isOpen"
+      @click="updateShow(true)"
     >
       Launch Example
     </dt-button>
@@ -31,6 +31,7 @@
     :size="size"
     :fixed-header-footer="fixedHeaderFooter"
     :show="isOpen"
+    class="d-m0"
     @update:show="updateShow"
   >
     <template
@@ -152,6 +153,9 @@ export default {
 
     updateShow (open) {
       this.isOpen = open;
+      if (!open) {
+        this.showModalBanner = false;
+      }
     },
   },
 };
