@@ -73,17 +73,18 @@ function boxShadows (shadowDeclarations, Declaration) {
           return `var(${shadowVar}${shadowNumber}-offset-x) var(${shadowVar}${shadowNumber}-offset-y) var(${shadowVar}${shadowNumber}-blur) var(${shadowVar}${shadowNumber}-spread) var(${shadowVar}${shadowNumber}-color)${isInset ? ' inset' : ''}`;
         }).join(', ');
 
-      shadowDeclarations.at(-1).after(new Declaration({ prop: shadowVar, value }));
+      shadowDeclarations.at(0).after(new Declaration({ prop: shadowVar, value }));
       newDocEntries[shadowVar] = formatCompositionTokenForDocs(shadowVar, value);
     });
 }
 
 /**
  * Wrap the value in a calc function if it is not already wrapped.
+ * Checks for multiplication and addition operators within the value.
  * @param { Declaration } declaration
  */
 function wrapInCalc (declaration) {
-  if (declaration.value.includes(' * ') && !declaration.value.startsWith('calc')) {
+  if ([' * ', ' + '].some(str => declaration.value.includes(str)) && !declaration.value.startsWith('calc')) {
     declaration.value = `calc(${declaration.value})`;
   }
 }
