@@ -1,3 +1,10 @@
+## [9.74.3](https://github.com/dialpad/dialtone/compare/dialtone/v9.74.2...dialtone/v9.74.3) (2024-09-18)
+
+
+### Bug Fixes
+
+* **Tokens:** DLT-2058 fix uncalced focus ring token ([#502](https://github.com/dialpad/dialtone/issues/502)) ([9733452](https://github.com/dialpad/dialtone/commit/9733452f935a524a88dfd3bfb0ee8844e0444113))
+
 ## [9.74.2](https://github.com/dialpad/dialtone/compare/dialtone/v9.74.1...dialtone/v9.74.2) (2024-09-17)
 
 
