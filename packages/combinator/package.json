@@ -1,9 +1,7 @@
 {
   "name": "@dialpad/dialtone-combinator",
   "version": "0.3.1",
-  "publishConfig": {
-    "access": "public"
-  },
+  "description": "Dialtone vue component combinator playground",
   "scripts": {
     "build": "vite build",
     "dev": "vite",
@@ -11,36 +9,52 @@
     "serve": "vite preview",
     "test": "vue-cli-service test:unit --timeout 100000 --colors --recursive --glob *.test.js src"
   },
-  "main": "./dist/lib/dialtone-combinator.umd.js",
+  "bugs": {
+    "email": "dialtone@dialpad.com"
+  },
+  "engineStrict": true,
+  "engines": {
+    "node": ">= 14.17"
+  },
+  "type": "module",
+  "module": "./dist/dialtone-combinator.js",
   "files": [
-    "./dist/lib/*.js"
+    "dist"
   ],
-  "devDependencies": {
+  "exports": {
+    ".": "./dist/dialtone-combinator.js",
+    "./css": "./dist/style.css",
+    "./*": "./dist/src/lib/*.js"
+  },
+  "dependencies": {
     "@dialpad/dialtone-vue": "workspace:^3",
     "@dialpad/dialtone-css": "workspace:*",
     "@dialpad/dialtone-icons": "workspace:*",
-    "@types/node": "^16.11.41",
-    "@typescript-eslint/eslint-plugin": "^5.30.0",
-    "@typescript-eslint/parser": "^7.0.1",
-    "@vitejs/plugin-vue": "^5.1.3",
-    "@vitejs/plugin-vue-jsx": "^1.3.10",
-    "@vue/cli-plugin-unit-mocha": "^5.0.8",
-    "@vue/test-utils": "^2.0.2",
-    "@vue/tsconfig": "^0.1.3",
-    "chai": "^4.3.6",
     "change-case": "^4.1.2",
-    "eslint": "^8.18.0",
-    "eslint-plugin-jsdoc": "^39.3.6",
-    "eslint-plugin-mocha": "^10.1.0",
     "js-beautify": "^1.14.4",
     "json5-with-undefined": "^2.1.301",
-    "just-clone": "^6.1.1",
-    "less": "^4.1.3",
-    "less-loader": "^11.0.0",
-    "npm-run-all": "^4.1.5",
-    "serve": "^13.0.4",
-    "vite": "^5.4.2",
-    "vue": "^3.3.4",
-    "vue-tsc": "^0.38.1"
-  }
+    "just-clone": "^6.1.1"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-vue": "^5.1.3",
+    "@vue/cli-plugin-unit-mocha": "^5.0.8",
+    "@vue/test-utils": "^2.0.2",
+    "chai": "^4.3.6",
+    "eslint-plugin-jsdoc": "^39.3.6",
+    "eslint-plugin-mocha": "^10.1.0",
+    "vite": "^5.4.2"
+  },
+  "peerDependencies": {
+    "vue": ">=3.2"
+  },
+  "keywords": [
+    "Dialpad",
+    "Dialtone",
+    "Dialtone Vue",
+    "Vue Components",
+    "Component Combinator",
+    "Vue"
+  ],
+  "license": "MIT",
+  "sideEffects": false
 }

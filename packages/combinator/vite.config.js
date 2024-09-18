@@ -3,6 +3,33 @@ import vue from '@vitejs/plugin-vue';
 import { fileURLToPath } from 'url';
 
 export default defineConfig({
+  build: {
+    sourcemap: true,
+    minify: false,
+    rollupOptions: {
+      external: [
+        /^@dialpad/,
+        'change-case',
+        'js-beautify',
+        'json5-with-undefined',
+        'just-clone',
+        'vue',
+      ],
+      output: {
+        preserveModules: true,
+        minifyInternalExports: false,
+        globals: {
+          vue: 'Vue',
+        },
+      },
+    },
+    lib: {
+      entry: {
+        'dialtone-combinator': './index.js',
+      },
+      formats: ['es'],
+    },
+  },
   plugins: [vue()],
   resolve: {
     alias: {
