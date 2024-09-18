@@ -146,7 +146,7 @@ showHtmlWarning />
 This is the default behavior that adds the scroll automatically in the modal content and leaves the header and footer fixed.
 
 <code-well-header>
-  <example-modal kind="fixed" />
+  <example-modal :fixed-header-footer="true" />
 </code-well-header>
 
 <code-example-tabs
@@ -316,7 +316,7 @@ showHtmlWarning />
 To make this modal take up as much of the screen as possible.
 
 <code-well-header>
-  <example-modal kind="full-screen" />
+  <example-modal size="full" />
 </code-well-header>
 
 <code-example-tabs
@@ -400,7 +400,7 @@ showHtmlWarning />
 When there is a need of more context information regarding the content of the Modal
 
 <code-well-header>
-  <example-modal kind="default" bannerKind="success" bannerTitle="This banner can have different kinds." />
+  <example-modal bannerKind="success" bannerTitle="This banner can have different kinds." />
 </code-well-header>
 
 <code-example-tabs

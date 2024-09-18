@@ -20,7 +20,7 @@ maximus ipsum ex. Curabitur elementum luctus augue, quis eleifend tortor feugiat
 Maecenas maximus, ipsum et laoreet congue, diam massa aliquam libero, at pellentesque \
 orci ipsum et velit.`,
   title: 'Example Title',
-  onClose: action('update:show'),
+  toggleOpen: action('update:show'),
   visuallyHiddenCloseLabel: 'Close Modal',
 };
 
@@ -102,7 +102,7 @@ a 2-way binding to control modal visibility.`,
       },
     },
   },
-  onClose: {
+  toggleOpen: {
     table: {
       disable: true,
     },
