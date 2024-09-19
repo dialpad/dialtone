@@ -1,3 +1,12 @@
+## [2.158.1-alpha.1](https://github.com/dialpad/dialtone/compare/dialtone-vue2/v2.158.0...dialtone-vue2/v2.158.1-alpha.1) (2024-09-19)
+
+
+### Bug Fixes
+
+* **Rich Text Editor:** DLT-2017 emojis positioning ([#486](https://github.com/dialpad/dialtone/issues/486)) ([b857386](https://github.com/dialpad/dialtone/commit/b857386ab32425a1ee3ec58287265bc3c511b39f))
+* **Tooltip:** DLT-2039 flush promises when external anchor ([#499](https://github.com/dialpad/dialtone/issues/499)) ([5c4bdb7](https://github.com/dialpad/dialtone/commit/5c4bdb7afc677af76a0974cfa23e15368e3fcc04))
+* **Tooltip:** NO-JIRA null protection on unmount ([307b619](https://github.com/dialpad/dialtone/commit/307b6197be1db249d01aea182c37e491b5141c22))
+
 # [2.158.0](https://github.com/dialpad/dialtone/compare/dialtone-vue2/v2.157.1...dialtone-vue2/v2.158.0) (2024-09-03)
 
 
