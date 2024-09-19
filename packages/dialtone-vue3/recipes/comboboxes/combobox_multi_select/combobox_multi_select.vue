@@ -454,6 +454,12 @@ export default {
       },
     },
 
+    chipMaxWidth: {
+      async handler () {
+        this.initSelectedItems();
+      },
+    },
+
     async label () {
       await this.$nextTick();
       // Adjust the chips position if label changed
@@ -761,7 +767,6 @@ export default {
 }
 
 .combobox__chip--truncate {
-  overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
 }
