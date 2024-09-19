@@ -1,3 +1,11 @@
+# [8.45.0](https://github.com/dialpad/dialtone/compare/dialtone-css/v8.44.0...dialtone-css/v8.45.0) (2024-09-19)
+
+
+### Features
+
+* **Modal:** DLT-1983 add custom scrollbar ([#497](https://github.com/dialpad/dialtone/issues/497)) ([c71a6c1](https://github.com/dialpad/dialtone/commit/c71a6c18ec7d6051fa81f6841a1aac260a8f9ab3))
+* **Modal:** DLT-1983 revert add custom scrollbar ([#497](https://github.com/dialpad/dialtone/issues/497)) ([ea622ec](https://github.com/dialpad/dialtone/commit/ea622ec7e87712cb49a2780465296b34af6a5316))
+
 # [8.44.0](https://github.com/dialpad/dialtone/compare/dialtone-css/v8.43.0...dialtone-css/v8.44.0) (2024-09-13)
 
 
