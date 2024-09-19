@@ -59,29 +59,27 @@
         >
           {{ title }}
         </h2>
-        <div v-dt-scrollbar>
-          <div
-            v-if="$slots.default"
-            :class="[
-              'd-modal__content',
-              contentClass,
-            ]"
-            data-qa="dt-modal-copy"
-          >
-            <!-- @slot Default slot for dialog body section, taking the place of any "copy" text prop -->
-            <slot />
-          </div>
-          <p
-            v-else
-            :class="[
-              'd-modal__content',
-              contentClass,
-            ]"
-            data-qa="dt-modal-copy"
-          >
-            {{ copy }}
-          </p>
+        <div
+          v-if="$slots.default"
+          :class="[
+            'd-modal__content',
+            contentClass,
+          ]"
+          data-qa="dt-modal-copy"
+        >
+          <!-- @slot Default slot for dialog body section, taking the place of any "copy" text prop -->
+          <slot />
         </div>
+        <p
+          v-else
+          :class="[
+            'd-modal__content',
+            contentClass,
+          ]"
+          data-qa="dt-modal-copy"
+        >
+          {{ copy }}
+        </p>
         <footer
           v-if="hasFooterSlot"
           class="d-modal__footer"

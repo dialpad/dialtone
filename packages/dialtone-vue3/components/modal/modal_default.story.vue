@@ -19,7 +19,7 @@
       :visually-hidden-close="$attrs.visuallyHiddenClose"
       :visually-hidden-close-label="$attrs.visuallyHiddenCloseLabel"
       :close-on-click="$attrs.closeOnClick"
-      @update:show="updateShow"
+      @update:show="close"
     >
       <template
         v-if="$attrs.banner"
@@ -119,9 +119,9 @@ export default {
   },
 
   methods: {
-    updateShow (open) {
-      this.isOpen = open;
-      this.$attrs.toggleOpen(open);
+    close (event) {
+      this.isOpen = !this.isOpen;
+      this.$attrs.onClose(event);
     },
   },
 

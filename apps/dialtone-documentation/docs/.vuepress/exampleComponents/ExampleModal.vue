@@ -15,86 +15,114 @@
         />
       </dt-select-menu>
     </div>
-    <dt-button
-      class="d-fl-none"
-      size="sm"
-      @click="updateShow(true)"
+    <button
+      class="d-btn d-btn--primary d-btn--sm d-fl-none"
+      type="button"
+      @click="openModal"
     >
       Launch Example
-    </dt-button>
+    </button>
   </div>
-  <dt-modal
-    :kind="kind"
-    :banner-kind="selectedBannerKind"
-    :banner-title="bannerTitle"
-    :close-button-props="{ ariaLabel: 'Close modal' }"
-    :size="size"
-    :fixed-header-footer="fixedHeaderFooter"
-    :show="isOpen"
-    class="d-m0"
-    @update:show="updateShow"
+  <aside
+    id="modal-base"
+    ref="modal"
+    class="d-modal d-m0"
+    :class="{
+      'd-modal--full': isFullScreen,
+      'd-modal--danger': isDanger,
+      'd-modal--animate-in': animateIn,
+      'd-modal--animate-out': animateOut,
+    }"
+    tabindex="-1"
+    role="dialog"
+    aria-labelledby="modal-title"
+    aria-describedby="modal-description"
+    :aria-hidden="!showModal"
+    @click.self="closeModal"
+    @keydown.tab="trapFocus"
+    @keydown.esc="closeModal"
   >
-    <template
+    <div
       v-if="shouldShowModalBanner"
-      #banner
+      :class="[
+        'd-modal__banner',
+        bannerKindClass,
+      ]"
     >
       {{ bannerTitle || "This example banner sits at the top of the modal." }}
-    </template>
-    <template #header>
-      Example Modal
-    </template>
-    <p id="modal-description">
-      {{ modalDescription }}
-      <template v-if="fixedHeaderFooter">
-        {{ modalDescription.repeat(3) }}
-      </template>
-    </p>
-    <p v-if="!hasBannerTitle" class="d-mt16">
-      <a
-        href="#"
-        class="d-link"
-        @click.prevent="openModalBanner"
-      >Show me a modal banner</a>
-    </p>
-    <template
-      #footer
+    </div>
+    <div
+      class="d-modal__dialog"
+      :class="{
+        'd-modal__dialog--animate-in': animateIn,
+        'd-modal__dialog--animate-out': animateOut,
+        'd-modal__dialog--scrollable d-hmx764': isFixed,
+      }"
+      role="document"
     >
-      <dt-button
-        :kind="secondaryButtonKind"
-        importance="clear"
-        @click="isOpen = false"
+      <h2 class="d-modal__header">
+        Example title
+      </h2>
+      <div class="d-modal__content">
+        <p id="modal-description">
+          {{ modalDescription }}
+          <template v-if="isFixed">
+            {{ modalDescription.repeat(3) }}
+          </template>
+        </p>
+        <p v-if="!hasBannerTitle" class="d-mt16">
+          <a
+            href="#"
+            class="d-link"
+            @click.prevent="openModalBanner"
+          >Show me a modal banner</a>
+        </p>
+      </div>
+      <footer class="d-modal__footer">
+        <button
+          class="d-btn d-btn--primary"
+          :class="{ 'd-btn--danger': isDanger }"
+          type="button"
+        >
+          Save
+        </button>
+        <button
+          class="d-btn"
+          :class="{ 'd-btn--muted': isDanger }"
+          type="button"
+          @click="closeModal"
+        >
+          Cancel
+        </button>
+      </footer>
+      <button
+        class="d-modal__close d-btn d-btn--circle d-btn--lg"
+        aria-label="Close"
+        @click="closeModal"
       >
-        Cancel
-      </dt-button>
-      <dt-button
-        :kind="kind"
-        importance="primary"
-        class="d-ml6"
-      >
-        Confirm
-      </dt-button>
-    </template>
-  </dt-modal>
+        <span class="d-btn__icon">
+          <dt-icon
+            name="close"
+            size="300"
+          />
+        </span>
+      </button>
+    </div>
+  </aside>
 </template>
 
 <script>
+import Modal from '@mixins/modal.js';
+
 export default {
   name: 'ExampleModal',
 
+  mixins: [Modal],
+
   props: {
     kind: {
-      type: String, // default | danger
-      default: 'default',
-    },
-
-    size: {
-      type: String, // default | full
-      default: 'default',
-    },
-
-    fixedHeaderFooter: {
-      type: Boolean,
-      default: false,
+      type: String,
+      default: 'base',
     },
 
     bannerKind: {
@@ -110,7 +138,6 @@ export default {
 
   data () {
     return {
-      isOpen: false,
       selectedBannerKind: this.bannerKind,
       showModal: false,
       showModalBanner: false,
@@ -125,8 +152,20 @@ export default {
   },
 
   computed: {
-    secondaryButtonKind () {
-      return this.kind === 'danger' ? 'muted' : 'default';
+    isFullScreen () {
+      return this.kind === 'full-screen';
+    },
+
+    isDanger () {
+      return this.kind === 'danger';
+    },
+
+    isFixed () {
+      return this.kind === 'fixed';
+    },
+
+    bannerKindClass () {
+      return window.DIALTONE_CONSTANTS.MODAL_BANNER_KINDS[this.selectedBannerKind];
     },
 
     hasBannerTitle () {
@@ -143,19 +182,38 @@ export default {
   },
 
   methods: {
+    openModal () {
+      this.animateOut = false;
+      this.animateIn = true;
+
+      this.showModal = true;
+
+      document.body.classList.add('d-of-hidden');
+      this.focusFirstElement(this.$refs.modal);
+    },
+
     openModalBanner () {
       this.showModalBanner = true;
     },
 
-    changeBannerKind (kind) {
-      this.selectedBannerKind = kind;
+    closeModal () {
+      this.animateIn = false;
+      this.animateOut = true;
+
+      this.showModal = false;
+      this.showModalBanner = false;
+
+      document.body.classList.remove('d-of-hidden');
     },
 
-    updateShow (open) {
-      this.isOpen = open;
-      if (!open) {
-        this.showModalBanner = false;
+    trapFocus (e) {
+      if (this.showModal) {
+        this.focusTrappedTabPress(e, this.$refs.modal);
       }
+    },
+
+    changeBannerKind (kind) {
+      this.selectedBannerKind = kind;
     },
   },
 };
