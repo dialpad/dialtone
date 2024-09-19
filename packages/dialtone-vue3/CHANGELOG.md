@@ -1,3 +1,11 @@
+# [3.153.0](https://github.com/dialpad/dialtone/compare/dialtone-vue3/v3.152.3...dialtone-vue3/v3.153.0) (2024-09-19)
+
+
+### Features
+
+* **Modal:** DLT-1983 add custom scrollbar ([#497](https://github.com/dialpad/dialtone/issues/497)) ([c71a6c1](https://github.com/dialpad/dialtone/commit/c71a6c18ec7d6051fa81f6841a1aac260a8f9ab3))
+* **Modal:** DLT-1983 revert add custom scrollbar ([#497](https://github.com/dialpad/dialtone/issues/497)) ([ea622ec](https://github.com/dialpad/dialtone/commit/ea622ec7e87712cb49a2780465296b34af6a5316))
+
 ## [3.152.3](https://github.com/dialpad/dialtone/compare/dialtone-vue3/v3.152.2...dialtone-vue3/v3.152.3) (2024-09-17)
 
 
