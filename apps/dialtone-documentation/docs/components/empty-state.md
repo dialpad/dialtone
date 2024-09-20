@@ -566,29 +566,27 @@ showHtmlWarning />
 
 #### Title
 
-* Should be scannable and informative.
-* Short and concise.
+- Should be scannable and informative.
+- Short and concise.
 
 #### Description
 
-* Short and to the point.
-* Avoid repeating the title's message, favoring complementary and useful information.
-* Inline text links (i.e. `<a class="d-link">...</a>`) may be appropriate given its use case, though first consider if it should be an action button.
+- Short and to the point.
+- Avoid repeating the title's message, favoring complementary and useful information.
+- Inline text links (i.e. `<a class="d-link">...</a>`) may be appropriate given its use case, though first consider if it should be an action button.
 
 #### Actions
 
-* Follow existing writing guidelines for Dialtone's Button commponent.
-* Connect its labels to the paired Title and Description.
-
+- Follow existing writing guidelines for Dialtone's Button commponent.
+- Connect its labels to the paired Title and Description.
 
 ### Scenarios
-
 
 #### Zero state
 
 Encourage and guide the user through product engagement.
 
-```
+```text
 Title: No Ai recaps yet
 Description: Enable Ai for calls and meetings and check back here!
 Action: [Show me how]
@@ -598,7 +596,7 @@ Action: [Show me how]
 
 Consider the user’s intent and provide guidance to resolve in a useful result.
 
-```
+```text
 Title: No matching results
 Description: Try adjusting your search criteria or filters.
 ```
@@ -607,7 +605,7 @@ Description: Try adjusting your search criteria or filters.
 
 Call out interesting new features or services, and entice the user to explore them.
 
-```
+```text
 Title: Discover Ai recaps
 Description: Enable Ai for calls and meetings to view and share a recap.
 Action: [Tell me more]
@@ -617,7 +615,7 @@ Action: [Tell me more]
 
 Be direct in communicating the unavailability of a feature or service, and provide quick actions.
 
-```
+```text
 Title: Restricted access
 Description: Permission required. You can request access from the owner.
 Action: [Cancel] [Request access]
@@ -625,7 +623,7 @@ Action: [Cancel] [Request access]
 
 ## Vue API
 
-<component-vue-api component-name="empty-state" />
+<component-vue-api component-name="empty_state" />
 
 ## Classes
 
