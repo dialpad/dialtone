@@ -167,7 +167,7 @@ export async function run () {
             'dt/android/compose/opacity/percentToFloat',
             'dt/android/compose/size/pxToDp',
             'dt/android/compose/size/pxToSp',
-            'color/composeColor',
+            'dt/android/compose/color',
             'dt/stringify',
             'attribute/cti',
             'name/camel',
