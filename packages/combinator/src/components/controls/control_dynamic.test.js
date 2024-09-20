@@ -1,6 +1,6 @@
-import DtcControlDynamic from './control_dynamic';
-import DtcControlNumber from '@/src/components/controls/control_number';
-import DtcControlString from '@/src/components/controls/control_string';
+import DtcControlDynamic from './control_dynamic.vue';
+import DtcControlNumber from '@/src/components/controls/control_number.vue';
+import DtcControlString from '@/src/components/controls/control_string.vue';
 
 import { assert } from 'chai';
 import { mount } from '@vue/test-utils';

@@ -1,4 +1,4 @@
-import DtcOptionBarControl from './option_bar_control';
+import DtcOptionBarControl from './option_bar_control.vue';
 
 import { assert } from 'chai';
 import { mount } from '@vue/test-utils';

@@ -11,9 +11,11 @@
           {{ heading }}
         </h2>
       </template>
-      <template #right>
-        <icon-collapse v-if="show" />
-        <icon-expand v-else />
+      <template #right="{ iconSize }">
+        <component
+          :is="show ? DtIconChevronDown : DtIconChevronRight"
+          :size="iconSize"
+        />
       </template>
     </dt-list-item>
     <div
@@ -26,9 +28,8 @@
 </template>
 
 <script setup>
-import IconExpand from 'dialtone-icons/IconArrowKeyboardDown';
-import IconCollapse from 'dialtone-icons/IconArrowKeyboardUp';
 import { DtListItem } from '@dialpad/dialtone-vue';
+import { DtIconChevronDown, DtIconChevronRight } from '@dialpad/dialtone-icons/vue3';
 
 import { ref } from 'vue';
 

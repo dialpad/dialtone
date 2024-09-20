@@ -1,4 +1,4 @@
-import DtcControlEvent from './control_event';
+import DtcControlEvent from './control_event.vue';
 
 import { assert } from 'chai';
 import { mount } from '@vue/test-utils';

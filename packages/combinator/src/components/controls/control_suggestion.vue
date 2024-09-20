@@ -18,9 +18,11 @@
           <template #default>
             <slot />
           </template>
-          <template #icon>
-            <icon-collapse v-if="open" />
-            <icon-expand v-else />
+          <template #icon="{ iconSize }">
+            <component
+              :is="open ? DtIconChevronDown : DtIconChevronRight"
+              :size="iconSize"
+            />
           </template>
         </dtc-control-string>
       </template>
@@ -50,13 +52,12 @@
 </template>
 
 <script setup>
-import DtcControlString from './control_string';
-import IconExpand from 'dialtone-icons/IconArrowKeyboardDown';
-import IconCollapse from 'dialtone-icons/IconArrowKeyboardUp';
+import DtcControlString from './control_string.vue';
 import { DtRecipeComboboxWithPopover, DtListItem } from '@dialpad/dialtone-vue';
 
 import { VALUE_UPDATE_EVENT } from '@/src/lib/constants';
 import { computed, ref } from 'vue';
+import { DtIconChevronDown, DtIconChevronRight } from '@dialpad/dialtone-icons/vue3';
 
 const WARNING_MESSAGE = 'Unexpected value';
 

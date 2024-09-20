@@ -29,7 +29,7 @@
     >
       May have unexpected behaviour.
     </dt-notice>
-    <div class="d-d-flex d-fl-grow1 d-hmn0">
+    <div class="d-d-flex d-fl-grow1 d-hmx464">
       <div
         class="dtc-root d-d-grid d-of-hidden d-ba d-bar4 d-w100p"
         :class="{
@@ -79,11 +79,11 @@
 </template>
 
 <script setup>
-import DtcOptionBar from './option_bar/option_bar';
-import DtcRenderer from './renderer/renderer';
-import DtcCodePanel from './code_panel/code_panel';
-import DtcSettingsMenu from './settings_menu/settings_menu';
-import DtcHeader from '@/src/components/header/header';
+import DtcOptionBar from './option_bar/option_bar.vue';
+import DtcRenderer from './renderer/renderer.vue';
+import DtcCodePanel from './code_panel/code_panel.vue';
+import DtcSettingsMenu from './settings_menu/settings_menu.vue';
+import DtcHeader from '@/src/components/header/header.vue';
 import { DtNotice } from '@dialpad/dialtone-vue';
 
 import { enumerateGroups } from '@/src/lib/utils';
@@ -219,6 +219,8 @@ const info = computed(() => {
 
 /**
  * Gets the values for a given 'options' member group with the provided defaults.
+ *
+ * @param info
  */
 function getInitialValues (info) {
   const options = {};
@@ -258,6 +260,9 @@ const options = computedModel(
    * Catch errors when updating member values,
    * else vue can block the value from ever being changed,
    * keeping the value permanently in an invalid state
+   *
+   * @param e
+   * @param model
    */
   (e, model) => {
     try {
@@ -339,6 +344,10 @@ export default {
   grid-template-rows: repeat(2, 1fr);
 }
 
+.dtc-root__sidebar {
+  grid-row: span 2 / span 2;
+}
+
 .dtc-root--blueprint {
   grid-template-columns: 1fr !important;
 
@@ -359,8 +368,7 @@ export default {
   }
 
   .dtc-root__sidebar {
-    grid-row: span 2 / span 2;
-    border-left: var(--su1) solid currentColor;
+    border-left: var(--dt-space-100) solid currentColor;
   }
 }
 
@@ -379,8 +387,7 @@ export default {
 
   .dtc-root__sidebar {
     grid-column-start: 1;
-    grid-row: span 2 / span 2;
-    border-right: var(--su1) solid currentColor;
+    border-right: var(--dt-space-100) solid currentColor;
   }
 }
 

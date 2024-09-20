@@ -35,7 +35,7 @@
 </template>
 
 <script setup>
-import DtcCodeEditorIndent from './code_editor_indent';
+import DtcCodeEditorIndent from './code_editor_indent.vue';
 
 import { computed } from 'vue';
 import { stringifyDocValue } from '@/src/lib/parse';

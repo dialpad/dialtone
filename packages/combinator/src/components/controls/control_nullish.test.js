@@ -1,4 +1,4 @@
-import DtcControlNullish from './control_nullish';
+import DtcControlNullish from './control_nullish.vue';
 
 import { assert } from 'chai';
 import { mount } from '@vue/test-utils';

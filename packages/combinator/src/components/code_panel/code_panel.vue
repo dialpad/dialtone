@@ -39,10 +39,10 @@
 </template>
 
 <script setup>
-import DtcTabPanel from '@/src/components/tools/tab_panel';
-import DtcEventConsole from '@/src/components/event_console/event_console';
-import DtcCodeEditor from '@/src/components/code_editor/code_editor';
-import DtcOverlay from '@/src/components/tools/overlay';
+import DtcTabPanel from '@/src/components/tools/tab_panel.vue';
+import DtcEventConsole from '@/src/components/event_console/event_console.vue';
+import DtcCodeEditor from '@/src/components/code_editor/code_editor.vue';
+import DtcOverlay from '@/src/components/tools/overlay.vue';
 
 import { OPTIONS_UPDATE_EVENT } from '@/src/lib/constants';
 import { ref } from 'vue';

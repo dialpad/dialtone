@@ -1,4 +1,4 @@
-import DtcControlSlot from './control_slot';
+import DtcControlSlot from './control_slot.vue';
 
 import { assert } from 'chai';
 import { mount } from '@vue/test-utils';

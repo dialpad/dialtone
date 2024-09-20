@@ -25,8 +25,8 @@
 <script setup>
 import { flatten } from '@/src/lib/utils';
 import { computed } from 'vue';
-import DtcEventConsolePair from '@/src/components/event_console/event_console_pair';
-import DtcEventConsoleLazyLoad from '@/src/components/event_console/event_console_lazy_load';
+import DtcEventConsolePair from '@/src/components/event_console/event_console_pair.vue';
+import DtcEventConsoleLazyLoad from '@/src/components/event_console/event_console_lazy_load.vue';
 
 const props = defineProps({
   value: {

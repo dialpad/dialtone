@@ -1,4 +1,4 @@
-import DtcEventConsole from './event_console';
+import DtcEventConsole from './event_console.vue';
 
 import { assert } from 'chai';
 import { mount } from '@vue/test-utils';

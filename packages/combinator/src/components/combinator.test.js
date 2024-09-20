@@ -1,4 +1,4 @@
-import DtcCombinator from './combinator';
+import DtcCombinator from './combinator.vue';
 
 import { assert } from 'chai';
 import { shallowMount } from '@vue/test-utils';

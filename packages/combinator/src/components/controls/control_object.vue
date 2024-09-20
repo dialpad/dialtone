@@ -45,9 +45,9 @@
 </template>
 
 <script setup>
-import DtcControlString from './control_string';
-import DtcControlIterable from './control_iterable';
-import DtcControlDynamic from './control_dynamic';
+import DtcControlString from './control_string.vue';
+import DtcControlIterable from './control_iterable.vue';
+import DtcControlDynamic from './control_dynamic.vue';
 import { VALUE_UPDATE_EVENT } from '@/src/lib/constants';
 import { computed } from 'vue';
 import { serializeControlValue, deserializeControlValue } from '@/src/lib/control';

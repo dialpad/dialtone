@@ -9,7 +9,7 @@
 </template>
 
 <script setup>
-import DtcControlString from './control_string';
+import DtcControlString from './control_string.vue';
 import { VALUE_UPDATE_EVENT } from '@/src/lib/constants';
 
 defineProps({

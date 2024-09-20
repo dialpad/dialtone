@@ -26,7 +26,7 @@
 </template>
 
 <script setup>
-import DtcControlSelection from './control_selection';
+import DtcControlSelection from './control_selection.vue';
 
 import { controlMap, getControlByValue, UNSET } from '@/src/lib/control';
 import { VALUE_UPDATE_EVENT } from '@/src/lib/constants';
