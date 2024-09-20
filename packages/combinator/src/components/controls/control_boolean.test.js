@@ -1,4 +1,4 @@
-import DtcControlBoolean from './control_boolean';
+import DtcControlBoolean from './control_boolean.vue';
 
 import { assert } from 'chai';
 import { mount } from '@vue/test-utils';

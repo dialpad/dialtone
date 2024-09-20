@@ -1,4 +1,4 @@
-import DtcControlIterable from './control_iterable';
+import DtcControlIterable from './control_iterable.vue';
 
 import { assert } from 'chai';
 import { mount } from '@vue/test-utils';

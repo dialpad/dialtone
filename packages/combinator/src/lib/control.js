@@ -2,17 +2,17 @@
  * See /.github/documentation/internal/CONTROLS.MD
  * For in-depth information about controls.
  */
-import DtcControlEvent from '@/src/components/controls/control_event';
-import DtcControlSlot from '@/src/components/controls/control_slot';
-import DtcControlDynamic from '@/src/components/controls/control_dynamic';
-import DtcControlObject from '@/src/components/controls/control_object';
-import DtcControlArray from '@/src/components/controls/control_array';
-import DtcControlBoolean from '@/src/components/controls/control_boolean';
-import DtcControlNumber from '@/src/components/controls/control_number';
-import DtcControlSelection from '@/src/components/controls/control_selection';
-import DtcControlString from '@/src/components/controls/control_string';
-import DtcControlNullish from '@/src/components/controls/control_nullish';
-import DtcControlBase from '@/src/components/controls/control_base';
+import DtcControlEvent from '@/src/components/controls/control_event.vue';
+import DtcControlSlot from '@/src/components/controls/control_slot.vue';
+import DtcControlDynamic from '@/src/components/controls/control_dynamic.vue';
+import DtcControlObject from '@/src/components/controls/control_object.vue';
+import DtcControlArray from '@/src/components/controls/control_array.vue';
+import DtcControlBoolean from '@/src/components/controls/control_boolean.vue';
+import DtcControlNumber from '@/src/components/controls/control_number.vue';
+import DtcControlSelection from '@/src/components/controls/control_selection.vue';
+import DtcControlString from '@/src/components/controls/control_string.vue';
+import DtcControlNullish from '@/src/components/controls/control_nullish.vue';
+import DtcControlBase from '@/src/components/controls/control_base.vue';
 
 import { typeOfMemberValue } from '@/src/lib/utils';
 

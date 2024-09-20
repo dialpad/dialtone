@@ -1,4 +1,4 @@
-import DtcControlSelection from './control_selection';
+import DtcControlSelection from './control_selection.vue';
 
 import { assert } from 'chai';
 import { mount } from '@vue/test-utils';

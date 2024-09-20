@@ -1,4 +1,4 @@
-import DtcOptionBarMemberGroup from './option_bar_member_group';
+import DtcOptionBarMemberGroup from './option_bar_member_group.vue';
 
 import { assert } from 'chai';
 import { mount } from '@vue/test-utils';

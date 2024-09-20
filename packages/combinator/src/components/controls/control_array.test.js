@@ -1,4 +1,4 @@
-import DtcControlArray from './control_array';
+import DtcControlArray from './control_array.vue';
 
 import { assert } from 'chai';
 import { mount } from '@vue/test-utils';

@@ -1,4 +1,4 @@
-import DtcControlNumber from './control_number';
+import DtcControlNumber from './control_number.vue';
 
 import { assert } from 'chai';
 import { mount } from '@vue/test-utils';

@@ -23,8 +23,8 @@
 </template>
 
 <script setup>
-import DtcEventConsolePair from '@/src/components/event_console/event_console_pair';
-import DtcEventConsoleLazyLoad from '@/src/components/event_console/event_console_lazy_load';
+import DtcEventConsolePair from '@/src/components/event_console/event_console_pair.vue';
+import DtcEventConsoleLazyLoad from '@/src/components/event_console/event_console_lazy_load.vue';
 
 defineProps({
   value: {
