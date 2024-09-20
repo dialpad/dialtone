@@ -1,0 +1,19 @@
+{
+  "classes": [
+    {
+      "class": "d-filter-pill",
+      "applies": "N/A",
+      "description": "Base filter pill style."
+    },
+    {
+      "class": "d-filter-pill__wrapper",
+      "applies": "N/A",
+      "description": "Applies relative positioning."
+    },
+    {
+      "class": "d-filter-pill__icon",
+      "applies": "N/A",
+      "description": "Applies the icon color."
+    }
+  ]
+}

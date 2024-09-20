@@ -36,6 +36,8 @@ export * from './components/emoji';
 export * from './components/emoji_picker';
 export * from './components/emoji_text_wrapper';
 export * from './components/empty_state';
+// @TODO: Comment before merging to exclude filter_pill export as it's not RFP.
+export * from './components/filter_pill';
 export * from './components/hovercard';
 export * from './components/icon';
 export * from './components/illustration';

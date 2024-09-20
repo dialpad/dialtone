@@ -1,0 +1,53 @@
+//
+//  DIALTONE
+//  COMPONENTS: FILTER PILL
+//
+//  These are the styles for filter-pill component.
+//
+//
+//  TABLE OF CONTENTS
+//  • BASE STYLE
+
+//  @@  BASE STYLE
+//  ----------------------------------------------------------------------------
+.d-filter-pill {
+  &__wrapper {
+    position: relative;
+    display: inline-block;
+
+    &:has(.d-filter-pill__reset) .d-filter-pill__icon {
+      visibility: hidden;
+    }
+
+    &:hover .d-filter-pill--active,
+    &:focus-visible .d-filter-pill--active {
+      background-color: var(--dt-action-color-background-base-active);
+    }
+  }
+
+  &__icon {
+    color: var(--dt-color-foreground-muted);
+  }
+
+  &__reset {
+    position: absolute;
+    top: var(--dt-space-50-percent);
+    right: var(--dt-space-0);
+    color: var(--dt-color-foreground-primary);
+    transform: translateY(-50%);
+    opacity: var(--dt-opacity-700);
+
+    &:hover, &:focus-visible {
+      opacity: var(--dt-opacity-1300);
+    }
+  }
+
+  &--active {
+    background-color: var(--dt-action-color-background-base-hover);
+    border: var(--dt-size-border-100) solid var(--dt-action-color-border-base-outlined-default);
+
+    &:hover, &:focus-visible {
+      background-color: var(--dt-action-color-background-base-active);
+    }
+  }
+}

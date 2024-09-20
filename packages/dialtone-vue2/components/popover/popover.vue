@@ -335,13 +335,7 @@ export default {
     /**
      * If the popover does not fit in the direction described by "placement",
      * it will attempt to change its direction to the "fallbackPlacements".
-     * <a
-     *   class="d-link"
-     *   href="https://popper.js.org/docs/v2/modifiers/flip/#fallbackplacements"
-     *   target="_blank"
-     * >
-     *   Popper.js docs
-     * </a>
+     * <a class="d-link" href="https://popper.js.org/docs/v2/modifiers/flip/#fallbackplacements" target="_blank">Popper.js docs</a>
      * */
     fallbackPlacements: {
       type: Array,
@@ -352,18 +346,8 @@ export default {
 
     /**
      * The direction the popover displays relative to the anchor.
-     * <a
-     *   class="d-link"
-     *   href="https://atomiks.github.io/tippyjs/v6/all-props/#placement"
-     *   target="_blank"
-     * >
-     *   Tippy.js docs
-     * </a>
-     * @values top, top-start, top-end,
-     * right, right-start, right-end,
-     * left, left-start, left-end,
-     * bottom, bottom-start, bottom-end,
-     * auto, auto-start, auto-end
+     * <a class="d-link" href="https://atomiks.github.io/tippyjs/v6/all-props/#placement" target="_blank">Tippy.js docs</a>
+     * @values top, top-start, top-end, right, right-start, right-end, left, left-start, left-end, bottom, bottom-start, bottom-end, auto, auto-start, auto-end
      */
     placement: {
       type: String,
