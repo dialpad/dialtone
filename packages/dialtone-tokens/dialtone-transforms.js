@@ -78,19 +78,6 @@ export function registerDialtoneTransforms (styleDictionary) {
   });
 
   styleDictionary.registerTransform({
-    name: 'dt/android/compose/color',
-    type: 'value',
-    transitive: true,
-    filter: function (token) {
-      return ['color'].includes(token.type);
-    },
-    transform: (token) => {
-      const hex8 = Color(token.value).toHex8();
-      return `Color(0x${hex8.slice(6) + hex8.slice(0, 6)})`;
-    },
-  });
-
-  styleDictionary.registerTransform({
     name: 'dt/android/compose/fonts/transformToStack',
     type: 'value',
     transitive: true,
