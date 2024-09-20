@@ -13,7 +13,7 @@
 </template>
 
 <script setup>
-import DtcEventConsoleLazyLoad from '@/src/components/event_console/event_console_lazy_load';
+import DtcEventConsoleLazyLoad from '@/src/components/event_console/event_console_lazy_load.vue';
 import beautify from 'js-beautify';
 import { computed } from 'vue';
 

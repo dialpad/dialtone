@@ -10,7 +10,7 @@
 </template>
 
 <script setup>
-import DtcControlSelection from './control_selection';
+import DtcControlSelection from './control_selection.vue';
 import { computed } from 'vue';
 import { VALUE_UPDATE_EVENT } from '@/src/lib/constants';
 import { UNSET } from '@/src/lib/control';

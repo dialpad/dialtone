@@ -19,8 +19,8 @@
         v-bind="attrs"
         @click="onOpen"
       >
-        <template #icon>
-          <icon-menu />
+        <template #icon="{ iconSize }">
+          <dt-icon-menu :size="iconSize" />
         </template>
       </dt-button>
     </template>
@@ -49,10 +49,10 @@
           @click="e => updateSettings('positioning', e)"
         >
           <template #native>
-            <icon-left />
+            <dt-icon-arrow-left />
           </template>
           <template #center>
-            <icon-center />
+            <dt-icon-align-center />
           </template>
         </dtc-button-bar>
       </div>
@@ -61,10 +61,10 @@
 </template>
 
 <script setup>
-import IconLeft from 'dialtone-icons/IconNotes';
-import IconCenter from 'dialtone-icons/IconMenu';
-import IconMenu from 'dialtone-icons/IconMenuVertical';
-import DtcButtonBar from '../tools/button_bar';
+import { DtIconArrowLeft } from '@dialpad/dialtone-icons/vue3'
+import { DtIconAlignCenter } from '@dialpad/dialtone-icons/vue3'
+import { DtIconMenu } from '@dialpad/dialtone-icons/vue3'
+import DtcButtonBar from '../tools/button_bar.vue';
 import { DtButton, DtPopover } from '@dialpad/dialtone-vue';
 import { SETTINGS_UPDATE_EVENT } from '@/src/lib/constants';
 import { ref } from 'vue';

@@ -25,8 +25,8 @@
             :disabled="member.lockControl"
             @click="() => resetMember(key)"
           >
-            <template #icon>
-              <icon-reset />
+            <template #icon="{ iconSize }">
+              <dt-icon-undo-2 :size="iconSize" />
             </template>
           </dt-button>
         </div>
@@ -54,9 +54,9 @@
 </template>
 
 <script setup>
-import DtcOptionBarControlSelector from '@/src/components/option_bar/option_bar_control_selector';
-import DtcOptionBarControl from './option_bar_control';
-import IconReset from 'dialtone-icons/IconRefresh';
+import DtcOptionBarControlSelector from '@/src/components/option_bar/option_bar_control_selector.vue';
+import DtcOptionBarControl from './option_bar_control.vue';
+import { DtIconUndo2 } from '@dialpad/dialtone-icons/vue3';
 import { DtButton } from '@dialpad/dialtone-vue';
 import { MEMBER_UPDATE_EVENT } from '@/src/lib/constants';
 import { computed, reactive } from 'vue';
@@ -117,6 +117,7 @@ const memberMap = computed(() => {
 /**
  * Used to match members in the 'member map' to their respective values.
  *
+ * @param member
  * @returns {*}
  */
 function getMemberKey (member) {
@@ -126,6 +127,7 @@ function getMemberKey (member) {
 /**
  * Determines if the member has a default value.
  *
+ * @param member
  * @returns {boolean} If the member has default value.
  */
 function hasDefaultValue (member) {
@@ -136,6 +138,7 @@ function hasDefaultValue (member) {
  * Attempts to get the control data for a given control.
  * If the control does not exist, gets the 'base' control data.
  *
+ * @param member
  * @returns {object} The control data from the 'control map'.
  */
 function getControlData (member) {
@@ -153,6 +156,7 @@ function isVModel (member) {
  * Wraps a member with an object containing additional data about the member.
  * This is used by the 'member map' to hold data about controls.
  *
+ * @param member
  * @returns {object}
  */
 function extendMember (member) {
@@ -170,6 +174,8 @@ function extendMember (member) {
 
 /**
  * Resets the control to default value.
+ *
+ * @param key
  */
 function resetMember (key) {
   const member = memberMap.value[key];
