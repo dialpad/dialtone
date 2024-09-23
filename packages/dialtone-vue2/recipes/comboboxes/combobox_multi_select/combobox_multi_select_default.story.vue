@@ -12,6 +12,7 @@
     :loading-message="$attrs.loadingMessage"
     :show-list="$attrs.showList"
     :selected-items="$attrs.selectedItems"
+    :chip-max-width="$attrs.chipMaxWidth"
     :max-selected="$attrs.maxSelected"
     :list-max-height="$attrs.listMaxHeight"
     :list-max-width="$attrs.listMaxWidth"

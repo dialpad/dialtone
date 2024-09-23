@@ -1,3 +1,4 @@
+<!-- eslint-disable vue/no-static-inline-styles -->
 <template>
   <dt-recipe-combobox-with-popover
     ref="comboboxWithPopover"
@@ -31,7 +32,8 @@
             ref="chips"
             :key="key"
             :label-class="['d-chip__label']"
-            class="combobox__chip"
+            :class="['combobox__chip', { 'combobox__chip--truncate': !!chipMaxWidth }]"
+            :style="{ maxWidth: chipMaxWidth }"
             :close-button-props="{ ariaLabel: 'close' }"
             :size="CHIP_SIZES[size]"
             v-on="chipListeners"
@@ -325,6 +327,16 @@ export default {
       type: Number,
       default: 64,
     },
+
+    /**
+     * Determines the maximum width of a single chip. If the text within this chip exceeds the value
+     * it will be truncated with ellipses.
+     * Possible units rem|px|em
+     */
+    chipMaxWidth: {
+      type: String,
+      default: '',
+    },
   },
 
   emits: [
@@ -444,6 +456,12 @@ export default {
 
   watch: {
     selectedItems: {
+      async handler () {
+        this.initSelectedItems();
+      },
+    },
+
+    chipMaxWidth: {
       async handler () {
         this.initSelectedItems();
       },
@@ -753,5 +771,10 @@ export default {
   text-align: center;
   padding-top: var(--dt-space-500);
   padding-bottom: var(--dt-space-500);
+}
+
+.combobox__chip--truncate {
+  white-space: nowrap;
+  text-overflow: ellipsis;
 }
 </style>

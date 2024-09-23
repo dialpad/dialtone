@@ -1,3 +1,15 @@
+# [3.154.0](https://github.com/dialpad/dialtone/compare/dialtone-vue3/v3.153.0...dialtone-vue3/v3.154.0) (2024-09-20)
+
+
+### Documentation
+
+* **Hovercard, Empty State:** DLT-1934 update docs ([#501](https://github.com/dialpad/dialtone/issues/501)) ([e3ea5c6](https://github.com/dialpad/dialtone/commit/e3ea5c69cfb76eb3a90aa451b137466ff079996d))
+
+
+### Features
+
+* **Combobox Multi Select:** DLT-2066 chip truncation ([#503](https://github.com/dialpad/dialtone/issues/503)) ([0a94cfc](https://github.com/dialpad/dialtone/commit/0a94cfca38886c310d1f035982e7c0a3ea4d2a36))
+
 # [3.153.0](https://github.com/dialpad/dialtone/compare/dialtone-vue3/v3.152.3...dialtone-vue3/v3.153.0) (2024-09-19)
 
 
