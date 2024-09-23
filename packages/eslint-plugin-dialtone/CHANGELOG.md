@@ -1,3 +1,10 @@
+## [1.8.1-beta.1](https://github.com/dialpad/dialtone/compare/eslint-plugin-dialtone/v1.8.0...eslint-plugin-dialtone/v1.8.1-beta.1) (2024-09-23)
+
+
+### Bug Fixes
+
+* NO-JIRA merge staging into beta ([#478](https://github.com/dialpad/dialtone/issues/478)) ([09f1165](https://github.com/dialpad/dialtone/commit/09f1165f4d4cffc00708aa18cd1067d8b84810aa))
+
 # [1.8.0](https://github.com/dialpad/dialtone/compare/eslint-plugin-dialtone/v1.7.2...eslint-plugin-dialtone/v1.8.0) (2024-09-13)
 
 
