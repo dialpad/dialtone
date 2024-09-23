@@ -1,3 +1,11 @@
+## [1.36.3-beta.1](https://github.com/dialpad/dialtone/compare/dialtone-tokens/v1.36.2...dialtone-tokens/v1.36.3-beta.1) (2024-09-23)
+
+
+### Bug Fixes
+
+* NO-JIRA merge staging into beta ([#478](https://github.com/dialpad/dialtone/issues/478)) ([09f1165](https://github.com/dialpad/dialtone/commit/09f1165f4d4cffc00708aa18cd1067d8b84810aa))
+* **Tokens:** DLT-2053 android tokens color value ([#504](https://github.com/dialpad/dialtone/issues/504)) ([368c9db](https://github.com/dialpad/dialtone/commit/368c9db93fc6045ce08bc7e2ee010590ec83ff5f))
+
 ## [1.36.2](https://github.com/dialpad/dialtone/compare/dialtone-tokens/v1.36.1...dialtone-tokens/v1.36.2) (2024-09-19)
 
 
