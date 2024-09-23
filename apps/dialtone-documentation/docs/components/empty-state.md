@@ -557,7 +557,7 @@ Action: [Cancel] [Request access]
 
 ## Vue API
 
-<component-vue-api component-name="empty-state" />
+<component-vue-api component-name="empty_state" />
 
 ## Classes
 

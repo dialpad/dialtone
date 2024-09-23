@@ -2,11 +2,11 @@
   <dt-hovercard placement="bottom-start" content-class="d-wmn332 ">
     <template #anchor>
       <dt-button>
-        Hover for example
+        {{ label }}
       </dt-button>
     </template>
     <template #content>
-      <div>Content</div>
+      <div>{{ content }}</div>
     </template>
     <template #headerContent>
       <div>Header</div>
@@ -17,6 +17,9 @@
   </dt-hovercard>
 </template>
 
-<script>
-
+<script setup>
+defineProps({
+  label: { type: String, default: 'Hover for example' },
+  content: { type: String, default: 'Content' },
+});
 </script>

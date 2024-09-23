@@ -320,6 +320,10 @@
         "voice"
       ],
       "dialpad-logomark": [],
+      "dialpad-sparkle": [
+        "ai",
+        "sparkle"
+      ],
       "dp-phone": [
         "call",
         "dialpad"

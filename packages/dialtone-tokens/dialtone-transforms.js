@@ -85,6 +85,16 @@ export function registerDialtoneTransforms (styleDictionary) {
       return ['color'].includes(token.type);
     },
     transform: (token) => {
+      if (token.$extensions?.['studio.tokens']?.modify?.type === 'alpha') {
+        const alpha = parseFloat(token.$extensions['studio.tokens'].modify.value);
+        const alphaHex = Math.round(alpha * 255).toString(16).padStart(2, '0');
+        // ex: token.value = Color(0xff222222)
+        const rgb = token.value.slice(10, 16);
+        return `Color(0x${alphaHex + rgb})`;
+      }
+      if (!Color(token.value).isValid()) {
+        return token.value;
+      }
       const hex8 = Color(token.value).toHex8();
       return `Color(0x${hex8.slice(6) + hex8.slice(0, 6)})`;
     },
