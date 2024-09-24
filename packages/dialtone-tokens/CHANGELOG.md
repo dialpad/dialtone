@@ -1,3 +1,10 @@
+## [1.36.3](https://github.com/dialpad/dialtone/compare/dialtone-tokens/v1.36.2...dialtone-tokens/v1.36.3) (2024-09-24)
+
+
+### Bug Fixes
+
+* **Tokens:** DLT-2053 android tokens color value ([#504](https://github.com/dialpad/dialtone/issues/504)) ([368c9db](https://github.com/dialpad/dialtone/commit/368c9db93fc6045ce08bc7e2ee010590ec83ff5f))
+
 ## [1.36.2](https://github.com/dialpad/dialtone/compare/dialtone-tokens/v1.36.1...dialtone-tokens/v1.36.2) (2024-09-19)
 
 
