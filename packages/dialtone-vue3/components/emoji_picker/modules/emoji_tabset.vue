@@ -50,11 +50,6 @@ const props = defineProps({
     required: true,
   },
 
-  isScrolling: {
-    type: Boolean,
-    default: false,
-  },
-
   emojiFilter: {
     type: String,
     default: '',
@@ -101,6 +96,7 @@ const tabs = computed(() => {
   return tabsData.map((tab, index) => ({
     ...tab,
     label: props.tabsetLabels[index],
+    // IDs on dt-tab component need to be on string
     id: (index + 1).toString(),
     panelId: (index + 1).toString(),
   }));
@@ -110,13 +106,11 @@ const isSearching = computed(() => props.emojiFilter.length > 0);
 
 const selectedTab = ref('1');
 
-const { isScrolling } = toRefs(props);
-
 const tabsetRef = ref([]);
 
 watch(() => props.scrollIntoTab,
   () => {
-    if (!isScrolling.value && !isSearching.value) {
+    if (!isSearching.value) {
       selectedTab.value = (props.scrollIntoTab + 1).toString();
     }
   });
@@ -134,10 +128,11 @@ watch(isSearching,
  * dt-tab component
  */
 function selectTabset (id) {
-  if (!isScrolling.value) {
-    selectedTab.value = id;
-  }
-  emits('selected-tabset', id);
+  // IDs on scrollToTab need to be on number
+  const parseId = parseInt(id);
+  // IDs on dt-tab component need to be on string
+  selectedTab.value = id;
+  emits('selected-tabset', parseId);
 }
 
 function setTabsetRef (ref) {

@@ -9,7 +9,6 @@
         :show-recently-used-tab="showRecentlyUsedTab"
         :scroll-into-tab="scrollIntoTab"
         :tabset-labels="tabSetLabels"
-        :is-scrolling="isScrolling"
         @focus-skin-selector="$refs.skinSelectorRef.focusSkinSelector()"
         @focus-search-input="showSearch ? $refs.searchInputRef.focusSearchInput() : $refs.emojiSelectorRef.focusEmojiSelector()"
         @selected-tabset="scrollToSelectedTabset"
@@ -37,7 +36,6 @@
         :recently-used-emojis="recentlyUsedEmojis"
         :selected-tabset="selectedTabset"
         @scroll-into-tab="updateScrollIntoTab"
-        @is-scrolling="updateIsScrolling"
         @highlighted-emoji="updateHighlightedEmoji"
         @selected-emoji="emits('selected-emoji', $event)"
         @focus-skin-selector="$refs.skinSelectorRef.focusSkinSelector()"
@@ -213,7 +211,6 @@ const highlightedEmoji = ref(null);
 const selectedTabset = ref({});
 
 const scrollIntoTab = ref(0);
-const isScrolling = ref(false);
 
 const showRecentlyUsedTab = computed(() => props.recentlyUsedEmojis.length > 0);
 
@@ -243,9 +240,6 @@ function updateScrollIntoTab (value) {
   scrollIntoTab.value = value;
 }
 
-function updateIsScrolling (value) {
-  isScrolling.value = value;
-}
 function updateHighlightedEmoji (emoji) {
   highlightedEmoji.value = emoji;
 }
