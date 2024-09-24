@@ -75,10 +75,9 @@ Configuration can be found in:
 - [.eslintrc.cjs](../.eslintrc.cjs), [.eslintignore](../.eslintignore)
 - [.markdownlintrc](apps/dialtone-documentation/.markdownlintrc), [.markdownlintignore](apps/dialtone-documentation/.markdownlintignore)
 
-Your code will be linted (and fixed if possible) automatically on commit.
+Your code will be linted automatically on commit.
 
-- **Lint manually:** `nx lint dialtone`
-- **With autofix:** `nx lint:fix dialtone`
+- **Lint manually:** `nx run dialtone-css:lint`
 
 Note that we use lesshint only for the utilities folder and stylelint for everything else. Due to some unsupported syntax limitations we cannot use stylelint on our utilities folder.
 
@@ -87,7 +86,7 @@ Note that we use lesshint only for the utilities folder and stylelint for everyt
 Here are some important directories to know within the Dialtone repository
 
 - `lib/build`: All source code and assets for the Dialtone library.
-- `lib/dist`: The compiled bundle will be output here upon `nx build dialtone-css`.
+- `lib/dist`: The compiled bundle will be output here upon `nx run dialtone-css:build`.
 - `lib/build/fonts`: Fonts we wish to bundle with Dialtone (woff2 format).
 - `lib/build/less`: LESS files defining our styles. they are processed and transpiled to CSS on build.
 
