@@ -1,13 +1,96 @@
 {
   "name": "dialtone-vue2",
   "targets": {
-    "build": {
-      "executor": "nx:run-script",
-      "options": { "script": "build" }
+    "clean-dist": {
+      "executor": "nx:run-commands",
+      "options": {
+        "cwd": "{projectRoot}",
+        "command": "rm -rf ./dist",
+        "cache": false
+      }
     },
-    "build-docs": {
-      "executor": "nx:run-script",
-      "options": { "script": "storybook:build" }
+    "build-documentation": {
+      "executor": "nx:run-commands",
+      "dependsOn": [ "clean-dist" ],
+      "outputs": [
+        "{projectRoot}/dist/component-documentation.json"
+      ],
+      "options": {
+        "cwd": "{projectRoot}",
+        "command": "node ../../scripts/build-dialtone-vue-docs.mjs 2"
+      }
+    },
+    "build-types": {
+      "executor": "nx:run-commands",
+      "outputs": [
+        "{projectRoot}/dist/types"
+      ],
+      "dependsOn": [ "clean-dist" ],
+      "options": {
+        "cwd": "{projectRoot}",
+        "command": "pnpm exec vue-tsc"
+      }
+    },
+    "build": {
+      "executor": "nx:run-commands",
+      "dependsOn": [
+        "clean-dist",
+        "build-documentation",
+        "build-types",
+        "dialtone-icons:build"
+      ],
+      "inputs": [
+        "{projectRoot}/common/**/*",
+        "{projectRoot}/components/**/*",
+        "{projectRoot}/directives/**/*",
+        "{projectRoot}/prototypes/**/*",
+        "{projectRoot}/recipes/**/*",
+        "{projectRoot}/index.js",
+        "{projectRoot}/package.json",
+        "{projectRoot}/vite.config.js"
+      ],
+      "outputs": [
+        "{projectRoot}/dist",
+        "{projectRoot}/dist/types",
+        "{projectRoot}/dist/component-documentation.json"
+      ],
+      "options": {
+        "cwd": "{projectRoot}",
+        "command": "pnpm exec vite build"
+      }
+    },
+    "build-storybook": {
+      "executor": "nx:run-commands",
+      "dependsOn": [
+        "dialtone-css:build",
+        "dialtone-icons:build",
+        "dialtone-tokens:build"
+      ],
+      "inputs": [
+        "{projectRoot}/.storybook/**/*",
+        "{projectRoot}/common/**/*",
+        "{projectRoot}/components/**/*",
+        "{projectRoot}/css/**/*",
+        "{projectRoot}/directives/**/*",
+        "{projectRoot}/docs/**/*",
+        "{projectRoot}/functions/*.mdx",
+        "{projectRoot}/prototypes/**/*",
+        "{projectRoot}/recipes/**/*",
+        "{projectRoot}/index.js",
+        "{projectRoot}/package.json",
+        "{projectRoot}/vite.config.js"
+      ],
+      "outputs": [
+        "{projectRoot}/storybook-static"
+      ],
+      "options": {
+        "cwd": "{projectRoot}",
+        "commands": [
+          { "command": "pnpm exec typedoc --plugin typedoc-plugin-markdown" },
+          { "command": "STORYBOOK_ENV=production pnpm exec storybook build" }
+        ],
+        "parallel": false
+      }
     },
     "publish": {
       "executor": "nx:run-commands",
@@ -22,9 +105,48 @@
         "parallel": false
       }
     },
+    "start": {
+      "executor": "nx:run-commands",
+      "options": {
+        "cwd": "{projectRoot}",
+        "commands": [
+          { "command": "nx run dialtone-css:watch" },
+          { "command": "STORYBOOK_ENV=development pnpm exec storybook dev -p 9010" }
+        ]
+      }
+    },
     "test": {
       "executor": "nx:run-script",
+      "dependsOn": [
+        "clean-dist",
+        "dialtone-icons:build"
+      ],
       "options": { "script": "test" }
+    },
+    "test:a11y": {
+      "executor": "nx:run-commands",
+      "dependsOn": [
+        "build-storybook"
+      ],
+      "options": {
+        "cwd": "{projectRoot}",
+        "commands": [
+          { "command": "pnpm exec http-server ./storybook-static --port 9010 --silent" },
+          { "command": "pnpm exec wait-on tcp:9010 && pnpm exec test-storybook --url http://localhost:9010"}
+        ]
+      }
+    },
+    "test:visual": {
+      "executor": "nx:run-commands",
+      "dependsOn": [
+        "build-storybook"
+      ],
+      "options": {
+        "cwd": "{projectRoot}",
+        "commands": [
+          { "command": "pnpm exec percy storybook --disable-cache --config ./percy.config.cjs --verbose ./storybook-static"}
+        ]
+      }
     }
   }
 }

@@ -1,12 +1,33 @@
 {
   "name": "dialtone-icons-vue2",
   "targets": {
+    "clean-dist": {
+      "executor": "nx:run-commands",
+      "options": {
+        "cwd": "{projectRoot}",
+        "command": "rm -rf ./dist",
+        "cache": false
+      }
+    },
     "build": {
-      "executor": "nx:run-script",
-      "inputs": ["{workspaceRoot}/packages/dialtone-icons/src/icons/*"],
+      "executor": "nx:run-commands",
+      "dependsOn": ["clean-dist"],
+      "inputs": [
+        "{workspaceRoot}/packages/dialtone-icons/src/icons/*",
+        "{workspaceRoot}/packages/dialtone-icons/src/illustrations/*",
+        "{projectRoot}/vite.config.js"
+      ],
       "outputs": ["{projectRoot}/dist"],
       "options": {
-        "script": "build"
+        "cwd": "{projectRoot}",
+        "commands": [
+          {
+            "command": "pnpm exec vite build"
+          },
+          {
+            "command": "pnpm exec vue-tsc"
+          }
+        ]
       }
     }
   }

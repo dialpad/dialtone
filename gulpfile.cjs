@@ -35,7 +35,6 @@ const paths = {
   },
   output: {
     css: './dist/css',
-    icons: './dist/icons',
     tokens: './dist/tokens',
     vue2: './dist/vue2',
     vue3: './dist/vue3',
