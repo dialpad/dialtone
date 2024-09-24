@@ -5,8 +5,7 @@
       "executor": "nx:run-commands",
       "options": {
         "cwd": "{projectRoot}",
-        "command": "rm -rf ./dist",
-        "cache": false
+        "command": "rm -rf ./dist"
       }
     },
     "build-documentation": {
