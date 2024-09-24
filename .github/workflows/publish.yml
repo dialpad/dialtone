@@ -287,7 +287,6 @@ jobs:
 
       # Publish iOS
       - name: Build swift
-        # working-directory: ./packages/dialtone-tokens
         run: pnpm nx run dialtone-tokens:publish:ios-package
 
       - name: Publish production - Swift
@@ -347,7 +346,6 @@ jobs:
         run: pnpm install --frozen-lockfile
 
       - name: Build android
-        # working-directory: ./packages/dialtone-tokens
         run: pnpm nx run dialtone-tokens:publish:android-package
 
       - name: Publish android - Gradle
