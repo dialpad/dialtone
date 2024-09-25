@@ -50,5 +50,5 @@ export default defineConfig({
       '@': fileURLToPath(new URL('.', import.meta.url)),
     },
   },
-  plugins: [dts({ outDir: 'dist/themes/types' })],
+  plugins: [dts({ outDir: 'dist/types' })],
 });

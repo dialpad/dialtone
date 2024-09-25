@@ -12,6 +12,21 @@
   "files": [
     "dist"
   ],
+  "exports": {
+    "./*.css": "./dist/css/*.css",
+    "./*.less": "./dist/less/*.less",
+    "./postcss/*": {
+      "types": "./dist/types/postcss/*.d.ts",
+      "import": "./dist/postcss/*.js",
+      "require": "./dist/postcss/*.cjs"
+    },
+    "./themes/*": {
+      "types": "./dist/types/themes/*.d.ts",
+      "import": "./dist/themes/*.js",
+      "require": "./dist/themes/*.cjs"
+    },
+    "./*": "./*"
+  },
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/dialpad/dialtone-tokens/issues"

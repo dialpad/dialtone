@@ -1,5 +1,8 @@
 {
-  "include": [ "themes/*.js", "postcss/*.js" ],
+  "include": [
+    "themes/*.js",
+    "postcss/*.cjs"
+  ],
   "exclude": [ "node_modules" ],
   "compilerOptions": {
     "module": "NodeNext",
@@ -25,5 +28,5 @@
     "paths": {
       "@/*": ["./*"]
     }
-  },
+  }
 }

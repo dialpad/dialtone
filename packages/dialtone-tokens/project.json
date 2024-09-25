@@ -24,7 +24,11 @@
       ],
       "options": {
         "cwd": "{projectRoot}",
-        "command": "node ./build.js && pnpm exec vite build"
+        "commands": [
+          "node ./build.js",
+          "pnpm exec vite build"
+        ],
+        "parallel": false
       }
     },
     "publish:android-package": {
