@@ -75,12 +75,10 @@ export default defineConfig({
     globals: true,
     environment: 'jsdom',
     setupFiles: './tests/setupTests.js',
+    exclude: ['common/custom-emoji.test.js'],
+    include: ['./{common,components,directives,recipes}/**/*.test.js'],
     coverage: {
       reporter: ['text', 'html'],
-      exclude: [
-        'node_modules/',
-        'tests/setupTests.js',
-      ],
     },
   },
 });
