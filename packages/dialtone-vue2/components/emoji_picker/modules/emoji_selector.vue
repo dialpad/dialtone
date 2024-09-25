@@ -334,26 +334,7 @@ export default {
 
       vm.$nextTick(function () {
         const container = vm.$refs.listRef;
-        const offsetTop = tabIndex === '1' ? 0 : tabElement.offsetTop - 20;
-
-        let isScrolling = true;
-        let prevScrollTop = container.scrollTop;
-        vm.$emit('is-scrolling', true);
-
-        /* eslint-disable-next-line complexity */
-        container.addEventListener('scroll', function () {
-          if (isScrolling) {
-            const scrollTop = container.scrollTop;
-            if (
-              (prevScrollTop < scrollTop && scrollTop >= offsetTop) ||
-            (prevScrollTop > scrollTop && scrollTop <= offsetTop)
-            ) {
-              isScrolling = false;
-              vm.$emit('is-scrolling', false);
-            }
-            prevScrollTop = scrollTop;
-          }
-        });
+        const offsetTop = tabIndex === 1 ? 0 : tabElement.offsetTop - 15;
 
         container.scrollTop = offsetTop;
 
@@ -471,7 +452,7 @@ export default {
         this.handleHorizontalNavigation('right', indexTab, indexEmoji);
       }
 
-      if (event.key === 'Tab') {
+      if (event.key === 'Tab' && !event.shiftKey) {
         if (this.focusEmoji(indexTab + 1, 0)) {
           this.scrollToTab((indexTab + 1) + 1, false);
         } else {
@@ -591,7 +572,6 @@ export default {
 
     setTabLabelObserver () {
       this.tabLabelObserver = new IntersectionObserver(entries => {
-        this.$emit('is-scrolling', false);
         /* eslint-disable-next-line complexity */
         entries.forEach(entry => {
           const { target } = entry;
@@ -619,7 +599,7 @@ export default {
     },
 
     focusLastEmoji () {
-      this.focusEmoji(this.tabs.length - 1, 0);
+      this.scrollToTab(this.tabs.length, true);
     },
 
   },
