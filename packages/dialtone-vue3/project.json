@@ -1,43 +1,9 @@
 {
   "name": "dialtone-vue3",
   "targets": {
-    "clean-dist": {
-      "executor": "nx:run-commands",
-      "options": {
-        "cwd": "{projectRoot}",
-        "command": "rm -rf ./dist"
-      }
-    },
-    "build-documentation": {
-      "executor": "nx:run-commands",
-      "dependsOn": [ "clean-dist" ],
-      "outputs": [
-        "{projectRoot}/dist/component-documentation.json"
-      ],
-      "options": {
-        "cwd": "{projectRoot}",
-        "command": "node ../../scripts/build-dialtone-vue-docs.mjs 3"
-      }
-    },
-    "build-types": {
-      "executor": "nx:run-commands",
-      "outputs": [
-        "{projectRoot}/dist/types"
-      ],
-      "dependsOn": [ "clean-dist" ],
-      "options": {
-        "cwd": "{projectRoot}",
-        "command": "pnpm exec vue-tsc"
-      }
-    },
     "build": {
       "executor": "nx:run-commands",
-      "dependsOn": [
-        "clean-dist",
-        "build-documentation",
-        "build-types",
-        "dialtone-icons:build"
-      ],
+      "dependsOn": [ "dialtone-icons:build" ],
       "inputs": [
         "{projectRoot}/common/**/*",
         "{projectRoot}/components/**/*",
@@ -46,16 +12,17 @@
         "{projectRoot}/recipes/**/*",
         "{projectRoot}/index.js",
         "{projectRoot}/package.json",
-        "{projectRoot}/vite.config.js"
+        "{projectRoot}/vite.config.js",
+        "{projectRoot}/tsconfig.json"
       ],
-      "outputs": [
-        "{projectRoot}/dist",
-        "{projectRoot}/dist/types",
-        "{projectRoot}/dist/component-documentation.json"
-      ],
+      "outputs": [ "{projectRoot}/dist" ],
       "options": {
         "cwd": "{projectRoot}",
-        "command": "pnpm exec vite build"
+        "commands": [
+          "pnpm exec vite build",
+          "node ../../scripts/build-dialtone-vue-docs.mjs 3"
+        ],
+        "parallel": false
       }
     },
     "build-storybook": {
@@ -66,10 +33,10 @@
         "dialtone-tokens:build"
       ],
       "inputs": [
-        "{projectRoot}/.storybook/**/*",
+        "{projectRoot}/.storybook/*",
         "{projectRoot}/common/**/*",
         "{projectRoot}/components/**/*",
-        "{projectRoot}/css/**/*",
+        "{projectRoot}/css/*",
         "{projectRoot}/directives/**/*",
         "{projectRoot}/docs/**/*",
         "{projectRoot}/functions/*.mdx",
@@ -77,16 +44,19 @@
         "{projectRoot}/recipes/**/*",
         "{projectRoot}/index.js",
         "{projectRoot}/package.json",
+        "{projectRoot}/tsconfig.json",
+        "{projectRoot}/typedoc.config.js",
         "{projectRoot}/vite.config.js"
       ],
       "outputs": [
-        "{projectRoot}/storybook-static"
+        "{projectRoot}/storybook-static",
+        "{projectRoot}/functions/generated"
       ],
       "options": {
         "cwd": "{projectRoot}",
         "commands": [
-          { "command": "pnpm exec typedoc --plugin typedoc-plugin-markdown" },
-          { "command": "STORYBOOK_ENV=production pnpm exec storybook build" }
+          "pnpm exec typedoc --plugin typedoc-plugin-markdown",
+          "STORYBOOK_ENV=production pnpm exec storybook build"
         ],
         "parallel": false
       }
@@ -106,44 +76,43 @@
     },
     "start": {
       "executor": "nx:run-commands",
+      "dependsOn": [
+        "dialtone-css:build",
+        "dialtone-icons:build",
+        "dialtone-tokens:build"
+      ],
       "options": {
         "cwd": "{projectRoot}",
         "commands": [
-          { "command": "nx run dialtone-css:watch" },
-          { "command": "STORYBOOK_ENV=development pnpm exec storybook dev -p 9011" }
+          "nx watch --projects=dialtone-css,dialtone-icons,dialtone-tokens --includeDependentProjects -- nx run \\$NX_PROJECT_NAME:build",
+          "STORYBOOK_ENV=development pnpm exec storybook dev -p 9011"
         ]
       }
     },
     "test": {
       "executor": "nx:run-script",
-      "dependsOn": [
-        "clean-dist",
-        "dialtone-icons:build"
-      ],
+      "dependsOn": [ "dialtone-icons:build" ],
       "options": { "script": "test" }
     },
     "test:a11y": {
       "executor": "nx:run-commands",
-      "dependsOn": [
-        "build-storybook"
-      ],
+      "dependsOn": [ "build-storybook" ],
       "options": {
         "cwd": "{projectRoot}",
         "commands": [
-          { "command": "pnpm exec http-server ./storybook-static --port 9011 --silent" },
-          { "command": "pnpm exec wait-on tcp:9010 && pnpm exec test-storybook --url http://localhost:9011"}
-        ]
+          "pnpm exec http-server ./storybook-static --port 9011 --silent",
+          "pnpm exec wait-on tcp:9011 && pnpm exec test-storybook --url http://localhost:9011"
+        ],
+        "readyWhen": "Ran all test suites"
       }
     },
     "test:visual": {
       "executor": "nx:run-commands",
-      "dependsOn": [
-        "build-storybook"
-      ],
+      "dependsOn": [ "build-storybook" ],
       "options": {
         "cwd": "{projectRoot}",
         "commands": [
-          { "command": "pnpm exec percy storybook --disable-cache --config ./percy.config.cjs --verbose ./storybook-static"}
+          "pnpm exec percy storybook --disable-cache --config ./percy.config.cjs --verbose ./storybook-static"
         ]
       }
     }

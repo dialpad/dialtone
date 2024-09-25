@@ -1,4 +1,6 @@
 {
+  "include": [ "themes/*.js" ],
+  "exclude": [ "node_modules" ],
   "compilerOptions": {
     "module": "NodeNext",
     "target": "es2015",
@@ -23,9 +25,5 @@
     "paths": {
       "@/*": ["./*"]
     }
-  },
-  "include": [
-    "themes/*.js",
-  ],
-  "exclude": ["node_modules"]
+  }
 }

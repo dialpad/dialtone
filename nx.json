@@ -1,18 +1,9 @@
 {
   "extends": "nx/presets/npm.json",
   "targetDefaults": {
-    "build*": {
-      "cache": true
-    },
-    "publish*": {
-      "dependsOn": [
-        "build",
-        "^build"
-      ]
-    }
+    "build*": { "cache": true },
+    "publish*": { "dependsOn": ["build", "^build"] }
   },
-  "installation": {
-    "version": "19.8.0"
-  },
+  "installation": { "version": "19.8.0" },
   "parallel": 5
 }

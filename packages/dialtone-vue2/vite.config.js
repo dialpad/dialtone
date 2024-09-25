@@ -2,6 +2,7 @@ import { defineConfig } from 'vite';
 import vue from '@vitejs/plugin-vue2';
 import { fileURLToPath } from 'url';
 import { glob } from 'glob';
+import dts from 'vite-plugin-dts';
 
 function _extractEntryNameFromPath (path, pathPrefix) {
   const regex = new RegExp(`^${pathPrefix}(\\/(\\w+))+\\/index\\.js$`);
@@ -32,7 +33,6 @@ export default defineConfig({
   build: {
     sourcemap: true,
     minify: false,
-    emptyOutDir: false,
     rollupOptions: {
       external: [
         /^@dialpad/,
@@ -63,7 +63,10 @@ export default defineConfig({
       formats: ['es', 'cjs'],
     },
   },
-  plugins: [vue()],
+  plugins: [
+    vue(),
+    dts({ outDir: 'dist/types' }),
+  ],
   resolve: {
     alias: {
       '@': fileURLToPath(new URL('.', import.meta.url)),
