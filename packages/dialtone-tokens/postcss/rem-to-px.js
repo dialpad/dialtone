@@ -1,10 +1,13 @@
 /**
  * @type {import('postcss').PluginCreator}
  */
-module.exports = () => {
+const creator = () => {
   return {
     postcssPlugin: 'postcss-dialtone-rem-to-px',
     Declaration (decl) {
+      const root = decl.root();
+      const re = /.*?\/css\/tokens-.*?/;
+      if (!re.test(root.source.input.file)) return;
       if (decl.value.includes('rem')) {
         const numericValue = parseFloat(decl.value);
         const newValue = numericValue * 10;
@@ -13,5 +16,5 @@ module.exports = () => {
     },
   };
 };
-
-module.exports.postcss = true;
+creator.postcss = true;
+export default creator;

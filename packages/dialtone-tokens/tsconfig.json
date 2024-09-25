@@ -25,7 +25,8 @@
     }
   },
   "include": [
-    "themes/*.js",
+    "dist/themes/*.js",
+    "dist/postcss/*.js",
   ],
   "exclude": ["node_modules"]
 }

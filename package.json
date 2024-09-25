@@ -74,6 +74,10 @@
       "import": "./dist/tokens/postcss/rem-to-px.js",
       "require": "./dist/tokens/postcss/rem-to-px.cjs"
     },
+    "./tokens/postcss/root-to-host": {
+      "import": "./dist/tokens/postcss/root-to-host.js",
+      "require": "./dist/tokens/postcss/root-to-host.cjs"
+    },
     "./vue2": {
       "types": "./dist/vue2/types/index.d.ts",
       "import": "./dist/vue2/dialtone-vue.js",
