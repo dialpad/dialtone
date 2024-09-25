@@ -96,6 +96,15 @@ Possible themes are as follows:
 - ExpressiveSmLight - Marketing Small Light
 - ExpressiveSmDark - Marketing Small Dark
 
+There is an optional second parameter to `setTheme` that allows you to set the theme on a specific element. This is useful in the case of a Shadow DOM
+when you want to apply the theme to the root element of the shadow DOM rather that the document root. If you do not set this parameter the theme will be applied to the document root.
+
+```js
+import { setTheme } from '@dialpad/dialtone/themes/config';
+import DpLight from '@dialpad/dialtone/themes/dp-light';
+setTheme(DpLight, document.querySelector('#my-shadow-root-host'));
+```
+
 ##### Set theme manually by importing files
 
 You may want to use this method if you are unable to use javascript.
