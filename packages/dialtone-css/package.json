@@ -49,15 +49,11 @@
   },
   "type": "module",
   "scripts": {
-    "build": "gulp",
-    "lesshint": "pnpm exec lesshint 'lib/build/less/utilities'",
-    "lint": "run-s lint:library lint:code",
+    "lint": "run-s lint:code lint:library",
     "lint:code": "eslint '**/*.{js,cjs,vue}'",
-    "lint:library": "run-s stylelint lesshint",
-    "start": "gulp watch",
-    "stylelint": "pnpm exec stylelint 'lib/build/less/**/*.less'",
-    "build:icons": "gulp icons",
-    "test:postcss-generator-plugin": "jest --coverage && eslint ."
+    "lint:library": "run-s lesshint stylelint",
+    "lesshint": "pnpm exec lesshint 'lib/build/less/utilities'",
+    "stylelint": "pnpm exec stylelint 'lib/build/less/**/*.less'"
   },
   "unpkg": "./lib/dist/dialtone.min.css",
   "exports": {
@@ -114,5 +110,10 @@
         "statements": 100
       }
     }
+  },
+  "nx": {
+    "includedScripts": [
+      "lint"
+    ]
   }
 }

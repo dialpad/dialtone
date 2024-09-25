@@ -2,6 +2,7 @@ import { defineConfig } from 'vite';
 import vue from '@vitejs/plugin-vue2';
 import { fileURLToPath } from 'url';
 import { glob } from 'glob';
+import dts from 'vite-plugin-dts';
 
 function _extractEntryNameFromPath (path, pathPrefix) {
   const regex = new RegExp(`^${pathPrefix}(\\/(\\w+))+\\/index\\.js$`);
@@ -62,7 +63,10 @@ export default defineConfig({
       formats: ['es', 'cjs'],
     },
   },
-  plugins: [vue()],
+  plugins: [
+    vue(),
+    dts({ outDir: 'dist/types' }),
+  ],
   resolve: {
     alias: {
       '@': fileURLToPath(new URL('.', import.meta.url)),
@@ -72,12 +76,10 @@ export default defineConfig({
     globals: true,
     environment: 'jsdom',
     setupFiles: './tests/setupTests.js',
+    exclude: ['common/custom-emoji.test.js'],
+    include: ['./{common,components,directives,recipes}/**/*.test.js'],
     coverage: {
       reporter: ['text', 'html'],
-      exclude: [
-        'node_modules/',
-        'tests/setupTests.js',
-      ],
     },
   },
 });

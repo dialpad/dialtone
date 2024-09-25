@@ -319,7 +319,7 @@ pnpm install
 ##### Dialtone documentation site
 
 ```bash
-nx start:dialtone
+nx run dialtone-documentation:start
 ```
 
 This will start the documentation site and watch the library for changes, it will be live updated with any changes.
@@ -329,7 +329,7 @@ Access the local server at `http://localhost:4000`
 ##### Dialtone Vue 2 storybook
 
 ```bash
-nx start:dialtone-vue2
+nx run dialtone-vue2:start
 ```
 
 Access the local storybook server for Dialtone Vue 2 via `http://localhost:9010/`
@@ -337,7 +337,7 @@ Access the local storybook server for Dialtone Vue 2 via `http://localhost:9010/
 ##### Dialtone Vue 3 storybook
 
 ```bash
-nx start:dialtone-vue3
+nx run dialtone-vue3:start
 ```
 
 Access the local storybook server for Dialtone Vue 3 via `http://localhost:9011/`
@@ -347,25 +347,25 @@ Access the local storybook server for Dialtone Vue 3 via `http://localhost:9011/
 ##### Production build the root project
 
 ```bash
-nx build
+nx run dialtone:build
 ```
 
-##### Run all Vue unit tests
+##### Run Vue unit tests
 
 ```bash
-nx test
+nx run dialtone:test:vue
 ```
 
 ##### Run Vue 2 tests
 
 ```bash
-nx test dialtone-vue2
+nx run dialtone-vue2:test
 ```
 
 ##### Run Vue 3 tests
 
 ```bash
-nx test dialtone-vue3
+nx run dialtone-vue3:test
 ```
 
 Use the `--filter` flag to run commands for a specific package or app.
@@ -397,16 +397,16 @@ pnpm add @dialpad/dialtone-tokens --filter dialtone-icons --workspace
 ##### Running commands for individual packages
 
 You can run commands like `build`, `test`, `start` for individual packages from
-the root of the project with:
+the root of the project using:
 
 ```bash
-nx <command> <package/app>
+nx run <package/app>:<target>
 ```
 
 Example:
 
 ```bash
-nx build dialtone-documentation
+nx run dialtone-documentation:build
 ```
 
 ##### Use local package in another project
@@ -439,10 +439,10 @@ The `scheduled` release will only release changes to `production` while `manuall
 On every Tuesday at 10:00 am UTC, [release action](.github/workflows/release.yml) will trigger the production release process which
 automatically release all packages that need to be released following the next steps:
 
-1. Run the `nx release` on every project.
+1. Run the `release` target on every project.
 2. Merge the release commits created by the semantic release bot on `staging` to `production` branch.
 3. Push the `production` branch.
-4. An [action](https://github.com/dialpad/dialtone/actions/workflows/publish.yml) will publish the packages with its corresponding tag.
+4. The [publish action](https://github.com/dialpad/dialtone/actions/workflows/publish.yml) will publish the packages with its corresponding tag.
 
 ##### Manually
 
@@ -453,18 +453,12 @@ In case you need to release earlier than the next scheduled date, you can trigge
 
 This will trigger the [release action](.github/workflows/release.yml), release changes on `staging` and automatically publish the selected packages following the next steps:
 
-1. Run the `nx release` on selected packages (all if `package` is empty).
+1. Run the `release` target on selected packages (all if `package` is empty).
 2. Merge the release commits created by the semantic release bot on `staging` to `production` branch.
 3. Push the `production` branch.
-4. An [action](https://github.com/dialpad/dialtone/actions/workflows/publish.yml) will publish the packages with its corresponding tag.
-
-```bash
-nx run release
-```
+4. The [publish action](https://github.com/dialpad/dialtone/actions/workflows/publish.yml) will publish the packages with its corresponding tag.
 
 #### Alpha/Beta/Next
-
-##### Manually
 
 1. Merge your changes to the branch you want to release, commit and push to origin. (Note: If your dialtone version number is behind the last production release number, it may fail. Merge in staging or update the version number manually.)
 2. Go to [GitHub](https://github.com/dialpad/dialtone/actions/workflows/release.yml) and click on `Run workflow`.
@@ -473,5 +467,5 @@ nx run release
 
 This will trigger the [release action](.github/workflows/release.yml), release changes on the selected branch and automatically publish the selected packages following the next steps:
 
-1. Run the `nx release` on selected packages (all if `package` is empty).
-2. An [action](https://github.com/dialpad/dialtone/actions/workflows/publish.yml) will publish the packages with its corresponding tag.
+1. Run the `release` target on selected packages (all if `package` is empty).
+2. The [publish action](https://github.com/dialpad/dialtone/actions/workflows/publish.yml) will publish the packages with its corresponding tag.

@@ -2,29 +2,34 @@
   "extends": "@vue/tsconfig/tsconfig.dom.json",
   "include": [
     "**/*.ts",
+    "common/**/*",
+    "common/**/*.vue",
+    "directives/**/*",
     "components/**/*",
     "components/**/*.vue",
     "recipes/**/*",
     "recipes/**/*.vue",
     "index.js",
-    "emoji.js",
-    "directives.js",
-    "message_input.js"
   ],
   "exclude": [
     "**/*.story.vue",
     "**/*.stories.js",
     "**/*.test.js",
-    "**/*.d.ts"
+    "**/*.d.ts",
+    "common/storybook_utils.js",
+    "common/v_html.js",
+    "node_modules"
   ],
   "compilerOptions": {
-    "baseUrl": ".",
     "allowJs": true,
+    "sourceMap": true,
+    "baseUrl": ".",
     "declaration": true,
     "emitDeclarationOnly": true,
     "declarationMap": true,
     "declarationDir": "dist/types",
     "strict": true,
+    "removeComments": true,
     "paths": {
       "@/*": ["./*"]
     }

@@ -192,13 +192,6 @@ const emits = defineEmits([
   'scroll-into-tab',
 
   /**
-   * Emitted when the scrollTo function starts scrolling and stops scrolling
-   * @event is-scrolling
-   * @param {Boolean} is-scrolling - Whether the user is scrolling with the scroll-to
-    */
-  'is-scrolling',
-
-  /**
    * Emitted when the user reach the end of the emoji list
    * @event focus-skin-selector
     */
@@ -407,39 +400,7 @@ function scrollToTab (tabIndex, focusFirstEmoji = true) {
 
   nextTick(() => {
     const container = listRef.value;
-    const offsetTop = tabIndex === '1' ? 0 : tabElement.offsetTop - 20;
-
-    /**
-     * This variable is used to check if the user is scrolling inside the emoji picker
-     * This is used to check if the user is scrolling using the scrollTo function
-     * This is useful because this flag will prevent to update the fixed label when the user is scrolling
-     * using the scrollTo function
-     */
-    let isScrolling = true;
-
-    let prevScrollTop = container.scrollTop;
-    emits('is-scrolling', true);
-
-    /**
-     * This event listener checks whether the user is scrolling up or down by comparing the current scrollTop
-     * to prevScrollTop. If the scrollToTab function is scrolling from bottom to top and has reached the desired
-     * position (scrollTop <= offsetTop),or if the scrollToTab function is scrolling from top to bottom and has
-     * passed the desired position(scrollTop >= offsetTop), then isScrolling is set to false.
-     */
-    /* eslint-disable-next-line complexity */
-    container.addEventListener('scroll', () => {
-      if (isScrolling) {
-        const scrollTop = container.scrollTop;
-        if (
-          (prevScrollTop < scrollTop && scrollTop >= offsetTop) ||
-          (prevScrollTop > scrollTop && scrollTop <= offsetTop)
-        ) {
-          isScrolling = false;
-          emits('is-scrolling', false);
-        }
-        prevScrollTop = scrollTop;
-      }
-    });
+    const offsetTop = tabIndex === 1 ? 0 : tabElement.offsetTop - 15;
 
     container.scrollTop = offsetTop;
 
@@ -466,7 +427,6 @@ function setTabLabelObserver () {
    * and checks whether the target intersects with the root and is positioned above or below it.
    */
   tabLabelObserver.value = new IntersectionObserver(async (entries) => {
-    emits('is-scrolling', false);
     // eslint-disable-next-line complexity
     entries.forEach(entry => {
       const { target } = entry;
@@ -580,7 +540,7 @@ function focusEmojiSelector () {
 }
 
 function focusLastEmoji () {
-  focusEmoji(tabs.value.length - 1, 0);
+  scrollToTab(tabs.value.length, true);
 }
 
 onMounted(() => {

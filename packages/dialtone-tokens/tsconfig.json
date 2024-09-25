@@ -1,4 +1,6 @@
 {
+  "include": [ "themes/*.js", "postcss/*.js" ],
+  "exclude": [ "node_modules" ],
   "compilerOptions": {
     "module": "NodeNext",
     "target": "es2015",
@@ -24,9 +26,4 @@
       "@/*": ["./*"]
     }
   },
-  "include": [
-    "dist/themes/*.js",
-    "dist/postcss/*.js",
-  ],
-  "exclude": ["node_modules"]
 }

@@ -1,5 +1,5 @@
 import { getEmojiData, validateCustomEmojiJson, unicodeToString } from './emoji';
-import { withValidCustomEmojis, withNotAllRequiredProps, withValidUnicodeEmojis } from './custom-emoji-test.js';
+import { withValidCustomEmojis, withNotAllRequiredProps, withValidUnicodeEmojis } from './custom-emoji.test.js';
 
 describe('Emoji Tests', () => {
   describe('Validation Tests', () => {
