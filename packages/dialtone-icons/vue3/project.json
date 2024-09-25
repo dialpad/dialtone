@@ -19,14 +19,7 @@
       "outputs": ["{projectRoot}/dist"],
       "options": {
         "cwd": "{projectRoot}",
-        "commands": [
-          {
-            "command": "pnpm exec vite build"
-          },
-          {
-            "command": "pnpm exec vue-tsc"
-          }
-        ]
+        "command": "pnpm exec vite build"
       }
     }
   }
