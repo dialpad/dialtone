@@ -97,7 +97,7 @@ Possible themes are as follows:
 - ExpressiveSmDark - Marketing Small Dark
 
 There is an optional second parameter to `setTheme` that allows you to set the theme on a specific element. This is useful in the case of a Shadow DOM
-when you want to apply the theme to the root element of the shadow DOM rather that the document root. If you do not set this parameter the theme will be applied to the document root.
+when you want to apply the theme to the root element of the shadow DOM rather than the document root. If you do not set this parameter the theme will be applied to the document root.
 
 ```js
 import { setTheme } from '@dialpad/dialtone/themes/config';
