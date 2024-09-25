@@ -6,7 +6,7 @@
     {
       "label": "start: dialtone docsite",
       "type": "shell",
-      "command": "nx start:dialtone",
+      "command": "pnpm nx run dialtone-documentation:start",
       "problemMatcher": [
         "$vite"
       ],
@@ -15,7 +15,7 @@
     {
       "label": "start: dialtone vue 2 storybook",
       "type": "shell",
-      "command": "nx start:dialtone-vue2",
+      "command": "pnpm nx run dialtone-vue2:start",
       "problemMatcher": [
         "$vite"
       ],
@@ -24,19 +24,7 @@
     {
       "label": "start: dialtone vue 3 storybook",
       "type": "shell",
-      "command": "nx start:dialtone-vue3",
-      "problemMatcher": [
-        "$vite"
-      ],
-      "isBackground": true
-    },
-    {
-      "label": "start: all",
-      "dependsOn": [
-        "start: dialtone docsite",
-        "start: dialtone vue 2 storybook",
-        "start: dialtone vue 3 storybook"
-      ],
+      "command": "pnpm nx run dialtone-vue3:start",
       "problemMatcher": [
         "$vite"
       ],
@@ -45,7 +33,7 @@
     {
       "label": "lint: all",
       "type": "shell",
-      "command": "nx lint",
+      "command": "pnpm nx run dialtone:lint:all",
       "problemMatcher": [
         "$eslint-stylish"
       ]
@@ -53,13 +41,13 @@
     {
       "label": "test: all",
       "type": "shell",
-      "command": "nx test",
+      "command": "pnpm nx run dialtone:test:all",
       "problemMatcher": []
     },
     {
       "label": "build: all",
       "type": "shell",
-      "command": "nx build",
+      "command": "pnpm nx run dialtone:build",
       "problemMatcher": []
     }
   ]

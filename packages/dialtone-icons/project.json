@@ -7,16 +7,26 @@
         "cwd": "{projectRoot}",
         "commands": [
           {
-            "command": "gulp"
+            "command": "pnpm exec gulp"
           },
           {
-            "command": "nx run-many --target=build --projects=dialtone-icons-vue2,dialtone-icons-vue3 --parallel=2"
+            "command": "nx run-many --target=build --projects=dialtone-icons-vue2,dialtone-icons-vue3 --parallel=2 --output-style=stream"
           }
         ],
         "parallel": false
       },
-      "inputs": ["{projectRoot}/src/**/*", "{projectRoot}/transformSVGtoVue.cjs", "{projectRoot}/gulpfile.cjs"],
-      "outputs": ["{projectRoot}/src/icons", "{projectRoot}/src/illustrations", "{projectRoot}/dist", "{projectRoot}/vue2/dist", "{projectRoot}/vue3/dist"]
+      "inputs": [
+        "{projectRoot}/src/**/*",
+        "{projectRoot}/transformSVGtoVue.cjs",
+        "{projectRoot}/gulpfile.cjs"
+      ],
+      "outputs": [
+        "{projectRoot}/src/icons",
+        "{projectRoot}/src/illustrations",
+        "{projectRoot}/dist",
+        "{projectRoot}/vue2/dist",
+        "{projectRoot}/vue3/dist"
+      ]
     },
     "publish": {
       "executor": "nx:run-commands",

@@ -2,11 +2,19 @@
   "name": "dialtone-css",
   "targets": {
     "build": {
-      "executor": "nx:run-script",
-      "options": { "script": "build" },
+      "executor": "nx:run-commands",
+      "dependsOn": [
+        "dialtone-tokens:build"
+      ],
+      "options": {
+        "cwd": "{projectRoot}",
+        "command": "gulp"
+      },
       "inputs": [
         "{projectRoot}/lib/build/less/**/*",
-        "{projectRoot}/gulpfile.cjs"
+        "{projectRoot}/lib/build/js/**/*",
+        "{projectRoot}/gulpfile.cjs",
+        "{projectRoot}/dialtone.less"
       ],
       "outputs": [
         "{projectRoot}/lib/dist"
@@ -25,9 +33,15 @@
         "parallel": false
       }
     },
-    "start": {
-      "executor": "nx:run-script",
-      "options": { "script": "start" }
+    "watch": {
+      "executor": "nx:run-commands",
+      "dependsOn": [
+        "dialtone-tokens:build"
+      ],
+      "options": {
+        "cwd": "{projectRoot}",
+        "command": "gulp watch"
+      }
     }
   }
 }

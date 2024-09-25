@@ -1,7 +1,7 @@
 import { parse } from 'vue-docgen-api';
 import path, { join } from 'path';
 import { fileURLToPath } from 'url';
-import { readdirSync, writeFile } from 'fs';
+import fs, { readdirSync, writeFile } from 'fs';
 
 import componentsList from '../common/components_list.js';
 
@@ -14,8 +14,9 @@ if (!version) {
   process.exit(-1);
 }
 
+const distPath = join(__dirname, `../packages/dialtone-vue${version}/dist`);
 const componentsRootFolder = join(__dirname, `../packages/dialtone-vue${version}/components`);
-const outputPath = join(__dirname, `../packages/dialtone-vue${version}/dist/component-documentation.json`);
+const outputPath = `${distPath}/component-documentation.json`;
 const fileList = getFileList(componentsRootFolder);
 
 function getFileList (folder) {
@@ -34,6 +35,11 @@ function getFileList (folder) {
 
 function writeDocumentationFile (data) {
   const jsonData = JSON.stringify(data);
+
+  if (!fs.existsSync(distPath)) {
+    fs.mkdirSync(distPath);
+  }
+
   writeFile(outputPath, jsonData, 'utf8', (err) => {
     if (err) throw new Error('An error occurred while writing JSON Object to File.');
     console.info('Documentation created successfully');
