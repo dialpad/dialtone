@@ -111,7 +111,7 @@
       "dependsOn": [ "build-storybook" ],
       "options": {
         "cwd": "{projectRoot}",
-        "command": "pnpm exec percy storybook --disable-cache --config ./percy.config.cjs --debug --verbose ./storybook-static"
+        "command": "pnpm exec percy storybook --disable-cache --config ./percy.config.cjs --verbose ./storybook-static"
       }
     }
   }

@@ -135,7 +135,7 @@
     "@dialpad/semantic-release-changelog-json": "^1.0.0",
     "@faker-js/faker": "8.4.1",
     "@percy/cli": "1.29.3",
-    "@percy/storybook": "5.0.3",
+    "@percy/storybook": "6.0.2",
     "@semantic-release/changelog": "^6.0.3",
     "@semantic-release/exec": "^6.0.3",
     "@semantic-release/git": "^10.0.1",
