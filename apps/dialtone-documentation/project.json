@@ -4,7 +4,10 @@
     "build": {
       "executor": "nx:run-commands",
       "dependsOn": [
-        "^build"
+        "dialtone-css:build",
+        "dialtone-icons:build",
+        "dialtone-tokens:build",
+        "dialtone-vue3:build"
       ],
       "inputs": [
         "{projectRoot}/docs/**/*",
@@ -23,6 +26,7 @@
     "start": {
       "executor": "nx:run-commands",
       "dependsOn": [
+        "dialtone-css:build",
         "dialtone-icons:build",
         "dialtone-tokens:build",
         "dialtone-vue3:build"
@@ -31,7 +35,7 @@
         "cwd": "{projectRoot}",
         "commands": [
           {
-            "command": "nx run dialtone-css:watch"
+            "command": "nx watch --projects=dialtone-css,dialtone-icons,dialtone-tokens,dialtone-vue3 --includeDependentProjects -- nx run \\$NX_PROJECT_NAME:build"
           },
           {
             "command": "vuepress dev docs"
