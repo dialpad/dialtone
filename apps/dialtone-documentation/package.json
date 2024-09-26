@@ -68,7 +68,6 @@
     "date-fns": "^2.30.0",
     "markdown-it": "^13.0.2",
     "markdown-it-anchor": "^8.6.7",
-    "npm-run-all": "^4.1.5",
     "prettier": "3.3.2",
     "prismjs": "^1.29.0",
     "vite-svg-loader": "^5.1.0",
