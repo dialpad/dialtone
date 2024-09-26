@@ -1,3 +1,11 @@
+## [9.76.2](https://github.com/dialpad/dialtone/compare/dialtone/v9.76.1...dialtone/v9.76.2) (2024-09-26)
+
+
+### Bug Fixes
+
+* **Emoji Picker:** NO-JIRA multiple fixs ([#506](https://github.com/dialpad/dialtone/issues/506)) ([c14a6da](https://github.com/dialpad/dialtone/commit/c14a6dacf57c6338baf5f0f25a0e9ed659bc5e8d))
+* **Tokens:** DLT-2054 support shadow dom ([#508](https://github.com/dialpad/dialtone/issues/508)) ([edd639f](https://github.com/dialpad/dialtone/commit/edd639f213795662c20c0114c0c1a2178af24736))
+
 ## [9.76.1](https://github.com/dialpad/dialtone/compare/dialtone/v9.76.0...dialtone/v9.76.1) (2024-09-24)
 
 
