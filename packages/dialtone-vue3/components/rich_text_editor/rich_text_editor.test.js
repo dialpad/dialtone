@@ -69,6 +69,7 @@ describe('DtRichTextEditor tests', () => {
   afterEach(function () {
     props = baseProps;
     slots = {};
+    wrapper.unmount();
   });
 
   describe('Presentation Tests', function () {

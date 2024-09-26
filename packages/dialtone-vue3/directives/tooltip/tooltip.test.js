@@ -44,7 +44,6 @@ describe('DtTooltipDirective Tests', () => {
         },
         plugins: [DtTooltipDirective],
       },
-      attachTo: document.body,
     });
 
     anchor = wrapper.find('button');

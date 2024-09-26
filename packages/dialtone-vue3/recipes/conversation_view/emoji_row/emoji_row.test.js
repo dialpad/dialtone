@@ -55,7 +55,6 @@ describe('DtRecipeEmojiRow Tests', function () {
       attrs,
       slots,
       provide,
-      attachTo: document.body,
     });
     _setChildWrappers();
   };

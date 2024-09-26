@@ -70,6 +70,7 @@ describe('DtPopover Tests', () => {
   afterEach(() => {
     mockProps = {};
     mockSlots = {};
+    wrapper.unmount();
   });
 
   afterAll(() => {
