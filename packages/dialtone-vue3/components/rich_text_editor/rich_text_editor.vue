@@ -530,9 +530,10 @@ export default {
             class: this.inputClass,
           },
 
-          // Absolutely crazy that this is what's needed to paste line breaks properly in prosemirror, but it does seem
-          // to fix our issue of line breaks outputting as paragraphs. Code taken from this thread:
-          // https://discuss.prosemirror.net/t/how-to-preserve-hard-breaks-when-pasting-html-into-a-plain-text-schema/4202/4
+          /* Absolutely crazy that this is what's needed to paste line breaks properly in prosemirror, but it does seem
+            to fix our issue of line breaks outputting as paragraphs. Code taken from this thread:
+            https://discuss.prosemirror.net/t/how-to-preserve-hard-breaks-when-pasting-html-into-a-plain-text-schema/4202/4
+          */
           handlePaste: function (view, event, slice) {
             const { state } = view;
             const { tr } = state;
