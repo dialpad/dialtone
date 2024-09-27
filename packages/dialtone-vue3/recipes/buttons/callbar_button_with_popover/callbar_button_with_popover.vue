@@ -77,7 +77,7 @@ import { DtButton } from '@/components/button';
 import { DtPopover } from '@/components/popover';
 import { DtIcon } from '@/components/icon';
 import { DtRecipeCallbarButton, CALLBAR_BUTTON_VALID_WIDTH_SIZE } from '../callbar_button';
-import utils from '@/common/utils';
+import utils, { warnIfUnmounted } from '@/common/utils';
 
 export default {
   name: 'DtRecipeCallbarButtonWithPopover',
@@ -313,6 +313,10 @@ export default {
 
       return this.toggleOpen();
     },
+  },
+
+  mounted () {
+    warnIfUnmounted(this.$el, this.$options.name);
   },
 
   methods: {

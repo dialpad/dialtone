@@ -135,7 +135,7 @@ import {
   POPOVER_ROLES,
   POPOVER_STICKY_VALUES,
 } from './popover_constants';
-import { getUniqueString, hasSlotContent, isOutOfViewPort } from '@/common/utils';
+import { getUniqueString, hasSlotContent, isOutOfViewPort, warnIfUnmounted } from '@/common/utils';
 import { DtLazyShow } from '@/components/lazy_show';
 import ModalMixin from '@/common/mixins/modal';
 import { createTippyPopover, getPopperOptions } from './tippy_utils';
@@ -703,6 +703,8 @@ export default {
   },
 
   mounted () {
+    warnIfUnmounted(this.$el, this.$options.name);
+
     const externalAnchorEl = this.externalAnchor
       ? this.$refs.anchor.getRootNode().querySelector(`#${this.externalAnchor}`)
       : null;
