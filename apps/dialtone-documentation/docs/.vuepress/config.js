@@ -55,8 +55,11 @@ export default defineUserConfig({
       },
       resolve: {
         alias: {
-          vue$: 'vue/dist/vue.esm-bundler.js',
+          vue: 'vue/dist/vue.esm-bundler.js',
         },
+      },
+      define: {
+        __VUE_PROD_HYDRATION_MISMATCH_DETAILS__: false,
       },
     },
     vuePluginOptions: {

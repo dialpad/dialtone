@@ -7,7 +7,8 @@
         "dialtone-css:build",
         "dialtone-icons:build",
         "dialtone-tokens:build",
-        "dialtone-vue3:build"
+        "dialtone-vue3:build",
+        "dialtone-combinator:build"
       ],
       "inputs": [
         "{projectRoot}/docs/**/*",
@@ -15,9 +16,7 @@
         "!{projectRoot}/docs/.vuepress/.temp",
         "!{projectRoot}/docs/.vuepress/dist"
       ],
-      "outputs": [
-        "{projectRoot}/docs/.vuepress/dist"
-      ],
+      "outputs": ["{projectRoot}/docs/.vuepress/dist"],
       "options": {
         "cwd": "{projectRoot}",
         "command": "vuepress build docs"
@@ -29,13 +28,14 @@
         "dialtone-css:build",
         "dialtone-icons:build",
         "dialtone-tokens:build",
-        "dialtone-vue3:build"
+        "dialtone-vue3:build",
+        "dialtone-combinator:build"
       ],
       "options": {
         "cwd": "{projectRoot}",
         "commands": [
           {
-            "command": "nx watch --projects=dialtone-css,dialtone-icons,dialtone-tokens,dialtone-vue3 --includeDependentProjects -- nx run \\$NX_PROJECT_NAME:build"
+            "command": "nx watch --projects=dialtone-css,dialtone-icons,dialtone-tokens,dialtone-vue3,dialtone-combinator --includeDependentProjects -- nx run \\$NX_PROJECT_NAME:build"
           },
           {
             "command": "vuepress dev docs"
