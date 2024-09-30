@@ -9,9 +9,15 @@ const ruleName = '@dialpad/stylelint-plugin-dialtone/use-dialtone-tokens';
 
 const messages = ruleMessages(ruleName, {
   useDialtoneTokens: (value) => `Use a Dialtone token instead of "${value}".
-    A list of available tokens can be found here: https://dialtone.dialpad.com/tokens.`,
-  useRemInsteadOfPx: (value) => `If it's not possible to use a Dialtone token, use rem instead of px for "${value}".`,
+    A list of available tokens can be found here: https://dialtone.dialpad.com/tokens.
+    Consult with design on which token should be used and only with their approval ignore this rule.`,
+  useRemInsteadOfPx: (value) => `If it's not possible to use a Dialtone token, use ${pxToRem(value)} instead of ${value}.`,
 });
+
+const pxToRem = (value) => {
+  const val = parseFloat(value.replace('px', ''));
+  return val / 10 + 'rem';
+}
 
 const meta = {
   url: "https://github.com/dialpad/dialtone/blob/staging/packages/stylelint-plugin-dialtone/docs/rules/use-dialtone-tokens.md",
