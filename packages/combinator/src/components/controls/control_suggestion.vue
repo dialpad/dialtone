@@ -2,7 +2,7 @@
   <div>
     <dt-recipe-combobox-with-popover
       ref="combobox"
-      list-aria-label="Valid values"
+      label="Valid values"
       max-height="512px"
       @select="e => onUpdate(suggestions[e])"
       @opened="onOpen"

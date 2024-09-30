@@ -3,10 +3,7 @@
   "version": "0.3.1",
   "description": "Dialtone vue component combinator playground",
   "scripts": {
-    "build": "vite build",
-    "dev": "vite",
     "lint": "eslint --ext .js,.vue --ignore-path .gitignore --fix src",
-    "serve": "vite preview",
     "test": "vue-cli-service test:unit --timeout 100000 --colors --recursive --glob *.test.js src"
   },
   "bugs": {
@@ -18,9 +15,7 @@
   },
   "type": "module",
   "module": "./dist/dialtone-combinator.js",
-  "files": [
-    "dist"
-  ],
+  "files": ["dist"],
   "exports": {
     ".": "./dist/dialtone-combinator.js",
     "./css": "./dist/style.css",
@@ -36,13 +31,10 @@
     "just-clone": "^6.1.1"
   },
   "devDependencies": {
-    "@vitejs/plugin-vue": "^5.1.3",
     "@vue/cli-plugin-unit-mocha": "^5.0.8",
-    "@vue/test-utils": "^2.0.2",
     "chai": "^4.3.6",
     "eslint-plugin-jsdoc": "^39.3.6",
-    "eslint-plugin-mocha": "^10.1.0",
-    "vite": "^5.4.2"
+    "eslint-plugin-mocha": "^10.1.0"
   },
   "peerDependencies": {
     "vue": ">=3.2"

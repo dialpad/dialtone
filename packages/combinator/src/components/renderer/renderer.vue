@@ -31,12 +31,12 @@
     </template>
     <template #overlay>
       <div class="d-d-flex d-jc-flex-end d-pt4 d-pe-auto">
-        <dtc-renderer-menu
+        <!--<dtc-renderer-menu
           :theme="theme"
           :background="background"
           :positioning="positioning"
           @update:settings="updateSettings"
-        />
+        />-->
       </div>
     </template>
   </dtc-overlay>
