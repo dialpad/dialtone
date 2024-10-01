@@ -18,6 +18,7 @@ on:
           - vue3
           - eslint-plugin
           - stylelint-plugin
+          - postcss-response-variations
   schedule:
     - cron: "0 10 * * 2"
 
@@ -56,7 +57,6 @@ jobs:
       pull-requests: write
     env:
       RELEASE_TAG: ${{ needs.get-branch-name.outputs.current_branch == 'staging' && 'latest' || needs.get-branch-name.outputs.current_branch }}
-      DIALTONE_RELEASE_TAG: ${{ needs.get-branch-name.outputs.current_branch == 'staging' && 'next' || needs.get-branch-name.outputs.current_branch }}
       DIALTONE_VUE3_RELEASE_TAG: ${{ needs.get-branch-name.outputs.current_branch == 'staging' && 'vue3' || needs.get-branch-name.outputs.current_branch }}
       NPM_TOKEN: ${{ secrets.DIALTONE_NPM_TOKEN }}
       GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -95,41 +95,45 @@ jobs:
         run: pnpm install --frozen-lockfile
 
       # Release to GitHub
-      - name: Release dialtone ${{ env.DIALTONE_RELEASE_TAG }}
+      - name: Release Dialtone ${{ env.RELEASE_TAG }}
         if: ${{ github.event_name == 'schedule' || github.event.inputs.package == 'all' || github.event.inputs.package == 'dialtone' }}
         run: pnpm nx run dialtone:release
 
-      - name: Release dialtone css ${{ env.RELEASE_TAG }}
+      - name: Release Dialtone CSS ${{ env.RELEASE_TAG }}
         if: ${{ github.event_name == 'schedule' || github.event.inputs.package == 'all' || github.event.inputs.package == 'css' }}
         run: pnpm nx run dialtone-css:release
 
-      - name: Release dialtone emojis ${{ env.RELEASE_TAG }}
+      - name: Release Dialtone Emojis ${{ env.RELEASE_TAG }}
         if: ${{ github.event_name == 'schedule' || github.event.inputs.package == 'all' || github.event.inputs.package == 'emojis' }}
         run: pnpm nx run dialtone-emojis:release
 
-      - name: Release dialtone icons ${{ env.RELEASE_TAG }}
+      - name: Release Dialtone Icons ${{ env.RELEASE_TAG }}
         if: ${{ github.event_name == 'schedule' || github.event.inputs.package == 'all' || github.event.inputs.package == 'icons' }}
         run: pnpm nx run dialtone-icons:release
 
-      - name: Release dialtone tokens ${{ env.RELEASE_TAG }}
+      - name: Release Dialtone Tokens ${{ env.RELEASE_TAG }}
         if: ${{ github.event_name == 'schedule' || github.event.inputs.package == 'all' || github.event.inputs.package == 'tokens' }}
         run: pnpm nx run dialtone-tokens:release
 
-      - name: Release dialtone-vue@${{ env.RELEASE_TAG }}
+      - name: Release Dialtone Vue@${{ env.RELEASE_TAG }}
         if: ${{ github.event_name == 'schedule' || github.event.inputs.package == 'all' || github.event.inputs.package == 'vue2' }}
         run: pnpm nx run dialtone-vue2:release
 
-      - name: Release dialtone-vue@${{ env.DIALTONE_VUE3_RELEASE_TAG }}
+      - name: Release Dialtone Vue@${{ env.DIALTONE_VUE3_RELEASE_TAG }}
         if: ${{ github.event_name == 'schedule' || github.event.inputs.package == 'all' || github.event.inputs.package == 'vue3' }}
         run: pnpm nx run dialtone-vue3:release
 
-      - name: Release Dialtone eslint plugin ${{ env.RELEASE_TAG }}
+      - name: Release Dialtone ESLint Plugin ${{ env.RELEASE_TAG }}
         if: ${{ github.event_name == 'schedule' || github.event.inputs.package == 'all' || github.event.inputs.package == 'eslint-plugin' }}
         run: pnpm nx run eslint-plugin-dialtone:release
 
-      - name: Release Dialtone stylelint plugin ${{ env.RELEASE_TAG }}
+      - name: Release Dialtone StyleLint Plugin ${{ env.RELEASE_TAG }}
         if: ${{ github.event_name == 'schedule' || github.event.inputs.package == 'all' || github.event.inputs.package == 'stylelint-plugin' }}
         run: pnpm nx run stylelint-plugin-dialtone:release
+
+      - name: Release Dialtone PostCSS Responsive Variations Plugin ${{ env.RELEASE_TAG }}
+        if: ${{ github.event_name == 'schedule' || github.event.inputs.package == 'all' || github.event.inputs.package == 'dialtone' }}
+        run: pnpm nx run postcss-responsive-variations:release
 
   push:
     needs: [ release ]
