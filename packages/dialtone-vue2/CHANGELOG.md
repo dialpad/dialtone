@@ -1,3 +1,18 @@
+# [2.162.0](https://github.com/dialpad/dialtone/compare/dialtone-vue2/v2.161.2...dialtone-vue2/v2.162.0) (2024-10-01)
+
+
+### Code Refactoring
+
+* **Badge, Emoji Tabset, Empty State:** remove DtIcon ([#481](https://github.com/dialpad/dialtone/issues/481)) ([0fa1280](https://github.com/dialpad/dialtone/commit/0fa12804511cf588245a2ad59b3c5d01f4eccc84))
+
+
+### Features
+
+* **Avatar:** DLT-1916 remove dt-icon from Avatar vue 2 ([#474](https://github.com/dialpad/dialtone/issues/474)) ([e8600c3](https://github.com/dialpad/dialtone/commit/e8600c39dc4cafe56e13643b293e606fab4a3107))
+* **Feed Item Pill:** DLT-1916 remove dt-icon from Feed Item Pill ([#489](https://github.com/dialpad/dialtone/issues/489)) ([bde73c8](https://github.com/dialpad/dialtone/commit/bde73c85a53249ce58b603f44e0115e82cb96bb1))
+* **Keyboard Shortcut To Unread Pill:** DLT-1916 remove dt-icon ([#482](https://github.com/dialpad/dialtone/issues/482)) ([277ae13](https://github.com/dialpad/dialtone/commit/277ae138fbc2ed7aad0c5428ce3b8f3ba3de667a))
+* **Message Input:** DLT-1916 remove dt-icon from message input ([#490](https://github.com/dialpad/dialtone/issues/490)) ([3215116](https://github.com/dialpad/dialtone/commit/3215116e49f1e91a264de4db99f3db60fff9029c))
+
 ## [2.161.2](https://github.com/dialpad/dialtone/compare/dialtone-vue2/v2.161.1...dialtone-vue2/v2.161.2) (2024-09-27)
 
 
