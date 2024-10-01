@@ -1,18 +1,11 @@
 {
   "name": "@dialpad/dialtone",
-  "version": "9.76.0",
+  "version": "9.76.3",
   "packageManager": "pnpm@9.9.0",
   "description": "Dialpad's Dialtone design system monorepo",
   "scripts": {
-    "test:all": "nx run-many --target=test",
-    "build:all": "nx run-many --target=build",
-    "lint:all": "nx run-many --target=lint",
-    "start:dialtone": "nx run-many --target=start --projects=dialtone-css,dialtone-documentation",
-    "start:dialtone-vue3": "nx run-many --target=start --projects=dialtone-css,dialtone-vue3",
-    "start:dialtone-vue2": "nx run-many --target=start --projects=dialtone-css,dialtone-vue2",
     "prepare": "husky install",
-    "prepack": "nx build --skip-nx-cache",
-    "test:vue": "vitest run --test-timeout=10000"
+    "prepack": "nx run dialtone:build --skip-nx-cache"
   },
   "pnpm": {
     "peerDependencyRules": {
@@ -70,9 +63,10 @@
     "./css-default-theme": "./dist/css/dialtone-default-theme.min.css",
     "./tokens/*.css": "./dist/tokens/css/*.css",
     "./tokens/*.less": "./dist/tokens/less/*.less",
-    "./tokens/postcss/rem-to-px": {
-      "import": "./dist/tokens/postcss/rem-to-px.js",
-      "require": "./dist/tokens/postcss/rem-to-px.cjs"
+    "./tokens/postcss/*": {
+      "types": "./dist/tokens/types/postcss/*.d.ts",
+      "import": "./dist/tokens/postcss/*.js",
+      "require": "./dist/tokens/postcss/*.cjs"
     },
     "./vue2": {
       "types": "./dist/vue2/types/index.d.ts",
@@ -97,7 +91,7 @@
       "require": "./dist/vue3/*.cjs"
     },
     "./themes/*": {
-      "types": "./dist/tokens/themes/types/*.d.ts",
+      "types": "./dist/tokens/types/themes/*.d.ts",
       "import": "./dist/tokens/themes/*.js",
       "require": "./dist/tokens/themes/*.cjs"
     },
@@ -133,7 +127,6 @@
     "emoji-toolkit": "8.0.0",
     "overlayscrollbars": "2.10.0",
     "regex-combined-emojis": "1.6.0",
-    "stylelint": "15.11.0",
     "tippy.js": "6.3.7"
   },
   "devDependencies": {
@@ -141,10 +134,32 @@
     "@commitlint/config-conventional": "^17.6.6",
     "@dialpad/conventional-changelog-angular": "^1.1.1",
     "@dialpad/semantic-release-changelog-json": "^1.0.0",
+    "@faker-js/faker": "8.4.1",
+    "@percy/cli": "1.29.3",
+    "@percy/storybook": "6.0.2",
     "@semantic-release/changelog": "^6.0.3",
     "@semantic-release/exec": "^6.0.3",
     "@semantic-release/git": "^10.0.1",
+    "@storybook/addon-a11y": "7.6.20",
+    "@storybook/addon-actions": "7.6.20",
+    "@storybook/addon-docs": "7.6.20",
+    "@storybook/addon-essentials": "7.6.20",
+    "@storybook/addon-links": "7.6.20",
+    "@storybook/addon-mdx-gfm": "7.6.20",
+    "@storybook/addon-viewport": "7.6.20",
+    "@storybook/blocks": "7.6.20",
+    "@storybook/manager-api": "7.6.20",
+    "@storybook/test-runner": "^0.16.0",
+    "@storybook/testing-library": "^0.2.2",
+    "@storybook/theming": "7.6.20",
+    "@vitejs/plugin-vue": "^5.0.3",
+    "@vitejs/plugin-vue2": "^2.3.1",
+    "@vue/tsconfig": "^0.4.0",
+    "axe-core": "^4.7.2",
+    "axe-playwright": "^1.2.3",
     "concurrently": "^8.2.2",
+    "c8": "^8.0.0",
+    "del": "^6.1.1",
     "eslint": "^8.55.0",
     "eslint-config-semistandard": "^17.0.0",
     "eslint-config-standard": "^17.1.0",
@@ -157,28 +172,50 @@
     "eslint-plugin-vitest-globals": "^1.3.1",
     "eslint-plugin-vue": "^9.15.1",
     "eslint-plugin-vuejs-accessibility": "^2.1.0",
+    "glob": "^10.3.10",
     "gulp": "^4.0.2",
+    "gulp-rename": "^2.0.0",
+    "gulp-replace": "^1.1.4",
+    "gulp-svgmin": "^4.1.0",
     "http-server": "^14.1.1",
     "husky": "^8.0.3",
+    "jsdom": "^24.0.0",
     "lesshint": "^6.3.7",
     "lint-staged": "^15.2.0",
+    "macos-release": "^3.2.0",
     "markdownlint": "^0.32.1",
     "markdownlint-cli": "^0.35.0",
-    "nx": "^17.2.1",
+    "npm-run-all": "^4.1.5",
+    "null-loader": "^4.0.1",
+    "nx": "19.8.0",
     "playwright": "^1.42.1",
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1",
     "semantic-release": "^21.0.6",
     "semantic-release-npm-github-publish": "^1.5.4",
     "semantic-release-plus": "^20.0.0",
-    "stylelint": "15.11.0",
+    "source-map-support": "^0.5.21",
+    "storybook": "7.6.20",
+    "storybook-dark-mode": "^3.0.3",
+    "string-hash": "^1.1.3",
+    "stylelint": "^15.11.0",
     "stylelint-config-rational-order": "^0.1.2",
     "stylelint-config-recommended-less": "1.0.4",
     "stylelint-config-standard": "^33.0.0",
     "stylelint-less": "1.0.4",
     "stylelint-no-px": "^1.0.1",
+    "tinycolor2": "^1.6.0",
+    "typedoc": "^0.25.2",
+    "typedoc-plugin-markdown": "^3.16.0",
+    "typescript": "^5.2",
     "vite": "^5.4.2",
+    "vite-bundle-visualizer": "^1.0.1",
+    "vite-plugin-dts": "^4.0.3",
     "vitest": "^1.0.4",
     "vue-docgen-api": "^4.75.0",
-    "wait-on": "^7.2.0"
+    "vue-template-compiler": "^2.7.16",
+    "wait-on": "^7.2.0",
+    "yo": "^5.0.0"
   },
   "peerDependencies": {
     "@linusborg/vue-simple-portal": "0.1.5",
@@ -216,5 +253,8 @@
   "publishConfig": {
     "access": "public"
   },
-  "sideEffects": false
+  "sideEffects": false,
+  "nx": {
+    "includedScripts": []
+  }
 }

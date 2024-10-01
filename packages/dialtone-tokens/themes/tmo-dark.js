@@ -1,5 +1,5 @@
-import Base from '@dialpad/dialtone-tokens/dist/css/tokens-base-dark.css?inline';
-import Brand from '@dialpad/dialtone-tokens/dist/css/tokens-tmo-dark.css?inline';
+import Base from '@dialpad/dialtone-tokens/tokens-base-dark.css?inline';
+import Brand from '@dialpad/dialtone-tokens/tokens-tmo-dark.css?inline';
 
 export default {
   base: {

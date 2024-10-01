@@ -1,11 +1,9 @@
 {
   "name": "@dialpad/dialtone-tokens",
-  "version": "1.36.2",
+  "version": "1.36.4",
   "description": "Design tokens for Dialtone.",
   "type": "module",
   "scripts": {
-    "build": "node ./build.js && vite build",
-    "publish:external-packages": "pnpm run publish:android-package && pnpm run publish:ios-package",
     "publish:android-package": "cp ./AndroidManifest.xml dist/android && ./gradlew publishToMavenLocal -Pversion=$npm_package_version",
     "publish:ios-package": "./build-ios.js",
     "sync:tokens-to-figma": "tsx sync-scripts/sync_tokens_to_figma.ts",
@@ -14,6 +12,21 @@
   "files": [
     "dist"
   ],
+  "exports": {
+    "./*.css": "./dist/css/*.css",
+    "./*.less": "./dist/less/*.less",
+    "./postcss/*": {
+      "types": "./dist/types/postcss/*.d.ts",
+      "import": "./dist/postcss/*.js",
+      "require": "./dist/postcss/*.cjs"
+    },
+    "./themes/*": {
+      "types": "./dist/types/themes/*.d.ts",
+      "import": "./dist/themes/*.js",
+      "require": "./dist/themes/*.cjs"
+    },
+    "./*": "./*"
+  },
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/dialpad/dialtone-tokens/issues"
@@ -30,10 +43,7 @@
     "postcss": "8.4.39",
     "postcss-cli": "11.0.0",
     "style-dictionary": "^4.1.0",
-    "tinycolor2": "^1.6.0",
-    "tsx": "^4.19.0",
-    "typescript": "^5.1.6",
-    "vite-plugin-dts": "^4.0.3"
+    "tsx": "^4.19.0"
   },
   "contributors": [
     {
