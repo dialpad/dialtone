@@ -1,6 +1,6 @@
 {
   "name": "@dialpad/dialtone-vue",
-  "version": "3.154.2",
+  "version": "3.155.0",
   "description": "Vue component library for Dialpad's design system Dialtone",
   "scripts": {
     "lint": "run-s lint:code lint:docs",
