@@ -1,0 +1,21 @@
+.dtc-theme__canvas {
+  color: var(--dtc-theme-color-foreground);
+  background-color: var(--dtc-theme-color-background);
+}
+
+.dtc-theme__canvas--inverted {
+  color: var(--dtc-theme-color-background);
+  background-color: var(--dtc-theme-color-foreground);
+}
+
+.dtc-theme__popover {
+  .dtc-theme__canvas--inverted();
+}
+
+.dtc-theme__popover *[class^="d-"][class$="__label"] {
+  color: var(--dtc-theme-color-background);
+}
+
+.dtc-theme__interactive {
+  color: var(--primary-color);
+}
