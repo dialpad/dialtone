@@ -81,6 +81,7 @@ async function registerDialtoneVue (app) {
 
   const dialtoneConstants = [];
   const dialtoneComponents = [];
+  const dialtoneUtils = [];
 
   Object.keys(module).forEach(key => {
     if (/^[A-Z_]+$/.test(key)) {
@@ -90,16 +91,19 @@ async function registerDialtoneVue (app) {
     } else if (key.startsWith('Dt')) {
       dialtoneComponents[key] = module[key];
       app.component(key, module[key]);
+    } else {
+      dialtoneUtils[key] = module[key];
     }
   });
 
+  app.provide('dialtoneUtils', dialtoneUtils);
   app.provide('dialtoneComponents', dialtoneComponents);
   app.provide('dialtoneComponentsDocumentation', documentation.default);
 
   window.DIALTONE_CONSTANTS = dialtoneConstants;
 
   // setup custom emojis
-  const { setCustomEmojiUrl, setCustomEmojiJson } = module;
+  const { setCustomEmojiUrl, setCustomEmojiJson } = dialtoneUtils;
   setCustomEmojiUrl('https://github.githubassets.com/images/icons/emoji/');
   setCustomEmojiJson(customEmojis);
 }
