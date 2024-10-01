@@ -179,6 +179,7 @@
     "gulp-svgmin": "^4.1.0",
     "http-server": "^14.1.1",
     "husky": "^8.0.3",
+    "jest": "^29.5.0",
     "jsdom": "^24.0.0",
     "lesshint": "^6.3.7",
     "lint-staged": "^15.2.0",

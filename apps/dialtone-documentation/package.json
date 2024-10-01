@@ -50,7 +50,6 @@
     "@dialpad/dialtone-icons": "workspace:*",
     "@dialpad/dialtone-tokens": "workspace:*",
     "@dialpad/dialtone-vue": "workspace:^3",
-    "@dialpad/postcss-responsive-variations": "^1.1.5",
     "@docsearch/js": "^3.5.1",
     "@originjs/vite-plugin-commonjs": "^1.0.3",
     "@toycode/markdown-it-class": "^1.2.4",
