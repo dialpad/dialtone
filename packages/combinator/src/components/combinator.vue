@@ -12,12 +12,12 @@
     </dt-notice>
     <div class="d-d-flex d-hmx464">
       <div
-        class="dtc-root d-d-grid d-of-hidden d-ba d-bar4 d-w100p"
-        :class="{
-          [rootClass]: true,
-          [`dtc-root&#45;&#45;sidebar-${settings.root.sidebar}`]: true,
-          'dtc-root&#45;&#45;blueprint': blueprint,
-        }"
+        :class="[
+          'dtc-root d-d-grid d-of-hidden d-ba d-bar4 d-w100p',
+          `dtc-root--sidebar-${settings.root.sidebar}`,
+          rootClass,
+          { 'dtc-root--blueprint': blueprint },
+        ]"
       >
         <div class="dtc-root__top">
           <dtc-renderer
