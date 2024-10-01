@@ -1,0 +1,72 @@
+{
+  "name": "@dialpad/postcss-responsive-variations",
+  "version": "1.1.5",
+  "description": "PostCSS plugin for creating responsive variations from a list of classes",
+  "scripts": {
+    "test": "jest --coverage",
+    "lint": "eslint . --fix"
+  },
+  "files": ["index.js"],
+  "dependencies": {
+    "postcss": "^8.4.1"
+  },
+  "devDependencies": {
+    "clean-publish": "^3.4.2"
+  },
+  "peerDependencies": {
+    "postcss": "^8.4.1"
+  },
+  "bugs": {
+    "email": "dialtone@dialpad.com"
+  },
+  "contributors": [
+    {
+      "name": "Brad Paugh",
+      "email": "brad.paugh@dialpad.com",
+      "url": "https://github.com/braddialpad"
+    },
+    {
+      "name": "Francis Rupert",
+      "email": "francis.rupert@dialpad.com",
+      "url": "https://github.com/francisrupert"
+    },
+    {
+      "name": "Julio Ortega",
+      "email": "julio.ortega@dialpad.com",
+      "url": "https://github.com/juliodialpad"
+    },
+    {
+      "name": "Ignacio Ropolo",
+      "email": "ignacio.ropolo@dialpad.com",
+      "url": "https://github.com/iropolo"
+    },
+    {
+      "name": "Nina Repetto",
+      "email": "nina.repetto@dialpad.com",
+      "url": "https://github.com/ninamarina"
+    }
+  ],
+  "engineStrict": true,
+  "engines": {
+    "node": ">=12.0.0"
+  },
+  "main": "index.js",
+  "exports": {
+    ".": "./index.js"
+  },
+  "keywords": [
+    "postcss",
+    "css",
+    "postcss-plugin",
+    "postcss-responsive-variations",
+    "responsive"
+  ],
+  "license": "MIT",
+  "jest": {
+    "coverageThreshold": {
+      "global": {
+        "statements": 100
+      }
+    }
+  }
+}
