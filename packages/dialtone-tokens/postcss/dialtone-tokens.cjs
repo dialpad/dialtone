@@ -7,6 +7,7 @@ const {
   IS_SHADOW_REGEX,
   IS_TYPOGRAPHY_REGEX,
   REGEX_OPTIONS,
+  HSLA_EXCLUDED_COLORS,
 } = require('./constants.cjs');
 
 let newDocEntries = {};
@@ -103,15 +104,31 @@ function generateColorHsla (declaration) {
     return false;
   });
 
-  if ((IS_COLOR_REGEX.test(declaration.prop) || IS_THEME_COLOR_REGEX.test(declaration.prop)) && !isHSLA) {
-    const color = tinycolor(declaration.value);
-    const { h: hue, s: saturation, l: lightness } = color.toHsl();
+  const isReferenceToken = (value) => value.includes('var(--');
+  const shouldHaveHSLAGenerated = (prop) =>
+    (IS_COLOR_REGEX.test(prop) ||
+    IS_THEME_COLOR_REGEX.test(prop)) &&
+    !isHSLA &&
+    !HSLA_EXCLUDED_COLORS.includes(prop);
 
-    declaration.before({ prop: `${declaration.prop}-h`, value: `${hue}` });
-    declaration.before({ prop: `${declaration.prop}-s`, value: `${saturation * 100}%` });
-    declaration.before({ prop: `${declaration.prop}-l`, value: `${lightness * 100}%` });
-    declaration.before({ prop: `${declaration.prop}-hsl`, value: `var(${declaration.prop}-h) var(${declaration.prop}-s) var(${declaration.prop}-l)` });
-    declaration.before({ prop: `${declaration.prop}-hsla`, value: `hsla(var(${declaration.prop}-h) var(${declaration.prop}-s) var(${declaration.prop}-l) / var(--alpha, 100%))` });
+  if (shouldHaveHSLAGenerated(declaration.prop)) {
+    if (isReferenceToken(declaration.value)) {
+      const varName = declaration.value.substring(4, declaration.value.length - 1);
+      declaration.before({ prop: `${declaration.prop}-h`, value: `var(${varName}-h)` });
+      declaration.before({ prop: `${declaration.prop}-s`, value: `var(${varName}-s)` });
+      declaration.before({ prop: `${declaration.prop}-l`, value: `var(${varName}-l)` });
+      declaration.before({ prop: `${declaration.prop}-hsl`, value: `var(${varName}-hsl)` });
+      declaration.before({ prop: `${declaration.prop}-hsla`, value: `var(${varName}-hsla)` });
+    } else {
+      const color = tinycolor(declaration.value);
+      const { h: hue, s: saturation, l: lightness } = color.toHsl();
+
+      declaration.before({ prop: `${declaration.prop}-h`, value: `${hue}` });
+      declaration.before({ prop: `${declaration.prop}-s`, value: `${saturation * 100}%` });
+      declaration.before({ prop: `${declaration.prop}-l`, value: `${lightness * 100}%` });
+      declaration.before({ prop: `${declaration.prop}-hsl`, value: `var(${declaration.prop}-h) var(${declaration.prop}-s) var(${declaration.prop}-l)` });
+      declaration.before({ prop: `${declaration.prop}-hsla`, value: `hsla(var(${declaration.prop}-h) var(${declaration.prop}-s) var(${declaration.prop}-l) / var(--alpha, 100%))` });
+    }
   }
 }
 
