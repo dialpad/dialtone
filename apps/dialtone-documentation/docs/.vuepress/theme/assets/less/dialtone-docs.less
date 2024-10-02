@@ -73,6 +73,14 @@ html body {
     box-shadow: var(--dt-shadow-large);
   }
 
+  &.DocSearch--active {
+    overflow: hidden !important;
+
+    & .os-scrollbar {
+      display: none;
+    }
+  }
+
   .DocSearch-SearchBar {
     padding-bottom: var(--dt-space-550);
     border-bottom: 1px solid var(--dt-color-border-subtle);
