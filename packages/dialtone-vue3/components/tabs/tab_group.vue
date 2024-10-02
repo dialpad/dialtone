@@ -33,7 +33,6 @@
 </template>
 
 <script>
-import { warnIfUnmounted } from '@/common/utils';
 import {
   TAB_LIST_SIZES,
   TAB_LIST_KIND_MODIFIERS,
@@ -172,7 +171,6 @@ export default {
 
   mounted () {
     this.updateSelected();
-    warnIfUnmounted(this.$el, this.$options.name);
   },
 
   beforeUpdate () {
