@@ -10,6 +10,7 @@ import { flushPromises } from '@workspaceRoot/common/utils';
 // CSS
 import '@dialpad/dialtone-css/lib/dist/dialtone.css';
 import '@dialpad/dialtone-vue/css';
+import '@dialpad/dialtone-combinator/css';
 import './assets/less/dialtone-docs.less';
 import './assets/less/dialtone-syntax.less';
 
@@ -41,7 +42,8 @@ export default defineClientConfig({
     if (!__VUEPRESS_SSR__) {
       await initOverlayScrollbars();
       await registerDialtoneVue(app);
-      // await registerDialtoneCombinator(app);
+      await registerDialtoneCombinator(app);
+      await registerDialtoneIcons(app);
     }
     router.options.scrollBehavior = async (to, from, savedPosition) => {
       if (to.hash) {
@@ -75,36 +77,56 @@ export default defineClientConfig({
 
 async function registerDialtoneVue (app) {
   const module = await import('@dialpad/dialtone-vue');
+  const documentation = await import('@dialpad/dialtone-vue/component-documentation.json');
+
   const dialtoneConstants = [];
   const dialtoneComponents = [];
+  const dialtoneUtils = [];
 
   Object.keys(module).forEach(key => {
     if (/^[A-Z_]+$/.test(key)) {
       dialtoneConstants[key] = module[key];
     } else if (key.endsWith('Directive')) {
       app.use(module[key]);
-    } else {
+    } else if (key.startsWith('Dt')) {
       dialtoneComponents[key] = module[key];
       app.component(key, module[key]);
+    } else {
+      dialtoneUtils[key] = module[key];
     }
   });
 
+  app.provide('dialtoneUtils', dialtoneUtils);
   app.provide('dialtoneComponents', dialtoneComponents);
+  app.provide('dialtoneComponentsDocumentation', documentation.default);
 
   window.DIALTONE_CONSTANTS = dialtoneConstants;
 
   // setup custom emojis
-  const { setCustomEmojiUrl, setCustomEmojiJson } = dialtoneComponents;
+  const { setCustomEmojiUrl, setCustomEmojiJson } = dialtoneUtils;
   setCustomEmojiUrl('https://github.githubassets.com/images/icons/emoji/');
   setCustomEmojiJson(customEmojis);
 }
 
-// This is commented because we are currently not using the combinator and it's
-// adding some wrong styles to the page for the dt-list-item component.
+async function registerDialtoneCombinator (app) {
+  const { DtcCombinator } = await import('@dialpad/dialtone-combinator');
+  app.component('DtcCombinator', DtcCombinator);
+}
 
-// async function registerDialtoneCombinator (app) {
-//   const module = await import('@dialpad/dialtone-combinator');
-//   app.component('DtcCombinator', module.DtcCombinator);
-//   app.component('DtcSection', module.DtcSection);
-//   app.provide('variantBank', module.variantBank());
-// }
+async function registerDialtoneIcons (app) {
+  const icons = await import('@dialpad/dialtone-icons/vue3');
+
+  const dialtoneIcons = [];
+  const dialtoneIllustrations = [];
+
+  Object.keys(icons).forEach(key => {
+    if (key.startsWith('DtIcon')) {
+      dialtoneIcons[key] = icons[key];
+    } else if (key.startsWith('DtIllustration')) {
+      dialtoneIllustrations[key] = icons[key];
+    }
+  });
+
+  app.provide('dialtoneIcons', dialtoneIcons);
+  app.provide('dialtoneIllustrations', dialtoneIllustrations);
+}

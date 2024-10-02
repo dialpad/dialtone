@@ -1,6 +1,5 @@
 import { controlMap } from '@/src/lib/control';
 import { extendBinding, extendEvent, extendMember } from '@/src/lib/info_extend';
-import clone from 'just-clone';
 
 /**
  * Gets component data from the documentation and processing on it
@@ -11,12 +10,11 @@ import clone from 'just-clone';
  *
  * @param {object} component - The target component.
  * @param {object} documentation - The component documentation.
- * @returns {Array} A newly instantiated info object.
+ * @returns {object} A newly instantiated info object.
  */
 export function getComponentInfo (component, documentation) {
-  const info = clone(documentation.find(componentInfo => componentInfo.displayName === component.name));
-  extendInfo(info, component);
-  return info;
+  extendInfo(documentation, component);
+  return documentation;
 }
 
 /**
@@ -35,6 +33,7 @@ export function getComponentInfo (component, documentation) {
  * @param {object} info - The unprocessed info object.
  * @param {object} component - The target component.
  */
+// eslint-disable-next-line complexity
 function extendInfo (info, component) {
   if (!info) {
     return;

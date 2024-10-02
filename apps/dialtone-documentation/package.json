@@ -46,6 +46,7 @@
   },
   "type": "module",
   "devDependencies": {
+    "@dialpad/dialtone-combinator": "workspace:*",
     "@dialpad/dialtone-css": "workspace:*",
     "@dialpad/dialtone-icons": "workspace:*",
     "@dialpad/dialtone-tokens": "workspace:*",

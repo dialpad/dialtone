@@ -61,9 +61,7 @@
 </template>
 
 <script setup>
-import { DtIconArrowLeft } from '@dialpad/dialtone-icons/vue3'
-import { DtIconAlignCenter } from '@dialpad/dialtone-icons/vue3'
-import { DtIconMenu } from '@dialpad/dialtone-icons/vue3'
+import { DtIconArrowLeft, DtIconAlignCenter, DtIconMenu } from '@dialpad/dialtone-icons/vue3';
 import DtcButtonBar from '../tools/button_bar.vue';
 import { DtButton, DtPopover } from '@dialpad/dialtone-vue';
 import { SETTINGS_UPDATE_EVENT } from '@/src/lib/constants';
@@ -101,11 +99,3 @@ export default {
   name: 'DtcRendererMenu',
 };
 </script>
-
-<style lang="less">
-@import (reference) "@/src/assets/dialtone.less";
-
-  .dtc-renderer-menu__button--dark {
-    .d-btn--inverted() !important;
-  }
-</style>

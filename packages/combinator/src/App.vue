@@ -1,70 +1,52 @@
 <template>
-  <div
-    class="dtc-preview d-d-flex d-fd-column d-ai-center d-w100p"
-    :class="`d-bgc-${background}`"
+  <dt-stack
+    gap="500"
+    class="d-ai-center"
   >
-    <dtc-button-bar
-      class="d-ps-absolute d-m8 d-t0 d-r0"
-      :value="background"
-      @click="updateBackground"
+    <dtc-suggestion
+      :value="component.name"
+      :suggestions="options"
+      @update:value="updateComponent"
     >
-      <template #orange-200>
-        <div class="d-w16 d-h16 d-ba d-bc-black d-bgc-orange-200" />
+      <span>Target Component</span>
+      <template #item="{ value }">
+        <span class="d-d-flex d-jc-space-between">
+          <span>{{ value }}</span>
+          <dt-badge
+            v-if="!isSupportedComponent(value)"
+            class="d-ml6"
+            color="yellow-300"
+          >
+            Unsupported
+          </dt-badge>
+          <dt-badge
+            v-if="value === DEFAULT_COMPONENT"
+            color="purple-500"
+          >
+            Default
+          </dt-badge>
+        </span>
       </template>
-      <template #black-800>
-        <div class="d-w16 d-h16 d-ba d-bc-black d-bgc-black-800" />
-      </template>
-      <template #white>
-        <div class="d-w16 d-h16 d-ba d-bc-black d-bgc-white" />
-      </template>
-    </dtc-button-bar>
-    <div class="d-mb16">
-      <dtc-suggestion
-        :value="component.name"
-        :suggestions="options"
-        @update:value="updateComponent"
-      >
-        <span>Target Component</span>
-        <template #item="{ value }">
-          <span class="d-d-flex d-jc-space-between">
-            <span>{{ value }}</span>
-            <dt-badge
-              v-if="!isSupportedComponent(value)"
-              class="d-ml6"
-              color="yellow-300"
-            >
-              Unsupported
-            </dt-badge>
-            <dt-badge
-              v-if="value === DEFAULT_COMPONENT"
-              color="purple-500"
-            >
-              Default
-            </dt-badge>
-          </span>
-        </template>
-      </dtc-suggestion>
-    </div>
-    <div class="d-d-flex d-as-stretch d-hmn0">
+    </dtc-suggestion>
+    <div class="d-mx128 lg:d-mx16">
       <Combinator
         :key="componentKey"
         :component="component"
         :variants="variants"
-        :documentation="documentation"
+        :documentation="componentDocumentation"
         :library="library"
       />
     </div>
-  </div>
+  </dt-stack>
 </template>
 
 <script setup>
-import documentation from '@/node_modules/@dialpad/dialtone-vue/dist/component-documentation.json';
+import documentation from '@dialpad/dialtone-vue/component-documentation.json';
 import * as modules from '@dialpad/dialtone-vue';
 import Combinator from './components/combinator.vue';
 import { computed, markRaw, onMounted, ref } from 'vue';
 import { DIALTONE_PREFIX } from '@/src/lib/constants';
-import { DtBadge } from '@dialpad/dialtone-vue';
-import DtcButtonBar from '@/src/components/tools/button_bar.vue';
+import { DtBadge, DtStack } from '@dialpad/dialtone-vue';
 import DtcSuggestion from '@/src/components/controls/control_suggestion.vue';
 import supportedComponentData from '@/src/supported_components.json';
 import variantBank from '@/src/variants/variants';
@@ -122,6 +104,10 @@ const library = computed(() => {
   };
 });
 
+const componentDocumentation = computed(() => {
+  return documentation.find(componentInfo => componentInfo.displayName === component.value.name);
+});
+
 onMounted(async () => {
   addEventListener('hashchange', () => {
     component.value = getComponentFromHash();
@@ -138,8 +124,6 @@ onMounted(async () => {
 });
 
 </script>
-
-<style lang="less" src="./assets/transitions.less" />
 
 <style>
   .dtc-preview {

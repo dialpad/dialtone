@@ -1,24 +1,5 @@
 <template>
-  <div
-    class="dtc-combinator d-d-flex d-fd-column d-w100p"
-    :class="`dtc-theme--${settings.root.theme}`"
-  >
-    <div
-      v-if="!blueprint"
-      class="d-mb6"
-    >
-      <div
-        :class="headerClass"
-        class="d-of-hidden d-ba d-bar4"
-      >
-        <dtc-header
-          :component="component"
-          :variants="variants"
-          :selected-variant="selectedVariant"
-          @update:variant="updateVariant"
-        />
-      </div>
-    </div>
+  <div class="dtc-combinator">
     <dt-notice
       v-if="showUnsupportedWarning"
       class="d-wmx-unset"
@@ -29,14 +10,14 @@
     >
       May have unexpected behaviour.
     </dt-notice>
-    <div class="d-d-flex d-fl-grow1 d-hmx464">
+    <div class="d-d-flex d-hmx464">
       <div
-        class="dtc-root d-d-grid d-of-hidden d-ba d-bar4 d-w100p"
-        :class="{
-          [rootClass]: true,
-          [`dtc-root--sidebar-${settings.root.sidebar}`]: true,
-          'dtc-root--blueprint': blueprint,
-        }"
+        :class="[
+          'dtc-root d-d-grid d-of-hidden d-ba d-bar4 d-w100p',
+          `dtc-root--sidebar-${settings.root.sidebar}`,
+          rootClass,
+          { 'dtc-root--blueprint': blueprint },
+        ]"
       >
         <div class="dtc-root__top">
           <dtc-renderer
@@ -166,7 +147,7 @@ function updateVariant (e) {
 function initializeInfo () {
   const info = getComponentInfo(props.component, props.documentation);
 
-  const variantInfo = props.variants[selectedVariant.value];
+  const variantInfo = props.variants?.[selectedVariant.value];
 
   if (variantInfo) {
     Object.entries(variantInfo).forEach(([memberGroup, members]) => {
@@ -307,7 +288,7 @@ const settings = computedModel(
   },
 );
 
-const showUnsupportedWarning = ref(!supportedComponents.includes(props.component.name));
+const showUnsupportedWarning = ref(!supportedComponents.includes(props.component?.name));
 
 function hideUnsupportedMessage () {
   showUnsupportedWarning.value = false;
@@ -337,8 +318,6 @@ export default {
 
 <style lang="less">
 @import "@/src/assets/themes/base.less";
-.dtc-theme--light { @import "@/src/assets/themes/light.less"; }
-.dtc-theme--dark { @import "@/src/assets/themes/dark.less"; }
 
 .dtc-root {
   grid-template-rows: repeat(2, 1fr);

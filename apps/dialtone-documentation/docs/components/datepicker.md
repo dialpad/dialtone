@@ -577,8 +577,8 @@ The formatted numerical date string.
 <script setup>
 import { ref, inject } from 'vue';
 
-const dialtoneComponents = inject('dialtoneComponents');
-const { formatLong, formatMedium, formatShort, formatNoYear, formatNumerical } = dialtoneComponents;
+const dialtoneUtils = inject('dialtoneUtils');
+const { formatLong, formatMedium, formatShort, formatNoYear, formatNumerical } = dialtoneUtils;
 
 const locale = 'en-US';
 const changeToLabel = 'Change to';

@@ -16,6 +16,7 @@ const props = defineProps({
     type: Object,
     required: true,
   },
+
   /**
    * Members to bind to the target component.
    */
@@ -23,6 +24,7 @@ const props = defineProps({
     type: undefined,
     required: true,
   },
+
   /**
    * Events to bind to the target component.
    */
