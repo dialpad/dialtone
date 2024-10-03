@@ -92,6 +92,7 @@ describe('DtRecipeEditor tests', () => {
   // Test Teardown
   afterEach(function () {
     propsData = baseProps;
+    wrapper.destroy();
   });
 
   describe('Presentation Tests', function () {
