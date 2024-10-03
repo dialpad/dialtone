@@ -3,9 +3,7 @@
   "targets": {
     "build": {
       "executor": "nx:run-commands",
-      "dependsOn": [
-        "dialtone-tokens:build"
-      ],
+      "dependsOn": ["dialtone-tokens:build"],
       "options": {
         "cwd": "{projectRoot}",
         "command": "gulp"
@@ -13,6 +11,8 @@
       "inputs": [
         "{projectRoot}/lib/build/less/**/*",
         "{projectRoot}/lib/build/js/**/*",
+        "{projectRoot}/postcss/*.cjs",
+        "!{projectRoot}/postcss/*.test.cjs",
         "{projectRoot}/gulpfile.cjs",
         "{projectRoot}/dialtone.less"
       ],
