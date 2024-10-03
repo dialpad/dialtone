@@ -40,6 +40,7 @@
 import MonthYearPicker from './modules/month-year-picker.vue';
 import Calendar from './modules/calendar.vue';
 import DtStack from '@/components/stack/stack.vue';
+import { warnIfUnmounted } from '@/common/utils';
 
 export default {
   name: 'DtDatepicker',
@@ -155,6 +156,10 @@ export default {
     return {
       calendarDays: [],
     };
+  },
+
+  mounted () {
+    warnIfUnmounted(this.$el, this.$options.name);
   },
 
   methods: {

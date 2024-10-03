@@ -41,6 +41,7 @@ import {
 import mentionSuggestion from './extensions/mentions/suggestion';
 import channelSuggestion from './extensions/channels/suggestion';
 import slashCommandSuggestion from './extensions/slash_command/suggestion';
+import { warnIfUnmounted } from '@/common/utils';
 
 export default {
   name: 'DtRichTextEditor',
@@ -512,6 +513,10 @@ export default {
 
   beforeUnmount () {
     this.destroyEditor();
+  },
+
+  mounted () {
+    warnIfUnmounted(this.$el, this.$options.name);
   },
 
   methods: {
