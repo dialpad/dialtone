@@ -1,13 +1,14 @@
 module.exports = {
-  parser: "@typescript-eslint/parser",
+  parser: '@typescript-eslint/parser',
   plugins: [
-    "@typescript-eslint"
+    '@typescript-eslint',
   ],
   extends: [
     'standard',
     'semistandard',
     'plugin:@typescript-eslint/eslint-recommended',
-    'plugin:@typescript-eslint/recommended'
+    'plugin:@typescript-eslint/recommended',
+    'prettier',
   ],
   env: {
     browser: true,

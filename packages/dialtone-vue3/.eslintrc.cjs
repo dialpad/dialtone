@@ -9,6 +9,7 @@ module.exports = {
     'plugin:vue/vue3-recommended',
     'plugin:vuejs-accessibility/recommended',
     'plugin:storybook/recommended',
+    'prettier',
   ],
   env: {
     browser: true,

@@ -6,6 +6,7 @@ module.exports = {
     'plugin:vue/vue3-recommended',
     'plugin:vuejs-accessibility/recommended',
     'plugin:jest/recommended',
+    'prettier',
   ],
   env: {
     browser: true,
@@ -112,6 +113,6 @@ module.exports = {
       multiline: {
         max: 1,
       },
-    }]
-  }
+    }],
+  },
 };

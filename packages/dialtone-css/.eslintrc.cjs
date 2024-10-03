@@ -3,6 +3,7 @@ module.exports = {
     'standard',
     'semistandard',
     'plugin:jest/recommended',
+    'prettier',
   ],
   env: {
     browser: true,

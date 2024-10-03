@@ -2,6 +2,7 @@ module.exports = {
   extends: [
     'standard',
     'semistandard',
+    'prettier',
   ],
   env: {
     browser: true,
