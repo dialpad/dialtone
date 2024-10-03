@@ -2,7 +2,8 @@
   <dt-popover
     :modal="modal"
     max-width="264px"
-    placement="bottom"
+    :placement="placement"
+    :fallback-placements="fallbackPlacements"
   >
     <template #anchor="{ attrs }">
       <dt-button
@@ -58,6 +59,16 @@ export default {
     footer: {
       type: Boolean,
       default: false,
+    },
+
+    placement: {
+      type: String,
+      default: 'bottom',
+    },
+
+    fallbackPlacements: {
+      type: Array,
+      default: () => ['auto'],
     },
   },
 };
