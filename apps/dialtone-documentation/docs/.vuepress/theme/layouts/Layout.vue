@@ -56,10 +56,11 @@ import Home from '../components/Home.vue';
 import Page from '../components/Page.vue';
 import MobileNavbar from '../components/MobileNavbar.vue';
 import MobileSidebar from '../components/MobileSidebar.vue';
-import { computed, ref, watch, onMounted } from 'vue';
+import { computed, ref, watch, onMounted, nextTick } from 'vue';
 import { useRoute } from 'vue-router';
 import { useThemeLocaleData } from '@vuepress/plugin-theme-data/client';
 import DialtoneLogo from '../components/DialtoneLogo.vue';
+import { disableRootScrolling, enableRootScrolling } from '@workspaceRoot/common/utils';
 
 const route = useRoute();
 
@@ -108,8 +109,15 @@ const findCurrent = () => {
   prev.value = isFirstItem && prevItems ? prevItems[prevItems.length - 1] : filteredItems[childIndex - 1];
   next.value = isLastItem && nextItems ? nextItems[0] : filteredItems[childIndex + 1];
 };
-const openSearch = () => {
+const openSearch = async () => {
   docSearchBtn.value.children[0].click();
+  await nextTick();
+  disableRootScrolling();
+  document.querySelector('.DocSearch-Container').addEventListener('focusout', (event) => {
+    if (event.relatedTarget === null) {
+      enableRootScrolling();
+    }
+  });
 };
 
 watch(
