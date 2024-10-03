@@ -36,10 +36,7 @@
               @click="button.onClick()"
             >
               <template #icon>
-                <component
-                  :is="button.icon"
-                  size="200"
-                />
+                <component :is="button.icon" size="200" />
               </template>
               {{ button?.label }}
             </dt-button>
@@ -47,11 +44,7 @@
         </dt-tooltip>
         <div class="dt-editor--button-group-divider" />
       </dt-stack>
-      <dt-stack
-        v-if="linkButton.showBtn"
-        direction="row"
-        gap="300"
-      >
+      <dt-stack v-if="linkButton.showBtn" direction="row" gap="300">
         <dt-popover
           :open="showLinkInput"
           placement="bottom-start"
@@ -75,7 +68,9 @@
                   importance="clear"
                   kind="muted"
                   class="d-ol-none"
-                  :active="$refs.richTextEditor?.editor?.isActive(linkButton.selector)"
+                  :active="
+                    $refs.richTextEditor?.editor?.isActive(linkButton.selector)
+                  "
                   size="xs"
                   :aria-label="linkButton.tooltipMessage"
                   @click="linkButton.onClick()"
@@ -93,9 +88,7 @@
           </template>
 
           <template #content>
-            <span
-              v-if="showAddLink.setLinkTitle.length > 0"
-            >
+            <span v-if="showAddLink.setLinkTitle.length > 0">
               {{ showAddLink.setLinkTitle }}
             </span>
             <dt-input
@@ -103,7 +96,7 @@
               :input-aria-label="showAddLink.setLinkInputAriaLabel"
               data-qa="dt-editor-link-input"
               :placeholder="setLinkPlaceholder"
-              input-wrapper-class="d-bgc-black-100 d-mt6 d-bar5 d-ba d-baw1 d-bc-black-300 d-py2 d-ol-none"
+              input-wrapper-class="d-bgc-secondary d-mt6 d-bar5 d-ba d-baw1 d-bc-default d-py2 d-ol-none"
               @click="onInputFocus"
               @click.stop="onInputFocus"
               @focus="onInputFocus"
@@ -151,7 +144,7 @@
 
     <!-- Some wrapper to restrict the height and show the scrollbar -->
     <div
-      class="d-of-auto d-mx16 d-mt8 d-mb16 d-c-text"
+      class="d-of-auto d-mx12 d-mt12 d-mb16 d-c-text"
       :style="{ 'max-height': maxHeight }"
     >
       <dt-rich-text-editor
@@ -181,16 +174,16 @@ import {
   DtRichTextEditor,
   RICH_TEXT_EDITOR_OUTPUT_FORMATS,
   RICH_TEXT_EDITOR_AUTOFOCUS_TYPES,
-} from '@/components/rich_text_editor';
+} from "@/components/rich_text_editor";
 import {
   EDITOR_SUPPORTED_LINK_PROTOCOLS,
   EDITOR_DEFAULT_LINK_PREFIX,
-} from './editor_constants.js';
-import { DtButton } from '@/components/button';
-import { DtPopover } from '@/components/popover';
-import { DtStack } from '@/components/stack';
-import { DtInput } from '@/components/input';
-import { DtTooltip } from '@/components/tooltip';
+} from "./editor_constants.js";
+import { DtButton } from "@/components/button";
+import { DtPopover } from "@/components/popover";
+import { DtStack } from "@/components/stack";
+import { DtInput } from "@/components/input";
+import { DtTooltip } from "@/components/tooltip";
 import {
   DtIconAlignCenter,
   DtIconAlignJustify,
@@ -206,10 +199,10 @@ import {
   DtIconQuote,
   DtIconStrikethrough,
   DtIconUnderline,
-} from '@dialpad/dialtone-icons/vue3';
+} from "@dialpad/dialtone-icons/vue3";
 
 export default {
-  name: 'DtRecipeEditor',
+  name: "DtRecipeEditor",
 
   components: {
     DtRichTextEditor,
@@ -245,7 +238,7 @@ export default {
      */
     value: {
       type: [Object, String],
-      default: '',
+      default: "",
     },
 
     /**
@@ -262,7 +255,7 @@ export default {
     inputAriaLabel: {
       type: String,
       required: true,
-      default: '',
+      default: "",
     },
 
     /**
@@ -272,7 +265,7 @@ export default {
      */
     inputClass: {
       type: String,
-      default: '',
+      default: "",
     },
 
     /**
@@ -289,8 +282,8 @@ export default {
     autoFocus: {
       type: [Boolean, String, Number],
       default: false,
-      validator (autoFocus) {
-        if (typeof autoFocus === 'string') {
+      validator(autoFocus) {
+        if (typeof autoFocus === "string") {
           return RICH_TEXT_EDITOR_AUTOFOCUS_TYPES.includes(autoFocus);
         }
         return true;
@@ -302,7 +295,7 @@ export default {
      */
     placeholder: {
       type: String,
-      default: '',
+      default: "",
     },
 
     /**
@@ -311,7 +304,7 @@ export default {
      */
     maxHeight: {
       type: String,
-      default: 'unset',
+      default: "unset",
     },
 
     /**
@@ -319,7 +312,7 @@ export default {
      */
     confirmSetLinkButton: {
       type: Object,
-      default: () => ({ label: 'Confirm', ariaLabel: 'Confirm set link' }),
+      default: () => ({ label: "Confirm", ariaLabel: "Confirm set link" }),
     },
 
     /**
@@ -327,7 +320,7 @@ export default {
      */
     removeLinkButton: {
       type: Object,
-      default: () => ({ label: 'Remove', ariaLabel: 'Remove link' }),
+      default: () => ({ label: "Remove", ariaLabel: "Remove link" }),
     },
 
     /**
@@ -335,7 +328,7 @@ export default {
      */
     cancelSetLinkButton: {
       type: Object,
-      default: () => ({ label: 'Cancel', ariaLabel: 'Cancel set link' }),
+      default: () => ({ label: "Cancel", ariaLabel: "Cancel set link" }),
     },
 
     /**
@@ -343,7 +336,7 @@ export default {
      */
     setLinkPlaceholder: {
       type: String,
-      default: '',
+      default: "",
     },
 
     /**
@@ -457,8 +450,8 @@ export default {
       type: Object,
       default: () => ({
         showAddLinkButton: true,
-        setLinkTitle: 'Add a link',
-        setLinkInputAriaLabel: 'Input field to add link',
+        setLinkTitle: "Add a link",
+        setLinkInputAriaLabel: "Input field to add link",
       }),
     },
   },
@@ -469,140 +462,250 @@ export default {
      * @event input
      * @type {String|JSON}
      */
-    'focus',
+    "focus",
 
     /**
      * Native blur event
      * @event input
      * @type {String|JSON}
      */
-    'blur',
+    "blur",
 
     /**
      * Native input event
      * @event input
      * @type {String|JSON}
      */
-    'input',
+    "input",
 
     /**
      * Quick replies button
      * pressed event
      * @event quick-replies-click
-    */
-    'quick-replies-click',
+     */
+    "quick-replies-click",
   ],
 
-  data () {
+  data() {
     return {
       internalInputValue: this.value, // internal input content
       hasFocus: false,
 
       linkOptions: {
-        class: 'd-link d-c-text d-d-inline-block',
+        class: "d-link d-c-text d-d-inline-block",
       },
 
       showLinkInput: false,
-      linkInput: '',
+      linkInput: "",
     };
   },
 
   computed: {
-    inputLength () {
+    inputLength() {
       return this.internalInputValue.length;
     },
 
-    htmlOutputFormat () {
+    htmlOutputFormat() {
       return RICH_TEXT_EDITOR_OUTPUT_FORMATS[2];
     },
 
-    showingTextFormatButtons () {
-      return this.showBoldButton || this.showItalicsButton || this.showStrikeButton || this.showUnderlineButton;
+    showingTextFormatButtons() {
+      return (
+        this.showBoldButton ||
+        this.showItalicsButton ||
+        this.showStrikeButton ||
+        this.showUnderlineButton
+      );
     },
 
-    showingAlignmentButtons () {
-      return this.showAlignLeftButton || this.showAlignCenterButton ||
-          this.showAlignRightButton || this.showAlignJustifyButton;
+    showingAlignmentButtons() {
+      return (
+        this.showAlignLeftButton ||
+        this.showAlignCenterButton ||
+        this.showAlignRightButton ||
+        this.showAlignJustifyButton
+      );
     },
 
-    showingListButtons () {
+    showingListButtons() {
       return this.showListItemsButton || this.showOrderedListButton;
     },
 
-    buttonGroups () {
-      const individualButtonStacks = this.individualButtons.map(buttonData => ({
-        key: buttonData.selector,
-        buttonGroup: [buttonData],
-      }));
+    buttonGroups() {
+      const individualButtonStacks = this.individualButtons.map(
+        (buttonData) => ({
+          key: buttonData.selector,
+          buttonGroup: [buttonData],
+        }),
+      );
       return [
-        { key: 'new', buttonGroup: this.newButtons },
-        { key: 'format', buttonGroup: this.textFormatButtons },
-        { key: 'alignment', buttonGroup: this.alignmentButtons },
-        { key: 'list', buttonGroup: this.listButtons },
+        { key: "new", buttonGroup: this.newButtons },
+        { key: "format", buttonGroup: this.textFormatButtons },
+        { key: "alignment", buttonGroup: this.alignmentButtons },
+        { key: "list", buttonGroup: this.listButtons },
         ...individualButtonStacks,
-      ].filter(buttonGroupData => buttonGroupData.buttonGroup.length > 0);
+      ].filter((buttonGroupData) => buttonGroupData.buttonGroup.length > 0);
     },
 
-    newButtons () {
+    newButtons() {
       return [
-        { showBtn: this.showQuickRepliesButton, label: 'Quick reply', selector: 'quickReplies', icon: DtIconLightningBolt, dataQA: 'dt-editor-quick-replies-btn', tooltipMessage: 'Quick Reply', onClick: this.onQuickRepliesClick },
-      ].filter(button => button.showBtn);
+        {
+          showBtn: this.showQuickRepliesButton,
+          label: "Quick reply",
+          selector: "quickReplies",
+          icon: DtIconLightningBolt,
+          dataQA: "dt-editor-quick-replies-btn",
+          tooltipMessage: "Quick Reply",
+          onClick: this.onQuickRepliesClick,
+        },
+      ].filter((button) => button.showBtn);
     },
 
-    textFormatButtons () {
+    textFormatButtons() {
       return [
-        { showBtn: this.showBoldButton, selector: 'bold', icon: DtIconBold, dataQA: 'dt-editor-bold-btn', tooltipMessage: 'Bold', onClick: this.onBoldTextToggle },
-        { showBtn: this.showItalicsButton, selector: 'italic', icon: DtIconItalic, dataQA: 'dt-editor-italics-btn', tooltipMessage: 'Italics', onClick: this.onItalicTextToggle },
-        { showBtn: this.showUnderlineButton, selector: 'underline', icon: DtIconUnderline, dataQA: 'dt-editor-underline-btn', tooltipMessage: 'Underline', onClick: this.onUnderlineTextToggle },
-        { showBtn: this.showStrikeButton, selector: 'strike', icon: DtIconStrikethrough, dataQA: 'dt-editor-strike-btn', tooltipMessage: 'Strike', onClick: this.onStrikethroughTextToggle },
-      ].filter(button => button.showBtn);
+        {
+          showBtn: this.showBoldButton,
+          selector: "bold",
+          icon: DtIconBold,
+          dataQA: "dt-editor-bold-btn",
+          tooltipMessage: "Bold",
+          onClick: this.onBoldTextToggle,
+        },
+        {
+          showBtn: this.showItalicsButton,
+          selector: "italic",
+          icon: DtIconItalic,
+          dataQA: "dt-editor-italics-btn",
+          tooltipMessage: "Italics",
+          onClick: this.onItalicTextToggle,
+        },
+        {
+          showBtn: this.showUnderlineButton,
+          selector: "underline",
+          icon: DtIconUnderline,
+          dataQA: "dt-editor-underline-btn",
+          tooltipMessage: "Underline",
+          onClick: this.onUnderlineTextToggle,
+        },
+        {
+          showBtn: this.showStrikeButton,
+          selector: "strike",
+          icon: DtIconStrikethrough,
+          dataQA: "dt-editor-strike-btn",
+          tooltipMessage: "Strike",
+          onClick: this.onStrikethroughTextToggle,
+        },
+      ].filter((button) => button.showBtn);
     },
 
-    alignmentButtons () {
+    alignmentButtons() {
       return [
-        { showBtn: this.showAlignLeftButton, selector: { textAlign: 'left' }, icon: DtIconAlignLeft, dataQA: 'dt-editor-align-left-btn', tooltipMessage: 'Align Left', onClick: () => this.onTextAlign('left') },
-        { showBtn: this.showAlignCenterButton, selector: { textAlign: 'center' }, icon: DtIconAlignCenter, dataQA: 'dt-editor-align-center-btn', tooltipMessage: 'Align Center', onClick: () => this.onTextAlign('center') },
-        { showBtn: this.showAlignRightButton, selector: { textAlign: 'right' }, icon: DtIconAlignRight, dataQA: 'dt-editor-align-right-btn', tooltipMessage: 'Align Right', onClick: () => this.onTextAlign('right') },
-        { showBtn: this.showAlignJustifyButton, selector: { textAlign: 'justify' }, icon: DtIconAlignJustify, dataQA: 'dt-editor-align-justify-btn', tooltipMessage: 'Align Justify', onClick: () => this.onTextAlign('justify') },
-      ].filter(button => button.showBtn);
+        {
+          showBtn: this.showAlignLeftButton,
+          selector: { textAlign: "left" },
+          icon: DtIconAlignLeft,
+          dataQA: "dt-editor-align-left-btn",
+          tooltipMessage: "Align Left",
+          onClick: () => this.onTextAlign("left"),
+        },
+        {
+          showBtn: this.showAlignCenterButton,
+          selector: { textAlign: "center" },
+          icon: DtIconAlignCenter,
+          dataQA: "dt-editor-align-center-btn",
+          tooltipMessage: "Align Center",
+          onClick: () => this.onTextAlign("center"),
+        },
+        {
+          showBtn: this.showAlignRightButton,
+          selector: { textAlign: "right" },
+          icon: DtIconAlignRight,
+          dataQA: "dt-editor-align-right-btn",
+          tooltipMessage: "Align Right",
+          onClick: () => this.onTextAlign("right"),
+        },
+        {
+          showBtn: this.showAlignJustifyButton,
+          selector: { textAlign: "justify" },
+          icon: DtIconAlignJustify,
+          dataQA: "dt-editor-align-justify-btn",
+          tooltipMessage: "Align Justify",
+          onClick: () => this.onTextAlign("justify"),
+        },
+      ].filter((button) => button.showBtn);
     },
 
-    listButtons () {
+    listButtons() {
       return [
-        { showBtn: this.showListItemsButton, selector: 'bulletList', icon: DtIconListBullet, dataQA: 'dt-editor-list-items-btn', tooltipMessage: 'Bullet List', onClick: this.onBulletListToggle },
-        { showBtn: this.showOrderedListButton, selector: 'orderedList', icon: DtIconListOrdered, dataQA: 'dt-editor-ordered-list-items-btn', tooltipMessage: 'Ordered List', onClick: this.onOrderedListToggle },
-      ].filter(button => button.showBtn);
+        {
+          showBtn: this.showListItemsButton,
+          selector: "bulletList",
+          icon: DtIconListBullet,
+          dataQA: "dt-editor-list-items-btn",
+          tooltipMessage: "Bullet List",
+          onClick: this.onBulletListToggle,
+        },
+        {
+          showBtn: this.showOrderedListButton,
+          selector: "orderedList",
+          icon: DtIconListOrdered,
+          dataQA: "dt-editor-ordered-list-items-btn",
+          tooltipMessage: "Ordered List",
+          onClick: this.onOrderedListToggle,
+        },
+      ].filter((button) => button.showBtn);
     },
 
-    individualButtons () {
+    individualButtons() {
       return [
-        { showBtn: this.showQuoteButton, selector: 'blockquote', icon: DtIconQuote, dataQA: 'dt-editor-blockquote-btn', tooltipMessage: 'Quote', onClick: this.onBlockquoteToggle },
-        { showBtn: this.showCodeBlockButton, selector: 'codeBlock', icon: DtIconCodeBlock, dataQA: 'dt-editor-code-block-btn', tooltipMessage: 'Code', onClick: this.onCodeBlockToggle },
-      ].filter(button => button.showBtn);
+        {
+          showBtn: this.showQuoteButton,
+          selector: "blockquote",
+          icon: DtIconQuote,
+          dataQA: "dt-editor-blockquote-btn",
+          tooltipMessage: "Quote",
+          onClick: this.onBlockquoteToggle,
+        },
+        {
+          showBtn: this.showCodeBlockButton,
+          selector: "codeBlock",
+          icon: DtIconCodeBlock,
+          dataQA: "dt-editor-code-block-btn",
+          tooltipMessage: "Code",
+          onClick: this.onCodeBlockToggle,
+        },
+      ].filter((button) => button.showBtn);
     },
 
-    linkButton () {
-      return { showBtn: this.showAddLink.showAddLinkButton, selector: 'link', icon: DtIconLink2, dataQA: 'dt-editor-add-link-btn', tooltipMessage: 'Link', onClick: this.openLinkInput };
+    linkButton() {
+      return {
+        showBtn: this.showAddLink.showAddLinkButton,
+        selector: "link",
+        icon: DtIconLink2,
+        dataQA: "dt-editor-add-link-btn",
+        tooltipMessage: "Link",
+        onClick: this.openLinkInput,
+      };
     },
   },
 
   watch: {
-    value (newValue) {
+    value(newValue) {
       this.internalInputValue = newValue;
     },
   },
 
   methods: {
-    onInputFocus (event) {
+    onInputFocus(event) {
       event?.stopPropagation();
     },
 
-    removeLink () {
+    removeLink() {
       this.$refs.richTextEditor?.editor?.chain()?.focus()?.unsetLink()?.run();
       this.closeLinkInput();
     },
 
-    setLink (event) {
+    setLink(event) {
       const editor = this.$refs.richTextEditor?.editor;
       event?.preventDefault();
       event?.stopPropagation();
@@ -615,7 +718,9 @@ export default {
       }
 
       // Check if input matches any of the supported link formats
-      const prefix = EDITOR_SUPPORTED_LINK_PROTOCOLS.find(prefixRegex => prefixRegex.test(this.linkInput));
+      const prefix = EDITOR_SUPPORTED_LINK_PROTOCOLS.find((prefixRegex) =>
+        prefixRegex.test(this.linkInput),
+      );
 
       if (!prefix) {
         // If no matching pattern is found, prepend default prefix
@@ -641,7 +746,7 @@ export default {
         editor
           .chain()
           .focus()
-          .extendMarkRange('link')
+          .extendMarkRange("link")
           .setLink({ href: this.linkInput, class: this.linkOptions.class })
           .run();
       }
@@ -649,81 +754,103 @@ export default {
       this.closeLinkInput();
     },
 
-    openLinkInput () {
+    openLinkInput() {
       this.showLinkInput = true;
     },
 
-    updateInput (openedInput) {
+    updateInput(openedInput) {
       if (!openedInput) {
         return this.closeLinkInput();
       }
-      this.linkInput = this.$refs.richTextEditor?.editor?.getAttributes('link')?.href;
+      this.linkInput =
+        this.$refs.richTextEditor?.editor?.getAttributes("link")?.href;
     },
 
-    closeLinkInput () {
+    closeLinkInput() {
       this.showLinkInput = false;
-      this.linkInput = '';
+      this.linkInput = "";
       this.$refs.richTextEditor.editor?.chain().focus();
     },
 
-    onBoldTextToggle () {
+    onBoldTextToggle() {
       this.$refs.richTextEditor?.editor?.chain().focus().toggleBold().run();
     },
 
-    onItalicTextToggle () {
+    onItalicTextToggle() {
       this.$refs.richTextEditor?.editor.chain().focus().toggleItalic().run();
     },
 
-    onUnderlineTextToggle () {
+    onUnderlineTextToggle() {
       this.$refs.richTextEditor?.editor.chain().focus().toggleUnderline().run();
     },
 
-    onStrikethroughTextToggle () {
+    onStrikethroughTextToggle() {
       this.$refs.richTextEditor?.editor.chain().focus().toggleStrike().run();
     },
 
-    onTextAlign (alignment) {
-      if (this.$refs.richTextEditor?.editor?.isActive({ textAlign: alignment })) {
+    onTextAlign(alignment) {
+      if (
+        this.$refs.richTextEditor?.editor?.isActive({ textAlign: alignment })
+      ) {
         // If this alignment type is already set here, unset it
-        return this.$refs.richTextEditor?.editor.chain().focus().unsetTextAlign().run();
+        return this.$refs.richTextEditor?.editor
+          .chain()
+          .focus()
+          .unsetTextAlign()
+          .run();
       }
-      this.$refs.richTextEditor?.editor.chain().focus().setTextAlign(alignment).run();
+      this.$refs.richTextEditor?.editor
+        .chain()
+        .focus()
+        .setTextAlign(alignment)
+        .run();
     },
 
-    onBulletListToggle () {
-      this.$refs.richTextEditor?.editor.chain().focus().toggleBulletList().run();
+    onBulletListToggle() {
+      this.$refs.richTextEditor?.editor
+        .chain()
+        .focus()
+        .toggleBulletList()
+        .run();
     },
 
-    onOrderedListToggle () {
-      this.$refs.richTextEditor?.editor.chain().focus().toggleOrderedList().run();
+    onOrderedListToggle() {
+      this.$refs.richTextEditor?.editor
+        .chain()
+        .focus()
+        .toggleOrderedList()
+        .run();
     },
 
-    onCodeBlockToggle () {
+    onCodeBlockToggle() {
       this.$refs.richTextEditor?.editor.chain().focus().toggleCodeBlock().run();
     },
 
-    onQuickRepliesClick () {
-      this.$emit('quick-replies-click');
+    onQuickRepliesClick() {
+      this.$emit("quick-replies-click");
     },
 
-    onBlockquoteToggle () {
-      this.$refs.richTextEditor?.editor.chain().focus().toggleBlockquote().run();
+    onBlockquoteToggle() {
+      this.$refs.richTextEditor?.editor
+        .chain()
+        .focus()
+        .toggleBlockquote()
+        .run();
     },
 
-    onFocus (event) {
+    onFocus(event) {
       this.hasFocus = true;
-      this.$emit('focus', event);
+      this.$emit("focus", event);
     },
 
-    onBlur (event) {
+    onBlur(event) {
       this.hasFocus = false;
-      this.$emit('blur', event);
+      this.$emit("blur", event);
     },
 
-    onInput (event) {
-      this.$emit('input', event);
+    onInput(event) {
+      this.$emit("input", event);
     },
-
   },
 };
 </script>
