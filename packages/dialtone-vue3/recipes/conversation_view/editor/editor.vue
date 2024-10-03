@@ -36,7 +36,10 @@
               @click="button.onClick()"
             >
               <template #icon>
-                <component :is="button.icon" size="200" />
+                <component
+                  :is="button.icon"
+                  size="200"
+                />
               </template>
               {{ button?.label }}
             </dt-button>
@@ -44,7 +47,11 @@
         </dt-tooltip>
         <div class="dt-editor--button-group-divider" />
       </dt-stack>
-      <dt-stack v-if="linkButton.showBtn" direction="row" gap="300">
+      <dt-stack
+        v-if="linkButton.showBtn"
+        direction="row"
+        gap="300"
+      >
         <dt-popover
           :open="showLinkInput"
           placement="bottom-start"
@@ -174,16 +181,16 @@ import {
   DtRichTextEditor,
   RICH_TEXT_EDITOR_OUTPUT_FORMATS,
   RICH_TEXT_EDITOR_AUTOFOCUS_TYPES,
-} from "@/components/rich_text_editor";
+} from '@/components/rich_text_editor';
 import {
   EDITOR_SUPPORTED_LINK_PROTOCOLS,
   EDITOR_DEFAULT_LINK_PREFIX,
-} from "./editor_constants.js";
-import { DtButton } from "@/components/button";
-import { DtPopover } from "@/components/popover";
-import { DtStack } from "@/components/stack";
-import { DtInput } from "@/components/input";
-import { DtTooltip } from "@/components/tooltip";
+} from './editor_constants.js';
+import { DtButton } from '@/components/button';
+import { DtPopover } from '@/components/popover';
+import { DtStack } from '@/components/stack';
+import { DtInput } from '@/components/input';
+import { DtTooltip } from '@/components/tooltip';
 import {
   DtIconAlignCenter,
   DtIconAlignJustify,
@@ -199,10 +206,10 @@ import {
   DtIconQuote,
   DtIconStrikethrough,
   DtIconUnderline,
-} from "@dialpad/dialtone-icons/vue3";
+} from '@dialpad/dialtone-icons/vue3';
 
 export default {
-  name: "DtRecipeEditor",
+  name: 'DtRecipeEditor',
 
   components: {
     DtRichTextEditor,
@@ -238,7 +245,7 @@ export default {
      */
     value: {
       type: [Object, String],
-      default: "",
+      default: '',
     },
 
     /**
@@ -255,7 +262,7 @@ export default {
     inputAriaLabel: {
       type: String,
       required: true,
-      default: "",
+      default: '',
     },
 
     /**
@@ -265,7 +272,7 @@ export default {
      */
     inputClass: {
       type: String,
-      default: "",
+      default: '',
     },
 
     /**
@@ -282,8 +289,8 @@ export default {
     autoFocus: {
       type: [Boolean, String, Number],
       default: false,
-      validator(autoFocus) {
-        if (typeof autoFocus === "string") {
+      validator (autoFocus) {
+        if (typeof autoFocus === 'string') {
           return RICH_TEXT_EDITOR_AUTOFOCUS_TYPES.includes(autoFocus);
         }
         return true;
@@ -295,7 +302,7 @@ export default {
      */
     placeholder: {
       type: String,
-      default: "",
+      default: '',
     },
 
     /**
@@ -304,7 +311,7 @@ export default {
      */
     maxHeight: {
       type: String,
-      default: "unset",
+      default: 'unset',
     },
 
     /**
@@ -312,7 +319,7 @@ export default {
      */
     confirmSetLinkButton: {
       type: Object,
-      default: () => ({ label: "Confirm", ariaLabel: "Confirm set link" }),
+      default: () => ({ label: 'Confirm', ariaLabel: 'Confirm set link' }),
     },
 
     /**
@@ -320,7 +327,7 @@ export default {
      */
     removeLinkButton: {
       type: Object,
-      default: () => ({ label: "Remove", ariaLabel: "Remove link" }),
+      default: () => ({ label: 'Remove', ariaLabel: 'Remove link' }),
     },
 
     /**
@@ -328,7 +335,7 @@ export default {
      */
     cancelSetLinkButton: {
       type: Object,
-      default: () => ({ label: "Cancel", ariaLabel: "Cancel set link" }),
+      default: () => ({ label: 'Cancel', ariaLabel: 'Cancel set link' }),
     },
 
     /**
@@ -336,7 +343,7 @@ export default {
      */
     setLinkPlaceholder: {
       type: String,
-      default: "",
+      default: '',
     },
 
     /**
@@ -450,8 +457,8 @@ export default {
       type: Object,
       default: () => ({
         showAddLinkButton: true,
-        setLinkTitle: "Add a link",
-        setLinkInputAriaLabel: "Input field to add link",
+        setLinkTitle: 'Add a link',
+        setLinkInputAriaLabel: 'Input field to add link',
       }),
     },
   },
@@ -462,54 +469,54 @@ export default {
      * @event input
      * @type {String|JSON}
      */
-    "focus",
+    'focus',
 
     /**
      * Native blur event
      * @event input
      * @type {String|JSON}
      */
-    "blur",
+    'blur',
 
     /**
      * Native input event
      * @event input
      * @type {String|JSON}
      */
-    "input",
+    'input',
 
     /**
      * Quick replies button
      * pressed event
      * @event quick-replies-click
      */
-    "quick-replies-click",
+    'quick-replies-click',
   ],
 
-  data() {
+  data () {
     return {
       internalInputValue: this.value, // internal input content
       hasFocus: false,
 
       linkOptions: {
-        class: "d-link d-c-text d-d-inline-block",
+        class: 'd-link d-c-text d-d-inline-block',
       },
 
       showLinkInput: false,
-      linkInput: "",
+      linkInput: '',
     };
   },
 
   computed: {
-    inputLength() {
+    inputLength () {
       return this.internalInputValue.length;
     },
 
-    htmlOutputFormat() {
+    htmlOutputFormat () {
       return RICH_TEXT_EDITOR_OUTPUT_FORMATS[2];
     },
 
-    showingTextFormatButtons() {
+    showingTextFormatButtons () {
       return (
         this.showBoldButton ||
         this.showItalicsButton ||
@@ -518,7 +525,7 @@ export default {
       );
     },
 
-    showingAlignmentButtons() {
+    showingAlignmentButtons () {
       return (
         this.showAlignLeftButton ||
         this.showAlignCenterButton ||
@@ -527,11 +534,11 @@ export default {
       );
     },
 
-    showingListButtons() {
+    showingListButtons () {
       return this.showListItemsButton || this.showOrderedListButton;
     },
 
-    buttonGroups() {
+    buttonGroups () {
       const individualButtonStacks = this.individualButtons.map(
         (buttonData) => ({
           key: buttonData.selector,
@@ -539,173 +546,173 @@ export default {
         }),
       );
       return [
-        { key: "new", buttonGroup: this.newButtons },
-        { key: "format", buttonGroup: this.textFormatButtons },
-        { key: "alignment", buttonGroup: this.alignmentButtons },
-        { key: "list", buttonGroup: this.listButtons },
+        { key: 'new', buttonGroup: this.newButtons },
+        { key: 'format', buttonGroup: this.textFormatButtons },
+        { key: 'alignment', buttonGroup: this.alignmentButtons },
+        { key: 'list', buttonGroup: this.listButtons },
         ...individualButtonStacks,
       ].filter((buttonGroupData) => buttonGroupData.buttonGroup.length > 0);
     },
 
-    newButtons() {
+    newButtons () {
       return [
         {
           showBtn: this.showQuickRepliesButton,
-          label: "Quick reply",
-          selector: "quickReplies",
+          label: 'Quick reply',
+          selector: 'quickReplies',
           icon: DtIconLightningBolt,
-          dataQA: "dt-editor-quick-replies-btn",
-          tooltipMessage: "Quick Reply",
+          dataQA: 'dt-editor-quick-replies-btn',
+          tooltipMessage: 'Quick Reply',
           onClick: this.onQuickRepliesClick,
         },
       ].filter((button) => button.showBtn);
     },
 
-    textFormatButtons() {
+    textFormatButtons () {
       return [
         {
           showBtn: this.showBoldButton,
-          selector: "bold",
+          selector: 'bold',
           icon: DtIconBold,
-          dataQA: "dt-editor-bold-btn",
-          tooltipMessage: "Bold",
+          dataQA: 'dt-editor-bold-btn',
+          tooltipMessage: 'Bold',
           onClick: this.onBoldTextToggle,
         },
         {
           showBtn: this.showItalicsButton,
-          selector: "italic",
+          selector: 'italic',
           icon: DtIconItalic,
-          dataQA: "dt-editor-italics-btn",
-          tooltipMessage: "Italics",
+          dataQA: 'dt-editor-italics-btn',
+          tooltipMessage: 'Italics',
           onClick: this.onItalicTextToggle,
         },
         {
           showBtn: this.showUnderlineButton,
-          selector: "underline",
+          selector: 'underline',
           icon: DtIconUnderline,
-          dataQA: "dt-editor-underline-btn",
-          tooltipMessage: "Underline",
+          dataQA: 'dt-editor-underline-btn',
+          tooltipMessage: 'Underline',
           onClick: this.onUnderlineTextToggle,
         },
         {
           showBtn: this.showStrikeButton,
-          selector: "strike",
+          selector: 'strike',
           icon: DtIconStrikethrough,
-          dataQA: "dt-editor-strike-btn",
-          tooltipMessage: "Strike",
+          dataQA: 'dt-editor-strike-btn',
+          tooltipMessage: 'Strike',
           onClick: this.onStrikethroughTextToggle,
         },
       ].filter((button) => button.showBtn);
     },
 
-    alignmentButtons() {
+    alignmentButtons () {
       return [
         {
           showBtn: this.showAlignLeftButton,
-          selector: { textAlign: "left" },
+          selector: { textAlign: 'left' },
           icon: DtIconAlignLeft,
-          dataQA: "dt-editor-align-left-btn",
-          tooltipMessage: "Align Left",
-          onClick: () => this.onTextAlign("left"),
+          dataQA: 'dt-editor-align-left-btn',
+          tooltipMessage: 'Align Left',
+          onClick: () => this.onTextAlign('left'),
         },
         {
           showBtn: this.showAlignCenterButton,
-          selector: { textAlign: "center" },
+          selector: { textAlign: 'center' },
           icon: DtIconAlignCenter,
-          dataQA: "dt-editor-align-center-btn",
-          tooltipMessage: "Align Center",
-          onClick: () => this.onTextAlign("center"),
+          dataQA: 'dt-editor-align-center-btn',
+          tooltipMessage: 'Align Center',
+          onClick: () => this.onTextAlign('center'),
         },
         {
           showBtn: this.showAlignRightButton,
-          selector: { textAlign: "right" },
+          selector: { textAlign: 'right' },
           icon: DtIconAlignRight,
-          dataQA: "dt-editor-align-right-btn",
-          tooltipMessage: "Align Right",
-          onClick: () => this.onTextAlign("right"),
+          dataQA: 'dt-editor-align-right-btn',
+          tooltipMessage: 'Align Right',
+          onClick: () => this.onTextAlign('right'),
         },
         {
           showBtn: this.showAlignJustifyButton,
-          selector: { textAlign: "justify" },
+          selector: { textAlign: 'justify' },
           icon: DtIconAlignJustify,
-          dataQA: "dt-editor-align-justify-btn",
-          tooltipMessage: "Align Justify",
-          onClick: () => this.onTextAlign("justify"),
+          dataQA: 'dt-editor-align-justify-btn',
+          tooltipMessage: 'Align Justify',
+          onClick: () => this.onTextAlign('justify'),
         },
       ].filter((button) => button.showBtn);
     },
 
-    listButtons() {
+    listButtons () {
       return [
         {
           showBtn: this.showListItemsButton,
-          selector: "bulletList",
+          selector: 'bulletList',
           icon: DtIconListBullet,
-          dataQA: "dt-editor-list-items-btn",
-          tooltipMessage: "Bullet List",
+          dataQA: 'dt-editor-list-items-btn',
+          tooltipMessage: 'Bullet List',
           onClick: this.onBulletListToggle,
         },
         {
           showBtn: this.showOrderedListButton,
-          selector: "orderedList",
+          selector: 'orderedList',
           icon: DtIconListOrdered,
-          dataQA: "dt-editor-ordered-list-items-btn",
-          tooltipMessage: "Ordered List",
+          dataQA: 'dt-editor-ordered-list-items-btn',
+          tooltipMessage: 'Ordered List',
           onClick: this.onOrderedListToggle,
         },
       ].filter((button) => button.showBtn);
     },
 
-    individualButtons() {
+    individualButtons () {
       return [
         {
           showBtn: this.showQuoteButton,
-          selector: "blockquote",
+          selector: 'blockquote',
           icon: DtIconQuote,
-          dataQA: "dt-editor-blockquote-btn",
-          tooltipMessage: "Quote",
+          dataQA: 'dt-editor-blockquote-btn',
+          tooltipMessage: 'Quote',
           onClick: this.onBlockquoteToggle,
         },
         {
           showBtn: this.showCodeBlockButton,
-          selector: "codeBlock",
+          selector: 'codeBlock',
           icon: DtIconCodeBlock,
-          dataQA: "dt-editor-code-block-btn",
-          tooltipMessage: "Code",
+          dataQA: 'dt-editor-code-block-btn',
+          tooltipMessage: 'Code',
           onClick: this.onCodeBlockToggle,
         },
       ].filter((button) => button.showBtn);
     },
 
-    linkButton() {
+    linkButton () {
       return {
         showBtn: this.showAddLink.showAddLinkButton,
-        selector: "link",
+        selector: 'link',
         icon: DtIconLink2,
-        dataQA: "dt-editor-add-link-btn",
-        tooltipMessage: "Link",
+        dataQA: 'dt-editor-add-link-btn',
+        tooltipMessage: 'Link',
         onClick: this.openLinkInput,
       };
     },
   },
 
   watch: {
-    value(newValue) {
+    value (newValue) {
       this.internalInputValue = newValue;
     },
   },
 
   methods: {
-    onInputFocus(event) {
+    onInputFocus (event) {
       event?.stopPropagation();
     },
 
-    removeLink() {
+    removeLink () {
       this.$refs.richTextEditor?.editor?.chain()?.focus()?.unsetLink()?.run();
       this.closeLinkInput();
     },
 
-    setLink(event) {
+    setLink (event) {
       const editor = this.$refs.richTextEditor?.editor;
       event?.preventDefault();
       event?.stopPropagation();
@@ -746,7 +753,7 @@ export default {
         editor
           .chain()
           .focus()
-          .extendMarkRange("link")
+          .extendMarkRange('link')
           .setLink({ href: this.linkInput, class: this.linkOptions.class })
           .run();
       }
@@ -754,41 +761,41 @@ export default {
       this.closeLinkInput();
     },
 
-    openLinkInput() {
+    openLinkInput () {
       this.showLinkInput = true;
     },
 
-    updateInput(openedInput) {
+    updateInput (openedInput) {
       if (!openedInput) {
         return this.closeLinkInput();
       }
       this.linkInput =
-        this.$refs.richTextEditor?.editor?.getAttributes("link")?.href;
+        this.$refs.richTextEditor?.editor?.getAttributes('link')?.href;
     },
 
-    closeLinkInput() {
+    closeLinkInput () {
       this.showLinkInput = false;
-      this.linkInput = "";
+      this.linkInput = '';
       this.$refs.richTextEditor.editor?.chain().focus();
     },
 
-    onBoldTextToggle() {
+    onBoldTextToggle () {
       this.$refs.richTextEditor?.editor?.chain().focus().toggleBold().run();
     },
 
-    onItalicTextToggle() {
+    onItalicTextToggle () {
       this.$refs.richTextEditor?.editor.chain().focus().toggleItalic().run();
     },
 
-    onUnderlineTextToggle() {
+    onUnderlineTextToggle () {
       this.$refs.richTextEditor?.editor.chain().focus().toggleUnderline().run();
     },
 
-    onStrikethroughTextToggle() {
+    onStrikethroughTextToggle () {
       this.$refs.richTextEditor?.editor.chain().focus().toggleStrike().run();
     },
 
-    onTextAlign(alignment) {
+    onTextAlign (alignment) {
       if (
         this.$refs.richTextEditor?.editor?.isActive({ textAlign: alignment })
       ) {
@@ -806,7 +813,7 @@ export default {
         .run();
     },
 
-    onBulletListToggle() {
+    onBulletListToggle () {
       this.$refs.richTextEditor?.editor
         .chain()
         .focus()
@@ -814,7 +821,7 @@ export default {
         .run();
     },
 
-    onOrderedListToggle() {
+    onOrderedListToggle () {
       this.$refs.richTextEditor?.editor
         .chain()
         .focus()
@@ -822,15 +829,15 @@ export default {
         .run();
     },
 
-    onCodeBlockToggle() {
+    onCodeBlockToggle () {
       this.$refs.richTextEditor?.editor.chain().focus().toggleCodeBlock().run();
     },
 
-    onQuickRepliesClick() {
-      this.$emit("quick-replies-click");
+    onQuickRepliesClick () {
+      this.$emit('quick-replies-click');
     },
 
-    onBlockquoteToggle() {
+    onBlockquoteToggle () {
       this.$refs.richTextEditor?.editor
         .chain()
         .focus()
@@ -838,18 +845,18 @@ export default {
         .run();
     },
 
-    onFocus(event) {
+    onFocus (event) {
       this.hasFocus = true;
-      this.$emit("focus", event);
+      this.$emit('focus', event);
     },
 
-    onBlur(event) {
+    onBlur (event) {
       this.hasFocus = false;
-      this.$emit("blur", event);
+      this.$emit('blur', event);
     },
 
-    onInput(event) {
-      this.$emit("input", event);
+    onInput (event) {
+      this.$emit('input', event);
     },
   },
 };
