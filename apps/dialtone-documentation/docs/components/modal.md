@@ -148,7 +148,7 @@ showHtmlWarning />
 This is the default behavior that adds the scroll automatically in the modal content and leaves the header and footer fixed.
 
 <code-well-header>
-  <example-modal fixed-header-footer />
+  <example-modal fixed-header-footer :copy="fixedHeaderFooterCopy" />
 </code-well-header>
 
 <code-example-tabs
@@ -562,6 +562,11 @@ At minimum, modals contain a title and one button. They could also contain body 
 
   const isOpen = ref(false);
   const selectedBannerKind = ref('success');
+  const fixedHeaderFooterCopy = ref(`Sed at orci quis nunc finibus gravida eget vitae est. Praesent
+          ac laoreet mi. Cras porttitor mauris ex. Integer convallis tellus a ex egestas, id laoreet elit mollis. Mauris
+          ut elementum velit. Nam vel consectetur turpis. Aenean consequat purus non nunc tincidunt rutrum. In semper
+          pretium dui vel tempus. Proin et mi id mi egestas iaculis. Sed lacinia libero non molestie consequat. Sed
+          efficitur purus eget lacus viverra volutpat. Nam luctus ac eros eu iaculis. Fusce non condimentum lorem.`.repeat(10))
 
   const openModal = () => {
     isOpen.value = true;

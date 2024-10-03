@@ -7,7 +7,7 @@
     :banner-kind="bannerKind"
     :fixed-header-footer="fixedHeaderFooter"
     :size="size"
-    :copy="modalDescription"
+    :copy="copy"
     @update:show="isOpen = $event"
   >
     <template
@@ -68,16 +68,20 @@ export default {
       type: String,
       default: 'default',
     },
+
+    copy: {
+      type: String,
+      default: `Sed at orci quis nunc finibus gravida eget vitae est. Praesent
+          ac laoreet mi. Cras porttitor mauris ex. Integer convallis tellus a ex egestas, id laoreet elit mollis. Mauris
+          ut elementum velit. Nam vel consectetur turpis. Aenean consequat purus non nunc tincidunt rutrum. In semper
+          pretium dui vel tempus. Proin et mi id mi egestas iaculis. Sed lacinia libero non molestie consequat. Sed
+          efficitur purus eget lacus viverra volutpat. Nam luctus ac eros eu iaculis. Fusce non condimentum lorem.`,
+    },
   },
 
   data () {
     return {
       isOpen: false,
-      modalDescription: `Sed at orci quis nunc finibus gravida eget vitae est. Praesent
-          ac laoreet mi. Cras porttitor mauris ex. Integer convallis tellus a ex egestas, id laoreet elit mollis. Mauris
-          ut elementum velit. Nam vel consectetur turpis. Aenean consequat purus non nunc tincidunt rutrum. In semper
-          pretium dui vel tempus. Proin et mi id mi egestas iaculis. Sed lacinia libero non molestie consequat. Sed
-          efficitur purus eget lacus viverra volutpat. Nam luctus ac eros eu iaculis. Fusce non condimentum lorem.`,
     };
   },
 };
