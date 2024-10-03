@@ -372,6 +372,18 @@ export function capitalizeFirstLetter (str, locale = 'en-US') {
   return str.replace(/^\p{CWU}/u, char => char.toLocaleUpperCase(locale));
 }
 
+/**
+ * Warns if the component is not mounted properly. Useful for tests.
+ * @param {HTMLElement} componentRef - the component reference
+ * @param {string} componentName - the component name
+ */
+export function warnIfUnmounted (componentRef, componentName) {
+  if (!componentRef || !(componentRef instanceof HTMLElement) || !document?.body) return;
+  if (!document.body.contains(componentRef)) {
+    console.warn(`The ${componentName} component is not attached to the document body. This may cause issues.`);
+  }
+}
+
 export default {
   getUniqueString,
   getRandomElement,

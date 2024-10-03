@@ -130,7 +130,7 @@ import {
   POPOVER_ROLES,
   POPOVER_STICKY_VALUES,
 } from './popover_constants';
-import { getUniqueString, isOutOfViewPort } from '@/common/utils';
+import { getUniqueString, isOutOfViewPort, warnIfUnmounted } from '@/common/utils';
 import { DtLazyShow } from '@/components/lazy_show';
 import { Portal } from '@linusborg/vue-simple-portal';
 import ModalMixin from '@/common/mixins/modal';
@@ -676,6 +676,8 @@ export default {
   },
 
   mounted () {
+    warnIfUnmounted(this.$el, this.$options.name);
+
     const externalAnchorEl = this.externalAnchor
       ? this.$refs.anchor.getRootNode().querySelector(`#${this.externalAnchor}`)
       : null;

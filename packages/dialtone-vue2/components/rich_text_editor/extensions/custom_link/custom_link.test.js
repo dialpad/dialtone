@@ -104,6 +104,7 @@ describe('DtRichTextEditor Link Extension tests', () => {
   afterEach(() => {
     propsData = baseProps;
     slots = {};
+    wrapper.destroy();
   });
 
   describe('Functionality Tests', () => {
