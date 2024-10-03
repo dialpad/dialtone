@@ -865,7 +865,6 @@ export default {
       const element = this.anchorEl?.closest('body, .tippy-box');
       if (!element) return;
       if (element.tagName?.toLowerCase() === 'body') {
-        console.log(this.anchorEl.getRootNode().host);
         enableRootScrolling(this.anchorEl.getRootNode().host);
         this.tip.setProps({ offset: this.offset });
       } else {
