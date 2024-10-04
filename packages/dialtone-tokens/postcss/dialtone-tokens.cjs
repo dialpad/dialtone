@@ -117,6 +117,7 @@ function generateColorHsla (declaration) {
       declaration.before({ prop: `${declaration.prop}-h`, value: `var(${varName}-h)` });
       declaration.before({ prop: `${declaration.prop}-s`, value: `var(${varName}-s)` });
       declaration.before({ prop: `${declaration.prop}-l`, value: `var(${varName}-l)` });
+      declaration.before({ prop: `${declaration.prop}-a`, value: `var(${varName}-a)` });
       declaration.before({ prop: `${declaration.prop}-hsl`, value: `var(${varName}-hsl)` });
       declaration.before({ prop: `${declaration.prop}-hsla`, value: `var(${varName}-hsla)` });
     } else {
