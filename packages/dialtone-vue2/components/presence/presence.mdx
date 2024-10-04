@@ -1,86 +1,10 @@
 import { Canvas, Story, Subtitle, Controls, Meta } from '@storybook/blocks';
 
 import * as PresenceStories from './presence.stories';
+import RedirectToDocs from "@/common/snippets/redirect-to-docs.mdx"
 
 <Meta of={PresenceStories}/>
 
 # Presence
 
-<Subtitle>
-    This component displays a presence circle indicating the current status.
-</Subtitle>
-
-## Base Style
-
-Presence can be initialized by passing `presence` prop that can take one of 4 values: 'away', 'active', 'offline', and 'busy'.
-By default, it's set to 'active'.
-
-<Canvas>
-  <Story of={PresenceStories.Default} />
-</Canvas>
-
-## Variants
-
-<Canvas>
-  <Story of={PresenceStories.Variants} />
-</Canvas>
-
-## Props, Slots & Events
-
-<Controls />
-
-## Usage
-
-### Import
-
-```jsx
-import { DtPresence } from '@dialpad/dialtone-vue';
-```
-
-### With Presence Prop
-
-```html
-<dt-presence
-  presence="active"
-/>
-```
-
-### With SR text prop
-
-```html
-<dt-presence
-  presence="active"
-  sr-text="User Presence"
-/>
-```
-
-### With Theme prop
-
-```html
-<dt-presence
-  theme="default"
-/>
-```
-
-### Accessibility
-
-The Presence component is purely visual by default, and will not be read out to a screen reader.
-
-If you'd like for a SR to read out any changes to Presence, you should pass the `srText` prop so it is
-read by AT and set the `aria-live` attribute to either 'polite' or 'assertive'.
-Even though the component has a role of "status" to assist SR apps in reading out status changes, its default
-'aria-live' value is set to 'off'.
-
-[See W3C guidelines](https://www.w3.org/WAI/WCAG22/Techniques/aria/ARIA22)
-for more information.
-
-Example:
-
-```html
-<dt-presence
-  presence="active"
-  sr-text="User {{ user }} is active"
-/>
-```
-
-Abbreviations / symbols should be read out in full for voiceover / screen readers.
+<RedirectToDocs name="presence" />
