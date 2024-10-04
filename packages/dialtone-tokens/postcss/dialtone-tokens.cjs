@@ -132,7 +132,7 @@ function generateColorHsla (declaration) {
       declaration.before({ prop: `${declaration.prop}-s`, value: `${saturation}%` });
       declaration.before({ prop: `${declaration.prop}-l`, value: `${lightness}%` });
       declaration.before({ prop: `${declaration.prop}-a`, value: `${alpha}%` });
-      declaration.before({ prop: `${declaration.prop}-hsl`, value: `hsl(var(${declaration.prop}-h) var(${declaration.prop}-s) var(${declaration.prop}-l))` });
+      declaration.before({ prop: `${declaration.prop}-hsl`, value: `var(${declaration.prop}-h) var(${declaration.prop}-s) var(${declaration.prop}-l)` });
       declaration.before({ prop: `${declaration.prop}-hsla`, value: `hsl(var(${declaration.prop}-h) var(${declaration.prop}-s) var(${declaration.prop}-l) / var(--alpha, ${alpha}%))` });
     }
   }
