@@ -775,6 +775,11 @@ export default {
   border-radius: var(--dt-size-radius-400);
   border: var(--dt-size-border-100) solid;
   border-color: var(--dt-color-border-default);
+<<<<<<< ours
+=======
+  box-shadow: 0 0 0 0 rgba(0, 0, 0, 0%);
+  line-height: var(--dt-font-line-height-400);
+>>>>>>> theirs
   cursor: text;
 
   &:focus-within {
@@ -783,7 +788,7 @@ export default {
   }
 
   &__editor-wrapper {
-    padding: var(--dt-space-400) var(--dt-space-500) var(--dt-space-300);
+    padding: var(--dt-space-450) var(--dt-space-500) var(--dt-space-300);
   }
 
   &__remaining-char-tooltip {
