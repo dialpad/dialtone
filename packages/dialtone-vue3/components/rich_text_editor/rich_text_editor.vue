@@ -507,7 +507,7 @@ export default {
 
   mounted () {
     warnIfUnmounted(this.$el, this.$options.name);
-    this.processValue(this.modelValue);
+    this.processValue(this.modelValue, false);
   },
 
   methods: {
@@ -568,13 +568,13 @@ export default {
       this.addEditorListeners();
     },
 
-    processValue (newValue) {
+    processValue (newValue, returnIfEqual = true) {
       let currentValue = this.getOutput();
       if (this.outputFormat === 'json') {
         newValue = JSON.stringify(newValue);
         currentValue = JSON.stringify(currentValue);
       }
-      if (newValue === currentValue) {
+      if (returnIfEqual && newValue === currentValue) {
         // The new value came from this component and was passed back down
         // through the parent, so don't do anything here.
         return;
