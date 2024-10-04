@@ -51,7 +51,6 @@
     <section class="dt-message-input__bottom-section">
       <!-- Left content -->
       <div class="dt-message-input__bottom-section-left">
-<<<<<<< ours
         <dt-button
           v-if="showImagePicker"
           v-dt-tooltip:top-start="showImagePicker?.tooltipLabel"
@@ -130,94 +129,6 @@
         </dt-popover>
         <!-- @slot Slot for emojiGiphy picker -->
         <slot name="emojiGiphyPicker" />
-=======
-        <dt-stack
-          gap="200"
-          direction="row"
-        >
-          <dt-button
-            v-if="showImagePicker"
-            v-dt-tooltip:top-start="showImagePicker?.tooltipLabel"
-            data-qa="dt-message-input-image-btn"
-            size="sm"
-            class="d-bar4"
-            style="width: 2.8rem; height: 2.8rem"
-            :kind="imagePickerFocus ? 'muted' : 'muted'"
-            importance="clear"
-            :aria-label="showImagePicker.ariaLabel"
-            @click="onSelectImage"
-            @mouseenter="imagePickerFocus = true"
-            @mouseleave="imagePickerFocus = false"
-            @focus="imagePickerFocus = true"
-            @blur="imagePickerFocus = false"
-          >
-            <template #icon>
-              <dt-icon-image size="300" />
-            </template>
-          </dt-button>
-          <dt-input
-            ref="messageInputImageUpload"
-            data-qa="dt-message-input-image-input"
-            accept="image/*, video/*"
-            type="file"
-            class="dt-message-input__image-input"
-            multiple
-            hidden
-            @input="onImageUpload"
-          />
-          <dt-popover
-            v-if="showEmojiPicker"
-            v-model:open="emojiPickerOpened"
-            data-qa="dt-message-input-emoji-picker-popover"
-            initial-focus-element="#searchInput"
-            padding="none"
-          >
-            <template #anchor="{ attrs }">
-              <dt-button
-                v-dt-tooltip="emojiTooltipMessage"
-                v-bind="attrs"
-                data-qa="dt-message-input-emoji-picker-btn"
-                size="sm"
-                class="d-bar4"
-                style="width: 2.8rem; height: 2.8rem"
-                :kind="emojiPickerHovered ? 'muted' : 'muted'"
-                importance="clear"
-                :aria-label="emojiButtonAriaLabel"
-                @click="toggleEmojiPicker"
-                @mouseenter="emojiPickerFocus = true"
-                @mouseleave="emojiPickerFocus = false"
-                @focus="emojiPickerFocus = true"
-                @blur="emojiPickerFocus = false"
-              >
-                <template #icon>
-                  <dt-icon-very-satisfied
-                    v-if="emojiPickerHovered"
-                    size="300"
-                  />
-                  <dt-icon-satisfied
-                    v-else
-                    size="300"
-                  />
-                </template>
-              </dt-button>
-            </template>
-            <template #content="{ close }">
-              <dt-emoji-picker
-                v-bind="emojiPickerProps"
-                @skin-tone="onSkinTone"
-                @selected-emoji="
-                  (emoji) => {
-                    close();
-                    onSelectEmoji(emoji);
-                  }
-                "
-              />
-            </template>
-          </dt-popover>
-          <!-- @slot Slot for emojiGiphy picker -->
-          <slot name="emojiGiphyPicker" />
-        </dt-stack>
->>>>>>> theirs
       </div>
       <!-- Right content -->
       <div class="dt-message-input__bottom-section-right">
@@ -290,13 +201,9 @@
                 name="sendIcon"
                 :icon-size="sendIconSize"
               >
-<<<<<<< ours
                 <dt-icon-send
                   :size="sendIconSize"
                 />
-=======
-                <dt-icon-send :size="sendIconSize" />
->>>>>>> theirs
               </slot>
             </template>
             <template
@@ -324,17 +231,7 @@ import { DtEmojiPicker } from '@/components/emoji_picker';
 import { DtPopover } from '@/components/popover';
 import { DtInput } from '@/components/input';
 import { DtTooltip } from '@/components/tooltip';
-<<<<<<< ours
 import { DtIconImage, DtIconVerySatisfied, DtIconSatisfied, DtIconSend } from '@dialpad/dialtone-icons/vue2';
-=======
-import { DtStack } from '@/components/stack';
-import {
-  DtIconImage,
-  DtIconVerySatisfied,
-  DtIconSatisfied,
-  DtIconSend,
-} from '@dialpad/dialtone-icons/vue3';
->>>>>>> theirs
 
 export default {
   name: 'DtRecipeMessageInput',
@@ -489,11 +386,7 @@ export default {
           'searchPlaceholderLabel',
           'skinSelectorButtonTooltipLabel',
           'tabSetLabels',
-<<<<<<< ours
         ].every(prop => emojiPickerProps[prop] != null);
-=======
-        ].every((prop) => emojiPickerProps[prop] != null);
->>>>>>> theirs
       },
     },
 
@@ -524,14 +417,7 @@ export default {
 
     showImagePicker: {
       type: [Boolean, Object],
-<<<<<<< ours
       default: () => ({ tooltipLabel: 'Attach Image', ariaLabel: 'image button' }),
-=======
-      default: () => ({
-        tooltipLabel: 'Attach Image',
-        ariaLabel: 'image button',
-      }),
->>>>>>> theirs
     },
 
     /**
@@ -735,11 +621,7 @@ export default {
      * @event update:value
      * @type {String|JSON}
      */
-<<<<<<< ours
     'update:value',
-=======
-    'update:modelValue',
->>>>>>> theirs
   ],
 
   data () {
@@ -762,7 +644,6 @@ export default {
     },
 
     displayCharacterLimitWarning () {
-<<<<<<< ours
       return Boolean(this.showCharacterLimit) &&
         ((this.showCharacterLimit.count - this.inputLength) <= this.showCharacterLimit.warning);
     },
@@ -774,28 +655,6 @@ export default {
     isSendDisabled () {
       return this.disableSend ||
       (this.showCharacterLimit && this.inputLength > this.showCharacterLimit.count);
-=======
-      return (
-        Boolean(this.showCharacterLimit) &&
-        this.showCharacterLimit.count - this.inputLength <=
-          this.showCharacterLimit.warning
-      );
-    },
-
-    characterLimitTooltipEnabled () {
-      return (
-        this.showCharacterLimit.message &&
-        this.showCharacterLimit.count - this.inputLength < 0
-      );
-    },
-
-    isSendDisabled () {
-      return (
-        this.disableSend ||
-        (this.showCharacterLimit &&
-          this.inputLength > this.showCharacterLimit.count)
-      );
->>>>>>> theirs
     },
 
     computedCloseButtonProps () {
@@ -814,11 +673,7 @@ export default {
   },
 
   watch: {
-<<<<<<< ours
     value (newValue) {
-=======
-    modelValue (newValue) {
->>>>>>> theirs
       this.internalInputValue = newValue;
     },
 
@@ -830,26 +685,15 @@ export default {
   },
 
   created () {
-<<<<<<< ours
     if (this.value && this.outputFormat === 'text') {
       this.internalInputValue = this.value.replace(/\n/g, '<br>');
-=======
-    if (this.modelValue && this.outputFormat === 'text') {
-      this.internalInputValue = this.modelValue.replace(/\n/g, '<br>');
->>>>>>> theirs
     }
   },
 
   methods: {
     // Mousedown instead of click because it fires before the blur event.
     onMousedown (e) {
-<<<<<<< ours
       const isWithinInput = this.$refs.richTextEditor.$el.querySelector('.tiptap').contains(e.target);
-=======
-      const isWithinInput = this.$refs.richTextEditor.$el
-        .querySelector('.tiptap')
-        .contains(e.target);
->>>>>>> theirs
 
       // If the click is not within the tiptap rich text editor input itself, but still within the wrapping div,
       // focus the editor.
@@ -899,14 +743,7 @@ export default {
     },
 
     onImageUpload () {
-<<<<<<< ours
       this.$emit('select-media', this.$refs.messageInputImageUpload.$refs.input.files);
-=======
-      this.$emit(
-        'select-media',
-        this.$refs.messageInputImageUpload.$refs.input.files,
-      );
->>>>>>> theirs
     },
 
     toggleEmojiPicker () {
@@ -925,11 +762,7 @@ export default {
     },
 
     onInput (event) {
-<<<<<<< ours
       this.$emit('update:value', event);
-=======
-      this.$emit('update:modelValue', event);
->>>>>>> theirs
     },
   },
 };
