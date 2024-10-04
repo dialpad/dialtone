@@ -805,6 +805,7 @@ export default {
   border: var(--dt-size-border-100) solid;
   border-color: var(--dt-color-border-default);
   box-shadow: 0 0 0 0 rgba(0, 0, 0, 0%);
+  line-height: var(--dt-font-line-height-400);
   cursor: text;
   transition: all 100ms cubic-bezier(0.22, 1, 0.36, 1);
 
@@ -818,7 +819,7 @@ export default {
   }
 
   &__editor-wrapper {
-    padding: var(--dt-space-400) var(--dt-space-500) var(--dt-space-300);
+    padding: var(--dt-space-450) var(--dt-space-500) var(--dt-space-300);
   }
 
   &__remaining-char-tooltip {
