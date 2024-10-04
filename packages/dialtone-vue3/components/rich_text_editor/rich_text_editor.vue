@@ -580,10 +580,9 @@ export default {
         return;
       }
 
-      if (this.outputFormat === 'text') {
-        // If the text contains emoji characters convert them to emoji component tags
-        newValue = newValue.replace(/(\p{Emoji}\p{Emoji_Modifier}?)/gu, '<emoji-component code="$1"></emoji-component>');
-      }
+      // If the text contains emoji characters convert them to emoji component tags
+      newValue = newValue.replace(/(\p{Emoji}\p{Emoji_Modifier}?)/gu, '<emoji-component code="$1"></emoji-component>');
+
       // Otherwise replace the content (resets the cursor position).
       this.editor.commands.setContent(newValue, false);
     },
