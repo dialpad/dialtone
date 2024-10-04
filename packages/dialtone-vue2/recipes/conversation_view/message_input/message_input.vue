@@ -51,90 +51,7 @@
     <section class="dt-message-input__bottom-section">
       <!-- Left content -->
       <div class="dt-message-input__bottom-section-left">
-<<<<<<< ours
-        <dt-button
-          v-if="showImagePicker"
-          v-dt-tooltip:top-start="showImagePicker?.tooltipLabel"
-          data-qa="dt-message-input-image-btn"
-          size="sm"
-          circle
-          :kind="imagePickerFocus ? 'default' : 'muted'"
-          importance="clear"
-          :aria-label="showImagePicker.ariaLabel"
-          @click="onSelectImage"
-          @mouseenter="imagePickerFocus = true"
-          @mouseleave="imagePickerFocus = false"
-          @focus="imagePickerFocus = true"
-          @blur="imagePickerFocus = false"
-        >
-          <template #icon>
-            <dt-icon-image
-              size="300"
-            />
-          </template>
-        </dt-button>
-        <dt-input
-          ref="messageInputImageUpload"
-          data-qa="dt-message-input-image-input"
-          accept="image/*, video/*"
-          type="file"
-          class="dt-message-input__image-input"
-          multiple
-          hidden
-          @input="onImageUpload"
-        />
-        <dt-popover
-          v-if="showEmojiPicker"
-          data-qa="dt-message-input-emoji-picker-popover"
-          :open.sync="emojiPickerOpened"
-          initial-focus-element="#searchInput"
-          padding="none"
-        >
-          <template #anchor="{ attrs }">
-            <dt-button
-              v-dt-tooltip="emojiTooltipMessage"
-              v-bind="attrs"
-              data-qa="dt-message-input-emoji-picker-btn"
-              size="sm"
-              circle
-              :kind="emojiPickerHovered ? 'default' : 'muted'"
-              importance="clear"
-              :aria-label="emojiButtonAriaLabel"
-              @click="toggleEmojiPicker"
-              @mouseenter="emojiPickerFocus = true"
-              @mouseleave="emojiPickerFocus = false"
-              @focus="emojiPickerFocus = true"
-              @blur="emojiPickerFocus = false"
-            >
-              <template #icon>
-                <dt-icon-very-satisfied
-                  v-if="emojiPickerHovered"
-                  size="300"
-                />
-                <dt-icon-satisfied
-                  v-else
-                  size="300"
-                />
-              </template>
-            </dt-button>
-          </template>
-          <template
-            #content="{ close }"
-          >
-            <dt-emoji-picker
-              v-bind="emojiPickerProps"
-              @skin-tone="onSkinTone"
-              @selected-emoji="(emoji) => { close(); onSelectEmoji(emoji); }"
-            />
-          </template>
-        </dt-popover>
-        <!-- @slot Slot for emojiGiphy picker -->
-        <slot name="emojiGiphyPicker" />
-=======
-        <dt-stack
-          gap="200"
-          direction="row"
-        >
+        <dt-stack gap="200" direction="row">
           <dt-button
             v-if="showImagePicker"
             v-dt-tooltip:top-start="showImagePicker?.tooltipLabel"
@@ -194,10 +111,7 @@
                     v-if="emojiPickerHovered"
                     size="300"
                   />
-                  <dt-icon-satisfied
-                    v-else
-                    size="300"
-                  />
+                  <dt-icon-satisfied v-else size="300" />
                 </template>
               </dt-button>
             </template>
@@ -217,7 +131,6 @@
           <!-- @slot Slot for emojiGiphy picker -->
           <slot name="emojiGiphyPicker" />
         </dt-stack>
->>>>>>> theirs
       </div>
       <!-- Right content -->
       <div class="dt-message-input__bottom-section-right">
@@ -281,27 +194,13 @@
             :aria-disabled="isSendDisabled"
             @click="onSend"
           >
-            <template
-              v-if="showSendIcon"
-              #icon
-            >
+            <template v-if="showSendIcon" #icon>
               <!-- @slot Slot for send button icon -->
-              <slot
-                name="sendIcon"
-                :icon-size="sendIconSize"
-              >
-<<<<<<< ours
-                <dt-icon-send
-                  :size="sendIconSize"
-                />
-=======
+              <slot name="sendIcon" :icon-size="sendIconSize">
                 <dt-icon-send :size="sendIconSize" />
->>>>>>> theirs
               </slot>
             </template>
-            <template
-              v-if="showSend.text"
-            >
+            <template v-if="showSend.text">
               <p>{{ showSend.text }}</p>
             </template>
           </dt-button>
@@ -317,27 +216,23 @@ import {
   DtRichTextEditor,
   RICH_TEXT_EDITOR_OUTPUT_FORMATS,
   RICH_TEXT_EDITOR_AUTOFOCUS_TYPES,
-} from '@/components/rich_text_editor';
-import meetingPill from './meeting_pill/meeting_pill';
-import { DtButton } from '@/components/button';
-import { DtEmojiPicker } from '@/components/emoji_picker';
-import { DtPopover } from '@/components/popover';
-import { DtInput } from '@/components/input';
-import { DtTooltip } from '@/components/tooltip';
-<<<<<<< ours
-import { DtIconImage, DtIconVerySatisfied, DtIconSatisfied, DtIconSend } from '@dialpad/dialtone-icons/vue2';
-=======
-import { DtStack } from '@/components/stack';
+} from "@/components/rich_text_editor";
+import meetingPill from "./meeting_pill/meeting_pill";
+import { DtButton } from "@/components/button";
+import { DtEmojiPicker } from "@/components/emoji_picker";
+import { DtPopover } from "@/components/popover";
+import { DtInput } from "@/components/input";
+import { DtTooltip } from "@/components/tooltip";
+import { DtStack } from "@/components/stack";
 import {
   DtIconImage,
   DtIconVerySatisfied,
   DtIconSatisfied,
   DtIconSend,
-} from '@dialpad/dialtone-icons/vue3';
->>>>>>> theirs
+} from "@dialpad/dialtone-icons/vue2";
 
 export default {
-  name: 'DtRecipeMessageInput',
+  name: "DtRecipeMessageInput",
 
   components: {
     DtButton,
@@ -363,7 +258,7 @@ export default {
      */
     value: {
       type: [Object, String],
-      default: '',
+      default: "",
     },
 
     /**
@@ -380,7 +275,7 @@ export default {
     inputAriaLabel: {
       type: String,
       required: true,
-      default: '',
+      default: "",
     },
 
     /**
@@ -398,7 +293,7 @@ export default {
      */
     inputClass: {
       type: String,
-      default: '',
+      default: "",
     },
 
     /**
@@ -415,8 +310,8 @@ export default {
     autoFocus: {
       type: [Boolean, String, Number],
       default: false,
-      validator (autoFocus) {
-        if (typeof autoFocus === 'string') {
+      validator(autoFocus) {
+        if (typeof autoFocus === "string") {
           return RICH_TEXT_EDITOR_AUTOFOCUS_TYPES.includes(autoFocus);
         }
         return true;
@@ -431,8 +326,8 @@ export default {
      */
     outputFormat: {
       type: String,
-      default: 'text',
-      validator (outputFormat) {
+      default: "text",
+      validator(outputFormat) {
         return RICH_TEXT_EDITOR_OUTPUT_FORMATS.includes(outputFormat);
       },
     },
@@ -450,7 +345,7 @@ export default {
      */
     placeholder: {
       type: String,
-      default: '',
+      default: "",
     },
 
     /**
@@ -467,7 +362,7 @@ export default {
      */
     maxHeight: {
       type: String,
-      default: 'unset',
+      default: "unset",
     },
 
     // Emoji picker props
@@ -482,18 +377,14 @@ export default {
     emojiPickerProps: {
       type: Object,
       default: () => ({}),
-      validate (emojiPickerProps) {
+      validate(emojiPickerProps) {
         return [
-          'searchNoResultsLabel',
-          'searchResultsLabel',
-          'searchPlaceholderLabel',
-          'skinSelectorButtonTooltipLabel',
-          'tabSetLabels',
-<<<<<<< ours
-        ].every(prop => emojiPickerProps[prop] != null);
-=======
+          "searchNoResultsLabel",
+          "searchResultsLabel",
+          "searchPlaceholderLabel",
+          "skinSelectorButtonTooltipLabel",
+          "tabSetLabels",
         ].every((prop) => emojiPickerProps[prop] != null);
->>>>>>> theirs
       },
     },
 
@@ -502,7 +393,7 @@ export default {
      */
     emojiTooltipMessage: {
       type: String,
-      default: 'Emoji',
+      default: "Emoji",
     },
 
     // Aria label for buttons
@@ -511,7 +402,7 @@ export default {
      */
     emojiButtonAriaLabel: {
       type: String,
-      default: 'emoji button',
+      default: "emoji button",
     },
 
     /**
@@ -519,19 +410,15 @@ export default {
      */
     showCharacterLimit: {
       type: [Boolean, Object],
-      default: () => ({ count: 1500, warning: 500, message: '' }),
+      default: () => ({ count: 1500, warning: 500, message: "" }),
     },
 
     showImagePicker: {
       type: [Boolean, Object],
-<<<<<<< ours
-      default: () => ({ tooltipLabel: 'Attach Image', ariaLabel: 'image button' }),
-=======
       default: () => ({
-        tooltipLabel: 'Attach Image',
-        ariaLabel: 'image button',
+        tooltipLabel: "Attach Image",
+        ariaLabel: "image button",
       }),
->>>>>>> theirs
     },
 
     /**
@@ -547,7 +434,7 @@ export default {
      */
     showCancel: {
       type: [Boolean, Object],
-      default: () => ({ text: 'Cancel' }),
+      default: () => ({ text: "Cancel" }),
     },
 
     /**
@@ -618,7 +505,7 @@ export default {
 
     /**
      * Whether the input allows for bullet list to be introduced in the text.
-    */
+     */
     allowBulletList: {
       type: Boolean,
       default: true,
@@ -664,7 +551,7 @@ export default {
      * @event submit
      * @type {String}
      */
-    'submit',
+    "submit",
 
     /**
      * Fires when media is selected from image button
@@ -672,7 +559,7 @@ export default {
      * @event select-media
      * @type {Array}
      */
-    'select-media',
+    "select-media",
 
     /**
      * Fires when media is dropped into the message input
@@ -680,7 +567,7 @@ export default {
      * @event add-media
      * @type {Array}
      */
-    'add-media',
+    "add-media",
 
     /**
      * Fires when media is pasted into the message input
@@ -688,7 +575,7 @@ export default {
      * @event paste-media
      * @type {Array}
      */
-    'paste-media',
+    "paste-media",
 
     /**
      * Fires when cancel button is pressed (only on edit mode)
@@ -696,7 +583,7 @@ export default {
      * @event cancel
      * @type {Boolean}
      */
-    'cancel',
+    "cancel",
 
     /**
      * Fires when skin tone is selected from the emoji picker
@@ -704,7 +591,7 @@ export default {
      * @event skin-tone
      * @type {String}
      */
-    'skin-tone',
+    "skin-tone",
 
     /**
      * Fires when emoji is selected from the emoji picker
@@ -712,7 +599,7 @@ export default {
      * @event selected-emoji
      * @type {String}
      */
-    'selected-emoji',
+    "selected-emoji",
 
     /**
      * Fires when a slash command is selected
@@ -720,7 +607,7 @@ export default {
      * @event selected-command
      * @type {String}
      */
-    'selected-command',
+    "selected-command",
 
     /**
      * Fires when meeting pill is closed
@@ -728,21 +615,17 @@ export default {
      * @event meeting-pill-close
      * @type {String}
      */
-    'meeting-pill-close',
+    "meeting-pill-close",
 
     /**
      * Event to sync the value with the parent
      * @event update:value
      * @type {String|JSON}
      */
-<<<<<<< ours
-    'update:value',
-=======
-    'update:modelValue',
->>>>>>> theirs
+    "update:modelValue",
   ],
 
-  data () {
+  data() {
     return {
       additionalExtensions: [meetingPill],
       internalInputValue: this.value, // internal input content
@@ -753,28 +636,15 @@ export default {
   },
 
   computed: {
-    showSendIcon () {
+    showSendIcon() {
       return !this.showSend.text;
     },
 
-    inputLength () {
+    inputLength() {
       return this.internalInputValue.length;
     },
 
-    displayCharacterLimitWarning () {
-<<<<<<< ours
-      return Boolean(this.showCharacterLimit) &&
-        ((this.showCharacterLimit.count - this.inputLength) <= this.showCharacterLimit.warning);
-    },
-
-    characterLimitTooltipEnabled () {
-      return this.showCharacterLimit.message && (this.showCharacterLimit.count - this.inputLength < 0);
-    },
-
-    isSendDisabled () {
-      return this.disableSend ||
-      (this.showCharacterLimit && this.inputLength > this.showCharacterLimit.count);
-=======
+    displayCharacterLimitWarning() {
       return (
         Boolean(this.showCharacterLimit) &&
         this.showCharacterLimit.count - this.inputLength <=
@@ -782,74 +652,60 @@ export default {
       );
     },
 
-    characterLimitTooltipEnabled () {
+    characterLimitTooltipEnabled() {
       return (
         this.showCharacterLimit.message &&
         this.showCharacterLimit.count - this.inputLength < 0
       );
     },
 
-    isSendDisabled () {
+    isSendDisabled() {
       return (
         this.disableSend ||
         (this.showCharacterLimit &&
           this.inputLength > this.showCharacterLimit.count)
       );
->>>>>>> theirs
     },
 
-    computedCloseButtonProps () {
+    computedCloseButtonProps() {
       return {
-        ariaLabel: 'Close',
+        ariaLabel: "Close",
       };
     },
 
-    emojiPickerHovered () {
+    emojiPickerHovered() {
       return this.emojiPickerFocus || this.emojiPickerOpened;
     },
 
-    sendIconSize () {
-      return '300';
+    sendIconSize() {
+      return "300";
     },
   },
 
   watch: {
-<<<<<<< ours
-    value (newValue) {
-=======
-    modelValue (newValue) {
->>>>>>> theirs
+    modelValue(newValue) {
       this.internalInputValue = newValue;
     },
 
-    emojiPickerOpened (newValue) {
+    emojiPickerOpened(newValue) {
       if (!newValue) {
         this.$refs.richTextEditor?.focusEditor();
       }
     },
   },
 
-  created () {
-<<<<<<< ours
-    if (this.value && this.outputFormat === 'text') {
-      this.internalInputValue = this.value.replace(/\n/g, '<br>');
-=======
-    if (this.modelValue && this.outputFormat === 'text') {
-      this.internalInputValue = this.modelValue.replace(/\n/g, '<br>');
->>>>>>> theirs
+  created() {
+    if (this.modelValue && this.outputFormat === "text") {
+      this.internalInputValue = this.modelValue.replace(/\n/g, "<br>");
     }
   },
 
   methods: {
     // Mousedown instead of click because it fires before the blur event.
-    onMousedown (e) {
-<<<<<<< ours
-      const isWithinInput = this.$refs.richTextEditor.$el.querySelector('.tiptap').contains(e.target);
-=======
+    onMousedown(e) {
       const isWithinInput = this.$refs.richTextEditor.$el
-        .querySelector('.tiptap')
+        .querySelector(".tiptap")
         .contains(e.target);
->>>>>>> theirs
 
       // If the click is not within the tiptap rich text editor input itself, but still within the wrapping div,
       // focus the editor.
@@ -860,76 +716,68 @@ export default {
       }
     },
 
-    onDrop (e) {
+    onDrop(e) {
       const dt = e.dataTransfer;
       const files = Array.from(dt.files);
-      this.$emit('add-media', files);
+      this.$emit("add-media", files);
     },
 
-    onPaste (e) {
+    onPaste(e) {
       if (e.clipboardData.files.length) {
         e.stopPropagation();
         e.preventDefault();
         const files = [...e.clipboardData.files];
-        this.$emit('paste-media', files);
+        this.$emit("paste-media", files);
       }
     },
 
-    onSkinTone (skinTone) {
-      this.$emit('skin-tone', skinTone);
+    onSkinTone(skinTone) {
+      this.$emit("skin-tone", skinTone);
     },
 
-    onSelectEmoji (emoji) {
+    onSelectEmoji(emoji) {
       if (!emoji) {
         return;
       }
 
       // Insert emoji into the editor
       this.$refs.richTextEditor.editor.commands.insertContent({
-        type: 'emoji',
+        type: "emoji",
         attrs: {
           code: emoji.shortname,
         },
       });
-      this.$emit('selected-emoji', emoji);
+      this.$emit("selected-emoji", emoji);
     },
 
-    onSelectImage () {
+    onSelectImage() {
       this.$refs.messageInputImageUpload.$refs.input.click();
     },
 
-    onImageUpload () {
-<<<<<<< ours
-      this.$emit('select-media', this.$refs.messageInputImageUpload.$refs.input.files);
-=======
+    onImageUpload() {
       this.$emit(
-        'select-media',
+        "select-media",
         this.$refs.messageInputImageUpload.$refs.input.files,
       );
->>>>>>> theirs
     },
 
-    toggleEmojiPicker () {
+    toggleEmojiPicker() {
       this.emojiPickerOpened = !this.emojiPickerOpened;
     },
 
-    onSend () {
+    onSend() {
       if (this.isSendDisabled) {
         return;
       }
-      this.$emit('submit', this.internalInputValue);
+      this.$emit("submit", this.internalInputValue);
     },
 
-    onCancel () {
-      this.$emit('cancel');
+    onCancel() {
+      this.$emit("cancel");
     },
 
-    onInput (event) {
-<<<<<<< ours
-      this.$emit('update:value', event);
-=======
-      this.$emit('update:modelValue', event);
->>>>>>> theirs
+    onInput(event) {
+      this.$emit("update:modelValue", event);
     },
   },
 };
