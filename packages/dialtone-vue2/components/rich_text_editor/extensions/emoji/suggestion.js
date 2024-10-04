@@ -18,11 +18,12 @@ export default {
     query = query.toLowerCase();
 
     const filteredEmoji = emojiList
-      .filter(item => [
-        item.name,
-        item.shortname.replaceAll(':', ''),
-        ...item.keywords,
-      ].some(text => text.startsWith(query)),
+      .filter(
+        item => [
+          item.name,
+          item.shortname.replaceAll(':', ''),
+          ...item.keywords,
+        ].some(text => text.startsWith(query)),
       ).splice(0, suggestionLimit);
     return filteredEmoji.map(item => ({ code: item.shortname }));
   },
