@@ -493,18 +493,7 @@ export default {
     },
 
     value (newValue) {
-      let currentValue = this.getOutput();
-      if (this.outputFormat === 'json') {
-        newValue = JSON.stringify(newValue);
-        currentValue = JSON.stringify(currentValue);
-      }
-      if (newValue === currentValue) {
-        // The new value came from this component and was passed back down
-        // through the parent, so don't do anything here.
-        return;
-      }
-      // Otherwise replace the content (resets the cursor position).
-      this.editor.commands.setContent(newValue, false);
+      this.processValue(newValue);
     },
   },
 
@@ -518,6 +507,7 @@ export default {
 
   mounted () {
     warnIfUnmounted(this.$el, this.$options.name);
+    this.processValue(this.value);
   },
 
   methods: {
@@ -576,6 +566,26 @@ export default {
         },
       });
       this.addEditorListeners();
+    },
+
+    processValue (newValue) {
+      let currentValue = this.getOutput();
+      if (this.outputFormat === 'json') {
+        newValue = JSON.stringify(newValue);
+        currentValue = JSON.stringify(currentValue);
+      }
+      if (newValue === currentValue) {
+        // The new value came from this component and was passed back down
+        // through the parent, so don't do anything here.
+        return;
+      }
+
+      if (this.outputFormat === 'text') {
+        // If the text contains emoji characters convert them to emoji component tags
+        newValue = newValue.replace(/(\p{Emoji}\p{Emoji_Modifier}?)/gu, '<emoji-component code="$1"></emoji-component>');
+      }
+      // Otherwise replace the content (resets the cursor position).
+      this.editor.commands.setContent(newValue, false);
     },
 
     destroyEditor () {
