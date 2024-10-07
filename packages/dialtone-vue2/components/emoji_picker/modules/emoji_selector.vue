@@ -148,6 +148,7 @@ export default {
 
   data () {
     return {
+      tabLabelsRefs: [],
       emojiRefs: [],
       emojiFilteredRefs: [],
       isFiltering: false,
@@ -257,7 +258,7 @@ export default {
       this.tabSetLabels?.forEach((_, index) => {
         const refKey = `tabLabelRef-${index}`;
         if (this.$refs[refKey]) {
-          this.$set(this.tabLabels, index, { ...this.tabLabels[index], ref: this.$refs[refKey] });
+          this.$set(this.tabLabelsRefs, index, { ref: this.$refs[refKey] });
         }
       });
     },
@@ -329,8 +330,7 @@ export default {
     scrollToTab: function (tabIndex, focusFirstEmoji) {
       const vm = this;
       if (focusFirstEmoji === undefined) { focusFirstEmoji = true; }
-      const tabLabel = vm.tabLabels[tabIndex - 1];
-      const tabElement = tabLabel.ref[0];
+      const tabElement = vm.tabLabelsRefs[tabIndex - 1].ref[0];
 
       vm.$nextTick(function () {
         const container = vm.$refs.listRef;
