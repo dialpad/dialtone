@@ -184,13 +184,12 @@
             v-dt-tooltip:top-end="showSend?.tooltipLabel"
             data-qa="dt-message-input-send-btn"
             size="sm"
-            class="dt-message-input__button"
             kind="default"
             importance="primary"
             :class="[
               {
-                'dt-message-input__send-button--disabled': isSendDisabled,
-                'd-btn--icon-only': showSendIcon,
+                'dt-message-input__button dt-message-input__send-button--disabled': isSendDisabled,
+                'dt-message-input__button d-btn--icon-only': showSendIcon,
               },
             ]"
             :aria-label="showSend.ariaLabel"
