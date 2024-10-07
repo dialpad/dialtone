@@ -1,3 +1,10 @@
+## [2.162.1](https://github.com/dialpad/dialtone/compare/dialtone-vue2/v2.162.0...dialtone-vue2/v2.162.1) (2024-10-07)
+
+
+### Bug Fixes
+
+* **Emoji Picker:** NO-JIRA refactor fix ref reactivity in vue2 ([#523](https://github.com/dialpad/dialtone/issues/523)) ([f164cad](https://github.com/dialpad/dialtone/commit/f164cad8cfa08f5d5e0262d6bf1b2f5531771e1f))
+
 # [2.162.0](https://github.com/dialpad/dialtone/compare/dialtone-vue2/v2.161.2...dialtone-vue2/v2.162.0) (2024-10-01)
 
 
