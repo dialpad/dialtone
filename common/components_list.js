@@ -37,6 +37,7 @@ module.exports = [
   'presence.vue',
   'radio.vue',
   'radio_group.vue',
+  'rich_text_editor.vue',
   'root_layout.vue',
   'scroller.vue',
   'select_menu.vue',
