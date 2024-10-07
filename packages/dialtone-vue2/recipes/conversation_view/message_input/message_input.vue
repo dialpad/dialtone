@@ -789,20 +789,20 @@ export default {
   border-radius: var(--dt-size-radius-400);
   border: var(--dt-size-border-100) solid;
   border-color: var(--dt-color-border-default);
-  box-shadow: 0 0 0 0 rgba(0, 0, 0, 0%);
   line-height: var(--dt-font-line-height-400);
   cursor: text;
-  transition: all 100ms cubic-bezier(0.22, 1, 0.36, 1);
+  opacity: 1;
+  transition-property: border-color, box-shadow, opacity;
+  transition-duration: var(--td200);
+  transition-timing-function: var(--ttf-in-out);
 
   &:focus-within {
     border-color: var(--dt-color-border-bold);
     box-shadow: 0 0 var(--dt-size-300) 0 var(--dt-color-surface-moderate-opaque);
-    transition: all 250ms cubic-bezier(0.22, 1, 0.36, 1);
   }
 
   &:not(:hover):not(:focus-within) .dt-message-input__button {
     opacity: 0.75;
-    transition: all 250ms cubic-bezier(0.22, 1, 0.36, 1);
   }
 
   &__editor-wrapper {
