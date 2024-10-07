@@ -1,3 +1,10 @@
+## [1.36.5](https://github.com/dialpad/dialtone/compare/dialtone-tokens/v1.36.4...dialtone-tokens/v1.36.5) (2024-10-07)
+
+
+### Bug Fixes
+
+* **Tokens:** NO-JIRA incorrect hsl for reference tokens ([#516](https://github.com/dialpad/dialtone/issues/516)) ([eb4e10e](https://github.com/dialpad/dialtone/commit/eb4e10e4371c3a9d53a3e7e08e759429c272723a))
+
 ## [1.36.4](https://github.com/dialpad/dialtone/compare/dialtone-tokens/v1.36.3...dialtone-tokens/v1.36.4) (2024-09-26)
 
 
