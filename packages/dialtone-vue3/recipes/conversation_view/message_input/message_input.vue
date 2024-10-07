@@ -58,8 +58,7 @@
             v-dt-tooltip:top-start="showImagePicker?.tooltipLabel"
             data-qa="dt-message-input-image-btn"
             size="sm"
-            class="d-bar4"
-            style="width: 2.8rem; height: 2.8rem"
+            class="dt-message-input__button"
             :kind="imagePickerFocus ? 'muted' : 'muted'"
             importance="clear"
             :aria-label="showImagePicker.ariaLabel"
@@ -96,8 +95,7 @@
                 v-bind="attrs"
                 data-qa="dt-message-input-emoji-picker-btn"
                 size="sm"
-                class="d-bar4"
-                style="width: 2.8rem; height: 2.8rem"
+                class="dt-message-input__button"
                 :kind="emojiPickerHovered ? 'muted' : 'muted'"
                 importance="clear"
                 :aria-label="emojiButtonAriaLabel"
@@ -167,9 +165,8 @@
         <dt-button
           v-if="showCancel"
           data-qa="dt-message-input-cancel-button"
-          class="dt-message-input__cancel-button d-bar4 d-p8"
+          class="dt-message-input__cancel-button dt-message-input__button d-p8"
           size="sm"
-          style="max-height: 2.8rem"
           kind="muted"
           importance="clear"
           :aria-label="showCancel.ariaLabel"
@@ -187,8 +184,7 @@
             v-dt-tooltip:top-end="showSend?.tooltipLabel"
             data-qa="dt-message-input-send-btn"
             size="sm"
-            class="d-bar4"
-            style="width: 2.8rem; height: 2.8rem"
+            class="dt-message-input__button"
             kind="default"
             importance="primary"
             :class="[
@@ -833,6 +829,12 @@ export default {
     margin-right: var(--dt-space-500);
   }
 
+  &__button {
+    max-height: 2.8rem;
+    max-width: 2.8rem;
+    border-radius: var(--dt-size-radius-400);
+  }
+
   &__send-button--disabled {
     background-color: unset;
     color: var(--dt-color-foreground-muted);
@@ -840,6 +842,7 @@ export default {
   }
 
   &__cancel-button {
+    max-width: unset;
     margin-right: var(--dt-space-300);
   }
 
