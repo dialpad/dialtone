@@ -59,7 +59,7 @@
             data-qa="dt-message-input-image-btn"
             size="sm"
             class="dt-message-input__button"
-            :kind="imagePickerFocus ? 'muted' : 'muted'"
+            kind="muted"
             importance="clear"
             :aria-label="showImagePicker.ariaLabel"
             @click="onSelectImage"
@@ -96,7 +96,7 @@
                 data-qa="dt-message-input-emoji-picker-btn"
                 size="sm"
                 class="dt-message-input__button"
-                :kind="emojiPickerHovered ? 'muted' : 'muted'"
+                kind="muted"
                 importance="clear"
                 :aria-label="emojiButtonAriaLabel"
                 @click="toggleEmojiPicker"
@@ -187,9 +187,10 @@
             kind="default"
             importance="primary"
             :class="[
+              'dt-message-input__button',
               {
-                'dt-message-input__button dt-message-input__send-button--disabled': isSendDisabled,
-                'dt-message-input__button d-btn--icon-only': showSendIcon,
+                'dt-message-input__send-button--disabled': isSendDisabled,
+                'd-btn--icon-only': showSendIcon,
               },
             ]"
             :aria-label="showSend.ariaLabel"
