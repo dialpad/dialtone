@@ -1,3 +1,15 @@
+# [9.79.0](https://github.com/dialpad/dialtone/compare/dialtone/v9.78.0...dialtone/v9.79.0) (2024-10-07)
+
+
+### Bug Fixes
+
+* **Rich Text Editor:** DP-113072 support dialtone emojis by setting value prop ([#524](https://github.com/dialpad/dialtone/issues/524)) ([40b90be](https://github.com/dialpad/dialtone/commit/40b90be35dd3e3168dc63ac77ba2e95a46dfafda))
+
+
+### Features
+
+* **Rich Text Editor:** DLT-2116 enable emoji searching by name and keyword ([#525](https://github.com/dialpad/dialtone/issues/525)) ([14e4569](https://github.com/dialpad/dialtone/commit/14e45694391156fbbaf6180a5db555b5352cd705))
+
 # [9.78.0](https://github.com/dialpad/dialtone/compare/dialtone/v9.77.0...dialtone/v9.78.0) (2024-10-07)
 
 
