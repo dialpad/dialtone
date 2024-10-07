@@ -38,6 +38,7 @@ import {
   RICH_TEXT_EDITOR_AUTOFOCUS_TYPES,
   RICH_TEXT_EDITOR_SUPPORTED_LINK_PROTOCOLS,
 } from './rich_text_editor_constants';
+import { emojiPattern } from 'regex-combined-emojis';
 
 import mentionSuggestion from './extensions/mentions/suggestion';
 import channelSuggestion from './extensions/channels/suggestion';
@@ -493,18 +494,7 @@ export default {
     },
 
     modelValue (newValue) {
-      let currentValue = this.getOutput();
-      if (this.outputFormat === 'json') {
-        newValue = JSON.stringify(newValue);
-        currentValue = JSON.stringify(currentValue);
-      }
-      if (newValue === currentValue) {
-        // The new value came from this component and was passed back down
-        // through the parent, so don't do anything here.
-        return;
-      }
-      // Otherwise replace the content (resets the cursor position).
-      this.editor.commands.setContent(newValue, false);
+      this.processValue(newValue);
     },
   },
 
@@ -518,6 +508,7 @@ export default {
 
   mounted () {
     warnIfUnmounted(this.$el, this.$options.name);
+    this.processValue(this.modelValue, false);
   },
 
   methods: {
@@ -576,6 +567,27 @@ export default {
         },
       });
       this.addEditorListeners();
+    },
+
+    processValue (newValue, returnIfEqual = true) {
+      let currentValue = this.getOutput();
+      if (this.outputFormat === 'json') {
+        newValue = JSON.stringify(newValue);
+        currentValue = JSON.stringify(currentValue);
+      }
+      if (returnIfEqual && newValue === currentValue) {
+        // The new value came from this component and was passed back down
+        // through the parent, so don't do anything here.
+        return;
+      }
+
+      const inputUnicodeRegex = new RegExp(`(${emojiPattern})`, 'g');
+
+      // If the text contains emoji characters convert them to emoji component tags
+      newValue = newValue.replace(inputUnicodeRegex, '<emoji-component code="$1"></emoji-component>');
+
+      // Otherwise replace the content (resets the cursor position).
+      this.editor.commands.setContent(newValue, false);
     },
 
     destroyEditor () {
