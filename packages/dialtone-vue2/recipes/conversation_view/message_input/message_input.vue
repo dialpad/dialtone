@@ -138,88 +138,93 @@
       </div>
       <!-- Right content -->
       <div class="dt-message-input__bottom-section-right">
-        <!-- @slot Slot for sms count -->
-        <div class="d-d-flex d-ai-center">
-          <slot name="smsCount" />
-        </div>
-
-        <!-- Optionally displayed remaining character counter -->
-        <dt-tooltip
-          v-if="Boolean(showCharacterLimit)"
-          class="dt-message-input__remaining-char-tooltip"
-          placement="top-end"
-          :enabled="characterLimitTooltipEnabled"
-          :message="showCharacterLimit.message"
-          :offset="[10, 8]"
+        <dt-stack
+          direction="row"
+          gap="300"
         >
-          <template #anchor>
-            <p
-              v-show="displayCharacterLimitWarning"
-              class="dt-message-input__remaining-char"
-              data-qa="dt-message-input-character-limit"
-            >
-              {{ showCharacterLimit.count - inputLength }}
-            </p>
-          </template>
-        </dt-tooltip>
+          <!-- @slot Slot for sms count -->
+          <div class="d-d-flex d-ai-center">
+            <slot name="smsCount" />
+          </div>
 
-        <!-- Cancel button for edit mode -->
-        <dt-button
-          v-if="showCancel"
-          data-qa="dt-message-input-cancel-button"
-          class="dt-message-input__cancel-button dt-message-input__button d-p8"
-          size="sm"
-          kind="muted"
-          importance="clear"
-          :aria-label="showCancel.ariaLabel"
-          @click="onCancel"
-        >
-          <p>{{ showCancel.text }}</p>
-        </dt-button>
-
-        <!-- @slot Slot for sendButton picker -->
-        <slot name="sendButton">
-          <!-- Send button -->
-          <!-- Right positioned UI - send button -->
-          <dt-button
-            v-if="showSend"
-            v-dt-tooltip:top-end="showSend?.tooltipLabel"
-            data-qa="dt-message-input-send-btn"
-            size="sm"
-            kind="default"
-            importance="primary"
-            :class="[
-              'dt-message-input__button',
-              {
-                'dt-message-input__send-button--disabled': isSendDisabled,
-                'd-btn--icon-only': showSendIcon,
-              },
-            ]"
-            :aria-label="showSend.ariaLabel"
-            :aria-disabled="isSendDisabled"
-            @click="onSend"
+          <!-- Optionally displayed remaining character counter -->
+          <dt-tooltip
+            v-if="Boolean(showCharacterLimit)"
+            class="dt-message-input__remaining-char-tooltip"
+            placement="top-end"
+            :enabled="characterLimitTooltipEnabled"
+            :message="showCharacterLimit.message"
+            :offset="[10, 8]"
           >
-            <template
-              v-if="showSendIcon"
-              #icon
-            >
-              <!-- @slot Slot for send button icon -->
-              <slot
-                name="sendIcon"
-                :icon-size="sendIconSize"
+            <template #anchor>
+              <p
+                v-show="displayCharacterLimitWarning"
+                class="dt-message-input__remaining-char"
+                data-qa="dt-message-input-character-limit"
               >
-                <dt-icon-send
-                  :size="sendIconSize"
-                />
-              </slot>
+                {{ showCharacterLimit.count - inputLength }}
+              </p>
             </template>
-            <template
-              v-if="showSend.text"
-            >
-              <p>{{ showSend.text }}</p>
-            </template>
+          </dt-tooltip>
+
+          <!-- Cancel button for edit mode -->
+          <dt-button
+            v-if="showCancel"
+            data-qa="dt-message-input-cancel-button"
+            class="dt-message-input__cancel-button dt-message-input__button d-p8"
+            size="sm"
+            kind="muted"
+            importance="clear"
+            :aria-label="showCancel.ariaLabel"
+            @click="onCancel"
+          >
+            <p>{{ showCancel.text }}</p>
           </dt-button>
-        </slot>
+
+          <!-- @slot Slot for sendButton picker -->
+          <slot name="sendButton">
+            <!-- Send button -->
+            <!-- Right positioned UI - send button -->
+            <dt-button
+              v-if="showSend"
+              v-dt-tooltip:top-end="showSend?.tooltipLabel"
+              data-qa="dt-message-input-send-btn"
+              size="sm"
+              kind="default"
+              importance="primary"
+              :class="[
+                'dt-message-input__button',
+                {
+                  'dt-message-input__send-button--disabled': isSendDisabled,
+                  'd-btn--icon-only': showSendIcon,
+                },
+              ]"
+              :aria-label="showSend.ariaLabel"
+              :aria-disabled="isSendDisabled"
+              @click="onSend"
+            >
+              <template
+                v-if="showSendIcon"
+                #icon
+              >
+                <!-- @slot Slot for send button icon -->
+                <slot
+                  name="sendIcon"
+                  :icon-size="sendIconSize"
+                >
+                  <dt-icon-send
+                    :size="sendIconSize"
+                  />
+                </slot>
+              </template>
+              <template
+                v-if="showSend.text"
+              >
+                <p>{{ showSend.text }}</p>
+              </template>
+            </dt-button>
+          </slot>
+        </dt-stack>
       </div>
     </section>
   </div>
@@ -812,24 +817,24 @@ export default {
   &__remaining-char {
     color: var(--dt-color-foreground-critical);
     font-size: var(--dt-font-size-100);
-    margin-right: var(--dt-space-500);
+    margin-right: var(--dt-space-300);
   }
 
   &__button {
     max-height: 2.8rem;
     max-width: 2.8rem;
-    border-radius: var(--dt-size-radius-400);
+    border-radius: var(--dt-size-radius-300);
+  }
+
+  &__send-button,
+  &__cancel-button {
+    max-width: unset;
   }
 
   &__send-button--disabled {
     background-color: unset;
     color: var(--dt-color-foreground-muted);
     cursor: default;
-  }
-
-  &__cancel-button {
-    max-width: unset;
-    margin-right: var(--dt-space-300);
   }
 
   &__bottom-section {
