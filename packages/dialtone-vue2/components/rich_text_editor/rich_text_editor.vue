@@ -38,6 +38,7 @@ import {
   RICH_TEXT_EDITOR_AUTOFOCUS_TYPES,
   RICH_TEXT_EDITOR_SUPPORTED_LINK_PROTOCOLS,
 } from './rich_text_editor_constants';
+import { emojiPattern } from 'regex-combined-emojis';
 
 import mentionSuggestion from './extensions/mentions/suggestion';
 import channelSuggestion from './extensions/channels/suggestion';
@@ -581,8 +582,10 @@ export default {
         return;
       }
 
+      const inputUnicodeRegex = new RegExp(`(${emojiPattern})`, 'g');
+
       // If the text contains emoji characters convert them to emoji component tags
-      newValue = newValue.replace(/(\p{Emoji}\p{Emoji_Modifier}?)/gu, '<emoji-component code="$1"></emoji-component>');
+      newValue = newValue.replace(inputUnicodeRegex, '<emoji-component code="$1"></emoji-component>');
 
       // Otherwise replace the content (resets the cursor position).
       this.editor.commands.setContent(newValue, false);
