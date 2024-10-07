@@ -1,3 +1,16 @@
+# [9.78.0](https://github.com/dialpad/dialtone/compare/dialtone/v9.77.0...dialtone/v9.78.0) (2024-10-07)
+
+
+### Bug Fixes
+
+* **Emoji Picker:** NO-JIRA refactor fix ref reactivity in vue2 ([#523](https://github.com/dialpad/dialtone/issues/523)) ([f164cad](https://github.com/dialpad/dialtone/commit/f164cad8cfa08f5d5e0262d6bf1b2f5531771e1f))
+* **Tokens:** NO-JIRA incorrect hsl for reference tokens ([#516](https://github.com/dialpad/dialtone/issues/516)) ([eb4e10e](https://github.com/dialpad/dialtone/commit/eb4e10e4371c3a9d53a3e7e08e759429c272723a))
+
+
+### Features
+
+* DLT-1915 add stylelint warning when using px or rem instead of tokens ([#509](https://github.com/dialpad/dialtone/issues/509)) ([77212aa](https://github.com/dialpad/dialtone/commit/77212aaf17e8bdf5a31192d5421bd1ab1d1fac30))
+
 # [9.77.0](https://github.com/dialpad/dialtone/compare/dialtone/v9.76.3...dialtone/v9.77.0) (2024-10-01)
 
 
