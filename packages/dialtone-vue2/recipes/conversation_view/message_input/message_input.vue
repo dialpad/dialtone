@@ -52,8 +52,8 @@
       <!-- Left content -->
       <div class="dt-message-input__bottom-section-left">
         <dt-stack
+          direction="row"
           gap="200"
-          directon="row"
         >
           <dt-button
             v-if="showImagePicker"
@@ -786,10 +786,17 @@ export default {
   box-shadow: 0 0 0 0 rgba(0, 0, 0, 0%);
   line-height: var(--dt-font-line-height-400);
   cursor: text;
+  transition: all 100ms cubic-bezier(0.22, 1, 0.36, 1);
 
   &:focus-within {
     border-color: var(--dt-color-border-bold);
-    box-shadow: var(--dt-shadow-small);
+    box-shadow: 0 0 var(--dt-size-300) 0 var(--dt-color-surface-moderate-opaque);
+    transition: all 250ms cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  &:not(:hover):not(:focus-within) .dt-message-input__button {
+    opacity: 0.75;
+    transition: all 250ms cubic-bezier(0.22, 1, 0.36, 1);
   }
 
   &__editor-wrapper {
@@ -827,7 +834,7 @@ export default {
   &__bottom-section {
     display: flex;
     justify-content: space-between;
-    padding: var(--dt-space-300) var(--dt-space-400);
+    padding: var(--dt-space-300) var(--dt-space-400) var(--dt-space-400);
   }
 
   &__bottom-section-left {

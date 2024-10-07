@@ -809,8 +809,10 @@ export default {
     box-shadow: 0 0 var(--dt-size-300) 0 var(--dt-color-surface-moderate-opaque);
     transition: all 250ms cubic-bezier(0.22, 1, 0.36, 1);
   }
-  &:not(:focus-within) .d-btn.d-btn--icon-only {
-    opacity: 0.5;
+
+  &:not(:hover):not(:focus-within) .dt-message-input__button {
+    opacity: 0.75;
+    transition: all 250ms cubic-bezier(0.22, 1, 0.36, 1);
   }
 
   &__editor-wrapper {
