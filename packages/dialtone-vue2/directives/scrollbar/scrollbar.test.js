@@ -18,7 +18,6 @@ describe('DtScrollbarDirective Tests', () => {
   const updateWrapper = () => {
     wrapper = mount(WrapperComponent, {
       localVue: testContext.localVue,
-      attachTo: document.body,
     });
 
     viewportElement = wrapper.find('#viewport').element;

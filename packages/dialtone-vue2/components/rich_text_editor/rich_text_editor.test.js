@@ -52,6 +52,7 @@ describe('DtRichTextEditor tests', () => {
   afterEach(() => {
     mockProps = {};
     mockListeners = {};
+    wrapper.destroy();
   });
 
   describe('Presentation Tests', () => {

@@ -90,9 +90,6 @@ jobs:
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
-      - name: Build Dialtone-vue 2 library and documentation site
-        run: pnpm nx run --verbose dialtone-vue2:build-docs
-
       - name: Run Dialtone-vue 2 Visual Tests
         env:
           PERCY_TOKEN: ${{ secrets.PERCY_TOKEN }}

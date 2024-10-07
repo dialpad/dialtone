@@ -10,6 +10,7 @@
 <script>
 /* eslint-disable max-lines */
 import { Editor, EditorContent } from '@tiptap/vue-3';
+import { Slice, Fragment } from '@tiptap/pm/model';
 import Blockquote from '@tiptap/extension-blockquote';
 import CodeBlock from '@tiptap/extension-code-block';
 import Document from '@tiptap/extension-document';
@@ -37,10 +38,12 @@ import {
   RICH_TEXT_EDITOR_AUTOFOCUS_TYPES,
   RICH_TEXT_EDITOR_SUPPORTED_LINK_PROTOCOLS,
 } from './rich_text_editor_constants';
+import { emojiPattern } from 'regex-combined-emojis';
 
 import mentionSuggestion from './extensions/mentions/suggestion';
 import channelSuggestion from './extensions/channels/suggestion';
 import slashCommandSuggestion from './extensions/slash_command/suggestion';
+import { warnIfUnmounted } from '@/common/utils';
 
 export default {
   name: 'DtRichTextEditor',
@@ -491,18 +494,7 @@ export default {
     },
 
     modelValue (newValue) {
-      let currentValue = this.getOutput();
-      if (this.outputFormat === 'json') {
-        newValue = JSON.stringify(newValue);
-        currentValue = JSON.stringify(currentValue);
-      }
-      if (newValue === currentValue) {
-        // The new value came from this component and was passed back down
-        // through the parent, so don't do anything here.
-        return;
-      }
-      // Otherwise replace the content (resets the cursor position).
-      this.editor.commands.setContent(newValue, false);
+      this.processValue(newValue);
     },
   },
 
@@ -512,6 +504,11 @@ export default {
 
   beforeUnmount () {
     this.destroyEditor();
+  },
+
+  mounted () {
+    warnIfUnmounted(this.$el, this.$options.name);
+    this.processValue(this.modelValue, false);
   },
 
   methods: {
@@ -528,9 +525,69 @@ export default {
             ...this.inputAttrs,
             class: this.inputClass,
           },
+
+          /* Absolutely crazy that this is what's needed to paste line breaks properly in prosemirror, but it does seem
+            to fix our issue of line breaks outputting as paragraphs. Code taken from this thread:
+            https://discuss.prosemirror.net/t/how-to-preserve-hard-breaks-when-pasting-html-into-a-plain-text-schema/4202/4
+          */
+          handlePaste: function (view, event, slice) {
+            const { state } = view;
+            const { tr } = state;
+
+            if (!state.schema.nodes.hardBreak) {
+              return false;
+            }
+
+            const clipboardText = event.clipboardData?.getData('text/plain').trim();
+
+            if (!clipboardText) {
+              return false;
+            }
+
+            const textLines = clipboardText.split(/(?:\r\n|\r|\n)/g);
+
+            const nodes = textLines.reduce((nodes, line, index) => {
+              if (line.length > 0) {
+                nodes.push(state.schema.text(line));
+              }
+
+              if (index < textLines.length - 1) {
+                nodes.push(state.schema.nodes.hardBreak.create());
+              }
+
+              return nodes;
+            }, []);
+
+            view.dispatch(
+              tr.replaceSelection(Slice.maxOpen(Fragment.fromArray(nodes))).scrollIntoView(),
+            );
+
+            return true;
+          },
         },
       });
       this.addEditorListeners();
+    },
+
+    processValue (newValue, returnIfEqual = true) {
+      let currentValue = this.getOutput();
+      if (this.outputFormat === 'json') {
+        newValue = JSON.stringify(newValue);
+        currentValue = JSON.stringify(currentValue);
+      }
+      if (returnIfEqual && newValue === currentValue) {
+        // The new value came from this component and was passed back down
+        // through the parent, so don't do anything here.
+        return;
+      }
+
+      const inputUnicodeRegex = new RegExp(`(${emojiPattern})`, 'g');
+
+      // If the text contains emoji characters convert them to emoji component tags
+      newValue = newValue.replace(inputUnicodeRegex, '<emoji-component code="$1"></emoji-component>');
+
+      // Otherwise replace the content (resets the cursor position).
+      this.editor.commands.setContent(newValue, false);
     },
 
     destroyEditor () {

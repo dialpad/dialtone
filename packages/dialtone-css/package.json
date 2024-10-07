@@ -1,6 +1,6 @@
 {
   "name": "@dialpad/dialtone-css",
-  "version": "8.45.0",
+  "version": "8.45.1",
   "description": "Dialpad's design system",
   "keywords": [
     "Dialpad",
@@ -49,15 +49,11 @@
   },
   "type": "module",
   "scripts": {
-    "build": "gulp",
-    "lesshint": "pnpm exec lesshint 'lib/build/less/utilities'",
-    "lint": "run-s lint:library lint:code",
+    "lint": "run-s lint:code lint:library",
     "lint:code": "eslint '**/*.{js,cjs,vue}'",
-    "lint:library": "run-s stylelint lesshint",
-    "start": "gulp watch",
-    "stylelint": "pnpm exec stylelint 'lib/build/less/**/*.less'",
-    "build:icons": "gulp icons",
-    "test:postcss-generator-plugin": "jest --coverage && eslint ."
+    "lint:library": "run-s lesshint stylelint",
+    "lesshint": "pnpm exec lesshint 'lib/build/less/utilities'",
+    "stylelint": "pnpm exec stylelint 'lib/build/less/**/*.less'"
   },
   "unpkg": "./lib/dist/dialtone.min.css",
   "exports": {
@@ -76,6 +72,7 @@
   },
   "devDependencies": {
     "@dialpad/dialtone-tokens": "workspace:*",
+    "@dialpad/postcss-responsive-variations": "workspace:*",
     "@vue/cli-plugin-eslint": "~5.0.8",
     "@vue/cli-service": "~5.0.8",
     "autoprefixer": "^10.4.14",
@@ -90,7 +87,6 @@
     "gulp-replace": "^1.1.4",
     "gulp-sourcemaps": "^3.0.0",
     "gulp-svgmin": "^4.1.0",
-    "jest": "^29.5.0",
     "less": "^4.2.0",
     "npm-run-all": "^4.1.5",
     "oslllo-svg-fixer": "^2.2.0",
@@ -114,5 +110,10 @@
         "statements": 100
       }
     }
+  },
+  "nx": {
+    "includedScripts": [
+      "lint"
+    ]
   }
 }

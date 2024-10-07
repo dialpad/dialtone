@@ -54,7 +54,6 @@ const _mountWrapper = () => {
     listeners,
     slots,
     localVue: testContext.localVue,
-    attachTo: document.body,
   });
 };
 

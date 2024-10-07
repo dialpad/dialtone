@@ -47,3 +47,6 @@ local.properties
 # Dialtone vue #
 packages/dialtone-vue*/storybook-static
 packages/dialtone-vue*/functions/generated
+
+# Postcss responsive variations
+packages/postcss-responsive-variations/coverage

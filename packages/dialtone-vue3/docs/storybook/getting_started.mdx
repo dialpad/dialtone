@@ -1,4 +1,4 @@
-import { Meta, Subtitle } from '@storybook/blocks';
+import { Meta } from '@storybook/blocks';
 
 <Meta title="Docs/Storybook/Getting Started" />
 
@@ -28,24 +28,24 @@ pnpm install
 Runs storybook locally at `localhost:9011`
 
 ```shell
-nx storybook dialtone-vue3
+nx run dialtone-vue3:start
 ```
 
 ### Building Storybook
 
-Outputs the bundled storybook to `dialtone-vue/storybook-static`
+Outputs the bundled storybook to `storybook-static` folder
 
 ```shell
-nx storybook:build dialtone-vue3
+nx run dialtone-vue3:build-storybook
 ```
 
 ### Deploying Storybook
 
-Storybook is deployed automatically from the master branch to [Netlify](https://dialtone-vue.netlify.app).
+Storybook is deployed automatically from the production branch to [Dialtone Vue 3 documentation](https://dialtone.dialpad.com/vue3).
 
 ## Modifying Storybook Build Config
 
 Most of the time we shouldn't need to modify Storybook's build config, both of the
 UI and the Canvas have been configured to support Dialtone classes and asset imports.
 However, if for whatever reason we need to modify the build configs, they can be found
-in `dialtone-vue/.storybook/main.js`.
+in `.storybook/main.js`.

@@ -67,11 +67,6 @@ export default {
       required: true,
     },
 
-    isScrolling: {
-      type: Boolean,
-      default: false,
-    },
-
     emojiFilter: {
       type: String,
       default: '',
@@ -112,6 +107,7 @@ export default {
       return tabsData.map((tab, index) => ({
         ...tab,
         label: this.tabSetLabels[index],
+        // IDs on dt-tab component need to be on string
         id: (index + 1).toString(),
         panelId: (index + 1).toString(),
       }));
@@ -124,7 +120,7 @@ export default {
 
   watch: {
     scrollIntoTab: function (newVal) {
-      if (!this.isScrolling && !this.isSearching) {
+      if (!this.isSearching) {
         this.selectedTab = (newVal + 1).toString();
       }
     },
@@ -144,10 +140,11 @@ export default {
 
   methods: {
     selectTabset (id) {
-      if (!this.isScrolling) {
-        this.selectedTab = id;
-      }
-      this.$emit('selected-tabset', id);
+      // IDs on scrollToTab need to be on number
+      const parseId = parseInt(id);
+      // IDs on dt-tab component need to be on string
+      this.selectedTab = id;
+      this.$emit('selected-tabset', parseId);
     },
 
     setTabsetRef () {

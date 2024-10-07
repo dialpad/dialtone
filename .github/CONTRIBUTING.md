@@ -102,14 +102,41 @@ Any new components or updates to existing components require the following:
   - Read by a screen reader.
   - Minimum contrast ratio.
 - Changes must be made for Vue 2 as well as Vue 3, `dialtone-vue2` and `dialtone-vue3` package folders respectively
+
 - Unit tests are passing locally.
-  - `nx test dialtone-vue2` or `nx test dialtone-vue3`
+  - Test all projects
+    - `nx run dialtone:test:all`
+  - Test individual project
+    - `nx run dialtone-vue2:test`
+    - `nx run dialtone-vue3:test`
+    - `nx run eslint-plugin-dialtone:test`
+    - `nx run stylelint-plugin-dialtone:test`
+
 - Linters are passing locally.
-  - `nx lint dialtone-vue2` or `nx lint dialtone-vue3`
+  - Lint all projects
+    - `nx run dialtone:lint:all`
+  - Lint individual project
+    - `nx run dialtone-css:lint`
+    - `nx run dialtone-documentation:lint`
+    - `nx run dialtone-vue2:lint`
+    - `nx run dialtone-vue3:lint`
+    - `nx run eslint-plugin-dialtone:lint`
+    - `nx run stylelint-plugin-dialtone:lint`
+
 - Library builds locally.
-  - `nx build dialtone-vue2` or `nx build dialtone-vue3`
+  - Build all libraries
+    - `nx run dialtone:build`
+  - Build individual library
+    - `nx run dialtone-css:build`
+    - `nx run dialtone-icons:build`
+    - `nx run dialtone-tokens:build`
+    - `nx run dialtone-vue2:build`
+    - `nx run dialtone-vue3:build`
+
 - Documentation builds locally.
-  - `nx storybook:build dialtone-vue2` or `nx storybook:build dialtone-vue3`
+  - `nx run dialtone-vue2:build-storybook`
+  - `nx run dialtone-vue3:build-storybook`
+  - `nx run dialtone-documentation:build`
 
 ### How to Submit
 

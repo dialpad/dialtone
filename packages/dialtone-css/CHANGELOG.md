@@ -1,3 +1,10 @@
+## [8.45.1](https://github.com/dialpad/dialtone/compare/dialtone-css/v8.45.0...dialtone-css/v8.45.1) (2024-09-27)
+
+
+### Bug Fixes
+
+* **Input:** DLT-2083 fix clear button margin ([#507](https://github.com/dialpad/dialtone/issues/507)) ([57bd549](https://github.com/dialpad/dialtone/commit/57bd5492dea05d02e94c693e9e29fc8c329ccf03))
+
 # [8.45.0](https://github.com/dialpad/dialtone/compare/dialtone-css/v8.44.0...dialtone-css/v8.45.0) (2024-09-19)
 
 
