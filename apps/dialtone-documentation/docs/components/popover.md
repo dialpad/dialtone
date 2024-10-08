@@ -228,7 +228,7 @@ vueCode='
       View Popover
     </dt-button>
   </template>
-  <template slot="headerContent">
+  <template #headerContent>
     <div class="d-w100p">
       This is the header
     </div>
@@ -322,7 +322,7 @@ vueCode='
       </dt-button>
     </div>
   </template>
-  <template slot="footerContent">
+  <template #footerContent>
     <div class="d-w100p">
       This is the footer
     </div>
