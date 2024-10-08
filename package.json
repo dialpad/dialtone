@@ -10,7 +10,7 @@
   "pnpm": {
     "peerDependencyRules": {
       "allowedVersions": {
-        "vue": "^2.6.0 || ^3.3.4",
+        "vue": "^2.6 || ^3.2",
         "mem-fs": "^4.0.0",
         "stylelint": "^15.11.0",
         "typescript": "^5.2"
@@ -219,21 +219,7 @@
     "yo": "^5.0.0"
   },
   "peerDependencies": {
-    "@linusborg/vue-simple-portal": "0.1.5",
-    "@tiptap/vue-2": "^2.6.6",
-    "@tiptap/vue-3": "^2.6.6",
     "vue": "^2 || ^3"
-  },
-  "peerDependenciesMeta": {
-    "@linusborg/vue-simple-portal": {
-      "optional": true
-    },
-    "@tiptap/vue-2": {
-      "optional": true
-    },
-    "@tiptap/vue-3": {
-      "optional": true
-    }
   },
   "homepage": "https://dialtone.dialpad.com",
   "keywords": [
