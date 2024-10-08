@@ -793,7 +793,7 @@ export default {
   cursor: text;
   opacity: 1;
   transition-property: border-color, box-shadow, opacity;
-  transition-duration: var(--td200);
+  transition-duration: var(--td50);
   transition-timing-function: var(--ttf-in-out);
 
   &:focus-within {
