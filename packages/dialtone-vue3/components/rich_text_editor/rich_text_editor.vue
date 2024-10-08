@@ -643,7 +643,15 @@ export default {
     },
 
     updateEditorAttributes (attributes) {
-      this.editor.setOptions({ editorProps: { attributes } });
+      this.editor.setOptions({
+        editorProps: {
+          attributes: {
+            ...this.inputAttrs,
+            class: this.inputClass,
+            ...attributes,
+          },
+        },
+      });
     },
 
     focusEditor () {
