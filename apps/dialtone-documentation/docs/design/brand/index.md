@@ -6,7 +6,7 @@ description: Branding assets.
 <dt-notice
   kind="info"
   title="Dialpad logomark"
-  hideClose="true"
+  :hideClose="true"
   class="d-wmx100p"
 >
   <template #default>

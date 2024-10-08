@@ -73,6 +73,12 @@ html body {
     box-shadow: var(--dt-shadow-large);
   }
 
+  // Override 'overflow: hidden' when algolia modal is showing because we are using
+  // dialtone scrollbar
+  &.DocSearch--active {
+    overflow: unset !important;
+  }
+
   .DocSearch-SearchBar {
     padding-bottom: var(--dt-space-550);
     border-bottom: 1px solid var(--dt-color-border-subtle);

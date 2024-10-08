@@ -42,7 +42,7 @@
 
 <script>
 export default {
-  name: 'ExamplePopover2',
+  name: 'ExamplePopover',
 
   props: {
     modal: {

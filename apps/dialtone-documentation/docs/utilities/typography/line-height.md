@@ -5,7 +5,7 @@ description: Utilities to change an element's line-height.
 
 <dt-notice
   kind="warning"
-  hideClose="true"
+  :hideClose="true"
   class="d-wmx100p"
 >
   <template #default>

@@ -139,6 +139,7 @@ import PopoverHeaderFooter from './popover_header_footer.vue';
 import SrOnlyCloseButtonMixin from '@/common/mixins/sr_only_close_button';
 import SrOnlyCloseButton from '@/common/sr_only_close_button.vue';
 import { TOOLTIP_DELAY_MS } from '@/components/tooltip/index.js';
+import { disableRootScrolling, enableRootScrolling } from '@/../../common/utils';
 
 /**
  * A Popover displays a content overlay when its anchor element is activated.
@@ -806,21 +807,6 @@ export default {
       this.isOpen = false;
     },
 
-    isDtScrollbarOnBody () {
-      if (document.documentElement.hasAttribute('data-overlayscrollbars')) {
-        return true;
-      }
-      return false;
-    },
-
-    disableDtScrollbar () {
-      document.documentElement.classList.add('d-scrollbar-disabled');
-    },
-
-    enableDtScrollbar () {
-      document.documentElement.classList.remove('d-scrollbar-disabled');
-    },
-
     /*
     * Prevents scrolling outside of the currently opened modal popover by:
     *   - when anchor is not within another popover: setting the body to overflow: hidden
@@ -832,11 +818,7 @@ export default {
         const element = this.anchorEl?.closest('body, .tippy-box');
         if (!element) return;
         if (element.tagName?.toLowerCase() === 'body') {
-          if (this.isDtScrollbarOnBody()) {
-            this.disableDtScrollbar();
-          } else {
-            element.classList.add('d-of-hidden');
-          }
+          disableRootScrolling(this.anchorEl.getRootNode().host);
           this.tip.setProps({ offset: this.offset });
         } else {
           element.classList.add('d-zi-popover');
@@ -851,11 +833,7 @@ export default {
       const element = this.anchorEl?.closest('body, .tippy-box');
       if (!element) return;
       if (element.tagName?.toLowerCase() === 'body') {
-        if (this.isDtScrollbarOnBody()) {
-          this.enableDtScrollbar();
-        } else {
-          element.classList.remove('d-of-hidden');
-        }
+        enableRootScrolling(this.anchorEl.getRootNode().host);
         this.tip.setProps({ offset: this.offset });
       } else {
         element.classList.remove('d-zi-popover');

@@ -129,6 +129,7 @@ import { EVENT_KEYNAMES } from '@/common/constants';
 import SrOnlyCloseButtonMixin from '@/common/mixins/sr_only_close_button';
 import SrOnlyCloseButton from '@/common/sr_only_close_button.vue';
 import { NOTICE_KINDS } from '@/components/notice';
+import { disableRootScrolling, enableRootScrolling } from '@/../../common/utils';
 
 /**
  * Modals focus the user’s attention exclusively on one task or piece of information
@@ -395,12 +396,13 @@ export default {
 
   watch: {
     show: {
-      immediate: true,
       handler (isShowing) {
         if (isShowing) {
           // Set a reference to the previously-active element, to which we'll return focus on modal close.
           this.previousActiveElement = document.activeElement;
+          disableRootScrolling(this.$el.getRootNode().host);
         } else {
+          enableRootScrolling(this.$el.getRootNode().host);
           // Modal is being hidden, so return focus to the previously active element before clearing the reference.
           this.previousActiveElement?.focus();
           this.previousActiveElement = null;
