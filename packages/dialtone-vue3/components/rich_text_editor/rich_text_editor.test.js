@@ -156,6 +156,10 @@ describe('DtRichTextEditor tests', () => {
       it('should have aria-readonly attribute', function () {
         expect(editor.attributes('aria-readonly')).toBe('true');
       });
+
+      it('should preserve input classes', function () {
+        expect(editor.attributes('class')).toContain('qa-editor');
+      });
     });
   });
 
