@@ -171,7 +171,7 @@
           <dt-button
             v-if="showCancel"
             data-qa="dt-message-input-cancel-button"
-            class="dt-message-input__cancel-button dt-message-input__button d-p8"
+            class="dt-message-input__button dt-message-input__cancel-button"
             size="sm"
             kind="muted"
             importance="clear"
@@ -193,7 +193,7 @@
               kind="default"
               importance="primary"
               :class="[
-                'dt-message-input__button',
+                'dt-message-input__button dt-message-input__send-button',
                 {
                   'dt-message-input__send-button--disabled': isSendDisabled,
                   'd-btn--icon-only': showSendIcon,
@@ -826,9 +826,10 @@ export default {
     border-radius: var(--dt-size-radius-300);
   }
 
-  &__send-button,
+  &__send-button.dt-message-input__button:not(.d-btn--icon-only),
   &__cancel-button {
     max-width: unset;
+    padding: var(--dt-space-350);
   }
 
   &__send-button--disabled {
