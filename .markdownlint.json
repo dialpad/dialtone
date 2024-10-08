@@ -4,5 +4,6 @@
   "no-duplicate-heading": false,
   "no-trailing-punctuation": false,
   "no-inline-html": false,
-  "first-line-h1": false
+  "first-line-h1": false,
+  "code-block-style": false
 }

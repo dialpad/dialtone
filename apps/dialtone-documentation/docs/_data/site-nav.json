@@ -683,6 +683,10 @@
           "link": "/components/radio-group.html"
         },
         {
+          "text": "Rich Text Editor",
+          "link": "/components/rich-text-editor.html"
+        },
+        {
           "text": "Root Layout",
           "link": "/components/root-layout.html"
         },
