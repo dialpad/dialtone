@@ -55,7 +55,7 @@ that may be included in the input text user provides.
 
 Provide prop `outputFormat: 'json'`
 
-the input will be formated as a json document that can then be consumed by product.
+the input will be formatted as a json document that can then be consumed by product.
 The type of the each node in the input will be present for example: `codeblock`, `image`
 along with other meta data pertaining to the text node.
 
@@ -63,7 +63,7 @@ along with other meta data pertaining to the text node.
 
 Provide prop `outputFormat: 'html'`
 
-the input will be formated as native html that can then be consumed by product.
+the input will be formatted as native html that can then be consumed by product.
 
 ## Tiptap Plugins Used
 
@@ -73,7 +73,7 @@ HardBreak plugin is used to add support for `<br>` tags in the rich text editor.
 
 ### [CodeBlocks](https://tiptap.dev/api/nodes/code-block)
 
-Codeblock plugin is used to enaable the support for code and also specify the language. Type ``` followed by space
+Codeblock plugin is used to enable the support for code and also specify the language. Type ``` followed by space
 or ~~~ with space to enable a codeblock in the rich text editor.
 
 ### [Placeholder](https://tiptap.dev/api/extensions/placeholder)
