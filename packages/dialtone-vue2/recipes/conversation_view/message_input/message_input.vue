@@ -801,10 +801,6 @@ export default {
     box-shadow: 0 0 var(--dt-size-300) 0 var(--dt-color-surface-moderate-opaque);
   }
 
-  &:not(:hover):not(:focus-within) .dt-message-input__button {
-    opacity: 0.75;
-  }
-
   &__editor-wrapper {
     padding: var(--dt-space-450) var(--dt-space-500) var(--dt-space-300);
   }

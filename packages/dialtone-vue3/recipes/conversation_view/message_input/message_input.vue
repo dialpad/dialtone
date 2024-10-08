@@ -809,16 +809,12 @@ export default {
   cursor: text;
   opacity: 1;
   transition-property: border-color, box-shadow, opacity;
-  transition-duration: var(--td200);
+  transition-duration: var(--td50);
   transition-timing-function: var(--ttf-in-out);
 
   &:focus-within {
     border-color: var(--dt-color-border-bold);
     box-shadow: 0 0 var(--dt-size-300) 0 var(--dt-color-surface-moderate-opaque);
-  }
-
-  &:not(:hover):not(:focus-within) .dt-message-input__button {
-    opacity: 0.75;
   }
 
   &__editor-wrapper {
