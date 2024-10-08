@@ -336,10 +336,10 @@ showHtmlWarning />
 The popover uses [headless-tippy](https://atomiks.github.io/tippyjs/v6/headless-tippy/) and
 [popper](https://popper.js.org/docs/v2/modifiers/flip/), if the popover opens in a placement where it will
 be clipped, it will move to a new position. It will do this automatically by default, but if you want to
-manually specify which position it will move to in what order you can do so via the fallbackPlacements prop.
+manually specify which position it will move to in what order you can do so via the `fallbackPlacements` prop.
 
 <code-well-header>
-  <example-popover :fallback-placements="['top']" />
+  <example-popover :fallback-placements="['top']" button-text="Fallback placement: top" />
 </code-well-header>
 
 <code-example-tabs
@@ -350,7 +350,7 @@ vueCode='
 >
   <template #anchor>
     <dt-button>
-       View Popover
+       fallback placement: top
     </dt-button>
   </template>
   <template
@@ -441,7 +441,7 @@ There are a few important considerations to ensure popover controls are accessib
 
 <component-accessible-table component-name="popover"/>
 
-## Anchor
+### Anchor
 
 The anchor element that activates the popover should be fully accessible by keyboard. The easiest way to do this is by using an element like an `DtButton` that is already accessible. The user should also be able to close the popover content using the `ESC` key for most ARIA roles.
 
@@ -467,7 +467,7 @@ The below keyboard functionality is automatically implemented when using the pop
 
 Additionally you must use the "initialFocusElement" prop to set which element is initially focused when the popover opens. You can set this to "first" to focus the first focusable element, "dialog" to focus the dialog itself, a string starting with '#' to focus an element by id within the dialog or you may pass in an HTMLElement directly. If set to "none" the focus will remain on the anchor, however this is invalid behavior if the popover is modal.
 
-### References
+## References
 
 - [tippyjs](https://atomiks.github.io/tippyjs/)
 - [popper.js](https://popper.js.org/)

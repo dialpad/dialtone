@@ -9,7 +9,7 @@
       <dt-button
         v-bind="attrs"
       >
-        View Popover
+        {{ buttonText }}
       </dt-button>
     </template>
     <template
@@ -69,6 +69,11 @@ export default {
     fallbackPlacements: {
       type: Array,
       default: () => ['auto'],
+    },
+
+    buttonText: {
+      type: String,
+      default: 'View Popover',
     },
   },
 };
