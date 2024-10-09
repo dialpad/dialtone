@@ -102,7 +102,7 @@
               :input-aria-label="showAddLink.setLinkInputAriaLabel"
               data-qa="dt-editor-link-input"
               :placeholder="setLinkPlaceholder"
-              input-wrapper-class="d-bgc-black-100 d-mt6 d-bar5 d-ba d-baw1 d-bc-black-300 d-py2 d-ol-none"
+              input-wrapper-class="d-bgc-secondary d-mt6 d-bar5 d-ba d-baw1 d-bc-default d-py2 d-ol-none"
               @click="onInputFocus"
               @click.native.stop="onInputFocus"
               @focus="onInputFocus"
