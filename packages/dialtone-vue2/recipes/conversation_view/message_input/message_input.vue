@@ -791,7 +791,6 @@ export default {
   border-color: var(--dt-color-border-default);
   line-height: var(--dt-font-line-height-400);
   cursor: text;
-  opacity: 1;
   transition-property: border-color, box-shadow, opacity;
   transition-duration: var(--td50);
   transition-timing-function: var(--ttf-in-out);
