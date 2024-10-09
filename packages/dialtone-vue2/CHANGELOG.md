@@ -1,3 +1,16 @@
+## [2.163.1](https://github.com/dialpad/dialtone/compare/dialtone-vue2/v2.163.0...dialtone-vue2/v2.163.1) (2024-10-09)
+
+
+### Bug Fixes
+
+* **Rich Text Editor:** DLT-2120 toggle editable prop removes input class styles ([#527](https://github.com/dialpad/dialtone/issues/527)) ([3f31e7a](https://github.com/dialpad/dialtone/commit/3f31e7a8403c901b66089da95e0a841821a3dc28))
+
+
+### Documentation
+
+* DLT-1797 move SB to docs - Popover to Root Layout ([#521](https://github.com/dialpad/dialtone/issues/521)) ([511b135](https://github.com/dialpad/dialtone/commit/511b1357580f2d8ed0116e58aaea8cf99459233d))
+* DLT-2002 fix remaining modal scrollbar issues ([#519](https://github.com/dialpad/dialtone/issues/519)) ([cd0b1a5](https://github.com/dialpad/dialtone/commit/cd0b1a58c39053821b854dcd6f4d92702f104111))
+
 # [2.163.0](https://github.com/dialpad/dialtone/compare/dialtone-vue2/v2.162.1...dialtone-vue2/v2.163.0) (2024-10-07)
 
 
