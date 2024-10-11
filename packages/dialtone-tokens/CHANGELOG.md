@@ -1,3 +1,10 @@
+## [1.36.6](https://github.com/dialpad/dialtone/compare/dialtone-tokens/v1.36.5...dialtone-tokens/v1.36.6) (2024-10-11)
+
+
+### Bug Fixes
+
+* DLT-1548 fix opacity classes selectors ([#520](https://github.com/dialpad/dialtone/issues/520)) ([1e6ef93](https://github.com/dialpad/dialtone/commit/1e6ef93933ee3dad7fa0c0cea5ab79ef7c9787eb))
+
 ## [1.36.5](https://github.com/dialpad/dialtone/compare/dialtone-tokens/v1.36.4...dialtone-tokens/v1.36.5) (2024-10-07)
 
 
