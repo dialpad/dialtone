@@ -1,4 +1,4 @@
-const tinycolor = require('tinycolor2');
+const Color = require('colorjs.io').default;
 const {
   PLATFORM_FONT_SIZES,
   Z_INDEX,
@@ -97,7 +97,7 @@ function wrapInCalc (declaration) {
 function generateColorHsla (declaration) {
   // Prevent regenerating hsla variables that have already been generated, since postcss will run this
   // even for newly generated variables.
-  const isHSLA = ['-h', '-s', '-l', '-hsl', '-hsla'].some(suffix => {
+  const isHSLA = ['-h', '-s', '-l', '-a', '-hsl', '-hsla'].some(suffix => {
     if (declaration.prop.endsWith(suffix)) {
       return true;
     }
@@ -117,17 +117,23 @@ function generateColorHsla (declaration) {
       declaration.before({ prop: `${declaration.prop}-h`, value: `var(${varName}-h)` });
       declaration.before({ prop: `${declaration.prop}-s`, value: `var(${varName}-s)` });
       declaration.before({ prop: `${declaration.prop}-l`, value: `var(${varName}-l)` });
+      declaration.before({ prop: `${declaration.prop}-a`, value: `var(${varName}-a)` });
       declaration.before({ prop: `${declaration.prop}-hsl`, value: `var(${varName}-hsl)` });
       declaration.before({ prop: `${declaration.prop}-hsla`, value: `var(${varName}-hsla)` });
     } else {
-      const color = tinycolor(declaration.value);
-      const { h: hue, s: saturation, l: lightness } = color.toHsl();
+      const color = new Color(declaration.value).to('hsl');
+      let [hue, saturation, lightness] = color.coords;
+      const alpha = ((color.alpha?.raw || color.alpha) * 100).toFixed(0);
+      hue = hue?.raw || (isNaN(hue) ? 0 : hue);
+      saturation = saturation?.raw || saturation;
+      lightness = lightness?.raw || lightness;
 
       declaration.before({ prop: `${declaration.prop}-h`, value: `${hue}` });
-      declaration.before({ prop: `${declaration.prop}-s`, value: `${saturation * 100}%` });
-      declaration.before({ prop: `${declaration.prop}-l`, value: `${lightness * 100}%` });
+      declaration.before({ prop: `${declaration.prop}-s`, value: `${saturation}%` });
+      declaration.before({ prop: `${declaration.prop}-l`, value: `${lightness}%` });
+      declaration.before({ prop: `${declaration.prop}-a`, value: `${alpha}%` });
       declaration.before({ prop: `${declaration.prop}-hsl`, value: `var(${declaration.prop}-h) var(${declaration.prop}-s) var(${declaration.prop}-l)` });
-      declaration.before({ prop: `${declaration.prop}-hsla`, value: `hsla(var(${declaration.prop}-h) var(${declaration.prop}-s) var(${declaration.prop}-l) / var(--alpha, 100%))` });
+      declaration.before({ prop: `${declaration.prop}-hsla`, value: `hsl(var(${declaration.prop}-h) var(${declaration.prop}-s) var(${declaration.prop}-l) / var(--alpha, ${alpha}%))` });
     }
   }
 }
@@ -241,7 +247,7 @@ module.exports = (opts = {}) => {
       // A little hacky, but doesn't seem like there's a better way to do this currently.
       // wraps calculated values in calc() for css if it contains a multiplication operator.
       // This could cause issues if a value ever contains a * character that isn't for multiplication.
-      // There are many disucssions on this issue and it is yet unresolved:
+      // There are many discussions on this issue and it is yet unresolved:
       // https://github.com/amzn/style-dictionary/issues/820
       // https://github.com/tokens-studio/sd-transforms/issues/13
       // https://github.com/amzn/style-dictionary/issues/1055

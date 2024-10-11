@@ -18,7 +18,7 @@
     </dt-stack>
     <dt-stack direction="row" gap="400">
       <dt-icon
-        class="d-fc-error"
+        class="d-fc-critical"
         name="box-select"
         size="300"
       />
@@ -111,7 +111,7 @@ const statusIcon = {
 const statusColor = {
   Ready: 'd-fc-success',
   'In progress': 'd-fc-warning',
-  Planned: 'd-fc-error',
+  Planned: 'd-fc-critical',
   'N/A': 'd-fc-muted',
 };
 </script>

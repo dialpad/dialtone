@@ -1,17 +1,11 @@
 <template>
-  <table class="d-table dialtone-doc-table">
+  <table class="d-table dialtone-doc-table d-fc-primary">
     <thead>
       <tr>
-        <th
-          class="d-w25p d-fc-primary"
-          scope="col"
-        >
+        <th class="d-w25p" scope="col">
           Class
         </th>
-        <th
-          class="d-fc-primary"
-          scope="col"
-        >
+        <th scope="col">
           Output
         </th>
       </tr>
@@ -25,7 +19,3 @@ export default {
   name: 'UtilityClassTable',
 };
 </script>
-
-<style scoped>
-
-</style>

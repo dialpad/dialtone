@@ -188,6 +188,9 @@ importers:
       c8:
         specifier: ^8.0.0
         version: 8.0.1
+      colorjs.io:
+        specifier: 0.5.2
+        version: 0.5.2
       concurrently:
         specifier: ^8.2.2
         version: 8.2.2
@@ -552,9 +555,6 @@ importers:
       through2:
         specifier: ^4.0.2
         version: 4.0.2
-      tinycolor2:
-        specifier: ^1.6.0
-        version: 1.6.0
       yargs:
         specifier: ^17.7.2
         version: 17.7.2
@@ -6257,6 +6257,9 @@ packages:
 
   colorjs.io@0.4.5:
     resolution: {integrity: sha512-yCtUNCmge7llyfd/Wou19PMAcf5yC3XXhgFoAh6zsO2pGswhUPBaaUh8jzgHnXtXuZyFKzXZNAnyF5i+apICow==}
+
+  colorjs.io@0.5.2:
+    resolution: {integrity: sha512-twmVoizEW7ylZSN32OgKdXRmo1qg+wT5/6C3xu5b9QsWzSFAhHLn2xd8ro0diCsKfCj1RdaTP/nrcW+vAoQPIw==}
 
   colors@1.0.3:
     resolution: {integrity: sha512-pFGrxThWcWQ2MsAz6RtgeWe4NK2kUE1WfsrvvlctdII745EW9I0yflqhe7++M5LEc7bV2c/9/5zc8sFcpL0Drw==}
@@ -22762,6 +22765,8 @@ snapshots:
   colorette@2.0.20: {}
 
   colorjs.io@0.4.5: {}
+
+  colorjs.io@0.5.2: {}
 
   colors@1.0.3: {}
 
