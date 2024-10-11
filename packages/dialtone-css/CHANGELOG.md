@@ -1,3 +1,15 @@
+## [8.45.2](https://github.com/dialpad/dialtone/compare/dialtone-css/v8.45.1...dialtone-css/v8.45.2) (2024-10-11)
+
+
+### Bug Fixes
+
+* DLT-1548 fix opacity classes selectors ([#520](https://github.com/dialpad/dialtone/issues/520)) ([1e6ef93](https://github.com/dialpad/dialtone/commit/1e6ef93933ee3dad7fa0c0cea5ab79ef7c9787eb))
+
+
+### Documentation
+
+* DLT-2002 fix remaining modal scrollbar issues ([#519](https://github.com/dialpad/dialtone/issues/519)) ([cd0b1a5](https://github.com/dialpad/dialtone/commit/cd0b1a58c39053821b854dcd6f4d92702f104111))
+
 ## [8.45.1](https://github.com/dialpad/dialtone/compare/dialtone-css/v8.45.0...dialtone-css/v8.45.1) (2024-09-27)
 
 
