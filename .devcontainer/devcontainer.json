@@ -4,19 +4,20 @@
   "name": "Node.js",
   // Or use a Dockerfile or Docker Compose file. More info: https://containers.dev/guide/dockerfile
   "image": "mcr.microsoft.com/devcontainers/javascript-node:1-20-bullseye",
-  "features": {
-    "ghcr.io/devcontainers-contrib/features/pnpm:2": {}
-  },
 
   "hostRequirements": {
     "cpus": 4,
     "memory": "16gb"
   },
 
+  "containerEnv": {
+    "SHELL": "/bin/bash"
+  },
+
   // Use 'forwardPorts' to make a list of ports inside the container available locally.
   "forwardPorts": [4000, 9010, 9011],
 
-  "updateContentCommand": "pnpm install",
+  "postCreateCommand": "bash .devcontainer/install.sh",
 
   // Configure tool-specific properties.
   "customizations": {
@@ -35,7 +36,7 @@
         "esbenp.prettier-vscode",
         "stylelint.vscode-stylelint",
         "jock.svg",
-        "zixuanchen.vitest-explorer",
+        "vitest.explorer",
         "vue.volar"
       ]
     }
