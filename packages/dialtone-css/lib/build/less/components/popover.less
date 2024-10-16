@@ -30,6 +30,9 @@
     --popover-color-border: var(--dt-color-border-subtle);
     --popover-shadow: var(--dt-shadow-card);
 
+    // If we don't set this the native app header region will override all click events within the popover
+    -webkit-app-region: no-drag;
+
     &,
     *,
     *::before,

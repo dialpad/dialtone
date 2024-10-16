@@ -33,6 +33,8 @@
     --modal-header-color-text: var(--dt-color-foreground-primary);
     --modal-dialog-shadow: var(--dt-shadow-large);
 
+    // If we don't set this the native app header region will override all click events on the modal overlay
+    -webkit-app-region: no-drag;
     position: fixed;
     inset: 0;
     z-index: var(--zi-hide);
@@ -50,6 +52,9 @@
 
 .d-modal--transparent {
   --modal-backdrop-color-background: var(--d-bgc-transparent);
+
+  // If we don't set this the native app header region will override all click events on the modal overlay
+  -webkit-app-region: no-drag;
 
   &[aria-hidden='false'] {
     position: fixed;
