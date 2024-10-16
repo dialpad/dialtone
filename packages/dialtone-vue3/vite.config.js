@@ -40,6 +40,7 @@ export default defineConfig({
         /^date-fns/,
         /^emoji-toolkit/,
         /^overlayscrollbars/,
+        /^prosemirror/,
         'regex-combined-emojis',
         'tippy.js',
         'vue',
