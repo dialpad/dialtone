@@ -40,7 +40,6 @@
     "@tiptap/suggestion": "^2.6.6",
     "@tiptap/vue-2": "^2.6.6",
     "date-fns": "2.30.0",
-    "emoji-toolkit": "8.0.0",
     "overlayscrollbars": "2.10.0",
     "regex-combined-emojis": "1.6.0",
     "tippy.js": "6.3.7"

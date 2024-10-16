@@ -20,7 +20,7 @@
         "cwd": "{projectRoot}",
         "commands": [
           "pnpm exec vite build",
-          "node ../../scripts/build-dialtone-vue-docs.mjs 3"
+          "node ../../scripts/build-dialtone-vue-docs.mjs 2"
         ],
         "parallel": false
       }

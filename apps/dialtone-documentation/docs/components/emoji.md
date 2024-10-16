@@ -222,7 +222,6 @@ By default the emoji will be rendered with an aria-label attribute describing th
 ## References
 
 * [JoyPixels](https://joypixels.com/) - Our emoji assets
-* [emoji-toolkit](https://github.com/joypixels/emoji-toolkit) - Helper library we use to render joypixels
 * [emojipedia](https://emojipedia.org/) - Good for looking up details about specific emojis.
 
 <script setup>

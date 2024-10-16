@@ -130,7 +130,7 @@ import {
   POPOVER_ROLES,
   POPOVER_STICKY_VALUES,
 } from './popover_constants';
-import { getUniqueString, isOutOfViewPort, warnIfUnmounted } from '@/common/utils';
+import { getUniqueString, isOutOfViewPort, warnIfUnmounted, disableRootScrolling, enableRootScrolling } from '@/common/utils';
 import { DtLazyShow } from '@/components/lazy_show';
 import { Portal } from '@linusborg/vue-simple-portal';
 import ModalMixin from '@/common/mixins/modal';
@@ -139,7 +139,6 @@ import PopoverHeaderFooter from './popover_header_footer.vue';
 import SrOnlyCloseButtonMixin from '@/common/mixins/sr_only_close_button';
 import SrOnlyCloseButton from '@/common/sr_only_close_button.vue';
 import { TOOLTIP_DELAY_MS } from '@/components/tooltip/index.js';
-import { disableRootScrolling, enableRootScrolling } from '@/../../common/utils';
 
 /**
  * A Popover displays a content overlay when its anchor element is activated.
