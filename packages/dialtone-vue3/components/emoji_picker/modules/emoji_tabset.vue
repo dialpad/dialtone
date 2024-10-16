@@ -29,9 +29,9 @@
 </template>
 
 <script setup>
-import { computed, ref, toRefs, watch } from 'vue';
+import { computed, ref, watch } from 'vue';
 import { DtTab, DtTabGroup } from '@/components/tabs';
-import { EMOJI_PICKER_CATEGORIES } from '@/components/emoji_picker';
+import { EMOJI_PICKER_CATEGORIES } from '@/components/emoji_picker/emoji_picker_constants.js';
 import {
   DtIconClock,
   DtIconSatisfied,
