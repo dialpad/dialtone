@@ -264,6 +264,14 @@ export default {
       type: String,
       default: undefined,
     },
+
+    /**
+     * Show the icon in the avatar.
+     */
+    showIcon: {
+      type: Boolean,
+      default: false,
+    },
   },
 
   emits: [
@@ -290,7 +298,7 @@ export default {
 
   computed: {
     isIconType () {
-      return this.$scopedSlots.icon && this.$scopedSlots.icon();
+      return this.showIcon || (this.$scopedSlots.icon && this.$scopedSlots.icon());
     },
 
     hasOverlayIcon () {

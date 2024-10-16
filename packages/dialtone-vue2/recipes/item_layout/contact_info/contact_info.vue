@@ -28,13 +28,13 @@
             image-alt=""
             :overlay-text="avatar.text"
             :avatar-class="[{ 'd-mln24': index > 0, 'd-bc-brand': !!avatar.halo }]"
+            :show-icon="showAvatarIcon"
           >
             <template
               #icon="{ iconSize }"
             >
               <!-- @slot Slot for avatar icon in a list -->
               <slot
-                v-if="hasAvatarIcon"
                 name="avatarIcon"
                 :icon-size="iconSize"
               />
@@ -56,13 +56,13 @@
           :seed="avatarSeed"
           :color="avatarColor"
           :presence="presence"
+          :show-icon="showAvatarIcon"
         >
           <template
             #icon="{ iconSize }"
           >
             <!-- @slot Slot for avatar icon in a list -->
             <slot
-              v-if="hasAvatarIcon"
               name="avatarIcon"
               :icon-size="iconSize"
             />
@@ -217,15 +217,17 @@ export default {
       type: Array,
       default: null,
     },
+
+    /**
+     * Show avatar icon
+     */
+    showAvatarIcon: {
+      type: Boolean,
+      default: false,
+    },
   },
 
   emits: ['avatar-click'],
-
-  computed: {
-    hasAvatarIcon () {
-      return this.$scopedSlots.avatarIcon && this.$scopedSlots.avatarIcon();
-    },
-  },
 
   methods: {
     avatarClick () {
