@@ -38,7 +38,6 @@ export default defineConfig({
         /^@dialpad/,
         /^@tiptap/,
         /^date-fns/,
-        /^emoji-toolkit/,
         /^overlayscrollbars/,
         /^prosemirror/,
         'regex-combined-emojis',

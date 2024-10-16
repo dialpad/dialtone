@@ -39,7 +39,6 @@ export default defineConfig({
         '@linusborg/vue-simple-portal',
         /^@tiptap/,
         /^date-fns/,
-        /^emoji-toolkit/,
         /^overlayscrollbars/,
         /^prosemirror/,
         'regex-combined-emojis',
