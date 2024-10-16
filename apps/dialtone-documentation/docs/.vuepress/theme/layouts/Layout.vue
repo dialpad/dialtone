@@ -60,7 +60,7 @@ import { computed, ref, watch, onMounted } from 'vue';
 import { useRoute } from 'vue-router';
 import { useThemeLocaleData } from '@vuepress/plugin-theme-data/client';
 import DialtoneLogo from '../components/DialtoneLogo.vue';
-import { disableRootScrolling, enableRootScrolling } from '@workspaceRoot/common/utils';
+import { disableRootScrolling, enableRootScrolling } from '@dialpad/dialtone-vue';
 
 const route = useRoute();
 

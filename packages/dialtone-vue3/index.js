@@ -11,6 +11,8 @@ export {
   formatMessages,
   filterFormattedMessages,
   getValidationState,
+  disableRootScrolling,
+  enableRootScrolling,
 } from './common/utils';
 export * from './common/dates';
 export * from './common/emoji';
