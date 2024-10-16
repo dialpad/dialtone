@@ -104,7 +104,7 @@
 /* eslint-disable max-len */
 /* eslint-disable max-lines */
 import { emojisGrouped as emojisImported } from '@dialpad/dialtone-emojis';
-import { CDN_URL, EMOJIS_PER_ROW } from '@/components/emoji_picker';
+import { CDN_URL, EMOJIS_PER_ROW } from '@/components/emoji_picker/emoji_picker_constants';
 
 export default {
   name: 'EmojiSelector',

@@ -36,19 +36,19 @@ export default defineConfig({
     rollupOptions: {
       external: [
         /^@dialpad/,
-        /^@linusborg/,
+        '@linusborg/vue-simple-portal',
         /^@tiptap/,
         /^date-fns/,
         /^emoji-toolkit/,
-        /^tippy\.js/,
-        /^prosemirror/,
         /^overlayscrollbars/,
-        'vue',
         'regex-combined-emojis',
+        'tippy.js',
+        'vue',
       ],
       output: {
         preserveModules: true,
         minifyInternalExports: false,
+        exports: 'named',
       },
       treeshake: 'smallest',
     },
@@ -63,10 +63,7 @@ export default defineConfig({
       formats: ['es', 'cjs'],
     },
   },
-  plugins: [
-    vue(),
-    dts({ outDir: 'dist/types' }),
-  ],
+  plugins: [vue(), dts({ outDir: 'dist/types' })],
   resolve: {
     alias: {
       '@': fileURLToPath(new URL('.', import.meta.url)),
