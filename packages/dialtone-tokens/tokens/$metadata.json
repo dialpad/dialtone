@@ -16,9 +16,7 @@
     "components/badge/dark",
     "components/button/default",
     "components/checkbox/default",
-    "components/checkbox/dark",
     "components/icon/default",
-    "components/radio/default",
-    "components/radio/dark"
+    "components/radio/default"
   ]
 }
