@@ -384,6 +384,42 @@ export function warnIfUnmounted (componentRef, componentName) {
   }
 }
 
+/**
+ * checks whether the dt-scrollbar is being used on the root element.
+ * @param rootElement {HTMLElement}
+ * @returns {boolean}
+ */
+function isDtScrollbarInUse (rootElement = document.documentElement) {
+  if (rootElement.hasAttribute('data-overlayscrollbars')) {
+    return true;
+  }
+  return false;
+}
+
+/**
+ * This will disable scrolling on the root element regardless of whether you are using dt-scrollbar or not.
+ * @param rootElement {HTMLElement}
+ */
+export function disableRootScrolling (rootElement = document.documentElement) {
+  if (isDtScrollbarInUse(rootElement)) {
+    rootElement.classList.add('d-scrollbar-disabled');
+  } else {
+    rootElement.classList.add('d-of-hidden');
+  }
+}
+
+/**
+ * This will enable scrolling on the root element regardless of whether you are using dt-scrollbar or not.
+ * @param rootElement {HTMLElement}
+ */
+export function enableRootScrolling (rootElement = document.documentElement) {
+  if (isDtScrollbarInUse(rootElement)) {
+    rootElement.classList.remove('d-scrollbar-disabled');
+  } else {
+    rootElement.classList.remove('d-of-hidden');
+  }
+}
+
 export default {
   getUniqueString,
   getRandomElement,
@@ -404,4 +440,6 @@ export default {
   isURL,
   safeConcatStrings,
   capitalizeFirstLetter,
+  disableRootScrolling,
+  enableRootScrolling,
 };

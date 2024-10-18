@@ -53,7 +53,7 @@
 
 <script setup>
 import { computed, nextTick, ref, watchEffect } from 'vue';
-import { CDN_URL, EMOJI_PICKER_SKIN_TONE_MODIFIERS } from '@/components/emoji_picker';
+import { CDN_URL, EMOJI_PICKER_SKIN_TONE_MODIFIERS } from '@/components/emoji_picker/emoji_picker_constants.js';
 import { DtTooltip } from '@/components/tooltip';
 
 const props = defineProps({
