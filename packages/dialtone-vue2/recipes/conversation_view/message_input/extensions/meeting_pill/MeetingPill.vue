@@ -35,9 +35,9 @@
 
 <script>
 import { NodeViewWrapper, nodeViewProps } from '@tiptap/vue-2';
-import { DtItemLayout } from '@/components/item_layout/index.js';
+import { DtItemLayout } from '@/components/item_layout';
 import { DtIconClose, DtIconVideo } from '@dialpad/dialtone-icons/vue2';
-import { DtButton } from '@/components/button/index.js';
+import { DtButton } from '@/components/button';
 
 export default {
   name: 'MeetingPill',
