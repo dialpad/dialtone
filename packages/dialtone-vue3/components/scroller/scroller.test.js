@@ -1,5 +1,5 @@
 import { mount } from '@vue/test-utils';
-import DtScroller from './DtScroller.vue';
+import DtScroller from './scroller.vue';
 
 const MOCK_ITEMS = Array.from({ length: 20 }, (_, i) => ({
   id: i,
