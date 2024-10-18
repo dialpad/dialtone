@@ -36,7 +36,7 @@
 <script>
 import { NodeViewWrapper, nodeViewProps } from '@tiptap/vue-2';
 import { DtItemLayout } from '@/components/item_layout/index.js';
-import { DtIconClose, DtIconVideo } from '@dialpad/dialtone-icons-vue2';
+import { DtIconClose, DtIconVideo } from '@dialpad/dialtone-icons/vue2';
 import { DtButton } from '@/components/button/index.js';
 
 export default {

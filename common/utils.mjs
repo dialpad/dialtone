@@ -25,6 +25,18 @@ export function kebabCaseToPascalCase (string) {
 }
 
 /**
+ * Transform a string from PascalCase to kebab-case
+ * @param {*} string
+ * @returns {string}
+ */
+export function PascalCaseToKebabCase (string) {
+  return string
+    .split(/(?=[A-Z]|[0-9]{3,}?)/)
+    .join('-')
+    .toLowerCase();
+}
+
+/**
  * Scans recursively through the provided path
  * and gets the valid contained Vue components and recipes.
  * @param {PathLike} folder
@@ -52,5 +64,6 @@ export default {
   getUniqueString,
   kebabCaseToPascalCase,
   flushPromises,
+  PascalCaseToKebabCase,
   getValidFileList
 };
