@@ -34,7 +34,6 @@
             >
               <!-- @slot Slot for avatar icon in a list -->
               <slot
-                v-if="hasAvatarIcon"
                 name="avatarIcon"
                 :icon-size="iconSize"
               />
@@ -62,7 +61,6 @@
           >
             <!-- @slot Slot for avatar icon in a list -->
             <slot
-              v-if="hasAvatarIcon"
               name="avatarIcon"
               :icon-size="iconSize"
             />
@@ -221,12 +219,6 @@ export default {
   },
 
   emits: ['avatar-click'],
-
-  computed: {
-    hasAvatarIcon () {
-      return hasSlotContent(this.$slots.avatarIcon);
-    },
-  },
 
   methods: {
     avatarClick () {
