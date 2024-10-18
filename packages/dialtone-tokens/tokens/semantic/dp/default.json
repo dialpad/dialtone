@@ -1342,7 +1342,7 @@
       },
       "border": {
         "default": {
-          "value": "{color.border.subtle}",
+          "value": "{color.border.default}",
           "type": "color"
         },
         "focus": {
@@ -1855,7 +1855,7 @@
         "inverted": {
           "outlined": {
             "default": {
-              "value": "{color.border.moderate-inverted}",
+              "value": "{color.border.default-inverted}",
               "type": "color"
             }
           }
@@ -1863,7 +1863,7 @@
         "muted": {
           "outlined": {
             "default": {
-              "value": "{color.border.moderate}",
+              "value": "{color.border.default}",
               "type": "color"
             }
           }
