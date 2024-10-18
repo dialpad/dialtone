@@ -2,7 +2,7 @@ import { parse } from 'vue-docgen-api';
 import path, { join } from 'path';
 import { fileURLToPath } from 'url';
 import fs, { writeFile } from 'fs';
-import { getValidFileList } from '../common/utils.mjs';
+import { getValidFileList } from '../common/utils/server.mjs';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
