@@ -28,7 +28,6 @@
             image-alt=""
             :overlay-text="avatar.text"
             :avatar-class="[{ 'd-mln24': index > 0, 'd-bc-brand': !!avatar.halo }]"
-            :show-icon="showAvatarIcon"
           >
             <template
               #icon="{ iconSize }"
@@ -56,7 +55,6 @@
           :seed="avatarSeed"
           :color="avatarColor"
           :presence="presence"
-          :show-icon="showAvatarIcon"
         >
           <template
             #icon="{ iconSize }"
@@ -216,14 +214,6 @@ export default {
     avatarList: {
       type: Array,
       default: null,
-    },
-
-    /**
-     * Show avatar icon
-     */
-    showAvatarIcon: {
-      type: Boolean,
-      default: false,
     },
   },
 

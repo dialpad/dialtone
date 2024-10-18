@@ -23,7 +23,7 @@
         :alt="imageAlt"
       >
       <div
-        v-else-if="isIconType"
+        v-else-if="isIconType()"
         :class="[iconClass, AVATAR_KIND_MODIFIERS.icon]"
         :aria-label="clickable ? iconAriaLabel : ''"
         :data-qa="iconDataQa"
@@ -264,14 +264,6 @@ export default {
       type: String,
       default: undefined,
     },
-
-    /**
-     * Show the icon in the avatar.
-     */
-    showIcon: {
-      type: Boolean,
-      default: false,
-    },
   },
 
   emits: [
@@ -297,10 +289,6 @@ export default {
   },
 
   computed: {
-    isIconType () {
-      return this.showIcon || (this.$scopedSlots.icon && this.$scopedSlots.icon());
-    },
-
     hasOverlayIcon () {
       return !!this.$slots.overlayIcon;
     },
@@ -316,7 +304,7 @@ export default {
         this.avatarClass,
         {
           'd-avatar--group': this.showGroup,
-          [`d-avatar--color-${this.getColor()}`]: !this.isIconType,
+          [`d-avatar--color-${this.getColor()}`]: !this.isIconType(),
           'd-avatar--clickable': this.clickable,
         },
       ];
@@ -385,6 +373,10 @@ export default {
   },
 
   methods: {
+    isIconType () {
+      return this.$scopedSlots.icon && this.$scopedSlots.icon();
+    },
+
     async setImageListeners () {
       await this.$nextTick();
       const el = this.$refs.avatarImage;
