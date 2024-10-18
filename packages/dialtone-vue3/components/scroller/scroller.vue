@@ -33,6 +33,10 @@ import CoreScroller from './modules/core_scroller.vue';
 import DynamicScroller from './modules/dynamic_scroller.vue';
 import { provide, computed, watch, ref } from 'vue';
 
+defineOptions({
+  name: 'DtScroller',
+});
+
 const props = defineProps({
   /**
       * The direction of the scroller.

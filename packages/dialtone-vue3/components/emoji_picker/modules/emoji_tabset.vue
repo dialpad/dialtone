@@ -30,7 +30,7 @@
 
 <script setup>
 import { computed, ref, watch } from 'vue';
-import { DtTab, DtTabGroup } from '@/components/tabs';
+import { DtTab, DtTabGroup } from '@/components/tab';
 import { EMOJI_PICKER_CATEGORIES } from '@/components/emoji_picker/emoji_picker_constants.js';
 import {
   DtIconClock,

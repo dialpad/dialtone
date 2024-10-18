@@ -281,7 +281,7 @@
 import DtRecipeFeedItemRow from './feed_item_row.vue';
 
 import { DtRecipeEmojiRow } from '../emoji_row';
-import { DtRecipeFeedItemPill } from '../feed_pill';
+import { DtRecipeFeedItemPill } from '../feed_item_pill';
 import { DtStack } from '@/components/stack';
 import { DtEmojiTextWrapper } from '@/components/emoji_text_wrapper';
 import { DtAvatar } from '@/components/avatar';

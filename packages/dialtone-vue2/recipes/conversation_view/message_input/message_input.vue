@@ -237,7 +237,7 @@ import {
   RICH_TEXT_EDITOR_OUTPUT_FORMATS,
   RICH_TEXT_EDITOR_AUTOFOCUS_TYPES,
 } from '@/components/rich_text_editor';
-import meetingPill from './meeting_pill/meeting_pill';
+import MeetingPill from './extensions/meeting_pill/meeting_pill';
 import { DtButton } from '@/components/button';
 import { DtEmojiPicker } from '@/components/emoji_picker';
 import { DtPopover } from '@/components/popover';
@@ -640,7 +640,7 @@ export default {
 
   data () {
     return {
-      additionalExtensions: [meetingPill],
+      additionalExtensions: [MeetingPill],
       internalInputValue: this.value, // internal input content
       imagePickerFocus: false,
       emojiPickerFocus: false,

@@ -48,7 +48,7 @@
 </template>
 
 <script setup>
-import DtScroller from './DtScroller.vue';
+import DtScroller from './scroller.vue';
 import { nextTick, ref } from 'vue';
 
 import defaultAvatar from './person.png';
