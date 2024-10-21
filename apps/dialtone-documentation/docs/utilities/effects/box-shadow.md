@@ -7,8 +7,8 @@ description: Utilities for controlling an element's box shadows.
 
 Use `d-bs-{n}` to add an outer box shadow to an element.
 
-<code-well-header class="d-fl-col4 d-flg16 d-bgc-neutral-white d-fw-wrap d-p24 d-w100p d-hmn102" custom>
-  <div v-for="className in boxShadowSizes" class="d-fl-center d-p16 d-bar8 d-bgc-secondary d-fs-200 d-fw-bold" :class="`d-bs-${className}`">.d-bs-{{ className }}</div>
+<code-well-header class="d-bar8 d-fl-col2 d-g32 d-bgc-secondary d-fw-wrap d-p32 d-w100p" custom>
+  <div v-for="className in boxShadowSizes" class="d-fl-center d-p32 d-bar8 d-bgc-primary d-fs-200 d-fw-bold" :class="`d-bs-${className}`">.d-bs-{{ className }}</div>
 </code-well-header>
 
 ```html
@@ -24,8 +24,8 @@ Use `d-bs-{n}` to add an outer box shadow to an element.
 
 Use `d-bs-none` to remove a box shadow to an element.
 
-<code-well-header class="d-fl-center d-p24 d-bgc-neutral-white d-w100p d-hmn102" custom>
-  <div class="d-fl-center d-p16 d-bar8 d-bgc-secondary d-fs-200 d-fw-bold d-bs-none">.d-bs-none</div>
+<code-well-header class="d-fl-center d-p24 d-bgc-secondary d-w100p" custom>
+  <div class="d-fl-center d-p32 d-bar8 d-bgc-primary d-fs-200 d-fw-bold d-bs-none">.d-bs-none</div>
 </code-well-header>
 
 ```html
@@ -37,8 +37,8 @@ Use `d-bs-none` to remove a box shadow to an element.
 
 Use `h:d-bs-{n}` to change an element's `:hover` state box shadow.
 
-<code-well-header class="d-fl-center d-p24 d-bgc-neutral-white d-w100p d-hmn102" custom>
-  <div class="d-fl-center d-p16 d-bar8 d-bgc-secondary d-fs-200 d-fw-bold d-bs-none h:d-bs-lg">Hover over me</div>
+<code-well-header class="d-fl-center d-p24 d-bgc-secondary d-w100p" custom>
+  <div class="d-fl-center d-p32 d-bar8 d-bgc-primary d-fs-200 d-fw-bold d-bs-none h:d-bs-lg">Hover over me</div>
 </code-well-header>
 
 ```html
@@ -50,8 +50,8 @@ Use `h:d-bs-{n}` to change an element's `:hover` state box shadow.
 
 Use `f:d-bs-{n}` to change an element's `:focus` and `:focus-within` state box shadow.
 
-<code-well-header class="d-fl-center d-p24 d-bgc-neutral-white d-w100p d-hmn102" custom>
-  <div tabindex="0" class="d-fl-center d-p16 d-bar8 d-bgc-secondary d-fs-200 d-fw-bold d-bs-none f:d-bs-lg">Click on me</div>
+<code-well-header class="d-fl-center d-p24 d-bgc-secondary d-w100p" custom>
+  <div tabindex="0" class="d-fl-center d-p32 d-bar8 d-bgc-primary d-fs-200 d-fw-bold d-bs-none f:d-bs-lg">Click on me</div>
 </code-well-header>
 
 ```html
@@ -63,8 +63,8 @@ Use `f:d-bs-{n}` to change an element's `:focus` and `:focus-within` state box s
 
 Use `fv:d-bs-{n}` to change an element's `:focus-visible` state box shadow [only when focused by keyboard].
 
-<code-well-header class="d-fl-center d-p24 d-bgc-neutral-white d-w100p d-hmn102" custom>
-  <div tabindex="0" class="d-fl-center d-p16 d-bar8 d-bgc-secondary d-fs-200 d-fw-bold d-bs-none fv:d-bs-lg">Focus on me</div>
+<code-well-header class="d-fl-center d-p24 d-bgc-secondary d-w100p" custom>
+  <div tabindex="0" class="d-fl-center d-p32 d-bar8 d-bgc-primary d-fs-200 d-fw-bold d-bs-none fv:d-bs-lg">Focus on me</div>
 </code-well-header>
 
 ```html

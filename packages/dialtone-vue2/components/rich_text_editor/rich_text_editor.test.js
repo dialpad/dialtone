@@ -52,6 +52,7 @@ describe('DtRichTextEditor tests', () => {
   afterEach(() => {
     mockProps = {};
     mockListeners = {};
+    wrapper.destroy();
   });
 
   describe('Presentation Tests', () => {
@@ -141,6 +142,13 @@ describe('DtRichTextEditor tests', () => {
         await wrapper.setProps({ editable: false });
 
         expect(editor.attributes('aria-readonly')).toBe('true');
+        expect(editor.attributes('class')).toContain('qa-editor');
+      });
+
+      it('should preserve input classes', async () => {
+        await wrapper.setProps({ editable: false });
+
+        expect(editor.attributes('class')).toContain('qa-editor');
       });
     });
   });

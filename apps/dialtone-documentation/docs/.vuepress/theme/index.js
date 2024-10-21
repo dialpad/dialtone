@@ -139,10 +139,10 @@ export const dialtoneVuepressTheme = (options) => {
         [
           '/guides/content/action-language/',
           '/guides/content/error-messages/',
-          '/guides/content/grammar-mechanics/',
+          '/guides/content/grammar-and-mechanics/',
           '/guides/content/help-content/',
           '/guides/content/inclusive-language/',
-          '/guides/content/voice-tone/',
+          '/guides/content/voice-and-tone/',
         ]);
       _extractFrontmatter(app, '/guides/content/', options);
       _extractFrontmatter(app, '/components/', options, ['/components/status/']);

@@ -5,7 +5,7 @@
 import { register, getTransforms, expandTypesMap } from '@tokens-studio/sd-transforms';
 import StyleDictionary from 'style-dictionary';
 import { promises, readFileSync } from 'fs';
-import { kebabCaseToPascalCase } from '../../common/utils.mjs';
+import { kebabCaseToPascalCase } from '../../common/utils/client.mjs';
 
 import { registerDialtoneTransforms } from './dialtone-transforms.js';
 import { buildDocs } from './build-docs.js';
@@ -80,6 +80,16 @@ export async function run () {
           basePxFontSize: Number.parseFloat(BASE_FONT_SIZE),
           buildPath: 'dist/css/',
           theme: themeName,
+          options: {
+            outputReferences: (token) => {
+              // Don't output references for tokens that have been modified via studio tokens extension, also
+              // for box shadow colors because they use rgb
+              if (token.$extensions?.['studio.tokens']?.modify || (token.$extensions?.['studio.tokens']?.originalType === 'boxShadow' && token.type === 'color')) {
+                return false;
+              }
+              return true;
+            },
+          },
           files: [
             {
               destination: `tokens-${themeName}.css`,
@@ -149,7 +159,19 @@ export async function run () {
           ],
         },
         android_compose: {
-          transforms: ['ts/resolveMath', 'dt/android/compose/fonts/transformToStack', 'dt/android/compose/fonts/weight', 'dt/android/compose/lineHeight/percentToDecimal', 'dt/android/compose/opacity/percentToFloat', 'dt/android/compose/size/pxToDp', 'dt/android/compose/size/pxToSp', 'dt/android/compose/color', 'dt/stringify', 'attribute/cti', 'name/camel'],
+          transforms: [
+            'ts/resolveMath',
+            'dt/android/compose/fonts/transformToStack',
+            'dt/android/compose/fonts/weight',
+            'dt/android/compose/lineHeight/percentToDecimal',
+            'dt/android/compose/opacity/percentToFloat',
+            'dt/android/compose/size/pxToDp',
+            'dt/android/compose/size/pxToSp',
+            'dt/android/compose/color',
+            'dt/stringify',
+            'attribute/cti',
+            'name/camel',
+          ],
           actions: ['buildDocJson'],
           prefix: 'dt',
           theme: themeName,

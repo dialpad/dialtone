@@ -39,13 +39,19 @@
     >
       <span v-html="$attrs.description" />
     </template>
-    <template #leftIcon="{ iconSize }">
+    <template
+      v-if="$attrs.leftIcon"
+      #leftIcon="{ iconSize }"
+    >
       <dt-icon
         :name="$attrs.leftIcon"
         :size="iconSize"
       />
     </template>
-    <template #rightIcon="{ iconSize }">
+    <template
+      v-if="$attrs.rightIcon"
+      #rightIcon="{ iconSize }"
+    >
       <dt-icon
         :name="$attrs.rightIcon"
         :size="iconSize"

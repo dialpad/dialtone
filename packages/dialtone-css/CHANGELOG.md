@@ -1,3 +1,44 @@
+## [8.45.2](https://github.com/dialpad/dialtone/compare/dialtone-css/v8.45.1...dialtone-css/v8.45.2) (2024-10-11)
+
+
+### Bug Fixes
+
+* DLT-1548 fix opacity classes selectors ([#520](https://github.com/dialpad/dialtone/issues/520)) ([1e6ef93](https://github.com/dialpad/dialtone/commit/1e6ef93933ee3dad7fa0c0cea5ab79ef7c9787eb))
+
+
+### Documentation
+
+* DLT-2002 fix remaining modal scrollbar issues ([#519](https://github.com/dialpad/dialtone/issues/519)) ([cd0b1a5](https://github.com/dialpad/dialtone/commit/cd0b1a58c39053821b854dcd6f4d92702f104111))
+
+## [8.45.1](https://github.com/dialpad/dialtone/compare/dialtone-css/v8.45.0...dialtone-css/v8.45.1) (2024-09-27)
+
+
+### Bug Fixes
+
+* **Input:** DLT-2083 fix clear button margin ([#507](https://github.com/dialpad/dialtone/issues/507)) ([57bd549](https://github.com/dialpad/dialtone/commit/57bd5492dea05d02e94c693e9e29fc8c329ccf03))
+
+# [8.45.0](https://github.com/dialpad/dialtone/compare/dialtone-css/v8.44.0...dialtone-css/v8.45.0) (2024-09-19)
+
+
+### Features
+
+* **Modal:** DLT-1983 add custom scrollbar ([#497](https://github.com/dialpad/dialtone/issues/497)) ([c71a6c1](https://github.com/dialpad/dialtone/commit/c71a6c18ec7d6051fa81f6841a1aac260a8f9ab3))
+* **Modal:** DLT-1983 revert add custom scrollbar ([#497](https://github.com/dialpad/dialtone/issues/497)) ([ea622ec](https://github.com/dialpad/dialtone/commit/ea622ec7e87712cb49a2780465296b34af6a5316))
+
+# [8.44.0](https://github.com/dialpad/dialtone/compare/dialtone-css/v8.43.0...dialtone-css/v8.44.0) (2024-09-13)
+
+
+### Features
+
+* **Utilities:** DLT-1763 add gap utility class ([#492](https://github.com/dialpad/dialtone/issues/492)) ([835d06f](https://github.com/dialpad/dialtone/commit/835d06fbeead4919dbe7683081b8b92d51031fc1))
+
+# [8.43.0](https://github.com/dialpad/dialtone/compare/dialtone-css/v8.42.3...dialtone-css/v8.43.0) (2024-09-03)
+
+
+### Features
+
+* **Design Tokens:** DLT-2004 typography and radius design tokens for button, input, select, tabs ([#467](https://github.com/dialpad/dialtone/issues/467)) ([a0c10a2](https://github.com/dialpad/dialtone/commit/a0c10a2390c68e8185d2d78edfefa02d4e889a12))
+
 ## [8.42.3](https://github.com/dialpad/dialtone/compare/dialtone-css/v8.42.2...dialtone-css/v8.42.3) (2024-08-22)
 
 

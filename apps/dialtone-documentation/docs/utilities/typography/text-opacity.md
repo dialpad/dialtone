@@ -6,7 +6,7 @@ The ability to control an element's color is <em>only</em> provided as a class. 
 
 ## Usage
 
-Use `d-fco{n}` to change a font-color's opacity. You can also change font-color's opacity on `:hover`, `:focus`, `:focus-visible`, or in dark mode by using the respective `h:d-fco{n}`, `f:d-fco{n}`, `fv:d-fco{n}`, or `d:d-fco{n}` prefixes.
+Use `d-fco{n}` to change a font-color's opacity. You can also change font-color's opacity on `:hover`, `:focus`, `:focus-visible` by using the respective `h:d-fco{n}`, `f:d-fco{n}`, `fv:d-fco{n}` prefixes.
 
 <code-well-header class="d-d-flex d-jc-center d-fd-column d-p24 d-bgc-magenta-100 d-w100p d-hmn102" custom>
   <p class="d-fs-300 d-fc-magenta-400">The quick brown fox jumps over the lazy dog.</p>

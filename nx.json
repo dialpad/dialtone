@@ -1,41 +1,9 @@
 {
   "extends": "nx/presets/npm.json",
-  "affected": {
-    "defaultBase": "production"
-  },
   "targetDefaults": {
-    "build": {
-      "cache": true,
-      "dependsOn": [
-        "^build"
-      ]
-    },
-    "build-docs": {
-      "cache": true,
-      "dependsOn": [
-        "^build"
-      ]
-    },
-    "publish": {
-      "dependsOn": [
-        "build",
-        "^build"
-      ]
-    },
-    "start": {
-      "dependsOn": [
-        "^build"
-      ]
-    },
-    "test": {
-      "cache": true,
-      "dependsOn": [
-        "^build",
-        "build"
-      ]
-    }
+    "build*": { "cache": true },
+    "publish*": { "dependsOn": ["build", "^build"] }
   },
-  "installation": {
-    "version": "17.0.2"
-  }
+  "installation": { "version": "19.8.0" },
+  "parallel": 5
 }

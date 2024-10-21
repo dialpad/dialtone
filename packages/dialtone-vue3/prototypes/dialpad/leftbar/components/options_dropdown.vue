@@ -18,8 +18,7 @@
         @click.stop="openDropdown"
       >
         <template #icon="{ iconSize }">
-          <dt-icon
-            name="more-vertical"
+          <dt-icon-more-vertical
             :size="iconSize"
           />
         </template>
@@ -50,7 +49,7 @@
 import { DtDropdown, DtDropdownSeparator } from '@/components/dropdown';
 import { DtListItem } from '@/components/list_item';
 import { DtButton } from '@/components/button';
-import { DtIcon } from '@/components/icon';
+import { DtIconMoreVertical } from '@dialpad/dialtone-icons/vue3';
 
 const emits = defineEmits(['select-menu-option', 'open-dropdown']);
 

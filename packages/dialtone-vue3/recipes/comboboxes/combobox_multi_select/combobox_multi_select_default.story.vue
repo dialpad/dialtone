@@ -12,6 +12,7 @@
     :loading-message="$attrs.loadingMessage"
     :show-list="$attrs.showList"
     :selected-items="$attrs.selectedItems"
+    :chip-max-width="$attrs.chipMaxWidth"
     :max-selected="$attrs.maxSelected"
     :list-max-height="$attrs.listMaxHeight"
     :list-max-width="$attrs.listMaxWidth"
@@ -22,6 +23,7 @@
     :visually-hidden-close-label="$attrs.visuallyHiddenCloseLabel"
     :append-to="$attrs.appendTo"
     :transition="$attrs.transition"
+    :reserved-right-space="$attrs.reservedRightSpace"
     @input="onComboboxInput"
     @select="onComboboxSelect"
     @remove="onComboboxRemove"
@@ -99,6 +101,9 @@ export default {
         // Clear input box and unfilter list
         this.$refs.comboboxMultiSelect.$data.value = '';
         this.items = ITEMS_LIST_DATA;
+      } else {
+        const item = this.$refs.comboboxMultiSelect.$refs.input.value;
+        item && this.$attrs.selectedItems.push(item);
       }
     },
 

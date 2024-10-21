@@ -53,9 +53,8 @@
             @click="close"
           >
             <template #icon>
-              <dt-icon
+              <dt-icon-close
                 class="d-image-viewer__close-button"
-                name="close"
                 size="400"
               />
             </template>
@@ -69,7 +68,7 @@
 <script>
 import Modal from '@/common/mixins/modal';
 import { EVENT_KEYNAMES } from '@/common/constants';
-import { DtIcon } from '@/components/icon';
+import { DtIconClose } from '@dialpad/dialtone-icons/vue3';
 import { DtButton } from '@/components/button';
 
 export default {
@@ -77,7 +76,7 @@ export default {
 
   components: {
     DtButton,
-    DtIcon,
+    DtIconClose,
   },
 
   mixins: [Modal],
@@ -93,6 +92,7 @@ export default {
       type: String,
       default: 'body',
     },
+
     /**
      * Controls whether the image modal is shown. Leaving this null will have the image modal
      * trigger on click by default.

@@ -80,14 +80,8 @@ jobs:
       - name: Install Playwright Browsers
         run: pnpm exec playwright install --with-deps
 
-      - name: Build Dialtone-vue 2 library and documentation site
-        run: pnpm nx run --verbose dialtone-vue2:build-docs
-
-      - name: Start storybook and run a11y tests
-        run: |
-          pnpm exec concurrently -k -s first -n "SB,TEST" -c "magenta,blue" \
-            "pnpm exec http-server packages/dialtone-vue2/storybook-static --port 9010 --silent" \
-            "pnpm exec wait-on tcp:9010 && pnpm nx run --verbose dialtone-vue2:test:a11y"
+      - name: Run a11y tests
+        run: pnpm nx run dialtone-vue2:test:a11y
 
   dialtone-vue-3:
     needs: filter-actions
@@ -127,11 +121,5 @@ jobs:
       - name: Install Playwright Browsers
         run: pnpm exec playwright install --with-deps
 
-      - name: Build Dialtone-vue 3 library and documentation site
-        run: pnpm nx run --verbose dialtone-vue3:build-docs
-
-      - name: Start storybook and run a11y tests
-        run: |
-          pnpm exec concurrently -k -s first -n "SB,TEST" -c "green,yellow" \
-            "pnpm exec http-server packages/dialtone-vue3/storybook-static --port 9011 --silent" \
-            "pnpm exec wait-on tcp:9011 && pnpm nx run --verbose dialtone-vue3:test:a11y"
+      - name: Run a11y tests
+        run: pnpm nx run dialtone-vue3:test:a11y

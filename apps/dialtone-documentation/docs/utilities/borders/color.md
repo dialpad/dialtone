@@ -30,8 +30,7 @@ Use `d-bc-{color}` to set an element's border color.
 ## Changing opacities
 
 Use `d-bco{n}` to change the border color opacity value. You can also change the border color opacity value on `:hover`
-, `:focus`, `:focus-visible`, or in dark mode by using the respective `h:d-bco{n}`, `f:d-bco{n}`, `fv:d-bco{n}`,
-or `d:d-bco{n}` prefixes.
+, `:focus`, `:focus-visible` by using the respective `h:d-bco{n}`, `f:d-bco{n}`, `fv:d-bco{n}` prefixes.
 
 <code-well-header class="d-d-flex d-jc-center d-fd-column d-p24 d-bgc-magenta-100 d-bgo50 d-w100p d-hmn102 d-stack8" custom>
   <div class="d-w100p d-p4 d-bb d-bbw2 d-bc-magenta-300 d-code--md d-fw-bold">100%</div>

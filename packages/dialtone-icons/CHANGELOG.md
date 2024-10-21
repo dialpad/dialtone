@@ -1,3 +1,21 @@
+## [4.27.2](https://github.com/dialpad/dialtone/compare/dialtone-icons/v4.27.1...dialtone-icons/v4.27.2) (2024-09-26)
+
+## [4.27.1](https://github.com/dialpad/dialtone/compare/dialtone-icons/v4.27.0...dialtone-icons/v4.27.1) (2024-09-16)
+
+# [4.27.0](https://github.com/dialpad/dialtone/compare/dialtone-icons/v4.26.7...dialtone-icons/v4.27.0) (2024-09-16)
+
+
+### Features
+
+* **Icon:** DLT-1991 add full color dialpad-sparkle ([#495](https://github.com/dialpad/dialtone/issues/495)) ([d20de6d](https://github.com/dialpad/dialtone/commit/d20de6d26f215e86caf197bb32a8586ac20a86ec))
+
+## [4.26.7](https://github.com/dialpad/dialtone/compare/dialtone-icons/v4.26.6...dialtone-icons/v4.26.7) (2024-09-04)
+
+
+### Bug Fixes
+
+* **Dialtone Icons:** NO-JIRA add data-qa to individual icon and illustration ([#483](https://github.com/dialpad/dialtone/issues/483)) ([28521d0](https://github.com/dialpad/dialtone/commit/28521d0fa2a420ee4239ac8bf862cc343239b92f))
+
 ## [4.26.6](https://github.com/dialpad/dialtone/compare/dialtone-icons/v4.26.5...dialtone-icons/v4.26.6) (2024-08-29)
 
 

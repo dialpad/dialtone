@@ -1,7 +1,7 @@
 ---
 title: Error messages
 prev: { link: "/guides/content/action-language/", text: "Action language" }
-next: { link: "/guides/content/grammar-mechanics/", text: "Grammar and mechanics" }
+next: { link: "/guides/content/grammar-and-mechanics/", text: "Grammar and mechanics" }
 description: Errors can be scary and frustrating for users. We aim to make users aware of errors, easy to understand, and provide helpful suggestions (when possible) to correct them.
 ---
 Good error messages should:

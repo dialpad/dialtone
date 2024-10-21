@@ -5,11 +5,11 @@ import customEmojis from '@data/custom-emoji.json';
 import 'overlayscrollbars/overlayscrollbars.css';
 import { OverlayScrollbars, ClickScrollPlugin } from 'overlayscrollbars';
 import { onBeforeMount, provide, ref } from 'vue';
-import { flushPromises } from '@workspaceRoot/common/utils';
+import { flushPromises } from '@workspaceRoot/common/utils/client.mjs';
 
 // CSS
 import '@dialpad/dialtone-css/lib/dist/dialtone.css';
-import '@dialpad/dialtone/vue3/css';
+import '@dialpad/dialtone-vue/css';
 import './assets/less/dialtone-docs.less';
 import './assets/less/dialtone-syntax.less';
 

@@ -51,7 +51,7 @@ html body {
   --docsearch-searchbox-height: 40px;
   // --docsearch-searchbox-background
   --docsearch-searchbox-focus-background: var(--dt-inputs-color-background-default);
-  --docsearch-searchbox-shadow: inset 0 0 0 var(--dt-size-border-150) var(--dt-inputs-color-border-default);
+  --docsearch-searchbox-shadow: inset 0 0 0 var(--dt-size-border-100) var(--dt-inputs-color-border-default);
   --docsearch-hit-height: var(--dt-size-650);
   --docsearch-hit-color: var(--dt-color-foreground-tertiary);
   --docsearch-hit-active-color: var(--dt-color-neutral-white);
@@ -71,6 +71,12 @@ html body {
     border-radius: var(--dt-size-radius-500);
     border-radius: var(--dt-size-500);
     box-shadow: var(--dt-shadow-large);
+  }
+
+  // Override 'overflow: hidden' when algolia modal is showing because we are using
+  // dialtone scrollbar
+  &.DocSearch--active {
+    overflow: unset !important;
   }
 
   .DocSearch-SearchBar {

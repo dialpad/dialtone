@@ -28,7 +28,6 @@ describe('DtImageViewer Tests', () => {
           teleport: true,
         },
       },
-      attachTo: document.body,
     });
 
     imageViewerPreview = wrapper.find('[data-qa="dt-image-viewer-preview"]');

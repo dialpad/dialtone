@@ -32,8 +32,7 @@
       @click="$emit('close')"
     >
       <template #icon>
-        <dt-icon
-          name="close"
+        <dt-icon-close
           size="300"
         />
       </template>
@@ -43,13 +42,13 @@
 
 <script>
 import { DtButton } from '@/components/button';
-import { DtIcon } from '@/components/icon';
+import { DtIconClose } from '@dialpad/dialtone-icons/vue2';
 
 export default {
   name: 'PopoverHeaderFooter',
   components: {
     DtButton,
-    DtIcon,
+    DtIconClose,
   },
 
   props: {

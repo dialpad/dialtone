@@ -21,7 +21,6 @@ describe('DtCard Tests', () => {
   const updateWrapper = () => {
     wrapper = mount(DtCard, {
       slots: { ...baseSlots, ...mockSlots },
-      attachTo: document.body,
     });
 
     contentElement = wrapper.find('[data-qa="content-element"]');

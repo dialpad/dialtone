@@ -11,8 +11,7 @@
       @keydown.enter="selectFirstEmoji"
     >
       <template #leftIcon>
-        <dt-icon
-          name="search"
+        <dt-icon-search
           size="200"
         />
       </template>
@@ -29,8 +28,7 @@
           @click="clearSearch"
         >
           <template #icon>
-            <dt-icon
-              name="close"
+            <dt-icon-close
               size="200"
             />
           </template>
@@ -41,8 +39,8 @@
 </template>
 
 <script>
+import { DtIconSearch, DtIconXCircle } from '@dialpad/dialtone-icons/vue2';
 import { DtInput } from '@/components/input';
-import { DtIcon } from '@/components/icon';
 import { DtButton } from '@/components/button';
 
 export default {
@@ -50,7 +48,8 @@ export default {
 
   components: {
     DtInput,
-    DtIcon,
+    DtIconSearch,
+    DtIconXCircle,
     DtButton,
   },
 

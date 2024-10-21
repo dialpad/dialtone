@@ -24,7 +24,6 @@ describe('DtCollapsible Tests', () => {
     wrapper = mount(DtCollapsible, {
       propsData: { ...baseProps, ...mockProps },
       slots: { ...baseSlots, ...mockSlots },
-      attachTo: document.body,
     });
 
     anchorElement = wrapper.find('[data-qa="dt-button"]');

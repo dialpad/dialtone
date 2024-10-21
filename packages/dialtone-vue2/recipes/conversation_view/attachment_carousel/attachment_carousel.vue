@@ -36,8 +36,7 @@
       @click="leftScroll"
     >
       <template #icon>
-        <dt-icon
-          name="arrow-left"
+        <dt-icon-arrow-left
           size="100"
         />
       </template>
@@ -53,8 +52,7 @@
       @click="rightScroll"
     >
       <template #icon>
-        <dt-icon
-          name="arrow-right"
+        <dt-icon-arrow-right
           size="100"
         />
       </template>
@@ -63,7 +61,7 @@
 </template>
 
 <script>
-import { DtIcon } from '@/components/icon';
+import { DtIconArrowRight, DtIconArrowLeft } from '@dialpad/dialtone-icons/vue2';
 import { DtButton } from '@/components/button';
 
 import DtImageCarousel from './media_components/image_carousel.vue';
@@ -75,7 +73,8 @@ export default {
 
   components: {
     DtButton,
-    DtIcon,
+    DtIconArrowRight,
+    DtIconArrowLeft,
     DtImageCarousel,
   },
 

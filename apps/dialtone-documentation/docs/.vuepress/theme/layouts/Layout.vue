@@ -60,6 +60,7 @@ import { computed, ref, watch, onMounted } from 'vue';
 import { useRoute } from 'vue-router';
 import { useThemeLocaleData } from '@vuepress/plugin-theme-data/client';
 import DialtoneLogo from '../components/DialtoneLogo.vue';
+import { disableRootScrolling, enableRootScrolling } from '@dialpad/dialtone-vue';
 
 const route = useRoute();
 
@@ -72,6 +73,7 @@ const mobileBreakpoint = 980;
 const evaluateWindowWidth = () => {
   isMobile.value = window.innerWidth <= mobileBreakpoint;
 };
+let observer = null;
 
 const isMobile = ref(false);
 
@@ -126,5 +128,17 @@ onMounted(() => {
   window.addEventListener('resize', () => {
     evaluateWindowWidth();
   });
+
+  observer = new MutationObserver((mutationList) => {
+    for (const mutation of mutationList) {
+      if (mutation.type === 'attributes') {
+        mutation.target.classList.contains('DocSearch--active')
+          ? disableRootScrolling()
+          : enableRootScrolling();
+      }
+    }
+  });
+
+  observer.observe(document.body, { attributes: true });
 });
 </script>

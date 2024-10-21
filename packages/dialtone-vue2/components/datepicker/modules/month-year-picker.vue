@@ -29,8 +29,7 @@
             @click="changeYear(-1)"
             @keydown="handleKeyDown($event)"
           >
-            <dt-icon
-              name="chevrons-left"
+            <dt-icon-chevrons-left
               size="200"
             />
           </dt-button>
@@ -55,8 +54,7 @@
             @click="changeMonth(-1)"
             @keydown="handleKeyDown($event)"
           >
-            <dt-icon
-              name="chevron-left"
+            <dt-icon-chevron-left
               size="200"
             />
           </dt-button>
@@ -96,8 +94,7 @@
             @click="changeMonth(1)"
             @keydown="handleKeyDown($event)"
           >
-            <dt-icon
-              name="chevron-right"
+            <dt-icon-chevron-right
               size="200"
             />
           </dt-button>
@@ -122,8 +119,7 @@
             @click="changeYear(1)"
             @keydown="handleKeyDown($event)"
           >
-            <dt-icon
-              name="chevrons-right"
+            <dt-icon-chevrons-right
               size="200"
             />
           </dt-button>
@@ -134,7 +130,7 @@
 </template>
 
 <script>
-import { DtIcon } from '@/components/icon';
+import { DtIconChevronLeft, DtIconChevronsLeft, DtIconChevronRight, DtIconChevronsRight } from '@dialpad/dialtone-icons/vue2';
 import { getYear, addMonths, getMonth, set, subMonths, getDate } from 'date-fns';
 import { getCalendarDays, formatMonth } from '../utils';
 import { INTL_MONTH_FORMAT } from '../datepicker_constants';
@@ -145,7 +141,15 @@ import DtButton from '@/components/button/button.vue';
 export default {
   name: 'DtDatepickerMonthYearPicker',
 
-  components: { DtButton, DtTooltip, DtStack, DtIcon },
+  components: {
+    DtButton,
+    DtTooltip,
+    DtStack,
+    DtIconChevronLeft,
+    DtIconChevronsLeft,
+    DtIconChevronRight,
+    DtIconChevronsRight,
+  },
 
   props: {
     locale: {

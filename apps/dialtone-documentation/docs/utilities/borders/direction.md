@@ -7,7 +7,7 @@ description: Utilities for controlling an element's border.
 
 Use `d-ba` to add a border to all sides of your element.
 
-<code-well-header class="d-fl-col5 d-flg8 d-fw-wrap d-p24 d-bgc-magenta-100 d-bgo50 d-w100p d-hmn102">
+<code-well-header class="d-fl-col5 d-g8 d-fw-wrap d-p24 d-bgc-magenta-100 d-bgo50 d-w100p d-hmn102">
   <div class="d-fl-center d-p16 d-ba d-bc-magenta-200 d-baw0 d-bgc-magenta-100 d-fs-200 d-fw-bold">.d-baw0</div>
   <div class="d-fl-center d-p16 d-ba d-bc-magenta-200 d-baw1 d-bgc-magenta-100 d-fs-200 d-fw-bold">.d-baw1</div>
   <div class="d-fl-center d-p16 d-ba d-bc-magenta-200 d-baw2 d-bgc-magenta-100 d-fs-200 d-fw-bold">.d-baw2</div>
@@ -27,7 +27,7 @@ Use `d-ba` to add a border to all sides of your element.
 
 Use `d-b{t|r|b|l|x|y}` to add a border to only specific sides of your element.
 
-<code-well-header class="d-fl-col4 d-flg8 d-fw-wrap d-p24 d-bgc-purple-100 d-bgo50 d-w100p d-hmn102">
+<code-well-header class="d-fl-col4 d-g8 d-fw-wrap d-p24 d-bgc-purple-100 d-bgo50 d-w100p d-hmn102">
   <div class="d-fl-center d-p16 d-bt d-bc-purple-400 d-baw2 d-bgc-purple-100 d-fs-200 d-fw-bold">.d-bt</div>
   <div class="d-fl-center d-p16 d-br d-bc-purple-400 d-baw2 d-bgc-purple-100 d-fs-200 d-fw-bold">.d-br</div>
   <div class="d-fl-center d-p16 d-bb d-bc-purple-400 d-baw2 d-bgc-purple-100 d-fs-200 d-fw-bold">.d-bb</div>

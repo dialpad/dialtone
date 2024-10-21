@@ -1,7 +1,7 @@
 <template>
-  <dt-icon
+  <component
     v-if="isIconType"
-    :name="getIconName"
+    :is="getIconName"
     :size="iconSize"
   />
   <div
@@ -13,24 +13,72 @@
     :class="dialbotClasses"
     data-qa="general-row-dialbot"
   >
-    <dt-icon
-      name="dialbot"
+    <dt-icon-dialbot
       size="500"
     />
   </div>
 </template>
 
 <script>
-import { DtIcon } from '@/components/icon';
 import {
-  LEFTBAR_GENERAL_ROW_ICON_MAPPING as ICON_MAPPING,
+  DtIconDialbot,
+  DtIconInbox,
+  DtIconContacts,
+  DtIconHash,
+  DtIconThread,
+  DtIconLayoutTemplate,
+  DtIconLock,
+  DtIconSparkle,
+  DtIconUsers,
+  DtIconExternalLink,
+  DtIconLockFilled,
+  DtIconHashBold,
+  DtIconAtSign,
+  DtIconLaptop2,
+  DtIconCalendarClock,
+} from '@dialpad/dialtone-icons/vue2';
+import {
   LEFTBAR_GENERAL_ROW_TYPES as TYPES,
   LEFTBAR_GENERAL_ROW_CONTACT_CENTER_COLORS as COLORS,
 } from '@/recipes/leftbar/general_row/general_row_constants';
 
+const typeToIcon = new Map([
+  [TYPES.INBOX, DtIconInbox],
+  [TYPES.CONTACTS, DtIconContacts],
+  [TYPES.CHANNELS, DtIconHash],
+  [TYPES.THREADS, DtIconThread],
+  [TYPES.LAUNCHPAD, DtIconLayoutTemplate],
+  [TYPES.LOCKED_CHANNEL, DtIconLock],
+  [TYPES.QUICK_START, DtIconSparkle],
+  [TYPES.COACHING_GROUP, DtIconUsers],
+  [TYPES.COACHING_CENTER, DtIconExternalLink],
+  ['locked channel unread', DtIconLockFilled],
+  ['channel unread', DtIconHashBold],
+  [TYPES.ASSIGNED, DtIconAtSign],
+  [TYPES.DIGITAL, DtIconLaptop2],
+  [TYPES.SCHEDULED, DtIconCalendarClock],
+]);
+
 export default {
   name: 'DtRecipeLeftbarGeneralRowIcon',
-  components: { DtIcon },
+  components: {
+    DtIconDialbot,
+    DtIconInbox,
+    DtIconContacts,
+    DtIconHash,
+    DtIconThread,
+    DtIconLayoutTemplate,
+    DtIconLock,
+    DtIconSparkle,
+    DtIconUsers,
+    DtIconExternalLink,
+    DtIconLockFilled,
+    DtIconHashBold,
+    DtIconAtSign,
+    DtIconLaptop2,
+    DtIconCalendarClock,
+  },
+
   props: {
     type: {
       type: String,
@@ -62,7 +110,7 @@ export default {
     },
 
     getIconName () {
-      return ICON_MAPPING[this.type];
+      return typeToIcon.get(this.type);
     },
 
     contactCenterIconClasses () {

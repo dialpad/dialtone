@@ -98,8 +98,7 @@
           @click="close"
         >
           <template #icon>
-            <dt-icon
-              name="close"
+            <dt-icon-close
               size="400"
             />
           </template>
@@ -117,14 +116,14 @@
 <script>
 /* eslint-disable max-lines */
 import { DtButton } from '@/components/button';
-import { DtIcon } from '@/components/icon';
+import { DtIconClose } from '@dialpad/dialtone-icons/vue3';
 import Modal from '@/common/mixins/modal';
 import {
   MODAL_BANNER_KINDS,
   MODAL_KIND_MODIFIERS,
   MODAL_SIZE_MODIFIERS,
 } from './modal_constants';
-import { getUniqueString, hasSlotContent } from '@/common/utils';
+import { getUniqueString, hasSlotContent, disableRootScrolling, enableRootScrolling } from '@/common/utils';
 import { DtLazyShow } from '@/components/lazy_show';
 import { EVENT_KEYNAMES } from '@/common/constants';
 import SrOnlyCloseButtonMixin from '@/common/mixins/sr_only_close_button';
@@ -142,7 +141,7 @@ export default {
   components: {
     DtLazyShow,
     DtButton,
-    DtIcon,
+    DtIconClose,
     SrOnlyCloseButton,
   },
 
@@ -411,12 +410,13 @@ export default {
 
   watch: {
     show: {
-      immediate: true,
       handler (isShowing) {
         if (isShowing) {
           // Set a reference to the previously-active element, to which we'll return focus on modal close.
           this.previousActiveElement = document.activeElement;
+          disableRootScrolling(this.$el.getRootNode().host);
         } else {
+          enableRootScrolling(this.$el.getRootNode().host);
           // Modal is being hidden, so return focus to the previously active element before clearing the reference.
           this.previousActiveElement?.focus();
           this.previousActiveElement = null;

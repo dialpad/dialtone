@@ -1,16 +1,14 @@
-import { mergeAttributes, Node, nodeInputRule, nodePasteRule } from '@tiptap/core';
-import { VueNodeViewRenderer } from '@tiptap/vue-2';
-import EmojiComponent from './EmojiComponent.vue';
-import { codeToEmojiData, emojiShortCodeRegex, emojiRegex, stringToUnicode } from '@/common/emoji';
+import { InputRule, mergeAttributes, Node, nodePasteRule } from '@tiptap/core';
 import { PluginKey } from '@tiptap/pm/state';
-
+import { VueNodeViewRenderer } from '@tiptap/vue-2';
 import Suggestion from '@tiptap/suggestion';
-import suggestionOptions from './suggestion';
 import { emojiPattern } from 'regex-combined-emojis';
 
-export const EmojiPluginKey = new PluginKey('emoji');
+import EmojiComponent from './EmojiComponent.vue';
+import { codeToEmojiData, emojiShortCodeRegex, emojiRegex, stringToUnicode } from '@/common/emoji';
+import suggestionOptions from './suggestion';
 
-const inputShortCodeRegex = /(^| |(?<=:))(:\w+:)$/;
+const inputShortCodeRegex = /(:\w+:)$/;
 const inputUnicodeRegex = new RegExp(emojiPattern + '$');
 
 const inputRuleMatch = (match) => {
@@ -19,11 +17,7 @@ const inputRuleMatch = (match) => {
     // needs to be a dict returned
     // ref type InputRuleMatch:
     // https://github.com/ueberdosis/tiptap/blob/main/packages/core/src/InputRule.ts#L16
-    return {
-      index: match.index,
-      text,
-      match,
-    };
+    return { text };
   }
 };
 
@@ -40,19 +34,16 @@ const shortCodePasteMatch = (text) => {
 };
 
 export const Emoji = Node.create({
+  name: 'emoji',
   addOptions () {
     return {
       HTMLAttributes: {},
-      suggestion: {
-        char: ':',
-        pluginKey: EmojiPluginKey,
-      },
     };
   },
-  name: 'emoji',
   group: 'inline',
   inline: true,
-  selectable: true,
+  selectable: false,
+  atom: true,
 
   addNodeView () {
     return VueNodeViewRenderer(EmojiComponent);
@@ -87,33 +78,18 @@ export const Emoji = Node.create({
 
   addInputRules () {
     return [
-      // shortcode input
-      nodeInputRule({
+      new InputRule({
         find: (text) => {
-          const match = text.match(inputShortCodeRegex);
+          const match = text.match(inputShortCodeRegex) || text.match(inputUnicodeRegex);
           if (!match) return;
-          return inputRuleMatch(match);
-        },
-        type: this.type,
-        getAttributes (attrs) {
-          return {
-            code: attrs[0],
-          };
-        },
-      }),
 
-      nodeInputRule({
-        find: (text) => {
-          const match = text.match(inputUnicodeRegex);
-          if (!match) return;
           return inputRuleMatch(match);
         },
-        type: this.type,
-        getAttributes (attrs) {
-          const emoji = codeToEmojiData(attrs[0]).shortname;
-          return {
-            code: emoji,
-          };
+        handler: ({ state, range, match, commands, chain, can }) => {
+          const { tr } = state;
+          const start = range.from;
+          const end = range.to;
+          tr.replaceWith(start, end, this.type.create({ code: match[0] }));
         },
       }),
     ];
@@ -145,10 +121,31 @@ export const Emoji = Node.create({
   addProseMirrorPlugins () {
     return [
       Suggestion({
+        char: ':',
+        pluginKey: new PluginKey('emoji'),
         editor: this.editor,
         ...this.options.suggestion,
         ...suggestionOptions,
       }),
     ];
+  },
+
+  addKeyboardShortcuts () {
+    return {
+      Backspace: () => this.editor.commands.command(({ tr, state }) => {
+        let isEmoji = false;
+        const { selection } = state;
+        const { empty, anchor } = selection;
+        if (!empty) { return false; }
+        state.doc.nodesBetween(anchor - 1, anchor, (node, pos) => {
+          if (node.type.name === this.name) {
+            isEmoji = true;
+            tr.insertText('', pos, pos + node.nodeSize);
+            return false;
+          }
+        });
+        return isEmoji;
+      }),
+    };
   },
 });

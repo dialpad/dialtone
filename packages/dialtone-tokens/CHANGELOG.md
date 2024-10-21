@@ -1,3 +1,52 @@
+## [1.36.6](https://github.com/dialpad/dialtone/compare/dialtone-tokens/v1.36.5...dialtone-tokens/v1.36.6) (2024-10-11)
+
+
+### Bug Fixes
+
+* DLT-1548 fix opacity classes selectors ([#520](https://github.com/dialpad/dialtone/issues/520)) ([1e6ef93](https://github.com/dialpad/dialtone/commit/1e6ef93933ee3dad7fa0c0cea5ab79ef7c9787eb))
+
+## [1.36.5](https://github.com/dialpad/dialtone/compare/dialtone-tokens/v1.36.4...dialtone-tokens/v1.36.5) (2024-10-07)
+
+
+### Bug Fixes
+
+* **Tokens:** NO-JIRA incorrect hsl for reference tokens ([#516](https://github.com/dialpad/dialtone/issues/516)) ([eb4e10e](https://github.com/dialpad/dialtone/commit/eb4e10e4371c3a9d53a3e7e08e759429c272723a))
+
+## [1.36.4](https://github.com/dialpad/dialtone/compare/dialtone-tokens/v1.36.3...dialtone-tokens/v1.36.4) (2024-09-26)
+
+
+### Bug Fixes
+
+* **Tokens:** DLT-2054 support shadow dom ([#508](https://github.com/dialpad/dialtone/issues/508)) ([edd639f](https://github.com/dialpad/dialtone/commit/edd639f213795662c20c0114c0c1a2178af24736))
+
+## [1.36.3](https://github.com/dialpad/dialtone/compare/dialtone-tokens/v1.36.2...dialtone-tokens/v1.36.3) (2024-09-24)
+
+
+### Bug Fixes
+
+* **Tokens:** DLT-2053 android tokens color value ([#504](https://github.com/dialpad/dialtone/issues/504)) ([368c9db](https://github.com/dialpad/dialtone/commit/368c9db93fc6045ce08bc7e2ee010590ec83ff5f))
+
+## [1.36.2](https://github.com/dialpad/dialtone/compare/dialtone-tokens/v1.36.1...dialtone-tokens/v1.36.2) (2024-09-19)
+
+
+### Bug Fixes
+
+* **Tokens:** DLT-2058 fix uncalced focus ring token ([#502](https://github.com/dialpad/dialtone/issues/502)) ([9733452](https://github.com/dialpad/dialtone/commit/9733452f935a524a88dfd3bfb0ee8844e0444113))
+
+## [1.36.1](https://github.com/dialpad/dialtone/compare/dialtone-tokens/v1.36.0...dialtone-tokens/v1.36.1) (2024-09-11)
+
+
+### Bug Fixes
+
+* **Tokens:** NO-JIRA keep references in css output ([#487](https://github.com/dialpad/dialtone/issues/487)) ([b019ff6](https://github.com/dialpad/dialtone/commit/b019ff67bbc2da4f33ad8dadf2da81150bbb1fc6))
+
+# [1.36.0](https://github.com/dialpad/dialtone/compare/dialtone-tokens/v1.35.0...dialtone-tokens/v1.36.0) (2024-09-03)
+
+
+### Features
+
+* **Design Tokens:** DLT-2004 typography and radius design tokens for button, input, select, tabs ([#467](https://github.com/dialpad/dialtone/issues/467)) ([a0c10a2](https://github.com/dialpad/dialtone/commit/a0c10a2390c68e8185d2d78edfefa02d4e889a12))
+
 # [1.35.0](https://github.com/dialpad/dialtone/compare/dialtone-tokens/v1.34.3...dialtone-tokens/v1.35.0) (2024-08-29)
 
 

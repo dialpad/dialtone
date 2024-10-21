@@ -44,8 +44,7 @@
       @click="$emit('close')"
     >
       <template #icon>
-        <dt-icon
-          name="close"
+        <dt-icon-close
           :size="closeButtonIconSize"
         />
       </template>
@@ -55,7 +54,7 @@
 
 <script>
 import { DtButton } from '@/components/button';
-import { DtIcon } from '@/components/icon';
+import { DtIconClose } from '@dialpad/dialtone-icons/vue3';
 import {
   CHIP_CLOSE_BUTTON_SIZE_MODIFIERS,
   CHIP_SIZE_MODIFIERS,
@@ -74,7 +73,7 @@ export default {
 
   components: {
     DtButton,
-    DtIcon,
+    DtIconClose,
   },
 
   props: {

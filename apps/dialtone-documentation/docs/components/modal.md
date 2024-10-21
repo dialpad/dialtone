@@ -24,6 +24,7 @@ Although highly versatile, this doesn't mean modal dialogs are fit for all purpo
 - Confirming a destructive action that is about to happen.
 - Ask for a user’s consent for an action.
 </template>
+
 <template #dont>
 
 - When its content or features can be part of the page without complicating the page’s intent.
@@ -34,6 +35,7 @@ Although highly versatile, this doesn't mean modal dialogs are fit for all purpo
 - Displaying complex forms or large amounts of information (instead: place content inline)
 - Displaying content unrelated to current task (instead: place content inline as a [Link](link.md) or [Banner](banner.md)).
 </template>
+
 </dialtone-usage>
 
 ### Best practices
@@ -146,7 +148,7 @@ showHtmlWarning />
 This is the default behavior that adds the scroll automatically in the modal content and leaves the header and footer fixed.
 
 <code-well-header>
-  <example-modal kind="fixed" />
+  <example-modal fixed-header-footer :copy="fixedHeaderFooterCopy" />
 </code-well-header>
 
 <code-example-tabs
@@ -316,7 +318,7 @@ showHtmlWarning />
 To make this modal take up as much of the screen as possible.
 
 <code-well-header>
-  <example-modal kind="full-screen" />
+  <example-modal size="full" />
 </code-well-header>
 
 <code-example-tabs
@@ -400,7 +402,22 @@ showHtmlWarning />
 When there is a need of more context information regarding the content of the Modal
 
 <code-well-header>
-  <example-modal kind="default" bannerKind="success" bannerTitle="This banner can have different kinds." />
+  <dt-stack direction="row" gap="500" class="d-ai-flex-end">
+    <dt-select-menu
+      label="Kind of Banner"
+      size="md"
+      @change="changeBannerKind"
+    >
+      <option
+        v-for="option in bannerKinds()"
+        :key="option"
+        :selected="option === selectedBannerKind"
+        :value="option"
+        v-text="option"
+      />
+    </dt-select-menu>
+    <example-modal kind="default" :banner-kind="selectedBannerKind" banner-title="This banner can have different kinds." />
+  </dt-stack>
 </code-well-header>
 
 <code-example-tabs
@@ -449,7 +466,7 @@ vueCode='
   close-button-props="Close"
   :show="isOpen"
   banner-title="This banner can have different kinds."
-  banner-kind="success"
+  :bannerKind="selectedBannerKind"
   copy="Sed at orci quis nunc finibus gravida eget vitae est..."
   @update:show="updateShow"
 >
@@ -544,6 +561,12 @@ At minimum, modals contain a title and one button. They could also contain body 
   import { ref } from 'vue';
 
   const isOpen = ref(false);
+  const selectedBannerKind = ref('success');
+  const fixedHeaderFooterCopy = ref(`Sed at orci quis nunc finibus gravida eget vitae est. Praesent
+          ac laoreet mi. Cras porttitor mauris ex. Integer convallis tellus a ex egestas, id laoreet elit mollis. Mauris
+          ut elementum velit. Nam vel consectetur turpis. Aenean consequat purus non nunc tincidunt rutrum. In semper
+          pretium dui vel tempus. Proin et mi id mi egestas iaculis. Sed lacinia libero non molestie consequat. Sed
+          efficitur purus eget lacus viverra volutpat. Nam luctus ac eros eu iaculis. Fusce non condimentum lorem.`.repeat(10))
 
   const openModal = () => {
     isOpen.value = true;
@@ -551,5 +574,13 @@ At minimum, modals contain a title and one button. They could also contain body 
 
   const updateShow = (value) => {
     if (!value) isOpen.value = false;
+  };
+
+  const changeBannerKind = (kind) => {
+    selectedBannerKind.value = kind;
+  };
+
+  const bannerKinds = () => {
+    return Object.keys(window.DIALTONE_CONSTANTS.MODAL_BANNER_KINDS);
   };
 </script>

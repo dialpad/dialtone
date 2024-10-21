@@ -12,12 +12,18 @@
       />
       <dt-badge
         text="Locked"
-        icon-left="lock"
-      />
+      >
+        <template #leftIcon="{ iconSize }">
+          <dt-icon-lock :size="iconSize" />
+        </template>
+      </dt-badge>
       <dt-badge
         text="Chat log"
-        icon-left="message"
-      />
+      >
+        <template #leftIcon="{ iconSize }">
+          <dt-icon-message :size="iconSize" />
+        </template>
+      </dt-badge>
     </div>
     <div
       class="d-d-flex d-gg8 d-ai-center"
@@ -73,8 +79,11 @@
       <dt-badge
         text="Recording"
         type="critical"
-        icon-left="record-filled"
-      />
+      >
+        <template #leftIcon="{ iconSize }">
+          <dt-icon-record-filled :size="iconSize" />
+        </template>
+      </dt-badge>
     </div>
     <div
       class="d-d-flex d-gg8 d-ai-center"
@@ -118,8 +127,11 @@
         text="5%"
         kind="count"
         type="success"
-        icon-left="arrow-up"
-      />
+      >
+        <template #leftIcon="{ iconSize }">
+          <dt-icon-arrow-up :size="iconSize" />
+        </template>
+      </dt-badge>
     </div>
     <div
       class="d-d-flex d-gg8 d-ai-center"
@@ -128,8 +140,11 @@
         text="-12%"
         kind="count"
         type="critical"
-        icon-left="arrow-down"
-      />
+      >
+        <template #leftIcon="{ iconSize }">
+          <dt-icon-arrow-down :size="iconSize" />
+        </template>
+      </dt-badge>
     </div>
     <div
       class="d-d-flex d-gg8 d-ai-center"
@@ -154,11 +169,25 @@
 </template>
 
 <script>
-import DtBadge from './badge.vue';
+import { DtBadge } from './';
+import {
+  DtIconArrowDown,
+  DtIconArrowUp,
+  DtIconLock,
+  DtIconMessage,
+  DtIconRecordFilled,
+} from '@dialpad/dialtone-icons/vue2';
 
 export default {
   name: 'DtBadgeExamples',
 
-  components: { DtBadge },
+  components: {
+    DtBadge,
+    DtIconArrowDown,
+    DtIconArrowUp,
+    DtIconLock,
+    DtIconMessage,
+    DtIconRecordFilled,
+  },
 };
 </script>

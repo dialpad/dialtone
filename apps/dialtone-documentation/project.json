@@ -1,13 +1,47 @@
 {
   "name": "dialtone-documentation",
   "targets": {
-    "build-docs": {
-      "executor": "nx:run-script",
-      "options": { "script": "build" }
+    "build": {
+      "executor": "nx:run-commands",
+      "dependsOn": [
+        "dialtone-css:build",
+        "dialtone-icons:build",
+        "dialtone-tokens:build",
+        "dialtone-vue3:build"
+      ],
+      "inputs": [
+        "{projectRoot}/docs/**/*",
+        "!{projectRoot}/docs/.vuepress/.cache",
+        "!{projectRoot}/docs/.vuepress/.temp",
+        "!{projectRoot}/docs/.vuepress/dist"
+      ],
+      "outputs": [
+        "{projectRoot}/docs/.vuepress/dist"
+      ],
+      "options": {
+        "cwd": "{projectRoot}",
+        "command": "vuepress build docs"
+      }
     },
     "start": {
-      "executor": "nx:run-script",
-      "options": { "script": "start" }
+      "executor": "nx:run-commands",
+      "dependsOn": [
+        "dialtone-css:build",
+        "dialtone-icons:build",
+        "dialtone-tokens:build",
+        "dialtone-vue3:build"
+      ],
+      "options": {
+        "cwd": "{projectRoot}",
+        "commands": [
+          {
+            "command": "nx watch --projects=dialtone-css,dialtone-icons,dialtone-tokens,dialtone-vue3 --includeDependentProjects -- nx run \\$NX_PROJECT_NAME:build"
+          },
+          {
+            "command": "vuepress dev docs"
+          }
+        ]
+      }
     }
   }
 }

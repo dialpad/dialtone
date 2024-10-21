@@ -31,8 +31,7 @@
         @click="removeMediaItem(index)"
       >
         <template #icon>
-          <dt-icon
-            name="close"
+          <dt-icon-close
             size="200"
           />
         </template>
@@ -44,7 +43,7 @@
 <script>
 import { DtImageViewer } from '@/components/image_viewer';
 import { DtButton } from '@/components/button';
-import { DtIcon } from '@/components/icon';
+import { DtIconClose } from '@dialpad/dialtone-icons/vue3';
 
 import DtProgressBar from './progress_bar.vue';
 
@@ -54,7 +53,7 @@ export default {
   components: {
     DtImageViewer,
     DtButton,
-    DtIcon,
+    DtIconClose,
     DtProgressBar,
   },
 

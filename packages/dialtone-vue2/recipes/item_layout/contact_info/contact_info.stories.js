@@ -146,6 +146,7 @@ export const Default = {
   render: (argsData) => createRenderConfig(DtRecipeContactInfo, DtRecipeContactInfoDefaultTemplate, argsData),
 
   args: {
+    avatarIcon: 'user',
     avatarSrc: avatarImage,
     avatarSeed: 'JL',
     avatarFullName: 'Joseph Lumaban',
@@ -210,6 +211,7 @@ export const Variants = {
   render: (argsData) => createRenderConfig(DtRecipeContactInfo, DtRecipeContactInfoVariantsTemplate, argsData),
 
   args: {
+    avatarIcon: 'user',
     avatarFullName: 'Natalie Woods',
     avatarSeed: 'NW',
     avatarSize: 'lg',
