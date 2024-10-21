@@ -160,7 +160,6 @@ export async function run () {
         },
         android_compose: {
           transforms: [
-            'ts/resolveMath',
             'dt/android/compose/fonts/transformToStack',
             'dt/android/compose/fonts/weight',
             'dt/android/compose/lineHeight/percentToDecimal',
@@ -187,7 +186,7 @@ export async function run () {
               },
 
               filter: function (token) {
-                if (['dtColorGradientMagentaPurple'].includes(token.name)) return false;
+                if (token.value.startsWith('linear-gradient')) return false;
                 return token.isSource;
               },
             },
@@ -207,7 +206,7 @@ export async function run () {
                 className: `DialtoneTokens${kebabCaseToPascalCase(themeName)}`,
               },
               filter: function (token) {
-                if (['dtColorGradientMagentaPurple'].includes(token.name)) return false;
+                if (token.value.startsWith('linear-gradient')) return false;
                 return token.isSource;
               },
             },

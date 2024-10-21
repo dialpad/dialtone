@@ -435,7 +435,7 @@
           "y": "{size.200}",
           "blur": "{size.500}",
           "spread": "{size.0}",
-          "color": "rgba({color.black.900}, 0.3)",
+          "color": "#0000004d",
           "type": "dropShadow"
         }
       ],
