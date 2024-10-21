@@ -48,7 +48,8 @@
           ref="input"
           v-model="value"
           class="combobox__input"
-          :input-class="{ 'd-fc-transparent': hideInputText }"
+          :input-class="[inputClass, { 'd-fc-transparent': hideInputText }]"
+          :input-wrapper-class="inputWrapperClass"
           :aria-label="label"
           :label="labelVisible ? label : ''"
           :description="description"
@@ -335,6 +336,26 @@ export default {
      */
     chipMaxWidth: {
       type: String,
+      default: '',
+    },
+
+    /**
+     * Additional class name for the input element.
+     * Can accept String, Object, and Array, i.e. has the
+     * same API as Vue's built-in handling of the class attribute.
+     */
+    inputClass: {
+      type: [String, Object, Array],
+      default: '',
+    },
+
+    /**
+     * Additional class name for the input wrapper element.
+     * Can accept all of String, Object, and Array, i.e. has the
+     * same api as Vue's built-in handling of the class attribute.
+     */
+    inputWrapperClass: {
+      type: [String, Object, Array],
       default: '',
     },
   },
