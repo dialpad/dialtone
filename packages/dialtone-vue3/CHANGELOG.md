@@ -1,3 +1,12 @@
+## [3.156.3](https://github.com/dialpad/dialtone/compare/dialtone-vue3/v3.156.2...dialtone-vue3/v3.156.3) (2024-10-22)
+
+
+### Bug Fixes
+
+* **Avatar:** DP-113524 avatar icon not reactive ([#529](https://github.com/dialpad/dialtone/issues/529)) ([9bde6bd](https://github.com/dialpad/dialtone/commit/9bde6bdada091793335bcf2c87c2f7718e508b5e))
+* **Design Tokens:** DLT-2135 DLT-139 nix references for shadow design tokens  ([#532](https://github.com/dialpad/dialtone/issues/532)) ([b2e09c5](https://github.com/dialpad/dialtone/commit/b2e09c5ae12a4a2bbdcc21d637ff36d58f3e6c50))
+* NO-JIRA dialtone-vue incorrect build output ([#530](https://github.com/dialpad/dialtone/issues/530)) ([28e53b4](https://github.com/dialpad/dialtone/commit/28e53b422316bc9053f13f6e4c7ad62c47bc755b))
+
 ## [3.156.2](https://github.com/dialpad/dialtone/compare/dialtone-vue3/v3.156.1...dialtone-vue3/v3.156.2) (2024-10-11)
 
 
