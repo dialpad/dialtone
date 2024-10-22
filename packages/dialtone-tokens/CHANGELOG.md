@@ -1,3 +1,10 @@
+## [1.36.7](https://github.com/dialpad/dialtone/compare/dialtone-tokens/v1.36.6...dialtone-tokens/v1.36.7) (2024-10-22)
+
+
+### Bug Fixes
+
+* **Design Tokens:** DLT-2135 DLT-139 nix references for shadow design tokens  ([#532](https://github.com/dialpad/dialtone/issues/532)) ([b2e09c5](https://github.com/dialpad/dialtone/commit/b2e09c5ae12a4a2bbdcc21d637ff36d58f3e6c50))
+
 ## [1.36.6](https://github.com/dialpad/dialtone/compare/dialtone-tokens/v1.36.5...dialtone-tokens/v1.36.6) (2024-10-11)
 
 
