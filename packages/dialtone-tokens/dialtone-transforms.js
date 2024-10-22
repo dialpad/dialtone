@@ -30,7 +30,7 @@ const pxToRemTransformer = (token, options) => {
   const floatVal = parseFloat(token.value);
 
   if (isNaN(floatVal)) {
-    throwSizeError(token.name, token.value, 'rem');
+    throwSizeError(token.path, token.value, 'rem');
   }
 
   if (floatVal === 0) {
@@ -136,7 +136,7 @@ export function registerDialtoneTransforms (styleDictionary) {
       const floatVal = parseFloat(token.value);
 
       if (isNaN(floatVal)) {
-        throwSizeError(token.name, token.value, 'dp');
+        throwSizeError(token.path, token.value, 'dp');
       }
 
       return `${floatVal}.dp`;
@@ -154,7 +154,7 @@ export function registerDialtoneTransforms (styleDictionary) {
       const floatVal = parseFloat(token.value);
 
       if (isNaN(floatVal)) {
-        throwSizeError(token.name, token.value, 'sp');
+        throwSizeError(token.path, token.value, 'sp');
       }
 
       return `${floatVal}.sp`;
@@ -171,7 +171,7 @@ export function registerDialtoneTransforms (styleDictionary) {
       const floatVal = parseFloat(token.value);
 
       if (isNaN(floatVal)) {
-        throwSizeError(token.name, token.value, '%');
+        throwSizeError(token.path, token.value, '%');
       }
 
       if (floatVal === 0) {
@@ -193,7 +193,7 @@ export function registerDialtoneTransforms (styleDictionary) {
       const floatVal = parseFloat(token.value);
 
       if (isNaN(floatVal)) {
-        throwSizeError(token.name, token.value, '%');
+        throwSizeError(token.path, token.value, '%');
       }
 
       return `${floatVal}F`;
@@ -214,6 +214,7 @@ export function registerDialtoneTransforms (styleDictionary) {
   styleDictionary.registerTransform({
     name: 'dt/ios/fonts/transformToStack',
     type: 'value',
+    transitive: true,
     filter: function (token) {
       return FONT_FAMILY_IDENTIFIERS.includes(token.type);
     },
@@ -250,7 +251,7 @@ export function registerDialtoneTransforms (styleDictionary) {
       const floatVal = parseFloat(token.value);
 
       if (isNaN(floatVal)) {
-        throwSizeError(token.name, token.value, 'dp');
+        throwSizeError(token.path, token.value, 'dp');
       }
 
       return `CGFloat(${(floatVal).toFixed(2)})`;
@@ -267,7 +268,7 @@ export function registerDialtoneTransforms (styleDictionary) {
       const floatVal = parseFloat(token.value);
 
       if (isNaN(floatVal)) {
-        throwSizeError(token.name, token.value, '%');
+        throwSizeError(token.path, token.value, '%');
       }
 
       return `CGFloat(${(floatVal).toFixed(2)})`;
@@ -284,7 +285,7 @@ export function registerDialtoneTransforms (styleDictionary) {
       const floatVal = parseFloat(token.value);
 
       if (isNaN(floatVal)) {
-        throwSizeError(token.name, token.value, '%');
+        throwSizeError(token.path, token.value, '%');
       }
 
       if (floatVal === 0) {
@@ -321,7 +322,7 @@ export function registerDialtoneTransforms (styleDictionary) {
       const floatVal = parseFloat(token.value);
 
       if (isNaN(floatVal)) {
-        throwSizeError(token.name, token.value, '%');
+        throwSizeError(token.path, token.value, '%');
       }
 
       if (floatVal === 0) {

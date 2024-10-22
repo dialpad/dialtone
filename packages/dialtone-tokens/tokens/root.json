@@ -9,7 +9,7 @@
   },
   "size": {
     "base": {
-      "value": "{font.size.root} * .8",
+      "value": "{font.size.root} * 0.8",
       "type": "sizing"
     }
   },
