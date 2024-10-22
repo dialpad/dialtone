@@ -1,3 +1,11 @@
+## [8.45.3](https://github.com/dialpad/dialtone/compare/dialtone-css/v8.45.2...dialtone-css/v8.45.3) (2024-10-22)
+
+
+### Bug Fixes
+
+* **Design Tokens:** DLT-2135 DLT-139 nix references for shadow design tokens  ([#532](https://github.com/dialpad/dialtone/issues/532)) ([b2e09c5](https://github.com/dialpad/dialtone/commit/b2e09c5ae12a4a2bbdcc21d637ff36d58f3e6c50))
+* **Popover:** NO-JIRA set -webkit-app-region: no-drag ([#531](https://github.com/dialpad/dialtone/issues/531)) ([ee2d658](https://github.com/dialpad/dialtone/commit/ee2d658b1eca6bdcb002f2179f87ab8fcc2d3bb3))
+
 ## [8.45.2](https://github.com/dialpad/dialtone/compare/dialtone-css/v8.45.1...dialtone-css/v8.45.2) (2024-10-11)
 
 
