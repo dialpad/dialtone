@@ -504,7 +504,6 @@
 
   cursor: not-allowed;
   transition: none;
-  pointer-events: none;
 }
 
 //  $$  BRAND BUTTONS
@@ -715,6 +714,105 @@
 
   &__omega--xl.d-btn--icon-only {
     --button-padding-x: var(--dt-space-450);
+  }
+}
+
+//  ============================================================================
+//  $   FILTER PILL
+//  ----------------------------------------------------------------------------
+
+// ?? OWN FILE OR RETAIN WITHIN BUTTON.LESS......? **
+
+// Temporary just to hide doc site stuff when exploring filter pill ui
+body:has(.d-filter-pill) {
+  .d-root-layout__header,
+  .d-root-layout__sidebar {
+    display: none;
+  }
+}
+
+.rgeerqweerqwe {
+  position: fixed;
+  padding: var(--dt-space-600);
+  overflow: auto;
+  background-color: var(--dt-color-surface-primary);
+  inset: 0;
+}
+
+.d-filter-pill {
+  display: inline-flex;
+  gap: 0;
+
+  &--selected {
+    gap: var(--dt-space-100);
+  }
+
+  &__primary {
+    &--has-clear {
+      border-start-end-radius: 0;
+      border-end-end-radius: 0;
+    }
+
+    &--selected:not(:disabled) {
+      background-color: var(--dt-action-color-background-base-active);
+      border-color: var(--dt-color-neutral-transparent);
+
+      &:hover {
+        background-color: var(--dt-action-color-background-base-hover);
+      }
+
+      &:active {
+        background-color: var(--dt-action-color-background-base-active);
+      }
+    }
+  }
+
+  &__label {
+    display: flex;
+    gap: var(--dt-space-350);
+    max-width: var(--dt-size-875);
+  }
+
+  &__label-alpha {
+    flex: 1;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+  }
+
+  &__label-omega {
+    display: flex;
+    gap: var(--dt-space-350);
+    align-items: center;
+
+    &::before {
+      background-color: var(--button-color-text);
+      border-radius: var(--dt-size-radius-circle);
+      content: "";
+      inline-size: calc(var(--dt-size-100) * 3);
+      block-size: calc(var(--dt-size-100) * 3);
+    }
+  }
+
+  &__clear {
+    --button-padding-x: var(--dt-space-350) !important;
+
+    border-inline-start-width: 0;
+    border-start-start-radius: 0;
+    border-end-start-radius: 0;
+
+    &--selected:not(:disabled) {
+      background-color: var(--dt-action-color-background-base-active);
+      border-color: var(--dt-color-neutral-transparent);
+
+      &:hover {
+        background-color: var(--dt-action-color-background-base-hover);
+      }
+
+      &:active {
+        background-color: var(--dt-action-color-background-base-active);
+      }
+    }
   }
 }
 
