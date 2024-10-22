@@ -51,6 +51,7 @@ module.exports = {
       'Recipes/Buttons/Callbar Button: Callbar',
       'Recipes/Buttons/Callbar Button With Popover: Default',
       'Recipes/Comboboxes/Combobox Multi-Select: Default',
+      'Recipes/Comboboxes/Combobox Multi-Select: With Styled Input',
       'Recipes/Comboboxes/Combobox With Popover: Empty',
       'Recipes/Conversation View/Feed Item Row: Default',
       'Recipes/Conversation View/Feed Item Pill: Default',
