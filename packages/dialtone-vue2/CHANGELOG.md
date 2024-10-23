@@ -1,3 +1,10 @@
+# [2.164.0](https://github.com/dialpad/dialtone/compare/dialtone-vue2/v2.163.3...dialtone-vue2/v2.164.0) (2024-10-23)
+
+
+### Features
+
+* **Combobox Multi Select:** DLT-1811 add pass thorugh props to style input ([#534](https://github.com/dialpad/dialtone/issues/534)) ([126d1fc](https://github.com/dialpad/dialtone/commit/126d1fc016ea8d8a67d4ee9799b5b3f42381b925))
+
 ## [2.163.3](https://github.com/dialpad/dialtone/compare/dialtone-vue2/v2.163.2...dialtone-vue2/v2.163.3) (2024-10-22)
 
 
