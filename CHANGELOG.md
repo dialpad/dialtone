@@ -1,3 +1,16 @@
+# [9.80.0](https://github.com/dialpad/dialtone/compare/dialtone/v9.79.3...dialtone/v9.80.0) (2024-10-23)
+
+
+### Bug Fixes
+
+* **Tokens:** DLT-2135 fix remaining iOS issues ([#535](https://github.com/dialpad/dialtone/issues/535)) ([8dd82d1](https://github.com/dialpad/dialtone/commit/8dd82d1324330663c0e7a4f3390b674e4d9a6a11))
+
+
+### Features
+
+* **Combobox Multi Select:** DLT-1811 add pass thorugh props to style input ([#534](https://github.com/dialpad/dialtone/issues/534)) ([126d1fc](https://github.com/dialpad/dialtone/commit/126d1fc016ea8d8a67d4ee9799b5b3f42381b925))
+* **Icon:** DLT-2166 update zendesk icon color ([#537](https://github.com/dialpad/dialtone/issues/537)) ([6e41aa6](https://github.com/dialpad/dialtone/commit/6e41aa64626e14dfc41899841143ac2e96457b2e))
+
 ## [9.79.3](https://github.com/dialpad/dialtone/compare/dialtone/v9.79.2...dialtone/v9.79.3) (2024-10-22)
 
 
