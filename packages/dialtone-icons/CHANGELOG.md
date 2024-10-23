@@ -1,3 +1,10 @@
+# [4.28.0](https://github.com/dialpad/dialtone/compare/dialtone-icons/v4.27.2...dialtone-icons/v4.28.0) (2024-10-23)
+
+
+### Features
+
+* **Icon:** DLT-2166 update zendesk icon color ([#537](https://github.com/dialpad/dialtone/issues/537)) ([6e41aa6](https://github.com/dialpad/dialtone/commit/6e41aa64626e14dfc41899841143ac2e96457b2e))
+
 ## [4.27.2](https://github.com/dialpad/dialtone/compare/dialtone-icons/v4.27.1...dialtone-icons/v4.27.2) (2024-09-26)
 
 ## [4.27.1](https://github.com/dialpad/dialtone/compare/dialtone-icons/v4.27.0...dialtone-icons/v4.27.1) (2024-09-16)
