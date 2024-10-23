@@ -1,3 +1,10 @@
+## [1.36.8](https://github.com/dialpad/dialtone/compare/dialtone-tokens/v1.36.7...dialtone-tokens/v1.36.8) (2024-10-23)
+
+
+### Bug Fixes
+
+* **Tokens:** DLT-2135 fix remaining iOS issues ([#535](https://github.com/dialpad/dialtone/issues/535)) ([8dd82d1](https://github.com/dialpad/dialtone/commit/8dd82d1324330663c0e7a4f3390b674e4d9a6a11))
+
 ## [1.36.7](https://github.com/dialpad/dialtone/compare/dialtone-tokens/v1.36.6...dialtone-tokens/v1.36.7) (2024-10-22)
 
 
