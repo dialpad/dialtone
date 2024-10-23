@@ -377,4 +377,8 @@ export const WithLengthValidation = {
 
 export const SearchVariant = {
   render: (argsData) => createRenderConfig(DtInput, InputSearchVariant, argsData),
+
+  args: {
+    type: 'search',
+  },
 };
