@@ -353,7 +353,7 @@ export default {
 
 <style lang="less">
 .dt-recipe--callbar-button-with-popover--arrow {
-  margin-top: var(--dt-space-350-negative);
+  margin-top: var(--dt-space-450);
   margin-left: calc(var(--dt-space-300-negative) * 5);
   width: var(--dt-size-500);
   height: var(--dt-size-500);
@@ -401,6 +401,6 @@ export default {
 
 .dt-recipe--callbar-button-with-popover {
   display: flex;
-  align-items: center;
+  align-items: start;
 }
 </style>
