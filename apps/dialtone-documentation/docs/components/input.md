@@ -466,24 +466,14 @@ const validate = () => {
 
 ### Search
 
-<dt-notice
-  kind="warning"
-  :hide-close="true"
-  class="d-wmx100p d-my16"
->
-  <template #default>
-    The use of <code>type="search"</code> is not recommended as it may cause a style collision with a browser's native Shadow DOM, e.g. its clearing functionality. Instead, refer to the below example code if you need to implement a search input with clearing functionality.
-  </template>
-</dt-notice>
-
-Use `type="text"` with a clear button in the `icon` slot. When the input is not empty, the clear button will render and will clears the input field when triggered.
+Use `type="search"` with a clear button in the `icon` slot. When the input is not empty, the clear button will render and will clear the input field when triggered.
 
 <code-well-header>
   <div class="d-w100p">
     <dt-input
       aria-label="Search items"
       placeholder="Search Items"
-      type="text"
+      type="search"
       v-model="inputValue"
     >
       <template #leftIcon="{ iconSize }">
@@ -511,7 +501,7 @@ Use `type="text"` with a clear button in the `icon` slot. When the input is not 
 htmlCode='
 <div class="d-input__wrapper">
   <span class="base-input__icon--left d-input-icon--left d-input-icon">...</span>
-  <input type="text" autocomplete="off" class="base-input__input d-input d-input-icon--left d-input-icon--right" placeholder="Search Items">
+  <input type="search" autocomplete="off" class="base-input__input d-input d-input-icon--left d-input-icon--right" placeholder="Search Items">
   <span class="base-input__icon--right d-input-icon--right d-input-icon undefined" data-qa="dt-input-right-icon-wrapper">
     <button class="base-button__button d-btn d-btn--muted d-btn--xs d-btn--circle d-btn--icon-only" data-qa="dt-button" type="button" aria-label="Clear search">
       <span class="base-button__icon d-btn__icon d-btn__icon--left">...</span>
@@ -523,7 +513,7 @@ vueCode='
 <dt-input
   aria-label="Search items"
   placeholder="Search Items"
-  type="text"
+  type="search"
   v-model="inputValue"
 >
   <template #leftIcon="{ iconSize }">

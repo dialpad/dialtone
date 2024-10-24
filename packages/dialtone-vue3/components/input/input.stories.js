@@ -375,4 +375,7 @@ const SearchVariantTemplate = (args, { argTypes }) => createTemplateFromVueFile(
 
 export const SearchVariant = {
   render: SearchVariantTemplate,
+  args: {
+    type: 'search',
+  },
 };
