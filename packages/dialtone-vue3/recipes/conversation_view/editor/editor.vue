@@ -164,6 +164,7 @@
         :output-format="htmlOutputFormat"
         :auto-focus="autoFocus"
         :placeholder="placeholder"
+        :use-default-paste-handler="useDefaultPasteHandler"
         :allow-line-breaks="true"
         :link="true"
         v-bind="$attrs"
@@ -460,6 +461,14 @@ export default {
         setLinkTitle: 'Add a link',
         setLinkInputAriaLabel: 'Input field to add link',
       }),
+    },
+
+    /**
+     * Use default paste handler.
+     */
+    useDefaultPasteHandler: {
+      type: Boolean,
+      default: false,
     },
   },
 

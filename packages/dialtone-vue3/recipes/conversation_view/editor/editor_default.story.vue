@@ -28,6 +28,7 @@
       :show-quote-button="$attrs.showQuoteButton"
       :show-quick-replies-button="$attrs.showQuickRepliesButton"
       :show-code-block-button="$attrs.showCodeBlockButton"
+      :use-default-paste-handler="$attrs.useDefaultPasteHandler"
       @focus="$attrs.onFocus"
       @blur="$attrs.onBlur"
       @input="$attrs.onInput"
