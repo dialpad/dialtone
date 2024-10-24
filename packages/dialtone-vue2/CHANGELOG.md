@@ -1,3 +1,10 @@
+## [2.164.2](https://github.com/dialpad/dialtone/compare/dialtone-vue2/v2.164.1...dialtone-vue2/v2.164.2) (2024-10-24)
+
+
+### Bug Fixes
+
+* **Rich Text Editor, Editor:** DLT-2175 editor loses text formatting while pasting ([#543](https://github.com/dialpad/dialtone/issues/543)) ([fd719a4](https://github.com/dialpad/dialtone/commit/fd719a46dbe5f32f1a953a64d0702e0086341281))
+
 ## [2.164.1](https://github.com/dialpad/dialtone/compare/dialtone-vue2/v2.164.0...dialtone-vue2/v2.164.1) (2024-10-24)
 
 
