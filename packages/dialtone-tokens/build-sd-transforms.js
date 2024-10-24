@@ -166,6 +166,7 @@ export async function run () {
             'dt/android/compose/opacity/percentToFloat',
             'dt/android/compose/size/pxToDp',
             'dt/android/compose/size/pxToSp',
+            'dt/android/compose/size/resolveMath',
             'dt/android/compose/color',
             'dt/stringify',
             'attribute/cti',
