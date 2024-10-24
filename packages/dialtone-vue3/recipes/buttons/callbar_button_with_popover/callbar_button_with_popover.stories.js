@@ -213,6 +213,20 @@ export default {
 };
 
 // Templates
+const defaultArgs = {
+  default: 'Button',
+  tooltip: 'Tooltip Text',
+  ariaLabel: 'Button',
+  arrowButtonLabel: 'Open popover',
+  content: 'Popover body content',
+  contentClass: ['d-h464', 'd-w512'],
+  headerContent: 'Header content',
+  showCloseButton: true,
+  forceShowArrow: false,
+  openPopover: false,
+  icon: 'dialpad-ai',
+};
+
 const DefaultTemplate = (args, { argTypes }) => createTemplateFromVueFile(
   args,
   argTypes,
@@ -226,20 +240,7 @@ const VariantsTemplate = (args, { argTypes }) => createTemplateFromVueFile(
 
 export const Default = {
   render: DefaultTemplate,
-
-  args: {
-    default: 'Button',
-    tooltip: 'Tooltip Text',
-    ariaLabel: 'Button',
-    arrowButtonLabel: 'Open popover',
-    content: 'Popover body content',
-    contentClass: ['d-h464', 'd-w512'],
-    headerContent: 'Header content',
-    showCloseButton: true,
-    forceShowArrow: false,
-    openPopover: false,
-    icon: 'dialpad-ai',
-  },
+  args: defaultArgs,
 };
 
 export const Variants = {
@@ -253,5 +254,13 @@ export const Variants = {
         openPopover: true,
       },
     },
+  },
+};
+
+export const WithLongText = {
+  render: DefaultTemplate,
+  args: {
+    ...defaultArgs,
+    default: 'Button with long text',
   },
 };

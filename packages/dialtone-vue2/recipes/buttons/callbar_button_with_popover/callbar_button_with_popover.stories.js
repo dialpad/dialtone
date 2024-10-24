@@ -212,23 +212,25 @@ export default {
   excludeStories: /.*Data$/,
 };
 
+const defaultArgs = {
+  default: 'Button',
+  tooltip: 'Tooltip Text',
+  ariaLabel: 'Button',
+  arrowButtonLabel: 'Open popover',
+  content: 'Popover body content',
+  contentClass: ['d-h464', 'd-w512'],
+  headerContent: 'Header content',
+  showCloseButton: true,
+  forceShowArrow: false,
+  openPopover: false,
+  icon: 'dialpad-ai',
+};
+
 export const Default = {
   render: (argsData) =>
     createRenderConfig(DtRecipeCallbarButtonWithPopover, DtRecipeCallbarButtonWithPopoverDefaultTemplate, argsData),
 
-  args: {
-    default: 'Button',
-    tooltip: 'Tooltip Text',
-    ariaLabel: 'Button',
-    arrowButtonLabel: 'Open popover',
-    content: 'Popover body content',
-    contentClass: ['d-h464', 'd-w512'],
-    headerContent: 'Header content',
-    showCloseButton: true,
-    forceShowArrow: false,
-    openPopover: false,
-    icon: 'dialpad-ai',
-  },
+  args: defaultArgs,
 };
 
 export const Variants = {
@@ -243,5 +245,15 @@ export const Variants = {
         openPopover: true,
       },
     },
+  },
+};
+
+export const WithLongText = {
+  render: (argsData) =>
+    createRenderConfig(DtRecipeCallbarButtonWithPopover, DtRecipeCallbarButtonWithPopoverDefaultTemplate, argsData),
+
+  args: {
+    ...defaultArgs,
+    default: 'Button with long text',
   },
 };
