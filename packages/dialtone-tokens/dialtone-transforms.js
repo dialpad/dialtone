@@ -169,7 +169,7 @@ export function registerDialtoneTransforms (styleDictionary) {
       return [...SPACING_IDENTIFIERS, ...SIZE_IDENTIFIERS, ...FONT_SIZE_IDENTIFIERS].includes(token.type);
     },
     transform: (token) => {
-      // replace dp or sp with empty string
+      // replace unmathable characters with empty string
       let unit;
       if (token.value.includes('.dp')) unit = 'dp';
       if (token.value.includes('.sp')) unit = 'sp';
@@ -177,7 +177,6 @@ export function registerDialtoneTransforms (styleDictionary) {
       const mathString = token.value.replace(/\.dp|\.sp|\.em/g, '');
       // eslint-disable-next-line no-eval
       const result = eval(mathString);
-
       return `${result}.${unit}`;
     },
   });
