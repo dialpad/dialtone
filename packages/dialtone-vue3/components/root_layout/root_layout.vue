@@ -19,24 +19,28 @@
         if you want a fixed height. -->
       <slot name="header" />
     </header>
-    <aside
-      ref="root-layout-sidebar"
-      tabindex="0"
-      :class="['d-root-layout__sidebar', sidebarClass]"
-      data-qa="dt-root-layout-sidebar"
-    >
-      <!-- @slot Slot for sidebar content, be sure to set a width on the element within this. -->
-      <slot name="sidebar" />
-    </aside>
-    <main
-      ref="root-layout-content"
-      :class="['d-root-layout__content', contentClass]"
-      data-qa="dt-root-layout-content"
-      tabindex="0"
-    >
-      <!-- @slot Slot for the main content -->
-      <slot />
-    </main>
+    <div v-dt-scrollbar>
+      <aside
+        ref="root-layout-sidebar"
+        tabindex="0"
+        :class="['d-root-layout__sidebar', sidebarClass]"
+        data-qa="dt-root-layout-sidebar"
+      >
+        <!-- @slot Slot for sidebar content, be sure to set a width on the element within this. -->
+        <slot name="sidebar" />
+      </aside>
+    </div>
+    <div v-dt-scrollbar>
+      <main
+        ref="root-layout-content"
+        :class="['d-root-layout__content', contentClass]"
+        data-qa="dt-root-layout-content"
+        tabindex="0"
+      >
+        <!-- @slot Slot for the main content -->
+        <slot />
+      </main>
+    </div>
     <footer
       :class="['d-root-layout__footer', footerClass]"
       data-qa="dt-root-layout-footer"
