@@ -1,3 +1,10 @@
+## [2.164.1](https://github.com/dialpad/dialtone/compare/dialtone-vue2/v2.164.0...dialtone-vue2/v2.164.1) (2024-10-24)
+
+
+### Bug Fixes
+
+* **Callbar Button With Popover:** DLT-2129 text overlapping anchor ([#536](https://github.com/dialpad/dialtone/issues/536)) ([673e5f1](https://github.com/dialpad/dialtone/commit/673e5f149e762037d50c26221ec51a09170f2fcb))
+
 # [2.164.0](https://github.com/dialpad/dialtone/compare/dialtone-vue2/v2.163.3...dialtone-vue2/v2.164.0) (2024-10-23)
 
 
