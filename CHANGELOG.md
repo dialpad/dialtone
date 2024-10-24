@@ -1,3 +1,16 @@
+# [9.81.0](https://github.com/dialpad/dialtone/compare/dialtone/v9.80.0...dialtone/v9.81.0) (2024-10-24)
+
+
+### Bug Fixes
+
+* **Callbar Button With Popover:** DLT-2129 text overlapping anchor ([#536](https://github.com/dialpad/dialtone/issues/536)) ([673e5f1](https://github.com/dialpad/dialtone/commit/673e5f149e762037d50c26221ec51a09170f2fcb))
+* **Tokens:** NO-JIRA resolveMath for android ([#540](https://github.com/dialpad/dialtone/issues/540)) ([e274816](https://github.com/dialpad/dialtone/commit/e27481611785f3147bfacce5ae5cddf0e30aaec2))
+
+
+### Features
+
+* **Tokens:** DLT-2040 create debug theme ([#539](https://github.com/dialpad/dialtone/issues/539)) ([2b848f7](https://github.com/dialpad/dialtone/commit/2b848f7ea3a1d8d420827a1c31e2e9240eccdb8c))
+
 # [9.80.0](https://github.com/dialpad/dialtone/compare/dialtone/v9.79.3...dialtone/v9.80.0) (2024-10-23)
 
 
