@@ -35,6 +35,7 @@ export default defineConfig({
           __dirname,
           './themes/expressive-sm-dark.js',
         ),
+        'themes/debug': resolve(__dirname, './themes/debug.js'),
       },
       formats: ['es', 'cjs'],
     },

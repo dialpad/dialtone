@@ -25,6 +25,7 @@
       "options": {
         "cwd": "{projectRoot}",
         "commands": [
+          "rm -rf dist",
           "node ./build.js",
           "pnpm exec vite build"
         ],
