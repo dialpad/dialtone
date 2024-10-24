@@ -162,6 +162,26 @@ export function registerDialtoneTransforms (styleDictionary) {
   });
 
   styleDictionary.registerTransform({
+    name: 'dt/android/compose/size/resolveMath',
+    type: 'value',
+    transitive: true,
+    filter: function (token) {
+      return [...SPACING_IDENTIFIERS, ...SIZE_IDENTIFIERS, ...FONT_SIZE_IDENTIFIERS].includes(token.type);
+    },
+    transform: (token) => {
+      // replace unmathable characters with empty string
+      let unit;
+      if (token.value.includes('.dp')) unit = 'dp';
+      if (token.value.includes('.sp')) unit = 'sp';
+      if (token.value.includes('.em')) unit = 'em';
+      const mathString = token.value.replace(/\.dp|\.sp|\.em/g, '');
+      // eslint-disable-next-line no-eval
+      const result = eval(mathString);
+      return `${result}.${unit}`;
+    },
+  });
+
+  styleDictionary.registerTransform({
     name: 'dt/android/compose/lineHeight/percentToDecimal',
     type: 'value',
     filter: function (token) {
