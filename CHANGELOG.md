@@ -1,3 +1,11 @@
+## [9.79.2-beta.1](https://github.com/dialpad/dialtone/compare/dialtone/v9.79.1...dialtone/v9.79.2-beta.1) (2024-10-25)
+
+
+### Bug Fixes
+
+* DLT-1548 fix opacity classes selectors ([#520](https://github.com/dialpad/dialtone/issues/520)) ([1e6ef93](https://github.com/dialpad/dialtone/commit/1e6ef93933ee3dad7fa0c0cea5ab79ef7c9787eb))
+* **Rich Text Editor:** DLT-2107 message input recipe updates ([#522](https://github.com/dialpad/dialtone/issues/522)) ([639a72e](https://github.com/dialpad/dialtone/commit/639a72e2a88cbf3c41a93ffa23b2229fe383e2ce))
+
 ## [9.79.1](https://github.com/dialpad/dialtone/compare/dialtone/v9.79.0...dialtone/v9.79.1) (2024-10-09)
 
 
