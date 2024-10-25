@@ -1,8 +1,9 @@
 <script>
 import { DtEmoji } from '../emoji';
-import { findEmojis, findShortCodes } from '@/common/emoji';
+import { findShortCodes } from '@/common/emoji';
 import { h } from 'vue';
 import { ICON_SIZE_MODIFIERS } from '@/components/icon/icon_constants';
+import { emojiPattern } from 'regex-combined-emojis';
 
 /**
  * Wrapper to find and replace shortcodes like :smile: or unicode chars such as 😄 with our custom Emojis implementation.
@@ -58,7 +59,7 @@ export default {
       return items
         .filter(item => item.trim() !== '')
         .map((item) => {
-          if (replaceList.includes(item)) {
+          if (replaceList.includes(item) || regexp.test(item)) {
             return h(DtEmoji, { code: item, size: this.size });
           }
           return h('span', { class: 'd-emoji-text-wrapper__text' }, item);
@@ -91,9 +92,8 @@ export default {
      */
     searchCodes (textContent) {
       const shortcodes = findShortCodes(textContent);
-      const emojis = findEmojis(textContent);
 
-      const replaceList = [...shortcodes, ...emojis];
+      const replaceList = [...shortcodes, emojiPattern];
       if (replaceList.length === 0) return textContent;
       return this.replaceDtEmojis(replaceList, textContent);
     },
