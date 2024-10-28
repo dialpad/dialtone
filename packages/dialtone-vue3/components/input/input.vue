@@ -163,7 +163,7 @@ export default {
     /**
      * Type of the input.
      * When `textarea` a `<textarea>` element will be rendered instead of an `<input>` element.
-     * @values text, password, email, number, textarea, date, time, file, tel
+     * @values text, password, email, number, textarea, date, time, file, tel, search
      * @default 'text'
      */
     type: {
