@@ -6,6 +6,7 @@ export const DtScrollbarDirective = {
     OverlayScrollbars.plugin(ClickScrollPlugin);
     Vue.directive('dt-scrollbar', {
       inserted (el, binding) {
+        if (binding.value === false) return;
         OverlayScrollbars({
           target: el,
           elements: {

@@ -6,6 +6,7 @@ export const DtScrollbarDirective = {
     OverlayScrollbars.plugin(ClickScrollPlugin);
     app.directive('dt-scrollbar', {
       mounted (el, binding) {
+        if (binding.value === false) return;
         OverlayScrollbars({
           target: el,
           elements: {
