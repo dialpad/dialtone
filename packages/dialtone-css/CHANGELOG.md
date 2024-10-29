@@ -1,3 +1,10 @@
+# [8.46.0](https://github.com/dialpad/dialtone/compare/dialtone-css/v8.45.3...dialtone-css/v8.46.0) (2024-10-29)
+
+
+### Features
+
+* **Input:** DLT-2080 add type search to input ([#538](https://github.com/dialpad/dialtone/issues/538)) ([c110325](https://github.com/dialpad/dialtone/commit/c110325c2569cf44268752cb39001cfb5751ce58))
+
 ## [8.45.3](https://github.com/dialpad/dialtone/compare/dialtone-css/v8.45.2...dialtone-css/v8.45.3) (2024-10-22)
 
 
