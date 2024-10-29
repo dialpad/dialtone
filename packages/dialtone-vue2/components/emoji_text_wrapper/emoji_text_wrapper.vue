@@ -58,6 +58,9 @@ export default {
       return items
         .filter(item => item.trim() !== '')
         .map((item) => {
+          // Reset the regexp index to 0 to start from the beginning
+          // Otherwise, it will start from the last index
+          regexp.lastIndex = 0;
           if (replaceList.includes(item) || regexp.test(item)) {
             return this.$createElement(DtEmoji, {
               props: { code: item, size: this.size },
