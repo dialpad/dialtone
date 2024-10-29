@@ -1,3 +1,10 @@
+# [2.165.0](https://github.com/dialpad/dialtone/compare/dialtone-vue2/v2.164.2...dialtone-vue2/v2.165.0) (2024-10-29)
+
+
+### Features
+
+* **Input:** DLT-2080 add type search to input ([#538](https://github.com/dialpad/dialtone/issues/538)) ([c110325](https://github.com/dialpad/dialtone/commit/c110325c2569cf44268752cb39001cfb5751ce58))
+
 ## [2.164.2](https://github.com/dialpad/dialtone/compare/dialtone-vue2/v2.164.1...dialtone-vue2/v2.164.2) (2024-10-24)
 
 
