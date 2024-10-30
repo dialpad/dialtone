@@ -3,7 +3,7 @@
   "version": "1.1.5",
   "description": "PostCSS plugin for creating responsive variations from a list of classes",
   "scripts": {
-    "test": "jest --coverage",
+    "test": "jest",
     "lint": "eslint . --fix"
   },
   "files": ["index.js"],
