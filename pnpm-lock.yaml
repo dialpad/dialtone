@@ -89,7 +89,7 @@ importers:
         specifier: 0.6.2
         version: 0.6.2
       emoji-toolkit:
-        specifier: '8'
+        specifier: 8.0.0
         version: 8.0.0
       overlayscrollbars:
         specifier: 2.10.0
