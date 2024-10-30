@@ -483,7 +483,7 @@ const handleKeyDownFilteredEmojis = (event, indexEmoji, emoji) => {
       emits('focus-skin-selector');
       break;
     case 'Enter':
-      selectEmoji(emoji);
+      selectEmoji({ ...emoji, shift_key: event.shiftKey });
       break;
     default:
       break;
@@ -519,7 +519,7 @@ const handleKeyDown = (event, indexTab, indexEmoji, emoji) => {
       break;
 
     case 'Enter':
-      selectEmoji(emoji);
+      selectEmoji({ ...emoji, shift_key: event.shiftKey });
       break;
 
     default:

@@ -471,7 +471,7 @@ export default {
       }
 
       if (event.key === 'Enter') {
-        this.$emit('selected-emoji', emoji);
+        this.$emit('selected-emoji', { ...emoji, shift_key: event.shiftKey });
       }
     },
 
@@ -566,7 +566,7 @@ export default {
       }
 
       if (event.key === 'Enter') {
-        this.$emit('selected-emoji', emoji);
+        this.$emit('selected-emoji', { ...emoji, shift_key: event.shiftKey });
       }
     },
 
