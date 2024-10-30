@@ -22,6 +22,18 @@
         "command": "pnpm publish --filter ./packages/dialtone-vue2"
       }
     },
+    "pack": {
+      "executor": "nx:run-commands",
+      "dependsOn": [
+        "build",
+        "dialtone-vue3:build",
+        "dialtone-tokens:build"
+      ],
+      "options": {
+        "cwd": "{projectRoot}/vscode",
+        "command": "pnpm vsce package --pre-release"
+      }
+    },
     "release": {
       "executor": "nx:run-commands",
       "options": {

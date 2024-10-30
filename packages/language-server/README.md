@@ -18,7 +18,7 @@ This is the Dialtone language tools based on Volar Framework.
 
 ## Running the Sample
 
-- Run `pnpm install` in this folder. This installs all necessary npm modules in both the client and server folder
+- Run `pnpm install`. This installs all necessary npm modules in both the client and server folder
 - Open VS Code on this folder.
 - Switch to the Debug viewlet.
 - Select `Launch Client` from the drop down.
@@ -30,8 +30,8 @@ This is the Dialtone language tools based on Volar Framework.
 
 ## Build .vsix
 
-- Run `pnpm run pack` in this folder
-- `packages/vscode/vscode-html1-0.0.1.vsix` will be created, and you can manual install it to VSCode.
+- Run `pnpm nx run dialtone-language-server:pack` in this folder
+- `vscode/vscode-dialtone-X.X.X.vsix` will be created, and you can manual install it to VSCode.
 
 ## References
 

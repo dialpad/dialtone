@@ -1,6 +1,6 @@
 {
 	"private": true,
-	"name": "@dialpad/vscode-dialtone",
+	"name": "vscode-dialtone",
 	"version": "0.0.1",
 	"categories": [
 		"Programming Languages"
@@ -28,8 +28,7 @@
 	},
 	"scripts": {
 		"build": "node scripts/build -- --minify",
-		"watch": "npm run build -- --watch",
-		"pack": "npm run build && vsce package --pre-release"
+		"watch": "npm run build -- --watch"
 	},
 	"devDependencies": {
 		"@dialpad/dialtone-language-server": "workspace:*",
@@ -38,5 +37,11 @@
 		"@volar/vscode": "~2.4.0",
 		"esbuild": "latest",
 		"vsce": "latest"
+	},
+	"license": "MIT",
+	"repository": {
+		"type": "git",
+		"url": "git+ssh://git@github.com/dialpad/dialtone.git",
+		"directory": "packages/language-server"
 	}
 }
