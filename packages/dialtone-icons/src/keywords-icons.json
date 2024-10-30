@@ -324,6 +324,13 @@
         "ai",
         "sparkle"
       ],
+      "dialpad-WFM": [
+        "workforce",
+        "surfboard",
+        "work",
+        "force",
+        "management"
+      ],
       "dp-phone": [
         "call",
         "dialpad"
@@ -1548,13 +1555,6 @@
         "purchase",
         "payment",
         "cc"
-      ],
-      "dialpad-WFM": [
-        "workforce",
-        "surfboard",
-        "work",
-        "force",
-        "management"
       ],
       "dissatisfied-filled": [
         "unhappy",
