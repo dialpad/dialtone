@@ -1,5 +1,5 @@
 import { emojiPattern } from 'regex-combined-emojis';
-import { emojisIndexed } from '@dialpad/dialtone-emojis';
+import emojiJsonLocal from 'emoji-toolkit/emoji_strategy.json' with { type: 'json' };
 
 export const emojiRegex = new RegExp(emojiPattern, 'g');
 export const emojiVersion = '8.0';
@@ -14,7 +14,7 @@ export let emojiFileExtensionSmall = '.png';
 export let emojiImageUrlLarge = defaultEmojiAssetUrl;
 export let emojiFileExtensionLarge = '.png';
 
-export const emojiJson = emojisIndexed;
+export const emojiJson = emojiJsonLocal;
 
 export const emojiShortCodeRegex = /(^| |(?<=:))(:\w+:)/g;
 
@@ -175,6 +175,7 @@ export function codeToEmojiData (code) {
     return shortcodeToEmojiData(code);
   } else {
     const unicodeString = unicodeToString(code);
+    console.log(unicodeString);
     const result = emojiJson[unicodeString];
     if (result) result.key = unicodeString;
     return result;

@@ -88,6 +88,9 @@ importers:
       docopt:
         specifier: 0.6.2
         version: 0.6.2
+      emoji-toolkit:
+        specifier: '8'
+        version: 8.0.0
       overlayscrollbars:
         specifier: 2.10.0
         version: 2.10.0
@@ -169,10 +172,10 @@ importers:
         version: 7.6.20(react-dom@16.14.0(react@16.14.0))(react@16.14.0)
       '@vitejs/plugin-vue':
         specifier: ^5.0.3
-        version: 5.1.4(vite@5.4.2(@types/node@20.16.5)(less@4.2.0)(sass@1.69.5)(sugarss@2.0.0)(terser@5.34.1))(vue@3.4.15(typescript@5.4.2))
+        version: 5.1.4(vite@5.4.2(@types/node@20.16.5)(less@4.2.0)(sass@1.69.5)(sugarss@2.0.0)(terser@5.34.1))
       '@vitejs/plugin-vue2':
         specifier: ^2.3.1
-        version: 2.3.1(vite@5.4.2(@types/node@20.16.5)(less@4.2.0)(sass@1.69.5)(sugarss@2.0.0)(terser@5.34.1))(vue@3.4.15(typescript@5.4.2))
+        version: 2.3.1(vite@5.4.2(@types/node@20.16.5)(less@4.2.0)(sass@1.69.5)(sugarss@2.0.0)(terser@5.34.1))
       '@vue/tsconfig':
         specifier: ^0.4.0
         version: 0.4.0
@@ -355,10 +358,10 @@ importers:
         version: 1.0.4(@types/node@20.16.5)(jsdom@24.0.0)(less@4.2.0)(sass@1.69.5)(sugarss@2.0.0)(terser@5.34.1)
       vue-docgen-api:
         specifier: ^4.75.0
-        version: 4.75.0(vue@3.4.15(typescript@5.4.2))
+        version: 4.75.0(vue@3.4.15(typescript@5.6.3))
       vue-template-compiler:
         specifier: ^2.7.16
-        version: 2.7.16(vue@3.4.15(typescript@5.4.2))
+        version: 2.7.16(vue@2.7.16)
       wait-on:
         specifier: ^7.2.0
         version: 7.2.0
@@ -7380,6 +7383,9 @@ packages:
 
   emoji-regex@9.2.2:
     resolution: {integrity: sha512-L18DaJsXSUk2+42pv8mLs5jJT2hqFkFE4j21wOmgbUqsZ2hL72NsUU785g9RXgo3s0ZNgVl42TiHp3ZtOv/Vyg==}
+
+  emoji-toolkit@8.0.0:
+    resolution: {integrity: sha512-Vz8YIqQJsQ+QZ4yuKMMzliXceayqfWbNjb6bST+vm77QAhU2is3I+/PRxrNknW+q1bvHHMgjLCQXxzINWLVapg==}
 
   emojis-list@3.0.0:
     resolution: {integrity: sha512-/kyM18EfinwXZbno9FyUGeFh87KC8HRQBQGildHZbEuRyWFOmv1U10o9BBp8XVZDVNNuQKyIGIu5ZYAAXJ0V2Q==}
@@ -15320,8 +15326,8 @@ packages:
   vue-component-type-helpers@1.8.24:
     resolution: {integrity: sha512-lqWs/7fdRXoSBAlbouHBX+LNuaY6gI9xWW34m/ZIz9zVPYHEyw0b2/zaCBwlKx0NtKTeF/6pOpvrxVkh7nhIYg==}
 
-  vue-component-type-helpers@2.1.8:
-    resolution: {integrity: sha512-ii36gDzrYAfOQIkOlo44yceDdT5269gKmNGxf07Qx6seH2U50+tQ2ol02XLhYPmxrh6YabAsOdte8WDrpaO6Tw==}
+  vue-component-type-helpers@2.1.10:
+    resolution: {integrity: sha512-lfgdSLQKrUmADiSV6PbBvYgQ33KF3Ztv6gP85MfGaGaSGMTXORVaHT1EHfsqCgzRNBstPKYDmvAV9Do5CmJ07A==}
 
   vue-demi@0.14.7:
     resolution: {integrity: sha512-EOG8KXDQNwkJILkx/gPcoL/7vH+hORoBaKgGe+6W7VFMvCYJfmF2dGbvgDroVnI8LU7/kTu8mbjRZGBU1z9NTA==}
@@ -20127,7 +20133,7 @@ snapshots:
       ts-dedent: 2.2.0
       type-fest: 2.19.0
       vue: 3.4.15(typescript@5.6.3)
-      vue-component-type-helpers: 2.1.8
+      vue-component-type-helpers: 2.1.10
     transitivePeerDependencies:
       - encoding
       - supports-color
@@ -20703,7 +20709,7 @@ snapshots:
   '@types/vinyl@2.0.12':
     dependencies:
       '@types/expect': 1.20.4
-      '@types/node': 20.16.5
+      '@types/node': 22.8.4
 
   '@types/wait-on@5.3.4':
     dependencies:
@@ -20985,10 +20991,9 @@ snapshots:
 
   '@ungap/structured-clone@1.2.0': {}
 
-  '@vitejs/plugin-vue2@2.3.1(vite@5.4.2(@types/node@20.16.5)(less@4.2.0)(sass@1.69.5)(sugarss@2.0.0)(terser@5.34.1))(vue@3.4.15(typescript@5.4.2))':
+  '@vitejs/plugin-vue2@2.3.1(vite@5.4.2(@types/node@20.16.5)(less@4.2.0)(sass@1.69.5)(sugarss@2.0.0)(terser@5.34.1))':
     dependencies:
       vite: 5.4.2(@types/node@20.16.5)(less@4.2.0)(sass@1.69.5)(sugarss@2.0.0)(terser@5.34.1)
-      vue: 3.4.15(typescript@5.4.2)
 
   '@vitejs/plugin-vue@4.6.2(vite@4.0.5(@types/node@22.8.4)(less@4.2.0)(sass@1.69.5)(sugarss@2.0.0)(terser@5.34.1))(vue@3.4.15(typescript@5.6.3))':
     dependencies:
@@ -21000,10 +21005,9 @@ snapshots:
       vite: 5.4.2(@types/node@22.8.4)(less@4.2.0)(sass@1.69.5)(sugarss@2.0.0)(terser@5.34.1)
       vue: 3.4.15(typescript@5.6.3)
 
-  '@vitejs/plugin-vue@5.1.4(vite@5.4.2(@types/node@20.16.5)(less@4.2.0)(sass@1.69.5)(sugarss@2.0.0)(terser@5.34.1))(vue@3.4.15(typescript@5.4.2))':
+  '@vitejs/plugin-vue@5.1.4(vite@5.4.2(@types/node@20.16.5)(less@4.2.0)(sass@1.69.5)(sugarss@2.0.0)(terser@5.34.1))':
     dependencies:
       vite: 5.4.2(@types/node@20.16.5)(less@4.2.0)(sass@1.69.5)(sugarss@2.0.0)(terser@5.34.1)
-      vue: 3.4.15(typescript@5.4.2)
 
   '@vitest/expect@1.0.4':
     dependencies:
@@ -24168,6 +24172,8 @@ snapshots:
   emoji-regex@8.0.0: {}
 
   emoji-regex@9.2.2: {}
+
+  emoji-toolkit@8.0.0: {}
 
   emojis-list@3.0.0: {}
 
@@ -33763,7 +33769,7 @@ snapshots:
 
   vue-component-type-helpers@1.8.24: {}
 
-  vue-component-type-helpers@2.1.8: {}
+  vue-component-type-helpers@2.1.10: {}
 
   vue-demi@0.14.7(vue@3.4.15(typescript@5.6.3)):
     dependencies:
@@ -33783,21 +33789,6 @@ snapshots:
       ts-map: 1.0.3
       vue: 2.7.16
       vue-inbrowser-compiler-independent-utils: 4.71.1(vue@2.7.16)
-
-  vue-docgen-api@4.75.0(vue@3.4.15(typescript@5.4.2)):
-    dependencies:
-      '@babel/parser': 7.23.9
-      '@babel/types': 7.23.0
-      '@vue/compiler-dom': 3.4.15
-      '@vue/compiler-sfc': 3.4.15
-      ast-types: 0.16.1
-      hash-sum: 2.0.0
-      lru-cache: 8.0.5
-      pug: 3.0.2
-      recast: 0.23.4
-      ts-map: 1.0.3
-      vue: 3.4.15(typescript@5.4.2)
-      vue-inbrowser-compiler-independent-utils: 4.71.1(vue@3.4.15(typescript@5.4.2))
 
   vue-docgen-api@4.75.0(vue@3.4.15(typescript@5.6.3)):
     dependencies:
@@ -33832,10 +33823,6 @@ snapshots:
   vue-inbrowser-compiler-independent-utils@4.71.1(vue@2.7.16):
     dependencies:
       vue: 2.7.16
-
-  vue-inbrowser-compiler-independent-utils@4.71.1(vue@3.4.15(typescript@5.4.2)):
-    dependencies:
-      vue: 3.4.15(typescript@5.4.2)
 
   vue-inbrowser-compiler-independent-utils@4.71.1(vue@3.4.15(typescript@5.6.3)):
     dependencies:
@@ -33933,12 +33920,6 @@ snapshots:
       de-indent: 1.0.2
       he: 1.2.0
       vue: 2.7.16
-
-  vue-template-compiler@2.7.16(vue@3.4.15(typescript@5.4.2)):
-    dependencies:
-      de-indent: 1.0.2
-      he: 1.2.0
-      vue: 3.4.15(typescript@5.4.2)
 
   vue-template-compiler@2.7.16(vue@3.4.15(typescript@5.6.3)):
     dependencies:
