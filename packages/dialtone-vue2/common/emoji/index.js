@@ -175,7 +175,6 @@ export function codeToEmojiData (code) {
     return shortcodeToEmojiData(code);
   } else {
     const unicodeString = unicodeToString(code);
-    console.log(unicodeString);
     const result = emojiJson[unicodeString];
     if (result) result.key = unicodeString;
     return result;
