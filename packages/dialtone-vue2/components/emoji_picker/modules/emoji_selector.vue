@@ -44,7 +44,7 @@
             :ref="`emojiRef-${indexTab}`"
             type="button"
             :aria-label="emoji.name"
-            @click="$emit('selected-emoji', emoji)"
+            @click="event => handleEmojiSelection(emoji, event)"
             @focusin="$emit('highlighted-emoji', emoji)"
             @focusout="$emit('highlighted-emoji', null)"
             @mouseover="$emit('highlighted-emoji', emoji)"
@@ -79,7 +79,7 @@
             :class="{
               'hover-emoji': (index === 0 && hoverFirstEmoji),
             }"
-            @click="$emit('selected-emoji', emoji)"
+            @click="event => handleEmojiSelection(emoji, event)"
             @focusin="$emit('highlighted-emoji', emoji)"
             @focusout="$emit('highlighted-emoji', null)"
             @mouseover="hoverEmoji(emoji)"
@@ -471,7 +471,7 @@ export default {
       }
 
       if (event.key === 'Enter') {
-        this.$emit('selected-emoji', { ...emoji, shift_key: event.shiftKey });
+        this.handleEmojiSelection(emoji, event);
       }
     },
 
@@ -522,6 +522,10 @@ export default {
       }
     },
 
+    handleEmojiSelection (emoji, event) {
+      this.$emit('selected-emoji', { ...emoji, shift_key: event.shiftKey });
+    },
+
     /* eslint-disable-next-line complexity */
     handleKeyDownFilteredEmojis (event, indexEmoji, emoji) {
       event.preventDefault();
@@ -566,7 +570,7 @@ export default {
       }
 
       if (event.key === 'Enter') {
-        this.$emit('selected-emoji', { ...emoji, shift_key: event.shiftKey });
+        this.handleEmojiSelection(emoji, event);
       }
     },
 
