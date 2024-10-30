@@ -1,3 +1,15 @@
+# [3.159.0](https://github.com/dialpad/dialtone/compare/dialtone-vue3/v3.158.0...dialtone-vue3/v3.159.0) (2024-10-30)
+
+
+### Bug Fixes
+
+* **Emoji Text Wrapper:** DLT-2176 invalid regular expression error ([#544](https://github.com/dialpad/dialtone/issues/544)) ([1ea0986](https://github.com/dialpad/dialtone/commit/1ea098693f1beb59c25362f554ab2cb8d4d6e01d))
+
+
+### Features
+
+* **Emoji Picker:** DP-113112 add shift key info on selected-emoji event ([#549](https://github.com/dialpad/dialtone/issues/549)) ([3092584](https://github.com/dialpad/dialtone/commit/3092584d85ceea1439bbb810f56ebaeeb8e09e3a))
+
 # [3.158.0](https://github.com/dialpad/dialtone/compare/dialtone-vue3/v3.157.2...dialtone-vue3/v3.158.0) (2024-10-29)
 
 
