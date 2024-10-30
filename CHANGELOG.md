@@ -1,3 +1,16 @@
+# [9.83.0](https://github.com/dialpad/dialtone/compare/dialtone/v9.82.0...dialtone/v9.83.0) (2024-10-30)
+
+
+### Bug Fixes
+
+* **Emoji Text Wrapper:** DLT-2176 invalid regular expression error ([#544](https://github.com/dialpad/dialtone/issues/544)) ([1ea0986](https://github.com/dialpad/dialtone/commit/1ea098693f1beb59c25362f554ab2cb8d4d6e01d))
+
+
+### Features
+
+* **Emoji Picker:** DP-113112 add shift key info on selected-emoji event ([#549](https://github.com/dialpad/dialtone/issues/549)) ([3092584](https://github.com/dialpad/dialtone/commit/3092584d85ceea1439bbb810f56ebaeeb8e09e3a))
+* **Icon:** DLT-2145 added Workforce Management (née Surfboard) ([#548](https://github.com/dialpad/dialtone/issues/548)) ([967d3e5](https://github.com/dialpad/dialtone/commit/967d3e5bd2c6221fc032e6b3cd8dee36d895dd27))
+
 # [9.82.0](https://github.com/dialpad/dialtone/compare/dialtone/v9.81.1...dialtone/v9.82.0) (2024-10-29)
 
 
