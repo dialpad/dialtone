@@ -49,6 +49,55 @@
       "type": "shell",
       "command": "pnpm nx run dialtone:build",
       "problemMatcher": []
+    },
+    {
+      "label": "build: language-server",
+      "type": "npm",
+      "script": "build",
+      "group": "build",
+      "presentation": {
+				"panel": "dedicated",
+				"reveal": "never"
+			},
+			"problemMatcher": {
+				"pattern": {
+					"regexp": "__________"
+				},
+				"background": {
+					"beginsPattern": "building\\.\\.\\.",
+					"endsPattern": "finished\\."
+				}
+			},
+      "options": {
+        "cwd": "${workspaceFolder}/packages/language-server/vscode"
+      }
+    },
+    {
+      "label": "watch: language-server",
+      "type": "npm",
+      "script": "watch",
+      "isBackground": true,
+      "group": {
+				"kind": "build",
+				"isDefault": true
+			},
+			"presentation": {
+				"panel": "dedicated",
+				"reveal": "never"
+			},
+			"problemMatcher": {
+				"pattern": {
+					"regexp": "__________"
+				},
+				"background": {
+					"activeOnStart": true,
+					"beginsPattern": "building\\.\\.\\.",
+					"endsPattern": "watching\\.\\.\\."
+				}
+			},
+      "options": {
+        "cwd": "${workspaceFolder}/packages/language-server/vscode"
+      }
     }
   ]
 }

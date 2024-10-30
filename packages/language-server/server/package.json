@@ -1,0 +1,24 @@
+{
+	"name": "@dialpad/dialtone-language-server",
+	"version": "0.0.1",
+	"author": "juliodialpad",
+	"license": "MIT",
+	"main": "out/index.js",
+	"files": [
+		"out/**/*.js",
+		"out/**/*.d.ts"
+	],
+	"bin": {
+		"dialtone-ls": "bin/server.js"
+	},
+	"dependencies": {
+		"@volar/language-core": "~2.4.0",
+		"@volar/language-server": "~2.4.0",
+		"vscode-html-languageservice": "^5.3.1",
+		"vscode-uri": "^3.0.8"
+	},
+	"devDependencies": {
+		"@dialpad/dialtone-vue": "workspace:^3",
+		"@dialpad/dialtone-tokens": "workspace:*"
+	}
+}

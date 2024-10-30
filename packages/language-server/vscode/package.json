@@ -1,0 +1,42 @@
+{
+	"private": true,
+	"name": "@dialpad/vscode-dialtone",
+	"version": "0.0.1",
+	"categories": [
+		"Programming Languages"
+	],
+	"displayName": "Dialtone Language Features",
+	"description": "Dialtone VSCode extension",
+	"author": "juliodialpad",
+	"publisher": "dialpad",
+	"engines": {
+		"vscode": "^1.82.0"
+	},
+	"activationEvents": [
+		"onLanguage:vue"
+	],
+	"main": "./dist/client.js",
+	"contributes": {
+		"languages": [
+			{
+				"id": "vue",
+				"extensions": [
+					".vue"
+				]
+			}
+		]
+	},
+	"scripts": {
+		"build": "node scripts/build -- --minify",
+		"watch": "npm run build -- --watch",
+		"pack": "npm run build && vsce package --pre-release"
+	},
+	"devDependencies": {
+		"@dialpad/dialtone-language-server": "workspace:*",
+		"@volar/language-server": "~2.4.0",
+		"@types/vscode": "^1.82.0",
+		"@volar/vscode": "~2.4.0",
+		"esbuild": "latest",
+		"vsce": "latest"
+	}
+}
