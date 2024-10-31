@@ -1,3 +1,10 @@
+## [9.83.1](https://github.com/dialpad/dialtone/compare/dialtone/v9.83.0...dialtone/v9.83.1) (2024-10-31)
+
+
+### Bug Fixes
+
+* **Emoji:** NO-JIRA revert back to emoji-toolkit ([#552](https://github.com/dialpad/dialtone/issues/552)) ([8b6d2ad](https://github.com/dialpad/dialtone/commit/8b6d2ad640bd47c51e650ef65d5a694b236afbc5))
+
 # [9.83.0](https://github.com/dialpad/dialtone/compare/dialtone/v9.82.0...dialtone/v9.83.0) (2024-10-30)
 
 
