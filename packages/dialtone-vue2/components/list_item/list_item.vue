@@ -2,10 +2,10 @@
   <component
     :is="elementType"
     :id="id"
-    :class="['dt-list-item', {
-      'dt-list-item--focusable': isFocusable,
-      'dt-list-item--highlighted': isHighlighted,
-      'dt-list-item--static': !isHoverable,
+    :class="['d-list-item', {
+      'd-list-item--focusable': isFocusable,
+      'd-list-item--highlighted': isHighlighted,
+      'd-list-item--static': !isHoverable,
     }]"
     :tabindex="isFocusable ? 0 : -1"
     :role="role"
@@ -29,7 +29,7 @@
       >
         <dt-icon-check
           size="400"
-          class="dt-list-item--selected-icon"
+          class="d-list-item--selected-icon"
         />
       </template>
     </component>
@@ -238,34 +238,3 @@ export default {
   },
 };
 </script>
-
-<style lang="less">
-.dt-list-item {
-  list-style: none;
-  background-color: var(--dt-action-color-background-muted-default);
-
-  &:not(.dt-list-item--static) {
-    cursor: pointer;
-    border-radius: var(--dt-size-radius-300);
-  }
-
-  &--focusable:focus,
-  &--focusable:focus-within,
-  &--highlighted {
-    background-color: var(--dt-action-color-background-muted-hover);
-  }
-
-  &--highlighted:active {
-    background-color: var(--dt-action-color-background-muted-active);
-  }
-
-  &--selected-icon {
-    margin-left: var(--dt-space-400);
-  }
-
-  :focus-visible {
-    outline: none;
-    box-shadow: var(--dt-shadow-focus);
-  }
-}
-</style>

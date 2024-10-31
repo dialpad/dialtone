@@ -17,15 +17,19 @@
 //  ============================================================================
 //  @   SKELETON CONTAINER
 //  ----------------------------------------------------------------------------
+
+// The --placeholder-from-color and --placeholder-to-color
+// custom properties can be set on the parent class of the
+// placeholder to control the animation colors.
 .skeleton-placeholder {
   --placeholder-from-color: hsla(var(--dt-color-black-900-hsl) / 0.2);
   --placeholder-to-color: hsla(var(--dt-color-black-900-hsl) / 0.1);
 
   display: flex;
   width: 100%;
-  background: var(--placeholder-from-color);
+  background: var(--placeholder-from-color, var(--dt-color-black-300));
   animation-duration: 1000ms;
-  fill: var(--placeholder-from-color);
+  fill: var(--placeholder-from-color, var(--dt-color-black-300));
   stroke: none;
 
   &--animate {
@@ -36,19 +40,19 @@
 
 // the animation is used by the skeleton component
 @keyframes skeleton-placeholder-throb {
-  20% {
-    background: var(--placeholder-from-color);
-    fill: var(--placeholder-from-color);
+  10% {
+    background: var(--placeholder-from-color, var(--dt-color-black-300));
+    fill: var(--placeholder-from-color, var(--dt-color-black-300));
   }
 
   50% {
-    background: var(--placeholder-to-color);
-    fill: var(--placeholder-to-color);
+    background: var(--placeholder-to-color, var(--dt-color-black-100));
+    fill: var(--placeholder-to-color, var(--dt-color-black-100));
   }
 
-  80% {
-    background: var(--placeholder-from-color);
-    fill: var(--placeholder-from-color);
+  90% {
+    background: var(--placeholder-from-color, var(--dt-color-black-300));
+    fill: var(--placeholder-from-color, var(--dt-color-black-300));
   }
 }
 
