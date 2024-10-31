@@ -1,6 +1,6 @@
 import { Diagnostic, LanguageServicePlugin, LanguageServicePluginInstance } from "@volar/language-server/node";
-import { resolveVueComponents } from "./VueComponentResolver";
-import { resolveCSSVariables } from "./CSSVariableResolver";
+import { resolveVueComponents } from "./resolvers/vue-components";
+import { resolveCSSVariables } from "./resolvers/css-variables";
 import { getContent, getCurrentWord } from "./utils";
 
 export type DialtoneTokenDoc = {
@@ -38,14 +38,14 @@ export function create(): LanguageServicePlugin {
                     const currentWord = getCurrentWord(currentLine, position);
 
                     // Remove all the trigger character from current word
-                    const sanitizedWord = currentWord.replaceAll(/[\(<="']/g, '');
+                    const sanitizedWord = currentWord.replaceAll(/[<="']/g, '');
                     // console.log('content: ', content);
                     // console.log('current line: ', currentLine);
                     // console.log('current word: ', currentWord);
-                    // console.log('sanitized word: ', sanitizedWord);
+                    console.log('sanitized word: ', sanitizedWord);
 
 
-                    if (completionContext.triggerCharacter === '(' && sanitizedWord === 'var')
+                    if (completionContext.triggerCharacter === '(' || sanitizedWord.startsWith('var('))
                         return resolveCSSVariables(currentLine, currentWord, sanitizedWord, completionContext);
                     else if (completionContext.triggerCharacter === '<' || currentLine.includes('<'))
                         // @TODO: Find multi-line components

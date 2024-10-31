@@ -1,7 +1,7 @@
 import { LanguageServiceContext } from "@volar/language-server";
 import { Position, TextDocument } from "vscode-html-languageservice";
 import { URI } from "vscode-uri";
-import { DialtoneVirtualCode } from "./languagePlugin";
+import { DialtoneVirtualCode } from "./language-plugin";
 
 export function stringToKebabCase(string: string): string {
     return string.split(/(?=[A-Z]|[0-9]{3,}?)/).join("-").toLowerCase();

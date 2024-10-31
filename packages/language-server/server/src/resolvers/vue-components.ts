@@ -1,4 +1,4 @@
-import { stringToHumanReadable, stringToKebabCase } from "./utils";
+import { stringToHumanReadable, stringToKebabCase } from "../utils";
 import { CompletionContext, CompletionItem, CompletionItemKind, CompletionList, NullableProviderResult } from "@volar/language-server/node";
 
 export type DialtoneComponentDoc = {
@@ -24,7 +24,7 @@ export type DialtoneComponentDoc = {
     }[]
 };
 
-const componentDocumentation: DialtoneComponentDoc[] = require('../node_modules/@dialpad/dialtone-vue/dist/component-documentation.json');
+const componentDocumentation: DialtoneComponentDoc[] = require('../../node_modules/@dialpad/dialtone-vue/dist/component-documentation.json');
 
 export const components = componentDocumentation.map((component: DialtoneComponentDoc) => {
     const componentName = stringToKebabCase(component.displayName);

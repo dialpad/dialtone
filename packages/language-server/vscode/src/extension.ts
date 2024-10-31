@@ -5,8 +5,6 @@ import * as vscode from 'vscode';
 
 let client: BaseLanguageClient;
 
-console.log('');
-
 export async function activate(context: vscode.ExtensionContext) {
 
 	const serverModule = vscode.Uri.joinPath(context.extensionUri, 'dist', 'server.js');
