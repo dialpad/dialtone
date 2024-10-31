@@ -10,7 +10,9 @@
         :scroll-into-tab="scrollIntoTab"
         :tabset-labels="tabSetLabels"
         @focus-skin-selector="$refs.skinSelectorRef.focusSkinSelector()"
-        @focus-search-input="showSearch ? $refs.searchInputRef.focusSearchInput() : $refs.emojiSelectorRef.focusEmojiSelector()"
+        @focus-search-input="showSearch
+          ? $refs.searchInputRef.focusSearchInput()
+          : $refs.emojiSelectorRef.focusEmojiSelector()"
         @selected-tabset="scrollToSelectedTabset"
         @keydown.esc="emits('close')"
       />

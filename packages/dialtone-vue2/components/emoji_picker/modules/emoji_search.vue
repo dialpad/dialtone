@@ -22,13 +22,13 @@
         <dt-button
           importance="clear"
           size="xs"
-          class="d-mrn4"
+          class="d-emoji-picker__search-x-button"
           circle
           kind="muted"
           @click="clearSearch"
         >
           <template #icon>
-            <dt-icon-close
+            <dt-icon-x-circle
               size="200"
             />
           </template>

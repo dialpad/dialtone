@@ -40,6 +40,7 @@
         <label for="Dialtone--SelectCategory"> Category</label>
       </div>
       <div class="d-select">
+        <!-- eslint-disable-next-line vuejs-accessibility/form-control-has-label -->
         <select
           id="Dialtone--SelectCategory"
           v-model="selectedCategory"

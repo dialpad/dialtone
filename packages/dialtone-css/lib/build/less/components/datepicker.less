@@ -14,14 +14,15 @@
   --datepicker-width: calc(var(--dt-size-300) * 75); // A bit of a magic number as default fixed size, may use CSS utilities to override
   --datepicker-button-size: calc(var(--dt-size-600) - var(--dt-size-200)); // Emulates SM button since Vue component in lieu of Vue component using DT button
 
+  box-sizing: border-box;
   width: var(--datepicker-width);
   padding: var(--dt-space-500);
-  box-sizing: border-box;
 
   &__hd {
     padding: 0 var(--dt-space-300);
   }
 
+  /* stylelint-disable-next-line block-no-empty */
   &__bd {
   }
 
@@ -33,12 +34,13 @@
   }
 
   &__month-year-title {
-    line-height: var(--dt-font-line-height-300);
-    font-size: var(--dt-font-size-100);
     font-weight: var(--dt-font-weight-normal);
+    font-size: var(--dt-font-size-100);
+    line-height: var(--dt-font-line-height-300);
     text-transform: uppercase;
   }
 
+  /* stylelint-disable-next-line block-no-empty */
   &__nav {
   }
 

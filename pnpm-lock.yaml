@@ -169,10 +169,10 @@ importers:
         version: 7.6.20(react-dom@16.14.0(react@16.14.0))(react@16.14.0)
       '@vitejs/plugin-vue':
         specifier: ^5.0.3
-        version: 5.1.4(vite@5.4.2(@types/node@20.16.5)(less@4.2.0)(sass@1.69.5)(sugarss@2.0.0)(terser@5.34.1))(vue@3.4.15(typescript@5.4.2))
+        version: 5.1.4(vite@5.4.2(@types/node@20.16.5)(less@4.2.0)(sass@1.69.5)(sugarss@2.0.0)(terser@5.34.1))
       '@vitejs/plugin-vue2':
         specifier: ^2.3.1
-        version: 2.3.1(vite@5.4.2(@types/node@20.16.5)(less@4.2.0)(sass@1.69.5)(sugarss@2.0.0)(terser@5.34.1))(vue@3.4.15(typescript@5.4.2))
+        version: 2.3.1(vite@5.4.2(@types/node@20.16.5)(less@4.2.0)(sass@1.69.5)(sugarss@2.0.0)(terser@5.34.1))
       '@vue/tsconfig':
         specifier: ^0.4.0
         version: 0.4.0
@@ -203,6 +203,9 @@ importers:
       eslint-config-standard:
         specifier: ^17.1.0
         version: 17.1.0(eslint-plugin-import@2.29.0(@typescript-eslint/parser@7.18.0(eslint@8.56.0)(typescript@5.4.2))(eslint@8.56.0))(eslint-plugin-n@15.7.0(eslint@8.56.0))(eslint-plugin-promise@6.1.1(eslint@8.56.0))(eslint@8.56.0)
+      eslint-plugin-eslint-plugin:
+        specifier: 6.3.1
+        version: 6.3.1(eslint@8.56.0)
       eslint-plugin-import:
         specifier: ^2.27.5
         version: 2.29.0(@typescript-eslint/parser@7.18.0(eslint@8.56.0)(typescript@5.4.2))(eslint@8.56.0)
@@ -257,9 +260,6 @@ importers:
       jsdom:
         specifier: ^24.0.0
         version: 24.0.0
-      lesshint:
-        specifier: ^6.3.7
-        version: 6.3.7
       lint-staged:
         specifier: ^15.2.0
         version: 15.2.0
@@ -324,8 +324,8 @@ importers:
         specifier: ^33.0.0
         version: 33.0.0(stylelint@15.11.0(typescript@5.4.2))
       stylelint-less:
-        specifier: 1.0.4
-        version: 1.0.4
+        specifier: 3.0.1
+        version: 3.0.1(postcss@8.4.39)(stylelint@15.11.0(typescript@5.4.2))
       stylelint-no-px:
         specifier: ^1.0.1
         version: 1.0.1(stylelint@15.11.0(typescript@5.4.2))
@@ -355,10 +355,10 @@ importers:
         version: 1.0.4(@types/node@20.16.5)(jsdom@24.0.0)(less@4.2.0)(sass@1.69.5)(sugarss@2.0.0)(terser@5.34.1)
       vue-docgen-api:
         specifier: ^4.75.0
-        version: 4.75.0(vue@3.4.15(typescript@5.4.2))
+        version: 4.75.0(vue@3.4.15(typescript@5.6.3))
       vue-template-compiler:
         specifier: ^2.7.16
-        version: 2.7.16(vue@3.4.15(typescript@5.4.2))
+        version: 2.7.16(vue@2.7.16)
       wait-on:
         specifier: ^7.2.0
         version: 7.2.0
@@ -7737,6 +7737,12 @@ packages:
     peerDependencies:
       eslint: '>=4.19.1'
 
+  eslint-plugin-eslint-plugin@6.3.1:
+    resolution: {integrity: sha512-5OUvS+kzpfbX3Pyt7ULYLJBGdjM/tGPdjePGFE50Lqdqcn/dB0f9ifbRCrCGWBt10Ljk7O6ajj3BPOZ8vmD50g==}
+    engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}
+    peerDependencies:
+      eslint: '>=8.23.0'
+
   eslint-plugin-import@2.29.0:
     resolution: {integrity: sha512-QPOO5NO6Odv5lpoTkddtutccQjysJuFxoPS7fAHO+9m9udNHvTCPSAMW9zGAYj8lAIdr40I8yPCdUYrncXtrwg==}
     engines: {node: '>=4'}
@@ -10030,11 +10036,6 @@ packages:
     engines: {node: '>=6'}
     hasBin: true
 
-  lesshint@6.3.7:
-    resolution: {integrity: sha512-ontd3g1seYMgeTusLTrm5NMYllLrQs4QFPkqh6GCut2CSG2csMpFbLfd/GJTQIlJXX8ixPQ4i27NeElMuftGaQ==}
-    engines: {node: '>=6'}
-    hasBin: true
-
   leven@2.1.0:
     resolution: {integrity: sha512-nvVPLpIHUxCUoRLrFqTgSxXJ614d8AgQoWl7zPe/2VadE8+1dpU3LBhowRuBAcuwruWtOdD8oYC9jDNJjXDPyA==}
     engines: {node: '>=0.10.0'}
@@ -10199,9 +10200,6 @@ packages:
 
   lodash.mergewith@4.6.2:
     resolution: {integrity: sha512-GK3g5RPZWTRSeLSpgP8Xhra+pnjBC56q9FZYe1d5RN3TJ35dbkGy3YqBSMbyCrlbi+CM9Z3Jk5yTL7RCsqboyQ==}
-
-  lodash.orderby@4.6.0:
-    resolution: {integrity: sha512-T0rZxKmghOOf5YPnn8EY5iLYeWCpZq8G41FfqoVHH5QDTAFaghJRmAdLiadEDq+ztgM2q5PjA+Z1fOwGrLgmtg==}
 
   lodash.pad@4.5.1:
     resolution: {integrity: sha512-mvUHifnLqM+03YNzeTBS1/Gr6JRFjd3rRx88FHWUvamVaT9k2O/kXha3yBSOwB9/DTQrSTLJNHvLBBt2FdX7Mg==}
@@ -14248,6 +14246,12 @@ packages:
   stylelint-less@1.0.4:
     resolution: {integrity: sha512-HABcyhBP++XWr95hqTy8NCxzD5Y89xUZtknrHPybT4KhSRmAWfYozFZbzYOgh+1/o/EJTaDDdEHNTnNMhUUbow==}
 
+  stylelint-less@3.0.1:
+    resolution: {integrity: sha512-6GkZ4jhmReXxX61IiNaniZFuyTzYTTC4HvRLNNok883d1ux/wUodM1uik+iAHZM1VSCwNASaj0Th6ZX46WZLMw==}
+    peerDependencies:
+      postcss: ^8.4.31
+      stylelint: ^16.0.2
+
   stylelint-no-px@1.0.1:
     resolution: {integrity: sha512-33+Gd5WFeSvEiOV8IwWMVgjzYieFg/Q4ETKeZkahSYl2V7+WMtgNT32IYYEspN402ZJv16bOciwEnG1GY2qrPA==}
     peerDependencies:
@@ -15320,8 +15324,8 @@ packages:
   vue-component-type-helpers@1.8.24:
     resolution: {integrity: sha512-lqWs/7fdRXoSBAlbouHBX+LNuaY6gI9xWW34m/ZIz9zVPYHEyw0b2/zaCBwlKx0NtKTeF/6pOpvrxVkh7nhIYg==}
 
-  vue-component-type-helpers@2.1.8:
-    resolution: {integrity: sha512-ii36gDzrYAfOQIkOlo44yceDdT5269gKmNGxf07Qx6seH2U50+tQ2ol02XLhYPmxrh6YabAsOdte8WDrpaO6Tw==}
+  vue-component-type-helpers@2.1.10:
+    resolution: {integrity: sha512-lfgdSLQKrUmADiSV6PbBvYgQ33KF3Ztv6gP85MfGaGaSGMTXORVaHT1EHfsqCgzRNBstPKYDmvAV9Do5CmJ07A==}
 
   vue-demi@0.14.7:
     resolution: {integrity: sha512-EOG8KXDQNwkJILkx/gPcoL/7vH+hORoBaKgGe+6W7VFMvCYJfmF2dGbvgDroVnI8LU7/kTu8mbjRZGBU1z9NTA==}
@@ -20127,7 +20131,7 @@ snapshots:
       ts-dedent: 2.2.0
       type-fest: 2.19.0
       vue: 3.4.15(typescript@5.6.3)
-      vue-component-type-helpers: 2.1.8
+      vue-component-type-helpers: 2.1.10
     transitivePeerDependencies:
       - encoding
       - supports-color
@@ -20703,7 +20707,7 @@ snapshots:
   '@types/vinyl@2.0.12':
     dependencies:
       '@types/expect': 1.20.4
-      '@types/node': 20.16.5
+      '@types/node': 22.8.4
 
   '@types/wait-on@5.3.4':
     dependencies:
@@ -20985,10 +20989,9 @@ snapshots:
 
   '@ungap/structured-clone@1.2.0': {}
 
-  '@vitejs/plugin-vue2@2.3.1(vite@5.4.2(@types/node@20.16.5)(less@4.2.0)(sass@1.69.5)(sugarss@2.0.0)(terser@5.34.1))(vue@3.4.15(typescript@5.4.2))':
+  '@vitejs/plugin-vue2@2.3.1(vite@5.4.2(@types/node@20.16.5)(less@4.2.0)(sass@1.69.5)(sugarss@2.0.0)(terser@5.34.1))':
     dependencies:
       vite: 5.4.2(@types/node@20.16.5)(less@4.2.0)(sass@1.69.5)(sugarss@2.0.0)(terser@5.34.1)
-      vue: 3.4.15(typescript@5.4.2)
 
   '@vitejs/plugin-vue@4.6.2(vite@4.0.5(@types/node@22.8.4)(less@4.2.0)(sass@1.69.5)(sugarss@2.0.0)(terser@5.34.1))(vue@3.4.15(typescript@5.6.3))':
     dependencies:
@@ -21000,10 +21003,9 @@ snapshots:
       vite: 5.4.2(@types/node@22.8.4)(less@4.2.0)(sass@1.69.5)(sugarss@2.0.0)(terser@5.34.1)
       vue: 3.4.15(typescript@5.6.3)
 
-  '@vitejs/plugin-vue@5.1.4(vite@5.4.2(@types/node@20.16.5)(less@4.2.0)(sass@1.69.5)(sugarss@2.0.0)(terser@5.34.1))(vue@3.4.15(typescript@5.4.2))':
+  '@vitejs/plugin-vue@5.1.4(vite@5.4.2(@types/node@20.16.5)(less@4.2.0)(sass@1.69.5)(sugarss@2.0.0)(terser@5.34.1))':
     dependencies:
       vite: 5.4.2(@types/node@20.16.5)(less@4.2.0)(sass@1.69.5)(sugarss@2.0.0)(terser@5.34.1)
-      vue: 3.4.15(typescript@5.4.2)
 
   '@vitest/expect@1.0.4':
     dependencies:
@@ -24597,6 +24599,12 @@ snapshots:
       eslint-utils: 2.1.0
       regexpp: 3.2.0
 
+  eslint-plugin-eslint-plugin@6.3.1(eslint@8.56.0):
+    dependencies:
+      '@eslint-community/eslint-utils': 4.4.0(eslint@8.56.0)
+      eslint: 8.56.0
+      estraverse: 5.3.0
+
   eslint-plugin-import@2.29.0(@typescript-eslint/parser@7.18.0(eslint@8.56.0)(typescript@5.4.2))(eslint@8.56.0):
     dependencies:
       array-includes: 3.1.7
@@ -27249,7 +27257,7 @@ snapshots:
 
   jest-worker@27.5.1:
     dependencies:
-      '@types/node': 20.16.5
+      '@types/node': 22.8.4
       merge-stream: 2.0.0
       supports-color: 8.1.1
 
@@ -27539,21 +27547,6 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  lesshint@6.3.7:
-    dependencies:
-      commander: 2.20.3
-      cosmiconfig: 5.2.1
-      globby: 9.2.0
-      lodash.merge: 4.6.2
-      lodash.orderby: 4.6.0
-      postcss: 7.0.39
-      postcss-less: 3.1.4
-      postcss-selector-parser: 5.0.0
-      postcss-values-parser: 2.0.1
-      strip-json-comments: 3.1.1
-    transitivePeerDependencies:
-      - supports-color
-
   leven@2.1.0: {}
 
   leven@3.1.0: {}
@@ -27728,8 +27721,6 @@ snapshots:
   lodash.merge@4.6.2: {}
 
   lodash.mergewith@4.6.2: {}
-
-  lodash.orderby@4.6.0: {}
 
   lodash.pad@4.5.1: {}
 
@@ -32444,6 +32435,13 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
+  stylelint-less@3.0.1(postcss@8.4.39)(stylelint@15.11.0(typescript@5.4.2)):
+    dependencies:
+      postcss: 8.4.39
+      postcss-resolve-nested-selector: 0.1.1
+      postcss-value-parser: 4.2.0
+      stylelint: 15.11.0(typescript@5.4.2)
+
   stylelint-no-px@1.0.1(stylelint@15.11.0(typescript@5.4.2)):
     dependencies:
       postcss-value-parser: 4.2.0
@@ -33763,7 +33761,7 @@ snapshots:
 
   vue-component-type-helpers@1.8.24: {}
 
-  vue-component-type-helpers@2.1.8: {}
+  vue-component-type-helpers@2.1.10: {}
 
   vue-demi@0.14.7(vue@3.4.15(typescript@5.6.3)):
     dependencies:
@@ -33783,21 +33781,6 @@ snapshots:
       ts-map: 1.0.3
       vue: 2.7.16
       vue-inbrowser-compiler-independent-utils: 4.71.1(vue@2.7.16)
-
-  vue-docgen-api@4.75.0(vue@3.4.15(typescript@5.4.2)):
-    dependencies:
-      '@babel/parser': 7.23.9
-      '@babel/types': 7.23.0
-      '@vue/compiler-dom': 3.4.15
-      '@vue/compiler-sfc': 3.4.15
-      ast-types: 0.16.1
-      hash-sum: 2.0.0
-      lru-cache: 8.0.5
-      pug: 3.0.2
-      recast: 0.23.4
-      ts-map: 1.0.3
-      vue: 3.4.15(typescript@5.4.2)
-      vue-inbrowser-compiler-independent-utils: 4.71.1(vue@3.4.15(typescript@5.4.2))
 
   vue-docgen-api@4.75.0(vue@3.4.15(typescript@5.6.3)):
     dependencies:
@@ -33832,10 +33815,6 @@ snapshots:
   vue-inbrowser-compiler-independent-utils@4.71.1(vue@2.7.16):
     dependencies:
       vue: 2.7.16
-
-  vue-inbrowser-compiler-independent-utils@4.71.1(vue@3.4.15(typescript@5.4.2)):
-    dependencies:
-      vue: 3.4.15(typescript@5.4.2)
 
   vue-inbrowser-compiler-independent-utils@4.71.1(vue@3.4.15(typescript@5.6.3)):
     dependencies:
@@ -33933,12 +33912,6 @@ snapshots:
       de-indent: 1.0.2
       he: 1.2.0
       vue: 2.7.16
-
-  vue-template-compiler@2.7.16(vue@3.4.15(typescript@5.4.2)):
-    dependencies:
-      de-indent: 1.0.2
-      he: 1.2.0
-      vue: 3.4.15(typescript@5.4.2)
 
   vue-template-compiler@2.7.16(vue@3.4.15(typescript@5.6.3)):
     dependencies:
