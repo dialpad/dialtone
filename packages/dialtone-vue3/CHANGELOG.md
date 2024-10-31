@@ -1,3 +1,10 @@
+## [3.159.2](https://github.com/dialpad/dialtone/compare/dialtone-vue3/v3.159.1...dialtone-vue3/v3.159.2) (2024-10-31)
+
+
+### Bug Fixes
+
+* **Emoji:** NO-JIRA add emoji-toolkit to externals ([#554](https://github.com/dialpad/dialtone/issues/554)) ([e225cbd](https://github.com/dialpad/dialtone/commit/e225cbdf13704eb3c5aedccb9630727d3831b19b))
+
 ## [3.159.1](https://github.com/dialpad/dialtone/compare/dialtone-vue3/v3.159.0...dialtone-vue3/v3.159.1) (2024-10-31)
 
 
