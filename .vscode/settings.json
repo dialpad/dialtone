@@ -17,6 +17,9 @@
   "files.eol": "\n",
   "files.insertFinalNewline": true,
   "files.trimFinalNewlines": true,
+  "files.associations": {
+    "*.mdx": "markdown"
+  },
 
   "npm.autoDetect": "off",
   "editor.codeActionsOnSave": {
@@ -46,14 +49,14 @@
   "[json]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
+  "[markdown]": {
+    "editor.rulers": [],
+    "editor.formatOnSave": true
+  },
   "prettier.singleQuote": true,
   "yaml.format.enable": true,
   "yaml.format.singleQuote": true,
   "yaml.schemas": {
     "https://json.schemastore.org/github-workflow.json": "file:///.github/workflows/deploy.yml"
-  },
-  "[markdown]": {
-    "editor.rulers": [],
-    "editor.formatOnSave": true
   }
 }
