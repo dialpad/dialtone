@@ -1,18 +1,13 @@
 {
-  // FILES
   "files.exclude": {
     "**/.git": true,
     "**/.DS_Store": true
   },
 
-  // SEARCH
-  // Note that gitignored files are automatically excluded from search. Do not add files
-  // here that are already gitignored.
   "search.exclude": {
     "**/pnpm-lock.yaml": true
   },
 
-  // SPACING
   "editor.tabSize": 2,
   "editor.insertSpaces": true,
   "editor.trimAutoWhitespace": true,
@@ -23,7 +18,6 @@
   "files.insertFinalNewline": true,
   "files.trimFinalNewlines": true,
 
-  // LINTING / FORMATTING
   "npm.autoDetect": "off",
   "editor.codeActionsOnSave": {
     "source.fixAll.stylelint": "explicit",
@@ -61,8 +55,5 @@
   "[markdown]": {
     "editor.rulers": [],
     "editor.formatOnSave": true
-  },
-  "markdownlint.ignore": [
-        "**/CHANGELOG.md"
-    ]
+  }
 }

@@ -1,11 +1,11 @@
 {
-  "*.{js, mjs, cjs, vue}": [
+  "*.{js,mjs,cjs,vue,json}": [
     "eslint --fix"
   ],
   "*.less": [
     "stylelint --fix"
   ],
-  "*.{md, mdx}": [
+  "*.{md,mdx}": [
     "markdownlint --fix"
   ]
 }
