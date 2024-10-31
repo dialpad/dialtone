@@ -2,8 +2,8 @@
   <!-- applies the transition on initial render -->
   <transition
     :appear="appear"
-    enter-active-class="enter-active"
-    leave-active-class="leave-active"
+    enter-active-class="d-collapsible__enter-active"
+    leave-active-class="d-collapsible__leave-active"
     v-bind="$attrs"
     :css="isCSSEnabled"
     @before-enter="beforeEnter"
@@ -155,11 +155,3 @@ export default {
   },
 };
 </script>
-
-<style>
-  .enter-active,
-  .leave-active {
-    overflow: hidden;
-    transition: height var(--td300) var(--ttf-out-quint);
-  }
-</style>

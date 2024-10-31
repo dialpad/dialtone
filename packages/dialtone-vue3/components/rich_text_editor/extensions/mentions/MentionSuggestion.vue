@@ -9,7 +9,7 @@
       :image-alt="name"
       size="xs"
     />
-    <span class="mention-suggestion-name">
+    <span class="d-mention-suggestion__name">
       {{ name }}
     </span>
   </dt-stack>
@@ -44,11 +44,3 @@ export default {
   },
 };
 </script>
-
-<style lang="less" scoped>
-.mention-suggestion-name {
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
-</style>
