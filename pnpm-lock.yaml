@@ -849,16 +849,16 @@ importers:
   packages/language-server/server:
     dependencies:
       '@volar/language-core':
-        specifier: ~2.4.0
-        version: 2.4.0
+        specifier: ~2.4.8
+        version: 2.4.8
       '@volar/language-server':
-        specifier: ~2.4.0
+        specifier: ~2.4.8
         version: 2.4.8
       vscode-html-languageservice:
-        specifier: ^5.3.1
+        specifier: ~5.3.1
         version: 5.3.1
       vscode-uri:
-        specifier: ^3.0.8
+        specifier: ~3.0.8
         version: 3.0.8
     devDependencies:
       '@dialpad/dialtone-tokens':
@@ -874,19 +874,19 @@ importers:
         specifier: workspace:*
         version: link:../server
       '@types/vscode':
-        specifier: ^1.82.0
+        specifier: ~1.95.0
         version: 1.95.0
       '@volar/language-server':
-        specifier: ~2.4.0
+        specifier: ~2.4.8
         version: 2.4.8
       '@volar/vscode':
-        specifier: ~2.4.0
+        specifier: ~2.4.8
         version: 2.4.8
       esbuild:
-        specifier: latest
+        specifier: ^0.24.0
         version: 0.24.0
       vsce:
-        specifier: latest
+        specifier: ^2.15.0
         version: 2.15.0
 
   packages/postcss-responsive-variations:
@@ -15477,8 +15477,8 @@ packages:
   vue-component-type-helpers@1.8.24:
     resolution: {integrity: sha512-lqWs/7fdRXoSBAlbouHBX+LNuaY6gI9xWW34m/ZIz9zVPYHEyw0b2/zaCBwlKx0NtKTeF/6pOpvrxVkh7nhIYg==}
 
-  vue-component-type-helpers@2.1.8:
-    resolution: {integrity: sha512-ii36gDzrYAfOQIkOlo44yceDdT5269gKmNGxf07Qx6seH2U50+tQ2ol02XLhYPmxrh6YabAsOdte8WDrpaO6Tw==}
+  vue-component-type-helpers@2.1.10:
+    resolution: {integrity: sha512-lfgdSLQKrUmADiSV6PbBvYgQ33KF3Ztv6gP85MfGaGaSGMTXORVaHT1EHfsqCgzRNBstPKYDmvAV9Do5CmJ07A==}
 
   vue-demi@0.14.7:
     resolution: {integrity: sha512-EOG8KXDQNwkJILkx/gPcoL/7vH+hORoBaKgGe+6W7VFMvCYJfmF2dGbvgDroVnI8LU7/kTu8mbjRZGBU1z9NTA==}
@@ -20241,7 +20241,7 @@ snapshots:
       ts-dedent: 2.2.0
       type-fest: 2.19.0
       vue: 3.4.15(typescript@5.4.2)
-      vue-component-type-helpers: 2.1.8
+      vue-component-type-helpers: 2.1.10
     transitivePeerDependencies:
       - encoding
       - supports-color
@@ -21438,7 +21438,7 @@ snapshots:
 
   '@vue/language-core@2.0.29(typescript@5.4.2)':
     dependencies:
-      '@volar/language-core': 2.4.0
+      '@volar/language-core': 2.4.8
       '@vue/compiler-dom': 3.4.15
       '@vue/compiler-vue2': 2.7.16
       '@vue/shared': 3.4.15
@@ -25224,7 +25224,7 @@ snapshots:
 
   filelist@1.0.4:
     dependencies:
-      minimatch: 5.0.1
+      minimatch: 5.1.6
 
   fill-range@4.0.0:
     dependencies:
@@ -25743,7 +25743,7 @@ snapshots:
       fs.realpath: 1.0.0
       inflight: 1.0.6
       inherits: 2.0.4
-      minimatch: 5.0.1
+      minimatch: 5.1.6
       once: 1.4.0
 
   global-agent@2.2.0:
@@ -33806,7 +33806,7 @@ snapshots:
 
   vue-component-type-helpers@1.8.24: {}
 
-  vue-component-type-helpers@2.1.8: {}
+  vue-component-type-helpers@2.1.10: {}
 
   vue-demi@0.14.7(vue@3.4.15(typescript@5.4.2)):
     dependencies:
@@ -33972,7 +33972,7 @@ snapshots:
 
   vue-tsc@2.0.29(typescript@5.4.2):
     dependencies:
-      '@volar/typescript': 2.4.0
+      '@volar/typescript': 2.4.8
       '@vue/language-core': 2.0.29(typescript@5.4.2)
       semver: 7.6.3
       typescript: 5.4.2

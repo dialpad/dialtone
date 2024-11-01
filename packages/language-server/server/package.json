@@ -15,10 +15,10 @@
 		"dialtone-ls": "bin/server.js"
 	},
 	"dependencies": {
-		"@volar/language-core": "~2.4.0",
-		"@volar/language-server": "~2.4.0",
-		"vscode-html-languageservice": "^5.3.1",
-		"vscode-uri": "^3.0.8"
+		"@volar/language-core": "~2.4.8",
+		"@volar/language-server": "~2.4.8",
+		"vscode-html-languageservice": "~5.3.1",
+		"vscode-uri": "~3.0.8"
 	},
 	"devDependencies": {
 		"@dialpad/dialtone-vue": "workspace:^3",
