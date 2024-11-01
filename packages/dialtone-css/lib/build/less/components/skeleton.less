@@ -27,9 +27,9 @@
 
   display: flex;
   width: 100%;
-  background: var(--placeholder-from-color, var(--dt-color-surface-bold-opaque));
+  background: var(--placeholder-from-color);
   animation-duration: 1000ms;
-  fill: var(--placeholder-from-color, var(--dt-color-surface-bold-opaque));
+  fill: var(--placeholder-from-color);
   stroke: none;
 
   &--animate {
@@ -41,18 +41,18 @@
 // the animation is used by the skeleton component
 @keyframes d-skeleton-placeholder-throb {
   10% {
-    background: var(--placeholder-from-color, var(--dt-color-surface-bold-opaque));
-    fill: var(--placeholder-from-color, var(--dt-color-surface-bold-opaque));
+    background: var(--placeholder-from-color);
+    fill: var(--placeholder-from-color);
   }
 
   50% {
-    background: var(--placeholder-to-color, var(--dt-color-black-100));
-    fill: var(--placeholder-to-color, var(--dt-color-black-100));
+    background: var(--placeholder-to-color);
+    fill: var(--placeholder-to-color);
   }
 
   90% {
-    background: var(--placeholder-from-color, var(--dt-color-surface-bold-opaque));
-    fill: var(--placeholder-from-color, var(--dt-color-surface-bold-opaque));
+    background: var(--placeholder-from-color);
+    fill: var(--placeholder-from-color);
   }
 }
 
