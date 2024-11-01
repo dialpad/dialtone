@@ -39,7 +39,7 @@ htmlCode='
     <span class="d-icon__wrapper">
       <div aria-busy="true" role="status" aria-label="" class="d-icon d-icon--size-400" style="display: none;">
         <div
-          class="skeleton-placeholder d-bar-circle skeleton-placeholder--animate"
+          class="d-skeleton-placeholder d-bar-circle d-skeleton-placeholder--animate"
           style="animation-delay: 0ms; animation-duration: 1000ms; min-width: 100%; max-width: 100%; min-height: 100%; max-height: 100%;"
         ></div>
       </div>
@@ -61,7 +61,7 @@ htmlCode='
         <span class="d-icon__wrapper">
           <div aria-busy="true" role="status" aria-label="" class="d-icon d-icon--size-200" style="display: none;">
             <div
-              class="skeleton-placeholder d-bar-circle skeleton-placeholder--animate"
+              class="d-skeleton-placeholder d-bar-circle d-skeleton-placeholder--animate"
               style="animation-delay: 0ms; animation-duration: 1000ms; min-width: 100%; max-width: 100%; min-height: 100%; max-height: 100%;"
             ></div>
           </div>
@@ -76,7 +76,7 @@ htmlCode='
     <span class="d-icon__wrapper">
       <div aria-busy="true" role="status" aria-label="" class="d-icon d-icon--size-400" style="display: none;">
         <div
-          class="skeleton-placeholder d-bar-circle skeleton-placeholder--animate"
+          class="d-skeleton-placeholder d-bar-circle d-skeleton-placeholder--animate"
           style="animation-delay: 0ms; animation-duration: 1000ms; min-width: 100%; max-width: 100%; min-height: 100%; max-height: 100%;"
         ></div>
       </div>
@@ -98,7 +98,7 @@ htmlCode='
         <span class="d-icon__wrapper">
           <div aria-busy="true" role="status" aria-label="" class="d-icon d-icon--size-200" style="display: none;">
             <div
-              class="skeleton-placeholder d-bar-circle skeleton-placeholder--animate"
+              class="d-skeleton-placeholder d-bar-circle d-skeleton-placeholder--animate"
               style="animation-delay: 0ms; animation-duration: 1000ms; min-width: 100%; max-width: 100%; min-height: 100%; max-height: 100%;"
             ></div>
           </div>
@@ -113,7 +113,7 @@ htmlCode='
     <span class="d-icon__wrapper">
       <div aria-busy="true" role="status" aria-label="" class="d-icon d-icon--size-400" style="display: none;">
         <div
-          class="skeleton-placeholder d-bar-circle skeleton-placeholder--animate"
+          class="d-skeleton-placeholder d-bar-circle d-skeleton-placeholder--animate"
           style="animation-delay: 0ms; animation-duration: 1000ms; min-width: 100%; max-width: 100%; min-height: 100%; max-height: 100%;"
         ></div>
       </div>
@@ -135,7 +135,7 @@ htmlCode='
         <span class="d-icon__wrapper">
           <div aria-busy="true" role="status" aria-label="" class="d-icon d-icon--size-200" style="display: none;">
             <div
-              class="skeleton-placeholder d-bar-circle skeleton-placeholder--animate"
+              class="d-skeleton-placeholder d-bar-circle d-skeleton-placeholder--animate"
               style="animation-delay: 0ms; animation-duration: 1000ms; min-width: 100%; max-width: 100%; min-height: 100%; max-height: 100%;"
             ></div>
           </div>
@@ -150,7 +150,7 @@ htmlCode='
     <span class="d-icon__wrapper">
       <div aria-busy="true" role="status" aria-label="" class="d-icon d-icon--size-400" style="display: none;">
         <div
-          class="skeleton-placeholder d-bar-circle skeleton-placeholder--animate"
+          class="d-skeleton-placeholder d-bar-circle d-skeleton-placeholder--animate"
           style="animation-delay: 0ms; animation-duration: 1000ms; min-width: 100%; max-width: 100%; min-height: 100%; max-height: 100%;"
         ></div>
       </div>
@@ -172,7 +172,7 @@ htmlCode='
         <span class="d-icon__wrapper">
           <div aria-busy="true" role="status" aria-label="" class="d-icon d-icon--size-200" style="display: none;">
             <div
-              class="skeleton-placeholder d-bar-circle skeleton-placeholder--animate"
+              class="d-skeleton-placeholder d-bar-circle d-skeleton-placeholder--animate"
               style="animation-delay: 0ms; animation-duration: 1000ms; min-width: 100%; max-width: 100%; min-height: 100%; max-height: 100%;"
             ></div>
           </div>
@@ -187,7 +187,7 @@ htmlCode='
     <span class="d-icon__wrapper">
       <div aria-busy="true" role="status" aria-label="" class="d-icon d-icon--size-400" style="display: none;">
         <div
-          class="skeleton-placeholder d-bar-circle skeleton-placeholder--animate"
+          class="d-skeleton-placeholder d-bar-circle d-skeleton-placeholder--animate"
           style="animation-delay: 0ms; animation-duration: 1000ms; min-width: 100%; max-width: 100%; min-height: 100%; max-height: 100%;"
         ></div>
       </div>
@@ -209,7 +209,7 @@ htmlCode='
         <span class="d-icon__wrapper">
           <div aria-busy="true" role="status" aria-label="" class="d-icon d-icon--size-200" style="display: none;">
             <div
-              class="skeleton-placeholder d-bar-circle skeleton-placeholder--animate"
+              class="d-skeleton-placeholder d-bar-circle d-skeleton-placeholder--animate"
               style="animation-delay: 0ms; animation-duration: 1000ms; min-width: 100%; max-width: 100%; min-height: 100%; max-height: 100%;"
             ></div>
           </div>
@@ -357,7 +357,7 @@ htmlCode='
     <span class="d-icon__wrapper">
       <div aria-busy="true" role="status" aria-label="" class="d-icon d-icon--size-400" style="display: none;">
         <div
-          class="skeleton-placeholder d-bar-circle skeleton-placeholder--animate"
+          class="d-skeleton-placeholder d-bar-circle d-skeleton-placeholder--animate"
           style="animation-delay: 0ms; animation-duration: 1000ms; min-width: 100%; max-width: 100%; min-height: 100%; max-height: 100%;"
         ></div>
       </div>
@@ -379,7 +379,7 @@ htmlCode='
         <span class="d-icon__wrapper">
           <div aria-busy="true" role="status" aria-label="" class="d-icon d-icon--size-200" style="display: none;">
             <div
-              class="skeleton-placeholder d-bar-circle skeleton-placeholder--animate"
+              class="d-skeleton-placeholder d-bar-circle d-skeleton-placeholder--animate"
               style="animation-delay: 0ms; animation-duration: 1000ms; min-width: 100%; max-width: 100%; min-height: 100%; max-height: 100%;"
             ></div>
           </div>
@@ -394,7 +394,7 @@ htmlCode='
     <span class="d-icon__wrapper">
       <div aria-busy="true" role="status" aria-label="" class="d-icon d-icon--size-400" style="display: none;">
         <div
-          class="skeleton-placeholder d-bar-circle skeleton-placeholder--animate"
+          class="d-skeleton-placeholder d-bar-circle d-skeleton-placeholder--animate"
           style="animation-delay: 0ms; animation-duration: 1000ms; min-width: 100%; max-width: 100%; min-height: 100%; max-height: 100%;"
         ></div>
       </div>
@@ -416,7 +416,7 @@ htmlCode='
         <span class="d-icon__wrapper">
           <div aria-busy="true" role="status" aria-label="" class="d-icon d-icon--size-200" style="display: none;">
             <div
-              class="skeleton-placeholder d-bar-circle skeleton-placeholder--animate"
+              class="d-skeleton-placeholder d-bar-circle d-skeleton-placeholder--animate"
               style="animation-delay: 0ms; animation-duration: 1000ms; min-width: 100%; max-width: 100%; min-height: 100%; max-height: 100%;"
             ></div>
           </div>
@@ -431,7 +431,7 @@ htmlCode='
     <span class="d-icon__wrapper">
       <div aria-busy="true" role="status" aria-label="" class="d-icon d-icon--size-400" style="display: none;">
         <div
-          class="skeleton-placeholder d-bar-circle skeleton-placeholder--animate"
+          class="d-skeleton-placeholder d-bar-circle d-skeleton-placeholder--animate"
           style="animation-delay: 0ms; animation-duration: 1000ms; min-width: 100%; max-width: 100%; min-height: 100%; max-height: 100%;"
         ></div>
       </div>
@@ -453,7 +453,7 @@ htmlCode='
         <span class="d-icon__wrapper">
           <div aria-busy="true" role="status" aria-label="" class="d-icon d-icon--size-200" style="display: none;">
             <div
-              class="skeleton-placeholder d-bar-circle skeleton-placeholder--animate"
+              class="d-skeleton-placeholder d-bar-circle d-skeleton-placeholder--animate"
               style="animation-delay: 0ms; animation-duration: 1000ms; min-width: 100%; max-width: 100%; min-height: 100%; max-height: 100%;"
             ></div>
           </div>
@@ -468,7 +468,7 @@ htmlCode='
     <span class="d-icon__wrapper">
       <div aria-busy="true" role="status" aria-label="" class="d-icon d-icon--size-400" style="display: none;">
         <div
-          class="skeleton-placeholder d-bar-circle skeleton-placeholder--animate"
+          class="d-skeleton-placeholder d-bar-circle d-skeleton-placeholder--animate"
           style="animation-delay: 0ms; animation-duration: 1000ms; min-width: 100%; max-width: 100%; min-height: 100%; max-height: 100%;"
         ></div>
       </div>
@@ -490,7 +490,7 @@ htmlCode='
         <span class="d-icon__wrapper">
           <div aria-busy="true" role="status" aria-label="" class="d-icon d-icon--size-200" style="display: none;">
             <div
-              class="skeleton-placeholder d-bar-circle skeleton-placeholder--animate"
+              class="d-skeleton-placeholder d-bar-circle d-skeleton-placeholder--animate"
               style="animation-delay: 0ms; animation-duration: 1000ms; min-width: 100%; max-width: 100%; min-height: 100%; max-height: 100%;"
             ></div>
           </div>
@@ -505,7 +505,7 @@ htmlCode='
     <span class="d-icon__wrapper">
       <div aria-busy="true" role="status" aria-label="" class="d-icon d-icon--size-400" style="display: none;">
         <div
-          class="skeleton-placeholder d-bar-circle skeleton-placeholder--animate"
+          class="d-skeleton-placeholder d-bar-circle d-skeleton-placeholder--animate"
           style="animation-delay: 0ms; animation-duration: 1000ms; min-width: 100%; max-width: 100%; min-height: 100%; max-height: 100%;"
         ></div>
       </div>
@@ -527,7 +527,7 @@ htmlCode='
         <span class="d-icon__wrapper">
           <div aria-busy="true" role="status" aria-label="" class="d-icon d-icon--size-200" style="display: none;">
             <div
-              class="skeleton-placeholder d-bar-circle skeleton-placeholder--animate"
+              class="d-skeleton-placeholder d-bar-circle d-skeleton-placeholder--animate"
               style="animation-delay: 0ms; animation-duration: 1000ms; min-width: 100%; max-width: 100%; min-height: 100%; max-height: 100%;"
             ></div>
           </div>
