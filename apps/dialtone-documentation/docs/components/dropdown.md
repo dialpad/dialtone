@@ -103,9 +103,9 @@ htmlCode='
     <div class="d-popover__content">
       <ul id="dt6" class="d-dropdown-list d-py0">
         <li class="d-list-item" tabindex="-1" role="menuitem" aria-selected="false">
-          <div class="dt-item-layout">
-            <section class="dt-item-layout--content">
-              <div class="dt-item-layout--title">Menu Item 1</div>
+          <div class="d-item-layout">
+            <section class="d-item-layout--content">
+              <div class="d-item-layout--title">Menu Item 1</div>
             </section>
           </div>
         </li>
@@ -202,9 +202,9 @@ htmlCode='
         <ul id="dt16" class="d-list-item-group" role="group" aria-labelledby="dt16-heading">
           <li id="dt16-heading" role="presentation" class="dt-dropdown-list--header d-py4 d-px8 d-fw-semibold d-c-default">Menu Heading A</li>
           <li id="dt17" class="d-list-item d-list-item--static" tabindex="-1" role="listitem">
-            <div class="dt-item-layout">
-              <section class="dt-item-layout--content">
-                <div class="dt-item-layout--title">
+            <div class="d-item-layout">
+              <section class="d-item-layout--content">
+                <div class="d-item-layout--title">
                   Menu Item 1
                 </div>
               </section>
@@ -212,9 +212,9 @@ htmlCode='
           </li>
           <li aria-hidden="true" class="d-list-item-separator"></li>
           <li id="dt18" class="d-list-item d-list-item--static" tabindex="-1" role="listitem">
-            <div class="dt-item-layout">
-              <section class="dt-item-layout--content">
-                <div class="dt-item-layout--title">
+            <div class="d-item-layout">
+              <section class="d-item-layout--content">
+                <div class="d-item-layout--title">
                   Menu Item 2
                 </div>
               </section>
@@ -225,9 +225,9 @@ htmlCode='
         <ul id="dt19" class="d-list-item-group" role="group" aria-labelledby="dt19-heading">
           <li id="dt19-heading" role="presentation" class="dt-dropdown-list--header d-py4 d-px8 d-fw-semibold d-c-default">Menu Heading B</li>
           <li id="dt20" class="d-list-item d-list-item--static" tabindex="-1" role="listitem">
-            <div class="dt-item-layout">
-              <section class="dt-item-layout--content">
-                <div class="dt-item-layout--title">
+            <div class="d-item-layout">
+              <section class="d-item-layout--content">
+                <div class="d-item-layout--title">
                   Menu Item 3
                 </div>
               </section>

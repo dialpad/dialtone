@@ -68,8 +68,8 @@ The **bottom** slot can be used to display content below the subtitle slot.
 htmlCode='
 <ul>
   <li id="dt4" class="d-list-item d-list-item--focusable" tabindex="0" role="listitem">
-    <div class="dt-item-layout">
-      <section class="dt-item-layout--left">
+    <div class="d-item-layout">
+      <section class="d-item-layout--left">
         <span class="d-icon__wrapper">
           <div aria-busy="true" role="status" aria-label="" class="d-icon d-icon--size-500" style="display: none;">
             <div
@@ -80,15 +80,15 @@ htmlCode='
           <svg>...</svg>
         </span>
       </section>
-      <section class="dt-item-layout--content">
-        <div class="dt-item-layout--subtitle">
+      <section class="d-item-layout--content">
+        <div class="d-item-layout--subtitle">
           {subtitle}
         </div>
-        <div class="dt-item-layout--bottom">
+        <div class="d-item-layout--bottom">
           {bottom}
         </div>
       </section>
-      <section class="dt-item-layout--right">
+      <section class="d-item-layout--right">
         <span class="d-icon__wrapper">
           <div aria-busy="true" role="status" aria-label="" class="d-icon d-icon--size-500" style="display: none;">
             <div
