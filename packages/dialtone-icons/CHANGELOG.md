@@ -1,3 +1,10 @@
+# [4.29.0](https://github.com/dialpad/dialtone/compare/dialtone-icons/v4.28.0...dialtone-icons/v4.29.0) (2024-10-30)
+
+
+### Features
+
+* **Icon:** DLT-2145 added Workforce Management (née Surfboard) ([#548](https://github.com/dialpad/dialtone/issues/548)) ([967d3e5](https://github.com/dialpad/dialtone/commit/967d3e5bd2c6221fc032e6b3cd8dee36d895dd27))
+
 # [4.28.0](https://github.com/dialpad/dialtone/compare/dialtone-icons/v4.27.2...dialtone-icons/v4.28.0) (2024-10-23)
 
 
