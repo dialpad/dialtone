@@ -11,6 +11,8 @@ This is the Dialtone language tools based on Volar Framework.
 
 - server: Language server.
   - src: Language server source files.
+    - resolvers: Process documentation and return completion items array.
+    - services: Language service plugins
 - vscode: VSCode extension.
   - src: Extension source files.
   - scripts: ESBuild script.
