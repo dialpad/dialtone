@@ -28,7 +28,7 @@
           @click="clearSearch"
         >
           <template #icon>
-            <dt-icon-x-circle
+            <dt-icon-close
               size="200"
             />
           </template>
@@ -39,7 +39,7 @@
 </template>
 
 <script>
-import { DtIconSearch, DtIconXCircle } from '@dialpad/dialtone-icons/vue2';
+import { DtIconSearch, DtIconClose } from '@dialpad/dialtone-icons/vue2';
 import { DtInput } from '@/components/input';
 import { DtButton } from '@/components/button';
 
@@ -49,7 +49,7 @@ export default {
   components: {
     DtInput,
     DtIconSearch,
-    DtIconXCircle,
+    DtIconClose,
     DtButton,
   },
 

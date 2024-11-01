@@ -172,7 +172,6 @@
 </template>
 
 <script setup>
-import SvgLoader from '../../baseComponents/SvgLoader.vue';
 function sendAnalyticsEvent () {
   if (!window.gtag) return;
   window.gtag('event', 'click', { event_name: 'get_started_button_clicked' });
