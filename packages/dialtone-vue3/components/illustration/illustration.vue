@@ -11,6 +11,10 @@ import { computed } from 'vue';
 import { illustrations } from '@dialpad/dialtone-icons/vue3';
 import { ILLUSTRATION_NAMES } from './illustration_constants';
 
+defineOptions({
+  name: 'DtIllustration',
+});
+
 const props = defineProps({
   /**
      * The illustration name in kebab-case

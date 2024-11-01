@@ -27,12 +27,14 @@
   "npm.autoDetect": "off",
   "editor.codeActionsOnSave": {
     "source.fixAll.stylelint": "explicit",
-    "source.fixAll.eslint": "explicit"
+    "source.fixAll.eslint": "explicit",
+    "source.fixAll.markdownlint": "explicit"
   },
   "javascript.format.enable": false,
   "css.validate": false,
   "less.validate": false,
   "stylelint.validate": ["css", "less"],
+  "stylelint.configFile": "./stylelint.config.cjs",
   "eslint.format.enable": true,
   "eslint.validate": [
     "javascript",
@@ -57,7 +59,8 @@
     "https://json.schemastore.org/github-workflow.json": "file:///.github/workflows/deploy.yml"
   },
   "[markdown]": {
-    "editor.rulers": []
+    "editor.rulers": [],
+    "editor.formatOnSave": true
   },
   "markdownlint.ignore": [
         "**/CHANGELOG.md"

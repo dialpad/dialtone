@@ -284,8 +284,8 @@
         </div>
 
         <dt-popover
+          v-model:open="isPopoverShown"
           external-anchor="external-anchor-example"
-          :open.sync="isPopoverShown"
         >
           <template #content>
             <ul>

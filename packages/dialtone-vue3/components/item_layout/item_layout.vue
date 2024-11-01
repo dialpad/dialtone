@@ -26,7 +26,10 @@
       <div
         v-if="hasSlotContent($slots.subtitle)"
         data-qa="dt-item-layout-subtitle-wrapper"
-        :class="['dt-item-layout--subtitle', { 'dt-item-layout--subtitle--with-title': hasSlotContent($slots.default) }]"
+        :class="[
+          'dt-item-layout--subtitle',
+          { 'dt-item-layout--subtitle--with-title': hasSlotContent($slots.default) },
+        ]"
       >
         <!-- @slot Slot for content below main content -->
         <slot name="subtitle" />

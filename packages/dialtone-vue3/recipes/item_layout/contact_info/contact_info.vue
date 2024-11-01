@@ -107,7 +107,6 @@
 <script>
 import DtItemLayout from '@/components/item_layout/item_layout.vue';
 import DtAvatar from '@/components/avatar/avatar.vue';
-import { hasSlotContent } from '@/common/utils/index.js';
 
 export default {
   name: 'DtRecipeContactInfo',

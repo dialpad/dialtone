@@ -19,6 +19,7 @@ module.exports = {
     'stylelint-less',
     'stylelint-no-px',
   ],
+  fix: true,
   customSyntax: 'postcss-less',
   rules: {
     'at-rule-no-unknown': [

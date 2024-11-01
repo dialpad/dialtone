@@ -60,7 +60,7 @@ module.exports = {
     'vue/block-tag-newline': ['error'],
     'vue/no-duplicate-attr-inheritance': ['error'],
     'vue/no-undef-components': ['error', {
-      ignorePatterns: ['icon-', 'router-link', 'toc', 'dtc-', 'dt-'],
+      ignorePatterns: ['icon-', 'router-link', 'toc', 'dtc-', 'dt-', 'svg-loader'],
     }],
     'vue/v-on-event-hyphenation': ['error'],
     'vue/no-template-target-blank': ['error'],
