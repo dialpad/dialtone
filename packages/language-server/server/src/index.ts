@@ -14,7 +14,7 @@ connection.onInitialize((params) => {
     createSimpleProject([dialtoneLanguagePlugin]),
     [
       createDialtoneComponentsService(),
-      createDialtoneTokensService()
+      createDialtoneTokensService(),
     ]
   );
 });

@@ -12,7 +12,7 @@ export const dialtoneLanguagePlugin: LanguagePlugin<URI> = {
     return virtualCode;
   },
 
-  getLanguageId: function (_scriptId): string | undefined {
+  getLanguageId(_scriptId) {
     return 'dialtone';
   }
 };
@@ -36,7 +36,10 @@ export class DialtoneVirtualCode implements VirtualCode {
       sourceOffsets: [0],
       generatedOffsets: [0],
       lengths: [this.snapshot.getLength()],
-      data: { completion: true },
+      data: {
+        completion: true,
+        // semantic: true,
+      },
     }];
   }
 }

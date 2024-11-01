@@ -1,5 +1,5 @@
-import { LanguageServiceContext } from "@volar/language-server";
-import { Position, TextDocument } from "vscode-html-languageservice";
+import type { LanguageServiceContext } from "@volar/language-server";
+import type { Position, TextDocument } from "vscode-html-languageservice";
 import { URI } from "vscode-uri";
 import { DialtoneVirtualCode } from "./language-plugin";
 

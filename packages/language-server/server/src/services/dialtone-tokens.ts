@@ -21,7 +21,7 @@ export function create(): LanguageServicePlugin {
                 resolveProvider: true,
                 triggerCharacters: ['(', '-'],
             },
-            hoverProvider: true,
+            // hoverProvider: true,
         },
         create(context): LanguageServicePluginInstance {
             console.log('Created Dialtone Tokens service');
@@ -42,20 +42,20 @@ export function create(): LanguageServicePlugin {
                         return { isIncomplete: true, items: [] };
 
                 },
-                async provideHover(document, position) {
-                    console.log('Providing Component Hover', document, position);
+                // async provideHover(document, position) {
+                //     console.log('Providing Component Hover', document, position);
 
-                    const content = getContent(document, context);
-                    if (!content) return;
+                //     const content = getContent(document, context);
+                //     if (!content) return;
 
-                    const currentLine: string = content.split('\n')[position.line];
-                    const currentWord = getCurrentWord(currentLine, position);
+                //     const currentLine: string = content.split('\n')[position.line];
+                //     const currentWord = getCurrentWord(currentLine, position);
 
-                    console.log('hovering: ', currentWord);
+                //     console.log('hovering: ', currentWord);
 
 
-                    return { contents: { kind: "plaintext", value: 'Hover content' } };
-                },
+                //     return { contents: { kind: "plaintext", value: 'Hover CSS content' } };
+                // },
             };
         },
     }

@@ -1,4 +1,4 @@
-import type { LanguageServicePlugin, LanguageServicePluginInstance } from "@volar/language-server/node";
+import type { LanguageServicePlugin, LanguageServicePluginInstance } from "@volar/language-service";
 import { resolveVueComponents } from "../resolvers/vue-components";
 import { getContent, getCurrentWord } from "../utils";
 
@@ -18,13 +18,13 @@ export function create(): LanguageServicePlugin {
         name: "dialtone-components",
         capabilities: {
             completionProvider: {
-                resolveProvider: true,
                 triggerCharacters: ['<', '\:', '"', '\''],
             },
-            hoverProvider: true,
+            // hoverProvider: true,
         },
         create(context): LanguageServicePluginInstance {
             console.log('Created Dialtone Components service');
+
             return {
                 provideCompletionItems(document, position, completionContext) {
                     console.log('Providing Component Completion Items');
@@ -44,20 +44,20 @@ export function create(): LanguageServicePlugin {
 
                     return resolveVueComponents(currentLine, currentWord, sanitizedWord, completionContext);
                 },
-                async provideHover(document, position) {
-                    console.log('Providing Token Hover', document, position);
+                // provideHover(document, position, token) {
+                //     console.log('Providing Token Hover', document, position, token);
 
-                    const content = getContent(document, context);
-                    if (!content) return;
+                //     const content = getContent(document, context);
+                //     if (!content) return;
 
-                    const currentLine: string = content.split('\n')[position.line];
-                    const currentWord = getCurrentWord(currentLine, position);
+                //     const currentLine: string = content.split('\n')[position.line];
+                //     const currentWord = getCurrentWord(currentLine, position);
 
-                    console.log('hovering: ', currentWord);
+                //     console.log('hovering: ', currentWord);
 
 
-                    return { contents: { kind: "plaintext", value: 'Hover content' } };
-                },
+                //     return { contents: ['Hover Component content'] };
+                // },
             };
         },
     }

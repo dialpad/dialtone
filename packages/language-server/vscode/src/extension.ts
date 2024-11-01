@@ -1,20 +1,9 @@
 import * as serverProtocol from '@volar/language-server/protocol';
 import { createLabsInfo, RevealOutputChannelOn } from '@volar/vscode';
 import type { ExtensionContext, OutputChannel } from 'vscode';
-import type {
-	BaseLanguageClient,
-	LanguageClientOptions,
-	ServerOptions,
-} from '@volar/vscode/node';
-import {
-	TransportKind,
-	LanguageClient,
-} from '@volar/vscode/node';
-import {
-	Uri,
-	commands,
-	window
-} from 'vscode';
+import type { BaseLanguageClient, LanguageClientOptions, ServerOptions } from '@volar/vscode/node';
+import { LanguageClient, TransportKind } from '@volar/vscode/node';
+import { Uri, commands, window } from 'vscode';
 
 let client: BaseLanguageClient;
 let outputChannel: OutputChannel;
