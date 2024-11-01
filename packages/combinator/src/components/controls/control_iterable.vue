@@ -56,7 +56,7 @@
 </template>
 
 <script setup>
-import { DtIconPlus, DtIconClose } from '@dialpad/dialtone-icons/vue3'
+import { DtIconPlus, DtIconClose } from '@dialpad/dialtone-icons/vue3';
 import { DtButton, DtListItem } from '@dialpad/dialtone-vue';
 import { DEFAULT_PREFIX, VALUE_UPDATE_EVENT } from '@/src/lib/constants';
 import { idMap } from '@/src/lib/utils_vue';

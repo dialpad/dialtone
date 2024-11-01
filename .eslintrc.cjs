@@ -2,7 +2,9 @@ module.exports = {
   extends: [
     'standard',
     'semistandard',
+    'plugin:json/recommended-legacy',
   ],
+  ignorePatterns: ['!.*', 'dist', 'node_modules'],
   env: {
     browser: true,
     node: true,

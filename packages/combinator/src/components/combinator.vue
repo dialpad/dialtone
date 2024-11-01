@@ -64,7 +64,7 @@ import DtcOptionBar from './option_bar/option_bar.vue';
 import DtcRenderer from './renderer/renderer.vue';
 import DtcCodePanel from './code_panel/code_panel.vue';
 import DtcSettingsMenu from './settings_menu/settings_menu.vue';
-import DtcHeader from '@/src/components/header/header.vue';
+// import DtcHeader from '@/src/components/header/header.vue';
 import { DtNotice } from '@dialpad/dialtone-vue';
 
 import { enumerateGroups } from '@/src/lib/utils';
@@ -134,9 +134,9 @@ const props = defineProps({
 
 const selectedVariant = ref('default');
 
-function updateVariant (e) {
-  selectedVariant.value = e;
-}
+// function updateVariant (e) {
+//   selectedVariant.value = e;
+// }
 
 /**
  * Gets a new instantiation of an info object.

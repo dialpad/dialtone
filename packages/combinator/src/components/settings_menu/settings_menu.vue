@@ -87,7 +87,7 @@
 </template>
 
 <script setup>
-import { DtIconSettings } from '@dialpad/dialtone-icons/vue3'
+import { DtIconSettings } from '@dialpad/dialtone-icons/vue3';
 
 import {
   DtButton,

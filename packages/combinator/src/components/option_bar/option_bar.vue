@@ -138,8 +138,10 @@ function getStaticControl (control) {
  * Emits an update to a member in the 'options' data object.
  *
  * @param memberGroup - The member group
+ * @param member.member
  * @param member - The member
  * @param value - The updated value
+ * @param member.value
  */
 function updateMember (memberGroup, { member, value }) {
   emit(OPTIONS_UPDATE_EVENT, (options) => {

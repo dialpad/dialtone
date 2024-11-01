@@ -45,7 +45,7 @@
 <script setup>
 import { computed } from 'vue';
 import { SETTINGS_UPDATE_EVENT } from '@/src/lib/constants';
-import DtcRendererMenu from '@/src/components/renderer/renderer_menu.vue';
+// import DtcRendererMenu from '@/src/components/renderer/renderer_menu.vue';
 import DtcOverlay from '@/src/components/tools/overlay.vue';
 import DtcRendererTarget from '@/src/components/renderer/renderer_target.vue';
 import DtcNode from '@/src/components/tools/node.vue';
@@ -102,13 +102,13 @@ const renderedSlots = computed(() => {
   );
 });
 
-const theme = computed(() => {
-  switch (background.value) {
-    case 'black': return 'dark';
-    case 'white': return 'light';
-    default: return props.settings.root.theme;
-  }
-});
+// const theme = computed(() => {
+//   switch (background.value) {
+//     case 'black': return 'dark';
+//     case 'white': return 'light';
+//     default: return props.settings.root.theme;
+//   }
+// });
 const background = computed(() => getSetting('background'));
 const positioning = computed(() => getSetting('positioning'));
 
@@ -122,11 +122,11 @@ function getSetting (setting) {
   return props.settings.renderer[setting];
 }
 
-function updateSettings (setting, e) {
-  emit(SETTINGS_UPDATE_EVENT, (model) => {
-    model.renderer[setting] = e;
-  });
-}
+// function updateSettings (setting, e) {
+//   emit(SETTINGS_UPDATE_EVENT, (model) => {
+//     model.renderer[setting] = e;
+//   });
+// }
 </script>
 
 <script>

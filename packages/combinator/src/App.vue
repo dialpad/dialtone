@@ -89,12 +89,6 @@ function updateComponent (e) {
   window.location.hash = e;
 }
 
-const background = ref('white');
-
-function updateBackground (e) {
-  background.value = e;
-}
-
 const icons = ref();
 
 const library = computed(() => {
@@ -114,7 +108,7 @@ onMounted(async () => {
     variants.value = getVariantFromHash();
   });
 
-  const promises = [];
+  // const promises = [];
   // getIcons().forEach(icon => {
   //  promises.push(import(`../node_modules/@dialpad/dialtone/lib/dist/vue/icons/${icon}.vue`).then(module => {
   //    return [icon, module.default];
