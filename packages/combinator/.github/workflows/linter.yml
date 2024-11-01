@@ -1,0 +1,36 @@
+name: Linter
+
+env:
+  NODE_MODULES_CACHE_VERSION: v1
+
+on:
+  pull_request:
+    types: ['opened', 'edited', 'reopened', 'synchronize']
+    branches:
+      - staging
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Use Node.js
+        uses: actions/setup-node@v3.3.0
+        with:
+          node-version: '16.x'
+
+      - uses: actions/cache@v3
+        id: npm-cache
+        with:
+          path: |
+            **/node_modules/
+          key: ${{ format('{0}-cache-node-modules-{1}-{2}', runner.os, env.NODE_MODULES_CACHE_VERSION, hashFiles('**/package-lock.json')) }}
+
+      - name: Install dependencies
+        if: steps.npm-cache.outputs.cache-hit != 'true'
+        run: npm ci
+
+      - name: Lint
+        run: npm run lint
