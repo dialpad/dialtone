@@ -44,7 +44,7 @@
             :ref="el => { if (el) setEmojiRef(el, indexTab, indexEmoji) }"
             type="button"
             :aria-label="emoji.name"
-            @click="selectEmoji(emoji)"
+            @click="event => selectEmoji(emoji, event)"
             @focusin="highlightEmoji(emoji)"
             @focusout="highlightEmoji(null)"
             @mouseover="highlightEmoji(emoji)"
@@ -79,7 +79,7 @@
             :class="{
               'hover-emoji': (index === 0 && hoverFirstEmoji),
             }"
-            @click="selectEmoji(emoji)"
+            @click="event => selectEmoji(emoji, event)"
             @focusin="highlightEmoji(emoji)"
             @focusout="highlightEmoji(null)"
             @mouseover="hoverEmoji(emoji)"
@@ -483,7 +483,7 @@ const handleKeyDownFilteredEmojis = (event, indexEmoji, emoji) => {
       emits('focus-skin-selector');
       break;
     case 'Enter':
-      selectEmoji(emoji);
+      selectEmoji(emoji, event);
       break;
     default:
       break;
@@ -519,7 +519,7 @@ const handleKeyDown = (event, indexTab, indexEmoji, emoji) => {
       break;
 
     case 'Enter':
-      selectEmoji(emoji);
+      selectEmoji(emoji, event);
       break;
 
     default:
@@ -527,8 +527,8 @@ const handleKeyDown = (event, indexTab, indexEmoji, emoji) => {
   }
 };
 
-function selectEmoji (emoji) {
-  emits('selected-emoji', emoji);
+function selectEmoji (emoji, event) {
+  emits('selected-emoji', { ...emoji, shift_key: event.shiftKey });
 }
 
 function highlightEmoji (emoji) {

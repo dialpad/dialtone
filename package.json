@@ -1,6 +1,6 @@
 {
   "name": "@dialpad/dialtone",
-  "version": "9.79.2",
+  "version": "9.83.2",
   "packageManager": "pnpm@9.9.0",
   "description": "Dialpad's Dialtone design system monorepo",
   "scripts": {
@@ -124,6 +124,7 @@
     "@tiptap/suggestion": "^2.6.6",
     "date-fns": "2.30.0",
     "docopt": "0.6.2",
+    "emoji-toolkit": "8.0.0",
     "overlayscrollbars": "2.10.0",
     "regex-combined-emojis": "1.6.0",
     "tippy.js": "6.3.7"

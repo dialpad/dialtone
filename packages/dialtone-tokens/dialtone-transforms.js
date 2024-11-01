@@ -30,7 +30,7 @@ const pxToRemTransformer = (token, options) => {
   const floatVal = parseFloat(token.value);
 
   if (isNaN(floatVal)) {
-    throwSizeError(token.name, token.value, 'rem');
+    throwSizeError(token.path, token.value, 'rem');
   }
 
   if (floatVal === 0) {
@@ -136,7 +136,7 @@ export function registerDialtoneTransforms (styleDictionary) {
       const floatVal = parseFloat(token.value);
 
       if (isNaN(floatVal)) {
-        throwSizeError(token.name, token.value, 'dp');
+        throwSizeError(token.path, token.value, 'dp');
       }
 
       return `${floatVal}.dp`;
@@ -154,10 +154,30 @@ export function registerDialtoneTransforms (styleDictionary) {
       const floatVal = parseFloat(token.value);
 
       if (isNaN(floatVal)) {
-        throwSizeError(token.name, token.value, 'sp');
+        throwSizeError(token.path, token.value, 'sp');
       }
 
       return `${floatVal}.sp`;
+    },
+  });
+
+  styleDictionary.registerTransform({
+    name: 'dt/android/compose/size/resolveMath',
+    type: 'value',
+    transitive: true,
+    filter: function (token) {
+      return [...SPACING_IDENTIFIERS, ...SIZE_IDENTIFIERS, ...FONT_SIZE_IDENTIFIERS].includes(token.type);
+    },
+    transform: (token) => {
+      // replace unmathable characters with empty string
+      let unit;
+      if (token.value.includes('.dp')) unit = 'dp';
+      if (token.value.includes('.sp')) unit = 'sp';
+      if (token.value.includes('.em')) unit = 'em';
+      const mathString = token.value.replace(/\.dp|\.sp|\.em/g, '');
+      // eslint-disable-next-line no-eval
+      const result = eval(mathString);
+      return `${result}.${unit}`;
     },
   });
 
@@ -171,7 +191,7 @@ export function registerDialtoneTransforms (styleDictionary) {
       const floatVal = parseFloat(token.value);
 
       if (isNaN(floatVal)) {
-        throwSizeError(token.name, token.value, '%');
+        throwSizeError(token.path, token.value, '%');
       }
 
       if (floatVal === 0) {
@@ -193,7 +213,7 @@ export function registerDialtoneTransforms (styleDictionary) {
       const floatVal = parseFloat(token.value);
 
       if (isNaN(floatVal)) {
-        throwSizeError(token.name, token.value, '%');
+        throwSizeError(token.path, token.value, '%');
       }
 
       return `${floatVal}F`;
@@ -214,6 +234,7 @@ export function registerDialtoneTransforms (styleDictionary) {
   styleDictionary.registerTransform({
     name: 'dt/ios/fonts/transformToStack',
     type: 'value',
+    transitive: true,
     filter: function (token) {
       return FONT_FAMILY_IDENTIFIERS.includes(token.type);
     },
@@ -250,7 +271,7 @@ export function registerDialtoneTransforms (styleDictionary) {
       const floatVal = parseFloat(token.value);
 
       if (isNaN(floatVal)) {
-        throwSizeError(token.name, token.value, 'dp');
+        throwSizeError(token.path, token.value, 'dp');
       }
 
       return `CGFloat(${(floatVal).toFixed(2)})`;
@@ -267,7 +288,7 @@ export function registerDialtoneTransforms (styleDictionary) {
       const floatVal = parseFloat(token.value);
 
       if (isNaN(floatVal)) {
-        throwSizeError(token.name, token.value, '%');
+        throwSizeError(token.path, token.value, '%');
       }
 
       return `CGFloat(${(floatVal).toFixed(2)})`;
@@ -284,7 +305,7 @@ export function registerDialtoneTransforms (styleDictionary) {
       const floatVal = parseFloat(token.value);
 
       if (isNaN(floatVal)) {
-        throwSizeError(token.name, token.value, '%');
+        throwSizeError(token.path, token.value, '%');
       }
 
       if (floatVal === 0) {
@@ -321,7 +342,7 @@ export function registerDialtoneTransforms (styleDictionary) {
       const floatVal = parseFloat(token.value);
 
       if (isNaN(floatVal)) {
-        throwSizeError(token.name, token.value, '%');
+        throwSizeError(token.path, token.value, '%');
       }
 
       if (floatVal === 0) {

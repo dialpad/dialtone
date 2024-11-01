@@ -395,11 +395,23 @@ a.header-anchor {
 //  ----------------------------------------------------------------------------
 .d-gl-docsite-icons {
   --icon-card-width: minmax(var(--dt-size-775), 1fr);
-  --icon-grid-columns: auto-fit;
+  --icon-grid-columns: 2;
 
   display: grid;
   grid-template-columns: repeat(var(--icon-grid-columns), [col] var(--icon-card-width));
   gap: var(--dt-space-400);
+
+  @media screen and (min-width: 375px) {
+    --icon-grid-columns: 3;
+  }
+
+  @media screen and (min-width: 480px) {
+    --icon-grid-columns: 4;
+  }
+
+  @media screen and (min-width: 1024px) {
+    --icon-grid-columns: 6;
+  }
 
   &--large {
     grid-auto-rows: 18rem;

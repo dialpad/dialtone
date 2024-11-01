@@ -1,3 +1,66 @@
+## [3.159.2](https://github.com/dialpad/dialtone/compare/dialtone-vue3/v3.159.1...dialtone-vue3/v3.159.2) (2024-10-31)
+
+
+### Bug Fixes
+
+* **Emoji:** NO-JIRA add emoji-toolkit to externals ([#554](https://github.com/dialpad/dialtone/issues/554)) ([e225cbd](https://github.com/dialpad/dialtone/commit/e225cbdf13704eb3c5aedccb9630727d3831b19b))
+
+## [3.159.1](https://github.com/dialpad/dialtone/compare/dialtone-vue3/v3.159.0...dialtone-vue3/v3.159.1) (2024-10-31)
+
+
+### Bug Fixes
+
+* **Emoji:** NO-JIRA revert back to emoji-toolkit ([#552](https://github.com/dialpad/dialtone/issues/552)) ([8b6d2ad](https://github.com/dialpad/dialtone/commit/8b6d2ad640bd47c51e650ef65d5a694b236afbc5))
+
+# [3.159.0](https://github.com/dialpad/dialtone/compare/dialtone-vue3/v3.158.0...dialtone-vue3/v3.159.0) (2024-10-30)
+
+
+### Bug Fixes
+
+* **Emoji Text Wrapper:** DLT-2176 invalid regular expression error ([#544](https://github.com/dialpad/dialtone/issues/544)) ([1ea0986](https://github.com/dialpad/dialtone/commit/1ea098693f1beb59c25362f554ab2cb8d4d6e01d))
+
+
+### Features
+
+* **Emoji Picker:** DP-113112 add shift key info on selected-emoji event ([#549](https://github.com/dialpad/dialtone/issues/549)) ([3092584](https://github.com/dialpad/dialtone/commit/3092584d85ceea1439bbb810f56ebaeeb8e09e3a))
+
+# [3.158.0](https://github.com/dialpad/dialtone/compare/dialtone-vue3/v3.157.2...dialtone-vue3/v3.158.0) (2024-10-29)
+
+
+### Features
+
+* **Input:** DLT-2080 add type search to input ([#538](https://github.com/dialpad/dialtone/issues/538)) ([c110325](https://github.com/dialpad/dialtone/commit/c110325c2569cf44268752cb39001cfb5751ce58))
+
+## [3.157.2](https://github.com/dialpad/dialtone/compare/dialtone-vue3/v3.157.1...dialtone-vue3/v3.157.2) (2024-10-24)
+
+
+### Bug Fixes
+
+* **Rich Text Editor, Editor:** DLT-2175 editor loses text formatting while pasting ([#543](https://github.com/dialpad/dialtone/issues/543)) ([fd719a4](https://github.com/dialpad/dialtone/commit/fd719a46dbe5f32f1a953a64d0702e0086341281))
+
+## [3.157.1](https://github.com/dialpad/dialtone/compare/dialtone-vue3/v3.157.0...dialtone-vue3/v3.157.1) (2024-10-24)
+
+
+### Bug Fixes
+
+* **Callbar Button With Popover:** DLT-2129 text overlapping anchor ([#536](https://github.com/dialpad/dialtone/issues/536)) ([673e5f1](https://github.com/dialpad/dialtone/commit/673e5f149e762037d50c26221ec51a09170f2fcb))
+
+# [3.157.0](https://github.com/dialpad/dialtone/compare/dialtone-vue3/v3.156.3...dialtone-vue3/v3.157.0) (2024-10-23)
+
+
+### Features
+
+* **Combobox Multi Select:** DLT-1811 add pass thorugh props to style input ([#534](https://github.com/dialpad/dialtone/issues/534)) ([126d1fc](https://github.com/dialpad/dialtone/commit/126d1fc016ea8d8a67d4ee9799b5b3f42381b925))
+
+## [3.156.3](https://github.com/dialpad/dialtone/compare/dialtone-vue3/v3.156.2...dialtone-vue3/v3.156.3) (2024-10-22)
+
+
+### Bug Fixes
+
+* **Avatar:** DP-113524 avatar icon not reactive ([#529](https://github.com/dialpad/dialtone/issues/529)) ([9bde6bd](https://github.com/dialpad/dialtone/commit/9bde6bdada091793335bcf2c87c2f7718e508b5e))
+* **Design Tokens:** DLT-2135 DLT-139 nix references for shadow design tokens  ([#532](https://github.com/dialpad/dialtone/issues/532)) ([b2e09c5](https://github.com/dialpad/dialtone/commit/b2e09c5ae12a4a2bbdcc21d637ff36d58f3e6c50))
+* NO-JIRA dialtone-vue incorrect build output ([#530](https://github.com/dialpad/dialtone/issues/530)) ([28e53b4](https://github.com/dialpad/dialtone/commit/28e53b422316bc9053f13f6e4c7ad62c47bc755b))
+
 ## [3.156.2](https://github.com/dialpad/dialtone/compare/dialtone-vue3/v3.156.1...dialtone-vue3/v3.156.2) (2024-10-11)
 
 
