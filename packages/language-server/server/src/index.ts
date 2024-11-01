@@ -1,5 +1,6 @@
 import { createConnection, createServer, createSimpleProject } from '@volar/language-server/node';
-import { create as createDialtoneService } from './volar-service-dialtone';
+import { create as createDialtoneComponentsService } from './services/dialtone-components';
+import { create as createDialtoneTokensService } from './services/dialtone-tokens';
 import { dialtoneLanguagePlugin } from "./language-plugin";
 
 const connection = createConnection();
@@ -12,7 +13,8 @@ connection.onInitialize((params) => {
     params,
     createSimpleProject([dialtoneLanguagePlugin]),
     [
-      createDialtoneService()
+      createDialtoneComponentsService(),
+      createDialtoneTokensService()
     ]
   );
 });

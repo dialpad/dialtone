@@ -1,10 +1,10 @@
 <template>
-    <dt-avatar size="" presence="busy" icon-size="600" icon-class="" />
-    <dt-banner title="Some title" pinned="true" kind="info" />
+    <dt-avatar />
+    <dt-avatar size="" />
 </template>
 
 <style>
     .custom-class {
-        color: var()
+        color: var(--dt-);
     }
 </style>

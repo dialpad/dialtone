@@ -1,29 +1,60 @@
 {
 	"private": true,
 	"name": "vscode-dialtone",
-	"version": "0.0.1",
+	"version": "1.0.0-alpha.1",
 	"categories": [
-		"Programming Languages"
+		"Other"
 	],
-	"displayName": "Dialtone Language Features",
-	"description": "Dialtone VSCode extension",
-	"author": "juliodialpad",
-	"publisher": "dialpad",
+	"galleryBanner": {
+    "color": "#7c52ff"
+  },
+	"pricing": "Free",
+	"preview": true,
+	"icon": "images/icon.png",
+	"displayName": "Dialtone",
+	"description": "Language Support for Dialtone components and tokens",
+	"author": "Tico Ortega <julio.ortega@dialpad.com>",
+	"publisher": "Dialpad",
+	"bugs": {
+    "email": "dialtone@dialpad.com"
+  },
+	"keywords": [
+		"dialpad",
+		"dialtone",
+		"autocomplete",
+		"vscode",
+		"components",
+		"vue",
+		"tokens",
+		"intellisense",
+		"css"
+	],
 	"engines": {
 		"vscode": "^1.82.0"
 	},
 	"activationEvents": [
-		"onLanguage:vue"
+		"onStartupFinished"
 	],
 	"main": "./dist/client.js",
 	"contributes": {
 		"languages": [
 			{
-				"id": "vue",
-				"extensions": [
-					".vue"
-				]
+				"id": "dialtone",
+				"aliases": [
+					"Dialtone Vue",
+					"Dialtone Tokens"
+				],
+				"icon": {
+					"light": "images/icon.png",
+					"dark": "images/icon.png"
+				}
 			}
+		],
+		"commands": [
+      {
+        "command": "dialtone.showOutput",
+        "title": "Dialtone: Show Output"
+      }
 		]
 	},
 	"scripts": {
@@ -38,10 +69,11 @@
 		"esbuild": "latest",
 		"vsce": "latest"
 	},
-	"license": "MIT",
+	"license": "SEE LICENSE IN LICENSE",
 	"repository": {
 		"type": "git",
 		"url": "git+ssh://git@github.com/dialpad/dialtone.git",
 		"directory": "packages/language-server"
-	}
+	},
+	"homepage": "https://github.com/dialpad/dialtone/blob/production/packages/language-server/vscode/README.md"
 }

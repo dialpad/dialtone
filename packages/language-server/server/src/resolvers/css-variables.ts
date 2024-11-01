@@ -1,4 +1,5 @@
-import { CompletionContext, CompletionItem, CompletionItemKind, CompletionList, MarkupContent, NullableProviderResult } from "@volar/language-server/node";
+import type { CompletionItem, CompletionList, MarkupContent, NullableProviderResult } from "@volar/language-server/node";
+import { CompletionItemKind } from "@volar/language-server/node";
 
 export type DialtoneTokensDoc = {
     [theme: string]: {
@@ -75,8 +76,8 @@ const tokensDocumentation: DialtoneTokensDoc = require('../../node_modules/@dial
 // @TODO: Process the tokens on build, as it is a static file that will not change on runtime.
 const cssVariablesDocumentation: CompletionItem[] = processDocumentation(tokensDocumentation);
 
-export function resolveCSSVariables(currentLine: string, currentWord: string, sanitizedWord: string, context: CompletionContext): NullableProviderResult<CompletionList> {
-    console.log('Resolving CSS Variables', currentLine, currentWord, sanitizedWord, context);
+export function resolveCSSVariables(currentWord: string): NullableProviderResult<CompletionList> {
+    console.log('Resolving CSS Variables', currentWord);
     // @TODO: Filter the tokens to send less info to the client at once.
     return { isIncomplete: false, items: cssVariablesDocumentation };
 }

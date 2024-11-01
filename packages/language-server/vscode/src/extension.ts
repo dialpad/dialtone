@@ -1,13 +1,36 @@
 import * as serverProtocol from '@volar/language-server/protocol';
-import { createLabsInfo } from '@volar/vscode';
-import { BaseLanguageClient, LanguageClient, LanguageClientOptions, ServerOptions, TransportKind } from '@volar/vscode/node';
-import * as vscode from 'vscode';
+import { createLabsInfo, RevealOutputChannelOn } from '@volar/vscode';
+import type { ExtensionContext, OutputChannel } from 'vscode';
+import type {
+	BaseLanguageClient,
+	LanguageClientOptions,
+	ServerOptions,
+} from '@volar/vscode/node';
+import {
+	TransportKind,
+	LanguageClient,
+} from '@volar/vscode/node';
+import {
+	Uri,
+	commands,
+	window
+} from 'vscode';
 
 let client: BaseLanguageClient;
+let outputChannel: OutputChannel;
 
-export async function activate(context: vscode.ExtensionContext) {
+const CLIENT_ID = 'dialtone'
+const CLIENT_NAME = 'Dialtone'
 
-	const serverModule = vscode.Uri.joinPath(context.extensionUri, 'dist', 'server.js');
+export async function activate(context: ExtensionContext) {
+	outputChannel = window.createOutputChannel(CLIENT_NAME);
+	context.subscriptions.push(
+		commands.registerCommand('dialtone.showOutput', () => {
+			outputChannel.show(true);
+		}),
+	)
+
+	const serverModule = Uri.joinPath(context.extensionUri, 'dist', 'server.js');
 	const runOptions = { execArgv: <string[]>[] };
 	const debugOptions = { execArgv: ['--nolazy', '--inspect=' + 6009] };
 	const serverOptions: ServerOptions = {
@@ -23,11 +46,13 @@ export async function activate(context: vscode.ExtensionContext) {
 		},
 	};
 	const clientOptions: LanguageClientOptions = {
-		documentSelector: [{ language: 'vue' }],
+		documentSelector: [{ scheme: 'file', pattern: '**/*.{vue,css,less}' }],
+		outputChannel,
+		revealOutputChannelOn: RevealOutputChannelOn.Error
 	};
 	client = new LanguageClient(
-		'dialtone-ls',
-		'Dialtone Language Server',
+		CLIENT_ID,
+		CLIENT_NAME,
 		serverOptions,
 		clientOptions,
 	);

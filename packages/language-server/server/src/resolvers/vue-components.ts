@@ -1,5 +1,6 @@
+import type { CompletionContext, CompletionItem, CompletionList, NullableProviderResult } from "@volar/language-server/node";
+import { CompletionItemKind } from "@volar/language-server/node";
 import { stringToHumanReadable, stringToKebabCase } from "../utils";
-import { CompletionContext, CompletionItem, CompletionItemKind, CompletionList, NullableProviderResult } from "@volar/language-server/node";
 
 export type DialtoneComponentDoc = {
     displayName: string;
@@ -34,7 +35,7 @@ export const components = componentDocumentation.map((component: DialtoneCompone
         kind: CompletionItemKind.Text,
         detail: humanReadableName,
         documentation: component.description,
-        deprecated: component.deprecated,
+        deprecated: component.deprecated
     } satisfies CompletionItem;
 }) satisfies CompletionItem[];
 
@@ -43,6 +44,7 @@ export function resolveVueComponents(currentLine: string, currentWord: string, s
 
     // Get the clean tag-name
     const tagName = currentLine.replace(/\s+<([\w-]+).*/, '$1');
+
     const component = componentDocumentation.find(component =>
         stringToKebabCase(component.displayName) === tagName
     );
@@ -60,7 +62,7 @@ export function resolveVueComponents(currentLine: string, currentWord: string, s
         ?.map(val => ({
             label: val,
             kind: CompletionItemKind.Value,
-        }));
+        }) as CompletionItem);
 
     if (propValues?.length) {
         return { isIncomplete: false, items: propValues }
@@ -69,12 +71,16 @@ export function resolveVueComponents(currentLine: string, currentWord: string, s
     const props = component.props
         .map(prop => ({
             label: stringToKebabCase(prop.name),
-            kind: CompletionItemKind.Property,
-            componentDocumentation: prop.description
-        }))
+            kind: CompletionItemKind.Field,
+            labelDetails: {
+                detail: `: ${prop.type.name}`,
+            },
+            detail: `Default: ${prop.defaultValue?.value}`,
+            documentation: prop.description
+        }) as CompletionItem)
         .filter(item =>
             // @TODO: Filter properties that are already set
-            item.label.startsWith(currentWord)
+            item.label.startsWith(sanitizedWord)
         );
 
     return { isIncomplete: false, items: props };

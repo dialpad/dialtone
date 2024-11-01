@@ -1,37 +1,32 @@
 import type { CodeMapping, LanguagePlugin, VirtualCode } from "@volar/language-core";
-import type * as ts from "typescript";
-import { URI } from "vscode-uri";
+import type { IScriptSnapshot } from "typescript";
+import type { URI } from "vscode-uri";
 
-const VALID_LANGUAGES = ['vue'];
+export const dialtoneLanguagePlugin: LanguagePlugin<URI> = {
+  createVirtualCode(_scriptId, _languageId, snapshot): DialtoneVirtualCode {
+    return new DialtoneVirtualCode(snapshot);
+  },
 
-export const dialtoneLanguagePlugin = {
-  getLanguageId(uri) {
-    console.log('Getting language ID: ', uri);
+  updateVirtualCode(_scriptId, virtualCode: DialtoneVirtualCode, snapshot): VirtualCode {
+    virtualCode.update(snapshot);
+    return virtualCode;
+  },
+
+  getLanguageId: function (_scriptId): string | undefined {
     return 'dialtone';
-  },
-
-  createVirtualCode(_uri, languageId, snapshot) {
-    if (VALID_LANGUAGES.includes(languageId)) {
-      return new DialtoneVirtualCode(snapshot);
-    }
-  },
-
-  updateVirtualCode(_fileId, code: DialtoneVirtualCode, snapshot) {
-    code.update(snapshot);
-    return code;
-  },
-} satisfies LanguagePlugin<URI>;
+  }
+};
 
 export class DialtoneVirtualCode implements VirtualCode {
   id = "root";
   languageId = "dialtone";
   mappings: CodeMapping[] = [];
 
-  constructor(public snapshot: ts.IScriptSnapshot) {
+  constructor(public snapshot: IScriptSnapshot) {
     this.onSnapshotUpdated();
   }
 
-  update(newSnapshot: ts.IScriptSnapshot) {
+  update(newSnapshot: IScriptSnapshot) {
     this.snapshot = newSnapshot;
     this.onSnapshotUpdated();
   }
