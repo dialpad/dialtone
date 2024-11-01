@@ -8,10 +8,16 @@
       <dt-recipe-feed-item-pill
         default-toggled
         title="Ben called you"
-        icon-name="phone-outgoing"
         wrapper-class="d-w628"
         border-color="ai"
       >
+        <template
+          #leftIcon="{ iconSize }"
+        >
+          <dt-icon-phone-outgoing
+            :size="iconSize"
+          />
+        </template>
         <template #subtitle>
           Lasted 8 min • Ended at 11:56 AM
         </template>
@@ -58,10 +64,16 @@
       <dt-recipe-feed-item-pill
         title="Missed call from Ben"
         border-color="critical"
-        icon-name="phone-missed"
         wrapper-class="d-w628"
         :toggleable="false"
       >
+        <template
+          #leftIcon="{ iconSize }"
+        >
+          <dt-icon-phone-missed
+            :size="iconSize"
+          />
+        </template>
         <template #right>
           <div>
             <dt-button
@@ -86,11 +98,17 @@
         Voicemail
       </h3>
       <dt-recipe-feed-item-pill
-        icon-name="voicemail"
         title="Voicemail"
         wrapper-class="d-w628"
         :toggleable="false"
       >
+        <template
+          #leftIcon="{ iconSize }"
+        >
+          <dt-icon-voicemail
+            :size="iconSize"
+          />
+        </template>
         <template #subtitle>
           From (800)504-9978
         </template>
@@ -120,10 +138,16 @@
       <dt-recipe-feed-item-pill
         border-color="ai"
         title="Ben called you"
-        icon-name="phone-incoming"
         wrapper-class="d-w628"
         :toggleable="false"
       >
+        <template
+          #leftIcon="{ iconSize }"
+        >
+          <dt-icon-phone-incoming
+            :size="iconSize"
+          />
+        </template>
         <template #right>
           <div>
             <dt-button
@@ -154,12 +178,18 @@
       </h3>
       <dt-recipe-feed-item-pill
         title="Ben started a meeting"
-        icon-name="video"
         button-class="d-bar24"
         wrapper-class="d-w628"
         border-color="ai"
         :default-toggled="true"
       >
+        <template
+          #leftIcon="{ iconSize }"
+        >
+          <dt-icon-video
+            :size="iconSize"
+          />
+        </template>
         <template #subtitle>
           Started 10 minutes ago
         </template>
@@ -208,12 +238,18 @@
       </h3>
       <dt-recipe-feed-item-pill
         title="Ben started a meeting"
-        icon-name="video"
         border-color="ai"
         button-class="d-bar24"
         wrapper-class="d-w628"
         :toggleable="false"
       >
+        <template
+          #leftIcon="{ iconSize }"
+        >
+          <dt-icon-video
+            :size="iconSize"
+          />
+        </template>
         <template #subtitle>
           Started 10 minutes ago
         </template>
@@ -247,7 +283,13 @@
 import DtRecipeFeedItemPill from './feed_item_pill.vue';
 import { DtIcon } from '@/components/icon';
 import { DtButton } from '@/components/button';
-
+import {
+  DtIconPhoneOutgoing,
+  DtIconPhoneMissed,
+  DtIconPhoneIncoming,
+  DtIconVideo,
+  DtIconVoicemail,
+} from '@dialpad/dialtone-icons/vue3';
 export default {
   name: 'DtRecipeFeedItemPillVariants',
 
@@ -255,6 +297,11 @@ export default {
     DtRecipeFeedItemPill,
     DtButton,
     DtIcon,
+    DtIconPhoneOutgoing,
+    DtIconPhoneMissed,
+    DtIconVoicemail,
+    DtIconPhoneIncoming,
+    DtIconVideo,
   },
 };
 </script>

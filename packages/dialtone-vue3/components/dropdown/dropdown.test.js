@@ -74,6 +74,7 @@ describe('DtDropdown Tests', () => {
     mockSlots = {};
     mockAttrs = {};
     vi.restoreAllMocks();
+    wrapper.unmount();
   });
 
   describe('Presentation Tests', () => {

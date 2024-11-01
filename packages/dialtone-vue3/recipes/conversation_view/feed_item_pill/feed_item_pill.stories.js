@@ -1,11 +1,13 @@
-import { createRenderConfig } from '@/common/storybook_utils';
+import { createTemplateFromVueFile, getIconNames } from '@/common/storybook_utils';
 import DtRecipeFeedItemPill from './feed_item_pill.vue';
 import DtRecipeFeedItemPillDefaultTemplate from './feed_item_pill_default.story.vue';
 import DtRecipeFeedItemPillVariantsTemplate from './feed_item_pill_variants.story.vue';
 
+const iconsList = getIconNames();
+
 // Default Prop Values
 const args = {
-  iconName: 'video',
+  leftIcon: 'video',
   title: 'This meeting has ended',
   ariaLabel: 'Click to expand',
   wrapperClass: 'd-w628',
@@ -14,6 +16,18 @@ const args = {
 
 const argTypes = {
   // Slots
+  leftIcon: {
+    table: {
+      type: { summary: 'VNode' },
+    },
+    options: iconsList,
+    control: {
+      type: 'select',
+      labels: {
+        undefined: '(empty)',
+      },
+    },
+  },
   subtitle: {
     control: 'text',
     table: {
@@ -56,16 +70,30 @@ export default {
   argTypes,
   excludeStories: /.*Data$/,
 };
+
+// Templates
+const DefaultTemplate = (args, { argTypes }) => createTemplateFromVueFile(
+  args,
+  argTypes,
+  DtRecipeFeedItemPillDefaultTemplate,
+);
+
+const VariantsTemplate = (args, { argTypes }) => createTemplateFromVueFile(
+  args,
+  argTypes,
+  DtRecipeFeedItemPillVariantsTemplate,
+);
+
 // Stories
 export const Default = {
-  render: (argsData) => createRenderConfig(DtRecipeFeedItemPill, DtRecipeFeedItemPillDefaultTemplate, argsData),
+  render: DefaultTemplate,
   parameters: {
     a11y: { disable: true },
   },
 };
 
 export const Variants = {
-  render: (argsData) => createRenderConfig(DtRecipeFeedItemPill, DtRecipeFeedItemPillVariantsTemplate, argsData),
+  render: VariantsTemplate,
   parameters: {
     options: { showPanel: false },
     a11y: { disable: true },

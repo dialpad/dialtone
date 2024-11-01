@@ -1,3 +1,10 @@
+# [1.2.0](https://github.com/dialpad/dialtone/compare/stylelint-plugin-dialtone/v1.1.0...stylelint-plugin-dialtone/v1.2.0) (2024-10-07)
+
+
+### Features
+
+* DLT-1915 add stylelint warning when using px or rem instead of tokens ([#509](https://github.com/dialpad/dialtone/issues/509)) ([77212aa](https://github.com/dialpad/dialtone/commit/77212aaf17e8bdf5a31192d5421bd1ab1d1fac30))
+
 # [1.1.0](https://github.com/dialpad/dialtone/compare/stylelint-plugin-dialtone/v1.0.2...stylelint-plugin-dialtone/v1.1.0) (2024-08-21)
 
 

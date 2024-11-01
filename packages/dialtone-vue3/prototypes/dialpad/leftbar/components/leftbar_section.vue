@@ -15,8 +15,12 @@
         >
           <template #icon="{ iconSize }">
             <div class="d-w24 d-d-inline-flex d-ai-center">
-              <dt-icon
-                :name=" isOpen ? 'chevron-down' : 'chevron-right'"
+              <dt-icon-chevron-down
+                v-if="isOpen"
+                :size="iconSize"
+              />
+              <dt-icon-chevron-right
+                v-else
                 :size="iconSize"
               />
             </div>
@@ -37,7 +41,7 @@
 <script setup>
 import { DtCollapsible } from '@/components/collapsible';
 import { DtButton } from '@/components/button';
-import { DtIcon } from '@/components/icon';
+import { DtIconChevronDown, DtIconChevronRight } from '@dialpad/dialtone-icons/vue3';
 import { ref } from 'vue';
 
 const props = defineProps({

@@ -49,160 +49,176 @@
     <section class="dt-message-input__bottom-section">
       <!-- Left content -->
       <div class="dt-message-input__bottom-section-left">
-        <dt-button
-          v-if="showImagePicker"
-          v-dt-tooltip:top-start="showImagePicker?.tooltipLabel"
-          data-qa="dt-message-input-image-btn"
-          size="sm"
-          circle
-          :kind="imagePickerFocus ? 'default' : 'muted'"
-          importance="clear"
-          :aria-label="showImagePicker.ariaLabel"
-          @click="onSelectImage"
-          @mouseenter="imagePickerFocus = true"
-          @mouseleave="imagePickerFocus = false"
-          @focus="imagePickerFocus = true"
-          @blur="imagePickerFocus = false"
+        <dt-stack
+          gap="200"
+          direction="row"
         >
-          <template #icon>
-            <dt-icon
-              name="image"
-              size="300"
-            />
-          </template>
-        </dt-button>
-        <dt-input
-          ref="messageInputImageUpload"
-          data-qa="dt-message-input-image-input"
-          accept="image/*, video/*"
-          type="file"
-          class="dt-message-input__image-input"
-          multiple
-          hidden
-          @input="onImageUpload"
-        />
-        <dt-popover
-          v-if="showEmojiPicker"
-          v-model:open="emojiPickerOpened"
-          data-qa="dt-message-input-emoji-picker-popover"
-          initial-focus-element="#searchInput"
-          padding="none"
-        >
-          <template #anchor="{ attrs }">
-            <dt-button
-              v-dt-tooltip="emojiTooltipMessage"
-              v-bind="attrs"
-              data-qa="dt-message-input-emoji-picker-btn"
-              size="sm"
-              circle
-              :kind="emojiPickerHovered ? 'default' : 'muted'"
-              importance="clear"
-              :aria-label="emojiButtonAriaLabel"
-              @click="toggleEmojiPicker"
-              @mouseenter="emojiPickerFocus = true"
-              @mouseleave="emojiPickerFocus = false"
-              @focus="emojiPickerFocus = true"
-              @blur="emojiPickerFocus = false"
-            >
-              <template #icon>
-                <dt-icon
-                  :name="!emojiPickerHovered ? 'satisfied' : 'very-satisfied'"
-                  size="300"
-                />
-              </template>
-            </dt-button>
-          </template>
-          <template
-            #content="{ close }"
+          <dt-button
+            v-if="showImagePicker"
+            v-dt-tooltip:top-start="showImagePicker?.tooltipLabel"
+            data-qa="dt-message-input-image-btn"
+            size="sm"
+            class="dt-message-input__button"
+            kind="muted"
+            importance="clear"
+            :aria-label="showImagePicker.ariaLabel"
+            @click="onSelectImage"
+            @mouseenter="imagePickerFocus = true"
+            @mouseleave="imagePickerFocus = false"
+            @focus="imagePickerFocus = true"
+            @blur="imagePickerFocus = false"
           >
-            <dt-emoji-picker
-              v-bind="emojiPickerProps"
-              @skin-tone="onSkinTone"
-              @selected-emoji="(emoji) => { close(); onSelectEmoji(emoji); }"
-            />
-          </template>
-        </dt-popover>
-        <!-- @slot Slot for emojiGiphy picker -->
-        <slot name="emojiGiphyPicker" />
+            <template #icon>
+              <dt-icon-image size="300" />
+            </template>
+          </dt-button>
+          <dt-input
+            ref="messageInputImageUpload"
+            data-qa="dt-message-input-image-input"
+            accept="image/*, video/*"
+            type="file"
+            class="dt-message-input__image-input"
+            multiple
+            hidden
+            @input="onImageUpload"
+          />
+          <dt-popover
+            v-if="showEmojiPicker"
+            v-model:open="emojiPickerOpened"
+            data-qa="dt-message-input-emoji-picker-popover"
+            initial-focus-element="#searchInput"
+            padding="none"
+          >
+            <template #anchor="{ attrs }">
+              <dt-button
+                v-dt-tooltip="emojiTooltipMessage"
+                v-bind="attrs"
+                data-qa="dt-message-input-emoji-picker-btn"
+                size="sm"
+                class="dt-message-input__button"
+                kind="muted"
+                importance="clear"
+                :aria-label="emojiButtonAriaLabel"
+                @click="toggleEmojiPicker"
+                @mouseenter="emojiPickerFocus = true"
+                @mouseleave="emojiPickerFocus = false"
+                @focus="emojiPickerFocus = true"
+                @blur="emojiPickerFocus = false"
+              >
+                <template #icon>
+                  <dt-icon-very-satisfied
+                    v-if="emojiPickerHovered"
+                    size="300"
+                  />
+                  <dt-icon-satisfied
+                    v-else
+                    size="300"
+                  />
+                </template>
+              </dt-button>
+            </template>
+            <template #content="{ close }">
+              <dt-emoji-picker
+                v-bind="emojiPickerProps"
+                @skin-tone="onSkinTone"
+                @selected-emoji="
+                  (emoji) => {
+                    close();
+                    onSelectEmoji(emoji);
+                  }
+                "
+              />
+            </template>
+          </dt-popover>
+          <!-- @slot Slot for emojiGiphy picker -->
+          <slot name="emojiGiphyPicker" />
+        </dt-stack>
       </div>
       <!-- Right content -->
       <div class="dt-message-input__bottom-section-right">
-        <!-- @slot Slot for sms count -->
-        <div class="d-d-flex d-ai-center">
-          <slot name="smsCount" />
-        </div>
-
-        <!-- Optionally displayed remaining character counter -->
-        <dt-tooltip
-          v-if="Boolean(showCharacterLimit)"
-          class="dt-message-input__remaining-char-tooltip"
-          placement="top-end"
-          :enabled="characterLimitTooltipEnabled"
-          :message="showCharacterLimit.message"
-          :offset="[10, 8]"
+        <dt-stack
+          direction="row"
+          gap="300"
         >
-          <template #anchor>
-            <p
-              v-show="displayCharacterLimitWarning"
-              class="dt-message-input__remaining-char"
-              data-qa="dt-message-input-character-limit"
-            >
-              {{ showCharacterLimit.count - inputLength }}
-            </p>
-          </template>
-        </dt-tooltip>
+          <!-- @slot Slot for sms count -->
+          <div class="d-d-flex d-ai-center">
+            <slot name="smsCount" />
+          </div>
 
-        <!-- Cancel button for edit mode -->
-        <dt-button
-          v-if="showCancel"
-          data-qa="dt-message-input-cancel-button"
-          class="dt-message-input__cancel-button"
-          size="sm"
-          kind="muted"
-          importance="clear"
-          :aria-label="showCancel.ariaLabel"
-          @click="onCancel"
-        >
-          <p>{{ showCancel.text }}</p>
-        </dt-button>
-
-        <!-- @slot Slot for sendButton picker -->
-        <slot name="sendButton">
-          <!-- Send button -->
-          <!-- Right positioned UI - send button -->
-          <dt-button
-            v-if="showSend"
-            v-dt-tooltip:top-end="showSend?.tooltipLabel"
-            data-qa="dt-message-input-send-btn"
-            size="sm"
-            kind="default"
-            importance="primary"
-            :class="[
-              {
-                'dt-message-input__send-button--disabled': isSendDisabled,
-                'd-btn--circle': showSend.icon,
-              },
-            ]"
-            :aria-label="showSend.ariaLabel"
-            :aria-disabled="isSendDisabled"
-            @click="onSend"
+          <!-- Optionally displayed remaining character counter -->
+          <dt-tooltip
+            v-if="Boolean(showCharacterLimit)"
+            class="dt-message-input__remaining-char-tooltip"
+            placement="top-end"
+            :enabled="characterLimitTooltipEnabled"
+            :message="showCharacterLimit.message"
+            :offset="[10, 8]"
           >
-            <template
-              v-if="showSend.icon"
-              #icon
-            >
-              <dt-icon
-                :name="showSend.icon"
-                size="300"
-              />
+            <template #anchor>
+              <p
+                v-show="displayCharacterLimitWarning"
+                class="dt-message-input__remaining-char"
+                data-qa="dt-message-input-character-limit"
+              >
+                {{ showCharacterLimit.count - inputLength }}
+              </p>
             </template>
-            <template
-              v-if="showSend.text"
-            >
-              <p>{{ showSend.text }}</p>
-            </template>
+          </dt-tooltip>
+
+          <!-- Cancel button for edit mode -->
+          <dt-button
+            v-if="showCancel"
+            data-qa="dt-message-input-cancel-button"
+            class="dt-message-input__button dt-message-input__cancel-button"
+            size="sm"
+            kind="muted"
+            importance="clear"
+            :aria-label="showCancel.ariaLabel"
+            @click="onCancel"
+          >
+            <p>{{ showCancel.text }}</p>
           </dt-button>
-        </slot>
+
+          <!-- @slot Slot for sendButton picker -->
+          <slot name="sendButton">
+            <!-- Send button -->
+            <!-- Right positioned UI - send button -->
+            <dt-button
+              v-if="showSend"
+              v-dt-tooltip:top-end="showSend?.tooltipLabel"
+              data-qa="dt-message-input-send-btn"
+              size="sm"
+              kind="default"
+              importance="primary"
+              :class="[
+                'dt-message-input__button dt-message-input__send-button',
+                {
+                  'dt-message-input__send-button--disabled': isSendDisabled,
+                  'd-btn--icon-only': showSendIcon,
+                },
+              ]"
+              :aria-label="showSend.ariaLabel"
+              :aria-disabled="isSendDisabled"
+              @click="onSend"
+            >
+              <template
+                v-if="showSendIcon"
+                #icon
+              >
+                <!-- @slot Slot for send button icon -->
+                <slot
+                  name="sendIcon"
+                  :icon-size="sendIconSize"
+                >
+                  <dt-icon-send :size="sendIconSize" />
+                </slot>
+              </template>
+              <template v-if="showSend.text">
+                <p>{{ showSend.text }}</p>
+              </template>
+            </dt-button>
+          </slot>
+        </dt-stack>
       </div>
     </section>
   </div>
@@ -215,13 +231,19 @@ import {
   RICH_TEXT_EDITOR_OUTPUT_FORMATS,
   RICH_TEXT_EDITOR_AUTOFOCUS_TYPES,
 } from '@/components/rich_text_editor';
-import meetingPill from './meeting_pill/meeting_pill';
+import MeetingPill from './extensions/meeting_pill/meeting_pill';
 import { DtButton } from '@/components/button';
-import { DtIcon } from '@/components/icon';
 import { DtEmojiPicker } from '@/components/emoji_picker';
 import { DtPopover } from '@/components/popover';
 import { DtInput } from '@/components/input';
 import { DtTooltip } from '@/components/tooltip';
+import { DtStack } from '@/components/stack';
+import {
+  DtIconImage,
+  DtIconVerySatisfied,
+  DtIconSatisfied,
+  DtIconSend,
+} from '@dialpad/dialtone-icons/vue3';
 
 export default {
   name: 'DtRecipeMessageInput',
@@ -229,11 +251,15 @@ export default {
   components: {
     DtButton,
     DtEmojiPicker,
-    DtIcon,
     DtInput,
     DtPopover,
     DtRichTextEditor,
     DtTooltip,
+    DtStack,
+    DtIconImage,
+    DtIconVerySatisfied,
+    DtIconSatisfied,
+    DtIconSend,
   },
 
   mixins: [],
@@ -373,7 +399,7 @@ export default {
           'searchPlaceholderLabel',
           'skinSelectorButtonTooltipLabel',
           'tabSetLabels',
-        ].every(prop => emojiPickerProps[prop] != null);
+        ].every((prop) => emojiPickerProps[prop] != null);
       },
     },
 
@@ -404,7 +430,10 @@ export default {
 
     showImagePicker: {
       type: [Boolean, Object],
-      default: () => ({ tooltipLabel: 'Attach Image', ariaLabel: 'image button' }),
+      default: () => ({
+        tooltipLabel: 'Attach Image',
+        ariaLabel: 'image button',
+      }),
     },
 
     /**
@@ -412,7 +441,7 @@ export default {
      */
     showSend: {
       type: [Boolean, Object],
-      default: () => ({ icon: 'send' }),
+      default: () => ({}),
     },
 
     /**
@@ -491,7 +520,7 @@ export default {
 
     /**
      * Whether the input allows for bullet list to be introduced in the text.
-    */
+     */
     allowBulletList: {
       type: Boolean,
       default: true,
@@ -613,7 +642,7 @@ export default {
 
   data () {
     return {
-      additionalExtensions: [meetingPill],
+      additionalExtensions: [MeetingPill],
       internalInputValue: this.modelValue, // internal input content
       imagePickerFocus: false,
       emojiPickerFocus: false,
@@ -622,22 +651,35 @@ export default {
   },
 
   computed: {
+    showSendIcon () {
+      return !this.showSend.text;
+    },
+
     inputLength () {
       return this.internalInputValue.length;
     },
 
     displayCharacterLimitWarning () {
-      return Boolean(this.showCharacterLimit) &&
-        ((this.showCharacterLimit.count - this.inputLength) <= this.showCharacterLimit.warning);
+      return (
+        Boolean(this.showCharacterLimit) &&
+        this.showCharacterLimit.count - this.inputLength <=
+          this.showCharacterLimit.warning
+      );
     },
 
     characterLimitTooltipEnabled () {
-      return this.showCharacterLimit.message && (this.showCharacterLimit.count - this.inputLength < 0);
+      return (
+        this.showCharacterLimit.message &&
+        this.showCharacterLimit.count - this.inputLength < 0
+      );
     },
 
     isSendDisabled () {
-      return this.disableSend ||
-      (this.showCharacterLimit && this.inputLength > this.showCharacterLimit.count);
+      return (
+        this.disableSend ||
+        (this.showCharacterLimit &&
+          this.inputLength > this.showCharacterLimit.count)
+      );
     },
 
     computedCloseButtonProps () {
@@ -648,6 +690,10 @@ export default {
 
     emojiPickerHovered () {
       return this.emojiPickerFocus || this.emojiPickerOpened;
+    },
+
+    sendIconSize () {
+      return '300';
     },
   },
 
@@ -672,7 +718,9 @@ export default {
   methods: {
     // Mousedown instead of click because it fires before the blur event.
     onMousedown (e) {
-      const isWithinInput = this.$refs.richTextEditor.$el.querySelector('.tiptap').contains(e.target);
+      const isWithinInput = this.$refs.richTextEditor.$el
+        .querySelector('.tiptap')
+        .contains(e.target);
 
       // If the click is not within the tiptap rich text editor input itself, but still within the wrapping div,
       // focus the editor.
@@ -722,7 +770,10 @@ export default {
     },
 
     onImageUpload () {
-      this.$emit('select-media', this.$refs.messageInputImageUpload.$refs.input.files);
+      this.$emit(
+        'select-media',
+        this.$refs.messageInputImageUpload.$refs.input.files,
+      );
     },
 
     toggleEmojiPicker () {
@@ -754,15 +805,19 @@ export default {
   border-radius: var(--dt-size-radius-400);
   border: var(--dt-size-border-100) solid;
   border-color: var(--dt-color-border-default);
+  line-height: var(--dt-font-line-height-400);
   cursor: text;
+  transition-property: border-color, box-shadow, opacity;
+  transition-duration: var(--td50);
+  transition-timing-function: var(--ttf-in-out);
 
   &:focus-within {
     border-color: var(--dt-color-border-bold);
-    box-shadow: var(--dt-shadow-small);
+    box-shadow: 0 0 var(--dt-size-300) 0 var(--dt-color-surface-moderate-opaque);
   }
 
   &__editor-wrapper {
-    padding: var(--dt-space-400) var(--dt-space-500) var(--dt-space-300);
+    padding: var(--dt-space-450) var(--dt-space-500) var(--dt-space-300);
   }
 
   &__remaining-char-tooltip {
@@ -773,7 +828,19 @@ export default {
   &__remaining-char {
     color: var(--dt-color-foreground-critical);
     font-size: var(--dt-font-size-100);
-    margin-right: var(--dt-space-500);
+    margin-right: var(--dt-space-300);
+  }
+
+  &__button {
+    max-height: 2.8rem;
+    max-width: 2.8rem;
+    border-radius: var(--dt-size-radius-300);
+  }
+
+  &__send-button.dt-message-input__button:not(.d-btn--icon-only),
+  &__cancel-button {
+    max-width: unset;
+    padding: var(--dt-space-350);
   }
 
   &__send-button--disabled {
@@ -782,14 +849,10 @@ export default {
     cursor: default;
   }
 
-  &__cancel-button {
-    margin-right: var(--dt-space-300);
-  }
-
   &__bottom-section {
     display: flex;
     justify-content: space-between;
-    padding: var(--dt-space-300) var(--dt-space-400);
+    padding: var(--dt-space-300) var(--dt-space-400) var(--dt-space-400);
   }
 
   &__bottom-section-left {

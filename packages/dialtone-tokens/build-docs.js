@@ -1,5 +1,5 @@
 import fs from 'fs';
-import keywordsJson from './keywords.json' assert { type: 'json' };
+import keywordsJson from './keywords.json' with { type: 'json' };
 
 // stores the documentation data for all tokens. This is output to file.
 const docTokens = {};

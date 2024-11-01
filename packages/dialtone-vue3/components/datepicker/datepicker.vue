@@ -41,7 +41,8 @@ import MonthYearPicker from './modules/month-year-picker.vue';
 import Calendar from './modules/calendar.vue';
 import { DtStack } from '@/components/stack';
 
-import { ref } from 'vue';
+import { onMounted, ref, getCurrentInstance } from 'vue';
+import { warnIfUnmounted } from '@/common/utils';
 
 defineProps({
   /**
@@ -153,4 +154,9 @@ const calendarDays = ref([]);
 function updateCalendarDays (days) {
   calendarDays.value = days;
 }
+
+onMounted(() => {
+  const instance = getCurrentInstance();
+  warnIfUnmounted(instance.proxy.$el, 'datepicker');
+});
 </script>

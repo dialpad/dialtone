@@ -64,7 +64,7 @@ import Prism from 'prismjs';
 import prettier from 'prettier/standalone';
 import htmlParser from 'prettier/plugins/html.mjs';
 import CopyButton from './CopyButton.vue';
-import { getUniqueString } from '@workspaceRoot/common/utils';
+import { getUniqueString } from '@workspaceRoot/common/utils/client.mjs';
 
 const props = defineProps({
   /**

@@ -29,7 +29,7 @@ Use `d-bgg-to-{color}` to declare the gradient ending color stop.
 
 ## Changing opacities
 
-Use `d-bgg-(from|to)-o{n}` to change the opacity values of each gradient color stop. You can also change the opacity values of each gradient color stop on `:hover`, `:focus`, `:focus-visible`, or in dark mode by using the respective `h:d-bgg-(from|to)-o{n}`, `f:d-bgg-(from|to)-o{n}`, `fv:d-bgg-(from|to)-o{n}`, `d:d-bgg-(from|to)-o{n}` prefixes.
+Use `d-bgg-(from|to)-o{n}` to change the opacity values of each gradient color stop. You can also change the opacity values of each gradient color stop on `:hover`, `:focus`, `:focus-visible` by using the respective `h:d-bgg-(from|to)-o{n}`, `f:d-bgg-(from|to)-o{n}`, `fv:d-bgg-(from|to)-o{n}` prefixes.
 
 <code-well-header class="d-d-flex d-jc-center d-fd-column d-p24 d-bgc-black-200 d-w100p d-hmn102 d-stack8" custom>
   <div class="d-d-flex d-jc-space-between d-ai-center d-p8 d-w100p d-h48 d-bar8 d-bgg-to-r d-bgg-from-purple-300 d-bgg-to-magenta-100 d-bgg-to-o0 d-fs-300 d-fw-bold d-fc-primary-inverted"><span>100%</span><span>0%</span></div>

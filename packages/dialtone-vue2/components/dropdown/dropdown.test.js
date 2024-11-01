@@ -79,6 +79,7 @@ describe('DtDropdown Tests', () => {
     mockSlots = {};
     mockScopedSlots = {};
     mockListeners = {};
+    wrapper.destroy();
   });
 
   describe('Presentation Tests', () => {

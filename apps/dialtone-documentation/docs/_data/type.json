@@ -389,60 +389,60 @@
   },
   "fontColorVars": [
     {
+      "var": "neutral-white",
+      "output": "dt-color-neutral-white"
+    },
+    {
+      "var": "neutral-black",
+      "output": "dt-color-neutral-black"
+    },
+    {
       "var": "primary",
-      "output": "black-900"
+      "output": "dt-color-foreground-primary"
     },
     {
       "var": "secondary",
-      "output": "black-700"
+      "output": "dt-color-foreground-secondary"
     },
     {
       "var": "tertiary",
-      "output": "black-600"
+      "output": "dt-color-foreground-tertiary"
     },
     {
       "var": "primary-inverted",
-      "output": "white"
+      "output": "dt-color-foreground-primary-inverted"
     },
     {
       "var": "secondary-inverted",
-      "output": "black-200"
+      "output": "dt-color-foreground-secondary-inverted"
     },
     {
       "var": "tertiary-inverted",
-      "output": "black-300"
+      "output": "dt-color-foreground-tertiary-inverted"
     },
     {
       "var": "muted",
-      "output": ""
-    },
-    {
-      "var": "purple",
-      "output": "purple-500"
+      "output": "dt-color-foreground-muted"
     },
     {
       "var": "placeholder",
-      "output": "black-500"
+      "output": "dt-color-foreground-placeholder"
     },
     {
       "var": "disabled",
-      "output": "black-500"
+      "output": "dt-color-foreground-disabled"
     },
     {
-      "var": "error",
-      "output": "red-400"
+      "var": "critical",
+      "output": "dt-color-foreground-critical"
     },
     {
       "var": "success",
-      "output": "green-400"
+      "output": "dt-color-foreground-success"
     },
     {
       "var": "warning",
-      "output": "green-500"
-    },
-    {
-      "var": "warning-hover",
-      "output": "black-900"
+      "output": "dt-color-foreground-warning"
     }
   ],
   "weight": [

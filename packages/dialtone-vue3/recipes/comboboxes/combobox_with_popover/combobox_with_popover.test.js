@@ -83,7 +83,6 @@ describe('DtRecipeComboboxWithPopover Tests', () => {
     props = baseProps;
     slots = {};
     wrapper.unmount();
-    document.body.innerHTML = '';
   });
 
   afterAll(() => {

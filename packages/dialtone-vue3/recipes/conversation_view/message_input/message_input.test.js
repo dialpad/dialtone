@@ -54,7 +54,6 @@ const _mountWrapper = () => {
     listeners,
     attrs,
     slots,
-    attachTo: document.body,
   });
 };
 

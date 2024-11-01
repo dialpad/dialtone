@@ -53,8 +53,7 @@
             size="xs"
           >
             <template #icon="{ iconSize }">
-              <dt-icon
-                name="bell-ring"
+              <dt-icon-bell-ring
                 :size="iconSize"
               />
             </template>
@@ -106,7 +105,7 @@ import LeftbarSection from './components/leftbar_section.vue';
 import MarkAllAsReadButton from './components/mark_all_as_read_button.vue';
 import OptionsDropdown from './components/options_dropdown.vue';
 import { DtButton } from '@/components/button';
-import { DtIcon } from '@/components/icon';
+import { DtIconBellRing } from '@dialpad/dialtone-icons/vue2';
 import { DtStack } from '@/components/stack';
 import { DtRecipeGeneralRow } from '@/recipes/leftbar/general_row';
 import { DtRecipeContactRow } from '@/recipes/leftbar/contact_row';
@@ -126,7 +125,7 @@ export default {
     MarkAllAsReadButton,
     OptionsDropdown,
     DtButton,
-    DtIcon,
+    DtIconBellRing,
     DtStack,
     DtRecipeGeneralRow,
     DtRecipeContactRow,

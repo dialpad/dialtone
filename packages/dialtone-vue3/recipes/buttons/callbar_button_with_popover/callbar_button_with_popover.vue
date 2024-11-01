@@ -51,8 +51,7 @@
           @click="arrowClick"
         >
           <template #icon>
-            <dt-icon
-              name="chevron-up"
+            <dt-icon-chevron-up
               class="dt-recipe--callbar-button-with-popover--arrow__icon"
               size="200"
             />
@@ -75,14 +74,14 @@
 <script>
 import { DtButton } from '@/components/button';
 import { DtPopover } from '@/components/popover';
-import { DtIcon } from '@/components/icon';
+import { DtIconChevronUp } from '@dialpad/dialtone-icons/vue3';
 import { DtRecipeCallbarButton, CALLBAR_BUTTON_VALID_WIDTH_SIZE } from '../callbar_button';
-import utils from '@/common/utils';
+import utils, { warnIfUnmounted } from '@/common/utils';
 
 export default {
   name: 'DtRecipeCallbarButtonWithPopover',
 
-  components: { DtRecipeCallbarButton, DtPopover, DtButton, DtIcon },
+  components: { DtRecipeCallbarButton, DtPopover, DtButton, DtIconChevronUp },
 
   /* inheritAttrs: false is generally an option we want to set on library
     components. This allows any attributes passed in that are not recognized
@@ -315,6 +314,10 @@ export default {
     },
   },
 
+  mounted () {
+    warnIfUnmounted(this.$el, this.$options.name);
+  },
+
   methods: {
     arrowClick (ev) {
       this.$emit('arrow-click', ev);
@@ -350,7 +353,7 @@ export default {
 
 <style lang="less">
 .dt-recipe--callbar-button-with-popover--arrow {
-  margin-top: var(--dt-space-350-negative);
+  margin-top: var(--dt-space-450);
   margin-left: calc(var(--dt-space-300-negative) * 5);
   width: var(--dt-size-500);
   height: var(--dt-size-500);
@@ -398,6 +401,6 @@ export default {
 
 .dt-recipe--callbar-button-with-popover {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
 }
 </style>

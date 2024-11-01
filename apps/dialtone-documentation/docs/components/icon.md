@@ -218,7 +218,7 @@ Dialtone provides eight sizes for icons. Each of the sizes represents the width 
 
   const iconColors = [
     { value: 'd-fc-success', label: 'd-fc-success' },
-    { value: 'd-fc-error', label: 'd-fc-error' },
+    { value: 'd-fc-critical', label: 'd-fc-critical' },
     { value: 'd-fc-primary', label: 'd-fc-primary' },
   ];
 

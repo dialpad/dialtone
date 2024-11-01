@@ -32,7 +32,7 @@ Use `d-fc-{color}` to change an element's text color.
 
 ## Changing opacity
 
-Use `d-fco{n}` to change an element's text color opacity. You can also change font color opacity on `:hover`, `:focus`, `:focus-visible`, or in dark mode by using the respective `h:d-fco{n}`, `f:d-fco{n}`, `fv:d-fco{n}`, or `d:d-fco{n}` prefixes.
+Use `d-fco{n}` to change an element's text color opacity. You can also change font color opacity on `:hover`, `:focus`, `:focus-visible` by using the respective `h:d-fco{n}`, `f:d-fco{n}`, `fv:d-fco{n}` prefixes.
 
 <code-well-header class="d-d-flex d-jc-center d-fd-column d-p24 d-bgc-purple-100 d-w100p d-hmn102 d-stack8" custom>
   <p class="d-fs-200 d-fc-purple-400">The quick brown fox jumps over the lazy dog.</p>
@@ -99,18 +99,13 @@ Use `fv:d-fc-{color}` to change an element's text color on `:focus-visible` stat
 Use `d:d-fc-{color}` to set a different text color when the user prefers dark mode.
 
 <code-well-header class="d-fl-center d-fd-column d-p24 d-bgc-black-200 d-w100p d-hmn102 d-stack16">
-  <button type="button" class="d-p16 d-bar4 d-fs-200 d-fc-purple-400 d-bgc-magenta-100 d:d-fc-gold-400 d:d-bgc-gold-200 d-ba d-bc-transparent js-theme-switcher">Click on me toggle dark mode</button>
+  <button type="button" class="d-p16 d-bar4 d-fs-200 d-fc-purple-400 d-bgc-magenta-100 d-ba d-bc-transparent js-theme-switcher">Click on me toggle dark mode</button>
 </code-well-header>
 
 ```html
-<button class="d-fc-purple-400 d:d-fc-gold-400">...</button>
+<button class="d-fc-purple-400">...</button>
 ```
  -->
-
-<script setup>
-  import { fontColorVars } from '@data/type.json';
-  import { base as baseColors } from '@data/colors.json';
-</script>
 
 ## Classes
 
@@ -160,22 +155,7 @@ Use `d:d-fc-{color}` to set a different text color when the user prefers dark mo
             </div>
           </td>
         </tr>
-        <!-- White Color -->
-        <tr>
-          <th scope="row" class="d-code--sm d-fc-purple-400">.d-fc-neutral-white</th>
-          <td>
-            <div class="d-d-flex d-jc-space-between d-ai-center">
-              <div class="d-fl1 d-code--sm">
-                --fco: 100%;<br/>
-                color: hsla(var(--dt-color-neutral-white-h) var(--dt-color-neutral-white-s) var(--dt-color-neutral-white-l) / var(--fco)) !important;
-              </div>
-              <div class="d-fl0 d-bgc-black-700 d-ml16 d-p4 d-bar4 d-fc-neutral-white d-fs-300 d-lh4">
-                Aa
-              </div>
-            </div>
-          </td>
-        </tr>
-        <!-- Colors -->
+        <!-- Semantic Colors -->
         <tr v-for="{ var: color, output } in fontColorVars">
           <th scope="row" class="d-code--sm d-fc-purple-400">.d-fc-{{ color }}</th>
           <td>
@@ -191,17 +171,8 @@ Use `d:d-fc-{color}` to set a different text color when the user prefers dark mo
           </td>
         </tr>
       </tbody>
-    </template>
-  </utility-class-table>
-</div>
-
-### Light mode
-
-<div class="d-h464 d-of-y-scroll d-bb d-bc-black-200">
-  <utility-class-table class="d-bgc-primary">
-    <template #content>
       <tbody v-for="{ color, stops } in baseColors.lightMode">
-        <tr v-for="{ stop } in stops.reverse()">
+        <tr v-for="{ stop } in stops">
           <th scope="row" class="d-code--sm d-fc-purple-400">.d-fc-{{ color }}-{{ stop }}</th>
           <td>
             <div class="d-d-flex d-jc-space-between d-ai-center">
@@ -220,27 +191,7 @@ Use `d:d-fc-{color}` to set a different text color when the user prefers dark mo
   </utility-class-table>
 </div>
 
-### Dark mode
-
-<div class="d-h464 d-of-y-scroll dialtone-theme-dark">
-  <utility-class-table class="d-bgc-primary d-table--inverted">
-    <template #content>
-      <tbody v-for="{ color, stops } in baseColors.darkMode">
-        <tr v-for="{ stop } in stops.reverse()">
-          <th scope="row" class="d-code--sm d-fc-purple-400">.d-fc-{{ color }}-{{ stop }}</th>
-          <td>
-            <div class="d-d-flex d-jc-space-between d-ai-center">
-              <div class="d-fl1 d-code--sm d-fc-primary">
-                  --fco: 100%;<br/>
-                  color: hsla(var(--{{ color }}-{{ stop }}-h) var(--{{ color }}-{{ stop }}-s) var(--{{ color }}-{{ stop }}-l) / var(--fco)) !important;
-              </div>
-              <div class="d-fl0 d-ml16 d-p4 d-fs-300 d-lh4" :class="`d-fc-${color}-${stop}`">
-                  Aa
-              </div>
-            </div>
-          </td>
-        </tr>
-      </tbody>
-    </template>
-  </utility-class-table>
-</div>
+<script setup>
+  import { fontColorVars } from '@data/type.json';
+  import { base as baseColors } from '@data/colors.json';
+</script>

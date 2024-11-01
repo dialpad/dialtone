@@ -44,7 +44,7 @@
             :ref="`emojiRef-${indexTab}`"
             type="button"
             :aria-label="emoji.name"
-            @click="$emit('selected-emoji', emoji)"
+            @click="event => handleEmojiSelection(emoji, event)"
             @focusin="$emit('highlighted-emoji', emoji)"
             @focusout="$emit('highlighted-emoji', null)"
             @mouseover="$emit('highlighted-emoji', emoji)"
@@ -79,7 +79,7 @@
             :class="{
               'hover-emoji': (index === 0 && hoverFirstEmoji),
             }"
-            @click="$emit('selected-emoji', emoji)"
+            @click="event => handleEmojiSelection(emoji, event)"
             @focusin="$emit('highlighted-emoji', emoji)"
             @focusout="$emit('highlighted-emoji', null)"
             @mouseover="hoverEmoji(emoji)"
@@ -104,7 +104,7 @@
 /* eslint-disable max-len */
 /* eslint-disable max-lines */
 import { emojisGrouped as emojisImported } from '@dialpad/dialtone-emojis';
-import { CDN_URL, EMOJIS_PER_ROW } from '@/components/emoji_picker';
+import { CDN_URL, EMOJIS_PER_ROW } from '@/components/emoji_picker/emoji_picker_constants';
 
 export default {
   name: 'EmojiSelector',
@@ -148,6 +148,7 @@ export default {
 
   data () {
     return {
+      tabLabelsRefs: [],
       emojiRefs: [],
       emojiFilteredRefs: [],
       isFiltering: false,
@@ -184,8 +185,8 @@ export default {
 
     tabLabels () {
       return this.recentlyUsedEmojis.length
-        ? this.tabSetLabels.map((label, index) => ({ label, ref: this.$refs[`tabLabelRef-${index}`] }))
-        : this.tabSetLabels.slice(1).map((label, index) => ({ label, ref: this.$refs[`tabLabelRef-${index}`] }));
+        ? this.tabSetLabels.map((label) => ({ label }))
+        : this.tabSetLabels.slice(1).map((label) => ({ label }));
     },
 
     tabs () {
@@ -254,10 +255,10 @@ export default {
 
   methods: {
     setupTabLabelRefs () {
-      this.tabSetLabels?.forEach((label, index) => {
+      this.tabSetLabels?.forEach((_, index) => {
         const refKey = `tabLabelRef-${index}`;
         if (this.$refs[refKey]) {
-          this.$set(this.tabLabels, index, { label, ref: this.$refs[refKey] });
+          this.$set(this.tabLabelsRefs, index, { ref: this.$refs[refKey] });
         }
       });
     },
@@ -329,8 +330,7 @@ export default {
     scrollToTab: function (tabIndex, focusFirstEmoji) {
       const vm = this;
       if (focusFirstEmoji === undefined) { focusFirstEmoji = true; }
-      const tabLabel = vm.tabLabels[tabIndex - 1];
-      const tabElement = tabLabel.ref[0];
+      const tabElement = vm.tabLabelsRefs[tabIndex - 1].ref[0];
 
       vm.$nextTick(function () {
         const container = vm.$refs.listRef;
@@ -471,7 +471,7 @@ export default {
       }
 
       if (event.key === 'Enter') {
-        this.$emit('selected-emoji', emoji);
+        this.handleEmojiSelection(emoji, event);
       }
     },
 
@@ -522,6 +522,10 @@ export default {
       }
     },
 
+    handleEmojiSelection (emoji, event) {
+      this.$emit('selected-emoji', { ...emoji, shift_key: event.shiftKey });
+    },
+
     /* eslint-disable-next-line complexity */
     handleKeyDownFilteredEmojis (event, indexEmoji, emoji) {
       event.preventDefault();
@@ -566,7 +570,7 @@ export default {
       }
 
       if (event.key === 'Enter') {
-        this.$emit('selected-emoji', emoji);
+        this.handleEmojiSelection(emoji, event);
       }
     },
 

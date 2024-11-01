@@ -14,8 +14,7 @@
       @click="changePage(currentPage - 1)"
     >
       <template #icon>
-        <dt-icon
-          name="chevron-left"
+        <dt-icon-chevron-left
           size="300"
         />
       </template>
@@ -31,8 +30,7 @@
         class="d-pagination__separator-icon"
         data-qa="dt-pagination-separator"
       >
-        <dt-icon
-          name="more-horizontal"
+        <dt-icon-more-horizontal
           size="300"
         />
         <!-- … -->
@@ -60,8 +58,7 @@
       @click="changePage(currentPage + 1)"
     >
       <template #icon>
-        <dt-icon
-          name="chevron-right"
+        <dt-icon-chevron-right
           size="300"
         />
       </template>
@@ -71,7 +68,7 @@
 
 <script>
 import { DtButton } from '@/components/button';
-import { DtIcon } from '@/components/icon';
+import { DtIconChevronLeft, DtIconChevronRight, DtIconMoreHorizontal } from '@dialpad/dialtone-icons/vue3';
 
 /**
  * Pagination allows you to divide large amounts of content into smaller chunks across multiple pages.
@@ -82,7 +79,9 @@ export default {
 
   components: {
     DtButton,
-    DtIcon,
+    DtIconChevronLeft,
+    DtIconChevronRight,
+    DtIconMoreHorizontal,
   },
 
   props: {

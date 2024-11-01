@@ -86,6 +86,14 @@ describe('DtTabGroup Tests', () => {
     _setWrappers();
   };
 
+  beforeEach(() => {
+    _mountWrapper();
+  });
+
+  afterEach(() => {
+    wrapper.unmount();
+  });
+
   describe('Presentation Tests', () => {
     // Setup
     beforeAll(async () => {

@@ -6,8 +6,7 @@
     >
       <template #left>
         <div class="dt-message-input-meeting-pill__icon">
-          <dt-icon
-            name="video"
+          <dt-icon-video
             size="400"
           />
         </div>
@@ -23,8 +22,7 @@
             @click="close"
           >
             <template #icon>
-              <dt-icon
-                name="close"
+              <dt-icon-close
                 size="300"
               />
             </template>
@@ -36,9 +34,9 @@
 </template>
 
 <script>
-import { NodeViewWrapper, nodeViewProps } from '@tiptap/vue-3';
+import { NodeViewWrapper, nodeViewProps } from '@tiptap/vue-2';
 import { DtItemLayout } from '@/components/item_layout';
-import { DtIcon } from '@/components/icon';
+import { DtIconClose, DtIconVideo } from '@dialpad/dialtone-icons/vue2';
 import { DtButton } from '@/components/button';
 
 export default {
@@ -47,8 +45,9 @@ export default {
   components: {
     NodeViewWrapper,
     DtItemLayout,
-    DtIcon,
+    DtIconClose,
     DtButton,
+    DtIconVideo,
   },
 
   props: nodeViewProps,

@@ -2,13 +2,14 @@
   <dt-popover
     :modal="modal"
     max-width="264px"
-    placement="bottom"
+    :placement="placement"
+    :fallback-placements="fallbackPlacements"
   >
     <template #anchor="{ attrs }">
       <dt-button
         v-bind="attrs"
       >
-        View Popover
+        {{ buttonText }}
       </dt-button>
     </template>
     <template
@@ -42,7 +43,7 @@
 
 <script>
 export default {
-  name: 'ExamplePopover2',
+  name: 'ExamplePopover',
 
   props: {
     modal: {
@@ -58,6 +59,21 @@ export default {
     footer: {
       type: Boolean,
       default: false,
+    },
+
+    placement: {
+      type: String,
+      default: 'bottom',
+    },
+
+    fallbackPlacements: {
+      type: Array,
+      default: () => ['auto'],
+    },
+
+    buttonText: {
+      type: String,
+      default: 'View Popover',
     },
   },
 };

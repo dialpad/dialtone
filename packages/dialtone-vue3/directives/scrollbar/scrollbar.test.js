@@ -18,7 +18,6 @@ describe('DtScrollbarDirective Tests', () => {
       global: {
         plugins: [DtScrollbarDirective],
       },
-      attachTo: document.body,
     });
 
     viewportElement = wrapper.find('#viewport').element;

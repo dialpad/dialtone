@@ -196,12 +196,3 @@ export function filterValidShortCodes (shortcodes) {
   const filtered = shortcodes ? shortcodes.filter(code => shortcodeToEmojiData(code)) : [];
   return new Set(filtered);
 }
-
-// Finds every emoji in slot text
-// removes duplicates
-// @returns {string[]}
-export function findEmojis (textContent) {
-  const matches = [...textContent.matchAll(emojiRegex)];
-  const emojis = matches.length ? matches.map(match => match[0]) : [];
-  return new Set(emojis);
-}

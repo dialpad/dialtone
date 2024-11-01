@@ -55,7 +55,6 @@ describe('DtHovercard Tests', () => {
     vi.useRealTimers();
     vi.clearAllTimers();
     wrapper.unmount();
-    document.body.innerHTML = '';
   });
 
   describe('Presentation Tests', () => {

@@ -88,6 +88,19 @@
     </div>
     <div>
       <h3>
+        With icon
+      </h3>
+      <dt-recipe-contact-row
+        name="Jaqueline Nackos"
+        avatar-presence="active"
+        avatar-seed="JN"
+        avatar-alt="Avatar person"
+        call-button-tooltip="Call"
+        :no-initials="true"
+      />
+    </div>
+    <div>
+      <h3>
         With emojis in the name
       </h3>
       <dt-recipe-contact-row
