@@ -16,9 +16,9 @@
       v-for="(item, i) in formattedShortcutSplit"
     >
       <component
+        :is="icons[item]"
         v-if="icons[item]"
         :key="`${i}-${item}`"
-        :is="icons[item]"
         size="100"
         aria-hidden="true"
         :class="[
