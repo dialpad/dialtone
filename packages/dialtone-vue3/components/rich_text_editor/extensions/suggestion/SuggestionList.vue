@@ -10,7 +10,7 @@
         :key="item.id"
         :class="[
           'd-suggestion-list__item',
-          { 'dt-list-item--highlighted': index === selectedIndex },
+          { 'd-list-item--highlighted': index === selectedIndex },
         ]"
         navigation-type="arrow-keys"
         @click="selectItem(index)"

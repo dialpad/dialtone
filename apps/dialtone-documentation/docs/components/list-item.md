@@ -67,7 +67,7 @@ The **bottom** slot can be used to display content below the subtitle slot.
 <code-example-tabs
 htmlCode='
 <ul>
-  <li id="dt4" class="dt-list-item dt-list-item--focusable" tabindex="0" role="listitem">
+  <li id="dt4" class="d-list-item d-list-item--focusable" tabindex="0" role="listitem">
     <div class="dt-item-layout">
       <section class="dt-item-layout--left">
         <span class="d-icon__wrapper">

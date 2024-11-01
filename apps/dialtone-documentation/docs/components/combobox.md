@@ -92,7 +92,7 @@ htmlCode='
       aria-label="Label Text"
     >
       <li
-        class="dt-list-item"
+        class="d-list-item"
         tabindex="-1"
         role="option"
         aria-selected="false"

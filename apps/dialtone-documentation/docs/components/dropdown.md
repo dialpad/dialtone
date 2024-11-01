@@ -102,7 +102,7 @@ htmlCode='
   <div id="dt7" role="menu" aria-hidden="false" aria-labelledby="DtPopover__anchor8" aria-modal="false" class="d-popover__dialog d-popover__dialog--modal" tabindex="-1" style="...">
     <div class="d-popover__content">
       <ul id="dt6" class="d-dropdown-list d-py0">
-        <li class="dt-list-item" tabindex="-1" role="menuitem" aria-selected="false">
+        <li class="d-list-item" tabindex="-1" role="menuitem" aria-selected="false">
           <div class="dt-item-layout">
             <section class="dt-item-layout--content">
               <div class="dt-item-layout--title">Menu Item 1</div>
@@ -201,7 +201,7 @@ htmlCode='
       <ul id="dt6" class="d-dropdown-list d-py0">
         <ul id="dt16" class="d-list-item-group" role="group" aria-labelledby="dt16-heading">
           <li id="dt16-heading" role="presentation" class="dt-dropdown-list--header d-py4 d-px8 d-fw-semibold d-c-default">Menu Heading A</li>
-          <li id="dt17" class="dt-list-item dt-list-item--static" tabindex="-1" role="listitem">
+          <li id="dt17" class="d-list-item d-list-item--static" tabindex="-1" role="listitem">
             <div class="dt-item-layout">
               <section class="dt-item-layout--content">
                 <div class="dt-item-layout--title">
@@ -210,8 +210,8 @@ htmlCode='
               </section>
             </div>
           </li>
-          <li aria-hidden="true" class="dt-list-separator"></li>
-          <li id="dt18" class="dt-list-item dt-list-item--static" tabindex="-1" role="listitem">
+          <li aria-hidden="true" class="d-list-item-separator"></li>
+          <li id="dt18" class="d-list-item d-list-item--static" tabindex="-1" role="listitem">
             <div class="dt-item-layout">
               <section class="dt-item-layout--content">
                 <div class="dt-item-layout--title">
@@ -221,10 +221,10 @@ htmlCode='
             </div>
           </li>
         </ul>
-        <li aria-hidden="true" class="dt-list-separator"></li>
+        <li aria-hidden="true" class="d-list-item-separator"></li>
         <ul id="dt19" class="d-list-item-group" role="group" aria-labelledby="dt19-heading">
           <li id="dt19-heading" role="presentation" class="dt-dropdown-list--header d-py4 d-px8 d-fw-semibold d-c-default">Menu Heading B</li>
-          <li id="dt20" class="dt-list-item dt-list-item--static" tabindex="-1" role="listitem">
+          <li id="dt20" class="d-list-item d-list-item--static" tabindex="-1" role="listitem">
             <div class="dt-item-layout">
               <section class="dt-item-layout--content">
                 <div class="dt-item-layout--title">
