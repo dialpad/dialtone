@@ -401,6 +401,6 @@ export default {
 
 .dt-recipe--callbar-button-with-popover {
   display: flex;
-  align-items: start;
+  align-items: flex-start;
 }
 </style>
