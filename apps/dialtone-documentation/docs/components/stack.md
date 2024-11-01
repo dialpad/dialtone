@@ -8,7 +8,10 @@ storybook: https://dialtone.dialpad.com/vue/?path=/story/components-stack--defau
 ---
 
 <code-well-header>
-  <div class="d-stack d-stack--gap-500 d-bgc-magenta-100">
+  <dt-stack
+    gap="500"
+    class="d-bgc-magenta-100"
+  >
     <div class="d-bgc-secondary">
       Stack item 1
     </div>
@@ -18,7 +21,7 @@ storybook: https://dialtone.dialpad.com/vue/?path=/story/components-stack--defau
     <div class="d-bgc-secondary">
       Stack item 3
     </div>
-  </div>
+  </dt-stack>
 </code-well-header>
 
 <code-example-tabs
@@ -50,50 +53,35 @@ showHtmlWarning />
 
 ### Direction
 
-Row: flow horizontally
+#### Row: flow horizontally
 
 <code-well-header>
-  <div class="d-stack d-stack--row d-stack--gap-400">
-    <span class="d-badge">Co-host</span>
-    <span class="d-badge">Customer</span>
-    <span class="d-badge">
-      <span class="d-badge__icon-left">
-        <dt-icon name="lock" size="200" />
-      </span>
-      <span class="d-badge__label">Locked</span>
-    </span>
-    <span class="d-badge">
-      <span class="d-badge__icon-left">
-        <dt-icon name="message" size="200" />
-      </span>
-      <span class="d-badge__label">Chat log</span>
-    </span>
-  </div>
+  <dt-stack
+    gap="500"
+    direction="row"
+    ref="rowExample"
+  >
+    <dt-badge text="co-host" />
+    <dt-badge text="Customer" />
+    <dt-badge
+      text="Locked"
+    >
+      <template #leftIcon="{ iconSize }">
+        <dt-icon-lock :size="iconSize" />
+      </template>
+    </dt-badge>
+    <dt-badge
+      text="Chat log"
+    >
+      <template #leftIcon="{ iconSize }">
+        <dt-icon-message :size="iconSize" />
+      </template>
+    </dt-badge>
+  </dt-stack>
 </code-well-header>
 
 <code-example-tabs
-htmlCode='
-<div class="d-stack d-stack--row d-stack--gap-500">
-  <span class="d-badge">
-    <span class="d-badge__label"> co-host </span>
-  </span>
-  <span class="d-badge">
-    <span class="d-badge__label"> Customer </span>
-  </span>
-  <span class="d-badge">
-    <span class="d-badge__icon-left">
-      <svg>...</svg>
-    </span>
-    <span class="d-badge__label"> Locked </span>
-  </span>
-  <span class="d-badge">
-    <span class="d-badge__icon-left">
-      <svg>...</svg>
-    </span>
-    <span class="d-badge__label"> Chat log </span>
-  </span>
-</div>
-'
+:htmlCode="() => $refs.rowExample"
 vueCode='
 <dt-stack
   gap="500"
@@ -102,33 +90,248 @@ vueCode='
   <dt-badge text="co-host" />
   <dt-badge text="Customer" />
   <dt-badge
-    icon-left="lock"
     text="Locked"
-  />
+  >
+    <template #leftIcon="{ iconSize }">
+      <dt-icon-lock :size="iconSize" />
+    </template>
+  </dt-badge>
   <dt-badge
-    icon-left="message"
     text="Chat log"
-  />
+  >
+    <template #leftIcon="{ iconSize }">
+      <dt-icon-message :size="iconSize" />
+    </template>
+  </dt-badge>
 </dt-stack>
 '
 showHtmlWarning />
+
+#### Column: flow vertically
+
+<code-well-header>
+  <dt-stack
+    gap="500"
+    direction="column"
+    ref="columnExample"
+  >
+    <dt-badge text="co-host" />
+    <dt-badge text="Customer" />
+    <dt-badge
+      text="Locked"
+    >
+      <template #leftIcon="{ iconSize }">
+        <dt-icon-lock :size="iconSize" />
+      </template>
+    </dt-badge>
+    <dt-badge
+      text="Chat log"
+    >
+      <template #leftIcon="{ iconSize }">
+        <dt-icon-message :size="iconSize" />
+      </template>
+    </dt-badge>
+  </dt-stack>
+</code-well-header>
+
+<code-example-tabs
+:htmlCode="() => $refs.columnExample"
+vueCode='
+<dt-stack
+  gap="500"
+  direction="column"
+>
+  <dt-badge text="co-host" />
+  <dt-badge text="Customer" />
+  <dt-badge
+    text="Locked"
+  >
+    <template #leftIcon="{ iconSize }">
+      <dt-icon-lock :size="iconSize" />
+    </template>
+  </dt-badge>
+  <dt-badge
+    text="Chat log"
+  >
+    <template #leftIcon="{ iconSize }">
+      <dt-icon-message :size="iconSize" />
+    </template>
+  </dt-badge>
+</dt-stack>
+'
+/>
+
+#### Row reverse
+
+<code-well-header>
+  <dt-stack
+    gap="500"
+    direction="row-reverse"
+    ref="rowReverseExample"
+  >
+    <dt-badge text="co-host" />
+    <dt-badge text="Customer" />
+    <dt-badge
+      text="Locked"
+    >
+      <template #leftIcon="{ iconSize }">
+        <dt-icon-lock :size="iconSize" />
+      </template>
+    </dt-badge>
+    <dt-badge
+      text="Chat log"
+    >
+      <template #leftIcon="{ iconSize }">
+        <dt-icon-message :size="iconSize" />
+      </template>
+    </dt-badge>
+  </dt-stack>
+</code-well-header>
+
+<code-example-tabs
+:htmlCode="() => $refs.rowReverseExample"
+vueCode='
+<dt-stack
+  gap="500"
+  direction="row-reverse"
+>
+  <dt-badge text="co-host" />
+  <dt-badge text="Customer" />
+  <dt-badge
+    text="Locked"
+  >
+    <template #leftIcon="{ iconSize }">
+      <dt-icon-lock :size="iconSize" />
+    </template>
+  </dt-badge>
+  <dt-badge
+    text="Chat log"
+  >
+    <template #leftIcon="{ iconSize }">
+      <dt-icon-message :size="iconSize" />
+    </template>
+  </dt-badge>
+</dt-stack>
+'
+/>
+
+#### Column reverse
+
+<code-well-header>
+  <dt-stack
+    gap="500"
+    direction="column-reverse"
+    ref="columnReverseExample"
+  >
+    <dt-badge text="co-host" />
+    <dt-badge text="Customer" />
+    <dt-badge
+      text="Locked"
+    >
+      <template #leftIcon="{ iconSize }">
+        <dt-icon-lock :size="iconSize" />
+      </template>
+    </dt-badge>
+    <dt-badge
+      text="Chat log"
+    >
+      <template #leftIcon="{ iconSize }">
+        <dt-icon-message :size="iconSize" />
+      </template>
+    </dt-badge>
+  </dt-stack>
+</code-well-header>
+
+<code-example-tabs
+:htmlCode="() => $refs.columnReverseExample"
+vueCode='
+<dt-stack
+  gap="500"
+  direction="column-reverse"
+>
+  <dt-badge text="co-host" />
+  <dt-badge text="Customer" />
+  <dt-badge
+    text="Locked"
+  >
+    <template #leftIcon="{ iconSize }">
+      <dt-icon-lock :size="iconSize" />
+    </template>
+  </dt-badge>
+  <dt-badge
+    text="Chat log"
+  >
+    <template #leftIcon="{ iconSize }">
+      <dt-icon-message :size="iconSize" />
+    </template>
+  </dt-badge>
+</dt-stack>
+'
+/>
+
+### Gap
+
+<code-well-header>
+  <div class="d-d-flex d-g24">
+    <dt-select-menu
+      label="Gap"
+      size="md"
+      @change="setGap"
+    >
+      <option
+        v-for="gap in gaps"
+        :key="gap"
+        :selected="gap === selectedGap"
+        :value="gap"
+        v-text="gap"
+      />
+    </dt-select-menu>
+    <dt-stack
+      :gap="selectedGap"
+      ref="gapExample"
+    >
+      <div>Stack item 1</div>
+      <div>Stack item 2</div>
+      <div>Stack item 3</div>
+    </dt-stack>
+  </div>
+</code-well-header>
+
+<code-example-tabs
+:htmlCode="() => $refs.gapExample"
+vueCode='
+<dt-stack
+  :gap="selectedGap"
+>
+  <div>
+    Stack item 1
+  </div>
+  <div>
+    Stack item 2
+  </div>
+  <div>
+    Stack item 3
+  </div>
+</dt-stack>
+'
+/>
 
 ### Responsive
 
 Stacks column at small screen size and column reverse at large screen
 
 <code-well-header>
-    <div class="d-stack d-stack--row d-stack--sm-column d-stack--lg-column-reverse d-stack--gap-500 d-bgc-magenta-100">
-      <div class="d-bgc-secondary">
-        Stack item 1
-      </div>
-      <div class="d-bgc-secondary">
-        Stack item 2
-      </div>
-      <div class="d-bgc-secondary">
-        Stack item 3
-      </div>
+  <div class="d-stack d-stack--row d-stack--sm-column d-stack--lg-column-reverse d-stack--gap-500 d-bgc-magenta-100">
+    <div class="d-bgc-secondary">
+      Stack item 1
     </div>
+    <div class="d-bgc-secondary">
+      Stack item 2
+    </div>
+    <div class="d-bgc-secondary">
+      Stack item 3
+    </div>
+  </div>
 </code-well-header>
 
 <code-example-tabs
@@ -259,3 +462,19 @@ showHtmlWarning />
 ## Classes
 
 <component-class-table component-name="stack"></component-class-table>
+
+<script setup>
+  import { ref } from 'vue';
+  import {
+    DtIconMessage,
+    DtIconLock,
+  } from '@dialpad/dialtone-icons/vue3';
+
+  const selectedGap = ref('500');
+
+  const setGap = (gap) => {
+    selectedGap.value = gap;
+  };
+
+  const gaps = window.DIALTONE_CONSTANTS.DT_STACK_GAP;
+</script>
