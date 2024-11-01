@@ -51,7 +51,7 @@
   "scripts": {
     "lint": "run-s lint:code lint:library",
     "lint:code": "eslint '**/*.{js,cjs,vue}'",
-    "lint:library": "run-s stylelint",
+    "lint:library": "pnpm exec stylelint 'lib/build/less/**/*.less'",
     "stylelint": "pnpm exec stylelint 'lib/build/less/**/*.less'"
   },
   "unpkg": "./lib/dist/dialtone.min.css",
