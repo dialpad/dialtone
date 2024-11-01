@@ -40,10 +40,10 @@
         <label for="Dialtone--SelectCategory"> Category</label>
       </div>
       <div class="d-select">
-        <!-- eslint-disable-next-line vuejs-accessibility/form-control-has-label -->
         <select
           id="Dialtone--SelectCategory"
           v-model="selectedCategory"
+          aria-labelledby="#Dialtone--SelectCategory"
           class="d-select__input d-tt-capitalize"
         >
           <option

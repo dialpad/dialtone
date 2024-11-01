@@ -7,7 +7,7 @@
     "eslint --fix"
   ],
   "*.less": [
-    "stylelint --fix"
+    "stylelint --fix --allow-empty-input"
   ],
   "*.{md,mdx}": [
     "markdownlint --fix"

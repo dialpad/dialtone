@@ -1,3 +1,17 @@
+## [2.166.2](https://github.com/dialpad/dialtone/compare/dialtone-vue2/v2.166.1...dialtone-vue2/v2.166.2) (2024-10-31)
+
+
+### Bug Fixes
+
+* **Emoji:** NO-JIRA add emoji-toolkit to externals ([#554](https://github.com/dialpad/dialtone/issues/554)) ([e225cbd](https://github.com/dialpad/dialtone/commit/e225cbdf13704eb3c5aedccb9630727d3831b19b))
+
+## [2.166.1](https://github.com/dialpad/dialtone/compare/dialtone-vue2/v2.166.0...dialtone-vue2/v2.166.1) (2024-10-31)
+
+
+### Bug Fixes
+
+* **Emoji:** NO-JIRA revert back to emoji-toolkit ([#552](https://github.com/dialpad/dialtone/issues/552)) ([8b6d2ad](https://github.com/dialpad/dialtone/commit/8b6d2ad640bd47c51e650ef65d5a694b236afbc5))
+
 # [2.166.0](https://github.com/dialpad/dialtone/compare/dialtone-vue2/v2.165.0...dialtone-vue2/v2.166.0) (2024-10-30)
 
 
