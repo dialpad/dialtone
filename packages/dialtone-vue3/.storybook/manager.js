@@ -13,7 +13,7 @@ if (process.env.STORYBOOK_ENV === 'production') {
   const style = document.createElement('style');
   head.appendChild(style);
   style.appendChild(
-    document.createTextNode(CSS_TO_HIDE_TEST_SECTION_FROM_SIDEBAR)
+    document.createTextNode(CSS_TO_HIDE_TEST_SECTION_FROM_SIDEBAR),
   );
 }
 

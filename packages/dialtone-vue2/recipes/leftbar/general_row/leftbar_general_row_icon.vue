@@ -1,7 +1,7 @@
 <template>
   <component
-    v-if="isIconType"
     :is="getIconName"
+    v-if="isIconType"
     :size="iconSize"
   />
   <div

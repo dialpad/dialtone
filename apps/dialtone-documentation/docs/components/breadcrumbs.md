@@ -95,7 +95,7 @@ htmlCode='
 </nav>
 '
 vueCode='
-<dt-breadcrumbs 
+<dt-breadcrumbs
   :breadcrumbs="[
     {
       href: `#`,
@@ -169,7 +169,7 @@ htmlCode='
 </nav>
 '
 vueCode='
-<dt-breadcrumbs 
+<dt-breadcrumbs
   inverted
   :breadcrumbs="[
     {

@@ -1,18 +1,22 @@
 <template>
   <template v-if="illustration">
     <template v-for="i in illustrationSVGs" :key="i">
-      <component :is="i" v-if="i" :class="class" />
+      <component :is="i" v-if="i" v-bind="$attrs" />
     </template>
   </template>
   <template v-else>
     <template v-for="svg in svgs" :key="svg">
-      <component :is="svg" v-if="svg" :class="class" />
+      <component :is="svg" v-if="svg" v-bind="$attrs" />
     </template>
   </template>
 </template>
 
 <script setup>
 import { defineAsyncComponent } from 'vue';
+
+defineOptions({
+  inheritAttrs: false,
+});
 
 // render an svg by name
 const props = defineProps({
@@ -22,13 +26,6 @@ const props = defineProps({
   name: {
     type: String,
     required: true,
-  },
-  /**
-   * Class attribute to be added to the component.
-   */
-  class: {
-    type: [String, Array, Object],
-    default: '',
   },
 
   /**

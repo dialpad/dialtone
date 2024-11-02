@@ -10,6 +10,7 @@ on:
         options:
           - all
           - dialtone
+          - combinator
           - css
           - emojis
           - icons
@@ -98,6 +99,10 @@ jobs:
       - name: Release Dialtone ${{ env.RELEASE_TAG }}
         if: ${{ github.event_name == 'schedule' || github.event.inputs.package == 'all' || github.event.inputs.package == 'dialtone' }}
         run: pnpm nx run dialtone:release
+
+      - name: Release Dialtone Combinator ${{ env.RELEASE_TAG }}
+        if: ${{ github.event_name == 'schedule' || github.event.inputs.package == 'all' || github.event.inputs.package == 'combinator' }}
+        run: pnpm nx run dialtone-combinator:release
 
       - name: Release Dialtone CSS ${{ env.RELEASE_TAG }}
         if: ${{ github.event_name == 'schedule' || github.event.inputs.package == 'all' || github.event.inputs.package == 'css' }}

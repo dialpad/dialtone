@@ -17,10 +17,6 @@ Thumbs.db
 *_rsa
 *_rsa.pub
 
-# VS Code #
-.vscode
-*.code-workspace
-
 # JetBrains #
 .idea
 
