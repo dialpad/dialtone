@@ -631,7 +631,6 @@ export default {
 
         // Always output JSON in a separate event
         const jsonValue = this.editor.getJSON();
-        console.log(jsonValue);
         this.$emit('json-input', jsonValue);
       });
 
