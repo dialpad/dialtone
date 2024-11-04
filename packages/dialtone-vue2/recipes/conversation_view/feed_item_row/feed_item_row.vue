@@ -52,9 +52,12 @@
         data-qa="dt-feed-item-row--header"
         class="dt-feed-item-row__header"
       >
-        <p class="dt-feed-item-row__header__name">
-          {{ displayName }}
-        </p>
+        <!-- @slot Slot for display name -->
+        <slot name="displayName">
+          <p class="dt-feed-item-row__header__name">
+            {{ displayName }}
+          </p>
+        </slot>
         <time
           class="dt-feed-item-row__header__time"
         >
