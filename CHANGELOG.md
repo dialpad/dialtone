@@ -1,3 +1,15 @@
+# [9.84.0](https://github.com/dialpad/dialtone/compare/dialtone/v9.83.2...dialtone/v9.84.0) (2024-11-04)
+
+
+### Bug Fixes
+
+* **Callbar Button With Popover:** NO-JIRA use flex-start ([#558](https://github.com/dialpad/dialtone/issues/558)) ([1522b52](https://github.com/dialpad/dialtone/commit/1522b5229e39541c76f9d7816fea44082631c331))
+
+
+### Features
+
+* DLT-1812 language server - initial implementation ([#551](https://github.com/dialpad/dialtone/issues/551)) ([189d40c](https://github.com/dialpad/dialtone/commit/189d40cf442b881c04a51adec7409406339486df))
+
 ## [9.83.2](https://github.com/dialpad/dialtone/compare/dialtone/v9.83.1...dialtone/v9.83.2) (2024-10-31)
 
 
