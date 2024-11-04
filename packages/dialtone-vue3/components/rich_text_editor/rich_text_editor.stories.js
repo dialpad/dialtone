@@ -23,6 +23,7 @@ export const argsData = {
   onInput: action('input'),
   onFocus: action('focus'),
   onEnter: action('enter'),
+  onJsonInput: action('json-input'),
 };
 
 export const argTypesData = {
@@ -83,6 +84,11 @@ export const argTypesData = {
     },
   },
   onEnter: {
+    table: {
+      disable: true,
+    },
+  },
+  onJsonInput: {
     table: {
       disable: true,
     },

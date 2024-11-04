@@ -104,6 +104,12 @@ export const argTypesData = {
     },
   },
 
+  onJsonInput: {
+    table: {
+      disable: true,
+    },
+  },
+
   onAddMedia: {
     table: {
       disable: true,
@@ -205,6 +211,7 @@ export const argsData = {
   onFocus: action('focus'),
   onBlur: action('blur'),
   onInput: action('input'),
+  onJsonInput: action('json-input'),
   onSelectMedia: action('select-media'),
   onSelectedEmoji: action('selected-emoji'),
   onSelectedCommand: action('selected-command'),
