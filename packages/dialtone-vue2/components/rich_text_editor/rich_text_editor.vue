@@ -308,6 +308,13 @@ export default {
     'input',
 
     /**
+     * Input event always in JSON format.
+     * @event input
+     * @type {JSON}
+     */
+    'json-input',
+
+    /**
      * Event to sync the value with the parent
      * @event update:value
      * @type {String|JSON}
@@ -621,6 +628,11 @@ export default {
         }
         this.$emit('input', value);
         this.$emit('update:value', value);
+
+        // Always output JSON in a separate event
+        const jsonValue = this.editor.getJSON();
+        console.log(jsonValue);
+        this.$emit('json-input', jsonValue);
       });
 
       // The editor is focused.

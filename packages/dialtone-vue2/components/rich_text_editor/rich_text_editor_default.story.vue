@@ -23,6 +23,7 @@
     :additional-extensions="$attrs.additionalExtensions"
     @blur="$attrs.onBlur"
     @input="$attrs.onInput"
+    @json-input="$attrs.onJsonInput"
     @focus="$attrs.onFocus"
     @enter="$attrs.onEnter"
   />
