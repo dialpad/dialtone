@@ -1,3 +1,10 @@
+## [3.159.3](https://github.com/dialpad/dialtone/compare/dialtone-vue3/v3.159.2...dialtone-vue3/v3.159.3) (2024-11-04)
+
+
+### Bug Fixes
+
+* **Callbar Button With Popover:** NO-JIRA use flex-start ([#558](https://github.com/dialpad/dialtone/issues/558)) ([1522b52](https://github.com/dialpad/dialtone/commit/1522b5229e39541c76f9d7816fea44082631c331))
+
 ## [3.159.2](https://github.com/dialpad/dialtone/compare/dialtone-vue3/v3.159.1...dialtone-vue3/v3.159.2) (2024-10-31)
 
 
