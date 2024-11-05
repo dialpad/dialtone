@@ -14,10 +14,13 @@
     :selected="$attrs.selected"
     :no-initials="$attrs.noInitials"
     :is-typing="$attrs.isTyping"
+    :reply-button-tooltip="$attrs.replyButtonTooltip"
+    :has-reply-button="$attrs.hasReplyButton"
     :has-call-button="$attrs.hasCallButton"
     :call-button-tooltip="$attrs.callButtonTooltip"
     @click="$attrs.onClick"
     @call="$attrs.onCall"
+    @reply="$attrs.onReply"
   />
 </template>
 

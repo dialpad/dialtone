@@ -10,6 +10,8 @@
     :aria-label="$attrs.ariaLabel"
     :unread-count-tooltip="$attrs.unreadCountTooltip"
     :selected="$attrs.selected"
+    :has-reply-button="$attrs.hasReplyButton"
+    :reply-button-tooltip="$attrs.replyButtonTooltip"
     :has-call-button="$attrs.hasCallButton"
     :call-button-tooltip="$attrs.callButtonTooltip"
     :muted="$attrs.muted"
@@ -20,6 +22,7 @@
     :icon-size="$attrs.iconSize"
     @click="$attrs.onClick"
     @call="$attrs.onCall"
+    @reply="$attrs.onReply"
   />
 </template>
 

@@ -5,6 +5,8 @@
     :unread-count="unreadCount"
     :has-unreads="hasUnreads"
     :unread-count-tooltip="unreadCountTooltip"
+    :has-reply-button="hasReplyButton"
+    :reply-button-tooltip="replyButtonTooltip"
     :selected="selected"
     :is-typing="isTyping"
     v-bind="$attrs"
@@ -77,6 +79,22 @@ export default {
     },
 
     /**
+     * Whether the contact row should display a reply button when hovered.
+     */
+    hasReplyButton: {
+      type: Boolean,
+      default: true,
+    },
+
+    /**
+     * Text shown when the reply button is hovered.
+     */
+    replyButtonTooltip: {
+      type: String,
+      default: '',
+    },
+
+    /**
      * Determines if the row is selected
      */
     selected: {
@@ -101,6 +119,14 @@ export default {
      * @type {PointerEvent | KeyboardEvent}
      */
     'click',
+
+    /**
+     * Reply button clicked
+     *
+     * @event reply
+     * @type {PointerEvent | KeyboardEvent}
+     */
+    'reply',
   ],
 
   computed: {

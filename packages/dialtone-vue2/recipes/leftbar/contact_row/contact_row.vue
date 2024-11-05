@@ -4,9 +4,11 @@
     :description="contactDescription"
     :has-unreads="hasUnreads"
     :selected="selected"
+    :has-reply-button="hasReplyButton"
     :has-call-button="hasCallButton"
     :muted="muted"
     :is-typing="isTyping"
+    :reply-button-tooltip="replyButtonTooltip"
     :call-button-tooltip="callButtonTooltip"
     :unread-count-tooltip="unreadCountTooltip"
     v-bind="$attrs"
@@ -194,11 +196,27 @@ export default {
     },
 
     /**
+     * Whether the contact row should display a reply button when hovered.
+     */
+    hasReplyButton: {
+      type: Boolean,
+      default: true,
+    },
+
+    /**
      * Whether the contact row should display a call button when hovered.
      */
     hasCallButton: {
       type: Boolean,
       default: true,
+    },
+
+    /**
+     * Text shown when the reply button is hovered.
+     */
+    replyButtonTooltip: {
+      type: String,
+      default: '',
     },
 
     /**
@@ -234,6 +252,14 @@ export default {
      * @type {PointerEvent | KeyboardEvent}
      */
     'call',
+
+    /**
+     * Reply button clicked
+     *
+     * @event reply
+     * @type {PointerEvent | KeyboardEvent}
+     */
+    'reply',
   ],
 
   computed: {

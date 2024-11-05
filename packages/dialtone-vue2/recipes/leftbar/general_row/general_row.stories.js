@@ -19,6 +19,7 @@ export const argsData = {
   iconSize: '300',
   onClick: action('click'),
   onCall: action('call'),
+  onReply: action('reply'),
 };
 
 export const argTypesData = {
@@ -61,6 +62,12 @@ export const argTypesData = {
     },
   },
 
+  onReply: {
+    table: {
+      disable: true,
+    },
+  },
+
   onCall: {
     table: {
       disable: true,
@@ -76,6 +83,12 @@ export const argTypesData = {
   },
 
   call: {
+    table: {
+      type: { summary: 'event' },
+    },
+  },
+
+  reply: {
     table: {
       type: { summary: 'event' },
     },

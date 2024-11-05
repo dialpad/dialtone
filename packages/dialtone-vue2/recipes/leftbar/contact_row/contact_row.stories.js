@@ -20,6 +20,7 @@ export const argsData = {
   unreadCountTooltip: '55 unread messages',
   onClick: action('click'),
   onCall: action('call'),
+  onReply: action('reply'),
 };
 
 export const argTypesData = {
@@ -61,6 +62,12 @@ export const argTypesData = {
     },
   },
 
+  onReply: {
+    table: {
+      disable: true,
+    },
+  },
+
   click: {
     description: 'Native click event for the entire row',
     table: {
@@ -70,6 +77,12 @@ export const argTypesData = {
   },
 
   call: {
+    table: {
+      type: { summary: 'event' },
+    },
+  },
+
+  reply: {
     table: {
       type: { summary: 'event' },
     },

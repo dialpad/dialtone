@@ -108,6 +108,36 @@
         </template>
       </dt-tooltip>
       <div
+        v-if="hasReplyButton"
+        class="dt-leftbar-row__action"
+        data-qa="dt-leftbar-row-action"
+      >
+        <dt-tooltip
+          :message="replyButtonTooltip"
+          placement="top"
+        >
+          <template #anchor>
+            <dt-button
+              class="dt-leftbar-row__action-button"
+              data-qa="dt-leftbar-row-action-reply-button"
+              :circle="true"
+              size="xs"
+              kind="inverted"
+              :aria-label="replyButtonTooltip"
+              @focus="actionFocused = true"
+              @blur="actionFocused = false"
+              @click.stop="$emit('reply', $event)"
+            >
+              <template #icon>
+                <dt-icon-webchat
+                  size="200"
+                />
+              </template>
+            </dt-button>
+          </template>
+        </dt-tooltip>
+      </div>
+      <div
         v-if="hasCallButton"
         class="dt-leftbar-row__action"
         data-qa="dt-leftbar-row-action"
@@ -150,7 +180,7 @@ import {
   LEFTBAR_GENERAL_ROW_ICON_SIZES,
 } from './general_row_constants';
 import { DtBadge } from '@/components/badge';
-import { DtIconPhone, DtIconWaveform } from '@dialpad/dialtone-icons/vue2';
+import { DtIconWebchat, DtIconPhone, DtIconWaveform } from '@dialpad/dialtone-icons/vue2';
 import { DtButton } from '@/components/button';
 import { DtTooltip } from '@/components/tooltip';
 import DtEmojiTextWrapper from '@/components/emoji_text_wrapper/emoji_text_wrapper.vue';
@@ -165,6 +195,7 @@ export default {
     DtBadge,
     DtButton,
     DtTooltip,
+    DtIconWebchat,
     DtIconPhone,
     DtIconWaveform,
     DtRecipeLeftbarGeneralRowIcon,
@@ -297,11 +328,27 @@ export default {
     },
 
     /**
+     * Whether the row should have a reply button. Usually only applicable to individual contact rows.
+     */
+    hasReplyButton: {
+      type: Boolean,
+      default: false,
+    },
+
+    /**
      * Whether the row should have a call button. Usually only applicable to individual contact rows.
      */
     hasCallButton: {
       type: Boolean,
       default: false,
+    },
+
+    /**
+     * Text shown when the reply button is hovered.
+     */
+    replyButtonTooltip: {
+      type: String,
+      default: '',
     },
 
     /**
@@ -348,6 +395,14 @@ export default {
      * @type {PointerEvent | KeyboardEvent}
      */
     'call',
+
+    /**
+     * Reply button clicked
+     *
+     * @event reply
+     * @type {PointerEvent | KeyboardEvent}
+     */
+    'reply',
   ],
 
   data () {
@@ -391,8 +446,8 @@ export default {
     },
 
     hasActions () {
-      return this.dndText || this.activeVoiceChat || this.showUnreadCount || this.hasCallButton ||
-        this.showUnreadMentionCount;
+      return this.dndText || this.activeVoiceChat || this.showUnreadCount || this.hasReplyButton ||
+        this.hasCallButton || this.showUnreadMentionCount;
     },
 
     showUnreadCount () {

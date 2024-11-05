@@ -8,6 +8,7 @@ import DtRecipeGroupRowVariantsTemplate from './group_row_variants.story.vue';
 // Default Prop Values
 export const argsData = {
   onClick: action('click'),
+  onReply: action('reply'),
   names: 'Jaqueline Nackos, Lori Smith',
 };
 
@@ -22,6 +23,18 @@ export const argTypesData = {
   },
 
   click: {
+    table: {
+      type: { summary: 'event' },
+    },
+  },
+
+  onReply: {
+    table: {
+      disable: true,
+    },
+  },
+
+  reply: {
     table: {
       type: { summary: 'event' },
     },

@@ -5,9 +5,12 @@
     :unread-count="$attrs.unreadCount"
     :unread-count-tooltip="$attrs.unreadCountTooltip"
     :has-unreads="$attrs.hasUnreads"
+    :has-reply-button="$attrs.hasReplyButton"
+    :reply-button-tooltip="$attrs.replyButtonTooltip"
     :selected="$attrs.selected"
     :is-typing="$attrs.isTyping"
     @click="$attrs.onClick"
+    @reply="$attrs.onReply"
   />
 </template>
 
