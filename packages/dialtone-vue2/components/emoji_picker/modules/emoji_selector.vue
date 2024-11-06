@@ -155,7 +155,7 @@ export default {
       hoverFirstEmoji: true,
       fixedLabel: '',
       filteredEmojis: [],
-      TABS_DATA: ['Recently used', 'People', 'Nature', 'Food', 'Activity', 'Travel', 'Objects', 'Symbols', 'Flags'],
+      TABS_DATA: ['Recently used', 'People', 'Nature', 'Food', 'Activity', 'Travel', 'Objects', 'Symbols', 'Flags', 'Custom'],
       tabLabelObserver: null,
     };
   },
@@ -172,6 +172,7 @@ export default {
         ...this.emojis[`Objects${this.skinTone}`] || [],
         ...this.emojis.Symbols || [],
         ...this.emojis.Flags || [],
+        ...this.emojis.Custom || [],
       ];
     },
 

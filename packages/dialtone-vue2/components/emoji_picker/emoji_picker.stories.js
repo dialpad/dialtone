@@ -66,6 +66,7 @@ export const argsData = {
     'Objects',
     'Symbols',
     'Flags',
+    'Custom'
   ],
   recentlyUsedEmojis,
   skinSelectorButtonTooltipLabel: 'Change default skin tone',

@@ -41,6 +41,7 @@ import {
   DtIconLightbulb,
   DtIconHeart,
   DtIconFlag,
+  DtIconTiktok,
 } from '@dialpad/dialtone-icons/vue2';
 
 export default {
@@ -97,6 +98,7 @@ export default {
         { label: EMOJI_PICKER_CATEGORIES.OBJECTS, icon: DtIconLightbulb },
         { label: EMOJI_PICKER_CATEGORIES.SYMBOLS, icon: DtIconHeart },
         { label: EMOJI_PICKER_CATEGORIES.FLAGS, icon: DtIconFlag },
+        { label: EMOJI_PICKER_CATEGORIES.CUSTOM, icon: DtIconTiktok },
       ],
     };
   },
