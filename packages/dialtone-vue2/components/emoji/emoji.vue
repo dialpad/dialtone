@@ -1,13 +1,20 @@
+<!-- eslint-disable vuejs-accessibility/no-static-element-interactions -->
 <template>
-  <span :class="['d-emoji d-icon', emojiSize]">
+  <span
+    :class="['d-emoji d-icon', emojiSize]"
+    @mouseenter="startHover"
+    @mouseleave="stopHover"
+    @focus="startHover"
+    @blur="stopHover"
+  >
     <dt-skeleton
-      v-show="imgLoading && showSkeleton"
+      v-show="(imgLoading || animationLoading) && showSkeleton"
       :offset="0"
       :class="['d-icon', emojiSize]"
       :shape-option="{ shape: 'circle', size: '100%' }"
     />
     <img
-      v-show="!imgLoading"
+      v-show="!imgLoading && !hovering"
       ref="emojiImg"
       :class="['d-icon', emojiSize, imgClass]"
       :aria-label="emojiLabel"
@@ -16,6 +23,18 @@
       :src="emojiSrc"
       @load="imageLoaded"
       @error="imageErrored"
+    >
+
+    <img
+      v-show="!animationLoading && hovering"
+      ref="emojiImg"
+      :class="['d-icon', emojiSize, imgClass]"
+      :aria-label="emojiLabel"
+      :alt="emojiAlt"
+      :title="emojiLabel"
+      :src="animatedSrc"
+      @load="animationLoaded"
+      @error="animationErrored"
     >
   </span>
 </template>
@@ -53,6 +72,12 @@ export default {
     code: {
       type: String,
       required: true,
+    },
+
+    // render the animated emoji by default
+    forceAnimate: {
+      type: Boolean,
+      default: false,
     },
 
     /**
@@ -101,6 +126,8 @@ export default {
     return {
       emojiData: null,
       imgLoading: false,
+      hovering: false,
+      animationLoading: false,
     };
   },
 
@@ -122,6 +149,12 @@ export default {
       } else {
         return emojiImageUrlLarge + this.emojiData.key + emojiFileExtensionLarge;
       }
+    },
+
+    animatedSrc () {
+      const key = this.emojiData?.key;
+      if (!key) { return ''; }
+      return `https://fonts.gstatic.com/s/e/notoemoji/latest/${key}/512.webp`;
     },
 
     emojiAlt () {
@@ -148,18 +181,48 @@ export default {
       immediate: true,
     },
 
+    forceAnimate: {
+      handler: function (val) {
+        this.hovering = val;
+      },
+    },
+
     emojiSrc: {
       handler: async function () {
-        this.imgLoading = true;
+        if (this.hovering) {
+          this.animationLoading = true;
+        } else {
+          this.imgLoading = true;
+        }
       },
 
       immediate: true,
     },
   },
 
+  created () {
+    const preloadImage = new Image();
+    preloadImage.src = this.animatedSrc;
+
+    if (this.emojiData?.custom) { return; }
+    if (this.forceAnimate) { this.hovering = true; }
+  },
+
   methods: {
     getEmojiData () {
       this.emojiData = codeToEmojiData(this.code);
+    },
+
+    startHover () {
+      if (this.forceAnimate) return;
+      if (this.emojiData?.custom) return;
+      this.hovering = true;
+    },
+
+    stopHover () {
+      if (this.forceAnimate) return;
+      if (this.emojiData?.custom) return;
+      this.hovering = false;
     },
 
     imageLoaded () {
@@ -168,6 +231,15 @@ export default {
 
     imageErrored () {
       this.imgLoading = false;
+    },
+
+    animationLoaded () {
+      this.animationLoading = false;
+    },
+
+    animationErrored () {
+      this.animationLoading = false;
+      this.hovering = false;
     },
   },
 };

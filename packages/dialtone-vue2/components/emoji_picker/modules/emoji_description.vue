@@ -6,7 +6,8 @@
       :alt="emoji.name"
       :aria-label="emoji.name"
       :title="emoji.name"
-      :src="`${CDN_URL + emoji.unicode_character}.png`"
+      :src="imageSrc"
+      @error="imageErrored = true"
     >
     <div>{{ emoji?.name }}</div>
   </div>
@@ -33,7 +34,30 @@ export default {
   data () {
     return {
       CDN_URL,
+      imageErrored: false,
     };
+  },
+
+  computed: {
+    imageSrc () {
+      const key = this.emoji?.unicode_character;
+      if (!key) { return ''; }
+      if (this.imageErrored) { return `${CDN_URL + key}.png`; }
+      return `https://fonts.gstatic.com/s/e/notoemoji/latest/${key}/512.webp`;
+    },
+  },
+
+  watch: {
+    emoji: {
+      handler () {
+        this.imageErrored = false;
+
+        const preloadImage = new Image();
+        preloadImage.src = this.imageSrc;
+      },
+
+      immediate: true,
+    },
   },
 };
 </script>

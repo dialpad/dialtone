@@ -30,6 +30,7 @@
               <dt-emoji
                 size="200"
                 :code="reaction.emojiUnicodeOrShortname"
+                :force-animate="animateEmoji === reaction"
               />
             </span>
             <span class="dt-emoji-row__reaction-number">
@@ -80,12 +81,23 @@ export default {
     'emoji-hovered',
   ],
 
+  data () {
+    return {
+      animateEmoji: null,
+    };
+  },
+
   methods: {
     emojiClicked (reaction) {
       this.$emit('emoji-clicked', reaction.emojiUnicodeOrShortname);
     },
 
     emojiHovered (reaction, state) {
+      if (state === false) {
+        this.animateEmoji = null;
+      } else {
+        this.animateEmoji = reaction;
+      }
       this.$emit('emoji-hovered', {
         reaction: reaction.emojiUnicodeOrShortname,
         state,
