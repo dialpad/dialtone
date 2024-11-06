@@ -69,6 +69,7 @@ export const argsData = {
     'Custom'
   ],
   recentlyUsedEmojis,
+  customEmojis: recentlyUsedEmojis,
   skinSelectorButtonTooltipLabel: 'Change default skin tone',
   searchNoResultsLabel: 'No results',
   searchResultsLabel: 'Search results',

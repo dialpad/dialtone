@@ -4,6 +4,7 @@
     :skin-selector-button-tooltip-label="$attrs.skinSelectorButtonTooltipLabel"
     :tab-set-labels="$attrs.tabSetLabels"
     :recently-used-emojis="$attrs.recentlyUsedEmojis"
+    :custom-emojis="$attrs.customEmojis"
     :search-results-label="$attrs.searchResultsLabel"
     :search-no-results-label="$attrs.searchNoResultsLabel"
     :search-placeholder-label="$attrs.searchPlaceholderLabel"

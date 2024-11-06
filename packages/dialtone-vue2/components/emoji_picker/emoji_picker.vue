@@ -37,6 +37,7 @@
         :search-results-label="searchResultsLabel"
         :search-no-results-label="searchNoResultsLabel"
         :recently-used-emojis="recentlyUsedEmojis"
+        :custom-emojis="customEmojis"
         :selected-tabset="selectedTabset"
         @scroll-into-tab="updateScrollIntoTab"
         @highlighted-emoji="updateHighlightedEmoji"
@@ -91,6 +92,18 @@ export default {
      */
     // TODO try to simplify this to achieve an array of unicode characters and not an entire emoji data object
     recentlyUsedEmojis: {
+      type: Array,
+    },
+
+    /**
+     * The array with custom emojis object
+     * This list is necessary to fill the custom tab
+     * @type {Array}
+     * @default []
+     * @example
+     * <dt-emoji-picker :customEmojis="[emojiObject, emojiObject]" />
+     */
+    customEmojis: {
       type: Array,
     },
 

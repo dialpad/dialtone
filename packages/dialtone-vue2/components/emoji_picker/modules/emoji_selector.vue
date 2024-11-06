@@ -144,6 +144,11 @@ export default {
       type: Array,
       default: () => [],
     },
+
+    customEmojis: {
+      type: Array,
+      default: () => [],
+    }
   },
 
   data () {
@@ -207,6 +212,14 @@ export default {
     recentlyUsedEmojis: {
       handler (newValue) {
         this.emojis['Recently used'] = newValue;
+      },
+
+      immediate: true,
+    },
+
+    customEmojis: {
+      handler (newValue) {
+        this.emojis['Custom'] = newValue;
       },
 
       immediate: true,

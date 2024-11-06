@@ -21,7 +21,6 @@ import PeopleMediumDark from './src/people-medium-dark.json';
 import PeopleDark from './src/people-dark.json';
 import Symbols from './src/symbols.json';
 import Travel from './src/travel.json';
-import Custom from './src/nature.json';
 
 export const emojisGrouped = {
   ActivityDefault,
@@ -47,7 +46,6 @@ export const emojisGrouped = {
   PeopleDark,
   Symbols,
   Travel,
-  Custom,
 };
 
 export const emojisIndexed = [].concat(...Object.values(emojisGrouped)).reduce((accumulator, item) => {
