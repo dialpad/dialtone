@@ -26,8 +26,8 @@
         @keydown.up.prevent="onArrowKeyPress"
         @keydown.down.prevent="onArrowKeyPress"
         @keydown.escape.capture="closePopover"
-        @mouseenter="onEnterAnchor"
-        @mouseleave="onLeaveAnchor"
+        @mouseenter="openHovercard"
+        @mouseleave="closeHovercard"
       >
         <!-- @slot Anchor element that activates the popover. Usually a button. -->
         <slot
@@ -58,8 +58,8 @@
         :tabindex="contentTabindex"
         appear
         v-on="popoverListeners"
-        @mouseenter="onEnterContent"
-        @mouseleave="onLeaveContent"
+        @mouseenter="openHovercard"
+        @mouseleave="closeHovercard"
       >
         <popover-header-footer
           v-if="$slots.headerContent || showCloseButton"
@@ -1038,34 +1038,26 @@ export default {
       }, TOOLTIP_DELAY_MS);
     },
 
-    onEnterAnchor () {
+    openHovercard () {
       if (!this.hovercard) return;
-      if (this.timer) this.timer.enter(this.id);
-      else {
-        clearTimeout(this.outTimer);
-        this.setInTimer();
+      if (this.open === null || this.open === undefined) {
+        if (this.timer) this.timer.enter(this.id);
+        else {
+          clearTimeout(this.outTimer);
+          this.setInTimer();
+        }
       }
     },
 
-    onLeaveAnchor () {
+    closeHovercard () {
       if (!this.hovercard) return;
-      if (this.timer) this.timer.leave();
-      else {
-        clearTimeout(this.inTimer);
-        this.setOutTimer();
+      if (this.open === null || this.open === undefined) {
+        if (this.timer) this.timer.leave();
+        else {
+          clearTimeout(this.inTimer);
+          this.setOutTimer();
+        }
       }
-    },
-
-    onEnterContent () {
-      if (!this.hovercard) return;
-      if (this.timer) this.timer.enter(this.id);
-      else clearTimeout(this.outTimer);
-    },
-
-    onLeaveContent () {
-      if (!this.hovercard) return;
-      if (this.timer) this.timer.leave();
-      else this.setOutTimer();
     },
 
     //  ============================================================================
