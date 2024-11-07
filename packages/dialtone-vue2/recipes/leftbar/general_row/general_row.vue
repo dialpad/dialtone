@@ -417,7 +417,7 @@ export default {
       return [
         'dt-leftbar-row',
         {
-          'dt-leftbar-row--no-action': !this.hasCallButton,
+          'dt-leftbar-row--no-action': !this.hasCallButton && !this.hasReplyButton,
           'dt-leftbar-row--has-unread': this.hasUnreads,
           'dt-leftbar-row--unread-count': this.showUnreadCount || this.showUnreadMentionCount,
           'dt-leftbar-row--selected': this.selected,
