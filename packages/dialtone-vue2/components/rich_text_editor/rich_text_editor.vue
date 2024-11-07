@@ -11,11 +11,11 @@
 /* eslint-disable max-lines */
 import { Editor, EditorContent } from '@tiptap/vue-2';
 import { Slice, Fragment } from '@tiptap/pm/model';
+import { Extension } from '@tiptap/core';
 import Blockquote from '@tiptap/extension-blockquote';
 import CodeBlock from '@tiptap/extension-code-block';
 import Code from '@tiptap/extension-code';
 import Document from '@tiptap/extension-document';
-import HardBreak from '@tiptap/extension-hard-break';
 import Paragraph from '@tiptap/extension-paragraph';
 import Placeholder from '@tiptap/extension-placeholder';
 import Bold from '@tiptap/extension-bold';
@@ -372,6 +372,32 @@ export default {
     extensions () {
       // These are the default extensions needed just for plain text.
       const extensions = [Document, Paragraph, Text, History];
+
+      const self = this;
+      const ShiftEnter = Extension.create({
+        addKeyboardShortcuts () {
+          return {
+            'Shift-Enter': ({ editor }) => {
+              editor.commands.first(({ commands }) => [
+                () => commands.newlineInCode(),
+                () => commands.splitListItem('listItem'),
+                () => commands.createParagraphNear(),
+                () => commands.liftEmptyBlock(),
+                () => commands.splitBlock(),
+              ]);
+            },
+            Enter: () => {
+              self.$emit('enter');
+              return true;
+            },
+          };
+        },
+      });
+
+      if (!this.allowLineBreaks) {
+        extensions.push(ShiftEnter);
+      }
+
       if (this.link) {
         extensions.push(TipTapLink.extend({ inclusive: false }).configure({
           HTMLAttributes: {
@@ -410,30 +436,6 @@ export default {
         extensions.push(
           Placeholder.configure({ placeholder: this.placeholder }),
         );
-      }
-
-      // make sure that this is defined before any other extensions
-      // where Enter and Shift+Enter should have its own interaction. otherwise it will be ignored
-      if (!this.allowLineBreaks) {
-        const self = this;
-        extensions.push(
-          HardBreak.extend({
-            addKeyboardShortcuts () {
-              return {
-                Enter: () => {
-                  self.$emit('enter');
-                  return true;
-                },
-                'Shift-Enter': () => {
-                  this.editor.commands.setHardBreak();
-                  return true;
-                },
-              };
-            },
-          }),
-        );
-      } else {
-        extensions.push(HardBreak);
       }
 
       if (this.mentionSuggestion) {
@@ -702,8 +704,7 @@ export default {
       background: var(--dt-color-surface-secondary);
       padding: var(--dt-space-400);
     }
-
-    code {
+    code:not(.dt-rich-text-editor--code-block > code) {
       padding: var(--dt-space-200) var(--dt-space-300);
       color: var(--dt-color-purple-400);
       background-color: var(--dt-color-purple-100);
