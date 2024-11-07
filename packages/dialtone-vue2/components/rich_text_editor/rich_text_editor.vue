@@ -13,6 +13,7 @@ import { Editor, EditorContent } from '@tiptap/vue-2';
 import { Slice, Fragment } from '@tiptap/pm/model';
 import Blockquote from '@tiptap/extension-blockquote';
 import CodeBlock from '@tiptap/extension-code-block';
+import Code from '@tiptap/extension-code';
 import Document from '@tiptap/extension-document';
 import HardBreak from '@tiptap/extension-hard-break';
 import Paragraph from '@tiptap/extension-paragraph';
@@ -275,6 +276,14 @@ export default {
     },
 
     /**
+     * Whether the input allows inline code (wrapped in backticks).
+     */
+    allowCode: {
+      type: Boolean,
+      default: true,
+    },
+
+    /**
      * Whether the input allows codeblock to be introduced in the text.
      */
     allowCodeblock: {
@@ -453,6 +462,10 @@ export default {
         types: ['paragraph'],
         defaultAlignment: 'left',
       }));
+
+      if (this.allowCode) {
+        extensions.push(Code);
+      }
 
       if (this.allowCodeblock) {
         extensions.push(CodeBlock.configure({
@@ -688,6 +701,13 @@ export default {
     &--code-block {
       background: var(--dt-color-surface-secondary);
       padding: var(--dt-space-400);
+    }
+
+    code {
+      padding: var(--dt-space-200) var(--dt-space-300);
+      color: var(--dt-color-purple-400);
+      background-color: var(--dt-color-purple-100);
+      border-radius: var(--dt-size-200);
     }
 
     > .ProseMirror {

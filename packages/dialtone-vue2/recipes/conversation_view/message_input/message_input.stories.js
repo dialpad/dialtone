@@ -263,6 +263,7 @@ export const WithoutExtensions = {
     allowItalic: false,
     allowStrike: false,
     allowUnderline: false,
+    allowCode: false,
     allowCodeblock: false,
   },
 };
