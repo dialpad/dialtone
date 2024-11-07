@@ -11,7 +11,7 @@ export default (function () {
   // If no hovercard is active, it sets a delay of TOOLTIP_DELAY_MS.
   // If there was an active hovercard, the delay depends on the time it takes
   // to move from one anchor to the other.
-  function enter (id) {
+  function enter (id, enterDelay = TOOLTIP_DELAY_MS) {
     if (prevCard) {
       const time = Date.now() - start + 100;
       if (timerLeave) clearTimeout(timerLeave);
@@ -38,13 +38,13 @@ export default (function () {
       timerEnter = setTimeout(() => {
         current.value = id;
         prevCard = id;
-      }, TOOLTIP_DELAY_MS);
+      }, enterDelay);
     }
   }
 
   // Handles the timer for when the event that closes the hovercard
   // is triggered.
-  function leave () {
+  function leave (leaveDelay = TOOLTIP_DELAY_MS) {
     if (timerEnter) {
       clearTimeout(timerEnter);
       timerEnter = null;
@@ -53,7 +53,7 @@ export default (function () {
     timerLeave = setTimeout(() => {
       current.value = null;
       prevCard = null;
-    }, TOOLTIP_DELAY_MS);
+    }, leaveDelay);
   }
 
   let instance = null;

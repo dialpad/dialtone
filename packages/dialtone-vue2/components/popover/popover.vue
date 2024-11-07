@@ -527,6 +527,24 @@ export default {
         return timer === null || (timer.enter && timer.leave && Object.keys(timer).includes('current'));
       },
     },
+
+    /**
+     * The enter delay in milliseconds before the hovercard is shown.
+     * @type number
+     */
+    enterDelay: {
+      type: Number,
+      default: TOOLTIP_DELAY_MS,
+    },
+
+    /**
+     * The leave delay in milliseconds before the hovercard is hidden.
+     * @type number
+     */
+    leaveDelay: {
+      type: Number,
+      default: TOOLTIP_DELAY_MS,
+    },
   },
 
   emits: [
@@ -1040,7 +1058,7 @@ export default {
 
     onEnterAnchor () {
       if (!this.hovercard) return;
-      if (this.timer) this.timer.enter(this.id);
+      if (this.timer) this.timerEnter();
       else {
         clearTimeout(this.outTimer);
         this.setInTimer();
@@ -1049,7 +1067,7 @@ export default {
 
     onLeaveAnchor () {
       if (!this.hovercard) return;
-      if (this.timer) this.timer.leave();
+      if (this.timer) this.timerLeave();
       else {
         clearTimeout(this.inTimer);
         this.setOutTimer();
@@ -1058,14 +1076,22 @@ export default {
 
     onEnterContent () {
       if (!this.hovercard) return;
-      if (this.timer) this.timer.enter(this.id);
+      if (this.timer) this.timerEnter();
       else clearTimeout(this.outTimer);
     },
 
     onLeaveContent () {
       if (!this.hovercard) return;
-      if (this.timer) this.timer.leave();
+      if (this.timer) this.timerLeave();
       else this.setOutTimer();
+    },
+
+    timerEnter () {
+      this.timer.enter(this.id, this.enterDelay);
+    },
+
+    timerLeave () {
+      this.timer.leave(this.leaveDelay);
     },
 
     //  ============================================================================
