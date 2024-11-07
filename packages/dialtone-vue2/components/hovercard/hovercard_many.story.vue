@@ -12,7 +12,7 @@
     >
       <template #avatar>
         <dt-hovercard
-          :id="$attrs.id"
+          :id="data.id"
           :placement="$attrs.placement"
           :content-class="$attrs.contentClass"
           :fallback-placements="$attrs.fallbackPlacements"
@@ -136,6 +136,7 @@
 </template>
 
 <script setup>
+import { getUniqueString } from '@/common/utils';
 import DtHovercard from './hovercard.vue';
 import DtRecipeFeedItemRow from '@/recipes/conversation_view/feed_item_row/feed_item_row.vue';
 import DtRecipeEmojiRow from '@/recipes/conversation_view/emoji_row/emoji_row.vue';
@@ -147,21 +148,32 @@ import DtButton from '../button/button.vue';
 import DtAvatar from '../avatar/avatar.vue';
 
 const cardData = [{
-  name: 'Jaqueline Nackos', src: avatar2, time: '4:54 PM', default: `<p class="d-fs-200 d-lh-400 d-wmx90ch">
+  name: 'Jaqueline Nackos',
+  src: avatar2,
+  time: '4:54 PM',
+  default: `<p class="d-fs-200 d-lh-400 d-wmx90ch">
   Elementum fames nullam elementum velit proin vitae aliquet.
   Platea nulla consectetur consequat sagittis nullam et ultricies nisl rhoncus
   aliquet elementum venenatis quisque.</p>`,
+  id: getUniqueString(),
 },
 {
-  name: 'Joseph Lumaban', src: avatar1, time: '5:05 PM', default: `<p class="d-fs-200 d-lh-400 d-wmx90ch">
+  name: 'Joseph Lumaban',
+  src: avatar1,
+  time: '5:05 PM',
+  default: `<p class="d-fs-200 d-lh-400 d-wmx90ch">
   Elementum fames nullam elementum velit proin vitae aliquet.
   Platea nulla consectetur consequat sagittis nullam et ultricies nisl rhoncus
   aliquet elementum venenatis quisque.</p>`,
+  id: getUniqueString(),
 },
 {
-  name: 'Purdie Afra', time: '5:16 PM', default: `<p class="d-fs-200 d-lh-400 d-wmx90ch">
+  name: 'Purdie Afra',
+  time: '5:16 PM',
+  default: `<p class="d-fs-200 d-lh-400 d-wmx90ch">
   Elementum fames nullam elementum velit proin vitae aliquet.
   Platea nulla consectetur consequat sagittis nullam et ultricies nisl rhoncus
   aliquet elementum venenatis quisque.</p>`,
+  id: getUniqueString(),
 }];
 </script>
