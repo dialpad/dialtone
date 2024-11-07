@@ -45,6 +45,7 @@
         @focus-skin-selector="$refs.skinSelectorRef.focusSkinSelector()"
         @focus-search-input="showSearch ? $refs.searchInputRef.focusSearchInput() : $refs.tabsetRef.focusTabset()"
         @keydown.esc.native="$emit('close')"
+        @scroll-bottom-reached="$emit('scroll-bottom-reached')"
       />
     </div>
     <div class="d-emoji-picker--footer">

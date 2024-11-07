@@ -51,11 +51,30 @@ const recentlyUsedEmojis = [
     unicode_character: '1f470-1f3ff-2640',
   },
 ];
+const customEmojis = [
+  {
+    name: "shipit",
+    date_added: 1730918816847,
+    added_by: "Lucía Aberastury",
+    image: "https://storage.googleapis.com/uber-voice_custom_emojis/123/shipit",
+    unicode_character: '1f44d',
+  },
+  {
+    name: 'thumbs up',
+    category: 'people',
+    shortname: ':thumbsup:',
+    shortname_alternates: [':+1:', ':thumbup:'],
+    keywords: ['+1', 'hand', 'thumb', 'up', 'uc6'],
+    unicode_output: '1f44d',
+    unicode_character: '1f44d',
+  },
+]
 
 export const argsData = {
   onSkinTone: action('skin-tone'),
   onSelectedEmoji: action('selected-emoji'),
   onClose: action('close'),
+  onScrollBottomReached: action('scroll-bottom-reached'),
   tabSetLabels: [
     'Most recently used',
     'Smileys and people',
@@ -69,7 +88,7 @@ export const argsData = {
     'Custom'
   ],
   recentlyUsedEmojis,
-  customEmojis: recentlyUsedEmojis,
+  customEmojis,
   skinSelectorButtonTooltipLabel: 'Change default skin tone',
   searchNoResultsLabel: 'No results',
   searchResultsLabel: 'Search results',
@@ -100,6 +119,11 @@ export const argTypesData = {
     },
   },
   onClose: {
+    table: {
+      disable: true,
+    },
+  },
+  onScrollBottomReached: {
     table: {
       disable: true,
     },

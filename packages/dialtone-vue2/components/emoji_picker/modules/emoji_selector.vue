@@ -56,7 +56,7 @@
               :alt="emoji.name"
               :aria-label="emoji.name"
               :title="emoji.name"
-              :src="getImgSrc(emoji.unicode_character)"
+              :src="emoji.date_added ? emoji.image : getImgSrc(emoji.unicode_character)"
               @error="handleImageError"
             >
           </button>
@@ -177,7 +177,6 @@ export default {
         ...this.emojis[`Objects${this.skinTone}`] || [],
         ...this.emojis.Symbols || [],
         ...this.emojis.Flags || [],
-        ...this.emojis.Custom || [],
       ];
     },
 
@@ -606,6 +605,13 @@ export default {
             this.fixedLabel = this.tabLabels[0]?.label;
           }
         });
+
+        // HACKATHON
+        // Check if scroll reached the bottom of the container
+        const container = this.$refs.listRef;
+        if (container.scrollTop + container.clientHeight >= container.scrollHeight - 100) {
+          this.$emit('scroll-bottom-reached');
+        }
       });
 
       this.tabLabelObserver.observe(this.$refs.tabCategoryRef);
