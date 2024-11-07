@@ -148,7 +148,7 @@ export default {
     customEmojis: {
       type: Array,
       default: () => [],
-    }
+    },
   },
 
   data () {
@@ -218,7 +218,7 @@ export default {
 
     customEmojis: {
       handler (newValue) {
-        this.emojis['Custom'] = newValue;
+        this.emojis.Custom = newValue;
       },
 
       immediate: true,
@@ -257,12 +257,19 @@ export default {
       this.setupFilteredRefs();
       this.setupTabLabelRefs();
       this.setTabLabelObserver();
+      // HACKATHON custom emojis
+      this.setBottomScrollListener();
     });
   },
 
   beforeDestroy () {
     if (this.tabLabelObserver) {
       this.tabLabelObserver.disconnect();
+    }
+
+    // HACKATHON custom emojis
+    if (this.$refs.listRef && this.handleScroll) {
+      this.$refs.listRef.removeEventListener('scroll', this.handleScroll);
     }
   },
 
@@ -587,6 +594,18 @@ export default {
       }
     },
 
+    // HACKATHON custom emojis
+    setBottomScrollListener () {
+      this.handleScroll = () => {
+        const container = this.$refs.listRef;
+        if (container.scrollTop + container.clientHeight >= container.scrollHeight) {
+          this.$emit('scroll-bottom-reached');
+        }
+      };
+
+      this.$refs.listRef.addEventListener('scroll', this.handleScroll);
+    },
+
     setTabLabelObserver () {
       this.tabLabelObserver = new IntersectionObserver(entries => {
         /* eslint-disable-next-line complexity */
@@ -605,13 +624,6 @@ export default {
             this.fixedLabel = this.tabLabels[0]?.label;
           }
         });
-
-        // HACKATHON
-        // Check if scroll reached the bottom of the container
-        const container = this.$refs.listRef;
-        if (container.scrollTop + container.clientHeight >= container.scrollHeight - 100) {
-          this.$emit('scroll-bottom-reached');
-        }
       });
 
       this.tabLabelObserver.observe(this.$refs.tabCategoryRef);

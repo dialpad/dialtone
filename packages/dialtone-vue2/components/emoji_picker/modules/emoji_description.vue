@@ -6,7 +6,7 @@
       :alt="emoji.name"
       :aria-label="emoji.name"
       :title="emoji.name"
-      :src="`${CDN_URL + emoji.unicode_character}.png`"
+      :src="emoji.date_added ? emoji.image : `${CDN_URL + emoji.unicode_character}.png`"
     >
     <div>{{ emoji?.name }}</div>
   </div>
