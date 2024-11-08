@@ -14,6 +14,7 @@
     @close="$attrs.onClose($event)"
     @selected-emoji="$attrs.onSelectedEmoji($event)"
     @scroll-bottom-reached="$attrs.onScrollBottomReached($event)"
+    @add-emoji="$attrs.onAddEmoji($event)"
   />
 </template>
 

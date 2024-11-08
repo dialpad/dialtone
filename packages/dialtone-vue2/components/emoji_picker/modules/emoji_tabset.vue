@@ -18,7 +18,21 @@
           @click.capture.stop="selectTabset(tab.id)"
           @keydown="handleKeyDown($event, tab.id)"
         >
+          <!--
+          Using <img because the shipit emoji should be get by API
+          or provided by prop
+          Quick hack for hackathon demo
+          -->
+          <img
+            v-if="tab.custom"
+            class="d-icon d-icon--size-400"
+            alt="shipit"
+            aria-label="shipit"
+            title="shipit"
+            src="https://github.githubassets.com/images/icons/emoji/shipit.png"
+          >
           <component
+            v-else
             :is="tab.icon"
             size="400"
           />
@@ -98,7 +112,7 @@ export default {
         { label: EMOJI_PICKER_CATEGORIES.OBJECTS, icon: DtIconLightbulb },
         { label: EMOJI_PICKER_CATEGORIES.SYMBOLS, icon: DtIconHeart },
         { label: EMOJI_PICKER_CATEGORIES.FLAGS, icon: DtIconFlag },
-        { label: EMOJI_PICKER_CATEGORIES.CUSTOM, icon: DtIconTiktok },
+        { label: EMOJI_PICKER_CATEGORIES.CUSTOM, custom: true, icon: DtIconTiktok },
       ],
     };
   },

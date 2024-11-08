@@ -72,6 +72,7 @@ const customEmojis = [
 
 export const argsData = {
   onSkinTone: action('skin-tone'),
+  onAddEmoji: action('add-emoji'),
   onSelectedEmoji: action('selected-emoji'),
   onClose: action('close'),
   onScrollBottomReached: action('scroll-bottom-reached'),
@@ -114,6 +115,11 @@ export const argTypesData = {
     },
   },
   onSelectedEmoji: {
+    table: {
+      disable: true,
+    },
+  },
+  onAddEmoji: {
     table: {
       disable: true,
     },
