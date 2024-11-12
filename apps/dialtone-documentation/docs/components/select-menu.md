@@ -474,6 +474,19 @@ htmlCode='
 </div>
 <div>
   <label>
+    <div class="d-label d-label--md">Label</div>
+    <div class="d-select d-select--md">
+      <select class="d-select__input">
+        <option class="" value=""> Please select one </option>
+        <option class="" value="1"> Option 1 </option>
+        <option class="" value="2"> Option 2 </option>
+        <option class="" value="3"> Option 3 </option>
+      </select>
+    </div>
+  </label>
+</div>
+<div>
+  <label>
     <div class="d-label d-label--lg">Label</div>
     <div class="d-select d-select--lg">
       <select class="d-select__input">
@@ -522,6 +535,19 @@ vueCode='
   ]"
   label="Label"
   size="sm"
+  :value="value"
+  @input="onInput"
+  @change="onChange"
+/>
+<dt-select-menu
+  :options="[
+    { value: ``, label: `Please select one` },
+    { value: `1`, label: `Option 1` },
+    { value: `2`, label: `Option 2` },
+    { value: `3`, label: `Option 3` },
+  ]"
+  label="Label"
+  size="md"
   :value="value"
   @input="onInput"
   @change="onChange"
