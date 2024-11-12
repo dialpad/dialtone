@@ -1,3 +1,10 @@
+## [9.84.1](https://github.com/dialpad/dialtone/compare/dialtone/v9.84.0...dialtone/v9.84.1) (2024-11-12)
+
+
+### Bug Fixes
+
+* **Emoji Text Wrapper:** DLT-2202 not rendering line break correctly ([#561](https://github.com/dialpad/dialtone/issues/561)) ([291772e](https://github.com/dialpad/dialtone/commit/291772e978937bd1d55d37089db68259c70547fa))
+
 # [9.84.0](https://github.com/dialpad/dialtone/compare/dialtone/v9.83.2...dialtone/v9.84.0) (2024-11-04)
 
 
