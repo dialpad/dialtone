@@ -51,8 +51,12 @@ export default {
      */
     replaceDtEmojis (replaceList, textContent) {
       if (!replaceList.length) return textContent;
+      // Escape the asterisk to avoid breaking the regex for the asterisk emoji
+      const escapedReplaceList = replaceList.map(item =>
+        item.replace(/\*/g, '\\*'),
+      );
 
-      const regexp = new RegExp(`(${replaceList.join('|')})`, 'g');
+      const regexp = new RegExp(`(${escapedReplaceList.join('|')})`, 'g');
       const items = textContent.split(regexp);
 
       return items
