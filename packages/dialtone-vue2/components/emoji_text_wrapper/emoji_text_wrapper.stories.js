@@ -56,7 +56,7 @@ export const Default = {
 
   args: {
     default:
-      'Some text with :invalid-emoji: :smile: :cry: *️⃣ and 😄, and custom emojis :octocat: :shipit:',
+      'Some text with :invalid-emoji: :smile: :cry: and 😄, and custom emojis :octocat: :shipit:',
   },
 };
 
