@@ -1,5 +1,5 @@
 import type { LanguageServicePlugin, LanguageServicePluginInstance } from "@volar/language-service";
-import { resolveVueComponents } from "../resolvers/vue-components";
+import { components, resolveComponentProps, resolvePropValues, resolveVueComponents } from "../resolvers/vue-components";
 import { getContent, getCurrentWord } from "../utils";
 
 export type DialtoneTokenDoc = {
@@ -20,44 +20,52 @@ export function create(): LanguageServicePlugin {
             completionProvider: {
                 triggerCharacters: ['<', '\:', '"', '\''],
             },
-            // hoverProvider: true,
+            hoverProvider: true,
         },
         create(context): LanguageServicePluginInstance {
             console.log('Created Dialtone Components service');
 
             return {
                 provideCompletionItems(document, position, completionContext) {
-                    console.log('Providing Component Completion Items');
 
                     const content = getContent(document, context);
                     if (!content) return;
 
                     const currentLine: string = content.split('\n')[position.line];
-                    const currentWord = getCurrentWord(currentLine, position);
-
-                    // Remove all the trigger character from current word
-                    const sanitizedWord = currentWord.replaceAll(/[<="'\:]/g, '');
 
                     // @TODO: Find multi-line components
                     if (!currentLine.includes('<dt-'))
                         return;
 
-                    return resolveVueComponents(currentLine, currentWord, sanitizedWord, completionContext);
+                    // console.log('Providing Component Completion Items');
+                    const currentWord = getCurrentWord(currentLine, position.character);
+
+                    if (currentWord.startsWith('dt-')) {
+                        console.log('Resolving components', currentWord);
+                        return { isIncomplete: false, items: components }
+                    } else if (/["']/.test(currentLine[position.character - 1])) {
+                        return resolvePropValues(currentLine, currentWord)
+                    } else {
+                        return resolveComponentProps(currentLine, currentWord)
+                    }
                 },
-                // provideHover(document, position, token) {
-                //     console.log('Providing Token Hover', document, position, token);
+                provideHover(document, position) {
+                    const content = getContent(document, context);
+                    if (!content) return;
 
-                //     const content = getContent(document, context);
-                //     if (!content) return;
+                    const currentLine: string = content.split('\n')[position.line];
 
-                //     const currentLine: string = content.split('\n')[position.line];
-                //     const currentWord = getCurrentWord(currentLine, position);
+                    if (!currentLine.includes('<dt-'))
+                        return;
 
-                //     console.log('hovering: ', currentWord);
+                    console.log('Providing Token Hover');
+                    const currentWord = getCurrentWord(currentLine, position.character);
+
+                    console.log('hovering: ', currentWord);
 
 
-                //     return { contents: ['Hover Component content'] };
-                // },
+                    return { contents: ['Hover Component content'] };
+                },
             };
         },
     }

@@ -1,6 +1,6 @@
 import type { CompletionContext, CompletionItem, CompletionList, NullableProviderResult } from "@volar/language-server/node";
-import { CompletionItemKind } from "@volar/language-server/node";
-import { stringToHumanReadable, stringToKebabCase } from "../utils";
+import { Command, CompletionItemKind } from "@volar/language-server/node";
+import { getCurrentWord, stringToHumanReadable, stringToKebabCase } from "../utils";
 
 export type DialtoneComponentDoc = {
     displayName: string;
@@ -31,17 +31,15 @@ export const components = componentDocumentation.map((component: DialtoneCompone
     const componentName = stringToKebabCase(component.displayName);
     const humanReadableName = stringToHumanReadable(component.displayName);
     return {
-        label: componentName,
+        label: `${componentName} `,
         kind: CompletionItemKind.Text,
         detail: humanReadableName,
         documentation: component.description,
-        deprecated: component.deprecated
+        deprecated: component.deprecated,
     } satisfies CompletionItem;
 }) satisfies CompletionItem[];
 
-export function resolveVueComponents(currentLine: string, currentWord: string, sanitizedWord: string, context: CompletionContext): NullableProviderResult<CompletionList> {
-    console.log('Resolving Vue Components', currentLine, currentWord, sanitizedWord, context);
-
+export function resolveVueComponents(currentLine: string, currentWord: string): NullableProviderResult<CompletionList> {
     // Get the clean tag-name
     const tagName = currentLine.replace(/\s+<([\w-]+).*/, '$1');
 
@@ -49,23 +47,22 @@ export function resolveVueComponents(currentLine: string, currentWord: string, s
         stringToKebabCase(component.displayName) === tagName
     );
 
-    if (currentWord.trim().startsWith('<') || context.triggerCharacter === '<') {
-        return { isIncomplete: false, items: components }
-    }
-
     if (!component)
         return;
 
-    const propValues = component.props
-        .find(prop => stringToKebabCase(prop.name) === stringToKebabCase(sanitizedWord))
-        ?.values
-        ?.map(val => ({
-            label: val,
-            kind: CompletionItemKind.Value,
-        }) as CompletionItem);
+    if (currentLine.endsWith('"')) {
+        const propValues = component.props
+            .find(prop => stringToKebabCase(prop.name) === stringToKebabCase(currentWord))
+            ?.values
+            ?.map(val => ({
+                label: val,
+                kind: CompletionItemKind.Value,
+            }) as CompletionItem);
 
-    if (propValues?.length) {
-        return { isIncomplete: false, items: propValues }
+        if (propValues?.length) {
+            console.log('Resolving values', currentWord);
+            return { isIncomplete: false, items: propValues }
+        }
     }
 
     const props = component.props
@@ -78,10 +75,66 @@ export function resolveVueComponents(currentLine: string, currentWord: string, s
             detail: `Default: ${prop.defaultValue?.value}`,
             documentation: prop.description
         }) as CompletionItem)
-        .filter(item =>
-            // @TODO: Filter properties that are already set
-            item.label.startsWith(sanitizedWord)
-        );
+        .filter(item => {
+            console.log(item.label, currentWord);
 
+            return item.label.startsWith(currentWord)
+        });
+
+    console.log('Resolving properties', currentWord);
     return { isIncomplete: false, items: props };
+}
+
+export function resolveComponentProps(currentLine: string, currentWord: string): NullableProviderResult<CompletionList> {
+    // Get the clean tag-name
+    const tagName = currentLine.replace(/\s+<([\w-]+).*/, '$1');
+
+    const component = componentDocumentation.find(component =>
+        stringToKebabCase(component.displayName) === tagName
+    );
+
+    if (!component)
+        return;
+
+    const props = component.props
+        .map(prop => ({
+            label: stringToKebabCase(prop.name),
+            kind: CompletionItemKind.Field,
+            labelDetails: {
+                detail: `: ${prop.type.name}`,
+            },
+            detail: `Default: ${prop.defaultValue?.value}`,
+            documentation: prop.description,
+        }) as CompletionItem);
+
+    console.log('Resolving properties', currentWord);
+    return { isIncomplete: false, items: props };
+}
+
+export function resolvePropValues(currentLine: string, currentWord: string): NullableProviderResult<CompletionList> {
+    console.log('Resolving values', currentWord);
+
+    // Get the clean tag-name
+    const tagName = currentLine.replace(/\s+<([\w-]+).*/, '$1');
+
+    const component = componentDocumentation.find(component =>
+        stringToKebabCase(component.displayName) === tagName
+    );
+
+    if (!component)
+        return;
+
+    const prop = component.props.find(prop => stringToKebabCase(prop.name) === stringToKebabCase(currentWord));
+
+    if (!prop) return;
+
+    const propValues = prop.values?.map(val => ({
+        label: val,
+        kind: CompletionItemKind.Value,
+    }) as CompletionItem);
+
+    if (propValues?.length) {
+        console.log('Resolving values', currentWord);
+        return { isIncomplete: false, items: propValues }
+    }
 }

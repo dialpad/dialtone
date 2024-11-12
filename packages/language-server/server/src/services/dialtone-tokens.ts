@@ -1,5 +1,5 @@
-import type { LanguageServicePlugin, LanguageServicePluginInstance } from "@volar/language-server/node";
-import { resolveCSSVariables } from "../resolvers/css-variables";
+import type { LanguageServicePlugin, LanguageServicePluginInstance, MarkupContent } from "@volar/language-server/node";
+import { resolveCSSVariables, cssVariablesDocumentation } from "../resolvers/css-variables";
 import { getContent, getCurrentWord } from "../utils";
 
 export type DialtoneTokenDoc = {
@@ -21,41 +21,65 @@ export function create(): LanguageServicePlugin {
                 resolveProvider: true,
                 triggerCharacters: ['(', '-'],
             },
-            // hoverProvider: true,
+            hoverProvider: true,
         },
         create(context): LanguageServicePluginInstance {
             console.log('Created Dialtone Tokens service');
             return {
                 provideCompletionItems(document, position) {
-                    console.log('Providing Tokens Completion Items');
-
                     const content = getContent(document, context);
                     if (!content) return;
 
                     const currentLine: string = content.split('\n')[position.line];
-                    const currentWord = getCurrentWord(currentLine, position);
 
-                    // @TODO: Find multi-line components
-                    if (currentWord.startsWith('var(--dt-'))
-                        return resolveCSSVariables(currentWord);
-                    else
-                        return { isIncomplete: true, items: [] };
+                    if (!currentLine.includes('var(--dt-'))
+                        return;
+
+                    console.log('Providing Tokens Completion Items');
+
+                    const currentWord = getCurrentWord(currentLine, position.character);
+                    return resolveCSSVariables(currentWord);
 
                 },
-                // async provideHover(document, position) {
-                //     console.log('Providing Component Hover', document, position);
+                async provideHover(document, position) {
+                    const content = getContent(document, context);
+                    if (!content) return;
 
-                //     const content = getContent(document, context);
-                //     if (!content) return;
+                    const currentLine: string = content.split('\n')[position.line];
 
-                //     const currentLine: string = content.split('\n')[position.line];
-                //     const currentWord = getCurrentWord(currentLine, position);
+                    if (!currentLine.includes('var(--dt-')) return;
 
-                //     console.log('hovering: ', currentWord);
+                    const variableMatch = /(--dt-[\w-]+)/gi.exec(currentLine);
 
+                    if (!variableMatch) return;
 
-                //     return { contents: { kind: "plaintext", value: 'Hover CSS content' } };
-                // },
+                    const matchStart = variableMatch.index;
+                    const matchEnd = matchStart + variableMatch[0].length;
+                    const isHoveringVariable = (position.character >= matchStart && position.character <= matchEnd);
+
+                    if (!isHoveringVariable) return;
+
+                    const variableName = variableMatch[0];
+
+                    console.log('Hovering: ', variableName);
+
+                    const cssVariable = cssVariablesDocumentation.find(item => item.label === variableName);
+                    if (!cssVariable) return;
+
+                    return {
+                        contents: cssVariable.documentation as MarkupContent,
+                        range: {
+                            start: {
+                                line: position.line,
+                                character: matchStart,
+                            },
+                            end: {
+                                line: position.line,
+                                character: matchEnd,
+                            }
+                        }
+                    };
+                },
             };
         },
     }

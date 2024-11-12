@@ -63,8 +63,6 @@ function processDocumentation(docs: DialtoneTokensDoc) {
             value: documentation,
         } as MarkupContent;
 
-        variable.detail = variable.detail || 'Missing variable description';
-
         variablesDocumentation.push(variable)
     }
 
@@ -74,7 +72,7 @@ function processDocumentation(docs: DialtoneTokensDoc) {
 const tokensDocumentation: DialtoneTokensDoc = require('../../node_modules/@dialpad/dialtone-tokens/dist/doc.json');
 
 // @TODO: Process the tokens on build, as it is a static file that will not change on runtime.
-const cssVariablesDocumentation: CompletionItem[] = processDocumentation(tokensDocumentation);
+export const cssVariablesDocumentation: CompletionItem[] = processDocumentation(tokensDocumentation);
 
 export function resolveCSSVariables(currentWord: string): NullableProviderResult<CompletionList> {
     console.log('Resolving CSS Variables', currentWord);
