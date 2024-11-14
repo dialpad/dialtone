@@ -25,10 +25,14 @@ This is the Dialtone language tools based on Volar Framework.
 - Switch to the Debug viewlet.
 - Select `Launch Client` from the drop down.
 - Run the launch config.
-- In the [Extension Development Host] instance of VSCode, open a `test.vue`
-  - Type `<dt-|` to try Component completion.
-  - Type `<dt-avatar | />` to try property completion.
-  - Have `<dt-avatar size="|" />` to see values completion.
+- The [Extension Development Host] instance of VSCode, will open the `sample` folder.
+  - On a `.vue` file:
+    - Type `<dt-|` to trigger Component completion.
+    - Type `<dt-avatar | />` to trigger property completion.
+    - Type `<dt-avatar size="|" />` to trigger values completion.
+  - On a `.css` file:
+    - Type `color: var(--dt-|)` to trigger token completion
+- If no completion is provided automatically (depends on your VSCode config), press `Ctrl + Space` to trigger the completions.
 
 ## Build .vsix
 

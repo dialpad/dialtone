@@ -1,6 +1,6 @@
 import type { LanguageServicePlugin, LanguageServicePluginInstance } from "@volar/language-service";
-import { components, resolveComponentProps, resolvePropValues, resolveVueComponents } from "../resolvers/vue-components";
-import { getContent, getCurrentWord } from "../utils";
+import { componentDocumentation, components, resolveComponentProps, resolvePropValues } from "../resolvers/vue-components";
+import { getContent, getCurrentWord, stringToKebabCase, wordUnderCursor } from "../utils";
 
 export type DialtoneTokenDoc = {
     [theme: string]: {
@@ -18,7 +18,7 @@ export function create(): LanguageServicePlugin {
         name: "dialtone-components",
         capabilities: {
             completionProvider: {
-                triggerCharacters: ['<', '\:', '"', '\''],
+                triggerCharacters: ['\:', '"', '\''],
             },
             hoverProvider: true,
         },
@@ -26,8 +26,7 @@ export function create(): LanguageServicePlugin {
             console.log('Created Dialtone Components service');
 
             return {
-                provideCompletionItems(document, position, completionContext) {
-
+                provideCompletionItems(document, position) {
                     const content = getContent(document, context);
                     if (!content) return;
 
@@ -37,16 +36,30 @@ export function create(): LanguageServicePlugin {
                     if (!currentLine.includes('<dt-'))
                         return;
 
-                    // console.log('Providing Component Completion Items');
-                    const currentWord = getCurrentWord(currentLine, position.character);
+                    const currentWord = getCurrentWord(currentLine, position.character)
+                    const tagName = currentLine.replace(/\s+<([\w-]+).*/, '$1');
+                    const quotesRegex = /["'][\w-]*["']/g;
+                    let quotesMatch = null;
 
-                    if (currentWord.startsWith('dt-')) {
-                        console.log('Resolving components', currentWord);
+                    console.info(`Component completion context (current-word: ${currentWord}, tag-name: ${tagName})`);
+
+                    // Check if cursor is within quotes
+                    while ((quotesMatch = quotesRegex.exec(currentLine)) !== null) {
+                        // If not, continue;
+                        if (position.character <= quotesMatch.index || position.character >= quotesMatch.index + quotesMatch[0].length)
+                            continue;
+
+                        const propName = currentLine.replace(/.*[^\w-](.*?)="[\w-]*".*/, "$1")
+                        console.log('prop name: ', propName);
+
+                        return resolvePropValues(tagName, propName)
+                    }
+
+                    if (/^\<?dt\-/.test(currentWord)) {
+                        console.info('Resolving components');
                         return { isIncomplete: false, items: components }
-                    } else if (/["']/.test(currentLine[position.character - 1])) {
-                        return resolvePropValues(currentLine, currentWord)
                     } else {
-                        return resolveComponentProps(currentLine, currentWord)
+                        return resolveComponentProps(tagName, currentWord)
                     }
                 },
                 provideHover(document, position) {
@@ -54,17 +67,49 @@ export function create(): LanguageServicePlugin {
                     if (!content) return;
 
                     const currentLine: string = content.split('\n')[position.line];
+                    const tagName = currentLine.replace(/\s+<([\w-]+).*/, '$1');
+                    const currentWord = wordUnderCursor(content, position)
 
-                    if (!currentLine.includes('<dt-'))
-                        return;
+                    if (!currentWord) return;
 
-                    console.log('Providing Token Hover');
-                    const currentWord = getCurrentWord(currentLine, position.character);
+                    const component = componentDocumentation.find(component => stringToKebabCase(component.displayName) === tagName)
 
-                    console.log('hovering: ', currentWord);
+                    if (!component) return;
 
+                    console.info(`Component hover context (current-word: ${currentWord.text}, tag-name: ${tagName})`);
 
-                    return { contents: ['Hover Component content'] };
+                    if (tagName === currentWord.text) {
+
+                        if (!component.description) return;
+
+                        return {
+                            contents: {
+                                kind: 'markdown',
+                                value: component.description
+                            },
+                            range: currentWord.range
+                        };
+                    }
+
+                    const prop = component.props.find(prop => stringToKebabCase(prop.name) === stringToKebabCase(currentWord.text));
+
+                    if (!prop || !prop.description) return;
+
+                    let description = prop.description;
+                    if (prop.values) {
+                        description += `\n\n**Values**: [${prop.values.join(', ')}]\n`
+                    }
+                    if (prop.defaultValue?.value) {
+                        description += `\n\n**Default**: ${prop.defaultValue.value}\n`
+                    }
+
+                    return {
+                        contents: {
+                            kind: 'markdown',
+                            value: description
+                        },
+                        range: currentWord.range
+                    };
                 },
             };
         },

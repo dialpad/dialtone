@@ -35,9 +35,10 @@ export function create(): LanguageServicePlugin {
                     if (!currentLine.includes('var(--dt-'))
                         return;
 
-                    console.log('Providing Tokens Completion Items');
-
                     const currentWord = getCurrentWord(currentLine, position.character);
+
+                    console.info(`Token completion context (current-word: ${currentWord})`);
+
                     return resolveCSSVariables(currentWord);
 
                 },
@@ -61,7 +62,7 @@ export function create(): LanguageServicePlugin {
 
                     const variableName = variableMatch[0];
 
-                    console.log('Hovering: ', variableName);
+                    console.info(`Token hover context (current-word: ${variableName}, start: ${matchStart}, end: ${matchEnd})`);
 
                     const cssVariable = cssVariablesDocumentation.find(item => item.label === variableName);
                     if (!cssVariable) return;
