@@ -1,5 +1,5 @@
-import type { LanguageServiceContext } from "@volar/language-server";
-import type { Position, TextDocument } from "vscode-html-languageservice";
+import type { LanguageServiceContext, Position, Range } from "@volar/language-server";
+import type { TextDocument } from "vscode-html-languageservice";
 import { URI } from "vscode-uri";
 import { DialtoneVirtualCode } from "./language-plugin";
 
@@ -11,8 +11,32 @@ export function stringToHumanReadable(string: string): string {
     return string.split(/(?=[A-Z]|[0-9]{3,}?)/).join(' ')
 }
 
-export function getCurrentWord(line: string, position: Position): string {
-    return line.slice(line.lastIndexOf(' ', position.character), position.character).trim();
+export function getCurrentWord(line: string, offset: number): string {
+    const lineUntilCursor = line.slice(0, offset);
+    return lineUntilCursor.replace(/.*[^\w-](.*?)/, "$1");
+}
+
+export function wordUnderCursor(content: string, position: Position) {
+    const currentLine: string = content.split('\n')[position.line];
+
+    if (!currentLine.includes('<dt-'))
+        return;
+
+    const start = currentLine.lastIndexOf(' ', position.character) + 1;
+    const end = currentLine.indexOf(' ', position.character);
+
+    const currentWord = (end === -1 ? currentLine.slice(start) : currentLine.slice(start, end));
+    const wordMatch = currentWord.match(/[\w-]+/);
+
+    if (!wordMatch) return;
+
+    return {
+        text: wordMatch[0],
+        range: {
+            start: { line: position.line, character: start + (wordMatch.index || 0) },
+            end: { line: position.line, character: start + ((wordMatch.index || 0) + wordMatch[0].length) }
+        } as Range
+    };
 }
 
 export function getContent(document: TextDocument, context: LanguageServiceContext): string | undefined {
