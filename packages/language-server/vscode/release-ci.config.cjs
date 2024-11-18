@@ -31,8 +31,7 @@ module.exports = {
         `${srcRoot}/package.json`,
         `${srcRoot}/vscode-dialtone-` + '${version}.vsix',
       ],
-      message: `chore(release): NO-JIRA ${name}` +
-        '/v${nextRelease.version}\n\n${nextRelease.notes}',
+      message: 'chore(release): NO-JIRA vscode-extension/v${nextRelease.version}\n\n${nextRelease.notes}',
     }],
     ['@semantic-release/github', {
       successComment: false,
