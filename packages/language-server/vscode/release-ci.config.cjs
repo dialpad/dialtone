@@ -1,13 +1,12 @@
 /* eslint-disable no-template-curly-in-string */
-const name = 'vscode';
-const srcRoot = `packages/language-server/${name}`;
+const srcRoot = 'packages/language-server/vscode';
 
 /**
  * @type {import('semantic-release').GlobalConfig}
  */
 module.exports = {
   pkgRoot: srcRoot,
-  tagFormat: name + '/v${version}',
+  tagFormat: 'vscode-extension/v${version}',
   commitPaths: [`${srcRoot}/*`],
   plugins: [
     ['@semantic-release/commit-analyzer', {
@@ -30,7 +29,7 @@ module.exports = {
         `${srcRoot}/CHANGELOG.md`,
         `${srcRoot}/CHANGELOG.json`,
         `${srcRoot}/package.json`,
-        `${srcRoot}/vscode-dialtone-` + '${nextRelease.version}.vsix',
+        `${srcRoot}/vscode-dialtone-` + '${version}.vsix',
       ],
       message: `chore(release): NO-JIRA ${name}` +
         '/v${nextRelease.version}\n\n${nextRelease.notes}',
