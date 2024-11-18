@@ -58,16 +58,27 @@ vueCode='
 
 ## Usage
 
-Import the directive from dialtone-vue
+Import the directive and styling from dialtone
 
 ```javascript
-import { DtScrollbarDirective } from "@dialpad/dialtone-vue";
+// For Vue 2
+import { DtScrollbarDirective } from "@dialpad/dialtone/vue2";
+
+// For Vue 3+
+import { DtScrollbarDirective } from "@dialpad/dialtone/vue3";
+
+// Import styling
+import 'overlayscrollbars/overlayscrollbars.css';
 ```
 
 Install the directive into vue instance
 
 ```javascript
+// For Vue 2
 Vue.use(DtScrollbarDirective);
+
+// For Vue 3+
+app.use(DtScrollbarDirective);
 ```
 
 To add a custom overlay scrollbar to a scrollable region, apply the `v-dt-scrollbar` directive to the parent element of the desired region.

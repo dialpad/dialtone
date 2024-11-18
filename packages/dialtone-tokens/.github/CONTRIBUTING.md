@@ -28,7 +28,7 @@ To do this we use:
 - [sd-transforms](https://github.com/tokens-studio/sd-transforms) for web.
 - [transform](../sync-scripts/transform.ts) As a custom translator for [Figma Variables](https://help.figma.com/hc/en-us/articles/15339657135383-Guide-to-variables-in-Figma).
 
-It can also be run as part of `nx build dialtone-tokens` which will build and output all different formats.
+It can also be run as part of `nx run dialtone-tokens:build` which will build and output all different formats.
 
 Next in the process is running Style Dictionary which will output tokens to a variety of different formats.
 We currently output the following:
@@ -40,7 +40,7 @@ We currently output the following:
 - LESS
 - CSS
 
-All of these are output to the dist folder when you do `nx build dialtone-tokens`
+All of these are output to the dist folder when you do `nx run dialtone-tokens:build`
 
 ## Style Dictionary Configuration
 
@@ -56,7 +56,9 @@ Because our design tokens are consumed on a variety of different platforms, we o
 
 ### Web
 
-Our web package is output via npm. Even though it is meant for web we contain the files for all platforms in the package (android, ios) for maximum flexibility. Everything in the `dist` folder after you run `nx build dialtone-tokens` is included in the NPM package. You can access the NPM package here: [@dialpad/dialtone-tokens](https://www.npmjs.com/package/@dialpad/dialtone-tokens)
+Our web package is output via npm. Even though it is meant for web we contain the files for all platforms in the package (android, ios) for maximum flexibility.
+Everything in the `dist` folder after you run `nx run dialtone-tokens:build` is included in the NPM package.
+You can access the NPM package here: [@dialpad/dialtone-tokens](https://www.npmjs.com/package/@dialpad/dialtone-tokens)
 
 ### Android
 

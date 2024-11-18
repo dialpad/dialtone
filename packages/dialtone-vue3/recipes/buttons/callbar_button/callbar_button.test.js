@@ -29,7 +29,6 @@ describe('DtRecipeCallbarButton Tests', () => {
       attrs,
       slots,
       provide,
-      attachTo: document.body,
     });
     _setChildWrappers();
   };

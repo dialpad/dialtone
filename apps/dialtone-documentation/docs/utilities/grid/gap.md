@@ -5,10 +5,10 @@ description: Utilities to control the spacing between columns, rows, or both in 
 
 ## Adding universal row and column gaps
 
-Use `d-gg{#}` to universally change the row and column gap space in grid layouts.
+Use `d-g{#}` to universally change the row and column gap space in grid layouts.
 
 <code-well-header class="d-fl-center d-fd-column d-p24 d-bgc-purple-100 d-bgo50 d-w100p d-hmn216" custom>
-  <div class="d-d-grid d-gg16 d-g-cols2 d-p16 d-w100p d-hmn216 d-bar8 d-bgc-purple-100">
+  <div class="d-d-grid d-g16 d-g-cols2 d-p16 d-w100p d-hmn216 d-bar8 d-bgc-purple-100">
     <div class="d-fl-center d-p16 d-bgc-purple-300 d-bar4 d-fs-300 d-fw-bold">1</div>
     <div class="d-fl-center d-p16 d-bgc-purple-300 d-bar4 d-fs-300 d-fw-bold">2</div>
     <div class="d-fl-center d-p16 d-bgc-purple-300 d-bar4 d-fs-300 d-fw-bold">3</div>
@@ -17,7 +17,7 @@ Use `d-gg{#}` to universally change the row and column gap space in grid layouts
 </code-well-header>
 
 ```html
-<div class="d-d-grid d-gg16 d-g-cols2">
+<div class="d-d-grid d-g16 d-g-cols2">
   <div>1</div>
   <div>2</div>
   <div>3</div>
@@ -27,10 +27,10 @@ Use `d-gg{#}` to universally change the row and column gap space in grid layouts
 
 ## Independently changing row and column gaps
 
-Use `d-gcg{#}` or `d-grg{#}` to independently change the row and column gap space in grid layouts.
+Use `d-cg{#}` or `d-rg{#}` to independently change the row and column gap space in grid layouts.
 
 <code-well-header class="d-fl-center d-fd-column d-p24 d-bgc-green-100 d-bgo50 d-w100p d-hmn216" custom>
-  <div class="d-d-grid d-gcg24 d-grg8 d-g-cols3 d-p16 d-w100p d-hmn216 d-bar8 d-bgc-green-100">
+  <div class="d-d-grid d-cg24 d-rg8 d-g-cols3 d-p16 d-w100p d-hmn216 d-bar8 d-bgc-green-100">
     <div class="d-fl-center d-p16 d-bgc-green-200 d-bar4 d-fs-300 d-fw-bold">1</div>
     <div class="d-fl-center d-p16 d-bgc-green-200 d-bar4 d-fs-300 d-fw-bold">2</div>
     <div class="d-fl-center d-p16 d-bgc-green-200 d-bar4 d-fs-300 d-fw-bold">3</div>
@@ -44,7 +44,7 @@ Use `d-gcg{#}` or `d-grg{#}` to independently change the row and column gap spac
 </code-well-header>
 
 ```html
-<div class="d-d-grid d-gcg24 d-grg8 d-g-cols3">
+<div class="d-d-grid d-cg24 d-rg8 d-g-cols3">
   <div>1</div>
   <div>2</div>
   <div>3</div>
@@ -58,8 +58,7 @@ Use `d-gcg{#}` or `d-grg{#}` to independently change the row and column gap spac
 ```
 
 <script setup>
-  import { gap } from '@data/grid.json';
-  import { values } from '@data/gap.json';
+  import { directions, values } from '@data/gap.json';
 </script>
 
 ## Classes
@@ -67,16 +66,16 @@ Use `d-gcg{#}` or `d-grg{#}` to independently change the row and column gap spac
 <div class="d-h464 d-of-y-scroll d-bb d-bc-black-200">
   <utility-class-table>
     <template #content>
-      <tbody v-for="{ direction: dir } in gap">
+      <tbody v-for="dir in directions">
         <tr v-for="{ output: rem, value: px } in values">
           <th scope="row" class="d-code--sm d-fc-purple-400">
-            <span v-if="dir === 'both'">.d-gg{{ px }}</span>
-            <span v-else-if="dir === 'column'">.d-gcg{{ px }}</span>
-            <span v-else-if="dir === 'row'">.d-grg{{ px }}</span>
+            <span v-if="dir === 'both'">.d-g{{ px }}</span>
+            <span v-else-if="dir === 'column'">.d-cg{{ px }}</span>
+            <span v-else-if="dir === 'row'">.d-rg{{ px }}</span>
           </th>
           <td class="d-code--sm">
-            <span v-if="dir !== 'both'">grid-{{ dir }}-gap: {{ rem }}</span>
-            <span v-else>grid-gap: {{ rem }}</span>
+            <span v-if="dir !== 'both'">{{ dir }}-gap: {{ rem }}</span>
+            <span v-else>gap: {{ rem }}</span>
           </td>
         </tr>
       </tbody>

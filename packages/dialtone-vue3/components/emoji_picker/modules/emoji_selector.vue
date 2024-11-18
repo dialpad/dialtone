@@ -44,7 +44,7 @@
             :ref="el => { if (el) setEmojiRef(el, indexTab, indexEmoji) }"
             type="button"
             :aria-label="emoji.name"
-            @click="selectEmoji(emoji)"
+            @click="event => selectEmoji(emoji, event)"
             @focusin="highlightEmoji(emoji)"
             @focusout="highlightEmoji(null)"
             @mouseover="highlightEmoji(emoji)"
@@ -79,7 +79,7 @@
             :class="{
               'hover-emoji': (index === 0 && hoverFirstEmoji),
             }"
-            @click="selectEmoji(emoji)"
+            @click="event => selectEmoji(emoji, event)"
             @focusin="highlightEmoji(emoji)"
             @focusout="highlightEmoji(null)"
             @mouseover="hoverEmoji(emoji)"
@@ -190,13 +190,6 @@ const emits = defineEmits([
    * @param {Number} tab-index - The tab that was scrolled into
     */
   'scroll-into-tab',
-
-  /**
-   * Emitted when the scrollTo function starts scrolling and stops scrolling
-   * @event is-scrolling
-   * @param {Boolean} is-scrolling - Whether the user is scrolling with the scroll-to
-    */
-  'is-scrolling',
 
   /**
    * Emitted when the user reach the end of the emoji list
@@ -407,39 +400,7 @@ function scrollToTab (tabIndex, focusFirstEmoji = true) {
 
   nextTick(() => {
     const container = listRef.value;
-    const offsetTop = tabIndex === '1' ? 0 : tabElement.offsetTop - 20;
-
-    /**
-     * This variable is used to check if the user is scrolling inside the emoji picker
-     * This is used to check if the user is scrolling using the scrollTo function
-     * This is useful because this flag will prevent to update the fixed label when the user is scrolling
-     * using the scrollTo function
-     */
-    let isScrolling = true;
-
-    let prevScrollTop = container.scrollTop;
-    emits('is-scrolling', true);
-
-    /**
-     * This event listener checks whether the user is scrolling up or down by comparing the current scrollTop
-     * to prevScrollTop. If the scrollToTab function is scrolling from bottom to top and has reached the desired
-     * position (scrollTop <= offsetTop),or if the scrollToTab function is scrolling from top to bottom and has
-     * passed the desired position(scrollTop >= offsetTop), then isScrolling is set to false.
-     */
-    /* eslint-disable-next-line complexity */
-    container.addEventListener('scroll', () => {
-      if (isScrolling) {
-        const scrollTop = container.scrollTop;
-        if (
-          (prevScrollTop < scrollTop && scrollTop >= offsetTop) ||
-          (prevScrollTop > scrollTop && scrollTop <= offsetTop)
-        ) {
-          isScrolling = false;
-          emits('is-scrolling', false);
-        }
-        prevScrollTop = scrollTop;
-      }
-    });
+    const offsetTop = tabIndex === 1 ? 0 : tabElement.offsetTop - 15;
 
     container.scrollTop = offsetTop;
 
@@ -466,7 +427,6 @@ function setTabLabelObserver () {
    * and checks whether the target intersects with the root and is positioned above or below it.
    */
   tabLabelObserver.value = new IntersectionObserver(async (entries) => {
-    emits('is-scrolling', false);
     // eslint-disable-next-line complexity
     entries.forEach(entry => {
       const { target } = entry;
@@ -523,7 +483,7 @@ const handleKeyDownFilteredEmojis = (event, indexEmoji, emoji) => {
       emits('focus-skin-selector');
       break;
     case 'Enter':
-      selectEmoji(emoji);
+      selectEmoji(emoji, event);
       break;
     default:
       break;
@@ -559,7 +519,7 @@ const handleKeyDown = (event, indexTab, indexEmoji, emoji) => {
       break;
 
     case 'Enter':
-      selectEmoji(emoji);
+      selectEmoji(emoji, event);
       break;
 
     default:
@@ -567,8 +527,8 @@ const handleKeyDown = (event, indexTab, indexEmoji, emoji) => {
   }
 };
 
-function selectEmoji (emoji) {
-  emits('selected-emoji', emoji);
+function selectEmoji (emoji, event) {
+  emits('selected-emoji', { ...emoji, shift_key: event.shiftKey });
 }
 
 function highlightEmoji (emoji) {
@@ -580,7 +540,7 @@ function focusEmojiSelector () {
 }
 
 function focusLastEmoji () {
-  focusEmoji(tabs.value.length - 1, 0);
+  scrollToTab(tabs.value.length, true);
 }
 
 onMounted(() => {

@@ -8,7 +8,7 @@ const _baseThemeVariables = {
   brandTitle: 'Dialpad storybook',
   brandUrl: 'https://dialtone.dialpad.com',
   fontBase: '-apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif',
-}
+};
 
 export const dialtoneDarkTheme = create({
   base: 'dark',

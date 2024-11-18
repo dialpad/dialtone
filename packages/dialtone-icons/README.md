@@ -65,7 +65,7 @@ import illustrationsList from '@dialpad/dialtone-icons/illustrations.js';
     - icon: `src/svg/icons`
     - illustration: `src/svg/illustrations`
 
-2. Run `nx build dialtone-icons`
+2. Run `nx run dialtone-icons:build`
 3. Commit and push your changes.
 
 ## Requesting features / reporting bugs

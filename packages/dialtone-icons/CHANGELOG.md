@@ -1,3 +1,35 @@
+# [4.30.0](https://github.com/dialpad/dialtone/compare/dialtone-icons/v4.29.0...dialtone-icons/v4.30.0) (2024-11-04)
+
+
+### Features
+
+* DLT-1812 language server - initial implementation ([#551](https://github.com/dialpad/dialtone/issues/551)) ([189d40c](https://github.com/dialpad/dialtone/commit/189d40cf442b881c04a51adec7409406339486df))
+
+# [4.29.0](https://github.com/dialpad/dialtone/compare/dialtone-icons/v4.28.0...dialtone-icons/v4.29.0) (2024-10-30)
+
+
+### Features
+
+* **Icon:** DLT-2145 added Workforce Management (née Surfboard) ([#548](https://github.com/dialpad/dialtone/issues/548)) ([967d3e5](https://github.com/dialpad/dialtone/commit/967d3e5bd2c6221fc032e6b3cd8dee36d895dd27))
+
+# [4.28.0](https://github.com/dialpad/dialtone/compare/dialtone-icons/v4.27.2...dialtone-icons/v4.28.0) (2024-10-23)
+
+
+### Features
+
+* **Icon:** DLT-2166 update zendesk icon color ([#537](https://github.com/dialpad/dialtone/issues/537)) ([6e41aa6](https://github.com/dialpad/dialtone/commit/6e41aa64626e14dfc41899841143ac2e96457b2e))
+
+## [4.27.2](https://github.com/dialpad/dialtone/compare/dialtone-icons/v4.27.1...dialtone-icons/v4.27.2) (2024-09-26)
+
+## [4.27.1](https://github.com/dialpad/dialtone/compare/dialtone-icons/v4.27.0...dialtone-icons/v4.27.1) (2024-09-16)
+
+# [4.27.0](https://github.com/dialpad/dialtone/compare/dialtone-icons/v4.26.7...dialtone-icons/v4.27.0) (2024-09-16)
+
+
+### Features
+
+* **Icon:** DLT-1991 add full color dialpad-sparkle ([#495](https://github.com/dialpad/dialtone/issues/495)) ([d20de6d](https://github.com/dialpad/dialtone/commit/d20de6d26f215e86caf197bb32a8586ac20a86ec))
+
 ## [4.26.7](https://github.com/dialpad/dialtone/compare/dialtone-icons/v4.26.6...dialtone-icons/v4.26.7) (2024-09-04)
 
 

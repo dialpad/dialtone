@@ -5,7 +5,7 @@ description: Dialtone is Dialpad's Design System that unites product teams aroun
 
 ## Release notes
 
-<div class="d-d-grid d-gg16 d-g-cols2 md:d-g-cols1">
+<div class="d-d-grid d-g16 d-g-cols2 md:d-g-cols1">
   <div>
     <dt-stack class="d-ai-center" direction="row" gap="400">
       <h3 class="d-docsite--header-3">Dialtone</h3>

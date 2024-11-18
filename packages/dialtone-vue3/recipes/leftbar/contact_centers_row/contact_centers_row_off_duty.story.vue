@@ -23,7 +23,7 @@
         size="sm"
         kind="muted"
         importance="clear"
-        class="d-bar-pill d-py4 d-fc-error d-to-ellipsis"
+        class="d-bar-pill d-py4 d-fc-critical d-to-ellipsis"
       >
         <template #icon>
           <dt-icon-bell-ring size="100" />

@@ -162,7 +162,7 @@ All product UI text can be characterized as one of **Headline**, **Body**, **Lab
 Titles and headings to establish hierarchy and set the tone of contextual groupings.
 
 <code-well-header class="d-d-flex d-jc-center d-fd-column d-p24 d-bgc-secondary d-w100p d-hmn102" custom>
-  <div class="d-d-grid d-gg16 d-ai-center" style="grid-template-columns: 52rem 1fr">
+  <div class="d-d-grid d-g16 d-ai-center" style="grid-template-columns: 52rem 1fr">
     <template v-for="{ var: varName } in typographyStylesHeadlines">
       <div class="d-truncate"><p :class="[varName, 'd-truncate', 'd-bgc-moderate-opaque']">{{ example }}</p></div>
       <dt-stack direction="row" class="d-jc-space-between dialtone-copy-utility">
@@ -180,7 +180,7 @@ Titles and headings to establish hierarchy and set the tone of contextual groupi
 Default text style for longer-form prose content, designed for comfort and clarity in reading varying lengths.
 
 <code-well-header class="d-d-flex d-jc-center d-fd-column d-p24 d-bgc-secondary d-w100p d-hmn102" custom>
-  <div class="d-d-grid d-gg16 d-ai-center" style="grid-template-columns: 52rem 1fr">
+  <div class="d-d-grid d-g16 d-ai-center" style="grid-template-columns: 52rem 1fr">
     <template v-for="{ var: varName } in typographyStylesBody">
       <div class="d-truncate"><p :class="[varName, 'd-truncate', 'd-bgc-moderate-opaque']">{{ example }}</p></div>
       <dt-stack direction="row" class="d-jc-space-between dialtone-copy-utility">
@@ -198,7 +198,7 @@ Default text style for longer-form prose content, designed for comfort and clari
 Shorter-length copy like form fields, buttons, and other UI-labeling elements, ensuring clear navigation and interaction.
 
 <code-well-header class="d-d-flex d-jc-center d-fd-column d-p24 d-bgc-secondary d-w100p d-hmn102" custom>
-  <div class="d-d-grid d-gg16 d-ai-center" style="grid-template-columns: 52rem 1fr">
+  <div class="d-d-grid d-g16 d-ai-center" style="grid-template-columns: 52rem 1fr">
     <template v-for="{ var: varName } in typographyStylesLabel">
       <div class="d-truncate"><p :class="[varName, 'd-truncate', 'd-bgc-moderate-opaque']">{{ example }}</p></div>
       <dt-stack direction="row" class="d-jc-space-between dialtone-copy-utility">
@@ -216,7 +216,7 @@ Shorter-length copy like form fields, buttons, and other UI-labeling elements, e
 Complementary information or guidance, such as tooltips and hints, to aid user understanding without overwhelming.
 
 <code-well-header class="d-d-flex d-jc-center d-fd-column d-p24 d-bgc-secondary d-w100p d-hmn102" custom>
-  <div class="d-d-grid d-gg16 d-ai-center" style="grid-template-columns: 52rem 1fr">
+  <div class="d-d-grid d-g16 d-ai-center" style="grid-template-columns: 52rem 1fr">
     <template v-for="{ var: varName } in typographyStylesHelper">
       <div class="d-truncate"><p :class="[varName, 'd-truncate', 'd-bgc-moderate-opaque']">{{ example }}</p></div>
       <dt-stack direction="row" class="d-jc-space-between dialtone-copy-utility">
@@ -234,7 +234,7 @@ Complementary information or guidance, such as tooltips and hints, to aid user u
 Code snippets, technical commands, or data values rendered as a monospaced font.
 
 <code-well-header class="d-d-flex d-jc-center d-fd-column d-p24 d-bgc-secondary d-w100p d-hmn102" custom>
-  <div class="d-d-grid d-gg16 d-ai-center" style="grid-template-columns: 52rem 1fr">
+  <div class="d-d-grid d-g16 d-ai-center" style="grid-template-columns: 52rem 1fr">
     <template v-for="{ var: varName } in typographyStylesCode">
       <div class="d-truncate"><p :class="[varName, 'd-truncate', 'd-bgc-moderate-opaque']">{{ example }}</p></div>
       <dt-stack direction="row" class="d-jc-space-between dialtone-copy-utility">

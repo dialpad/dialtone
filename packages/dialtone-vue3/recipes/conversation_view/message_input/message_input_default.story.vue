@@ -64,6 +64,15 @@
         <span v-html="$attrs.top" />
       </template>
       <template
+        v-if="$attrs.sendIcon"
+        #sendIcon="{ iconSize }"
+      >
+        <dt-icon
+          :name="$attrs.sendIcon"
+          :size="iconSize"
+        />
+      </template>
+      <template
         v-if="$attrs.sendButton"
         #sendButton
       >
@@ -81,9 +90,10 @@
 
 <script>
 import DtRecipeMessageInput from './message_input.vue';
+import { DtIcon } from '@/components/icon';
 
 export default {
   name: 'DtRecipeMessageInputDefault',
-  components: { DtRecipeMessageInput },
+  components: { DtRecipeMessageInput, DtIcon },
 };
 </script>

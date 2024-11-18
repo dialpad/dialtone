@@ -158,6 +158,7 @@ export const Default = {
   render: DefaultTemplate,
 
   args: {
+    avatarIcon: 'user',
     avatarSrc: avatarImage,
     avatarSeed: 'JL',
     avatarFullName: 'Joseph Lumaban',
@@ -222,6 +223,7 @@ export const Variants = {
   render: VariantsTemplate,
 
   args: {
+    avatarIcon: 'user',
     avatarFullName: 'Natalie Woods',
     avatarSeed: 'NW',
     avatarSize: 'lg',

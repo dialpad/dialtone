@@ -37,7 +37,6 @@ describe('DtRecipeCallbarButton Tests', () => {
       slots,
       provide,
       listeners,
-      attachTo: document.body,
       localVue: testContext.localVue,
     });
     _setChildWrappers();

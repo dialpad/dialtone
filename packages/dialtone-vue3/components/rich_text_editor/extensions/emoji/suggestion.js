@@ -8,19 +8,25 @@ import EmojiSuggestion from './EmojiSuggestion.vue';
 import tippy from 'tippy.js';
 import hideOnEsc from '../tippy_plugins/hide_on_esc';
 
+const suggestionLimit = 20;
+
 export default {
   items: ({ query }) => {
     if (query.length < 2) {
       return [];
     }
     const emojiList = Object.values(emojisIndexed);
-    const filteredEmoji = emojiList.filter(function (item) {
-      if (item.shortname.substring(1, item.shortname.length - 1).startsWith(query.toLowerCase())) {
-        return true;
-      }
-      return false;
-    });
-    return filteredEmoji.map(item => { return { code: item.shortname }; });
+    query = query.toLowerCase();
+
+    const filteredEmoji = emojiList
+      .filter(
+        item => [
+          item.name,
+          item.shortname.replaceAll(':', ''),
+          ...item.keywords,
+        ].some(text => text.startsWith(query)),
+      ).splice(0, suggestionLimit);
+    return filteredEmoji.map(item => ({ code: item.shortname }));
   },
 
   command: ({ editor, range, props }) => {

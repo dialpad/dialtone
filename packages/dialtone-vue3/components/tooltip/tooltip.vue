@@ -50,7 +50,7 @@ import {
 import {
   POPOVER_APPEND_TO_VALUES,
 } from '../popover/popover_constants';
-import { flushPromises, getUniqueString, hasSlotContent } from '@/common/utils';
+import { flushPromises, getUniqueString, hasSlotContent, warnIfUnmounted } from '@/common/utils';
 import {
   createTippy,
   getAnchor,
@@ -362,6 +362,7 @@ export default {
       await flushPromises();
       this.addExternalAnchorEventListeners();
     }
+    warnIfUnmounted(this.$el, this.$options.name);
   },
 
   beforeUnmount () {

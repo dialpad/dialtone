@@ -1,4 +1,5 @@
 import { createLocalVue, mount } from '@vue/test-utils';
+import { DtIconUser } from '@dialpad/dialtone-icons/vue2';
 import DtAvatar from './avatar.vue';
 import { AVATAR_KIND_MODIFIERS, AVATAR_SIZE_MODIFIERS } from './avatar_constants';
 
@@ -9,6 +10,7 @@ const MOCK_INITIALS = 'JN';
 const MOCK_SIZE = 'lg';
 const MOCK_GROUP = 25;
 const MOCK_CUSTOM_CLASS = 'my-custom-class';
+const MOCK_ICON_SLOT = '<dt-icon-user />';
 let MOCK_ELEMENT = null;
 
 const baseProps = {
@@ -20,23 +22,28 @@ const baseListeners = {};
 let mockProps = {};
 let mockListeners = {};
 const testContext = {};
+let mockSlots = {};
 
 describe('DtAvatar Tests', () => {
   let wrapper;
   let image;
   let count;
   let presence;
+  let iconWrapper;
 
   const updateWrapper = () => {
     wrapper = mount(DtAvatar, {
       propsData: { ...baseProps, ...mockProps },
       listeners: { ...baseListeners, ...mockListeners },
       localVue: testContext.localVue,
+      slots: { ...mockSlots },
+      components: { DtIconUser },
     });
 
     image = wrapper.find('[data-qa="dt-avatar-image"]');
     count = wrapper.find('[data-qa="dt-avatar-count"]');
     presence = wrapper.find('[data-qa="dt-presence"]');
+    iconWrapper = wrapper.find('[data-qa="dt-avatar-icon"]');
   };
 
   beforeAll(() => {
@@ -50,6 +57,7 @@ describe('DtAvatar Tests', () => {
   afterEach(() => {
     mockProps = {};
     mockListeners = {};
+    mockSlots = {};
   });
 
   describe('Presentation Tests', () => {
@@ -83,19 +91,23 @@ describe('DtAvatar Tests', () => {
       });
     });
 
-    describe('When the iconName is provided', () => {
+    describe('When the icon slot is provided', () => {
       beforeEach(() => {
-        mockProps = { iconName: 'accessibility' };
+        mockSlots = { icon: MOCK_ICON_SLOT };
 
         updateWrapper();
       });
 
       it('icon should exist', () => {
-        expect(wrapper.find('svg').exists()).toBeTruthy();
+        expect(iconWrapper.exists()).toBeTruthy();
       });
 
       it('should have correct class', () => {
-        expect(wrapper.find('svg').classes(AVATAR_KIND_MODIFIERS.icon)).toBe(true);
+        expect(iconWrapper.classes(AVATAR_KIND_MODIFIERS.icon)).toBe(true);
+      });
+
+      it('should render the custom icon', () => {
+        expect(iconWrapper.findComponent(DtIconUser).exists()).toBe(true);
       });
     });
 

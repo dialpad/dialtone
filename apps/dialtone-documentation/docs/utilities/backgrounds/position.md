@@ -7,7 +7,7 @@ description: Utilities for controlling the position of an element's background i
 
 Use `d-bgp-{position}` to control where an element's background image is placed.
 
-<code-well-header class="d-fl-col4 d-fw-wrap d-flg12 d-p12 d-bgc-purple-100 d-bgo50" custom>
+<code-well-header class="d-fl-col4 d-fw-wrap d-g12 d-p12 d-bgc-purple-100 d-bgo50" custom>
   <div class="d-d-flex d-fd-column d-ai-center d-stack4" v-for="{ className } in positions">
       <div
         class="d-fl-center d-w128 d-h128 d-bgc-purple-300 d-bar8 d-bc-purple-200 d-of-hidden d-bgr-none d-bgs-var" style="--bgg-size: 65% 65%; background-image: url('https://cdn.jpegmini.com/user/images/slider_puffin_before_mobile.jpg');"

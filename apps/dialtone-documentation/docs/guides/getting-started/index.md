@@ -8,19 +8,19 @@ description: A quick start guide to add Dialtone to your project.
 To take advantage of Dialtone's customizations, classes, and variables in your project, you will want to install Dialtone via [npm](https://www.npmjs.com/).
 
 ```bash
-npm install @dialpad/dialtone
+npm install @dialpad/dialtone-css
 ```
 
 Add the following line in your Less file:
 
 ```less
-@import "node_modules/@dialpad/dialtone-css/lib/build/less/dialtone.less";
+@import "@dialpad/dialtone-css/lib/build/less/dialtone.less";
 ```
 
 If you only need access to Dialtone's variables and customizations to build a file and don't need the whole library exported, use this line instead in your Less file:
 
 ```less
-@import (reference) "node_modules/@dialpad/dialtone-css/lib/build/less/dialtone.less";
+@import (reference) "@dialpad/dialtone-css/lib/build/less/dialtone.less";
 ```
 
 ## Usage
@@ -186,7 +186,7 @@ pnpm install
 You're now ready to build Dialtone! To build and run the development server:
 
 ```bash
-nx start:dialtone
+nx run dialtone-documentation:start
 ```
 
 Once finished, visit [http://localhost:4000/](http://localhost:4000/).

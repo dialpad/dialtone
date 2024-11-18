@@ -3,6 +3,7 @@ import { defineConfig } from 'vite';
 import { fileURLToPath } from 'url';
 import { resolve } from 'path';
 import { glob } from 'glob';
+import dts from 'vite-plugin-dts';
 
 const iconEntries = glob.sync('../src/icons/*.vue').reduce((entries, path) => {
   const entryName = path.replace(/^\.\.\/src\/icons\/(.*)\.vue$/, 'components/$1');
@@ -34,7 +35,10 @@ export default defineConfig({
     },
     minify: true,
   },
-  plugins: [vue()],
+  plugins: [
+    vue(),
+    dts({ outDir: 'dist/types' }),
+  ],
   resolve: {
     alias: {
       '@': fileURLToPath(new URL('../', import.meta.url)),

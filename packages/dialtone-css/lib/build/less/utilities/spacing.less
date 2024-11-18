@@ -82,11 +82,25 @@
 .d-ml-auto { margin-left: auto !important; }
 .d-ml-unset { margin-left: unset !important; }
 
-.d-mx-auto { margin-right: auto !important; margin-left: auto !important; }
-.d-mx-unset { margin-right: unset !important; margin-left: unset !important; }
+.d-mx-auto {
+  margin-right: auto !important;
+  margin-left: auto !important;
+}
 
-.d-my-auto { margin-top: auto !important; margin-bottom: auto !important; }
-.d-my-unset { margin-top: unset !important; margin-bottom: unset !important; }
+.d-mx-unset {
+  margin-right: unset !important;
+  margin-left: unset !important;
+}
+
+.d-my-auto {
+  margin-top: auto !important;
+  margin-bottom: auto !important;
+ }
+
+.d-my-unset {
+  margin-top: unset !important;
+  margin-bottom: unset !important;
+}
 
 
 //  ============================================================================
@@ -102,6 +116,22 @@
 
 .d-pl-unset { padding-left: unset !important; }
 
-.d-px-unset { padding-right: unset !important; padding-left: unset !important; }
+.d-px-unset {
+  padding-right: unset !important;
+  padding-left: unset !important;
+}
 
-.d-py-unset { padding-top: unset !important; padding-bottom: unset !important; }
+.d-py-unset {
+  padding-top: unset !important;
+  padding-bottom: unset !important;
+}
+
+//  ============================================================================
+//  $   GAP
+//  ============================================================================
+//      Defines the size of 'gaps' (lines). We generate a gap for
+//      each defined spacing unit.
+//  ----------------------------------------------------------------------------
+.d-cg-unset { column-gap: unset !important; }
+.d-rg-unset { row-gap: unset !important; }
+.d-g-unset { gap: unset !important; }

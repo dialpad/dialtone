@@ -58,7 +58,6 @@ describe('DtRecipeEmojiRow Tests', function () {
       slots,
       provide,
       localVue: testContext.localVue,
-      attachTo: document.body,
     });
     _setChildWrappers();
   };

@@ -17,10 +17,6 @@ Thumbs.db
 *_rsa
 *_rsa.pub
 
-# VS Code #
-.vscode
-*.code-workspace
-
 # JetBrains #
 .idea
 
@@ -28,6 +24,7 @@ Thumbs.db
 dist
 .temp
 .cache
+out
 
 # Dialtone icons #
 packages/dialtone-icons/index.js
@@ -47,3 +44,10 @@ local.properties
 # Dialtone vue #
 packages/dialtone-vue*/storybook-static
 packages/dialtone-vue*/functions/generated
+
+# Postcss responsive variations
+packages/postcss-responsive-variations/coverage
+
+# Language Server
+*.tsbuildinfo
+*.vsix

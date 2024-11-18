@@ -43,6 +43,7 @@
         <select
           id="Dialtone--SelectCategory"
           v-model="selectedCategory"
+          aria-labelledby="#Dialtone--SelectCategory"
           class="d-select__input d-tt-capitalize"
         >
           <option

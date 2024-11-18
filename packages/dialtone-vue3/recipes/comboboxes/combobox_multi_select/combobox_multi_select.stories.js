@@ -201,3 +201,12 @@ export const WithCollapseOnFocusOut = {
     collapseOnFocusOut: true,
   },
 };
+
+export const WithStyledInput = {
+  render: Template,
+
+  args: {
+    selectedItems: ['item12', 'item13', 'item14'],
+    inputWrapperClass: ['d-ba-none', 'd-bgc-primary'],
+  },
+};

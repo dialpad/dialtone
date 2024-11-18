@@ -5,7 +5,7 @@ description: Utilities to change an element's font-size.
 
 <dt-notice
   kind="warning"
-  hideClose="true"
+  :hideClose="true"
   class="d-wmx100p"
 >
   <template #default>
@@ -19,7 +19,7 @@ Use `d-{fs|headline}-{stop}` to change an element's font-size in the product or 
 change in other platforms (mobile, tc8, tv).
 
 <code-well-header class="d-d-flex d-jc-center d-fd-column d-p24 d-bgc-purple-100 d-w100p d-hmn102" custom>
-  <div class="d-d-grid d-gg16 d-ai-center" style="grid-template-columns: 10rem 1fr">
+  <div class="d-d-grid d-g16 d-ai-center" style="grid-template-columns: 10rem 1fr">
     <div class="d-code--sm d-fc-purple-400">.d-fs-100</div>
     <div><p class="d-fs-100">The quick brown fox jumps over the lazy dog.</p></div>
     <div class="d-code--sm d-fc-purple-400">.d-fs-200</div>

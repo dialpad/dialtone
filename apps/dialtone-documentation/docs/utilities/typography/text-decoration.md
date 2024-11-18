@@ -56,6 +56,7 @@ Use `d-td-none` to remove text decorations.
 </script>
 
 ## Hover
+
 Use `h:d-td-{n}` to change an element's :hover state text decoration.
 
 <code-well-header class="d-d-flex d-jc-center d-fd-column d-p24 d-bgc-magenta-100 d-w100p d-hmn102" custom>
@@ -67,6 +68,7 @@ Use `h:d-td-{n}` to change an element's :hover state text decoration.
 ```
 
 ## Focus
+
 Use `f:d-td-{n}` to change an element's :focus and :focus-within state text decoration.
 
 <code-well-header class="d-d-flex d-p24 d-bgc-magenta-100 d-w100p d-hmn102" custom>
@@ -80,6 +82,7 @@ Use `f:d-td-{n}` to change an element's :focus and :focus-within state text deco
 ```
 
 ## Focus visible
+
 Use `fv:d-td-{n}` to change an element's :focus-visible state text decoration [only when focused by keyboard].
 
 <code-well-header class="d-d-flex d-p24 d-bgc-purple-100 d-w100p d-hmn102" custom>

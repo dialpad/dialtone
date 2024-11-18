@@ -115,7 +115,7 @@ export default {
     border: 0;
     color: var(--emoji-item-color-foreground);
     background-color: var(--emoji-item-color-background);
-    box-shadow: inset 0 0 0 var(--dt-size-border-150) var(--emoji-item-color-inset-shadow);
+    box-shadow: inset 0 0 0 var(--dt-size-border-100) var(--emoji-item-color-inset-shadow);
     height: var(--dt-size-550);
 
     &.dt-emoji-row__picker {

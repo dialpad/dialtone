@@ -59,7 +59,6 @@ describe('DtHovercard Tests', () => {
     vi.useRealTimers();
     vi.clearAllTimers();
     wrapper.destroy();
-    document.body.innerHTML = '';
   });
 
   describe('Presentation Tests', () => {

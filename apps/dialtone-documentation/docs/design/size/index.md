@@ -19,7 +19,7 @@ Size design tokens define intrinsic **dimensions** of UI components. Example CSS
 
 ### Setting a specific size
 
-<div class="d-d-grid d-gg24 d-g-cols3 md:d-g-cols1">
+<div class="d-d-grid d-g24 d-g-cols3 md:d-g-cols1">
 <div>
 
 When assigning a size to an element, utilize [Size Tokens](#tokens) for the value.
@@ -32,7 +32,7 @@ When assigning a size to an element, utilize [Size Tokens](#tokens) for the valu
 </div>
 <div class="d-gc2">
 <code-well-header>
-  <div class="d-d-grid d-gg24 d-g-cols2 md:d-g-cols1 d-w100p">
+  <div class="d-d-grid d-g24 d-g-cols2 md:d-g-cols1 d-w100p">
     <div class="d-fl-center d-ba d-bc-purple-400 d-js-center" :style="{ width: 'fit-content', minWidth: selectedSize }">
       Box
     </div>
@@ -54,7 +54,7 @@ When assigning a size to an element, utilize [Size Tokens](#tokens) for the valu
 
 ### Widths and Heights
 
-<div class="d-d-grid d-gg24 d-g-cols3 md:d-g-cols1">
+<div class="d-d-grid d-g24 d-g-cols3 md:d-g-cols1">
 <dt-stack direction="column" gap="100">
 <p>
 
@@ -76,7 +76,7 @@ Exceptions exist for select elements like Avatars, Icons, and Toggles. These ele
 
 ### Variable sizing
 
-<div class="d-d-grid d-gg24 d-g-cols3 md:d-g-cols1">
+<div class="d-d-grid d-g24 d-g-cols3 md:d-g-cols1">
 <div>
 
 The size of some components is determined by their content. Most expand vertically, while a select few expand horizontally.
@@ -94,7 +94,7 @@ The size of some components is determined by their content. Most expand vertical
 
 ### Responsiveness
 
-<div class="d-d-grid d-gg24 d-g-cols3 md:d-g-cols1">
+<div class="d-d-grid d-g24 d-g-cols3 md:d-g-cols1">
 <div>
 
 Adapting to different devices, sizes should be fluid across breakpoints. While most Dialtone components are responsive, their fluidity depends on the layout they live within.
@@ -109,7 +109,7 @@ Adapting to different devices, sizes should be fluid across breakpoints. While m
 
 ### Accessibility
 
-<div class="d-d-grid d-gg24 d-g-cols1 md:d-g-cols1">
+<div class="d-d-grid d-g24 d-g-cols1 md:d-g-cols1">
 
 To ensure clickable and interactive areas are easily accessible, we recommend a minimum area of `var(--dt-size-300)`, except for links within text. In Dialtone we've applied these to components such as buttons, toggles, checkboxes, radio buttons, dropdowns, and inputs.
 

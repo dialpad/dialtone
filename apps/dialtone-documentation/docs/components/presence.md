@@ -109,6 +109,24 @@ showHtmlWarning />
 
 You may wish to announce any live changes to this component via the screen reader since this is only a visual indicator.
 
+If you'd like for a screen reader to read out any changes to Presence, you should pass the `srText` prop so it is
+read by AT and set the `aria-live` attribute to either 'polite' or 'assertive'.
+Even though the component has a role of "status" to assist SR apps in reading out status changes, its default
+'aria-live' value is set to 'off'.
+
+[See W3C guidelines](https://www.w3.org/WAI/WCAG22/Techniques/aria/ARIA22) for more information.
+
+Example:
+
+```html
+<dt-presence
+  presence="active"
+  sr-text="User {{ user }} is active"
+/>
+```
+
+Abbreviations / symbols should be read out in full for voiceover / screen readers.
+
 <script setup>
   import ExamplePresence from '@exampleComponents/ExamplePresence.vue';
 </script>

@@ -1,9 +1,10 @@
 import '../css/dialtone-globals.less';
 import '@dialpad/dialtone-css/lib/dist/dialtone.css';
+import 'overlayscrollbars/overlayscrollbars.css';
 import { addons } from '@storybook/preview-api';
 import { setTheme } from '@dialpad/dialtone-tokens/themes/config';
-import DpLight from '@dialpad/dialtone-tokens/themes/dp-light.js';
-import DpDark from '@dialpad/dialtone-tokens/themes/dp-dark.js';
+import DpLight from '@dialpad/dialtone-tokens/themes/dp-light';
+import DpDark from '@dialpad/dialtone-tokens/themes/dp-dark';
 import { MINIMAL_VIEWPORTS } from '@storybook/addon-viewport';
 import { DocsContainer } from '@storybook/addon-docs';
 import { useDarkMode, DARK_MODE_EVENT_NAME } from "storybook-dark-mode";

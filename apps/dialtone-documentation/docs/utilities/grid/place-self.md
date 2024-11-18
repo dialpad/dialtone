@@ -8,7 +8,7 @@ description: Utilities for controlling a grid item's alignment along their block
 Use `d-pls-stretch{-n}` to stretch grid items along their block and inline axis.
 
 <code-well-header class="d-fl-center d-fd-column d-p24 d-bgc-purple-100 d-bgo50 d-w100p d-hmn102" custom>
-  <div class="d-d-grid d-g-cols2 d-gg16 d-p16 d-w100p d-hmn216 d-bar8 d-bgc-purple-100">
+  <div class="d-d-grid d-g-cols2 d-g16 d-p16 d-w100p d-hmn216 d-bar8 d-bgc-purple-100">
     <div class="d-fl-center d-pls-stretch d-p16 d-bgc-purple-300 d-bar4 d-fs-300 d-fw-bold">1</div>
     <div class="d-fl-center d-p16 d-w64 d-h64 d-bgc-purple-300 d-bar4 d-fs-300 d-fw-bold d-o50">2</div>
     <div class="d-fl-center d-p16 d-w64 d-h64 d-bgc-purple-300 d-bar4 d-fs-300 d-fw-bold d-o50">3</div>
@@ -30,7 +30,7 @@ Use `d-pls-stretch{-n}` to stretch grid items along their block and inline axis.
 Use `d-pls-start{-n}` to align a grid item along the start of their block and/or inline axis.
 
 <code-well-header class="d-fl-center d-fd-column d-p24 d-bgc-green-100 d-bgo50 d-w100p d-hmn102" custom>
-  <div class="d-d-grid d-g-cols2 d-gg16 d-p16 d-w100p d-h216d-bar8 d-bgc-green-100">
+  <div class="d-d-grid d-g-cols2 d-g16 d-p16 d-w100p d-h216d-bar8 d-bgc-green-100">
     <div class="d-fl-center d-pls-start d-p16 d-w64 d-h64 d-bgc-green-200 d-bar4 d-fs-300 d-fw-bold">1</div>
     <div class="d-fl-center d-p16 d-bgc-green-200 d-bar4 d-fs-300 d-fw-bold d-o50">2</div>
     <div class="d-fl-center d-p16 d-bgc-green-200 d-bar4 d-fs-300 d-fw-bold d-o50">3</div>
@@ -52,7 +52,7 @@ Use `d-pls-start{-n}` to align a grid item along the start of their block and/or
 Use `d-pls-end{-n}` to align a grid item along the end of their block and/or inline axis.
 
 <code-well-header class="d-fl-center d-fd-column d-p24 d-bgc-magenta-100 d-bgo50 d-w100p d-hmn102" custom>
-  <div class="d-d-grid d-g-cols2 d-gg16 d-p16 d-w100p d-h216d-bar8 d-bgc-magenta-100">
+  <div class="d-d-grid d-g-cols2 d-g16 d-p16 d-w100p d-h216d-bar8 d-bgc-magenta-100">
     <div class="d-fl-center d-pls-end d-p16 d-w64 d-h64 d-bgc-magenta-200 d-bar4 d-fs-300 d-fw-bold">1</div>
     <div class="d-fl-center d-p16 d-bgc-magenta-200 d-bar4 d-fs-300 d-fw-bold d-o50">2</div>
     <div class="d-fl-center d-p16 d-bgc-magenta-200 d-bar4 d-fs-300 d-fw-bold d-o50">3</div>
@@ -74,7 +74,7 @@ Use `d-pls-end{-n}` to align a grid item along the end of their block and/or inl
 Use `d-pls-center{-n}` to align a grid item along the center of their block and/or inline axis.
 
 <code-well-header class="d-fl-center d-fd-column d-p24 d-bgc-gold-100 d-bgo50 d-w100p d-hmn102" custom>
-  <div class="d-d-grid d-g-cols2 d-gg16 d-p16 d-w100p d-h216d-bar8 d-bgc-gold-100">
+  <div class="d-d-grid d-g-cols2 d-g16 d-p16 d-w100p d-h216d-bar8 d-bgc-gold-100">
     <div class="d-fl-center d-pls-center d-p16 d-w64 d-h64 d-bgc-gold-200 d-bar4 d-fs-300 d-fw-bold">1</div>
     <div class="d-fl-center d-p16 d-bgc-gold-200 d-bar4 d-fs-300 d-fw-bold d-o50">2</div>
     <div class="d-fl-center d-p16 d-bgc-gold-200 d-bar4 d-fs-300 d-fw-bold d-o50">3</div>

@@ -75,6 +75,7 @@ describe('DtRichTextEditor Emoji Extension tests', () => {
   // Test Teardown
   afterEach(() => {
     propsData = baseProps;
+    wrapper.unmount();
   });
 
   describe('Functionality Tests', () => {

@@ -32,7 +32,19 @@ module.exports = {
       VAttribute(node) {
         if (node.key.name === 'class') {
           const classes = node.value.value.split(' ');
-          const typographyClasses = ['d-fs', 'd-fw', 'd-lh', 'd-ff'];
+          const typographyClasses = [
+            'd-fs',
+            'd-fw-normal',
+            'd-fw-medium',
+            'd-fw-semibold',
+            'd-fw-bold',
+            'd-lh',
+            'd-ff-custom',
+            'd-ff-sans',
+            'd-ff-mono',
+            'd-ff-marketing',
+            'd-ff-unset',
+          ];
           const typographyClassesFound = classes.filter((className) =>
             typographyClasses.some((typographyClass) => className.includes(typographyClass))
           );

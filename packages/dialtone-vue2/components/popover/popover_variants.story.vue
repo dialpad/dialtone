@@ -1,6 +1,6 @@
 <!-- eslint-disable max-lines -->
 <template>
-  <div class="d-d-flex d-jc-space-between d-fw-wrap d-w100p d-flg12 d-fl-col2">
+  <div class="d-d-flex d-jc-space-between d-fw-wrap d-w100p d-cg12 d-fl-col2">
     <dt-popover
       :open="$attrs.open"
       :modal="$attrs.modal"

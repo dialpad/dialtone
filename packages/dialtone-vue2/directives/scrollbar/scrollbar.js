@@ -1,5 +1,4 @@
 import { OverlayScrollbars, ClickScrollPlugin } from 'overlayscrollbars';
-import 'overlayscrollbars/overlayscrollbars.css';
 
 export const DtScrollbarDirective = {
   name: 'dt-scrollbar-directive',

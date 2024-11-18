@@ -12,7 +12,8 @@ export default defineConfig({
     emptyOutDir: false,
     lib: {
       entry: {
-        'postcss/rem-to-px': resolve(__dirname, './postcss/rem-to-px.cjs'),
+        'postcss/rem-to-px': resolve(__dirname, './postcss/rem-to-px.js'),
+        'postcss/root-to-host': resolve(__dirname, './postcss/root-to-host.js'),
         'themes/config': resolve(__dirname, './themes/config.js'),
         'themes/dp-light': resolve(__dirname, './themes/dp-light.js'),
         'themes/dp-dark': resolve(__dirname, './themes/dp-dark.js'),
@@ -34,6 +35,7 @@ export default defineConfig({
           __dirname,
           './themes/expressive-sm-dark.js',
         ),
+        'themes/debug': resolve(__dirname, './themes/debug.js'),
       },
       formats: ['es', 'cjs'],
     },
@@ -49,5 +51,5 @@ export default defineConfig({
       '@': fileURLToPath(new URL('.', import.meta.url)),
     },
   },
-  plugins: [dts({ outDir: 'dist/themes/types' })],
+  plugins: [dts({ outDir: 'dist/types' })],
 });

@@ -1,3 +1,4 @@
+<!-- eslint-disable vue/no-static-inline-styles -->
 <template>
   <dt-recipe-combobox-with-popover
     ref="comboboxWithPopover"
@@ -31,7 +32,8 @@
             ref="chips"
             :key="item"
             :label-class="['d-chip__label']"
-            class="combobox__chip"
+            :class="['combobox__chip', { 'combobox__chip--truncate': !!chipMaxWidth }]"
+            :style="{ maxWidth: chipMaxWidth }"
             :close-button-props="{ ariaLabel: 'close' }"
             :size="CHIP_SIZES[size]"
             v-on="chipListeners"
@@ -46,7 +48,8 @@
           ref="input"
           v-model="value"
           class="combobox__input"
-          :input-class="{ 'd-fc-transparent': hideInputText }"
+          :input-class="[inputClass, { 'd-fc-transparent': hideInputText }]"
+          :input-wrapper-class="inputWrapperClass"
           :aria-label="label"
           :label="labelVisible ? label : ''"
           :description="description"
@@ -315,6 +318,46 @@ export default {
       type: String,
       default: '',
     },
+
+    /**
+    * Amount of reserved space (in px) on the right side of the input
+    * before the chips and the input caret jump to the next line.
+    * default is 64
+    */
+    reservedRightSpace: {
+      type: Number,
+      default: 64,
+    },
+
+    /**
+     * Determines the maximum width of a single chip. If the text within this chip exceeds the value
+     * it will be truncated with ellipses.
+     * Possible units rem|px|em
+     */
+    chipMaxWidth: {
+      type: String,
+      default: '',
+    },
+
+    /**
+     * Additional class name for the input element.
+     * Can accept String, Object, and Array, i.e. has the
+     * same API as Vue's built-in handling of the class attribute.
+     */
+    inputClass: {
+      type: [String, Object, Array],
+      default: '',
+    },
+
+    /**
+     * Additional class name for the input wrapper element.
+     * Can accept all of String, Object, and Array, i.e. has the
+     * same api as Vue's built-in handling of the class attribute.
+     */
+    inputWrapperClass: {
+      type: [String, Object, Array],
+      default: '',
+    },
   },
 
   emits: [
@@ -432,6 +475,12 @@ export default {
       },
     },
 
+    chipMaxWidth: {
+      async handler () {
+        this.initSelectedItems();
+      },
+    },
+
     async label () {
       await this.$nextTick();
       // Adjust the chips position if label changed
@@ -491,6 +540,7 @@ export default {
     },
 
     onComboboxSelect (i) {
+      if (this.loading) return;
       this.value = '';
       this.$emit('select', i);
     },
@@ -606,18 +656,25 @@ export default {
       // Get the position of the last chip
       // The input cursor should be the same "top" as that chip and next besides it
       const left = lastChip.offsetLeft + this.getFullWidth(lastChip);
-      input.style.paddingLeft = left + 'px';
+      const spaceLeft = input.getBoundingClientRect().width - left;
+      // input.style.paddingLeft = left + 'px';
 
-      // Get the chip size minus the 4px padding
-      const chipsSize = chipsWrapper.getBoundingClientRect().height - 4;
+      if (spaceLeft > this.reservedRightSpace) {
+        input.style.paddingLeft = left + 'px';
+      } else {
+        input.style.paddingLeft = '4px';
+      }
+
+      // Get the chip wrapper height minus the 4px padding
+      const chipsWrapperHeight = chipsWrapper.getBoundingClientRect().height - 4;
+      const lastChipHeight = lastChip.getBoundingClientRect().height - 4;
 
       // Get lastChip offsetTop plus 2px of the input padding.
-      const top = lastChip.offsetTop + 2;
+      const top = spaceLeft > this.reservedRightSpace
+        ? lastChip.offsetTop + 2
+        : (chipsWrapperHeight + lastChipHeight - 9);
 
-      // Add padding to Top only if the chips need more space
-      if (chipsSize > this.initialInputHeight) {
-        input.style.paddingTop = `${top}px`;
-      }
+      input.style.paddingTop = `${top}px`;
     },
 
     revertInputPadding (input) {
@@ -729,5 +786,10 @@ export default {
   text-align: center;
   padding-top: var(--dt-space-500);
   padding-bottom: var(--dt-space-500);
+}
+
+.combobox__chip--truncate {
+  white-space: nowrap;
+  text-overflow: ellipsis;
 }
 </style>

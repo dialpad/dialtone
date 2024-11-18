@@ -196,6 +196,7 @@ module.exports = {
       'success',
       'warning',
       'brand',
+      'ai',
       'accent',
     ].join('|'),
     BORDER_COLOR_VARIATIONS: [

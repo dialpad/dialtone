@@ -1,4 +1,4 @@
-const tinycolor = require('tinycolor2');
+const Color = require('colorjs.io').default;
 const {
   PLATFORM_FONT_SIZES,
   Z_INDEX,
@@ -7,6 +7,7 @@ const {
   IS_SHADOW_REGEX,
   IS_TYPOGRAPHY_REGEX,
   REGEX_OPTIONS,
+  HSLA_EXCLUDED_COLORS,
 } = require('./constants.cjs');
 
 let newDocEntries = {};
@@ -73,9 +74,20 @@ function boxShadows (shadowDeclarations, Declaration) {
           return `var(${shadowVar}${shadowNumber}-offset-x) var(${shadowVar}${shadowNumber}-offset-y) var(${shadowVar}${shadowNumber}-blur) var(${shadowVar}${shadowNumber}-spread) var(${shadowVar}${shadowNumber}-color)${isInset ? ' inset' : ''}`;
         }).join(', ');
 
-      shadowDeclarations.at(-1).after(new Declaration({ prop: shadowVar, value }));
+      shadowDeclarations.at(0).after(new Declaration({ prop: shadowVar, value }));
       newDocEntries[shadowVar] = formatCompositionTokenForDocs(shadowVar, value);
     });
+}
+
+/**
+ * Wrap the value in a calc function if it is not already wrapped.
+ * Checks for multiplication and addition operators within the value.
+ * @param { Declaration } declaration
+ */
+function wrapInCalc (declaration) {
+  if ([' * ', ' + '].some(str => declaration.value.includes(str)) && !declaration.value.startsWith('calc')) {
+    declaration.value = `calc(${declaration.value})`;
+  }
 }
 
 /**
@@ -85,22 +97,44 @@ function boxShadows (shadowDeclarations, Declaration) {
 function generateColorHsla (declaration) {
   // Prevent regenerating hsla variables that have already been generated, since postcss will run this
   // even for newly generated variables.
-  const isHSLA = ['-h', '-s', '-l', '-hsl', '-hsla'].some(suffix => {
+  const isHSLA = ['-h', '-s', '-l', '-a', '-hsl', '-hsla'].some(suffix => {
     if (declaration.prop.endsWith(suffix)) {
       return true;
     }
     return false;
   });
 
-  if ((IS_COLOR_REGEX.test(declaration.prop) || IS_THEME_COLOR_REGEX.test(declaration.prop)) && !isHSLA) {
-    const color = tinycolor(declaration.value);
-    const { h: hue, s: saturation, l: lightness } = color.toHsl();
+  const isReferenceToken = (value) => value.includes('var(--');
+  const shouldHaveHSLAGenerated = (prop) =>
+    (IS_COLOR_REGEX.test(prop) ||
+    IS_THEME_COLOR_REGEX.test(prop)) &&
+    !isHSLA &&
+    !HSLA_EXCLUDED_COLORS.includes(prop);
 
-    declaration.before({ prop: `${declaration.prop}-h`, value: `${hue}` });
-    declaration.before({ prop: `${declaration.prop}-s`, value: `${saturation * 100}%` });
-    declaration.before({ prop: `${declaration.prop}-l`, value: `${lightness * 100}%` });
-    declaration.before({ prop: `${declaration.prop}-hsl`, value: `var(${declaration.prop}-h) var(${declaration.prop}-s) var(${declaration.prop}-l)` });
-    declaration.before({ prop: `${declaration.prop}-hsla`, value: `hsla(var(${declaration.prop}-h) var(${declaration.prop}-s) var(${declaration.prop}-l) / var(--alpha, 100%))` });
+  if (shouldHaveHSLAGenerated(declaration.prop)) {
+    if (isReferenceToken(declaration.value)) {
+      const varName = declaration.value.substring(4, declaration.value.length - 1);
+      declaration.before({ prop: `${declaration.prop}-h`, value: `var(${varName}-h)` });
+      declaration.before({ prop: `${declaration.prop}-s`, value: `var(${varName}-s)` });
+      declaration.before({ prop: `${declaration.prop}-l`, value: `var(${varName}-l)` });
+      declaration.before({ prop: `${declaration.prop}-a`, value: `var(${varName}-a)` });
+      declaration.before({ prop: `${declaration.prop}-hsl`, value: `var(${varName}-hsl)` });
+      declaration.before({ prop: `${declaration.prop}-hsla`, value: `var(${varName}-hsla)` });
+    } else {
+      const color = new Color(declaration.value).to('hsl');
+      let [hue, saturation, lightness] = color.coords;
+      const alpha = ((color.alpha?.raw || color.alpha) * 100).toFixed(0);
+      hue = hue?.raw || (isNaN(hue) ? 0 : hue);
+      saturation = saturation?.raw || saturation;
+      lightness = lightness?.raw || lightness;
+
+      declaration.before({ prop: `${declaration.prop}-h`, value: `${hue}` });
+      declaration.before({ prop: `${declaration.prop}-s`, value: `${saturation}%` });
+      declaration.before({ prop: `${declaration.prop}-l`, value: `${lightness}%` });
+      declaration.before({ prop: `${declaration.prop}-a`, value: `${alpha}%` });
+      declaration.before({ prop: `${declaration.prop}-hsl`, value: `var(${declaration.prop}-h) var(${declaration.prop}-s) var(${declaration.prop}-l)` });
+      declaration.before({ prop: `${declaration.prop}-hsla`, value: `hsl(var(${declaration.prop}-h) var(${declaration.prop}-s) var(${declaration.prop}-l) / var(--alpha, ${alpha}%))` });
+    }
   }
 }
 
@@ -196,6 +230,9 @@ module.exports = (opts = {}) => {
       layoutVariables(rootSelector, Declaration);
 
       const shadows = rootSelector.nodes.filter(node => node.type === 'decl' && IS_SHADOW_REGEX.test(node.prop));
+      // for some reason when outputReferences is enabled the numbered shadows output in a backwards order. This messes
+      // up our algorithm to count the shadows in boxShadows() so we reverse the array to fix this.
+      shadows.reverse();
       boxShadows(shadows, Declaration);
       const typographies = rootSelector.nodes.filter(node => node.type === 'decl' && IS_TYPOGRAPHY_REGEX.test(node.prop));
       typography(typographies, Declaration);
@@ -206,6 +243,15 @@ module.exports = (opts = {}) => {
 
     Declaration (declaration) {
       generateColorHsla(declaration);
+
+      // A little hacky, but doesn't seem like there's a better way to do this currently.
+      // wraps calculated values in calc() for css if it contains a multiplication operator.
+      // This could cause issues if a value ever contains a * character that isn't for multiplication.
+      // There are many discussions on this issue and it is yet unresolved:
+      // https://github.com/amzn/style-dictionary/issues/820
+      // https://github.com/tokens-studio/sd-transforms/issues/13
+      // https://github.com/amzn/style-dictionary/issues/1055
+      wrapInCalc(declaration);
     },
   };
 };

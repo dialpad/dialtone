@@ -174,9 +174,9 @@
 <script setup>
 import { useRoute } from 'vue-router';
 import { onMounted, onUnmounted, inject, computed } from 'vue';
-import { setTheme } from '@dialpad/dialtone/themes/config';
-import DpLight from '@dialpad/dialtone/themes/dp-light';
-import DpDark from '@dialpad/dialtone/themes/dp-dark';
+import { setTheme } from '@dialpad/dialtone-tokens/themes/config';
+import DpLight from '@dialpad/dialtone-tokens/themes/dp-light';
+import DpDark from '@dialpad/dialtone-tokens/themes/dp-dark';
 
 defineProps({
   items: {

@@ -4,25 +4,30 @@
     "dialtone-css",
     "dialtone-tokens",
     "dialtone-vue2",
-    "dialtone-vue3",
-    "eslint-plugin-dialtone",
-    "stylelint-plugin-dialtone"
+    "dialtone-vue3"
   ],
   "targets": {
     "build": {
       "executor": "nx:run-commands",
+      "dependsOn": [
+        "^build"
+      ],
       "options": {
+        "cwd": "{workspaceRoot}",
         "command": "gulp"
       },
       "inputs": [
-        "{projectRoot}/gulpfile.cjs"
+        "{workspaceRoot}/packages/dialtone-css/dist",
+        "{workspaceRoot}/packages/dialtone-tokens/dist",
+        "{workspaceRoot}/packages/dialtone-vue2/dist",
+        "{workspaceRoot}/packages/dialtone-vue3/dist",
+        "{workspaceRoot}/gulpfile.cjs"
       ],
       "outputs": [
-        "{projectRoot}/dist/css",
-        "{projectRoot}/dist/themes",
-        "{projectRoot}/dist/tokens",
-        "{projectRoot}/dist/vue2",
-        "{projectRoot}/dist/vue3"
+        "{workspaceRoot}/dist/css",
+        "{workspaceRoot}/dist/tokens",
+        "{workspaceRoot}/dist/vue2",
+        "{workspaceRoot}/dist/vue3"
       ]
     },
     "publish": {
@@ -38,10 +43,21 @@
         "parallel": false
       }
     },
-    "test": {
-      "executor": "nx:run-script",
+    "test:vue": {
+      "executor": "nx:run-commands",
+      "dependsOn": [ "dialtone-icons:build" ],
+      "options": { "command": "vitest run --test-timeout=10000" }
+    },
+    "test:all": {
+      "executor": "nx:run-commands",
       "options": {
-        "script": "test:vue"
+        "command": "nx run-many --target=test --output-style=stream"
+      }
+    },
+    "lint:all": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "nx run-many --target=lint --output-style=stream"
       }
     }
   }

@@ -5,7 +5,7 @@ description: Utilities to change an element's line-height.
 
 <dt-notice
   kind="warning"
-  hideClose="true"
+  :hideClose="true"
   class="d-wmx100p"
 >
   <template #default>
@@ -18,7 +18,7 @@ description: Utilities to change an element's line-height.
 Use `d-lh-{n}` to change an element's line-height relatively. This means no unit is set with the line-height. Instead the line-height value is a multiple of the font-size.
 
 <code-well-header class="d-d-flex d-jc-center d-fd-column d-p24 d-bgc-purple-100 d-w100p d-hmn102" custom>
-  <div class="d-d-grid d-gg16 d-ai-center" style="grid-template-columns: 10rem 1fr">
+  <div class="d-d-grid d-g16 d-ai-center" style="grid-template-columns: 10rem 1fr">
     <div class="d-code--sm d-fc-purple-400 d-fco75">.d-lh-100</div>
     <div><p class="d-fs-300 d-lh-100 d-bgc-purple-200 d-bgo25">The quick brown fox jumps over the lazy dog.</p></div>
     <div class="d-code--sm d-fc-purple-400 d-fco75">.d-lh-200</div>
@@ -48,7 +48,7 @@ Use `d-lh-{n}` to change an element's line-height relatively. This means no unit
 Use `d-lh{n}` to fix an element's line-height. This allows you to target a specific line-height based on the font-size. For example if a target 20px line-height is desired and the current font-size is 14px, apply `.d-lh6` to achieve this target (14px font-size + 6px = 20px target line-height).
 
 <code-well-header class="d-d-flex d-jc-center d-fd-column d-p24 d-bgc-gold-100 d-w100p d-hmn102" custom>
-  <div class="d-d-grid d-gg16 d-ai-center" style="grid-template-columns: 10rem 1fr">
+  <div class="d-d-grid d-g16 d-ai-center" style="grid-template-columns: 10rem 1fr">
     <div class="d-code--sm d-fc-gold-300">.d-lh0</div>
     <div><p class="d-fs-300 d-lh0 d-fc-gold-500 d-bgc-gold-100 d-bgo50">The quick brown fox jumps over the lazy dog.</p></div>
     <div class="d-code--sm d-fc-gold-300">.d-lh1</div>

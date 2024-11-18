@@ -1,0 +1,18 @@
+{
+  "name": "postcss-responsive-variations",
+  "targets": {
+    "publish": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "pnpm publish --filter ./packages/postcss-responsive-variations"
+      }
+    },
+    "release": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "pnpm semantic-release-plus --extends ./packages/postcss-responsive-variations/release-ci.config.cjs && sleep 3",
+        "parallel": false
+      }
+    }
+  }
+}
