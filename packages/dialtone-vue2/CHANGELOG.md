@@ -1,3 +1,10 @@
+## [2.166.4](https://github.com/dialpad/dialtone/compare/dialtone-vue2/v2.166.3...dialtone-vue2/v2.166.4) (2024-11-12)
+
+
+### Bug Fixes
+
+* **Emoji Text Wrapper:** DLT-2202 not rendering line break correctly ([#561](https://github.com/dialpad/dialtone/issues/561)) ([291772e](https://github.com/dialpad/dialtone/commit/291772e978937bd1d55d37089db68259c70547fa))
+
 ## [2.166.3](https://github.com/dialpad/dialtone/compare/dialtone-vue2/v2.166.2...dialtone-vue2/v2.166.3) (2024-11-04)
 
 
