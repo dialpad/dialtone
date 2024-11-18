@@ -1,10 +1,10 @@
 {
 	"name": "@dialpad/dialtone-language-server",
-	"version": "1.0.0-alpha.2",
+	"version": "1.0.0-alpha.1",
 	"author": "Tico Ortega <julio.ortega@dialpad.com>",
 	"bugs": {
-    "email": "dialtone@dialpad.com"
-  },
+		"email": "dialtone@dialpad.com"
+	},
 	"license": "MIT",
 	"main": "out/index.js",
 	"files": [
