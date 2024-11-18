@@ -1,13 +1,13 @@
 {
 	"private": true,
 	"name": "vscode-dialtone",
-	"version": "1.0.0-alpha.3",
+	"version": "1.0.0-alpha.1",
 	"categories": [
 		"Other"
 	],
 	"galleryBanner": {
-    "color": "#7c52ff"
-  },
+		"color": "#7c52ff"
+	},
 	"pricing": "Free",
 	"preview": true,
 	"icon": "images/icon.png",
@@ -16,8 +16,8 @@
 	"author": "Tico Ortega <julio.ortega@dialpad.com>",
 	"publisher": "Dialpad",
 	"bugs": {
-    "email": "dialtone@dialpad.com"
-  },
+		"email": "dialtone@dialpad.com"
+	},
 	"keywords": [
 		"dialpad",
 		"dialtone",
@@ -51,10 +51,10 @@
 			}
 		],
 		"commands": [
-      {
-        "command": "dialtone.showOutput",
-        "title": "Dialtone: Show Output"
-      }
+			{
+				"command": "dialtone.showOutput",
+				"title": "Dialtone: Show Output"
+			}
 		]
 	},
 	"scripts": {
