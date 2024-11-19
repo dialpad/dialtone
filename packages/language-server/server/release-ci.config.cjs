@@ -32,10 +32,6 @@ module.exports = {
       ],
       message: 'chore(release): NO-JIRA language-server/v${nextRelease.version}\n\n${nextRelease.notes}',
     }],
-    ['@semantic-release/github', {
-      successComment: false,
-      failTitle: false,
-    }],
   ],
   branches: [
     'staging',

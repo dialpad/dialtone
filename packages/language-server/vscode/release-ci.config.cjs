@@ -29,13 +29,15 @@ module.exports = {
         `${srcRoot}/CHANGELOG.md`,
         `${srcRoot}/CHANGELOG.json`,
         `${srcRoot}/package.json`,
-        `${srcRoot}/vscode-dialtone-` + '${version}.vsix',
       ],
       message: 'chore(release): NO-JIRA vscode-extension/v${nextRelease.version}\n\n${nextRelease.notes}',
     }],
     ['@semantic-release/github', {
       successComment: false,
       failTitle: false,
+      assets: [
+        { path: `${srcRoot}/vscode-dialtone.vsix`, label: 'VS Code extension' },
+      ],
     }],
   ],
   branches: [
