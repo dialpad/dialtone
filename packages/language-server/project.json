@@ -25,7 +25,7 @@
       ],
       "options": {
         "cwd": "{projectRoot}/vscode",
-        "command": "pnpm vsce package --pre-release"
+        "command": "pnpm vsce package --out vscode-dialtone.vsix --pre-release"
       }
     },
     "release": {
