@@ -9,7 +9,7 @@ figma_url: https://www.figma.com/file/2adf7JhZOncRyjYiy2joil/DT-Core%3A-Componen
 ---
 <code-well-header>
   <div class="d-toggle-group d-d-flex d-ai-center">
-    <example-toggle label="Label" id="Dialtone-Toggle-Preview"/>
+    <dt-toggle label-class="d-mr6">Label</dt-toggle>
   </div>
 </code-well-header>
 
@@ -24,12 +24,14 @@ The Toggle component acts as a way to allow the User to switch between two mutua
 
 - When its action has an instantaneous effect.
 </template>
+
 <template #dont>
 
 - When its action does not have an immediate effect on the application.
 - Selecting between 2 options. Instead, utilize a [Checkbox](checkbox.md).
 - As an alternative to a [Checkbox](checkbox.md) or [Radio](radio.md) within a Form.
 </template>
+
 </dialtone-usage>
 
 ### Best practices
@@ -46,24 +48,13 @@ The Toggle component acts as a way to allow the User to switch between two mutua
 
 <code-well-header>
   <fieldset class="d-stack8">
-    <div class="d-toggle-group d-d-flex d-ai-center">
-      <example-toggle label="Unchecked Toggle" id="Dialtone-Toggle1"/>
-    </div>
-    <div class="d-toggle-group d-d-flex d-ai-center">
-      <example-toggle label="Checked Toggle" checked id="Dialtone-Toggle2"/>
-    </div>
-    <div class="d-toggle-group d-d-flex d-ai-center">
-      <example-toggle label="Unchecked Disabled" disabled id="Dialtone-Toggle3"/>
-    </div>
-    <div class="d-toggle-group d-d-flex d-ai-center">
-      <example-toggle label="Checked Disabled" checked disabled id="Dialtone-Toggle4"/>
-    </div>
-    <div class="d-toggle-group d-d-flex d-ai-center">
-      <example-toggle label="Indeterminate Toggle" indeterminate id="Dialtone-Toggle5"/>
-    </div>
-    <div class="d-toggle-group d-d-flex d-ai-center">
-      <example-toggle label="Indeterminate Disabled" disabled indeterminate id="Dialtone-Toggle6"/>
-    </div>
+    <dt-toggle label-class="d-mr6">Unchecked Toggle</dt-toggle>
+    <dt-toggle checked label-class="d-mr6">Checked Toggle</dt-toggle>
+    <dt-toggle disabled label-class="d-mr6">Unchecked Disabled</dt-toggle>
+    <dt-toggle checked disabled label-class="d-mr6">Checked Disabled</dt-toggle>
+    <dt-toggle checked="mixed" label-class="d-mr6">Indeterminate Toggle</dt-toggle>
+    <dt-toggle checked="mixed" label-class="d-mr6" disabled>Indeterminate Disabled</dt-toggle>
+    <dt-toggle label-class="d-mr6" :show-icon="false">Without icon</dt-toggle>
   </fieldset>
 </code-well-header>
 
@@ -92,6 +83,10 @@ htmlCode='
   <label for="dt8"> Indeterminate Disabled </label>
   <button id="dt8" role="checkbox" type="button" aria-checked="mixed" disabled="disabled" aria-disabled="true" class="d-toggle d-toggle--disabled d-toggle--indeterminate"><span class="d-toggle__inner"></span></button>
 </div>
+<div class="d-toggle-wrapper">
+  <label for="dt14">Without icon</label>
+  <button id="dt14" role="switch" type="button" aria-checked="false" aria-disabled="false" class="d-toggle"></button>
+</div>
 '
 vueCode='
 <dt-toggle>
@@ -112,6 +107,9 @@ vueCode='
 <dt-toggle checked="mixed" :disabled="true">
   Indeterminate Disabled
 </dt-toggle>
+<dt-toggle :show-icon="false">
+  Without icon
+</dt-toggle>
 '
 showHtmlWarning />
 
@@ -119,12 +117,8 @@ showHtmlWarning />
 
 <code-well-header>
   <fieldset class="d-stack8">
-    <div class="d-toggle-group d-d-flex d-ai-center">
-      <example-toggle label="Small size" size="small" id="Dialtone-Toggle6"/>
-    </div>
-    <div class="d-toggle-group d-d-flex d-ai-center">
-      <example-toggle label="Default size" id="Dialtone-Toggle7"/>
-    </div>
+    <dt-toggle size="sm" label-class="d-mr6">Small size</dt-toggle>
+    <dt-toggle label-class="d-mr6">Default size</dt-toggle>
   </fieldset>
 </code-well-header>
 
@@ -147,6 +141,23 @@ vueCode='
 '
 showHtmlWarning />
 
+### With v-model
+
+<code-well-header>
+  <fieldset class="d-stack8">
+    <dt-toggle v-model="checked" label-class="d-mr6" ref="vModelExample">Toggle</dt-toggle>
+  </fieldset>
+</code-well-header>
+
+<code-example-tabs
+:htmlCode="() => $refs.vModelExample"
+vueCode='
+<dt-toggle v-model="checked">
+  Toggle
+</dt-toggle>
+'
+/>
+
 ## Vue API
 
 <component-vue-api component-name="toggle" />
@@ -157,12 +168,31 @@ showHtmlWarning />
 
 ## Accessibility
 
+This component uses a native button element under the hood that has a role `switch` and type `button` to improve accessibility.
+[See W3C guidelines](https://www.w3.org/TR/2021/NOTE-wai-aria-practices-1.2-20211129/examples/switch/switch-button.html)
+for more information.
+
 The best accessibility is semantic HTML. Most screen readers understand how to parse buttons if they’re correctly formatted. When it comes to toggles, there are a few things to keep in mind:
 
 - All toggle buttons should have an `id` attribute.
 - Associate toggle labels with their buttons using the `for` attribute. This correlates with the toggle's `id`.
 - If you have a group of related toggles, use a `fieldset` to group them and a `legend` to title the group. For further information, please visit Gov.UK’s article, ["Using the fieldset and legend elements"](https://accessibility.blog.gov.uk/2016/07/22/using-the-fieldset-and-legend-elements).
 
+### Button
+
+The button element should be fully accessible by keyboard. To accomplish this, the `DtToggle` component automatically
+populates several ARIA attributes to the underlying `button` element depending on the checked and
+disabled states. However, if a label default slot is not used with `DtToggle`
+(without including an `aria-label`), a console warning error will be thrown indicating that this issue exists.
+
+### Focus & Keyboard
+
+The button element should capture keyboard focus as long as it is not disabled (`disabled` prop is `true`).
+`ENTER` key will
+emit a **change** event with the current value of the toggle and will change its internal `checked` state.
+
 <script setup>
-  import ExampleToggle from '@exampleComponents/ExampleToggle.vue';
+import { ref } from 'vue'
+
+const checked = ref(false)
 </script>
