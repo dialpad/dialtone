@@ -1,3 +1,4 @@
+// Comment to bump version
 import * as serverProtocol from '@volar/language-server/protocol';
 import { createLabsInfo, RevealOutputChannelOn } from '@volar/vscode';
 import type { ExtensionContext, OutputChannel } from 'vscode';
