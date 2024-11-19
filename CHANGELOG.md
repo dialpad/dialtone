@@ -1,3 +1,15 @@
+## [9.84.2](https://github.com/dialpad/dialtone/compare/dialtone/v9.84.1...dialtone/v9.84.2) (2024-11-19)
+
+
+### Bug Fixes
+
+* **Multi Select:** DP-116677 avoid deleting input content when loading ([#562](https://github.com/dialpad/dialtone/issues/562)) ([ed29a4b](https://github.com/dialpad/dialtone/commit/ed29a4b2112d23aa17a05846e23aa2818a850a10))
+
+
+### Documentation
+
+* **Select Menu, Skeleton, Stack:** DLT-1798 move sb to docs  ([#555](https://github.com/dialpad/dialtone/issues/555)) ([304a27e](https://github.com/dialpad/dialtone/commit/304a27e652cdc755b27145df9a0a59e114a21efe))
+
 ## [9.84.1](https://github.com/dialpad/dialtone/compare/dialtone/v9.84.0...dialtone/v9.84.1) (2024-11-12)
 
 
