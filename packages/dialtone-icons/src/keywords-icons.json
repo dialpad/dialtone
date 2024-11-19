@@ -483,6 +483,12 @@
       ],
       "whisper": [
         "soft"
+      ],
+      "Simultaneous-ring": [
+        "simultaneous",
+        "multi-ring",
+        "multiple calls",
+        "phone"
       ]
     },
     "controls": {
