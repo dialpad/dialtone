@@ -6,19 +6,39 @@ Enhances the Dialtone development experience by providing Visual Studio Code use
 
 ### Autocomplete
 
-Inteligent suggestion for [Dialtone components](https://dialtone.dialpad.com/components/)
+#### Intelligent completion suggestion for [Dialtone components](https://dialtone.dialpad.com/components/)
 
 - type: `<dt-|` to get a list of components.
-- type: `<dt-button |` to get a list of component props.
-- type: `<dt-button size="|"` to get a list of prop values.
+![Dialtone components completion example](media/completion/components.png)
 
-As well as [Design Tokens](https://dialtone.dialpad.com/tokens/)
+- type: `<dt-button |` to get a list of component props, (the list will show up at the bottom of the list) so click the arrow up, to quickly go to the dialtone component props.
+![Dialtone component properties completion example](media/completion/properties.png)
+
+- type: `<dt-button size="|"` to get a list of prop values.
+![Dialtone component property values completion example](media/completion/values.png)
+
+#### Intelligent completion suggestion for [Design Tokens](https://dialtone.dialpad.com/tokens/)
 
 - type: `var(--dt-|)` to get a list of CSS variables.
+![Dialtone tokens completion example](media/completion/tokens.png)
+
+> **TIP**: If no completion is provided automatically (depends on your VSCode config), press `Ctrl + Space` to trigger the completions.
 
 ### Hover Preview
 
-Coming soon.
+Hover over a dialtone component, prop or token to see documentation.
+
+#### Component
+
+![Dialtone component hover example](media/hover/components.gif)
+
+#### Prop
+
+![Dialtone property hover example](media/hover/properties.gif)
+
+#### Token
+
+![Dialtone token hover example](media/hover/tokens.gif)
 
 ## Extension Commands
 
@@ -30,4 +50,5 @@ Reveal the language server log panel. This command is only available when there 
 
 If you’re having issues getting the Dialtone Extension features to activate:
 
-- Take a look at the language server output by running the `Dialtone: Show Output` command from the command palette. This may show errors that are preventing the extension from activating.
+- Take a look at the language server output by running the `Dialtone: Show Output` command from the command palette.
+This may show errors that are preventing the extension from activating.
