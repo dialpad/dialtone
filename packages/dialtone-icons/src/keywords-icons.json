@@ -2188,6 +2188,13 @@
       "users": [
         "group",
         "people"
+      ],
+      "raise-hand": [
+        "user",
+        "raising",
+        "hands",
+        "request",
+        "attention"
       ]
     },
     "places": {
