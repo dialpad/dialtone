@@ -1,13 +1,12 @@
 /* eslint-disable no-template-curly-in-string */
-const name = 'language-server';
-const srcRoot = `packages/language-server/${name}`;
+const srcRoot = 'packages/language-server/server';
 
 /**
  * @type {import('semantic-release').GlobalConfig}
  */
 module.exports = {
   pkgRoot: srcRoot,
-  tagFormat: name + '/v${version}',
+  tagFormat: 'language-server/v${version}',
   commitPaths: [`${srcRoot}/*`],
   plugins: [
     ['@semantic-release/commit-analyzer', {
@@ -31,12 +30,7 @@ module.exports = {
         `${srcRoot}/CHANGELOG.json`,
         `${srcRoot}/package.json`,
       ],
-      message: `chore(release): NO-JIRA ${name}` +
-        '/v${nextRelease.version}\n\n${nextRelease.notes}',
-    }],
-    ['@semantic-release/github', {
-      successComment: false,
-      failTitle: false,
+      message: 'chore(release): NO-JIRA language-server/v${nextRelease.version}\n\n${nextRelease.notes}',
     }],
   ],
   branches: [
