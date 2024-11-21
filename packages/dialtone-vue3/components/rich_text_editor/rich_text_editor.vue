@@ -1,8 +1,8 @@
 <template>
   <editor-content
     :editor="editor"
-    data-qa="dt-rich-text-editor"
     class="dt-rich-text-editor"
+    data-qa="dt-rich-text-editor"
     v-bind="attrs"
   />
 </template>
@@ -243,7 +243,7 @@ export default {
 
     /**
      * Whether the input allows for bullet list to be introduced in the text.
-    */
+     */
     allowBulletList: {
       type: Boolean,
       default: true,
@@ -467,10 +467,10 @@ export default {
   },
 
   /**
-    * Because the Editor instance is initialized when mounted it does not get
-    * updated props automatically, so the ones that can change after mount have
-    * to be hooked up to the Editor's own API.
-    */
+   * Because the Editor instance is initialized when mounted it does not get
+   * updated props automatically, so the ones that can change after mount have
+   * to be hooked up to the Editor's own API.
+   */
   watch: {
     editable (isEditable) {
       this.editor.setEditable(isEditable);
@@ -523,6 +523,12 @@ export default {
           attributes: {
             ...this.inputAttrs,
             class: this.inputClass,
+          },
+
+          // Moves the <br /> tags inside the previous closing tag to avoid
+          // Prosemirror wrapping them within another </p> tag.
+          transformPastedHTML (html) {
+            return html.replace(/(<\/\w+>)((<br \/>)+)/g, '$2$3$1');
           },
         },
       });
@@ -623,40 +629,40 @@ export default {
 </script>
 
 <style lang="less">
-  .dt-rich-text-editor {
-    &--code-block {
-      background: var(--dt-color-surface-secondary);
-      padding: var(--dt-space-400);
+.dt-rich-text-editor {
+  &--code-block {
+    background: var(--dt-color-surface-secondary);
+    padding: var(--dt-space-400);
+  }
+
+  > .ProseMirror {
+    box-shadow: none;
+
+    p.is-editor-empty:first-child::before {
+      content: attr(data-placeholder);
+      float: left;
+      color: var(--dt-color-foreground-placeholder);
+      pointer-events: none;
+      height: 0;
     }
 
-    > .ProseMirror {
-      box-shadow: none;
+    ul, ol {
+      padding-left: var(--dt-space-525);
+    }
 
-      p.is-editor-empty:first-child::before {
-        content: attr(data-placeholder);
-        float: left;
-        color: var(--dt-color-foreground-placeholder);
-        pointer-events: none;
-        height: 0;
-      }
+    ul > li {
+      list-style-type: disc;
+    }
 
-      ul, ol {
-        padding-left: var(--dt-space-525);
-      }
+    ol > li {
+      list-style-type: decimal;
+    }
 
-      ul > li {
-        list-style-type: disc;
-      }
-
-      ol > li {
-        list-style-type: decimal;
-      }
-
-      blockquote {
-        padding-left: var(--dt-space-400);
-        border-left: var(--dt-size-border-300) solid var(--dt-color-foreground-muted-inverted);
-        margin-left: 0;
-      }
+    blockquote {
+      padding-left: var(--dt-space-400);
+      border-left: var(--dt-size-border-300) solid var(--dt-color-foreground-muted-inverted);
+      margin-left: 0;
     }
   }
+}
 </style>
