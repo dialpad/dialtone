@@ -1,3 +1,21 @@
+# [9.85.0](https://github.com/dialpad/dialtone/compare/dialtone/v9.84.2...dialtone/v9.85.0) (2024-11-22)
+
+
+### Bug Fixes
+
+* DLT-2117 copy/paste on message input ([#569](https://github.com/dialpad/dialtone/issues/569)) ([41e836d](https://github.com/dialpad/dialtone/commit/41e836d8dcbc9f83232d9887fd448f78ab1f3074))
+
+
+### Documentation
+
+* NO-JIRA update LS docs ([#567](https://github.com/dialpad/dialtone/issues/567)) ([1ae8c82](https://github.com/dialpad/dialtone/commit/1ae8c82b23ee228c8997d57df548cf7d4307dce0))
+
+
+### Features
+
+* DLT-2192 lsp-hover-provider ([#563](https://github.com/dialpad/dialtone/issues/563)) ([1bd875a](https://github.com/dialpad/dialtone/commit/1bd875a99128f48fbc017e8be1c5c2531f2c5ed8))
+* **Icon:** DLT-2206 add new icon Simultaneous contact center ([#564](https://github.com/dialpad/dialtone/issues/564)) ([c29e044](https://github.com/dialpad/dialtone/commit/c29e0446e0038d90ac9cd603dd21d6875b4491db))
+
 ## [9.84.2](https://github.com/dialpad/dialtone/compare/dialtone/v9.84.1...dialtone/v9.84.2) (2024-11-19)
 
 
