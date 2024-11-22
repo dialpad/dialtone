@@ -1,3 +1,10 @@
+# [4.31.0](https://github.com/dialpad/dialtone/compare/dialtone-icons/v4.30.0...dialtone-icons/v4.31.0) (2024-11-22)
+
+
+### Features
+
+* **Icon:** DLT-2206 add new icon Simultaneous contact center ([#564](https://github.com/dialpad/dialtone/issues/564)) ([c29e044](https://github.com/dialpad/dialtone/commit/c29e0446e0038d90ac9cd603dd21d6875b4491db))
+
 # [4.30.0](https://github.com/dialpad/dialtone/compare/dialtone-icons/v4.29.0...dialtone-icons/v4.30.0) (2024-11-04)
 
 
