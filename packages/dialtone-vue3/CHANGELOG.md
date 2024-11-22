@@ -1,3 +1,10 @@
+## [3.159.6](https://github.com/dialpad/dialtone/compare/dialtone-vue3/v3.159.5...dialtone-vue3/v3.159.6) (2024-11-22)
+
+
+### Bug Fixes
+
+* DLT-2117 copy/paste on message input ([#569](https://github.com/dialpad/dialtone/issues/569)) ([41e836d](https://github.com/dialpad/dialtone/commit/41e836d8dcbc9f83232d9887fd448f78ab1f3074))
+
 ## [3.159.5](https://github.com/dialpad/dialtone/compare/dialtone-vue3/v3.159.4...dialtone-vue3/v3.159.5) (2024-11-19)
 
 
