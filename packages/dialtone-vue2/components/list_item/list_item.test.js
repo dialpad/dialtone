@@ -60,7 +60,7 @@ describe('DtListItem tests', () => {
       });
 
       it('should apply the focusable class to the wrapper.', () => {
-        expect(wrapper.classes('dt-list-item--focusable')).toBe(true);
+        expect(wrapper.classes('d-list-item--focusable')).toBe(true);
       });
 
       it('should add tabindex 0 to the wrapper.', () => {
@@ -76,8 +76,8 @@ describe('DtListItem tests', () => {
       });
 
       it('should not apply the classes to the wrapper.', () => {
-        expect(wrapper.classes('dt-list-item--focusable')).toBe(false);
-        expect(wrapper.classes('dt-list-item--highlighted')).toBe(false);
+        expect(wrapper.classes('d-list-item--focusable')).toBe(false);
+        expect(wrapper.classes('d-list-item--highlighted')).toBe(false);
       });
 
       it('should add tabindex -1 to the wrapper.', () => {
@@ -87,7 +87,7 @@ describe('DtListItem tests', () => {
 
     describe('When item is not highlighted', () => {
       it('should not apply the class to the wrapper.', () => {
-        expect(wrapper.classes('dt-list-item--highlighted')).toBe(false);
+        expect(wrapper.classes('d-list-item--highlighted')).toBe(false);
       });
 
       it('aria-selected should not be set', () => {
@@ -103,7 +103,7 @@ describe('DtListItem tests', () => {
       });
 
       it('should apply the class to the wrapper.', () => {
-        expect(wrapper.classes('dt-list-item--highlighted')).toBe(true);
+        expect(wrapper.classes('d-list-item--highlighted')).toBe(true);
       });
 
       it('aria-selected should be set to "true"', () => {

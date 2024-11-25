@@ -22,7 +22,7 @@
   --avatar-color-background: var(--dt-avatar-color-background-000);
   --avatar-color-text: var(--dt-avatar-color-foreground);
   --avatar-size-shape: var(--dt-size-600);
-  --avatar-size-image: 100%;
+  --avatar-size-image: var(--dt-size-100-percent);
   --avatar-size-text: var(--dt-font-size-200);
   --avatar-presence-position-right: var(--dt-space-200-negative);
   --avatar-presence-position-bottom: var(--dt-space-200-negative);
@@ -75,6 +75,11 @@
     border-radius: var(--dt-size-radius-pill);
   }
 
+  &--image-loaded {
+    background-color: transparent;
+    background-image: unset;
+  }
+
   &__initials {
     position: absolute;
     z-index: var(--zi-base);
@@ -93,13 +98,15 @@
     position: absolute;
     right: var(--avatar-presence-position-right);
     bottom: var(--avatar-presence-position-bottom);
+    z-index: var(--zi-base);
     display: flex;
   }
 
   &__count {
     position: absolute;
-    right: 0;
-    bottom: 0;
+    right: var(--dt-space-0);
+    bottom: var(--dt-space-0);
+    z-index: var(--zi-base);
     display: inline-flex;
     align-items: center;
     justify-content: center;
@@ -118,6 +125,57 @@
     .dt-leftbar-row--selected &,
     .dt-leftbar-row__primary:hover & {
       --avatar-count-color-shadow: var(--dt-theme-sidebar-row-color-background-hover);
+    }
+  }
+
+  &--clickable {
+    --avatar-color-border: transparent;
+
+    padding: 0;
+    background-color: transparent;
+    border: var(--dt-size-border-100) solid var(--avatar-color-border);
+    border-radius: var(--dt-size-radius-circle);
+    cursor: pointer;
+
+    &:focus-visible {
+      outline: none;
+      box-shadow: var(--dt-shadow-focus);
+    }
+
+    &:hover {
+      --avatar-color-border: var(--dt-color-border-default);
+    }
+
+    &:active {
+      --avatar-color-border: var(--dt-color-border-moderate);
+
+      transform: scale(0.98);
+    }
+  }
+
+  &__overlay {
+    position: absolute;
+    z-index: var(--zi-base);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: var(--dt-size-100-percent);
+    height: var(--dt-size-100-percent);
+    background-color: var(--dt-color-surface-contrast-opaque);
+    border-radius: var(--dt-size-radius-circle);
+    opacity: var(--dt-opacity-900);
+
+    &-icon {
+      width: var(--dt-size-100-percent);
+      color: var(--dt-color-foreground-primary-inverted);
+    }
+
+    &-text {
+      width: var(--dt-size-100-percent);
+      color: var(--dt-color-foreground-primary-inverted);
+      font-weight: var(--dt-font-weight-bold);
+      font-size: var(--dt-font-size-200);
+      text-align: center;
     }
   }
 

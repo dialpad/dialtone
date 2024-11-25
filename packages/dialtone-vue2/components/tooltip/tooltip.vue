@@ -520,24 +520,3 @@ export default {
   },
 };
 </script>
-
-<style lang="less">
-@import 'tippy.js/dist/svg-arrow.css';
-
-.tippy-box[data-reference-hidden] {
-  visibility: hidden;
-  pointer-events: none;
-}
-
-.tippy-box > .tippy-svg-arrow {
-  fill: var(--dt-color-surface-contrast);
-}
-
-.tippy-box[data-theme~='inverted'] > .tippy-svg-arrow {
-  fill: var(--dt-color-surface-moderate);
-}
-
-.tippy-box[data-animation='fade'][data-state='hidden'] {
-  opacity: 0;
-}
-</style>

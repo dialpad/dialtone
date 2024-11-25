@@ -1,16 +1,16 @@
 <template>
-  <div class="d-popover__dialog dt-suggestion-list__container">
+  <div class="d-popover__dialog d-suggestion-list__container">
     <ul
       v-show="items.length"
       ref="suggestionList"
-      class="dt-suggestion-list"
+      class="d-suggestion-list"
     >
       <dt-list-item
         v-for="(item, index) in items"
         :key="item.id"
         :class="[
-          'dt-suggestion-list--item',
-          { 'dt-list-item--highlighted': index === selectedIndex },
+          'd-suggestion-list__item',
+          { 'd-list-item--highlighted': index === selectedIndex },
         ]"
         navigation-type="arrow-keys"
         @click="selectItem(index)"
@@ -102,7 +102,7 @@ export default {
 
     async scrollActiveElementIntoView () {
       await this.$nextTick();
-      const activeElement = this.$refs.suggestionList.querySelector('.dt-list-item--highlighted');
+      const activeElement = this.$refs.suggestionList.querySelector('.d-list-item--highlighted');
       if (activeElement) {
         activeElement.scrollIntoView({
           behaviour: 'smooth',
@@ -136,20 +136,3 @@ export default {
   },
 };
 </script>
-
-<style>
-.dt-suggestion-list__container {
-  max-height: var(--dt-size-875);
-}
-
-.dt-suggestion-list {
-  position: relative;
-  padding: var(--dt-size-300);
-  min-width: var(--dt-size-925);
-  max-width: var(--dt-size-975);
-}
-
-.dt-suggestion-list--item {
-  border: var(--dt-size-100) solid transparent;
-}
-</style>

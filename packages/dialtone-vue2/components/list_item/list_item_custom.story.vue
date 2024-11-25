@@ -109,15 +109,15 @@ export default {
   }
 }
 
-.dt-list-item:hover,
-.dt-list-item:focus-within {
+.d-list-item:hover,
+.d-list-item:focus-within {
   .custom-list-item--time {
     opacity: 0.75;
   }
 }
 
-.dt-list-item:hover,
-.dt-list-item:focus-within {
+.d-list-item:hover,
+.d-list-item:focus-within {
   .custom-list-item--actions {
     opacity: 1;
   }

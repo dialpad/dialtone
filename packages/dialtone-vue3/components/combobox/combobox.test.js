@@ -149,7 +149,7 @@ describe('DtCombobox Tests', () => {
       });
 
       it('should apply the class to the empty list element', () => {
-        expect(comboboxEmptyList.find('.dt-empty-list-item').classes().includes('class')).toBe(true);
+        expect(comboboxEmptyList.find('.d-combobox__empty-list-item').classes().includes('class')).toBe(true);
       });
     });
 

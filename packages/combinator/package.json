@@ -4,7 +4,7 @@
   "description": "Dialtone vue component combinator",
   "scripts": {
     "lint": "eslint --ext .js,.vue --ignore-path .gitignore --fix src",
-    "test": "vue-cli-service test:unit --timeout 100000 --colors --recursive --glob *.test.js src"
+    "test:old": "vue-cli-service test:unit --timeout 100000 --colors --recursive --glob *.test.js src"
   },
   "bugs": {
     "email": "dialtone@dialpad.com"

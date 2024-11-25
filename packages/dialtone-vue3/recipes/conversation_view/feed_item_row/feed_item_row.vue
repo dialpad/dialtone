@@ -430,13 +430,13 @@ export default {
     right: var(--dt-space-450);
   }
 
-  &:deep(> .dt-item-layout) {
+  &:deep(> .d-item-layout) {
     font: var(--dt-typography-body-md-compact);
     min-height: initial;
     padding: 0px;
   }
 
-  &:deep(> .dt-item-layout > .dt-item-layout--left) {
+  &:deep(> .d-item-layout > .d-item-layout--left) {
     align-self: flex-start;
     text-align: end;
     display: block;
@@ -446,12 +446,12 @@ export default {
     min-width: calc(var(--dt-space-600) + var(--dt-space-300));
   }
 
-  &:deep(> .dt-item-layout > .dt-item-layout--right) {
+  &:deep(> .d-item-layout > .d-item-layout--right) {
     padding: 0;
     min-width: initial;
   }
 
-  &:deep(> .dt-item-layout > .dt-item-layout--content > .dt-item-layout--bottom) {
+  &:deep(> .d-item-layout > .d-item-layout--content > .d-item-layout--bottom) {
     display: flex;
     flex-direction: column;
     margin-top: 0;

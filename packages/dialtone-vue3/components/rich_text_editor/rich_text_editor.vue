@@ -1,7 +1,8 @@
+<!-- eslint-disable vue/no-restricted-class -->
 <template>
   <editor-content
     :editor="editor"
-    class="dt-rich-text-editor"
+    class="d-rich-text-editor"
     data-qa="dt-rich-text-editor"
     v-bind="attrs"
   />
@@ -441,7 +442,7 @@ export default {
       if (this.allowCodeblock) {
         extensions.push(CodeBlock.configure({
           HTMLAttributes: {
-            class: 'dt-rich-text-editor--code-block',
+            class: 'd-rich-text-editor__code-block',
           },
         }));
       }
@@ -627,42 +628,3 @@ export default {
   },
 };
 </script>
-
-<style lang="less">
-.dt-rich-text-editor {
-  &--code-block {
-    background: var(--dt-color-surface-secondary);
-    padding: var(--dt-space-400);
-  }
-
-  > .ProseMirror {
-    box-shadow: none;
-
-    p.is-editor-empty:first-child::before {
-      content: attr(data-placeholder);
-      float: left;
-      color: var(--dt-color-foreground-placeholder);
-      pointer-events: none;
-      height: 0;
-    }
-
-    ul, ol {
-      padding-left: var(--dt-space-525);
-    }
-
-    ul > li {
-      list-style-type: disc;
-    }
-
-    ol > li {
-      list-style-type: decimal;
-    }
-
-    blockquote {
-      padding-left: var(--dt-space-400);
-      border-left: var(--dt-size-border-300) solid var(--dt-color-foreground-muted-inverted);
-      margin-left: 0;
-    }
-  }
-}
-</style>

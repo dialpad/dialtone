@@ -35,7 +35,7 @@ describe('DtDescriptionList Tests', () => {
   describe('Presentation Tests', () => {
     it('Should render the description list', () => {
       expect(wrapper).toBeDefined();
-      expect(wrapper.classes().includes('dt-description-list')).toBe(true);
+      expect(wrapper.classes().includes('d-description-list')).toBe(true);
     });
 
     describe('When direction prop is set', () => {
@@ -44,7 +44,7 @@ describe('DtDescriptionList Tests', () => {
 
         updateWrapper();
 
-        expect(wrapper.classes().includes('dt-description-list--column')).toBe(true);
+        expect(wrapper.classes().includes('d-description-list--column')).toBe(true);
       });
     });
 
@@ -54,7 +54,7 @@ describe('DtDescriptionList Tests', () => {
 
         updateWrapper();
 
-        expect(wrapper.classes().includes('dt-description-list--gap-300')).toBe(true);
+        expect(wrapper.classes().includes('d-description-list--gap-300')).toBe(true);
       });
     });
   });
