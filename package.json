@@ -1,6 +1,6 @@
 {
   "name": "@dialpad/dialtone",
-  "version": "9.83.2",
+  "version": "9.85.0",
   "packageManager": "pnpm@9.9.0",
   "description": "Dialpad's Dialtone design system monorepo",
   "scripts": {
@@ -152,6 +152,7 @@
     "@storybook/test-runner": "^0.16.0",
     "@storybook/testing-library": "^0.2.2",
     "@storybook/theming": "7.6.20",
+    "@types/node": "^20.4.5",
     "@vitejs/plugin-vue": "^5.0.3",
     "@vitejs/plugin-vue2": "^2.3.1",
     "@vue/tsconfig": "^0.4.0",

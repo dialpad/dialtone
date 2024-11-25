@@ -1,8 +1,9 @@
+<!-- eslint-disable vue/no-restricted-class -->
 <template>
   <editor-content
     :editor="editor"
-    data-qa="dt-rich-text-editor"
     class="d-rich-text-editor"
+    data-qa="dt-rich-text-editor"
     v-on="editorListeners"
   />
 </template>
@@ -10,7 +11,6 @@
 <script>
 /* eslint-disable max-lines */
 import { Editor, EditorContent } from '@tiptap/vue-2';
-import { Slice, Fragment } from '@tiptap/pm/model';
 import Blockquote from '@tiptap/extension-blockquote';
 import CodeBlock from '@tiptap/extension-code-block';
 import Document from '@tiptap/extension-document';
@@ -244,7 +244,7 @@ export default {
 
     /**
      * Whether the input allows for bullet list to be introduced in the text.
-    */
+     */
     allowBulletList: {
       type: Boolean,
       default: true,
@@ -288,14 +288,6 @@ export default {
     additionalExtensions: {
       type: Array,
       default: () => [],
-    },
-
-    /**
-     * Use default paste handler.
-     */
-    useDefaultPasteHandler: {
-      type: Boolean,
-      default: false,
     },
   },
 
@@ -476,10 +468,10 @@ export default {
   },
 
   /**
-    * Because the Editor instance is initialized when mounted it does not get
-    * updated props automatically, so the ones that can change after mount have
-    * to be hooked up to the Editor's own API.
-    */
+   * Because the Editor instance is initialized when mounted it does not get
+   * updated props automatically, so the ones that can change after mount have
+   * to be hooked up to the Editor's own API.
+   */
   watch: {
     editable (isEditable) {
       this.editor.setEditable(isEditable);
@@ -534,49 +526,14 @@ export default {
             class: this.inputClass,
           },
 
-          /* Absolutely crazy that this is what's needed to paste line breaks properly in prosemirror, but it does seem
-            to fix our issue of line breaks outputting as paragraphs. Code taken from this thread:
-            https://discuss.prosemirror.net/t/how-to-preserve-hard-breaks-when-pasting-html-into-a-plain-text-schema/4202/4
-          */
-          ...(!this.useDefaultPasteHandler && { handlePaste: this.handlerPreserveBreaksOnPaste }),
+          // Moves the <br /> tags inside the previous closing tag to avoid
+          // Prosemirror wrapping them within another </p> tag.
+          transformPastedHTML (html) {
+            return html.replace(/(<\/\w+>)((<br \/>)+)/g, '$2$3$1');
+          },
         },
       });
       this.addEditorListeners();
-    },
-
-    handlerPreserveBreaksOnPaste (view, event, slice) {
-      const { state } = view;
-      const { tr } = state;
-
-      if (!state.schema.nodes.hardBreak) {
-        return false;
-      }
-
-      const clipboardText = event.clipboardData?.getData('text/plain').trim();
-
-      if (!clipboardText) {
-        return false;
-      }
-
-      const textLines = clipboardText.split(/(?:\r\n|\r|\n)/g);
-
-      const nodes = textLines.reduce((nodes, line, index) => {
-        if (line.length > 0) {
-          nodes.push(state.schema.text(line));
-        }
-
-        if (index < textLines.length - 1) {
-          nodes.push(state.schema.nodes.hardBreak.create());
-        }
-
-        return nodes;
-      }, []);
-
-      view.dispatch(
-        tr.replaceSelection(Slice.maxOpen(Fragment.fromArray(nodes))).scrollIntoView(),
-      );
-
-      return true;
     },
 
     processValue (newValue, returnIfEqual = true) {
@@ -642,7 +599,7 @@ export default {
           return this.editor.getHTML();
         case 'text':
         default:
-          return this.editor.getText();
+          return this.editor.getText({ blockSeparator: '\n' });
       }
     },
 

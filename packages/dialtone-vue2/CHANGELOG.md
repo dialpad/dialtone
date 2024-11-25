@@ -1,3 +1,36 @@
+## [2.166.6](https://github.com/dialpad/dialtone/compare/dialtone-vue2/v2.166.5...dialtone-vue2/v2.166.6) (2024-11-22)
+
+
+### Bug Fixes
+
+* DLT-2117 copy/paste on message input ([#569](https://github.com/dialpad/dialtone/issues/569)) ([41e836d](https://github.com/dialpad/dialtone/commit/41e836d8dcbc9f83232d9887fd448f78ab1f3074))
+
+## [2.166.5](https://github.com/dialpad/dialtone/compare/dialtone-vue2/v2.166.4...dialtone-vue2/v2.166.5) (2024-11-19)
+
+
+### Bug Fixes
+
+* **Multi Select:** DP-116677 avoid deleting input content when loading ([#562](https://github.com/dialpad/dialtone/issues/562)) ([ed29a4b](https://github.com/dialpad/dialtone/commit/ed29a4b2112d23aa17a05846e23aa2818a850a10))
+
+
+### Documentation
+
+* **Select Menu, Skeleton, Stack:** DLT-1798 move sb to docs  ([#555](https://github.com/dialpad/dialtone/issues/555)) ([304a27e](https://github.com/dialpad/dialtone/commit/304a27e652cdc755b27145df9a0a59e114a21efe))
+
+## [2.166.4](https://github.com/dialpad/dialtone/compare/dialtone-vue2/v2.166.3...dialtone-vue2/v2.166.4) (2024-11-12)
+
+
+### Bug Fixes
+
+* **Emoji Text Wrapper:** DLT-2202 not rendering line break correctly ([#561](https://github.com/dialpad/dialtone/issues/561)) ([291772e](https://github.com/dialpad/dialtone/commit/291772e978937bd1d55d37089db68259c70547fa))
+
+## [2.166.3](https://github.com/dialpad/dialtone/compare/dialtone-vue2/v2.166.2...dialtone-vue2/v2.166.3) (2024-11-04)
+
+
+### Bug Fixes
+
+* **Callbar Button With Popover:** NO-JIRA use flex-start ([#558](https://github.com/dialpad/dialtone/issues/558)) ([1522b52](https://github.com/dialpad/dialtone/commit/1522b5229e39541c76f9d7816fea44082631c331))
+
 ## [2.166.2](https://github.com/dialpad/dialtone/compare/dialtone-vue2/v2.166.1...dialtone-vue2/v2.166.2) (2024-10-31)
 
 

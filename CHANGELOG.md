@@ -1,3 +1,52 @@
+# [9.85.0](https://github.com/dialpad/dialtone/compare/dialtone/v9.84.2...dialtone/v9.85.0) (2024-11-22)
+
+
+### Bug Fixes
+
+* DLT-2117 copy/paste on message input ([#569](https://github.com/dialpad/dialtone/issues/569)) ([41e836d](https://github.com/dialpad/dialtone/commit/41e836d8dcbc9f83232d9887fd448f78ab1f3074))
+
+
+### Documentation
+
+* NO-JIRA update LS docs ([#567](https://github.com/dialpad/dialtone/issues/567)) ([1ae8c82](https://github.com/dialpad/dialtone/commit/1ae8c82b23ee228c8997d57df548cf7d4307dce0))
+
+
+### Features
+
+* DLT-2192 lsp-hover-provider ([#563](https://github.com/dialpad/dialtone/issues/563)) ([1bd875a](https://github.com/dialpad/dialtone/commit/1bd875a99128f48fbc017e8be1c5c2531f2c5ed8))
+* **Icon:** DLT-2206 add new icon Simultaneous contact center ([#564](https://github.com/dialpad/dialtone/issues/564)) ([c29e044](https://github.com/dialpad/dialtone/commit/c29e0446e0038d90ac9cd603dd21d6875b4491db))
+
+## [9.84.2](https://github.com/dialpad/dialtone/compare/dialtone/v9.84.1...dialtone/v9.84.2) (2024-11-19)
+
+
+### Bug Fixes
+
+* **Multi Select:** DP-116677 avoid deleting input content when loading ([#562](https://github.com/dialpad/dialtone/issues/562)) ([ed29a4b](https://github.com/dialpad/dialtone/commit/ed29a4b2112d23aa17a05846e23aa2818a850a10))
+
+
+### Documentation
+
+* **Select Menu, Skeleton, Stack:** DLT-1798 move sb to docs  ([#555](https://github.com/dialpad/dialtone/issues/555)) ([304a27e](https://github.com/dialpad/dialtone/commit/304a27e652cdc755b27145df9a0a59e114a21efe))
+
+## [9.84.1](https://github.com/dialpad/dialtone/compare/dialtone/v9.84.0...dialtone/v9.84.1) (2024-11-12)
+
+
+### Bug Fixes
+
+* **Emoji Text Wrapper:** DLT-2202 not rendering line break correctly ([#561](https://github.com/dialpad/dialtone/issues/561)) ([291772e](https://github.com/dialpad/dialtone/commit/291772e978937bd1d55d37089db68259c70547fa))
+
+# [9.84.0](https://github.com/dialpad/dialtone/compare/dialtone/v9.83.2...dialtone/v9.84.0) (2024-11-04)
+
+
+### Bug Fixes
+
+* **Callbar Button With Popover:** NO-JIRA use flex-start ([#558](https://github.com/dialpad/dialtone/issues/558)) ([1522b52](https://github.com/dialpad/dialtone/commit/1522b5229e39541c76f9d7816fea44082631c331))
+
+
+### Features
+
+* DLT-1812 language server - initial implementation ([#551](https://github.com/dialpad/dialtone/issues/551)) ([189d40c](https://github.com/dialpad/dialtone/commit/189d40cf442b881c04a51adec7409406339486df))
+
 ## [9.83.2](https://github.com/dialpad/dialtone/compare/dialtone/v9.83.1...dialtone/v9.83.2) (2024-10-31)
 
 

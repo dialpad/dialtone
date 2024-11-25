@@ -24,6 +24,7 @@ Thumbs.db
 dist
 .temp
 .cache
+out
 
 # Dialtone icons #
 packages/dialtone-icons/index.js
@@ -46,3 +47,9 @@ packages/dialtone-vue*/functions/generated
 
 # Postcss responsive variations
 packages/postcss-responsive-variations/coverage
+
+# Language Server
+*.tsbuildinfo
+*.vsix
+packages/language-server/sample/*.vue
+packages/language-server/sample/*.css

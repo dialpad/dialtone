@@ -540,6 +540,7 @@ export default {
     },
 
     onComboboxSelect (i) {
+      if (this.loading) return;
       this.value = '';
       this.$emit('select', i);
     },
