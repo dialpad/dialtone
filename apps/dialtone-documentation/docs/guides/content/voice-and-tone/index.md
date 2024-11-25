@@ -101,7 +101,7 @@ Sometimes we want to keep people moving along a desired path. In these situation
 
 Despite our best efforts, errors still happen. These are often simple mistakes or roadblocks to action that can be fixed. Although they aren’t necessarily errors or problems, they might feel that way to users. In that situation, our job is to help people understand what happened and how they can address it so they can get back to their task as quickly as possible.
 
-Read the [error message guidelines](/error-messages/) for more detailed guidance.
+Read the [error message guidelines](/guides/content/error-messages/) for more detailed guidance.
 
 <dialtone-usage>
 <template #do>
@@ -124,7 +124,7 @@ At times we will need to share bad news. This might be due to an outage, an erro
 
 In these situations, there’s a serious risk of damaging trust and hurting our relationship with our customers, so we need to be careful how we communicate.
 
-Read the [error message guidelines](/error-messages/) for more detailed guidance.
+Read the [error message guidelines](/guides/content/error-messages/) for more detailed guidance.
 
 <dialtone-usage>
 <template #do>
@@ -189,7 +189,7 @@ It’s exciting to launch a new feature or update, but always consider the audie
 
 When announcing something new, focus on educating and explaining what it is, what it’s used for, and what the user can expect.
 
-Be sure to use [inclusive language](/inclusive-language/) in your writing.
+Be sure to use [inclusive language](/guides/content/inclusive-language/) in your writing.
 
 <dialtone-usage>
 <template #do>
