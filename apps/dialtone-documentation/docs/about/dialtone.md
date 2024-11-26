@@ -32,7 +32,7 @@ Dialtone provides two options to use the components: CSS and Vue.
 
 ### Vue components (recommended)
 
-Use [Vue components](https://dialtone.dialpad.com/vue) in the case your project supports Vue since these components are built conforming to [WCAG AA Accessibility Guidelines](https://www.w3.org/WAI/standards-guidelines/wcag/glance/)
+Use [Vue components](https://dialtone.dialpad.com/vue/index.html) in the case your project supports Vue since these components are built conforming to [WCAG AA Accessibility Guidelines](https://www.w3.org/WAI/standards-guidelines/wcag/glance/)
 and with usability and performance in mind.
 
 ### CSS components

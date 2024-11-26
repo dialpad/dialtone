@@ -19,7 +19,7 @@ Spacing design tokens focus on controlling **spatial relationships**; that is, t
 
 Use spacing units, when [stacking elements](#stacking) or when adding [padding](#padding) or margin.
 
-When setting the scale of an element, use [Size](/design/sizing/) units.
+When setting the scale of an element, use [Size](/design/size/) units.
 
 ### Setting a specific spacing
 
@@ -155,7 +155,7 @@ Avoid using `margin`, which adds space outside the element and can affect the la
 
 ## Tokens
 
-Here are some frequently used tokens, don't use values outside the recommended range for specific types of spacing. For a complete list, visit the [Spacing Tokens](/tokens/space) section.
+Here are some frequently used tokens, don't use values outside the recommended range for specific types of spacing. For a complete list, visit the [Spacing Tokens](/tokens/#space) section.
 
 <token-table category="space" :tokenList="true" :tokens="tokens" theme="light" />
 

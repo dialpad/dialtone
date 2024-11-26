@@ -117,7 +117,7 @@ To ensure clickable and interactive areas are easily accessible, we recommend a 
 
 ## Tokens
 
-Here are some frequently used tokens. For a complete list, visit the [Size Tokens](/tokens/size/) section.
+Here are some frequently used tokens. For a complete list, visit the [Size Tokens](/tokens/#size) section.
 
 <token-table category="size" :tokenList="true" :tokens="tokens" theme="light" />
 

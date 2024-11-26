@@ -261,7 +261,7 @@ vueCode='
 
 ### Presence
 
-Positions the [Presence](components/presence.html) component at each size.
+Positions the [Presence](/components/presence.html) component at each size.
 
 <code-well-header>
     <div class="d-d-inline-flex d-ai-center d-flow8">
