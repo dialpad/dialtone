@@ -1,3 +1,10 @@
+## [3.159.7](https://github.com/dialpad/dialtone/compare/dialtone-vue3/v3.159.6...dialtone-vue3/v3.159.7) (2024-11-26)
+
+
+### Bug Fixes
+
+* **Component:** DLT-2121 move all styling to dialtone-css from vue ([#557](https://github.com/dialpad/dialtone/issues/557)) ([97de9ed](https://github.com/dialpad/dialtone/commit/97de9ed36c48e59addf4d2e99ade9cb7dfc3cc37))
+
 ## [3.159.6](https://github.com/dialpad/dialtone/compare/dialtone-vue3/v3.159.5...dialtone-vue3/v3.159.6) (2024-11-22)
 
 
