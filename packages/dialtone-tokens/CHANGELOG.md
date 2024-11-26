@@ -1,3 +1,10 @@
+## [1.37.1](https://github.com/dialpad/dialtone/compare/dialtone-tokens/v1.37.0...dialtone-tokens/v1.37.1) (2024-11-26)
+
+
+### Bug Fixes
+
+* **Design Tokens:** NO-JIRA corrected dark theme's "busy" reference color ([#571](https://github.com/dialpad/dialtone/issues/571)) ([cd29d0e](https://github.com/dialpad/dialtone/commit/cd29d0ecab4b8afb0bae29af3b7c755661e9192b))
+
 # [1.37.0](https://github.com/dialpad/dialtone/compare/dialtone-tokens/v1.36.8...dialtone-tokens/v1.37.0) (2024-10-24)
 
 
