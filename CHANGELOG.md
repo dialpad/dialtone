@@ -1,3 +1,10 @@
+## [9.85.2](https://github.com/dialpad/dialtone/compare/dialtone/v9.85.1...dialtone/v9.85.2) (2024-11-26)
+
+
+### Bug Fixes
+
+* **Design Tokens:** NO-JIRA corrected dark theme's "busy" reference color ([#571](https://github.com/dialpad/dialtone/issues/571)) ([cd29d0e](https://github.com/dialpad/dialtone/commit/cd29d0ecab4b8afb0bae29af3b7c755661e9192b))
+
 ## [9.85.1](https://github.com/dialpad/dialtone/compare/dialtone/v9.85.0...dialtone/v9.85.1) (2024-11-26)
 
 
