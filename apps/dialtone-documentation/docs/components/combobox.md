@@ -14,9 +14,9 @@ A combobox provides accessibility controls and common functionality. It does not
 
 It has 2 core required slots:
 
-1. `input`: contains the input element controlling the list. This will usually be the [Input component](/components/input.html).
+1. `input`: contains the input element controlling the list. This will usually be the [Input component](/components/input.md).
 2. `list`: the list of items to display responding to `input`'s value. Almost always this will be a list of `dt-list-item`.
-This will usually be the [List Item component](/components/list-item.html).
+This will usually be the [List Item component](/components/list-item.md).
 
 <code-well-header class="d-d-block">
   <dt-combobox

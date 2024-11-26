@@ -26,7 +26,7 @@ Find a list of available icons in [DT Core: Icons](https://www.figma.com/file/zz
 
 <div class="d-d-grid d-g24 d-g-cols3 md:d-g-cols1">
 
-For detailed instructions on using the icons, check the [Icon component](/components/icon.html).
+For detailed instructions on using the icons, check the [Icon component](/components/icon.md).
 
 <div class="d-gc2">
 <code-well-header>

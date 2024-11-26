@@ -127,4 +127,4 @@ Currently, this wrapper component **can't handle Vue components**, make sure to 
 ### Custom emojis
 
 It supports custom emojis, you can use the shortcode to display them. For example, `:octocat:` will render the octocat emoji.
-To do this, you need to [set up custom emojis](/components/emoji.html#custom-emoji) in your application.
+To do this, you need to [set up custom emojis](/components/emoji.md#custom-emoji) in your application.

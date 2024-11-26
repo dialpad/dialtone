@@ -429,7 +429,7 @@ Popover must contain an anchor and content element. d-modal--transparent can be 
 
 ## Accessibility
 
-If your popover is modal, please see the accessibility section of this page regarding "focus trapping": [Modal Accessibility](/components/modal/#accessibility). The same rules will apply here if your popover is modal.
+If your popover is modal, please see the accessibility section of this page regarding "focus trapping": [Modal Accessibility](/components/modal.md#accessibility). The same rules will apply here if your popover is modal.
 
 Popovers, in their current implementation, are accessible when used as interactive components. Content will be read to screen reader users, and the popover markup by is appended to the `<body>`.
 

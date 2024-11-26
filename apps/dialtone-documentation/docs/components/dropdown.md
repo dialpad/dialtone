@@ -55,7 +55,7 @@ figma_url: https://www.figma.com/file/2adf7JhZOncRyjYiy2joil/DT-Core%3A-Componen
 
 ## Usage
 
-Use the Dropdown component when you have a list of links or actions that can be performed. Use the [Select Menu](/components/select-menu.html) component to allow the users to choose one option from the list.
+Use the Dropdown component when you have a list of links or actions that can be performed. Use the [Select Menu](/components/select-menu.md) component to allow the users to choose one option from the list.
 
 - The dropdown component provides accessibility controls when using with List item component.
 - The dropdown has two major pieces that are provided as required named slots: the anchor and the list.
@@ -351,7 +351,7 @@ The dropdown menu has a role of "menu" and the list items have a role "menuitem"
 
 ### List
 
-The Dropdown is rendered with semantic `<ul>` and `<li>`. The list slot is wrapped in `<ul>` element so make sure the items are wrapped in `<li>` element and each item has the menuitem role. It is recommended to use the [List Item component](/components/list-item.html) as it supports all the necessary accessibility props and interactions.
+The Dropdown is rendered with semantic `<ul>` and `<li>`. The list slot is wrapped in `<ul>` element so make sure the items are wrapped in `<li>` element and each item has the menuitem role. It is recommended to use the [List Item component](/components/list-item.md) as it supports all the necessary accessibility props and interactions.
 
 ### Focus & Keyboard
 
