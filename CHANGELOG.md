@@ -1,3 +1,15 @@
+## [9.85.1](https://github.com/dialpad/dialtone/compare/dialtone/v9.85.0...dialtone/v9.85.1) (2024-11-26)
+
+
+### Bug Fixes
+
+* **Component:** DLT-2121 move all styling to dialtone-css from vue ([#557](https://github.com/dialpad/dialtone/issues/557)) ([97de9ed](https://github.com/dialpad/dialtone/commit/97de9ed36c48e59addf4d2e99ade9cb7dfc3cc37))
+
+
+### Documentation
+
+* NO-JIRA fix broken links ([20994ae](https://github.com/dialpad/dialtone/commit/20994ae432a66d30560244013d31035b391a87a8))
+
 # [9.85.0](https://github.com/dialpad/dialtone/compare/dialtone/v9.84.2...dialtone/v9.85.0) (2024-11-22)
 
 
