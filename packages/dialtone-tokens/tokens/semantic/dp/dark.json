@@ -733,6 +733,16 @@
           }
         }
       }
+    },
+    "presence": {
+      "color": {
+        "background": {
+          "busy-unavailable": {
+            "value": "{color.red.400}",
+            "type": "color"
+          }
+        }
+      }
     }
   }
 }
