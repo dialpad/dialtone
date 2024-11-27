@@ -17,6 +17,7 @@ import CodeBlock from '@tiptap/extension-code-block';
 import Document from '@tiptap/extension-document';
 import Paragraph from '@tiptap/extension-paragraph';
 import Placeholder from '@tiptap/extension-placeholder';
+import HardBreak from '@tiptap/extension-hard-break';
 import Bold from '@tiptap/extension-bold';
 import BulletList from '@tiptap/extension-bullet-list';
 import Italic from '@tiptap/extension-italic';
@@ -347,7 +348,7 @@ export default {
     // eslint-disable-next-line complexity
     extensions () {
       // These are the default extensions needed just for plain text.
-      const extensions = [Document, Paragraph, Text, History];
+      const extensions = [Document, Paragraph, Text, History, HardBreak];
 
       const self = this;
       const ShiftEnter = Extension.create({
@@ -363,15 +364,16 @@ export default {
               ]);
             },
             Enter: () => {
+              if (self.allowLineBreaks) {
+                return false;
+              }
               self.$emit('enter');
               return true;
             },
           };
         },
       });
-      if (!this.allowLineBreaks) {
-        extensions.push(ShiftEnter);
-      }
+      extensions.push(ShiftEnter);
 
       if (this.link) {
         extensions.push(TipTapLink.extend({ inclusive: false }).configure({
