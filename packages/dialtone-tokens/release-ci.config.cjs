@@ -35,7 +35,7 @@ module.exports = {
         '/v${nextRelease.version}\n\n${nextRelease.notes}',
     }],
     ['@semantic-release/exec', {
-      prepareCmd: './gradlew setProperties -Pversion=${nextRelease.version} && echo \'${nextRelease.version}\' > ./dist_ios/VERSION && git add -A && git commit -m \'chore(release): NO-JIRA ' + name + '/v${nextRelease.version} gradle\' && git push',
+      prepareCmd: './gradlew setProperties -Pversion=${nextRelease.version} && echo \'${nextRelease.version}\' > ./dist_ios/VERSION && git add ./dist_ios/VERSION ./gradle.properties && git commit -m \'chore(release): NO-JIRA ' + name + '/v${nextRelease.version} gradle\' && git push',
       execCwd: srcRoot,
     }],
     ['@semantic-release/github', {
