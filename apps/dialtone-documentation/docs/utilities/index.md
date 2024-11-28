@@ -147,7 +147,7 @@ Convert it to a `flex` container by adding `class="d-d-flex"`.
 
 ### 7. Add borders to segment each.
 
-Add a border to each box by applying `d-divide-x` (horizontal borders) to the surrounding container from the list of[divide width classes](/utilities/borders/divide-width.md).
+Add a border to each box by applying `d-divide-x` (horizontal borders) to the surrounding container from the list of [divide width classes](/utilities/borders/divide-width.md).
 
 <code-well-header>
   <div class="d-d-flex d-divide-x">
@@ -169,7 +169,7 @@ Add a border to each box by applying `d-divide-x` (horizontal borders) to the su
 
 ### 8. And change the border color
 
-Since the border color of `d-divide-x` inherits the color of the parent's foreground (implicitly `currentColor`), let's soften it with `d-divide-black-400`, from the list of[divide color classes](/utilities/borders/divide-color.md).
+Since the border color of `d-divide-x` inherits the color of the parent's foreground (implicitly `currentColor`), let's soften it with `d-divide-black-400`, from the list of [divide color classes](/utilities/borders/divide-color.md).
 
 <code-well-header>
   <div class="d-d-flex d-divide-x d-divide-black-400">

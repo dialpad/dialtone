@@ -65,14 +65,12 @@ Auto margins allow an element to fill a remaining space within an object. This i
 <div class="d-mr-auto ...">d-mr-auto</div>
 ```
 
-<script setup>
-  import { directions, values } from '@data/spacing.json';
-</script>
-
 ## Classes
 
 Margins can be added to an element by using a utility class (i.e. `.d-m[#]`) or by using a directional class (i.e. `.d-m{t|r|b|l|y|x}[#]`).
-The margin utility classes help visually separate elements. Because layouts are highly contextual, margins are never applied natively to a component's outer wrapper. Instead you can use these margin classes to provide that space or the [Stack and Flow layouts](/utilities/layout/stacks/index.md).
+The margin utility classes help visually separate elements. Because layouts are highly contextual, margins are never applied natively to a component's outer wrapper.
+
+It is highly recommended to use the [stack component](/components/stack.md) or the [auto spacing classes](/utilities/spacing/auto-spacing.md) prior to applying margins individually.
 
 <div class="d-h464 d-of-y-scroll d-bb d-bc-black-200">
   <utility-class-table>
@@ -172,3 +170,7 @@ The margin utility classes help visually separate elements. Because layouts are 
     </template>
   </utility-class-table>
 </div>
+
+<script setup>
+  import { directions, values } from '@data/spacing.json';
+</script>

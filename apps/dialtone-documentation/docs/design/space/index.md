@@ -155,7 +155,7 @@ Avoid using `margin`, which adds space outside the element and can affect the la
 
 ## Tokens
 
-Here are some frequently used tokens, don't use values outside the recommended range for specific types of spacing. For a complete list, visit the[Spacing Tokens](/tokens/index.md#space) section.
+Here are some frequently used tokens, don't use values outside the recommended range for specific types of spacing. For a complete list, visit the [Spacing Tokens](/tokens/index.md#space) section.
 
 <token-table category="space" :tokenList="true" :tokens="tokens" theme="light" />
 
