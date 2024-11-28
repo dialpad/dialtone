@@ -27,11 +27,31 @@
 //  ============================================================================
 //  $   BASE STYLE
 //  ----------------------------------------------------------------------------
+
+@import (inline) 'tippy.js/dist/svg-arrow.css';
+
 .d-tooltip-container {
   position: relative;
   display: inline-flex;
   align-items: center;
   justify-content: center;
+}
+
+.tippy-box[data-reference-hidden] {
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.tippy-box > .tippy-svg-arrow {
+  fill: var(--dt-color-surface-contrast);
+}
+
+.tippy-box[data-theme~='inverted'] > .tippy-svg-arrow {
+  fill: var(--dt-color-surface-moderate);
+}
+
+.tippy-box[data-animation='fade'][data-state='hidden'] {
+  opacity: 0;
 }
 
 .d-tooltip {

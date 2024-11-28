@@ -1,0 +1,57 @@
+.d-rich-text-editor {
+  &__code-block {
+    padding: var(--dt-space-400);
+    background: var(--dt-color-surface-secondary);
+  }
+
+  > .ProseMirror {
+    box-shadow: none;
+
+    p.is-editor-empty:first-child::before {
+      float: left;
+      height: 0;
+      color: var(--dt-color-foreground-placeholder);
+      content: attr(data-placeholder);
+      pointer-events: none;
+    }
+
+    ul, ol {
+      padding-left: var(--dt-space-525);
+    }
+
+    ul > li {
+      list-style-type: disc;
+    }
+
+    ol > li {
+      list-style-type: decimal;
+    }
+
+    blockquote {
+      margin-left: 0;
+      padding-left: var(--dt-space-400);
+      border-left: var(--dt-size-border-300) solid var(--dt-color-foreground-muted-inverted);
+    }
+  }
+}
+
+.d-suggestion-list__container {
+  max-height: var(--dt-size-875);
+}
+
+.d-suggestion-list {
+  position: relative;
+  min-width: var(--dt-size-925);
+  max-width: var(--dt-size-975);
+  padding: var(--dt-size-300);
+}
+
+.d-suggestion-list__item {
+  border: var(--dt-size-100) solid transparent;
+}
+
+.d-mention-suggestion__name {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}

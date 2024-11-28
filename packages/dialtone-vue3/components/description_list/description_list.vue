@@ -1,5 +1,5 @@
 <template>
-  <dl :class="['dt-description-list', getDirectionClass, getGapClass]">
+  <dl :class="['d-description-list', getDirectionClass, getGapClass]">
     <template
       v-for="item in items"
       :key="item.term"
@@ -72,50 +72,20 @@ export default {
 
   computed: {
     dtClass () {
-      return ['dt-description-list__term', this.termClass];
+      return ['d-description-list__term', this.termClass];
     },
 
     ddClass () {
-      return ['dt-description-list__description', this.descriptionClass];
+      return ['d-description-list__description', this.descriptionClass];
     },
 
     getDirectionClass () {
-      return `dt-description-list--${this.direction}`;
+      return `d-description-list--${this.direction}`;
     },
 
     getGapClass () {
-      return `dt-description-list--gap-${this.gap}`;
+      return `d-description-list--gap-${this.gap}`;
     },
   },
 };
 </script>
-
-<style lang="less">
-.dt-description-list {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: flex-start;
-  flex-direction: row;
-  line-height: var(--dt-font-line-height-300);
-  font-size: var(--dt-font-size-100);
-  --description-list-gap: var(--dt-space-400);
-  gap: var(--description-list-gap);
-  each(range(0, 600, 100), {
-    &--gap-@{value} {
-     --description-list-gap: ~"var(--dt-space-@{value})";
-    }
-  });
-  &--column {
-    flex-direction: column;
-  }
-  &__term {
-    color: var(--dt-color-foreground-tertiary);
-    flex: 0 1 40%;
-  }
-  &__description {
-    color: var(--dt-color-foreground-primary);
-    flex: 1 1 50%;
-    margin-left: 0;
-  }
-}
-</style>

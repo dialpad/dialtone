@@ -1,3 +1,34 @@
+# [9.86.0](https://github.com/dialpad/dialtone/compare/dialtone/v9.85.2...dialtone/v9.86.0) (2024-11-28)
+
+
+### Bug Fixes
+
+* **Tooltip:** NO-JIRA inline css for tippy arrow ([#575](https://github.com/dialpad/dialtone/issues/575)) ([09c8f8e](https://github.com/dialpad/dialtone/commit/09c8f8e6267308fc4f233a2f307ac3e1d885f1fe))
+
+
+### Features
+
+* **Message Input:** DLT-2128 avoid closing the emoji picker when shift is pressed ([#570](https://github.com/dialpad/dialtone/issues/570)) ([285c7ee](https://github.com/dialpad/dialtone/commit/285c7ee64ebf84e0281c1b02cd5b57f4104f0a20))
+
+## [9.85.2](https://github.com/dialpad/dialtone/compare/dialtone/v9.85.1...dialtone/v9.85.2) (2024-11-26)
+
+
+### Bug Fixes
+
+* **Design Tokens:** NO-JIRA corrected dark theme's "busy" reference color ([#571](https://github.com/dialpad/dialtone/issues/571)) ([cd29d0e](https://github.com/dialpad/dialtone/commit/cd29d0ecab4b8afb0bae29af3b7c755661e9192b))
+
+## [9.85.1](https://github.com/dialpad/dialtone/compare/dialtone/v9.85.0...dialtone/v9.85.1) (2024-11-26)
+
+
+### Bug Fixes
+
+* **Component:** DLT-2121 move all styling to dialtone-css from vue ([#557](https://github.com/dialpad/dialtone/issues/557)) ([97de9ed](https://github.com/dialpad/dialtone/commit/97de9ed36c48e59addf4d2e99ade9cb7dfc3cc37))
+
+
+### Documentation
+
+* NO-JIRA fix broken links ([20994ae](https://github.com/dialpad/dialtone/commit/20994ae432a66d30560244013d31035b391a87a8))
+
 # [9.85.0](https://github.com/dialpad/dialtone/compare/dialtone/v9.84.2...dialtone/v9.85.0) (2024-11-22)
 
 

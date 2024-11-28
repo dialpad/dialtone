@@ -18,7 +18,7 @@ const dialtoneVueRootFolder = join(__dirname, `../packages/dialtone-vue${version
 const outputPath = `${distPath}/component-documentation.json`;
 const fileList = [
   ...getValidFileList(dialtoneVueRootFolder + '/components'),
-  ...getValidFileList(dialtoneVueRootFolder + '/recipes')
+  ...getValidFileList(dialtoneVueRootFolder + '/recipes'),
 ];
 
 function writeDocumentationFile (data) {

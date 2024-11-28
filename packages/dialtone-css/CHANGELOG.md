@@ -1,3 +1,17 @@
+## [8.46.2](https://github.com/dialpad/dialtone/compare/dialtone-css/v8.46.1...dialtone-css/v8.46.2) (2024-11-28)
+
+
+### Bug Fixes
+
+* **Tooltip:** NO-JIRA inline css for tippy arrow ([#575](https://github.com/dialpad/dialtone/issues/575)) ([09c8f8e](https://github.com/dialpad/dialtone/commit/09c8f8e6267308fc4f233a2f307ac3e1d885f1fe))
+
+## [8.46.1](https://github.com/dialpad/dialtone/compare/dialtone-css/v8.46.0...dialtone-css/v8.46.1) (2024-11-26)
+
+
+### Bug Fixes
+
+* **Component:** DLT-2121 move all styling to dialtone-css from vue ([#557](https://github.com/dialpad/dialtone/issues/557)) ([97de9ed](https://github.com/dialpad/dialtone/commit/97de9ed36c48e59addf4d2e99ade9cb7dfc3cc37))
+
 # [8.46.0](https://github.com/dialpad/dialtone/compare/dialtone-css/v8.45.3...dialtone-css/v8.46.0) (2024-10-29)
 
 

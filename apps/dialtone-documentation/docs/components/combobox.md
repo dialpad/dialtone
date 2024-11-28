@@ -92,21 +92,21 @@ htmlCode='
       aria-label="Label Text"
     >
       <li
-        class="dt-list-item"
+        class="d-list-item"
         tabindex="-1"
         role="option"
         aria-selected="false"
       >
-        <div class="dt-item-layout">
-          <section class="dt-item-layout--left">
+        <div class="d-item-layout">
+          <section class="d-item-layout--left">
             <div class="d-avatar d-avatar--md d-avatar--color-1300">
               <div class="d-avatar__canvas">
                 <span class="d-avatar__initials">1</span>
               </div>
             </div>
           </section>
-          <section class="dt-item-layout--content">
-            <div class="dt-item-layout--title">combobox item 1</div>
+          <section class="d-item-layout--content">
+            <div class="d-item-layout--title">combobox item 1</div>
           </section>
         </div>
       </li>

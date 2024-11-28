@@ -233,18 +233,18 @@ export default {
 
   display: flex;
 
-  &:deep(.dt-item-layout) {
+  &:deep(.d-item-layout) {
     flex: 1 1 0;
   }
 
-  &:deep(.dt-item-layout--content) {
+  &:deep(.d-item-layout--content) {
     /*
     DP-74536: Add `min-width` to make the width of "contact info" adjustable.
     */
     min-width: var(--dt-space-825);
   }
 
-  &:deep(.dt-item-layout--left) {
+  &:deep(.d-item-layout--left) {
     /*
     DP-74536: To make 'Avatar' in fixed position when resizing the window.
     */
@@ -253,7 +253,7 @@ export default {
     align-items: center;
   }
 
-  &:deep(.dt-item-layout--right) {
+  &:deep(.d-item-layout--right) {
     /*
     DP-74536: Remove `min-width` which cause extra unused empty space on the right of "contact info".
     */

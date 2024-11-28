@@ -29,21 +29,21 @@ htmlCode='
   <span> Some text with :invalid-emoji: </span>
   <span class="d-emoji d-icon d-icon--size-500">
     <div aria-busy="true" role="status" aria-label="" class="d-icon d-icon--size-500" style="display: none;">
-      <div class="skeleton-placeholder d-bar-circle skeleton-placeholder--animate" style="animation-delay: 0ms; animation-duration: 1000ms; min-width: 100%; max-width: 100%; min-height: 100%; max-height: 100%;"></div>
+      <div class="d-skeleton-placeholder d-bar-circle d-skeleton-placeholder--animate" style="animation-delay: 0ms; animation-duration: 1000ms; min-width: 100%; max-width: 100%; min-height: 100%; max-height: 100%;"></div>
     </div>
     <img class="d-icon d-icon--size-500" aria-label="grinning face with smiling eyes" alt="😄" title="grinning face with smiling eyes" src="https://cdn.jsdelivr.net/joypixels/assets/8.0/png/unicode/32/1f604.png" style="" />
   </span>
   <span> </span>
   <span class="d-emoji d-icon d-icon--size-500">
     <div aria-busy="true" role="status" aria-label="" class="d-icon d-icon--size-500" style="display: none;">
-      <div class="skeleton-placeholder d-bar-circle skeleton-placeholder--animate" style="animation-delay: 0ms; animation-duration: 1000ms; min-width: 100%; max-width: 100%; min-height: 100%; max-height: 100%;"></div>
+      <div class="d-skeleton-placeholder d-bar-circle d-skeleton-placeholder--animate" style="animation-delay: 0ms; animation-duration: 1000ms; min-width: 100%; max-width: 100%; min-height: 100%; max-height: 100%;"></div>
     </div>
     <img class="d-icon d-icon--size-500" aria-label="crying face" alt="😢" title="crying face" src="https://cdn.jsdelivr.net/joypixels/assets/8.0/png/unicode/32/1f622.png" style="" />
   </span>
   <span> and </span>
   <span class="d-emoji d-icon d-icon--size-500">
     <div aria-busy="true" role="status" aria-label="" class="d-icon d-icon--size-500" style="display: none;">
-      <div class="skeleton-placeholder d-bar-circle skeleton-placeholder--animate" style="animation-delay: 0ms; animation-duration: 1000ms; min-width: 100%; max-width: 100%; min-height: 100%; max-height: 100%;"></div>
+      <div class="d-skeleton-placeholder d-bar-circle d-skeleton-placeholder--animate" style="animation-delay: 0ms; animation-duration: 1000ms; min-width: 100%; max-width: 100%; min-height: 100%; max-height: 100%;"></div>
     </div>
     <img class="d-icon d-icon--size-500" aria-label="grinning face with smiling eyes" alt="😄" title="grinning face with smiling eyes" src="https://cdn.jsdelivr.net/joypixels/assets/8.0/png/unicode/32/1f604.png" style="" />
   </span>

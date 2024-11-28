@@ -1,10 +1,10 @@
 {
   "name": "@dialpad/dialtone-combinator",
-  "version": "0.3.1",
+  "version": "1.0.0",
   "description": "Dialtone vue component combinator",
   "scripts": {
     "lint": "eslint --ext .js,.vue --ignore-path .gitignore --fix src",
-    "test": "vue-cli-service test:unit --timeout 100000 --colors --recursive --glob *.test.js src"
+    "test:old": "vue-cli-service test:unit --timeout 100000 --colors --recursive --glob *.test.js src"
   },
   "bugs": {
     "email": "dialtone@dialpad.com"
@@ -15,7 +15,9 @@
   },
   "type": "module",
   "module": "./dist/dialtone-combinator.js",
-  "files": ["dist"],
+  "files": [
+    "dist"
+  ],
   "exports": {
     ".": "./dist/dialtone-combinator.js",
     "./css": "./dist/style.css",

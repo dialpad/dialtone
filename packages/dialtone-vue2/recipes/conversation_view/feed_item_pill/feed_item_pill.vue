@@ -185,7 +185,7 @@ export default {
     gap: var(--dt-space-300);
     width: 100%;
 
-    &:deep(> .dt-item-layout--left) {
+    &:deep(> .d-item-layout--left) {
       padding-right: var(--dt-space-0);
       justify-content: center;
     }

@@ -344,6 +344,12 @@
       ]
     },
     "communication": {
+      "Simultaneous-ring": [
+        "simultaneous",
+        "multi-ring",
+        "multiple calls",
+        "phone"
+      ],
       "call-abandoned": [
         "phone",
         "missed",
@@ -483,12 +489,6 @@
       ],
       "whisper": [
         "soft"
-      ],
-      "Simultaneous-ring": [
-        "simultaneous",
-        "multi-ring",
-        "multiple calls",
-        "phone"
       ]
     },
     "controls": {

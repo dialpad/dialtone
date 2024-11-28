@@ -19,10 +19,10 @@ describe('DtItemLayout tests', () => {
       localVue: testContext.localVue,
     });
 
-    leftWrapper = wrapper.find('[data-qa="dt-item-layout-left-wrapper"]');
-    rightWrapper = wrapper.find('[data-qa="dt-item-layout-right-wrapper"]');
-    subtitleWrapper = wrapper.find('[data-qa="dt-item-layout-subtitle-wrapper"]');
-    bottomWrapper = wrapper.find('[data-qa="dt-item-layout-bottom-wrapper"]');
+    leftWrapper = wrapper.find('[data-qa="d-item-layout-left-wrapper"]');
+    rightWrapper = wrapper.find('[data-qa="d-item-layout-right-wrapper"]');
+    subtitleWrapper = wrapper.find('[data-qa="d-item-layout-subtitle-wrapper"]');
+    bottomWrapper = wrapper.find('[data-qa="d-item-layout-bottom-wrapper"]');
   };
 
   beforeAll(() => {

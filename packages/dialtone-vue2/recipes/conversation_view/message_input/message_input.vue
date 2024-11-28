@@ -123,12 +123,7 @@
               <dt-emoji-picker
                 v-bind="emojiPickerProps"
                 @skin-tone="onSkinTone"
-                @selected-emoji="
-                  (emoji) => {
-                    close();
-                    onSelectEmoji(emoji);
-                  }
-                "
+                @selected-emoji="(emoji) => onSelectEmoji(emoji, close)"
               />
             </template>
           </dt-popover>
@@ -737,9 +732,13 @@ export default {
       this.$emit('skin-tone', skinTone);
     },
 
-    onSelectEmoji (emoji) {
+    onSelectEmoji (emoji, close) {
       if (!emoji) {
         return;
+      }
+
+      if (!emoji.shift_key) {
+        close();
       }
 
       // Insert emoji into the editor
