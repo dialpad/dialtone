@@ -1,3 +1,10 @@
+# [2.167.0](https://github.com/dialpad/dialtone/compare/dialtone-vue2/v2.166.7...dialtone-vue2/v2.167.0) (2024-11-28)
+
+
+### Features
+
+* **Message Input:** DLT-2128 avoid closing the emoji picker when shift is pressed ([#570](https://github.com/dialpad/dialtone/issues/570)) ([285c7ee](https://github.com/dialpad/dialtone/commit/285c7ee64ebf84e0281c1b02cd5b57f4104f0a20))
+
 ## [2.166.7](https://github.com/dialpad/dialtone/compare/dialtone-vue2/v2.166.6...dialtone-vue2/v2.166.7) (2024-11-26)
 
 
