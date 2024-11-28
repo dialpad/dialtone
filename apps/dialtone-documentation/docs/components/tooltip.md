@@ -21,9 +21,7 @@ figma_url: https://www.figma.com/file/2adf7JhZOncRyjYiy2joil/DT-Core%3A-Componen
 Default tooltip directive uses top as default placement
 
 <code-well-header class="d-hmn164">
-  <div class="d-tooltip d-tooltip__arrow--bottom-center d-tooltip--show">
-    <span>Tooltip</span>
-  </div>
+  <dt-button v-dt-tooltip="`Tooltip text`">Hover me</dt-button>
 </code-well-header>
 
 <code-example-tabs
@@ -39,7 +37,7 @@ htmlCode='
 </div>
 '
 vueCode='
-<dt-button v-dt-tooltip="Tooltip text">Placeholder Button</dt-button>
+<dt-button v-dt-tooltip="`Tooltip text`">Hover me</dt-button>
 '
 showHtmlWarning />
 
@@ -52,7 +50,7 @@ It's possible to change the tooltip default placement with directive arguments, 
 </code-well-header>
 
 ```javascript
-<dt-button v-dt-tooltip:bottom-start="Tooltip text">Placeholder Button</dt-button>
+<dt-button v-dt-tooltip:bottom-start="`Tooltip text`">Placeholder Button</dt-button>
 ```
 
 ### Import
@@ -84,9 +82,13 @@ A tooltip has two slots:
 ### Base Styles
 
 <code-well-header class="d-hmn164">
-  <div class="d-tooltip d-tooltip__arrow--bottom-center d-tooltip--show">
-    <span>Tooltip</span>
-  </div>
+  <dt-tooltip message="tooltip">
+    <template #anchor>
+      <dt-button>
+        Hover me
+      </dt-button>
+    </template>
+  </dt-tooltip>
 </code-well-header>
 
 <code-example-tabs
@@ -111,7 +113,7 @@ vueCode='
 <dt-tooltip message="tooltip">
   <template #anchor>
     <dt-button>
-      Hover to show tooltip
+      Hover me
     </dt-button>
   </template>
 </dt-tooltip>
@@ -121,9 +123,13 @@ showHtmlWarning />
 ### Inverted
 
 <code-well-header bgclass="d-bgc-contrast" class="d-hmn164">
-  <div class="d-tooltip d-tooltip__arrow--bottom-center d-tooltip--inverted d-tooltip--show">
-    <span>Tooltip</span>
-  </div>
+  <dt-tooltip inverted message="tooltip">
+    <template #anchor>
+      <dt-button>
+        Hover me
+      </dt-button>
+    </template>
+  </dt-tooltip>
 </code-well-header>
 
 <code-example-tabs
@@ -148,7 +154,7 @@ vueCode='
 <dt-tooltip inverted message="tooltip">
   <template #anchor>
     <dt-button>
-      Hover to show tooltip
+      Hover me
     </dt-button>
   </template>
 </dt-tooltip>

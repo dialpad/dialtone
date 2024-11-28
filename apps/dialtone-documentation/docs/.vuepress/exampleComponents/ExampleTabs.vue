@@ -35,7 +35,7 @@
     </template>
     <div
       :class="{
-        'd-fc-neutral-white': inverted,
+        'd-fc-primary-inverted': inverted,
       }"
     >
       <dt-tab-panel

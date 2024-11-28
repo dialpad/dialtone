@@ -68,9 +68,9 @@ htmlCode='
 vueCode='
 <dt-toast
   title="Title"
-  show="showToast"
-  important="important"
-  kind="selectedKind"
+  :show="showToast"
+  :important="important"
+  :kind="selectedKind"
   @close="closeEvent"
 >
   Message body with
@@ -96,10 +96,10 @@ It's recommended to use a time of at least 6000 ms (minimum duration validated i
 If the duration is not provided the toast won't disappear automatically.
 
 <code-well-header>
-  <dt-button @click="toggleDurationToast(true)">Toggle Example</dt-button>
+  <dt-button @click="toggleDurationToast(true)">Show Example</dt-button>
   <example-toast
     class="d-zi-notification"
-    :show.sync="showDurationToast"
+    :show="showDurationToast"
     title="Title"
     @close="toggleDurationToast(false)"
     @update:show="updateShow"
@@ -111,7 +111,7 @@ If the duration is not provided the toast won't disappear automatically.
 vueCode='
 <dt-toast
   title="Title"
-  show="showDurationToast"
+  :show="showDurationToast"
   @close="closeEvent"
   :duration="7500"
 >
@@ -141,7 +141,7 @@ If you need to self-position the toast at the top center, use the `d-toast-wrapp
   <dt-toast
     :title="title"
     :message="message"
-    :show.sync="isShown"
+    :show="isShown"
   ></dt-toast>
 </aside>
 ```

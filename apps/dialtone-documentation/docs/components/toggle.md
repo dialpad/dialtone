@@ -47,7 +47,7 @@ The Toggle component acts as a way to allow the User to switch between two mutua
 ### Base Styles
 
 <code-well-header>
-  <fieldset class="d-stack8">
+  <dt-stack as="fieldset" gap="400">
     <dt-toggle label-class="d-mr6">Unchecked Toggle</dt-toggle>
     <dt-toggle checked label-class="d-mr6">Checked Toggle</dt-toggle>
     <dt-toggle disabled label-class="d-mr6">Unchecked Disabled</dt-toggle>
@@ -55,7 +55,7 @@ The Toggle component acts as a way to allow the User to switch between two mutua
     <dt-toggle checked="mixed" label-class="d-mr6">Indeterminate Toggle</dt-toggle>
     <dt-toggle checked="mixed" label-class="d-mr6" disabled>Indeterminate Disabled</dt-toggle>
     <dt-toggle label-class="d-mr6" :show-icon="false">Without icon</dt-toggle>
-  </fieldset>
+  </dt-stack>
 </code-well-header>
 
 <code-example-tabs
@@ -116,10 +116,10 @@ showHtmlWarning />
 ### Sizes
 
 <code-well-header>
-  <fieldset class="d-stack8">
+  <dt-stack as="fieldset" gap="400">
     <dt-toggle size="sm" label-class="d-mr6">Small size</dt-toggle>
     <dt-toggle label-class="d-mr6">Default size</dt-toggle>
-  </fieldset>
+  </dt-stack>
 </code-well-header>
 
 <code-example-tabs
@@ -144,9 +144,9 @@ showHtmlWarning />
 ### With v-model
 
 <code-well-header>
-  <fieldset class="d-stack8">
+  <dt-stack as="fieldset" gap="400">
     <dt-toggle v-model="checked" label-class="d-mr6" ref="vModelExample">Toggle</dt-toggle>
-  </fieldset>
+  </dt-stack>
 </code-well-header>
 
 <code-example-tabs
