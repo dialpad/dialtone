@@ -101,7 +101,6 @@
       "import": "./dist/dialtone-vue.js",
       "require": "./dist/dialtone-vue.cjs"
     },
-    "./css": "./dist/style.css",
     "./component-documentation.json": "./dist/component-documentation.json",
     "./*": {
       "import": "./dist/*.js",

@@ -9,7 +9,6 @@ import { flushPromises } from '@workspaceRoot/common/utils/client.mjs';
 
 // CSS
 import '@dialpad/dialtone-css/lib/dist/dialtone.css';
-import '@dialpad/dialtone-vue/css';
 // import '@dialpad/dialtone-combinator/css';
 import './assets/less/dialtone-docs.less';
 import './assets/less/dialtone-syntax.less';
