@@ -3,15 +3,15 @@
     ref="FeedItemRef"
     navigation-type="none"
     v-bind="$attrs"
-    :class="['dt-feed-item-row', listItemClasses]"
-    data-qa="dt-feed-item-row"
+    :class="['dt-recipe-feed-item-row', listItemClasses]"
+    data-qa="dt-recipe-feed-item-row"
     v-on="feedListeners"
   >
     <!-- Avatar or time -->
     <template #left>
       <div
         v-if="showHeader"
-        class="dt-feed-item-row__avatar-container"
+        class="dt-recipe-feed-item-row__avatar-container"
       >
         <!-- @slot Slot to contain the avatar, overrides avatar props. -->
         <slot
@@ -38,25 +38,25 @@
       <span
         v-if="!showHeader"
         v-show="isActive"
-        class="dt-feed-item-row__left-time"
-        data-qa="dt-feed-item-row--left-time"
+        class="dt-recipe-feed-item-row__left-time"
+        data-qa="dt-recipe-feed-item-row--left-time"
       >
         {{ shortTime }}
       </span>
     </template>
 
-    <article class="dt-feed-item-row__content">
+    <article class="dt-recipe-feed-item-row__content">
       <!-- Feed Item -->
       <div
         v-if="showHeader"
-        data-qa="dt-feed-item-row--header"
-        class="dt-feed-item-row__header"
+        data-qa="dt-recipe-feed-item-row--header"
+        class="dt-recipe-feed-item-row__header"
       >
-        <p class="dt-feed-item-row__header__name">
+        <p class="dt-recipe-feed-item-row__header-name">
           {{ displayName }}
         </p>
         <time
-          class="dt-feed-item-row__header__time"
+          class="dt-recipe-feed-item-row__header-time"
         >
           {{ time }}
         </time>
@@ -67,14 +67,14 @@
       </div>
       <!-- @slot Default content slot for feed item row -->
       <span
-        data-qa="dt-feed-item-row--content"
+        data-qa="dt-recipe-feed-item-row--content"
       >
         <slot />
       </span>
       <div
         v-if="$slots.attachment"
-        data-qa="dt-feed-item-row--attachment"
-        class="dt-feed-item-row__attachment"
+        data-qa="dt-recipe-feed-item-row--attachment"
+        class="dt-recipe-feed-item-row__attachment"
       >
         <slot name="attachment" />
       </div>
@@ -83,15 +83,15 @@
     <template #bottom>
       <div
         v-if="$slots.reactions"
-        class="dt-feed-item-row__reactions"
-        data-qa="dt-feed-item-row--reactions"
+        class="dt-recipe-feed-item-row__reactions"
+        data-qa="dt-recipe-feed-item-row--reactions"
       >
         <!-- @slot Slot for reactions row component -->
         <slot name="reactions" />
       </div>
       <div
         v-if="$slots.threading"
-        class="dt-feed-item-row__threading"
+        class="dt-recipe-feed-item-row__threading"
       >
         <!-- @slot Slot for threading row component -->
         <slot name="threading" />
@@ -102,8 +102,8 @@
     <template #right>
       <div
         v-show="isActive"
-        data-qa="dt-feed-item-row--menu"
-        class="dt-feed-item-row__menu"
+        data-qa="dt-recipe-feed-item-row--menu"
+        class="dt-recipe-feed-item-row__menu"
       >
         <dt-lazy-show
           :appear="true"
@@ -283,9 +283,9 @@ export default {
 
     listItemClasses () {
       return [
-        'dt-feed-item-row',
-        { 'dt-feed-item-row--active': this.isActive && this.state === DEFAULT_FEED_ROW_STATE },
-        { 'dt-feed-item-row--state-transition': this.transitionActive },
+        'dt-recipe-feed-item-row',
+        { 'dt-recipe-feed-item-row--active': this.isActive && this.state === DEFAULT_FEED_ROW_STATE },
+        { 'dt-recipe-feed-item-row__state-transition': this.transitionActive },
         FEED_ROW_STATE_BACKGROUND_COLOR[this.state],
 
       ];
@@ -324,138 +324,3 @@ export default {
   },
 };
 </script>
-
-<style lang="less" scoped>
-.dt-feed-item-row {
-
-  width: var(--dt-size-100-percent);
-  box-sizing: border-box;
-  position: relative;
-  padding: var(--dt-space-300) var(--dt-space-500);
-
-  &:focus-visible {
-    box-shadow: var(--dt-shadow-focus-inset);
-  }
-
-  &--state-searched {
-    background-color: var(--dt-color-surface-warning-subtle);
-  }
-
-  &--state-error {
-    background-color: var(--dt-color-surface-critical-subtle);
-  }
-
-  &--active {
-    background-color: var(--dt-color-surface-secondary-opaque);
-  }
-
-  &--state-transition {
-    transition-duration: 2s;
-    transition-delay: 0s;
-    transition-timing-function: var(--ttf-in-out);
-    transition-property: background-color;
-  }
-
-  &__avatar-container {
-    padding-top: var(--dt-space-300);
-    padding-bottom: var(--dt-space-300);
-  }
-
-  &__content {
-    padding-left: var(--dt-space-300);
-  }
-
-  &__attachment {
-    padding-top: var(--dt-space-200);
-    padding-bottom: var(--dt-space-300);
-
-    &:deep(.dt-feed-item-row__image)  {
-      border: var(--dt-color-border-subtle) solid var(--dt-size-border-100);
-      border-radius: var(--dt-size-radius-400);
-      display: block;
-      max-width: 30rem;
-      max-height: 30rem;
-      min-width: 5.6rem;
-      min-height: 5.6rem;
-    }
-
-    &:deep(.dt-feed-item-row__video)  {
-      display: block;
-      height: 25.0rem;
-    }
-  }
-
-  &__header {
-    display: flex;
-    align-items: baseline;
-    flex-wrap: wrap;
-    gap: var(--dt-space-300);
-    font-size: var(--dt-font-size-200);
-    line-height: var(--dt-font-line-height-300);
-
-    &__name {
-      font-weight: var(--dt-font-weight-bold);
-    }
-
-    &__time {
-      font-size: var(--dt-font-size-100);
-      color: var(--dt-color-foreground-tertiary);
-      flex-shrink: 0;
-    }
-  }
-
-  &__reactions {
-    display: flex;
-    flex-wrap: wrap;
-    padding-top: var(--dt-space-200);
-    padding-bottom: var(--dt-space-200);
-    padding-left: var(--dt-space-300);
-  }
-
-  &__threading {
-    padding-top: var(--dt-space-200);
-    padding-bottom: var(--dt-space-200);
-  }
-
-  &__left-time {
-    color: var(--dt-color-foreground-tertiary);
-    font-size: var(--dt-font-size-100);
-    font-weight: var(--dt-font-weight-normal);
-    vertical-align: middle;
-    white-space: nowrap;
-  }
-
-  &__menu {
-    position: absolute;
-    top: var(--dt-space-550-negative);
-    right: var(--dt-space-450);
-  }
-
-  &:deep(> .d-item-layout) {
-    font: var(--dt-typography-body-md-compact);
-    min-height: initial;
-    padding: 0px;
-  }
-
-  &:deep(> .d-item-layout > .d-item-layout--left) {
-    align-self: flex-start;
-    text-align: end;
-    display: block;
-    padding-right: var(--dt-space-300);
-    padding-left: var(--dt-space-0);
-    // min-width = avatar width + padding
-    min-width: calc(var(--dt-space-600) + var(--dt-space-300));
-  }
-
-  &:deep(> .d-item-layout > .d-item-layout--right) {
-    padding: 0;
-    min-width: initial;
-  }
-
-  &:deep(> .d-item-layout > .d-item-layout--content > .d-item-layout--bottom) {
-    display: flex;
-    flex-direction: column;
-    margin-top: 0;
-  }
-}
-</style>

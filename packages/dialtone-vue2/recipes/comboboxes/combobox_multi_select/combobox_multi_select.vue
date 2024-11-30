@@ -19,20 +19,23 @@
     <template #input="{ onInput }">
       <span
         ref="inputSlotWrapper"
-        class="combobox__input-wrapper"
+        class="dt-recipe-combobox-multi-select__input-wrapper"
         @focusin="handleInputFocusIn"
         @focusout="handleInputFocusOut"
       >
         <span
           ref="chipsWrapper"
-          :class="['combobox__chip-wrapper', chipWrapperClass]"
+          :class="['dt-recipe-combobox-multi-select__chip-wrapper', chipWrapperClass]"
         >
           <dt-chip
             v-for="({ item, key }) in selectedItemsWithKeys"
             ref="chips"
             :key="key"
             :label-class="['d-chip__label']"
-            :class="['combobox__chip', { 'combobox__chip--truncate': !!chipMaxWidth }]"
+            :class="[
+              'dt-recipe-combobox-multi-select__chip',
+              { 'dt-recipe-combobox-multi-select__chip--truncate': !!chipMaxWidth },
+            ]"
             :style="{ maxWidth: chipMaxWidth }"
             :close-button-props="{ ariaLabel: 'close' }"
             :size="CHIP_SIZES[size]"
@@ -47,7 +50,7 @@
         <dt-input
           ref="input"
           v-model="value"
-          class="combobox__input"
+          class="dt-recipe-combobox-multi-select__input"
           :input-class="[inputClass, { 'd-fc-transparent': hideInputText }]"
           :input-wrapper-class="inputWrapperClass"
           :aria-label="label"
@@ -90,7 +93,7 @@
         />
         <div
           v-else
-          class="combobox__list--loading"
+          class="dt-recipe-combobox-multi-select__list--loading"
         >
           {{ loadingMessage }}
         </div>
@@ -470,7 +473,7 @@ export default {
 
     chipWrapperClass () {
       return {
-        [`combobox__chip-wrapper-${this.size}--collapsed`]: !this.inputFocused && this.collapseOnFocusOut,
+        [`dt-recipe-combobox-multi-select__chip-wrapper-${this.size}--collapsed`]: !this.inputFocused && this.collapseOnFocusOut,
       };
     },
   },
@@ -749,54 +752,3 @@ export default {
   },
 };
 </script>
-
-<style scoped lang="less">
-.combobox__input-wrapper {
-  position: relative;
-  display: block;
-}
-
-.combobox__chip-wrapper {
-  position: absolute;
-  margin-left: var(--dt-space-200);
-  margin-right: var(--dt-space-200);
-  padding-left: var(--dt-space-100);
-  max-width: calc(var(--dt-size-100-percent) - var(--dt-space-400));
-  max-height: initial;
-  overflow-y: visible;
-}
-
-.combobox__chip-wrapper-md--collapsed {
-  max-height: 2.8rem;
-  overflow-y: hidden;
-}
-
-.combobox__chip-wrapper-sm--collapsed,
-.combobox__chip-wrapper-xs--collapsed {
-  max-height: 2.5rem;
-  overflow-y: hidden;
-}
-
-.combobox__chip {
-  margin-top: var(--dt-space-300);
-  margin-left: var(--dt-space-200);
-  margin-right: var(--dt-space-200);
-  z-index: var(--zi-base1);
-  max-width: var(--dt-size-100-percent);
-}
-
-.combobox__input {
-  flex-grow: 1;
-}
-
-.combobox__list--loading {
-  text-align: center;
-  padding-top: var(--dt-space-500);
-  padding-bottom: var(--dt-space-500);
-}
-
-.combobox__chip--truncate {
-  white-space: nowrap;
-  text-overflow: ellipsis;
-}
-</style>

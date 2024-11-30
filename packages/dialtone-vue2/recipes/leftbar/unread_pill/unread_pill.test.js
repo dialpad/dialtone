@@ -37,7 +37,7 @@ describe('DtRecipeUnreadPill Tests', () => {
   // Helpers
   const _setChildWrappers = async () => {
     await vi.dynamicImportSettled();
-    unreadPillLabel = wrapper.find('[data-qa="dt-leftbar-unread-pill__label"]');
+    unreadPillLabel = wrapper.find('[data-qa="dt-recipe-leftbar-unread-pill__label"]');
     unreadPillIcon = wrapper.find('[data-qa="dt-icon"]');
   };
 
@@ -89,7 +89,7 @@ describe('DtRecipeUnreadPill Tests', () => {
       });
 
       it('should contain the correct class', () => {
-        expect(wrapper.classes('dt-leftbar-unread-pill--messages')).toBe(true);
+        expect(wrapper.classes('dt-recipe-leftbar-unread-pill-messages')).toBe(true);
       });
     });
 
@@ -99,7 +99,7 @@ describe('DtRecipeUnreadPill Tests', () => {
       });
 
       it('should contain the correct class', () => {
-        expect(wrapper.classes('dt-leftbar-unread-pill--mentions')).toBe(true);
+        expect(wrapper.classes('dt-recipe-leftbar-unread-pill-mentions')).toBe(true);
       });
     });
 

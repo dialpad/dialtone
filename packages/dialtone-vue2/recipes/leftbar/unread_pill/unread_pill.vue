@@ -1,8 +1,8 @@
 <template>
   <button
-    :class="['dt-leftbar-unread-pill', `dt-leftbar-unread-pill--${kind}`]"
+    :class="['dt-recipe-leftbar-unread-pill', `dt-recipe-leftbar-unread-pill-${kind}`]"
     type="button"
-    data-qa="dt-leftbar-unread-pill"
+    data-qa="dt-recipe-leftbar-unread-pill"
     v-on="$listeners"
   >
     <dt-icon-arrow-up
@@ -13,7 +13,7 @@
       v-else
       size="300"
     />
-    <span data-qa="dt-leftbar-unread-pill__label">
+    <span data-qa="dt-recipe-leftbar-unread-pill__label">
       <slot />
     </span>
   </button>
@@ -63,30 +63,3 @@ export default {
   ],
 };
 </script>
-
-<style lang="less">
-.dt-leftbar-unread-pill {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: var(--dt-space-200) var(--dt-space-500) var(--dt-space-200) var(--dt-space-400);
-  gap: var(--dt-space-300);
-  font-size: var(--dt-font-size-100);
-  box-shadow: var(--dt-shadow-medium);
-  border-radius: var(--dt-size-radius-pill);
-  border: none;
-  line-height: var(--dt-font-line-height-600);
-  cursor: pointer;
-
-  &--mentions {
-    font-weight: var(--dt-font-weight-bold);
-    background-color: var(--dt-theme-mention-color-background);
-    color: var(--dt-theme-mention-color-foreground);
-  }
-
-  &--messages {
-    background-color: var(--dt-color-surface-contrast);
-    color: var(--dt-color-foreground-secondary-inverted);
-  }
-}
-</style>

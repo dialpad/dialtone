@@ -24,7 +24,7 @@ describe('DtRecipeCallbarButtonWithPopover Tests', () => {
   // Helpers
   const _setChildWrappers = () => {
     button = wrapper.findComponent(DtRecipeCallbarButton);
-    arrow = wrapper.findComponent('.dt-recipe--callbar-button-with-popover--arrow');
+    arrow = wrapper.findComponent('.dt-recipe-callbar-button-with-popover__arrow');
     popover = wrapper.findComponent(DtPopover);
   };
 

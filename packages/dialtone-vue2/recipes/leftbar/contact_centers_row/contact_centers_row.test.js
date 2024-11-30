@@ -29,9 +29,9 @@ describe('DtRecipeContactCentersRow Tests', () => {
   // Helpers
   const _setChildWrappers = async () => {
     await vi.dynamicImportSettled();
-    iconType = wrapper.find('[data-qa="dt-leftbar-row-icon"]');
-    description = wrapper.find('[data-qa="dt-leftbar-row-description"]');
-    unreadBadge = wrapper.find('[data-qa="dt-leftbar-row-unread-badge"]');
+    iconType = wrapper.find('[data-qa="dt-recipe-leftbar-row-icon"]');
+    description = wrapper.find('[data-qa="dt-recipe-leftbar-row-description"]');
+    unreadBadge = wrapper.find('[data-qa="dt-recipe-leftbar-row-unread-badge"]');
   };
 
   const _setWrappers = async () => {

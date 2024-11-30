@@ -1,0 +1,48 @@
+.dt-recipe-combobox-multi-select__chip {
+  z-index: var(--zi-base1);
+  max-width: var(--dt-size-100-percent);
+  margin-top: var(--dt-space-300);
+  margin-right: var(--dt-space-200);
+  margin-left: var(--dt-space-200);
+}
+
+.dt-recipe-combobox-multi-select__chip-wrapper {
+  position: absolute;
+  max-width: calc(var(--dt-size-100-percent) - var(--dt-space-400));
+  max-height: initial;
+  margin-right: var(--dt-space-200);
+  margin-left: var(--dt-space-200);
+  padding-left: var(--dt-space-100);
+  overflow-y: visible;
+}
+
+.dt-recipe-combobox-multi-select__chip-wrapper-md--collapsed {
+  max-height: 2.8rem;
+  overflow-y: hidden;
+}
+
+.dt-recipe-combobox-multi-select__chip-wrapper-sm--collapsed,
+.dt-recipe-combobox-multi-select__chip-wrapper-xs--collapsed {
+  max-height: 2.5rem;
+  overflow-y: hidden;
+}
+
+.dt-recipe-combobox-multi-select__chip--truncate {
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.dt-recipe-combobox-multi-select__input {
+  flex-grow: 1;
+}
+
+.dt-recipe-combobox-multi-select__input-wrapper {
+  position: relative;
+  display: block;
+}
+
+.dt-recipe-combobox-multi-select__list--loading {
+  padding-top: var(--dt-space-500);
+  padding-bottom: var(--dt-space-500);
+  text-align: center;
+}
