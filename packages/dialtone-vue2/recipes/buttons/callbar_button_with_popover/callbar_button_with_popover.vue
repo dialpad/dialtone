@@ -10,6 +10,9 @@
       :button-class="buttonClass"
       :button-width-size="buttonWidthSize"
       :text-class="textClass"
+      :inverted="invertedTooltip"
+      :show="showTooltip"
+      :tooltip-text="tooltipText"
       class="dt-recipe--callbar-button-with-popover--main-button"
       @click="buttonClick"
     >
@@ -257,6 +260,33 @@ export default {
     openPopover: {
       type: Boolean,
       default: false,
+    },
+
+    /**
+     * Whether the tooltip has an inverted background color.
+     * @values true, false
+     */
+    invertedTooltip: {
+      type: Boolean,
+      default: false,
+    },
+
+    /**
+     * Use this if you would like to manually override the logic for when the tooltip shows.
+     * Otherwise it will just show on hover/focus.
+     * @values null, true, false
+     */
+    showTooltip: {
+      type: Boolean,
+      default: null,
+    },
+
+    /**
+     * The message that displays in the tooltip. This will be overridden by the tooltip slot.
+     */
+    tooltipText: {
+      type: String,
+      default: undefined,
     },
   },
 

@@ -1,6 +1,8 @@
 <template>
   <dt-tooltip
     :id="id"
+    :inverted="invertedTooltip"
+    :show="showTooltip"
     :offset="[0, 24]"
   >
     <template #anchor>
@@ -26,7 +28,9 @@
         </dt-button>
       </span>
     </template>
-    <slot name="tooltip" />
+    <slot name="tooltip">
+      {{ tooltipText }}
+    </slot>
   </dt-tooltip>
 </template>
 
@@ -139,6 +143,33 @@ export default {
     importance: {
       type: String,
       default: '',
+    },
+
+    /**
+     * Whether the tooltip has an inverted background color.
+     * @values true, false
+     */
+    invertedTooltip: {
+      type: Boolean,
+      default: false,
+    },
+
+    /**
+     * Use this if you would like to manually override the logic for when the tooltip shows.
+     * Otherwise it will just show on hover/focus.
+     * @values null, true, false
+     */
+    showTooltip: {
+      type: Boolean,
+      default: null,
+    },
+
+    /**
+     * The message that displays in the tooltip. This will be overridden by the tooltip slot.
+     */
+    tooltipText: {
+      type: String,
+      default: undefined,
     },
 
   },
