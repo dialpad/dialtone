@@ -10,6 +10,9 @@
     :button-class="$attrs.buttonClass"
     :text-class="$attrs.textClass"
     :button-width-size="$attrs.buttonWidthSize"
+    :inverted="$attrs.inverted"
+    :show="$attrs.show"
+    :tooltip-text="$attrs.tooltipText"
     @click="$attrs.onClick"
   >
     <template
