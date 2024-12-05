@@ -3297,6 +3297,25 @@
     "group": "tmo"
   },
   {
+    "id": "76d0ba74de0533b970fe27e938ab6e61e8011118",
+    "name": "light",
+    "$figmaStyleReferences": {},
+    "selectedTokenSets": {
+      "root": "source",
+      "base/default": "source",
+      "base/deca": "source",
+      "semantic/dp/default": "enabled",
+      "semantic/deca/default": "enabled",
+      "components/avatar/default": "enabled",
+      "components/badge/default": "enabled",
+      "components/button/default": "enabled",
+      "components/checkbox/default": "enabled",
+      "components/icon/default": "enabled",
+      "components/radio/default": "enabled"
+    },
+    "group": "deca"
+  },
+  {
     "id": "0372d8ab03e30b812857cd98434cdeb10d8db3a9",
     "name": "light",
     "$figmaStyleReferences": {
@@ -3855,6 +3874,53 @@
       "root": "enabled",
       "base/default": "enabled",
       "base/dark": "enabled"
+    },
+    "group": "base"
+  },
+  {
+    "id": "73b15ac7174751c847eb7ee2a17d745bc8ddd1b9",
+    "name": "deca-light",
+    "$figmaStyleReferences": {},
+    "selectedTokenSets": {
+      "root": "enabled",
+      "base/default": "enabled",
+      "base/deca": "enabled"
+    },
+    "group": "base"
+  },
+  {
+    "id": "a1d802456db91e0aefe01a3e8d20140eec66a8dc",
+    "name": "dark",
+    "$figmaStyleReferences": {},
+    "selectedTokenSets": {
+      "root": "source",
+      "base/default": "source",
+      "base/dark": "source",
+      "base/deca": "source",
+      "base/deca-dark": "source",
+      "semantic/dp/default": "enabled",
+      "semantic/dp/dark": "enabled",
+      "semantic/deca/default": "enabled",
+      "semantic/deca/dark": "enabled",
+      "components/avatar/default": "enabled",
+      "components/badge/default": "enabled",
+      "components/button/default": "enabled",
+      "components/checkbox/default": "enabled",
+      "components/icon/default": "enabled",
+      "components/radio/default": "enabled"
+    },
+    "group": "deca"
+  },
+  {
+    "id": "fdce22368bfb59c90332b0e7471cd04e1eb8ea9f",
+    "name": "deca-dark",
+    "$figmaStyleReferences": {},
+    "selectedTokenSets": {
+      "root": "enabled",
+      "base/default": "enabled",
+      "base/dark": "enabled",
+      "base/deca": "enabled",
+      "base/deca-dark": "enabled"
     },
     "group": "base"
   }
