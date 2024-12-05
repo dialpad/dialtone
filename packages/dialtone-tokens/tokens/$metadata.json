@@ -2,6 +2,7 @@
   "tokenSetOrder": [
     "root",
     "base/default",
+    "base/deca",
     "base/dark",
     "semantic/dp/default",
     "semantic/dp/dark",
