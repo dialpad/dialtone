@@ -27,8 +27,17 @@
           "type": "color"
         },
         "bulletin-subtle": {
-          "value": "{color.purple.200}",
-          "type": "color"
+          "value": "{color.brand.purple}",
+          "type": "color",
+          "$extensions": {
+            "studio.tokens": {
+              "modify": {
+                "type": "alpha",
+                "value": ".1",
+                "space": "hsl"
+              }
+            }
+          }
         },
         "ai": {
           "value": "{color.gradient.magenta-purple}",
@@ -45,8 +54,17 @@
           "type": "color"
         },
         "bulletin-subtle": {
-          "value": "{color.purple.500}",
-          "type": "color"
+          "value": "{color.brand.purple}",
+          "type": "color",
+          "$extensions": {
+            "studio.tokens": {
+              "modify": {
+                "type": "darken",
+                "value": "0.6",
+                "space": "hsl"
+              }
+            }
+          }
         }
       },
       "border": {
@@ -55,8 +73,17 @@
           "type": "color"
         },
         "bulletin-subtle": {
-          "value": "{color.purple.300}",
-          "type": "color"
+          "value": "{color.brand.purple}",
+          "type": "color",
+          "$extensions": {
+            "studio.tokens": {
+              "modify": {
+                "type": "alpha",
+                "value": ".5",
+                "space": "hsl"
+              }
+            }
+          }
         }
       }
     }
