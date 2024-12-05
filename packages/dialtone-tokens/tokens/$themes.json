@@ -372,7 +372,7 @@
       "components/radio/default": "enabled",
       "root": "source",
       "components/button/default": "enabled",
-      "base/deca-dark": "disabled"
+      "semantic/deca/default": "disabled"
     },
     "$figmaCollectionId": "VariableCollectionId:406:18994",
     "$figmaModeId": "406:0",
@@ -1286,7 +1286,7 @@
       "root": "source",
       "components/badge/dark": "enabled",
       "components/button/default": "enabled",
-      "base/deca-dark": "disabled"
+      "semantic/deca/default": "disabled"
     },
     "$figmaCollectionId": "VariableCollectionId:406:18994",
     "$figmaModeId": "406:1",
@@ -2190,7 +2190,7 @@
       "components/icon/default": "enabled",
       "components/radio/default": "enabled",
       "root": "source",
-      "base/deca-dark": "disabled"
+      "semantic/deca/default": "disabled"
     },
     "$figmaCollectionId": "VariableCollectionId:406:19535",
     "$figmaModeId": "406:2",
@@ -2755,7 +2755,7 @@
       "components/icon/default": "enabled",
       "components/radio/default": "enabled",
       "root": "source",
-      "base/deca-dark": "disabled"
+      "semantic/deca/default": "disabled"
     },
     "$figmaCollectionId": "VariableCollectionId:406:19535",
     "$figmaModeId": "406:3",
@@ -3664,7 +3664,7 @@
       "components/icon/default": "enabled",
       "components/radio/default": "enabled",
       "semantic/dp/default": "enabled",
-      "base/deca-dark": "disabled"
+      "semantic/deca/default": "disabled"
     },
     "group": "expressive"
   },
@@ -3684,7 +3684,7 @@
       "components/checkbox/default": "enabled",
       "components/icon/default": "enabled",
       "components/radio/default": "enabled",
-      "base/deca-dark": "disabled"
+      "semantic/deca/default": "disabled"
     },
     "group": "expressive"
   },
@@ -3703,7 +3703,7 @@
       "components/icon/default": "enabled",
       "components/radio/default": "enabled",
       "semantic/expressive/default": "enabled",
-      "base/deca-dark": "disabled"
+      "semantic/deca/default": "disabled"
     },
     "group": "expressive-sm"
   },
@@ -3724,7 +3724,7 @@
       "components/icon/default": "enabled",
       "components/radio/default": "enabled",
       "semantic/expressive/default": "enabled",
-      "base/deca-dark": "disabled"
+      "semantic/deca/default": "disabled"
     },
     "group": "expressive-sm"
   },
@@ -3795,7 +3795,7 @@
     "selectedTokenSets": {
       "root": "enabled",
       "base/default": "enabled",
-      "base/deca-dark": "disabled"
+      "semantic/deca/default": "disabled"
     },
     "group": "base"
   },
@@ -3867,7 +3867,7 @@
       "root": "enabled",
       "base/default": "enabled",
       "base/dark": "enabled",
-      "base/deca-dark": "disabled"
+      "semantic/deca/default": "disabled"
     },
     "group": "base"
   }
