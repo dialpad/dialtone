@@ -1,8 +1,8 @@
 <template>
   <div
     :class="[
-      'dt-leftbar-row__container',
-      { 'dt-leftbar-row__container--off-duty': $slots.timer },
+      'dt-recipe-leftbar-row__container',
+      { 'dt-recipe-leftbar-row__container--off-duty': $slots.timer },
     ]"
   >
     <div
@@ -10,27 +10,27 @@
       data-qa="dt-recipe-contact-centers-row"
     >
       <a
-        class="dt-leftbar-row__primary"
-        :data-qa="$attrs['data-qa'] ?? 'dt-leftbar-row-link'"
+        class="dt-recipe-leftbar-row__primary"
+        :data-qa="$attrs['data-qa'] ?? 'dt-recipe-leftbar-row-link'"
         :aria-label="getAriaLabel"
         :title="description"
         :href="$attrs.href ?? 'javascript:void(0)'"
         v-bind="$attrs"
         v-on="$listeners"
       >
-        <div class="dt-leftbar-row__alpha">
+        <div class="dt-recipe-leftbar-row__alpha">
           <dt-icon-headphones
             size="300"
-            data-qa="dt-leftbar-row-icon"
+            data-qa="dt-recipe-leftbar-row-icon"
           />
         </div>
         <div
-          class="dt-leftbar-row__label"
+          class="dt-recipe-leftbar-row__label"
           :style="`flex-basis: ${labelWidth}`"
         >
           <dt-emoji-text-wrapper
-            class="dt-leftbar-row__description"
-            data-qa="dt-leftbar-row-description"
+            class="dt-recipe-leftbar-row__description"
+            data-qa="dt-recipe-leftbar-row-description"
             size="200"
           >
             {{ description }}
@@ -39,22 +39,22 @@
       </a>
       <div
         v-show="!hideActions"
-        class="dt-leftbar-row__omega"
+        class="dt-recipe-leftbar-row__omega"
       >
         <slot name="right" />
-        <div class="dt-leftbar-row__action-container">
+        <div class="dt-recipe-leftbar-row__action-container">
           <dt-badge
             v-if="showUnreadCount"
-            class="dt-leftbar-row__unread-badge"
-            data-qa="dt-leftbar-row-unread-badge"
+            class="dt-recipe-leftbar-row__unread-badge"
+            data-qa="dt-recipe-leftbar-row-unread-badge"
             kind="count"
             type="bulletin"
           >
             {{ unreadCount }}
           </dt-badge>
           <dt-button
-            class="dt-leftbar-row__action"
-            data-qa="dt-leftbar-row-action-button"
+            class="dt-recipe-leftbar-row__action"
+            data-qa="dt-recipe-leftbar-row-action-button"
             :aria-label="menuButtonAriaLabel"
             importance="clear"
             size="xs"
@@ -68,7 +68,7 @@
         </div>
       </div>
     </div>
-    <div class="dt-leftbar-row__bottom">
+    <div class="dt-recipe-leftbar-row__bottom">
       <slot name="timer" />
     </div>
   </div>
@@ -172,11 +172,11 @@ export default {
   computed: {
     leftbarContactCentersRowClasses () {
       return [
-        'dt-leftbar-row',
-        'dt-leftbar-row--contact-centers',
+        'dt-recipe-leftbar-row',
+        'dt-recipe-leftbar-row--contact-centers',
         {
-          'dt-leftbar-row--unread-count': this.showUnreadCount,
-          'dt-leftbar-row--selected': this.selected,
+          'dt-recipe-leftbar-row__unread-count': this.showUnreadCount,
+          'dt-recipe-leftbar-row--selected': this.selected,
         },
       ];
     },
@@ -214,16 +214,12 @@ export default {
 
   methods: {
     adjustLabelWidth () {
-      const labelWidth = this.$el?.querySelector('.dt-leftbar-row__primary')?.clientWidth || 0;
-      const omegaWidth = this.$el?.querySelector('.dt-leftbar-row__omega')?.clientWidth || 0;
-      const alphaWidth = this.$el?.querySelector('.dt-leftbar-row__alpha')?.clientWidth || 0;
+      const labelWidth = this.$el?.querySelector('.dt-recipe-leftbar-row__primary')?.clientWidth || 0;
+      const omegaWidth = this.$el?.querySelector('.dt-recipe-leftbar-row__omega')?.clientWidth || 0;
+      const alphaWidth = this.$el?.querySelector('.dt-recipe-leftbar-row__alpha')?.clientWidth || 0;
       const paddings = 12;
       this.labelWidth = labelWidth - (omegaWidth + alphaWidth + paddings) + 'px';
     },
   },
 };
 </script>
-
-<style lang="less" scoped>
-@import "../style/leftbar_row.less";
-</style>

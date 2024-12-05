@@ -34,10 +34,6 @@ If you don't care about theming and just want to use Dialtone with the default l
 
 ```css
 @import "@dialpad/dialtone/css-default-theme";
-/* If using vue components */
-@import "@dialpad/dialtone/vue2/css";
-/* Or */
-@import "@dialpad/dialtone/vue3/css";
 
 ```
 
@@ -45,10 +41,6 @@ If you don't care about theming and just want to use Dialtone with the default l
 
 ```js
 import "@dialpad/dialtone/css-default-theme";
-/* If using vue components */
-import "@dialpad/dialtone/vue2/css";
-/* Or */
-import "@dialpad/dialtone/vue3/css";
 ```
 
 #### With theming
@@ -59,20 +51,12 @@ If you want to use theming, import from the below path. This file does not inclu
 
 ```css
 @import "@dialpad/dialtone/css";
-/* If using vue components */
-@import "@dialpad/dialtone/vue2/css";
-/* Or */
-@import "@dialpad/dialtone/vue3/css";
 ```
 
 - Javascript
 
 ```js
 import "@dialpad/dialtone/css";
-/* If using vue components */
-import "@dialpad/dialtone/vue2/css";
-/* Or */
-import "@dialpad/dialtone/vue3/css";
 ```
 
 ##### Set theme via setTheme() javascript function (preferred)

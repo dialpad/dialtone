@@ -3,9 +3,9 @@ export const CALLBOX_BADGE_COLORS = {
 };
 
 export const CALLBOX_BORDER_COLORS = {
-  default: 'dt-recipe-callbox--border-default',
-  ai: 'dt-recipe-callbox--border-ai',
-  critical: 'dt-recipe-callbox--border-critical',
+  default: 'dt-recipe-callbox__border-default',
+  ai: 'dt-recipe-callbox__border-ai',
+  critical: 'dt-recipe-callbox__border-critical',
 };
 
 export default {
