@@ -44,7 +44,7 @@ export default {
     aria-valuemax="100"
   >
     <svg
-      class="dt-recipe-attachment-carousel__progress-bar"
+      class="d-recipe-attachment-carousel__progress-bar"
       :style="cssVars"
     >
       <circle
@@ -52,13 +52,13 @@ export default {
         r="8"
         cx="12"
         cy="12"
-        class="dt-recipe-attachment-carousel__progress-bar__circle"
+        class="d-recipe-attachment-carousel__progress-bar__circle"
       />
       <circle
         r="8"
         cx="12"
         cy="12"
-        class="dt-recipe-attachment-carousel__progress-bar__circle"
+        class="d-recipe-attachment-carousel__progress-bar__circle"
       />
     </svg>
   </div>

@@ -1,9 +1,9 @@
 <!-- eslint-disable vue/no-restricted-class -->
 <template>
   <div
-    data-qa="dt-recipe-message-input"
+    data-qa="d-recipe-message-input"
     role="presentation"
-    :class="['dt-recipe-message-input']"
+    :class="['d-recipe-message-input']"
     @dragover.prevent
     @drop.prevent="onDrop"
     @paste="onPaste"
@@ -14,7 +14,7 @@
     <!-- Some wrapper to restrict the height and show the scrollbar -->
     <div
       v-dt-scrollbar
-      class="dt-recipe-message-input__editor-wrapper"
+      class="d-recipe-message-input__editor-wrapper"
       :style="{ 'max-height': maxHeight }"
     >
       <dt-rich-text-editor
@@ -48,9 +48,9 @@
     <!-- @slot Slot for attachment carousel -->
     <slot name="middle" />
     <!-- Section for the bottom UI -->
-    <section class="dt-recipe-message-input__bottom-section">
+    <section class="d-recipe-message-input__bottom-section">
       <!-- Left content -->
-      <div class="dt-recipe-message-input__bottom-section-left">
+      <div class="d-recipe-message-input__bottom-section-left">
         <dt-stack
           direction="row"
           gap="200"
@@ -58,9 +58,9 @@
           <dt-button
             v-if="showImagePicker"
             v-dt-tooltip:top-start="showImagePicker?.tooltipLabel"
-            data-qa="dt-recipe-message-input-image-btn"
+            data-qa="d-recipe-message-input-image-btn"
             size="sm"
-            class="dt-recipe-message-input__button"
+            class="d-recipe-message-input__button"
             kind="muted"
             importance="clear"
             :aria-label="showImagePicker.ariaLabel"
@@ -76,10 +76,10 @@
           </dt-button>
           <dt-input
             ref="messageInputImageUpload"
-            data-qa="dt-recipe-message-input-image-input"
+            data-qa="d-recipe-message-input-image-input"
             accept="image/*, video/*"
             type="file"
-            class="dt-recipe-message-input__image-input"
+            class="d-recipe-message-input__image-input"
             multiple
             hidden
             @input="onImageUpload"
@@ -87,7 +87,7 @@
           <dt-popover
             v-if="showEmojiPicker"
             v-model:open="emojiPickerOpened"
-            data-qa="dt-recipe-message-input-emoji-picker-popover"
+            data-qa="d-recipe-message-input-emoji-picker-popover"
             initial-focus-element="#searchInput"
             padding="none"
           >
@@ -95,9 +95,9 @@
               <dt-button
                 v-dt-tooltip="emojiTooltipMessage"
                 v-bind="attrs"
-                data-qa="dt-recipe-message-input-emoji-picker-btn"
+                data-qa="d-recipe-message-input-emoji-picker-btn"
                 size="sm"
-                class="dt-recipe-message-input__button"
+                class="d-recipe-message-input__button"
                 kind="muted"
                 importance="clear"
                 :aria-label="emojiButtonAriaLabel"
@@ -132,7 +132,7 @@
         </dt-stack>
       </div>
       <!-- Right content -->
-      <div class="dt-recipe-message-input__bottom-section-right">
+      <div class="d-recipe-message-input__bottom-section-right">
         <dt-stack
           direction="row"
           gap="300"
@@ -145,7 +145,7 @@
           <!-- Optionally displayed remaining character counter -->
           <dt-tooltip
             v-if="Boolean(showCharacterLimit)"
-            class="dt-recipe-message-input__remaining-char-tooltip"
+            class="d-recipe-message-input__remaining-char-tooltip"
             placement="top-end"
             :enabled="characterLimitTooltipEnabled"
             :message="showCharacterLimit.message"
@@ -154,8 +154,8 @@
             <template #anchor>
               <p
                 v-show="displayCharacterLimitWarning"
-                class="dt-recipe-message-input__remaining-char"
-                data-qa="dt-recipe-message-input-character-limit"
+                class="d-recipe-message-input__remaining-char"
+                data-qa="d-recipe-message-input-character-limit"
               >
                 {{ showCharacterLimit.count - inputLength }}
               </p>
@@ -165,8 +165,8 @@
           <!-- Cancel button for edit mode -->
           <dt-button
             v-if="showCancel"
-            data-qa="dt-recipe-message-input-cancel-button"
-            class="dt-recipe-message-input__button dt-recipe-message-input__cancel-button"
+            data-qa="d-recipe-message-input-cancel-button"
+            class="d-recipe-message-input__button d-recipe-message-input__cancel-button"
             size="sm"
             kind="muted"
             importance="clear"
@@ -183,14 +183,14 @@
             <dt-button
               v-if="showSend"
               v-dt-tooltip:top-end="showSend?.tooltipLabel"
-              data-qa="dt-recipe-message-input-send-btn"
+              data-qa="d-recipe-message-input-send-btn"
               size="sm"
               kind="default"
               importance="primary"
               :class="[
-                'dt-recipe-message-input__button dt-recipe-message-input__send-button',
+                'd-recipe-message-input__button d-recipe-message-input__send-button',
                 {
-                  'dt-recipe-message-input__send-button--disabled': isSendDisabled,
+                  'd-recipe-message-input__send-button--disabled': isSendDisabled,
                   'd-btn--icon-only': showSendIcon,
                 },
               ]"

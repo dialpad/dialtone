@@ -1,8 +1,8 @@
 <template>
   <time
-    data-qa="dt-recipe-time-pill"
+    data-qa="d-recipe-time-pill"
     :dateTime="dateTime"
-    class="dt-recipe-time-pill"
+    class="d-recipe-time-pill"
   >
     {{ dateTimeDisplay }}
   </time>

@@ -1,13 +1,13 @@
 <template>
   <div
-    class="dt-recipe-ivr-node"
+    class="d-recipe-ivr-node"
     v-on="$listeners"
   >
     <div
       v-if="dtmfKey"
       data-qa="dt-top-connector-dtmf"
-      class="dt-recipe-ivr-node__connector dt-recipe-ivr-node__connector-dtmf"
-      :class="{ 'dt-recipe-ivr-node__connector-dtmf--selected': isSelected }"
+      class="d-recipe-ivr-node__connector d-recipe-ivr-node__connector-dtmf"
+      :class="{ 'd-recipe-ivr-node__connector-dtmf--selected': isSelected }"
     >
       {{ dtmfKey }}
     </div>
@@ -18,8 +18,8 @@
     <div
       v-if="!dtmfKey && !$slots.connector"
       data-qa="dt-top-connector"
-      class="dt-recipe-ivr-node__connector"
-      :class="{ 'dt-recipe-ivr-node__connector--selected': isSelected }"
+      class="d-recipe-ivr-node__connector"
+      :class="{ 'd-recipe-ivr-node__connector--selected': isSelected }"
     />
     <dt-card
       content-class="d-bt d-bc-black-300 d-px12 d-pt8 d-pb12"
@@ -39,7 +39,7 @@
     >
       <template #header>
         <!-- node label and icon section on left of the header -->
-        <div class="dt-recipe-ivr-node__header-left">
+        <div class="d-recipe-ivr-node__header-left">
           <dt-button
             :aria-label="nodeType"
             importance="clear"
@@ -50,12 +50,12 @@
               <component
                 :is="nodeIcon"
                 size="200"
-                :class="['', { 'dt-recipe-ivr-node__goto-icon': isGotoNode }]"
+                :class="['', { 'd-recipe-ivr-node__goto-icon': isGotoNode }]"
               />
             </template>
           </dt-button>
           <p
-            class="dt-recipe-ivr-node__label"
+            class="d-recipe-ivr-node__label"
             data-qa="ivr-node-label"
           >
             {{ nodeLabel }}
@@ -79,7 +79,7 @@
             </dt-button>
           </template>
           <template #list="{ close }">
-            <div class="dt-recipe-ivr-node__dropdown-list">
+            <div class="d-recipe-ivr-node__dropdown-list">
               <slot
                 name="menuItems"
                 :close="close"

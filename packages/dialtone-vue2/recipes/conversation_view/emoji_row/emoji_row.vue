@@ -1,12 +1,12 @@
 <template>
-  <span class="dt-recipe-emoji-row">
+  <span class="d-recipe-emoji-row">
     <span
       v-for="reaction in reactions"
       :key="reaction.unicodeOutput"
       :reaction="reaction"
     >
       <dt-tooltip
-        class="dt-recipe-emoji-row__tooltip"
+        class="d-recipe-emoji-row__tooltip"
         content-class="d-wmx464"
         sticky="popper"
         @shown="(shown) => emojiHovered(reaction, shown)"
@@ -22,20 +22,20 @@
             size="sm"
             data-qa="feed-item-reaction-button"
             :class="[
-              'dt-recipe-emoji-row__reaction',
-              reaction.isSelected ? 'dt-recipe-emoji-row__reaction--selected' : '',
+              'd-recipe-emoji-row__reaction',
+              reaction.isSelected ? 'd-recipe-emoji-row__reaction--selected' : '',
             ]"
             :aria-label="reaction.ariaLabel"
             :attrs="attrs"
             @click="emojiClicked(reaction)"
           >
-            <span class="dt-recipe-emoji-row__emoji">
+            <span class="d-recipe-emoji-row__emoji">
               <dt-emoji
                 size="200"
                 :code="reaction.emojiUnicodeOrShortname"
               />
             </span>
-            <span class="dt-recipe-emoji-row__reaction-number">
+            <span class="d-recipe-emoji-row__reaction-number">
               {{ reaction.num }}
             </span>
           </dt-button>

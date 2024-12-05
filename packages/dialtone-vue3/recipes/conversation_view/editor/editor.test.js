@@ -44,20 +44,20 @@ const _setChildWrappers = () => {
   editor = wrapper.find('[data-qa="dt-rich-text-editor"]').find('div[contenteditable]');
 
   // buttons
-  boldFormatBtn = wrapper.find('[data-qa="dt-recipe-editor-bold-btn"]');
-  italicsFormatBtn = wrapper.find('[data-qa="dt-recipe-editor-italics-btn"]');
-  underlineFormatBtn = wrapper.find('[data-qa="dt-recipe-editor-underline-btn"]');
-  strikeFormatBtn = wrapper.find('[data-qa="dt-recipe-editor-strike-btn"]');
-  listItemsFormatBtn = wrapper.find('[data-qa="dt-recipe-editor-list-items-btn"]');
-  addLinkBtn = wrapper.find('[data-qa="dt-recipe-editor-add-link-btn"]');
-  alignLeftBtn = wrapper.find('[data-qa="dt-recipe-editor-align-left-btn"]');
-  alignCenterBtn = wrapper.find('[data-qa="dt-recipe-editor-align-center-btn"]');
-  alignRightBtn = wrapper.find('[data-qa="dt-recipe-editor-align-right-btn"]');
-  alignJustifyBtn = wrapper.find('[data-qa="dt-recipe-editor-align-justify-btn"]');
-  orderedListBtn = wrapper.find('[data-qa="dt-recipe-editor-ordered-list-items-btn"]');
-  blockquoteBtn = wrapper.find('[data-qa="dt-recipe-editor-blockquote-btn"]');
-  codeblockBtn = wrapper.find('[data-qa="dt-recipe-editor-code-block-btn"]');
-  quickRepliesBtn = wrapper.find('[data-qa="dt-recipe-editor-quick-replies-btn"]');
+  boldFormatBtn = wrapper.find('[data-qa="d-recipe-editor-bold-btn"]');
+  italicsFormatBtn = wrapper.find('[data-qa="d-recipe-editor-italics-btn"]');
+  underlineFormatBtn = wrapper.find('[data-qa="d-recipe-editor-underline-btn"]');
+  strikeFormatBtn = wrapper.find('[data-qa="d-recipe-editor-strike-btn"]');
+  listItemsFormatBtn = wrapper.find('[data-qa="d-recipe-editor-list-items-btn"]');
+  addLinkBtn = wrapper.find('[data-qa="d-recipe-editor-add-link-btn"]');
+  alignLeftBtn = wrapper.find('[data-qa="d-recipe-editor-align-left-btn"]');
+  alignCenterBtn = wrapper.find('[data-qa="d-recipe-editor-align-center-btn"]');
+  alignRightBtn = wrapper.find('[data-qa="d-recipe-editor-align-right-btn"]');
+  alignJustifyBtn = wrapper.find('[data-qa="d-recipe-editor-align-justify-btn"]');
+  orderedListBtn = wrapper.find('[data-qa="d-recipe-editor-ordered-list-items-btn"]');
+  blockquoteBtn = wrapper.find('[data-qa="d-recipe-editor-blockquote-btn"]');
+  codeblockBtn = wrapper.find('[data-qa="d-recipe-editor-code-block-btn"]');
+  quickRepliesBtn = wrapper.find('[data-qa="d-recipe-editor-quick-replies-btn"]');
 };
 
 const _mountWrapper = () => {
@@ -165,31 +165,31 @@ describe('DtRecipeEditor tests', () => {
 
       it('should not appear in the formatting options', () => {
         expect(wrapper
-          .find('[data-qa="dt-recipe-editor-bold-btn"]')
+          .find('[data-qa="d-recipe-editor-bold-btn"]')
           .exists()).toBe(false);
 
         expect(wrapper
-          .find('[data-qa="dt-recipe-editor-italics-btn"]')
+          .find('[data-qa="d-recipe-editor-italics-btn"]')
           .exists()).toBe(true);
 
         expect(wrapper
-          .find('[data-qa="dt-recipe-editor-underline-btn"]')
+          .find('[data-qa="d-recipe-editor-underline-btn"]')
           .exists()).toBe(true);
 
         expect(wrapper
-          .find('[data-qa="dt-recipe-editor-strike-btn"]')
+          .find('[data-qa="d-recipe-editor-strike-btn"]')
           .exists()).toBe(true);
 
         expect(wrapper
-          .find('[data-qa="dt-recipe-editor-list-items-btn"]')
+          .find('[data-qa="d-recipe-editor-list-items-btn"]')
           .exists()).toBe(true);
 
         expect(wrapper
-          .find('[data-qa="dt-recipe-editor-quick-replies-btn"]')
+          .find('[data-qa="d-recipe-editor-quick-replies-btn"]')
           .exists()).toBe(true);
 
         expect(wrapper
-          .find('[data-qa="dt-recipe-editor-add-link-btn"]')
+          .find('[data-qa="d-recipe-editor-add-link-btn"]')
           .exists()).toBe(true);
       });
     });
@@ -204,31 +204,31 @@ describe('DtRecipeEditor tests', () => {
 
       it('should not appear in the formatting options', () => {
         expect(wrapper
-          .find('[data-qa="dt-recipe-editor-bold-btn"]')
+          .find('[data-qa="d-recipe-editor-bold-btn"]')
           .exists()).toBe(true);
 
         expect(wrapper
-          .find('[data-qa="dt-recipe-editor-italics-btn"]')
+          .find('[data-qa="d-recipe-editor-italics-btn"]')
           .exists()).toBe(false);
 
         expect(wrapper
-          .find('[data-qa="dt-recipe-editor-underline-btn"]')
+          .find('[data-qa="d-recipe-editor-underline-btn"]')
           .exists()).toBe(true);
 
         expect(wrapper
-          .find('[data-qa="dt-recipe-editor-strike-btn"]')
+          .find('[data-qa="d-recipe-editor-strike-btn"]')
           .exists()).toBe(true);
 
         expect(wrapper
-          .find('[data-qa="dt-recipe-editor-list-items-btn"]')
+          .find('[data-qa="d-recipe-editor-list-items-btn"]')
           .exists()).toBe(true);
 
         expect(wrapper
-          .find('[data-qa="dt-recipe-editor-quick-replies-btn"]')
+          .find('[data-qa="d-recipe-editor-quick-replies-btn"]')
           .exists()).toBe(true);
 
         expect(wrapper
-          .find('[data-qa="dt-recipe-editor-add-link-btn"]')
+          .find('[data-qa="d-recipe-editor-add-link-btn"]')
           .exists()).toBe(true);
       });
     });
@@ -243,31 +243,31 @@ describe('DtRecipeEditor tests', () => {
 
       it('should not appear in the formatting options', () => {
         expect(wrapper
-          .find('[data-qa="dt-recipe-editor-bold-btn"]')
+          .find('[data-qa="d-recipe-editor-bold-btn"]')
           .exists()).toBe(true);
 
         expect(wrapper
-          .find('[data-qa="dt-recipe-editor-italics-btn"]')
+          .find('[data-qa="d-recipe-editor-italics-btn"]')
           .exists()).toBe(true);
 
         expect(wrapper
-          .find('[data-qa="dt-recipe-editor-underline-btn"]')
+          .find('[data-qa="d-recipe-editor-underline-btn"]')
           .exists()).toBe(false);
 
         expect(wrapper
-          .find('[data-qa="dt-recipe-editor-strike-btn"]')
+          .find('[data-qa="d-recipe-editor-strike-btn"]')
           .exists()).toBe(true);
 
         expect(wrapper
-          .find('[data-qa="dt-recipe-editor-list-items-btn"]')
+          .find('[data-qa="d-recipe-editor-list-items-btn"]')
           .exists()).toBe(true);
 
         expect(wrapper
-          .find('[data-qa="dt-recipe-editor-quick-replies-btn"]')
+          .find('[data-qa="d-recipe-editor-quick-replies-btn"]')
           .exists()).toBe(true);
 
         expect(wrapper
-          .find('[data-qa="dt-recipe-editor-add-link-btn"]')
+          .find('[data-qa="d-recipe-editor-add-link-btn"]')
           .exists()).toBe(true);
       });
     });
@@ -282,31 +282,31 @@ describe('DtRecipeEditor tests', () => {
 
       it('should not appear in the formatting options', () => {
         expect(wrapper
-          .find('[data-qa="dt-recipe-editor-bold-btn"]')
+          .find('[data-qa="d-recipe-editor-bold-btn"]')
           .exists()).toBe(true);
 
         expect(wrapper
-          .find('[data-qa="dt-recipe-editor-italics-btn"]')
+          .find('[data-qa="d-recipe-editor-italics-btn"]')
           .exists()).toBe(true);
 
         expect(wrapper
-          .find('[data-qa="dt-recipe-editor-underline-btn"]')
+          .find('[data-qa="d-recipe-editor-underline-btn"]')
           .exists()).toBe(true);
 
         expect(wrapper
-          .find('[data-qa="dt-recipe-editor-strike-btn"]')
+          .find('[data-qa="d-recipe-editor-strike-btn"]')
           .exists()).toBe(false);
 
         expect(wrapper
-          .find('[data-qa="dt-recipe-editor-list-items-btn"]')
+          .find('[data-qa="d-recipe-editor-list-items-btn"]')
           .exists()).toBe(true);
 
         expect(wrapper
-          .find('[data-qa="dt-recipe-editor-quick-replies-btn"]')
+          .find('[data-qa="d-recipe-editor-quick-replies-btn"]')
           .exists()).toBe(true);
 
         expect(wrapper
-          .find('[data-qa="dt-recipe-editor-add-link-btn"]')
+          .find('[data-qa="d-recipe-editor-add-link-btn"]')
           .exists()).toBe(true);
       });
     });
@@ -321,31 +321,31 @@ describe('DtRecipeEditor tests', () => {
 
       it('should not appear in the formatting options', () => {
         expect(wrapper
-          .find('[data-qa="dt-recipe-editor-bold-btn"]')
+          .find('[data-qa="d-recipe-editor-bold-btn"]')
           .exists()).toBe(true);
 
         expect(wrapper
-          .find('[data-qa="dt-recipe-editor-italics-btn"]')
+          .find('[data-qa="d-recipe-editor-italics-btn"]')
           .exists()).toBe(true);
 
         expect(wrapper
-          .find('[data-qa="dt-recipe-editor-underline-btn"]')
+          .find('[data-qa="d-recipe-editor-underline-btn"]')
           .exists()).toBe(true);
 
         expect(wrapper
-          .find('[data-qa="dt-recipe-editor-strike-btn"]')
+          .find('[data-qa="d-recipe-editor-strike-btn"]')
           .exists()).toBe(true);
 
         expect(wrapper
-          .find('[data-qa="dt-recipe-editor-list-items-btn"]')
+          .find('[data-qa="d-recipe-editor-list-items-btn"]')
           .exists()).toBe(false);
 
         expect(wrapper
-          .find('[data-qa="dt-recipe-editor-quick-replies-btn"]')
+          .find('[data-qa="d-recipe-editor-quick-replies-btn"]')
           .exists()).toBe(true);
 
         expect(wrapper
-          .find('[data-qa="dt-recipe-editor-add-link-btn"]')
+          .find('[data-qa="d-recipe-editor-add-link-btn"]')
           .exists()).toBe(true);
       });
     });
@@ -360,31 +360,31 @@ describe('DtRecipeEditor tests', () => {
 
       it('should not appear in the formatting options', () => {
         expect(wrapper
-          .find('[data-qa="dt-recipe-editor-bold-btn"]')
+          .find('[data-qa="d-recipe-editor-bold-btn"]')
           .exists()).toBe(true);
 
         expect(wrapper
-          .find('[data-qa="dt-recipe-editor-italics-btn"]')
+          .find('[data-qa="d-recipe-editor-italics-btn"]')
           .exists()).toBe(true);
 
         expect(wrapper
-          .find('[data-qa="dt-recipe-editor-underline-btn"]')
+          .find('[data-qa="d-recipe-editor-underline-btn"]')
           .exists()).toBe(true);
 
         expect(wrapper
-          .find('[data-qa="dt-recipe-editor-strike-btn"]')
+          .find('[data-qa="d-recipe-editor-strike-btn"]')
           .exists()).toBe(true);
 
         expect(wrapper
-          .find('[data-qa="dt-recipe-editor-list-items-btn"]')
+          .find('[data-qa="d-recipe-editor-list-items-btn"]')
           .exists()).toBe(true);
 
         expect(wrapper
-          .find('[data-qa="dt-recipe-editor-quick-replies-btn"]')
+          .find('[data-qa="d-recipe-editor-quick-replies-btn"]')
           .exists()).toBe(false);
 
         expect(wrapper
-          .find('[data-qa="dt-recipe-editor-add-link-btn"]')
+          .find('[data-qa="d-recipe-editor-add-link-btn"]')
           .exists()).toBe(true);
       });
     });
@@ -399,31 +399,31 @@ describe('DtRecipeEditor tests', () => {
 
       it('should not appear in the formatting options', () => {
         expect(wrapper
-          .find('[data-qa="dt-recipe-editor-bold-btn"]')
+          .find('[data-qa="d-recipe-editor-bold-btn"]')
           .exists()).toBe(true);
 
         expect(wrapper
-          .find('[data-qa="dt-recipe-editor-italics-btn"]')
+          .find('[data-qa="d-recipe-editor-italics-btn"]')
           .exists()).toBe(true);
 
         expect(wrapper
-          .find('[data-qa="dt-recipe-editor-underline-btn"]')
+          .find('[data-qa="d-recipe-editor-underline-btn"]')
           .exists()).toBe(true);
 
         expect(wrapper
-          .find('[data-qa="dt-recipe-editor-strike-btn"]')
+          .find('[data-qa="d-recipe-editor-strike-btn"]')
           .exists()).toBe(true);
 
         expect(wrapper
-          .find('[data-qa="dt-recipe-editor-list-items-btn"]')
+          .find('[data-qa="d-recipe-editor-list-items-btn"]')
           .exists()).toBe(true);
 
         expect(wrapper
-          .find('[data-qa="dt-recipe-editor-quick-replies-btn"]')
+          .find('[data-qa="d-recipe-editor-quick-replies-btn"]')
           .exists()).toBe(true);
 
         expect(wrapper
-          .find('[data-qa="dt-recipe-editor-add-link-btn"]')
+          .find('[data-qa="d-recipe-editor-add-link-btn"]')
           .exists()).toBe(false);
       });
     });

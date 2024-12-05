@@ -8,8 +8,8 @@ describe('DtRecipeFeedItemPill Tests', function () {
   const MOCK_ARIA_LABEL = 'Click to expand';
   const MOCK_ICON_SLOT = '<dt-icon-video />';
   const DATA_QA = {
-    PILL: 'dt-recipe-feed-item-pill',
-    PILL_ICON: 'dt-recipe-feed-item-pill__icon',
+    PILL: 'd-recipe-feed-item-pill',
+    PILL_ICON: 'd-recipe-feed-item-pill__icon',
     CONTENT_ELEMENT: 'content-element',
   };
 
