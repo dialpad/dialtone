@@ -4,7 +4,7 @@ description: Collection of customizable symbols and sizes
 status: ready
 thumb: true
 image: assets/images/components/icon.png
-storybook: https://dialtone.dialpad.com/vue/?path=/docs/components-icon--default
+storybook: https://dialtone.dialpad.com/vue/?path=/story/components-icon--default
 figma_url: https://www.figma.com/file/zz40wi0uW9MvaJ5RuhcRZR/DT-Core%3A-Icons-7?node-id=1473%3A3757&viewport=-168%2C479%2C1&t=OhX4ilCDvb7Tqkx4-11
 ---
 
@@ -12,7 +12,7 @@ figma_url: https://www.figma.com/file/zz40wi0uW9MvaJ5RuhcRZR/DT-Core%3A-Icons-7?
   <dt-icon-user-plus />
 </code-well-header>
 
-Check out our complete icon collection in the [icon catalog](/design/icons/#icon-catalog).
+Check out our complete icon collection in the [icon catalog](/design/icons/index.md#icon-catalog).
 
 ## Usage
 
@@ -141,7 +141,7 @@ When setting the color of an icon take these into considaration:
 
 <div class="d-d-grid d-g24 d-g-cols3 md:d-g-cols1">
 
-We encourage utilizing the [Stack component](/components/stack/) for aligning elements both horizontally and vertically.
+We encourage utilizing the [Stack component](/components/stack.md) for aligning elements both horizontally and vertically.
 
 <div class="d-gc2">
 <code-well-header>
@@ -172,7 +172,7 @@ We encourage utilizing the [Stack component](/components/stack/) for aligning el
 
 - Icons contrast guidelines are the same as Typography.
 
-- Avoid using icons as clickable elements; instead, use the [Icon Button](/components/button.html#icon-only) for interactive actions.
+- Avoid using icons as clickable elements; instead, use the [Icon Button](/components/button.md#icon-only) for interactive actions.
 
 ## Sizes
 

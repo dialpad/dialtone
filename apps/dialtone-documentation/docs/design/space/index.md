@@ -13,13 +13,13 @@ Spacing design tokens focus on controlling **spatial relationships**; that is, t
 
 ### Size
 
-[Size](/design/size/) design tokens define intrinsic **dimensions** of UI components. Example CSS properties they correspond to: `width`, `height`, `border-radius`, `border-width`, positioning properties, i.e. `top`, `left`, etc.
+[Size](/design/size/index.md) design tokens define intrinsic **dimensions** of UI components. Example CSS properties they correspond to: `width`, `height`, `border-radius`, `border-width`, positioning properties, i.e. `top`, `left`, etc.
 
 ## Usage
 
 Use spacing units, when [stacking elements](#stacking) or when adding [padding](#padding) or margin.
 
-When setting the scale of an element, use [Size](/design/sizing/) units.
+When setting the scale of an element, use [Size](/design/size/index.md) units.
 
 ### Setting a specific spacing
 
@@ -155,7 +155,7 @@ Avoid using `margin`, which adds space outside the element and can affect the la
 
 ## Tokens
 
-Here are some frequently used tokens, don't use values outside the recommended range for specific types of spacing. For a complete list, visit the [Spacing Tokens](/tokens/space) section.
+Here are some frequently used tokens, don't use values outside the recommended range for specific types of spacing. For a complete list, visit the [Spacing Tokens](/tokens/index.md#space) section.
 
 <token-table category="space" :tokenList="true" :tokens="tokens" theme="light" />
 

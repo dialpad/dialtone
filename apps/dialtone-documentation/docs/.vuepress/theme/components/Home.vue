@@ -94,10 +94,10 @@
           <router-link class="d-link" to="/components/">
             Browse CSS components
           </router-link>
-          <a class="d-link" href="https://dialtone.dialpad.com/vue" target="_blank" rel="noopener noreferrer">
+          <a class="d-link" href="https://dialtone.dialpad.com/vue/index.html?path=/docs/welcome--docs" target="_blank" rel="noopener noreferrer">
             Browse Vue 2 components
           </a>
-          <a class="d-link" href="https://dialtone.dialpad.com/vue3" target="_blank" rel="noopener noreferrer">
+          <a class="d-link" href="https://dialtone.dialpad.com/vue3/index.html?path=/docs/welcome--docs" target="_blank" rel="noopener noreferrer">
             Browse Vue 3 components
           </a>
         </dt-stack>

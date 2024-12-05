@@ -91,11 +91,6 @@ Use `fv:d-bgg-{from|to}-{color}` to change an element's background gradient star
 <button class="d-bgg-from-purple-300 fv:d-bgg-from-purple-300 d-bgg-to-magenta-100 fv:d-bgg-to-purple-500">...</button>
 ```
 
-<script setup>
-  import { gradients } from '@data/backgrounds.json';
-  import { base as baseColors} from '@data/colors.json';
-</script>
-
 ## Directions
 
 To create a background gradient, first declare the desired gradient and, if applicable, the direction. All classes with directions are linear gradients. Radial gradients start from the center and work out to the edge. Conic gradients progressively work around a circle.
@@ -131,7 +126,7 @@ The starting stop (`d-bgg-from-{color}`) should be declared. Optionally an endin
                           <div class="d-fl-grow1 d-code--sm">
                               <span v-if="direction === 'from'">
                                 --bgg-from-opacity: 100%;<br/>
-                                --bgg-from: hsla(var(--{{ color }}-{{ stop }}-h) var(--{{ color }}-{{ stop }}-s) var(--{{ color }}-{{ stop }}-l) / var(----bgg-from-opacity)) !important;<br/>
+                                --bgg-from: hsla(var(--{{ color }}-{{ stop }}-h) var(--{{ color }}-{{ stop }}-s) var(--{{ color }}-{{ stop }}-l) / var(--bgg-from-opacity)) !important;<br/>
                                 --bgg-to: hsla(var(--{{ color }}-{{ stop }}-h) var(--{{ color }}-{{ stop }}-s) var(--{{ color }}-{{ stop }}-l) / 0%) !important;
                               </span>
                               <span v-else-if="direction === 'to'">
@@ -152,3 +147,9 @@ The starting stop (`d-bgg-from-{color}`) should be declared. Optionally an endin
     </template>
   </utility-class-table>
 </div>
+
+<script setup>
+  import { gradients } from '@data/backgrounds.json';
+  import { base } from '@data/colors.json';
+  const baseColors = base.lightMode;
+</script>
