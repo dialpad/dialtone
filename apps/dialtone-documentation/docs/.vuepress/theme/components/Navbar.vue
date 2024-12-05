@@ -177,6 +177,8 @@ import { onMounted, onUnmounted, inject, computed } from 'vue';
 import { setTheme } from '@dialpad/dialtone-tokens/themes/config';
 import DpLight from '@dialpad/dialtone-tokens/themes/dp-light';
 import DpDark from '@dialpad/dialtone-tokens/themes/dp-dark';
+// import DpDecaLight from '@dialpad/dialtone-tokens/themes/dp-deca-light';
+// import DpDecaDark from '@dialpad/dialtone-tokens/themes/dp-deca-dark';
 
 defineProps({
   items: {
