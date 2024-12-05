@@ -36,18 +36,18 @@
 }
 
 .dt-recipe-callbar-button-with-popover__button {
-  .d-tab--selected::after,
-  .d-tab--selected:hover::after {
+  &.d-tab--selected::after,
+  &.d-tab--selected:hover::after {
     --tab--bgc: var(--dt-color-surface-contrast);
   }
 
-  .tab-group {
+  &.tab-group {
     display: flex;
     flex-direction: column;
     height: 100%;
   }
 
-  .tab-content {
+  &.tab-content {
     flex: 1 1 100%;
     overflow-y: auto;
   }
