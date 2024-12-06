@@ -246,10 +246,8 @@ const toggleTheme = () => {
 
 const toggleBrand = () => {
   const currentIndex = brands.indexOf(currentBrand.value);
-  console.log(currentIndex);
   const nextIndex = (currentIndex + 1) % brands.length;
   currentBrand.value = brands[nextIndex];
-  console.log(brands[nextIndex]);
   setCssForBrand(currentBrand.value);
 };
 
@@ -269,7 +267,6 @@ const setCssForBrand = (currentBrand) => {
   if (theme === 'system') {
     mediaQuery.matches ? theme = 'dark' : theme = 'light';
   }
-  console.log(currentBrand);
   if (currentBrand === 'deca') {
     theme === 'dark' ? setTheme(DpDecaDark) : setTheme(DpDecaLight);
   } else if (currentBrand === 'tmobile') {
