@@ -1,7 +1,7 @@
 export const FEED_ROW_STATE_BACKGROUND_COLOR = {
   NORMAL: '',
-  SEARCHED: 'dt-feed-item-row--state-searched',
-  ERROR: 'dt-feed-item-row--state-error',
+  SEARCHED: 'dt-recipe-feed-item-row__state--searched',
+  ERROR: 'dt-recipe-feed-item-row__state--error',
 };
 
 export const DEFAULT_FEED_ROW_STATE = 'NORMAL';

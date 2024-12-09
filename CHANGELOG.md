@@ -1,3 +1,16 @@
+## [9.86.1](https://github.com/dialpad/dialtone/compare/dialtone/v9.86.0...dialtone/v9.86.1) (2024-12-03)
+
+
+### Bug Fixes
+
+* **Tokens:** DLT-1961 output font related tokens as rem instead of px ([#576](https://github.com/dialpad/dialtone/issues/576)) ([7241f65](https://github.com/dialpad/dialtone/commit/7241f65f7e7538dea1fd21fc5c4c2a96297f5514))
+
+
+### Documentation
+
+* DLT-1799 move SB to docs - Tabs to Validation Messages ([#565](https://github.com/dialpad/dialtone/issues/565)) ([e78aece](https://github.com/dialpad/dialtone/commit/e78aecebc94c1c160637401bc82efa17e84f24a0))
+* NO-JIRA fix broken links ([#572](https://github.com/dialpad/dialtone/issues/572)) ([98038c0](https://github.com/dialpad/dialtone/commit/98038c08a08df304bd0254957087e1406172ad33))
+
 # [9.86.0](https://github.com/dialpad/dialtone/compare/dialtone/v9.85.2...dialtone/v9.86.0) (2024-11-28)
 
 

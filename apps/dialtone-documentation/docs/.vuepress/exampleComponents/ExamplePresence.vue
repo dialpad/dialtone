@@ -1,5 +1,5 @@
 <template>
-  <div class="dt-leftbar-row dt-leftbar-row__primary">
+  <div class="dt-recipe-leftbar-row dt-recipe-leftbar-row__primary">
     <div
       class="d-presence"
     >

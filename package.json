@@ -1,6 +1,6 @@
 {
   "name": "@dialpad/dialtone",
-  "version": "9.86.0",
+  "version": "9.86.1",
   "packageManager": "pnpm@9.9.0",
   "description": "Dialpad's Dialtone design system monorepo",
   "scripts": {
@@ -73,7 +73,6 @@
       "import": "./dist/vue2/dialtone-vue.js",
       "require": "./dist/vue2/dialtone-vue.cjs"
     },
-    "./vue2/css": "./dist/vue2/style.css",
     "./vue2/*": {
       "types": "./dist/vue2/types/index.d.ts",
       "import": "./dist/vue2/*.js",
@@ -84,7 +83,6 @@
       "import": "./dist/vue3/dialtone-vue.js",
       "require": "./dist/vue3/dialtone-vue.cjs"
     },
-    "./vue3/css": "./dist/vue3/style.css",
     "./vue3/*": {
       "types": "./dist/vue3/types/index.d.ts",
       "import": "./dist/vue3/*.js",

@@ -1,8 +1,8 @@
 <template>
   <time
-    data-qa="dt-time-pill"
+    data-qa="dt-recipe-time-pill"
     :dateTime="dateTime"
-    class="dt-time-pill"
+    class="dt-recipe-time-pill"
   >
     {{ dateTimeDisplay }}
   </time>
@@ -42,15 +42,3 @@ export default {
   },
 };
 </script>
-
-<style lang="less">
-.dt-time-pill {
-  color: var(--dt-color-foreground-primary);
-  border-radius: var(--dt-size-radius-pill);
-  line-height: var(--dt-font-line-height-300);
-  font-size: var(--dt-font-size-100);
-  border: var(--dt-size-border-100) solid var(--dt-color-border-default);
-  background-color: var(--dt-color-surface-primary);
-  padding: var(--dt-space-300) var(--dt-space-500);
-}
-</style>

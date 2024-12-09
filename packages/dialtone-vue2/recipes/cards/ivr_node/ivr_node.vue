@@ -1,13 +1,13 @@
 <template>
   <div
-    class="ivr_node"
+    class="dt-recipe-ivr-node"
     v-on="$listeners"
   >
     <div
       v-if="dtmfKey"
       data-qa="dt-top-connector-dtmf"
-      class="ivr-connector ivr-connector--dtmf"
-      :class="{ 'ivr-connector--dtmf--selected': isSelected }"
+      class="dt-recipe-ivr-node__connector dt-recipe-ivr-node__connector-dtmf"
+      :class="{ 'dt-recipe-ivr-node__connector-dtmf--selected': isSelected }"
     >
       {{ dtmfKey }}
     </div>
@@ -18,8 +18,8 @@
     <div
       v-if="!dtmfKey && !$slots.connector"
       data-qa="dt-top-connector"
-      class="ivr-connector"
-      :class="{ 'ivr-connector--selected': isSelected }"
+      class="dt-recipe-ivr-node__connector"
+      :class="{ 'dt-recipe-ivr-node__connector--selected': isSelected }"
     />
     <dt-card
       content-class="d-bt d-bc-black-300 d-px12 d-pt8 d-pb12"
@@ -39,7 +39,7 @@
     >
       <template #header>
         <!-- node label and icon section on left of the header -->
-        <div class="ivr_node__header-left">
+        <div class="dt-recipe-ivr-node__header-left">
           <dt-button
             :aria-label="nodeType"
             importance="clear"
@@ -50,12 +50,12 @@
               <component
                 :is="nodeIcon"
                 size="200"
-                :class="['', { 'ivr_node__goto_icon': isGotoNode }]"
+                :class="['', { 'dt-recipe-ivr-node__goto-icon': isGotoNode }]"
               />
             </template>
           </dt-button>
           <p
-            class="ivr_node__label"
+            class="dt-recipe-ivr-node__label"
             data-qa="ivr-node-label"
           >
             {{ nodeLabel }}
@@ -79,7 +79,7 @@
             </dt-button>
           </template>
           <template #list="{ close }">
-            <div class="ivr_node__dropdown-list">
+            <div class="dt-recipe-ivr-node__dropdown-list">
               <slot
                 name="menuItems"
                 :close="close"
@@ -237,60 +237,3 @@ export default {
   },
 };
 </script>
-
-<style lang="less">
-.ivr_node {
-  width: 280px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  cursor: pointer;
-
-  &__header-left {
-    display: flex;
-    align-items: center;
-  }
-
-  &__label {
-    font-size: var(--dt-font-size-200);
-    font-weight: var(--dt-font-weight-bold);
-  }
-
-  &__dropdown-list {
-    width: var(--dt-size-825);
-  }
-}
-
-.ivr_node__goto_icon {
-  transform: rotate(90deg);
-}
-
-.ivr-connector {
-  z-index: var(--zi-base);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border-color: var(--dt-color-purple-600);
-  background-color: var(--dt-color-purple-600);
-  width: var(--dt-size-400);
-  height: var(--dt-size-400);
-  border-radius: var(--dt-size-radius-circle);
-  margin-bottom: var(--dt-space-300-negative);
-
-  &--selected {
-    margin-bottom: var(--dt-space-400-negative);
-  }
-
-  &.ivr-connector--dtmf {
-    width: var(--dt-size-550);
-    height: var(--dt-size-550);
-    margin-bottom: var(--dt-space-450-negative);
-    color: var(--dt-color-neutral-white);
-    font-size: var(--dt-font-size-200);
-
-    &--selected {
-      margin-bottom: var(--dt-space-500-negative);
-    }
-  }
-}
-</style>

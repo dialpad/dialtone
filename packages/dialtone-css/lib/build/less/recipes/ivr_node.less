@@ -1,0 +1,56 @@
+.dt-recipe-ivr-node {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 280px; /* stylelint-disable-line meowtec/no-px */
+  cursor: pointer;
+}
+
+.dt-recipe-ivr-node__header-left {
+  display: flex;
+  align-items: center;
+}
+
+.dt-recipe-ivr-node__label {
+  font-weight: var(--dt-font-weight-bold);
+  font-size: var(--dt-font-size-200);
+}
+
+.dt-recipe-ivr-node__dropdown-list {
+  width: var(--dt-size-825);
+}
+
+.dt-recipe-ivr-node__goto-icon {
+  transform: rotate(90deg);
+}
+
+.dt-recipe-ivr-node__connector {
+  z-index: var(--zi-base);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--dt-size-400);
+  height: var(--dt-size-400);
+  margin-bottom: var(--dt-space-300-negative);
+  background-color: var(--dt-color-purple-600);
+  border-color: var(--dt-color-purple-600);
+  border-radius: var(--dt-size-radius-circle);
+}
+
+.dt-recipe-ivr-node__connector--selected {
+  margin-bottom: var(--dt-space-400-negative);
+}
+
+.dt-recipe-ivr-node__connector-dtmf {
+  width: var(--dt-size-550);
+  height: var(--dt-size-550);
+  margin-bottom: var(--dt-space-450-negative);
+  color: var(--dt-color-neutral-white);
+  font-size: var(--dt-font-size-200);
+
+  .dt-recipe-ivr-node__connector--selected {
+    margin-bottom: var(--dt-space-500-negative);
+  }
+}
+
+

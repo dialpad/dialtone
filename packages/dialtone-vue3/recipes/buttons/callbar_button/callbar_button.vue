@@ -233,33 +233,3 @@ export default {
   },
 };
 </script>
-
-<style lang="less">
-.dt-recipe-callbar-button:not(.dt-recipe-callbar-button--circle) {
-  line-height: var(--dt-font-line-height-300);
-}
-
-.dt-recipe-callbar-button--circle {
-  border-radius: var(--dt-size-radius-circle);
-}
-
-.dt-recipe-callbar-button.d-btn[disabled] {
-  background-color: unset;
-  opacity: .5;
-}
-
-.dt-recipe-callbar-button--circle.d-btn[disabled] {
-  border-color: unset;
-}
-
-.dt-recipe-callbar-button--active,
-.dt-recipe-callbar-button--active:hover {
-  .base-button__icon {
-    color: var(--primary-color);
-  }
-}
-
-.dt-recipe-callbar-button--disabled {
-  cursor: not-allowed;
-}
-</style>

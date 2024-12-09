@@ -115,7 +115,7 @@ export default {
 
     contactCenterIconClasses () {
       return [
-        'dt-leftbar-row__icon-cc',
+        'dt-recipe-leftbar-row__icon-cc',
         COLORS[this.color],
       ];
     },
