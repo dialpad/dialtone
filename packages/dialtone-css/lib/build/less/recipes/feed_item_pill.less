@@ -4,7 +4,7 @@
 }
 
 .d-recipe-feed-item-pill__button {
-  width: 100%;
+  width: var(--dt-size-100-percent);
   text-align: left;
   background-color: var(--dt-color-surface-moderate);
   border-width: 0;
@@ -19,7 +19,7 @@
 
 .d-recipe-feed-item-pill__layout {
   gap: var(--dt-space-300);
-  width: 100%;
+  width: var(--dt-size-100-percent);
   padding: var(--dt-space-400);
 
   & > .d-item-layout--left {
@@ -32,7 +32,7 @@
   display: flex;
 
   & svg {
-    animation: fade 0.15s ease-in;
+    animation: d-recipe-feed-item-pill-fade 0.15s ease-in;
   }
 }
 
@@ -50,7 +50,7 @@
   overflow: hidden;
   background-clip: content-box, border-box;
   background-origin: border-box;
-  border: double 1px transparent;
+  border: double var(--dt-size-100) transparent;
   border-radius: var(--dt-size-radius-600);
 }
 
@@ -67,7 +67,7 @@
   background: var(--dt-color-foreground-critical);
 }
 
-@keyframes fade {
+@keyframes d-recipe-feed-item-pill-fade {
   0% {
     transform: scale(0);
   }
