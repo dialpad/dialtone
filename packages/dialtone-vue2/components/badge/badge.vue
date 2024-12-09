@@ -37,7 +37,7 @@
       <!-- @slot Slot for right icon, icon-size slot prop defaults to '200' -->
       <slot
         name="rightIcon"
-        :icon-size="'200'"
+        :icon-size="'300'"
       />
     </span>
   </span>
