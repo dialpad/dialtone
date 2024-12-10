@@ -13,7 +13,6 @@ export default {
   out: 'functions/generated',
   githubPages: false,
   name: 'Date and Time',
-  hideInPageTOC: true,
   hideBreadcrumbs: true,
   entryPointStrategy: 'expand',
 };
