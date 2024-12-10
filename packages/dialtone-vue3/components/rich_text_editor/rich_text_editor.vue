@@ -288,7 +288,7 @@ export default {
      */
     allowInlineImages: {
       type: Boolean,
-      default: true,
+      default: false,
     },
 
     /**
