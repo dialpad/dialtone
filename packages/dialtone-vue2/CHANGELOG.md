@@ -1,3 +1,15 @@
+## [2.167.1](https://github.com/dialpad/dialtone/compare/dialtone-vue2/v2.167.0...dialtone-vue2/v2.167.1) (2024-12-10)
+
+
+### Code Refactoring
+
+* DLT-2122 move css out of recipes ([#577](https://github.com/dialpad/dialtone/issues/577)) ([75d5a0b](https://github.com/dialpad/dialtone/commit/75d5a0bf28bedb591daf2d7788dca4323394f1ff))
+
+
+### Documentation
+
+* DLT-1799 move SB to docs - Tabs to Validation Messages ([#565](https://github.com/dialpad/dialtone/issues/565)) ([e78aece](https://github.com/dialpad/dialtone/commit/e78aecebc94c1c160637401bc82efa17e84f24a0))
+
 # [2.167.0](https://github.com/dialpad/dialtone/compare/dialtone-vue2/v2.166.7...dialtone-vue2/v2.167.0) (2024-11-28)
 
 
