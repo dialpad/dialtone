@@ -1,6 +1,12 @@
 import { Markdown, Meta } from '@storybook/blocks';
-import Dates from './generated/dates/README.md?raw';
+import durationInHHMM from './generated/dates/functions/durationInHHMM.md?raw';
+import getDateMedium from './generated/dates/functions/getDateMedium.md?raw';
+import relativeDate from './generated/dates/functions/relativeDate.md?raw';
+import setDateLocale from './generated/dates/functions/setDateLocale.md?raw';
 
 <Meta title="Functions/Date and Time" />
 
-<Markdown>{Dates}</Markdown>
+<Markdown>{durationInHHMM}</Markdown>
+<Markdown>{getDateMedium}</Markdown>
+<Markdown>{relativeDate}</Markdown>
+<Markdown>{setDateLocale}</Markdown>
