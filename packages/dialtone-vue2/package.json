@@ -1,6 +1,6 @@
 {
   "name": "@dialpad/dialtone-vue",
-  "version": "2.167.0",
+  "version": "2.167.1",
   "description": "Vue component library for Dialpad's design system Dialtone",
   "scripts": {
     "lint": "run-s lint:code lint:docs",
@@ -40,7 +40,7 @@
     "@tiptap/suggestion": "^2.6.6",
     "@tiptap/vue-2": "^2.6.6",
     "date-fns": "2.30.0",
-    "emoji-toolkit": "8.0.0",
+    "emoji-toolkit": "9.0.1",
     "overlayscrollbars": "2.10.0",
     "regex-combined-emojis": "1.6.0",
     "tippy.js": "6.3.7"
