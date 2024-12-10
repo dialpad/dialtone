@@ -89,8 +89,8 @@ importers:
         specifier: 0.6.2
         version: 0.6.2
       emoji-toolkit:
-        specifier: 8.0.0
-        version: 8.0.0
+        specifier: 9.0.1
+        version: 9.0.1
       overlayscrollbars:
         specifier: 2.10.0
         version: 2.10.0
@@ -175,10 +175,10 @@ importers:
         version: 20.16.5
       '@vitejs/plugin-vue':
         specifier: ^5.0.3
-        version: 5.1.4(vite@5.4.2(@types/node@20.16.5)(less@4.2.0)(sass@1.69.5)(sugarss@2.0.0)(terser@5.34.1))
+        version: 5.1.4(vite@5.4.2(@types/node@20.16.5)(less@4.2.0)(sass@1.69.5)(sugarss@2.0.0)(terser@5.34.1))(vue@3.4.15(typescript@5.4.2))
       '@vitejs/plugin-vue2':
         specifier: ^2.3.1
-        version: 2.3.1(vite@5.4.2(@types/node@20.16.5)(less@4.2.0)(sass@1.69.5)(sugarss@2.0.0)(terser@5.34.1))
+        version: 2.3.1(vite@5.4.2(@types/node@20.16.5)(less@4.2.0)(sass@1.69.5)(sugarss@2.0.0)(terser@5.34.1))(vue@3.4.15(typescript@5.4.2))
       '@vue/tsconfig':
         specifier: ^0.4.0
         version: 0.4.0
@@ -364,10 +364,10 @@ importers:
         version: 1.0.4(@types/node@20.16.5)(jsdom@24.0.0)(less@4.2.0)(sass@1.69.5)(sugarss@2.0.0)(terser@5.34.1)
       vue-docgen-api:
         specifier: ^4.75.0
-        version: 4.75.0(vue@3.4.15(typescript@5.6.3))
+        version: 4.75.0(vue@3.4.15(typescript@5.4.2))
       vue-template-compiler:
         specifier: ^2.7.16
-        version: 2.7.16(vue@2.7.16)
+        version: 2.7.16(vue@3.4.15(typescript@5.4.2))
       wait-on:
         specifier: ^7.2.0
         version: 7.2.0
@@ -751,8 +751,8 @@ importers:
         specifier: 2.30.0
         version: 2.30.0
       emoji-toolkit:
-        specifier: 8.0.0
-        version: 8.0.0
+        specifier: 9.0.1
+        version: 9.0.1
       overlayscrollbars:
         specifier: 2.10.0
         version: 2.10.0
@@ -860,8 +860,8 @@ importers:
         specifier: 2.30.0
         version: 2.30.0
       emoji-toolkit:
-        specifier: 8.0.0
-        version: 8.0.0
+        specifier: 9.0.1
+        version: 9.0.1
       overlayscrollbars:
         specifier: 2.10.0
         version: 2.10.0
@@ -7757,8 +7757,8 @@ packages:
   emoji-regex@9.2.2:
     resolution: {integrity: sha512-L18DaJsXSUk2+42pv8mLs5jJT2hqFkFE4j21wOmgbUqsZ2hL72NsUU785g9RXgo3s0ZNgVl42TiHp3ZtOv/Vyg==}
 
-  emoji-toolkit@8.0.0:
-    resolution: {integrity: sha512-Vz8YIqQJsQ+QZ4yuKMMzliXceayqfWbNjb6bST+vm77QAhU2is3I+/PRxrNknW+q1bvHHMgjLCQXxzINWLVapg==}
+  emoji-toolkit@9.0.1:
+    resolution: {integrity: sha512-sMMNqKNLVHXJfIKoPbrRJwtYuysVNC9GlKetr72zE3SSVbHqoeDLWVrxP0uM0AE0qvdl3hbUk+tJhhwXZrDHaw==}
 
   emojis-list@3.0.0:
     resolution: {integrity: sha512-/kyM18EfinwXZbno9FyUGeFh87KC8HRQBQGildHZbEuRyWFOmv1U10o9BBp8XVZDVNNuQKyIGIu5ZYAAXJ0V2Q==}
@@ -21765,9 +21765,10 @@ snapshots:
 
   '@ungap/structured-clone@1.2.0': {}
 
-  '@vitejs/plugin-vue2@2.3.1(vite@5.4.2(@types/node@20.16.5)(less@4.2.0)(sass@1.69.5)(sugarss@2.0.0)(terser@5.34.1))':
+  '@vitejs/plugin-vue2@2.3.1(vite@5.4.2(@types/node@20.16.5)(less@4.2.0)(sass@1.69.5)(sugarss@2.0.0)(terser@5.34.1))(vue@3.4.15(typescript@5.4.2))':
     dependencies:
       vite: 5.4.2(@types/node@20.16.5)(less@4.2.0)(sass@1.69.5)(sugarss@2.0.0)(terser@5.34.1)
+      vue: 3.4.15(typescript@5.4.2)
 
   '@vitejs/plugin-vue@4.6.2(vite@4.0.5(@types/node@22.8.4)(less@4.2.0)(sass@1.69.5)(sugarss@2.0.0)(terser@5.34.1))(vue@3.4.15(typescript@5.6.3))':
     dependencies:
@@ -21779,9 +21780,10 @@ snapshots:
       vite: 5.4.2(@types/node@22.8.4)(less@4.2.0)(sass@1.69.5)(sugarss@2.0.0)(terser@5.34.1)
       vue: 3.4.15(typescript@5.6.3)
 
-  '@vitejs/plugin-vue@5.1.4(vite@5.4.2(@types/node@20.16.5)(less@4.2.0)(sass@1.69.5)(sugarss@2.0.0)(terser@5.34.1))':
+  '@vitejs/plugin-vue@5.1.4(vite@5.4.2(@types/node@20.16.5)(less@4.2.0)(sass@1.69.5)(sugarss@2.0.0)(terser@5.34.1))(vue@3.4.15(typescript@5.4.2))':
     dependencies:
       vite: 5.4.2(@types/node@20.16.5)(less@4.2.0)(sass@1.69.5)(sugarss@2.0.0)(terser@5.34.1)
+      vue: 3.4.15(typescript@5.4.2)
 
   '@vitest/expect@1.0.4':
     dependencies:
@@ -25121,7 +25123,7 @@ snapshots:
 
   emoji-regex@9.2.2: {}
 
-  emoji-toolkit@8.0.0: {}
+  emoji-toolkit@9.0.1: {}
 
   emojis-list@3.0.0: {}
 
@@ -35189,6 +35191,21 @@ snapshots:
       vue: 2.7.16
       vue-inbrowser-compiler-independent-utils: 4.71.1(vue@2.7.16)
 
+  vue-docgen-api@4.75.0(vue@3.4.15(typescript@5.4.2)):
+    dependencies:
+      '@babel/parser': 7.23.9
+      '@babel/types': 7.23.0
+      '@vue/compiler-dom': 3.4.15
+      '@vue/compiler-sfc': 3.4.15
+      ast-types: 0.16.1
+      hash-sum: 2.0.0
+      lru-cache: 8.0.5
+      pug: 3.0.2
+      recast: 0.23.4
+      ts-map: 1.0.3
+      vue: 3.4.15(typescript@5.4.2)
+      vue-inbrowser-compiler-independent-utils: 4.71.1(vue@3.4.15(typescript@5.4.2))
+
   vue-docgen-api@4.75.0(vue@3.4.15(typescript@5.6.3)):
     dependencies:
       '@babel/parser': 7.23.9
@@ -35222,6 +35239,10 @@ snapshots:
   vue-inbrowser-compiler-independent-utils@4.71.1(vue@2.7.16):
     dependencies:
       vue: 2.7.16
+
+  vue-inbrowser-compiler-independent-utils@4.71.1(vue@3.4.15(typescript@5.4.2)):
+    dependencies:
+      vue: 3.4.15(typescript@5.4.2)
 
   vue-inbrowser-compiler-independent-utils@4.71.1(vue@3.4.15(typescript@5.6.3)):
     dependencies:
@@ -35319,6 +35340,12 @@ snapshots:
       de-indent: 1.0.2
       he: 1.2.0
       vue: 2.7.16
+
+  vue-template-compiler@2.7.16(vue@3.4.15(typescript@5.4.2)):
+    dependencies:
+      de-indent: 1.0.2
+      he: 1.2.0
+      vue: 3.4.15(typescript@5.4.2)
 
   vue-template-compiler@2.7.16(vue@3.4.15(typescript@5.6.3)):
     dependencies:
