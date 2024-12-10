@@ -1,3 +1,10 @@
+## [4.31.2](https://github.com/dialpad/dialtone/compare/dialtone-icons/v4.31.1...dialtone-icons/v4.31.2) (2024-12-10)
+
+
+### Bug Fixes
+
+* **Icon:** DLT-2206 fix icon Simultaneous ring ([#579](https://github.com/dialpad/dialtone/issues/579)) ([1435dbd](https://github.com/dialpad/dialtone/commit/1435dbdcf12e295fbd198446a3d7b9e97e5f9797))
+
 ## [4.31.1](https://github.com/dialpad/dialtone/compare/dialtone-icons/v4.31.0...dialtone-icons/v4.31.1) (2024-11-28)
 
 # [4.31.0](https://github.com/dialpad/dialtone/compare/dialtone-icons/v4.30.0...dialtone-icons/v4.31.0) (2024-11-22)
