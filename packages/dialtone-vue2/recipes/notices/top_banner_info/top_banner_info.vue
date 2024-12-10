@@ -1,21 +1,21 @@
 <template>
   <div
-    class="dt-recipe-top-banner-info"
+    class="d-recipe-top-banner-info"
     :class="bannerInfoClass"
     data-qa="banner-info"
   >
-    <div class="dt-recipe-top-banner-info__left">
+    <div class="d-recipe-top-banner-info__left">
       <slot name="left" />
     </div>
 
     <div
-      class="dt-recipe-top-banner-info__middle"
+      class="d-recipe-top-banner-info__middle"
       data-qa="banner-info--middle"
     >
       <slot />
     </div>
 
-    <div class="dt-recipe-top-banner-info__right">
+    <div class="d-recipe-top-banner-info__right">
       <slot name="right" />
     </div>
   </div>

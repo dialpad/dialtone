@@ -1,6 +1,6 @@
 <template>
   <div
-    class="dt-recipe-callbar-button-with-popover"
+    class="d-recipe-callbar-button-with-popover"
   >
     <dt-recipe-callbar-button
       :aria-label="ariaLabel"
@@ -10,7 +10,7 @@
       :button-class="buttonClass"
       :button-width-size="buttonWidthSize"
       :text-class="textClass"
-      class="dt-recipe-callbar-button-with-popover--main-button"
+      class="d-recipe-callbar-button-with-popover--main-button"
       @click="buttonClick"
     >
       <template #icon>
@@ -31,8 +31,8 @@
       :show-close-button="showCloseButton"
       :offset="offset"
       padding="none"
-      class="dt-recipe-callbar-button-with-popover__popover-wrapper"
-      :dialog-class="['dt-recipe-callbar-button-with-popover__popover', contentClass]"
+      class="d-recipe-callbar-button-with-popover__popover-wrapper"
+      :dialog-class="['d-recipe-callbar-button-with-popover__popover', contentClass]"
       header-class="d-d-flex d-ai-center d-fw-normal d-px12"
       v-bind="$attrs"
       :open-popover="showPopover"
@@ -43,8 +43,8 @@
           circle
           importance="clear"
           size="lg"
-          :class="['dt-recipe-callbar-button-with-popover__arrow',
-                   { 'dt-recipe-callbar-button-with-popover__arrow--large': !isCompactMode }]"
+          :class="['d-recipe-callbar-button-with-popover__arrow',
+                   { 'd-recipe-callbar-button-with-popover__arrow--large': !isCompactMode }]"
           width="2rem"
           :aria-label="arrowButtonLabel"
           :active="open"
@@ -52,7 +52,7 @@
         >
           <template #icon>
             <dt-icon-chevron-up
-              class="dt-recipe-callbar-button-with-popover__arrow-icon"
+              class="d-recipe-callbar-button-with-popover__arrow-icon"
               size="200"
             />
           </template>

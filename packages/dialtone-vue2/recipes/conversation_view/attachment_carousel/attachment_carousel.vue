@@ -1,12 +1,12 @@
 <template>
   <div
-    class="dt-recipe-attachment-carousel"
+    class="d-recipe-attachment-carousel"
     role="presentation"
   >
     <ul
       v-if="mediaList.length > 0"
       ref="carousel"
-      class="dt-recipe-attachment-carousel__media-list"
+      class="d-recipe-attachment-carousel__media-list"
       @scroll="handleScroll"
     >
       <!-- media list -->
@@ -29,7 +29,7 @@
       v-show="showLeftArrow"
       tabindex="-1"
       :aria-label="leftArrowAriaLabel"
-      class="dt-recipe-attachment-carousel__arrow dt-recipe-attachment-carousel__arrow--left"
+      class="d-recipe-attachment-carousel__arrow d-recipe-attachment-carousel__arrow--left"
       circle
       size="xs"
       importance="clear"
@@ -45,7 +45,7 @@
       v-show="showRightArrow"
       tabindex="-1"
       :aria-label="rightArrowAriaLabel"
-      class="dt-recipe-attachment-carousel__arrow dt-recipe-attachment-carousel__arrow--right"
+      class="d-recipe-attachment-carousel__arrow d-recipe-attachment-carousel__arrow--right"
       circle
       size="xs"
       importance="clear"

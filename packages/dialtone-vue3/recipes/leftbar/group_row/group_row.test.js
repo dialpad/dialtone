@@ -23,8 +23,8 @@ describe('DtRecipeGroupRow Tests', () => {
 
   // Helpers
   const _setChildWrappers = () => {
-    description = wrapper.find('.dt-recipe-leftbar-row__description');
-    unreadBadge = wrapper.find('[data-qa="dt-recipe-leftbar-row-unread-badge"]');
+    description = wrapper.find('.d-recipe-leftbar-row__description');
+    unreadBadge = wrapper.find('[data-qa="d-recipe-leftbar-row-unread-badge"]');
   };
 
   const _setWrappers = () => {
@@ -88,7 +88,7 @@ describe('DtRecipeGroupRow Tests', () => {
       });
 
       it('should render the selected group row', () => {
-        expect(wrapper.classes().includes('dt-recipe-leftbar-row--selected')).toBe(true);
+        expect(wrapper.classes().includes('d-recipe-leftbar-row--selected')).toBe(true);
       });
     });
   });

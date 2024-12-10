@@ -19,13 +19,13 @@
     <template #input="{ onInput }">
       <span
         ref="inputSlotWrapper"
-        class="dt-recipe-combobox-multi-select__input-wrapper"
+        class="d-recipe-combobox-multi-select__input-wrapper"
         @focusin="handleInputFocusIn"
         @focusout="handleInputFocusOut"
       >
         <span
           ref="chipsWrapper"
-          :class="['dt-recipe-combobox-multi-select__chip-wrapper', chipWrapperClass]"
+          :class="['d-recipe-combobox-multi-select__chip-wrapper', chipWrapperClass]"
         >
           <dt-chip
             v-for="item in selectedItems"
@@ -33,8 +33,8 @@
             :key="item"
             :label-class="['d-chip__label']"
             :class="[
-              'dt-recipe-combobox-multi-select__chip',
-              { 'dt-recipe-combobox-multi-select__chip--truncate': !!chipMaxWidth },
+              'd-recipe-combobox-multi-select__chip',
+              { 'd-recipe-combobox-multi-select__chip--truncate': !!chipMaxWidth },
             ]"
             :style="{ maxWidth: chipMaxWidth }"
             :close-button-props="{ ariaLabel: 'close' }"
@@ -50,7 +50,7 @@
         <dt-input
           ref="input"
           v-model="value"
-          class="dt-recipe-combobox-multi-select__input"
+          class="d-recipe-combobox-multi-select__input"
           :input-class="[inputClass, { 'd-fc-transparent': hideInputText }]"
           :input-wrapper-class="inputWrapperClass"
           :aria-label="label"
@@ -93,7 +93,7 @@
         />
         <div
           v-else
-          class="dt-recipe-combobox-multi-select__list--loading"
+          class="d-recipe-combobox-multi-select__list--loading"
         >
           {{ loadingMessage }}
         </div>
@@ -465,7 +465,7 @@ export default {
 
     chipWrapperClass () {
       return {
-        [`dt-recipe-combobox-multi-select__chip-wrapper-${this.size}--collapsed`]: !this.inputFocused && this.collapseOnFocusOut,
+        [`d-recipe-combobox-multi-select__chip-wrapper-${this.size}--collapsed`]: !this.inputFocused && this.collapseOnFocusOut,
       };
     },
   },

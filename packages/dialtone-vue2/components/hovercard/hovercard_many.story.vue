@@ -120,7 +120,7 @@
             size="sm"
             aria-label="Add reaction"
             data-qa="feed-item-reaction-button"
-            class="dt-recipe-emoji-row__reaction dt-recipe-emoji-row__picker"
+            class="d-recipe-emoji-row__reaction d-recipe-emoji-row__picker"
           >
             <span class="d-d-inline-flex">
               <dt-icon

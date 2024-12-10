@@ -1,11 +1,11 @@
 export const CALLBOX_BADGE_COLORS = {
-  warning: 'dt-recipe-callbox-badge--warning',
+  warning: 'd-recipe-callbox-badge--warning',
 };
 
 export const CALLBOX_BORDER_COLORS = {
-  default: 'dt-recipe-callbox__border-default',
-  ai: 'dt-recipe-callbox__border-ai',
-  critical: 'dt-recipe-callbox__border-critical',
+  default: 'd-recipe-callbox__border-default',
+  ai: 'd-recipe-callbox__border-ai',
+  critical: 'd-recipe-callbox__border-critical',
 };
 
 export default {

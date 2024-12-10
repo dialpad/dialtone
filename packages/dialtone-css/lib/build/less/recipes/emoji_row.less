@@ -1,14 +1,14 @@
-.dt-recipe-emoji-row {
+.d-recipe-emoji-row {
   display: flex;
   flex-wrap: wrap;
   gap: var(--dt-space-300);
 }
 
-.dt-recipe-emoji-row__tooltip {
+.d-recipe-emoji-row__tooltip {
   display: inline-block;
 }
 
-.dt-recipe-emoji-row__reaction {
+.d-recipe-emoji-row__reaction {
   --emoji-item-color-inset-shadow: transparent;
   --emoji-item-color-foreground: var(--dt-action-color-foreground-muted-default);
   --emoji-item-color-background: var(--dt-action-color-background-muted-hover);
@@ -21,7 +21,7 @@
   border-radius: var(--dt-size-radius-pill);
   box-shadow: inset 0 0 0 var(--dt-size-border-100) var(--emoji-item-color-inset-shadow);
 
-  &.dt-recipe-emoji-row__picker {
+  &.d-recipe-emoji-row__picker {
     padding: var(--dt-space-200) var(--dt-space-350);
   }
 
@@ -42,7 +42,7 @@
     --emoji-item-color-foreground: var(--dt-color-link-primary);
     --emoji-item-color-background: var(--dt-action-color-background-base-hover);
 
-    .dt-recipe-emoji-row__reaction-number {
+    .d-recipe-emoji-row__reaction-number {
       font-weight: var(--dt-font-weight-bold);
     }
 
@@ -57,7 +57,7 @@
   }
 }
 
-.dt-recipe-emoji-row__reaction-number {
+.d-recipe-emoji-row__reaction-number {
   // set font properties individually to change line height,
   // as font shorthand property will override line-height.
   font-weight: var(--dt-typography-body-sm-font-weight);
@@ -67,7 +67,7 @@
   line-height: var(--dt-font-line-height-100);
 }
 
-.dt-recipe-emoji-row__emoji {
+.d-recipe-emoji-row__emoji {
   display: inline-flex;
   margin-right: var(--dt-space-300);
 }

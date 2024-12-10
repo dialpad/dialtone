@@ -1,26 +1,26 @@
 <template>
-  <div :class="['dt-recipe-feed-item-pill__border', borderClass, wrapperClass]">
-    <div class="dt-recipe-feed-item-pill__wrapper">
+  <div :class="['d-recipe-feed-item-pill__border', borderClass, wrapperClass]">
+    <div class="d-recipe-feed-item-pill__wrapper">
       <dt-collapsible :open="expanded">
         <template #anchor>
           <button
-            data-qa="dt-recipe-feed-item-pill"
+            data-qa="d-recipe-feed-item-pill"
             :aria-label="ariaLabel"
-            :class="['dt-recipe-feed-item-pill__button', toggleableClass, buttonClass]"
+            :class="['d-recipe-feed-item-pill__button', toggleableClass, buttonClass]"
             @focusin="hover = true"
             @focusout="hover = false"
             @mouseenter="hover = true"
             @mouseleave="hover = false"
             @click="onClick"
           >
-            <dt-item-layout class="dt-recipe-feed-item-pill__layout">
+            <dt-item-layout class="d-recipe-feed-item-pill__layout">
               <slot name="title">
-                <span class="dt-recipe-feed-item-pill__title">{{ title }}</span>
+                <span class="d-recipe-feed-item-pill__title">{{ title }}</span>
               </slot>
               <template #left>
                 <div
-                  class="dt-recipe-feed-item-pill__icon"
-                  data-qa="dt-recipe-feed-item-pill__icon"
+                  class="d-recipe-feed-item-pill__icon"
+                  data-qa="d-recipe-feed-item-pill__icon"
                 >
                   <component
                     :is="toggleIcon"
@@ -48,7 +48,7 @@
           </button>
         </template>
         <template #content>
-          <div class="dt-recipe-feed-item-pill__content">
+          <div class="d-recipe-feed-item-pill__content">
             <slot name="content" />
           </div>
         </template>

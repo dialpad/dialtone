@@ -31,9 +31,9 @@ describe('DtRecipeContactCentersRow Tests', () => {
       },
     });
 
-    iconType = wrapper.find('[data-qa="dt-recipe-leftbar-row-icon"]');
-    description = wrapper.find('[data-qa="dt-recipe-leftbar-row-description"]');
-    unreadBadge = wrapper.find('[data-qa="dt-recipe-leftbar-row-unread-badge"]');
+    iconType = wrapper.find('[data-qa="d-recipe-leftbar-row-icon"]');
+    description = wrapper.find('[data-qa="d-recipe-leftbar-row-description"]');
+    unreadBadge = wrapper.find('[data-qa="d-recipe-leftbar-row-unread-badge"]');
   };
 
   beforeEach(async () => {

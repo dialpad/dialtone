@@ -5,7 +5,7 @@
   >
     <template #anchor>
       <span
-        :class="{ 'dt-recipe-callbar-button--disabled': disabled }"
+        :class="{ 'd-recipe-callbar-button--disabled': disabled }"
       >
         <dt-button
           :importance="buttonImportance"
@@ -157,12 +157,12 @@ export default {
     callbarButtonClass () {
       return [
         this.buttonClass,
-        'dt-recipe-callbar-button',
+        'd-recipe-callbar-button',
         'd-px0',
         {
-          'dt-recipe-callbar-button--circle': this.circle,
-          'dt-recipe-callbar-button--active': this.active,
-          'dt-recipe-callbar-button--danger': this.danger,
+          'd-recipe-callbar-button--circle': this.circle,
+          'd-recipe-callbar-button--active': this.active,
+          'd-recipe-callbar-button--danger': this.danger,
           'd-btn--disabled d-bgc-transparent': this.disabled,
           'd-fc-primary': !this.disabled,
         }];
