@@ -359,31 +359,6 @@ export default {
       // These are the default extensions needed just for plain text.
       const extensions = [Document, Paragraph, Text, History, HardBreak];
 
-      const self = this;
-      const ShiftEnter = Extension.create({
-        addKeyboardShortcuts () {
-          return {
-            'Shift-Enter': ({ editor }) => {
-              editor.commands.first(({ commands }) => [
-                () => commands.newlineInCode(),
-                () => commands.splitListItem('listItem'),
-                () => commands.createParagraphNear(),
-                () => commands.liftEmptyBlock(),
-                () => commands.splitBlock(),
-              ]);
-            },
-            Enter: () => {
-              if (self.allowLineBreaks) {
-                return false;
-              }
-              self.$emit('enter');
-              return true;
-            },
-          };
-        },
-      });
-      extensions.push(ShiftEnter);
-
       if (this.link) {
         extensions.push(TipTapLink.extend({ inclusive: false }).configure({
           HTMLAttributes: {
@@ -466,6 +441,35 @@ export default {
       if (this.additionalExtensions.length) {
         extensions.push(...this.additionalExtensions);
       }
+
+      const self = this;
+      const ShiftEnter = Extension.create({
+        addKeyboardShortcuts () {
+          return {
+            'Shift-Enter': ({ editor }) => {
+              if (self.allowLineBreaks) {
+                return false;
+              }
+              editor.commands.first(({ commands }) => [
+                () => commands.newlineInCode(),
+                () => commands.splitListItem('listItem'),
+                () => commands.createParagraphNear(),
+                () => commands.liftEmptyBlock(),
+                () => commands.splitBlock(),
+              ]);
+              return true;
+            },
+            Enter: () => {
+              if (self.allowLineBreaks) {
+                return false;
+              }
+              self.$emit('enter');
+              return true;
+            },
+          };
+        },
+      });
+      extensions.push(ShiftEnter);
 
       return extensions;
     },
