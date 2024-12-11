@@ -1,21 +1,21 @@
 <template>
   <div
-    class="dt-top-banner-info"
+    class="dt-recipe-top-banner-info"
     :class="bannerInfoClass"
     data-qa="banner-info"
   >
-    <div class="dt-top-banner-info__left">
+    <div class="dt-recipe-top-banner-info__left">
       <slot name="left" />
     </div>
 
     <div
-      class="dt-top-banner-info__middle"
+      class="dt-recipe-top-banner-info__middle"
       data-qa="banner-info--middle"
     >
       <slot />
     </div>
 
-    <div class="dt-top-banner-info__right">
+    <div class="dt-recipe-top-banner-info__right">
       <slot name="right" />
     </div>
   </div>
@@ -59,34 +59,3 @@ export default {
   },
 };
 </script>
-
-<style lang="less">
-.dt-top-banner-info {
-  font-size: var(--dt-font-size-100);
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  color: var(--dt-color-foreground-primary);
-
-   &__left {
-     margin: var(--dt-space-300) 0 var(--dt-space-300) var(--dt-space-400);
-     min-width: 20%;
-  }
-  &__middle {
-     display: flex;
-     align-items: center;
-     gap: var(--dt-size-300);
-     margin-top: var(--dt-space-300);
-    margin-bottom: var(--dt-space-300);
-  }
-  &__right {
-     display: flex;
-     align-items: baseline;
-     justify-content: flex-end;
-     gap: var(--dt-size-300);
-     margin: var(--dt-space-300) var(--dt-space-500) var(--dt-space-300) 0;
-     min-width: 20%;
-     text-align: right;
-  }
-}
-</style>

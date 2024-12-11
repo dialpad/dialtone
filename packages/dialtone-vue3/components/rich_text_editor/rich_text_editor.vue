@@ -15,9 +15,10 @@ import { Extension } from '@tiptap/core';
 import Blockquote from '@tiptap/extension-blockquote';
 import CodeBlock from '@tiptap/extension-code-block';
 import Document from '@tiptap/extension-document';
+import HardBreak from '@tiptap/extension-hard-break';
+import Image from '@tiptap/extension-image';
 import Paragraph from '@tiptap/extension-paragraph';
 import Placeholder from '@tiptap/extension-placeholder';
-import HardBreak from '@tiptap/extension-hard-break';
 import Bold from '@tiptap/extension-bold';
 import BulletList from '@tiptap/extension-bullet-list';
 import Italic from '@tiptap/extension-italic';
@@ -284,6 +285,14 @@ export default {
     },
 
     /**
+     * Whether the input allows inline images to be rendered.
+     */
+    allowInlineImages: {
+      type: Boolean,
+      default: false,
+    },
+
+    /**
      * Additional TipTap extensions to be added to the editor.
      */
     additionalExtensions: {
@@ -448,6 +457,10 @@ export default {
             class: 'd-rich-text-editor__code-block',
           },
         }));
+      }
+
+      if (this.allowInlineImages) {
+        extensions.push(Image);
       }
 
       if (this.additionalExtensions.length) {

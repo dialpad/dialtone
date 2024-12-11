@@ -665,7 +665,7 @@ showHtmlWarning />
 In addition to the [Button component's](button.md#accessibility) accessibility documentation:
 
 - An icon-only primary action and the secondary action require a [Tooltip](tooltip.md) to indicate its function.
-- While the secondary action is focused, pressing `Enter` or `Space` triggers its action, displaying a [Dropdown component](dropdown.md) or [Popover component](popover.md).z
+- While the secondary action is focused, pressing `Enter` or `Space` triggers its action, displaying a [Dropdown component](dropdown.md) or [Popover component](popover.md).
 
 ## Classes
 
