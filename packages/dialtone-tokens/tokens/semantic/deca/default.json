@@ -45,7 +45,7 @@
         "description": "Expresses an error, danger, or otherwise critical state on surfaces that require a stronger contrast."
       },
       "success": {
-        "value": "{color.green.400}",
+        "value": "{color.green.425}",
         "type": "color",
         "description": "Indicates a positive state."
       },
@@ -260,31 +260,22 @@
         "description": "Background surface color containing error, danger, or otherwise critical messaging or elements."
       },
       "critical-subtle": {
-        "value": "{color.red.100}",
+        "value": "{color.red.50}",
         "type": "color",
-        "description": "A softer version of the Critical surface.",
-        "$extensions": {
-          "studio.tokens": {
-            "modify": {
-              "type": "lighten",
-              "value": ".5",
-              "space": "hsl"
-            }
-          }
-        }
+        "description": "A softer version of the Critical surface."
       },
       "critical-strong": {
-        "value": "{color.red.400}",
+        "value": "{color.red.300}",
         "type": "color",
         "description": "A contrasting critical surface, most likely paired with inverted foreground colors."
       },
       "warning": {
-        "value": "{color.gold.150}",
+        "value": "{color.gold.100}",
         "type": "color",
         "description": "Background surface color highlighting messaging or elements that may require user's attention."
       },
       "warning-subtle": {
-        "value": "{color.gold.100}",
+        "value": "{color.gold.50}",
         "type": "color",
         "description": "A softer version of the default warning surface."
       },
@@ -294,32 +285,32 @@
         "description": "A contrasting warning surface, most likely paired with inverted foreground colors."
       },
       "success": {
-        "value": "{color.green.200}",
+        "value": "{color.green.100}",
         "type": "color",
         "description": "Background surface color containing messaging or elements expressing a positive or successful state."
       },
       "success-subtle": {
-        "value": "{color.green.100}",
+        "value": "{color.green.50}",
         "type": "color",
         "description": "A softer version of the default success surface."
       },
       "success-strong": {
-        "value": "{color.green.450}",
+        "value": "{color.green.425}",
         "type": "color",
         "description": "A contrasting positive state surface, most likely paired with inverted foreground colors."
       },
       "info": {
-        "value": "{color.blue.125}",
+        "value": "{color.blue.100}",
         "type": "color",
         "description": "Background surface color containing messaging or elements communicated as generally informational."
       },
       "info-subtle": {
-        "value": "{color.blue.100}",
+        "value": "{color.blue.50}",
         "type": "color",
         "description": "A softer version of the default informational surface."
       },
       "info-strong": {
-        "value": "{color.blue.400}",
+        "value": "{color.blue.350}",
         "type": "color",
         "description": "A contrasting informational surface, most likely paired with inverted foreground colors."
       },

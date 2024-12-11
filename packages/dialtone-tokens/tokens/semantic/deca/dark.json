@@ -2,7 +2,7 @@
   "color": {
     "surface": {
       "primary": {
-        "value": "#1f1f1f",
+        "value": "{color.black.200}",
         "type": "color"
       },
       "secondary": {

@@ -1,6 +1,10 @@
 {
   "color": {
     "black": {
+      "50": {
+        "value": "#FCFCFC",
+        "type": "color"
+      },
       "100": {
         "value": "#FBFBFB",
         "type": "color"
@@ -40,9 +44,17 @@
       "900": {
         "value": "#111111",
         "type": "color"
+      },
+      "1000": {
+        "value": "#000000",
+        "type": "color"
       }
     },
     "purple": {
+      "50": {
+        "value": "#FDF7FF",
+        "type": "color"
+      },
       "100": {
         "value": "#F5EEFF",
         "type": "color"
@@ -82,9 +94,17 @@
       "600": {
         "value": "#2A007B",
         "type": "color"
+      },
+      "1000": {
+        "value": "#1F0060",
+        "type": "color"
       }
     },
     "blue": {
+      "50": {
+        "value": "#F9F9FF",
+        "type": "color"
+      },
       "100": {
         "value": "#EDF0FF",
         "type": "color"
@@ -124,9 +144,17 @@
       "500": {
         "value": "#002E69",
         "type": "color"
+      },
+      "1000": {
+        "value": "#001A41",
+        "type": "color"
       }
     },
     "magenta": {
+      "50": {
+        "value": "#FFF8F7",
+        "type": "color"
+      },
       "100": {
         "value": "#FFECF0",
         "type": "color"
@@ -166,9 +194,17 @@
       "500": {
         "value": "#51002A",
         "type": "color"
+      },
+      "1000": {
+        "value": "#3E001F",
+        "type": "color"
       }
     },
     "gold": {
+      "50": {
+        "value": "#FFF8F4",
+        "type": "color"
+      },
       "100": {
         "value": "#FFEEDD",
         "type": "color"
@@ -211,6 +247,10 @@
       }
     },
     "green": {
+      "50": {
+        "value": "#F6FFF0",
+        "type": "color"
+      },
       "100": {
         "value": "#EBFFE6",
         "type": "color"
@@ -250,9 +290,17 @@
       "500": {
         "value": "#003911",
         "type": "color"
+      },
+      "1000": {
+        "value": "#002204",
+        "type": "color"
       }
     },
     "red": {
+      "50": {
+        "value": "#FFF8F7",
+        "type": "color"
+      },
       "100": {
         "value": "#FFEDEB",
         "type": "color"
@@ -291,6 +339,10 @@
       },
       "500": {
         "value": "#54000C",
+        "type": "color"
+      },
+      "1000": {
+        "value": "#410001",
         "type": "color"
       }
     }
