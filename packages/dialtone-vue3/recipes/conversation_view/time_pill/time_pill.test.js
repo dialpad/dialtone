@@ -25,7 +25,7 @@ describe('DtRecipeTimePill Tests', () => {
 
   // Helpers
   const _setChildWrappers = () => {
-    timePill = wrapper.find('[data-qa="d-recipe-time-pill"]');
+    timePill = wrapper.find('[data-qa="dt-recipe-time-pill"]');
   };
 
   const _setWrappers = () => {

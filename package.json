@@ -106,6 +106,7 @@
     "@tiptap/extension-code-block": "^2.6.6",
     "@tiptap/extension-document": "^2.6.6",
     "@tiptap/extension-hard-break": "^2.6.6",
+    "@tiptap/extension-image": "^2.6.6",
     "@tiptap/extension-history": "^2.6.6",
     "@tiptap/extension-italic": "^2.6.6",
     "@tiptap/extension-link": "^2.6.6",

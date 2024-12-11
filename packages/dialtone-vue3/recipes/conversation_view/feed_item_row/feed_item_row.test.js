@@ -34,12 +34,12 @@ describe('DtFeedItemRow tests', () => {
   // Helpers
   const _setChildWrappers = () => {
     avatarImgWrapper = wrapper.find('[data-qa="dt-avatar-image"]');
-    headerWrapper = wrapper.find('[data-qa="d-recipe-feed-item-row--header"]');
-    leftTimeWrapper = wrapper.find('[data-qa="d-recipe-feed-item-row--left-time"]');
-    contentWrapper = wrapper.find('[data-qa="d-recipe-feed-item-row--content"]');
-    attachmentWrapper = wrapper.find('[data-qa="d-recipe-feed-item-row--attachment"]');
-    reactionsWrapper = wrapper.find('[data-qa="d-recipe-feed-item-row--reactions"]');
-    menuWrapper = wrapper.find('[data-qa="d-recipe-feed-item-row--menu"]');
+    headerWrapper = wrapper.find('[data-qa="dt-recipe-feed-item-row--header"]');
+    leftTimeWrapper = wrapper.find('[data-qa="dt-recipe-feed-item-row--left-time"]');
+    contentWrapper = wrapper.find('[data-qa="dt-recipe-feed-item-row--content"]');
+    attachmentWrapper = wrapper.find('[data-qa="dt-recipe-feed-item-row--attachment"]');
+    reactionsWrapper = wrapper.find('[data-qa="dt-recipe-feed-item-row--reactions"]');
+    menuWrapper = wrapper.find('[data-qa="dt-recipe-feed-item-row--menu"]');
   };
 
   // Test Setup

@@ -152,7 +152,7 @@
       border-radius: var(--dt-size-radius-pill);
       opacity: 0.3;
       transition: all 500ms ease;
-      animation: wave 1.5s ease infinite;
+      animation: d-recipe-leftbar-row-wave 1.5s ease infinite;
 
       &:nth-child(1) {
         animation-delay: 0ms;
@@ -283,7 +283,7 @@
   &__active-voice {
     display: inline-flex;
     color: var(--dt-color-purple-400);
-    .opacity-pulsate();
+    .d-recipe-leftbar-row-opacity-pulsate();
   }
 
   &__dnd {
@@ -327,10 +327,10 @@
   }
 }
 
-.opacity-pulsate {
-  -webkit-animation-name: opacity-pulsate;
-  -moz-animation-name: opacity-pulsate;
-  animation-name: opacity-pulsate;
+.d-recipe-leftbar-row-opacity-pulsate {
+  -webkit-animation-name: d-recipe-leftbar-row-opacity-pulsate;
+  -moz-animation-name: d-recipe-leftbar-row-opacity-pulsate;
+  animation-name: d-recipe-leftbar-row-opacity-pulsate;
   -webkit-animation-duration: 1s;
   -moz-animation-duration: 1s;
   animation-duration: 1s;
@@ -342,7 +342,7 @@
   animation-fill-mode: both;
 }
 
-@keyframes opacity-pulsate {
+@keyframes d-recipe-leftbar-row-opacity-pulsate {
   0%,
   100% {
     opacity: 0.2;
@@ -353,29 +353,7 @@
   }
 }
 
-@keyframes opacity-pulsate {
-  0%,
-  100% {
-    opacity: 0.2;
-  }
-
-  50% {
-    opacity: 1;
-  }
-}
-
-@keyframes opacity-pulsate {
-  0%,
-  100% {
-    opacity: 0.2;
-  }
-
-  50% {
-    opacity: 1;
-  }
-}
-
-@keyframes wave {
+@keyframes d-recipe-leftbar-row-wave {
   0%,
   50%,
   100% {

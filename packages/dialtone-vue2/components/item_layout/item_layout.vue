@@ -5,19 +5,19 @@
   >
     <section
       v-if="$slots.left"
-      data-qa="d-item-layout-left-wrapper"
+      data-qa="dt-item-layout-left-wrapper"
       class="d-item-layout--left"
     >
       <!-- @slot Slot for left content -->
       <slot name="left" />
     </section>
     <section
-      data-qa="d-item-layout-content-wrapper"
+      data-qa="dt-item-layout-content-wrapper"
       class="d-item-layout--content"
     >
       <div
         v-if="$slots.default"
-        data-qa="d-item-layout-title-wrapper"
+        data-qa="dt-item-layout-title-wrapper"
         class="d-item-layout--title"
       >
         <!-- @slot Slot for main content -->
@@ -25,7 +25,7 @@
       </div>
       <div
         v-if="$slots.subtitle"
-        data-qa="d-item-layout-subtitle-wrapper"
+        data-qa="dt-item-layout-subtitle-wrapper"
         :class="['d-item-layout--subtitle', { 'd-item-layout--subtitle--with-title': $slots.default }]"
       >
         <!-- @slot Slot for content below main content -->
@@ -33,7 +33,7 @@
       </div>
       <div
         v-if="$slots.bottom"
-        data-qa="d-item-layout-bottom-wrapper"
+        data-qa="dt-item-layout-bottom-wrapper"
         class="d-item-layout--bottom"
       >
         <!-- @slot Slot for content below subtitle -->
@@ -42,7 +42,7 @@
     </section>
     <section
       v-if="$slots.right"
-      data-qa="d-item-layout-right-wrapper"
+      data-qa="dt-item-layout-right-wrapper"
       class="d-item-layout--right"
     >
       <!-- @slot Slot for right content -->
@@ -50,7 +50,7 @@
     </section>
     <section
       v-if="$slots.selected"
-      data-qa="d-item-layout-selected-wrapper"
+      data-qa="dt-item-layout-selected-wrapper"
       class="d-item-layout--selected"
     >
       <!-- @slot Slot for selected icon -->

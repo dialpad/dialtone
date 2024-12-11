@@ -7,7 +7,7 @@
   >
     <div
       :class="leftbarContactCentersRowClasses"
-      data-qa="d-recipe-contact-centers-row"
+      data-qa="dt-recipe-contact-centers-row"
     >
       <a
         class="d-recipe-leftbar-row__primary"
@@ -22,7 +22,7 @@
         <div class="d-recipe-leftbar-row__alpha">
           <dt-icon-headphones
             size="300"
-            data-qa="d-recipe-leftbar-row-icon"
+            data-qa="dt-recipe-leftbar-row-icon"
           />
         </div>
         <div
@@ -31,7 +31,7 @@
         >
           <dt-emoji-text-wrapper
             class="d-recipe-leftbar-row__description"
-            data-qa="d-recipe-leftbar-row-description"
+            data-qa="dt-recipe-leftbar-row-description"
             size="200"
           >
             {{ description }}
@@ -47,7 +47,7 @@
           <dt-badge
             v-if="showUnreadCount"
             class="d-recipe-leftbar-row__unread-badge"
-            data-qa="d-recipe-leftbar-row-unread-badge"
+            data-qa="dt-recipe-leftbar-row-unread-badge"
             kind="count"
             type="bulletin"
           >
@@ -55,7 +55,7 @@
           </dt-badge>
           <dt-button
             class="d-recipe-leftbar-row__action"
-            data-qa="d-recipe-leftbar-row-action-button"
+            data-qa="dt-recipe-leftbar-row-action-button"
             :aria-label="menuButtonAriaLabel"
             importance="clear"
             size="xs"

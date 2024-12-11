@@ -36,7 +36,7 @@
     <template #label>
       <dt-emoji-text-wrapper
         class="d-recipe-leftbar-row__description"
-        data-qa="d-recipe-leftbar-row-description"
+        data-qa="dt-recipe-leftbar-row-description"
         size="200"
       >
         {{ name }}
@@ -44,7 +44,7 @@
       <div class="d-recipe-leftbar-row__status">
         <span
           v-if="presenceText"
-          data-qa="d-recipe-leftbar-row-presence-text"
+          data-qa="dt-recipe-leftbar-row-presence-text"
           :class="['d-recipe-leftbar-row__meta-context', presenceColorClass]"
         >
           {{ presenceText }}
@@ -53,7 +53,7 @@
           v-if="userStatus"
           size="100"
           element-type="span"
-          data-qa="d-recipe-leftbar-row-user-status"
+          data-qa="dt-recipe-leftbar-row-user-status"
           class="d-recipe-leftbar-row__meta-custom"
         >
           {{ userStatus }}
