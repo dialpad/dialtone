@@ -260,5 +260,45 @@
         }
       }
     }
+  },
+  "action": {
+    "color": {
+      "foreground": {
+        "base": {
+          "primary": {
+            "default": {
+              "value": "{color.black.100}",
+              "type": "color"
+            }
+          }
+        },
+        "critical": {
+          "primary": {
+            "default": {
+              "value": "{color.black.100}",
+              "type": "color"
+            }
+          }
+        }
+      },
+      "background": {
+        "critical": {
+          "primary": {
+            "default": {
+              "value": "{color.red.350}",
+              "type": "color"
+            },
+            "hover": {
+              "value": "{color.red.400}",
+              "type": "color"
+            },
+            "active": {
+              "value": "{color.red.450}",
+              "type": "color"
+            }
+          }
+        }
+      }
+    }
   }
 }
