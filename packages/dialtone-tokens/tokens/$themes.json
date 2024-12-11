@@ -371,8 +371,7 @@
       "components/icon/default": "enabled",
       "components/radio/default": "enabled",
       "root": "source",
-      "components/button/default": "enabled",
-      "components/badge/deca-dark": "disabled"
+      "components/button/default": "enabled"
     },
     "$figmaCollectionId": "VariableCollectionId:406:18994",
     "$figmaModeId": "406:0",
@@ -1285,8 +1284,7 @@
       "components/radio/default": "enabled",
       "root": "source",
       "components/badge/dark": "enabled",
-      "components/button/default": "enabled",
-      "components/badge/deca-dark": "disabled"
+      "components/button/default": "enabled"
     },
     "$figmaCollectionId": "VariableCollectionId:406:18994",
     "$figmaModeId": "406:1",
@@ -2189,8 +2187,7 @@
       "components/checkbox/default": "enabled",
       "components/icon/default": "enabled",
       "components/radio/default": "enabled",
-      "root": "source",
-      "components/badge/deca-dark": "disabled"
+      "root": "source"
     },
     "$figmaCollectionId": "VariableCollectionId:406:19535",
     "$figmaModeId": "406:2",
@@ -2754,8 +2751,7 @@
       "components/checkbox/default": "enabled",
       "components/icon/default": "enabled",
       "components/radio/default": "enabled",
-      "root": "source",
-      "components/badge/deca-dark": "disabled"
+      "root": "source"
     },
     "$figmaCollectionId": "VariableCollectionId:406:19535",
     "$figmaModeId": "406:3",
@@ -3318,8 +3314,7 @@
       "components/button/default": "enabled",
       "components/checkbox/default": "enabled",
       "components/icon/default": "enabled",
-      "components/radio/default": "enabled",
-      "components/badge/deca-dark": "disabled"
+      "components/radio/default": "enabled"
     },
     "group": "deca"
   },
@@ -3683,8 +3678,7 @@
       "components/checkbox/default": "enabled",
       "components/icon/default": "enabled",
       "components/radio/default": "enabled",
-      "semantic/dp/default": "enabled",
-      "components/badge/deca-dark": "disabled"
+      "semantic/dp/default": "enabled"
     },
     "group": "expressive"
   },
@@ -3703,8 +3697,7 @@
       "components/badge/default": "enabled",
       "components/checkbox/default": "enabled",
       "components/icon/default": "enabled",
-      "components/radio/default": "enabled",
-      "components/badge/deca-dark": "disabled"
+      "components/radio/default": "enabled"
     },
     "group": "expressive"
   },
@@ -3722,8 +3715,7 @@
       "components/checkbox/default": "enabled",
       "components/icon/default": "enabled",
       "components/radio/default": "enabled",
-      "semantic/expressive/default": "enabled",
-      "components/badge/deca-dark": "disabled"
+      "semantic/expressive/default": "enabled"
     },
     "group": "expressive-sm"
   },
@@ -3743,8 +3735,7 @@
       "components/checkbox/default": "enabled",
       "components/icon/default": "enabled",
       "components/radio/default": "enabled",
-      "semantic/expressive/default": "enabled",
-      "components/badge/deca-dark": "disabled"
+      "semantic/expressive/default": "enabled"
     },
     "group": "expressive-sm"
   },
@@ -3814,8 +3805,7 @@
     },
     "selectedTokenSets": {
       "root": "enabled",
-      "base/default": "enabled",
-      "components/badge/deca-dark": "disabled"
+      "base/default": "enabled"
     },
     "group": "base"
   },
@@ -3886,8 +3876,7 @@
     "selectedTokenSets": {
       "root": "enabled",
       "base/default": "enabled",
-      "base/dark": "enabled",
-      "components/badge/deca-dark": "disabled"
+      "base/dark": "enabled"
     },
     "group": "base"
   },
@@ -3898,8 +3887,7 @@
     "selectedTokenSets": {
       "root": "enabled",
       "base/default": "enabled",
-      "base/deca": "enabled",
-      "components/badge/deca-dark": "disabled"
+      "base/deca": "enabled"
     },
     "group": "base"
   },
@@ -3937,8 +3925,7 @@
       "base/default": "enabled",
       "base/dark": "enabled",
       "base/deca": "enabled",
-      "base/deca-dark": "enabled",
-      "components/badge/deca-dark": "disabled"
+      "base/deca-dark": "enabled"
     },
     "group": "base"
   }

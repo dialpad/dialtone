@@ -244,6 +244,10 @@
       "500": {
         "value": "#462B00",
         "type": "color"
+      },
+      "1000": {
+        "value": "#2A1800",
+        "type": "color"
       }
     },
     "green": {
