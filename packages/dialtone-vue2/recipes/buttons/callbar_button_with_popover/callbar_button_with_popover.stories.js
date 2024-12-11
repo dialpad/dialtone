@@ -105,6 +105,12 @@ export const argTypesData = {
   openPopover: {
     control: 'boolean',
   },
+  invertedTooltip: {
+    control: 'boolean',
+  },
+  showTooltip: {
+    control: 'boolean',
+  },
 
   // Popover slots
   content: {
