@@ -489,7 +489,23 @@
       ],
       "whisper": [
         "soft"
-      ]
+      ],
+      "power-dialer": [
+        "powerdialer",
+        "dialer",
+        "lightning",
+        "list",
+        "speed"
+      ],
+      "power-dialer-off": [
+        "powerdialer",
+        "dialer",
+        "lightning",
+        "list",
+        "speed",
+        "off",
+        "strikethrough"
+        ]
     },
     "controls": {
       "barge": [
