@@ -2,108 +2,108 @@
   position: relative;
   width: var(--dt-space-1000);
   max-height: 100px; /* stylelint-disable-line meowtec/no-px */
+}
 
-  &__media-list {
-    display: flex;
-    flex-direction: row;
-    padding-left: 0;
-    overflow-x: scroll;
+.d-recipe-attachment-carousel__media-list {
+  display: flex;
+  flex-direction: row;
+  padding-left: 0;
+  overflow-x: scroll;
+}
 
-    &::-webkit-scrollbar {
-      display: none;
-    }
-  }
+.d-recipe-attachment-carousel__media-list::-webkit-scrollbar {
+  display: none;
+}
 
-  &__arrow {
-    position: absolute;
-    top: var(--dt-space-30-percent);
-    background-color: var(--dt-color-neutral-white);
-    border: var(--dt-space-100) solid;
-    border-color: var(--bc-default);
-    border-width: var(--dt-size-100);
-    opacity: 0;
+.d-recipe-attachment-carousel__arrow {
+  position: absolute;
+  top: var(--dt-space-30-percent);
+  background-color: var(--dt-color-neutral-white);
+  border: var(--dt-space-100) solid;
+  border-color: var(--bc-default);
+  border-width: var(--dt-size-100);
+  opacity: 0;
+}
 
-    .d-recipe-attachment-carousel:hover & {
-      opacity: 1;
-    }
+.d-recipe-attachment-carousel:hover .d-recipe-attachment-carousel__arrow {
+  opacity: 1;
+}
 
-    .&--left {
-      left: var(--dt-space-300);
-    }
+.d-recipe-attachment-carousel__arrow--left {
+  left: var(--dt-space-300);
+}
 
-    .&--right {
-      right: var(--dt-space-300);
-    }
-  }
+.d-recipe-attachment-carousel__arrow--right {
+  right: var(--dt-space-300);
+}
 
-  .&__image {
-    position: relative;
+.d-recipe-attachment-carousel__image {
+  position: relative;
+}
 
-    .&-close-button {
-      position: absolute;
-      top: inherit;
-      right: inherit;
-      color: var(--dt-color-neutral-white);
-      background-color: var(--dt-color-black-400);
-      border: var(--dt-space-100) solid;
-      border-color: var(--dt-color-neutral-white);
-      border-width: var(--dt-size-200);
-      opacity: 0;
+.d-recipe-attachment-carousel__image-close-button {
+  position: absolute;
+  top: inherit;
+  right: inherit;
+  color: var(--dt-color-neutral-white);
+  background-color: var(--dt-color-black-400);
+  border: var(--dt-space-100) solid;
+  border-color: var(--dt-color-neutral-white);
+  border-width: var(--dt-size-200);
+  opacity: 0;
+}
 
-      .d-recipe-attachment-carousel__image:focus-within &, .d-recipe-attachment-carousel__image:hover & {
-        opacity: 1;
-      }
-    }
+.d-recipe-attachment-carousel__image:focus-within .d-recipe-attachment-carousel__image-close-button, .d-recipe-attachment-carousel__image:hover .d-recipe-attachment-carousel__image-close-button {
+  opacity: 1;
+}
 
-    .&-viewer {
-      width: var(--dt-size-700);
-      height: var(--dt-size-700);
-      object-fit: cover;
-      border: var(--dt-space-100) solid;
-      border-color: var(--dt-color-border-subtle);
-      border-width: var(--dt-size-350);
-      border-radius: var(--br4);
-    }
+.d-recipe-attachment-carousel__image-viewer {
+  width: var(--dt-size-700);
+  height: var(--dt-size-700);
+  object-fit: cover;
+  border: var(--dt-space-100) solid;
+  border-color: var(--dt-color-border-subtle);
+  border-width: var(--dt-size-350);
+  border-radius: var(--br4);
+}
 
-    .&-top-right {
-      position: absolute;
-      top: var(--dt-size-100);
-      right: var(--dt-size-100);
-    }
+.d-recipe-attachment-carousel__image-top-right {
+  position: absolute;
+  top: var(--dt-size-100);
+  right: var(--dt-size-100);
+}
 
-    .&-progress-bar {
-      position: absolute;
-      top: inherit;
-      right: inherit;
-      display: flex;
-      background-color: var(--dt-color-neutral-white);
-      border: var(--dt-space-100) solid;
-      border-color: var(--dt-color-border-subtle);
-      border-width: var(--dt-size-200);
-      border-radius: 50%;
-      transform: rotate(-90deg);
-    }
-  }
+.d-recipe-attachment-carousel__image-progress-bar {
+  position: absolute;
+  top: inherit;
+  right: inherit;
+  display: flex;
+  background-color: var(--dt-color-neutral-white);
+  border: var(--dt-space-100) solid;
+  border-color: var(--dt-color-border-subtle);
+  border-width: var(--dt-size-200);
+  border-radius: 50%;
+  transform: rotate(-90deg);
+}
 
-  .&__progress-bar {
-    width: var(--dt-size-550);
-    height: var(--dt-size-550);
+.d-recipe-attachment-carousel__progress-bar {
+  width: var(--dt-size-550);
+  height: var(--dt-size-550);
+}
 
-    .&-circle {
-      fill: none;
-      stroke-width: 2;
-      stroke-dasharray: var(--stroke-dasharray);
-    }
+.d-recipe-attachment-carousel__progress-bar-circle {
+  fill: none;
+  stroke-width: 2;
+  stroke-dasharray: var(--stroke-dasharray);
+}
 
-    .&-circle:nth-child(1) {
-      stroke: var(--dt-color-black-100);
-      stroke-dashoffset: 0;
-    }
+.d-recipe-attachment-carousel__progress-bar-circle:nth-child(1) {
+  stroke: var(--dt-color-black-100);
+  stroke-dashoffset: 0;
+}
 
-    .&-circle:nth-child(2) {
-      transition: stroke-dashoffset 500ms linear;
-      stroke: var(--dt-color-purple-500);
-      stroke-dashoffset: var(--stroke-dashoffset);
-    }
-  }
+.d-recipe-attachment-carousel__progress-bar-circle:nth-child(2) {
+  transition: stroke-dashoffset 500ms linear;
+  stroke: var(--dt-color-purple-500);
+  stroke-dashoffset: var(--stroke-dashoffset);
 }
