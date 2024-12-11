@@ -52,13 +52,13 @@ export default {
         r="8"
         cx="12"
         cy="12"
-        class="d-recipe-attachment-carousel__progress-bar__circle"
+        class="d-recipe-attachment-carousel__progress-bar-circle"
       />
       <circle
         r="8"
         cx="12"
         cy="12"
-        class="d-recipe-attachment-carousel__progress-bar__circle"
+        class="d-recipe-attachment-carousel__progress-bar-circle"
       />
     </svg>
   </div>
