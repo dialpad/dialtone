@@ -331,86 +331,86 @@
       "moderate-opaque": {
         "value": "{color.black.900}",
         "type": "color",
-        "description": "Moderate surface as opaque background color.",
         "$extensions": {
           "studio.tokens": {
             "modify": {
               "type": "alpha",
-              "value": ".09",
+              "value": ".12",
               "space": "hsl"
             }
           }
-        }
+        },
+        "description": "Moderate surface as opaque background color."
       },
       "bold-opaque": {
         "value": "{color.black.900}",
         "type": "color",
-        "description": "Bold surface as opaque background color.",
         "$extensions": {
           "studio.tokens": {
             "modify": {
               "type": "alpha",
-              "value": ".18",
+              "value": ".23",
               "space": "hsl"
             }
           }
-        }
+        },
+        "description": "Bold surface as opaque background color."
       },
       "strong-opaque": {
         "value": "{color.black.900}",
         "type": "color",
-        "description": "Strong surface as opaque background color.",
         "$extensions": {
           "studio.tokens": {
             "modify": {
               "type": "alpha",
-              "value": ".67",
+              "value": ".72",
               "space": "hsl"
             }
           }
-        }
+        },
+        "description": "Strong surface as opaque background color."
       },
       "contrast-opaque": {
         "value": "{color.black.900}",
         "type": "color",
-        "description": "Contrast surface as opaque background color.",
         "$extensions": {
           "studio.tokens": {
             "modify": {
               "type": "alpha",
-              "value": ".87",
+              "value": ".95",
               "space": "hsl"
             }
           }
-        }
+        },
+        "description": "Contrast surface as opaque background color."
       },
       "critical-opaque": {
-        "value": "{color.red.300}",
+        "value": "{color.red.125}",
         "type": "color",
-        "description": "Critical surface as opaque background color.",
         "$extensions": {
           "studio.tokens": {
             "modify": {
               "type": "alpha",
-              "value": ".11",
+              "value": ".24",
               "space": "hsl"
             }
           }
-        }
+        },
+        "description": "Critical surface as opaque background color."
       },
       "critical-subtle-opaque": {
-        "value": "{color.red.300}",
+        "value": "{color.red.100}",
         "type": "color",
-        "description": "Critical subtle surface as opaque background color.",
         "$extensions": {
           "studio.tokens": {
             "modify": {
               "type": "alpha",
-              "value": ".05",
+              "value": ".40",
               "space": "hsl"
             }
           }
-        }
+        },
+        "description": "Critical subtle surface as opaque background color."
       },
       "warning-opaque": {
         "value": "{color.gold.200}",
