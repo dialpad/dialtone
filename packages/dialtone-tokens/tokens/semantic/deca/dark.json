@@ -17,12 +17,24 @@
         "value": "{color.black.500}",
         "type": "color"
       },
+      "strong": {
+        "value": "{color.black.700}",
+        "type": "color"
+      },
       "contrast": {
         "value": "{color.black.900}",
         "type": "color"
       },
       "critical-strong": {
-        "value": "{color.red.275}",
+        "value": "{color.red.350}",
+        "type": "color"
+      },
+      "warning-strong": {
+        "value": "{color.gold.275}",
+        "type": "color"
+      },
+      "success-strong": {
+        "value": "{color.green.450}",
         "type": "color"
       }
     },
