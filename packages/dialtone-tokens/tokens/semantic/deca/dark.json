@@ -1,23 +1,5 @@
 {
   "color": {
-    "foreground": {
-      "placeholder": {
-        "value": "{color.black.600}",
-        "type": "color"
-      },
-      "disabled": {
-        "value": "{color.black.600}",
-        "type": "color"
-      },
-      "secondary-inverted": {
-        "value": "{color.black.300}",
-        "type": "color"
-      },
-      "tertiary-inverted": {
-        "value": "{color.black.400}",
-        "type": "color"
-      }
-    },
     "surface": {
       "primary": {
         "value": "{color.black.200}",

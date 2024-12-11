@@ -1,18 +1,13 @@
 {
   "color": {
     "foreground": {
-      "primary": {
-        "value": "{color.black.850}",
-        "type": "color",
-        "description": "Default text color throughout the UI."
-      },
       "secondary": {
-        "value": "{color.black.700}",
+        "value": "{color.black.800}",
         "type": "color",
         "description": "Example uses include introduction paragraphs, labels, and descriptions paired with form elements."
       },
       "tertiary": {
-        "value": "{color.black.600}",
+        "value": "{color.black.700}",
         "type": "color",
         "description": "Used to imply visual hierarchy relative to primary and secondary text colors, e.g. headlines and labels."
       },
@@ -30,17 +25,17 @@
         }
       },
       "placeholder": {
-        "value": "{color.black.500}",
+        "value": "{color.black.600}",
         "type": "color",
         "description": "Text color for placeholder text within form elements."
       },
       "disabled": {
-        "value": "{color.black.500}",
+        "value": "{color.black.600}",
         "type": "color",
         "description": "Used for text paired with disabled content or components, like the form elements."
       },
       "critical": {
-        "value": "{color.red.350}",
+        "value": "{color.red.400}",
         "type": "color",
         "description": "Expresses an error, danger, or otherwise critical state."
       },
