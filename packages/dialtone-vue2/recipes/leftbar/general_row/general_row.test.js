@@ -35,10 +35,10 @@ describe('DtRecipeGeneralRow Tests', () => {
   // Helpers
   const _setChildWrappers = async () => {
     await vi.dynamicImportSettled();
-    iconType = wrapper.find('[data-qa="d-recipe-leftbar-row-icon"]');
+    iconType = wrapper.find('[data-qa="dt-recipe-leftbar-row-icon"]');
     description = wrapper.find('.d-recipe-leftbar-row__description');
-    unreadBadge = wrapper.find('[data-qa="d-recipe-leftbar-row-unread-badge"]');
-    unreadMentionBadge = wrapper.find('[data-qa="d-recipe-leftbar-row-unread-mention-badge"]');
+    unreadBadge = wrapper.find('[data-qa="dt-recipe-leftbar-row-unread-badge"]');
+    unreadMentionBadge = wrapper.find('[data-qa="dt-recipe-leftbar-row-unread-mention-badge"]');
   };
 
   const _setWrappers = async () => {

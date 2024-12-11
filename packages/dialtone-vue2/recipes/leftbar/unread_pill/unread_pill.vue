@@ -2,7 +2,7 @@
   <button
     :class="['d-recipe-leftbar-unread-pill', `d-recipe-leftbar-unread-pill-${kind}`]"
     type="button"
-    data-qa="d-recipe-leftbar-unread-pill"
+    data-qa="dt-recipe-leftbar-unread-pill"
     v-on="$listeners"
   >
     <dt-icon-arrow-up
@@ -13,7 +13,7 @@
       v-else
       size="300"
     />
-    <span data-qa="d-recipe-leftbar-unread-pill__label">
+    <span data-qa="dt-recipe-leftbar-unread-pill__label">
       <slot />
     </span>
   </button>

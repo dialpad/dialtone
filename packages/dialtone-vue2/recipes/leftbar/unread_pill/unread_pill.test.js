@@ -37,7 +37,7 @@ describe('DtRecipeUnreadPill Tests', () => {
   // Helpers
   const _setChildWrappers = async () => {
     await vi.dynamicImportSettled();
-    unreadPillLabel = wrapper.find('[data-qa="d-recipe-leftbar-unread-pill__label"]');
+    unreadPillLabel = wrapper.find('[data-qa="dt-recipe-leftbar-unread-pill__label"]');
     unreadPillIcon = wrapper.find('[data-qa="dt-icon"]');
   };
 

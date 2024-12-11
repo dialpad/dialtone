@@ -1,7 +1,7 @@
 <template>
   <div
     :class="leftbarGeneralRowClasses"
-    data-qa="d-recipe-leftbar-row"
+    data-qa="dt-recipe-leftbar-row"
   >
     <a
       class="d-recipe-leftbar-row__primary"
@@ -29,7 +29,7 @@
             :type="getIcon"
             :color="color"
             :icon-size="iconSize"
-            data-qa="d-recipe-leftbar-row-icon"
+            data-qa="dt-recipe-leftbar-row-icon"
           />
         </slot>
       </div>
@@ -40,7 +40,7 @@
         <slot name="label">
           <dt-emoji-text-wrapper
             class="d-recipe-leftbar-row__description"
-            data-qa="d-recipe-leftbar-row-description"
+            data-qa="dt-recipe-leftbar-row-description"
             size="200"
           >
             {{ description }}
@@ -61,7 +61,7 @@
           <div
             ref="d-recipe-leftbar-row-dnd"
             class="d-recipe-leftbar-row__dnd"
-            data-qa="d-recipe-leftbar-row-dnd"
+            data-qa="dt-recipe-leftbar-row-dnd"
           >
             {{ dndText }}
           </div>
@@ -85,7 +85,7 @@
             v-if="showUnreadCount"
             kind="count"
             type="bulletin"
-            data-qa="d-recipe-leftbar-row-unread-badge"
+            data-qa="dt-recipe-leftbar-row-unread-badge"
             :class="['d-recipe-leftbar-row__unread-badge', {
               'd-recipe-leftbar-row__unread-count-badge':
                 shouldApplyCustomStyleForCountBadge,
@@ -97,7 +97,7 @@
             v-if="showUnreadMentionCount"
             kind="count"
             type="bulletin"
-            data-qa="d-recipe-leftbar-row-unread-mention-badge"
+            data-qa="dt-recipe-leftbar-row-unread-mention-badge"
             :class="['d-recipe-leftbar-row__unread-badge',
                      { 'd-recipe-leftbar-row__unread-mention-count-badge': shouldApplyCustomStyleForCountBadge },
                      { 'd-recipe-leftbar-row__unread-mention-only-count-badge': shouldApplyCustomStyleForMentionOnly },
@@ -110,7 +110,7 @@
       <div
         v-if="hasCallButton"
         class="d-recipe-leftbar-row__action"
-        data-qa="d-recipe-leftbar-row-action"
+        data-qa="dt-recipe-leftbar-row-action"
       >
         <dt-tooltip
           :message="callButtonTooltip"
@@ -119,7 +119,7 @@
           <template #anchor>
             <dt-button
               class="d-recipe-leftbar-row__action-button"
-              data-qa="d-recipe-leftbar-row-action-call-button"
+              data-qa="dt-recipe-leftbar-row-action-call-button"
               :circle="true"
               size="xs"
               kind="inverted"

@@ -1,7 +1,7 @@
 <!-- eslint-disable vue/no-restricted-class -->
 <template>
   <div
-    data-qa="d-recipe-editor"
+    data-qa="dt-recipe-editor"
     role="presentation"
     class="d-d-flex d-fd-column"
     @click="$refs.richTextEditor.focusEditor()"
@@ -57,7 +57,7 @@
           placement="bottom-start"
           :visually-hidden-close="true"
           :visually-hidden-close-label="'Close link input popover'"
-          data-qa="d-recipe-editor-link-input-popover"
+          data-qa="dt-recipe-editor-link-input-popover"
           :show-close-button="false"
           @click="onInputFocus"
           @click.stop="onInputFocus"
@@ -101,7 +101,7 @@
             <dt-input
               v-model="linkInput"
               :input-aria-label="showAddLink.setLinkInputAriaLabel"
-              data-qa="d-recipe-editor-link-input"
+              data-qa="dt-recipe-editor-link-input"
               :placeholder="setLinkPlaceholder"
               input-wrapper-class="d-bgc-secondary d-mt6 d-bar5 d-ba d-baw1 d-bc-default d-py2 d-ol-none"
               @click="onInputFocus"
@@ -118,7 +118,7 @@
                 importance="clear"
                 kind="muted"
                 size="sm"
-                data-qa="d-recipe-editor-remove-link-btn"
+                data-qa="dt-recipe-editor-remove-link-btn"
                 @click="removeLink"
               >
                 {{ removeLinkButton.label }}
@@ -129,7 +129,7 @@
                 importance="clear"
                 kind="muted"
                 size="sm"
-                data-qa="d-recipe-editor-set-link-cancel-btn"
+                data-qa="dt-recipe-editor-set-link-cancel-btn"
                 @click="closeLinkInput"
               >
                 {{ cancelSetLinkButton.label }}
@@ -138,7 +138,7 @@
                 class="d-mx2"
                 size="sm"
                 :aria-label="confirmSetLinkButton.ariaLabel"
-                data-qa="d-recipe-editor-set-link-confirm-btn"
+                data-qa="dt-recipe-editor-set-link-confirm-btn"
                 @click="setLink"
               >
                 {{ confirmSetLinkButton.label }}
@@ -562,7 +562,7 @@ export default {
           label: 'Quick reply',
           selector: 'quickReplies',
           icon: DtIconLightningBolt,
-          dataQA: 'd-recipe-editor-quick-replies-btn',
+          dataQA: 'dt-recipe-editor-quick-replies-btn',
           tooltipMessage: 'Quick Reply',
           onClick: this.onQuickRepliesClick,
         },
@@ -575,7 +575,7 @@ export default {
           showBtn: this.showBoldButton,
           selector: 'bold',
           icon: DtIconBold,
-          dataQA: 'd-recipe-editor-bold-btn',
+          dataQA: 'dt-recipe-editor-bold-btn',
           tooltipMessage: 'Bold',
           onClick: this.onBoldTextToggle,
         },
@@ -583,7 +583,7 @@ export default {
           showBtn: this.showItalicsButton,
           selector: 'italic',
           icon: DtIconItalic,
-          dataQA: 'd-recipe-editor-italics-btn',
+          dataQA: 'dt-recipe-editor-italics-btn',
           tooltipMessage: 'Italics',
           onClick: this.onItalicTextToggle,
         },
@@ -591,7 +591,7 @@ export default {
           showBtn: this.showUnderlineButton,
           selector: 'underline',
           icon: DtIconUnderline,
-          dataQA: 'd-recipe-editor-underline-btn',
+          dataQA: 'dt-recipe-editor-underline-btn',
           tooltipMessage: 'Underline',
           onClick: this.onUnderlineTextToggle,
         },
@@ -599,7 +599,7 @@ export default {
           showBtn: this.showStrikeButton,
           selector: 'strike',
           icon: DtIconStrikethrough,
-          dataQA: 'd-recipe-editor-strike-btn',
+          dataQA: 'dt-recipe-editor-strike-btn',
           tooltipMessage: 'Strike',
           onClick: this.onStrikethroughTextToggle,
         },
@@ -612,7 +612,7 @@ export default {
           showBtn: this.showAlignLeftButton,
           selector: { textAlign: 'left' },
           icon: DtIconAlignLeft,
-          dataQA: 'd-recipe-editor-align-left-btn',
+          dataQA: 'dt-recipe-editor-align-left-btn',
           tooltipMessage: 'Align Left',
           onClick: () => this.onTextAlign('left'),
         },
@@ -620,7 +620,7 @@ export default {
           showBtn: this.showAlignCenterButton,
           selector: { textAlign: 'center' },
           icon: DtIconAlignCenter,
-          dataQA: 'd-recipe-editor-align-center-btn',
+          dataQA: 'dt-recipe-editor-align-center-btn',
           tooltipMessage: 'Align Center',
           onClick: () => this.onTextAlign('center'),
         },
@@ -628,7 +628,7 @@ export default {
           showBtn: this.showAlignRightButton,
           selector: { textAlign: 'right' },
           icon: DtIconAlignRight,
-          dataQA: 'd-recipe-editor-align-right-btn',
+          dataQA: 'dt-recipe-editor-align-right-btn',
           tooltipMessage: 'Align Right',
           onClick: () => this.onTextAlign('right'),
         },
@@ -636,7 +636,7 @@ export default {
           showBtn: this.showAlignJustifyButton,
           selector: { textAlign: 'justify' },
           icon: DtIconAlignJustify,
-          dataQA: 'd-recipe-editor-align-justify-btn',
+          dataQA: 'dt-recipe-editor-align-justify-btn',
           tooltipMessage: 'Align Justify',
           onClick: () => this.onTextAlign('justify'),
         },
@@ -649,7 +649,7 @@ export default {
           showBtn: this.showListItemsButton,
           selector: 'bulletList',
           icon: DtIconListBullet,
-          dataQA: 'd-recipe-editor-list-items-btn',
+          dataQA: 'dt-recipe-editor-list-items-btn',
           tooltipMessage: 'Bullet List',
           onClick: this.onBulletListToggle,
         },
@@ -657,7 +657,7 @@ export default {
           showBtn: this.showOrderedListButton,
           selector: 'orderedList',
           icon: DtIconListOrdered,
-          dataQA: 'd-recipe-editor-ordered-list-items-btn',
+          dataQA: 'dt-recipe-editor-ordered-list-items-btn',
           tooltipMessage: 'Ordered List',
           onClick: this.onOrderedListToggle,
         },
@@ -670,7 +670,7 @@ export default {
           showBtn: this.showQuoteButton,
           selector: 'blockquote',
           icon: DtIconQuote,
-          dataQA: 'd-recipe-editor-blockquote-btn',
+          dataQA: 'dt-recipe-editor-blockquote-btn',
           tooltipMessage: 'Quote',
           onClick: this.onBlockquoteToggle,
         },
@@ -678,7 +678,7 @@ export default {
           showBtn: this.showCodeBlockButton,
           selector: 'codeBlock',
           icon: DtIconCodeBlock,
-          dataQA: 'd-recipe-editor-code-block-btn',
+          dataQA: 'dt-recipe-editor-code-block-btn',
           tooltipMessage: 'Code',
           onClick: this.onCodeBlockToggle,
         },
@@ -690,7 +690,7 @@ export default {
         showBtn: this.showAddLink.showAddLinkButton,
         selector: 'link',
         icon: DtIconLink2,
-        dataQA: 'd-recipe-editor-add-link-btn',
+        dataQA: 'dt-recipe-editor-add-link-btn',
         tooltipMessage: 'Link',
         onClick: this.openLinkInput,
       };

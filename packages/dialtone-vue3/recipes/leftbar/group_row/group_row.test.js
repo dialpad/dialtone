@@ -24,7 +24,7 @@ describe('DtRecipeGroupRow Tests', () => {
   // Helpers
   const _setChildWrappers = () => {
     description = wrapper.find('.d-recipe-leftbar-row__description');
-    unreadBadge = wrapper.find('[data-qa="d-recipe-leftbar-row-unread-badge"]');
+    unreadBadge = wrapper.find('[data-qa="dt-recipe-leftbar-row-unread-badge"]');
   };
 
   const _setWrappers = () => {

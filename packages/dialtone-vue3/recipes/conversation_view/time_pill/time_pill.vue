@@ -1,6 +1,6 @@
 <template>
   <time
-    data-qa="d-recipe-time-pill"
+    data-qa="dt-recipe-time-pill"
     :dateTime="dateTime"
     class="d-recipe-time-pill"
   >

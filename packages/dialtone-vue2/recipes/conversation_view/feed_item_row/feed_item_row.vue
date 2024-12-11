@@ -4,7 +4,7 @@
     navigation-type="none"
     v-bind="$attrs"
     :class="['d-recipe-feed-item-row', listItemClasses]"
-    data-qa="d-recipe-feed-item-row"
+    data-qa="dt-recipe-feed-item-row"
     v-on="feedListeners"
   >
     <!-- Avatar or time -->
@@ -39,7 +39,7 @@
         v-if="!showHeader"
         v-show="isActive"
         class="d-recipe-feed-item-row__left-time"
-        data-qa="d-recipe-feed-item-row--left-time"
+        data-qa="dt-recipe-feed-item-row--left-time"
       >
         {{ shortTime }}
       </span>
@@ -49,7 +49,7 @@
       <!-- Feed Item -->
       <div
         v-if="showHeader"
-        data-qa="d-recipe-feed-item-row--header"
+        data-qa="dt-recipe-feed-item-row--header"
         class="d-recipe-feed-item-row__header"
       >
         <p class="d-recipe-feed-item-row__header-name">
@@ -67,13 +67,13 @@
       </div>
       <!-- @slot Default content slot for feed item row -->
       <span
-        data-qa="d-recipe-feed-item-row--content"
+        data-qa="dt-recipe-feed-item-row--content"
       >
         <slot />
       </span>
       <div
         v-if="$slots.attachment"
-        data-qa="d-recipe-feed-item-row--attachment"
+        data-qa="dt-recipe-feed-item-row--attachment"
         class="d-recipe-feed-item-row__attachment"
       >
         <slot name="attachment" />
@@ -84,7 +84,7 @@
       <div
         v-if="$slots.reactions"
         class="d-recipe-feed-item-row__reactions"
-        data-qa="d-recipe-feed-item-row--reactions"
+        data-qa="dt-recipe-feed-item-row--reactions"
       >
         <!-- @slot Slot for reactions row component -->
         <slot name="reactions" />
@@ -102,7 +102,7 @@
     <template #right>
       <div
         v-show="isActive"
-        data-qa="d-recipe-feed-item-row--menu"
+        data-qa="dt-recipe-feed-item-row--menu"
         class="d-recipe-feed-item-row__menu"
       >
         <dt-lazy-show

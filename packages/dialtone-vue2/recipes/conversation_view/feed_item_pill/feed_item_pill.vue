@@ -4,7 +4,7 @@
       <dt-collapsible :open="expanded">
         <template #anchor>
           <button
-            data-qa="d-recipe-feed-item-pill"
+            data-qa="dt-recipe-feed-item-pill"
             :aria-label="ariaLabel"
             :class="['d-recipe-feed-item-pill__button', toggleableClass, buttonClass]"
             @focusin="hover = true"
@@ -20,7 +20,7 @@
               <template #left>
                 <div
                   class="d-recipe-feed-item-pill__icon"
-                  data-qa="d-recipe-feed-item-pill__icon"
+                  data-qa="dt-recipe-feed-item-pill__icon"
                 >
                   <component
                     :is="toggleIcon"

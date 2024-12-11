@@ -1,7 +1,7 @@
 <!-- eslint-disable vue/no-restricted-class -->
 <template>
   <div
-    data-qa="d-recipe-message-input"
+    data-qa="dt-recipe-message-input"
     role="presentation"
     :class="['d-recipe-message-input']"
     @dragover.prevent
@@ -58,7 +58,7 @@
           <dt-button
             v-if="showImagePicker"
             v-dt-tooltip:top-start="showImagePicker?.tooltipLabel"
-            data-qa="d-recipe-message-input-image-btn"
+            data-qa="dt-recipe-message-input-image-btn"
             size="sm"
             class="d-recipe-message-input__button"
             kind="muted"
@@ -76,7 +76,7 @@
           </dt-button>
           <dt-input
             ref="messageInputImageUpload"
-            data-qa="d-recipe-message-input-image-input"
+            data-qa="dt-recipe-message-input-image-input"
             accept="image/*, video/*"
             type="file"
             class="d-recipe-message-input__image-input"
@@ -87,7 +87,7 @@
           <dt-popover
             v-if="showEmojiPicker"
             v-model:open="emojiPickerOpened"
-            data-qa="d-recipe-message-input-emoji-picker-popover"
+            data-qa="dt-recipe-message-input-emoji-picker-popover"
             initial-focus-element="#searchInput"
             padding="none"
           >
@@ -95,7 +95,7 @@
               <dt-button
                 v-dt-tooltip="emojiTooltipMessage"
                 v-bind="attrs"
-                data-qa="d-recipe-message-input-emoji-picker-btn"
+                data-qa="dt-recipe-message-input-emoji-picker-btn"
                 size="sm"
                 class="d-recipe-message-input__button"
                 kind="muted"
@@ -155,7 +155,7 @@
               <p
                 v-show="displayCharacterLimitWarning"
                 class="d-recipe-message-input__remaining-char"
-                data-qa="d-recipe-message-input-character-limit"
+                data-qa="dt-recipe-message-input-character-limit"
               >
                 {{ showCharacterLimit.count - inputLength }}
               </p>
@@ -165,7 +165,7 @@
           <!-- Cancel button for edit mode -->
           <dt-button
             v-if="showCancel"
-            data-qa="d-recipe-message-input-cancel-button"
+            data-qa="dt-recipe-message-input-cancel-button"
             class="d-recipe-message-input__button d-recipe-message-input__cancel-button"
             size="sm"
             kind="muted"
@@ -183,7 +183,7 @@
             <dt-button
               v-if="showSend"
               v-dt-tooltip:top-end="showSend?.tooltipLabel"
-              data-qa="d-recipe-message-input-send-btn"
+              data-qa="dt-recipe-message-input-send-btn"
               size="sm"
               kind="default"
               importance="primary"
