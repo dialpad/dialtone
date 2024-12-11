@@ -164,7 +164,7 @@
         "type": "color"
       },
       "success-strong": {
-        "value": "{color.green.450}",
+        "value": "{color.green.475}",
         "type": "color"
       },
       "warning-subtle": {
@@ -172,7 +172,7 @@
         "type": "color"
       },
       "warning-strong": {
-        "value": "{color.gold.425}",
+        "value": "{color.gold.475}",
         "type": "color"
       },
       "brand-strong": {
