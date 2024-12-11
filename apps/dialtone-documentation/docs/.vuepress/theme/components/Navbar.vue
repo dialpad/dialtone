@@ -154,6 +154,7 @@
         </template>
       </dt-tooltip>
       <dt-tooltip
+        hidden
         placement="bottom"
         sticky="popper"
       >
