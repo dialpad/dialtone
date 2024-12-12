@@ -11,6 +11,7 @@
 <script>
 /* eslint-disable max-lines */
 import { Editor, EditorContent } from '@tiptap/vue-3';
+import { Extension } from '@tiptap/core';
 import Blockquote from '@tiptap/extension-blockquote';
 import CodeBlock from '@tiptap/extension-code-block';
 import Document from '@tiptap/extension-document';
@@ -356,7 +357,8 @@ export default {
     // eslint-disable-next-line complexity
     extensions () {
       // These are the default extensions needed just for plain text.
-      const extensions = [Document, Paragraph, Text, History];
+      const extensions = [Document, Paragraph, Text, History, HardBreak];
+
       if (this.link) {
         extensions.push(TipTapLink.extend({ inclusive: false }).configure({
           HTMLAttributes: {
@@ -395,30 +397,6 @@ export default {
         extensions.push(
           Placeholder.configure({ placeholder: this.placeholder }),
         );
-      }
-
-      // make sure that this is defined before any other extensions
-      // where Enter and Shift+Enter should have its own interaction. otherwise it will be ignored
-      if (!this.allowLineBreaks) {
-        const self = this;
-        extensions.push(
-          HardBreak.extend({
-            addKeyboardShortcuts () {
-              return {
-                Enter: () => {
-                  self.$emit('enter');
-                  return true;
-                },
-                'Shift-Enter': () => {
-                  this.editor.commands.setHardBreak();
-                  return true;
-                },
-              };
-            },
-          }),
-        );
-      } else {
-        extensions.push(HardBreak);
       }
 
       if (this.mentionSuggestion) {
@@ -463,6 +441,35 @@ export default {
       if (this.additionalExtensions.length) {
         extensions.push(...this.additionalExtensions);
       }
+
+      const self = this;
+      const ShiftEnter = Extension.create({
+        addKeyboardShortcuts () {
+          return {
+            'Shift-Enter': ({ editor }) => {
+              if (self.allowLineBreaks) {
+                return false;
+              }
+              editor.commands.first(({ commands }) => [
+                () => commands.newlineInCode(),
+                () => commands.splitListItem('listItem'),
+                () => commands.createParagraphNear(),
+                () => commands.liftEmptyBlock(),
+                () => commands.splitBlock(),
+              ]);
+              return true;
+            },
+            Enter: () => {
+              if (self.allowLineBreaks) {
+                return false;
+              }
+              self.$emit('enter');
+              return true;
+            },
+          };
+        },
+      });
+      extensions.push(ShiftEnter);
 
       return extensions;
     },
