@@ -212,12 +212,50 @@
       "primary-hover": {
         "value": "{color.purple.500}",
         "type": "color"
+      },
+      "warning-hover": {
+        "value": "{color.gold.475}",
+        "type": "color"
       }
     },
     "foreground": {
       "critical": {
         "value": "{color.red.350}",
         "type": "color"
+      },
+      "success-strong": {
+        "value": "{color.green.475}",
+        "type": "color"
+      },
+      "warning": {
+        "value": "{color.gold.425}",
+        "type": "color"
+      },
+      "secondary-inverted": {
+        "value": "{color.black.100}",
+        "type": "color",
+        "$extensions": {
+          "studio.tokens": {
+            "modify": {
+              "type": "lighten",
+              "value": ".1",
+              "space": "hsl"
+            }
+          }
+        }
+      },
+      "tertiary-inverted": {
+        "value": "{color.black.100}",
+        "type": "color",
+        "$extensions": {
+          "studio.tokens": {
+            "modify": {
+              "type": "lighten",
+              "value": ".2",
+              "space": "hsl"
+            }
+          }
+        }
       }
     }
   },
