@@ -36,6 +36,110 @@
       "success-strong": {
         "value": "{color.green.450}",
         "type": "color"
+      },
+      "critical-opaque": {
+        "value": "{color.red.125}",
+        "type": "color",
+        "$extensions": {
+          "studio.tokens": {
+            "modify": {
+              "type": "alpha",
+              "value": ".71",
+              "space": "hsl"
+            }
+          }
+        }
+      },
+      "critical-subtle-opaque": {
+        "value": "{color.red.100}",
+        "type": "color",
+        "$extensions": {
+          "studio.tokens": {
+            "modify": {
+              "type": "alpha",
+              "value": ".6",
+              "space": "hsl"
+            }
+          }
+        }
+      },
+      "warning-opaque": {
+        "value": "{color.gold.150}",
+        "type": "color",
+        "$extensions": {
+          "studio.tokens": {
+            "modify": {
+              "type": "alpha",
+              "value": ".52",
+              "space": "hsl"
+            }
+          }
+        }
+      },
+      "warning-subtle-opaque": {
+        "value": "{color.gold.225}",
+        "type": "color",
+        "$extensions": {
+          "studio.tokens": {
+            "modify": {
+              "type": "alpha",
+              "value": ".2",
+              "space": "hsl"
+            }
+          }
+        }
+      },
+      "success-opaque": {
+        "value": "{color.green.200}",
+        "type": "color",
+        "$extensions": {
+          "studio.tokens": {
+            "modify": {
+              "type": "alpha",
+              "value": ".51",
+              "space": "hsl"
+            }
+          }
+        }
+      },
+      "success-subtle-opaque": {
+        "value": "{color.green.100}",
+        "type": "color",
+        "$extensions": {
+          "studio.tokens": {
+            "modify": {
+              "type": "alpha",
+              "value": ".45",
+              "space": "hsl"
+            }
+          }
+        }
+      },
+      "info-opaque": {
+        "value": "{color.blue.125}",
+        "type": "color",
+        "$extensions": {
+          "studio.tokens": {
+            "modify": {
+              "type": "alpha",
+              "value": "0.62",
+              "space": "hsl"
+            }
+          }
+        }
+      },
+      "info-subtle-opaque": {
+        "value": "{color.blue.175}",
+        "type": "color",
+        "$extensions": {
+          "studio.tokens": {
+            "modify": {
+              "type": "alpha",
+              "value": "0.25",
+              "space": "hsl"
+            }
+          }
+        }
       }
     },
     "border": {
@@ -389,6 +493,24 @@
           }
         }
       }
+    },
+    "presence": {
+      "color": {
+        "background": {
+          "available": {
+            "value": "{color.green.450}",
+            "type": "color"
+          },
+          "busy-unavailable": {
+            "value": "{color.red.350}",
+            "type": "color"
+          },
+          "busy": {
+            "value": "{color.gold.425}",
+            "type": "color"
+          }
+        }
+      }
     }
   },
   "action": {
@@ -400,6 +522,14 @@
               "value": "{color.black.50}",
               "type": "color"
             }
+          },
+          "default": {
+            "value": "{color.purple.425}",
+            "type": "color"
+          },
+          "hover": {
+            "value": "{color.purple.475}",
+            "type": "color"
           }
         },
         "critical": {
@@ -419,7 +549,7 @@
               "type": "color"
             },
             "hover": {
-              "value": "{color.red.400}",
+              "value": "{color.red.450}",
               "type": "color"
             },
             "active": {
@@ -434,6 +564,14 @@
               "value": "{color.purple.425}",
               "type": "color"
             }
+          },
+          "hover": {
+            "value": "{color.purple.50}",
+            "type": "color"
+          },
+          "active": {
+            "value": "{color.purple.100}",
+            "type": "color"
           }
         }
       }
