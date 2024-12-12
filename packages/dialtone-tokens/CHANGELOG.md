@@ -1,3 +1,10 @@
+# [1.38.0](https://github.com/dialpad/dialtone/compare/dialtone-tokens/v1.37.2...dialtone-tokens/v1.38.0) (2024-12-12)
+
+
+### Features
+
+* **Design Tokens:** DLT-2239 experimental deca ([#580](https://github.com/dialpad/dialtone/issues/580)) ([53ff3d8](https://github.com/dialpad/dialtone/commit/53ff3d87424c7f9bdb81c28e17aa34ac60b179d6))
+
 ## [1.37.2](https://github.com/dialpad/dialtone/compare/dialtone-tokens/v1.37.1...dialtone-tokens/v1.37.2) (2024-12-03)
 
 
