@@ -1,11 +1,11 @@
 <template>
-  <node-view-wrapper class="dt-recipe-message-input-meeting-pill">
+  <node-view-wrapper class="d-recipe-message-input-meeting-pill">
     <dt-item-layout
-      class="dt-recipe-message-input-meeting-pill__layout"
+      class="d-recipe-message-input-meeting-pill__layout"
       unstyled
     >
       <template #left>
-        <div class="dt-recipe-message-input-meeting-pill__icon">
+        <div class="d-recipe-message-input-meeting-pill__icon">
           <dt-icon-video
             size="400"
           />
@@ -13,7 +13,7 @@
       </template>
       {{ node.attrs.text }}
       <template #right>
-        <div class="dt-recipe-message-input-meeting-pill__close">
+        <div class="d-recipe-message-input-meeting-pill__close">
           <dt-button
             circle
             :aria-label="node.attrs['close-button-aria-label']"

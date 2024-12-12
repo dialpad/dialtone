@@ -36,7 +36,7 @@ describe('DtRecipeGeneralRow Tests', () => {
     });
 
     iconType = wrapper.find('[data-qa="dt-recipe-leftbar-row-icon"]');
-    description = wrapper.find('.dt-recipe-leftbar-row__description');
+    description = wrapper.find('.d-recipe-leftbar-row__description');
     unreadBadge = wrapper.find('[data-qa="dt-recipe-leftbar-row-unread-badge"]');
     unreadMentionBadge = wrapper.find('[data-qa="dt-recipe-leftbar-row-unread-mention-badge"]');
   };
@@ -134,7 +134,7 @@ describe('DtRecipeGeneralRow Tests', () => {
       });
 
       it('should render the contact center icon', () => {
-        expect(iconType.classes('dt-recipe-leftbar-row__icon-cc')).toBe(true);
+        expect(iconType.classes('d-recipe-leftbar-row__icon-cc')).toBe(true);
       });
 
       it(

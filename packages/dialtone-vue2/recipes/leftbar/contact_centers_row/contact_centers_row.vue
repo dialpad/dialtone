@@ -1,8 +1,8 @@
 <template>
   <div
     :class="[
-      'dt-recipe-leftbar-row__container',
-      { 'dt-recipe-leftbar-row__container--off-duty': $slots.timer },
+      'd-recipe-leftbar-row__container',
+      { 'd-recipe-leftbar-row__container--off-duty': $slots.timer },
     ]"
   >
     <div
@@ -10,26 +10,26 @@
       data-qa="dt-recipe-contact-centers-row"
     >
       <a
-        class="dt-recipe-leftbar-row__primary"
-        :data-qa="$attrs['data-qa'] ?? 'dt-recipe-leftbar-row-link'"
+        class="d-recipe-leftbar-row__primary"
+        :data-qa="$attrs['data-qa'] ?? 'd-recipe-leftbar-row-link'"
         :aria-label="getAriaLabel"
         :title="description"
         :href="$attrs.href ?? 'javascript:void(0)'"
         v-bind="$attrs"
         v-on="$listeners"
       >
-        <div class="dt-recipe-leftbar-row__alpha">
+        <div class="d-recipe-leftbar-row__alpha">
           <dt-icon-headphones
             size="300"
             data-qa="dt-recipe-leftbar-row-icon"
           />
         </div>
         <div
-          class="dt-recipe-leftbar-row__label"
+          class="d-recipe-leftbar-row__label"
           :style="`flex-basis: ${labelWidth}`"
         >
           <dt-emoji-text-wrapper
-            class="dt-recipe-leftbar-row__description"
+            class="d-recipe-leftbar-row__description"
             data-qa="dt-recipe-leftbar-row-description"
             size="200"
           >
@@ -39,13 +39,13 @@
       </a>
       <div
         v-show="!hideActions"
-        class="dt-recipe-leftbar-row__omega"
+        class="d-recipe-leftbar-row__omega"
       >
         <slot name="right" />
-        <div class="dt-recipe-leftbar-row__action-container">
+        <div class="d-recipe-leftbar-row__action-container">
           <dt-badge
             v-if="showUnreadCount"
-            class="dt-recipe-leftbar-row__unread-badge"
+            class="d-recipe-leftbar-row__unread-badge"
             data-qa="dt-recipe-leftbar-row-unread-badge"
             kind="count"
             type="bulletin"
@@ -53,7 +53,7 @@
             {{ unreadCount }}
           </dt-badge>
           <dt-button
-            class="dt-recipe-leftbar-row__action"
+            class="d-recipe-leftbar-row__action"
             data-qa="dt-recipe-leftbar-row-action-button"
             :aria-label="menuButtonAriaLabel"
             importance="clear"
@@ -68,7 +68,7 @@
         </div>
       </div>
     </div>
-    <div class="dt-recipe-leftbar-row__bottom">
+    <div class="d-recipe-leftbar-row__bottom">
       <slot name="timer" />
     </div>
   </div>
@@ -172,11 +172,11 @@ export default {
   computed: {
     leftbarContactCentersRowClasses () {
       return [
-        'dt-recipe-leftbar-row',
-        'dt-recipe-leftbar-row--contact-centers',
+        'd-recipe-leftbar-row',
+        'd-recipe-leftbar-row--contact-centers',
         {
-          'dt-recipe-leftbar-row__unread-count': this.showUnreadCount,
-          'dt-recipe-leftbar-row--selected': this.selected,
+          'd-recipe-leftbar-row__unread-count': this.showUnreadCount,
+          'd-recipe-leftbar-row--selected': this.selected,
         },
       ];
     },
@@ -214,9 +214,9 @@ export default {
 
   methods: {
     adjustLabelWidth () {
-      const labelWidth = this.$el?.querySelector('.dt-recipe-leftbar-row__primary')?.clientWidth || 0;
-      const omegaWidth = this.$el?.querySelector('.dt-recipe-leftbar-row__omega')?.clientWidth || 0;
-      const alphaWidth = this.$el?.querySelector('.dt-recipe-leftbar-row__alpha')?.clientWidth || 0;
+      const labelWidth = this.$el?.querySelector('.d-recipe-leftbar-row__primary')?.clientWidth || 0;
+      const omegaWidth = this.$el?.querySelector('.d-recipe-leftbar-row__omega')?.clientWidth || 0;
+      const alphaWidth = this.$el?.querySelector('.d-recipe-leftbar-row__alpha')?.clientWidth || 0;
       const paddings = 12;
       this.labelWidth = labelWidth - (omegaWidth + alphaWidth + paddings) + 'px';
     },

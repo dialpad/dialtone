@@ -1,4 +1,4 @@
-.dt-recipe-leftbar-row {
+.d-recipe-leftbar-row {
   //  ============================================================================
   //  $   CSS CUSTOM PROPERTIES
   //  ----------------------------------------------------------------------------
@@ -40,19 +40,19 @@
   //  $   VARIANTS
   //  ----------------------------------------------------------------------------
   //
-  //  <div class="dt-recipe-leftbar-row dt-recipe-leftbar-row--{$VARIANT}">
+  //  <div class="d-recipe-leftbar-row d-recipe-leftbar-row--{$VARIANT}">
   //    ...
   //  </div>
   //
-  &:not(.dt-recipe-leftbar-row--no-action):hover,
-  &:not(.dt-recipe-leftbar-row--no-action):focus-within {
+  &:not(.d-recipe-leftbar-row--no-action):hover,
+  &:not(.d-recipe-leftbar-row--no-action):focus-within {
     --leftbar-row-unread-badge-display: none;
 
-    .dt-recipe-leftbar-row__action {
+    .d-recipe-leftbar-row__action {
       display: inline-flex;
     }
 
-    .dt-recipe-leftbar-row__action-button {
+    .d-recipe-leftbar-row__action-button {
       opacity: 1;
     }
   }
@@ -74,12 +74,12 @@
   //  $   LABEL'S ELEMENTS
   //  ----------------------------------------------------------------------------
   //
-  //  <div class="dt-recipe-leftbar-row__description">
+  //  <div class="d-recipe-leftbar-row__description">
   //    ...
   //  </div>
-  //  <div class="dt-recipe-leftbar-row__status">
-  //    <span class="dt-recipe-leftbar-row__meta-context ...">...</span>
-  //    <span class="dt-recipe-leftbar-row__meta-custom">...</span>
+  //  <div class="d-recipe-leftbar-row__status">
+  //    <span class="d-recipe-leftbar-row__meta-context ...">...</span>
+  //    <span class="d-recipe-leftbar-row__meta-custom">...</span>
   //  </div>
   //
   &__description {
@@ -152,7 +152,7 @@
       border-radius: var(--dt-size-radius-pill);
       opacity: 0.3;
       transition: all 500ms ease;
-      animation: wave 1.5s ease infinite;
+      animation: d-recipe-leftbar-row-wave 1.5s ease infinite;
 
       &:nth-child(1) {
         animation-delay: 0ms;
@@ -172,11 +172,11 @@
   //  $   ACTIONABLE ELEMENTS
   //  ----------------------------------------------------------------------------
   //
-  // <el class="dt-recipe-leftbar-row__primary" ...>
+  // <el class="d-recipe-leftbar-row__primary" ...>
   //   ...
   // </el>
-  // <div class="dt-recipe-leftbar-row__action">
-  //   <button class="dt-recipe-leftbar-row__action-button d-btn ..." ...>...</button>
+  // <div class="d-recipe-leftbar-row__action">
+  //   <button class="d-recipe-leftbar-row__action-button d-btn ..." ...>...</button>
   // </div>
   //
   &__primary {
@@ -216,9 +216,9 @@
   //  $   PRIMARY'S MAIN ELEMENTS
   //  ----------------------------------------------------------------------------
   //
-  //  <div class="dt-recipe-leftbar-row__alpha">...</div>
-  //  <div class="dt-recipe-leftbar-row__label">...</div>
-  //  <div class="dt-recipe-leftbar-row__omega">...</div>
+  //  <div class="d-recipe-leftbar-row__alpha">...</div>
+  //  <div class="d-recipe-leftbar-row__label">...</div>
+  //  <div class="d-recipe-leftbar-row__omega">...</div>
 
   &__alpha {
     display: flex;
@@ -258,7 +258,7 @@
   }
 
   &__unread-count {
-    .dt-recipe-leftbar-row__action {
+    .d-recipe-leftbar-row__action {
       display: none;
     }
   }
@@ -283,7 +283,7 @@
   &__active-voice {
     display: inline-flex;
     color: var(--dt-color-purple-400);
-    .opacity-pulsate();
+    .d-recipe-leftbar-row-opacity-pulsate();
   }
 
   &__dnd {
@@ -300,18 +300,18 @@
     border: var(--dt-size-100) solid var(--dt-color-border-subtle);
     border-radius: var(--dt-size-radius-500);
 
-    .dt-recipe-leftbar-row__primary {
+    .d-recipe-leftbar-row__primary {
       margin: calc(var(--dt-size-100) * -1);
     }
   }
 
   &--contact-centers {
-    .dt-recipe-leftbar-row__alpha {
+    .d-recipe-leftbar-row__alpha {
       padding-right: var(--dt-space-450);
       padding-left: var(--dt-space-450);
     }
 
-    .dt-recipe-leftbar-row__action-container {
+    .d-recipe-leftbar-row__action-container {
       display: inline-flex;
       align-items: center;
       justify-content: flex-end;
@@ -327,10 +327,10 @@
   }
 }
 
-.opacity-pulsate {
-  -webkit-animation-name: opacity-pulsate;
-  -moz-animation-name: opacity-pulsate;
-  animation-name: opacity-pulsate;
+.d-recipe-leftbar-row-opacity-pulsate {
+  -webkit-animation-name: d-recipe-leftbar-row-opacity-pulsate;
+  -moz-animation-name: d-recipe-leftbar-row-opacity-pulsate;
+  animation-name: d-recipe-leftbar-row-opacity-pulsate;
   -webkit-animation-duration: 1s;
   -moz-animation-duration: 1s;
   animation-duration: 1s;
@@ -342,7 +342,7 @@
   animation-fill-mode: both;
 }
 
-@keyframes opacity-pulsate {
+@keyframes d-recipe-leftbar-row-opacity-pulsate {
   0%,
   100% {
     opacity: 0.2;
@@ -353,29 +353,7 @@
   }
 }
 
-@keyframes opacity-pulsate {
-  0%,
-  100% {
-    opacity: 0.2;
-  }
-
-  50% {
-    opacity: 1;
-  }
-}
-
-@keyframes opacity-pulsate {
-  0%,
-  100% {
-    opacity: 0.2;
-  }
-
-  50% {
-    opacity: 1;
-  }
-}
-
-@keyframes wave {
+@keyframes d-recipe-leftbar-row-wave {
   0%,
   50%,
   100% {

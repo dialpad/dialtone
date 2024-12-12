@@ -1,10 +1,10 @@
-.dt-recipe-feed-item-pill__wrapper {
+.d-recipe-feed-item-pill__wrapper {
   padding: var(--dt-space-400);
   background-color: var(--dt-color-surface-secondary);
 }
 
-.dt-recipe-feed-item-pill__button {
-  width: 100%;
+.d-recipe-feed-item-pill__button {
+  width: var(--dt-size-100-percent);
   text-align: left;
   background-color: var(--dt-color-surface-moderate);
   border-width: 0;
@@ -17,9 +17,9 @@
   --button-border-radius: var(--dt-size-radius-600);
 }
 
-.dt-recipe-feed-item-pill__layout {
+.d-recipe-feed-item-pill__layout {
   gap: var(--dt-space-300);
-  width: 100%;
+  width: var(--dt-size-100-percent);
   padding: var(--dt-space-400);
 
   & > .d-item-layout--left {
@@ -28,46 +28,46 @@
   }
 }
 
-.dt-recipe-feed-item-pill__icon {
+.d-recipe-feed-item-pill__icon {
   display: flex;
 
   & svg {
-    animation: fade 0.15s ease-in;
+    animation: d-recipe-feed-item-pill-fade 0.15s ease-in;
   }
 }
 
-.dt-recipe-feed-item-pill__content {
+.d-recipe-feed-item-pill__content {
   display: flex;
   justify-content: center;
 }
 
-.dt-recipe-feed-item-pill__title {
+.d-recipe-feed-item-pill__title {
   font-weight: var(--dt-font-weight-bold);
 }
 
 // Gradient radius solution taken from https://stackoverflow.com/a/53037637
-.dt-recipe-feed-item-pill__border {
+.d-recipe-feed-item-pill__border {
   overflow: hidden;
   background-clip: content-box, border-box;
   background-origin: border-box;
-  border: double 1px transparent;
+  border: double var(--dt-size-100) transparent;
   border-radius: var(--dt-size-radius-600);
 }
 
-.dt-recipe-feed-item-pill__border--default {
+.d-recipe-feed-item-pill__border--default {
   background: var(--dt-color-border-default)
 }
 
-.dt-recipe-feed-item-pill__border--ai {
+.d-recipe-feed-item-pill__border--ai {
   background-image: linear-gradient(var(--dt-color-surface-primary), var(--dt-color-surface-primary)),
   var(--dt-badge-color-background-ai);
 }
 
-.dt-recipe-feed-item-pill__border--critical {
+.d-recipe-feed-item-pill__border--critical {
   background: var(--dt-color-foreground-critical);
 }
 
-@keyframes fade {
+@keyframes d-recipe-feed-item-pill-fade {
   0% {
     transform: scale(0);
   }

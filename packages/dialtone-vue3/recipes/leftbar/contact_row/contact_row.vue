@@ -36,17 +36,17 @@
     </template>
     <template #label>
       <dt-emoji-text-wrapper
-        class="dt-recipe-leftbar-row__description"
+        class="d-recipe-leftbar-row__description"
         data-qa="dt-recipe-leftbar-row-description"
         size="200"
       >
         {{ name }}
       </dt-emoji-text-wrapper>
-      <div class="dt-recipe-leftbar-row__status">
+      <div class="d-recipe-leftbar-row__status">
         <span
           v-if="presenceText"
           data-qa="dt-recipe-leftbar-row-presence-text"
-          :class="['dt-recipe-leftbar-row__meta-context', presenceColorClass]"
+          :class="['d-recipe-leftbar-row__meta-context', presenceColorClass]"
         >
           {{ presenceText }}
         </span>
@@ -55,7 +55,7 @@
           size="100"
           element-type="span"
           data-qa="dt-recipe-leftbar-row-user-status"
-          class="dt-recipe-leftbar-row__meta-custom"
+          class="d-recipe-leftbar-row__meta-custom"
         >
           {{ userStatus }}
         </dt-emoji-text-wrapper>

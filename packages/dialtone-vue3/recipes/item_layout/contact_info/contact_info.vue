@@ -2,21 +2,21 @@
   <dt-item-layout
     :role="role"
     data-qa="contact-info"
-    class="dt-recipe-contact-info"
+    class="d-recipe-contact-info"
   >
     <template
       v-if="showAvatar"
       #left
     >
       <button
-        class="dt-recipe-contact-info__left"
+        class="d-recipe-contact-info__left"
         data-qa="contact-info-left"
         :aria-labelledby="avatarLabelledBy"
         @click="avatarClick"
       >
         <span
           v-if="avatarList"
-          class="dt-recipe-contact-info__avatars"
+          class="d-recipe-contact-info__avatars"
         >
           <dt-avatar
             v-for="(avatar, index) in avatarList"

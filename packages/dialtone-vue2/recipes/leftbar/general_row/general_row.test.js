@@ -36,7 +36,7 @@ describe('DtRecipeGeneralRow Tests', () => {
   const _setChildWrappers = async () => {
     await vi.dynamicImportSettled();
     iconType = wrapper.find('[data-qa="dt-recipe-leftbar-row-icon"]');
-    description = wrapper.find('.dt-recipe-leftbar-row__description');
+    description = wrapper.find('.d-recipe-leftbar-row__description');
     unreadBadge = wrapper.find('[data-qa="dt-recipe-leftbar-row-unread-badge"]');
     unreadMentionBadge = wrapper.find('[data-qa="dt-recipe-leftbar-row-unread-mention-badge"]');
   };
@@ -151,7 +151,7 @@ describe('DtRecipeGeneralRow Tests', () => {
       });
 
       it('should render the contact center icon', () => {
-        expect(iconType.find('.dt-recipe-leftbar-row__icon-cc').exists()).toBeTruthy();
+        expect(iconType.find('.d-recipe-leftbar-row__icon-cc').exists()).toBeTruthy();
       });
 
       it(

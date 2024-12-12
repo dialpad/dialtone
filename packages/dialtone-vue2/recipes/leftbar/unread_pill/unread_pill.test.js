@@ -89,7 +89,7 @@ describe('DtRecipeUnreadPill Tests', () => {
       });
 
       it('should contain the correct class', () => {
-        expect(wrapper.classes('dt-recipe-leftbar-unread-pill-messages')).toBe(true);
+        expect(wrapper.classes('d-recipe-leftbar-unread-pill-messages')).toBe(true);
       });
     });
 
@@ -99,7 +99,7 @@ describe('DtRecipeUnreadPill Tests', () => {
       });
 
       it('should contain the correct class', () => {
-        expect(wrapper.classes('dt-recipe-leftbar-unread-pill-mentions')).toBe(true);
+        expect(wrapper.classes('d-recipe-leftbar-unread-pill-mentions')).toBe(true);
       });
     });
 

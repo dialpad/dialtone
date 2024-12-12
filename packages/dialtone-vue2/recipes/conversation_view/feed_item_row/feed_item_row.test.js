@@ -239,12 +239,12 @@ describe('DtFeedItemRow tests', () => {
       });
 
       it('should not add highlight background to the feed row', () => {
-        expect(wrapper.classes('dt-recipe-feed-item-row--active')).toBe(false);
+        expect(wrapper.classes('d-recipe-feed-item-row--active')).toBe(false);
       });
 
       it('should add highlight background to the feed row when isActive is toggled', async () => {
         await wrapper.setProps({ isActive: true });
-        expect(wrapper.classes('dt-recipe-feed-item-row--active')).toBe(true);
+        expect(wrapper.classes('d-recipe-feed-item-row--active')).toBe(true);
       });
     });
   });

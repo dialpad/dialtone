@@ -4,7 +4,7 @@
     importance="outlined"
     size="xs"
     icon-position="right"
-    class="dt-recipe-settings-menu-button-update"
+    class="d-recipe-settings-menu-button-update"
     :aria-label="ariaLabel"
     v-on="$listeners"
   >
@@ -19,7 +19,7 @@
     v-else
     importance="clear"
     kind="inverted"
-    class="dt-recipe-settings-menu-button"
+    class="d-recipe-settings-menu-button"
     :aria-label="ariaLabel"
     v-on="$listeners"
   >

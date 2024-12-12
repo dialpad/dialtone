@@ -1,6 +1,6 @@
 <template>
   <button
-    :class="['dt-recipe-leftbar-unread-pill', `dt-recipe-leftbar-unread-pill-${kind}`]"
+    :class="['d-recipe-leftbar-unread-pill', `d-recipe-leftbar-unread-pill-${kind}`]"
     type="button"
     data-qa="dt-recipe-leftbar-unread-pill"
     v-on="unreadChipListeners"

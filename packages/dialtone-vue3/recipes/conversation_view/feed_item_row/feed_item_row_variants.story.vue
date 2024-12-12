@@ -110,7 +110,7 @@
               :image-src="fryImage"
               image-alt="Alt Text"
               close-aria-label="Close"
-              image-button-class="dt-recipe-feed-item-row__image d-wmn64 d-hmn64 w-wmx332 d-hmx332"
+              image-button-class="d-recipe-feed-item-row__image d-wmn64 d-hmn64 w-wmx332 d-hmx332"
               aria-label="Click to open image"
             />
           </template>
@@ -147,7 +147,7 @@
           <template #attachment>
             <!-- eslint-disable-next-line vuejs-accessibility/media-has-caption -->
             <video
-              class="dt-recipe-feed-item-row__video"
+              class="d-recipe-feed-item-row__video"
               controls
               src="https://www.w3schools.com/html/mov_bbb.mp4"
             />

@@ -1,9 +1,9 @@
 <template>
   <li
-    class="dt-recipe-attachment-carousel__image"
+    class="d-recipe-attachment-carousel__image"
   >
     <dt-image-viewer
-      image-button-class="dt-recipe-attachment-carousel__image__viewer"
+      image-button-class="d-recipe-attachment-carousel__image-viewer"
       :image-src="mediaItem.path"
       :image-alt="mediaItem.altText"
       :close-aria-label="closeAriaLabel"
@@ -12,18 +12,18 @@
 
     <!-- Loader / Close button -->
     <div
-      class="dt-recipe-attachment-carousel__image__top-right"
+      class="d-recipe-attachment-carousel__image-top-right"
     >
       <dt-progress-bar
         v-if="mediaItem.isUploading"
-        class="dt-recipe-attachment-carousel__image__progress-bar"
+        class="d-recipe-attachment-carousel__image-progress-bar"
         :progress="mediaItem.progress"
         :progressbar-aria-label="progressbarAriaLabel"
       />
       <dt-button
         :id="`closeButton-${index}`"
         tabindex="0"
-        class="dt-recipe-attachment-carousel__image__close-button"
+        class="d-recipe-attachment-carousel__image-close-button"
         circle
         size="xs"
         importance="clear"

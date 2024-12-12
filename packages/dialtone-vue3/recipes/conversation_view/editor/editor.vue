@@ -10,7 +10,7 @@
     <dt-stack
       direction="row"
       gap="450"
-      class="d-p8 dt-recipe-editor__top-bar-background"
+      class="d-p8 d-recipe-editor__top-bar-background"
     >
       <dt-stack
         v-for="buttonGroup in buttonGroups"
@@ -45,7 +45,7 @@
             </dt-button>
           </template>
         </dt-tooltip>
-        <div class="dt-recipe-editor__button-group-divider" />
+        <div class="d-recipe-editor__button-group-divider" />
       </dt-stack>
       <dt-stack
         v-if="linkButton.showBtn"

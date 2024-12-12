@@ -3,7 +3,7 @@
     ref="FeedItemRef"
     navigation-type="none"
     v-bind="$attrs"
-    :class="['dt-recipe-feed-item-row', listItemClasses]"
+    :class="['d-recipe-feed-item-row', listItemClasses]"
     data-qa="dt-recipe-feed-item-row"
     v-on="feedListeners"
   >
@@ -11,7 +11,7 @@
     <template #left>
       <div
         v-if="showHeader"
-        class="dt-recipe-feed-item-row__avatar-container"
+        class="d-recipe-feed-item-row__avatar-container"
       >
         <!-- @slot Slot to contain the avatar, overrides avatar props. -->
         <slot
@@ -38,25 +38,25 @@
       <span
         v-if="!showHeader"
         v-show="isActive"
-        class="dt-recipe-feed-item-row__left-time"
+        class="d-recipe-feed-item-row__left-time"
         data-qa="dt-recipe-feed-item-row--left-time"
       >
         {{ shortTime }}
       </span>
     </template>
 
-    <article class="dt-recipe-feed-item-row__content">
+    <article class="d-recipe-feed-item-row__content">
       <!-- Feed Item -->
       <div
         v-if="showHeader"
         data-qa="dt-recipe-feed-item-row--header"
-        class="dt-recipe-feed-item-row__header"
+        class="d-recipe-feed-item-row__header"
       >
-        <p class="dt-recipe-feed-item-row__header-name">
+        <p class="d-recipe-feed-item-row__header-name">
           {{ displayName }}
         </p>
         <time
-          class="dt-recipe-feed-item-row__header-time"
+          class="d-recipe-feed-item-row__header-time"
         >
           {{ time }}
         </time>
@@ -74,7 +74,7 @@
       <div
         v-if="$slots.attachment"
         data-qa="dt-recipe-feed-item-row--attachment"
-        class="dt-recipe-feed-item-row__attachment"
+        class="d-recipe-feed-item-row__attachment"
       >
         <slot name="attachment" />
       </div>
@@ -83,7 +83,7 @@
     <template #bottom>
       <div
         v-if="$slots.reactions"
-        class="dt-recipe-feed-item-row__reactions"
+        class="d-recipe-feed-item-row__reactions"
         data-qa="dt-recipe-feed-item-row--reactions"
       >
         <!-- @slot Slot for reactions row component -->
@@ -91,7 +91,7 @@
       </div>
       <div
         v-if="$slots.threading"
-        class="dt-recipe-feed-item-row__threading"
+        class="d-recipe-feed-item-row__threading"
       >
         <!-- @slot Slot for threading row component -->
         <slot name="threading" />
@@ -103,7 +103,7 @@
       <div
         v-show="isActive"
         data-qa="dt-recipe-feed-item-row--menu"
-        class="dt-recipe-feed-item-row__menu"
+        class="d-recipe-feed-item-row__menu"
       >
         <dt-lazy-show
           :appear="true"
@@ -283,9 +283,9 @@ export default {
 
     listItemClasses () {
       return [
-        'dt-recipe-feed-item-row',
-        { 'dt-recipe-feed-item-row--active': this.isActive && this.state === DEFAULT_FEED_ROW_STATE },
-        { 'dt-recipe-feed-item-row__state-transition': this.transitionActive },
+        'd-recipe-feed-item-row',
+        { 'd-recipe-feed-item-row--active': this.isActive && this.state === DEFAULT_FEED_ROW_STATE },
+        { 'd-recipe-feed-item-row__state-transition': this.transitionActive },
         FEED_ROW_STATE_BACKGROUND_COLOR[this.state],
 
       ];
