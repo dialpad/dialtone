@@ -14,6 +14,7 @@ export const BRANDS = [
   { value: 'tmo', label: 'T-Mobile' },
   { value: 'expressive', label: 'Expressive' },
   { value: 'expressive-sm', label: 'Expressive Small' },
+  // { value: 'deca', label: 'Deca' },
 ];
 
 export const CATEGORY_MAP = {
