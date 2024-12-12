@@ -1,3 +1,18 @@
+# [9.87.0](https://github.com/dialpad/dialtone/compare/dialtone/v9.86.2...dialtone/v9.87.0) (2024-12-12)
+
+
+### Bug Fixes
+
+* recipes css cleanup ([#581](https://github.com/dialpad/dialtone/issues/581)) ([ba85404](https://github.com/dialpad/dialtone/commit/ba854047ab79637d23e87b6d7ab2097792606ae1))
+* **Rich Text Editor:** DP-116205 fix line break related issues ([#573](https://github.com/dialpad/dialtone/issues/573)) ([a204fd4](https://github.com/dialpad/dialtone/commit/a204fd446f9d047d3700f1b4249633be8d3a022a))
+
+
+### Features
+
+* **Callbar Button:** DLT-2211 add passthrough tooltip props ([#578](https://github.com/dialpad/dialtone/issues/578)) ([66cf439](https://github.com/dialpad/dialtone/commit/66cf439fb51f3975a91b0edd15ea52924a2e8e0e))
+* **Emoji:** NO-JIRA update emoji-toolkit to 9.0 ([#587](https://github.com/dialpad/dialtone/issues/587)) ([9684377](https://github.com/dialpad/dialtone/commit/96843779bcf107e02ead41085c01375c1cba1f4e))
+* **Rich Text Editor:** DLT-2237 add image extension to editor ([#589](https://github.com/dialpad/dialtone/issues/589)) ([72cff78](https://github.com/dialpad/dialtone/commit/72cff7887f1fb230cf31c2847b2a916cf489b74b))
+
 ## [9.86.2](https://github.com/dialpad/dialtone/compare/dialtone/v9.86.1...dialtone/v9.86.2) (2024-12-10)
 
 
