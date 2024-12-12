@@ -4,11 +4,29 @@
       "secondary": {
         "value": "{color.black.800}",
         "type": "color",
+        "$extensions": {
+          "studio.tokens": {
+            "modify": {
+              "type": "lighten",
+              "value": ".05",
+              "space": "hsl"
+            }
+          }
+        },
         "description": "Example uses include introduction paragraphs, labels, and descriptions paired with form elements."
       },
       "tertiary": {
         "value": "{color.black.700}",
         "type": "color",
+        "$extensions": {
+          "studio.tokens": {
+            "modify": {
+              "type": "lighten",
+              "value": "0.085",
+              "space": "hsl"
+            }
+          }
+        },
         "description": "Used to imply visual hierarchy relative to primary and secondary text colors, e.g. headlines and labels."
       },
       "muted": {
@@ -317,7 +335,6 @@
       "secondary-opaque": {
         "value": "{color.black.900}",
         "type": "color",
-        "description": "Secondary surface as opaque background color.",
         "$extensions": {
           "studio.tokens": {
             "modify": {
@@ -326,7 +343,8 @@
               "space": "hsl"
             }
           }
-        }
+        },
+        "description": "Secondary surface as opaque background color."
       },
       "moderate-opaque": {
         "value": "{color.black.900}",
@@ -1475,15 +1493,15 @@
       "color": {
         "background": {
           "available": {
-            "value": "{color.green.400}",
+            "value": "{color.green.325}",
             "type": "color"
           },
           "busy-unavailable": {
-            "value": "{color.red.300}",
+            "value": "{color.red.275}",
             "type": "color"
           },
           "busy": {
-            "value": "{color.gold.300}",
+            "value": "{color.gold.200}",
             "type": "color"
           },
           "offline": {
