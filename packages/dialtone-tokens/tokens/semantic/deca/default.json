@@ -413,88 +413,88 @@
         "description": "Critical subtle surface as opaque background color."
       },
       "warning-opaque": {
-        "value": "{color.gold.200}",
+        "value": "{color.gold.150}",
         "type": "color",
-        "description": "Warning surface as opaque background color",
         "$extensions": {
           "studio.tokens": {
             "modify": {
               "type": "alpha",
-              "value": ".38",
+              "value": ".50",
               "space": "hsl"
             }
           }
-        }
+        },
+        "description": "Warning surface as opaque background color"
       },
       "warning-subtle-opaque": {
-        "value": "{color.gold.200}",
+        "value": "{color.gold.100}",
         "type": "color",
-        "description": "Warning subtle surface as opaque background color",
         "$extensions": {
           "studio.tokens": {
             "modify": {
               "type": "alpha",
-              "value": ".18",
+              "value": ".50",
               "space": "hsl"
             }
           }
-        }
+        },
+        "description": "Warning subtle surface as opaque background color"
       },
       "success-opaque": {
-        "value": "{color.green.400}",
+        "value": "{color.green.200}",
         "type": "color",
-        "description": "Success surface as opaque background color.",
         "$extensions": {
           "studio.tokens": {
             "modify": {
               "type": "alpha",
-              "value": ".08",
+              "value": ".26",
               "space": "hsl"
             }
           }
-        }
+        },
+        "description": "Success surface as opaque background color."
       },
       "success-subtle-opaque": {
-        "value": "{color.green.400}",
+        "value": "{color.green.100}",
         "type": "color",
-        "description": "Success subtle surface as opaque background color.",
         "$extensions": {
           "studio.tokens": {
             "modify": {
               "type": "alpha",
-              "value": ".03",
+              "value": ".50",
               "space": "hsl"
             }
           }
-        }
+        },
+        "description": "Success subtle surface as opaque background color."
       },
       "info-opaque": {
-        "value": "{color.blue.400}",
+        "value": "{color.blue.125}",
         "type": "color",
-        "description": "Info surface as opaque background color.",
         "$extensions": {
           "studio.tokens": {
             "modify": {
               "type": "alpha",
-              "value": ".09",
+              "value": ".5",
               "space": "hsl"
             }
           }
-        }
+        },
+        "description": "Info surface as opaque background color."
       },
       "info-subtle-opaque": {
-        "value": "{color.blue.400}",
+        "value": "{color.blue.100}",
         "type": "color",
-        "description": "Info surface as opaque background color.",
         "$extensions": {
           "studio.tokens": {
             "modify": {
               "type": "alpha",
-              "value": ".04",
+              "value": ".50",
               "space": "hsl"
             }
           }
-        }
+        },
+        "description": "Info surface as opaque background color."
       },
       "backdrop": {
         "value": "{color.neutral.black}",
