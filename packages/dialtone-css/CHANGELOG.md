@@ -1,3 +1,10 @@
+## [8.46.4](https://github.com/dialpad/dialtone/compare/dialtone-css/v8.46.3...dialtone-css/v8.46.4) (2024-12-12)
+
+
+### Bug Fixes
+
+* recipes css cleanup ([#581](https://github.com/dialpad/dialtone/issues/581)) ([ba85404](https://github.com/dialpad/dialtone/commit/ba854047ab79637d23e87b6d7ab2097792606ae1))
+
 ## [8.46.3](https://github.com/dialpad/dialtone/compare/dialtone-css/v8.46.2...dialtone-css/v8.46.3) (2024-12-10)
 
 
