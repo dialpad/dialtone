@@ -1,3 +1,10 @@
+# [1.1.0](https://github.com/dialpad/dialtone/compare/dialtone-emojis/v1.0.8...dialtone-emojis/v1.1.0) (2024-12-13)
+
+
+### Features
+
+* DLT-2236 update emoji set ([#592](https://github.com/dialpad/dialtone/issues/592)) ([0292911](https://github.com/dialpad/dialtone/commit/029291158c9fa0257e09e76ff3dc9da8d4e756af))
+
 ## [1.0.8](https://github.com/dialpad/dialtone/compare/dialtone-emojis/v1.0.7...dialtone-emojis/v1.0.8) (2024-08-29)
 
 
