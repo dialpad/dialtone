@@ -54,13 +54,13 @@ describe('DtRecipeCallbox Tests', () => {
     avatar = wrapper.find('[data-qa="dt-avatar"]');
     avatarImage = wrapper.find('[data-qa="dt-avatar-image"]');
     badge = wrapper.find('[data-qa="dt-badge"]');
-    badgeSlot = wrapper.find('[data-qa="dt-recipe-callbox--badge-wrapper"]');
-    bottomSlot = wrapper.find('[data-qa="dt-recipe-callbox--bottom-wrapper"]');
-    mainContent = wrapper.find('[data-qa="dt-recipe-callbox--main-content"]');
-    rightSlot = wrapper.find('[data-qa="dt-recipe-callbox--right-wrapper"]');
-    subtitleSlot = wrapper.find('[data-qa="dt-recipe-callbox--subtitle-wrapper"]');
-    title = wrapper.find('[data-qa="dt-recipe-callbox--title"]');
-    videoSlot = wrapper.find('[data-qa="dt-recipe-callbox--video-wrapper"]');
+    badgeSlot = wrapper.find('[data-qa="dt-recipe-callbox__badge-wrapper"]');
+    bottomSlot = wrapper.find('[data-qa="dt-recipe-callbox__bottom-wrapper"]');
+    mainContent = wrapper.find('[data-qa="dt-recipe-callbox__main-content"]');
+    rightSlot = wrapper.find('[data-qa="dt-recipe-callbox__right-wrapper"]');
+    subtitleSlot = wrapper.find('[data-qa="dt-recipe-callbox__subtitle-wrapper"]');
+    title = wrapper.find('[data-qa="dt-recipe-callbox__title"]');
+    videoSlot = wrapper.find('[data-qa="dt-recipe-callbox__video-wrapper"]');
   };
 
   beforeAll(() => {

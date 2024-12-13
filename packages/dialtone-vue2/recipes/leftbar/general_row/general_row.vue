@@ -1,11 +1,11 @@
 <template>
   <div
     :class="leftbarGeneralRowClasses"
-    data-qa="dt-leftbar-row"
+    data-qa="dt-recipe-leftbar-row"
   >
     <a
-      class="dt-leftbar-row__primary"
-      :data-qa="'data-qa' in $attrs ? $attrs['data-qa'] : 'dt-leftbar-row-link'"
+      class="d-recipe-leftbar-row__primary"
+      :data-qa="'data-qa' in $attrs ? $attrs['data-qa'] : 'd-recipe-leftbar-row-link'"
       :aria-label="getAriaLabel"
       :title="description"
       :href="'href' in $attrs ? $attrs.href : 'javascript:void(0)'"
@@ -13,11 +13,11 @@
       v-on="$listeners"
     >
       <div
-        class="dt-leftbar-row__alpha"
+        class="d-recipe-leftbar-row__alpha"
       >
         <div
           v-if="isTyping"
-          class="dt-leftbar-row__is-typing"
+          class="d-recipe-leftbar-row__is-typing"
         >
           <span /><span /><span />
         </div>
@@ -29,18 +29,18 @@
             :type="getIcon"
             :color="color"
             :icon-size="iconSize"
-            data-qa="dt-leftbar-row-icon"
+            data-qa="dt-recipe-leftbar-row-icon"
           />
         </slot>
       </div>
       <div
-        class="dt-leftbar-row__label"
+        class="d-recipe-leftbar-row__label"
         :style="`flex-basis: ${labelWidth}`"
       >
         <slot name="label">
           <dt-emoji-text-wrapper
-            class="dt-leftbar-row__description"
-            data-qa="dt-leftbar-row-description"
+            class="d-recipe-leftbar-row__description"
+            data-qa="dt-recipe-leftbar-row-description"
             size="200"
           >
             {{ description }}
@@ -50,7 +50,7 @@
     </a>
     <div
       v-if="hasActions"
-      class="dt-leftbar-row__omega"
+      class="d-recipe-leftbar-row__omega"
     >
       <dt-tooltip
         v-if="dndText"
@@ -59,9 +59,9 @@
       >
         <template #anchor>
           <div
-            ref="dt-leftbar-row-dnd"
-            class="dt-leftbar-row__dnd"
-            data-qa="dt-leftbar-row-dnd"
+            ref="d-recipe-leftbar-row-dnd"
+            class="d-recipe-leftbar-row__dnd"
+            data-qa="dt-recipe-leftbar-row-dnd"
           >
             {{ dndText }}
           </div>
@@ -69,7 +69,7 @@
       </dt-tooltip>
       <div
         v-if="activeVoiceChat"
-        class="dt-leftbar-row__active-voice"
+        class="d-recipe-leftbar-row__active-voice"
       >
         <dt-icon-waveform
           size="300"
@@ -85,9 +85,9 @@
             v-if="showUnreadCount"
             kind="count"
             type="bulletin"
-            data-qa="dt-leftbar-row-unread-badge"
-            :class="['dt-leftbar-row__unread-badge', {
-              'dt-leftbar-row__unread-count-badge':
+            data-qa="dt-recipe-leftbar-row-unread-badge"
+            :class="['d-recipe-leftbar-row__unread-badge', {
+              'd-recipe-leftbar-row__unread-count-badge':
                 shouldApplyCustomStyleForCountBadge,
             }]"
           >
@@ -97,10 +97,10 @@
             v-if="showUnreadMentionCount"
             kind="count"
             type="bulletin"
-            data-qa="dt-leftbar-row-unread-mention-badge"
-            :class="['dt-leftbar-row__unread-badge',
-                     { 'dt-leftbar-row__unread-mention-count-badge': shouldApplyCustomStyleForCountBadge },
-                     { 'dt-leftbar-row__unread-mention-only-count-badge': shouldApplyCustomStyleForMentionOnly },
+            data-qa="dt-recipe-leftbar-row-unread-mention-badge"
+            :class="['d-recipe-leftbar-row__unread-badge',
+                     { 'd-recipe-leftbar-row__unread-mention-count-badge': shouldApplyCustomStyleForCountBadge },
+                     { 'd-recipe-leftbar-row__unread-mention-only-count-badge': shouldApplyCustomStyleForMentionOnly },
             ]"
           >
             {{ unreadMentionCount }}
@@ -109,8 +109,8 @@
       </dt-tooltip>
       <div
         v-if="hasCallButton"
-        class="dt-leftbar-row__action"
-        data-qa="dt-leftbar-row-action"
+        class="d-recipe-leftbar-row__action"
+        data-qa="dt-recipe-leftbar-row-action"
       >
         <dt-tooltip
           :message="callButtonTooltip"
@@ -118,8 +118,8 @@
         >
           <template #anchor>
             <dt-button
-              class="dt-leftbar-row__action-button"
-              data-qa="dt-leftbar-row-action-call-button"
+              class="d-recipe-leftbar-row__action-button"
+              data-qa="dt-recipe-leftbar-row-action-call-button"
               :circle="true"
               size="xs"
               kind="inverted"
@@ -360,14 +360,14 @@ export default {
   computed: {
     leftbarGeneralRowClasses () {
       return [
-        'dt-leftbar-row',
+        'd-recipe-leftbar-row',
         {
-          'dt-leftbar-row--no-action': !this.hasCallButton,
-          'dt-leftbar-row--has-unread': this.hasUnreads,
-          'dt-leftbar-row--unread-count': this.showUnreadCount || this.showUnreadMentionCount,
-          'dt-leftbar-row--selected': this.selected,
-          'dt-leftbar-row--muted': this.muted,
-          'dt-leftbar-row--action-focused': this.actionFocused,
+          'd-recipe-leftbar-row--no-action': !this.hasCallButton,
+          'd-recipe-leftbar-row--has-unread': this.hasUnreads,
+          'd-recipe-leftbar-row__unread-count': this.showUnreadCount || this.showUnreadMentionCount,
+          'd-recipe-leftbar-row--selected': this.selected,
+          'd-recipe-leftbar-row--muted': this.muted,
+          'd-recipe-leftbar-row--action-focused': this.actionFocused,
         },
       ];
     },
@@ -456,16 +456,12 @@ export default {
     },
 
     adjustLabelWidth () {
-      const labelWidth = this.$el?.querySelector('.dt-leftbar-row__primary')?.clientWidth || 0;
-      const omegaWidth = this.$el?.querySelector('.dt-leftbar-row__omega')?.clientWidth || 0;
-      const alphaWidth = this.$el?.querySelector('.dt-leftbar-row__alpha')?.clientWidth || 0;
+      const labelWidth = this.$el?.querySelector('.d-recipe-leftbar-row__primary')?.clientWidth || 0;
+      const omegaWidth = this.$el?.querySelector('.d-recipe-leftbar-row__omega')?.clientWidth || 0;
+      const alphaWidth = this.$el?.querySelector('.d-recipe-leftbar-row__alpha')?.clientWidth || 0;
       const paddings = 16;
       this.labelWidth = labelWidth - (omegaWidth + alphaWidth + paddings) + 'px';
     },
   },
 };
 </script>
-
-<style lang="less" scoped>
-@import "../style/leftbar_row.less";
-</style>

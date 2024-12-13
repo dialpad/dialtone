@@ -1,23 +1,23 @@
 {
 	"private": true,
 	"name": "vscode-dialtone",
-	"version": "1.0.0-alpha.2",
+	"version": "1.0.0",
 	"categories": [
 		"Other"
 	],
 	"galleryBanner": {
-    "color": "#7c52ff"
-  },
+		"color": "#7c52ff"
+	},
 	"pricing": "Free",
 	"preview": true,
-	"icon": "images/icon.png",
+	"icon": "media/icon.png",
 	"displayName": "Dialtone",
 	"description": "Language Support for Dialtone components and tokens",
 	"author": "Tico Ortega <julio.ortega@dialpad.com>",
 	"publisher": "Dialpad",
 	"bugs": {
-    "email": "dialtone@dialpad.com"
-  },
+		"email": "dialtone@dialpad.com"
+	},
 	"keywords": [
 		"dialpad",
 		"dialtone",
@@ -45,16 +45,16 @@
 					"Dialtone Tokens"
 				],
 				"icon": {
-					"light": "images/icon.png",
-					"dark": "images/icon.png"
+					"light": "media/icon.png",
+					"dark": "media/icon.png"
 				}
 			}
 		],
 		"commands": [
-      {
-        "command": "dialtone.showOutput",
-        "title": "Dialtone: Show Output"
-      }
+			{
+				"command": "dialtone.showOutput",
+				"title": "Dialtone: Show Output"
+			}
 		]
 	},
 	"scripts": {
@@ -72,8 +72,8 @@
 	"license": "SEE LICENSE IN LICENSE",
 	"repository": {
 		"type": "git",
-		"url": "git+ssh://git@github.com/dialpad/dialtone.git",
-		"directory": "packages/language-server"
+		"url": "https://github.com/dialpad/dialtone",
+		"directory": "packages/language-server/vscode"
 	},
 	"homepage": "https://github.com/dialpad/dialtone/blob/production/packages/language-server/vscode/README.md"
 }

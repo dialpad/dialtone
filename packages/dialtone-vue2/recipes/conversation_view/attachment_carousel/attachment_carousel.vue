@@ -1,12 +1,12 @@
 <template>
   <div
-    class="dt-attachment-carousel"
+    class="d-recipe-attachment-carousel"
     role="presentation"
   >
     <ul
       v-if="mediaList.length > 0"
       ref="carousel"
-      class="dt-attachment-carousel__media-list"
+      class="d-recipe-attachment-carousel__media-list"
       @scroll="handleScroll"
     >
       <!-- media list -->
@@ -29,7 +29,7 @@
       v-show="showLeftArrow"
       tabindex="-1"
       :aria-label="leftArrowAriaLabel"
-      class="dt-attachment-carousel__arrow dt-attachment-carousel__arrow--left"
+      class="d-recipe-attachment-carousel__arrow d-recipe-attachment-carousel__arrow--left"
       circle
       size="xs"
       importance="clear"
@@ -45,7 +45,7 @@
       v-show="showRightArrow"
       tabindex="-1"
       :aria-label="rightArrowAriaLabel"
-      class="dt-attachment-carousel__arrow dt-attachment-carousel__arrow--right"
+      class="d-recipe-attachment-carousel__arrow d-recipe-attachment-carousel__arrow--right"
       circle
       size="xs"
       importance="clear"
@@ -204,50 +204,3 @@ export default {
   },
 };
 </script>
-
-<style lang="less">
-.dt-attachment-carousel {
-  position: relative;
-  max-height: 100px;
-  width: var(--dt-space-1000);
-}
-
-.dt-attachment-carousel__media-list {
-  display: flex;
-  flex-direction: row;
-  padding-left: 0px;
-  overflow-x: scroll;
-  &::-webkit-scrollbar {
-    display: none;
-  }
-}
-
-.dt-attachment-carousel__arrow {
-  position: absolute;
-  opacity: 0;
-
-  .dt-attachment-carousel:hover & {
-    opacity: 1;
-  }
-  background-color: var(--dt-color-neutral-white);
-  top: var(--dt-space-30-percent);
-  border: var(--dt-space-100) solid;
-  border-width: var(--dt-size-100);
-  border-color: var(--bc-default);
-}
-.dt-attachment-carousel__arrow--left {
-  left: var(--dt-space-300);
-}
-.dt-attachment-carousel__arrow--right {
-  right: var(--dt-space-300);
-}
-
-.dt-attachment-carousel__image-viewer {
-  height: var(--dt-size-700);
-  width: var(--dt-size-700);
-  border-radius: var(--br4);
-  border: var(--dt-space-100) solid;
-  border-width: var(--dt-size-350);
-  border-color: var(--dt-color-border-subtle);
-}
-</style>

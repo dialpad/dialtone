@@ -153,6 +153,30 @@
           </dt-button>
         </template>
       </dt-tooltip>
+      <dt-tooltip
+        hidden
+        placement="bottom"
+        sticky="popper"
+      >
+        <template #default>
+          <span class="d-tt-capitalize">{{ `${currentBrand} brand` }}</span>
+        </template>
+        <template #anchor>
+          <dt-button
+            circle
+            importance="clear"
+            kind="muted"
+            @click="toggleBrand"
+          >
+            <template #icon>
+              <dt-icon
+                size="400"
+                name="triangle"
+              />
+            </template>
+          </dt-button>
+        </template>
+      </dt-tooltip>
     </dt-stack>
     <dt-button
       importance="outlined"
@@ -173,10 +197,14 @@
 
 <script setup>
 import { useRoute } from 'vue-router';
-import { onMounted, onUnmounted, inject, computed } from 'vue';
+import { onMounted, onUnmounted, inject, computed, ref } from 'vue';
 import { setTheme } from '@dialpad/dialtone-tokens/themes/config';
 import DpLight from '@dialpad/dialtone-tokens/themes/dp-light';
 import DpDark from '@dialpad/dialtone-tokens/themes/dp-dark';
+import DpDecaLight from '@dialpad/dialtone-tokens/themes/dp-deca-light';
+import DpDecaDark from '@dialpad/dialtone-tokens/themes/dp-deca-dark';
+import TmoLight from '@dialpad/dialtone-tokens/themes/tmo-light';
+import TmoDark from '@dialpad/dialtone-tokens/themes/tmo-dark';
 
 defineProps({
   items: {
@@ -188,7 +216,9 @@ defineEmits(['search']);
 
 const route = useRoute();
 const currentTheme = inject('currentTheme');
+const currentBrand = ref('dialpad');
 const themes = ['system', 'light', 'dark'];
+const brands = ['dialpad', 'tmobile', 'deca'];
 const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
 
 const currentThemeIconName = computed(() => {
@@ -215,6 +245,13 @@ const toggleTheme = () => {
   localStorage.setItem('preferredTheme', currentTheme.value);
 };
 
+const toggleBrand = () => {
+  const currentIndex = brands.indexOf(currentBrand.value);
+  const nextIndex = (currentIndex + 1) % brands.length;
+  currentBrand.value = brands[nextIndex];
+  setCssForBrand(currentBrand.value);
+};
+
 const setCssForTheme = (currentTheme) => {
   if (currentTheme === 'system') {
     mediaQuery.matches ? setTheme(DpDark) : setTheme(DpLight);
@@ -222,6 +259,21 @@ const setCssForTheme = (currentTheme) => {
     setTheme(DpDark);
   } else {
     setTheme(DpLight);
+  }
+};
+
+// eslint-disable-next-line complexity
+const setCssForBrand = (currentBrand) => {
+  let theme = currentTheme.value;
+  if (theme === 'system') {
+    mediaQuery.matches ? theme = 'dark' : theme = 'light';
+  }
+  if (currentBrand === 'deca') {
+    theme === 'dark' ? setTheme(DpDecaDark) : setTheme(DpDecaLight);
+  } else if (currentBrand === 'tmobile') {
+    theme === 'dark' ? setTheme(TmoDark) : setTheme(TmoLight);
+  } else {
+    theme === 'dark' ? setTheme(DpDark) : setTheme(DpLight);
   }
 };
 

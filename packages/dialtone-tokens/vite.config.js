@@ -17,6 +17,8 @@ export default defineConfig({
         'themes/config': resolve(__dirname, './themes/config.js'),
         'themes/dp-light': resolve(__dirname, './themes/dp-light.js'),
         'themes/dp-dark': resolve(__dirname, './themes/dp-dark.js'),
+        'themes/dp-deca-light': resolve(__dirname, './themes/dp-deca-light.js'),
+        'themes/dp-deca-dark': resolve(__dirname, './themes/dp-deca-dark.js'),
         'themes/expressive-light': resolve(
           __dirname,
           './themes/expressive-light.js',

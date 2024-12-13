@@ -1,3 +1,70 @@
+# [3.161.0](https://github.com/dialpad/dialtone/compare/dialtone-vue3/v3.160.1...dialtone-vue3/v3.161.0) (2024-12-12)
+
+
+### Bug Fixes
+
+* recipes css cleanup ([#581](https://github.com/dialpad/dialtone/issues/581)) ([ba85404](https://github.com/dialpad/dialtone/commit/ba854047ab79637d23e87b6d7ab2097792606ae1))
+* **Rich Text Editor:** DP-116205 fix line break related issues ([#573](https://github.com/dialpad/dialtone/issues/573)) ([a204fd4](https://github.com/dialpad/dialtone/commit/a204fd446f9d047d3700f1b4249633be8d3a022a))
+
+
+### Features
+
+* **Callbar Button:** DLT-2211 add passthrough tooltip props ([#578](https://github.com/dialpad/dialtone/issues/578)) ([66cf439](https://github.com/dialpad/dialtone/commit/66cf439fb51f3975a91b0edd15ea52924a2e8e0e))
+* **Emoji:** NO-JIRA update emoji-toolkit to 9.0 ([#587](https://github.com/dialpad/dialtone/issues/587)) ([9684377](https://github.com/dialpad/dialtone/commit/96843779bcf107e02ead41085c01375c1cba1f4e))
+* **Rich Text Editor:** DLT-2237 add image extension to editor ([#589](https://github.com/dialpad/dialtone/issues/589)) ([72cff78](https://github.com/dialpad/dialtone/commit/72cff7887f1fb230cf31c2847b2a916cf489b74b))
+
+## [3.160.1](https://github.com/dialpad/dialtone/compare/dialtone-vue3/v3.160.0...dialtone-vue3/v3.160.1) (2024-12-10)
+
+
+### Code Refactoring
+
+* DLT-2122 move css out of recipes ([#577](https://github.com/dialpad/dialtone/issues/577)) ([75d5a0b](https://github.com/dialpad/dialtone/commit/75d5a0bf28bedb591daf2d7788dca4323394f1ff))
+
+
+### Documentation
+
+* DLT-1799 move SB to docs - Tabs to Validation Messages ([#565](https://github.com/dialpad/dialtone/issues/565)) ([e78aece](https://github.com/dialpad/dialtone/commit/e78aecebc94c1c160637401bc82efa17e84f24a0))
+
+# [3.160.0](https://github.com/dialpad/dialtone/compare/dialtone-vue3/v3.159.7...dialtone-vue3/v3.160.0) (2024-11-28)
+
+
+### Features
+
+* **Message Input:** DLT-2128 avoid closing the emoji picker when shift is pressed ([#570](https://github.com/dialpad/dialtone/issues/570)) ([285c7ee](https://github.com/dialpad/dialtone/commit/285c7ee64ebf84e0281c1b02cd5b57f4104f0a20))
+
+## [3.159.7](https://github.com/dialpad/dialtone/compare/dialtone-vue3/v3.159.6...dialtone-vue3/v3.159.7) (2024-11-26)
+
+
+### Bug Fixes
+
+* **Component:** DLT-2121 move all styling to dialtone-css from vue ([#557](https://github.com/dialpad/dialtone/issues/557)) ([97de9ed](https://github.com/dialpad/dialtone/commit/97de9ed36c48e59addf4d2e99ade9cb7dfc3cc37))
+
+## [3.159.6](https://github.com/dialpad/dialtone/compare/dialtone-vue3/v3.159.5...dialtone-vue3/v3.159.6) (2024-11-22)
+
+
+### Bug Fixes
+
+* DLT-2117 copy/paste on message input ([#569](https://github.com/dialpad/dialtone/issues/569)) ([41e836d](https://github.com/dialpad/dialtone/commit/41e836d8dcbc9f83232d9887fd448f78ab1f3074))
+
+## [3.159.5](https://github.com/dialpad/dialtone/compare/dialtone-vue3/v3.159.4...dialtone-vue3/v3.159.5) (2024-11-19)
+
+
+### Bug Fixes
+
+* **Multi Select:** DP-116677 avoid deleting input content when loading ([#562](https://github.com/dialpad/dialtone/issues/562)) ([ed29a4b](https://github.com/dialpad/dialtone/commit/ed29a4b2112d23aa17a05846e23aa2818a850a10))
+
+
+### Documentation
+
+* **Select Menu, Skeleton, Stack:** DLT-1798 move sb to docs  ([#555](https://github.com/dialpad/dialtone/issues/555)) ([304a27e](https://github.com/dialpad/dialtone/commit/304a27e652cdc755b27145df9a0a59e114a21efe))
+
+## [3.159.4](https://github.com/dialpad/dialtone/compare/dialtone-vue3/v3.159.3...dialtone-vue3/v3.159.4) (2024-11-12)
+
+
+### Bug Fixes
+
+* **Emoji Text Wrapper:** DLT-2202 not rendering line break correctly ([#561](https://github.com/dialpad/dialtone/issues/561)) ([291772e](https://github.com/dialpad/dialtone/commit/291772e978937bd1d55d37089db68259c70547fa))
+
 ## [3.159.3](https://github.com/dialpad/dialtone/compare/dialtone-vue3/v3.159.2...dialtone-vue3/v3.159.3) (2024-11-04)
 
 

@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-var-requires */
 const Color = require('colorjs.io').default;
 const {
   PLATFORM_FONT_SIZES,
@@ -86,6 +87,10 @@ function boxShadows (shadowDeclarations, Declaration) {
  */
 function wrapInCalc (declaration) {
   if ([' * ', ' + '].some(str => declaration.value.includes(str)) && !declaration.value.startsWith('calc')) {
+    if (declaration.value.includes('var(--dt-font-size-root)')) {
+      // replace referenced root font size with 1 rem so they output as rem instead of px.
+      declaration.value = declaration.value.replace('var(--dt-font-size-root)', '1rem');
+    }
     declaration.value = `calc(${declaration.value})`;
   }
 }
@@ -211,7 +216,7 @@ function getThemeFromFilename (filename) {
 /**
  * @type {import('postcss').PluginCreator}
  */
-module.exports = (opts = {}) => {
+module.exports = () => {
   return {
     postcssPlugin: 'dialtone-tokens',
     async Once (root, { Declaration }) {

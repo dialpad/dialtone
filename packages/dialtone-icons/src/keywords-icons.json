@@ -344,6 +344,12 @@
       ]
     },
     "communication": {
+      "Simultaneous-ring": [
+        "simultaneous",
+        "multi-ring",
+        "multiple calls",
+        "phone"
+      ],
       "call-abandoned": [
         "phone",
         "missed",

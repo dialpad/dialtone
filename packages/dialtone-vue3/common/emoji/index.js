@@ -2,7 +2,7 @@ import { emojiPattern } from 'regex-combined-emojis';
 import emojiJsonLocal from 'emoji-toolkit/emoji_strategy.json' with { type: 'json' };
 
 export const emojiRegex = new RegExp(emojiPattern, 'g');
-export const emojiVersion = '8.0';
+export const emojiVersion = '9.0';
 export const defaultEmojiAssetUrl = 'https://cdn.jsdelivr.net/joypixels/assets/' + emojiVersion + '/png/unicode/32/';
 export let customEmojiAssetUrl = null;
 
@@ -195,4 +195,13 @@ export function findShortCodes (textContent) {
 export function filterValidShortCodes (shortcodes) {
   const filtered = shortcodes ? shortcodes.filter(code => shortcodeToEmojiData(code)) : [];
   return new Set(filtered);
+}
+
+// Finds every emoji in slot text
+// removes duplicates
+// @returns {string[]}
+export function findEmojis (textContent) {
+  const matches = [...textContent.matchAll(emojiRegex)];
+  const emojis = matches.length ? matches.map(match => match[0]) : [];
+  return new Set(emojis);
 }

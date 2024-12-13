@@ -269,7 +269,7 @@ Each typography style is expressed through a shorthand `font` property, and its 
 </div>
 
 <script setup>
-  import { typographyVariants, typographyStyles, fontSize, lineHeight } from '@data/type.json';
+  import { typographyVariants, typographyStyles } from '@data/type.json';
   import CopyButton from '@baseComponents/CopyButton.vue';
   import SvgLoader from '@baseComponents/SvgLoader.vue';
 
@@ -279,34 +279,14 @@ Each typography style is expressed through a shorthand `font` property, and its 
   const typographyStylesHelper = typographyStyles.filter(type => type.var.startsWith("d-helper"));
   const typographyStylesCode = typographyStyles.filter(type => type.var.startsWith("d-code"));
 
-  const example = "The quick brown fox jumps over the lazy dog."
-
-  const fontSizeValues = fontSize.product.reduce((accum, curr) => {
-    accum.push(`d-fs-${curr.stop}`);
-    return accum;
-  }, []);
-  fontSizeValues.push('d-headline36', 'd-headline48', 'd-headline54');
-
-  const lineHeightValues = lineHeight.reduce((accum, curr) => {
-    if (curr.class.startsWith('-') && !curr.class.endsWith('unset')) {
-      accum.push(`d-lh${curr.class}`);
-    }
-    return accum;
-  }, []);
-
-  const exampleAi = "Ai that works for you."
-
+  const example = "The quick brown fox jumps over the lazy dog.";
 </script>
 
 <style lang="less" scoped>
   .dialtone-copy-utility {
-
     & {
       position: relative;
       cursor: default;
-    }
-
-    &__utility {
     }
 
     &__btn {

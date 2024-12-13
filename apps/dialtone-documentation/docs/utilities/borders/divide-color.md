@@ -63,10 +63,6 @@ Use `d-dco{n}` to change a divider opacity value.
 </div>
 ```
 
-<script setup>
-  import { base as baseColors} from '@data/colors.json';
-</script>
-
 ## Classes
 
 <div class="d-h464 d-of-y-scroll d-bb d-bc-black-200">
@@ -95,3 +91,8 @@ Use `d-dco{n}` to change a divider opacity value.
     </template>
   </utility-class-table>
 </div>
+
+<script setup>
+  import { base } from '@data/colors.json';
+  const baseColors = base.lightMode;
+</script>

@@ -12,23 +12,23 @@ import { readdirSync } from 'node:fs';
  * @returns {PathLike[]}
  */
 export function getValidFileList (folder) {
-    const parentFolderName = folder.split('/').pop();
-    const excludedFolderNamesRegex = /(extensions|modules|decorators)$/;
-    const validFileNamesRegex = new RegExp(`^${parentFolderName}\\.vue$`);
+  const parentFolderName = folder.split('/').pop();
+  const excludedFolderNamesRegex = /(extensions|modules|decorators)$/;
+  const validFileNamesRegex = new RegExp(`^${parentFolderName}\\w*\\.vue$`);
 
-    return readdirSync(folder, { withFileTypes: true })
-        .filter((item) => (
-            (item.isDirectory() && !excludedFolderNamesRegex.test(item.name)) ||
-            validFileNamesRegex.test(item.name)
-        ))
-        .reduce((files, item) => {
-            if (item.isDirectory()) files = [...files, ...getValidFileList(`${folder}/${item.name}`)]
-            else files.push(`${folder}/${item.name}`);
+  return readdirSync(folder, { withFileTypes: true })
+    .filter((item) => {
+      return (item.isDirectory() && !excludedFolderNamesRegex.test(item.name)) ||
+            validFileNamesRegex.test(item.name);
+    })
+    .reduce((files, item) => {
+      if (item.isDirectory()) files = [...files, ...getValidFileList(`${folder}/${item.name}`)];
+      else files.push(`${folder}/${item.name}`);
 
-            return files;
-        }, []);
+      return files;
+    }, []);
 }
 
 export default {
-    getValidFileList
-}
+  getValidFileList,
+};

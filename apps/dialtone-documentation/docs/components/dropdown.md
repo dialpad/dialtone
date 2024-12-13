@@ -55,7 +55,7 @@ figma_url: https://www.figma.com/file/2adf7JhZOncRyjYiy2joil/DT-Core%3A-Componen
 
 ## Usage
 
-Use the Dropdown component when you have a list of links or actions that can be performed. Use the [Select Menu](/components/select-menu.html) component to allow the users to choose one option from the list.
+Use the Dropdown component when you have a list of links or actions that can be performed. Use the [Select Menu](/components/select-menu.md) component to allow the users to choose one option from the list.
 
 - The dropdown component provides accessibility controls when using with List item component.
 - The dropdown has two major pieces that are provided as required named slots: the anchor and the list.
@@ -102,10 +102,10 @@ htmlCode='
   <div id="dt7" role="menu" aria-hidden="false" aria-labelledby="DtPopover__anchor8" aria-modal="false" class="d-popover__dialog d-popover__dialog--modal" tabindex="-1" style="...">
     <div class="d-popover__content">
       <ul id="dt6" class="d-dropdown-list d-py0">
-        <li class="dt-list-item" tabindex="-1" role="menuitem" aria-selected="false">
-          <div class="dt-item-layout">
-            <section class="dt-item-layout--content">
-              <div class="dt-item-layout--title">Menu Item 1</div>
+        <li class="d-list-item" tabindex="-1" role="menuitem" aria-selected="false">
+          <div class="d-item-layout">
+            <section class="d-item-layout--content">
+              <div class="d-item-layout--title">Menu Item 1</div>
             </section>
           </div>
         </li>
@@ -201,33 +201,33 @@ htmlCode='
       <ul id="dt6" class="d-dropdown-list d-py0">
         <ul id="dt16" class="d-list-item-group" role="group" aria-labelledby="dt16-heading">
           <li id="dt16-heading" role="presentation" class="dt-dropdown-list--header d-py4 d-px8 d-fw-semibold d-c-default">Menu Heading A</li>
-          <li id="dt17" class="dt-list-item dt-list-item--static" tabindex="-1" role="listitem">
-            <div class="dt-item-layout">
-              <section class="dt-item-layout--content">
-                <div class="dt-item-layout--title">
+          <li id="dt17" class="d-list-item d-list-item--static" tabindex="-1" role="listitem">
+            <div class="d-item-layout">
+              <section class="d-item-layout--content">
+                <div class="d-item-layout--title">
                   Menu Item 1
                 </div>
               </section>
             </div>
           </li>
-          <li aria-hidden="true" class="dt-list-separator"></li>
-          <li id="dt18" class="dt-list-item dt-list-item--static" tabindex="-1" role="listitem">
-            <div class="dt-item-layout">
-              <section class="dt-item-layout--content">
-                <div class="dt-item-layout--title">
+          <li aria-hidden="true" class="d-list-item-separator"></li>
+          <li id="dt18" class="d-list-item d-list-item--static" tabindex="-1" role="listitem">
+            <div class="d-item-layout">
+              <section class="d-item-layout--content">
+                <div class="d-item-layout--title">
                   Menu Item 2
                 </div>
               </section>
             </div>
           </li>
         </ul>
-        <li aria-hidden="true" class="dt-list-separator"></li>
+        <li aria-hidden="true" class="d-list-item-separator"></li>
         <ul id="dt19" class="d-list-item-group" role="group" aria-labelledby="dt19-heading">
           <li id="dt19-heading" role="presentation" class="dt-dropdown-list--header d-py4 d-px8 d-fw-semibold d-c-default">Menu Heading B</li>
-          <li id="dt20" class="dt-list-item dt-list-item--static" tabindex="-1" role="listitem">
-            <div class="dt-item-layout">
-              <section class="dt-item-layout--content">
-                <div class="dt-item-layout--title">
+          <li id="dt20" class="d-list-item d-list-item--static" tabindex="-1" role="listitem">
+            <div class="d-item-layout">
+              <section class="d-item-layout--content">
+                <div class="d-item-layout--title">
                   Menu Item 3
                 </div>
               </section>
@@ -351,7 +351,7 @@ The dropdown menu has a role of "menu" and the list items have a role "menuitem"
 
 ### List
 
-The Dropdown is rendered with semantic `<ul>` and `<li>`. The list slot is wrapped in `<ul>` element so make sure the items are wrapped in `<li>` element and each item has the menuitem role. It is recommended to use the [List Item component](/components/list-item.html) as it supports all the necessary accessibility props and interactions.
+The Dropdown is rendered with semantic `<ul>` and `<li>`. The list slot is wrapped in `<ul>` element so make sure the items are wrapped in `<li>` element and each item has the menuitem role. It is recommended to use the [List Item component](/components/list-item.md) as it supports all the necessary accessibility props and interactions.
 
 ### Focus & Keyboard
 

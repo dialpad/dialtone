@@ -5,9 +5,9 @@
     data-qa="skeleton-text-body"
     :class="[
       'd-skeleton-text',
-      'skeleton-placeholder',
+      'd-skeleton-placeholder',
       {
-        'skeleton-placeholder--animate': animate,
+        'd-skeleton-placeholder--animate': animate,
       },
       contentClass,
     ]"
@@ -23,9 +23,9 @@
     :class="[
       SKELETON_HEADING_HEIGHTS[headingHeight],
       'd-skeleton-text--heading',
-      'skeleton-placeholder',
+      'd-skeleton-placeholder',
       {
-        'skeleton-placeholder--animate': animate,
+        'd-skeleton-placeholder--animate': animate,
       },
       contentClass,
     ]"

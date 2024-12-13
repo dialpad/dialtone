@@ -1,8 +1,7 @@
 <script>
 import { DtEmoji } from '../emoji';
-import { findShortCodes } from '@/common/emoji';
+import { findEmojis, findShortCodes } from '@/common/emoji';
 import { ICON_SIZE_MODIFIERS } from '@/components/icon/icon_constants';
-import { emojiPattern } from 'regex-combined-emojis';
 
 /**
  * Wrapper to find and replace shortcodes like :smile: or unicode chars such as 😄 with our custom Emojis implementation.
@@ -51,17 +50,18 @@ export default {
      */
     replaceDtEmojis (replaceList, textContent) {
       if (!replaceList.length) return textContent;
+      // Escape the asterisk to avoid breaking the regex for the asterisk emoji
+      const escapedReplaceList = replaceList.map(item =>
+        item.replace(/\*/g, '\\*'),
+      );
 
-      const regexp = new RegExp(`(${replaceList.join('|')})`, 'g');
+      const regexp = new RegExp(`(${escapedReplaceList.join('|')})`, 'g');
       const items = textContent.split(regexp);
 
       return items
         .filter(item => item.trim() !== '')
         .map((item) => {
-          // Reset the regexp index to 0 to start from the beginning
-          // Otherwise, it will start from the last index
-          regexp.lastIndex = 0;
-          if (replaceList.includes(item) || regexp.test(item)) {
+          if (replaceList.includes(item)) {
             return this.$createElement(DtEmoji, {
               props: { code: item, size: this.size },
             });
@@ -97,7 +97,9 @@ export default {
      */
     searchCodes (textContent) {
       const shortcodes = findShortCodes(textContent);
-      const replaceList = [...shortcodes, emojiPattern];
+      const emojis = findEmojis(textContent);
+
+      const replaceList = [...shortcodes, ...emojis];
       return this.replaceDtEmojis(replaceList, textContent);
     },
   },

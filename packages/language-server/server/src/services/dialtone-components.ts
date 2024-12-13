@@ -1,6 +1,6 @@
 import type { LanguageServicePlugin, LanguageServicePluginInstance } from "@volar/language-service";
-import { resolveVueComponents } from "../resolvers/vue-components";
-import { getContent, getCurrentWord } from "../utils";
+import { componentDocumentation, components, resolveComponentProps, resolvePropValues } from "../resolvers/vue-components";
+import { getContent, getCurrentWord, stringToKebabCase, wordUnderCursor } from "../utils";
 
 export type DialtoneTokenDoc = {
     [theme: string]: {
@@ -18,46 +18,99 @@ export function create(): LanguageServicePlugin {
         name: "dialtone-components",
         capabilities: {
             completionProvider: {
-                triggerCharacters: ['<', '\:', '"', '\''],
+                triggerCharacters: ['\:', '"', '\''],
             },
-            // hoverProvider: true,
+            hoverProvider: true,
         },
         create(context): LanguageServicePluginInstance {
             console.log('Created Dialtone Components service');
 
             return {
-                provideCompletionItems(document, position, completionContext) {
-                    console.log('Providing Component Completion Items');
-
+                provideCompletionItems(document, position) {
                     const content = getContent(document, context);
                     if (!content) return;
 
                     const currentLine: string = content.split('\n')[position.line];
-                    const currentWord = getCurrentWord(currentLine, position);
-
-                    // Remove all the trigger character from current word
-                    const sanitizedWord = currentWord.replaceAll(/[<="'\:]/g, '');
 
                     // @TODO: Find multi-line components
                     if (!currentLine.includes('<dt-'))
                         return;
 
-                    return resolveVueComponents(currentLine, currentWord, sanitizedWord, completionContext);
+                    const currentWord = getCurrentWord(currentLine, position.character)
+                    const tagName = currentLine.replace(/\s+<([\w-]+).*/, '$1');
+                    const quotesRegex = /["'][\w-]*["']/g;
+                    let quotesMatch = null;
+
+                    console.info(`Component completion context (current-word: ${currentWord}, tag-name: ${tagName})`);
+
+                    // Check if cursor is within quotes
+                    while ((quotesMatch = quotesRegex.exec(currentLine)) !== null) {
+                        // If not, continue;
+                        if (position.character <= quotesMatch.index || position.character >= quotesMatch.index + quotesMatch[0].length)
+                            continue;
+
+                        const propName = currentLine.replace(/.*[^\w-](.*?)="[\w-]*".*/, "$1")
+                        console.log('prop name: ', propName);
+
+                        return resolvePropValues(tagName, propName)
+                    }
+
+                    if (/^\<?dt\-/.test(currentWord)) {
+                        console.info('Resolving components');
+                        return { isIncomplete: false, items: components }
+                    } else {
+                        return resolveComponentProps(tagName, currentWord)
+                    }
                 },
-                // provideHover(document, position, token) {
-                //     console.log('Providing Token Hover', document, position, token);
+                provideHover(document, position) {
+                    const content = getContent(document, context);
+                    if (!content) return;
 
-                //     const content = getContent(document, context);
-                //     if (!content) return;
+                    const currentLine: string = content.split('\n')[position.line];
+                    const tagName = currentLine.replace(/\s+<([\w-]+).*/, '$1');
+                    const currentWord = wordUnderCursor(content, position)
 
-                //     const currentLine: string = content.split('\n')[position.line];
-                //     const currentWord = getCurrentWord(currentLine, position);
+                    if (!currentWord) return;
 
-                //     console.log('hovering: ', currentWord);
+                    const component = componentDocumentation.find(component => stringToKebabCase(component.displayName) === tagName)
 
+                    if (!component) return;
 
-                //     return { contents: ['Hover Component content'] };
-                // },
+                    console.info(`Component hover context (current-word: ${currentWord.text}, tag-name: ${tagName})`);
+
+                    if (tagName === currentWord.text) {
+
+                        if (!component.description) return;
+
+                        return {
+                            contents: {
+                                kind: 'markdown',
+                                value: component.description
+                            },
+                            range: currentWord.range
+                        };
+                    }
+
+                    const prop = component.props.find(prop => stringToKebabCase(prop.name) === stringToKebabCase(currentWord.text));
+
+                    if (!prop || !prop.description) return;
+
+                    let description = prop.description;
+                    if (prop.values) {
+                        description += `\n\n**Values**: [${prop.values.join(', ')}]\n`
+                    }
+                    if (prop.defaultValue?.value) {
+                        description += `\n\n**Default**: ${prop.defaultValue.value}\n`
+                    }
+
+                    return {
+                        contents: {
+                            kind: 'markdown',
+                            value: description
+                        },
+                        range: currentWord.range
+                    };
+                },
             };
         },
     }
