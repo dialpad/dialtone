@@ -1,3 +1,10 @@
+# [9.89.0](https://github.com/dialpad/dialtone/compare/dialtone/v9.88.0...dialtone/v9.89.0) (2024-12-13)
+
+
+### Features
+
+* DLT-2236 update emoji set ([#592](https://github.com/dialpad/dialtone/issues/592)) ([0292911](https://github.com/dialpad/dialtone/commit/029291158c9fa0257e09e76ff3dc9da8d4e756af))
+
 # [9.88.0](https://github.com/dialpad/dialtone/compare/dialtone/v9.87.0...dialtone/v9.88.0) (2024-12-12)
 
 
