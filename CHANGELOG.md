@@ -1,3 +1,15 @@
+# [9.90.0](https://github.com/dialpad/dialtone/compare/dialtone/v9.89.0...dialtone/v9.90.0) (2024-12-14)
+
+
+### Bug Fixes
+
+* **Rich Text Editor:** NO-JIRA order of enter shortcut ([#595](https://github.com/dialpad/dialtone/issues/595)) ([3943ebe](https://github.com/dialpad/dialtone/commit/3943ebe76491ba5a1f02a5b5353fab96e88c50ea))
+
+
+### Features
+
+* **Icon:** DP-119206 power dialer icons ([#590](https://github.com/dialpad/dialtone/issues/590)) ([3984d49](https://github.com/dialpad/dialtone/commit/3984d49507ed78a1dbd2ac2672569b5940080c11))
+
 # [9.89.0](https://github.com/dialpad/dialtone/compare/dialtone/v9.88.0...dialtone/v9.89.0) (2024-12-13)
 
 
