@@ -16,6 +16,7 @@
     :hovercard="true"
     :timer="timer"
     data-qa="dt-hovercard"
+    :open="open"
     @opened="(e) => ($emit('opened', e))"
   >
     <template #anchor="{ attrs }">
@@ -59,6 +60,17 @@ defineProps({
   transition: {
     type: Boolean,
     default: false,
+  },
+
+  /**
+     * Controls whether the hovercard is shown. Leaving this null will have the hovercard trigger on hover by default.
+     * If you set this value, the default trigger behavior will be disabled, and you can control it as you need.
+     * Supports .sync modifier
+     * @values null, true, false
+     */
+  open: {
+    type: Boolean,
+    default: null,
   },
 
   /**

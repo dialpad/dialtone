@@ -30,8 +30,8 @@
         @keydown.escape.capture="closePopover"
         @keydown.enter="$emit('keydown', $event)"
         @keydown.space="$emit('keydown', $event)"
-        @mouseenter="onEnterAnchor"
-        @mouseleave="onLeaveAnchor"
+        @mouseenter="openHovercard"
+        @mouseleave="closeHovercard"
       >
         <!-- @slot Anchor element that activates the popover. Usually a button. -->
         <slot
@@ -63,8 +63,8 @@
         :css="$attrs.css"
         :tabindex="contentTabindex"
         v-on="popoverListeners"
-        @mouseenter="onEnterContent"
-        @mouseleave="onLeaveContent"
+        @mouseenter="openHovercard"
+        @mouseleave="closeHovercard"
       >
         <popover-header-footer
           v-if="hasSlotContent($slots.headerContent) || showCloseButton"
@@ -1074,34 +1074,26 @@ export default {
       }, TOOLTIP_DELAY_MS);
     },
 
-    onEnterAnchor () {
+    openHovercard () {
       if (!this.hovercard) return;
-      if (this.timer) this.timer.enter(this.id);
-      else {
-        clearTimeout(this.outTimer);
-        this.setInTimer();
+      if (this.open === null || this.open === undefined) {
+        if (this.timer) this.timer.enter(this.id);
+        else {
+          clearTimeout(this.outTimer);
+          this.setInTimer();
+        }
       }
     },
 
-    onLeaveAnchor () {
+    closeHovercard () {
       if (!this.hovercard) return;
-      if (this.timer) this.timer.leave();
-      else {
-        clearTimeout(this.inTimer);
-        this.setOutTimer();
+      if (this.open === null || this.open === undefined) {
+        if (this.timer) this.timer.leave();
+        else {
+          clearTimeout(this.inTimer);
+          this.setOutTimer();
+        }
       }
-    },
-
-    onEnterContent () {
-      if (!this.hovercard) return;
-      if (this.timer) this.timer.enter(this.id);
-      else clearTimeout(this.outTimer);
-    },
-
-    onLeaveContent () {
-      if (!this.hovercard) return;
-      if (this.timer) this.timer.leave();
-      else this.setOutTimer();
     },
 
     //  ============================================================================

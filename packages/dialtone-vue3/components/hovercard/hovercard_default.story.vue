@@ -11,6 +11,7 @@
     :header-class="$attrs.headerClass"
     :footer-class="$attrs.footerClass"
     :append-to="$attrs.appendTo"
+    :open="$attrs.open"
     @opened="$attrs.onOpened"
   >
     <template #anchor="slotProps">
