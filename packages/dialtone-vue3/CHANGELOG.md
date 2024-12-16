@@ -1,3 +1,10 @@
+## [3.161.1](https://github.com/dialpad/dialtone/compare/dialtone-vue3/v3.161.0...dialtone-vue3/v3.161.1) (2024-12-14)
+
+
+### Bug Fixes
+
+* **Rich Text Editor:** NO-JIRA order of enter shortcut ([#595](https://github.com/dialpad/dialtone/issues/595)) ([3943ebe](https://github.com/dialpad/dialtone/commit/3943ebe76491ba5a1f02a5b5353fab96e88c50ea))
+
 # [3.161.0](https://github.com/dialpad/dialtone/compare/dialtone-vue3/v3.160.1...dialtone-vue3/v3.161.0) (2024-12-12)
 
 

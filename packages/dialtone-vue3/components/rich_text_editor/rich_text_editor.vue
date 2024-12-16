@@ -375,18 +375,6 @@ export default {
       // These are the default extensions needed just for plain text.
       const extensions = [Document, Paragraph, Text, History, HardBreak];
 
-      if (this.link) {
-        extensions.push(TipTapLink.extend({ inclusive: false }).configure({
-          HTMLAttributes: {
-            class: 'd-link d-wb-break-all',
-          },
-          autolink: true,
-          protocols: RICH_TEXT_EDITOR_SUPPORTED_LINK_PROTOCOLS,
-        }));
-      }
-      if (this.customLink) {
-        extensions.push(this.getExtension(CustomLink, this.customLink));
-      }
       if (this.allowBlockquote) {
         extensions.push(Blockquote);
       }
@@ -413,6 +401,48 @@ export default {
         extensions.push(
           Placeholder.configure({ placeholder: this.placeholder }),
         );
+      }
+
+      const self = this;
+      const ShiftEnter = Extension.create({
+        addKeyboardShortcuts () {
+          return {
+            'Shift-Enter': ({ editor }) => {
+              if (self.allowLineBreaks) {
+                return false;
+              }
+              editor.commands.first(({ commands }) => [
+                () => commands.newlineInCode(),
+                () => commands.splitListItem('listItem'),
+                () => commands.createParagraphNear(),
+                () => commands.liftEmptyBlock(),
+                () => commands.splitBlock(),
+              ]);
+              return true;
+            },
+            Enter: () => {
+              if (self.allowLineBreaks) {
+                return false;
+              }
+              self.$emit('enter');
+              return true;
+            },
+          };
+        },
+      });
+      extensions.push(ShiftEnter);
+
+      if (this.link) {
+        extensions.push(TipTapLink.extend({ inclusive: false }).configure({
+          HTMLAttributes: {
+            class: 'd-link d-wb-break-all',
+          },
+          autolink: true,
+          protocols: RICH_TEXT_EDITOR_SUPPORTED_LINK_PROTOCOLS,
+        }));
+      }
+      if (this.customLink) {
+        extensions.push(this.getExtension(CustomLink, this.customLink));
       }
 
       if (this.mentionSuggestion) {
@@ -461,35 +491,6 @@ export default {
       if (this.additionalExtensions.length) {
         extensions.push(...this.additionalExtensions);
       }
-
-      const self = this;
-      const ShiftEnter = Extension.create({
-        addKeyboardShortcuts () {
-          return {
-            'Shift-Enter': ({ editor }) => {
-              if (self.allowLineBreaks) {
-                return false;
-              }
-              editor.commands.first(({ commands }) => [
-                () => commands.newlineInCode(),
-                () => commands.splitListItem('listItem'),
-                () => commands.createParagraphNear(),
-                () => commands.liftEmptyBlock(),
-                () => commands.splitBlock(),
-              ]);
-              return true;
-            },
-            Enter: () => {
-              if (self.allowLineBreaks) {
-                return false;
-              }
-              self.$emit('enter');
-              return true;
-            },
-          };
-        },
-      });
-      extensions.push(ShiftEnter);
 
       return extensions;
     },

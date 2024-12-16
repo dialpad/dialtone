@@ -451,6 +451,19 @@
       "phone": [
         "call"
       ],
+      "power-dialer-off": [
+        "powerdialer",
+        "lightning",
+        "list",
+        "speed",
+        "strikethrough"
+      ],
+      "power-dialer": [
+        "powerdialer",
+        "lightning",
+        "list",
+        "speed"
+      ],
       "reply-all": [
         "email"
       ],
