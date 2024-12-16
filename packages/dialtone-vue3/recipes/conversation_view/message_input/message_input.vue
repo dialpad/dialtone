@@ -25,6 +25,7 @@
         kind="muted"
         class="d-ol-none"
         size="xs"
+        :active="$refs.richTextEditor?.editor?.isActive('bold')"
         @click="$refs.richTextEditor?.editor?.chain().focus().toggleBold().run()"
       >
         <template #icon>
@@ -40,6 +41,7 @@
         kind="muted"
         class="d-ol-none"
         size="xs"
+        :active="$refs.richTextEditor?.editor?.isActive('italic')"
         @click="$refs.richTextEditor?.editor?.chain().focus().toggleItalic().run()"
       >
         <template #icon>
@@ -55,6 +57,7 @@
         kind="muted"
         class="d-ol-none"
         size="xs"
+        :active="$refs.richTextEditor?.editor?.isActive('strike')"
         @click="$refs.richTextEditor?.editor?.chain().focus().toggleStrike().run()"
       >
         <template #icon>
@@ -77,32 +80,25 @@
         @opened="updateInput"
       >
         <template #anchor>
-          <dt-tooltip
-            :key="linkButton.key"
-            :message="linkButton.tooltipMessage"
-            placement="top"
+          <dt-button
+            v-dt-tooltip:top="linkButton.tooltipMessage"
+            :data-qa="linkButton.dataQA"
+            importance="clear"
+            kind="muted"
+            class="d-ol-none"
+            :active="$refs.richTextEditor?.editor?.isActive('link')"
+            size="xs"
+            :aria-label="linkButton.tooltipMessage"
+            @click="linkButton.onClick()"
           >
-            <template #anchor>
-              <dt-button
-                :data-qa="linkButton.dataQA"
-                importance="clear"
-                kind="muted"
-                class="d-ol-none"
-                :active="$refs.richTextEditor?.editor?.isActive(linkButton.selector)"
-                size="xs"
-                :aria-label="linkButton.tooltipMessage"
-                @click="linkButton.onClick()"
-              >
-                <template #icon>
-                  <component
-                    :is="linkButton.icon"
-                    size="200"
-                    class="d-fw-bold"
-                  />
-                </template>
-              </dt-button>
+            <template #icon>
+              <component
+                :is="linkButton.icon"
+                size="200"
+                class="d-fw-bold"
+              />
             </template>
-          </dt-tooltip>
+          </dt-button>
         </template>
 
         <template #content>
@@ -201,6 +197,7 @@
         kind="muted"
         class="d-ol-none"
         size="xs"
+        :active="$refs.richTextEditor?.editor?.isActive('blockquote')"
         @click="$refs.richTextEditor?.editor?.chain().focus().toggleBlockquote().run()"
       >
         <template #icon>
@@ -217,6 +214,7 @@
         kind="muted"
         class="d-ol-none"
         size="xs"
+        :active="$refs.richTextEditor?.editor?.isActive('code')"
         @click="$refs.richTextEditor?.editor?.chain().focus().toggleCode().run()"
       >
         <template #icon>
@@ -232,6 +230,7 @@
         kind="muted"
         class="d-ol-none"
         size="xs"
+        :active="$refs.richTextEditor?.editor?.isActive('codeBlock')"
         @click="$refs.richTextEditor?.editor?.chain().focus().toggleCodeBlock().run()"
       >
         <template #icon>
