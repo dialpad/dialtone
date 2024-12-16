@@ -25,6 +25,7 @@
     @blur="$attrs.onBlur"
     @input="$attrs.onInput"
     @json-input="$attrs.onJsonInput"
+    @html-input="$attrs.onHtmlInput"
     @focus="$attrs.onFocus"
     @enter="$attrs.onEnter"
   />

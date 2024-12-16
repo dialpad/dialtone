@@ -623,6 +623,10 @@ export default {
         // Always output JSON in a separate event
         const jsonValue = this.editor.getJSON();
         this.$emit('json-input', jsonValue);
+
+        // Always output HTML in a separate event
+        const htmlValue = this.editor.getHTML();
+        this.$emit('html-input', htmlValue);
       });
 
       // The editor is focused.

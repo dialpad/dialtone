@@ -24,6 +24,7 @@ export const argsData = {
   onFocus: action('focus'),
   onEnter: action('enter'),
   onJsonInput: action('json-input'),
+  onHtmlInput: action('html-input'),
 };
 
 export const argTypesData = {
@@ -89,6 +90,11 @@ export const argTypesData = {
     },
   },
   onJsonInput: {
+    table: {
+      disable: true,
+    },
+  },
+  onHtmlInput: {
     table: {
       disable: true,
     },
