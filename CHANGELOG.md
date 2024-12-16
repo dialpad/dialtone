@@ -1,3 +1,10 @@
+# [9.91.0](https://github.com/dialpad/dialtone/compare/dialtone/v9.90.0...dialtone/v9.91.0) (2024-12-16)
+
+
+### Features
+
+* **Feed Item Row:** DP-119844 add slot for displayName ([#596](https://github.com/dialpad/dialtone/issues/596)) ([c861ac1](https://github.com/dialpad/dialtone/commit/c861ac1af542b10e1dc1ee2ca0481dbfd661e418))
+
 # [9.90.0](https://github.com/dialpad/dialtone/compare/dialtone/v9.89.0...dialtone/v9.90.0) (2024-12-14)
 
 
