@@ -784,7 +784,7 @@ export default {
      */
     allowUnderline: {
       type: Boolean,
-      default: true,
+      default: false,
     },
 
     /**

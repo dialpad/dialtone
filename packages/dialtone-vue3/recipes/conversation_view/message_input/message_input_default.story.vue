@@ -37,6 +37,7 @@
       @blur="$attrs.onBlur"
       @input="$attrs.onInput"
       @json-input="$attrs.onJsonInput"
+      @html-input="$attrs.onHtmlInput"
       @select-media="$attrs.onSelectMedia"
       @selected-emoji="$attrs.onSelectedEmoji"
       @selected-command="$attrs.onSelectedCommand"
