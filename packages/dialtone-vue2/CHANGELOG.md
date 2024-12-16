@@ -1,3 +1,10 @@
+# [2.169.0](https://github.com/dialpad/dialtone/compare/dialtone-vue2/v2.168.1...dialtone-vue2/v2.169.0) (2024-12-16)
+
+
+### Features
+
+* **Feed Item Row:** DP-119844 add slot for displayName ([#596](https://github.com/dialpad/dialtone/issues/596)) ([c861ac1](https://github.com/dialpad/dialtone/commit/c861ac1af542b10e1dc1ee2ca0481dbfd661e418))
+
 ## [2.168.1](https://github.com/dialpad/dialtone/compare/dialtone-vue2/v2.168.0...dialtone-vue2/v2.168.1) (2024-12-14)
 
 
