@@ -102,6 +102,33 @@ export const argTypesData = {
     },
   },
 
+  displayNameSlot: {
+    name: 'displayName',
+    description: 'Slot for display name',
+    control: 'text',
+    table: {
+      category: 'slots',
+      type: {
+        summary: 'VNode',
+      },
+    },
+  },
+
+  // Props
+  displayName: {
+    name: 'displayName',
+    description: 'The display name of the user',
+    table: {
+      category: 'props',
+      type: {
+        summary: 'string',
+      },
+    },
+    control: {
+      type: 'text',
+    },
+  },
+
   // Events
   onFocus: {
     table: {
