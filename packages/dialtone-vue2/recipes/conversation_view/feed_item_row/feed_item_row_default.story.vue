@@ -28,6 +28,12 @@
       />
     </template>
     <template
+      v-if="$attrs.displayNameSlot"
+      #displayName
+    >
+      <span v-html="$attrs.displayNameSlot" />
+    </template>
+    <template
       v-if="$attrs.attachment"
       #attachment
     >
