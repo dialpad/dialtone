@@ -2,7 +2,7 @@
   <div class="d-h264">
     <dt-recipe-message-input
       ref="input"
-      v-model="$attrs.modelValue"
+      v-model="$attrs.value"
       :input-aria-label="$attrs.inputAriaLabel"
       :auto-focus="$attrs.autoFocus"
       :allow-blockquote="$attrs.allowBlockquote"
@@ -32,6 +32,7 @@
       :show-image-picker="$attrs.showImagePicker"
       :show-send="$attrs.showSend"
       :show-cancel="$attrs.showCancel"
+      :set-link-placeholder="$attrs.setLinkPlaceholder"
       @submit="$attrs.onSubmit"
       @focus="$attrs.onFocus"
       @blur="$attrs.onBlur"

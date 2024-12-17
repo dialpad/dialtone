@@ -200,6 +200,7 @@ export const argsData = {
     ],
     skinTone: 'Default',
   },
+  setLinkPlaceholder: 'e.g. https://www.dialpad.com',
   sendIcon: undefined,
   showCharacterLimit: {
     count: 1000,
