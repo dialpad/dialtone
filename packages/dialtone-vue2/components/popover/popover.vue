@@ -513,20 +513,6 @@ export default {
       type: Boolean,
       default: false,
     },
-
-    /**
-     * The timer is used only when the hovercard prop is true.
-     * It defines the delays when opening several hovercards.
-     * It must have the keys: enter, leave and current.
-     * If null, the default delay of 300ms will be used.
-     */
-    timer: {
-      type: [Object, null],
-      default: null,
-      validator: timer => {
-        return timer === null || (timer.enter && timer.leave && Object.keys(timer).includes('current'));
-      },
-    },
   },
 
   emits: [
@@ -593,10 +579,6 @@ export default {
       // there is no aria-label and the labelledby should point to the anchor.
       return this.ariaLabelledby || (!this.ariaLabel && getUniqueString('DtPopover__anchor'));
     },
-
-    currentHovercard () {
-      return this.timer?.current.value;
-    },
   },
 
   watch: {
@@ -661,16 +643,6 @@ export default {
       } else if (!isOpen && isPrev !== isOpen) {
         this.removeEventListeners();
         this.tip.hide();
-      }
-    },
-
-    currentHovercard () {
-      if (this.hovercard && this.timer) {
-        if (this.currentHovercard === this.id) {
-          this.isOpen = true;
-        } else {
-          this.isOpen = false;
-        }
       }
     },
   },
@@ -1041,22 +1013,16 @@ export default {
     openHovercard () {
       if (!this.hovercard) return;
       if (this.open === null || this.open === undefined) {
-        if (this.timer) this.timer.enter(this.id);
-        else {
-          clearTimeout(this.outTimer);
-          this.setInTimer();
-        }
+        clearTimeout(this.outTimer);
+        this.setInTimer();
       }
     },
 
     closeHovercard () {
       if (!this.hovercard) return;
       if (this.open === null || this.open === undefined) {
-        if (this.timer) this.timer.leave();
-        else {
-          clearTimeout(this.inTimer);
-          this.setOutTimer();
-        }
+        clearTimeout(this.inTimer);
+        this.setOutTimer();
       }
     },
 
