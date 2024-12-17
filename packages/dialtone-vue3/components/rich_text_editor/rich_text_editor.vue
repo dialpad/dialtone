@@ -465,7 +465,7 @@ export default {
       }
 
       if (this.allowInlineImages) {
-        extensions.push(Image);
+        extensions.push(Image.configure({ inline: true }));
       }
 
       if (this.additionalExtensions.length) {
