@@ -16,6 +16,8 @@
     :hovercard="true"
     data-qa="dt-hovercard"
     :open="open"
+    :enter-delay="enterDelay"
+    :leave-delay="leaveDelay"
     @opened="(e) => ($emit('opened', e))"
   >
     <template #anchor="{ attrs }">
@@ -43,7 +45,7 @@
 
 <script setup>
 import { POPOVER_APPEND_TO_VALUES, POPOVER_PADDING_CLASSES, DtPopover } from '@/components/popover/index.js';
-import { TOOLTIP_DIRECTIONS } from '@/components/tooltip/index.js';
+import { TOOLTIP_DIRECTIONS, TOOLTIP_DELAY_MS } from '@/components/tooltip/index.js';
 import { getUniqueString } from '@/common/utils';
 
 defineProps({
@@ -170,6 +172,24 @@ defineProps({
     validator: appendTo => {
       return POPOVER_APPEND_TO_VALUES.includes(appendTo) ||
             (appendTo instanceof HTMLElement);
+    },
+
+    /**
+     * The enter delay in milliseconds before the hovercard is shown.
+     * @type number
+     */
+    enterDelay: {
+      type: Number,
+      default: TOOLTIP_DELAY_MS,
+    },
+
+    /**
+     * The leave delay in milliseconds before the hovercard is hidden.
+     * @type number
+     */
+    leaveDelay: {
+      type: Number,
+      default: TOOLTIP_DELAY_MS,
     },
   },
 });
