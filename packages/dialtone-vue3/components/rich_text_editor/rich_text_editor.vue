@@ -397,7 +397,7 @@ export default {
               }
               editor.commands.first(({ commands }) => [
                 () => commands.newlineInCode(),
-                () => commands.splitListItem('listItem'),
+                () => self.allowBulletList && commands.splitListItem('listItem'),
                 () => commands.createParagraphNear(),
                 () => commands.liftEmptyBlock(),
                 () => commands.splitBlock(),
