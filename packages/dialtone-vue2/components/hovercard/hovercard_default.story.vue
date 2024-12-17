@@ -12,6 +12,8 @@
     :footer-class="$attrs.footerClass"
     :append-to="$attrs.appendTo"
     :open="$attrs.open"
+    :enter-delay="$attrs.enterDelay"
+    :leave-delay="$attrs.leaveDelay"
     @opened="$attrs.onOpened"
   >
     <template #anchor="slotProps">

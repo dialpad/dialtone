@@ -513,6 +513,24 @@ export default {
       type: Boolean,
       default: false,
     },
+
+    /**
+     * The enter delay in milliseconds before the hovercard is shown.
+     * @type number
+     */
+    enterDelay: {
+      type: Number,
+      default: TOOLTIP_DELAY_MS,
+    },
+
+    /**
+     * The leave delay in milliseconds before the hovercard is hidden.
+     * @type number
+     */
+    leaveDelay: {
+      type: Number,
+      default: TOOLTIP_DELAY_MS,
+    },
   },
 
   emits: [
@@ -1001,13 +1019,13 @@ export default {
     setInTimer () {
       this.inTimer = setTimeout(() => {
         this.isOpen = true;
-      }, TOOLTIP_DELAY_MS);
+      }, this.enterDelay);
     },
 
     setOutTimer () {
       this.outTimer = setTimeout(() => {
         this.isOpen = false;
-      }, TOOLTIP_DELAY_MS);
+      }, this.leaveDelay);
     },
 
     openHovercard () {
