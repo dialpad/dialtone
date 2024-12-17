@@ -1041,7 +1041,7 @@ export default {
       // If the selection is already a link, populate the popover with the existing link text.
       // Otherwise, use the selected text.
       const linkNode = this.$refs.richTextEditor?.editor.state.doc.nodeAt(from);
-      if (linkNode) {
+      if (linkNode && linkNode.marks?.at(0)?.type?.name === 'link') {
         this.linkText = linkNode.textContent;
       } else {
         this.linkText = text;
