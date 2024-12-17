@@ -33,6 +33,7 @@
         :show-image-picker="$attrs.showImagePicker"
         :show-send="$attrs.showSend"
         :show-cancel="$attrs.showCancel"
+        :set-link-placeholder="$attrs.setLinkPlaceholder"
         @submit="$attrs.onSubmit"
         @focus="$attrs.onFocus"
         @blur="$attrs.onBlur"

@@ -23,7 +23,6 @@
         data-qa="bold"
         importance="clear"
         kind="muted"
-        class="d-ol-none"
         size="xs"
         :active="$refs.richTextEditor?.editor?.isActive('bold')"
         @click="$refs.richTextEditor?.editor?.chain().focus().toggleBold().run()"
@@ -39,7 +38,6 @@
         data-qa="italic"
         importance="clear"
         kind="muted"
-        class="d-ol-none"
         size="xs"
         :active="$refs.richTextEditor?.editor?.isActive('italic')"
         @click="$refs.richTextEditor?.editor?.chain().focus().toggleItalic().run()"
@@ -55,7 +53,6 @@
         data-qa="strikethrough"
         importance="clear"
         kind="muted"
-        class="d-ol-none"
         size="xs"
         :active="$refs.richTextEditor?.editor?.isActive('strike')"
         @click="$refs.richTextEditor?.editor?.chain().focus().toggleStrike().run()"
@@ -71,6 +68,7 @@
       <dt-popover
         :open.sync="showLinkInput"
         placement="bottom-start"
+        content-class="d-recipe-message-input__link-popover"
         :visually-hidden-close="true"
         :visually-hidden-close-label="'Close link input popover'"
         data-qa="dt-editor-link-input-popover"
@@ -85,7 +83,6 @@
             :data-qa="linkButton.dataQA"
             importance="clear"
             kind="muted"
-            class="d-ol-none"
             :active="$refs.richTextEditor?.editor?.isActive('link')"
             size="xs"
             :aria-label="linkButton.tooltipMessage"
@@ -102,57 +99,77 @@
         </template>
 
         <template #content>
-          <span
-            v-if="showAddLink.setLinkTitle.length > 0"
-          >
-            {{ showAddLink.setLinkTitle }}
-          </span>
-          <dt-input
-            v-model="linkInput"
-            :input-aria-label="showAddLink.setLinkInputAriaLabel"
-            data-qa="dt-editor-link-input"
-            :placeholder="setLinkPlaceholder"
-            input-wrapper-class="d-bgc-secondary d-mt6 d-bar5 d-ba d-baw1 d-bc-default d-py2 d-ol-none"
-            @click="onInputFocus"
-            @click.native.stop="onInputFocus"
-            @focus="onInputFocus"
-            @keydown.enter="setLink"
-          />
-        </template>
-        <template #footerContent>
-          <div class="d-ml8 d-mr12">
-            <dt-button
-              class="d-mx2"
-              :aria-label="removeLinkButton.ariaLabel"
-              importance="clear"
-              kind="muted"
-              size="sm"
-              data-qa="dt-editor-remove-link-btn"
-              @click="removeLink"
+          <dt-stack gap="500">
+            <div
+              v-if="showAddLink.setLinkTitle.length > 0"
+              class="d-headline--md-compact"
             >
-              {{ removeLinkButton.label }}
-            </dt-button>
-            <dt-button
-              class="d-mx2"
-              :aria-label="cancelSetLinkButton.ariaLabel"
-              importance="clear"
-              kind="muted"
-              size="sm"
-              data-qa="dt-editor-set-link-cancel-btn"
-              @click="closeLinkInput"
+              {{ showAddLink.setLinkTitle }}
+            </div>
+            <dt-input
+              v-model="linkText"
+              input-aria-label=""
+              size="xs"
+              data-qa="dt-editor-link-text-input"
+              label="Text to display (optional)"
+              input-wrapper-class="d-bgc-secondary d-mt6 d-bar5 d-ba d-baw1 d-bc-default d-py2 d-ol-none"
+              @click="onInputFocus"
+              @click.native.stop="onInputFocus"
+              @focus="onInputFocus"
+              @keydown.enter="setLink"
+            />
+            <dt-input
+              v-model="linkInput"
+              :input-aria-label="showAddLink.setLinkInputAriaLabel"
+              size="xs"
+              data-qa="dt-editor-link-input"
+              :placeholder="setLinkPlaceholder"
+              label="Link"
+              input-wrapper-class="d-bgc-secondary d-mt6 d-bar5 d-ba d-baw1 d-bc-default d-py2 d-ol-none"
+              @click="onInputFocus"
+              @click.native.stop="onInputFocus"
+              @focus="onInputFocus"
+              @keydown.enter="setLink"
+            />
+            <dt-stack
+              direction="row"
+              class="d-jc-space-between"
             >
-              {{ cancelSetLinkButton.label }}
-            </dt-button>
-            <dt-button
-              class="d-mx2"
-              size="sm"
-              :aria-label="confirmSetLinkButton.ariaLabel"
-              data-qa="dt-editor-set-link-confirm-btn"
-              @click="setLink"
-            >
-              {{ confirmSetLinkButton.label }}
-            </dt-button>
-          </div>
+              <dt-button
+                :aria-label="removeLinkButton.ariaLabel"
+                importance="clear"
+                kind="danger"
+                size="md"
+                data-qa="dt-editor-remove-link-btn"
+                @click="removeLink"
+              >
+                {{ removeLinkButton.label }}
+              </dt-button>
+              <dt-stack
+                direction="row"
+                gap="400"
+              >
+                <dt-button
+                  :aria-label="cancelSetLinkButton.ariaLabel"
+                  importance="clear"
+                  kind="muted"
+                  size="md"
+                  data-qa="dt-editor-set-link-cancel-btn"
+                  @click="closeLinkInput"
+                >
+                  {{ cancelSetLinkButton.label }}
+                </dt-button>
+                <dt-button
+                  size="md"
+                  :aria-label="confirmSetLinkButton.ariaLabel"
+                  data-qa="dt-editor-set-link-confirm-btn"
+                  @click="setLink"
+                >
+                  {{ confirmSetLinkButton.label }}
+                </dt-button>
+              </dt-stack>
+            </dt-stack>
+          </dt-stack>
         </template>
       </dt-popover>
 
@@ -162,7 +179,6 @@
         data-qa="bullet-list"
         importance="clear"
         kind="muted"
-        class="d-ol-none"
         :active="$refs.richTextEditor?.editor?.isActive('bulletList')"
         size="xs"
         @click="$refs.richTextEditor?.editor?.chain().focus().toggleBulletList().run()"
@@ -178,7 +194,6 @@
         data-qa="ordered-list"
         importance="clear"
         kind="muted"
-        class="d-ol-none"
         :active="$refs.richTextEditor?.editor?.isActive('orderedList')"
         size="xs"
         @click="$refs.richTextEditor?.editor?.chain().focus().toggleOrderedList().run()"
@@ -195,7 +210,6 @@
         data-qa="quote"
         importance="clear"
         kind="muted"
-        class="d-ol-none"
         size="xs"
         :active="$refs.richTextEditor?.editor?.isActive('blockquote')"
         @click="$refs.richTextEditor?.editor?.chain().focus().toggleBlockquote().run()"
@@ -212,7 +226,6 @@
         data-qa="code"
         importance="clear"
         kind="muted"
-        class="d-ol-none"
         size="xs"
         :active="$refs.richTextEditor?.editor?.isActive('code')"
         @click="$refs.richTextEditor?.editor?.chain().focus().toggleCode().run()"
@@ -228,7 +241,6 @@
         data-qa="code-block"
         importance="clear"
         kind="muted"
-        class="d-ol-none"
         size="xs"
         :active="$refs.richTextEditor?.editor?.isActive('codeBlock')"
         @click="$refs.richTextEditor?.editor?.chain().focus().toggleCodeBlock().run()"
@@ -811,7 +823,7 @@ export default {
      */
     confirmSetLinkButton: {
       type: Object,
-      default: () => ({ label: 'Confirm', ariaLabel: 'Confirm set link' }),
+      default: () => ({ label: 'Done', ariaLabel: 'Confirm link' }),
     },
 
     /**
@@ -827,7 +839,7 @@ export default {
      */
     cancelSetLinkButton: {
       type: Object,
-      default: () => ({ label: 'Cancel', ariaLabel: 'Cancel set link' }),
+      default: () => ({ label: 'Cancel', ariaLabel: 'Cancel' }),
     },
 
     /**
@@ -943,6 +955,7 @@ export default {
         class: 'd-link d-c-text d-d-inline-block',
       },
 
+      linkText: '',
       showLinkInput: false,
       linkInput: '',
     };
@@ -1014,6 +1027,19 @@ export default {
     },
 
     openLinkInput () {
+      // populate "link text" field with currently selected text
+      const { view, state } = this.$refs.richTextEditor?.editor;
+      const { from, to } = view.state.selection;
+      const text = state.doc.textBetween(from, to, '');
+
+      // If the selection is already a link, populate the popover with the existing link text.
+      // Otherwise, use the selected text.
+      const linkNode = this.$refs.richTextEditor?.editor.state.doc.nodeAt(from);
+      if (linkNode) {
+        this.linkText = linkNode.textContent;
+      } else {
+        this.linkText = text;
+      }
       this.showLinkInput = true;
     },
 
