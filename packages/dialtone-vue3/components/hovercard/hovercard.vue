@@ -14,7 +14,6 @@
     :footer-class="footerClass"
     :append-to="appendTo"
     :hovercard="true"
-    :timer="timer"
     data-qa="dt-hovercard"
     :open="open"
     @opened="(e) => ($emit('opened', e))"
@@ -43,13 +42,9 @@
 </template>
 
 <script setup>
-import { reactive } from 'vue';
 import { POPOVER_APPEND_TO_VALUES, POPOVER_PADDING_CLASSES, DtPopover } from '@/components/popover/index.js';
 import { TOOLTIP_DIRECTIONS } from '@/components/tooltip/index.js';
 import { getUniqueString } from '@/common/utils';
-import useTimer from './timer';
-
-const timer = reactive(useTimer());
 
 defineProps({
   /**
