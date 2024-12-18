@@ -1,3 +1,11 @@
+## [3.162.1](https://github.com/dialpad/dialtone/compare/dialtone-vue3/v3.162.0...dialtone-vue3/v3.162.1) (2024-12-18)
+
+
+### Bug Fixes
+
+* **Rich Text Editor:** DLT-2237 configure image extension to inline content so they will show up inside paragraph tags ([#598](https://github.com/dialpad/dialtone/issues/598)) ([da04964](https://github.com/dialpad/dialtone/commit/da0496400e89a25396a25bb5536e03d9ff2245f7))
+* **Rich Text Editor:** NO-JIRA fix error when allowBulletList false ([#599](https://github.com/dialpad/dialtone/issues/599)) ([96b6134](https://github.com/dialpad/dialtone/commit/96b6134679ae3b7a87ac886901e900838dbcf800))
+
 # [3.162.0](https://github.com/dialpad/dialtone/compare/dialtone-vue3/v3.161.1...dialtone-vue3/v3.162.0) (2024-12-16)
 
 
