@@ -1,3 +1,10 @@
+# [3.163.0](https://github.com/dialpad/dialtone/compare/dialtone-vue3/v3.162.1...dialtone-vue3/v3.163.0) (2024-12-18)
+
+
+### Features
+
+* **Hovercard:** DP-119841 hovercard fixes for Fast Connect ([#597](https://github.com/dialpad/dialtone/issues/597)) ([e5c78a3](https://github.com/dialpad/dialtone/commit/e5c78a3d8896aeaee19e0da4fd9ee16ebaa033bf))
+
 ## [3.162.1](https://github.com/dialpad/dialtone/compare/dialtone-vue3/v3.162.0...dialtone-vue3/v3.162.1) (2024-12-18)
 
 
