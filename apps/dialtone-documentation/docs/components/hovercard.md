@@ -69,8 +69,6 @@ showHtmlWarning />
 
 ### Many hovercards
 
-Initially, there is a 300ms delay when numerous hovercards are present. However, when transitioning from one anchor to another, the delay is determined by the mouse movement time. This implies that the closer the anchors are, the faster the hovercard appears. To achieve this, the component uses a global timer. Move the mouse over the avatars to reveal the hovercards in the example.
-
 <code-well-header>
   <dt-stack direction="row" gap="500">
     <example-hovercard v-for="data in exampleData" :label="data.label" :content="data.content" />
