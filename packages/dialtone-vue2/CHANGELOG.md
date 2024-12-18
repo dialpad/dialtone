@@ -1,3 +1,10 @@
+# [2.170.0](https://github.com/dialpad/dialtone/compare/dialtone-vue2/v2.169.1...dialtone-vue2/v2.170.0) (2024-12-18)
+
+
+### Features
+
+* **Hovercard:** DP-119841 hovercard fixes for Fast Connect ([#597](https://github.com/dialpad/dialtone/issues/597)) ([e5c78a3](https://github.com/dialpad/dialtone/commit/e5c78a3d8896aeaee19e0da4fd9ee16ebaa033bf))
+
 ## [2.169.1](https://github.com/dialpad/dialtone/compare/dialtone-vue2/v2.169.0...dialtone-vue2/v2.169.1) (2024-12-18)
 
 
