@@ -75,7 +75,6 @@
         :show-close-button="false"
         @click="onInputFocus"
         @click.stop="onInputFocus"
-        @opened="updateInput"
       >
         <template #anchor>
           <dt-button
@@ -281,8 +280,11 @@
         :channel-suggestion="channelSuggestion"
         :slash-command-suggestion="slashCommandSuggestion"
         :additional-extensions="additionalExtensions"
+        :hide-link-bubble-menu="hideLinkBubbleMenu"
         v-bind="$attrs"
         @input="onInput"
+        @enter="onSend"
+        @edit-link="handleEditLinkInput"
       />
     </div>
     <!-- @slot Slot for attachment carousel -->
@@ -955,6 +957,7 @@ export default {
       linkText: '',
       showLinkInput: false,
       linkInput: '',
+      hideLinkBubbleMenu: false,
     };
   },
 
@@ -1033,86 +1036,44 @@ export default {
     },
 
     openLinkInput () {
-      // populate "link text" field with currently selected text
-      const { view, state } = this.$refs.richTextEditor?.editor;
-      const { from, to } = view.state.selection;
-      const text = state.doc.textBetween(from, to, '');
+      this.$refs.richTextEditor?.editLink();
+    },
 
-      // If the selection is already a link, populate the popover with the existing link text.
-      // Otherwise, use the selected text.
-      const linkNode = this.$refs.richTextEditor?.editor.state.doc.nodeAt(from);
-      if (linkNode && linkNode.marks?.at(0)?.type?.name === 'link') {
-        this.linkText = linkNode.textContent;
-      } else {
-        this.linkText = text;
-      }
+    async handleEditLinkInput (event) {
+      this.hideLinkBubbleMenu = true;
       this.showLinkInput = true;
+      this.linkInput = event.href;
+      this.linkText = event.text;
     },
 
     removeLink () {
-      this.$refs.richTextEditor?.editor?.chain()?.focus()?.unsetLink()?.run();
+      this.$refs.richTextEditor?.removeLink();
       this.closeLinkInput();
     },
 
     closeLinkInput () {
       this.showLinkInput = false;
+      this.hideLinkBubbleMenu = false;
       this.linkInput = '';
       this.$refs.richTextEditor.editor?.chain().focus();
     },
 
     setLink (event) {
-      const editor = this.$refs.richTextEditor?.editor;
       event?.preventDefault();
       event?.stopPropagation();
-
-      if (!this.linkInput) {
-        // If link text is set to empty string,
-        // remove any existing links.
-        this.removeLink();
-        return;
-      }
-
-      // Check if input matches any of the supported link formats
-      const prefix = EDITOR_SUPPORTED_LINK_PROTOCOLS.find(prefixRegex => prefixRegex.test(this.linkInput));
-
-      if (!prefix) {
-        // If no matching pattern is found, prepend default prefix
-        this.linkInput = `${EDITOR_DEFAULT_LINK_PREFIX}${this.linkInput}`;
-      }
-
-      const selection = editor?.view?.state?.selection;
-
-      if (selection.anchor === selection.head) {
-        // If no text has been selected, manually insert the link text.
-        // Do not rely on link options set through DtRichTextEditor
-        // component, because they clash with these and cause issues.
-        editor
-          .chain()
-          .focus()
-          .insertContentAt(
-            selection.anchor,
-            `<a class="${this.linkOptions.class}" href=${this.linkInput}>${this.linkInput}</a>`,
-          )
-          .run();
-      } else {
-        // Set or edit the link
-        editor
-          .chain()
-          .focus()
-          .extendMarkRange('link')
-          .setLink({ href: this.linkInput, class: this.linkOptions.class })
-          .run();
-      }
+      this.$refs.richTextEditor.setLink(
+        this.linkInput, this.linkOptions, EDITOR_SUPPORTED_LINK_PROTOCOLS, EDITOR_DEFAULT_LINK_PREFIX,
+      );
 
       this.closeLinkInput();
     },
 
-    updateInput (openedInput) {
-      if (!openedInput) {
-        return this.closeLinkInput();
-      }
-      this.linkInput = this.$refs.richTextEditor?.editor?.getAttributes('link')?.href;
-    },
+    // updateInput (openedInput) {
+    //   if (!openedInput) {
+    //     return this.closeLinkInput();
+    //   }
+    //   this.linkInput = this.$refs.richTextEditor?.editor?.getAttributes('link')?.href;
+    // },
 
     // Mousedown instead of click because it fires before the blur event.
     onMousedown (e) {

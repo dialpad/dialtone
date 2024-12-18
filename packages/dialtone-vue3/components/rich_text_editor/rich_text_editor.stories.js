@@ -25,6 +25,7 @@ export const argsData = {
   onEnter: action('enter'),
   onJsonInput: action('json-input'),
   onHtmlInput: action('html-input'),
+  onEditLink: action('edit-link'),
 };
 
 export const argTypesData = {
@@ -95,6 +96,11 @@ export const argTypesData = {
     },
   },
   onHtmlInput: {
+    table: {
+      disable: true,
+    },
+  },
+  onEditLink: {
     table: {
       disable: true,
     },
