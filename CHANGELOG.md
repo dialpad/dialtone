@@ -1,3 +1,10 @@
+# [9.92.0](https://github.com/dialpad/dialtone/compare/dialtone/v9.91.1...dialtone/v9.92.0) (2024-12-18)
+
+
+### Features
+
+* **Hovercard:** DP-119841 hovercard fixes for Fast Connect ([#597](https://github.com/dialpad/dialtone/issues/597)) ([e5c78a3](https://github.com/dialpad/dialtone/commit/e5c78a3d8896aeaee19e0da4fd9ee16ebaa033bf))
+
 ## [9.91.1](https://github.com/dialpad/dialtone/compare/dialtone/v9.91.0...dialtone/v9.91.1) (2024-12-18)
 
 
