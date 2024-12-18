@@ -1,17 +1,55 @@
+<!-- eslint-disable vue/no-static-inline-styles -->
+<!-- eslint-disable vue/no-bare-strings-in-template -->
 <!-- eslint-disable vue/no-restricted-class -->
 <template>
-  <editor-content
-    :editor="editor"
-    class="d-rich-text-editor"
-    data-qa="dt-rich-text-editor"
-    v-on="editorListeners"
-  />
+  <div>
+    <!-- why the hell is this visibility: hidden by default??? -->
+    <bubble-menu
+      v-if="editor && link && !hideLinkBubbleMenu"
+      :editor="editor"
+      :should-show="bubbleMenuShouldShow"
+      :tippy-options="tippyOptions"
+      style="visibility: visible;"
+    >
+      <div class="d-rich-text-editor-link-bubble-menu">
+        <dt-button
+          link
+          link-kind="danger"
+          @click="removeLink"
+        >
+          Remove
+        </dt-button>
+        <dt-button
+          link
+          link-kind="muted"
+          @click="openLink"
+        >
+          Open Link
+        </dt-button>
+        <dt-button
+          link
+          link-kind="muted"
+          @click="editLink"
+        >
+          Edit
+        </dt-button>
+      </div>
+    </bubble-menu>
+    <editor-content
+      ref="editor"
+      :editor="editor"
+      class="d-rich-text-editor"
+      data-qa="dt-rich-text-editor"
+      v-on="editorListeners"
+    />
+  </div>
 </template>
 
 <script>
 /* eslint-disable max-lines */
-import { Editor, EditorContent } from '@tiptap/vue-2';
+import { Editor, EditorContent, BubbleMenu } from '@tiptap/vue-2';
 import { Extension } from '@tiptap/core';
+import { DtButton } from '../button';
 import Blockquote from '@tiptap/extension-blockquote';
 import CodeBlock from '@tiptap/extension-code-block';
 import Code from '@tiptap/extension-code';
@@ -53,6 +91,8 @@ export default {
 
   components: {
     EditorContent,
+    BubbleMenu,
+    DtButton,
   },
 
   props: {
@@ -308,6 +348,16 @@ export default {
       type: Array,
       default: () => [],
     },
+
+    /**
+     * Manually hide the link bubble menu. The link bubble menu is shown when a link is selected via the cursor.
+     * There are some cases when you may want the link to remain selected but hide the bubble menu such as when You
+     * are showing a custom link editor popup.
+     */
+    hideLinkBubbleMenu: {
+      type: Boolean,
+      default: false,
+    },
   },
 
   emits: [
@@ -352,11 +402,23 @@ export default {
      * @type {String}
      */
     'enter',
+
+    /**
+     * "Edit link" button was clicked. Fires an event for the consuming component to handle the editing of the link.
+     * event contains the link object with two properties href and text.
+     * @event edit-link
+     * @type {Object}
+     */
+    'edit-link',
   ],
 
   data () {
     return {
       editor: null,
+      tippyOptions: {
+        appendTo: () => this.$refs.editor.$el.getRootNode()?.querySelector('body'),
+        placement: 'top-start',
+      },
     };
   },
 
@@ -437,6 +499,7 @@ export default {
           HTMLAttributes: {
             class: 'd-link d-wb-break-all',
           },
+          openOnClick: false,
           autolink: true,
           protocols: RICH_TEXT_EDITOR_SUPPORTED_LINK_PROTOCOLS,
         }));
@@ -575,6 +638,82 @@ export default {
         },
       });
       this.addEditorListeners();
+    },
+
+    bubbleMenuShouldShow ({ editor, view, state, oldState, from, to }) {
+      return editor.isActive('link');
+    },
+
+    editLink () {
+      // If the selection is already a link, populate the popover with the existing link text.
+      // Otherwise, use the selected text.
+      let linkText = '';
+      const { view, state } = this.editor;
+      const { from, to } = view.state.selection;
+      const text = state.doc.textBetween(from, to, '');
+      const linkNode = this.editor.state.doc.nodeAt(from);
+      if (linkNode && linkNode.marks?.at(0)?.type?.name === 'link') {
+        linkText = linkNode.textContent;
+      } else {
+        linkText = text;
+      }
+
+      const link = {
+        href: this.editor.getAttributes('link').href,
+        text: linkText,
+      };
+      this.$emit('edit-link', link);
+    },
+
+    removeLink () {
+      this.editor?.chain()?.focus()?.unsetLink()?.run();
+    },
+
+    openLink () {
+      this.editor?.chain()?.focus();
+      const link = this.editor.getAttributes('link').href;
+      window.open(link, '_blank');
+    },
+
+    setLink (linkInput, linkOptions, linkProtocols = RICH_TEXT_EDITOR_SUPPORTED_LINK_PROTOCOLS, defaultPrefix) {
+      if (!linkInput) {
+        // If link text is set to empty string,
+        // remove any existing links.
+        this.removeLink();
+        return;
+      }
+
+      // Check if input matches any of the supported link formats
+      const prefix = linkProtocols.find(prefixRegex => prefixRegex.test(linkInput));
+
+      if (!prefix) {
+        // If no matching pattern is found, prepend default prefix
+        linkInput = `${defaultPrefix}${linkInput}`;
+      }
+
+      const selection = this.editor?.view?.state?.selection;
+
+      if (selection.anchor === selection.head) {
+        // If no text has been selected, manually insert the link text.
+        // Do not rely on link options set through DtRichTextEditor
+        // component, because they clash with these and cause issues.
+        this.editor
+          .chain()
+          .focus()
+          .insertContentAt(
+            selection.anchor,
+            `<a class="${linkOptions.class}" href=${linkInput}>${linkInput}</a>`,
+          )
+          .run();
+      } else {
+        // Set or edit the link
+        this.editor
+          .chain()
+          .focus()
+          .extendMarkRange('link')
+          .setLink({ href: linkInput, class: linkOptions.class })
+          .run();
+      }
     },
 
     processValue (newValue, returnIfEqual = true) {
