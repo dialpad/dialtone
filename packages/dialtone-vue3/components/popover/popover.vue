@@ -30,8 +30,8 @@
         @keydown.escape.capture="closePopover"
         @keydown.enter="$emit('keydown', $event)"
         @keydown.space="$emit('keydown', $event)"
-        @mouseenter="onEnterAnchor"
-        @mouseleave="onLeaveAnchor"
+        @mouseenter="openHovercard"
+        @mouseleave="closeHovercard"
       >
         <!-- @slot Anchor element that activates the popover. Usually a button. -->
         <slot
@@ -63,8 +63,8 @@
         :css="$attrs.css"
         :tabindex="contentTabindex"
         v-on="popoverListeners"
-        @mouseenter="onEnterContent"
-        @mouseleave="onLeaveContent"
+        @mouseenter="openHovercard"
+        @mouseleave="closeHovercard"
       >
         <popover-header-footer
           v-if="hasSlotContent($slots.headerContent) || showCloseButton"
@@ -526,17 +526,21 @@ export default {
     },
 
     /**
-     * The timer is used only when the hovercard prop is true.
-     * It defines the delays when opening several hovercards.
-     * It must have the keys: enter, leave and current.
-     * If null, the default delay of 300ms will be used.
+     * The enter delay in milliseconds before the hovercard is shown.
+     * @type number
      */
-    timer: {
-      type: [Object, null],
-      default: null,
-      validator: timer => {
-        return timer === null || (timer.enter && timer.leave && Object.keys(timer).includes('current'));
-      },
+    enterDelay: {
+      type: Number,
+      default: TOOLTIP_DELAY_MS,
+    },
+
+    /**
+     * The leave delay in milliseconds before the hovercard is hidden.
+     * @type number
+     */
+    leaveDelay: {
+      type: Number,
+      default: TOOLTIP_DELAY_MS,
     },
   },
 
@@ -608,10 +612,6 @@ export default {
       // aria-labelledby should be set only if aria-labelledby is passed as a prop, or if
       // there is no aria-label and the labelledby should point to the anchor.
       return this.ariaLabelledby || (!this.ariaLabel && getUniqueString('DtPopover__anchor'));
-    },
-
-    currentHovercard () {
-      return this.timer?.current;
     },
   },
 
@@ -688,16 +688,6 @@ export default {
       } else if (!isOpen && isPrev !== isOpen) {
         this.removeEventListeners();
         this.tip.hide();
-      }
-    },
-
-    currentHovercard () {
-      if (this.hovercard && this.timer) {
-        if (this.currentHovercard === this.id) {
-          this.isOpen = true;
-        } else {
-          this.isOpen = false;
-        }
       }
     },
   },
@@ -1065,43 +1055,29 @@ export default {
     setInTimer () {
       this.inTimer = setTimeout(() => {
         this.isOpen = true;
-      }, TOOLTIP_DELAY_MS);
+      }, this.enterDelay);
     },
 
     setOutTimer () {
       this.outTimer = setTimeout(() => {
         this.isOpen = false;
-      }, TOOLTIP_DELAY_MS);
+      }, this.leaveDelay);
     },
 
-    onEnterAnchor () {
+    openHovercard () {
       if (!this.hovercard) return;
-      if (this.timer) this.timer.enter(this.id);
-      else {
+      if (this.open === null || this.open === undefined) {
         clearTimeout(this.outTimer);
         this.setInTimer();
       }
     },
 
-    onLeaveAnchor () {
+    closeHovercard () {
       if (!this.hovercard) return;
-      if (this.timer) this.timer.leave();
-      else {
+      if (this.open === null || this.open === undefined) {
         clearTimeout(this.inTimer);
         this.setOutTimer();
       }
-    },
-
-    onEnterContent () {
-      if (!this.hovercard) return;
-      if (this.timer) this.timer.enter(this.id);
-      else clearTimeout(this.outTimer);
-    },
-
-    onLeaveContent () {
-      if (!this.hovercard) return;
-      if (this.timer) this.timer.leave();
-      else this.setOutTimer();
     },
 
     //  ============================================================================

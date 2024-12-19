@@ -153,7 +153,7 @@
       </h2>
       <a
         class="d-btn d-btn--muted d-btn--outlined d-btn--lg"
-        href="https://dialpad.atlassian.net/secure/CreateIssue.jspa?issuetype=10975&pid=12508"
+        href="https://dialpad.atlassian.net/servicedesk/customer/portal/123/create/465"
         target="_blank"
         rel="noopener noreferrer"
       >

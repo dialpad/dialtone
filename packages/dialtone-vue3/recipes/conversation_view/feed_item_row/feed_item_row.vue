@@ -52,9 +52,12 @@
         data-qa="dt-recipe-feed-item-row--header"
         class="d-recipe-feed-item-row__header"
       >
-        <p class="d-recipe-feed-item-row__header-name">
-          {{ displayName }}
-        </p>
+        <!-- @slot Slot for display name -->
+        <slot name="displayName">
+          <p class="d-recipe-feed-item-row__header-name">
+            {{ displayName }}
+          </p>
+        </slot>
         <time
           class="d-recipe-feed-item-row__header-time"
         >

@@ -25,6 +25,8 @@
           :header-class="$attrs.headerClass"
           :footer-class="$attrs.footerClass"
           :append-to="$attrs.appendTo"
+          :enter-delay="$attrs.enterDelay"
+          :leave-delay="$attrs.leaveDelay"
           @opened="$attrs.onOpened"
         >
           <template #anchor="slotProps">

@@ -1,3 +1,25 @@
+# [9.92.0](https://github.com/dialpad/dialtone/compare/dialtone/v9.91.1...dialtone/v9.92.0) (2024-12-18)
+
+
+### Features
+
+* **Hovercard:** DP-119841 hovercard fixes for Fast Connect ([#597](https://github.com/dialpad/dialtone/issues/597)) ([e5c78a3](https://github.com/dialpad/dialtone/commit/e5c78a3d8896aeaee19e0da4fd9ee16ebaa033bf))
+
+## [9.91.1](https://github.com/dialpad/dialtone/compare/dialtone/v9.91.0...dialtone/v9.91.1) (2024-12-18)
+
+
+### Bug Fixes
+
+* **Rich Text Editor:** DLT-2237 configure image extension to inline content so they will show up inside paragraph tags ([#598](https://github.com/dialpad/dialtone/issues/598)) ([da04964](https://github.com/dialpad/dialtone/commit/da0496400e89a25396a25bb5536e03d9ff2245f7))
+* **Rich Text Editor:** NO-JIRA fix error when allowBulletList false ([#599](https://github.com/dialpad/dialtone/issues/599)) ([96b6134](https://github.com/dialpad/dialtone/commit/96b6134679ae3b7a87ac886901e900838dbcf800))
+
+# [9.91.0](https://github.com/dialpad/dialtone/compare/dialtone/v9.90.0...dialtone/v9.91.0) (2024-12-16)
+
+
+### Features
+
+* **Feed Item Row:** DP-119844 add slot for displayName ([#596](https://github.com/dialpad/dialtone/issues/596)) ([c861ac1](https://github.com/dialpad/dialtone/commit/c861ac1af542b10e1dc1ee2ca0481dbfd661e418))
+
 # [9.90.0](https://github.com/dialpad/dialtone/compare/dialtone/v9.89.0...dialtone/v9.90.0) (2024-12-14)
 
 

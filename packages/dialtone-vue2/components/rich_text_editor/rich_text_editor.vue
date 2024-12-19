@@ -475,7 +475,7 @@ export default {
               }
               editor.commands.first(({ commands }) => [
                 () => commands.newlineInCode(),
-                () => commands.splitListItem('listItem'),
+                () => self.allowBulletList && commands.splitListItem('listItem'),
                 () => commands.createParagraphNear(),
                 () => commands.liftEmptyBlock(),
                 () => commands.splitBlock(),
@@ -548,7 +548,7 @@ export default {
       }
 
       if (this.allowInlineImages) {
-        extensions.push(Image);
+        extensions.push(Image.configure({ inline: true }));
       }
 
       if (this.additionalExtensions.length) {
