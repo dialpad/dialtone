@@ -5,17 +5,41 @@
       :key="reaction.unicodeOutput"
       :reaction="reaction"
     >
+      <!--
+        CONSIDERATION: on product side, content-class="d-wmx###"
+        can be adjusted to wider if more than X people.
+        Or even narrower if fewer.
+      -->
       <dt-tooltip
         class="d-recipe-emoji-row__tooltip"
-        content-class="d-wmx464"
+        content-class="d-wmx216"
         sticky="popper"
+        :fallback-placements="['top', 'bottom']"
         @shown="(shown) => emojiHovered(reaction, shown)"
       >
-        <span aria-hidden="true">
-          <dt-emoji-text-wrapper size="200">
-            {{ reaction.tooltip }}
-          </dt-emoji-text-wrapper>
-        </span>
+        <!-- TODO: move CSS utilitites to emoji_row.less -->
+        <div
+          aria-hidden="true"
+          class="d-bar4 d-bgc-neutral-white d-p4 d-d-inline-block d-mt4 d-mb6"
+        >
+          <!-- TODO: will ultimately need to work for Custom Emojis, including animated. Presumably same size -->
+          <dt-emoji
+            :code="reaction.emojiUnicodeOrShortname"
+            size="800"
+          />
+        </div>
+        <div>
+          Brad Paugh,
+          Julio Ortega,
+          Ignacio Ropolo,
+          Nina Repetto,
+          Francis Rupert,
+          and
+          you
+          <span class="d-fc-tertiary-inverted d-fw-normal">
+            reacted with :sparkling_heart:
+          </span>
+        </div>
         <template #anchor="{ attrs }">
           <dt-button
             importance="clear"
@@ -52,12 +76,11 @@ import { REACTIONS_ATTRIBUTES } from './emoji_row_constants.js';
 import { DtButton } from '../../../components/button';
 import { DtTooltip } from '../../../components/tooltip';
 import { DtEmoji } from '../../../components/emoji';
-import { DtEmojiTextWrapper } from '../../../components/emoji_text_wrapper';
 
 export default {
   name: 'DtRecipeEmojiRow',
 
-  components: { DtTooltip, DtButton, DtEmoji, DtEmojiTextWrapper },
+  components: { DtTooltip, DtButton, DtEmoji },
 
   mixins: [],
 
