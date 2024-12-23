@@ -15,6 +15,10 @@ figma_url: https://www.figma.com/file/2adf7JhZOncRyjYiy2joil/DT-Core%3A-Componen
   />
 </code-well-header>
 
+## Usage
+
+Validation messages are typically paired with an input element. They are currently built in to some of our shared input components such as `dt-input` and `dt-radio-group`.
+
 ## Variants
 
 ### Success / Positive
@@ -72,7 +76,7 @@ showHtmlWarning />
 <code-well-header>
   <dt-validation-messages
     id="sample--04"
-    :validationMessages='[{"message":"Critical validation message","type":"warning"}]'
+    :validationMessages='[{"message":"Warning validation message","type":"warning"}]'
   />
 </code-well-header>
 
@@ -80,14 +84,14 @@ showHtmlWarning />
 htmlCode='
 <div class="base-input__messages d-validation-message__container">
   <div role="status" aria-live="polite" class="base-input__message d-validation-message base-input__message--warning d-validation-message--warning">
-    <p>Critical validation message</p>
+    <p>Warning validation message</p>
   </div>
 </div>
 '
 vueCode='
 <dt-validation-messages
   id="sample--04"
-  :validationMessages=`[{"message":"Critical validation message","type":"warning"}]`
+  :validationMessages=`[{"message":"Warning validation message","type":"warning"}]`
 />
 '
 showHtmlWarning />

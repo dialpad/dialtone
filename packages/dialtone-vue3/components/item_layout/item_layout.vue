@@ -1,24 +1,24 @@
 <template>
   <component
     :is="as"
-    :class="unstyled ? 'dt-item-layout--custom' : 'dt-item-layout'"
+    :class="unstyled ? 'd-item-layout--custom' : 'd-item-layout'"
   >
     <section
       v-if="hasSlotContent($slots.left)"
       data-qa="dt-item-layout-left-wrapper"
-      class="dt-item-layout--left"
+      class="d-item-layout--left"
     >
       <!-- @slot Slot for left content -->
       <slot name="left" />
     </section>
     <section
       data-qa="dt-item-layout-content-wrapper"
-      class="dt-item-layout--content"
+      class="d-item-layout--content"
     >
       <div
         v-if="hasSlotContent($slots.default)"
         data-qa="dt-item-layout-title-wrapper"
-        class="dt-item-layout--title"
+        class="d-item-layout--title"
       >
         <!-- @slot Slot for main content -->
         <slot />
@@ -27,8 +27,8 @@
         v-if="hasSlotContent($slots.subtitle)"
         data-qa="dt-item-layout-subtitle-wrapper"
         :class="[
-          'dt-item-layout--subtitle',
-          { 'dt-item-layout--subtitle--with-title': hasSlotContent($slots.default) },
+          'd-item-layout--subtitle',
+          { 'd-item-layout--subtitle--with-title': hasSlotContent($slots.default) },
         ]"
       >
         <!-- @slot Slot for content below main content -->
@@ -37,7 +37,7 @@
       <div
         v-if="hasSlotContent($slots.bottom)"
         data-qa="dt-item-layout-bottom-wrapper"
-        class="dt-item-layout--bottom"
+        class="d-item-layout--bottom"
       >
         <!-- @slot Slot for content below subtitle -->
         <slot name="bottom" />
@@ -46,7 +46,7 @@
     <section
       v-if="hasSlotContent($slots.right)"
       data-qa="dt-item-layout-right-wrapper"
-      class="dt-item-layout--right"
+      class="d-item-layout--right"
     >
       <!-- @slot Slot for right content -->
       <slot name="right" />
@@ -54,7 +54,7 @@
     <section
       v-if="hasSlotContent($slots.selected)"
       data-qa="dt-item-layout-selected-wrapper"
-      class="dt-item-layout--selected"
+      class="d-item-layout--selected"
     >
       <!-- @slot Slot for selected icon -->
       <slot name="selected" />

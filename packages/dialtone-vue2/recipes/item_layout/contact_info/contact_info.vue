@@ -2,21 +2,21 @@
   <dt-item-layout
     :role="role"
     data-qa="contact-info"
-    class="dt-contact-info"
+    class="d-recipe-contact-info"
   >
     <template
       v-if="showAvatar"
       #left
     >
       <button
-        class="dt-contact-info__left"
+        class="d-recipe-contact-info__left"
         data-qa="contact-info-left"
         :aria-labelledby="avatarLabelledBy"
         @click="avatarClick"
       >
         <span
           v-if="avatarList"
-          class="dt-contact-info--avatars"
+          class="d-recipe-contact-info__avatars"
         >
           <dt-avatar
             v-for="(avatar, index) in avatarList"
@@ -226,59 +226,3 @@ export default {
   },
 };
 </script>
-
-<style lang="less" scoped>
-.dt-contact-info {
-  --contact-info-avatar-border-color: var(--dt-color-surface-primary);
-
-  display: flex;
-
-  &:deep(.dt-item-layout) {
-    flex: 1 1 0;
-  }
-
-  &:deep(.dt-item-layout--content) {
-    /*
-    DP-74536: Add `min-width` to make the width of "contact info" adjustable.
-    */
-    min-width: var(--dt-space-825);
-  }
-
-  &:deep(.dt-item-layout--left) {
-    /*
-    DP-74536: To make 'Avatar' in fixed position when resizing the window.
-    */
-    min-width: var(--dt-space-650);
-    justify-content: flex-start;
-    align-items: center;
-  }
-
-  &:deep(.dt-item-layout--right) {
-    /*
-    DP-74536: Remove `min-width` which cause extra unused empty space on the right of "contact info".
-    */
-    min-width: 0;
-    align-items: center;
-  }
-
-  &__left {
-    position: relative;
-    background-color: transparent;
-    background-image: none;
-    border-width: 0;
-    cursor: pointer;
-  }
-
-  &--avatars {
-    margin-right: var(--dt-space-300-negative);
-    display: flex;
-    flex-direction: row;
-
-    .d-avatar {
-      border-radius: var(--dt-size-radius-pill);
-      border: var(--dt-size-300) solid var(--contact-info-avatar-border-color);
-      box-sizing: unset;
-    }
-  }
-}
-</style>

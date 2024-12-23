@@ -1,3 +1,31 @@
+# [4.32.0](https://github.com/dialpad/dialtone/compare/dialtone-icons/v4.31.2...dialtone-icons/v4.32.0) (2024-12-14)
+
+
+### Bug Fixes
+
+* **Rich Text Editor:** NO-JIRA order of enter shortcut ([#595](https://github.com/dialpad/dialtone/issues/595)) ([3943ebe](https://github.com/dialpad/dialtone/commit/3943ebe76491ba5a1f02a5b5353fab96e88c50ea))
+
+
+### Features
+
+* **Icon:** DP-119206 power dialer icons ([#590](https://github.com/dialpad/dialtone/issues/590)) ([3984d49](https://github.com/dialpad/dialtone/commit/3984d49507ed78a1dbd2ac2672569b5940080c11))
+
+## [4.31.2](https://github.com/dialpad/dialtone/compare/dialtone-icons/v4.31.1...dialtone-icons/v4.31.2) (2024-12-10)
+
+
+### Bug Fixes
+
+* **Icon:** DLT-2206 fix icon Simultaneous ring ([#579](https://github.com/dialpad/dialtone/issues/579)) ([1435dbd](https://github.com/dialpad/dialtone/commit/1435dbdcf12e295fbd198446a3d7b9e97e5f9797))
+
+## [4.31.1](https://github.com/dialpad/dialtone/compare/dialtone-icons/v4.31.0...dialtone-icons/v4.31.1) (2024-11-28)
+
+# [4.31.0](https://github.com/dialpad/dialtone/compare/dialtone-icons/v4.30.0...dialtone-icons/v4.31.0) (2024-11-22)
+
+
+### Features
+
+* **Icon:** DLT-2206 add new icon Simultaneous contact center ([#564](https://github.com/dialpad/dialtone/issues/564)) ([c29e044](https://github.com/dialpad/dialtone/commit/c29e0446e0038d90ac9cd603dd21d6875b4491db))
+
 # [4.30.0](https://github.com/dialpad/dialtone/compare/dialtone-icons/v4.29.0...dialtone-icons/v4.30.0) (2024-11-04)
 
 

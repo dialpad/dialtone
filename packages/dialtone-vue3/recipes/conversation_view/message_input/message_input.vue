@@ -1,9 +1,9 @@
 <!-- eslint-disable vue/no-restricted-class -->
 <template>
   <div
-    data-qa="dt-message-input"
+    data-qa="dt-recipe-message-input"
     role="presentation"
-    :class="['dt-message-input']"
+    :class="['d-recipe-message-input']"
     @dragover.prevent
     @drop.prevent="onDrop"
     @paste="onPaste"
@@ -14,7 +14,7 @@
     <!-- Some wrapper to restrict the height and show the scrollbar -->
     <div
       v-dt-scrollbar
-      class="dt-message-input__editor-wrapper"
+      class="d-recipe-message-input__editor-wrapper"
       :style="{ 'max-height': maxHeight }"
     >
       <dt-rich-text-editor
@@ -46,9 +46,9 @@
     <!-- @slot Slot for attachment carousel -->
     <slot name="middle" />
     <!-- Section for the bottom UI -->
-    <section class="dt-message-input__bottom-section">
+    <section class="d-recipe-message-input__bottom-section">
       <!-- Left content -->
-      <div class="dt-message-input__bottom-section-left">
+      <div class="d-recipe-message-input__bottom-section-left">
         <dt-stack
           gap="200"
           direction="row"
@@ -56,9 +56,9 @@
           <dt-button
             v-if="showImagePicker"
             v-dt-tooltip:top-start="showImagePicker?.tooltipLabel"
-            data-qa="dt-message-input-image-btn"
+            data-qa="dt-recipe-message-input-image-btn"
             size="sm"
-            class="dt-message-input__button"
+            class="d-recipe-message-input__button"
             kind="muted"
             importance="clear"
             :aria-label="showImagePicker.ariaLabel"
@@ -74,10 +74,10 @@
           </dt-button>
           <dt-input
             ref="messageInputImageUpload"
-            data-qa="dt-message-input-image-input"
+            data-qa="dt-recipe-message-input-image-input"
             accept="image/*, video/*"
             type="file"
-            class="dt-message-input__image-input"
+            class="d-recipe-message-input__image-input"
             multiple
             hidden
             @input="onImageUpload"
@@ -85,7 +85,7 @@
           <dt-popover
             v-if="showEmojiPicker"
             v-model:open="emojiPickerOpened"
-            data-qa="dt-message-input-emoji-picker-popover"
+            data-qa="dt-recipe-message-input-emoji-picker-popover"
             initial-focus-element="#searchInput"
             padding="none"
           >
@@ -93,9 +93,9 @@
               <dt-button
                 v-dt-tooltip="emojiTooltipMessage"
                 v-bind="attrs"
-                data-qa="dt-message-input-emoji-picker-btn"
+                data-qa="dt-recipe-message-input-emoji-picker-btn"
                 size="sm"
-                class="dt-message-input__button"
+                class="d-recipe-message-input__button"
                 kind="muted"
                 importance="clear"
                 :aria-label="emojiButtonAriaLabel"
@@ -121,12 +121,7 @@
               <dt-emoji-picker
                 v-bind="emojiPickerProps"
                 @skin-tone="onSkinTone"
-                @selected-emoji="
-                  (emoji) => {
-                    close();
-                    onSelectEmoji(emoji);
-                  }
-                "
+                @selected-emoji="(emoji) => onSelectEmoji(emoji, close)"
               />
             </template>
           </dt-popover>
@@ -135,7 +130,7 @@
         </dt-stack>
       </div>
       <!-- Right content -->
-      <div class="dt-message-input__bottom-section-right">
+      <div class="d-recipe-message-input__bottom-section-right">
         <dt-stack
           direction="row"
           gap="300"
@@ -148,7 +143,7 @@
           <!-- Optionally displayed remaining character counter -->
           <dt-tooltip
             v-if="Boolean(showCharacterLimit)"
-            class="dt-message-input__remaining-char-tooltip"
+            class="d-recipe-message-input__remaining-char-tooltip"
             placement="top-end"
             :enabled="characterLimitTooltipEnabled"
             :message="showCharacterLimit.message"
@@ -157,8 +152,8 @@
             <template #anchor>
               <p
                 v-show="displayCharacterLimitWarning"
-                class="dt-message-input__remaining-char"
-                data-qa="dt-message-input-character-limit"
+                class="d-recipe-message-input__remaining-char"
+                data-qa="dt-recipe-message-input-character-limit"
               >
                 {{ showCharacterLimit.count - inputLength }}
               </p>
@@ -168,8 +163,8 @@
           <!-- Cancel button for edit mode -->
           <dt-button
             v-if="showCancel"
-            data-qa="dt-message-input-cancel-button"
-            class="dt-message-input__button dt-message-input__cancel-button"
+            data-qa="dt-recipe-message-input-cancel-button"
+            class="d-recipe-message-input__button d-recipe-message-input__cancel-button"
             size="sm"
             kind="muted"
             importance="clear"
@@ -186,14 +181,14 @@
             <dt-button
               v-if="showSend"
               v-dt-tooltip:top-end="showSend?.tooltipLabel"
-              data-qa="dt-message-input-send-btn"
+              data-qa="dt-recipe-message-input-send-btn"
               size="sm"
               kind="default"
               importance="primary"
               :class="[
-                'dt-message-input__button dt-message-input__send-button',
+                'd-recipe-message-input__button d-recipe-message-input__send-button',
                 {
-                  'dt-message-input__send-button--disabled': isSendDisabled,
+                  'd-recipe-message-input__send-button--disabled': isSendDisabled,
                   'd-btn--icon-only': showSendIcon,
                 },
               ]"
@@ -750,9 +745,13 @@ export default {
       this.$emit('skin-tone', skinTone);
     },
 
-    onSelectEmoji (emoji) {
+    onSelectEmoji (emoji, close) {
       if (!emoji) {
         return;
+      }
+
+      if (!emoji.shift_key) {
+        close();
       }
 
       // Insert emoji into the editor
@@ -797,74 +796,3 @@ export default {
   },
 };
 </script>
-
-<style lang="less">
-.dt-message-input {
-  display: flex;
-  flex-direction: column;
-  border-radius: var(--dt-size-radius-400);
-  border: var(--dt-size-border-100) solid;
-  border-color: var(--dt-color-border-default);
-  line-height: var(--dt-font-line-height-400);
-  cursor: text;
-  transition-property: border-color, box-shadow, opacity;
-  transition-duration: var(--td50);
-  transition-timing-function: var(--ttf-in-out);
-
-  &:focus-within {
-    border-color: var(--dt-color-border-bold);
-    box-shadow: 0 0 var(--dt-size-300) 0 var(--dt-color-surface-moderate-opaque);
-  }
-
-  &__editor-wrapper {
-    padding: var(--dt-space-450) var(--dt-space-500) var(--dt-space-300);
-  }
-
-  &__remaining-char-tooltip {
-    margin-top: auto;
-    margin-bottom: auto;
-  }
-
-  &__remaining-char {
-    color: var(--dt-color-foreground-critical);
-    font-size: var(--dt-font-size-100);
-    margin-right: var(--dt-space-300);
-  }
-
-  &__button {
-    max-height: 2.8rem;
-    max-width: 2.8rem;
-    border-radius: var(--dt-size-radius-300);
-  }
-
-  &__send-button.dt-message-input__button:not(.d-btn--icon-only),
-  &__cancel-button {
-    max-width: unset;
-    padding: var(--dt-space-350);
-  }
-
-  &__send-button--disabled {
-    background-color: unset;
-    color: var(--dt-color-foreground-muted);
-    cursor: default;
-  }
-
-  &__bottom-section {
-    display: flex;
-    justify-content: space-between;
-    padding: var(--dt-space-300) var(--dt-space-400) var(--dt-space-400);
-  }
-
-  &__bottom-section-left {
-    display: flex;
-  }
-
-  &__bottom-section-right {
-    display: flex;
-  }
-
-  &__image-input {
-    position: absolute;
-  }
-}
-</style>

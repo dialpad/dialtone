@@ -1,0 +1,82 @@
+{
+  "badge": {
+    "color": {
+      "background": {
+        "default": {
+          "value": "{color.surface.moderate-opaque}",
+          "type": "color"
+        },
+        "info": {
+          "value": "{color.blue.125}",
+          "type": "color"
+        },
+        "success": {
+          "value": "{color.green.200}",
+          "type": "color"
+        },
+        "warning": {
+          "value": "{color.gold.150}",
+          "type": "color"
+        },
+        "critical": {
+          "value": "{color.red.125}",
+          "type": "color"
+        },
+        "bulletin": {
+          "value": "{color.brand.purple}",
+          "type": "color"
+        },
+        "bulletin-subtle": {
+          "value": "{color.purple.100}",
+          "type": "color"
+        },
+        "ai": {
+          "value": "{color.gradient.magenta-purple}",
+          "type": "color"
+        }
+      },
+      "foreground": {
+        "default": {
+          "value": "{color.foreground.primary}",
+          "type": "color"
+        },
+        "bulletin": {
+          "value": "{color.neutral.white}",
+          "type": "color"
+        },
+        "bulletin-subtle": {
+          "value": "{color.brand.purple}",
+          "type": "color",
+          "$extensions": {
+            "studio.tokens": {
+              "modify": {
+                "type": "darken",
+                "value": "0.6",
+                "space": "hsl"
+              }
+            }
+          }
+        }
+      },
+      "border": {
+        "default": {
+          "value": "{color.border.subtle}",
+          "type": "color"
+        },
+        "bulletin-subtle": {
+          "value": "{color.brand.purple}",
+          "type": "color",
+          "$extensions": {
+            "studio.tokens": {
+              "modify": {
+                "type": "alpha",
+                "value": ".5",
+                "space": "hsl"
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

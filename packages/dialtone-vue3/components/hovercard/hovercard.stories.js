@@ -50,6 +50,11 @@ export const argTypesData = {
   },
 
   // Props
+  open: {
+    control: {
+      type: 'boolean',
+    },
+  },
   fallbackPlacements: {
     description: `If the popover does not fit in the direction described by "placement",
     it will attempt to change its direction to the "fallbackPlacements".

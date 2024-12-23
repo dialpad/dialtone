@@ -26,7 +26,7 @@ htmlCode='
   <span class="d-emoji d-icon d-icon--size-500" code=":smile:" size="500">
     <div aria-busy="true" role="status" aria-label="" class="d-icon d-icon--size-500" style="display: none;">
       <div
-        class="skeleton-placeholder d-bar-circle skeleton-placeholder--animate"
+        class="d-skeleton-placeholder d-bar-circle d-skeleton-placeholder--animate"
         style="animation-delay: 0ms; animation-duration: 1000ms; min-width: 100%; max-width: 100%; min-height: 100%; max-height: 100%;">
       </div>
     </div>

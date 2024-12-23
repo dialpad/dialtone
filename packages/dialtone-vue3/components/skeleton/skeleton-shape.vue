@@ -3,10 +3,10 @@
     ref="skeleton"
     data-qa="skeleton-shape"
     :class="[
-      'skeleton-placeholder',
+      'd-skeleton-placeholder',
       SKELETON_SHAPES[shape],
       {
-        'skeleton-placeholder--animate': animate,
+        'd-skeleton-placeholder--animate': animate,
       },
       contentClass,
     ]"

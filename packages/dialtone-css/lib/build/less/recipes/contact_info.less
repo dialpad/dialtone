@@ -1,0 +1,55 @@
+.d-recipe-contact-info {
+  --contact-info-avatar-border-color: var(--dt-color-surface-primary);
+
+  display: flex;
+
+  .d-item-layout {
+    flex: 1 1 0;
+  }
+
+  .d-item-layout--content {
+    /*
+    DP-74536: Add `min-width` to make the width of "contact info" adjustable.
+    */
+    min-width: var(--dt-space-825);
+  }
+
+  .d-item-layout--left {
+    align-items: center;
+    justify-content: flex-start;
+
+    /*
+    DP-74536: To make 'Avatar' in fixed position when resizing the window.
+    */
+    min-width: var(--dt-space-650);
+  }
+
+  .d-item-layout--right {
+    align-items: center;
+
+    /*
+    DP-74536: Remove `min-width` which cause extra unused empty space on the right of "contact info".
+    */
+    min-width: 0;
+  }
+}
+
+.d-recipe-contact-info__left {
+  position: relative;
+  background-color: transparent;
+  background-image: none;
+  border-width: 0;
+  cursor: pointer;
+}
+
+.d-recipe-contact-info__avatars {
+  display: flex;
+  flex-direction: row;
+  margin-right: var(--dt-space-300-negative);
+
+  .d-avatar {
+    box-sizing: unset;
+    border: var(--dt-size-300) solid var(--contact-info-avatar-border-color);
+    border-radius: var(--dt-size-radius-pill);
+  }
+}

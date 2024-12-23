@@ -14,6 +14,7 @@ on:
           - css
           - emojis
           - icons
+          - language-server
           - tokens
           - vue2
           - vue3
@@ -115,6 +116,10 @@ jobs:
       - name: Release Dialtone Icons ${{ env.RELEASE_TAG }}
         if: ${{ github.event_name == 'schedule' || github.event.inputs.package == 'all' || github.event.inputs.package == 'icons' }}
         run: pnpm nx run dialtone-icons:release
+
+      - name: Release Dialtone Language server ${{ env.RELEASE_TAG }}
+        if: ${{ github.event_name == 'schedule' || github.event.inputs.package == 'all' || github.event.inputs.package == 'language-server' }}
+        run: pnpm nx run dialtone-language-server:release
 
       - name: Release Dialtone Tokens ${{ env.RELEASE_TAG }}
         if: ${{ github.event_name == 'schedule' || github.event.inputs.package == 'all' || github.event.inputs.package == 'tokens' }}

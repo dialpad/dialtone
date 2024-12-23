@@ -38,7 +38,7 @@ export class DialtoneVirtualCode implements VirtualCode {
       lengths: [this.snapshot.getLength()],
       data: {
         completion: true,
-        // semantic: true,
+        semantic: true,
       },
     }];
   }

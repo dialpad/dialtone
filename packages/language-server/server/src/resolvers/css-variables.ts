@@ -32,7 +32,7 @@ function getItemKind(itemName: string): CompletionItemKind {
 }
 
 function processDocumentation(docs: DialtoneTokensDoc) {
-    const themeNames = Object.keys(docs);
+    const themeNames = Object.keys(docs).filter(themeName => ['dp-light', 'base-light', 'dp-dark', 'base-dark'].includes(themeName));
     const variableNames = new Set(themeNames.map(themeName => Object.keys(docs[themeName])).flat())
     const variablesDocumentation: CompletionItem[] = [];
 
@@ -50,9 +50,9 @@ function processDocumentation(docs: DialtoneTokensDoc) {
             variable.detail = cssVariable.description || variable.detail;
 
             // Small text to the right of the variable label
-            // if (!variable.labelDetails) {
-            //     variable.labelDetails = { description: cssVariable.value };
-            // }
+            if (!variable.labelDetails) {
+                variable.labelDetails = { description: cssVariable.value };
+            }
 
             documentation += `- **${themeName}**: ${cssVariable.value}\n`;
 
@@ -63,8 +63,6 @@ function processDocumentation(docs: DialtoneTokensDoc) {
             value: documentation,
         } as MarkupContent;
 
-        variable.detail = variable.detail || 'Missing variable description';
-
         variablesDocumentation.push(variable)
     }
 
@@ -74,7 +72,7 @@ function processDocumentation(docs: DialtoneTokensDoc) {
 const tokensDocumentation: DialtoneTokensDoc = require('../../node_modules/@dialpad/dialtone-tokens/dist/doc.json');
 
 // @TODO: Process the tokens on build, as it is a static file that will not change on runtime.
-const cssVariablesDocumentation: CompletionItem[] = processDocumentation(tokensDocumentation);
+export const cssVariablesDocumentation: CompletionItem[] = processDocumentation(tokensDocumentation);
 
 export function resolveCSSVariables(currentWord: string): NullableProviderResult<CompletionList> {
     console.log('Resolving CSS Variables', currentWord);

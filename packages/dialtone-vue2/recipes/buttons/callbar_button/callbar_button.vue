@@ -1,11 +1,13 @@
 <template>
   <dt-tooltip
     :id="id"
+    :inverted="invertedTooltip"
+    :show="showTooltip"
     :offset="[0, 24]"
   >
     <template #anchor>
       <span
-        :class="{ 'dt-recipe-callbar-button--disabled': disabled }"
+        :class="{ 'd-recipe-callbar-button--disabled': disabled }"
       >
         <dt-button
           :importance="buttonImportance"
@@ -26,7 +28,9 @@
         </dt-button>
       </span>
     </template>
-    <slot name="tooltip" />
+    <slot name="tooltip">
+      {{ tooltipText }}
+    </slot>
   </dt-tooltip>
 </template>
 
@@ -141,6 +145,33 @@ export default {
       default: '',
     },
 
+    /**
+     * Whether the tooltip has an inverted background color.
+     * @values true, false
+     */
+    invertedTooltip: {
+      type: Boolean,
+      default: false,
+    },
+
+    /**
+     * Use this if you would like to manually override the logic for when the tooltip shows.
+     * Otherwise it will just show on hover/focus.
+     * @values null, true, false
+     */
+    showTooltip: {
+      type: Boolean,
+      default: null,
+    },
+
+    /**
+     * The message that displays in the tooltip. This will be overridden by the tooltip slot.
+     */
+    tooltipText: {
+      type: String,
+      default: undefined,
+    },
+
   },
 
   emits: [
@@ -157,12 +188,12 @@ export default {
     callbarButtonClass () {
       return [
         this.buttonClass,
-        'dt-recipe-callbar-button',
+        'd-recipe-callbar-button',
         'd-px0',
         {
-          'dt-recipe-callbar-button--circle': this.circle,
-          'dt-recipe-callbar-button--active': this.active,
-          'dt-recipe-callbar-button--danger': this.danger,
+          'd-recipe-callbar-button--circle': this.circle,
+          'd-recipe-callbar-button--active': this.active,
+          'd-recipe-callbar-button--danger': this.danger,
           'd-btn--disabled d-bgc-transparent': this.disabled,
           'd-fc-primary': !this.disabled,
         }];
@@ -202,33 +233,3 @@ export default {
   },
 };
 </script>
-
-<style lang="less">
-.dt-recipe-callbar-button:not(.dt-recipe-callbar-button--circle) {
-  line-height: var(--dt-font-line-height-300);
-}
-
-.dt-recipe-callbar-button--circle {
-  border-radius: var(--dt-size-radius-circle);
-}
-
-.dt-recipe-callbar-button.d-btn[disabled] {
-  background-color: unset;
-  opacity: .5;
-}
-
-.dt-recipe-callbar-button--circle.d-btn[disabled] {
-  border-color: unset;
-}
-
-.dt-recipe-callbar-button--active,
-.dt-recipe-callbar-button--active:hover {
-  .base-button__icon {
-    color: var(--primary-color);
-  }
-}
-
-.dt-recipe-callbar-button--disabled {
-  cursor: not-allowed;
-}
-</style>

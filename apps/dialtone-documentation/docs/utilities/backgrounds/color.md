@@ -90,10 +90,6 @@ Use `fv:d-bgc-{color}` to change an element's `:focus-visible` state background 
 <button class="d-bgc-transparent fv:d-fc-red-300 fv:d-bgc-red-300 fv:d-bgo25">...</button>
 ```
 
-<script setup>
-  import { base as baseColors} from '@data/colors.json';
-</script>
-
 ## Classes
 
 <div class="d-h464 d-of-y-scroll d-bb d-bc-black-200">
@@ -279,3 +275,8 @@ Use `fv:d-bgc-{color}` to change an element's `:focus-visible` state background 
     </template>
   </utility-class-table>
 </div>
+
+<script setup>
+  import { base } from '@data/colors.json';
+  const baseColors = base.lightMode;
+</script>

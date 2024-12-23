@@ -14,8 +14,10 @@
     :footer-class="footerClass"
     :append-to="appendTo"
     :hovercard="true"
-    :timer="timer"
     data-qa="dt-hovercard"
+    :open="open"
+    :enter-delay="enterDelay"
+    :leave-delay="leaveDelay"
     @opened="(e) => ($emit('opened', e))"
   >
     <template #anchor="{ attrs }">
@@ -42,13 +44,9 @@
 </template>
 
 <script setup>
-import { reactive } from 'vue';
 import { POPOVER_APPEND_TO_VALUES, POPOVER_PADDING_CLASSES, DtPopover } from '@/components/popover/index.js';
-import { TOOLTIP_DIRECTIONS } from '@/components/tooltip/index.js';
+import { TOOLTIP_DIRECTIONS, TOOLTIP_DELAY_MS } from '@/components/tooltip/index.js';
 import { getUniqueString } from '@/common/utils';
-import useTimer from './timer';
-
-const timer = reactive(useTimer());
 
 defineProps({
   /**
@@ -59,6 +57,17 @@ defineProps({
   transition: {
     type: Boolean,
     default: false,
+  },
+
+  /**
+     * Controls whether the hovercard is shown. Leaving this null will have the hovercard trigger on hover by default.
+     * If you set this value, the default trigger behavior will be disabled, and you can control it as you need.
+     * Supports .sync modifier
+     * @values null, true, false
+     */
+  open: {
+    type: Boolean,
+    default: null,
   },
 
   /**
@@ -163,6 +172,24 @@ defineProps({
     validator: appendTo => {
       return POPOVER_APPEND_TO_VALUES.includes(appendTo) ||
             (appendTo instanceof HTMLElement);
+    },
+
+    /**
+     * The enter delay in milliseconds before the hovercard is shown.
+     * @type number
+     */
+    enterDelay: {
+      type: Number,
+      default: TOOLTIP_DELAY_MS,
+    },
+
+    /**
+     * The leave delay in milliseconds before the hovercard is hidden.
+     * @type number
+     */
+    leaveDelay: {
+      type: Number,
+      default: TOOLTIP_DELAY_MS,
     },
   },
 });

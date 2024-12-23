@@ -60,7 +60,7 @@ showHtmlWarning />
 Add a `d-tablist--no-border` to remove the bottom border of any tablist. Handy for small tablists and tablists serving as subtabs to a larger menu.
 
 <code-well-header>
-  <example-tabs hide-content borderless />
+  <example-tabs borderless />
 </code-well-header>
 
 <code-example-tabs
@@ -145,6 +145,49 @@ vueCode='
 '
 showHtmlWarning />
 
+### Disabled
+
+<code-well-header>
+  <example-tabs disabled />
+</code-well-header>
+
+<code-example-tabs
+htmlCode='
+<div class="d-tablist" role="tablist" aria-label="Label Example Group" tabindex="0">
+  <button id="base-tab-0" class="d-tab d-tab--selected" role="tab" disabled aria-selected="true" aria-controls="base-panel-0" tabindex="0">First tab </button>
+  <button id="base-tab-1" class="d-tab" role="tab" disabled aria-selected="false" aria-controls="base-panel-1" tabindex="-1">Second tab </button>
+  <button id="base-tab-2" class="d-tab" role="tab" disabled aria-selected="false" aria-controls="base-panel-2" tabindex="-1">Third tab </button>
+</div>
+'
+vueCode='
+<dt-tab-group :disabled="true">
+  <template #tabs>
+    <dt-tab id="1" panel-id="2" selected>
+      First
+    </dt-tab>
+    <dt-tab id="3" panel-id="4" disabled>
+      Second
+    </dt-tab>
+    <dt-tab id="5`" panel-id="6">
+      Third
+    </dt-tab>
+  </template>
+
+  <div>
+    <dt-tab-panel id="2" tab-id="1">
+      <p>First Panel</p>
+    </dt-tab-panel>
+    <dt-tab-panel id="4" tab-id="3">
+      <p>Second Panel</p>
+    </dt-tab-panel>
+    <dt-tab-panel id="6" tab-id="5">
+      <p>Third Panel</p>
+    </dt-tab-panel>
+  </div>
+</dt-tab-group>
+'
+/>
+
 ## Sizes
 
 ### Default
@@ -192,7 +235,7 @@ showHtmlWarning />
 ### Small
 
 <code-well-header>
-  <example-tabs hide-content size="small" />
+  <example-tabs size="sm" />
 </code-well-header>
 
 <code-example-tabs

@@ -94,9 +94,8 @@ describe('DtHovercard Tests', () => {
         await anchor.trigger('mouseleave');
         await vi.runAllTimers();
 
-        content = getHovercardContent();
-
-        expect(content).toBeNull();
+        const dialog = document.querySelector('[data-qa="dt-hovercard__dialog"] > div');
+        expect(dialog.style.display).toBe('none');
       });
     });
 

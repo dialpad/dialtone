@@ -30,6 +30,12 @@ export const argTypesData = {
   circle: {
     control: 'boolean',
   },
+  invertedTooltip: {
+    control: 'boolean',
+  },
+  showTooltip: {
+    control: 'boolean',
+  },
   danger: {
     control: 'boolean',
   },
