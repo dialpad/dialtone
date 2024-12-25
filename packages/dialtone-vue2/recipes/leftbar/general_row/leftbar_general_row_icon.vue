@@ -10,7 +10,7 @@
   />
   <div
     v-else-if="isDialbotType"
-    :class="dialbotClasses"
+    class="dt-recipe-leftbar-general-row__icon"
     data-qa="general-row-dialbot"
   >
     <dt-icon-dialbot
@@ -117,14 +117,6 @@ export default {
       return [
         'd-recipe-leftbar-row__icon-cc',
         COLORS[this.color],
-      ];
-    },
-
-    dialbotClasses () {
-      return [
-        'd-d-flex',
-        'd-ai-center',
-        'd-jc-center',
       ];
     },
   },
