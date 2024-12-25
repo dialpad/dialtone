@@ -45,7 +45,7 @@
         <span
           v-if="presenceText"
           data-qa="dt-recipe-leftbar-row-presence-text"
-          :class="['d-recipe-leftbar-row__meta-context', presenceColorClass]"
+          :class="['d-recipe-leftbar-row__meta-context', presenceFontColorClass]"
         >
           {{ presenceText }}
         </span>
@@ -237,17 +237,14 @@ export default {
   ],
 
   computed: {
-    presenceColorClass () {
-      switch (this.avatarPresence) {
-        case 'active':
-          return 'd-fc-success';
-        case 'busy':
-          return 'd-fc-critical';
-        case 'away':
-          return 'd-fc-warning';
-        default:
-          return undefined;
-      }
+    presenceFontColorClass () {
+      const presenceFontColors = {
+        active: 'd-recipe-contact-row--active',
+        busy: 'd-recipe-contact-row--busy',
+        away: 'd-recipe-contact-row--away',
+      };
+
+      return presenceFontColors[this.avatarPresence];
     },
 
     contactDescription () {
