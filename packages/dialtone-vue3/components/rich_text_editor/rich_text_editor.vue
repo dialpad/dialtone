@@ -16,7 +16,6 @@ import Blockquote from '@tiptap/extension-blockquote';
 import CodeBlock from '@tiptap/extension-code-block';
 import Document from '@tiptap/extension-document';
 import HardBreak from '@tiptap/extension-hard-break';
-import Image from '@tiptap/extension-image';
 import Paragraph from '@tiptap/extension-paragraph';
 import Placeholder from '@tiptap/extension-placeholder';
 import Bold from '@tiptap/extension-bold';
@@ -32,6 +31,7 @@ import TextAlign from '@tiptap/extension-text-align';
 import History from '@tiptap/extension-history';
 import Emoji from './extensions/emoji';
 import CustomLink from './extensions/custom_link';
+import ConfigurableImage from './extensions/image';
 import { MentionPlugin } from './extensions/mentions/mention';
 import { ChannelPlugin } from './extensions/channels/channel';
 import { SlashCommandPlugin } from './extensions/slash_command/slash_command';
@@ -465,7 +465,7 @@ export default {
       }
 
       if (this.allowInlineImages) {
-        extensions.push(Image.configure({ inline: true }));
+        extensions.push(ConfigurableImage);
       }
 
       if (this.additionalExtensions.length) {

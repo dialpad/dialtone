@@ -20,7 +20,6 @@ import Placeholder from '@tiptap/extension-placeholder';
 import HardBreak from '@tiptap/extension-hard-break';
 import Bold from '@tiptap/extension-bold';
 import BulletList from '@tiptap/extension-bullet-list';
-import Image from '@tiptap/extension-image';
 import Italic from '@tiptap/extension-italic';
 import TipTapLink from '@tiptap/extension-link';
 import ListItem from '@tiptap/extension-list-item';
@@ -32,6 +31,7 @@ import TextAlign from '@tiptap/extension-text-align';
 import History from '@tiptap/extension-history';
 import Emoji from './extensions/emoji';
 import CustomLink from './extensions/custom_link';
+import ConfigurableImage from './extensions/image';
 import { MentionPlugin } from './extensions/mentions/mention';
 import { ChannelPlugin } from './extensions/channels/channel';
 import { SlashCommandPlugin } from './extensions/slash_command/slash_command';
@@ -465,7 +465,7 @@ export default {
       }
 
       if (this.allowInlineImages) {
-        extensions.push(Image.configure({ inline: true }));
+        extensions.push(ConfigurableImage);
       }
 
       if (this.additionalExtensions.length) {
