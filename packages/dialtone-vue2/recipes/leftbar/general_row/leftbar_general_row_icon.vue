@@ -10,7 +10,7 @@
   />
   <div
     v-else-if="isDialbotType"
-    class="dt-recipe-leftbar-general-row__icon"
+    class="d-recipe-leftbar-general-row__icon"
     data-qa="general-row-dialbot"
   >
     <dt-icon-dialbot
