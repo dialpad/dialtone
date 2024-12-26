@@ -26,16 +26,20 @@
 
 .d-recipe-callbar-button-with-popover__popover {
   .d-popover__header {
-    display: flex;
-    align-items: center;
-    padding-left: var(--dt-space-450);
     color: var(--dt-color-foreground-primary-inverted);
-    font-weight: normal;
     background: var(--dt-color-surface-contrast);
 
     .d-btn {
       color: var(--dt-color-foreground-primary-inverted);
     }
+  }
+
+  .d-popover__header__content {
+    display: flex;
+    align-items: center;
+    padding-right: var(--dt-space-450);
+    padding-left: var(--dt-space-450);
+    font-weight: normal;
   }
 }
 
