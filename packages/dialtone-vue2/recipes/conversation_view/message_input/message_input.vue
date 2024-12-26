@@ -1,4 +1,3 @@
-<!-- eslint-disable vue/no-restricted-class -->
 <template>
   <div
     data-qa="dt-recipe-message-input"
