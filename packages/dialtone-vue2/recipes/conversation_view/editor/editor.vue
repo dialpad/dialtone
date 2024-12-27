@@ -150,7 +150,7 @@
 
     <!-- Some wrapper to restrict the height and show the scrollbar -->
     <div
-      class="d-of-auto d-mx16 d-mt8 d-mb16 d-c-text"
+      class="d-of-auto d-mx16 d-mb4 d-c-text"
       :style="{ 'max-height': maxHeight }"
     >
       <dt-rich-text-editor
