@@ -2,7 +2,7 @@
   <div>
     <dt-recipe-editor
       ref="editor"
-      v-model="$attrs.value"
+      v-model="value"
       class="d-mb32"
       :input-aria-label="$attrs.inputAriaLabel"
       :auto-focus="$attrs.autoFocus"

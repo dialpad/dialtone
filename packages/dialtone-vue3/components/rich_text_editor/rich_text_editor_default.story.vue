@@ -1,6 +1,6 @@
 <template>
   <dt-rich-text-editor
-    v-model="$attrs.value"
+    v-model="value"
     :editable="$attrs.editable"
     :input-aria-label="$attrs.inputAriaLabel"
     :input-class="$attrs.inputClass"
