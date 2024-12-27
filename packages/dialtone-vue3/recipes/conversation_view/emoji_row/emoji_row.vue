@@ -7,7 +7,7 @@
     >
       <dt-tooltip
         class="d-recipe-emoji-row__tooltip"
-        content-class="d-wmx464"
+        content-class="d-recipe-emoji-row__tooltip-content"
         sticky="popper"
         @shown="(shown) => emojiHovered(reaction, shown)"
       >

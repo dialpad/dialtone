@@ -1,16 +1,16 @@
-<!-- eslint-disable vue/no-restricted-class -->
 <template>
   <div
+
+    class="d-recipe-editor"
     data-qa="dt-recipe-editor"
     role="presentation"
-    class="d-d-flex d-fd-column"
     @click="$refs.richTextEditor.focusEditor()"
   >
     <!-- Section for the top UI -->
     <dt-stack
+      class="d-recipe-editor__top-bar"
       direction="row"
       gap="450"
-      class="d-p8 d-recipe-editor__top-bar-background"
     >
       <dt-stack
         v-for="buttonGroup in buttonGroups"
@@ -26,13 +26,12 @@
         >
           <template #anchor>
             <dt-button
+              :active="$refs.richTextEditor?.editor?.isActive(button.selector)"
+              :aria-label="button.tooltipMessage"
               :data-qa="button.dataQA"
               importance="clear"
               kind="muted"
-              :active="$refs.richTextEditor?.editor?.isActive(button.selector)"
               size="xs"
-              :aria-label="button.tooltipMessage"
-              :class="{ 'd-btn--icon-only': !button.label }"
               @click="button.onClick()"
             >
               <template #icon>
@@ -54,14 +53,15 @@
       >
         <dt-popover
           :open="showLinkInput"
-          placement="bottom-start"
+          :show-close-button="false"
           :visually-hidden-close="true"
           :visually-hidden-close-label="'Close link input popover'"
           data-qa="dt-recipe-editor-link-input-popover"
-          :show-close-button="false"
+          padding="none"
+          placement="bottom-start"
           @click="onInputFocus"
-          @click.stop="onInputFocus"
           @opened="updateInput"
+          @click.stop="onInputFocus"
         >
           <template #anchor>
             <dt-tooltip
@@ -71,22 +71,18 @@
             >
               <template #anchor>
                 <dt-button
+                  :active="$refs.richTextEditor?.editor?.isActive(linkButton.selector)"
+                  :aria-label="linkButton.tooltipMessage"
                   :data-qa="linkButton.dataQA"
                   importance="clear"
                   kind="muted"
-                  class="d-ol-none"
-                  :active="
-                    $refs.richTextEditor?.editor?.isActive(linkButton.selector)
-                  "
                   size="xs"
-                  :aria-label="linkButton.tooltipMessage"
                   @click="linkButton.onClick()"
                 >
                   <template #icon>
                     <component
                       :is="linkButton.icon"
                       size="200"
-                      class="d-fw-bold"
                     />
                   </template>
                 </dt-button>
@@ -95,55 +91,60 @@
           </template>
 
           <template #content>
-            <span v-if="showAddLink.setLinkTitle.length > 0">
-              {{ showAddLink.setLinkTitle }}
-            </span>
-            <dt-input
-              v-model="linkInput"
-              :input-aria-label="showAddLink.setLinkInputAriaLabel"
-              data-qa="dt-recipe-editor-link-input"
-              :placeholder="setLinkPlaceholder"
-              input-wrapper-class="d-bgc-secondary d-mt6 d-bar5 d-ba d-baw1 d-bc-default d-py2 d-ol-none"
-              @click="onInputFocus"
-              @click.stop="onInputFocus"
-              @focus="onInputFocus"
-              @keydown.enter="setLink"
-            />
+            <div class="d-recipe-editor__popover-content">
+              <span
+                v-if="showAddLink.setLinkTitle.length > 0"
+              >
+                {{ showAddLink.setLinkTitle }}
+              </span>
+              <dt-input
+                v-model="linkInput"
+                :input-aria-label="showAddLink.setLinkInputAriaLabel"
+                :placeholder="setLinkPlaceholder"
+                data-qa="dt-recipe-editor-link-input"
+                input-wrapper-class="d-recipe-editor-link__input-wrapper"
+                @click="onInputFocus"
+                @focus="onInputFocus"
+                @click.stop="onInputFocus"
+                @keydown.enter="setLink"
+              />
+            </div>
           </template>
           <template #footerContent>
-            <div class="d-ml8 d-mr12">
+            <dt-stack
+              direction="row"
+              gap="300"
+              class="d-recipe-editor__popover-footer"
+            >
               <dt-button
-                class="d-mx2"
                 :aria-label="removeLinkButton.ariaLabel"
+                data-qa="dt-recipe-editor-remove-link-btn"
                 importance="clear"
                 kind="muted"
                 size="sm"
-                data-qa="dt-recipe-editor-remove-link-btn"
                 @click="removeLink"
               >
                 {{ removeLinkButton.label }}
               </dt-button>
               <dt-button
-                class="d-mx2"
                 :aria-label="cancelSetLinkButton.ariaLabel"
+                data-qa="dt-recipe-editor-set-link-cancel-btn"
                 importance="clear"
                 kind="muted"
                 size="sm"
-                data-qa="dt-recipe-editor-set-link-cancel-btn"
                 @click="closeLinkInput"
               >
                 {{ cancelSetLinkButton.label }}
               </dt-button>
               <dt-button
-                class="d-mx2"
-                size="sm"
                 :aria-label="confirmSetLinkButton.ariaLabel"
                 data-qa="dt-recipe-editor-set-link-confirm-btn"
+                size="sm"
                 @click="setLink"
               >
                 {{ confirmSetLinkButton.label }}
               </dt-button>
-            </div>
+            </dt-stack>
           </template>
         </dt-popover>
       </dt-stack>
@@ -151,25 +152,25 @@
 
     <!-- Some wrapper to restrict the height and show the scrollbar -->
     <div
-      class="d-of-auto d-mx12 d-mt12 d-mb16 d-c-text"
       :style="{ 'max-height': maxHeight }"
+      class="d-recipe-editor__content"
     >
       <dt-rich-text-editor
         ref="richTextEditor"
         v-model="internalInputValue"
-        data-qa="dt-rich-text-editor"
+        :allow-inline-images="true"
+        :allow-line-breaks="true"
+        :auto-focus="autoFocus"
         :editable="editable"
         :input-aria-label="inputAriaLabel"
-        :input-class="`d-ml16 d-ol-none d-my6 ${inputClass}`"
-        :output-format="htmlOutputFormat"
-        :auto-focus="autoFocus"
-        :placeholder="placeholder"
-        :allow-line-breaks="true"
-        :allow-inline-images="true"
+        :input-class="`d-recipe-editor__content-input ${inputClass}`"
         :link="true"
+        :output-format="htmlOutputFormat"
+        :placeholder="placeholder"
+        data-qa="dt-rich-text-editor"
         v-bind="$attrs"
-        @focus="onFocus"
         @blur="onBlur"
+        @focus="onFocus"
         @input="onInput($event)"
       />
     </div>
@@ -500,7 +501,7 @@ export default {
       hasFocus: false,
 
       linkOptions: {
-        class: 'd-link d-c-text d-d-inline-block',
+        class: 'd-recipe-editor__link',
       },
 
       showLinkInput: false,
@@ -518,21 +519,12 @@ export default {
     },
 
     showingTextFormatButtons () {
-      return (
-        this.showBoldButton ||
-        this.showItalicsButton ||
-        this.showStrikeButton ||
-        this.showUnderlineButton
-      );
+      return this.showBoldButton || this.showItalicsButton || this.showStrikeButton || this.showUnderlineButton;
     },
 
     showingAlignmentButtons () {
-      return (
-        this.showAlignLeftButton ||
-        this.showAlignCenterButton ||
-        this.showAlignRightButton ||
-        this.showAlignJustifyButton
-      );
+      return this.showAlignLeftButton || this.showAlignCenterButton ||
+        this.showAlignRightButton || this.showAlignJustifyButton;
     },
 
     showingListButtons () {
@@ -540,19 +532,17 @@ export default {
     },
 
     buttonGroups () {
-      const individualButtonStacks = this.individualButtons.map(
-        (buttonData) => ({
-          key: buttonData.selector,
-          buttonGroup: [buttonData],
-        }),
-      );
+      const individualButtonStacks = this.individualButtons.map(buttonData => ({
+        key: buttonData.selector,
+        buttonGroup: [buttonData],
+      }));
       return [
         { key: 'new', buttonGroup: this.newButtons },
         { key: 'format', buttonGroup: this.textFormatButtons },
         { key: 'alignment', buttonGroup: this.alignmentButtons },
         { key: 'list', buttonGroup: this.listButtons },
         ...individualButtonStacks,
-      ].filter((buttonGroupData) => buttonGroupData.buttonGroup.length > 0);
+      ].filter(buttonGroupData => buttonGroupData.buttonGroup.length > 0);
     },
 
     newButtons () {
@@ -566,7 +556,7 @@ export default {
           tooltipMessage: 'Quick Reply',
           onClick: this.onQuickRepliesClick,
         },
-      ].filter((button) => button.showBtn);
+      ].filter(button => button.showBtn);
     },
 
     textFormatButtons () {
@@ -603,7 +593,7 @@ export default {
           tooltipMessage: 'Strike',
           onClick: this.onStrikethroughTextToggle,
         },
-      ].filter((button) => button.showBtn);
+      ].filter(button => button.showBtn);
     },
 
     alignmentButtons () {
@@ -640,7 +630,7 @@ export default {
           tooltipMessage: 'Align Justify',
           onClick: () => this.onTextAlign('justify'),
         },
-      ].filter((button) => button.showBtn);
+      ].filter(button => button.showBtn);
     },
 
     listButtons () {
@@ -661,7 +651,7 @@ export default {
           tooltipMessage: 'Ordered List',
           onClick: this.onOrderedListToggle,
         },
-      ].filter((button) => button.showBtn);
+      ].filter(button => button.showBtn);
     },
 
     individualButtons () {
@@ -682,7 +672,7 @@ export default {
           tooltipMessage: 'Code',
           onClick: this.onCodeBlockToggle,
         },
-      ].filter((button) => button.showBtn);
+      ].filter(button => button.showBtn);
     },
 
     linkButton () {
@@ -726,9 +716,7 @@ export default {
       }
 
       // Check if input matches any of the supported link formats
-      const prefix = EDITOR_SUPPORTED_LINK_PROTOCOLS.find((prefixRegex) =>
-        prefixRegex.test(this.linkInput),
-      );
+      const prefix = EDITOR_SUPPORTED_LINK_PROTOCOLS.find(prefixRegex => prefixRegex.test(this.linkInput));
 
       if (!prefix) {
         // If no matching pattern is found, prepend default prefix
@@ -746,7 +734,7 @@ export default {
           .focus()
           .insertContentAt(
             selection.anchor,
-            `<a class="${this.linkOptions.class}" href=${this.linkInput}>${this.linkInput}</a>`,
+          `<a class="${this.linkOptions.class}" href=${this.linkInput}>${this.linkInput}</a>`,
           )
           .run();
       } else {
@@ -770,8 +758,7 @@ export default {
       if (!openedInput) {
         return this.closeLinkInput();
       }
-      this.linkInput =
-        this.$refs.richTextEditor?.editor?.getAttributes('link')?.href;
+      this.linkInput = this.$refs.richTextEditor?.editor?.getAttributes('link')?.href;
     },
 
     closeLinkInput () {
@@ -797,37 +784,19 @@ export default {
     },
 
     onTextAlign (alignment) {
-      if (
-        this.$refs.richTextEditor?.editor?.isActive({ textAlign: alignment })
-      ) {
+      if (this.$refs.richTextEditor?.editor?.isActive({ textAlign: alignment })) {
         // If this alignment type is already set here, unset it
-        return this.$refs.richTextEditor?.editor
-          .chain()
-          .focus()
-          .unsetTextAlign()
-          .run();
+        return this.$refs.richTextEditor?.editor.chain().focus().unsetTextAlign().run();
       }
-      this.$refs.richTextEditor?.editor
-        .chain()
-        .focus()
-        .setTextAlign(alignment)
-        .run();
+      this.$refs.richTextEditor?.editor.chain().focus().setTextAlign(alignment).run();
     },
 
     onBulletListToggle () {
-      this.$refs.richTextEditor?.editor
-        .chain()
-        .focus()
-        .toggleBulletList()
-        .run();
+      this.$refs.richTextEditor?.editor.chain().focus().toggleBulletList().run();
     },
 
     onOrderedListToggle () {
-      this.$refs.richTextEditor?.editor
-        .chain()
-        .focus()
-        .toggleOrderedList()
-        .run();
+      this.$refs.richTextEditor?.editor.chain().focus().toggleOrderedList().run();
     },
 
     onCodeBlockToggle () {
@@ -839,11 +808,7 @@ export default {
     },
 
     onBlockquoteToggle () {
-      this.$refs.richTextEditor?.editor
-        .chain()
-        .focus()
-        .toggleBlockquote()
-        .run();
+      this.$refs.richTextEditor?.editor.chain().focus().toggleBlockquote().run();
     },
 
     onFocus (event) {
@@ -859,6 +824,7 @@ export default {
     onInput (event) {
       this.$emit('input', event);
     },
+
   },
 };
 </script>
