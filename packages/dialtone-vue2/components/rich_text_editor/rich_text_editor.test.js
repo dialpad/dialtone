@@ -8,6 +8,7 @@ const baseProps = {
   value: 'initial value',
   inputAriaLabel: 'aria-label text',
   inputClass: 'qa-editor',
+  allowInlineImages: true,
 };
 const baseListeners = {
   input: MOCK_INPUT_STUB,
@@ -21,6 +22,11 @@ describe('DtRichTextEditor tests', () => {
   let wrapper;
   let editor;
   let editorEl;
+
+  const _setValue = async (value) => {
+    editorEl.innerHTML = value;
+    await wrapper.vm.$nextTick();
+  };
 
   const updateWrapper = async () => {
     editorEl?.remove();
@@ -68,19 +74,26 @@ describe('DtRichTextEditor tests', () => {
   describe('Reactivity Tests', () => {
     describe('User Input Tests', () => {
       describe('When user inputs a value', () => {
-        describe('When using text output', () => {
+        // Shared Examples
+        const itBehavesLikeOutputsCorrectly = (value, output, onlyCheckOutputContained = false) => {
           it('should emit the output value', async () => {
-            await wrapper.setProps({ outputFormat: 'text' });
-
-            editorEl = document.getElementsByClassName('qa-editor')[0];
-
-            editorEl.innerHTML = 'new value';
-
-            await wrapper.vm.$nextTick();
-
-            expect(wrapper.emitted().input[0][0]).toBe('new value');
+            await _setValue(value);
+            const emittedOutput = wrapper.emitted().input[0][0];
+            if (onlyCheckOutputContained) {
+              expect(emittedOutput).toContain(output);
+            } else {
+              expect(emittedOutput).toEqual(output);
+            }
             expect(MOCK_INPUT_STUB).toHaveBeenCalled();
           });
+        };
+
+        describe('When using text output', () => {
+          beforeEach(async function () {
+            await wrapper.setProps({ outputFormat: 'text' });
+          });
+
+          itBehavesLikeOutputsCorrectly('new value', 'new value');
         });
 
         describe('When using json output', () => {
@@ -98,31 +111,25 @@ describe('DtRichTextEditor tests', () => {
             }],
           };
 
-          it('should emit the output value', async () => {
+          beforeEach(async function () {
             await wrapper.setProps({ outputFormat: 'json' });
-
-            editorEl = document.getElementsByClassName('qa-editor')[0];
-            editorEl.innerHTML = 'new value';
-
-            await wrapper.vm.$nextTick();
-
-            expect(wrapper.emitted().input[0][0]).toEqual(MOCK_JSON_OUTPUT);
-            expect(MOCK_INPUT_STUB).toHaveBeenCalled();
           });
+
+          itBehavesLikeOutputsCorrectly('new value', MOCK_JSON_OUTPUT);
         });
 
         describe('When using html output', () => {
-          it('should emit the output value', async () => {
+          beforeEach(async function () {
             await wrapper.setProps({ outputFormat: 'html' });
-
-            editorEl = document.getElementsByClassName('qa-editor')[0];
-            editorEl.innerHTML = 'new value';
-
-            await wrapper.vm.$nextTick();
-
-            expect(wrapper.emitted().input[0][0]).toBe('<p>new value</p>');
-            expect(MOCK_INPUT_STUB).toHaveBeenCalled();
           });
+
+          itBehavesLikeOutputsCorrectly('new value', '<p>new value</p>');
+
+          const htmlWithImgTag = 'image <img src="http://someimgurl.com" height="100px" width="200px" />';
+
+          itBehavesLikeOutputsCorrectly(htmlWithImgTag, 'height="100px"', true);
+          itBehavesLikeOutputsCorrectly(htmlWithImgTag, 'width="200px"', true);
+          itBehavesLikeOutputsCorrectly(htmlWithImgTag, 'src="http://someimgurl.com"', true);
         });
       });
     });

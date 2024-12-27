@@ -2,7 +2,7 @@
   <div>
     <dt-recipe-editor
       ref="editor"
-      v-model="modelValue"
+      v-model="$attrs.value"
       class="d-mb32"
       :input-aria-label="$attrs.inputAriaLabel"
       :auto-focus="$attrs.autoFocus"
@@ -34,7 +34,7 @@
       @quick-replies-click="$attrs.onQuickRepliesClick"
     />
     <p><strong>Editor content is:</strong></p>
-    <span>{{ modelValue }}</span>
+    <span>{{ value }}</span>
   </div>
 </template>
 
@@ -46,7 +46,7 @@ export default {
   components: { DtRecipeEditor },
   data () {
     return {
-      modelValue: this.$attrs.modelValue,
+      value: this.$attrs.value,
     };
   },
 };
