@@ -25,4 +25,4 @@ export const ConfigurableImage = Image.extend({
       },
     };
   },
-}).configure({ inline: true });
+}).configure({ inline: true, allowBase64: true });
