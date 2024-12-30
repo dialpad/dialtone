@@ -142,7 +142,7 @@ export default {
     },
 
     toggleableClass () {
-      return this.toggleable ? 'd-c-pointer' : '';
+      return this.toggleable ? 'd-recipe-feed-item-pill--toggleable' : '';
     },
 
     borderClass () {

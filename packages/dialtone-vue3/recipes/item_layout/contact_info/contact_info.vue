@@ -27,7 +27,12 @@
             :image-src="avatar.src"
             image-alt=""
             :overlay-text="avatar.text"
-            :avatar-class="[{ 'd-mln24': index > 0, 'd-bc-brand': !!avatar.halo }]"
+            :avatar-class="[
+              {
+                'd-recipe-contact-info__avatar-stacked': index > 0,
+                'd-recipe-contact-info__avatar-halo': !!avatar.halo,
+              },
+            ]"
           >
             <template
               #icon="{ iconSize }"

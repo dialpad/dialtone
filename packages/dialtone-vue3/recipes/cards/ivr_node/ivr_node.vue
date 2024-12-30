@@ -1,6 +1,9 @@
 <template>
   <div
-    class="d-recipe-ivr-node"
+    :class="[
+      'd-recipe-ivr-node',
+      nodeClass,
+    ]"
     v-on="nodeListeners"
   >
     <div
@@ -21,22 +24,7 @@
       class="d-recipe-ivr-node__connector"
       :class="{ 'd-recipe-ivr-node__connector--selected': isSelected }"
     />
-    <dt-card
-      content-class="d-bt d-bc-black-300 d-px12 d-pt8 d-pb12"
-      :container-class="[
-        'd-w100p',
-        { 'd-ba d-bar8 d-baw4': isSelected },
-        headerColor,
-      ]"
-      :header-class="[
-        'd-mtn1',
-        'd-bt',
-        'd-btw4',
-        'd-p0',
-        headerColor,
-        { 'd-btr4': !isSelected },
-      ]"
-    >
+    <dt-card>
       <template #header>
         <!-- node label and icon section on left of the header -->
         <div class="d-recipe-ivr-node__header-left">
@@ -112,7 +100,7 @@ import {
   DtIconMoreVertical,
 } from '@dialpad/dialtone-icons/vue3';
 import {
-  IVR_NODE_COLOR_MAPPING,
+  IVR_NODE_CLASS_MAPPING,
   IVR_NODE_PROMPT_MENU,
   IVR_NODE_PROMPT_COLLECT,
   IVR_NODE_PROMPT_PLAY,
@@ -226,8 +214,8 @@ export default {
       return typeToIcon.get(this.nodeType);
     },
 
-    headerColor () {
-      const { normal, selected } = IVR_NODE_COLOR_MAPPING[this.nodeType];
+    nodeClass () {
+      const { normal, selected } = IVR_NODE_CLASS_MAPPING[this.nodeType];
       return this.isSelected ? selected : normal;
     },
 

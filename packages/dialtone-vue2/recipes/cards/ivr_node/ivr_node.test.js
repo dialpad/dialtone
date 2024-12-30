@@ -1,7 +1,7 @@
 import { createLocalVue, mount } from '@vue/test-utils';
 import DtRecipeIvrNode from './ivr_node.vue';
 import {
-  IVR_NODE_COLOR_MAPPING, IVR_NODE_HANGUP, IVR_NODE_LABELS,
+  IVR_NODE_CLASS_MAPPING, IVR_NODE_HANGUP, IVR_NODE_LABELS,
 } from '@/recipes/cards/ivr_node/ivr_node_constants';
 
 const basePropsData = {
@@ -119,12 +119,7 @@ describe('DtRecipeIvrNode Tests', () => {
         await _setWrappers();
       });
       it('should include selected class', () => {
-        const card = wrapper.find('[data-qa="dt-card"]');
-        const header = wrapper.find('.d-card__header');
-        expect(card.classes().includes(IVR_NODE_COLOR_MAPPING[IVR_NODE_HANGUP].selected)).toBe(true);
-        expect(
-          header.classes().includes(IVR_NODE_COLOR_MAPPING[IVR_NODE_HANGUP].selected),
-        ).toBe(true);
+        expect(wrapper.classes().includes(IVR_NODE_CLASS_MAPPING[IVR_NODE_HANGUP].selected)).toBe(true);
       });
     });
   });

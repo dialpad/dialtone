@@ -1,4 +1,3 @@
-<!-- eslint-disable vue/no-restricted-class -->
 <template>
   <div
     data-qa="dt-recipe-message-input"
@@ -136,7 +135,7 @@
           gap="300"
         >
           <!-- @slot Slot for sms count -->
-          <div class="d-d-flex d-ai-center">
+          <div class="d-recipe-message-input__sms-count">
             <slot name="smsCount" />
           </div>
 

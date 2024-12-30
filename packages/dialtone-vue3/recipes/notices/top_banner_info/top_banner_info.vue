@@ -45,14 +45,14 @@ export default {
       const bgColors = {
         // these are too specific, so for now I'm at least updating the resultant semantic value
         // TODO: breaking change: update to be more abstract
-        green300: 'd-bgc-success',
-        green100: 'd-bgc-success',
-        red200: 'd-bgc-critical',
-        red100: 'd-bgc-critical',
-        gold200: 'd-bgc-warning',
-        gold100: 'd-bgc-warning',
-        black100: 'd-bgc-info',
-        white: 'd-bgc-primary',
+        green100: 'd-recipe-top-banner-info--success',
+        green300: 'd-recipe-top-banner-info--success',
+        red100: 'd-recipe-top-banner-info--critical',
+        red200: 'd-recipe-top-banner-info--critical',
+        gold100: 'd-recipe-top-banner-info--warning',
+        gold200: 'd-recipe-top-banner-info--warning',
+        black100: 'd-recipe-top-banner-info--info',
+        white: 'd-recipe-top-banner-info--primary',
       };
       return [bgColors[this.colorCode]];
     },

@@ -49,9 +49,13 @@
   "devDependencies": {
     "@dialpad/dialtone-css": "workspace:*",
     "@dialpad/generator-dialtone": "workspace:*",
+    "@storybook/addon-a11y": "7.6.20",
+    "@storybook/addon-essentials": "7.6.20",
+    "@storybook/addon-links": "7.6.20",
     "@storybook/vue": "7.6.20",
     "@storybook/vue-vite": "7.6.20",
     "@vue/test-utils": "1.3",
+    "storybook-dark-mode": "^3.0.3",
     "vue": "^2.7.15"
   },
   "peerDependencies": {

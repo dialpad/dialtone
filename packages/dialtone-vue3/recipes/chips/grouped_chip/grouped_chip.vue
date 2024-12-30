@@ -1,12 +1,11 @@
 <template>
   <div
-    data-qa="grouped-chip"
+    data-qa="dt-recipe-grouped-chip"
     class="d-recipe-grouped-chip"
   >
     <dt-chip
       :hide-close="true"
       :interactive="false"
-      content-class="d-fs100"
       size="xs"
       :grouped-chip="true"
       class="d-recipe-grouped-chip__content d-recipe-grouped-chip__content-left"
@@ -38,7 +37,6 @@
     <dt-chip
       :hide-close="true"
       :interactive="false"
-      content-class="d-fs100"
       size="xs"
       :grouped-chip="true"
       class="d-recipe-grouped-chip__content d-recipe-grouped-chip__content-right"
