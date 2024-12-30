@@ -1032,7 +1032,7 @@ export default {
       this.$refs.richTextEditor?.editLink();
     },
 
-    async handleEditLinkInput (event) {
+    handleEditLinkInput (event) {
       this.hideLinkBubbleMenu = true;
       this.showLinkInput = true;
       this.linkInput = event.href;

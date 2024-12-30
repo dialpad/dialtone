@@ -376,6 +376,20 @@ export default {
     'json-input',
 
     /**
+     * Input event always in HTML format.
+     * @event input
+     * @type {HTML}
+     */
+    'html-input',
+
+    /**
+     * Input event always in text format.
+     * @event input
+     * @type {String}
+     */
+    'text-input',
+
+    /**
      * Event to sync the value with the parent
      * @event update:value
      * @type {String|JSON}
@@ -716,6 +730,7 @@ export default {
       }
     },
 
+    // eslint-disable-next-line complexity
     processValue (newValue, returnIfEqual = true) {
       let currentValue = this.getOutput();
       if (this.outputFormat === 'json') {
@@ -729,10 +744,11 @@ export default {
         return;
       }
 
-      const inputUnicodeRegex = new RegExp(`(${emojiPattern})`, 'g');
-
       // If the text contains emoji characters convert them to emoji component tags
-      newValue = newValue.replace(inputUnicodeRegex, '<emoji-component code="$1"></emoji-component>');
+      if (typeof newValue === 'string' && this.outputFormat === 'text') {
+        const inputUnicodeRegex = new RegExp(`(${emojiPattern})`, 'g');
+        newValue = newValue?.replace(inputUnicodeRegex, '<emoji-component code="$1"></emoji-component>');
+      }
 
       // Otherwise replace the content (resets the cursor position).
       this.editor.commands.setContent(newValue, false);
@@ -766,6 +782,10 @@ export default {
         // Always output HTML in a separate event
         const htmlValue = this.editor.getHTML();
         this.$emit('html-input', htmlValue);
+
+        // Always output HTML in a separate event
+        const textValue = this.editor.getText();
+        this.$emit('text-input', textValue);
       });
 
       // The editor is focused.

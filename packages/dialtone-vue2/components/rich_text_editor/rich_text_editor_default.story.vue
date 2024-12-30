@@ -28,6 +28,7 @@
     @edit-link="$attrs.onEditLink"
     @json-input="$attrs.onJsonInput"
     @html-input="$attrs.onHtmlInput"
+    @text-input="$attrs.onTextInput"
     @focus="$attrs.onFocus"
     @enter="$attrs.onEnter"
   />
