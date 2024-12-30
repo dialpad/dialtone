@@ -28,7 +28,7 @@ describe('DtRecipeGroupedChip Tests', () => {
 
   // Helpers
   const _setChildWrappers = () => {
-    rootElement = wrapper.find('[data-qa="grouped-chip"]');
+    rootElement = wrapper.find('[data-qa="dt-recipe-grouped-chip"]');
 
     leftChipIconElement = wrapper.find('[data-qa="left-grouped-chip-icon"]');
     rightChipIconElement = wrapper.find('[data-qa="right-grouped-chip-icon"]');

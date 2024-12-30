@@ -1,16 +1,16 @@
-<!-- eslint-disable vue/no-restricted-class -->
 <template>
   <div
+
+    class="d-recipe-editor"
     data-qa="dt-recipe-editor"
     role="presentation"
-    class="d-d-flex d-fd-column"
     @click="$refs.richTextEditor.focusEditor()"
   >
     <!-- Section for the top UI -->
     <dt-stack
+      class="d-recipe-editor__top-bar"
       direction="row"
       gap="450"
-      class="d-p8 d-recipe-editor__top-bar-background"
     >
       <dt-stack
         v-for="buttonGroup in buttonGroups"
@@ -26,12 +26,12 @@
         >
           <template #anchor>
             <dt-button
+              :active="$refs.richTextEditor?.editor?.isActive(button.selector)"
+              :aria-label="button.tooltipMessage"
               :data-qa="button.dataQA"
               importance="clear"
               kind="muted"
-              :active="$refs.richTextEditor?.editor?.isActive(button.selector)"
               size="xs"
-              :aria-label="button.tooltipMessage"
               @click="button.onClick()"
             >
               <template #icon>
@@ -53,14 +53,15 @@
       >
         <dt-popover
           :open.sync="showLinkInput"
-          placement="bottom-start"
+          :show-close-button="false"
           :visually-hidden-close="true"
           :visually-hidden-close-label="'Close link input popover'"
           data-qa="dt-recipe-editor-link-input-popover"
-          :show-close-button="false"
+          padding="none"
+          placement="bottom-start"
           @click="onInputFocus"
-          @click.native.stop="onInputFocus"
           @opened="updateInput"
+          @click.native.stop="onInputFocus"
         >
           <template #anchor>
             <dt-tooltip
@@ -70,20 +71,18 @@
             >
               <template #anchor>
                 <dt-button
+                  :active="$refs.richTextEditor?.editor?.isActive(linkButton.selector)"
+                  :aria-label="linkButton.tooltipMessage"
                   :data-qa="linkButton.dataQA"
                   importance="clear"
                   kind="muted"
-                  class="d-ol-none"
-                  :active="$refs.richTextEditor?.editor?.isActive(linkButton.selector)"
                   size="xs"
-                  :aria-label="linkButton.tooltipMessage"
                   @click="linkButton.onClick()"
                 >
                   <template #icon>
                     <component
                       :is="linkButton.icon"
                       size="200"
-                      class="d-fw-bold"
                     />
                   </template>
                 </dt-button>
@@ -92,57 +91,60 @@
           </template>
 
           <template #content>
-            <span
-              v-if="showAddLink.setLinkTitle.length > 0"
-            >
-              {{ showAddLink.setLinkTitle }}
-            </span>
-            <dt-input
-              v-model="linkInput"
-              :input-aria-label="showAddLink.setLinkInputAriaLabel"
-              data-qa="dt-recipe-editor-link-input"
-              :placeholder="setLinkPlaceholder"
-              input-wrapper-class="d-bgc-secondary d-mt6 d-bar5 d-ba d-baw1 d-bc-default d-py2 d-ol-none"
-              @click="onInputFocus"
-              @click.native.stop="onInputFocus"
-              @focus="onInputFocus"
-              @keydown.enter="setLink"
-            />
+            <div class="d-recipe-editor__popover-content">
+              <span
+                v-if="showAddLink.setLinkTitle.length > 0"
+              >
+                {{ showAddLink.setLinkTitle }}
+              </span>
+              <dt-input
+                v-model="linkInput"
+                :input-aria-label="showAddLink.setLinkInputAriaLabel"
+                :placeholder="setLinkPlaceholder"
+                data-qa="dt-recipe-editor-link-input"
+                input-wrapper-class="d-recipe-editor-link__input-wrapper"
+                @click="onInputFocus"
+                @focus="onInputFocus"
+                @click.native.stop="onInputFocus"
+                @keydown.enter="setLink"
+              />
+            </div>
           </template>
           <template #footerContent>
-            <div class="d-ml8 d-mr12">
+            <dt-stack
+              direction="row"
+              gap="300"
+              class="d-recipe-editor__popover-footer"
+            >
               <dt-button
-                class="d-mx2"
                 :aria-label="removeLinkButton.ariaLabel"
+                data-qa="dt-recipe-editor-remove-link-btn"
                 importance="clear"
                 kind="muted"
                 size="sm"
-                data-qa="dt-recipe-editor-remove-link-btn"
                 @click="removeLink"
               >
                 {{ removeLinkButton.label }}
               </dt-button>
               <dt-button
-                class="d-mx2"
                 :aria-label="cancelSetLinkButton.ariaLabel"
+                data-qa="dt-recipe-editor-set-link-cancel-btn"
                 importance="clear"
                 kind="muted"
                 size="sm"
-                data-qa="dt-recipe-editor-set-link-cancel-btn"
                 @click="closeLinkInput"
               >
                 {{ cancelSetLinkButton.label }}
               </dt-button>
               <dt-button
-                class="d-mx2"
-                size="sm"
                 :aria-label="confirmSetLinkButton.ariaLabel"
                 data-qa="dt-recipe-editor-set-link-confirm-btn"
+                size="sm"
                 @click="setLink"
               >
                 {{ confirmSetLinkButton.label }}
               </dt-button>
-            </div>
+            </dt-stack>
           </template>
         </dt-popover>
       </dt-stack>
@@ -150,25 +152,25 @@
 
     <!-- Some wrapper to restrict the height and show the scrollbar -->
     <div
-      class="d-of-auto d-mx16 d-mb4 d-c-text"
       :style="{ 'max-height': maxHeight }"
+      class="d-recipe-editor__content"
     >
       <dt-rich-text-editor
         ref="richTextEditor"
         v-model="internalInputValue"
-        data-qa="dt-rich-text-editor"
+        :allow-inline-images="true"
+        :allow-line-breaks="true"
+        :auto-focus="autoFocus"
         :editable="editable"
         :input-aria-label="inputAriaLabel"
-        :input-class="`d-ml16 d-ol-none d-my6 ${inputClass}`"
-        :output-format="htmlOutputFormat"
-        :auto-focus="autoFocus"
-        :placeholder="placeholder"
-        :allow-line-breaks="true"
-        :allow-inline-images="true"
+        :input-class="`d-recipe-editor__content-input ${inputClass}`"
         :link="true"
+        :output-format="htmlOutputFormat"
+        :placeholder="placeholder"
+        data-qa="dt-rich-text-editor"
         v-bind="$attrs"
-        @focus="onFocus"
         @blur="onBlur"
+        @focus="onFocus"
         @input="onInput($event)"
       />
     </div>
@@ -487,7 +489,7 @@ export default {
      * Quick replies button
      * pressed event
      * @event quick-replies-click
-    */
+     */
     'quick-replies-click',
   ],
 
@@ -497,7 +499,7 @@ export default {
       hasFocus: false,
 
       linkOptions: {
-        class: 'd-link d-c-text d-d-inline-block',
+        class: 'd-recipe-editor__link',
       },
 
       showLinkInput: false,
@@ -520,7 +522,7 @@ export default {
 
     showingAlignmentButtons () {
       return this.showAlignLeftButton || this.showAlignCenterButton ||
-          this.showAlignRightButton || this.showAlignJustifyButton;
+        this.showAlignRightButton || this.showAlignJustifyButton;
     },
 
     showingListButtons () {
@@ -543,44 +545,143 @@ export default {
 
     newButtons () {
       return [
-        { showBtn: this.showQuickRepliesButton, label: 'Quick reply', selector: 'quickReplies', icon: DtIconLightningBolt, dataQA: 'dt-recipe-editor-quick-replies-btn', tooltipMessage: 'Quick Reply', onClick: this.onQuickRepliesClick },
+        {
+          showBtn: this.showQuickRepliesButton,
+          label: 'Quick reply',
+          selector: 'quickReplies',
+          icon: DtIconLightningBolt,
+          dataQA: 'dt-recipe-editor-quick-replies-btn',
+          tooltipMessage: 'Quick Reply',
+          onClick: this.onQuickRepliesClick,
+        },
       ].filter(button => button.showBtn);
     },
 
     textFormatButtons () {
       return [
-        { showBtn: this.showBoldButton, selector: 'bold', icon: DtIconBold, dataQA: 'dt-recipe-editor-bold-btn', tooltipMessage: 'Bold', onClick: this.onBoldTextToggle },
-        { showBtn: this.showItalicsButton, selector: 'italic', icon: DtIconItalic, dataQA: 'dt-recipe-editor-italics-btn', tooltipMessage: 'Italics', onClick: this.onItalicTextToggle },
-        { showBtn: this.showUnderlineButton, selector: 'underline', icon: DtIconUnderline, dataQA: 'dt-recipe-editor-underline-btn', tooltipMessage: 'Underline', onClick: this.onUnderlineTextToggle },
-        { showBtn: this.showStrikeButton, selector: 'strike', icon: DtIconStrikethrough, dataQA: 'dt-recipe-editor-strike-btn', tooltipMessage: 'Strike', onClick: this.onStrikethroughTextToggle },
+        {
+          showBtn: this.showBoldButton,
+          selector: 'bold',
+          icon: DtIconBold,
+          dataQA: 'dt-recipe-editor-bold-btn',
+          tooltipMessage: 'Bold',
+          onClick: this.onBoldTextToggle,
+        },
+        {
+          showBtn: this.showItalicsButton,
+          selector: 'italic',
+          icon: DtIconItalic,
+          dataQA: 'dt-recipe-editor-italics-btn',
+          tooltipMessage: 'Italics',
+          onClick: this.onItalicTextToggle,
+        },
+        {
+          showBtn: this.showUnderlineButton,
+          selector: 'underline',
+          icon: DtIconUnderline,
+          dataQA: 'dt-recipe-editor-underline-btn',
+          tooltipMessage: 'Underline',
+          onClick: this.onUnderlineTextToggle,
+        },
+        {
+          showBtn: this.showStrikeButton,
+          selector: 'strike',
+          icon: DtIconStrikethrough,
+          dataQA: 'dt-recipe-editor-strike-btn',
+          tooltipMessage: 'Strike',
+          onClick: this.onStrikethroughTextToggle,
+        },
       ].filter(button => button.showBtn);
     },
 
     alignmentButtons () {
       return [
-        { showBtn: this.showAlignLeftButton, selector: { textAlign: 'left' }, icon: DtIconAlignLeft, dataQA: 'dt-recipe-editor-align-left-btn', tooltipMessage: 'Align Left', onClick: () => this.onTextAlign('left') },
-        { showBtn: this.showAlignCenterButton, selector: { textAlign: 'center' }, icon: DtIconAlignCenter, dataQA: 'dt-recipe-editor-align-center-btn', tooltipMessage: 'Align Center', onClick: () => this.onTextAlign('center') },
-        { showBtn: this.showAlignRightButton, selector: { textAlign: 'right' }, icon: DtIconAlignRight, dataQA: 'dt-recipe-editor-align-right-btn', tooltipMessage: 'Align Right', onClick: () => this.onTextAlign('right') },
-        { showBtn: this.showAlignJustifyButton, selector: { textAlign: 'justify' }, icon: DtIconAlignJustify, dataQA: 'dt-recipe-editor-align-justify-btn', tooltipMessage: 'Align Justify', onClick: () => this.onTextAlign('justify') },
+        {
+          showBtn: this.showAlignLeftButton,
+          selector: { textAlign: 'left' },
+          icon: DtIconAlignLeft,
+          dataQA: 'dt-recipe-editor-align-left-btn',
+          tooltipMessage: 'Align Left',
+          onClick: () => this.onTextAlign('left'),
+        },
+        {
+          showBtn: this.showAlignCenterButton,
+          selector: { textAlign: 'center' },
+          icon: DtIconAlignCenter,
+          dataQA: 'dt-recipe-editor-align-center-btn',
+          tooltipMessage: 'Align Center',
+          onClick: () => this.onTextAlign('center'),
+        },
+        {
+          showBtn: this.showAlignRightButton,
+          selector: { textAlign: 'right' },
+          icon: DtIconAlignRight,
+          dataQA: 'dt-recipe-editor-align-right-btn',
+          tooltipMessage: 'Align Right',
+          onClick: () => this.onTextAlign('right'),
+        },
+        {
+          showBtn: this.showAlignJustifyButton,
+          selector: { textAlign: 'justify' },
+          icon: DtIconAlignJustify,
+          dataQA: 'dt-recipe-editor-align-justify-btn',
+          tooltipMessage: 'Align Justify',
+          onClick: () => this.onTextAlign('justify'),
+        },
       ].filter(button => button.showBtn);
     },
 
     listButtons () {
       return [
-        { showBtn: this.showListItemsButton, selector: 'bulletList', icon: DtIconListBullet, dataQA: 'dt-recipe-editor-list-items-btn', tooltipMessage: 'Bullet List', onClick: this.onBulletListToggle },
-        { showBtn: this.showOrderedListButton, selector: 'orderedList', icon: DtIconListOrdered, dataQA: 'dt-recipe-editor-ordered-list-items-btn', tooltipMessage: 'Ordered List', onClick: this.onOrderedListToggle },
+        {
+          showBtn: this.showListItemsButton,
+          selector: 'bulletList',
+          icon: DtIconListBullet,
+          dataQA: 'dt-recipe-editor-list-items-btn',
+          tooltipMessage: 'Bullet List',
+          onClick: this.onBulletListToggle,
+        },
+        {
+          showBtn: this.showOrderedListButton,
+          selector: 'orderedList',
+          icon: DtIconListOrdered,
+          dataQA: 'dt-recipe-editor-ordered-list-items-btn',
+          tooltipMessage: 'Ordered List',
+          onClick: this.onOrderedListToggle,
+        },
       ].filter(button => button.showBtn);
     },
 
     individualButtons () {
       return [
-        { showBtn: this.showQuoteButton, selector: 'blockquote', icon: DtIconQuote, dataQA: 'dt-recipe-editor-blockquote-btn', tooltipMessage: 'Quote', onClick: this.onBlockquoteToggle },
-        { showBtn: this.showCodeBlockButton, selector: 'codeBlock', icon: DtIconCodeBlock, dataQA: 'dt-recipe-editor-code-block-btn', tooltipMessage: 'Code', onClick: this.onCodeBlockToggle },
+        {
+          showBtn: this.showQuoteButton,
+          selector: 'blockquote',
+          icon: DtIconQuote,
+          dataQA: 'dt-recipe-editor-blockquote-btn',
+          tooltipMessage: 'Quote',
+          onClick: this.onBlockquoteToggle,
+        },
+        {
+          showBtn: this.showCodeBlockButton,
+          selector: 'codeBlock',
+          icon: DtIconCodeBlock,
+          dataQA: 'dt-recipe-editor-code-block-btn',
+          tooltipMessage: 'Code',
+          onClick: this.onCodeBlockToggle,
+        },
       ].filter(button => button.showBtn);
     },
 
     linkButton () {
-      return { showBtn: this.showAddLink.showAddLinkButton, selector: 'link', icon: DtIconLink2, dataQA: 'dt-recipe-editor-add-link-btn', tooltipMessage: 'Link', onClick: this.openLinkInput };
+      return {
+        showBtn: this.showAddLink.showAddLinkButton,
+        selector: 'link',
+        icon: DtIconLink2,
+        dataQA: 'dt-recipe-editor-add-link-btn',
+        tooltipMessage: 'Link',
+        onClick: this.openLinkInput,
+      };
     },
   },
 
@@ -631,7 +732,7 @@ export default {
           .focus()
           .insertContentAt(
             selection.anchor,
-            `<a class="${this.linkOptions.class}" href=${this.linkInput}>${this.linkInput}</a>`,
+          `<a class="${this.linkOptions.class}" href=${this.linkInput}>${this.linkInput}</a>`,
           )
           .run();
       } else {

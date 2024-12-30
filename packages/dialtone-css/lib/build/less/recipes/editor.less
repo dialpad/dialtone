@@ -1,4 +1,10 @@
-.d-recipe-editor__top-bar-background {
+.d-recipe-editor {
+  display: flex;
+  flex-direction: column;
+}
+
+.d-recipe-editor__top-bar {
+  padding: var(--dt-space-400);
   background-color: var(--dt-color-surface-secondary);
 }
 
@@ -7,4 +13,40 @@
   height: calc(var(--dt-size-550) + var(--dt-size-300));
   margin-left: var(--dt-space-400);
   background: var(--dt-color-border-subtle);
+}
+
+.d-recipe-editor-link__input-wrapper {
+  margin-top: var(--dt-space-350);
+  padding-top: var(--dt-space-200);
+  padding-bottom: var(--dt-space-200);
+  background-color: var(--dt-color-surface-secondary);
+  border: var(--dt-size-border-100) solid var(--dt-color-border-default);
+  outline: none;
+  box-shadow: none !important; // This doesn't work if !important is removed
+}
+
+.d-recipe-editor__popover-content {
+  padding: var(--dt-space-500);
+}
+
+.d-recipe-editor__popover-footer {
+  padding-right: var(--dt-space-450);
+  padding-left: var(--dt-space-550);
+}
+
+.d-recipe-editor__content {
+  margin: var(--dt-space-400) var(--dt-space-500) var(--dt-space-500);
+  overflow: auto;
+  cursor: text;
+}
+
+.d-recipe-editor__content-input {
+  margin-top: var(--dt-space-350);
+  margin-bottom: var(--dt-space-350);
+  margin-left: var(--dt-space-500);
+}
+
+.d-recipe-editor__link {
+  display: inline-block;
+  cursor: text;
 }

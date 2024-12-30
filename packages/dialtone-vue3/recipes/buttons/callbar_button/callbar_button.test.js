@@ -90,7 +90,6 @@ describe('DtRecipeCallbarButton Tests', () => {
       it('Should display a disabled button when "disabled"', async () => {
         await wrapper.setProps({ disabled: true });
         expect(button.classes().includes('d-btn--disabled')).toBe(true);
-        expect(button.classes().includes('d-bgc-transparent')).toBe(true);
       });
 
       it(

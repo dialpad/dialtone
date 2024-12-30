@@ -1,5 +1,5 @@
 const componentsList = require('../../common/components_list.js');
-componentsList.push('btn', 'select', 'validation-message', 'label', 'description', 'split-btn');
+componentsList.push('btn', 'select', 'validation-message', 'label', 'description', 'split-btn', 'mention-suggestion', 'suggestion-list');
 const componentsNames = componentsList.map(name => name.replace('_', '-').replace('.vue', ''));
 
 module.exports = {

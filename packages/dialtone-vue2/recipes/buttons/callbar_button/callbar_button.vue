@@ -189,19 +189,17 @@ export default {
       return [
         this.buttonClass,
         'd-recipe-callbar-button',
-        'd-px0',
         {
           'd-recipe-callbar-button--circle': this.circle,
           'd-recipe-callbar-button--active': this.active,
           'd-recipe-callbar-button--danger': this.danger,
-          'd-btn--disabled d-bgc-transparent': this.disabled,
-          'd-fc-primary': !this.disabled,
+          'd-btn--disabled': this.disabled,
         }];
     },
 
     callbarButtonTextClass () {
       return [
-        'd-fs-100 lg:d-d-none md:d-d-none sm:d-d-none',
+        'd-recipe-callbar-button__text',
         this.textClass,
       ];
     },

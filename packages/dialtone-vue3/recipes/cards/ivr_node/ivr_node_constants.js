@@ -32,29 +32,29 @@ export const IVR_NODE_LABELS = {
   [IVR_NODE_ASSIGN]: 'Assign',
 };
 
-const IVR_NODE_COLORS = {
+const IVR_NODE_CLASSES = {
   PROMPT: {
-    normal: 'd-bc-blue-200',
-    selected: 'd-bc-blue-300',
+    normal: 'd-recipe-ivr-node-prompt',
+    selected: 'd-recipe-ivr-node-prompt--selected',
   },
   LOGIC: {
-    normal: 'd-bc-purple-200',
-    selected: 'd-bc-purple-400',
+    normal: 'd-recipe-ivr-node-logic',
+    selected: 'd-recipe-ivr-node-logic--selected',
   },
   TERMINAL: {
-    normal: 'd-bc-red-100',
-    selected: 'd-bc-red-200',
+    normal: 'd-recipe-ivr-node-terminal',
+    selected: 'd-recipe-ivr-node-terminal--selected',
   },
 };
 
-export const IVR_NODE_COLOR_MAPPING = {
-  [IVR_NODE_PROMPT_MENU]: IVR_NODE_COLORS.PROMPT,
-  [IVR_NODE_PROMPT_COLLECT]: IVR_NODE_COLORS.PROMPT,
-  [IVR_NODE_PROMPT_PLAY]: IVR_NODE_COLORS.PROMPT,
-  [IVR_NODE_EXPERT]: IVR_NODE_COLORS.LOGIC,
-  [IVR_NODE_BRANCH]: IVR_NODE_COLORS.LOGIC,
-  [IVR_NODE_GO_TO]: IVR_NODE_COLORS.LOGIC,
-  [IVR_NODE_ASSIGN]: IVR_NODE_COLORS.LOGIC,
-  [IVR_NODE_TRANSFER]: IVR_NODE_COLORS.TERMINAL,
-  [IVR_NODE_HANGUP]: IVR_NODE_COLORS.TERMINAL,
+export const IVR_NODE_CLASS_MAPPING = {
+  [IVR_NODE_PROMPT_MENU]: IVR_NODE_CLASSES.PROMPT,
+  [IVR_NODE_PROMPT_COLLECT]: IVR_NODE_CLASSES.PROMPT,
+  [IVR_NODE_PROMPT_PLAY]: IVR_NODE_CLASSES.PROMPT,
+  [IVR_NODE_EXPERT]: IVR_NODE_CLASSES.LOGIC,
+  [IVR_NODE_BRANCH]: IVR_NODE_CLASSES.LOGIC,
+  [IVR_NODE_GO_TO]: IVR_NODE_CLASSES.LOGIC,
+  [IVR_NODE_ASSIGN]: IVR_NODE_CLASSES.LOGIC,
+  [IVR_NODE_TRANSFER]: IVR_NODE_CLASSES.TERMINAL,
+  [IVR_NODE_HANGUP]: IVR_NODE_CLASSES.TERMINAL,
 };
