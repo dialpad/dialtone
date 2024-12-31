@@ -1,3 +1,15 @@
+# [3.164.0](https://github.com/dialpad/dialtone/compare/dialtone-vue3/v3.163.0...dialtone-vue3/v3.164.0) (2024-12-31)
+
+
+### Code Refactoring
+
+* DLT-2123 remove utility classes from recipes ([#603](https://github.com/dialpad/dialtone/issues/603)) ([11717a4](https://github.com/dialpad/dialtone/commit/11717a4ea1e5fed809af6a9fb2dfd5fde7baec51))
+
+
+### Features
+
+* **Rich Text Editor:** DLT-2244 add ability inherit image properties in editor ([#604](https://github.com/dialpad/dialtone/issues/604)) ([eb65dea](https://github.com/dialpad/dialtone/commit/eb65deab173aebb02f07ac46916584f3fd3c16d9))
+
 # [3.163.0](https://github.com/dialpad/dialtone/compare/dialtone-vue3/v3.162.1...dialtone-vue3/v3.163.0) (2024-12-18)
 
 
