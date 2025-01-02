@@ -125,6 +125,8 @@ describe('DtRecipeMessageInput tests', () => {
           },
           modelValue: randoText,
         });
+        // for some reason this event doesn't fire on it's own initially. trigger it manually.
+        wrapper.findComponent({ ref: 'richTextEditor' }).vm.$emit('text-input', randoText);
         _setChildWrappers();
       });
 
