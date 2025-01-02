@@ -733,12 +733,13 @@ export default {
     // eslint-disable-next-line complexity
     processValue (newValue, returnIfEqual = true) {
       let currentValue = this.getOutput();
+      let newValueCompare = newValue;
       if (this.outputFormat === 'json') {
-        newValue = JSON.stringify(newValue);
+        newValueCompare = JSON.stringify(newValue);
         currentValue = JSON.stringify(currentValue);
       }
 
-      if (returnIfEqual && newValue === currentValue) {
+      if (returnIfEqual && newValueCompare === currentValue) {
         // The new value came from this component and was passed back down
         // through the parent, so don't do anything here.
         return;
@@ -758,34 +759,41 @@ export default {
       this.editor.destroy();
     },
 
+    triggerInputChangeEvents () {
+      const value = this.getOutput();
+      this.$emit('input', value);
+      this.$emit('update:value', value);
+
+      // Always output JSON in a separate event
+      const jsonValue = this.editor.getJSON();
+      this.$emit('json-input', jsonValue);
+
+      // Always output HTML in a separate event
+      const htmlValue = this.editor.getHTML();
+      this.$emit('html-input', htmlValue);
+
+      // Always output HTML in a separate event
+      const textValue = this.editor.getText();
+      this.$emit('text-input', textValue);
+    },
+
     /**
      * The Editor exposes event hooks that we have to map our emits into. See
      * https://tiptap.dev/api/events for all events.
      */
     addEditorListeners () {
+      this.editor.on('create', () => {
+        this.triggerInputChangeEvents();
+      });
       // The content has changed.
       this.editor.on('update', () => {
-        const value = this.getOutput();
         // When preventTyping is true and user wants to type, we revert to last value
         // If Backspace (keyCode = 8) is pressed, we allow updating the text
         if (this.preventTyping && this.editor.view?.input?.lastKeyCode !== 8) {
           this.editor.commands.setContent(this.value, false);
           return;
         }
-        this.$emit('input', value);
-        this.$emit('update:value', value);
-
-        // Always output JSON in a separate event
-        const jsonValue = this.editor.getJSON();
-        this.$emit('json-input', jsonValue);
-
-        // Always output HTML in a separate event
-        const htmlValue = this.editor.getHTML();
-        this.$emit('html-input', htmlValue);
-
-        // Always output HTML in a separate event
-        const textValue = this.editor.getText();
-        this.$emit('text-input', textValue);
+        this.triggerInputChangeEvents();
       });
 
       // The editor is focused.

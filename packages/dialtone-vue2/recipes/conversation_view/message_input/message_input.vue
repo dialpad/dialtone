@@ -283,6 +283,7 @@
         :hide-link-bubble-menu="hideLinkBubbleMenu"
         v-bind="$attrs"
         @input="onInput"
+        @text-input="onTextInput"
         @enter="onSend"
         @edit-link="handleEditLinkInput"
         v-on="$listeners"
@@ -597,7 +598,7 @@ export default {
      */
     outputFormat: {
       type: String,
-      default: 'text',
+      default: 'json',
       validator (outputFormat) {
         return RICH_TEXT_EDITOR_OUTPUT_FORMATS.includes(outputFormat);
       },
@@ -956,6 +957,7 @@ export default {
         class: 'd-link d-c-text d-d-inline-block',
       },
 
+      text: '',
       linkText: '',
       showLinkInput: false,
       linkInput: '',
@@ -973,7 +975,7 @@ export default {
     },
 
     inputLength () {
-      return this.internalInputValue.length;
+      return this.text.length;
     },
 
     displayCharacterLimitWarning () {
@@ -1020,6 +1022,8 @@ export default {
   created () {
     if (this.value && this.outputFormat === 'text') {
       this.internalInputValue = this.value.replace(/\n/g, '<br>');
+    } else {
+      this.internalInputValue = this.value;
     }
   },
 
@@ -1144,6 +1148,11 @@ export default {
 
     onInput (event) {
       this.$emit('update:value', event);
+    },
+
+    onTextInput (event) {
+      this.text = event;
+      this.$emit('text-input', event);
     },
   },
 };
