@@ -85,6 +85,7 @@ import mentionSuggestion from './extensions/mentions/suggestion';
 import channelSuggestion from './extensions/channels/suggestion';
 import slashCommandSuggestion from './extensions/slash_command/suggestion';
 import { warnIfUnmounted } from '@/common/utils';
+import deepEqual from 'deep-equal';
 
 export default {
   name: 'DtRichTextEditor',
@@ -554,7 +555,11 @@ export default {
       }
 
       if (this.allowCodeblock) {
-        extensions.push(CodeBlock.configure({
+        extensions.push(CodeBlock.extend({
+          renderText ({ node }) {
+            return `\`\`\`\n${node.textContent}\n\`\`\``;
+          },
+        }).configure({
           HTMLAttributes: {
             class: 'd-rich-text-editor__code-block',
           },
@@ -732,14 +737,9 @@ export default {
 
     // eslint-disable-next-line complexity
     processValue (newValue, returnIfEqual = true) {
-      let currentValue = this.getOutput();
-      let newValueCompare = newValue;
-      if (this.outputFormat === 'json') {
-        newValueCompare = JSON.stringify(newValue);
-        currentValue = JSON.stringify(currentValue);
-      }
+      const currentValue = this.getOutput();
 
-      if (returnIfEqual && newValueCompare === currentValue) {
+      if (returnIfEqual && deepEqual(newValue, currentValue)) {
         // The new value came from this component and was passed back down
         // through the parent, so don't do anything here.
         return;
