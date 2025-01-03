@@ -42,6 +42,7 @@ export default defineConfig({
         /^overlayscrollbars/,
         /^prosemirror/,
         'regex-combined-emojis',
+        'deep-equal',
         'tippy.js',
         'vue',
       ],
