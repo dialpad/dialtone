@@ -1,16 +1,17 @@
 .d-rich-text-editor {
   &__code-block {
     padding: var(--dt-space-400);
+    font: var(--dt-typography-code-md);
     background: var(--dt-color-surface-secondary);
   }
 
   code:not(.d-rich-text-editor__code-block > code) {
     padding: var(--dt-space-200);
     color: var(--dt-color-foreground-warning);
-    background-color: var(--dt-color-surface-secondary-opaque);
-    border-radius: var(--dt-size-radius-200);
-    border: var(--dt-size-border-100) solid var(--dt-color-border-subtle);
     font: var(--dt-typography-code-md);
+    background-color: var(--dt-color-surface-secondary-opaque);
+    border: var(--dt-size-border-100) solid var(--dt-color-border-subtle);
+    border-radius: var(--dt-size-radius-200);
   }
 
   > .ProseMirror {
