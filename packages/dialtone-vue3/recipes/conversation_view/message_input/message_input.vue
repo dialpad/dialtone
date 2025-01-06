@@ -24,7 +24,7 @@
         importance="clear"
         kind="muted"
         size="xs"
-        :active="$refs.richTextEditor?.editor?.isActive('bold')"
+        :active="$refs.richTextEditor?.editor?.isActive('bold') && isFocused"
         @click="$refs.richTextEditor?.editor?.chain().focus().toggleBold().run()"
       >
         <template #icon>
@@ -39,7 +39,7 @@
         importance="clear"
         kind="muted"
         size="xs"
-        :active="$refs.richTextEditor?.editor?.isActive('italic')"
+        :active="$refs.richTextEditor?.editor?.isActive('italic') && isFocused"
         @click="$refs.richTextEditor?.editor?.chain().focus().toggleItalic().run()"
       >
         <template #icon>
@@ -54,7 +54,7 @@
         importance="clear"
         kind="muted"
         size="xs"
-        :active="$refs.richTextEditor?.editor?.isActive('strike')"
+        :active="$refs.richTextEditor?.editor?.isActive('strike') && isFocused"
         @click="$refs.richTextEditor?.editor?.chain().focus().toggleStrike().run()"
       >
         <template #icon>
@@ -82,7 +82,7 @@
             :data-qa="linkButton.dataQA"
             importance="clear"
             kind="muted"
-            :active="$refs.richTextEditor?.editor?.isActive('link')"
+            :active="$refs.richTextEditor?.editor?.isActive('link') && isFocused"
             size="xs"
             :aria-label="linkButton.tooltipMessage"
             @click="linkButton.onClick()"
@@ -178,7 +178,7 @@
         data-qa="bullet-list"
         importance="clear"
         kind="muted"
-        :active="$refs.richTextEditor?.editor?.isActive('bulletList')"
+        :active="$refs.richTextEditor?.editor?.isActive('bulletList') && isFocused"
         size="xs"
         @click="$refs.richTextEditor?.editor?.chain().focus().toggleBulletList().run()"
       >
@@ -193,7 +193,7 @@
         data-qa="ordered-list"
         importance="clear"
         kind="muted"
-        :active="$refs.richTextEditor?.editor?.isActive('orderedList')"
+        :active="$refs.richTextEditor?.editor?.isActive('orderedList') && isFocused"
         size="xs"
         @click="$refs.richTextEditor?.editor?.chain().focus().toggleOrderedList().run()"
       >
@@ -210,7 +210,7 @@
         importance="clear"
         kind="muted"
         size="xs"
-        :active="$refs.richTextEditor?.editor?.isActive('blockquote')"
+        :active="$refs.richTextEditor?.editor?.isActive('blockquote') && isFocused"
         @click="$refs.richTextEditor?.editor?.chain().focus().toggleBlockquote().run()"
       >
         <template #icon>
@@ -226,7 +226,7 @@
         importance="clear"
         kind="muted"
         size="xs"
-        :active="$refs.richTextEditor?.editor?.isActive('code')"
+        :active="$refs.richTextEditor?.editor?.isActive('code') && isFocused"
         @click="$refs.richTextEditor?.editor?.chain().focus().toggleCode().run()"
       >
         <template #icon>
@@ -241,7 +241,7 @@
         importance="clear"
         kind="muted"
         size="xs"
-        :active="$refs.richTextEditor?.editor?.isActive('codeBlock')"
+        :active="$refs.richTextEditor?.editor?.isActive('codeBlock') && isFocused"
         @click="$refs.richTextEditor?.editor?.chain().focus().toggleCodeBlock().run()"
       >
         <template #icon>
@@ -286,6 +286,8 @@
         @text-input="onTextInput"
         @enter="onSend"
         @edit-link="handleEditLinkInput"
+        @focus="isFocused = true"
+        @blur="isFocused = false"
       />
     </div>
     <!-- @slot Slot for attachment carousel -->
@@ -951,6 +953,7 @@ export default {
       imagePickerFocus: false,
       emojiPickerFocus: false,
       emojiPickerOpened: false,
+      isFocused: false,
       linkOptions: {
         class: 'd-link d-c-text d-d-inline-block',
       },

@@ -11,28 +11,33 @@
       :tippy-options="tippyOptions"
       style="visibility: visible;"
     >
-      <div class="d-rich-text-editor-link-bubble-menu">
-        <dt-button
-          link
-          link-kind="danger"
-          @click="removeLink"
+      <div class="d-popover__dialog">
+        <dt-stack
+          direction="row"
+          gap="200"
         >
-          Remove
-        </dt-button>
-        <dt-button
-          link
-          link-kind="muted"
-          @click="openLink"
-        >
-          Open Link
-        </dt-button>
-        <dt-button
-          link
-          link-kind="muted"
-          @click="editLink"
-        >
-          Edit
-        </dt-button>
+          <dt-button
+            kind="muted"
+            importance="clear"
+            @click="editLink"
+          >
+            Edit
+          </dt-button>
+          <dt-button
+            kind="muted"
+            importance="clear"
+            @click="openLink"
+          >
+            Open link
+          </dt-button>
+          <dt-button
+            kind="danger"
+            importance="clear"
+            @click="removeLink"
+          >
+            Remove
+          </dt-button>
+        </dt-stack>
       </div>
     </bubble-menu>
     <editor-content
@@ -50,6 +55,7 @@
 import { Editor, EditorContent, BubbleMenu } from '@tiptap/vue-3';
 import { Extension } from '@tiptap/core';
 import { DtButton } from '../button';
+import { DtStack } from '../stack';
 import Blockquote from '@tiptap/extension-blockquote';
 import CodeBlock from '@tiptap/extension-code-block';
 import Code from '@tiptap/extension-code';
@@ -94,6 +100,7 @@ export default {
     EditorContent,
     BubbleMenu,
     DtButton,
+    DtStack,
   },
 
   props: {
@@ -694,6 +701,7 @@ export default {
       window.open(link, '_blank');
     },
 
+    // eslint-disable-next-line complexity
     setLink (linkInput, linkOptions, linkProtocols = RICH_TEXT_EDITOR_SUPPORTED_LINK_PROTOCOLS, defaultPrefix) {
       if (!linkInput) {
         // If link text is set to empty string,
@@ -712,10 +720,12 @@ export default {
 
       const selection = this.editor?.view?.state?.selection;
 
-      if (selection.anchor === selection.head) {
-        // If no text has been selected, manually insert the link text.
-        // Do not rely on link options set through DtRichTextEditor
-        // component, because they clash with these and cause issues.
+      const linkNode = this.editor.state.doc.nodeAt(selection.anchor);
+      const isActiveLinkNode = linkNode && linkNode.marks?.at(0)?.type?.name === 'link';
+
+      if (selection.anchor === selection.head && !isActiveLinkNode) {
+        // If no text has been selected, and the cursor is not currently within an active link,
+        // manually insert the link text.
         this.editor
           .chain()
           .focus()
