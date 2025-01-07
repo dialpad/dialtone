@@ -706,7 +706,8 @@ export default {
     },
 
     // eslint-disable-next-line complexity
-    setLink (linkInput, linkOptions, linkProtocols = RICH_TEXT_EDITOR_SUPPORTED_LINK_PROTOCOLS, defaultPrefix) {
+    setLink (linkInput, linkText, linkOptions, linkProtocols = RICH_TEXT_EDITOR_SUPPORTED_LINK_PROTOCOLS,
+      defaultPrefix) {
       if (!linkInput) {
         // If link text is set to empty string,
         // remove any existing links.
@@ -722,31 +723,21 @@ export default {
         linkInput = `${defaultPrefix}${linkInput}`;
       }
 
+      this.editor
+        .chain()
+        .focus()
+        .extendMarkRange('link')
+        .run();
+
       const selection = this.editor?.view?.state?.selection;
 
-      const linkNode = this.editor.state.doc.nodeAt(selection.anchor);
-      const isActiveLinkNode = linkNode && linkNode.marks?.at(0)?.type?.name === 'link';
-
-      if (selection.anchor === selection.head && !isActiveLinkNode) {
-        // If no text has been selected, and the cursor is not currently within an active link,
-        // manually insert the link text.
-        this.editor
-          .chain()
-          .focus()
-          .insertContentAt(
-            selection.anchor,
-            `<a class="${linkOptions.class}" href=${linkInput}>${linkInput}</a>`,
-          )
-          .run();
-      } else {
-        // Set or edit the link
-        this.editor
-          .chain()
-          .focus()
-          .extendMarkRange('link')
-          .setLink({ href: linkInput, class: linkOptions.class })
-          .run();
-      }
+      this.editor
+        .chain()
+        .focus()
+        .insertContent(linkText)
+        .setTextSelection({ from: selection.from, to: selection.from + linkText.length })
+        .setLink({ href: linkInput, class: linkOptions.class })
+        .run();
     },
 
     // eslint-disable-next-line complexity
