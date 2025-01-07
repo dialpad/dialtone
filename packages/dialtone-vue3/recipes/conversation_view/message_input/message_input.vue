@@ -178,7 +178,10 @@
         data-qa="bullet-list"
         importance="clear"
         kind="muted"
-        :active="$refs.richTextEditor?.editor?.isActive('bulletList') && isFocused"
+        :active="lastActiveNodes(
+          $refs.richTextEditor?.editor?.state,
+          [{ type: 'bulletList' }, { type: 'orderedList' }],
+        ).includes('bulletList') && isFocused"
         size="xs"
         @click="$refs.richTextEditor?.editor?.chain().focus().toggleBulletList().run()"
       >
@@ -193,7 +196,10 @@
         data-qa="ordered-list"
         importance="clear"
         kind="muted"
-        :active="$refs.richTextEditor?.editor?.isActive('orderedList') && isFocused"
+        :active="lastActiveNodes(
+          $refs.richTextEditor?.editor?.state,
+          [{ type: 'bulletList' }, { type: 'orderedList' }],
+        ).includes('orderedList') && isFocused"
         size="xs"
         @click="$refs.richTextEditor?.editor?.chain().focus().toggleOrderedList().run()"
       >
@@ -473,6 +479,7 @@ import {
   RICH_TEXT_EDITOR_OUTPUT_FORMATS,
   RICH_TEXT_EDITOR_AUTOFOCUS_TYPES,
 } from '@/components/rich_text_editor';
+import lastActiveNodes from './last_active_nodes';
 import MeetingPill from './extensions/meeting_pill/meeting_pill';
 import { DtButton } from '@/components/button';
 import { DtEmojiPicker } from '@/components/emoji_picker';
@@ -948,6 +955,9 @@ export default {
 
   data () {
     return {
+      // If an ordered list is nested within an unordered list, we only want to show the currently selected list as
+      // active. This function performs the logic to determine the farthest active node from the root.
+      lastActiveNodes,
       additionalExtensions: [MeetingPill],
       internalInputValue: this.modelValue, // internal input content
       imagePickerFocus: false,
