@@ -467,7 +467,11 @@ export default {
       }
       if (this.allowBulletList) {
         extensions.push(BulletList);
-        extensions.push(ListItem);
+        extensions.push(ListItem.extend({
+          renderText ({ node }) {
+            return node.textContent;
+          },
+        }));
         extensions.push(OrderedList);
       }
       if (this.allowItalic) {
@@ -783,7 +787,7 @@ export default {
       this.$emit('html-input', htmlValue);
 
       // Always output HTML in a separate event
-      const textValue = this.editor.getText();
+      const textValue = this.editor.getText({ blockSeparator: '\n' });
       this.$emit('text-input', textValue);
     },
 
