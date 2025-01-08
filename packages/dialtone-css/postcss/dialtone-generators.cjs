@@ -6,6 +6,9 @@ const TokensDpLight = require('@dialpad/dialtone-tokens/dist/tokens-dp-light.jso
 
 const { Rule } = require('postcss');
 
+const fs = require('fs');
+const path = require('path');
+
 // TODO: Move these constants to the _data directory
 const {
   BORDER_RADIUS_SIZES,
@@ -775,9 +778,27 @@ function _generateHoverFocusVariations (rule) {
     textDecorationRegex,
     opacityRegex,
   ].some(regex => regex.test(rule.selector));
-  if (!found) return;
+
+  if (
+    !found ||
+    rule.selectors.some(selector => REGEX_OPTIONS.HOVER_FOCUS_PREFIXES.test(selector))
+  ) return;
+
   const selectors = rule.selectors.map(selector => appendHoverFocusSelectors(selector));
   rule.selector = selectors.filter(selector => !!selector).join(', ');
+}
+
+//  Utility classes documentation //
+
+function _generateDocumentation (rules) {
+  const documentation = [];
+  rules.forEach(rule => {
+    const className = rule.selector.split(',')[0].slice(1);
+    const value = rule.nodes.map(node => `${node.prop}: ${node.value};`).join('\n');
+
+    documentation.push({ className, value });
+  });
+  fs.writeFileSync(path.resolve(__dirname, '../lib/dist/dialtone-docs.json'), JSON.stringify(documentation), 'utf-8');
 }
 
 /**
@@ -793,7 +814,14 @@ module.exports = () => {
 
       _generateUtilities(clonedSource, declaration);
 
-      root.insertAfter(rootSelector, Object.values(generatedRules).flat());
+      const rules = Object.values(generatedRules).flat();
+
+      root.insertAfter(rootSelector, rules);
+
+      // Generate documentation on default theme only
+      if (root.source.input.file.endsWith('dialtone-default-theme.css')) {
+        _generateDocumentation(rules);
+      }
     },
     Root (root) {
       root.walkRules(rule => {

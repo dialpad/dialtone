@@ -134,11 +134,7 @@ module.exports = {
       'Red',
       'Tan',
     ].join('|'),
-    HOVER_FOCUS_PREFIXES: [
-      'h',
-      'f',
-      'fv',
-    ].join('|'),
+    HOVER_FOCUS_PREFIXES: /\.(h|f|v)\\:/g,
     BACKGROUND_GRADIENTS: [
       'none',
       'unset',
@@ -198,6 +194,9 @@ module.exports = {
       'brand',
       'ai',
       'accent',
+      'transparent',
+      'current',
+      'unset',
     ].join('|'),
     BORDER_COLOR_VARIATIONS: [
       'inverted',
@@ -222,16 +221,7 @@ module.exports = {
       'underline',
       'unset',
     ].join('|'),
-    OPACITY_VARIATIONS: [
-      '0',
-      '10',
-      '25',
-      '50',
-      '75',
-      '90',
-      '95',
-      '99',
-    ].join('|'),
+    OPACITY_VARIATIONS: '\\d{1,3}',
   },
   WIDTH_HEIGHTS: {
     0: '0',
