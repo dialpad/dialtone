@@ -70,7 +70,7 @@ describe('DtRecipeTopBannerInfo Tests', function () {
         expect(middleContent.text()).toBe(slots.default);
       });
       it('Should display with default background color', () => {
-        expect(rootElement.classes()).toContain('d-bgc-success');
+        expect(rootElement.classes()).toContain('d-recipe-top-banner-info--success');
       });
     });
 
@@ -80,7 +80,7 @@ describe('DtRecipeTopBannerInfo Tests', function () {
       });
 
       it('Should display with passed background color', () => {
-        expect(rootElement.classes()).toContain('d-bgc-info');
+        expect(rootElement.classes()).toContain('d-recipe-top-banner-info--info');
       });
     });
   });

@@ -38,7 +38,6 @@
       padding="none"
       class="d-recipe-callbar-button-with-popover__popover-wrapper"
       :dialog-class="['d-recipe-callbar-button-with-popover__popover', contentClass]"
-      header-class="d-d-flex d-ai-center d-fw-normal d-px12"
       v-bind="$attrs"
       :open-popover="showPopover"
       @opened="onModalIsOpened"

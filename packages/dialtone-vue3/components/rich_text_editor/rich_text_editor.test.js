@@ -19,6 +19,7 @@ const baseProps = {
   modelValue: 'initial value',
   inputAriaLabel: 'aria-label text',
   inputClass: 'qa-editor',
+  allowInlineImages: true,
 };
 
 // Helpers
@@ -86,10 +87,15 @@ describe('DtRichTextEditor tests', () => {
     describe('User Input Tests', function () {
       describe('When user inputs a value', function () {
         // Shared Examples
-        const itBehavesLikeOutputsCorrectly = (value, output) => {
+        const itBehavesLikeOutputsCorrectly = (value, output, onlyCheckOutputContained = false) => {
           it('should emit the output value', async () => {
             await _setValue(value);
-            expect(wrapper.emitted().input[0][0]).toEqual(output);
+            const emittedOutput = wrapper.emitted().input[0][0];
+            if (onlyCheckOutputContained) {
+              expect(emittedOutput).toContain(output);
+            } else {
+              expect(emittedOutput).toEqual(output);
+            }
             expect(inputStub).toHaveBeenCalled();
           });
         };
@@ -134,6 +140,12 @@ describe('DtRichTextEditor tests', () => {
           });
 
           itBehavesLikeOutputsCorrectly('new value', '<p>new value</p>');
+
+          const htmlWithImgTag = 'image <img src="http://someimgurl.com" height="100px" width="200px" />';
+
+          itBehavesLikeOutputsCorrectly(htmlWithImgTag, 'height="100px"', true);
+          itBehavesLikeOutputsCorrectly(htmlWithImgTag, 'width="200px"', true);
+          itBehavesLikeOutputsCorrectly(htmlWithImgTag, 'src="http://someimgurl.com"', true);
         });
       });
     });

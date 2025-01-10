@@ -1,6 +1,6 @@
 import { mount, createLocalVue } from '@vue/test-utils';
 import DtRichTextEditor from './rich_text_editor.vue';
-import { EditorContent } from '@tiptap/vue-2';
+import { Editor, EditorContent, BubbleMenu } from '@tiptap/vue-2';
 
 const MOCK_INPUT_STUB = vi.fn();
 
@@ -25,7 +25,7 @@ describe('DtRichTextEditor tests', () => {
   const updateWrapper = async () => {
     editorEl?.remove();
     wrapper = mount(DtRichTextEditor, {
-      components: { EditorContent },
+      components: { Editor, EditorContent, BubbleMenu },
       propsData: { ...baseProps, ...mockProps },
       listeners: { ...baseListeners, ...mockListeners },
       localVue: testContext.localVue,

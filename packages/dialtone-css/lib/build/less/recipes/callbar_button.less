@@ -11,13 +11,25 @@
 //  $   BASE STYLE
 //  ----------------------------------------------------------------------------
 .d-recipe-callbar-button {
+  padding-right: var(--dt-space-0);
+  padding-left: var(--dt-space-0);
+  color: var(--dt-color-foreground-primary);
+
   &:not(.d-recipe-callbar-button--circle) {
     line-height: var(--dt-font-line-height-300);
   }
 
-  &.d-btn[disabled] {
+  &.d-btn--disabled {
     background-color: unset;
-    opacity: .5;
+    opacity: var(--dt-opacity-700);
+  }
+}
+
+.d-recipe-callbar-button__text {
+  font-size: var(--dt-font-size-100);
+
+  @media (max-width: 980px) {
+    display: none;
   }
 }
 

@@ -1,3 +1,10 @@
+## [8.46.5](https://github.com/dialpad/dialtone/compare/dialtone-css/v8.46.4...dialtone-css/v8.46.5) (2024-12-31)
+
+
+### Code Refactoring
+
+* DLT-2123 remove utility classes from recipes ([#603](https://github.com/dialpad/dialtone/issues/603)) ([11717a4](https://github.com/dialpad/dialtone/commit/11717a4ea1e5fed809af6a9fb2dfd5fde7baec51))
+
 ## [8.46.4](https://github.com/dialpad/dialtone/compare/dialtone-css/v8.46.3...dialtone-css/v8.46.4) (2024-12-12)
 
 

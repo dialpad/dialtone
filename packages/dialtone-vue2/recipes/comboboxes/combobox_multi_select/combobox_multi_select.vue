@@ -51,7 +51,10 @@
           ref="input"
           v-model="value"
           class="d-recipe-combobox-multi-select__input"
-          :input-class="[inputClass, { 'd-fc-transparent': hideInputText }]"
+          :input-class="[
+            inputClass, {
+              'd-recipe-combobox-multi-select__input--hidden': hideInputText,
+            }]"
           :input-wrapper-class="inputWrapperClass"
           :aria-label="label"
           :label="labelVisible ? label : ''"
