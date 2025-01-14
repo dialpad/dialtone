@@ -17,6 +17,7 @@ const settings = {
   sync: true, // Turn on/off sync tasks
   build: true, // Turn on/off build tasks
   watch: true, // Turn on/off watch tasks
+  documentation: true, // Turn on/off documentation generation
 };
 
 //  ================================================================================
@@ -54,6 +55,8 @@ const del = require('del');
 const rename = require('gulp-rename');
 const cache = require('gulp-cached');
 const through2 = require('through2');
+const path = require('path');
+const fs = require('fs');
 
 //  @@ STYLES
 const postCSS = settings.styles ? require('gulp-postcss') : null;
@@ -64,11 +67,11 @@ const postCSSResponsify = settings.styles
   ? require('@dialpad/postcss-responsive-variations')({ breakpoints, classes })
   : null;
 const postCSSDialtoneGenerator = settings.styles ? require('./postcss/dialtone-generators.cjs') : null;
+const postCSSDialtoneDocs = settings.documentation ? require('./postcss/dialtone-docs.cjs') : null;
 const sourcemaps = settings.styles ? require('gulp-sourcemaps') : null;
 const autoprefixer = settings.styles ? require('autoprefixer') : null;
 
 //  @@ SVGS
-const path = settings.svgs ? require('path') : null;
 const svgmin = settings.svgs ? require('gulp-svgmin') : null;
 const replace = settings.svgs ? require('gulp-replace') : null;
 const svgStrokeToFill = settings.svgs ? require('./svg-stroke-to-fill.cjs') : null;
@@ -94,13 +97,9 @@ const categories = [
 //     Where everything is in this project
 //  ================================================================================
 const paths = {
-  clean: {
-    libCss: './lib/dist/*.css',
-    libSvg: './lib/dist/svg/**/*',
-    libVueIcons: './lib/dist/vue/**/*',
-    libFonts: './dist/fonts/**/*',
-    libJS: './lib/dist/js/**/*.{mjs,js,cjs}',
-  },
+  clean: [
+    './lib/dist',
+  ],
   scripts: {
     input: './lib/build/js/**/*',
     output: './lib/dist/js/',
@@ -179,11 +178,9 @@ const cleanUp = () => {
   // Make sure the feature is active before running
   if (!settings.clean) return;
 
-  const items = Object.values(paths.clean);
-
   // Clean dist folders
   return Promise.all([
-    del.sync(items),
+    del.sync(paths.clean),
   ]);
 };
 
@@ -218,8 +215,7 @@ const libStyles = function (done) {
   return src(paths.styles.inputLib)
     .pipe(less({ paths: ['./node_modules'] })) // compile less to css
     .pipe(replace('../fonts/', './fonts/'))
-    .pipe(postCSS([postCSSDialtoneGenerator, postCSSResponsify]))
-    .pipe(postCSS([autoprefixer()]))
+    .pipe(postCSS([postCSSDialtoneGenerator, postCSSResponsify, autoprefixer()]))
     .pipe(dest(paths.styles.outputLib))
     .pipe(postCSS([postCSSNano]))
     .pipe(rename({ suffix: '.min' }))
@@ -234,8 +230,7 @@ const libStylesDev = function (done) {
   return src(paths.styles.inputLib)
     .pipe(sourcemaps.init())
     .pipe(less({ paths: ['./node_modules'] })) // compile less to css
-    .pipe(postCSS([postCSSDialtoneGenerator, postCSSResponsify]))
-    .pipe(postCSS([autoprefixer()]))
+    .pipe(postCSS([postCSSDialtoneGenerator, postCSSResponsify, autoprefixer()]))
     .pipe(sourcemaps.mapSources(function (sourcePath) {
       if (sourcePath === '<no source>') return sourcePath;
       return '../../build/less/' + sourcePath;
@@ -398,6 +393,64 @@ const buildNewSVGIcons = function (done) {
 };
 
 //  ================================================================================
+//  @@  BUILD DOCS
+//      Process files and generate documentation
+//  ================================================================================
+const libDocs = function (done) {
+  //  Make sure this feature is activated before running
+  if (!settings.documentation) return done();
+
+  //  Generate documentation
+  return src('./lib/dist/dialtone-default-theme.css')
+    .pipe(postCSS([postCSSDialtoneDocs]));
+};
+
+/**
+ * Process base-light and dp-light themes from Dialtone Tokens doc.json file.
+ * Extracts CSS Variables primitive value and description.
+ * @returns {{Token: { value: String, description: String }}}
+ */
+const tokenDocs = function (done) {
+  if (!settings.documentation) return done();
+
+  const docs = {};
+
+  const rawTokensDocumentation = require(path.resolve(__dirname, './node_modules/@dialpad/dialtone-tokens/dist/doc.json'));
+  const CSSVarRegex = /var\(([^)]+)\)/g;
+
+  Object.values({ ...rawTokensDocumentation['base-light'], ...rawTokensDocumentation['dp-light'] })
+    .forEach(DocEntry => {
+      const CSSVarEntry = DocEntry['css/variables'];
+      const token = CSSVarEntry.name.replace(CSSVarRegex, '$1');
+      const description = CSSVarEntry.description;
+      let value = CSSVarEntry.value;
+
+      if (!CSSVarRegex.test(value)) {
+        docs[token] = { value, description };
+        return;
+      }
+
+      value = value.replace(CSSVarRegex, (match) => {
+        const tokenName = match.replace(CSSVarRegex, '$1');
+        const tokenValue = docs[tokenName];
+
+        if (!tokenValue) {
+          console.warn('Missing token value: ', tokenName);
+          return match;
+        }
+
+        return tokenValue.value;
+      });
+
+      docs[token] = { value, description };
+    });
+
+  fs.writeFileSync(path.resolve(__dirname, './lib/dist/tokens-docs.json'), JSON.stringify(docs), 'utf-8');
+
+  return done();
+};
+
+//  ================================================================================
 //  @   EXPORT TASKS
 //  ================================================================================
 //  --  BUILD OUT THE SITE BUT DON'T START THE SERVER
@@ -418,6 +471,8 @@ exports.default = series(
   exports.svg,
   tokens,
   libStyles,
+  tokenDocs,
+  libDocs,
   libScripts,
 );
 

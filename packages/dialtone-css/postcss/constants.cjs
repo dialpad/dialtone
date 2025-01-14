@@ -6,7 +6,9 @@
  * This data shouldn't duplicate values under `/docs/_data/` folder
  */
 
+// @TODO: Move HSLA_EXCLUDED_COLORS to common/utils to share and sync it with dialtone-tokens/postcss/common.js
 module.exports = {
+  HSLA_EXCLUDED_COLORS: ['--dt-color-gradient-magenta-purple', '--dt-badge-color-background-ai', '--dt-color-border-ai'],
   OPACITIES: [
     100,
     99,
