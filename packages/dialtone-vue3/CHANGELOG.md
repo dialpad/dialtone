@@ -1,3 +1,10 @@
+## [3.164.1](https://github.com/dialpad/dialtone/compare/dialtone-vue3/v3.164.0...dialtone-vue3/v3.164.1) (2025-01-14)
+
+
+### Bug Fixes
+
+* NO-JIRA set warnIfUnmounted to only run on test env ([#607](https://github.com/dialpad/dialtone/issues/607)) ([ce14a2d](https://github.com/dialpad/dialtone/commit/ce14a2d7238609d7bd77b659a96477fdd349a535))
+
 # [3.164.0](https://github.com/dialpad/dialtone/compare/dialtone-vue3/v3.163.0...dialtone-vue3/v3.164.0) (2024-12-31)
 
 
