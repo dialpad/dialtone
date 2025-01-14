@@ -26,8 +26,8 @@
         @keydown.up.prevent="onArrowKeyPress"
         @keydown.down.prevent="onArrowKeyPress"
         @keydown.escape.capture="closePopover"
-        @mouseenter="openHovercard"
-        @mouseleave="closeHovercard"
+        @mouseenter="onMouseEnter"
+        @mouseleave="onMouseLeave"
       >
         <!-- @slot Anchor element that activates the popover. Usually a button. -->
         <slot
@@ -58,8 +58,8 @@
         :tabindex="contentTabindex"
         appear
         v-on="popoverListeners"
-        @mouseenter="openHovercard"
-        @mouseleave="closeHovercard"
+        @mouseenter="onMouseEnter"
+        @mouseleave="onMouseLeave"
       >
         <popover-header-footer
           v-if="$slots.headerContent || showCloseButton"
@@ -138,7 +138,6 @@ import { createTippyPopover, getPopperOptions } from './tippy_utils';
 import PopoverHeaderFooter from './popover_header_footer.vue';
 import SrOnlyCloseButtonMixin from '@/common/mixins/sr_only_close_button';
 import SrOnlyCloseButton from '@/common/sr_only_close_button.vue';
-import { TOOLTIP_DELAY_MS } from '@/components/tooltip/index.js';
 
 /**
  * A Popover displays a content overlay when its anchor element is activated.
@@ -504,33 +503,6 @@ export default {
             (appendTo instanceof HTMLElement);
       },
     },
-
-    /**
-     * Set this prop to true and popover component will support hovercard behaviour
-     * It will open on mouseenter and close on mouseleave with timer delay of 300ms
-     */
-    hovercard: {
-      type: Boolean,
-      default: false,
-    },
-
-    /**
-     * The enter delay in milliseconds before the hovercard is shown.
-     * @type number
-     */
-    enterDelay: {
-      type: Number,
-      default: TOOLTIP_DELAY_MS,
-    },
-
-    /**
-     * The leave delay in milliseconds before the hovercard is hidden.
-     * @type number
-     */
-    leaveDelay: {
-      type: Number,
-      default: TOOLTIP_DELAY_MS,
-    },
   },
 
   emits: [
@@ -560,8 +532,6 @@ export default {
       isOpen: false,
       anchorEl: null,
       popoverContentEl: null,
-      inTimer: null,
-      outTimer: null,
     };
   },
 
@@ -735,7 +705,6 @@ export default {
     },
 
     defaultToggleOpen (e) {
-      if (this.hovercard) { return; }
       if (this.openOnContext) { return; }
 
       // Only use default toggle behaviour if the user has not set the open prop.
@@ -1012,41 +981,13 @@ export default {
       });
     },
 
-    //  ============================================================================
-    //  $ HOVERCARD
-    //  ----------------------------------------------------------------------------
-
-    setInTimer () {
-      this.inTimer = setTimeout(() => {
-        this.isOpen = true;
-      }, this.enterDelay);
+    onMouseEnter () {
+      this.$emit('mouseenter-popover');
     },
 
-    setOutTimer () {
-      this.outTimer = setTimeout(() => {
-        this.isOpen = false;
-      }, this.leaveDelay);
+    onMouseLeave () {
+      this.$emit('mouseleave-popover');
     },
-
-    openHovercard () {
-      if (!this.hovercard) return;
-      if (this.open === null || this.open === undefined) {
-        clearTimeout(this.outTimer);
-        this.setInTimer();
-      }
-    },
-
-    closeHovercard () {
-      if (!this.hovercard) return;
-      if (this.open === null || this.open === undefined) {
-        clearTimeout(this.inTimer);
-        this.setOutTimer();
-      }
-    },
-
-    //  ============================================================================
-    //  $ HOVERCARD
-    //  ----------------------------------------------------------------------------
   },
 };
 </script>
