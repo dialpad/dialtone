@@ -1,3 +1,10 @@
+## [3.164.2](https://github.com/dialpad/dialtone/compare/dialtone-vue3/v3.164.1...dialtone-vue3/v3.164.2) (2025-01-15)
+
+
+### Bug Fixes
+
+* NO-JIRA fix error process is not defined ([#608](https://github.com/dialpad/dialtone/issues/608)) ([06f7c1f](https://github.com/dialpad/dialtone/commit/06f7c1f89eb42fc9e6405f30457635b890f0bc6e))
+
 ## [3.164.1](https://github.com/dialpad/dialtone/compare/dialtone-vue3/v3.164.0...dialtone-vue3/v3.164.1) (2025-01-14)
 
 
