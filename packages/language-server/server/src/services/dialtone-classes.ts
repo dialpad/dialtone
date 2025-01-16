@@ -81,14 +81,17 @@ export function create(): LanguageServicePlugin {
 
                     if (!hoveredClass) return;
 
-                    console.info(`Utility class hover context (current-word: ${hoveredClass}, start: ${currentIndex}, end: ${currentIndex + hoveredClass.length})`);
                     const cssVariable = utilityClassDocumentation.find(item => item.label === hoveredClass);
+
+                    console.info(`Utility class hover context (current-word: ${hoveredClass}, start: ${currentIndex}, end: ${currentIndex + hoveredClass.length}`);
+                    console.info(cssVariable);
+
                     if (!cssVariable) return;
 
                     return {
                         contents: {
                             kind: 'plaintext',
-                            value: cssVariable.labelDetails?.description
+                            value: cssVariable.labelDetails?.description || cssVariable.detail
                         } as MarkupContent,
                         range: {
                             start: {
