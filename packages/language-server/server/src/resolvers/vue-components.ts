@@ -39,7 +39,7 @@ export const components = componentDocumentation.map((component: DialtoneCompone
     } satisfies CompletionItem;
 }) satisfies CompletionItem[];
 
-export function resolveComponentProps(tagName: string, currentWord: string): NullableProviderResult<CompletionList> {
+export function resolveComponentProps(tagName: string, existingProps: Set<String>): NullableProviderResult<CompletionList> {
     const component = componentDocumentation.find(component =>
         stringToKebabCase(component.displayName) === tagName
     );
@@ -48,7 +48,10 @@ export function resolveComponentProps(tagName: string, currentWord: string): Nul
         return;
 
     const props = component.props
-        .filter(prop => stringToKebabCase(prop.name).startsWith(currentWord))
+        .filter(prop => {
+            const propKebabCase = stringToKebabCase(prop.name);
+            return (!existingProps.has(prop.name) || !existingProps.has(propKebabCase))
+        })
         .map(prop => ({
             label: stringToKebabCase(prop.name),
             kind: CompletionItemKind.Field,
