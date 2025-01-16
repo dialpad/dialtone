@@ -5,7 +5,7 @@
   <div>
     <!-- why the hell is this visibility: hidden by default??? -->
     <bubble-menu
-      v-if="editor && link && !hideLinkBubbleMenu"
+      v-if="editor && link && !hideLinkBubbleMenu && bubbleMenuReady"
       :editor="editor"
       :should-show="bubbleMenuShouldShow"
       :tippy-options="tippyOptions"
@@ -437,6 +437,9 @@ export default {
   data () {
     return {
       editor: null,
+      // This is used to prevent the bubble menu from showing before the editor is ready,
+      // may be a bug in the bubble menu
+      bubbleMenuReady: false,
       tippyOptions: {
         appendTo: () => this.$refs.editor.$el.getRootNode()?.querySelector('body'),
         placement: 'top-start',
@@ -671,6 +674,7 @@ export default {
     },
 
     bubbleMenuShouldShow ({ editor, view, state, oldState, from, to }) {
+      this.bubbleMenuReady = true;
       return editor.isActive('link');
     },
 
