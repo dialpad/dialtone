@@ -20,17 +20,14 @@
     @opened="(e) => ($emit('opened', e))"
     @mouseenter-popover="onMouseEnter"
     @mouseleave-popover="onMouseLeave"
+    @mouseenter-popover-anchor="onMouseEnter"
+    @mouseleave-popover-anchor="onMouseLeave"
   >
     <template #anchor="{ attrs }">
-      <div
-        @mouseenter-popover="onMouseEnter"
-        @mouseleave-popover="onMouseLeave"
-      >
-        <slot
-          name="anchor"
-          v-bind="attrs"
-        />
-      </div>
+      <slot
+        name="anchor"
+        v-bind="attrs"
+      />
     </template>
     <template #content>
       <slot name="content" />
