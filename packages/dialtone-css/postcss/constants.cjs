@@ -6,7 +6,9 @@
  * This data shouldn't duplicate values under `/docs/_data/` folder
  */
 
+// @TODO: Move HSLA_EXCLUDED_COLORS to common/utils to share and sync it with dialtone-tokens/postcss/common.js
 module.exports = {
+  HSLA_EXCLUDED_COLORS: ['--dt-color-gradient-magenta-purple', '--dt-badge-color-background-ai', '--dt-color-border-ai'],
   OPACITIES: [
     100,
     99,
@@ -134,11 +136,7 @@ module.exports = {
       'Red',
       'Tan',
     ].join('|'),
-    HOVER_FOCUS_PREFIXES: [
-      'h',
-      'f',
-      'fv',
-    ].join('|'),
+    HOVER_FOCUS_PREFIXES: /\.(h|f|v)\\:/g,
     BACKGROUND_GRADIENTS: [
       'none',
       'unset',
@@ -198,6 +196,9 @@ module.exports = {
       'brand',
       'ai',
       'accent',
+      'transparent',
+      'current',
+      'unset',
     ].join('|'),
     BORDER_COLOR_VARIATIONS: [
       'inverted',
@@ -222,16 +223,7 @@ module.exports = {
       'underline',
       'unset',
     ].join('|'),
-    OPACITY_VARIATIONS: [
-      '0',
-      '10',
-      '25',
-      '50',
-      '75',
-      '90',
-      '95',
-      '99',
-    ].join('|'),
+    OPACITY_VARIATIONS: '\\d{1,3}',
   },
   WIDTH_HEIGHTS: {
     0: '0',

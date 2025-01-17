@@ -39,12 +39,19 @@ export function wordUnderCursor(content: string, position: Position) {
     };
 }
 
+export function getEmbeddedLanguage(document: TextDocument, context: LanguageServiceContext): string | undefined {
+    const decoded = context.decodeEmbeddedDocumentUri(URI.parse(document.uri));
+    if (!decoded) return;
+
+    return decoded[1];
+}
+
 export function getContent(document: TextDocument, context: LanguageServiceContext): string | undefined {
     const decoded = context.decodeEmbeddedDocumentUri(URI.parse(document.uri));
     if (!decoded) return;
 
     const virtualCode = context.language.scripts.get(decoded[0])?.generated?.embeddedCodes.get(decoded[1]);
-    if (!(virtualCode instanceof DialtoneVirtualCode)) return;
+    if (!virtualCode) return;
 
     return virtualCode.snapshot.getText(0, virtualCode.snapshot.getLength());
 }

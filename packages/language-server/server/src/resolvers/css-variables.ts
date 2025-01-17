@@ -1,6 +1,8 @@
 import type { CompletionItem, CompletionList, MarkupContent, NullableProviderResult } from "@volar/language-server/node";
 import { CompletionItemKind } from "@volar/language-server/node";
 
+const tokensDocumentation: DialtoneTokensDoc = require('../../node_modules/@dialpad/dialtone-tokens/dist/doc.json');
+
 export type DialtoneTokensDoc = {
     [theme: string]: {
         [variable: string]: {
@@ -68,8 +70,6 @@ function processDocumentation(docs: DialtoneTokensDoc) {
 
     return variablesDocumentation;
 }
-
-const tokensDocumentation: DialtoneTokensDoc = require('../../node_modules/@dialpad/dialtone-tokens/dist/doc.json');
 
 // @TODO: Process the tokens on build, as it is a static file that will not change on runtime.
 export const cssVariablesDocumentation: CompletionItem[] = processDocumentation(tokensDocumentation);

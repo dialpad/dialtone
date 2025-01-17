@@ -6,6 +6,8 @@ Enhances the Dialtone development experience by providing Visual Studio Code use
 
 ### Autocomplete
 
+> **TIP**: If no completion is provided automatically (depends on your VSCode config), press `Ctrl + Space` or `Cmd + I` to trigger the completions.
+
 #### Intelligent completion suggestion for [Dialtone components](https://dialtone.dialpad.com/components/)
 
 - type: `<dt-|` to get a list of components.
@@ -17,16 +19,19 @@ Enhances the Dialtone development experience by providing Visual Studio Code use
 - type: `<dt-button size="|"` to get a list of prop values.
 ![Dialtone component property values completion example](media/completion/values.png)
 
-#### Intelligent completion suggestion for [Design Tokens](https://dialtone.dialpad.com/tokens/)
+#### Intelligent completion suggestion for [Design tokens](https://dialtone.dialpad.com/tokens/)
 
 - type: `var(--dt-|)` to get a list of CSS variables.
 ![Dialtone tokens completion example](media/completion/tokens.png)
 
-> **TIP**: If no completion is provided automatically (depends on your VSCode config), press `Ctrl + Space` to trigger the completions.
+#### Intelligent completion suggestion for [CSS utility classes](https://dialtone.dialpad.com/utilities/)
+
+- type: `class="|"` to get a list of CSS variables.
+![CSS utility classes completion example](media/completion/class.gif)
 
 ### Hover Preview
 
-Hover over a dialtone component, prop or token to see documentation.
+Hover over a dialtone component, prop, utility class or token to see documentation.
 
 #### Component
 
@@ -35,6 +40,10 @@ Hover over a dialtone component, prop or token to see documentation.
 #### Prop
 
 ![Dialtone property hover example](media/hover/properties.gif)
+
+#### Utility class
+
+![Dialtone utility class hover example](media/hover/class.gif)
 
 #### Token
 
