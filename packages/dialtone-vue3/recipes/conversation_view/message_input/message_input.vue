@@ -15,6 +15,7 @@
     <!-- Some wrapper to restrict the height and show the scrollbar -->
     <!-- Section for the top UI -->
     <dt-stack
+      v-if="richText"
       direction="row"
       gap="200"
       class="d-p8 d-bgc-secondary"
@@ -266,20 +267,20 @@
       <dt-rich-text-editor
         ref="richTextEditor"
         v-model="internalInputValue"
-        :allow-blockquote="allowBlockquote"
-        :allow-bold="allowBold"
-        :allow-bullet-list="allowBulletList"
-        :allow-code="allowCode"
-        :allow-codeblock="allowCodeblock"
-        :allow-italic="allowItalic"
-        :allow-strike="allowStrike"
-        :allow-underline="allowUnderline"
+        :allow-blockquote="richText"
+        :allow-bold="richText"
+        :allow-bullet-list="richText"
+        :allow-code="richText"
+        :allow-codeblock="richText"
+        :allow-italic="richText"
+        :allow-strike="richText"
+        :allow-underline="richText"
         :editable="editable"
         :input-aria-label="inputAriaLabel"
         :input-class="inputClass"
         :output-format="outputFormat"
         :auto-focus="autoFocus"
-        :link="link"
+        :link="richText"
         :placeholder="placeholder"
         :prevent-typing="preventTyping"
         :mention-suggestion="mentionSuggestion"
@@ -529,6 +530,19 @@ export default {
 
   props: {
     /**
+     * Displays all the buttons for rich text formatting above the message input, and enables it within the editor.
+     * Rich text formatting for the purposes of this component is defined as:
+     *
+     * bold, italic, strikethrough, lists, blockquotes, inline code tags, and code blocks.
+     *
+     * If you are sending a message to a phone rather than a Dialpad to Dialpad message, you should have this as false.
+     */
+    richText: {
+      type: Boolean,
+      default: true,
+    },
+
+    /**
      * Value of the input. The object format should match TipTap's JSON
      * document structure: https://tiptap.dev/guide/output#option-1-json
      */
@@ -761,70 +775,6 @@ export default {
     slashCommandSuggestion: {
       type: Object,
       default: null,
-    },
-
-    /**
-     * Whether the input allows for block quote.
-     */
-    allowBlockquote: {
-      type: Boolean,
-      default: true,
-    },
-
-    /**
-     * Whether the input allows for bold to be introduced in the text.
-     */
-    allowBold: {
-      type: Boolean,
-      default: true,
-    },
-
-    /**
-     * Whether the input allows for bullet list to be introduced in the text.
-     */
-    allowBulletList: {
-      type: Boolean,
-      default: true,
-    },
-
-    /**
-     * Whether the input allows for italic to be introduced in the text.
-     */
-    allowItalic: {
-      type: Boolean,
-      default: true,
-    },
-
-    /**
-     * Whether the input allows for strike to be introduced in the text.
-     */
-    allowStrike: {
-      type: Boolean,
-      default: true,
-    },
-
-    /**
-     * Whether the input allows for underline to be introduced in the text.
-     */
-    allowUnderline: {
-      type: Boolean,
-      default: false,
-    },
-
-    /**
-     * Whether the input allows inline code (wrapped in backticks).
-     */
-    allowCode: {
-      type: Boolean,
-      default: true,
-    },
-
-    /**
-     * Whether the input allows codeblock to be introduced in the text.
-     */
-    allowCodeblock: {
-      type: Boolean,
-      default: true,
     },
 
     /**

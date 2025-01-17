@@ -279,14 +279,7 @@ export const InitializeWithLineBreaks = {
 export const WithoutExtensions = {
   render: DefaultTemplate,
   args: {
-    allowBlockquote: false,
-    allowBold: false,
-    allowBulletList: false,
-    allowItalic: false,
-    allowStrike: false,
-    allowUnderline: false,
-    allowCode: false,
-    allowCodeblock: false,
+    richText: false,
   },
 };
 
