@@ -21,18 +21,15 @@
     @opened="(e) => ($emit('opened', e))"
     @mouseenter-popover="onMouseEnter"
     @mouseleave-popover="onMouseLeave"
+    @mouseenter-popover-anchor="onMouseEnter"
+    @mouseleave-popover-anchor="onMouseLeave"
   >
     <template #anchor="{ attrs }">
-      <div
-        @mouseenter-popover="onMouseEnter"
-        @mouseleave-popover="onMouseLeave"
-      >
-        <!-- @slot Anchor element that activates the hovercard. Usually a button. -->
-        <slot
-          name="anchor"
-          v-bind="attrs"
-        />
-      </div>
+      <!-- @slot Anchor element that activates the hovercard. Usually a button. -->
+      <slot
+        name="anchor"
+        v-bind="attrs"
+      />
     </template>
     <template #content>
       <!-- @slot Slot for the content that is displayed in the hovercard. -->

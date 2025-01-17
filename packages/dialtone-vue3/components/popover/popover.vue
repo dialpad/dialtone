@@ -63,8 +63,8 @@
         :css="$attrs.css"
         :tabindex="contentTabindex"
         v-on="popoverListeners"
-        @mouseenter="onMouseEnter"
-        @mouseleave="onMouseLeave"
+        @mouseenter="onMouseEnterAnchor"
+        @mouseleave="onMouseLeaveAnchor"
       >
         <popover-header-footer
           v-if="hasSlotContent($slots.headerContent) || showCloseButton"
@@ -538,6 +538,34 @@ export default {
      * @type {Boolean | Array}
      */
     'opened',
+
+    /**
+     * Emitted when the mouse enters the popover
+     *
+     * @event mouseenter-popover
+     */
+    'mouseenter-popover',
+
+    /**
+     * Emitted when the mouse leaves the popover
+     *
+     * @event mouseleave-popover
+     */
+    'mouseleave-popover',
+
+    /**
+     * Emitted when the mouse enters the popover anchor
+     *
+     * @event mouseenter-popover-anchor
+     */
+    'mouseenter-popover-anchor',
+
+    /**
+     * Emitted when the mouse leaves the popover anchor
+     *
+     * @event mouseleave-popover-anchor
+     */
+    'mouseleave-popover-anchor',
   ],
 
   data () {
@@ -1023,6 +1051,14 @@ export default {
 
     onMouseLeave () {
       this.$emit('mouseleave-popover');
+    },
+
+    onMouseEnterAnchor () {
+      this.$emit('mouseenter-popover-anchor');
+    },
+
+    onMouseLeaveAnchor () {
+      this.$emit('mouseleave-popover-anchor');
     },
   },
 };
