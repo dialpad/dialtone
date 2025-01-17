@@ -67,7 +67,6 @@ const postCSSResponsify = settings.styles
   ? require('@dialpad/postcss-responsive-variations')({ breakpoints, classes })
   : null;
 const postCSSDialtoneGenerator = settings.styles ? require('./postcss/dialtone-generators.cjs') : null;
-const postCSSDialtoneDocs = settings.documentation ? require('./postcss/dialtone-docs.cjs') : null;
 const sourcemaps = settings.styles ? require('gulp-sourcemaps') : null;
 const autoprefixer = settings.styles ? require('autoprefixer') : null;
 
@@ -399,6 +398,8 @@ const buildNewSVGIcons = function (done) {
 const libDocs = function (done) {
   //  Make sure this feature is activated before running
   if (!settings.documentation) return done();
+
+  const postCSSDialtoneDocs = require('./postcss/dialtone-docs.cjs');
 
   //  Generate documentation
   return src('./lib/dist/dialtone-default-theme.css')
