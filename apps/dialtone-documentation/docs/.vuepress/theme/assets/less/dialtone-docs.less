@@ -415,6 +415,19 @@ a.header-anchor {
 
   &--large {
     grid-auto-rows: 18rem;
+
+    @media screen and (min-width: 375px) {
+      --icon-grid-columns: 1;
+    }
+
+    @media screen and (min-width: 480px) {
+      --icon-grid-columns: 2;
+    }
+
+    @media screen and (min-width: 1024px) {
+      --icon-grid-columns: 4;
+    }
+
     &:extend(.d-gl-docsite-icons);
 
     --icon-card-width: 18rem;
