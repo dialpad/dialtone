@@ -5,13 +5,13 @@
         "atomic",
         "space"
       ],
-      "blank-space": [
-        "blank",
-        "space"
-      ],
       "black-hole": [
         "black",
         "hole"
+      ],
+      "blank-space": [
+        "blank",
+        "space"
       ],
       "dialpad-logo-black": [
         "logo",
@@ -121,12 +121,12 @@
         "word",
         "marketing"
       ],
+      "mind": [
+        "mind"
+      ],
       "orbital-harmony": [
         "orbital",
         "harmony"
-      ],
-      "mind": [
-        "mind"
       ],
       "vector-vortex": [
         "vector",
