@@ -41,8 +41,10 @@ module.exports = {
     }],
   ],
   branches: [
-    'staging',
-    'next',
+    {
+      name: 'staging',
+      prerelease: true,
+    },
     {
       name: 'beta',
       prerelease: true,

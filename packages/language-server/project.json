@@ -5,7 +5,8 @@
       "executor": "nx:run-commands",
       "dependsOn": [
         "dialtone-vue3:build",
-        "dialtone-tokens:build"
+        "dialtone-tokens:build",
+        "dialtone-css:build"
       ],
       "inputs": [
         "{projectRoot}/**/*"
@@ -19,9 +20,7 @@
     "pack": {
       "executor": "nx:run-commands",
       "dependsOn": [
-        "build",
-        "dialtone-vue3:build",
-        "dialtone-tokens:build"
+        "build"
       ],
       "options": {
         "cwd": "{projectRoot}/vscode",
