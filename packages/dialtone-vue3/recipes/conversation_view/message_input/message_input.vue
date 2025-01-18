@@ -20,12 +20,12 @@
       gap="200"
       class="d-p8 d-bgc-secondary"
     >
-      <dt-button
+      <dt-recipe-message-input-button
+        :aria-label="boldButtonOptions.ariaLabel"
+        :tooltip-text="boldButtonOptions.tooltipText"
+        :keyboard-shortcut-text="boldButtonOptions.keyboardShortcutText"
         data-qa="bold"
-        importance="clear"
-        kind="muted"
-        size="xs"
-        :active="$refs.richTextEditor?.editor?.isActive('bold') && isFocused"
+        :is-active="$refs.richTextEditor?.editor?.isActive('bold') && isFocused"
         @click="$refs.richTextEditor?.editor?.chain().focus().toggleBold().run()"
       >
         <template #icon>
@@ -34,13 +34,14 @@
             size="200"
           />
         </template>
-      </dt-button>
-      <dt-button
+      </dt-recipe-message-input-button>
+
+      <dt-recipe-message-input-button
+        :aria-label="italicButtonOptions.ariaLabel"
+        :tooltip-text="italicButtonOptions.tooltipText"
+        :keyboard-shortcut-text="italicButtonOptions.keyboardShortcutText"
         data-qa="italic"
-        importance="clear"
-        kind="muted"
-        size="xs"
-        :active="$refs.richTextEditor?.editor?.isActive('italic') && isFocused"
+        :is-active="$refs.richTextEditor?.editor?.isActive('italic') && isFocused"
         @click="$refs.richTextEditor?.editor?.chain().focus().toggleItalic().run()"
       >
         <template #icon>
@@ -49,13 +50,14 @@
             size="200"
           />
         </template>
-      </dt-button>
-      <dt-button
+      </dt-recipe-message-input-button>
+
+      <dt-recipe-message-input-button
+        :aria-label="strikeButtonOptions.ariaLabel"
+        :tooltip-text="strikeButtonOptions.tooltipText"
+        :keyboard-shortcut-text="strikeButtonOptions.keyboardShortcutText"
         data-qa="strikethrough"
-        importance="clear"
-        kind="muted"
-        size="xs"
-        :active="$refs.richTextEditor?.editor?.isActive('strike') && isFocused"
+        :is-active="$refs.richTextEditor?.editor?.isActive('strike') && isFocused"
         @click="$refs.richTextEditor?.editor?.chain().focus().toggleStrike().run()"
       >
         <template #icon>
@@ -64,8 +66,8 @@
             size="200"
           />
         </template>
-      </dt-button>
-      <div class="dt-message-input--button-group-divider" />
+      </dt-recipe-message-input-button>
+      <div class="d-recipe-message-input--button-group-divider" />
       <dt-popover
         v-model:open="showLinkInput"
         placement="bottom-start"
@@ -78,24 +80,21 @@
         @click.stop="onInputFocus"
       >
         <template #anchor>
-          <dt-button
-            v-dt-tooltip:top="linkButton.tooltipMessage"
-            :data-qa="linkButton.dataQA"
-            importance="clear"
-            kind="muted"
-            :active="$refs.richTextEditor?.editor?.isActive('link') && isFocused"
-            size="xs"
-            :aria-label="linkButton.tooltipMessage"
+          <dt-recipe-message-input-button
+            :aria-label="linkButtonOptions.ariaLabel"
+            :tooltip-text="linkButtonOptions.tooltipText"
+            :keyboard-shortcut-text="linkButtonOptions.keyboardShortcutText"
+            data-qa="link"
+            :is-active="$refs.richTextEditor?.editor?.isActive('link') && isFocused"
             @click="linkButton.onClick()"
           >
             <template #icon>
-              <component
-                :is="linkButton.icon"
-                size="200"
+              <dt-icon-link2
                 class="d-fw-bold"
+                size="200"
               />
             </template>
-          </dt-button>
+          </dt-recipe-message-input-button>
         </template>
 
         <template #content>
@@ -175,15 +174,15 @@
 
       <div class="d-recipe-message-input--button-group-divider" />
 
-      <dt-button
+      <dt-recipe-message-input-button
+        :aria-label="bulletListButtonOptions.ariaLabel"
+        :tooltip-text="bulletListButtonOptions.tooltipText"
+        :keyboard-shortcut-text="bulletListButtonOptions.keyboardShortcutText"
         data-qa="bullet-list"
-        importance="clear"
-        kind="muted"
-        :active="lastActiveNodes(
+        :is-active="lastActiveNodes(
           $refs.richTextEditor?.editor?.state,
           [{ type: 'bulletList' }, { type: 'orderedList' }],
         ).includes('bulletList') && isFocused"
-        size="xs"
         @click="$refs.richTextEditor?.editor?.chain().focus().toggleBulletList().run()"
       >
         <template #icon>
@@ -192,16 +191,17 @@
             size="200"
           />
         </template>
-      </dt-button>
-      <dt-button
+      </dt-recipe-message-input-button>
+
+      <dt-recipe-message-input-button
+        :aria-label="orderedListButtonOptions.ariaLabel"
+        :tooltip-text="orderedListButtonOptions.tooltipText"
+        :keyboard-shortcut-text="orderedListButtonOptions.keyboardShortcutText"
         data-qa="ordered-list"
-        importance="clear"
-        kind="muted"
-        :active="lastActiveNodes(
+        :is-active="lastActiveNodes(
           $refs.richTextEditor?.editor?.state,
           [{ type: 'bulletList' }, { type: 'orderedList' }],
         ).includes('orderedList') && isFocused"
-        size="xs"
         @click="$refs.richTextEditor?.editor?.chain().focus().toggleOrderedList().run()"
       >
         <template #icon>
@@ -210,14 +210,14 @@
             size="200"
           />
         </template>
-      </dt-button>
+      </dt-recipe-message-input-button>
       <div class="d-recipe-message-input--button-group-divider" />
-      <dt-button
-        data-qa="quote"
-        importance="clear"
-        kind="muted"
-        size="xs"
-        :active="$refs.richTextEditor?.editor?.isActive('blockquote') && isFocused"
+      <dt-recipe-message-input-button
+        :aria-label="blockQuoteButtonOptions.ariaLabel"
+        :tooltip-text="blockQuoteButtonOptions.tooltipText"
+        :keyboard-shortcut-text="blockQuoteButtonOptions.keyboardShortcutText"
+        data-qa="blockquote"
+        :is-active="$refs.richTextEditor?.editor?.isActive('blockquote') && isFocused"
         @click="$refs.richTextEditor?.editor?.chain().focus().toggleBlockquote().run()"
       >
         <template #icon>
@@ -226,14 +226,16 @@
             size="200"
           />
         </template>
-      </dt-button>
+      </dt-recipe-message-input-button>
+
       <div class="d-recipe-message-input--button-group-divider" />
-      <dt-button
+
+      <dt-recipe-message-input-button
+        :aria-label="codeButtonOptions.ariaLabel"
+        :tooltip-text="codeButtonOptions.tooltipText"
+        :keyboard-shortcut-text="codeButtonOptions.keyboardShortcutText"
         data-qa="code"
-        importance="clear"
-        kind="muted"
-        size="xs"
-        :active="$refs.richTextEditor?.editor?.isActive('code') && isFocused"
+        :is-active="$refs.richTextEditor?.editor?.isActive('code') && isFocused"
         @click="$refs.richTextEditor?.editor?.chain().focus().toggleCode().run()"
       >
         <template #icon>
@@ -242,13 +244,13 @@
             size="200"
           />
         </template>
-      </dt-button>
-      <dt-button
+      </dt-recipe-message-input-button>
+      <dt-recipe-message-input-button
+        :aria-label="codeBlockButtonOptions.ariaLabel"
+        :tooltip-text="codeBlockButtonOptions.tooltipText"
+        :keyboard-shortcut-text="codeBlockButtonOptions.keyboardShortcutText"
         data-qa="code-block"
-        importance="clear"
-        kind="muted"
-        size="xs"
-        :active="$refs.richTextEditor?.editor?.isActive('codeBlock') && isFocused"
+        :is-active="$refs.richTextEditor?.editor?.isActive('codeBlock') && isFocused"
         @click="$refs.richTextEditor?.editor?.chain().focus().toggleCodeBlock().run()"
       >
         <template #icon>
@@ -257,7 +259,7 @@
             size="200"
           />
         </template>
-      </dt-button>
+      </dt-recipe-message-input-button>
     </dt-stack>
     <div
       v-dt-scrollbar
@@ -493,6 +495,7 @@ import {
   DtIconLink2, DtIconListBullet, DtIconBold, DtIconItalic, DtIconStrikethrough,
   DtIconListOrdered, DtIconQuote, DtIconCode, DtIconCodeBlock,
 } from '@dialpad/dialtone-icons/vue3';
+import DtRecipeMessageInputButton from './message_input_button.vue';
 
 import {
   EDITOR_SUPPORTED_LINK_PROTOCOLS,
@@ -521,7 +524,9 @@ export default {
     DtIconListOrdered,
     DtIconQuote,
     DtIconCode,
+    DtIconLink2,
     DtIconCodeBlock,
+    DtRecipeMessageInputButton,
   },
 
   mixins: [],
@@ -778,6 +783,142 @@ export default {
     },
 
     /**
+     * descriptive text fields for the bold button
+     *
+     * object format:
+     * { ariaLabel: string, tooltipText: string, keyboardShortcutText: string }
+     */
+    boldButtonOptions: {
+      type: Object,
+      default: () => ({
+        ariaLabel: 'Toggle bold on selected text',
+        tooltipText: 'Bold',
+        keyboardShortcutText: 'Mod + B',
+      }),
+    },
+
+    /**
+     * descriptive text fields for the italic button
+     *
+     * object format:
+     * { ariaLabel: string, tooltipText: string, keyboardShortcutText: string }
+     */
+    italicButtonOptions: {
+      type: Object,
+      default: () => ({
+        ariaLabel: 'Toggle italic on selected text',
+        tooltipText: 'Italic',
+        keyboardShortcutText: 'Mod + I',
+      }),
+    },
+
+    /**
+     * descriptive text fields for the strikethrough button
+     *
+     * object format:
+     * { ariaLabel: string, tooltipText: string, keyboardShortcutText: string }
+     */
+    strikeButtonOptions: {
+      type: Object,
+      default: () => ({
+        ariaLabel: 'Toggle strikethrough on selected text',
+        tooltipText: 'Strikethrough',
+        keyboardShortcutText: 'Mod + Shift + S',
+      }),
+    },
+
+    /**
+     * descriptive text fields for the link button
+     *
+     * object format:
+     * { ariaLabel: string, tooltipText: string, keyboardShortcutText: string }
+     */
+    linkButtonOptions: {
+      type: Object,
+      default: () => ({
+        ariaLabel: 'Create or edit link on selected text',
+        tooltipText: 'Link',
+        // TODO: implement mod k
+        keyboardShortcutText: 'Mod + K',
+      }),
+    },
+
+    /**
+     * descriptive text fields for the bullet list button
+     *
+     * object format:
+     * { ariaLabel: string, tooltipText: string, keyboardShortcutText: string }
+     */
+    bulletListButtonOptions: {
+      type: Object,
+      default: () => ({
+        ariaLabel: 'Toggle bullet list on selected text',
+        tooltipText: 'Bullet list',
+        keyboardShortcutText: 'Mod + Shift + 8',
+      }),
+    },
+
+    /**
+     * descriptive text fields for the ordered list button
+     *
+     * object format:
+     * { ariaLabel: string, tooltipText: string, keyboardShortcutText: string }
+     */
+    orderedListButtonOptions: {
+      type: Object,
+      default: () => ({
+        ariaLabel: 'Toggle ordered list on selected text',
+        tooltipText: 'Ordered list',
+        keyboardShortcutText: 'Mod + Shift + 7',
+      }),
+    },
+
+    /**
+     * descriptive text fields for the italic button
+     *
+     * object format:
+     * { ariaLabel: string, tooltipText: string, keyboardShortcutText: string }
+     */
+    blockQuoteButtonOptions: {
+      type: Object,
+      default: () => ({
+        ariaLabel: 'Toggle Blockquote on selected text',
+        tooltipText: 'Blockquote',
+        keyboardShortcutText: 'Mod + Shift + B',
+      }),
+    },
+
+    /**
+     * descriptive text fields for the code button
+     *
+     * object format:
+     * { ariaLabel: string, tooltipText: string, keyboardShortcutText: string }
+     */
+    codeButtonOptions: {
+      type: Object,
+      default: () => ({
+        ariaLabel: 'Toggle code tag on selected text',
+        tooltipText: 'Code',
+        keyboardShortcutText: 'Mod + E',
+      }),
+    },
+
+    /**
+     * descriptive text fields for the code block button
+     *
+     * object format:
+     * { ariaLabel: string, tooltipText: string, keyboardShortcutText: string }
+     */
+    codeBlockButtonOptions: {
+      type: Object,
+      default: () => ({
+        ariaLabel: 'Toggle code block on selected text',
+        tooltipText: 'Code block',
+        keyboardShortcutText: 'Mod + Alt + C',
+      }),
+    },
+
+    /**
      * Confirm set link button defaults.
      */
     confirmSetLinkButton: {
@@ -1022,14 +1163,15 @@ export default {
       this.showLinkInput = false;
       this.hideLinkBubbleMenu = false;
       this.linkInput = '';
-      this.$refs.richTextEditor.editor?.chain().focus();
+      this.linkText = '';
+      // this.$refs.richTextEditor.editor?.chain().focus();
     },
 
     setLink (event) {
       event?.preventDefault();
       event?.stopPropagation();
       this.$refs.richTextEditor.setLink(
-        this.linkInput, this.linkOptions, EDITOR_SUPPORTED_LINK_PROTOCOLS, EDITOR_DEFAULT_LINK_PREFIX,
+        this.linkInput, this.linkText, this.linkOptions, EDITOR_SUPPORTED_LINK_PROTOCOLS, EDITOR_DEFAULT_LINK_PREFIX,
       );
 
       this.closeLinkInput();
