@@ -1,0 +1,8 @@
+
+> @dialpad/eslint-plugin-dialtone@1.5.0 lint:fix /workspaces/Tone-i/packages/eslint-plugin-dialtone
+> pnpm run lint --fix
+
+
+> @dialpad/eslint-plugin-dialtone@1.5.0 lint /workspaces/Tone-i/packages/eslint-plugin-dialtone
+> eslint . "--fix"
+

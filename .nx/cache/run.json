@@ -1,0 +1,43 @@
+{
+  "run": {
+    "command": "nx run-many --target=lint:fix",
+    "startTime": "2025-01-18T03:14:52.449Z",
+    "endTime": "2025-01-18T03:14:52.478Z",
+    "inner": false
+  },
+  "tasks": [
+    {
+      "taskId": "dialtone:lint:fix",
+      "target": "lint:fix",
+      "projectName": "dialtone",
+      "hash": "11158622788846794333",
+      "startTime": "2025-01-18T03:14:52.462Z",
+      "endTime": "2025-01-18T03:14:52.477Z",
+      "params": "",
+      "cacheStatus": "local-cache-hit",
+      "status": 0
+    },
+    {
+      "taskId": "eslint-plugin-dialtone:lint:fix",
+      "target": "lint:fix",
+      "projectName": "eslint-plugin-dialtone",
+      "hash": "1516996990758048640",
+      "startTime": "2025-01-18T03:14:52.463Z",
+      "endTime": "2025-01-18T03:14:52.478Z",
+      "params": "",
+      "cacheStatus": "local-cache-hit",
+      "status": 0
+    },
+    {
+      "taskId": "dialtone-documentation:lint:fix",
+      "target": "lint:fix",
+      "projectName": "dialtone-documentation",
+      "hash": "11763347819986058627",
+      "startTime": "2025-01-18T03:14:52.463Z",
+      "endTime": "2025-01-18T03:14:52.478Z",
+      "params": "",
+      "cacheStatus": "local-cache-hit",
+      "status": 0
+    }
+  ]
+}

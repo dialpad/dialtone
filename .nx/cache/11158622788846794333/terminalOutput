@@ -1,0 +1,26 @@
+
+> @dialpad/dialtone@8.22.1 lint:fix /workspaces/Tone-i/packages/dialtone
+> run-s lint-staged:library lint-staged:code
+
+
+> @dialpad/dialtone@8.22.1 lint-staged:library /workspaces/Tone-i/packages/dialtone
+> pnpm run stylelint --fix
+
+
+> @dialpad/dialtone@8.22.1 stylelint /workspaces/Tone-i/packages/dialtone
+> pnpm exec stylelint 'lib/build/less/**/*.less' "--fix"
+
+
+> @dialpad/dialtone@8.22.1 lint-staged:code /workspaces/Tone-i/packages/dialtone
+> pnpm run lint:code --fix
+
+
+> @dialpad/dialtone@8.22.1 lint:code /workspaces/Tone-i/packages/dialtone
+> eslint '**/*.{js,cjs,vue}' "--fix"
+
+[0m[0m
+[0m[4m/workspaces/Tone-i/packages/dialtone/postcss/constants.cjs[24m[0m
+[0m  [2m312:1[22m  [33mwarning[39m  File has too many lines (310). Maximum allowed is 300  [2mmax-lines[22m[0m
+[0m[0m
+[0m[33m[1m✖ 1 problem (0 errors, 1 warning)[22m[39m[0m
+[0m[33m[1m[22m[39m[0m
