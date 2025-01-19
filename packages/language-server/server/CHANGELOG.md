@@ -1,3 +1,10 @@
+# [1.1.0](https://github.com/dialpad/dialtone/compare/language-server/v1.0.0...language-server/v1.1.0) (2025-01-19)
+
+
+### Features
+
+* DLT-1890 vscode-plugin: utility class autocompletion and hover ([#609](https://github.com/dialpad/dialtone/issues/609)) ([d67e226](https://github.com/dialpad/dialtone/commit/d67e226ab6d30faac2b6a2d9b4b30d44037cf086))
+
 # 1.0.0 (2024-11-22)
 
 
