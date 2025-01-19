@@ -22,6 +22,7 @@
 		"vscode-uri": "~3.0.8"
 	},
 	"devDependencies": {
+		"@dialpad/dialtone-css": "workspace:*",
 		"@dialpad/dialtone-vue": "workspace:^3",
 		"@dialpad/dialtone-tokens": "workspace:*"
 	}

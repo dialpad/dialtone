@@ -907,6 +907,9 @@ importers:
         specifier: ~3.0.8
         version: 3.0.8
     devDependencies:
+      '@dialpad/dialtone-css':
+        specifier: workspace:*
+        version: link:../../dialtone-css
       '@dialpad/dialtone-tokens':
         specifier: workspace:*
         version: link:../../dialtone-tokens
