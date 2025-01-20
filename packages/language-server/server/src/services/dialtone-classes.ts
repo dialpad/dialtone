@@ -2,6 +2,8 @@ import type { LanguageServicePlugin, LanguageServicePluginInstance, MarkupConten
 import { getContent, getCurrentWord, getEmbeddedLanguage } from "../utils";
 import { resolveUtilityClass, utilityClassDocumentation } from "../resolvers/css-utilities";
 
+const classAttributeRegex = /:?(class=)("([^"]*)"|'([^']*)')/
+
 export function create(): LanguageServicePlugin {
     return {
         name: "dialtone-classes",
@@ -24,7 +26,6 @@ export function create(): LanguageServicePlugin {
                     if (!content) return;
 
                     const currentLine: string = content.split('\n')[position.line];
-                    const classAttributeRegex = /:?(class=)"([^"]*)"|'([^']*)'/;
                     const classAttributeMatch = classAttributeRegex.exec(currentLine);
                     if (!classAttributeMatch) return;
 
@@ -52,7 +53,6 @@ export function create(): LanguageServicePlugin {
                     if (!content) return;
 
                     const currentLine: string = content.split('\n')[position.line];
-                    const classAttributeRegex = /:?(class=)"([^"]*)+"|'([^']*)+'/;
                     const classAttributeMatch = classAttributeRegex.exec(currentLine);
                     if (!classAttributeMatch) return;
 
