@@ -628,14 +628,6 @@ export default {
     },
 
     /**
-     * Enables the Link extension and optionally passes configurations to it
-     */
-    link: {
-      type: [Boolean, Object],
-      default: true,
-    },
-
-    /**
      * Placeholder text
      */
     placeholder: {
