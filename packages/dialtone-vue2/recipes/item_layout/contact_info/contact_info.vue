@@ -3,6 +3,7 @@
     :role="role"
     data-qa="contact-info"
     class="d-recipe-contact-info"
+    unstyled
   >
     <template
       v-if="showAvatar"
@@ -34,9 +35,7 @@
               },
             ]"
           >
-            <template
-              #icon="{ iconSize }"
-            >
+            <template #icon="{ iconSize }">
               <!-- @slot Slot for avatar icon in a list -->
               <slot
                 name="avatarIcon"
@@ -61,9 +60,7 @@
           :color="avatarColor"
           :presence="presence"
         >
-          <template
-            #icon="{ iconSize }"
-          >
+          <template #icon="{ iconSize }">
             <!-- @slot Slot for avatar icon in a list -->
             <slot
               name="avatarIcon"
@@ -74,14 +71,20 @@
       </button>
     </template>
     <template #default>
-      <div data-qa="contact-info-header">
+      <div
+        class="d-recipe-contact-info__header"
+        data-qa="contact-info-header"
+      >
         <!-- @slot Slot for header information -->
         <slot name="header" />
       </div>
     </template>
 
     <template #subtitle>
-      <div data-qa="contact-info-subtitle">
+      <div
+        class="d-recipe-contact-info__subtitle"
+        data-qa="contact-info-subtitle"
+      >
         <!-- @slot Slot for subtitle information -->
         <slot name="subtitle" />
       </div>
@@ -91,7 +94,10 @@
       v-if="$slots.bottom"
       #bottom
     >
-      <div data-qa="contact-info-bottom">
+      <div
+        class="d-recipe-contact-info__bottom"
+        data-qa="contact-info-bottom"
+      >
         <!-- @slot Slot for information at the bottom -->
         <slot name="bottom" />
       </div>
@@ -101,7 +107,10 @@
       v-if="$slots.right"
       #right
     >
-      <div data-qa="contact-info-right">
+      <div
+        class="d-recipe-contact-info__right"
+        data-qa="contact-info-right"
+      >
         <!-- @slot Slot for the right content -->
         <slot name="right" />
       </div>

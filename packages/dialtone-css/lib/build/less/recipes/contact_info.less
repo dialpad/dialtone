@@ -1,45 +1,41 @@
 .d-recipe-contact-info {
   --contact-info-avatar-border-color: var(--dt-color-surface-primary);
 
-  display: flex;
-
-  .d-item-layout {
-    flex: 1 1 0;
-  }
-
-  .d-item-layout--content {
-    /*
-    DP-74536: Add `min-width` to make the width of "contact info" adjustable.
-    */
-    min-width: var(--dt-space-825);
-  }
-
-  .d-item-layout--left {
-    align-items: center;
-    justify-content: flex-start;
-
-    /*
-    DP-74536: To make 'Avatar' in fixed position when resizing the window.
-    */
-    min-width: var(--dt-space-650);
-  }
-
-  .d-item-layout--right {
-    align-items: center;
-
-    /*
-    DP-74536: Remove `min-width` which cause extra unused empty space on the right of "contact info".
-    */
-    min-width: 0;
-  }
+  column-gap: var(--dt-space-400);
 }
 
 .d-recipe-contact-info__left {
   position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  min-width: var(--dt-space-650);
+  height: var(--dt-size-100-percent);
   background-color: transparent;
   background-image: none;
   border-width: 0;
   cursor: pointer;
+}
+
+.d-recipe-contact-info__header {
+  line-height: var(--dt-font-line-height-300);
+}
+
+.d-recipe-contact-info__subtitle {
+  margin-top: var(--dt-space-200-negative);
+  color: var(--dt-color-foreground-tertiary);
+  font-size: var(--dt-font-size-100);
+  line-height: var(--dt-font-line-height-300);
+}
+
+.d-recipe-contact-info__bottom {
+  margin-top: var(--dt-space-200);
+  line-height: var(--dt-font-line-height-300);
+}
+
+.d-recipe-contact-info__right {
+  align-items: center;
+  min-width: 0;
 }
 
 .d-recipe-contact-info__avatars {
