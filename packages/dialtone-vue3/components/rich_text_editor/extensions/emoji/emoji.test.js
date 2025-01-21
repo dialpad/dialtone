@@ -78,8 +78,7 @@ describe('DtRichTextEditor Emoji Extension tests', () => {
     wrapper.unmount();
   });
 
-  // todo: figure out why this is broken
-  describe.skip('Functionality Tests', () => {
+  describe('Functionality Tests', () => {
     describe('Shortcodes', () => {
       it(':cat: should be a valid shortcode for emoji', async () => {
         await _setValue(':cat:');
