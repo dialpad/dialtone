@@ -2,6 +2,9 @@ import type { LanguageServicePlugin, LanguageServicePluginInstance, MarkupConten
 import { getContent, getCurrentWord, getEmbeddedLanguage } from "../utils";
 import { resolveUtilityClass, utilityClassDocumentation } from "../resolvers/css-utilities";
 
+// @TODO: Find and autocomplete classes within :class="[]" and :class="{ 'some-class': true }"
+const classAttributeRegex = /\s(class=)("([^"]*)"|'([^']*)')/
+
 export function create(): LanguageServicePlugin {
     return {
         name: "dialtone-classes",
@@ -15,8 +18,6 @@ export function create(): LanguageServicePlugin {
             console.log('Created Dialtone Utility Classes service');
             return {
                 provideCompletionItems(document, position) {
-                    console.log('resolving classes');
-
                     const language = getEmbeddedLanguage(document, context);
                     if (language !== 'template') return;
 
@@ -24,7 +25,6 @@ export function create(): LanguageServicePlugin {
                     if (!content) return;
 
                     const currentLine: string = content.split('\n')[position.line];
-                    const classAttributeRegex = /:?(class=)"([^"]*)"|'([^']*)'/;
                     const classAttributeMatch = classAttributeRegex.exec(currentLine);
                     if (!classAttributeMatch) return;
 
@@ -35,7 +35,7 @@ export function create(): LanguageServicePlugin {
 
                     if (!(isCursorWithinClassAttribute)) return;
 
-                    const classes = new Set(classAttributeMatch[2].split(' '));
+                    const classes = new Set(classAttributeMatch[3].split(' '));
 
                     const currentWord = getCurrentWord(currentLine, position.character);
 
@@ -52,7 +52,6 @@ export function create(): LanguageServicePlugin {
                     if (!content) return;
 
                     const currentLine: string = content.split('\n')[position.line];
-                    const classAttributeRegex = /:?(class=)"([^"]*)+"|'([^']*)+'/;
                     const classAttributeMatch = classAttributeRegex.exec(currentLine);
                     if (!classAttributeMatch) return;
 
@@ -62,7 +61,7 @@ export function create(): LanguageServicePlugin {
                     const isCursorWithinClassAttribute = position.character > classesStartIndex && position.character < classesEndIndex;
                     if (!(isCursorWithinClassAttribute)) return;
 
-                    const classes = classAttributeMatch[2].split(' ');
+                    const classes = classAttributeMatch[3].split(' ');
                     let currentIndex = classesStartIndex + 1;
 
                     const hoveredClass = classes.find(className => {

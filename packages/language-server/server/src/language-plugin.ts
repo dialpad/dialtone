@@ -28,7 +28,7 @@ function _findEmbeddedLanguages(content: string): { id: string, languageId: stri
 
   if (templateTagMatch) {
     const templateTagStart = templateTagMatch.index + templateTagMatch[0].length;
-    const templateTagEnd = content.indexOf('</template>', templateTagStart);
+    const templateTagEnd = content.lastIndexOf('</template>');
 
     template = content.substring(templateTagStart, templateTagEnd)
 
