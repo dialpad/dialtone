@@ -22,7 +22,7 @@
         :tooltip-text="boldButtonOptions.tooltipText"
         :keyboard-shortcut-text="boldButtonOptions.keyboardShortcutText"
         data-qa="bold"
-        :is-active="$refs.richTextEditor?.editor?.isActive('bold') && isFocused"
+        :is-active="isSelectionActive('bold')"
         @click="$refs.richTextEditor?.editor?.chain().focus().toggleBold().run()"
       >
         <template #icon>
@@ -38,7 +38,7 @@
         :tooltip-text="italicButtonOptions.tooltipText"
         :keyboard-shortcut-text="italicButtonOptions.keyboardShortcutText"
         data-qa="italic"
-        :is-active="$refs.richTextEditor?.editor?.isActive('italic') && isFocused"
+        :is-active="isSelectionActive('italic')"
         @click="$refs.richTextEditor?.editor?.chain().focus().toggleItalic().run()"
       >
         <template #icon>
@@ -54,7 +54,7 @@
         :tooltip-text="strikeButtonOptions.tooltipText"
         :keyboard-shortcut-text="strikeButtonOptions.keyboardShortcutText"
         data-qa="strikethrough"
-        :is-active="$refs.richTextEditor?.editor?.isActive('strike') && isFocused"
+        :is-active="isSelectionActive('strike')"
         @click="$refs.richTextEditor?.editor?.chain().focus().toggleStrike().run()"
       >
         <template #icon>
@@ -82,7 +82,7 @@
             :tooltip-text="linkButtonOptions.tooltipText"
             :keyboard-shortcut-text="linkButtonOptions.keyboardShortcutText"
             data-qa="link"
-            :is-active="$refs.richTextEditor?.editor?.isActive('link') && isFocused"
+            :is-active="isSelectionActive('link')"
             @click="linkButton.onClick()"
           >
             <template #icon>
@@ -176,10 +176,7 @@
         :tooltip-text="bulletListButtonOptions.tooltipText"
         :keyboard-shortcut-text="bulletListButtonOptions.keyboardShortcutText"
         data-qa="bullet-list"
-        :is-active="lastActiveNodes(
-          $refs.richTextEditor?.editor?.state,
-          [{ type: 'bulletList' }, { type: 'orderedList' }],
-        ).includes('bulletList') && isFocused"
+        :is-active="isSelectionActive('bulletList')"
         @click="$refs.richTextEditor?.editor?.chain().focus().toggleBulletList().run()"
       >
         <template #icon>
@@ -195,10 +192,7 @@
         :tooltip-text="orderedListButtonOptions.tooltipText"
         :keyboard-shortcut-text="orderedListButtonOptions.keyboardShortcutText"
         data-qa="ordered-list"
-        :is-active="lastActiveNodes(
-          $refs.richTextEditor?.editor?.state,
-          [{ type: 'bulletList' }, { type: 'orderedList' }],
-        ).includes('orderedList') && isFocused"
+        :is-active="isSelectionActive('orderedList')"
         @click="$refs.richTextEditor?.editor?.chain().focus().toggleOrderedList().run()"
       >
         <template #icon>
@@ -214,7 +208,7 @@
         :tooltip-text="blockQuoteButtonOptions.tooltipText"
         :keyboard-shortcut-text="blockQuoteButtonOptions.keyboardShortcutText"
         data-qa="blockquote"
-        :is-active="$refs.richTextEditor?.editor?.isActive('blockquote') && isFocused"
+        :is-active="isSelectionActive('blockquote')"
         @click="$refs.richTextEditor?.editor?.chain().focus().toggleBlockquote().run()"
       >
         <template #icon>
@@ -232,7 +226,7 @@
         :tooltip-text="codeButtonOptions.tooltipText"
         :keyboard-shortcut-text="codeButtonOptions.keyboardShortcutText"
         data-qa="code"
-        :is-active="$refs.richTextEditor?.editor?.isActive('code') && isFocused"
+        :is-active="isSelectionActive('code')"
         @click="$refs.richTextEditor?.editor?.chain().focus().toggleCode().run()"
       >
         <template #icon>
@@ -247,7 +241,7 @@
         :tooltip-text="codeBlockButtonOptions.tooltipText"
         :keyboard-shortcut-text="codeBlockButtonOptions.keyboardShortcutText"
         data-qa="code-block"
-        :is-active="$refs.richTextEditor?.editor?.isActive('codeBlock') && isFocused"
+        :is-active="isSelectionActive('codeBlock')"
         @click="$refs.richTextEditor?.editor?.chain().focus().toggleCodeBlock().run()"
       >
         <template #icon>
@@ -1129,6 +1123,14 @@ export default {
   },
 
   methods: {
+    // Checks if the node currently selected is active ex/ the bold button is active if the selected text is bold
+    isSelectionActive (type) {
+      if (['bulletList', 'orderedList'].includes(type)) {
+        return this.lastActiveNodes(this.$refs.richTextEditor?.editor?.state, [{ type: 'bulletList' }, { type: 'orderedList' }]).includes(type) && this.isFocused;
+      }
+      return this.$refs.richTextEditor?.editor?.isActive(type) && this.isFocused;
+    },
+
     onInputFocus (event) {
       event?.stopPropagation();
     },
