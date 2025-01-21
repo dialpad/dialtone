@@ -1,10 +1,9 @@
 <!-- eslint-disable max-lines -->
-<!-- eslint-disable vue/no-restricted-class -->
 <template>
   <div
     data-qa="dt-recipe-message-input"
     role="presentation"
-    :class="['d-recipe-message-input', 'd-of-hidden']"
+    class="d-recipe-message-input"
     @dragover.prevent
     @drop.prevent="onDrop"
     @paste="onPaste"
@@ -12,13 +11,11 @@
   >
     <!-- @slot Renders above the input, but still within the borders. -->
     <slot name="top" />
-    <!-- Some wrapper to restrict the height and show the scrollbar -->
-    <!-- Section for the top UI -->
     <dt-stack
       v-if="richText"
       direction="row"
       gap="200"
-      class="d-p8 d-bgc-secondary"
+      class="d-recipe-message-input__button-stack"
     >
       <dt-recipe-message-input-button
         :aria-label="boldButtonOptions.ariaLabel"
@@ -30,7 +27,7 @@
       >
         <template #icon>
           <dt-icon-bold
-            class="d-fw-bold"
+            class="d-recipe-message-input__button-stack-icon"
             size="200"
           />
         </template>
@@ -46,7 +43,7 @@
       >
         <template #icon>
           <dt-icon-italic
-            class="d-fw-bold"
+            class="d-recipe-message-input__button-stack-icon"
             size="200"
           />
         </template>
@@ -62,7 +59,7 @@
       >
         <template #icon>
           <dt-icon-strikethrough
-            class="d-fw-bold"
+            class="d-recipe-message-input__button-stack-icon"
             size="200"
           />
         </template>
@@ -90,7 +87,7 @@
           >
             <template #icon>
               <dt-icon-link2
-                class="d-fw-bold"
+                class="d-recipe-message-input__button-stack-icon"
                 size="200"
               />
             </template>
@@ -101,7 +98,7 @@
           <dt-stack gap="500">
             <div
               v-if="showAddLink.setLinkTitle.length > 0"
-              class="d-headline--md-compact"
+              class="d-recipe-message-input__link-dialog-title"
             >
               {{ showAddLink.setLinkTitle }}
             </div>
@@ -132,7 +129,7 @@
             />
             <dt-stack
               direction="row"
-              class="d-jc-space-between"
+              class="d-recipe-message-input__link-dialog-buttons"
             >
               <dt-button
                 :aria-label="removeLinkButton.ariaLabel"
@@ -187,7 +184,7 @@
       >
         <template #icon>
           <dt-icon-list-bullet
-            class="d-fw-bold"
+            class="d-recipe-message-input__button-stack-icon"
             size="200"
           />
         </template>
@@ -206,7 +203,7 @@
       >
         <template #icon>
           <dt-icon-list-ordered
-            class="d-fw-bold"
+            class="d-recipe-message-input__button-stack-icon"
             size="200"
           />
         </template>
@@ -222,7 +219,7 @@
       >
         <template #icon>
           <dt-icon-quote
-            class="d-fw-bold"
+            class="d-recipe-message-input__button-stack-icon"
             size="200"
           />
         </template>
@@ -240,7 +237,7 @@
       >
         <template #icon>
           <dt-icon-code
-            class="d-fw-bold"
+            class="d-recipe-message-input__button-stack-icon"
             size="200"
           />
         </template>
@@ -255,12 +252,13 @@
       >
         <template #icon>
           <dt-icon-code-block
-            class="d-fw-bold"
+            class="d-recipe-message-input__button-stack-icon"
             size="200"
           />
         </template>
       </dt-recipe-message-input-button>
     </dt-stack>
+    <!-- Some wrapper to restrict the height and show the scrollbar -->
     <div
       v-dt-scrollbar
       class="d-recipe-message-input__editor-wrapper"

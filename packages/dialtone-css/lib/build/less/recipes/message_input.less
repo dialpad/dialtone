@@ -1,6 +1,7 @@
 .d-recipe-message-input {
   display: flex;
   flex-direction: column;
+  overflow: hidden;
   line-height: var(--dt-font-line-height-400);
   border: var(--dt-size-border-100) solid;
   border-color: var(--dt-color-border-default);
@@ -14,6 +15,15 @@
     border-color: var(--dt-color-border-bold);
     box-shadow: 0 0 var(--dt-size-300) 0 var(--dt-color-surface-moderate-opaque);
   }
+}
+
+.d-recipe-message-input__button-stack {
+  padding: var(--dt-space-400);
+  background-color: var(--dt-color-surface-secondary);
+}
+
+.d-recipe-message-input__button-stack-icon {
+  font-weight: var(--dt-font-weight-bold);
 }
 
 .d-recipe-message-input__editor-wrapper {
@@ -106,4 +116,12 @@
   margin-right: var(--dt-space-300);
   margin-left: var(--dt-space-300);
   background: var(--dt-color-border-subtle);
+}
+
+.d-recipe-message-input__link-dialog-title {
+  font: var(--dt-typography-headline-md-compact);
+}
+
+.d-recipe-message-input__link-dialog-buttons {
+  justify-content: space-between;
 }
