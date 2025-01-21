@@ -18,6 +18,7 @@
     <dt-stack gap="200">
       <p>{{ tooltipText }}</p>
       <dt-keyboard-shortcut
+        v-if="keyboardShortcutText"
         inverted
         :shortcut="keyboardShortcutText"
       />
@@ -52,12 +53,12 @@ export default {
 
     keyboardShortcutText: {
       type: String,
-      required: true,
+      default: '',
     },
 
     isActive: {
       type: Boolean,
-      required: true,
+      default: false,
     },
 
     dataQa: {
