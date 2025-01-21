@@ -1,3 +1,10 @@
+# [8.48.0](https://github.com/dialpad/dialtone/compare/dialtone-css/v8.47.0...dialtone-css/v8.48.0) (2025-01-21)
+
+
+### Features
+
+* DLT-1890 vscode-plugin: utility class autocompletion and hover ([#609](https://github.com/dialpad/dialtone/issues/609)) ([d67e226](https://github.com/dialpad/dialtone/commit/d67e226ab6d30faac2b6a2d9b4b30d44037cf086))
+
 # [8.47.0](https://github.com/dialpad/dialtone/compare/dialtone-css/v8.46.5...dialtone-css/v8.47.0) (2025-01-14)
 
 
