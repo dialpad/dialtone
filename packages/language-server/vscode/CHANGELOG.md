@@ -1,3 +1,10 @@
+## [1.1.1](https://github.com/dialpad/dialtone/compare/vscode-extension/v1.1.0...vscode-extension/v1.1.1) (2025-01-21)
+
+
+### Bug Fixes
+
+* NO-JIRA vscode extension utility classes ([#613](https://github.com/dialpad/dialtone/issues/613)) ([915cec7](https://github.com/dialpad/dialtone/commit/915cec78148b5254664599c3c47e39ed53199144))
+
 # [1.1.0](https://github.com/dialpad/dialtone/compare/vscode-extension/v1.0.0...vscode-extension/v1.1.0) (2025-01-19)
 
 
