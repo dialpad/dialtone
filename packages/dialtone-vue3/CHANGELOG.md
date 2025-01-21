@@ -1,3 +1,17 @@
+## [3.164.2](https://github.com/dialpad/dialtone/compare/dialtone-vue3/v3.164.1...dialtone-vue3/v3.164.2) (2025-01-15)
+
+
+### Bug Fixes
+
+* NO-JIRA fix error process is not defined ([#608](https://github.com/dialpad/dialtone/issues/608)) ([06f7c1f](https://github.com/dialpad/dialtone/commit/06f7c1f89eb42fc9e6405f30457635b890f0bc6e))
+
+## [3.164.1](https://github.com/dialpad/dialtone/compare/dialtone-vue3/v3.164.0...dialtone-vue3/v3.164.1) (2025-01-14)
+
+
+### Bug Fixes
+
+* NO-JIRA set warnIfUnmounted to only run on test env ([#607](https://github.com/dialpad/dialtone/issues/607)) ([ce14a2d](https://github.com/dialpad/dialtone/commit/ce14a2d7238609d7bd77b659a96477fdd349a535))
+
 # [3.164.0](https://github.com/dialpad/dialtone/compare/dialtone-vue3/v3.163.0...dialtone-vue3/v3.164.0) (2024-12-31)
 
 

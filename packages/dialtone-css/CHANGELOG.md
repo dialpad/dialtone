@@ -1,3 +1,10 @@
+# [8.47.0](https://github.com/dialpad/dialtone/compare/dialtone-css/v8.46.5...dialtone-css/v8.47.0) (2025-01-14)
+
+
+### Features
+
+* **Utilities:** NO-JIRA add intrinsic size classes for width ([#594](https://github.com/dialpad/dialtone/issues/594)) ([6d68b71](https://github.com/dialpad/dialtone/commit/6d68b71a4ead8de3b2717ca396d52aed9bd7fd61))
+
 ## [8.46.5](https://github.com/dialpad/dialtone/compare/dialtone-css/v8.46.4...dialtone-css/v8.46.5) (2024-12-31)
 
 

@@ -1,6 +1,6 @@
 import type { LanguageServicePlugin, LanguageServicePluginInstance, MarkupContent } from "@volar/language-server/node";
 import { resolveCSSVariables, cssVariablesDocumentation } from "../resolvers/css-variables";
-import { getContent, getCurrentWord } from "../utils";
+import { getContent, getCurrentWord, getEmbeddedLanguage } from "../utils";
 
 export type DialtoneTokenDoc = {
     [theme: string]: {
@@ -18,7 +18,6 @@ export function create(): LanguageServicePlugin {
         name: "dialtone-tokens",
         capabilities: {
             completionProvider: {
-                resolveProvider: true,
                 triggerCharacters: ['(', '-'],
             },
             hoverProvider: true,
@@ -27,6 +26,9 @@ export function create(): LanguageServicePlugin {
             console.log('Created Dialtone Tokens service');
             return {
                 provideCompletionItems(document, position) {
+                    const language = getEmbeddedLanguage(document, context);
+                    if (language !== 'style') return;
+
                     const content = getContent(document, context);
                     if (!content) return;
 
@@ -43,6 +45,9 @@ export function create(): LanguageServicePlugin {
 
                 },
                 async provideHover(document, position) {
+                    const language = getEmbeddedLanguage(document, context);
+                    if (language !== 'style') return;
+
                     const content = getContent(document, context);
                     if (!content) return;
 

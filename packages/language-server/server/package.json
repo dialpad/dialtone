@@ -1,6 +1,6 @@
 {
 	"name": "@dialpad/dialtone-language-server",
-	"version": "1.0.0",
+	"version": "1.1.1",
 	"author": "Tico Ortega <julio.ortega@dialpad.com>",
 	"bugs": {
 		"email": "dialtone@dialpad.com"
@@ -22,6 +22,7 @@
 		"vscode-uri": "~3.0.8"
 	},
 	"devDependencies": {
+		"@dialpad/dialtone-css": "workspace:*",
 		"@dialpad/dialtone-vue": "workspace:^3",
 		"@dialpad/dialtone-tokens": "workspace:*"
 	}

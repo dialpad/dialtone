@@ -1,5 +1,3 @@
-const { REGEX_OPTIONS } = require('./constants.cjs');
-
 function _pascalToKebabCase (string) {
   return string.split(/(?=[A-Z]|[0-9]{3,}?)/).join('-').toLowerCase();
 }
@@ -27,10 +25,6 @@ module.exports = {
   * @returns String
   */
   appendHoverFocusSelectors (selector) {
-    const prefixRegex = new RegExp(`\\.(${REGEX_OPTIONS.HOVER_FOCUS_PREFIXES})\\\\:`);
-    if (prefixRegex.test(selector)) {
-      return selector;
-    }
     const hoverSelector = selector.replaceAll('.', '.h\\:').concat(':hover');
     const focusSelector = selector.replaceAll('.', '.f\\:').concat(':focus');
     const focusWithinSelector = selector.replaceAll('.', '.f\\:').concat(':focus-within');
