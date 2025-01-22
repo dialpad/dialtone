@@ -1,6 +1,14 @@
 {
   "categories": {
     "spot-illustrations": {
+      "atomic-pathway": [
+        "atomic",
+        "space"
+      ],
+      "black-hole": [
+        "black",
+        "hole"
+      ],
       "blank-space": [
         "blank",
         "space"
@@ -115,6 +123,10 @@
       ],
       "mind": [
         "mind"
+      ],
+      "orbital-harmony": [
+        "orbital",
+        "harmony"
       ],
       "vector-vortex": [
         "vector",
