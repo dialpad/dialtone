@@ -118,12 +118,12 @@ px* var(--divide-{{ d }}-reverse)
               border-right: calc(
                 <span v-if="i === 'default'">1</span>
                 <span v-else>{{ i }}</span>
-                px *(1 - var(--divide-{{ d }}-reverse))
+                px*var(--divide-{{ d }}-reverse)
               ) solid !important;<br/>
               border-left: calc(
                 <span v-if="i === 'default'">1</span>
                 <span v-else>{{ i }}</span>
-px* var(--divide-{{ d }}-reverse)
+px*(1 - var(--divide-{{ d }}-reverse))
               ) solid !important;
             </span>
           </td>
