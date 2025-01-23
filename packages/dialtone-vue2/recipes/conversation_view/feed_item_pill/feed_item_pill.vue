@@ -38,17 +38,26 @@
                   />
                 </div>
               </template>
-              <template #subtitle>
+              <template
+                v-if="$slots.subtitle"
+                #subtitle
+              >
                 <div class="d-recipe-feed-item-pill__subtitle">
                   <slot name="subtitle" />
                 </div>
               </template>
-              <template #bottom>
+              <template
+                v-if="$slots.bottom"
+                #bottom
+              >
                 <div class="d-recipe-feed-item-pill__bottom">
                   <slot name="bottom" />
                 </div>
               </template>
-              <template #right>
+              <template
+                v-if="$slots.right"
+                #right
+              >
                 <div class="d-recipe-feed-item-pill__right">
                   <slot name="right" />
                 </div>
@@ -56,7 +65,10 @@
             </dt-item-layout>
           </button>
         </template>
-        <template #content>
+        <template
+          v-if="$slots.content"
+          #content
+        >
           <div class="d-recipe-feed-item-pill__content">
             <slot name="content" />
           </div>
