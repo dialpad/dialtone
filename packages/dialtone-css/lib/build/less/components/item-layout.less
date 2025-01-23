@@ -67,44 +67,35 @@
 
 .d-item-layout--custom {
   display: grid;
-  grid-template-areas: 'left content right selected';
-  grid-template-columns: minmax(0, max-content) 1fr minmax(0, max-content) minmax(0, max-content);
+  grid-auto-columns: minmax(0, max-content) 1fr minmax(0, max-content);
 
   > .d-item-layout--left {
-    grid-area: left;
-  }
-
-  > .d-item-layout--right {
-    grid-area: right;
+    grid-area: 1/1;
   }
 
   > .d-item-layout--content {
     display: grid;
-    grid-area: content;
-    grid-template-areas:
-      'title'
-      'subtitle'
-      'bottom';
-    grid-template-rows: repeat(auto-fit, minmax(0, auto));
+    grid-area: 1/2;
+    grid-auto-rows: repeat(3, 1fr);
 
     > .d-item-layout--title {
-      grid-area: title;
+      grid-area: 1/1;
     }
 
     > .d-item-layout--subtitle {
-      grid-area: subtitle;
-    }
-
-    > .d-item-layout--subtitle--with-title {
-      //
+      grid-area: 2/1;
     }
 
     > .d-item-layout--bottom {
-      grid-area: bottom;
+      grid-area: 3/1;
     }
   }
 
+  > .d-item-layout--right {
+    grid-area: 1/3;
+  }
+
   > .d-item-layout--selected {
-    grid-area: selected;
+    grid-area: 1/4;
   }
 }
