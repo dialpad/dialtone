@@ -9,8 +9,6 @@
       :time="data.time"
       :is-active="true"
       :state="$attrs.state"
-      @hover="$attrs.onHover"
-      @focus="$attrs.onFocus"
     >
       <template #avatar>
         <dt-hovercard

@@ -30,8 +30,8 @@
         @keydown.escape.capture="closePopover"
         @keydown.enter="$emit('keydown', $event)"
         @keydown.space="$emit('keydown', $event)"
-        @mouseenter="openHovercard"
-        @mouseleave="closeHovercard"
+        @mouseenter="onMouseEnter"
+        @mouseleave="onMouseLeave"
       >
         <!-- @slot Anchor element that activates the popover. Usually a button. -->
         <slot
@@ -63,8 +63,8 @@
         :css="$attrs.css"
         :tabindex="contentTabindex"
         v-on="popoverListeners"
-        @mouseenter="openHovercard"
-        @mouseleave="closeHovercard"
+        @mouseenter="onMouseEnterAnchor"
+        @mouseleave="onMouseLeaveAnchor"
       >
         <popover-header-footer
           v-if="hasSlotContent($slots.headerContent) || showCloseButton"
@@ -142,7 +142,6 @@ import { createTippyPopover, getPopperOptions } from './tippy_utils';
 import PopoverHeaderFooter from './popover_header_footer.vue';
 import SrOnlyCloseButtonMixin from '@/common/mixins/sr_only_close_button';
 import SrOnlyCloseButton from '@/common/sr_only_close_button.vue';
-import { TOOLTIP_DELAY_MS } from '@/components/tooltip/index.js';
 
 /**
  * A Popover displays a content overlay when its anchor element is activated.
@@ -515,33 +514,6 @@ export default {
             (appendTo instanceof HTMLElement);
       },
     },
-
-    /**
-     * Set this prop to true and popover component will support hovercard behaviour
-     * It will open on mouseenter and close on mouseleave with timer delay of 300ms
-     */
-    hovercard: {
-      type: Boolean,
-      default: false,
-    },
-
-    /**
-     * The enter delay in milliseconds before the hovercard is shown.
-     * @type number
-     */
-    enterDelay: {
-      type: Number,
-      default: TOOLTIP_DELAY_MS,
-    },
-
-    /**
-     * The leave delay in milliseconds before the hovercard is hidden.
-     * @type number
-     */
-    leaveDelay: {
-      type: Number,
-      default: TOOLTIP_DELAY_MS,
-    },
   },
 
   emits: [
@@ -566,6 +538,34 @@ export default {
      * @type {Boolean | Array}
      */
     'opened',
+
+    /**
+     * Emitted when the mouse enters the popover
+     *
+     * @event mouseenter-popover
+     */
+    'mouseenter-popover',
+
+    /**
+     * Emitted when the mouse leaves the popover
+     *
+     * @event mouseleave-popover
+     */
+    'mouseleave-popover',
+
+    /**
+     * Emitted when the mouse enters the popover anchor
+     *
+     * @event mouseenter-popover-anchor
+     */
+    'mouseenter-popover-anchor',
+
+    /**
+     * Emitted when the mouse leaves the popover anchor
+     *
+     * @event mouseleave-popover-anchor
+     */
+    'mouseleave-popover-anchor',
   ],
 
   data () {
@@ -579,8 +579,6 @@ export default {
       anchorEl: null,
       popoverContentEl: null,
       hasSlotContent,
-      inTimer: null,
-      outTimer: null,
     };
   },
 
@@ -762,7 +760,6 @@ export default {
     },
 
     defaultToggleOpen (e) {
-      if (this.hovercard) { return; }
       if (this.openOnContext) { return; }
 
       // Only use default toggle behaviour if the user has not set the open prop.
@@ -1048,41 +1045,21 @@ export default {
       });
     },
 
-    //  ============================================================================
-    //  $ HOVERCARD
-    //  ----------------------------------------------------------------------------
-
-    setInTimer () {
-      this.inTimer = setTimeout(() => {
-        this.isOpen = true;
-      }, this.enterDelay);
+    onMouseEnter () {
+      this.$emit('mouseenter-popover');
     },
 
-    setOutTimer () {
-      this.outTimer = setTimeout(() => {
-        this.isOpen = false;
-      }, this.leaveDelay);
+    onMouseLeave () {
+      this.$emit('mouseleave-popover');
     },
 
-    openHovercard () {
-      if (!this.hovercard) return;
-      if (this.open === null || this.open === undefined) {
-        clearTimeout(this.outTimer);
-        this.setInTimer();
-      }
+    onMouseEnterAnchor () {
+      this.$emit('mouseenter-popover-anchor');
     },
 
-    closeHovercard () {
-      if (!this.hovercard) return;
-      if (this.open === null || this.open === undefined) {
-        clearTimeout(this.inTimer);
-        this.setOutTimer();
-      }
+    onMouseLeaveAnchor () {
+      this.$emit('mouseleave-popover-anchor');
     },
-
-    //  ============================================================================
-    //  $ HOVERCARD
-    //  ----------------------------------------------------------------------------
   },
 };
 </script>

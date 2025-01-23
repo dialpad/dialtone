@@ -1,9 +1,10 @@
-<!-- eslint-disable vue/multi-word-component-names -->
 <template>
   <dt-popover
     :id="id"
+    :open="hovercardOpen"
     :placement="placement"
     :content-class="contentClass"
+    :dialog-class="dialogClass"
     :fallback-placements="fallbackPlacements"
     :padding="padding"
     :transition="transition ? 'fade' : null"
@@ -13,12 +14,14 @@
     :header-class="headerClass"
     :footer-class="footerClass"
     :append-to="appendTo"
-    :hovercard="true"
     data-qa="dt-hovercard"
-    :open="open"
     :enter-delay="enterDelay"
     :leave-delay="leaveDelay"
     @opened="(e) => ($emit('opened', e))"
+    @mouseenter-popover="onMouseEnter"
+    @mouseleave-popover="onMouseLeave"
+    @mouseenter-popover-anchor="onMouseEnter"
+    @mouseleave-popover-anchor="onMouseLeave"
   >
     <template #anchor="{ attrs }">
       <slot
@@ -206,5 +209,51 @@ export default {
      */
     'opened',
   ],
+
+  data () {
+    return {
+      hovercardOpen: this.open,
+      inTimer: null,
+      outTimer: null,
+    };
+  },
+
+  watch: {
+    open: {
+      handler: function (open) {
+        this.hovercardOpen = open;
+      },
+
+      immediate: true,
+    },
+  },
+
+  methods: {
+    setInTimer () {
+      this.inTimer = setTimeout(() => {
+        this.hovercardOpen = true;
+      }, this.enterDelay);
+    },
+
+    setOutTimer () {
+      this.outTimer = setTimeout(() => {
+        this.hovercardOpen = false;
+      }, this.leaveDelay);
+    },
+
+    onMouseEnter () {
+      if (this.open === null) {
+        clearTimeout(this.outTimer);
+        this.setInTimer();
+      }
+    },
+
+    onMouseLeave () {
+      if (this.open === null) {
+        clearTimeout(this.inTimer);
+        this.setOutTimer();
+      }
+    },
+  },
 };
 </script>
