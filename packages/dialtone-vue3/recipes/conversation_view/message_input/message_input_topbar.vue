@@ -147,7 +147,7 @@ import { DtStack } from '@/components/stack';
 import {
   DtIconListBullet, DtIconBold, DtIconItalic, DtIconStrikethrough,
   DtIconListOrdered, DtIconQuote, DtIconCode, DtIconCodeBlock,
-} from '@dialpad/dialtone-icons/vue2';
+} from '@dialpad/dialtone-icons/vue3';
 
 import DtRecipeMessageInputButton from './message_input_button.vue';
 export default {

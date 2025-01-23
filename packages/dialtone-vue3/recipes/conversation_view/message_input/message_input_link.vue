@@ -43,7 +43,6 @@
           :label="linkButtonOptions.textLabel"
           input-wrapper-class="d-recipe-message-input__link-input"
           @click.stop
-          @click.native.stop
           @focus.stop
           @keydown.enter="$emit('set-link', linkText, linkInput)"
         />
@@ -56,7 +55,6 @@
           :label="linkButtonOptions.linkLabel"
           input-wrapper-class="d-recipe-message-input__link-input"
           @click.stop
-          @click.native.stop
           @focus.stop
           @keydown.enter="$emit('set-link', linkText, linkInput)"
         />
@@ -108,7 +106,7 @@ import { DtPopover } from '@/components/popover';
 import { DtInput } from '@/components/input';
 import { DtButton } from '@/components/button';
 import { DtStack } from '@/components/stack';
-import { DtIconLink2 } from '@dialpad/dialtone-icons/vue2';
+import { DtIconLink2 } from '@dialpad/dialtone-icons/vue3';
 import DtRecipeMessageInputButton from './message_input_button.vue';
 export default {
   name: 'MessageInputLink',

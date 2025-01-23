@@ -768,6 +768,13 @@ export default {
      * @type {String|JSON}
      */
     'update:value',
+
+    /**
+     * Emitted when input changes, returns text content only
+     * @event text-input
+     * @type {String}
+     */
+    'text-input',
   ],
 
   data () {

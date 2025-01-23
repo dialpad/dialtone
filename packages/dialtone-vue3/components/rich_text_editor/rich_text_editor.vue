@@ -432,6 +432,14 @@ export default {
      * @type {Object}
      */
     'edit-link',
+
+    /**
+     * "Selected" event is fired when the user selects text in the editor. returns the currently selected text.
+     * If the selected text is partially a link, the full link text is returned.
+     * @event selected
+     * @type {String}
+     */
+    'selected',
   ],
 
   data () {
@@ -674,19 +682,25 @@ export default {
       return editor.isActive('link');
     },
 
-    editLink () {
-      // If the selection is already a link, populate the popover with the existing link text.
-      // Otherwise, use the selected text.
-      let linkText = '';
-      const { view, state } = this.editor;
+    /**
+     * If the selection contains a link, return the existing link text.
+     * Otherwise, use just the selected text.
+     * @param editor the editor instance.
+     */
+    getSelectedLinkText (editor) {
+      const { view, state } = editor;
       const { from, to } = view.state.selection;
       const text = state.doc.textBetween(from, to, '');
       const linkNode = this.editor.state.doc.nodeAt(from);
       if (linkNode && linkNode.marks?.at(0)?.type?.name === 'link') {
-        linkText = linkNode.textContent;
+        return linkNode.textContent;
       } else {
-        linkText = text;
+        return text;
       }
+    },
+
+    editLink () {
+      const linkText = this.getSelectedLinkText(this.editor);
 
       const link = {
         href: this.editor.getAttributes('link').href,
@@ -799,6 +813,10 @@ export default {
           return;
         }
         this.triggerInputChangeEvents();
+      });
+
+      this.editor.on('selectionUpdate', ({ editor }) => {
+        this.$emit('selected', this.getSelectedLinkText(editor));
       });
 
       // The editor is focused.
