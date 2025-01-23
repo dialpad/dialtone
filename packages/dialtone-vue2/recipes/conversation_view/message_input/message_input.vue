@@ -11,247 +11,31 @@
   >
     <!-- @slot Renders above the input, but still within the borders. -->
     <slot name="top" />
-    <dt-stack
+    <dt-recipe-message-input-topbar
       v-if="richText"
-      direction="row"
-      gap="200"
-      class="d-recipe-message-input__button-stack"
+      :bold-button-options="boldButtonOptions"
+      :italic-button-options="italicButtonOptions"
+      :strike-button-options="strikeButtonOptions"
+      :bullet-list-button-options="bulletListButtonOptions"
+      :ordered-list-button-options="orderedListButtonOptions"
+      :block-quote-button-options="blockQuoteButtonOptions"
+      :code-button-options="codeButtonOptions"
+      :code-block-button-options="codeBlockButtonOptions"
+      :is-selection-active="isSelectionActive"
+      @click="handleTopbarClick"
     >
-      <dt-recipe-message-input-button
-        :aria-label="boldButtonOptions.ariaLabel"
-        :tooltip-text="boldButtonOptions.tooltipText"
-        :keyboard-shortcut-text="boldButtonOptions.keyboardShortcutText"
-        data-qa="bold"
-        :is-active="isSelectionActive('bold')"
-        @click="$refs.richTextEditor?.editor?.chain().focus().toggleBold().run()"
-      >
-        <template #icon>
-          <dt-icon-bold
-            class="d-recipe-message-input__button-stack-icon"
-            size="200"
-          />
-        </template>
-      </dt-recipe-message-input-button>
-
-      <dt-recipe-message-input-button
-        :aria-label="italicButtonOptions.ariaLabel"
-        :tooltip-text="italicButtonOptions.tooltipText"
-        :keyboard-shortcut-text="italicButtonOptions.keyboardShortcutText"
-        data-qa="italic"
-        :is-active="isSelectionActive('italic')"
-        @click="$refs.richTextEditor?.editor?.chain().focus().toggleItalic().run()"
-      >
-        <template #icon>
-          <dt-icon-italic
-            class="d-recipe-message-input__button-stack-icon"
-            size="200"
-          />
-        </template>
-      </dt-recipe-message-input-button>
-
-      <dt-recipe-message-input-button
-        :aria-label="strikeButtonOptions.ariaLabel"
-        :tooltip-text="strikeButtonOptions.tooltipText"
-        :keyboard-shortcut-text="strikeButtonOptions.keyboardShortcutText"
-        data-qa="strikethrough"
-        :is-active="isSelectionActive('strike')"
-        @click="$refs.richTextEditor?.editor?.chain().focus().toggleStrike().run()"
-      >
-        <template #icon>
-          <dt-icon-strikethrough
-            class="d-recipe-message-input__button-stack-icon"
-            size="200"
-          />
-        </template>
-      </dt-recipe-message-input-button>
-      <div class="d-recipe-message-input--button-group-divider" />
-      <dt-popover
-        :open.sync="showLinkInput"
-        placement="bottom-start"
-        content-class="d-recipe-message-input__link-popover"
-        :visually-hidden-close="true"
-        :visually-hidden-close-label="'Close link input popover'"
-        data-qa="dt-editor-link-input-popover"
-        :show-close-button="false"
-        @click="onInputFocus"
-        @click.native.stop="onInputFocus"
-      >
-        <template #anchor>
-          <dt-recipe-message-input-button
-            :aria-label="linkButtonOptions.ariaLabel"
-            :tooltip-text="linkButtonOptions.tooltipText"
-            :keyboard-shortcut-text="linkButtonOptions.keyboardShortcutText"
-            data-qa="link"
-            :is-active="isSelectionActive('link')"
-            @click="linkButton.onClick()"
-          >
-            <template #icon>
-              <dt-icon-link2
-                class="d-recipe-message-input__button-stack-icon"
-                size="200"
-              />
-            </template>
-          </dt-recipe-message-input-button>
-        </template>
-
-        <template #content>
-          <dt-stack gap="500">
-            <div
-              v-if="showAddLink.setLinkTitle.length > 0"
-              class="d-recipe-message-input__link-dialog-title"
-            >
-              {{ showAddLink.setLinkTitle }}
-            </div>
-            <dt-input
-              v-model="linkText"
-              input-aria-label=""
-              size="xs"
-              data-qa="dt-editor-link-text-input"
-              label="Text to display (optional)"
-              input-wrapper-class="d-bgc-secondary d-mt6 d-bar5 d-ba d-baw1 d-bc-default d-py2 d-ol-none"
-              @click="onInputFocus"
-              @click.native.stop="onInputFocus"
-              @focus="onInputFocus"
-              @keydown.enter="setLink"
-            />
-            <dt-input
-              v-model="linkInput"
-              :input-aria-label="showAddLink.setLinkInputAriaLabel"
-              size="xs"
-              data-qa="dt-editor-link-input"
-              :placeholder="setLinkPlaceholder"
-              label="Link"
-              input-wrapper-class="d-bgc-secondary d-mt6 d-bar5 d-ba d-baw1 d-bc-default d-py2 d-ol-none"
-              @click="onInputFocus"
-              @click.native.stop="onInputFocus"
-              @focus="onInputFocus"
-              @keydown.enter="setLink"
-            />
-            <dt-stack
-              direction="row"
-              class="d-recipe-message-input__link-dialog-buttons"
-            >
-              <dt-button
-                :aria-label="removeLinkButton.ariaLabel"
-                importance="clear"
-                kind="danger"
-                size="md"
-                data-qa="dt-editor-remove-link-btn"
-                @click="removeLink"
-              >
-                {{ removeLinkButton.label }}
-              </dt-button>
-              <dt-stack
-                direction="row"
-                gap="400"
-              >
-                <dt-button
-                  :aria-label="cancelSetLinkButton.ariaLabel"
-                  importance="clear"
-                  kind="muted"
-                  size="md"
-                  data-qa="dt-editor-set-link-cancel-btn"
-                  @click="closeLinkInput"
-                >
-                  {{ cancelSetLinkButton.label }}
-                </dt-button>
-                <dt-button
-                  size="md"
-                  :aria-label="confirmSetLinkButton.ariaLabel"
-                  data-qa="dt-editor-set-link-confirm-btn"
-                  @click="setLink"
-                >
-                  {{ confirmSetLinkButton.label }}
-                </dt-button>
-              </dt-stack>
-            </dt-stack>
-          </dt-stack>
-        </template>
-      </dt-popover>
-
-      <div class="d-recipe-message-input--button-group-divider" />
-
-      <dt-recipe-message-input-button
-        :aria-label="bulletListButtonOptions.ariaLabel"
-        :tooltip-text="bulletListButtonOptions.tooltipText"
-        :keyboard-shortcut-text="bulletListButtonOptions.keyboardShortcutText"
-        data-qa="bullet-list"
-        :is-active="isSelectionActive('bulletList')"
-        @click="$refs.richTextEditor?.editor?.chain().focus().toggleBulletList().run()"
-      >
-        <template #icon>
-          <dt-icon-list-bullet
-            class="d-recipe-message-input__button-stack-icon"
-            size="200"
-          />
-        </template>
-      </dt-recipe-message-input-button>
-
-      <dt-recipe-message-input-button
-        :aria-label="orderedListButtonOptions.ariaLabel"
-        :tooltip-text="orderedListButtonOptions.tooltipText"
-        :keyboard-shortcut-text="orderedListButtonOptions.keyboardShortcutText"
-        data-qa="ordered-list"
-        :is-active="isSelectionActive('orderedList')"
-        @click="$refs.richTextEditor?.editor?.chain().focus().toggleOrderedList().run()"
-      >
-        <template #icon>
-          <dt-icon-list-ordered
-            class="d-recipe-message-input__button-stack-icon"
-            size="200"
-          />
-        </template>
-      </dt-recipe-message-input-button>
-      <div class="d-recipe-message-input--button-group-divider" />
-      <dt-recipe-message-input-button
-        :aria-label="blockQuoteButtonOptions.ariaLabel"
-        :tooltip-text="blockQuoteButtonOptions.tooltipText"
-        :keyboard-shortcut-text="blockQuoteButtonOptions.keyboardShortcutText"
-        data-qa="blockquote"
-        :is-active="isSelectionActive('blockquote')"
-        @click="$refs.richTextEditor?.editor?.chain().focus().toggleBlockquote().run()"
-      >
-        <template #icon>
-          <dt-icon-quote
-            class="d-recipe-message-input__button-stack-icon"
-            size="200"
-          />
-        </template>
-      </dt-recipe-message-input-button>
-
-      <div class="d-recipe-message-input--button-group-divider" />
-
-      <dt-recipe-message-input-button
-        :aria-label="codeButtonOptions.ariaLabel"
-        :tooltip-text="codeButtonOptions.tooltipText"
-        :keyboard-shortcut-text="codeButtonOptions.keyboardShortcutText"
-        data-qa="code"
-        :is-active="isSelectionActive('code')"
-        @click="$refs.richTextEditor?.editor?.chain().focus().toggleCode().run()"
-      >
-        <template #icon>
-          <dt-icon-code
-            class="d-recipe-message-input__button-stack-icon"
-            size="200"
-          />
-        </template>
-      </dt-recipe-message-input-button>
-      <dt-recipe-message-input-button
-        :aria-label="codeBlockButtonOptions.ariaLabel"
-        :tooltip-text="codeBlockButtonOptions.tooltipText"
-        :keyboard-shortcut-text="codeBlockButtonOptions.keyboardShortcutText"
-        data-qa="code-block"
-        :is-active="isSelectionActive('codeBlock')"
-        @click="$refs.richTextEditor?.editor?.chain().focus().toggleCodeBlock().run()"
-      >
-        <template #icon>
-          <dt-icon-code-block
-            class="d-recipe-message-input__button-stack-icon"
-            size="200"
-          />
-        </template>
-      </dt-recipe-message-input-button>
-    </dt-stack>
+      <template #link>
+        <dt-recipe-message-input-link
+          ref="link"
+          :open="linkDialogOpen"
+          :link-button-options="linkButtonOptions"
+          :is-selection-active="isSelectionActive"
+          @opened="linkDialogOpened"
+          @set-link="setLink"
+          @remove-link="removeLink"
+        />
+      </template>
+    </dt-recipe-message-input-topbar>
     <!-- Some wrapper to restrict the height and show the scrollbar -->
     <div
       v-dt-scrollbar
@@ -286,7 +70,8 @@
         @input="onInput"
         @text-input="onTextInput"
         @enter="onSend"
-        @edit-link="handleEditLinkInput"
+        @selected="selectedText = $event"
+        @edit-link="initLinkDialog"
         @focus="isFocused = true"
         @blur="isFocused = false"
         v-on="$listeners"
@@ -333,7 +118,7 @@
           />
           <dt-popover
             v-if="showEmojiPicker"
-            v-model:open="emojiPickerOpened"
+            open.sync="emojiPickerOpened"
             data-qa="dt-recipe-message-input-emoji-picker-popover"
             initial-focus-element="#searchInput"
             padding="none"
@@ -489,10 +274,9 @@ import { DtTooltip } from '@/components/tooltip';
 import { DtStack } from '@/components/stack';
 import {
   DtIconImage, DtIconVerySatisfied, DtIconSatisfied, DtIconSend,
-  DtIconLink2, DtIconListBullet, DtIconBold, DtIconItalic, DtIconStrikethrough,
-  DtIconListOrdered, DtIconQuote, DtIconCode, DtIconCodeBlock,
 } from '@dialpad/dialtone-icons/vue2';
-import DtRecipeMessageInputButton from './message_input_button.vue';
+import DtRecipeMessageInputTopbar from './message_input_topbar.vue';
+import DtRecipeMessageInputLink from './message_input_link.vue';
 
 import {
   EDITOR_SUPPORTED_LINK_PROTOCOLS,
@@ -507,7 +291,8 @@ export default {
     DtEmojiPicker,
     DtInput,
     DtPopover,
-    DtIconListBullet,
+    DtRecipeMessageInputTopbar,
+    DtRecipeMessageInputLink,
     DtRichTextEditor,
     DtTooltip,
     DtStack,
@@ -515,15 +300,6 @@ export default {
     DtIconVerySatisfied,
     DtIconSatisfied,
     DtIconSend,
-    DtIconBold,
-    DtIconItalic,
-    DtIconStrikethrough,
-    DtIconListOrdered,
-    DtIconQuote,
-    DtIconCode,
-    DtIconLink2,
-    DtIconCodeBlock,
-    DtRecipeMessageInputButton,
   },
 
   mixins: [],
@@ -826,6 +602,14 @@ export default {
         tooltipText: 'Link',
         // TODO: implement mod k
         keyboardShortcutText: 'Mod + K',
+        dialogTitle: 'Add a link',
+        textLabel: 'Text to display (optional)',
+        linkLabel: 'Link',
+        linkPlaceholder: 'e.g. https://www.dialpad.com',
+        removeLabel: 'Remove',
+        cancelLabel: 'Cancel',
+        confirmLabel: 'Done',
+        visuallyHiddenCloseText: 'Close link dialog',
       }),
     },
 
@@ -901,50 +685,6 @@ export default {
         ariaLabel: 'Toggle code block on selected text',
         tooltipText: 'Code block',
         keyboardShortcutText: 'Mod + Alt + C',
-      }),
-    },
-
-    /**
-     * Confirm set link button defaults.
-     */
-    confirmSetLinkButton: {
-      type: Object,
-      default: () => ({ label: 'Done', ariaLabel: 'Confirm link' }),
-    },
-
-    /**
-     * Remove link button defaults.
-     */
-    removeLinkButton: {
-      type: Object,
-      default: () => ({ label: 'Remove', ariaLabel: 'Remove link' }),
-    },
-
-    /**
-     * Cancel set link button defaults.
-     */
-    cancelSetLinkButton: {
-      type: Object,
-      default: () => ({ label: 'Cancel', ariaLabel: 'Cancel' }),
-    },
-
-    /**
-     * Placeholder text for the set link input field
-     */
-    setLinkPlaceholder: {
-      type: String,
-      default: '',
-    },
-
-    /**
-     * Show add link default config.
-     */
-    showAddLink: {
-      type: Object,
-      default: () => ({
-        showAddLinkButton: true,
-        setLinkTitle: 'Add a link',
-        setLinkInputAriaLabel: 'Input field to add link',
       }),
     },
   },
@@ -1045,18 +785,14 @@ export default {
         class: 'd-link d-c-text d-d-inline-block',
       },
 
+      linkDialogOpen: false,
+      selectedText: '',
       text: '',
-      linkText: '',
-      showLinkInput: false,
-      linkInput: '',
       hideLinkBubbleMenu: false,
     };
   },
 
   computed: {
-    linkButton () {
-      return { showBtn: this.showAddLink.showAddLinkButton, selector: 'link', icon: DtIconLink2, dataQA: 'dt-editor-add-link-btn', tooltipMessage: 'Link', onClick: this.openLinkInput };
-    },
 
     showSendIcon () {
       return !this.showSend.text;
@@ -1116,6 +852,46 @@ export default {
   },
 
   methods: {
+    linkDialogOpened (value) {
+      this.linkDialogOpen = value;
+      if (value === true) {
+        this.initLinkDialog();
+      } else {
+        this.hideLinkBubbleMenu = false;
+        this.$refs.richTextEditor?.focusEditor();
+      }
+    },
+
+    // eslint-disable-next-line complexity
+    handleTopbarClick (type) {
+      switch (type) {
+        case 'bold':
+          this.$refs.richTextEditor?.editor?.chain().focus().toggleBold().run();
+          break;
+        case 'italic':
+          this.$refs.richTextEditor?.editor?.chain().focus().toggleItalic().run();
+          break;
+        case 'strike':
+          this.$refs.richTextEditor?.editor?.chain().focus().toggleStrike().run();
+          break;
+        case 'bulletList':
+          this.$refs.richTextEditor?.editor?.chain().focus().toggleBulletList().run();
+          break;
+        case 'orderedList':
+          this.$refs.richTextEditor?.editor?.chain().focus().toggleOrderedList().run();
+          break;
+        case 'blockquote':
+          this.$refs.richTextEditor?.editor?.chain().focus().toggleBlockquote().run();
+          break;
+        case 'code':
+          this.$refs.richTextEditor?.editor?.chain().focus().toggleCode().run();
+          break;
+        case 'codeBlock':
+          this.$refs.richTextEditor?.editor?.chain().focus().toggleCodeBlock().run();
+          break;
+      }
+    },
+
     // Checks if the node currently selected is active ex/ the bold button is active if the selected text is bold
     isSelectionActive (type) {
       if (['bulletList', 'orderedList'].includes(type)) {
@@ -1124,50 +900,23 @@ export default {
       return this.$refs.richTextEditor?.editor?.isActive(type) && this.isFocused;
     },
 
-    onInputFocus (event) {
-      event?.stopPropagation();
-    },
-
-    openLinkInput () {
-      this.$refs.richTextEditor?.editLink();
-    },
-
-    handleEditLinkInput (event) {
+    initLinkDialog () {
+      this.$refs.link.setInitialValues(this.selectedText, this.$refs.richTextEditor?.editor?.getAttributes('link')?.href);
       this.hideLinkBubbleMenu = true;
-      this.showLinkInput = true;
-      this.linkInput = event.href;
-      this.linkText = event.text;
+      this.linkDialogOpen = true;
     },
 
     removeLink () {
       this.$refs.richTextEditor?.removeLink();
-      this.closeLinkInput();
+      this.linkDialogOpen = false;
     },
 
-    closeLinkInput () {
-      this.showLinkInput = false;
-      this.hideLinkBubbleMenu = false;
-      this.linkInput = '';
-      this.linkText = '';
-      // this.$refs.richTextEditor.editor?.chain().focus();
-    },
-
-    setLink (event) {
-      event?.preventDefault();
-      event?.stopPropagation();
+    setLink (linkText, linkInput) {
       this.$refs.richTextEditor.setLink(
-        this.linkInput, this.linkText, this.linkOptions, EDITOR_SUPPORTED_LINK_PROTOCOLS, EDITOR_DEFAULT_LINK_PREFIX,
+        linkInput, linkText, this.linkOptions, EDITOR_SUPPORTED_LINK_PROTOCOLS, EDITOR_DEFAULT_LINK_PREFIX,
       );
-
-      this.closeLinkInput();
+      this.linkDialogOpen = false;
     },
-
-    // updateInput (openedInput) {
-    //   if (!openedInput) {
-    //     return this.closeLinkInput();
-    //   }
-    //   this.linkInput = this.$refs.richTextEditor?.editor?.getAttributes('link')?.href;
-    // },
 
     // Mousedown instead of click because it fires before the blur event.
     onMousedown (e) {
