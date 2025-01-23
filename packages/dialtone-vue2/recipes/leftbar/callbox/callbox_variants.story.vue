@@ -326,7 +326,7 @@
       </template>
       <template #bottom>
         <dt-item-layout
-          class="d-px8"
+          class="d-py4 d-px8"
           unstyled
         >
           <template #default>
