@@ -126,7 +126,7 @@ describe('DtFeedItemRow tests', () => {
         propsData = {
           ...basePropsData,
           showHeader: true,
-          avatarImageUrl: 'https://i1.sndcdn.com/avatars-000181324408-652e57-t500x500.jpg',
+          avatarImageUrl: '/avatar1.png',
         };
         _mountWrapper();
         _setChildWrappers();
