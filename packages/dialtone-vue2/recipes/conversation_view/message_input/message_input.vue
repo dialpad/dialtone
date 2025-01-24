@@ -416,7 +416,7 @@ export default {
     },
 
     /**
-     * Enable character Limit warning
+     * Enable character Limit warning.
      */
     showCharacterLimit: {
       type: [Boolean, Object],
