@@ -18,6 +18,7 @@
       v-if="isDefaultType"
       unstyled
       class="d-list-item__wrapper"
+      title-class="d-list-item__title"
       subtitle-class="d-list-item__subtitle"
       left-class="d-list-item__left"
       right-class="d-list-item__right"
