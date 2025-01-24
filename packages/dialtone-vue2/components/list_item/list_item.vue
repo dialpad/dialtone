@@ -2,19 +2,27 @@
   <component
     :is="elementType"
     :id="id"
-    :class="['d-list-item', {
-      'd-list-item--focusable': isFocusable,
-      'd-list-item--highlighted': isHighlighted,
-      'd-list-item--static': !isHoverable,
-    }]"
+    :class="[
+      'd-list-item',
+      {
+        'd-list-item--focusable': isFocusable,
+        'd-list-item--highlighted': isHighlighted,
+        'd-list-item--static': !isHoverable,
+      }]"
     :tabindex="isFocusable ? 0 : -1"
     :role="role"
     :aria-selected="role === 'listitem' ? undefined : isHighlighted"
     v-on="listItemListeners"
   >
-    <component
-      :is="listItemType"
-      v-if="listItemType"
+    <dt-item-layout
+      v-if="isDefaultType"
+      unstyled
+      class="d-list-item__wrapper"
+      subtitle-class="d-list-item__subtitle"
+      left-class="d-list-item__left"
+      right-class="d-list-item__right"
+      selected-class="d-list-item__selected"
+      bottom-class="d-list-item__bottom"
     >
       <template
         v-for="(_, slotName) in $slots"
@@ -27,12 +35,9 @@
         v-if="selected"
         #selected
       >
-        <dt-icon-check
-          size="400"
-          class="d-list-item--selected-icon"
-        />
+        <dt-icon-check size="400" />
       </template>
-    </component>
+    </dt-item-layout>
     <!-- @slot slot for the main content -->
     <slot v-else />
   </component>
@@ -168,13 +173,9 @@ export default {
   },
 
   computed: {
-    listItemType () {
-      switch (this.type) {
-        case LIST_ITEM_TYPES.DEFAULT:
-          return DtItemLayout;
-        default:
-          return null;
-      }
+    isDefaultType () {
+      if (this.type === LIST_ITEM_TYPES.DEFAULT) return true;
+      return false;
     },
 
     listItemListeners () {
