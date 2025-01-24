@@ -67,7 +67,7 @@
 
 .d-item-layout--custom {
   display: grid;
-  grid-auto-columns: minmax(0, max-content) 1fr minmax(0, max-content);
+  grid-auto-columns: minmax(0, max-content) 1fr minmax(0, max-content) minmax(0, max-content);
 
   > .d-item-layout--left {
     grid-area: 1/1;
@@ -76,7 +76,7 @@
   > .d-item-layout--content {
     display: grid;
     grid-area: 1/2;
-    grid-auto-rows: repeat(3, 1fr);
+    grid-auto-rows: minmax(0, max-content);
 
     > .d-item-layout--title {
       grid-area: 1/1;
