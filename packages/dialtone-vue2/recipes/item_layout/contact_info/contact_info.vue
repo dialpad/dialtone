@@ -3,6 +3,8 @@
     :role="role"
     data-qa="contact-info"
     class="d-recipe-contact-info"
+    content-class="d-recipe-contact-info__content"
+    right-class="d-recipe-contact-info__right"
     unstyled
   >
     <template
@@ -107,10 +109,7 @@
       v-if="$slots.right"
       #right
     >
-      <div
-        class="d-recipe-contact-info__right"
-        data-qa="contact-info-right"
-      >
+      <div data-qa="contact-info-right">
         <!-- @slot Slot for the right content -->
         <slot name="right" />
       </div>
