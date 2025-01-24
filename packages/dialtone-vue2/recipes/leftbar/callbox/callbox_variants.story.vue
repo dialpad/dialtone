@@ -327,13 +327,13 @@
       <template #bottom>
         <dt-item-layout
           class="d-py4 d-px8"
+          content-class="d-ac-center"
           unstyled
         >
           <template #default>
             <dt-stack
               direction="row"
               gap="400"
-              class="d-ai-center d-h100p"
             >
               <dt-icon-share-screen size="400" />
               <span class="d-fs-100">Sharing screen</span>
