@@ -1,3 +1,10 @@
+# [4.33.0](https://github.com/dialpad/dialtone/compare/dialtone-icons/v4.32.0...dialtone-icons/v4.33.0) (2025-01-27)
+
+
+### Features
+
+* **Illustrations:** DLT-2292 several new abstract illustrations ([#610](https://github.com/dialpad/dialtone/issues/610)) ([509ac7a](https://github.com/dialpad/dialtone/commit/509ac7a7351d77ae751aaf01b062c2d999e1c4ba))
+
 # [4.32.0](https://github.com/dialpad/dialtone/compare/dialtone-icons/v4.31.2...dialtone-icons/v4.32.0) (2024-12-14)
 
 
