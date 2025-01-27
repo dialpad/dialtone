@@ -1,3 +1,10 @@
+## [2.171.3](https://github.com/dialpad/dialtone/compare/dialtone-vue2/v2.171.2...dialtone-vue2/v2.171.3) (2025-01-27)
+
+
+### Code Refactoring
+
+* **Popover, Hovercard:** DLT-2245 separate Hovercard from Popover ([#606](https://github.com/dialpad/dialtone/issues/606)) ([d11c5e4](https://github.com/dialpad/dialtone/commit/d11c5e47a7bdde20905a2b86960b4a9df16b924f))
+
 ## [2.171.2](https://github.com/dialpad/dialtone/compare/dialtone-vue2/v2.171.1...dialtone-vue2/v2.171.2) (2025-01-15)
 
 
