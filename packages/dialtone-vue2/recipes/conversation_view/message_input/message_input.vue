@@ -874,31 +874,21 @@ export default {
 
     // eslint-disable-next-line complexity
     handleTopbarClick (type) {
-      switch (type) {
-        case 'bold':
-          this.$refs.richTextEditor?.editor?.chain().focus().toggleBold().run();
-          break;
-        case 'italic':
-          this.$refs.richTextEditor?.editor?.chain().focus().toggleItalic().run();
-          break;
-        case 'strike':
-          this.$refs.richTextEditor?.editor?.chain().focus().toggleStrike().run();
-          break;
-        case 'bulletList':
-          this.$refs.richTextEditor?.editor?.chain().focus().toggleBulletList().run();
-          break;
-        case 'orderedList':
-          this.$refs.richTextEditor?.editor?.chain().focus().toggleOrderedList().run();
-          break;
-        case 'blockquote':
-          this.$refs.richTextEditor?.editor?.chain().focus().toggleBlockquote().run();
-          break;
-        case 'code':
-          this.$refs.richTextEditor?.editor?.chain().focus().toggleCode().run();
-          break;
-        case 'codeBlock':
-          this.$refs.richTextEditor?.editor?.chain().focus().toggleCodeBlock().run();
-          break;
+      const editor = this.$refs.richTextEditor?.editor;
+      // Key is the name returned in the event, value is the name of the TipTap command function to run.
+      const typeToCommandMap = {
+        bold: () => editor?.chain().focus().toggleBold().run(),
+        italic: () => editor?.chain().focus().toggleItalic().run(),
+        strike: () => editor?.chain().focus().toggleStrike().run(),
+        bulletList: () => editor?.chain().focus().toggleBulletList().run(),
+        orderedList: () => editor?.chain().focus().toggleOrderedList().run(),
+        blockquote: () => editor?.chain().focus().toggleBlockquote().run(),
+        code: () => editor?.chain().focus().toggleCode().run(),
+        codeBlock: () => editor?.chain().focus().toggleCodeBlock().run(),
+      };
+
+      if (editor && typeToCommandMap[type]) {
+        typeToCommandMap[type]();
       }
     },
 
