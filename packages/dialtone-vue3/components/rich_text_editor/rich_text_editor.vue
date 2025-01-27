@@ -14,7 +14,8 @@
       <div class="d-popover__dialog">
         <dt-stack
           direction="row"
-          gap="200"
+          class="d-rich-text-editor-bubble-menu__button-stack"
+          gap="0"
         >
           <dt-button
             kind="muted"
