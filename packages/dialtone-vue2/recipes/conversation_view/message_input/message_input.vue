@@ -11,8 +11,11 @@
   >
     <!-- @slot Renders above the input, but still within the borders. -->
     <slot name="top" />
+
+    <!-- set key to selectedText to force update. otherwise this component may not reflect the active selection -->
     <dt-recipe-message-input-topbar
       v-if="richText"
+      :key="selectedText"
       :bold-button-options="boldButtonOptions"
       :italic-button-options="italicButtonOptions"
       :strike-button-options="strikeButtonOptions"
