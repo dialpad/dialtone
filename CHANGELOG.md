@@ -1,3 +1,20 @@
+# [9.96.0](https://github.com/dialpad/dialtone/compare/dialtone/v9.95.0...dialtone/v9.96.0) (2025-01-27)
+
+
+### Bug Fixes
+
+* **Docs:** NO-JIRA the class output in divide width docs was backwards ([#616](https://github.com/dialpad/dialtone/issues/616)) ([3f8228c](https://github.com/dialpad/dialtone/commit/3f8228cf7579062faac2a1537d7b08fecf0a0cda))
+
+
+### Code Refactoring
+
+* **Popover, Hovercard:** DLT-2245 separate Hovercard from Popover ([#606](https://github.com/dialpad/dialtone/issues/606)) ([d11c5e4](https://github.com/dialpad/dialtone/commit/d11c5e47a7bdde20905a2b86960b4a9df16b924f))
+
+
+### Features
+
+* **Illustrations:** DLT-2292 several new abstract illustrations ([#610](https://github.com/dialpad/dialtone/issues/610)) ([509ac7a](https://github.com/dialpad/dialtone/commit/509ac7a7351d77ae751aaf01b062c2d999e1c4ba))
+
 # [9.95.0](https://github.com/dialpad/dialtone/compare/dialtone/v9.94.2...dialtone/v9.95.0) (2025-01-21)
 
 
