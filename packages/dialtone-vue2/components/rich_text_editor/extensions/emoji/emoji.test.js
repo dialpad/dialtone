@@ -15,6 +15,7 @@ const baseProps = {
   inputAriaLabel: 'aria-label text',
   link: true,
   inputClass: 'qa-editor',
+  hideLinkBubbleMenu: true,
 };
 
 const getClientRectsMock = vi.fn(() => [{}]);

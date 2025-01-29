@@ -104,6 +104,24 @@ export const argTypesData = {
     },
   },
 
+  onJsonInput: {
+    table: {
+      disable: true,
+    },
+  },
+
+  onHtmlInput: {
+    table: {
+      disable: true,
+    },
+  },
+
+  onTextInput: {
+    table: {
+      disable: true,
+    },
+  },
+
   onAddMedia: {
     table: {
       disable: true,
@@ -188,6 +206,7 @@ export const argsData = {
     ],
     skinTone: 'Default',
   },
+  setLinkPlaceholder: 'e.g. https://www.dialpad.com',
   sendIcon: undefined,
   showCharacterLimit: {
     count: 1000,
@@ -205,6 +224,9 @@ export const argsData = {
   onFocus: action('focus'),
   onBlur: action('blur'),
   onInput: action('input'),
+  onJsonInput: action('json-input'),
+  onHtmlInput: action('html-input'),
+  onTextInput: action('text-input'),
   onSelectMedia: action('select-media'),
   onSelectedEmoji: action('selected-emoji'),
   onSelectedCommand: action('selected-command'),
@@ -250,13 +272,7 @@ export const InitializeWithLineBreaks = {
 export const WithoutExtensions = {
   render: (argsData) => createRenderConfig(DtRecipeMessageInput, DtRecipeMessageInputDefaultTemplate, argsData),
   args: {
-    allowBlockquote: false,
-    allowBold: false,
-    allowBulletList: false,
-    allowItalic: false,
-    allowStrike: false,
-    allowUnderline: false,
-    allowCodeblock: false,
+    richText: false,
   },
 };
 

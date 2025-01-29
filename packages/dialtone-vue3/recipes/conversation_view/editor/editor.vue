@@ -160,6 +160,7 @@
         v-model="internalInputValue"
         :allow-inline-images="true"
         :allow-line-breaks="true"
+        :hide-link-bubble-menu="true"
         :auto-focus="autoFocus"
         :editable="editable"
         :input-aria-label="inputAriaLabel"
