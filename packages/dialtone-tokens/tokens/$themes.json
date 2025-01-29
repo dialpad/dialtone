@@ -3320,7 +3320,8 @@
       "components/radio/default": "enabled",
       "components/badge/deca-light": "enabled"
     },
-    "group": "deca"
+    "group": "deca",
+    "$figmaVariableReferences": {}
   },
   {
     "id": "0372d8ab03e30b812857cd98434cdeb10d8db3a9",
@@ -3684,7 +3685,8 @@
       "components/radio/default": "enabled",
       "semantic/dp/default": "enabled"
     },
-    "group": "expressive"
+    "group": "expressive",
+    "$figmaVariableReferences": {}
   },
   {
     "id": "2dd8e572ffd0fc521451be9a41df23182a10d6e6",
@@ -3703,7 +3705,8 @@
       "components/icon/default": "enabled",
       "components/radio/default": "enabled"
     },
-    "group": "expressive"
+    "group": "expressive",
+    "$figmaVariableReferences": {}
   },
   {
     "id": "a7705a1017f866e6d26c86e483eea649824498cf",
@@ -3721,7 +3724,8 @@
       "components/radio/default": "enabled",
       "semantic/expressive/default": "enabled"
     },
-    "group": "expressive-sm"
+    "group": "expressive-sm",
+    "$figmaVariableReferences": {}
   },
   {
     "id": "b44842943a6314033f32e041ab17daf7d52c7c7a",
@@ -3741,7 +3745,8 @@
       "components/radio/default": "enabled",
       "semantic/expressive/default": "enabled"
     },
-    "group": "expressive-sm"
+    "group": "expressive-sm",
+    "$figmaVariableReferences": {}
   },
   {
     "id": "2f63bc06422150ef708aff75020998ea70824c62",
@@ -3811,7 +3816,8 @@
       "root": "enabled",
       "base/default": "enabled"
     },
-    "group": "base"
+    "group": "base",
+    "$figmaVariableReferences": {}
   },
   {
     "id": "ae20a00dfcb0ef5937057144425831ea08531d09",
@@ -3882,7 +3888,8 @@
       "base/default": "enabled",
       "base/dark": "enabled"
     },
-    "group": "base"
+    "group": "base",
+    "$figmaVariableReferences": {}
   },
   {
     "id": "73b15ac7174751c847eb7ee2a17d745bc8ddd1b9",
@@ -3893,7 +3900,8 @@
       "base/default": "enabled",
       "base/deca": "enabled"
     },
-    "group": "base"
+    "group": "base",
+    "$figmaVariableReferences": {}
   },
   {
     "id": "a1d802456db91e0aefe01a3e8d20140eec66a8dc",
@@ -3919,7 +3927,8 @@
       "components/badge/deca-dark": "enabled",
       "components/badge/deca-light": "enabled"
     },
-    "group": "deca"
+    "group": "deca",
+    "$figmaVariableReferences": {}
   },
   {
     "id": "fdce22368bfb59c90332b0e7471cd04e1eb8ea9f",
@@ -3932,6 +3941,7 @@
       "base/deca": "enabled",
       "base/deca-dark": "enabled"
     },
-    "group": "base"
+    "group": "base",
+    "$figmaVariableReferences": {}
   }
 ]

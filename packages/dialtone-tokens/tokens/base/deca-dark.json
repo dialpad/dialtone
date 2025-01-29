@@ -349,12 +349,6 @@
         "value": "#FFF8F7",
         "type": "color"
       }
-    },
-    "brand": {
-      "purple": {
-        "value": "{color.purple.425}",
-        "type": "color"
-      }
     }
   }
 }
