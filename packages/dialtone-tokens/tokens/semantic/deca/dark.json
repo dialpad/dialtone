@@ -418,30 +418,12 @@
         "type": "color"
       },
       "secondary-inverted": {
-        "value": "{color.black.100}",
-        "type": "color",
-        "$extensions": {
-          "studio.tokens": {
-            "modify": {
-              "type": "lighten",
-              "value": ".1",
-              "space": "hsl"
-            }
-          }
-        }
+        "value": "{color.black.300}",
+        "type": "color"
       },
       "tertiary-inverted": {
-        "value": "{color.black.100}",
-        "type": "color",
-        "$extensions": {
-          "studio.tokens": {
-            "modify": {
-              "type": "lighten",
-              "value": ".2",
-              "space": "hsl"
-            }
-          }
-        }
+        "value": "{color.black.400}",
+        "type": "color"
       }
     }
   },
