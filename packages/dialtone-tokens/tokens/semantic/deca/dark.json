@@ -31,7 +31,7 @@
         "type": "color"
       },
       "contrast": {
-        "value": "{color.black.900}",
+        "value": "{color.black.1000}",
         "type": "color"
       },
       "critical-strong": {
@@ -394,6 +394,14 @@
       "warning-hover": {
         "value": "{color.gold.500}",
         "type": "color"
+      },
+      "primary-inverted": {
+        "value": "{color.purple.425}",
+        "type": "color"
+      },
+      "primary-inverted-hover": {
+        "value": "{color.purple.350}",
+        "type": "color"
       }
     },
     "foreground": {
@@ -423,6 +431,26 @@
       },
       "tertiary-inverted": {
         "value": "{color.black.400}",
+        "type": "color"
+      },
+      "critical-inverted": {
+        "value": "{color.red.325}",
+        "type": "color"
+      },
+      "critical-strong-inverted": {
+        "value": "{color.red.300}",
+        "type": "color"
+      },
+      "success-inverted": {
+        "value": "{color.green.200}",
+        "type": "color"
+      },
+      "success-strong-inverted": {
+        "value": "{color.green.150}",
+        "type": "color"
+      },
+      "warning-inverted": {
+        "value": "{color.gold.200}",
         "type": "color"
       }
     }
