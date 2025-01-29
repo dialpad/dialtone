@@ -713,7 +713,7 @@
         "type": "color"
       },
       "critical-inverted": {
-        "value": "{color.red.200}",
+        "value": "{color.red.400}",
         "type": "color"
       },
       "critical-strong-inverted": {
