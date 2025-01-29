@@ -297,20 +297,6 @@
         "value": "#FFE5E6",
         "type": "color"
       }
-    },
-    "brand": {
-      "purple": {
-        "value": "#7C52FF",
-        "type": "color"
-      },
-      "magenta": {
-        "value": "#FF1BA4",
-        "type": "color"
-      },
-      "gold": {
-        "value": "#FF9E0E",
-        "type": "color"
-      }
     }
   }
 }
