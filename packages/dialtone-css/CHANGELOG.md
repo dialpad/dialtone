@@ -1,3 +1,10 @@
+# [8.49.0](https://github.com/dialpad/dialtone/compare/dialtone-css/v8.48.0...dialtone-css/v8.49.0) (2025-01-29)
+
+
+### Features
+
+* DLT-2291 add rich text formatting ([#593](https://github.com/dialpad/dialtone/issues/593)) ([abb9501](https://github.com/dialpad/dialtone/commit/abb9501857696e02169b3408291af9564f6ebd12))
+
 # [8.48.0](https://github.com/dialpad/dialtone/compare/dialtone-css/v8.47.0...dialtone-css/v8.48.0) (2025-01-21)
 
 
