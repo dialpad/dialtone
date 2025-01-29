@@ -1511,15 +1511,15 @@
       "color": {
         "background": {
           "available": {
-            "value": "{color.green.325}",
+            "value": "{color.green.400}",
             "type": "color"
           },
           "busy-unavailable": {
-            "value": "{color.red.275}",
+            "value": "{color.red.300}",
             "type": "color"
           },
           "busy": {
-            "value": "{color.gold.200}",
+            "value": "{color.gold.300}",
             "type": "color"
           },
           "offline": {
