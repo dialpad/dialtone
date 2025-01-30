@@ -585,51 +585,6 @@
       }
     }
   },
-  "inputs": {
-    "color": {
-      "background": {
-        "default": {
-          "value": "{color.black.900}",
-          "type": "color",
-          "$extensions": {
-            "studio.tokens": {
-              "modify": {
-                "type": "alpha",
-                "value": ".06",
-                "space": "hsl"
-              }
-            }
-          }
-        },
-        "focus": {
-          "value": "{color.black.900}",
-          "type": "color",
-          "$extensions": {
-            "studio.tokens": {
-              "modify": {
-                "type": "alpha",
-                "value": ".03",
-                "space": "hsl"
-              }
-            }
-          }
-        },
-        "disabled": {
-          "value": "{color.black.900}",
-          "type": "color",
-          "$extensions": {
-            "studio.tokens": {
-              "modify": {
-                "type": "alpha",
-                "value": ".15",
-                "space": "hsl"
-              }
-            }
-          }
-        }
-      }
-    }
-  },
   "theme": {
     "topbar": {
       "field": {
