@@ -803,6 +803,14 @@
               "type": "color"
             }
           }
+        },
+        "critical": {
+          "primary": {
+            "default": {
+              "value": "{color.neutral.black}",
+              "type": "color"
+            }
+          }
         }
       }
     }
