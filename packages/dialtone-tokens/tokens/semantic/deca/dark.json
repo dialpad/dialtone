@@ -743,11 +743,11 @@
         },
         "muted": {
           "hover": {
-            "value": "{color.surface.secondary-opaque}",
+            "value": "{color.surface.moderate-opaque}",
             "type": "color"
           },
           "active": {
-            "value": "{color.surface.moderate-opaque}",
+            "value": "{color.surface.bold-opaque}",
             "type": "color"
           }
         }
