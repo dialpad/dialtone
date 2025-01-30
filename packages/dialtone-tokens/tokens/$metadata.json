@@ -23,7 +23,9 @@
     "components/button/default",
     "components/button/deca-light",
     "components/checkbox/default",
+    "components/checkbox/deca-light",
     "components/icon/default",
-    "components/radio/default"
+    "components/radio/default",
+    "components/radio/deca-light"
   ]
 }

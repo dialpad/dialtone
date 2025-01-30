@@ -1,0 +1,12 @@
+{
+  "checkbox": {
+    "color": {
+      "background": {
+        "checked": {
+          "value": "{color.surface.brand-strong}",
+          "type": "color"
+        }
+      }
+    }
+  }
+}
