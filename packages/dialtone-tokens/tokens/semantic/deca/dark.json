@@ -745,11 +745,11 @@
               "type": "color"
             },
             "hover": {
-              "value": "{color.red.375}",
+              "value": "{color.red.450}",
               "type": "color"
             },
             "active": {
-              "value": "{color.red.325}",
+              "value": "{color.red.500}",
               "type": "color"
             }
           }
