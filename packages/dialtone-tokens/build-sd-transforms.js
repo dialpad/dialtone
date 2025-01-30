@@ -135,7 +135,7 @@ export async function run () {
         android_xml: {
           transforms: ['attribute/cti', 'name/snake', 'dt/android/xml/size/resolveMath', 'dt/android/xml/color', 'dt/android/xml/size/pxToDp'],
           actions: ['buildDocJson'],
-          prefix: 'dt_',
+          prefix: `dt_${themeName}`,
           theme: themeName,
           buildPath: 'dist/android/res/values/',
           files: [
