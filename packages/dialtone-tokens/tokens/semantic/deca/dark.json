@@ -785,6 +785,16 @@
               "type": "color"
             }
           }
+        },
+        "muted": {
+          "hover": {
+            "value": "{color.surface.secondary-opaque}",
+            "type": "color"
+          },
+          "active": {
+            "value": "{color.surface.moderate-opaque}",
+            "type": "color"
+          }
         }
       },
       "foreground": {
