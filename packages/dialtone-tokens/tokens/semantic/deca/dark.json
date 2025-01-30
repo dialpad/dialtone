@@ -412,7 +412,7 @@
         }
       },
       "critical": {
-        "value": "{color.red.400}",
+        "value": "{color.red.450}",
         "type": "color"
       },
       "critical-subtle": {
@@ -731,6 +731,22 @@
             "value": "{color.gold.400}",
             "type": "color"
           }
+        }
+      }
+    },
+    "mention": {
+      "color": {
+        "foreground": {
+          "value": "{color.neutral.black}",
+          "type": "color"
+        },
+        "background": {
+          "value": "{color.purple.475}",
+          "type": "color"
+        },
+        "background-strong": {
+          "value": "{color.purple.600}",
+          "type": "color"
         }
       }
     }
