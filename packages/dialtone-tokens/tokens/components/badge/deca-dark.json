@@ -16,7 +16,7 @@
           }
         },
         "bulletin": {
-          "value": "{color.black.50}",
+          "value": "{color.neutral.black}",
           "type": "color"
         }
       },
@@ -33,6 +33,12 @@
               }
             }
           }
+        }
+      },
+      "background": {
+        "bulletin": {
+          "value": "{color.purple.475}",
+          "type": "color"
         }
       }
     }
