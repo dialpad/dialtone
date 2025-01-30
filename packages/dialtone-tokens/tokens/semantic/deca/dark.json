@@ -696,12 +696,6 @@
     "color": {
       "foreground": {
         "base": {
-          "primary": {
-            "default": {
-              "value": "{color.black.50}",
-              "type": "color"
-            }
-          },
           "default": {
             "value": "{color.purple.425}",
             "type": "color"
@@ -709,14 +703,6 @@
           "hover": {
             "value": "{color.purple.475}",
             "type": "color"
-          }
-        },
-        "critical": {
-          "primary": {
-            "default": {
-              "value": "{color.black.50}",
-              "type": "color"
-            }
           }
         }
       },
@@ -745,11 +731,11 @@
             }
           },
           "hover": {
-            "value": "{color.purple.50}",
+            "value": "{color.purple.100}",
             "type": "color"
           },
           "active": {
-            "value": "{color.purple.100}",
+            "value": "{color.purple.200}",
             "type": "color"
           }
         }

@@ -331,6 +331,11 @@
         "type": "color",
         "description": "Background surface color containing messaging or elements communicated as generally informational."
       },
+      "brand": {
+        "value": "{color.purple.100}",
+        "type": "color",
+        "description": "Background surface color containing messaging or elements communicated as generally informational."
+      },
       "info-subtle": {
         "value": "{color.blue.100}",
         "type": "color",
@@ -345,8 +350,27 @@
         },
         "description": "A softer version of the default informational surface."
       },
+      "brand-subtle": {
+        "value": "{color.purple.100}",
+        "type": "color",
+        "$extensions": {
+          "studio.tokens": {
+            "modify": {
+              "type": "lighten",
+              "value": ".4",
+              "space": "hsl"
+            }
+          }
+        },
+        "description": "A softer version of the default informational surface."
+      },
       "info-strong": {
         "value": "{color.blue.400}",
+        "type": "color",
+        "description": "A contrasting informational surface, most likely paired with inverted foreground colors."
+      },
+      "brand-strong": {
+        "value": "{color.purple.400}",
         "type": "color",
         "description": "A contrasting informational surface, most likely paired with inverted foreground colors."
       },
@@ -518,6 +542,20 @@
         },
         "description": "Info surface as opaque background color."
       },
+      "brand-opaque": {
+        "value": "{color.purple.200}",
+        "type": "color",
+        "$extensions": {
+          "studio.tokens": {
+            "modify": {
+              "type": "alpha",
+              "value": ".27",
+              "space": "hsl"
+            }
+          }
+        },
+        "description": "Info surface as opaque background color."
+      },
       "info-subtle-opaque": {
         "value": "{color.blue.100}",
         "type": "color",
@@ -526,6 +564,20 @@
             "modify": {
               "type": "alpha",
               "value": ".50",
+              "space": "hsl"
+            }
+          }
+        },
+        "description": "Info surface as opaque background color."
+      },
+      "brand-subtle-opaque": {
+        "value": "{color.purple.200}",
+        "type": "color",
+        "$extensions": {
+          "studio.tokens": {
+            "modify": {
+              "type": "alpha",
+              "value": ".20",
               "space": "hsl"
             }
           }
