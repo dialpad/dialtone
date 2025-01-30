@@ -587,16 +587,16 @@
       "backdrop": {
         "value": "{color.neutral.black}",
         "type": "color",
-        "description": "Background color for a modal-like backdrop.",
         "$extensions": {
           "studio.tokens": {
             "modify": {
               "type": "alpha",
-              "value": ".7",
+              "value": ".65",
               "space": "hsl"
             }
           }
-        }
+        },
+        "description": "Background color for a modal-like backdrop."
       }
     },
     "border": {

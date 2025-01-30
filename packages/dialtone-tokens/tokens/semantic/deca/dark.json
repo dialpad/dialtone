@@ -167,6 +167,19 @@
           }
         }
       },
+      "brand-opaque": {
+        "value": "{color.purple.200}",
+        "type": "color",
+        "$extensions": {
+          "studio.tokens": {
+            "modify": {
+              "type": "alpha",
+              "value": "0.5",
+              "space": "hsl"
+            }
+          }
+        }
+      },
       "info-subtle-opaque": {
         "value": "{color.blue.100}",
         "type": "color",
@@ -180,8 +193,34 @@
           }
         }
       },
+      "brand-subtle-opaque": {
+        "value": "{color.purple.100}",
+        "type": "color",
+        "$extensions": {
+          "studio.tokens": {
+            "modify": {
+              "type": "alpha",
+              "value": "0.5",
+              "space": "hsl"
+            }
+          }
+        }
+      },
       "info-subtle": {
         "value": "{color.blue.100}",
+        "type": "color",
+        "$extensions": {
+          "studio.tokens": {
+            "modify": {
+              "type": "darken",
+              "value": ".4",
+              "space": "hsl"
+            }
+          }
+        }
+      },
+      "brand-subtle": {
+        "value": "{color.purple.100}",
         "type": "color",
         "$extensions": {
           "studio.tokens": {
