@@ -677,15 +677,15 @@
       "color": {
         "background": {
           "available": {
-            "value": "{color.green.450}",
+            "value": "{color.green.300}",
             "type": "color"
           },
           "busy-unavailable": {
-            "value": "{color.red.350}",
+            "value": "{color.red.400}",
             "type": "color"
           },
           "busy": {
-            "value": "{color.gold.425}",
+            "value": "{color.gold.400}",
             "type": "color"
           }
         }
