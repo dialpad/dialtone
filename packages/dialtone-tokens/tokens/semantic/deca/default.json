@@ -701,7 +701,7 @@
         "type": "color"
       },
       "brand-subtle": {
-        "value": "{color.purple.250}",
+        "value": "{color.purple.300}",
         "type": "color"
       },
       "ai": {
@@ -757,7 +757,7 @@
         "type": "color"
       },
       "brand-strong-inverted": {
-        "value": "{color.purple.200}",
+        "value": "{color.purple.300}",
         "type": "color"
       }
     }

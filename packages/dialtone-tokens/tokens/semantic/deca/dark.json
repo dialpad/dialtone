@@ -392,6 +392,14 @@
         "value": "{color.green.200}",
         "type": "color"
       },
+      "success-inverted": {
+        "value": "{color.green.200}",
+        "type": "color"
+      },
+      "success-strong-inverted": {
+        "value": "{color.green.150}",
+        "type": "color"
+      },
       "success-strong": {
         "value": "{color.green.375}",
         "type": "color"
@@ -404,8 +412,20 @@
         "value": "{color.gold.600}",
         "type": "color"
       },
+      "warning-strong-inverted": {
+        "value": "{color.gold.200}",
+        "type": "color"
+      },
       "brand-strong": {
         "value": "{color.purple.600}",
+        "type": "color"
+      },
+      "brand-subtle-inverted": {
+        "value": "{color.purple.500}",
+        "type": "color"
+      },
+      "brand-strong-inverted": {
+        "value": "{color.purple.300}",
         "type": "color"
       },
       "brand-subtle": {
@@ -417,27 +437,31 @@
         "type": "color"
       },
       "critical-inverted": {
-        "value": "{color.red.275}",
+        "value": "{color.red.400}",
+        "type": "color"
+      },
+      "critical-subtle-inverted": {
+        "value": "{color.red.450}",
         "type": "color"
       },
       "warning-inverted": {
-        "value": "{color.gold.275}",
+        "value": "{color.gold.300}",
         "type": "color"
       },
       "brand-inverted": {
-        "value": "{color.purple.400}",
+        "value": "{color.purple.425}",
         "type": "color"
       },
       "critical-strong-inverted": {
-        "value": "{color.red.175}",
+        "value": "{color.red.300}",
         "type": "color"
       },
       "success-subtle-inverted": {
-        "value": "{color.green.450}",
+        "value": "{color.green.375}",
         "type": "color"
       },
       "warning-subtle-inverted": {
-        "value": "{color.gold.300}",
+        "value": "{color.gold.400}",
         "type": "color"
       },
       "focus": {
