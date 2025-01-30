@@ -21,6 +21,7 @@
     "components/badge/dark",
     "components/badge/deca-dark",
     "components/button/default",
+    "components/button/deca-light",
     "components/checkbox/default",
     "components/icon/default",
     "components/radio/default"
