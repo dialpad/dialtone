@@ -720,7 +720,7 @@
               "type": "color"
             },
             "active": {
-              "value": "{color.red.1000}",
+              "value": "{action.color.background.critical.primary.default}",
               "type": "color"
             }
           }
@@ -736,7 +736,7 @@
               "type": "color"
             },
             "active": {
-              "value": "{color.purple.600}",
+              "value": "{action.color.background.base.primary.default}",
               "type": "color"
             }
           }
@@ -749,6 +749,14 @@
           "active": {
             "value": "{color.surface.bold-opaque}",
             "type": "color"
+          }
+        },
+        "positive": {
+          "primary": {
+            "active": {
+              "value": "{action.color.background.positive.primary.default}",
+              "type": "color"
+            }
           }
         }
       },
