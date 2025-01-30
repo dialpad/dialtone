@@ -1105,7 +1105,8 @@
           "primary": {
             "default": {
               "value": "{color.green.375}",
-              "type": "color"
+              "type": "color",
+              "description": "Postive, accepting, or success actions."
             },
             "hover": {
               "value": "{color.green.400}",
