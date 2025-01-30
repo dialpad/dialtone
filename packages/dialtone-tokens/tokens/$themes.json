@@ -581,7 +581,6 @@
       "action.color.foreground.positive.active": "e08ab150baffe7330e936961b1d58d15df612608",
       "action.color.foreground.positive.primary.default": "ca9397dd8e5b810f6f33665851b6ca79ccd85948",
       "action.color.background.base.default": "456a75981525cff00e9f82437a5df69ae49373b0",
-      "action.color.background.base.hover": "8f8f7fc3eb41d61840f72da4c9f72d242285eab4",
       "action.color.background.base.active": "2045268db9f7519853244d0508991191bc4f4fb7",
       "action.color.background.base.primary.default": "5a27a7bea8db3da7be71071b24aef8b12ee1cfcd",
       "action.color.background.base.primary.hover": "0f5084ce126091dd59256b00db09c2709f58880b",
@@ -915,7 +914,8 @@
       "size.radius.500": "f2b4aa7c5400d05997c03e99fd25fe26a62a5d1c",
       "size.radius.600": "46d04dffba7c75381df14930f694d42cff3dc3b4",
       "size.radius.pill": "a5cff6e5e4ea7a476abe3c391eedda68d1ccb65b",
-      "size.radius.circle": "fc1a41298222e0031f3cfc7926f00d7c858ce930"
+      "size.radius.circle": "fc1a41298222e0031f3cfc7926f00d7c858ce930",
+      "action.color.background.base.hover": "8f8f7fc3eb41d61840f72da4c9f72d242285eab4"
     },
     "group": "dp"
   },
@@ -1399,7 +1399,6 @@
       "inputs.color.background.disabled": "69c6e5691e473b12e839984cf29ce59223c29d8f",
       "action.color.foreground.base.hover": "1f4acc69572a64f777f68eb7a8ef4213fb84a98c",
       "action.color.foreground.critical.hover": "c09937c4456539f420f7b0ca0907dea8230c5a14",
-      "action.color.background.base.hover": "8f8f7fc3eb41d61840f72da4c9f72d242285eab4",
       "action.color.background.base.active": "2045268db9f7519853244d0508991191bc4f4fb7",
       "action.color.background.critical.hover": "bf1c9719a878017f858f1310072604e38934e617",
       "action.color.background.critical.active": "cae364709dccff88423408796818e6801ba17c22",
@@ -1828,7 +1827,8 @@
       "size.radius.500": "f2b4aa7c5400d05997c03e99fd25fe26a62a5d1c",
       "size.radius.600": "46d04dffba7c75381df14930f694d42cff3dc3b4",
       "size.radius.pill": "a5cff6e5e4ea7a476abe3c391eedda68d1ccb65b",
-      "size.radius.circle": "fc1a41298222e0031f3cfc7926f00d7c858ce930"
+      "size.radius.circle": "fc1a41298222e0031f3cfc7926f00d7c858ce930",
+      "action.color.background.base.hover": "8f8f7fc3eb41d61840f72da4c9f72d242285eab4"
     },
     "group": "dp"
   },
@@ -2400,7 +2400,6 @@
       "action.color.foreground.positive.active": "f5d8c02cb18f93a50d1e367edbb676333cf605fc",
       "action.color.foreground.positive.primary.default": "4d35cae662c4677bda89ec528a32903f593cc8ca",
       "action.color.background.base.default": "e9e9a460a095ea7072d6ab91f1b49a9e436c91db",
-      "action.color.background.base.hover": "240b2027e5a4177a790e0cc194bb779bd8aceee8",
       "action.color.background.base.active": "0a60c775f7bd76d3186280c0fe68409ea5ef0092",
       "action.color.background.base.primary.default": "5d03879866b3cefdc1c524a3cf4c6fbbefd54838",
       "action.color.background.base.primary.hover": "57d9c5f207600c9ca2992f4afc4c58b4de95cab6",
@@ -2732,7 +2731,8 @@
       "size.radius.500": "590b2c5cdafcb9f81ebdbf56e85ca4647bbaa4fc",
       "size.radius.600": "116cbaed3dd6c6e6f76af2fdf7de01ac7b680eb9",
       "size.radius.pill": "d5381c1eeade0eea88d8929b56fe46fc456f85b7",
-      "size.radius.circle": "88a9f2079fe2f7496702724c11a2940a6457a02b"
+      "size.radius.circle": "88a9f2079fe2f7496702724c11a2940a6457a02b",
+      "action.color.background.base.hover": "240b2027e5a4177a790e0cc194bb779bd8aceee8"
     },
     "group": "tmo"
   },
@@ -2871,7 +2871,6 @@
       "inputs.color.background.disabled": "a083b7896c251cdfedfb53fa60ade823183e340a",
       "action.color.foreground.base.hover": "0c4f371f922c73e91d960a36f75f152d34e43b69",
       "action.color.foreground.critical.hover": "3ac9b98adc3f1d8a1774a2ae460020630221dc4f",
-      "action.color.background.base.hover": "240b2027e5a4177a790e0cc194bb779bd8aceee8",
       "action.color.background.base.active": "0a60c775f7bd76d3186280c0fe68409ea5ef0092",
       "action.color.background.critical.hover": "f7c7b0fd808ac100de86022e23febf38772eb968",
       "action.color.background.critical.active": "35a4db636b4b4daf93fbbd43483d80e8d84edd67",
@@ -3298,7 +3297,8 @@
       "size.radius.500": "590b2c5cdafcb9f81ebdbf56e85ca4647bbaa4fc",
       "size.radius.600": "116cbaed3dd6c6e6f76af2fdf7de01ac7b680eb9",
       "size.radius.pill": "d5381c1eeade0eea88d8929b56fe46fc456f85b7",
-      "size.radius.circle": "88a9f2079fe2f7496702724c11a2940a6457a02b"
+      "size.radius.circle": "88a9f2079fe2f7496702724c11a2940a6457a02b",
+      "action.color.background.base.hover": "240b2027e5a4177a790e0cc194bb779bd8aceee8"
     },
     "group": "tmo"
   },
