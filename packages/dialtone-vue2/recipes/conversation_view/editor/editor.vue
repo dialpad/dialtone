@@ -813,6 +813,10 @@ export default {
       this.$refs.richTextEditor?.editor.chain().focus().insertContent(messageContent).run();
     },
 
+    setCursorPosition (position = null) {
+      this.$refs.richTextEditor?.editor.chain().focus(position).run();
+    },
+
     onFocus (event) {
       this.hasFocus = true;
       this.$emit('focus', event);
