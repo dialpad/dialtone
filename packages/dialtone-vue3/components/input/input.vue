@@ -143,6 +143,7 @@ import { MessagesMixin } from '@/common/mixins/input';
  * @see https://dialtone.dialpad.com/components/input.html
  */
 export default {
+  compatConfig: { MODE: 3 },
   name: 'DtInput',
 
   components: { DtValidationMessages },

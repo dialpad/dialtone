@@ -19,6 +19,7 @@ import { directionValidator, gapValidator } from './validators';
 import { getDefaultDirectionClass, getResponsiveClasses, getDefaultGapClass } from './utils';
 
 export default {
+  compatConfig: { MODE: 3 },
   name: 'DtStack',
 
   props: {

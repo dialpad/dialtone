@@ -158,6 +158,7 @@ import DtRecipeLeftbarGeneralRowIcon from './leftbar_general_row_icon.vue';
 import { extractVueListeners, safeConcatStrings } from '@/common/utils';
 
 export default {
+  compatConfig: { MODE: 3 },
   name: 'DtRecipeGeneralRow',
 
   components: {

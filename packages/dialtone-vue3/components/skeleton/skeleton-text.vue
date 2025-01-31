@@ -41,6 +41,7 @@ import { SKELETON_HEADING_HEIGHTS, SKELETON_TEXT_TYPES } from './skeleton_consta
 import SkeletonAnimation from '@/common/mixins/skeleton';
 
 export default {
+  compatConfig: { MODE: 3 },
   name: 'DtSkeletonText',
 
   mixins: [SkeletonAnimation],

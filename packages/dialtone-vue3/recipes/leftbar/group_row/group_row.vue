@@ -24,6 +24,7 @@ import { DtIconUsers } from '@dialpad/dialtone-icons/vue3';
 import { safeConcatStrings, extractVueListeners } from '@/common/utils';
 
 export default {
+  compatConfig: { MODE: 3 },
   name: 'DtRecipeGroupRow',
 
   components: {

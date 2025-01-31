@@ -63,6 +63,7 @@ import { LINK_KIND_MODIFIERS, getLinkKindModifier } from '@/components/link';
  * @see https://dialtone.dialpad.com/components/button.html
  */
 export default {
+  compatConfig: { MODE: 3 },
   name: 'DtButton',
 
   inheritAttrs: false,

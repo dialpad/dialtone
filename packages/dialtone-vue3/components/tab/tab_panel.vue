@@ -22,6 +22,7 @@ import Modal from '@/common/mixins/modal';
  * @see https://dialtone.dialpad.com/components/tabs.html
  */
 export default {
+  compatConfig: { MODE: 3 },
   name: 'DtTabPanel',
 
   mixins: [Modal],

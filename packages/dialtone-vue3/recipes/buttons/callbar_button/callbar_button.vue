@@ -41,6 +41,7 @@ import { DtTooltip } from '@/components/tooltip';
 import utils, { extractVueListeners } from '@/common/utils';
 
 export default {
+  compatConfig: { MODE: 3 },
   name: 'DtRecipeCallbarButton',
 
   components: { DtButton, DtTooltip },

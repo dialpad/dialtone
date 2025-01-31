@@ -64,6 +64,7 @@ import {
  * @see https://dialtone.dialpad.com/components/tooltip.html
  */
 export default {
+  compatConfig: { MODE: 3 },
   name: 'DtTooltip',
 
   props: {

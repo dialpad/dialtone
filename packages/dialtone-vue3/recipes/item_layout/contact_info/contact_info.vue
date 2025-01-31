@@ -114,6 +114,7 @@ import DtItemLayout from '@/components/item_layout/item_layout.vue';
 import DtAvatar from '@/components/avatar/avatar.vue';
 
 export default {
+  compatConfig: { MODE: 3 },
   name: 'DtRecipeContactInfo',
 
   components: {

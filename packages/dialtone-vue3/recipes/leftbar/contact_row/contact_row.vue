@@ -72,6 +72,7 @@ import { extractVueListeners, safeConcatStrings } from '@/common/utils';
 import { DtIconUser } from '@dialpad/dialtone-icons/vue3';
 
 export default {
+  compatConfig: { MODE: 3 },
   name: 'DtRecipeContactRow',
 
   components: {

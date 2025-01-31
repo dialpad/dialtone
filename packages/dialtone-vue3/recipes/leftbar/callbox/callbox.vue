@@ -94,6 +94,7 @@ import DtBadge from '@/components/badge/badge.vue';
 import { DtIconPause } from '@dialpad/dialtone-icons/vue3';
 
 export default {
+  compatConfig: { MODE: 3 },
   name: 'DtRecipeCallbox',
 
   components: { DtBadge, DtAvatar, DtIconPause },

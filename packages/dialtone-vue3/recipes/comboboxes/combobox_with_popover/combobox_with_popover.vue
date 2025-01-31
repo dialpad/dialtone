@@ -120,6 +120,7 @@ import { DROPDOWN_PADDING_CLASSES } from '@/components/dropdown';
 import SrOnlyCloseButtonMixin from '@/common/mixins/sr_only_close_button';
 
 export default {
+  compatConfig: { MODE: 3 },
   name: 'DtRecipeComboboxWithPopover',
 
   components: {

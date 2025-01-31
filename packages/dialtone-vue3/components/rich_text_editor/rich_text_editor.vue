@@ -95,6 +95,7 @@ import { warnIfUnmounted } from '@/common/utils';
 import deepEqual from 'deep-equal';
 
 export default {
+  compatConfig: { MODE: 3 },
   name: 'DtRichTextEditor',
 
   components: {

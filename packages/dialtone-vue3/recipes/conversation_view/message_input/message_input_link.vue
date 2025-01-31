@@ -109,6 +109,7 @@ import { DtStack } from '@/components/stack';
 import { DtIconLink2 } from '@dialpad/dialtone-icons/vue3';
 import DtRecipeMessageInputButton from './message_input_button.vue';
 export default {
+  compatConfig: { MODE: 3 },
   name: 'MessageInputLink',
 
   components: {

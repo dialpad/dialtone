@@ -55,6 +55,7 @@ const ROLES = ['listitem', 'menuitem', 'option'];
  * @see https://dialtone.dialpad.com/components/list_item.html
  */
 export default {
+  compatConfig: { MODE: 3 },
   name: 'DtListItem',
 
   components: {

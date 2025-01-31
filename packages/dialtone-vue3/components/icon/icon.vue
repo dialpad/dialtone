@@ -17,6 +17,7 @@ import { ICON_SIZE_MODIFIERS, ICON_NAMES } from './icon_constants';
  * @see https://dialtone.dialpad.com/components/icon.html
  */
 export default {
+  compatConfig: { MODE: 3 },
   name: 'DtIcon',
 
   props: {

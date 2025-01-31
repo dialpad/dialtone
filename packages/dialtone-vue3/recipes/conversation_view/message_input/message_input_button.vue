@@ -32,6 +32,7 @@ import { DtTooltip } from '@/components/tooltip';
 import { DtStack } from '@/components/stack';
 import { DtKeyboardShortcut } from '@/components/keyboard_shortcut';
 export default {
+  compatConfig: { MODE: 3 },
   name: 'DtRecipeMessageInputButton',
   components: {
     DtButton,

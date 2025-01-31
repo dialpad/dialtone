@@ -75,6 +75,7 @@ import { DtIconChevronLeft, DtIconChevronRight, DtIconMoreHorizontal } from '@di
  * @see https://dialtone.dialpad.com/components/pagination.html
  */
 export default {
+  compatConfig: { MODE: 3 },
   name: 'DtPagination',
 
   components: {
