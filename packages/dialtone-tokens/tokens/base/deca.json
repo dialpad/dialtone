@@ -265,15 +265,15 @@
         "value": "#FF716F",
         "type": "color"
       },
+      "250": {
+        "value": "#FF415B",
+        "type": "color"
+      },
       "300": {
         "value": "#FF1356",
         "type": "color"
       },
-      "325": {
-        "value": "#FA0047",
-        "type": "color"
-      },
-      "375": {
+      "350": {
         "value": "#E10040",
         "type": "color"
       },
