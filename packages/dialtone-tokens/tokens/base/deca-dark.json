@@ -44,42 +44,42 @@
     },
     "purple": {
       "100": {
-        "value": "#17033F",
+        "value": "#1D0155",
         "type": "color"
       },
       "200": {
-        "value": "#260764",
-        "type": "color"
-      },
-      "300": {
         "value": "#3A1D95",
         "type": "color"
       },
-      "350": {
+      "250": {
         "value": "#5023DD",
         "type": "color"
       },
-      "400": {
+      "300": {
         "value": "#6538F1",
         "type": "color"
       },
-      "425": {
+      "350": {
         "value": "#7C52FF",
         "type": "color"
       },
-      "475": {
+      "400": {
         "value": "#9568FF",
         "type": "color"
       },
-      "500": {
+      "425": {
         "value": "#AB7EFF",
         "type": "color"
       },
-      "600": {
+      "475": {
+        "value": "#C2A3FF",
+        "type": "color"
+      },
+      "500": {
         "value": "#DAC7FF",
         "type": "color"
       },
-      "1000": {
+      "600": {
         "value": "#F5F0FF",
         "type": "color"
       }
