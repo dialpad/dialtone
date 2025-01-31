@@ -35,7 +35,7 @@
         "description": "Used for text paired with disabled content or components, like the form elements."
       },
       "critical": {
-        "value": "{color.red.325}",
+        "value": "{color.red.350}",
         "type": "color",
         "description": "Expresses an error, danger, or otherwise critical state."
       },
@@ -1032,11 +1032,11 @@
               "type": "color"
             },
             "hover": {
-              "value": "{color.red.325}",
+              "value": "{color.red.350}",
               "type": "color"
             },
             "active": {
-              "value": "{color.red.375}",
+              "value": "{color.red.400}",
               "type": "color"
             }
           }
