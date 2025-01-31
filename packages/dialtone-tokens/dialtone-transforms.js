@@ -65,6 +65,40 @@ export function registerDialtoneTransforms (styleDictionary) {
   });
 
   styleDictionary.registerTransform({
+    name: 'dt/android/xml/size/resolveMath',
+    type: 'value',
+    transitive: true,
+    filter: function (token) {
+      return [...SPACING_IDENTIFIERS, ...SIZE_IDENTIFIERS].includes(token.type);
+    },
+    transform: (token) => {
+      // replace unmathable characters with empty string
+      const mathString = token.value.replace(/dp|sp|em|px|%/g, '');
+      // eslint-disable-next-line no-eval
+      const result = eval(mathString).toFixed(2);
+      return `${result}dp`;
+    },
+  });
+
+  styleDictionary.registerTransform({
+    name: 'dt/android/xml/size/pxToDp',
+    type: 'value',
+    transitive: true,
+    filter: function (token) {
+      return [...SPACING_IDENTIFIERS, ...SIZE_IDENTIFIERS].includes(token.type);
+    },
+    transform: (token) => {
+      const floatVal = parseFloat(token.value);
+
+      if (isNaN(floatVal)) {
+        throwSizeError(token.path, token.value, 'dp');
+      }
+
+      return `${floatVal.toFixed(2)}dp`;
+    },
+  });
+
+  styleDictionary.registerTransform({
     name: 'dt/android/xml/color',
     type: 'value',
     filter: function (token) {
@@ -129,6 +163,7 @@ export function registerDialtoneTransforms (styleDictionary) {
   styleDictionary.registerTransform({
     name: 'dt/android/compose/size/pxToDp',
     type: 'value',
+    transitive: true,
     filter: function (token) {
       return [...SPACING_IDENTIFIERS, ...SIZE_IDENTIFIERS].includes(token.type);
     },
@@ -147,6 +182,7 @@ export function registerDialtoneTransforms (styleDictionary) {
   styleDictionary.registerTransform({
     name: 'dt/android/compose/size/pxToSp',
     type: 'value',
+    transitive: true,
     filter: function (token) {
       return [...FONT_SIZE_IDENTIFIERS].includes(token.type);
     },
@@ -174,7 +210,7 @@ export function registerDialtoneTransforms (styleDictionary) {
       if (token.value.includes('.dp')) unit = 'dp';
       if (token.value.includes('.sp')) unit = 'sp';
       if (token.value.includes('.em')) unit = 'em';
-      const mathString = token.value.replace(/\.dp|\.sp|\.em/g, '');
+      const mathString = token.value.replace(/\.dp|\.sp|\.em|px|%/g, '');
       // eslint-disable-next-line no-eval
       const result = eval(mathString);
       return `${result}.${unit}`;
