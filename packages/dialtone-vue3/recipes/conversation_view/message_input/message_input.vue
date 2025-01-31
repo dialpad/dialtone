@@ -282,6 +282,7 @@ import {
 } from '../editor/editor_constants.js';
 
 export default {
+  compatConfig: { MODE: 3 },
   name: 'DtRecipeMessageInput',
 
   components: {

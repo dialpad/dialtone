@@ -50,6 +50,7 @@ import SrOnlyCloseButtonMixin from '@/common/mixins/sr_only_close_button';
  * @see https://dialtone.dialpad.com/components/notice.html
  */
 export default {
+  compatConfig: { MODE: 3 },
   name: 'DtNotice',
 
   components: {

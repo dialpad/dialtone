@@ -15,6 +15,7 @@
 import { BUTTON_GROUP_ALIGNMENT } from './button_group_constants';
 
 export default {
+  compatConfig: { MODE: 3 },
   name: 'DtButtonGroup',
 
   props: {

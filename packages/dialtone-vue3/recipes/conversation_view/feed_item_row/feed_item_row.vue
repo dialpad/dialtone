@@ -132,6 +132,7 @@ import Modal from '@/common/mixins/modal';
 import { DtIconUser } from '@dialpad/dialtone-icons/vue3';
 
 export default {
+  compatConfig: { MODE: 3 },
   name: 'DtRecipeFeedItemRow',
 
   components: {

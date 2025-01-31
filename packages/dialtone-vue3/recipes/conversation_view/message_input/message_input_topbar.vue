@@ -151,6 +151,7 @@ import {
 
 import DtRecipeMessageInputButton from './message_input_button.vue';
 export default {
+  compatConfig: { MODE: 3 },
   name: 'DtRecipeMesageInputTopbar',
   components: {
     DtStack,

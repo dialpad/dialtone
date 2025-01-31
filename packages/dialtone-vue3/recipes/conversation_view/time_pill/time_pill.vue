@@ -12,6 +12,7 @@
 import {} from './time_pill_constants';
 
 export default {
+  compatConfig: { MODE: 3 },
   name: 'DtRecipeTimePill',
 
   props: {

@@ -69,6 +69,7 @@ import DtImageCarousel from './media_components/image_carousel.vue';
 const MEDIA_ITEM_WIDTH = 64;
 
 export default {
+  compatConfig: { MODE: 3 },
   name: 'DtRecipeAttachmentCarousel',
 
   components: {

@@ -21,6 +21,7 @@ import { DtAvatar } from '@/components/avatar';
 import { DtStack } from '@/components/stack';
 
 export default {
+  compatConfig: { MODE: 3 },
   name: 'MentionSuggestion',
   components: {
     DtAvatar,

@@ -96,6 +96,7 @@ import { extractInitialsFromName } from './utils';
  * @see https://dialtone.dialpad.com/components/avatar.html
  */
 export default {
+  compatConfig: { MODE: 3 },
   name: 'DtAvatar',
   components: { DtPresence },
 

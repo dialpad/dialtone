@@ -84,6 +84,7 @@ import DtIconChevronDown from '@dialpad/dialtone-icons/vue3/chevron-down';
 import DtIconHeadphones from '@dialpad/dialtone-icons/vue3/headphones';
 
 export default {
+  compatConfig: { MODE: 3 },
   name: 'DtRecipeContactCentersRow',
 
   components: {

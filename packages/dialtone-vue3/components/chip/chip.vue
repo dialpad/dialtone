@@ -69,6 +69,7 @@ import { getUniqueString, hasSlotContent } from '@/common/utils';
  * @see https://dialtone.dialpad.com/components/chip.html
  */
 export default {
+  compatConfig: { MODE: 3 },
   name: 'DtChip',
 
   components: {

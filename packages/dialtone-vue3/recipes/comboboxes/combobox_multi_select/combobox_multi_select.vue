@@ -134,6 +134,7 @@ import {
 import SrOnlyCloseButtonMixin from '@/common/mixins/sr_only_close_button';
 
 export default {
+  compatConfig: { MODE: 3 },
   name: 'DtRecipeComboboxMultiSelect',
 
   components: {

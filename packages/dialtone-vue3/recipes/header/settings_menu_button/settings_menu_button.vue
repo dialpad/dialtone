@@ -36,6 +36,7 @@ import DtButton from '@/components/button/button.vue';
 import { DtIconMoreVertical } from '@dialpad/dialtone-icons/vue3';
 
 export default {
+  compatConfig: { MODE: 3 },
   name: 'DtRecipeSettingsMenuButton',
 
   components: {

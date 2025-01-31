@@ -64,6 +64,7 @@ import { DtCollapsible } from '@/components/collapsible';
 import { DtIconChevronDown, DtIconChevronRight } from '@dialpad/dialtone-icons/vue3';
 
 export default {
+  compatConfig: { MODE: 3 },
   name: 'DtRecipeFeedItemPill',
 
   components: { DtItemLayout, DtCollapsible },

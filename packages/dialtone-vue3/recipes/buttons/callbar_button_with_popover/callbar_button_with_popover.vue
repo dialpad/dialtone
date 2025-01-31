@@ -81,6 +81,7 @@ import { DtRecipeCallbarButton, CALLBAR_BUTTON_VALID_WIDTH_SIZE } from '../callb
 import utils, { warnIfUnmounted } from '@/common/utils';
 
 export default {
+  compatConfig: { MODE: 3 },
   name: 'DtRecipeCallbarButtonWithPopover',
 
   components: { DtRecipeCallbarButton, DtPopover, DtButton, DtIconChevronUp },

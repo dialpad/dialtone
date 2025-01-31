@@ -20,6 +20,7 @@ import { DT_DESCRIPTION_LIST_DIRECTION } from './description_list_constants';
 import { itemsValidator } from './description_list_validators';
 
 export default {
+  compatConfig: { MODE: 3 },
   name: 'DtDescriptionList',
 
   props: {

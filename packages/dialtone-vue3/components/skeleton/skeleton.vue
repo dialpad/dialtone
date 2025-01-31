@@ -48,6 +48,7 @@ import DtSkeletonText from './skeleton-text.vue';
  * @see https://dialtone.dialpad.com/components/skeleton.html
  */
 export default {
+  compatConfig: { MODE: 3 },
   name: 'DtSkeleton',
   components: {
     DtSkeletonText,
