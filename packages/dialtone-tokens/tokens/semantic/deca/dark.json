@@ -480,6 +480,10 @@
       "primary-inverted-hover": {
         "value": "{color.purple.250}",
         "type": "color"
+      },
+      "warning-inverted-hover": {
+        "value": "{color.gold.200}",
+        "type": "color"
       }
     },
     "foreground": {
