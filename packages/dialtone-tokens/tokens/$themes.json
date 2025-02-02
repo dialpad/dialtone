@@ -673,9 +673,6 @@
       "color.blue.500": "3d4c7a9e64df3d900342c76cbd7fe34e2d635f3b",
       "color.magenta.100": "152d057bf184a1352a16a64b822687044e8892af",
       "color.magenta.200": "c55456e3c2ff7876e2cf4d70d4b3ea3e004c63d1",
-      "color.magenta.300": "4817a7ff2f9b78cf30d594636700878d3a090be1",
-      "color.magenta.400": "75113a4f554ac35e83a891eebd5163dea74d9ab0",
-      "color.magenta.500": "832ef0e1922d58edbcf4a0c891f2374f079a850d",
       "color.gold.100": "843bf674d676999e3a72a3c536efadd9de2c447d",
       "color.gold.200": "a9925de9ad94e22cf492ae0e151c021b13f5974b",
       "color.gold.300": "edfdd41c250bc7f003b348e83b921219fad20398",
@@ -915,7 +912,10 @@
       "size.radius.pill": "a5cff6e5e4ea7a476abe3c391eedda68d1ccb65b",
       "size.radius.circle": "fc1a41298222e0031f3cfc7926f00d7c858ce930",
       "action.color.background.base.hover": "8f8f7fc3eb41d61840f72da4c9f72d242285eab4",
-      "color.purple.550": "c1ea339f0fd276c130e312b884300b27d53ba9f1"
+      "color.purple.550": "c1ea339f0fd276c130e312b884300b27d53ba9f1",
+      "color.magenta.600": "832ef0e1922d58edbcf4a0c891f2374f079a850d",
+      "color.magenta.500": "75113a4f554ac35e83a891eebd5163dea74d9ab0",
+      "color.magenta.400": "4817a7ff2f9b78cf30d594636700878d3a090be1"
     },
     "group": "dp"
   },
@@ -1583,9 +1583,6 @@
       "color.blue.500": "3d4c7a9e64df3d900342c76cbd7fe34e2d635f3b",
       "color.magenta.100": "152d057bf184a1352a16a64b822687044e8892af",
       "color.magenta.200": "c55456e3c2ff7876e2cf4d70d4b3ea3e004c63d1",
-      "color.magenta.300": "4817a7ff2f9b78cf30d594636700878d3a090be1",
-      "color.magenta.400": "75113a4f554ac35e83a891eebd5163dea74d9ab0",
-      "color.magenta.500": "832ef0e1922d58edbcf4a0c891f2374f079a850d",
       "color.gold.100": "843bf674d676999e3a72a3c536efadd9de2c447d",
       "color.gold.200": "a9925de9ad94e22cf492ae0e151c021b13f5974b",
       "color.gold.300": "edfdd41c250bc7f003b348e83b921219fad20398",
@@ -1828,7 +1825,10 @@
       "size.radius.pill": "a5cff6e5e4ea7a476abe3c391eedda68d1ccb65b",
       "size.radius.circle": "fc1a41298222e0031f3cfc7926f00d7c858ce930",
       "action.color.background.base.hover": "8f8f7fc3eb41d61840f72da4c9f72d242285eab4",
-      "color.purple.550": "c1ea339f0fd276c130e312b884300b27d53ba9f1"
+      "color.purple.550": "c1ea339f0fd276c130e312b884300b27d53ba9f1",
+      "color.magenta.600": "832ef0e1922d58edbcf4a0c891f2374f079a850d",
+      "color.magenta.500": "75113a4f554ac35e83a891eebd5163dea74d9ab0",
+      "color.magenta.400": "4817a7ff2f9b78cf30d594636700878d3a090be1"
     },
     "group": "dp"
   },
@@ -2490,9 +2490,6 @@
       "color.blue.500": "f5229d9727dd1bee18e680f2607f2e5ec144f6bd",
       "color.magenta.100": "b780bccf7bcd5ae323c318afa54b0a00fbc752da",
       "color.magenta.200": "d6d222e2c155dc5a46076f94de2ca735f743d0dd",
-      "color.magenta.300": "04f6b215eb6aa48edd82e8fb24c90894503b3d6d",
-      "color.magenta.400": "ff5525f02cf0461b690623456ad1d57541b31291",
-      "color.magenta.500": "7412e39ea8a5a08bb7b6008bd3690d954cd02531",
       "color.gold.100": "f81ab084c108c669da8df05512a729faaea76687",
       "color.gold.200": "a5e00a71886f6f25214b49435d9efa75d0811db9",
       "color.gold.300": "5a9858462c59a07c4ad57a844825c00b26b9ad04",
@@ -2732,7 +2729,10 @@
       "size.radius.pill": "d5381c1eeade0eea88d8929b56fe46fc456f85b7",
       "size.radius.circle": "88a9f2079fe2f7496702724c11a2940a6457a02b",
       "action.color.background.base.hover": "240b2027e5a4177a790e0cc194bb779bd8aceee8",
-      "color.purple.550": "c5c79eac4529b3a552afcfc5cfcb61e12fb534d4"
+      "color.purple.550": "c5c79eac4529b3a552afcfc5cfcb61e12fb534d4",
+      "color.magenta.600": "7412e39ea8a5a08bb7b6008bd3690d954cd02531",
+      "color.magenta.500": "ff5525f02cf0461b690623456ad1d57541b31291",
+      "color.magenta.400": "04f6b215eb6aa48edd82e8fb24c90894503b3d6d"
     },
     "group": "tmo"
   },
@@ -3053,9 +3053,6 @@
       "color.blue.500": "f5229d9727dd1bee18e680f2607f2e5ec144f6bd",
       "color.magenta.100": "b780bccf7bcd5ae323c318afa54b0a00fbc752da",
       "color.magenta.200": "d6d222e2c155dc5a46076f94de2ca735f743d0dd",
-      "color.magenta.300": "04f6b215eb6aa48edd82e8fb24c90894503b3d6d",
-      "color.magenta.400": "ff5525f02cf0461b690623456ad1d57541b31291",
-      "color.magenta.500": "7412e39ea8a5a08bb7b6008bd3690d954cd02531",
       "color.gold.100": "f81ab084c108c669da8df05512a729faaea76687",
       "color.gold.200": "a5e00a71886f6f25214b49435d9efa75d0811db9",
       "color.gold.300": "5a9858462c59a07c4ad57a844825c00b26b9ad04",
@@ -3298,7 +3295,10 @@
       "size.radius.pill": "d5381c1eeade0eea88d8929b56fe46fc456f85b7",
       "size.radius.circle": "88a9f2079fe2f7496702724c11a2940a6457a02b",
       "action.color.background.base.hover": "240b2027e5a4177a790e0cc194bb779bd8aceee8",
-      "color.purple.550": "c5c79eac4529b3a552afcfc5cfcb61e12fb534d4"
+      "color.purple.550": "c5c79eac4529b3a552afcfc5cfcb61e12fb534d4",
+      "color.magenta.600": "7412e39ea8a5a08bb7b6008bd3690d954cd02531",
+      "color.magenta.500": "ff5525f02cf0461b690623456ad1d57541b31291",
+      "color.magenta.400": "04f6b215eb6aa48edd82e8fb24c90894503b3d6d"
     },
     "group": "tmo"
   },
