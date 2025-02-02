@@ -14,10 +14,6 @@
               }
             }
           }
-        },
-        "bulletin": {
-          "value": "{color.neutral.black}",
-          "type": "color"
         }
       },
       "border": {
