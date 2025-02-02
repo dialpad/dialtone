@@ -859,7 +859,7 @@
           },
           "primary": {
             "default": {
-              "value": "{color.neutral.white}",
+              "value": "{color.black.50}",
               "type": "color"
             }
           }
@@ -879,7 +879,7 @@
           },
           "primary": {
             "default": {
-              "value": "{color.neutral.white}",
+              "value": "{color.black.50}",
               "type": "color"
             }
           }
@@ -947,7 +947,7 @@
           },
           "primary": {
             "default": {
-              "value": "{color.neutral.white}",
+              "value": "{color.black.50}",
               "type": "color"
             }
           }

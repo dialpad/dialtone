@@ -717,32 +717,6 @@
             "type": "color"
           }
         }
-      },
-      "foreground": {
-        "positive": {
-          "primary": {
-            "default": {
-              "value": "{color.neutral.black}",
-              "type": "color"
-            }
-          }
-        },
-        "base": {
-          "primary": {
-            "default": {
-              "value": "{color.neutral.black}",
-              "type": "color"
-            }
-          }
-        },
-        "critical": {
-          "primary": {
-            "default": {
-              "value": "{color.neutral.black}",
-              "type": "color"
-            }
-          }
-        }
       }
     }
   }
