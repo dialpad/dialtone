@@ -37,7 +37,11 @@
       },
       "background": {
         "bulletin": {
-          "value": "{color.purple.475}",
+          "value": "{color.purple.425}",
+          "type": "color"
+        },
+        "bulletin-subtle": {
+          "value": "{color.purple.200}",
           "type": "color"
         }
       }

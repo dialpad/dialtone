@@ -801,15 +801,15 @@
         "type": "color"
       },
       "brand-inverted": {
-        "value": "{color.brand.purple}",
+        "value": "{color.purple.300}",
         "type": "color"
       },
       "brand-subtle-inverted": {
-        "value": "{color.purple.475}",
+        "value": "{color.purple.400}",
         "type": "color"
       },
       "brand-strong-inverted": {
-        "value": "{color.purple.300}",
+        "value": "{color.purple.200}",
         "type": "color"
       }
     }
