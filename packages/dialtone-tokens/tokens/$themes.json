@@ -908,13 +908,12 @@
       "color.gold.400": "edfdd41c250bc7f003b348e83b921219fad20398",
       "color.gold.500": "56cd8e8fef6abd06ad1c2fc0b3812757a05a3808",
       "color.gold.600": "afeb500609e66b69891698b7dff31bd56af9c91c",
-      "color.green.600": "3529082d4e0020c7e06be3e711b4928032390cdd",
-      "color.green.300": "f79c6e49809bc0bd1ef3c0b2671b960823adf4a6",
-      "color.green.400": "525340482f70ca0620ed54b808e83cf6b094754e",
-      "color.green.500": "a6287aab5d4049ee166ab9a69a68ed7dcc14adc5",
+      "color.green.600": "a6287aab5d4049ee166ab9a69a68ed7dcc14adc5",
       "color.blue.600": "d725ba339f8bdc6a73e86ef132f490e4fbe3bb06",
       "color.blue.425": "aebf904a38ee55512359d219afc00770dfd1cf0a",
-      "color.blue.500": "268ace8b3e83c237b582d6130845be8759f0d626"
+      "color.blue.500": "268ace8b3e83c237b582d6130845be8759f0d626",
+      "color.green.400": "f79c6e49809bc0bd1ef3c0b2671b960823adf4a6",
+      "color.green.500": "525340482f70ca0620ed54b808e83cf6b094754e"
     },
     "group": "dp"
   },
@@ -1820,13 +1819,12 @@
       "color.gold.400": "edfdd41c250bc7f003b348e83b921219fad20398",
       "color.gold.500": "56cd8e8fef6abd06ad1c2fc0b3812757a05a3808",
       "color.gold.600": "afeb500609e66b69891698b7dff31bd56af9c91c",
-      "color.green.600": "3529082d4e0020c7e06be3e711b4928032390cdd",
-      "color.green.300": "f79c6e49809bc0bd1ef3c0b2671b960823adf4a6",
-      "color.green.400": "525340482f70ca0620ed54b808e83cf6b094754e",
-      "color.green.500": "a6287aab5d4049ee166ab9a69a68ed7dcc14adc5",
+      "color.green.600": "a6287aab5d4049ee166ab9a69a68ed7dcc14adc5",
       "color.blue.600": "d725ba339f8bdc6a73e86ef132f490e4fbe3bb06",
       "color.blue.425": "aebf904a38ee55512359d219afc00770dfd1cf0a",
-      "color.blue.500": "268ace8b3e83c237b582d6130845be8759f0d626"
+      "color.blue.500": "268ace8b3e83c237b582d6130845be8759f0d626",
+      "color.green.400": "f79c6e49809bc0bd1ef3c0b2671b960823adf4a6",
+      "color.green.500": "525340482f70ca0620ed54b808e83cf6b094754e"
     },
     "group": "dp"
   },
@@ -2723,13 +2721,12 @@
       "color.gold.400": "5a9858462c59a07c4ad57a844825c00b26b9ad04",
       "color.gold.500": "9578daf324f237f700204c9ad0440e49782fb26b",
       "color.gold.600": "9bc3d3c4da49087f2d506e91afe3b68682b197e1",
-      "color.green.600": "7e99c2880c152ab24bf3ec8f5b64a2a7597fd3b4",
-      "color.green.300": "1c505ba3b575bb88a05f89514dba80170e69ef33",
-      "color.green.400": "a878f89125066157e3494302e09361366fe6e91d",
-      "color.green.500": "cc078c5006e21a9a241be5918cf912f345b0ed30",
+      "color.green.600": "cc078c5006e21a9a241be5918cf912f345b0ed30",
       "color.blue.600": "f3e473b26045c67e78adbd3c17362b08ea72978b",
       "color.blue.425": "1346001f3e03f7a013f62c31b535f1c9a49f73d4",
-      "color.blue.500": "0f9e8341aac4cf70b44452a3cd0976bb443b39e9"
+      "color.blue.500": "0f9e8341aac4cf70b44452a3cd0976bb443b39e9",
+      "color.green.400": "1c505ba3b575bb88a05f89514dba80170e69ef33",
+      "color.green.500": "a878f89125066157e3494302e09361366fe6e91d"
     },
     "group": "tmo"
   },
@@ -3288,13 +3285,12 @@
       "color.gold.400": "5a9858462c59a07c4ad57a844825c00b26b9ad04",
       "color.gold.500": "9578daf324f237f700204c9ad0440e49782fb26b",
       "color.gold.600": "9bc3d3c4da49087f2d506e91afe3b68682b197e1",
-      "color.green.600": "7e99c2880c152ab24bf3ec8f5b64a2a7597fd3b4",
-      "color.green.300": "1c505ba3b575bb88a05f89514dba80170e69ef33",
-      "color.green.400": "a878f89125066157e3494302e09361366fe6e91d",
-      "color.green.500": "cc078c5006e21a9a241be5918cf912f345b0ed30",
+      "color.green.600": "cc078c5006e21a9a241be5918cf912f345b0ed30",
       "color.blue.600": "f3e473b26045c67e78adbd3c17362b08ea72978b",
       "color.blue.425": "1346001f3e03f7a013f62c31b535f1c9a49f73d4",
-      "color.blue.500": "0f9e8341aac4cf70b44452a3cd0976bb443b39e9"
+      "color.blue.500": "0f9e8341aac4cf70b44452a3cd0976bb443b39e9",
+      "color.green.400": "1c505ba3b575bb88a05f89514dba80170e69ef33",
+      "color.green.500": "a878f89125066157e3494302e09361366fe6e91d"
     },
     "group": "tmo"
   },

@@ -316,7 +316,7 @@
         }
       },
       "success-opaque": {
-        "value": "{color.green.300}",
+        "value": "{color.green.400}",
         "type": "color",
         "$extensions": {
           "studio.tokens": {

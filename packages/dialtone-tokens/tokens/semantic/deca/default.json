@@ -45,7 +45,7 @@
         "description": "Expresses an error, danger, or otherwise critical state on surfaces that require a stronger contrast."
       },
       "success": {
-        "value": "{color.green.500}",
+        "value": "{color.green.600}",
         "type": "color",
         "description": "Indicates a positive state."
       },
@@ -114,7 +114,7 @@
         "description": "Success text that sits on high-contrast surfaces or backgrounds"
       },
       "success-strong-inverted": {
-        "value": "{color.green.300}",
+        "value": "{color.green.400}",
         "type": "color",
         "description": "Success strong text that sits on high-contrast surfaces or backgrounds"
       },
@@ -295,7 +295,7 @@
         "description": "A softer version of the default success surface."
       },
       "success-strong": {
-        "value": "{color.green.500}",
+        "value": "{color.green.600}",
         "type": "color",
         "description": "A contrasting positive state surface, most likely paired with inverted foreground colors."
       },
@@ -470,7 +470,7 @@
         "description": "Warning subtle surface as opaque background color"
       },
       "success-opaque": {
-        "value": "{color.green.200}",
+        "value": "{color.green.300}",
         "type": "color",
         "$extensions": {
           "studio.tokens": {
@@ -690,7 +690,7 @@
         "type": "color"
       },
       "success": {
-        "value": "{color.green.500}",
+        "value": "{color.green.600}",
         "type": "color"
       },
       "success-strong": {
@@ -750,11 +750,11 @@
         "type": "color"
       },
       "success-strong-inverted": {
-        "value": "{color.green.300}",
+        "value": "{color.green.400}",
         "type": "color"
       },
       "success-subtle-inverted": {
-        "value": "{color.green.500}",
+        "value": "{color.green.600}",
         "type": "color"
       },
       "warning-inverted": {
@@ -1068,7 +1068,7 @@
             "type": "color"
           },
           "active": {
-            "value": "{color.green.200}",
+            "value": "{color.green.300}",
             "type": "color"
           },
           "primary": {
@@ -1078,7 +1078,7 @@
               "description": "Postive, accepting, or success actions."
             },
             "hover": {
-              "value": "{color.green.500}",
+              "value": "{color.green.600}",
               "type": "color"
             },
             "active": {
@@ -1488,7 +1488,7 @@
       "color": {
         "background": {
           "available": {
-            "value": "{color.green.500}",
+            "value": "{color.green.600}",
             "type": "color"
           },
           "busy-unavailable": {

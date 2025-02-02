@@ -11,7 +11,7 @@
           "type": "color"
         },
         "success": {
-          "value": "{color.green.200}",
+          "value": "{color.green.300}",
           "type": "color"
         },
         "warning": {
