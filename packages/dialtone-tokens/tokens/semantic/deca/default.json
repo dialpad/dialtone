@@ -35,12 +35,12 @@
         "description": "Used for text paired with disabled content or components, like the form elements."
       },
       "critical": {
-        "value": "{color.red.350}",
+        "value": "{color.red.450}",
         "type": "color",
         "description": "Expresses an error, danger, or otherwise critical state."
       },
       "critical-strong": {
-        "value": "{color.red.400}",
+        "value": "{color.red.500}",
         "type": "color",
         "description": "Expresses an error, danger, or otherwise critical state on surfaces that require a stronger contrast."
       },
@@ -99,12 +99,12 @@
         "description": "Disabled text color that sits on high-contrast surfaces or backgrounds."
       },
       "critical-inverted": {
-        "value": "{color.red.200}",
+        "value": "{color.red.300}",
         "type": "color",
         "description": "Critical text that sits on high-contrast surfaces or backgrounds"
       },
       "critical-strong-inverted": {
-        "value": "{color.red.150}",
+        "value": "{color.red.200}",
         "type": "color",
         "description": "Critical strong text that sits on high-contrast surfaces or backgrounds"
       },
@@ -265,7 +265,7 @@
         "description": "A softer version of the Critical surface."
       },
       "critical-strong": {
-        "value": "{color.red.400}",
+        "value": "{color.red.500}",
         "type": "color",
         "description": "A contrasting critical surface, most likely paired with inverted foreground colors."
       },
@@ -414,7 +414,7 @@
         "description": "Contrast surface as opaque background color."
       },
       "critical-opaque": {
-        "value": "{color.red.150}",
+        "value": "{color.red.200}",
         "type": "color",
         "$extensions": {
           "studio.tokens": {
@@ -678,15 +678,15 @@
         "type": "color"
       },
       "critical": {
-        "value": "{color.red.300}",
-        "type": "color"
-      },
-      "critical-strong": {
         "value": "{color.red.400}",
         "type": "color"
       },
+      "critical-strong": {
+        "value": "{color.red.500}",
+        "type": "color"
+      },
       "critical-subtle": {
-        "value": "{color.red.200}",
+        "value": "{color.red.300}",
         "type": "color"
       },
       "success": {
@@ -734,15 +734,15 @@
         "type": "color"
       },
       "critical-inverted": {
-        "value": "{color.red.200}",
+        "value": "{color.red.300}",
         "type": "color"
       },
       "critical-strong-inverted": {
-        "value": "{color.red.150}",
+        "value": "{color.red.200}",
         "type": "color"
       },
       "critical-subtle-inverted": {
-        "value": "{color.red.400}",
+        "value": "{color.red.500}",
         "type": "color"
       },
       "success-inverted": {
@@ -992,20 +992,20 @@
             "type": "color"
           },
           "active": {
-            "value": "{color.red.150}",
+            "value": "{color.red.200}",
             "type": "color"
           },
           "primary": {
             "default": {
-              "value": "{color.red.300}",
+              "value": "{color.red.400}",
               "type": "color"
             },
             "hover": {
-              "value": "{color.red.350}",
+              "value": "{color.red.450}",
               "type": "color"
             },
             "active": {
-              "value": "{color.red.400}",
+              "value": "{color.red.500}",
               "type": "color"
             }
           }
@@ -1492,7 +1492,7 @@
             "type": "color"
           },
           "busy-unavailable": {
-            "value": "{color.red.300}",
+            "value": "{color.red.400}",
             "type": "color"
           },
           "busy": {

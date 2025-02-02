@@ -26,7 +26,7 @@
         "type": "color"
       },
       "critical-strong": {
-        "value": "{color.red.500}",
+        "value": "{color.red.700}",
         "type": "color"
       },
       "warning-strong": {
@@ -38,7 +38,7 @@
         "type": "color"
       },
       "critical-opaque": {
-        "value": "{color.red.150}",
+        "value": "{color.red.200}",
         "type": "color",
         "$extensions": {
           "studio.tokens": {
@@ -360,11 +360,11 @@
         }
       },
       "critical": {
-        "value": "{color.red.450}",
+        "value": "{color.red.600}",
         "type": "color"
       },
       "critical-subtle": {
-        "value": "{color.red.300}",
+        "value": "{color.red.400}",
         "type": "color"
       },
       "success": {
@@ -376,7 +376,7 @@
         "type": "color"
       },
       "critical-strong": {
-        "value": "{color.red.500}",
+        "value": "{color.red.700}",
         "type": "color"
       },
       "success-subtle": {
@@ -428,11 +428,11 @@
         "type": "color"
       },
       "critical-inverted": {
-        "value": "{color.red.400}",
+        "value": "{color.red.500}",
         "type": "color"
       },
       "critical-subtle-inverted": {
-        "value": "{color.red.450}",
+        "value": "{color.red.600}",
         "type": "color"
       },
       "warning-inverted": {
@@ -444,7 +444,7 @@
         "type": "color"
       },
       "critical-strong-inverted": {
-        "value": "{color.red.300}",
+        "value": "{color.red.400}",
         "type": "color"
       },
       "success-subtle-inverted": {
@@ -484,11 +484,11 @@
     },
     "foreground": {
       "critical": {
-        "value": "{color.red.450}",
+        "value": "{color.red.600}",
         "type": "color"
       },
       "critical-strong": {
-        "value": "{color.red.500}",
+        "value": "{color.red.700}",
         "type": "color"
       },
       "success": {
@@ -512,11 +512,11 @@
         "type": "color"
       },
       "critical-inverted": {
-        "value": "{color.red.350}",
+        "value": "{color.red.450}",
         "type": "color"
       },
       "critical-strong-inverted": {
-        "value": "{color.red.300}",
+        "value": "{color.red.400}",
         "type": "color"
       },
       "success-inverted": {
@@ -627,7 +627,7 @@
             "type": "color"
           },
           "busy-unavailable": {
-            "value": "{color.red.400}",
+            "value": "{color.red.500}",
             "type": "color"
           },
           "busy": {
@@ -660,11 +660,11 @@
         "critical": {
           "primary": {
             "default": {
-              "value": "{color.red.450}",
+              "value": "{color.red.600}",
               "type": "color"
             },
             "hover": {
-              "value": "{color.red.500}",
+              "value": "{color.red.700}",
               "type": "color"
             },
             "active": {
