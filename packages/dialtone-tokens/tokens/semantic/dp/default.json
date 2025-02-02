@@ -416,7 +416,7 @@
         }
       },
       "info-opaque": {
-        "value": "{color.blue.500}",
+        "value": "{color.blue.600}",
         "type": "color",
         "description": "Info surface as opaque background color.",
         "$extensions": {
@@ -430,7 +430,7 @@
         }
       },
       "info-subtle-opaque": {
-        "value": "{color.blue.500}",
+        "value": "{color.blue.600}",
         "type": "color",
         "description": "Info surface as opaque background color.",
         "$extensions": {
@@ -565,7 +565,7 @@
         }
       },
       "info-strong": {
-        "value": "{color.blue.500}",
+        "value": "{color.blue.600}",
         "type": "color",
         "description": "A contrasting informational surface, most likely paired with inverted foreground colors."
       }

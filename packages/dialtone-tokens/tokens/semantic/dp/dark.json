@@ -342,7 +342,7 @@
         }
       },
       "info-opaque": {
-        "value": "{color.blue.400}",
+        "value": "{color.blue.500}",
         "type": "color",
         "$extensions": {
           "studio.tokens": {

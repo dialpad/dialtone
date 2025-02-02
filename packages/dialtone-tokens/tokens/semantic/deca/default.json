@@ -320,7 +320,7 @@
         "description": "A softer version of the default informational surface."
       },
       "info-strong": {
-        "value": "{color.blue.500}",
+        "value": "{color.blue.600}",
         "type": "color",
         "description": "A contrasting informational surface, most likely paired with inverted foreground colors."
       },
@@ -498,7 +498,7 @@
         "description": "Success subtle surface as opaque background color."
       },
       "info-opaque": {
-        "value": "{color.blue.200}",
+        "value": "{color.blue.400}",
         "type": "color",
         "$extensions": {
           "studio.tokens": {

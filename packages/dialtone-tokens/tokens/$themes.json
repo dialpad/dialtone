@@ -912,10 +912,9 @@
       "color.green.300": "f79c6e49809bc0bd1ef3c0b2671b960823adf4a6",
       "color.green.400": "525340482f70ca0620ed54b808e83cf6b094754e",
       "color.green.500": "a6287aab5d4049ee166ab9a69a68ed7dcc14adc5",
-      "color.blue.600": "3d4c7a9e64df3d900342c76cbd7fe34e2d635f3b",
-      "color.blue.400": "268ace8b3e83c237b582d6130845be8759f0d626",
+      "color.blue.600": "d725ba339f8bdc6a73e86ef132f490e4fbe3bb06",
       "color.blue.425": "aebf904a38ee55512359d219afc00770dfd1cf0a",
-      "color.blue.500": "d725ba339f8bdc6a73e86ef132f490e4fbe3bb06"
+      "color.blue.500": "268ace8b3e83c237b582d6130845be8759f0d626"
     },
     "group": "dp"
   },
@@ -1825,10 +1824,9 @@
       "color.green.300": "f79c6e49809bc0bd1ef3c0b2671b960823adf4a6",
       "color.green.400": "525340482f70ca0620ed54b808e83cf6b094754e",
       "color.green.500": "a6287aab5d4049ee166ab9a69a68ed7dcc14adc5",
-      "color.blue.600": "3d4c7a9e64df3d900342c76cbd7fe34e2d635f3b",
-      "color.blue.400": "268ace8b3e83c237b582d6130845be8759f0d626",
+      "color.blue.600": "d725ba339f8bdc6a73e86ef132f490e4fbe3bb06",
       "color.blue.425": "aebf904a38ee55512359d219afc00770dfd1cf0a",
-      "color.blue.500": "d725ba339f8bdc6a73e86ef132f490e4fbe3bb06"
+      "color.blue.500": "268ace8b3e83c237b582d6130845be8759f0d626"
     },
     "group": "dp"
   },
@@ -2729,10 +2727,9 @@
       "color.green.300": "1c505ba3b575bb88a05f89514dba80170e69ef33",
       "color.green.400": "a878f89125066157e3494302e09361366fe6e91d",
       "color.green.500": "cc078c5006e21a9a241be5918cf912f345b0ed30",
-      "color.blue.600": "f5229d9727dd1bee18e680f2607f2e5ec144f6bd",
-      "color.blue.400": "0f9e8341aac4cf70b44452a3cd0976bb443b39e9",
+      "color.blue.600": "f3e473b26045c67e78adbd3c17362b08ea72978b",
       "color.blue.425": "1346001f3e03f7a013f62c31b535f1c9a49f73d4",
-      "color.blue.500": "f3e473b26045c67e78adbd3c17362b08ea72978b"
+      "color.blue.500": "0f9e8341aac4cf70b44452a3cd0976bb443b39e9"
     },
     "group": "tmo"
   },
@@ -3295,10 +3292,9 @@
       "color.green.300": "1c505ba3b575bb88a05f89514dba80170e69ef33",
       "color.green.400": "a878f89125066157e3494302e09361366fe6e91d",
       "color.green.500": "cc078c5006e21a9a241be5918cf912f345b0ed30",
-      "color.blue.600": "f5229d9727dd1bee18e680f2607f2e5ec144f6bd",
-      "color.blue.400": "0f9e8341aac4cf70b44452a3cd0976bb443b39e9",
+      "color.blue.600": "f3e473b26045c67e78adbd3c17362b08ea72978b",
       "color.blue.425": "1346001f3e03f7a013f62c31b535f1c9a49f73d4",
-      "color.blue.500": "f3e473b26045c67e78adbd3c17362b08ea72978b"
+      "color.blue.500": "0f9e8341aac4cf70b44452a3cd0976bb443b39e9"
     },
     "group": "tmo"
   },
