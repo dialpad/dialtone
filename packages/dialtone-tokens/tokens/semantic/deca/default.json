@@ -45,12 +45,12 @@
         "description": "Expresses an error, danger, or otherwise critical state on surfaces that require a stronger contrast."
       },
       "success": {
-        "value": "{color.green.400}",
+        "value": "{color.green.500}",
         "type": "color",
         "description": "Indicates a positive state."
       },
       "success-strong": {
-        "value": "{color.green.500}",
+        "value": "{color.green.600}",
         "type": "color",
         "description": "Indicates a strong positive state on surfaces that require a stronger contrast."
       },
@@ -109,12 +109,12 @@
         "description": "Critical strong text that sits on high-contrast surfaces or backgrounds"
       },
       "success-inverted": {
-        "value": "{color.green.250}",
+        "value": "{color.green.350}",
         "type": "color",
         "description": "Success text that sits on high-contrast surfaces or backgrounds"
       },
       "success-strong-inverted": {
-        "value": "{color.green.200}",
+        "value": "{color.green.300}",
         "type": "color",
         "description": "Success strong text that sits on high-contrast surfaces or backgrounds"
       },
@@ -295,7 +295,7 @@
         "description": "A softer version of the default success surface."
       },
       "success-strong": {
-        "value": "{color.green.400}",
+        "value": "{color.green.500}",
         "type": "color",
         "description": "A contrasting positive state surface, most likely paired with inverted foreground colors."
       },
@@ -470,7 +470,7 @@
         "description": "Warning subtle surface as opaque background color"
       },
       "success-opaque": {
-        "value": "{color.green.150}",
+        "value": "{color.green.200}",
         "type": "color",
         "$extensions": {
           "studio.tokens": {
@@ -690,15 +690,15 @@
         "type": "color"
       },
       "success": {
-        "value": "{color.green.400}",
-        "type": "color"
-      },
-      "success-strong": {
         "value": "{color.green.500}",
         "type": "color"
       },
+      "success-strong": {
+        "value": "{color.green.600}",
+        "type": "color"
+      },
       "success-subtle": {
-        "value": "{color.green.250}",
+        "value": "{color.green.350}",
         "type": "color"
       },
       "warning": {
@@ -746,15 +746,15 @@
         "type": "color"
       },
       "success-inverted": {
-        "value": "{color.green.325}",
+        "value": "{color.green.425}",
         "type": "color"
       },
       "success-strong-inverted": {
-        "value": "{color.green.200}",
+        "value": "{color.green.300}",
         "type": "color"
       },
       "success-subtle-inverted": {
-        "value": "{color.green.400}",
+        "value": "{color.green.500}",
         "type": "color"
       },
       "warning-inverted": {
@@ -1068,21 +1068,21 @@
             "type": "color"
           },
           "active": {
-            "value": "{color.green.150}",
+            "value": "{color.green.200}",
             "type": "color"
           },
           "primary": {
             "default": {
-              "value": "{color.green.375}",
+              "value": "{color.green.475}",
               "type": "color",
               "description": "Postive, accepting, or success actions."
             },
             "hover": {
-              "value": "{color.green.400}",
+              "value": "{color.green.500}",
               "type": "color"
             },
             "active": {
-              "value": "{color.green.500}",
+              "value": "{color.green.600}",
               "type": "color"
             }
           }
@@ -1488,7 +1488,7 @@
       "color": {
         "background": {
           "available": {
-            "value": "{color.green.400}",
+            "value": "{color.green.500}",
             "type": "color"
           },
           "busy-unavailable": {
