@@ -55,7 +55,7 @@
         "description": "Indicates a strong positive state on surfaces that require a stronger contrast."
       },
       "warning": {
-        "value": "{color.gold.500}",
+        "value": "{color.gold.600}",
         "type": "color",
         "description": "Indicates information that requires user’s attention and further action may be necessary."
       },
@@ -119,7 +119,7 @@
         "description": "Success strong text that sits on high-contrast surfaces or backgrounds"
       },
       "warning-inverted": {
-        "value": "{color.gold.250}",
+        "value": "{color.gold.350}",
         "type": "color",
         "description": "Warning text that sits on high-contrast surfaces or backgrounds"
       }
@@ -155,7 +155,7 @@
         "type": "color"
       },
       "warning-hover": {
-        "value": "{color.gold.600}",
+        "value": "{color.gold.700}",
         "type": "color"
       },
       "muted": {
@@ -203,7 +203,7 @@
         "type": "color"
       },
       "warning-inverted-hover": {
-        "value": "{color.gold.150}",
+        "value": "{color.gold.200}",
         "type": "color"
       },
       "muted-inverted": {
@@ -280,7 +280,7 @@
         "description": "A softer version of the default warning surface."
       },
       "warning-strong": {
-        "value": "{color.gold.200}",
+        "value": "{color.gold.300}",
         "type": "color",
         "description": "A contrasting warning surface, most likely paired with inverted foreground colors."
       },
@@ -442,7 +442,7 @@
         "description": "Critical subtle surface as opaque background color."
       },
       "warning-opaque": {
-        "value": "{color.gold.150}",
+        "value": "{color.gold.200}",
         "type": "color",
         "$extensions": {
           "studio.tokens": {
@@ -702,15 +702,15 @@
         "type": "color"
       },
       "warning": {
-        "value": "{color.gold.350}",
+        "value": "{color.gold.450}",
         "type": "color"
       },
       "warning-strong": {
-        "value": "{color.gold.500}",
+        "value": "{color.gold.600}",
         "type": "color"
       },
       "warning-subtle": {
-        "value": "{color.gold.250}",
+        "value": "{color.gold.350}",
         "type": "color"
       },
       "brand": {
@@ -758,15 +758,15 @@
         "type": "color"
       },
       "warning-inverted": {
-        "value": "{color.gold.250}",
+        "value": "{color.gold.350}",
         "type": "color"
       },
       "warning-strong-inverted": {
-        "value": "{color.gold.150}",
+        "value": "{color.gold.200}",
         "type": "color"
       },
       "warning-subtle-inverted": {
-        "value": "{color.gold.400}",
+        "value": "{color.gold.500}",
         "type": "color"
       },
       "brand-inverted": {
@@ -1496,7 +1496,7 @@
             "type": "color"
           },
           "busy": {
-            "value": "{color.gold.300}",
+            "value": "{color.gold.400}",
             "type": "color"
           },
           "offline": {

@@ -15,7 +15,7 @@
           "type": "color"
         },
         "warning": {
-          "value": "{color.gold.150}",
+          "value": "{color.gold.200}",
           "type": "color"
         },
         "critical": {

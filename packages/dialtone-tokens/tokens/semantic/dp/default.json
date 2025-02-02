@@ -60,7 +60,7 @@
         "description": "Indicates a strong positive state on surfaces that require a stronger contrast."
       },
       "warning": {
-        "value": "{color.gold.500}",
+        "value": "{color.gold.600}",
         "type": "color",
         "description": "Indicates information that requires user’s attention and further action may be necessary."
       },
@@ -360,7 +360,7 @@
         }
       },
       "warning-opaque": {
-        "value": "{color.gold.200}",
+        "value": "{color.gold.300}",
         "type": "color",
         "description": "Warning surface as opaque background color",
         "$extensions": {
@@ -374,7 +374,7 @@
         }
       },
       "warning-subtle-opaque": {
-        "value": "{color.gold.200}",
+        "value": "{color.gold.300}",
         "type": "color",
         "description": "Warning subtle surface as opaque background color",
         "$extensions": {
@@ -517,7 +517,7 @@
         }
       },
       "warning-strong": {
-        "value": "{color.gold.200}",
+        "value": "{color.gold.300}",
         "type": "color",
         "description": "A contrasting warning surface, most likely paired with inverted foreground colors."
       },
@@ -688,7 +688,7 @@
         "type": "color"
       },
       "warning": {
-        "value": "{color.gold.400}",
+        "value": "{color.gold.500}",
         "type": "color"
       },
       "brand": {
@@ -720,11 +720,11 @@
         "type": "color"
       },
       "warning-subtle": {
-        "value": "{color.gold.200}",
+        "value": "{color.gold.300}",
         "type": "color"
       },
       "warning-strong": {
-        "value": "{color.gold.500}",
+        "value": "{color.gold.600}",
         "type": "color",
         "$extensions": {
           "studio.tokens": {
@@ -753,7 +753,7 @@
         "type": "color"
       },
       "warning-inverted": {
-        "value": "{color.gold.200}",
+        "value": "{color.gold.300}",
         "type": "color"
       },
       "brand-inverted": {
@@ -777,7 +777,7 @@
         "type": "color"
       },
       "warning-subtle-inverted": {
-        "value": "{color.gold.400}",
+        "value": "{color.gold.500}",
         "type": "color"
       },
       "warning-strong-inverted": {
@@ -2243,7 +2243,7 @@
             "type": "color"
           },
           "busy": {
-            "value": "{color.gold.300}",
+            "value": "{color.gold.400}",
             "type": "color"
           },
           "offline": {
