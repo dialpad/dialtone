@@ -116,7 +116,7 @@
         }
       },
       "info-opaque": {
-        "value": "{color.blue.125}",
+        "value": "{color.blue.200}",
         "type": "color",
         "$extensions": {
           "studio.tokens": {
@@ -168,7 +168,7 @@
         }
       },
       "info-strong": {
-        "value": "{color.blue.375}",
+        "value": "{color.blue.475}",
         "type": "color"
       },
       "secondary-opaque": {
@@ -456,7 +456,7 @@
         "type": "color"
       },
       "focus": {
-        "value": "{color.blue.325}",
+        "value": "{color.blue.450}",
         "type": "color"
       }
     },
