@@ -29,52 +29,13 @@
         "value": "{color.red.500}",
         "type": "color"
       },
-      "critical-subtle": {
-        "value": "{color.red.100}",
-        "type": "color",
-        "$extensions": {
-          "studio.tokens": {
-            "modify": {
-              "type": "darken",
-              "value": ".3",
-              "space": "hsl"
-            }
-          }
-        }
-      },
       "warning-strong": {
         "value": "{color.gold.500}",
         "type": "color"
       },
-      "warning-subtle": {
-        "value": "{color.gold.100}",
-        "type": "color",
-        "$extensions": {
-          "studio.tokens": {
-            "modify": {
-              "type": "darken",
-              "value": ".4",
-              "space": "hsl"
-            }
-          }
-        }
-      },
       "success-strong": {
         "value": "{color.green.400}",
         "type": "color"
-      },
-      "success-subtle": {
-        "value": "{color.green.100}",
-        "type": "color",
-        "$extensions": {
-          "studio.tokens": {
-            "modify": {
-              "type": "darken",
-              "value": ".4",
-              "space": "hsl"
-            }
-          }
-        }
       },
       "critical-opaque": {
         "value": "{color.red.150}",
@@ -83,20 +44,20 @@
           "studio.tokens": {
             "modify": {
               "type": "alpha",
-              "value": ".3",
+              "value": ".2",
               "space": "hsl"
             }
           }
         }
       },
       "critical-subtle-opaque": {
-        "value": "{color.red.150}",
+        "value": "{color.red.50}",
         "type": "color",
         "$extensions": {
           "studio.tokens": {
             "modify": {
               "type": "alpha",
-              "value": ".2",
+              "value": ".6",
               "space": "hsl"
             }
           }
@@ -116,13 +77,13 @@
         }
       },
       "warning-subtle-opaque": {
-        "value": "{color.gold.100}",
+        "value": "{color.gold.50}",
         "type": "color",
         "$extensions": {
           "studio.tokens": {
             "modify": {
               "type": "alpha",
-              "value": ".13",
+              "value": ".7",
               "space": "hsl"
             }
           }
@@ -142,13 +103,13 @@
         }
       },
       "success-subtle-opaque": {
-        "value": "{color.green.150}",
+        "value": "{color.green.50}",
         "type": "color",
         "$extensions": {
           "studio.tokens": {
             "modify": {
               "type": "alpha",
-              "value": ".13",
+              "value": ".6",
               "space": "hsl"
             }
           }
@@ -181,52 +142,26 @@
         }
       },
       "info-subtle-opaque": {
-        "value": "{color.blue.100}",
+        "value": "{color.blue.50}",
         "type": "color",
         "$extensions": {
           "studio.tokens": {
             "modify": {
               "type": "alpha",
-              "value": "0.24",
+              "value": "0.7",
               "space": "hsl"
             }
           }
         }
       },
       "brand-subtle-opaque": {
-        "value": "{color.purple.100}",
+        "value": "{color.purple.50}",
         "type": "color",
         "$extensions": {
           "studio.tokens": {
             "modify": {
               "type": "alpha",
-              "value": "0.5",
-              "space": "hsl"
-            }
-          }
-        }
-      },
-      "info-subtle": {
-        "value": "{color.blue.100}",
-        "type": "color",
-        "$extensions": {
-          "studio.tokens": {
-            "modify": {
-              "type": "darken",
-              "value": ".4",
-              "space": "hsl"
-            }
-          }
-        }
-      },
-      "brand-subtle": {
-        "value": "{color.purple.100}",
-        "type": "color",
-        "$extensions": {
-          "studio.tokens": {
-            "modify": {
-              "type": "darken",
-              "value": ".4",
+              "value": "0.65",
               "space": "hsl"
             }
           }
@@ -244,6 +179,19 @@
             "modify": {
               "type": "alpha",
               "value": ".03",
+              "space": "hsl"
+            }
+          }
+        }
+      },
+      "primary-opaque": {
+        "value": "{color.black.50}",
+        "type": "color",
+        "$extensions": {
+          "studio.tokens": {
+            "modify": {
+              "type": "alpha",
+              "value": ".87",
               "space": "hsl"
             }
           }
