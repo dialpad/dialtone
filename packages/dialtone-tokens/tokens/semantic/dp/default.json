@@ -40,12 +40,12 @@
         "description": "Used for text paired with disabled content or components, like the form elements."
       },
       "critical": {
-        "value": "{color.red.400}",
+        "value": "{color.red.500}",
         "type": "color",
         "description": "Expresses an error, danger, or otherwise critical state."
       },
       "critical-strong": {
-        "value": "{color.red.500}",
+        "value": "{color.red.700}",
         "type": "color",
         "description": "Expresses an error, danger, or otherwise critical state on surfaces that require a stronger contrast."
       },
@@ -104,7 +104,7 @@
         "description": "Disabled text color that sits on high-contrast surfaces or backgrounds."
       },
       "critical-inverted": {
-        "value": "{color.red.300}",
+        "value": "{color.red.400}",
         "type": "color",
         "description": "Critical text that sits on high-contrast surfaces or backgrounds"
       },
@@ -202,7 +202,7 @@
         "type": "color"
       },
       "critical-hover": {
-        "value": "{color.red.500}",
+        "value": "{color.red.700}",
         "type": "color"
       },
       "success-hover": {
@@ -332,7 +332,7 @@
         }
       },
       "critical-opaque": {
-        "value": "{color.red.400}",
+        "value": "{color.red.500}",
         "type": "color",
         "description": "Critical surface as opaque background color.",
         "$extensions": {
@@ -346,7 +346,7 @@
         }
       },
       "critical-subtle-opaque": {
-        "value": "{color.red.400}",
+        "value": "{color.red.500}",
         "type": "color",
         "description": "Critical subtle surface as opaque background color.",
         "$extensions": {
@@ -493,7 +493,7 @@
         }
       },
       "critical-strong": {
-        "value": "{color.red.500}",
+        "value": "{color.red.700}",
         "type": "color",
         "description": "A contrasting critical surface, most likely paired with inverted foreground colors."
       },
@@ -680,7 +680,7 @@
         "type": "color"
       },
       "critical": {
-        "value": "{color.red.400}",
+        "value": "{color.red.500}",
         "type": "color"
       },
       "success": {
@@ -704,11 +704,11 @@
         "type": "color"
       },
       "critical-subtle": {
-        "value": "{color.red.300}",
+        "value": "{color.red.400}",
         "type": "color"
       },
       "critical-strong": {
-        "value": "{color.red.500}",
+        "value": "{color.red.700}",
         "type": "color"
       },
       "success-subtle": {
@@ -745,7 +745,7 @@
         "type": "color"
       },
       "critical-inverted": {
-        "value": "{color.red.300}",
+        "value": "{color.red.400}",
         "type": "color"
       },
       "success-inverted": {
@@ -761,7 +761,7 @@
         "type": "color"
       },
       "critical-subtle-inverted": {
-        "value": "{color.red.500}",
+        "value": "{color.red.700}",
         "type": "color"
       },
       "critical-strong-inverted": {
@@ -1619,7 +1619,7 @@
             "type": "color"
           },
           "hover": {
-            "value": "{color.red.400}",
+            "value": "{color.red.500}",
             "type": "color",
             "$extensions": {
               "studio.tokens": {
@@ -1632,7 +1632,7 @@
             }
           },
           "active": {
-            "value": "{color.red.400}",
+            "value": "{color.red.500}",
             "type": "color",
             "$extensions": {
               "studio.tokens": {
@@ -1646,7 +1646,7 @@
           },
           "primary": {
             "default": {
-              "value": "{color.red.400}",
+              "value": "{color.red.500}",
               "type": "color"
             },
             "hover": {
@@ -2239,7 +2239,7 @@
             "type": "color"
           },
           "busy-unavailable": {
-            "value": "{color.red.400}",
+            "value": "{color.red.500}",
             "type": "color"
           },
           "busy": {

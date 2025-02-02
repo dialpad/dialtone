@@ -23,7 +23,7 @@
         "type": "color"
       },
       "critical": {
-        "value": "{color.red.500}",
+        "value": "{color.red.700}",
         "type": "color"
       },
       "critical-strong": {
@@ -69,11 +69,11 @@
         "type": "color"
       },
       "critical-inverted": {
-        "value": "{color.red.400}",
+        "value": "{color.red.500}",
         "type": "color"
       },
       "critical-strong-inverted": {
-        "value": "{color.red.300}",
+        "value": "{color.red.400}",
         "type": "color"
       },
       "success-strong-inverted": {
@@ -104,7 +104,7 @@
         "type": "color"
       },
       "critical-inverted-hover": {
-        "value": "{color.red.300}",
+        "value": "{color.red.400}",
         "type": "color"
       },
       "warning-inverted-hover": {
@@ -264,7 +264,7 @@
         }
       },
       "critical-opaque": {
-        "value": "{color.red.300}",
+        "value": "{color.red.400}",
         "type": "color",
         "$extensions": {
           "studio.tokens": {
@@ -474,11 +474,11 @@
         }
       },
       "critical": {
-        "value": "{color.red.500}",
+        "value": "{color.red.700}",
         "type": "color"
       },
       "critical-inverted": {
-        "value": "{color.red.400}",
+        "value": "{color.red.500}",
         "type": "color"
       },
       "critical-strong": {
@@ -490,7 +490,7 @@
         "type": "color"
       },
       "critical-strong-inverted": {
-        "value": "{color.red.300}",
+        "value": "{color.red.400}",
         "type": "color"
       }
     }
@@ -611,7 +611,7 @@
         },
         "critical": {
           "hover": {
-            "value": "{color.red.400}",
+            "value": "{color.red.500}",
             "type": "color",
             "$extensions": {
               "studio.tokens": {
@@ -624,7 +624,7 @@
             }
           },
           "active": {
-            "value": "{color.red.400}",
+            "value": "{color.red.500}",
             "type": "color",
             "$extensions": {
               "studio.tokens": {
@@ -738,7 +738,7 @@
       "color": {
         "background": {
           "busy-unavailable": {
-            "value": "{color.red.500}",
+            "value": "{color.red.700}",
             "type": "color"
           }
         }

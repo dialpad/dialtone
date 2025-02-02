@@ -38,7 +38,7 @@
         "type": "color"
       },
       "critical-opaque": {
-        "value": "{color.red.200}",
+        "value": "{color.red.300}",
         "type": "color",
         "$extensions": {
           "studio.tokens": {
@@ -364,7 +364,7 @@
         "type": "color"
       },
       "critical-subtle": {
-        "value": "{color.red.400}",
+        "value": "{color.red.500}",
         "type": "color"
       },
       "success": {
@@ -428,7 +428,7 @@
         "type": "color"
       },
       "critical-inverted": {
-        "value": "{color.red.500}",
+        "value": "{color.red.700}",
         "type": "color"
       },
       "critical-subtle-inverted": {
@@ -444,7 +444,7 @@
         "type": "color"
       },
       "critical-strong-inverted": {
-        "value": "{color.red.400}",
+        "value": "{color.red.500}",
         "type": "color"
       },
       "success-subtle-inverted": {
@@ -512,11 +512,11 @@
         "type": "color"
       },
       "critical-inverted": {
-        "value": "{color.red.450}",
+        "value": "{color.red.600}",
         "type": "color"
       },
       "critical-strong-inverted": {
-        "value": "{color.red.400}",
+        "value": "{color.red.500}",
         "type": "color"
       },
       "success-inverted": {
@@ -627,7 +627,7 @@
             "type": "color"
           },
           "busy-unavailable": {
-            "value": "{color.red.500}",
+            "value": "{color.red.700}",
             "type": "color"
           },
           "busy": {
