@@ -1536,7 +1536,7 @@
     "mention": {
       "color": {
         "foreground": {
-          "value": "{color.neutral.white}",
+          "value": "{color.black.50}",
           "type": "color"
         },
         "foreground-strong": {

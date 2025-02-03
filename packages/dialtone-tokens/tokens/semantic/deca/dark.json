@@ -643,10 +643,6 @@
     },
     "mention": {
       "color": {
-        "foreground": {
-          "value": "{color.neutral.black}",
-          "type": "color"
-        },
         "background-strong": {
           "value": "{color.purple.600}",
           "type": "color"
