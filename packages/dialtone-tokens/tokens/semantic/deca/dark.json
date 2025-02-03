@@ -671,6 +671,19 @@
               "value": "{action.color.background.critical.primary.default}",
               "type": "color"
             }
+          },
+          "active": {
+            "value": "{action.color.background.critical.hover}",
+            "type": "color",
+            "$extensions": {
+              "studio.tokens": {
+                "modify": {
+                  "type": "lighten",
+                  "value": ".25",
+                  "space": "hsl"
+                }
+              }
+            }
           }
         },
         "base": {
@@ -686,6 +699,19 @@
             "active": {
               "value": "{action.color.background.base.primary.default}",
               "type": "color"
+            }
+          },
+          "active": {
+            "value": "{action.color.background.base.hover}",
+            "type": "color",
+            "$extensions": {
+              "studio.tokens": {
+                "modify": {
+                  "type": "lighten",
+                  "value": ".25",
+                  "space": "hsl"
+                }
+              }
             }
           }
         },
@@ -704,6 +730,19 @@
             "active": {
               "value": "{action.color.background.positive.primary.default}",
               "type": "color"
+            }
+          },
+          "active": {
+            "value": "{action.color.background.positive.hover}",
+            "type": "color",
+            "$extensions": {
+              "studio.tokens": {
+                "modify": {
+                  "type": "lighten",
+                  "value": ".25",
+                  "space": "hsl"
+                }
+              }
             }
           }
         },
