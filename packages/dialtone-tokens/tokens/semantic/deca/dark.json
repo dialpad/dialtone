@@ -26,15 +26,15 @@
         "type": "color"
       },
       "critical-strong": {
-        "value": "{color.red.700}",
+        "value": "{color.red.600}",
         "type": "color"
       },
       "warning-strong": {
-        "value": "{color.gold.700}",
+        "value": "{color.gold.600}",
         "type": "color"
       },
       "success-strong": {
-        "value": "{color.green.600}",
+        "value": "{color.green.500}",
         "type": "color"
       },
       "critical-opaque": {
@@ -168,7 +168,7 @@
         }
       },
       "info-strong": {
-        "value": "{color.blue.475}",
+        "value": "{color.blue.450}",
         "type": "color"
       },
       "secondary-opaque": {

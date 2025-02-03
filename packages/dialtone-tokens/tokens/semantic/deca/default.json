@@ -265,7 +265,7 @@
         "description": "A softer version of the Critical surface."
       },
       "critical-strong": {
-        "value": "{color.red.700}",
+        "value": "{color.red.500}",
         "type": "color",
         "description": "A contrasting critical surface, most likely paired with inverted foreground colors."
       },
@@ -280,7 +280,7 @@
         "description": "A softer version of the default warning surface."
       },
       "warning-strong": {
-        "value": "{color.gold.400}",
+        "value": "{color.gold.350}",
         "type": "color",
         "description": "A contrasting warning surface, most likely paired with inverted foreground colors."
       },
@@ -295,7 +295,7 @@
         "description": "A softer version of the default success surface."
       },
       "success-strong": {
-        "value": "{color.green.600}",
+        "value": "{color.green.500}",
         "type": "color",
         "description": "A contrasting positive state surface, most likely paired with inverted foreground colors."
       },
@@ -320,7 +320,7 @@
         "description": "A softer version of the default informational surface."
       },
       "info-strong": {
-        "value": "{color.blue.600}",
+        "value": "{color.blue.500}",
         "type": "color",
         "description": "A contrasting informational surface, most likely paired with inverted foreground colors."
       },
