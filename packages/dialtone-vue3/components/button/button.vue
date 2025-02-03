@@ -10,7 +10,6 @@
     :style="{ width: width }"
     :aria-live="computedAriaLive"
     :aria-label="loading ? 'loading' : $attrs['aria-label']"
-    v-bind="$attrs"
     v-on="buttonListeners"
   >
     <!-- NOTE(cormac): This span is needed since we can't apply styles to slots. -->
@@ -65,8 +64,6 @@ import { LINK_KIND_MODIFIERS, getLinkKindModifier } from '@/components/link';
 export default {
   compatConfig: { MODE: 3 },
   name: 'DtButton',
-
-  inheritAttrs: false,
 
   props: {
     /**
