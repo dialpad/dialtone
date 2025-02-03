@@ -7,23 +7,23 @@
           "type": "color"
         },
         "info": {
-          "value": "{color.blue.400}",
+          "value": "{color.blue.200}",
           "type": "color"
         },
         "success": {
-          "value": "{color.green.300}",
+          "value": "{color.green.200}",
           "type": "color"
         },
         "warning": {
-          "value": "{color.gold.300}",
+          "value": "{color.gold.200}",
           "type": "color"
         },
         "critical": {
-          "value": "{color.red.300}",
+          "value": "{color.red.200}",
           "type": "color"
         },
         "bulletin": {
-          "value": "{color.brand.purple}",
+          "value": "{color.surface.brand-strong}",
           "type": "color"
         },
         "bulletin-subtle": {
