@@ -465,6 +465,14 @@ export default {
         setLinkInputAriaLabel: 'Input field to add link',
       }),
     },
+
+    /**
+     * Use default paste handler.
+     */
+    useDefaultPasteHandler: {
+      type: Boolean,
+      default: false,
+    },
   },
 
   emits: [

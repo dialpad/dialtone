@@ -71,11 +71,9 @@
 
 ## [8.45.2-beta.1](https://github.com/dialpad/dialtone/compare/dialtone-css/v8.45.1...dialtone-css/v8.45.2-beta.1) (2024-10-25)
 
-
 ### Bug Fixes
 
 * DLT-1548 fix opacity classes selectors ([#520](https://github.com/dialpad/dialtone/issues/520)) ([1e6ef93](https://github.com/dialpad/dialtone/commit/1e6ef93933ee3dad7fa0c0cea5ab79ef7c9787eb))
-
 
 ### Documentation
 
