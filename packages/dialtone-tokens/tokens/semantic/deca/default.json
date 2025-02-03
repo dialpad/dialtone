@@ -964,8 +964,17 @@
             "type": "color"
           },
           "active": {
-            "value": "{color.purple.200}",
-            "type": "color"
+            "value": "{action.color.background.base.hover}",
+            "type": "color",
+            "$extensions": {
+              "studio.tokens": {
+                "modify": {
+                  "type": "darken",
+                  "value": ".1",
+                  "space": "hsl"
+                }
+              }
+            }
           },
           "primary": {
             "default": {
@@ -992,8 +1001,17 @@
             "type": "color"
           },
           "active": {
-            "value": "{color.red.200}",
-            "type": "color"
+            "value": "{action.color.background.critical.hover}",
+            "type": "color",
+            "$extensions": {
+              "studio.tokens": {
+                "modify": {
+                  "type": "darken",
+                  "value": ".1",
+                  "space": "hsl"
+                }
+              }
+            }
           },
           "primary": {
             "default": {
@@ -1048,8 +1066,17 @@
             "type": "color"
           },
           "active": {
-            "value": "{color.surface.bold-opaque}",
-            "type": "color"
+            "value": "{action.color.background.muted.hover}",
+            "type": "color",
+            "$extensions": {
+              "studio.tokens": {
+                "modify": {
+                  "type": "darken",
+                  "value": ".1",
+                  "space": "hsl"
+                }
+              }
+            }
           }
         },
         "disabled": {
@@ -1068,8 +1095,17 @@
             "type": "color"
           },
           "active": {
-            "value": "{color.green.200}",
-            "type": "color"
+            "value": "{action.color.background.positive.hover}",
+            "type": "color",
+            "$extensions": {
+              "studio.tokens": {
+                "modify": {
+                  "type": "darken",
+                  "value": ".1",
+                  "space": "hsl"
+                }
+              }
+            }
           },
           "primary": {
             "default": {
