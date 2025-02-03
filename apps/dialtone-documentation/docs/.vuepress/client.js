@@ -10,6 +10,7 @@ import Overview from './views/Overview.vue';
 // Base components
 import CodeWellHeader from './baseComponents/CodeWellHeader.vue';
 import UtilityClassTable from './baseComponents/UtilityClassTable.vue';
+import NewUtilityClassTable from './baseComponents/NewUtilityClassTable.vue';
 import ComponentClassTable from './baseComponents/ComponentClassTable.vue';
 import TokenTable from './baseComponents/tokens/TokenTable.vue';
 import ComponentVueApi from './baseComponents/ComponentVueApi.vue';
@@ -31,6 +32,7 @@ export default defineClientConfig({
     // Base components
     app.component('CodeWellHeader', CodeWellHeader);
     app.component('UtilityClassTable', UtilityClassTable);
+    app.component('NewUtilityClassTable', NewUtilityClassTable);
     app.component('ComponentClassTable', ComponentClassTable);
     app.component('TokenTable', TokenTable);
     app.component('ComponentVueApi', ComponentVueApi);
