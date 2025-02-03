@@ -1,6 +1,6 @@
 ---
-title: Background Patterns
-description: Utilities for adding distinctive background patterns for Department and Call Centers.
+title: Background Pattern
+description: Utilities for adding distinctive background pattern for Department and Call Centers.
 ---
 
 ## Usage

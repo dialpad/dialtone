@@ -1,5 +1,5 @@
 ---
-title: Gradients
+title: Background Gradient
 description: Utilities for creating an background gradient and controlling its stops.
 ---
 

@@ -8,13 +8,19 @@ description: Utilities for controlling the position of an element's background i
 Use `d-bgp-{position}` to control where an element's background image is placed.
 
 <code-well-header class="d-fl-col4 d-fw-wrap d-g12 d-p12 d-bgc-purple-100 d-bgo50" custom>
-  <div class="d-d-flex d-fd-column d-ai-center d-stack4" v-for="{ className } in positions">
+  <div
+    class="d-d-flex d-fd-column d-ai-center d-stack4"
+    v-for="(_, className) in positions"
+    :key="className"
+    >
       <div
-        class="d-fl-center d-w128 d-h128 d-bgc-purple-300 d-bar8 d-bc-purple-200 d-of-hidden d-bgr-none d-bgs-var" style="--bgg-size: 65% 65%; background-image: url('https://cdn.jpegmini.com/user/images/slider_puffin_before_mobile.jpg');"
-        :class="`d-bgp-${className}`"
+        class="d-fl-center d-w128 d-h128 d-bgc-purple-300 d-bar8 d-bc-purple-200 d-of-hidden d-bgr-none d-bgs-var"
+        style="--bgg-size: 65% 65%;"
+        :style="`background-image: url(${$withBase('/assets/images/test.jpg')});`"
+        :class="className"
       >
       </div>
-      <code>.d-bgp-{{ className }}</code>
+      <code v-text="className" />
   </div>
 </code-well-header>
 
@@ -29,21 +35,14 @@ Use `d-bgp-{position}` to control where an element's background image is placed.
 <div class="d-bgr-none d-bgs-var d-bgp-l" style="--bgg-size: 65% 65%; background-image: url(...);">...</div>
 ```
 
-<script setup>
-  import { positions } from '@data/backgrounds.json';
-</script>
-
 ## Classes
 
-<utility-class-table>
-  <template #content>
-    <tbody>
-      <tr v-for="{ className, output } in positions">
-          <th scope="row" class="d-code--sm d-docsite-code">.d-bgp-{{ className }}</th>
-          <td class="d-code--sm">
-            background-position: {{ output }} !important;
-          </td>
-      </tr>
-    </tbody>
-  </template>
-</utility-class-table>
+<new-utility-class-table :classes="positions"/>
+
+<script setup>
+  import { inject } from 'vue';
+  import { extractUtilityClasses } from '@utilities'
+
+  const utilityClassDocs = inject('utilityClassDocs');
+  const positions = extractUtilityClasses(utilityClassDocs, 'd-bgp-');
+</script>
