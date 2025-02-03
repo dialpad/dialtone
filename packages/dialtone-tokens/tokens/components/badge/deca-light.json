@@ -37,7 +37,7 @@
       },
       "foreground": {
         "default": {
-          "value": "{color.foreground.primary}",
+          "value": "{color.black.1000}",
           "type": "color"
         },
         "bulletin": {
