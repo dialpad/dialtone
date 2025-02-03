@@ -1,3 +1,16 @@
+# [9.99.0-beta.1](https://github.com/dialpad/dialtone/compare/dialtone/v9.98.0...dialtone/v9.99.0-beta.1) (2025-02-03)
+
+
+### Bug Fixes
+
+* NO-JIRA set compat mode 3 on vue 3 components ([#620](https://github.com/dialpad/dialtone/issues/620)) ([8c96425](https://github.com/dialpad/dialtone/commit/8c964250c6e16d30c247ef736fa4400eb7943038))
+* **Rich Text Editor, Editor:** DLT-2175 editor loses text formatting while pasting ([#543](https://github.com/dialpad/dialtone/issues/543)) ([a475b84](https://github.com/dialpad/dialtone/commit/a475b8472933f18b6a5b1b5db087209d4ed50567))
+
+
+### Features
+
+* **Editor:** DLT-2338 add method to insert content in editor ([#621](https://github.com/dialpad/dialtone/issues/621)) ([97be8e3](https://github.com/dialpad/dialtone/commit/97be8e3f6c1d700319376b1496027fb0757b52c9))
+
 ## [9.79.2-beta.2](https://github.com/dialpad/dialtone/compare/dialtone/v9.79.2-beta.1...dialtone/v9.79.2-beta.2) (2024-10-25)
 
 
