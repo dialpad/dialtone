@@ -190,12 +190,12 @@
           "link": "/utilities/backgrounds/size.html"
         },
         {
-          "text": "Gradients",
-          "link": "/utilities/backgrounds/gradients.html"
+          "text": "Background Gradient",
+          "link": "/utilities/backgrounds/gradient.html"
         },
         {
-          "text": "Patterns",
-          "link": "/utilities/backgrounds/patterns.html"
+          "text": "Background Pattern",
+          "link": "/utilities/backgrounds/pattern.html"
         }
       ]
     },
