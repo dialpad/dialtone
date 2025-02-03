@@ -674,7 +674,7 @@
         }
       },
       "focus": {
-        "value": "{color.blue.425}",
+        "value": "{color.blue.475}",
         "type": "color"
       },
       "critical": {
