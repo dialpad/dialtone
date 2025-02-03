@@ -970,7 +970,7 @@
               "studio.tokens": {
                 "modify": {
                   "type": "darken",
-                  "value": ".1",
+                  "value": ".25",
                   "space": "hsl"
                 }
               }
@@ -1007,7 +1007,7 @@
               "studio.tokens": {
                 "modify": {
                   "type": "darken",
-                  "value": ".1",
+                  "value": ".25",
                   "space": "hsl"
                 }
               }
@@ -1066,17 +1066,8 @@
             "type": "color"
           },
           "active": {
-            "value": "{action.color.background.muted.hover}",
-            "type": "color",
-            "$extensions": {
-              "studio.tokens": {
-                "modify": {
-                  "type": "darken",
-                  "value": ".1",
-                  "space": "hsl"
-                }
-              }
-            }
+            "value": "{color.surface.bold-opaque}",
+            "type": "color"
           }
         },
         "disabled": {
@@ -1101,7 +1092,7 @@
               "studio.tokens": {
                 "modify": {
                   "type": "darken",
-                  "value": ".1",
+                  "value": ".25",
                   "space": "hsl"
                 }
               }
