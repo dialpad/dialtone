@@ -1,3 +1,16 @@
+# [9.99.0](https://github.com/dialpad/dialtone/compare/dialtone/v9.98.0...dialtone/v9.99.0) (2025-02-04)
+
+
+### Bug Fixes
+
+* **Button:** NO-JIRA remove v-bind attrs from button ([#622](https://github.com/dialpad/dialtone/issues/622)) ([099b88d](https://github.com/dialpad/dialtone/commit/099b88d4c532943a17e44dd01fdd651e173166a6))
+* NO-JIRA set compat mode 3 on vue 3 components ([#620](https://github.com/dialpad/dialtone/issues/620)) ([8c96425](https://github.com/dialpad/dialtone/commit/8c964250c6e16d30c247ef736fa4400eb7943038))
+
+
+### Features
+
+* **Editor:** DLT-2338 add method to insert content in editor ([#621](https://github.com/dialpad/dialtone/issues/621)) ([97be8e3](https://github.com/dialpad/dialtone/commit/97be8e3f6c1d700319376b1496027fb0757b52c9))
+
 # [9.98.0](https://github.com/dialpad/dialtone/compare/dialtone/v9.97.0...dialtone/v9.98.0) (2025-01-31)
 
 
