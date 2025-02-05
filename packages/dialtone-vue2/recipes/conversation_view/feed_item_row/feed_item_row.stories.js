@@ -6,14 +6,17 @@ import DtRecipeFeedItemRowVariantsTemplate from './feed_item_row_variants.story.
 
 import { DEFAULT_FEED_ROW_STATE, FEED_ROW_STATE_BACKGROUND_COLOR } from './feed_item_row_constants';
 
+import avatarImage from '@/common/assets/avatar1.png?url';
+import testImage from '@/common/assets/test.jpg?url';
+
 export const argsData = {
-  avatarImageUrl: '/avatar1.png',
+  avatarImageUrl: avatarImage,
   displayName: 'Dwight Schrute',
   time: '4:54 PM',
   shortTime: '4:54',
   onFocus: action('focus'),
   onHover: action('hover'),
-  attachment: '<img class="d-recipe-feed-item-row__image" alt="test image" src="/test.jpg"></img>',
+  attachment: `<img class="d-recipe-feed-item-row__image" alt="test image" src="${testImage}"></img>`,
   default: `Elementum fames :smile: nullam elementum velit proin vitae aliquet.
   Platea nulla consectetur consequat sagittis nullam et ultricies nisl rhoncus
   aliquet elementum venenatis :laughing: quisque.`,
