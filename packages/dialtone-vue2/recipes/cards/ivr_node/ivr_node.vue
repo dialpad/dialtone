@@ -110,7 +110,8 @@ import {
   IVR_NODE_GO_TO,
   IVR_NODE_ASSIGN,
   IVR_NODE_TRANSFER,
-  IVR_NODE_HANGUP, IVR_NODE_CUSTOMER_DATA,
+  IVR_NODE_HANGUP,
+  IVR_NODE_CUSTOMER_DATA,
 } from './ivr_node_constants';
 
 const typeToIcon = new Map([
