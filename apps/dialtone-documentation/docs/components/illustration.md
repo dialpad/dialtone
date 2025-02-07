@@ -6,7 +6,7 @@ thumb: true
 storybook: https://dialtone.dialpad.com/vue/?path=/story/components-illustration--default
 ---
 
-Check out our [illustration catalog](/design/illustrations/index.md, and our [brand section](/design/brand/index.md) for information on how to use this component.
+Check out our [illustration catalog](/design/illustrations/index.md), and our [brand section](/design/brand/index.md) for information on how to use this component.
 
 ## Vue API
 
