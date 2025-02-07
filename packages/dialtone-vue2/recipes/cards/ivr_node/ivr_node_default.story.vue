@@ -59,7 +59,7 @@
           <p>Carolina Garcia Rodriguez</p>
         </div>
       </div>
-      <div v-if="hangup || branch || goTo || assign">
+      <div v-if="hangup || branch || goTo || assign || customerData">
         <p class="d-fw-bold">
           Name
         </p>
@@ -132,7 +132,7 @@
 import DtRecipeIvrNode from './ivr_node.vue';
 import {
   IVR_NODE_ASSIGN,
-  IVR_NODE_BRANCH,
+  IVR_NODE_BRANCH, IVR_NODE_CUSTOMER_DATA,
   IVR_NODE_EXPERT, IVR_NODE_GO_TO, IVR_NODE_HANGUP,
   IVR_NODE_LABELS,
   IVR_NODE_PROMPT_COLLECT,
@@ -184,6 +184,10 @@ export default {
 
     assign () {
       return this.$attrs.nodeType === IVR_NODE_ASSIGN;
+    },
+
+    customerData () {
+      return this.$attrs.nodeType === IVR_NODE_CUSTOMER_DATA;
     },
 
     transfer () {

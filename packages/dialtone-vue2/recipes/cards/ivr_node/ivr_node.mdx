@@ -190,6 +190,26 @@ A node in IVR used to assign variables that will be available for use throughout
 </dt-recipe-ivr-node>
 ```
 
+## Customer Data Node
+
+A node in IVR used to collect key value pair of data to be shown during the customer journeys.
+<Canvas>
+    <Story of={IvrNodeStories.CustomerData} />
+</Canvas>
+
+```html
+<dt-recipe-ivr-node
+  :node-label="CustomerData"
+  :node-type="customerdata"
+  :drop-down-menu-items="items"
+  :is-selected="false"
+  :menu-button-label="'Node menu'"
+>
+  <p class="d-fw-bold">Customer Data</p>
+  <p>Description</p>
+</dt-recipe-ivr-node>
+```
+
 ## Transfer Node
 
 A node in IVR used to transfer to person, department, call center, etc.

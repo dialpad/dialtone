@@ -7,6 +7,7 @@ export const IVR_NODE_BRANCH = 'branch';
 export const IVR_NODE_TRANSFER = 'transfer';
 export const IVR_NODE_HANGUP = 'hangup';
 export const IVR_NODE_ASSIGN = 'assign';
+export const IVR_NODE_CUSTOMER_DATA = 'customerdata';
 
 export const IVR_NODE_ICON_TYPES = {
   [IVR_NODE_PROMPT_MENU]: 'keypad',
@@ -16,6 +17,7 @@ export const IVR_NODE_ICON_TYPES = {
   [IVR_NODE_BRANCH]: 'branch',
   [IVR_NODE_GO_TO]: 'call-merge',
   [IVR_NODE_ASSIGN]: 'chevrons-right',
+  [IVR_NODE_CUSTOMER_DATA]: 'list-bullet',
   [IVR_NODE_TRANSFER]: 'transfer',
   [IVR_NODE_HANGUP]: 'phone-hang-up',
 };
@@ -30,6 +32,7 @@ export const IVR_NODE_LABELS = {
   [IVR_NODE_TRANSFER]: 'Transfer',
   [IVR_NODE_HANGUP]: 'Hangup',
   [IVR_NODE_ASSIGN]: 'Assign',
+  [IVR_NODE_CUSTOMER_DATA]: 'Customer Data',
 };
 
 const IVR_NODE_CLASSES = {
@@ -55,6 +58,7 @@ export const IVR_NODE_CLASS_MAPPING = {
   [IVR_NODE_BRANCH]: IVR_NODE_CLASSES.LOGIC,
   [IVR_NODE_GO_TO]: IVR_NODE_CLASSES.LOGIC,
   [IVR_NODE_ASSIGN]: IVR_NODE_CLASSES.LOGIC,
+  [IVR_NODE_CUSTOMER_DATA]: IVR_NODE_CLASSES.LOGIC,
   [IVR_NODE_TRANSFER]: IVR_NODE_CLASSES.TERMINAL,
   [IVR_NODE_HANGUP]: IVR_NODE_CLASSES.TERMINAL,
 };
