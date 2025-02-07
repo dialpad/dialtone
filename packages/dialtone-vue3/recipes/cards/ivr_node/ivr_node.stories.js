@@ -184,6 +184,13 @@ export const Assign = {
   },
 };
 
+export const CustomerData = {
+  render: DefaultTemplate,
+  args: {
+    nodeType: 'customerdata',
+  },
+};
+
 export const Transfer = {
   render: DefaultTemplate,
 
