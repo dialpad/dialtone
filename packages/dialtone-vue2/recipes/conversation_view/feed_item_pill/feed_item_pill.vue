@@ -13,7 +13,10 @@
             @mouseleave="hover = false"
             @click="onClick"
           >
-            <dt-item-layout class="d-recipe-feed-item-pill__layout">
+            <dt-item-layout
+              class="d-recipe-feed-item-pill__layout"
+              unstyled
+            >
               <slot name="title">
                 <span class="d-recipe-feed-item-pill__title">{{ title }}</span>
               </slot>
@@ -35,19 +38,37 @@
                   />
                 </div>
               </template>
-              <template #subtitle>
-                <slot name="subtitle" />
+              <template
+                v-if="$slots.subtitle"
+                #subtitle
+              >
+                <div class="d-recipe-feed-item-pill__subtitle">
+                  <slot name="subtitle" />
+                </div>
               </template>
-              <template #bottom>
-                <slot name="bottom" />
+              <template
+                v-if="$slots.bottom"
+                #bottom
+              >
+                <div class="d-recipe-feed-item-pill__bottom">
+                  <slot name="bottom" />
+                </div>
               </template>
-              <template #right>
-                <slot name="right" />
+              <template
+                v-if="$slots.right"
+                #right
+              >
+                <div class="d-recipe-feed-item-pill__right">
+                  <slot name="right" />
+                </div>
               </template>
             </dt-item-layout>
           </button>
         </template>
-        <template #content>
+        <template
+          v-if="$slots.content"
+          #content
+        >
           <div class="d-recipe-feed-item-pill__content">
             <slot name="content" />
           </div>

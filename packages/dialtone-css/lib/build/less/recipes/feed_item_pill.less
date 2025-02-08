@@ -25,15 +25,14 @@
   gap: var(--dt-space-300);
   width: var(--dt-size-100-percent);
   padding: var(--dt-space-400);
-
-  & > .d-item-layout--left {
-    justify-content: center;
-    padding-right: var(--dt-space-0);
-  }
+  line-height: var(--dt-font-line-height-300)
 }
 
 .d-recipe-feed-item-pill__icon {
-  display: flex;
+  display: grid;
+  place-content: center;
+  min-width: var(--dt-size-600);
+  height: var(--dt-size-100-percent);
 
   & svg {
     animation: d-recipe-feed-item-pill-fade 0.15s ease-in;
@@ -46,7 +45,27 @@
 }
 
 .d-recipe-feed-item-pill__title {
+  display: grid;
+  align-content: center;
+  height: var(--dt-size-100-percent);
   font-weight: var(--dt-font-weight-bold);
+}
+
+.d-recipe-feed-item-pill__subtitle {
+  margin-top: var(--dt-space-200-negative);
+  color: var(--dt-color-foreground-tertiary);
+  font-size: var(--dt-font-size-100);
+}
+
+.d-recipe-feed-item-pill__bottom {
+  margin-top: var(--dt-space-200);
+}
+
+.d-recipe-feed-item-pill__right {
+  display: grid;
+  place-content: center;
+  min-width: var(--dt-size-600);
+  height: var(--dt-size-100-percent);
 }
 
 // Gradient radius solution taken from https://stackoverflow.com/a/53037637
