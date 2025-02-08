@@ -88,6 +88,7 @@
     <template #list>
       <div
         ref="list"
+        class="d-recipe-combobox-multi-select__list"
         @mousedown.prevent
       >
         <slot
