@@ -234,8 +234,18 @@
         "type": "color",
         "description": "For adjacent or complementary regions."
       },
+      "secondary-inverted": {
+        "value": "{color.black.800}",
+        "type": "color",
+        "description": "For adjacent or complementary regions."
+      },
       "moderate": {
         "value": "{color.black.200}",
+        "type": "color",
+        "description": "A tertiary surface level, prominent without being too overpowering."
+      },
+      "moderate-inverted": {
+        "value": "{color.black.700}",
         "type": "color",
         "description": "A tertiary surface level, prominent without being too overpowering."
       },
@@ -244,8 +254,18 @@
         "type": "color",
         "description": "Highlight or call attention to specific areas of the interface."
       },
+      "bold-inverted": {
+        "value": "{color.black.600}",
+        "type": "color",
+        "description": "Highlight or call attention to specific areas of the interface."
+      },
       "strong": {
         "value": "{color.black.600}",
+        "type": "color",
+        "description": "Use sparingly to draw the eye to a relatively important region."
+      },
+      "strong-inverted": {
+        "value": "{color.black.400}",
         "type": "color",
         "description": "Use sparingly to draw the eye to a relatively important region."
       },
@@ -254,8 +274,23 @@
         "type": "color",
         "description": "An inverted surface for lightened content and elements, most likely paired with inverted foreground colors."
       },
+      "contrast-inverted": {
+        "value": "{color.black.100}",
+        "type": "color",
+        "description": "An inverted surface for lightened content and elements, most likely paired with inverted foreground colors."
+      },
+      "primary-inverted": {
+        "value": "{color.black.950}",
+        "type": "color",
+        "description": "An inverted surface for lightened content and elements, most likely paired with inverted foreground colors."
+      },
       "critical": {
         "value": "{color.red.100}",
+        "type": "color",
+        "description": "Background surface color containing error, danger, or otherwise critical messaging or elements."
+      },
+      "critical-inverted": {
+        "value": "{color.red.900}",
         "type": "color",
         "description": "Background surface color containing error, danger, or otherwise critical messaging or elements."
       },
@@ -264,8 +299,18 @@
         "type": "color",
         "description": "A softer version of the Critical surface."
       },
+      "critical-subtle-inverted": {
+        "value": "{color.red.1000}",
+        "type": "color",
+        "description": "A softer version of the Critical surface."
+      },
       "critical-strong": {
         "value": "{color.red.500}",
+        "type": "color",
+        "description": "A contrasting critical surface, most likely paired with inverted foreground colors."
+      },
+      "critical-strong-inverted": {
+        "value": "{color.red.300}",
         "type": "color",
         "description": "A contrasting critical surface, most likely paired with inverted foreground colors."
       },
@@ -274,12 +319,27 @@
         "type": "color",
         "description": "Background surface color highlighting messaging or elements that may require user's attention."
       },
+      "warning-inverted": {
+        "value": "{color.gold.900}",
+        "type": "color",
+        "description": "Background surface color highlighting messaging or elements that may require user's attention."
+      },
       "warning-subtle": {
         "value": "{color.gold.50}",
         "type": "color",
         "description": "A softer version of the default warning surface."
       },
+      "warning-subtle-inverted": {
+        "value": "{color.gold.1000}",
+        "type": "color",
+        "description": "A softer version of the default warning surface."
+      },
       "warning-strong": {
+        "value": "{color.gold.350}",
+        "type": "color",
+        "description": "A contrasting warning surface, most likely paired with inverted foreground colors."
+      },
+      "warning-strong-inverted": {
         "value": "{color.gold.350}",
         "type": "color",
         "description": "A contrasting warning surface, most likely paired with inverted foreground colors."
