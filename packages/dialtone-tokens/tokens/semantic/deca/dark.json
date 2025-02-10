@@ -64,7 +64,7 @@
         }
       },
       "warning-opaque": {
-        "value": "{color.gold.300}",
+        "value": "{color.gold.200}",
         "type": "color",
         "$extensions": {
           "studio.tokens": {
@@ -90,13 +90,13 @@
         }
       },
       "success-opaque": {
-        "value": "{color.green.400}",
+        "value": "{color.green.200}",
         "type": "color",
         "$extensions": {
           "studio.tokens": {
             "modify": {
               "type": "alpha",
-              "value": ".19",
+              "value": ".28",
               "space": "hsl"
             }
           }

@@ -602,6 +602,20 @@
         },
         "description": "Critical surface as opaque background color."
       },
+      "critical-opaque-inverted": {
+        "value": "{color.red.700}",
+        "type": "color",
+        "$extensions": {
+          "studio.tokens": {
+            "modify": {
+              "type": "alpha",
+              "value": ".50",
+              "space": "hsl"
+            }
+          }
+        },
+        "description": "Critical surface as opaque background color."
+      },
       "critical-subtle-opaque": {
         "value": "{color.red.100}",
         "type": "color",
@@ -610,6 +624,20 @@
             "modify": {
               "type": "alpha",
               "value": ".5",
+              "space": "hsl"
+            }
+          }
+        },
+        "description": "Critical subtle surface as opaque background color."
+      },
+      "critical-subtle-opaque-inverted": {
+        "value": "{color.red.1000}",
+        "type": "color",
+        "$extensions": {
+          "studio.tokens": {
+            "modify": {
+              "type": "alpha",
+              "value": ".6",
               "space": "hsl"
             }
           }
@@ -630,6 +658,20 @@
         },
         "description": "Warning surface as opaque background color"
       },
+      "warning-opaque-inverted": {
+        "value": "{color.gold.700}",
+        "type": "color",
+        "$extensions": {
+          "studio.tokens": {
+            "modify": {
+              "type": "alpha",
+              "value": ".35",
+              "space": "hsl"
+            }
+          }
+        },
+        "description": "Warning surface as opaque background color"
+      },
       "warning-subtle-opaque": {
         "value": "{color.gold.100}",
         "type": "color",
@@ -638,6 +680,20 @@
             "modify": {
               "type": "alpha",
               "value": ".50",
+              "space": "hsl"
+            }
+          }
+        },
+        "description": "Warning subtle surface as opaque background color"
+      },
+      "warning-subtle-opaque-inverted": {
+        "value": "{color.gold.1000}",
+        "type": "color",
+        "$extensions": {
+          "studio.tokens": {
+            "modify": {
+              "type": "alpha",
+              "value": ".7",
               "space": "hsl"
             }
           }
