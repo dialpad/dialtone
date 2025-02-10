@@ -809,6 +809,14 @@ export default {
       this.$emit('quick-replies-click');
     },
 
+    insertInMessageBody (messageContent) {
+      this.$refs.richTextEditor?.editor.chain().focus().insertContent(messageContent).run();
+    },
+
+    setCursorPosition (position = null) {
+      this.$refs.richTextEditor?.editor.chain().focus(position).run();
+    },
+
     onBlockquoteToggle () {
       this.$refs.richTextEditor?.editor.chain().focus().toggleBlockquote().run();
     },

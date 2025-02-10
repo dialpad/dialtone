@@ -74,7 +74,11 @@
           <!-- eslint-disable-next-line vuejs-accessibility/no-static-element-interactions -->
           <div
             ref="listWrapper"
-            :class="[DROPDOWN_PADDING_CLASSES[padding], listClass]"
+            :class="[
+              'd-recipe-combobox-with-popover__list',
+              DROPDOWN_PADDING_CLASSES[padding],
+              listClass,
+            ]"
             @mouseleave="clearHighlightIndex"
             @focusout="clearHighlightIndex"
           >

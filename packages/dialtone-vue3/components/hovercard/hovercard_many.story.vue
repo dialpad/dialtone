@@ -137,14 +137,14 @@
 
 <script setup>
 import DtHovercard from './hovercard.vue';
-import DtRecipeFeedItemRow from '@/recipes/conversation_view/feed_item_row/feed_item_row.vue';
-import DtRecipeEmojiRow from '@/recipes/conversation_view/emoji_row/emoji_row.vue';
-import avatar1 from '@/common/assets/avatar1.png';
-import avatar2 from '@/common/assets/avatar2.png';
-import DtStack from '../stack/stack.vue';
-import DtIcon from '../icon/icon.vue';
-import DtButton from '../button/button.vue';
-import DtAvatar from '../avatar/avatar.vue';
+import avatar1 from '@/common/assets/avatar1.png?url';
+import avatar2 from '@/common/assets/avatar2.png?url';
+import { DtRecipeFeedItemRow } from '@/recipes/conversation_view/feed_item_row';
+import { DtRecipeEmojiRow } from '@/recipes/conversation_view/emoji_row';
+import { DtStack } from '@/components/stack';
+import { DtIcon } from '@/components/icon';
+import { DtButton } from '@/components/button';
+import { DtAvatar } from '@/components/avatar';
 
 const cardData = [{
   name: 'Jaqueline Nackos', src: avatar2, time: '4:54 PM', default: `<p class="d-fs-200 d-lh-400 d-wmx90ch">

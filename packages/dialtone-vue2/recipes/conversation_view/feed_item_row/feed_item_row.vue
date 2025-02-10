@@ -3,7 +3,7 @@
     ref="FeedItemRef"
     navigation-type="none"
     v-bind="$attrs"
-    :class="['d-recipe-feed-item-row', listItemClasses]"
+    :class="listItemClasses"
     data-qa="dt-recipe-feed-item-row"
     v-on="feedListeners"
   >
@@ -84,6 +84,7 @@
     </article>
 
     <template #bottom>
+      <!-- Reactions -->
       <div
         v-if="$slots.reactions"
         class="d-recipe-feed-item-row__reactions"
@@ -92,6 +93,8 @@
         <!-- @slot Slot for reactions row component -->
         <slot name="reactions" />
       </div>
+
+      <!-- Threading -->
       <div
         v-if="$slots.threading"
         class="d-recipe-feed-item-row__threading"
@@ -99,10 +102,8 @@
         <!-- @slot Slot for threading row component -->
         <slot name="threading" />
       </div>
-    </template>
 
-    <!-- Action menu -->
-    <template #right>
+      <!-- Action menu -->
       <div
         v-show="isActive"
         data-qa="dt-recipe-feed-item-row--menu"

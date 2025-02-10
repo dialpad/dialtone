@@ -1,3 +1,10 @@
+# [2.173.0](https://github.com/dialpad/dialtone/compare/dialtone-vue2/v2.172.0...dialtone-vue2/v2.173.0) (2025-02-04)
+
+
+### Features
+
+* **Editor:** DLT-2338 add method to insert content in editor ([#621](https://github.com/dialpad/dialtone/issues/621)) ([97be8e3](https://github.com/dialpad/dialtone/commit/97be8e3f6c1d700319376b1496027fb0757b52c9))
+
 # [2.172.0](https://github.com/dialpad/dialtone/compare/dialtone-vue2/v2.171.3...dialtone-vue2/v2.172.0) (2025-01-29)
 
 
