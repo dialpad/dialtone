@@ -349,8 +349,18 @@
         "type": "color",
         "description": "Background surface color containing messaging or elements expressing a positive or successful state."
       },
+      "success-inverted": {
+        "value": "{color.green.900}",
+        "type": "color",
+        "description": "Background surface color containing messaging or elements expressing a positive or successful state."
+      },
       "success-subtle": {
         "value": "{color.green.50}",
+        "type": "color",
+        "description": "A softer version of the default success surface."
+      },
+      "success-subtle-inverted": {
+        "value": "{color.green.1000}",
         "type": "color",
         "description": "A softer version of the default success surface."
       },
@@ -359,8 +369,18 @@
         "type": "color",
         "description": "A contrasting positive state surface, most likely paired with inverted foreground colors."
       },
+      "success-strong-inverted": {
+        "value": "{color.green.300}",
+        "type": "color",
+        "description": "A contrasting positive state surface, most likely paired with inverted foreground colors."
+      },
       "info": {
         "value": "{color.blue.100}",
+        "type": "color",
+        "description": "Background surface color containing messaging or elements communicated as generally informational."
+      },
+      "info-inverted": {
+        "value": "{color.blue.900}",
         "type": "color",
         "description": "Background surface color containing messaging or elements communicated as generally informational."
       },
@@ -369,8 +389,18 @@
         "type": "color",
         "description": "Background surface color containing messaging or elements communicated as generally informational."
       },
+      "brand-inverted": {
+        "value": "{color.purple.600}",
+        "type": "color",
+        "description": "Background surface color containing messaging or elements communicated as generally informational."
+      },
       "info-subtle": {
         "value": "{color.blue.50}",
+        "type": "color",
+        "description": "A softer version of the default informational surface."
+      },
+      "info-subtle-inverted": {
+        "value": "{color.blue.1000}",
         "type": "color",
         "description": "A softer version of the default informational surface."
       },
@@ -379,13 +409,28 @@
         "type": "color",
         "description": "A softer version of the default informational surface."
       },
+      "brand-subtle-inverted": {
+        "value": "{color.purple.1000}",
+        "type": "color",
+        "description": "A softer version of the default informational surface."
+      },
       "info-strong": {
         "value": "{color.blue.500}",
         "type": "color",
         "description": "A contrasting informational surface, most likely paired with inverted foreground colors."
       },
+      "info-strong-inverted": {
+        "value": "{color.blue.425}",
+        "type": "color",
+        "description": "A contrasting informational surface, most likely paired with inverted foreground colors."
+      },
       "brand-strong": {
         "value": "{color.purple.400}",
+        "type": "color",
+        "description": "A contrasting informational surface, most likely paired with inverted foreground colors."
+      },
+      "brand-strong-inverted": {
+        "value": "{color.purple.300}",
         "type": "color",
         "description": "A contrasting informational surface, most likely paired with inverted foreground colors."
       },
