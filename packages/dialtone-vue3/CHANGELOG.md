@@ -1,3 +1,15 @@
+# [3.167.0](https://github.com/dialpad/dialtone/compare/dialtone-vue3/v3.166.0...dialtone-vue3/v3.167.0) (2025-02-11)
+
+
+### Code Refactoring
+
+* DLT-1450 custom item layout ([#615](https://github.com/dialpad/dialtone/issues/615)) ([18bd10c](https://github.com/dialpad/dialtone/commit/18bd10c8eb34cbf0085b18593573b5edb588a9e0))
+
+
+### Features
+
+* **Ivr Node Customer Data:** DP-128891 add new step type ([#624](https://github.com/dialpad/dialtone/issues/624)) ([d00ecc7](https://github.com/dialpad/dialtone/commit/d00ecc739d32e1c7b824b1725e5d78a688d0edda))
+
 # [3.166.0](https://github.com/dialpad/dialtone/compare/dialtone-vue3/v3.165.0...dialtone-vue3/v3.166.0) (2025-02-04)
 
 
