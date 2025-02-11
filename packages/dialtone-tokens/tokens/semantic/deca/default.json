@@ -714,6 +714,20 @@
         },
         "description": "Success surface as opaque background color."
       },
+      "success-opaque-inverted": {
+        "value": "{color.green.600}",
+        "type": "color",
+        "$extensions": {
+          "studio.tokens": {
+            "modify": {
+              "type": "alpha",
+              "value": ".30",
+              "space": "hsl"
+            }
+          }
+        },
+        "description": "Success surface as opaque background color."
+      },
       "success-subtle-opaque": {
         "value": "{color.green.100}",
         "type": "color",
@@ -722,6 +736,20 @@
             "modify": {
               "type": "alpha",
               "value": ".50",
+              "space": "hsl"
+            }
+          }
+        },
+        "description": "Success subtle surface as opaque background color."
+      },
+      "success-subtle-opaque-inverted": {
+        "value": "{color.green.1000}",
+        "type": "color",
+        "$extensions": {
+          "studio.tokens": {
+            "modify": {
+              "type": "alpha",
+              "value": ".66",
               "space": "hsl"
             }
           }
