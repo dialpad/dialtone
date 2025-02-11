@@ -1,3 +1,10 @@
+## [8.49.1](https://github.com/dialpad/dialtone/compare/dialtone-css/v8.49.0...dialtone-css/v8.49.1) (2025-02-11)
+
+
+### Code Refactoring
+
+* DLT-1450 custom item layout ([#615](https://github.com/dialpad/dialtone/issues/615)) ([18bd10c](https://github.com/dialpad/dialtone/commit/18bd10c8eb34cbf0085b18593573b5edb588a9e0))
+
 # [8.49.0](https://github.com/dialpad/dialtone/compare/dialtone-css/v8.48.0...dialtone-css/v8.49.0) (2025-01-29)
 
 
