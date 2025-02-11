@@ -771,13 +771,13 @@
         "description": "Info surface as opaque background color."
       },
       "info-opaque-inverted": {
-        "value": "{color.blue.600}",
+        "value": "{color.blue.900}",
         "type": "color",
         "$extensions": {
           "studio.tokens": {
             "modify": {
               "type": "alpha",
-              "value": ".25",
+              "value": ".6",
               "space": "hsl"
             }
           }
