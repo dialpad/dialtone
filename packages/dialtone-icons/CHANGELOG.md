@@ -1,3 +1,11 @@
+# [4.34.0](https://github.com/dialpad/dialtone/compare/dialtone-icons/v4.33.0...dialtone-icons/v4.34.0) (2025-02-11)
+
+
+### Features
+
+* **Icon:** DLT-2234 update pause icon  ([#623](https://github.com/dialpad/dialtone/issues/623)) ([467e780](https://github.com/dialpad/dialtone/commit/467e78050b830baff0067ce1dcada8a10f70f7ce))
+* **Icon:** DLT-2344 icon graduation ([#627](https://github.com/dialpad/dialtone/issues/627)) ([a2e92ac](https://github.com/dialpad/dialtone/commit/a2e92ac23b8e104cdca216a029118d2c3d089f3e))
+
 # [4.33.0](https://github.com/dialpad/dialtone/compare/dialtone-icons/v4.32.0...dialtone-icons/v4.33.0) (2025-01-27)
 
 
