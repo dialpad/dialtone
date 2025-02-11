@@ -798,6 +798,20 @@
         },
         "description": "Info surface as opaque background color."
       },
+      "brand-opaque-inverted": {
+        "value": "{color.purple.600}",
+        "type": "color",
+        "$extensions": {
+          "studio.tokens": {
+            "modify": {
+              "type": "alpha",
+              "value": ".8",
+              "space": "hsl"
+            }
+          }
+        },
+        "description": "Info surface as opaque background color."
+      },
       "info-subtle-opaque-inverted": {
         "value": "{color.blue.1000}",
         "type": "color",
@@ -834,6 +848,20 @@
             "modify": {
               "type": "alpha",
               "value": ".20",
+              "space": "hsl"
+            }
+          }
+        },
+        "description": "Info surface as opaque background color."
+      },
+      "brand-subtle-opaque-inverted": {
+        "value": "{color.purple.1000}",
+        "type": "color",
+        "$extensions": {
+          "studio.tokens": {
+            "modify": {
+              "type": "alpha",
+              "value": ".66",
               "space": "hsl"
             }
           }
