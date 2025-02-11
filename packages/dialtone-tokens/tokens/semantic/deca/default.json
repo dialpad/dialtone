@@ -280,7 +280,7 @@
         "description": "An inverted surface for lightened content and elements, most likely paired with inverted foreground colors."
       },
       "primary-inverted": {
-        "value": "{color.black.950}",
+        "value": "{color.black.1000}",
         "type": "color",
         "description": "An inverted surface for lightened content and elements, most likely paired with inverted foreground colors."
       },
