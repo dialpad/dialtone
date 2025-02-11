@@ -346,6 +346,18 @@
             }
           }
         }
+      },
+      "info-strong-inverted": {
+        "value": "{color.blue.300}",
+        "type": "color"
+      },
+      "brand-strong-inverted": {
+        "value": "{color.purple.350}",
+        "type": "color"
+      },
+      "warning-strong-inverted": {
+        "value": "{color.gold.500}",
+        "type": "color"
       }
     },
     "border": {
