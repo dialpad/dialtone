@@ -113,7 +113,7 @@ Sentences should have a single focus. Remember that we aim for an 8th grade read
 
 ## Capitalization
 
-Sentence casing for all writing except in the following situations:
+We use [sentence vs. title casing](#sentence-vs-title-casing) for all writing except in the following situations:
 
 * Action-oriented areas (e.g. buttons and menus), which uses title casing
 * Eyebrow headlines, which uses all caps casing
