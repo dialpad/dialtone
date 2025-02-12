@@ -5,17 +5,17 @@ import DtRecipeIvrNode from './ivr_node.vue';
 import DtRecipeIvrNodeDefaultTemplate from './ivr_node_default.story.vue';
 import { IVR_NODE_ICON_TYPES } from './ivr_node_constants';
 
-import defaultImage from '@/common/assets/avatar2.png';
+import defaultImage from '@/common/assets/avatar2.png?url';
 
 // Default Prop Values
-export const argsData = {
+const argsData = {
   onClick: action('click'),
   menuButtonAriaLabel: 'Node menu',
   isSelected: false,
   defaultImage,
 };
 
-export const argTypesData = {
+const argTypesData = {
   // Slots
   content: {
     description: 'Slot for card content',
@@ -91,7 +91,6 @@ export default {
   component: DtRecipeIvrNode,
   args: argsData,
   argTypes: argTypesData,
-  excludeStories: /.*Data$/,
 };
 
 const DefaultTemplate = (argsData) => createRenderConfig(DtRecipeIvrNode, DtRecipeIvrNodeDefaultTemplate, argsData);
@@ -181,6 +180,7 @@ export const Assign = {
 
 export const CustomerData = {
   render: DefaultTemplate,
+
   args: {
     nodeType: 'customerdata',
   },
