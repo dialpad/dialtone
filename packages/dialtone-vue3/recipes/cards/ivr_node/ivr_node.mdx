@@ -1,5 +1,4 @@
 import { Canvas, Story, Subtitle, Controls, Meta } from '@storybook/blocks';
-
 import * as IvrNodeStories from './ivr_node.stories';
 
 <Meta of={IvrNodeStories}/>
@@ -191,10 +190,13 @@ A node in IVR used to assign variables that will be available for use throughout
 ```
 
 ## Customer Data Node
+
 A node in IVR used to collect key value pair of data to be shown during the customer journeys.
+
 <Canvas>
     <Story of={IvrNodeStories.CustomerData} />
 </Canvas>
+
 ```html
 <dt-recipe-ivr-node
   :node-label="CustomerData"
@@ -207,7 +209,6 @@ A node in IVR used to collect key value pair of data to be shown during the cust
   <p>Description</p>
 </dt-recipe-ivr-node>
 ```
-
 
 ## Transfer Node
 
