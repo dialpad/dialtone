@@ -41,10 +41,7 @@
         >
           Launch Expert
           <template #icon>
-            <dt-icon
-              size="300"
-              name="external-link"
-            />
+            <dt-icon-external-link size="300" />
           </template>
         </dt-button>
       </div>
@@ -132,14 +129,18 @@
 import DtRecipeIvrNode from './ivr_node.vue';
 import {
   IVR_NODE_ASSIGN,
-  IVR_NODE_BRANCH, IVR_NODE_CUSTOMER_DATA,
-  IVR_NODE_EXPERT, IVR_NODE_GO_TO, IVR_NODE_HANGUP,
+  IVR_NODE_BRANCH,
+  IVR_NODE_CUSTOMER_DATA,
+  IVR_NODE_EXPERT,
+  IVR_NODE_GO_TO,
+  IVR_NODE_HANGUP,
   IVR_NODE_LABELS,
   IVR_NODE_PROMPT_COLLECT,
   IVR_NODE_PROMPT_MENU,
-  IVR_NODE_PROMPT_PLAY, IVR_NODE_TRANSFER,
+  IVR_NODE_PROMPT_PLAY,
+  IVR_NODE_TRANSFER,
 } from './ivr_node_constants';
-import { DtIcon } from '@/components/icon';
+import { DtIconExternalLink } from '@dialpad/dialtone-icons/vue2';
 import { DtButton } from '@/components/button';
 import { DtAvatar } from '@/components/avatar';
 import { DtListItem } from '@/components/list_item';
@@ -147,7 +148,14 @@ import { DtKeyboardShortcut } from '@/components/keyboard_shortcut';
 
 export default {
   name: 'DtRecipeIvrNodeDefault',
-  components: { DtButton, DtRecipeIvrNode, DtIcon, DtAvatar, DtListItem, DtKeyboardShortcut },
+  components: {
+    DtButton,
+    DtRecipeIvrNode,
+    DtIconExternalLink,
+    DtAvatar,
+    DtListItem,
+    DtKeyboardShortcut,
+  },
 
   computed: {
     items () {
