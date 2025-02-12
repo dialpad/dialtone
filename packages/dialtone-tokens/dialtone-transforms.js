@@ -6,7 +6,7 @@
 
 import Color from 'tinycolor2';
 
-const SIZE_IDENTIFIERS = ['fontSizes', 'sizing', 'borderWidth', 'borderRadius', 'blur', 'spread', 'x', 'y', 'dimension'];
+const SIZE_IDENTIFIERS = ['sizing', 'borderWidth', 'borderRadius', 'blur', 'spread', 'x', 'y', 'dimension'];
 const SPACING_IDENTIFIERS = ['spacing'];
 const FONT_FAMILY_IDENTIFIERS = ['fontFamily'];
 const FONT_SIZE_IDENTIFIERS = ['fontSizes', 'fontSize'];
@@ -165,7 +165,10 @@ export function registerDialtoneTransforms (styleDictionary) {
     type: 'value',
     transitive: true,
     filter: function (token) {
-      return [...SPACING_IDENTIFIERS, ...SIZE_IDENTIFIERS].includes(token.type);
+      return [...SPACING_IDENTIFIERS, ...SIZE_IDENTIFIERS].includes(token.type) &&
+        // The fontSize token in typography tokens is a 'dimension' type for some reason,
+        // so have this special case to exclude it from this transform.
+        !FONT_SIZE_IDENTIFIERS.includes(token.name);
     },
     transform: (token) => {
       const floatVal = parseFloat(token.value);
@@ -184,7 +187,10 @@ export function registerDialtoneTransforms (styleDictionary) {
     type: 'value',
     transitive: true,
     filter: function (token) {
-      return [...FONT_SIZE_IDENTIFIERS].includes(token.type);
+      return [...FONT_SIZE_IDENTIFIERS].includes(token.type) ||
+        // The fontSize token in typography tokens is a 'dimension' type for some reason,
+        // so have this special case to include it in this transform.
+        FONT_SIZE_IDENTIFIERS.includes(token.name);
     },
     transform: (token) => {
       const floatVal = parseFloat(token.value);
