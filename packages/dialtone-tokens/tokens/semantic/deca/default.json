@@ -477,7 +477,7 @@
         "description": "Secondary surface as opaque background color."
       },
       "moderate-opaque": {
-        "value": "{color.black.50}",
+        "value": "{color.black.900}",
         "type": "color",
         "$extensions": {
           "studio.tokens": {
