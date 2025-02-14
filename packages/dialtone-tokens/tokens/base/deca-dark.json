@@ -349,12 +349,6 @@
         "value": "#FFF2F3",
         "type": "color"
       }
-    },
-    "gradient": {
-      "gold-red-magenta-purple": {
-        "value": "linear-gradient(132deg, #FE8819 0%, {color.brand.red} 30%, {color.brand.magenta} 75%, #AE3ADF 100%)",
-        "type": "color"
-      }
     }
   }
 }

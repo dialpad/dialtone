@@ -1041,7 +1041,7 @@
         "type": "color"
       },
       "ai": {
-        "value": "{color.gradient.gold-red-magenta-purple}",
+        "value": "{color.gradient.magenta-purple}",
         "type": "color"
       },
       "accent": {
