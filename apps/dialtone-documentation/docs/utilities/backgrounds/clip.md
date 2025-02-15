@@ -8,16 +8,22 @@ description: Utilities for controlling whether an element's background extends u
 Use `d-bgclip-{name}` to control which box an element's background is clipped by.
 
 <code-well-header class='d-fl-col3 d-jc-center d-p24 d-bgc-purple-100 d-bgo50 d-flow16' custom>
-  <div class="d-bgclip-border-box d-fl-center d-p16 d-bgc-purple-300 d-ba d-baw4 d-bas-dashed d-bar8 d-bc-purple-200 d-fs-200 d-fw-bold">border-box</div>
-  <div class="d-bgclip-padding-box d-fl-center d-p16 d-bgc-purple-300 d-ba d-baw4 d-bas-dashed d-bar8 d-bc-purple-200 d-fs-200 d-fw-bold">padding-box</div>
-  <div class="d-bgclip-content-box d-fl-center d-p16 d-bgc-purple-300 d-ba d-baw4 d-bas-dashed d-bar8 d-bc-purple-200 d-fs-200 d-fw-bold">content-box</div>
+  <div
+    v-for="(_, className) in clips"
+    class="d-fl-center d-p16 d-bgc-purple-300 d-ba d-baw4 d-bas-dashed d-bar8 d-bc-purple-200 d-fs-200 d-fw-bold"
+    :key="className"
+    :class="className"
+  >
+    {{className.replace('d-bgclip-', '')}}
+  </div>
 </code-well-header>
 
 ```html
-
 <div class="d-bgclip-border-box">...</div>
 <div class="d-bgclip-padding-box">...</div>
 <div class="d-bgclip-content-box">...</div>
+<div class="d-bgclip-text">...</div>
+<div class="d-bgclip-unset">...</div>
 ```
 
 ## Clipping text
@@ -35,4 +41,12 @@ Use `d-bgclip-text` to clip the background color(s) within the foreground text.
 
 ## Classes
 
-<new-utility-class-table utility-class-prefix="d-bgclip-"/>
+<new-utility-class-table :classes="clips" />
+
+<script setup>
+  import { inject } from 'vue';
+  import { extractUtilityClasses } from '@utilities';
+
+  const utilityClassDocs = inject('utilityClassDocs');
+  const clips = extractUtilityClasses(utilityClassDocs, 'd-bgclip-');
+</script>

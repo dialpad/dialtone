@@ -2,13 +2,6 @@
 title: Background position
 description: Utilities for controlling the position of an element's background image.
 ---
-<script setup>
-  import { inject } from 'vue';
-  import { extractUtilityClasses } from '@utilities'
-
-  const utilityClassDocs = inject('utilityClassDocs');
-  const positions = extractUtilityClasses(utilityClassDocs, 'd-bgp-');
-</script>
 
 ## Usage
 
@@ -45,3 +38,11 @@ Use `d-bgp-{position}` to control where an element's background image is placed.
 ## Classes
 
 <new-utility-class-table :classes="positions"/>
+
+<script setup>
+  import { inject } from 'vue';
+  import { extractUtilityClasses } from '@utilities';
+
+  const utilityClassDocs = inject('utilityClassDocs');
+  const positions = extractUtilityClasses(utilityClassDocs, 'd-bgp-');
+</script>

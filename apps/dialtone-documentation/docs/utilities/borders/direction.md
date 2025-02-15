@@ -47,31 +47,24 @@ Use `d-b{t|r|b|l|x|y}` to add a border to only specific sides of your element.
 <div class="d-ba d-bc-purple-400 d-baw2 d-btw0 ">...</div>
 ```
 
-<script setup>
-  import { directions } from '@data/borders.json';
-</script>
-
 ## Classes
 
-<utility-class-table>
-  <template #content>
-    <tbody>
-      <tr v-for="i in directions">
-        <th scope="row" class="d-code--sm d-fc-purple-400">.d-b{{ i[0] }}</th>
-        <td class="d-code--sm">
-          <span v-if="i === 'y'">
-            border-top: var(--dt-space-100) solid !important;<br/>
-            border-bottom: var(--dt-space-100) solid !important;
-          </span>
-          <span v-else-if="i === 'x'">
-            border-right: var(--dt-space-100) solid !important;<br/>
-            border-left: var(--dt-space-100) solid !important;
-          </span>
-          <span v-else>
-            border-{{i}}: var(--dt-space-100) solid !important;
-          </span>
-        </td>
-      </tr>
-    </tbody>
-  </template>
-</utility-class-table>
+<new-utility-class-table :classes="borderDirections"/>
+
+<script setup>
+  import { inject } from 'vue';
+  import { extractUtilityClasses } from '@utilities';
+
+  const allowedBorderDirectionsRegex = /d-b[atlbryx](-(none|unset))?$/;
+
+  const utilityClassDocs = inject('utilityClassDocs');
+  const borders = extractUtilityClasses(utilityClassDocs, 'd-b');
+
+  const directions = [];
+  const borderDirections = Object.keys(borders)
+    .filter(className => allowedBorderDirectionsRegex.test(className))
+    .reduce((obj, key) => {
+      obj[key] = borders[key];
+      return obj;
+    }, {});
+</script>

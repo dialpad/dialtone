@@ -98,73 +98,21 @@ Use `fv:d-bc-{color}` to change an element's border color when in `:focus-visibl
 
 ## Classes
 
-<div class="d-h464 d-of-y-scroll d-bb d-bc-black-200">
-  <utility-class-table>
-    <template #content>
-      <tbody>
-          <tr v-for="c in special">
-              <th scope="row" class="d-code--sm d-fc-purple-400">.d-bc-{{c}}</th>
-              <td>
-                  <div class="d-d-flex d-jc-space-between d-ai-center">
-                      <div class="d-fl-grow1 d-code--sm">
-                        <span v-if="c === 'white'">
-                            --bco: 100%;<br/>
-                            border-color: hsla(var(--{{ c }}-h) var(--{{ c }}-s) var(--{{ c }}-l) / var(--bco)) !important;
-                        </span>
-                        <span v-else>border-color: {{c}} !important;</span>
-                      </div>
-                      <div
-                        :class="['d-d-inline-flex', {'d-bgc-contrast': c.includes('white')}]"
-                      >
-                        <div
-                            :class="`d-fl-shrink0 d-m4 d-h42 d-w42 d-bar4 d-bc-${c} d-ba d-baw2`"
-                        />
-                      </div>
-                  </div>
-              </td>
-          </tr>
-      </tbody>
-      <tbody>
-          <tr v-for="c in borders">
-              <th scope="row" class="d-code--sm d-fc-purple-400">.d-bc-{{c}}</th>
-              <td>
-                  <div class="d-d-flex d-jc-space-between d-ai-center">
-                      <div class="d-fl-grow1 d-code--sm">
-                        <span>border-color: var(--bc-{{c}})</span>
-                      </div>
-                      <div
-                        :class="['d-d-inline-flex', {'d-bgc-contrast': c.includes('inverted')}]"
-                      >
-                        <div
-                            :class="`d-fl-shrink0 d-m4 d-h42 d-w42 d-bar4 d-bc-${c} d-ba d-baw2`"
-                        />
-                      </div>
-                  </div>
-              </td>
-          </tr>
-      </tbody>
-      <tbody v-for="{color: c, stops} in base">
-          <tr v-for="{ stop, copy } in stops">
-              <th scope="row" class="d-code--sm d-fc-purple-400">.d-bc-{{ c }}-{{ stop }}</th>
-              <td>
-                  <div class="d-d-flex d-jc-space-between d-ai-center">
-                      <div class="d-fl-grow1 d-code--sm">
-                          --bco: 100%;<br/>
-                          border-color: hsla(var(--{{ c }}-{{ stop }}-h) var(--{{ c }}-{{ stop }}-s) var(--{{ c }}-{{ stop }}-l) / var(--bco)) !important;
-                      </div>
-                      <div
-                        class="d-fl-shrink0 d-m4 d-ml16 d-h42 d-w42 d-bar4 d-ba d-baw2"
-                        :class="`d-bc-${c}-${stop}`"
-                      >
-                      </div>
-                  </div>
-              </td>
-          </tr>
-      </tbody>
-    </template>
-  </utility-class-table>
-</div>
+<new-utility-class-table :classes="borderColors">
+  <template #example="{ className }">
+    <div :class="['d-d-inline-flex', {'d-bgc-contrast': className.endsWith('inverted')}]" >
+      <div
+        class="d-fl-shrink0 d-m4 d-h42 d-w42 d-bar4 d-ba d-baw2"
+        :class="className"
+      />
+    </div>
+  </template>
+</new-utility-class-table>
 
 <script setup>
-import {base, special, borders} from '@data/colors.json';
+  import { inject } from 'vue';
+  import { extractUtilityClasses } from '@utilities';
+
+  const utilityClassDocs = inject('utilityClassDocs');
+  const borderColors = extractUtilityClasses(utilityClassDocs, 'd-bc-');
 </script>

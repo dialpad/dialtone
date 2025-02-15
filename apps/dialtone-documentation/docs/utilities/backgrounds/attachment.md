@@ -46,4 +46,12 @@ of the element rather than the viewable box.
 
 ## Classes
 
-<new-utility-class-table utility-class-prefix="d-bga-"/>
+<new-utility-class-table :classes="attachments" />
+
+<script setup>
+  import { inject } from 'vue';
+  import { extractUtilityClasses } from '@utilities';
+
+  const utilityClassDocs = inject('utilityClassDocs');
+  const attachments = extractUtilityClasses(utilityClassDocs, 'd-bga-');
+</script>
