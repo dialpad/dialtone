@@ -95,61 +95,43 @@ Use `fv:d-bgg-{from|to}-{color}` to change an element's background gradient star
 
 To create a background gradient, first declare the desired gradient and, if applicable, the direction. All classes with directions are linear gradients. Radial gradients start from the center and work out to the edge. Conic gradients progressively work around a circle.
 
-<utility-class-table>
-  <template #content>
-    <tbody>
-      <tr v-for="{ className, output } in gradients">
-          <th scope="row" class="d-code--sm d-docsite-code">.d-bgg-{{ className }}</th>
-          <td class="d-code--sm">
-            background-image: {{ output }}
-            <span v-if="!['unset', 'none'].includes(className)"> var(--bgg-stops)) </span>
-            !important;
-          </td>
-      </tr>
-    </tbody>
-  </template>
-</utility-class-table>
+<new-utility-class-table :classes="directions"/>
 
 ## Color Stops
 
 The starting stop (`d-bgg-from-{color}`) should be declared. Optionally an ending stop (`d-bgg-to-{color}`) can also be declared.
 
-<div class="d-h464 d-of-y-scroll d-bb d-bc-black-200">
-<utility-class-table>
- <template #content>
-        <div v-for="direction in ['from', 'to']" style="display: contents">
-          <tbody v-for="{ color, stops } in baseColors">
-              <tr v-for="{ stop } in stops">
-                  <th scope="row" class="d-code--sm d-docsite-code">.d-bgg-{{ direction }}-{{ color }}-{{ stop }}</th>
-                  <td>
-                      <div class="d-d-flex d-jc-space-between d-ai-center">
-                          <div class="d-fl-grow1 d-code--sm">
-                              <span v-if="direction === 'from'">
-                                --bgg-from-opacity: 100%;<br/>
-                                --bgg-from: hsla(var(--{{ color }}-{{ stop }}-h) var(--{{ color }}-{{ stop }}-s) var(--{{ color }}-{{ stop }}-l) / var(--bgg-from-opacity)) !important;<br/>
-                                --bgg-to: hsla(var(--{{ color }}-{{ stop }}-h) var(--{{ color }}-{{ stop }}-s) var(--{{ color }}-{{ stop }}-l) / 0%) !important;
-                              </span>
-                              <span v-else-if="direction === 'to'">
-                                --bgg-to-opacity: 100%;<br/>
-                                --bgg-to: hsla(var(--{{ color }}-{{ stop }}-h) var(--{{ color }}-{{ stop }}-s) var(--{{ color }}-{{ stop }}-l) / var(--bgg-to-opacity)) !important;
-                              </span>
-                          </div>
-                          <div
-                            class="d-fl-shrink0 d-m4 d-ml16 d-h32 d-w64 d-bar4 d-bgg-to-r d-bgg-from-black-100"
-                            :class="[`d-bgg-${direction}-${color}-${stop}`]"
-                          >
-                          </div>
-                      </div>
-                  </td>
-              </tr>
-          </tbody>
-        </div>
-    </template>
-  </utility-class-table>
-</div>
+<new-utility-class-table :classes="colors">
+  <template #example="{ className }">
+    <div
+      class="d-fl-shrink0 d-m4 d-ml16 d-h32 d-w64 d-bar4 d-bgg-to-r d-bgg-from-black-100"
+      :class="className"
+    >
+    </div>
+  </template>
+</new-utility-class-table>
 
 <script setup>
-  import { gradients } from '@data/backgrounds.json';
-  import { base } from '@data/colors.json';
-  const baseColors = base.lightMode;
+  import { inject } from 'vue';
+  import { extractUtilityClasses } from '@utilities';
+
+  const utilityClassDocs = inject('utilityClassDocs');
+  const gradients = extractUtilityClasses(utilityClassDocs, 'd-bgg');
+
+  const allowedDirections = ['to-t', 'to-b', 'to-l', 'to-r', 'to-tl', 'to-tr', 'to-bl', 'to-br', 'radial', 'conic', 'none', 'unset'];
+  const allowedColors = ['black', 'purple', 'magenta', 'gold', 'red', 'green', 'blue', 'tan', 'white'];
+
+  const directions = Object.keys(gradients)
+    .filter(className => allowedDirections.some(direction => className.endsWith(direction)))
+    .reduce((obj, key) => {
+      obj[key] = gradients[key];
+      return obj;
+    }, {});
+  
+  const colors = Object.keys(gradients)
+    .filter(className => allowedColors.some(color => className.includes(color)))
+    .reduce((obj, key) => {
+      obj[key] = gradients[key];
+      return obj;
+    }, {});
 </script>

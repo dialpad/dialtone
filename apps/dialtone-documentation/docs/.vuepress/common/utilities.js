@@ -54,12 +54,10 @@ export function extractUtilityClasses (utilityClassDocs, prefix) {
   return Object.keys(utilityClassDocs)
     .filter(className => className.startsWith(prefix))
     .reduce((result, className) => {
-      const classOutput = utilityClassDocs[className]
+      result[className] = utilityClassDocs[className]
         .values
         .map(declaration => `${declaration.prop}: ${declaration.value};`)
         .join('\n');
-
-      result[`.${className}`] = classOutput;
       return result;
     }, {});
 }

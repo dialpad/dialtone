@@ -92,7 +92,7 @@ Use `fv:d-bgc-{color}` to change an element's `:focus-visible` state background 
 
 ## Classes
 
-<new-utility-class-table utility-class-prefix="d-bgc-">
+<new-utility-class-table :classes="colors">
   <template #example="{ className }">
     <div
       class="d-fl-shrink0 d-m4 d-ml16 d-h42 d-w42 d-bar-circle d-ba d-bc-black-200"
@@ -100,3 +100,11 @@ Use `fv:d-bgc-{color}` to change an element's `:focus-visible` state background 
     />
   </template>
 </new-utility-class-table>
+
+<script setup>
+  import { inject } from 'vue';
+  import { extractUtilityClasses } from '@utilities';
+
+  const utilityClassDocs = inject('utilityClassDocs');
+  const colors = extractUtilityClasses(utilityClassDocs, 'd-bgc-');
+</script>

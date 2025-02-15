@@ -41,7 +41,7 @@ Use `d-bgp-{position}` to control where an element's background image is placed.
 
 <script setup>
   import { inject } from 'vue';
-  import { extractUtilityClasses } from '@utilities'
+  import { extractUtilityClasses } from '@utilities';
 
   const utilityClassDocs = inject('utilityClassDocs');
   const positions = extractUtilityClasses(utilityClassDocs, 'd-bgp-');
