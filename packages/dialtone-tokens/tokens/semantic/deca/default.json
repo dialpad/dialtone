@@ -35,12 +35,12 @@
         "description": "Used for text paired with disabled content or components, like the form elements."
       },
       "critical": {
-        "value": "{color.red.450}",
+        "value": "{color.red.400}",
         "type": "color",
         "description": "Expresses an error, danger, or otherwise critical state."
       },
       "critical-strong": {
-        "value": "{color.red.600}",
+        "value": "{color.red.500}",
         "type": "color",
         "description": "Expresses an error, danger, or otherwise critical state on surfaces that require a stronger contrast."
       },
