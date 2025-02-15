@@ -1416,7 +1416,7 @@
               "studio.tokens": {
                 "modify": {
                   "type": "darken",
-                  "value": ".2",
+                  "value": ".3",
                   "space": "hsl"
                 }
               }
@@ -1433,8 +1433,17 @@
               "type": "color"
             },
             "active": {
-              "value": "{color.green.600}",
-              "type": "color"
+              "value": "{action.color.background.positive.primary.hover}",
+              "type": "color",
+              "$extensions": {
+                "studio.tokens": {
+                  "modify": {
+                    "type": "darken",
+                    "value": ".11",
+                    "space": "hsl"
+                  }
+                }
+              }
             }
           }
         }
