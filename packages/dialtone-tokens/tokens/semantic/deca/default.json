@@ -469,7 +469,7 @@
           "studio.tokens": {
             "modify": {
               "type": "alpha",
-              "value": ".06",
+              "value": ".15",
               "space": "hsl"
             }
           }
@@ -497,7 +497,7 @@
           "studio.tokens": {
             "modify": {
               "type": "alpha",
-              "value": ".15",
+              "value": ".23",
               "space": "hsl"
             }
           }
@@ -525,7 +525,7 @@
           "studio.tokens": {
             "modify": {
               "type": "alpha",
-              "value": ".26",
+              "value": ".32",
               "space": "hsl"
             }
           }
@@ -553,7 +553,7 @@
           "studio.tokens": {
             "modify": {
               "type": "alpha",
-              "value": ".64",
+              "value": ".67",
               "space": "hsl"
             }
           }
@@ -581,7 +581,7 @@
           "studio.tokens": {
             "modify": {
               "type": "alpha",
-              "value": ".92",
+              "value": ".97",
               "space": "hsl"
             }
           }
