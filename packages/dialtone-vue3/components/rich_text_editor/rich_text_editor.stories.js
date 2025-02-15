@@ -23,6 +23,10 @@ export const argsData = {
   onInput: action('input'),
   onFocus: action('focus'),
   onEnter: action('enter'),
+  onJsonInput: action('json-input'),
+  onHtmlInput: action('html-input'),
+  onTextInput: action('text-input'),
+  onEditLink: action('edit-link'),
 };
 
 export const argTypesData = {
@@ -87,6 +91,26 @@ export const argTypesData = {
       disable: true,
     },
   },
+  onJsonInput: {
+    table: {
+      disable: true,
+    },
+  },
+  onHtmlInput: {
+    table: {
+      disable: true,
+    },
+  },
+  onTextInput: {
+    table: {
+      disable: true,
+    },
+  },
+  onEditLink: {
+    table: {
+      disable: true,
+    },
+  },
 };
 
 // Story Collection
@@ -136,6 +160,7 @@ export const WithCustomExtensions = {
     allowItalic: false,
     allowStrike: false,
     allowUnderline: false,
+    allowCode: false,
     allowCodeblock: false,
   },
 };

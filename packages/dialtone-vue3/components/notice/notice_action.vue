@@ -37,6 +37,7 @@ import SrOnlyCloseButtonMixin from '@/common/mixins/sr_only_close_button';
 import SrOnlyCloseButton from '@/common/sr_only_close_button.vue';
 
 export default {
+  compatConfig: { MODE: 3 },
   name: 'DtNoticeAction',
 
   components: {

@@ -9,6 +9,7 @@
       :image-alt="name"
       size="xs"
     />
+    <!-- eslint-disable-next-line vue/no-restricted-class -->
     <span class="d-mention-suggestion__name">
       {{ name }}
     </span>

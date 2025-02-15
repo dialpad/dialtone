@@ -14,6 +14,7 @@
 import { DtCheckbox } from '../checkbox';
 
 export default {
+  compatConfig: { MODE: 3 },
   name: 'CheckboxesDecorator',
   components: { DtCheckbox },
   created () {

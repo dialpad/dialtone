@@ -9,6 +9,7 @@
       :image-alt="name"
       size="xs"
     />
+    <!-- eslint-disable-next-line vue/no-restricted-class -->
     <span class="d-mention-suggestion__name">
       {{ name }}
     </span>
@@ -20,6 +21,7 @@ import { DtAvatar } from '@/components/avatar';
 import { DtStack } from '@/components/stack';
 
 export default {
+  compatConfig: { MODE: 3 },
   name: 'MentionSuggestion',
   components: {
     DtAvatar,

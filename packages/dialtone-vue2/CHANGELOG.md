@@ -1,3 +1,36 @@
+# [2.174.0](https://github.com/dialpad/dialtone/compare/dialtone-vue2/v2.173.0...dialtone-vue2/v2.174.0) (2025-02-11)
+
+
+### Code Refactoring
+
+* DLT-1450 custom item layout ([#615](https://github.com/dialpad/dialtone/issues/615)) ([18bd10c](https://github.com/dialpad/dialtone/commit/18bd10c8eb34cbf0085b18593573b5edb588a9e0))
+
+
+### Features
+
+* **Ivr Node Customer Data:** DP-128891 add new step type ([#624](https://github.com/dialpad/dialtone/issues/624)) ([d00ecc7](https://github.com/dialpad/dialtone/commit/d00ecc739d32e1c7b824b1725e5d78a688d0edda))
+
+# [2.173.0](https://github.com/dialpad/dialtone/compare/dialtone-vue2/v2.172.0...dialtone-vue2/v2.173.0) (2025-02-04)
+
+
+### Features
+
+* **Editor:** DLT-2338 add method to insert content in editor ([#621](https://github.com/dialpad/dialtone/issues/621)) ([97be8e3](https://github.com/dialpad/dialtone/commit/97be8e3f6c1d700319376b1496027fb0757b52c9))
+
+# [2.172.0](https://github.com/dialpad/dialtone/compare/dialtone-vue2/v2.171.3...dialtone-vue2/v2.172.0) (2025-01-29)
+
+
+### Features
+
+* DLT-2291 add rich text formatting ([#593](https://github.com/dialpad/dialtone/issues/593)) ([abb9501](https://github.com/dialpad/dialtone/commit/abb9501857696e02169b3408291af9564f6ebd12))
+
+## [2.171.3](https://github.com/dialpad/dialtone/compare/dialtone-vue2/v2.171.2...dialtone-vue2/v2.171.3) (2025-01-27)
+
+
+### Code Refactoring
+
+* **Popover, Hovercard:** DLT-2245 separate Hovercard from Popover ([#606](https://github.com/dialpad/dialtone/issues/606)) ([d11c5e4](https://github.com/dialpad/dialtone/commit/d11c5e47a7bdde20905a2b86960b4a9df16b924f))
+
 ## [2.171.2](https://github.com/dialpad/dialtone/compare/dialtone-vue2/v2.171.1...dialtone-vue2/v2.171.2) (2025-01-15)
 
 

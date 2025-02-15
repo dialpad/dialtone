@@ -9,6 +9,7 @@ import { ICON_SIZE_MODIFIERS } from '@/components/icon/icon_constants';
  * @see https://dialtone.dialpad.com/components/emoji_text_wrapper.html
  */
 export default {
+  compatConfig: { MODE: 3 },
   name: 'DtEmojiTextWrapper',
 
   components: {

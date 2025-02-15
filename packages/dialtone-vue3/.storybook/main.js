@@ -25,5 +25,6 @@ const config = {
       },
     });
   },
+  staticDirs: ['../common/assets/'],
 };
 export default config;

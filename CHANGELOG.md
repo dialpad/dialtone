@@ -1,3 +1,72 @@
+# [9.100.0](https://github.com/dialpad/dialtone/compare/dialtone/v9.99.0...dialtone/v9.100.0) (2025-02-11)
+
+
+### Bug Fixes
+
+* **Docs:** NO-JIRA typo in the illustration page ([#626](https://github.com/dialpad/dialtone/issues/626)) ([c291f7e](https://github.com/dialpad/dialtone/commit/c291f7e5365d3c09e2fe0c4eb501787f126e219c))
+
+
+### Code Refactoring
+
+* DLT-1450 custom item layout ([#615](https://github.com/dialpad/dialtone/issues/615)) ([18bd10c](https://github.com/dialpad/dialtone/commit/18bd10c8eb34cbf0085b18593573b5edb588a9e0))
+
+
+### Features
+
+* **Icon:** DLT-2234 update pause icon  ([#623](https://github.com/dialpad/dialtone/issues/623)) ([467e780](https://github.com/dialpad/dialtone/commit/467e78050b830baff0067ce1dcada8a10f70f7ce))
+* **Icon:** DLT-2344 icon graduation ([#627](https://github.com/dialpad/dialtone/issues/627)) ([a2e92ac](https://github.com/dialpad/dialtone/commit/a2e92ac23b8e104cdca216a029118d2c3d089f3e))
+* **Ivr Node Customer Data:** DP-128891 add new step type ([#624](https://github.com/dialpad/dialtone/issues/624)) ([d00ecc7](https://github.com/dialpad/dialtone/commit/d00ecc739d32e1c7b824b1725e5d78a688d0edda))
+
+# [9.99.0](https://github.com/dialpad/dialtone/compare/dialtone/v9.98.0...dialtone/v9.99.0) (2025-02-04)
+
+
+### Bug Fixes
+
+* **Button:** NO-JIRA remove v-bind attrs from button ([#622](https://github.com/dialpad/dialtone/issues/622)) ([099b88d](https://github.com/dialpad/dialtone/commit/099b88d4c532943a17e44dd01fdd651e173166a6))
+* NO-JIRA set compat mode 3 on vue 3 components ([#620](https://github.com/dialpad/dialtone/issues/620)) ([8c96425](https://github.com/dialpad/dialtone/commit/8c964250c6e16d30c247ef736fa4400eb7943038))
+
+
+### Features
+
+* **Editor:** DLT-2338 add method to insert content in editor ([#621](https://github.com/dialpad/dialtone/issues/621)) ([97be8e3](https://github.com/dialpad/dialtone/commit/97be8e3f6c1d700319376b1496027fb0757b52c9))
+
+# [9.98.0](https://github.com/dialpad/dialtone/compare/dialtone/v9.97.0...dialtone/v9.98.0) (2025-01-31)
+
+
+### Bug Fixes
+
+* **Tokens:** DLT-2233 correct math on android tokens ([#618](https://github.com/dialpad/dialtone/issues/618)) ([533fea1](https://github.com/dialpad/dialtone/commit/533fea19d2886deeb00bd2ee1c4822bd75c404c6))
+
+
+### Features
+
+* **Design Tokens:** NO-JIRA experimental deca token set update ([#617](https://github.com/dialpad/dialtone/issues/617)) ([5094998](https://github.com/dialpad/dialtone/commit/5094998657bac23c3baedb994049d0964cb6b81f))
+* **Design Tokens:** NO-JIRA experimental deca token set update for reds ([#619](https://github.com/dialpad/dialtone/issues/619)) ([8e9ee8b](https://github.com/dialpad/dialtone/commit/8e9ee8b76792785937edb27c938c312b9361fd49))
+
+# [9.97.0](https://github.com/dialpad/dialtone/compare/dialtone/v9.96.0...dialtone/v9.97.0) (2025-01-29)
+
+
+### Features
+
+* DLT-2291 add rich text formatting ([#593](https://github.com/dialpad/dialtone/issues/593)) ([abb9501](https://github.com/dialpad/dialtone/commit/abb9501857696e02169b3408291af9564f6ebd12))
+
+# [9.96.0](https://github.com/dialpad/dialtone/compare/dialtone/v9.95.0...dialtone/v9.96.0) (2025-01-27)
+
+
+### Bug Fixes
+
+* **Docs:** NO-JIRA the class output in divide width docs was backwards ([#616](https://github.com/dialpad/dialtone/issues/616)) ([3f8228c](https://github.com/dialpad/dialtone/commit/3f8228cf7579062faac2a1537d7b08fecf0a0cda))
+
+
+### Code Refactoring
+
+* **Popover, Hovercard:** DLT-2245 separate Hovercard from Popover ([#606](https://github.com/dialpad/dialtone/issues/606)) ([d11c5e4](https://github.com/dialpad/dialtone/commit/d11c5e47a7bdde20905a2b86960b4a9df16b924f))
+
+
+### Features
+
+* **Illustrations:** DLT-2292 several new abstract illustrations ([#610](https://github.com/dialpad/dialtone/issues/610)) ([509ac7a](https://github.com/dialpad/dialtone/commit/509ac7a7351d77ae751aaf01b062c2d999e1c4ba))
+
 # [9.95.0](https://github.com/dialpad/dialtone/compare/dialtone/v9.94.2...dialtone/v9.95.0) (2025-01-21)
 
 

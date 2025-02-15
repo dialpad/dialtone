@@ -68,6 +68,7 @@ import { DtValidationMessages } from '../validation_messages';
  * @see https://dialtone.dialpad.com/components/checkbox.html
  */
 export default {
+  compatConfig: { MODE: 3 },
   name: 'DtCheckbox',
 
   components: { DtValidationMessages },

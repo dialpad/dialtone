@@ -25,6 +25,7 @@
 import { COLOR_CODES } from './top_banner_info_constants';
 
 export default {
+  compatConfig: { MODE: 3 },
   name: 'DtRecipeTopBannerInfo',
 
   props: {

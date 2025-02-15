@@ -34,6 +34,7 @@ const kindToIcon = new Map([
 ]);
 
 export default {
+  compatConfig: { MODE: 3 },
   name: 'DtNoticeIcon',
 
   components: {

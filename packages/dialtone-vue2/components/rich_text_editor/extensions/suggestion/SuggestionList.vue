@@ -1,3 +1,4 @@
+<!-- eslint-disable vue/no-restricted-class -->
 <template>
   <div class="d-popover__dialog d-suggestion-list__container">
     <ul

@@ -160,6 +160,7 @@
         v-model="internalInputValue"
         :allow-inline-images="true"
         :allow-line-breaks="true"
+        :hide-link-bubble-menu="true"
         :auto-focus="autoFocus"
         :editable="editable"
         :input-aria-label="inputAriaLabel"
@@ -211,6 +212,7 @@ import {
 } from '@dialpad/dialtone-icons/vue3';
 
 export default {
+  compatConfig: { MODE: 3 },
   name: 'DtRecipeEditor',
 
   components: {
@@ -805,6 +807,14 @@ export default {
 
     onQuickRepliesClick () {
       this.$emit('quick-replies-click');
+    },
+
+    insertInMessageBody (messageContent) {
+      this.$refs.richTextEditor?.editor.chain().focus().insertContent(messageContent).run();
+    },
+
+    setCursorPosition (position = null) {
+      this.$refs.richTextEditor?.editor.chain().focus(position).run();
     },
 
     onBlockquoteToggle () {

@@ -136,6 +136,7 @@ import { NOTICE_KINDS } from '@/components/notice';
  * @see https://dialtone.dialpad.com/components/modal.html
  */
 export default {
+  compatConfig: { MODE: 3 },
   name: 'DtModal',
 
   components: {

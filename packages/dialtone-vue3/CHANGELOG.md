@@ -1,3 +1,42 @@
+# [3.167.0](https://github.com/dialpad/dialtone/compare/dialtone-vue3/v3.166.0...dialtone-vue3/v3.167.0) (2025-02-11)
+
+
+### Code Refactoring
+
+* DLT-1450 custom item layout ([#615](https://github.com/dialpad/dialtone/issues/615)) ([18bd10c](https://github.com/dialpad/dialtone/commit/18bd10c8eb34cbf0085b18593573b5edb588a9e0))
+
+
+### Features
+
+* **Ivr Node Customer Data:** DP-128891 add new step type ([#624](https://github.com/dialpad/dialtone/issues/624)) ([d00ecc7](https://github.com/dialpad/dialtone/commit/d00ecc739d32e1c7b824b1725e5d78a688d0edda))
+
+# [3.166.0](https://github.com/dialpad/dialtone/compare/dialtone-vue3/v3.165.0...dialtone-vue3/v3.166.0) (2025-02-04)
+
+
+### Bug Fixes
+
+* **Button:** NO-JIRA remove v-bind attrs from button ([#622](https://github.com/dialpad/dialtone/issues/622)) ([099b88d](https://github.com/dialpad/dialtone/commit/099b88d4c532943a17e44dd01fdd651e173166a6))
+* NO-JIRA set compat mode 3 on vue 3 components ([#620](https://github.com/dialpad/dialtone/issues/620)) ([8c96425](https://github.com/dialpad/dialtone/commit/8c964250c6e16d30c247ef736fa4400eb7943038))
+
+
+### Features
+
+* **Editor:** DLT-2338 add method to insert content in editor ([#621](https://github.com/dialpad/dialtone/issues/621)) ([97be8e3](https://github.com/dialpad/dialtone/commit/97be8e3f6c1d700319376b1496027fb0757b52c9))
+
+# [3.165.0](https://github.com/dialpad/dialtone/compare/dialtone-vue3/v3.164.3...dialtone-vue3/v3.165.0) (2025-01-29)
+
+
+### Features
+
+* DLT-2291 add rich text formatting ([#593](https://github.com/dialpad/dialtone/issues/593)) ([abb9501](https://github.com/dialpad/dialtone/commit/abb9501857696e02169b3408291af9564f6ebd12))
+
+## [3.164.3](https://github.com/dialpad/dialtone/compare/dialtone-vue3/v3.164.2...dialtone-vue3/v3.164.3) (2025-01-27)
+
+
+### Code Refactoring
+
+* **Popover, Hovercard:** DLT-2245 separate Hovercard from Popover ([#606](https://github.com/dialpad/dialtone/issues/606)) ([d11c5e4](https://github.com/dialpad/dialtone/commit/d11c5e47a7bdde20905a2b86960b4a9df16b924f))
+
 ## [3.164.2](https://github.com/dialpad/dialtone/compare/dialtone-vue3/v3.164.1...dialtone-vue3/v3.164.2) (2025-01-15)
 
 

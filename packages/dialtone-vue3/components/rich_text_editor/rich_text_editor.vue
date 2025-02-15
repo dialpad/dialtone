@@ -1,19 +1,65 @@
+<!-- eslint-disable vue/no-static-inline-styles -->
+<!-- eslint-disable vue/no-bare-strings-in-template -->
 <!-- eslint-disable vue/no-restricted-class -->
 <template>
-  <editor-content
-    :editor="editor"
-    class="d-rich-text-editor"
-    data-qa="dt-rich-text-editor"
-    v-bind="attrs"
-  />
+  <div>
+    <!-- why the hell is this visibility: hidden by default??? -->
+    <bubble-menu
+      v-if="editor && link && !hideLinkBubbleMenu"
+      :editor="editor"
+      :should-show="bubbleMenuShouldShow"
+      :tippy-options="tippyOptions"
+      style="visibility: visible;"
+    >
+      <div class="d-popover__dialog">
+        <dt-stack
+          direction="row"
+          class="d-rich-text-editor-bubble-menu__button-stack"
+          gap="0"
+        >
+          <dt-button
+            kind="muted"
+            importance="clear"
+            @click="editLink"
+          >
+            Edit
+          </dt-button>
+          <dt-button
+            kind="muted"
+            importance="clear"
+            @click="openLink"
+          >
+            Open link
+          </dt-button>
+          <dt-button
+            kind="danger"
+            importance="clear"
+            @click="removeLink"
+          >
+            Remove
+          </dt-button>
+        </dt-stack>
+      </div>
+    </bubble-menu>
+    <editor-content
+      ref="editor"
+      :editor="editor"
+      class="d-rich-text-editor"
+      data-qa="dt-rich-text-editor"
+      v-bind="attrs"
+    />
+  </div>
 </template>
 
 <script>
 /* eslint-disable max-lines */
-import { Editor, EditorContent } from '@tiptap/vue-3';
+import { Editor, EditorContent, BubbleMenu } from '@tiptap/vue-3';
 import { Extension } from '@tiptap/core';
+import { DtButton } from '../button';
+import { DtStack } from '../stack';
 import Blockquote from '@tiptap/extension-blockquote';
 import CodeBlock from '@tiptap/extension-code-block';
+import Code from '@tiptap/extension-code';
 import Document from '@tiptap/extension-document';
 import HardBreak from '@tiptap/extension-hard-break';
 import Paragraph from '@tiptap/extension-paragraph';
@@ -46,12 +92,17 @@ import mentionSuggestion from './extensions/mentions/suggestion';
 import channelSuggestion from './extensions/channels/suggestion';
 import slashCommandSuggestion from './extensions/slash_command/suggestion';
 import { warnIfUnmounted } from '@/common/utils';
+import deepEqual from 'deep-equal';
 
 export default {
+  compatConfig: { MODE: 3 },
   name: 'DtRichTextEditor',
 
   components: {
     EditorContent,
+    BubbleMenu,
+    DtButton,
+    DtStack,
   },
 
   props: {
@@ -277,6 +328,14 @@ export default {
     },
 
     /**
+     * Whether the input allows inline code (wrapped in backticks).
+     */
+    allowCode: {
+      type: Boolean,
+      default: true,
+    },
+
+    /**
      * Whether the input allows codeblock to be introduced in the text.
      */
     allowCodeblock: {
@@ -299,6 +358,16 @@ export default {
       type: Array,
       default: () => [],
     },
+
+    /**
+     * Manually hide the link bubble menu. The link bubble menu is shown when a link is selected via the cursor.
+     * There are some cases when you may want the link to remain selected but hide the bubble menu such as when You
+     * are showing a custom link editor popup.
+     */
+    hideLinkBubbleMenu: {
+      type: Boolean,
+      default: false,
+    },
   },
 
   emits: [
@@ -308,6 +377,27 @@ export default {
      * @type {String|JSON}
      */
     'input',
+
+    /**
+     * Input event always in JSON format.
+     * @event input
+     * @type {JSON}
+     */
+    'json-input',
+
+    /**
+     * Input event always in HTML format.
+     * @event input
+     * @type {HTML}
+     */
+    'html-input',
+
+    /**
+     * Input event always in text format.
+     * @event input
+     * @type {String}
+     */
+    'text-input',
 
     /**
      * Event to sync the value with the parent
@@ -336,11 +426,31 @@ export default {
      * @type {String}
      */
     'enter',
+
+    /**
+     * "Edit link" button was clicked. Fires an event for the consuming component to handle the editing of the link.
+     * event contains the link object with two properties href and text.
+     * @event edit-link
+     * @type {Object}
+     */
+    'edit-link',
+
+    /**
+     * "Selected" event is fired when the user selects text in the editor. returns the currently selected text.
+     * If the selected text is partially a link, the full link text is returned.
+     * @event selected
+     * @type {String}
+     */
+    'selected',
   ],
 
   data () {
     return {
       editor: null,
+      tippyOptions: {
+        appendTo: () => this.$refs.editor.$el.getRootNode()?.querySelector('body'),
+        placement: 'top-start',
+      },
     };
   },
 
@@ -367,7 +477,11 @@ export default {
       }
       if (this.allowBulletList) {
         extensions.push(BulletList);
-        extensions.push(ListItem);
+        extensions.push(ListItem.extend({
+          renderText ({ node }) {
+            return node.textContent;
+          },
+        }));
         extensions.push(OrderedList);
       }
       if (this.allowItalic) {
@@ -421,6 +535,7 @@ export default {
           HTMLAttributes: {
             class: 'd-link d-wb-break-all',
           },
+          openOnClick: false,
           autolink: true,
           protocols: RICH_TEXT_EDITOR_SUPPORTED_LINK_PROTOCOLS,
         }));
@@ -456,8 +571,16 @@ export default {
         defaultAlignment: 'left',
       }));
 
+      if (this.allowCode) {
+        extensions.push(Code);
+      }
+
       if (this.allowCodeblock) {
-        extensions.push(CodeBlock.configure({
+        extensions.push(CodeBlock.extend({
+          renderText ({ node }) {
+            return `\`\`\`\n${node.textContent}\n\`\`\``;
+          },
+        }).configure({
           HTMLAttributes: {
             class: 'd-rich-text-editor__code-block',
           },
@@ -557,23 +680,97 @@ export default {
       this.addEditorListeners();
     },
 
-    processValue (newValue, returnIfEqual = true) {
-      let currentValue = this.getOutput();
-      if (this.outputFormat === 'json') {
-        newValue = JSON.stringify(newValue);
-        currentValue = JSON.stringify(currentValue);
+    bubbleMenuShouldShow ({ editor, view, state, oldState, from, to }) {
+      return editor.isActive('link');
+    },
+
+    /**
+     * If the selection contains a link, return the existing link text.
+     * Otherwise, use just the selected text.
+     * @param editor the editor instance.
+     */
+    getSelectedLinkText (editor) {
+      const { view, state } = editor;
+      const { from, to } = view.state.selection;
+      const text = state.doc.textBetween(from, to, '');
+      const linkNode = this.editor.state.doc.nodeAt(from);
+      if (linkNode && linkNode.marks?.at(0)?.type?.name === 'link') {
+        return linkNode.textContent;
+      } else {
+        return text;
+      }
+    },
+
+    editLink () {
+      const linkText = this.getSelectedLinkText(this.editor);
+
+      const link = {
+        href: this.editor.getAttributes('link').href,
+        text: linkText,
+      };
+      this.$emit('edit-link', link);
+    },
+
+    removeLink () {
+      this.editor?.chain()?.focus()?.unsetLink()?.run();
+    },
+
+    openLink () {
+      this.editor?.chain()?.focus();
+      const link = this.editor.getAttributes('link').href;
+      window.open(link, '_blank');
+    },
+
+    // eslint-disable-next-line complexity
+    setLink (linkInput, linkText, linkOptions, linkProtocols = RICH_TEXT_EDITOR_SUPPORTED_LINK_PROTOCOLS,
+      defaultPrefix) {
+      if (!linkInput) {
+        // If link text is set to empty string,
+        // remove any existing links.
+        this.removeLink();
+        return;
       }
 
-      if (returnIfEqual && newValue === currentValue) {
+      // Check if input matches any of the supported link formats
+      const prefix = linkProtocols.find(prefixRegex => prefixRegex.test(linkInput));
+
+      if (!prefix) {
+        // If no matching pattern is found, prepend default prefix
+        linkInput = `${defaultPrefix}${linkInput}`;
+      }
+
+      this.editor
+        .chain()
+        .focus()
+        .extendMarkRange('link')
+        .run();
+
+      const selection = this.editor?.view?.state?.selection;
+
+      this.editor
+        .chain()
+        .focus()
+        .insertContent(linkText)
+        .setTextSelection({ from: selection.from, to: selection.from + linkText.length })
+        .setLink({ href: linkInput, class: linkOptions.class })
+        .run();
+    },
+
+    // eslint-disable-next-line complexity
+    processValue (newValue, returnIfEqual = true) {
+      const currentValue = this.getOutput();
+
+      if (returnIfEqual && deepEqual(newValue, currentValue)) {
         // The new value came from this component and was passed back down
         // through the parent, so don't do anything here.
         return;
       }
 
-      const inputUnicodeRegex = new RegExp(`(${emojiPattern})`, 'g');
-
       // If the text contains emoji characters convert them to emoji component tags
-      newValue = newValue.replace(inputUnicodeRegex, '<emoji-component code="$1"></emoji-component>');
+      if (typeof newValue === 'string' && this.outputFormat === 'text') {
+        const inputUnicodeRegex = new RegExp(`(${emojiPattern})`, 'g');
+        newValue = newValue?.replace(inputUnicodeRegex, '<emoji-component code="$1"></emoji-component>');
+      }
 
       // Otherwise replace the content (resets the cursor position).
       this.editor.commands.setContent(newValue, false);
@@ -583,22 +780,45 @@ export default {
       this.editor.destroy();
     },
 
+    triggerInputChangeEvents () {
+      const value = this.getOutput();
+      this.$emit('input', value);
+      this.$emit('update:modelValue', value);
+
+      // Always output JSON in a separate event
+      const jsonValue = this.editor.getJSON();
+      this.$emit('json-input', jsonValue);
+
+      // Always output HTML in a separate event
+      const htmlValue = this.editor.getHTML();
+      this.$emit('html-input', htmlValue);
+
+      // Always output HTML in a separate event
+      const textValue = this.editor.getText({ blockSeparator: '\n' });
+      this.$emit('text-input', textValue);
+    },
+
     /**
      * The Editor exposes event hooks that we have to map our emits into. See
      * https://tiptap.dev/api/events for all events.
      */
     addEditorListeners () {
+      this.editor.on('create', () => {
+        this.triggerInputChangeEvents();
+      });
       // The content has changed.
       this.editor.on('update', () => {
-        const value = this.getOutput();
         // When preventTyping is true and user wants to type, we revert to last value
         // If Backspace (keyCode = 8) is pressed, we allow updating the text
         if (this.preventTyping && this.editor.view?.input?.lastKeyCode !== 8) {
           this.editor.commands.setContent(this.value, false);
           return;
         }
-        this.$emit('input', value);
-        this.$emit('update:modelValue', value);
+        this.triggerInputChangeEvents();
+      });
+
+      this.editor.on('selectionUpdate', ({ editor }) => {
+        this.$emit('selected', this.getSelectedLinkText(editor));
       });
 
       // The editor is focused.

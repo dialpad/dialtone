@@ -74,7 +74,11 @@
           <!-- eslint-disable-next-line vuejs-accessibility/no-static-element-interactions -->
           <div
             ref="listWrapper"
-            :class="[DROPDOWN_PADDING_CLASSES[padding], listClass]"
+            :class="[
+              'd-recipe-combobox-with-popover__list',
+              DROPDOWN_PADDING_CLASSES[padding],
+              listClass,
+            ]"
             @mouseleave="clearHighlightIndex"
             @focusout="clearHighlightIndex"
           >
@@ -120,6 +124,7 @@ import { DROPDOWN_PADDING_CLASSES } from '@/components/dropdown';
 import SrOnlyCloseButtonMixin from '@/common/mixins/sr_only_close_button';
 
 export default {
+  compatConfig: { MODE: 3 },
   name: 'DtRecipeComboboxWithPopover',
 
   components: {

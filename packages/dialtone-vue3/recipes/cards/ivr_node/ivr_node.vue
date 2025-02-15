@@ -98,6 +98,7 @@ import {
   DtIconTransfer,
   DtIconPhoneHangUp,
   DtIconMoreVertical,
+  DtIconListBullet,
 } from '@dialpad/dialtone-icons/vue3';
 import {
   IVR_NODE_CLASS_MAPPING,
@@ -110,6 +111,7 @@ import {
   IVR_NODE_ASSIGN,
   IVR_NODE_TRANSFER,
   IVR_NODE_HANGUP,
+  IVR_NODE_CUSTOMER_DATA,
 } from './ivr_node_constants';
 
 const typeToIcon = new Map([
@@ -120,11 +122,13 @@ const typeToIcon = new Map([
   [IVR_NODE_BRANCH, DtIconBranch],
   [IVR_NODE_GO_TO, DtIconCallMerge],
   [IVR_NODE_ASSIGN, DtIconChevronsRight],
+  [IVR_NODE_CUSTOMER_DATA, DtIconListBullet],
   [IVR_NODE_TRANSFER, DtIconTransfer],
   [IVR_NODE_HANGUP, DtIconPhoneHangUp],
 ]);
 
 export default {
+  compatConfig: { MODE: 3 },
   name: 'DtRecipeIvrNode',
 
   components: {
@@ -141,6 +145,7 @@ export default {
     DtIconTransfer,
     DtIconPhoneHangUp,
     DtIconMoreVertical,
+    DtIconListBullet,
   },
 
   props: {

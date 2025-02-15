@@ -46,6 +46,7 @@ import { DtIconClose } from '@dialpad/dialtone-icons/vue3';
 import { hasSlotContent } from '@/common/utils';
 
 export default {
+  compatConfig: { MODE: 3 },
   name: 'PopoverHeaderFooter',
   components: {
     DtButton,

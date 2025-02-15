@@ -55,6 +55,7 @@ import { DtEmoji } from '../../../components/emoji';
 import { DtEmojiTextWrapper } from '../../../components/emoji_text_wrapper';
 
 export default {
+  compatConfig: { MODE: 3 },
   name: 'DtRecipeEmojiRow',
 
   components: { DtTooltip, DtButton, DtEmoji, DtEmojiTextWrapper },

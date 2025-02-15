@@ -1,3 +1,4 @@
+<!-- eslint-disable vue/no-restricted-class -->
 <template>
   <div class="d-popover__dialog d-suggestion-list__container">
     <ul
@@ -29,6 +30,7 @@
 import { DtListItem } from '@/components/list_item';
 
 export default {
+  compatConfig: { MODE: 3 },
   name: 'SuggestionList',
   components: {
     DtListItem,

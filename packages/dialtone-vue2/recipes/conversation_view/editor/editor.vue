@@ -160,6 +160,7 @@
         v-model="internalInputValue"
         :allow-inline-images="true"
         :allow-line-breaks="true"
+        :hide-link-bubble-menu="true"
         :auto-focus="autoFocus"
         :editable="editable"
         :input-aria-label="inputAriaLabel"
@@ -807,6 +808,14 @@ export default {
 
     onBlockquoteToggle () {
       this.$refs.richTextEditor?.editor.chain().focus().toggleBlockquote().run();
+    },
+
+    insertInMessageBody (messageContent) {
+      this.$refs.richTextEditor?.editor.chain().focus().insertContent(messageContent).run();
+    },
+
+    setCursorPosition (position = null) {
+      this.$refs.richTextEditor?.editor.chain().focus(position).run();
     },
 
     onFocus (event) {

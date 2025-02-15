@@ -28,6 +28,7 @@ import {} from './list_item_group_constants';
 import { getUniqueString } from '@/common/utils';
 
 export default {
+  compatConfig: { MODE: 3 },
   name: 'DtListItemGroup',
 
   props: {

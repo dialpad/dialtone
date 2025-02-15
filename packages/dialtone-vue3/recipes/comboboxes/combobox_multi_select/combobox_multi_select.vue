@@ -88,6 +88,7 @@
     <template #list>
       <div
         ref="list"
+        class="d-recipe-combobox-multi-select__list"
         @mousedown.prevent
       >
         <slot
@@ -134,6 +135,7 @@ import {
 import SrOnlyCloseButtonMixin from '@/common/mixins/sr_only_close_button';
 
 export default {
+  compatConfig: { MODE: 3 },
   name: 'DtRecipeComboboxMultiSelect',
 
   components: {

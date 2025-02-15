@@ -48,6 +48,7 @@ import { DtIconClose } from '@dialpad/dialtone-icons/vue3';
 import DtProgressBar from './progress_bar.vue';
 
 export default {
+  compatConfig: { MODE: 3 },
   name: 'DtImageCarousel',
 
   components: {

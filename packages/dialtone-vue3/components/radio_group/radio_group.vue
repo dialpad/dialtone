@@ -6,6 +6,7 @@ import { DtInputGroup } from '../input_group';
  * @see https://dialtone.dialpad.com/components/radio_group.html
  */
 export default {
+  compatConfig: { MODE: 3 },
   name: 'DtRadioGroup',
 
   extends: DtInputGroup,

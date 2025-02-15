@@ -72,6 +72,7 @@ import { DtIconClose } from '@dialpad/dialtone-icons/vue3';
 import { DtButton } from '@/components/button';
 
 export default {
+  compatConfig: { MODE: 3 },
   name: 'DtImageViewer',
 
   components: {

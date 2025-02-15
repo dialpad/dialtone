@@ -25,6 +25,7 @@ import DtSkeletonText from './skeleton-text.vue';
 
 const validator = number => number !== '' && !Number.isNaN(Number(number));
 export default {
+  compatConfig: { MODE: 3 },
   name: 'DtSkeletonParagraph',
   components: {
     DtSkeletonText,

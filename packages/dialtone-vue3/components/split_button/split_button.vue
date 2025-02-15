@@ -81,6 +81,7 @@ import { DtDropdown } from '@/components/dropdown';
 import { hasSlotContent, warnIfUnmounted } from '@/common/utils';
 
 export default {
+  compatConfig: { MODE: 3 },
   name: 'DtSplitButton',
 
   components: {

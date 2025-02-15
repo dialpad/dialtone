@@ -450,6 +450,15 @@ describe('DtRecipeEditor tests', () => {
       });
     });
 
+    describe('When calling insert in message body', () => {
+      it('message content is inserted at current caret position', async () => {
+        await wrapper.vm.setCursorPosition(19);
+        await wrapper.vm.$nextTick();
+        await wrapper.vm.insertInMessageBody('all things considered, ');
+        expect(editor.html()).toContain('<p>In the beginning, all things considered, it was a nice day.</p>');
+      });
+    });
+
     describe('When italics font button is clicked', () => {
       it('editor output should be enclosed in italics html tags', async () => {
         await italicsFormatBtn.trigger('click');
