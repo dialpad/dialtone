@@ -34,7 +34,7 @@
         "type": "color"
       },
       "success-strong": {
-        "value": "{color.green.500}",
+        "value": "{color.green.475}",
         "type": "color"
       },
       "critical-opaque": {

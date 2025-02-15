@@ -340,7 +340,7 @@
         "description": "A contrasting warning surface, most likely paired with inverted foreground colors."
       },
       "warning-strong-inverted": {
-        "value": "{color.gold.350}",
+        "value": "{color.gold.300}",
         "type": "color",
         "description": "A contrasting warning surface, most likely paired with inverted foreground colors."
       },
@@ -370,7 +370,7 @@
         "description": "A contrasting positive state surface, most likely paired with inverted foreground colors."
       },
       "success-strong-inverted": {
-        "value": "{color.green.300}",
+        "value": "{color.green.350}",
         "type": "color",
         "description": "A contrasting positive state surface, most likely paired with inverted foreground colors."
       },
