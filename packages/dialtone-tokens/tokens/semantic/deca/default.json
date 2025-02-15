@@ -1285,7 +1285,7 @@
               "studio.tokens": {
                 "modify": {
                   "type": "darken",
-                  "value": ".15",
+                  "value": ".11",
                   "space": "hsl"
                 }
               }
@@ -1322,7 +1322,7 @@
               "studio.tokens": {
                 "modify": {
                   "type": "darken",
-                  "value": ".15",
+                  "value": ".11",
                   "space": "hsl"
                 }
               }
@@ -1381,8 +1381,17 @@
             "type": "color"
           },
           "active": {
-            "value": "{color.surface.bold-opaque}",
-            "type": "color"
+            "value": "{action.color.background.muted.hover}",
+            "type": "color",
+            "$extensions": {
+              "studio.tokens": {
+                "modify": {
+                  "type": "alpha",
+                  "value": ".14",
+                  "space": "hsl"
+                }
+              }
+            }
           }
         },
         "disabled": {
