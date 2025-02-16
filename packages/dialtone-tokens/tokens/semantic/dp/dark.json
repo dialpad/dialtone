@@ -80,10 +80,6 @@
         "value": "{color.purple.550}",
         "type": "color"
       },
-      "critical-hover": {
-        "value": "{color.red.500}",
-        "type": "color"
-      },
       "warning-hover": {
         "value": "{color.gold.700}",
         "type": "color"
@@ -94,10 +90,6 @@
       },
       "primary-inverted-hover": {
         "value": "{color.purple.250}",
-        "type": "color"
-      },
-      "critical-inverted-hover": {
-        "value": "{color.red.200}",
         "type": "color"
       },
       "warning-inverted-hover": {

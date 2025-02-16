@@ -104,12 +104,12 @@
         "description": "Disabled text color that sits on high-contrast surfaces or backgrounds."
       },
       "critical-inverted": {
-        "value": "{color.red.200}",
+        "value": "{color.red.300}",
         "type": "color",
         "description": "Critical text that sits on high-contrast surfaces or backgrounds"
       },
       "critical-strong-inverted": {
-        "value": "{color.red.100}",
+        "value": "{color.red.200}",
         "type": "color",
         "description": "Critical strong text that sits on high-contrast surfaces or backgrounds"
       },
@@ -1747,7 +1747,7 @@
             "type": "color"
           },
           "hover": {
-            "value": "{color.link.critical-hover}",
+            "value": "{color.link.critical-hoverasdf}",
             "type": "color"
           },
           "active": {
