@@ -199,13 +199,13 @@
         "type": "color"
       },
       "primary-opaque": {
-        "value": "{color.black.1000}",
+        "value": "{color.surface.primary}",
         "type": "color",
         "$extensions": {
           "studio.tokens": {
             "modify": {
               "type": "alpha",
-              "value": ".96",
+              "value": ".90",
               "space": "hsl"
             }
           }

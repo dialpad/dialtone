@@ -335,13 +335,13 @@
         "description": "A contrasting informational surface, most likely paired with inverted foreground colors."
       },
       "primary-opaque": {
-        "value": "{color.black.1000}",
+        "value": "{color.black.50}",
         "type": "color",
         "$extensions": {
           "studio.tokens": {
             "modify": {
               "type": "alpha",
-              "value": ".20",
+              "value": ".96",
               "space": "hsl"
             }
           }
