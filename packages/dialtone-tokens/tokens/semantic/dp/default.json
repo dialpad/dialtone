@@ -1747,7 +1747,7 @@
             "type": "color"
           },
           "hover": {
-            "value": "{color.link.critical-hoverasdf}",
+            "value": "{color.link.critical-hover}",
             "type": "color"
           },
           "active": {
