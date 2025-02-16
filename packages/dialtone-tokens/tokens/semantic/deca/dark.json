@@ -305,7 +305,7 @@
         }
       },
       "critical-strong-inverted": {
-        "value": "{color.red.350}",
+        "value": "{color.red.400}",
         "type": "color"
       },
       "critical-opaque-inverted": {

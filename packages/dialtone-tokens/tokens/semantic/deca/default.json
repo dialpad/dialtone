@@ -305,7 +305,7 @@
         "description": "A softer version of the Critical surface."
       },
       "critical-strong": {
-        "value": "{color.red.500}",
+        "value": "{color.red.450}",
         "type": "color",
         "description": "A contrasting critical surface, most likely paired with inverted foreground colors."
       },
