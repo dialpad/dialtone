@@ -30,17 +30,17 @@
       },
       "weight": {
         "xs": {
-          "value": "{font.weight.medium}",
+          "value": "{font.weight.semiBold}",
           "type": "fontWeights",
           "description": "Font weight for XS button"
         },
         "sm": {
-          "value": "{font.weight.medium}",
+          "value": "{font.weight.semiBold}",
           "type": "fontWeights",
           "description": "Font weight for SM button"
         },
         "md": {
-          "value": "{font.weight.medium}",
+          "value": "{font.weight.semiBold}",
           "type": "fontWeights",
           "description": "Font weight for MD button"
         },
