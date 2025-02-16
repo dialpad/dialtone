@@ -3301,11 +3301,7 @@
       "components/button/default": "enabled",
       "components/checkbox/default": "enabled",
       "components/icon/default": "enabled",
-      "components/radio/default": "enabled",
-      "components/badge/deca-light": "enabled",
-      "components/button/deca-light": "enabled",
-      "components/checkbox/deca-light": "enabled",
-      "components/radio/deca-light": "enabled"
+      "components/radio/default": "enabled"
     },
     "$figmaVariableReferences": {},
     "group": "deca"
@@ -3910,12 +3906,7 @@
       "components/button/default": "enabled",
       "components/checkbox/default": "enabled",
       "components/icon/default": "enabled",
-      "components/radio/default": "enabled",
-      "components/badge/deca-dark": "enabled",
-      "components/badge/deca-light": "enabled",
-      "components/button/deca-light": "enabled",
-      "components/checkbox/deca-light": "enabled",
-      "components/radio/deca-light": "enabled"
+      "components/radio/default": "enabled"
     },
     "$figmaVariableReferences": {},
     "group": "deca"
