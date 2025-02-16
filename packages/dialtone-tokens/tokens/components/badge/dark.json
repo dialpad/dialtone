@@ -3,17 +3,8 @@
     "color": {
       "background": {
         "bulletin-subtle": {
-          "value": "{color.purple.400}",
-          "type": "color",
-          "$extensions": {
-            "studio.tokens": {
-              "modify": {
-                "type": "alpha",
-                "value": ".6",
-                "space": "hsl"
-              }
-            }
-          }
+          "value": "{color.purple.200}",
+          "type": "color"
         }
       },
       "foreground": {
