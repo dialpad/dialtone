@@ -3,17 +3,7 @@
     "color": {
       "background": {
         "checked": {
-          "value": "{color.surface.brand-strong}",
-          "type": "color"
-        }
-      },
-      "foreground": {
-        "default": {
-          "value": "{color.neutral.transparent}",
-          "type": "color"
-        },
-        "checked": {
-          "value": "{color.foreground.primary-inverted}",
+          "value": "#ff0000",
           "type": "color"
         }
       }
