@@ -928,7 +928,7 @@
               "studio.tokens": {
                 "modify": {
                   "type": "alpha",
-                  "value": ".18",
+                  "value": ".1",
                   "space": "hsl"
                 }
               }
@@ -941,7 +941,7 @@
               "studio.tokens": {
                 "modify": {
                   "type": "alpha",
-                  "value": ".24",
+                  "value": ".15",
                   "space": "hsl"
                 }
               }
@@ -958,7 +958,7 @@
               "studio.tokens": {
                 "modify": {
                   "type": "alpha",
-                  "value": ".2",
+                  "value": ".12",
                   "space": "hsl"
                 }
               }
@@ -970,10 +970,26 @@
     "presence": {
       "color": {
         "background": {
+          "available": {
+            "value": "{color.green.425}",
+            "type": "color"
+          },
           "busy-unavailable": {
-            "value": "{color.red.400}",
+            "value": "{color.red.500}",
+            "type": "color"
+          },
+          "busy": {
+            "value": "{color.gold.500}",
             "type": "color"
           }
+        }
+      }
+    },
+    "mention": {
+      "color": {
+        "background-strong": {
+          "value": "{color.purple.600}",
+          "type": "color"
         }
       }
     }
