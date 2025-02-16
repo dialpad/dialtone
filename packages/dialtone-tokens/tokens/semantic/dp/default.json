@@ -2062,7 +2062,7 @@
             "studio.tokens": {
               "modify": {
                 "type": "alpha",
-                "value": ".75",
+                "value": ".8",
                 "space": "hsl"
               }
             }
@@ -2355,7 +2355,7 @@
               "studio.tokens": {
                 "modify": {
                   "type": "alpha",
-                  "value": "0.12",
+                  "value": "0.11",
                   "space": "hsl"
                 }
               }
@@ -2368,7 +2368,7 @@
               "studio.tokens": {
                 "modify": {
                   "type": "alpha",
-                  "value": ".16",
+                  "value": ".15",
                   "space": "hsl"
                 }
               }
@@ -2389,7 +2389,7 @@
               "studio.tokens": {
                 "modify": {
                   "type": "alpha",
-                  "value": ".10",
+                  "value": ".09",
                   "space": "hsl"
                 }
               }
@@ -2410,15 +2410,15 @@
       "color": {
         "background": {
           "available": {
-            "value": "{color.green.400}",
+            "value": "{color.green.425}",
             "type": "color"
           },
           "busy-unavailable": {
-            "value": "{color.red.300}",
+            "value": "{color.red.400}",
             "type": "color"
           },
           "busy": {
-            "value": "{color.gold.300}",
+            "value": "{color.gold.400}",
             "type": "color"
           },
           "offline": {
@@ -2431,7 +2431,7 @@
     "mention": {
       "color": {
         "foreground": {
-          "value": "{color.neutral.white}",
+          "value": "{color.black.50}",
           "type": "color"
         },
         "foreground-strong": {
@@ -2439,11 +2439,11 @@
           "type": "color"
         },
         "background": {
-          "value": "{color.brand.purple}",
+          "value": "{color.surface.brand-strong}",
           "type": "color"
         },
         "background-strong": {
-          "value": "{color.purple.500}",
+          "value": "{color.purple.550}",
           "type": "color"
         }
       }
