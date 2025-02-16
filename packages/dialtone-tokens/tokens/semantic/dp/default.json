@@ -1677,43 +1677,16 @@
       },
       "background": {
         "default": {
-          "value": "{color.black.900}",
-          "type": "color",
-          "$extensions": {
-            "studio.tokens": {
-              "modify": {
-                "type": "alpha",
-                "value": ".03",
-                "space": "hsl"
-              }
-            }
-          }
+          "value": "{color.surface.secondary-opaque}",
+          "type": "color"
         },
         "focus": {
-          "value": "{color.black.900}",
-          "type": "color",
-          "$extensions": {
-            "studio.tokens": {
-              "modify": {
-                "type": "alpha",
-                "value": ".01",
-                "space": "hsl"
-              }
-            }
-          }
+          "value": "{color.black.100}",
+          "type": "color"
         },
         "disabled": {
-          "value": "{color.black.900}",
-          "type": "color",
-          "$extensions": {
-            "studio.tokens": {
-              "modify": {
-                "type": "alpha",
-                "value": ".12",
-                "space": "hsl"
-              }
-            }
-          }
+          "value": "{color.surface.moderate-opaque}",
+          "type": "color"
         }
       }
     }
