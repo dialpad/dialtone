@@ -335,7 +335,7 @@
         "description": "A contrasting informational surface, most likely paired with inverted foreground colors."
       },
       "primary-opaque": {
-        "value": "{color.black.50}",
+        "value": "{color.surface.primary}",
         "type": "color",
         "$extensions": {
           "studio.tokens": {
@@ -662,6 +662,20 @@
         "value": "{color.purple.300}",
         "type": "color",
         "description": "A contrasting informational surface, most likely paired with inverted foreground colors."
+      },
+      "primary-opaque-inverted": {
+        "value": "{color.surface.primary-inverted}",
+        "type": "color",
+        "$extensions": {
+          "studio.tokens": {
+            "modify": {
+              "type": "alpha",
+              "value": ".85",
+              "space": "hsl"
+            }
+          }
+        },
+        "description": "Secondary surface as opaque background color."
       },
       "secondary-opaque-inverted": {
         "value": "{color.black.50}",
