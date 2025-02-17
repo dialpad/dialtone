@@ -1,3 +1,10 @@
+# [1.41.0](https://github.com/dialpad/dialtone/compare/dialtone-tokens/v1.40.0...dialtone-tokens/v1.41.0) (2025-02-17)
+
+
+### Features
+
+* **Design Tokens:** NO-JIRA experimental deca token set updates again ([#632](https://github.com/dialpad/dialtone/issues/632)) ([c7ad513](https://github.com/dialpad/dialtone/commit/c7ad513f49215728dae86bf3305dd54f44df1251))
+
 # [1.40.0](https://github.com/dialpad/dialtone/compare/dialtone-tokens/v1.39.0...dialtone-tokens/v1.40.0) (2025-01-31)
 
 
