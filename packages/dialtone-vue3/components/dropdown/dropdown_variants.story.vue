@@ -156,6 +156,40 @@
           </dt-list-item-group>
         </template>
       </dt-dropdown>
+
+      <dt-dropdown
+        class="d-mr8"
+        :placement="variant"
+        :padding="$attrs.padding"
+        :navigation-type="$attrs.navigationType"
+        :transition="$attrs.transition"
+        :open="$attrs.open"
+        @highlight="$attrs.onHighlight"
+      >
+        <template #anchor>
+          <dt-button>
+            with footer
+          </dt-button>
+        </template>
+        <template #list="{ close }">
+          <dt-list-item
+            v-for="(item) in items"
+            :key="item.id"
+            role="menuitem"
+            :navigation-type="$attrs.navigationType"
+            @click="close"
+          >
+            {{ item.name }}
+          </dt-list-item>
+        </template>
+        <template #footer="{ close }">
+          <div class="d-px12">
+            <dt-button @click="close">
+              Dropdown footer
+            </dt-button>
+          </div>
+        </template>
+      </dt-dropdown>
     </div>
     <div class="d-d-flex d-fd-column">
       <p class="d-fw-bold d-mb2">
