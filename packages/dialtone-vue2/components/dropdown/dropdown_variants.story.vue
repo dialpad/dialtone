@@ -162,6 +162,60 @@
           </dt-list-item-group>
         </template>
       </dt-dropdown>
+
+      <dt-dropdown
+        class="d-mr8"
+        :open="$attrs.open"
+        :placement="$attrs.placement"
+        :fallback-placements="$attrs.fallbackPlacements"
+        :padding="$attrs.padding"
+        :modal="$attrs.modal"
+        :max-height="$attrs.maxHeight"
+        :max-width="$attrs.maxWidth"
+        :navigation-type="$attrs.navigationType"
+        :transition="$attrs.transition"
+        @opened="$attrs.onOpened"
+      >
+        <template
+          slot="anchor"
+          slot-scope="{ attrs }"
+        >
+          <div
+            v-if="$attrs.anchor"
+            v-html="$attrs.anchor"
+          />
+          <dt-button
+            v-else
+            v-bind="attrs"
+          >
+            with footer
+          </dt-button>
+        </template>
+        <template
+          slot="list"
+          slot-scope="{ close }"
+        >
+          <dt-list-item
+            v-for="(item) in items"
+            :key="item.id"
+            role="menuitem"
+            :navigation-type="$attrs.navigationType"
+            @click="close"
+          >
+            {{ item.name }}
+          </dt-list-item>
+        </template>
+        <template
+          slot="footer"
+          slot-scope="{ close }"
+        >
+          <div class="d-px12">
+            <dt-button @click="close">
+              Dropdown footer
+            </dt-button>
+          </div>
+        </template>
+      </dt-dropdown>
     </div>
     <div class="d-d-flex d-fd-column">
       <p class="d-fw-bold d-mb2">

@@ -18,7 +18,7 @@ export const argsData = {
   placement: 'bottom',
   appendTo: 'body',
   padding: 'none',
-  contentWidth: 'null',
+  contentWidth: '',
 };
 
 export const argTypesData = {
