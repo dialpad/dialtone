@@ -10,6 +10,7 @@ on:
       - next
       - production
       - staging
+      - rebrand-2025-beta
 
     paths:
       - 'packages/**'
