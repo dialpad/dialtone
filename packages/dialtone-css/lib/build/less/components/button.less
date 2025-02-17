@@ -651,6 +651,11 @@
       opacity: var(--dt-opacity-600); // soften it
       content: "";
 
+       // soften divider for muted outlined
+      .d-split-btn:has(.d-btn--outlined.d-btn--muted, .d-btn--outlined.d-btn--inverted) & {
+        opacity: var(--dt-opacity-300);
+      }
+
       // hide divider line when hovering or focusing any button within the split button
       .d-split-btn:has(:focus-visible, :hover, .d-btn--active) & {
         opacity: 0;
