@@ -25,6 +25,7 @@
     //  Component specific CSS Vars
     //  ------------------------------------------------------------------------
     --check-radio-color-border: var(--dt-checkbox-color-border-unchecked);
+    --check-radio-color-border-hover: var(--dt-checkbox-color-border-unchecked-hover);
     --check-radio-color-border-checked: var(--dt-checkbox-color-border-checked);
     --check-radio-color-border-disabled: var(--dt-inputs-color-border-disabled);
     --check-radio-color-background: var(--dt-inputs-color-background-default);
@@ -53,6 +54,10 @@
 
         &::-ms-check {
             display: none;
+        }
+
+        &:not(:disabled):hover {
+            border-color: var(--check-radio-color-border-hover);
         }
 
         &:checked {
