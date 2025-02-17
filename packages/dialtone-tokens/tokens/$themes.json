@@ -410,7 +410,8 @@
       "radio.color.foreground.default": "S:15e5c211eb73efd4e30a778b4d0832a095e7b74d,",
       "radio.color.foreground.checked": "S:a87fd53132b508efad557916bc7caf6f42d47bb9,",
       "checkbox.color.border.unchecked-hover": "S:98186641f51a54e093fb2a9e1dbbc583ce11b7ef,",
-      "radio.color.border.unchecked-hover": "S:e036a8502762ed8fbe2f176609d5f513976624c2,"
+      "radio.color.border.unchecked-hover": "S:e036a8502762ed8fbe2f176609d5f513976624c2,",
+      "inputs.color.border.hover": "S:cd1adb39265b75f7598b176833cf75bbe0d4cf35,"
     },
     "selectedTokenSets": {
       "base/default": "source",

@@ -1668,7 +1668,7 @@
           "value": "{color.border.default}",
           "type": "color"
         },
-        "default-hover": {
+        "hover": {
           "value": "{color.border.moderate}",
           "type": "color"
         },
