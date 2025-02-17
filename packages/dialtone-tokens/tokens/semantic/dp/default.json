@@ -1902,11 +1902,11 @@
             "type": "color"
           },
           "hover": {
-            "value": "{color.black.600}",
+            "value": "{color.surface.moderate-opaque-inverted}",
             "type": "color"
           },
           "active": {
-            "value": "{color.black.500}",
+            "value": "{color.surface.bold-opaque-inverted}",
             "type": "color"
           },
           "primary": {
