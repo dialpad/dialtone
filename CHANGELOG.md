@@ -1,3 +1,15 @@
+# [9.101.0-rebrand-2025-beta.1](https://github.com/dialpad/dialtone/compare/dialtone/v9.100.0...dialtone/v9.101.0-rebrand-2025-beta.1) (2025-02-17)
+
+
+### Documentation
+
+* NO-JIRA fix ivr-node ([#630](https://github.com/dialpad/dialtone/issues/630)) ([bca81d8](https://github.com/dialpad/dialtone/commit/bca81d8ac1f0701512a35c6af704762c08d8f080))
+
+
+### Features
+
+* **Design Tokens:** NO-JIRA experimental deca token set updates again ([#632](https://github.com/dialpad/dialtone/issues/632)) ([c7ad513](https://github.com/dialpad/dialtone/commit/c7ad513f49215728dae86bf3305dd54f44df1251))
+
 # [9.100.0](https://github.com/dialpad/dialtone/compare/dialtone/v9.99.0...dialtone/v9.100.0) (2025-02-11)
 
 
