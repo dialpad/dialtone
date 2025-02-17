@@ -24,6 +24,7 @@ on:
       - alpha
       - beta
       - next
+      - rebrand-2025-beta
 
 env:
   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
