@@ -936,7 +936,7 @@
           "studio.tokens": {
             "modify": {
               "type": "alpha",
-              "value": ".25",
+              "value": ".3",
               "space": "hsl"
             }
           }
@@ -1666,6 +1666,10 @@
       "border": {
         "default": {
           "value": "{color.border.default}",
+          "type": "color"
+        },
+        "default-hover": {
+          "value": "{color.border.moderate}",
           "type": "color"
         },
         "focus": {

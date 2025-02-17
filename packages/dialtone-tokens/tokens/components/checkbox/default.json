@@ -21,7 +21,7 @@
           "type": "color"
         },
         "unchecked-hover": {
-          "value": "{color.border.bold}",
+          "value": "{color.border.moderate}",
           "type": "color"
         },
         "checked": {
