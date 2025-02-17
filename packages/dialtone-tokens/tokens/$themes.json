@@ -408,7 +408,9 @@
       "checkbox.color.foreground.default": "S:cfd18a9afd0f34b6f6bd8f4e355a00b106d4d7a8,",
       "checkbox.color.foreground.checked": "S:d87815eeefc170a1ecf6a0902430591438063994,",
       "radio.color.foreground.default": "S:15e5c211eb73efd4e30a778b4d0832a095e7b74d,",
-      "radio.color.foreground.checked": "S:a87fd53132b508efad557916bc7caf6f42d47bb9,"
+      "radio.color.foreground.checked": "S:a87fd53132b508efad557916bc7caf6f42d47bb9,",
+      "checkbox.color.border.unchecked-hover": "S:98186641f51a54e093fb2a9e1dbbc583ce11b7ef,",
+      "radio.color.border.unchecked-hover": "S:e036a8502762ed8fbe2f176609d5f513976624c2,"
     },
     "selectedTokenSets": {
       "base/default": "source",

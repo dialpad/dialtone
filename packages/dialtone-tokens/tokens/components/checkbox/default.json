@@ -20,6 +20,10 @@
           "value": "{color.border.moderate}",
           "type": "color"
         },
+        "unchecked-hover": {
+          "value": "{color.border.bold}",
+          "type": "color"
+        },
         "checked": {
           "value": "{color.border.brand}",
           "type": "color"
