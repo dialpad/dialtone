@@ -61,7 +61,7 @@
     gap: var(--dt-space-400);
     align-items: center;
 
-    button {
+    .d-btn {
         color: var(--notice-color-text);
     }
 }
@@ -113,7 +113,7 @@
 .d-banner--error,
 .d-toast--error {
     --notice-color-background: var(--dt-color-surface-critical);
-    --notice-color-icon: var(--dt-color-red-400);
+    --notice-color-icon: var(--dt-color-foreground-critical);
 
     &.d-notice--important,
     &.d-banner--important,
@@ -144,7 +144,7 @@
 .d-banner--success,
 .d-toast--success {
     --notice-color-background: var(--dt-color-surface-success);
-    --notice-color-icon: var(--dt-color-green-400);
+    --notice-color-icon: var(--dt-color-foreground-success);
 
     &.d-notice--important,
     &.d-banner--important,
@@ -160,7 +160,7 @@
 .d-banner--warning,
 .d-toast--warning {
     --notice-color-background: var(--dt-color-surface-warning);
-    --notice-color-icon: var(--dt-color-gold-400);
+    --notice-color-icon: var(--dt-color-foreground-warning);
 
     &.d-notice--important,
     &.d-banner--important,

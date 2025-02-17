@@ -10,7 +10,7 @@
       :kind="isFirstPage ? 'default' : 'muted'"
       :importance="isFirstPage ? 'primary' : 'clear'"
       :disabled="isFirstPage"
-      :class="isFirstPage ? 'd-fc-black-300 d-bgc-transparent' : 'd-fc-tertiary'"
+      :class="isFirstPage ? 'd-fco50 d-fc-disabled d-bgc-transparent' : 'd-fc-tertiary'"
       @click="changePage(currentPage - 1)"
     >
       <template #icon>
@@ -54,7 +54,7 @@
       :disabled="isLastPage"
       kind="muted"
       :importance="isLastPage ? 'primary' : 'clear'"
-      :class="isLastPage ? 'd-fc-black-300 d-bgc-transparent' : 'd-fc-tertiary'"
+      :class="isLastPage ? 'd-fco50 d-fc-disabled d-bgc-transparent' : 'd-fc-tertiary'"
       @click="changePage(currentPage + 1)"
     >
       <template #icon>
