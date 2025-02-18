@@ -31,7 +31,7 @@
           "type": "color"
         },
         "ai": {
-          "value": "{color.gradient.magenta-purple}",
+          "value": "{color.gradient.gold-red-magenta-purple}",
           "type": "color"
         }
       },
