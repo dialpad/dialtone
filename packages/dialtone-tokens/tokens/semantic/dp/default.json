@@ -900,6 +900,10 @@
           }
         },
         "description": "Background color for a modal-like backdrop."
+      },
+      "ai": {
+        "value": "{color.gradient.gold-red-magenta-purple}",
+        "type": "color"
       }
     },
     "border": {
