@@ -1,9 +1,9 @@
 ---
-title: Divide width
+title: Divide Width
 description: Utilities for controlling the divider width between an element's child items.
 ---
 
-## Default width
+## Default Width
 
 Use `d-divide-{y|x}` to create a 1px divider between an element's child items.
 
@@ -33,7 +33,7 @@ Use `d-divide-{y|x}` to create a 1px divider between an element's child items.
 </div>
 ```
 
-## Changing the divider width
+## Changing the Divider Width
 
 Use `d-divide-{y|x}{n}` to change the divider width between an element's child items.
 
@@ -70,7 +70,7 @@ Use `d-divide-{y|x}{n}` to change the divider width between an element's child i
 <div class="d-divide-x4 ...">...</div>
 ```
 
-## Reversing the divider direction
+## Reversing the Divider Direction
 
 If an element's `flex-direction` is reversed, apply `d-divide-{y|x}-reverse` to reverse the divider placement between an element's child items.
 

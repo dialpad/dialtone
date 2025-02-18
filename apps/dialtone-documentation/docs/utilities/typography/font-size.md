@@ -1,5 +1,5 @@
 ---
-title: Font size
+title: Font Size
 description: Utilities to change an element's font-size.
 ---
 
@@ -45,7 +45,7 @@ change in other platforms (mobile, tc8, tv).
   import { fontSize } from '@data/type.json';
 </script>
 
-## Classes by platform
+## Classes by Platform
 
 ### Product
 

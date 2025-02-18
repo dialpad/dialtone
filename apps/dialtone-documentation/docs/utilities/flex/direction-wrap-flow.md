@@ -3,7 +3,7 @@ title: Direction, Wrap, & Flow
 description: Utilities for setting an object's flex direction, wrap, and flow directions.
 ---
 
-## Flex direction
+## Flex Direction
 
 The `flex-direction` property declares a flex container’s main axis direction. The default value is row.
 
@@ -50,7 +50,7 @@ The `flex-direction` property declares a flex container’s main axis direction.
 </div>
 ```
 
-## Flex wrap
+## Flex Wrap
 
 The `flex-wrap` property declares a flex container’s wrapping status. The default value is nowrap.
 
@@ -87,7 +87,7 @@ The `flex-wrap` property declares a flex container’s wrapping status. The defa
 </div>
 ```
 
-## Flex flow
+## Flex Flow
 
 The `flex-flow` property is a shorthand property that sets allows you to quickly set the above `flex-direction` and `flex-wrap` properties. By default all flex containers are set to `row` and `nowrap`.
 

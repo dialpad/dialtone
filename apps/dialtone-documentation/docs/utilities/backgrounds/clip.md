@@ -1,5 +1,5 @@
 ---
-title: Background clip
+title: Background Clip
 description: Utilities for controlling whether an element's background extends underneath its border, padding, or content box.
 ---
 
@@ -20,7 +20,7 @@ Use `d-bgc-{name}` to control which box an element's background is clipped by.
 <div class="d-bgc-content-box">...</div>
 ```
 
-## Clipping text
+## Clipping Text
 
 Use `d-bgc-text` to clip the background color(s) within the foreground text.
 

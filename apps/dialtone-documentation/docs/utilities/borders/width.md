@@ -1,9 +1,9 @@
 ---
-title: Border widths
+title: Border Widths
 description: Utilities for controlling an element's border width.
 ---
 
-## All sides
+## All Sides
 
 Use `d-baw{n}` to change the border width on your element.
 
@@ -24,7 +24,7 @@ Use `d-baw{n}` to change the border width on your element.
 <div class="d-ba d-baw6">...</div>
 ```
 
-## Individual sides
+## Individual Sides
 
 Use `d-b{a|t|r|b|l}w{n}` to change the border width of your direction on your element.
 

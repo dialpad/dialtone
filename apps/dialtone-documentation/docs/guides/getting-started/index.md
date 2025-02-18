@@ -3,7 +3,7 @@ title: Getting started
 description: A quick start guide to add Dialtone to your project.
 ---
 
-## Adding Dialtone to your project
+## Adding Dialtone to Your Project
 
 To take advantage of Dialtone's customizations, classes, and variables in your project, you will want to install Dialtone via [npm](https://www.npmjs.com/).
 
@@ -27,7 +27,7 @@ If you only need access to Dialtone's variables and customizations to build a fi
 
 A general overview of Dialtone's utility classes, CSS components, and Vue components.
 
-### Utility-first
+### Utility-First
 
 Dialtone's CSS library offers a framework of utility-first classes. Each class is a small, [atomic style](https://css-tricks.com/lets-define-exactly-atomic-css/) declaration that, when chained together, should mitigate most situations in which custom CSS must be written. Just write these classes right in your mark-up and you're all set!
 
@@ -126,7 +126,7 @@ In order to make Dialtone work across our supported browsers you need to manuall
 1. Focus-visible adds a listener to every element that should be keyboard-focused only and when the element is focused, it adds the .focus-visible class to it, follow the [focus-visible](https://github.com/WICG/focus-visible#installation) installation instructions.
 2. Postcss focus-visible plugin adds a .focus-visible class for every :focus-visible class found in your css, follow the [postcss-focus-visible](https://www.npmjs.com/package/postcss-focus-visible) installation instructions.
 
-### Box-sizing
+### Box-Sizing
 
 All Dialtone components are implemented with `box-sizing: border-box;` applied. To understand why we prefer `border-box` over `content-box`, please visit this [Stack Overflow Teams question](https://stackoverflow.com/c/dialpad/questions/121).
 
@@ -154,7 +154,7 @@ You should see the following response:
 v16.x.x
 ```
 
-### Clone project
+### Clone Project
 
 Download the project:
 
@@ -172,7 +172,7 @@ Then `cd` into the Dialtone directory:
 cd ./path/to/dialtone
 ```
 
-### Install dependencies
+### Install Dependencies
 
 Dialtone uses [Gulp](https://gulpjs.com/) to automate its various workflows.
 Run the following command to install Gulp and all other project dependencies:

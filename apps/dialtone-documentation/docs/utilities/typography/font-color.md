@@ -30,7 +30,7 @@ Use `d-fc-{color}` to change an element's text color.
 <p class="d-fc-purple-400">...</p>
 ```
 
-## Changing opacity
+## Changing Opacity
 
 Use `d-fco{n}` to change an element's text color opacity. You can also change font color opacity on `:hover`, `:focus`, `:focus-visible` by using the respective `h:d-fco{n}`, `f:d-fco{n}`, `fv:d-fco{n}` prefixes.
 
@@ -82,7 +82,7 @@ Use `f:d-fc-{color}` to change an element's text color `:focus` and `:focus-with
 <button class="d-fc-magenta-300 f:d-fc-neutral-white d-bgc-transparent f:d-bgc-magenta-400">...</button>
 ```
 
-## Focus visible
+## Focus Visible
 
 Use `fv:d-fc-{color}` to change an element's text color on `:focus-visible` state [only when focused by keyboard].
 

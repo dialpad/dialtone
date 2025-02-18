@@ -3,7 +3,7 @@ title: Lists
 description: Utilities for controlling list styling.
 ---
 
-## Resetting a list
+## Resetting a List
 
 Use `d-ls-reset` to reset the margin, padding, and list-style-type of a list. Reseting a list applies to the parent `ol` or `ul`, any child `li` elements, and any child `ol` or `ul` elements.
 
@@ -49,7 +49,7 @@ Use `d-ls-reset` to reset the margin, padding, and list-style-type of a list. Re
 </ul>
 ```
 
-## Changing the list style type
+## Changing the List Style Type
 
 Use `d-lst-{none|disc|circle|decimal|content|none}` to change a list item's bullet styling.
 
@@ -113,7 +113,7 @@ Use `d-lst-{none|disc|circle|decimal|content|none}` to change a list item's bull
 </dt-stack>
 ```
 
-## Custom starting number
+## Custom Starting Number
 
 Use the `start` attribute for an `<ol>` to set its starting number.
 
