@@ -40,7 +40,7 @@
             <div>{{ name }}</div>
             <div
               v-if="required"
-              class="d-fc-critical"
+              class="d-fc-critical d-fw-normal"
             >
               required
             </div>
