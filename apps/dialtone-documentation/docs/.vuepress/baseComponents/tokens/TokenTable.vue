@@ -75,12 +75,12 @@
             :tokens="tokens"
           />
         </th>
-        <td v-if="!isSmallDevice" class="d-code--sm d-fc-purple-400 d-ta-right d-wmx164">
+        <td v-if="!isSmallDevice" class="d-code--sm  d-fc-blue-500 d-ta-right d-wmx164">
           <token-value :token-value="valueToString(tokenValue)" :tokens="tokens" />
         </td>
         <td
           v-if="!!tokenList"
-          class="d-code--sm d-fc-purple-400"
+          class="d-code--sm d-docsite-code"
         >
           <div class="d-wmx264">
             {{ remToPixels(tokenValue) }}

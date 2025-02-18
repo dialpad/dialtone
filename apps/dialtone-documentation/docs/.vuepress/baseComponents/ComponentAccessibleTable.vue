@@ -26,7 +26,7 @@
       >
         <th
           scope="row"
-          class="d-code--sm d-fc-blue-500"
+          class="d-code--sm d-docsite-code"
           v-text="item"
         />
         <td

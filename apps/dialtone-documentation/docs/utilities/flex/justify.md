@@ -9,7 +9,7 @@ description: Utilities for setting how an element's space around and between con
   <template #content>
     <tbody>
       <tr v-for="{ class: className, output } in justifyContent">
-        <th scope="row" class="d-code--sm d-fc-purple-400">.d-{{ className }}</th>
+        <th scope="row" class="d-code--sm d-docsite-code">.d-{{ className }}</th>
         <td class="d-code--sm">{{ output }}</td>
       </tr>
     </tbody>

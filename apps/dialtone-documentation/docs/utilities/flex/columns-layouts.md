@@ -97,13 +97,13 @@ By default flexed items align to `flex-start` both horizontally and vertically (
     <template #content>
       <tbody>
         <tr v-for="i in columns">
-          <th scope="row" class="d-code--sm d-fc-purple-400">.d-fl-col{{ i }}</th>
+          <th scope="row" class="d-code--sm d-docsite-code">.d-fl-col{{ i }}</th>
           <td class="d-code--sm d-ws-pre">> *{ flex-basis: calc({{ calcFlexBasis(i) }}% - (var(--fl-gap)* 2)); }</td>
         </tr>
       </tbody>
       <tbody>
         <tr v-for="i in gaps">
-          <th scope="row" class="d-code--sm d-fc-purple-400">.d-cg{{ i }}</th>
+          <th scope="row" class="d-code--sm d-docsite-code">.d-cg{{ i }}</th>
           <td class="d-code--sm d-ws-pre">> * { --fl-gap: {{ calcGap(i) }} !important; }</td>
         </tr>
       </tbody>

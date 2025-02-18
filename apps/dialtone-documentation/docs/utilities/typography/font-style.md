@@ -37,7 +37,7 @@ Use `d-fs-none` to remove an element's font-style.
   <template #content>
     <tbody>
       <tr v-for="i in style">
-        <th scope="row" class="d-code--sm d-fc-purple-400">.d-fs-{{ i }}</th>
+        <th scope="row" class="d-code--sm d-docsite-code">.d-fs-{{ i }}</th>
         <td class="d-code--sm">font-style: {{ i }} !important;</td>
       </tr>
     </tbody>

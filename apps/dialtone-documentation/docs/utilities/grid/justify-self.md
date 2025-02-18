@@ -89,7 +89,7 @@ Use `d-js-center` to justify an item to the center of its inline axis.
   <template #content>
     <tbody>
       <tr v-for="i in ['center', 'end', 'start', 'left', 'right', 'baseline', 'first-baseline', 'last-baseline', 'stretch', 'safe', 'unsafe', 'normal', 'legacy', 'auto', 'unset']">
-        <th scope="row" class="d-code--sm d-fc-purple-400">.d-js-{{ i }}</th>
+        <th scope="row" class="d-code--sm d-docsite-code">.d-js-{{ i }}</th>
         <td class="d-code--sm">justify-self: {{ i }} !important;</td>
       </tr>
     </tbody>

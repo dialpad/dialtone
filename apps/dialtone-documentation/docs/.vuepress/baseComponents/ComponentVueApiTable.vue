@@ -34,7 +34,7 @@
       >
         <th
           scope="row"
-          class="d-code--sm d-fc-purple-400"
+          class="d-code--sm d-docsite-code"
         >
           <dt-stack gap="300">
             <div>{{ name }}</div>

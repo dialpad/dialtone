@@ -38,7 +38,7 @@ Use `d-ol-{focusring|focusring-inset|none}` to change an elements' outline.
   <template #content>
     <tbody>
       <tr v-for="{ class: className, output } in outline">
-        <th scope="row" class="d-code--sm d-fc-purple-400">.{{ className }}</th>
+        <th scope="row" class="d-code--sm d-docsite-code">.{{ className }}</th>
         <td class="d-code--sm">{{ output }}</td>
       </tr>
     </tbody>

@@ -78,7 +78,7 @@ It is highly recommended to use the [stack component](/components/stack.md) or t
       <!-- Positive margins -->
       <tbody v-for="i in directions">
         <tr v-for="{ value: val, output } in values">
-          <th scope="row" class="d-code--sm d-fc-purple-400">
+          <th scope="row" class="d-code--sm d-docsite-code">
             <span v-if="i !== 'All'">.d-m{{ i[0] }}{{ val }}</span>
             <span v-else>.d-m{{ val }}</span>
           </th>
@@ -101,7 +101,7 @@ It is highly recommended to use the [stack component](/components/stack.md) or t
       <!-- Negative margins -->
       <tbody v-for="i in directions">
         <tr v-for="{ value: val, output } in values.slice(1)">
-          <th scope="row" class="d-code--sm d-fc-purple-400">
+          <th scope="row" class="d-code--sm d-docsite-code">
             <span v-if="i !== 'All'">.d-m{{ i[0] }}n{{ val }}</span>
             <span v-else>.d-mn{{ val }}</span>
           </th>
@@ -124,7 +124,7 @@ It is highly recommended to use the [stack component](/components/stack.md) or t
       <!-- Auto margins -->
       <tbody>
         <tr v-for="i in directions">
-          <th scope="row" class="d-code--sm d-fc-purple-400">
+          <th scope="row" class="d-code--sm d-docsite-code">
             <span v-if="i !== 'All'">.d-m{{ i[0] }}-auto</span>
             <span v-else>.d-m-auto</span>
           </th>
@@ -147,7 +147,7 @@ It is highly recommended to use the [stack component](/components/stack.md) or t
       <!-- Unset margins -->
       <tbody>
         <tr v-for="i in directions">
-          <th scope="row" class="d-code--sm d-fc-purple-400">
+          <th scope="row" class="d-code--sm d-docsite-code">
             <span v-if="i !== 'All'">.d-m{{ i[0] }}-unset</span>
             <span v-else>.d-m-unset</span>
           </th>

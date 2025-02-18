@@ -95,7 +95,7 @@ Use `d-ai-flex-end` to distribute items from the end of the element's cross axis
  <template #content>
     <tbody>
       <tr v-for="{ class: className, output } in alignItems">
-        <th scope="row" class="d-code--sm d-fc-purple-400">.d-{{ className }}</th>
+        <th scope="row" class="d-code--sm d-docsite-code">.d-{{ className }}</th>
         <td class="d-code--sm">{{ output }}</td>
       </tr>
     </tbody>

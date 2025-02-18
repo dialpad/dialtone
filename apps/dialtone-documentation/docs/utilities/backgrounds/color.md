@@ -97,7 +97,7 @@ Use `fv:d-bgc-{color}` to change an element's `:focus-visible` state background 
     <template #content>
       <tbody>
         <tr>
-            <th scope="row" class="d-code--sm d-fc-purple-400">.d-bgc-primary</th>
+            <th scope="row" class="d-code--sm d-docsite-code">.d-bgc-primary</th>
             <td>
                 <div class="d-d-flex d-jc-space-between d-ai-center">
                     <div class="d-fl-grow1 d-code--sm">
@@ -109,7 +109,7 @@ Use `fv:d-bgc-{color}` to change an element's `:focus-visible` state background 
             </td>
         </tr>
         <tr>
-            <th scope="row" class="d-code--sm d-fc-purple-400">.d-bgc-secondary</th>
+            <th scope="row" class="d-code--sm d-docsite-code">.d-bgc-secondary</th>
             <td>
                 <div class="d-d-flex d-jc-space-between d-ai-center">
                     <div class="d-fl-grow1 d-code--sm">
@@ -121,7 +121,7 @@ Use `fv:d-bgc-{color}` to change an element's `:focus-visible` state background 
             </td>
         </tr>
         <tr>
-            <th scope="row" class="d-code--sm d-fc-purple-400">.d-bgc-moderate</th>
+            <th scope="row" class="d-code--sm d-docsite-code">.d-bgc-moderate</th>
             <td>
                 <div class="d-d-flex d-jc-space-between d-ai-center">
                     <div class="d-fl-grow1 d-code--sm">
@@ -133,7 +133,7 @@ Use `fv:d-bgc-{color}` to change an element's `:focus-visible` state background 
             </td>
         </tr>
         <tr>
-            <th scope="row" class="d-code--sm d-fc-purple-400">.d-bgc-bold</th>
+            <th scope="row" class="d-code--sm d-docsite-code">.d-bgc-bold</th>
             <td>
                 <div class="d-d-flex d-jc-space-between d-ai-center">
                     <div class="d-fl-grow1 d-code--sm">
@@ -145,7 +145,7 @@ Use `fv:d-bgc-{color}` to change an element's `:focus-visible` state background 
             </td>
         </tr>
         <tr>
-            <th scope="row" class="d-code--sm d-fc-purple-400">.d-bgc-strong</th>
+            <th scope="row" class="d-code--sm d-docsite-code">.d-bgc-strong</th>
             <td>
                 <div class="d-d-flex d-jc-space-between d-ai-center">
                     <div class="d-fl-grow1 d-code--sm">
@@ -157,7 +157,7 @@ Use `fv:d-bgc-{color}` to change an element's `:focus-visible` state background 
             </td>
         </tr>
         <tr>
-            <th scope="row" class="d-code--sm d-fc-purple-400">.d-bgc-contrast</th>
+            <th scope="row" class="d-code--sm d-docsite-code">.d-bgc-contrast</th>
             <td>
                 <div class="d-d-flex d-jc-space-between d-ai-center">
                     <div class="d-fl-grow1 d-code--sm">
@@ -171,7 +171,7 @@ Use `fv:d-bgc-{color}` to change an element's `:focus-visible` state background 
       </tbody>
       <tbody>
         <tr>
-            <th scope="row" class="d-code--sm d-fc-purple-400">.d-bgc-critical</th>
+            <th scope="row" class="d-code--sm d-docsite-code">.d-bgc-critical</th>
             <td>
                 <div class="d-d-flex d-jc-space-between d-ai-center">
                     <div class="d-fl-grow1 d-code--sm">
@@ -183,7 +183,7 @@ Use `fv:d-bgc-{color}` to change an element's `:focus-visible` state background 
             </td>
         </tr>
         <tr>
-            <th scope="row" class="d-code--sm d-fc-purple-400">.d-bgc-success</th>
+            <th scope="row" class="d-code--sm d-docsite-code">.d-bgc-success</th>
             <td>
                 <div class="d-d-flex d-jc-space-between d-ai-center">
                     <div class="d-fl-grow1 d-code--sm">
@@ -195,7 +195,7 @@ Use `fv:d-bgc-{color}` to change an element's `:focus-visible` state background 
             </td>
         </tr>
         <tr>
-            <th scope="row" class="d-code--sm d-fc-purple-400">.d-bgc-warning</th>
+            <th scope="row" class="d-code--sm d-docsite-code">.d-bgc-warning</th>
             <td>
                 <div class="d-d-flex d-jc-space-between d-ai-center">
                     <div class="d-fl-grow1 d-code--sm">
@@ -207,7 +207,7 @@ Use `fv:d-bgc-{color}` to change an element's `:focus-visible` state background 
             </td>
         </tr>
         <tr>
-            <th scope="row" class="d-code--sm d-fc-purple-400">.d-bgc-info</th>
+            <th scope="row" class="d-code--sm d-docsite-code">.d-bgc-info</th>
             <td>
                 <div class="d-d-flex d-jc-space-between d-ai-center">
                     <div class="d-fl-grow1 d-code--sm">
@@ -221,7 +221,7 @@ Use `fv:d-bgc-{color}` to change an element's `:focus-visible` state background 
       </tbody>
       <tbody>
           <tr>
-              <th scope="row" class="d-code--sm d-fc-purple-400">.d-bgc-transparent</th>
+              <th scope="row" class="d-code--sm d-docsite-code">.d-bgc-transparent</th>
               <td>
                   <div class="d-d-flex d-jc-space-between d-ai-center">
                       <div class="d-fl-grow1 d-code--sm">
@@ -232,7 +232,7 @@ Use `fv:d-bgc-{color}` to change an element's `:focus-visible` state background 
               </td>
           </tr>
           <tr>
-              <th scope="row" class="d-code--sm d-fc-purple-400">.d-bgc-unset</th>
+              <th scope="row" class="d-code--sm d-docsite-code">.d-bgc-unset</th>
               <td>
                   <div class="d-d-flex d-jc-space-between d-ai-center">
                       <div class="d-fl-grow1 d-code--sm">
@@ -243,7 +243,7 @@ Use `fv:d-bgc-{color}` to change an element's `:focus-visible` state background 
               </td>
           </tr>
           <tr>
-              <th scope="row" class="d-code--sm d-fc-purple-400">.d-bgc-neutral-white</th>
+              <th scope="row" class="d-code--sm d-docsite-code">.d-bgc-neutral-white</th>
               <td>
                   <div class="d-d-flex d-jc-space-between d-ai-center">
                       <div class="d-fl-grow1 d-code--sm">
@@ -257,7 +257,7 @@ Use `fv:d-bgc-{color}` to change an element's `:focus-visible` state background 
       </tbody>
       <tbody v-for="{ color, stops } in baseColors">
         <tr v-for="{ stop } in stops">
-            <th scope="row" class="d-code--sm d-fc-purple-400">.d-bgc-{{ color }}-{{ stop }}</th>
+            <th scope="row" class="d-code--sm d-docsite-code">.d-bgc-{{ color }}-{{ stop }}</th>
             <td>
                 <div class="d-d-flex d-jc-space-between d-ai-center">
                     <div class="d-fl-grow1 d-code--sm">

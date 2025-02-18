@@ -51,7 +51,7 @@ Use `d-wb-keep-all` on an element to not use word breaks for Chinese, Japanese, 
   <template #content>
     <tbody>
       <tr v-for="i in ['normal', 'break-all', 'keep-all', 'unset']">
-        <th scope="row" class="d-code--sm d-fc-purple-400">.d-wb-{{ i }}</th>
+        <th scope="row" class="d-code--sm d-docsite-code">.d-wb-{{ i }}</th>
         <td class="d-code--sm">word-break: {{ i }} !important;</td>
       </tr>
     </tbody>

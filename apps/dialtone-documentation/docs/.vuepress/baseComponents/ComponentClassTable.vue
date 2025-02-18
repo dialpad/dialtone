@@ -26,7 +26,7 @@
       >
         <th
           scope="row"
-          class="d-code--sm d-fc-purple-400"
+          class="d-code--sm d-fc-blue-475"
           v-text="`.${className}`"
         />
         <td class="d-code--sm">

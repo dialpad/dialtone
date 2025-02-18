@@ -118,23 +118,23 @@ Use `d-w-auto` have the browser calculate and select a width.
     </thead>
     <tbody>
       <tr v-for="i in percentage">
-        <th scope="row" class="d-code--sm d-fc-purple-400">.d-w{{ i }}p</th>
+        <th scope="row" class="d-code--sm d-docsite-code">.d-w{{ i }}p</th>
         <td class="d-code--sm">width: {{ i }}% !important;</td>
       </tr>
     </tbody>
     <tbody>
       <tr v-for="i in fixed">
-        <th scope="row" class="d-code--sm d-fc-purple-400">.d-w{{ i }}</th>
+        <th scope="row" class="d-code--sm d-docsite-code">.d-w{{ i }}</th>
         <td class="d-code--sm">width: {{ i }}px !important;</td>
       </tr>
     </tbody>
     <tbody>
       <tr>
-        <th scope="row" class="d-code--sm d-fc-purple-400">.d-w100vw</th>
+        <th scope="row" class="d-code--sm d-docsite-code">.d-w100vw</th>
         <td class="d-code--sm">width: 100vh !important;</td>
       </tr>
       <tr v-for="i in other">
-        <th scope="row" class="d-code--sm d-fc-purple-400">.d-w-{{ i }}</th>
+        <th scope="row" class="d-code--sm d-docsite-code">.d-w-{{ i }}</th>
         <td class="d-code--sm">width: {{ i }} !important;</td>
       </tr>
     </tbody>

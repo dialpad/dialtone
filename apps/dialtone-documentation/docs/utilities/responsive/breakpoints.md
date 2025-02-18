@@ -41,22 +41,22 @@ To help keep prefixes concise, we use abbreviations. This syntax is used consist
   </thead>
   <tbody>
     <tr>
-      <th scope="row" class="d-code--sm d-fc-purple-400">.xl:{class}</th>
+      <th scope="row" class="d-code--sm d-docsite-code">.xl:{class}</th>
       <td class="d-code--sm">max-width: 1264px</td>
       <td class="d-code--sm">The class is applied on extra large browser widths and below.</td>
     </tr>
     <tr>
-      <th scope="row" class="d-code--sm d-fc-purple-400">.lg:{class}</th>
+      <th scope="row" class="d-code--sm d-docsite-code">.lg:{class}</th>
       <td class="d-code--sm">max-width: 980px</td>
       <td class="d-code--sm">The class is applied on large browser widths and below.</td>
     </tr>
     <tr>
-      <th scope="row" class="d-code--sm d-fc-purple-400">.md:{class}</th>
+      <th scope="row" class="d-code--sm d-docsite-code">.md:{class}</th>
       <td class="d-code--sm">max-width: 640px</td>
       <td class="d-code--sm">The class is applied on medium browser widths and below.</td>
     </tr>
     <tr>
-      <th scope="row" class="d-code--sm d-fc-purple-400">.sm:{class}</th>
+      <th scope="row" class="d-code--sm d-docsite-code">.sm:{class}</th>
       <td class="d-code--sm">max-width: 480px</td>
       <td class="d-code--sm">The class is applied on small browser widths and below.</td>
     </tr>

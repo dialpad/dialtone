@@ -25,7 +25,7 @@ All examples below have a 128px height and width. You can see how `.d-box-border
   <template #content>
     <tbody>
       <tr v-for="i in ['content', 'split']">
-        <th class="d-code--sm d-fc-purple-400">d-box-{{ i }}</th>
+        <th class="d-code--sm d-docsite-code">d-box-{{ i }}</th>
         <td class="d-code--sm">box-sizing: {{ i }}-box;</td>
       </tr>
     </tbody>

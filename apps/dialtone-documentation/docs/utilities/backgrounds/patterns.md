@@ -25,7 +25,7 @@ Use `d-bgg-pattern-{pattern}-{dark|light}` to apply a pattern.
     <template #content>
       <tbody v-for="c in ['dark', 'light']">
         <tr v-for="i in ['blob', 'chevrons', 'crosses', 'crosshatch', 'dot-dash', 'dots-circles', 'horz-stripes', 'slanted-stripes', 'steps', 'stripe']">
-          <th scope="row" class="d-code--sm d-fc-purple-400">.d-bgg-pattern-{{ i }}-{{ c }}</th>
+          <th scope="row" class="d-code--sm d-docsite-code">.d-bgg-pattern-{{ i }}-{{ c }}</th>
           <td>
             <div class="d-d-flex d-jc-space-between d-ai-center">
               <div class="d-fl-grow1 d-code--sm">

@@ -93,7 +93,7 @@ Use `d-ws-break-spaces` to have an element act like `pre-wrap` except that any s
   <template #content>
     <tbody>
       <tr v-for="i in ['normal', 'nowrap', 'pre', 'pre-line', 'pre-wrap', 'break-spaces', 'unset']">
-        <th scope="row" class="d-code--sm d-fc-purple-400">.d-ws-{{ i }}</th>
+        <th scope="row" class="d-code--sm d-docsite-code">.d-ws-{{ i }}</th>
         <td class="d-code--sm">white-space: {{ i }} !important;</td>
       </tr>
     </tbody>

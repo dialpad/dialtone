@@ -163,7 +163,7 @@ Use the `start` attribute for an `<ol>` to set its starting number.
   <template #content>
     <tbody>
       <tr>
-        <th scope="row" class="d-code--sm d-fc-purple-400">.d-ls-reset</th>
+        <th scope="row" class="d-code--sm d-docsite-code">.d-ls-reset</th>
         <td class="d-code--sm">
           margin: 0;<br/>
           padding: 0;<br/>
@@ -171,11 +171,11 @@ Use the `start` attribute for an `<ol>` to set its starting number.
         </td>
       </tr>
       <tr>
-        <th scope="row" class="d-code--sm d-fc-purple-400">.d-ls-none</th>
+        <th scope="row" class="d-code--sm d-docsite-code">.d-ls-none</th>
         <td class="d-code--sm">list-style: none !important;</td>
       </tr>
       <tr v-for="i in lists">
-        <th scope="row" class="d-code--sm d-fc-purple-400">.d-lst-{{ i }}</th>
+        <th scope="row" class="d-code--sm d-docsite-code">.d-lst-{{ i }}</th>
         <td class="d-code--sm">
           <span v-if="i === 'content'">list-style-type: var(--ls-content) !important;</span>
           <span v-else>list-style-type: {{ i }} !important;</span>

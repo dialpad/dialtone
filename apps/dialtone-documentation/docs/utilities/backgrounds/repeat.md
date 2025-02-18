@@ -37,7 +37,7 @@ const repeat = ['repeat', 'repeat-x', 'repeat-y', 'space', 'none', 'unset'];
   <template #content>
     <tbody>
       <tr v-for="i in repeat">
-          <th scope="row" class="d-code--sm d-fc-purple-400">.d-bgr-{{ i }}</th>
+          <th scope="row" class="d-code--sm d-docsite-code">.d-bgr-{{ i }}</th>
           <td class="d-code--sm">
             background-repeat: {{ i }} !important;
           </td>

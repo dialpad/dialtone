@@ -78,7 +78,7 @@ Use `fv:d-bs-{n}` to change an element's `:focus-visible` state box shadow [only
   <template #content>
     <tbody>
       <tr v-for="size in boxShadowSizes">
-        <th scope="row" class="d-code--sm d-fc-purple-400">.d-bs-{{ size }}</th>
+        <th scope="row" class="d-code--sm d-docsite-code">.d-bs-{{ size }}</th>
         <td v-if="size !== 'card'" class="d-code--sm">
             box-shadow: var(--dt-shadow-{{ size }}-0-x) var(--dt-shadow-{{ size }}-0-y) var(--dt-shadow-{{ size }}-0-blur) var(--dt-shadow-{{ size }}-0-spread) var(--dt-shadow-{{ size }}-0-color) !important;
         </td>
@@ -90,11 +90,11 @@ Use `fv:d-bs-{n}` to change an element's `:focus-visible` state box shadow [only
         </td>
       </tr>
       <tr>
-        <th scope="row" class="d-code--sm d-fc-purple-400">.d-bs-none</th>
+        <th scope="row" class="d-code--sm d-docsite-code">.d-bs-none</th>
         <td class="d-code--sm">box-shadow: none !important;</td>
       </tr>
       <tr>
-        <th scope="row" class="d-code--sm d-fc-purple-400">.d-bs-unset</th>
+        <th scope="row" class="d-code--sm d-docsite-code">.d-bs-unset</th>
         <td class="d-code--sm">box-shadow: unset !important;</td>
       </tr>
     </tbody>

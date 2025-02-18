@@ -80,7 +80,7 @@ Use `d-cg{#}` to change the column gap space.
     <template #content>
       <tbody v-for="dir in directions">
         <tr v-for="{ output: rem, value: px } in values">
-          <th scope="row" class="d-code--sm d-fc-purple-400">
+          <th scope="row" class="d-code--sm d-docsite-code">
             <span v-if="dir === 'both'">.d-g{{ px }}</span>
             <span v-else-if="dir === 'column'">.d-cg{{ px }}</span>
             <span v-else-if="dir === 'row'">.d-rg{{ px }}</span>

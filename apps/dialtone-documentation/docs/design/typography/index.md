@@ -166,7 +166,7 @@ Titles and headings to establish hierarchy and set the tone of contextual groupi
     <template v-for="{ var: varName } in typographyStylesHeadlines">
       <div class="d-truncate"><p :class="[varName, 'd-truncate', 'd-bgc-moderate-opaque']">{{ example }}</p></div>
       <dt-stack direction="row" class="d-jc-space-between dialtone-copy-utility">
-        <span class="dialtone-copy-utility__utility d-code--sm d-fc-purple-400">{{ varName }}</span>
+        <span class="dialtone-copy-utility__utility d-code--sm d-fc-blue-500">{{ varName }}</span>
         <div class="dialtone-copy-utility__btn">
           <copy-button :text="varName" aria-label="Copy" />
         </div>
@@ -184,7 +184,7 @@ Default text style for longer-form prose content, designed for comfort and clari
     <template v-for="{ var: varName } in typographyStylesBody">
       <div class="d-truncate"><p :class="[varName, 'd-truncate', 'd-bgc-moderate-opaque']">{{ example }}</p></div>
       <dt-stack direction="row" class="d-jc-space-between dialtone-copy-utility">
-        <span class="dialtone-copy-utility__utility d-code--sm d-fc-purple-400">{{ varName }}</span>
+        <span class="dialtone-copy-utility__utility d-code--sm d-fc-blue-500">{{ varName }}</span>
         <div class="dialtone-copy-utility__btn">
           <copy-button :text="varName" aria-label="Copy" />
         </div>
@@ -202,7 +202,7 @@ Shorter-length copy like form fields, buttons, and other UI-labeling elements, e
     <template v-for="{ var: varName } in typographyStylesLabel">
       <div class="d-truncate"><p :class="[varName, 'd-truncate', 'd-bgc-moderate-opaque']">{{ example }}</p></div>
       <dt-stack direction="row" class="d-jc-space-between dialtone-copy-utility">
-        <span class="dialtone-copy-utility__utility d-code--sm d-fc-purple-400">{{ varName }}</span>
+        <span class="dialtone-copy-utility__utility d-code--sm d-fc-blue-500">{{ varName }}</span>
         <div class="dialtone-copy-utility__btn">
           <copy-button :text="varName" aria-label="Copy" />
         </div>
@@ -220,7 +220,7 @@ Complementary information or guidance, such as tooltips and hints, to aid user u
     <template v-for="{ var: varName } in typographyStylesHelper">
       <div class="d-truncate"><p :class="[varName, 'd-truncate', 'd-bgc-moderate-opaque']">{{ example }}</p></div>
       <dt-stack direction="row" class="d-jc-space-between dialtone-copy-utility">
-        <span class="dialtone-copy-utility__utility d-code--sm d-fc-purple-400">{{ varName }}</span>
+        <span class="dialtone-copy-utility__utility d-code--sm d-fc-blue-500">{{ varName }}</span>
         <div class="dialtone-copy-utility__btn">
           <copy-button :text="varName" aria-label="Copy" />
         </div>
@@ -238,7 +238,7 @@ Code snippets, technical commands, or data values rendered as a monospaced font.
     <template v-for="{ var: varName } in typographyStylesCode">
       <div class="d-truncate"><p :class="[varName, 'd-truncate', 'd-bgc-moderate-opaque']">{{ example }}</p></div>
       <dt-stack direction="row" class="d-jc-space-between dialtone-copy-utility">
-        <span class="dialtone-copy-utility__utility d-code--sm d-fc-purple-400">{{ varName }}</span>
+        <span class="dialtone-copy-utility__utility d-code--sm d-fc-blue-500">{{ varName }}</span>
         <div class="dialtone-copy-utility__btn">
           <copy-button :text="varName" aria-label="Copy" />
         </div>
@@ -261,7 +261,7 @@ Each typography style is expressed through a shorthand `font` property, and its 
     </thead>
     <tbody>
       <tr v-for="{ var: varName, output } in typographyStyles">
-        <td class="d-code--sm d-fc-purple-400">.{{ varName }}</td>
+        <td class="d-code--sm d-docsite-code">.{{ varName }}</td>
         <td class="d-code--sm">{{ output }}</td>
       </tr>
     </tbody>

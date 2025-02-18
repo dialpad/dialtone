@@ -137,7 +137,7 @@ Use `d-fvn-unset` to deactivate other value previously set to `font-variant-nume
   <template #content>
     <tbody>
       <tr v-for="item in fontVariantNumeric">
-        <th scope="row" class="d-code--sm d-fc-purple-400">.d-fvn-{{ item.class }}</th>
+        <th scope="row" class="d-code--sm d-docsite-code">.d-fvn-{{ item.class }}</th>
         <td class="d-code--sm">font-variant-numeric: {{ item.output }} !important;</td>
       </tr>
     </tbody>
