@@ -95,7 +95,7 @@
           />
         </div>
         <popover-header-footer
-          v-if="$slots.footerContent"
+          v-if="hasFooter"
           ref="popover__footer"
           type="footer"
           :class="POPOVER_HEADER_FOOTER_PADDING_CLASSES[padding]"
@@ -594,6 +594,10 @@ export default {
       // aria-labelledby should be set only if aria-labelledby is passed as a prop, or if
       // there is no aria-label and the labelledby should point to the anchor.
       return this.ariaLabelledby || (!this.ariaLabel && getUniqueString('DtPopover__anchor'));
+    },
+
+    hasFooter () {
+      return this.$slots.footerContent || (this.$scopedSlots.footerContent && this.$scopedSlots.footerContent());
     },
   },
 
