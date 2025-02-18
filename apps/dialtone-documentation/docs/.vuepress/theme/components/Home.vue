@@ -19,7 +19,7 @@
           >
             <img
               alt="Dialtone version number"
-              src="https://img.shields.io/npm/v/@dialpad/dialtone?color=D3BCFF&label=Dialtone"
+              src="https://img.shields.io/npm/v/@dialpad/dialtone?color=F5F0FF&label=Dialtone"
             >
           </a>
         </div>
@@ -65,7 +65,7 @@
           <dt-stack gap="600">
             <svg-loader class="d-h96" name="home-design-language" />
             <h2 class="d-headline--xl">
-              Design language
+              Design Language
             </h2>
           </dt-stack>
         </router-link>
@@ -74,7 +74,7 @@
         </p>
         <dt-stack gap="300">
           <router-link class="d-link" to="/design/">
-            Browse design guidelines
+            Browse Design Guidelines
           </router-link>
         </dt-stack>
       </dt-stack>
@@ -92,13 +92,13 @@
         </p>
         <dt-stack gap="300">
           <router-link class="d-link" to="/components/">
-            Browse CSS components
+            Browse CSS Components
           </router-link>
           <a class="d-link" href="https://dialtone.dialpad.com/vue/index.html?path=/docs/welcome--docs" target="_blank" rel="noopener noreferrer">
-            Browse Vue 2 components
+            Browse Vue 2 Components
           </a>
           <a class="d-link" href="https://dialtone.dialpad.com/vue3/index.html?path=/docs/welcome--docs" target="_blank" rel="noopener noreferrer">
-            Browse Vue 3 components
+            Browse Vue 3 Components
           </a>
         </dt-stack>
       </dt-stack>
@@ -116,7 +116,7 @@
         </p>
         <dt-stack gap="300">
           <router-link class="d-link" to="/utilities/">
-            Browse utility classes
+            Browse Utility Classes
           </router-link>
         </dt-stack>
       </dt-stack>
@@ -134,10 +134,10 @@
         </p>
         <dt-stack gap="300">
           <router-link class="d-link" to="/guides/getting-started/">
-            Getting started
+            Getting Started
           </router-link>
           <router-link class="d-link" to="/guides/content/">
-            Writing guidelines
+            Writing Guidelines
           </router-link>
           <router-link class="d-link" to="/guides/accessibility/">
             Accessibility
