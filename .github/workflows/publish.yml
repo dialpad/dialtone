@@ -18,12 +18,8 @@ on:
           - vue3
           - eslint-plugin
           - stylelint-plugin
-  push:
-    branches:
-      - production
-      - alpha
-      - beta
-      - next
+  release:
+    types: [published]
 
 env:
   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
