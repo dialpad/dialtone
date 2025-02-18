@@ -411,7 +411,8 @@
       "radio.color.foreground.checked": "S:a87fd53132b508efad557916bc7caf6f42d47bb9,",
       "checkbox.color.border.unchecked-hover": "S:98186641f51a54e093fb2a9e1dbbc583ce11b7ef,",
       "radio.color.border.unchecked-hover": "S:e036a8502762ed8fbe2f176609d5f513976624c2,",
-      "inputs.color.border.hover": "S:cd1adb39265b75f7598b176833cf75bbe0d4cf35,"
+      "inputs.color.border.hover": "S:cd1adb39265b75f7598b176833cf75bbe0d4cf35,",
+      "color.surface.ai": "S:096e8f73c95e27f58042e75a271514caea787467,"
     },
     "selectedTokenSets": {
       "base/default": "source",
@@ -3881,7 +3882,8 @@
       "color.red.700": "S:c6932fd2b3b33f89b544a7a8ffec6b80ed37067f,",
       "color.red.900": "S:6a6434d54df80145ceb2460202603b2cca751f99,",
       "color.red.1000": "S:50b830d0e69274cfa1b07871953bc78227e4ff18,",
-      "color.brand.red": "S:505f22996175e38f4a414f5ffb3a633c94b5248d,"
+      "color.brand.red": "S:505f22996175e38f4a414f5ffb3a633c94b5248d,",
+      "color.gradient.gold-red-magenta-purple": "S:92c8a3ad81be428e66001b7e1eb916ea28c17a7c,"
     },
     "selectedTokenSets": {
       "root": "enabled",
