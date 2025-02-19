@@ -166,26 +166,12 @@
       <dt-dropdown
         class="d-mr8"
         :open="$attrs.open"
-        :placement="$attrs.placement"
-        :fallback-placements="$attrs.fallbackPlacements"
-        :padding="$attrs.padding"
-        :modal="$attrs.modal"
-        :max-height="$attrs.maxHeight"
-        :max-width="$attrs.maxWidth"
-        :navigation-type="$attrs.navigationType"
-        :transition="$attrs.transition"
-        @opened="$attrs.onOpened"
       >
         <template
           slot="anchor"
           slot-scope="{ attrs }"
         >
-          <div
-            v-if="$attrs.anchor"
-            v-html="$attrs.anchor"
-          />
           <dt-button
-            v-else
             v-bind="attrs"
           >
             with footer

@@ -159,15 +159,10 @@
 
       <dt-dropdown
         class="d-mr8"
-        :placement="variant"
-        :padding="$attrs.padding"
-        :navigation-type="$attrs.navigationType"
-        :transition="$attrs.transition"
         :open="$attrs.open"
-        @highlight="$attrs.onHighlight"
       >
-        <template #anchor>
-          <dt-button>
+        <template #anchor="{ attrs }">
+          <dt-button v-bind="attrs">
             with footer
           </dt-button>
         </template>
