@@ -1,3 +1,11 @@
+## [9.101.1](https://github.com/dialpad/dialtone/compare/dialtone/v9.101.0...dialtone/v9.101.1) (2025-02-19)
+
+
+### Bug Fixes
+
+* **Docs:** NO-JIRA update the figma link in the button docsite page ([#634](https://github.com/dialpad/dialtone/issues/634)) ([77a3a57](https://github.com/dialpad/dialtone/commit/77a3a571bec9089f0c161f0936f35ce44d850664))
+* NO-JIRA custom item layout ([#639](https://github.com/dialpad/dialtone/issues/639)) ([1553250](https://github.com/dialpad/dialtone/commit/155325090d5f8ac38b0b9de377a6a9731a9274ae))
+
 # [9.101.0](https://github.com/dialpad/dialtone/compare/dialtone/v9.100.0...dialtone/v9.101.0) (2025-02-17)
 
 
