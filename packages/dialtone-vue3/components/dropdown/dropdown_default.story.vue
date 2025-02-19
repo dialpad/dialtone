@@ -46,6 +46,13 @@
         {{ item.name }}
       </dt-list-item>
     </template>
+    <template #footer="{ close }">
+      <div class="d-px12">
+        <dt-button @click="close">
+          Dropdown footer
+        </dt-button>
+      </div>
+    </template>
   </dt-dropdown>
 </template>
 
