@@ -31,7 +31,7 @@ figma_url: https://www.figma.com/file/2adf7JhZOncRyjYiy2joil/DT-Core%3A-Componen
 
 </dialtone-usage>
 
-### Best practices
+### Best Practices
 
 - Use useful, actionable, and descriptive text clearly conveying the hyperlink’s destination. For example, a generic label like "click here" doesn’t convey its target content.
 - Too many links can be overwhelming. Be selective about the number of links in a context.
@@ -43,7 +43,7 @@ figma_url: https://www.figma.com/file/2adf7JhZOncRyjYiy2joil/DT-Core%3A-Componen
 - Users must be able to identify links without relying on color alone.
 - Users must be able to activate hover and focus states with both a mouse and a keyboard.
 
-## Variants and examples
+## Variants and Examples
 
 ### Default
 

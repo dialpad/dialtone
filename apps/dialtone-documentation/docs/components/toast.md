@@ -16,7 +16,7 @@ figma_url: https://www.figma.com/file/2adf7JhZOncRyjYiy2joil/DT-Core%3A-Componen
 
 <!-- <component-combinator component-name="DtToast" /> -->
 
-## Variants and examples
+## Variants and Examples
 
 <code-well-header>
     <div class="d-d-flex d-w100p d-flow8 d-ai-flex-end">
@@ -90,7 +90,7 @@ vueCode='
 '
 showHtmlWarning />
 
-### With duration
+### With Duration
 
 It's recommended to use a time of at least 6000 ms (minimum duration validated in the component) to give users enough time to read the toast. Take into account that the time necessary to read and comprehend the message could vary in users. For instance, users using assistive technology, or users with language barriers could potentially need more time to read and understand the message.
 If the duration is not provided the toast won't disappear automatically.
@@ -132,7 +132,7 @@ vueCode='
 '
 />
 
-### With self-positioning
+### With Self-Positioning
 
 If you need to self-position the toast at the top center, use the `d-toast-wrapper` Dialtone class:
 

@@ -1,5 +1,5 @@
 ---
-title: Description list
+title: Description List
 description: Description lists are a way to group and clarify associated ideas. They are notably useful when outlining and explaining terms, like those in a glossary.
 status: ready
 thumb: true
@@ -17,7 +17,7 @@ figma: planned
   </div>
 </code-well-header>
 
-## Variants and examples
+## Variants And Examples
 
 ### Default
 
@@ -44,7 +44,7 @@ vueCode='
 '
 />
 
-### Column direction
+### Column Direction
 
 <code-well-header>
   <div class="d-w332">
@@ -68,7 +68,7 @@ vueCode='
 '
 />
 
-### Long text
+### Long Text
 
 <code-well-header>
   <div class="d-w332">
@@ -92,7 +92,7 @@ vueCode='
 '
 />
 
-### With term and description styles
+### With Term And Description Styles
 
 <code-well-header>
   <div class="d-w332">

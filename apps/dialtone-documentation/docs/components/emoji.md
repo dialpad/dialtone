@@ -12,9 +12,9 @@ storybook: https://dialtone.dialpad.com/vue/?path=/story/components-emoji--defau
   <dt-emoji code=":smile:" />
 </code-well-header>
 
-## Variants and examples
+## Variants And Examples
 
-### With shortcode
+### With Shortcode
 
 <code-well-header>
   <dt-emoji code=":smile:" />
@@ -48,7 +48,7 @@ vueCode='
 '
 showHtmlWarning />
 
-### With unicode
+### With Unicode
 
 <code-well-header>
   <dt-emoji code="😉" ref="exampleUnicode" />
@@ -61,7 +61,7 @@ vueCode='
 '
 />
 
-### With skin tone
+### With Skin Tone
 
 <code-well-header>
   <dt-emoji code=":raised_hand_tone4:" ref="exampleSkinTone" />
@@ -115,7 +115,7 @@ setEmojiAssetUrlLarge('https://my.example.website.com/joypixels/svg/unicode/', '
 
 Please be aware of JoyPixels [licensing requirements](https://joypixels.com/licenses). You may not use JoyPixels assets for business use without a license.
 
-### Custom emoji
+### Custom Emoji
 
 It's possible to provide a custom emoji JSON file [with this structure](#json-structure) in order to support emojis that aren't part of the Unicode standard. To do so, first specify where the assets are and set the raw JSON:
 
@@ -142,7 +142,7 @@ vueCode='
 
 In this example, the emoji with the :shipit: shortcode from the custom emoji provided will be rendered. Take into account that a custom emoji can only be referenced by the shortcode as no Unicode character is associated with it.
 
-### JSON structure
+### JSON Structure
 
 It follows a similar structure to the [standard emoji json file](https://raw.githubusercontent.com/joypixels/emoji-toolkit/master/emoji_strategy.json), though there are some specific properties used in the custom emoji json.
 
@@ -166,7 +166,7 @@ It follows a similar structure to the [standard emoji json file](https://raw.git
 
 The required properties are `name`, `category`, `shortname`, `extension`, `custom`.
 
-### Modify data in native emojis
+### Modify Data In Native Emojis
 
 It's possible to modify or add data to a native emoji using the codepoint as the key of the object.
 
@@ -190,7 +190,7 @@ In case the property is a string, it will overwrite the property of the native e
 }
 ```
 
-## Emoji metadata
+## Emoji Metadata
 
 You may access the full list of supported native emojis and all emoji metadata by importing the following function and executing it:
 

@@ -40,7 +40,7 @@ Checkboxes are an easily understandable way to indicate that users can select on
 
 </dialtone-usage>
 
-### Best practices
+### Best Practices
 
 - Users should be able to tap on or click on either the text `label` or the checkbox element itself to toggle an option, aiding accessibility.
 - Options that are listed vertically are easier to read than those listed horizontally. Horizontal listings can make it difficult to tell which label pertains to which checkbox.
@@ -53,7 +53,7 @@ Checkboxes are an easily understandable way to indicate that users can select on
   - `unchecked`: all children are not checked.
   - `indeterminate`: children are a mix of checked and unchecked.
 
-## Variants and examples
+## Variants and Examples
 
 ### Base Styles
 
@@ -475,7 +475,7 @@ vueCode='
 '
 showHtmlWarning />
 
-### With validation states
+### With Validation States
 
 <code-well-header>
   <fieldset class="d-input-group__fieldset d-stack8">

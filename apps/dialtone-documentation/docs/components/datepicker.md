@@ -32,7 +32,7 @@ to the `dt-popover` component.
 
 With this we accomplish the requirement to have the previous year button focused when the datepicker is opened.
 
-## Variants and examples
+## Variants And Examples
 
 ### Default
 
@@ -182,7 +182,7 @@ vueCode='
 '
 showHtmlWarning />
 
-### With popover
+### With Popover
 
 <code-well-header>
   <dt-popover
@@ -407,12 +407,12 @@ In `calendar`:
 
 - Select day 20 July 2023
 
-## Date formats
+## Date Formats
 
 We are providing the following functions to format dates:
 
 <!-- TODO: Autogenerate this docs from jsdocs in packages/dialtone-vue2/components/datepicker/formatUtils.js -->
-### formatLong
+### Format Long
 
 ▸ **formatLong**(`date`, `locale` = 'default'): `string`
 
@@ -433,7 +433,7 @@ The formatted date string.
 
 ___
 
-### formatMedium
+### Format Medium
 
 ▸ **formatMedium**(`date`, `locale` = 'default'): `string`
 
@@ -454,7 +454,7 @@ The formatted date string.
 
 ___
 
-### formatShort
+### Format Short
 
 ▸ **formatShort**(`date`, `locale` = 'default', `showWeekday`= true): `string`
 
@@ -476,7 +476,7 @@ The formatted date string.
 
 ___
 
-### formatNoYear
+### Format No Year
 
 ▸ **formatNoYear**(`date`, `locale` = 'default', `abbreviated`= false): `string`
 
@@ -498,7 +498,7 @@ The formatted date without the year.
 
 ___
 
-### formatNumerical
+### Format Numerical
 
 ▸ **formatNumerical**(`date`, `locale` = 'default'): `string`
 

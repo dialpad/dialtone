@@ -18,7 +18,7 @@ figma_url: https://www.figma.com/file/2adf7JhZOncRyjYiy2joil/DT-Core%3A-Componen
 
 A notice delivers informational and assistive messages that inform the user about product or account statuses and related actions. It can suggest an action or dismissed by the user, though neither are required. For time-based notifications, see [Toast](toast.md).
 
-## Variants and examples
+## Variants and Examples
 
 ### Base Styles
 
@@ -661,7 +661,7 @@ vueCode='
 '
 showHtmlWarning />
 
-### Truncate text
+### Truncate Text
 
 Truncates the text instead of wrapping it. Useful when the Notice needs to have a fixed height.
 

@@ -101,7 +101,7 @@ vueCode='
 '
 showHtmlWarning />
 
-## Variants and examples
+## Variants and Examples
 
 ### Header Sticky
 

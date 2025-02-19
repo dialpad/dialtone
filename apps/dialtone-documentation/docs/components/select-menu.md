@@ -31,7 +31,7 @@ figma_url: https://www.figma.com/file/2adf7JhZOncRyjYiy2joil/DT-Core%3A-Componen
 </template>
 </dialtone-usage>
 
-### Best practices
+### Best Practices
 
 - Selects should be considered the “UI of last resort,” as users often find them confusing and difficult to use. Consider testing thoroughly with members of your target audience.
 - Avoid making options in one dropdown menu change based on the input to another. Users often don’t understand how selecting an item in one impacts another.
@@ -108,7 +108,7 @@ vueCode='
 '
 showHtmlWarning />
 
-### With description text
+### With Description Text
 
 <code-well-header bgclass="d-bgc-primary" class="d-d-block">
   <example-select-menu label="Label" description="Optional description text" />
@@ -148,7 +148,7 @@ vueCode='
 '
 showHtmlWarning />
 
-### With validation states
+### With Validation States
 
 Provides feedback to the user based on their interaction, or lack thereof, with a select.
 
@@ -263,7 +263,7 @@ vueCode='
 '
 showHtmlWarning />
 
-### With validation states hidden
+### With Validation States Hidden
 
 <code-well-header bgclass="d-bgc-primary" class="d-d-block">
   <div class="d-stack16 d-w100p" ref="messagesHidden">
@@ -333,7 +333,7 @@ vueCode='
 '
 />
 
-### With slotted label
+### With Slotted Label
 
 <code-well-header class="d-d-block">
   <example-select-menu ref="slottedLabel">
@@ -364,7 +364,7 @@ vueCode='
 '
 />
 
-### With slotted description
+### With Slotted Description
 
 <code-well-header class="d-d-block">
   <example-select-menu ref="slottedDescription">
@@ -395,7 +395,7 @@ vueCode='
 '
 />
 
-### With slotted options
+### With Slotted Options
 
 <code-well-header class="d-d-block">
   <dt-select-menu
@@ -502,8 +502,7 @@ htmlCode='
   <label>
     <div class="d-label d-label--xl">Label</div>
     <div class="d-select d-select--xl">
-      <select class="d-select__input">
-        <option class="" value=""> Please select one </option>
+      <select class="" value=""> Please select one </option>
         <option class="" value="1"> Option 1 </option>
         <option class="" value="2"> Option 2 </option>
         <option class="" value="3"> Option 3 </option>

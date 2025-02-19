@@ -62,7 +62,7 @@ Use the Dropdown component when you have a list of links or actions that can be 
 - The **anchor** slot contains the element that controls the dropdown's visibility.
 - The **list** slot contains a list of items to show as dropdown menu items.
 
-## Variants and examples
+## Variants And Examples
 
 ### Default
 
@@ -137,7 +137,7 @@ vueCode='
 '
 />
 
-### With sections and headings
+### With Sections And Headings
 
 <code-well-header>
   <dt-dropdown navigation-type="arrow-keys">
@@ -285,7 +285,7 @@ vueCode='
 '
 showHtmlWarning />
 
-### Context menu
+### Context Menu
 
 Set `openOnContext=true` to open the menu on right-click (context menu) and disable the default trigger behavior.
 

@@ -1,6 +1,6 @@
 ---
 title: Components
-description: Reusable components solving common UI needs, designed and built to be assembled in countless combinations.
+description: Reusable Components Solving Common UI Needs, Designed and Built to Be Assembled in Countless Combinations.
 no_preview: true
 ---
 

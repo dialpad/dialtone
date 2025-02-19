@@ -1,5 +1,5 @@
 ---
-title: Radio group
+title: Radio Group
 description: Radio groups are control elements that allow the user to make a single selection from a list of options.
 status: ready
 thumb: true
@@ -220,7 +220,7 @@ vueCode='
 '
 />
 
-### With validation states
+### With Validation States
 
 <code-well-header>
   <div class="d-stack16">
