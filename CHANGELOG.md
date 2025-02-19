@@ -1,3 +1,11 @@
+## [9.101.2](https://github.com/dialpad/dialtone/compare/dialtone/v9.101.1...dialtone/v9.101.2) (2025-02-19)
+
+
+### Bug Fixes
+
+* **Tokens:** DLT-2347 mobile color token modifiers fix ([#628](https://github.com/dialpad/dialtone/issues/628)) ([9545644](https://github.com/dialpad/dialtone/commit/9545644dc1837061e57370e06c1e695a56681518))
+* **Tokens:** DLT-2348 android font sizes were dp instead of sp ([#631](https://github.com/dialpad/dialtone/issues/631)) ([adda07b](https://github.com/dialpad/dialtone/commit/adda07bdd52126cac3a60c522f54da82034c3484))
+
 ## [9.101.1](https://github.com/dialpad/dialtone/compare/dialtone/v9.101.0...dialtone/v9.101.1) (2025-02-19)
 
 
