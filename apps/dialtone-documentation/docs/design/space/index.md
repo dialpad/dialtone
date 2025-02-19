@@ -5,7 +5,7 @@ description: Define paddings, gaps, and margins around elements.
 
 <svg-loader name="space-img" />
 
-## Choosing Space vs Size
+## Choosing Space vs. Size
 
 ### Space
 

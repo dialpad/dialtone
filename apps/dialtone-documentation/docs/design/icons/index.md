@@ -78,7 +78,7 @@ The icon size is defined based on the context and text size next to it. These ar
 </div>
 </div>
 
-## Crafting an icon
+## Crafting an Icon
 
 Our icons are designed for easy recognition and understanding. They are a visual support, helping people navigate the experience more effectively.
 
