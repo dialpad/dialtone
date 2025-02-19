@@ -3883,7 +3883,14 @@
       "color.red.900": "S:6a6434d54df80145ceb2460202603b2cca751f99,",
       "color.red.1000": "S:50b830d0e69274cfa1b07871953bc78227e4ff18,",
       "color.brand.red": "S:505f22996175e38f4a414f5ffb3a633c94b5248d,",
-      "color.gradient.gold-red-magenta-purple": "S:92c8a3ad81be428e66001b7e1eb916ea28c17a7c,"
+      "color.gradient.gold-red-magenta-purple": "S:92c8a3ad81be428e66001b7e1eb916ea28c17a7c,",
+      "color.tan.50": "S:4d5ef4aebe3ad9ee6564ff3a7c4022c6e88193ba,",
+      "color.tan.600": "S:bb695bbb380d90b69a1d7e606adeef23d61a044d,",
+      "color.tan.700": "S:fd41e4bfa5b8753e1668e0f63a2c1ac4e41e1d42,",
+      "color.tan.800": "S:d9342a5eb6792a3373b0c9ba799d6d3219116158,",
+      "color.tan.900": "S:fe3f9806f64ce88fc1e3deb671f311d0cb93518b,",
+      "color.tan.950": "S:70dc42b0677b60e264fc21604852a0d3fcbee36c,",
+      "color.tan.1000": "S:ed489ad856a057b5919756ae0d3c0c3f363bf324,"
     },
     "selectedTokenSets": {
       "root": "enabled",
