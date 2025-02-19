@@ -45,6 +45,17 @@ export const argTypesData = {
       type: 'text',
     },
   },
+  footer: {
+    table: {
+      category: 'slots',
+      type: {
+        summary: 'VNode',
+      },
+    },
+    control: {
+      type: 'text',
+    },
+  },
 
   // Props
   navigationType: {
