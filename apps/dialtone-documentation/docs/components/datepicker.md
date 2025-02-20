@@ -409,12 +409,67 @@ In `calendar`:
 
 ## Date Formats
 
-We are providing the following functions to format dates:
+The following functions are available for date formatting.
+
+<div class="d-bgc-secondary d-bar8 d-p16">
+  <dt-stack
+    :direction="{ 'default': 'row', 'md': 'column' }"
+    gap="600"
+    class="d-ai-flex-start"
+  >
+    <dt-stack class="d-ai-center">
+      <dt-datepicker
+        :locale="locale"
+        :prev-month-label="prevMonthLabel"
+        :next-month-label="nextMonthLabel"
+        :prev-year-label="prevYearLabel"
+        :next-year-label="nextYearLabel"
+        :select-day-label="selectDayLabel"
+        :change-to-label="changeToLabel"
+        :selected-date="currentSelectedDate"
+        @selected-date="currentSelectedDate = $event;"
+      />
+      <p class="d-body--sm">
+        {{ currentSelectedDate }}
+      </p>
+    </dt-stack>
+    <table class="d-table d-body--sm d-bt d-bc-default d-fl1">
+      <tr>
+        <th scope="row" class="d-code--sm">formatLong</th>
+        <td>{{ formatLong(currentSelectedDate, locale) }}</td>
+      </tr>
+      <tr>
+        <th scope="row" class="d-code--sm">formatMedium</th>
+        <td>{{ formatMedium(currentSelectedDate, locale) }}</td>
+      </tr>
+      <tr>
+        <th scope="row" class="d-code--sm">formatShort</th>
+        <td>{{ formatShort(currentSelectedDate, locale) }}</td>
+      </tr>
+      <tr>
+        <th scope="row" class="d-code--sm">formatShort (no weekday)</th>
+        <td>{{ formatShort(currentSelectedDate, locale, false) }}</td>
+      </tr>
+      <tr>
+        <th scope="row" class="d-code--sm">formatNoYear</th>
+        <td>{{ formatNoYear(currentSelectedDate, locale) }}</td>
+      </tr>
+      <tr>
+        <th scope="row" class="d-code--sm">formatNoYear (abbreviated)</th>
+        <td>{{ formatNoYear(currentSelectedDate, locale, true) }}</td>
+      </tr>
+      <tr>
+        <th scope="row" class="d-code--sm">formatNumerical</th>
+        <td>{{ formatNumerical(currentSelectedDate, locale) }}</td>
+      </tr>
+    </table>
+  </dt-stack>
+</div>
 
 <!-- TODO: Autogenerate this docs from jsdocs in packages/dialtone-vue2/components/datepicker/formatUtils.js -->
 ### formatLong
 
-▸ **formatLong**(`date`, `locale` = 'default'): `string`
+**formatLong**(`date`, `locale` = 'default'): `string`
 
 Formats a date into a long format using the specified locale.
 
@@ -431,11 +486,9 @@ Formats a date into a long format using the specified locale.
 
 The formatted date string.
 
-___
-
 ### formatMedium
 
-▸ **formatMedium**(`date`, `locale` = 'default'): `string`
+**formatMedium**(`date`, `locale` = 'default'): `string`
 
 Formats the given date in medium format.
 
@@ -452,11 +505,9 @@ Formats the given date in medium format.
 
 The formatted date string.
 
-___
-
 ### formatShort
 
-▸ **formatShort**(`date`, `locale` = 'default', `showWeekday`= true): `string`
+**formatShort**(`date`, `locale` = 'default', `showWeekday`= true): `string`
 
 Formats a date into a short string representation.
 
@@ -474,11 +525,9 @@ Formats a date into a short string representation.
 
 The formatted date string.
 
-___
-
 ### formatNoYear
 
-▸ **formatNoYear**(`date`, `locale` = 'default', `abbreviated`= false): `string`
+**formatNoYear**(`date`, `locale` = 'default', `abbreviated`= false): `string`
 
 Formats a date without the year.
 
@@ -496,11 +545,9 @@ Formats a date without the year.
 
 The formatted date without the year.
 
-___
-
 ### formatNumerical
 
-▸ **formatNumerical**(`date`, `locale` = 'default'): `string`
+**formatNumerical**(`date`, `locale` = 'default'): `string`
 
 Formats a date into a numerical string representation.
 
@@ -516,63 +563,6 @@ Formats a date into a numerical string representation.
 `string`
 
 The formatted numerical date string.
-
-### Examples
-
-<div>
-  <p>
-    Selected date: {{ currentSelectedDate }}
-  </p>
-  <br>
-  <br>
-  <table class="d-table">
-    <tr>
-      <th>Format</th>
-      <th>Result</th>
-    </tr>
-    <tr>
-      <td>formatLong</td>
-      <td>{{ formatLong(currentSelectedDate, locale) }}</td>
-    </tr>
-    <tr>
-      <td>formatMedium</td>
-      <td>{{ formatMedium(currentSelectedDate, locale) }}</td>
-    </tr>
-    <tr>
-      <td>formatShort</td>
-      <td>{{ formatShort(currentSelectedDate, locale) }}</td>
-    </tr>
-    <tr>
-      <td>formatShort (no weekday)</td>
-      <td>{{ formatShort(currentSelectedDate, locale, false) }}</td>
-    </tr>
-    <tr>
-      <td>formatNoYear</td>
-      <td>{{ formatNoYear(currentSelectedDate, locale) }}</td>
-    </tr>
-    <tr>
-      <td>formatNoYear (abbreviated)</td>
-      <td>{{ formatNoYear(currentSelectedDate, locale, true) }}</td>
-    </tr>
-    <tr>
-      <td>formatNumerical</td>
-      <td>{{ formatNumerical(currentSelectedDate, locale) }}</td>
-    </tr>
-  </table>
-  <br>
-  <br>
-  <dt-datepicker
-    :locale="locale"
-    :prev-month-label="prevMonthLabel"
-    :next-month-label="nextMonthLabel"
-    :prev-year-label="prevYearLabel"
-    :next-year-label="nextYearLabel"
-    :select-day-label="selectDayLabel"
-    :change-to-label="changeToLabel"
-    :selected-date="currentSelectedDate"
-    @selected-date="currentSelectedDate = $event;"
-  />
-</div>
 
 <script setup>
 import { ref, inject } from 'vue';
