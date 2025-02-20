@@ -1,1 +1,54 @@
-{}
+{
+  "color": {
+    "foreground": {
+      "muted": {
+        "value": "{color.tan.1000}",
+        "type": "color",
+        "$extensions": {
+          "studio.tokens": {
+            "modify": {
+              "type": "alpha",
+              "value": ".4",
+              "space": "hsl"
+            }
+          }
+        }
+      },
+      "muted-inverted": {
+        "value": "{color.tan.100}",
+        "type": "color",
+        "$extensions": {
+          "studio.tokens": {
+            "modify": {
+              "type": "alpha",
+              "value": ".65",
+              "space": "hsl"
+            }
+          }
+        }
+      }
+    },
+    "surface": {
+      "secondary-inverted": {
+        "value": "{color.tan.950}",
+        "type": "color"
+      },
+      "moderate-inverted": {
+        "value": "{color.tan.900}",
+        "type": "color"
+      },
+      "bold-inverted": {
+        "value": "{color.tan.800}",
+        "type": "color"
+      },
+      "strong-inverted": {
+        "value": "{color.tan.500}",
+        "type": "color"
+      },
+      "contrast-inverted": {
+        "value": "{color.tan.300}",
+        "type": "color"
+      }
+    }
+  }
+}
