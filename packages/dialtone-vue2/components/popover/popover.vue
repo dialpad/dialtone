@@ -697,6 +697,10 @@ export default {
    ******************/
   methods: {
 
+    hasFooter () {
+      return this.$slots.footerContent || (this.$scopedSlots.footerContent && this.$scopedSlots.footerContent());
+    },
+
     hasIntersectedViewport (entries) {
       const dialog = entries?.[0]?.target;
       if (!dialog) return;
