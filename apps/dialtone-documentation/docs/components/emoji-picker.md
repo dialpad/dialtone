@@ -29,7 +29,7 @@ storybook: https://dialtone.dialpad.com/vue3/?path=/story/components-emoji-picke
     />
 </code-well-header>
 
-## Variants And Examples
+## Variants and Examples
 
 ### Default
 

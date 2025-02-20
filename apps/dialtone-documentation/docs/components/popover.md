@@ -58,7 +58,7 @@ The content slot will be rendered lazily when the popover is open. By default, t
 - Close non-modal dialogs if they are scrolled out of visibility.
 - Set the z-index of the dialog to var(--zi-modal-element) if modal, var(--zi-popover) if not.
 
-## Variants And Examples
+## Variants and Examples
 
 ### Popover - Modal
 

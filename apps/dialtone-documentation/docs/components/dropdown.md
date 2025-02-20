@@ -62,7 +62,7 @@ Use the Dropdown component when you have a list of links or actions that can be 
 - The **anchor** slot contains the element that controls the dropdown's visibility.
 - The **list** slot contains a list of items to show as dropdown menu items.
 
-## Variants And Examples
+## Variants and Examples
 
 ### Default
 
@@ -137,7 +137,7 @@ vueCode='
 '
 />
 
-### With Sections And Headings
+### With Sections and Headings
 
 <code-well-header>
   <dt-dropdown navigation-type="arrow-keys">

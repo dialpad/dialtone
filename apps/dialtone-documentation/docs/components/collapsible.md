@@ -32,7 +32,9 @@ storybook: https://dialtone.dialpad.com/vue/?path=/story/components-collapsible-
   </div>
 </code-well-header>
 
-## Basic Usage Without Anchor Slot
+The collapsible component consists of two parts: the anchor and the content. If the anchor slot is not filled, the anchor will default to a basic button with text. The content must be provided and is the element that can be hidden or shown when the anchor is clicked.
+
+### Basic Usage Without Anchor Slot
 
 <code-well-header class="d-d-block">
   <dt-collapsible
@@ -58,7 +60,7 @@ vueCode='
 '
 />
 
-## With Anchor Slot
+### With Anchor Slot
 
 <code-well-header class="d-d-block">
   <dt-collapsible :open="isOpen" ref="with-anchor-slot">

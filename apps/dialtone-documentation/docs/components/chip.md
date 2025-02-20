@@ -14,7 +14,7 @@ figma_url: https://www.figma.com/file/2adf7JhZOncRyjYiy2joil/DT-Core%3A-Componen
 
 <!-- <component-combinator component-name="DtChip" /> -->
 
-## Variants And Examples
+## Variants and Examples
 
 ### Base
 
@@ -96,7 +96,7 @@ vueCode='
 '
 showHtmlWarning />
 
-### With Icon And Close Button
+### With Icon and Close Button
 
 <code-well-header>
   <example-chip label="Chip" with-icon/>
@@ -133,7 +133,7 @@ vueCode='
 '
 showHtmlWarning />
 
-### With Avatar And Close Button
+### With Avatar and Close Button
 
 <code-well-header>
   <example-chip label="Chip" with-avatar/>

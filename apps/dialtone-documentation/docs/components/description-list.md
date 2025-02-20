@@ -17,7 +17,7 @@ figma: planned
   </div>
 </code-well-header>
 
-## Variants And Examples
+## Variants and Examples
 
 ### Default
 
@@ -92,7 +92,7 @@ vueCode='
 '
 />
 
-### With Term And Description Styles
+### With Term and Description Styles
 
 <code-well-header>
   <div class="d-w332">

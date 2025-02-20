@@ -12,7 +12,7 @@ storybook: https://dialtone.dialpad.com/vue/?path=/story/components-emoji--defau
   <dt-emoji code=":smile:" />
 </code-well-header>
 
-## Variants And Examples
+## Variants and Examples
 
 ### With Shortcode
 
@@ -166,7 +166,7 @@ It follows a similar structure to the [standard emoji json file](https://raw.git
 
 The required properties are `name`, `category`, `shortname`, `extension`, `custom`.
 
-### Modify Data In Native Emojis
+### Modify Data in Native Emojis
 
 It's possible to modify or add data to a native emoji using the codepoint as the key of the object.
 

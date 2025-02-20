@@ -32,7 +32,7 @@ to the `dt-popover` component.
 
 With this we accomplish the requirement to have the previous year button focused when the datepicker is opened.
 
-## Variants And Examples
+## Variants and Examples
 
 ### Default
 
@@ -412,7 +412,7 @@ In `calendar`:
 We are providing the following functions to format dates:
 
 <!-- TODO: Autogenerate this docs from jsdocs in packages/dialtone-vue2/components/datepicker/formatUtils.js -->
-### Format Long
+### formatLong
 
 ▸ **formatLong**(`date`, `locale` = 'default'): `string`
 
@@ -433,7 +433,7 @@ The formatted date string.
 
 ___
 
-### Format Medium
+### formatMedium
 
 ▸ **formatMedium**(`date`, `locale` = 'default'): `string`
 
@@ -454,7 +454,7 @@ The formatted date string.
 
 ___
 
-### Format Short
+### formatShort
 
 ▸ **formatShort**(`date`, `locale` = 'default', `showWeekday`= true): `string`
 
@@ -476,7 +476,7 @@ The formatted date string.
 
 ___
 
-### Format No Year
+### formatNoYear
 
 ▸ **formatNoYear**(`date`, `locale` = 'default', `abbreviated`= false): `string`
 
@@ -498,7 +498,7 @@ The formatted date without the year.
 
 ___
 
-### Format Numerical
+### formatNumerical
 
 ▸ **formatNumerical**(`date`, `locale` = 'default'): `string`
 
