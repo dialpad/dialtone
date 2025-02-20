@@ -95,7 +95,7 @@
           />
         </div>
         <popover-header-footer
-          v-if="$slots.footerContent"
+          v-if="hasFooter()"
           ref="popover__footer"
           type="footer"
           :class="POPOVER_HEADER_FOOTER_PADDING_CLASSES[padding]"
@@ -697,6 +697,10 @@ export default {
    ******************/
   methods: {
 
+    hasFooter () {
+      return this.$slots.footerContent || (this.$scopedSlots.footerContent && this.$scopedSlots.footerContent());
+    },
+
     hasIntersectedViewport (entries) {
       const dialog = entries?.[0]?.target;
       if (!dialog) return;
@@ -1023,6 +1027,10 @@ export default {
 
     onMouseLeaveAnchor () {
       this.$emit('mouseleave-popover-anchor');
+    },
+
+    hasFooter () {
+      return this.$slots.footerContent || this.$scopedSlots.footerContent?.();
     },
   },
 };

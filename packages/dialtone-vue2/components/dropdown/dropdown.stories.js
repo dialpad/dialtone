@@ -18,7 +18,7 @@ export const argsData = {
   placement: 'bottom',
   appendTo: 'body',
   padding: 'none',
-  contentWidth: 'null',
+  contentWidth: '',
 };
 
 export const argTypesData = {
@@ -35,6 +35,17 @@ export const argTypesData = {
     },
   },
   list: {
+    table: {
+      category: 'slots',
+      type: {
+        summary: 'VNode',
+      },
+    },
+    control: {
+      type: 'text',
+    },
+  },
+  footer: {
     table: {
       category: 'slots',
       type: {
@@ -151,7 +162,10 @@ export default {
 
 export const Default = {
   render: (argsData) => createRenderConfig(DtDropdown, DtDropdownDefaultTemplate, argsData),
-  args: {},
+  args: {
+    footer: '',
+    list: '',
+  },
 
   parameters: {
     percy: {
