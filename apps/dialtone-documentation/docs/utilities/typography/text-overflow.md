@@ -1,5 +1,5 @@
 ---
-title: Text overflow
+title: Text Overflow
 description: Utilities for controlling an element's text overflow.
 ---
 

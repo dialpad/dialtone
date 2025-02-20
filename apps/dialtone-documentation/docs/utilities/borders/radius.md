@@ -1,9 +1,9 @@
 ---
-title: Border radius
+title: Border Radius
 description: Utilities for controlling an element's border radius.
 ---
 
-## All corners
+## All Corners
 
 Use `d-bar{n}` to change the border radius on all corners of your element.
 
@@ -28,7 +28,7 @@ Use `d-bar{n}` to change the border radius on all corners of your element.
 <div class="d-bar32">...</div>
 ```
 
-## Rounded sides
+## Rounded Sides
 
 Use `d-b{t|r|b|l}r{n}` to change the border radius on a side of your element.
 

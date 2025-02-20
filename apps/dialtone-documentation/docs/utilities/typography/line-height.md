@@ -1,5 +1,5 @@
 ---
-title: Line height
+title: Line Height
 description: Utilities to change an element's line-height.
 ---
 
@@ -13,7 +13,7 @@ description: Utilities to change an element's line-height.
   </template>
 </dt-notice>
 
-## Relative line-heights
+## Relative Line-Heights
 
 Use `d-lh-{n}` to change an element's line-height relatively. This means no unit is set with the line-height. Instead the line-height value is a multiple of the font-size.
 
@@ -36,7 +36,7 @@ Use `d-lh-{n}` to change an element's line-height relatively. This means no unit
 <p class="d-lh-600">...</p>
 ```
 
-## Fixed line-heights
+## Fixed Line-Heights
 
 Use `d-lh{n}` to fix an element's line-height. This allows you to target a specific line-height based on the font-size. For example if a target 20px line-height is desired and the current font-size is 14px, apply `.d-lh6` to achieve this target (14px font-size + 6px = 20px target line-height).
 
@@ -62,7 +62,7 @@ Use `d-lh{n}` to fix an element's line-height. This allows you to target a speci
 <p class="d-lh24">...</p>
 ```
 
-## CSS variables
+## CSS Variables
 
 <div class="d-h332 d-of-y-scroll d-bb d-bc-black-200">
   <table class="d-table dialtone-doc-table">

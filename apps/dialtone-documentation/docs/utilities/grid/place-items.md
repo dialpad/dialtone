@@ -1,5 +1,5 @@
 ---
-title: Place items
+title: Place Items
 description: Utilities for controlling how grid items are aligned along their block and inline axis directions.
 ---
 

@@ -1,6 +1,6 @@
 ---
 title: Typography Styles
-description: Core typographic styles for body text and headlines.
+description: Core Typographic Styles for Body Text and Headlines.
 ---
 
 <dt-notice

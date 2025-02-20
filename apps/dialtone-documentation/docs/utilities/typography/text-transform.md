@@ -1,5 +1,5 @@
 ---
-title: Text transform
+title: Text Transform
 description: Utilities for controlling an element's text transform.
 ---
 

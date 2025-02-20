@@ -1,9 +1,9 @@
 ---
-title: Border style.
+title: Border Style
 description: Utilities for controlling an element's border style.
 ---
 
-## Dashed borders
+## Dashed Borders
 
 Use `d-b{a|t|r|b|l}s-dashed` to change the border style to dashed on your element.
 
@@ -24,7 +24,7 @@ Use `d-b{a|t|r|b|l}s-dashed` to change the border style to dashed on your elemen
 <div class="d-ba d-bc-magenta-200 d-bls-dashed d-baw4">...</div>
 ```
 
-## Dotted borders
+## Dotted Borders
 
 Use `d-b{a|t|r|b|l}s-dotted` to change the border style to dotted on your element.
 

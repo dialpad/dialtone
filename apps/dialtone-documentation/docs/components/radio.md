@@ -39,14 +39,14 @@ Radio buttons are a common way to allow users to make a single selection from a 
 
 </dialtone-usage>
 
-### Best practices
+### Best Practices
 
 - Users should be able to tap on or click either the text `label` or the radio element itself to select an option.
 - Options that are listed vertically are easier to read than those listed horizontally. Horizontal listings can make it difficult to tell which label pertains to which radio button.
 - Make sure selections are adequately spaced for touch screens.
 - Use caution if you decide to set a default value as they cannot be unchecked. Setting a default value can discourage users from making conscious decisions, seem pushy, or alienate users who don’t fit into your assumptions. If you are unsure, leave nothing selected by default.
 
-## Variants and examples
+## Variants and Examples
 
 ### Base Styles
 
@@ -139,7 +139,7 @@ vueCode='
 '
 showHtmlWarning />
 
-### With validation states
+### With Validation States
 
 <code-well-header>
   <fieldset class="d-input-group__fieldset d-stack8">
@@ -238,7 +238,7 @@ vueCode='
 '
 showHtmlWarning />
 
-### With slotted label
+### With Slotted Label
 
 <code-well-header>
   <dt-radio
@@ -262,7 +262,7 @@ vueCode='
 '
 />
 
-### With slotted description
+### With Slotted Description
 
 <code-well-header>
   <dt-radio

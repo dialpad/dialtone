@@ -1,5 +1,5 @@
 ---
-title: Border colors
+title: Border Colors
 description: Utilities for controlling an element's border color.
 ---
 
@@ -27,7 +27,7 @@ Use `d-bc-{color}` to set an element's border color.
 <div class="... d-ba d-bc-purple-400">...</div>
 ```
 
-## Changing opacities
+## Changing Opacities
 
 Use `d-bco{n}` to change the border color opacity value. You can also change the border color opacity value on `:hover`
 , `:focus`, `:focus-visible` by using the respective `h:d-bco{n}`, `f:d-bco{n}`, `fv:d-bco{n}` prefixes.
@@ -82,7 +82,7 @@ Use `f:d-bc-{color}` to change an element's border color when in `:focus` or `:f
 <button class="d-ba d-baw2 d-bc-red-300 f:d-bc-neutral-white">...</button>
 ```
 
-## Focus visible
+## Focus Visible
 
 Use `fv:d-bc-{color}` to change an element's border color when in `:focus-visible` state [only when focused by keyboard]
 .

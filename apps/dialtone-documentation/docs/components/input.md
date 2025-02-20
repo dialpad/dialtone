@@ -36,7 +36,7 @@ This component combines both the `input` and `textarea` elements as options with
 
 </dialtone-usage>
 
-### Best practices
+### Best Practices
 
 - The length of the text input provides a hint to users as to how much text to enter.
 - Only show error validation messages or stylings after a user has interacted with a particular field.
@@ -261,7 +261,7 @@ vueCode='
 '
 showHtmlWarning />
 
-### With validation states
+### With Validation States
 
 Provides feedback to the user based on their interaction, or lack thereof, with an input.
 
@@ -331,7 +331,7 @@ vueCode='
 '
 showHtmlWarning />
 
-### With multiple validation messages
+### With Multiple Validation Messages
 
 <code-well-header>
   <div class="d-w100p">
@@ -346,7 +346,7 @@ vueCode='
 '
 />
 
-### With maximum length validation
+### With Maximum Length Validation
 
 Adds validation for the input length. Make sure to provide the following props:
 
@@ -410,7 +410,7 @@ vueCode='
 '
 />
 
-### With custom maximum length validation message
+### With Custom Maximum Length Validation Message
 
 <code-well-header>
   <div class="d-w100p">
@@ -537,7 +537,7 @@ vueCode='
 '
 showHtmlWarning />
 
-## Icon support
+## Icon Support
 
 <code-well-header>
   <div class="d-stack16 d-w100p">

@@ -3,7 +3,7 @@ title: Coordinates
 description: Utility classes to assign an element’s top, right, bottom, or left position.
 ---
 
-## Positive coordinates
+## Positive Coordinates
 
 ### Examples
 
@@ -101,7 +101,7 @@ Use the `top|right|bottom|left|x|y|all` utility classes to absolutely position e
   </table>
 </div>
 
-## Negative coordinates
+## Negative Coordinates
 
 ### Examples
 

@@ -38,7 +38,7 @@ Although highly versatile, this doesn't mean modal dialogs are fit for all purpo
 
 </dialtone-usage>
 
-### Best practices
+### Best Practices
 
 - Ideally, users trigger the modal, not the system, and should not be a surprise. Its appearance should reflect user intent to invoke it.  Uninvited modals may surprise the user and result in a quick dismissal of the window.
 - Treat modals as a last resort. Consider whether there’s another component or UI that might be  less disruptive for the user.
@@ -60,7 +60,7 @@ Although highly versatile, this doesn't mean modal dialogs are fit for all purpo
 
 <component-accessible-table component-name="modal"></component-accessible-table>
 
-## Variants and examples
+## Variants and Examples
 
 ### Base Style
 
@@ -143,7 +143,7 @@ vueCode='
 '
 showHtmlWarning />
 
-### Fixed header and footer
+### Fixed Header and Footer
 
 This is the default behavior that adds the scroll automatically in the modal content and leaves the header and footer fixed.
 
@@ -497,7 +497,7 @@ vueCode='
 '
 showHtmlWarning />
 
-### Custom header and content
+### Custom Header and Content
 
 You're not limited to using plain title and copy text.
 

@@ -402,9 +402,9 @@ vueCode='
 '
 showHtmlWarning />
 
-## Icon support
+## Icon Support
 
-### Icon and label
+### Icon and Label
 
 <code-well-header>
   <dt-stack direction="row" gap="400">
@@ -510,7 +510,7 @@ vueCode='
 '
 showHtmlWarning />
 
-### Icon only
+### Icon Only
 
 <code-well-header>
   <dt-stack direction="row" gap="400">

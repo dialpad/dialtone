@@ -15,7 +15,7 @@ While an atomic CSS approach comes with many advantages, we recognize it also of
 
 ## Example
 
-### Border top
+### Border Top
 
 `d-bt` applies a border (`b`) to the top (`t`) side. 1px is the default width, and the color is inherited from the foreground color (`currentColor`).
 
@@ -27,7 +27,7 @@ While an atomic CSS approach comes with many advantages, we recognize it also of
 <div class="d-bt">Box</div>
 ```
 
-### Border top width
+### Border Top Width
 
 `d-btw4` applies a 4px (`4`) width (`w`) to the top (`t`).
 
@@ -39,7 +39,7 @@ While an atomic CSS approach comes with many advantages, we recognize it also of
 <div class="d-bt d-btw4">Box</div>
 ```
 
-### Border color
+### Border Color
 
 `d-bc-purple-400` applies a border (`b`) color (`c`) of [Purple 400](/design/colors/index.md#purple).
 
@@ -55,7 +55,7 @@ While an atomic CSS approach comes with many advantages, we recognize it also of
 
 A basic example styling a container by combining Dialtone's CSS utilities. Follow each step with this [Codepen template.](https://codepen.io/pen?template=dyKvvZB)
 
-### 1. Begin with an unstyled container
+### 1. Begin with an Unstyled Container
 
 <code-well-header>
   <div>Box</div>
@@ -65,7 +65,7 @@ A basic example styling a container by combining Dialtone's CSS utilities. Follo
 <div>Box</div>
 ```
 
-### 2. Apply a dark background color
+### 2. Apply a Dark Background Color
 
 Add `d-bgc-black-900` from the list of [background color utility classes]/utilities/backgrounds/color/index.md).
 
@@ -77,7 +77,7 @@ Add `d-bgc-black-900` from the list of [background color utility classes]/utilit
 <div class="d-bgc-black-900">Box</div>
 ```
 
-### 3. Apply color to the foreground text
+### 3. Apply Color to the Foreground Text
 
 Since this is primary content on a dark background, let's use `d-fc-primary-inverted` from the [font color utilities]/utilities/typography/color/index.md).
 
@@ -89,7 +89,7 @@ Since this is primary content on a dark background, let's use `d-fc-primary-inve
 <div class="d-bgc-black-600 d-fc-primary-inverted">Box</div>
 ```
 
-### 4. Apply some padding
+### 4. Apply Some Padding
 
 Let's use `d-px16` for horizontal padding (right and left), and `d-py8` for vertical padding (top and bottom), from the list of [padding utility classes]/utilities/spacing/padding/index.md).
 
@@ -101,7 +101,7 @@ Let's use `d-px16` for horizontal padding (right and left), and `d-py8` for vert
 <div class="d-bgc-black-600 d-fc-primary-inverted d-px16 d-py8">Box</div>
 ```
 
-### 5. List a bunch of boxes
+### 5. List a Bunch of Boxes
 
 Let's wrap a repeating set of boxes in a new container.
 
@@ -123,7 +123,7 @@ Let's wrap a repeating set of boxes in a new container.
 </div>
 ```
 
-### 6. Render them horizontally
+### 6. Render Them Horizontally
 
 Convert it to a `flex` container by adding `class="d-d-flex"`.
 
@@ -145,7 +145,7 @@ Convert it to a `flex` container by adding `class="d-d-flex"`.
 </div>
 ```
 
-### 7. Add borders to segment each.
+### 7. Add Borders to Segment Each
 
 Add a border to each box by applying `d-divide-x` (horizontal borders) to the surrounding container from the list of [divide width classes](/utilities/borders/divide-width.md).
 
@@ -167,7 +167,7 @@ Add a border to each box by applying `d-divide-x` (horizontal borders) to the su
 </div>
 ```
 
-### 8. And change the border color
+### 8. And Change the Border Color
 
 Since the border color of `d-divide-x` inherits the color of the parent's foreground (implicitly `currentColor`), let's soften it with `d-divide-black-400`, from the list of [divide color classes](/utilities/borders/divide-color.md).
 
@@ -189,6 +189,6 @@ Since the border color of `d-divide-x` inherits the color of the parent's foregr
 </div>
 ```
 
-### Keep exploring!
+### Keep Exploring!
 
 View the final result in this [Codepen template](https://codepen.io/pen?template=XWYMMRY). Continue to explore using the variety of CSS utilities listed here.

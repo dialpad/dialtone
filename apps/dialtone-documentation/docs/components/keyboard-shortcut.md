@@ -65,7 +65,7 @@ vueCode='
 '
 showHtmlWarning />
 
-### Shortcut size variation
+### Shortcut Size Variation
 
 <code-well-header>
   <dt-keyboard-shortcut
@@ -82,7 +82,7 @@ vueCode='
 '
 />
 
-### All available shortcut aliases
+### All Available Shortcut Aliases
 
 <code-well-header>
   <dt-keyboard-shortcut
@@ -100,7 +100,7 @@ vueCode='
 '
 />
 
-### Inline with text and screen reader text
+### Inline with Text and Screen Reader Text
 
 <code-well-header>
   <div ref="inlineExample">

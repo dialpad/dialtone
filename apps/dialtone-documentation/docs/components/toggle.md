@@ -34,7 +34,7 @@ The Toggle component acts as a way to allow the User to switch between two mutua
 
 </dialtone-usage>
 
-### Best practices
+### Best Practices
 
 - A Toggle component should be used as a control within an application and provide a way to toggle between two states like a household light switch.
 - An `indeterminate` Toggle convey a "mixed" state that neither qualifies as toggled or not toggled. An example use case is when a Toggle acts as a "parent" of a collection of child Toggle components:
@@ -42,7 +42,7 @@ The Toggle component acts as a way to allow the User to switch between two mutua
   - Not toggled: all children are not toggled.
   - `indeterminate`: children are a mix of toggled and not toggled.
 
-## Variants and examples
+## Variants and Examples
 
 ### Base Styles
 

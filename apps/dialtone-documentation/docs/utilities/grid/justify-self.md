@@ -1,5 +1,5 @@
 ---
-title: Justify self
+title: Justify Self
 description: Utilities for controlling how a grid item is aligned along its inline axis.
 ---
 
