@@ -95,7 +95,7 @@
           />
         </div>
         <popover-header-footer
-          v-if="hasFooter"
+          v-if="hasFooter()"
           ref="popover__footer"
           type="footer"
           :class="POPOVER_HEADER_FOOTER_PADDING_CLASSES[padding]"
@@ -595,10 +595,6 @@ export default {
       // there is no aria-label and the labelledby should point to the anchor.
       return this.ariaLabelledby || (!this.ariaLabel && getUniqueString('DtPopover__anchor'));
     },
-
-    hasFooter () {
-      return this.$slots.footerContent || (this.$scopedSlots.footerContent && this.$scopedSlots.footerContent());
-    },
   },
 
   watch: {
@@ -1027,6 +1023,10 @@ export default {
 
     onMouseLeaveAnchor () {
       this.$emit('mouseleave-popover-anchor');
+    },
+
+    hasFooter () {
+      return this.$slots.footerContent || this.$scopedSlots.footerContent?.();
     },
   },
 };
