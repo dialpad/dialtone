@@ -162,7 +162,10 @@ export default {
 
 export const Default = {
   render: (argsData) => createRenderConfig(DtDropdown, DtDropdownDefaultTemplate, argsData),
-  args: {},
+  args: {
+    footer: '',
+    list: '',
+  },
 
   parameters: {
     percy: {
