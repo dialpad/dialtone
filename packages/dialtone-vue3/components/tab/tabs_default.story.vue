@@ -11,6 +11,7 @@
       :disabled="$attrs.disabled"
       :tab-list-class="$attrs.tabListClass"
       :tab-list-child-props="$attrs.tabListChildProps"
+      @before-change="validateChange"
       @change="$attrs.onChange"
     >
       <template #tabs>
@@ -108,5 +109,13 @@ import DtTabPanel from './tab_panel.vue';
 export default {
   name: 'DtTabsDefault',
   components: { DtTabGroup, DtTab, DtTabPanel },
+
+  methods: {
+    validateChange (event) {
+      if (!confirm('You might lose changes, change tab?')) {
+        event.preventDefault();
+      }
+    },
+  },
 };
 </script>

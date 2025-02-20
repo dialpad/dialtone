@@ -20,6 +20,7 @@
       @keyup.right="tabRight"
       @keyup.enter="selectTab"
       @keyup.space="selectTab"
+      @click="selectTab"
       @keydown.home="onHomeButton"
       @keydown.end="onEndButton"
     >
@@ -49,7 +50,6 @@ export default {
   provide () {
     return {
       groupContext: this.provideObj,
-      changeContentPanel: this.changeContentPanel,
       setFocus: this.setFocus,
     };
   },
@@ -135,6 +135,14 @@ export default {
      * @type {Object}
      */
     'change',
+
+    /**
+     * Before change tab event with the event argument, useful to perform validations and prevent changing tabs if neccessary.
+     *
+     * @event before-change
+     * @type {Event}
+     */
+    'before-change',
   ],
 
   data () {
@@ -197,7 +205,7 @@ export default {
           return ({
             context: el,
             panelId: el.getAttribute('aria-controls')?.replace('dt-panel-', ''),
-            id: el.getAttribute('id')?.replace('dt-tab-', ''),
+            tabId: el.getAttribute('id')?.replace('dt-tab-', ''),
             isSelected: el.getAttribute('aria-selected') === 'true',
           });
         });
@@ -207,51 +215,48 @@ export default {
       this.$emit('change', { ...this.provideObj });
     },
 
-    changeContentPanel ({ selected, selectOverride }) {
-      this.provideObj.selected = selected;
-      if (!selectOverride) {
-        this.onChange();
-      }
-    },
-
     tabLeft () {
-      const { index, tabs } = this.getIndexAndTabs();
+      const index = this.getFocusedTabIndex();
       if (index === -1) return;
-      const indexElement = index - 1 < 0 ? tabs.length - 1 : index - 1;
-      this.selectFocusOnTab(indexElement, tabs);
+
+      const indexElement = index - 1 < 0 ? this.tabs.length - 1 : index - 1;
+      this.selectFocusOnTab(indexElement);
     },
 
     tabRight () {
-      const { index, tabs } = this.getIndexAndTabs();
+      const index = this.getFocusedTabIndex();
       if (index === -1) return;
 
-      const indexElement = index + 1 > tabs.length - 1 ? 0 : index + 1;
-      this.selectFocusOnTab(indexElement, tabs);
+      const indexElement = index + 1 > this.tabs.length - 1 ? 0 : index + 1;
+      this.selectFocusOnTab(indexElement);
     },
 
-    selectFocusOnTab (index, tabs) {
-      const { context } = tabs[index];
+    selectFocusOnTab (index) {
+      const { context } = this.tabs[index];
       context.focus();
     },
 
-    selectTab () {
-      const { tabs, index } = this.getIndexAndTabs();
-      this.selectTabByIndex(index, tabs);
+    selectTab (event) {
+      if (this.isSameTabClicked()) return;
+
+      this.$emit('before-change', event);
+      if (event.defaultPrevented) return;
+
+      const index = this.getFocusedTabIndex();
+
+      this.selectTabByIndex(index);
+      this.onChange();
     },
 
-    selectTabByIndex (index, tabs) {
-      const { context, panelId } = tabs[index];
+    selectTabByIndex (index) {
+      const { context, panelId } = this.tabs[index];
       this.provideObj.selected = panelId;
       context.focus();
     },
 
-    getIndexAndTabs () {
-      const index = this.tabs.findIndex((context) =>
-        this.focusId ? context.id === `${this.focusId}` : context.isSelected);
-      return {
-        tabs: this.tabs,
-        index,
-      };
+    getFocusedTabIndex () {
+      return this.tabs.findIndex((context) =>
+        this.focusId ? context.tabId === `${this.focusId}` : context.isSelected);
     },
 
     onHomeButton () {
@@ -262,6 +267,11 @@ export default {
     onEndButton () {
       if (this.tabs.length === 0) return;
       this.tabs[this.tabs.length - 1]?.context?.focus();
+    },
+
+    isSameTabClicked () {
+      const tab = this.tabs[this.getFocusedTabIndex()];
+      return this.provideObj.selected === tab.panelId;
     },
   },
 };

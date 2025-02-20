@@ -44,18 +44,18 @@ const optionTabs = [
 ];
 
 const tabPanelComponents = {
-  functional: true,
   render () {
-    return optionTabPanel.map(option => h(DtTabPanel, option, () => option.slot));
+    return h('div', {}, optionTabPanel.map(option => h(DtTabPanel, { id: option.id, tabId: option.tabId }, () => option.slot)));
   },
 };
 
 const tabComponents = {
-  functional: true,
   render () {
-    return optionTabs.map(option => h(DtTab, option, () => option.slot));
+    return h('div', {}, optionTabs.map(option => h(DtTab, { id: option.id, panelId: option.panelId, selected: option.selected, label: option.label }, () => option.slot)));
   },
 };
+
+const baseAttributes = {};
 
 describe('DtTabGroup Tests', () => {
   // Wrappers
@@ -63,10 +63,15 @@ describe('DtTabGroup Tests', () => {
   let tabList;
   let tabs;
   let tabPanels;
+  let attrs;
 
   const props = {
     label: 'area-label',
   };
+
+  beforeEach(() => {
+    attrs = baseAttributes;
+  });
 
   const _setWrappers = () => {
     tabList = wrapper.find('[role="tablist"]');
@@ -78,6 +83,7 @@ describe('DtTabGroup Tests', () => {
     wrapper = mount(DtTabGroup, {
       attachTo: document.body,
       props,
+      attrs,
       slots: {
         default: tabPanelComponents,
         tabs: tabComponents,
@@ -195,6 +201,16 @@ describe('DtTabGroup Tests', () => {
       });
     });
 
+    describe('Correct before-change event', () => {
+      beforeEach(() => {
+        tabs.at(1).vm.$el.click();
+      });
+
+      it('should emitted on click', () => {
+        expect(wrapper.emitted('before-change').length).toBe(1);
+      });
+    });
+
     describe('Correct key navigation', () => {
       describe('On keyup left', () => {
         beforeEach(async () => {
@@ -207,22 +223,19 @@ describe('DtTabGroup Tests', () => {
           expect(tabs.at(2).attributes('aria-selected')).toBe('true');
           expect(tabPanels.at(2).attributes('aria-hidden')).toBe('false');
         });
+      });
 
-        describe('On double keyup left and space', () => {
-          beforeEach(async () => {
-            tabs.at(0).vm.$el.focus();
-            await tabList.trigger('keyup.left');
-            await tabList.trigger('keyup.left');
-            await tabList.trigger('keyup.space');
-          });
+      describe('On double keyup left and space', () => {
+        beforeEach(async () => {
+          tabs.at(0).vm.$el.focus();
+          await tabList.trigger('keyup.left');
+          await tabList.trigger('keyup.left');
+          await tabList.trigger('keyup.space');
+        });
 
-          it('aria-selected should be "true"', () => {
-            expect(tabs.at(1).attributes('aria-selected')).toBe('true');
-          });
-
-          it('aria-hidden should be "false"', () => {
-            expect(tabPanels.at(1).attributes('aria-hidden')).toBe('false');
-          });
+        it('selected element should be correct', () => {
+          expect(tabs.at(1).attributes('aria-selected')).toBe('true');
+          expect(tabPanels.at(1).attributes('aria-hidden')).toBe('false');
         });
       });
 
@@ -233,29 +246,23 @@ describe('DtTabGroup Tests', () => {
           await tabList.trigger('keyup.enter');
         });
 
-        it('aria-selected should be "true"', () => {
+        it('selected element should be correct', () => {
           expect(tabs.at(1).attributes('aria-selected')).toBe('true');
-        });
-
-        it('aria-hidden should be "false"', () => {
           expect(tabPanels.at(1).attributes('aria-hidden')).toBe('false');
         });
+      });
 
-        describe('On double keyup right and enter', () => {
-          beforeEach(async () => {
-            tabs.at(0).vm.$el.focus();
-            await tabList.trigger('keyup.right');
-            await tabList.trigger('keyup.right');
-            await tabList.trigger('keyup.enter');
-          });
+      describe('On double keyup right and enter', () => {
+        beforeEach(async () => {
+          tabs.at(0).vm.$el.focus();
+          await tabList.trigger('keyup.right');
+          await tabList.trigger('keyup.right');
+          await tabList.trigger('keyup.enter');
+        });
 
-          it('aria-selected should be "true"', () => {
-            expect(tabs.at(2).attributes('aria-selected')).toBe('true');
-          });
-
-          it('aria-hidden should be "false"', () => {
-            expect(tabPanels.at(2).attributes('aria-hidden')).toBe('false');
-          });
+        it('selected element should be correct', () => {
+          expect(tabs.at(2).attributes('aria-selected')).toBe('true');
+          expect(tabPanels.at(2).attributes('aria-hidden')).toBe('false');
         });
       });
 
@@ -266,11 +273,8 @@ describe('DtTabGroup Tests', () => {
           await tabList.trigger('keyup.enter');
         });
 
-        it('aria-selected should be "true"', () => {
+        it('selected element should be correct', () => {
           expect(tabs.at(0).attributes('aria-selected')).toBe('true');
-        });
-
-        it('aria-hidden should be "false"', () => {
           expect(tabPanels.at(0).attributes('aria-hidden')).toBe('false');
         });
       });
@@ -282,13 +286,28 @@ describe('DtTabGroup Tests', () => {
           await tabList.trigger('keyup.enter');
         });
 
-        it('aria-selected should be "true"', () => {
+        it('selected element should be correct', () => {
           expect(tabs.at(2).attributes('aria-selected')).toBe('true');
-        });
-
-        it('aria-hidden should be "false"', () => {
           expect(tabPanels.at(2).attributes('aria-hidden')).toBe('false');
         });
+      });
+    });
+
+    describe('When before-change prevents default event', () => {
+      beforeEach(async () => {
+        attrs = {
+          onBeforeChange: (event) => {
+            event.preventDefault();
+          },
+        };
+
+        _mountWrapper();
+
+        tabs.at(0).vm.$el.click();
+      });
+
+      it('Should prevent the change event', async () => {
+        expect(wrapper.emitted('change')).toBeUndefined();
       });
     });
   });
