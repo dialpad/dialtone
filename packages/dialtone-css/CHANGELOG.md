@@ -1,3 +1,10 @@
+## [8.49.2](https://github.com/dialpad/dialtone/compare/dialtone-css/v8.49.1...dialtone-css/v8.49.2) (2025-02-19)
+
+
+### Bug Fixes
+
+* NO-JIRA custom item layout ([#639](https://github.com/dialpad/dialtone/issues/639)) ([1553250](https://github.com/dialpad/dialtone/commit/155325090d5f8ac38b0b9de377a6a9731a9274ae))
+
 ## [8.49.1](https://github.com/dialpad/dialtone/compare/dialtone-css/v8.49.0...dialtone-css/v8.49.1) (2025-02-11)
 
 

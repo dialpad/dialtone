@@ -6,8 +6,15 @@ on:
       - staging
       - production
 
+    paths:
+      - 'packages/dialtone-vue2/**'
+      - 'packages/dialtone-vue3/**'
+
   pull_request:
-    types: ['opened', 'synchronize']
+    types:
+      - opened
+      - synchronize
+
     paths:
       - 'packages/dialtone-vue2/**'
       - 'packages/dialtone-vue3/**'
