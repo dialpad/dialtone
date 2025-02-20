@@ -112,7 +112,7 @@ export default {
 
   methods: {
     validateChange (event) {
-      if (!confirm('You might loose changes, change tab?')) {
+      if (!confirm('You might lose changes, change tab?')) {
         event.preventDefault();
       }
     },
