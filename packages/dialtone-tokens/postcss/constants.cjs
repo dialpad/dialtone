@@ -9,7 +9,7 @@
  */
 
 module.exports = {
-  HSLA_EXCLUDED_COLORS: ['--dt-color-gradient-gold-red-magenta-purple', '--dt-color-gradient-magenta-purple', '--dt-badge-color-background-ai', '--dt-color-border-ai'],
+  HSLA_EXCLUDED_COLORS: ['--dt-color-surface-ai', '--dt-color-gradient-gold-red-magenta-purple', '--dt-color-gradient-magenta-purple', '--dt-badge-color-background-ai', '--dt-color-border-ai'],
   IS_COLOR_REGEX: /--dt.*-color/,
   IS_THEME_COLOR_REGEX: /(--dt-theme-).*-(color).*/,
   IS_SHADOW_REGEX: /--dt.*-shadow/,
