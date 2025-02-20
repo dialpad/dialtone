@@ -46,12 +46,11 @@
         {{ item.name }}
       </dt-list-item>
     </template>
-    <template #footer="{ close }">
-      <div class="d-px12">
-        <dt-button @click="close">
-          Dropdown footer
-        </dt-button>
-      </div>
+    <template #footer>
+      <div
+        v-if="$attrs.footer"
+        v-html="$attrs.footer"
+      />
     </template>
   </dt-dropdown>
 </template>
