@@ -377,7 +377,9 @@ export function capitalizeFirstLetter (str, locale = 'en-US') {
  * @param {HTMLElement} componentRef - the component reference
  * @param {string} componentName - the component name
  */
+// eslint-disable-next-line complexity
 export function warnIfUnmounted (componentRef, componentName) {
+  if (typeof process === 'undefined') return;
   if (typeof process !== 'undefined' && process.env.NODE_ENV !== 'test') return;
   if (!componentRef || !(componentRef instanceof HTMLElement) || !document?.body) return;
   if (!document.body.contains(componentRef)) {
