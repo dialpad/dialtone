@@ -1,3 +1,10 @@
+## [9.102.1](https://github.com/dialpad/dialtone/compare/dialtone/v9.102.0...dialtone/v9.102.1) (2025-02-21)
+
+
+### Bug Fixes
+
+* DP-128277 remove duplicated hasFooter from DtPopover ([#642](https://github.com/dialpad/dialtone/issues/642)) ([98a06e1](https://github.com/dialpad/dialtone/commit/98a06e14f59e98b077ce67dc44201ef95d42ff4d))
+
 # [9.102.0](https://github.com/dialpad/dialtone/compare/dialtone/v9.101.2...dialtone/v9.102.0) (2025-02-20)
 
 
