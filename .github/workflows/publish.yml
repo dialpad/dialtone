@@ -91,10 +91,10 @@ jobs:
       matrix:
         package: ${{ fromJSON(needs.filter-actions.outputs.packages) }}
         registry: [ npm, GitHub ]
-        release-tag: ${{ needs.variables-setup.outputs.release_tag }}
+        release-tag: "${{ needs.variables-setup.outputs.release_tag }}"
         include:
           - package: dialtone-vue3
-            release-tag: ${{ needs.variables-setup.outputs.dialtone_vue3_release_tag }}
+            release-tag: "${{ needs.variables-setup.outputs.dialtone_vue3_release_tag }}"
           - package: dialtone-tokens
             registry: Gradle
           - package: dialtone-tokens
