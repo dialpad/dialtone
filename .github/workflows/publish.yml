@@ -101,10 +101,8 @@ jobs:
             registry: Swift
           - registry: GitHub
             registry_url: //npm.pkg.github.com/
-            auth_token: ${{ env.GITHUB_TOKEN }}
           - registry: npm
             registry_url: //registry.npmjs.org/
-            auth_token: ${{ secrets.DIALTONE_NPM_TOKEN }}
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -144,7 +142,7 @@ jobs:
         run: pnpm config set @dialpad:registry https://npm.pkg.github.com
 
       - name: Set ${{ matrix.registry }} auth token
-        run: pnpm config set ${{ matrix.registry_url }}:_authToken=${{ matrix.auth_token }}
+        run: pnpm config set ${{ matrix.registry_url }}:_authToken=${{ matrix.registry == 'GitHub' && env.GITHUB_TOKEN || secrets.DIALTONE_NPM_TOKEN }}
 
       # Publish npm/GitHub
       - name: Publish ${{ matrix.package }} ${{ matrix.release-tag }}
