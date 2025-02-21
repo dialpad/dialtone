@@ -1,3 +1,10 @@
+## [2.175.1](https://github.com/dialpad/dialtone/compare/dialtone-vue2/v2.175.0...dialtone-vue2/v2.175.1) (2025-02-21)
+
+
+### Bug Fixes
+
+* DP-128277 remove duplicated hasFooter from DtPopover ([#642](https://github.com/dialpad/dialtone/issues/642)) ([98a06e1](https://github.com/dialpad/dialtone/commit/98a06e14f59e98b077ce67dc44201ef95d42ff4d))
+
 # [2.175.0](https://github.com/dialpad/dialtone/compare/dialtone-vue2/v2.174.0...dialtone-vue2/v2.175.0) (2025-02-20)
 
 
