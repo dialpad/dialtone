@@ -97,10 +97,6 @@ jobs:
         run: pnpm install --frozen-lockfile
 
       # Release to GitHub
-      - name: Release Dialtone ${{ env.RELEASE_TAG }}
-        if: ${{ github.event_name == 'schedule' || github.event.inputs.package == 'all' || github.event.inputs.package == 'dialtone' }}
-        run: pnpm nx run dialtone:release
-
       - name: Release Dialtone Combinator ${{ env.RELEASE_TAG }}
         if: ${{ github.event_name == 'schedule' || github.event.inputs.package == 'all' || github.event.inputs.package == 'combinator' }}
         run: pnpm nx run dialtone-combinator:release
@@ -144,6 +140,10 @@ jobs:
       - name: Release Dialtone PostCSS Responsive Variations Plugin ${{ env.RELEASE_TAG }}
         if: ${{ github.event_name == 'schedule' || github.event.inputs.package == 'all' || github.event.inputs.package == 'dialtone' }}
         run: pnpm nx run postcss-responsive-variations:release
+
+      - name: Release Dialtone ${{ env.RELEASE_TAG }}
+        if: ${{ github.event_name == 'schedule' || github.event.inputs.package == 'all' || github.event.inputs.package == 'dialtone' }}
+        run: pnpm nx run dialtone:release
 
   update-production:
     needs: [ release ]
