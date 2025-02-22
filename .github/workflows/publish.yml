@@ -30,9 +30,9 @@ jobs:
   variables-setup:
     runs-on: ubuntu-latest
     outputs:
-      current_branch: ${{ contains( fromJSON('["production", "staging"]'), steps.branch-name.outputs.current_branch) && 'production' || steps.branch-name.outputs.current_branch }}
-      release_tag: ${{ contains( fromJSON('["production", "staging"]'), steps.branch-name.outputs.current_branch) && 'latest' || steps.branch-name.outputs.current_branch }}
-      dialtone_vue3_release_tag: ${{ contains( fromJSON('["production", "staging"]'), steps.branch-name.outputs.current_branch) && 'vue3' || format('vue3-{0}', steps.branch-name.outputs.current_branch) }}
+      current_branch: ${{ contains( fromJSON('["production", "fix-publish-workflow"]'), steps.branch-name.outputs.current_branch) && 'production' || steps.branch-name.outputs.current_branch }}
+      release_tag: ${{ contains( fromJSON('["production", "fix-publish-workflow"]'), steps.branch-name.outputs.current_branch) && 'latest' || steps.branch-name.outputs.current_branch }}
+      dialtone_vue3_release_tag: ${{ contains( fromJSON('["production", "fix-publish-workflow"]'), steps.branch-name.outputs.current_branch) && 'vue3' || format('vue3-{0}', steps.branch-name.outputs.current_branch) }}
     steps:
       - name: Get branch name
         id: branch-name
@@ -149,11 +149,11 @@ jobs:
 
       # Publish iOS
       - name: Build swift
-        if: ${{ needs.variables-setup.outputs.current_branch == 'production' && matrix.package == 'dialtone-tokens' }}
+        if: ${{ false && needs.variables-setup.outputs.current_branch == 'production' && matrix.package == 'dialtone-tokens' }}
         run: pnpm nx run dialtone-tokens:publish:ios-package
 
       - name: Publish production - Swift
-        if: ${{ needs.variables-setup.outputs.current_branch == 'production' && matrix.package == 'dialtone-tokens' }}
+        if: ${{ false && needs.variables-setup.outputs.current_branch == 'production' && matrix.package == 'dialtone-tokens' }}
         uses: cpina/github-action-push-to-another-repository@v1.5.1
         env:
           API_TOKEN_GITHUB: ${{ secrets.DIALTONE_CI_TOKEN }}
@@ -166,7 +166,7 @@ jobs:
 
       # Publish Android
       - name: Setup Java
-        if: ${{ needs.variables-setup.outputs.current_branch == 'production' && matrix.package == 'dialtone-tokens' }}
+        if: ${{ false && needs.variables-setup.outputs.current_branch == 'production' && matrix.package == 'dialtone-tokens' }}
         uses: actions/setup-java@v4
         with:
           java-version: 17
@@ -177,11 +177,11 @@ jobs:
             packages/dialtone-tokens/**/gradle-wrapper.properties
 
       - name: Build android
-        if: ${{ needs.variables-setup.outputs.current_branch == 'production' && matrix.package == 'dialtone-tokens' }}
+        if: ${{ false && needs.variables-setup.outputs.current_branch == 'production' && matrix.package == 'dialtone-tokens' }}
         run: pnpm nx run dialtone-tokens:publish:android-package
 
       - name: Publish android - Gradle
-        if: ${{ needs.variables-setup.outputs.current_branch == 'production' && matrix.package == 'dialtone-tokens' }}
+        if: ${{ false && needs.variables-setup.outputs.current_branch == 'production' && matrix.package == 'dialtone-tokens' }}
         working-directory: ./packages/dialtone-tokens
         env:
           GITHUB_USER: braddialpad
