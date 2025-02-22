@@ -91,17 +91,11 @@ jobs:
       matrix:
         package: ${{ fromJSON(needs.filter-actions.outputs.packages) }}
         registry: [ npm, GitHub ]
-        release-tag: ["${{ needs.variables-setup.outputs.release_tag }}"]
         include:
-          - package: dialtone-vue3
-            release-tag: "${{ needs.variables-setup.outputs.dialtone_vue3_release_tag }}"
           - registry: GitHub
             registry_url: //npm.pkg.github.com/
           - registry: npm
             registry_url: //registry.npmjs.org/
-        exclude:
-          - package: dialtone-vue3
-            release-tag: ${{ needs.variables-setup.outputs.release_tag }}
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -144,11 +138,13 @@ jobs:
         run: pnpm config set ${{ matrix.registry_url }}:_authToken=${{ matrix.registry == 'GitHub' && env.GITHUB_TOKEN || secrets.DIALTONE_NPM_TOKEN }}
 
       # Publish npm/GitHub
-      - name: Publish ${{ matrix.package }} ${{ matrix.release-tag }}
+      - name: Publish ${{ matrix.package }}@${{ matrix.package == 'dialtone-vue3' && needs.variables-setup.outputs.dialtone_vue3_release_tag || needs.variables-setup.outputs.release_tag }}
+        env:
+          RELEASE_TAG: ${{ matrix.package == 'dialtone-vue3' && needs.variables-setup.outputs.dialtone_vue3_release_tag || needs.variables-setup.outputs.release_tag }}
         run: >
           pnpm nx run ${{ matrix.package }}:publish
           --publish-branch=${{ needs.variables-setup.outputs.current_branch }}
-          --tag=${{ matrix.release-tag }}
+          --tag=${{ env.RELEASE_TAG }}
           --dry-run
 
       # Publish iOS
