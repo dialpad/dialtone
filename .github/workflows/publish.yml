@@ -4,23 +4,26 @@ on:
   workflow_dispatch:
     inputs:
       package:
-        type: 'choice'
+        description: 'Select the package you want to publish'
         required: true
-        description: 'Select a package to run a single release, leave empty to release all'
+        default: 'dialtone'
+        type: 'choice'
         options:
-          - all
           - dialtone
-          - css
-          - emojis
-          - icons
-          - tokens
-          - vue2
-          - vue3
-          - eslint-plugin
-          - stylelint-plugin
-  workflow_run:
-    types: [completed]
-    workflows: ["Release packages"]
+          - dialtone-css
+          - dialtone-emojis
+          - dialtone-icons
+          - dialtone-tokens
+          - dialtone-vue2
+          - dialtone-vue3
+          - eslint-plugin-dialtone
+          - stylelint-plugin-dialtone
+  push:
+    branches:
+      - production
+      - alpha
+      - beta
+      - next
 
 env:
   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -30,9 +33,9 @@ jobs:
   variables-setup:
     runs-on: ubuntu-latest
     outputs:
-      current_branch: ${{ contains( fromJSON('["production", "fix-publish-workflow"]'), steps.branch-name.outputs.current_branch) && 'production' || steps.branch-name.outputs.current_branch }}
-      release_tag: ${{ contains( fromJSON('["production", "fix-publish-workflow"]'), steps.branch-name.outputs.current_branch) && 'latest' || steps.branch-name.outputs.current_branch }}
-      dialtone_vue3_release_tag: ${{ contains( fromJSON('["production", "fix-publish-workflow"]'), steps.branch-name.outputs.current_branch) && 'vue3' || format('vue3-{0}', steps.branch-name.outputs.current_branch) }}
+      current_branch: ${{ steps.branch-name.outputs.current_branch }}
+      release_tag: ${{ steps.branch-name.outputs.current_branch == 'production' && 'latest' || steps.branch-name.outputs.current_branch }}
+      dialtone_vue3_release_tag: ${{ steps.branch-name.outputs.current_branch == 'production' && 'vue3' || format('vue3-{0}', steps.branch-name.outputs.current_branch) }}
     steps:
       - name: Get branch name
         id: branch-name
@@ -40,21 +43,19 @@ jobs:
 
   filter-actions:
     runs-on: ubuntu-latest
-    needs: variables-setup
     outputs:
-      packages: ${{ steps.filter.outputs.changes }}
+      packages: ${{ github.event_name == 'push' && steps.filter-path.outputs.changes || steps.filter-input.outputs.package }}
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-        with:
-          ref: ${{ needs.variables-setup.outputs.current_branch }}
 
-      - uses: dorny/paths-filter@v3
-        id: filter
+      - name: Filter actions by path
+        if: ${{ github.event_name == 'push' }}
+        uses: dorny/paths-filter@v3
+        id: filter-path
         with:
+          base: ${{ github.ref }}
           list-files: 'json'
-          #base: ${{ needs.variables-setup.outputs.current_branch }}
-          #ref: ${{ needs.variables-setup.outputs.current_branch }}
           filters: |
             dialtone:
               - 'package.json'
@@ -75,6 +76,13 @@ jobs:
             stylelint-plugin-dialtone:
               - 'packages/stylelint-plugin-dialtone/package.json'
 
+
+      - name: Filter actions by input
+        if: ${{ github.event_name == 'workflow_dispatch' }}
+        id: filter-input
+        run: |
+          echo "package=[${{ github.event.inputs.package }}]" >> $GITHUB_OUTPUT
+
   check-dialpad-member:
     runs-on: ubuntu-latest
     steps:
@@ -88,7 +96,7 @@ jobs:
 
   publish:
     needs: [ variables-setup, check-dialpad-member, filter-actions ]
-    if: ${{ needs.filter-actions.outputs.packages != '[]' }}
+    if: ${{ github.event_name == 'workflow_dispatch' || (github.event_name == 'push' && needs.filter-actions.outputs.packages != '[]') }}
     strategy:
       matrix:
         package: ${{ fromJSON(needs.filter-actions.outputs.packages) }}
