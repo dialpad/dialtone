@@ -87,6 +87,7 @@ jobs:
 
   publish:
     needs: [ variables-setup, check-dialpad-member, filter-actions ]
+    if: ${{ needs.filter-actions.outputs.packages != '[]' }}
     strategy:
       matrix:
         package: ${{ fromJSON(needs.filter-actions.outputs.packages) }}
