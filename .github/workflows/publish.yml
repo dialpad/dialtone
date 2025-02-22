@@ -155,7 +155,6 @@ jobs:
           pnpm nx run ${{ matrix.package }}:publish
           --publish-branch=${{ needs.variables-setup.outputs.current_branch }}
           --tag=${{ env.RELEASE_TAG }}
-          --dry-run
 
       # Publish iOS
       - name: Build swift
