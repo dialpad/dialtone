@@ -20,6 +20,7 @@ on:
           - stylelint-plugin-dialtone
   push:
     branches:
+      - fix-publish-workflow
       - production
       - alpha
       - beta
