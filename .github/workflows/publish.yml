@@ -52,8 +52,8 @@ jobs:
       - uses: dorny/paths-filter@v3
         id: filter
         with:
-          #base: ${{ needs.variables-setup.outputs.current_branch }}
-          ref: ${{ needs.variables-setup.outputs.current_branch }}
+          base: ${{ needs.variables-setup.outputs.current_branch }}
+          #ref: ${{ needs.variables-setup.outputs.current_branch }}
           filters: |
             dialtone:
               - 'package.json'
