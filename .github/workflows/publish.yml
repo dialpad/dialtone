@@ -82,7 +82,7 @@ jobs:
         if: ${{ github.event_name == 'workflow_dispatch' }}
         id: filter-input
         run: |
-          echo "package=[${{ github.event.inputs.package }}]" >> $GITHUB_OUTPUT
+          echo 'package=["${{ github.event.inputs.package }}"]' >> $GITHUB_OUTPUT
 
   check-dialpad-member:
     runs-on: ubuntu-latest
