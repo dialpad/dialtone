@@ -52,7 +52,7 @@ jobs:
       - uses: dorny/paths-filter@v3
         id: filter
         with:
-          base: ${{ needs.variables-setup.outputs.current_branch }}
+          #base: ${{ needs.variables-setup.outputs.current_branch }}
           ref: ${{ needs.variables-setup.outputs.current_branch }}
           filters: |
             dialtone:
@@ -98,91 +98,93 @@ jobs:
             registry_url: //registry.npmjs.org/
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-        with:
-          ref: ${{ needs.variables-setup.outputs.current_branch }}
-
-      - name: Use Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: 22
-
-      - name: Use pnpm
-        uses: pnpm/action-setup@v3
-        with:
-          version: 9
-          run_install: false
-
-      - name: Get pnpm store directory
-        shell: bash
-        run: |
-          echo "STORE_PATH=$(pnpm store path --silent)" >> $GITHUB_ENV
-
-      - name: Setup pnpm cache
-        uses: actions/cache@v4
-        with:
-          path: ${{ env.STORE_PATH }}
-          key: "${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}"
-          restore-keys: |
-            ${{ runner.os }}-pnpm-store-
-
-      - name: Install dependencies
-        run: pnpm install --frozen-lockfile
-
-      - name: Set registry to GitHub packages
-        if: matrix.registry == 'GitHub'
-        run: pnpm config set @dialpad:registry https://npm.pkg.github.com
-
-      - name: Set ${{ matrix.registry }} auth token
-        run: pnpm config set ${{ matrix.registry_url }}:_authToken=${{ matrix.registry == 'GitHub' && env.GITHUB_TOKEN || secrets.DIALTONE_NPM_TOKEN }}
-
-      # Publish npm/GitHub
-      - name: Publish ${{ matrix.package }}@${{ matrix.package == 'dialtone-vue3' && needs.variables-setup.outputs.dialtone_vue3_release_tag || needs.variables-setup.outputs.release_tag }}
-        env:
-          RELEASE_TAG: ${{ matrix.package == 'dialtone-vue3' && needs.variables-setup.outputs.dialtone_vue3_release_tag || needs.variables-setup.outputs.release_tag }}
-        run: >
-          pnpm nx run ${{ matrix.package }}:publish
-          --publish-branch=${{ needs.variables-setup.outputs.current_branch }}
-          --tag=${{ env.RELEASE_TAG }}
-          --dry-run
-
-      # Publish iOS
-      - name: Build swift
-        if: ${{ false && needs.variables-setup.outputs.current_branch == 'production' && matrix.package == 'dialtone-tokens' }}
-        run: pnpm nx run dialtone-tokens:publish:ios-package
-
-      - name: Publish production - Swift
-        if: ${{ false && needs.variables-setup.outputs.current_branch == 'production' && matrix.package == 'dialtone-tokens' }}
-        uses: cpina/github-action-push-to-another-repository@v1.5.1
-        env:
-          API_TOKEN_GITHUB: ${{ secrets.DIALTONE_CI_TOKEN }}
-        with:
-          user-email: 'dialtone@dialpad.com'
-          source-directory: 'packages/dialtone-tokens/dist_ios'
-          destination-repository-name: 'dialtone-tokens-swift'
-          destination-github-username: 'dialpad'
-          commit-message: "dialtone-tokens-swift release"
-
-      # Publish Android
-      - name: Setup Java
-        if: ${{ false && needs.variables-setup.outputs.current_branch == 'production' && matrix.package == 'dialtone-tokens' }}
-        uses: actions/setup-java@v4
-        with:
-          java-version: 17
-          distribution: 'temurin'
-          cache: 'gradle'
-          cache-dependency-path: |
-            packages/dialtone-tokens/*.gradle*
-            packages/dialtone-tokens/**/gradle-wrapper.properties
-
-      - name: Build android
-        if: ${{ false && needs.variables-setup.outputs.current_branch == 'production' && matrix.package == 'dialtone-tokens' }}
-        run: pnpm nx run dialtone-tokens:publish:android-package
-
-      - name: Publish android - Gradle
-        if: ${{ false && needs.variables-setup.outputs.current_branch == 'production' && matrix.package == 'dialtone-tokens' }}
-        working-directory: ./packages/dialtone-tokens
-        env:
-          GITHUB_USER: braddialpad
-        run: ./gradlew publish
+      - name: Test
+        run: echo ${{ matrix.package }}
+#      - name: Checkout
+#        uses: actions/checkout@v4
+#        with:
+#          ref: ${{ needs.variables-setup.outputs.current_branch }}
+#
+#      - name: Use Node.js
+#        uses: actions/setup-node@v4
+#        with:
+#          node-version: 22
+#
+#      - name: Use pnpm
+#        uses: pnpm/action-setup@v3
+#        with:
+#          version: 9
+#          run_install: false
+#
+#      - name: Get pnpm store directory
+#        shell: bash
+#        run: |
+#          echo "STORE_PATH=$(pnpm store path --silent)" >> $GITHUB_ENV
+#
+#      - name: Setup pnpm cache
+#        uses: actions/cache@v4
+#        with:
+#          path: ${{ env.STORE_PATH }}
+#          key: "${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}"
+#          restore-keys: |
+#            ${{ runner.os }}-pnpm-store-
+#
+#      - name: Install dependencies
+#        run: pnpm install --frozen-lockfile
+#
+#      - name: Set registry to GitHub packages
+#        if: matrix.registry == 'GitHub'
+#        run: pnpm config set @dialpad:registry https://npm.pkg.github.com
+#
+#      - name: Set ${{ matrix.registry }} auth token
+#        run: pnpm config set ${{ matrix.registry_url }}:_authToken=${{ matrix.registry == 'GitHub' && env.GITHUB_TOKEN || secrets.DIALTONE_NPM_TOKEN }}
+#
+#      # Publish npm/GitHub
+#      - name: Publish ${{ matrix.package }}@${{ matrix.package == 'dialtone-vue3' && needs.variables-setup.outputs.dialtone_vue3_release_tag || needs.variables-setup.outputs.release_tag }}
+#        env:
+#          RELEASE_TAG: ${{ matrix.package == 'dialtone-vue3' && needs.variables-setup.outputs.dialtone_vue3_release_tag || needs.variables-setup.outputs.release_tag }}
+#        run: >
+#          pnpm nx run ${{ matrix.package }}:publish
+#          --publish-branch=${{ needs.variables-setup.outputs.current_branch }}
+#          --tag=${{ env.RELEASE_TAG }}
+#          --dry-run
+#
+#      # Publish iOS
+#      - name: Build swift
+#        if: ${{ false && needs.variables-setup.outputs.current_branch == 'production' && matrix.package == 'dialtone-tokens' }}
+#        run: pnpm nx run dialtone-tokens:publish:ios-package
+#
+#      - name: Publish production - Swift
+#        if: ${{ false && needs.variables-setup.outputs.current_branch == 'production' && matrix.package == 'dialtone-tokens' }}
+#        uses: cpina/github-action-push-to-another-repository@v1.5.1
+#        env:
+#          API_TOKEN_GITHUB: ${{ secrets.DIALTONE_CI_TOKEN }}
+#        with:
+#          user-email: 'dialtone@dialpad.com'
+#          source-directory: 'packages/dialtone-tokens/dist_ios'
+#          destination-repository-name: 'dialtone-tokens-swift'
+#          destination-github-username: 'dialpad'
+#          commit-message: "dialtone-tokens-swift release"
+#
+#      # Publish Android
+#      - name: Setup Java
+#        if: ${{ false && needs.variables-setup.outputs.current_branch == 'production' && matrix.package == 'dialtone-tokens' }}
+#        uses: actions/setup-java@v4
+#        with:
+#          java-version: 17
+#          distribution: 'temurin'
+#          cache: 'gradle'
+#          cache-dependency-path: |
+#            packages/dialtone-tokens/*.gradle*
+#            packages/dialtone-tokens/**/gradle-wrapper.properties
+#
+#      - name: Build android
+#        if: ${{ false && needs.variables-setup.outputs.current_branch == 'production' && matrix.package == 'dialtone-tokens' }}
+#        run: pnpm nx run dialtone-tokens:publish:android-package
+#
+#      - name: Publish android - Gradle
+#        if: ${{ false && needs.variables-setup.outputs.current_branch == 'production' && matrix.package == 'dialtone-tokens' }}
+#        working-directory: ./packages/dialtone-tokens
+#        env:
+#          GITHUB_USER: braddialpad
+#        run: ./gradlew publish
