@@ -900,6 +900,10 @@
           }
         },
         "description": "Background color for a modal-like backdrop."
+      },
+      "ai": {
+        "value": "{color.gradient.gold-red-magenta-purple}",
+        "type": "color"
       }
     },
     "border": {
@@ -936,7 +940,7 @@
           "studio.tokens": {
             "modify": {
               "type": "alpha",
-              "value": ".25",
+              "value": ".3",
               "space": "hsl"
             }
           }
@@ -1108,7 +1112,7 @@
         "type": "color"
       },
       "ai": {
-        "value": "{color.gradient.magenta-purple}",
+        "value": "{color.gradient.gold-red-magenta-purple}",
         "type": "color"
       },
       "accent": {
@@ -1668,6 +1672,10 @@
           "value": "{color.border.default}",
           "type": "color"
         },
+        "hover": {
+          "value": "{color.border.moderate}",
+          "type": "color"
+        },
         "focus": {
           "value": "{color.border.focus}",
           "type": "color"
@@ -1898,11 +1906,11 @@
             "type": "color"
           },
           "hover": {
-            "value": "{color.black.600}",
+            "value": "{color.surface.moderate-opaque-inverted}",
             "type": "color"
           },
           "active": {
-            "value": "{color.black.500}",
+            "value": "{color.surface.bold-opaque-inverted}",
             "type": "color"
           },
           "primary": {

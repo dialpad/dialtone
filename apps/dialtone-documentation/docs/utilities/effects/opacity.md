@@ -86,7 +86,7 @@ Use `fv:d-o{n}` to change an element's :focus-visible state opacity [only when f
     <template #content>
       <tbody>
         <tr v-for="{className, value} in opacities">
-          <th scope="row" class="d-code--sm d-fc-purple-400">.d-o{{className}}</th>
+          <th scope="row" class="d-code--sm d-docsite-code">.d-o{{className}}</th>
           <td class="d-code--sm">opacity: {{value}} !important;</td>
         </tr>
       </tbody>

@@ -49,7 +49,7 @@ Use `d-tt-capitalize` to capitalize an element's text.
   <template #content>
     <tbody>
       <tr v-for="i in transform">
-        <th scope="row" class="d-code--sm d-fc-purple-400">.d-tt-{{ i }}</th>
+        <th scope="row" class="d-code--sm d-docsite-code">.d-tt-{{ i }}</th>
         <td class="d-code--sm">text-transform: {{ i }} !important;</td>
       </tr>
     </tbody>

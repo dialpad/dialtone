@@ -163,7 +163,7 @@ import { alignContent } from '@data/flex.json';
  <template #content>
     <tbody>
       <tr v-for="{ class: className, output } in alignContent">
-        <th scope="row" class="d-code--sm d-fc-purple-400">.d-{{ className }}</th>
+        <th scope="row" class="d-code--sm d-docsite-code">.d-{{ className }}</th>
         <td class="d-code--sm">{{ output }}</td>
       </tr>
     </tbody>

@@ -17,7 +17,7 @@ The `flex-direction` property declares a flex container’s main axis direction.
   </thead>
   <tbody>
     <tr v-for="{ class: className, output, description } in direction">
-      <th scope="row" class="d-code--sm d-fc-purple-400">.d-{{ className }}</th>
+      <th scope="row" class="d-code--sm d-docsite-code">.d-{{ className }}</th>
       <td class="d-code--sm">{{ output }}</td>
       <td>{{ description }}</td>
     </tr>
@@ -64,7 +64,7 @@ The `flex-wrap` property declares a flex container’s wrapping status. The defa
   </thead>
   <tbody>
     <tr v-for="{ class: className, output, description } in wrap">
-      <th scope="row" class="d-code--sm d-fc-purple-400">.d-{{ className }}</th>
+      <th scope="row" class="d-code--sm d-docsite-code">.d-{{ className }}</th>
       <td class="d-code--sm">{{ output }}</td>
       <td>{{ description }}</td>
     </tr>
@@ -101,7 +101,7 @@ The `flex-flow` property is a shorthand property that sets allows you to quickly
   </thead>
   <tbody>
     <tr v-for="{class: className, output, description} in flow">
-      <th scope="row" class="d-code--sm d-fc-purple-400">.d-{{ className }}</th>
+      <th scope="row" class="d-code--sm d-docsite-code">.d-{{ className }}</th>
       <td class="d-code--sm">{{ output }}</td>
       <td>{{ description }}</td>
     </tr>

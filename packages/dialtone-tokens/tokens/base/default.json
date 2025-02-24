@@ -113,7 +113,7 @@
         "type": "color"
       },
       "1000": {
-        "value": "#0E002A",
+        "value": "#10022C",
         "type": "color"
       }
     },
@@ -368,30 +368,63 @@
       }
     },
     "tan": {
+      "50": {
+        "value": "#F8F7F6",
+        "type": "color"
+      },
       "100": {
         "value": "#F2F0EE",
         "type": "color"
       },
       "200": {
-        "value": "#CEC8C4",
+        "value": "#E0DCD9",
         "type": "color"
       },
       "300": {
-        "value": "#87807B",
+        "value": "#CEC8C4",
         "type": "color"
       },
       "400": {
-        "value": "#3F3D3C",
+        "value": "#AAA4A1",
         "type": "color"
       },
       "500": {
-        "value": "#121212",
+        "value": "#87807B",
+        "type": "color"
+      },
+      "600": {
+        "value": "#635F5D",
+        "type": "color"
+      },
+      "700": {
+        "value": "#3F3D3C",
+        "type": "color"
+      },
+      "800": {
+        "value": "#282624",
+        "type": "color"
+      },
+      "900": {
+        "value": "#1D1C1B",
+        "type": "color"
+      },
+      "950": {
+        "value": "#151413",
+        "type": "color"
+      },
+      "1000": {
+        "value": "#0B0A09",
         "type": "color"
       }
     },
     "gradient": {
       "magenta-purple": {
         "value": "linear-gradient(135deg, {color.brand.magenta} 10%, {color.brand.purple} 90%)",
+        "type": "color",
+        "description": "Gradient for Ai-oriented treatments."
+      },
+      "gold-red-magenta-purple": {
+        "value": "linear-gradient(140deg, #FF5E2F 0%, {color.brand.red} 25%, {color.brand.magenta} 66%, #9D42EA 100%)",
         "type": "color",
         "description": "Gradient for Ai-oriented treatments."
       }

@@ -34,13 +34,13 @@
       >
         <th
           scope="row"
-          class="d-code--sm d-fc-purple-400"
+          class="d-code--sm d-docsite-code"
         >
           <dt-stack gap="300">
             <div>{{ name }}</div>
             <div
               v-if="required"
-              class="d-fc-critical"
+              class="d-fc-critical d-fw-normal"
             >
               required
             </div>

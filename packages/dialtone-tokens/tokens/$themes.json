@@ -408,7 +408,11 @@
       "checkbox.color.foreground.default": "S:cfd18a9afd0f34b6f6bd8f4e355a00b106d4d7a8,",
       "checkbox.color.foreground.checked": "S:d87815eeefc170a1ecf6a0902430591438063994,",
       "radio.color.foreground.default": "S:15e5c211eb73efd4e30a778b4d0832a095e7b74d,",
-      "radio.color.foreground.checked": "S:a87fd53132b508efad557916bc7caf6f42d47bb9,"
+      "radio.color.foreground.checked": "S:a87fd53132b508efad557916bc7caf6f42d47bb9,",
+      "checkbox.color.border.unchecked-hover": "S:98186641f51a54e093fb2a9e1dbbc583ce11b7ef,",
+      "radio.color.border.unchecked-hover": "S:e036a8502762ed8fbe2f176609d5f513976624c2,",
+      "inputs.color.border.hover": "S:cd1adb39265b75f7598b176833cf75bbe0d4cf35,",
+      "color.surface.ai": "S:096e8f73c95e27f58042e75a271514caea787467,"
     },
     "selectedTokenSets": {
       "base/default": "source",
@@ -1553,8 +1557,6 @@
       "action.color.background.critical.primary.hover": "eeef76b474ef8ed7b4484c8b5f3e8df705ce4d8b",
       "action.color.background.critical.primary.active": "638cdc1455db604011c30c1707c30739b42f560f",
       "action.color.background.inverted.default": "1409726987e14cadfa125e6949764d66e3ce4fbf",
-      "action.color.background.inverted.hover": "692b180ab200a794cccc80dc663d907e1ecee767",
-      "action.color.background.inverted.active": "6bb609da881562fdd34bbbb091f5ccc36cb1aad2",
       "action.color.background.inverted.primary.default": "aafbbbe3f7a1d9212aaa5b9a72bb83355437fd87",
       "action.color.background.inverted.primary.hover": "d871f1cf7e690ff7181be04d8fd2fa56e898de31",
       "action.color.background.muted.default": "d0b5ee9bdaf4de950a5c432e976635adbc077b5d",
@@ -3015,8 +3017,6 @@
       "action.color.background.critical.primary.hover": "e8a380d5729ba55514c3dd5bda47a0913a1ee498",
       "action.color.background.critical.primary.active": "e2730191281f4260f6844b1da5d73ebc8315b6ae",
       "action.color.background.inverted.default": "10773f64549d0090d274953be08880c2405e2024",
-      "action.color.background.inverted.hover": "d80776cc193ad57a64316562825292c98bc0531c",
-      "action.color.background.inverted.active": "fc9acaef3bc8256bd3c23d77ecd41c9a6daffd43",
       "action.color.background.inverted.primary.default": "f4f296397c7fc4dd54d2fe8112f0842d6e09e484",
       "action.color.background.inverted.primary.hover": "842feb93b847e26df6a52ec0e9c66f2cd6a257cd",
       "action.color.background.muted.default": "ca909de0b20a2e94031e7b694138eb5c3639dd1d",
@@ -3882,7 +3882,15 @@
       "color.red.700": "S:c6932fd2b3b33f89b544a7a8ffec6b80ed37067f,",
       "color.red.900": "S:6a6434d54df80145ceb2460202603b2cca751f99,",
       "color.red.1000": "S:50b830d0e69274cfa1b07871953bc78227e4ff18,",
-      "color.brand.red": "S:505f22996175e38f4a414f5ffb3a633c94b5248d,"
+      "color.brand.red": "S:505f22996175e38f4a414f5ffb3a633c94b5248d,",
+      "color.gradient.gold-red-magenta-purple": "S:92c8a3ad81be428e66001b7e1eb916ea28c17a7c,",
+      "color.tan.50": "S:4d5ef4aebe3ad9ee6564ff3a7c4022c6e88193ba,",
+      "color.tan.600": "S:bb695bbb380d90b69a1d7e606adeef23d61a044d,",
+      "color.tan.700": "S:fd41e4bfa5b8753e1668e0f63a2c1ac4e41e1d42,",
+      "color.tan.800": "S:d9342a5eb6792a3373b0c9ba799d6d3219116158,",
+      "color.tan.900": "S:fe3f9806f64ce88fc1e3deb671f311d0cb93518b,",
+      "color.tan.950": "S:70dc42b0677b60e264fc21604852a0d3fcbee36c,",
+      "color.tan.1000": "S:ed489ad856a057b5919756ae0d3c0c3f363bf324,"
     },
     "selectedTokenSets": {
       "root": "enabled",

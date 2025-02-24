@@ -27,10 +27,10 @@
             </div>
           </div>
         </th>
-        <td class="d-code--sm d-fc-purple-400">
+        <td class="d-code--sm d-docsite-code">
           var(--dt-color-border-{{ c }})
         </td>
-        <td class="d-code--sm d-fc-purple-400">
+        <td class="d-code--sm d-docsite-code">
           .d-bc-{{ c }}
         </td>
       </tr>

@@ -47,19 +47,19 @@ Use `d-wmn{n}` to set a fixed minimum width for an element. This can be combined
     </thead>
     <tbody>
       <tr v-for="i in percentage">
-        <th scope="row" class="d-code--sm d-fc-purple-400">.d-wmn{{ i }}p</th>
+        <th scope="row" class="d-code--sm d-docsite-code">.d-wmn{{ i }}p</th>
         <td class="d-code--sm">min-width: {{ i }}% !important;</td>
       </tr>
     </tbody>
     <tbody>
       <tr v-for="i in fixed">
-        <th scope="row" class="d-code--sm d-fc-purple-400">.d-wmn{{ i }}</th>
+        <th scope="row" class="d-code--sm d-docsite-code">.d-wmn{{ i }}</th>
         <td class="d-code--sm">min-width: {{ i }}px !important;</td>
       </tr>
     </tbody>
     <tbody>
       <tr v-for="i in other">
-        <th scope="row" class="d-code--sm d-fc-purple-400">.d-wmn-{{ i }}</th>
+        <th scope="row" class="d-code--sm d-docsite-code">.d-wmn-{{ i }}</th>
         <td class="d-code--sm">min-width: {{ i }} !important;</td>
       </tr>
     </tbody>

@@ -52,13 +52,13 @@ Use `d-b{a|t|r|b|l}s-dotted` to change the border style to dotted on your elemen
     <template #content>
       <tbody>
         <tr>
-          <th scope="row" class="d-code--sm d-fc-purple-400">.d-bas-unset</th>
+          <th scope="row" class="d-code--sm d-docsite-code">.d-bas-unset</th>
           <td class="d-code--sm">border-style: unset !important;</td>
         </tr>
       </tbody>
       <tbody v-for="s in ['dashed', 'dotted']">
         <tr v-for="i in ['all', 'top', 'right', 'bottom', 'left']">
-          <th scope="row" class="d-code--sm d-fc-purple-400">.d-b{{ i[0] }}s-{{ s }}</th>
+          <th scope="row" class="d-code--sm d-docsite-code">.d-b{{ i[0] }}s-{{ s }}</th>
           <td class="d-code--sm">
             <span v-if="i === 'all'">border-style: {{ s }} !important;</span>
             <span v-else>border-{{i}}-style: {{ s }} !important;</span>

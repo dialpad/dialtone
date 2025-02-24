@@ -11,7 +11,7 @@ Set an element's z-index by using a class (`.d-zi-{level}`>). These classes matc
   <template #content>
     <tbody>
       <tr v-for="{ name, output } in zIndex">
-        <th scope="row" class="d-code--sm d-fc-purple-400">.d-zi-{{ name }}</th>
+        <th scope="row" class="d-code--sm d-docsite-code">.d-zi-{{ name }}</th>
         <td class="d-code--sm">z-index: {{ output }};</td>
       </tr>
     </tbody>

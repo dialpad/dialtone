@@ -20,15 +20,15 @@ change in other platforms (mobile, tc8, tv).
 
 <code-well-header class="d-d-flex d-jc-center d-fd-column d-p24 d-bgc-purple-100 d-w100p d-hmn102" custom>
   <div class="d-d-grid d-g16 d-ai-center" style="grid-template-columns: 10rem 1fr">
-    <div class="d-code--sm d-fc-purple-400">.d-fs-100</div>
+    <div class="d-code--sm d-docsite-code">.d-fs-100</div>
     <div><p class="d-fs-100">The quick brown fox jumps over the lazy dog.</p></div>
-    <div class="d-code--sm d-fc-purple-400">.d-fs-200</div>
+    <div class="d-code--sm d-docsite-code">.d-fs-200</div>
     <div><p class="d-fs-200">The quick brown fox jumps over the lazy dog.</p></div>
-    <div class="d-code--sm d-fc-purple-400">.d-fs-300</div>
+    <div class="d-code--sm d-docsite-code">.d-fs-300</div>
     <div><p class="d-fs-300">The quick brown fox jumps over the lazy dog.</p></div>
-    <div class="d-code--sm d-fc-purple-400">.d-fs-400</div>
+    <div class="d-code--sm d-docsite-code">.d-fs-400</div>
     <div><p class="d-fs-400">The quick brown fox jumps over the lazy dog.</p></div>
-    <div class="d-code--sm d-fc-purple-400">.d-fs-500</div>
+    <div class="d-code--sm d-docsite-code">.d-fs-500</div>
     <div><p class="d-fs-500">The quick brown fox jumps over the lazy dog.</p></div>
   </div>
 </code-well-header>
@@ -61,7 +61,7 @@ change in other platforms (mobile, tc8, tv).
     <tbody>
       <tr v-for="{ stop, size, output } in fontSize.product">
         <th scope="row">{{ size }}px</th>
-        <td class="d-code--sm d-fc-purple-400">.d-fs-{{ stop }}</td>
+        <td class="d-code--sm d-docsite-code">.d-fs-{{ stop }}</td>
         <td>
           <div class="d-d-flex d-jc-space-between d-ai-center">
             <div class="d-fl1 d-code--sm">
@@ -91,7 +91,7 @@ change in other platforms (mobile, tc8, tv).
     <tbody>
       <tr v-for="{ stop, size, output } in fontSize.mobile">
         <th scope="row">{{ size }}px</th>
-        <td class="d-code--sm d-fc-purple-400">.d-fs-{{ stop }}-mobile</td>
+        <td class="d-code--sm d-docsite-code">.d-fs-{{ stop }}-mobile</td>
         <td>
           <div class="d-d-flex d-jc-space-between d-ai-center">
             <div class="d-fl1 d-code--sm">
@@ -121,7 +121,7 @@ change in other platforms (mobile, tc8, tv).
     <tbody>
       <tr v-for="{ stop, size, output } in fontSize.tc8">
         <th scope="row">{{ size }}px</th>
-        <td class="d-code--sm d-fc-purple-400">.d-fs-{{ stop }}-tc8</td>
+        <td class="d-code--sm d-docsite-code">.d-fs-{{ stop }}-tc8</td>
         <td>
           <div class="d-d-flex d-jc-space-between d-ai-center">
             <div class="d-fl1 d-code--sm">
@@ -151,7 +151,7 @@ change in other platforms (mobile, tc8, tv).
     <tbody>
       <tr v-for="{ stop, size, output } in fontSize.tv">
         <th scope="row">{{ size }}px</th>
-        <td class="d-code--sm d-fc-purple-400">.d-fs-{{ stop }}-tv</td>
+        <td class="d-code--sm d-docsite-code">.d-fs-{{ stop }}-tv</td>
         <td>
           <div class="d-d-flex d-jc-space-between d-ai-center">
             <div class="d-fl1 d-code--sm">

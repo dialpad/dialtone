@@ -76,7 +76,7 @@ Dialtone supports select marketing fonts and weights. Use the following combinat
   </thead>
   <tbody>
     <tr v-for="{ var: varName, output } in fontFamily.slice(0, -1)">
-      <td class="d-code--sm d-fc-purple-400">var(--ff-{{ varName }})</td>
+      <td class="d-code--sm d-docsite-code">var(--ff-{{ varName }})</td>
       <td class="d-code--sm">{{ output }}</td>
     </tr>
   </tbody>
@@ -93,7 +93,7 @@ Dialtone supports select marketing fonts and weights. Use the following combinat
   </thead>
   <tbody>
     <tr v-for="{ var: varName, output } in fontFamily">
-      <td class="d-code--sm d-fc-purple-400">.d-ff-{{ varName }}</td>
+      <td class="d-code--sm d-docsite-code">.d-ff-{{ varName }}</td>
       <td class="d-code--sm">font-family: {{ output }} !important;</td>
     </tr>
   </tbody>

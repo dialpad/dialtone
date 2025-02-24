@@ -103,7 +103,7 @@ Use `fv:d-bc-{color}` to change an element's border color when in `:focus-visibl
     <template #content>
       <tbody>
           <tr v-for="c in special">
-              <th scope="row" class="d-code--sm d-fc-purple-400">.d-bc-{{c}}</th>
+              <th scope="row" class="d-code--sm d-docsite-code">.d-bc-{{c}}</th>
               <td>
                   <div class="d-d-flex d-jc-space-between d-ai-center">
                       <div class="d-fl-grow1 d-code--sm">
@@ -126,7 +126,7 @@ Use `fv:d-bc-{color}` to change an element's border color when in `:focus-visibl
       </tbody>
       <tbody>
           <tr v-for="c in borders">
-              <th scope="row" class="d-code--sm d-fc-purple-400">.d-bc-{{c}}</th>
+              <th scope="row" class="d-code--sm d-docsite-code">.d-bc-{{c}}</th>
               <td>
                   <div class="d-d-flex d-jc-space-between d-ai-center">
                       <div class="d-fl-grow1 d-code--sm">
@@ -145,7 +145,7 @@ Use `fv:d-bc-{color}` to change an element's border color when in `:focus-visibl
       </tbody>
       <tbody v-for="{color: c, stops} in base">
           <tr v-for="{ stop, copy } in stops">
-              <th scope="row" class="d-code--sm d-fc-purple-400">.d-bc-{{ c }}-{{ stop }}</th>
+              <th scope="row" class="d-code--sm d-docsite-code">.d-bc-{{ c }}-{{ stop }}</th>
               <td>
                   <div class="d-d-flex d-jc-space-between d-ai-center">
                       <div class="d-fl-grow1 d-code--sm">

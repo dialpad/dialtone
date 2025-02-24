@@ -122,23 +122,23 @@ Use `d-h-auto` have the browser calculate and select a height.
     </thead>
     <tbody>
       <tr v-for="i in percentage">
-        <th scope="row" class="d-code--sm d-fc-purple-400">.d-h{{ i }}p</th>
+        <th scope="row" class="d-code--sm d-docsite-code">.d-h{{ i }}p</th>
         <td class="d-code--sm">height: {{ i }}% !important;</td>
       </tr>
     </tbody>
     <tbody>
       <tr v-for="i in fixed">
-        <th scope="row" class="d-code--sm d-fc-purple-400">.d-h{{ i }}</th>
+        <th scope="row" class="d-code--sm d-docsite-code">.d-h{{ i }}</th>
         <td class="d-code--sm">height: {{ i }}px !important;</td>
       </tr>
     </tbody>
     <tbody>
       <tr>
-        <th scope="row" class="d-code--sm d-fc-purple-400">.d-h100vh</th>
+        <th scope="row" class="d-code--sm d-docsite-code">.d-h100vh</th>
         <td class="d-code--sm">height: 100vh !important;</td>
       </tr>
       <tr v-for="i in other">
-        <th scope="row" class="d-code--sm d-fc-purple-400">.d-h-{{ i }}</th>
+        <th scope="row" class="d-code--sm d-docsite-code">.d-h-{{ i }}</th>
         <td class="d-code--sm">height: {{ i }} !important;</td>
       </tr>
     </tbody>

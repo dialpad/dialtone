@@ -804,16 +804,6 @@
             }
           }
         },
-        "inverted": {
-          "hover": {
-            "value": "{color.black.800}",
-            "type": "color"
-          },
-          "active": {
-            "value": "{color.black.700}",
-            "type": "color"
-          }
-        },
         "muted": {
           "hover": {
             "value": "{color.surface.moderate-opaque}",

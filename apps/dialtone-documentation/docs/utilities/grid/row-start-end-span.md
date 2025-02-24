@@ -56,7 +56,7 @@ Use `d-gre{#}` to set an element's ending point. A reminder that CSS grid rows s
     <template #content>
       <tbody v-for="g in ['start', 'end', 'span']">
         <tr v-for="i in [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]">
-          <th scope="row" class="d-code--sm d-fc-purple-400">
+          <th scope="row" class="d-code--sm d-docsite-code">
             <span v-if="g === 'start'">.d-grs{{ i }}</span>
             <span v-else-if="g === 'end'">.d-gre{{ i }}</span>
             <span v-else>.d-gr{{ i }}</span>
@@ -74,11 +74,11 @@ Use `d-gre{#}` to set an element's ending point. A reminder that CSS grid rows s
           </td>
         </tr>
         <tr v-if="g === 'span'">
-          <th scope="row" class="d-code--sm d-fc-purple-400">.d-gr-full</th>
+          <th scope="row" class="d-code--sm d-docsite-code">.d-gr-full</th>
           <td class="d-code--sm">grid-row: 1 / -1 !important;</td>
         </tr>
         <tr>
-          <th scope="row" class="d-code--sm d-fc-purple-400">
+          <th scope="row" class="d-code--sm d-docsite-code">
             <span v-if="g === 'start'">
               .d-grs-auto
             </span>
@@ -102,7 +102,7 @@ Use `d-gre{#}` to set an element's ending point. A reminder that CSS grid rows s
           </td>
         </tr>
         <tr>
-          <th scope="row" class="d-code--sm d-fc-purple-400">
+          <th scope="row" class="d-code--sm d-docsite-code">
             <span v-if="g === 'start'">
               .d-grs-unset
             </span>

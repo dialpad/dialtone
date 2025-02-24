@@ -115,7 +115,7 @@ Use `d:d-fc-{color}` to set a different text color when the user prefers dark mo
       <tbody>
         <!-- Current Color -->
         <tr>
-          <th scope="row" class="d-code--sm d-fc-purple-400">.d-fc-current</th>
+          <th scope="row" class="d-code--sm d-docsite-code">.d-fc-current</th>
           <td>
             <div class="d-d-flex d-jc-space-between d-ai-center">
               <div class="d-fl1 d-code--sm">
@@ -129,7 +129,7 @@ Use `d:d-fc-{color}` to set a different text color when the user prefers dark mo
         </tr>
         <!-- Transparent -->
         <tr>
-          <th scope="row" class="d-code--sm d-fc-purple-400">.d-fc-transparent</th>
+          <th scope="row" class="d-code--sm d-docsite-code">.d-fc-transparent</th>
           <td>
             <div class="d-d-flex d-jc-space-between d-ai-center">
               <div class="d-fl1 d-code--sm">
@@ -143,7 +143,7 @@ Use `d:d-fc-{color}` to set a different text color when the user prefers dark mo
         </tr>
         <!-- Unset Color -->
         <tr>
-          <th scope="row" class="d-code--sm d-fc-purple-400">.d-fc-unset</th>
+          <th scope="row" class="d-code--sm d-docsite-code">.d-fc-unset</th>
           <td>
             <div class="d-d-flex d-jc-space-between d-ai-center">
               <div class="d-fl1 d-code--sm">
@@ -157,7 +157,7 @@ Use `d:d-fc-{color}` to set a different text color when the user prefers dark mo
         </tr>
         <!-- Semantic Colors -->
         <tr v-for="{ var: color, output } in fontColorVars">
-          <th scope="row" class="d-code--sm d-fc-purple-400">.d-fc-{{ color }}</th>
+          <th scope="row" class="d-code--sm d-docsite-code">.d-fc-{{ color }}</th>
           <td>
             <div class="d-d-flex d-jc-space-between d-ai-center">
               <div class="d-fl1 d-code--sm">
@@ -173,7 +173,7 @@ Use `d:d-fc-{color}` to set a different text color when the user prefers dark mo
       </tbody>
       <tbody v-for="{ color, stops } in baseColors.lightMode">
         <tr v-for="{ stop } in stops">
-          <th scope="row" class="d-code--sm d-fc-purple-400">.d-fc-{{ color }}-{{ stop }}</th>
+          <th scope="row" class="d-code--sm d-docsite-code">.d-fc-{{ color }}-{{ stop }}</th>
           <td>
             <div class="d-d-flex d-jc-space-between d-ai-center">
               <div class="d-fl1 d-code--sm">

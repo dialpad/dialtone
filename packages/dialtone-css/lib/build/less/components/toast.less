@@ -25,7 +25,7 @@
 .d-toast {
     //  Component CSS Vars
     //  ------------------------------------------------------------------------
-    --toast-color-shadow: hsla(var(--dt-color-black-900-hsl) / 0.15);
+    --toast-color-shadow: var(--dt-color-border-subtle);
     --toast-box-shadow: 0 0 0 var(--dt-size-100) var(--toast-color-shadow) inset, var(--dt-shadow-medium);
 
     z-index: var(--zi-notification);
@@ -74,7 +74,7 @@
 .d-toast--chat {
   .d-notice__icon,
   .d-toast__meta {
-    color: var(--dt-color-black-500);
+    color: var(--dt-color-foreground-tertiary);
   }
 
   .d-toast__meta {

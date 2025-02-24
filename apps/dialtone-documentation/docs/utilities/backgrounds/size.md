@@ -38,7 +38,7 @@ Use `d-bgs-{n}` to control the size of element's background image.
   <template #content>
     <tbody>
       <tr v-for="i in sizes">
-        <th scope="row" class="d-code--sm d-fc-purple-400">.d-bgp-{{ i }}</th>
+        <th scope="row" class="d-code--sm d-docsite-code">.d-bgp-{{ i }}</th>
         <td class="d-code--sm">
           background-size:
             <span v-if="i === 'var'"> var(--bgg-size, 100% 100%); </span>

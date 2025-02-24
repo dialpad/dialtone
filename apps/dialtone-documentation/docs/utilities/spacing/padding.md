@@ -65,7 +65,7 @@ Padding can be added to an element by using a utility class (i.e. `.d-p[#]`) or 
       <!-- Positive paddings -->
       <tbody v-for="i in directions">
           <tr v-for="{ value: val, output } in values">
-              <th scope="row" class="d-code--sm d-fc-purple-400">
+              <th scope="row" class="d-code--sm d-docsite-code">
                 <span v-if="i !== 'All'">.d-p{{ i[0] }}{{ val }}</span>
                 <span v-else>.d-p{{ val }}</span>
               </th>
@@ -88,7 +88,7 @@ Padding can be added to an element by using a utility class (i.e. `.d-p[#]`) or 
       <!-- Unset paddings -->
       <tbody>
         <tr v-for="i in directions">
-          <th scope="row" class="d-code--sm d-fc-purple-400">
+          <th scope="row" class="d-code--sm d-docsite-code">
             <span v-if="i !== 'All'">.d-p{{ i[0] }}-unset</span>
             <span v-else>.d-p-unset</span>
           </th>

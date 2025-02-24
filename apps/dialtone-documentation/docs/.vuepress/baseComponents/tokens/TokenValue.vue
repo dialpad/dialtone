@@ -1,5 +1,5 @@
 <template>
-  <div class="d-code--sm d-fc-purple-400 d-wmx164">
+  <div class="d-code--sm d-docsite-code d-wmx164">
     <div v-if="isCompositionToken(tokenValue)">
       <span v-for="value in tokenValue" :key="value">
         <span v-dt-tooltip="getTooltipValue(value)" :class="{ 'h:d-fc-secondary': getTooltipValue(value) }">

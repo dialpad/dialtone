@@ -70,7 +70,7 @@ Use `d-dco{n}` to change a divider opacity value.
     <template #content>
       <tbody v-for="{ color: c, stops } in baseColors">
         <tr v-for="{ stop, copy } in stops">
-          <th scope="row" class="d-code--sm d-fc-purple-400">.d-divide-{{ c }}-{{ stop }}</th>
+          <th scope="row" class="d-code--sm d-docsite-code">.d-divide-{{ c }}-{{ stop }}</th>
           <td>
             <div class="d-d-flex d-jc-space-between d-ai-center">
               <div class="d-fl-grow1 d-code--sm">

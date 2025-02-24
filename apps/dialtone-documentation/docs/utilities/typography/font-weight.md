@@ -19,7 +19,7 @@ description: Utilities to change an element's font-weight.
   <template #content>
     <tbody>
       <tr v-for="{ name, output } in weight">
-        <th scope="row" class="d-code--sm d-fc-purple-400">
+        <th scope="row" class="d-code--sm d-docsite-code">
           .d-fw-{{ name }}
         </th>
         <td class="d-code--sm">
@@ -36,13 +36,13 @@ Use `d-fw-{n}` to change an element's font-weight.
 
 <code-well-header class="d-d-flex d-jc-center d-fd-column d-p24 d-bgc-purple-100 d-w100p d-hmn102" custom>
   <div class="d-d-grid d-g16 d-ai-center" style="grid-template-columns: 10rem 1fr">
-    <div class="d-code--sm d-fc-purple-400">.d-fw-normal</div>
+    <div class="d-code--sm d-docsite-code">.d-fw-normal</div>
     <div><p class="d-fs-300 d-fw-normal">The quick brown fox jumps over the lazy dog.</p></div>
-    <div class="d-code--sm d-fc-purple-400">.d-fw-medium</div>
+    <div class="d-code--sm d-docsite-code">.d-fw-medium</div>
     <div><p class="d-fs-300 d-fw-medium">The quick brown fox jumps over the lazy dog.</p></div>
-    <div class="d-code--sm d-fc-purple-400">.d-fw-semibold</div>
+    <div class="d-code--sm d-docsite-code">.d-fw-semibold</div>
     <div><p class="d-fs-300 d-fw-semibold">The quick brown fox jumps over the lazy dog.</p></div>
-    <div class="d-code--sm d-fc-purple-400">.d-fw-bold</div>
+    <div class="d-code--sm d-docsite-code">.d-fw-bold</div>
     <div><p class="d-fs-300 d-fw-bold">The quick brown fox jumps over the lazy dog.</p></div>
   </div>
 </code-well-header>
@@ -69,7 +69,7 @@ Use `d-fw-{n}` to change an element's font-weight.
   </thead>
   <tbody>
     <tr v-for="{ name, output } in weight">
-      <th scope="row" class="d-code--sm d-fc-purple-400">var(--fw-{{ name }})</th>
+      <th scope="row" class="d-code--sm d-docsite-code">var(--fw-{{ name }})</th>
       <td class="d-code--sm">{{ output }}</td>
     </tr>
   </tbody>
