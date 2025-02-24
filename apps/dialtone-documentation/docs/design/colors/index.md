@@ -213,7 +213,7 @@ Key foreground colors rendered on surfaces to indicate hierarchy and importance.
   </tbody>
 </table>
 
-## Status text
+## Status Text
 
 Foreground colors distinguishing important information with a status role.
 
@@ -707,7 +707,7 @@ CSS variables for themeable parts of the UI, primarily targeting the topbar and 
 
 <ThemeColorTable />
 
-## Base palette
+## Base Palette
 
 Base colors are the literal value of all available colors. Use these only if all abstracted Text, Status text, Surface, or Border colors do not fit your need — consult a Product Designer.
 

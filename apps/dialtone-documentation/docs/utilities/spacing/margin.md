@@ -3,7 +3,7 @@ title: Margins
 description: Utilities to adjust an element's exterior spacing between other objects.
 ---
 
-## Add margin to all sides
+## Add Margin to All Sides
 
 <code-well-header class="d-fl-center d-p24 d-bgc-purple-100 d-bgo50 d-w100p d-hmn216" custom>
   <div class="d-bgc-purple-200 d-of-hidden"><div class="d-fl-center d-p16 d-m24 d-bgc-purple-300 d-bar4 d-code--md">d-m24</div></div>
@@ -13,7 +13,7 @@ description: Utilities to adjust an element's exterior spacing between other obj
 <div class="d-m24 ...">d-m24</div>
 ```
 
-## Add margin to a single side
+## Add Margin to a Single Side
 
 <code-well-header class="d-d-flex d-fw-wrap d-ai-start d-jc-center d-bgc-green-100 d-bgo50 d-w100p d-hmn216 d-flow24" custom>
   <div class="d-as-center d-bar8 d-bgc-green-100 d-of-hidden"><div class="d-fl-center d-mt12 d-p16 d-bgc-green-200 d-bbr4 d-code--md">d-mt12</div></div>
@@ -29,7 +29,7 @@ description: Utilities to adjust an element's exterior spacing between other obj
 <div class="d-ml32 ...">d-ml32</div>
 ```
 
-## Add horizontal margins
+## Add Horizontal Margins
 
 <code-well-header class="d-d-flex d-fw-wrap d-ai-start d-jc-center d-bgc-magenta-100 d-bgo50 d-w100p d-hmn216" custom>
   <div class="d-as-center d-bar8 d-bgc-magenta-100 d-of-hidden"><div class="d-fl-center d-mx24 d-p16 d-bgc-magenta-200 d-code--md">d-mx24</div></div>
@@ -39,7 +39,7 @@ description: Utilities to adjust an element's exterior spacing between other obj
 <div class="d-mx24 ...">d-mx24</div>
 ```
 
-## Add vertical margins
+## Add Vertical Margins
 
 <code-well-header class="d-d-flex d-fw-wrap d-ai-start d-jc-center d-bgc-red-100 d-bgo50 d-w100p d-hmn216" custom>
   <div class="d-as-center d-bar8 d-bgc-red-100 d-of-hidden"><div class="d-fl-center d-my24 d-p16 d-bgc-red-300 d-code--sm d-fc-primary-inverted">d-my24</div></div>
@@ -49,7 +49,7 @@ description: Utilities to adjust an element's exterior spacing between other obj
 <div class="d-my24 ...">d-my24</div>
 ```
 
-## Auto margins
+## Auto Margins
 
 Auto margins allow an element to fill a remaining space within an object. This is especially useful in flex layouts.
 

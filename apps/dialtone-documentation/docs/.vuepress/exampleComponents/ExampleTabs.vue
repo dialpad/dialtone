@@ -4,6 +4,7 @@
     :inverted="inverted"
     :borderless="borderless"
     :disabled="disabled"
+    @before-change="confirmBeforeLeave"
   >
     <template #tabs>
       <dt-tab
@@ -89,6 +90,23 @@ export default {
     inverted: {
       type: Boolean,
       default: false,
+    },
+
+    validate: {
+      type: Boolean,
+      default: false,
+    },
+  },
+
+  methods: {
+    confirmBeforeLeave (event) {
+      if (!this.validate) return;
+
+      const confirmed = confirm('Are you sure to change tab?');
+
+      if (!confirmed) {
+        event.preventDefault();
+      }
     },
   },
 };

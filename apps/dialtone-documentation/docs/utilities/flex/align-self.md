@@ -1,5 +1,5 @@
 ---
-title: Align self
+title: Align Self
 description: Utilities for setting how an element's is aligned along a parent's cross axis.
 ---
 
@@ -23,7 +23,7 @@ Use `d-as-stretch` to stretch an item along a parent's cross axis.
 </div>
 ```
 
-## Flex start
+## Flex Start
 
 Use `d-as-flex-start` to align an item to the start of the parent's cross axis.
 
@@ -63,7 +63,7 @@ Use `d-as-center` to align an item along the center of the parent's cross axis.
 </div>
 ```
 
-## Flex end
+## Flex End
 
 Use `d-as-flex-end` to align an item from the end of the parent's cross axis.
 

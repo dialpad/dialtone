@@ -1,3 +1,18 @@
+## [9.102.1](https://github.com/dialpad/dialtone/compare/dialtone/v9.102.0...dialtone/v9.102.1) (2025-02-21)
+
+
+### Bug Fixes
+
+* DP-128277 remove duplicated hasFooter from DtPopover ([#642](https://github.com/dialpad/dialtone/issues/642)) ([98a06e1](https://github.com/dialpad/dialtone/commit/98a06e14f59e98b077ce67dc44201ef95d42ff4d))
+
+# [9.102.0](https://github.com/dialpad/dialtone/compare/dialtone/v9.101.2...dialtone/v9.102.0) (2025-02-20)
+
+
+### Features
+
+* DLT-2370 add before-change event and improve tab behavior ([#633](https://github.com/dialpad/dialtone/issues/633)) ([dd43934](https://github.com/dialpad/dialtone/commit/dd4393485b1ca223e3679b51cf537fe216fb8c00))
+* DP-128277 footer slot for DtDropdown ([#635](https://github.com/dialpad/dialtone/issues/635)) ([38f0614](https://github.com/dialpad/dialtone/commit/38f061425c8eadea22919002b7d63d85ddcf3758))
+
 ## [9.101.2](https://github.com/dialpad/dialtone/compare/dialtone/v9.101.1...dialtone/v9.101.2) (2025-02-19)
 
 

@@ -82,7 +82,7 @@ The Avatar component is designed to prioritize different sources for content dis
     </tbody>
 </table>
 
-## Variants and examples
+## Variants and Examples
 
 ### Icon
 

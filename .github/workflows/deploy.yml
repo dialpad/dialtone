@@ -10,6 +10,7 @@ on:
       - next
       - production
       - staging
+      - rebrand-2025-beta
 
     paths:
       - 'packages/**'
@@ -78,6 +79,8 @@ jobs:
       DIALTONE_BUCKET_DIRECTORY: dialtone.dialpad.com${{ github.ref == 'refs/heads/production' && '/' || format('/{0}/', needs.get-branch-name.outputs.current_branch) }}
       DIALTONE_VUE_2_BUCKET_DIRECTORY: dialtone.dialpad.com/vue${{ github.ref == 'refs/heads/production' && '/' || format('/{0}/', needs.get-branch-name.outputs.current_branch) }}
       DIALTONE_VUE_3_BUCKET_DIRECTORY: dialtone.dialpad.com/vue3${{ github.ref == 'refs/heads/production' && '/' || format('/{0}/', needs.get-branch-name.outputs.current_branch) }}
+      DIALTONE_BUCKET_CLEANUP_EXCLUDE: '/alpha/|/beta/|/legacy/|/next/|/deploy-previews/|/vue/|/vue3/|/staging/|/rebrand-2025-beta/'
+      DIALTONE_VUE_BUCKET_CLEANUP_EXCLUDE: '/alpha/|/beta/|/legacy/|/next/|/deploy-previews/|/staging/|/rebrand-2025-beta/'
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -140,21 +143,21 @@ jobs:
         if: ${{ github.ref == 'refs/heads/production' }}
         run: >
           gcloud storage ls ${{ format('gs://{0}', env.DIALTONE_BUCKET_DIRECTORY) }} |
-          grep -v -E '/alpha/|/beta/|/legacy/|/next/|/deploy-previews/|/vue/|/vue3/|/staging/' |
+          grep -v -E "${{ env.DIALTONE_BUCKET_CLEANUP_EXCLUDE }}" |
           gcloud storage rm --recursive --read-paths-from-stdin
 
       - name: Clean up bucket Dialtone Vue 2
         if: ${{ github.ref == 'refs/heads/production' }}
         run: >
           gcloud storage ls ${{ format('gs://{0}', env.DIALTONE_VUE_2_BUCKET_DIRECTORY) }} |
-          grep -v -E '/alpha/|/beta/|/legacy/|/next/|/deploy-previews/|/staging/' |
+          grep -v -E "${{ env.DIALTONE_VUE_BUCKET_CLEANUP_EXCLUDE }}" |
           gcloud storage rm --recursive --read-paths-from-stdin
 
       - name: Clean up bucket Dialtone Vue 3
         if: ${{ github.ref == 'refs/heads/production' }}
         run: >
           gcloud storage ls ${{ format('gs://{0}', env.DIALTONE_VUE_3_BUCKET_DIRECTORY) }} |
-          grep -v -E '/alpha/|/beta/|/legacy/|/next/|/deploy-previews/|/staging/' |
+          grep -v -E "${{ env.DIALTONE_VUE_BUCKET_CLEANUP_EXCLUDE }}" |
           gcloud storage rm --recursive --read-paths-from-stdin
 
       # ---------------------- #

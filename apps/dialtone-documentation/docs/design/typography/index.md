@@ -3,9 +3,9 @@ title: Typography
 description: Clear, legible, and easy-to-read text.
 ---
 
-## Font properties
+## Font Properties
 
-### Font family
+### Font Family
 
 Dialtone's product UI font stack defers to the user's default system font, ensuring a seamless native experience.
 
@@ -16,7 +16,7 @@ Dialtone's product UI font stack defers to the user's default system font, ensur
   <svg-loader class="d-fl1" name="ff-linux" />
 </dt-stack>
 
-### Font weight
+### Font Weight
 
 Four weights for clear hierarchy and visual contrast among different elements.
 
@@ -27,7 +27,7 @@ Four weights for clear hierarchy and visual contrast among different elements.
   <svg-loader name="fw-bold" />
 </dt-stack>
 
-### Font size
+### Font Size
 
 Dictates the scale of text, enhancing readability and defining information hierarchy across content.
 
@@ -39,7 +39,7 @@ Dictates the scale of text, enhancing readability and defining information hiera
   <svg-loader name="fs-500" />
 </dt-stack>
 
-### Line height
+### Line Height
 
 Adjusts vertical spacing between lines of text, optimizing legibility and text flow.
 

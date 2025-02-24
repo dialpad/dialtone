@@ -1,9 +1,9 @@
 ---
-title: Auto spacing
+title: Auto Spacing
 description: Utilities for controlling the space between child elements.
 ---
 
-## Adding space vertically
+## Adding Space Vertically
 
 <code-well-header class="d-fl-center d-p24 d-bgc-purple-100 d-w100p d-hmn216" custom>
   <div class="d-fl-center d-fd-column d-bgc-tan-200 d-stack16 d-bar8">
@@ -21,7 +21,7 @@ description: Utilities for controlling the space between child elements.
 </div>
 ```
 
-## Adding space horizontally
+## Adding Space Horizontally
 
 <code-well-header class="d-fl-center d-p24 d-bgc-purple-100 d-w100p d-hmn216" custom>
   <div class="d-fl-center d-bgc-tan-200 d-flow24 d-bar8 d-fs-300 d-fw-bold d-ta-center">

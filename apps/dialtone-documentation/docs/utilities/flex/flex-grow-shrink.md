@@ -46,7 +46,7 @@ control the grow and shrink flex values separately with their own utility classe
 </div>
 ```
 
-## Flex grow
+## Flex Grow
 
 The `flex-grow` sets the flex container’s grow factor relative to the parent's main size. The default value is 0.
 
@@ -88,7 +88,7 @@ The `flex-grow` sets the flex container’s grow factor relative to the parent's
 </div>
 ```
 
-## Flex shrink
+## Flex Shrink
 
 The `flex-shrink` sets the flex container’s shrink factor relative to the parent's main size. The default value is 1.
 

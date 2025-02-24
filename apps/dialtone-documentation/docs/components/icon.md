@@ -34,7 +34,7 @@ import { DtIconUserPlus } from '@dialpad/dialtone-icons/vue3';
 <dt-icon-user-plus size="500" />
 ```
 
-### Without tree shaking (deprecated)
+### Without Tree Shaking (Deprecated)
 
 ```js
 import { DtIcon } from '@dialpad/dialtone'
@@ -65,7 +65,7 @@ Adjust the size using the `size` prop. Note that sizes 600, 700, and 800 are exc
 </div>
 </div>
 
-## Changing color
+## Changing Color
 
 <div class="d-d-grid d-g24 d-g-cols3 md:d-g-cols1">
 
@@ -137,7 +137,7 @@ When setting the color of an icon take these into considaration:
 </div>
 </div>
 
-## Icon and text alignment
+## Icon and Text Alignment
 
 <div class="d-d-grid d-g24 d-g-cols3 md:d-g-cols1">
 

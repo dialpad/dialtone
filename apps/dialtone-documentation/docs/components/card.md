@@ -52,7 +52,7 @@ They should be easy to scan for relevant and actionable information. Elements, l
 - The content of a card should be concise and offer only a preview of detailed content.
 - The headings should set clear expectations about the card’s purpose.
 
-## Variants and examples
+## Variants and Examples
 
 ### Base
 
@@ -202,7 +202,7 @@ vueCode='
 '
 showHtmlWarning />
 
-### Content only
+### Content Only
 
 <code-well-header>
   <div class="d-card d-w264">
@@ -229,7 +229,7 @@ vueCode='
 '
 showHtmlWarning />
 
-### With Header, Footer and scrollable content
+### With Header, Footer and Scrollable Content
 
 <code-well-header>
   <div class="d-card d-w264">

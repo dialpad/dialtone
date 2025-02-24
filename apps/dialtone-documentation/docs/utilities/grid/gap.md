@@ -3,7 +3,7 @@ title: Gap
 description: Utilities to control the spacing between columns, rows, or both in grids.
 ---
 
-## Adding universal row and column gaps
+## Adding Universal Row and Column Gaps
 
 Use `d-g{#}` to universally change the row and column gap space in grid layouts.
 
@@ -25,7 +25,7 @@ Use `d-g{#}` to universally change the row and column gap space in grid layouts.
 </div>
 ```
 
-## Independently changing row and column gaps
+## Independently Changing Row and Column Gaps
 
 Use `d-cg{#}` or `d-rg{#}` to independently change the row and column gap space in grid layouts.
 

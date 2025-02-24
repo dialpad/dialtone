@@ -15,7 +15,7 @@ Good error messages should:
 
 Good design can reduce the need for error messages by preventing them in the first place.
 
-## Voice and tone
+## Voice and Tone
 
 When writing error content, a common mistake is to lighten the mode or overwhelm users with technical reasons. Avoid these errors. Instead when writing content you should be straight-forward with the user:
 
@@ -40,13 +40,13 @@ When writing error content, a common mistake is to lighten the mode or overwhelm
 </template>
 </dialtone-usage>
 
-## Message types
+## Message Types
 
 Think about the error scope when selecting the correct message type. Is something wrong with the entire application, current screen, or a specific screen element?
 
 If the error cause is visible, show the error message as close to the problem source as possible. Error messages should be shown once the user has signaled they’ve finished with their work.
 
-### Validation errors
+### Validation Errors
 
 Occasionally it is helpful to provide error feedback to the user while the user is still typing. These type of error messages should not be used for “empty state” errors.
 
@@ -94,7 +94,7 @@ Error notifications should be rarely shown on the Launchpad page. Always attempt
 
 <img alt="Picture shows app level banner" src="/assets/images/content/app-banner@2x.png" class="d-w100p d-wmx464" />
 
-### Error pages
+### Error Pages
 
 Use an error page when a server error (e.g., 400 or 500-series errors) prevents a page from being displayed or account permissions are preventing a user from accessing a page.
 
@@ -105,7 +105,7 @@ We use two colors to communicate error message severity.
 * Use the color red when needing to communicate critical messages that need to be dealt with immediately to avoid receiving communication, using a feature, or accessing the Dialpad platform.
 * Use the color yellow when messages still demand attention, but aren’t blocking access to use Dialpad. This message color is more appropriate for items part of a user’s daily workflow.
 
-### Red (critical)
+### Red (Critical)
 
 Use critical messages to bring attention to tasks that, if not dealt with immediately, will noticeably impact or block access to feature(s) or the Dialpad platform entirely such as when a payment method has expired or an account is past-due.
 
@@ -127,7 +127,7 @@ Exceptions to the use of the color red for non-critical messaging are:
 * Standard form validation errors since this is the accepted convention for most users
 * Destructive actions which impact continued use of a feature or the Dialpad feature (e.g., deleting an office or user)
 
-### Yellow (warning)
+### Yellow (Warning)
 
 Use warning messages to help users potentially address non-blocking issues as they complete a workflow or continue to the next step. This can include upcoming expirations or pending requests that if not dealt with in a timely fashion will become critical issues.
 
@@ -144,25 +144,25 @@ Use warning messages to help users potentially address non-blocking issues as th
 </template>
 </dialtone-usage>
 
-## Anti-patterns
+## Anti-Patterns
 
-### Using toasts for error messages
+### Using Toasts for Error Messages
 
 Toast messages are short-lived notifications that don’t provide the time or space to accurately explain the problem and how to address the problem. It can be difficult to make toast messages to visually appear close to the problem source and their temporary nature can make them easy to miss by users.
 
 Reserve the use of error toasts for issues not initiated by users such as connection issues. In these instances, the toast time out should be suspended until the issue is resolved. For persistent errors, use a page level banner.
 
-### Using modals for error messages
+### Using Modals for Error Messages
 
 Modals are helpful for focusing a user's attention on completing short workflows or confirming destructive actions—not to tell them an error has occurred. Modals block the user's ability to visibly attach the message to the problem source. They also block access to the rest of the platform.
 
-### Using the app for error messages
+### Using the App for Error Messages
 
 The Dialpad application is where users go to accomplish tasks and communicate with others. Errors should only be shown within the app for high-priority tasks that must be completed immediately to continue using features or the platform.
 
 ## Validation
 
-### Input fields
+### Input Fields
 
 Validation messages should only be shown with input fields when there are specific formatting requirements (e.g., email addresses, phone numbers). Where possible, automatically correct issues or suggest corrections for the user such as proactively formatting credit card or phone numbers. Users should be able to undo automatic suggestions though.
 
@@ -236,7 +236,7 @@ These messages don’t need to start with actionable language. Instead they can 
 </template>
 </dialtone-usage>
 
-## Banners in cards and modals
+## Banners in Cards and Modals
 
 Use banners when users are engaged in a task flow and need to warn them about potential issues with the task at hand, or to inform them something has gone wrong.
 
@@ -280,7 +280,7 @@ Other considerations:
 
 <img alt="Picture shows error being placed within a list" src="/assets/images/content/list-errors@2x.png" class="d-w100p d-wmx464" />
 
-## App unavailable errors
+## App Unavailable Errors
 
 Sometimes Dialpad can’t be displayed due to a network issue, browser limitation, connection problem, or server issue. 400 and 500 series errors fall in this category. In these cases, always explain what went wrong and provide users with a troubleshooting step, such as refreshing the page or verifying their internet connection.
 
@@ -292,7 +292,7 @@ Don’t use these page level errors when the error can be placed in context, nex
 * Body copy should outline next steps or how to troubleshoot the issue
 * Call to action should provide the most probable fix, such as reloading the app or going back to the previous page
 
-## Errors without solutions
+## Errors Without Solutions
 
 When an issue occurs in Dialpad or is caused by a third party, a resolution isn’t always available to offer users. In these cases, always explain what went wrong so they can attempt to troubleshoot. If available, provide users with a troubleshooting step, like refreshing the page or returning later.
 

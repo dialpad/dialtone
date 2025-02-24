@@ -1,5 +1,5 @@
 ---
-title: Text align
+title: Text Align
 description: Utilities for controlling an element's text alignment.
 ---
 

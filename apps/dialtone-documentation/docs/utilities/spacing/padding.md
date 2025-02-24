@@ -3,7 +3,7 @@ title: Padding
 description: Utilities for setting an element's interior spacing between child elements and the element's box edge.
 ---
 
-## Add padding to all sides
+## Add Padding to All Sides
 
 <code-well-header class="d-fl-center d-p24 d-bgc-purple-100 d-bgo50 d-w100p d-hmn216" custom>
   <div class="d-h128 d-w128 d-p16 d-bar8 d-bgc-purple-200 d-of-hidden"><div class="d-fl-center d-fl1 d-h100p d-bgc-purple-300 d-bar4 d-code--md">d-p16</div></div>
@@ -13,7 +13,7 @@ description: Utilities for setting an element's interior spacing between child e
 <div class="d-p8 ...">d-p8</div>
 ```
 
-## Add padding to a single side
+## Add Padding to a Single Side
 
 <code-well-header class="d-d-flex d-fw-wrap d-ai-start d-jc-center d-bgc-green-100 d-bgo50 d-w100p d-hmn216 d-flow24" custom>
   <div class="d-as-center d-pt12 d-bar8 d-bgc-green-200 d-of-hidden"><div class="d-fl-center d-p16 d-bgc-green-100 d-bbr4 d-code--md">d-pt12</div></div>
@@ -29,7 +29,7 @@ description: Utilities for setting an element's interior spacing between child e
 <div class="d-pl32 ...">d-pl32</div>
 ```
 
-## Add horizontal padding
+## Add Horizontal Padding
 
 <code-well-header class="d-d-flex d-fw-wrap d-ai-start d-jc-center d-bgc-magenta-100 d-bgo50 d-w100p d-hmn216" custom>
   <div class="d-as-center d-px24 d-bar8 d-bgc-magenta-100 d-of-hidden"><div class="d-fl-center d-p16 d-bgc-magenta-100 d-code--md">d-px24</div></div>
@@ -39,7 +39,7 @@ description: Utilities for setting an element's interior spacing between child e
 <div class="d-px24 ...">d-px24</div>
 ```
 
-## Add vertical padding
+## Add Vertical Padding
 
 <code-well-header class="d-d-flex d-fw-wrap d-ai-start d-jc-center d-bgc-red-100 d-bgo50 d-w100p d-hmn216" custom>
   <div class="d-as-center d-py24 d-bar8 d-bgc-red-100 d-of-hidden">

@@ -1,9 +1,9 @@
 ---
-title: Border directions
+title: Border Directions
 description: Utilities for controlling an element's border.
 ---
 
-## All sides
+## All Sides
 
 Use `d-ba` to add a border to all sides of your element.
 
@@ -23,7 +23,7 @@ Use `d-ba` to add a border to all sides of your element.
 <div class="d-ba d-bc-magenta-200 d-baw6">...</div>
 ```
 
-## Individual sides
+## Individual Sides
 
 Use `d-b{t|r|b|l|x|y}` to add a border to only specific sides of your element.
 

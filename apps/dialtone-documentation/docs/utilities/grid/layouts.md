@@ -7,7 +7,7 @@ description: Common grid layout patterns used throughout Dialpad and UberConfere
 
 Use `.d-gl-sidebar` to create a simple 2-column layout with a sidebar and main content area.
 
-### CSS variables
+### CSS Variables
 
 <table class="d-table dialtone-doc-table">
   <thead>
@@ -50,7 +50,7 @@ Use `.d-gl-sidebar` to create a simple 2-column layout with a sidebar and main c
 
 Use `.d-gl-header` to create a simple 2-row layout with a header area and main content area. Usually this is nested within a `.d-gl-sidebar` content area.
 
-### CSS variables
+### CSS Variables
 
 <table class="d-table dialtone-doc-table">
   <thead>
@@ -144,7 +144,7 @@ Use `.d-g-cols{n}` to create a multi-column layout.
 </div>
 ```
 
-## Nesting grids
+## Nesting Grids
 
 Unlike some CSS, CSS grid does not cascade beyond the parent and its direct children (`parent-element > *`). We can use this to our advantage by being able to nest grids within each other without cascade errors.
 

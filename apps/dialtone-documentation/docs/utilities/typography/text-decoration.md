@@ -1,5 +1,5 @@
 ---
-title: Text decoration
+title: Text Decoration
 description: Utilities to change an element's text decoration styles.
 ---
 
@@ -27,7 +27,7 @@ Use `d-td-dotted` to apply a dotted underline style to the text.
 <p class="d-td-dotted">...</p>
 ```
 
-## Line through
+## Line Through
 
 Use `d-td-line-through` to apply a line through the text.
 
@@ -39,7 +39,7 @@ Use `d-td-line-through` to apply a line through the text.
 <p class="d-td-line-through">...</p>
 ```
 
-## No decorations
+## No Decorations
 
 Use `d-td-none` to remove text decorations.
 
@@ -81,7 +81,7 @@ Use `f:d-td-{n}` to change an element's :focus and :focus-within state text deco
 <p class="f:d-td-underline">...</p>
 ```
 
-## Focus visible
+## Focus Visible
 
 Use `fv:d-td-{n}` to change an element's :focus-visible state text decoration [only when focused by keyboard].
 

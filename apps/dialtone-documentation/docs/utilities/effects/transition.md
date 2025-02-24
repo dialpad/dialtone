@@ -3,7 +3,7 @@ title: Transition
 description: Utilities for controlling how an element transitions in and out of states.
 ---
 
-## Adding a transition
+## Adding a Transition
 
 Use `d-t` to add a transition to an element.
 
@@ -15,7 +15,7 @@ Use `d-t` to add a transition to an element.
 <div class="d-bgc-purple-300 h:d-bgc-gold-200 h:d-bs-lg d-fc-primary-inverted h:d-fc-primary d-t">...</div>
 ```
 
-## Changing transition duration
+## Changing Transition Duration
 
 Use `d-td{n}` change an element's `transition-delay` from it's default `50ms` length.
 
@@ -37,7 +37,7 @@ Use `d-td{n}` change an element's `transition-delay` from it's default `50ms` le
 <div class="d-t d-td300">...</div>
 ```
 
-## Changing transition easing
+## Changing Transition Easing
 
 Use `d-ttf-{n}` change an element's `transition-timing-function` (aka easing) from it's default Quad Ease In, Ease Out value.
 
@@ -53,7 +53,7 @@ Use `d-ttf-{n}` change an element's `transition-timing-function` (aka easing) fr
 <div class="d-t d-td100 d-ttf-quint">...</div>
 ```
 
-## Changing transition property
+## Changing Transition Property
 
 Use `d-tp-{n}` change an what items within an element are transitioned.
 

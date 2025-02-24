@@ -47,7 +47,7 @@ Use `f:d-o{n}` to change an element's :focus and :focus-within state opacity.
 <p class="f:d-o50">...</p>
 ```
 
-## Focus visible
+## Focus Visible
 
 Use `fv:d-o{n}` to change an element's :focus-visible state opacity [only when focused by keyboard].
 

@@ -5,7 +5,7 @@ description: Define paddings, gaps, and margins around elements.
 
 <svg-loader name="space-img" />
 
-## Choosing Space vs Size
+## Choosing Space vs. Size
 
 ### Space
 
@@ -21,7 +21,7 @@ Use spacing units, when [stacking elements](#stacking) or when adding [padding](
 
 When setting the scale of an element, use [Size](/design/size/index.md) units.
 
-### Setting a specific spacing
+### Setting a Specific Spacing
 
 <div class="d-d-grid d-g24 d-g-cols3 md:d-g-cols1">
 
@@ -115,7 +115,7 @@ Avoid using `margin`, which adds space outside the element and can affect the la
 </dt-stack>
 </div>
 
-## Visual guides
+## Visual Guides
 
 ### Grouping
 
@@ -134,7 +134,7 @@ Avoid using `margin`, which adds space outside the element and can affect the la
     </dt-stack>
 </div>
 
-### Guiding the eye
+### Guiding the Eye
 
 <div class="d-d-grid d-g16 d-g-cols3 md:d-g-cols1" >
   <div>

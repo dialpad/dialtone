@@ -1,5 +1,5 @@
 ---
-title: Button group
+title: Button Group
 description: Used for grouping buttons that share a relationship or perform similar actions.
 thumb: true
 image: assets/images/components/button-group.png
@@ -94,7 +94,7 @@ vueCode='
 '
 showHtmlWarning />
 
-### Space-between
+### Space-Between
 
 When set to `space-between`, the elements are evenly distributed within the row, creating a directional flow where the `primary` button is either on the **left** (regressive) or on the **right** (progressive).
 <code-well-header class="d-d-block">

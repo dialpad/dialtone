@@ -1,5 +1,5 @@
 ---
-title: Rich text editor
+title: Rich Text Editor
 description: A rich text editor is a component that allows users to format text with a variety of styles. It enables also mixing text with custom components built as extensions, such as links and user mentions.
 status: ready
 storybook: https://dialtone.dialpad.com/vue/?path=/story/components-rich-text-editor--default
@@ -32,7 +32,7 @@ vueCode='
 '
 />
 
-## With links
+## With Links
 
 <code-well-header>
   <example-rich-text-editor
@@ -40,7 +40,7 @@ vueCode='
   />
 </code-well-header>
 
-## Output format
+## Output Format
 
 There are 3 defined output formats currently for the input text.
 
@@ -85,7 +85,7 @@ Provides support to enable placeholder support
 The tiptap Mention plugin is apt for our use case of mentioning users or channels within the editor.
 It also creates the respective nodes with ability for user to customize the trigger character.
 
-#### How to use the Mention plugin:
+#### How to Use the Mention Plugin:
 
 When using the Rich Text editor, the developer would have to pass in the suggestion object prop
 which MUST contain an items function that takes in a query and returns a list of object with the properties:

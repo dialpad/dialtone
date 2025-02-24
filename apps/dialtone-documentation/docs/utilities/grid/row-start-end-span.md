@@ -3,7 +3,7 @@ title: Row Start / End / Span
 description: Utilities for controlling how elements are placed across grid rows.
 ---
 
-## Spanning rows
+## Spanning Rows
 
 Use `d-gr{#}` to span an element across multiple rows. This can be combined with `d-gc{#}` classes to span a set of columns.
 
@@ -25,7 +25,7 @@ Use `d-gr{#}` to span an element across multiple rows. This can be combined with
 </div>
 ```
 
-## Setting the starting and ending rows
+## Setting the Starting and Ending Rows
 
 Use `d-grs{#}` to set the starting point for an element. This can be combined with `d-gc{#}` classes to span a set of columns.
 

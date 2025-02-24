@@ -17,7 +17,7 @@ Use `d-ws-normal` to collapse an element's text whitespaces sequences and newlin
 <p class="d-ws-normal">...</p>
 ```
 
-## No wrap
+## No Wrap
 
 Use `d-ws-nowrap` to collapse an element's text whitespaces sequences, but line breaks are not honored. This keeps text from wrapping.
 
@@ -45,7 +45,7 @@ Use `d-ws-pre` to preserve an element's whitespaces sequences. Lines are only br
 <p class="d-ws-pre">...</p>
 ```
 
-## Pre line
+## Pre Line
 
 Use `d-ws-pre-line` to collapse an element's whitespaces sequences. Lines are broken at new line characters, `<br/>` elements, or as needed to fill boxes.
 
@@ -59,7 +59,7 @@ Use `d-ws-pre-line` to collapse an element's whitespaces sequences. Lines are br
 <p class="d-ws-pre-line">...</p>
 ```
 
-## Pre wrap
+## Pre Wrap
 
 Use `d-ws-pre-wrap` to preserve an element's whitespaces sequences. Lines are broken at new line characters, `<br/>` elements, or as needed to fill boxes.
 
@@ -73,7 +73,7 @@ Use `d-ws-pre-wrap` to preserve an element's whitespaces sequences. Lines are br
 <p class="d-ws-pre-wrap">...</p>
 ```
 
-## Break spaces
+## Break Spaces
 
 Use `d-ws-break-spaces` to have an element act like `pre-wrap` except that any sequence of preserved whitespace always takes up space, a line breaking opportunity exists after every preserved whitespace character, and preserved spaces take up space and do not hang which affects the element's intrinisic size (`min-content` and `max-content` sizes).
 

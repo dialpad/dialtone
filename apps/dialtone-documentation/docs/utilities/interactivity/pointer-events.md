@@ -3,7 +3,7 @@ title: Pointer events
 description: Utilities for controlling how an element responds to mouse/touch events.
 ---
 
-## Pointer event classes
+## Pointer Event Classes
 
 <code-well-header class="d-fl-col5 d-g8 d-fw-wrap d-p24 d-bgc-magenta-100 d-bgo50 d-w100p d-hmn102" custom>
   <button v-for="{ class: className } in pointerEvents.slice(0, 3)" class="d-btn d-btn--filled d-code--sm" :class="className">.{{ className }}</button>
@@ -15,7 +15,7 @@ description: Utilities for controlling how an element responds to mouse/touch ev
 <div class="d-pe-none">...</div>
 ```
 
-## User select classes
+## User Select Classes
 
 Use the `user-select` property to control whether the user can select text.
 

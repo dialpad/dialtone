@@ -1,5 +1,5 @@
 ---
-title: Font family
+title: Font Family
 description: Utilities to change an element's font-family.
 ---
 
@@ -25,7 +25,7 @@ Use `d-ff-custom` to apply the theme's font-family.
 <p class="d-ff-custom">...</p>
 ```
 
-## Sans-serif
+## Sans-Serif
 
 Use `d-ff-sans` to apply a Sans-Serif font stack.
 
@@ -65,7 +65,7 @@ Dialtone supports select marketing fonts and weights. Use the following combinat
   import { fontFamily } from '@data/type.json';
 </script>
 
-## CSS variables
+## CSS Variables
 
 <table class="d-table dialtone-doc-table">
   <thead>

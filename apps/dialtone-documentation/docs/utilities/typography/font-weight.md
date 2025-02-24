@@ -1,5 +1,5 @@
 ---
-title: Font weight
+title: Font Weight
 description: Utilities to change an element's font-weight.
 ---
 

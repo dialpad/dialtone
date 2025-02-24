@@ -5,7 +5,7 @@ description: A system to maintain consistent size and scale.
 
 <svg-loader name="size-img" />
 
-## Choosing Size vs Space
+## Choosing Size vs. Space
 
 ### Size
 
@@ -17,7 +17,7 @@ Size design tokens define intrinsic **dimensions** of UI components. Example CSS
 
 ## Usage
 
-### Setting a specific size
+### Setting a Specific Size
 
 <div class="d-d-grid d-g24 d-g-cols3 md:d-g-cols1">
 <div>
@@ -74,7 +74,7 @@ Exceptions exist for select elements like Avatars, Icons, and Toggles. These ele
 </dt-stack>
 </div>
 
-### Variable sizing
+### Variable Sizing
 
 <div class="d-d-grid d-g24 d-g-cols3 md:d-g-cols1">
 <div>
