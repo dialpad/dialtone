@@ -143,21 +143,21 @@ jobs:
         if: ${{ github.ref == 'refs/heads/production' }}
         run: >
           gcloud storage ls ${{ format('gs://{0}', env.DIALTONE_BUCKET_DIRECTORY) }} |
-          grep -v -E "${{ env.DIALTONE_BUCKET_CLEANUP_EXCLUDE }}" |
+          grep -v -E ${{ env.DIALTONE_BUCKET_CLEANUP_EXCLUDE }} |
           gcloud storage rm --recursive --read-paths-from-stdin
 
       - name: Clean up bucket Dialtone Vue 2
         if: ${{ github.ref == 'refs/heads/production' }}
         run: >
           gcloud storage ls ${{ format('gs://{0}', env.DIALTONE_VUE_2_BUCKET_DIRECTORY) }} |
-          grep -v -E "${{ env.DIALTONE_VUE_BUCKET_CLEANUP_EXCLUDE }}" |
+          grep -v -E ${{ env.DIALTONE_VUE_BUCKET_CLEANUP_EXCLUDE }} |
           gcloud storage rm --recursive --read-paths-from-stdin
 
       - name: Clean up bucket Dialtone Vue 3
         if: ${{ github.ref == 'refs/heads/production' }}
         run: >
           gcloud storage ls ${{ format('gs://{0}', env.DIALTONE_VUE_3_BUCKET_DIRECTORY) }} |
-          grep -v -E "${{ env.DIALTONE_VUE_BUCKET_CLEANUP_EXCLUDE }}" |
+          grep -v -E ${{ env.DIALTONE_VUE_BUCKET_CLEANUP_EXCLUDE }} |
           gcloud storage rm --recursive --read-paths-from-stdin
 
       # ---------------------- #
