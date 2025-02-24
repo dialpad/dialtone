@@ -1,5 +1,5 @@
 ---
-title: Item layout
+title: Item Layout
 description: An item layout provides a standardized group of containers to enable developer to use list-item like stack. It is used as base for `dt-list-item` component
 status: ready
 thumb: true
@@ -7,7 +7,7 @@ image: assets/images/components/item-layout.png
 storybook: https://dialtone.dialpad.com/vue/?path=/story/components-item-layout--default
 ---
 
-## With default styling
+## With Default Styling
 
 By default, item layout includes custom styling, like paddings, sizes, colors, etc.
 
@@ -81,7 +81,7 @@ vueCode='
 '
 showHtmlWarning />
 
-## Without styling
+## Without Styling
 
 Setting the `unstyled` property will add `d-item-layout--custom` class. This will change the item-layout from flexbox to grid, removing all the custom styling while maintaining the slots positions.
 

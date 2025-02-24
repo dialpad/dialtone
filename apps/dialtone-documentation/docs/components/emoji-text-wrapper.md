@@ -1,5 +1,5 @@
 ---
-title: Emoji text wrapper
+title: Emoji Text Wrapper
 description: "Wrapper to find and replace shortcodes like :smile: or unicode chars such as 😄 with our custom Emojis implementation."
 status: ready
 thumb: true
@@ -13,9 +13,9 @@ storybook: https://dialtone.dialpad.com/vue/?path=/story/components-emoji-text-w
   </dt-emoji-text-wrapper>
 </code-well-header>
 
-## Variants and examples
+## Variants and Examples
 
-### Text only
+### Text Only
 
 <code-well-header>
   <dt-emoji-text-wrapper>
@@ -124,7 +124,7 @@ import { DtEmojiTextWrapper } from '@dialpad/dialtone-vue';
 
 Currently, this wrapper component **can't handle Vue components**, make sure to wrap only native HTML elements and text.
 
-### Custom emojis
+### Custom Emojis
 
 It supports custom emojis, you can use the shortcode to display them. For example, `:octocat:` will render the octocat emoji.
 To do this, you need to [set up custom emojis](/components/emoji.md#custom-emoji) in your application.

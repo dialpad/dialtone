@@ -1,9 +1,9 @@
 ---
-title: Align content
-description: Utilities for setting how rows are distributed along it's cross axis. This property only works when a parent container has more than one line.
+title: Align Content
+description: Utilities for setting how rows are distributed along its cross axis. This property only works when a parent container has more than one line.
 ---
 
-## Flex start
+## Flex Start
 
 Use `d-ac-flex-start` to pack rows against the start of the element's cross axis. This is the default value.
 
@@ -51,7 +51,7 @@ Use `d-ac-center` to pack rows along the center of the element's cross axis.
 </div>
 ```
 
-## Flex end
+## Flex End
 
 Use `d-ac-flex-end` to rack rows against the end of the element's main axis.
 
@@ -75,7 +75,7 @@ Use `d-ac-flex-end` to rack rows against the end of the element's main axis.
 </div>
 ```
 
-## Space around
+## Space Around
 
 Use `d-ac-space-around` to pack rows along the element's cross axis so that there is an equal amount of space on each side of the item. This effectively takes all available space, divides it for each row, placing half of alotted space on either side of the row. This is why the space appears doubled for interior rows versus end rows.
 
@@ -99,7 +99,7 @@ Use `d-ac-space-around` to pack rows along the element's cross axis so that ther
 </div>
 ```
 
-## Space between
+## Space Between
 
 Use `d-ac-space-between` to distribute rows along the element's cross axis so that there is an equal amount of space between each row without inserting any space between the first or last object.
 
@@ -123,7 +123,7 @@ Use `d-ac-space-between` to distribute rows along the element's cross axis so th
 </div>
 ```
 
-## Space evenly
+## Space Evenly
 
 Use `d-ac-space-evenly` to distribute rows along the element's cross axis so that there is an equal amount of space on each side of the rows, but unlike `d-ac-space-around` the space visually looks evenly distributed between objects.
 

@@ -7,7 +7,7 @@ description: Learn how to apply Dialpad's voice and choose the right tone, no ma
 
 This guide is the comprehensive writing resource for product teams. Reference this guide to ensure accuracy, coherence, and consistency throughout the product. Applying the outlined principles in this guide consistently will maintain high writing quality standards across product teams and throughout the product experience.
 
-## Voice versus tone
+## Voice vs. Tone
 
 Voice and tone are what make our writing personable. Word choice, phrasing, and even punctuation can all impact how we sound to users. Sometimes people use the words “voice” and “tone interchangeably, but there are key differences.
 
@@ -17,19 +17,19 @@ Dialpad’s voice is a reflection of who we are and it doesn’t change much day
 
 As Dialpad’s voice, we should always:
 
-### Be helpful, but don’t handhold
+### Be Helpful, but Don’t Handhold
 
 Make it easy for users to learn the information they want and need; don’t talk down to them. Be specific when explaining benefits without making things sound better than they are. Write with simplicity, clarity, and purpose so everyone can follow along.
 
-### Be real, but not too tough
+### Be Real, but Not Too Tough
 
 Use business casual language—be plain-spoken, avoid being pretentious or overlay playful. Be honest and direct with users, even if we make a mistake. Communicate with clarity and empathy—be direct, not insensitive.
 
-### Be welcoming, but not overly familiar
+### Be Welcoming, but Not Overly Familiar
 
 We welcome everyone everywhere to use Dialpad—and we show this with our words. We want our language to be warm and approachable, resonating with each user. Avoid using academic or industry jargon unless it’s necessary—explaining those terms when they are industry. Don’t be sarcastic.
 
-### Be bold, but not arrogant
+### Be Bold, but Not Arrogant
 
 We aim to always do the right thing. We aren’t afraid to stand for what’s right. We take pride in our work and feel confident we can help our customers succeed. Teach people the “why” and “how” behind actions—don’t just tell them to do something. We aren’t hesitant or pushy.
 
@@ -39,7 +39,7 @@ On the other hand, Dialpad’s tone adapts contextually. We use certain voice at
 
 Here are a few examples of how tone changes:
 
-### Everyday tasks and activities
+### Everyday Tasks and Activities
 
 When everything is working as it should, our goal is to give people what they need to get work done, without getting in the way or drawing attention to ourselves. We want the audience to know what something is or that something has happened as expected.
 
@@ -58,7 +58,7 @@ When everything is working as it should, our goal is to give people what they ne
 </template>
 </dialtone-usage>
 
-### Learning and education
+### Learning and Education
 
 Sometimes users need help to determine how to best move forward. In these situations, content should help users feel confident in their actions and in our capabilities. Some users will prefer step-by-step instructions, especially if it’s an irregular task. Others though may want to try it out and learn on their own. Look for ways to accommodate both users.
 
@@ -79,7 +79,7 @@ Remember that while users may have sought a specific feature or we may have reco
 </template>
 </dialtone-usage>
 
-### Motivate or encourage action
+### Motivate or Encourage Action
 
 Sometimes we want to keep people moving along a desired path. In these situations, we do this with direct information and clear steps to encourage action. Don’t be too overzealous or action-driven here—our goal is to help people understand the next step and give them the required context to move forward.
 
@@ -97,7 +97,7 @@ Sometimes we want to keep people moving along a desired path. In these situation
 </template>
 </dialtone-usage>
 
-### Simple errors
+### Simple Errors
 
 Despite our best efforts, errors still happen. These are often simple mistakes or roadblocks to action that can be fixed. Although they aren’t necessarily errors or problems, they might feel that way to users. In that situation, our job is to help people understand what happened and how they can address it so they can get back to their task as quickly as possible.
 
@@ -118,7 +118,7 @@ Read the [error message guidelines](/guides/content/error-messages/index.md) for
 </template>
 </dialtone-usage>
 
-### Serious problems or errors
+### Serious Problems or Errors
 
 At times we will need to share bad news. This might be due to an outage, an error, or a product we’re no longer supporting. These are hopefully rare situations, but they will happen.
 
@@ -141,7 +141,7 @@ Read the [error message guidelines](/guides/content/error-messages/index.md) for
 </template>
 </dialtone-usage>
 
-### Acknowledging effort, progress, or completion
+### Acknowledging Effort, Progress, or Completion
 
 There are situations where we want to acknowledge that a user has completed a complex activity or difficult task, such as porting a number or registering an A2P (application to person) messaging campaign. While we don’t need to celebrate these accomplishments, we can recognize the time and effort they put into it.
 
@@ -162,7 +162,7 @@ Depending on the effort level, we might provide simple confirmations or more act
 </template>
 </dialtone-usage>
 
-### Celebrations and congratulations
+### Celebrations and Congratulations
 
 Occasionally it’s appropriate to celebrate an event or milestone, or to congratulate someone for an important achievement. These moments should happen rarely, but we should let users know that we understand it’s an important moment and are excited for them.
 
@@ -183,7 +183,7 @@ In these moments be careful not to take credit for it. Even if we played a role 
 </template>
 </dialtone-usage>
 
-### Announcing new features and updates
+### Announcing New Features and Updates
 
 It’s exciting to launch a new feature or update, but always consider the audience’s perspective first. While we may be excited about the benefits and additional capabilities, change can be frustrating, intimidating, and annoying to our users.
 
@@ -210,14 +210,14 @@ Be sure to use [inclusive language](/guides/content/inclusive-language/index.md)
 
 Good content is accessible to everyone. To make sure including everyone, keep these writing principles in mind.
 
-### Write clearly
+### Write Clearly
 
 * Aim for an eighth-grade or below reading. This means you should use plain language, be straightforward, and avoid being overly complicated with your words.
 * Avoid jargon whenever possible.
 * Use words consistently across Dialpad.
 * Make sure calls-to-action clearly hint at what will happen next.
 
-### Don’t rely on visual communication
+### Don’t Rely on Visual Communication
 
 * Avoid directional language (e.g. “fill out the form to the left” or “click the button below”).
 * Avoid communicating only with color.
@@ -225,7 +225,7 @@ Good content is accessible to everyone. To make sure including everyone, keep th
 * Make sure all visual elements have alt-text appropriately applied.
 * Label things clearly. Don’t rely on icons to convey meaning.
 
-### Organize for scannability
+### Organize for Scannability
 
 * Put the most important information first
 * Use headings that clearly describe their content

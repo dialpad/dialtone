@@ -28,7 +28,7 @@ figma_url: https://www.figma.com/file/2adf7JhZOncRyjYiy2joil/DT-Core%3A-Componen
   </ul>
 </code-well-header>
 
-## Base style
+## Base Style
 
 A list item provides accessibility controls and common functionality. The component uses child components that provide styling and slots for different types of list items. If you want to create a custom list item you can pass a type "custom", which will let you define the structure of the content.
 
@@ -126,7 +126,7 @@ vueCode='
 
 ## Variants
 
-### Custom list item
+### Custom List Item
 
 When `type` is set to "custom" the list item will not render any styles or slots. This type can be used when the list item has to support content that does not work with the default structure.
 

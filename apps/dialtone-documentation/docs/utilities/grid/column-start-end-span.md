@@ -3,7 +3,7 @@ title: Column Start / End / Span
 description: Utilities for controlling how elements are placed across grid columns.
 ---
 
-## Spanning columns
+## Spanning Columns
 
 Use `d-gc{#}` to span an element across multiple columns. This can be combined with `d-gc{#}` classes to span a set of columns. Use `d-gce{#}` to set an element's ending point. A reminder that CSS grid columns start at 1 and end at the number of columns + 1. For example in a 3-column grid, the starting line would be 1 and the ending line would be 4.
 
@@ -35,7 +35,7 @@ Use `d-gc{#}` to span an element across multiple columns. This can be combined w
 </div>
 ```
 
-## Setting the starting and ending column
+## Setting the Starting and Ending Column
 
 Use `d-gcs{#}` to set the starting point for an element. This can be combined with `d-gc{#}` classes to span a set of columns.
 

@@ -1,5 +1,5 @@
 ---
-title: Align items
+title: Align Items
 description: Utilities for setting how an element's is aligned along an element's cross axis.
 ---
 
@@ -23,7 +23,7 @@ Use `d-ai-stretch` to stretch items across the element's cross axis. This is the
 </div>
 ```
 
-## Flex start
+## Flex Start
 
 Use `d-ai-flex-start` to align items to the start of the element's cross axis.
 
@@ -63,7 +63,7 @@ Use `d-ai-center` to distribute items along the center of the element's cross ax
 </div>
 ```
 
-## Flex end
+## Flex End
 
 Use `d-ai-flex-end` to distribute items from the end of the element's cross axis.
 

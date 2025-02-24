@@ -206,7 +206,11 @@ export default {
 export const Default = {
   render: (argsData) => createRenderConfig(DtPopover, PopoverDefault, argsData),
 
-  args: {},
+  args: {
+    headerContent: '',
+    footerContent: '',
+    content: '',
+  },
 
   decorators: [
     () => ({

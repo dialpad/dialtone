@@ -100,7 +100,7 @@ showHtmlWarning />
 
 ## Variants
 
-### With active page
+### With Active Page
 
 <code-well-header>
   <dt-pagination
@@ -128,7 +128,7 @@ vueCode='
 '
 />
 
-### With max-visible
+### With Max-Visible
 
 <code-well-header>
   <dt-pagination

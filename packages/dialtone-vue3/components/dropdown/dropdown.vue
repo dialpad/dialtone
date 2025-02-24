@@ -52,6 +52,13 @@
         />
       </ul>
     </template>
+    <template #footerContent="{ close }">
+      <!-- @slot Slot for the footer content -->
+      <slot
+        name="footer"
+        :close="close"
+      />
+    </template>
   </dt-popover>
 </template>
 

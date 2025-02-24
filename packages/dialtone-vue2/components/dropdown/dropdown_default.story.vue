@@ -18,10 +18,7 @@
     @highlight="$attrs.onHighlight"
     @opened="$attrs.onOpened"
   >
-    <template
-      slot="anchor"
-      slot-scope="{ attrs }"
-    >
+    <template #anchor="{ attrs }">
       <div
         v-if="$attrs.anchor"
         v-html="$attrs.anchor"
@@ -33,10 +30,7 @@
         Click to open
       </dt-button>
     </template>
-    <template
-      slot="list"
-      slot-scope="{ close }"
-    >
+    <template #list="{ close }">
       <div
         v-if="$attrs.list"
         v-html="$attrs.list"
@@ -51,6 +45,12 @@
       >
         {{ item.name }}
       </dt-list-item>
+    </template>
+    <template #footer>
+      <div
+        v-if="$attrs.footer"
+        v-html="$attrs.footer"
+      />
     </template>
   </dt-dropdown>
 </template>

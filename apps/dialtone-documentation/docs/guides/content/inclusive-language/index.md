@@ -7,9 +7,9 @@ description: We aim to create the best experience for all our customers—and th
 
 Test assumptions or biases by sharing content with a diverse audience. Recruit research participants from a variety of backgrounds and roles.
 
-## Recommended language
+## Recommended Language
 
-### Disable, disabled
+### Disable, Disabled
 
 Don’t label actions or features using “disable” or “disabled.” This can imply that being disabled is a negative state. Alternatively use terms such as “deactivate”, “inactive”, or “turn off.”
 
@@ -26,7 +26,7 @@ Don’t label actions or features using “disable” or “disabled.” This ca
 </template>
 </dialtone-usage>
 
-### Just, only, easy, etc.
+### Just, Only, Easy, Etc.
 
 When writing instructional content, avoid stating a task is easy or quick. If you imply it’s easy for everyone, it can discourage those who might struggle. While they might be okay in the correct context, try to avoid using words such as:
 
@@ -46,6 +46,6 @@ Gender is an important part of many people’s identity. Stereotypes and assumpt
 
 Many languages lack ungendered options, like the English “they.” When possible, write in a way that avoids gendered language. For example, use “you” instead of a third person pronoun. You may need to work with a translator to avoid unintentionally gendering concepts. Always choose the clearest option.
 
-### Personal pronouns
+### Personal Pronouns
 
 Dialpad offers users the ability to self-identify their personal pronouns. Use this feature to personalize your copy. Always use their preferred pronouns. If you’re not sure or the user hasn’t set their preferred pronouns, use the pronouns “they/them.” This keeps the content inclusive, simple, and readable.

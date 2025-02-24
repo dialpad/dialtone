@@ -1,9 +1,9 @@
 ---
-title: Box shadows
+title: Box Shadows
 description: Utilities for controlling an element's box shadows.
 ---
 
-## Outer shadow
+## Outer Shadow
 
 Use `d-bs-{n}` to add an outer box shadow to an element.
 
@@ -20,7 +20,7 @@ Use `d-bs-{n}` to add an outer box shadow to an element.
 <div class="d-bs-card">...</div>
 ```
 
-## No shadow
+## No Shadow
 
 Use `d-bs-none` to remove a box shadow to an element.
 
@@ -59,7 +59,7 @@ Use `f:d-bs-{n}` to change an element's `:focus` and `:focus-within` state box s
 <div tabindex="0" class="d-bs-none f:d-bs-lg">Click on me</div>
 ```
 
-## Focus visible
+## Focus Visible
 
 Use `fv:d-bs-{n}` to change an element's `:focus-visible` state box shadow [only when focused by keyboard].
 

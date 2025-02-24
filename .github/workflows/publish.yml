@@ -4,20 +4,20 @@ on:
   workflow_dispatch:
     inputs:
       package:
-        type: 'choice'
+        description: 'Select the package you want to publish'
         required: true
-        description: 'Select a package to run a single release, leave empty to release all'
+        default: 'dialtone'
+        type: 'choice'
         options:
-          - all
           - dialtone
-          - css
-          - emojis
-          - icons
-          - tokens
-          - vue2
-          - vue3
-          - eslint-plugin
-          - stylelint-plugin
+          - dialtone-css
+          - dialtone-emojis
+          - dialtone-icons
+          - dialtone-tokens
+          - dialtone-vue2
+          - dialtone-vue3
+          - eslint-plugin-dialtone
+          - stylelint-plugin-dialtone
   push:
     branches:
       - production
@@ -31,10 +31,12 @@ env:
   HUSKY: 0
 
 jobs:
-  get-branch-name:
+  variables-setup:
     runs-on: ubuntu-latest
     outputs:
       current_branch: ${{ steps.branch-name.outputs.current_branch }}
+      release_tag: ${{ steps.branch-name.outputs.current_branch == 'production' && 'latest' || steps.branch-name.outputs.current_branch }}
+      dialtone_vue3_release_tag: ${{ steps.branch-name.outputs.current_branch == 'production' && 'vue3' || format('vue3-{0}', steps.branch-name.outputs.current_branch) }}
     steps:
       - name: Get branch name
         id: branch-name
@@ -43,15 +45,7 @@ jobs:
   filter-actions:
     runs-on: ubuntu-latest
     outputs:
-      dialtone: ${{ steps.filter.outputs.dialtone }}
-      css: ${{ steps.filter.outputs.css }}
-      emojis: ${{ steps.filter.outputs.emojis }}
-      icons: ${{ steps.filter.outputs.icons }}
-      tokens: ${{ steps.filter.outputs.tokens }}
-      vue2: ${{ steps.filter.outputs.vue2 }}
-      vue3: ${{ steps.filter.outputs.vue3 }}
-      eslint-plugin: ${{ steps.filter.outputs.eslint-plugin }}
-      stylelint-plugin: ${{ steps.filter.outputs.stylelint-plugin }}
+      packages: ${{ github.event_name == 'push' && steps.filter-path.outputs.changes || steps.filter-input.outputs.package }}
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -59,29 +53,36 @@ jobs:
       - name: Filter actions by path
         if: ${{ github.event_name == 'push' }}
         uses: dorny/paths-filter@v3
-        id: filter
+        id: filter-path
         with:
           base: ${{ github.ref }}
           list-files: 'json'
           filters: |
             dialtone:
               - 'package.json'
-            css:
+            dialtone-css:
               - 'packages/dialtone-css/package.json'
-            emojis:
+            dialtone-emojis:
               - 'packages/dialtone-emojis/package.json'
-            icons:
+            dialtone-icons:
               - 'packages/dialtone-icons/package.json'
-            tokens:
+            dialtone-tokens:
               - 'packages/dialtone-tokens/package.json'
-            vue2:
+            dialtone-vue2:
               - 'packages/dialtone-vue2/package.json'
-            vue3:
+            dialtone-vue3:
               - 'packages/dialtone-vue3/package.json'
-            eslint-plugin:
+            eslint-plugin-dialtone:
               - 'packages/eslint-plugin-dialtone/package.json'
-            stylelint-plugin:
+            stylelint-plugin-dialtone:
               - 'packages/stylelint-plugin-dialtone/package.json'
+
+
+      - name: Filter actions by input
+        if: ${{ github.event_name == 'workflow_dispatch' }}
+        id: filter-input
+        run: |
+          echo 'package=["${{ github.event.inputs.package }}"]' >> $GITHUB_OUTPUT
 
   check-dialpad-member:
     runs-on: ubuntu-latest
@@ -94,90 +95,19 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.DIALTONE_CI_TOKEN }}
 
-  publish-npm:
-    needs: [ get-branch-name, check-dialpad-member, filter-actions ]
+  publish:
+    needs: [ variables-setup, check-dialpad-member, filter-actions ]
+    if: ${{ github.event_name == 'workflow_dispatch' || (github.event_name == 'push' && needs.filter-actions.outputs.packages != '[]') }}
+    strategy:
+      matrix:
+        package: ${{ fromJSON(needs.filter-actions.outputs.packages) }}
+        registry: [ npm, GitHub ]
+        include:
+          - registry: GitHub
+            registry_url: //npm.pkg.github.com/
+          - registry: npm
+            registry_url: //registry.npmjs.org/
     runs-on: ubuntu-latest
-    env:
-      BRANCH_NAME: ${{ needs.get-branch-name.outputs.current_branch }}
-      RELEASE_TAG: ${{ needs.get-branch-name.outputs.current_branch == 'production' && 'latest' || needs.get-branch-name.outputs.current_branch }}
-      DIALTONE_VUE3_RELEASE_TAG: ${{ needs.get-branch-name.outputs.current_branch == 'production' && 'vue3' || needs.get-branch-name.outputs.current_branch }}
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-
-      - name: Use Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: 22
-
-      - name: Use pnpm
-        uses: pnpm/action-setup@v3
-        with:
-          version: 9
-          run_install: false
-
-      - name: Get pnpm store directory
-        shell: bash
-        run: |
-          echo "STORE_PATH=$(pnpm store path --silent)" >> $GITHUB_ENV
-
-      - name: Setup pnpm cache
-        uses: actions/cache@v4
-        with:
-          path: ${{ env.STORE_PATH }}
-          key: "${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}"
-          restore-keys: |
-            ${{ runner.os }}-pnpm-store-
-
-      - name: Install dependencies
-        run: pnpm install --frozen-lockfile
-
-      - name: Set npm token
-        run: pnpm config set //registry.npmjs.org/:_authToken=${{ secrets.DIALTONE_NPM_TOKEN }}
-
-      - name: Publish dialtone ${{ env.RELEASE_TAG }}
-        if: ${{ needs.filter-actions.outputs.dialtone == 'true' || github.event.inputs.package == 'all' || github.event.inputs.package == 'dialtone' }}
-        run: pnpm nx run dialtone:publish --publish-branch=${{ env.BRANCH_NAME }} --tag=${{ env.RELEASE_TAG }}
-
-      - name: Publish dialtone css ${{ env.RELEASE_TAG }}
-        if: ${{ needs.filter-actions.outputs.css == 'true' || github.event.inputs.package == 'all' || github.event.inputs.package == 'css' }}
-        run: pnpm nx run dialtone-css:publish --publish-branch=${{ env.BRANCH_NAME }} --tag=${{ env.RELEASE_TAG }}
-
-      - name: Publish dialtone emojis ${{ env.RELEASE_TAG }}
-        if: ${{ needs.filter-actions.outputs.emojis == 'true' || github.event.inputs.package == 'all' || github.event.inputs.package == 'emojis' }}
-        run: pnpm nx run dialtone-emojis:publish --publish-branch=${{ env.BRANCH_NAME }} --tag=${{ env.RELEASE_TAG }}
-
-      - name: Publish dialtone icons ${{ env.RELEASE_TAG }}
-        if: ${{ needs.filter-actions.outputs.icons == 'true' || github.event.inputs.package == 'all' || github.event.inputs.package == 'icons' }}
-        run: pnpm nx run dialtone-icons:publish --publish-branch=${{ env.BRANCH_NAME }} --tag=${{ env.RELEASE_TAG }}
-
-      - name: Publish dialtone tokens ${{ env.RELEASE_TAG }}
-        if: ${{ needs.filter-actions.outputs.tokens == 'true' || github.event.inputs.package == 'all' || github.event.inputs.package == 'tokens' }}
-        run: pnpm nx run dialtone-tokens:publish --publish-branch=${{ env.BRANCH_NAME }} --tag=${{ env.RELEASE_TAG }}
-
-      - name: Publish dialtone-vue@${{ env.RELEASE_TAG }}
-        if: ${{ needs.filter-actions.outputs.vue2 == 'true' || github.event.inputs.package == 'all' || github.event.inputs.package == 'vue2' }}
-        run: pnpm nx run dialtone-vue2:publish --publish-branch=${{ env.BRANCH_NAME }} --tag=${{ env.RELEASE_TAG }}
-
-      - name: Publish dialtone-vue@${{ env.DIALTONE_VUE3_RELEASE_TAG }}
-        if: ${{ needs.filter-actions.outputs.vue3 == 'true' || github.event.inputs.package == 'all' || github.event.inputs.package == 'vue3' }}
-        run: pnpm nx run dialtone-vue3:publish --publish-branch=${{ env.BRANCH_NAME }} --tag ${{ env.DIALTONE_VUE3_RELEASE_TAG }}
-
-      - name: Publish Dialtone eslint plugin ${{ env.RELEASE_TAG }}
-        if: ${{ needs.filter-actions.outputs.eslint-plugin == 'true' || github.event.inputs.package == 'all' || github.event.inputs.package == 'eslint-plugin' }}
-        run: pnpm nx run eslint-plugin-dialtone:publish --publish-branch=${{ env.BRANCH_NAME }} --tag=${{ env.RELEASE_TAG }}
-
-      - name: Publish Dialtone stylelint plugin ${{ env.RELEASE_TAG }}
-        if: ${{ needs.filter-actions.outputs.stylelint-plugin == 'true' || github.event.inputs.package == 'all' || github.event.inputs.package == 'stylelint-plugin' }}
-        run: pnpm nx run stylelint-plugin-dialtone:publish --publish-branch=${{ env.BRANCH_NAME }} --tag=${{ env.RELEASE_TAG }}
-
-  publish-github:
-    needs: [ get-branch-name, check-dialpad-member, filter-actions ]
-    runs-on: ubuntu-latest
-    env:
-      BRANCH_NAME: ${{ needs.get-branch-name.outputs.current_branch }}
-      RELEASE_TAG: ${{ needs.get-branch-name.outputs.current_branch == 'production' && 'latest' || needs.get-branch-name.outputs.current_branch }}
-      DIALTONE_VUE3_RELEASE_TAG: ${{ needs.get-branch-name.outputs.current_branch == 'production' && 'vue3' || needs.get-branch-name.outputs.current_branch }}
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -210,87 +140,30 @@ jobs:
         run: pnpm install --frozen-lockfile
 
       - name: Set registry to GitHub packages
+        if: matrix.registry == 'GitHub'
         run: pnpm config set @dialpad:registry https://npm.pkg.github.com
 
-      - name: Set GitHub auth token
-        run: pnpm config set //npm.pkg.github.com/:_authToken=${{ env.GITHUB_TOKEN }}
+      - name: Set ${{ matrix.registry }} auth token
+        env:
+          AUTH_TOKEN: ${{ matrix.registry == 'GitHub' && env.GITHUB_TOKEN || secrets.DIALTONE_NPM_TOKEN }}
+        run: pnpm config set ${{ matrix.registry_url }}:_authToken=${{ env.AUTH_TOKEN }}
 
-      - name: Publish dialtone ${{ env.RELEASE_TAG }}
-        if: ${{ needs.filter-actions.outputs.dialtone == 'true' || github.event.inputs.package == 'all' || github.event.inputs.package == 'dialtone' }}
-        run: pnpm nx run dialtone:publish --publish-branch=${{ env.BRANCH_NAME }} --tag=${{ env.RELEASE_TAG }}
-
-      - name: Publish dialtone css ${{ env.RELEASE_TAG }}
-        if: ${{ needs.filter-actions.outputs.css == 'true' || github.event.inputs.package == 'all' || github.event.inputs.package == 'css' }}
-        run: pnpm nx run dialtone-css:publish --publish-branch=${{ env.BRANCH_NAME }} --tag=${{ env.RELEASE_TAG }}
-
-      - name: Publish dialtone emojis ${{ env.RELEASE_TAG }}
-        if: ${{ needs.filter-actions.outputs.emojis == 'true' || github.event.inputs.package == 'all' || github.event.inputs.package == 'emojis' }}
-        run: pnpm nx run dialtone-emojis:publish --publish-branch=${{ env.BRANCH_NAME }} --tag=${{ env.RELEASE_TAG }}
-
-      - name: Publish dialtone icons ${{ env.RELEASE_TAG }}
-        if: ${{ needs.filter-actions.outputs.icons == 'true' || github.event.inputs.package == 'all' || github.event.inputs.package == 'icons' }}
-        run: pnpm nx run dialtone-icons:publish --publish-branch=${{ env.BRANCH_NAME }} --tag=${{ env.RELEASE_TAG }}
-
-      - name: Publish dialtone tokens ${{ env.RELEASE_TAG }}
-        if: ${{ needs.filter-actions.outputs.tokens == 'true' || github.event.inputs.package == 'all' || github.event.inputs.package == 'tokens' }}
-        run: pnpm nx run dialtone-tokens:publish --publish-branch=${{ env.BRANCH_NAME }} --tag=${{ env.RELEASE_TAG }}
-
-      - name: Publish dialtone-vue@${{ env.RELEASE_TAG }}
-        if: ${{ needs.filter-actions.outputs.vue2 == 'true' || github.event.inputs.package == 'all' || github.event.inputs.package == 'vue2' }}
-        run: pnpm nx run dialtone-vue2:publish --publish-branch=${{ env.BRANCH_NAME }} --tag=${{ env.RELEASE_TAG }}
-
-      - name: Publish dialtone-vue@${{ env.DIALTONE_VUE3_RELEASE_TAG }}
-        if: ${{ needs.filter-actions.outputs.vue3 == 'true' || github.event.inputs.package == 'all' || github.event.inputs.package == 'vue3' }}
-        run: pnpm nx run dialtone-vue3:publish --publish-branch=${{ env.BRANCH_NAME }} --tag ${{ env.DIALTONE_VUE3_RELEASE_TAG }}
-
-      - name: Publish Dialtone eslint plugin ${{ env.RELEASE_TAG }}
-        if: ${{ needs.filter-actions.outputs.eslint-plugin == 'true' || github.event.inputs.package == 'all' || github.event.inputs.package == 'eslint-plugin' }}
-        run: pnpm nx run eslint-plugin-dialtone:publish --publish-branch=${{ env.BRANCH_NAME }} --tag=${{ env.RELEASE_TAG }}
-
-      - name: Publish Dialtone stylelint plugin ${{ env.RELEASE_TAG }}
-        if: ${{ needs.filter-actions.outputs.stylelint-plugin == 'true' || github.event.inputs.package == 'all' || github.event.inputs.package == 'stylelint-plugin' }}
-        run: pnpm nx run stylelint-plugin-dialtone:publish --publish-branch=${{ env.BRANCH_NAME }} --tag=${{ env.RELEASE_TAG }}
-
-  publish-iOS:
-    needs: [ get-branch-name, check-dialpad-member, filter-actions ]
-    if: ${{ needs.get-branch-name.outputs.current_branch == 'production' && (needs.filter-actions.outputs.tokens == 'true' || github.event.inputs.package == 'all' || github.event.inputs.package == 'tokens' ) }}
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-
-      - name: Use Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: 22
-
-      - name: Use pnpm
-        uses: pnpm/action-setup@v3
-        with:
-          version: 9
-          run_install: false
-
-      - name: Get pnpm store directory
-        shell: bash
-        run: |
-          echo "STORE_PATH=$(pnpm store path --silent)" >> $GITHUB_ENV
-
-      - name: Setup pnpm cache
-        uses: actions/cache@v4
-        with:
-          path: ${{ env.STORE_PATH }}
-          key: "${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}"
-          restore-keys: |
-            ${{ runner.os }}-pnpm-store-
-
-      - name: Install dependencies
-        run: pnpm install --frozen-lockfile
+      # Publish npm/GitHub
+      - name: Publish ${{ matrix.package }}@${{ env.RELEASE_TAG }}
+        env:
+          RELEASE_TAG: ${{ matrix.package == 'dialtone-vue3' && needs.variables-setup.outputs.dialtone_vue3_release_tag || needs.variables-setup.outputs.release_tag }}
+        run: >
+          pnpm nx run ${{ matrix.package }}:publish
+          --publish-branch=${{ needs.variables-setup.outputs.current_branch }}
+          --tag=${{ env.RELEASE_TAG }}
 
       # Publish iOS
       - name: Build swift
+        if: ${{ needs.variables-setup.outputs.current_branch == 'production' && matrix.package == 'dialtone-tokens' }}
         run: pnpm nx run dialtone-tokens:publish:ios-package
 
       - name: Publish production - Swift
+        if: ${{ needs.variables-setup.outputs.current_branch == 'production' && matrix.package == 'dialtone-tokens' }}
         uses: cpina/github-action-push-to-another-repository@v1.5.1
         env:
           API_TOKEN_GITHUB: ${{ secrets.DIALTONE_CI_TOKEN }}
@@ -301,20 +174,9 @@ jobs:
           destination-github-username: 'dialpad'
           commit-message: "dialtone-tokens-swift release"
 
-  publish-android:
-    needs: [ get-branch-name, check-dialpad-member, filter-actions ]
-    if: ${{ needs.get-branch-name.outputs.current_branch == 'production' && (needs.filter-actions.outputs.tokens == 'true' || github.event.inputs.package == 'all' || github.event.inputs.package == 'tokens' ) }}
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-
-      - name: Use Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: 22
-
+      # Publish Android
       - name: Setup Java
+        if: ${{ needs.variables-setup.outputs.current_branch == 'production' && matrix.package == 'dialtone-tokens' }}
         uses: actions/setup-java@v4
         with:
           java-version: 17
@@ -324,32 +186,12 @@ jobs:
             packages/dialtone-tokens/*.gradle*
             packages/dialtone-tokens/**/gradle-wrapper.properties
 
-      - name: Use pnpm
-        uses: pnpm/action-setup@v3
-        with:
-          version: 9
-          run_install: false
-
-      - name: Get pnpm store directory
-        shell: bash
-        run: |
-          echo "STORE_PATH=$(pnpm store path --silent)" >> $GITHUB_ENV
-
-      - name: Setup pnpm cache
-        uses: actions/cache@v4
-        with:
-          path: ${{ env.STORE_PATH }}
-          key: "${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}"
-          restore-keys: |
-            ${{ runner.os }}-pnpm-store-
-
-      - name: Install dependencies
-        run: pnpm install --frozen-lockfile
-
       - name: Build android
+        if: ${{ needs.variables-setup.outputs.current_branch == 'production' && matrix.package == 'dialtone-tokens' }}
         run: pnpm nx run dialtone-tokens:publish:android-package
 
       - name: Publish android - Gradle
+        if: ${{ needs.variables-setup.outputs.current_branch == 'production' && matrix.package == 'dialtone-tokens' }}
         working-directory: ./packages/dialtone-tokens
         env:
           GITHUB_USER: braddialpad

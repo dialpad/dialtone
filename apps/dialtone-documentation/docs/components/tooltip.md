@@ -12,7 +12,7 @@ figma_url: https://www.figma.com/file/2adf7JhZOncRyjYiy2joil/DT-Core%3A-Componen
   <dt-button v-dt-tooltip="`Simple tooltip`">Hover me</dt-button>
 </code-well-header>
 
-## Tooltip as a directive
+## Tooltip as a Directive
 
 ### Usage
 
@@ -67,7 +67,7 @@ Install the directive into vue instance
 Vue.use(DtTooltipDirective);
 ```
 
-## Tooltip as a component
+## Tooltip as a Component
 
 The tooltip, also known as infotip or hint, is a common graphical user interface element in which, when hovering over a
 screen element or component, a text box displays information about that element (such as a description of a button's

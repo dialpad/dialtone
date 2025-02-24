@@ -1,3 +1,16 @@
+# [3.168.0](https://github.com/dialpad/dialtone/compare/dialtone-vue3/v3.167.0...dialtone-vue3/v3.168.0) (2025-02-20)
+
+
+### Documentation
+
+* NO-JIRA fix ivr-node ([#630](https://github.com/dialpad/dialtone/issues/630)) ([bca81d8](https://github.com/dialpad/dialtone/commit/bca81d8ac1f0701512a35c6af704762c08d8f080))
+
+
+### Features
+
+* DLT-2370 add before-change event and improve tab behavior ([#633](https://github.com/dialpad/dialtone/issues/633)) ([dd43934](https://github.com/dialpad/dialtone/commit/dd4393485b1ca223e3679b51cf537fe216fb8c00))
+* DP-128277 footer slot for DtDropdown ([#635](https://github.com/dialpad/dialtone/issues/635)) ([38f0614](https://github.com/dialpad/dialtone/commit/38f061425c8eadea22919002b7d63d85ddcf3758))
+
 # [3.167.0](https://github.com/dialpad/dialtone/compare/dialtone-vue3/v3.166.0...dialtone-vue3/v3.167.0) (2025-02-11)
 
 

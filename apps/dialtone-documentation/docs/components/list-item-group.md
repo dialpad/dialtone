@@ -1,5 +1,5 @@
 ---
-title: List item group
+title: List Item Group
 description: The "List Item Group" component uses a non interactive heading which groups list items.
 status: ready
 storybook: https://dialtone.dialpad.com/vue/?path=/story/components-list-item-group--default
@@ -28,7 +28,7 @@ storybook: https://dialtone.dialpad.com/vue/?path=/story/components-list-item-gr
   </dt-list-item-group>
 </code-well-header>
 
-## Base style
+## Base Style
 
 You should use this component when you have multiple list items you would like to group into different categories.
 

@@ -1,9 +1,9 @@
 ---
-title: Divide color
+title: Divide Color
 description: Utilities for controlling the border color between an element's child items.
 ---
 
-## Vertical dividers
+## Vertical Dividers
 
 Use `d-divide-y{n}` to create a divider between an element's child items.
 
@@ -23,7 +23,7 @@ Use `d-divide-y{n}` to create a divider between an element's child items.
 </div>
 ```
 
-## Horizontal dividers
+## Horizontal Dividers
 
 Use `d-divide-x{n}` to create a divider between an element's child items.
 
@@ -43,7 +43,7 @@ Use `d-divide-x{n}` to create a divider between an element's child items.
 </div>
 ```
 
-## Changing opacities
+## Changing Opacities
 
 Use `d-dco{n}` to change a divider opacity value.
 

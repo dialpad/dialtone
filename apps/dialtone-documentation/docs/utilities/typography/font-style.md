@@ -1,5 +1,5 @@
 ---
-title: Font style
+title: Font Style
 description: Utilities to change an element's font styles.
 ---
 
@@ -15,7 +15,7 @@ Use `d-fs-italic` to change an element's font-style.
 <p class="d-fs-300 d-fs-italic">...</p>
 ```
 
-## No italics
+## No Italics
 
 Use `d-fs-none` to remove an element's font-style.
 
