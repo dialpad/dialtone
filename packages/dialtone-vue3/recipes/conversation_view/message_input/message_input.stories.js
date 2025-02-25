@@ -34,6 +34,14 @@ export const argTypesData = {
       type: 'text',
     },
   },
+  customActionIcons: {
+    table: {
+      type: { summary: 'VNode' },
+    },
+    control: {
+      type: 'text',
+    },
+  },
   middle: {
     table: {
       type: { summary: 'VNode' },
@@ -183,6 +191,7 @@ export const argsData = {
   top: '',
   middle: '',
   emojiGiphyPicker: '',
+  customActionIcons: '',
   sendButton: '',
   smsCount: '',
   placeholder: 'New message',
