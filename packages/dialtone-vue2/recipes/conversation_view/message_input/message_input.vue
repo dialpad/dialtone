@@ -164,6 +164,8 @@
           </dt-popover>
           <!-- @slot Slot for emojiGiphy picker -->
           <slot name="emojiGiphyPicker" />
+          <!-- @slot Slot to add extra action icons next to default ones -->
+          <slot name="customActionIcons" />
         </dt-stack>
       </div>
       <!-- Right content -->

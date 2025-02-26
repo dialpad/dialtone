@@ -1,3 +1,53 @@
+## [9.102.2](https://github.com/dialpad/dialtone/compare/dialtone/v9.102.1...dialtone/v9.102.2) (2025-02-25)
+
+
+### Bug Fixes
+
+* NO-JIRA not show unmounted warning in dev or prod environments ([#643](https://github.com/dialpad/dialtone/issues/643)) ([32cffbd](https://github.com/dialpad/dialtone/commit/32cffbde0aafa6c9f3c278bc23ba1b68b2aec17b))
+
+## [9.102.1](https://github.com/dialpad/dialtone/compare/dialtone/v9.102.0...dialtone/v9.102.1) (2025-02-21)
+
+
+### Bug Fixes
+
+* DP-128277 remove duplicated hasFooter from DtPopover ([#642](https://github.com/dialpad/dialtone/issues/642)) ([98a06e1](https://github.com/dialpad/dialtone/commit/98a06e14f59e98b077ce67dc44201ef95d42ff4d))
+
+# [9.102.0](https://github.com/dialpad/dialtone/compare/dialtone/v9.101.2...dialtone/v9.102.0) (2025-02-20)
+
+
+### Features
+
+* DLT-2370 add before-change event and improve tab behavior ([#633](https://github.com/dialpad/dialtone/issues/633)) ([dd43934](https://github.com/dialpad/dialtone/commit/dd4393485b1ca223e3679b51cf537fe216fb8c00))
+* DP-128277 footer slot for DtDropdown ([#635](https://github.com/dialpad/dialtone/issues/635)) ([38f0614](https://github.com/dialpad/dialtone/commit/38f061425c8eadea22919002b7d63d85ddcf3758))
+
+## [9.101.2](https://github.com/dialpad/dialtone/compare/dialtone/v9.101.1...dialtone/v9.101.2) (2025-02-19)
+
+
+### Bug Fixes
+
+* **Tokens:** DLT-2347 mobile color token modifiers fix ([#628](https://github.com/dialpad/dialtone/issues/628)) ([9545644](https://github.com/dialpad/dialtone/commit/9545644dc1837061e57370e06c1e695a56681518))
+* **Tokens:** DLT-2348 android font sizes were dp instead of sp ([#631](https://github.com/dialpad/dialtone/issues/631)) ([adda07b](https://github.com/dialpad/dialtone/commit/adda07bdd52126cac3a60c522f54da82034c3484))
+
+## [9.101.1](https://github.com/dialpad/dialtone/compare/dialtone/v9.101.0...dialtone/v9.101.1) (2025-02-19)
+
+
+### Bug Fixes
+
+* **Docs:** NO-JIRA update the figma link in the button docsite page ([#634](https://github.com/dialpad/dialtone/issues/634)) ([77a3a57](https://github.com/dialpad/dialtone/commit/77a3a571bec9089f0c161f0936f35ce44d850664))
+* NO-JIRA custom item layout ([#639](https://github.com/dialpad/dialtone/issues/639)) ([1553250](https://github.com/dialpad/dialtone/commit/155325090d5f8ac38b0b9de377a6a9731a9274ae))
+
+# [9.101.0](https://github.com/dialpad/dialtone/compare/dialtone/v9.100.0...dialtone/v9.101.0) (2025-02-17)
+
+
+### Documentation
+
+* NO-JIRA fix ivr-node ([#630](https://github.com/dialpad/dialtone/issues/630)) ([bca81d8](https://github.com/dialpad/dialtone/commit/bca81d8ac1f0701512a35c6af704762c08d8f080))
+
+
+### Features
+
+* **Design Tokens:** NO-JIRA experimental deca token set updates again ([#632](https://github.com/dialpad/dialtone/issues/632)) ([c7ad513](https://github.com/dialpad/dialtone/commit/c7ad513f49215728dae86bf3305dd54f44df1251))
+
 # [9.100.0](https://github.com/dialpad/dialtone/compare/dialtone/v9.99.0...dialtone/v9.100.0) (2025-02-11)
 
 

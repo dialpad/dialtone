@@ -1,9 +1,9 @@
 ---
-title: Columns & layouts
+title: Columns & Layouts
 description: Utilities for flex columns and common flex layouts.
 ---
 
-## Creating flex columns
+## Creating Flex Columns
 
 Use `d-fl-col{n}` to create uniformly sized children within an element.
 
@@ -31,7 +31,7 @@ Use `d-fl-col{n}` to create uniformly sized children within an element.
 <div class="d-fl-col12 d-cg8">...</div>
 ```
 
-## Flex column gaps
+## Flex Column Gaps
 
 Use `d-cg{n}` to create uniform gaps between flex columns within an element.
 
@@ -61,7 +61,7 @@ Use `d-cg{n}` to create uniform gaps between flex columns within an element.
 <div class="d-fl-col3 d-cg64">...</div>
 ```
 
-## Centering objects
+## Centering Objects
 
 By default flexed items align to `flex-start` both horizontally and vertically (effectively top, left). Use `d-fl-center` to center-center child items within an element.
 

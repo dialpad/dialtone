@@ -3,7 +3,7 @@ title: Background Gradient
 description: Utilities for creating an background gradient and controlling its stops.
 ---
 
-## Starting color
+## Starting Color
 
 Use `d-bgg-from-{color}` to declare the gradient starting color stop.
 
@@ -15,7 +15,7 @@ Use `d-bgg-from-{color}` to declare the gradient starting color stop.
 <div class="d-bgg-to-br d-bgg-from-purple-500">...</div>
 ```
 
-## Ending color
+## Ending Color
 
 Use `d-bgg-to-{color}` to declare the gradient ending color stop.
 
@@ -27,7 +27,7 @@ Use `d-bgg-to-{color}` to declare the gradient ending color stop.
 <div class="d-bgg-to-br d-bgg-from-purple-400 d-bgg-to-magenta-300">...</div>
 ```
 
-## Changing opacities
+## Changing Opacities
 
 Use `d-bgg-(from|to)-o{n}` to change the opacity values of each gradient color stop. You can also change the opacity values of each gradient color stop on `:hover`, `:focus`, `:focus-visible` by using the respective `h:d-bgg-(from|to)-o{n}`, `f:d-bgg-(from|to)-o{n}`, `fv:d-bgg-(from|to)-o{n}` prefixes.
 
@@ -79,7 +79,7 @@ Use `f:d-bgg-{from|to}-{color}` to change an element's background gradient start
 <button class="d-bgg-from-purple-300 f:d-bgg-from-purple-300 d-bgg-to-magenta-100 f:d-bgg-to-purple-500">...</button>
 ```
 
-## Focus visible
+## Focus Visible
 
 Use `fv:d-bgg-{from|to}-{color}` to change an element's background gradient starting and ending stops in `:focus-visible` state [only when focused by keyboard].
 

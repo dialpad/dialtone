@@ -5,7 +5,7 @@ next: { link: "/guides/content/help-content/", text: "Help content" }
 description: These guidelines exist to help everyone at Dialpad write helpful copy that shares the same voice, tone, and consistency.
 ---
 
-## Active voice
+## Active Voice
 
 We help users accomplish tasks every day. To reflect that acitvity, we write using an active voice in our copy. Use this voice for when the user needs to do something. We only allow a passive voice in very specific scenarios. Otherwise, use an active voice in all copy you write.
 
@@ -26,7 +26,7 @@ Missed calls were sent to voicemail.
 </template>
 </dialtone-usage>
 
-## Passive voice
+## Passive Voice
 
 Try to catch if you're using a passive voice by looking out for the following signs:
 
@@ -40,7 +40,7 @@ There are times when passive voice is permissible:
 * To make it clear that you didn’t personally take an action or make a decision
 * If the object is more important than the subject
 
-## Sentence versus title casing
+## Sentence vs. Title Casing
 
 Dialpad uses sentence casing for all writing except action-oriented areas (e.g., menus, buttons, links). In those situations, we use title casing.
 
@@ -90,7 +90,7 @@ Contractions are abbreviated words (e.g., can’t”, “aren’t”, and “you
 </template>
 </dialtone-usage>
 
-## Plain language
+## Plain Language
 
 When writing, communicate the way our customers do. Avoid using jargon or technical terminology. If you absolutely need to use it, clearly explain the concepts.
 
@@ -113,7 +113,7 @@ Sentences should have a single focus. Remember that we aim for an 8th grade read
 
 ## Capitalization
 
-We use [sentence casing](#sentence-versus-title-casing) for all writing except in the following situations:
+We use [sentence vs. title casing](#sentence-vs-title-casing) for all writing except in the following situations:
 
 * Action-oriented areas (e.g. buttons and menus), which uses title casing
 * Eyebrow headlines, which uses all caps casing
@@ -139,7 +139,7 @@ Use sentence case for all headings. Capitalize the first word of each phrase, pr
 </template>
 </dialtone-usage>
 
-### Products and feature names
+### Products and Feature Names
 
 If a product or feature isn’t unique to Dialpad, such as contact centers, teams, or offices, then don’t capitalize the name. However, if it is unique to Dialpad and we can market it as a distinct product in the market, such as Ai Scorecards or Ai Playbooks, then capitalize it.
 
@@ -166,7 +166,7 @@ At Dialpad we aim to respect the usage guidelines for any third-party intellectu
 
 For example, Salesforce does not allow their brand name to be used as part of a product offering such as “The Dialpad Salesforce app”. Instead state "Dialpad integrates with Salesforce."
 
-### Job titles
+### Job Titles
 
 Job titles should use title casing when placed close to a person’s name. When referring to a title without referencing a person, use sentence casing.
 
@@ -189,7 +189,7 @@ Job titles should use title casing when placed close to a person’s name. When 
 </template>
 </dialtone-usage>
 
-### Letters following slashes
+### Letters Following Slashes
 
 The first word following a slash shouldn’t be capitalized.
 
@@ -267,11 +267,11 @@ To start a phone number porting request, you will need to:
 </template>
 </dialtone-usage>
 
-### Menu bars
+### Menu Bars
 
 When space is limited, it's permissible to use horizontal action menus for the users. These menu items are often ordered based on logic, such as by popular actions or by greater to smaller options.
 
-#### Actions in a menu
+#### Actions in a Menu
 
 Menu labels follow the same “Verb” + “Noun” pattern outlined in buttons. If there’s enough context, only a verb might be necessary.
 
@@ -294,7 +294,7 @@ Menu labels follow the same “Verb” + “Noun” pattern outlined in buttons.
 </template>
 </dialtone-usage>
 
-#### Nouns in a menu
+#### Nouns in a Menu
 
 Nouns should be concise, but give users enough information that they can easily identify and select the desired item.
 
@@ -318,11 +318,11 @@ Time range filter
 </template>
 </dialtone-usage>
 
-## Date and numbers
+## Dates and Numbers
 
 We attempt to properly localize dates, numbers, and measurements. These guidelines are for manually formatting in American English, which we use as the base before translating to other languages.
 
-### Date
+### Dates
 
 Whenever possible, fully write out dates. Dates are always represented in this order:
 
@@ -408,7 +408,7 @@ Currently all time formats are formatted using the following guidelines:
 </template>
 </dialtone-usage>
 
-### Time zones
+### Time Zones
 
 * Include a time zone only if it’s necessary.
 * Use the time zone’s abbreviation following the am/pm, for example, 12:36 pm PT.
@@ -432,7 +432,7 @@ Currently all time formats are formatted using the following guidelines:
 
 We use both relative and absolute timestamps, determining what to use based on content and context.
 
-#### Relative timestamps
+#### Relative Timestamps
 
 Relative timestamps are best used in situations where specific timestamps would be tedious and unnecessary. Instead use relative timestamps when only trying to roughly communicate when something happened.
 
@@ -480,7 +480,7 @@ When using relative timestamps, use these formats:
   </tbody>
 </table>
 
-#### Absolute timestamps
+#### Absolute Timestamps
 
 Absolute timestamps are used in situations where specific timestamps are important and necessary such as with call times, data tables, and historical records.
 
@@ -947,7 +947,7 @@ Consider space constraints in the interface when deciding to use truncation. Ide
 
 A button with an ellipsis icon (not the same as the text) is used to expand secondary actions. It’s typically used on table rows or with horizontal action sets when space is limited.
 
-### En-dashes and em-dashes
+### En-Dashes and Em-Dashes
 
 Use an en dash with no spaces in between (–) for a fixed range of numbers.
 
@@ -984,7 +984,7 @@ On Mac the keyboard shortcuts for these punctuation marks are:
 * En dash: <dt-keyboard-shortcut shortcut="Option+-"/>
 * Em dash: <dt-keyboard-shortcut shortcut="Shift+Option+-"/>
 
-### Exclamation marks
+### Exclamation Marks
 
 Avoid using exclamation marks. Most of our copy is rarely that exciting. If you absolutely have to, limit yourself to one exclamation mark to a page.
 
@@ -1084,7 +1084,7 @@ Don't use periods for:
 
 You may use periods in bulleted, numbered, or link lists when a list item has two or more full sentences.
 
-### Question marks
+### Question Marks
 
 Avoid using question marks wherever possible. Reword sentences into affirmative statements wherever you can, but there are exceptions.
 
@@ -1111,7 +1111,7 @@ Don't use question marks if:
 </template>
 </dialtone-usage>
 
-### Quotation marks
+### Quotation Marks
 
 Use quotation marks to define words (“agents”) or to quote text. Use quotation marks to indicate input that the user has provided such as a title or file name. Use this indication only when the input appears in running text.
 
@@ -1168,9 +1168,9 @@ The design team continues to grow; the rain is starting.
 </template>
 </dialtone-usage>
 
-## Spelling and formatting
+## Spelling and Formatting
 
-### American spelling
+### American Spelling
 
 Use American spelling for all external-facing Dialpad content. When in doubt, review the [Merriam-Webster dictionary](https://www.merriam-webster.com/) for the preferred word spelling.
 
@@ -1210,9 +1210,9 @@ We’ve sent a confirmation email to **[user@domain.com](mailto:user@domain.com)
 </template>
 </dialtone-usage>
 
-## You, we, and other personal pronouns
+## You, We, and Other Personal Pronouns
 
-### Addressing users
+### Addressing Users
 
 Always refer to users as “you.” Don’t speak for users with phrases that use “I” or “my.”
 

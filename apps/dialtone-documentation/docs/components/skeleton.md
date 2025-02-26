@@ -152,7 +152,7 @@ vueCode='
 '
 />
 
-### Image / icon
+### Image / Icon
 
 <code-well-header class="d-ai-flex-start">
   <div ref="squareExample">
@@ -196,7 +196,7 @@ vueCode='
 '
 />
 
-## Prefabricated combinations
+## Prefabricated Combinations
 
 ### Paragraphs
 

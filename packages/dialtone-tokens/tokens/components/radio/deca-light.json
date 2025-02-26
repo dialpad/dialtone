@@ -6,6 +6,16 @@
           "value": "{color.surface.brand-strong}",
           "type": "color"
         }
+      },
+      "foreground": {
+        "default": {
+          "value": "{color.neutral.transparent}",
+          "type": "color"
+        },
+        "checked": {
+          "value": "{color.foreground.primary-inverted}",
+          "type": "color"
+        }
       }
     }
   }

@@ -95,7 +95,7 @@
           />
         </div>
         <popover-header-footer
-          v-if="$slots.footerContent"
+          v-if="hasFooter()"
           ref="popover__footer"
           type="footer"
           :class="POPOVER_HEADER_FOOTER_PADDING_CLASSES[padding]"
@@ -696,7 +696,6 @@ export default {
    *     METHODS    *
    ******************/
   methods: {
-
     hasIntersectedViewport (entries) {
       const dialog = entries?.[0]?.target;
       if (!dialog) return;
@@ -793,12 +792,12 @@ export default {
       this.isOpen = false;
     },
 
-    /*
-    * Prevents scrolling outside of the currently opened modal popover by:
-    *   - when anchor is not within another popover: setting the body to overflow: hidden
-    *   - when anchor is within another popover: set the popover dialog container to it's non-modal z-index
-    *     since it is no longer the active modal. This puts it underneath the overlay and prevents scrolling.
-    **/
+    /**
+     * Prevents scrolling outside of the currently opened modal popover by:
+     *   - when anchor is not within another popover: setting the body to overflow: hidden
+     *   - when anchor is within another popover: set the popover dialog container to it's non-modal z-index
+     *     since it is no longer the active modal. This puts it underneath the overlay and prevents scrolling.
+     */
     preventScrolling () {
       if (this.modal) {
         const element = this.anchorEl?.closest('body, .tippy-box');
@@ -812,9 +811,9 @@ export default {
       }
     },
 
-    /*
-    * Resets the prevent scrolling properties set in preventScrolling() back to normal.
-    **/
+    /**
+     * Resets the prevent scrolling properties set in preventScrolling() back to normal.
+     */
     enableScrolling () {
       const element = this.anchorEl?.closest('body, .tippy-box');
       if (!element) return;
@@ -1023,6 +1022,10 @@ export default {
 
     onMouseLeaveAnchor () {
       this.$emit('mouseleave-popover-anchor');
+    },
+
+    hasFooter () {
+      return this.$slots.footerContent || this.$scopedSlots.footerContent?.();
     },
   },
 };

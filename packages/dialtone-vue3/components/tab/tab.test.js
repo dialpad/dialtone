@@ -10,7 +10,6 @@ const MOCK_GROUP_CONTEXT = {
   disabled: false,
   selected: '',
 };
-const MOCK_CHANGE_CONTENT_PANEL = vi.fn();
 
 const baseProps = {
   id: MOCK_ID,
@@ -20,8 +19,6 @@ const baseProps = {
 const baseSlots = { default: MOCK_DEFAULT_SLOT };
 const baseProvide = {
   setFocus: vi.fn(),
-  groupContext: MOCK_GROUP_CONTEXT,
-  changeContentPanel: MOCK_CHANGE_CONTENT_PANEL,
 };
 
 let mockProps = {};
@@ -33,6 +30,8 @@ describe('DtTab Tests', () => {
   let tab;
 
   const updateWrapper = () => {
+    baseProvide.groupContext = { ...MOCK_GROUP_CONTEXT };
+
     wrapper = mount(DtTab, {
       props: { ...baseProps, ...mockProps },
       slots: { ...baseSlots, ...mockSlots },
@@ -67,16 +66,13 @@ describe('DtTab Tests', () => {
       expect(tab.text()).toBe(MOCK_DEFAULT_SLOT);
     });
 
-    describe('Selected by default', () => {
-      it('changeContentPanel should be called with valid data', () => {
+    describe('Selected Tab by default', () => {
+      it('Group context should have set selected tab', () => {
         mockProps = { selected: true };
 
         updateWrapper();
 
-        expect(MOCK_CHANGE_CONTENT_PANEL).toHaveBeenCalledWith({
-          selected: baseProps.panelId,
-          selectOverride: true,
-        });
+        expect(baseProvide.groupContext.selected).toBe(baseProps.panelId);
       });
     });
 

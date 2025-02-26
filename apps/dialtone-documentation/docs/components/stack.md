@@ -53,7 +53,7 @@ showHtmlWarning />
 
 ### Direction
 
-#### Row: flow horizontally
+#### Row: Flow Horizontally
 
 <code-well-header>
   <dt-stack
@@ -107,7 +107,7 @@ vueCode='
 '
 showHtmlWarning />
 
-#### Column: flow vertically
+#### Column: Flow Vertically
 
 <code-well-header>
   <dt-stack
@@ -161,7 +161,7 @@ vueCode='
 '
 />
 
-#### Row reverse
+#### Row Reverse
 
 <code-well-header>
   <dt-stack
@@ -215,7 +215,7 @@ vueCode='
 '
 />
 
-#### Column reverse
+#### Column Reverse
 
 <code-well-header>
   <dt-stack

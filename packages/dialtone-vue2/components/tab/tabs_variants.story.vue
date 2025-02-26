@@ -41,7 +41,7 @@
 
         <div
           :class="{
-            'd-fc-neutral-white': variant.propsToBind.inverted,
+            'd-fc-primary-inverted': variant.propsToBind.inverted,
           }"
         >
           <dt-tab-panel
@@ -78,35 +78,36 @@ export default {
   components: { DtTabGroup, DtTab, DtTabPanel },
   data () {
     return {
-      variantsTabs: [{
-        description: 'Default tabs',
-        propsToBind: {},
-      }, {
-        description: 'Inverted tabs',
-        propsToBind: {
-          inverted: true,
+      variantsTabs: [
+        {
+          description: 'Default tabs',
+          propsToBind: {},
         },
-      }, {
-        description: 'Small size tabs',
-        propsToBind: {
-          size: 'sm',
+        {
+          description: 'Inverted tabs',
+          propsToBind: {
+            inverted: true,
+          },
         },
-      }, {
-        description: 'Borderless tabs',
-        propsToBind: {
-          borderless: true,
+        {
+          description: 'Small size tabs',
+          propsToBind: {
+            size: 'sm',
+          },
         },
-      }, {
-        description: 'Importance tabs',
-        propsToBind: {
-          importance: true,
+        {
+          description: 'Borderless tabs',
+          propsToBind: {
+            borderless: true,
+          },
         },
-      }, {
-        description: 'Disabled tabs',
-        propsToBind: {
-          disabled: true,
+        {
+          description: 'Disabled tabs',
+          propsToBind: {
+            disabled: true,
+          },
         },
-      }],
+      ],
     };
   },
 };

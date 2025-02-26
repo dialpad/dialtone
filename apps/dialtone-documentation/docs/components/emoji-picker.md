@@ -1,5 +1,5 @@
 ---
-title: Emoji picker
+title: Emoji Picker
 thumb: true
 image: assets/images/components/emoji-picker.png
 description: A emoji picker component that allows you to view and select an emoji from a list.
@@ -29,7 +29,7 @@ storybook: https://dialtone.dialpad.com/vue3/?path=/story/components-emoji-picke
     />
 </code-well-header>
 
-## Variants and examples
+## Variants and Examples
 
 ### Default
 
@@ -180,7 +180,7 @@ vueCode='
 '
 showHtmlWarning />
 
-### With popover
+### With Popover
 
 <code-well-header>
   <dt-popover

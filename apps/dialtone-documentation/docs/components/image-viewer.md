@@ -18,7 +18,7 @@ storybook: https://dialtone.dialpad.com/vue/?path=/story/components-image-viewer
 
 ## Examples
 
-### JPG image
+### JPG Image
 
 <code-well-header>
   <dt-image-viewer
@@ -44,7 +44,7 @@ vueCode='
 '
 />
 
-### GIF image
+### GIF Image
 
 <code-well-header>
   <dt-image-viewer

@@ -1,3 +1,30 @@
+## [2.175.2](https://github.com/dialpad/dialtone/compare/dialtone-vue2/v2.175.1...dialtone-vue2/v2.175.2) (2025-02-25)
+
+
+### Bug Fixes
+
+* NO-JIRA not show unmounted warning in dev or prod environments ([#643](https://github.com/dialpad/dialtone/issues/643)) ([32cffbd](https://github.com/dialpad/dialtone/commit/32cffbde0aafa6c9f3c278bc23ba1b68b2aec17b))
+
+## [2.175.1](https://github.com/dialpad/dialtone/compare/dialtone-vue2/v2.175.0...dialtone-vue2/v2.175.1) (2025-02-21)
+
+
+### Bug Fixes
+
+* DP-128277 remove duplicated hasFooter from DtPopover ([#642](https://github.com/dialpad/dialtone/issues/642)) ([98a06e1](https://github.com/dialpad/dialtone/commit/98a06e14f59e98b077ce67dc44201ef95d42ff4d))
+
+# [2.175.0](https://github.com/dialpad/dialtone/compare/dialtone-vue2/v2.174.0...dialtone-vue2/v2.175.0) (2025-02-20)
+
+
+### Documentation
+
+* NO-JIRA fix ivr-node ([#630](https://github.com/dialpad/dialtone/issues/630)) ([bca81d8](https://github.com/dialpad/dialtone/commit/bca81d8ac1f0701512a35c6af704762c08d8f080))
+
+
+### Features
+
+* DLT-2370 add before-change event and improve tab behavior ([#633](https://github.com/dialpad/dialtone/issues/633)) ([dd43934](https://github.com/dialpad/dialtone/commit/dd4393485b1ca223e3679b51cf537fe216fb8c00))
+* DP-128277 footer slot for DtDropdown ([#635](https://github.com/dialpad/dialtone/issues/635)) ([38f0614](https://github.com/dialpad/dialtone/commit/38f061425c8eadea22919002b7d63d85ddcf3758))
+
 # [2.174.0](https://github.com/dialpad/dialtone/compare/dialtone-vue2/v2.173.0...dialtone-vue2/v2.174.0) (2025-02-11)
 
 

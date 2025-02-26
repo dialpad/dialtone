@@ -1,6 +1,6 @@
 ---
-title: Justify content
-description: Utilities for setting how an element's space around and between content is distributed along it's main axis.
+title: Justify Content
+description: Utilities for setting how an element's space around and between content is distributed along its main axis.
 ---
 
 ## Classes
@@ -16,7 +16,7 @@ description: Utilities for setting how an element's space around and between con
   </template>
 </utility-class-table>
 
-## Flex start
+## Flex Start
 
 Use `d-jc-flex-start` to justify items against the start of the element's main axis. This is the default value.
 
@@ -56,7 +56,7 @@ Use `d-jc-center` to justify items along the center of the element's main axis.
 </div>
 ```
 
-## Flex end
+## Flex End
 
 Use `d-jc-flex-end` to justify items against the end of the element's main axis.
 
@@ -76,7 +76,7 @@ Use `d-jc-flex-end` to justify items against the end of the element's main axis.
 </div>
 ```
 
-## Space around
+## Space Around
 
 Use `d-jc-space-around` to justify items along the element's main axis so that there is an equal amount of space on each side of the item. This effectively takes all available space, divides it for each child element, placing half of available space on either side of the child. This is why the space appears doubled for interior objects versus end objects.
 
@@ -96,7 +96,7 @@ Use `d-jc-space-around` to justify items along the element's main axis so that t
 </div>
 ```
 
-## Space between
+## Space Between
 
 Use `d-jc-space-between` to justify items along the element's main axis so that there is an equal amount of space between each item without inserting any space between the first or last object.
 
@@ -116,7 +116,7 @@ Use `d-jc-space-between` to justify items along the element's main axis so that 
 </div>
 ```
 
-## Space evenly
+## Space Evenly
 
 Use `d-jc-space-evenly` to justify items along the element's main axis so that there is an equal amount of space on each side of the item, but unlike `d-jc-space-around` visually evenly spaces objects.
 

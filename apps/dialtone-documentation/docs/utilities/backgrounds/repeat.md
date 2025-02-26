@@ -1,5 +1,5 @@
 ---
-title: Background repeat
+title: Background Repeat
 description: Utilities for controlling if or how an element's background image repeats.
 ---
 ## Usage

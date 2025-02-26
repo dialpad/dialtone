@@ -6,7 +6,7 @@ thumb: true
 image: assets/images/components/scrollbar.png
 ---
 
-## Scrollbar directive
+## Scrollbar Directive
 
 Allows to add overlay scrollbars that will look the same for every browser. The directive sets up the scrollbars from the library [OverlayScrollbars](https://kingsora.github.io/OverlayScrollbars/).
 
@@ -98,7 +98,7 @@ see [variants](#variants).
 
 To customize the behavior of the scrollbar, you can use different arguments with the directive. The allowed arguments are 'leave' (default), 'never', 'scroll', and 'move'.
 
-### Enter (default)
+### Enter (Default)
 
 Show the scrollbar when the mouse enters the scrollable area. This is the default option, so no argument is needed.
 

@@ -67,7 +67,7 @@ showHtmlWarning />
 
 ## Variants
 
-### Many hovercards
+### Many Hovercards
 
 <code-well-header>
   <dt-stack direction="row" gap="500">

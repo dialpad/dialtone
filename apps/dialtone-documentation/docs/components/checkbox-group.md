@@ -1,5 +1,5 @@
 ---
-title: Checkbox group
+title: Checkbox Group
 description: Checkbox groups are convenient components for a grouping of related Checkboxes.
 status: ready
 thumb: true
@@ -121,7 +121,7 @@ vueCode='
 '
 showHtmlWarning />
 
-### With selected values
+### With Selected Values
 
 <code-well-header>
   <dt-checkbox-group
@@ -201,7 +201,7 @@ vueCode='
 '
 />
 
-### With validation states
+### With Validation States
 
 <code-well-header>
   <div class="d-stack16">
@@ -355,7 +355,7 @@ vueCode='
 '
 showHtmlWarning />
 
-### With validation messages hidden
+### With Validation Messages Hidden
 
 <code-well-header>
   <dt-checkbox-group

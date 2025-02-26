@@ -1,11 +1,11 @@
 ---
-title: Font variant numeric
+title: Font Variant Numeric
 description: Utilities to change an element's font variant numeric.
 ---
 
 The `font-variant-numeric` CSS property controls the usage of alternate glyphs for numbers, fractions, and ordinal markers.
 
-## Normal (default)
+## Normal (Default)
 
 Use `d-fvn-normal` to deactivate any alternate glyphs.
 
@@ -29,7 +29,7 @@ The class `d-fvn-ordinal` forces the use of special glyphs for ordinal markers, 
 <p class="d-fs-300 d-fvn-ordinal">1st, 2nd, 3rd, 4th</p>
 ```
 
-## Proportional-nums
+## Proportional-Nums
 
 Use `d-fvn-proportional` to set different sizes for each number.
 
@@ -66,7 +66,7 @@ Use `d-fvn-proportional` to set different sizes for each number.
 <div class="d-fs-300 d-fvn-proportional"><table>...</table></div>
 ```
 
-## Tabular-nums
+## Tabular-Nums
 
 Use `d-fvn-tabular` for aligning tabular data and preventing layout shifts of dynamically-changing content. For example, a timer counting down.
 
@@ -103,7 +103,7 @@ Use `d-fvn-tabular` for aligning tabular data and preventing layout shifts of dy
 <div class="d-fs-300 d-fvn-tabular"><table>...</table></div>
 ```
 
-## Diagonal-fractions
+## Diagonal-Fractions
 
 Use `d-fvn-diagonal` to display numerator and denominator smaller and separated by a slash.
 

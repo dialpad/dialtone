@@ -14,10 +14,6 @@
               }
             }
           }
-        },
-        "bulletin": {
-          "value": "{color.neutral.black}",
-          "type": "color"
         }
       },
       "border": {
@@ -36,8 +32,8 @@
         }
       },
       "background": {
-        "bulletin": {
-          "value": "{color.purple.475}",
+        "bulletin-subtle": {
+          "value": "{color.purple.200}",
           "type": "color"
         }
       }

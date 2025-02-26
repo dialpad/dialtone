@@ -1,3 +1,18 @@
+## [1.41.1](https://github.com/dialpad/dialtone/compare/dialtone-tokens/v1.41.0...dialtone-tokens/v1.41.1) (2025-02-19)
+
+
+### Bug Fixes
+
+* **Tokens:** DLT-2347 mobile color token modifiers fix ([#628](https://github.com/dialpad/dialtone/issues/628)) ([9545644](https://github.com/dialpad/dialtone/commit/9545644dc1837061e57370e06c1e695a56681518))
+* **Tokens:** DLT-2348 android font sizes were dp instead of sp ([#631](https://github.com/dialpad/dialtone/issues/631)) ([adda07b](https://github.com/dialpad/dialtone/commit/adda07bdd52126cac3a60c522f54da82034c3484))
+
+# [1.41.0](https://github.com/dialpad/dialtone/compare/dialtone-tokens/v1.40.0...dialtone-tokens/v1.41.0) (2025-02-17)
+
+
+### Features
+
+* **Design Tokens:** NO-JIRA experimental deca token set updates again ([#632](https://github.com/dialpad/dialtone/issues/632)) ([c7ad513](https://github.com/dialpad/dialtone/commit/c7ad513f49215728dae86bf3305dd54f44df1251))
+
 # [1.40.0](https://github.com/dialpad/dialtone/compare/dialtone-tokens/v1.39.0...dialtone-tokens/v1.40.0) (2025-01-31)
 
 

@@ -1,5 +1,5 @@
 ---
-title: Background color
+title: Background Color
 description: Utilities for setting the background color.
 ---
 
@@ -26,7 +26,7 @@ Use `d-bgc-{color}` to set an element's background color.
 <div class="d-bgc-purple-300">...</div>
 ```
 
-## Changing opacity
+## Changing Opacity
 
 Use `d-bgo{stop}` to change an element's background color opacity. You can also change the background color opacity on `:hover`, `:focus`, `:focus-visible` by using the respective `h:d-bgo{stop}`, `f:d-bgo{stop}`, `fv:d-bgo{stop}` prefixes.
 
@@ -78,7 +78,7 @@ Use `f:d-bgc-{color}` to change an element's `:focus` and `:focus-within` state 
 <button class="d-bgc-transparent f:d-fc-red-300 f:d-bgc-red-300 f:d-bgo25">...</button>
 ```
 
-## Focus visible
+## Focus Visible
 
 Use `fv:d-bgc-{color}` to change an element's `:focus-visible` state background color [only when focused by keyboard].
 

@@ -42,11 +42,11 @@ Breadcrumbs show users where they are within a site’s hierarchy. Breadcrumbs h
 
 Breadcrumbs should be the first page element—placed directly above the page’s title. All pages that appear in the breadcrumb should link to their respective page. The page the user is on should always be the last page listed and not linked.
 
-### When not to use
+### When Not to Use
 
 Breadcrumbs are always treated as secondary and should not entirely replace the primary navigation. They shouldn’t be used for products that have single level navigation because they create unnecessary clutter.
 
-## Variants and examples
+## Variants and Examples
 
 ### Default
 

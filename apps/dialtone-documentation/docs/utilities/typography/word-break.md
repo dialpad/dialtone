@@ -1,5 +1,5 @@
 ---
-title: Word break
+title: Word Break
 description: Utilities for controlling the way words break within an element. Useful when you want to ensure that text will absolutely not overflow its container, regardless readability risk.
 ---
 
@@ -17,7 +17,7 @@ Use `d-wb-normal` to reset an element's line break rule.
 <p class="d-wb-normal">...</p>
 ```
 
-## Break all
+## Break All
 
 Use `d-wb-break-all` on an element to insert word breaks between any two characters (excluding Chinese, Japanese, or Korean text) to prevent text from overflowing. The break between any two characters can lead to awkward line breaks in the middle of short words, for a more conservative way to handle it see [`d-ww-break-word`](./word-wrap.md#break-word).
 
@@ -31,7 +31,7 @@ Use `d-wb-break-all` on an element to insert word breaks between any two charact
 <p class="d-wb-break-all">...</p>
 ```
 
-## Keep all
+## Keep All
 
 Use `d-wb-keep-all` on an element to not use word breaks for Chinese, Japanese, or Korean (CJK) text. Non-CJK text behavior is set to normal.
 
