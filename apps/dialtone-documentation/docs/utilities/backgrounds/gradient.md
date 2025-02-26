@@ -104,7 +104,7 @@ The starting stop (`d-bgg-from-{color}`) should be declared. Optionally an endin
 <new-utility-class-table :classes="colors">
   <template #example="{ className }">
     <div
-      class="d-fl-shrink0 d-m4 d-ml16 d-h32 d-w64 d-bar4 d-bgg-to-r d-bgg-from-black-100"
+      class="d-fl-shrink0 d-h32 d-w64 d-bar4 d-bgg-to-r d-bgg-from-black-100"
       :class="className"
     >
     </div>
