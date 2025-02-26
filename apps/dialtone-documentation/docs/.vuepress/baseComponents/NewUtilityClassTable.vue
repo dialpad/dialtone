@@ -24,7 +24,7 @@
           <td
             class="d-code--sm d-ws-break-spaces"
           >
-            <div class="d-d-flex d-jc-space-between d-ai-center">
+            <div class="d-d-flex d-jc-space-between d-ai-center d-gg16">
               <span class="d-fl-grow1 d-code--sm" v-text="value" />
               <slot name="example" :class-name="className" />
             </div>
