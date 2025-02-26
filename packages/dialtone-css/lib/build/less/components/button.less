@@ -226,20 +226,7 @@
 .d-btn--circle {
   --button-padding-x: var(--button-padding-y-md);
   --button-padding-y: var(--button-padding-y-md);
-  --button-color-text: var(--dt-action-color-foreground-muted-default);
   --button-border-radius: var(--dt-size-radius-circle);
-
-  &:hover:not([disabled]) {
-    --button-color-text: var(--dt-action-color-foreground-muted-hover);
-    --button-color-background: var(--dt-action-color-background-muted-hover);
-  }
-
-  &:active:not([disabled]),
-  &.d-btn--active:not([disabled]),
-  &.d-btn--active:active:not([disabled]) {
-    --button-color-text: var(--dt-action-color-foreground-muted-active);
-    --button-color-background: var(--dt-action-color-background-muted-active);
-  }
 
   .d-btn__icon {
     margin: unset;
@@ -247,10 +234,6 @@
 
   &.d-btn__label {
     display: none;
-  }
-
-  &.d-btn--outlined {
-    --button-color-border: var(--dt-action-color-border-muted-outlined-default);
   }
 
   // Adjust padding based on sizes
