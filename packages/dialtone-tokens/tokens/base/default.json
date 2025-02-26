@@ -517,7 +517,7 @@
         "type": "fontFamilies"
       },
       "expressive": {
-        "value": "Archivo, {font.family.body}",
+        "value": "\"Season Mix\", {font.family.body}",
         "type": "fontFamilies"
       },
       "mono": {
