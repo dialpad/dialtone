@@ -91,19 +91,13 @@ export const argTypesData = {
     },
     control: 'text',
   },
-  contentClass: {
-    table: {
-      type: {
-        summary: ['string', 'array', 'object'],
-      },
-    },
-    control: 'text',
-  },
 
   // Popover slots
   list: {
     description: 'Slot for dropdown list',
-    control: 'text',
+    control: {
+      type: {},
+    },
     table: {
       type: {
         summary: 'VNode',
