@@ -198,7 +198,7 @@ export const pascalCaseToKebabCase = (string) => {
 
 export const extractVueListeners = (attrs) => {
   const listeners = Object.entries(attrs)
-    .filter(([key]) => /on[A-Z]/.match(key));
+    .filter(([key]) => key.match(/on[A-Z]/));
   return Object.fromEntries(listeners);
 };
 
