@@ -60,6 +60,12 @@
         <span v-html="$attrs.emojiGiphyPicker" />
       </template>
       <template
+        v-if="$attrs.customActionIcons"
+        #customActionIcons
+      >
+        <span v-html="$attrs.customActionIcons" />
+      </template>
+      <template
         v-if="$attrs.middle"
         #middle
       >

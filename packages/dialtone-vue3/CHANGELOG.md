@@ -1,3 +1,10 @@
+## [3.168.1](https://github.com/dialpad/dialtone/compare/dialtone-vue3/v3.168.0...dialtone-vue3/v3.168.1) (2025-02-25)
+
+
+### Bug Fixes
+
+* NO-JIRA not show unmounted warning in dev or prod environments ([#643](https://github.com/dialpad/dialtone/issues/643)) ([32cffbd](https://github.com/dialpad/dialtone/commit/32cffbde0aafa6c9f3c278bc23ba1b68b2aec17b))
+
 # [3.168.0](https://github.com/dialpad/dialtone/compare/dialtone-vue3/v3.167.0...dialtone-vue3/v3.168.0) (2025-02-20)
 
 
