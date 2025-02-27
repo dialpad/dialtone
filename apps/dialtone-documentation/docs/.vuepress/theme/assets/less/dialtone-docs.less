@@ -258,11 +258,9 @@ html body {
   align-items: center;
   justify-content: space-between;
   height: var(--dt-size-700);
-  padding: var(--dt-space-500);
-  padding-left: var(--dt-space-400);
+  padding: var(--dt-space-500) var(--dt-space-500) var(--dt-space-500) var(--dt-space-400);
   background-color: var(--dt-color-surface-secondary);
-  // TODO: redo 😜
-  border-bottom: var(--dt-size-100) solid var(--dt-color-border-subtle);
+  border-bottom: var(--dt-size-border-50) solid var(--dt-color-border-subtle);
 }
 
 .dialtone-sidebar {
@@ -300,9 +298,8 @@ a.header-anchor {
 .d-docsite--header-2 {
   margin-top: var(--dt-space-600);
   margin-bottom: var(--dt-space-400);
-  font-weight: var(--dt-font-weight-medium);
-  font-size: var(--dt-font-size-400);
-  line-height: var(--dt-font-line-height-200);
+  font: var(--dt-typography-headline-xl);
+  font-family: var(--dt-font-family-expressive);
 }
 
 .d-docsite--header-3 {
@@ -636,9 +633,8 @@ a.header-anchor {
 
 .dialtone-page-title {
   margin-bottom: var(--dt-space-400);
-  font-weight: var(--dt-font-weight-medium);
-  font-size: var(--dt-font-size-500);
-  line-height: var(--dt-font-line-height-200);
+  font: var(--dt-typography-headline-xxl);
+  font-family: var(--dt-font-family-expressive);
 }
 
 //  ============================================================================
@@ -681,12 +677,13 @@ a.header-anchor {
     border: var(--dt-size-100) solid;
     border-color: var(--dt-color-border-default);
     border-radius: var(--dt-size-400);
+    opacity: .7;
     transition-timing-function: var(--ttf-in-out);
     transition-duration: var(--td200);
     transition-property: box-shadow;
 
-    &--disabled {
-      opacity: .7;
+    &:is(a) {
+      opacity: initial;
     }
 
     &:is(a):hover {
