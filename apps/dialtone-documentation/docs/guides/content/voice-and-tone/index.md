@@ -1,6 +1,6 @@
 ---
-title: Voice and tone
-prev: { link: "/guides/content/inclusive-language/", text: "Inclusive language" }
+title: Voice and Tone
+prev: { link: "/guides/content/inclusive-language/", text: "Inclusive Language" }
 next: { link: "/guides/accessibility", text: "Accessibility" }
 description: Learn how to apply Dialpad's voice and choose the right tone, no matter the product, feature, or experience you're building.
 ---

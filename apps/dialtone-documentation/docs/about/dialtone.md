@@ -5,23 +5,20 @@ description: Dialtone is Dialpad's Design System that unites product teams aroun
 
 ## Release Notes
 
-<div class="d-d-grid d-g16 d-g-cols2 md:d-g-cols1">
-  <div>
-    <dt-stack class="d-ai-center" direction="row" gap="400">
-      <h3 class="d-docsite--header-3">Dialtone</h3>
-      <a
-        class="d-d-inline-flex d-pt12"
-        href="https://github.com/dialpad/dialtone/"
-      >
-        <img
-          alt="Dialtone version number"
-          src="https://img.shields.io/github/package-json/v/dialpad/dialtone?color=D3BCFF&label=Dialtone"
-        />
-      </a>
-    </dt-stack>
-    <dialtone-changelog />
-  </div>
-</div>
+<p>
+  <a
+    class="d-d-inline-flex d-pt12"
+    href="https://github.com/dialpad/dialtone/"
+  >
+    <img
+      alt="Dialtone version number"
+      src="https://img.shields.io/github/package-json/v/dialpad/dialtone?color=D3BCFF&label=Dialtone"
+    />
+  </a>
+</p>
+<dialtone-changelog />
+
+### [All Releases](https://github.com/dialpad/dialtone/releases)
 
 ## Components
 
