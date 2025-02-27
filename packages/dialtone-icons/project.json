@@ -11,7 +11,11 @@
           },
           {
             "command": "nx run-many --target=build --projects=dialtone-icons-vue2,dialtone-icons-vue3 --parallel=2 --output-style=stream"
-          }
+          },
+          "brew install ComposeGears/repo/valkyrie",
+          "rm -rf dist/android",
+          "valkyrie iconpack --output-path=./dist/android/kotlin/icons --package-name=dialtone.dialpad.icons --iconpack-name=DialtoneIcons",
+          "valkyrie svgxml2imagevector --input-path=./dist/svg/icons --output-path=./dist/android/kotlin/icons --package-name=dialtone.dialpad.icons --iconpack-name=DialtoneIcons"
         ],
         "parallel": false
       },
@@ -38,6 +42,16 @@
       "executor": "nx:run-commands",
       "options": {
         "command": "pnpm semantic-release-plus --extends ./packages/dialtone-icons/release-ci.config.cjs && sleep 3",
+        "parallel": false
+      }
+    },
+    "publish:android-package": {
+      "executor": "nx:run-commands",
+      "options": {
+        "cwd": "{projectRoot}/android",
+        "commands": [
+          "cp ./AndroidManifest.xml ./../dist/android && ./gradlew publishToMavenLocal -Pversion=0.0.1"
+        ],
         "parallel": false
       }
     }
