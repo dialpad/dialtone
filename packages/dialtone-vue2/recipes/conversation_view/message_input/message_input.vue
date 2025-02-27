@@ -946,6 +946,11 @@ export default {
         const files = [...e.clipboardData.files];
         this.$emit('paste-media', files);
       }
+
+      // Handle link paste when no rich-text
+      if (!this.richText) {
+
+      }
     },
 
     onSkinTone (skinTone) {
