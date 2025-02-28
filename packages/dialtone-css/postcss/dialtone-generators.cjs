@@ -104,10 +104,10 @@ const generatedRules = {
  * @param { Declaration } declaration
  */
 function colorUtilities (clonedSource, declaration) {
-  const baseColorsRegex = new RegExp(`(dtColor(Neutral)?(${REGEX_OPTIONS.COLORS})([0-9]{2,4})?)`);
-  const foregroundColorsRegex = new RegExp(`(dtColorForeground(${REGEX_OPTIONS.FONT_COLORS})(${REGEX_OPTIONS.FONT_COLOR_VARIATIONS})?)`, 'i');
-  const surfaceColorsRegex = new RegExp(`(dtColorSurface(${REGEX_OPTIONS.BACKGROUND_COLORS})(${REGEX_OPTIONS.BACKGROUND_COLOR_VARIATIONS})?)`, 'i');
-  const borderColorsRegex = new RegExp(`(dtColorBorder(${REGEX_OPTIONS.BORDER_COLORS})(${REGEX_OPTIONS.BORDER_COLOR_VARIATIONS})?)`, 'i');
+  const foregroundColorsRegex = /dtColorForeground.+/i;
+  const surfaceColorsRegex = /dtColorSurface.+/i;
+  const borderColorsRegex = /dtColorBorder.+/i;
+  const baseColorsRegex = /dtColor(?!(Foreground|Surface|Border|Brand|Gradient|Link)).+/i;
 
   const tokens = { ...TokensBaseLight, ...TokensDpLight };
 
@@ -143,10 +143,12 @@ function colorUtilities (clonedSource, declaration) {
     generatedRules.backgroundColor.push(new Rule({
       source: clonedSource,
       selector: appendHoverFocusSelectors(`.d-bgc-${colorName}`),
-      nodes: _generateColorNodes(token, 'background-color', '--bgo'),
+      nodes: _generateColorNodes(token, 'background', '--bgo'),
     }));
   }
   function _generateBorderColors (token, colorName) {
+    if (colorName === 'ai') return;
+
     generatedRules.borderColor.push(new Rule({
       source: clonedSource,
       selector: appendHoverFocusSelectors(`.d-bc-${colorName}`),
