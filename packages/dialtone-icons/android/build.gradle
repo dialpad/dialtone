@@ -14,7 +14,7 @@ idea {
 }
 
 ext.kotlin_version = '1.7.20'
-project.buildDir = '../dist_android'
+project.buildDir = 'dist'
 
 repositories {
     mavenCentral()
@@ -30,9 +30,9 @@ dependencies {
 android {
     sourceSets {
         main {
-            java.srcDirs = ['../dist/android/kotlin']
-            res.srcDirs = ['../dist/android/res']
-            manifest.srcFile '../dist/android/AndroidManifest.xml'
+            java.srcDirs = ['src/kotlin']
+            res.srcDirs = ['src/res']
+            manifest.srcFile 'src/AndroidManifest.xml'
         }
     }
 }

@@ -10,12 +10,8 @@
             "command": "pnpm exec gulp"
           },
           {
-            "command": "nx run-many --target=build --projects=dialtone-icons-vue2,dialtone-icons-vue3 --parallel=2 --output-style=stream"
-          },
-          "brew install ComposeGears/repo/valkyrie",
-          "rm -rf dist/android",
-          "valkyrie iconpack --output-path=./dist/android/kotlin/icons --package-name=dialtone.dialpad.icons --iconpack-name=DialtoneIcons",
-          "valkyrie svgxml2imagevector --input-path=./dist/svg/icons --output-path=./dist/android/kotlin/icons --package-name=dialtone.dialpad.icons --iconpack-name=DialtoneIcons"
+            "command": "nx run-many --target=build --projects=dialtone-icons-vue2,dialtone-icons-vue3,dialtone-icons-android --parallel=3 --output-style=stream"
+          }
         ],
         "parallel": false
       },
@@ -50,7 +46,7 @@
       "options": {
         "cwd": "{projectRoot}/android",
         "commands": [
-          "cp ./AndroidManifest.xml ./../dist/android && ./gradlew publishToMavenLocal -Pversion=0.0.1"
+          "./gradlew publishToMavenLocal"
         ],
         "parallel": false
       }
