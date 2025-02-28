@@ -26,6 +26,10 @@ ruleTester.run("deprecated-component", rule, {
             name: 'Component that contains select_menu in the filename, but is not the file we are looking for',
             code: "import SelectMenuOption from '../components/select_menu_option';",
         },
+        {
+            name: 'Component that contains checkbox at the end of the name',
+            code: "import Checkbox from './components/app_settings_checkbox';",
+        },
     ],
 
     invalid: [
