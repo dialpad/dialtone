@@ -1,7 +1,9 @@
 name: Draft publish icons android package
 
 on:
-  workflow_dispatch:
+  push:
+    branches:
+      - "jp/DLT-2384-android-icons-package"
 
 env:
   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
