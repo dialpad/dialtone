@@ -13,6 +13,7 @@
       :inverted-tooltip="invertedTooltip"
       :show-tooltip="showTooltip"
       :tooltip-text="tooltipText"
+      :tooltip-delay="tooltipDelay"
       class="d-recipe-callbar-button-with-popover--main-button"
       @click="buttonClick"
     >
@@ -285,6 +286,15 @@ export default {
      */
     tooltipText: {
       type: String,
+      default: undefined,
+    },
+
+    /**
+     * Whether there is a delay before the tooltip shows on hover/focus.
+     * @values true, false
+     */
+    tooltipDelay: {
+      type: Boolean,
       default: undefined,
     },
   },
