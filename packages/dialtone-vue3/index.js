@@ -77,6 +77,7 @@ export * from './directives/scrollbar';
 /// Recipes
 export * from './recipes/buttons/callbar_button';
 export * from './recipes/buttons/callbar_button_with_popover';
+export * from './recipes/buttons/callbar_button_with_dropdown';
 export * from './recipes/cards/ivr_node';
 export * from './recipes/chips/grouped_chip';
 export * from './recipes/comboboxes/combobox_multi_select';
