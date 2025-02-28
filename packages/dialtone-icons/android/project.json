@@ -21,7 +21,8 @@
           "brew install ComposeGears/repo/valkyrie",
           "valkyrie iconpack --output-path=./src/kotlin/icons --package-name=dialtone.dialpad.icons --iconpack-name=DialtoneIcons",
           "valkyrie svgxml2imagevector --input-path=./../dist/svg/icons --output-path=./src/kotlin/icons --package-name=dialtone.dialpad.icons --iconpack-name=DialtoneIcons"
-        ]
+        ],
+        "parallel": false
       }
     }
   }
