@@ -147,7 +147,8 @@ function colorUtilities (clonedSource, declaration) {
     }));
   }
   function _generateBorderColors (token, colorName) {
-    if (colorName === 'ai') return;
+    // Exclude ai gradient border color
+    if (token === '--dt-color-border-ai') return;
 
     generatedRules.borderColor.push(new Rule({
       source: clonedSource,
