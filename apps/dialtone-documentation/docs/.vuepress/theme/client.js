@@ -43,6 +43,7 @@ export default defineClientConfig({
       await registerDialtoneVue(app);
       // await registerDialtoneCombinator(app);
       await registerDialtoneIcons(app);
+      await importDocumentation(app);
     }
     router.options.scrollBehavior = async (to, from, savedPosition) => {
       if (to.hash) {
@@ -128,4 +129,15 @@ async function registerDialtoneIcons (app) {
 
   app.provide('dialtoneIcons', dialtoneIcons);
   app.provide('dialtoneIllustrations', dialtoneIllustrations);
+}
+
+async function importDocumentation (app) {
+  try {
+    console.info('Importing Utility Class documentation');
+    const importedModule = await import('../../../node_modules/@dialpad/dialtone-css/lib/dist/dialtone-docs.json');
+
+    app.provide('utilityClassDocs', importedModule.default);
+  } catch (error) {
+    console.error(`Couldn't import dialtone documentation: ${error}`);
+  }
 }
