@@ -2,6 +2,7 @@
   <dt-tooltip
     :id="id"
     :inverted="invertedTooltip"
+    :delay="tooltipDelay"
     :show="showTooltip"
     :offset="[0, 24]"
   >
@@ -173,6 +174,14 @@ export default {
       default: undefined,
     },
 
+    /**
+     * Whether there is a delay before the tooltip shows on hover/focus.
+     * @values true, false
+     */
+    tooltipDelay: {
+      type: Boolean,
+      default: undefined,
+    },
   },
 
   emits: [

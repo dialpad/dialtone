@@ -10,6 +10,10 @@
       :button-class="buttonClass"
       :button-width-size="buttonWidthSize"
       :text-class="textClass"
+      :inverted-tooltip="invertedTooltip"
+      :show-tooltip="showTooltip"
+      :tooltip-text="tooltipText"
+      :tooltip-delay="tooltipDelay"
       class="dt-recipe--callbar-button-with-dropdown--main-button"
       @click="buttonClick"
     >
@@ -219,6 +223,42 @@ export default {
       type: String,
       default: 'xl',
       validator: size => CALLBAR_BUTTON_VALID_WIDTH_SIZE.includes(size),
+    },
+
+    /**
+     * Whether the tooltip has an inverted background color.
+     * @values true, false
+     */
+    invertedTooltip: {
+      type: Boolean,
+      default: false,
+    },
+
+    /**
+     * Use this if you would like to manually override the logic for when the tooltip shows.
+     * Otherwise it will just show on hover/focus.
+     * @values null, true, false
+     */
+    showTooltip: {
+      type: Boolean,
+      default: null,
+    },
+
+    /**
+     * The message that displays in the tooltip. This will be overridden by the tooltip slot.
+     */
+    tooltipText: {
+      type: String,
+      default: undefined,
+    },
+
+    /**
+     * Whether there is a delay before the tooltip shows on hover/focus.
+     * @values true, false
+     */
+    tooltipDelay: {
+      type: Boolean,
+      default: undefined,
     },
   },
 
