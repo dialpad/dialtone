@@ -1,5 +1,5 @@
 ---
-title: CSS utilities
+title: CSS Utilities
 description: A utility-first CSS framework for building user interfaces.
 ---
 
