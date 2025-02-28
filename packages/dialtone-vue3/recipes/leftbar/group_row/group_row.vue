@@ -64,7 +64,7 @@ export default {
     /**
      * Number of unread mention messages
      */
-     unreadMentionCount: {
+    unreadMentionCount: {
       type: String,
       default: null,
     },
