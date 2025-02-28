@@ -1,3 +1,15 @@
+# [2.176.0](https://github.com/dialpad/dialtone/compare/dialtone-vue2/v2.175.2...dialtone-vue2/v2.176.0) (2025-02-27)
+
+
+### Bug Fixes
+
+* **Message Input:** DP-131613 fix pasting links when no rich-text ([#653](https://github.com/dialpad/dialtone/issues/653)) ([5538473](https://github.com/dialpad/dialtone/commit/55384736fdde0c7599dbfead148399f8c1a7b109))
+
+
+### Features
+
+* **Message Input:** DLT-2358 add slot for custom action icons ([#641](https://github.com/dialpad/dialtone/issues/641)) ([91fa11e](https://github.com/dialpad/dialtone/commit/91fa11ec4177901dec9005817af5ddc2adebdf90))
+
 ## [2.175.2](https://github.com/dialpad/dialtone/compare/dialtone-vue2/v2.175.1...dialtone-vue2/v2.175.2) (2025-02-25)
 
 

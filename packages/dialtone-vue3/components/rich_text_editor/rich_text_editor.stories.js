@@ -162,5 +162,6 @@ export const WithCustomExtensions = {
     allowUnderline: false,
     allowCode: false,
     allowCodeblock: false,
+    link: false,
   },
 };
