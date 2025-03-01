@@ -1,3 +1,16 @@
+# [9.104.0](https://github.com/dialpad/dialtone/compare/dialtone/v9.103.0...dialtone/v9.104.0) (2025-03-01)
+
+
+### Bug Fixes
+
+* **Callbar Button:** NO-JIRA add missing props ([#658](https://github.com/dialpad/dialtone/issues/658)) ([7dd2476](https://github.com/dialpad/dialtone/commit/7dd2476009f9bb8c83489f513d4a50bdcb5e938c))
+* **Eslint Plugin:** DLT-2390 bound filename by slash ([#656](https://github.com/dialpad/dialtone/issues/656)) ([a7b887a](https://github.com/dialpad/dialtone/commit/a7b887ac1a1031cb738b2428e2b900c5e3fecb5c))
+
+
+### Features
+
+* **Component:** DLT-2232 callbar button with dropdown ([#647](https://github.com/dialpad/dialtone/issues/647)) ([f029ffd](https://github.com/dialpad/dialtone/commit/f029ffd653b314a9dd248a5611444d418620ed1f))
+
 # [9.103.0](https://github.com/dialpad/dialtone/compare/dialtone/v9.102.2...dialtone/v9.103.0) (2025-02-27)
 
 
