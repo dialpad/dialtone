@@ -1,3 +1,15 @@
+# [3.170.0](https://github.com/dialpad/dialtone/compare/dialtone-vue3/v3.169.0...dialtone-vue3/v3.170.0) (2025-03-01)
+
+
+### Bug Fixes
+
+* **Callbar Button:** NO-JIRA add missing props ([#658](https://github.com/dialpad/dialtone/issues/658)) ([7dd2476](https://github.com/dialpad/dialtone/commit/7dd2476009f9bb8c83489f513d4a50bdcb5e938c))
+
+
+### Features
+
+* **Component:** DLT-2232 callbar button with dropdown ([#647](https://github.com/dialpad/dialtone/issues/647)) ([f029ffd](https://github.com/dialpad/dialtone/commit/f029ffd653b314a9dd248a5611444d418620ed1f))
+
 # [3.169.0](https://github.com/dialpad/dialtone/compare/dialtone-vue3/v3.168.1...dialtone-vue3/v3.169.0) (2025-02-27)
 
 
