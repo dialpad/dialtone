@@ -1,3 +1,10 @@
+## [1.8.1](https://github.com/dialpad/dialtone/compare/eslint-plugin-dialtone/v1.8.0...eslint-plugin-dialtone/v1.8.1) (2025-03-01)
+
+
+### Bug Fixes
+
+* **Eslint Plugin:** DLT-2390 bound filename by slash ([#656](https://github.com/dialpad/dialtone/issues/656)) ([a7b887a](https://github.com/dialpad/dialtone/commit/a7b887ac1a1031cb738b2428e2b900c5e3fecb5c))
+
 # [1.8.0](https://github.com/dialpad/dialtone/compare/eslint-plugin-dialtone/v1.7.2...eslint-plugin-dialtone/v1.8.0) (2024-09-13)
 
 
