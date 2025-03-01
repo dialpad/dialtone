@@ -148,12 +148,6 @@ jobs:
           AUTH_TOKEN: ${{ matrix.registry == 'GitHub' && env.GITHUB_TOKEN || secrets.DIALTONE_NPM_TOKEN }}
         run: pnpm config set ${{ matrix.registry_url }}:_authToken=${{ env.AUTH_TOKEN }}
 
-      # dialtone-icons-android requires Homebrew
-      - name: Set up Homebrew
-        if: ${{ matrix.package == 'dialtone-icons' }}
-        id: set-up-homebrew
-        uses: Homebrew/actions/setup-homebrew@master
-
       # Publish npm/GitHub
       - name: Publish ${{ matrix.package }}@${{ env.RELEASE_TAG }}
         env:

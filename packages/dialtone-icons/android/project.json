@@ -18,9 +18,8 @@
       "options": {
         "cwd": "{projectRoot}",
         "commands": [
-          "brew install ComposeGears/repo/valkyrie",
-          "valkyrie iconpack --output-path=./src/kotlin/icons --package-name=dialtone.dialpad.icons --iconpack-name=DialtoneIcons",
-          "valkyrie svgxml2imagevector --input-path=./../dist/svg/icons --output-path=./src/kotlin/icons --package-name=dialtone.dialpad.icons --iconpack-name=DialtoneIcons",
+          "valkyrie-cli/bin/valkyrie iconpack --output-path=./src/kotlin/icons --package-name=dialtone.dialpad.icons --iconpack-name=DialtoneIcons",
+          "valkyrie-cli/bin/valkyrie svgxml2imagevector --input-path=./../dist/svg/icons --output-path=./src/kotlin/icons --package-name=dialtone.dialpad.icons --iconpack-name=DialtoneIcons",
           "mkdir -p ./src/res/raw",
           "ls ./src/kotlin/icons | grep -E '.*\\.kt' | grep -v DialtoneIcons | cut -d . -f 1 > ./src/res/raw/icons.txt"
         ],
