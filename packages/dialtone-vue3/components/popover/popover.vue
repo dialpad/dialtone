@@ -715,7 +715,7 @@ export default {
 
   beforeUnmount () {
     this.tip?.destroy();
-    this.intersectionObserver.disconnect();
+    this.intersectionObserver?.disconnect();
     this.removeReferences();
     this.removeEventListeners();
   },
