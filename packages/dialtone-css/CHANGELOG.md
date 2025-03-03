@@ -1,3 +1,10 @@
+# [8.50.0](https://github.com/dialpad/dialtone/compare/dialtone-css/v8.49.2...dialtone-css/v8.50.0) (2025-02-28)
+
+
+### Features
+
+* **Component:** DLT-2232 callbar button with dropdown ([#647](https://github.com/dialpad/dialtone/issues/647)) ([f029ffd](https://github.com/dialpad/dialtone/commit/f029ffd653b314a9dd248a5611444d418620ed1f))
+
 ## [8.49.2](https://github.com/dialpad/dialtone/compare/dialtone-css/v8.49.1...dialtone-css/v8.49.2) (2025-02-19)
 
 

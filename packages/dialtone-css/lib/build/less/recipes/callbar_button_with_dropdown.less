@@ -1,0 +1,52 @@
+.dt-recipe--callbar-button-with-dropdown--arrow {
+  width: var(--dt-size-500);
+  height: var(--dt-size-500);
+  margin-top: var(--dt-space-450);
+  margin-left: calc(var(--dt-space-300-negative) * 5);
+  padding: var(--dt-space-400);
+  border-radius: var(--dt-size-300);
+
+  &.d-btn--active {
+    background: var(--dt-color-surface-moderate-opaque);
+  }
+
+  &--large {
+    margin-left: var(--dt-space-550-negative);
+  }
+
+  &__icon {
+    color: var(--dt-color-black-800);
+  }
+}
+
+.dt-recipe--callbar-button-with-dropdown--dropdown {
+  .d-popover__header {
+    color: var(--dt-color-foreground-primary-inverted);
+    background: var(--dt-color-surface-contrast);
+
+    .d-btn {
+      color: var(--dt-color-foreground-primary-inverted);
+    }
+  }
+}
+
+.dt-recipe--callbar-button-with-dropdown--button .d-tab--selected::after,
+.dt-recipe--callbar-button-with-dropdown--button .d-tab--selected:hover::after {
+  --tab--bgc: var(--dt-color-surface-contrast);
+}
+
+.dt-recipe--callbar-button-with-dropdown--button .tab-group {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.dt-recipe--callbar-button-with-dropdown--button .tab-content {
+  flex: 1 1 100%;
+  overflow-y: auto;
+}
+
+.dt-recipe--callbar-button-with-dropdown {
+  display: flex;
+  align-items: flex-start;
+}

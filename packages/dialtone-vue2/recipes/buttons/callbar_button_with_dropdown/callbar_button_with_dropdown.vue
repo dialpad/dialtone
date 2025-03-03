@@ -1,6 +1,6 @@
 <template>
   <div
-    class="d-recipe-callbar-button-with-popover"
+    class="dt-recipe--callbar-button-with-dropdown"
   >
     <dt-recipe-callbar-button
       :aria-label="ariaLabel"
@@ -14,33 +14,26 @@
       :show-tooltip="showTooltip"
       :tooltip-text="tooltipText"
       :tooltip-delay="tooltipDelay"
-      class="d-recipe-callbar-button-with-popover--main-button"
+      class="dt-recipe--callbar-button-with-dropdown--main-button"
       @click="buttonClick"
     >
-      <slot
-        slot="icon"
-        name="icon"
-      />
-      <slot
-        slot="tooltip"
-        name="tooltip"
-      />
+      <template #icon>
+        <slot name="icon" />
+      </template>
+      <template #tooltip>
+        <slot name="tooltip" />
+      </template>
       <slot />
     </dt-recipe-callbar-button>
-    <dt-popover
+    <dt-dropdown
       v-if="showArrowButton"
       :id="id"
-      :modal="false"
       :open="open"
       :placement="placement"
-      :initial-focus-element="initialFocusElement"
-      :show-close-button="showCloseButton"
-      :offset="offset"
+      :fallback-placements="fallbackPlacements"
       padding="none"
-      class="d-recipe-callbar-button-with-popover__popover-wrapper"
-      :dialog-class="['d-recipe-callbar-button-with-popover__popover', contentClass]"
+      class="dt-recipe--callbar-button-with-dropdown--dropdown-wrapper"
       v-bind="$attrs"
-      :open-popover="showPopover"
       @opened="onModalIsOpened"
     >
       <template #anchor>
@@ -48,8 +41,8 @@
           circle
           importance="clear"
           size="lg"
-          :class="['d-recipe-callbar-button-with-popover__arrow',
-                   { 'd-recipe-callbar-button-with-popover__arrow--large': !isCompactMode }]"
+          :class="['dt-recipe--callbar-button-with-dropdown--arrow',
+                   { 'dt-recipe--callbar-button-with-dropdown--arrow--large': !isCompactMode }]"
           width="2rem"
           :aria-label="arrowButtonLabel"
           :active="open"
@@ -57,39 +50,30 @@
         >
           <template #icon>
             <dt-icon-chevron-up
-              class="d-recipe-callbar-button-with-popover__arrow-icon"
+              class="dt-recipe--callbar-button-with-dropdown--arrow__icon"
               size="200"
             />
           </template>
         </dt-button>
       </template>
-      <slot
-        slot="content"
-        name="content"
-      />
-      <slot
-        slot="headerContent"
-        name="headerContent"
-      />
-      <slot
-        slot="footerContent"
-        name="footerContent"
-      />
-    </dt-popover>
+      <template #list>
+        <slot name="list" />
+      </template>
+    </dt-dropdown>
   </div>
 </template>
 
 <script>
 import { DtButton } from '@/components/button';
-import { DtPopover } from '@/components/popover';
+import { DtDropdown } from '@/components/dropdown';
 import { DtIconChevronUp } from '@dialpad/dialtone-icons/vue2';
 import { DtRecipeCallbarButton, CALLBAR_BUTTON_VALID_WIDTH_SIZE } from '../callbar_button';
 import utils, { warnIfUnmounted } from '@/common/utils';
 
 export default {
-  name: 'DtRecipeCallbarButtonWithPopover',
+  name: 'DtRecipeCallbarButtonWithDropdown',
 
-  components: { DtRecipeCallbarButton, DtPopover, DtButton, DtIconChevronUp },
+  components: { DtRecipeCallbarButton, DtDropdown, DtButton, DtIconChevronUp },
 
   /* inheritAttrs: false is generally an option we want to set on library
     components. This allows any attributes passed in that are not recognized
@@ -131,7 +115,7 @@ export default {
     },
 
     /**
-     * The direction the popover displays relative to the anchor.
+     * The direction the dropdown displays relative to the anchor.
      * @values 'bottom', 'bottom-start', 'bottom-end',
      *         'right', 'right-start', 'right-end',
      *         'left', 'left-start', 'left-end',
@@ -144,39 +128,20 @@ export default {
     },
 
     /**
-     *  Displaces the content box from its anchor element
-     *  by the specified number of pixels.
-     *  <a
-     *    class="d-link"
-     *    href="https://atomiks.github.io/tippyjs/v6/all-props/#offset"
-     *    target="_blank"
-     *  >
-     *    Tippy.js docs
-     *  </a>
-     */
-    offset: {
+     * If the dropdown does not fit in the direction described by "placement",
+     * it will attempt to change it's direction to the "fallbackPlacements".
+     *
+     * @values top, top-start, top-end,
+     * right, right-start, right-end,
+     * left, left-start, left-end,
+     * bottom, bottom-start, bottom-end,
+     * auto, auto-start, auto-end
+     * */
+    fallbackPlacements: {
       type: Array,
-      default: () => [0, 16],
-    },
-
-    /**
-     * The element that is focused when the popover is opened. This can be an
-     * HTMLElement within the popover, a string starting with '#' which will
-     * find the element by ID. 'first' which will automatically focus
-     * the first element, or 'dialog' which will focus the dialog window itself.
-     * If the dialog is modal this prop cannot be 'none'.
-     */
-    initialFocusElement: {
-      type: String,
-      default: 'first',
-    },
-
-    /**
-     * Determines visibility for close button
-     */
-    showCloseButton: {
-      type: Boolean,
-      default: true,
+      default: () => {
+        return ['auto'];
+      },
     },
 
     /**
@@ -247,22 +212,6 @@ export default {
     },
 
     /**
-     * Additional class name for the popover content wrapper element.
-     */
-    contentClass: {
-      type: [String, Array, Object],
-      default: '',
-    },
-
-    /**
-     * To auto open the modal popover.
-     */
-    openPopover: {
-      type: Boolean,
-      default: false,
-    },
-
-    /**
      * Whether the tooltip has an inverted background color.
      * @values true, false
      */
@@ -314,7 +263,7 @@ export default {
     'click',
 
     /**
-     * Emitted when modal popover is opened or closed.
+     * Emitted when modal dropdown is opened or closed.
      */
     'opened',
   ],
@@ -334,8 +283,8 @@ export default {
       return this.buttonWidthSize === 'sm' || this.buttonWidthSize === 'md';
     },
 
-    showPopover () {
-      if (!this.openPopover || this.open) {
+    showDropdown () {
+      if (!this.openDropdown || this.open) {
         this.syncOpenState();
         return false;
       }
@@ -359,11 +308,11 @@ export default {
     },
 
     syncOpenState () {
-      this.open = this.openPopover;
+      this.open = this.openDropdown;
     },
 
     buttonClick (ev) {
-      // If no listener for the click event, the button click opens the popover
+      // If no listener for the click event, the button click opens the dropdown
       // the same as if the arrow was clicked.
       if (!this.$listeners.click) {
         this.arrowClick(ev);

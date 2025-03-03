@@ -19,6 +19,7 @@
     :inverted-tooltip="$attrs.invertedTooltip"
     :show-tooltip="$attrs.showTooltip"
     :tooltip-text="$attrs.tooltipText"
+    :tooltip-delay="$attrs.tooltipDelay"
     @arrow-click="$attrs.onArrowClick"
     @click="$attrs.onClick"
     @opened="$attrs.onOpened"
