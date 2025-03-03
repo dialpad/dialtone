@@ -110,6 +110,7 @@ export default defineUserConfig({
     '@baseComponents': path.resolve(__dirname, './baseComponents'),
     '@views': path.resolve(__dirname, './views'),
     '@mixins': path.resolve(__dirname, './common/mixins/'),
+    '@utilities': path.resolve(__dirname, './common/utilities.js'),
     '@projectRoot': path.resolve(__dirname, '../../'),
     '@': path.resolve(__dirname, '../'),
     '@workspaceRoot': path.resolve(__dirname, '../../../../'),

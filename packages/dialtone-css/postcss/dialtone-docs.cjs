@@ -107,7 +107,7 @@ module.exports = () => {
       });
     },
     async Rule (rule) {
-      if (!/^\.(d-|\w{2}\\:)/.test(rule.selector) | exclusionRegex.test(rule.selector)) return;
+      if (!/^\.(d-|\w{2}\\:)/.test(rule.selector) || exclusionRegex.test(rule.selector)) return;
       generateDocumentation(rule);
     },
     async OnceExit () {
