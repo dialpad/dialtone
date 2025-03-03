@@ -224,3 +224,15 @@
     border-left: calc(~'4px * (1 - var(--divide-x-reverse))') solid !important;
 }
 .d-divide-x-reverse > * + * { --divide-x-reverse: 1; }
+
+
+//  $$ Border linear gradient
+//  ----------------------------------------------------------------------------
+
+/*
+ * Note: border-image is not compatible with border-radius, but it's the easiest way to get a linear gradient border.
+ * https://dev.to/afif/border-with-gradient-and-radius-387f
+ */
+.d-bc-ai {
+  border-image: var(--dt-color-border-ai) 1 !important;
+}
