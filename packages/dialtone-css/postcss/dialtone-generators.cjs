@@ -143,13 +143,10 @@ function colorUtilities (clonedSource, declaration) {
     generatedRules.backgroundColor.push(new Rule({
       source: clonedSource,
       selector: appendHoverFocusSelectors(`.d-bgc-${colorName}`),
-      nodes: _generateColorNodes(token, 'background', '--bgo'),
+      nodes: _generateColorNodes(token, 'background-color', '--bgo'),
     }));
   }
   function _generateBorderColors (token, colorName) {
-    // Exclude ai gradient border color
-    if (token === '--dt-color-border-ai') return;
-
     generatedRules.borderColor.push(new Rule({
       source: clonedSource,
       selector: appendHoverFocusSelectors(`.d-bc-${colorName}`),
@@ -157,9 +154,6 @@ function colorUtilities (clonedSource, declaration) {
     }));
   }
   function _generateDividerColors (token, colorName) {
-    // Exclude ai gradient border color
-    if (token === '--dt-color-border-ai') return;
-
     generatedRules.dividerColor.push(new Rule({
       source: clonedSource,
       selector: `.d-divide-${colorName} > * + *`,
@@ -195,9 +189,15 @@ function colorUtilities (clonedSource, declaration) {
     _generateForegroundColors(token, colorName);
   });
   surfaceColors.forEach(({ token, colorName }) => {
+    // Exclude as it is a gradient color and it is being generated manually
+    if (token === '--dt-color-surface-ai') return;
+
     _generateSurfaceColors(token, colorName);
   });
   borderColors.forEach(({ token, colorName }) => {
+    // Exclude as it is a gradient color and it is being generated manually
+    if (token === '--dt-color-border-ai') return;
+
     _generateBorderColors(token, colorName);
     _generateDividerColors(token, colorName);
   });
