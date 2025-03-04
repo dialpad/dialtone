@@ -1,3 +1,15 @@
+## [9.104.1](https://github.com/dialpad/dialtone/compare/dialtone/v9.104.0...dialtone/v9.104.1) (2025-03-04)
+
+
+### Bug Fixes
+
+* DLT-2392 add optional chaining to intersection observer disconnect ([#660](https://github.com/dialpad/dialtone/issues/660)) ([e6e04e0](https://github.com/dialpad/dialtone/commit/e6e04e0be1d02724c27e3f94db3ea5d60d31fcb6))
+
+
+### Documentation
+
+* NO-JIRA automate utility classes extraction ([#654](https://github.com/dialpad/dialtone/issues/654)) ([7a53512](https://github.com/dialpad/dialtone/commit/7a53512046d6403958aafda6aa93caab6d2bc3b8))
+
 # [9.104.0](https://github.com/dialpad/dialtone/compare/dialtone/v9.103.0...dialtone/v9.104.0) (2025-03-01)
 
 
