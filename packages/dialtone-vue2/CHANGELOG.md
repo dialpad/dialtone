@@ -1,3 +1,10 @@
+## [2.177.1](https://github.com/dialpad/dialtone/compare/dialtone-vue2/v2.177.0...dialtone-vue2/v2.177.1) (2025-03-04)
+
+
+### Bug Fixes
+
+* DLT-2392 add optional chaining to intersection observer disconnect ([#660](https://github.com/dialpad/dialtone/issues/660)) ([e6e04e0](https://github.com/dialpad/dialtone/commit/e6e04e0be1d02724c27e3f94db3ea5d60d31fcb6))
+
 # [2.177.0](https://github.com/dialpad/dialtone/compare/dialtone-vue2/v2.176.0...dialtone-vue2/v2.177.0) (2025-03-01)
 
 
