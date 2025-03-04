@@ -156,16 +156,22 @@ function colorUtilities (clonedSource, declaration) {
       nodes: _generateColorNodes(token, 'border-color', '--bco'),
     }));
   }
+  function _generateDividerColors (token, colorName) {
+    // Exclude ai gradient border color
+    if (token === '--dt-color-border-ai') return;
 
-  baseColors.forEach(({ token, colorName }) => {
-    _generateForegroundColors(token, colorName);
-    _generateBorderColors(token, colorName);
-    _generateSurfaceColors(token, colorName);
     generatedRules.dividerColor.push(new Rule({
       source: clonedSource,
       selector: `.d-divide-${colorName} > * + *`,
       nodes: _generateColorNodes(token, 'border-color', '--dco'),
     }));
+  }
+
+  baseColors.forEach(({ token, colorName }) => {
+    _generateForegroundColors(token, colorName);
+    _generateBorderColors(token, colorName);
+    _generateSurfaceColors(token, colorName);
+    _generateDividerColors(token, colorName);
     generatedRules.backgroundGradientFromColor.push(new Rule({
       source: clonedSource,
       selector: appendHoverFocusSelectors(`.d-bgg-from-${colorName}`),
@@ -193,6 +199,7 @@ function colorUtilities (clonedSource, declaration) {
   });
   borderColors.forEach(({ token, colorName }) => {
     _generateBorderColors(token, colorName);
+    _generateDividerColors(token, colorName);
   });
 }
 
