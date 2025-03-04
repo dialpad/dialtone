@@ -2,7 +2,7 @@ name: Visual Tests
 
 on:
   push:
-    branches: [ staging ]
+    branches: [ staging, rebrand-2025-beta ]
   pull_request:
     types: [ unlabeled, labeled, synchronize, opened ]
 
@@ -54,8 +54,17 @@ jobs:
           message-id: 'missing-visual-test-label'
           refresh-message-position: true
 
+  get-branch-name:
+    runs-on: ubuntu-latest
+    outputs:
+      current_branch: ${{ steps.branch-name.outputs.current_branch }}
+    steps:
+      - name: Get branch name
+        id: branch-name
+        uses: tj-actions/branch-names@v8
+
   dialtone-vue-2:
-    needs: filter-actions
+    needs: [filter-actions, get-branch-name]
     if: ${{ github.event_name == 'push' || (needs.filter-actions.outputs.dialtone-vue-2 == 'true' && contains(github.event.pull_request.labels.*.name, 'visual-test-ready')) }}
 
     runs-on: ubuntu-latest
@@ -93,5 +102,5 @@ jobs:
       - name: Run Dialtone-vue 2 Visual Tests
         env:
           PERCY_TOKEN: ${{ secrets.PERCY_TOKEN }}
-          PERCY_TARGET_BRANCH: ${{ github.base_ref }}
+          PERCY_TARGET_BRANCH: ${{ needs.get-branch-name.outputs.current_branch == 'rebrand-2025-beta' && 'staging' || github.base_ref }}
         run: pnpm nx run --verbose dialtone-vue2:test:visual
