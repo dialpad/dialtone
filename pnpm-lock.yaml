@@ -4,7 +4,7 @@ settings:
   autoInstallPeers: true
   excludeLinksFromLockfile: false
 
-packageExtensionsChecksum: f38c1fb15d26d189e11c382f3f9a5407
+packageExtensionsChecksum: aff6e3dd621a77ff74647d5fdf4be0e5
 
 importers:
 
@@ -651,6 +651,9 @@ importers:
       '@linusborg/vue-simple-portal':
         specifier: 0.1.5
         version: 0.1.5(vue@2.7.16)
+      '@percy/cli-command':
+        specifier: ^1.30.7
+        version: 1.30.7(typescript@5.6.3)
       '@tiptap/core':
         specifier: ^2.6.6
         version: 2.6.6(@tiptap/pm@2.6.6)
@@ -18859,6 +18862,17 @@ snapshots:
       - typescript
       - utf-8-validate
 
+  '@percy/cli-command@1.30.7(typescript@5.6.3)':
+    dependencies:
+      '@percy/config': 1.30.7(typescript@5.6.3)
+      '@percy/core': 1.30.7(typescript@5.6.3)
+      '@percy/logger': 1.30.7
+    transitivePeerDependencies:
+      - bufferutil
+      - supports-color
+      - typescript
+      - utf-8-validate
+
   '@percy/cli-config@1.30.7(typescript@5.4.2)':
     dependencies:
       '@percy/cli-command': 1.30.7(typescript@5.4.2)
@@ -18936,6 +18950,15 @@ snapshots:
     transitivePeerDependencies:
       - typescript
 
+  '@percy/config@1.30.7(typescript@5.6.3)':
+    dependencies:
+      '@percy/logger': 1.30.7
+      ajv: 8.13.0
+      cosmiconfig: 8.3.6(typescript@5.6.3)
+      yaml: 2.6.1
+    transitivePeerDependencies:
+      - typescript
+
   '@percy/core@1.30.7(typescript@5.4.2)':
     dependencies:
       '@percy/client': 1.30.7
@@ -18944,6 +18967,31 @@ snapshots:
       '@percy/logger': 1.30.7
       '@percy/monitoring': 1.30.7(typescript@5.4.2)
       '@percy/webdriver-utils': 1.30.7(typescript@5.4.2)
+      content-disposition: 0.5.4
+      cross-spawn: 7.0.3
+      extract-zip: 2.0.1
+      fast-glob: 3.3.2
+      micromatch: 4.0.8
+      mime-types: 2.1.35
+      pako: 2.1.0
+      path-to-regexp: 6.3.0
+      rimraf: 3.0.2
+      ws: 8.18.0
+      yaml: 2.6.1
+    transitivePeerDependencies:
+      - bufferutil
+      - supports-color
+      - typescript
+      - utf-8-validate
+
+  '@percy/core@1.30.7(typescript@5.6.3)':
+    dependencies:
+      '@percy/client': 1.30.7
+      '@percy/config': 1.30.7(typescript@5.6.3)
+      '@percy/dom': 1.30.7
+      '@percy/logger': 1.30.7
+      '@percy/monitoring': 1.30.7(typescript@5.6.3)
+      '@percy/webdriver-utils': 1.30.7(typescript@5.6.3)
       content-disposition: 0.5.4
       cross-spawn: 7.0.3
       extract-zip: 2.0.1
@@ -18978,6 +19026,15 @@ snapshots:
     transitivePeerDependencies:
       - typescript
 
+  '@percy/monitoring@1.30.7(typescript@5.6.3)':
+    dependencies:
+      '@percy/config': 1.30.7(typescript@5.6.3)
+      '@percy/logger': 1.30.7
+      '@percy/sdk-utils': 1.30.7
+      systeminformation: 5.25.11
+    transitivePeerDependencies:
+      - typescript
+
   '@percy/sdk-utils@1.30.7': {}
 
   '@percy/storybook@6.0.3(typescript@5.4.2)':
@@ -18994,6 +19051,13 @@ snapshots:
   '@percy/webdriver-utils@1.30.7(typescript@5.4.2)':
     dependencies:
       '@percy/config': 1.30.7(typescript@5.4.2)
+      '@percy/sdk-utils': 1.30.7
+    transitivePeerDependencies:
+      - typescript
+
+  '@percy/webdriver-utils@1.30.7(typescript@5.6.3)':
+    dependencies:
+      '@percy/config': 1.30.7(typescript@5.6.3)
       '@percy/sdk-utils': 1.30.7
     transitivePeerDependencies:
       - typescript
