@@ -95,7 +95,7 @@ Use `fv:d-bgc-{color}` to change an element's `:focus-visible` state background 
 <new-utility-class-table :classes="backgroundColors">
   <template #example="{ className }">
     <div
-      class="d-fl-shrink0 d-h42 d-w42 d-bar-circle d-ba d-bc-black-200"
+      class="d-fl-shrink0 d-h42 d-w42 d-bar-circle d-ba d-bc-moderate"
       :class="className"
     />
   </template>
