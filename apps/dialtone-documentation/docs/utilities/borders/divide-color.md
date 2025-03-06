@@ -65,34 +65,25 @@ Use `d-dco{n}` to change a divider opacity value.
 
 ## Classes
 
-<div class="d-h464 d-of-y-scroll d-bb d-bc-black-200">
-  <utility-class-table>
-    <template #content>
-      <tbody v-for="{ color: c, stops } in baseColors">
-        <tr v-for="{ stop, copy } in stops">
-          <th scope="row" class="d-code--sm d-docsite-code">.d-divide-{{ c }}-{{ stop }}</th>
-          <td>
-            <div class="d-d-flex d-jc-space-between d-ai-center">
-              <div class="d-fl-grow1 d-code--sm">
-                --dco: 100%;<br/>
-                border-color: hsla(var(--{{ c }}-{{ stop }}-h) var(--{{ c }}-{{ stop }}-s) var(--{{ c }}-{{ stop }}-l) / var(--dco)) !important;
-              </div>
-              <div class="d-fl-shrink0 d-fl-center d-m4 d-ml16 d-h64 d-w64">
-                <div
-                  class="d-w100p d-h0 d-bt d-btw2"
-                  :class="`d-bc-${c}-${stop}`"
-                >
-                </div>
-              </div>
-            </div>
-          </td>
-        </tr>
-      </tbody>
-    </template>
-  </utility-class-table>
-</div>
+<new-utility-class-table :classes="divideColors">
+  <template #example="{ className }">
+    <div
+      class="d-d-flex d-fl-shrink0 d-w42 d-h42 d-w24 d-ta-center"
+      :class="[
+        className.startsWith('d-divide-x') ? 'd-divide-x d-fl-col2' : 'd-divide-y d-fd-column',
+        className
+      ]"
+    >
+      <div class="d-fl-center">1</div>
+      <div class="d-fl-center">2</div>
+    </div>
+  </template>
+</new-utility-class-table>
 
 <script setup>
-  import { base } from '@data/colors.json';
-  const baseColors = base.lightMode;
+  import { inject } from 'vue';
+  import { extractUtilityClasses } from '@utilities';
+
+  const utilityClassDocs = inject('utilityClassDocs');
+  const divideColors = extractUtilityClasses(utilityClassDocs, 'd-divide-');
 </script>
