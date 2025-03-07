@@ -40,6 +40,10 @@ module.exports = {
       message: `chore(release): NO-JIRA ${name}` +
         '/v${nextRelease.version}\n\n${nextRelease.notes}',
     }],
+    ['@semantic-release/exec', {
+      prepareCmd: './gradlew setProperties -Pversion=${nextRelease.version} && git add ./gradle.properties && git commit -m \'chore(release): NO-JIRA ' + name + '/v${nextRelease.version} gradle\' && git push',
+      execCwd: `${srcRoot}/android`,
+    }],
     ['@semantic-release/github', {
       successComment: false,
       failTitle: false,
