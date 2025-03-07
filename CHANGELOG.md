@@ -1,3 +1,10 @@
+## [9.104.2](https://github.com/dialpad/dialtone/compare/dialtone/v9.104.1...dialtone/v9.104.2) (2025-03-07)
+
+
+### Bug Fixes
+
+* DP-131618 fix tab panel container ([#662](https://github.com/dialpad/dialtone/issues/662)) ([a1dec70](https://github.com/dialpad/dialtone/commit/a1dec704c3a7caea3afb76dc2c0c84cd644fbb71))
+
 ## [9.104.1](https://github.com/dialpad/dialtone/compare/dialtone/v9.104.0...dialtone/v9.104.1) (2025-03-04)
 
 
