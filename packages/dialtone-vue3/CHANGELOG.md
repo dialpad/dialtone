@@ -1,3 +1,10 @@
+## [3.170.2](https://github.com/dialpad/dialtone/compare/dialtone-vue3/v3.170.1...dialtone-vue3/v3.170.2) (2025-03-07)
+
+
+### Bug Fixes
+
+* DP-131618 fix tab panel container ([#662](https://github.com/dialpad/dialtone/issues/662)) ([a1dec70](https://github.com/dialpad/dialtone/commit/a1dec704c3a7caea3afb76dc2c0c84cd644fbb71))
+
 ## [3.170.1](https://github.com/dialpad/dialtone/compare/dialtone-vue3/v3.170.0...dialtone-vue3/v3.170.1) (2025-03-04)
 
 
