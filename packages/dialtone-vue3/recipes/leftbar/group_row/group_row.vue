@@ -4,6 +4,7 @@
     :aria-label="ariaLabel"
     :unread-count="unreadCount"
     :has-unreads="hasUnreads"
+    :unread-mention-count="unreadMentionCount"
     :unread-count-tooltip="unreadCountTooltip"
     :selected="selected"
     :is-typing="isTyping"
@@ -56,6 +57,14 @@ export default {
      * Number of unread messages
      */
     unreadCount: {
+      type: String,
+      default: null,
+    },
+
+    /**
+     * Number of unread mention messages
+     */
+    unreadMentionCount: {
       type: String,
       default: null,
     },

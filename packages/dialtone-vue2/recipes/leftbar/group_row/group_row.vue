@@ -5,6 +5,7 @@
     :unread-count="unreadCount"
     :has-unreads="hasUnreads"
     :unread-count-tooltip="unreadCountTooltip"
+    :unread-mention-count="unreadMentionCount"
     :selected="selected"
     :is-typing="isTyping"
     v-bind="$attrs"
@@ -55,6 +56,14 @@ export default {
      * Number of unread messages
      */
     unreadCount: {
+      type: String,
+      default: null,
+    },
+
+    /**
+     * Number of unread mention messages
+     */
+    unreadMentionCount: {
       type: String,
       default: null,
     },
