@@ -1,3 +1,15 @@
+# [2.178.0](https://github.com/dialpad/dialtone/compare/dialtone-vue2/v2.177.2...dialtone-vue2/v2.178.0) (2025-03-10)
+
+
+### Bug Fixes
+
+* **Tab Panel:** NO-JIRA remove wrapper ([#664](https://github.com/dialpad/dialtone/issues/664)) ([bb160bb](https://github.com/dialpad/dialtone/commit/bb160bb90d0ad3d7fc1e0bc95e3ae8c4499805c3))
+
+
+### Features
+
+* **Group Row:** DP-80725 add mentions prop to groups recipe ([#649](https://github.com/dialpad/dialtone/issues/649)) ([0eb2e67](https://github.com/dialpad/dialtone/commit/0eb2e6746094eb67406b8c9ba7a481bf06682853))
+
 ## [2.177.2](https://github.com/dialpad/dialtone/compare/dialtone-vue2/v2.177.1...dialtone-vue2/v2.177.2) (2025-03-07)
 
 
