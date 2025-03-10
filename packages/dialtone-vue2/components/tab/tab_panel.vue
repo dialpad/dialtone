@@ -10,12 +10,7 @@
     data-qa="dt-tab-panel"
   >
     <!-- @slot Default slot for Tab Panel -->
-    <div
-      v-show="!hidden"
-      class="d-tab-panel-container"
-    >
-      <slot />
-    </div>
+    <slot />
   </div>
 </template>
 
