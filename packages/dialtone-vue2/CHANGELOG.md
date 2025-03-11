@@ -1,3 +1,15 @@
+## [2.174.1-alpha.1](https://github.com/dialpad/dialtone/compare/dialtone-vue2/v2.174.0...dialtone-vue2/v2.174.1-alpha.1) (2025-03-11)
+
+
+### Bug Fixes
+
+* **Tab Panel:** NO-JIRA remove wrapper ([#664](https://github.com/dialpad/dialtone/issues/664)) ([6942974](https://github.com/dialpad/dialtone/commit/6942974a0f0f78d5c35eae8c73c421f5bcb4e97f))
+
+
+### Documentation
+
+* NO-JIRA fix ivr-node ([#630](https://github.com/dialpad/dialtone/issues/630)) ([bca81d8](https://github.com/dialpad/dialtone/commit/bca81d8ac1f0701512a35c6af704762c08d8f080))
+
 # [2.174.0](https://github.com/dialpad/dialtone/compare/dialtone-vue2/v2.173.0...dialtone-vue2/v2.174.0) (2025-02-11)
 
 
