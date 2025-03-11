@@ -1,3 +1,10 @@
+## [9.101.2-alpha.1](https://github.com/dialpad/dialtone/compare/dialtone/v9.101.1...dialtone/v9.101.2-alpha.1) (2025-03-11)
+
+
+### Bug Fixes
+
+* **Tab Panel:** NO-JIRA remove wrapper ([#664](https://github.com/dialpad/dialtone/issues/664)) ([6942974](https://github.com/dialpad/dialtone/commit/6942974a0f0f78d5c35eae8c73c421f5bcb4e97f))
+
 ## [9.101.1](https://github.com/dialpad/dialtone/compare/dialtone/v9.101.0...dialtone/v9.101.1) (2025-02-19)
 
 
