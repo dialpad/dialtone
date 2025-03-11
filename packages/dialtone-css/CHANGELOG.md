@@ -1,3 +1,11 @@
+## [8.49.2-alpha.1](https://github.com/dialpad/dialtone/compare/dialtone-css/v8.49.1...dialtone-css/v8.49.2-alpha.1) (2025-03-11)
+
+
+### Bug Fixes
+
+* NO-JIRA custom item layout ([#639](https://github.com/dialpad/dialtone/issues/639)) ([1553250](https://github.com/dialpad/dialtone/commit/155325090d5f8ac38b0b9de377a6a9731a9274ae))
+* **Tab Panel:** NO-JIRA remove wrapper ([#664](https://github.com/dialpad/dialtone/issues/664)) ([6942974](https://github.com/dialpad/dialtone/commit/6942974a0f0f78d5c35eae8c73c421f5bcb4e97f))
+
 ## [8.49.1](https://github.com/dialpad/dialtone/compare/dialtone-css/v8.49.0...dialtone-css/v8.49.1) (2025-02-11)
 
 
