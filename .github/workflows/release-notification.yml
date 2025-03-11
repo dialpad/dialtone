@@ -3,7 +3,7 @@ name: Release notification
 on:
   push:
     tags:
-      - dialtone/v*
+      - 'dialtone/v[0-9]+.[0-9]+.[0-9]+'
 
 env:
   RELEASE_URL: ${{ format('https://github.com/dialpad/dialtone/releases/tag/{0}', github.ref_name) }}
