@@ -40,7 +40,7 @@
         "description": "Used for text paired with disabled content or components, like the form elements."
       },
       "critical": {
-        "value": "{color.red.400}",
+        "value": "{color.red.450}",
         "type": "color",
         "description": "Expresses an error, danger, or otherwise critical state."
       },
@@ -960,7 +960,7 @@
         }
       },
       "critical": {
-        "value": "{color.red.400}",
+        "value": "{color.red.450}",
         "type": "color"
       },
       "success": {
