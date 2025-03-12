@@ -32,18 +32,20 @@ A general overview of Dialtone's utility classes, CSS components, and Vue compon
 Dialtone's CSS library offers a framework of utility-first classes. Each class is a small, [atomic style](https://css-tricks.com/lets-define-exactly-atomic-css/) declaration that, when chained together, should mitigate most situations in which custom CSS must be written. Just write these classes right in your mark-up and you're all set!
 
 <code-well-header>
-  <div class="d-p16 d-bgc-black-600 d-fc-primary-inverted">Box</div>
+  <div class="d-body--sm d-p8 d-bgc-contrast d-fc-primary-inverted d-bar8">Box</div>
 </code-well-header>
 
 ```html
-<div class="d-p16 d-bgc-black-600 d-fc-primary-inverted">Box</div>
+<div class="d-body--sm d-p8 d-bgc-contrast d-fc-primary-inverted d-bar8">Box</div>
 ```
 
 In the above example, we used:
 
-- Our [padding utility class](/utilities/spacing/padding.md) `.d-p16` to add 16px of padding
-- Our [background color utility class](/utilities/backgrounds/color.md) `.d-bgc-black-600` to add a purple background
-- Our [font color utility class](/utilities/typography/font-color.md) `.d-fc-primary-inverted` to change the font color to the inverted primary text color
+- Our [padding utility class](/utilities/spacing/padding.md) `.d-p8` to add 8px of padding on all sides.
+- Our [background color utility class](/utilities/backgrounds/color.md) `.d-bgc-contrast`.
+- Our [font color utility class](/utilities/typography/font-color.md) `.d-fc-primary-inverted` to change the font color to the inverted primary text color.
+- Our [border radius](/utilities/borders/radius.md) `.d-bar8` for rounded corners.
+- Our [text style](/design/typography/index.md) `.d-body--sm`.
 
 Though an atomic CSS approach comes with many advantages, we know it also offers a notable disadvantage: reducing the CSS cascade. This is especially true for repeated UI elements, which can end up creating redundant mark-up. For these instances, Dialtone offers components.
 
@@ -60,7 +62,7 @@ In the event Dialtone Vue doesn't suit your needs, Dialtone's CSS library offers
 <button class="d-btn d-btn--primary">Primary Button</button>
 ```
 
-### Writing CSS
+### Authoring Custom Style
 
 In the event you need to write CSS, use [BEM (Block Element Modifier)](http://getbem.com/). This is a simple, common naming convention that helps make our CSS easier to read and understand. If you aren't familiar with the approach, here's a [quick synposis](http://getbem.com/introduction/):
 
@@ -89,6 +91,7 @@ In the event you need to write CSS, use [BEM (Block Element Modifier)](http://ge
   display: flex;
   flex-direction: column;
   background-color: var(--card-color-background);
+  border: var(--dt-size-border-100) solid var(--dt-color-border-default);
 
   // Modifier for block
   &--featured {
