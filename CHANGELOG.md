@@ -1,3 +1,17 @@
+# [9.105.0-rebrand-2025-beta.2](https://github.com/dialpad/dialtone/compare/dialtone/v9.105.0-rebrand-2025-beta.1...dialtone/v9.105.0-rebrand-2025-beta.2) (2025-03-12)
+
+
+### Documentation
+
+* **Css Utilities:** NO-JIRA update css utilities demo to emphasize semantic ([#665](https://github.com/dialpad/dialtone/issues/665)) ([520eab4](https://github.com/dialpad/dialtone/commit/520eab42a48b6d641f156cb9059ac76416dcdd24))
+* modify the brand page, remove the word-mark variant, update the logo ([#668](https://github.com/dialpad/dialtone/issues/668)) ([08370f7](https://github.com/dialpad/dialtone/commit/08370f7aa45a95e1ba2e0cedb253a98215be5b2c))
+
+
+### Features
+
+* **Design Tokens:** NO-JIRA update critical foreground and border ([ebd2885](https://github.com/dialpad/dialtone/commit/ebd288508696f4c3aa3fd720b1122d86662f6531))
+* **Design Tokens:** NO-JIRA updated dark muted foreground color ([f5146cc](https://github.com/dialpad/dialtone/commit/f5146cca5eb3fbff4d3cad6faf381a6eb2510c99))
+
 # [9.105.0-rebrand-2025-beta.1](https://github.com/dialpad/dialtone/compare/dialtone/v9.104.0...dialtone/v9.105.0-rebrand-2025-beta.1) (2025-03-11)
 
 
