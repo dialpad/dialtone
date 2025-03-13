@@ -2,14 +2,18 @@
   "theme": {
     "color": {
       "base": {
-        "value": "#F285BC",
+        "value": "{color.black.900}",
         "type": "color"
       }
     },
     "mention": {
       "color": {
         "background-strong": {
-          "value": "#FFCEE7",
+          "value": "#E20074",
+          "type": "color"
+        },
+        "background": {
+          "value": "#FFB2DA",
           "type": "color"
         }
       }
