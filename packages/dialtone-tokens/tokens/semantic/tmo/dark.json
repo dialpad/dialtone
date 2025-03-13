@@ -54,15 +54,15 @@
     },
     "border": {
       "brand": {
-        "value": "#FF4DA8",
+        "value": "#FFB2DA",
         "type": "color"
       },
       "brand-subtle": {
-        "value": "#A80056",
+        "value": "#FF4DA8",
         "type": "color"
       },
       "brand-strong": {
-        "value": "#FFB2DA",
+        "value": "#FFCCE6",
         "type": "color"
       },
       "brand-inverted": {
