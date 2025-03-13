@@ -36,6 +36,37 @@
 * DLT-2350 expand color css utility classes ([#655](https://github.com/dialpad/dialtone/issues/655)) ([1b271f3](https://github.com/dialpad/dialtone/commit/1b271f36eafbd798cdaa8c38f40202e11719909f))
 * **Empty State:** DLT-2361 DLT-2362 update icon color ([#651](https://github.com/dialpad/dialtone/issues/651)) ([0be7414](https://github.com/dialpad/dialtone/commit/0be7414bd2d2ef32d2d491e638ebdd492971746c))
 
+# [9.105.0](https://github.com/dialpad/dialtone/compare/dialtone/v9.104.2...dialtone/v9.105.0) (2025-03-10)
+
+
+### Bug Fixes
+
+* **Tab Panel:** NO-JIRA remove wrapper ([#664](https://github.com/dialpad/dialtone/issues/664)) ([bb160bb](https://github.com/dialpad/dialtone/commit/bb160bb90d0ad3d7fc1e0bc95e3ae8c4499805c3))
+
+
+### Features
+
+* **Group Row:** DP-80725 add mentions prop to groups recipe ([#649](https://github.com/dialpad/dialtone/issues/649)) ([0eb2e67](https://github.com/dialpad/dialtone/commit/0eb2e6746094eb67406b8c9ba7a481bf06682853))
+
+## [9.104.2](https://github.com/dialpad/dialtone/compare/dialtone/v9.104.1...dialtone/v9.104.2) (2025-03-07)
+
+
+### Bug Fixes
+
+* DP-131618 fix tab panel container ([#662](https://github.com/dialpad/dialtone/issues/662)) ([a1dec70](https://github.com/dialpad/dialtone/commit/a1dec704c3a7caea3afb76dc2c0c84cd644fbb71))
+
+## [9.104.1](https://github.com/dialpad/dialtone/compare/dialtone/v9.104.0...dialtone/v9.104.1) (2025-03-04)
+
+
+### Bug Fixes
+
+* DLT-2392 add optional chaining to intersection observer disconnect ([#660](https://github.com/dialpad/dialtone/issues/660)) ([e6e04e0](https://github.com/dialpad/dialtone/commit/e6e04e0be1d02724c27e3f94db3ea5d60d31fcb6))
+
+
+### Documentation
+
+* NO-JIRA automate utility classes extraction ([#654](https://github.com/dialpad/dialtone/issues/654)) ([7a53512](https://github.com/dialpad/dialtone/commit/7a53512046d6403958aafda6aa93caab6d2bc3b8))
+
 # [9.104.0](https://github.com/dialpad/dialtone/compare/dialtone/v9.103.0...dialtone/v9.104.0) (2025-03-01)
 
 

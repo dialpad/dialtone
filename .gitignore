@@ -30,6 +30,9 @@ out
 packages/dialtone-icons/index.js
 packages/dialtone-icons/src/icons
 packages/dialtone-icons/src/illustrations
+packages/dialtone-icons/android/src/kotlin/*
+packages/dialtone-icons/android/src/res/*
+packages/dialtone-icons/android/dist/*
 
 # Dialtone tokens #
 packages/dialtone-tokens/token_transformer

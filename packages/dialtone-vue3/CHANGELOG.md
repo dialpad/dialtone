@@ -1,3 +1,29 @@
+# [3.171.0](https://github.com/dialpad/dialtone/compare/dialtone-vue3/v3.170.2...dialtone-vue3/v3.171.0) (2025-03-10)
+
+
+### Bug Fixes
+
+* **Tab Panel:** NO-JIRA remove wrapper ([#664](https://github.com/dialpad/dialtone/issues/664)) ([bb160bb](https://github.com/dialpad/dialtone/commit/bb160bb90d0ad3d7fc1e0bc95e3ae8c4499805c3))
+
+
+### Features
+
+* **Group Row:** DP-80725 add mentions prop to groups recipe ([#649](https://github.com/dialpad/dialtone/issues/649)) ([0eb2e67](https://github.com/dialpad/dialtone/commit/0eb2e6746094eb67406b8c9ba7a481bf06682853))
+
+## [3.170.2](https://github.com/dialpad/dialtone/compare/dialtone-vue3/v3.170.1...dialtone-vue3/v3.170.2) (2025-03-07)
+
+
+### Bug Fixes
+
+* DP-131618 fix tab panel container ([#662](https://github.com/dialpad/dialtone/issues/662)) ([a1dec70](https://github.com/dialpad/dialtone/commit/a1dec704c3a7caea3afb76dc2c0c84cd644fbb71))
+
+## [3.170.1](https://github.com/dialpad/dialtone/compare/dialtone-vue3/v3.170.0...dialtone-vue3/v3.170.1) (2025-03-04)
+
+
+### Bug Fixes
+
+* DLT-2392 add optional chaining to intersection observer disconnect ([#660](https://github.com/dialpad/dialtone/issues/660)) ([e6e04e0](https://github.com/dialpad/dialtone/commit/e6e04e0be1d02724c27e3f94db3ea5d60d31fcb6))
+
 # [3.170.0](https://github.com/dialpad/dialtone/compare/dialtone-vue3/v3.169.0...dialtone-vue3/v3.170.0) (2025-03-01)
 
 

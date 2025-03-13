@@ -174,7 +174,7 @@ jobs:
           destination-github-username: 'dialpad'
           commit-message: "dialtone-tokens-swift release"
 
-      # Publish Android
+      # Publish Android tokens
       - name: Setup Java
         if: ${{ needs.variables-setup.outputs.current_branch == 'production' && matrix.package == 'dialtone-tokens' }}
         uses: actions/setup-java@v4
@@ -186,13 +186,36 @@ jobs:
             packages/dialtone-tokens/*.gradle*
             packages/dialtone-tokens/**/gradle-wrapper.properties
 
-      - name: Build android
+      - name: Build android tokens
         if: ${{ needs.variables-setup.outputs.current_branch == 'production' && matrix.package == 'dialtone-tokens' }}
         run: pnpm nx run dialtone-tokens:publish:android-package
 
-      - name: Publish android - Gradle
+      - name: Publish android tokens - Gradle
         if: ${{ needs.variables-setup.outputs.current_branch == 'production' && matrix.package == 'dialtone-tokens' }}
         working-directory: ./packages/dialtone-tokens
+        env:
+          GITHUB_USER: braddialpad
+        run: ./gradlew publish
+
+      # Publish Android icons
+      - name: Setup Java
+        if: ${{ needs.variables-setup.outputs.current_branch == 'production' && matrix.package == 'dialtone-icons' }}
+        uses: actions/setup-java@v4
+        with:
+          java-version: 17
+          distribution: 'temurin'
+          cache: 'gradle'
+          cache-dependency-path: |
+            packages/dialtone-icons/android/*.gradle*
+            packages/dialtone-icons/android/**/gradle-wrapper.properties
+
+      - name: Build android icons
+        if: ${{ needs.variables-setup.outputs.current_branch == 'production' && matrix.package == 'dialtone-icons' }}
+        run: pnpm nx run dialtone-icons:publish:android-package
+
+      - name: Publish android icons - Gradle
+        if: ${{ needs.variables-setup.outputs.current_branch == 'production' && matrix.package == 'dialtone-icons' }}
+        working-directory: ./packages/dialtone-icons/android
         env:
           GITHUB_USER: braddialpad
         run: ./gradlew publish

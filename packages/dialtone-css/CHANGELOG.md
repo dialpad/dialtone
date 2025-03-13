@@ -1,3 +1,22 @@
+## [8.50.2](https://github.com/dialpad/dialtone/compare/dialtone-css/v8.50.1...dialtone-css/v8.50.2) (2025-03-10)
+
+
+### Bug Fixes
+
+* **Tab Panel:** NO-JIRA remove wrapper ([#664](https://github.com/dialpad/dialtone/issues/664)) ([bb160bb](https://github.com/dialpad/dialtone/commit/bb160bb90d0ad3d7fc1e0bc95e3ae8c4499805c3))
+
+## [8.50.1](https://github.com/dialpad/dialtone/compare/dialtone-css/v8.50.0...dialtone-css/v8.50.1) (2025-03-07)
+
+
+### Bug Fixes
+
+* DP-131618 fix tab panel container ([#662](https://github.com/dialpad/dialtone/issues/662)) ([a1dec70](https://github.com/dialpad/dialtone/commit/a1dec704c3a7caea3afb76dc2c0c84cd644fbb71))
+
+
+### Documentation
+
+* NO-JIRA automate utility classes extraction ([#654](https://github.com/dialpad/dialtone/issues/654)) ([7a53512](https://github.com/dialpad/dialtone/commit/7a53512046d6403958aafda6aa93caab6d2bc3b8))
+
 # [8.50.0](https://github.com/dialpad/dialtone/compare/dialtone-css/v8.49.2...dialtone-css/v8.50.0) (2025-02-28)
 
 
