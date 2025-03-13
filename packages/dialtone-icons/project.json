@@ -10,7 +10,7 @@
             "command": "pnpm exec gulp"
           },
           {
-            "command": "nx run-many --target=build --projects=dialtone-icons-vue2,dialtone-icons-vue3,dialtone-icons-android --parallel=3 --output-style=stream"
+            "command": "nx run-many --target=build --projects=dialtone-icons-vue2,dialtone-icons-vue3 --parallel=3 --output-style=stream"
           }
         ],
         "parallel": false
