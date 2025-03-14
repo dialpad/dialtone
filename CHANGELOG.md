@@ -1,3 +1,10 @@
+# [9.106.0-rebrand-2025-beta.3](https://github.com/dialpad/dialtone/compare/dialtone/v9.106.0-rebrand-2025-beta.2...dialtone/v9.106.0-rebrand-2025-beta.3) (2025-03-14)
+
+
+### Bug Fixes
+
+* NO-JIRA icons build, naming conflict and typo ([#671](https://github.com/dialpad/dialtone/issues/671)) ([de83b22](https://github.com/dialpad/dialtone/commit/de83b22354ab59fa52af91fbbdf8f8060ac5b88c))
+
 # [9.106.0-rebrand-2025-beta.2](https://github.com/dialpad/dialtone/compare/dialtone/v9.106.0-rebrand-2025-beta.1...dialtone/v9.106.0-rebrand-2025-beta.2) (2025-03-14)
 
 
