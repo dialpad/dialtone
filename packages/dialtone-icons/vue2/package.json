@@ -13,9 +13,18 @@
       "require": "./dist/dialtone-icons.cjs"
     },
     "./*": {
-      "types": "./dist/types/src/**/*.d.ts",
-      "import": "./dist/components/*.js",
-      "require": "./dist/components/*.cjs"
+      "types": [
+        "./dist/types/src/icons/*.vue.d.ts",
+        "./dist/types/src/illustrations/*.vue.d.ts"
+      ],
+      "import": [
+        "./dist/components/icons/*.js",
+        "./dist/components/illustrations/*.js"
+      ],
+      "require": [
+        "./dist/components/icons/*.cjs",
+        "./dist/components/illustrations/*.cjs"
+      ]
     }
   }
 }
