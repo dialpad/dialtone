@@ -62,8 +62,26 @@ export function extractUtilityClasses (utilityClassDocs, prefix) {
     }, {});
 }
 
+export function extractCSSVariableName (propValue) {
+  const variable = Object.values(propValue.values)[0].value;
+  if (!variable.startsWith('var(')) return '-';
+  return variable.replace(/(-[hsla])?\).*/, ')');
+}
+
+/**
+ * Sorts the colors putting the base colors at the bottom of the list.
+ * @param {string} a
+ * @returns {number}
+ */
+export function colorSorter (a) {
+  if (/\d{2,4}$/.test(a)) return 1;
+  return -1;
+}
+
 export default {
   debounce,
   ReleaseNoteFormatter,
   extractUtilityClasses,
+  extractCSSVariableName,
+  colorSorter,
 };
