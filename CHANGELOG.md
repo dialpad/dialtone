@@ -1,3 +1,10 @@
+# [9.106.0-rebrand-2025-beta.4](https://github.com/dialpad/dialtone/compare/dialtone/v9.106.0-rebrand-2025-beta.3...dialtone/v9.106.0-rebrand-2025-beta.4) (2025-03-14)
+
+
+### Bug Fixes
+
+* NO-JIRA bring dialpad illustration assets back ([e3dc23e](https://github.com/dialpad/dialtone/commit/e3dc23eb1418b9901a6a6eabd002c2e760a7a4e3))
+
 # [9.106.0-rebrand-2025-beta.3](https://github.com/dialpad/dialtone/compare/dialtone/v9.106.0-rebrand-2025-beta.2...dialtone/v9.106.0-rebrand-2025-beta.3) (2025-03-14)
 
 
