@@ -1,3 +1,10 @@
+# [9.106.0-rebrand-2025-beta.2](https://github.com/dialpad/dialtone/compare/dialtone/v9.106.0-rebrand-2025-beta.1...dialtone/v9.106.0-rebrand-2025-beta.2) (2025-03-14)
+
+
+### Features
+
+* **Icon:** DLT-2410 new dialpad logo icon and update gradients ([#670](https://github.com/dialpad/dialtone/issues/670)) ([c29ee5a](https://github.com/dialpad/dialtone/commit/c29ee5aa2898bab28b4494fe70050fedaff1fb86))
+
 # [9.106.0-rebrand-2025-beta.1](https://github.com/dialpad/dialtone/compare/dialtone/v9.105.0...dialtone/v9.106.0-rebrand-2025-beta.1) (2025-03-13)
 
 
