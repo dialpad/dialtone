@@ -1,3 +1,20 @@
+# [4.35.0-rebrand-2025-beta.1](https://github.com/dialpad/dialtone/compare/dialtone-icons/v4.34.1...dialtone-icons/v4.35.0-rebrand-2025-beta.1) (2025-03-14)
+
+
+### Bug Fixes
+
+* NO-JIRA icons build, naming conflict and typo ([#671](https://github.com/dialpad/dialtone/issues/671)) ([de83b22](https://github.com/dialpad/dialtone/commit/de83b22354ab59fa52af91fbbdf8f8060ac5b88c))
+
+
+### Documentation
+
+* modify the brand page, remove the word-mark variant, update the logo ([#668](https://github.com/dialpad/dialtone/issues/668)) ([08370f7](https://github.com/dialpad/dialtone/commit/08370f7aa45a95e1ba2e0cedb253a98215be5b2c))
+
+
+### Features
+
+* **Icon:** DLT-2410 new dialpad logo icon and update gradients ([#670](https://github.com/dialpad/dialtone/issues/670)) ([c29ee5a](https://github.com/dialpad/dialtone/commit/c29ee5aa2898bab28b4494fe70050fedaff1fb86))
+
 ## [4.34.1](https://github.com/dialpad/dialtone/compare/dialtone-icons/v4.34.0...dialtone-icons/v4.34.1) (2025-03-07)
 
 # [4.34.0](https://github.com/dialpad/dialtone/compare/dialtone-icons/v4.33.0...dialtone-icons/v4.34.0) (2025-02-11)
