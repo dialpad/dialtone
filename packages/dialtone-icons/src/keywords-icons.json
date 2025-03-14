@@ -345,12 +345,6 @@
       ]
     },
     "communication": {
-      "Simultaneous-ring": [
-        "simultaneous",
-        "multi-ring",
-        "multiple calls",
-        "phone"
-      ],
       "call-abandoned": [
         "phone",
         "missed",
@@ -475,6 +469,12 @@
         "paper airplane",
         "paper aeroplane",
         "submit"
+      ],
+      "simultaneous-ring": [
+        "simultaneous",
+        "multi-ring",
+        "multiple calls",
+        "phone"
       ],
       "thread": [
         "conversation",
