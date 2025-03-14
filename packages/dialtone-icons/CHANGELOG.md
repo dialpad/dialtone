@@ -1,3 +1,10 @@
+# [4.35.0-rebrand-2025-beta.3](https://github.com/dialpad/dialtone/compare/dialtone-icons/v4.35.0-rebrand-2025-beta.2...dialtone-icons/v4.35.0-rebrand-2025-beta.3) (2025-03-14)
+
+
+### Bug Fixes
+
+* NO-JIRA icons-illustrations naming conflicts ([29f1f13](https://github.com/dialpad/dialtone/commit/29f1f13f1cd55af95327f7900b88d018f327ab32))
+
 # [4.35.0-rebrand-2025-beta.2](https://github.com/dialpad/dialtone/compare/dialtone-icons/v4.35.0-rebrand-2025-beta.1...dialtone-icons/v4.35.0-rebrand-2025-beta.2) (2025-03-14)
 
 
