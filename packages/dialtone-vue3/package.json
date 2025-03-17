@@ -40,7 +40,7 @@
     "@tiptap/pm": "^2.6.6",
     "@tiptap/suggestion": "^2.6.6",
     "@tiptap/vue-3": "^2.6.6",
-    "date-fns": "2.30.0",
+    "date-fns": "4.1.0",
     "deep-equal": "2.2.3",
     "emoji-toolkit": "9.0.1",
     "linkifyjs": "4.2.0",
