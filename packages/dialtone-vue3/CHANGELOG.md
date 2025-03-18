@@ -1,3 +1,10 @@
+## [3.171.1](https://github.com/dialpad/dialtone/compare/dialtone-vue3/v3.171.0...dialtone-vue3/v3.171.1) (2025-03-18)
+
+
+### Bug Fixes
+
+* NO-JIRA update date-fns to latest version ([#672](https://github.com/dialpad/dialtone/issues/672)) ([1ec525e](https://github.com/dialpad/dialtone/commit/1ec525ecbb8166c4a4addd2d4292b58f6ce5ad2c))
+
 # [3.171.0](https://github.com/dialpad/dialtone/compare/dialtone-vue3/v3.170.2...dialtone-vue3/v3.171.0) (2025-03-10)
 
 
