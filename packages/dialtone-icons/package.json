@@ -1,6 +1,6 @@
 {
   "name": "@dialpad/dialtone-icons",
-  "version": "4.34.1",
+  "version": "4.35.0-rebrand-2025-beta.3",
   "description": "Dialtone icon library",
   "files": [
     "dist",
@@ -18,8 +18,14 @@
         "./vue2/dist/types/src/icons/*.vue.d.ts",
         "./vue2/dist/types/src/illustrations/*.vue.d.ts"
       ],
-      "import": "./vue2/dist/components/*.js",
-      "require": "./vue2/dist/components/*.cjs"
+      "import": [
+        "./vue2/dist/components/icons/*.js",
+        "./vue2/dist/components/illustrations/*.js"
+      ],
+      "require": [
+        "./vue2/dist/components/icons/*.cjs",
+        "./vue2/dist/components/illustrations/*.cjs"
+      ]
     },
     "./vue3": {
       "types": "./vue3/dist/types/index.d.ts",
@@ -31,8 +37,14 @@
         "./vue3/dist/types/src/icons/*.vue.d.ts",
         "./vue3/dist/types/src/illustrations/*.vue.d.ts"
       ],
-      "import": "./vue3/dist/components/*.js",
-      "require": "./vue3/dist/components/*.cjs"
+      "import": [
+        "./vue3/dist/components/icons/*.js",
+        "./vue3/dist/components/illustrations/*.js"
+      ],
+      "require": [
+        "./vue3/dist/components/icons/*.cjs",
+        "./vue3/dist/components/illustrations/*.cjs"
+      ]
     },
     "./icons.js": "./dist/icons.js",
     "./illustrations.js": "./dist/illustrations.js",

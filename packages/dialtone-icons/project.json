@@ -10,7 +10,7 @@
             "command": "pnpm exec gulp"
           },
           {
-            "command": "nx run-many --target=build --projects=dialtone-icons-vue2,dialtone-icons-vue3,dialtone-icons-android --parallel=3 --output-style=stream"
+            "command": "nx run-many --target=build --projects=dialtone-icons-vue2,dialtone-icons-vue3 --parallel=2 --output-style=stream"
           }
         ],
         "parallel": false
@@ -28,6 +28,17 @@
         "{projectRoot}/vue3/dist"
       ]
     },
+    "build:android": {
+      "executor": "nx:run-commands",
+      "options": {
+        "cwd": "{projectRoot}",
+        "command": "nx run dialtone-icons-android:build:android --output-style=stream"
+      },
+      "outputs": [
+        "{projectRoot}/android/src/kotlin/icons",
+        "{projectRoot}/android/src/res/raw"
+      ]
+    },
     "publish": {
       "executor": "nx:run-commands",
       "options": {
@@ -42,13 +53,11 @@
       }
     },
     "publish:android-package": {
+      "dependsOn": ["build:android"],
       "executor": "nx:run-commands",
       "options": {
         "cwd": "{projectRoot}/android",
-        "commands": [
-          "./gradlew publishToMavenLocal"
-        ],
-        "parallel": false
+        "command": "./gradlew publishToMavenLocal"
       }
     }
   }
