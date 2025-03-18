@@ -1,3 +1,10 @@
+## [9.105.1](https://github.com/dialpad/dialtone/compare/dialtone/v9.105.0...dialtone/v9.105.1) (2025-03-18)
+
+
+### Bug Fixes
+
+* NO-JIRA update date-fns to latest version ([#672](https://github.com/dialpad/dialtone/issues/672)) ([1ec525e](https://github.com/dialpad/dialtone/commit/1ec525ecbb8166c4a4addd2d4292b58f6ce5ad2c))
+
 # [9.105.0](https://github.com/dialpad/dialtone/compare/dialtone/v9.104.2...dialtone/v9.105.0) (2025-03-10)
 
 
