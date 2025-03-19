@@ -234,7 +234,11 @@
       ],
       "diners-club": [],
       "discover": [],
-      "dpm-logo": [],
+      "dpm-logo": [
+        "dialpad",
+        "meetings",
+        "logo"
+      ],
       "evernote": [],
       "facebook": [],
       "freshsales-crm": [],
