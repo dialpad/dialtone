@@ -322,6 +322,14 @@ export default {
     },
 
     /**
+     * Enables the TipTap Link extension and optionally passes configurations to it
+     */
+     link: {
+      type: [Boolean, Object],
+      default: false,
+    },
+
+    /**
      * Value of the input. The object format should match TipTap's JSON
      * document structure: https://tiptap.dev/guide/output#option-1-json
      */

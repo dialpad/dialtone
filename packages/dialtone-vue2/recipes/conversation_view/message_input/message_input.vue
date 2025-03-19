@@ -53,7 +53,7 @@
         :input-class="inputClass"
         :output-format="outputFormat"
         :auto-focus="autoFocus"
-        :link="richText"
+        :link="link"
         :placeholder="placeholder"
         :prevent-typing="preventTyping"
         :mention-suggestion="mentionSuggestion"
@@ -323,6 +323,14 @@ export default {
     richText: {
       type: Boolean,
       default: true,
+    },
+
+    /**
+     * Enables the TipTap Link extension and optionally passes configurations to it
+     */
+     link: {
+      type: [Boolean, Object],
+      default: false,
     },
 
     /**

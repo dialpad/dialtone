@@ -309,3 +309,11 @@ export const WithMeetingPill = {
     preventTyping: true,
   },
 };
+
+export const WithoutExtensionsButWithLink = {
+  render: DefaultTemplate,
+  args: {
+    richText: false,
+    link: true
+  },
+};

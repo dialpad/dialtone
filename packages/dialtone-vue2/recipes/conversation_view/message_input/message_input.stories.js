@@ -302,3 +302,11 @@ export const WithMeetingPill = {
     preventTyping: true,
   },
 };
+
+export const WithoutExtensionsButWithLink = {
+  render: (argsData) => createRenderConfig(DtRecipeMessageInput, DtRecipeMessageInputDefaultTemplate, argsData),
+  args: {
+    richText: false,
+    link: true
+  },
+};
