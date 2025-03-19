@@ -162,5 +162,21 @@ export const WithCustomExtensions = {
     allowUnderline: false,
     allowCode: false,
     allowCodeblock: false,
+    link: false
+  },
+};
+
+export const OnlyLinkExtension = {
+  ...Default,
+  args: {
+    allowBlockquote: false,
+    allowBold: false,
+    allowBulletList: false,
+    allowItalic: false,
+    allowStrike: false,
+    allowUnderline: false,
+    allowCode: false,
+    allowCodeblock: false,
+    link: true
   },
 };
