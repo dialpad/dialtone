@@ -33,6 +33,11 @@ export const argTypesData = {
       type: 'number',
     },
   },
+  hideEdges: {
+    control: {
+      type: 'boolean',
+    },
+  },
   ariaLabel: {
     control: {
       type: 'text',

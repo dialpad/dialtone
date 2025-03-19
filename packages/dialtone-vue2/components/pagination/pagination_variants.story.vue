@@ -38,6 +38,20 @@
         :page-number-aria-label="getPageNumberAriaLabel"
       />
     </div>
+    <div class="d-m32">
+      <p class="d-my16 d-fs-200 d-fw-bold">
+        Hide edges
+      </p>
+      <dt-pagination
+        :total-pages="10"
+        :active-page="5"
+        :aria-label="'pagination with separator on both sides'"
+        :prev-aria-label="'previous'"
+        :next-aria-label="'next'"
+        :page-number-aria-label="getPageNumberAriaLabel"
+        :hide-edges="true"
+      />
+    </div>
   </div>
 </template>
 

@@ -3,6 +3,7 @@
     :total-pages="$attrs.totalPages"
     :active-page="$attrs.activePage"
     :max-visible="$attrs.maxVisible"
+    :hide-edges="$attrs.hideEdges"
     :aria-label="$attrs.ariaLabel"
     :prev-aria-label="$attrs.prevAriaLabel"
     :next-aria-label="$attrs.nextAriaLabel"

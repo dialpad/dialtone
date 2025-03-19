@@ -142,6 +142,16 @@ export default {
       type: Number,
       default: 5,
     },
+
+    /**
+     * Sometimes you may need to hide start and end page number buttons when moving in between.
+     * This prop will be used to hide the first and last page buttons when not near the edges.
+     * This is useful when your backend does not support offset and you can only use cursor based pagination.
+     */
+    hideEdges: {
+      type: Boolean,
+      default: false,
+    },
   },
 
   emits: [
@@ -181,10 +191,16 @@ export default {
       const end = this.totalPages - start + 1;
 
       if (this.currentPage < start) {
+        if (this.hideEdges) {
+          return [...this.range(1, start + 1), '...'];
+        }
         return [...this.range(1, start), '...', this.totalPages];
       }
 
       if (this.currentPage > end) {
+        if (this.hideEdges) {
+          return ['...', ...this.range(end - 1, this.totalPages)];
+        }
         return [1, '...', ...this.range(end, this.totalPages)];
       }
 
@@ -193,7 +209,16 @@ export default {
       const centerIndex = Math.floor(total / 2);
       const left = this.currentPage - centerIndex;
       const right = this.currentPage + centerIndex;
+      if (this.hideEdges) {
+        return ['...', ...this.range(left - 1, right + 1), '...'];
+      }
       return [1, '...', ...this.range(left, right), '...', this.totalPages];
+    },
+  },
+
+  watch: {
+    activePage () {
+      this.currentPage = this.activePage;
     },
   },
 
