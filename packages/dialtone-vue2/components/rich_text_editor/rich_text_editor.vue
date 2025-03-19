@@ -656,7 +656,6 @@ export default {
   },
 
   methods: {
-
     createEditor () {
       // For all available options, see https://tiptap.dev/api/editor#settings
       this.editor = new Editor({
