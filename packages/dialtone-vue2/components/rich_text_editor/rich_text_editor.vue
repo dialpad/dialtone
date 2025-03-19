@@ -536,6 +536,7 @@ export default {
           },
           openOnClick: false,
           autolink: true,
+          linkOnPaste: false,
           protocols: RICH_TEXT_EDITOR_SUPPORTED_LINK_PROTOCOLS,
         }));
       }
