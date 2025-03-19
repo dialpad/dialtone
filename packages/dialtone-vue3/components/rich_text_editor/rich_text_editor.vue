@@ -670,17 +670,6 @@ export default {
             class: this.inputClass,
           },
 
-          handlePaste: (_, event) => {
-            // When having link and customLink props we should maintain default paste behavior
-            if (!this.link && !this.customLink) {
-              const pastedContent = event.clipboardData.getData('text');
-              this.editor.chain().focus().insertContent(pastedContent).run();
-              return true; // Prevent the default paste behavior
-            }
-
-            return false; // Allow the default paste behavior
-          },
-
           // Moves the <br /> tags inside the previous closing tag to avoid
           // Prosemirror wrapping them within another </p> tag.
           transformPastedHTML (html) {
