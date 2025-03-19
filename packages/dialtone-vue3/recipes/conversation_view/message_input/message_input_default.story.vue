@@ -25,6 +25,7 @@
       :channel-suggestion="$attrs.channelSuggestion"
       :slash-command-suggestion="$attrs.slashCommandSuggestion"
       :show-emoji-picker="$attrs.showEmojiPicker"
+      :link="$attrs.link"
       :emoji-picker-props="$attrs.emojiPickerProps"
       :emoji-tooltip-message="$attrs.emojiTooltipMessage"
       :emoji-button-aria-label="$attrs.emojiButtonAriaLabel"

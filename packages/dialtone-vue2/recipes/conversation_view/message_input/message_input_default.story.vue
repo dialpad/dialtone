@@ -37,6 +37,7 @@
         :remove-link-button="$attrs.removeLinkButton"
         :cancel-set-link-button="$attrs.cancelSetLinkButton"
         :set-link-placeholder="$attrs.setLinkPlaceholder"
+        :link="$attrs.link"
         @submit="$attrs.onSubmit"
         @focus="$attrs.onFocus"
         @blur="$attrs.onBlur"
