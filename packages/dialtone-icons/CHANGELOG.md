@@ -1,3 +1,10 @@
+# [4.35.0-rebrand-2025-beta.4](https://github.com/dialpad/dialtone/compare/dialtone-icons/v4.35.0-rebrand-2025-beta.3...dialtone-icons/v4.35.0-rebrand-2025-beta.4) (2025-03-19)
+
+
+### Features
+
+* **Icon:** DLT-2426 add dialpad meetings icon ([#673](https://github.com/dialpad/dialtone/issues/673)) ([96ba523](https://github.com/dialpad/dialtone/commit/96ba52320ff65ff281c4f35e744ed35c1c94fa58))
+
 # [4.35.0-rebrand-2025-beta.3](https://github.com/dialpad/dialtone/compare/dialtone-icons/v4.35.0-rebrand-2025-beta.2...dialtone-icons/v4.35.0-rebrand-2025-beta.3) (2025-03-14)
 
 
