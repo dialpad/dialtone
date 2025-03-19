@@ -1,3 +1,15 @@
+# [9.106.0-rebrand-2025-beta.6](https://github.com/dialpad/dialtone/compare/dialtone/v9.106.0-rebrand-2025-beta.5...dialtone/v9.106.0-rebrand-2025-beta.6) (2025-03-19)
+
+
+### Bug Fixes
+
+* NO-JIRA update date-fns to latest version ([#672](https://github.com/dialpad/dialtone/issues/672)) ([1ec525e](https://github.com/dialpad/dialtone/commit/1ec525ecbb8166c4a4addd2d4292b58f6ce5ad2c))
+
+
+### Features
+
+* **Icon:** DLT-2426 add dialpad meetings icon ([#673](https://github.com/dialpad/dialtone/issues/673)) ([96ba523](https://github.com/dialpad/dialtone/commit/96ba52320ff65ff281c4f35e744ed35c1c94fa58))
+
 # [9.106.0-rebrand-2025-beta.5](https://github.com/dialpad/dialtone/compare/dialtone/v9.106.0-rebrand-2025-beta.4...dialtone/v9.106.0-rebrand-2025-beta.5) (2025-03-15)
 
 
