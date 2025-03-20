@@ -671,7 +671,25 @@ export default {
           handlePaste: (_, event) => {
             // When having link and customLink props we should maintain default paste behavior
             if (!this.link && !this.customLink) {
+              const regex = /^https?:\/\//;
+
+              if (!event?.clipboardData) {
+                return false;
+              }
               const pastedContent = event.clipboardData.getData('text');
+
+              // Check if the pasted content is a valid URL (starting with http:// or https://)
+              // If it's not a URL, allow the default paste behavior
+              if (!regex.test(pastedContent)) {
+                return false;
+              }
+
+              // If `text/html` is missing from clipboard data, it's a plain link
+              // In this case, allow the default paste behavior
+              if (!event.clipboardData.getData('text/html')) {
+                return false;
+              }
+
               this.editor.chain().focus().insertContent(pastedContent).run();
               return true; // Prevent the default paste behavior
             }
