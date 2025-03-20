@@ -123,6 +123,51 @@ describe('DtPagination Tests', () => {
         expect(pages.length).toBe(7);
       });
     });
+
+    describe('When hideEdges is true', () => {
+      it('shouldn\'t render hidden pages which are the first and last when in middle', () => {
+        mockProps = {
+          totalPages: 15,
+          activePage: 7,
+          maxVisible: 5,
+          hideEdges: true,
+        };
+
+        updateWrapper();
+
+        expect(pages.length).toBe(7);
+        expect(pages.at(1).text()).toBe('5');
+        expect(pages.at(5).text()).toBe('9');
+      });
+
+      it('shouldn\'t render hidden pages which is the last page when at start', () => {
+        mockProps = {
+          totalPages: 15,
+          activePage: 1,
+          maxVisible: 5,
+          hideEdges: true,
+        };
+
+        updateWrapper();
+
+        expect(pages.length).toBe(7);
+        expect(pages.at(6).text()).not.toBe('15');
+      });
+
+      it('shouldn\'t render hidden pages which is the first page when at end', () => {
+        mockProps = {
+          totalPages: 15,
+          activePage: 14,
+          maxVisible: 5,
+          hideEdges: true,
+        };
+
+        updateWrapper();
+
+        expect(pages.length).toBe(7);
+        expect(pages.at(0).text()).not.toBe('1');
+      });
+    });
   });
 
   describe('Interactivity Tests', () => {

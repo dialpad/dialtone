@@ -188,32 +188,52 @@ export default {
         return this.range(1, this.totalPages);
       }
 
-      const start = this.maxVisible - 1;
-      const end = this.totalPages - start + 1;
+      let start = this.maxVisible - 1;
+      let end = this.totalPages - start + 1;
+
+      // if hideEdges is true, modify the start and
+      // end to account for the hidden pages
+      if (this.hideEdges) {
+        start = start + 1;
+        end = end - 1;
+      }
 
       if (this.currentPage < start) {
-        if (this.hideEdges) {
-          return [...this.range(1, start + 1), '...'];
+        const pages = [...this.range(1, start), '...'];
+        if (!this.hideEdges) {
+          // add last page to the end
+          pages.push(this.totalPages);
         }
-        return [...this.range(1, start), '...', this.totalPages];
+        return pages;
       }
 
       if (this.currentPage > end) {
-        if (this.hideEdges) {
-          return ['...', ...this.range(end - 1, this.totalPages)];
+        console.log('END=', end);
+        const pages = ['...', ...this.range(end, this.totalPages)];
+        if (!this.hideEdges) {
+          // add first page to the beginning
+          pages.unshift(1);
         }
-        return [1, '...', ...this.range(end, this.totalPages)];
+        return pages;
       }
 
       // rounding to the nearest odd according to the maxlength to always show the page number in the middle.
       const total = this.maxVisible - (3 - this.maxVisible % 2);
       const centerIndex = Math.floor(total / 2);
-      const left = this.currentPage - centerIndex;
-      const right = this.currentPage + centerIndex;
+      let left = this.currentPage - centerIndex;
+      let right = this.currentPage + centerIndex;
+
+      // if hideEdge is true, modify the left and right to account for the hidden pages
       if (this.hideEdges) {
-        return ['...', ...this.range(left - 1, right + 1), '...'];
+        left = left - 1;
+        right = right + 1;
       }
-      return [1, '...', ...this.range(left, right), '...', this.totalPages];
+
+      const pages = ['...', ...this.range(left, right), '...'];
+      if (!this.hideEdges) {
+        return [1, ...pages, this.totalPages];
+      }
+      return pages;
     },
   },
 
