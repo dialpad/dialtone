@@ -10,6 +10,7 @@ export const argsData = {
   totalPages: 5,
   activePage: 1,
   maxVisible: 5,
+  hideEdges: false,
   ariaLabel: 'pagination',
   prevAriaLabel: 'previous',
   nextAriaLabel: 'next',
@@ -31,6 +32,11 @@ export const argTypesData = {
   maxVisible: {
     control: {
       type: 'number',
+    },
+  },
+  hideEdges: {
+    control: {
+      type: 'boolean',
     },
   },
   ariaLabel: {
