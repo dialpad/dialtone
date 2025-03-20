@@ -1,3 +1,10 @@
+## [2.178.2](https://github.com/dialpad/dialtone/compare/dialtone-vue2/v2.178.1...dialtone-vue2/v2.178.2) (2025-03-20)
+
+
+### Bug Fixes
+
+* **Rich Text Editor:** DP-134543 patchfix paste ([#676](https://github.com/dialpad/dialtone/issues/676)) ([d46fe42](https://github.com/dialpad/dialtone/commit/d46fe424c4818126d7ed680e47c75aebc0889b41))
+
 ## [2.178.1](https://github.com/dialpad/dialtone/compare/dialtone-vue2/v2.178.0...dialtone-vue2/v2.178.1) (2025-03-18)
 
 
