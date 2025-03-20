@@ -1,3 +1,10 @@
+# [3.172.0](https://github.com/dialpad/dialtone/compare/dialtone-vue3/v3.171.2...dialtone-vue3/v3.172.0) (2025-03-20)
+
+
+### Features
+
+* DLT-2419 hideEdges + watcher on active page prop ([#675](https://github.com/dialpad/dialtone/issues/675)) ([67ef1e2](https://github.com/dialpad/dialtone/commit/67ef1e2429aed7f0e0138dad98f33b09a11add7e))
+
 ## [3.171.2](https://github.com/dialpad/dialtone/compare/dialtone-vue3/v3.171.1...dialtone-vue3/v3.171.2) (2025-03-20)
 
 
