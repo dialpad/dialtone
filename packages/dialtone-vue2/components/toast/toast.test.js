@@ -23,6 +23,8 @@ describe('DtToast Tests', () => {
       localVue: testContext.localVue,
     });
 
+    console.log(wrapper.html());
+
     toast = wrapper.find('[data-qa="dt-toast"]');
     actionChildStub = wrapper.find('dt-notice-action-stub');
     contentChildStub = wrapper.find('dt-notice-content-stub');
@@ -44,7 +46,7 @@ describe('DtToast Tests', () => {
 
   describe('Presentation Tests', () => {
     describe('When the toast renders', () => {
-      it('should exist', () => {
+      it.only('should exist', () => {
         expect(wrapper.exists()).toBeTruthy();
       });
 
