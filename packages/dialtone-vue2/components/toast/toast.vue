@@ -134,7 +134,7 @@ export default {
      */
     role: {
       type: String,
-      default: undefined,
+      default: 'status',
     },
 
     /**
