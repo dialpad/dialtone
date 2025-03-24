@@ -134,9 +134,13 @@ async function registerDialtoneIcons (app) {
 async function importDocumentation (app) {
   try {
     console.info('Importing Utility Class documentation');
-    const importedModule = await import('../../../node_modules/@dialpad/dialtone-css/lib/dist/dialtone-docs.json');
+    const utilityClassDocsModule = (await import('../../../node_modules/@dialpad/dialtone-css/lib/dist/dialtone-docs.json'))?.default;
 
-    app.provide('utilityClassDocs', importedModule.default);
+    console.info('Importing Tokens documentation');
+    const tokensDocsModule = (await import('../../../node_modules/@dialpad/dialtone-css/lib/dist/tokens-docs.json'))?.default;
+
+    app.provide('utilityClassDocs', utilityClassDocsModule);
+    app.provide('tokensDocs', tokensDocsModule);
   } catch (error) {
     console.error(`Couldn't import dialtone documentation: ${error}`);
   }
