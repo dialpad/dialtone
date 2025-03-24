@@ -544,9 +544,6 @@ importers:
       autoprefixer:
         specifier: ^10.4.14
         version: 10.4.16(postcss@8.4.41)
-      colorjs.io:
-        specifier: 0.5.2
-        version: 0.5.2
       cssnano:
         specifier: ^6.0.1
         version: 6.0.1(postcss@8.4.41)
