@@ -11,6 +11,7 @@ export const BUTTON_KIND_MODIFIERS = {
   muted: 'd-btn--muted',
   danger: 'd-btn--danger',
   inverted: 'd-btn--inverted',
+  positive: 'd-btn--positive',
 };
 
 export const BUTTON_IMPORTANCE_MODIFIERS = {

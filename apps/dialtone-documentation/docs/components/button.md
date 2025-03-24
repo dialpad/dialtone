@@ -213,6 +213,31 @@ vueCode='
 '
 showHtmlWarning />
 
+### Positive
+
+The positive button style is used to communicate positive actions.
+
+<code-well-header>
+  <div class="d-d-flex d-flow8">
+    <dt-button kind="positive">Place Call</dt-button>
+    <dt-button kind="positive" importance="outlined">Place Call</dt-button>
+    <dt-button kind="positive" importance="clear">Place Call</dt-button>
+  </div>
+</code-well-header>
+
+<code-example-tabs
+htmlCode='
+<button class="d-btn d-btn--positive d-btn--primary" type="button"><span class="d-btn__label">...</span></button>
+<button class="d-btn d-btn--positive d-btn--outlined" type="button"><span class="d-btn__label">...</span></button>
+<button class="d-btn d-btn--positive" type="button"><span class="d-btn__label">...</span></button>
+'
+vueCode='
+<dt-button kind="positive"> Place Call </dt-button>
+<dt-button kind="positive" importance="outlined"> Place Call </dt-button>
+<dt-button kind="positive" importance="clear"> Place Call </dt-button>
+'
+showHtmlWarning />
+
 ### Inverted
 
 The inverted button style is used to visually separate buttons set on darker backgrounds.

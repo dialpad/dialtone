@@ -25,6 +25,11 @@
         Danger
       </dt-button>
 
+      <!-- Positive -->
+      <dt-button kind="positive">
+        Positive
+      </dt-button>
+
       <!-- Inverted -->
       <dt-button kind="inverted">
         Inverted
@@ -174,6 +179,14 @@
       <dt-button
         active
         kind="danger"
+      >
+        Active Danger button
+      </dt-button>
+
+      <!-- Active Positive Button -->
+      <dt-button
+        active
+        kind="positive"
       >
         Active Danger button
       </dt-button>
