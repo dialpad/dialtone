@@ -188,7 +188,7 @@
         active
         kind="positive"
       >
-        Active Danger button
+        Active Positive button
       </dt-button>
     </div>
   </div>
