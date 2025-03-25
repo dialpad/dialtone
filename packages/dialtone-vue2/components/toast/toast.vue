@@ -1,6 +1,6 @@
 <template>
-  <toast-layout-alternate
-    v-if="layout === 'alternate'"
+  <component
+    :is="selectedLayout"
     :is-shown="isShown"
     :title-id="titleId"
     :content-id="contentId"
@@ -33,42 +33,7 @@
     <template #action>
       <slot name="action" />
     </template>
-  </toast-layout-alternate>
-  <toast-layout-default
-    v-else
-    :is-shown="isShown"
-    :title-id="titleId"
-    :content-id="contentId"
-    :title="title"
-    :message="message"
-    :role="role"
-    :kind="kind"
-    :important="important"
-    :close-button-props="closeButtonProps"
-    :hide-close="hideClose"
-    :hide-icon="hideIcon"
-    :hide-action="hideAction"
-    v-on="$listeners"
-    @close="handleClose"
-  >
-    <!-- @slot Slot for custom icon -->
-    <template #icon>
-      <slot name="icon" />
-    </template>
-    <template #titleOverride>
-      <!-- @slot Allows you to override the title, only use this if you need to override
-          with something other than text. Otherwise use the "title" prop. -->
-      <slot name="titleOverride" />
-    </template>
-    <!-- @slot the main textual content of the toast -->
-    <slot>
-      {{ message }}
-    </slot>
-    <!-- @slot Enter a possible action for the user to take, such as a link to another page -->
-    <template #action>
-      <slot name="action" />
-    </template>
-  </toast-layout-default>
+  </component>
 </template>
 
 <script>
@@ -216,9 +181,7 @@ export default {
     },
 
     /**
-     * The duration in ms the toast will display before disappearing.
-     * The toast won't disappear if the duration is not provided.
-     * If it's provided, it should be equal to or greater than 6000.
+     * The layout / styling you wish to use for the toast.
      * @values default, alternate
      */
     layout: {
@@ -256,6 +219,10 @@ export default {
   computed: {
     shouldSetTimeout () {
       return !!this.duration && this.duration >= this.minDuration;
+    },
+
+    selectedLayout () {
+      return this.layout === 'alternate' ? ToastLayoutAlternate : ToastLayoutDefault;
     },
   },
 
