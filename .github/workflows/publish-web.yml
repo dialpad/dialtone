@@ -45,7 +45,7 @@ jobs:
   filter-actions:
     runs-on: ubuntu-latest
     outputs:
-      packages: ${{ github.event_name == 'push' && steps.filter-path.outputs.changes || steps.filter-input.outputs.package }}
+      packages: ${{ steps.filter.outputs.changes }}
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -53,7 +53,7 @@ jobs:
       - name: Filter actions by path
         if: ${{ github.event_name == 'push' }}
         uses: dorny/paths-filter@v3
-        id: filter-path
+        id: filter
         with:
           base: ${{ github.ref }}
           list-files: 'json'
@@ -77,12 +77,11 @@ jobs:
             stylelint-plugin-dialtone:
               - 'packages/stylelint-plugin-dialtone/package.json'
 
-
       - name: Filter actions by input
         if: ${{ github.event_name == 'workflow_dispatch' }}
-        id: filter-input
+        id: filter
         run: |
-          echo 'package=["${{ github.event.inputs.package }}"]' >> $GITHUB_OUTPUT
+          echo 'changes=["${{ github.event.inputs.package }}"]' >> $GITHUB_OUTPUT
 
   check-dialpad-member:
     runs-on: ubuntu-latest
@@ -156,66 +155,3 @@ jobs:
           pnpm nx run ${{ matrix.package }}:publish
           --publish-branch=${{ needs.variables-setup.outputs.current_branch }}
           --tag=${{ env.RELEASE_TAG }}
-
-      # Publish iOS
-      - name: Build swift
-        if: ${{ needs.variables-setup.outputs.current_branch == 'production' && matrix.package == 'dialtone-tokens' }}
-        run: pnpm nx run dialtone-tokens:publish:ios-package
-
-      - name: Publish production - Swift
-        if: ${{ needs.variables-setup.outputs.current_branch == 'production' && matrix.package == 'dialtone-tokens' }}
-        uses: cpina/github-action-push-to-another-repository@v1.5.1
-        env:
-          API_TOKEN_GITHUB: ${{ secrets.DIALTONE_CI_TOKEN }}
-        with:
-          user-email: 'dialtone@dialpad.com'
-          source-directory: 'packages/dialtone-tokens/dist_ios'
-          destination-repository-name: 'dialtone-tokens-swift'
-          destination-github-username: 'dialpad'
-          commit-message: "dialtone-tokens-swift release"
-
-      # Publish Android tokens
-      - name: Setup Java
-        if: ${{ needs.variables-setup.outputs.current_branch == 'production' && matrix.package == 'dialtone-tokens' }}
-        uses: actions/setup-java@v4
-        with:
-          java-version: 17
-          distribution: 'temurin'
-          cache: 'gradle'
-          cache-dependency-path: |
-            packages/dialtone-tokens/*.gradle*
-            packages/dialtone-tokens/**/gradle-wrapper.properties
-
-      - name: Build android tokens
-        if: ${{ needs.variables-setup.outputs.current_branch == 'production' && matrix.package == 'dialtone-tokens' }}
-        run: pnpm nx run dialtone-tokens:publish:android-package
-
-      - name: Publish android tokens - Gradle
-        if: ${{ needs.variables-setup.outputs.current_branch == 'production' && matrix.package == 'dialtone-tokens' }}
-        working-directory: ./packages/dialtone-tokens
-        env:
-          GITHUB_USER: braddialpad
-        run: ./gradlew publish
-
-      # Publish Android icons
-      - name: Setup Java
-        if: ${{ needs.variables-setup.outputs.current_branch == 'production' && matrix.package == 'dialtone-icons' }}
-        uses: actions/setup-java@v4
-        with:
-          java-version: 17
-          distribution: 'temurin'
-          cache: 'gradle'
-          cache-dependency-path: |
-            packages/dialtone-icons/android/*.gradle*
-            packages/dialtone-icons/android/**/gradle-wrapper.properties
-
-      - name: Build android icons
-        if: ${{ needs.variables-setup.outputs.current_branch == 'production' && matrix.package == 'dialtone-icons' }}
-        run: pnpm nx run dialtone-icons:publish:android-package
-
-      - name: Publish android icons - Gradle
-        if: ${{ needs.variables-setup.outputs.current_branch == 'production' && matrix.package == 'dialtone-icons' }}
-        working-directory: ./packages/dialtone-icons/android
-        env:
-          GITHUB_USER: braddialpad
-        run: ./gradlew publish
