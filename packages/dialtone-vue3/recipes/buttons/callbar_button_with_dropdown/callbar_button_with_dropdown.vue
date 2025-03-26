@@ -3,17 +3,17 @@
     class="dt-recipe--callbar-button-with-dropdown"
   >
     <dt-recipe-callbar-button
-      :aria-label="ariaLabel"
-      :disabled="disabled"
       :active="active"
-      :danger="danger"
+      :aria-label="ariaLabel"
       :button-class="buttonClass"
       :button-width-size="buttonWidthSize"
-      :text-class="textClass"
+      :danger="danger"
+      :disabled="disabled"
       :inverted-tooltip="invertedTooltip"
       :show-tooltip="showTooltip"
-      :tooltip-text="tooltipText"
+      :text-class="textClass"
       :tooltip-delay="tooltipDelay"
+      :tooltip-text="tooltipText"
       class="dt-recipe--callbar-button-with-dropdown--main-button"
       @click="buttonClick"
     >
@@ -28,24 +28,24 @@
     <dt-dropdown
       v-if="showArrowButton"
       :id="id"
+      :fallback-placements="fallbackPlacements"
       :open="open"
       :placement="placement"
-      :fallback-placements="fallbackPlacements"
-      padding="none"
       class="dt-recipe--callbar-button-with-dropdown--dropdown-wrapper"
+      padding="none"
       v-bind="$attrs"
       @opened="onModalIsOpened"
     >
       <template #anchor>
         <dt-button
+          :active="open"
+          :aria-label="arrowButtonLabel"
+          :class="['dt-recipe--callbar-button-with-dropdown--arrow',
+                   { 'dt-recipe--callbar-button-with-dropdown--arrow--large': !isCompactMode }]"
           circle
           importance="clear"
           size="lg"
-          :class="['dt-recipe--callbar-button-with-dropdown--arrow',
-                   { 'dt-recipe--callbar-button-with-dropdown--arrow--large': !isCompactMode }]"
           width="2rem"
-          :aria-label="arrowButtonLabel"
-          :active="open"
           @click="arrowClick"
         >
           <template #icon>
@@ -56,8 +56,11 @@
           </template>
         </dt-button>
       </template>
-      <template #list>
-        <slot name="list" />
+      <template #list="{ close }">
+        <slot
+          :close="close"
+          name="list"
+        />
       </template>
     </dt-dropdown>
   </div>
@@ -76,9 +79,9 @@ export default {
   components: { DtRecipeCallbarButton, DtDropdown, DtButton, DtIconChevronUp },
 
   /* inheritAttrs: false is generally an option we want to set on library
-    components. This allows any attributes passed in that are not recognized
-    as props to be passed down to another element or component using v-bind:$attrs
-    more info: https://vuejs.org/v2/api/#inheritAttrs */
+   components. This allows any attributes passed in that are not recognized
+   as props to be passed down to another element or component using v-bind:$attrs
+   more info: https://vuejs.org/v2/api/#inheritAttrs */
   inheritAttrs: false,
 
   props: {
@@ -193,7 +196,7 @@ export default {
      * This makes it impossible from the regular declaration (emits: ['click']) to check whether
      * we actually have a click handler or not.
      * We're hacking it by adding an onClick prop: https://github.com/vuejs/core/issues/5220
-    */
+     */
     /* eslint-disable-next-line vue/no-unused-properties */
     onClick: {
       type: Function,
