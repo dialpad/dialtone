@@ -56,7 +56,6 @@ const rename = require('gulp-rename');
 const cache = require('gulp-cached');
 const through2 = require('through2');
 const path = require('path');
-const fs = require('fs');
 
 //  @@ STYLES
 const postCSS = settings.styles ? require('gulp-postcss') : null;
@@ -406,51 +405,6 @@ const libDocs = function (done) {
     .pipe(postCSS([postCSSDialtoneDocs]));
 };
 
-/**
- * Process base-light and dp-light themes from Dialtone Tokens doc.json file.
- * Extracts CSS Variables primitive value and description.
- * @returns {{Token: { value: String, description: String }}}
- */
-const tokenDocs = function (done) {
-  if (!settings.documentation) return done();
-
-  const docs = {};
-
-  const rawTokensDocumentation = require(path.resolve(__dirname, './node_modules/@dialpad/dialtone-tokens/dist/doc.json'));
-  const CSSVarRegex = /var\(([^)]+)\)/g;
-
-  Object.values({ ...rawTokensDocumentation['base-light'], ...rawTokensDocumentation['dp-light'] })
-    .forEach(DocEntry => {
-      const CSSVarEntry = DocEntry['css/variables'];
-      const token = CSSVarEntry.name.replace(CSSVarRegex, '$1');
-      const description = CSSVarEntry.description;
-      let value = CSSVarEntry.value;
-
-      if (!CSSVarRegex.test(value)) {
-        docs[token] = { value, description };
-        return;
-      }
-
-      value = value.replace(CSSVarRegex, (match) => {
-        const tokenName = match.replace(CSSVarRegex, '$1');
-        const tokenValue = docs[tokenName];
-
-        if (!tokenValue) {
-          console.warn('Missing token value: ', tokenName);
-          return match;
-        }
-
-        return tokenValue.value;
-      });
-
-      docs[token] = { value, description };
-    });
-
-  fs.writeFileSync(path.resolve(__dirname, './lib/dist/tokens-docs.json'), JSON.stringify(docs), 'utf-8');
-
-  return done();
-};
-
 //  ================================================================================
 //  @   EXPORT TASKS
 //  ================================================================================
@@ -472,7 +426,6 @@ exports.default = series(
   exports.svg,
   tokens,
   libStyles,
-  tokenDocs,
   libDocs,
   libScripts,
 );
