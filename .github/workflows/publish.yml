@@ -176,7 +176,7 @@ jobs:
 
       # Publish Android tokens
       - name: Setup Java
-        if: ${{ needs.variables-setup.outputs.current_branch == 'production' && matrix.package == 'dialtone-tokens' }}
+        if: ${{ matrix.package == 'dialtone-tokens' }}
         uses: actions/setup-java@v4
         with:
           java-version: 17
@@ -187,11 +187,11 @@ jobs:
             packages/dialtone-tokens/**/gradle-wrapper.properties
 
       - name: Build android tokens
-        if: ${{ needs.variables-setup.outputs.current_branch == 'production' && matrix.package == 'dialtone-tokens' }}
+        if: ${{ matrix.package == 'dialtone-tokens' }}
         run: pnpm nx run dialtone-tokens:publish:android-package
 
       - name: Publish android tokens - Gradle
-        if: ${{ needs.variables-setup.outputs.current_branch == 'production' && matrix.package == 'dialtone-tokens' }}
+        if: ${{ matrix.package == 'dialtone-tokens' }}
         working-directory: ./packages/dialtone-tokens
         env:
           GITHUB_USER: braddialpad
@@ -199,7 +199,7 @@ jobs:
 
       # Publish Android icons
       - name: Setup Java
-        if: ${{ needs.variables-setup.outputs.current_branch == 'production' && matrix.package == 'dialtone-icons' }}
+        if: ${{ matrix.package == 'dialtone-icons' }}
         uses: actions/setup-java@v4
         with:
           java-version: 17
@@ -210,11 +210,11 @@ jobs:
             packages/dialtone-icons/android/**/gradle-wrapper.properties
 
       - name: Build android icons
-        if: ${{ needs.variables-setup.outputs.current_branch == 'production' && matrix.package == 'dialtone-icons' }}
+        if: ${{ matrix.package == 'dialtone-icons' }}
         run: pnpm nx run dialtone-icons:publish:android-package
 
       - name: Publish android icons - Gradle
-        if: ${{ needs.variables-setup.outputs.current_branch == 'production' && matrix.package == 'dialtone-icons' }}
+        if: ${{ matrix.package == 'dialtone-icons' }}
         working-directory: ./packages/dialtone-icons/android
         env:
           GITHUB_USER: braddialpad

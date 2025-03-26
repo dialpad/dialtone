@@ -36,7 +36,7 @@
     >
       <span v-html="$attrs.tooltip" />
     </template>
-    <template #list>
+    <template #list="{ close }">
       <dt-list-item-group
         heading-class="d-py4 d-px8 d-fw-semibold d-c-default"
         heading="Menu Heading A"
