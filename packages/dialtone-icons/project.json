@@ -6,12 +6,8 @@
       "options": {
         "cwd": "{projectRoot}",
         "commands": [
-          {
-            "command": "pnpm exec gulp"
-          },
-          {
-            "command": "nx run-many --target=build --projects=dialtone-icons-vue2,dialtone-icons-vue3,dialtone-icons-android --parallel=3 --output-style=stream"
-          }
+          "pnpm exec gulp",
+          "nx run-many --target=build --projects=dialtone-icons-vue2,dialtone-icons-vue3 --parallel=2 --output-style=stream"
         ],
         "parallel": false
       },
@@ -28,6 +24,18 @@
         "{projectRoot}/vue3/dist"
       ]
     },
+    "build:android": {
+      "dependsOn": ["dialtone-icons-android:build"],
+      "executor": "nx:run-commands",
+      "options": {
+        "cwd": "{projectRoot}/android",
+        "command": "./gradlew publishToMavenLocal"
+      },
+      "outputs": [
+        "{projectRoot}/android/src/kotlin/icons",
+        "{projectRoot}/android/src/res/raw"
+      ]
+    },
     "publish": {
       "executor": "nx:run-commands",
       "options": {
@@ -38,16 +46,6 @@
       "executor": "nx:run-commands",
       "options": {
         "command": "pnpm semantic-release-plus --extends ./packages/dialtone-icons/release-ci.config.cjs && sleep 3",
-        "parallel": false
-      }
-    },
-    "publish:android-package": {
-      "executor": "nx:run-commands",
-      "options": {
-        "cwd": "{projectRoot}/android",
-        "commands": [
-          "./gradlew publishToMavenLocal"
-        ],
         "parallel": false
       }
     }
