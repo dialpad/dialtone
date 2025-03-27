@@ -7,10 +7,9 @@
       class="d-pagination__button"
       data-qa="dt-pagination-prev"
       :aria-label="prevAriaLabel"
-      :kind="isFirstPage ? 'default' : 'muted'"
-      :importance="isFirstPage ? 'primary' : 'clear'"
+      kind="muted"
+      importance="clear"
       :disabled="isFirstPage"
-      :class="isFirstPage ? 'd-fc-black-300 d-bgc-transparent' : 'd-fc-tertiary'"
       @click="changePage(currentPage - 1)"
     >
       <template #icon>
@@ -53,8 +52,7 @@
       :aria-label="nextAriaLabel"
       :disabled="isLastPage"
       kind="muted"
-      :importance="isLastPage ? 'primary' : 'clear'"
-      :class="isLastPage ? 'd-fc-black-300 d-bgc-transparent' : 'd-fc-tertiary'"
+      importance="clear"
       @click="changePage(currentPage + 1)"
     >
       <template #icon>
