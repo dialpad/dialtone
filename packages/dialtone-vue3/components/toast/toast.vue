@@ -1,58 +1,46 @@
 <template>
-  <div
-    v-if="isShown"
-    :class="[
-      'd-toast',
-      kindClass,
-      { 'd-toast--important': important },
-    ]"
-    data-qa="dt-toast"
-    :aria-hidden="(!isShown).toString()"
+  <component
+    :is="selectedLayout"
+    :is-shown="isShown"
+    :title-id="titleId"
+    :content-id="contentId"
+    :title="title"
+    :message="message"
+    :role="role"
+    :kind="kind"
+    :important="important"
+    :close-button-props="closeButtonProps"
+    :hide-close="hideClose"
+    :hide-icon="hideIcon"
+    :hide-action="hideAction"
+    v-bind="$attrs"
+    @close="handleClose"
   >
-    <div class="d-toast__dialog">
-      <dt-notice-icon
-        v-if="!hideIcon"
-        :kind="kind"
-      >
-        <!-- @slot Slot for custom icon -->
-        <slot name="icon" />
-      </dt-notice-icon>
-      <dt-notice-content
-        :title-id="titleId"
-        :content-id="contentId"
-        :title="title"
-        :role="role"
-      >
-        <template #titleOverride>
-          <!-- @slot Allows you to override the title, only use this if you need to override
+    <!-- @slot Slot for custom icon -->
+    <template #icon>
+      <slot name="icon" />
+    </template>
+    <template #titleOverride>
+      <!-- @slot Allows you to override the title, only use this if you need to override
           with something other than text. Otherwise use the "title" prop. -->
-          <slot name="titleOverride" />
-        </template>
-        <!-- @slot the main textual content of the toast -->
-        <slot>
-          {{ message }}
-        </slot>
-      </dt-notice-content>
-      <dt-notice-action
-        :hide-action="hideAction"
-        :hide-close="hideClose"
-        :close-button-props="closeButtonProps"
-        :visually-hidden-close="visuallyHiddenClose"
-        :visually-hidden-close-label="visuallyHiddenCloseLabel"
-        @close="closeToast"
-      >
-        <!-- @slot Enter a possible action for the user to take, such as a link to another page -->
-        <slot name="action" />
-      </dt-notice-action>
-    </div>
-  </div>
+      <slot name="titleOverride" />
+    </template>
+    <!-- @slot the main textual content of the toast -->
+    <slot>
+      {{ message }}
+    </slot>
+    <!-- @slot Enter a possible action for the user to take, such as a link to another page -->
+    <template #action>
+      <slot name="action" />
+    </template>
+  </component>
 </template>
 
 <script>
-import { DtNoticeIcon, DtNoticeContent, DtNoticeAction, NOTICE_KINDS } from '@/components/notice';
-import utils from '@/common/utils';
-import { TOAST_ROLES, TOAST_MIN_DURATION } from './toast_constants.js';
+import { TOAST_MIN_DURATION, TOAST_LAYOUTS } from './toast_constants.js';
 import SrOnlyCloseButtonMixin from '@/common/mixins/sr_only_close_button';
+import ToastLayoutDefault from './layouts/toast_layout_default.vue';
+import ToastLayoutAlternate from './layouts/toast_layout_alternate.vue';
 
 /**
  * A toast notice, sometimes called a snackbar, is a time-based message that appears based on users' actions.
@@ -64,12 +52,13 @@ export default {
   name: 'DtToast',
 
   components: {
-    DtNoticeIcon,
-    DtNoticeContent,
-    DtNoticeAction,
+    ToastLayoutDefault,
+    ToastLayoutAlternate,
   },
 
   mixins: [SrOnlyCloseButtonMixin],
+
+  inheritAttrs: false,
 
   props: {
     /**
@@ -78,7 +67,7 @@ export default {
      */
     titleId: {
       type: String,
-      default () { return utils.getUniqueString(); },
+      default: undefined,
     },
 
     /**
@@ -87,7 +76,7 @@ export default {
      */
     contentId: {
       type: String,
-      default () { return utils.getUniqueString(); },
+      default: undefined,
     },
 
     /**
@@ -95,7 +84,7 @@ export default {
      */
     title: {
       type: String,
-      default: '',
+      default: undefined,
     },
 
     /**
@@ -103,7 +92,7 @@ export default {
      */
     message: {
       type: String,
-      default: '',
+      default: undefined,
     },
 
     /**
@@ -114,21 +103,15 @@ export default {
     role: {
       type: String,
       default: 'status',
-      validator: (role) => {
-        return TOAST_ROLES.includes(role);
-      },
     },
 
     /**
-     * Severity level of the toast, sets the icon and background
-     * @values base, error, info, success, warning
+     * Severity level of the toast, could be different depending on which toast layout is used.
+     * @values base, error, info, success, warning, gradient
      */
     kind: {
       type: String,
-      default: 'base',
-      validator: (kind) => {
-        return NOTICE_KINDS.includes(kind);
-      },
+      default: undefined,
     },
 
     /**
@@ -157,7 +140,7 @@ export default {
      */
     closeButtonProps: {
       type: Object,
-      default: () => ({}),
+      default: undefined,
     },
 
     /**
@@ -166,7 +149,7 @@ export default {
      */
     hideClose: {
       type: Boolean,
-      default: false,
+      default: undefined,
     },
 
     /**
@@ -175,7 +158,7 @@ export default {
      */
     hideIcon: {
       type: Boolean,
-      default: false,
+      default: undefined,
     },
 
     /**
@@ -184,7 +167,7 @@ export default {
      */
     hideAction: {
       type: Boolean,
-      default: false,
+      default: undefined,
     },
 
     /**
@@ -197,6 +180,18 @@ export default {
       default: null,
       validator: (duration) => {
         return duration >= TOAST_MIN_DURATION;
+      },
+    },
+
+    /**
+     * The layout / styling you wish to use for the toast.
+     * @values default, alternate
+     */
+    layout: {
+      type: String,
+      default: 'default',
+      validator: (layout) => {
+        return TOAST_LAYOUTS.includes(layout);
       },
     },
   },
@@ -233,20 +228,12 @@ export default {
   },
 
   computed: {
-    kindClass () {
-      const kindClasses = {
-        error: 'd-toast--error',
-        info: 'd-toast--info',
-        success: 'd-toast--success',
-        warning: 'd-toast--warning',
-        base: 'd-toast--base',
-      };
-
-      return kindClasses[this.kind];
-    },
-
     shouldSetTimeout () {
       return !!this.duration && this.duration >= this.minDuration;
+    },
+
+    selectedLayout () {
+      return this.layout === 'alternate' ? ToastLayoutAlternate : ToastLayoutDefault;
     },
   },
 
@@ -282,6 +269,11 @@ export default {
           this.$emit('update:show', false);
         }, this.duration);
       }
+    },
+
+    handleClose () {
+      this.isShown = false;
+      this.$emit('update:show', false);
     },
   },
 };

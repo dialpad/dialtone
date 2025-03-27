@@ -4,6 +4,7 @@ import DtToast from './toast.vue';
 
 import DtToastDefaultTemplate from './toast_default.story.vue';
 import { NOTICE_KINDS } from '../notice';
+import { TOAST_LAYOUTS } from './toast_constants.js';
 
 const iconsList = getIconNames();
 
@@ -71,6 +72,12 @@ export const argTypesData = {
   },
   kind: {
     options: NOTICE_KINDS,
+    control: {
+      type: 'select',
+    },
+  },
+  layout: {
+    options: TOAST_LAYOUTS,
     control: {
       type: 'select',
     },
