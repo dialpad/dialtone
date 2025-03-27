@@ -1,3 +1,11 @@
+## [9.106.1](https://github.com/dialpad/dialtone/compare/dialtone/v9.106.0...dialtone/v9.106.1) (2025-03-27)
+
+
+### Bug Fixes
+
+* **Callbar Button With Dropdown:** DLT-2440 add missing slot prop close ([#682](https://github.com/dialpad/dialtone/issues/682)) ([3034563](https://github.com/dialpad/dialtone/commit/3034563cbc4822e8160151728d3b409b5cf151ac))
+* **Toast:** NO-JIRA put z-index on wrapper ([#677](https://github.com/dialpad/dialtone/issues/677)) ([beca85a](https://github.com/dialpad/dialtone/commit/beca85ab8df20928571edacdd82e9bcd8dd79802))
+
 # [9.106.0](https://github.com/dialpad/dialtone/compare/dialtone/v9.105.2...dialtone/v9.106.0) (2025-03-20)
 
 
