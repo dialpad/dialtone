@@ -1,3 +1,10 @@
+## [8.50.3](https://github.com/dialpad/dialtone/compare/dialtone-css/v8.50.2...dialtone-css/v8.50.3) (2025-03-27)
+
+
+### Bug Fixes
+
+* **Toast:** NO-JIRA put z-index on wrapper ([#677](https://github.com/dialpad/dialtone/issues/677)) ([beca85a](https://github.com/dialpad/dialtone/commit/beca85ab8df20928571edacdd82e9bcd8dd79802))
+
 ## [8.50.2](https://github.com/dialpad/dialtone/compare/dialtone-css/v8.50.1...dialtone-css/v8.50.2) (2025-03-10)
 
 
