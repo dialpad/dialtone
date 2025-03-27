@@ -1,3 +1,10 @@
+## [3.172.1](https://github.com/dialpad/dialtone/compare/dialtone-vue3/v3.172.0...dialtone-vue3/v3.172.1) (2025-03-27)
+
+
+### Bug Fixes
+
+* **Callbar Button With Dropdown:** DLT-2440 add missing slot prop close ([#682](https://github.com/dialpad/dialtone/issues/682)) ([3034563](https://github.com/dialpad/dialtone/commit/3034563cbc4822e8160151728d3b409b5cf151ac))
+
 # [3.172.0](https://github.com/dialpad/dialtone/compare/dialtone-vue3/v3.171.2...dialtone-vue3/v3.172.0) (2025-03-20)
 
 
