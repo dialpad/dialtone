@@ -42,6 +42,7 @@
         :visually-hidden-close="visuallyHiddenClose"
         :visually-hidden-close-label="visuallyHiddenCloseLabel"
         v-bind="$attrs"
+        @close="$emit('close')"
       >
         <!-- @slot Enter a possible action for the user to take, such as a link to another page -->
         <slot name="action" />
@@ -177,6 +178,8 @@ export default {
       default: false,
     },
   },
+
+  emits: ['close'],
 
   computed: {
     kindClass () {

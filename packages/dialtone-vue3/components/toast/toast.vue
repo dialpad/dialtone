@@ -205,14 +205,6 @@ export default {
     'close',
 
     /**
-     * Native click event
-     *
-     * @event click
-     * @type {PointerEvent | KeyboardEvent}
-     */
-    'click',
-
-    /**
      * Sync show value
      *
      * @event update:show
@@ -273,6 +265,7 @@ export default {
 
     handleClose () {
       this.isShown = false;
+      this.$emit('close');
       this.$emit('update:show', false);
     },
   },
