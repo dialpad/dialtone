@@ -1381,7 +1381,8 @@
       "typography.button.sm": "S:9a5e3f3504e3870f5c1c177238409ce957d31c77,",
       "typography.button.md": "S:2822a1164f375b1cc205840fa8a0834555440cb4,",
       "typography.button.lg": "S:dcae3ac5914df1f028787d584a73d868bcfb5f6e,",
-      "typography.button.xl": "S:99f7c070d9ff42d314ccd03ecf5973d64cb188e6,"
+      "typography.button.xl": "S:99f7c070d9ff42d314ccd03ecf5973d64cb188e6,",
+      "action.color.border.positive.outlined.default": "S:3b6dee6148f619fe6d0e39a36b91f959c333673b,"
     },
     "selectedTokenSets": {
       "base/dark": "source",
