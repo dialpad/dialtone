@@ -2037,6 +2037,14 @@
               "type": "color"
             }
           }
+        },
+        "positive": {
+          "outlined": {
+            "default": {
+              "value": "{color.border.success}",
+              "type": "color"
+            }
+          }
         }
       }
     }

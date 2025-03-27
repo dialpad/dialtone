@@ -412,7 +412,8 @@
       "checkbox.color.border.unchecked-hover": "S:98186641f51a54e093fb2a9e1dbbc583ce11b7ef,",
       "radio.color.border.unchecked-hover": "S:e036a8502762ed8fbe2f176609d5f513976624c2,",
       "inputs.color.border.hover": "S:cd1adb39265b75f7598b176833cf75bbe0d4cf35,",
-      "color.surface.ai": "S:096e8f73c95e27f58042e75a271514caea787467,"
+      "color.surface.ai": "S:096e8f73c95e27f58042e75a271514caea787467,",
+      "action.color.border.positive.outlined.default": "S:74f5c663172f4d7466b7111a8b9d6ccad7abcac7,"
     },
     "selectedTokenSets": {
       "base/default": "source",
