@@ -15,6 +15,7 @@
       :cancel-set-link-button="$attrs.cancelSetLinkButton"
       :confirm-set-link-button="$attrs.confirmSetLinkButton"
       :remove-link-button="$attrs.removeLinkButton"
+      :use-div-tags="$attrs.useDivTags"
       :show-bold-button="$attrs.showBoldButton"
       :show-italics-button="$attrs.showItalicsButton"
       :show-strike-button="$attrs.showStrikeButton"

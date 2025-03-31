@@ -168,6 +168,7 @@
         :link="true"
         :output-format="htmlOutputFormat"
         :placeholder="placeholder"
+        :use-div-tags="useDivTags"
         data-qa="dt-rich-text-editor"
         v-bind="$attrs"
         @blur="onBlur"
@@ -461,6 +462,14 @@ export default {
         setLinkTitle: 'Add a link',
         setLinkInputAriaLabel: 'Input field to add link',
       }),
+    },
+
+    /**
+     * Use div tags instead of paragraph tags to show text
+     */
+    useDivTags: {
+      type: Boolean,
+      default: false,
     },
   },
 
