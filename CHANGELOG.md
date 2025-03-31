@@ -1,3 +1,15 @@
+# [9.107.0](https://github.com/dialpad/dialtone/compare/dialtone/v9.106.1...dialtone/v9.107.0) (2025-03-31)
+
+
+### Bug Fixes
+
+* **Pagination:** DLT-2373 invalid prop combination on end buttons ([#684](https://github.com/dialpad/dialtone/issues/684)) ([517debb](https://github.com/dialpad/dialtone/commit/517debbbab0c497d13d48230ab9e8d2e9a52c423))
+
+
+### Features
+
+* **Editor:** DP-131851 added editor support to encase text with div tags ([#685](https://github.com/dialpad/dialtone/issues/685)) ([d0429a3](https://github.com/dialpad/dialtone/commit/d0429a30c4474e02434388b6d782e23b07ac97c8))
+
 ## [9.106.1](https://github.com/dialpad/dialtone/compare/dialtone/v9.106.0...dialtone/v9.106.1) (2025-03-27)
 
 
