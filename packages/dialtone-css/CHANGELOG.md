@@ -1,3 +1,10 @@
+## [8.50.4](https://github.com/dialpad/dialtone/compare/dialtone-css/v8.50.3...dialtone-css/v8.50.4) (2025-03-31)
+
+
+### Bug Fixes
+
+* **Pagination:** DLT-2373 invalid prop combination on end buttons ([#684](https://github.com/dialpad/dialtone/issues/684)) ([517debb](https://github.com/dialpad/dialtone/commit/517debbbab0c497d13d48230ab9e8d2e9a52c423))
+
 ## [8.50.3](https://github.com/dialpad/dialtone/compare/dialtone-css/v8.50.2...dialtone-css/v8.50.3) (2025-03-27)
 
 
