@@ -4,6 +4,9 @@ import {
   VALIDATION_MESSAGE_TYPES,
 } from '../constants';
 import {
+  configVue2StyleClassAttrs,
+} from '../config';
+import {
   h,
   Comment,
   Text,
@@ -203,6 +206,8 @@ export const extractVueListeners = (attrs) => {
 };
 
 /*
+  Only will apply changes if the config option configVue2StyleClassAttrs is set to true. It is false by default.
+
   Removes the class and style attributes from the $attrs. This is useful for vue 2 to vue 3 migration
   purposes so we don't cause breaking changes due to INSTANCE_ATTRS_CLASS_STYLE
   https://v3-migration.vuejs.org/breaking-changes/attrs-includes-class-style
@@ -214,6 +219,7 @@ export const extractVueListeners = (attrs) => {
   :style="$attrs.style"
 */
 export function removeClassStyleAttrs (attrs) {
+  if (!configVue2StyleClassAttrs) return attrs;
   const listeners = Object.entries(attrs)
     .filter(([key]) => !['class', 'style'].includes(key));
   return Object.fromEntries(listeners);
