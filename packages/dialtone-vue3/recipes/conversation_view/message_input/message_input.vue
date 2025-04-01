@@ -3,7 +3,7 @@
   <div
     data-qa="dt-recipe-message-input"
     role="presentation"
-    class="d-recipe-message-input"
+    :class="['d-recipe-message-input', $attrs.class]"
     @dragover.prevent
     @drop.prevent="onDrop"
     @paste="onPaste"
@@ -69,7 +69,7 @@
         :slash-command-suggestion="slashCommandSuggestion"
         :additional-extensions="additionalExtensions"
         :hide-link-bubble-menu="hideLinkBubbleMenu"
-        v-bind="$attrs"
+        v-bind="removeClassStyleAttrs($attrs)"
         @input="onInput"
         @text-input="onTextInput"
         @enter="onSend"
@@ -265,6 +265,7 @@ import {
   RICH_TEXT_EDITOR_AUTOFOCUS_TYPES,
 } from '@/components/rich_text_editor';
 import lastActiveNodes from './last_active_nodes';
+import { removeClassStyleAttrs } from '@/common/utils';
 import MeetingPill from './extensions/meeting_pill/meeting_pill';
 import { DtButton } from '@/components/button';
 import { DtEmojiPicker } from '@/components/emoji_picker';
@@ -786,6 +787,7 @@ export default {
       // If an ordered list is nested within an unordered list, we only want to show the currently selected list as
       // active. This function performs the logic to determine the farthest active node from the root.
       lastActiveNodes,
+      removeClassStyleAttrs,
       additionalExtensions: [MeetingPill],
       internalInputValue: this.modelValue, // internal input content
       imagePickerFocus: false,

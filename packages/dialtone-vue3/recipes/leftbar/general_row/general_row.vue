@@ -9,7 +9,7 @@
       :aria-label="getAriaLabel"
       :title="description"
       :href="'href' in $attrs ? $attrs.href : 'javascript:void(0)'"
-      v-bind="$attrs"
+      v-bind="removeClassStyleAttrs($attrs)"
       v-on="generalRowListeners"
     >
       <div
@@ -155,7 +155,7 @@ import { DtButton } from '@/components/button';
 import { DtTooltip } from '@/components/tooltip';
 import DtEmojiTextWrapper from '@/components/emoji_text_wrapper/emoji_text_wrapper.vue';
 import DtRecipeLeftbarGeneralRowIcon from './leftbar_general_row_icon.vue';
-import { extractVueListeners, safeConcatStrings } from '@/common/utils';
+import { extractVueListeners, safeConcatStrings, removeClassStyleAttrs } from '@/common/utils';
 
 export default {
   compatConfig: { MODE: 3 },
@@ -347,6 +347,7 @@ export default {
     return {
       actionFocused: false,
       labelWidth: '100%',
+      removeClassStyleAttrs,
     };
   },
 
@@ -354,6 +355,7 @@ export default {
     leftbarGeneralRowClasses () {
       return [
         'd-recipe-leftbar-row',
+        this.$attrs.class,
         {
           'd-recipe-leftbar-row--no-action': !this.hasCallButton,
           'd-recipe-leftbar-row--has-unread': this.hasUnreads,

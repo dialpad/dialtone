@@ -203,6 +203,23 @@ export const extractVueListeners = (attrs) => {
 };
 
 /*
+  Removes the class and style attributes from the $attrs. This is useful for vue 2 to vue 3 migration
+  purposes so we don't cause breaking changes due to INSTANCE_ATTRS_CLASS_STYLE
+  https://v3-migration.vuejs.org/breaking-changes/attrs-includes-class-style
+
+  Remove the class and style attributes from the v-bind like so so v-bind="removeClassStyleAttrs($attrs)",
+  and then apply them to the root element manually via:
+
+  :class="$attrs.class"
+  :style="$attrs.style"
+*/
+export function removeClassStyleAttrs (attrs) {
+  const listeners = Object.entries(attrs)
+    .filter(([key]) => !['class', 'style'].includes(key));
+  return Object.fromEntries(listeners);
+}
+
+/*
 * Set's a global timer to debounce the execution of a function.
 * @param { object } func - the function that is going to be called after timeout
 * @param { number } [timeout=300] timeout
@@ -456,6 +473,7 @@ export default {
   flushPromises,
   kebabCaseToPascalCase,
   extractVueListeners,
+  removeClassStyleAttrs,
   debounce,
   isOutOfViewPort,
   getPhoneNumberRegex,

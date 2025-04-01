@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div :class="$attrs.class">
     <label>
       <div :class="['d-checkbox-group', { 'd-checkbox-group--disabled': internalDisabled }]">
         <div class="d-checkbox__input">
@@ -10,7 +10,7 @@
             :value="value"
             :disabled="internalDisabled"
             :class="['d-checkbox', inputValidationClass, inputClass]"
-            v-bind="$attrs"
+            v-bind="removeClassStyleAttrs($attrs)"
             :indeterminate.prop="internalIndeterminate"
             v-on="inputListeners"
           >
@@ -59,6 +59,7 @@ import {
   GroupableMixin,
   MessagesMixin,
 } from '@/common/mixins/input';
+import { removeClassStyleAttrs } from '@/common/utils';
 import { CHECKBOX_INPUT_VALIDATION_CLASSES } from './checkbox_constants';
 import { DtValidationMessages } from '../validation_messages';
 
@@ -102,6 +103,12 @@ export default {
      */
     'focusout',
   ],
+
+  data () {
+    return {
+      removeClassStyleAttrs,
+    };
+  },
 
   computed: {
     inputValidationClass () {

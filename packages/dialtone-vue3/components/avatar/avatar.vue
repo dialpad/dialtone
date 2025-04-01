@@ -302,6 +302,7 @@ export default {
     avatarClasses () {
       return [
         'd-avatar',
+        this.$attrs.class,
         AVATAR_SIZE_MODIFIERS[this.validatedSize],
         this.avatarClass,
         {

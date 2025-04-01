@@ -2,6 +2,7 @@
   <li
     data-qa="dt-breadcrumb-item"
     :class="[
+      $attrs.class,
       'd-breadcrumbs__item',
       { [BREADCRUMB_ITEM_SELECTED_MODIFIER]: selected },
     ]"
@@ -11,7 +12,7 @@
       :inverted="linkInverted"
       :aria-current="ariaCurrent"
       data-qa="breadcrumb-item"
-      v-bind="$attrs"
+      v-bind="removeClassStyleAttrs($attrs)"
     >
       <!-- @slot default slot for breadcrumb item's label -->
       <slot>
@@ -23,6 +24,7 @@
 
 <script>
 import { BREADCRUMB_ITEM_SELECTED_MODIFIER } from './breadcrumbs_constants';
+import { removeClassStyleAttrs } from '@/common/utils';
 import { DtLink } from '../link';
 import { MUTED } from '../link/link_constants';
 
@@ -64,6 +66,7 @@ export default {
   data () {
     return {
       BREADCRUMB_ITEM_SELECTED_MODIFIER,
+      removeClassStyleAttrs,
     };
   },
 

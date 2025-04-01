@@ -1,5 +1,8 @@
 <template>
-  <div class="d-toggle-wrapper">
+  <div
+    class="d-toggle-wrapper"
+    :class="$attrs.class"
+  >
     <label
       v-if="hasSlotContent($slots.default)"
       :class="labelClass"
@@ -30,7 +33,7 @@
 
 <script>
 import { warn } from 'vue';
-import { getUniqueString, hasSlotContent } from '@/common/utils';
+import { getUniqueString, hasSlotContent, removeClassStyleAttrs } from '@/common/utils';
 import { TOGGLE_CHECKED_VALUES, TOGGLE_SIZE_MODIFIERS } from '@/components/toggle/toggle_constants';
 
 /**
@@ -146,7 +149,7 @@ export default {
   computed: {
     inputListeners () {
       return {
-        ...this.$attrs,
+        ...removeClassStyleAttrs(this.$attrs),
         onClick: _ => this.toggleCheckedValue(),
       };
     },

@@ -1,7 +1,7 @@
 <template>
   <div
     ref="container"
-    :class="['d-input__root', { 'd-input--hidden': hidden }]"
+    :class="[$attrs.class, 'd-input__root', { 'd-input--hidden': hidden }]"
     data-qa="dt-input"
   >
     <label
@@ -74,7 +74,7 @@
           :class="inputClasses()"
           :maxlength="shouldLimitMaxLength ? validationProps.length.max : null"
           data-qa="dt-input-input"
-          v-bind="$attrs"
+          v-bind="removeClassStyleAttrs($attrs)"
           v-on="inputListeners"
         />
         <input
@@ -88,7 +88,7 @@
           :class="inputClasses()"
           :maxlength="shouldLimitMaxLength ? validationProps.length.max : null"
           data-qa="dt-input-input"
-          v-bind="$attrs"
+          v-bind="removeClassStyleAttrs($attrs)"
           v-on="inputListeners"
         >
         <span
@@ -131,6 +131,7 @@ import {
   getUniqueString,
   getValidationState,
   hasSlotContent,
+  removeClassStyleAttrs,
 } from '@/common/utils';
 import { DtValidationMessages } from '@/components/validation_messages';
 import { MessagesMixin } from '@/common/mixins/input';
@@ -361,6 +362,7 @@ export default {
       isInvalid: false,
       defaultLength: 0,
       hasSlotContent,
+      removeClassStyleAttrs,
     };
   },
 

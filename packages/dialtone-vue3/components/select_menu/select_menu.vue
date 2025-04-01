@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div :class="$attrs.class">
     <label>
       <div
         v-if="hasSlotContent($slots.label) || label"
@@ -44,7 +44,7 @@
             'd-select__input',
             SELECT_STATE_MODIFIERS[state],
           ]"
-          v-bind="$attrs"
+          v-bind="removeClassStyleAttrs($attrs)"
           data-qa="dt-select"
           :disabled="disabled"
           v-on="selectListeners"
@@ -88,6 +88,7 @@ import {
   getUniqueString,
   getValidationState,
   hasSlotContent,
+  removeClassStyleAttrs,
 } from '@/common/utils';
 import { MessagesMixin } from '@/common/mixins/input';
 import { optionsValidator } from './select_menu_validators.js';
@@ -242,6 +243,7 @@ export default {
       SELECT_SIZE_MODIFIERS,
       SELECT_STATE_MODIFIERS,
       hasSlotContent,
+      removeClassStyleAttrs,
     };
   },
 
