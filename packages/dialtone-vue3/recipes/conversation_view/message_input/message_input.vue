@@ -277,6 +277,7 @@ import {
 } from '@dialpad/dialtone-icons/vue3';
 import DtRecipeMessageInputTopbar from './message_input_topbar.vue';
 import DtRecipeMessageInputLink from './message_input_link.vue';
+import { returnFirstEl } from '@/common/utils';
 
 import {
   EDITOR_SUPPORTED_LINK_PROTOCOLS,
@@ -930,7 +931,7 @@ export default {
 
     // Mousedown instead of click because it fires before the blur event.
     onMousedown (e) {
-      const isWithinInput = this.$refs.richTextEditor.$el
+      const isWithinInput = returnFirstEl(this.$refs.richTextEditor.$el)
         .querySelector('.tiptap')
         .contains(e.target);
 

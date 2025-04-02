@@ -202,6 +202,23 @@ export const extractVueListeners = (attrs) => {
   return Object.fromEntries(listeners);
 };
 
+/**
+ * $el works very differently than in vue 2, if the first node in the template is a text node
+ * such as a comment it will return that instead of the first actual element. This function
+ * will recursively return the first element in the template instead of the first node.
+ * @param el
+ * @returns {HTMLElement} The first element in the template
+ */
+export const returnFirstEl = (el) => {
+  if (el?.nodeType === Node.ELEMENT_NODE) {
+    return el;
+  } else if (!el?.nodeType) {
+    return null;
+  } else {
+    return returnFirstEl(el?.nextSibling);
+  }
+};
+
 /*
 * Set's a global timer to debounce the execution of a function.
 * @param { object } func - the function that is going to be called after timeout
@@ -456,6 +473,7 @@ export default {
   flushPromises,
   kebabCaseToPascalCase,
   extractVueListeners,
+  returnFirstEl,
   debounce,
   isOutOfViewPort,
   getPhoneNumberRegex,

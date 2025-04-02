@@ -79,7 +79,7 @@ import { DtButton } from '@/components/button';
 import { DtPopover } from '@/components/popover';
 import { DtIconChevronUp } from '@dialpad/dialtone-icons/vue3';
 import { DtRecipeCallbarButton, CALLBAR_BUTTON_VALID_WIDTH_SIZE } from '../callbar_button';
-import utils, { warnIfUnmounted } from '@/common/utils';
+import utils, { warnIfUnmounted, returnFirstEl } from '@/common/utils';
 
 export default {
   compatConfig: { MODE: 3 },
@@ -355,7 +355,7 @@ export default {
   },
 
   mounted () {
-    warnIfUnmounted(this.$el, this.$options.name);
+    warnIfUnmounted(returnFirstEl(this.$el), this.$options.name);
   },
 
   methods: {
