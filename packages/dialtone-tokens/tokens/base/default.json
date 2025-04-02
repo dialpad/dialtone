@@ -712,7 +712,7 @@
           "y": "{size.0}",
           "blur": "{size.0}",
           "spread": "{size.200} + {size.100}",
-          "color": "{color.blue.300}",
+          "color": "{color.blue.425}",
           "type": "dropShadow"
         }
       ],
@@ -725,7 +725,7 @@
           "y": "{size.0}",
           "blur": "{size.0}",
           "spread": "{size.200}",
-          "color": "{color.blue.300}",
+          "color": "{color.blue.425}",
           "type": "innerShadow"
         }
       ],
