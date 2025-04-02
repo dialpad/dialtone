@@ -1,5 +1,8 @@
 <template>
-  <div :class="$attrs.class">
+  <div
+    :class="$attrs.class"
+    :style="$attrs.style"
+  >
     <label>
       <div
         v-if="hasSlotContent($slots.label) || label"

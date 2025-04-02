@@ -1,5 +1,8 @@
 <template>
-  <div :class="$attrs.class">
+  <div
+    :class="$attrs.class"
+    :style="$attrs.style"
+  >
     <label>
       <div :class="['d-checkbox-group', { 'd-checkbox-group--disabled': internalDisabled }]">
         <div class="d-checkbox__input">

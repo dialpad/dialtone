@@ -3,6 +3,7 @@
     :is="clickable ? 'button' : 'div'"
     :id="id"
     :class="avatarClasses"
+    :style="$attrs.style"
     data-qa="dt-avatar"
     @click="handleClick"
   >

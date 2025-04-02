@@ -1,6 +1,7 @@
 <template>
   <div
     :class="['d-recipe-editor', $attrs.class]"
+    :style="$attrs.style"
     data-qa="dt-recipe-editor"
     role="presentation"
     @click="$refs.richTextEditor.focusEditor()"

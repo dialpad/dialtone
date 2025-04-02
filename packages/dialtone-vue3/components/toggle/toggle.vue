@@ -2,6 +2,7 @@
   <div
     class="d-toggle-wrapper"
     :class="$attrs.class"
+    :style="$attrs.style"
   >
     <label
       v-if="hasSlotContent($slots.default)"

@@ -2,6 +2,7 @@
   <div
     ref="container"
     :class="[$attrs.class, 'd-input__root', { 'd-input--hidden': hidden }]"
+    :style="$attrs.style"
     data-qa="dt-input"
   >
     <label

@@ -1,5 +1,8 @@
 <template>
-  <div :class="$attrs.class">
+  <div
+    :class="$attrs.class"
+    :style="$attrs.style"
+  >
     <label>
       <div :class="['d-radio-group', { 'd-radio-group--disabled': internalDisabled }]">
         <div class="d-radio__input">

@@ -4,6 +4,7 @@
     data-qa="dt-recipe-message-input"
     role="presentation"
     :class="['d-recipe-message-input', $attrs.class]"
+    :style="$attrs.style"
     @dragover.prevent
     @drop.prevent="onDrop"
     @paste="onPaste"

@@ -5,6 +5,7 @@
       'd-recipe-leftbar-row__container',
       { 'd-recipe-leftbar-row__container--off-duty': $slots.timer },
     ]"
+    :style="$attrs.style"
   >
     <div
       :class="leftbarContactCentersRowClasses"

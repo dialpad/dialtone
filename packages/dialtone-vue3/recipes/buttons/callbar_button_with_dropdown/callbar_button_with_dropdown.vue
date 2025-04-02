@@ -1,6 +1,7 @@
 <template>
   <div
     :class="['dt-recipe--callbar-button-with-dropdown', $attrs.class]"
+    :style="$attrs.style"
   >
     <dt-recipe-callbar-button
       :active="active"

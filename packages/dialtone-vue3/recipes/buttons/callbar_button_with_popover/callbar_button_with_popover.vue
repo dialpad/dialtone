@@ -1,6 +1,7 @@
 <template>
   <div
     :class="['d-recipe-callbar-button-with-popover', $attrs.class]"
+    :style="$attrs.style"
   >
     <dt-recipe-callbar-button
       :aria-label="ariaLabel"

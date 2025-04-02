@@ -3,6 +3,7 @@
     :id="id"
     :inverted="invertedTooltip"
     :class="$attrs.class"
+    :style="$attrs.style"
     :delay="tooltipDelay"
     :show="showTooltip"
     :offset="[0, 24]"

@@ -1,6 +1,7 @@
 <template>
   <div
     :class="leftbarGeneralRowClasses"
+    :style="$attrs.style"
     data-qa="dt-recipe-leftbar-row"
   >
     <a

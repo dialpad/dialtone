@@ -6,6 +6,7 @@
       'd-breadcrumbs__item',
       { [BREADCRUMB_ITEM_SELECTED_MODIFIER]: selected },
     ]"
+    :style="$attrs.style"
   >
     <dt-link
       :kind="linkKind"

@@ -295,6 +295,7 @@ export default {
         size: this.size,
         tooltipText: this.alphaTooltipText,
         class: this.$attrs.class,
+        style: this.$attrs.style,
       };
     },
 
@@ -309,6 +310,7 @@ export default {
         size: this.size,
         tooltipText: this.omegaTooltipText,
         class: this.$attrs.class,
+        style: this.$attrs.style,
       };
     },
   },
