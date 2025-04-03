@@ -1,7 +1,6 @@
 <template>
   <div
-    :class="$attrs.class"
-    :style="$attrs.style"
+    v-bind="addClassStyleAttrs($attrs)"
   >
     <label>
       <div
@@ -92,6 +91,7 @@ import {
   getValidationState,
   hasSlotContent,
   removeClassStyleAttrs,
+  addClassStyleAttrs,
 } from '@/common/utils';
 import { MessagesMixin } from '@/common/mixins/input';
 import { optionsValidator } from './select_menu_validators.js';
@@ -303,6 +303,7 @@ export default {
 
   methods: {
     removeClassStyleAttrs,
+    addClassStyleAttrs,
     emitValue (value, event) {
       this.$emit('input', value, event);
       this.$emit('change', value, event);

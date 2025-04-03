@@ -222,7 +222,7 @@ export const returnFirstEl = (el) => {
   }
 };
 
-/*
+/**
   Only will apply changes if the config option configVue2StyleClassAttrs is set to true. It is false by default.
 
   Removes the class and style attributes from the $attrs. This is useful for vue 2 to vue 3 migration
@@ -240,6 +240,19 @@ export function removeClassStyleAttrs (attrs) {
   const listeners = Object.entries(attrs)
     .filter(([key]) => !['class', 'style'].includes(key));
   return Object.fromEntries(listeners);
+}
+
+/**
+  This should be applied to the root element on components using inheritAttrs: false.
+  This will add the class and style attributes back to the root element if configVue2StyleClassAttrs
+  is enabled.
+*/
+export function addClassStyleAttrs (attrs) {
+  if (!configVue2StyleClassAttrs) return {};
+  return {
+    class: attrs.class,
+    style: attrs.style,
+  };
 }
 
 /*
@@ -497,6 +510,7 @@ export default {
   kebabCaseToPascalCase,
   extractVueListeners,
   removeClassStyleAttrs,
+  addClassStyleAttrs,
   returnFirstEl,
   debounce,
   isOutOfViewPort,

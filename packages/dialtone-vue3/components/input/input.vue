@@ -1,8 +1,8 @@
 <template>
   <div
     ref="container"
-    :class="[$attrs.class, 'd-input__root', { 'd-input--hidden': hidden }]"
-    :style="$attrs.style"
+    :class="['d-input__root', { 'd-input--hidden': hidden }]"
+    v-bind="addClassStyleAttrs($attrs)"
     data-qa="dt-input"
   >
     <label
@@ -133,6 +133,7 @@ import {
   getValidationState,
   hasSlotContent,
   removeClassStyleAttrs,
+  addClassStyleAttrs,
 } from '@/common/utils';
 import { DtValidationMessages } from '@/components/validation_messages';
 import { MessagesMixin } from '@/common/mixins/input';
@@ -534,6 +535,7 @@ export default {
 
   methods: {
     removeClassStyleAttrs,
+    addClassStyleAttrs,
     inputClasses () {
       return [
         'd-input__input',

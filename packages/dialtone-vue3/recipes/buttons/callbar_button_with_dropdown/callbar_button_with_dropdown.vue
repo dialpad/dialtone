@@ -1,7 +1,7 @@
 <template>
   <div
-    :class="['dt-recipe--callbar-button-with-dropdown', $attrs.class]"
-    :style="$attrs.style"
+    class="dt-recipe--callbar-button-with-dropdown"
+    v-bind="addClassStyleAttrs($attrs)"
   >
     <dt-recipe-callbar-button
       :active="active"
@@ -72,7 +72,7 @@ import { DtButton } from '@/components/button';
 import { DtDropdown } from '@/components/dropdown';
 import { DtIconChevronUp } from '@dialpad/dialtone-icons/vue3';
 import { DtRecipeCallbarButton, CALLBAR_BUTTON_VALID_WIDTH_SIZE } from '../callbar_button';
-import utils, { warnIfUnmounted, removeClassStyleAttrs, returnFirstEl } from '@/common/utils';
+import utils, { warnIfUnmounted, removeClassStyleAttrs, addClassStyleAttrs, returnFirstEl } from '@/common/utils';
 
 export default {
   name: 'DtRecipeCallbarButtonWithDropdown',
@@ -317,6 +317,7 @@ export default {
 
   methods: {
     removeClassStyleAttrs,
+    addClassStyleAttrs,
     arrowClick (ev) {
       this.$emit('arrow-click', ev);
       return this.toggleOpen();

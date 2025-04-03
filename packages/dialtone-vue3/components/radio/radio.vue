@@ -1,7 +1,6 @@
 <template>
   <div
-    :class="$attrs.class"
-    :style="$attrs.style"
+    v-bind="addClassStyleAttrs($attrs)"
   >
     <label>
       <div :class="['d-radio-group', { 'd-radio-group--disabled': internalDisabled }]">
@@ -60,7 +59,7 @@ import {
 } from '@/common/mixins/input';
 import { RADIO_INPUT_VALIDATION_CLASSES } from './radio_constants';
 import { DtValidationMessages } from '../validation_messages';
-import { hasSlotContent, removeClassStyleAttrs } from '@/common/utils';
+import { hasSlotContent, removeClassStyleAttrs, addClassStyleAttrs } from '@/common/utils';
 
 /**
  * Radios are control elements that allow the user to make a single selection.
@@ -173,6 +172,7 @@ export default {
 
   methods: {
     removeClassStyleAttrs,
+    addClassStyleAttrs,
     emitValue (value) {
       if (value !== this.radioGroupValue) {
         // update provided value if injected

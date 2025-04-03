@@ -1,7 +1,7 @@
 <template>
   <div
-    :class="['d-recipe-editor', $attrs.class]"
-    :style="$attrs.style"
+    class="d-recipe-editor"
+    v-bind="addClassStyleAttrs($attrs)"
     data-qa="dt-recipe-editor"
     role="presentation"
     @click="$refs.richTextEditor.focusEditor()"
@@ -190,7 +190,7 @@ import {
   EDITOR_SUPPORTED_LINK_PROTOCOLS,
   EDITOR_DEFAULT_LINK_PREFIX,
 } from './editor_constants.js';
-import { removeClassStyleAttrs } from '@/common/utils';
+import { removeClassStyleAttrs, addClassStyleAttrs } from '@/common/utils';
 import { DtButton } from '@/components/button';
 import { DtPopover } from '@/components/popover';
 import { DtStack } from '@/components/stack';
@@ -707,6 +707,7 @@ export default {
 
   methods: {
     removeClassStyleAttrs,
+    addClassStyleAttrs,
 
     onInputFocus (event) {
       event?.stopPropagation();

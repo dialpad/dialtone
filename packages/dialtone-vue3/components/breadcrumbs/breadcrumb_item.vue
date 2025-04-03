@@ -2,11 +2,10 @@
   <li
     data-qa="dt-breadcrumb-item"
     :class="[
-      $attrs.class,
       'd-breadcrumbs__item',
       { [BREADCRUMB_ITEM_SELECTED_MODIFIER]: selected },
     ]"
-    :style="$attrs.style"
+    v-bind="addClassStyleAttrs($attrs)"
   >
     <dt-link
       :kind="linkKind"
@@ -25,7 +24,7 @@
 
 <script>
 import { BREADCRUMB_ITEM_SELECTED_MODIFIER } from './breadcrumbs_constants';
-import { removeClassStyleAttrs } from '@/common/utils';
+import { removeClassStyleAttrs, addClassStyleAttrs } from '@/common/utils';
 import { DtLink } from '../link';
 import { MUTED } from '../link/link_constants';
 
@@ -87,6 +86,7 @@ export default {
 
   methods: {
     removeClassStyleAttrs,
+    addClassStyleAttrs,
   },
 };
 </script>

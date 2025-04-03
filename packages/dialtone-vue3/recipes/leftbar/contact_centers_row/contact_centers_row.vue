@@ -1,11 +1,10 @@
 <template>
   <div
     :class="[
-      $attrs.class,
       'd-recipe-leftbar-row__container',
       { 'd-recipe-leftbar-row__container--off-duty': $slots.timer },
     ]"
-    :style="$attrs.style"
+    v-bind="addClassStyleAttrs($attrs)"
   >
     <div
       :class="leftbarContactCentersRowClasses"
@@ -78,7 +77,7 @@
 </template>
 
 <script>
-import { extractVueListeners, safeConcatStrings, removeClassStyleAttrs, returnFirstEl } from '@/common/utils';
+import { extractVueListeners, safeConcatStrings, removeClassStyleAttrs, returnFirstEl, addClassStyleAttrs } from '@/common/utils';
 import { DtBadge } from '@/components/badge';
 import { DtButton } from '@/components/button';
 import DtEmojiTextWrapper from '@/components/emoji_text_wrapper/emoji_text_wrapper.vue';
@@ -222,6 +221,7 @@ export default {
 
   methods: {
     removeClassStyleAttrs,
+    addClassStyleAttrs,
 
     adjustLabelWidth () {
       const labelWidth = returnFirstEl(this.$el)?.querySelector('.d-recipe-leftbar-row__primary')?.clientWidth || 0;

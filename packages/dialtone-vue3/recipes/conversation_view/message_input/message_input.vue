@@ -3,8 +3,8 @@
   <div
     data-qa="dt-recipe-message-input"
     role="presentation"
-    :class="['d-recipe-message-input', $attrs.class]"
-    :style="$attrs.style"
+    class="d-recipe-message-input"
+    v-bind="addClassStyleAttrs($attrs)"
     @dragover.prevent
     @drop.prevent="onDrop"
     @paste="onPaste"
@@ -266,7 +266,7 @@ import {
   RICH_TEXT_EDITOR_AUTOFOCUS_TYPES,
 } from '@/components/rich_text_editor';
 import lastActiveNodes from './last_active_nodes';
-import { removeClassStyleAttrs, returnFirstEl } from '@/common/utils';
+import { removeClassStyleAttrs, returnFirstEl, addClassStyleAttrs } from '@/common/utils';
 import MeetingPill from './extensions/meeting_pill/meeting_pill';
 import { DtButton } from '@/components/button';
 import { DtEmojiPicker } from '@/components/emoji_picker';
@@ -875,6 +875,7 @@ export default {
 
   methods: {
     removeClassStyleAttrs,
+    addClassStyleAttrs,
 
     linkDialogOpened (value) {
       this.linkDialogOpen = value;

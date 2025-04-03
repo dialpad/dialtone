@@ -1,7 +1,7 @@
 <template>
   <div
     :class="leftbarGeneralRowClasses"
-    :style="$attrs.style"
+    v-bind="addClassStyleAttrs($attrs)"
     data-qa="dt-recipe-leftbar-row"
   >
     <a
@@ -156,7 +156,7 @@ import { DtButton } from '@/components/button';
 import { DtTooltip } from '@/components/tooltip';
 import DtEmojiTextWrapper from '@/components/emoji_text_wrapper/emoji_text_wrapper.vue';
 import DtRecipeLeftbarGeneralRowIcon from './leftbar_general_row_icon.vue';
-import { extractVueListeners, safeConcatStrings, removeClassStyleAttrs, returnFirstEl } from '@/common/utils';
+import { extractVueListeners, safeConcatStrings, removeClassStyleAttrs, returnFirstEl, addClassStyleAttrs } from '@/common/utils';
 
 export default {
   compatConfig: { MODE: 3 },
@@ -355,7 +355,6 @@ export default {
     leftbarGeneralRowClasses () {
       return [
         'd-recipe-leftbar-row',
-        this.$attrs.class,
         {
           'd-recipe-leftbar-row--no-action': !this.hasCallButton,
           'd-recipe-leftbar-row--has-unread': this.hasUnreads,
@@ -448,6 +447,7 @@ export default {
 
   methods: {
     removeClassStyleAttrs,
+    addClassStyleAttrs,
 
     validateProps () {
       if (this.type === LEFTBAR_GENERAL_ROW_TYPES.CONTACT_CENTER &&
