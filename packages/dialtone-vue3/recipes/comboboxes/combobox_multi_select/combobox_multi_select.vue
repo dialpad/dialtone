@@ -123,7 +123,7 @@ import DtInput from '@/components/input/input.vue';
 import DtChip from '@/components/chip/chip.vue';
 import DtValidationMessages from '@/components/validation_messages/validation_messages.vue';
 import { validationMessageValidator } from '@/common/validators';
-import { hasSlotContent } from '@/common/utils';
+import { hasSlotContent, returnFirstEl } from '@/common/utils';
 import {
   POPOVER_APPEND_TO_VALUES,
 } from '@/components/popover/popover_constants';
@@ -564,11 +564,11 @@ export default {
     },
 
     getChipButtons () {
-      return this.$refs.chips && this.$refs.chips.map(chip => chip.$el.querySelector('button'));
+      return this.$refs.chips && this.$refs.chips.map(chip => returnFirstEl(chip.$el).querySelector('button'));
     },
 
     getChips () {
-      return this.$refs.chips && this.$refs.chips.map(chip => chip.$el);
+      return this.$refs.chips && this.$refs.chips.map(chip => returnFirstEl(chip.$el));
     },
 
     getLastChipButton () {

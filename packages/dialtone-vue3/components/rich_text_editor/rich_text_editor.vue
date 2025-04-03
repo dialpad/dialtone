@@ -92,7 +92,7 @@ import { emojiPattern } from 'regex-combined-emojis';
 import mentionSuggestion from './extensions/mentions/suggestion';
 import channelSuggestion from './extensions/channels/suggestion';
 import slashCommandSuggestion from './extensions/slash_command/suggestion';
-import { warnIfUnmounted } from '@/common/utils';
+import { warnIfUnmounted, returnFirstEl } from '@/common/utils';
 import deepEqual from 'deep-equal';
 
 export default {
@@ -457,7 +457,7 @@ export default {
     return {
       editor: null,
       tippyOptions: {
-        appendTo: () => this.$refs.editor.$el.getRootNode()?.querySelector('body'),
+        appendTo: () => returnFirstEl(this.$refs.editor.$el).getRootNode()?.querySelector('body'),
         placement: 'top-start',
       },
     };
@@ -661,7 +661,7 @@ export default {
   },
 
   mounted () {
-    warnIfUnmounted(this.$el, this.$options.name);
+    warnIfUnmounted(returnFirstEl(this.$el), this.$options.name);
     this.processValue(this.modelValue, false);
   },
 
