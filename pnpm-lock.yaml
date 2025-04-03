@@ -649,11 +649,11 @@ importers:
         specifier: workspace:*
         version: link:../dialtone-icons
       '@dialpad/i18n-services':
-        specifier: 1.2.2-test2
-        version: 1.2.2-test2(@vue/composition-api@1.7.2(vue@2.7.16))(vue-demi@0.14.10(@vue/composition-api@1.7.2(vue@2.7.16))(vue@2.7.16))(vue@2.7.16)
+        specifier: 1.2.0-beta
+        version: 1.2.0-beta(@vue/composition-api@1.7.2(vue@2.7.16))(vue-demi@0.14.10(@vue/composition-api@1.7.2(vue@2.7.16))(vue@2.7.16))(vue@2.7.16)
       '@dialpad/i18n-vue2':
-        specifier: 1.0.1-test3
-        version: 1.0.1-test3(vue-demi@0.14.10(@vue/composition-api@1.7.2(vue@2.7.16))(vue@2.7.16))(vue@2.7.16)
+        specifier: 1.0.2-beta
+        version: 1.0.2-beta(vue-demi@0.14.10(@vue/composition-api@1.7.2(vue@2.7.16))(vue@2.7.16))(vue@2.7.16)
       '@linusborg/vue-simple-portal':
         specifier: 0.1.5
         version: 0.1.5(vue@2.7.16)
@@ -1835,15 +1835,16 @@ packages:
     resolution: {integrity: sha512-TLsyNwTUmGK6TtvdoC4SE/13Ae501pdzhSIyOV9V3HOVf8YrVTOgLUJ/l97kZSxcTOeRbFeRjbWfH7W3ixn36g==, tarball: https://npm.pkg.github.com/download/@dialpad/conventional-changelog-angular/1.1.1/1c54240f941b2d02d73e4ca2d4e53420d128bbf6}
     engines: {node: '>=10'}
 
-  '@dialpad/i18n-services@1.2.2-test2':
-    resolution: {integrity: sha512-52zvUd7cE2oGbRySZOCBd1Q5SmulHWaOqm/lcrWu47P5Z2t+rnBXyxiLbNz3zCm1fJqumS4YfdjKv437haalSA==, tarball: https://npm.pkg.github.com/download/@dialpad/i18n-services/1.2.2-test2/5b53f99b7a58d2902c8d4fb0961f4f736a86c19d}
+  '@dialpad/i18n-services@1.2.0-beta':
+    resolution: {integrity: sha512-WNfajFgLW64Qckku8iQhbo9gT7oRO1mkBWbrE4Tvx12KSXVVUFKLaU6ptZshZ6lykXjw9Ajwltmw/HNPy6e+jQ==, tarball: https://npm.pkg.github.com/download/@dialpad/i18n-services/1.2.0-beta/7a91fdbd110cca668a3ebfc38af3afb94995da19}
+    hasBin: true
     peerDependencies:
-      '@vue/composition-api': ^1.0.0-rc.1
+      '@vue/composition-api': 1.7.2
       vue: ^2.0.0 || >=3.0.0
       vue-demi: 0.14.10
 
-  '@dialpad/i18n-vue2@1.0.1-test3':
-    resolution: {integrity: sha512-o9MN9E/2J05Lf0N6i/7h3BSrpoaCvAtiwTVIF/RtkjE6eCfyGj00dhjzccCX9Z6mO8HT583G8Z8mMK8Jgpc46g==, tarball: https://npm.pkg.github.com/download/@dialpad/i18n-vue2/1.0.1-test3/59503cc36d2e3988a755b3f9f9334c03ff1017cb}
+  '@dialpad/i18n-vue2@1.0.2-beta':
+    resolution: {integrity: sha512-Xksle7G6fsOGhwwzHhEjv/cyBzlmbPoi5XzwNdjvyF67gGInZWtOSbWhQXURIgPSTFLFuOn4i/YUzjmuck74kQ==, tarball: https://npm.pkg.github.com/download/@dialpad/i18n-vue2/1.0.2-beta/28e29252fe1119ea7804d180831c8ce44cb5d33b}
     peerDependencies:
       vue: ^2.0.0
 
@@ -17408,7 +17409,7 @@ snapshots:
       compare-func: 2.0.0
       q: 1.5.1
 
-  '@dialpad/i18n-services@1.2.2-test2(@vue/composition-api@1.7.2(vue@2.7.16))(vue-demi@0.14.10(@vue/composition-api@1.7.2(vue@2.7.16))(vue@2.7.16))(vue@2.7.16)':
+  '@dialpad/i18n-services@1.2.0-beta(@vue/composition-api@1.7.2(vue@2.7.16))(vue-demi@0.14.10(@vue/composition-api@1.7.2(vue@2.7.16))(vue@2.7.16))(vue@2.7.16)':
     dependencies:
       '@dialpad/logger': 1.2.0
       '@fluent/bundle': 0.17.1
@@ -17421,9 +17422,9 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  '@dialpad/i18n-vue2@1.0.1-test3(vue-demi@0.14.10(@vue/composition-api@1.7.2(vue@2.7.16))(vue@2.7.16))(vue@2.7.16)':
+  '@dialpad/i18n-vue2@1.0.2-beta(vue-demi@0.14.10(@vue/composition-api@1.7.2(vue@2.7.16))(vue@2.7.16))(vue@2.7.16)':
     dependencies:
-      '@dialpad/i18n-services': 1.2.2-test2(@vue/composition-api@1.7.2(vue@2.7.16))(vue-demi@0.14.10(@vue/composition-api@1.7.2(vue@2.7.16))(vue@2.7.16))(vue@2.7.16)
+      '@dialpad/i18n-services': 1.2.0-beta(@vue/composition-api@1.7.2(vue@2.7.16))(vue-demi@0.14.10(@vue/composition-api@1.7.2(vue@2.7.16))(vue@2.7.16))(vue@2.7.16)
       '@vue/composition-api': 1.7.2(vue@2.7.16)
       vue: 2.7.16
     transitivePeerDependencies:
@@ -30593,13 +30594,13 @@ snapshots:
     dependencies:
       htmlparser2: 3.10.1
       postcss: 7.0.39
-      postcss-syntax: 0.36.2(postcss-html@0.36.0(postcss-syntax@0.36.2(postcss@8.4.39))(postcss@7.0.39))(postcss-jsx@0.36.4(postcss-syntax@0.36.2(postcss@8.4.39))(postcss@7.0.39))(postcss-less@3.1.4)(postcss-markdown@0.36.0)(postcss-scss@2.1.1)(postcss@7.0.39)
+      postcss-syntax: 0.36.2(postcss-html@0.36.0(postcss-syntax@0.36.2(postcss@8.4.39))(postcss@7.0.39))(postcss-jsx@0.36.4(postcss-syntax@0.36.2(postcss@8.4.39))(postcss@7.0.39))(postcss-less@3.1.4)(postcss-markdown@0.36.0(postcss-syntax@0.36.2(postcss@8.4.39))(postcss@7.0.39))(postcss-scss@2.1.1)(postcss@7.0.39)
 
   postcss-jsx@0.36.4(postcss-syntax@0.36.2(postcss@8.4.39))(postcss@7.0.39):
     dependencies:
       '@babel/core': 7.23.2
       postcss: 7.0.39
-      postcss-syntax: 0.36.2(postcss-html@0.36.0(postcss-syntax@0.36.2(postcss@8.4.39))(postcss@7.0.39))(postcss-jsx@0.36.4(postcss-syntax@0.36.2(postcss@8.4.39))(postcss@7.0.39))(postcss-less@3.1.4)(postcss-markdown@0.36.0)(postcss-scss@2.1.1)(postcss@7.0.39)
+      postcss-syntax: 0.36.2(postcss-html@0.36.0(postcss-syntax@0.36.2(postcss@8.4.39))(postcss@7.0.39))(postcss-jsx@0.36.4(postcss-syntax@0.36.2(postcss@8.4.39))(postcss@7.0.39))(postcss-less@3.1.4)(postcss-markdown@0.36.0(postcss-syntax@0.36.2(postcss@8.4.39))(postcss@7.0.39))(postcss-scss@2.1.1)(postcss@7.0.39)
     transitivePeerDependencies:
       - supports-color
 
@@ -30643,7 +30644,7 @@ snapshots:
   postcss-markdown@0.36.0(postcss-syntax@0.36.2(postcss@8.4.39))(postcss@7.0.39):
     dependencies:
       postcss: 7.0.39
-      postcss-syntax: 0.36.2(postcss-html@0.36.0(postcss-syntax@0.36.2(postcss@8.4.39))(postcss@7.0.39))(postcss-jsx@0.36.4(postcss-syntax@0.36.2(postcss@8.4.39))(postcss@7.0.39))(postcss-less@3.1.4)(postcss-markdown@0.36.0)(postcss-scss@2.1.1)(postcss@7.0.39)
+      postcss-syntax: 0.36.2(postcss-html@0.36.0(postcss-syntax@0.36.2(postcss@8.4.39))(postcss@7.0.39))(postcss-jsx@0.36.4(postcss-syntax@0.36.2(postcss@8.4.39))(postcss@7.0.39))(postcss-less@3.1.4)(postcss-markdown@0.36.0(postcss-syntax@0.36.2(postcss@8.4.39))(postcss@7.0.39))(postcss-scss@2.1.1)(postcss@7.0.39)
       remark: 10.0.1
       unist-util-find-all-after: 1.0.5
 
@@ -30931,7 +30932,7 @@ snapshots:
       postcss-value-parser: 4.2.0
       svgo: 3.0.2
 
-  postcss-syntax@0.36.2(postcss-html@0.36.0(postcss-syntax@0.36.2(postcss@8.4.39))(postcss@7.0.39))(postcss-jsx@0.36.4(postcss-syntax@0.36.2(postcss@8.4.39))(postcss@7.0.39))(postcss-less@3.1.4)(postcss-markdown@0.36.0)(postcss-scss@2.1.1)(postcss@7.0.39):
+  postcss-syntax@0.36.2(postcss-html@0.36.0(postcss-syntax@0.36.2(postcss@8.4.39))(postcss@7.0.39))(postcss-jsx@0.36.4(postcss-syntax@0.36.2(postcss@8.4.39))(postcss@7.0.39))(postcss-less@3.1.4)(postcss-markdown@0.36.0(postcss-syntax@0.36.2(postcss@8.4.39))(postcss@7.0.39))(postcss-scss@2.1.1)(postcss@7.0.39):
     dependencies:
       postcss: 7.0.39
     optionalDependencies:
@@ -33084,7 +33085,7 @@ snapshots:
       postcss-sass: 0.3.5
       postcss-scss: 2.1.1
       postcss-selector-parser: 3.1.2
-      postcss-syntax: 0.36.2(postcss-html@0.36.0(postcss-syntax@0.36.2(postcss@8.4.39))(postcss@7.0.39))(postcss-jsx@0.36.4(postcss-syntax@0.36.2(postcss@8.4.39))(postcss@7.0.39))(postcss-less@3.1.4)(postcss-markdown@0.36.0)(postcss-scss@2.1.1)(postcss@7.0.39)
+      postcss-syntax: 0.36.2(postcss-html@0.36.0(postcss-syntax@0.36.2(postcss@8.4.39))(postcss@7.0.39))(postcss-jsx@0.36.4(postcss-syntax@0.36.2(postcss@8.4.39))(postcss@7.0.39))(postcss-less@3.1.4)(postcss-markdown@0.36.0(postcss-syntax@0.36.2(postcss@8.4.39))(postcss@7.0.39))(postcss-scss@2.1.1)(postcss@7.0.39)
       postcss-value-parser: 3.3.1
       resolve-from: 4.0.0
       signal-exit: 3.0.7
