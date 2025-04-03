@@ -78,7 +78,7 @@ import {
 import SplitButtonAlpha from './split_button-alpha.vue';
 import SplitButtonOmega from './split_button-omega.vue';
 import { DtDropdown } from '@/components/dropdown';
-import { hasSlotContent, warnIfUnmounted } from '@/common/utils';
+import { hasSlotContent, warnIfUnmounted, returnFirstEl } from '@/common/utils';
 
 export default {
   compatConfig: { MODE: 3 },
@@ -324,7 +324,7 @@ export default {
   },
 
   mounted () {
-    warnIfUnmounted(this.$el, this.$options.name);
+    warnIfUnmounted(returnFirstEl(this.$el), this.$options.name);
   },
 
   methods: {

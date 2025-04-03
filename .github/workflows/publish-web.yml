@@ -1,4 +1,4 @@
-name: Publish packages
+name: Publish Web
 
 on:
   workflow_dispatch:
@@ -45,7 +45,7 @@ jobs:
   filter-actions:
     runs-on: ubuntu-latest
     outputs:
-      packages: ${{ steps.filter.outputs.changes }}
+      packages: ${{ github.event_name == 'push' && steps.filter-path.outputs.changes || steps.filter-input.outputs.package }}
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -53,7 +53,7 @@ jobs:
       - name: Filter actions by path
         if: ${{ github.event_name == 'push' }}
         uses: dorny/paths-filter@v3
-        id: filter
+        id: filter-path
         with:
           base: ${{ github.ref }}
           list-files: 'json'
@@ -79,9 +79,9 @@ jobs:
 
       - name: Filter actions by input
         if: ${{ github.event_name == 'workflow_dispatch' }}
-        id: filter
+        id: filter-input
         run: |
-          echo 'changes=["${{ github.event.inputs.package }}"]' >> $GITHUB_OUTPUT
+          echo 'package=["${{ github.event.inputs.package }}"]' >> $GITHUB_OUTPUT
 
   check-dialpad-member:
     runs-on: ubuntu-latest

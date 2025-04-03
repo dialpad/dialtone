@@ -23,6 +23,7 @@
     :allow-underline="$attrs.allowUnderline"
     :additional-extensions="$attrs.additionalExtensions"
     :hide-link-bubble-menu="$attrs.hideLinkBubbleMenu"
+    :use-div-tags="$attrs.useDivTags"
     @blur="$attrs.onBlur"
     @input="$attrs.onInput"
     @edit-link="$attrs.onEditLink"

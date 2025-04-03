@@ -31,6 +31,7 @@
 <script setup>
 import { computed, ref, watch } from 'vue';
 import { DtTab, DtTabGroup } from '@/components/tab';
+import { returnFirstEl } from '@/common/utils';
 import { EMOJI_PICKER_CATEGORIES } from '@/components/emoji_picker/emoji_picker_constants.js';
 import {
   DtIconClock,
@@ -148,7 +149,7 @@ function selectTabset (id) {
 function setTabsetRef (ref) {
   // We push the $el, because $el is the button inside the dt-tab component
   // and we need the button to focus it
-  tabsetRef.value.push(ref.$el);
+  tabsetRef.value.push(returnFirstEl(ref.$el));
 }
 
 function focusTabset () {

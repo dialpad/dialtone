@@ -156,7 +156,7 @@ import { DtButton } from '@/components/button';
 import { DtTooltip } from '@/components/tooltip';
 import DtEmojiTextWrapper from '@/components/emoji_text_wrapper/emoji_text_wrapper.vue';
 import DtRecipeLeftbarGeneralRowIcon from './leftbar_general_row_icon.vue';
-import { extractVueListeners, safeConcatStrings, removeClassStyleAttrs } from '@/common/utils';
+import { extractVueListeners, safeConcatStrings, removeClassStyleAttrs, returnFirstEl } from '@/common/utils';
 
 export default {
   compatConfig: { MODE: 3 },
@@ -439,7 +439,7 @@ export default {
 
   mounted () {
     this.resizeObserver = new ResizeObserver(this.adjustLabelWidth);
-    this.resizeObserver.observe(this.$el);
+    this.resizeObserver.observe(returnFirstEl(this.$el));
     this.adjustLabelWidth();
   },
 
@@ -456,9 +456,9 @@ export default {
     },
 
     adjustLabelWidth () {
-      const labelWidth = this.$el?.querySelector('.d-recipe-leftbar-row__primary')?.clientWidth || 0;
-      const omegaWidth = this.$el?.querySelector('.d-recipe-leftbar-row__omega')?.clientWidth || 0;
-      const alphaWidth = this.$el?.querySelector('.d-recipe-leftbar-row__alpha')?.clientWidth || 0;
+      const labelWidth = returnFirstEl(this.$el)?.querySelector('.d-recipe-leftbar-row__primary')?.clientWidth || 0;
+      const omegaWidth = returnFirstEl(this.$el)?.querySelector('.d-recipe-leftbar-row__omega')?.clientWidth || 0;
+      const alphaWidth = returnFirstEl(this.$el)?.querySelector('.d-recipe-leftbar-row__alpha')?.clientWidth || 0;
       const paddings = 16;
       this.labelWidth = labelWidth - (omegaWidth + alphaWidth + paddings) + 'px';
     },

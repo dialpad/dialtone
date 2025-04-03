@@ -2,6 +2,7 @@ import { mount } from '@vue/test-utils';
 import DtTabGroup from './tab_group.vue';
 import DtTabPanel from './tab_panel.vue';
 import DtTab from './tab.vue';
+import { returnFirstEl } from '@/common/utils';
 import { TAB_LIST_KIND_MODIFIERS, TAB_LIST_SIZE_MODIFIERS, TAB_LIST_IMPORTANCE_MODIFIERS } from './tabs_constants';
 import { h } from 'vue';
 
@@ -165,7 +166,7 @@ describe('DtTabGroup Tests', () => {
       beforeEach(async () => {
         _mountWrapper();
         // Simulating the third tab being set programmatically after the second tab was selected by a user.
-        tabs.at(1).vm.$el.click();
+        returnFirstEl(tabs.at(1).vm.$el).click();
         props.selected = optionTabs[2].panelId;
         await wrapper.setProps(props);
       });
@@ -193,7 +194,7 @@ describe('DtTabGroup Tests', () => {
 
     describe('Correct change event', () => {
       beforeEach(() => {
-        tabs.at(1).vm.$el.click();
+        returnFirstEl(tabs.at(1).vm.$el).click();
       });
 
       it('should emitted on click', () => {
@@ -203,7 +204,7 @@ describe('DtTabGroup Tests', () => {
 
     describe('Correct before-change event', () => {
       beforeEach(() => {
-        tabs.at(1).vm.$el.click();
+        returnFirstEl(tabs.at(1).vm.$el).click();
       });
 
       it('should emitted on click', () => {
@@ -214,7 +215,7 @@ describe('DtTabGroup Tests', () => {
     describe('Correct key navigation', () => {
       describe('On keyup left', () => {
         beforeEach(async () => {
-          tabs.at(0).vm.$el.focus();
+          returnFirstEl(tabs.at(0).vm.$el).focus();
           await tabList.trigger('keyup.left');
           await tabList.trigger('keyup.space');
         });
@@ -227,7 +228,7 @@ describe('DtTabGroup Tests', () => {
 
       describe('On double keyup left and space', () => {
         beforeEach(async () => {
-          tabs.at(0).vm.$el.focus();
+          returnFirstEl(tabs.at(0).vm.$el).focus();
           await tabList.trigger('keyup.left');
           await tabList.trigger('keyup.left');
           await tabList.trigger('keyup.space');
@@ -241,7 +242,7 @@ describe('DtTabGroup Tests', () => {
 
       describe('On right and enter', () => {
         beforeEach(async () => {
-          tabs.at(0).vm.$el.focus();
+          returnFirstEl(tabs.at(0).vm.$el).focus();
           await tabList.trigger('keyup.right');
           await tabList.trigger('keyup.enter');
         });
@@ -254,7 +255,7 @@ describe('DtTabGroup Tests', () => {
 
       describe('On double keyup right and enter', () => {
         beforeEach(async () => {
-          tabs.at(0).vm.$el.focus();
+          returnFirstEl(tabs.at(0).vm.$el).focus();
           await tabList.trigger('keyup.right');
           await tabList.trigger('keyup.right');
           await tabList.trigger('keyup.enter');
@@ -268,7 +269,7 @@ describe('DtTabGroup Tests', () => {
 
       describe('On keydown home and enter', () => {
         beforeEach(async () => {
-          tabs.at(2).vm.$el.focus();
+          returnFirstEl(tabs.at(2).vm.$el).focus();
           await tabList.trigger('keydown.home');
           await tabList.trigger('keyup.enter');
         });
@@ -281,7 +282,7 @@ describe('DtTabGroup Tests', () => {
 
       describe('On keydown end and enter', () => {
         beforeEach(async () => {
-          tabs.at(0).vm.$el.focus();
+          returnFirstEl(tabs.at(0).vm.$el).focus();
           await tabList.trigger('keydown.end');
           await tabList.trigger('keyup.enter');
         });
@@ -303,7 +304,7 @@ describe('DtTabGroup Tests', () => {
 
         _mountWrapper();
 
-        tabs.at(0).vm.$el.click();
+        returnFirstEl(tabs.at(0).vm.$el).click();
       });
 
       it('Should prevent the change event', async () => {
@@ -314,7 +315,7 @@ describe('DtTabGroup Tests', () => {
 
   describe('Accessibility Tests', () => {
     beforeEach(async () => {
-      tabs.at(0).vm.$el.focus();
+      returnFirstEl(tabs.at(0).vm.$el).focus();
       await tabList.trigger('keyup.enter');
     });
 
@@ -332,7 +333,7 @@ describe('DtTabGroup Tests', () => {
         let lastTab;
         let lastPanel;
         beforeEach(async () => {
-          tabs.at(0).vm.$el.focus();
+          returnFirstEl(tabs.at(0).vm.$el).focus();
           await tabList.trigger('keyup.left');
           await tabList.trigger('keyup.space');
           lastTab = tabs.at(2).attributes();
@@ -347,7 +348,7 @@ describe('DtTabGroup Tests', () => {
 
       describe('attributes after keyup right', () => {
         beforeEach(async () => {
-          tabs.at(0).vm.$el.focus();
+          returnFirstEl(tabs.at(0).vm.$el).focus();
           await tabList.trigger('keyup.right');
           await tabList.trigger('keyup.enter');
         });
@@ -365,7 +366,7 @@ describe('DtTabGroup Tests', () => {
 
       describe('attributes after keydown home', () => {
         beforeEach(async () => {
-          tabs.at(2).vm.$el.focus();
+          returnFirstEl(tabs.at(2).vm.$el).focus();
           await tabList.trigger('keydown.home');
           await tabList.trigger('keyup.enter');
         });
@@ -383,7 +384,7 @@ describe('DtTabGroup Tests', () => {
 
       describe('attributes after keydown end', () => {
         beforeEach(async () => {
-          tabs.at(0).vm.$el.focus();
+          returnFirstEl(tabs.at(0).vm.$el).focus();
           await tabList.trigger('keydown.end');
           await tabList.trigger('keyup.enter');
         });

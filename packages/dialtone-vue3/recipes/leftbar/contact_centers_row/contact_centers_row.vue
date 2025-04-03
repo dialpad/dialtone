@@ -78,7 +78,7 @@
 </template>
 
 <script>
-import { extractVueListeners, safeConcatStrings, removeClassStyleAttrs } from '@/common/utils';
+import { extractVueListeners, safeConcatStrings, removeClassStyleAttrs, returnFirstEl } from '@/common/utils';
 import { DtBadge } from '@/components/badge';
 import { DtButton } from '@/components/button';
 import DtEmojiTextWrapper from '@/components/emoji_text_wrapper/emoji_text_wrapper.vue';
@@ -213,7 +213,7 @@ export default {
 
   mounted () {
     this.resizeObserver = new ResizeObserver(this.adjustLabelWidth);
-    this.resizeObserver.observe(this.$el);
+    this.resizeObserver.observe(returnFirstEl(this.$el));
     this.adjustLabelWidth();
   },
 
@@ -223,9 +223,9 @@ export default {
 
   methods: {
     adjustLabelWidth () {
-      const labelWidth = this.$el?.querySelector('.d-recipe-leftbar-row__primary')?.clientWidth || 0;
-      const omegaWidth = this.$el?.querySelector('.d-recipe-leftbar-row__omega')?.clientWidth || 0;
-      const alphaWidth = this.$el?.querySelector('.d-recipe-leftbar-row__alpha')?.clientWidth || 0;
+      const labelWidth = returnFirstEl(this.$el)?.querySelector('.d-recipe-leftbar-row__primary')?.clientWidth || 0;
+      const omegaWidth = returnFirstEl(this.$el)?.querySelector('.d-recipe-leftbar-row__omega')?.clientWidth || 0;
+      const alphaWidth = returnFirstEl(this.$el)?.querySelector('.d-recipe-leftbar-row__alpha')?.clientWidth || 0;
       const paddings = 12;
       this.labelWidth = labelWidth - (omegaWidth + alphaWidth + paddings) + 'px';
     },

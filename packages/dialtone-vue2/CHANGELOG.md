@@ -1,3 +1,23 @@
+## [2.180.1](https://github.com/dialpad/dialtone/compare/dialtone-vue2/v2.180.0...dialtone-vue2/v2.180.1) (2025-04-02)
+
+
+### Bug Fixes
+
+* **Ci:** NO-JIRA changelog release order ([#689](https://github.com/dialpad/dialtone/issues/689)) ([bd4c080](https://github.com/dialpad/dialtone/commit/bd4c0802a59be6fdafb8f661a9c12c64ef764656))
+* **Emoji Text Wrapper:** DLT-2455 skip vue3 comment vnodes when extracting text for emojis ([#686](https://github.com/dialpad/dialtone/issues/686)) ([62ad982](https://github.com/dialpad/dialtone/commit/62ad98241850ae52e7d0ceeebb83aecb65fa3ad0))
+
+# [2.180.0](https://github.com/dialpad/dialtone/compare/dialtone-vue2/v2.179.1...dialtone-vue2/v2.180.0) (2025-03-31)
+
+
+### Bug Fixes
+
+* **Pagination:** DLT-2373 invalid prop combination on end buttons ([#684](https://github.com/dialpad/dialtone/issues/684)) ([517debb](https://github.com/dialpad/dialtone/commit/517debbbab0c497d13d48230ab9e8d2e9a52c423))
+
+
+### Features
+
+* **Editor:** DP-131851 added editor support to encase text with div tags ([#685](https://github.com/dialpad/dialtone/issues/685)) ([d0429a3](https://github.com/dialpad/dialtone/commit/d0429a30c4474e02434388b6d782e23b07ac97c8))
+
 ## [2.179.1](https://github.com/dialpad/dialtone/compare/dialtone-vue2/v2.179.0...dialtone-vue2/v2.179.1) (2025-03-27)
 
 
