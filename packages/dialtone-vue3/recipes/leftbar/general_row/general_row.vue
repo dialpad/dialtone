@@ -1,6 +1,7 @@
 <template>
   <div
     :class="leftbarGeneralRowClasses"
+    v-bind="addClassStyleAttrs($attrs)"
     data-qa="dt-recipe-leftbar-row"
   >
     <a
@@ -9,7 +10,7 @@
       :aria-label="getAriaLabel"
       :title="description"
       :href="'href' in $attrs ? $attrs.href : 'javascript:void(0)'"
-      v-bind="$attrs"
+      v-bind="removeClassStyleAttrs($attrs)"
       v-on="generalRowListeners"
     >
       <div
@@ -155,7 +156,7 @@ import { DtButton } from '@/components/button';
 import { DtTooltip } from '@/components/tooltip';
 import DtEmojiTextWrapper from '@/components/emoji_text_wrapper/emoji_text_wrapper.vue';
 import DtRecipeLeftbarGeneralRowIcon from './leftbar_general_row_icon.vue';
-import { extractVueListeners, safeConcatStrings, returnFirstEl } from '@/common/utils';
+import { extractVueListeners, safeConcatStrings, removeClassStyleAttrs, returnFirstEl, addClassStyleAttrs } from '@/common/utils';
 
 export default {
   compatConfig: { MODE: 3 },
@@ -445,6 +446,9 @@ export default {
   },
 
   methods: {
+    removeClassStyleAttrs,
+    addClassStyleAttrs,
+
     validateProps () {
       if (this.type === LEFTBAR_GENERAL_ROW_TYPES.CONTACT_CENTER &&
         !Object.keys(LEFTBAR_GENERAL_ROW_CONTACT_CENTER_COLORS).includes(this.color)) {

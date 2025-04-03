@@ -4,6 +4,7 @@
     data-qa="dt-recipe-message-input"
     role="presentation"
     class="d-recipe-message-input"
+    v-bind="addClassStyleAttrs($attrs)"
     @dragover.prevent
     @drop.prevent="onDrop"
     @paste="onPaste"
@@ -69,7 +70,7 @@
         :slash-command-suggestion="slashCommandSuggestion"
         :additional-extensions="additionalExtensions"
         :hide-link-bubble-menu="hideLinkBubbleMenu"
-        v-bind="$attrs"
+        v-bind="removeClassStyleAttrs($attrs)"
         @input="onInput"
         @text-input="onTextInput"
         @enter="onSend"
@@ -265,6 +266,7 @@ import {
   RICH_TEXT_EDITOR_AUTOFOCUS_TYPES,
 } from '@/components/rich_text_editor';
 import lastActiveNodes from './last_active_nodes';
+import { removeClassStyleAttrs, returnFirstEl, addClassStyleAttrs } from '@/common/utils';
 import MeetingPill from './extensions/meeting_pill/meeting_pill';
 import { DtButton } from '@/components/button';
 import { DtEmojiPicker } from '@/components/emoji_picker';
@@ -277,7 +279,6 @@ import {
 } from '@dialpad/dialtone-icons/vue3';
 import DtRecipeMessageInputTopbar from './message_input_topbar.vue';
 import DtRecipeMessageInputLink from './message_input_link.vue';
-import { returnFirstEl } from '@/common/utils';
 
 import {
   EDITOR_SUPPORTED_LINK_PROTOCOLS,
@@ -873,6 +874,9 @@ export default {
   },
 
   methods: {
+    removeClassStyleAttrs,
+    addClassStyleAttrs,
+
     linkDialogOpened (value) {
       this.linkDialogOpen = value;
       if (value === true) {
