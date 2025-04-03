@@ -135,7 +135,7 @@ import {
   POPOVER_ROLES,
   POPOVER_STICKY_VALUES,
 } from './popover_constants';
-import { getUniqueString, hasSlotContent, isOutOfViewPort, warnIfUnmounted, disableRootScrolling, enableRootScrolling } from '@/common/utils';
+import { getUniqueString, hasSlotContent, isOutOfViewPort, warnIfUnmounted, disableRootScrolling, enableRootScrolling, returnFirstEl } from '@/common/utils';
 import { DtLazyShow } from '@/components/lazy_show';
 import ModalMixin from '@/common/mixins/modal';
 import { createTippyPopover, getPopperOptions } from './tippy_utils';
@@ -692,13 +692,13 @@ export default {
   },
 
   mounted () {
-    warnIfUnmounted(this.$el, this.$options.name);
+    warnIfUnmounted(returnFirstEl(this.$el), this.$options.name);
 
     const externalAnchorEl = this.externalAnchor
       ? this.$refs.anchor.getRootNode().querySelector(`#${this.externalAnchor}`)
       : null;
     this.anchorEl = externalAnchorEl ?? this.$refs.anchor.children[0];
-    this.popoverContentEl = this.$refs.content?.$el;
+    this.popoverContentEl = returnFirstEl(this.$refs.content?.$el);
 
     if (this.isOpen) {
       this.initTippyInstance();
@@ -749,7 +749,7 @@ export default {
 
     calculateAnchorZindex () {
       // if a modal is currently active render at modal-element z-index, otherwise at popover z-index
-      if (this.$el.getRootNode()
+      if (returnFirstEl(this.$el).getRootNode()
         .querySelector('.d-modal[aria-hidden="false"], .d-modal--transparent[aria-hidden="false"]') ||
         // Special case because we don't have any dialtone drawer component yet. Render at 650 when
         // anchor of popover is within a drawer.
@@ -906,7 +906,7 @@ export default {
 
     focusInitialElement () {
       if (this.initialFocusElement === 'dialog') {
-        this.$refs.content?.$el?.focus();
+        returnFirstEl(this.$refs.content?.$el)?.focus();
       }
       // find by ID
       if (this.initialFocusElement.startsWith('#')) {
@@ -921,14 +921,14 @@ export default {
     },
 
     focusInitialElementById () {
-      const result = this.$refs.content?.$el?.querySelector(this.initialFocusElement);
+      const result = returnFirstEl(this.$refs.content?.$el)?.querySelector(this.initialFocusElement);
       if (result) {
         result.focus();
       } else {
         console.warn('Could not find the element specified in dt-popover prop "initialFocusElement". ' +
           'Defaulting to focusing the dialog.');
       }
-      result ? result.focus() : this.$refs.content?.$el.focus();
+      result ? result.focus() : returnFirstEl(this.$refs.content?.$el).focus();
     },
 
     onResize () {
@@ -970,7 +970,7 @@ export default {
         this.$refs.popover__header?.focusCloseButton();
       } else {
         // if there are no focusable elements at all focus the dialog itself
-        this.$refs.content?.$el.focus();
+        returnFirstEl(this.$refs.content?.$el).focus();
       }
     },
 
