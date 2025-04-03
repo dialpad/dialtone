@@ -462,7 +462,7 @@ export default {
      */
     showInlineImageButton: {
       type: Boolean,
-      default: true,
+      default: false,
     },
 
     /**
