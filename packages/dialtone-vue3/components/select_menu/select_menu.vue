@@ -246,7 +246,6 @@ export default {
       SELECT_SIZE_MODIFIERS,
       SELECT_STATE_MODIFIERS,
       hasSlotContent,
-      removeClassStyleAttrs,
     };
   },
 
@@ -303,6 +302,7 @@ export default {
   },
 
   methods: {
+    removeClassStyleAttrs,
     emitValue (value, event) {
       this.$emit('input', value, event);
       this.$emit('change', value, event);

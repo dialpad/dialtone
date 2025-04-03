@@ -67,7 +67,7 @@ export default {
   data () {
     return {
       BREADCRUMB_ITEM_SELECTED_MODIFIER,
-      removeClassStyleAttrs,
+
     };
   },
 
@@ -83,6 +83,10 @@ export default {
     ariaCurrent () {
       return this.selected ? 'location' : undefined;
     },
+  },
+
+  methods: {
+    removeClassStyleAttrs,
   },
 };
 </script>

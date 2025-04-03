@@ -348,7 +348,6 @@ export default {
     return {
       actionFocused: false,
       labelWidth: '100%',
-      removeClassStyleAttrs,
     };
   },
 
@@ -448,6 +447,8 @@ export default {
   },
 
   methods: {
+    removeClassStyleAttrs,
+
     validateProps () {
       if (this.type === LEFTBAR_GENERAL_ROW_TYPES.CONTACT_CENTER &&
         !Object.keys(LEFTBAR_GENERAL_ROW_CONTACT_CENTER_COLORS).includes(this.color)) {

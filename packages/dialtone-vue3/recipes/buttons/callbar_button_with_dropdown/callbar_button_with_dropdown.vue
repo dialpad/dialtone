@@ -289,7 +289,6 @@ export default {
   data () {
     return {
       open: false,
-      removeClassStyleAttrs,
     };
   },
 
@@ -317,6 +316,7 @@ export default {
   },
 
   methods: {
+    removeClassStyleAttrs,
     arrowClick (ev) {
       this.$emit('arrow-click', ev);
       return this.toggleOpen();

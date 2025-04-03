@@ -170,7 +170,6 @@ export default {
   data () {
     return {
       labelWidth: 'auto',
-      removeClassStyleAttrs,
     };
   },
 
@@ -222,6 +221,8 @@ export default {
   },
 
   methods: {
+    removeClassStyleAttrs,
+
     adjustLabelWidth () {
       const labelWidth = returnFirstEl(this.$el)?.querySelector('.d-recipe-leftbar-row__primary')?.clientWidth || 0;
       const omegaWidth = returnFirstEl(this.$el)?.querySelector('.d-recipe-leftbar-row__omega')?.clientWidth || 0;

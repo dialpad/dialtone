@@ -518,7 +518,6 @@ export default {
 
       showLinkInput: false,
       linkInput: '',
-      removeClassStyleAttrs,
     };
   },
 
@@ -707,6 +706,8 @@ export default {
   },
 
   methods: {
+    removeClassStyleAttrs,
+
     onInputFocus (event) {
       event?.stopPropagation();
     },

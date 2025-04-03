@@ -363,7 +363,6 @@ export default {
       isInvalid: false,
       defaultLength: 0,
       hasSlotContent,
-      removeClassStyleAttrs,
     };
   },
 
@@ -534,6 +533,7 @@ export default {
   },
 
   methods: {
+    removeClassStyleAttrs,
     inputClasses () {
       return [
         'd-input__input',

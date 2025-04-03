@@ -132,7 +132,6 @@ export default {
   data () {
     return {
       hasSlotContent,
-      removeClassStyleAttrs,
     };
   },
 
@@ -173,6 +172,7 @@ export default {
   },
 
   methods: {
+    removeClassStyleAttrs,
     emitValue (value) {
       if (value !== this.radioGroupValue) {
         // update provided value if injected

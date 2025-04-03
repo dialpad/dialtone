@@ -107,12 +107,6 @@ export default {
     'focusout',
   ],
 
-  data () {
-    return {
-      removeClassStyleAttrs,
-    };
-  },
-
   computed: {
     inputValidationClass () {
       return CHECKBOX_INPUT_VALIDATION_CLASSES[this.internalValidationState];
@@ -166,6 +160,8 @@ export default {
   },
 
   methods: {
+    removeClassStyleAttrs,
+
     emitValue (target) {
       let { value, checked } = target;
       // Expected: Indeterminate -> unchecked. We need to manually set DOM property `checked` to false

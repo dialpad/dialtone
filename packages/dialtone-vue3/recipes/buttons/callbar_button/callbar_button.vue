@@ -196,12 +196,6 @@ export default {
     'click',
   ],
 
-  data () {
-    return {
-      removeClassStyleAttrs,
-    };
-  },
-
   computed: {
     callbarButtonClass () {
       return [
@@ -246,6 +240,10 @@ export default {
         click: (event) => this.$emit('click', event),
       };
     },
+  },
+
+  methods: {
+    removeClassStyleAttrs,
   },
 };
 </script>

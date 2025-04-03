@@ -266,7 +266,7 @@ import {
   RICH_TEXT_EDITOR_AUTOFOCUS_TYPES,
 } from '@/components/rich_text_editor';
 import lastActiveNodes from './last_active_nodes';
-import { removeClassStyleAttrs } from '@/common/utils';
+import { removeClassStyleAttrs, returnFirstEl } from '@/common/utils';
 import MeetingPill from './extensions/meeting_pill/meeting_pill';
 import { DtButton } from '@/components/button';
 import { DtEmojiPicker } from '@/components/emoji_picker';
@@ -279,7 +279,6 @@ import {
 } from '@dialpad/dialtone-icons/vue3';
 import DtRecipeMessageInputTopbar from './message_input_topbar.vue';
 import DtRecipeMessageInputLink from './message_input_link.vue';
-import { returnFirstEl } from '@/common/utils';
 
 import {
   EDITOR_SUPPORTED_LINK_PROTOCOLS,
@@ -789,7 +788,6 @@ export default {
       // If an ordered list is nested within an unordered list, we only want to show the currently selected list as
       // active. This function performs the logic to determine the farthest active node from the root.
       lastActiveNodes,
-      removeClassStyleAttrs,
       additionalExtensions: [MeetingPill],
       internalInputValue: this.modelValue, // internal input content
       imagePickerFocus: false,
@@ -876,6 +874,8 @@ export default {
   },
 
   methods: {
+    removeClassStyleAttrs,
+
     linkDialogOpened (value) {
       this.linkDialogOpen = value;
       if (value === true) {
