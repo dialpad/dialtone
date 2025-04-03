@@ -60,6 +60,7 @@ jobs:
 
   publish:
     needs: [ check-dialpad-member, filter-actions ]
+    if: ${{ github.event_name == 'workflow_dispatch' || (github.event_name == 'push' && needs.filter-actions.outputs.packages != '[]') }}
     strategy:
       matrix:
         package: ${{ fromJSON(needs.filter-actions.outputs.packages) }}
