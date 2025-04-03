@@ -556,5 +556,17 @@ describe('DtRecipeEditor tests', () => {
         expect('quick-replies-click' in wrapper.emitted()).toBeTruthy();
       });
     });
+
+    describe('When use div tags is enabled', () => {
+      beforeEach(async () => {
+        _mountWrapper();
+        await wrapper.setProps({ useDivTags: true });
+        await wrapper.vm.$nextTick();
+        _setChildWrappers();
+      });
+      it('should contain the initial value in div tags', function () {
+        expect(editor.html()).toContain(`<div>${testText}</div>`);
+      });
+    });
   });
 });

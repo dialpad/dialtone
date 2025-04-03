@@ -4,8 +4,6 @@
   "description": "Design tokens for Dialtone.",
   "type": "module",
   "scripts": {
-    "publish:android-package": "cp ./AndroidManifest.xml dist/android && ./gradlew publishToMavenLocal -Pversion=$npm_package_version",
-    "publish:ios-package": "./build-ios.js",
     "sync:tokens-to-figma": "tsx sync-scripts/sync_tokens_to_figma.ts",
     "sync:figma-to-tokens": "tsx sync-scripts/sync_figma_to_tokens.ts"
   },

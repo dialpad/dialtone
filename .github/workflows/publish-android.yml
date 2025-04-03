@@ -1,0 +1,120 @@
+name: Publish Android
+
+on:
+  workflow_dispatch:
+    inputs:
+      package:
+        description: 'Select the package you want to publish'
+        required: true
+        default: 'dialtone-tokens'
+        type: 'choice'
+        options:
+          - dialtone-tokens
+          - dialtone-icons
+  push:
+    branches:
+      - production
+      - rebrand-2025-beta
+
+env:
+  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+jobs:
+  filter-actions:
+    runs-on: ubuntu-latest
+    outputs:
+      packages: ${{ github.event_name == 'push' && steps.filter-path.outputs.changes || steps.filter-input.outputs.package }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Filter actions by path
+        if: ${{ github.event_name == 'push' }}
+        uses: dorny/paths-filter@v3
+        id: filter-path
+        with:
+          base: ${{ github.ref }}
+          list-files: 'json'
+          filters: |
+            dialtone-icons:
+              - 'packages/dialtone-icons/android/gradle.properties'
+            dialtone-tokens:
+              - 'packages/dialtone-tokens/gradle.properties'
+
+      - name: Filter actions by input
+        if: ${{ github.event_name == 'workflow_dispatch' }}
+        id: filter-input
+        run: |
+          echo 'package=["${{ github.event.inputs.package }}"]' >> $GITHUB_OUTPUT
+
+  check-dialpad-member:
+    runs-on: ubuntu-latest
+    steps:
+      # Will prevent the rest of the steps from running on fail
+      - name: Check if user is a dialpad member
+        uses: octokit/request-action@v2.x
+        with:
+          route: GET /orgs/dialpad/members/${{ github.actor }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.DIALTONE_CI_TOKEN }}
+
+  publish:
+    needs: [ check-dialpad-member, filter-actions ]
+    strategy:
+      matrix:
+        package: ${{ fromJSON(needs.filter-actions.outputs.packages) }}
+        include:
+          - package: dialtone-icons
+            dir: ./packages/dialtone-icons/android
+          - package: dialtone-tokens
+            dir: ./packages/dialtone-tokens
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Use Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Use pnpm
+        uses: pnpm/action-setup@v3
+        with:
+          version: 9
+          run_install: false
+
+      - name: Get pnpm store directory
+        shell: bash
+        run: |
+          echo "STORE_PATH=$(pnpm store path --silent)" >> $GITHUB_ENV
+
+      - name: Setup pnpm cache
+        uses: actions/cache@v4
+        with:
+          path: ${{ env.STORE_PATH }}
+          key: "${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}"
+          restore-keys: |
+            ${{ runner.os }}-pnpm-store-
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Setup Java
+        uses: actions/setup-java@v4
+        with:
+          java-version: 17
+          distribution: 'temurin'
+          cache: 'gradle'
+          cache-dependency-path: |
+            ${{ matrix.dir }}/*.gradle*
+            ${{ matrix.dir }}/**/gradle-wrapper.properties
+
+      - name: Build ${{ matrix.package }}
+        run: pnpm nx run ${{ matrix.package }}:build:android
+
+      - name: Publish ${{ matrix.package }}
+        working-directory: ${{ matrix.dir }}
+        env:
+          GITHUB_USER: braddialpad
+        run: ./gradlew publish

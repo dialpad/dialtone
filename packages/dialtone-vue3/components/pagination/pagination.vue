@@ -7,10 +7,9 @@
       class="d-pagination__button"
       data-qa="dt-pagination-prev"
       :aria-label="prevAriaLabel"
-      :kind="isFirstPage ? 'default' : 'muted'"
-      :importance="isFirstPage ? 'primary' : 'clear'"
+      kind="muted"
+      importance="clear"
       :disabled="isFirstPage"
-      :class="isFirstPage ? 'd-fco50 d-fc-disabled d-bgc-transparent' : 'd-fc-tertiary'"
       @click="changePage(currentPage - 1)"
     >
       <template #icon>
@@ -53,8 +52,7 @@
       :aria-label="nextAriaLabel"
       :disabled="isLastPage"
       kind="muted"
-      :importance="isLastPage ? 'primary' : 'clear'"
-      :class="isLastPage ? 'd-fco50 d-fc-disabled d-bgc-transparent' : 'd-fc-tertiary'"
+      importance="clear"
       @click="changePage(currentPage + 1)"
     >
       <template #icon>
@@ -208,7 +206,6 @@ export default {
       }
 
       if (this.currentPage > end) {
-        console.log('END=', end);
         const pages = ['...', ...this.range(end, this.totalPages)];
         if (!this.hideEdges) {
           // add first page to the beginning

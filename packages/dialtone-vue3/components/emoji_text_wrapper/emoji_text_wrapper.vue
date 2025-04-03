@@ -1,8 +1,10 @@
 <script>
 import { DtEmoji } from '../emoji';
 import { findEmojis, findShortCodes } from '@/common/emoji';
-import { h } from 'vue';
+import { h, resolveDynamicComponent } from 'vue';
 import { ICON_SIZE_MODIFIERS } from '@/components/icon/icon_constants';
+
+const COMMENT_TYPE = h(resolveDynamicComponent(null)).type;
 
 /**
  * Wrapper to find and replace shortcodes like :smile: or unicode chars such as 😄 with our custom Emojis implementation.
@@ -77,6 +79,7 @@ export default {
      */
     searchVNodes (VNode) {
       if (typeof VNode === 'string') return this.searchCodes(VNode);
+      if (VNode.type === COMMENT_TYPE) return VNode;
       if (typeof VNode.type === 'symbol') return this.searchCodes(VNode.children);
       if (VNode.props?.innerHTML) return this.searchVNodes(VNode.props.innerHTML);
 

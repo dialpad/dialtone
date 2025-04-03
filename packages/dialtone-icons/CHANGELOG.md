@@ -1,40 +1,11 @@
-# [4.35.0-rebrand-2025-beta.4](https://github.com/dialpad/dialtone/compare/dialtone-icons/v4.35.0-rebrand-2025-beta.3...dialtone-icons/v4.35.0-rebrand-2025-beta.4) (2025-03-19)
-
-
-### Features
-
-* **Icon:** DLT-2426 add dialpad meetings icon ([#673](https://github.com/dialpad/dialtone/issues/673)) ([96ba523](https://github.com/dialpad/dialtone/commit/96ba52320ff65ff281c4f35e744ed35c1c94fa58))
-
-# [4.35.0-rebrand-2025-beta.3](https://github.com/dialpad/dialtone/compare/dialtone-icons/v4.35.0-rebrand-2025-beta.2...dialtone-icons/v4.35.0-rebrand-2025-beta.3) (2025-03-14)
+## [4.34.3](https://github.com/dialpad/dialtone/compare/dialtone-icons/v4.34.2...dialtone-icons/v4.34.3) (2025-04-02)
 
 
 ### Bug Fixes
 
-* NO-JIRA icons-illustrations naming conflicts ([29f1f13](https://github.com/dialpad/dialtone/commit/29f1f13f1cd55af95327f7900b88d018f327ab32))
+* **Ci:** NO-JIRA changelog release order ([#689](https://github.com/dialpad/dialtone/issues/689)) ([bd4c080](https://github.com/dialpad/dialtone/commit/bd4c0802a59be6fdafb8f661a9c12c64ef764656))
 
-# [4.35.0-rebrand-2025-beta.2](https://github.com/dialpad/dialtone/compare/dialtone-icons/v4.35.0-rebrand-2025-beta.1...dialtone-icons/v4.35.0-rebrand-2025-beta.2) (2025-03-14)
-
-
-### Bug Fixes
-
-* NO-JIRA bring dialpad illustration assets back ([e3dc23e](https://github.com/dialpad/dialtone/commit/e3dc23eb1418b9901a6a6eabd002c2e760a7a4e3))
-
-# [4.35.0-rebrand-2025-beta.1](https://github.com/dialpad/dialtone/compare/dialtone-icons/v4.34.1...dialtone-icons/v4.35.0-rebrand-2025-beta.1) (2025-03-14)
-
-
-### Bug Fixes
-
-* NO-JIRA icons build, naming conflict and typo ([#671](https://github.com/dialpad/dialtone/issues/671)) ([de83b22](https://github.com/dialpad/dialtone/commit/de83b22354ab59fa52af91fbbdf8f8060ac5b88c))
-
-
-### Documentation
-
-* modify the brand page, remove the word-mark variant, update the logo ([#668](https://github.com/dialpad/dialtone/issues/668)) ([08370f7](https://github.com/dialpad/dialtone/commit/08370f7aa45a95e1ba2e0cedb253a98215be5b2c))
-
-
-### Features
-
-* **Icon:** DLT-2410 new dialpad logo icon and update gradients ([#670](https://github.com/dialpad/dialtone/issues/670)) ([c29ee5a](https://github.com/dialpad/dialtone/commit/c29ee5aa2898bab28b4494fe70050fedaff1fb86))
+## [4.34.2](https://github.com/dialpad/dialtone/compare/dialtone-icons/v4.34.1...dialtone-icons/v4.34.2) (2025-03-31)
 
 ## [4.34.1](https://github.com/dialpad/dialtone/compare/dialtone-icons/v4.34.0...dialtone-icons/v4.34.1) (2025-03-07)
 

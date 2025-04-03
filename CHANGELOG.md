@@ -1,109 +1,51 @@
-# [9.106.0-rebrand-2025-beta.6](https://github.com/dialpad/dialtone/compare/dialtone/v9.106.0-rebrand-2025-beta.5...dialtone/v9.106.0-rebrand-2025-beta.6) (2025-03-19)
+## [9.107.1](https://github.com/dialpad/dialtone/compare/dialtone/v9.107.0...dialtone/v9.107.1) (2025-04-02)
+
+
+### Bug Fixes
+
+* **Ci:** NO-JIRA changelog release order ([#689](https://github.com/dialpad/dialtone/issues/689)) ([bd4c080](https://github.com/dialpad/dialtone/commit/bd4c0802a59be6fdafb8f661a9c12c64ef764656))
+* **Emoji Text Wrapper:** DLT-2455 skip vue3 comment vnodes when extracting text for emojis ([#686](https://github.com/dialpad/dialtone/issues/686)) ([62ad982](https://github.com/dialpad/dialtone/commit/62ad98241850ae52e7d0ceeebb83aecb65fa3ad0))
+
+# [9.107.0](https://github.com/dialpad/dialtone/compare/dialtone/v9.106.1...dialtone/v9.107.0) (2025-03-31)
+
+
+### Bug Fixes
+
+* **Pagination:** DLT-2373 invalid prop combination on end buttons ([#684](https://github.com/dialpad/dialtone/issues/684)) ([517debb](https://github.com/dialpad/dialtone/commit/517debbbab0c497d13d48230ab9e8d2e9a52c423))
+
+
+### Features
+
+* **Editor:** DP-131851 added editor support to encase text with div tags ([#685](https://github.com/dialpad/dialtone/issues/685)) ([d0429a3](https://github.com/dialpad/dialtone/commit/d0429a30c4474e02434388b6d782e23b07ac97c8))
+
+## [9.106.1](https://github.com/dialpad/dialtone/compare/dialtone/v9.106.0...dialtone/v9.106.1) (2025-03-27)
+
+
+### Bug Fixes
+
+* **Callbar Button With Dropdown:** DLT-2440 add missing slot prop close ([#682](https://github.com/dialpad/dialtone/issues/682)) ([3034563](https://github.com/dialpad/dialtone/commit/3034563cbc4822e8160151728d3b409b5cf151ac))
+* **Toast:** NO-JIRA put z-index on wrapper ([#677](https://github.com/dialpad/dialtone/issues/677)) ([beca85a](https://github.com/dialpad/dialtone/commit/beca85ab8df20928571edacdd82e9bcd8dd79802))
+
+# [9.106.0](https://github.com/dialpad/dialtone/compare/dialtone/v9.105.2...dialtone/v9.106.0) (2025-03-20)
+
+
+### Features
+
+* DLT-2419 hideEdges + watcher on active page prop ([#675](https://github.com/dialpad/dialtone/issues/675)) ([67ef1e2](https://github.com/dialpad/dialtone/commit/67ef1e2429aed7f0e0138dad98f33b09a11add7e))
+
+## [9.105.2](https://github.com/dialpad/dialtone/compare/dialtone/v9.105.1...dialtone/v9.105.2) (2025-03-20)
+
+
+### Bug Fixes
+
+* **Rich Text Editor:** DP-134543 patchfix paste ([#676](https://github.com/dialpad/dialtone/issues/676)) ([d46fe42](https://github.com/dialpad/dialtone/commit/d46fe424c4818126d7ed680e47c75aebc0889b41))
+
+## [9.105.1](https://github.com/dialpad/dialtone/compare/dialtone/v9.105.0...dialtone/v9.105.1) (2025-03-18)
 
 
 ### Bug Fixes
 
 * NO-JIRA update date-fns to latest version ([#672](https://github.com/dialpad/dialtone/issues/672)) ([1ec525e](https://github.com/dialpad/dialtone/commit/1ec525ecbb8166c4a4addd2d4292b58f6ce5ad2c))
-
-
-### Features
-
-* **Icon:** DLT-2426 add dialpad meetings icon ([#673](https://github.com/dialpad/dialtone/issues/673)) ([96ba523](https://github.com/dialpad/dialtone/commit/96ba52320ff65ff281c4f35e744ed35c1c94fa58))
-
-# [9.106.0-rebrand-2025-beta.5](https://github.com/dialpad/dialtone/compare/dialtone/v9.106.0-rebrand-2025-beta.4...dialtone/v9.106.0-rebrand-2025-beta.5) (2025-03-15)
-
-
-### Bug Fixes
-
-* NO-JIRA icons-illustrations naming conflicts ([29f1f13](https://github.com/dialpad/dialtone/commit/29f1f13f1cd55af95327f7900b88d018f327ab32))
-
-# [9.106.0-rebrand-2025-beta.4](https://github.com/dialpad/dialtone/compare/dialtone/v9.106.0-rebrand-2025-beta.3...dialtone/v9.106.0-rebrand-2025-beta.4) (2025-03-14)
-
-
-### Bug Fixes
-
-* NO-JIRA bring dialpad illustration assets back ([e3dc23e](https://github.com/dialpad/dialtone/commit/e3dc23eb1418b9901a6a6eabd002c2e760a7a4e3))
-
-# [9.106.0-rebrand-2025-beta.3](https://github.com/dialpad/dialtone/compare/dialtone/v9.106.0-rebrand-2025-beta.2...dialtone/v9.106.0-rebrand-2025-beta.3) (2025-03-14)
-
-
-### Bug Fixes
-
-* NO-JIRA icons build, naming conflict and typo ([#671](https://github.com/dialpad/dialtone/issues/671)) ([de83b22](https://github.com/dialpad/dialtone/commit/de83b22354ab59fa52af91fbbdf8f8060ac5b88c))
-
-# [9.106.0-rebrand-2025-beta.2](https://github.com/dialpad/dialtone/compare/dialtone/v9.106.0-rebrand-2025-beta.1...dialtone/v9.106.0-rebrand-2025-beta.2) (2025-03-14)
-
-
-### Features
-
-* **Icon:** DLT-2410 new dialpad logo icon and update gradients ([#670](https://github.com/dialpad/dialtone/issues/670)) ([c29ee5a](https://github.com/dialpad/dialtone/commit/c29ee5aa2898bab28b4494fe70050fedaff1fb86))
-
-# [9.106.0-rebrand-2025-beta.1](https://github.com/dialpad/dialtone/compare/dialtone/v9.105.0...dialtone/v9.106.0-rebrand-2025-beta.1) (2025-03-13)
-
-
-### Bug Fixes
-
-* **Contact Centers Row:** DLT-2363 update colors on recipes ([#663](https://github.com/dialpad/dialtone/issues/663)) ([aac54e6](https://github.com/dialpad/dialtone/commit/aac54e61185938ea5b73fcaae31ccfca4c5b20b4))
-
-
-### Documentation
-
-* **Css Utilities:** NO-JIRA update css utilities demo to emphasize semantic ([#665](https://github.com/dialpad/dialtone/issues/665)) ([520eab4](https://github.com/dialpad/dialtone/commit/520eab42a48b6d641f156cb9059ac76416dcdd24))
-* DLT-2354 DLT-2331 apply season to doc site and add dialtone logo ([#652](https://github.com/dialpad/dialtone/issues/652)) ([0bd67c5](https://github.com/dialpad/dialtone/commit/0bd67c52cf8b01085b87041c329969d1f901f6ae))
-* DLT-2391 color utilities documentation ([#659](https://github.com/dialpad/dialtone/issues/659)) ([4d07c12](https://github.com/dialpad/dialtone/commit/4d07c126efd6d29b54f5b0ec599127cc39e84d6c))
-* modify the brand page, remove the word-mark variant, update the logo ([#668](https://github.com/dialpad/dialtone/issues/668)) ([08370f7](https://github.com/dialpad/dialtone/commit/08370f7aa45a95e1ba2e0cedb253a98215be5b2c))
-
-
-### Features
-
-* **Design Tokens:** DLT-2352 apply new 2025 reb colors ([#636](https://github.com/dialpad/dialtone/issues/636)) ([40d8f96](https://github.com/dialpad/dialtone/commit/40d8f9629ca770cad4a9f9cfd18002824c3302d1))
-* **Design Tokens:** NO-JIRA unhack tmo theme ([#669](https://github.com/dialpad/dialtone/issues/669)) ([daa0801](https://github.com/dialpad/dialtone/commit/daa0801aac82342129f1cfd13849c62063064422))
-* **Design Tokens:** NO-JIRA update critical foreground and border ([ebd2885](https://github.com/dialpad/dialtone/commit/ebd288508696f4c3aa3fd720b1122d86662f6531))
-* **Design Tokens:** NO-JIRA updated dark muted foreground color ([f5146cc](https://github.com/dialpad/dialtone/commit/f5146cca5eb3fbff4d3cad6faf381a6eb2510c99))
-* **Design Tokens:** NO-JIRA updated purples ([099fa4b](https://github.com/dialpad/dialtone/commit/099fa4b2ed2050688142711f607558b608fe31c0))
-* **Design Tokens:** NO-JIRA updated purples dark mode library connection ([a5aa5ab](https://github.com/dialpad/dialtone/commit/a5aa5ab02177c5f6c2a8cfdba4bb2e875278c7b8))
-* DLT-2329 update Archivo to Season Mix font ([#648](https://github.com/dialpad/dialtone/issues/648)) ([ca8fdcf](https://github.com/dialpad/dialtone/commit/ca8fdcf6c3064d402a87be050b00fdbee92d6f88))
-* DLT-2350 expand color css utility classes ([#655](https://github.com/dialpad/dialtone/issues/655)) ([1b271f3](https://github.com/dialpad/dialtone/commit/1b271f36eafbd798cdaa8c38f40202e11719909f))
-* **Empty State:** DLT-2361 DLT-2362 update icon color ([#651](https://github.com/dialpad/dialtone/issues/651)) ([0be7414](https://github.com/dialpad/dialtone/commit/0be7414bd2d2ef32d2d491e638ebdd492971746c))
-* **Linters:** DLT-2395 base color linter rules ([#667](https://github.com/dialpad/dialtone/issues/667)) ([a23e3c6](https://github.com/dialpad/dialtone/commit/a23e3c6b4229ecd70b1ce9766b30a8f5ba42e2ad))
-
-# [9.105.0-rebrand-2025-beta.2](https://github.com/dialpad/dialtone/compare/dialtone/v9.105.0-rebrand-2025-beta.1...dialtone/v9.105.0-rebrand-2025-beta.2) (2025-03-12)
-
-
-### Documentation
-
-* **Css Utilities:** NO-JIRA update css utilities demo to emphasize semantic ([#665](https://github.com/dialpad/dialtone/issues/665)) ([520eab4](https://github.com/dialpad/dialtone/commit/520eab42a48b6d641f156cb9059ac76416dcdd24))
-* modify the brand page, remove the word-mark variant, update the logo ([#668](https://github.com/dialpad/dialtone/issues/668)) ([08370f7](https://github.com/dialpad/dialtone/commit/08370f7aa45a95e1ba2e0cedb253a98215be5b2c))
-
-
-### Features
-
-* **Design Tokens:** NO-JIRA update critical foreground and border ([ebd2885](https://github.com/dialpad/dialtone/commit/ebd288508696f4c3aa3fd720b1122d86662f6531))
-* **Design Tokens:** NO-JIRA updated dark muted foreground color ([f5146cc](https://github.com/dialpad/dialtone/commit/f5146cca5eb3fbff4d3cad6faf381a6eb2510c99))
-
-# [9.105.0-rebrand-2025-beta.1](https://github.com/dialpad/dialtone/compare/dialtone/v9.104.0...dialtone/v9.105.0-rebrand-2025-beta.1) (2025-03-11)
-
-
-### Bug Fixes
-
-* **Contact Centers Row:** DLT-2363 update colors on recipes ([#663](https://github.com/dialpad/dialtone/issues/663)) ([aac54e6](https://github.com/dialpad/dialtone/commit/aac54e61185938ea5b73fcaae31ccfca4c5b20b4))
-
-
-### Documentation
-
-* DLT-2354 DLT-2331 apply season to doc site and add dialtone logo ([#652](https://github.com/dialpad/dialtone/issues/652)) ([0bd67c5](https://github.com/dialpad/dialtone/commit/0bd67c52cf8b01085b87041c329969d1f901f6ae))
-* DLT-2391 color utilities documentation ([#659](https://github.com/dialpad/dialtone/issues/659)) ([4d07c12](https://github.com/dialpad/dialtone/commit/4d07c126efd6d29b54f5b0ec599127cc39e84d6c))
-* NO-JIRA automate utility classes extraction ([#654](https://github.com/dialpad/dialtone/issues/654)) ([7a53512](https://github.com/dialpad/dialtone/commit/7a53512046d6403958aafda6aa93caab6d2bc3b8))
-
-
-### Features
-
-* **Design Tokens:** DLT-2352 apply new 2025 reb colors ([#636](https://github.com/dialpad/dialtone/issues/636)) ([40d8f96](https://github.com/dialpad/dialtone/commit/40d8f9629ca770cad4a9f9cfd18002824c3302d1))
-* **Design Tokens:** NO-JIRA updated purples ([099fa4b](https://github.com/dialpad/dialtone/commit/099fa4b2ed2050688142711f607558b608fe31c0))
-* **Design Tokens:** NO-JIRA updated purples dark mode library connection ([a5aa5ab](https://github.com/dialpad/dialtone/commit/a5aa5ab02177c5f6c2a8cfdba4bb2e875278c7b8))
-* DLT-2329 update Archivo to Season Mix font ([#648](https://github.com/dialpad/dialtone/issues/648)) ([ca8fdcf](https://github.com/dialpad/dialtone/commit/ca8fdcf6c3064d402a87be050b00fdbee92d6f88))
-* DLT-2350 expand color css utility classes ([#655](https://github.com/dialpad/dialtone/issues/655)) ([1b271f3](https://github.com/dialpad/dialtone/commit/1b271f36eafbd798cdaa8c38f40202e11719909f))
-* **Empty State:** DLT-2361 DLT-2362 update icon color ([#651](https://github.com/dialpad/dialtone/issues/651)) ([0be7414](https://github.com/dialpad/dialtone/commit/0be7414bd2d2ef32d2d491e638ebdd492971746c))
 
 # [9.105.0](https://github.com/dialpad/dialtone/compare/dialtone/v9.104.2...dialtone/v9.105.0) (2025-03-10)
 

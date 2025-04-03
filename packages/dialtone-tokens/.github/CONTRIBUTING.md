@@ -62,7 +62,13 @@ You can access the NPM package here: [@dialpad/dialtone-tokens](https://www.npmj
 
 ### Android
 
-Upon build, the Android source code is output to `dist/android` folder. If we are looking to publish the package, this source must be compiled into an Android package. This is done via Gradle by running `publish:android-package`. The compiled package will contain kotlin as well as resource files for Dialtone's tokens. The Android package is served through GitHub Packages and can be found here: [design.dialpad.tokens.dialtone-tokens](https://github.com/dialpad/dialtone-tokens/packages/1646082). You do not have to run this command locally unless you are looking to debug something related to the Android package. The android package will be built and released on CI via our regular release process.
+Upon build, the Android source code is output to `dist/android` folder.
+If we are looking to publish the package, this source must be compiled into an Android package.
+This is done via Gradle by running `build:android`.
+The compiled package will contain kotlin as well as resource files for Dialtone's tokens.
+The Android package is served through GitHub Packages and can be found here: [design.dialpad.tokens.dialtone-tokens](https://github.com/dialpad/dialtone-tokens/packages/1646082).
+You do not have to run this command locally unless you are looking to debug something related to the Android package.
+The android package will be built and released on CI via our regular release process.
 
 If you would like to build the Android package locally for debugging purposes you will need to:
 
@@ -76,6 +82,10 @@ sdk.dir=PATH_TO_YOUR_ANDROID_SDK_GOES_HERE
 
 ### iOS
 
-Upon build the iOS swift source code is output to the `dist/ios` folder. The contents of the Swift package are included in `dist_ios` when running `publish:ios-package`. Swift packages are hosted directly from github repositories so we have a separate repository we deploy to to serve this package. This can be found here: [dialtone-tokens-swift](https://github.com/dialpad/dialtone-tokens-swift)
+Upon build the iOS swift source code is output to the `dist/ios` folder.
+The contents of the Swift package are included in `dist_ios` when running `build:ios`.
+Swift packages are hosted directly from github repositories so we have a separate repository we deploy to to serve this package.
+This can be found here: [dialtone-tokens-swift](https://github.com/dialpad/dialtone-tokens-swift)
 
-The deploy process is performed by the github actions workflow `.github/workflows/release.yml` and is triggered whenever we push the production branch. For more info on how to release, see [RELEASING.md](RELEASING.md)
+The deploy process is performed by the github actions workflow `.github/workflows/release.yml` and is triggered whenever we push the production branch.
+For more info on how to release, see [RELEASING.md](RELEASING.md)
