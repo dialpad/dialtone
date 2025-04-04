@@ -467,6 +467,56 @@
         "type": "color"
       }
     },
+    "coral": {
+      "50": {
+        "value": "#FEF4F1",
+        "type": "color"
+      },
+      "100": {
+        "value": "#FBEEE9",
+        "type": "color"
+      },
+      "200": {
+        "value": "#F4B59F",
+        "type": "color"
+      },
+      "300": {
+        "value": "#F48662",
+        "type": "color"
+      },
+      "400": {
+        "value": "#F66437",
+        "type": "color"
+      },
+      "500": {
+        "value": "#F44710",
+        "type": "color"
+      },
+      "600": {
+        "value": "#D03A0B",
+        "type": "color"
+      },
+      "700": {
+        "value": "#A93009",
+        "type": "color"
+      },
+      "800": {
+        "value": "#862609",
+        "type": "color"
+      },
+      "900": {
+        "value": "#651E06",
+        "type": "color"
+      },
+      "950": {
+        "value": "#380E00",
+        "type": "color"
+      },
+      "1000": {
+        "value": "#240900",
+        "type": "color"
+      }
+    },
     "gradient": {
       "magenta-purple": {
         "value": "linear-gradient(135deg, {color.brand.magenta} 10%, {color.brand.purple} 90%)",
