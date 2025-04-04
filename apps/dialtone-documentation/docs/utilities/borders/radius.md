@@ -72,48 +72,46 @@ Use `d-b{a|t|r|b|l}r-circle` to change the border radius of your element to a ci
 
 ## Classes
 
-<div class="d-h464 d-of-y-scroll d-bb d-bc-black-200">
-  <utility-class-table>
-    <template #content>
-      <tbody>
-        <tr>
-          <th scope="row" class="d-code--sm d-docsite-code">.d-bar-unset</th>
-          <td class="d-code--sm">border-radius: unset !important;</td>
-        </tr>
-      </tbody>
-      <tbody v-for="i in ['a', 't', 'r', 'b', 'l']">
-        <tr v-for="r in [0, 2, 4, 8, 12, 16, 24, 32, '-circle', '-pill']">
-          <th scope="row" class="d-code--sm d-docsite-code">.d-b{{ i }}r{{ r }}</th>
-          <td>
-            <div class="d-d-flex d-jc-space-between d-ai-center">
-              <div class="d-fl-grow1 d-code--sm">
-                <span v-if="i === 'a'">border-radius: var(--br{{ r }}) !important;</span>
-                <span v-else-if="i === 't'">
-                  border-top-left-radius: var(--br{{ r }}) !important;<br/>
-                  border-top-right-radius: var(--br{{ r }}) !important;
-                </span>
-                <span v-else-if="i === 'r'">
-                  border-top-right-radius: var(--br{{ r }}) !important;<br/>
-                  border-bottom-right-radius: var(--br{{ r }}) !important;
-                </span>
-                <span v-else-if="i === 'b'">
-                  border-bottom-left-radius: var(--br{{ r }}) !important;<br/>
-                  border-bottom-right-radius: var(--br{{ r }}) !important;
-                </span>
-                <span v-else-if="i === 'l'">
-                  border-bottom-left-radius: var(--br{{ r }}) !important;
-                  border-top-left-radius: var(--br{{ r }}) !important;<br/>
-                </span>
-              </div>
-              <div
-                class="d-fl-shrink0 d-m4 d-ml16 d-h32 d-bgc-black-300"
-                :class="[r === '-circle' ? 'd-w32' : 'd-w64', `d-b${i}r${r}`]"
-              >
-              </div>
+<utility-class-table>
+  <template #content>
+    <tbody>
+      <tr>
+        <th scope="row" class="d-code--sm d-docsite-code">.d-bar-unset</th>
+        <td class="d-code--sm">border-radius: unset !important;</td>
+      </tr>
+    </tbody>
+    <tbody v-for="i in ['a', 't', 'r', 'b', 'l']">
+      <tr v-for="r in [0, 2, 4, 8, 12, 16, 24, 32, '-circle', '-pill']">
+        <th scope="row" class="d-code--sm d-docsite-code">.d-b{{ i }}r{{ r }}</th>
+        <td>
+          <div class="d-d-flex d-jc-space-between d-ai-center">
+            <div class="d-fl-grow1 d-code--sm">
+              <span v-if="i === 'a'">border-radius: var(--br{{ r }}) !important;</span>
+              <span v-else-if="i === 't'">
+                border-top-left-radius: var(--br{{ r }}) !important;<br/>
+                border-top-right-radius: var(--br{{ r }}) !important;
+              </span>
+              <span v-else-if="i === 'r'">
+                border-top-right-radius: var(--br{{ r }}) !important;<br/>
+                border-bottom-right-radius: var(--br{{ r }}) !important;
+              </span>
+              <span v-else-if="i === 'b'">
+                border-bottom-left-radius: var(--br{{ r }}) !important;<br/>
+                border-bottom-right-radius: var(--br{{ r }}) !important;
+              </span>
+              <span v-else-if="i === 'l'">
+                border-bottom-left-radius: var(--br{{ r }}) !important;
+                border-top-left-radius: var(--br{{ r }}) !important;<br/>
+              </span>
             </div>
-          </td>
-        </tr>
-      </tbody>
-    </template>
-  </utility-class-table>
-</div>
+            <div
+              class="d-fl-shrink0 d-m4 d-ml16 d-h32 d-bgc-black-300"
+              :class="[r === '-circle' ? 'd-w32' : 'd-w64', `d-b${i}r${r}`]"
+            >
+            </div>
+          </div>
+        </td>
+      </tr>
+    </tbody>
+  </template>
+</utility-class-table>

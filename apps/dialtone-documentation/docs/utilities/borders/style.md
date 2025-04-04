@@ -47,24 +47,22 @@ Use `d-b{a|t|r|b|l}s-dotted` to change the border style to dotted on your elemen
 
 ## Classes
 
-<div class="d-h464 d-of-y-scroll d-bb d-bc-black-200">
-  <utility-class-table>
-    <template #content>
-      <tbody>
-        <tr>
-          <th scope="row" class="d-code--sm d-docsite-code">.d-bas-unset</th>
-          <td class="d-code--sm">border-style: unset !important;</td>
-        </tr>
-      </tbody>
-      <tbody v-for="s in ['dashed', 'dotted']">
-        <tr v-for="i in ['all', 'top', 'right', 'bottom', 'left']">
-          <th scope="row" class="d-code--sm d-docsite-code">.d-b{{ i[0] }}s-{{ s }}</th>
-          <td class="d-code--sm">
-            <span v-if="i === 'all'">border-style: {{ s }} !important;</span>
-            <span v-else>border-{{i}}-style: {{ s }} !important;</span>
-          </td>
-        </tr>
-      </tbody>
-    </template>
-  </utility-class-table>
-</div>
+<utility-class-table>
+  <template #content>
+    <tbody>
+      <tr>
+        <th scope="row" class="d-code--sm d-docsite-code">.d-bas-unset</th>
+        <td class="d-code--sm">border-style: unset !important;</td>
+      </tr>
+    </tbody>
+    <tbody v-for="s in ['dashed', 'dotted']">
+      <tr v-for="i in ['all', 'top', 'right', 'bottom', 'left']">
+        <th scope="row" class="d-code--sm d-docsite-code">.d-b{{ i[0] }}s-{{ s }}</th>
+        <td class="d-code--sm">
+          <span v-if="i === 'all'">border-style: {{ s }} !important;</span>
+          <span v-else>border-{{i}}-style: {{ s }} !important;</span>
+        </td>
+      </tr>
+    </tbody>
+  </template>
+</utility-class-table>

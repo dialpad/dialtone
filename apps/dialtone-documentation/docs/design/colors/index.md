@@ -3,9 +3,9 @@ title: Colors
 description: A functional, personal, and accessible color palette.
 ---
 
-## Text
+## Foreground
 
-Key foreground colors rendered on surfaces to indicate hierarchy and importance.
+Colors for text and icons
 
 <DesignColorTable :excluded-colors="textColorsExclusionList" class-prefix="d-fc-">
   <template #example="{color}">
@@ -17,7 +17,7 @@ Key foreground colors rendered on surfaces to indicate hierarchy and importance.
       :class="[
         'd-fl0 d-fs-300 d-p6 d-fw-medium',
         color.utilityClass,
-        { 'd-bgc-contrast': color.utilityClass.endsWith('inverted') },  
+        { 'd-bgc-contrast': color.utilityClass.endsWith('inverted') },
       ]"
     >
       Aa
@@ -25,7 +25,7 @@ Key foreground colors rendered on surfaces to indicate hierarchy and importance.
   </template>
 </DesignColorTable>
 
-## Status Text
+## Foreground Status
 
 Foreground colors distinguishing important information with a status role.
 
@@ -39,7 +39,7 @@ Foreground colors distinguishing important information with a status role.
       :class="[
         'd-fl0 d-fs-300 d-p6 d-fw-medium',
         color.utilityClass,
-        { 'd-bgc-contrast': color.utilityClass.endsWith('inverted') },  
+        { 'd-bgc-contrast': color.utilityClass.endsWith('inverted') },
       ]"
     >
       Aa
@@ -49,7 +49,7 @@ Foreground colors distinguishing important information with a status role.
 
 ## Surface
 
-Background colors for default application UI surfaces. Surface colors are containing blocks — such as pages, modals, tables, headers, and cards — containing foreground content or elements.
+Background colors for application UI surfaces. Surface colors are containing blocks — such as pages, modals, tables, headers, and cards — containing foreground content or elements.
 
 <DesignColorTable :excluded-colors="surfaceColorsExclusionList" class-prefix="d-bgc-">
   <template #example="{color}">
@@ -90,7 +90,7 @@ Base colors are the literal value of all available colors. Use these only if all
 Each of the colors listed above references these. For example, in Light mode
 `var(--dt-color-foreground-primary)` is an alias to `var(--dt-color-black-900)`, and
 `var(--dt-color-foreground-critical)` is an alias to
-`var(--dt-color-red-300)`, though will have a different value in Dark mode.
+`var(--dt-color-red-300)`, and will have a different value in Dark mode.
 
 ### Light Theme
 

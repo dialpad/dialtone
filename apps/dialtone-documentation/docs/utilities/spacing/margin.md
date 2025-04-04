@@ -72,104 +72,102 @@ The margin utility classes help visually separate elements. Because layouts are 
 
 It is highly recommended to use the [stack component](/components/stack.md) or the [auto spacing classes](/utilities/spacing/auto-spacing.md) prior to applying margins individually.
 
-<div class="d-h464 d-of-y-scroll d-bb d-bc-black-200">
-  <utility-class-table>
-    <template #content>
-      <!-- Positive margins -->
-      <tbody v-for="i in directions">
-        <tr v-for="{ value: val, output } in values">
-          <th scope="row" class="d-code--sm d-docsite-code">
-            <span v-if="i !== 'All'">.d-m{{ i[0] }}{{ val }}</span>
-            <span v-else>.d-m{{ val }}</span>
-          </th>
-          <td class="d-code--sm">
-            <span v-if="i == 'y'">
-              margin-top: {{ output }} !important;<br/>
-              margin-bottom: {{ output }} !important;
-            </span>
-            <span v-else-if="i == 'x'">
-              margin-right: {{ output }} !important;<br/>
-              margin-left: {{ output }} !important;
-            </span>
-            <span v-else>
-              <span v-if="i !== 'All'">margin-{{ i }}: {{ output }} !important; </span>
-              <span v-else>margin: {{ output }} !important</span>
-            </span>
-          </td>
-        </tr>
-      </tbody>
-      <!-- Negative margins -->
-      <tbody v-for="i in directions">
-        <tr v-for="{ value: val, output } in values.slice(1)">
-          <th scope="row" class="d-code--sm d-docsite-code">
-            <span v-if="i !== 'All'">.d-m{{ i[0] }}n{{ val }}</span>
-            <span v-else>.d-mn{{ val }}</span>
-          </th>
-          <td class="d-code--sm">
-            <span v-if="i == 'y'">
-              margin-top: -{{ output }} !important;<br/>
-              margin-bottom: -{{ output }} !important;
-            </span>
-            <span v-else-if="i == 'x'">
-              margin-right: -{{ output }} !important;<br/>
-              margin-left: -{{ output }} !important;
-            </span>
-            <span v-else>
-              <span v-if="i !== 'All'">margin-{{ i }}: -{{ output }} !important; </span>
-              <span v-else>margin: -{{ output }} !important</span>
-            </span>
-          </td>
-        </tr>
-      </tbody>
-      <!-- Auto margins -->
-      <tbody>
-        <tr v-for="i in directions">
-          <th scope="row" class="d-code--sm d-docsite-code">
-            <span v-if="i !== 'All'">.d-m{{ i[0] }}-auto</span>
-            <span v-else>.d-m-auto</span>
-          </th>
-          <td class="d-code--sm">
-            <span v-if="i == 'y'">
-              margin-top: auto !important;<br/>
-              margin-bottom: auto !important;
-            </span>
-            <span v-else-if="i == 'x'">
-              margin-right: auto !important;<br/>
-              margin-left: auto !important;
-            </span>
-            <span v-else>
-              <span v-if="i !== 'All'">margin-{{ i }}: auto !important; </span>
-              <span v-else>margin: auto !important</span>
-            </span>
-          </td>
-        </tr>
-      </tbody>
-      <!-- Unset margins -->
-      <tbody>
-        <tr v-for="i in directions">
-          <th scope="row" class="d-code--sm d-docsite-code">
-            <span v-if="i !== 'All'">.d-m{{ i[0] }}-unset</span>
-            <span v-else>.d-m-unset</span>
-          </th>
-          <td class="d-code--sm">
-            <span v-if="i == 'y'">
-              margin-top: unset !important;<br/>
-              margin-bottom: unset !important;
-            </span>
-            <span v-else-if="i == 'x'">
-              margin-right: unset !important;<br/>
-              margin-left: unset !important;
-            </span>
-            <span v-else>
-              <span v-if="i !== 'All'">margin-{{ i }}: unset !important; </span>
-              <span v-else>margin: unset !important</span>
-            </span>
-          </td>
-        </tr>
-      </tbody>
-    </template>
-  </utility-class-table>
-</div>
+<utility-class-table>
+  <template #content>
+    <!-- Positive margins -->
+    <tbody v-for="i in directions">
+      <tr v-for="{ value: val, output } in values">
+        <th scope="row" class="d-code--sm d-docsite-code">
+          <span v-if="i !== 'All'">.d-m{{ i[0] }}{{ val }}</span>
+          <span v-else>.d-m{{ val }}</span>
+        </th>
+        <td class="d-code--sm">
+          <span v-if="i == 'y'">
+            margin-top: {{ output }} !important;<br/>
+            margin-bottom: {{ output }} !important;
+          </span>
+          <span v-else-if="i == 'x'">
+            margin-right: {{ output }} !important;<br/>
+            margin-left: {{ output }} !important;
+          </span>
+          <span v-else>
+            <span v-if="i !== 'All'">margin-{{ i }}: {{ output }} !important; </span>
+            <span v-else>margin: {{ output }} !important</span>
+          </span>
+        </td>
+      </tr>
+    </tbody>
+    <!-- Negative margins -->
+    <tbody v-for="i in directions">
+      <tr v-for="{ value: val, output } in values.slice(1)">
+        <th scope="row" class="d-code--sm d-docsite-code">
+          <span v-if="i !== 'All'">.d-m{{ i[0] }}n{{ val }}</span>
+          <span v-else>.d-mn{{ val }}</span>
+        </th>
+        <td class="d-code--sm">
+          <span v-if="i == 'y'">
+            margin-top: -{{ output }} !important;<br/>
+            margin-bottom: -{{ output }} !important;
+          </span>
+          <span v-else-if="i == 'x'">
+            margin-right: -{{ output }} !important;<br/>
+            margin-left: -{{ output }} !important;
+          </span>
+          <span v-else>
+            <span v-if="i !== 'All'">margin-{{ i }}: -{{ output }} !important; </span>
+            <span v-else>margin: -{{ output }} !important</span>
+          </span>
+        </td>
+      </tr>
+    </tbody>
+    <!-- Auto margins -->
+    <tbody>
+      <tr v-for="i in directions">
+        <th scope="row" class="d-code--sm d-docsite-code">
+          <span v-if="i !== 'All'">.d-m{{ i[0] }}-auto</span>
+          <span v-else>.d-m-auto</span>
+        </th>
+        <td class="d-code--sm">
+          <span v-if="i == 'y'">
+            margin-top: auto !important;<br/>
+            margin-bottom: auto !important;
+          </span>
+          <span v-else-if="i == 'x'">
+            margin-right: auto !important;<br/>
+            margin-left: auto !important;
+          </span>
+          <span v-else>
+            <span v-if="i !== 'All'">margin-{{ i }}: auto !important; </span>
+            <span v-else>margin: auto !important</span>
+          </span>
+        </td>
+      </tr>
+    </tbody>
+    <!-- Unset margins -->
+    <tbody>
+      <tr v-for="i in directions">
+        <th scope="row" class="d-code--sm d-docsite-code">
+          <span v-if="i !== 'All'">.d-m{{ i[0] }}-unset</span>
+          <span v-else>.d-m-unset</span>
+        </th>
+        <td class="d-code--sm">
+          <span v-if="i == 'y'">
+            margin-top: unset !important;<br/>
+            margin-bottom: unset !important;
+          </span>
+          <span v-else-if="i == 'x'">
+            margin-right: unset !important;<br/>
+            margin-left: unset !important;
+          </span>
+          <span v-else>
+            <span v-if="i !== 'All'">margin-{{ i }}: unset !important; </span>
+            <span v-else>margin: unset !important</span>
+          </span>
+        </td>
+      </tr>
+    </tbody>
+  </template>
+</utility-class-table>
 
 <script setup>
   import { directions, values } from '@data/spacing.json';

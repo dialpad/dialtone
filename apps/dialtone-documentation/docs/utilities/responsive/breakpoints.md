@@ -31,36 +31,40 @@ This plugin takes the breakpoints and the classes you need to have responsive va
 
 To help keep prefixes concise, we use abbreviations. This syntax is used consistently across all responsive classes. As the viewport size grows, you can change an elements properties. For example, you can set an element to display normally, but be hidden at smaller sizes: `.d-d-block .sm:d-d-none`.
 
-<table class="d-table dialtone-doc-table">
-  <thead>
-    <tr>
-      <th scope="col" class="d-w25p">Class Prefix</th>
-      <th scope="col" class="d-w25p">Media Query</th>
-      <th scope="col">Description</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th scope="row" class="d-code--sm d-docsite-code">.xl:{class}</th>
-      <td class="d-code--sm">max-width: 1264px</td>
-      <td class="d-code--sm">The class is applied on extra large browser widths and below.</td>
-    </tr>
-    <tr>
-      <th scope="row" class="d-code--sm d-docsite-code">.lg:{class}</th>
-      <td class="d-code--sm">max-width: 980px</td>
-      <td class="d-code--sm">The class is applied on large browser widths and below.</td>
-    </tr>
-    <tr>
-      <th scope="row" class="d-code--sm d-docsite-code">.md:{class}</th>
-      <td class="d-code--sm">max-width: 640px</td>
-      <td class="d-code--sm">The class is applied on medium browser widths and below.</td>
-    </tr>
-    <tr>
-      <th scope="row" class="d-code--sm d-docsite-code">.sm:{class}</th>
-      <td class="d-code--sm">max-width: 480px</td>
-      <td class="d-code--sm">The class is applied on small browser widths and below.</td>
-    </tr>
-  </tbody>
-</table>
+<div v-dt-scrollbar class="d-hmx464 d-bar8 d-ba d-bc-subtle">
+  <div>
+    <table class="d-table dialtone-doc-table">
+      <thead class="d-bgc-primary d-ps-sticky d-zi-base1 d-t0">
+        <tr>
+          <th scope="col" class="d-p0 d-bbw0 d-w25p"><div class="d-p16 d-bb d-bc-default d-bbw1">Class Prefix</div></th>
+          <th scope="col" class="d-p0 d-bbw0 d-w25p"><div class="d-p16 d-bb d-bc-default d-bbw1">Media Query</div></th>
+          <th scope="col" class="d-p0 d-bbw0 "><div class="d-p16 d-bb d-bc-default d-bbw1">Description</div></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <th scope="row" class="d-code--sm d-docsite-code">.xl:{class}</th>
+          <td class="d-code--sm">max-width: 1264px</td>
+          <td class="d-code--sm">The class is applied on extra large browser widths and below.</td>
+        </tr>
+        <tr>
+          <th scope="row" class="d-code--sm d-docsite-code">.lg:{class}</th>
+          <td class="d-code--sm">max-width: 980px</td>
+          <td class="d-code--sm">The class is applied on large browser widths and below.</td>
+        </tr>
+        <tr>
+          <th scope="row" class="d-code--sm d-docsite-code">.md:{class}</th>
+          <td class="d-code--sm">max-width: 640px</td>
+          <td class="d-code--sm">The class is applied on medium browser widths and below.</td>
+        </tr>
+        <tr>
+          <th scope="row" class="d-code--sm d-docsite-code">.sm:{class}</th>
+          <td class="d-code--sm">max-width: 480px</td>
+          <td class="d-code--sm">The class is applied on small browser widths and below.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
 
 **Note:** These breakpoints may change.
