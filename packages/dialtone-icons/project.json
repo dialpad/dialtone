@@ -36,11 +36,15 @@
       ]
     },
     "build:android": {
-      "dependsOn": ["pre-build", "dialtone-icons-android:build"],
+      "dependsOn": ["pre-build"],
       "executor": "nx:run-commands",
       "options": {
         "cwd": "{projectRoot}/android",
-        "command": "./gradlew publishToMavenLocal"
+        "commands": [
+          "nx run dialtone-icons-android:build:android --output-style=stream",
+          "./gradlew publishToMavenLocal"
+        ],
+        "parallel": false
       },
       "outputs": [
         "{projectRoot}/android/src/kotlin/icons",
