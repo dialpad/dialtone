@@ -28,13 +28,10 @@
     "emitDeclarationOnly": true,
     "declarationMap": true,
     "declarationDir": "dist/types",
+    "strict": true,
     "removeComments": true,
     "paths": {
       "@/*": ["./*"]
-    },
-    "target": "es5",
-    "strict": true,
-    "module": "es2015",
-    "moduleResolution": "node"
+    }
   }
 }
