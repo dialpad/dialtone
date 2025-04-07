@@ -7,9 +7,6 @@ on:
       - 'packages/**'
       - 'apps/**'
 
-permissions:
-  packages: read
-
 env:
   HUSKY: 0
 
@@ -51,6 +48,7 @@ jobs:
       contents: read
       id-token: write
       pull-requests: write
+      packages: read
     env:
       VUEPRESS_BASE_URL: /deploy-previews/pr-${{ github.event.pull_request.number }}/
       DIALTONE_BUCKET_DIRECTORY: dialtone.dialpad.com/deploy-previews/pr-${{ github.event.pull_request.number }}/
