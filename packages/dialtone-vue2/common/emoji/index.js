@@ -1,5 +1,5 @@
 import { emojiPattern } from 'regex-combined-emojis';
-import emojiJsonLocal from 'emoji-toolkit/emoji_strategy.json';
+import emojiJsonLocal from 'emoji-toolkit/emoji_strategy.json' with { type: 'json' };
 
 export const emojiRegex = new RegExp(emojiPattern, 'g');
 export const emojiVersion = '8.0';
