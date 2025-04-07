@@ -1,3 +1,10 @@
+# [1.42.0-rebrand-2025-beta.3](https://github.com/dialpad/dialtone/compare/dialtone-tokens/v1.42.0-rebrand-2025-beta.2...dialtone-tokens/v1.42.0-rebrand-2025-beta.3) (2025-04-07)
+
+
+### Features
+
+* **Design Tokens:** DLT-2458 wfm extended base colors ([#694](https://github.com/dialpad/dialtone/issues/694)) ([2905279](https://github.com/dialpad/dialtone/commit/2905279609c8abcb0ac2168328b912fc950d3dfc))
+
 # [1.42.0-rebrand-2025-beta.2](https://github.com/dialpad/dialtone/compare/dialtone-tokens/v1.42.0-rebrand-2025-beta.1...dialtone-tokens/v1.42.0-rebrand-2025-beta.2) (2025-04-03)
 
 
