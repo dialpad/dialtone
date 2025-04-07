@@ -163,24 +163,6 @@ describe('DtPopover Tests', () => {
 
         expect(buttonExists).toBe(true);
       });
-
-      describe('When visuallyHiddenCloseLabel is null', () => {
-        it('should raise a validation error', async () => {
-          let consoleErrorSpy;
-
-          consoleErrorSpy = vi.spyOn(console, 'error').mockClear();
-
-          await wrapper.setProps({ visuallyHiddenCloseLabel: null });
-
-          const message = `If visuallyHiddenClose prop is true, the component includes
-           a visually hidden close button and you must set the visuallyHiddenCloseLabel prop.`;
-
-          expect(consoleErrorSpy).toHaveBeenCalledWith(message);
-
-          consoleErrorSpy = null;
-          console.error.mockRestore();
-        });
-      });
     });
   });
 

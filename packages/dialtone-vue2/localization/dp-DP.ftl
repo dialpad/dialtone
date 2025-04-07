@@ -5,5 +5,5 @@ SPANISH = Šþëŋīšħ
 DIALPADISTAN = Ḍīë£þëḍīš†ëŋ
 SET_LANGUAGE = Šά† £ëŋğøëğά
 CLOSE_BUTTON =
-    .aria-label = Ĉ£ůšά ßø††ůŋ
-    .title = Ĉ£ůšά ßø††ůŋ
+    .aria-label = Ĉ£ůšά
+    .title = Ĉ£ůšά

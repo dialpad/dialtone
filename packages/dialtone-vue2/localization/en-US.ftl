@@ -5,5 +5,5 @@ SPANISH = Spanish
 DIALPADISTAN = Dialpadistan
 SET_LANGUAGE = Set language
 CLOSE_BUTTON =
-  .aria-label = Close button
-  .title = Close button
+  .aria-label = Close
+  .title = Close

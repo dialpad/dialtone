@@ -68,7 +68,6 @@
           :content-class="headerClass"
           type="header"
           :show-close-button="showCloseButton"
-          :close-button-props="closeButtonProps"
           @close="closePopover"
         >
           <template #content>
@@ -110,8 +109,7 @@
           </template>
         </popover-header-footer>
         <sr-only-close-button
-          v-if="showVisuallyHiddenClose"
-          :visually-hidden-close-label="visuallyHiddenCloseLabel"
+          v-if="visuallyHiddenClose"
           @close="closePopover"
         />
       </dt-lazy-show>
@@ -228,15 +226,6 @@ export default {
     ariaLabel: {
       type: String,
       default: null,
-    },
-
-    /**
-     * A set of props to be passed into the popover's header close button.
-     * Requires an 'ariaLabel' property, when the header popover is visible
-     */
-    closeButtonProps: {
-      type: Object,
-      default: () => ({}),
     },
 
     /**
