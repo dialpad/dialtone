@@ -1,1 +1,9 @@
-close = Close
+CLICK_TO_CLOSE = Click to close
+CLICK_TO_OPEN = Click to open
+ENGLISH = English
+SPANISH = Spanish
+DIALPADISTAN = Dialpadistan
+SET_LANGUAGE = Set language
+CLOSE_BUTTON =
+  .aria-label = Close button
+  .title = Close button
