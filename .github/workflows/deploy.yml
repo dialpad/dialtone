@@ -109,6 +109,12 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-pnpm-store-
 
+      - name: Set @dialpad registry to GitHub packages
+        run: pnpm config set @dialpad:registry https://npm.pkg.github.com
+
+      - name: Set GitHub auth token
+        run: pnpm config set //npm.pkg.github.com/:_authToken=${{ secrets.GITHUB_TOKEN }}
+
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
 

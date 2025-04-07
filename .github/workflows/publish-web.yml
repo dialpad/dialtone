@@ -135,17 +135,20 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-pnpm-store-
 
+      - name: Set @dialpad registry to GitHub packages
+        run: pnpm config set @dialpad:registry https://npm.pkg.github.com
+
+      - name: Set auth tokens
+        run: |
+          pnpm config set //npm.pkg.github.com/:_authToken=${{ secrets.GITHUB_TOKEN }}
+          pnpm config set //registry.npmjs.org/:_authToken=${{ secrets.DIALTONE_NPM_TOKEN }}
+
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
-      - name: Set registry to GitHub packages
-        if: matrix.registry == 'GitHub'
-        run: pnpm config set @dialpad:registry https://npm.pkg.github.com
-
-      - name: Set ${{ matrix.registry }} auth token
-        env:
-          AUTH_TOKEN: ${{ matrix.registry == 'GitHub' && env.GITHUB_TOKEN || secrets.DIALTONE_NPM_TOKEN }}
-        run: pnpm config set ${{ matrix.registry_url }}:_authToken=${{ env.AUTH_TOKEN }}
+      - name: Remove GitHub registry if publishing to npm
+        if: matrix.registry == 'npm'
+        run: pnpm config delete @dialpad:registry
 
       # Publish npm/GitHub
       - name: Publish ${{ matrix.package }}@${{ env.RELEASE_TAG }}
