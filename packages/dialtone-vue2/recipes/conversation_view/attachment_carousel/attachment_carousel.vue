@@ -16,7 +16,7 @@
         :key="`media-${index}`"
         :index="index"
         :media-item="mediaItem"
-        :close-aria-label="$t('close')"
+        :close-aria-label="closeAriaLabel"
         :click-to-open-aria-label="clickToOpenAriaLabel"
         :progressbar-aria-label="progressbarAriaLabel"
         @remove-media="removeMediaItem(index)"
@@ -63,11 +63,10 @@
 <script>
 import { DtIconArrowRight, DtIconArrowLeft } from '@dialpad/dialtone-icons/vue2';
 import { DtButton } from '@/components/button';
-import { useI18N } from '@dialpad/i18n-vue2';
+
 import DtImageCarousel from './media_components/image_carousel.vue';
 
 const MEDIA_ITEM_WIDTH = 64;
-const { $t } = useI18N();
 
 export default {
   name: 'DtRecipeAttachmentCarousel',
@@ -100,6 +99,11 @@ export default {
     mediaList: {
       type: Array,
       default: () => [],
+    },
+
+    closeAriaLabel: {
+      type: String,
+      required: true,
     },
 
     clickToOpenAriaLabel: {
@@ -154,8 +158,6 @@ export default {
   },
 
   methods: {
-    $t,
-
     onItemFocus (e) {
       e.currentTarget.scrollIntoView({ behavior: 'smooth' });
     },

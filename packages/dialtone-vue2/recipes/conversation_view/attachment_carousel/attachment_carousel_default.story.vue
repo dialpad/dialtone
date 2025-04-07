@@ -4,17 +4,15 @@
     We can bind the data that the user entered into the storybook controls to props by using a property of the same name
     as the storybook control defined in the corresponding `.story.js` file.
   -->
-  <div>
-    <dt-recipe-attachment-carousel
-      :media-list="$attrs.mediaList"
-      :close-aria-label="$attrs.closeAriaLabel"
-      :click-to-open-aria-label="$attrs.clickToOpenAriaLabel"
-      :progressbar-aria-label="$attrs.progressbarAriaLabel"
-      :left-arrow-aria-label="$attrs.leftArrowAriaLabel"
-      :right-arrow-aria-label="$attrs.rightArrowAriaLabel"
-      @remove-media="removeMedia"
-    />
-  </div>
+  <dt-recipe-attachment-carousel
+    :media-list="$attrs.mediaList"
+    :close-aria-label="$attrs.closeAriaLabel"
+    :click-to-open-aria-label="$attrs.clickToOpenAriaLabel"
+    :progressbar-aria-label="$attrs.progressbarAriaLabel"
+    :left-arrow-aria-label="$attrs.leftArrowAriaLabel"
+    :right-arrow-aria-label="$attrs.rightArrowAriaLabel"
+    @remove-media="removeMedia"
+  />
 </template>
 
 <script>

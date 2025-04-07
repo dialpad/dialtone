@@ -109,7 +109,8 @@
           </template>
         </popover-header-footer>
         <sr-only-close-button
-          v-if="visuallyHiddenClose"
+          v-if="showVisuallyHiddenClose"
+          :visually-hidden-close-label="visuallyHiddenCloseLabel"
           @close="closePopover"
         />
       </dt-lazy-show>
