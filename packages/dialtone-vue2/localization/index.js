@@ -6,13 +6,14 @@ export const DialtoneLocalizationPlugin = {
       resources: await RawBundleSource.dynamicResources([
         ['en-US', 'dialtone', import('./en-US.ftl?raw')],
         ['dp-DP', 'dialtone', import('./dp-DP.ftl?raw')],
+        ['es-LA', 'dialtone', import('./es-LA.ftl?raw')],
       ]),
     });
 
     const manager = new LocaleManager({
       bundleSource,
       preferredLocale: 'en-US', // optional
-      allowedLocales: ['en-US', 'dp-DP'], // optional
+      allowedLocales: ['en-US', 'dp-DP', 'es-LA'], // optional
       fallbackLocale: 'en-US',
       namespaces: ['dialtone'],
     });
