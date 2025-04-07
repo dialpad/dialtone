@@ -19,6 +19,9 @@ on:
       - 'packages/dialtone-vue2/**'
       - 'packages/dialtone-vue3/**'
 
+permissions:
+  packages: read
+
 env:
   HUSKY: 0
 

@@ -6,6 +6,9 @@ on:
   pull_request:
     types: [ unlabeled, labeled, synchronize, opened ]
 
+permissions:
+  packages: read
+
 env:
   HUSKY: 0
 

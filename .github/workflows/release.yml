@@ -24,6 +24,9 @@ on:
   schedule:
     - cron: "0 10 * * 2"
 
+permissions:
+  packages: read
+
 env:
   HUSKY: 0
 

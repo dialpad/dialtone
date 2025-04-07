@@ -6,6 +6,9 @@ on:
     branches:
       - staging
 
+permissions:
+  packages: read
+
 jobs:
   commit-lint:
     runs-on: ubuntu-latest

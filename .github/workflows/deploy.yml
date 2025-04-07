@@ -16,6 +16,9 @@ on:
       - 'packages/**'
       - 'apps/**'
 
+permissions:
+  packages: read
+
 env:
   HUSKY: 0
 

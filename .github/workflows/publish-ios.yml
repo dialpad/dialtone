@@ -8,6 +8,9 @@ on:
     paths:
       - 'packages/dialtone-tokens/dist_ios/**'
 
+permissions:
+  packages: read
+
 env:
   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
