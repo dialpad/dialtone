@@ -1,3 +1,10 @@
+# [2.181.0](https://github.com/dialpad/dialtone/compare/dialtone-vue2/v2.180.1...dialtone-vue2/v2.181.0) (2025-04-07)
+
+
+### Features
+
+* **Editor:** DP-130987 insert inline image through editor ([#692](https://github.com/dialpad/dialtone/issues/692)) ([4616b67](https://github.com/dialpad/dialtone/commit/4616b67e0d8781d932b15200e0f3f7768dd241a7))
+
 ## [2.180.1](https://github.com/dialpad/dialtone/compare/dialtone-vue2/v2.180.0...dialtone-vue2/v2.180.1) (2025-04-02)
 
 
