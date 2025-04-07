@@ -14,33 +14,19 @@
       :right-arrow-aria-label="$attrs.rightArrowAriaLabel"
       @remove-media="removeMedia"
     />
-
-    {{ $t('close') }}
-
-    <button @click="changeLocale">
-      Change locale
-    </button>
   </div>
 </template>
 
 <script>
 import DtRecipeAttachmentCarousel from './attachment_carousel.vue';
-import { useI18N } from '@dialpad/i18n-vue2';
-const { $t, setI18N, currentLocale } = useI18N();
 
 export default {
   name: 'DtRecipeAttachmentCarouselDefault',
   components: { DtRecipeAttachmentCarousel },
   methods: {
-    $t,
     removeMedia (index) {
       this.$attrs.mediaList.splice(index, 1);
       this.$attrs.onRemoveMedia(index);
-    },
-
-    async changeLocale () {
-      // console.log(currentLocale, currentLocale === 'dp-DP');
-      await setI18N({ preferredLocale: currentLocale === 'dp-DP' ? 'en-US' : 'dp-DP' });
     },
   },
 };
