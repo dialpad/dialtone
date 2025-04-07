@@ -16,8 +16,8 @@
   "dependencies": {
     "@dialpad/dialtone-emojis": "workspace:*",
     "@dialpad/dialtone-icons": "workspace:*",
-    "@dialpad/i18n-services": "1.2.0-beta.v5",
-    "@dialpad/i18n-vue2": "1.0.2-beta.v7",
+    "@dialpad/i18n-services": "1.2.0-beta.v6",
+    "@dialpad/i18n-vue2": "1.0.2-beta.v8",
     "@linusborg/vue-simple-portal": "0.1.5",
     "@tiptap/core": "^2.6.6",
     "@tiptap/extension-blockquote": "^2.6.6",
