@@ -1,6 +1,7 @@
 import { computed, ref, watch } from 'vue';
 import { addMonths, getDate, getMonth, getYear, set, subMonths } from 'date-fns';
 import { formatMonth, getCalendarDays } from '@/components/datepicker/utils.js';
+import { returnFirstEl } from '@/common/utils';
 
 export function useMonthYearPicker (props, emits) {
   const selectMonth = ref(getMonth(props.selectedDate));
@@ -34,7 +35,7 @@ export function useMonthYearPicker (props, emits) {
   }
 
   function focusMonthYearPicker () {
-    focusRefs.value[0].$el.focus();
+    returnFirstEl(focusRefs.value[0].$el).focus();
   }
 
   function handleKeyDown (event) {
@@ -43,10 +44,10 @@ export function useMonthYearPicker (props, emits) {
         event.preventDefault();
         if (focusPicker.value === 0) {
           focusPicker.value = 3;
-          focusRefs.value[focusPicker.value].$el.focus();
+          returnFirstEl(focusRefs.value[focusPicker.value].$el).focus();
         } else {
           focusPicker.value--;
-          focusRefs.value[focusPicker.value].$el.focus();
+          returnFirstEl(focusRefs.value[focusPicker.value].$el).focus();
         }
         break;
 
@@ -54,10 +55,10 @@ export function useMonthYearPicker (props, emits) {
         event.preventDefault();
         if (focusPicker.value === 3) {
           focusPicker.value = 0;
-          focusRefs.value[focusPicker.value].$el.focus();
+          returnFirstEl(focusRefs.value[focusPicker.value].$el).focus();
         } else {
           focusPicker.value++;
-          focusRefs.value[focusPicker.value].$el.focus();
+          returnFirstEl(focusRefs.value[focusPicker.value].$el).focus();
         }
         break;
 

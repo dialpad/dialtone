@@ -50,7 +50,7 @@ import {
 import {
   POPOVER_APPEND_TO_VALUES,
 } from '../popover/popover_constants';
-import { flushPromises, getUniqueString, hasSlotContent, warnIfUnmounted } from '@/common/utils';
+import { flushPromises, getUniqueString, hasSlotContent, warnIfUnmounted, returnFirstEl } from '@/common/utils';
 import {
   createTippy,
   getAnchor,
@@ -363,7 +363,7 @@ export default {
       await flushPromises();
       this.addExternalAnchorEventListeners();
     }
-    warnIfUnmounted(this.$el, this.$options.name);
+    warnIfUnmounted(returnFirstEl(this.$el), this.$options.name);
   },
 
   beforeUnmount () {
@@ -377,11 +377,11 @@ export default {
   methods: {
     calculateAnchorZindex () {
       // if a modal is currently active render at modal-element z-index, otherwise at tooltip z-index
-      if (this.$el.getRootNode()
+      if (returnFirstEl(this.$el).getRootNode()
         .querySelector('.d-modal[aria-hidden="false"], .d-modal--transparent[aria-hidden="false"]') ||
         // Special case because we don't have any dialtone drawer component yet. Render at 651 when
         // anchor of popover is within a drawer.
-        this.$el.closest('.d-zi-drawer')) {
+        returnFirstEl(this.$el).closest('.d-zi-drawer')) {
         return 651;
       } else {
         return 400;

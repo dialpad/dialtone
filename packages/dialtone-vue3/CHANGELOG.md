@@ -1,3 +1,19 @@
+## [3.173.2](https://github.com/dialpad/dialtone/compare/dialtone-vue3/v3.173.1...dialtone-vue3/v3.173.2) (2025-04-03)
+
+
+### Bug Fixes
+
+* DLT-2398 synchronize class attrs on vue 3 components ([#688](https://github.com/dialpad/dialtone/issues/688)) ([ff72641](https://github.com/dialpad/dialtone/commit/ff726419f06647ba0d3d6016fddcf698c13ba21d))
+* NO-JIRA $el in vue 3 ([#690](https://github.com/dialpad/dialtone/issues/690)) ([0027ba7](https://github.com/dialpad/dialtone/commit/0027ba7dbe3c394b9185797790a6408a6eae5234))
+
+## [3.173.1](https://github.com/dialpad/dialtone/compare/dialtone-vue3/v3.173.0...dialtone-vue3/v3.173.1) (2025-04-02)
+
+
+### Bug Fixes
+
+* **Ci:** NO-JIRA changelog release order ([#689](https://github.com/dialpad/dialtone/issues/689)) ([bd4c080](https://github.com/dialpad/dialtone/commit/bd4c0802a59be6fdafb8f661a9c12c64ef764656))
+* **Emoji Text Wrapper:** DLT-2455 skip vue3 comment vnodes when extracting text for emojis ([#686](https://github.com/dialpad/dialtone/issues/686)) ([62ad982](https://github.com/dialpad/dialtone/commit/62ad98241850ae52e7d0ceeebb83aecb65fa3ad0))
+
 # [3.173.0](https://github.com/dialpad/dialtone/compare/dialtone-vue3/v3.172.1...dialtone-vue3/v3.173.0) (2025-03-31)
 
 

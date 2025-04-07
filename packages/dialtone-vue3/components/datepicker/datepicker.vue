@@ -37,12 +37,12 @@
 </template>
 
 <script setup>
+import { returnFirstEl, warnIfUnmounted } from '@/common/utils';
 import MonthYearPicker from './modules/month-year-picker.vue';
 import Calendar from './modules/calendar.vue';
 import { DtStack } from '@/components/stack';
 
 import { onMounted, ref, getCurrentInstance } from 'vue';
-import { warnIfUnmounted } from '@/common/utils';
 
 defineProps({
   /**
@@ -157,6 +157,6 @@ function updateCalendarDays (days) {
 
 onMounted(() => {
   const instance = getCurrentInstance();
-  warnIfUnmounted(instance.proxy.$el, 'datepicker');
+  warnIfUnmounted(returnFirstEl(instance.proxy.$el), 'datepicker');
 });
 </script>

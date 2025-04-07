@@ -39,6 +39,7 @@ We have modified it for our own specific use. -->
 <script>
 import CoreScroller from './core_scroller.vue';
 import DtScrollerItem from './scroller_item.vue';
+import { returnFirstEl } from '@/common/utils';
 
 export default {
   name: 'DynamicScroller',
@@ -197,7 +198,7 @@ export default {
     },
 
     itemsWithSize (next, prev) {
-      const scrollTop = this.$el.scrollTop;
+      const scrollTop = returnFirstEl(this.$el).scrollTop;
 
       // Calculate total diff between prev and next sizes
       // over current scroll top. Then add it to scrollTop to
@@ -217,7 +218,7 @@ export default {
         return;
       }
 
-      this.$el.scrollTop += offset;
+      returnFirstEl(this.$el).scrollTop += offset;
     },
   },
 
@@ -254,7 +255,7 @@ export default {
     scrollToBottom () {
       if (this.$_scrollingToBottom) return;
       this.$_scrollingToBottom = true;
-      const el = this.$el;
+      const el = returnFirstEl(this.$el);
       // Item is inserted to the DOM
       this.$nextTick(() => {
         el.scrollTop = el.scrollHeight + 5000;

@@ -60,16 +60,16 @@ jobs:
 
   publish:
     needs: [ check-dialpad-member, filter-actions ]
+    if: ${{ github.event_name == 'workflow_dispatch' || (github.event_name == 'push' && needs.filter-actions.outputs.packages != '[]') }}
     strategy:
       matrix:
         package: ${{ fromJSON(needs.filter-actions.outputs.packages) }}
-        include:
-          - package: dialtone-icons
-            dir: ./packages/dialtone-icons/android
-          - package: dialtone-tokens
-            dir: ./packages/dialtone-tokens
     runs-on: ubuntu-latest
     steps:
+      - name: Set working Dir
+        run: |
+          echo "WORKING_DIR=${{ matrix.package == 'dialtone-icons' && './packages/dialtone-icons/android' || './packages/dialtone-tokens' }}" >> $GITHUB_ENV
+
       - name: Checkout
         uses: actions/checkout@v4
 
@@ -107,14 +107,14 @@ jobs:
           distribution: 'temurin'
           cache: 'gradle'
           cache-dependency-path: |
-            ${{ matrix.dir }}/*.gradle*
-            ${{ matrix.dir }}/**/gradle-wrapper.properties
+            ${{ env.WORKING_DIR }}/*.gradle*
+            ${{ env.WORKING_DIR }}/**/gradle-wrapper.properties
 
       - name: Build ${{ matrix.package }}
         run: pnpm nx run ${{ matrix.package }}:build:android
 
       - name: Publish ${{ matrix.package }}
-        working-directory: ${{ matrix.dir }}
+        working-directory: ${{ env.WORKING_DIR }}
         env:
           GITHUB_USER: braddialpad
         run: ./gradlew publish
