@@ -45,18 +45,16 @@ Use `d-b{a|t|r|b|l}w{n}` to change the border width of your direction on your el
 
 ## Classes
 
-<div class="d-h464 d-of-y-scroll d-bb d-bc-black-200">
-  <utility-class-table>
-    <template #content>
-      <tbody v-for="i in ['all', 'top', 'right', 'bottom', 'left']">
-        <tr v-for="(val, key) in {0: '0', 1: '100', 2: '200', 4: '300', 6: '350'}">
-          <th scope="row" class="d-code--sm d-docsite-code">.d-b{{ i[0] }}w{{ key }}</th>
-          <td class="d-code--sm">
-            <span v-if="i === 'all'">border-width: var(--dt-size-{{ val }}) !important;</span>
-            <span v-else>border-{{i}}-width: var(--dt-size-{{ val }}) !important;</span>
-          </td>
-        </tr>
-      </tbody>
-    </template>
-  </utility-class-table>
-</div>
+<utility-class-table>
+  <template #content>
+    <tbody v-for="i in ['all', 'top', 'right', 'bottom', 'left']">
+      <tr v-for="(val, key) in {0: '0', 1: '100', 2: '200', 4: '300', 6: '350'}">
+        <th scope="row" class="d-code--sm d-docsite-code">.d-b{{ i[0] }}w{{ key }}</th>
+        <td class="d-code--sm">
+          <span v-if="i === 'all'">border-width: var(--dt-size-{{ val }}) !important;</span>
+          <span v-else>border-{{i}}-width: var(--dt-size-{{ val }}) !important;</span>
+        </td>
+      </tr>
+    </tbody>
+  </template>
+</utility-class-table>

@@ -61,81 +61,79 @@ Use `d-gcs{#}` to set the starting point for an element. This can be combined wi
 
 ## Classes
 
-<div class="d-h464 d-of-y-scroll d-bb d-bc-black-200">
-  <utility-class-table>
-    <template #content>
-      <tbody v-for="g in ['start', 'end', 'span']">
-        <tr v-for="i in [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]">
-          <th scope="row" class="d-code--sm d-docsite-code">
-            <span v-if="g === 'start'">.d-gcs{{ i }}</span>
-            <span v-else-if="g === 'end'">.d-gce{{ i }}</span>
-            <span v-else>.d-gc{{ i }}</span>
-          </th>
-          <td class="d-code--sm">
-            <span v-if="g === 'start'">
-              grid-column-start: {{ i }}
-            </span>
-            <span v-else-if="g === 'end'">
-              grid-column-end: {{ i }}
-            </span>
-            <span v-else>
-              grid-column: span {{ i }} / span {{ i }}
-            </span>
-          </td>
-        </tr>
-        <tr v-if="g === 'span'">
-            <th scope="row" class="d-code--sm d-docsite-code">.d-gc-full</th>
-            <td class="d-code--sm">grid-column: 1 / -1 !important;</td>
-        </tr>
-        <tr>
-          <th scope="row" class="d-code--sm d-docsite-code">
-            <span v-if="g === 'start'">
-              .d-gcs-auto
-            </span>
-            <span v-else-if="g === 'end'">
-              .d-gce-auto
-            </span>
-            <span v-else>
-              .d-gc-auto
-            </span>
-          </th>
-          <td class="d-code--sm">
-            <span v-if="g === 'start'">
-              grid-column-start: auto !important;
-            </span>
-            <span v-else-if="g === 'end'">
-              grid-column-end: auto !important;
-            </span>
-            <span v-else>
-              grid-column: auto !important;
-            </span>
-          </td>
-        </tr>
-        <tr>
-          <th scope="row" class="d-code--sm d-docsite-code">
-            <span v-if="g === 'start'">
-              .d-gcs-unset
-            </span>
-            <span v-else-if="g === 'end'">
-              .d-gce-unset
-            </span>
-            <span v-else>
-              .d-gc-unset
-            </span>
-          </th>
-          <td class="d-code--sm">
-            <span v-if="g === 'start'">
-              grid-column-start: unset !important;
-            </span>
-            <span v-else-if="g === 'end'">
-              grid-column-end: unset !important;
-            </span>
-            <span v-else>
-              grid-column: unset !important;
-            </span>
-          </td>
-        </tr>
-      </tbody>
-    </template>
-  </utility-class-table>
-</div>
+<utility-class-table>
+  <template #content>
+    <tbody v-for="g in ['start', 'end', 'span']">
+      <tr v-for="i in [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]">
+        <th scope="row" class="d-code--sm d-docsite-code">
+          <span v-if="g === 'start'">.d-gcs{{ i }}</span>
+          <span v-else-if="g === 'end'">.d-gce{{ i }}</span>
+          <span v-else>.d-gc{{ i }}</span>
+        </th>
+        <td class="d-code--sm">
+          <span v-if="g === 'start'">
+            grid-column-start: {{ i }}
+          </span>
+          <span v-else-if="g === 'end'">
+            grid-column-end: {{ i }}
+          </span>
+          <span v-else>
+            grid-column: span {{ i }} / span {{ i }}
+          </span>
+        </td>
+      </tr>
+      <tr v-if="g === 'span'">
+          <th scope="row" class="d-code--sm d-docsite-code">.d-gc-full</th>
+          <td class="d-code--sm">grid-column: 1 / -1 !important;</td>
+      </tr>
+      <tr>
+        <th scope="row" class="d-code--sm d-docsite-code">
+          <span v-if="g === 'start'">
+            .d-gcs-auto
+          </span>
+          <span v-else-if="g === 'end'">
+            .d-gce-auto
+          </span>
+          <span v-else>
+            .d-gc-auto
+          </span>
+        </th>
+        <td class="d-code--sm">
+          <span v-if="g === 'start'">
+            grid-column-start: auto !important;
+          </span>
+          <span v-else-if="g === 'end'">
+            grid-column-end: auto !important;
+          </span>
+          <span v-else>
+            grid-column: auto !important;
+          </span>
+        </td>
+      </tr>
+      <tr>
+        <th scope="row" class="d-code--sm d-docsite-code">
+          <span v-if="g === 'start'">
+            .d-gcs-unset
+          </span>
+          <span v-else-if="g === 'end'">
+            .d-gce-unset
+          </span>
+          <span v-else>
+            .d-gc-unset
+          </span>
+        </th>
+        <td class="d-code--sm">
+          <span v-if="g === 'start'">
+            grid-column-start: unset !important;
+          </span>
+          <span v-else-if="g === 'end'">
+            grid-column-end: unset !important;
+          </span>
+          <span v-else>
+            grid-column: unset !important;
+          </span>
+        </td>
+      </tr>
+    </tbody>
+  </template>
+</utility-class-table>

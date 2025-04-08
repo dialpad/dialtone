@@ -60,17 +60,21 @@ Use `d-fw-{n}` to change an element's font-weight.
 
 ## Variables
 
-<table class="d-table dialtone-doc-table">
-  <thead>
-      <tr>
-          <th scope="col" class="d-w25p">Variable</th>
-          <th scope="col">Output</th>
-      </tr>
-  </thead>
-  <tbody>
-    <tr v-for="{ name, output } in weight">
-      <th scope="row" class="d-code--sm d-docsite-code">var(--fw-{{ name }})</th>
-      <td class="d-code--sm">{{ output }}</td>
-    </tr>
-  </tbody>
-</table>
+<div v-dt-scrollbar class="d-hmx464 d-bar8 d-ba d-bc-subtle">
+  <div>
+    <table class="d-table dialtone-doc-table">
+      <thead class="d-bgc-primary d-ps-sticky d-zi-base1 d-t0">
+          <tr>
+              <th scope="col" class="d-p0 d-bbw0 d-w25p"><div class="d-p16 d-bb d-bc-default d-bbw1">Variable</div></th>
+              <th scope="col" class="d-p0 d-bbw0"><div class="d-p16 d-bb d-bc-default d-bbw1">Output</div></th>
+          </tr>
+      </thead>
+      <tbody>
+        <tr v-for="{ name, output } in weight">
+          <th scope="row" class="d-code--sm d-docsite-code">var(--fw-{{ name }})</th>
+          <td class="d-code--sm">{{ output }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

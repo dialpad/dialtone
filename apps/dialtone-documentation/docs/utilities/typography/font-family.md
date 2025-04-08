@@ -67,34 +67,42 @@ Dialtone supports select marketing fonts and weights. Use the following combinat
 
 ## CSS Variables
 
-<table class="d-table dialtone-doc-table">
-  <thead>
-    <tr>
-      <th scope="col" class="d-w40p">Variable</th>
-      <th scope="col">Output</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr v-for="{ var: varName, output } in fontFamily.slice(0, -1)">
-      <td class="d-code--sm d-docsite-code">var(--ff-{{ varName }})</td>
-      <td class="d-code--sm">{{ output }}</td>
-    </tr>
-  </tbody>
-</table>
+<div v-dt-scrollbar class="d-hmx464 d-bar8 d-ba d-bc-subtle">
+  <div>
+    <table class="d-table dialtone-doc-table">
+      <thead class="d-bgc-primary d-ps-sticky d-zi-base1 d-t0">
+        <tr>
+          <th scope="col" class="d-p0 d-bbw0 d-w40p"><div class="d-p16 d-bb d-bc-default d-bbw1">Variable</div></th>
+          <th scope="col" class="d-p0 d-bbw0"><div class="d-p16 d-bb d-bc-default d-bbw1">Output</div></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr v-for="{ var: varName, output } in fontFamily.slice(0, -1)">
+          <td class="d-code--sm d-docsite-code">var(--ff-{{ varName }})</td>
+          <td class="d-code--sm">{{ output }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
 
 ## Classes
 
-<table class="d-table dialtone-doc-table">
-  <thead>
-    <tr>
-      <th scope="col" class="d-w40p">Class</th>
-      <th scope="col">Output</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr v-for="{ var: varName, output } in fontFamily">
-      <td class="d-code--sm d-docsite-code">.d-ff-{{ varName }}</td>
-      <td class="d-code--sm">font-family: {{ output }} !important;</td>
-    </tr>
-  </tbody>
-</table>
+<div v-dt-scrollbar class="d-hmx464 d-bar8 d-ba d-bc-subtle">
+  <div>
+    <table class="d-table dialtone-doc-table">
+      <thead class="d-bgc-primary d-ps-sticky d-zi-base1 d-t0">
+        <tr>
+          <th scope="col" class="d-p0 d-bbw0 d-w40p"><div class="d-p16 d-bb d-bc-default d-bbw1">Class</div></th>
+          <th scope="col" class="d-p0 d-bbw0"><div class="d-p16 d-bb d-bc-default d-bbw1">Output</div></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr v-for="{ var: varName, output } in fontFamily">
+          <td class="d-code--sm d-docsite-code">.d-ff-{{ varName }}</td>
+          <td class="d-code--sm">font-family: {{ output }} !important;</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

@@ -20,30 +20,28 @@ Use `d-bgg-pattern-{pattern}-{dark|light}` to apply a pattern.
 
 ## Classes
 
-<div class="d-h464 d-of-y-scroll d-bb d-bc-black-200">
-  <utility-class-table>
-    <template #content>
-      <tbody v-for="c in ['dark', 'light']">
-        <tr v-for="i in ['blob', 'chevrons', 'crosses', 'crosshatch', 'dot-dash', 'dots-circles', 'horz-stripes', 'slanted-stripes', 'steps', 'stripe']">
-          <th scope="row" class="d-code--sm d-docsite-code">.d-bgg-pattern-{{ i }}-{{ c }}</th>
-          <td>
-            <div class="d-d-flex d-jc-space-between d-ai-center">
-              <div class="d-fl-grow1 d-code--sm">
-                --bgg-pattern: --bgg-pattern-{{ i }}-{{ c }};
-              </div>
-              <div
-                class="d-w24 d-h24 d-bgg-pattern d-ba d-bc-black-900 d-bar4"
-                :class="[
-                    {'d-bgc-neutral-white': c === 'dark'},
-                    {'d-bgc-neutral-black': c === 'light'},
-                    `d-bgg-pattern-${i}-${c}`
-                ]"
-              >
-              </div>
+<utility-class-table>
+  <template #content>
+    <tbody v-for="c in ['dark', 'light']">
+      <tr v-for="i in ['blob', 'chevrons', 'crosses', 'crosshatch', 'dot-dash', 'dots-circles', 'horz-stripes', 'slanted-stripes', 'steps', 'stripe']">
+        <th scope="row" class="d-code--sm d-docsite-code">.d-bgg-pattern-{{ i }}-{{ c }}</th>
+        <td>
+          <div class="d-d-flex d-jc-space-between d-ai-center">
+            <div class="d-fl-grow1 d-code--sm">
+              --bgg-pattern: --bgg-pattern-{{ i }}-{{ c }};
             </div>
-          </td>
-        </tr>
-      </tbody>
-    </template>
-  </utility-class-table>
-</div>
+            <div
+              class="d-w24 d-h24 d-bgg-pattern d-ba d-bc-black-900 d-bar4"
+              :class="[
+                  {'d-bgc-neutral-white': c === 'dark'},
+                  {'d-bgc-neutral-black': c === 'light'},
+                  `d-bgg-pattern-${i}-${c}`
+              ]"
+            >
+            </div>
+          </div>
+        </td>
+      </tr>
+    </tbody>
+  </template>
+</utility-class-table>
