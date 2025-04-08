@@ -4,6 +4,7 @@
       'd-recipe-leftbar-row__container',
       { 'd-recipe-leftbar-row__container--off-duty': $slots.timer },
     ]"
+    v-bind="addClassStyleAttrs($attrs)"
   >
     <div
       :class="leftbarContactCentersRowClasses"
@@ -15,7 +16,7 @@
         :aria-label="getAriaLabel"
         :title="description"
         :href="$attrs.href ?? 'javascript:void(0)'"
-        v-bind="$attrs"
+        v-bind="removeClassStyleAttrs($attrs)"
         v-on="contactRowListeners"
         @click="$emit('click', $event)"
       >
@@ -76,7 +77,7 @@
 </template>
 
 <script>
-import { extractVueListeners, safeConcatStrings, returnFirstEl } from '@/common/utils';
+import { extractVueListeners, safeConcatStrings, removeClassStyleAttrs, returnFirstEl, addClassStyleAttrs } from '@/common/utils';
 import { DtBadge } from '@/components/badge';
 import { DtButton } from '@/components/button';
 import DtEmojiTextWrapper from '@/components/emoji_text_wrapper/emoji_text_wrapper.vue';
@@ -219,6 +220,9 @@ export default {
   },
 
   methods: {
+    removeClassStyleAttrs,
+    addClassStyleAttrs,
+
     adjustLabelWidth () {
       const labelWidth = returnFirstEl(this.$el)?.querySelector('.d-recipe-leftbar-row__primary')?.clientWidth || 0;
       const omegaWidth = returnFirstEl(this.$el)?.querySelector('.d-recipe-leftbar-row__omega')?.clientWidth || 0;

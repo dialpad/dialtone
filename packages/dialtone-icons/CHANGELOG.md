@@ -1,16 +1,11 @@
-# [4.35.0-rebrand-2025-beta.6](https://github.com/dialpad/dialtone/compare/dialtone-icons/v4.35.0-rebrand-2025-beta.5...dialtone-icons/v4.35.0-rebrand-2025-beta.6) (2025-04-07)
+## [4.34.5](https://github.com/dialpad/dialtone/compare/dialtone-icons/v4.34.4...dialtone-icons/v4.34.5) (2025-04-07)
+
+## [4.34.4](https://github.com/dialpad/dialtone/compare/dialtone-icons/v4.34.3...dialtone-icons/v4.34.4) (2025-04-03)
 
 
 ### Bug Fixes
 
 * NO-JIRA dialtone icons android build ([#691](https://github.com/dialpad/dialtone/issues/691)) ([8c10768](https://github.com/dialpad/dialtone/commit/8c10768d86c7d93707541971287c6de283d9bb85))
-
-# [4.35.0-rebrand-2025-beta.5](https://github.com/dialpad/dialtone/compare/dialtone-icons/v4.35.0-rebrand-2025-beta.4...dialtone-icons/v4.35.0-rebrand-2025-beta.5) (2025-04-03)
-
-
-### Bug Fixes
-
-* **Ci:** NO-JIRA changelog release order ([#689](https://github.com/dialpad/dialtone/issues/689)) ([bd4c080](https://github.com/dialpad/dialtone/commit/bd4c0802a59be6fdafb8f661a9c12c64ef764656))
 
 ## [4.34.3](https://github.com/dialpad/dialtone/compare/dialtone-icons/v4.34.2...dialtone-icons/v4.34.3) (2025-04-02)
 

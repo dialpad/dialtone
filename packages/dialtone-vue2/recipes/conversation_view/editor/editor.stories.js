@@ -44,6 +44,12 @@ export const argTypesData = {
       disable: true,
     },
   },
+
+  onInlineImageClick: {
+    table: {
+      disable: true,
+    },
+  },
 };
 
 // Set default values at the story level here.
@@ -56,6 +62,7 @@ export const argsData = {
   onBlur: action('blur'),
   onInput: action('input'),
   onQuickRepliesClick: action('quick-replies-click'),
+  onInlineImageClick: action('inline-image-click'),
 };
 
 // Story Collection

@@ -1,3 +1,10 @@
+## [8.50.6](https://github.com/dialpad/dialtone/compare/dialtone-css/v8.50.5...dialtone-css/v8.50.6) (2025-04-03)
+
+
+### Bug Fixes
+
+* **Tooltip:** DP-129564 add overflow-wrap for tooltip ([#687](https://github.com/dialpad/dialtone/issues/687)) ([b6d8256](https://github.com/dialpad/dialtone/commit/b6d825647b22b1c18685a895b84985d76a6ce938))
+
 ## [8.50.5](https://github.com/dialpad/dialtone/compare/dialtone-css/v8.50.4...dialtone-css/v8.50.5) (2025-04-02)
 
 

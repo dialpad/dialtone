@@ -202,6 +202,7 @@ import {
   DtIconAlignRight,
   DtIconBold,
   DtIconCodeBlock,
+  DtIconImage,
   DtIconItalic,
   DtIconLightningBolt,
   DtIconLink2,
@@ -236,6 +237,7 @@ export default {
     DtIconQuote,
     DtIconCodeBlock,
     DtIconLink2,
+    DtIconImage,
   },
 
   inheritAttrs: false,
@@ -453,6 +455,14 @@ export default {
     },
 
     /**
+     * Show button to add an inline image
+     */
+    showInlineImageButton: {
+      type: Boolean,
+      default: false,
+    },
+
+    /**
      * Show add link default config.
      */
     showAddLink: {
@@ -501,6 +511,12 @@ export default {
      * @event quick-replies-click
      */
     'quick-replies-click',
+
+    /**
+     * Emit when inline image button is clicked
+     * @event inline-image-click
+     */
+    'inline-image-click',
   ],
 
   data () {
@@ -680,6 +696,14 @@ export default {
           tooltipMessage: 'Code',
           onClick: this.onCodeBlockToggle,
         },
+        {
+          showBtn: this.showInlineImageButton,
+          selector: 'image',
+          icon: DtIconImage,
+          dataQA: 'dt-recipe-editor-inline-image-btn',
+          tooltipMessage: 'Image',
+          onClick: this.onInsertInlineImageClick,
+        },
       ].filter(button => button.showBtn);
     },
 
@@ -813,6 +837,14 @@ export default {
 
     onQuickRepliesClick () {
       this.$emit('quick-replies-click');
+    },
+
+    onInsertInlineImageClick () {
+      this.$emit('inline-image-click');
+    },
+
+    insertInlineImage (imageUrl) {
+      this.$refs.richTextEditor?.editor.chain().focus().setImage({ src: imageUrl }).run();
     },
 
     onBlockquoteToggle () {
