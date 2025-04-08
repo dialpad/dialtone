@@ -57,9 +57,9 @@ const colors = processColorsDocs(props.excludedColors, props.classPrefix);
 </script>
 
 <template>
-  <div v-dt-scrollbar class="d-hmx464 d-bar8 d-ba d-bc-subtle">
+  <div v-if="colors.length" v-dt-scrollbar class="d-hmx464 d-bar8 d-ba d-bc-subtle">
     <div>
-      <table v-if="colors.length" class="d-table dialtone-doc-table">
+      <table class="d-table dialtone-doc-table">
         <thead class="d-bgc-primary d-ps-sticky d-zi-base1 d-t0">
           <tr>
             <th class="d-p0 d-bbw0" scope="col" colspan="3">
