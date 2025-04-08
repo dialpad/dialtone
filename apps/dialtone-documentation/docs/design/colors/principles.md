@@ -11,7 +11,7 @@ description: A systematic and accessible color palette that supports both functi
 
 Dialtone's color system offers a consistent visual foundation with a brand purple, versatile grayscale, and semantic status colors. Subtle gradients are used for promotional accents.
 
-What we prioritize is semantic clarity, ensuring each color serves a distinct purpose within the UI for clear communication and consistency.
+What we prioritize is semantic clarity, ensuring each color serves a distinct purpose within the UI for clear communication and consistency...
 
 <div class="d-m32"></div>
 
