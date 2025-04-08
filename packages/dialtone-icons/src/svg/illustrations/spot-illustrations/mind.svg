@@ -19,7 +19,7 @@
 <path d="M137.551 63.5511L140.215 66.2154" stroke="black" stroke-width="0.224165" stroke-miterlimit="10"/>
 <path d="M137.551 66.2154L140.215 63.5511" stroke="black" stroke-width="0.224165" stroke-miterlimit="10"/>
 <circle cx="110.598" cy="65.5985" r="4.13611" transform="rotate(-118.159 110.598 65.5985)" fill="white"/>
-<circle cx="70.465" cy="48.4649" r="3.00179" transform="rotate(-99.706 70.465 48.4649)" fill='var(--dt-color-black-1000)'/>
+<circle cx="70.465" cy="48.4649" r="3.00179" transform="rotate(-99.706 70.465 48.4649)" fill="black"/>
 <path d="M93.012 31V43.021" stroke="black" stroke-width="0.715402" stroke-miterlimit="10"/>
 <path d="M87 37.0122H99.021" stroke="black" stroke-width="0.715402" stroke-miterlimit="10"/>
 <path d="M88.759 32.7592L97.2619 41.262" stroke="black" stroke-width="0.715402" stroke-miterlimit="10"/>
@@ -50,7 +50,7 @@
 <path d="M137.551 63.5511L140.215 66.2154" stroke="black" stroke-width="0.224165" stroke-miterlimit="10"/>
 <path d="M137.551 66.2154L140.215 63.5511" stroke="black" stroke-width="0.224165" stroke-miterlimit="10"/>
 <circle cx="110.598" cy="65.5985" r="4.13611" transform="rotate(-118.159 110.598 65.5985)" fill="white"/>
-<circle cx="70.465" cy="48.4649" r="3.00179" transform="rotate(-99.706 70.465 48.4649)" fill='var(--dt-color-black-1000)'/>
+<circle cx="70.465" cy="48.4649" r="3.00179" transform="rotate(-99.706 70.465 48.4649)" fill='black'/>
 <path d="M93.012 31V43.021" stroke="black" stroke-width="0.715402" stroke-miterlimit="10"/>
 <path d="M87 37.0122H99.021" stroke="black" stroke-width="0.715402" stroke-miterlimit="10"/>
 <path d="M88.759 32.7592L97.2619 41.262" stroke="black" stroke-width="0.715402" stroke-miterlimit="10"/>
