@@ -4,7 +4,6 @@ on:
   push:
     branches:
       - staging
-      - setup-i18n-actions
   workflow_dispatch:
 
 jobs:
