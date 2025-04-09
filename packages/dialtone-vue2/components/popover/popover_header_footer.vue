@@ -100,7 +100,7 @@ export default {
 
   computed: {
     enhancedCloseButtonProps () {
-      return Object.assign({}, ...this.closeButtonProps, ...$ta('CLOSE_BUTTON'));
+      return Object.assign({}, $ta('CLOSE_BUTTON'), this.closeButtonProps);
     },
   },
 
