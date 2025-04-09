@@ -7,4 +7,3 @@ SET_LANGUAGE = Set language
 CLOSE_BUTTON =
   .aria-label = Close
   .title = Close
-TEST_WORD = Test
