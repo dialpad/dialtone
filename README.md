@@ -34,7 +34,6 @@ If you don't care about theming and just want to use Dialtone with the default l
 
 ```css
 @import "@dialpad/dialtone/css-default-theme";
-
 ```
 
 - Javascript

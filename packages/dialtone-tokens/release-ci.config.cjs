@@ -54,5 +54,9 @@ module.exports = {
       name: 'alpha',
       prerelease: true,
     },
+    {
+      name: 'rebrand-2025-beta',
+      prerelease: true,
+    },
   ],
 };
