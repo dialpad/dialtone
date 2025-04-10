@@ -8,7 +8,7 @@
       border-color="ai"
     >
       <template #subtitle>
-        <span>06:01</span>
+        <span class="d-fvn-tabular">06:01</span>
       </template>
       <template #right>
         <dt-button
@@ -37,7 +37,7 @@
       avatar-seed="1 Participant"
     >
       <template #subtitle>
-        <span>06:01</span>
+        <span class="d-fvn-tabular">06:01</span>
       </template>
       <template #right>
         <dt-button
@@ -82,7 +82,7 @@
         >
       </template>
       <template #subtitle>
-        <span>06:01</span>
+        <span class="d-fvn-tabular">06:01</span>
       </template>
       <template #right>
         <dt-button
@@ -124,7 +124,7 @@
       border-color="ai"
     >
       <template #subtitle>
-        <span>06:01</span>
+        <span class="d-fvn-tabular">06:01</span>
       </template>
       <template #right>
         <dt-button
@@ -161,7 +161,7 @@
           class="d-ai-center"
         >
           <dt-icon-share-screen size="100" />
-          <span>06:01</span>
+          <span class="d-fvn-tabular">06:01</span>
         </dt-stack>
       </template>
       <template #right>
@@ -303,7 +303,7 @@
           class="d-ai-center"
         >
           <dt-icon-share-screen size="100" />
-          <span>06:01</span>
+          <span class="d-fvn-tabular">06:01</span>
         </dt-stack>
       </template>
       <template #right>
@@ -337,9 +337,14 @@
             <dt-stack
               direction="row"
               gap="400"
+              class="d-pl2"
             >
-              <dt-icon-share-screen size="400" />
-              <span class="d-fs-100">Sharing screen</span>
+              <dt-stack
+                class="d-ai-center d-w24"
+              >
+                <dt-icon-share-screen size="400" />
+              </dt-stack>
+              <span class="d-body--sm-compact">Sharing screen</span>
             </dt-stack>
           </template>
           <template #right>
@@ -370,7 +375,7 @@
           class="d-ai-center"
         >
           <dt-icon-share-screen size="100" />
-          <span>06:01</span>
+          <span class="d-fvn-tabular">06:01</span>
         </dt-stack>
       </template>
       <template #right>
