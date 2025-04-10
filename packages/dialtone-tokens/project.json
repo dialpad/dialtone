@@ -32,18 +32,24 @@
         "parallel": false
       }
     },
-    "publish:android-package": {
-      "executor": "nx:run-script",
+    "build:android": {
+      "dependsOn": ["build"],
+      "executor": "nx:run-commands",
       "options": {
         "cwd": "{projectRoot}",
-        "script": "publish:android-package"
+        "commands": [
+          "cp ./AndroidManifest.xml dist/android",
+          "./gradlew publishToMavenLocal"
+        ],
+        "parallel": false
       }
     },
-    "publish:ios-package": {
-      "executor": "nx:run-script",
+    "build:ios": {
+      "dependsOn": ["build"],
+      "executor": "nx:run-commands",
       "options": {
         "cwd": "{projectRoot}",
-        "script": "publish:ios-package"
+        "command": "node ./build-ios.js"
       }
     },
     "publish": {

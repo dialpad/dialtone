@@ -1,7 +1,7 @@
 <template>
   <div
-
     class="d-recipe-editor"
+    v-bind="addClassStyleAttrs($attrs)"
     data-qa="dt-recipe-editor"
     role="presentation"
     @click="$refs.richTextEditor.focusEditor()"
@@ -168,8 +168,9 @@
         :link="true"
         :output-format="htmlOutputFormat"
         :placeholder="placeholder"
+        :use-div-tags="useDivTags"
         data-qa="dt-rich-text-editor"
-        v-bind="$attrs"
+        v-bind="removeClassStyleAttrs($attrs)"
         @blur="onBlur"
         @focus="onFocus"
         @input="onInput($event)"
@@ -189,6 +190,7 @@ import {
   EDITOR_SUPPORTED_LINK_PROTOCOLS,
   EDITOR_DEFAULT_LINK_PREFIX,
 } from './editor_constants.js';
+import { removeClassStyleAttrs, addClassStyleAttrs } from '@/common/utils';
 import { DtButton } from '@/components/button';
 import { DtPopover } from '@/components/popover';
 import { DtStack } from '@/components/stack';
@@ -201,6 +203,7 @@ import {
   DtIconAlignRight,
   DtIconBold,
   DtIconCodeBlock,
+  DtIconImage,
   DtIconItalic,
   DtIconLightningBolt,
   DtIconLink2,
@@ -236,6 +239,7 @@ export default {
     DtIconQuote,
     DtIconCodeBlock,
     DtIconLink2,
+    DtIconImage,
   },
 
   mixins: [],
@@ -455,6 +459,14 @@ export default {
     },
 
     /**
+     * Show button to add an inline image
+     */
+    showInlineImageButton: {
+      type: Boolean,
+      default: false,
+    },
+
+    /**
      * Show add link default config.
      */
     showAddLink: {
@@ -464,6 +476,14 @@ export default {
         setLinkTitle: 'Add a link',
         setLinkInputAriaLabel: 'Input field to add link',
       }),
+    },
+
+    /**
+     * Use div tags instead of paragraph tags to show text
+     */
+    useDivTags: {
+      type: Boolean,
+      default: false,
     },
   },
 
@@ -495,6 +515,12 @@ export default {
      * @event quick-replies-click
      */
     'quick-replies-click',
+
+    /**
+     * Emit when inline image button is clicked
+     * @event inline-image-click
+     */
+    'inline-image-click',
   ],
 
   data () {
@@ -674,6 +700,15 @@ export default {
           tooltipMessage: 'Code',
           onClick: this.onCodeBlockToggle,
         },
+        {
+          showBtn: this.showInlineImageButton,
+          selector: 'image',
+          icon: DtIconImage,
+          dataQA: 'dt-recipe-editor-inline-image-btn',
+          tooltipMessage: 'Image',
+          // Handle getting image
+          onClick: this.onInsertInlineImageClick,
+        },
       ].filter(button => button.showBtn);
     },
 
@@ -696,6 +731,9 @@ export default {
   },
 
   methods: {
+    removeClassStyleAttrs,
+    addClassStyleAttrs,
+
     onInputFocus (event) {
       event?.stopPropagation();
     },
@@ -807,6 +845,14 @@ export default {
 
     onQuickRepliesClick () {
       this.$emit('quick-replies-click');
+    },
+
+    onInsertInlineImageClick () {
+      this.$emit('inline-image-click');
+    },
+
+    insertInlineImage (imageUrl) {
+      this.$refs.richTextEditor?.editor.chain().focus().setImage({ src: imageUrl }).run();
     },
 
     insertInMessageBody (messageContent) {

@@ -78,6 +78,7 @@ import History from '@tiptap/extension-history';
 import Emoji from './extensions/emoji';
 import CustomLink from './extensions/custom_link';
 import ConfigurableImage from './extensions/image';
+import DivParagraph from './extensions/div';
 import { MentionPlugin } from './extensions/mentions/mention';
 import { ChannelPlugin } from './extensions/channels/channel';
 import { SlashCommandPlugin } from './extensions/slash_command/slash_command';
@@ -91,7 +92,7 @@ import { emojiPattern } from 'regex-combined-emojis';
 import mentionSuggestion from './extensions/mentions/suggestion';
 import channelSuggestion from './extensions/channels/suggestion';
 import slashCommandSuggestion from './extensions/slash_command/suggestion';
-import { warnIfUnmounted } from '@/common/utils';
+import { warnIfUnmounted, returnFirstEl } from '@/common/utils';
 import deepEqual from 'deep-equal';
 
 export default {
@@ -368,6 +369,14 @@ export default {
       type: Boolean,
       default: false,
     },
+
+    /**
+     * Show text in HTML div tags instead of paragraph tags
+     */
+    useDivTags: {
+      type: Boolean,
+      default: false,
+    },
   },
 
   emits: [
@@ -448,7 +457,7 @@ export default {
     return {
       editor: null,
       tippyOptions: {
-        appendTo: () => this.$refs.editor.$el.getRootNode()?.querySelector('body'),
+        appendTo: () => returnFirstEl(this.$refs.editor.$el).getRootNode()?.querySelector('body'),
         placement: 'top-start',
       },
     };
@@ -467,7 +476,8 @@ export default {
     // eslint-disable-next-line complexity
     extensions () {
       // These are the default extensions needed just for plain text.
-      const extensions = [Document, Paragraph, Text, History, HardBreak];
+      const extensions = [Document, Text, History, HardBreak];
+      extensions.push(this.useDivTags ? DivParagraph : Paragraph);
 
       if (this.allowBlockquote) {
         extensions.push(Blockquote);
@@ -651,7 +661,7 @@ export default {
   },
 
   mounted () {
-    warnIfUnmounted(this.$el, this.$options.name);
+    warnIfUnmounted(returnFirstEl(this.$el), this.$options.name);
     this.processValue(this.modelValue, false);
   },
 

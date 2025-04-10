@@ -1,7 +1,8 @@
 <template>
   <div
     data-qa="dt-recipe-callbox"
-    class="d-recipe-callbox"
+    :class="[$attrs.class, 'd-recipe-callbox']"
+    :style="$attrs.style"
   >
     <div
       v-if="$slots.video"
