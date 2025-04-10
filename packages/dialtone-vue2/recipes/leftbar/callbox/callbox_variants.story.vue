@@ -17,7 +17,7 @@
           importance="clear"
         >
           <template #icon>
-            <dt-icon-dialpad-ai-color size="400" />
+            <dt-icon-dialpad-sparkle size="400" />
           </template>
         </dt-button>
         <dt-button
@@ -133,7 +133,7 @@
           importance="clear"
         >
           <template #icon>
-            <dt-icon-dialpad-ai-color size="400" />
+            <dt-icon-dialpad-sparkle size="400" />
           </template>
         </dt-button>
         <dt-button
@@ -181,7 +181,7 @@
           importance="clear"
         >
           <template #icon>
-            <dt-icon-dialpad-ai-color size="400" />
+            <dt-icon-dialpad-sparkle size="400" />
           </template>
         </dt-button>
         <dt-button
@@ -247,8 +247,11 @@
             />
             <span>3</span>
           </dt-stack>
-          <span class="d-fs-300">
-            •
+          <span
+            class="d-body--sm-compact"
+            aria-hidden="true"
+          >
+            &bull;
           </span>
           <dt-stack
             direction="row"
@@ -310,7 +313,7 @@
           importance="clear"
         >
           <template #icon>
-            <dt-icon-dialpad-ai-color size="400" />
+            <dt-icon-dialpad-sparkle size="400" />
           </template>
         </dt-button>
         <dt-button
@@ -390,7 +393,7 @@
 import DtRecipeCallbox from './callbox.vue';
 import DtButton from '@/components/button/button.vue';
 import {
-  DtIconDialpadAiColor,
+  DtIconDialpadSparkle,
   DtIconPhoneHangUp,
   DtIconShareScreen,
   DtIconStopFilled,
@@ -410,7 +413,7 @@ export default {
     DtItemLayout,
     DtButton,
     DtRecipeCallbox,
-    DtIconDialpadAiColor,
+    DtIconDialpadSparkle,
     DtIconPhoneHangUp,
     DtIconShareScreen,
     DtIconStopFilled,
