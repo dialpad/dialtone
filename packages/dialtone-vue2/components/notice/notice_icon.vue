@@ -21,6 +21,9 @@ import {
   DtIconAlertTriangle,
   DtIconAlertCircle,
   DtIconBell,
+  DtIconDialpadSparkle,
+  DtIconMessage,
+  DtIconClipboardList,
 } from '@dialpad/dialtone-icons/vue2';
 import { NOTICE_KINDS } from './notice_constants.js';
 
@@ -30,6 +33,10 @@ const kindToIcon = new Map([
   ['warning', DtIconAlertTriangle],
   ['error', DtIconAlertCircle],
   ['base', DtIconBell],
+  ['assist', DtIconDialpadSparkle],
+  ['chat', DtIconMessage],
+  ['playbook', DtIconClipboardList],
+  ['system', DtIconInfo],
 ]);
 
 export default {
@@ -41,6 +48,9 @@ export default {
     DtIconAlertTriangle,
     DtIconAlertCircle,
     DtIconBell,
+    DtIconDialpadSparkle,
+    DtIconMessage,
+    DtIconClipboardList,
   },
 
   props: {

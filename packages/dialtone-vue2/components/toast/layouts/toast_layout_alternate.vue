@@ -10,7 +10,20 @@
     :aria-hidden="(!isShown).toString()"
   >
     <div class="d-toast__dialog">
-      New Toast Layout Placeholder
+      <dt-notice-icon
+        v-if="!hideIcon"
+        :kind="kind"
+        v-on="$listeners"
+      >
+        <!-- @slot Slot for custom icon -->
+        <slot name="icon" />
+      </dt-notice-icon>
+      <div>
+        <p> {{ kind }}</p>
+      </div>
+      <div>
+        {{ getCurrentTime() }}
+      </div>
     </div>
   </div>
 </template>
@@ -18,11 +31,13 @@
 <script>
 import utils from '@/common/utils';
 import SrOnlyCloseButtonMixin from '@/common/mixins/sr_only_close_button';
+import { DtNoticeIcon } from '@/components/notice';
 import { TOAST_ROLES } from '../toast_constants.js';
 export default {
   name: 'ToastLayoutAlternate',
 
   components: {
+    DtNoticeIcon,
   },
 
   mixins: [SrOnlyCloseButtonMixin],
@@ -134,7 +149,22 @@ export default {
     },
   },
 
+  computed: {
+  },
+
   methods: {
+    getCurrentTime () {
+      const time = new Date();
+      let hours = time.getHours();
+      const minutes = time.getMinutes().toString().padStart(2, '0');
+      const amPm = hours >= 12 ? 'pm' : 'am';
+
+      // Convert to 12-hour format
+      hours = (hours % 12) || 12; // Convert 0 to 12 for midnight
+      hours = hours.toString().padStart(2, '0'); // Ensure two digits for hours
+
+      return `${hours}:${minutes}${amPm}`;
+    },
   },
 };
 </script>
