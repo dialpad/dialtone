@@ -20,7 +20,7 @@
       "@dialpad/dialtone-vue@2": {
         "peerDependencies": {
           "vue": "^2.6.0",
-          "@percy/cli-command": "^1.30.7"
+          "@percy/cli-command": "1.30.9"
         }
       },
       "@dialpad/dialtone-vue@3": {
@@ -139,7 +139,7 @@
     "@dialpad/conventional-changelog-angular": "^1.1.1",
     "@dialpad/semantic-release-changelog-json": "^1.0.0",
     "@faker-js/faker": "8.4.1",
-    "@percy/cli": "1.30.7",
+    "@percy/cli": "1.30.9",
     "@percy/storybook": "6.0.3",
     "@semantic-release/changelog": "^6.0.3",
     "@semantic-release/exec": "^6.0.3",
