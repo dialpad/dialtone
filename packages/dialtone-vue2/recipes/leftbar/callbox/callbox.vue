@@ -92,14 +92,13 @@
 <script>
 import { CALLBOX_BADGE_COLORS, CALLBOX_BORDER_COLORS } from './callbox_constants';
 import DtAvatar from '@/components/avatar/avatar.vue';
-import DtTooltip from '@/components/tooltip/tooltip.vue';
 import DtBadge from '@/components/badge/badge.vue';
 import { DtIconPause } from '@dialpad/dialtone-icons/vue2';
 
 export default {
   name: 'DtRecipeCallbox',
 
-  components: { DtBadge, DtAvatar, DtIconPause, DtTooltip },
+  components: { DtBadge, DtAvatar, DtIconPause },
 
   inheritAttrs: false,
 
