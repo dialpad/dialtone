@@ -333,6 +333,18 @@
         "intelligence",
         "voice"
       ],
+      "dialpad-star-reversed": [
+        "dp",
+        "brand",
+        "sparkle",
+        "star"
+      ],
+      "dialpad-star": [
+        "star",
+        "dp",
+        "sparkle",
+        "brand"
+      ],
       "dialpad-logomark": [],
       "dialpad-wfm": [
         "workforce",
