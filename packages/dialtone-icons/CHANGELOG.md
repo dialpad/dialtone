@@ -1,3 +1,11 @@
+# [4.35.0-rebrand-2025-beta.7](https://github.com/dialpad/dialtone/compare/dialtone-icons/v4.35.0-rebrand-2025-beta.6...dialtone-icons/v4.35.0-rebrand-2025-beta.7) (2025-04-11)
+
+
+### Features
+
+* **Icons:** [NO-JIRA] new icons dialpad-star ([#706](https://github.com/dialpad/dialtone/issues/706)) ([f38fefd](https://github.com/dialpad/dialtone/commit/f38fefd0b4bcd9de7780cb3c48b291d9de8dc29a))
+* **Illustrations:** DLT-2424 add rebranded illustrations ([#693](https://github.com/dialpad/dialtone/issues/693)) ([6644761](https://github.com/dialpad/dialtone/commit/6644761f32a3854e0f404cd7416d9a12805bee38))
+
 ## [4.34.5](https://github.com/dialpad/dialtone/compare/dialtone-icons/v4.34.4...dialtone-icons/v4.34.5) (2025-04-07)
 
 ## [4.34.4](https://github.com/dialpad/dialtone/compare/dialtone-icons/v4.34.3...dialtone-icons/v4.34.4) (2025-04-03)
