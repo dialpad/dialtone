@@ -18,7 +18,6 @@
     :initial-focus-element="$attrs.initialFocusElement"
     :content-width="$attrs.contentWidth"
     :show-close-button="$attrs.showCloseButton"
-    :close-button-props="$attrs.closeButtonProps"
     :header-class="$attrs.headerClass"
     :footer-class="$attrs.footerClass"
     :max-height="$attrs.maxHeight"

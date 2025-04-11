@@ -28,7 +28,7 @@
       importance="outlined"
       kind="muted"
       circle
-      v-bind="enhancedCloseButtonProps"
+      v-bind="$ta('CLOSE_BUTTON')"
       @click="$emit('close')"
     >
       <template #icon>
@@ -78,14 +78,6 @@ export default {
       type: Boolean,
       default: false,
     },
-
-    /**
-     * A set of props to be passed into the close button.
-     */
-    closeButtonProps: {
-      type: Object,
-      default: () => {},
-    },
   },
 
   emits: [
@@ -98,13 +90,9 @@ export default {
     'close',
   ],
 
-  computed: {
-    enhancedCloseButtonProps () {
-      return Object.assign({}, $ta('CLOSE_BUTTON'), this.closeButtonProps);
-    },
-  },
-
   methods: {
+    $ta,
+
     focusCloseButton () {
       const closeButton = this.$refs['popover__close-button']?.$el;
       closeButton?.focus();

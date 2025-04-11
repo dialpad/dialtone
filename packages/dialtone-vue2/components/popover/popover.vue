@@ -68,7 +68,6 @@
           :content-class="headerClass"
           type="header"
           :show-close-button="showCloseButton"
-          :close-button-props="closeButtonProps"
           @close="closePopover"
         >
           <template #content>
@@ -228,14 +227,6 @@ export default {
     ariaLabel: {
       type: String,
       default: null,
-    },
-
-    /**
-     * A set of props to be passed into the popover's header close button.
-     */
-    closeButtonProps: {
-      type: Object,
-      default: () => ({}),
     },
 
     /**
