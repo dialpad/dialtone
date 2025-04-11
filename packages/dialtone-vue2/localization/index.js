@@ -1,5 +1,14 @@
 import { LocaleManager, RawBundleSource } from '@dialpad/i18n-vue2';
 
+/**
+ * @type {{[key: string]: string}}
+ */
+export const allowedLocales = {
+  ENGLISH: 'en-US',
+  DIALPADISTAN: 'dp-DP',
+  SPANISH: 'es-LA',
+};
+
 export const DialtoneLocalizationPlugin = {
   async install (Vue) {
     const bundleSource = new RawBundleSource({
@@ -13,7 +22,7 @@ export const DialtoneLocalizationPlugin = {
     const manager = new LocaleManager({
       bundleSource,
       preferredLocale: 'en-US', // optional
-      allowedLocales: ['en-US', 'dp-DP', 'es-LA'], // optional
+      allowedLocales: Object.values(allowedLocales), // optional
       fallbackLocale: 'en-US',
       namespaces: ['dialtone'],
     });
