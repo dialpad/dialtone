@@ -1,3 +1,10 @@
+# [2.182.0](https://github.com/dialpad/dialtone/compare/dialtone-vue2/v2.181.0...dialtone-vue2/v2.182.0) (2025-04-11)
+
+
+### Features
+
+* **Callbox:** NO-JIRA style improvements ([#705](https://github.com/dialpad/dialtone/issues/705)) ([01a5146](https://github.com/dialpad/dialtone/commit/01a51465e823ae3a14ea65b7a4a775685574f904))
+
 # [2.181.0](https://github.com/dialpad/dialtone/compare/dialtone-vue2/v2.180.1...dialtone-vue2/v2.181.0) (2025-04-07)
 
 

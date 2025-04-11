@@ -1,3 +1,10 @@
+# [8.51.0](https://github.com/dialpad/dialtone/compare/dialtone-css/v8.50.6...dialtone-css/v8.51.0) (2025-04-11)
+
+
+### Features
+
+* **Callbox:** NO-JIRA style improvements ([#705](https://github.com/dialpad/dialtone/issues/705)) ([01a5146](https://github.com/dialpad/dialtone/commit/01a51465e823ae3a14ea65b7a4a775685574f904))
+
 ## [8.50.6](https://github.com/dialpad/dialtone/compare/dialtone-css/v8.50.5...dialtone-css/v8.50.6) (2025-04-03)
 
 

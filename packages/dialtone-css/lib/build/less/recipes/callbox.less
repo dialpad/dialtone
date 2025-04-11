@@ -2,21 +2,26 @@
   padding: 0;
   color: var(--dt-color-foreground-primary);
   background-color: var(--dt-color-surface-primary);
-  border-radius: var(--dt-size-radius-300);
+  border-radius: var(--dt-size-radius-400);
 }
 
 .d-recipe-callbox__video {
   display: flex;
-  margin-bottom: var(--dt-space-300-negative);
   overflow: clip;
-  border-radius: var(--dt-size-radius-200) var(--dt-size-radius-200) 0 0;
+  border-radius: var(--dt-size-radius-400) var(--dt-size-radius-400) 0 0;
 }
 
 .d-recipe-callbox__main-content {
   align-items: stretch;
   padding: 0;
   border: var(--dt-size-border-100) solid transparent;
-  border-radius: var(--dt-size-radius-300);
+  border-radius: var(--dt-size-radius-400);
+
+  .d-recipe-callbox__video + &  {
+    border-start-start-radius: 0;
+    border-start-end-radius: 0;
+    border-block-start-width: 0;
+  }
 
   &.d-recipe-callbox__border-default {
     border-color: var(--dt-color-border-default);
@@ -29,29 +34,32 @@
 
   &.d-recipe-callbox__border-critical {
     background: radial-gradient(var(--dt-color-surface-primary), var(--dt-color-surface-primary)) padding-box,
-    radial-gradient(circle, #E7301D, #F78B23) border-box;
+    radial-gradient(circle, var(--dt-color-border-critical-strong), var(--dt-color-border-critical)) border-box;
   }
+}
+
+.d-recipe-callbox__avatar {
+  margin-inline-start: var(--dt-space-200);
 }
 
 .d-recipe-callbox__main-content-top {
   display: flex;
+  gap: var(--dt-space-350);
   align-items: center;
-  padding: var(--dt-space-350) var(--dt-space-400);
+  padding: var(--dt-space-400) var(--dt-space-350) var(--dt-space-350) var(--dt-space-400);
 }
 
 .d-recipe-callbox__main-content-bottom {
-  border-top: 1px solid var(--dt-color-border-subtle);
-}
-
-.d-recipe-callbox__avatar {
-  margin-right: var(--dt-space-400);
+  border-top: var(--dt-size-border-100) solid var(--dt-color-border-subtle);
 }
 
 .d-recipe-callbox__content {
   display: flex;
   flex: 1 0 auto;
   flex-direction: column;
+  gap: var(--dt-space-300);
   min-width: 0;
+  padding-inline-start: var(--dt-space-200);
 }
 
 .d-recipe-callbox__content-title {
@@ -60,14 +68,13 @@
   padding: 0;
   overflow: clip;
   color: var(--dt-color-foreground-primary);
-  font-weight: var(--dt-font-weight-bold);
-  line-height: normal;
+  font: var(--dt-typography-headline-md);
+  line-height: var(--dt-font-line-height-100);
   white-space: nowrap;
   text-align: left;
   text-overflow: ellipsis;
   background-color: var(--dt-color-surface-primary);
   border: none;
-  user-select: text;
 }
 
 .d-recipe-callbox__content-badge {
@@ -80,8 +87,7 @@
   padding: 0;
   overflow: hidden;
   color: var(--dt-color-foreground-tertiary);
-  font-size: var(--dt-font-size-100);
-  line-height: normal;
+  font: var(--dt-typography-body-sm-compact);
 }
 
 .d-recipe-callbox__right {
@@ -101,6 +107,7 @@
     }
 
     &:hover, &:active {
+      color: var(--dt-color-link-primary-hover);
       text-decoration: underline;
     }
   }
