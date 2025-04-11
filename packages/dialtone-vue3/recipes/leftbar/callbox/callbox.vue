@@ -40,8 +40,10 @@
         <div class="d-recipe-callbox__content">
           <component
             :is="clickable ? 'button' : 'span'"
+            v-dt-tooltip="title"
             data-qa="dt-recipe-callbox__title"
             class="d-recipe-callbox__content-title"
+            tabindex="0"
             @click="handleClick"
           >
             {{ title }}
