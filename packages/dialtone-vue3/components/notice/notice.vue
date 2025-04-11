@@ -195,6 +195,7 @@ export default {
         success: 'd-notice--success',
         warning: 'd-notice--warning',
         base: 'd-notice--base',
+        gredient: 'd-notice--gradient',
       };
       return [
         'd-notice',

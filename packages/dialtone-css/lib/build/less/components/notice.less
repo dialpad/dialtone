@@ -41,6 +41,51 @@
     box-shadow: var(--notice-box-shadow);
 }
 
+.d-toast-alternate {
+    //  Component CSS Vars
+    //  ------------------------------------------------------------------------
+    --notice-alternate-color-background: var(--dt-color-neutral-white);
+    --notice-alternate-color-text: var(--dt-color-neutral-black);
+    --notice-alternate-color-icon: var(--notice-alternate-color-text);
+    --notice-alternate-padding: var(--dt-space-450);
+    --notice-alternate-font-size: var(--dt-font-size-200);
+    --notice-alternate-line-height: var(--dt-font-line-height-300);
+    --notice-alternate-border-radius: var(--dt-size-500);
+    --notice-alternate-border-color: var(--dt-color-border-subtle);
+    --notice-alternate-border-style: solid;
+    --notice-alternate-border-width: var(--dt-size-100);
+
+    //  Base Styles
+    //  ------------------------------------------------------------------------
+    display: flex;
+    align-items: center;
+    box-sizing: border-box;
+    width: 100%;
+    max-width: var(--dt-size-1020);
+    padding: var(--notice-alternate-padding);
+    color: var(--notice-alternate-color-text);
+    font-size: var(--notice-alternate-font-size);
+    line-height: var(--notice-alternate-line-height);
+    background-color: var(--notice-alternate-color-background);
+    border: var(--notice-alternate-border-width) var(--notice-alternate-border-style) var(--notice-alternate-border-color);
+    border-radius: var(--notice-alternate-border-radius);
+
+    .d-notice__icon {
+        margin-right: var(--dt-space-300);
+        color: var(--dt-color-foreground-muted);
+    }
+
+    .d-notice__title {
+        font-weight: var(--dt-font-weight-normal);
+        font-size: var(--dt-font-size-100);
+        font-color: var(--dt-color-foreground-muted);
+    }
+
+    .d-notice__actions .base-button__button {
+        padding: var(--dt-size-100);
+    }
+}
+
 //  ============================================================================
 //  $   NOTICE AREAS
 //  ============================================================================
@@ -51,6 +96,16 @@
     flex: 1 auto;
     flex-direction: column;
     margin-right: var(--dt-space-500);
+}
+
+.d-toast-alternate__content {
+    display: flex;
+    flex: 1 auto;
+    flex-direction: column;
+    margin-right: var(--dt-space-500);
+    color: var(--dt-color-foreground-primary);
+    font-weight: var(--dt-font-weight-normal);
+    font-size: var(--dt-font-size-200);
 }
 
 //  $$  ACTIONS
@@ -170,6 +225,15 @@
     }
 }
 
+//  $$  GREDIENT
+//  ----------------------------------------------------------------------------
+.d-notice--gredient,
+.d-banner--gredient,
+.d-toast--gredient {
+    --notice-color-background: var(--dt-color-neutral-white);
+    --notice-border-color: var(--dt-color-brand-magenta);
+}
+
 //  $$  TRUNCATE TEXT
 //  ----------------------------------------------------------------------------
 .d-notice.d-notice--truncate {
@@ -183,4 +247,46 @@
             text-overflow: ellipsis;
         }
     }
+}
+
+
+//  $$  ERROR
+//  ----------------------------------------------------------------------------
+.d-toast-alternate--error,
+.d-banner-alternate--error,
+.d-notice-alternate--error {
+    --notice-alternate-border-color: var(--dt-color-border-critical-subtle);
+}
+
+//  $$  INFO
+//  ----------------------------------------------------------------------------
+
+.d-toast-alternate--info,
+.d-banner-alternate--info,
+.d-notice-alternate--info {
+    --notice-alternate-border-color: var(--dt-color-border-focus);
+}
+
+//  $$  SUCCESS
+//  ----------------------------------------------------------------------------
+.d-toast-alternate--success,
+.d-banner-alternate--success,
+.d-notice-alternate--success {
+    --notice-alternate-border-color: var(--dt-color-border-success-subtle);
+}
+
+//  $$  gredient
+//  ----------------------------------------------------------------------------
+.d-toast-alternate--gradient,
+.d-banner-alternate--gradient,
+.d-notice-alternate--gradient {
+    --notice-alternate-border-color: var(--dt-color-brand-magenta);
+}
+
+//  $$  warning
+//  ----------------------------------------------------------------------------
+.d-toast-alternate--warning,
+.d-banner-alternate--warning,
+.d-notice-alternate--warning {
+    --notice-alternate-border-color: var(--dt-color-border-warning-subtle);
 }

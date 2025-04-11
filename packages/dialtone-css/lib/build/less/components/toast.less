@@ -119,3 +119,56 @@
 .d-toast--viewing {
   --toast-color-background: var(--dt-color-surface-secondary);
 }
+
+//  ============================================================================
+//  @   BASE STYLE
+//  ----------------------------------------------------------------------------
+.d-toast-alternate {
+  //  Component CSS Vars
+  //  ------------------------------------------------------------------------
+  --toast-alternate-color-shadow: hsla(var(--dt-color-black-900-hsl) / 0.15);
+  --toast-alternate-box-shadow: 0 0 0 var(--dt-size-0) var(--toast-alternate-color-shadow) inset, var(--dt-shadow-medium);
+
+  z-index: var(--zi-notification);
+  display: block;
+  max-width: var(--dt-size-975);
+  padding: var(--dt-space-450);
+  word-break: normal;
+  box-shadow: var(--toast-alternate-box-shadow);
+  pointer-events: all;
+
+  //  If there's a link in a toast, break the url so it wraps
+  > a {
+      word-break: break-all;
+  }
+
+  // If you want to hide and reveal the toast
+  &[aria-hidden='true'] {
+      visibility: hidden;
+      opacity: 0;
+  }
+
+  &[aria-hidden='false'] {
+      visibility: visible;
+      opacity: 1;
+  }
+}
+
+//  ============================================================================
+//  $   CONTENT CONTAINER
+//  ----------------------------------------------------------------------------
+.d-toast-alternate__dialog {
+  position: relative;
+  align-items: center;
+
+
+  .d-notice__actions button:first-child {
+      margin-left: var(--dt-space-600); // 32
+  }
+}
+
+.d-toast-alternate__header {
+  display: flex;
+  gap: var(--dt-space-200);
+  align-items: center;
+}

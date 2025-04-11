@@ -32,7 +32,7 @@
 
 <script>
 import { DtIconClose } from '@dialpad/dialtone-icons/vue3';
-import { DtButton } from '@/components/button';
+import { DtButton, BUTTON_SIZE_MODIFIERS } from '@/components/button';
 import SrOnlyCloseButtonMixin from '@/common/mixins/sr_only_close_button';
 import SrOnlyCloseButton from '@/common/sr_only_close_button.vue';
 
@@ -64,6 +64,15 @@ export default {
     hideClose: {
       type: Boolean,
       default: false,
+    },
+
+    /**
+     * Close button size
+     */
+    buttonSize: {
+      type: String,
+      default: 'sm',
+      validator: (s) => Object.keys(BUTTON_SIZE_MODIFIERS).includes(s),
     },
 
     /**
