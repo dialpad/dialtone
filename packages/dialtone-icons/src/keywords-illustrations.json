@@ -89,9 +89,13 @@
         "solid",
         "marketing"
       ],
+      "login-error": [],
+      "mic-detected": [],
       "mind": [
         "mind"
       ],
+      "new-meeting": [],
+      "new-message": [],
       "orbital-harmony": [
         "orbital",
         "harmony"
