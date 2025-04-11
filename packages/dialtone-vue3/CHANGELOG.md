@@ -1,3 +1,17 @@
+# [3.175.0](https://github.com/dialpad/dialtone/compare/dialtone-vue3/v3.174.0...dialtone-vue3/v3.175.0) (2025-04-11)
+
+
+### Features
+
+* **Callbox:** NO-JIRA style improvements ([#705](https://github.com/dialpad/dialtone/issues/705)) ([01a5146](https://github.com/dialpad/dialtone/commit/01a51465e823ae3a14ea65b7a4a775685574f904))
+
+# [3.174.0](https://github.com/dialpad/dialtone/compare/dialtone-vue3/v3.173.2...dialtone-vue3/v3.174.0) (2025-04-07)
+
+
+### Features
+
+* **Editor:** DP-130987 insert inline image through editor ([#692](https://github.com/dialpad/dialtone/issues/692)) ([4616b67](https://github.com/dialpad/dialtone/commit/4616b67e0d8781d932b15200e0f3f7768dd241a7))
+
 ## [3.173.2](https://github.com/dialpad/dialtone/compare/dialtone-vue3/v3.173.1...dialtone-vue3/v3.173.2) (2025-04-03)
 
 

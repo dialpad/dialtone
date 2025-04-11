@@ -97,6 +97,7 @@ jobs:
     needs: [ variables-setup, check-dialpad-member, filter-actions ]
     if: ${{ github.event_name == 'workflow_dispatch' || (github.event_name == 'push' && needs.filter-actions.outputs.packages != '[]') }}
     strategy:
+      fail-fast: false
       matrix:
         package: ${{ fromJSON(needs.filter-actions.outputs.packages) }}
         registry: [ npm, GitHub ]
