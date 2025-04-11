@@ -1,19 +1,11 @@
 {
   "name": "dialtone-icons",
   "targets": {
-    "build": {
+    "pre-build": {
       "executor": "nx:run-commands",
       "options": {
         "cwd": "{projectRoot}",
-        "commands": [
-          {
-            "command": "pnpm exec gulp"
-          },
-          {
-            "command": "nx run-many --target=build --projects=dialtone-icons-vue2,dialtone-icons-vue3,dialtone-icons-android --parallel=3 --output-style=stream"
-          }
-        ],
-        "parallel": false
+        "command": "pnpm exec gulp"
       },
       "inputs": [
         "{projectRoot}/src/**/*",
@@ -23,9 +15,40 @@
       "outputs": [
         "{projectRoot}/src/icons",
         "{projectRoot}/src/illustrations",
-        "{projectRoot}/dist",
+        "{projectRoot}/dist"
+      ]
+    },
+    "build": {
+      "dependsOn": ["pre-build"],
+      "executor": "nx:run-commands",
+      "options": {
+        "cwd": "{projectRoot}",
+        "command": "nx run-many --target=build --projects=dialtone-icons-vue2,dialtone-icons-vue3 --parallel=2 --output-style=stream"
+      },
+      "inputs": [
+        "{projectRoot}/src/**/*",
+        "{projectRoot}/transformSVGtoVue.cjs",
+        "{projectRoot}/gulpfile.cjs"
+      ],
+      "outputs": [
         "{projectRoot}/vue2/dist",
         "{projectRoot}/vue3/dist"
+      ]
+    },
+    "build:android": {
+      "dependsOn": ["pre-build"],
+      "executor": "nx:run-commands",
+      "options": {
+        "cwd": "{projectRoot}/android",
+        "commands": [
+          "nx run dialtone-icons-android:build:android --output-style=stream",
+          "./gradlew publishToMavenLocal"
+        ],
+        "parallel": false
+      },
+      "outputs": [
+        "{projectRoot}/android/src/kotlin/icons",
+        "{projectRoot}/android/src/res/raw"
       ]
     },
     "publish": {
@@ -38,16 +61,6 @@
       "executor": "nx:run-commands",
       "options": {
         "command": "pnpm semantic-release-plus --extends ./packages/dialtone-icons/release-ci.config.cjs && sleep 3",
-        "parallel": false
-      }
-    },
-    "publish:android-package": {
-      "executor": "nx:run-commands",
-      "options": {
-        "cwd": "{projectRoot}/android",
-        "commands": [
-          "./gradlew publishToMavenLocal"
-        ],
         "parallel": false
       }
     }

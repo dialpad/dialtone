@@ -1,3 +1,31 @@
+## [8.50.6](https://github.com/dialpad/dialtone/compare/dialtone-css/v8.50.5...dialtone-css/v8.50.6) (2025-04-03)
+
+
+### Bug Fixes
+
+* **Tooltip:** DP-129564 add overflow-wrap for tooltip ([#687](https://github.com/dialpad/dialtone/issues/687)) ([b6d8256](https://github.com/dialpad/dialtone/commit/b6d825647b22b1c18685a895b84985d76a6ce938))
+
+## [8.50.5](https://github.com/dialpad/dialtone/compare/dialtone-css/v8.50.4...dialtone-css/v8.50.5) (2025-04-02)
+
+
+### Bug Fixes
+
+* **Ci:** NO-JIRA changelog release order ([#689](https://github.com/dialpad/dialtone/issues/689)) ([bd4c080](https://github.com/dialpad/dialtone/commit/bd4c0802a59be6fdafb8f661a9c12c64ef764656))
+
+## [8.50.4](https://github.com/dialpad/dialtone/compare/dialtone-css/v8.50.3...dialtone-css/v8.50.4) (2025-03-31)
+
+
+### Bug Fixes
+
+* **Pagination:** DLT-2373 invalid prop combination on end buttons ([#684](https://github.com/dialpad/dialtone/issues/684)) ([517debb](https://github.com/dialpad/dialtone/commit/517debbbab0c497d13d48230ab9e8d2e9a52c423))
+
+## [8.50.3](https://github.com/dialpad/dialtone/compare/dialtone-css/v8.50.2...dialtone-css/v8.50.3) (2025-03-27)
+
+
+### Bug Fixes
+
+* **Toast:** NO-JIRA put z-index on wrapper ([#677](https://github.com/dialpad/dialtone/issues/677)) ([beca85a](https://github.com/dialpad/dialtone/commit/beca85ab8df20928571edacdd82e9bcd8dd79802))
+
 ## [8.50.2](https://github.com/dialpad/dialtone/compare/dialtone-css/v8.50.1...dialtone-css/v8.50.2) (2025-03-10)
 
 

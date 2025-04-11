@@ -3,6 +3,7 @@
     :is="clickable ? 'button' : 'div'"
     :id="id"
     :class="avatarClasses"
+    :style="$attrs.style"
     data-qa="dt-avatar"
     @click="handleClick"
   >
@@ -302,6 +303,7 @@ export default {
     avatarClasses () {
       return [
         'd-avatar',
+        this.$attrs.class,
         AVATAR_SIZE_MODIFIERS[this.validatedSize],
         this.avatarClass,
         {

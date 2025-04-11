@@ -36,7 +36,7 @@
     >
       <span v-html="$attrs.tooltip" />
     </template>
-    <template #list>
+    <template #list="{ close }">
       <dt-list-item-group
         heading-class="d-py4 d-px8 d-fw-semibold d-c-default"
         heading="Menu Heading A"
@@ -44,6 +44,7 @@
         <dt-list-item
           role="menuitem"
           navigation-type="arrow-keys"
+          @click="close"
         >
           Menu Item 1
         </dt-list-item>
@@ -51,6 +52,7 @@
         <dt-list-item
           role="menuitem"
           navigation-type="arrow-keys"
+          @click="close"
         >
           Menu Item 2
         </dt-list-item>
@@ -63,6 +65,7 @@
         <dt-list-item
           role="menuitem"
           navigation-type="arrow-keys"
+          @click="close"
         >
           Menu Item 3
         </dt-list-item>

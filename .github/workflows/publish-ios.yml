@@ -1,0 +1,71 @@
+name: Publish iOS
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - production
+    paths:
+      - 'packages/dialtone-tokens/dist_ios/**'
+
+env:
+  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+jobs:
+  check-dialpad-member:
+    runs-on: ubuntu-latest
+    steps:
+      # Will prevent the rest of the steps from running on fail
+      - name: Check if user is a dialpad member
+        uses: octokit/request-action@v2.x
+        with:
+          route: GET /orgs/dialpad/members/${{ github.actor }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.DIALTONE_CI_TOKEN }}
+  publish:
+    needs: [ check-dialpad-member ]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Use Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Use pnpm
+        uses: pnpm/action-setup@v3
+        with:
+          version: 9
+          run_install: false
+
+      - name: Get pnpm store directory
+        shell: bash
+        run: |
+          echo "STORE_PATH=$(pnpm store path --silent)" >> $GITHUB_ENV
+
+      - name: Setup pnpm cache
+        uses: actions/cache@v4
+        with:
+          path: ${{ env.STORE_PATH }}
+          key: "${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}"
+          restore-keys: |
+            ${{ runner.os }}-pnpm-store-
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Build swift
+        run: pnpm nx run dialtone-tokens:build:ios
+
+      - name: Publish production - Swift
+        uses: cpina/github-action-push-to-another-repository@v1.5.1
+        env:
+          API_TOKEN_GITHUB: ${{ secrets.DIALTONE_CI_TOKEN }}
+        with:
+          user-email: 'dialtone@dialpad.com'
+          source-directory: 'packages/dialtone-tokens/dist_ios'
+          destination-repository-name: 'dialtone-tokens-swift'
+          destination-github-username: 'dialpad'
+          commit-message: "dialtone-tokens-swift release"

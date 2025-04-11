@@ -4,6 +4,9 @@ import {
   VALIDATION_MESSAGE_TYPES,
 } from '../constants';
 import {
+  configVue2StyleClassAttrs,
+} from '../config';
+import {
   h,
   Comment,
   Text,
@@ -201,6 +204,56 @@ export const extractVueListeners = (attrs) => {
     .filter(([key]) => key.match(/on[A-Z]/));
   return Object.fromEntries(listeners);
 };
+
+/**
+ * $el works very differently than in vue 2, if the first node in the template is a text node
+ * such as a comment it will return that instead of the first actual element. This function
+ * will recursively return the first element in the template instead of the first node.
+ * @param el
+ * @returns {HTMLElement} The first element in the template
+ */
+export const returnFirstEl = (el) => {
+  if (el?.nodeType === Node.ELEMENT_NODE) {
+    return el;
+  } else if (!el?.nodeType) {
+    return null;
+  } else {
+    return returnFirstEl(el?.nextSibling);
+  }
+};
+
+/**
+  Only will apply changes if the config option configVue2StyleClassAttrs is set to true. It is false by default.
+
+  Removes the class and style attributes from the $attrs. This is useful for vue 2 to vue 3 migration
+  purposes so we don't cause breaking changes due to INSTANCE_ATTRS_CLASS_STYLE
+  https://v3-migration.vuejs.org/breaking-changes/attrs-includes-class-style
+
+  Remove the class and style attributes from the v-bind like so so v-bind="removeClassStyleAttrs($attrs)",
+  and then apply them to the root element manually via:
+
+  :class="$attrs.class"
+  :style="$attrs.style"
+*/
+export function removeClassStyleAttrs (attrs) {
+  if (!configVue2StyleClassAttrs) return attrs;
+  const listeners = Object.entries(attrs)
+    .filter(([key]) => !['class', 'style'].includes(key));
+  return Object.fromEntries(listeners);
+}
+
+/**
+  This should be applied to the root element on components using inheritAttrs: false.
+  This will add the class and style attributes back to the root element if configVue2StyleClassAttrs
+  is enabled.
+*/
+export function addClassStyleAttrs (attrs) {
+  if (!configVue2StyleClassAttrs) return {};
+  return {
+    class: attrs.class,
+    style: attrs.style,
+  };
+}
 
 /*
 * Set's a global timer to debounce the execution of a function.
@@ -456,6 +509,9 @@ export default {
   flushPromises,
   kebabCaseToPascalCase,
   extractVueListeners,
+  removeClassStyleAttrs,
+  addClassStyleAttrs,
+  returnFirstEl,
   debounce,
   isOutOfViewPort,
   getPhoneNumberRegex,

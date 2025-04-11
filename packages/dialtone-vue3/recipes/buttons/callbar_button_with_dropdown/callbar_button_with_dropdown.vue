@@ -1,19 +1,20 @@
 <template>
   <div
     class="dt-recipe--callbar-button-with-dropdown"
+    v-bind="addClassStyleAttrs($attrs)"
   >
     <dt-recipe-callbar-button
-      :aria-label="ariaLabel"
-      :disabled="disabled"
       :active="active"
-      :danger="danger"
+      :aria-label="ariaLabel"
       :button-class="buttonClass"
       :button-width-size="buttonWidthSize"
-      :text-class="textClass"
+      :danger="danger"
+      :disabled="disabled"
       :inverted-tooltip="invertedTooltip"
       :show-tooltip="showTooltip"
-      :tooltip-text="tooltipText"
+      :text-class="textClass"
       :tooltip-delay="tooltipDelay"
+      :tooltip-text="tooltipText"
       class="dt-recipe--callbar-button-with-dropdown--main-button"
       @click="buttonClick"
     >
@@ -28,24 +29,24 @@
     <dt-dropdown
       v-if="showArrowButton"
       :id="id"
+      :fallback-placements="fallbackPlacements"
       :open="open"
       :placement="placement"
-      :fallback-placements="fallbackPlacements"
-      padding="none"
       class="dt-recipe--callbar-button-with-dropdown--dropdown-wrapper"
-      v-bind="$attrs"
+      padding="none"
+      v-bind="removeClassStyleAttrs($attrs)"
       @opened="onModalIsOpened"
     >
       <template #anchor>
         <dt-button
+          :active="open"
+          :aria-label="arrowButtonLabel"
+          :class="['dt-recipe--callbar-button-with-dropdown--arrow',
+                   { 'dt-recipe--callbar-button-with-dropdown--arrow--large': !isCompactMode }]"
           circle
           importance="clear"
           size="lg"
-          :class="['dt-recipe--callbar-button-with-dropdown--arrow',
-                   { 'dt-recipe--callbar-button-with-dropdown--arrow--large': !isCompactMode }]"
           width="2rem"
-          :aria-label="arrowButtonLabel"
-          :active="open"
           @click="arrowClick"
         >
           <template #icon>
@@ -56,8 +57,11 @@
           </template>
         </dt-button>
       </template>
-      <template #list>
-        <slot name="list" />
+      <template #list="{ close }">
+        <slot
+          :close="close"
+          name="list"
+        />
       </template>
     </dt-dropdown>
   </div>
@@ -68,7 +72,7 @@ import { DtButton } from '@/components/button';
 import { DtDropdown } from '@/components/dropdown';
 import { DtIconChevronUp } from '@dialpad/dialtone-icons/vue3';
 import { DtRecipeCallbarButton, CALLBAR_BUTTON_VALID_WIDTH_SIZE } from '../callbar_button';
-import utils, { warnIfUnmounted } from '@/common/utils';
+import utils, { warnIfUnmounted, removeClassStyleAttrs, addClassStyleAttrs, returnFirstEl } from '@/common/utils';
 
 export default {
   name: 'DtRecipeCallbarButtonWithDropdown',
@@ -76,9 +80,9 @@ export default {
   components: { DtRecipeCallbarButton, DtDropdown, DtButton, DtIconChevronUp },
 
   /* inheritAttrs: false is generally an option we want to set on library
-    components. This allows any attributes passed in that are not recognized
-    as props to be passed down to another element or component using v-bind:$attrs
-    more info: https://vuejs.org/v2/api/#inheritAttrs */
+   components. This allows any attributes passed in that are not recognized
+   as props to be passed down to another element or component using v-bind:$attrs
+   more info: https://vuejs.org/v2/api/#inheritAttrs */
   inheritAttrs: false,
 
   props: {
@@ -193,7 +197,7 @@ export default {
      * This makes it impossible from the regular declaration (emits: ['click']) to check whether
      * we actually have a click handler or not.
      * We're hacking it by adding an onClick prop: https://github.com/vuejs/core/issues/5220
-    */
+     */
     /* eslint-disable-next-line vue/no-unused-properties */
     onClick: {
       type: Function,
@@ -308,10 +312,12 @@ export default {
   },
 
   mounted () {
-    warnIfUnmounted(this.$el, this.$options.name);
+    warnIfUnmounted(returnFirstEl(this.$el), this.$options.name);
   },
 
   methods: {
+    removeClassStyleAttrs,
+    addClassStyleAttrs,
     arrowClick (ev) {
       this.$emit('arrow-click', ev);
       return this.toggleOpen();

@@ -1,3 +1,48 @@
+# [9.108.0](https://github.com/dialpad/dialtone/compare/dialtone/v9.107.2...dialtone/v9.108.0) (2025-04-07)
+
+
+### Features
+
+* **Editor:** DP-130987 insert inline image through editor ([#692](https://github.com/dialpad/dialtone/issues/692)) ([4616b67](https://github.com/dialpad/dialtone/commit/4616b67e0d8781d932b15200e0f3f7768dd241a7))
+
+## [9.107.2](https://github.com/dialpad/dialtone/compare/dialtone/v9.107.1...dialtone/v9.107.2) (2025-04-03)
+
+
+### Bug Fixes
+
+* DLT-2398 synchronize class attrs on vue 3 components ([#688](https://github.com/dialpad/dialtone/issues/688)) ([ff72641](https://github.com/dialpad/dialtone/commit/ff726419f06647ba0d3d6016fddcf698c13ba21d))
+* NO-JIRA $el in vue 3 ([#690](https://github.com/dialpad/dialtone/issues/690)) ([0027ba7](https://github.com/dialpad/dialtone/commit/0027ba7dbe3c394b9185797790a6408a6eae5234))
+* NO-JIRA dialtone icons android build ([#691](https://github.com/dialpad/dialtone/issues/691)) ([8c10768](https://github.com/dialpad/dialtone/commit/8c10768d86c7d93707541971287c6de283d9bb85))
+* **Tooltip:** DP-129564 add overflow-wrap for tooltip ([#687](https://github.com/dialpad/dialtone/issues/687)) ([b6d8256](https://github.com/dialpad/dialtone/commit/b6d825647b22b1c18685a895b84985d76a6ce938))
+
+## [9.107.1](https://github.com/dialpad/dialtone/compare/dialtone/v9.107.0...dialtone/v9.107.1) (2025-04-02)
+
+
+### Bug Fixes
+
+* **Ci:** NO-JIRA changelog release order ([#689](https://github.com/dialpad/dialtone/issues/689)) ([bd4c080](https://github.com/dialpad/dialtone/commit/bd4c0802a59be6fdafb8f661a9c12c64ef764656))
+* **Emoji Text Wrapper:** DLT-2455 skip vue3 comment vnodes when extracting text for emojis ([#686](https://github.com/dialpad/dialtone/issues/686)) ([62ad982](https://github.com/dialpad/dialtone/commit/62ad98241850ae52e7d0ceeebb83aecb65fa3ad0))
+
+# [9.107.0](https://github.com/dialpad/dialtone/compare/dialtone/v9.106.1...dialtone/v9.107.0) (2025-03-31)
+
+
+### Bug Fixes
+
+* **Pagination:** DLT-2373 invalid prop combination on end buttons ([#684](https://github.com/dialpad/dialtone/issues/684)) ([517debb](https://github.com/dialpad/dialtone/commit/517debbbab0c497d13d48230ab9e8d2e9a52c423))
+
+
+### Features
+
+* **Editor:** DP-131851 added editor support to encase text with div tags ([#685](https://github.com/dialpad/dialtone/issues/685)) ([d0429a3](https://github.com/dialpad/dialtone/commit/d0429a30c4474e02434388b6d782e23b07ac97c8))
+
+## [9.106.1](https://github.com/dialpad/dialtone/compare/dialtone/v9.106.0...dialtone/v9.106.1) (2025-03-27)
+
+
+### Bug Fixes
+
+* **Callbar Button With Dropdown:** DLT-2440 add missing slot prop close ([#682](https://github.com/dialpad/dialtone/issues/682)) ([3034563](https://github.com/dialpad/dialtone/commit/3034563cbc4822e8160151728d3b409b5cf151ac))
+* **Toast:** NO-JIRA put z-index on wrapper ([#677](https://github.com/dialpad/dialtone/issues/677)) ([beca85a](https://github.com/dialpad/dialtone/commit/beca85ab8df20928571edacdd82e9bcd8dd79802))
+
 # [9.106.0](https://github.com/dialpad/dialtone/compare/dialtone/v9.105.2...dialtone/v9.106.0) (2025-03-20)
 
 

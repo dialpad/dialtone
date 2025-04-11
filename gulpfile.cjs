@@ -21,7 +21,7 @@ const del = require('del');
 //  ================================================================================
 const paths = {
   clean: {
-    dist: './dist/**',
+    dist: ['./dist/**'],
   },
   input: {
     css: './packages/dialtone-css/lib/dist/**',
@@ -60,7 +60,7 @@ const cleanUp = (items) => {
 
 //  --  Clean out dist folder
 const cleanDist = () => {
-  return cleanUp([paths.clean.dist]);
+  return cleanUp(paths.clean.dist);
 };
 
 //  ================================================================================

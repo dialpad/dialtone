@@ -143,6 +143,22 @@ describe('DtEmojiTextWrapper Tests', () => {
           });
         });
       });
+
+      describe('When default slot contains html', () => {
+        beforeEach(() => {
+          mockSlots = { default: 'this <strong>noun</strong> being <em>bolded :star_struck:</em> is <!--slightly--> impressive!' }
+
+          updateWrapper();
+        });
+
+        it('Contains emoji component', () => {
+          expect(emoji.exists()).toBe(true);
+        });
+
+        it('Does not render comments as text', () => {
+          expect(wrapper.text()).not.toContain('slightly');
+        });
+      });
     });
 
     describe('When default slot is not provided', () => {

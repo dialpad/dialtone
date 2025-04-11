@@ -163,5 +163,6 @@ export const WithCustomExtensions = {
     allowCode: false,
     allowCodeblock: false,
     link: false,
+    useDivTags: false,
   },
 };
