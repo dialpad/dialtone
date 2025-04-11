@@ -334,6 +334,18 @@
         "voice"
       ],
       "dialpad-logomark": [],
+      "dialpad-star-reversed": [
+        "dp",
+        "brand",
+        "sparkle",
+        "star"
+      ],
+      "dialpad-star": [
+        "star",
+        "dp",
+        "sparkle",
+        "brand"
+      ],
       "dialpad-wfm": [
         "workforce",
         "surfboard",
