@@ -1,6 +1,5 @@
 <template>
   <div
-
     class="d-recipe-editor"
     data-qa="dt-recipe-editor"
     role="presentation"
