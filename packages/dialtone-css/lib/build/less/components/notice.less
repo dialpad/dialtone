@@ -41,6 +41,14 @@
     box-shadow: var(--notice-box-shadow);
 }
 
+.d-toast-alternate {
+  --notice-alternate-border: var(--dt-size-100) solid;
+  --notice-alternate-border-color: var(--dt-color-border-subtle);
+
+  border: var(--notice-alternate-border);
+  border-color: var(--notice-alternate-border-color);
+}
+
 //  ============================================================================
 //  $   NOTICE AREAS
 //  ============================================================================
@@ -122,6 +130,10 @@
     }
 }
 
+.d-toast--failure {
+  --notice-alternate-border-color: var(--dt-color-border-critical-subtle);
+}
+
 //  $$  INFO
 //  ----------------------------------------------------------------------------
 .d-notice--info,
@@ -154,6 +166,10 @@
     }
 }
 
+.d-toast--positive {
+  --notice-alternate-border-color: var(--dt-color-border-success-subtle);
+}
+
 //  $$  WARNING
 //  ----------------------------------------------------------------------------
 .d-notice--warning,
@@ -169,6 +185,29 @@
         --notice-color-text: var(--dt-color-neutral-black);
     }
 }
+
+.d-toast--neutral {
+  --notice-alternate-border-color: var(--dt-color-border-subtle);
+}
+
+//  $$  ASSIST
+// ----------------------------------------------------------------------------
+.d-toast--assist {
+  --notice-alternate-border-color: var(--dt-color-border-accent);
+}
+
+//  $$  PLAYBOOK
+// ----------------------------------------------------------------------------
+.d-toast--playbook {
+  --notice-alternate-border-color: var(--dt-color-border-accent);
+}
+
+//  $$  CHAT
+// ----------------------------------------------------------------------------
+.d-toast--chat {
+  --notice-alternate-border-color: var(--dt-color-border-subtle);
+}
+
 
 //  $$  TRUNCATE TEXT
 //  ----------------------------------------------------------------------------

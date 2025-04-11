@@ -5,6 +5,8 @@
     v-if="isShown"
     :class="[
       'd-toast',
+      'd-toast-alternate',
+      kindClass,
     ]"
     data-qa="dt-toast"
     :aria-hidden="(!isShown).toString()"
@@ -150,6 +152,18 @@ export default {
   },
 
   computed: {
+    kindClass () {
+      const kindClasses = {
+        assist: 'd-toast--assist',
+        chat: 'd-toast--chat',
+        playbook: 'd-toast--playbook',
+        success: 'd-toast--positive',
+        error: 'd-toast--failure',
+        warning: 'd-toast--neutral',
+      };
+
+      return kindClasses[this.kind];
+    },
   },
 
   methods: {
