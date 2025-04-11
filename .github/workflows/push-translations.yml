@@ -4,7 +4,6 @@ on:
   push:
     branches:
       - staging
-      - setup-i18n-actions
     paths:
       - 'packages/dialtone-vue2/localization/en-US.ftl'
 
