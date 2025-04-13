@@ -8,7 +8,7 @@
     <slot>
       <component
         :is="defaultIcon"
-        size="400"
+        :size="size"
       />
     </slot>
   </div>
@@ -21,9 +21,11 @@ import {
   DtIconAlertTriangle,
   DtIconAlertCircle,
   DtIconBell,
+  DtIconSparkle,
 } from '@dialpad/dialtone-icons/vue3';
 import { NOTICE_KINDS } from './notice_constants.js';
 import { hasSlotContent } from '@/common/utils';
+import { ICON_SIZE_MODIFIERS } from '@/components/icon/icon_constants.js';
 
 const kindToIcon = new Map([
   ['info', DtIconInfo],
@@ -31,6 +33,7 @@ const kindToIcon = new Map([
   ['warning', DtIconAlertTriangle],
   ['error', DtIconAlertCircle],
   ['base', DtIconBell],
+  ['gradient', DtIconSparkle],
 ]);
 
 export default {
@@ -43,6 +46,7 @@ export default {
     DtIconAlertTriangle,
     DtIconAlertCircle,
     DtIconBell,
+    DtIconSparkle,
   },
 
   props: {
@@ -56,6 +60,12 @@ export default {
       validate (kind) {
         return NOTICE_KINDS.includes(kind);
       },
+    },
+
+    size: {
+      type: String,
+      default: '400',
+      validator: (s) => Object.keys(ICON_SIZE_MODIFIERS).includes(s),
     },
   },
 

@@ -11,14 +11,14 @@
   >
     <div class="d-toast-alternate__dialog">
       <div class="d-toast-alternate__header">
-        <dt-notice-icon
+        <dt-toast-layout-alternate-icon
           v-if="!hideIcon"
           :kind="kind"
           size="200"
           v-bind="$attrs"
         >
           <slot name="icon" />
-        </dt-notice-icon>
+        </dt-toast-layout-alternate-icon>
         <dt-notice-content
           :title-id="titleId"
           :content-id="contentId"
@@ -56,14 +56,16 @@
 
 <script>
 import utils from '@/common/utils';
-import { DtNoticeIcon, DtNoticeContent, DtNoticeAction, NOTICE_KINDS } from '@/components/notice';
+import { DtNoticeContent, DtNoticeAction } from '@/components/notice';
+import { TOAST_ALTERNATE_KINDS } from '@/components/toast/toast_constants';
+import DtToastLayoutAlternateIcon from '@/components/toast';
 import SrOnlyCloseButtonMixin from '@/common/mixins/sr_only_close_button';
 import { TOAST_ROLES } from '../toast_constants.js';
 export default {
-  name: 'ToastLayoutDefault',
+  name: 'ToastLayoutAlternate',
 
   components: {
-    DtNoticeIcon,
+    DtToastLayoutAlternateIcon,
     DtNoticeContent,
     DtNoticeAction,
   },
@@ -133,7 +135,7 @@ export default {
       type: String,
       default: 'base',
       validator: (kind) => {
-        return NOTICE_KINDS.includes(kind);
+        return TOAST_ALTERNATE_KINDS.includes(kind);
       },
     },
 
