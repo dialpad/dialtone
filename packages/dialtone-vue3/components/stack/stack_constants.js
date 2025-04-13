@@ -8,7 +8,7 @@ export const DT_STACK_DIRECTION = {
 
 export const DT_STACK_RESPONSIVE_BREAKPOINTS = ['sm', 'md', 'lg', 'xl'];
 
-export const DT_STACK_GAP = ['0', '100', '200', '300', '400', '450', '500', '600'];
+export const DT_STACK_GAP = ['0', '50', '100', '200', '300', '350', '400', '450', '500', '525', '550', '600', '625', '650', '700'];
 
 export default {
   DT_STACK_DIRECTION,

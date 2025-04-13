@@ -48,8 +48,7 @@
         kind="warning"
         hide-close
       >
-        When using HTML / CSS code only the visuals of the component are rendered. It may require
-        additional javascript to function the same way as the example.
+        Raw HTML renders visuals only. You may need to add JS to replicate its functionality.
       </dt-banner>
       <div v-dt-scrollbar class="language-html d-hmx332" data-ext="html">
         <pre class="language-html" v-html="highlightedHtml" />
