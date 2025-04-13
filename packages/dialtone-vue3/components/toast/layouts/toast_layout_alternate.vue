@@ -56,10 +56,10 @@
 
 <script>
 import utils from '@/common/utils';
-import { DtNoticeContent, DtNoticeAction, NOTICE_KINDS } from '@/components/notice';
+import { DtNoticeContent, DtNoticeAction } from '@/components/notice';
 import { DtToastLayoutAlternateIcon } from '@/components/toast';
 import SrOnlyCloseButtonMixin from '@/common/mixins/sr_only_close_button';
-import { TOAST_ROLES } from '../toast_constants.js';
+import { TOAST_ROLES, TOAST_ALTERNATE_KINDS } from '../toast_constants.js';
 export default {
   name: 'ToastLayoutAlternate',
 
@@ -134,7 +134,7 @@ export default {
       type: String,
       default: 'base',
       validator: (kind) => {
-        return NOTICE_KINDS.includes(kind);
+        return TOAST_ALTERNATE_KINDS.includes(kind);
       },
     },
 

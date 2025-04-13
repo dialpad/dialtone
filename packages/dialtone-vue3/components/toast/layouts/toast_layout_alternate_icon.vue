@@ -2,7 +2,7 @@
   <div
     v-if="defaultIcon || hasSlotContent($slots.default)"
     aria-hidden="true"
-    class="d-notice__icon"
+    class="d-toast-layout-alternate__icon"
   >
     <slot>
       <component
