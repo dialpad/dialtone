@@ -4,7 +4,6 @@
     aria-hidden="true"
     class="d-notice__icon"
   >
-    <!-- @slot Slot for the main content -->
     <slot>
       <component
         :is="defaultIcon"
@@ -17,34 +16,30 @@
 <script>
 import {
   DtIconInfo,
-  DtIconCheckCircle,
   DtIconAlertTriangle,
-  DtIconAlertCircle,
   DtIconBell,
   DtIconSparkle,
 } from '@dialpad/dialtone-icons/vue3';
-import { NOTICE_KINDS } from './notice_constants.js';
+import { TOAST_ALTERNATE_KINDS } from '../toast_constants.js';
 import { hasSlotContent } from '@/common/utils';
 import { ICON_SIZE_MODIFIERS } from '@/components/icon/icon_constants.js';
 
 const kindToIcon = new Map([
   ['info', DtIconInfo],
-  ['success', DtIconCheckCircle],
+  ['success', DtIconInfo],
   ['warning', DtIconAlertTriangle],
-  ['error', DtIconAlertCircle],
+  ['error', DtIconInfo],
   ['base', DtIconBell],
   ['gradient', DtIconSparkle],
 ]);
 
 export default {
   compatConfig: { MODE: 3 },
-  name: 'DtNoticeIcon',
+  name: 'DtToastLayoutAlternateIcon',
 
   components: {
     DtIconInfo,
-    DtIconCheckCircle,
     DtIconAlertTriangle,
-    DtIconAlertCircle,
     DtIconBell,
     DtIconSparkle,
   },
@@ -58,7 +53,7 @@ export default {
       type: String,
       default: 'base',
       validate (kind) {
-        return NOTICE_KINDS.includes(kind);
+        return TOAST_ALTERNATE_KINDS.includes(kind);
       },
     },
 
