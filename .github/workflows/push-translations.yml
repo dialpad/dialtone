@@ -1,0 +1,40 @@
+name: Push to translation service
+
+on:
+  push:
+    branches:
+      - staging
+    paths:
+      - 'packages/dialtone-vue2/localization/en-US.ftl'
+
+jobs:
+  push-translations:
+    runs-on: ubuntu-latest
+
+    defaults:
+      run:
+        shell: bash -o pipefail {0}
+        working-directory: ./packages/dialtone-vue2
+
+    env:
+      SMARTLING_BASE_URL: "https://api.smartling.com"
+      SMARTLING_AUTH_PATH: "/auth-api/v2/authenticate"
+      SMARTLING_FILES_PATH: "/files-api/v2/projects"
+      SMARTLING_PROJECTS_PATH: "/projects-api/v2/projects"
+      SMARTLING_JOBS_PATH: "/jobs-api/v3/projects"
+      SMARTLING_PROJECT_ID: ${{ vars.SMARTLING_PROJECT_ID }}
+      INJECT_PLACEHOLDER_WORKAROUND: ${{ vars.INJECT_PLACEHOLDER_WORKAROUND }}
+      SMARTLING_API_USER: ${{ secrets.SMARTLING_API_USER }}
+      SMARTLING_API_SECRET: ${{ secrets.SMARTLING_API_SECRET }}
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
+
+      - name: Setup Environment
+        uses: ./.github/actions/setup-environment
+
+      - name: Convert and upload en-US.ftl to third party service
+        run: pnpm exec upload-translation-service --use-ftl-flow ${{ vars.USE_FTL_FLOW }}

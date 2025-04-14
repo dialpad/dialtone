@@ -1,0 +1,9 @@
+CLICK_TO_CLOSE = Ĉ£īĉʞ †ů ĉ£ůšά
+CLICK_TO_OPEN = Ĉ£īĉʞ †ů ůþάŋ
+ENGLISH = Άŋğ£īšħ
+SPANISH = Šþëŋīšħ
+DIALPADISTAN = Ḍīë£þëḍīš†ëŋ
+SET_LANGUAGE = Šά† £ëŋğøëğά
+CLOSE_BUTTON =
+    .aria-label = Ĉ£ůšά
+    .title = Ĉ£ůšά
