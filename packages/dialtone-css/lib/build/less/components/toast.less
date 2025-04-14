@@ -149,8 +149,8 @@
   align-items: center;
   box-sizing: border-box;
   width: var(--dt-size-100-percent);
+  min-width: var(--dt-size-925);
   max-width: var(--dt-size-1020);
-  max-width: var(--dt-size-975);
   padding: var(--toast-alternate-padding);
   padding: var(--dt-space-450);
   color: var(--toast-alternate-color-text);
@@ -190,6 +190,7 @@
     color: var(--dt-color-foreground-muted);
     font-weight: var(--dt-font-weight-normal);
     font-size: var(--dt-font-size-100);
+    word-break: break-all;
   }
 
   .d-notice__actions .base-button__button {
@@ -209,6 +210,7 @@
   color: var(--dt-color-foreground-primary);
   font-weight: var(--dt-font-weight-normal);
   font-size: var(--dt-font-size-200);
+  word-break: break-all;
 }
 
 .d-toast-alternate__dialog {
@@ -250,7 +252,8 @@
 //  $$  GRADIENT
 //  ----------------------------------------------------------------------------
 .d-toast-alternate--gradient {
-    --toast-alternate-border-color: var(--dt-color-brand-magenta);
+  background: linear-gradient(var(--dt-color-neutral-white), var(--dt-color-neutral-white)) padding-box,
+  var(--dt-color-border-ai) border-box;
 }
 
 //  $$  warning
