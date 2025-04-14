@@ -33,7 +33,7 @@ describe('DtCheckbox Tests', () => {
   let input;
   let label;
   let description;
-  let labelDescriptionContainer;
+  let descriptionMessagesContainer;
 
   const updateWrapper = () => {
     wrapper = mount(DtCheckbox, {
@@ -49,7 +49,7 @@ describe('DtCheckbox Tests', () => {
     input = wrapper.find('input');
     label = wrapper.find('[data-qa="checkbox-label"]');
     description = wrapper.find('[data-qa="checkbox-description"]');
-    labelDescriptionContainer = wrapper.find('[data-qa="checkbox-label-description-container"]');
+    descriptionMessagesContainer = wrapper.find('[data-qa="checkbox-description-messages"]');
   };
 
   beforeEach(() => {
@@ -132,8 +132,8 @@ describe('DtCheckbox Tests', () => {
         expect(label.exists()).toBe(false);
       });
 
-      it('should remove the checkbox label/description container if neither is provided', () => {
-        expect(labelDescriptionContainer.exists()).toBe(false);
+      it('should remove the checkbox description/messages container if neither is provided', () => {
+        expect(descriptionMessagesContainer.exists()).toBe(false);
       });
 
       it('should keep the input checkbox', () => {
