@@ -1,5 +1,5 @@
 ---
-title: Color Principles
+title: Color
 description: A systematic and accessible color palette that supports both functional needs and personalized experiences within our products.
 ---
 
@@ -35,7 +35,7 @@ Semantic colors are our messengers, conveying feedback, status, and urgency. The
 
 ## Use Semantic Color Tokens
 
-Dialtone uses **semantic tokens** for color, representing a color's *purpose* in the UI. See our **design token list** for descriptions guiding their application.
+Dialtone uses **semantic tokens** for color, representing a color's *purpose* in the UI. See our [See our design token list](https://dialtone.dialpad.com/tokens/) for descriptions guiding their application.
 
 <div class="d-bgc-purple-400 d-bgo10 d-bar12"><svg-loader class="d-fl1" name="color-tokens" /></div>
 
@@ -181,12 +181,12 @@ Embrace semantic tokens to separate color values from their contextual meaning, 
 <dialtone-usage>
 <template #do>
 
-- ...
+<div class="d-bgc-purple-400 d-bgo10 d-bar12"><svg-loader class="d-fl1" name="color-contrast-do" /></div>
 </template>
 
 <template #dont>
 
-- ...
+<div class="d-bgc-purple-400 d-bgo10 d-bar12"><svg-loader class="d-fl1" name="color-contrast-dont" /></div>
 
 </template>
 
@@ -201,12 +201,12 @@ Maintain color consistency across similar components to build intuitive user pat
 <dialtone-usage>
 <template #do>
 
-- ...
+<div class="d-bgc-purple-400 d-bgo10 d-bar12"><svg-loader class="d-fl1" name="color-uniform-do" /></div>
 </template>
 
 <template #dont>
 
-- ...
+<div class="d-bgc-purple-400 d-bgo10 d-bar12"><svg-loader class="d-fl1" name="color-uniform-dont" /></div>
 
 </template>
 
@@ -230,5 +230,5 @@ Dialtone is designed to seamlessly support both light and dark themes. We supply
 
 ## Related
 
-- If you need full list of our color palette, [Check out our list of colors](https://dialtone.dialpad.com/colors/).
-- [See our entire token catalog with full descriptions and vaues of all tokens.](https://dialtone.dialpad.com/tokens/).
+- If you need full list of our color palette, [Check out our list of colors](https://dialtone.dialpad.com/design/colors/).
+- [See our entire token catalog with full descriptions and values of all tokens.](https://dialtone.dialpad.com/tokens/).
