@@ -29,7 +29,6 @@ export const InputMixin = {
 
     /**
      * The value of the input
-     * @model value
      */
     value: {
       type: [String, Number, Boolean, Object],
@@ -151,16 +150,12 @@ export const InputMixin = {
  * @displayName Checkable Mixin
  */
 export const CheckableMixin = {
-  model: {
-    prop: 'checked',
-  },
-
   props: {
     /**
-     * Used to set the state of the checkable input
-     * @model checked
+     * Used to set the checked state of the checkable input
+     * @model modelValue
      */
-    checked: {
+    modelValue: {
       type: Boolean,
       default: false,
     },
@@ -182,13 +177,13 @@ export const CheckableMixin = {
 
   data () {
     return {
-      internalChecked: this.checked,
+      internalChecked: this.modelValue,
       internalIndeterminate: this.indeterminate,
     };
   },
 
   watch: {
-    checked (newChecked) {
+    modelValue (newChecked) {
       // update internal checked when the prop changes
       this.internalChecked = newChecked;
     },

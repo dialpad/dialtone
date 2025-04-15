@@ -13,7 +13,7 @@ const MOCK_PROP_VALUE = 'prop';
 
 const baseProps = {
   name: 'test-radio-group',
-  value: '',
+  modelValue: '',
 };
 const baseAttrs = { 'aria-label': 'Test Radio Group' };
 const baseSlots = {};
@@ -153,9 +153,9 @@ describe('DtRadioGroup Tests', () => {
       updateWrapper();
     });
 
-    describe('When an initial value is provided', () => {
+    describe('When an initial modelValue is provided', () => {
       it('updates provide object', () => {
-        mockProps = { value: MOCK_SELECTED_VALUE };
+        mockProps = { modelValue: MOCK_SELECTED_VALUE };
 
         updateWrapper();
 

@@ -54,7 +54,7 @@ export const argTypesData = {
       type: 'text',
     },
   },
-  checked: {
+  modelValue: {
     description: 'Used to set the initial state of the radio',
     control: 'boolean',
     table: {

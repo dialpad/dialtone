@@ -190,7 +190,8 @@ htmlCode='
 '
 vueCode='
 <dt-input label="Label" placeholder="Placeholder" />
-<dt-input label="Label" value="Value" />
+<!-- IMPORTANT NOTE: Change model-value to just value in Vue 2 -->
+<dt-input label="Label" model-value="Value" />
 <dt-input label="Label" placeholder="Placeholder" disabled />
 '
 showHtmlWarning />
@@ -220,7 +221,8 @@ htmlCode='
 '
 vueCode='
 <dt-input label="Label" placeholder="Placeholder" type="textarea" />
-<dt-input label="Label" type="textarea" value="Value" />
+<!-- IMPORTANT NOTE: Change model-value to just value in Vue 2 -->
+<dt-input label="Label" type="textarea" model-value="Value" />
 <dt-input label="Label" placeholder="Placeholder" type="textarea" disabled />
 '
 showHtmlWarning />
@@ -292,9 +294,10 @@ htmlCode='
 </div>
 '
 vueCode='
-<dt-input label="Label" type="email" value="Value" :messages="[messages.error]"/>
-<dt-input label="Label" type="email" value="Value" :messages="[messages.success]"/>
-<dt-input label="Label" type="email" value="Value" :messages="[messages.warning]"/>
+<!-- IMPORTANT NOTE: Change model-value to just value in Vue 2 -->
+<dt-input label="Label" type="email" model-value="Value" :messages="[messages.error]"/>
+<dt-input label="Label" type="email" model-value="Value" :messages="[messages.success]"/>
+<dt-input label="Label" type="email" model-value="Value" :messages="[messages.warning]"/>
 '
 showHtmlWarning />
 
@@ -325,9 +328,10 @@ htmlCode='
 </div>
 '
 vueCode='
-<dt-input label="Label" type="textarea" value="Value" :messages="[messages.error]"/>
-<dt-input label="Label" type="textarea" value="Value" :messages="[messages.success]"/>
-<dt-input label="Label" type="textarea" value="Value" :messages="[messages.warning]"/>
+<!-- IMPORTANT NOTE: Change model-value to just value in Vue 2 -->
+<dt-input label="Label" type="textarea" model-value="Value" :messages="[messages.error]"/>
+<dt-input label="Label" type="textarea" model-value="Value" :messages="[messages.success]"/>
+<dt-input label="Label" type="textarea" model-value="Value" :messages="[messages.warning]"/>
 '
 showHtmlWarning />
 
@@ -342,7 +346,8 @@ showHtmlWarning />
 <code-example-tabs
 :htmlCode='() => $refs.multipleMessages'
 vueCode='
-<dt-input label="Label" type="email" value="Value" :messages="multipleMessages" />
+<!-- IMPORTANT NOTE: Change model-value to just value in Vue 2 -->
+<dt-input label="Label" type="email" model-value="Value" :messages="multipleMessages" />
 '
 />
 

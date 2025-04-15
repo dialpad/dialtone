@@ -137,7 +137,7 @@ describe('DtRadio Tests', () => {
 
     describe('When checked', () => {
       it('should be checked', () => {
-        mockProps = { checked: true };
+        mockProps = { modelValue: true };
 
         updateWrapper();
 

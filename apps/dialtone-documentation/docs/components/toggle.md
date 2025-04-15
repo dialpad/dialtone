@@ -49,11 +49,11 @@ The Toggle component acts as a way to allow the User to switch between two mutua
 <code-well-header>
   <dt-stack as="fieldset" gap="400">
     <dt-toggle label-class="d-mr6">Unchecked Toggle</dt-toggle>
-    <dt-toggle checked label-class="d-mr6">Checked Toggle</dt-toggle>
+    <dt-toggle :model-value="true" label-class="d-mr6">Checked Toggle</dt-toggle>
     <dt-toggle disabled label-class="d-mr6">Unchecked Disabled</dt-toggle>
-    <dt-toggle checked disabled label-class="d-mr6">Checked Disabled</dt-toggle>
-    <dt-toggle checked="mixed" label-class="d-mr6">Indeterminate Toggle</dt-toggle>
-    <dt-toggle checked="mixed" label-class="d-mr6" disabled>Indeterminate Disabled</dt-toggle>
+    <dt-toggle :model-value="true" disabled label-class="d-mr6">Checked Disabled</dt-toggle>
+    <dt-toggle :model-value="mixed" label-class="d-mr6">Indeterminate Toggle</dt-toggle>
+    <dt-toggle :model-value="mixed" label-class="d-mr6" disabled>Indeterminate Disabled</dt-toggle>
     <dt-toggle label-class="d-mr6" :show-icon="false">Without icon</dt-toggle>
   </dt-stack>
 </code-well-header>
@@ -92,19 +92,19 @@ vueCode='
 <dt-toggle>
   Unchecked Toggle
 </dt-toggle>
-<dt-toggle :checked="true">
+<dt-toggle :model-value="true">
   Checked Toggle
 </dt-toggle>
 <dt-toggle :disabled="true">
   Unchecked Disabled
 </dt-toggle>
-<dt-toggle :checked="true" :disabled="true">
+<dt-toggle :model-value="true" :disabled="true">
   Checked Disabled
 </dt-toggle>
-<dt-toggle checked="mixed">
+<dt-toggle model-value="mixed">
   Indeterminate Toggle
 </dt-toggle>
-<dt-toggle checked="mixed" :disabled="true">
+<dt-toggle model-value="mixed" :disabled="true">
   Indeterminate Disabled
 </dt-toggle>
 <dt-toggle :show-icon="false">
