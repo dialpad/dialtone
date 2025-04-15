@@ -4,7 +4,6 @@
     :class="[
       'd-toast-alternate',
       kindClass,
-      { 'd-toast-alternate--important': important },
     ]"
     data-qa="dt-toast"
     :aria-hidden="(!isShown).toString()"
@@ -57,7 +56,7 @@
 <script>
 import utils from '@/common/utils';
 import { DtNoticeContent, DtNoticeAction } from '@/components/notice';
-import { DtToastLayoutAlternateIcon } from '@/components/toast';
+import DtToastLayoutAlternateIcon from './toast_layout_alternate_icon.vue';
 import SrOnlyCloseButtonMixin from '@/common/mixins/sr_only_close_button';
 import { TOAST_ROLES, TOAST_ALTERNATE_KINDS } from '../toast_constants.js';
 export default {

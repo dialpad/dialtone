@@ -1,12 +1,12 @@
 <template>
   <div
-    v-if="defaultIcon || hasSlotContent($slots.default)"
     aria-hidden="true"
     class="d-toast-layout-alternate__icon"
   >
     <slot>
       <component
         :is="defaultIcon"
+        v-if="defaultIcon"
         :size="size"
       />
     </slot>
@@ -21,7 +21,6 @@ import {
   DtIconSparkle,
 } from '@dialpad/dialtone-icons/vue3';
 import { TOAST_ALTERNATE_KINDS } from '../toast_constants.js';
-import { hasSlotContent } from '@/common/utils';
 import { ICON_SIZE_MODIFIERS } from '@/components/icon/icon_constants.js';
 
 const kindToIcon = new Map([
@@ -62,12 +61,6 @@ export default {
       default: '400',
       validator: (s) => Object.keys(ICON_SIZE_MODIFIERS).includes(s),
     },
-  },
-
-  data () {
-    return {
-      hasSlotContent,
-    };
   },
 
   computed: {

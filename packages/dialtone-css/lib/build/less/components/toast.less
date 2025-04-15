@@ -132,7 +132,6 @@
   --toast-alternate-color-text: var(--dt-color-foreground-primary);
   --toast-alternate-color-icon: var(--dt-color-foreground-muted);
   --toast-alternate-font-color: var(--dt-color-foreground-tertiary);
-  --toast-alternate-padding: var(--dt-space-450);
   --toast-alternate-font-size: var(--dt-font-size-200);
   --toast-alternate-line-height: var(--dt-font-line-height-300);
   --toast-alternate-border-radius: var(--dt-size-500);
@@ -145,14 +144,10 @@
   //  Base Styles
   //  ------------------------------------------------------------------------
   display: flex;
-  display: block;
   align-items: center;
   box-sizing: border-box;
-  width: var(--dt-size-100-percent);
-  min-width: var(--dt-size-925);
-  max-width: var(--dt-size-1020);
-  padding: var(--toast-alternate-padding);
-  padding: var(--dt-space-450);
+  width: var(--dt-size-925);
+  padding: var(--dt-space-350) var(--dt-space-350) var(--dt-space-450) var(--dt-space-450);
   color: var(--toast-alternate-color-text);
   font-size: var(--toast-alternate-font-size);
   line-height: var(--toast-alternate-line-height);
@@ -187,10 +182,9 @@
   }
 
   .d-notice__title {
-    color: var(--dt-color-foreground-muted);
+    color: var(--dt-color-foreground-tertiary);
     font-weight: var(--dt-font-weight-normal);
     font-size: var(--dt-font-size-100);
-    word-break: break-all;
   }
 
   .d-notice__actions .base-button__button {
@@ -210,16 +204,16 @@
   color: var(--dt-color-foreground-primary);
   font-weight: var(--dt-font-weight-normal);
   font-size: var(--dt-font-size-200);
-  word-break: break-all;
 }
 
 .d-toast-alternate__dialog {
   position: relative;
   align-items: center;
+  width: var(--dt-size-100-percent);
 
 
   .d-notice__actions button:first-child {
-      margin-left: var(--dt-space-600); // 32
+    margin-left: var(--dt-space-600); // 32
   }
 }
 
@@ -227,7 +221,7 @@
   display: flex;
   gap: var(--dt-space-200);
   align-items: center;
-  font-color: var(--toast-alternate-font-color);
+  color: var(--toast-alternate-font-color);
 }
 
 //  $$  ERROR
@@ -252,7 +246,7 @@
 //  $$  GRADIENT
 //  ----------------------------------------------------------------------------
 .d-toast-alternate--gradient {
-  background: linear-gradient(var(--dt-color-neutral-white), var(--dt-color-neutral-white)) padding-box,
+  background: linear-gradient(var(--dt-color-surface-primary), var(--dt-color-surface-primary)) padding-box,
   var(--dt-color-border-ai) border-box;
 }
 
