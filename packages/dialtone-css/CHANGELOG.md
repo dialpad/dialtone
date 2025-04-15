@@ -1,3 +1,10 @@
+# [8.52.0](https://github.com/dialpad/dialtone/compare/dialtone-css/v8.51.0...dialtone-css/v8.52.0) (2025-04-15)
+
+
+### Features
+
+* **Stack:** DLT-2474 add more gap options and improve their discoverability ([#709](https://github.com/dialpad/dialtone/issues/709)) ([d5e35fa](https://github.com/dialpad/dialtone/commit/d5e35fafd629149a9d568182d0291d0d79ee46c2))
+
 # [8.51.0](https://github.com/dialpad/dialtone/compare/dialtone-css/v8.50.6...dialtone-css/v8.51.0) (2025-04-11)
 
 
