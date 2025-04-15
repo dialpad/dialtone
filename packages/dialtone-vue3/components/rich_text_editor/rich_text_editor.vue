@@ -702,7 +702,11 @@ export default {
                 return false;
               }
 
-              this.editor.chain().focus().insertContent(pastedContent).run();
+              const htmlContent = pastedContent
+              .replace(/\n/g, '<br>') // Convert newlines to <br>
+              .replace(/ {2}/g, '&nbsp;&nbsp;'); // Convert multiple spaces
+
+              this.editor.chain().focus().insertContent(htmlContent).run();
               return true; // Prevent the default paste behavior
             }
 
