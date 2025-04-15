@@ -1,3 +1,11 @@
+## [3.176.1](https://github.com/dialpad/dialtone/compare/dialtone-vue3/v3.176.0...dialtone-vue3/v3.176.1) (2025-04-15)
+
+
+### Bug Fixes
+
+* **Checkbox:** DP-137343 fix label clickable area ([#708](https://github.com/dialpad/dialtone/issues/708)) ([d74d937](https://github.com/dialpad/dialtone/commit/d74d9377148770185e9675fe10c4ee00b8f07d91))
+* **Editor:** DP-130987 add text-input event ([#714](https://github.com/dialpad/dialtone/issues/714)) ([9445eb9](https://github.com/dialpad/dialtone/commit/9445eb9ecaed5fa301fb28b98e7d4c9830f0aa63))
+
 # [3.176.0](https://github.com/dialpad/dialtone/compare/dialtone-vue3/v3.175.0...dialtone-vue3/v3.176.0) (2025-04-15)
 
 
