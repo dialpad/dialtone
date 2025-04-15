@@ -171,6 +171,7 @@
         :use-div-tags="useDivTags"
         data-qa="dt-rich-text-editor"
         v-bind="$attrs"
+        @text-input="onTextInput"
         @blur="onBlur"
         @focus="onFocus"
         @input="onInput($event)"
@@ -517,6 +518,11 @@ export default {
      * @event inline-image-click
      */
     'inline-image-click',
+
+    /**
+     * Emit when text content changes (not raw html)
+     */
+     'text-input',
   ],
 
   data () {
@@ -857,6 +863,10 @@ export default {
 
     setCursorPosition (position = null) {
       this.$refs.richTextEditor?.editor.chain().focus(position).run();
+    },
+
+    onTextInput (event) {
+      this.$emit('text-input', event);
     },
 
     onFocus (event) {

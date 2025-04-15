@@ -171,6 +171,7 @@
         :use-div-tags="useDivTags"
         data-qa="dt-rich-text-editor"
         v-bind="removeClassStyleAttrs($attrs)"
+        @text-input="onTextInput"
         @blur="onBlur"
         @focus="onFocus"
         @input="onInput($event)"
@@ -521,6 +522,13 @@ export default {
      * @event inline-image-click
      */
     'inline-image-click',
+
+    /**
+     * Emit when text input is changed
+     * @event text-input
+     * @type {String}
+     */
+    'text-input',
   ],
 
   data () {
@@ -865,6 +873,10 @@ export default {
 
     onBlockquoteToggle () {
       this.$refs.richTextEditor?.editor.chain().focus().toggleBlockquote().run();
+    },
+
+    onTextInput (input) {
+      this.$emit('text-input', input);
     },
 
     onFocus (event) {

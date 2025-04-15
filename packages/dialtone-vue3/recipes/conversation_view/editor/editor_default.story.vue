@@ -35,6 +35,7 @@
       @input="$attrs.onInput"
       @quick-replies-click="$attrs.onQuickRepliesClick"
       @inline-image-click="$attrs.onInlineImageClick"
+      @text-input="$attrs.onTextInput"
     />
     <p><strong>Editor content is:</strong></p>
     <span>{{ value }}</span>
