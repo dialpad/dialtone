@@ -1,6 +1,6 @@
 import Vue from 'vue';
 import { DtValidationMessages } from '@/components/validation_messages';
-import { validationMessageValidator } from '../validators';
+import { validationMessageValidator } from '@/common/validators';
 import {
   getUniqueString,
   formatMessages,
