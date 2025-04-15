@@ -108,7 +108,7 @@ jobs:
             registry_url: //registry.npmjs.org/
     runs-on: ubuntu-latest
     permissions:
-      packages: read
+      packages: write
     steps:
       - name: Checkout
         uses: actions/checkout@v4
