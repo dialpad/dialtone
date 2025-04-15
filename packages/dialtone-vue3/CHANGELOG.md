@@ -1,3 +1,10 @@
+# [3.176.0](https://github.com/dialpad/dialtone/compare/dialtone-vue3/v3.175.0...dialtone-vue3/v3.176.0) (2025-04-15)
+
+
+### Features
+
+* **Stack:** DLT-2474 add more gap options and improve their discoverability ([#709](https://github.com/dialpad/dialtone/issues/709)) ([d5e35fa](https://github.com/dialpad/dialtone/commit/d5e35fafd629149a9d568182d0291d0d79ee46c2))
+
 # [3.175.0](https://github.com/dialpad/dialtone/compare/dialtone-vue3/v3.174.0...dialtone-vue3/v3.175.0) (2025-04-11)
 
 
