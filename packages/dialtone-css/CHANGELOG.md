@@ -1,3 +1,10 @@
+## [8.52.1](https://github.com/dialpad/dialtone/compare/dialtone-css/v8.52.0...dialtone-css/v8.52.1) (2025-04-15)
+
+
+### Bug Fixes
+
+* **Checkbox:** DP-137343 fix label clickable area ([#708](https://github.com/dialpad/dialtone/issues/708)) ([d74d937](https://github.com/dialpad/dialtone/commit/d74d9377148770185e9675fe10c4ee00b8f07d91))
+
 # [8.52.0](https://github.com/dialpad/dialtone/compare/dialtone-css/v8.51.0...dialtone-css/v8.52.0) (2025-04-15)
 
 
