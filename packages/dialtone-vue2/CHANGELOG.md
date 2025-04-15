@@ -1,3 +1,11 @@
+# [2.183.0](https://github.com/dialpad/dialtone/compare/dialtone-vue2/v2.182.0...dialtone-vue2/v2.183.0) (2025-04-15)
+
+
+### Features
+
+* **Localization:** DLT-2452 setup i18n ([#696](https://github.com/dialpad/dialtone/issues/696)) ([ed4d43b](https://github.com/dialpad/dialtone/commit/ed4d43b615dbe91c9ea6e52a6a1e251145dcf40a))
+* **Stack:** DLT-2474 add more gap options and improve their discoverability ([#709](https://github.com/dialpad/dialtone/issues/709)) ([d5e35fa](https://github.com/dialpad/dialtone/commit/d5e35fafd629149a9d568182d0291d0d79ee46c2))
+
 # [2.182.0](https://github.com/dialpad/dialtone/compare/dialtone-vue2/v2.181.0...dialtone-vue2/v2.182.0) (2025-04-11)
 
 
