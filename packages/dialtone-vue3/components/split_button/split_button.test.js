@@ -3,7 +3,7 @@ import DtSplitButton from './split_button.vue';
 import SplitButtonAlpha from './split_button-alpha.vue';
 import SplitButtonOmega from './split_button-omega.vue';
 import { DtIconSend } from '@dialpad/dialtone-icons/vue3';
-import { DtTooltipDirective } from '@/directives/tooltip';
+import { DtTooltipDirective } from '@/directives/tooltip_directive';
 
 const MOCK_ALPHA_BUTTON_STUB = vi.fn();
 const MOCK_OMEGA_BUTTON_STUB = vi.fn();

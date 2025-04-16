@@ -12,16 +12,8 @@ The below usage instructions are for the combined package.
 
 ### Install it via NPM:
 
-#### Vue 3
-
 ```shell
-npm install @dialpad/dialtone@latest @tiptap/vue-3
-```
-
-#### Vue 2
-
-```shell
-npm install @dialpad/dialtone@latest @linusborg/vue-simple-portal @tiptap/vue-2
+npm install @dialpad/dialtone@latest
 ```
 
 ### Import packages:
