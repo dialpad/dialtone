@@ -4,13 +4,51 @@
   <div
     v-if="isShown"
     :class="[
-      'd-toast',
+      'd-toast-alternate',
+      kindClass,
     ]"
     data-qa="dt-toast"
     :aria-hidden="(!isShown).toString()"
   >
-    <div class="d-toast__dialog">
-      New Toast Layout Placeholder
+    <div class="d-toast-alternate__dialog">
+      <div class="d-toast-alternate__header">
+        <dt-toast-layout-alternate-icon
+          v-if="!hideIcon"
+          :kind="kind"
+          size="200"
+          v-on="$listeners"
+        >
+          <slot name="icon" />
+        </dt-toast-layout-alternate-icon>
+        <dt-notice-content
+          :title-id="titleId"
+          :content-id="contentId"
+          :title="title"
+          :role="role"
+          v-on="$listeners"
+        >
+          <template #titleOverride>
+            <slot name="titleOverride" />
+          </template>
+        </dt-notice-content>
+
+        <!-- Close Button -->
+        <dt-notice-action
+          :hide-action="true"
+          :hide-close="hideClose"
+          button-size="xs"
+          :close-button-props="closeButtonProps"
+          :visually-hidden-close="visuallyHiddenClose"
+          :visually-hidden-close-label="visuallyHiddenCloseLabel"
+          v-on="$listeners"
+        />
+      </div>
+      <!-- Content Section -->
+      <div class="d-toast-alternate__content">
+        <slot>
+          {{ message }}
+        </slot>
+      </div>
     </div>
   </div>
 </template>
@@ -18,11 +56,16 @@
 <script>
 import utils from '@/common/utils';
 import SrOnlyCloseButtonMixin from '@/common/mixins/sr_only_close_button';
-import { TOAST_ROLES } from '../toast_constants.js';
+import DtToastLayoutAlternateIcon from './toast_layout_alternate_icon.vue';
+import { DtNoticeAction, DtNoticeContent } from '@/components/notice';
+import { TOAST_ROLES, TOAST_ALTERNATE_KINDS } from '../toast_constants.js';
 export default {
   name: 'ToastLayoutAlternate',
 
   components: {
+    DtNoticeAction,
+    DtNoticeContent,
+    DtToastLayoutAlternateIcon,
   },
 
   mixins: [SrOnlyCloseButtonMixin],
@@ -82,11 +125,14 @@ export default {
 
     /**
      * Severity level of the toast, sets the icon and background
-     * @values base, success, error, gradient
+     * @values base, error, info, success, warning, gradient
      */
     kind: {
       type: String,
       default: 'base',
+      validator: (kind) => {
+        return TOAST_ALTERNATE_KINDS.includes(kind);
+      },
     },
 
     /**
@@ -123,18 +169,22 @@ export default {
       type: Boolean,
       default: false,
     },
-
-    /**
-     * Hides the action from the notice
-     * @values true, false
-     */
-    hideAction: {
-      type: Boolean,
-      default: false,
-    },
   },
 
-  methods: {
+  emits: ['close'],
+
+  computed: {
+    kindClass () {
+      const kindClasses = {
+        error: 'd-toast-alternate--error',
+        info: 'd-toast-alternate--info',
+        success: 'd-toast-alternate--success',
+        warning: 'd-toast-alternate--warning',
+        gradient: 'd-toast-alternate--gradient',
+      };
+
+      return kindClasses[this.kind];
+    },
   },
 };
 </script>
