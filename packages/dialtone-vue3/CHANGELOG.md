@@ -1,3 +1,10 @@
+## [3.176.2](https://github.com/dialpad/dialtone/compare/dialtone-vue3/v3.176.1...dialtone-vue3/v3.176.2) (2025-04-16)
+
+
+### Bug Fixes
+
+* **Rich Text Editor:** DP-135726 fix pasting issues ([#712](https://github.com/dialpad/dialtone/issues/712)) ([0275eac](https://github.com/dialpad/dialtone/commit/0275eacbc08a24ab413d44343b9bcc511523b30d))
+
 ## [3.176.1](https://github.com/dialpad/dialtone/compare/dialtone-vue3/v3.176.0...dialtone-vue3/v3.176.1) (2025-04-15)
 
 
