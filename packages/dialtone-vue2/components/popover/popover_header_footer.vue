@@ -28,7 +28,7 @@
       importance="outlined"
       kind="muted"
       circle
-      v-bind="$ta('CLOSE_BUTTON')"
+      v-bind="closeButtonProps"
       @click="$emit('close')"
     >
       <template #icon>
@@ -43,8 +43,6 @@
 <script>
 import { DtButton } from '@/components/button';
 import { DtIconClose } from '@dialpad/dialtone-icons/vue2';
-import { useI18N } from '@dialpad/i18n-vue2';
-const { $ta } = useI18N();
 
 export default {
   name: 'PopoverHeaderFooter',
@@ -78,6 +76,15 @@ export default {
       type: Boolean,
       default: false,
     },
+
+    /**
+     * A set of props to be passed into the popover's header close button.
+     * Requires an 'ariaLabel' property.
+     */
+    closeButtonProps: {
+      type: Object,
+      default: () => {},
+    },
   },
 
   emits: [
@@ -91,8 +98,6 @@ export default {
   ],
 
   methods: {
-    $ta,
-
     focusCloseButton () {
       const closeButton = this.$refs['popover__close-button']?.$el;
       closeButton?.focus();
