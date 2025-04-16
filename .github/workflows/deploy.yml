@@ -74,6 +74,7 @@ jobs:
     permissions:
       contents: read
       id-token: write
+      packages: read
     env:
       VUEPRESS_BASE_URL: ${{ github.ref == 'refs/heads/production' && '/' || format('/{0}/', needs.get-branch-name.outputs.current_branch) }}
       DIALTONE_BUCKET_DIRECTORY: dialtone.dialpad.com${{ github.ref == 'refs/heads/production' && '/' || format('/{0}/', needs.get-branch-name.outputs.current_branch) }}
@@ -85,31 +86,21 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
+      - name: Use pnpm
+        uses: pnpm/action-setup@v3
+
       - name: Use Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: 22
-
-      - name: Use pnpm
-        uses: pnpm/action-setup@v3
-        with:
-          version: 9
-          run_install: false
-
-      - name: Get pnpm store directory
-        shell: bash
-        run: |
-          echo "STORE_PATH=$(pnpm store path --silent)" >> $GITHUB_ENV
-
-      - name: Setup pnpm cache
-        uses: actions/cache@v4
-        with:
-          path: ${{ env.STORE_PATH }}
-          key: "${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}"
-          restore-keys: |
-            ${{ runner.os }}-pnpm-store-
+          node-version-file: ".nvmrc"
+          cache: "pnpm"
+          registry-url: "https://npm.pkg.github.com"
+          scope: "dialpad"
+        env:
+          NODE_AUTH_TOKEN: ${{ github.token }}
 
       - name: Install dependencies
+        shell: bash
         run: pnpm install --frozen-lockfile
 
       # ---------- #

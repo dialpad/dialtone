@@ -1,0 +1,114 @@
+name: Pull from translation service
+
+on:
+  push:
+    branches:
+      - staging
+  workflow_dispatch:
+
+jobs:
+  pull-translations:
+    runs-on: ubuntu-latest
+
+    defaults:
+      run:
+        shell: bash -o pipefail {0}
+        working-directory: ./packages/dialtone-vue2
+
+    env:
+      SMARTLING_BASE_URL: "https://api.smartling.com"
+      SMARTLING_AUTH_PATH: "/auth-api/v2/authenticate"
+      SMARTLING_FILES_PATH: "/files-api/v2/projects"
+      SMARTLING_PROJECTS_PATH: "/projects-api/v2/projects"
+      SMARTLING_JOBS_PATH: "/jobs-api/v3/projects"
+      SMARTLING_PROJECT_ID: ${{ vars.SMARTLING_PROJECT_ID }}
+      INJECT_PLACEHOLDER_WORKAROUND: ${{ vars.INJECT_PLACEHOLDER_WORKAROUND }}
+      SMARTLING_API_USER: ${{ secrets.SMARTLING_API_USER }}
+      SMARTLING_API_SECRET: ${{ secrets.SMARTLING_API_SECRET }}
+      GH_TOKEN: ${{ github.token }}
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Environment
+        uses: ./.github/actions/setup-environment
+
+      - name: Check if translations need to be synced
+        id: check_translations
+        run: |
+          result=$(pnpm exec should-pull --use-ftl-flow ${{ vars.USE_FTL_FLOW }} | tail -n 1)
+          echo "should_create_pr=$result" >> $GITHUB_OUTPUT
+
+      - name: Pull translations if needed
+        if: steps.check_translations.outputs.should_create_pr == 'true'
+        run: |
+          pnpm exec pull-translations --use-ftl-flow ${{ vars.USE_FTL_FLOW }}
+
+      - name: Commit changes if there are any
+        if: steps.check_translations.outputs.should_create_pr == 'true'
+        run: |
+          TIMESTAMP=$(date +%Y%m%d%H%M%S)
+          BRANCH_NAME="translation-sync-${TIMESTAMP}"
+
+          echo "BRANCH_NAME=$BRANCH_NAME" >> $GITHUB_ENV
+
+          git config --global user.name 'GitHub Actions Bot'
+          git config --global user.email 'github-actions[bot]@users.noreply.github.com'
+          git checkout -b "$BRANCH_NAME"
+          git add .
+
+          if git diff --cached --quiet; then
+            echo "No changes to commit."
+            exit 0
+          else
+            git commit -m "Sync translations"
+            git push origin "$BRANCH_NAME"
+          fi
+
+      - name: Get commit hash of latest translation sync commit
+        if: steps.check_translations.outputs.should_create_pr == 'true'
+        id: get_commit_hash
+        run: |
+          COMMIT_HASH=$(git log --pretty=format:"%H" --author="github-actions.*" --grep="Sync translations" -n 1)
+          echo "commit_hash=$COMMIT_HASH" >> $GITHUB_OUTPUT
+
+      - name: Get open Translation PRs
+        if: steps.check_translations.outputs.should_create_pr == 'true'
+        id: get_open_prs
+        run: |
+          OPEN_PRS=$(gh pr list --state open --search "ci: [Automated] Sync Translations" --json number --jq '.[] | .number' | paste -sd "," -)
+          echo "open_prs=$OPEN_PRS" >> $GITHUB_OUTPUT
+
+      - name: Check if any open PRs have the same commit
+        if: steps.check_translations.outputs.should_create_pr == 'true'
+        id: check_existing_pr
+        run: |
+          echo "Checking open PRs for duplicate Sync Translations commits..."
+
+          IFS=',' read -r -a PRS_ARRAY <<< "${{steps.get_open_prs.outputs.open_prs}}"
+
+          git fetch origin --quiet
+
+          for pr in "${PRS_ARRAY[@]}"; do
+            PR_COMMITS=$(gh pr view $pr --json commits --jq '.commits[].oid')
+            for pr_commit in $PR_COMMITS; do
+              COMMIT_DIFF=$(diff <(git show --pretty=format:"" ${{steps.get_commit_hash.outputs.commit_hash}}) <(git show --pretty=format:"" $pr_commit))
+              if [ -z "$COMMIT_DIFF" ]; then
+                echo "Found duplicate PR with same changes in commit $pr_commit for PR #$pr"
+                echo "pr_exists=true" >> $GITHUB_OUTPUT
+                exit 0
+              fi
+            done
+          done
+          echo "No duplicate PR found"
+          echo "pr_exists=false" >> $GITHUB_OUTPUT
+
+      - name: Create PR if no duplicate found
+        if: steps.check_translations.outputs.should_create_pr == 'true' && steps.check_existing_pr.outputs.pr_exists == 'false'
+        run: |
+          PR_URL=$(gh pr create --title "ci: [Automated] Sync Translations" \
+                                --body "This PR updates translations." \
+                                --base main \
+                                --head "$BRANCH_NAME")
+          echo "Pull Request created: $PR_URL"

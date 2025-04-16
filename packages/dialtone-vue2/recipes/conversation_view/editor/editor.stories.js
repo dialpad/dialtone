@@ -50,6 +50,12 @@ export const argTypesData = {
       disable: true,
     },
   },
+
+  onTextInput: {
+    table: {
+      disable: true,
+    },
+  },
 };
 
 // Set default values at the story level here.
@@ -63,6 +69,7 @@ export const argsData = {
   onInput: action('input'),
   onQuickRepliesClick: action('quick-replies-click'),
   onInlineImageClick: action('inline-image-click'),
+  onTextInput: action('text-input'),
 };
 
 // Story Collection

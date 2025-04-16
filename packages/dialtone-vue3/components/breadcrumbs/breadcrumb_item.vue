@@ -25,8 +25,7 @@
 <script>
 import { BREADCRUMB_ITEM_SELECTED_MODIFIER } from './breadcrumbs_constants';
 import { removeClassStyleAttrs, addClassStyleAttrs } from '@/common/utils';
-import { DtLink } from '../link';
-import { MUTED } from '../link/link_constants';
+import { DtLink, MUTED } from '@/components/link';
 
 export default {
   name: 'DtBreadcrumbItem',
