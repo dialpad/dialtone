@@ -43,12 +43,13 @@ export default defineConfig({
     minify: true,
     rollupOptions: {
       external: [
-        /^@dialpad/,
+        /^@dialpad\/dialtone/,
         /^@tiptap\/(?!vue-2)/,
         /^date-fns/,
         /^emoji-toolkit/,
         /^overlayscrollbars/,
         /^prosemirror/,
+        '@dialpad/i18n-services',
         '@linusborg/vue-simple-portal',
         'regex-combined-emojis',
         'deep-equal',
@@ -63,13 +64,25 @@ export default defineConfig({
     },
     lib: {
       entry: {
+        'dialtone-vue': './index.js',
+
         ...commonEntries,
         ...componentEntries,
         ...directiveEntries,
         ...recipeEntries,
+
+        // Shared components
         'shared/sr_only_close_button': './common/sr_only_close_button.vue',
+
+        // Dependencies
         'node_modules/@tiptap/vue-2': './node_modules/@tiptap/vue-2/dist/index.js',
-        'dialtone-vue': './index.js',
+        'node_modules/@dialpad/i18n-vue2': './node_modules/@dialpad/i18n-vue2/dist/i18n-vue2.js',
+
+        // Localization
+        'localization/index': './localization/index.js',
+        'localization/dp-DP': './localization/dp-DP.ftl?raw',
+        'localization/es-LA': './localization/es-LA.ftl?raw',
+        'localization/en-US': './localization/en-US.ftl?raw',
       },
       formats: ['es', 'cjs'],
     },

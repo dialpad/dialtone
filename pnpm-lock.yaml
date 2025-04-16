@@ -19,6 +19,9 @@ importers:
       '@dialpad/dialtone-tokens':
         specifier: workspace:*
         version: link:packages/dialtone-tokens
+      '@dialpad/i18n-services':
+        specifier: 1.2.0-beta.v6
+        version: 1.2.0-beta.v6(@vue/composition-api@1.7.2(vue@3.4.15(typescript@5.4.2)))(vue-demi@0.14.10(@vue/composition-api@1.7.2(vue@3.4.15(typescript@5.4.2)))(vue@3.4.15(typescript@5.4.2)))(vue@3.4.15(typescript@5.4.2))
       '@tiptap/core':
         specifier: 2.6.6
         version: 2.6.6(@tiptap/pm@2.6.6)
@@ -17575,6 +17578,16 @@ snapshots:
       vue: 2.7.16
       vue-demi: 0.14.10(@vue/composition-api@1.7.2(vue@2.7.16))(vue@2.7.16)
 
+  '@dialpad/i18n-services@1.2.0-beta.v6(@vue/composition-api@1.7.2(vue@3.4.15(typescript@5.4.2)))(vue-demi@0.14.10(@vue/composition-api@1.7.2(vue@3.4.15(typescript@5.4.2)))(vue@3.4.15(typescript@5.4.2)))(vue@3.4.15(typescript@5.4.2))':
+    dependencies:
+      '@fluent/bundle': 0.17.1
+      '@fluent/syntax': 0.19.0
+      '@vue/composition-api': 1.7.2(vue@3.4.15(typescript@5.4.2))
+      csv-parse: 5.5.6
+      fluent-vue: 3.7.0(@fluent/bundle@0.17.1)(@vue/composition-api@1.7.2(vue@3.4.15(typescript@5.4.2)))(vue@3.4.15(typescript@5.4.2))
+      vue: 3.4.15(typescript@5.4.2)
+      vue-demi: 0.14.10(@vue/composition-api@1.7.2(vue@3.4.15(typescript@5.4.2)))(vue@3.4.15(typescript@5.4.2))
+
   '@dialpad/i18n-vue2@1.0.2-beta.v8(vue-demi@0.14.10(@vue/composition-api@1.7.2(vue@2.7.16))(vue@2.7.16))(vue@2.7.16)':
     dependencies:
       '@dialpad/i18n-services': 1.2.0-beta.v6(@vue/composition-api@1.7.2(vue@2.7.16))(vue-demi@0.14.10(@vue/composition-api@1.7.2(vue@2.7.16))(vue@2.7.16))(vue@2.7.16)
@@ -22154,6 +22167,10 @@ snapshots:
     dependencies:
       vue: 2.7.16
 
+  '@vue/composition-api@1.7.2(vue@3.4.15(typescript@5.4.2))':
+    dependencies:
+      vue: 3.4.15(typescript@5.4.2)
+
   '@vue/composition-api@1.7.2(vue@3.4.15(typescript@5.6.3))':
     dependencies:
       vue: 3.4.15(typescript@5.6.3)
@@ -26362,6 +26379,17 @@ snapshots:
       vue-demi: 0.14.10(@vue/composition-api@1.7.2(vue@2.7.16))(vue@2.7.16)
     optionalDependencies:
       '@vue/composition-api': 1.7.2(vue@2.7.16)
+
+  fluent-vue@3.7.0(@fluent/bundle@0.17.1)(@vue/composition-api@1.7.2(vue@3.4.15(typescript@5.4.2)))(vue@3.4.15(typescript@5.4.2)):
+    dependencies:
+      '@fluent/bundle': 0.17.1
+      '@fluent/sequence': 0.8.0(@fluent/bundle@0.17.1)
+      '@vue/devtools-api': 7.7.2
+      cached-iterable: 0.3.0
+      vue: 3.4.15(typescript@5.4.2)
+      vue-demi: 0.14.10(@vue/composition-api@1.7.2(vue@3.4.15(typescript@5.4.2)))(vue@3.4.15(typescript@5.4.2))
+    optionalDependencies:
+      '@vue/composition-api': 1.7.2(vue@3.4.15(typescript@5.4.2))
 
   flush-write-stream@1.1.1:
     dependencies:
@@ -34666,6 +34694,12 @@ snapshots:
       vue: 2.7.16
     optionalDependencies:
       '@vue/composition-api': 1.7.2(vue@2.7.16)
+
+  vue-demi@0.14.10(@vue/composition-api@1.7.2(vue@3.4.15(typescript@5.4.2)))(vue@3.4.15(typescript@5.4.2)):
+    dependencies:
+      vue: 3.4.15(typescript@5.4.2)
+    optionalDependencies:
+      '@vue/composition-api': 1.7.2(vue@3.4.15(typescript@5.4.2))
 
   vue-demi@0.14.10(@vue/composition-api@1.7.2(vue@3.4.15(typescript@5.6.3)))(vue@3.4.15(typescript@5.6.3)):
     dependencies:

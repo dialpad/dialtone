@@ -43,7 +43,7 @@ export default defineConfig({
     minify: true,
     rollupOptions: {
       external: [
-        /^@dialpad/,
+        /^@dialpad\/dialtone/,
         /^@tiptap\/(?!vue-3)/,
         /^date-fns/,
         /^emoji-toolkit/,
@@ -62,13 +62,18 @@ export default defineConfig({
     },
     lib: {
       entry: {
+        'dialtone-vue': './index.js',
+
         ...commonEntries,
         ...componentEntries,
         ...directiveEntries,
         ...recipeEntries,
+
+        // Shared components
         'shared/sr_only_close_button': './common/sr_only_close_button.vue',
+
+        // Dependencies
         'node_modules/@tiptap/vue-3': './node_modules/@tiptap/vue-3/dist/index.js',
-        'dialtone-vue': './index.js',
       },
       formats: ['es', 'cjs'],
     },

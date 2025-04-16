@@ -100,6 +100,7 @@
     "@dialpad/dialtone-emojis": "workspace:*",
     "@dialpad/dialtone-icons": "workspace:*",
     "@dialpad/dialtone-tokens": "workspace:*",
+    "@dialpad/i18n-services": "1.2.0-beta.v6",
     "@tiptap/core": "2.6.6",
     "@tiptap/extension-blockquote": "2.6.6",
     "@tiptap/extension-bold": "2.6.6",
