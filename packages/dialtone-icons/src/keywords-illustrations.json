@@ -1,6 +1,8 @@
 {
   "categories": {
     "spot-illustrations": {
+      "Theres-nothing-to-see-here": [],
+      "access-denied": [],
       "atomic-pathway": [
         "atomic",
         "space"
@@ -100,6 +102,7 @@
         "orbital",
         "harmony"
       ],
+      "something-went-wrong": [],
       "vector-vortex": [
         "vector",
         "vortex"
