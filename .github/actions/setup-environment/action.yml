@@ -1,0 +1,22 @@
+name: Setup Environment
+description: Common steps  set up the environment for tasks
+
+runs:
+  using: "composite"
+  steps:
+    - name: Install pnpm
+      uses: pnpm/action-setup@v3
+
+    - name: Set up Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version-file: ".nvmrc"
+        cache: "pnpm"
+        registry-url: "https://npm.pkg.github.com"
+        scope: "dialpad"
+      env:
+        NODE_AUTH_TOKEN: ${{ github.token }}
+
+    - name: Install dependencies
+      shell: bash
+      run: pnpm install --frozen-lockfile
