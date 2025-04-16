@@ -119,3 +119,139 @@
 .d-toast--viewing {
   --toast-color-background: var(--dt-color-surface-secondary);
 }
+
+//  ============================================================================
+//  @   BASE STYLE
+//  ----------------------------------------------------------------------------
+.d-toast-alternate {
+  //  Component CSS Vars
+  //  ------------------------------------------------------------------------
+  --toast-alternate-color-shadow: hsla(var(--dt-color-black-900-hsl) / 0.15);
+  --toast-alternate-box-shadow: 0 0 0 var(--dt-size-0) var(--toast-alternate-color-shadow) inset, var(--dt-shadow-medium);
+  --toast-alternate-color-background: var(--dt-color-surface-primary);
+  --toast-alternate-color-text: var(--dt-color-foreground-primary);
+  --toast-alternate-color-icon: var(--dt-color-foreground-muted);
+  --toast-alternate-font-color: var(--dt-color-foreground-tertiary);
+  --toast-alternate-font-size: var(--dt-font-size-200);
+  --toast-alternate-line-height: var(--dt-font-line-height-300);
+  --toast-alternate-border-radius: var(--dt-size-500);
+  --toast-alternate-border-color: var(--dt-color-border-subtle);
+  --toast-alternate-border-style: solid;
+  --toast-alternate-border-width: var(--dt-size-100);
+
+  z-index: var(--zi-notification);
+
+  //  Base Styles
+  //  ------------------------------------------------------------------------
+  display: flex;
+  align-items: center;
+  box-sizing: border-box;
+  width: var(--dt-size-925);
+  padding: var(--dt-space-350) var(--dt-space-350) var(--dt-space-450) var(--dt-space-450);
+  color: var(--toast-alternate-color-text);
+  font-size: var(--toast-alternate-font-size);
+  line-height: var(--toast-alternate-line-height);
+  word-break: normal;
+  background-color: var(--toast-alternate-color-background);
+  border: var(--toast-alternate-border-width) var(--toast-alternate-border-style) var(--toast-alternate-border-color);
+  border-radius: var(--toast-alternate-border-radius);
+  box-shadow: var(--toast-alternate-box-shadow);
+  pointer-events: all;
+
+  //  If there's a link in a toast, break the url so it wraps
+  > a {
+    word-break: break-all;
+  }
+
+  // If you want to hide and reveal the toast
+  &[aria-hidden='true'] {
+    visibility: hidden;
+    opacity: var(--dt-opacity-0);
+  }
+
+  &[aria-hidden='false'] {
+    visibility: visible;
+    opacity: var(--dt-opacity-1300);
+  }
+
+  .d-toast-layout-alternate__icon {
+    display: flex;
+    flex: 0 auto;
+    margin-right: var(--dt-space-300);
+    color: var(--toast-alternate-color-icon);
+  }
+
+  .d-notice__title {
+    color: var(--dt-color-foreground-tertiary);
+    font-weight: var(--dt-font-weight-normal);
+    font-size: var(--dt-font-size-100);
+  }
+
+  .d-notice__actions .base-button__button {
+    padding: var(--dt-size-100);
+    color: var(--dt-action-color-foreground-muted-default);
+  }
+}
+
+//  ============================================================================
+//  $   CONTENT CONTAINER
+//  ----------------------------------------------------------------------------
+.d-toast-alternate__content {
+  display: flex;
+  flex: 1 auto;
+  flex-direction: column;
+  margin-right: var(--dt-space-500);
+  color: var(--dt-color-foreground-primary);
+  font-weight: var(--dt-font-weight-normal);
+  font-size: var(--dt-font-size-200);
+}
+
+.d-toast-alternate__dialog {
+  position: relative;
+  align-items: center;
+  width: var(--dt-size-100-percent);
+
+
+  .d-notice__actions button:first-child {
+    margin-left: var(--dt-space-600); // 32
+  }
+}
+
+.d-toast-alternate__header {
+  display: flex;
+  gap: var(--dt-space-200);
+  align-items: center;
+  color: var(--toast-alternate-font-color);
+}
+
+//  $$  ERROR
+//  ----------------------------------------------------------------------------
+.d-toast-alternate--error {
+  --toast-alternate-border-color: var(--dt-color-border-critical-subtle);
+}
+
+//  $$  INFO
+//  ----------------------------------------------------------------------------
+
+.d-toast-alternate--info {
+  --toast-alternate-border-color: var(--dt-color-border-subtle);
+}
+
+//  $$  SUCCESS
+//  ----------------------------------------------------------------------------
+.d-toast-alternate--success {
+  --toast-alternate-border-color: var(--dt-color-border-success-subtle);
+}
+
+//  $$  GRADIENT
+//  ----------------------------------------------------------------------------
+.d-toast-alternate--gradient {
+  background: linear-gradient(var(--dt-color-surface-primary), var(--dt-color-surface-primary)) padding-box,
+  var(--dt-color-border-ai) border-box;
+}
+
+//  $$  warning
+//  ----------------------------------------------------------------------------
+.d-toast-alternate--warning {
+  --toast-alternate-border-color: var(--dt-color-border-warning-subtle);
+}
