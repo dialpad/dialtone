@@ -11,3 +11,7 @@ export {
 export {
   default as DtKeyboardListNavigationMixin,
 } from './keyboard_list_navigation';
+
+export {
+  default as DtLocalizationMixin,
+} from './localization.js';
