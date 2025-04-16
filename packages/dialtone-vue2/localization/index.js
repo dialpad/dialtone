@@ -11,20 +11,21 @@ export const allowedLocales = {
 
 export const DialtoneLocalizationPlugin = {
   async install (Vue) {
+    const locales = Object.values(allowedLocales);
+    const dialtoneNamespace = 'dialtone';
     const bundleSource = new RawBundleSource({
-      resources: await RawBundleSource.dynamicResources([
-        ['en-US', 'dialtone', import('./en-US.ftl?raw')],
-        ['dp-DP', 'dialtone', import('./dp-DP.ftl?raw')],
-        ['es-LA', 'dialtone', import('./es-LA.ftl?raw')],
-      ]),
+      resources: await RawBundleSource.dynamicResources(
+        locales.map(locale => [locale, dialtoneNamespace, import(`./${locale}.ftl?raw`)]),
+      ),
     });
+    const preferredLocale = locales[0];
 
     const manager = new LocaleManager({
       bundleSource,
-      preferredLocale: 'en-US', // optional
-      allowedLocales: Object.values(allowedLocales), // optional
-      fallbackLocale: 'en-US',
-      namespaces: ['dialtone'],
+      preferredLocale,
+      allowedLocales: locales,
+      fallbackLocale: preferredLocale,
+      namespaces: [dialtoneNamespace],
     });
 
     await manager.ready;
