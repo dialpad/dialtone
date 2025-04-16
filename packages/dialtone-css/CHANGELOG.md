@@ -1,3 +1,24 @@
+## [8.52.1](https://github.com/dialpad/dialtone/compare/dialtone-css/v8.52.0...dialtone-css/v8.52.1) (2025-04-15)
+
+
+### Bug Fixes
+
+* **Checkbox:** DP-137343 fix label clickable area ([#708](https://github.com/dialpad/dialtone/issues/708)) ([d74d937](https://github.com/dialpad/dialtone/commit/d74d9377148770185e9675fe10c4ee00b8f07d91))
+
+# [8.52.0](https://github.com/dialpad/dialtone/compare/dialtone-css/v8.51.0...dialtone-css/v8.52.0) (2025-04-15)
+
+
+### Features
+
+* **Stack:** DLT-2474 add more gap options and improve their discoverability ([#709](https://github.com/dialpad/dialtone/issues/709)) ([d5e35fa](https://github.com/dialpad/dialtone/commit/d5e35fafd629149a9d568182d0291d0d79ee46c2))
+
+# [8.51.0](https://github.com/dialpad/dialtone/compare/dialtone-css/v8.50.6...dialtone-css/v8.51.0) (2025-04-11)
+
+
+### Features
+
+* **Callbox:** NO-JIRA style improvements ([#705](https://github.com/dialpad/dialtone/issues/705)) ([01a5146](https://github.com/dialpad/dialtone/commit/01a51465e823ae3a14ea65b7a4a775685574f904))
+
 ## [8.50.6](https://github.com/dialpad/dialtone/compare/dialtone-css/v8.50.5...dialtone-css/v8.50.6) (2025-04-03)
 
 

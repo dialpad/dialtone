@@ -1,21 +1,31 @@
 import { LocaleManager, RawBundleSource } from '@dialpad/i18n-vue2';
 
+/**
+ * @type {{[key: string]: string}}
+ */
+export const allowedLocales = {
+  ENGLISH: 'en-US',
+  DIALPADISTAN: 'dp-DP',
+  SPANISH: 'es-LA',
+};
+
 export const DialtoneLocalizationPlugin = {
   async install (Vue) {
+    const locales = Object.values(allowedLocales);
+    const dialtoneNamespace = 'dialtone';
     const bundleSource = new RawBundleSource({
-      resources: await RawBundleSource.dynamicResources([
-        ['en-US', 'dialtone', import('./en-US.ftl?raw')],
-        ['dp-DP', 'dialtone', import('./dp-DP.ftl?raw')],
-        ['es-LA', 'dialtone', import('./es-LA.ftl?raw')],
-      ]),
+      resources: await RawBundleSource.dynamicResources(
+        locales.map(locale => [locale, dialtoneNamespace, import(`./${locale}.ftl?raw`)]),
+      ),
     });
+    const preferredLocale = locales[0];
 
     const manager = new LocaleManager({
       bundleSource,
-      preferredLocale: 'en-US', // optional
-      allowedLocales: ['en-US', 'dp-DP', 'es-LA'], // optional
-      fallbackLocale: 'en-US',
-      namespaces: ['dialtone'],
+      preferredLocale,
+      allowedLocales: locales,
+      fallbackLocale: preferredLocale,
+      namespaces: [dialtoneNamespace],
     });
 
     await manager.ready;

@@ -1,6 +1,6 @@
 import {
   VALIDATION_MESSAGE_TYPES,
-} from '../constants';
+} from '@/common/constants';
 
 export function validationMessageValidator (rawMessages) {
   if (!rawMessages) {

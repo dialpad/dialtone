@@ -13,9 +13,9 @@ import Vue from 'vue';
 import { setEmojiAssetUrlSmall, setEmojiAssetUrlLarge, setCustomEmojiUrl, setCustomEmojiJson } from '@/common/emoji';
 import customEmojiJson from '@/common/custom-emoji.json';
 import { dialtoneDarkTheme, dialtoneLightTheme } from './dialtone-themes.js';
-import { DtTooltipDirective } from '@/directives/tooltip';
+import { DtTooltipDirective } from '@/directives/tooltip_directive';
+import { DtScrollbarDirective } from '@/directives/scrollbar_directive';
 import { faker } from '@faker-js/faker';
-import { DtScrollbarDirective } from '@/directives/scrollbar';
 import { DialtoneLocalizationPlugin } from '@/localization';
 
 setTheme(DpLight);

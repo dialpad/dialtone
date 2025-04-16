@@ -1,55 +1,62 @@
 import { defineConfig } from 'vite';
 import vue from '@vitejs/plugin-vue2';
-import { fileURLToPath } from 'url';
-import { glob } from 'glob';
+import { globSync } from 'glob';
+import { fileURLToPath } from 'node:url';
 import dts from 'vite-plugin-dts';
 
-function _extractEntryNameFromPath (path, pathPrefix) {
-  const regex = new RegExp(`^${pathPrefix}(\\/(\\w+))+\\/index\\.js$`);
-  return path.replace(regex, '$2').replaceAll('_', '-');
-}
-function _getEntries (pathPrefix, globRegex, entrySuffix = '') {
-  return glob.sync(globRegex).reduce((entries, path) => {
-    let entryName = _extractEntryNameFromPath(path, pathPrefix);
-    if (entrySuffix) entryName += `-${entrySuffix}`;
+function _getEntries (pathPrefix, globRegex) {
+  return globSync(globRegex, {
+    ignore: [
+      '**/*.story.vue',
+      '**/*.stories.js',
+      '**/*.test.js',
+      'common/storybook_utils.js',
+      'common/v_html.js',
+      'common/mixins/keyboard_list_navigation_tester.vue',
+      'components/plugins/*',
+    ],
+    maxDepth: 4,
+  }).reduce((entries, path) => {
+    const entryName = path
+      .split('/')
+      .slice(-2)
+      .join('/')
+      .replace(`${pathPrefix}/`, '')
+      .replace(/\.(vue|js)/, '')
+      .replaceAll('_', '-');
 
-    if (pathPrefix === 'common') {
-      entries[`common/${entryName}`] = path;
-    } else {
-      entries[`lib/${entryName}`] = path;
-    }
+    entries[`${pathPrefix}/${entryName}`] = path;
 
     return entries;
   }, {});
 }
 
-const commonEntries = _getEntries('common', 'common/*/index.js');
-const componentEntries = _getEntries('components', 'components/*/index.js');
-const directiveEntries = _getEntries('directives', 'directives/*/index.js', 'directive');
-const recipeEntries = _getEntries('recipes', 'recipes/**/index.js');
+const commonEntries = _getEntries('common', 'common/*/*.{js,vue}');
+const componentEntries = _getEntries('lib', 'components/*/*.{js,vue}');
+const directiveEntries = _getEntries('lib', 'directives/*/*.{js,vue}');
+const recipeEntries = _getEntries('lib', 'recipes/**/*.{js,vue}');
 
 // https://vitejs.dev/config/
 export default defineConfig({
   build: {
     sourcemap: true,
-    minify: false,
+    minify: true,
     rollupOptions: {
       external: [
-        /^@dialpad/,
-        '@linusborg/vue-simple-portal',
-        /^@tiptap/,
+        /^@dialpad\/dialtone/,
+        /^@tiptap\/(?!vue-2)/,
         /^date-fns/,
         /^emoji-toolkit/,
         /^overlayscrollbars/,
         /^prosemirror/,
+        '@dialpad/i18n-services',
         'regex-combined-emojis',
         'deep-equal',
         'tippy.js',
         'vue',
       ],
       output: {
-        preserveModules: true,
-        minifyInternalExports: false,
+        minifyInternalExports: true,
         exports: 'named',
       },
       treeshake: 'smallest',
@@ -57,10 +64,25 @@ export default defineConfig({
     lib: {
       entry: {
         'dialtone-vue': './index.js',
+
         ...commonEntries,
         ...componentEntries,
         ...directiveEntries,
         ...recipeEntries,
+
+        // Shared components
+        'shared/sr_only_close_button': './common/sr_only_close_button.vue',
+
+        // Dependencies
+        'node_modules/@tiptap/vue-2': './node_modules/@tiptap/vue-2/dist/index.js',
+        'node_modules/@dialpad/i18n-vue2': './node_modules/@dialpad/i18n-vue2/dist/i18n-vue2.js',
+        'node_modules/@linusborg/vue-simple-portal': './node_modules/@linusborg/vue-simple-portal/dist/index.esm.js',
+
+        // Localization
+        'localization/index': './localization/index.js',
+        'localization/dp-DP': './localization/dp-DP.ftl?raw',
+        'localization/es-LA': './localization/es-LA.ftl?raw',
+        'localization/en-US': './localization/en-US.ftl?raw',
       },
       formats: ['es', 'cjs'],
     },

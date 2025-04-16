@@ -2,7 +2,7 @@ import { createLocalVue, mount } from '@vue/test-utils';
 import { flushPromises } from '@/common/utils';
 import DtSplitButton from './split_button.vue';
 import { DtIconSend } from '@dialpad/dialtone-icons/vue2';
-import { DtTooltipDirective } from '@/directives/tooltip';
+import { DtTooltipDirective } from '@/directives/tooltip_directive';
 
 const MOCK_TRANSITION_STUB = () => ({
   render: function (h) {

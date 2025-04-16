@@ -1,3 +1,40 @@
+## [2.183.2](https://github.com/dialpad/dialtone/compare/dialtone-vue2/v2.183.1...dialtone-vue2/v2.183.2) (2025-04-16)
+
+
+### Bug Fixes
+
+* **Rich Text Editor:** DP-135726 fix pasting issues ([#712](https://github.com/dialpad/dialtone/issues/712)) ([0275eac](https://github.com/dialpad/dialtone/commit/0275eacbc08a24ab413d44343b9bcc511523b30d))
+
+## [2.183.1](https://github.com/dialpad/dialtone/compare/dialtone-vue2/v2.183.0...dialtone-vue2/v2.183.1) (2025-04-15)
+
+
+### Bug Fixes
+
+* **Checkbox:** DP-137343 fix label clickable area ([#708](https://github.com/dialpad/dialtone/issues/708)) ([d74d937](https://github.com/dialpad/dialtone/commit/d74d9377148770185e9675fe10c4ee00b8f07d91))
+* **Editor:** DP-130987 add text-input event ([#714](https://github.com/dialpad/dialtone/issues/714)) ([9445eb9](https://github.com/dialpad/dialtone/commit/9445eb9ecaed5fa301fb28b98e7d4c9830f0aa63))
+
+# [2.183.0](https://github.com/dialpad/dialtone/compare/dialtone-vue2/v2.182.0...dialtone-vue2/v2.183.0) (2025-04-15)
+
+
+### Features
+
+* **Localization:** DLT-2452 setup i18n ([#696](https://github.com/dialpad/dialtone/issues/696)) ([ed4d43b](https://github.com/dialpad/dialtone/commit/ed4d43b615dbe91c9ea6e52a6a1e251145dcf40a))
+* **Stack:** DLT-2474 add more gap options and improve their discoverability ([#709](https://github.com/dialpad/dialtone/issues/709)) ([d5e35fa](https://github.com/dialpad/dialtone/commit/d5e35fafd629149a9d568182d0291d0d79ee46c2))
+
+# [2.182.0](https://github.com/dialpad/dialtone/compare/dialtone-vue2/v2.181.0...dialtone-vue2/v2.182.0) (2025-04-11)
+
+
+### Features
+
+* **Callbox:** NO-JIRA style improvements ([#705](https://github.com/dialpad/dialtone/issues/705)) ([01a5146](https://github.com/dialpad/dialtone/commit/01a51465e823ae3a14ea65b7a4a775685574f904))
+
+# [2.181.0](https://github.com/dialpad/dialtone/compare/dialtone-vue2/v2.180.1...dialtone-vue2/v2.181.0) (2025-04-07)
+
+
+### Features
+
+* **Editor:** DP-130987 insert inline image through editor ([#692](https://github.com/dialpad/dialtone/issues/692)) ([4616b67](https://github.com/dialpad/dialtone/commit/4616b67e0d8781d932b15200e0f3f7768dd241a7))
+
 ## [2.180.1](https://github.com/dialpad/dialtone/compare/dialtone-vue2/v2.180.0...dialtone-vue2/v2.180.1) (2025-04-02)
 
 

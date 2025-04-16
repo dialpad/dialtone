@@ -70,8 +70,8 @@ export * from './components/tooltip';
 export * from './components/validation_messages';
 
 // Directives
-export * from './directives/tooltip';
-export * from './directives/scrollbar';
+export * from './directives/tooltip_directive';
+export * from './directives/scrollbar_directive';
 
 /// Recipes
 export * from './recipes/buttons/callbar_button';

@@ -29,10 +29,13 @@
       :show-quote-button="$attrs.showQuoteButton"
       :show-quick-replies-button="$attrs.showQuickRepliesButton"
       :show-code-block-button="$attrs.showCodeBlockButton"
+      :show-inline-image-button="$attrs.showInlineImageButton"
       @focus="$attrs.onFocus"
       @blur="$attrs.onBlur"
       @input="$attrs.onInput"
       @quick-replies-click="$attrs.onQuickRepliesClick"
+      @inline-image-click="$attrs.onInlineImageClick"
+      @text-input="$attrs.onTextInput"
     />
     <p><strong>Editor content is:</strong></p>
     <span>{{ value }}</span>

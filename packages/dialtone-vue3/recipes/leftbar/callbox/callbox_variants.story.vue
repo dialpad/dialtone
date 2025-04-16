@@ -8,7 +8,7 @@
       border-color="ai"
     >
       <template #subtitle>
-        <span>06:01</span>
+        <span class="d-fvn-tabular">06:01</span>
       </template>
       <template #right>
         <dt-button
@@ -17,7 +17,7 @@
           importance="clear"
         >
           <template #icon>
-            <dt-icon-dialpad-ai-color size="400" />
+            <dt-icon-dialpad-sparkle size="400" />
           </template>
         </dt-button>
         <dt-button
@@ -37,7 +37,7 @@
       avatar-seed="1 Participant"
     >
       <template #subtitle>
-        <span>06:01</span>
+        <span class="d-fvn-tabular">06:01</span>
       </template>
       <template #right>
         <dt-button
@@ -82,7 +82,7 @@
         >
       </template>
       <template #subtitle>
-        <span>06:01</span>
+        <span class="d-fvn-tabular">06:01</span>
       </template>
       <template #right>
         <dt-button
@@ -124,7 +124,7 @@
       border-color="ai"
     >
       <template #subtitle>
-        <span>06:01</span>
+        <span class="d-fvn-tabular">06:01</span>
       </template>
       <template #right>
         <dt-button
@@ -133,7 +133,7 @@
           importance="clear"
         >
           <template #icon>
-            <dt-icon-dialpad-ai-color size="400" />
+            <dt-icon-dialpad-sparkle size="400" />
           </template>
         </dt-button>
         <dt-button
@@ -161,7 +161,7 @@
           class="d-ai-center"
         >
           <dt-icon-share-screen size="100" />
-          <span>06:01</span>
+          <span class="d-fvn-tabular">06:01</span>
         </dt-stack>
       </template>
       <template #right>
@@ -181,7 +181,7 @@
           importance="clear"
         >
           <template #icon>
-            <dt-icon-dialpad-ai-color size="400" />
+            <dt-icon-dialpad-sparkle size="400" />
           </template>
         </dt-button>
         <dt-button
@@ -247,7 +247,10 @@
             />
             <span>3</span>
           </dt-stack>
-          <span class="d-fs-300">
+          <span
+            class="d-body--sm-compact"
+            aria-hidden="true"
+          >
             •
           </span>
           <dt-stack
@@ -300,7 +303,7 @@
           class="d-ai-center"
         >
           <dt-icon-share-screen size="100" />
-          <span>06:01</span>
+          <span class="d-fvn-tabular">06:01</span>
         </dt-stack>
       </template>
       <template #right>
@@ -310,7 +313,7 @@
           importance="clear"
         >
           <template #icon>
-            <dt-icon-dialpad-ai-color size="400" />
+            <dt-icon-dialpad-sparkle size="400" />
           </template>
         </dt-button>
         <dt-button
@@ -334,9 +337,14 @@
             <dt-stack
               direction="row"
               gap="400"
+              class="d-pl2"
             >
-              <dt-icon-share-screen size="400" />
-              <span class="d-fs-100">Sharing screen</span>
+              <dt-stack
+                class="d-ai-center d-w24"
+              >
+                <dt-icon-share-screen size="400" />
+              </dt-stack>
+              <span class="d-body--sm-compact">Sharing screen</span>
             </dt-stack>
           </template>
           <template #right>
@@ -367,7 +375,7 @@
           class="d-ai-center"
         >
           <dt-icon-share-screen size="100" />
-          <span>06:01</span>
+          <span class="d-fvn-tabular">06:01</span>
         </dt-stack>
       </template>
       <template #right>
@@ -390,7 +398,7 @@
 import DtRecipeCallbox from './callbox.vue';
 import DtButton from '@/components/button/button.vue';
 import {
-  DtIconDialpadAiColor,
+  DtIconDialpadSparkle,
   DtIconPhoneHangUp,
   DtIconShareScreen,
   DtIconStopFilled,
@@ -410,7 +418,7 @@ export default {
     DtItemLayout,
     DtButton,
     DtRecipeCallbox,
-    DtIconDialpadAiColor,
+    DtIconDialpadSparkle,
     DtIconPhoneHangUp,
     DtIconShareScreen,
     DtIconStopFilled,
