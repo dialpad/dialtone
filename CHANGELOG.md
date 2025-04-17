@@ -1,3 +1,16 @@
+# [9.111.0](https://github.com/dialpad/dialtone/compare/dialtone/v9.110.2...dialtone/v9.111.0) (2025-04-17)
+
+
+### Bug Fixes
+
+* **Localization:** NO-JIRA remove localization from popover ([#719](https://github.com/dialpad/dialtone/issues/719)) ([ed5da5c](https://github.com/dialpad/dialtone/commit/ed5da5c67946354685d95db5f4ac9ac470605f88))
+* NO-JIRA bundle issues ([#715](https://github.com/dialpad/dialtone/issues/715)) ([ae16776](https://github.com/dialpad/dialtone/commit/ae16776ee2d8128dae891418a41a84075e7fa0c0))
+
+
+### Features
+
+* **Toast:** DLT-2418 support multiple layouts within toast ([#678](https://github.com/dialpad/dialtone/issues/678)) ([c593554](https://github.com/dialpad/dialtone/commit/c593554cc59fc171a4ce42e670c539a83d64a06c))
+
 ## [9.110.2](https://github.com/dialpad/dialtone/compare/dialtone/v9.110.1...dialtone/v9.110.2) (2025-04-16)
 
 

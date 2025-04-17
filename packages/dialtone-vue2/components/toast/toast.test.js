@@ -1,4 +1,4 @@
-import { createLocalVue, shallowMount } from '@vue/test-utils';
+import { createLocalVue, mount } from '@vue/test-utils';
 import DtToast from './toast.vue';
 import { TOAST_MIN_DURATION } from './toast_constants';
 
@@ -12,21 +12,21 @@ const testContext = {};
 describe('DtToast Tests', () => {
   let wrapper;
   let toast;
-  let actionChildStub;
-  let contentChildStub;
-  let iconChildStub;
+  let actionChild;
+  let contentChild;
+  let iconChild;
 
   const updateWrapper = () => {
-    wrapper = shallowMount(DtToast, {
+    wrapper = mount(DtToast, {
       propsData: { ...baseProps, ...mockProps },
       slots: { ...baseSlots, ...mockSlots },
       localVue: testContext.localVue,
     });
 
     toast = wrapper.find('[data-qa="dt-toast"]');
-    actionChildStub = wrapper.find('dt-notice-action-stub');
-    contentChildStub = wrapper.find('dt-notice-content-stub');
-    iconChildStub = wrapper.find('dt-notice-icon-stub');
+    actionChild = wrapper.findComponent({ name: 'dt-notice-action' });
+    contentChild = wrapper.findComponent({ name: 'dt-notice-content' });
+    iconChild = wrapper.findComponent({ name: 'dt-notice-icon' });
   };
 
   beforeAll(() => {
@@ -65,15 +65,15 @@ describe('DtToast Tests', () => {
       });
 
       it('action slot is passed down correctly', () => {
-        expect(actionChildStub.text()).toBe(mockSlots.action);
+        expect(actionChild.text()).toBe(mockSlots.action);
       });
 
       it('default slot is passed down correctly', () => {
-        expect(contentChildStub.text()).toBe(mockSlots.default);
+        expect(contentChild.text()).toBe(mockSlots.default);
       });
 
       it('icon slot is passed down correctly', () => {
-        expect(iconChildStub.text()).toBe(mockSlots.icon);
+        expect(iconChild.text()).toBe(mockSlots.icon);
       });
     });
 
@@ -91,23 +91,23 @@ describe('DtToast Tests', () => {
       });
 
       it('titleId prop is passed down correctly', () => {
-        expect(contentChildStub.props('titleId')).toBe(mockProps.titleId);
+        expect(contentChild.props('titleId')).toBe(mockProps.titleId);
       });
 
       it('contentId prop is passed down correctly', () => {
-        expect(contentChildStub.props('contentId')).toBe(mockProps.contentId);
+        expect(contentChild.props('contentId')).toBe(mockProps.contentId);
       });
 
       it('title prop is passed down correctly', () => {
-        expect(contentChildStub.props('title')).toBe(mockProps.title);
+        expect(contentChild.props('title')).toBe(mockProps.title);
       });
 
       it('message prop is passed down correctly', () => {
-        expect(contentChildStub.text()).toBe(mockProps.message);
+        expect(contentChild.find('[data-qa="notice-content-message"]').text()).toBe(mockProps.message);
       });
 
       it('hideClose prop is passed down correctly', () => {
-        expect(actionChildStub.props('hideClose')).toBe(mockProps.hideClose);
+        expect(actionChild.props('hideClose')).toBe(mockProps.hideClose);
       });
     });
 
@@ -187,7 +187,7 @@ describe('DtToast Tests', () => {
       const MOCK_ROLE = DtToast.props.role.default;
 
       it('shows correct default role', () => {
-        expect(contentChildStub.attributes('role')).toBe(MOCK_ROLE);
+        expect(contentChild.attributes('role')).toBe(MOCK_ROLE);
       });
 
       it('should have aria-hidden set to false when toast is shown', () => {
@@ -201,44 +201,12 @@ describe('DtToast Tests', () => {
 
         updateWrapper();
 
-        expect(contentChildStub.attributes('role')).toBe('alert');
+        expect(contentChild.attributes('role')).toBe('alert');
       });
     });
   });
 
   describe('Validation Tests', () => {
-    describe('Role Validator', () => {
-      const MOCK_PROP = DtToast.props.role;
-
-      describe('When provided role is in TOAST_ROLES', () => {
-        it('passes custom prop validation', () => {
-          expect(MOCK_PROP.validator(MOCK_PROP.default)).toBe(true);
-        });
-      });
-
-      describe('When provided role is not in TOAST_ROLES', () => {
-        it('fails custom prop validation', () => {
-          expect(MOCK_PROP.validator(`INVALID_ROLE`)).toBe(false);
-        });
-      });
-    });
-
-    describe('Kind Validator', () => {
-      const MOCK_PROP = DtToast.props.kind;
-
-      describe('When provided kind is in NOTICE_KINDS', () => {
-        it('passes custom prop validation', () => {
-          expect(MOCK_PROP.validator(MOCK_PROP.default)).toBe(true);
-        });
-      });
-
-      describe('When provided kind is not in NOTICE_KINDS', () => {
-        it('fails custom prop validation', () => {
-          expect(MOCK_PROP.validator(`INVALID_KIND`)).toBe(false);
-        });
-      });
-    });
-
     describe('Duration Validator', () => {
       const MOCK_PROP = DtToast.props.duration;
       const MOCK_DURATION = TOAST_MIN_DURATION;
@@ -272,7 +240,7 @@ describe('DtToast Tests', () => {
 
         updateWrapper();
 
-        MOCK_ELEMENT = actionChildStub;
+        MOCK_ELEMENT = actionChild;
 
         expect(MOCK_ELEMENT.props(MOCK_PROP_NAME)).toBe(MOCK_PROP_VALUE);
       });

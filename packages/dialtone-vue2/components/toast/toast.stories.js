@@ -1,9 +1,8 @@
 import { action } from '@storybook/addon-actions';
 import { createRenderConfig, getIconNames } from '@/common/storybook_utils';
 import DtToast from './toast.vue';
-
 import DtToastDefaultTemplate from './toast_default.story.vue';
-import { NOTICE_KINDS } from '../notice';
+import { TOAST_LAYOUTS, TOAST_ALTERNATE_KINDS } from './toast_constants.js';
 
 const iconsList = getIconNames();
 
@@ -70,7 +69,13 @@ export const argTypesData = {
     },
   },
   kind: {
-    options: NOTICE_KINDS,
+    options: TOAST_ALTERNATE_KINDS,
+    control: {
+      type: 'select',
+    },
+  },
+  layout: {
+    options: TOAST_LAYOUTS,
     control: {
       type: 'select',
     },
