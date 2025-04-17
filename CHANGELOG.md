@@ -1,3 +1,10 @@
+## [9.109.1-alpha.1](https://github.com/dialpad/dialtone/compare/dialtone/v9.109.0...dialtone/v9.109.1-alpha.1) (2025-04-17)
+
+
+### Bug Fixes
+
+* **Editor:** DP-130987 add text-input event ([#714](https://github.com/dialpad/dialtone/issues/714)) ([bc3a956](https://github.com/dialpad/dialtone/commit/bc3a95638b858b91b80e0ca460262c73b5da8a84))
+
 # [9.109.0](https://github.com/dialpad/dialtone/compare/dialtone/v9.108.0...dialtone/v9.109.0) (2025-04-11)
 
 
