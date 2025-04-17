@@ -171,8 +171,6 @@ export default {
     },
   },
 
-  emits: ['close'],
-
   computed: {
     kindClass () {
       const kindClasses = {
