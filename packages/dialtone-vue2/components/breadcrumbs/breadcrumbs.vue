@@ -1,6 +1,6 @@
 <template>
   <nav
-    :aria-label="ariaLabel"
+    :aria-label="ariaLabel || $t('BREADCRUMB_ARIA_LABEL')"
     data-qa="dt-breadcrumbs"
     :class="[
       'd-breadcrumbs',
@@ -26,6 +26,7 @@
 import { BREADCRUMBS_INVERTED_MODIFIER } from './breadcrumbs_constants';
 import DtBreadcrumbItem from './breadcrumb_item.vue';
 import utils from '@/common/utils';
+import { DtLocalizationMixin } from '@/common/mixins';
 
 /**
  * Breadcrumbs are links used to provide context for the currently-viewed page
@@ -38,6 +39,8 @@ export default {
   components: {
     DtBreadcrumbItem,
   },
+
+  mixins: [DtLocalizationMixin],
 
   props: {
     /**
@@ -67,7 +70,7 @@ export default {
      */
     ariaLabel: {
       type: String,
-      default: 'breadcrumb',
+      default: '',
     },
   },
 
