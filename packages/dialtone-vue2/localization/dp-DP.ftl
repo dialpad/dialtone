@@ -7,3 +7,5 @@ SET_LANGUAGE = Šά† £ëŋğøëğά
 CLOSE_BUTTON =
     .aria-label = Ĉ£ůšά
     .title = Ĉ£ůšά
+BREADCRUMB_ARIA_LABEL = ßřάëḍĉřøɱß
+LOADING = £ůëḍīŋğ

@@ -1,21 +1,42 @@
-<script setup>
-import { DtButton } from '@/components/button/index.js';
-import { DtStack } from '@/components/stack/index.js';
+<script>
+import { DtButton } from '@/components/button';
+import { DtStack } from '@/components/stack';
 import { allowedLocales } from '@/localization/index.js';
-import { useI18N } from '@dialpad/i18n-vue2';
-import { onMounted, ref } from 'vue';
-const { $t, setI18N, currentLocale } = useI18N();
+import { DtLocalizationMixin } from '@/common/mixins';
 
-const locale = ref(currentLocale);
+export default {
+  name: 'LocalizationDefault',
 
-async function setLocale (_locale) {
-  await setI18N({ preferredLocale: _locale });
-  locale.value = _locale;
-}
+  components: {
+    DtButton,
+    DtStack,
+  },
 
-onMounted(async () => {
-  await setLocale('en-US');
-});
+  mixins: [DtLocalizationMixin],
+
+  data () {
+    return {
+      locale: this.currentLocale,
+    };
+  },
+
+  computed: {
+    allowedLocales () {
+      return allowedLocales;
+    },
+  },
+
+  async mounted () {
+    await this.setLocale('en-US');
+  },
+
+  methods: {
+    setLocale: async function (_locale) {
+      await this.setI18N({ preferredLocale: _locale });
+      this.locale = _locale;
+    },
+  },
+};
 </script>
 
 <template>

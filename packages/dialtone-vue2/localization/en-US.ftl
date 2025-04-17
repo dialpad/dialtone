@@ -7,3 +7,5 @@ SET_LANGUAGE = Set language
 CLOSE_BUTTON =
   .aria-label = Close
   .title = Close
+BREADCRUMB_ARIA_LABEL = breadcrumbs
+LOADING = loading

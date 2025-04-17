@@ -7,3 +7,5 @@ SET_LANGUAGE = Cambiar idioma
 CLOSE_BUTTON =
   .aria-label = Cerrar
   .title = Cerrar
+BREADCRUMB_ARIA_LABEL = lista de enlaces
+LOADING = cargando
