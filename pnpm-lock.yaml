@@ -655,11 +655,11 @@ importers:
         specifier: workspace:*
         version: link:../dialtone-icons
       '@dialpad/i18n-services':
-        specifier: 1.2.0-beta.v6
-        version: 1.2.0-beta.v6(@vue/composition-api@1.7.2(vue@2.7.16))(vue-demi@0.14.10(@vue/composition-api@1.7.2(vue@2.7.16))(vue@2.7.16))(vue@2.7.16)
+        specifier: 1.2.0-beta.v17
+        version: 1.2.0-beta.v17(@vue/composition-api@1.7.2(vue@2.7.16))(vue@2.7.16)
       '@dialpad/i18n-vue2':
-        specifier: 1.0.2-beta.v8
-        version: 1.0.2-beta.v8(vue-demi@0.14.10(@vue/composition-api@1.7.2(vue@2.7.16))(vue@2.7.16))(vue@2.7.16)
+        specifier: 1.0.2-beta.v30
+        version: 1.0.2-beta.v30(vue@2.7.16)
       '@linusborg/vue-simple-portal':
         specifier: 0.1.5
         version: 0.1.5(vue@2.7.16)
@@ -1856,6 +1856,13 @@ packages:
     resolution: {integrity: sha512-TLsyNwTUmGK6TtvdoC4SE/13Ae501pdzhSIyOV9V3HOVf8YrVTOgLUJ/l97kZSxcTOeRbFeRjbWfH7W3ixn36g==, tarball: https://npm.pkg.github.com/download/@dialpad/conventional-changelog-angular/1.1.1/1c54240f941b2d02d73e4ca2d4e53420d128bbf6}
     engines: {node: '>=10'}
 
+  '@dialpad/i18n-services@1.2.0-beta.v17':
+    resolution: {integrity: sha512-3f78SDvOus72y9ygYl+fG2NGOmDX6RQe07qApOu7kkEfAuMXhkrsmAdtZTuMxLWooF7pMmkLn6sANvNHNB2bxg==, tarball: https://npm.pkg.github.com/download/@dialpad/i18n-services/1.2.0-beta.v17/1c8ae817efdf43dace74faab5f94873441196a41}
+    hasBin: true
+    peerDependencies:
+      '@vue/composition-api': '>=1.0.0-rc.1'
+      vue: ^2.0.0 || >=3.0.0
+
   '@dialpad/i18n-services@1.2.0-beta.v6':
     resolution: {integrity: sha512-3QQ5zpfe4fgv7lhvEEId6wdfWugVGjaSb1GXCNpvskAxqS++FGLgfZKuNWbhblmsZOhVC55NqRY0dDxVYL12kA==, tarball: https://npm.pkg.github.com/download/@dialpad/i18n-services/1.2.0-beta.v6/a61204e17e4b1737a940bdfc318498cd05509c62}
     hasBin: true
@@ -1864,8 +1871,8 @@ packages:
       vue: ^2.0.0 || >=3.0.0
       vue-demi: 0.14.10
 
-  '@dialpad/i18n-vue2@1.0.2-beta.v8':
-    resolution: {integrity: sha512-ko+usBfZjOEBWfb19aktLrcuw7pLYcnyZ+kOj+BXyhiShHSLJ4b1tapWV9gEjInUV2dNtFElUCrNumuVGaW9iQ==, tarball: https://npm.pkg.github.com/download/@dialpad/i18n-vue2/1.0.2-beta.v8/a8d4a563261a66c7730da5f157480feed99723e9}
+  '@dialpad/i18n-vue2@1.0.2-beta.v30':
+    resolution: {integrity: sha512-4o0xPcX/mCLrddN/82bCRkPlR6E7+XzENX7XC8pqtcfKZqo6X0M5UUP9WNlPH2yDShM3jKDZHALpp/R+M6Hang==, tarball: https://npm.pkg.github.com/download/@dialpad/i18n-vue2/1.0.2-beta.v30/0292fbf4ffaa1ec14fececb99bcf4dbe111804c7}
     peerDependencies:
       vue: ^2.0.0
 
@@ -17524,7 +17531,7 @@ snapshots:
       compare-func: 2.0.0
       q: 1.5.1
 
-  '@dialpad/i18n-services@1.2.0-beta.v6(@vue/composition-api@1.7.2(vue@2.7.16))(vue-demi@0.14.10(@vue/composition-api@1.7.2(vue@2.7.16))(vue@2.7.16))(vue@2.7.16)':
+  '@dialpad/i18n-services@1.2.0-beta.v17(@vue/composition-api@1.7.2(vue@2.7.16))(vue@2.7.16)':
     dependencies:
       '@fluent/bundle': 0.17.1
       '@fluent/syntax': 0.19.0
@@ -17544,13 +17551,11 @@ snapshots:
       vue: 3.4.15(typescript@5.4.2)
       vue-demi: 0.14.10(@vue/composition-api@1.7.2(vue@3.4.15(typescript@5.4.2)))(vue@3.4.15(typescript@5.4.2))
 
-  '@dialpad/i18n-vue2@1.0.2-beta.v8(vue-demi@0.14.10(@vue/composition-api@1.7.2(vue@2.7.16))(vue@2.7.16))(vue@2.7.16)':
+  '@dialpad/i18n-vue2@1.0.2-beta.v30(vue@2.7.16)':
     dependencies:
-      '@dialpad/i18n-services': 1.2.0-beta.v6(@vue/composition-api@1.7.2(vue@2.7.16))(vue-demi@0.14.10(@vue/composition-api@1.7.2(vue@2.7.16))(vue@2.7.16))(vue@2.7.16)
+      '@dialpad/i18n-services': 1.2.0-beta.v17(@vue/composition-api@1.7.2(vue@2.7.16))(vue@2.7.16)
       '@vue/composition-api': 1.7.2(vue@2.7.16)
       vue: 2.7.16
-    transitivePeerDependencies:
-      - vue-demi
 
   '@dialpad/semantic-release-changelog-json@1.0.0(semantic-release@21.1.2(typescript@5.4.2))':
     dependencies:
