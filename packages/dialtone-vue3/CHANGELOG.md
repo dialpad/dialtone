@@ -1,3 +1,15 @@
+# [3.177.0](https://github.com/dialpad/dialtone/compare/dialtone-vue3/v3.176.2...dialtone-vue3/v3.177.0) (2025-04-17)
+
+
+### Bug Fixes
+
+* NO-JIRA bundle issues ([#715](https://github.com/dialpad/dialtone/issues/715)) ([ae16776](https://github.com/dialpad/dialtone/commit/ae16776ee2d8128dae891418a41a84075e7fa0c0))
+
+
+### Features
+
+* **Toast:** DLT-2418 support multiple layouts within toast ([#678](https://github.com/dialpad/dialtone/issues/678)) ([c593554](https://github.com/dialpad/dialtone/commit/c593554cc59fc171a4ce42e670c539a83d64a06c))
+
 ## [3.176.2](https://github.com/dialpad/dialtone/compare/dialtone-vue3/v3.176.1...dialtone-vue3/v3.176.2) (2025-04-16)
 
 
