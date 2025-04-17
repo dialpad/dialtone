@@ -23,6 +23,7 @@
     :placement="$attrs.placement"
     :role="$attrs.role"
     :show-close-button="$attrs.showCloseButton"
+    :close-button-props="$attrs.closeButtonProps"
     :sticky="$attrs.sticky"
     :tether="$attrs.tether"
     :transition="$attrs.transition"
