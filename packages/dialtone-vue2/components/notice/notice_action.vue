@@ -8,12 +8,11 @@
     <dt-button
       v-if="!hideClose"
       ref="closeButton"
-      data-qa="dt-notice-action-close-button"
-      size="sm"
-      importance="clear"
       circle
-      :aria-label="closeButtonProps.ariaLabel ? closeButtonProps.ariaLabel : 'Close'"
-      v-bind="closeButtonProps"
+      data-qa="dt-notice-action-close-button"
+      importance="clear"
+      size="sm"
+      v-bind="$ta('CLOSE_BUTTON')"
       v-on="noticeActionListeners"
     >
       <template #icon>
@@ -23,8 +22,7 @@
       </template>
     </dt-button>
     <sr-only-close-button
-      v-if="showVisuallyHiddenClose"
-      :visually-hidden-close-label="visuallyHiddenCloseLabel"
+      v-else
       @close="close"
     />
   </div>
@@ -33,8 +31,8 @@
 <script>
 import { DtIconClose } from '@dialpad/dialtone-icons/vue2';
 import { DtButton } from '@/components/button';
-import SrOnlyCloseButtonMixin from '@/common/mixins/sr_only_close_button';
 import SrOnlyCloseButton from '@/common/sr_only_close_button.vue';
+import { DtLocalizationMixin } from '@/common/mixins';
 
 export default {
   name: 'DtNoticeAction',
@@ -45,17 +43,9 @@ export default {
     SrOnlyCloseButton,
   },
 
-  mixins: [SrOnlyCloseButtonMixin],
+  mixins: [DtLocalizationMixin],
 
   props: {
-    /**
-     * Props for the notice close button.
-     */
-    closeButtonProps: {
-      type: Object,
-      default: () => ({}),
-    },
-
     /**
      * Hides the close button from the notice
      * @values true, false
@@ -95,12 +85,6 @@ export default {
         },
       };
     },
-  },
-
-  created () {
-    if (!this.hideClose && !this.closeButtonProps.ariaLabel) {
-      console.error('Invalid props: you must pass in closeButtonProps.ariaLabel if the close button is displayed.');
-    }
   },
 
   mounted () {
