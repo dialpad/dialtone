@@ -9,7 +9,7 @@
     :disabled="disabled"
     :style="{ width: width }"
     :aria-live="computedAriaLive"
-    :aria-label="loading ? 'loading' : $attrs['aria-label']"
+    :aria-label="loading ? $t('LOADING') : $attrs['aria-label']"
     v-on="buttonListeners"
   >
     <!-- NOTE(cormac): This span is needed since we can't apply styles to slots. -->
@@ -54,6 +54,8 @@ import {
 
 import { LINK_KIND_MODIFIERS, getLinkKindModifier } from '@/components/link';
 
+import { DtLocalizationMixin } from '@/common/mixins';
+
 /**
  * A button is a UI element which allows users to take an action throughout the app.
  * It is important a button is identifiable, consistent, and communicates its actions clearly,
@@ -62,6 +64,8 @@ import { LINK_KIND_MODIFIERS, getLinkKindModifier } from '@/components/link';
  */
 export default {
   name: 'DtButton',
+
+  mixins: [DtLocalizationMixin],
 
   props: {
     /**
