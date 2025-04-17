@@ -1,4 +1,4 @@
-export const LABEL_SIZES = {
+export const COMBOBOX_LABEL_SIZES = {
   EXTRA_SMALL: 'xs',
   SMALL: 'sm',
   DEFAULT: 'md',
@@ -7,5 +7,5 @@ export const LABEL_SIZES = {
 };
 
 export default {
-  LABEL_SIZES,
+  LABEL_SIZES: COMBOBOX_LABEL_SIZES,
 };
