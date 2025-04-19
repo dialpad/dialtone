@@ -5,7 +5,7 @@ status: ready
 thumb: true
 image: assets/images/components/avatar.png
 storybook: https://dialtone.dialpad.com/vue/?path=/story/components-avatar--default
-figma_url: https://www.figma.com/file/2adf7JhZOncRyjYiy2joil/DT-Core%3A-Components-7?node-id=8918%3A21289&viewport=137%2C605%2C0.46&t=xHutRjwo1o5zMTgT-11
+figma_url: https://www.figma.com/design/W58r5BkO8qTw3vem9YieJd/DT9-Component-Library--Rebrand-2025-?node-id=5413-13176
 ---
 
 <code-well-header>

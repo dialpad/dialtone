@@ -5,7 +5,7 @@ status: ready
 thumb: true
 image: assets/images/components/chip.png
 storybook: https://dialtone.dialpad.com/vue/?path=/story/components-chip--default
-figma_url: https://www.figma.com/file/2adf7JhZOncRyjYiy2joil/DT-Core%3A-Components-7?node-id=9937%3A64802
+figma_url: https://www.figma.com/design/W58r5BkO8qTw3vem9YieJd/DT9-Component-Library--Rebrand-2025-?node-id=9937-64802
 ---
 
 <code-well-header>

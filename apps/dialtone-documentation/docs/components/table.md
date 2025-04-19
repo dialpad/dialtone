@@ -4,8 +4,7 @@ status: ready
 thumb: true
 image: assets/images/components/table.png
 description: A table is a pattern for organizing data sets. While data visualization helps quickly summarize a data set, a table allows users to compare and analyze individual data rows.
-figma: wip
-figma_url: https://www.figma.com/file/2adf7JhZOncRyjYiy2joil/DT-Core%3A-Components-7?node-id=8921%3A20948&viewport=-788%2C209%2C0.86&t=xHutRjwo1o5zMTgT-11
+figma_url: https://www.figma.com/design/W58r5BkO8qTw3vem9YieJd/DT9-Component-Library--Rebrand-2025-?node-id=5544-21729
 ---
 <code-well-header bgclass="d-bgc-primary">
   <table class="d-table dialtone-doc-table">

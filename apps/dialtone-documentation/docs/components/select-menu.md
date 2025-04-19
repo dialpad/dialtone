@@ -5,7 +5,7 @@ status: ready
 thumb: true
 image: assets/images/components/select-menu.png
 storybook: https://dialtone.dialpad.com/vue/?path=/story/components-select-menu--default
-figma_url: https://www.figma.com/file/2adf7JhZOncRyjYiy2joil/DT-Core%3A-Components-7?node-id=8919%3A21569&viewport=-1857%2C206%2C0.37&t=xHutRjwo1o5zMTgT-11
+figma_url: https://www.figma.com/design/W58r5BkO8qTw3vem9YieJd/DT9-Component-Library--Rebrand-2025-?node-id=25737-2711
 ---
 
 <code-well-header class="d-d-block">
@@ -21,6 +21,7 @@ figma_url: https://www.figma.com/file/2adf7JhZOncRyjYiy2joil/DT-Core%3A-Componen
 
 - Use sparingly — only when a user needs to choose from about seven to 15 possible options, and you have limited space to display the options.
 </template>
+
 <template #dont>
 
 - For site navigation.
@@ -29,6 +30,7 @@ figma_url: https://www.figma.com/file/2adf7JhZOncRyjYiy2joil/DT-Core%3A-Componen
 - Avoid using the `multiple` attribute. Users often don’t understand how to select multiple items from the select element (e.g. by holding down a modifier key).
 - For selecting an action that takes immediate effect. A `select` is for selecting a choice that is only confirmed by a separate submit action (much like a [Checkbox](checkbox.md)). For immediate actions consider the [Dropdown](dropdown.md) component.
 </template>
+
 </dialtone-usage>
 
 ### Best Practices

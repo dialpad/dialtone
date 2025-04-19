@@ -5,7 +5,7 @@ status: ready
 thumb: true
 image: assets/images/components/keyboard-shortcut.png
 storybook: https://dialtone.dialpad.com/vue/?path=/story/components-keyboard-shortcut--default
-figma_url: https://www.figma.com/file/2adf7JhZOncRyjYiy2joil/DT-Core%3A-Components?type=design&node-id=8922-20524&mode=design&t=4VsDQfzhbBwFVFl2-11
+figma_url: https://www.figma.com/design/W58r5BkO8qTw3vem9YieJd/DT9-Component-Library--Rebrand-2025-?node-id=7239-203541
 ---
 
 <code-well-header>
