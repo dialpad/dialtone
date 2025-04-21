@@ -7,5 +7,5 @@ export const COMBOBOX_LABEL_SIZES = {
 };
 
 export default {
-  LABEL_SIZES: COMBOBOX_LABEL_SIZES,
+  COMBOBOX_LABEL_SIZES,
 };
