@@ -618,10 +618,10 @@ vueCode='
 '
 showHtmlWarning />
 
-Set 300 as the default gap, 600 at <= XL, 500 at <= L, 400 at <= M, and 300 at <= SM. Check how our breakpoints work [here](/utilities/responsive/breakpoints.md).
+Set `200` as the default gap, `300` for small and larger, `400` for medium, `500` for large, and `600` for extra large. Learn more about how our breakpoints work in the [Responsive Breakpoints documentation](/utilities/responsive/breakpoints.md).
 
 <code-well-header>
-  <dt-stack :gap="{ default: '300', xl: '600', lg: '500', md: '400', sm: '300' }" class="d-bgc-magenta-100">
+  <dt-stack :gap="{ default: '200', xl: '600', lg: '500', md: '400', sm: '300' }" class="d-bgc-magenta-100">
     <div class="d-bgc-secondary">
       Stack item 1
     </div>
