@@ -1,3 +1,10 @@
+## [2.184.1](https://github.com/dialpad/dialtone/compare/dialtone-vue2/v2.184.0...dialtone-vue2/v2.184.1) (2025-04-21)
+
+
+### Bug Fixes
+
+* **Checkbox, Radio:** NO-JIRA description slot not being reactive ([#725](https://github.com/dialpad/dialtone/issues/725)) ([7a29e67](https://github.com/dialpad/dialtone/commit/7a29e67fd3f8efb9b4036dd98a716903aa7ad3d1))
+
 # [2.184.0](https://github.com/dialpad/dialtone/compare/dialtone-vue2/v2.183.2...dialtone-vue2/v2.184.0) (2025-04-17)
 
 

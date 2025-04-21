@@ -23,12 +23,12 @@
       </div>
     </label>
     <div
-      v-if="hasDescriptionOrMessages"
+      v-if="$slots.description || description || hasMessages"
       class="d-radio__messages"
       data-qa="radio-description-messages"
     >
       <div
-        v-if="hasDescription"
+        v-if="$slots.description || description"
         :class="['d-description', descriptionClass]"
         v-bind="descriptionChildProps"
         data-qa="radio-description"
@@ -133,14 +133,6 @@ export default {
         input: () => {},
         change: event => this.emitValue(event.target.value),
       };
-    },
-
-    hasDescription () {
-      return !!(this.$slots.description || this.description);
-    },
-
-    hasDescriptionOrMessages () {
-      return this.hasDescription || this.hasMessages;
     },
 
     hasMessages () {
