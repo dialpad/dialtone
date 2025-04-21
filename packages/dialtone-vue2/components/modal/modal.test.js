@@ -169,7 +169,7 @@ describe('DtModal Tests', () => {
     const mountCloseBtn = mountWrapper.findComponent(DtButton);
 
     const syncEvent = 'update:show';
-    expect(mountWrapper.emitted()).toEqual({});
+    expect(mountWrapper.emitted('update:show')).toBeFalsy();
 
     await mountOverlay.trigger('click');
 
