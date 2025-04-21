@@ -1,3 +1,15 @@
+## [9.111.1](https://github.com/dialpad/dialtone/compare/dialtone/v9.111.0...dialtone/v9.111.1) (2025-04-21)
+
+
+### Bug Fixes
+
+* **Checkbox, Radio:** NO-JIRA description slot not being reactive ([#725](https://github.com/dialpad/dialtone/issues/725)) ([7a29e67](https://github.com/dialpad/dialtone/commit/7a29e67fd3f8efb9b4036dd98a716903aa7ad3d1))
+
+
+### Documentation
+
+* DLT-2491 update figma urls ([#720](https://github.com/dialpad/dialtone/issues/720)) ([430d6c2](https://github.com/dialpad/dialtone/commit/430d6c2197f1da51d6ea4ca3d8012269606ff7f2))
+
 # [9.111.0](https://github.com/dialpad/dialtone/compare/dialtone/v9.110.2...dialtone/v9.111.0) (2025-04-17)
 
 
