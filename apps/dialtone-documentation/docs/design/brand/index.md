@@ -1,6 +1,7 @@
 ---
 title: Brand
 description: Branding assets.
+figma_url: https://www.figma.com/design/W58r5BkO8qTw3vem9YieJd/DT9-Component-Library--Rebrand-2025-?node-id=17330-1170
 ---
 
 <dt-notice

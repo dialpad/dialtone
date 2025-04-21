@@ -5,7 +5,7 @@ status: beta
 thumb: true
 image: assets/images/components/split-button.png
 storybook: https://dialtone.dialpad.com/vue/?path=/story/components-split-button--default
-figma_url: https://www.figma.com/design/2adf7JhZOncRyjYiy2joil/DT9-Component-Library?node-id=17597-8212&t=zQhkLLjFhis5qtDn-11
+figma_url: https://www.figma.com/design/W58r5BkO8qTw3vem9YieJd/DT9-Component-Library--Rebrand-2025-?node-id=19800-32233
 ---
 
 <code-well-header>

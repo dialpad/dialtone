@@ -4,8 +4,8 @@ description: Indicates no data is available to display, provides clarification, 
 status: ready
 thumb: true
 image: assets/images/components/empty-state.png
-figma: planned
 storybook: https://dialtone.dialpad.com/vue/?path=/story/components-empty-state--default
+figma_url: https://www.figma.com/design/W58r5BkO8qTw3vem9YieJd/DT9-Component-Library--Rebrand-2025-?node-id=17203-203
 ---
 
 <code-well-header>
