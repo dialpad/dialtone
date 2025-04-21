@@ -31,6 +31,7 @@
       :id="id"
       :fallback-placements="fallbackPlacements"
       :open="open"
+      :modal="false"
       :placement="placement"
       class="dt-recipe--callbar-button-with-dropdown--dropdown-wrapper"
       padding="none"
