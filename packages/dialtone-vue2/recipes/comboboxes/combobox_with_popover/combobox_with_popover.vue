@@ -117,7 +117,7 @@
 <script>
 import ComboboxLoadingList from '@/components/combobox/combobox_loading-list.vue';
 import ComboboxEmptyList from '@/components/combobox/combobox_empty-list.vue';
-import { DtCombobox, LABEL_SIZES } from '@/components/combobox';
+import { DtCombobox, COMBOBOX_LABEL_SIZES } from '@/components/combobox';
 import { DtPopover, POPOVER_APPEND_TO_VALUES, POPOVER_CONTENT_WIDTHS } from '@/components/popover';
 import { getUniqueString } from '@/common/utils';
 import { DROPDOWN_PADDING_CLASSES } from '@/components/dropdown';
@@ -160,7 +160,7 @@ export default {
     size: {
       type: String,
       default: null,
-      validator: (t) => Object.values(LABEL_SIZES).includes(t),
+      validator: (t) => Object.values(COMBOBOX_LABEL_SIZES).includes(t),
     },
 
     /**
