@@ -89,12 +89,6 @@ export default {
     },
   },
 
-  created () {
-    if (!this.hideClose && !this.closeButtonProps.ariaLabel) {
-      console.error('Invalid props: you must pass in closeButtonProps.ariaLabel if the close button is displayed.');
-    }
-  },
-
   mounted () {
     if (!this.hideClose) {
       this.lastFocusedElement = document.activeElement;
