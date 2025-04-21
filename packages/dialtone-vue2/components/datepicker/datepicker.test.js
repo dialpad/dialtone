@@ -1,7 +1,9 @@
 import { createLocalVue, mount } from '@vue/test-utils';
-import { formatMonth } from '@/components/datepicker/utils.js';
+import { formatDate, formatMonth } from '@/components/datepicker/utils.js';
 import DtDatepicker from './datepicker.vue';
 import { INTL_MONTH_FORMAT } from '@/components/datepicker/datepicker_constants.js';
+import { useI18N } from '@dialpad/i18n-vue2';
+const { $t } = useI18N();
 
 const MOCK_DAY = 21;
 const MOCK_MONTH = 6; // Note: month is zero-based, so 6 represents July
@@ -12,14 +14,12 @@ const MOCK_TODAY_YEAR = MOCK_TEST_DATE.getFullYear();
 const MOCK_TODAY_MONTH = MOCK_TEST_DATE.getMonth();
 const MOCK_FORMATTED_TODAY_MONTH = formatMonth(MOCK_TODAY_MONTH, INTL_MONTH_FORMAT);
 const MOCK_HEADER_SELECTED_DATE = `${MOCK_FORMATTED_TODAY_MONTH} ${MOCK_TODAY_YEAR}`;
+const MOCK_LOCALIZED_PREVIOUS_YEAR_LABEL = `${$t('CHANGE_TO')} ${$t('PREVIOUS_YEAR')} ${MOCK_TODAY_YEAR - 1}`;
+const MOCK_LOCALIZED_PREVIOUS_MONTH_LABEL = `${$t('CHANGE_TO')} ${$t('PREVIOUS_MONTH')} ${formatMonth(MOCK_TODAY_MONTH - 1, INTL_MONTH_FORMAT)}`;
+const MOCK_LOCALIZED_NEXT_MONTH_LABEL = `${$t('CHANGE_TO')} ${$t('NEXT_MONTH')} ${formatMonth(MOCK_TODAY_MONTH + 1, INTL_MONTH_FORMAT)}`;
+const MOCK_LOCALIZED_NEXT_YEAR_LABEL = `${$t('CHANGE_TO')} ${$t('NEXT_YEAR')} ${MOCK_TODAY_YEAR + 1}`;
 
 const baseProps = {
-  changeToLabel: 'Change to',
-  prevMonthLabel: 'Previous month',
-  nextMonthLabel: 'Next month',
-  prevYearLabel: 'Previous year',
-  nextYearLabel: 'Next year',
-  selectDayLabel: 'Select day',
   selectedDate: MOCK_TEST_DATE,
 };
 
@@ -138,33 +138,33 @@ describe('DtDatepicker Tests', () => {
     describe('On the header', () => {
       it('previous year button should has correct aria label', () => {
         expect(prevYearButton.attributes('aria-label'))
-          .toContain(`${baseProps.changeToLabel} ${baseProps.prevYearLabel} ${MOCK_TODAY_YEAR - 1}`);
+          .toContain(MOCK_LOCALIZED_PREVIOUS_YEAR_LABEL);
       });
 
       it('previous month button should has correct aria label', () => {
         expect(prevMonthButton.attributes('aria-label'))
         // eslint-disable-next-line max-len
-          .toContain(`${baseProps.changeToLabel} ${baseProps.prevMonthLabel} ${formatMonth(MOCK_TODAY_MONTH - 1, INTL_MONTH_FORMAT)}`);
+          .toContain(MOCK_LOCALIZED_PREVIOUS_MONTH_LABEL);
       });
 
       it('next month button should has correct aria label', () => {
         expect(nextMonthButton.attributes('aria-label'))
-        // eslint-disable-next-line max-len
-          .toContain(`${baseProps.changeToLabel} ${baseProps.nextMonthLabel} ${formatMonth(MOCK_TODAY_MONTH + 1, INTL_MONTH_FORMAT)}`);
+          .toContain(MOCK_LOCALIZED_NEXT_MONTH_LABEL);
       });
 
       it('next year button should has correct aria label', () => {
         expect(nextYearButton.attributes('aria-label'))
-          .toContain(`${baseProps.changeToLabel} ${baseProps.nextYearLabel} ${MOCK_TODAY_YEAR + 1}`);
+          .toContain(MOCK_LOCALIZED_NEXT_YEAR_LABEL);
       });
     });
 
     describe('On calendar', () => {
       it('day should has correct aria label', () => {
         const days = wrapper.findAll('.d-datepicker__calendar button');
+        const formattedDate = formatDate(`${MOCK_TODAY_YEAR}, ${MOCK_FORMATTED_TODAY_MONTH}, ${MOCK_DAY}`, INTL_MONTH_FORMAT, this.currentLocale);
 
         expect(days.at(26).attributes('aria-label'))
-          .toContain(`${baseProps.selectDayLabel} ${MOCK_DAY} ${MOCK_FORMATTED_TODAY_MONTH} ${MOCK_TODAY_YEAR}`);
+          .toContain(`${$t('SELECT_DAY')} ${formattedDate}`);
       });
     });
 

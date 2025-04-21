@@ -1,31 +1,31 @@
 <template>
   <dt-stack
-    direction="row"
     class="d-datepicker__month-year"
+    direction="row"
     gap="300"
   >
     <dt-stack
       as="nav"
+      class="d-datepicker__nav"
       direction="row"
       gap="200"
-      class="d-datepicker__nav"
     >
       <dt-tooltip
-        :message="prevYearLabel"
-        placement="top"
         :fallback-placements="['top-start', 'auto']"
+        :message="$t('PREVIOUS_YEAR')"
+        placement="top"
       >
         <template #anchor>
           <dt-button
             id="prevYearButton"
             :ref="refNames[0]"
-            size="xs"
+            :aria-label="previousYearAriaLabel"
+            circle
+            class="d-datepicker__nav-btn"
             importance="clear"
             kind="muted"
-            :circle="true"
-            class="d-datepicker__nav-btn"
+            size="xs"
             type="button"
-            :aria-label="`${changeToLabel} ${prevYearLabel} ${selectYear - 1}`"
             @click="changeYear(-1)"
             @keydown="handleKeyDown($event)"
           >
@@ -36,21 +36,21 @@
         </template>
       </dt-tooltip>
       <dt-tooltip
-        :message="prevMonthLabel"
+        :fallback-placements="['top-start', 'auto']"
+        :message="$t('PREVIOUS_MONTH')"
         placement="top"
-        :fallback-placements="['top-end', 'auto']"
       >
         <template #anchor>
           <dt-button
             id="prevMonthButton"
             :ref="refNames[1]"
-            size="xs"
+            :aria-label="previousMonthAriaLabel"
+            circle
+            class="d-datepicker__nav-btn"
             importance="clear"
             kind="muted"
-            :circle="true"
-            class="d-datepicker__nav-btn"
+            size="xs"
             type="button"
-            :aria-label="`${changeToLabel} ${prevMonthLabel} ${formattedMonth(selectMonth - 1)}`"
             @click="changeMonth(-1)"
             @keydown="handleKeyDown($event)"
           >
@@ -71,26 +71,26 @@
     </div>
     <dt-stack
       as="nav"
+      class="d-datepicker__nav"
       direction="row"
       gap="200"
-      class="d-datepicker__nav"
     >
       <dt-tooltip
-        :message="nextMonthLabel"
+        :fallback-placements="['top-end', 'auto']"
+        :message="$t('NEXT_MONTH')"
         placement="top"
-        :fallback-placements="['top-start', 'auto']"
       >
         <template #anchor>
           <dt-button
             id="nextMonthButton"
             :ref="refNames[2]"
-            size="xs"
-            importance="clear"
-            :circle="true"
-            kind="muted"
+            :aria-label="nextMonthAriaLabel"
+            circle
             class="d-datepicker__nav-btn"
+            importance="clear"
+            kind="muted"
+            size="xs"
             type="button"
-            :aria-label="`${changeToLabel} ${nextMonthLabel} ${formattedMonth(selectMonth + 1)}`"
             @click="changeMonth(1)"
             @keydown="handleKeyDown($event)"
           >
@@ -101,21 +101,21 @@
         </template>
       </dt-tooltip>
       <dt-tooltip
-        :message="nextYearLabel"
-        placement="top"
         :fallback-placements="['top-end', 'auto']"
+        :message="$t('NEXT_YEAR')"
+        placement="top"
       >
         <template #anchor>
           <dt-button
             id="nextYearButton"
             :ref="refNames[3]"
-            size="xs"
-            kind="muted"
-            :circle="true"
-            importance="clear"
+            :aria-label="nextYearAriaLabel"
+            circle
             class="d-datepicker__nav-btn"
+            importance="clear"
+            kind="muted"
+            size="xs"
             type="button"
-            :aria-label="`${changeToLabel} ${nextYearLabel} ${selectYear + 1}`"
             @click="changeYear(1)"
             @keydown="handleKeyDown($event)"
           >
@@ -130,13 +130,19 @@
 </template>
 
 <script>
-import { DtIconChevronLeft, DtIconChevronsLeft, DtIconChevronRight, DtIconChevronsRight } from '@dialpad/dialtone-icons/vue2';
+import {
+  DtIconChevronLeft,
+  DtIconChevronsLeft,
+  DtIconChevronRight,
+  DtIconChevronsRight,
+} from '@dialpad/dialtone-icons/vue2';
 import { getYear, addMonths, getMonth, set, subMonths, getDate } from 'date-fns';
 import { getCalendarDays, formatMonth } from '../utils';
 import { INTL_MONTH_FORMAT } from '../datepicker_constants';
-import DtStack from '@/components/stack/stack.vue';
-import DtTooltip from '@/components/tooltip/tooltip.vue';
-import DtButton from '@/components/button/button.vue';
+import { DtStack } from '@/components/stack';
+import { DtTooltip } from '@/components/tooltip';
+import { DtButton } from '@/components/button';
+import { DtLocalizationMixin } from '@/common/mixins';
 
 export default {
   name: 'DtDatepickerMonthYearPicker',
@@ -151,37 +157,9 @@ export default {
     DtIconChevronsRight,
   },
 
+  mixins: [DtLocalizationMixin],
+
   props: {
-    locale: {
-      type: String,
-      required: true,
-    },
-
-    prevMonthLabel: {
-      type: String,
-      required: true,
-    },
-
-    nextMonthLabel: {
-      type: String,
-      required: true,
-    },
-
-    prevYearLabel: {
-      type: String,
-      required: true,
-    },
-
-    nextYearLabel: {
-      type: String,
-      required: true,
-    },
-
-    changeToLabel: {
-      type: String,
-      required: true,
-    },
-
     selectedDate: {
       type: Date,
       required: true,
@@ -237,7 +215,23 @@ export default {
     },
 
     formattedMonth () {
-      return (month) => formatMonth(month, INTL_MONTH_FORMAT, this.locale);
+      return (month) => formatMonth(month, INTL_MONTH_FORMAT, this.currentLocale);
+    },
+
+    previousYearAriaLabel () {
+      return `${this.$t('CHANGE_TO')} ${this.$t('PREVIOUS_YEAR')} ${this.selectYear - 1}`;
+    },
+
+    previousMonthAriaLabel () {
+      return `${this.$t('CHANGE_TO')} ${this.$t('PREVIOUS_MONTH')} ${this.formattedMonth(this.selectMonth - 1)}`;
+    },
+
+    nextYearAriaLabel () {
+      return `${this.$t('CHANGE_TO')} ${this.$t('NEXT_YEAR')} ${this.selectYear + 1}`;
+    },
+
+    nextMonthAriaLabel () {
+      return `${this.$t('CHANGE_TO')} ${this.$t('NEXT_MONTH')} ${this.formattedMonth(this.selectMonth + 1)}`;
     },
   },
 

@@ -59,28 +59,20 @@
 </template>
 
 <script>
-import { getWeekDayNames, calculateNextFocusDate, calculatePrevFocusDate } from '@/components/datepicker/utils';
-import { WEEK_START, MONTH_FORMAT } from '@/components/datepicker/datepicker_constants.js';
-import { format, getYear } from 'date-fns';
-import DtButton from '@/components/button/button.vue';
+import { getWeekDayNames, calculateNextFocusDate, calculatePrevFocusDate, formatDate } from '../utils';
+import { WEEK_START, INTL_MONTH_FORMAT } from '../datepicker_constants.js';
+import { DtButton } from '@/components/button';
+import { DtLocalizationMixin } from '@/common/mixins';
 
 export default {
   name: 'DtDatepickerCalendar',
   components: { DtButton },
 
+  mixins: [DtLocalizationMixin],
+
   props: {
     calendarDays: {
       type: Array,
-      required: true,
-    },
-
-    locale: {
-      type: String,
-      required: true,
-    },
-
-    selectDayLabel: {
-      type: String,
       required: true,
     },
   },
@@ -120,7 +112,7 @@ export default {
 
   computed: {
     weekDays () {
-      return getWeekDayNames(this.locale, WEEK_START);
+      return getWeekDayNames(this.currentLocale, WEEK_START);
     },
   },
 
@@ -141,7 +133,7 @@ export default {
 
   methods: {
     dayAriaLabel (day) {
-      return `${this.selectDayLabel} ${day.text} ${format(day.value, MONTH_FORMAT)} ${getYear(day.value)}`;
+      return this.$t('SELECT_DAY') + ` ${formatDate(day.value, INTL_MONTH_FORMAT, this.currentLocale)}`;
     },
 
     setDayRef (el, day) {
