@@ -1,5 +1,5 @@
 import Vue from 'vue';
-import { DialtoneLocalizationPlugin } from '@/localization/index.js';
+import { DialtoneLocalizationPlugin } from '@/localization';
 
 Vue.config.productionTip = false;
 Vue.config.devtools = false;
