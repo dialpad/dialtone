@@ -82,6 +82,7 @@ htmlCode='
 </div>
 '
 vueCode='
+<!-- IMPORTANT NOTE: Change model-value to just value in Vue 2 -->
 <dt-select-menu
   :options="[
         { value: ``, label: `Please select one` },
@@ -90,7 +91,7 @@ vueCode='
         { value: `3`, label: `Option 3` },
       ]"
   label="Default"
-  :value="value"
+  :model-value="modelValue"
   @input="onInput"
   @change="onChange"
 />
@@ -103,7 +104,7 @@ vueCode='
       ]"
   label="Disabled"
   disabled
-  :value="value"
+  :model-value="modelValue"
   @input="onInput"
   @change="onChange"
 />
@@ -134,6 +135,7 @@ htmlCode='
 </div>
 '
 vueCode='
+<!-- IMPORTANT NOTE: Change model-value to just value in Vue 2 -->
 <dt-select-menu
   :options="[
         { value: ``, label: `Please select one` },
@@ -143,7 +145,7 @@ vueCode='
       ]"
   label="Label"
   description="Optional description text"
-  :value="value"
+  :model-value="modelValue"
   @input="onInput"
   @change="onChange"
 />
@@ -223,6 +225,7 @@ htmlCode='
 </div>
 '
 vueCode='
+<!-- IMPORTANT NOTE: Change model-value to just value in Vue 2 -->
 <dt-select-menu
   :options="[
     { value: ``, label: `Please select one` },
@@ -232,7 +235,7 @@ vueCode='
   ]"
   :messages="[{ message: `Error validation message`, type: `error` }]"
   label="Label"
-  :value="value"
+  :model-value="modelValue"
   @input="onInput"
   @change="onChange"
 />
@@ -245,7 +248,7 @@ vueCode='
   ]"
   :messages="[{ message: `Success validation message`, type: `success` }]"
   label="Label"
-  :value="value"
+  :model-value="modelValue"
   @input="onInput"
   @change="onChange"
 />
@@ -258,7 +261,7 @@ vueCode='
   ]"
   :messages="[{ message: `Warning validation message`, type: `warning` }]"
   label="Label"
-  :value="value"
+  :model-value="modelValue"
   @input="onInput"
   @change="onChange"
 />
@@ -290,6 +293,7 @@ showHtmlWarning />
 <code-example-tabs
 :htmlCode="() => $refs.messagesHidden"
 vueCode='
+<!-- IMPORTANT NOTE: Change model-value to just value in Vue 2 -->
 <dt-select-menu
   :options="[
     { value: ``, label: `Please select one` },
@@ -299,21 +303,21 @@ vueCode='
   ]"
   :messages="[{ message: `Error validation message`, type: `error` }]"
   label="Label"
-  :value="value"
+  :model-value="modelValue"
   @input="onInput"
   @change="onChange"
   :show-messages="false"
 />
 <dt-select-menu
   :options="[
-    { value: ``, label: `Please select one` },
+    { value:``, label: `Please select one` },
     { value: `1`, label: `Option 1` },
     { value: `2`, label: `Option 2` },
     { value: `3`, label: `Option 3` },
   ]"
   :messages="[{ message: `Success validation message`, type: `success` }]"
   label="Label"
-  :value="value"
+  :model-value="modelValue"
   @input="onInput"
   @change="onChange"
   :show-messages="false"
@@ -327,7 +331,7 @@ vueCode='
   ]"
   :messages="[{ message: `Warning validation message`, type: `warning` }]"
   label="Label"
-  :value="value"
+  :model-value="modelValue"
   @input="onInput"
   @change="onChange"
   :show-messages="false"
@@ -348,6 +352,7 @@ vueCode='
 <code-example-tabs
 :htmlCode="() => $refs.slottedLabel"
 vueCode='
+<!-- IMPORTANT NOTE: Change model-value to just value in Vue 2 -->
 <dt-select-menu
   :options="[
     { value: ``, label: `Please select one` },
@@ -355,7 +360,7 @@ vueCode='
     { value: `2`, label: `Option 2` },
     { value: `3`, label: `Option 3` },
   ]"
-  :value="value"
+  :model-value="modelValue"
   @input="onInput"
   @change="onChange"
 >
@@ -379,6 +384,7 @@ vueCode='
 <code-example-tabs
 :htmlCode="() => $refs.slottedDescription"
 vueCode='
+<!-- IMPORTANT NOTE: Change model-value to just value in Vue 2 -->
 <dt-select-menu
   :options="[
     { value: ``, label: `Please select one` },
@@ -386,7 +392,7 @@ vueCode='
     { value: `2`, label: `Option 2` },
     { value: `3`, label: `Option 3` },
   ]"
-  :value="value"
+  :model-value="modelValue"
   @input="onInput"
   @change="onChange"
 >
@@ -414,8 +420,9 @@ vueCode='
 <code-example-tabs
 :htmlCode="() => $refs.slottedOptions"
 vueCode='
+<!-- IMPORTANT NOTE: Change model-value to just value in Vue 2 -->
 <dt-select-menu
-  :value="value"
+  :model-value="modelValue"
   @input="onInput"
   @change="onChange"
 >
@@ -514,6 +521,7 @@ htmlCode='
 </div>
 '
 vueCode='
+<!-- IMPORTANT NOTE: Change model-value to just value in Vue 2 -->
 <dt-select-menu
   :options="[
     { value: ``, label: `Please select one` },
@@ -523,7 +531,7 @@ vueCode='
   ]"
   label="Label"
   size="xs"
-  :value="value"
+  :model-value="modelValue"
   @input="onInput"
   @change="onChange"
 />
@@ -536,7 +544,7 @@ vueCode='
   ]"
   label="Label"
   size="sm"
-  :value="value"
+  :model-value="modelValue"
   @input="onInput"
   @change="onChange"
 />
@@ -549,7 +557,7 @@ vueCode='
   ]"
   label="Label"
   size="md"
-  :value="value"
+  :model-value="modelValue"
   @input="onInput"
   @change="onChange"
 />
@@ -562,7 +570,7 @@ vueCode='
   ]"
   label="Label"
   size="lg"
-  :value="value"
+  :model-value="modelValue"
   @input="onInput"
   @change="onChange"
 />
@@ -575,7 +583,7 @@ vueCode='
   ]"
   label="Label"
   size="xl"
-  :value="value"
+  :model-value="modelValue"
   @input="onInput"
   @change="onChange"
 />

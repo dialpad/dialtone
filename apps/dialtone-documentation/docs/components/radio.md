@@ -54,7 +54,7 @@ Radio buttons are a common way to allow users to make a single selection from a 
   <fieldset class="d-input-group__fieldset d-stack8">
     <dt-radio name="Value" value="Value" label="Radio label"/>
     <dt-radio name="Disabled" value="Disabled" label="Radio label thats been disabled" disabled/>
-    <dt-radio name="CheckedDisabled" value="Checked" label="Radio label thats been disabled & checked" checked disabled />
+    <dt-radio name="CheckedDisabled" value="Checked" label="Radio label thats been disabled & checked" :model-value="true" disabled />
   </fieldset>
 </code-well-header>
 
@@ -94,7 +94,7 @@ htmlCode='
 vueCode='
 <dt-radio name="Value" value="Value" label="Radio label"/>
 <dt-radio name="Disabled" value="Disabled" label="Radio label thats been disabled" disabled/>
-<dt-radio name="CheckedDisabled" value="Checked" label="Radio label thats been disabled & checked" checked disabled />
+<dt-radio name="CheckedDisabled" value="Checked" label="Radio label thats been disabled & checked" :model-value="true" disabled />
 '
 showHtmlWarning />
 

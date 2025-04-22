@@ -172,7 +172,7 @@ describe('DtCheckbox Tests', () => {
 
     describe('When checked', () => {
       it('should be checked', () => {
-        mockProps = { checked: true };
+        mockProps = { modelValue: true };
 
         updateWrapper();
 
@@ -248,7 +248,7 @@ describe('DtCheckbox Tests', () => {
       describe('When checked', () => {
         describe('When the checkbox is clicked', () => {
           it('Should emit an input event', async () => {
-            mockProps = { checked: true };
+            mockProps = { modelValue: true };
 
             updateWrapper();
 
@@ -288,7 +288,7 @@ describe('DtCheckbox Tests', () => {
       describe('When checked', () => {
         describe('When the checkbox is clicked', () => {
           it('Should emit an input event', async () => {
-            mockProps = { checked: true };
+            mockProps = { modelValue: true };
 
             updateWrapper();
 

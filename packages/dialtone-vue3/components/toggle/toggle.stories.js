@@ -9,7 +9,7 @@ import { TOGGLE_CHECKED_VALUES, TOGGLE_SIZE_MODIFIERS } from '@/components/toggl
 // Default Prop Values
 export const argsData = {
   default: 'Toggle Default',
-  checked: false,
+  modelValue: false,
   onChange: action('change'),
   labelClass: 'd-mr6',
 };
@@ -28,7 +28,7 @@ export const argTypesData = {
   },
 
   // Props
-  checked: {
+  modelValue: {
     description:
       'Used to set the initial state of the toggle. Setting "mixed" means it gets the indeterminate state.',
     options: TOGGLE_CHECKED_VALUES,

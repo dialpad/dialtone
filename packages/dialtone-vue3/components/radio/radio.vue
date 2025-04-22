@@ -95,6 +95,13 @@ export default {
      * @type {String | Number}
      */
     'input',
+    /**
+     * Event fired to sync the modelValue prop with the parent component
+     *
+     * @event input
+     * @type {String | Number}
+     */
+    'update:modelValue',
 
     /**
      * Native input focus event
@@ -182,8 +189,8 @@ export default {
       if (value !== this.radioGroupValue) {
         // update provided value if injected
         this.setGroupValue(value);
-
         this.$emit('input', value);
+        this.$emit('update:modelValue', value);
       }
     },
   },

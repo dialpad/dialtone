@@ -3,7 +3,7 @@
     :id="$attrs.id"
     :name="$attrs.name"
     :legend="$attrs.legend"
-    :value="$attrs.value"
+    :model-value="$attrs.modelValue"
     :disabled="$attrs.disabled"
     :messages="$attrs.messages"
     :show-messages="$attrs.showMessages"
