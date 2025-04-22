@@ -1,3 +1,12 @@
+# [4.35.0-rebrand-2025-beta.8](https://github.com/dialpad/dialtone/compare/dialtone-icons/v4.35.0-rebrand-2025-beta.7...dialtone-icons/v4.35.0-rebrand-2025-beta.8) (2025-04-22)
+
+
+### Features
+
+* **Icons:** DLT-2494 revert update dialpad logo gradient ([#727](https://github.com/dialpad/dialtone/issues/727)) ([8b33df6](https://github.com/dialpad/dialtone/commit/8b33df695fc3160d2772b38d9a45e86704f90420))
+* **Icons:** DLT-2494 update dialpad logo gradient ([#726](https://github.com/dialpad/dialtone/issues/726)) ([933bb7b](https://github.com/dialpad/dialtone/commit/933bb7b40695fa153b7d63d8533793a6208cf536))
+* **Illustrations:** NO-JIRA new illustrations added ([#718](https://github.com/dialpad/dialtone/issues/718)) ([6b45b79](https://github.com/dialpad/dialtone/commit/6b45b79b2dee2e42d9c075a13b00e85f223f2763))
+
 # [4.35.0-rebrand-2025-beta.7](https://github.com/dialpad/dialtone/compare/dialtone-icons/v4.35.0-rebrand-2025-beta.6...dialtone-icons/v4.35.0-rebrand-2025-beta.7) (2025-04-11)
 
 
