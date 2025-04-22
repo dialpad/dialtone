@@ -1,3 +1,22 @@
+## [3.177.1](https://github.com/dialpad/dialtone/compare/dialtone-vue3/v3.177.0...dialtone-vue3/v3.177.1) (2025-04-21)
+
+
+### Bug Fixes
+
+* **Checkbox, Radio:** NO-JIRA description slot not being reactive ([#725](https://github.com/dialpad/dialtone/issues/725)) ([7a29e67](https://github.com/dialpad/dialtone/commit/7a29e67fd3f8efb9b4036dd98a716903aa7ad3d1))
+
+# [3.177.0](https://github.com/dialpad/dialtone/compare/dialtone-vue3/v3.176.2...dialtone-vue3/v3.177.0) (2025-04-17)
+
+
+### Bug Fixes
+
+* NO-JIRA bundle issues ([#715](https://github.com/dialpad/dialtone/issues/715)) ([ae16776](https://github.com/dialpad/dialtone/commit/ae16776ee2d8128dae891418a41a84075e7fa0c0))
+
+
+### Features
+
+* **Toast:** DLT-2418 support multiple layouts within toast ([#678](https://github.com/dialpad/dialtone/issues/678)) ([c593554](https://github.com/dialpad/dialtone/commit/c593554cc59fc171a4ce42e670c539a83d64a06c))
+
 ## [3.176.2](https://github.com/dialpad/dialtone/compare/dialtone-vue3/v3.176.1...dialtone-vue3/v3.176.2) (2025-04-16)
 
 

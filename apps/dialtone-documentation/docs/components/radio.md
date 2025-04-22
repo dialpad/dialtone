@@ -5,7 +5,7 @@ status: ready
 thumb: true
 image: assets/images/components/radio.png
 storybook: https://dialtone.dialpad.com/vue/?path=/story/components-radio--default
-figma_url: https://www.figma.com/file/2adf7JhZOncRyjYiy2joil/DT-Core%3A-Components-7?node-id=8919%3A22042&viewport=-451%2C205%2C0.6&t=xHutRjwo1o5zMTgT-11
+figma_url: https://www.figma.com/design/W58r5BkO8qTw3vem9YieJd/DT9-Component-Library--Rebrand-2025-?node-id=24935-9743
 ---
 
 <code-well-header>
@@ -54,7 +54,7 @@ Radio buttons are a common way to allow users to make a single selection from a 
   <fieldset class="d-input-group__fieldset d-stack8">
     <dt-radio name="Value" value="Value" label="Radio label"/>
     <dt-radio name="Disabled" value="Disabled" label="Radio label thats been disabled" disabled/>
-    <dt-radio name="CheckedDisabled" value="Checked" label="Radio label thats been disabled & checked" checked disabled />
+    <dt-radio name="CheckedDisabled" value="Checked" label="Radio label thats been disabled & checked" :model-value="true" disabled />
   </fieldset>
 </code-well-header>
 
@@ -94,7 +94,7 @@ htmlCode='
 vueCode='
 <dt-radio name="Value" value="Value" label="Radio label"/>
 <dt-radio name="Disabled" value="Disabled" label="Radio label thats been disabled" disabled/>
-<dt-radio name="CheckedDisabled" value="Checked" label="Radio label thats been disabled & checked" checked disabled />
+<dt-radio name="CheckedDisabled" value="Checked" label="Radio label thats been disabled & checked" :model-value="true" disabled />
 '
 showHtmlWarning />
 

@@ -25,12 +25,12 @@
       </div>
     </label>
     <div
-      v-if="hasDescriptionOrMessages"
+      v-if="$slots.description || description || hasMessages"
       class="d-radio__messages"
       data-qa="radio-description-messages"
     >
       <div
-        v-if="hasDescription"
+        v-if="$slots.description || description"
         :class="['d-description', descriptionClass]"
         v-bind="descriptionChildProps"
         data-qa="radio-description"
@@ -95,6 +95,13 @@ export default {
      * @type {String | Number}
      */
     'input',
+    /**
+     * Event fired to sync the modelValue prop with the parent component
+     *
+     * @event input
+     * @type {String | Number}
+     */
+    'update:modelValue',
 
     /**
      * Native input focus event
@@ -158,14 +165,6 @@ export default {
       };
     },
 
-    hasDescription () {
-      return !!(this.$slots.description || this.description);
-    },
-
-    hasDescriptionOrMessages () {
-      return this.hasDescription || this.hasMessages;
-    },
-
     hasMessages () {
       return this.formattedMessages.length && this.showMessages;
     },
@@ -190,8 +189,8 @@ export default {
       if (value !== this.radioGroupValue) {
         // update provided value if injected
         this.setGroupValue(value);
-
         this.$emit('input', value);
+        this.$emit('update:modelValue', value);
       }
     },
   },

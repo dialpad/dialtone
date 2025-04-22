@@ -28,6 +28,7 @@
     <dt-dropdown
       v-if="showArrowButton"
       :id="id"
+      :modal="false"
       :fallback-placements="fallbackPlacements"
       :open="open"
       :placement="placement"

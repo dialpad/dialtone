@@ -5,7 +5,7 @@ thumb: true
 image: assets/images/components/toggle.png
 description: A toggle, or "switch", is a button control element that allows the user to make a binary selection.
 storybook: https://dialtone.dialpad.com/vue/?path=/story/components-toggle--default
-figma_url: https://www.figma.com/file/2adf7JhZOncRyjYiy2joil/DT-Core%3A-Components-7?node-id=8919%3A21460&viewport=-359%2C250%2C0.49&t=xHutRjwo1o5zMTgT-11
+figma_url: https://www.figma.com/design/W58r5BkO8qTw3vem9YieJd/DT9-Component-Library--Rebrand-2025-?node-id=8272-20496
 ---
 <code-well-header>
   <div class="d-toggle-group d-d-flex d-ai-center">
@@ -49,11 +49,11 @@ The Toggle component acts as a way to allow the User to switch between two mutua
 <code-well-header>
   <dt-stack as="fieldset" gap="400">
     <dt-toggle label-class="d-mr6">Unchecked Toggle</dt-toggle>
-    <dt-toggle checked label-class="d-mr6">Checked Toggle</dt-toggle>
+    <dt-toggle :model-value="true" label-class="d-mr6">Checked Toggle</dt-toggle>
     <dt-toggle disabled label-class="d-mr6">Unchecked Disabled</dt-toggle>
-    <dt-toggle checked disabled label-class="d-mr6">Checked Disabled</dt-toggle>
-    <dt-toggle checked="mixed" label-class="d-mr6">Indeterminate Toggle</dt-toggle>
-    <dt-toggle checked="mixed" label-class="d-mr6" disabled>Indeterminate Disabled</dt-toggle>
+    <dt-toggle :model-value="true" disabled label-class="d-mr6">Checked Disabled</dt-toggle>
+    <dt-toggle :model-value="mixed" label-class="d-mr6">Indeterminate Toggle</dt-toggle>
+    <dt-toggle :model-value="mixed" label-class="d-mr6" disabled>Indeterminate Disabled</dt-toggle>
     <dt-toggle label-class="d-mr6" :show-icon="false">Without icon</dt-toggle>
   </dt-stack>
 </code-well-header>
@@ -92,19 +92,19 @@ vueCode='
 <dt-toggle>
   Unchecked Toggle
 </dt-toggle>
-<dt-toggle :checked="true">
+<dt-toggle :model-value="true">
   Checked Toggle
 </dt-toggle>
 <dt-toggle :disabled="true">
   Unchecked Disabled
 </dt-toggle>
-<dt-toggle :checked="true" :disabled="true">
+<dt-toggle :model-value="true" :disabled="true">
   Checked Disabled
 </dt-toggle>
-<dt-toggle checked="mixed">
+<dt-toggle model-value="mixed">
   Indeterminate Toggle
 </dt-toggle>
-<dt-toggle checked="mixed" :disabled="true">
+<dt-toggle model-value="mixed" :disabled="true">
   Indeterminate Disabled
 </dt-toggle>
 <dt-toggle :show-icon="false">

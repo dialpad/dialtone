@@ -60,7 +60,7 @@ export const argTypesData = {
 
 // Set default values at the story level here.
 export const argsData = {
-  value: 'In the beginning, it was a nice day',
+  modelValue: 'In the beginning, it was a nice day',
   placeholder: 'New message',
   inputAriaLabel: 'Input text field',
   maxHeight: '40vh',

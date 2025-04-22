@@ -5,7 +5,7 @@ status: ready
 thumb: true
 image: assets/images/components/button.png
 storybook: https://dialtone.dialpad.com/vue/?path=/story/components-button--default
-figma_url: https://www.figma.com/design/2adf7JhZOncRyjYiy2joil/branch/PCrJdyyPbcQ2WEXDUpzfsz/DT9-Component-Library?node-id=19800-33209&t=IFey3MiB0H6pv0QY-11
+figma_url: https://www.figma.com/design/W58r5BkO8qTw3vem9YieJd/DT9-Component-Library--Rebrand-2025-?node-id=19800-32233
 
 ---
 

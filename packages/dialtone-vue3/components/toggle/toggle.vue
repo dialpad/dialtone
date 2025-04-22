@@ -47,11 +47,6 @@ export default {
 
   inheritAttrs: false,
 
-  model: {
-    prop: 'checked',
-    event: 'change',
-  },
-
   props: {
 
     /**
@@ -73,10 +68,10 @@ export default {
 
     /**
      * Value of the toggle
-     * @model checked
+     * @model modelValue
      * @values true, false, 'mixed'
      */
-    checked: {
+    modelValue: {
       type: [Boolean, String],
       default: false,
       validator: (v) => TOGGLE_CHECKED_VALUES.includes(v),
@@ -137,11 +132,20 @@ export default {
      * @model change
      */
     'change',
+
+    /**
+     * v-model event event
+     *
+     * @event change
+     * @type {Boolean}
+     * @model change
+     */
+    'update:modelValue',
   ],
 
   data () {
     return {
-      internalChecked: this.checked,
+      internalChecked: this.modelValue,
       hasSlotContent,
     };
   },
@@ -176,7 +180,7 @@ export default {
   },
 
   watch: {
-    checked (newChecked) {
+    modelValue (newChecked) {
       this.internalChecked = newChecked;
     },
   },
@@ -189,6 +193,7 @@ export default {
     addClassStyleAttrs,
     toggleCheckedValue () {
       this.$emit('change', !this.internalChecked);
+      this.$emit('update:modelValue', !this.internalChecked);
 
       if (this.toggleOnClick) {
         this.internalChecked = !this.internalChecked;

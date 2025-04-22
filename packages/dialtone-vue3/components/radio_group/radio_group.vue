@@ -16,7 +16,7 @@ export default {
      * A provided value for the radio group
      * @model value
      */
-    value: {
+    modelValue: {
       type: [String, Number],
       default: '',
     },
@@ -54,16 +54,23 @@ export default {
      * @type {String | Number}
      */
     'input',
+    /**
+     * Native input event
+     *
+     * @event input
+     * @type {String | Number}
+     */
+    'update:modelValue',
   ],
 
   data () {
     return {
-      internalValue: this.value,
+      internalValue: this.modelValue,
     };
   },
 
   watch: {
-    value (newValue) {
+    modelValue (newValue) {
       this.internalValue = newValue;
     },
 
@@ -87,6 +94,7 @@ export default {
      */
     setGroupValue (newValue) {
       this.$emit('input', newValue);
+      this.$emit('update:modelValue', newValue);
     },
 
     getMessageKey (type, index) {

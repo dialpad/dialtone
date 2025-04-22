@@ -1,3 +1,10 @@
+# [8.53.0](https://github.com/dialpad/dialtone/compare/dialtone-css/v8.52.1...dialtone-css/v8.53.0) (2025-04-17)
+
+
+### Features
+
+* **Toast:** DLT-2418 support multiple layouts within toast ([#678](https://github.com/dialpad/dialtone/issues/678)) ([c593554](https://github.com/dialpad/dialtone/commit/c593554cc59fc171a4ce42e670c539a83d64a06c))
+
 ## [8.52.1](https://github.com/dialpad/dialtone/compare/dialtone-css/v8.52.0...dialtone-css/v8.52.1) (2025-04-15)
 
 

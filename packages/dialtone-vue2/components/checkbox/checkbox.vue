@@ -25,12 +25,12 @@
       </div>
     </label>
     <div
-      v-if="hasDescriptionOrMessages"
+      v-if="$slots.description || description || hasMessages"
       class="d-checkbox__messages"
       data-qa="checkbox-description-messages"
     >
       <div
-        v-if="hasDescription"
+        v-if="$slots.description || description"
         :class="['d-description', descriptionClass]"
         v-bind="descriptionChildProps"
         data-qa="checkbox-description"
@@ -113,14 +113,6 @@ export default {
 
     hasLabel () {
       return !!(this.$slots.default || this.label);
-    },
-
-    hasDescription () {
-      return !!(this.$slots.description || this.description);
-    },
-
-    hasDescriptionOrMessages () {
-      return this.hasDescription || this.hasMessages;
     },
 
     hasMessages () {

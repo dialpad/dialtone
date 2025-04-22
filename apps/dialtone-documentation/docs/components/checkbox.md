@@ -5,7 +5,7 @@ status: ready
 thumb: true
 image: assets/images/components/checkbox.png
 storybook: https://dialtone.dialpad.com/vue/?path=/story/components-checkbox--default
-figma_url: https://www.figma.com/file/2adf7JhZOncRyjYiy2joil/DT-Core%3A-Components-7?node-id=8921%3A21160&viewport=-351%2C484%2C0.54&t=xHutRjwo1o5zMTgT-11
+figma_url: https://www.figma.com/design/W58r5BkO8qTw3vem9YieJd/DT9-Component-Library--Rebrand-2025-?node-id=24943-2447
 ---
 <code-well-header>
   <dt-checkbox
@@ -150,7 +150,7 @@ vueCode='
   name="checked"
   value="Value"
   label="Checkbox label"
-  checked
+  :model-value="true"
 />
 <!-- Disabled -->
 <dt-checkbox
@@ -164,7 +164,7 @@ vueCode='
   name="disabled-checked"
   value="Value"
   label="Checkbox label"
-  checked
+  :model-value="true"
   disabled
 />
 '
@@ -232,7 +232,7 @@ vueCode='
   name="indeterminate-disabled"
   value="Value"
   label="Indeterminate checkbox disabled"
-  checked
+  :model-value="true"
   disabled
   indeterminate
 />

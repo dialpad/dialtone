@@ -18,10 +18,11 @@
         :hide-action="$attrs.hideAction"
         :hide-icon="$attrs.hideIcon"
         :duration="$attrs.duration"
+        :layout="$attrs.layout"
         :close-button-props="buttonCloseProps"
         :visually-hidden-close="$attrs.visuallyHiddenClose"
         :visually-hidden-close-label="$attrs.visuallyHiddenCloseLabel"
-        @close="$attrs.onClose($event)"
+        @close="$attrs.onClose"
       >
         <span
           v-if="$attrs.default"

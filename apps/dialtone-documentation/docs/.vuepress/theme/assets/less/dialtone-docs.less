@@ -462,15 +462,11 @@ a.header-anchor {
   justify-content: center;
   width: var(--icon-card-width);
   height: 100%;
-  padding: var(--dt-space-400);
-  background-color: hsl(var(--dt-color-black-200-h), var(--dt-color-black-200-s), var(--dt-color-black-200-l), 0);
-  border-radius: var(--dt-size-400);
   cursor: pointer;
   transition: all 150ms var(--ttf-in-out);
 
-  &:hover,
   .dialtone-icon-card[data-selected='yes'] & {
-    background-color: hsl(var(--dt-color-black-200-h), var(--dt-color-black-200-s), var(--dt-color-black-200-l), 0.4);
+    background-color: var(--dt-action-color-background-muted-active);
   }
 
   &.logo-white {
