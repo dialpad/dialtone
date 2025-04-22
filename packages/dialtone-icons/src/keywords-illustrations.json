@@ -1,6 +1,7 @@
 {
   "categories": {
     "spot-illustrations": {
+      "access-denied": [],
       "atomic-pathway": [
         "atomic",
         "space"
@@ -90,16 +91,19 @@
         "marketing"
       ],
       "login-error": [],
+      "magnifier": [],
       "mic-detected": [],
       "mind": [
         "mind"
       ],
       "new-meeting": [],
       "new-message": [],
+      "nothing-to-see-here": [],
       "orbital-harmony": [
         "orbital",
         "harmony"
       ],
+      "something-went-wrong": [],
       "vector-vortex": [
         "vector",
         "vortex"
