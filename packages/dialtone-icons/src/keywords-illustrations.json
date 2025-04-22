@@ -1,7 +1,6 @@
 {
   "categories": {
     "spot-illustrations": {
-      "Theres-nothing-to-see-here": [],
       "access-denied": [],
       "atomic-pathway": [
         "atomic",
@@ -92,12 +91,14 @@
         "marketing"
       ],
       "login-error": [],
+      "magnifier": [],
       "mic-detected": [],
       "mind": [
         "mind"
       ],
       "new-meeting": [],
       "new-message": [],
+      "nothing-to-see-here": [],
       "orbital-harmony": [
         "orbital",
         "harmony"
