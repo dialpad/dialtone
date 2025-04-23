@@ -55,8 +55,6 @@
         :auto-focus="false"
         :append-to="appendTo"
         :transition="transition"
-        :visually-hidden-close-label="visuallyHiddenCloseLabel"
-        :visually-hidden-close="visuallyHiddenClose"
         @opened="opened($event, arguments[1]);"
       >
         <template
@@ -121,7 +119,6 @@ import { DtCombobox, COMBOBOX_LABEL_SIZES } from '@/components/combobox';
 import { DtPopover, POPOVER_APPEND_TO_VALUES, POPOVER_CONTENT_WIDTHS } from '@/components/popover';
 import { getUniqueString } from '@/common/utils';
 import { DROPDOWN_PADDING_CLASSES } from '@/components/dropdown';
-import SrOnlyCloseButtonMixin from '@/common/mixins/sr_only_close_button';
 
 export default {
   name: 'DtRecipeComboboxWithPopover',
@@ -132,8 +129,6 @@ export default {
     ComboboxLoadingList,
     ComboboxEmptyList,
   },
-
-  mixins: [SrOnlyCloseButtonMixin],
 
   props: {
     /**
