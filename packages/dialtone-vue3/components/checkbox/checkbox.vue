@@ -88,6 +88,13 @@ export default {
      * @type {Boolean}
      */
     'input',
+    /**
+     * Event fired to sync the modelValue prop with the parent component
+     *
+     * @event update:modelValue
+     * @type {Boolean}
+     */
+    'update:modelValue',
 
     /**
      * Native input focusin event
@@ -172,6 +179,7 @@ export default {
 
       // emit the state of the checkbox
       this.$emit('input', checked);
+      this.$emit('update:modelValue', checked);
     },
 
     runValidations () {

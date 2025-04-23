@@ -150,7 +150,7 @@ vueCode='
   name="checked"
   value="Value"
   label="Checkbox label"
-  checked
+  :model-value="true"
 />
 <!-- Disabled -->
 <dt-checkbox
@@ -164,7 +164,7 @@ vueCode='
   name="disabled-checked"
   value="Value"
   label="Checkbox label"
-  checked
+  :model-value="true"
   disabled
 />
 '
@@ -232,7 +232,7 @@ vueCode='
   name="indeterminate-disabled"
   value="Value"
   label="Indeterminate checkbox disabled"
-  checked
+  :model-value="true"
   disabled
   indeterminate
 />

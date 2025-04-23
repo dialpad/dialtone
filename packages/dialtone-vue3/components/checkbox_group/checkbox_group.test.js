@@ -230,7 +230,7 @@ describe('Checkbox Group Tests', () => {
   });
 
   describe('Validation Tests', () => {
-    const MOCK_PROP = DtCheckboxGroup.props.value;
+    const MOCK_PROP = DtCheckboxGroup.props.modelValue;
 
     describe('When a value is not provided', () => {
       it('passes custom prop validation', () => {

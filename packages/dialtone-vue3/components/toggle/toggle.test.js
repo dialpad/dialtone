@@ -92,7 +92,7 @@ describe('DtToggle Tests', () => {
 
     describe('Unchecked Toggle', () => {
       beforeEach(() => {
-        mockProps = { checked: false };
+        mockProps = { modelValue: false };
 
         updateWrapper();
       });
@@ -102,7 +102,7 @@ describe('DtToggle Tests', () => {
       });
 
       describe('checked behaviour', () => {
-        it('should set correct checked attributes when checked prop is false', () => {
+        it('should set correct checked attributes when modelValue prop is false', () => {
           expect(button.attributes('aria-checked')).toBe('false');
           expect(button.classes().includes('d-toggle--checked')).toBe(false);
         });
@@ -122,7 +122,7 @@ describe('DtToggle Tests', () => {
     describe('Checked Toggle', () => {
       beforeEach(() => {
         mockProps = {
-          checked: true,
+          modelValue: true,
           disabled: false,
         };
 
@@ -153,7 +153,7 @@ describe('DtToggle Tests', () => {
 
     describe('Indeterminate Toggle', () => {
       beforeEach(() => {
-        mockProps = { checked: 'mixed' };
+        mockProps = { modelValue: 'mixed' };
 
         updateWrapper();
       });

@@ -7,7 +7,7 @@
     :show-messages="$attrs.showMessages"
     :messages="$attrs.messages"
     :name="$attrs.name"
-    :value="$attrs.value"
+    :model-value="$attrs.modelValue"
     :disabled="$attrs.disabled"
     :label-class="$attrs.labelClass"
     :description-class="$attrs.descriptionClass"

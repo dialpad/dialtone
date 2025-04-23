@@ -6,8 +6,8 @@
       {
         'd-root-layout--fixed': fixed,
         'd-root-layout--inverted': isInverted,
-        [`d-root-layout__responsive--${responsiveBreakpoint}`]: !!responsiveBreakpoint,
       },
+      responsiveBreakpointClass,
     ]"
     data-qa="dt-root-layout"
   >
@@ -158,6 +158,12 @@ export default {
   computed: {
     isInverted () {
       return this.sidebarPosition === ROOT_LAYOUT_SIDEBAR_POSITIONS.RIGHT;
+    },
+
+    responsiveBreakpointClass () {
+      return this.responsiveBreakpoint
+        ? `d-root-layout__responsive--${this.responsiveBreakpoint}`
+        : 'd-root-layout__responsive--default';
     },
   },
 };
