@@ -7,7 +7,7 @@ export default {
     $ta,
     setI18N,
   },
-  //
+
   computed: {
     currentLocale: () => currentLocale,
   },
