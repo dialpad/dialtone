@@ -20,7 +20,7 @@ on:
           - vue3
           - eslint-plugin
           - stylelint-plugin
-          - postcss-response-variations
+          - postcss-responsive-variations
   schedule:
     - cron: "0 10 * * 2"
 
@@ -131,7 +131,7 @@ jobs:
         run: pnpm nx run stylelint-plugin-dialtone:release
 
       - name: Release Dialtone PostCSS Responsive Variations Plugin ${{ env.RELEASE_TAG }}
-        if: ${{ github.event_name == 'schedule' || github.event.inputs.package == 'all' || github.event.inputs.package == 'dialtone' }}
+        if: ${{ github.event_name == 'schedule' || github.event.inputs.package == 'all' || github.event.inputs.package == 'postcss-responsive-variations' }}
         run: pnpm nx run postcss-responsive-variations:release
 
       - name: Release Dialtone ${{ env.RELEASE_TAG }}
