@@ -1,7 +1,7 @@
 <template>
   <table class="d-table dialtone-doc-table">
     <thead>
-      <tr class="sm:d-d-none">
+      <tr>
         <th
           scope="col"
           class="d-label--sm-compact d-tt-none"
@@ -39,7 +39,7 @@
         @focusin="onEnterRow(name)"
         @focusout="onLeaveRow()"
       >
-        <td class="d-w128 sm:d-w72 d-box-content">
+        <td class="d-w72 sm:d-w128 d-box-content">
           <token-example
             :category="category"
             :name="exampleName || name"
@@ -185,5 +185,12 @@ export default {
 
 .d-table tr th:first-child {
   width: 16rem;
+}
+
+.d-table thead tr {
+  display: none;
+  @media (min-width: 480px) {
+    display: table-row;
+  }
 }
 </style>

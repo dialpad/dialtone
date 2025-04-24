@@ -289,7 +289,7 @@ vueCode='
     gap="500"
     class="d-ai-flex-start d-w100p"
   >
-    <dt-stack class="d-w50p md:d-w100p">
+    <dt-stack class="d-w100p md:d-w50p">
       <h3 class="d-headline--md">Column</h3>
       <dt-stack
         :gap="selectedGap"
@@ -301,7 +301,7 @@ vueCode='
         <div class="d-bgc-secondary">Stack item 3</div>
       </dt-stack>
     </dt-stack>
-    <dt-stack class="d-w50p md:d-w100p">
+    <dt-stack class="d-w100p md:d-w50p">
       <h3 class="d-headline--md">Row</h3>
       <div class="d-d-inline-flex">
         <dt-stack

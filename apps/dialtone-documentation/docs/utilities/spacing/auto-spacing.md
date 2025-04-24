@@ -25,9 +25,9 @@ description: Utilities for controlling the space between child elements.
 
 <code-well-header class="d-fl-center d-p24 d-bgc-purple-100 d-w100p d-hmn216" custom>
   <div class="d-fl-center d-bgc-tan-200 d-flow24 d-bar8 d-fs-300 d-fw-bold d-ta-center">
-    <div class="lg:d-w96 d-w128 d-p16 d-bar8 d-bgc-purple-300">1</div>
-    <div class="lg:d-w96 d-w128 d-p16 d-bar8 d-bgc-purple-300">2</div>
-    <div class="lg:d-w96 d-w128 d-p16 d-bar8 d-bgc-purple-300">3</div>
+    <div class="d-w96 lg:d-w128 d-p16 d-bar8 d-bgc-purple-300">1</div>
+    <div class="d-w96 lg:d-w128 d-p16 d-bar8 d-bgc-purple-300">2</div>
+    <div class="d-w96 lg:d-w128 d-p16 d-bar8 d-bgc-purple-300">3</div>
   </div>
 </code-well-header>
 
