@@ -1,3 +1,10 @@
+# [1.42.0](https://github.com/dialpad/dialtone/compare/dialtone-tokens/v1.41.2...dialtone-tokens/v1.42.0) (2025-04-25)
+
+
+### Features
+
+* DLT-2307 dialpad rebrand 2025 ([#733](https://github.com/dialpad/dialtone/issues/733)) ([1be97a2](https://github.com/dialpad/dialtone/commit/1be97a2a6c7ac81b85e7efd3b0bef57fcf54f329))
+
 # [1.42.0-rebrand-2025-beta.3](https://github.com/dialpad/dialtone/compare/dialtone-tokens/v1.42.0-rebrand-2025-beta.2...dialtone-tokens/v1.42.0-rebrand-2025-beta.3) (2025-04-07)
 
 
