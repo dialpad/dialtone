@@ -1,3 +1,16 @@
+# [3.178.0](https://github.com/dialpad/dialtone/compare/dialtone-vue3/v3.177.1...dialtone-vue3/v3.178.0) (2025-04-24)
+
+
+### Bug Fixes
+
+* **Callbar Button With Dropdown:** DLT-2441 add modal false ([#723](https://github.com/dialpad/dialtone/issues/723)) ([b031e78](https://github.com/dialpad/dialtone/commit/b031e785b698b45b6cc85ab4a52f1b029ed1854f))
+* NO-JIRA vue 3 v-model corrections ([#711](https://github.com/dialpad/dialtone/issues/711)) ([2d5c646](https://github.com/dialpad/dialtone/commit/2d5c646b268a06b1ee43b4b07646efdf353a9665))
+
+
+### Features
+
+* **Breakpoints, Stack, Layout:** DLT-2462 reverse default breakpoints ([#722](https://github.com/dialpad/dialtone/issues/722)) ([b4c01e1](https://github.com/dialpad/dialtone/commit/b4c01e1929c1c895796fc3859295e9f6674db1a0))
+
 ## [3.177.1](https://github.com/dialpad/dialtone/compare/dialtone-vue3/v3.177.0...dialtone-vue3/v3.177.1) (2025-04-21)
 
 

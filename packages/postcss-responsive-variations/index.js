@@ -1,9 +1,9 @@
 const postcss = require('postcss');
 const defaultBreakpoints = [
-  { prefix: 'sm\\:', mediaQuery: '(max-width: 480px)' },
-  { prefix: 'md\\:', mediaQuery: '(max-width: 640px)' },
-  { prefix: 'lg\\:', mediaQuery: '(max-width: 960px)' },
-  { prefix: 'xl\\:', mediaQuery: '(max-width: 1264px)' },
+  { prefix: 'sm\\:', mediaQuery: '(min-width: 480px)' },
+  { prefix: 'md\\:', mediaQuery: '(min-width: 640px)' },
+  { prefix: 'lg\\:', mediaQuery: '(min-width: 960px)' },
+  { prefix: 'xl\\:', mediaQuery: '(min-width: 1264px)' },
 ];
 
 function processBreakpoints (root, breakpoints) {
