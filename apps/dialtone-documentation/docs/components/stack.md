@@ -266,7 +266,7 @@ vueCode='
   <dt-stack class=" d-w100p">
     <h3 class="d-label">Select a gap option</h3>
     <dt-stack
-      :direction="{ 'default': 'row', 'md': 'column' }"
+      :direction="{ 'default': 'column', 'md': 'row' }"
       gap="200"
       class="d-bgc-primary d-p2 d-bar4 d-mb16"
     >
@@ -285,7 +285,7 @@ vueCode='
     </dt-stack>
   </dt-stack>
   <dt-stack
-    :direction="{ 'default': 'row', 'md': 'column' }"
+    :direction="{ 'default': 'column', 'md': 'row' }"
     gap="500"
     class="d-ai-flex-start d-w100p"
   >
