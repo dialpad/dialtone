@@ -1,3 +1,10 @@
+# [8.55.0](https://github.com/dialpad/dialtone/compare/dialtone-css/v8.54.0...dialtone-css/v8.55.0) (2025-04-25)
+
+
+### Features
+
+* DLT-2307 dialpad rebrand 2025 ([#733](https://github.com/dialpad/dialtone/issues/733)) ([1be97a2](https://github.com/dialpad/dialtone/commit/1be97a2a6c7ac81b85e7efd3b0bef57fcf54f329))
+
 # [8.54.0](https://github.com/dialpad/dialtone/compare/dialtone-css/v8.53.0...dialtone-css/v8.54.0) (2025-04-23)
 
 
