@@ -614,7 +614,6 @@ describe('DtRecipeEditor tests', () => {
       beforeEach(async () => {
         _mountWrapper();
         await wrapper.vm.$nextTick();
-        _setChildWrappers();
       });
       it('should contain tabindex of 0 when disableTopBarFocus property is not set', function () {
         expect(wrapper.html()).toContain(`tabindex="0"`);
@@ -625,7 +624,6 @@ describe('DtRecipeEditor tests', () => {
         _mountWrapper();
         await wrapper.setProps({ disableTopBarFocus: false });
         await wrapper.vm.$nextTick();
-        _setChildWrappers();
       });
       it('should contain tabindex of 0 when disableTopBarFocus property is false', function () {
         expect(wrapper.html()).toContain(`tabindex="0"`);
@@ -636,12 +634,10 @@ describe('DtRecipeEditor tests', () => {
         _mountWrapper();
         await wrapper.setProps({ disableTopBarFocus: true });
         await wrapper.vm.$nextTick();
-        _setChildWrappers();
       });
       it('should contain tabindex of -1 when disableTopBarFocus property is true', function () {
         expect(wrapper.vm.disableTopBarFocus).toBe(true);
         expect(wrapper.html()).toContain(`tabindex="-1"`);
-        // expect(editor.html()).toContain(`tabindex="0"`);
       });
     });
   });
