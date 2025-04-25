@@ -1,3 +1,10 @@
+# [8.55.0-beta.1](https://github.com/dialpad/dialtone/compare/dialtone-css/v8.54.0...dialtone-css/v8.55.0-beta.1) (2025-04-25)
+
+
+### Features
+
+* **Breakpoints:** DLT-2463 migrate doc site to new breakpoints ([#728](https://github.com/dialpad/dialtone/issues/728)) ([9f4d888](https://github.com/dialpad/dialtone/commit/9f4d888de7a4c6d2f12a772081fa2642e6d2e4cc))
+
 # [8.54.0](https://github.com/dialpad/dialtone/compare/dialtone-css/v8.53.0...dialtone-css/v8.54.0) (2025-04-23)
 
 
