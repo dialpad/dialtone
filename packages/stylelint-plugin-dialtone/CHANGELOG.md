@@ -1,3 +1,10 @@
+# [1.3.0](https://github.com/dialpad/dialtone/compare/stylelint-plugin-dialtone/v1.2.1...stylelint-plugin-dialtone/v1.3.0) (2025-04-25)
+
+
+### Features
+
+* DLT-2307 dialpad rebrand 2025 ([#733](https://github.com/dialpad/dialtone/issues/733)) ([1be97a2](https://github.com/dialpad/dialtone/commit/1be97a2a6c7ac81b85e7efd3b0bef57fcf54f329))
+
 ## [1.2.1](https://github.com/dialpad/dialtone/compare/stylelint-plugin-dialtone/v1.2.0...stylelint-plugin-dialtone/v1.2.1) (2025-04-02)
 
 
