@@ -32,6 +32,7 @@
               importance="clear"
               kind="muted"
               size="xs"
+              :tabindex="topBarTabIndex"
               @click="button.onClick()"
             >
               <template #icon>
@@ -77,6 +78,7 @@
                   importance="clear"
                   kind="muted"
                   size="xs"
+                  :tabindex="topBarTabIndex"
                   @click="linkButton.onClick()"
                 >
                   <template #icon>
@@ -486,6 +488,14 @@ export default {
       type: Boolean,
       default: false,
     },
+
+    /**
+     * Disables focus on the top bar for the recipe editor
+     */
+    disableTopBarFocus: {
+      type: Boolean,
+      default: false,
+    },
   },
 
   emits: [
@@ -729,6 +739,10 @@ export default {
         tooltipMessage: 'Link',
         onClick: this.openLinkInput,
       };
+    },
+
+    topBarTabIndex () {
+      return this.disableTopBarFocus ? -1 : 0;
     },
   },
 
