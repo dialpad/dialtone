@@ -75,22 +75,20 @@ Use `d-cg{#}` to change the column gap space.
 
 ## Classes
 
-<div class="d-h464 d-of-y-scroll d-bb d-bc-black-200">
-  <utility-class-table>
-    <template #content>
-      <tbody v-for="dir in directions">
-        <tr v-for="{ output: rem, value: px } in values">
-          <th scope="row" class="d-code--sm d-fc-purple-400">
-            <span v-if="dir === 'both'">.d-g{{ px }}</span>
-            <span v-else-if="dir === 'column'">.d-cg{{ px }}</span>
-            <span v-else-if="dir === 'row'">.d-rg{{ px }}</span>
-          </th>
-          <td class="d-code--sm">
-            <span v-if="dir !== 'both'">{{ dir }}-gap: {{ rem }}</span>
-            <span v-else>gap: {{ rem }}</span>
-          </td>
-        </tr>
-      </tbody>
-    </template>
-  </utility-class-table>
-</div>
+<utility-class-table>
+  <template #content>
+    <tbody v-for="dir in directions">
+      <tr v-for="{ output: rem, value: px } in values">
+        <th scope="row" class="d-code--sm d-docsite-code">
+          <span v-if="dir === 'both'">.d-g{{ px }}</span>
+          <span v-else-if="dir === 'column'">.d-cg{{ px }}</span>
+          <span v-else-if="dir === 'row'">.d-rg{{ px }}</span>
+        </th>
+        <td class="d-code--sm">
+          <span v-if="dir !== 'both'">{{ dir }}-gap: {{ rem }}</span>
+          <span v-else>gap: {{ rem }}</span>
+        </td>
+      </tr>
+    </tbody>
+  </template>
+</utility-class-table>

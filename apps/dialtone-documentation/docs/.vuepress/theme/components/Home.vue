@@ -1,9 +1,9 @@
 <!-- eslint-disable max-len -->
 <template>
   <section class="hero">
-    <div class="hero__inner-wrapper d-d-flex d-jc-space-between d-mx-auto d-wmx1340 d-pl32 d-pr32 d-ai-center">
+    <div class="hero__inner-wrapper d-d-flex d-jc-space-between d-mx-auto d-wmx1340 d-pl24 d-pr32 d-ai-center">
       <div class="hero__content d-d-flex d-fd-column d-jc-center">
-        <h1 class="d-headline--xxl d-mb12">
+        <h1 class="d-headline--xxl d-mb12 d-ff-marketing">
           Improve your UI's reception with Dialtone
         </h1>
         <p class="d-fs-300 d-lh-400 d-mb16 d-fc-secondary">
@@ -19,7 +19,7 @@
           >
             <img
               alt="Dialtone version number"
-              src="https://img.shields.io/npm/v/@dialpad/dialtone?color=D3BCFF&label=Dialtone"
+              src="https://img.shields.io/npm/v/@dialpad/dialtone?color=F5F0FF&label=Dialtone"
             >
           </a>
         </div>
@@ -61,11 +61,11 @@
   <section class="links d-bt d-bb d-bc-subtle d-bgc-secondary">
     <div class="d-d-grid d-gg16 d-g-cols12 d-wmx1340 d-mx-auto">
       <dt-stack gap="400" class="link d-body--md d-gc3 d-px32 d-ta-center">
-        <router-link class="d-fc-primary h:d-fc-purple-400 h:d-td-underline d-td-none d-bar8 d-pt4" to="/design/">
+        <router-link class="d-fc-primary h:d-td-underline d-td-none d-bar8 d-pt4" to="/design/">
           <dt-stack gap="600">
             <svg-loader class="d-h96" name="home-design-language" />
-            <h2 class="d-headline--xl">
-              Design language
+            <h2 class="d-headline--xl d-ff-marketing">
+              Design Language
             </h2>
           </dt-stack>
         </router-link>
@@ -74,15 +74,15 @@
         </p>
         <dt-stack gap="300">
           <router-link class="d-link" to="/design/">
-            Browse design guidelines
+            Browse Design Guidelines
           </router-link>
         </dt-stack>
       </dt-stack>
       <dt-stack gap="400" class="link d-body--md d-gc3 d-px32 d-ta-center">
-        <router-link class="d-fc-primary h:d-fc-purple-400 h:d-td-underline d-td-none d-bar8 d-pt4" to="/components/">
+        <router-link class="d-fc-primary h:d-td-underline d-td-none d-bar8 d-pt4" to="/components/">
           <dt-stack gap="600">
             <svg-loader class="d-h96" name="home-components" />
-            <h2 class="d-headline--xl">
+            <h2 class="d-headline--xl d-ff-marketing">
               Components
             </h2>
           </dt-stack>
@@ -92,21 +92,21 @@
         </p>
         <dt-stack gap="300">
           <router-link class="d-link" to="/components/">
-            Browse CSS components
+            Browse CSS Components
           </router-link>
           <a class="d-link" href="https://dialtone.dialpad.com/vue/index.html?path=/docs/welcome--docs" target="_blank" rel="noopener noreferrer">
-            Browse Vue 2 components
+            Browse Vue 2 Components
           </a>
           <a class="d-link" href="https://dialtone.dialpad.com/vue3/index.html?path=/docs/welcome--docs" target="_blank" rel="noopener noreferrer">
-            Browse Vue 3 components
+            Browse Vue 3 Components
           </a>
         </dt-stack>
       </dt-stack>
       <dt-stack gap="400" class="link d-body--md d-gc3 d-px32 d-ta-center">
-        <router-link class="d-fc-primary h:d-fc-purple-400 h:d-td-underline d-td-none d-bar8 d-pt4" to="/utilities/">
+        <router-link class="d-fc-primary h:d-td-underline d-td-none d-bar8 d-pt4" to="/utilities/">
           <dt-stack gap="600">
             <svg-loader class="d-h96" name="home-utilities" />
-            <h2 class="d-headline--xl">
+            <h2 class="d-headline--xl d-ff-marketing">
               Utilities
             </h2>
           </dt-stack>
@@ -116,15 +116,15 @@
         </p>
         <dt-stack gap="300">
           <router-link class="d-link" to="/utilities/">
-            Browse utility classes
+            Browse Utility Classes
           </router-link>
         </dt-stack>
       </dt-stack>
       <dt-stack gap="400" class="link d-body--md d-gc3 d-px32 d-ta-center">
-        <router-link class="d-fc-primary h:d-fc-purple-400 h:d-td-underline d-td-none d-bar8 d-pt4" to="/guides/">
+        <router-link class="d-fc-primary h:d-td-underline d-td-none d-bar8 d-pt4" to="/guides/">
           <dt-stack gap="600">
             <svg-loader class="d-h96" name="home-guides" />
-            <h2 class="d-headline--xl">
+            <h2 class="d-headline--xl d-ff-marketing">
               Guides
             </h2>
           </dt-stack>
@@ -134,10 +134,10 @@
         </p>
         <dt-stack gap="300">
           <router-link class="d-link" to="/guides/getting-started/">
-            Getting started
+            Getting Started
           </router-link>
           <router-link class="d-link" to="/guides/content/">
-            Writing guidelines
+            Writing Guidelines
           </router-link>
           <router-link class="d-link" to="/guides/accessibility/">
             Accessibility

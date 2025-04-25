@@ -7,22 +7,26 @@ description: Utilities for setting an object's flex direction, wrap, and flow di
 
 The `flex-direction` property declares a flex container’s main axis direction. The default value is row.
 
-<table class="d-table dialtone-doc-table">
-  <thead>
-    <tr>
-      <th scope="col" class="d-w20p">Class</th>
-      <th scope="col" class="d-w30p">Output</th>
-      <th scope="col">Description</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr v-for="{ class: className, output, description } in direction">
-      <th scope="row" class="d-code--sm d-fc-purple-400">.d-{{ className }}</th>
-      <td class="d-code--sm">{{ output }}</td>
-      <td>{{ description }}</td>
-    </tr>
-  </tbody>
-</table>
+<div v-dt-scrollbar class="d-hmx464 d-bar8 d-ba d-bc-subtle d-mb16">
+  <div>
+    <table class="d-table dialtone-doc-table">
+      <thead class="d-bgc-primary d-ps-sticky d-zi-base1 d-t0">
+        <tr>
+          <th scope="col" class="d-p0 d-bbw0 d-w20p"><div class="d-p16 d-bb d-bc-default d-bbw1">Class</div></th>
+          <th scope="col" class="d-p0 d-bbw0 d-w30p"><div class="d-p16 d-bb d-bc-default d-bbw1">Output</div></th>
+          <th scope="col" class="d-p0 d-bbw0"><div class="d-p16 d-bb d-bc-default d-bbw1">Description</div></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr v-for="{ class: className, output, description } in direction">
+          <th scope="row" class="d-code--sm d-docsite-code">.d-{{ className }}</th>
+          <td class="d-code--sm">{{ output }}</td>
+          <td>{{ description }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
 
 <code-well-header class="d-fl-center d-fd-column d-p24 d-bgc-purple-100 d-bgo50 d-w100p d-hmn216">
   <div class="d-d-flex d-fd-row-reverse d-w100p d-bar8 d-bgc-purple-100">
@@ -54,22 +58,26 @@ The `flex-direction` property declares a flex container’s main axis direction.
 
 The `flex-wrap` property declares a flex container’s wrapping status. The default value is nowrap.
 
-<table class="d-table dialtone-doc-table">
-  <thead>
-    <tr>
-      <th scope="col" class="d-w20p">Class</th>
-      <th scope="col" class="d-w30p">Output</th>
-      <th scope="col">Description</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr v-for="{ class: className, output, description } in wrap">
-      <th scope="row" class="d-code--sm d-fc-purple-400">.d-{{ className }}</th>
-      <td class="d-code--sm">{{ output }}</td>
-      <td>{{ description }}</td>
-    </tr>
-    </tbody>
-</table>
+<div v-dt-scrollbar class="d-hmx464 d-bar8 d-ba d-bc-subtle d-mb16">
+  <div>
+    <table class="d-table dialtone-doc-table">
+      <thead class="d-bgc-primary d-ps-sticky d-zi-base1 d-t0">
+        <tr>
+          <th scope="col" class="d-p0 d-bbw0 d-w20p"><div class="d-p16 d-bb d-bc-default d-bbw1">Class</div></th>
+          <th scope="col" class="d-p0 d-bbw0 d-w30p"><div class="d-p16 d-bb d-bc-default d-bbw1">Output</div></th>
+          <th scope="col" class="d-p0 d-bbw0"><div class="d-p16 d-bb d-bc-default d-bbw1">Description</div></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr v-for="{ class: className, output, description } in wrap">
+          <th scope="row" class="d-code--sm d-docsite-code">.d-{{ className }}</th>
+          <td class="d-code--sm">{{ output }}</td>
+          <td>{{ description }}</td>
+        </tr>
+        </tbody>
+    </table>
+  </div>
+</div>
 
 <code-well-header class="d-fl-center d-fd-column d-p24 d-bgc-magenta-100 d-bgo50 d-w100p d-hmn216">
   <div class="d-d-flex d-fw-wrap d-w100p d-bar8 d-bgc-magenta-100">
@@ -91,22 +99,26 @@ The `flex-wrap` property declares a flex container’s wrapping status. The defa
 
 The `flex-flow` property is a shorthand property that sets allows you to quickly set the above `flex-direction` and `flex-wrap` properties. By default all flex containers are set to `row` and `nowrap`.
 
-<table class="d-table dialtone-doc-table">
-  <thead>
-    <tr>
-      <th scope="col" class="d-w20p">Class</th>
-      <th scope="col" class="d-w30p">Output</th>
-      <th scope="col">Description</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr v-for="{class: className, output, description} in flow">
-      <th scope="row" class="d-code--sm d-fc-purple-400">.d-{{ className }}</th>
-      <td class="d-code--sm">{{ output }}</td>
-      <td>{{ description }}</td>
-    </tr>
-  </tbody>
-</table>
+<div v-dt-scrollbar class="d-hmx464 d-bar8 d-ba d-bc-subtle d-mb16">
+  <div>
+    <table class="d-table dialtone-doc-table">
+      <thead class="d-bgc-primary d-ps-sticky d-zi-base1 d-t0">
+        <tr>
+          <th scope="col" class="d-p0 d-bbw0 d-w20p"><div class="d-p16 d-bb d-bc-default d-bbw1">Class</div></th>
+          <th scope="col" class="d-p0 d-bbw0 d-w30p"><div class="d-p16 d-bb d-bc-default d-bbw1">Output</div></th>
+          <th scope="col" class="d-p0 d-bbw0"><div class="d-p16 d-bb d-bc-default d-bbw1">Description</div></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr v-for="{class: className, output, description} in flow">
+          <th scope="row" class="d-code--sm d-docsite-code">.d-{{ className }}</th>
+          <td class="d-code--sm">{{ output }}</td>
+          <td>{{ description }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
 
 <code-well-header class="d-fl-center d-fd-column d-p24 d-bgc-blue-100 d-bgo50 d-w100p d-hmn216">
   <div class="d-d-flex d-ff-row-reverse-wrap d-w100p d-bar8 d-bgc-blue-100">

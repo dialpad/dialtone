@@ -41,7 +41,7 @@ description: Utilities for controlling the display box type of an element.
   <template #content>
     <tbody>
       <tr v-for=" { name, output } in display">
-        <th class="d-code--sm d-fc-purple-400">{{ name }}</th>
+        <th class="d-code--sm d-docsite-code">{{ name }}</th>
         <td class="d-code--sm">{{ output }}</td>
       </tr>
     </tbody>

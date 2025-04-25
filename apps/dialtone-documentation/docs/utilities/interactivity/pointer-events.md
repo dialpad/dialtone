@@ -38,7 +38,7 @@ Use the `user-select` property to control whether the user can select text.
   <template #content>
     <tbody>
       <tr v-for="{ class: className, output } in pointerEvents">
-        <th scope="row" class="d-code--sm d-fc-purple-400">.{{ className }}</th>
+        <th scope="row" class="d-code--sm d-docsite-code">.{{ className }}</th>
         <td class="d-code--sm">{{ output }}</td>
       </tr>
     </tbody>

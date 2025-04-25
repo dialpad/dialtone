@@ -112,35 +112,37 @@ Use `d-h-auto` have the browser calculate and select a height.
 
 ## Classes
 
-<div class="d-h464 d-of-y-scroll d-bb d-bc-black-200">
-  <table class="d-table dialtone-doc-table">
-    <thead>
-      <tr>
-        <th scope="col" class="d-w30p">Class</th>
-        <th scope="col">Output</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr v-for="i in percentage">
-        <th scope="row" class="d-code--sm d-fc-purple-400">.d-h{{ i }}p</th>
-        <td class="d-code--sm">height: {{ i }}% !important;</td>
-      </tr>
-    </tbody>
-    <tbody>
-      <tr v-for="i in fixed">
-        <th scope="row" class="d-code--sm d-fc-purple-400">.d-h{{ i }}</th>
-        <td class="d-code--sm">height: {{ i }}px !important;</td>
-      </tr>
-    </tbody>
-    <tbody>
-      <tr>
-        <th scope="row" class="d-code--sm d-fc-purple-400">.d-h100vh</th>
-        <td class="d-code--sm">height: 100vh !important;</td>
-      </tr>
-      <tr v-for="i in other">
-        <th scope="row" class="d-code--sm d-fc-purple-400">.d-h-{{ i }}</th>
-        <td class="d-code--sm">height: {{ i }} !important;</td>
-      </tr>
-    </tbody>
-  </table>
+<div v-dt-scrollbar class="d-hmx464 d-bar8 d-ba d-bc-subtle">
+  <div>
+    <table class="d-table dialtone-doc-table">
+      <thead class="d-bgc-primary d-ps-sticky d-zi-base1 d-t0">
+        <tr>
+          <th scope="col" class="d-p0 d-bbw0 d-w30p"><div class="d-p16 d-bb d-bc-default d-bbw1">Class</div></th>
+          <th scope="col" class="d-p0 d-bbw0"><div class="d-p16 d-bb d-bc-default d-bbw1">Output</div></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr v-for="i in percentage">
+          <th scope="row" class="d-code--sm d-docsite-code">.d-h{{ i }}p</th>
+          <td class="d-code--sm">height: {{ i }}% !important;</td>
+        </tr>
+      </tbody>
+      <tbody>
+        <tr v-for="i in fixed">
+          <th scope="row" class="d-code--sm d-docsite-code">.d-h{{ i }}</th>
+          <td class="d-code--sm">height: {{ i }}px !important;</td>
+        </tr>
+      </tbody>
+      <tbody>
+        <tr>
+          <th scope="row" class="d-code--sm d-docsite-code">.d-h100vh</th>
+          <td class="d-code--sm">height: 100vh !important;</td>
+        </tr>
+        <tr v-for="i in other">
+          <th scope="row" class="d-code--sm d-docsite-code">.d-h-{{ i }}</th>
+          <td class="d-code--sm">height: {{ i }} !important;</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
 </div>

@@ -10,7 +10,7 @@
       v-for="link in items"
       :key="link.text"
       :to="link.link"
-      class="d-btn d-btn--muted d-btn--md d-bar-pill"
+      class="d-btn d-btn--muted d-btn--md d-fw-normal"
       :class="{ 'd-btn--active': isActiveLink(link.text) }"
     >
       {{ link.text }}

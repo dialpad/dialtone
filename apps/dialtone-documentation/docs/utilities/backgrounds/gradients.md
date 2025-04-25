@@ -99,7 +99,7 @@ To create a background gradient, first declare the desired gradient and, if appl
   <template #content>
     <tbody>
       <tr v-for="{ className, output } in gradients">
-          <th scope="row" class="d-code--sm d-fc-purple-400">.d-bgg-{{ className }}</th>
+          <th scope="row" class="d-code--sm d-docsite-code">.d-bgg-{{ className }}</th>
           <td class="d-code--sm">
             background-image: {{ output }}
             <span v-if="!['unset', 'none'].includes(className)"> var(--bgg-stops)) </span>
@@ -114,39 +114,37 @@ To create a background gradient, first declare the desired gradient and, if appl
 
 The starting stop (`d-bgg-from-{color}`) should be declared. Optionally an ending stop (`d-bgg-to-{color}`) can also be declared.
 
-<div class="d-h464 d-of-y-scroll d-bb d-bc-black-200">
 <utility-class-table>
- <template #content>
-        <div v-for="direction in ['from', 'to']" style="display: contents">
-          <tbody v-for="{ color, stops } in baseColors">
-              <tr v-for="{ stop } in stops">
-                  <th scope="row" class="d-code--sm d-fc-purple-400">.d-bgg-{{ direction }}-{{ color }}-{{ stop }}</th>
-                  <td>
-                      <div class="d-d-flex d-jc-space-between d-ai-center">
-                          <div class="d-fl-grow1 d-code--sm">
-                              <span v-if="direction === 'from'">
-                                --bgg-from-opacity: 100%;<br/>
-                                --bgg-from: hsla(var(--{{ color }}-{{ stop }}-h) var(--{{ color }}-{{ stop }}-s) var(--{{ color }}-{{ stop }}-l) / var(--bgg-from-opacity)) !important;<br/>
-                                --bgg-to: hsla(var(--{{ color }}-{{ stop }}-h) var(--{{ color }}-{{ stop }}-s) var(--{{ color }}-{{ stop }}-l) / 0%) !important;
-                              </span>
-                              <span v-else-if="direction === 'to'">
-                                --bgg-to-opacity: 100%;<br/>
-                                --bgg-to: hsla(var(--{{ color }}-{{ stop }}-h) var(--{{ color }}-{{ stop }}-s) var(--{{ color }}-{{ stop }}-l) / var(--bgg-to-opacity)) !important;
-                              </span>
-                          </div>
-                          <div
-                            class="d-fl-shrink0 d-m4 d-ml16 d-h32 d-w64 d-bar4 d-bgg-to-r d-bgg-from-black-100"
-                            :class="[`d-bgg-${direction}-${color}-${stop}`]"
-                          >
-                          </div>
-                      </div>
-                  </td>
-              </tr>
-          </tbody>
-        </div>
-    </template>
-  </utility-class-table>
-</div>
+<template #content>
+       <div v-for="direction in ['from', 'to']" style="display: contents">
+         <tbody v-for="{ color, stops } in baseColors">
+             <tr v-for="{ stop } in stops">
+                 <th scope="row" class="d-code--sm d-docsite-code">.d-bgg-{{ direction }}-{{ color }}-{{ stop }}</th>
+                 <td>
+                     <div class="d-d-flex d-jc-space-between d-ai-center">
+                         <div class="d-fl-grow1 d-code--sm">
+                             <span v-if="direction === 'from'">
+                               --bgg-from-opacity: 100%;<br/>
+                               --bgg-from: hsla(var(--{{ color }}-{{ stop }}-h) var(--{{ color }}-{{ stop }}-s) var(--{{ color }}-{{ stop }}-l) / var(--bgg-from-opacity)) !important;<br/>
+                               --bgg-to: hsla(var(--{{ color }}-{{ stop }}-h) var(--{{ color }}-{{ stop }}-s) var(--{{ color }}-{{ stop }}-l) / 0%) !important;
+                             </span>
+                             <span v-else-if="direction === 'to'">
+                               --bgg-to-opacity: 100%;<br/>
+                               --bgg-to: hsla(var(--{{ color }}-{{ stop }}-h) var(--{{ color }}-{{ stop }}-s) var(--{{ color }}-{{ stop }}-l) / var(--bgg-to-opacity)) !important;
+                             </span>
+                         </div>
+                         <div
+                           class="d-fl-shrink0 d-m4 d-ml16 d-h32 d-w64 d-bar4 d-bgg-to-r d-bgg-from-black-100"
+                           :class="[`d-bgg-${direction}-${color}-${stop}`]"
+                         >
+                         </div>
+                     </div>
+                 </td>
+             </tr>
+         </tbody>
+       </div>
+   </template>
+ </utility-class-table>
 
 <script setup>
   import { gradients } from '@data/backgrounds.json';

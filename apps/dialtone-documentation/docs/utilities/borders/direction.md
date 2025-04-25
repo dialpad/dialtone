@@ -57,7 +57,7 @@ Use `d-b{t|r|b|l|x|y}` to add a border to only specific sides of your element.
   <template #content>
     <tbody>
       <tr v-for="i in directions">
-        <th scope="row" class="d-code--sm d-fc-purple-400">.d-b{{ i[0] }}</th>
+        <th scope="row" class="d-code--sm d-docsite-code">.d-b{{ i[0] }}</th>
         <td class="d-code--sm">
           <span v-if="i === 'y'">
             border-top: var(--dt-space-100) solid !important;<br/>

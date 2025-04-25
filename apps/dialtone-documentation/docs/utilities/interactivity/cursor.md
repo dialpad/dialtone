@@ -39,15 +39,13 @@ description: Utilities for setting the type of mouse cursor, if any, to show whe
 
 ## Classes
 
-<div class="d-h464 d-of-y-scroll d-bb d-bc-black-200">
-  <utility-class-table>
-    <template #content>
-      <tbody>
-        <tr v-for="{ class: className, output } in cursor">
-          <th scope="row" class="d-code--sm d-fw-normal d-fc-purple-400">.{{ className }}</th>
-          <td class="d-code--sm">{{ output }}</td>
-        </tr>
-      </tbody>
-    </template>
-  </utility-class-table>
-</div>
+<utility-class-table>
+  <template #content>
+    <tbody>
+      <tr v-for="{ class: className, output } in cursor">
+        <th scope="row" class="d-code--sm d-fw-normal d-fc-purple-400">.{{ className }}</th>
+        <td class="d-code--sm">{{ output }}</td>
+      </tr>
+    </tbody>
+  </template>
+</utility-class-table>

@@ -6,7 +6,7 @@
 div[class*="language-"] {
 	margin: var(--dt-space-500) 0;
 	padding: var(--dt-space-400);
-	background-color: var(--dt-color-surface-moderate);
+	background-color: var(--dt-color-surface-secondary);
 	border-radius: var(--dt-size-500);
 
 	& pre {
@@ -28,17 +28,16 @@ div[class*="language-"] {
 
 code:not(.d-code--md, .d-code--sm) {
 	padding: var(--dt-space-200) var(--dt-space-300);
-	color: var(--dt-color-purple-400);
-	background-color: var(--dt-color-purple-100);
-	border-radius: var(--dt-size-200);
+	color: var(--dt-color-blue-500);
+	background-color: var(--dt-color-surface-info);
+	border-radius: var(--dt-size-100);
 }
 
 code[class*="language-"],
 pre[class*="language-"] {
 	margin: 0;
-	color: var(--dt-color-foreground-secondary);
-	font-size: var(--dt-font-size-100);
-	font-family: SFMono-Regular, Consolas, "Liberation Mono", Menlo, Courier, monospace !important;
+	color: var(--dt-color-black-1000);
+	font: var(--dt-typography-code-sm);
 	line-height: var(--dt-font-line-height-400);
 	white-space: pre;
 	text-align: left;
@@ -73,11 +72,11 @@ pre[class*="language-"] {
 .token.prolog,
 .token.doctype,
 .token.cdata {
-	color: var(--dt-color-black-600);
+	color: var(--dt-color-foreground-tertiary);
 }
 
 .token.punctuation {
-	color: var(--dt-color-purple-600);
+	color: var(--dt-color-blue-500);
 }
 
 .token.namespace {
@@ -91,7 +90,7 @@ pre[class*="language-"] {
 .token.constant,
 .token.symbol,
 .token.deleted {
-	color: var(--dt-color-purple-500);
+	color: var(--dt-color-blue-500);
 }
 
 .token.selector,
@@ -100,7 +99,7 @@ pre[class*="language-"] {
 .token.char,
 .token.builtin,
 .token.inserted {
-	color: var(--dt-color-blue-400);
+	color: var(--dt-color-purple-550);
 }
 
 .token.operator,
@@ -114,18 +113,18 @@ pre[class*="language-"] {
 .token.atrule,
 .token.attr-value,
 .token.keyword {
-	color: var(--dt-color-green-500);
+	color: var(--dt-color-green-600);
 }
 
 .token.function,
 .token.class-name {
-	color: var(--dt-color-red-400);
+	color: var(--dt-color-red-600);
 }
 
 .token.regex,
 .token.important,
 .token.variable {
-	color: var(--dt-color-gold-500);
+	color: var(--dt-color-gold-600);
 }
 
 .token.important,

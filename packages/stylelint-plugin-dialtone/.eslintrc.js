@@ -1,17 +1,19 @@
-"use strict";
+'use strict';
 
 module.exports = {
-  root: true,
   extends: [
-    "eslint:recommended",
-    "plugin:eslint-plugin/recommended",
-    "plugin:node/recommended",
+    'eslint:recommended',
+    'plugin:eslint-plugin/recommended',
+    'plugin:node/recommended',
   ],
   parserOptions: {
     ecmaVersion: 'latest',
-    parser: "vue-eslint-parser"
+    parser: 'vue-eslint-parser',
   },
   env: {
     node: true,
+  },
+  rules: {
+    'node/no-missing-import': ['warn'],
   },
 };

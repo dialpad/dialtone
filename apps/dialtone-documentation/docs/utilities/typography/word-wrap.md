@@ -65,7 +65,7 @@ Use `d-ww-inherit` to inherit this property from its parent element.
   <template #content>
     <tbody>
       <tr v-for="i in ['normal', 'break-word', 'initial', 'inherit']">
-        <th scope="row" class="d-code--sm d-fc-purple-400">.d-ww-{{ i }}</th>
+        <th scope="row" class="d-code--sm d-docsite-code">.d-ww-{{ i }}</th>
         <td class="d-code--sm">word-wrap: {{ i }} !important;</td>
       </tr>
     </tbody>

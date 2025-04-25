@@ -19,7 +19,7 @@ Use `d-lh-{n}` to change an element's line-height relatively. This means no unit
 
 <code-well-header class="d-d-flex d-jc-center d-fd-column d-p24 d-g16 d-bgc-purple-100 d-w100p d-hmn102" custom>
   <div v-for="{ class: stop } in relative" class="d-d-grid d-ai-center" style="grid-template-columns: 10rem 1fr">
-    <div class="d-code--sm d-fc-purple-400 d-fco75">.d-lh-{{stop}}</div>
+    <div class="d-code--sm d-docsite-code">.d-lh-{{stop}}</div>
     <div>
         <p :class="`d-lh-${stop} d-fs-300 d-bgc-purple-200 d-bgo25`">The quick brown fox jumps over the lazy dog.</p>
     </div>
@@ -64,62 +64,62 @@ Use `d-lh{n}` to fix an element's line-height. This allows you to target a speci
 
 ## CSS Variables
 
-<div class="d-h332 d-of-y-scroll d-bb d-bc-black-200">
-  <table class="d-table dialtone-doc-table">
-    <thead>
-      <tr>
-        <th scope="col">Variable</th>
-        <th scope="col">Output</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr v-for="{ class: className, output } in relative.slice(1)">
-        <th scope="row" class="d-code--sm d-fc-purple-400">
-          var(--dt-font-line-height-{{ className }})
-        </th>
-        <td class="d-code--sm">{{ output }}</td>
-      </tr>
-      <tr v-for="{ class: className, output } in fixed">
-        <th scope="row" class="d-code--sm d-fc-purple-400">
-          var(--lh{{ className }})
-        </th>
-        <td class="d-code--sm">{{ output }}</td>
-      </tr>
-    </tbody>
-  </table>
+<div v-dt-scrollbar class="d-hmx464 d-bar8 d-ba d-bc-subtle">
+  <div>
+    <table class="d-table dialtone-doc-table">
+      <thead class="d-bgc-primary d-ps-sticky d-zi-base1 d-t0">
+        <tr>
+          <th scope="col" class="d-p0 d-bbw0"><div class="d-p16 d-bb d-bc-default d-bbw1">Variable</div></th>
+          <th scope="col" class="d-p0 d-bbw0"><div class="d-p16 d-bb d-bc-default d-bbw1">Output</div></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr v-for="{ class: className, output } in relative.slice(1)">
+          <th scope="row" class="d-code--sm d-docsite-code">
+            var(--dt-font-line-height-{{ className }})
+          </th>
+          <td class="d-code--sm">{{ output }}</td>
+        </tr>
+        <tr v-for="{ class: className, output } in fixed">
+          <th scope="row" class="d-code--sm d-docsite-code">
+            var(--lh{{ className }})
+          </th>
+          <td class="d-code--sm">{{ output }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
 </div>
 
 ## Classes
 
-<div class="d-h332 d-of-y-scroll d-bb d-bc-black-200">
-  <utility-class-table>
-    <template #content>
-      <tbody>
-        <tr v-for="{ class: className, output } in relative">
-          <th scope="row" class="d-code--sm d-fc-purple-400">
-            .d-lh-{{ className }}
-          </th>
-          <td class="d-code--sm">
-            <span v-if="className !== 'unset'">
-                line-height: var(--dt-font-line-height-{{ className }}) !important;
-            </span>
-            <span v-else>
-                {{ output }}
-            </span>
-          </td>
-        </tr>
-        <tr v-for="{ class: className, output } in fixed">
-          <th scope="row" class="d-code--sm d-fc-purple-400">
-            .d-lh{{ className }}
-          </th>
-          <td class="d-code--sm">
-            line-height: var(--lh{{ className }}) !important;
-          </td>
-        </tr>
-      </tbody>
-    </template>
-  </utility-class-table>
-</div>
+<utility-class-table>
+  <template #content>
+    <tbody>
+      <tr v-for="{ class: className, output } in relative">
+        <th scope="row" class="d-code--sm d-docsite-code">
+          .d-lh-{{ className }}
+        </th>
+        <td class="d-code--sm">
+          <span v-if="className !== 'unset'">
+              line-height: var(--dt-font-line-height-{{ className }}) !important;
+          </span>
+          <span v-else>
+              {{ output }}
+          </span>
+        </td>
+      </tr>
+      <tr v-for="{ class: className, output } in fixed">
+        <th scope="row" class="d-code--sm d-docsite-code">
+          .d-lh{{ className }}
+        </th>
+        <td class="d-code--sm">
+          line-height: var(--lh{{ className }}) !important;
+        </td>
+      </tr>
+    </tbody>
+  </template>
+</utility-class-table>
 
 <script setup>
   import { lineHeight } from '@data/type.json';

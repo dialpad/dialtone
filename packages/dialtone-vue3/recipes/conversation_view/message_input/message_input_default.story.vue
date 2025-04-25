@@ -62,7 +62,7 @@
       <template
         v-if="$attrs.customActionIcons"
         #customActionIcons
-        >
+      >
         <span v-html="$attrs.customActionIcons" />
       </template>
       <template
