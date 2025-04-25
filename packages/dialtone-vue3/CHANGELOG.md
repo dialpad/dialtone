@@ -1,3 +1,10 @@
+# [3.179.0](https://github.com/dialpad/dialtone/compare/dialtone-vue3/v3.178.0...dialtone-vue3/v3.179.0) (2025-04-25)
+
+
+### Features
+
+* DLT-2307 dialpad rebrand 2025 ([#733](https://github.com/dialpad/dialtone/issues/733)) ([1be97a2](https://github.com/dialpad/dialtone/commit/1be97a2a6c7ac81b85e7efd3b0bef57fcf54f329))
+
 # [3.178.0](https://github.com/dialpad/dialtone/compare/dialtone-vue3/v3.177.1...dialtone-vue3/v3.178.0) (2025-04-24)
 
 
