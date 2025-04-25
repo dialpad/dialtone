@@ -1,3 +1,20 @@
+# [9.113.0](https://github.com/dialpad/dialtone/compare/dialtone/v9.112.0...dialtone/v9.113.0) (2025-04-25)
+
+
+### Bug Fixes
+
+* **Docs:** NO-JIRA responsiveness of stack in docs ([88e8683](https://github.com/dialpad/dialtone/commit/88e8683478aa86d9200791529c658145fa7264b9))
+
+
+### Features
+
+* DLT-2307 dialpad rebrand 2025 ([#733](https://github.com/dialpad/dialtone/issues/733)) ([1be97a2](https://github.com/dialpad/dialtone/commit/1be97a2a6c7ac81b85e7efd3b0bef57fcf54f329))
+
+
+### Reverts
+
+* Revert "chore(release): NO-JIRA postcss-responsive-variations/v1.1.0" ([3bd9880](https://github.com/dialpad/dialtone/commit/3bd98803118c4374b66a213ac1f65f0feda1b396))
+
 # [9.112.0](https://github.com/dialpad/dialtone/compare/dialtone/v9.111.1...dialtone/v9.112.0) (2025-04-24)
 
 ### Bug Fixes
