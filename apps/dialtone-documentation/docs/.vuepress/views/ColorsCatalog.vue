@@ -1,6 +1,6 @@
 <template>
   <section class="d-stack16">
-    <div class="d-d-grid d-gg24 d-g-cols2 md:d-g-cols1">
+    <div class="d-d-grid d-gg24 d-g-cols1 md:d-g-cols2">
       <base-color
         v-for="({ stops }, colorName) in colors"
         :key="colorName"

@@ -9,7 +9,7 @@ Use `d-ws-normal` to collapse an element's text whitespaces sequences and newlin
 
 <code-well-header class="d-fl-center d-p24 d-bgc-green-100 d-bgo50 d-w100p d-hmn102" custom>
   <div class="d-bgc-green-200 d-py8 d-px16 d-bar8 d-w216">
-    <p class="lg:d-fs-200 d-fs-200 d-ws-normal">Lorem ipsum dolor sit amet, consectetur adipisicing elit.<br/>Blanditiisitaquequodpraesentium Dolores beatae nam at sed dolorum ratione dolorem nisi velit dolor.</p>
+    <p class="d-fs-200 d-ws-normal">Lorem ipsum dolor sit amet, consectetur adipisicing elit.<br/>Blanditiisitaquequodpraesentium Dolores beatae nam at sed dolorum ratione dolorem nisi velit dolor.</p>
   </div>
 </code-well-header>
 
@@ -23,7 +23,7 @@ Use `d-ws-nowrap` to collapse an element's text whitespaces sequences, but line 
 
 <code-well-header class="d-fl-center d-p24 d-bgc-purple-100 d-bgo50 d-w100p d-hmn102" custom>
   <div class="d-bgc-purple-200 d-py8 d-px16 d-bar8 d-w216">
-    <p class="lg:d-fs-200 d-fs-200 d-ws-nowrap d-of-hidden">Lorem ipsum dolor sit amet, consectetur adipisicing elit.<br/>Blanditiisitaquequodpraesentiumexplicaboincidunt? Dolores beatae nam at sed dolorum ratione dolorem nisi velit dolor.</p>
+    <p class="d-fs-200 d-ws-nowrap d-of-hidden">Lorem ipsum dolor sit amet, consectetur adipisicing elit.<br/>Blanditiisitaquequodpraesentiumexplicaboincidunt? Dolores beatae nam at sed dolorum ratione dolorem nisi velit dolor.</p>
   </div>
 </code-well-header>
 
@@ -37,7 +37,7 @@ Use `d-ws-pre` to preserve an element's whitespaces sequences. Lines are only br
 
 <code-well-header class="d-fl-center d-p24 d-bgc-blue-100 d-bgo50 d-w100p d-hmn102" custom>
   <div class="d-bgc-blue-200 d-py8 d-px16 d-bar8 d-w216">
-    <p class="lg:d-fs-200 d-fs-200 d-ws-pre d-of-hidden">Lorem ipsum dolor sit amet, consectetur adipisicing elit.<br/>       Blanditiisitaquequodpraesentiumexplicaboincidunt?       Dolores beatae nam at sed dolorum ratione dolorem nisi velit dolor.</p>
+    <p class="d-fs-200 d-ws-pre d-of-hidden">Lorem ipsum dolor sit amet, consectetur adipisicing elit.<br/>       Blanditiisitaquequodpraesentiumexplicaboincidunt?       Dolores beatae nam at sed dolorum ratione dolorem nisi velit dolor.</p>
   </div>
 </code-well-header>
 
@@ -51,7 +51,7 @@ Use `d-ws-pre-line` to collapse an element's whitespaces sequences. Lines are br
 
 <code-well-header class="d-fl-center d-p24 d-bgc-magenta-100 d-bgo50 d-w100p d-hmn102" custom>
   <div class="d-bgc-magenta-100 d-py8 d-px16 d-bar8 d-w216">
-    <p class="lg:d-fs-200 d-fs-200 d-ws-pre-line d-of-hidden">Lorem ipsum dolor sit amet, consectetur adipisicing elit.<br/>Blanditiisitaquequodpraesentiumexplicaboincidunt? Dolores beatae nam at sed dolorum ratione dolorem nisi velit dolor.</p>
+    <p class="d-fs-200 d-ws-pre-line d-of-hidden">Lorem ipsum dolor sit amet, consectetur adipisicing elit.<br/>Blanditiisitaquequodpraesentiumexplicaboincidunt? Dolores beatae nam at sed dolorum ratione dolorem nisi velit dolor.</p>
   </div>
 </code-well-header>
 
@@ -65,7 +65,7 @@ Use `d-ws-pre-wrap` to preserve an element's whitespaces sequences. Lines are br
 
 <code-well-header class="d-fl-center d-p24 d-bgc-gold-100 d-bgo50 d-w100p d-hmn102" custom>
   <div class="d-bgc-gold-100 d-py8 d-px16 d-bar8 d-w216">
-    <p class="lg:d-fs-200 d-fs-200 d-ws-pre-wrap d-of-hidden">Lorem ipsum dolor sit amet, consectetur adipisicing elit.<br/>      Blanditiisitaquequodpraesentiumexplicaboincidunt? Dolores beatae nam at sed dolorum ratione dolorem nisi velit dolor.</p>
+    <p class="d-fs-200 d-ws-pre-wrap d-of-hidden">Lorem ipsum dolor sit amet, consectetur adipisicing elit.<br/>      Blanditiisitaquequodpraesentiumexplicaboincidunt? Dolores beatae nam at sed dolorum ratione dolorem nisi velit dolor.</p>
   </div>
 </code-well-header>
 
@@ -79,7 +79,7 @@ Use `d-ws-break-spaces` to have an element act like `pre-wrap` except that any s
 
 <code-well-header class="d-fl-center d-p24 d-bgc-red-100 d-bgo50 d-w100p d-hmn102" custom>
   <div class="d-bgc-red-100 d-py8 d-px16 d-bar8 d-w216">
-    <p class="lg:d-fs-200 d-fs-200 d-ws-break-spaces d-of-hidden">Lorem ipsum dolor sit amet, consectetur adipisicing elit.<br/>Blanditiisitaquequodpraesentiumexplicaboincidunt? Dolores beatae nam at sed dolorum ratione dolorem nisi velit dolor.</p>
+    <p class="d-fs-200 d-ws-break-spaces d-of-hidden">Lorem ipsum dolor sit amet, consectetur adipisicing elit.<br/>Blanditiisitaquequodpraesentiumexplicaboincidunt? Dolores beatae nam at sed dolorum ratione dolorem nisi velit dolor.</p>
   </div>
 </code-well-header>
 

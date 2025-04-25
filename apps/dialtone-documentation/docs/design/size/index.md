@@ -20,7 +20,7 @@ Size design tokens define intrinsic **dimensions** of UI components. Example CSS
 
 ### Setting a Specific Size
 
-<div class="d-d-grid d-g24 d-g-cols3 md:d-g-cols1">
+<div class="d-d-grid d-g24 d-g-cols1 md:d-g-cols3">
 <div>
 
 When assigning a size to an element, utilize [Size Tokens](#tokens) for the value.
@@ -55,7 +55,7 @@ When assigning a size to an element, utilize [Size Tokens](#tokens) for the valu
 
 ### Widths and Heights
 
-<div class="d-d-grid d-g24 d-g-cols3 md:d-g-cols1">
+<div class="d-d-grid d-g24 d-g-cols1 md:d-g-cols3">
 <dt-stack direction="column" gap="100">
 <p>
 
@@ -77,7 +77,7 @@ Exceptions exist for select elements like Avatars, Icons, and Toggles. These ele
 
 ### Variable Sizing
 
-<div class="d-d-grid d-g24 d-g-cols3 md:d-g-cols1">
+<div class="d-d-grid d-g24 d-g-cols1 md:d-g-cols3">
 <div>
 
 The size of some components is determined by their content. Most expand vertically, while a select few expand horizontally.
@@ -95,7 +95,7 @@ The size of some components is determined by their content. Most expand vertical
 
 ### Responsiveness
 
-<div class="d-d-grid d-g24 d-g-cols3 md:d-g-cols1">
+<div class="d-d-grid d-g24 d-g-cols1 md:d-g-cols3">
 <div>
 
 Adapting to different devices, sizes should be fluid across breakpoints. While most Dialtone components are responsive, their fluidity depends on the layout they live within.
