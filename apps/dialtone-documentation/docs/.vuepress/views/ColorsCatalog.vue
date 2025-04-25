@@ -1,7 +1,7 @@
 <template>
   <section class="d-stack16">
     <div
-      class="d-d-grid d-gg24 d-g-cols2 md:d-g-cols1"
+      class="d-d-grid d-gg24 d-g-cols1 md:d-g-cols2"
       :class="themeModeClass"
     >
       <base-color

@@ -21,31 +21,6 @@ const settings = {
 };
 
 //  ================================================================================
-//  @@  RESPONSIVE CLASSES GENERATION
-//  ================================================================================
-//  -- BREAK POINTS
-const breakpoints = [
-  { prefix: 'sm\\:', mediaQuery: '(max-width: 480px)' },
-  { prefix: 'md\\:', mediaQuery: '(max-width: 640px)' },
-  { prefix: 'lg\\:', mediaQuery: '(max-width: 980px)' },
-  { prefix: 'xl\\:', mediaQuery: '(max-width: 1264px)' },
-];
-//  -- CLASSES
-const classes = [
-  /\.d-d-(flex|none|block)$/, // Display Flex, None and Block
-  '.d-t0',
-  /\.d-p[t|r|l|b]([0-9]*|-unset)$/, // Padding Top and Right
-  '.d-fd-column',
-  '.d-ai-stretch',
-  '.d-ps-relative',
-  /\.d-mx([0-9]*|-(auto|unset))$/, // Margin X
-  /\.d-g-cols[0-9]*$/, // Grid columns
-  /\.d-(stack|flow|h|w|fs-)[0-9]*$/, // Stack, Flow, Height, Widths and Font sizes
-  '.d-w100p',
-  /\.d-wmx(-(auto|unset)|[0-9]*(ch|p))$/, // Max widths
-];
-
-//  ================================================================================
 //  @  PACKAGES
 //     What makes everything go
 //  ================================================================================
@@ -63,9 +38,6 @@ const postCSS = settings.styles ? require('gulp-postcss') : null;
 // crawls .less dependencies for incremental building
 const postCSSNano = settings.styles ? require('cssnano') : null;
 const less = settings.styles ? require('gulp-less') : null;
-const postCSSResponsify = settings.styles
-  ? require('@dialpad/postcss-responsive-variations')({ breakpoints, classes })
-  : null;
 const postCSSDialtoneGenerator = settings.styles ? require('./postcss/dialtone-generators.cjs') : null;
 const sourcemaps = settings.styles ? require('gulp-sourcemaps') : null;
 const autoprefixer = settings.styles ? require('autoprefixer') : null;
@@ -214,7 +186,7 @@ const libStyles = function (done) {
   return src(paths.styles.inputLib)
     .pipe(less({ paths: ['./node_modules'] })) // compile less to css
     .pipe(replace('../fonts/', './fonts/'))
-    .pipe(postCSS([postCSSDialtoneGenerator, postCSSResponsify, autoprefixer()]))
+    .pipe(postCSS([postCSSDialtoneGenerator, autoprefixer()]))
     .pipe(dest(paths.styles.outputLib))
     .pipe(postCSS([postCSSNano]))
     .pipe(rename({ suffix: '.min' }))
@@ -229,7 +201,7 @@ const libStylesDev = function (done) {
   return src(paths.styles.inputLib)
     .pipe(sourcemaps.init())
     .pipe(less({ paths: ['./node_modules'] })) // compile less to css
-    .pipe(postCSS([postCSSDialtoneGenerator, postCSSResponsify, autoprefixer()]))
+    .pipe(postCSS([postCSSDialtoneGenerator, autoprefixer()]))
     .pipe(sourcemaps.mapSources(function (sourcePath) {
       if (sourcePath === '<no source>') return sourcePath;
       return '../../build/less/' + sourcePath;

@@ -9,17 +9,17 @@ description: Utility classes to assign an element’s top, right, bottom, or lef
 
 Use the `top|right|bottom|left|x|y|all` utility classes to absolutely position elements within the nearest positioned element.
 
-<code-well-header class="d-p24 d-bgc-purple-100 d-bgo50 d-w100p d-hmn216 d-d-grid d-g-cols4 d-g24 d-pi-center sm:d-fs-100 xl:d-fs-200 d-fs-300 d-fw-bold" custom>
-  <div class="d-ps-relative xl:d-h48 xl:d-w48 d-h128 d-w128 d-bar8 d-bgc-purple-200"><div class="d-fl-center d-ps-absolute d-x0 d-t0 d-bgc-purple-300 d-bar4 d-h50p">1</div></div>
-  <div class="d-ps-relative xl:d-h48 xl:d-w48 d-h128 d-w128 d-bar8 d-bgc-purple-200"><div class="d-fl-center d-ps-absolute d-y0 d-r0 d-bgc-purple-300 d-bar4 d-w50p">2</div></div>
-  <div class="d-ps-relative xl:d-h48 xl:d-w48 d-h128 d-w128 d-bar8 d-bgc-purple-200"><div class="d-fl-center d-ps-absolute d-x0 d-b0 d-bgc-purple-300 d-bar4 d-h50p">3</div></div>
-  <div class="d-ps-relative xl:d-h48 xl:d-w48 d-h128 d-w128 d-bar8 d-bgc-purple-200"><div class="d-fl-center d-ps-absolute d-y0 d-l0 d-bgc-purple-300 d-bar4 d-w50p">4</div></div>
-  <div class="d-ps-relative xl:d-h48 xl:d-w48 d-h128 d-w128 d-bar8 d-bgc-purple-200"><div class="d-fl-center d-ps-absolute d-all0 d-bgc-purple-300 d-bar4">5</div></div>
-  <div class="d-ps-relative xl:d-h48 xl:d-w48 d-h128 d-w128 d-bar8 d-bgc-purple-200"><div class="d-fl-center d-ps-absolute d-l0 d-t0 d-bgc-purple-300 d-bar4 d-w50p d-h50p">6</div></div>
-  <div class="d-ps-relative xl:d-h48 xl:d-w48 d-h128 d-w128 d-bar8 d-bgc-purple-200"><div class="d-fl-center d-ps-absolute d-r0 d-t0 d-bgc-purple-300 d-bar4 d-w50p d-h50p">7</div></div>
-  <div class="d-ps-relative xl:d-h48 xl:d-w48 d-h128 d-w128 d-bar8 d-bgc-purple-200"><div class="d-fl-center d-ps-absolute d-r0 d-b0 d-bgc-purple-300 d-bar4 d-w50p d-h50p">8</div></div>
-  <div class="d-ps-relative xl:d-h48 xl:d-w48 d-h128 d-w128 d-bar8 d-bgc-purple-200"><div class="d-fl-center d-ps-absolute d-l0 d-b0 d-bgc-purple-300 d-bar4 d-w50p d-h50p">9</div></div>
-  <div class="d-ps-relative xl:d-h48 xl:d-w48 d-h128 d-w128 d-bar8 d-bgc-purple-200"><div class="d-fl-center d-ps-absolute d-all8 d-bgc-purple-300 d-bar4">10</div></div>
+<code-well-header class="d-p24 d-bgc-purple-100 d-bgo50 d-w100p d-hmn216 d-d-grid d-g-cols4 d-g24 d-pi-center d-fs-100 sm:d-fs-200 xl:d-fs-300 d-fw-bold" custom>
+  <div class="d-ps-relative d-h48 d-w48 xl:d-h128 xl:d-w128 d-bar8 d-bgc-purple-200"><div class="d-fl-center d-ps-absolute d-x0 d-t0 d-bgc-purple-300 d-bar4 d-h50p">1</div></div>
+  <div class="d-ps-relative d-h48 d-w48 xl:d-h128 xl:d-w128 d-bar8 d-bgc-purple-200"><div class="d-fl-center d-ps-absolute d-y0 d-r0 d-bgc-purple-300 d-bar4 d-w50p">2</div></div>
+  <div class="d-ps-relative d-h48 d-w48 xl:d-h128 xl:d-w128 d-bar8 d-bgc-purple-200"><div class="d-fl-center d-ps-absolute d-x0 d-b0 d-bgc-purple-300 d-bar4 d-h50p">3</div></div>
+  <div class="d-ps-relative d-h48 d-w48 xl:d-h128 xl:d-w128 d-bar8 d-bgc-purple-200"><div class="d-fl-center d-ps-absolute d-y0 d-l0 d-bgc-purple-300 d-bar4 d-w50p">4</div></div>
+  <div class="d-ps-relative d-h48 d-w48 xl:d-h128 xl:d-w128 d-bar8 d-bgc-purple-200"><div class="d-fl-center d-ps-absolute d-all0 d-bgc-purple-300 d-bar4">5</div></div>
+  <div class="d-ps-relative d-h48 d-w48 xl:d-h128 xl:d-w128 d-bar8 d-bgc-purple-200"><div class="d-fl-center d-ps-absolute d-l0 d-t0 d-bgc-purple-300 d-bar4 d-w50p d-h50p">6</div></div>
+  <div class="d-ps-relative d-h48 d-w48 xl:d-h128 xl:d-w128 d-bar8 d-bgc-purple-200"><div class="d-fl-center d-ps-absolute d-r0 d-t0 d-bgc-purple-300 d-bar4 d-w50p d-h50p">7</div></div>
+  <div class="d-ps-relative d-h48 d-w48 xl:d-h128 xl:d-w128 d-bar8 d-bgc-purple-200"><div class="d-fl-center d-ps-absolute d-r0 d-b0 d-bgc-purple-300 d-bar4 d-w50p d-h50p">8</div></div>
+  <div class="d-ps-relative d-h48 d-w48 xl:d-h128 xl:d-w128 d-bar8 d-bgc-purple-200"><div class="d-fl-center d-ps-absolute d-l0 d-b0 d-bgc-purple-300 d-bar4 d-w50p d-h50p">9</div></div>
+  <div class="d-ps-relative d-h48 d-w48 xl:d-h128 xl:d-w128 d-bar8 d-bgc-purple-200"><div class="d-fl-center d-ps-absolute d-all8 d-bgc-purple-300 d-bar4">10</div></div>
 </code-well-header>
 
 ```html
@@ -107,16 +107,16 @@ Use the `top|right|bottom|left|x|y|all` utility classes to absolutely position e
 
 Use the `top|right|bottom|left|x|y|all` utility classes to absolutely position elements within the nearest positioned element.
 
-<code-well-header class="d-p24 d-bgc-gold-100 d-bgo50 d-w100p d-hmn216 d-d-grid d-g-cols4 d-g24 d-pi-center sm:d-fs-100 xl:d-fs-200 d-fs-300 d-fw-bold" custom>
-  <div class="d-ps-relative xl:d-h48 xl:d-w48 d-h128 d-w128 d-bar8 d-bgc-gold-100"><div class="d-fl-center d-ps-absolute d-xn2 d-tn2 d-bgc-gold-200 d-bar8 d-h50p">1</div></div>
-  <div class="d-ps-relative xl:d-h48 xl:d-w48 d-h128 d-w128 d-bar8 d-bgc-gold-100"><div class="d-fl-center d-ps-absolute d-yn2 d-rn2 d-bgc-gold-200 d-bar8 d-w50p">2</div></div>
-  <div class="d-ps-relative xl:d-h48 xl:d-w48 d-h128 d-w128 d-bar8 d-bgc-gold-100"><div class="d-fl-center d-ps-absolute d-xn2 d-bn2 d-bgc-gold-200 d-bar8 d-h50p">3</div></div>
-  <div class="d-ps-relative xl:d-h48 xl:d-w48 d-h128 d-w128 d-bar8 d-bgc-gold-100"><div class="d-fl-center d-ps-absolute d-yn2 d-ln2 d-bgc-gold-200 d-bar8 d-w50p">4</div></div>
-  <div class="d-ps-relative xl:d-h48 xl:d-w48 d-h128 d-w128 d-bar8 d-bgc-gold-100"><div class="d-fl-center d-ps-absolute d-alln2 d-bgc-gold-200 d-bar8">5</div></div>
-  <div class="d-ps-relative xl:d-h48 xl:d-w48 d-h128 d-w128 d-bar8 d-bgc-gold-100"><div class="d-fl-center d-ps-absolute d-ln4 d-tn4 d-bgc-gold-200 d-bar8 d-w50p d-h50p">6</div></div>
-  <div class="d-ps-relative xl:d-h48 xl:d-w48 d-h128 d-w128 d-bar8 d-bgc-gold-100"><div class="d-fl-center d-ps-absolute d-rn8 d-tn8 d-bgc-gold-200 d-bar8 d-w50p d-h50p">7</div></div>
-  <div class="d-ps-relative xl:d-h48 xl:d-w48 d-h128 d-w128 d-bar8 d-bgc-gold-100"><div class="d-fl-center d-ps-absolute d-rn8 d-bn8 d-bgc-gold-200 d-bar8 d-w50p d-h50p">8</div></div>
-  <div class="d-ps-relative xl:d-h48 xl:d-w48 d-h128 d-w128 d-bar8 d-bgc-gold-100"><div class="d-fl-center d-ps-absolute d-ln4 d-bn4 d-bgc-gold-200 d-bar8 d-w50p d-h50p">9</div></div>
+<code-well-header class="d-p24 d-bgc-gold-100 d-bgo50 d-w100p d-hmn216 d-d-grid d-g-cols4 d-g24 d-pi-center d-fs-100 sm:d-fs-200 xl:d-fs-300 d-fw-bold" custom>
+  <div class="d-ps-relative d-h48 d-w48 xl:d-h128 xl:d-w128 d-bar8 d-bgc-gold-100"><div class="d-fl-center d-ps-absolute d-xn2 d-tn2 d-bgc-gold-200 d-bar8 d-h50p">1</div></div>
+  <div class="d-ps-relative d-h48 d-w48 xl:d-h128 xl:d-w128 d-bar8 d-bgc-gold-100"><div class="d-fl-center d-ps-absolute d-yn2 d-rn2 d-bgc-gold-200 d-bar8 d-w50p">2</div></div>
+  <div class="d-ps-relative d-h48 d-w48 xl:d-h128 xl:d-w128 d-bar8 d-bgc-gold-100"><div class="d-fl-center d-ps-absolute d-xn2 d-bn2 d-bgc-gold-200 d-bar8 d-h50p">3</div></div>
+  <div class="d-ps-relative d-h48 d-w48 xl:d-h128 xl:d-w128 d-bar8 d-bgc-gold-100"><div class="d-fl-center d-ps-absolute d-yn2 d-ln2 d-bgc-gold-200 d-bar8 d-w50p">4</div></div>
+  <div class="d-ps-relative d-h48 d-w48 xl:d-h128 xl:d-w128 d-bar8 d-bgc-gold-100"><div class="d-fl-center d-ps-absolute d-alln2 d-bgc-gold-200 d-bar8">5</div></div>
+  <div class="d-ps-relative d-h48 d-w48 xl:d-h128 xl:d-w128 d-bar8 d-bgc-gold-100"><div class="d-fl-center d-ps-absolute d-ln4 d-tn4 d-bgc-gold-200 d-bar8 d-w50p d-h50p">6</div></div>
+  <div class="d-ps-relative d-h48 d-w48 xl:d-h128 xl:d-w128 d-bar8 d-bgc-gold-100"><div class="d-fl-center d-ps-absolute d-rn8 d-tn8 d-bgc-gold-200 d-bar8 d-w50p d-h50p">7</div></div>
+  <div class="d-ps-relative d-h48 d-w48 xl:d-h128 xl:d-w128 d-bar8 d-bgc-gold-100"><div class="d-fl-center d-ps-absolute d-rn8 d-bn8 d-bgc-gold-200 d-bar8 d-w50p d-h50p">8</div></div>
+  <div class="d-ps-relative d-h48 d-w48 xl:d-h128 xl:d-w128 d-bar8 d-bgc-gold-100"><div class="d-fl-center d-ps-absolute d-ln4 d-bn4 d-bgc-gold-200 d-bar8 d-w50p d-h50p">9</div></div>
 </code-well-header>
 
 ```html

@@ -1,5 +1,5 @@
 <template>
-  <aside class="dialtone-toc d-of-auto d-py32 lg:d-ps-relative lg:d-w100p d-ps-fixed xl:d-d-none">
+  <aside class="dialtone-toc d-of-auto d-py32 d-ps-fixed d-d-none xl:d-d-block">
     <h2 class="d-headline--eyebrow d-fw-semibold d-fc-secondary d-px12 d-pb4">
       On this page
     </h2>
@@ -18,7 +18,6 @@
         <dt-collapsible
           v-else
           element-type="li"
-          class="lg:d-d-flex d-fw-wrap"
           :open="isHeaderActive(header)"
         >
           <template #anchor="{ attrs }">
@@ -37,7 +36,6 @@
               <li
                 v-for="child in header.children"
                 :key="child.slug"
-                class="lg:d-d-flex d-fw-wrap"
               >
                 <toc-item
                   :active="isItemActive(child)"
