@@ -1,3 +1,15 @@
+# [9.113.0-beta.1](https://github.com/dialpad/dialtone/compare/dialtone/v9.112.0...dialtone/v9.113.0-beta.1) (2025-04-25)
+
+
+### Bug Fixes
+
+* **Docs:** NO-JIRA responsiveness of stack in docs ([88e8683](https://github.com/dialpad/dialtone/commit/88e8683478aa86d9200791529c658145fa7264b9))
+
+
+### Features
+
+* **Breakpoints:** DLT-2463 migrate doc site to new breakpoints ([#728](https://github.com/dialpad/dialtone/issues/728)) ([9f4d888](https://github.com/dialpad/dialtone/commit/9f4d888de7a4c6d2f12a772081fa2642e6d2e4cc))
+
 # [9.112.0](https://github.com/dialpad/dialtone/compare/dialtone/v9.111.1...dialtone/v9.112.0) (2025-04-24)
 
 
