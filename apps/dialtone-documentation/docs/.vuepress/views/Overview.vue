@@ -12,13 +12,13 @@
         <div class="dialtone-wall__details">
           <div class="dialtone-wall__title">
             <span class="dialtone-wall__title-text">{{ pageTitle(page) }}</span>
-            <span
+            <dt-badge
               v-if="page.status"
-              class="d-badge d-tt-capitalize"
-              :class="badgeKindClass(page.status)"
+              class="d-tt-capitalize"
+              v-bind="badgeStatusType(page.status)"
             >
               {{ page.status }}
-            </span>
+            </dt-badge>
           </div>
           <div class="dialtone-wall__description">
             {{ page.description }}
@@ -42,16 +42,16 @@ defineProps({
   },
 });
 
-const badgeKindClass = (status) => {
+const badgeStatusType = (status) => {
   switch (status) {
     case 'new':
-      return 'd-badge--bulletin';
+      return { type: 'bulletin' };
     case 'ready':
-      return 'd-badge--success';
+      return { type: 'success' };
     case 'beta':
-      return 'd-badge--info';
+      return { type: 'info' };
     default:
-      return '';
+      return { type: 'default' };
   }
 };
 const pageTitle = (page) => {
