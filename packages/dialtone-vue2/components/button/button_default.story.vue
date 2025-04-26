@@ -5,6 +5,7 @@
     :size="$attrs.size"
     :kind="$attrs.kind"
     :circle="$attrs.circle"
+    :unstyled="$attrs.unstyled"
     :loading="$attrs.loading"
     :label-class="$attrs.labelClass"
     :assertive-on-focus="$attrs.assertiveOnFocus"

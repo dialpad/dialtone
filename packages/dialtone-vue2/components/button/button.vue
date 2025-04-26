@@ -43,6 +43,7 @@
 import Vue from 'vue';
 
 import {
+  BUTTON_UNSTYLED_CLASS,
   BUTTON_SIZE_MODIFIERS,
   BUTTON_KIND_MODIFIERS,
   BUTTON_IMPORTANCE_MODIFIERS,
@@ -220,6 +221,15 @@ export default {
       type: Boolean,
       default: false,
     },
+
+    /**
+     * Whether the button should be unstyled.
+     * @values true, false
+     */
+    unstyled: {
+      type: Boolean,
+      default: false,
+    },
   },
 
   emits: [
@@ -313,12 +323,14 @@ export default {
         BUTTON_IMPORTANCE_MODIFIERS[this.importance],
         BUTTON_KIND_MODIFIERS[this.kind],
         BUTTON_SIZE_MODIFIERS[this.size],
+        BUTTON_UNSTYLED_CLASS[this.unstyled],
         {
           'd-btn--circle': this.circle,
           'd-btn--loading': this.loading,
           'd-btn--icon-only': this.isIconOnly(),
           'd-btn--vertical': this.isVerticalIconLayout(),
           'd-btn--active': this.active,
+          'd-btn--unstyled': this.unstyled,
         },
       ];
     },

@@ -278,6 +278,18 @@ describe('DtButton Tests', () => {
           });
         });
       });
+
+      describe('When button has unstyled set to true', () => {
+        it('Should have unstyled class', async () => {
+          await wrapper.setProps({
+            unstyled: true,
+          });
+
+          button = wrapper.find('.base-button__button');
+
+          expect(button.classes().includes('d-btn--unstyled')).toBe(true);
+        });
+      });
     });
 
     describe('With icon slot populated', () => {

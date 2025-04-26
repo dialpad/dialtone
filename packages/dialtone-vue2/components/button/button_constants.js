@@ -1,3 +1,5 @@
+export const BUTTON_UNSTYLED_CLASS = 'd-btn--unstyled';
+
 export const BUTTON_SIZE_MODIFIERS = {
   xs: 'd-btn--xs',
   sm: 'd-btn--sm',
@@ -77,6 +79,7 @@ export default {
   BUTTON_KIND_MODIFIERS,
   BUTTON_IMPORTANCE_MODIFIERS,
   BUTTON_TYPES,
+  BUTTON_UNSTYLED_CLASS,
   ICON_POSITION_MODIFIERS,
   INVALID_COMBINATION,
   BUTTON_ICON_SIZES,
