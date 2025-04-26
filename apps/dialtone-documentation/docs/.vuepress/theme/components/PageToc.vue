@@ -41,7 +41,6 @@
               >
                 <toc-item
                   :active="isItemActive(child)"
-                  class="d-fw-normal"
                   :to="child.link"
                   :text="child.title"
                 />

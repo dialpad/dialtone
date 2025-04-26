@@ -13,7 +13,7 @@
       class="d-btn d-btn--muted d-fw-normal"
       :class="{ 'd-btn--active': isActiveLink(link.text) }"
     >
-      {{ link.text }}
+      <span class="d-btn__label">{{ link.text }}</span>
     </router-link>
   </dt-stack>
   <dt-stack direction="row" gap="300">
