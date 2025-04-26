@@ -280,14 +280,52 @@ describe('DtButton Tests', () => {
       });
 
       describe('When button has unstyled set to true', () => {
-        it('Should have unstyled class', async () => {
+        it('Should have unstyled class and no d-btn classes except d-btn--unstyled', async () => {
           await wrapper.setProps({
             unstyled: true,
           });
 
           button = wrapper.find('.base-button__button');
 
+          // Should have the d-btn--unstyled class
           expect(button.classes().includes('d-btn--unstyled')).toBe(true);
+
+          // Should NOT have the d-btn class
+          expect(button.classes().includes('d-btn')).toBe(false);
+
+          // Should NOT have any d-btn-- classes except d-btn--unstyled
+          const buttonClasses = button.classes();
+          const nonUnstyledBtnClasses = buttonClasses.filter(cls =>
+            cls.startsWith('d-btn--') && cls !== 'd-btn--unstyled',
+          );
+          expect(nonUnstyledBtnClasses.length).toBe(0);
+        });
+      });
+
+      describe('When button is unstyled and has icon and label', () => {
+        it('Should not have d-btn classes on icon and label', async () => {
+          mockSlots = {
+            default: 'Button Text',
+            icon: EmptyComponentFixture,
+          };
+
+          updateWrapper();
+
+          await wrapper.setProps({
+            unstyled: true,
+          });
+
+          icon = wrapper.find('[data-qa="dt-button-icon"]');
+          label = wrapper.find('[data-qa="dt-button-label"]');
+
+          // Icon should have base-button__icon class but not d-btn__icon
+          expect(icon.classes().includes('base-button__icon')).toBe(true);
+          expect(icon.classes().includes('d-btn__icon')).toBe(false);
+          expect(icon.classes().some(cls => cls.startsWith('d-btn__icon--'))).toBe(false);
+
+          // Label should have base-button__label class but not d-btn__label
+          expect(label.classes().includes('base-button__label')).toBe(true);
+          expect(label.classes().includes('d-btn__label')).toBe(false);
         });
       });
     });
