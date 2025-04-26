@@ -131,6 +131,11 @@
   all: unset;
   color: inherit;
   cursor: pointer;
+
+  &:focus-visible {
+    outline: none;
+    box-shadow: var(--dt-shadow-focus);
+  }
 }
 
 //  ============================================================================
