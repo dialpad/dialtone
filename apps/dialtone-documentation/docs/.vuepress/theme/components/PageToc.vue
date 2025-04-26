@@ -7,6 +7,7 @@
       <ul
         v-for="header in headers"
         :key="header.slug"
+        class="d-mt2"
       >
         <li v-if="!header.children.length">
           <toc-item
@@ -33,11 +34,11 @@
             v-if="header.children.length"
             #content
           >
-            <ul class="d-pl8">
+            <ul class="d-pl8 d-mt2">
               <li
                 v-for="child in header.children"
                 :key="child.slug"
-                class="lg:d-d-flex d-fw-wrap"
+                class="lg:d-d-flex d-fw-wrap d-mt2"
               >
                 <toc-item
                   :active="isItemActive(child)"
