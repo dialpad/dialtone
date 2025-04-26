@@ -18,8 +18,8 @@
       data-qa="dt-button-icon"
       :class="[
         'base-button__icon',
-        'd-btn__icon',
-        ICON_POSITION_MODIFIERS[iconPosition],
+        !unstyled && 'd-btn__icon',
+        !unstyled && ICON_POSITION_MODIFIERS[iconPosition],
       ]"
     >
       <!-- @slot Button icon -->
@@ -31,7 +31,11 @@
     <span
       v-if="$slots.default"
       data-qa="dt-button-label"
-      :class="['d-btn__label', 'base-button__label', labelClass]"
+      :class="[
+        !unstyled && 'd-btn__label',
+        'base-button__label',
+        labelClass,
+      ]"
     >
       <!-- @slot Content within button -->
       <slot />
@@ -43,7 +47,6 @@
 import Vue from 'vue';
 
 import {
-  BUTTON_UNSTYLED_CLASS,
   BUTTON_SIZE_MODIFIERS,
   BUTTON_KIND_MODIFIERS,
   BUTTON_IMPORTANCE_MODIFIERS,
@@ -318,24 +321,35 @@ export default {
           BUTTON_SIZE_MODIFIERS[this.size],
         ];
       }
+
+      // Return only d-btn--unstyled class if unstyled is true
+      if (this.unstyled) {
+        return [
+          'd-btn--unstyled',
+        ];
+      }
+
       return [
         'd-btn',
         BUTTON_IMPORTANCE_MODIFIERS[this.importance],
         BUTTON_KIND_MODIFIERS[this.kind],
         BUTTON_SIZE_MODIFIERS[this.size],
-        BUTTON_UNSTYLED_CLASS[this.unstyled],
         {
           'd-btn--circle': this.circle,
           'd-btn--loading': this.loading,
           'd-btn--icon-only': this.isIconOnly(),
           'd-btn--vertical': this.isVerticalIconLayout(),
           'd-btn--active': this.active,
-          'd-btn--unstyled': this.unstyled,
         },
       ];
     },
 
     isInvalidPropCombination (circle, kind, importance) {
+      // Skip validation if unstyled is true
+      if (this.unstyled) {
+        return true;
+      }
+
       for (const row of INVALID_COMBINATION) {
         if (circle === row.circle && kind === row.kind && importance === row.importance) {
           console.warn(row.message);
