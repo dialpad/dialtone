@@ -98,11 +98,11 @@ vueCode='
   <div class="d-w332">
     <dt-description-list
       ref="exampleWithStyles"
-      gap="400"
+      gap="00"
       :items="items"
       direction="row"
-      :termClass="['d-fw-bold', 'd-fc-purple-400']"
-      :descriptionClass="['d-fw-medium', 'd-fc-disabled']"
+      :termClass="[`d-fc-critical`, `d-fw-bold`]"
+      :descriptionClass="[`d-fc-success`]"
     />
   </div>
 </code-well-header>
@@ -111,11 +111,12 @@ vueCode='
 :htmlCode="() => $refs.exampleWithStyles"
 vueCode='
 <dt-description-list
-  gap="400"
+  ref="exampleWithStyles"
+  gap="00"
   :items="items"
   direction="row"
-  :termClass="[`d-fw-bold`, `d-fc-purple-400`]"
-  :descriptionClass="[`d-fw-medium`, `d-fc-disabled`]"
+  :termClass="[`d-fc-critical`, `d-fw-bold`]"
+  :descriptionClass="[`d-fc-success`]"
 />
 '
 />
