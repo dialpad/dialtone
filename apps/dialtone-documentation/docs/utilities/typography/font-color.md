@@ -7,16 +7,9 @@ All font colors pass the WCAG 2.1 Level AA contrast ratio requirements (ratio >=
 The contrast ratio value is noted with the colors below.
 Please use **only** these colors or variations of these colors which pass WCAG 2.1 Level AA contrast ratio requirements.
 
-<aside class="d-notice d-notice--warning d-mt24 d-wmx100p" role="status" aria-hidden="false">
-  <div class="d-notice__icon">
-    <dt-icon name="alert-triangle"></dt-icon>
-  </div>
-  <div class="d-notice__content d-stack4">
-    <p class="d-notice__message">
-      Before using a Color utility, consider <router-link class="d-link d-link--muted" to="/design/colors/#text">semantic colors</router-link>.
-    </p>
-  </div>
-</aside>
+<dt-notice kind="warning" class="d-wmx100p d-mt24" hideClose>
+  Before using a Color utility, consider <router-link class="d-link d-link--muted" to="/design/colors/#text">semantic colors</router-link>.
+</dt-notice>
 
 ## Usage
 

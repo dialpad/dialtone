@@ -3,16 +3,9 @@ title: Background Color
 description: Utilities for setting the background color.
 ---
 
-<aside class="d-notice d-notice--warning d-mt24 d-wmx100p" role="status" aria-hidden="false">
-  <div class="d-notice__icon">
-    <dt-icon name="alert-triangle"></dt-icon>
-  </div>
-  <div class="d-notice__content d-stack4">
-    <p class="d-notice__message">
-      Before using background color utilities, first consider <router-link class="d-link d-link--muted" to="/design/colors/#surface">semantic surface colors</router-link>.
-    </p>
-  </div>
-</aside>
+<dt-notice kind="warning" class="d-wmx100p d-mt24" hideClose>
+  Before using background color utilities, first consider <router-link class="d-link d-link--muted" to="/design/colors/#surface">semantic surface colors</router-link>.
+</dt-notice>
 
 ## Usage
 
