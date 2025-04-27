@@ -7,44 +7,54 @@ description: Utilities for controlling an element's border.
 
 Use `d-ba` to add a border to all sides of your element.
 
-<code-well-header class="d-fl-col5 d-g8 d-fw-wrap d-p24 d-bgc-magenta-100 d-bgo50 d-w100p d-hmn102">
-  <div class="d-fl-center d-p16 d-ba d-bc-magenta-200 d-baw0 d-bgc-magenta-100 d-fs-200 d-fw-bold">.d-baw0</div>
-  <div class="d-fl-center d-p16 d-ba d-bc-magenta-200 d-baw1 d-bgc-magenta-100 d-fs-200 d-fw-bold">.d-baw1</div>
-  <div class="d-fl-center d-p16 d-ba d-bc-magenta-200 d-baw2 d-bgc-magenta-100 d-fs-200 d-fw-bold">.d-baw2</div>
-  <div class="d-fl-center d-p16 d-ba d-bc-magenta-200 d-baw4 d-bgc-magenta-100 d-fs-200 d-fw-bold">.d-baw4</div>
-  <div class="d-fl-center d-p16 d-ba d-bc-magenta-200 d-baw6 d-bgc-magenta-100 d-fs-200 d-fw-bold">.d-baw6</div>
+<code-well-header>
+  <dt-stack
+    gap="500"
+    :direction="{ 'default': 'column', 'md': 'row' }"
+  >
+    <div class="d-p16 d-ba d-baw0 d-bc-default d-bgc-primary">d-baw0</div>
+    <div class="d-p16 d-ba d-baw1 d-bc-default d-bgc-primary">d-baw1</div>
+    <div class="d-p16 d-ba d-baw2 d-bc-default d-bgc-primary">d-baw2</div>
+    <div class="d-p16 d-ba d-baw4 d-bc-default d-bgc-primary">d-baw4</div>
+    <div class="d-p16 d-ba d-baw6 d-bc-default d-bgc-primary">d-baw6</div>
+  </dt-stack>
 </code-well-header>
 
 ```html
-<div class="d-ba d-bc-magenta-200 d-baw0">...</div>
-<div class="d-ba d-bc-magenta-200 d-baw1">...</div>
-<div class="d-ba d-bc-magenta-200 d-baw2">...</div>
-<div class="d-ba d-bc-magenta-200 d-baw4">...</div>
-<div class="d-ba d-bc-magenta-200 d-baw6">...</div>
+<div class="d-p16 d-ba d-baw0 d-bc-default d-bgc-primary">d-baw0</div>
+<div class="d-p16 d-ba d-baw1 d-bc-default d-bgc-primary">d-baw1</div>
+<div class="d-p16 d-ba d-baw2 d-bc-default d-bgc-primary">d-baw2</div>
+<div class="d-p16 d-ba d-baw4 d-bc-default d-bgc-primary">d-baw4</div>
+<div class="d-p16 d-ba d-baw6 d-bc-default d-bgc-primary">d-baw6</div>
 ```
 
 ## Individual Sides
 
 Use `d-b{t|r|b|l|x|y}` to add a border to only specific sides of your element.
 
-<code-well-header class="d-fl-col4 d-g8 d-fw-wrap d-p24 d-bgc-purple-100 d-bgo50 d-w100p d-hmn102">
-  <div class="d-fl-center d-p16 d-bt d-bc-purple-400 d-baw2 d-bgc-purple-100 d-fs-200 d-fw-bold">.d-bt</div>
-  <div class="d-fl-center d-p16 d-br d-bc-purple-400 d-baw2 d-bgc-purple-100 d-fs-200 d-fw-bold">.d-br</div>
-  <div class="d-fl-center d-p16 d-bb d-bc-purple-400 d-baw2 d-bgc-purple-100 d-fs-200 d-fw-bold">.d-bb</div>
-  <div class="d-fl-center d-p16 d-bl d-bc-purple-400 d-baw2 d-bgc-purple-100 d-fs-200 d-fw-bold">.d-bl</div>
-  <div class="d-fl-center d-p16 d-bx d-bc-purple-400 d-baw2 d-bgc-purple-100 d-fs-200 d-fw-bold">.d-bx</div>
-  <div class="d-fl-center d-p16 d-by d-bc-purple-400 d-baw2 d-bgc-purple-100 d-fs-200 d-fw-bold">.d-by</div>
-  <div class="d-fl-center d-p16 d-ba d-bc-purple-400 d-baw2 d-btw0 d-bgc-purple-100 d-fs-200 d-fw-bold">.d-ba d-btw0</div>
+<code-well-header>
+  <dt-stack
+    gap="500"
+    :direction="{ 'default': 'column', 'md': 'row' }"
+  >
+    <div class="d-p16 d-bt d-baw4 d-bc-default d-bgc-primary">d-bt</div>
+    <div class="d-p16 d-br d-baw4 d-bc-default d-bgc-primary">d-br</div>
+    <div class="d-p16 d-bb d-baw4 d-bc-default d-bgc-primary">d-bb</div>
+    <div class="d-p16 d-bl d-baw4 d-bc-default d-bgc-primary">d-bl</div>
+    <div class="d-p16 d-bx d-baw4 d-bc-default d-bgc-primary">d-bx</div>
+    <div class="d-p16 d-by d-baw4 d-bc-default d-bgc-primary">d-by</div>
+    <div class="d-p16 d-ba d-baw4 d-bc-default d-bgc-primary">d-ba</div>
+  </dt-stack>
 </code-well-header>
 
 ```html
-<div class="d-bt d-bc-purple-400 d-baw2 ">...</div>
-<div class="d-br d-bc-purple-400 d-baw2 ">...</div>
-<div class="d-bb d-bc-purple-400 d-baw2 ">...</div>
-<div class="d-bl d-bc-purple-400 d-baw2 ">...</div>
-<div class="d-bx d-bc-purple-400 d-baw2 ">...</div>
-<div class="d-by d-bc-purple-400 d-baw2 ">...</div>
-<div class="d-ba d-bc-purple-400 d-baw2 d-btw0 ">...</div>
+<div class="d-p16 d-bt d-baw4 d-bc-default d-bgc-primary">d-bt</div>
+<div class="d-p16 d-br d-baw4 d-bc-default d-bgc-primary">d-br</div>
+<div class="d-p16 d-bb d-baw4 d-bc-default d-bgc-primary">d-bb</div>
+<div class="d-p16 d-bl d-baw4 d-bc-default d-bgc-primary">d-bl</div>
+<div class="d-p16 d-bx d-baw4 d-bc-default d-bgc-primary">d-bx</div>
+<div class="d-p16 d-by d-baw4 d-bc-default d-bgc-primary">d-by</div>
+<div class="d-p16 d-ba d-baw4 d-bc-default d-bgc-primary">d-ba</div>
 ```
 
 <script setup>

@@ -7,14 +7,19 @@ description: Utilities for controlling an element's border radius.
 
 Use `d-bar{n}` to change the border radius on all corners of your element.
 
-<code-well-header class="d-fl-col4 d-g8 d-fw-wrap d-p24 d-bgc-purple-100 d-bgo50 d-w100p d-hmn102" custom>
-  <div
-    v-for="r in [0, 2, 4, 8, 12, 16, 24, 32]"
-    class="d-fl-center d-p16 d-hmn48 d-bgc-purple-300 d-fs-200 d-fw-bold"
-    :class="`d-bar${r}`"
+<code-well-header>
+  <dt-stack
+    gap="400"
+    :direction="{ 'default': 'column', 'md': 'row' }"
   >
-    .d-bar{{ r }}
-  </div>
+    <div
+      v-for="r in [0, 2, 4, 8, 12, 16, 24, 32]"
+      class="d-p16 d-ba d-baw2 d-bc-default d-bgc-primary d-ws-nowrap"
+      :class="`d-bar${r}`"
+    >
+      d-bar{{ r }}
+    </div>
+  </dt-stack>
 </code-well-header>
 
 ```html
@@ -32,11 +37,19 @@ Use `d-bar{n}` to change the border radius on all corners of your element.
 
 Use `d-b{t|r|b|l}r{n}` to change the border radius on a side of your element.
 
-<code-well-header class="d-fl-center d-g8 d-fw-wrap d-p24 d-bgc-magenta-100 d-bgo50 d-w100p d-hmn102 lg:d-stack8 d-flow8" custom>
-  <div class="d-fl-center d-p16 d-h48 d-btr4 d-bgc-magenta-100 d-fs-300 d-fw-bold">.d-btr4</div>
-  <div class="d-fl-center d-p16 d-h48 d-brr8 d-bgc-magenta-100 d-fs-300 d-fw-bold">.d-brr8</div>
-  <div class="d-fl-center d-p16 d-h48 d-bbr12 d-bgc-magenta-100 d-fs-300 d-fw-bold">.d-bbr12</div>
-  <div class="d-fl-center d-p16 d-h48 d-blr16 d-bgc-magenta-100 d-fs-300 d-fw-bold">.d-blr16</div>
+<code-well-header>
+  <dt-stack
+    gap="400"
+    :direction="{ 'default': 'column', 'md': 'row' }"
+  >
+    <div
+      v-for="r in [4, 8, 12, 16]"
+      class="d-p16 d-ba d-baw2 d-bc-default d-bgc-primary d-ws-nowrap"
+      :class="`d-btr${r}`"
+    >
+      d-btr{{ r }}
+    </div>
+  </dt-stack>
 </code-well-header>
 
 ```html
@@ -50,8 +63,15 @@ Use `d-b{t|r|b|l}r{n}` to change the border radius on a side of your element.
 
 Use `d-b{a|t|r|b|l}r-pill` to change the border radius of your element to a pill shape.
 
-<code-well-header class="d-fl-center d-g8 d-fw-wrap d-p24 d-bgc-green-100 d-bgo50 d-w100p d-hmn102" custom>
-            <div class="d-fl-center d-p16 d-h64 d-wmn264 d-bar-pill d-bgc-green-200 d-fs-300 d-fw-bold">.d-bar-pill</div>
+<code-well-header>
+  <dt-stack
+    gap="400"
+    :direction="{ 'default': 'column', 'md': 'row' }"
+  >
+    <div class="d-p16 d-ba d-baw2 d-bc-default d-bgc-primary d-ws-nowrap d-bar-pill">
+      d-bar-pill
+    </div>
+  </dt-stack>
 </code-well-header>
 
 ```html
@@ -62,8 +82,15 @@ Use `d-b{a|t|r|b|l}r-pill` to change the border radius of your element to a pill
 
 Use `d-b{a|t|r|b|l}r-circle` to change the border radius of your element to a circle shape.
 
-<code-well-header class="d-fl-center d-g8 d-fw-wrap d-p24 d-bgc-red-100 d-bgo50 d-w100p d-hmn102" custom>
-  <div class="d-fl-center d-p16 d-h264 d-w264 d-bar-circle d-bgc-red-200 d-fs-300 d-fw-bold d-fc-primary-inverted">.d-bar-circle</div>
+<code-well-header>
+  <dt-stack
+    gap="400"
+    :direction="{ 'default': 'column', 'md': 'row' }"
+   >
+    <div class="d-fl-center d-p16 d-h128 d-w128 d-ba d-baw2 d-bc-default d-bgc-primary d-ws-nowrap d-bar-circle ">
+      d-bar-circle
+    </div>
+  </dt-stack>
 </code-well-header>
 
 ```html
