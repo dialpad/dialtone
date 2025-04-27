@@ -3,8 +3,7 @@
   flex-flow: row wrap;
   gap: var(--description-list-gap);
   align-items: flex-start;
-  font-size: var(--dt-font-size-100);
-  line-height: var(--dt-font-line-height-300);
+  font: var(--dt-typography-body-sm);
 
   --description-list-gap: var(--dt-space-400);
   each(range(0, 600, 100), {
@@ -20,6 +19,7 @@
   &__term {
     flex: 0 1 40%;
     color: var(--dt-color-foreground-tertiary);
+    font: var(--dt-typography-label-sm);
   }
 
   &__description {
