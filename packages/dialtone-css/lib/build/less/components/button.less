@@ -128,7 +128,8 @@
 }
 
 .d-btn--unstyled {
-  all: unset;
+  /* stylelint-disable-next-line order/properties-order */
+  all: unset; // stylelint keeps moving `all` to bottom, it has to be first.
   display: inline-flex;
   align-content: center;
   align-items: center;
