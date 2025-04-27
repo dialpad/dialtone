@@ -34,7 +34,7 @@ When assigning a size to an element, utilize [Size Tokens](#tokens) for the valu
 <div class="d-gc2">
 <code-well-header>
   <div class="d-d-grid d-g24 d-g-cols2 md:d-g-cols1 d-w100p">
-    <div class="d-fl-center d-ba d-bc-purple-400 d-js-center" :style="{ width: 'fit-content', minWidth: selectedSize }">
+    <div class="d-fl-center d-ba d-bc-default d-js-center" :style="{ width: 'fit-content', minWidth: selectedSize }">
       Box
     </div>
     <dt-select-menu label="min-width" :options="sizeValues" @change="changeBoxSize" />
@@ -121,16 +121,6 @@ To ensure clickable and interactive areas are easily accessible, we recommend a 
 Here are some frequently used tokens. For a complete list, visit the [Size Tokens](/tokens/index.md#size) section.
 
 <token-table category="size" :tokenList="true" :tokens="tokens" theme="light" />
-
-<dt-notice
-  kind="info"
-  title="Figma Variables"
-  :hideClose="true"
->
-  <template #default>
-    By April 2024, we aim to integrate sizing units into Figma Variables. This will simplify the process of setting these tokens on width, min-width, height, min-height in your Figma files, making it easier for engineers to obtain the correct variable for each case.
-  </template>
-</dt-notice>
 
 ## Key Takeaways
 

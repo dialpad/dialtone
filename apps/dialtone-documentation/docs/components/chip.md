@@ -23,7 +23,7 @@ figma_url: https://www.figma.com/design/W58r5BkO8qTw3vem9YieJd/DT9-Component-Lib
 
 ### Non Interactive
 
-Add `:interactive="false"` to make it a read-only, non-interactive Chip. This changes it from a `<button>` to a non-interative, read-only Chip with no events or hover/active state. Note that this does not effect the interactivity of its `×` remove button.
+Add `:interactive="false"` to make it a read-only, non-interactive Chip. This changes it from a `<button>` to a non-interactive, read-only Chip with no events or hover/active state. Note that this does not effect the interactivity of its `×` remove button.
 
 <code-well-header>
   <example-chip label="Chip" :interactive="false"/>
