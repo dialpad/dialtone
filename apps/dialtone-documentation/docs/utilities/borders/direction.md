@@ -12,11 +12,13 @@ Use `d-ba` to add a border to all sides of your element.
     gap="500"
     :direction="{ 'default': 'column', 'md': 'row' }"
   >
-    <div class="d-p16 d-ba d-baw0 d-bc-default d-bgc-primary">d-baw0</div>
-    <div class="d-p16 d-ba d-baw1 d-bc-default d-bgc-primary">d-baw1</div>
-    <div class="d-p16 d-ba d-baw2 d-bc-default d-bgc-primary">d-baw2</div>
-    <div class="d-p16 d-ba d-baw4 d-bc-default d-bgc-primary">d-baw4</div>
-    <div class="d-p16 d-ba d-baw6 d-bc-default d-bgc-primary">d-baw6</div>
+    <div
+      v-for="width in [0, 1, 2, 4, 6]"
+      class="d-p16 d-ba d-bc-default d-bgc-primary"
+      :class="`d-baw${width}`"
+    >
+      d-baw{{ width }}
+    </div>
   </dt-stack>
 </code-well-header>
 
@@ -37,13 +39,13 @@ Use `d-b{t|r|b|l|x|y}` to add a border to only specific sides of your element.
     gap="500"
     :direction="{ 'default': 'column', 'md': 'row' }"
   >
-    <div class="d-p16 d-bt d-baw4 d-bc-default d-bgc-primary">d-bt</div>
-    <div class="d-p16 d-br d-baw4 d-bc-default d-bgc-primary">d-br</div>
-    <div class="d-p16 d-bb d-baw4 d-bc-default d-bgc-primary">d-bb</div>
-    <div class="d-p16 d-bl d-baw4 d-bc-default d-bgc-primary">d-bl</div>
-    <div class="d-p16 d-bx d-baw4 d-bc-default d-bgc-primary">d-bx</div>
-    <div class="d-p16 d-by d-baw4 d-bc-default d-bgc-primary">d-by</div>
-    <div class="d-p16 d-ba d-baw4 d-bc-default d-bgc-primary">d-ba</div>
+    <div
+      v-for="side in ['t', 'r', 'b', 'l', 'x', 'y', 'a']"
+      class="d-p16 d-baw4 d-bc-default d-bgc-primary"
+      :class="`d-b${side}`"
+    >
+      d-b{{ side }}
+    </div>
   </dt-stack>
 </code-well-header>
 
