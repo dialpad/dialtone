@@ -43,7 +43,7 @@ description: Utilities for setting the type of mouse cursor, if any, to show whe
   <template #content>
     <tbody>
       <tr v-for="{ class: className, output } in cursor">
-        <th scope="row" class="d-code--sm d-fw-normal d-fc-purple-400">.{{ className }}</th>
+        <th scope="row" class="d-code--sm d-docsite-code">.{{ className }}</th>
         <td class="d-code--sm">{{ output }}</td>
       </tr>
     </tbody>
