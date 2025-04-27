@@ -33,6 +33,7 @@
     </component>
     <button
       v-if="!hideCloseBtn"
+      v-dt-tooltip="`Remove`"
       aria-label="close"
       :class="['d-chip__close', { [`d-chip__close--${size}`]: size }]"
     >
