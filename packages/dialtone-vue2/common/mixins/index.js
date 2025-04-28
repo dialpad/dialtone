@@ -25,3 +25,7 @@ export {
 export {
   default as DtSrOnlyCloseButtonMixin,
 } from './sr_only_close_button';
+
+export {
+  default as DtLocalizationMixin,
+} from './localization';

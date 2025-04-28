@@ -4,7 +4,6 @@ import DtNotice from './notice.vue';
 
 const baseProps = {
   title: 'Notice Title',
-  closeButtonProps: { ariaLabel: 'close' },
 };
 
 const baseSlots = {
@@ -94,12 +93,6 @@ describe('DtNotice tests', () => {
         await wrapper.setProps({ kind: 'error' });
 
         expect(rootElement.classes('d-notice--error')).toBe(true);
-      });
-    });
-
-    describe('When closeButtonProps is passed', () => {
-      it('Has correct class', () => {
-        expect(actionChildStub.props().closeButtonProps).toEqual({ ariaLabel: 'close' });
       });
     });
   });

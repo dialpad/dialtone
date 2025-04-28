@@ -2,7 +2,6 @@ import { action } from '@storybook/addon-actions';
 import DtNotice from './notice.vue';
 import { NOTICE_KINDS, NOTICE_ROLES } from './notice_constants';
 import NoticeDefault from './notice_default.story.vue';
-
 import { createRenderConfig, getIconNames } from '@/common/storybook_utils';
 
 const iconsList = getIconNames();
