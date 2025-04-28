@@ -44,7 +44,7 @@ export default {
     direction="row"
     gap="300"
   >
-    <span>{{ $t('SET_LANGUAGE') }}: </span>
+    <span>{{ $t('STORYBOOK_SET_LANGUAGE') }}: </span>
     <dt-button
       v-for="(key, name) in allowedLocales"
       :key="key"
@@ -53,7 +53,7 @@ export default {
       importance="outlined"
       @click="setLocale(key)"
     >
-      {{ $t(name) }}
+      {{ $t(`STORYBOOK_LANGUAGE_${name}`) }}
     </dt-button>
   </dt-stack>
 </template>

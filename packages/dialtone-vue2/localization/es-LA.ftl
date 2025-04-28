@@ -1,17 +1,18 @@
-CLICK_TO_CLOSE = Click para cerrar
-CLICK_TO_OPEN = Click para abrir
-ENGLISH = Inglés
-SPANISH = Español
-DIALPADISTAN = Dialpadistan
-SET_LANGUAGE = Cambiar idioma
-CLOSE_BUTTON =
+# Dialtone
+DIALTONE_CLOSE_BUTTON =
   .aria-label = Cerrar
   .title = Cerrar
-BREADCRUMB_ARIA_LABEL = lista de enlaces
-LOADING = cargando
-PREVIOUS_YEAR = Año anterior
-PREVIOUS_MONTH = Mes anterior
-NEXT_MONTH = Siguiente mes
-NEXT_YEAR = Siguiente año
-SELECT_DAY = Seleccionar día
-CHANGE_TO = Cambiar a
+DIALTONE_BREADCRUMBS_ARIA_LABEL = lista de enlaces
+DIALTONE_BUTTON_LOADING = cargando
+DIALTONE_DATEPICKER_PREVIOUS_YEAR = Año anterior
+DIALTONE_DATEPICKER_PREVIOUS_MONTH = Mes anterior
+DIALTONE_DATEPICKER_NEXT_MONTH = Siguiente mes
+DIALTONE_DATEPICKER_NEXT_YEAR = Siguiente año
+DIALTONE_DATEPICKER_SELECT_DAY = Seleccionar día
+DIALTONE_DATEPICKER_CHANGE_TO = Cambiar a
+
+# Storybook only
+STORYBOOK_LANGUAGE_ENGLISH = Inglés
+STORYBOOK_LANGUAGE_SPANISH = Español
+STORYBOOK_LANGUAGE_DIALPADISTAN = Dialpadistan
+STORYBOOK_SET_LANGUAGE = Cambiar idioma

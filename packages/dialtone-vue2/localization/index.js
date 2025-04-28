@@ -4,8 +4,8 @@ import { LocaleManager, RawBundleSource, useI18N } from '@dialpad/i18n-vue2';
  * @type {{[key: string]: string}}
  */
 export const allowedLocales = {
-  SPANISH: 'es-LA',
   ENGLISH: 'en-US',
+  SPANISH: 'es-LA',
   DIALPADISTAN: 'dp-DP',
 };
 

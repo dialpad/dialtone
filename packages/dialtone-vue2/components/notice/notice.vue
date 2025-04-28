@@ -28,6 +28,7 @@
     <dt-notice-action
       :hide-action="hideAction"
       :hide-close="hideClose"
+      :close-button-props="closeButtonProps"
       v-on="$listeners"
     >
       <!-- @slot Enter a possible action for the user to take, such as a link to another page -->
@@ -116,6 +117,14 @@ export default {
       validate (kind) {
         return NOTICE_KINDS.includes(kind);
       },
+    },
+
+    /**
+     * Props for the notice close button.
+     */
+    closeButtonProps: {
+      type: Object,
+      default: () => ({}),
     },
 
     /**

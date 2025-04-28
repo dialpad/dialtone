@@ -1,17 +1,18 @@
-CLICK_TO_CLOSE = Ĉ£īĉʞ †ů ĉ£ůšά
-CLICK_TO_OPEN = Ĉ£īĉʞ †ů ůþάŋ
-ENGLISH = Άŋğ£īšħ
-SPANISH = Šþëŋīšħ
-DIALPADISTAN = Ḍīë£þëḍīš†ëŋ
-SET_LANGUAGE = Šά† £ëŋğøëğά
-CLOSE_BUTTON =
-    .aria-label = Ĉ£ůšά
-    .title = Ĉ£ůšά
-BREADCRUMB_ARIA_LABEL = ßřάëḍĉřøɱßš
-LOADING = £ůëḍīŋğ
-PREVIOUS_MONTH = Þřάʋīůøš ɱůŋ†ħ
-NEXT_MONTH = Ŋάχ† ɱůŋ†ħ
-PREVIOUS_YEAR = Þřάʋīůøš ýάëř
-NEXT_YEAR = Ŋάχ† ýάëř
-SELECT_DAY = Šά£άĉ† ḍëý
-CHANGE_TO = Ĉħëŋğά †ů
+# Dialtone
+DIALTONE_CLOSE_BUTTON =
+  .aria-label = Ĉ£ůšά
+  .title = Ĉ£ůšά
+DIALTONE_BREADCRUMBS_ARIA_LABEL = ßřάëḍĉřøɱßš
+DIALTONE_BUTTON_LOADING = £ůëḍīŋğ
+DIALTONE_DATEPICKER_PREVIOUS_MONTH = Þřάʋīůøš ɱůŋ†ħ
+DIALTONE_DATEPICKER_NEXT_MONTH = Ŋάχ† ɱůŋ†ħ
+DIALTONE_DATEPICKER_PREVIOUS_YEAR = Þřάʋīůøš ýάëř
+DIALTONE_DATEPICKER_NEXT_YEAR = Ŋάχ† ýάëř
+DIALTONE_DATEPICKER_SELECT_DAY = Šά£άĉ† ḍëý
+DIALTONE_DATEPICKER_CHANGE_TO = Ĉħëŋğά †ů
+
+# Storybook only
+STORYBOOK_LANGUAGE_ENGLISH = Άŋğ£īšħ
+STORYBOOK_LANGUAGE_SPANISH = Šþëŋīšħ
+STORYBOOK_LANGUAGE_DIALPADISTAN = Ḍīë£þëḍīš†ëŋ
+STORYBOOK_SET_LANGUAGE = Šά† £ëŋğøëğά
