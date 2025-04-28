@@ -7,7 +7,7 @@ description: Utilities to control an element's height.
 
 Use `d-h{n}p` to set a percentage height for an element.
 
-<code-well-header class="d-d-flex d-p24 d-bgc-green-100 d-bgo50 d-w100p d-h332 d-flow16 d-of-x-scroll d-code--md d-ta-center" custom>
+<code-well-header class="d-d-flex d-p24 d-bgc-green-100 d-bgo50 d-w100p d-h332 d-flow16 d-code--md d-ta-center" v-dt-scrollbar:never custom>
   <div v-for="i in percentage" class="d-d-flex d-fl-center d-h100p d-ps-relative">
     <span class="d-zi-active d-w64">d-h{{i}}p</span>
     <div class="d-w64 d-h216 d-ps-absolute d-bgc-green-100">
@@ -37,7 +37,7 @@ Use `d-h{n}p` to set a percentage height for an element.
 
 Use `d-h{n}` to set a fixed height for an element.
 
-<code-well-header class="d-d-flex d-p24 d-bgc-magenta-100 d-bgo50 d-w100p d-hmx512 d-flow16 d-of-scroll d-fs-300 d-fw-bold d-ta-center" custom>
+<code-well-header class="d-d-flex d-p24 d-bgc-magenta-100 d-bgo50 d-w100p d-hmx512 d-flow16 d-of-scroll d-fs-300 d-fw-bold d-ta-center" v-dt-scrollbar:never custom>
   <div v-for="(i, index) in fixed" class="d-d-flex d-fd-column d-pls-start">
     <span>{{ index }}</span>
     <div class="d-fl-center d-w64 d-bgc-magenta-100 d-bar4" :class="`d-h${i}`"></div>

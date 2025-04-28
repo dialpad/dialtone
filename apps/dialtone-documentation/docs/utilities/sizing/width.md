@@ -7,7 +7,7 @@ description: Utilities to control an element's width.
 
 Use `d-w{n}p` to set a percentage width for an element.
 
-<code-well-header class="d-d-flex d-fd-column d-p24 d-bgc-purple-100 d-bgo50 d-w100p d-hmx332 d-stack16 d-code--md d-ta-center d-of-y-scroll" custom>
+<code-well-header class="d-d-flex d-fd-column d-p24 d-bgc-purple-100 d-bgo50 d-w100p d-hmx332 d-stack16 d-code--md d-ta-center d-of-y-scroll" v-dt-scrollbar:never custom>
   <div v-for="i in percentage" class="d-d-flex d-fl-center d-ps-relative">
     <span class="d-zi-active d-h64 d-d-flex d-ai-center">d-w{{i}}p</span>
     <div class="d-w100p d-h64 d-ps-absolute d-bgc-purple-200">
@@ -35,7 +35,7 @@ Use `d-w{n}p` to set a percentage width for an element.
 
 Use `d-w{n}` to set a fixed width for an element.
 
-<code-well-header class="d-d-flex d-fd-column d-p24 d-bgc-magenta-100 d-bgo50 d-w100p d-hmx332 d-stack16 d-fs-300 d-fw-bold d-ta-center d-of-scroll" custom>
+<code-well-header class="d-d-flex d-fd-column d-p24 d-bgc-magenta-100 d-bgo50 d-w100p d-hmx332 d-stack16 d-fs-300 d-fw-bold d-ta-center d-of-scroll" v-dt-scrollbar:never custom>
   <div v-for="(i, index) in fixed" class="d-d-flex d-pls-start d-ai-center">
               <span class="d-w48">{{ index }}</span>
               <div class="d-h64 d-bgc-magenta-100 d-bar4" :class="`d-w${i}`"></div>
