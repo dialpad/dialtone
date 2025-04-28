@@ -5,11 +5,11 @@ description: Utilities for showing or hiding an element without changing the lay
 
 ## Usage
 
-<code-well-header bgclass='d-bgc-purple-100'>
+<code-well-header>
   <div class="d-w100p">
-    <div class="d-d-inline-block d-m8 d-p16 d-bgc-purple-300 d-bar4 d-code--md d-ta-center d-vi-visible">.d-vi-visible</div>
-    <div class="d-d-inline-block d-m8 d-p16 d-bgc-purple-300 d-bar4 d-code--md d-ta-center d-vi-visible-sr">.d-vi-visible-sr</div>
-    <div class="d-d-inline-block d-m8 d-p16 d-bgc-purple-300 d-bar4 d-code--md d-ta-center d-vi-hidden">.d-vi-hidden</div>
+    <div class="d-d-inline-block d-p16 d-bgc-moderate d-bar4 d-code--md d-ta-center d-vi-visible">.d-vi-visible</div>
+    <div class="d-d-inline-block d-p16 d-bgc-moderate d-bar4 d-code--md d-ta-center d-vi-visible-sr">.d-vi-visible-sr</div>
+    <div class="d-d-inline-block d-p16 d-bgc-moderate d-bar4 d-code--md d-ta-center d-vi-hidden">.d-vi-hidden</div>
   </div>
 </code-well-header>
 
