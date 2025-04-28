@@ -3,8 +3,6 @@
     :open="isOpen"
     placement="bottom-start"
     content-class="d-recipe-message-input__link-popover"
-    :visually-hidden-close="true"
-    :visually-hidden-close-label="linkButtonOptions.visuallyHiddenCloseText"
     data-qa="dt-message-input-link-popover"
     :show-close-button="false"
     @opened="$emit('opened', $event)"

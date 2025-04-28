@@ -10,7 +10,6 @@ const iconsList = getIconNames();
 export const argsData = {
   onClose: action('close'),
   onClick: action('click'),
-  visuallyHiddenCloseLabel: 'Close Notice',
   show: undefined,
 };
 
@@ -96,11 +95,6 @@ export const argTypesData = {
     },
   },
   important: {
-    control: {
-      type: 'boolean',
-    },
-  },
-  visuallyHiddenClose: {
     control: {
       type: 'boolean',
     },
