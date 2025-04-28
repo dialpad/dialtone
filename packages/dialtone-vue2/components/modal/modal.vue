@@ -98,7 +98,7 @@
           circle
           size="lg"
           importance="clear"
-          v-bind="$ta('CLOSE_BUTTON')"
+          v-bind="$ta('DIALTONE_CLOSE_BUTTON')"
           @click="close"
         >
           <template #icon>

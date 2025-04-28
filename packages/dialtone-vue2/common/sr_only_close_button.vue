@@ -3,7 +3,7 @@
     id="sr-only-close-button"
     data-qa="dt-sr-only-close-button"
     class="d-vi-visible-sr"
-    v-bind="$ta('CLOSE_BUTTON')"
+    v-bind="$ta('DIALTONE_CLOSE_BUTTON')"
     @click="close"
     @keydown.space.prevent.stop="close"
   >
