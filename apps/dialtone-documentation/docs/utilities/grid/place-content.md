@@ -75,10 +75,10 @@ Use `d-plc-center{-n}` to align grid items along the center of the block and/or 
 
 <code-well-header>
   <div class="d-d-grid d-g-cols2 d-plc-center d-g16 d-w100p d-h216d-bar8 d-bgc-moderate" style="--col-width: 6.4rem;">
-    <div class="d-fl-center d-p16 d-bgc-red-200 d-bar4">1</div>
-    <div class="d-fl-center d-p16 d-bgc-red-200 d-bar4">2</div>
-    <div class="d-fl-center d-p16 d-bgc-red-200 d-bar4">3</div>
-    <div class="d-fl-center d-p16 d-bgc-red-200 d-bar4">4</div>
+    <div class="d-fl-center d-p16 d-bgc-moderate-opaque d-bar4">1</div>
+    <div class="d-fl-center d-p16 d-bgc-moderate-opaque d-bar4">2</div>
+    <div class="d-fl-center d-p16 d-bgc-moderate-opaque d-bar4">3</div>
+    <div class="d-fl-center d-p16 d-bgc-moderate-opaque d-bar4">4</div>
   </div>
 </code-well-header>
 
@@ -97,10 +97,10 @@ Use `d-plc-space-evenly{-n}` to distribute grid items evenly along the block axi
 
 <code-well-header>
   <div class="d-d-grid d-g-cols2 d-plc-space-evenly d-g16 d-w100p d-h216d-bar8 d-bgc-moderate" style="--col-width: 6.4rem;">
-    <div class="d-fl-center d-p16 d-bgc-gold-200 d-bar4">1</div>
-    <div class="d-fl-center d-p16 d-bgc-gold-200 d-bar4">2</div>
-    <div class="d-fl-center d-p16 d-bgc-gold-200 d-bar4">3</div>
-    <div class="d-fl-center d-p16 d-bgc-gold-200 d-bar4">4</div>
+    <div class="d-fl-center d-p16 d-bgc-moderate-opaque d-bar4">1</div>
+    <div class="d-fl-center d-p16 d-bgc-moderate-opaque d-bar4">2</div>
+    <div class="d-fl-center d-p16 d-bgc-moderate-opaque d-bar4">3</div>
+    <div class="d-fl-center d-p16 d-bgc-moderate-opaque d-bar4">4</div>
   </div>
 </code-well-header>
 

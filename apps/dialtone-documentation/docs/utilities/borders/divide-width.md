@@ -9,28 +9,28 @@ Use `d-divide-{y|x}` to create a 1px divider between an element's child items.
 
 <code-well-header>
   <dt-stack class="d-divide-y d-divide-default d-w100p">
-    <div class="d-fl-center d-p16 d-fw-bold">1</div>
-    <div class="d-fl-center d-p16 d-fw-bold">2</div>
-    <div class="d-fl-center d-p16 d-fw-bold">3</div>
+    <div class="d-fl-center d-p16">1</div>
+    <div class="d-fl-center d-p16">2</div>
+    <div class="d-fl-center d-p16">3</div>
   </dt-stack>
   <dt-stack direction="row" class="d-divide-x d-divide-default d-w100p">
-    <div class="d-fl-center d-w100p d-p16 d-fw-bold">1</div>
-    <div class="d-fl-center d-w100p d-p16 d-fw-bold">2</div>
-    <div class="d-fl-center d-w100p d-p16 d-fw-bold">3</div>
+    <div class="d-fl-center d-w100p d-p16">1</div>
+    <div class="d-fl-center d-w100p d-p16">2</div>
+    <div class="d-fl-center d-w100p d-p16">3</div>
   </dt-stack>
 </code-well-header>
 
 ```html
 <dt-stack class="d-divide-y d-divide-default d-w100p">
-  <div class="d-fl-center d-p16 d-fw-bold">1</div>
-  <div class="d-fl-center d-p16 d-fw-bold">2</div>
-  <div class="d-fl-center d-p16 d-fw-bold">3</div>
+  <div class="d-fl-center d-p16">1</div>
+  <div class="d-fl-center d-p16">2</div>
+  <div class="d-fl-center d-p16">3</div>
 </dt-stack>
 
 <dt-stack direction="row" class="d-divide-x d-divide-default d-w100p">
-  <div class="d-fl-center d-w100p d-p16 d-fw-bold">1</div>
-  <div class="d-fl-center d-w100p d-p16 d-fw-bold">2</div>
-  <div class="d-fl-center d-w100p d-p16 d-fw-bold">3</div>
+  <div class="d-fl-center d-w100p d-p16">1</div>
+  <div class="d-fl-center d-w100p d-p16">2</div>
+  <div class="d-fl-center d-w100p d-p16">3</div>
 </dt-stack>
 ```
 
@@ -41,21 +41,21 @@ Use `d-divide-{y|x}{n}` to change the divider width between an element's child i
 <code-well-header>
   <code>d-divide-x0</code>
   <dt-stack direction="row" class="d-divide-x d-divide-x0 d-divide-default d-w100p d-ba d-bc-default">
-    <div class="d-fl-center d-w100p d-p16 d-fw-bold">1</div>
-    <div class="d-fl-center d-w100p d-p16 d-fw-bold">2</div>
-    <div class="d-fl-center d-w100p d-p16 d-fw-bold">3</div>
+    <div class="d-fl-center d-w100p d-p16">1</div>
+    <div class="d-fl-center d-w100p d-p16">2</div>
+    <div class="d-fl-center d-w100p d-p16">3</div>
   </dt-stack>
   <code>d-divide-x2</code>
   <dt-stack direction="row" class="d-divide-x d-divide-x2 d-divide-default d-w100p d-ba d-bc-default d-baw2">
-    <div class="d-fl-center d-w100p d-p16 d-fw-bold">1</div>
-    <div class="d-fl-center d-w100p d-p16 d-fw-bold">2</div>
-    <div class="d-fl-center d-w100p d-p16 d-fw-bold">3</div>
+    <div class="d-fl-center d-w100p d-p16">1</div>
+    <div class="d-fl-center d-w100p d-p16">2</div>
+    <div class="d-fl-center d-w100p d-p16">3</div>
   </dt-stack>
   <code>d-divide-x4</code>
   <dt-stack direction="row" class="d-divide-x d-divide-x4 d-divide-default d-w100p d-ba d-bc-default d-baw4">
-    <div class="d-fl-center d-w100p d-p16 d-fw-bold">1</div>
-    <div class="d-fl-center d-w100p d-p16 d-fw-bold">2</div>
-    <div class="d-fl-center d-w100p d-p16 d-fw-bold">3</div>
+    <div class="d-fl-center d-w100p d-p16">1</div>
+    <div class="d-fl-center d-w100p d-p16">2</div>
+    <div class="d-fl-center d-w100p d-p16">3</div>
   </dt-stack>
 </code-well-header>
 
@@ -77,17 +77,17 @@ If an element's `flex-direction` is reversed, apply `d-divide-{y|x}-reverse` to 
 
 <code-well-header>
   <dt-stack direction="row-reverse" class="d-divide-x d-divide-default d-divide-x-reverse d-w100p">
-    <div class="d-fl-center d-w100p d-p16 d-fw-bold">1</div>
-    <div class="d-fl-center d-w100p d-p16 d-fw-bold">2</div>
-    <div class="d-fl-center d-w100p d-p16 d-fw-bold">3</div>
+    <div class="d-fl-center d-w100p d-p16">1</div>
+    <div class="d-fl-center d-w100p d-p16">2</div>
+    <div class="d-fl-center d-w100p d-p16">3</div>
   </dt-stack>
 </code-well-header>
 
 ```html
 <dt-stack direction="row-reverse" class="d-divide-x d-divide-default d-divide-x-reverse d-w100p d-ba d-bc-default">
-  <div class="d-fl-center d-w100p d-p16 d-fw-bold">1</div>
-  <div class="d-fl-center d-w100p d-p16 d-fw-bold">2</div>
-  <div class="d-fl-center d-w100p d-p16 d-fw-bold">3</div>
+  <div class="d-fl-center d-w100p d-p16">1</div>
+  <div class="d-fl-center d-w100p d-p16">2</div>
+  <div class="d-fl-center d-w100p d-p16">3</div>
 </dt-stack>
 ```
 
