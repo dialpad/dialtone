@@ -37,7 +37,6 @@
       <dt-notice-action
         :hide-action="hideAction"
         :hide-close="hideClose"
-        :close-button-props="closeButtonProps"
         :visually-hidden-close="visuallyHiddenClose"
         :visually-hidden-close-label="visuallyHiddenCloseLabel"
         v-on="$listeners"
@@ -128,14 +127,6 @@ export default {
       validate (kind) {
         return NOTICE_KINDS.includes(kind);
       },
-    },
-
-    /**
-     * Props for the notice close button.
-     */
-    closeButtonProps: {
-      type: Object,
-      default: () => ({}),
     },
 
     /**

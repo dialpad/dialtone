@@ -1,14 +1,13 @@
 import { createLocalVue, mount } from '@vue/test-utils';
 import EmptyComponentFixture from '@/tests/fixtures/component.vue';
 import { DtChip } from '@/components/chip';
+import { useI18N } from '@dialpad/i18n-vue2';
+const { $ta } = useI18N();
 
 const MOCK_DEFAULT_TEXT = 'TEXT';
+const MOCK_LOCALIZED_CLOSE_BUTTON_ATTRIBUTES = $ta('DIALTONE_CLOSE_BUTTON');
 
-const baseProps = {
-  closeButtonProps: {
-    ariaLabel: 'close',
-  },
-};
+const baseProps = {};
 const baseSlots = {};
 
 let mockProps = {};
@@ -94,7 +93,7 @@ describe('DtChip Tests', () => {
       });
 
       it('button should have aria-label', () => {
-        expect(remove.attributes('aria-label')).toBe('close');
+        expect(remove.attributes('aria-label')).toBe(MOCK_LOCALIZED_CLOSE_BUTTON_ATTRIBUTES['aria-label']);
       });
     });
 

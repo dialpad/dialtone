@@ -1,12 +1,12 @@
-import { LocaleManager, RawBundleSource } from '@dialpad/i18n-vue2';
+import { LocaleManager, RawBundleSource, useI18N } from '@dialpad/i18n-vue2';
 
 /**
  * @type {{[key: string]: string}}
  */
 export const allowedLocales = {
+  SPANISH: 'es-LA',
   ENGLISH: 'en-US',
   DIALPADISTAN: 'dp-DP',
-  SPANISH: 'es-LA',
 };
 
 export const DialtoneLocalizationPlugin = {
@@ -31,5 +31,8 @@ export const DialtoneLocalizationPlugin = {
     await manager.ready;
 
     Vue.use(manager);
+
+    const { setI18N } = useI18N();
+    setI18N(preferredLocale);
   },
 };

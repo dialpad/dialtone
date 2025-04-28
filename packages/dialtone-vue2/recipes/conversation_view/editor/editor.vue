@@ -522,7 +522,7 @@ export default {
     /**
      * Emit when text content changes (not raw html)
      */
-     'text-input',
+    'text-input',
   ],
 
   data () {

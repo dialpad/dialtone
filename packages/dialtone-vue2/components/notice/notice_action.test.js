@@ -9,7 +9,6 @@ import { itBehavesLikeVisuallyHiddenCloseLabelIsNull } from '@/tests/shared_exam
 // Constants
 const basePropsData = {
   hideClose: false,
-  closeButtonProps: { ariaLabel: 'Close' },
   visuallyHiddenCloseLabel: 'Close',
 };
 
@@ -73,12 +72,6 @@ describe('DtNoticeAction tests', () => {
     describe('When hideClose is false', () => {
       it('Close button is displayed', () => {
         expect(closeButton.exists()).toBe(true);
-      });
-    });
-
-    describe('When closeButtonProps is passed', () => {
-      it('Adds props to button', () => {
-        expect(closeButton.attributes()['aria-label']).toBe('Close');
       });
     });
 

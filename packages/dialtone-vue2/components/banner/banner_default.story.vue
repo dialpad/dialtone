@@ -106,7 +106,6 @@ export default {
       return {
         ...this.$attrs.closeButtonProps,
         kind: this.buttonKind,
-        ariaLabel: 'Close',
       };
     },
   },

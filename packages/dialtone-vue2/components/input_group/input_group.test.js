@@ -232,7 +232,7 @@ describe('Input Group Tests', () => {
         it('does not emit an input event', async () => {
           await _selectInput(MOCK_SELECTED_VALUE);
 
-          expect(wrapper.emitted()).toEqual({});
+          expect(wrapper.emitted('input')).toBeFalsy();
         });
       });
     });

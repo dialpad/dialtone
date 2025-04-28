@@ -3,7 +3,7 @@
   <div class="d-d-flex d-fd-column d-stack8">
     <div>
       <h4>With Icon</h4>
-      <dt-chip :close-button-props="$attrs.closeButtonProps">
+      <dt-chip>
         <template #icon>
           <dt-icon
             name="lock-filled"
@@ -17,7 +17,7 @@
     </div>
     <div>
       <h4>With Avatar</h4>
-      <dt-chip :close-button-props="$attrs.closeButtonProps">
+      <dt-chip>
         <template #avatar>
           <dt-avatar
             full-name="Jaqueline Nackos"
@@ -33,8 +33,7 @@
       <h4>Non interactive</h4>
       <dt-chip
         :interactive="false"
-        :hide-close="true"
-        :close-button-props="$attrs.closeButtonProps"
+        hide-close
       >
         <template #default>
           Chip
@@ -47,7 +46,7 @@
 <script>
 import DtChip from './chip.vue';
 import { DtIcon } from '@/components/icon';
-import DtAvatar from '@/components/avatar/avatar.vue';
+import { DtAvatar } from '@/components/avatar';
 
 export default {
   name: 'DtChipVariants',
