@@ -5,7 +5,7 @@ import { useI18N } from '@dialpad/i18n-vue2';
 const { $ta } = useI18N();
 
 const MOCK_DEFAULT_TEXT = 'TEXT';
-const MOCK_LOCALIZED_CLOSE_BUTTON_ATTRIBUTES = $ta('CLOSE_BUTTON');
+const MOCK_LOCALIZED_CLOSE_BUTTON_ATTRIBUTES = $ta('DIALTONE_CLOSE_BUTTON');
 
 const baseProps = {};
 const baseSlots = {};
