@@ -7,11 +7,11 @@ description: Utilities to control an element's width.
 
 Use `d-w{n}p` to set a percentage width for an element.
 
-<code-well-header class="d-d-flex d-fd-column d-p24 d-bgc-purple-100 d-bgo50 d-w100p d-hmx332 d-stack16 d-code--md d-ta-center d-of-y-scroll" v-dt-scrollbar:never custom>
+<code-well-header class="d-d-flex d-fd-column d-p24 d-bgc-secondary d-w100p d-hmx332 d-stack16 d-code--md d-ta-center d-of-y-scroll" v-dt-scrollbar:never custom>
   <div v-for="i in percentage" class="d-d-flex d-fl-center d-ps-relative">
     <span class="d-zi-active d-h64 d-d-flex d-ai-center">d-w{{i}}p</span>
-    <div class="d-w100p d-h64 d-ps-absolute d-bgc-purple-200">
-      <div class="d-h64 d-bgc-purple-300 d-bar4" :class="`d-w${i}p`"></div>
+    <div class="d-w100p d-h64 d-ps-absolute d-bgc-moderate">
+      <div class="d-h64 d-bgc-moderate-opaque d-bar4" :class="`d-w${i}p`"></div>
     </div>
   </div>
 </code-well-header>
@@ -35,11 +35,11 @@ Use `d-w{n}p` to set a percentage width for an element.
 
 Use `d-w{n}` to set a fixed width for an element.
 
-<code-well-header class="d-d-flex d-fd-column d-p24 d-bgc-magenta-100 d-bgo50 d-w100p d-hmx332 d-stack16 d-fs-300 d-fw-bold d-ta-center d-of-scroll" v-dt-scrollbar:never custom>
+<code-well-header class="d-d-flex d-fd-column d-p24 d-bgc-secondary d-w100p d-hmx332 d-stack16 d-ta-center d-of-scroll" v-dt-scrollbar:never custom>
   <div v-for="(i, index) in fixed" class="d-d-flex d-pls-start d-ai-center">
-              <span class="d-w48">{{ index }}</span>
-              <div class="d-h64 d-bgc-magenta-100 d-bar4" :class="`d-w${i}`"></div>
-            </div>
+    <span class="d-w48">{{ index }}</span>
+    <div class="d-h64 d-bgc-moderate d-bar4" :class="`d-w${i}`"></div>
+  </div>
 </code-well-header>
 
 ```html
@@ -82,8 +82,8 @@ Use `d-w{n}` to set a fixed width for an element.
 
 Use `d-w100vh` to have an element cover the user's viewport.
 
-<code-well-header class="d-ps-relative d-d-flex d-jc-center d-p24 d-bgc-gold-100 d-bgo50 d-w100p d-h3 d-stack16 d-of-y-scroll" custom>
-  <div class="d-fl-center d-py16 d-px8 d-w100vw d-h100vh d-bgc-gold-200 d-bar4 d-fs-300 d-fw-bold d-ta-center">Viewport</div>
+<code-well-header class="d-ps-relative d-d-flex d-jc-center d-p24 d-bgc-secondary d-w100p d-h3 d-stack16 d-of-y-scroll" custom>
+  <div class="d-fl-center d-py16 d-px8 d-w100vw d-h100vh d-bgc-moderate d-bar4 d-ta-center">Viewport</div>
 </code-well-header>
 
 ```html
@@ -94,8 +94,8 @@ Use `d-w100vh` to have an element cover the user's viewport.
 
 Use `d-w-auto` have the browser calculate and select a width.
 
-<code-well-header class="d-ps-relative d-d-flex d-jc-center d-p24 d-bgc-blue-100 d-bgo50 d-w100p d-hmn102 d-stack16" custom>
-  <div class="d-fl-center d-py16 d-px8 d-h72 d-w-auto d-bgc-blue-200 d-bar4 d-fs-300 d-fw-bold d-ta-center">Auto</div>
+<code-well-header class="d-ps-relative d-d-flex d-jc-center d-p24 d-bgc-secondary d-w100p d-hmn102 d-stack16" custom>
+  <div class="d-fl-center d-py16 d-px8 d-h72 d-w-auto d-bgc-moderate d-bar4 d-ta-center">Auto</div>
 </code-well-header>
 
 ```html

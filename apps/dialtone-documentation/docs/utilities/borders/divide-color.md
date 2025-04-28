@@ -9,17 +9,17 @@ Use `d-divide-y{n}` to create a divider between an element's child items.
 
 <code-well-header>
   <dt-stack class="d-divide-y d-divide-default d-w100p">
-    <div class="d-fl-center d-p16 d-fw-bold">1</div>
-    <div class="d-fl-center d-p16 d-fw-bold">2</div>
-    <div class="d-fl-center d-p16 d-fw-bold">3</div>
+    <div class="d-fl-center d-p16">1</div>
+    <div class="d-fl-center d-p16">2</div>
+    <div class="d-fl-center d-p16">3</div>
   </dt-stack>
 </code-well-header>
 
 ```html
 <dt-stack class="d-divide-y d-divide-default d-w100p">
-  <div class="d-fl-center d-w100p d-p16 d-fw-bold">1</div>
-  <div class="d-fl-center d-w100p d-p16 d-fw-bold">2</div>
-  <div class="d-fl-center d-w100p d-p16 d-fw-bold">3</div>
+  <div class="d-fl-center d-w100p d-p16">1</div>
+  <div class="d-fl-center d-w100p d-p16">2</div>
+  <div class="d-fl-center d-w100p d-p16">3</div>
 </dt-stack>
 ```
 
@@ -29,17 +29,17 @@ Use `d-divide-x{n}` to create a divider between an element's child items.
 
 <code-well-header>
   <dt-stack direction="row" class="d-divide-x d-divide-default d-w100p">
-    <div class="d-fl-center d-w100p d-p16 d-fw-bold">1</div>
-    <div class="d-fl-center d-w100p d-p16 d-fw-bold">2</div>
-    <div class="d-fl-center d-w100p d-p16 d-fw-bold">3</div>
+    <div class="d-fl-center d-w100p d-p16">1</div>
+    <div class="d-fl-center d-w100p d-p16">2</div>
+    <div class="d-fl-center d-w100p d-p16">3</div>
   </dt-stack>
 </code-well-header>
 
 ```html
 <dt-stack direction="row" class="d-divide-x d-divide-default d-w100p">
-  <div class="d-fl-center d-w100p d-p16 d-fw-bold">1</div>
-  <div class="d-fl-center d-w100p d-p16 d-fw-bold">2</div>
-  <div class="d-fl-center d-w100p d-p16 d-fw-bold">3</div>
+  <div class="d-fl-center d-w100p d-p16">1</div>
+  <div class="d-fl-center d-w100p d-p16">2</div>
+  <div class="d-fl-center d-w100p d-p16">3</div>
 </dt-stack>
 ```
 

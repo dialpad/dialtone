@@ -8,10 +8,10 @@ description: Utilities for controlling an element's text baseline.
 Use `d-va-baseline` to vertically align an element to the baseline.
 
 <code-well-header>
-  <div class="d-w100p d-ps-relative d-lh0 d-bgc-critical-subtle">
+  <div class="d-w100p d-ps-relative d-lh0 d-bgc-moderate">
     <div class="d-w0 d-h16 d-d-inline-block d-va-baseline">
-      <span class="d-ps-absolute d-t0 d-h16 d-w100p d-by d-bts-dashed d-bbs-dashed d-bc-critical-subtle"></span>
-      <span class="d-ps-absolute d-t0 d-h8 d-w100p d-by d-bts-dashed d-bbs-dashed d-bc-critical-subtle"></span>
+      <span class="d-ps-absolute d-t0 d-h16 d-w100p d-by d-bts-dashed d-bbs-dashed d-bc-focus"></span>
+      <span class="d-ps-absolute d-t0 d-h8 d-w100p d-by d-bts-dashed d-bbs-dashed d-bc-focus"></span>
     </div>
     <p class="d-fs-200 d-d-inline-block d-ps-relative d-zi-base1">The quick brown fox.</p>
   </div>
@@ -26,10 +26,10 @@ Use `d-va-baseline` to vertically align an element to the baseline.
 Use `d-va-top` to vertically align an element to the top.
 
 <code-well-header>
-  <div class="d-w100p d-ps-relative d-lh0 d-bgc-critical-subtle">
+  <div class="d-w100p d-ps-relative d-lh0 d-bgc-moderate">
     <div class="d-w0 d-h16 d-d-inline-block d-va-top">
-      <span class="d-ps-absolute d-t0 d-h16 d-w100p d-by d-bts-dashed d-bbs-dashed d-bc-critical-subtle"></span>
-      <span class="d-ps-absolute d-t0 d-h8 d-w100p d-by d-bts-dashed d-bbs-dashed d-bc-critical-subtle"></span>
+      <span class="d-ps-absolute d-t0 d-h16 d-w100p d-by d-bts-dashed d-bbs-dashed d-bc-focus"></span>
+      <span class="d-ps-absolute d-t0 d-h8 d-w100p d-by d-bts-dashed d-bbs-dashed d-bc-focus"></span>
     </div>
     <p class="d-fs-200 d-d-inline-block d-ps-relative d-zi-base1">The quick brown fox.</p>
   </div>
@@ -44,10 +44,10 @@ Use `d-va-top` to vertically align an element to the top.
 Use `d-va-middle` to vertically align an element to middle.
 
 <code-well-header>
-  <div class="d-w100p d-ps-relative d-lh0 d-bgc-critical-subtle">
+  <div class="d-w100p d-ps-relative d-lh0 d-bgc-moderate">
     <div class="d-w0 d-h16 d-d-inline-block d-va-middle">
-      <span class="d-ps-absolute d-t0 d-h16 d-w100p d-by d-bts-dashed d-bbs-dashed d-bc-critical-subtle"></span>
-      <span class="d-ps-absolute d-t0 d-h8 d-w100p d-by d-bts-dashed d-bbs-dashed d-bc-critical-subtle"></span>
+      <span class="d-ps-absolute d-t0 d-h16 d-w100p d-by d-bts-dashed d-bbs-dashed d-bc-focus"></span>
+      <span class="d-ps-absolute d-t0 d-h8 d-w100p d-by d-bts-dashed d-bbs-dashed d-bc-focus"></span>
     </div>
     <p class="d-fs-200 d-d-inline-block d-ps-relative d-zi-base1">The quick brown fox.</p>
   </div>
@@ -62,10 +62,10 @@ Use `d-va-middle` to vertically align an element to middle.
 Use `d-va-bottom` to vertically align an element to the bottom.
 
 <code-well-header>
-  <div class="d-w100p d-ps-relative d-lh0 d-bgc-critical-subtle">
+  <div class="d-w100p d-ps-relative d-lh0 d-bgc-moderate">
     <div class="d-w0 d-h16 d-d-inline-block d-va-bottom">
-      <span class="d-ps-absolute d-t0 d-h16 d-w100p d-by d-bts-dashed d-bbs-dashed d-bc-critical-subtle"></span>
-      <span class="d-ps-absolute d-t0 d-h8 d-w100p d-by d-bts-dashed d-bbs-dashed d-bc-critical-subtle"></span>
+      <span class="d-ps-absolute d-t0 d-h16 d-w100p d-by d-bts-dashed d-bbs-dashed d-bc-focus"></span>
+      <span class="d-ps-absolute d-t0 d-h8 d-w100p d-by d-bts-dashed d-bbs-dashed d-bc-focus"></span>
     </div>
     <p class="d-fs-200 d-d-inline-block d-ps-relative d-zi-base1">The quick brown fox.</p>
   </div>
@@ -80,10 +80,10 @@ Use `d-va-bottom` to vertically align an element to the bottom.
 Use `d-va-text-top` to vertically align an element to text top.
 
 <code-well-header>
-  <div class="d-w100p d-ps-relative d-lh0 d-bgc-critical-subtle">
+  <div class="d-w100p d-ps-relative d-lh0 d-bgc-moderate">
     <div class="d-w0 d-h16 d-d-inline-block d-va-text-top">
-      <span class="d-ps-absolute d-t0 d-h16 d-w100p d-by d-bts-dashed d-bbs-dashed d-bc-critical-subtle"></span>
-      <span class="d-ps-absolute d-t0 d-h8 d-w100p d-by d-bts-dashed d-bbs-dashed d-bc-critical-subtle"></span>
+      <span class="d-ps-absolute d-t0 d-h16 d-w100p d-by d-bts-dashed d-bbs-dashed d-bc-focus"></span>
+      <span class="d-ps-absolute d-t0 d-h8 d-w100p d-by d-bts-dashed d-bbs-dashed d-bc-focus"></span>
     </div>
     <p class="d-fs-200 d-d-inline-block d-ps-relative d-zi-base1">The quick brown fox.</p>
   </div>
@@ -98,10 +98,10 @@ Use `d-va-text-top` to vertically align an element to text top.
 Use `d-va-text-bottom` to vertically align an element to text bottom.
 
 <code-well-header>
-  <div class="d-w100p d-ps-relative d-lh0 d-bgc-critical-subtle">
+  <div class="d-w100p d-ps-relative d-lh0 d-bgc-moderate">
     <div class="d-w0 d-h16 d-d-inline-block d-va-text-bottom">
-      <span class="d-ps-absolute d-t0 d-h16 d-w100p d-by d-bts-dashed d-bbs-dashed d-bc-critical-subtle"></span>
-      <span class="d-ps-absolute d-t0 d-h8 d-w100p d-by d-bts-dashed d-bbs-dashed d-bc-critical-subtle"></span>
+      <span class="d-ps-absolute d-t0 d-h16 d-w100p d-by d-bts-dashed d-bbs-dashed d-bc-focus"></span>
+      <span class="d-ps-absolute d-t0 d-h8 d-w100p d-by d-bts-dashed d-bbs-dashed d-bc-focus"></span>
     </div>
     <p class="d-fs-200 d-d-inline-block d-ps-relative d-zi-base1">The quick brown fox.</p>
   </div>
