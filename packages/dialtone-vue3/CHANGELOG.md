@@ -1,3 +1,10 @@
+## [3.179.1](https://github.com/dialpad/dialtone/compare/dialtone-vue3/v3.179.0...dialtone-vue3/v3.179.1) (2025-04-29)
+
+
+### Bug Fixes
+
+* **Select Menu:** NO-JIRA avoid emitting value on mounted (vue 3 only) ([#734](https://github.com/dialpad/dialtone/issues/734)) ([78962c3](https://github.com/dialpad/dialtone/commit/78962c3eed952d1d07531a037a9037259ab117d2))
+
 # [3.179.0](https://github.com/dialpad/dialtone/compare/dialtone-vue3/v3.178.0...dialtone-vue3/v3.179.0) (2025-04-25)
 
 
