@@ -21,6 +21,9 @@ const classes = [
   /\.d-wmx(-(auto|unset)|[0-9]*(ch|p))$/, // Max widths
 ];
 
+console.log(
+  'Setting up postcss-responsive-variations with breakpoints:',
+);
 export default {
   plugins: [
     postcssResponsiveVariations({ breakpoints, classes }),
