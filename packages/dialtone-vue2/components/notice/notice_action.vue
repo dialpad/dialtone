@@ -22,8 +22,7 @@
       </template>
     </dt-button>
     <sr-only-close-button
-      v-if="showVisuallyHiddenClose"
-      :visually-hidden-close-label="visuallyHiddenCloseLabel"
+      v-else
       @close="close"
     />
   </div>
@@ -32,7 +31,6 @@
 <script>
 import { DtIconClose } from '@dialpad/dialtone-icons/vue2';
 import { DtButton } from '@/components/button';
-import SrOnlyCloseButtonMixin from '@/common/mixins/sr_only_close_button';
 import SrOnlyCloseButton from '@/common/sr_only_close_button.vue';
 import { DtLocalizationMixin } from '@/common/mixins';
 
@@ -45,7 +43,7 @@ export default {
     SrOnlyCloseButton,
   },
 
-  mixins: [SrOnlyCloseButtonMixin, DtLocalizationMixin],
+  mixins: [DtLocalizationMixin],
 
   props: {
     /**

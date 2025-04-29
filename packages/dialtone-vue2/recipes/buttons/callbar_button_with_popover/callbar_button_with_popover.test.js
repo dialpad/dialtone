@@ -121,7 +121,7 @@ describe('DtRecipeCallbarButtonWithPopover Tests', () => {
     );
 
     it(
-      'should propagate placement, initialFocusElement and showCloseButton props to the popover component',
+      'should propagate placement and initialFocusElement props to the popover component',
       async () => {
         await wrapper.setProps({
           placement: 'mock',

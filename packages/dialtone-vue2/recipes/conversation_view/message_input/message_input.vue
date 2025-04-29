@@ -165,7 +165,7 @@
           <!-- @slot Slot for emojiGiphy picker -->
           <slot name="emojiGiphyPicker" />
           <!-- @slot Slot to add extra action icons next to default ones -->
-        <slot name="customActionIcons" />
+          <slot name="customActionIcons" />
         </dt-stack>
       </div>
       <!-- Right content -->
@@ -614,7 +614,6 @@ export default {
         removeLabel: 'Remove',
         cancelLabel: 'Cancel',
         confirmLabel: 'Done',
-        visuallyHiddenCloseText: 'Close link dialog',
       }),
     },
 
@@ -826,12 +825,6 @@ export default {
     isSendDisabled () {
       return this.disableSend ||
       (this.showCharacterLimit && this.inputLength > this.showCharacterLimit.count);
-    },
-
-    computedCloseButtonProps () {
-      return {
-        ariaLabel: 'Close',
-      };
     },
 
     emojiPickerHovered () {

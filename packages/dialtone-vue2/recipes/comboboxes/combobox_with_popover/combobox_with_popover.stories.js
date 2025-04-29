@@ -22,7 +22,6 @@ export const argsData = {
   onHighlight: action('highlight'),
   onSelect: action('select'),
   onOpened: action('opened'),
-  visuallyHiddenCloseLabel: 'Close Combobox',
 };
 
 export const argTypesData = {
