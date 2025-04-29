@@ -128,8 +128,14 @@
 }
 
 .d-btn--unstyled {
-  all: unset;
+  /* stylelint-disable */
+  all: unset; // Must be first!
+  /* stylelint-enable */
+  display: inline-flex;
+  align-content: center;
+  align-items: center;
   color: inherit;
+  font: inherit;
   cursor: pointer;
 
   &:focus-visible {
