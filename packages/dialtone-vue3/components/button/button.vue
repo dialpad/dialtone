@@ -18,8 +18,10 @@
       data-qa="dt-button-icon"
       :class="[
         'base-button__icon',
-        kind !== 'unstyled' && 'd-btn__icon',
-        kind !== 'unstyled' && ICON_POSITION_MODIFIERS[iconPosition],
+        {
+          'd-btn__icon': kind !== 'unstyled',
+          [ICON_POSITION_MODIFIERS[iconPosition]]: kind !== 'unstyled',
+        },
       ]"
     >
       <!-- @slot Button icon -->
@@ -31,7 +33,11 @@
     <span
       v-if="hasSlotContent($slots.default)"
       data-qa="dt-button-label"
-      :class="['base-button__label', kind !== 'unstyled' && 'd-btn__label', labelClass]"
+      :class="[
+        'base-button__label',
+        { 'd-btn__label': kind !== 'unstyled' },
+        labelClass,
+      ]"
     >
       <!-- @slot Content within button -->
       <slot />
