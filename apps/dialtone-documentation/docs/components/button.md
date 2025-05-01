@@ -60,7 +60,7 @@ Button labels should be clear and predictable so users have confidence in their 
 
 ## Variants
 
-Dialtone provides four core button **types**, each with three levels of **importance**.
+Dialtone provides five options for `kind`, with three levels of `importance`.
 
 <ButtonVariantsTable></ButtonVariantsTable>
 
