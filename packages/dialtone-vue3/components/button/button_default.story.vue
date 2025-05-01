@@ -15,7 +15,6 @@
     :disabled="$attrs.disabled"
     :width="$attrs.width"
     :active="$attrs.active"
-    :unstyled="$attrs.unstyled"
     @click="$attrs.onClick"
     @focusin="$attrs.onFocusIn"
     @focusout="$attrs.onFocusOut"

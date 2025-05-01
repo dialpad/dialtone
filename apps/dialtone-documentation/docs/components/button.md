@@ -69,7 +69,7 @@ Dialtone provides four core button **types**, each with three levels of **import
 The unstyled button removes all default Dialtone styling while preserving the semantic HTML `<button>` element and maintaining proper button behavior and accessibility.
 
 <code-well-header>
-    <dt-button unstyled>Place Call</dt-button>
+    <dt-button kind="unstyled">Place Call</dt-button>
 </code-well-header>
 
 <code-example-tabs
@@ -77,7 +77,7 @@ htmlCode='
 <button class="d-btn--unstyled" type="button">Place Call</button>
 '
 vueCode='
-<dt-button unstyled>Place Call</dt-button>
+<dt-button kind="unstyled">Place Call</dt-button>
 '
 showHtmlWarning />
 

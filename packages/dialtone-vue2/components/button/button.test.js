@@ -1,6 +1,7 @@
 import { createLocalVue, mount } from '@vue/test-utils';
 import DtButton from './button.vue';
 import EmptyComponentFixture from '@/tests/fixtures/component.vue';
+import { BUTTON_KIND_MODIFIERS } from './button_constants';
 
 const MOCK_BUTTON_STUB = vi.fn();
 
@@ -279,26 +280,53 @@ describe('DtButton Tests', () => {
         });
       });
 
-      describe('When button has unstyled set to true', () => {
-        it('Should have unstyled class and no d-btn classes except d-btn--unstyled', async () => {
+      describe('When button has kind set to unstyled', () => {
+        it('Should have unstyled class', async () => {
           await wrapper.setProps({
-            unstyled: true,
+            kind: 'unstyled',
           });
 
           button = wrapper.find('.base-button__button');
 
-          // Should have the d-btn--unstyled class
           expect(button.classes().includes('d-btn--unstyled')).toBe(true);
+        });
+      });
 
-          // Should NOT have the d-btn class
-          expect(button.classes().includes('d-btn')).toBe(false);
+      describe('When button has kind set to default', () => {
+        it('Should not have unstyled class', async () => {
+          await wrapper.setProps({
+            kind: 'default',
+          });
 
-          // Should NOT have any d-btn-- classes except d-btn--unstyled
-          const buttonClasses = button.classes();
-          const nonUnstyledBtnClasses = buttonClasses.filter(cls =>
-            cls.startsWith('d-btn--') && cls !== 'd-btn--unstyled',
-          );
-          expect(nonUnstyledBtnClasses.length).toBe(0);
+          button = wrapper.find('.base-button__button');
+
+          expect(button.classes().includes('d-btn--unstyled')).toBe(false);
+        });
+      });
+
+      describe('When button has kind set to a value other than unstyled', () => {
+        Object.keys(BUTTON_KIND_MODIFIERS)
+          .filter(kind => kind !== 'unstyled')
+          .forEach(kind => {
+            it(`should not have unstyled class for kind="${kind}"`, async () => {
+              await wrapper.setProps({ kind });
+              button = wrapper.find('.base-button__button');
+              expect(button.classes().includes('d-btn--unstyled')).toBe(false);
+            });
+          });
+      });
+
+      describe('When button has kind set to unstyled with any importance', () => {
+        const importances = ['clear', 'outlined', 'primary'];
+        importances.forEach(importance => {
+          it(`should not render importance class for kind="unstyled" and importance="${importance}"`, async () => {
+            await wrapper.setProps({ kind: 'unstyled', importance });
+            button = wrapper.find('.base-button__button');
+            // Should only have d-btn--unstyled, not any importance class
+            expect(button.classes().includes('d-btn--unstyled')).toBe(true);
+            expect(button.classes().includes('d-btn--outlined')).toBe(false);
+            expect(button.classes().includes('d-btn--primary')).toBe(false);
+          });
         });
       });
 
@@ -312,7 +340,7 @@ describe('DtButton Tests', () => {
           updateWrapper();
 
           await wrapper.setProps({
-            unstyled: true,
+            kind: 'unstyled',
           });
 
           icon = wrapper.find('[data-qa="dt-button-icon"]');

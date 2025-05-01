@@ -18,8 +18,8 @@
       data-qa="dt-button-icon"
       :class="[
         'base-button__icon',
-        !unstyled && 'd-btn__icon',
-        !unstyled && ICON_POSITION_MODIFIERS[iconPosition],
+        kind !== 'unstyled' && 'd-btn__icon',
+        kind !== 'unstyled' && ICON_POSITION_MODIFIERS[iconPosition],
       ]"
     >
       <!-- @slot Button icon -->
@@ -32,8 +32,8 @@
       v-if="$slots.default"
       data-qa="dt-button-label"
       :class="[
-        !unstyled && 'd-btn__label',
         'base-button__label',
+        kind !== 'unstyled' && 'd-btn__label',
         labelClass,
       ]"
     >
@@ -196,7 +196,7 @@ export default {
 
     /**
      * The color of the button.
-     * @values default, muted, danger, positive, inverted
+     * @values default, unstyled, muted, danger, positive, inverted
      */
     kind: {
       type: String,
@@ -221,15 +221,6 @@ export default {
      * @values true, false
      */
     active: {
-      type: Boolean,
-      default: false,
-    },
-
-    /**
-     * Whether the button should be unstyled.
-     * @values true, false
-     */
-    unstyled: {
       type: Boolean,
       default: false,
     },
@@ -321,14 +312,9 @@ export default {
           BUTTON_SIZE_MODIFIERS[this.size],
         ];
       }
-
-      // Return only d-btn--unstyled class if unstyled is true
-      if (this.unstyled) {
-        return [
-          'd-btn--unstyled',
-        ];
+      if (this.kind === 'unstyled') {
+        return ['d-btn--unstyled'];
       }
-
       return [
         'd-btn',
         BUTTON_IMPORTANCE_MODIFIERS[this.importance],
@@ -346,7 +332,7 @@ export default {
 
     isInvalidPropCombination (circle, kind, importance) {
       // Skip validation if unstyled is true
-      if (this.unstyled) {
+      if (this.kind === 'unstyled') {
         return true;
       }
 

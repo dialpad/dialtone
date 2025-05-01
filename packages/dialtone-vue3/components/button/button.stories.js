@@ -57,9 +57,6 @@ export const argTypesData = {
   circle: {
     control: 'boolean',
   },
-  unstyled: {
-    control: 'boolean',
-  },
   importance: {
     control: 'select',
     options: Object.keys(BUTTON_IMPORTANCE_MODIFIERS),

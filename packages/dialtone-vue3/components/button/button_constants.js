@@ -14,6 +14,7 @@ export const BUTTON_KIND_MODIFIERS = {
   danger: 'd-btn--danger',
   positive: 'd-btn--positive',
   inverted: 'd-btn--inverted',
+  unstyled: 'd-btn--unstyled',
 };
 
 export const BUTTON_IMPORTANCE_MODIFIERS = {

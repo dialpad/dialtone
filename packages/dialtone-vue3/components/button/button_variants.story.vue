@@ -5,7 +5,13 @@
   >
     <div class="d-flow8">
       <!-- Unstyled -->
-      <dt-button unstyled>
+      <dt-button kind="unstyled">
+        Unstyled
+      </dt-button>
+    </div>
+    <div class="d-flow8">
+      <!-- Unstyled -->
+      <dt-button kind="unstyled">
         Unstyled
       </dt-button>
     </div>
