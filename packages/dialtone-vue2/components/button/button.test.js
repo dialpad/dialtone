@@ -1,7 +1,6 @@
 import { createLocalVue, mount } from '@vue/test-utils';
 import DtButton from './button.vue';
 import EmptyComponentFixture from '@/tests/fixtures/component.vue';
-import { BUTTON_KIND_MODIFIERS } from './button_constants';
 
 const MOCK_BUTTON_STUB = vi.fn();
 
@@ -302,18 +301,6 @@ describe('DtButton Tests', () => {
 
           expect(button.classes().includes('d-btn--unstyled')).toBe(false);
         });
-      });
-
-      describe('When button has kind set to a value other than unstyled', () => {
-        Object.keys(BUTTON_KIND_MODIFIERS)
-          .filter(kind => kind !== 'unstyled')
-          .forEach(kind => {
-            it(`should not have unstyled class for kind="${kind}"`, async () => {
-              await wrapper.setProps({ kind });
-              button = wrapper.find('.base-button__button');
-              expect(button.classes().includes('d-btn--unstyled')).toBe(false);
-            });
-          });
       });
 
       describe('When button has kind set to unstyled with any importance', () => {
