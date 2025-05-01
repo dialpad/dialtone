@@ -64,23 +64,6 @@ Dialtone provides four core button **types**, each with three levels of **import
 
 <ButtonVariantsTable></ButtonVariantsTable>
 
-### Unstyled
-
-The unstyled button removes all default Dialtone styling while preserving the semantic HTML `<button>` element and maintaining proper button behavior and accessibility.
-
-<code-well-header>
-    <dt-button kind="unstyled">Place Call</dt-button>
-</code-well-header>
-
-<code-example-tabs
-htmlCode='
-<button class="d-btn--unstyled" type="button">Place Call</button>
-'
-vueCode='
-<dt-button kind="unstyled">Place Call</dt-button>
-'
-showHtmlWarning />
-
 ### Default
 
 The base button should be the go-to button for most of your needs. When in doubt, use this style. To help provide clarity to users, it is generally recommended to use only one primary button style within a section or page.
@@ -319,7 +302,24 @@ vueCode='
 '
 showHtmlWarning />
 
-### Split Button
+### Unstyled
+
+The unstyled button removes all default Dialtone styling while preserving the semantic HTML `<button>` element and maintaining proper button behavior and accessibility.
+
+<code-well-header>
+    <dt-button kind="unstyled">Place Call</dt-button>
+</code-well-header>
+
+<code-example-tabs
+htmlCode='
+<button class="d-btn--unstyled" type="button">Place Call</button>
+'
+vueCode='
+<dt-button kind="unstyled">Place Call</dt-button>
+'
+showHtmlWarning />
+
+## Split Button
 
 The [Split Button](split-button.md) is its own component containing multiple buttons.
 
