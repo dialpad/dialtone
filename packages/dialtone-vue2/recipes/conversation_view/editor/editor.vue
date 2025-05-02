@@ -26,7 +26,7 @@
         >
           <template #anchor>
             <dt-button
-              :ref="(el) => { itemRefs[getButtonRef(buttonGroup.key, button.selector)] = el }"
+              :ref="(el) => { buttonRefMap[getButtonRef(buttonGroup.key, button.selector)] = el }"
               :active="$refs.richTextEditor?.editor?.isActive(button.selector)"
               :aria-label="button.tooltipMessage"
               :data-qa="button.dataQA"
@@ -75,7 +75,7 @@
             >
               <template #anchor>
                 <dt-button
-                  :ref="(el) => { itemRefs[getButtonRef('custom', 'link')] = el }"
+                  :ref="(el) => { buttonRefMap[getButtonRef('custom', 'link')] = el }"
                   :active="$refs.richTextEditor?.editor?.isActive(linkButton.selector)"
                   :aria-label="linkButton.tooltipMessage"
                   :data-qa="linkButton.dataQA"
@@ -546,7 +546,7 @@ export default {
       showLinkInput: false,
       linkInput: '',
       currentButtonRefIndex: 0,
-      itemRefs: ref({}),
+      buttonRefMap: ref({}),
     };
   },
 
@@ -932,10 +932,10 @@ export default {
     },
 
     shiftButtonRefIndex (shiftAmount) {
-      const previousRef = this.itemRefs[this.orderedRefs[this.currentButtonRefIndex]];
+      const previousRef = this.buttonRefMap[this.orderedRefs[this.currentButtonRefIndex]];
       const index = (this.currentButtonRefIndex + shiftAmount) % this.orderedRefs.length;
       this.currentButtonRefIndex = index >= 0 ? index : this.orderedRefs.length + index;
-      const currentRef = this.itemRefs[this.orderedRefs[this.currentButtonRefIndex]];
+      const currentRef = this.buttonRefMap[this.orderedRefs[this.currentButtonRefIndex]];
       previousRef.$el.blur();
       currentRef.$el.focus();
     },
