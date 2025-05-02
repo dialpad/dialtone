@@ -20,20 +20,23 @@
       >
         <dt-tooltip
           v-for="button in buttonGroup.buttonGroup"
-          :key="`${buttonGroup.key}-${JSON.stringify(button.selector)}`"
+          :key="getButtonKey(buttonGroup.key, button.selector)"
           :message="button.tooltipMessage"
           placement="top"
         >
           <template #anchor>
             <dt-button
+              :ref="(el) => { itemRefs[getButtonRef(buttonGroup.key, button.selector)] = el }"
               :active="$refs.richTextEditor?.editor?.isActive(button.selector)"
               :aria-label="button.tooltipMessage"
               :data-qa="button.dataQA"
+              :tabindex="canFocus(getButtonRef(buttonGroup.key, button.selector)) ? 0 : -1"
               importance="clear"
               kind="muted"
               size="xs"
-              :tabindex="topBarTabIndex"
               @click="button.onClick()"
+              @keydown.right.stop="shiftActionBarFocusRight"
+              @keydown.left.stop="shiftActionBarFocusLeft"
             >
               <template #icon>
                 <component
@@ -72,14 +75,17 @@
             >
               <template #anchor>
                 <dt-button
+                  :ref="(el) => { itemRefs[getButtonRef('custom', 'link')] = el }"
                   :active="$refs.richTextEditor?.editor?.isActive(linkButton.selector)"
                   :aria-label="linkButton.tooltipMessage"
                   :data-qa="linkButton.dataQA"
+                  :tabindex="canFocus(getButtonRef('custom', 'link')) ? 0 : -1"
                   importance="clear"
                   kind="muted"
                   size="xs"
-                  :tabindex="topBarTabIndex"
                   @click="linkButton.onClick()"
+                  @keydown.right.stop="shiftActionBarFocusRight"
+                  @keydown.left.stop="shiftActionBarFocusLeft"
                 >
                   <template #icon>
                     <component
@@ -215,6 +221,7 @@ import {
   DtIconStrikethrough,
   DtIconUnderline,
 } from '@dialpad/dialtone-icons/vue2';
+import { ref } from 'vue';
 
 export default {
   name: 'DtRecipeEditor',
@@ -484,14 +491,6 @@ export default {
       type: Boolean,
       default: false,
     },
-
-    /**
-     * Disables focus on the top bar for the recipe editor
-     */
-    disableTopBarFocus: {
-      type: Boolean,
-      default: false,
-    },
   },
 
   emits: [
@@ -546,6 +545,8 @@ export default {
 
       showLinkInput: false,
       linkInput: '',
+      currentButtonRefIndex: 0,
+      itemRefs: ref({}),
     };
   },
 
@@ -569,6 +570,17 @@ export default {
 
     showingListButtons () {
       return this.showListItemsButton || this.showOrderedListButton;
+    },
+
+    orderedRefs () {
+      const refs = this.buttonGroups.reduce(function (acc, buttonData) {
+        buttonData.buttonGroup.forEach(button => {
+          acc.push(this.getButtonRef(buttonData.key, button.selector));
+        }, this);
+        return acc;
+      }.bind(this), []);
+      refs.push(this.getButtonRef('custom', 'link'));
+      return refs;
     },
 
     buttonGroups () {
@@ -734,9 +746,6 @@ export default {
       };
     },
 
-    topBarTabIndex () {
-      return this.disableTopBarFocus ? -1 : 0;
-    },
   },
 
   watch: {
@@ -897,6 +906,39 @@ export default {
       this.$emit('input', event);
     },
 
+    getButtonKey (key, selector) {
+      return `${key}-${JSON.stringify(selector)}`;
+    },
+
+    // Unique Button Ref Key to identify ref
+    getButtonRef (key, selector) {
+      return `${this.getButtonKey(key, selector)}-ref`;
+    },
+
+    /**
+     * Determines if an element in the action bar button list is focusable with tab key
+     * @param {string} refKey - unique identifier for the ref element in DOM
+     */
+    canFocus (refKey) {
+      return refKey === this.orderedRefs[this.currentButtonRefIndex];
+    },
+
+    shiftActionBarFocusRight () {
+      this.shiftButtonRefIndex(1);
+    },
+
+    shiftActionBarFocusLeft () {
+      this.shiftButtonRefIndex(-1);
+    },
+
+    shiftButtonRefIndex (shiftAmount) {
+      const previousRef = this.itemRefs[this.orderedRefs[this.currentButtonRefIndex]];
+      const index = (this.currentButtonRefIndex + shiftAmount) % this.orderedRefs.length;
+      this.currentButtonRefIndex = index >= 0 ? index : this.orderedRefs.length + index;
+      const currentRef = this.itemRefs[this.orderedRefs[this.currentButtonRefIndex]];
+      previousRef.$el.blur();
+      currentRef.$el.focus();
+    },
   },
 };
 </script>

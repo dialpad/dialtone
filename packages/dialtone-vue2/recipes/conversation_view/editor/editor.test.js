@@ -610,34 +610,50 @@ describe('DtRecipeEditor tests', () => {
       });
     });
 
-    describe('When top bar focus is not configured', () => {
+    describe('Top Action Bar Tests', () => {
       beforeEach(async () => {
         _mountWrapper();
         await wrapper.vm.$nextTick();
       });
-      it('should contain tabindex of 0 when disableTopBarFocus property is not set', function () {
-        expect(wrapper.html()).toContain(`tabindex="0"`);
+
+      it('should have only the first button as a focusable item', async function () {
+        await quickRepliesBtn.trigger('focus');
+        expect(quickRepliesBtn.html()).toContain(`tabindex="0"`);
+        expect(boldFormatBtn.html()).toContain(`tabindex="-1"`);
       });
-    });
-    describe('When top bar focus is set to false', () => {
-      beforeEach(async () => {
-        _mountWrapper();
-        await wrapper.setProps({ disableTopBarFocus: false });
-        await wrapper.vm.$nextTick();
+
+      it('should focus the next button to the right when right arrow key is pressed', async function () {
+        await quickRepliesBtn.trigger('focus');
+        await quickRepliesBtn.trigger('keydown', { key: 'Right' });
+        expect(quickRepliesBtn.html()).toContain(`tabindex="-1"`);
+        expect(boldFormatBtn.html()).toContain(`tabindex="0"`);
+        expect(document.activeElement).toBe(boldFormatBtn.element);
       });
-      it('should contain tabindex of 0 when disableTopBarFocus property is false', function () {
-        expect(wrapper.html()).toContain(`tabindex="0"`);
+
+      it('should focus the next button to the left when left arrow key is pressed', async function () {
+        await quickRepliesBtn.trigger('focus');
+        await quickRepliesBtn.trigger('keydown', { key: 'Right' });
+        await quickRepliesBtn.trigger('keydown', { key: 'Left' });
+        expect(quickRepliesBtn.html()).toContain(`tabindex="0"`);
+        expect(boldFormatBtn.html()).toContain(`tabindex="-1"`);
+        expect(document.activeElement).toBe(quickRepliesBtn.element);
       });
-    });
-    describe('When top bar focus is set to true', () => {
-      beforeEach(async () => {
-        _mountWrapper();
-        await wrapper.setProps({ disableTopBarFocus: true });
-        await wrapper.vm.$nextTick();
+
+      it('should wrap around and only have the last button as a focusable item when the left arrow key button is pressed', async function () {
+        await quickRepliesBtn.trigger('focus');
+        await quickRepliesBtn.trigger('keydown', { key: 'Left' });
+        expect(addLinkBtn.html()).toContain(`tabindex="0"`);
+        expect(quickRepliesBtn.html()).toContain(`tabindex="-1"`);
+        expect(document.activeElement).toBe(addLinkBtn.element);
       });
-      it('should contain tabindex of -1 when disableTopBarFocus property is true', function () {
-        expect(wrapper.vm.disableTopBarFocus).toBe(true);
-        expect(wrapper.html()).toContain(`tabindex="-1"`);
+
+      it('should wrap around and only have the first button as a focusable item when the right arrow key button is pressed past the last button', async function () {
+        await quickRepliesBtn.trigger('focus');
+        await quickRepliesBtn.trigger('keydown', { key: 'Left' });
+        await addLinkBtn.trigger('keydown', { key: 'Right' });
+        expect(document.activeElement).toBe(quickRepliesBtn.element);
+        expect(quickRepliesBtn.html()).toContain(`tabindex="0"`);
+        expect(addLinkBtn.html()).toContain(`tabindex="-1"`);
       });
     });
   });
