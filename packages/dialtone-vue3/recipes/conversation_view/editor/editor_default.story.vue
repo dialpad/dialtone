@@ -30,7 +30,6 @@
       :show-quick-replies-button="$attrs.showQuickRepliesButton"
       :show-code-block-button="$attrs.showCodeBlockButton"
       :show-inline-image-button="$attrs.showInlineImageButton"
-      :disable-top-bar-focus="$attrs.disableTopBarFocus"
       @focus="$attrs.onFocus"
       @blur="$attrs.onBlur"
       @input="$attrs.onInput"
