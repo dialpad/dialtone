@@ -19,7 +19,7 @@ export const argsData = {
   size: 'md',
   name: '',
   disabled: false,
-  value: SELECT_OPTIONS[0].value,
+  modelValue: SELECT_OPTIONS[0].value,
   options: SELECT_OPTIONS,
   onInput: action('input'),
   onChange: action('change'),
@@ -150,7 +150,7 @@ export const argTypesData = {
   },
 
   // HTML attributes
-  value: {
+  modelValue: {
     description: 'HTML select value attribute. Provides a value for the select',
     options: SELECT_OPTIONS.map((option) => option.value),
     control: {

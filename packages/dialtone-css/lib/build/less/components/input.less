@@ -27,6 +27,7 @@
     //  Component CSS Vars
     //  ------------------------------------------------------------------------
     --input-color-border: var(--dt-inputs-color-border-default);
+    --input-color-border-hover: var(--dt-inputs-color-border-hover);
     --input-color-background: var(--dt-inputs-color-background-default);
     --input-color-background-disabled: var(--dt-inputs-color-background-disabled);
     --input-color-text: var(--dt-inputs-color-foreground-default);
@@ -91,6 +92,12 @@
     &::-ms-clear {
         display: none;
     }
+    //  --  HOVER STATE
+
+    &:hover {
+        --input-color-border: var(--input-color-border-hover);
+    }
+
     //  --  FOCUS STATE
     &:focus,
     &:focus-within {

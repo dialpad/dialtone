@@ -57,7 +57,7 @@ export const argTypesData = {
       type: 'text',
     },
   },
-  value: {
+  modelValue: {
     description: 'A provided value for the radio group',
     control: 'text',
     table: {

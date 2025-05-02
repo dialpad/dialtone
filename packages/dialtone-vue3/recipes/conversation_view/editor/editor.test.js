@@ -24,7 +24,7 @@ const testText = 'In the beginning, it was a nice day.';
 
 // Constants
 const baseProps = {
-  value: testText,
+  modelValue: testText,
   inputAriaLabel: 'aria-label text',
   inputClass: 'qa-editor',
   autoFocus: 'all',

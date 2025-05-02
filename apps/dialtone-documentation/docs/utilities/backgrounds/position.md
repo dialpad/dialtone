@@ -39,7 +39,7 @@ Use `d-bgp-{position}` to control where an element's background image is placed.
   <template #content>
     <tbody>
       <tr v-for="{ className, output } in positions">
-          <th scope="row" class="d-code--sm d-fc-purple-400">.d-bgp-{{ className }}</th>
+          <th scope="row" class="d-code--sm d-docsite-code">.d-bgp-{{ className }}</th>
           <td class="d-code--sm">
             background-position: {{ output }} !important;
           </td>

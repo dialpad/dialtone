@@ -35,7 +35,7 @@ Set an element’s position by using the position classes listed in the table be
   <template #content>
     <tbody>
       <tr v-for="i in ['static', 'relative', 'absolute', 'fixed', 'sticky', 'unset']">
-        <th scope="row" class="d-code--sm d-fc-purple-400">.d-ps-{{ i }}</th>
+        <th scope="row" class="d-code--sm d-docsite-code">.d-ps-{{ i }}</th>
         <td class="d-code--sm">position: {{ i }} !important;</td>
       </tr>
     </tbody>

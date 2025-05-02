@@ -39,11 +39,13 @@ They should be easy to scan for relevant and actionable information. Elements, l
 
 - To display content and actions on a single topic.
 </template>
+
 <template #dont>
 
 - Add too many call-to-action elements to the same card. A card should only contain a single primary action.
 - Inform users about important changes.
 </template>
+
 </dialtone-usage>
 
 ### Best Practices

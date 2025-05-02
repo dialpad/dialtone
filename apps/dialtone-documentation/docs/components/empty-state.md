@@ -4,8 +4,8 @@ description: Indicates no data is available to display, provides clarification, 
 status: ready
 thumb: true
 image: assets/images/components/empty-state.png
-figma: planned
 storybook: https://dialtone.dialpad.com/vue/?path=/story/components-empty-state--default
+figma_url: https://www.figma.com/design/W58r5BkO8qTw3vem9YieJd/DT9-Component-Library--Rebrand-2025-?node-id=17203-203
 ---
 
 <code-well-header>
@@ -20,7 +20,7 @@ storybook: https://dialtone.dialpad.com/vue/?path=/story/components-empty-state-
       </dt-stack>
     </template>
     <template #illustration>
-      <dt-illustration-mind></dt-illustration-mind>
+      <dt-illustration-nothing-to-see-here></dt-illustration-nothing-to-see-here>
     </template>
   </dt-empty-state>
 </code-well-header>
@@ -140,7 +140,7 @@ Appropriate for indicating that something is currently unavailable to them. Prov
 
 ## Variants
 
-A few rules to keep in mind when choosing a size variant.
+A few rules to keep in nothing-to-see-here when choosing a size variant.
 
 - Choosing a size adjusts the relative width, padding, and font size.
 - `lg` and `md` sizes
@@ -165,7 +165,7 @@ A few rules to keep in mind when choosing a size variant.
       </dt-stack>
     </template>
     <template #illustration>
-      <dt-illustration-mind></dt-illustration-mind>
+      <dt-illustration-nothing-to-see-here></dt-illustration-nothing-to-see-here>
     </template>
   </dt-empty-state>
 </code-well-header>
@@ -184,7 +184,7 @@ vueCode='
     </dt-stack>
   </template>
   <template #illustration>
-    <dt-illustration-mind></dt-illustration-mind>
+    <dt-illustration-nothing-to-see-here></dt-illustration-nothing-to-see-here>
   </template>
 </dt-empty-state>
 '
@@ -246,7 +246,7 @@ showHtmlWarning />
       </dt-stack>
     </template>
     <template #illustration>
-      <dt-illustration-mind></dt-illustration-mind>
+      <dt-illustration-nothing-to-see-here></dt-illustration-nothing-to-see-here>
     </template>
   </dt-empty-state>
 </code-well-header>
@@ -266,7 +266,7 @@ vueCode='
     </dt-stack>
   </template>
   <template #illustration>
-    <dt-illustration-mind></dt-illustration-mind>
+    <dt-illustration-nothing-to-see-here></dt-illustration-nothing-to-see-here>
   </template>
 </dt-empty-state>
 '
@@ -367,7 +367,7 @@ showHtmlWarning />
     body-text="Looks like there is no data to display here."
   >
     <template #illustration>
-      <dt-illustration-mind></dt-illustration-mind>
+      <dt-illustration-nothing-to-see-here></dt-illustration-nothing-to-see-here>
     </template>
   </dt-empty-state>
 </code-well-header>
@@ -380,7 +380,7 @@ vueCode='
   body-text="Looks like there is no data to display here."
 >
   <template #illustration>
-    <dt-illustration-mind></dt-illustration-mind>
+    <dt-illustration-nothing-to-see-here></dt-illustration-nothing-to-see-here>
   </template>
 </dt-empty-state>
 '
@@ -394,7 +394,7 @@ showHtmlWarning />
     header-text="Nothing to see here"
   >
     <template #illustration>
-      <dt-illustration-mind></dt-illustration-mind>
+      <dt-illustration-nothing-to-see-here></dt-illustration-nothing-to-see-here>
     </template>
   </dt-empty-state>
 </code-well-header>
@@ -406,7 +406,7 @@ vueCode='
   header-text="Nothing to see here"
 >
   <template #illustration>
-    <dt-illustration-mind></dt-illustration-mind>
+    <dt-illustration-nothing-to-see-here></dt-illustration-nothing-to-see-here>
   </template>
 </dt-empty-state>
 '
@@ -427,7 +427,7 @@ showHtmlWarning />
       </dt-stack>
     </template>
     <template #illustration>
-      <dt-illustration-mind></dt-illustration-mind>
+      <dt-illustration-nothing-to-see-here></dt-illustration-nothing-to-see-here>
     </template>
   </dt-empty-state>
 </code-well-header>
@@ -446,7 +446,7 @@ vueCode='
     </dt-stack>
   </template>
   <template #illustration>
-    <dt-illustration-mind></dt-illustration-mind>
+    <dt-illustration-nothing-to-see-here></dt-illustration-nothing-to-see-here>
   </template>
 </dt-empty-state>
 '
@@ -567,7 +567,7 @@ At a minimum, empty state requires a body of content. It can optionally contain 
 
 <script setup>
 import {
-  DtIllustrationMind,
+  DtIllustrationNothingToSeeHere,
   DtIconBox,
 } from '@dialpad/dialtone-icons/vue3';
 </script>

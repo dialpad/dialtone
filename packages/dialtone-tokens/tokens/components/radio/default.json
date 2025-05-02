@@ -20,6 +20,10 @@
           "value": "{color.border.moderate}",
           "type": "color"
         },
+        "unchecked-hover": {
+          "value": "{color.border.bold}",
+          "type": "color"
+        },
         "checked": {
           "value": "{color.border.brand}",
           "type": "color"
@@ -27,7 +31,17 @@
       },
       "background": {
         "checked": {
-          "value": "{color.brand.purple}",
+          "value": "{color.surface.brand-strong}",
+          "type": "color"
+        }
+      },
+      "foreground": {
+        "default": {
+          "value": "{color.neutral.transparent}",
+          "type": "color"
+        },
+        "checked": {
+          "value": "{color.foreground.primary-inverted}",
           "type": "color"
         }
       }

@@ -231,6 +231,14 @@ export default {
     'input',
 
     /**
+     * Event fired to sync the modelValue prop with the parent component
+     *
+     * @event input
+     * @type {String | Number}
+     */
+    'update:modelValue',
+
+    /**
      * Native change event
      *
      * @event change
@@ -283,17 +291,7 @@ export default {
     },
   },
 
-  watch: {
-    // whenever question changes, this function will run
-    options () {
-      this.$nextTick(() => {
-        this.emitValue(this.$refs.selectElement.value, null);
-      });
-    },
-  },
-
   mounted () {
-    this.emitValue(this.$refs.selectElement.value, null);
     this.validateOptionsPresence();
   },
 
@@ -305,6 +303,7 @@ export default {
     removeClassStyleAttrs,
     addClassStyleAttrs,
     emitValue (value, event) {
+      this.$emit('update:modelValue', value, event);
       this.$emit('input', value, event);
       this.$emit('change', value, event);
     },

@@ -27,7 +27,8 @@ module.exports = {
   },
 
   create(context) {
-    return context.parserServices.defineTemplateBodyVisitor({
+    const sourceCode = context.sourceCode ?? context.getSourceCode();
+    return sourceCode.parserServices.defineTemplateBodyVisitor({
       // Visitor functions for Vue templates
       VAttribute(node) {
         if (node.key.name === 'class') {

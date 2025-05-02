@@ -104,10 +104,10 @@ const generatedRules = {
  * @param { Declaration } declaration
  */
 function colorUtilities (clonedSource, declaration) {
-  const baseColorsRegex = new RegExp(`(dtColor(Neutral)?(${REGEX_OPTIONS.COLORS})([0-9]{3})?)`);
-  const foregroundColorsRegex = new RegExp(`(dtColorForeground(${REGEX_OPTIONS.FONT_COLORS})(${REGEX_OPTIONS.FONT_COLOR_VARIATIONS})?)`, 'i');
-  const surfaceColorsRegex = new RegExp(`(dtColorSurface(${REGEX_OPTIONS.BACKGROUND_COLORS})(${REGEX_OPTIONS.BACKGROUND_COLOR_VARIATIONS})?)`, 'i');
-  const borderColorsRegex = new RegExp(`(dtColorBorder(${REGEX_OPTIONS.BORDER_COLORS})(${REGEX_OPTIONS.BORDER_COLOR_VARIATIONS})?)`, 'i');
+  const foregroundColorsRegex = /dtColorForeground.+/i;
+  const surfaceColorsRegex = /dtColorSurface.+/i;
+  const borderColorsRegex = /dtColorBorder.+/i;
+  const baseColorsRegex = /dtColor(?!(Foreground|Surface|Border|Brand|Gradient|Link)).+/i;
 
   const tokens = { ...TokensBaseLight, ...TokensDpLight };
 
@@ -153,16 +153,19 @@ function colorUtilities (clonedSource, declaration) {
       nodes: _generateColorNodes(token, 'border-color', '--bco'),
     }));
   }
-
-  baseColors.forEach(({ token, colorName }) => {
-    _generateForegroundColors(token, colorName);
-    _generateBorderColors(token, colorName);
-    _generateSurfaceColors(token, colorName);
+  function _generateDividerColors (token, colorName) {
     generatedRules.dividerColor.push(new Rule({
       source: clonedSource,
       selector: `.d-divide-${colorName} > * + *`,
       nodes: _generateColorNodes(token, 'border-color', '--dco'),
     }));
+  }
+
+  baseColors.forEach(({ token, colorName }) => {
+    _generateForegroundColors(token, colorName);
+    _generateBorderColors(token, colorName);
+    _generateSurfaceColors(token, colorName);
+    _generateDividerColors(token, colorName);
     generatedRules.backgroundGradientFromColor.push(new Rule({
       source: clonedSource,
       selector: appendHoverFocusSelectors(`.d-bgg-from-${colorName}`),
@@ -186,10 +189,17 @@ function colorUtilities (clonedSource, declaration) {
     _generateForegroundColors(token, colorName);
   });
   surfaceColors.forEach(({ token, colorName }) => {
+    // Exclude as it is a gradient color and it is being generated manually
+    if (token === '--dt-color-surface-ai') return;
+
     _generateSurfaceColors(token, colorName);
   });
   borderColors.forEach(({ token, colorName }) => {
+    // Exclude as it is a gradient color and it is being generated manually
+    if (token === '--dt-color-border-ai') return;
+
     _generateBorderColors(token, colorName);
+    _generateDividerColors(token, colorName);
   });
 }
 

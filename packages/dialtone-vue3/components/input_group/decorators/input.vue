@@ -52,6 +52,13 @@ export default {
      * @type {String}
      */
     'input',
+    /**
+     * Event fired to sync the modelValue prop with the parent component
+     *
+     * @event update:modelValue
+     * @type {String}
+     */
+    'update:modelValue',
   ],
 
   computed: {
@@ -76,7 +83,7 @@ export default {
       handler (newGroupValue) {
         if (this.hasGroup) {
           // update internal value when the input group value changes
-          this.internalChecked = newGroupValue === this.value;
+          this.internalChecked = newGroupValue === this.modelValue;
         }
       },
     },
@@ -89,6 +96,7 @@ export default {
         this.setGroupValue(value);
 
         this.$emit('input', value);
+        this.$emit('update:modelValue', value);
       }
     },
   },

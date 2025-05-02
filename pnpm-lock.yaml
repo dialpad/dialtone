@@ -455,6 +455,9 @@ importers:
       prismjs:
         specifier: ^1.29.0
         version: 1.29.0
+      tinycolor2:
+        specifier: ^1.6.0
+        version: 1.6.0
       vite-svg-loader:
         specifier: ^5.1.0
         version: 5.1.0(vue@3.4.15(typescript@5.6.3))

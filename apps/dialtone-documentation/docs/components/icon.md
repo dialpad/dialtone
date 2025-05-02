@@ -178,25 +178,27 @@ We encourage utilizing the [Stack component](/components/stack.md) for aligning 
 
 Dialtone provides eight sizes for icons. Each of the sizes represents the width and a height the icon is going to have:
 
-<table class="d-table dialtone-doc-table">
-  <thead>
-    <tr>
-      <th scope="col" colspan="2">Size</th>
-      <th scope="col">Dimensions</th>
-      <th scope="col">Class</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr v-for="{size, width_height, className } in sizes">
-      <th scope="row">{{ size }}</th>
-      <td class="d-ta-center">
-        <dt-icon name="inbox" :size="size" />
-      </td>
-      <td class="d-code--sm">{{ width_height }}</td>
-      <td class="d-code--sm">.{{ className }}</td>
-    </tr>
-  </tbody>
-</table>
+<div class="d-bar8 d-ba d-bc-subtle">
+  <table class="d-table dialtone-doc-table">
+    <thead>
+      <tr>
+        <th scope="col" colspan="2">Size</th>
+        <th scope="col">Dimensions</th>
+        <th scope="col">Class</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr v-for="{size, width_height, className } in sizes">
+        <th scope="row">{{ size }}</th>
+        <td class="d-ta-center">
+          <dt-icon name="inbox" :size="size" />
+        </td>
+        <td class="d-code--sm d-docsite-code">{{ width_height }}</td>
+        <td class="d-code--sm d-docsite-code">.{{ className }}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
 
 ## Vue API
 

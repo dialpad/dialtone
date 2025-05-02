@@ -1,5 +1,9 @@
-function _pascalToKebabCase (string) {
-  return string.split(/(?=[A-Z]|[0-9]{3,}?)/).join('-').toLowerCase();
+function _generateTokenName (string) {
+  return string
+    .split(/([A-Z][a-z]+)(\d{2,})?/)
+    .filter(item => !!item)
+    .join('-')
+    .toLowerCase();
 }
 
 function _removePrefixFromColor (colorName) {
@@ -11,7 +15,7 @@ function _removePrefixFromColor (colorName) {
 module.exports = {
 
   processColors (result, color) {
-    const token = `--${_pascalToKebabCase(color[0])}`;
+    const token = `--${_generateTokenName(color[0])}`;
     const hexValue = color[1];
     const colorName = _removePrefixFromColor(token);
     result.push({ token, hexValue, colorName });

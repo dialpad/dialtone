@@ -261,7 +261,7 @@ export default {
      * Value of the input. The object format should match TipTap's JSON
      * document structure: https://tiptap.dev/guide/output#option-1-json
      */
-    value: {
+    modelValue: {
       type: [Object, String],
       default: '',
     },
@@ -520,6 +520,13 @@ export default {
     'input',
 
     /**
+     * Event fired to sync the modelValue prop with the parent component
+     * @event input
+     * @type {String|JSON}
+     */
+    'update:modelValue',
+
+    /**
      * Quick replies button
      * pressed event
      * @event quick-replies-click
@@ -542,7 +549,7 @@ export default {
 
   data () {
     return {
-      internalInputValue: this.value, // internal input content
+      internalInputValue: this.modelValue, // internal input content
       hasFocus: false,
 
       linkOptions: {
@@ -756,7 +763,7 @@ export default {
   },
 
   watch: {
-    value (newValue) {
+    modelValue (newValue) {
       this.internalInputValue = newValue;
     },
   },
@@ -914,6 +921,7 @@ export default {
 
     onInput (event) {
       this.$emit('input', event);
+      this.$emit('update:modelValue', event);
     },
 
     getButtonKey (key, selector) {

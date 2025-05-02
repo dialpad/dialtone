@@ -1,3 +1,31 @@
+# [1.42.0](https://github.com/dialpad/dialtone/compare/dialtone-tokens/v1.41.2...dialtone-tokens/v1.42.0) (2025-04-25)
+
+
+### Features
+
+* DLT-2307 dialpad rebrand 2025 ([#733](https://github.com/dialpad/dialtone/issues/733)) ([1be97a2](https://github.com/dialpad/dialtone/commit/1be97a2a6c7ac81b85e7efd3b0bef57fcf54f329))
+
+# [1.42.0-rebrand-2025-beta.3](https://github.com/dialpad/dialtone/compare/dialtone-tokens/v1.42.0-rebrand-2025-beta.2...dialtone-tokens/v1.42.0-rebrand-2025-beta.3) (2025-04-07)
+
+
+### Features
+
+* **Design Tokens:** DLT-2458 wfm extended base colors ([#694](https://github.com/dialpad/dialtone/issues/694)) ([2905279](https://github.com/dialpad/dialtone/commit/2905279609c8abcb0ac2168328b912fc950d3dfc))
+
+# [1.42.0-rebrand-2025-beta.2](https://github.com/dialpad/dialtone/compare/dialtone-tokens/v1.42.0-rebrand-2025-beta.1...dialtone-tokens/v1.42.0-rebrand-2025-beta.2) (2025-04-03)
+
+
+### Bug Fixes
+
+* **Ci:** NO-JIRA changelog release order ([#689](https://github.com/dialpad/dialtone/issues/689)) ([bd4c080](https://github.com/dialpad/dialtone/commit/bd4c0802a59be6fdafb8f661a9c12c64ef764656))
+
+
+### Features
+
+* **Design Tokens:** NO-JIRA positive button border color ([497bba8](https://github.com/dialpad/dialtone/commit/497bba84dd899e7a01dbe5a7c21741c0c4572d02))
+* **Design Tokens:** NO-JIRA positive button border color (dark) ([82b8654](https://github.com/dialpad/dialtone/commit/82b8654f0a3f9712188373e371bbb32e6066f8be))
+* **Design Tokens:** NO-JIRA remap focus color ([e003c8b](https://github.com/dialpad/dialtone/commit/e003c8b8e38cda3a627b48eae48c1e8e6649bfbd))
+
 ## [1.41.2](https://github.com/dialpad/dialtone/compare/dialtone-tokens/v1.41.1...dialtone-tokens/v1.41.2) (2025-04-02)
 
 

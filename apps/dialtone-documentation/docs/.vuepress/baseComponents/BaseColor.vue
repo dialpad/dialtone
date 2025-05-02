@@ -1,69 +1,85 @@
 <template>
   <aside class="d-d-flex d-fd-column">
-    <header class="d-d-flex d-jc-space-between d-ai-end">
-      <h2
-        :id="color"
+    <header v-if="stops.length" class="d-d-flex d-jc-space-between d-ai-end">
+      <h4
         class="d-docsite--header-3 d-tt-capitalize"
         tabindex="-1"
-      >
-        <a
-          :href="`#${color}`"
-          class="header-anchor"
-        >#</a>
-        {{ color }}
-      </h2>
+        v-text="colorName"
+      />
     </header>
     <div
-      v-for="({ stop, copy, hex, contrast, invertedContrast }, index) in stops"
-      :key="index"
-      :class="dynamicClasses(stop, copy, index)"
-      class="d-d-flex d-jc-space-between d-ai-center d-px12 d-py8 d-code--sm"
+      v-for="(stop, index) in stops"
+      :key="`${colorName}-${index}`"
+      :class="[
+        'd-d-flex d-jc-space-between d-ai-center d-px12 d-py8 d-code--sm',
+        {
+          'd-btr4': index === 0,
+          'd-bbr4': index === (stops.length - 1),
+        },
+      ]"
+      :style="`background-color: ${stop.value}`"
     >
-      <div>
-        <strong>var(--dt-color-{{ color }}{{ stop ? `-${stop}` : '' }})</strong>
+      <div :class="fontColorClass(stop.primaryContrast, stop.invertedContrast)">
+        <strong v-text="`var(--dt-color-${colorName}-${stop.stop})`" />
         <br>
-        <span>#{{ hex }}</span>
+        <span v-text="stop.value" />
       </div>
       <div class="d-d-flex d-fd-column d-fs-100 d-lh2 d-fw-bold d-bar-sm d-px4 py2">
-        <span> {{ contrast }}</span>
         <span
-          v-if="invertedContrast"
-          :class="copy === 'primary-inverted' ? 'd-fc-primary' : 'd-fc-primary-inverted'"
-        >
-          {{ invertedContrast }}
-        </span>
+          v-if="stop.primaryContrast >= minAAContrastRatio"
+          :class="fontColorMap[theme].primary"
+          v-text="formattedContrast(stop.primaryContrast)"
+        />
+        <span
+          v-if="stop.invertedContrast >= minAAContrastRatio"
+          :class="fontColorMap[theme].inverted"
+          v-text="formattedContrast(stop.invertedContrast)"
+        />
       </div>
     </div>
   </aside>
 </template>
 
-<script>
-export default {
-  name: 'BaseColor',
-  props: {
-    stops: {
-      type: Array,
-      required: true,
-    },
+<script setup>
+const minAAContrastRatio = 4;
+const minAAAContrastRatio = 7;
 
-    color: {
-      type: String,
-      required: true,
-    },
+// Using neutral colors instead of primary, primary-inverted to make it easier to
+// implement this, as the primary color change based on theme, it was being pretty complex
+// to keep the text colors matching.
+const fontColorMap = {
+  light: {
+    primary: 'd-fc-neutral-black',
+    inverted: 'd-fc-neutral-white',
   },
-
-  methods: {
-    dynamicClasses (stop, copy, index) {
-      const stopColor = [this.color, stop].join('-');
-      return [
-        `d-bgc-${stopColor}`,
-        `d-fc-${copy}`,
-        {
-          'd-btr4': index === 0,
-          'd-bbr4': index === (this.stops.length - 1),
-        },
-      ];
-    },
+  dark: {
+    primary: 'd-fc-neutral-white',
+    inverted: 'd-fc-neutral-black',
   },
 };
+
+const props = defineProps({
+  stops: {
+    type: Array,
+    required: true,
+  },
+  colorName: {
+    type: String,
+    required: true,
+  },
+  theme: {
+    type: String,
+    required: true,
+  },
+});
+
+function fontColorClass (primaryContrast, invertedContrast) {
+  return primaryContrast > invertedContrast
+    ? fontColorMap[props.theme].primary
+    : fontColorMap[props.theme].inverted;
+}
+function formattedContrast (contrast) {
+  const contrastGrade = contrast >= minAAAContrastRatio ? 'AAA' : (contrast >= minAAContrastRatio ? 'AA' : 'A');
+  return `${contrastGrade} ${contrast}`;
+}
 </script>

@@ -1,43 +1,63 @@
 <template>
   <section class="d-stack16">
-    <div
-      class="d-d-grid d-gg24 d-g-cols2 md:d-g-cols1"
-      :class="themeModeClass"
-    >
+    <div class="d-d-grid d-gg24 d-g-cols2 md:d-g-cols1">
       <base-color
-        v-for="color in colors"
-        :key="color.color"
-        :color="color.color"
-        :stops="color.stops || []"
+        v-for="({ stops }, colorName) in colors"
+        :key="colorName"
+        :color-name="colorName"
+        :stops="stops || []"
+        :theme="theme"
       />
     </div>
   </section>
 </template>
 
-<script>
+<script setup>
+import { inject, onMounted, ref } from 'vue';
 import BaseColor from '../baseComponents/BaseColor.vue';
-import { base as colorsData } from '../../_data/colors.json';
+import tinycolor from 'tinycolor2';
 
-export default {
-  name: 'Colors',
-  components: {
-    BaseColor,
+const tokensDocs = inject('tokensDocs');
+const props = defineProps({
+  theme: {
+    type: String,
+    default: 'light',
   },
+});
+const foregroundPrimaryValue = tokensDocs['--dt-color-foreground-primary'][`dp-${props.theme}`].value;
+const foregroundPrimaryInvertedValue = tokensDocs['--dt-color-foreground-primary-inverted'][`dp-${props.theme}`].value;
 
-  props: {
-    /**
-     * Defines the themeMode colors catalog to show
-     * @values: lightMode, darkMode
-     */
-    themeMode: {
-      type: String,
-      required: true,
-    },
-  },
+const colors = ref(undefined);
 
-  created () {
-    this.colors = colorsData[this.themeMode];
-    this.themeModeClass = this.themeMode === 'lightMode' ? 'dialtone-theme-light' : 'dialtone-theme-dark';
-  },
-};
+function getContrastRatio (hexValue) {
+  return {
+    primary: tinycolor.readability(hexValue, foregroundPrimaryValue).toFixed(2),
+    primaryInverted: tinycolor.readability(hexValue, foregroundPrimaryInvertedValue).toFixed(2),
+  };
+}
+
+onMounted(() => {
+  colors.value = Object.keys(tokensDocs)
+    .filter(tokenName => tokenName.startsWith('--dt-color-') && /-\d{2,4}$/.test(tokenName))
+    .reduce((result, tokenName) => {
+      const colorName = tokenName.replace(/--dt-color-(\w+).*/, '$1');
+      const colorStop = tokenName.replace(/--dt-color-\w+-(\d{2,4})/, '$1');
+      const token = tokensDocs[tokenName][`base-${props.theme}`];
+      const colorValue = token?.value;
+      const contrastRatio = getContrastRatio(colorValue);
+
+      if (!result[colorName]) {
+        result[colorName] = { stops: [] };
+      }
+
+      result[colorName].stops.push({
+        stop: colorStop,
+        value: colorValue,
+        primaryContrast: contrastRatio.primary,
+        invertedContrast: contrastRatio.primaryInverted,
+      });
+
+      return result;
+    }, {});
+});
 </script>

@@ -1,6 +1,6 @@
 <template>
   <dt-toggle
-    :checked="$attrs.checked"
+    :model-value="$attrs.modelValue"
     :disabled="$attrs.disabled"
     :size="$attrs.size"
     :show-icon="$attrs.showIcon"

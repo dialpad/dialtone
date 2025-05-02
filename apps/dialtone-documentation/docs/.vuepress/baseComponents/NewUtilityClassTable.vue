@@ -1,37 +1,43 @@
 <template>
-  <div class="d-hmx464 d-of-y-auto d-bb d-bc-black-200">
-    <table class="d-table dialtone-doc-table d-fc-primary">
-      <thead>
-        <tr>
-          <th class="d-w25p" scope="col">
-            Class
-          </th>
-          <th scope="col">
-            Output
-          </th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr
-          v-for="(value, className) in classes"
-          :key="className"
-        >
-          <th
-            scope="row"
-            class="d-code--sm d-fc-purple-400"
-            v-text="className"
-          />
-          <td
-            class="d-code--sm d-ws-break-spaces"
+  <div v-dt-scrollbar class="d-hmx464 d-bar8 d-ba d-bc-subtle">
+    <div>
+      <table class="d-table dialtone-doc-table d-fc-primary">
+        <thead class="d-bgc-primary d-ps-sticky d-zi-base1 d-t0">
+          <tr>
+            <th class="d-w25p d-p0 d-bbw0" scope="col">
+              <div class="d-p16 d-bb d-bc-default d-bbw1">
+                Class
+              </div>
+            </th>
+            <th class="d-p0 d-bbw0" scope="col">
+              <div class="d-p16 d-bb d-bc-default d-bbw1">
+                Output
+              </div>
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr
+            v-for="(value, className) in classes"
+            :key="className"
           >
-            <div class="d-d-flex d-jc-space-between d-ai-center d-gg16">
-              <span class="d-fl-grow1 d-code--sm" v-text="value" />
-              <slot name="example" :class-name="className" />
-            </div>
-          </td>
-        </tr>
-      </tbody>
-    </table>
+            <th
+              scope="row"
+              class="d-code--sm d-docsite-code"
+              v-text="className"
+            />
+            <td
+              class="d-code--sm d-ws-break-spaces"
+            >
+              <div class="d-d-flex d-jc-space-between d-ai-center d-gg16">
+                <span class="d-fl-grow1 d-code--sm" v-text="value" />
+                <slot name="example" :class-name="className" />
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
   </div>
 </template>
 

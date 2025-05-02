@@ -34,7 +34,8 @@ module.exports = {
       },
     ];
 
-    return context.parserServices.defineTemplateBodyVisitor({
+    const sourceCode = context.sourceCode ?? context.getSourceCode();
+    return sourceCode.parserServices.defineTemplateBodyVisitor({
       VAttribute(node) {
         deprecatedDirectives.forEach((item) => {
           if (node.directive && node.key.name.name === item.directiveName) {

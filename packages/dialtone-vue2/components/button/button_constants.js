@@ -10,13 +10,14 @@ export const BUTTON_KIND_MODIFIERS = {
   default: '',
   muted: 'd-btn--muted',
   danger: 'd-btn--danger',
+  positive: 'd-btn--positive',
   inverted: 'd-btn--inverted',
 };
 
 export const BUTTON_IMPORTANCE_MODIFIERS = {
   clear: '',
-  primary: 'd-btn--primary',
   outlined: 'd-btn--outlined',
+  primary: 'd-btn--primary',
 };
 
 export const BUTTON_TYPES = ['submit', 'reset', 'button'];

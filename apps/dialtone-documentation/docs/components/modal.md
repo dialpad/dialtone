@@ -5,7 +5,7 @@ status: ready
 thumb: true
 image: assets/images/components/modal.png
 storybook: https://dialtone.dialpad.com/vue/?path=/story/components-modal--default
-figma_url: https://www.figma.com/file/2adf7JhZOncRyjYiy2joil/DT-Core%3A-Components-7?node-id=8923%3A20396&viewport=-724%2C-52%2C0.38&t=xHutRjwo1o5zMTgT-11
+figma_url: https://www.figma.com/design/W58r5BkO8qTw3vem9YieJd/DT9-Component-Library--Rebrand-2025-?node-id=4454-10944
 ---
 <code-well-header>
   <example-modal />

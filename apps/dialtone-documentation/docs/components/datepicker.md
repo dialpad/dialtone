@@ -5,7 +5,7 @@ image: assets/images/components/datepicker.png
 description: Datepicker component will provide a calendar to select a date.
 status: beta
 storybook: https://dialtone.dialpad.com/vue/?path=/story/components-datepicker--default
-figma_url: https://www.figma.com/file/2adf7JhZOncRyjYiy2joil/DT8-Component-Library?type=design&node-id=13998-87&mode=design&t=k5q7YXo32w6HoOmK-11
+figma_url: https://www.figma.com/design/W58r5BkO8qTw3vem9YieJd/DT9-Component-Library--Rebrand-2025-?node-id=13998-86
 ---
 
 <code-well-header>
@@ -413,7 +413,7 @@ The following functions are available for date formatting.
 
 <div class="d-bgc-secondary d-bar8 d-p16">
   <dt-stack
-    :direction="{ 'default': 'row', 'md': 'column' }"
+    :direction="{ 'default': 'column', 'md': 'row' }"
     gap="600"
     class="d-ai-flex-start"
   >

@@ -389,6 +389,62 @@
   }
 }
 
+//  $$  POSITIVE BUTTON
+//  ----------------------------------------------------------------------------
+.d-btn--positive {
+  --button-color-text: var(--dt-action-color-foreground-positive-default);
+  --button-color-background: var(--dt-action-color-background-positive-default);
+
+  &:hover:not([disabled]) {
+    --button-color-text: var(--dt-action-color-foreground-positive-hover);
+    --button-color-background: var(--dt-action-color-background-positive-hover);
+  }
+
+  &:active:not([disabled]),
+  &.d-btn--active:not([disabled]),
+  &.d-btn--active:active:not([disabled]) {
+    --button-color-text: var(--dt-action-color-foreground-positive-active);
+    --button-color-background: var(
+      --dt-action-color-background-positive-active
+    );
+  }
+
+  &.d-btn--outlined {
+    --button-color-border: var(
+      --dt-action-color-border-positive-outlined-default
+    );
+  }
+
+  &.d-btn--primary {
+    --button-color-text: var(
+      --dt-action-color-foreground-positive-primary-default
+    );
+    --button-color-background: var(
+      --dt-action-color-background-positive-primary-default
+    );
+
+    &:hover:not([disabled]) {
+      --button-color-text: var(
+        --dt-action-color-foreground-positive-primary-default
+      );
+      --button-color-background: var(
+        --dt-action-color-background-positive-primary-hover
+      );
+    }
+
+    &:active:not([disabled]),
+    &.d-btn--active:not([disabled]),
+    &.d-btn--active:active:not([disabled]) {
+      --button-color-text: var(
+        --dt-action-color-foreground-positive-primary-default
+      );
+      --button-color-background: var(
+        --dt-action-color-background-positive-primary-active
+      );
+    }
+  }
+}
+
 //  $$  INVERTED BUTTON
 //  ----------------------------------------------------------------------------
 //  --  Base, clear inverted button
@@ -650,6 +706,11 @@
 
       opacity: var(--dt-opacity-600); // soften it
       content: "";
+
+       // soften divider for muted outlined
+      .d-split-btn:has(.d-btn--outlined.d-btn--muted, .d-btn--outlined.d-btn--inverted) & {
+        opacity: var(--dt-opacity-300);
+      }
 
       // hide divider line when hovering or focusing any button within the split button
       .d-split-btn:has(:focus-visible, :hover, .d-btn--active) & {

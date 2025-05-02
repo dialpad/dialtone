@@ -5,7 +5,7 @@ status: ready
 thumb: true
 image: assets/images/components/popover.png
 storybook: https://dialtone.dialpad.com/vue/?path=/story/components-popover--default
-figma_url: https://www.figma.com/file/2adf7JhZOncRyjYiy2joil/DT-Core%3A-Components-7?node-id=8921%3A22411&viewport=831%2C-269%2C0.43&t=xHutRjwo1o5zMTgT-11
+figma_url: https://www.figma.com/design/W58r5BkO8qTw3vem9YieJd/DT9-Component-Library--Rebrand-2025-?node-id=7298-20354
 ---
 <code-well-header>
   <example-popover modal />

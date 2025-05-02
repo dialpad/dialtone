@@ -92,21 +92,19 @@ By default flexed items align to `flex-start` both horizontally and vertically (
 
 ## Classes
 
-<div class="d-h464 d-of-y-scroll d-bb d-bc-black-200">
-  <utility-class-table>
-    <template #content>
-      <tbody>
-        <tr v-for="i in columns">
-          <th scope="row" class="d-code--sm d-fc-purple-400">.d-fl-col{{ i }}</th>
-          <td class="d-code--sm d-ws-pre">> *{ flex-basis: calc({{ calcFlexBasis(i) }}% - (var(--fl-gap)* 2)); }</td>
-        </tr>
-      </tbody>
-      <tbody>
-        <tr v-for="i in gaps">
-          <th scope="row" class="d-code--sm d-fc-purple-400">.d-cg{{ i }}</th>
-          <td class="d-code--sm d-ws-pre">> * { --fl-gap: {{ calcGap(i) }} !important; }</td>
-        </tr>
-      </tbody>
-    </template>
-  </utility-class-table>
-</div>
+<utility-class-table>
+  <template #content>
+    <tbody>
+      <tr v-for="i in columns">
+        <th scope="row" class="d-code--sm d-docsite-code">.d-fl-col{{ i }}</th>
+        <td class="d-code--sm d-ws-pre">> *{ flex-basis: calc({{ calcFlexBasis(i) }}% - (var(--fl-gap)* 2)); }</td>
+      </tr>
+    </tbody>
+    <tbody>
+      <tr v-for="i in gaps">
+        <th scope="row" class="d-code--sm d-docsite-code">.d-cg{{ i }}</th>
+        <td class="d-code--sm d-ws-pre">> * { --fl-gap: {{ calcGap(i) }} !important; }</td>
+      </tr>
+    </tbody>
+  </template>
+</utility-class-table>

@@ -1,3 +1,49 @@
+## [3.179.1](https://github.com/dialpad/dialtone/compare/dialtone-vue3/v3.179.0...dialtone-vue3/v3.179.1) (2025-04-29)
+
+
+### Bug Fixes
+
+* **Select Menu:** NO-JIRA avoid emitting value on mounted (vue 3 only) ([#734](https://github.com/dialpad/dialtone/issues/734)) ([78962c3](https://github.com/dialpad/dialtone/commit/78962c3eed952d1d07531a037a9037259ab117d2))
+
+# [3.179.0](https://github.com/dialpad/dialtone/compare/dialtone-vue3/v3.178.0...dialtone-vue3/v3.179.0) (2025-04-25)
+
+
+### Features
+
+* DLT-2307 dialpad rebrand 2025 ([#733](https://github.com/dialpad/dialtone/issues/733)) ([1be97a2](https://github.com/dialpad/dialtone/commit/1be97a2a6c7ac81b85e7efd3b0bef57fcf54f329))
+
+# [3.178.0](https://github.com/dialpad/dialtone/compare/dialtone-vue3/v3.177.1...dialtone-vue3/v3.178.0) (2025-04-24)
+
+
+### Bug Fixes
+
+* **Callbar Button With Dropdown:** DLT-2441 add modal false ([#723](https://github.com/dialpad/dialtone/issues/723)) ([b031e78](https://github.com/dialpad/dialtone/commit/b031e785b698b45b6cc85ab4a52f1b029ed1854f))
+* NO-JIRA vue 3 v-model corrections ([#711](https://github.com/dialpad/dialtone/issues/711)) ([2d5c646](https://github.com/dialpad/dialtone/commit/2d5c646b268a06b1ee43b4b07646efdf353a9665))
+
+
+### Features
+
+* **Breakpoints, Stack, Layout:** DLT-2462 reverse default breakpoints ([#722](https://github.com/dialpad/dialtone/issues/722)) ([b4c01e1](https://github.com/dialpad/dialtone/commit/b4c01e1929c1c895796fc3859295e9f6674db1a0))
+
+## [3.177.1](https://github.com/dialpad/dialtone/compare/dialtone-vue3/v3.177.0...dialtone-vue3/v3.177.1) (2025-04-21)
+
+
+### Bug Fixes
+
+* **Checkbox, Radio:** NO-JIRA description slot not being reactive ([#725](https://github.com/dialpad/dialtone/issues/725)) ([7a29e67](https://github.com/dialpad/dialtone/commit/7a29e67fd3f8efb9b4036dd98a716903aa7ad3d1))
+
+# [3.177.0](https://github.com/dialpad/dialtone/compare/dialtone-vue3/v3.176.2...dialtone-vue3/v3.177.0) (2025-04-17)
+
+
+### Bug Fixes
+
+* NO-JIRA bundle issues ([#715](https://github.com/dialpad/dialtone/issues/715)) ([ae16776](https://github.com/dialpad/dialtone/commit/ae16776ee2d8128dae891418a41a84075e7fa0c0))
+
+
+### Features
+
+* **Toast:** DLT-2418 support multiple layouts within toast ([#678](https://github.com/dialpad/dialtone/issues/678)) ([c593554](https://github.com/dialpad/dialtone/commit/c593554cc59fc171a4ce42e670c539a83d64a06c))
+
 ## [3.176.2](https://github.com/dialpad/dialtone/compare/dialtone-vue3/v3.176.1...dialtone-vue3/v3.176.2) (2025-04-16)
 
 

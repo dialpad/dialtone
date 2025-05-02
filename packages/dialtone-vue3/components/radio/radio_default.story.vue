@@ -3,7 +3,7 @@
     :label="$attrs.label"
     :name="$attrs.name"
     :value="$attrs.value"
-    :checked="$attrs.checked"
+    :model-value="$attrs.modelValue"
     :description="$attrs.description"
     :validation-state="$attrs.validationState"
     :disabled="$attrs.disabled"

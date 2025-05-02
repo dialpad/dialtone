@@ -5,7 +5,7 @@ status: beta
 thumb: true
 image: assets/images/components/split-button.png
 storybook: https://dialtone.dialpad.com/vue/?path=/story/components-split-button--default
-figma_url: https://www.figma.com/design/2adf7JhZOncRyjYiy2joil/DT9-Component-Library?node-id=17597-8212&t=zQhkLLjFhis5qtDn-11
+figma_url: https://www.figma.com/design/W58r5BkO8qTw3vem9YieJd/DT9-Component-Library--Rebrand-2025-?node-id=19800-32233
 ---
 
 <code-well-header>
@@ -133,6 +133,50 @@ vueCode='
 <dt-split-button kind="danger" omega-tooltip-text="More calling options"> Place Call </dt-button>
 <dt-split-button importance="outlined" kind="danger" omega-tooltip-text="More calling options"> Place Call </dt-button>
 <dt-split-button importance="clear" kind="danger" omega-tooltip-text="More calling options"> Place Call </dt-button>
+'
+showHtmlWarning />
+
+### Positive
+
+<code-well-header>
+  <dt-stack direction="row" gap="400">
+      <dt-split-button kind="positive" omega-tooltip-text="More calling options"> Place Call </dt-split-button>
+      <dt-split-button importance="outlined" kind="positive" omega-tooltip-text="More calling options"> Place Call </dt-split-button>
+      <dt-split-button importance="clear" kind="positive" omega-tooltip-text="More calling options"> Place Call </dt-split-button>
+  </dt-stack>
+</code-well-header>
+
+<code-example-tabs
+htmlCode='
+<span class="d-split-btn">
+<button class="base-button__button d-btn d-btn--primary d-btn--positive d-split-btn__alpha d-split-btn__alpha--md" type="button">
+<span class="d-btn__label base-button__label"> Place Call </span>
+</button>
+<button class="base-button__button d-btn d-btn--primary d-btn--positive d-btn--icon-only d-split-btn__omega d-split-btn__omega--md" type="button">
+<span class="base-button__icon d-btn__icon d-btn__icon--left">...</span>
+</button>
+</span>
+<span class="d-split-btn">
+<button class="base-button__button d-btn d-btn--outlined d-btn--positive d-split-btn__alpha d-split-btn__alpha--md" type="button">
+<span class="d-btn__label base-button__label"> Place Call </span>
+</button>
+<button class="base-button__button d-btn d-btn--outlined d-btn--positive d-btn--icon-only d-split-btn__omega d-split-btn__omega--md" type="button">
+<span class="base-button__icon d-btn__icon d-btn__icon--left">...</span>
+</button>
+</span>
+<span class="d-split-btn">
+<button class="base-button__button d-btn d-btn--positive d-split-btn__alpha d-split-btn__alpha--md" type="button">
+<span class="d-btn__label base-button__label"> Place Call </span>
+</button>
+<button class="base-button__button d-btn d-btn--positive d-btn--icon-only d-split-btn__omega d-split-btn__omega--md" type="button">
+<span class="base-button__icon d-btn__icon d-btn__icon--left">...</span>
+</button>
+</span>
+'
+vueCode='
+<dt-split-button kind="positive" omega-tooltip-text="More calling options"> Place Call </dt-button>
+<dt-split-button kind="positive" importance="outlined" omega-tooltip-text="More calling options"> Place Call </dt-button>
+<dt-split-button kind="positive" importance="clear" omega-tooltip-text="More calling options"> Place Call </dt-button>
 '
 showHtmlWarning />
 
