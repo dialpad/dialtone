@@ -1,3 +1,11 @@
+# [9.114.0](https://github.com/dialpad/dialtone/compare/dialtone/v9.113.1...dialtone/v9.114.0) (2025-05-05)
+
+
+### Features
+
+* **Editor:** DP-115099 recipe editor support for focusing action bar buttons using arrow keys ([#732](https://github.com/dialpad/dialtone/issues/732)) ([011f042](https://github.com/dialpad/dialtone/commit/011f042d49bb0c874d12cd3eb702641b80f48d34))
+* **Icons:** DLT-2497 quick reply, dpm logo ([#738](https://github.com/dialpad/dialtone/issues/738)) ([9d92cee](https://github.com/dialpad/dialtone/commit/9d92ceee7b12bc4d9bad0975837f810572665dba))
+
 ## [9.113.1](https://github.com/dialpad/dialtone/compare/dialtone/v9.113.0...dialtone/v9.113.1) (2025-04-29)
 
 
