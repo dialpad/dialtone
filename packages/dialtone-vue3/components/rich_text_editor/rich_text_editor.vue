@@ -75,6 +75,9 @@ import Underline from '@tiptap/extension-underline';
 import Text from '@tiptap/extension-text';
 import TextAlign from '@tiptap/extension-text-align';
 import History from '@tiptap/extension-history';
+import TextStyle from '@tiptap/extension-text-style';
+import Color from '@tiptap/extension-color';
+import FontFamily from '@tiptap/extension-font-family';
 import Emoji from './extensions/emoji';
 import CustomLink from './extensions/custom_link';
 import ConfigurableImage from './extensions/image';
@@ -353,6 +356,22 @@ export default {
     },
 
     /**
+     * Whether the input allows color to be introduced in the text.
+     */
+    allowFontColor: {
+      type: Boolean,
+      default: false,
+    },
+
+    /**
+     * Whether the input allows different font-families to be introduced in the text.
+     */
+    allowFontFamily: {
+      type: Boolean,
+      default: false,
+    },
+
+    /**
      * Additional TipTap extensions to be added to the editor.
      */
     additionalExtensions: {
@@ -476,7 +495,7 @@ export default {
     // eslint-disable-next-line complexity
     extensions () {
       // These are the default extensions needed just for plain text.
-      const extensions = [Document, Text, History, HardBreak];
+      const extensions = [Document, Text, TextStyle, History, HardBreak];
       extensions.push(this.useDivTags ? DivParagraph : Paragraph);
 
       if (this.allowBlockquote) {
@@ -599,6 +618,14 @@ export default {
 
       if (this.allowInlineImages) {
         extensions.push(ConfigurableImage);
+      }
+
+      if (this.allowFontColor) {
+        extensions.push(Color);
+      }
+
+      if (this.allowFontFamily) {
+        extensions.push(FontFamily);
       }
 
       if (this.additionalExtensions.length) {

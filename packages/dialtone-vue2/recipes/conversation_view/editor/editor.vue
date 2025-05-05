@@ -166,6 +166,8 @@
       <dt-rich-text-editor
         ref="richTextEditor"
         v-model="internalInputValue"
+        :allow-font-color="true"
+        :allow-font-family="true"
         :allow-inline-images="true"
         :allow-line-breaks="true"
         :hide-link-bubble-menu="true"
