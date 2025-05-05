@@ -1,3 +1,10 @@
+## [1.42.1](https://github.com/dialpad/dialtone/compare/dialtone-tokens/v1.42.0...dialtone-tokens/v1.42.1) (2025-05-05)
+
+
+### Bug Fixes
+
+* **Design Tokens:** NO-JIRA update color.surface.warning reference in dark mode ([#740](https://github.com/dialpad/dialtone/issues/740)) ([b20558a](https://github.com/dialpad/dialtone/commit/b20558a28b5af91f885d48ea60b204fd1f6e6c29))
+
 # [1.42.0](https://github.com/dialpad/dialtone/compare/dialtone-tokens/v1.41.2...dialtone-tokens/v1.42.0) (2025-04-25)
 
 
