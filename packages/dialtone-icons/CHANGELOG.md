@@ -1,3 +1,10 @@
+# [4.36.0](https://github.com/dialpad/dialtone/compare/dialtone-icons/v4.35.0...dialtone-icons/v4.36.0) (2025-05-05)
+
+
+### Features
+
+* **Icons:** DLT-2497 quick reply, dpm logo ([#738](https://github.com/dialpad/dialtone/issues/738)) ([9d92cee](https://github.com/dialpad/dialtone/commit/9d92ceee7b12bc4d9bad0975837f810572665dba))
+
 # [4.35.0](https://github.com/dialpad/dialtone/compare/dialtone-icons/v4.34.6...dialtone-icons/v4.35.0) (2025-04-25)
 
 
