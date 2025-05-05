@@ -568,5 +568,52 @@ describe('DtRecipeEditor tests', () => {
         expect(editor.html()).toContain(`<div>${testText}</div>`);
       });
     });
+
+    describe('Top Action Bar Tests', () => {
+      beforeEach(async () => {
+        _mountWrapper();
+        await wrapper.vm.$nextTick();
+      });
+
+      it('should have only the first button as a focusable item', async function () {
+        await quickRepliesBtn.trigger('focus');
+        expect(quickRepliesBtn.html()).toContain(`tabindex="0"`);
+        expect(boldFormatBtn.html()).toContain(`tabindex="-1"`);
+      });
+
+      it('should focus the next button to the right when right arrow key is pressed', async function () {
+        await quickRepliesBtn.trigger('focus');
+        await quickRepliesBtn.trigger('keydown', { key: 'Right' });
+        expect(quickRepliesBtn.html()).toContain(`tabindex="-1"`);
+        expect(boldFormatBtn.html()).toContain(`tabindex="0"`);
+        expect(document.activeElement).toBe(boldFormatBtn.element);
+      });
+
+      it('should focus the next button to the left when left arrow key is pressed', async function () {
+        await quickRepliesBtn.trigger('focus');
+        await quickRepliesBtn.trigger('keydown', { key: 'Right' });
+        await quickRepliesBtn.trigger('keydown', { key: 'Left' });
+        expect(quickRepliesBtn.html()).toContain(`tabindex="0"`);
+        expect(boldFormatBtn.html()).toContain(`tabindex="-1"`);
+        expect(document.activeElement).toBe(quickRepliesBtn.element);
+      });
+
+      it('should wrap around and only have the last button as a focusable item when the left arrow key button is pressed', async function () {
+        await quickRepliesBtn.trigger('focus');
+        await quickRepliesBtn.trigger('keydown', { key: 'Left' });
+        expect(addLinkBtn.html()).toContain(`tabindex="0"`);
+        expect(quickRepliesBtn.html()).toContain(`tabindex="-1"`);
+        expect(document.activeElement).toBe(addLinkBtn.element);
+      });
+
+      it('should wrap around and only have the first button as a focusable item when the right arrow key button is pressed past the last button', async function () {
+        await quickRepliesBtn.trigger('focus');
+        await quickRepliesBtn.trigger('keydown', { key: 'Left' });
+        await addLinkBtn.trigger('keydown', { key: 'Right' });
+        expect(document.activeElement).toBe(quickRepliesBtn.element);
+        expect(quickRepliesBtn.html()).toContain(`tabindex="0"`);
+        expect(addLinkBtn.html()).toContain(`tabindex="-1"`);
+      });
+    });
   });
 });
