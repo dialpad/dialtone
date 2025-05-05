@@ -32,7 +32,7 @@ Use `d-bar{n}` to change the border radius on all corners of your element.
 
 Use `d-b{t|r|b|l}r{n}` to change the border radius on a side of your element.
 
-<code-well-header class="d-fl-center d-g8 d-fw-wrap d-p24 d-bgc-magenta-100 d-bgo50 d-w100p d-hmn102 lg:d-stack8 d-flow8" custom>
+<code-well-header class="d-fl-center d-g8 d-fw-wrap d-p24 d-bgc-magenta-100 d-bgo50 d-w100p d-hmn102 d-flow8" custom>
   <div class="d-fl-center d-p16 d-h48 d-btr4 d-bgc-magenta-100 d-fs-300 d-fw-bold">.d-btr4</div>
   <div class="d-fl-center d-p16 d-h48 d-brr8 d-bgc-magenta-100 d-fs-300 d-fw-bold">.d-brr8</div>
   <div class="d-fl-center d-p16 d-h48 d-bbr12 d-bgc-magenta-100 d-fs-300 d-fw-bold">.d-bbr12</div>

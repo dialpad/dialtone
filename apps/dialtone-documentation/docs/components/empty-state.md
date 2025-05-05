@@ -82,7 +82,7 @@ figma_url: https://www.figma.com/design/W58r5BkO8qTw3vem9YieJd/DT9-Component-Lib
 
 The four most likely scenarios for an empty state are **Zero State**, **No Results**, **New Feature**, and **Not Enabled**. This is not an exhaustive list, but a good starting point for most use cases.
 
-<div class="d-d-grid d-g-cols3 lg:d-g-cols1 d-bar8 d-bgc-secondary d-mb32">
+<div class="d-d-grid d-g-cols1 lg:d-g-cols3 d-bar8 d-bgc-secondary d-mb32">
 
   <div class="d-p16 d-p16 d-plc-center">
 
@@ -96,7 +96,7 @@ The Empty State should guide the user on how to achieve a non-empty state. You m
   </div>
 </div>
 
-<div class="d-d-grid d-g-cols3 lg:d-g-cols1 d-bar8 d-bgc-secondary d-mb32">
+<div class="d-d-grid d-g-cols1 lg:d-g-cols3 d-bar8 d-bgc-secondary d-mb32">
 
   <div class="d-p16 d-p16 d-plc-center">
 
@@ -110,7 +110,7 @@ When an action results in no data or information to display, recommend alternate
   </div>
 </div>
 
-<div class="d-d-grid d-g-cols3 lg:d-g-cols1 d-bar8 d-bgc-secondary d-mb32">
+<div class="d-d-grid d-g-cols1 lg:d-g-cols3 d-bar8 d-bgc-secondary d-mb32">
 
   <div class="d-p16 d-p16 d-plc-center">
 
@@ -124,7 +124,7 @@ An opportunity to introduce something new or not yet take advantage of. If it in
   </div>
 </div>
 
-<div class="d-d-grid d-g-cols3 lg:d-g-cols1 d-bar8 d-bgc-secondary d-mb32">
+<div class="d-d-grid d-g-cols1 lg:d-g-cols3 d-bar8 d-bgc-secondary d-mb32">
 
   <div class="d-p16 d-p16 d-plc-center">
 

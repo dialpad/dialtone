@@ -3,7 +3,7 @@
     <div>
       <table class="d-table dialtone-doc-table">
         <thead class="d-bgc-primary d-ps-sticky d-zi-base1 d-t0">
-          <tr class="sm:d-d-none">
+          <tr>
             <th
               scope="col"
               class="d-p0 d-bbw0 d-label--sm-compact d-tt-none"
@@ -49,7 +49,7 @@
             @focusin="onEnterRow(name)"
             @focusout="onLeaveRow()"
           >
-            <td class="d-w128 sm:d-w72 d-box-content">
+            <td class="d-w72 sm:d-w128 d-box-content">
               <token-example
                 :category="category"
                 :name="exampleName || name"
@@ -197,5 +197,15 @@ export default {
 
 .d-table tr th:first-child {
   width: 16rem;
+}
+
+.d-table thead tr {
+  display: none;
+}
+
+@media (min-width: 480px) {
+  .d-table thead tr {
+    display: table-row;
+  }
 }
 </style>
