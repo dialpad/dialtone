@@ -201,7 +201,10 @@ export default {
 
 .d-table thead tr {
   display: none;
-  @media (min-width: 480px) {
+}
+
+@media (min-width: 480px) {
+  .d-table thead tr {
     display: table-row;
   }
 }
