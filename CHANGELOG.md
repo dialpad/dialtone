@@ -1,3 +1,10 @@
+# [9.115.0](https://github.com/dialpad/dialtone/compare/dialtone/v9.114.0...dialtone/v9.115.0) (2025-05-05)
+
+
+### Features
+
+* **Breakpoints:** DLT-2463 migrate doc site to new breakpoints ([#739](https://github.com/dialpad/dialtone/issues/739)) ([df2f173](https://github.com/dialpad/dialtone/commit/df2f1739315e359d463ae54d2a4da34d6de546c0))
+
 # [9.114.0](https://github.com/dialpad/dialtone/compare/dialtone/v9.113.1...dialtone/v9.114.0) (2025-05-05)
 
 
