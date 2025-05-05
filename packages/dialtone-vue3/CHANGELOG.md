@@ -1,3 +1,10 @@
+# [3.180.0](https://github.com/dialpad/dialtone/compare/dialtone-vue3/v3.179.1...dialtone-vue3/v3.180.0) (2025-05-05)
+
+
+### Features
+
+* **Editor:** DP-115099 recipe editor support for focusing action bar buttons using arrow keys ([#732](https://github.com/dialpad/dialtone/issues/732)) ([011f042](https://github.com/dialpad/dialtone/commit/011f042d49bb0c874d12cd3eb702641b80f48d34))
+
 ## [3.179.1](https://github.com/dialpad/dialtone/compare/dialtone-vue3/v3.179.0...dialtone-vue3/v3.179.1) (2025-04-29)
 
 
