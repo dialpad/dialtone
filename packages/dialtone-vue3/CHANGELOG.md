@@ -1,3 +1,10 @@
+# [3.182.0](https://github.com/dialpad/dialtone/compare/dialtone-vue3/v3.181.0...dialtone-vue3/v3.182.0) (2025-05-06)
+
+
+### Features
+
+* **Editor:** DP-135938 update quick reply icon ([#744](https://github.com/dialpad/dialtone/issues/744)) ([c5bb007](https://github.com/dialpad/dialtone/commit/c5bb007f3a937ce1e6fa0dde21fe118d6452f70d))
+
 # [3.181.0](https://github.com/dialpad/dialtone/compare/dialtone-vue3/v3.180.0...dialtone-vue3/v3.181.0) (2025-05-06)
 
 
