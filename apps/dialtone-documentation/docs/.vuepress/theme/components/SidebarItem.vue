@@ -22,7 +22,7 @@
             label-class="d-jc-flex-start"
             icon-position="right"
             :class="[
-              'd-bar-pill d-w100p d-fw-normal d-us-none d-td-none d-fc-primary',
+              'd-w100p d-fw-normal d-us-none d-td-none d-fc-primary',
               {
                 'd-headline--eyebrow d-fw-semibold d-fc-secondary d-bgc-transparent d-c-default': !item.link,
                 'd-btn--active d-fw-medium': isActiveLink(isExactActive, item.link),
@@ -64,7 +64,7 @@
               kind="muted"
               label-class="d-jc-flex-start"
               :class="[
-                'd-bar-pill d-w100p d-fw-normal d-us-none d-td-none d-fc-primary',
+                'd-w100p d-fw-normal d-us-none d-td-none d-fc-primary',
                 {
                   'd-btn--active d-fw-medium': isActiveLink(isExactActive, subItem.link),
                   'd-mt2': (index === 0 && nested), // add margin top to first nested item

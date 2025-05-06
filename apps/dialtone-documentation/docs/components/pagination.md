@@ -21,7 +21,7 @@ figma_url: https://www.figma.com/design/W58r5BkO8qTw3vem9YieJd/DT9-Component-Lib
 <code-example-tabs
 htmlCode='
 <nav aria-label="Pagination" class="d-pagination">
-  <button class="base-button__button d-btn d-btn--primary d-btn--icon-only d-pagination__button d-fc-black-300 d-bgc-transparent" type="button" disabled="" aria-label="Previous page">
+  <button class="base-button__button d-btn d-btn--primary d-btn--icon-only d-pagination__button d-fco50 d-fc-disabled d-bgc-transparent" type="button" disabled="" aria-label="Previous page">
     <span class="base-button__icon d-btn__icon d-btn__icon--left">
       <span class="d-icon__wrapper">
         <div aria-busy="true" role="status" aria-label="" class="d-icon d-icon--size-300" style="display: none;">

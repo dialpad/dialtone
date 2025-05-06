@@ -4,6 +4,12 @@
     class="d-stack16"
   >
     <div class="d-flow8">
+      <!-- Unstyled -->
+      <dt-button kind="unstyled">
+        Unstyled
+      </dt-button>
+    </div>
+    <div class="d-flow8">
       <!-- Default -->
       <dt-button>
         Primary
@@ -23,6 +29,11 @@
       <!-- Danger -->
       <dt-button kind="danger">
         Danger
+      </dt-button>
+
+      <!-- Positive -->
+      <dt-button kind="positive">
+        Positive
       </dt-button>
 
       <!-- Inverted -->
@@ -84,10 +95,7 @@
         circle
         aria-label="Icon only"
       >
-        <template
-          slot="icon"
-          slot-scope="{ iconSize }"
-        >
+        <template #icon="{ iconSize }">
           <dt-icon
             name="download"
             :size="iconSize"
@@ -97,10 +105,7 @@
 
       <!-- Icon Only -->
       <dt-button aria-label="Icon only">
-        <template
-          slot="icon"
-          slot-scope="{ iconSize }"
-        >
+        <template #icon="{ iconSize }">
           <dt-icon
             name="download"
             :size="iconSize"
@@ -110,10 +115,7 @@
 
       <!-- Icon Left -->
       <dt-button>
-        <template
-          slot="icon"
-          slot-scope="{ iconSize }"
-        >
+        <template #icon="{ iconSize }">
           <dt-icon
             name="download"
             :size="iconSize"
@@ -124,10 +126,7 @@
 
       <!-- Icon Right -->
       <dt-button icon-position="right">
-        <template
-          slot="icon"
-          slot-scope="{ iconSize }"
-        >
+        <template #icon="{ iconSize }">
           <dt-icon
             name="download"
             :size="iconSize"
@@ -138,10 +137,7 @@
 
       <!-- Icon Top -->
       <dt-button icon-position="top">
-        <template
-          slot="icon"
-          slot-scope="{ iconSize }"
-        >
+        <template #icon="{ iconSize }">
           <dt-icon
             name="download"
             :size="iconSize"
@@ -152,10 +148,7 @@
 
       <!-- Icon Bottom -->
       <dt-button icon-position="bottom">
-        <template
-          slot="icon"
-          slot-scope="{ iconSize }"
-        >
+        <template #icon="{ iconSize }">
           <dt-icon
             name="download"
             :size="iconSize"
@@ -194,6 +187,14 @@
         kind="danger"
       >
         Active Danger button
+      </dt-button>
+
+      <!-- Active Positive Button -->
+      <dt-button
+        active
+        kind="positive"
+      >
+        Active Positive button
       </dt-button>
     </div>
   </div>

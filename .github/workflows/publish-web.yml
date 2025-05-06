@@ -18,6 +18,7 @@ on:
           - dialtone-vue3
           - eslint-plugin-dialtone
           - stylelint-plugin-dialtone
+          - postcss-responsive-variations
   push:
     branches:
       - production
@@ -75,6 +76,8 @@ jobs:
               - 'packages/eslint-plugin-dialtone/package.json'
             stylelint-plugin-dialtone:
               - 'packages/stylelint-plugin-dialtone/package.json'
+            postcss-responsive-variations:
+              - 'packages/postcss-responsive-variations/package.json'
 
       - name: Filter actions by input
         if: ${{ github.event_name == 'workflow_dispatch' }}

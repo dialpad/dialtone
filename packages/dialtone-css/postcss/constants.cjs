@@ -8,7 +8,7 @@
 
 // @TODO: Move HSLA_EXCLUDED_COLORS to common/utils to share and sync it with dialtone-tokens/postcss/common.js
 module.exports = {
-  HSLA_EXCLUDED_COLORS: ['--dt-color-gradient-magenta-purple', '--dt-badge-color-background-ai', '--dt-color-border-ai'],
+  HSLA_EXCLUDED_COLORS: ['--dt-color-surface-ai', '--dt-color-gradient-gold-red-magenta-purple', '--dt-color-gradient-magenta-purple', '--dt-badge-color-background-ai', '--dt-color-border-ai'],
   OPACITIES: [
     100,
     99,
@@ -140,49 +140,6 @@ module.exports = {
     BACKGROUND_GRADIENTS: [
       'none',
       'unset',
-    ].join('|'),
-    FONT_COLORS: [
-      'primary',
-      'secondary',
-      'tertiary',
-      'muted',
-      'placeholder',
-      'disabled',
-      'success',
-      'warning',
-      'error',
-      'critical',
-      'current',
-      'transparent',
-      'unset',
-    ].join('|'),
-    FONT_COLOR_VARIATIONS: [
-      'strong-inverted',
-      'inverted',
-      'strong',
-    ].join('|'),
-    BACKGROUND_COLORS: [
-      'primary',
-      'secondary',
-      'moderate',
-      'strong',
-      'contrast',
-      'bold',
-      'backdrop',
-      'success',
-      'warning',
-      'info',
-      'error',
-      'critical',
-      'danger',
-      'transparent',
-      'unset',
-    ].join('|'),
-    BACKGROUND_COLOR_VARIATIONS: [
-      'opaque',
-      'subtle-opaque',
-      'subtle',
-      'strong',
     ].join('|'),
     BORDER_COLORS: [
       'default',

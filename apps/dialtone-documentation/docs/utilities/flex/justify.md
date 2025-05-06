@@ -3,19 +3,6 @@ title: Justify Content
 description: Utilities for setting how an element's space around and between content is distributed along its main axis.
 ---
 
-## Classes
-
-<utility-class-table>
-  <template #content>
-    <tbody>
-      <tr v-for="{ class: className, output } in justifyContent">
-        <th scope="row" class="d-code--sm d-fc-purple-400">.d-{{ className }}</th>
-        <td class="d-code--sm">{{ output }}</td>
-      </tr>
-    </tbody>
-  </template>
-</utility-class-table>
-
 ## Flex Start
 
 Use `d-jc-flex-start` to justify items against the start of the element's main axis. This is the default value.
@@ -135,6 +122,19 @@ Use `d-jc-space-evenly` to justify items along the element's main axis so that t
   <div>3</div>
 </div>
 ```
+
+## Classes
+
+<utility-class-table>
+  <template #content>
+    <tbody>
+      <tr v-for="{ class: className, output } in justifyContent">
+        <th scope="row" class="d-code--sm d-docsite-code">.d-{{ className }}</th>
+        <td class="d-code--sm">{{ output }}</td>
+      </tr>
+    </tbody>
+  </template>
+</utility-class-table>
 
 <script setup>
   import { justifyContent } from '@data/flex.json';

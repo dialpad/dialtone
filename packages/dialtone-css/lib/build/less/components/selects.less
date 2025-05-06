@@ -35,16 +35,12 @@
     z-index: var(--zi-selected);
     width: var(--select-arrow-size);
     height: var(--select-arrow-size);
-    background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMiIgaGVpZ2h0PSIxMiIgZmlsbD0ibm9uZSIgdmlld0JveD0iMCAwIDEyIDEyIj4KICA8cGF0aCBmaWxsPSIjNTU1IiBmaWxsLXJ1bGU9ImV2ZW5vZGQiIGQ9Ik0zLjE0NiA3LjE0NmEuNS41IDAgMCAxIC43MDggMEw2IDkuMjkzbDIuMTQ2LTIuMTQ3YS41LjUgMCAxIDEgLjcwOC43MDhsLTIuNSAyLjVhLjUuNSAwIDAgMS0uNzA4IDBsLTIuNS0yLjVhLjUuNSAwIDAgMSAwLS43MDhabTIuNS01LjVhLjUuNSAwIDAgMSAuNzA4IDBsMi41IDIuNWEuNS41IDAgMSAxLS43MDguNzA4TDYgMi43MDcgMy44NTQgNC44NTRhLjUuNSAwIDEgMS0uNzA4LS43MDhsMi41LTIuNVoiIGNsaXAtcnVsZT0iZXZlbm9kZCIvPgo8L3N2Zz4K');
+    background-image: url("data:image/svg+xml,<svg width='14' height='14' viewBox='0 0 14 14' fill='none' xmlns='http://www.w3.org/2000/svg'> <path fill-rule='evenodd' clip-rule='evenodd' d='M6.55798 1.89155C6.80205 1.64748 7.19778 1.64748 7.44186 1.89155L10.3585 4.80822C10.6026 5.0523 10.6026 5.44803 10.3585 5.6921C10.1144 5.93618 9.71872 5.93618 9.47464 5.6921L6.99992 3.21738L4.52519 5.6921C4.28112 5.93618 3.88539 5.93618 3.64131 5.6921C3.39723 5.44803 3.39723 5.0523 3.64131 4.80822L6.55798 1.89155ZM3.64131 8.30822C3.88539 8.06414 4.28112 8.06414 4.52519 8.30822L6.99992 10.7829L9.47464 8.30822C9.71872 8.06414 10.1144 8.06414 10.3585 8.30822C10.6026 8.5523 10.6026 8.94803 10.3585 9.1921L7.44186 12.1088C7.19778 12.3528 6.80205 12.3528 6.55798 12.1088L3.64131 9.1921C3.39723 8.94803 3.39723 8.5523 3.64131 8.30822Z' fill='gray'/> </svg>");
     background-repeat: no-repeat;
     background-size: 100%;
     transform: translateY(-50%);
     content: '';
     pointer-events: none;
-
-    .dialtone-theme-dark & {
-      background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMiIgaGVpZ2h0PSIxMiIgZmlsbD0ibm9uZSIgdmlld0JveD0iMCAwIDEyIDEyIj4KICA8cGF0aCBmaWxsPSIjQUFBIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiIGQ9Ik0zLjE0NiA3LjE0NmEuNS41IDAgMCAxIC43MDggMEw2IDkuMjkzbDIuMTQ2LTIuMTQ3YS41LjUgMCAxIDEgLjcwOC43MDhsLTIuNSAyLjVhLjUuNSAwIDAgMS0uNzA4IDBsLTIuNS0yLjVhLjUuNSAwIDAgMSAwLS43MDhabTIuNS01LjVhLjUuNSAwIDAgMSAuNzA4IDBsMi41IDIuNWEuNS41IDAgMSAxLS43MDguNzA4TDYgMi43MDcgMy44NTQgNC44NTRhLjUuNSAwIDAgMS0uNzA4LS43MDhsMi41LTIuNVoiIGNsaXAtcnVsZT0iZXZlbm9kZCIvPgo8L3N2Zz4K');
-    }
   }
 }
 
@@ -136,15 +132,18 @@
 
 //  $$  VALIDATION STATES
 //  ------------------------------------------------------------------------
-.d-select__input--success {
+.d-select__input--success,
+.d-select__input--success:hover {
   --input-color-border: var(--dt-inputs-color-border-success);
 }
 
-.d-select__input--error {
+.d-select__input--error,
+.d-select__input--error:hover {
   --input-color-border: var(--dt-inputs-color-border-critical);
 }
 
-.d-select__input--warning {
+.d-select__input--warning,
+.d-select__input--warning:hover {
   --input-color-border: var(--dt-inputs-color-border-warning);
 }
 

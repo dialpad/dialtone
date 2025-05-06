@@ -129,6 +129,15 @@ const isModalOpen = ref(false);
 const isPopoverOpen = ref({});
 const filteredIconsList = ref({});
 const selectedIcon = ref(undefined);
+const excludedIcons = [
+  'brand-dialpad-meetings',
+  'brand-dialpad',
+  'dialpad-ai-color-reversed',
+  'dialpad-ai-color',
+  'dialpad-ai-reversed',
+  'dialpad-ai',
+  'dialpad-logomark',
+];
 
 const searchIcon = () => {
   debounce(() => {
@@ -178,7 +187,7 @@ const hasSearchResults = computed(() => Object.keys(filteredIconsList.value).len
  * In each category, iterate over the icons and filter by the search text or bypass it if the search in empty
  * If category has icons after filter, gets added to the categories Object.
  *
- * The filteredIconsList gets updated with a freezed object to improve performance.
+ * The filteredIconsList gets updated with a frozen object to improve performance.
  * @returns void
  */
 const filterIconList = () => {
@@ -189,7 +198,7 @@ const filterIconList = () => {
       const filteredCategory = Object.entries(categories[category])
         .filter(([name, keywords]) => {
           if (!search.value) return true;
-          return regex.test(name) || regex.test(keywords.join(' '));
+          return !excludedIcons.includes(name) && (regex.test(name) || regex.test(keywords.join(' ')));
         })
         .reduce((acc, [name, _]) => Object.assign(acc, { [name]: Object.freeze(categories[category][name]) }), {});
 

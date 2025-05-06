@@ -17,15 +17,10 @@
     "semantic/cox/dark",
     "components/avatar/default",
     "components/badge/default",
-    "components/badge/deca-light",
     "components/badge/dark",
-    "components/badge/deca-dark",
     "components/button/default",
-    "components/button/deca-light",
     "components/checkbox/default",
-    "components/checkbox/deca-light",
     "components/icon/default",
-    "components/radio/default",
-    "components/radio/deca-light"
+    "components/radio/default"
   ]
 }

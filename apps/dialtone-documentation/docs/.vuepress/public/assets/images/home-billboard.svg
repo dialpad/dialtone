@@ -4,11 +4,11 @@
   fill="none"
 >
   <g filter="url(#filter0_d_1046_9081)">
-    <rect x="325" y="78" width="322" height="152" rx="4" fill="var(--dt-color-surface-primary)" />
+    <rect x="325" y="78" width="322" height="152" rx="4" fill="var(--dt-color-surface-secondary)" />
     <circle cx="353" cy="102" r="12" fill="var(--dt-color-gold-300)" />
-    <rect x="373" y="98" width="92" height="8" rx="3" fill="var(--dt-color-black-200)" />
+    <rect x="373" y="98" width="92" height="8" rx="3" fill="var(--dt-color-surface-moderate-opaque)" />
     <rect width="322" height="40" transform="translate(325 118)" fill="black" fill-opacity="0.02" />
-    <circle cx="353" cy="138" r="12" fill="var(--dt-color-purple-300)" />
+    <circle cx="353" cy="138" r="12" fill="var(--dt-color-purple-200)" />
     <rect x="373" y="134" width="127.336" height="8" rx="3" fill="var(--dt-color-black-400)" />
     <g clip-path="url(#clip0_1046_9081)">
       <rect width="34" height="32" transform="translate(529 122)" fill="var(--dt-color-brand-purple)" />
@@ -32,12 +32,12 @@
       </g>
     </g>
     <circle cx="353" cy="174" r="12" fill="var(--dt-color-red-100)" />
-    <rect x="373" y="170" width="111" height="8" rx="3" fill="var(--dt-color-black-200)" />
+    <rect x="373" y="170" width="111" height="8" rx="3" fill="var(--dt-color-surface-moderate-opaque)" />
     <circle cx="353" cy="206" r="12" fill="#FFDB80" />
-    <rect x="373" y="202" width="142" height="8" rx="3" fill="var(--dt-color-black-200)" />
+    <rect x="373" y="202" width="142" height="8" rx="3" fill="var(--dt-color-surface-moderate-opaque)" />
   </g>
   <g filter="url(#filter3_d_1046_9081)">
-    <rect x="249" y="10" width="88" height="88" rx="4" fill="var(--dt-color-surface-contrast)" />
+    <rect x="249" y="10" width="88" height="88" rx="4" fill="var(--dt-color-surface-primary-inverted)" />
     <path
       d="M306.583 31C306.261 31 306 31.2612 306 31.5833V34.9167C306 35.2388 306.261 35.5 306.583 35.5H309.917C310.239 35.5 310.5 35.2388 310.5 34.9167V31.5833C310.5 31.2612 310.239 31 309.917 31H306.583Z"
       fill="var(--dt-color-surface-primary)"
@@ -76,20 +76,20 @@
     />
   </g>
   <g filter="url(#filter4_d_1046_9081)">
-    <rect x="249" y="180" width="192" height="225" rx="8" fill="var(--dt-color-surface-info)" />
+    <rect x="249" y="180" width="192" height="225" rx="8" fill="var(--dt-color-blue-200)" />
     <g clip-path="url(#clip1_1046_9081)">
-      <rect x="281" y="200.5" width="128" height="128" rx="64" fill="var(--dt-color-blue-200)" />
+      <rect x="281" y="200.5" width="128" height="128" rx="64" fill="var(--dt-color-blue-300)" />
       <path
         d="M317.748 281.5V247.68H330.662C334.052 247.68 336.943 248.328 339.334 249.625C341.74 250.922 343.584 252.82 344.865 255.32C346.146 257.805 346.787 260.836 346.787 264.414V264.461C346.787 268.039 346.146 271.102 344.865 273.648C343.599 276.195 341.763 278.141 339.357 279.484C336.951 280.828 334.052 281.5 330.662 281.5H317.748ZM324.826 275.641H329.818C331.927 275.641 333.709 275.219 335.162 274.375C336.615 273.531 337.709 272.281 338.443 270.625C339.193 268.969 339.568 266.922 339.568 264.484V264.438C339.568 262.078 339.185 260.086 338.42 258.461C337.67 256.836 336.568 255.609 335.115 254.781C333.662 253.938 331.896 253.516 329.818 253.516H324.826V275.641ZM357.088 281.5V253.516H347.315V247.68H373.963V253.516H364.166V281.5H357.088Z"
-        fill="var(--dt-color-blue-400)"
+        fill="var(--dt-color-blue-500)"
       />
     </g>
     <g clip-path="url(#clip2_1046_9081)">
       <g filter="url(#filter5_d_1046_9081)">
-        <path d="M249 293.5L441 317.5V411H249V293.5Z" fill="var(--dt-color-surface-primary)" />
+        <path d="M249 293.5L441 317.5V411H249V293.5Z" fill="var(--dt-color-surface-secondary)" />
       </g>
-      <rect x="265" y="333" width="127.336" height="12" rx="4" fill="var(--dt-color-black-200)" />
-      <rect x="265" y="353" width="81" height="8" rx="3" fill="var(--dt-color-black-200)" />
+      <rect x="265" y="333" width="127.336" height="12" rx="4" fill="var(--dt-color-surface-moderate-opaque)" />
+      <rect x="265" y="353" width="81" height="8" rx="3" fill="var(--dt-color-surface-moderate-opaque)" />
       <g clip-path="url(#clip3_1046_9081)">
         <path
           d="M281 382.333C282.107 382.333 282.993 381.44 282.993 380.333L283 376.333C283 375.227 282.107 374.333 281 374.333C279.893 374.333 279 375.227 279 376.333V380.333C279 381.44 279.893 382.333 281 382.333ZM284.533 380.333C284.533 382.333 282.84 383.733 281 383.733C279.16 383.733 277.467 382.333 277.467 380.333H276.333C276.333 382.607 278.147 384.487 280.333 384.813V387H281.667V384.813C283.853 384.493 285.667 382.613 285.667 380.333H284.533Z"
@@ -127,7 +127,7 @@
       height="229"
       rx="10"
       transform="matrix(-1 0 0 1 445 180)"
-      stroke="var(--dt-color-brand-purple)"
+      stroke="var(--dt-color-neutral-transparent)"
       stroke-width="4"
     />
   </g>
@@ -146,12 +146,12 @@
     <rect opacity="0.4" x="28" y="144" width="130" height="8" rx="3" fill="var(--dt-color-neutral-white)" />
     <path
       d="M16 160H291V224C291 226.209 289.209 228 287 228H20C17.7909 228 16 226.209 16 224V160Z"
-      fill="var(--dt-color-surface-contrast)"
+      fill="var(--dt-color-surface-primary-inverted)"
     />
-    <circle cx="46" cy="194" r="18" fill="var(--dt-color-black-500)" />
-    <rect x="70" y="180" width="83" height="12" rx="4" fill="var(--dt-color-black-500)" />
-    <rect x="70" y="199" width="53" height="8" rx="3" fill="var(--dt-color-black-500)" />
-    <rect x="185" y="172" width="44" height="44" rx="8" fill="var(--dt-color-red-300)" />
+    <circle cx="46" cy="194" r="18" fill="var(--dt-color-foreground-tertiary)" />
+    <rect x="70" y="180" width="83" height="12" rx="4" fill="var(--dt-color-foreground-tertiary)" />
+    <rect x="70" y="199" width="53" height="8" rx="3" fill="var(--dt-color-foreground-tertiary)" />
+    <rect x="185" y="172" width="44" height="44" rx="8" fill="var(--dt-color-red-400)" />
     <path
       d="M207 189.833C205.667 189.833 204.375 190.042 203.167 190.433V193.017C203.167 193.342 202.975 193.633 202.7 193.767C201.883 194.175 201.142 194.7 200.483 195.308C200.333 195.458 200.125 195.542 199.9 195.542C199.667 195.542 199.458 195.45 199.308 195.3L197.242 193.233C197.092 193.092 197 192.883 197 192.65C197 192.417 197.092 192.208 197.242 192.058C199.783 189.65 203.217 188.167 207 188.167C210.783 188.167 214.217 189.65 216.758 192.058C216.908 192.208 217 192.417 217 192.65C217 192.883 216.908 193.092 216.758 193.242L214.692 195.308C214.542 195.458 214.333 195.55 214.1 195.55C213.875 195.55 213.667 195.458 213.517 195.317C212.858 194.7 212.108 194.183 211.292 193.775C211.017 193.642 210.825 193.358 210.825 193.025V190.442C209.625 190.042 208.333 189.833 207 189.833Z"
       fill="var(--dt-color-neutral-white)"
@@ -167,10 +167,10 @@
     />
   </g>
   <g filter="url(#filter9_d_1046_9081)">
-    <circle cx="648" cy="78" r="20" fill="var(--dt-color-green-100)" />
+    <circle cx="648" cy="78" r="20" fill="var(--dt-color-green-200)" />
     <path
       d="M648 80C649.66 80 650.99 78.66 650.99 77L651 71C651 69.34 649.66 68 648 68C646.34 68 645 69.34 645 71V77C645 78.66 646.34 80 648 80ZM653.3 77C653.3 80 650.76 82.1 648 82.1C645.24 82.1 642.7 80 642.7 77H641C641 80.41 643.72 83.23 647 83.72V87H649V83.72C652.28 83.24 655 80.42 655 77H653.3Z"
-      fill="var(--dt-color-green-400)"
+      fill="var(--dt-color-green-600)"
     />
   </g>
   <g filter="url(#filter10_d_1046_9081)">

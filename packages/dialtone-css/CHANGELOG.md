@@ -1,3 +1,24 @@
+# [8.57.0](https://github.com/dialpad/dialtone/compare/dialtone-css/v8.56.0...dialtone-css/v8.57.0) (2025-05-06)
+
+
+### Features
+
+* **Button:** DLT-2500 add unstyled variant ([#735](https://github.com/dialpad/dialtone/issues/735)) ([1b6114d](https://github.com/dialpad/dialtone/commit/1b6114dc54005ebd1a1072be1872e3e04cff989c))
+
+# [8.56.0](https://github.com/dialpad/dialtone/compare/dialtone-css/v8.55.0...dialtone-css/v8.56.0) (2025-05-05)
+
+
+### Features
+
+* **Breakpoints:** DLT-2463 migrate doc site to new breakpoints ([#739](https://github.com/dialpad/dialtone/issues/739)) ([df2f173](https://github.com/dialpad/dialtone/commit/df2f1739315e359d463ae54d2a4da34d6de546c0))
+
+# [8.55.0](https://github.com/dialpad/dialtone/compare/dialtone-css/v8.54.0...dialtone-css/v8.55.0) (2025-04-25)
+
+
+### Features
+
+* DLT-2307 dialpad rebrand 2025 ([#733](https://github.com/dialpad/dialtone/issues/733)) ([1be97a2](https://github.com/dialpad/dialtone/commit/1be97a2a6c7ac81b85e7efd3b0bef57fcf54f329))
+
 # [8.54.0](https://github.com/dialpad/dialtone/compare/dialtone-css/v8.53.0...dialtone-css/v8.54.0) (2025-04-23)
 
 

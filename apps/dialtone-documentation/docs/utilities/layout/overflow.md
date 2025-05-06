@@ -38,19 +38,23 @@ description: Utilities for controlling how an element handles content that is to
 
 The `overflow` CSS shorthand property sets the desired behavior for how content is handled when it exceeds the wrapper's bounds in both directions (x-axis and then y-axis).
 
-<table class="d-table dialtone-doc-table">
-    <thead>
-        <tr>
-            <th scope="col" class="d-w20p">Class</th>
-            <th scope="col" class="d-w20p">Output</th>
-            <th scope="col">Description</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr v-for="{ class: className, output, description } in overflow">
-            <th scope="row" class="d-code--sm d-fc-purple-400">.d-of-{{ className }}</th>
-            <td class="d-code--sm">{{ output }};</td>
-            <td>{{ description }}</td>
-        </tr>
-    </tbody>
-</table>
+<div v-dt-scrollbar class="d-hmx464 d-bar8 d-ba d-bc-subtle">
+  <div>
+    <table class="d-table dialtone-doc-table">
+        <thead class="d-bgc-primary d-ps-sticky d-zi-base1 d-t0">
+            <tr>
+                <th scope="col" class="d-p0 d-bbw0 d-w20p"><div class="d-p16 d-bb d-bc-default d-bbw1">Class</div></th>
+                <th scope="col" class="d-p0 d-bbw0 d-w20p"><div class="d-p16 d-bb d-bc-default d-bbw1">Output</div></th>
+                <th scope="col" class="d-p0 d-bbw0"><div class="d-p16 d-bb d-bc-default d-bbw1">Description</div></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr v-for="{ class: className, output, description } in overflow">
+                <th scope="row" class="d-code--sm d-docsite-code">.d-of-{{ className }}</th>
+                <td class="d-code--sm">{{ output }};</td>
+                <td>{{ description }}</td>
+            </tr>
+        </tbody>
+    </table>
+  </div>
+</div>

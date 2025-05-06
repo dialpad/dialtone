@@ -97,23 +97,21 @@ Use `d-pli-center{-n}` to align grid items along the center of their block and/o
 
 ## Classes
 
-<div class="d-h464 d-of-y-scroll d-bb d-bc-black-200">
-  <utility-class-table>
-    <template #content>
-      <tbody>
-        <div v-for="c in alignments" style="display: contents">
-          <tr v-for="i in alignments">
-            <th scope="row" class="d-code--sm d-fc-purple-400">
-              <span v-if="i !== c">.d-pli-{{ c }}-{{ i }}</span>
-              <span v-else>.d-pli-{{ c }}</span>
-            </th>
-            <td class="d-code--sm">
-              <span v-if="i !== c">place-items: {{ c }} {{ i }} !important;</span>
-              <span v-else>place-items: {{ c }} !important;</span>
-            </td>
-          </tr>
-        </div>
-      </tbody>
-    </template>
-  </utility-class-table>
-</div>
+<utility-class-table>
+  <template #content>
+    <tbody>
+      <div v-for="c in alignments" style="display: contents">
+        <tr v-for="i in alignments">
+          <th scope="row" class="d-code--sm d-docsite-code">
+            <span v-if="i !== c">.d-pli-{{ c }}-{{ i }}</span>
+            <span v-else>.d-pli-{{ c }}</span>
+          </th>
+          <td class="d-code--sm">
+            <span v-if="i !== c">place-items: {{ c }} {{ i }} !important;</span>
+            <span v-else>place-items: {{ c }} !important;</span>
+          </td>
+        </tr>
+      </div>
+    </tbody>
+  </template>
+</utility-class-table>

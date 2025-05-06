@@ -227,12 +227,18 @@
       "dialbot": [],
       "dialpad-ai-color-reversed": [],
       "dialpad-ai-color": [],
+      "dialpad-logo": [],
       "dialpad-sparkle": [
         "ai",
         "sparkle"
       ],
       "diners-club": [],
       "discover": [],
+      "dpm-logo": [
+        "dialpad",
+        "meetings",
+        "logo"
+      ],
       "evernote": [],
       "facebook": [],
       "freshsales-crm": [],
@@ -328,6 +334,18 @@
         "voice"
       ],
       "dialpad-logomark": [],
+      "dialpad-star-reversed": [
+        "dp",
+        "brand",
+        "sparkle",
+        "star"
+      ],
+      "dialpad-star": [
+        "star",
+        "dp",
+        "sparkle",
+        "brand"
+      ],
       "dialpad-wfm": [
         "workforce",
         "surfboard",
@@ -344,12 +362,6 @@
       ]
     },
     "communication": {
-      "Simultaneous-ring": [
-        "simultaneous",
-        "multi-ring",
-        "multiple calls",
-        "phone"
-      ],
       "call-abandoned": [
         "phone",
         "missed",
@@ -464,6 +476,11 @@
         "list",
         "speed"
       ],
+      "quick-reply": [
+        "message",
+        "chat",
+        "reply"
+      ],
       "reply-all": [
         "email"
       ],
@@ -474,6 +491,12 @@
         "paper airplane",
         "paper aeroplane",
         "submit"
+      ],
+      "simultaneous-ring": [
+        "simultaneous",
+        "multi-ring",
+        "multiple calls",
+        "phone"
       ],
       "thread": [
         "conversation",
