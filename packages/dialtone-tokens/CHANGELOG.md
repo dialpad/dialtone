@@ -1,3 +1,10 @@
+# [1.43.0](https://github.com/dialpad/dialtone/compare/dialtone-tokens/v1.42.1...dialtone-tokens/v1.43.0) (2025-05-06)
+
+
+### Features
+
+* **Design Token:** NO-JIRA update brand gradient ([#745](https://github.com/dialpad/dialtone/issues/745)) ([b3e927c](https://github.com/dialpad/dialtone/commit/b3e927c3ebbd2bbc3d0572645f02e521a2b04d91))
+
 ## [1.42.1](https://github.com/dialpad/dialtone/compare/dialtone-tokens/v1.42.0...dialtone-tokens/v1.42.1) (2025-05-05)
 
 
