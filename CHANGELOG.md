@@ -1,3 +1,11 @@
+# [9.117.0](https://github.com/dialpad/dialtone/compare/dialtone/v9.116.0...dialtone/v9.117.0) (2025-05-06)
+
+
+### Features
+
+* **Design Token:** NO-JIRA update brand gradient ([#745](https://github.com/dialpad/dialtone/issues/745)) ([b3e927c](https://github.com/dialpad/dialtone/commit/b3e927c3ebbd2bbc3d0572645f02e521a2b04d91))
+* **Editor:** DP-135938 update quick reply icon ([#744](https://github.com/dialpad/dialtone/issues/744)) ([c5bb007](https://github.com/dialpad/dialtone/commit/c5bb007f3a937ce1e6fa0dde21fe118d6452f70d))
+
 # [9.116.0](https://github.com/dialpad/dialtone/compare/dialtone/v9.115.1...dialtone/v9.116.0) (2025-05-06)
 
 

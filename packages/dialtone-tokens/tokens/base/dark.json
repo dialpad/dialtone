@@ -652,7 +652,7 @@
     },
     "gradient": {
       "gold-red-magenta-purple": {
-        "value": "linear-gradient(132deg, #FE8819 0%, {color.brand.red} 30%, {color.brand.magenta} 75%, #AE3ADF 100%)",
+        "value": "linear-gradient(135deg, #471571 0%, #551B84 3.08%, #7C229E 14.48%, #9024A4 23.67%, #B02290 35.5%, #D32B86 48.3%, #E92F6F 60.29%, #F6484F 74%, #FB7328 93%, #F3960F 98%, #F3960F 100%)",
         "type": "color"
       }
     }
