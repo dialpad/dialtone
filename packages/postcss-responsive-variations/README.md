@@ -15,25 +15,25 @@
   .background-color: red;
 }
 
-@media (max-width: 480px){
+@media (min-width: 480px){
   .sm\:foo {
     .background-color: red;
   }
 }
 
-@media (max-width: 640px){
+@media (min-width: 640px){
   .md\:foo {
   .background-color: red;
   }
 }
 
-@media (max-width: 980px){
+@media (min-width: 980px){
   .lg\:foo {
   .background-color: red;
   }
 }
 
-@media (max-width: 1264px){
+@media (min-width: 1264px){
   .xl\:foo {
   .background-color: red;
   }
@@ -66,14 +66,14 @@ module.exports = {
 }
 ```
 
-**Step 4:** Create the responsive breakpoints and the classes you need and pass it to the plugin argument.
+**Step 4:** Create the responsive breakpoints and the classes you need and pass it to the plugin argument. Note: if you don't pass the breakpoints, the plugin will use the default ones, which are the ones shown in this example.
 
 ```diff
 +const breakpoints = [
-+  { prefix: 'sm\\:', mediaQuery: '(max-width: 480px)' },
-+  { prefix: 'md\\:', mediaQuery: '(max-width: 640px)' },
-+  { prefix: 'lg\\:', mediaQuery: '(max-width: 980px)' },
-+  { prefix: 'xl\\:', mediaQuery: '(max-width: 1264px)' },
++  { prefix: 'sm\\:', mediaQuery: '(min-width: 480px)' },
++  { prefix: 'md\\:', mediaQuery: '(min-width: 640px)' },
++  { prefix: 'lg\\:', mediaQuery: '(min-width: 980px)' },
++  { prefix: 'xl\\:', mediaQuery: '(min-width: 1264px)' },
 +];
 
 +const classes = [
