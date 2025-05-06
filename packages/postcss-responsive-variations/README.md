@@ -48,7 +48,7 @@
 npm install --save-dev postcss @dialpad/postcss-responsive-variations
 ```
 
-**Step 2:** Check you project for existing PostCSS config: `postcss.config.js`
+**Step 2:** Check your project for existing PostCSS config: `postcss.config.js`
 in the project root, `"postcss"` section in `package.json`
 or `postcss` in bundle config.
 
@@ -66,7 +66,7 @@ module.exports = {
 }
 ```
 
-**Step 4:** Create the responsive breakpoints and the classes you need and pass it to the plugin argument. Note: if you don't pass the breakpoints, the plugin will use the default ones, which are the ones shown in this example.
+**Step 4:** Create the responsive breakpoints and the classes you need and pass them to the plugin argument. Note: if you don't pass the breakpoints, the plugin will use the default ones, which are the ones shown in this example.
 
 ```diff
 +const breakpoints = [
