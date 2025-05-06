@@ -1,3 +1,10 @@
+# [2.188.0](https://github.com/dialpad/dialtone/compare/dialtone-vue2/v2.187.0...dialtone-vue2/v2.188.0) (2025-05-06)
+
+
+### Features
+
+* **Button:** DLT-2500 add unstyled variant ([#735](https://github.com/dialpad/dialtone/issues/735)) ([1b6114d](https://github.com/dialpad/dialtone/commit/1b6114dc54005ebd1a1072be1872e3e04cff989c))
+
 # [2.187.0](https://github.com/dialpad/dialtone/compare/dialtone-vue2/v2.186.0...dialtone-vue2/v2.187.0) (2025-05-05)
 
 
