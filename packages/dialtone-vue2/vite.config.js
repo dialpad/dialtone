@@ -49,7 +49,6 @@ export default defineConfig({
         /^emoji-toolkit/,
         /^overlayscrollbars/,
         /^prosemirror/,
-        '@dialpad/i18n-services',
         'regex-combined-emojis',
         'deep-equal',
         'tippy.js',
@@ -75,7 +74,6 @@ export default defineConfig({
 
         // Dependencies
         'node_modules/@tiptap/vue-2': './node_modules/@tiptap/vue-2/dist/index.js',
-        'node_modules/@dialpad/i18n-vue2': './node_modules/@dialpad/i18n-vue2/dist/i18n-vue2.js',
         'node_modules/@linusborg/vue-simple-portal': './node_modules/@linusborg/vue-simple-portal/dist/index.esm.js',
 
         // Localization
