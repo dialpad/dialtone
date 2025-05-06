@@ -43,6 +43,9 @@
     "style-dictionary": "^4.1.0",
     "tsx": "^4.19.0"
   },
+  "peerDependencies": {
+    "eslint": "^8.55.0"
+  },
   "contributors": [
     {
       "name": "Brad Paugh",
