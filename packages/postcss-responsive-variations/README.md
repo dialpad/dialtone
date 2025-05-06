@@ -48,14 +48,14 @@
 npm install --save-dev postcss @dialpad/postcss-responsive-variations
 ```
 
-**Step 2:** Check you project for existed PostCSS config: `postcss.config.js`
+**Step 2:** Check you project for existing PostCSS config: `postcss.config.js`
 in the project root, `"postcss"` section in `package.json`
 or `postcss` in bundle config.
 
-If you do not use PostCSS, add it according to [official docs](https://github.com/postcss/postcss#usage)
+If you do not use PostCSS, add it according to the [official docs](https://github.com/postcss/postcss#usage)
 and set this plugin in settings.
 
-**Step 3:** Add the plugin to plugins list:
+**Step 3:** Add the plugin to the plugins list:
 
 ```diff
 module.exports = {
