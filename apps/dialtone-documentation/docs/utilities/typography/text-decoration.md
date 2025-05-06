@@ -101,7 +101,7 @@ Use `fv:d-td-{n}` to change an element's :focus-visible state text decoration [o
   <template #content>
     <tbody>
       <tr v-for=" i in decoration">
-        <th scope="row" class="d-code--sm d-fc-purple-400">.d-td-{{ i }}</th>
+        <th scope="row" class="d-code--sm d-docsite-code">.d-td-{{ i }}</th>
         <td class="d-code--sm">
           <span v-if="i === 'dotted'">text-decoration: underline {{ i }} !important</span>
           <span v-else>text-decoration: {{ i }} !important</span>

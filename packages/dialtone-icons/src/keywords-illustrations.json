@@ -1,6 +1,7 @@
 {
   "categories": {
     "spot-illustrations": {
+      "access-denied": [],
       "atomic-pathway": [
         "atomic",
         "space"
@@ -13,6 +14,7 @@
         "blank",
         "space"
       ],
+      "browser-table-graph": [],
       "dialpad-logo-black": [
         "logo",
         "brand",
@@ -89,49 +91,27 @@
         "solid",
         "marketing"
       ],
-      "dialpad-wordmark-black": [
-        "logo",
-        "brand",
-        "branding",
-        "dialpad",
-        "word",
-        "marketing"
-      ],
-      "dialpad-wordmark-inverted": [
-        "logo",
-        "brand",
-        "branding",
-        "dialpad",
-        "word",
-        "marketing"
-      ],
-      "dialpad-wordmark-white": [
-        "logo",
-        "brand",
-        "branding",
-        "dialpad",
-        "word",
-        "marketing"
-      ],
-      "dialpad-wordmark": [
-        "logo",
-        "brand",
-        "branding",
-        "dialpad",
-        "word",
-        "marketing"
-      ],
+      "file-upload": [],
+      "login-error": [],
+      "magnifier": [],
+      "mic-detected": [],
       "mind": [
         "mind"
       ],
+      "new-meeting": [],
+      "new-message": [],
+      "nothing-to-see-here": [],
       "orbital-harmony": [
         "orbital",
         "harmony"
       ],
+      "publish-graphic": [],
+      "something-went-wrong": [],
       "vector-vortex": [
         "vector",
         "vortex"
-      ]
+      ],
+      "wireless-screenshare": []
     }
   }
 }

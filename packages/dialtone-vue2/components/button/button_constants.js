@@ -1,3 +1,5 @@
+export const BUTTON_UNSTYLED_CLASS = 'd-btn--unstyled';
+
 export const BUTTON_SIZE_MODIFIERS = {
   xs: 'd-btn--xs',
   sm: 'd-btn--sm',
@@ -10,13 +12,15 @@ export const BUTTON_KIND_MODIFIERS = {
   default: '',
   muted: 'd-btn--muted',
   danger: 'd-btn--danger',
+  positive: 'd-btn--positive',
   inverted: 'd-btn--inverted',
+  unstyled: 'd-btn--unstyled',
 };
 
 export const BUTTON_IMPORTANCE_MODIFIERS = {
   clear: '',
-  primary: 'd-btn--primary',
   outlined: 'd-btn--outlined',
+  primary: 'd-btn--primary',
 };
 
 export const BUTTON_TYPES = ['submit', 'reset', 'button'];
@@ -76,6 +80,7 @@ export default {
   BUTTON_KIND_MODIFIERS,
   BUTTON_IMPORTANCE_MODIFIERS,
   BUTTON_TYPES,
+  BUTTON_UNSTYLED_CLASS,
   ICON_POSITION_MODIFIERS,
   INVALID_COMBINATION,
   BUTTON_ICON_SIZES,

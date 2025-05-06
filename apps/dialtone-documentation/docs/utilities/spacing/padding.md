@@ -59,55 +59,53 @@ description: Utilities for setting an element's interior spacing between child e
 
 Padding can be added to an element by using a utility class (i.e. `.d-p[#]`) or by using a directional class (i.e. `.d-p{t|r|b|l|y|x}[#]`).
 
-<div class="d-h464 d-of-y-scroll d-bb d-bc-black-200">
-  <utility-class-table>
-    <template #content>
-      <!-- Positive paddings -->
-      <tbody v-for="i in directions">
-          <tr v-for="{ value: val, output } in values">
-              <th scope="row" class="d-code--sm d-fc-purple-400">
-                <span v-if="i !== 'All'">.d-p{{ i[0] }}{{ val }}</span>
-                <span v-else>.d-p{{ val }}</span>
-              </th>
-              <td class="d-code--sm">
-                  <span v-if="i == 'y'">
-                    padding-top: {{ output }} !important;<br/>
-                    padding-bottom: {{ output }} !important;
-                  </span>
-                  <span v-else-if="i == 'x'">
-                    padding-right: {{ output }} !important;<br/>
-                    padding-left: {{ output }} !important;
-                  </span>
-                  <span v-else>
-                    <span v-if="i !== 'All'">padding-{{ i }}: {{ output }} !important; </span>
-                    <span v-else>padding: {{ output }} !important</span>
-                  </span>
-              </td>
-          </tr>
-      </tbody>
-      <!-- Unset paddings -->
-      <tbody>
-        <tr v-for="i in directions">
-          <th scope="row" class="d-code--sm d-fc-purple-400">
-            <span v-if="i !== 'All'">.d-p{{ i[0] }}-unset</span>
-            <span v-else>.d-p-unset</span>
-          </th>
-          <td class="d-code--sm">
-            <span v-if="i == 'y'">
-              padding-top: unset !important;<br/>
-              padding-bottom: unset !important;
-            </span>
-            <span v-else-if="i == 'x'">
-              padding-right: unset !important;<br/>
-              padding-left: unset !important;
-            </span>
-            <span v-else>
-              <span v-if="i !== 'All'">padding-{{ i }}: unset !important; </span>
-              <span v-else>padding: unset !important</span>
-            </span>
-          </td>
+<utility-class-table>
+  <template #content>
+    <!-- Positive paddings -->
+    <tbody v-for="i in directions">
+        <tr v-for="{ value: val, output } in values">
+            <th scope="row" class="d-code--sm d-docsite-code">
+              <span v-if="i !== 'All'">.d-p{{ i[0] }}{{ val }}</span>
+              <span v-else>.d-p{{ val }}</span>
+            </th>
+            <td class="d-code--sm">
+                <span v-if="i == 'y'">
+                  padding-top: {{ output }} !important;<br/>
+                  padding-bottom: {{ output }} !important;
+                </span>
+                <span v-else-if="i == 'x'">
+                  padding-right: {{ output }} !important;<br/>
+                  padding-left: {{ output }} !important;
+                </span>
+                <span v-else>
+                  <span v-if="i !== 'All'">padding-{{ i }}: {{ output }} !important; </span>
+                  <span v-else>padding: {{ output }} !important</span>
+                </span>
+            </td>
         </tr>
-      </tbody>
-    </template>
-  </utility-class-table>
-</div>
+    </tbody>
+    <!-- Unset paddings -->
+    <tbody>
+      <tr v-for="i in directions">
+        <th scope="row" class="d-code--sm d-docsite-code">
+          <span v-if="i !== 'All'">.d-p{{ i[0] }}-unset</span>
+          <span v-else>.d-p-unset</span>
+        </th>
+        <td class="d-code--sm">
+          <span v-if="i == 'y'">
+            padding-top: unset !important;<br/>
+            padding-bottom: unset !important;
+          </span>
+          <span v-else-if="i == 'x'">
+            padding-right: unset !important;<br/>
+            padding-left: unset !important;
+          </span>
+          <span v-else>
+            <span v-if="i !== 'All'">padding-{{ i }}: unset !important; </span>
+            <span v-else>padding: unset !important</span>
+          </span>
+        </td>
+      </tr>
+    </tbody>
+  </template>
+</utility-class-table>

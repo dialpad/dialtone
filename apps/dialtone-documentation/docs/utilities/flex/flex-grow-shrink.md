@@ -8,27 +8,31 @@ description: Utilities for setting an object's flex, grow, and shrink flex prope
 The `flex` property is a shorthand property for `flex-grow`, `flex-shrink`, and `flex-basis` properties. You can also
 control the grow and shrink flex values separately with their own utility classes.
 
-<table class="d-table dialtone-doc-table">
-  <thead>
-    <tr>
-      <th scope="col" class="d-w20p">Class</th>
-      <th scope="col" class="d-w30p">Output</th>
-      <th scope="col">Description</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr v-for="v in properties[0].values">
-      <th scope="row" class="d-code--sm d-fc-purple-400">.d-fl{{ v }}</th>
-      <td class="d-code--sm">flex: {{ v }} auto !important;</td>
-      <td>{{ properties[0].description }} {{ v }}.</td>
-    </tr>
-    <tr>
-      <th scope="row" class="d-code--sm d-fc-purple-400">.d-fl-unset</th>
-      <td class="d-code--sm">flex: unset;</td>
-      <td>Resets the flex value to the initial value (0 1 auto).</td>
-    </tr>
-  </tbody>
-</table>
+<div v-dt-scrollbar class="d-hmx464 d-bar8 d-ba d-bc-subtle d-mb16">
+  <div>
+    <table class="d-table dialtone-doc-table">
+      <thead class="d-bgc-primary d-ps-sticky d-zi-base1 d-t0">
+        <tr>
+          <th scope="col" class="d-p0 d-bbw0 d-w20p"><div class="d-p16 d-bb d-bc-default d-bbw1">Class</div></th>
+          <th scope="col" class="d-p0 d-bbw0 d-w30p"><div class="d-p16 d-bb d-bc-default d-bbw1">Output</div></th>
+          <th scope="col" class="d-p0 d-bbw0"><div class="d-p16 d-bb d-bc-default d-bbw1">Description</div></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr v-for="v in properties[0].values">
+          <th scope="row" class="d-code--sm d-docsite-code">.d-fl{{ v }}</th>
+          <td class="d-code--sm">flex: {{ v }} auto !important;</td>
+          <td>{{ properties[0].description }} {{ v }}.</td>
+        </tr>
+        <tr>
+          <th scope="row" class="d-code--sm d-docsite-code">.d-fl-unset</th>
+          <td class="d-code--sm">flex: unset;</td>
+          <td>Resets the flex value to the initial value (0 1 auto).</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
 
 <code-well-header class="d-fl-center d-fd-column d-p24 d-bgc-magenta-100 d-bgo50 d-w100p d-hmn216 d-of-auto" custom>
   <div class="d-d-flex d-w100p d-bar8 d-bgc-magenta-100">
@@ -50,27 +54,31 @@ control the grow and shrink flex values separately with their own utility classe
 
 The `flex-grow` sets the flex container’s grow factor relative to the parent's main size. The default value is 0.
 
-<table class="d-table dialtone-doc-table">
-  <thead>
-    <tr>
-      <th scope="col" class="d-w20p">Class</th>
-      <th scope="col" class="d-w30p">Output</th>
-      <th scope="col">Description</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr v-for="v in properties[1].values">
-      <th scope="row" class="d-code--sm d-fc-purple-400">.d-{{ properties[1].class }}{{ v }}</th>
-      <td class="d-code--sm">flex-grow: {{ v }} !important;</td>
-      <td>{{ properties[1].description }} {{ v }}.</td>
-    </tr>
-    <tr>
-      <th scope="row" class="d-code--sm d-fc-purple-400">.d-fl-grow-unset</th>
-      <td class="d-code--sm">flex-grow: unset !important;</td>
-      <td>Resets the flex-grow value to the initial value (0).</td>
-    </tr>
-  </tbody>
-</table>
+<div v-dt-scrollbar class="d-hmx464 d-bar8 d-ba d-bc-subtle d-mb16">
+  <div>
+    <table class="d-table dialtone-doc-table">
+      <thead class="d-bgc-primary d-ps-sticky d-zi-base1 d-t0">
+        <tr>
+          <th scope="col" class="d-p0 d-bbw0 d-w20p"><div class="d-p16 d-bb d-bc-default d-bbw1">Class</div></th>
+          <th scope="col" class="d-p0 d-bbw0 d-w30p"><div class="d-p16 d-bb d-bc-default d-bbw1">Output</div></th>
+          <th scope="col" class="d-p0 d-bbw0"><div class="d-p16 d-bb d-bc-default d-bbw1">Description</div></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr v-for="v in properties[1].values">
+          <th scope="row" class="d-code--sm d-docsite-code">.d-{{ properties[1].class }}{{ v }}</th>
+          <td class="d-code--sm">flex-grow: {{ v }} !important;</td>
+          <td>{{ properties[1].description }} {{ v }}.</td>
+        </tr>
+        <tr>
+          <th scope="row" class="d-code--sm d-docsite-code">.d-fl-grow-unset</th>
+          <td class="d-code--sm">flex-grow: unset !important;</td>
+          <td>Resets the flex-grow value to the initial value (0).</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
 
 <code-well-header class="d-fl-center d-fd-column d-p24 d-bgc-purple-100 d-bgo50 d-w100p d-hmn216 d-of-auto" custom>
   <div class="d-d-flex d-w100p d-bar8 d-bgc-purple-100">
@@ -92,27 +100,31 @@ The `flex-grow` sets the flex container’s grow factor relative to the parent's
 
 The `flex-shrink` sets the flex container’s shrink factor relative to the parent's main size. The default value is 1.
 
-<table class="d-table dialtone-doc-table">
-  <thead>
-    <tr>
-      <th scope="col" class="d-w20p">Class</th>
-      <th scope="col" class="d-w30p">Output</th>
-      <th scope="col">Description</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr v-for="v in properties[2].values">
-      <th scope="row" class="d-code--sm d-fc-purple-400">.d-{{ properties[2].class }}{{ v }}</th>
-      <td class="d-code--sm">flex-shrink: {{ v }} !important;</td>
-      <td>{{ properties[2].description }} {{ v }}.</td>
-    </tr>
-    <tr>
-      <th scope="row" class="d-code--sm d-fc-purple-400">.d-fl-shrink-unset</th>
-      <td class="d-code--sm">flex-shrink: unset !important;</td>
-      <td>Resets the flex-shrink value to the initial value (1).</td>
-    </tr>
-  </tbody>
-</table>
+<div v-dt-scrollbar class="d-hmx464 d-bar8 d-ba d-bc-subtle d-mb16">
+  <div>
+    <table class="d-table dialtone-doc-table">
+      <thead class="d-bgc-primary d-ps-sticky d-zi-base1 d-t0">
+        <tr>
+          <th scope="col" class="d-p0 d-bbw0 d-w20p"><div class="d-p16 d-bb d-bc-default d-bbw1">Class</div></th>
+          <th scope="col" class="d-p0 d-bbw0 d-w30p"><div class="d-p16 d-bb d-bc-default d-bbw1">Output</div></th>
+          <th scope="col" class="d-p0 d-bbw0"><div class="d-p16 d-bb d-bc-default d-bbw1">Description</div></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr v-for="v in properties[2].values">
+          <th scope="row" class="d-code--sm d-docsite-code">.d-{{ properties[2].class }}{{ v }}</th>
+          <td class="d-code--sm">flex-shrink: {{ v }} !important;</td>
+          <td>{{ properties[2].description }} {{ v }}.</td>
+        </tr>
+        <tr>
+          <th scope="row" class="d-code--sm d-docsite-code">.d-fl-shrink-unset</th>
+          <td class="d-code--sm">flex-shrink: unset !important;</td>
+          <td>Resets the flex-shrink value to the initial value (1).</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
 
 <code-well-header class="d-fl-center d-fd-column d-p24 d-bgc-red-100 d-bgo50 d-w100p d-hmn216 d-of-auto" custom>
   <div class="d-d-flex d-w5 d-bar8 d-bgc-red-100">

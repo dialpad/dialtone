@@ -79,7 +79,7 @@
   .d-avatar {
     --avatar-size-shape: var(--dt-size-550);
 
-    margin: var(--dt-space-200-negative) var(--dt-space-300) var(--dt-space-200-negative) var(--dt-space-350-negative);
+    margin: var(--dt-space-200-negative) var(--dt-space-350) var(--dt-space-200-negative) var(--dt-space-350-negative);
   }
 }
 
@@ -100,23 +100,23 @@
   }
 
   &:hover:not([disabled]) {
-    --button-color-background: hsla(var(--dt-color-black-800-hsl) ~' / ' 15%);
+    --button-color-background: var(--dt-action-color-background-muted-hover);
   }
 
   &:active:not([disabled]),
   &.d-btn--active:not([disabled]),
   &.d-btn--active:active:not([disabled]) {
-    --button-color-background: hsla(var(--dt-color-black-800-hsl) ~' / ' 25%);
+    --button-color-background: var(--dt-action-color-background-muted-active);
   }
 }
 
 .d-chip__icon {
-  padding-right: var(--dt-space-300);
-  line-height: 0;
+  padding-right: var(--dt-space-350);
+  line-height: 1;
 }
 
 .d-chip__label--active {
-  background-color: var(--dt-color-black-400);
+  background-color: var(--dt-color-surface-bold-opaque);
 }
 
 .d-chip__text {
@@ -146,7 +146,7 @@
   .d-avatar {
     --avatar-size-shape: var(--dt-size-500);
 
-    margin-right: var(--dt-space-300);
+    margin-right: var(--dt-space-350);
     margin-left: var(--dt-space-300-negative);
   }
 }

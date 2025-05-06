@@ -4,9 +4,9 @@
  */
 'use strict';
 
-//------------------------------------------------------------------------------
+// ------------------------------------------------------------------------------
 // Rule Definition
-//------------------------------------------------------------------------------
+// ------------------------------------------------------------------------------
 
 module.exports = {
   meta: {
@@ -25,7 +25,7 @@ module.exports = {
     },
   },
 
-  create(context) {
+  create (context) {
     const deprecatedDirectives = [
       {
         directiveName: 'tooltip',
@@ -34,12 +34,13 @@ module.exports = {
       },
     ];
 
-    return context.parserServices.defineTemplateBodyVisitor({
-      VAttribute(node) {
+    const sourceCode = context.sourceCode ?? context.getSourceCode();
+    return sourceCode.parserServices.defineTemplateBodyVisitor({
+      VAttribute (node) {
         deprecatedDirectives.forEach((item) => {
           if (node.directive && node.key.name.name === item.directiveName) {
             context.report({
-              node: node,
+              node,
               messageId: 'deprecatedDirective',
               data: {
                 directiveName: item.directiveName,

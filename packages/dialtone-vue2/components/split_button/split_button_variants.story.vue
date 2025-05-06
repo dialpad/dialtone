@@ -11,7 +11,7 @@
             &nbsp;
           </td>
           <th
-            v-for="importance in importances"
+            v-for="importance in importanceList"
             :key="importance"
             class="d-ta-center d-br d-bc-default"
           >
@@ -36,7 +36,7 @@
             />
           </th>
           <td
-            v-for="importance in importances"
+            v-for="importance in importanceList"
             :key="`${kind}-${importance}`"
             class="d-ta-center d-br"
             :class="[kind === 'inverted' ? 'd-bc-default-inverted' : 'd-bc-default']"
@@ -90,7 +90,7 @@
         <h2>Sizes</h2>
         <dt-stack gap="500">
           <div
-            v-for="size in Object.keys(sizes)"
+            v-for="size in sizes"
             :key="size"
             class="d-ta-center"
           >
@@ -101,7 +101,7 @@
             >
               <span
                 class="d-tt-capitalize"
-                v-text="sizes[size]"
+                v-text="sizeNameMapping[size]"
               />
             </dt-split-button>
           </div>
@@ -147,7 +147,7 @@
         <h2>With custom omega icon</h2>
         <dt-stack gap="500">
           <div
-            v-for="size in Object.keys(sizes)"
+            v-for="size in sizes"
             :key="size"
             class="d-ta-center"
           >
@@ -248,7 +248,7 @@
         <h2>Icon only</h2>
         <dt-stack gap="500">
           <div
-            v-for="size in Object.keys(sizes)"
+            v-for="size in sizes"
             :key="`icon-only-${size}`"
             class="d-ta-center"
           >
@@ -305,6 +305,11 @@ import { DtStack } from '@/components/stack';
 import { DtIcon } from '@/components/icon';
 import { DtListItem } from '@/components/list_item';
 import { DtPopover } from '@/components/popover';
+import {
+  BUTTON_IMPORTANCE_MODIFIERS,
+  BUTTON_KIND_MODIFIERS,
+  BUTTON_SIZE_MODIFIERS, ICON_POSITION_MODIFIERS,
+} from '@/components/button/button_constants.js';
 
 export default {
   name: 'DtSplitButtonVariants',
@@ -318,10 +323,18 @@ export default {
 
   data () {
     return {
-      sizes: { xs: 'extra small', sm: 'small', md: 'medium', lg: 'large', xl: 'extra large' },
-      kinds: ['default', 'danger', 'inverted', 'muted'],
-      importances: ['clear', 'outlined', 'primary'],
-      iconPositions: ['left', 'right', 'top', 'bottom'],
+      sizeNameMapping: {
+        xs: 'Extra small',
+        sm: 'Small',
+        md: 'Medium',
+        lg: 'Large',
+        xl: 'Extra large',
+      },
+
+      sizes: Object.keys(BUTTON_SIZE_MODIFIERS),
+      kinds: Object.keys(BUTTON_KIND_MODIFIERS),
+      importanceList: Object.keys(BUTTON_IMPORTANCE_MODIFIERS),
+      iconPositions: Object.keys(ICON_POSITION_MODIFIERS),
       listItems: [
         { id: 1, text: 'First item' },
         { id: 2, text: 'Second item' },

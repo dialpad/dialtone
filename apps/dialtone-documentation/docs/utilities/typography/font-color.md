@@ -1,5 +1,5 @@
 ---
-title: Font Colors
+title: Font Color
 description: Utilities to change an element's font-color.
 ---
 
@@ -109,89 +109,25 @@ Use `d:d-fc-{color}` to set a different text color when the user prefers dark mo
 
 ## Classes
 
-<div class="d-h464 d-of-y-scroll d-bb d-bc-black-200">
-  <utility-class-table>
-    <template #content>
-      <tbody>
-        <!-- Current Color -->
-        <tr>
-          <th scope="row" class="d-code--sm d-fc-purple-400">.d-fc-current</th>
-          <td>
-            <div class="d-d-flex d-jc-space-between d-ai-center">
-              <div class="d-fl1 d-code--sm">
-                color: currentColor !important;
-              </div>
-              <div class="d-fl0 d-fc-current d-fs-300 d-lh4">
-                Aa
-              </div>
-            </div>
-          </td>
-        </tr>
-        <!-- Transparent -->
-        <tr>
-          <th scope="row" class="d-code--sm d-fc-purple-400">.d-fc-transparent</th>
-          <td>
-            <div class="d-d-flex d-jc-space-between d-ai-center">
-              <div class="d-fl1 d-code--sm">
-                color: transparent !important;
-              </div>
-              <div class="d-fl0 d-fc-transparent d-fs-300 d-lh4">
-                Aa
-              </div>
-            </div>
-          </td>
-        </tr>
-        <!-- Unset Color -->
-        <tr>
-          <th scope="row" class="d-code--sm d-fc-purple-400">.d-fc-unset</th>
-          <td>
-            <div class="d-d-flex d-jc-space-between d-ai-center">
-              <div class="d-fl1 d-code--sm">
-                color: unset !important;
-              </div>
-              <div class="d-fl0 d-fc-unset d-fs-300 d-lh4">
-                Aa
-              </div>
-            </div>
-          </td>
-        </tr>
-        <!-- Semantic Colors -->
-        <tr v-for="{ var: color, output } in fontColorVars">
-          <th scope="row" class="d-code--sm d-fc-purple-400">.d-fc-{{ color }}</th>
-          <td>
-            <div class="d-d-flex d-jc-space-between d-ai-center">
-              <div class="d-fl1 d-code--sm">
-                --fco: 100%;<br/>
-                color: hsla(var(--{{ output }}-h) var(--{{ output }}-s) var(--{{ output }}-l) / var(--fco)) !important;
-              </div>
-              <div class="d-fl0 d-ml16 d-p4 d-fs-300 d-lh4" :class="`d-fc-${color}`">
-                Aa
-              </div>
-            </div>
-          </td>
-        </tr>
-      </tbody>
-      <tbody v-for="{ color, stops } in baseColors.lightMode">
-        <tr v-for="{ stop } in stops">
-          <th scope="row" class="d-code--sm d-fc-purple-400">.d-fc-{{ color }}-{{ stop }}</th>
-          <td>
-            <div class="d-d-flex d-jc-space-between d-ai-center">
-              <div class="d-fl1 d-code--sm">
-                  --fco: 100%;<br/>
-                  color: hsla(var(--{{ color }}-{{ stop }}-h) var(--{{ color }}-{{ stop }}-s) var(--{{ color }}-{{ stop }}-l) / var(--fco)) !important;
-              </div>
-              <div class="d-fl0 d-ml16 d-p4 d-fs-300 d-lh4" :class="`d-fc-${color}-${stop}`">
-                  Aa
-              </div>
-            </div>
-          </td>
-        </tr>
-      </tbody>
-    </template>
-  </utility-class-table>
-</div>
+<new-utility-class-table :classes="colors">
+  <template #example="{ className }">
+    <div
+      class="d-fl-shrink0 d-h42 d-w42 d-bar-circle d-ba d-bc-moderate d-d-flex d-ai-center d-jc-center"
+      :class="[
+        {'d-bgc-primary': !className.endsWith('inverted')},
+        {'d-bgc-contrast': className.endsWith('inverted')},
+        className
+      ]"
+    >
+      <span>Aa</span>
+    </div>
+  </template>
+</new-utility-class-table>
 
 <script setup>
-  import { fontColorVars } from '@data/type.json';
-  import { base as baseColors } from '@data/colors.json';
+  import { inject } from 'vue';
+  import { extractUtilityClasses } from '@utilities';
+
+  const utilityClassDocs = inject('utilityClassDocs');
+  const colors = extractUtilityClasses(utilityClassDocs, 'd-fc-');
 </script>

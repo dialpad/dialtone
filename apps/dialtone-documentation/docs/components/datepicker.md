@@ -413,7 +413,7 @@ The following functions are available for date formatting.
 
 <div class="d-bgc-secondary d-bar8 d-p16">
   <dt-stack
-    :direction="{ 'default': 'row', 'md': 'column' }"
+    :direction="{ 'default': 'column', 'md': 'row' }"
     gap="600"
     class="d-ai-flex-start"
   >
