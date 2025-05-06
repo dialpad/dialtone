@@ -1,3 +1,10 @@
+# [8.57.0](https://github.com/dialpad/dialtone/compare/dialtone-css/v8.56.0...dialtone-css/v8.57.0) (2025-05-06)
+
+
+### Features
+
+* **Button:** DLT-2500 add unstyled variant ([#735](https://github.com/dialpad/dialtone/issues/735)) ([1b6114d](https://github.com/dialpad/dialtone/commit/1b6114dc54005ebd1a1072be1872e3e04cff989c))
+
 # [8.56.0](https://github.com/dialpad/dialtone/compare/dialtone-css/v8.55.0...dialtone-css/v8.56.0) (2025-05-05)
 
 
