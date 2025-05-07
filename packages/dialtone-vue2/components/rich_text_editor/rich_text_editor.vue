@@ -494,7 +494,7 @@ export default {
     // eslint-disable-next-line complexity
     extensions () {
       // These are the default extensions needed just for plain text.
-      const extensions = [Document, Text, TextStyle, History, HardBreak];
+      const extensions = [Document, Text, History, HardBreak];
       extensions.push(this.useDivTags ? DivParagraph : Paragraph);
 
       if (this.allowBlockquote) {
