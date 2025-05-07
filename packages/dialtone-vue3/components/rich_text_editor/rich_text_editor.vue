@@ -495,7 +495,7 @@ export default {
     // eslint-disable-next-line complexity
     extensions () {
       // These are the default extensions needed just for plain text.
-      const extensions = [Document, Text, TextStyle, History, HardBreak];
+      const extensions = [Document, Text, History, HardBreak];
       extensions.push(this.useDivTags ? DivParagraph : Paragraph);
 
       if (this.allowBlockquote) {
@@ -620,12 +620,16 @@ export default {
         extensions.push(ConfigurableImage);
       }
 
-      if (this.allowFontColor) {
-        extensions.push(Color);
-      }
+      if (this.allowFontFamily || this.allowFontColor) {
+        extensions.push(TextStyle);
 
-      if (this.allowFontFamily) {
-        extensions.push(FontFamily);
+        if (this.allowFontColor) {
+          extensions.push(Color);
+        }
+
+        if (this.allowFontFamily) {
+          extensions.push(FontFamily);
+        }
       }
 
       if (this.additionalExtensions.length) {

@@ -619,12 +619,16 @@ export default {
         extensions.push(ConfigurableImage);
       }
 
-      if (this.allowFontColor) {
-        extensions.push(Color);
-      }
+      if (this.allowFontFamily || this.allowFontColor) {
+        extensions.push(TextStyle);
 
-      if (this.allowFontFamily) {
-        extensions.push(FontFamily);
+        if (this.allowFontColor) {
+          extensions.push(Color);
+        }
+
+        if (this.allowFontFamily) {
+          extensions.push(FontFamily);
+        }
       }
 
       if (this.additionalExtensions.length) {
