@@ -1,3 +1,10 @@
+## [3.182.1](https://github.com/dialpad/dialtone/compare/dialtone-vue3/v3.182.0...dialtone-vue3/v3.182.1) (2025-05-07)
+
+
+### Bug Fixes
+
+* **Editor:** DP-140466 font family and font-color support in editor for qrs ([#742](https://github.com/dialpad/dialtone/issues/742)) ([156f874](https://github.com/dialpad/dialtone/commit/156f87483490e8dc9634168b048601a5a535081f))
+
 # [3.182.0](https://github.com/dialpad/dialtone/compare/dialtone-vue3/v3.181.0...dialtone-vue3/v3.182.0) (2025-05-06)
 
 
