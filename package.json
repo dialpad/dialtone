@@ -1,6 +1,6 @@
 {
   "name": "@dialpad/dialtone",
-  "version": "9.115.0",
+  "version": "9.117.0",
   "packageManager": "pnpm@9.9.0",
   "description": "Dialpad's Dialtone design system monorepo",
   "scripts": {
@@ -17,17 +17,6 @@
       }
     },
     "packageExtensions": {
-      "@dialpad/dialtone-vue@2": {
-        "peerDependencies": {
-          "vue": "^2.6.0",
-          "@percy/cli-command": "1.30.9"
-        }
-      },
-      "@dialpad/dialtone-vue@3": {
-        "peerDependencies": {
-          "vue": "^3.3.4"
-        }
-      },
       "@linusborg/vue-simple-portal": {
         "peerDependencies": {
           "vue": "^2.6.6"
@@ -35,7 +24,8 @@
       },
       "@tiptap/vue-2": {
         "peerDependencies": {
-          "vue": "^2.6.0"
+          "vue": "^2.6.0",
+          "@tiptap/extension-bubble-menu": "2.6.6"
         }
       },
       "@tiptap/vue-3": {
@@ -100,7 +90,6 @@
     "@dialpad/dialtone-emojis": "workspace:*",
     "@dialpad/dialtone-icons": "workspace:*",
     "@dialpad/dialtone-tokens": "workspace:*",
-    "@dialpad/i18n-services": "1.2.0-beta.v6",
     "@tiptap/core": "2.6.6",
     "@tiptap/extension-blockquote": "2.6.6",
     "@tiptap/extension-bold": "2.6.6",
@@ -170,7 +159,7 @@
     "eslint-config-standard": "^17.1.0",
     "eslint-plugin-eslint-plugin": "6.3.1",
     "eslint-plugin-import": "^2.27.5",
-    "eslint-plugin-jest": "^25.2.2",
+    "eslint-plugin-jest": "^28.11.0",
     "eslint-plugin-json": "4.0.1",
     "eslint-plugin-node": "^11.1.0",
     "eslint-plugin-promise": "^6.1.1",

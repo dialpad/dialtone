@@ -15,6 +15,7 @@ const kindDescriptions = {
   positive: 'Used to communicate positive actions.',
   inverted: 'Use for placement on non-white, dark backgrounds.',
   muted: 'For non-primary actions and contexts where base style may not work.',
+  unstyled: 'Raw button devoid of any style.',
 };
 </script>
 
@@ -55,7 +56,8 @@ const kindDescriptions = {
             { 'd-bgc-contrast': kind === 'inverted' },
           ]"
         >
-          <dt-button v-if="importance !== 'primary' || kind !== 'muted'" :importance="importance" :kind="kind">
+          <span v-if="kind === 'unstyled'">N/A</span>
+          <dt-button v-else-if="importance !== 'primary' || kind !== 'muted'" :importance="importance" :kind="kind">
             Place call
           </dt-button>
           <span v-else>N/A</span>
