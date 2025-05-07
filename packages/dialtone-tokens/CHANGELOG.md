@@ -1,3 +1,10 @@
+## [1.43.1](https://github.com/dialpad/dialtone/compare/dialtone-tokens/v1.43.0...dialtone-tokens/v1.43.1) (2025-05-07)
+
+
+### Bug Fixes
+
+* NO-JIRA dependency issues and warnings ([#746](https://github.com/dialpad/dialtone/issues/746)) ([3e6d9eb](https://github.com/dialpad/dialtone/commit/3e6d9ebb940ec302a7323c39fbfc63950b5bb1c2))
+
 # [1.43.0](https://github.com/dialpad/dialtone/compare/dialtone-tokens/v1.42.1...dialtone-tokens/v1.43.0) (2025-05-06)
 
 
