@@ -1,3 +1,10 @@
+## [9.117.2](https://github.com/dialpad/dialtone/compare/dialtone/v9.117.1...dialtone/v9.117.2) (2025-05-07)
+
+
+### Bug Fixes
+
+* **Tiptap Editor:** DP-140466 pkg dep fix ([#747](https://github.com/dialpad/dialtone/issues/747)) ([699d9c4](https://github.com/dialpad/dialtone/commit/699d9c4949766c23342c3d8adb2cbfd2f3fa413b))
+
 ## [9.117.1](https://github.com/dialpad/dialtone/compare/dialtone/v9.117.0...dialtone/v9.117.1) (2025-05-07)
 
 
