@@ -32,11 +32,11 @@ Use `d-bgg-to-{color}` to declare the gradient ending color stop.
 Use `h:d-bgg-{from|to}-{color}` to change an element's background gradient color spot when in an `:hover` state.
 
 <code-well-header>
-  <dt-button unstyled class="d-p16 d-bar4 d-fs-200 d-bgg-to-r d-bgg-from-purple-300 h:d-bgg-from-purple-300 d-bgg-to-magenta-100 h:d-bgg-to-magenta-300 d-baw0">Hover over me</dt-button>
+  <dt-button kind="unstyled" class="d-p16 d-bar4 d-fs-200 d-bgg-to-r d-bgg-from-purple-300 h:d-bgg-from-purple-300 d-bgg-to-magenta-100 h:d-bgg-to-magenta-300 d-baw0">Hover over me</dt-button>
 </code-well-header>
 
 ```html
-<dt-button unstyled class="d-p16 d-bar4 d-fs-200 d-bgg-to-r d-bgg-from-purple-300 h:d-bgg-from-purple-300 d-bgg-to-magenta-100 h:d-bgg-to-magenta-300 d-baw0">Hover over me</dt-button>
+<dt-button kind="unstyled" class="d-p16 d-bar4 d-fs-200 d-bgg-to-r d-bgg-from-purple-300 h:d-bgg-from-purple-300 d-bgg-to-magenta-100 h:d-bgg-to-magenta-300 d-baw0">Hover over me</dt-button>
 ```
 
 ## Focus
@@ -44,11 +44,11 @@ Use `h:d-bgg-{from|to}-{color}` to change an element's background gradient color
 Use `f:d-bgg-{from|to}-{color}` to change an element's background gradient starting and ending stops in `:focus` and `:focus-within` states.
 
 <code-well-header>
-  <dt-button unstyled class="d-p16 d-bar4 d-fs-200 d-bgg-to-r d-bgg-from-purple-300 h:d-bgg-from-purple-300 d-bgg-to-magenta-100 f:d-bgg-to-magenta-300 d-baw0">Focus me</dt-button>
+  <dt-button kind="unstyled" class="d-p16 d-bar4 d-fs-200 d-bgg-to-r d-bgg-from-purple-300 h:d-bgg-from-purple-300 d-bgg-to-magenta-100 f:d-bgg-to-magenta-300 d-baw0">Focus me</dt-button>
 </code-well-header>
 
 ```html
-<dt-button unstyled class="d-p16 d-bar4 d-fs-200 d-bgg-to-r d-bgg-from-purple-300 h:d-bgg-from-purple-300 d-bgg-to-magenta-100 f:d-bgg-to-magenta-300 d-baw0">Focus me</dt-button>
+<dt-button kind="unstyled" class="d-p16 d-bar4 d-fs-200 d-bgg-to-r d-bgg-from-purple-300 h:d-bgg-from-purple-300 d-bgg-to-magenta-100 f:d-bgg-to-magenta-300 d-baw0">Focus me</dt-button>
 ```
 
 ## Focus Visible
@@ -56,11 +56,11 @@ Use `f:d-bgg-{from|to}-{color}` to change an element's background gradient start
 Use `fv:d-bgg-{from|to}-{color}` to change an element's background gradient starting and ending stops in `:focus-visible` state [only when focused by keyboard].
 
 <code-well-header>
-  <dt-button unstyled class="d-p16 d-bar4 d-fs-200 d-bgg-to-r d-bgg-from-purple-300 h:d-bgg-from-purple-300 d-bgg-to-magenta-100 fv:d-bgg-to-magenta-300 d-baw0">Keyboard focus me</dt-button>
+  <dt-button kind="unstyled" class="d-p16 d-bar4 d-fs-200 d-bgg-to-r d-bgg-from-purple-300 h:d-bgg-from-purple-300 d-bgg-to-magenta-100 fv:d-bgg-to-magenta-300 d-baw0">Keyboard focus me</dt-button>
 </code-well-header>
 
 ```html
-<dt-button unstyled class="d-p16 d-bar4 d-fs-200 d-bgg-to-r d-bgg-from-purple-300 h:d-bgg-from-purple-300 d-bgg-to-magenta-100 fv:d-bgg-to-magenta-300 d-baw0">Keyboard focus me</dt-button>
+<dt-button kind="unstyled" class="d-p16 d-bar4 d-fs-200 d-bgg-to-r d-bgg-from-purple-300 h:d-bgg-from-purple-300 d-bgg-to-magenta-100 fv:d-bgg-to-magenta-300 d-baw0">Keyboard focus me</dt-button>
 ```
 
 ## Changing Opacities

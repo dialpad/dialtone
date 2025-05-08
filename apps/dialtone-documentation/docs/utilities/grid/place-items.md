@@ -30,7 +30,7 @@ Use `d-pli-stretch{-n}` to stretch grid items along their block and inline axis.
 Use `d-pli-start{-n}` to align grid items along the start of their block and/or inline axis.
 
 <code-well-header>
-  <div class="d-d-grid d-g-cols2 d-pli-start d-g16 d-w100p d-h216d-bar8 d-bgc-moderate">
+  <div class="d-d-grid d-g-cols2 d-pli-start d-g16 d-w100p d-h216 d-bar8 d-bgc-moderate">
     <div class="d-fl-center d-p16 d-w64 d-h64 d-bgc-moderate-opaque d-bar4">1</div>
     <div class="d-fl-center d-p16 d-w64 d-h64 d-bgc-moderate-opaque d-bar4">2</div>
     <div class="d-fl-center d-p16 d-w64 d-h64 d-bgc-moderate-opaque d-bar4">3</div>
@@ -52,7 +52,7 @@ Use `d-pli-start{-n}` to align grid items along the start of their block and/or 
 Use `d-pli-end{-n}` to align grid items along the end of their block and/or inline axis.
 
 <code-well-header>
-  <div class="d-d-grid d-g-cols2 d-pli-end d-g16 d-w100p d-h216d-bar8 d-bgc-moderate">
+  <div class="d-d-grid d-g-cols2 d-pli-end d-g16 d-w100p d-h216 d-bar8 d-bgc-moderate">
     <div class="d-fl-center d-p16 d-w64 d-h64 d-bgc-moderate-opaque d-bar4">1</div>
     <div class="d-fl-center d-p16 d-w64 d-h64 d-bgc-moderate-opaque d-bar4">2</div>
     <div class="d-fl-center d-p16 d-w64 d-h64 d-bgc-moderate-opaque d-bar4">3</div>
@@ -74,7 +74,7 @@ Use `d-pli-end{-n}` to align grid items along the end of their block and/or inli
 Use `d-pli-center{-n}` to align grid items along the center of their block and/or inline axis.
 
 <code-well-header>
-  <div class="d-d-grid d-g-cols2 d-pli-center d-g16 d-w100p d-h216d-bar8 d-bgc-moderate">
+  <div class="d-d-grid d-g-cols2 d-pli-center d-g16 d-w100p d-h216 d-bar8 d-bgc-moderate">
     <div class="d-fl-center d-p16 d-w64 d-h64 d-bgc-moderate-opaque d-bar4">1</div>
     <div class="d-fl-center d-p16 d-w64 d-h64 d-bgc-moderate-opaque d-bar4">2</div>
     <div class="d-fl-center d-p16 d-w64 d-h64 d-bgc-moderate-opaque d-bar4">3</div>

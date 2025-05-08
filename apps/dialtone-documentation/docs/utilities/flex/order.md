@@ -11,7 +11,7 @@ By default, items are ordered by their position in the DOM. To re-order an eleme
   <div class="d-d-flex d-ai-center d-jc-space-between d-w100p d-bar8 d-bgc-moderate">
     <div class="d-fl-center d-p16 d-w64 d-h64 d-bgc-moderate-opaque d-bar4">1</div>
     <div class="d-fl-center d-p16 d-w64 d-h64 d-bgc-moderate-opaque d-bar4">2</div>
-    <div class="d-fl-center d-p16 d-w64 d-h64 d-bgc-moderate-opaque d-bar4 d-order-first d-fw-bold">3</div>
+    <div class="d-fl-center d-p16 d-w64 d-h64 d-bgc-bold-opaque d-bar4 d-order-first">3</div>
   </div>
 </code-well-header>
 

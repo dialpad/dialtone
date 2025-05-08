@@ -30,11 +30,11 @@ Use `d-o{n}` to change the opacity of your element.
 Use `h:d-o{n}` to change an element's :hover state opacity.
 
 <code-well-header>
-  <dt-button unstyled class="d-p16 d-bar8 d-bgc-moderate h:d-o50">Hover me</dt-button>
+  <dt-button kind="unstyled" class="d-p16 d-bar8 d-bgc-moderate h:d-o50">Hover me</dt-button>
 </code-well-header>
 
 ```html
-<dt-button unstyled class="h:d-o50">...</dt-button>
+<dt-button kind="unstyled" class="h:d-o50">...</dt-button>
 ```
 
 ## Focus
@@ -42,11 +42,11 @@ Use `h:d-o{n}` to change an element's :hover state opacity.
 Use `f:d-o{n}` to change an element's :focus and :focus-within state opacity.
 
 <code-well-header>
-  <dt-button unstyled class="d-p16 d-bar8 d-bgc-moderate f:d-o50">Focus me</dt-button>
+  <dt-button kind="unstyled" class="d-p16 d-bar8 d-bgc-moderate f:d-o50">Focus me</dt-button>
 </code-well-header>
 
 ```html
-<dt-button unstyled class="f:d-o50">...</dt-button>
+<dt-button kind="unstyled" class="f:d-o50">...</dt-button>
 ```
 
 ## Focus Visible
@@ -54,11 +54,11 @@ Use `f:d-o{n}` to change an element's :focus and :focus-within state opacity.
 Use `fv:d-o{n}` to change an element's :focus-visible state opacity [only when focused by keyboard].
 
 <code-well-header>
-  <dt-button unstyled class="d-p16 d-bar8 d-bgc-moderate fv:d-o50">Keyboard focus me</dt-button>
+  <dt-button kind="unstyled" class="d-p16 d-bar8 d-bgc-moderate fv:d-o50">Keyboard focus me</dt-button>
 </code-well-header>
 
 ```html
-<dt-button unstyled class="fv:d-o50">...</dt-button>
+<dt-button kind="unstyled" class="fv:d-o50">...</dt-button>
 ```
 
 <script setup>

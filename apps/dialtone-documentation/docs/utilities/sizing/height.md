@@ -39,7 +39,7 @@ Use `d-h{n}` to set a fixed height for an element.
 
 <code-well-header class="d-d-flex d-p24 d-bgc-secondary d-w100p d-hmx512 d-flow16 d-of-scroll d-ta-center" v-dt-scrollbar:never custom>
   <div v-for="(i, index) in fixed" class="d-d-flex d-fd-column d-pls-start d-g8" :key="index">
-    <span class="d-code--md">{{i}}</span>
+    <span class="d-code--md">d-h{{i}}</span>
     <div class="d-fl-center d-w64 d-bgc-bold d-bar4" :class="`d-h${i}`"></div>
   </div>
 </code-well-header>

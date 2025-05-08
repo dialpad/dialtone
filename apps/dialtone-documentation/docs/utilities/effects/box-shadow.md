@@ -41,11 +41,11 @@ Use `d-bs-none` to remove a box shadow to an element.
 Use `h:d-bs-{n}` to change an element's `:hover` state box shadow.
 
 <code-well-header class="d-fl-center d-p24 d-bgc-secondary d-w100p" custom>
-  <dt-button unstyled class="d-p16 d-bar8 d-bgc-primary h:d-bs-md">Hover over me</dt-button>
+  <dt-button kind="unstyled" class="d-p16 d-bar8 d-bgc-primary h:d-bs-md">Hover over me</dt-button>
 </code-well-header>
 
 ```html
-<dt-button unstyled class="h:d-bs-md">Hover over me</dt-button>
+<dt-button kind="unstyled" class="h:d-bs-md">Hover over me</dt-button>
 ```
 
 ## Focus
@@ -53,11 +53,11 @@ Use `h:d-bs-{n}` to change an element's `:hover` state box shadow.
 Use `f:d-bs-{n}` to change an element's `:focus` and `:focus-within` state box shadow.
 
 <code-well-header class="d-fl-center d-p24 d-bgc-secondary d-w100p" custom>
-  <dt-button unstyled class="d-p16 d-bar8 d-bgc-primary f:d-bs-md">Focus me</dt-button>
+  <dt-button kind="unstyled" class="d-p16 d-bar8 d-bgc-primary f:d-bs-md">Focus me</dt-button>
 </code-well-header>
 
 ```html
-<dt-button unstyled class="f:d-bs-md">Focus me</dt-button>
+<dt-button kind="unstyled" class="f:d-bs-md">Focus me</dt-button>
 ```
 
 ## Focus Visible
@@ -65,11 +65,11 @@ Use `f:d-bs-{n}` to change an element's `:focus` and `:focus-within` state box s
 Use `fv:d-bs-{n}` to change an element's `:focus-visible` state box shadow [only when focused by keyboard].
 
 <code-well-header class="d-fl-center d-p24 d-bgc-secondary d-w100p" custom>
-  <dt-button unstyled class="d-p16 d-bar8 d-bgc-primary fv:d-bs-md">Keyboard focus me</dt-button>
+  <dt-button kind="unstyled" class="d-p16 d-bar8 d-bgc-primary fv:d-bs-md">Keyboard focus me</dt-button>
 </code-well-header>
 
 ```html
-<dt-button unstyled class="fv:d-bs-md">Keyboard focus me</dt-button>
+<dt-button kind="unstyled" class="fv:d-bs-md">Keyboard focus me</dt-button>
 ```
 
 ## Classes

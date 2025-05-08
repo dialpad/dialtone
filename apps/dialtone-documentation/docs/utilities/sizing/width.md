@@ -37,7 +37,7 @@ Use `d-w{n}` to set a fixed width for an element.
 
 <code-well-header class="d-d-flex d-fd-column d-p24 d-bgc-secondary d-w100p d-hmx332 d-stack16 d-ta-center d-of-scroll" v-dt-scrollbar:never custom>
   <div v-for="(i, index) in fixed" class="d-d-flex d-pls-start d-ai-center">
-    <span class="d-w48">{{ index }}</span>
+    <span class="d-w72">d-w{{i}}</span>
     <div class="d-h64 d-bgc-moderate d-bar4" :class="`d-w${i}`"></div>
   </div>
 </code-well-header>

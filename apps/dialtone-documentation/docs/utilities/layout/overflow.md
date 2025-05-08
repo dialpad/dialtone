@@ -3,6 +3,10 @@ title: Overflow
 description: Utilities for controlling how an element handles content that is too large for the container.
 ---
 
+<dt-notice kind="info" class="d-wmx100p d-mt24" hideClose>
+Consider using the custom scrollbar first with the <router-link class="d-link d-link--muted" to="/components/scrollbar">Scrollbar Directive</router-link>.
+</dt-notice>
+
 ## Examples
 
 <code-well-header>

@@ -28,11 +28,11 @@ Use `d-fc-{color}` to change an element's text color.
 Use `h:d-fc-{color}` to change an element's text color `:hover` state.
 
 <code-well-header>
-  <dt-button unstyled class="d-fc-critical h:d-fc-success">Hover over me</dt-button>
+  <dt-button kind="unstyled" class="d-fc-critical h:d-fc-success">Hover over me</dt-button>
 </code-well-header>
 
 ```html
-<dt-button unstyled class="d-fc-critical h:d-fc-success">Hover over me</dt-button>
+<dt-button kind="unstyled" class="d-fc-critical h:d-fc-success">Hover over me</dt-button>
 ```
 
 ## Focus
@@ -40,11 +40,11 @@ Use `h:d-fc-{color}` to change an element's text color `:hover` state.
 Use `f:d-fc-{color}` to change an element's text color `:focus` and `:focus-within` state.
 
 <code-well-header>
-  <dt-button unstyled class="d-fc-critical f:d-fc-success">Focus me</dt-button>
+  <dt-button kind="unstyled" class="d-fc-critical f:d-fc-success">Focus me</dt-button>
 </code-well-header>
 
 ```html
-<dt-button unstyled class="d-fc-critical f:d-fc-success">Focus me</dt-button>
+<dt-button kind="unstyled" class="d-fc-critical f:d-fc-success">Focus me</dt-button>
 ```
 
 ## Focus Visible
@@ -52,11 +52,11 @@ Use `f:d-fc-{color}` to change an element's text color `:focus` and `:focus-with
 Use `fv:d-fc-{color}` to change an element's text color on `:focus-visible` state [only when focused by keyboard].
 
 <code-well-header>
-  <dt-button unstyled class="d-fc-critical fv:d-fc-success">Keyboard focus me</dt-button>
+  <dt-button kind="unstyled" class="d-fc-critical fv:d-fc-success">Keyboard focus me</dt-button>
 </code-well-header>
 
 ```html
-<dt-button unstyled class="d-fc-critical fv:d-fc-success">Keyboard focus me</dt-button>
+<dt-button kind="unstyled" class="d-fc-critical fv:d-fc-success">Keyboard focus me</dt-button>
 ```
 
 ## Changing Opacity

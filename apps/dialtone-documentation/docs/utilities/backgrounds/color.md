@@ -36,13 +36,13 @@ Use `d-bgc-{color}` to set an element's background color.
 Use `h:d-bgc-{color}` to change an element's `:hover` state background color.
 
 <code-well-header>
-  <dt-button unstyled class="d-p16 d-bgc-primary h:d-bgc-critical">
+  <dt-button kind="unstyled" class="d-p16 d-bgc-primary h:d-bgc-critical">
     Hover over me
   </dt-button>
 </code-well-header>
 
 ```html
-<dt-button unstyled class="d-p16 d-bgc-primary h:d-bgc-critical">
+<dt-button kind="unstyled" class="d-p16 d-bgc-primary h:d-bgc-critical">
   Hover over me
 </dt-button>
 ```
@@ -52,13 +52,13 @@ Use `h:d-bgc-{color}` to change an element's `:hover` state background color.
 Use `f:d-bgc-{color}` to change an element's `:focus` and `:focus-within` state background color.
 
 <code-well-header>
-  <dt-button unstyled class="d-p16 d-bgc-primary f:d-bgc-critical">
+  <dt-button kind="unstyled" class="d-p16 d-bgc-primary f:d-bgc-critical">
     Focus me
   </dt-button>
 </code-well-header>
 
 ```html
-<dt-button unstyled class="d-p16 d-bgc-primary f:d-bgc-critical">
+<dt-button kind="unstyled" class="d-p16 d-bgc-primary f:d-bgc-critical">
   Focus me
 </dt-button>
 ```
@@ -68,13 +68,13 @@ Use `f:d-bgc-{color}` to change an element's `:focus` and `:focus-within` state 
 Use `fv:d-bgc-{color}` to change an element's `:focus-visible` state background color [only when focused by keyboard].
 
 <code-well-header>
-  <dt-button unstyled class="d-p16 d-bgc-primary fv:d-bgc-critical">
+  <dt-button kind="unstyled" class="d-p16 d-bgc-primary fv:d-bgc-critical">
     Keyboard focus me
   </dt-button>
 </code-well-header>
 
 ```html
-<dt-button unstyled class="d-p16 d-bgc-primary fv:d-bgc-critical">
+<dt-button kind="unstyled" class="d-p16 d-bgc-primary fv:d-bgc-critical">
   Keyboard focus me
 </dt-button>
 ```

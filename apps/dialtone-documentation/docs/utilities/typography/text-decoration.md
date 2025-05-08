@@ -60,13 +60,13 @@ Use `d-td-none` to remove text decorations.
 Use `h:d-td-{n}` to change an element's :hover state text decoration.
 
 <code-well-header>
-  <dt-button unstyled class="h:d-td-underline">
+  <dt-button kind="unstyled" class="h:d-td-underline">
     The quick brown fox jumps over the lazy dog.
   </dt-button>
 </code-well-header>
 
 ```html
-<dt-button unstyled class="h:d-td-underline">
+<dt-button kind="unstyled" class="h:d-td-underline">
   The quick brown fox jumps over the lazy dog.
 </dt-button>
 ```
@@ -76,13 +76,13 @@ Use `h:d-td-{n}` to change an element's :hover state text decoration.
 Use `f:d-td-{n}` to change an element's :focus and :focus-within state text decoration.
 
 <code-well-header>
-  <dt-button unstyled class="f:d-td-underline">
+  <dt-button kind="unstyled" class="f:d-td-underline">
     The quick brown fox jumps over the lazy dog.
   </dt-button>
 </code-well-header>
 
 ```html
-<dt-button unstyled class="f:d-td-underline">
+<dt-button kind="unstyled" class="f:d-td-underline">
   The quick brown fox jumps over the lazy dog.
 </dt-button>
 ```
@@ -92,13 +92,13 @@ Use `f:d-td-{n}` to change an element's :focus and :focus-within state text deco
 Use `fv:d-td-{n}` to change an element's :focus-visible state text decoration [only when focused by keyboard].
 
 <code-well-header>
-  <dt-button unstyled class="fv:d-td-underline">
+  <dt-button kind="unstyled" class="fv:d-td-underline">
     The quick brown fox jumps over the lazy dog.
   </dt-button>
 </code-well-header>
 
 ```html
-<dt-button unstyled class="fv:d-td-underline">
+<dt-button kind="unstyled" class="fv:d-td-underline">
   The quick brown fox jumps over the lazy dog.
 </dt-button>
 ```
