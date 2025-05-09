@@ -11,7 +11,7 @@ Use `d-bgs-{n}` to control the size of element's background image.
   <div class="d-d-flex d-fd-column d-ai-center d-stack4" v-for="i in sizes">
       <div
         class="d-fl-center d-w128 d-h128 d-bgc-moderate d-bar8 d-of-hidden d-bgr-none"
-        style="background-image: url('https://4.bp.blogspot.com/-EVbXg5iW6qY/ULcKZEC-bnI/AAAAAAAACCI/kZDtjeKwQlo/s1600/puffin1.jpg');"
+        style="background-image: url('/assets/images/puffin.jpg');"
         :style="i === 'var' ? '--bgg-size: 65% 65%;' : ''"
         :class="[{'d-bgp-center': i === 'auto'}, `d-bgs-${i}`]"
       >

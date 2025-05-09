@@ -98,7 +98,7 @@ vueCode='
   <div class="d-w332">
     <dt-description-list
       ref="exampleWithStyles"
-      gap="00"
+      gap="400"
       :items="items"
       direction="row"
       :termClass="[`d-fc-critical`, `d-fw-bold`]"
@@ -112,7 +112,7 @@ vueCode='
 vueCode='
 <dt-description-list
   ref="exampleWithStyles"
-  gap="00"
+  gap="400"
   :items="items"
   direction="row"
   :termClass="[`d-fc-critical`, `d-fw-bold`]"
