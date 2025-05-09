@@ -73,7 +73,7 @@ export default defineConfig({
         'shared/sr_only_close_button': './common/sr_only_close_button.vue',
 
         // Dependencies
-        'node_modules/@linusborg/vue-simple-portal': './node_modules/@linusborg/vue-simple-portal/dist/index.umd.js',
+        'node_modules/@linusborg/vue-simple-portal': './node_modules/@linusborg/vue-simple-portal/dist/index.esm.js',
         'node_modules/@tiptap/vue-2': './node_modules/@tiptap/vue-2/dist/index.js',
 
         // Localization
