@@ -17,6 +17,11 @@
       }
     },
     "packageExtensions": {
+      "@dialpad/i18n-vue2": {
+        "peerDependencies": {
+          "vue": "~2.6"
+        }
+      },
       "@linusborg/vue-simple-portal": {
         "peerDependencies": {
           "vue": "~2.6"
@@ -113,9 +118,9 @@
     "@tiptap/extension-text": "2.6.6",
     "@tiptap/extension-text-align": "2.6.6",
     "@tiptap/extension-underline": "2.6.6",
-    "@tiptap/extension-text-style": "2.12.0",
-    "@tiptap/extension-color": "2.12.0",
-    "@tiptap/extension-font-family": "2.12.0",
+    "@tiptap/extension-text-style": "2.6.6",
+    "@tiptap/extension-color": "2.6.6",
+    "@tiptap/extension-font-family": "2.6.6",
     "@tiptap/pm": "2.6.6",
     "@tiptap/suggestion": "2.6.6",
     "date-fns": "4.1.0",
