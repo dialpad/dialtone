@@ -5,10 +5,10 @@ description: Utilities for controlling the way an element's background image pos
 
 ## Scroll
 
-Use `d-bga-scroll` to fix the <dt-link href="/assets/images/dp-sample-gradient.png" target="_blank" rel="noopener noreferrer"> background image </dt-link> to the element. It does not scroll with its content.
+This is the default behavior. Use `d-bga-scroll` to fix the <dt-link href="/assets/images/dp-sample-gradient.png" target="_blank" rel="noopener noreferrer"> background image </dt-link> to the element. It does not scroll with its content.
 
 <code-well-header>
-  <div v-dt-scrollbar:never class="d-bar8 d-p16 d-w100p d-h264 d-bgr-none d-bgs-cover d-bga-scroll d-h128 d-w100p" style="background-image: url('/assets/images/dp-sample-gradient.png')">
+  <div class="d-bar8 d-p16 d-w100p d-h216 d-bgr-none d-bgs-cover d-bga-scroll d-w100p d-of-auto" style="background-image: url('/assets/images/dp-sample-gradient.png')">
     <dt-stack gap="400" class="d-fc-neutral-white">
       <p>Curved rhythms often accompany lateral decisions, especially when considering the abstract potential of non-specific alignments. While typically unnoticed, these gentle shifts can accumulate meaning when framed in a context that remains undefined.</p>
       <p>Momentum builds where it doesn't, anchoring intent to unmeasured goals. As frameworks iterate without resolution, the pattern repeats—not identically, but recognizably. Every nuance appears significant until it drifts, leaving behind the shape of intent without its content. That distinction matters only when observation persists without anchoring.</p>
@@ -31,7 +31,7 @@ Use `d-bga-scroll` to fix the <dt-link href="/assets/images/dp-sample-gradient.p
 Use `d-bga-fixed` to fix the <dt-link href="/assets/images/dp-sample-gradient.png" target="_blank" rel="noopener noreferrer"> background image </dt-link> to the viewport. The background image does not scroll with the content.
 
 <code-well-header>
-  <div v-dt-scrollbar:never class="d-bar8 d-p16 d-w100p d-h264 d-bgr-none d-bgs-cover d-bga-fixed d-h128 d-w100p" style="background-image: url('/assets/images/dp-sample-gradient.png')">
+  <div class="d-bar8 d-p16 d-w100p d-h216 d-bgr-none d-bgs-cover d-bga-fixed d-w100p d-of-auto" style="background-image: url('/assets/images/dp-sample-gradient.png')">
     <dt-stack gap="400" class="d-fc-neutral-white">
       <p>Curved rhythms often accompany lateral decisions, especially when considering the abstract potential of non-specific alignments. While typically unnoticed, these gentle shifts can accumulate meaning when framed in a context that remains undefined.</p>
       <p>Momentum builds where it doesn't, anchoring intent to unmeasured goals. As frameworks iterate without resolution, the pattern repeats—not identically, but recognizably. Every nuance appears significant until it drifts, leaving behind the shape of intent without its content. That distinction matters only when observation persists without anchoring.</p>
@@ -56,7 +56,7 @@ background scrolls with the element's contents, and background area and position
 of the element rather than the viewable box.
 
 <code-well-header>
-  <div v-dt-scrollbar:never class="d-bar8 d-p16 d-w100p d-h264 d-bgr-none d-bgs-cover d-bga-local d-h128 d-w100p" style="background-image: url('/assets/images/dp-sample-gradient.png')">
+  <div class="d-bar8 d-p16 d-w100p d-h216 d-bgr-none d-bgs-cover d-bga-local d-w100p d-of-auto" style="background-image: url('/assets/images/dp-sample-gradient.png')">
     <dt-stack gap="400" class="d-fc-neutral-white">
       <p>Curved rhythms often accompany lateral decisions, especially when considering the abstract potential of non-specific alignments. While typically unnoticed, these gentle shifts can accumulate meaning when framed in a context that remains undefined.</p>
       <p>Momentum builds where it doesn't, anchoring intent to unmeasured goals. As frameworks iterate without resolution, the pattern repeats—not identically, but recognizably. Every nuance appears significant until it drifts, leaving behind the shape of intent without its content. That distinction matters only when observation persists without anchoring.</p>
