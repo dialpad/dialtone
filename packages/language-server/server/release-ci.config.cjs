@@ -12,7 +12,13 @@ module.exports = {
     ['@semantic-release/commit-analyzer', {
       preset: 'angular',
       releaseRules: [
+        { type: 'build', release: 'patch' },
+        { type: 'chore', release: 'patch' },
+        { type: 'ci', release: 'patch' },
+        { type: 'docs', release: 'patch' },
         { type: 'refactor', release: 'patch' },
+        { type: 'style', release: 'patch' },
+        { type: 'test', release: 'patch' },
       ],
     }],
     ['@semantic-release/release-notes-generator', {
@@ -34,15 +40,9 @@ module.exports = {
     }],
   ],
   branches: [
-    'staging',
-    'next',
-    {
-      name: 'beta',
-      prerelease: true,
-    },
-    {
-      name: 'alpha',
-      prerelease: true,
-    },
+    { name: 'staging', prerelease: true },
+    { name: 'next', prerelease: true },
+    { name: 'beta', prerelease: true },
+    { name: 'alpha', prerelease: true },
   ],
 };
