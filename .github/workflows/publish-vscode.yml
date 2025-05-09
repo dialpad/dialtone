@@ -1,0 +1,46 @@
+name: Publish VSCode Extension
+
+on:
+  workflow_dispatch:
+  push:
+    tags:
+      - vscode-extension/v*
+
+env:
+  HUSKY: 0
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    permissions:
+      packages: read
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Use pnpm
+        uses: pnpm/action-setup@v3
+
+      - name: Use Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version-file: ".nvmrc"
+          cache: "pnpm"
+          registry-url: "https://npm.pkg.github.com"
+          scope: "dialpad"
+        env:
+          NODE_AUTH_TOKEN: ${{ github.token }}
+
+      - name: Install dependencies
+        shell: bash
+        run: pnpm install --frozen-lockfile
+
+      - name: Build vscode extension
+        run: pnpm nx run dialtone-language-server:pack
+
+      - name: Publish to Visual Studio Marketplace
+        uses: HaaLeo/publish-vscode-extension@v2
+        with:
+          pat: ${{ secrets.DIALTONE_AZURE_PAT }}
+          registryUrl: https://marketplace.visualstudio.com
+          extensionFile: ./packages/language-server/vscode/vscode-dialtone.vsix
