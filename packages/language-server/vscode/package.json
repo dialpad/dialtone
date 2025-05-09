@@ -10,7 +10,7 @@
 	},
 	"pricing": "Free",
 	"preview": true,
-	"icon": "media/icon.png",
+	"icon": "media/dialpad-logo.png",
 	"displayName": "Dialtone",
 	"description": "Language Support for Dialtone components and tokens",
 	"author": "Tico Ortega <julio.ortega@dialpad.com>",
@@ -45,8 +45,8 @@
 					"Dialtone Tokens"
 				],
 				"icon": {
-					"light": "media/icon.png",
-					"dark": "media/icon.png"
+					"light": "media/dialpad-logo.png",
+					"dark": "media/dialpad-logo.png"
 				}
 			}
 		],
