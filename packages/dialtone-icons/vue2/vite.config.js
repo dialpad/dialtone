@@ -1,4 +1,4 @@
-import vue from '@vitejs/plugin-vue2';
+import { createVuePlugin } from 'vite-plugin-vue2';
 import { defineConfig } from 'vite';
 import { fileURLToPath } from 'url';
 import { resolve } from 'path';
@@ -36,7 +36,7 @@ export default defineConfig({
     minify: true,
   },
   plugins: [
-    vue(),
+    createVuePlugin(),
     dts({ outDir: 'dist/types' }),
   ],
   resolve: {

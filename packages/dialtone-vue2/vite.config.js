@@ -1,5 +1,5 @@
 import { defineConfig } from 'vite';
-import vue from '@vitejs/plugin-vue2';
+import { createVuePlugin } from 'vite-plugin-vue2';
 import { globSync } from 'glob';
 import { fileURLToPath } from 'node:url';
 import dts from 'vite-plugin-dts';
@@ -43,7 +43,7 @@ export default defineConfig({
     minify: true,
     rollupOptions: {
       external: [
-        /^@dialpad\/dialtone/,
+        /^@dialpad/,
         /^@tiptap\/(?!vue-2)/,
         /^date-fns/,
         /^emoji-toolkit/,
@@ -73,19 +73,19 @@ export default defineConfig({
         'shared/sr_only_close_button': './common/sr_only_close_button.vue',
 
         // Dependencies
+        'node_modules/@linusborg/vue-simple-portal': './node_modules/@linusborg/vue-simple-portal/dist/index.umd.js',
         'node_modules/@tiptap/vue-2': './node_modules/@tiptap/vue-2/dist/index.js',
-        'node_modules/@linusborg/vue-simple-portal': './node_modules/@linusborg/vue-simple-portal/dist/index.esm.js',
 
         // Localization
-        'localization/index': './localization/index.js',
-        'localization/dp-DP': './localization/dp-DP.ftl?raw',
-        'localization/es-LA': './localization/es-LA.ftl?raw',
-        'localization/en-US': './localization/en-US.ftl?raw',
+        // 'localization/index': './localization/index.js',
+        // 'localization/dp-DP': './localization/dp-DP.ftl?raw',
+        // 'localization/es-LA': './localization/es-LA.ftl?raw',
+        // 'localization/en-US': './localization/en-US.ftl?raw',
       },
       formats: ['es', 'cjs'],
     },
   },
-  plugins: [vue(), dts({ outDir: 'dist/types' })],
+  plugins: [createVuePlugin(), dts({ outDir: 'dist/types' })],
   resolve: {
     alias: {
       '@': fileURLToPath(new URL('.', import.meta.url)),
