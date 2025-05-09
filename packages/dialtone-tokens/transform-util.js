@@ -11,8 +11,14 @@ export const DeviceObjectFormat = Object.freeze({
   IOS_SWIFT: 'ios/swift',
 });
 
-export const colorModifiersFilter = (token) => {
+export const colorsFilter = (token) => {
   return (token.$type ?? token.type) === 'color' &&
+    // Don't transform linear-gradient colors so they can be identified and removed by the file filter
+    !(token.$value ?? token.value).startsWith('linear-gradient');
+};
+
+export const colorModifiersFilter = (token) => {
+  return colorsFilter(token) &&
             token.$extensions &&
             token.$extensions['studio.tokens']?.modify;
 };
