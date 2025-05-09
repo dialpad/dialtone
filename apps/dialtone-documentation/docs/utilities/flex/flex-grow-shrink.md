@@ -8,6 +8,22 @@ description: Utilities for setting an object's flex, grow, and shrink flex prope
 The `flex` property is a shorthand property for `flex-grow`, `flex-shrink`, and `flex-basis` properties. You can also
 control the grow and shrink flex values separately with their own utility classes.
 
+<code-well-header>
+  <div class="d-d-flex d-w100p d-bar8 d-bgc-moderate">
+    <div class="d-fl-none d-p16 d-ps-relative">Content cannot flex</div>
+    <div class="d-fl1 d-p16 d-bgc-moderate-opaque d-ps-relative">Text that will flex</div>
+    <div class="d-fl-none d-p16 d-ps-relative">Content cannot flex</div>
+  </div>
+</code-well-header>
+
+```html
+<div class="d-d-flex">
+  <div>...</div>
+  <div class="d-fl1">...</div>
+  <div>...</div>
+</div>
+```
+
 <div v-dt-scrollbar class="d-hmx464 d-bar8 d-ba d-bc-subtle d-mb16">
   <div>
     <table class="d-table dialtone-doc-table">
@@ -34,25 +50,25 @@ control the grow and shrink flex values separately with their own utility classe
   </div>
 </div>
 
-<code-well-header class="d-fl-center d-fd-column d-p24 d-bgc-magenta-100 d-bgo50 d-w100p d-hmn216 d-of-auto" custom>
-  <div class="d-d-flex d-w100p d-bar8 d-bgc-magenta-100">
-    <div class="d-fl-none d-p16 d-fs-200 d-lh-tight d-bgc-magenta-100 d-ps-relative">Content cannot flex</div>
-    <div class="d-fl1 d-p16 d-fs-200 d-lh-tight d-bgc-magenta-200 d-ps-relative">Text that will flex</div>
-    <div class="d-fl-none d-p16 d-fs-200 d-lh-tight d-bgc-magenta-100 d-ps-relative">Content cannot flex</div>
+## Flex Grow
+
+The `flex-grow` sets the flex container’s grow factor relative to the parent's main size. The default value is 0.
+
+<code-well-header>
+  <div class="d-d-flex d-w100p d-bar8 d-bgc-moderate">
+    <div class="d-fl-none d-p16">Content cannot flex</div>
+    <div class="d-fl-grow1 d-p16 d-bgc-moderate-opaque">Text that will grow</div>
+    <div class="d-fl-none d-p16">Content cannot flex</div>
   </div>
 </code-well-header>
 
 ```html
 <div class="d-d-flex">
   <div>...</div>
-  <div class="d-fl1">...</div>
+  <div class="d-fl-grow1">...</div>
   <div>...</div>
 </div>
 ```
-
-## Flex Grow
-
-The `flex-grow` sets the flex container’s grow factor relative to the parent's main size. The default value is 0.
 
 <div v-dt-scrollbar class="d-hmx464 d-bar8 d-ba d-bc-subtle d-mb16">
   <div>
@@ -80,25 +96,25 @@ The `flex-grow` sets the flex container’s grow factor relative to the parent's
   </div>
 </div>
 
-<code-well-header class="d-fl-center d-fd-column d-p24 d-bgc-purple-100 d-bgo50 d-w100p d-hmn216 d-of-auto" custom>
-  <div class="d-d-flex d-w100p d-bar8 d-bgc-purple-100">
-    <div class="d-fl-none d-p16 d-fs-200 d-lh-tight d-bgc-purple-100">Content cannot flex</div>
-    <div class="d-fl-grow1 d-p16 d-fs-200 d-lh-tight d-bgc-purple-200">Text that will grow</div>
-    <div class="d-fl-none d-p16 d-fs-200 d-lh-tight d-bgc-purple-100">Content cannot flex</div>
+## Flex Shrink
+
+The `flex-shrink` sets the flex container’s shrink factor relative to the parent's main size. The default value is 1.
+
+<code-well-header>
+  <div class="d-d-flex d-w5 d-bar8 d-bgc-moderate">
+    <div class="d-fl-none d-p16">Longer text that cannot flex</div>
+    <div class="d-fl-shrink1 d-p16 d-bgc-moderate-opaque">Text that will shrink even if it causes text to wrap</div>
+    <div class="d-fl-none d-p16">Longer text that cannot flex</div>
   </div>
 </code-well-header>
 
 ```html
 <div class="d-d-flex">
   <div>...</div>
-  <div class="d-fl-grow1">...</div>
+  <div class="d-fl-shrink1">...</div>
   <div>...</div>
 </div>
 ```
-
-## Flex Shrink
-
-The `flex-shrink` sets the flex container’s shrink factor relative to the parent's main size. The default value is 1.
 
 <div v-dt-scrollbar class="d-hmx464 d-bar8 d-ba d-bc-subtle d-mb16">
   <div>
@@ -125,22 +141,6 @@ The `flex-shrink` sets the flex container’s shrink factor relative to the pare
     </table>
   </div>
 </div>
-
-<code-well-header class="d-fl-center d-fd-column d-p24 d-bgc-red-100 d-bgo50 d-w100p d-hmn216 d-of-auto" custom>
-  <div class="d-d-flex d-w5 d-bar8 d-bgc-red-100">
-    <div class="d-fl-none d-p16 d-fs-200 d-lh-tight d-bgc-red-100">Longer text that cannot flex</div>
-    <div class="d-fl-shrink1 d-p16 d-fs-200 d-lh-tight d-bgc-red-200">Text that will shrink even if it causes text to wrap</div>
-    <div class="d-fl-none d-p16 d-fs-200 d-lh-tight d-bgc-red-100">Longer text that cannot flex</div>
-  </div>
-</code-well-header>
-
-```html
-<div class="d-d-flex">
-  <div>...</div>
-  <div class="d-fl-shrink1">...</div>
-  <div>...</div>
-</div>
-```
 
 <script setup>
   import { properties } from '@data/flex.json';

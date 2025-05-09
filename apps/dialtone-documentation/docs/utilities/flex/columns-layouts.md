@@ -7,13 +7,15 @@ description: Utilities for flex columns and common flex layouts.
 
 Use `d-fl-col{n}` to create uniformly sized children within an element.
 
-<code-well-header class="d-d-flex d-fd-column d-p16 d-bgc-purple-100 d-bgo50 d-w100p d-hmx464 d-of-y-scroll d-stack8" custom>
-  <div v-for="(i, index) in columns" class="d-d-flex d-fd-column d-p8 d-bar8 d-bgc-purple-100">
-    <code>.d-fl-col{{i}}</code>
-    <div class="d-cg8 d-of-auto" :class="`d-fl-col${i}`">
-      <div v-for="(col) in columns.slice(0, i)" class="d-fl-center d-p16 d-bar4 d-bgc-purple-300 d-fs-200 d-fw-bold">{{ col }}</div>
+<code-well-header>
+  <dt-stack gap="500" class="d-w100p">
+    <div v-for="(i, index) in columns" class="d-p8 d-bar8 d-bgc-moderate d-w100p">
+      <code class="d-bgc-transparent">.d-fl-col{{i}}</code>
+      <div class="d-cg8 d-of-auto" :class="`d-fl-col${i}`">
+        <div v-for="(col) in columns.slice(0, i)" class="d-fl-center d-p16 d-bar4 d-bgc-moderate-opaque">{{ col }}</div>
+      </div>
     </div>
-  </div>
+  </dt-stack>
 </code-well-header>
 
 ```html
@@ -35,15 +37,17 @@ Use `d-fl-col{n}` to create uniformly sized children within an element.
 
 Use `d-cg{n}` to create uniform gaps between flex columns within an element.
 
-<code-well-header class="d-d-flex d-fd-column d-p16 d-bgc-purple-100 d-bgo50 d-w100p d-hmx464 d-of-y-scroll d-stack8" custom>
-  <div class="d-d-flex d-fd-column d-p8 d-bar8 d-bgc-purple-100" v-for="i in gaps">
-    <code>.d-cg{{ i }}</code>
-    <div class="d-fl-col3 d-of-auto" :class="`d-cg${i}`">
-      <div class="d-fl-center d-p16 d-bar4 d-bgc-purple-300 d-fs-200 d-fw-bold">1</div>
-      <div class="d-fl-center d-p16 d-bar4 d-bgc-purple-300 d-fs-200 d-fw-bold">2</div>
-      <div class="d-fl-center d-p16 d-bar4 d-bgc-purple-300 d-fs-200 d-fw-bold">3</div>
-    </div>
-  </div>
+<code-well-header>
+  <dt-stack gap="500" class="d-w100p">
+    <dt-stack v-for="i in gaps" gap="400" class="d-p8 d-bar8 d-bgc-moderate d-w100p">
+      <code class="d-bgc-transparent">.d-cg{{ i }}</code>
+      <div class="d-fl-col3 d-of-auto" :class="`d-cg${i}`">
+        <div class="d-fl-center d-p16 d-bar4 d-bgc-moderate-opaque">1</div>
+        <div class="d-fl-center d-p16 d-bar4 d-bgc-moderate-opaque">2</div>
+        <div class="d-fl-center d-p16 d-bar4 d-bgc-moderate-opaque">3</div>
+      </div>
+    </dt-stack>
+  </dt-stack>
 </code-well-header>
 
 ```html
@@ -65,10 +69,12 @@ Use `d-cg{n}` to create uniform gaps between flex columns within an element.
 
 By default flexed items align to `flex-start` both horizontally and vertically (effectively top, left). Use `d-fl-center` to center-center child items within an element.
 
-<code-well-header class="d-fl-center d-p24 d-bgc-green-100 d-bgo50 d-w100p d-hmn216" custom>
-  <div class="d-fl-center d-w48 d-h48 d-m8 d-p16 d-bgc-green-200 d-bar4 d-fs-300 d-fw-bold">1</div>
-  <div class="d-fl-center d-w64 d-h64 d-m8 d-p16 d-bgc-green-200 d-bar4 d-fs-300 d-fw-bold">2</div>
-  <div class="d-fl-center d-w48 d-h48 d-m8 d-p16 d-bgc-green-200 d-bar4 d-fs-300 d-fw-bold">3</div>
+<code-well-header>
+  <div class="d-fl-center d-w100p d-hmn216 d-bgc-moderate">
+    <div class="d-fl-center d-w48 d-h48 d-m8 d-p16 d-bgc-moderate-opaque d-bar4">1</div>
+    <div class="d-fl-center d-w64 d-h64 d-m8 d-p16 d-bgc-moderate-opaque d-bar4">2</div>
+    <div class="d-fl-center d-w48 d-h48 d-m8 d-p16 d-bgc-moderate-opaque d-bar4">3</div>
+  </div>
 </code-well-header>
 
 ```html

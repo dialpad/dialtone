@@ -30,11 +30,11 @@ Use `.d-gl-sidebar` to create a simple 2-column layout with a sidebar and main c
 
 ### Example
 
-<aside class="d-bar8 d-of-hidden">
-  <header class="d-fl-center d-fd-column d-p24 d-bgc-purple-100 d-bgo50 d-w100p d-hmn216">
-    <div class="d-d-grid d-gl-sidebar d-g16 d-p16 d-w100p d-hmn216 d-bar8 d-bgc-purple-100 d-of-auto" style="--sidebar-width: minmax(10rem, 20rem);">
-      <div class="d-ga-sidebar d-fl-center d-p16 d-bgc-purple-300 d-bar4 d-fs-300 d-fw-bold">Sidebar</div>
-      <div class="d-ga-content d-fl-center d-p16 d-bgc-purple-300 d-bar4 d-fs-300 d-fw-bold">Content</div>
+<aside class="d-bar8 d-of-hidden d-bgc-secondary">
+  <header class="d-fl-center d-fd-column d-p16 d-w100p d-hmn216">
+    <div class="d-d-grid d-gl-sidebar d-g16 d-w100p d-hmn216 d-bar8 d-of-auto d-bgc-moderate" style="--sidebar-width: minmax(10rem, 20rem);">
+      <div class="d-ga-sidebar d-fl-center d-p16 d-bgc-moderate-opaque d-bar4">Sidebar</div>
+      <div class="d-ga-content d-fl-center d-p16 d-bgc-moderate-opaque d-bar4">Content</div>
     </div>
   </header>
 </aside>
@@ -73,13 +73,13 @@ Use `.d-gl-header` to create a simple 2-row layout with a header area and main c
 
 ### Example
 
-<aside class="d-bar8 d-of-hidden">
-  <header class="d-fl-center d-fd-column d-p24 d-bgc-green-100 d-bgo50 d-w100p d-hmn216 d-of-auto">
-    <div class="d-d-grid d-gl-sidebar d-g16 d-p16 d-w100p d-hmn216 d-bar8 d-bgc-green-100" style="--sidebar-width: minmax(10rem, 20rem);">
-      <div class="d-ga-sidebar d-fl-center d-p16 d-bgc-green-200 d-bar4 d-fs-300 d-fw-bold d-o50">Sidebar</div>
-      <div class="d-ga-content d-d-grid d-gl-header d-g16 d-p16 d-bgc-green-100 d-bar4 d-fs-300 d-fw-bold" style="--content-height: minmax(24rem, max-content);">
-        <div class="d-ga-header d-fl-center d-p16 d-bgc-green-200 d-bar4 d-fs-300 d-fw-bold">Header</div>
-        <div class="d-ga-content d-fl-center d-p16 d-bgc-green-200 d-bar4 d-fs-300 d-fw-bold">Content</div>
+<aside class="d-bar8 d-of-hidden d-bgc-secondary">
+  <header class="d-fl-center d-fd-column d-p16 d-w100p d-hmn216 d-of-auto">
+    <div class="d-d-grid d-gl-sidebar d-g16 d-w100p d-hmn216 d-bar8 d-bgc-moderate" style="--sidebar-width: minmax(10rem, 20rem);">
+      <div class="d-ga-sidebar d-fl-center d-p16 d-bgc-moderate-opaque d-bar4">Sidebar</div>
+      <div class="d-ga-content d-d-grid d-gl-header d-g16 d-p16 d-bgc-moderate-opaque d-bar4" style="--content-height: minmax(24rem, max-content);">
+        <div class="d-ga-header d-fl-center d-p16 d-bgc-moderate-opaque d-bar4">Header</div>
+        <div class="d-ga-content d-fl-center d-p16 d-bgc-moderate-opaque d-bar4">Content</div>
       </div>
     </div>
   </header>
@@ -116,17 +116,17 @@ Use `.d-g-cols{n}` to create a multi-column layout.
 
 ### Example
 
-<aside class="d-bar8 d-of-hidden">
-  <header class="d-fl-center d-fd-column d-p24 d-bgc-magenta-100 d-bgo50 d-w100p d-hmn216">
-    <div class="d-d-grid d-g-cols4 d-g16 d-p16 d-w100p d-hmn216 d-bar8 d-bgc-magenta-100">
-      <div class="d-fl-center d-p16 d-bgc-magenta-200 d-bar4 d-fs-300 d-fw-bold">1</div>
-      <div class="d-fl-center d-p16 d-bgc-magenta-200 d-bar4 d-fs-300 d-fw-bold">2</div>
-      <div class="d-fl-center d-p16 d-bgc-magenta-200 d-bar4 d-fs-300 d-fw-bold">3</div>
-      <div class="d-fl-center d-p16 d-bgc-magenta-200 d-bar4 d-fs-300 d-fw-bold">4</div>
-      <div class="d-fl-center d-p16 d-bgc-magenta-200 d-bar4 d-fs-300 d-fw-bold">5</div>
-      <div class="d-fl-center d-p16 d-bgc-magenta-200 d-bar4 d-fs-300 d-fw-bold">6</div>
-      <div class="d-fl-center d-p16 d-bgc-magenta-200 d-bar4 d-fs-300 d-fw-bold">7</div>
-      <div class="d-fl-center d-p16 d-bgc-magenta-200 d-bar4 d-fs-300 d-fw-bold">8</div>
+<aside class="d-bar8 d-of-hidden d-bgc-secondary d-p16">
+  <header class="d-fl-center d-fd-column d-w100p d-hmn216">
+    <div class="d-d-grid d-g-cols4 d-g16 d-w100p d-hmn216 d-bar8 d-bgc-moderate">
+      <div class="d-fl-center d-p16 d-bgc-moderate-opaque d-bar4">1</div>
+      <div class="d-fl-center d-p16 d-bgc-moderate-opaque d-bar4">2</div>
+      <div class="d-fl-center d-p16 d-bgc-moderate-opaque d-bar4">3</div>
+      <div class="d-fl-center d-p16 d-bgc-moderate-opaque d-bar4">4</div>
+      <div class="d-fl-center d-p16 d-bgc-moderate-opaque d-bar4">5</div>
+      <div class="d-fl-center d-p16 d-bgc-moderate-opaque d-bar4">6</div>
+      <div class="d-fl-center d-p16 d-bgc-moderate-opaque d-bar4">7</div>
+      <div class="d-fl-center d-p16 d-bgc-moderate-opaque d-bar4">8</div>
     </div>
   </header>
 </aside>
@@ -148,12 +148,12 @@ Use `.d-g-cols{n}` to create a multi-column layout.
 
 Unlike some CSS, CSS grid does not cascade beyond the parent and its direct children (`parent-element > *`). We can use this to our advantage by being able to nest grids within each other without cascade errors.
 
-<code-well-header class="d-fl-center d-fd-column d-p24 d-bgc-gold-100 d-bgo50 d-w100p d-hmn216" custom>
-  <div class="d-d-grid d-g-cols2 d-g16 d-p16 d-w100p d-hmn216 d-bar8 d-bgc-gold-100">
-    <div class="d-fl-center d-p16 d-bgc-gold-200 d-bar4 d-fs-300 d-fw-bold">1</div>
-    <div class="d-d-grid d-g-cols2 d-g16 d-p16 d-bgc-gold-100 d-bar4 d-fs-300 d-fw-bold">
-      <div class="d-fl-center d-p16 d-bgc-gold-200 d-bar4 d-fs-300 d-fw-bold">3</div>
-      <div class="d-fl-center d-p16 d-bgc-gold-200 d-bar4 d-fs-300 d-fw-bold">4</div>
+<code-well-header>
+  <div class="d-d-grid d-g-cols2 d-g16 d-w100p d-hmn216 d-bar8 d-bgc-moderate">
+    <div class="d-fl-center d-p16 d-bgc-moderate-opaque d-bar4">1</div>
+    <div class="d-d-grid d-g-cols2 d-g16 d-p16 d-bgc-moderate-opaque d-bar4">
+      <div class="d-fl-center d-p16 d-bgc-moderate-opaque d-bar4">3</div>
+      <div class="d-fl-center d-p16 d-bgc-moderate-opaque d-bar4">4</div>
     </div>
   </div>
 </code-well-header>

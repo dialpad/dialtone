@@ -7,8 +7,8 @@ description: Utilities for controlling an element's text transform.
 
 Use `d-tt-uppercase` to uppercase an element's text.
 
-<code-well-header class="d-fl-center d-p24 d-bgc-green-100 d-bgo50 d-w100p d-hmn102" custom>
-  <p class="d-fs-300 d-fc-green-400 d-tt-uppercase">The quick brown fox jumps over the lazy dog.</p>
+<code-well-header>
+  <p class="d-tt-uppercase">The quick brown fox jumps over the lazy dog.</p>
 </code-well-header>
 
 ```html
@@ -19,8 +19,8 @@ Use `d-tt-uppercase` to uppercase an element's text.
 
 Use `d-tt-lowercase` to lowercase an element's text.
 
-<code-well-header class="d-fl-center d-p24 d-bgc-purple-100 d-bgo50 d-w100p d-hmn102" custom>
-  <p class="d-fs-300 d-fc-purple-400 d-tt-lowercase">The quick brown fox jumps over the lazy dog.</p>
+<code-well-header>
+  <p class="d-tt-lowercase">The quick brown fox jumps over the lazy dog.</p>
 </code-well-header>
 
 ```html
@@ -31,8 +31,8 @@ Use `d-tt-lowercase` to lowercase an element's text.
 
 Use `d-tt-capitalize` to capitalize an element's text.
 
-<code-well-header class="d-fl-center d-p24 d-bgc-magenta-100 d-bgo50 d-w100p d-hmn102" custom>
-  <p class="d-fs-300 d-fc-magenta-300 d-tt-capitalize">The quick brown fox jumps over the lazy dog.</p>
+<code-well-header>
+  <p class="d-tt-capitalize">The quick brown fox jumps over the lazy dog.</p>
 </code-well-header>
 
 ```html

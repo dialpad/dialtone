@@ -7,17 +7,17 @@ description: Utilities for controlling how elements are placed across grid colum
 
 Use `d-gc{#}` to span an element across multiple columns. This can be combined with `d-gc{#}` classes to span a set of columns. Use `d-gce{#}` to set an element's ending point. A reminder that CSS grid columns start at 1 and end at the number of columns + 1. For example in a 3-column grid, the starting line would be 1 and the ending line would be 4.
 
-<code-well-header class="d-fl-center d-fd-column d-p24 d-bgc-purple-100 d-bgo50 d-w100p d-hmn216" custom>
-  <div class="d-d-grid d-g16 d-g-cols4 d-p16 d-w100p d-hmn216 d-bar8 d-bgc-purple-100">
-    <div class="d-fl-center d-p16 d-bgc-purple-300 d-bar4 d-fs-300 d-fw-bold d-o50">1</div>
-    <div class="d-fl-center d-p16 d-bgc-purple-300 d-bar4 d-fs-300 d-fw-bold d-o50">2</div>
-    <div class="d-gc2 d-fl-center d-p16 d-bgc-purple-300 d-bar4 d-fs-300 d-fw-bold">3</div>
-    <div class="d-gc2 d-fl-center d-p16 d-bgc-purple-300 d-bar4 d-fs-300 d-fw-bold">4</div>
-    <div class="d-fl-center d-p16 d-bgc-purple-300 d-bar4 d-fs-300 d-fw-bold d-o50">5</div>
-    <div class="d-fl-center d-p16 d-bgc-purple-300 d-bar4 d-fs-300 d-fw-bold d-o50">6</div>
-    <div class="d-fl-center d-p16 d-bgc-purple-300 d-bar4 d-fs-300 d-fw-bold d-o50">7</div>
-    <div class="d-gc3 d-fl-center d-p16 d-bgc-purple-300 d-bar4 d-fs-300 d-fw-bold">8</div>
-    <div class="d-gc-full d-fl-center d-p16 d-bgc-purple-300 d-bar4 d-fs-300 d-fw-bold">9</div>
+<code-well-header>
+  <div class="d-d-grid d-g16 d-g-cols4 d-w100p d-hmn216 d-bar8 d-bgc-moderate">
+    <div class="d-fl-center d-p16 d-bgc-moderate-opaque d-bar4">1</div>
+    <div class="d-fl-center d-p16 d-bgc-moderate-opaque d-bar4">2</div>
+    <div class="d-gc2 d-fl-center d-p16 d-bgc-bold-opaque d-bar4">3</div>
+    <div class="d-gc2 d-fl-center d-p16 d-bgc-bold-opaque d-bar4">4</div>
+    <div class="d-fl-center d-p16 d-bgc-moderate-opaque d-bar4">5</div>
+    <div class="d-fl-center d-p16 d-bgc-moderate-opaque d-bar4">6</div>
+    <div class="d-fl-center d-p16 d-bgc-moderate-opaque d-bar4">7</div>
+    <div class="d-gc3 d-fl-center d-p16 d-bgc-bold-opaque d-bar4">8</div>
+    <div class="d-gc-full d-fl-center d-p16 d-bgc-bold-opaque d-bar4">9</div>
   </div>
 </code-well-header>
 
@@ -39,15 +39,15 @@ Use `d-gc{#}` to span an element across multiple columns. This can be combined w
 
 Use `d-gcs{#}` to set the starting point for an element. This can be combined with `d-gc{#}` classes to span a set of columns.
 
-<code-well-header class="d-fl-center d-fd-column d-p24 d-bgc-gold-100 d-bgo50 d-w100p d-hmn216" custom>
-  <div class="d-d-grid d-g16 d-g-cols6 d-p16 d-w100p d-hmn216 d-bar8 d-bgc-gold-100">
-    <div class="d-fl-center d-p16 d-bgc-gold-100 d-bar4"></div>
-    <div class="d-gcs2 d-gce6 d-fl-center d-p16 d-bgc-gold-200 d-bar4 d-fs-300 d-fw-bold">1</div>
-    <div class="d-fl-center d-p16 d-bgc-gold-100 d-bar4"></div>
-    <div class="d-gcs1 d-gce5 d-fl-center d-p16 d-bgc-gold-200 d-bar4 d-fs-300 d-fw-bold">2</div>
-    <div class="d-fl-center d-p16 d-bgc-gold-100 d-bar4"></div>
-    <div class="d-fl-center d-p16 d-bgc-gold-100 d-bar4"></div>
-    <div class="d-gcs1 d-gce7 d-fl-center d-p16 d-bgc-gold-200 d-bar4 d-fs-300 d-fw-bold">3</div>
+<code-well-header>
+  <div class="d-d-grid d-g16 d-g-cols6 d-w100p d-hmn216 d-bar8 d-bgc-moderate">
+    <div class="d-fl-center d-p16 d-bgc-moderate-opaque d-bar4"></div>
+    <div class="d-gcs2 d-gce6 d-fl-center d-p16 d-bgc-bold-opaque d-bar4">1</div>
+    <div class="d-fl-center d-p16 d-bgc-moderate-opaque d-bar4"></div>
+    <div class="d-gcs1 d-gce5 d-fl-center d-p16 d-bgc-bold-opaque d-bar4">2</div>
+    <div class="d-fl-center d-p16 d-bgc-moderate-opaque d-bar4"></div>
+    <div class="d-fl-center d-p16 d-bgc-moderate-opaque d-bar4"></div>
+    <div class="d-gcs1 d-gce7 d-fl-center d-p16 d-bgc-bold-opaque d-bar4">3</div>
   </div>
 </code-well-header>
 
