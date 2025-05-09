@@ -4,7 +4,7 @@
  * because sd-transforms handles the transforms for CSS.
  */
 
-import { colorModifiersFilter, DeviceObjectFormat, deviceTransformColorModifiers, tokenColorToDeviceColor } from './transform-util.js';
+import { colorsFilter, colorModifiersFilter, DeviceObjectFormat, deviceTransformColorModifiers, tokenColorToDeviceColor } from './transform-util.js';
 
 const SIZE_IDENTIFIERS = ['sizing', 'borderWidth', 'borderRadius', 'blur', 'spread', 'x', 'y', 'dimension'];
 const SPACING_IDENTIFIERS = ['spacing'];
@@ -101,9 +101,7 @@ export function registerDialtoneTransforms (styleDictionary) {
   styleDictionary.registerTransform({
     name: 'dt/android/xml/color',
     type: 'value',
-    filter: function (token) {
-      return ['color'].includes(token.type);
-    },
+    filter: colorsFilter,
     transform: function (token) {
       return tokenColorToDeviceColor(token.value, DeviceObjectFormat.ANDROID_XML);
     },
@@ -122,9 +120,7 @@ export function registerDialtoneTransforms (styleDictionary) {
   styleDictionary.registerTransform({
     name: 'dt/android/compose/color',
     type: 'value',
-    filter: function (token) {
-      return ['color'].includes(token.type);
-    },
+    filter: colorsFilter,
     transform: (token) => {
       return tokenColorToDeviceColor(token.value, DeviceObjectFormat.ANDROID_COMPOSE);
     },
@@ -297,9 +293,7 @@ export function registerDialtoneTransforms (styleDictionary) {
   styleDictionary.registerTransform({
     name: 'dt/ios/color',
     type: 'value',
-    filter: function (token) {
-      return ['color'].includes(token.type);
-    },
+    filter: colorsFilter,
     transform: (token) => {
       return tokenColorToDeviceColor(token.value, DeviceObjectFormat.IOS_SWIFT);
     },
