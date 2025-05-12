@@ -1,3 +1,18 @@
+# [9.118.0](https://github.com/dialpad/dialtone/compare/dialtone/v9.117.2...dialtone/v9.118.0) (2025-05-12)
+
+
+### Bug Fixes
+
+* **Editor:** DP-140768 recipe editor throwing console error ([#749](https://github.com/dialpad/dialtone/issues/749)) ([0246ce2](https://github.com/dialpad/dialtone/commit/0246ce2b0bd7c7e0d25d17ae2e2884bfa37212da))
+* **Ivr Node:** NO-JIRA fix connector color in dark mode ([#748](https://github.com/dialpad/dialtone/issues/748)) ([08ed4ad](https://github.com/dialpad/dialtone/commit/08ed4ad24c1b7899e7a9673fcbfe81ff464192f4))
+* **Tokens:** DLT-2510 remove color tokens with a gradient for mobile ([#752](https://github.com/dialpad/dialtone/issues/752)) ([f02cfe1](https://github.com/dialpad/dialtone/commit/f02cfe1efc4d2f7413b1c9794c5bdfc48dc0534e))
+* **Utilities:** NO-JIRA add height utility classes for fit-content, max-content, and min-content ([#755](https://github.com/dialpad/dialtone/issues/755)) ([19130c8](https://github.com/dialpad/dialtone/commit/19130c841aba2bf098113f4b3636cec1f2972e24))
+
+
+### Features
+
+* **Illustrations:** DLT-2504 add new illustration mobile full notifications ([#754](https://github.com/dialpad/dialtone/issues/754)) ([9beb907](https://github.com/dialpad/dialtone/commit/9beb9072912d89968ef19a48b4000684ee114872))
+
 ## [9.117.2](https://github.com/dialpad/dialtone/compare/dialtone/v9.117.1...dialtone/v9.117.2) (2025-05-07)
 
 
