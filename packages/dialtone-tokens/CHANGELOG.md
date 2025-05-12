@@ -1,3 +1,10 @@
+## [1.43.2](https://github.com/dialpad/dialtone/compare/dialtone-tokens/v1.43.1...dialtone-tokens/v1.43.2) (2025-05-12)
+
+
+### Bug Fixes
+
+* **Tokens:** DLT-2510 remove color tokens with a gradient for mobile ([#752](https://github.com/dialpad/dialtone/issues/752)) ([f02cfe1](https://github.com/dialpad/dialtone/commit/f02cfe1efc4d2f7413b1c9794c5bdfc48dc0534e))
+
 ## [1.43.1](https://github.com/dialpad/dialtone/compare/dialtone-tokens/v1.43.0...dialtone-tokens/v1.43.1) (2025-05-07)
 
 
