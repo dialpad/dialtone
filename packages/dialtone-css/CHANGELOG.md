@@ -1,3 +1,11 @@
+## [8.57.1](https://github.com/dialpad/dialtone/compare/dialtone-css/v8.57.0...dialtone-css/v8.57.1) (2025-05-12)
+
+
+### Bug Fixes
+
+* **Ivr Node:** NO-JIRA fix connector color in dark mode ([#748](https://github.com/dialpad/dialtone/issues/748)) ([08ed4ad](https://github.com/dialpad/dialtone/commit/08ed4ad24c1b7899e7a9673fcbfe81ff464192f4))
+* **Utilities:** NO-JIRA add height utility classes for fit-content, max-content, and min-content ([#755](https://github.com/dialpad/dialtone/issues/755)) ([19130c8](https://github.com/dialpad/dialtone/commit/19130c841aba2bf098113f4b3636cec1f2972e24))
+
 # [8.57.0](https://github.com/dialpad/dialtone/compare/dialtone-css/v8.56.0...dialtone-css/v8.57.0) (2025-05-06)
 
 
