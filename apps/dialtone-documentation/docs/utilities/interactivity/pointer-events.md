@@ -5,22 +5,31 @@ description: Utilities for controlling how an element responds to mouse/touch ev
 
 ## Pointer Event Classes
 
-<code-well-header class="d-fl-col5 d-g8 d-fw-wrap d-p24 d-bgc-magenta-100 d-bgo50 d-w100p d-hmn102" custom>
-  <button v-for="{ class: className } in pointerEvents.slice(0, 3)" class="d-btn d-btn--filled d-code--sm" :class="className">.{{ className }}</button>
+<code-well-header>
+  <dt-stack direction="row" gap="400">
+    <div class="d-p16 d-bgc-moderate d-code--sm" v-for="{ class: className } in pointerEvents.slice(0, 3)" :class="className">.{{ className }}</div>
+  </dt-stack>
 </code-well-header>
 
 ```html
-<div class="d-pe-auto">...</div>
-<div class="d-pe-inherit">...</div>
-<div class="d-pe-none">...</div>
+<el class="d-pe-auto">...</el>
+<el class="d-pe-inherit">...</el>
+<el class="d-pe-none">...</el>
 ```
 
 ## User Select Classes
 
 Use the `user-select` property to control whether the user can select text.
 
-<code-well-header class="d-fl-col5 d-g8 d-fw-wrap d-p24 d-bgc-purple-100 d-bgo50 d-w100p d-hmn102" custom>
-  <div v-for="{ class: className } in pointerEvents.slice(3)" class="d-fl-center d-m8 d-p16 d-w332 d-bgc-purple-300 d-code--sm" :class="className">.{{ className }}</div>
+<code-well-header>
+  <dt-stack direction="row" gap="400">
+    <div v-for="{ class: className } in pointerEvents.slice(3)" class="d-p16 d-bgc-moderate d-code--sm" :class="className">
+      <dt-stack gap="400" class="d-ta-center">
+        <div>.{{ className }}</div>
+        <div>Try to select my text.</div>
+      </dt-stack>
+    </div>
+  </dt-stack>
 </code-well-header>
 
 ```html

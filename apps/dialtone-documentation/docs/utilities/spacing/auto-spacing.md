@@ -3,13 +3,17 @@ title: Auto Spacing
 description: Utilities for controlling the space between child elements.
 ---
 
+<dt-notice kind="info" class="d-wmx100p d-mt24" hideClose>
+  We recommend using the <router-link class="d-link d-link--muted" to="/components/stack/">Stack</router-link> component. It can still be combined with flex utilities to create more complex layouts.
+</dt-notice>
+
 ## Adding Space Vertically
 
-<code-well-header class="d-fl-center d-p24 d-bgc-purple-100 d-w100p d-hmn216" custom>
-  <div class="d-fl-center d-fd-column d-bgc-tan-200 d-stack16 d-bar8">
-    <div class="d-w128 d-p16 d-bar8 d-bgc-purple-300 d-fs-300 d-fw-bold d-ta-center">1</div>
-    <div class="d-w128 d-p16 d-bar8 d-bgc-purple-300 d-fs-300 d-fw-bold d-ta-center">2</div>
-    <div class="d-w128 d-p16 d-bar8 d-bgc-purple-300 d-fs-300 d-fw-bold d-ta-center">3</div>
+<code-well-header>
+  <div class="d-bgc-bold d-stack16 d-bar8 lg:d-w96 d-w128">
+    <div class="d-p16 d-bar8 d-bgc-moderate d-ta-center">1</div>
+    <div class="d-p16 d-bar8 d-bgc-moderate d-ta-center">2</div>
+    <div class="d-p16 d-bar8 d-bgc-moderate d-ta-center">3</div>
   </div>
 </code-well-header>
 
@@ -23,11 +27,11 @@ description: Utilities for controlling the space between child elements.
 
 ## Adding Space Horizontally
 
-<code-well-header class="d-fl-center d-p24 d-bgc-purple-100 d-w100p d-hmn216" custom>
-  <div class="d-fl-center d-bgc-tan-200 d-flow24 d-bar8 d-fs-300 d-fw-bold d-ta-center">
-    <div class="d-w96 lg:d-w128 d-p16 d-bar8 d-bgc-purple-300">1</div>
-    <div class="d-w96 lg:d-w128 d-p16 d-bar8 d-bgc-purple-300">2</div>
-    <div class="d-w96 lg:d-w128 d-p16 d-bar8 d-bgc-purple-300">3</div>
+<code-well-header>
+  <div class="d-fl-center d-bgc-bold d-flow24 d-bar8 d-ta-center">
+    <div class="lg:d-w96 d-w128 d-p16 d-bar8 d-bgc-moderate">1</div>
+    <div class="lg:d-w96 d-w128 d-p16 d-bar8 d-bgc-moderate">2</div>
+    <div class="lg:d-w96 d-w128 d-p16 d-bar8 d-bgc-moderate">3</div>
   </div>
 </code-well-header>
 

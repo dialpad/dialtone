@@ -7,8 +7,8 @@ description: Utilities to control an element's minimum height.
 
 Use `d-hmn{n}p` to set a minimum height percentage for an element. This can be combined with `d-h{n}p` and `d-hmx{n}` to have an element fill a certain height range.
 
-<code-well-header class="d-d-flex d-jc-center d-p24 d-bgc-purple-100 d-bgo50 d-w100p d-h216 d-flow16" custom>
-  <div class="d-fl-center d-py16 d-px8 d-w100p d-hmn100p d-bgc-purple-300 d-bar4 d-fs-300 d-fw-bold d-ta-center">1</div>
+<code-well-header class="d-d-flex d-jc-center d-p24 d-bgc-secondary d-bgo50 d-w100p d-h216 d-flow16" custom>
+  <div class="d-fl-center d-py16 d-px8 d-w100p d-hmn100p d-bgc-moderate d-bar4 d-ta-center">1</div>
 </code-well-header>
 
 ```html
@@ -21,10 +21,10 @@ Use `d-hmn{n}p` to set a minimum height percentage for an element. This can be c
 
 Use `d-hmn{n}` to set a fixed minimum height for an element. This can be combined with `d-h{n}p` and `d-hmx{n}` to have an element fill a certain height range.
 
-<code-well-header class="d-d-flex d-jc-center d-p24 d-bgc-magenta-100 d-bgo50 d-w100p d-hmn264 d-flow16 d-of-y-scroll" custom>
-  <div class="d-fl-center d-py16 d-px8 d-w64 d-h48 d-hmn64 d-bgc-magenta-100 d-bar4 d-fs-300 d-fw-bold d-ta-center">1</div>
-  <div class="d-fl-center d-py16 d-px8 d-w64 d-h48 d-hmn96 d-bgc-magenta-100 d-bar4 d-fs-300 d-fw-bold d-ta-center">2</div>
-  <div class="d-fl-center d-py16 d-px8 d-w64 d-hmn332 d-bgc-magenta-100 d-bar4 d-fs-300 d-fw-bold d-ta-center">3</div>
+<code-well-header class="d-d-flex d-jc-center d-p24 d-bgc-secondary d-w100p d-hmn264 d-flow16 d-of-y-scroll" custom>
+  <div class="d-fl-center d-py16 d-px8 d-w64 d-h48 d-hmn64 d-bgc-moderate d-bar4 d-ta-center">1</div>
+  <div class="d-fl-center d-py16 d-px8 d-w64 d-h48 d-hmn96 d-bgc-moderate d-bar4 d-ta-center">2</div>
+  <div class="d-fl-center d-py16 d-px8 d-w64 d-hmn332 d-bgc-moderate d-bar4 d-ta-center">3</div>
 </code-well-header>
 
 ```html

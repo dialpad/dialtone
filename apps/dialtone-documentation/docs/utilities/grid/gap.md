@@ -7,12 +7,12 @@ description: Utilities to control the spacing between columns, rows, or both in 
 
 Use `d-g{#}` to universally change the row and column gap space in grid layouts.
 
-<code-well-header class="d-fl-center d-fd-column d-p24 d-bgc-purple-100 d-bgo50 d-w100p d-hmn216" custom>
-  <div class="d-d-grid d-g16 d-g-cols2 d-p16 d-w100p d-hmn216 d-bar8 d-bgc-purple-100">
-    <div class="d-fl-center d-p16 d-bgc-purple-300 d-bar4 d-fs-300 d-fw-bold">1</div>
-    <div class="d-fl-center d-p16 d-bgc-purple-300 d-bar4 d-fs-300 d-fw-bold">2</div>
-    <div class="d-fl-center d-p16 d-bgc-purple-300 d-bar4 d-fs-300 d-fw-bold">3</div>
-    <div class="d-fl-center d-p16 d-bgc-purple-300 d-bar4 d-fs-300 d-fw-bold">4</div>
+<code-well-header>
+  <div class="d-d-grid d-g16 d-g-cols2 d-w100p d-bar8 d-bgc-bold">
+    <div class="d-fl-center d-p16 d-bgc-moderate d-bar4">1</div>
+    <div class="d-fl-center d-p16 d-bgc-moderate d-bar4">2</div>
+    <div class="d-fl-center d-p16 d-bgc-moderate d-bar4">3</div>
+    <div class="d-fl-center d-p16 d-bgc-moderate d-bar4">4</div>
   </div>
 </code-well-header>
 
@@ -29,17 +29,17 @@ Use `d-g{#}` to universally change the row and column gap space in grid layouts.
 
 Use `d-cg{#}` or `d-rg{#}` to independently change the row and column gap space in grid layouts.
 
-<code-well-header class="d-fl-center d-fd-column d-p24 d-bgc-green-100 d-bgo50 d-w100p d-hmn216" custom>
-  <div class="d-d-grid d-cg24 d-rg8 d-g-cols3 d-p16 d-w100p d-hmn216 d-bar8 d-bgc-green-100">
-    <div class="d-fl-center d-p16 d-bgc-green-200 d-bar4 d-fs-300 d-fw-bold">1</div>
-    <div class="d-fl-center d-p16 d-bgc-green-200 d-bar4 d-fs-300 d-fw-bold">2</div>
-    <div class="d-fl-center d-p16 d-bgc-green-200 d-bar4 d-fs-300 d-fw-bold">3</div>
-    <div class="d-fl-center d-p16 d-bgc-green-200 d-bar4 d-fs-300 d-fw-bold">4</div>
-    <div class="d-fl-center d-p16 d-bgc-green-200 d-bar4 d-fs-300 d-fw-bold">5</div>
-    <div class="d-fl-center d-p16 d-bgc-green-200 d-bar4 d-fs-300 d-fw-bold">6</div>
-    <div class="d-fl-center d-p16 d-bgc-green-200 d-bar4 d-fs-300 d-fw-bold">7</div>
-    <div class="d-fl-center d-p16 d-bgc-green-200 d-bar4 d-fs-300 d-fw-bold">8</div>
-    <div class="d-fl-center d-p16 d-bgc-green-200 d-bar4 d-fs-300 d-fw-bold">9</div>
+<code-well-header>
+  <div class="d-d-grid d-cg24 d-rg8 d-g-cols3 d-w100p d-bar8 d-bgc-bold">
+    <div class="d-fl-center d-p16 d-bgc-moderate d-bar4">1</div>
+    <div class="d-fl-center d-p16 d-bgc-moderate d-bar4">2</div>
+    <div class="d-fl-center d-p16 d-bgc-moderate d-bar4">3</div>
+    <div class="d-fl-center d-p16 d-bgc-moderate d-bar4">4</div>
+    <div class="d-fl-center d-p16 d-bgc-moderate d-bar4">5</div>
+    <div class="d-fl-center d-p16 d-bgc-moderate d-bar4">6</div>
+    <div class="d-fl-center d-p16 d-bgc-moderate d-bar4">7</div>
+    <div class="d-fl-center d-p16 d-bgc-moderate d-bar4">8</div>
+    <div class="d-fl-center d-p16 d-bgc-moderate d-bar4">9</div>
   </div>
 </code-well-header>
 

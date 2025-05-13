@@ -1,3 +1,10 @@
+# [4.37.0](https://github.com/dialpad/dialtone/compare/dialtone-icons/v4.36.0...dialtone-icons/v4.37.0) (2025-05-12)
+
+
+### Features
+
+* **Illustrations:** DLT-2504 add new illustration mobile full notifications ([#754](https://github.com/dialpad/dialtone/issues/754)) ([9beb907](https://github.com/dialpad/dialtone/commit/9beb9072912d89968ef19a48b4000684ee114872))
+
 # [4.36.0](https://github.com/dialpad/dialtone/compare/dialtone-icons/v4.35.0...dialtone-icons/v4.36.0) (2025-05-05)
 
 

@@ -1,9 +1,8 @@
 <template>
   <RouterLink
     :class="[
-      'd-btn d-btn--xs d-btn--muted d-w100p d-jc-flex-start',
-      { 'd-fw-bold d-bgc-moderate': active },
-      { 'd-fw-normal': !active },
+      'd-btn d-btn--xs d-btn--muted d-w100p d-jc-flex-start d-fw-normal',
+      { 'd-btn--active': active },
     ]"
     :to="to"
   >

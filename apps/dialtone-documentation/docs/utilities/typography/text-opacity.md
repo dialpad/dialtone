@@ -8,65 +8,77 @@ The ability to control an element's color is <em>only</em> provided as a class. 
 
 Use `d-fco{n}` to change a font-color's opacity. You can also change font-color's opacity on `:hover`, `:focus`, `:focus-visible` by using the respective `h:d-fco{n}`, `f:d-fco{n}`, `fv:d-fco{n}` prefixes.
 
-<code-well-header class="d-d-flex d-jc-center d-fd-column d-p24 d-bgc-magenta-100 d-w100p d-hmn102" custom>
-  <p class="d-fs-300 d-fc-magenta-400">The quick brown fox jumps over the lazy dog.</p>
-  <p class="d-fs-300 d-fc-magenta-400 d-fco99">The quick brown fox jumps over the lazy dog.</p>
-  <p class="d-fs-300 d-fc-magenta-400 d-fco95">The quick brown fox jumps over the lazy dog.</p>
-  <p class="d-fs-300 d-fc-magenta-400 d-fco90">The quick brown fox jumps over the lazy dog.</p>
-  <p class="d-fs-300 d-fc-magenta-400 d-fco75">The quick brown fox jumps over the lazy dog.</p>
-  <p class="d-fs-300 d-fc-magenta-400 d-fco50">The quick brown fox jumps over the lazy dog.</p>
-  <p class="d-fs-300 d-fc-magenta-400 d-fco25">The quick brown fox jumps over the lazy dog.</p>
-  <p class="d-fs-300 d-fc-magenta-400 d-fco10">The quick brown fox jumps over the lazy dog.</p>
-  <p class="d-fs-300 d-fc-magenta-400 d-fco0">The quick brown fox jumps over the lazy dog.</p>
+<code-well-header>
+  <p class="d-fc-critical">The quick brown fox jumps over the lazy dog.</p>
+  <p class="d-fc-critical d-fco99">The quick brown fox jumps over the lazy dog.</p>
+  <p class="d-fc-critical d-fco95">The quick brown fox jumps over the lazy dog.</p>
+  <p class="d-fc-critical d-fco90">The quick brown fox jumps over the lazy dog.</p>
+  <p class="d-fc-critical d-fco75">The quick brown fox jumps over the lazy dog.</p>
+  <p class="d-fc-critical d-fco50">The quick brown fox jumps over the lazy dog.</p>
+  <p class="d-fc-critical d-fco25">The quick brown fox jumps over the lazy dog.</p>
+  <p class="d-fc-critical d-fco10">The quick brown fox jumps over the lazy dog.</p>
+  <p class="d-fc-critical d-fco0">The quick brown fox jumps over the lazy dog.</p>
 </code-well-header>
 
 ```html
-<p class="d-fc-magenta-400">The quick brown fox jumps over the lazy dog.</p>
-<p class="d-fc-magenta-400 d-fco99">The quick brown fox jumps over the lazy dog.</p>
-<p class="d-fc-magenta-400 d-fco95">The quick brown fox jumps over the lazy dog.</p>
-<p class="d-fc-magenta-400 d-fco90">The quick brown fox jumps over the lazy dog.</p>
-<p class="d-fc-magenta-400 d-fco85">The quick brown fox jumps over the lazy dog.</p>
-<p class="d-fc-magenta-400 d-fco75">The quick brown fox jumps over the lazy dog.</p>
-<p class="d-fc-magenta-400 d-fco50">The quick brown fox jumps over the lazy dog.</p>
-<p class="d-fc-magenta-400 d-fco25">The quick brown fox jumps over the lazy dog.</p>
-<p class="d-fc-magenta-400 d-fco10">The quick brown fox jumps over the lazy dog.</p>
-<p class="d-fc-magenta-400 d-fco0">The quick brown fox jumps over the lazy dog.</p>
+<p class="d-fc-critical">The quick brown fox jumps over the lazy dog.</p>
+<p class="d-fc-critical d-fco99">The quick brown fox jumps over the lazy dog.</p>
+<p class="d-fc-critical d-fco95">The quick brown fox jumps over the lazy dog.</p>
+<p class="d-fc-critical d-fco90">The quick brown fox jumps over the lazy dog.</p>
+<p class="d-fc-critical d-fco85">The quick brown fox jumps over the lazy dog.</p>
+<p class="d-fc-critical d-fco75">The quick brown fox jumps over the lazy dog.</p>
+<p class="d-fc-critical d-fco50">The quick brown fox jumps over the lazy dog.</p>
+<p class="d-fc-critical d-fco25">The quick brown fox jumps over the lazy dog.</p>
+<p class="d-fc-critical d-fco10">The quick brown fox jumps over the lazy dog.</p>
+<p class="d-fc-critical d-fco0">The quick brown fox jumps over the lazy dog.</p>
 ```
 
-Please note that because the opacity adjustments are made via CSS variables, a font-color utility class must be present on the same element to work.
+### Inheritance Constraints
 
-<div class="d-fw-bold d-d-flex d-ai-center d-lh20 d-mt16">
-  <icon-close class="d-w24 d-h24 d-p2 d-bar-circle d-bgc-red-100 d-fc-red-200" />
-  <span class="d-ml8">Text opacity utility classes don't inherit colors.</span>
+Text opacity CSS Utilities won't be inherited by its children. A font-color utility class must be present on the same element to work.
+
+<div class="d-d-grid d-g16 lg:d-g-cols2">
+  <div>
+    <dt-stack direction="row" gap="400" class="d-fc-warning d-mb8">
+      <dt-icon name="alert-triangle" size="400" />
+      <strong>Text opacity utility classes don't inherit colors.</strong>
+    </dt-stack>
+    <code-well-header>
+      <div class="d-fc-critical">
+        <p>The quick brown fox jumps over the lazy dog.</p>
+        <p class="d-fco50">The quick brown fox jumps over the lazy dog.</p>
+      </div>
+    </code-well-header>
+
+```html
+// This will not work
+<div class="d-fc-critical">
+  <p>The quick brown fox jumps over the lazy dog.</p>
+  <p class="d-fco50">The quick brown fox jumps over the lazy dog.</p>
 </div>
-
-<!-- Is important to have a blank line between div and ```html -->
-<div  class="d-bgc-black-700 d-bar8">
-  <div  class="d-p8 d-bgc-red-200 d-bgo25 d-bar8">
-
-  ```jsx
-  <p class="d-fc-primary">
-      <span class="d-fco75">The quick brown fox jumps over the lazy dog.</span>
-  </p>
-  ```
+```
 
   </div>
+  <div>
+<dt-stack direction="row" gap="400" class="d-fc-success d-mb8">
+  <dt-icon name="check-circle" size="400" />
+  <strong>Apply each utility class to the same element</strong>
+</dt-stack>
+
+<code-well-header>
+  <div class="d-fc-critical">
+    <p>The quick brown fox jumps over the lazy dog.</p>
+    <p class="d-fc-critical d-fco50">The quick brown fox jumps over the lazy dog.</p>
+  </div>
+</code-well-header>
+
+```html
+// This will
+<div class="d-fc-critical">
+  <p>The quick brown fox jumps over the lazy dog.</p>
+  <p class="d-fc-critical d-fco50">The quick brown fox jumps over the lazy dog.</p>
 </div>
-
-<div class="d-fw-bold d-d-flex d-ai-center d-lh20 d-mt16">
-  <icon-checkmark class="d-w24 d-h24 d-p2 d-bar-circle d-bgc-green-100 d-fc-green-300" />
-  <span class="d-ml8">Add a font-color utility classes to enable the opacity class to work.</span>
-</div>
-
-<!-- Is important to have a blank line between div and ```html -->
-<div  class="d-bgc-black-700 d-bar8">
-  <div  class="d-p8 d-bgc-green-200 d-bgo25 d-bar8">
-
-  ```jsx
-  <p class="d-fc-primary">
-      <span class="d-fc-primary d-fco75">The quick brown fox jumps over the lazy dog.</span>
-  </p>
-  ```
+```
 
   </div>
 </div>
