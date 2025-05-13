@@ -7,19 +7,19 @@ description: Utilities for creating an background gradient and controlling its s
 
 Use `d-bgg-from-{color}` to declare the gradient starting color stop.
 
-<code-well-header class="d-d-flex d-jc-center d-fd-column d-p24 d-bgc-black-200 d-w100p d-hmn102" custom>
-  <div class="d-w100p d-h128 d-bar8 d-bgg-to-br d-bgg-from-purple-500"></div>
+<code-well-header>
+  <div class="d-w100p d-h128 d-bar8 d-bgg-to-br d-bgg-from-purple-400"></div>
 </code-well-header>
 
 ```html
-<div class="d-bgg-to-br d-bgg-from-purple-500">...</div>
+<div class="d-bgg-to-br d-bgg-from-purple-400">...</div>
 ```
 
 ## Ending Color
 
 Use `d-bgg-to-{color}` to declare the gradient ending color stop.
 
-<code-well-header class="d-d-flex d-jc-center d-fd-column d-p24 d-bgc-black-200 d-w100p d-hmn102" custom>
+<code-well-header>
   <div class="d-w100p d-h128 d-bar8 d-bgg-to-br d-bgg-from-magenta-300 d-bgg-to-purple-400"></div>
 </code-well-header>
 
@@ -27,20 +27,56 @@ Use `d-bgg-to-{color}` to declare the gradient ending color stop.
 <div class="d-bgg-to-br d-bgg-from-purple-400 d-bgg-to-magenta-300">...</div>
 ```
 
+## Hover
+
+Use `h:d-bgg-{from|to}-{color}` to change an element's background gradient color spot when in an `:hover` state.
+
+<code-well-header>
+  <dt-button kind="unstyled" class="d-p16 d-bar4 d-fs-200 d-bgg-to-r d-bgg-from-purple-300 h:d-bgg-from-purple-300 d-bgg-to-magenta-100 h:d-bgg-to-magenta-300 d-baw0">Hover over me</dt-button>
+</code-well-header>
+
+```html
+<dt-button kind="unstyled" class="d-p16 d-bar4 d-fs-200 d-bgg-to-r d-bgg-from-purple-300 h:d-bgg-from-purple-300 d-bgg-to-magenta-100 h:d-bgg-to-magenta-300 d-baw0">Hover over me</dt-button>
+```
+
+## Focus
+
+Use `f:d-bgg-{from|to}-{color}` to change an element's background gradient starting and ending stops in `:focus` and `:focus-within` states.
+
+<code-well-header>
+  <dt-button kind="unstyled" class="d-p16 d-bar4 d-fs-200 d-bgg-to-r d-bgg-from-purple-300 h:d-bgg-from-purple-300 d-bgg-to-magenta-100 f:d-bgg-to-magenta-300 d-baw0">Focus me</dt-button>
+</code-well-header>
+
+```html
+<dt-button kind="unstyled" class="d-p16 d-bar4 d-fs-200 d-bgg-to-r d-bgg-from-purple-300 h:d-bgg-from-purple-300 d-bgg-to-magenta-100 f:d-bgg-to-magenta-300 d-baw0">Focus me</dt-button>
+```
+
+## Focus Visible
+
+Use `fv:d-bgg-{from|to}-{color}` to change an element's background gradient starting and ending stops in `:focus-visible` state [only when focused by keyboard].
+
+<code-well-header>
+  <dt-button kind="unstyled" class="d-p16 d-bar4 d-fs-200 d-bgg-to-r d-bgg-from-purple-300 h:d-bgg-from-purple-300 d-bgg-to-magenta-100 fv:d-bgg-to-magenta-300 d-baw0">Keyboard focus me</dt-button>
+</code-well-header>
+
+```html
+<dt-button kind="unstyled" class="d-p16 d-bar4 d-fs-200 d-bgg-to-r d-bgg-from-purple-300 h:d-bgg-from-purple-300 d-bgg-to-magenta-100 fv:d-bgg-to-magenta-300 d-baw0">Keyboard focus me</dt-button>
+```
+
 ## Changing Opacities
 
 Use `d-bgg-(from|to)-o{n}` to change the opacity values of each gradient color stop. You can also change the opacity values of each gradient color stop on `:hover`, `:focus`, `:focus-visible` by using the respective `h:d-bgg-(from|to)-o{n}`, `f:d-bgg-(from|to)-o{n}`, `fv:d-bgg-(from|to)-o{n}` prefixes.
 
-<code-well-header class="d-d-flex d-jc-center d-fd-column d-p24 d-bgc-black-200 d-w100p d-hmn102 d-stack8" custom>
-  <div class="d-d-flex d-jc-space-between d-ai-center d-p8 d-w100p d-h48 d-bar8 d-bgg-to-r d-bgg-from-purple-300 d-bgg-to-magenta-100 d-bgg-to-o0 d-fs-300 d-fw-bold d-fc-primary-inverted"><span>100%</span><span>0%</span></div>
-  <div class="d-d-flex d-jc-space-between d-ai-center d-p8 d-w100p d-h48 d-bar8 d-bgg-to-r d-bgg-from-purple-300 d-bgg-from-o99 d-bgg-to-magenta-100 d-bgg-to-o10 d-fs-300 d-fw-bold d-fc-primary-inverted"><span>99%</span><span>10%</span></div>
-  <div class="d-d-flex d-jc-space-between d-ai-center d-p8 d-w100p d-h48 d-bar8 d-bgg-to-r d-bgg-from-purple-300 d-bgg-from-o95 d-bgg-to-magenta-100 d-bgg-to-o25 d-fs-300 d-fw-bold d-fc-primary-inverted"><span>95%</span><span>25%</span></div>
-  <div class="d-d-flex d-jc-space-between d-ai-center d-p8 d-w100p d-h48 d-bar8 d-bgg-to-r d-bgg-from-purple-300 d-bgg-from-o90 d-bgg-to-magenta-100 d-bgg-to-o50 d-fs-300 d-fw-bold d-fc-primary-inverted"><span>90%</span><span>50%</span></div>
-  <div class="d-d-flex d-jc-space-between d-ai-center d-p8 d-w100p d-h48 d-bar8 d-bgg-to-r d-bgg-from-purple-300 d-bgg-from-o75 d-bgg-to-magenta-100 d-bgg-to-o75 d-fs-300 d-fw-bold d-fc-primary-inverted"><span>75%</span><span>75%</span></div>
-  <div class="d-d-flex d-jc-space-between d-ai-center d-p8 d-w100p d-h48 d-bar8 d-bgg-to-r d-bgg-from-purple-300 d-bgg-from-o50 d-bgg-to-magenta-100 d-bgg-to-o90 d-fs-300 d-fw-bold d-fc-primary-inverted"><span>50%</span><span>90%</span></div>
-  <div class="d-d-flex d-jc-space-between d-ai-center d-p8 d-w100p d-h48 d-bar8 d-bgg-to-r d-bgg-from-purple-300 d-bgg-from-o25 d-bgg-to-magenta-100 d-bgg-to-o95 d-fs-300 d-fw-bold d-fc-primary-inverted"><span>25%</span><span>95%</span></div>
-  <div class="d-d-flex d-jc-space-between d-ai-center d-p8 d-w100p d-h48 d-bar8 d-bgg-to-r d-bgg-from-purple-300 d-bgg-from-o10 d-bgg-to-magenta-100 d-bgg-to-o99 d-fs-300 d-fw-bold d-fc-primary-inverted"><span>10%</span><span>99%</span></div>
-  <div class="d-d-flex d-jc-space-between d-ai-center d-p8 d-w100p d-h48 d-bar8 d-bgg-to-r d-bgg-from-purple-300 d-bgg-from-o0 d-bgg-to-magenta-100 d-fs-300 d-fw-bold d-fc-primary-inverted"><span>0%</span><span>100%</span></div>
+<code-well-header>
+  <div class="d-d-flex d-jc-space-between d-ai-center d-p8 d-w100p d-h48 d-bar8 d-bgg-to-r d-bgg-from-purple-300 d-bgg-to-magenta-100 d-bgg-to-o0 d-fs-300 d-fw-bold"><span>100%</span><span>0%</span></div>
+  <div class="d-d-flex d-jc-space-between d-ai-center d-p8 d-w100p d-h48 d-bar8 d-bgg-to-r d-bgg-from-purple-300 d-bgg-from-o99 d-bgg-to-magenta-100 d-bgg-to-o10 d-fs-300 d-fw-bold"><span>99%</span><span>10%</span></div>
+  <div class="d-d-flex d-jc-space-between d-ai-center d-p8 d-w100p d-h48 d-bar8 d-bgg-to-r d-bgg-from-purple-300 d-bgg-from-o95 d-bgg-to-magenta-100 d-bgg-to-o25 d-fs-300 d-fw-bold"><span>95%</span><span>25%</span></div>
+  <div class="d-d-flex d-jc-space-between d-ai-center d-p8 d-w100p d-h48 d-bar8 d-bgg-to-r d-bgg-from-purple-300 d-bgg-from-o90 d-bgg-to-magenta-100 d-bgg-to-o50 d-fs-300 d-fw-bold"><span>90%</span><span>50%</span></div>
+  <div class="d-d-flex d-jc-space-between d-ai-center d-p8 d-w100p d-h48 d-bar8 d-bgg-to-r d-bgg-from-purple-300 d-bgg-from-o75 d-bgg-to-magenta-100 d-bgg-to-o75 d-fs-300 d-fw-bold"><span>75%</span><span>75%</span></div>
+  <div class="d-d-flex d-jc-space-between d-ai-center d-p8 d-w100p d-h48 d-bar8 d-bgg-to-r d-bgg-from-purple-300 d-bgg-from-o50 d-bgg-to-magenta-100 d-bgg-to-o90 d-fs-300 d-fw-bold"><span>50%</span><span>90%</span></div>
+  <div class="d-d-flex d-jc-space-between d-ai-center d-p8 d-w100p d-h48 d-bar8 d-bgg-to-r d-bgg-from-purple-300 d-bgg-from-o25 d-bgg-to-magenta-100 d-bgg-to-o95 d-fs-300 d-fw-bold"><span>25%</span><span>95%</span></div>
+  <div class="d-d-flex d-jc-space-between d-ai-center d-p8 d-w100p d-h48 d-bar8 d-bgg-to-r d-bgg-from-purple-300 d-bgg-from-o10 d-bgg-to-magenta-100 d-bgg-to-o99 d-fs-300 d-fw-bold"><span>10%</span><span>99%</span></div>
+  <div class="d-d-flex d-jc-space-between d-ai-center d-p8 d-w100p d-h48 d-bar8 d-bgg-to-r d-bgg-from-purple-300 d-bgg-from-o0 d-bgg-to-magenta-100 d-fs-300 d-fw-bold"><span>0%</span><span>100%</span></div>
 </code-well-header>
 
 ```html
@@ -53,42 +89,6 @@ Use `d-bgg-(from|to)-o{n}` to change the opacity values of each gradient color s
 <div class="d-bgg-from-purple-300 d-bgg-from-o25 d-bgg-to-magenta-100 d-bgg-to-o95">...</div>
 <div class="d-bgg-from-purple-300 d-bgg-from-o10 d-bgg-to-magenta-100 d-bgg-to-o99">...</div>
 <div class="d-bgg-from-purple-300 d-bgg-from-o0 d-bgg-to-magenta-100">...</div>
-```
-
-## Hover
-
-Use `h:d-bgg-{from|to}-{color}` to change an element's background gradient color spot when in an `:hover` state.
-
-<code-well-header class="d-fl-center d-p24 d-bgc-black-200 d-w100p d-hmn102" custom>
-  <button class="d-p16 d-bar4 d-fs-200 d-fc-primary-inverted d-bgg-to-r d-bgg-from-purple-300 h:d-bgg-from-purple-300 d-bgg-to-magenta-100 h:d-bgg-to-magenta-300 d-baw0">Hover over me</button>
-</code-well-header>
-
-```html
-<button class="d-bgg-from-purple-300 h:d-bgg-from-purple-300 d-bgg-to-magenta-100 h:d-bgg-to-magenta-300">...</button>
-```
-
-## Focus
-
-Use `f:d-bgg-{from|to}-{color}` to change an element's background gradient starting and ending stops in `:focus` and `:focus-within` states.
-
-<code-well-header class="d-fl-center d-p24 d-bgc-black-200 d-w100p d-hmn102" custom>
-  <button class="d-p16 d-bar4 d-fs-200 d-fc-primary-inverted d-bgg-to-r d-bgg-from-purple-300 f:d-bgg-from-purple-300 d-bgg-to-magenta-100 f:d-bgg-to-purple-500 d-baw0">Click on me</button>
-</code-well-header>
-
-```html
-<button class="d-bgg-from-purple-300 f:d-bgg-from-purple-300 d-bgg-to-magenta-100 f:d-bgg-to-purple-500">...</button>
-```
-
-## Focus Visible
-
-Use `fv:d-bgg-{from|to}-{color}` to change an element's background gradient starting and ending stops in `:focus-visible` state [only when focused by keyboard].
-
-<code-well-header class="d-fl-center d-p24 d-bgc-black-200 d-w100p d-hmn102" custom>
-  <button class="d-p16 d-bar4 d-fs-200 d-fc-primary-inverted d-bgg-to-r d-bgg-from-purple-300 fv:d-bgg-from-purple-300 d-bgg-to-magenta-100 fv:d-bgg-to-purple-500 d-baw0">Focus on me</button>
-</code-well-header>
-
-```html
-<button class="d-bgg-from-purple-300 fv:d-bgg-from-purple-300 d-bgg-to-magenta-100 fv:d-bgg-to-purple-500">...</button>
 ```
 
 ## Directions

@@ -26,7 +26,7 @@
         >
           <template #anchor>
             <dt-button
-              :ref="(el) => { buttonRefMap[getButtonRef(buttonGroup.key, button.selector)] = el }"
+              :ref="getButtonRef(buttonGroup.key, button.selector)"
               :active="$refs.richTextEditor?.editor?.isActive(button.selector)"
               :aria-label="button.tooltipMessage"
               :data-qa="button.dataQA"
@@ -75,7 +75,7 @@
             >
               <template #anchor>
                 <dt-button
-                  :ref="(el) => { buttonRefMap[getButtonRef('custom', 'link')] = el }"
+                  :ref="getButtonRef('custom', 'link')"
                   :active="$refs.richTextEditor?.editor?.isActive(linkButton.selector)"
                   :aria-label="linkButton.tooltipMessage"
                   :data-qa="linkButton.dataQA"
@@ -166,6 +166,8 @@
       <dt-rich-text-editor
         ref="richTextEditor"
         v-model="internalInputValue"
+        :allow-font-color="true"
+        :allow-font-family="true"
         :allow-inline-images="true"
         :allow-line-breaks="true"
         :hide-link-bubble-menu="true"
@@ -221,7 +223,6 @@ import {
   DtIconStrikethrough,
   DtIconUnderline,
 } from '@dialpad/dialtone-icons/vue2';
-import { ref } from 'vue';
 
 export default {
   name: 'DtRecipeEditor',
@@ -546,7 +547,6 @@ export default {
       showLinkInput: false,
       linkInput: '',
       currentButtonRefIndex: 0,
-      buttonRefMap: ref({}),
     };
   },
 
@@ -932,12 +932,14 @@ export default {
     },
 
     shiftButtonRefIndex (shiftAmount) {
-      const previousRef = this.buttonRefMap[this.orderedRefs[this.currentButtonRefIndex]];
+      const previousRef = this.$refs[this.orderedRefs[this.currentButtonRefIndex]];
+      const previousActionBarBtn = Array.isArray(previousRef) ? previousRef[0] : previousRef;
       const index = (this.currentButtonRefIndex + shiftAmount) % this.orderedRefs.length;
       this.currentButtonRefIndex = index >= 0 ? index : this.orderedRefs.length + index;
-      const currentRef = this.buttonRefMap[this.orderedRefs[this.currentButtonRefIndex]];
-      previousRef.$el.blur();
-      currentRef.$el.focus();
+      const currentRef = this.$refs[this.orderedRefs[this.currentButtonRefIndex]];
+      const currentActionBarBtn = Array.isArray(currentRef) ? currentRef[0] : currentRef;
+      previousActionBarBtn.$el.blur();
+      currentActionBarBtn.$el.focus();
     },
   },
 };

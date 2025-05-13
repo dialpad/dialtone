@@ -7,87 +7,88 @@ description: Utilities for controlling the divider width between an element's ch
 
 Use `d-divide-{y|x}` to create a 1px divider between an element's child items.
 
-<code-well-header class="d-fl-center d-fd-column d-p24 d-bgc-green-100 d-bgo50 d-w100p d-hmn102" custom>
-  <div class="d-w100p d-d-flex d-fd-column d-divide-y d-divide-green-300">
-    <div class="d-fl-center d-w100p d-h64 d-p16 d-fc-green-400 d-fs-300 d-fw-bold">1</div>
-    <div class="d-fl-center d-w100p d-h64 d-p16 d-fc-green-400 d-fs-300 d-fw-bold">2</div>
-    <div class="d-fl-center d-w100p d-h64 d-p16 d-fc-green-400 d-fs-300 d-fw-bold">3</div>
-  </div>
-  <div class="d-w100p d-fl-col3 d-divide-x d-divide-green-300">
-    <div class="d-fl-center d-fl-grow1 d-h64 d-p16 d-fc-green-400 d-fs-300 d-fw-bold">1</div>
-    <div class="d-fl-center d-fl-grow1 d-h64 d-p16 d-fc-green-400 d-fs-300 d-fw-bold">2</div>
-    <div class="d-fl-center d-fl-grow1 d-h64 d-p16 d-fc-green-400 d-fs-300 d-fw-bold">3</div>
-  </div>
+<code-well-header>
+  <dt-stack class="d-divide-y d-divide-default d-w100p">
+    <div class="d-fl-center d-p16">1</div>
+    <div class="d-fl-center d-p16">2</div>
+    <div class="d-fl-center d-p16">3</div>
+  </dt-stack>
+  <dt-stack direction="row" class="d-divide-x d-divide-default d-w100p">
+    <div class="d-fl-center d-w100p d-p16">1</div>
+    <div class="d-fl-center d-w100p d-p16">2</div>
+    <div class="d-fl-center d-w100p d-p16">3</div>
+  </dt-stack>
 </code-well-header>
 
 ```html
-<div class="d-divide-y d-divide-purple-400">
-  <div>1</div>
-  <div>2</div>
-  <div>3</div>
-</div>
-<div class="d-divide-x d-divide-purple-400">
-  <div>1</div>
-  <div>2</div>
-  <div>3</div>
-</div>
+<dt-stack class="d-divide-y d-divide-default d-w100p">
+  <div class="d-fl-center d-p16">1</div>
+  <div class="d-fl-center d-p16">2</div>
+  <div class="d-fl-center d-p16">3</div>
+</dt-stack>
+
+<dt-stack direction="row" class="d-divide-x d-divide-default d-w100p">
+  <div class="d-fl-center d-w100p d-p16">1</div>
+  <div class="d-fl-center d-w100p d-p16">2</div>
+  <div class="d-fl-center d-w100p d-p16">3</div>
+</dt-stack>
 ```
 
 ## Changing the Divider Width
 
 Use `d-divide-{y|x}{n}` to change the divider width between an element's child items.
 
-<code-well-header class="d-fl-center d-fd-column d-p24 d-bgc-purple-100 d-bgo50 d-w100p d-hmn102 d-stack8">
-  <div class="d-w100p d-d-flex d-fd-column d-p8 d-bar8 d-bgc-purple-100">
-    <code>.d-divide-x0</code>
-    <div class="d-w100p d-fl-col3 d-divide-x0 d-divide-purple-400">
-        <div class="d-fl-center d-fl-grow1 d-p16 d-fc-purple-500 d-fs-300 d-fw-bold">1</div>
-        <div class="d-fl-center d-fl-grow1 d-p16 d-fc-purple-500 d-fs-300 d-fw-bold">2</div>
-        <div class="d-fl-center d-fl-grow1 d-p16 d-fc-purple-500 d-fs-300 d-fw-bold">3</div>
-    </div>
-  </div>
-  <div class="d-w100p d-d-flex d-fd-column d-p8 d-bar8 d-bgc-purple-100">
-    <code>.d-divide-x2</code>
-    <div class="d-w100p d-fl-col3 d-divide-x2 d-divide-purple-400">
-        <div class="d-fl-center d-fl-grow1 d-p16 d-fc-purple-500 d-fs-300 d-fw-bold">1</div>
-        <div class="d-fl-center d-fl-grow1 d-p16 d-fc-purple-500 d-fs-300 d-fw-bold">2</div>
-        <div class="d-fl-center d-fl-grow1 d-p16 d-fc-purple-500 d-fs-300 d-fw-bold">3</div>
-    </div>
-  </div>
-  <div class="d-w100p d-d-flex d-fd-column d-p8 d-bar8 d-bgc-purple-100">
-    <code>.d-divide-x4</code>
-    <div class="d-w100p d-fl-col3 d-divide-x4 d-divide-purple-400">
-        <div class="d-fl-center d-fl-grow1 d-p16 d-fc-purple-500 d-fs-300 d-fw-bold">1</div>
-        <div class="d-fl-center d-fl-grow1 d-p16 d-fc-purple-500 d-fs-300 d-fw-bold">2</div>
-        <div class="d-fl-center d-fl-grow1 d-p16 d-fc-purple-500 d-fs-300 d-fw-bold">3</div>
-    </div>
-  </div>
+<code-well-header>
+  <code>d-divide-x0</code>
+  <dt-stack direction="row" class="d-divide-x d-divide-x0 d-divide-default d-w100p d-ba d-bc-default">
+    <div class="d-fl-center d-w100p d-p16">1</div>
+    <div class="d-fl-center d-w100p d-p16">2</div>
+    <div class="d-fl-center d-w100p d-p16">3</div>
+  </dt-stack>
+  <code>d-divide-x2</code>
+  <dt-stack direction="row" class="d-divide-x d-divide-x2 d-divide-default d-w100p d-ba d-bc-default d-baw2">
+    <div class="d-fl-center d-w100p d-p16">1</div>
+    <div class="d-fl-center d-w100p d-p16">2</div>
+    <div class="d-fl-center d-w100p d-p16">3</div>
+  </dt-stack>
+  <code>d-divide-x4</code>
+  <dt-stack direction="row" class="d-divide-x d-divide-x4 d-divide-default d-w100p d-ba d-bc-default d-baw4">
+    <div class="d-fl-center d-w100p d-p16">1</div>
+    <div class="d-fl-center d-w100p d-p16">2</div>
+    <div class="d-fl-center d-w100p d-p16">3</div>
+  </dt-stack>
 </code-well-header>
 
 ```html
-<div class="d-divide-x0 ...">...</div>
-<div class="d-divide-x2 ...">...</div>
-<div class="d-divide-x4 ...">...</div>
+<dt-stack direction="row" class="d-divide-x d-divide-x0 d-divide-default d-w100p d-ba d-bc-default">
+  ...
+</dt-stack>
+<dt-stack direction="row" class="d-divide-x d-divide-x2 d-divide-default d-w100p d-ba d-bc-default d-baw2">
+  ...
+</dt-stack>
+<dt-stack direction="row" class="d-divide-x d-divide-x4 d-divide-default d-w100p d-ba d-bc-default d-baw4">
+  ...
+</dt-stack>
 ```
 
 ## Reversing the Divider Direction
 
 If an element's `flex-direction` is reversed, apply `d-divide-{y|x}-reverse` to reverse the divider placement between an element's child items.
 
-<code-well-header class="d-fl-center d-fd-column d-p24 d-bgc-magenta-100 d-bgo50 d-w100p d-hmn102" custom>
-  <div class="d-w100p d-d-flex d-fd-column-reverse d-divide-y d-divide-y-reverse d-divide-magenta-200">
-    <div class="d-fl-center d-p16 d-fc-magenta-400 d-fs-300 d-fw-bold">1</div>
-    <div class="d-fl-center d-p16 d-fc-magenta-400 d-fs-300 d-fw-bold">2</div>
-    <div class="d-fl-center d-p16 d-fc-magenta-400 d-fs-300 d-fw-bold">3</div>
-  </div>
+<code-well-header>
+  <dt-stack direction="row-reverse" class="d-divide-x d-divide-default d-divide-x-reverse d-w100p">
+    <div class="d-fl-center d-w100p d-p16">1</div>
+    <div class="d-fl-center d-w100p d-p16">2</div>
+    <div class="d-fl-center d-w100p d-p16">3</div>
+  </dt-stack>
 </code-well-header>
 
 ```html
-<div class="d-fd-column-reverse d-divide-y d-divide-y-reverse">
-  <div>1</div>
-  <div>2</div>
-  <div>3</div>
-</div>
+<dt-stack direction="row-reverse" class="d-divide-x d-divide-default d-divide-x-reverse d-w100p d-ba d-bc-default">
+  <div class="d-fl-center d-w100p d-p16">1</div>
+  <div class="d-fl-center d-w100p d-p16">2</div>
+  <div class="d-fl-center d-w100p d-p16">3</div>
+</dt-stack>
 ```
 
 ## Classes
