@@ -1,17 +1,16 @@
 import { createLocalVue, mount } from '@vue/test-utils';
 import DtPagination from './pagination.vue';
 import { DtButton } from '@/components/button';
+import { useI18N } from '@dialpad/i18n-vue2';
+const { $t } = useI18N();
 
-const getPageNumberAriaLabel = (page) => {
-  return `Page number ${page}`;
-};
+const MOCK_LOCALIZED_FIRST_PAGE = $t('DIALTONE_PAGINATION_FIRST_PAGE');
+const MOCK_LOCALIZED_NEXT_PAGE = $t('DIALTONE_PAGINATION_NEXT_PAGE');
+const MOCK_LOCALIZED_FIRST_PAGE_NUMBER = $t('DIALTONE_PAGINATION_PAGE_NUMBER', { page: 1 });
 
 const baseProps = {
   totalPages: 5,
-  prevAriaLabel: 'previous',
-  nextAriaLabel: 'next',
   ariaLabel: 'pagination',
-  pageNumberAriaLabel: getPageNumberAriaLabel,
 };
 
 let mockProps = {};
@@ -75,15 +74,15 @@ describe('DtPagination Tests', () => {
       });
 
       it('prev button should have aria-label', () => {
-        expect(prev.attributes('aria-label')).toBe('previous');
+        expect(prev.attributes('aria-label')).toBe(MOCK_LOCALIZED_FIRST_PAGE);
       });
 
       it('next button should have aria-label', () => {
-        expect(next.attributes('aria-label')).toBe('next');
+        expect(next.attributes('aria-label')).toBe(MOCK_LOCALIZED_NEXT_PAGE);
       });
 
       it('first page should have aria-label', () => {
-        expect(pages.at(1).attributes('aria-label')).toBe('Page number 1');
+        expect(pages.at(1).attributes('aria-label')).toBe(MOCK_LOCALIZED_FIRST_PAGE_NUMBER);
       });
     });
 

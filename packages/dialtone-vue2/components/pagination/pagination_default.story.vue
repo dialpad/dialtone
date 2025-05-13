@@ -5,9 +5,6 @@
     :max-visible="$attrs.maxVisible"
     :hide-edges="$attrs.hideEdges"
     :aria-label="$attrs.ariaLabel"
-    :prev-aria-label="$attrs.prevAriaLabel"
-    :next-aria-label="$attrs.nextAriaLabel"
-    :page-number-aria-label="getPageNumberAriaLabel"
     @change="$attrs.onChange"
   />
 </template>
@@ -18,10 +15,5 @@ import DtPagination from './pagination.vue';
 export default {
   name: 'DtPaginationDefault',
   components: { DtPagination },
-  methods: {
-    getPageNumberAriaLabel (page) {
-      return page === this.$attrs.totalPages ? `Last page ${page}` : `Page ${page}`;
-    },
-  },
 };
 </script>
