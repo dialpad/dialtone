@@ -45,14 +45,14 @@
     >
       <template #anchor>
         <dt-button
+          :active="open"
+          :class="['d-recipe-callbar-button-with-popover__arrow',
+                   { 'd-recipe-callbar-button-with-popover__arrow--large': !isCompactMode }]"
           circle
           importance="clear"
           size="lg"
-          :class="['d-recipe-callbar-button-with-popover__arrow',
-                   { 'd-recipe-callbar-button-with-popover__arrow--large': !isCompactMode }]"
+          v-bind="arrowButtonLabel"
           width="2rem"
-          :aria-label="arrowButtonLabel"
-          :active="open"
           @click="arrowClick"
         >
           <template #icon>
@@ -85,11 +85,14 @@ import { DtPopover } from '@/components/popover';
 import { DtIconChevronUp } from '@dialpad/dialtone-icons/vue2';
 import { DtRecipeCallbarButton, CALLBAR_BUTTON_VALID_WIDTH_SIZE } from '../callbar_button';
 import utils, { warnIfUnmounted } from '@/common/utils';
+import { DtLocalizationMixin } from '@/common/mixins';
 
 export default {
   name: 'DtRecipeCallbarButtonWithPopover',
 
   components: { DtRecipeCallbarButton, DtPopover, DtButton, DtIconChevronUp },
+
+  mixins: [DtLocalizationMixin],
 
   /* inheritAttrs: false is generally an option we want to set on library
     components. This allows any attributes passed in that are not recognized
@@ -116,17 +119,6 @@ export default {
       default: null,
       validator: (label) => {
         return label || this.$slots.default;
-      },
-    },
-
-    /**
-     * Aria label for the arrow. Cannot be empty.
-     */
-    arrowButtonLabel: {
-      type: String,
-      required: true,
-      validator: (label) => {
-        return !!label;
       },
     },
 
@@ -341,6 +333,10 @@ export default {
       }
 
       return this.toggleOpen();
+    },
+
+    arrowButtonLabel () {
+      return this.$ta('DIALTONE_CALLBAR_BUTTON_WITH_POPOVER_ARROW_BUTTON_LABEL');
     },
   },
 
