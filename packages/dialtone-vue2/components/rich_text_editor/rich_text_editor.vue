@@ -686,7 +686,7 @@ export default {
     this.createEditor();
   },
 
-  beforeUnmount () {
+  beforeDestroy () {
     this.destroyEditor();
   },
 
