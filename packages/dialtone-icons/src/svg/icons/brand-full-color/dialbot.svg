@@ -5,11 +5,17 @@
 <path d="M15.1998 14.0998C14.7622 14.482 14.2651 14.7776 13.7086 14.9865C13.1521 15.1954 12.5836 15.2998 12.0033 15.2998C11.4183 15.2998 10.8475 15.1954 10.291 14.9865C9.73446 14.7776 9.23737 14.482 8.7998 14.0998V13.2998C9.09471 13.4776 9.42763 13.6309 9.79869 13.7598C10.1657 13.8934 10.5426 13.9982 10.9259 14.0732C11.3113 14.1487 11.6704 14.1865 12.0033 14.1865C12.3411 14.1865 12.7002 14.1487 13.0807 14.0732C13.4641 13.9981 13.841 13.8934 14.2081 13.7598C14.579 13.6309 14.9096 13.4776 15.1998 13.2998V14.0998Z" fill="white"/>
 </g>
 <defs>
-<linearGradient id="paint0_linear_11308_2982" x1="1.9308" y1="0.5" x2="22.0692" y2="24.5" gradientUnits="userSpaceOnUse">
-<stop stop-color="#FF5E2F"/>
-<stop offset="0.25" stop-color="#FF1356"/>
-<stop offset="0.66" stop-color="#FF1BA4"/>
-<stop offset="1" stop-color="#9D42EA"/>
+<linearGradient id="paint0_linear_11308_2982" x1="-3.75" y1="-4.675" x2="24.75" y2="24.5" gradientUnits="userSpaceOnUse">
+<stop offset="0.0601577" stop-color="#10022C"/>
+<stop offset="0.200258" stop-color="#611F93"/>
+<stop offset="0.289616" stop-color="#8223A1"/>
+<stop offset="0.366456" stop-color="#9325A5"/>
+<stop offset="0.459136" stop-color="#C52599" stop-opacity="0.9"/>
+<stop offset="0.563509" stop-color="#D52C86"/>
+<stop offset="0.658104" stop-color="#EA2F6F"/>
+<stop offset="0.73655" stop-color="#F64850"/>
+<stop offset="0.895954" stop-color="#FD6D2D"/>
+<stop offset="0.955002" stop-color="#FF9E0E" stop-opacity="0.95"/>
 </linearGradient>
 <clipPath id="clip0_11308_2982">
 <rect width="24" height="24" fill="white" transform="translate(0 0.5)"/>

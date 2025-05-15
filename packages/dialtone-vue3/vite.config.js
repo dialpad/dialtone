@@ -43,7 +43,7 @@ export default defineConfig({
     minify: true,
     rollupOptions: {
       external: [
-        /^@dialpad\/dialtone/,
+        /^@dialpad/,
         /^@tiptap\/(?!vue-3)/,
         /^date-fns/,
         /^emoji-toolkit/,

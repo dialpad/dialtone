@@ -1,3 +1,10 @@
+# [4.38.0](https://github.com/dialpad/dialtone/compare/dialtone-icons/v4.37.0...dialtone-icons/v4.38.0) (2025-05-14)
+
+
+### Features
+
+* **Icon:** UC-24044 add dialpad meetings icon ([#759](https://github.com/dialpad/dialtone/issues/759)) ([0f77b49](https://github.com/dialpad/dialtone/commit/0f77b499f17e7dcb6c39bc026620d8b4369680dc))
+
 # [4.37.0](https://github.com/dialpad/dialtone/compare/dialtone-icons/v4.36.0...dialtone-icons/v4.37.0) (2025-05-12)
 
 
