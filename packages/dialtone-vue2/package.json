@@ -57,8 +57,8 @@
   "devDependencies": {
     "@dialpad/dialtone-css": "workspace:*",
     "@dialpad/generator-dialtone": "workspace:*",
-    "@dialpad/i18n-services": "1.2.0-beta.v17",
-    "@dialpad/i18n-vue2": "1.0.2-beta.v30",
+    "@dialpad/i18n-services": "1.2.0-prerelease.6",
+    "@dialpad/i18n-vue2": "1.0.2-prerelease.5",
     "@storybook/addon-a11y": "7.6.20",
     "@storybook/addon-essentials": "7.6.20",
     "@storybook/addon-links": "7.6.20",

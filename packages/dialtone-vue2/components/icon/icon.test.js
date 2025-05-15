@@ -1,5 +1,9 @@
 import DtIcon from './icon.vue';
 import { mount } from '@vue/test-utils';
+import { useI18N } from '@dialpad/i18n-vue2';
+const { $t } = useI18N();
+
+const MOCK_LOCALIZED_ARIA_LABEL = $t('DIALTONE_ICON_ACCESSIBILITY');
 
 const baseProps = { name: 'accessibility' };
 
@@ -50,20 +54,12 @@ describe('DtIcon Tests', () => {
   });
 
   describe('Accessibility Tests', () => {
-    describe('When ariaLabel prop is set', () => {
-      beforeEach(async () => {
-        mockProps = { ariaLabel: 'icon description' };
+    it('sets aria-hidden to false', () => {
+      expect(icon.attributes()['aria-hidden']).toBe('false');
+    });
 
-        await updateWrapper();
-      });
-
-      it('sets the aria-label attribute', () => {
-        expect(icon.attributes()['aria-label']).toBe('icon description');
-      });
-
-      it('sets aria-hidden to false', () => {
-        expect(icon.attributes()['aria-hidden']).toBe('false');
-      });
+    it('sets aria-label to localized string', () => {
+      expect(icon.attributes()['aria-label']).toBe(MOCK_LOCALIZED_ARIA_LABEL);
     });
   });
 });
