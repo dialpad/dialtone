@@ -1,4 +1,3 @@
-<!-- @Current_work: Replace node type aria label -->
 <template>
   <div
     :class="[
