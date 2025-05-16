@@ -1,3 +1,10 @@
+## [4.38.1](https://github.com/dialpad/dialtone/compare/dialtone-icons/v4.38.0...dialtone-icons/v4.38.1) (2025-05-16)
+
+
+### Bug Fixes
+
+* NO-JIRA dialbot icon gradients rebrand 2025 ([#760](https://github.com/dialpad/dialtone/issues/760)) ([f7eeb10](https://github.com/dialpad/dialtone/commit/f7eeb10269d95543e0beabb8628c56bb0282a382))
+
 # [4.38.0](https://github.com/dialpad/dialtone/compare/dialtone-icons/v4.37.0...dialtone-icons/v4.38.0) (2025-05-14)
 
 
