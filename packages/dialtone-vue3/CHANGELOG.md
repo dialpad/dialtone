@@ -1,3 +1,10 @@
+## [3.182.3](https://github.com/dialpad/dialtone/compare/dialtone-vue3/v3.182.2...dialtone-vue3/v3.182.3) (2025-05-16)
+
+
+### Bug Fixes
+
+* NO-JIRA i18n dependencies ([#756](https://github.com/dialpad/dialtone/issues/756)) ([48aa9c8](https://github.com/dialpad/dialtone/commit/48aa9c8d7b396b4b1e8338d0533551d5af9a5b49))
+
 ## [3.182.2](https://github.com/dialpad/dialtone/compare/dialtone-vue3/v3.182.1...dialtone-vue3/v3.182.2) (2025-05-12)
 
 
