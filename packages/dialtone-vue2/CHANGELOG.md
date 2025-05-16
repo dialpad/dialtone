@@ -1,3 +1,11 @@
+## [2.189.3](https://github.com/dialpad/dialtone/compare/dialtone-vue2/v2.189.2...dialtone-vue2/v2.189.3) (2025-05-16)
+
+
+### Bug Fixes
+
+* NO-JIRA i18n dependencies ([#756](https://github.com/dialpad/dialtone/issues/756)) ([48aa9c8](https://github.com/dialpad/dialtone/commit/48aa9c8d7b396b4b1e8338d0533551d5af9a5b49))
+* **Rich Text Editor:** DLT-2544 fix memory leak ([#761](https://github.com/dialpad/dialtone/issues/761)) ([0b84241](https://github.com/dialpad/dialtone/commit/0b842413e17ff808e7e72605f1cadeee13e09919))
+
 ## [2.189.2](https://github.com/dialpad/dialtone/compare/dialtone-vue2/v2.189.1...dialtone-vue2/v2.189.2) (2025-05-12)
 
 
