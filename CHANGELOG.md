@@ -1,3 +1,23 @@
+# [9.119.0](https://github.com/dialpad/dialtone/compare/dialtone/v9.118.0...dialtone/v9.119.0) (2025-05-16)
+
+
+### Bug Fixes
+
+* NO-JIRA dialbot icon gradients rebrand 2025 ([#760](https://github.com/dialpad/dialtone/issues/760)) ([f7eeb10](https://github.com/dialpad/dialtone/commit/f7eeb10269d95543e0beabb8628c56bb0282a382))
+* NO-JIRA i18n dependencies ([#756](https://github.com/dialpad/dialtone/issues/756)) ([48aa9c8](https://github.com/dialpad/dialtone/commit/48aa9c8d7b396b4b1e8338d0533551d5af9a5b49))
+* **Rebrand:** DLT-2548 update favicon in dialtone documentation ([#762](https://github.com/dialpad/dialtone/issues/762)) ([a5c5702](https://github.com/dialpad/dialtone/commit/a5c5702fcf075284c5e4c4766eb0a19183612765))
+* **Rich Text Editor:** DLT-2544 fix memory leak ([#761](https://github.com/dialpad/dialtone/issues/761)) ([0b84241](https://github.com/dialpad/dialtone/commit/0b842413e17ff808e7e72605f1cadeee13e09919))
+
+
+### Documentation
+
+* NO-JIRA remove dialpad-wordmark ([#758](https://github.com/dialpad/dialtone/issues/758)) ([165eeeb](https://github.com/dialpad/dialtone/commit/165eeeb66491cd783c577c7c5f708862767142fb))
+
+
+### Features
+
+* **Icon:** UC-24044 add dialpad meetings icon ([#759](https://github.com/dialpad/dialtone/issues/759)) ([0f77b49](https://github.com/dialpad/dialtone/commit/0f77b499f17e7dcb6c39bc026620d8b4369680dc))
+
 # [9.118.0](https://github.com/dialpad/dialtone/compare/dialtone/v9.117.2...dialtone/v9.118.0) (2025-05-12)
 
 
