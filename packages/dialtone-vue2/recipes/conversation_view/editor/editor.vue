@@ -121,32 +121,32 @@
               class="d-recipe-editor__popover-footer"
             >
               <dt-button
-                :aria-label="removeLinkButtonLabels['aria-label']"
                 data-qa="dt-recipe-editor-remove-link-btn"
                 importance="clear"
                 kind="muted"
                 size="sm"
+                v-bind="removeLinkButtonLabels"
                 @click="removeLink"
               >
-                {{ removeLinkButtonLabels.label }}
+                {{ removeLinkButtonLabels.title }}
               </dt-button>
               <dt-button
-                :aria-label="cancelSetLinkButtonLabels['aria-label']"
                 data-qa="dt-recipe-editor-set-link-cancel-btn"
                 importance="clear"
                 kind="muted"
                 size="sm"
+                v-bind="cancelSetLinkButtonLabels"
                 @click="closeLinkInput"
               >
-                {{ cancelSetLinkButtonLabels.label }}
+                {{ cancelSetLinkButtonLabels.title }}
               </dt-button>
               <dt-button
-                :aria-label="confirmSetLinkButtonLabels['aria-label']"
                 data-qa="dt-recipe-editor-set-link-confirm-btn"
                 size="sm"
+                v-bind="confirmSetLinkButtonLabels"
                 @click="setLink"
               >
-                {{ confirmSetLinkButtonLabels.label }}
+                {{ confirmSetLinkButtonLabels.title }}
               </dt-button>
             </dt-stack>
           </template>

@@ -31,13 +31,13 @@ DIALTONE_ATTACHMENT_CAROUSEL_LEFT_ARROW_ARIA_LABEL = Previous
 DIALTONE_ATTACHMENT_CAROUSEL_RIGHT_ARROW_ARIA_LABEL = Next
 
 DIALTONE_EDITOR_CONFIRM_SET_LINK_BUTTON =
-  .label = Confirm
+  .title = Confirm
   .aria-label = Confirm set link
 DIALTONE_EDITOR_REMOVE_LINK_BUTTON =
-  .label = Remove
+  .title = Remove
   .aria-label = Remove link
 DIALTONE_EDITOR_CANCEL_SET_LINK_BUTTON =
-  .label = Cancel
+  .title = Cancel
   .aria-label = Cancel set link
 
 DIALTONE_EDITOR_QUICK_REPLY_BUTTON_LABEL = Quick Reply
@@ -72,8 +72,8 @@ DIALTONE_EMOJI_ROW_REACTION_LABEL =
     }
 
 DIALTONE_FEED_ITEM_PILL_ARIA_LABEL =
-  .aria-label = Click to expand
   .title = Click to expand
+  .aria-label = Click to expand
 
 DIALTONE_PAGINATION_FIRST_PAGE = First page
 DIALTONE_PAGINATION_PREVIOUS_PAGE = Previous page
