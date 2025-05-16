@@ -1,7 +1,12 @@
 {
   "categories": {
     "spot-illustrations": {
-      "access-denied": [],
+      "access-denied": [
+        "access",
+        "denied",
+        "error",
+        "authentication"
+      ],
       "atomic-pathway": [
         "atomic",
         "space"
@@ -91,27 +96,82 @@
         "solid",
         "marketing"
       ],
-      "file-upload": [],
-      "login-error": [],
-      "magnifier": [],
-      "mic-detected": [],
+      "file-upload": [
+        "upload",
+        "file",
+        "document",
+        "attachment"
+      ],
+      "login-error": [
+        "error",
+        "login",
+        "authentication",
+        "access"
+      ],
+      "magnifier": [
+        "magnifier",
+        "search",
+        "zoom",
+        "lens"
+      ],
+      "mic-detected": [
+        "mic",
+        "detected",
+        "audio",
+        "sound"
+      ],
       "mind": [
         "mind"
       ],
-      "new-meeting": [],
-      "new-message": [],
-      "nothing-to-see-here": [],
+      "mobile-full-notifications": [
+        "mobile",
+        "notifications",
+        "phone",
+        "alert"
+      ],
+      "new-meeting": [
+        "new",
+        "meeting",
+        "calendar",
+        "schedule"
+      ],
+      "new-message": [
+        "new",
+        "message",
+        "chat",
+        "notification"
+      ],
+      "nothing-to-see-here": [
+        "nothing",
+        "empty",
+        "blank",
+        "space"
+      ],
       "orbital-harmony": [
         "orbital",
         "harmony"
       ],
-      "publish-graphic": [],
-      "something-went-wrong": [],
+      "publish-graphic": [
+        "publish",
+        "graphic",
+        "asset"
+      ],
+      "something-went-wrong": [
+        "error",
+        "wrong",
+        "issue",
+        "problem"
+      ],
       "vector-vortex": [
         "vector",
         "vortex"
       ],
-      "wireless-screenshare": []
+      "wireless-screenshare": [
+        "wireless",
+        "screenshare",
+        "screen",
+        "share"
+      ]
     }
   }
 }
