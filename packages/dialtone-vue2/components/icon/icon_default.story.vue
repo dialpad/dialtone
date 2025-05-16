@@ -2,8 +2,6 @@
   <dt-icon
     :size="$attrs.size"
     :name="$attrs.name"
-    :aria-label="$attrs.ariaLabel"
-    :show-skeleton="$attrs.showSkeleton"
   />
 </template>
 

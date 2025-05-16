@@ -7,9 +7,9 @@ description: Utilities for adding distinctive background patterns for Department
 
 Use `d-bgg-pattern-{pattern}-{dark|light}` to apply a pattern.
 
-<code-well-header class="d-d-flex d-jc-center d-fd-column d-p24 d-bgc-black-200 d-w100p d-hmn102 d-stack8" custom>
-  <div class="d-d-flex d-ai-center d-w100p d-h32 d-bar4 d-bgg-to-br d-bgg-from-gold-200 d-bgg-to-gold-200 d-bgg-pattern d-bgg-pattern-slanted-stripes-dark d-fs-200 d-fw-bold d-fc-primary">Ted's Call Center</div>
-  <div class="d-d-flex d-ai-center d-w100p d-h32 d-bar4 d-bgg-to-br d-bgg-from-purple-400 d-bgg-to-purple-500 d-bgg-pattern d-bgg-pattern-dots-circles-light d-fs-200 d-fw-bold d-fc-neutral-white">Vicky's Department</div>
+<code-well-header>
+  <div class="d-d-flex d-ai-center d-w100p d-h32 d-bar4 d-bgg-to-br d-ba d-bc-default d-bgc-moderate d-bgg-pattern d-bgg-pattern-slanted-stripes-dark d-fc-primary">Ted's Call Center</div>
+  <div class="d-d-flex d-ai-center d-w100p d-h32 d-bar4 d-bgg-to-br d-ba d-bc-default d-bgc-moderate d-bgg-pattern d-bgg-pattern-chevrons-dark">Vicky's Department</div>
 </code-well-header>
 
 ```html

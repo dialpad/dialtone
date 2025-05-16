@@ -30,6 +30,8 @@ export const DialtoneLocalizationPlugin = {
 
     await manager.ready;
 
+    manager.install();
+
     Vue.use(manager);
 
     const { setI18N } = useI18N();

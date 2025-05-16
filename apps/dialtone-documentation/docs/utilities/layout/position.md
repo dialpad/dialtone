@@ -5,16 +5,16 @@ description: Utility classes to change an element’s position type.
 
 ## Examples
 
-<code-well-header class="d-p24 d-bgc-purple-100 d-bgo50 d-w100p d-hmn216 d-of-y-auto" custom>
-  <div class="d-ps-relative">
-    Relative Parent
-    <div class="d-ps-static d-bgc-purple-100 d-mt24 d-p24 d-h464 d-bar8">
-      Static Parent
-      <div class="d-ps-absolute d-t0 d-r12 d-fl-center d-h128 d-w128 d-p8 d-bar8 d-bgc-purple-300 d-code--sm">.d-ps-absolute<br>.d-t0<br>.d-r12</div>
-      <div class="d-ps-absolute d-b0 d-rn12 d-fl-center d-h128 d-w128 d-p8 d-bar8 d-bgc-purple-300 d-code--sm">.d-ps-absolute<br>.d-b0<br>.d-rn12</div>
-      <div class="d-ps-sticky d-t0 d-fl-center d-h128 d-w128 d-p8 d-bar8 d-bgc-purple-300 d-code--sm">.d-ps-sticky<br>.d-t0</div>
-      <div class="d-ps-relative d-t32 d-l64 d-fl-center d-h128 d-w128 d-p8 d-bar8 d-bgc-purple-300 d-code--sm">.d-ps-relative<br>.d-t32<br>.d-l64</div>
-      <div class="d-ps-fixed d-t50p d-l50p d-fl-center d-h128 d-w128 d-p8 d-bar8 d-bgc-purple-300 d-code--sm">.d-ps-fixed<br>.d-t50p<br>.d-l50p</div>
+<code-well-header>
+  <div class="d-ps-relative d-w100p">
+    <code class="d-bgc-transparent">Relative Parent</code>
+    <div class="d-ps-static d-bgc-moderate-opaque d-p16 d-h464 d-bar8">
+      <code class="d-bgc-transparent">Static Parent</code>
+      <div class="d-ps-absolute d-t0 d-r12 d-fl-center d-h128 d-w128 d-p8 d-bar8 d-bgc-moderate-opaque d-code--sm">.d-ps-absolute<br>.d-t0<br>.d-r12</div>
+      <div class="d-ps-absolute d-b0 d-rn12 d-fl-center d-h128 d-w128 d-p8 d-bar8 d-bgc-moderate-opaque d-code--sm">.d-ps-absolute<br>.d-b0<br>.d-rn12</div>
+      <div class="d-ps-sticky d-t0 d-fl-center d-h128 d-w128 d-p8 d-bar8 d-bgc-moderate-opaque d-code--sm">.d-ps-sticky<br>.d-t0</div>
+      <div class="d-ps-relative d-t32 d-l64 d-fl-center d-h128 d-w128 d-p8 d-bar8 d-bgc-moderate-opaque d-code--sm">.d-ps-relative<br>.d-t32<br>.d-l64</div>
+      <div class="d-ps-fixed d-t50p d-l50p d-fl-center d-h128 d-w128 d-p8 d-bar8 d-bgc-moderate-opaque d-code--sm">.d-ps-fixed<br>.d-t50p<br>.d-l50p</div>
     </div>
   </div>
 </code-well-header>

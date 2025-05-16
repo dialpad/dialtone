@@ -3,14 +3,20 @@ title: Overflow
 description: Utilities for controlling how an element handles content that is too large for the container.
 ---
 
+<dt-notice kind="info" class="d-wmx100p d-mt24" hideClose>
+Consider using the custom scrollbar first with the <router-link class="d-link d-link--muted" to="/components/scrollbar">Scrollbar Directive</router-link>.
+</dt-notice>
+
 ## Examples
 
-<code-well-header  class="d-d-flex d-fd-row d-fw-wrap d-p24 d-pb48 d-bgc-purple-100 d-bgo50 d-w100p d-hmn216" custom>
-    <div v-for="{ class: className } in overflow" class="d-w216 d-h216 d-m6 d-p12 d-bar4 d-bgc-purple-200 d-bgo75" :class="`d-of-${className}`">
-        <code>.d-of-{{ className }}</code>
-        <p class="d-w216">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris eleifend rutrum auctor. Phasellus convallis sagittis augue ut ornare. Vestibulum et gravida lectus, sed ultrices sapien. Nullam aliquet elit dui, vitae hendrerit lectus volutpat eget.
-        </p>
+<code-well-header>
+    <div class="d-d-grid d-g-cols4 d-g16">
+        <div v-for="{ class: className } in overflow" class="d-h216 d-p12 d-bar4 d-bgc-moderate" :class="`d-of-${className}`">
+            <code>.d-of-{{ className }}</code>
+            <p class="d-w216">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris eleifend rutrum auctor. Phasellus convallis sagittis augue ut ornare. Vestibulum et gravida lectus, sed ultrices sapien. Nullam aliquet elit dui, vitae hendrerit lectus volutpat eget.
+            </p>
+        </div>
     </div>
 </code-well-header>
 

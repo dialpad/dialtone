@@ -1,6 +1,6 @@
 {
   "name": "@dialpad/dialtone-vue",
-  "version": "2.189.0",
+  "version": "2.189.2",
   "description": "Vue component library for Dialpad's design system Dialtone",
   "scripts": {
     "lint": "run-s lint:code lint:docs",
@@ -40,6 +40,9 @@
     "@tiptap/extension-text": "2.6.6",
     "@tiptap/extension-text-align": "2.6.6",
     "@tiptap/extension-underline": "2.6.6",
+    "@tiptap/extension-text-style": "2.6.6",
+    "@tiptap/extension-color": "2.6.6",
+    "@tiptap/extension-font-family": "2.6.6",
     "@tiptap/pm": "2.6.6",
     "@tiptap/suggestion": "2.6.6",
     "@tiptap/vue-2": "^2.6.6",
@@ -54,8 +57,8 @@
   "devDependencies": {
     "@dialpad/dialtone-css": "workspace:*",
     "@dialpad/generator-dialtone": "workspace:*",
-    "@dialpad/i18n-services": "1.2.0-beta.v17",
-    "@dialpad/i18n-vue2": "1.0.2-beta.v30",
+    "@dialpad/i18n-services": "1.2.0-prerelease.6",
+    "@dialpad/i18n-vue2": "1.0.2-prerelease.5",
     "@storybook/addon-a11y": "7.6.20",
     "@storybook/addon-essentials": "7.6.20",
     "@storybook/addon-links": "7.6.20",

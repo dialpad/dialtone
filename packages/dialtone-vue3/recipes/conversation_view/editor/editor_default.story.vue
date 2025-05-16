@@ -38,7 +38,7 @@
       @text-input="$attrs.onTextInput"
     />
     <p><strong>Editor content is:</strong></p>
-    <span>{{ value }}</span>
+    <span>{{ modelValue }}</span>
   </div>
 </template>
 
@@ -48,6 +48,7 @@ import DtRecipeEditor from './editor.vue';
 export default {
   name: 'DtRecipeEditorDefault',
   components: { DtRecipeEditor },
+
   data () {
     return {
       modelValue: this.$attrs.modelValue,

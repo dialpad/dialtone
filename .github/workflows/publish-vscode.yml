@@ -1,0 +1,32 @@
+name: Publish VSCode Extension
+
+on:
+  workflow_dispatch:
+  push:
+    tags:
+      - vscode-extension/v*
+
+env:
+  HUSKY: 0
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    permissions:
+      packages: read
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Environment
+        uses: ./.github/actions/setup-environment
+
+      - name: Build vscode extension
+        run: pnpm nx run dialtone-language-server:pack
+
+      - name: Publish to Visual Studio Marketplace
+        uses: HaaLeo/publish-vscode-extension@v2
+        with:
+          pat: ${{ secrets.DIALTONE_AZURE_PAT }}
+          registryUrl: https://marketplace.visualstudio.com
+          extensionFile: ./packages/language-server/vscode/vscode-dialtone.vsix

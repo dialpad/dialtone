@@ -5,10 +5,20 @@ description: Utilities for controlling the way an element's background image pos
 
 ## Scroll
 
-Use `d-bga-scroll` to fix a background image to the element. It does not scroll with its content.
+This is the default behavior. Use `d-bga-scroll` to fix the <dt-link href="/assets/images/dp-sample-gradient.png" target="_blank" rel="noopener noreferrer"> background image </dt-link> to the element. It does not scroll with its content.
 
 <code-well-header>
-  <div class="d-p32 d-w100p d-h264 d-bgr-none d-bgs-cover d-bga-scroll d-fs-300 d-fw-bold d-of-y-scroll" style="background-image: url('/assets/images/agent-bw-illo.svg')">London. Michaelmas term lately over, and the Lord Chancellor sitting in Lincoln's Inn Hall. Implacable November weather. As much mud in the streets as if the waters had but newly retired from the face of the earth, and it would not be wonderful to meet a Megalosaurus, forty feet long or so, waddling like an elephantine lizard up Holborn Hill. London. Michaelmas term lately over, and the Lord Chancellor sitting in Lincoln's Inn Hall. Implacable November weather. As much mud in the streets as if the waters had but newly retired from the face of the earth, and it would not be wonderful to meet a Megalosaurus, forty feet long or so, waddling like an elephantine lizard up Holborn Hill.</div>
+  <div class="d-bar8 d-p16 d-w100p d-h216 d-bgr-none d-bgs-cover d-bga-scroll d-w100p d-of-auto" style="background-image: url('/assets/images/dp-sample-gradient.png')">
+    <dt-stack gap="400" class="d-fc-neutral-white">
+      <p>Curved rhythms often accompany lateral decisions, especially when considering the abstract potential of non-specific alignments. While typically unnoticed, these gentle shifts can accumulate meaning when framed in a context that remains undefined.</p>
+      <p>Momentum builds where it doesn't, anchoring intent to unmeasured goals. As frameworks iterate without resolution, the pattern repeats—not identically, but recognizably. Every nuance appears significant until it drifts, leaving behind the shape of intent without its content. That distinction matters only when observation persists without anchoring.</p>
+      <p>Transitions feel deliberate, though no threshold is ever clearly crossed. Echoes outlast their origin, and yet no moment stands alone when layered against ambient expectation.</p>
+      <p>Nothing hinges on timing, yet sequences unfold as if they do. Loops stretch toward closure that neither confirms nor denies their purpose.</p>
+      <p>With each cycle, the presence of form replaces the need for structure. In this way, absence becomes a container—soft-edged, indefinite, and quietly complete.</p>
+      <p>Texture emerges where contrast flattens, offering a sense of motion without direction. The perception of clarity is merely a rhythm of proximity, not a function of definition.</p>
+      <p>Eventually, what remains is not a resolution but a sustained pause—just enough to suggest continuity while withholding the terms of return.</p>
+    </dt-stack>
+  </div>
 </code-well-header>
 
 ```html
@@ -18,10 +28,20 @@ Use `d-bga-scroll` to fix a background image to the element. It does not scroll 
 
 ## Fixed
 
-Use `d-bga-fixed` to fix a background image to the viewport. The background image does not scroll with the content.
+Use `d-bga-fixed` to fix the <dt-link href="/assets/images/dp-sample-gradient.png" target="_blank" rel="noopener noreferrer"> background image </dt-link> to the viewport. The background image does not scroll with the content.
 
 <code-well-header>
-  <div class="d-p32 d-w100p d-h264 d-bgr-none d-bgs-cover d-bga-fixed d-fs-300 d-fw-bold d-of-y-scroll" style="background-image: url('/assets/images/agent-bw-illo.svg')">London. Michaelmas term lately over, and the Lord Chancellor sitting in Lincoln's Inn Hall. Implacable November weather. As much mud in the streets as if the waters had but newly retired from the face of the earth, and it would not be wonderful to meet a Megalosaurus, forty feet long or so, waddling like an elephantine lizard up Holborn Hill. London. Michaelmas term lately over, and the Lord Chancellor sitting in Lincoln's Inn Hall. Implacable November weather. As much mud in the streets as if the waters had but newly retired from the face of the earth, and it would not be wonderful to meet a Megalosaurus, forty feet long or so, waddling like an elephantine lizard up Holborn Hill.</div>
+  <div class="d-bar8 d-p16 d-w100p d-h216 d-bgr-none d-bgs-cover d-bga-fixed d-w100p d-of-auto" style="background-image: url('/assets/images/dp-sample-gradient.png')">
+    <dt-stack gap="400" class="d-fc-neutral-white">
+      <p>Curved rhythms often accompany lateral decisions, especially when considering the abstract potential of non-specific alignments. While typically unnoticed, these gentle shifts can accumulate meaning when framed in a context that remains undefined.</p>
+      <p>Momentum builds where it doesn't, anchoring intent to unmeasured goals. As frameworks iterate without resolution, the pattern repeats—not identically, but recognizably. Every nuance appears significant until it drifts, leaving behind the shape of intent without its content. That distinction matters only when observation persists without anchoring.</p>
+      <p>Transitions feel deliberate, though no threshold is ever clearly crossed. Echoes outlast their origin, and yet no moment stands alone when layered against ambient expectation.</p>
+      <p>Nothing hinges on timing, yet sequences unfold as if they do. Loops stretch toward closure that neither confirms nor denies their purpose.</p>
+      <p>With each cycle, the presence of form replaces the need for structure. In this way, absence becomes a container—soft-edged, indefinite, and quietly complete.</p>
+      <p>Texture emerges where contrast flattens, offering a sense of motion without direction. The perception of clarity is merely a rhythm of proximity, not a function of definition.</p>
+      <p>Eventually, what remains is not a resolution but a sustained pause—just enough to suggest continuity while withholding the terms of return.</p>
+    </dt-stack>
+  </div>
 </code-well-header>
 
 ```html
@@ -31,12 +51,22 @@ Use `d-bga-fixed` to fix a background image to the viewport. The background imag
 
 ## Local
 
-Use `d-bga-local` to fix a background image relative to the element's contents. If the element is scrollable, the
+Use `d-bga-local` to fix <dt-link href="/assets/images/dp-sample-gradient.png" target="_blank" rel="noopener noreferrer"> background image </dt-link> relative to the element's contents. If the element is scrollable, the
 background scrolls with the element's contents, and background area and positioning are relative to the scrollable area
 of the element rather than the viewable box.
 
 <code-well-header>
-        <div class="d-p32 d-w100p d-h264 d-bgr-none d-bgs-cover d-bga-local d-fs-300 d-fw-bold d-of-y-scroll" style="background-image: url('/assets/images/agent-bw-illo.svg')">London. Michaelmas term lately over, and the Lord Chancellor sitting in Lincoln's Inn Hall. Implacable November weather. As much mud in the streets as if the waters had but newly retired from the face of the earth, and it would not be wonderful to meet a Megalosaurus, forty feet long or so, waddling like an elephantine lizard up Holborn Hill. London. Michaelmas term lately over, and the Lord Chancellor sitting in Lincoln's Inn Hall. Implacable November weather. As much mud in the streets as if the waters had but newly retired from the face of the earth, and it would not be wonderful to meet a Megalosaurus, forty feet long or so, waddling like an elephantine lizard up Holborn Hill.</div>
+  <div class="d-bar8 d-p16 d-w100p d-h216 d-bgr-none d-bgs-cover d-bga-local d-w100p d-of-auto" style="background-image: url('/assets/images/dp-sample-gradient.png')">
+    <dt-stack gap="400" class="d-fc-neutral-white">
+      <p>Curved rhythms often accompany lateral decisions, especially when considering the abstract potential of non-specific alignments. While typically unnoticed, these gentle shifts can accumulate meaning when framed in a context that remains undefined.</p>
+      <p>Momentum builds where it doesn't, anchoring intent to unmeasured goals. As frameworks iterate without resolution, the pattern repeats—not identically, but recognizably. Every nuance appears significant until it drifts, leaving behind the shape of intent without its content. That distinction matters only when observation persists without anchoring.</p>
+      <p>Transitions feel deliberate, though no threshold is ever clearly crossed. Echoes outlast their origin, and yet no moment stands alone when layered against ambient expectation.</p>
+      <p>Nothing hinges on timing, yet sequences unfold as if they do. Loops stretch toward closure that neither confirms nor denies their purpose.</p>
+      <p>With each cycle, the presence of form replaces the need for structure. In this way, absence becomes a container—soft-edged, indefinite, and quietly complete.</p>
+      <p>Texture emerges where contrast flattens, offering a sense of motion without direction. The perception of clarity is merely a rhythm of proximity, not a function of definition.</p>
+      <p>Eventually, what remains is not a resolution but a sustained pause—just enough to suggest continuity while withholding the terms of return.</p>
+    </dt-stack>
+  </div>
 </code-well-header>
 
 ```html

@@ -49,7 +49,7 @@
             size="lg"
             importance="clear"
             kind="inverted"
-            :aria-label="closeAriaLabel"
+            v-bind="$ta('DIALTONE_CLOSE_BUTTON')"
             @click="close"
           >
             <template #icon>
@@ -59,6 +59,10 @@
               />
             </template>
           </dt-button>
+          <sr-only-close-button
+            v-else
+            @close="close"
+          />
         </transition>
       </div>
     </portal>
@@ -71,17 +75,20 @@ import { EVENT_KEYNAMES } from '@/common/constants';
 import { DtIconClose } from '@dialpad/dialtone-icons/vue2';
 import { DtButton } from '@/components/button';
 import { Portal } from '@linusborg/vue-simple-portal';
+import SrOnlyCloseButton from '@/common/sr_only_close_button.vue';
+import { DtLocalizationMixin } from '@/common/mixins';
 
 export default {
   name: 'DtImageViewer',
 
   components: {
     Portal,
+    SrOnlyCloseButton,
     DtButton,
     DtIconClose,
   },
 
-  mixins: [Modal],
+  mixins: [Modal, DtLocalizationMixin],
 
   props: {
     /**
@@ -89,7 +96,7 @@ export default {
      * this behaviour by passing an appendTo prop that points to an id or an html tag from the root of the parent.
      * The appendTo prop expects a CSS selector string or an actual DOM node.
      * type: string | HTMLElement, default: 'body'
-    */
+     */
     appendTo: {
       type: String,
       default: 'body',
@@ -136,14 +143,6 @@ export default {
      * Aria label
      */
     ariaLabel: {
-      type: String,
-      required: true,
-    },
-
-    /**
-     * Aria label for close button
-     */
-    closeAriaLabel: {
       type: String,
       required: true,
     },
@@ -255,7 +254,6 @@ export default {
         this.focusTrappedTabPress(e);
       }
     },
-
   },
 };
 </script>

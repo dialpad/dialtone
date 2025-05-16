@@ -6,9 +6,11 @@
     <div class="d-p24 d-pt64 lg:d-pt24">
       <page-header />
       <content />
-      <nav
+      <dt-stack
+        direction="row"
         :class="prev ? 'd-jc-space-between' : 'd-jc-flex-end'"
-        class="page-nav d-h64 d-d-flex d-ai-center"
+        class="d-pt32 d-ai-center"
+        as="nav"
       >
         <router-link
           v-if="prev"
@@ -45,7 +47,7 @@
             {{ next.text }}
           </dt-button>
         </router-link>
-      </nav>
+      </dt-stack>
       <footer class="d-mt16 d-mb16 d-body--sm d-fc-tertiary">
         <span
           v-if="$frontmatter.title"

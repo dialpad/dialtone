@@ -1,6 +1,6 @@
 {
   "name": "@dialpad/dialtone",
-  "version": "9.117.0",
+  "version": "9.118.0",
   "packageManager": "pnpm@9.9.0",
   "description": "Dialpad's Dialtone design system monorepo",
   "scripts": {
@@ -113,6 +113,9 @@
     "@tiptap/extension-text": "2.6.6",
     "@tiptap/extension-text-align": "2.6.6",
     "@tiptap/extension-underline": "2.6.6",
+    "@tiptap/extension-text-style": "2.6.6",
+    "@tiptap/extension-color": "2.6.6",
+    "@tiptap/extension-font-family": "2.6.6",
     "@tiptap/pm": "2.6.6",
     "@tiptap/suggestion": "2.6.6",
     "date-fns": "4.1.0",

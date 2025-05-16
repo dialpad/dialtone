@@ -1,6 +1,6 @@
 {
 	"name": "@dialpad/dialtone-language-server",
-	"version": "1.1.2",
+	"version": "1.1.3",
 	"author": "Tico Ortega <julio.ortega@dialpad.com>",
 	"bugs": {
 		"email": "dialtone@dialpad.com"
