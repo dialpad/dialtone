@@ -68,6 +68,7 @@ import EmojiSearch from './modules/emoji_search.vue';
 import EmojiSelector from './modules/emoji_selector.vue';
 import EmojiDescription from './modules/emoji_description.vue';
 import EmojiSkinSelector from './modules/emoji_skin_selector.vue';
+import { DtLocalizationMixin } from '@/common/mixins';
 
 export default {
   name: 'DtEmojiPicker',
@@ -79,6 +80,8 @@ export default {
     EmojiDescription,
     EmojiSkinSelector,
   },
+
+  mixins: [DtLocalizationMixin],
 
   props: {
     /**
@@ -92,57 +95,7 @@ export default {
     // TODO try to simplify this to achieve an array of unicode characters and not an entire emoji data object
     recentlyUsedEmojis: {
       type: Array,
-    },
-
-    /**
-     * The placeholder text for the search input
-     * @type {String}
-     * @required
-     * @example
-     * <dt-emoji-picker :searchPlaceholderLabel="'Search...'" />
-     */
-    searchPlaceholderLabel: {
-      type: String,
-      required: true,
-    },
-
-    /**
-     * The label for the search results tab
-     * @type {String}
-     * @required
-     * @example
-     * <dt-emoji-picker :searchResultsLabel="'Search results'" />
-     */
-    searchResultsLabel: {
-      type: String,
-      required: true,
-    },
-
-    /**
-     * The label for the search no results
-     * @type {String}
-     * @required
-     * @example
-     * <dt-emoji-picker :searchNoResultsLabel="'No results'" />
-     */
-    searchNoResultsLabel: {
-      type: String,
-      required: true,
-    },
-
-    /**
-     * The list of tabsets to show, it is necessary to be updated with the correct language
-     * It must respect the provided order.
-     * @type {Array}
-     * @required
-     * @example
-     * <dt-emoji-picker
-     *  :tabSetLabels="['Most recently used', 'Smileys and people', 'Nature',
-     *    'Food', 'Activity', 'Travel', 'Objects', 'Symbols', 'Flags']" />
-     */
-    tabSetLabels: {
-      type: Array,
-      required: true,
+      default: () => [],
     },
 
     /**
@@ -157,18 +110,6 @@ export default {
     skinTone: {
       type: String,
       default: 'Default',
-    },
-
-    /**
-     * Tooltip shown when skin selector button is hovered.
-     * @type {String}
-     * @required
-     * @example
-     * <dt-emoji-picker :skin-selector-button-tooltip-label="'Change default skin tone'" />
-     */
-    skinSelectorButtonTooltipLabel: {
-      type: String,
-      required: true,
     },
 
     /**
@@ -206,6 +147,36 @@ export default {
   computed: {
     showRecentlyUsedTab () {
       return this.recentlyUsedEmojis?.length > 0;
+    },
+
+    tabSetLabels () {
+      return [
+        this.$t('DIALTONE_EMOJI_PICKER_TABSET_RECENTLY_USED_LABEL'),
+        this.$t('DIALTONE_EMOJI_PICKER_TABSET_SMILEYS_AND_PEOPLE_LABEL'),
+        this.$t('DIALTONE_EMOJI_PICKER_TABSET_NATURE_LABEL'),
+        this.$t('DIALTONE_EMOJI_PICKER_TABSET_FOOD_LABEL'),
+        this.$t('DIALTONE_EMOJI_PICKER_TABSET_ACTIVITY_LABEL'),
+        this.$t('DIALTONE_EMOJI_PICKER_TABSET_TRAVEL_LABEL'),
+        this.$t('DIALTONE_EMOJI_PICKER_TABSET_OBJECTS_LABEL'),
+        this.$t('DIALTONE_EMOJI_PICKER_TABSET_SYMBOLS_LABEL'),
+        this.$t('DIALTONE_EMOJI_PICKER_TABSET_FLAGS_LABEL'),
+      ];
+    },
+
+    searchPlaceholderLabel () {
+      return this.$t('DIALTONE_EMOJI_PICKER_SEARCH_PLACEHOLDER_LABEL');
+    },
+
+    searchResultsLabel () {
+      return this.$t('DIALTONE_EMOJI_PICKER_SEARCH_RESULTS_LABEL');
+    },
+
+    searchNoResultsLabel () {
+      return this.$t('DIALTONE_EMOJI_PICKER_SEARCH_NO_RESULTS_LABEL');
+    },
+
+    skinSelectorButtonTooltipLabel () {
+      return this.$t('DIALTONE_EMOJI_PICKER_SKIN_SELECTOR_BUTTON_TOOLTIP_LABEL');
     },
   },
 
