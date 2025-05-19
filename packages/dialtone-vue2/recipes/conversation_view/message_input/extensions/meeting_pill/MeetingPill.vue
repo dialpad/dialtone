@@ -16,9 +16,9 @@
         <div class="d-recipe-message-input-meeting-pill__close">
           <dt-button
             circle
-            :aria-label="node.attrs['close-button-aria-label']"
-            size="xs"
             importance="clear"
+            size="xs"
+            v-bind="$ta('DIALTONE_CLOSE_BUTTON')"
             @click="close"
           >
             <template #icon>
@@ -38,6 +38,7 @@ import { NodeViewWrapper, nodeViewProps } from '@tiptap/vue-2';
 import { DtItemLayout } from '@/components/item_layout';
 import { DtIconClose, DtIconVideo } from '@dialpad/dialtone-icons/vue2';
 import { DtButton } from '@/components/button';
+import { DtLocalizationMixin } from '@/common/mixins';
 
 export default {
   name: 'MeetingPill',
@@ -49,6 +50,8 @@ export default {
     DtButton,
     DtIconVideo,
   },
+
+  mixins: [DtLocalizationMixin],
 
   props: nodeViewProps,
 
