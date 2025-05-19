@@ -5,6 +5,14 @@ DIALTONE_CLOSE_BUTTON =
 DIALTONE_BREADCRUMBS_ARIA_LABEL = breadcrumbs
 DIALTONE_BUTTON_LOADING = loading
 
+DIALTONE_CONTACT_CENTERS_ROW_MENU_BUTTON_LABEL = Open menu
+DIALTONE_CONTACT_CENTERS_ROW_UNREAD_COUNT_TOOLTIP =
+  { $unreadCount ->
+    [0] No unread messages
+    [1] 1 unread message
+    *[other] {$unreadCount} unread messages
+  }
+
 DIALTONE_DATEPICKER_PREVIOUS_MONTH = Previous month
 DIALTONE_DATEPICKER_NEXT_MONTH = Next month
 DIALTONE_DATEPICKER_PREVIOUS_YEAR = Previous year

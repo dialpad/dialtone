@@ -5,6 +5,14 @@ DIALTONE_CLOSE_BUTTON =
 DIALTONE_BREADCRUMBS_ARIA_LABEL = lista de enlaces
 DIALTONE_BUTTON_LOADING = cargando
 
+DIALTONE_CONTACT_CENTERS_ROW_MENU_BUTTON_LABEL = Abrir menu
+DIALTONE_CONTACT_CENTERS_ROW_UNREAD_COUNT_TOOLTIP =
+  { $unreadCount ->
+    [0] Sin mensajes
+    [1] 1 mensaje no leido
+    *[other] {$unreadCount} mensajes no leidos
+  }
+
 DIALTONE_DATEPICKER_PREVIOUS_YEAR = Año anterior
 DIALTONE_DATEPICKER_PREVIOUS_MONTH = Mes anterior
 DIALTONE_DATEPICKER_NEXT_MONTH = Siguiente mes
