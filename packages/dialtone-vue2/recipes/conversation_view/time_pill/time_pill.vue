@@ -9,14 +9,13 @@
 </template>
 
 <script>
-import {} from './time_pill_constants';
-
 export default {
   name: 'DtRecipeTimePill',
 
   props: {
     /**
      * Date time display value
+     * TODO: Should this text be localized?
      */
     dateTimeDisplay: {
       type: String,
