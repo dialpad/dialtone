@@ -186,7 +186,7 @@ export default {
         ? this.ariaLabel
         : safeConcatStrings([
           this.description,
-          this.$t('DIALTONE_CONTACT_CENTERS_ROW_UNREAD_COUNT_TOOLTIP', { unreadCount: count }),
+          this.$t('DIALTONE_UNREAD_MESSAGE_COUNT_TEXT', { unreadCount: count }),
         ]);
     },
 
