@@ -17,6 +17,7 @@
       >
         <div
           v-if="isTyping"
+          v-dt-tooltip="typingTooltip"
           class="d-recipe-leftbar-row__is-typing"
         >
           <span /><span /><span />
@@ -368,6 +369,7 @@ export default {
       if (this.ariaLabel) return this.ariaLabel;
 
       return safeConcatStrings([
+        this.typingTooltip,
         this.description,
         this.unreadCountTooltip,
         this.dndTextTooltip,
@@ -438,6 +440,10 @@ export default {
 
     callButtonTooltip () {
       return this.$t('DIALTONE_GENERAL_ROW_CALL_BUTTON_TOOLTIP');
+    },
+
+    typingTooltip () {
+      return this.isTyping && this.$t('DIALTONE_TYPING_TEXT');
     },
   },
 
