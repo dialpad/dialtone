@@ -1,3 +1,10 @@
+## [9.119.1](https://github.com/dialpad/dialtone/compare/dialtone/v9.119.0...dialtone/v9.119.1) (2025-05-20)
+
+
+### Bug Fixes
+
+* **Scrollbar:** DLT-2552 cleanup OverlayScollbars instances on unbind ([#765](https://github.com/dialpad/dialtone/issues/765)) ([3f5e36d](https://github.com/dialpad/dialtone/commit/3f5e36df066b1a65e788c405111095dab555beb2))
+
 # [9.119.0](https://github.com/dialpad/dialtone/compare/dialtone/v9.118.0...dialtone/v9.119.0) (2025-05-16)
 
 
