@@ -1,6 +1,7 @@
 <template>
   <dt-popover
     :id="id"
+    ref="popover"
     :open="hovercardOpen"
     :placement="placement"
     :content-class="contentClass"
@@ -213,6 +214,8 @@ export default {
   data () {
     return {
       hovercardOpen: this.open,
+      anchorEl: null,
+      observer: null,
       inTimer: null,
       outTimer: null,
     };
@@ -226,6 +229,33 @@ export default {
 
       immediate: true,
     },
+  },
+
+  mounted () {
+    this.$nextTick(() => {
+      this.anchorEl = this.$refs.popover?.$refs?.anchor;
+
+      this.observer = new MutationObserver(() => {
+        if (this.anchorEl && !this.anchorEl.isConnected) {
+          // If the anchor element is removed from the DOM, close the hovercard
+          this.hovercardOpen = false;
+        }
+      });
+
+      this.observer.observe(document.body, {
+        childList: true,
+        subtree: true,
+      });
+    });
+  },
+
+  beforeDestroy () {
+    if (this.observer) {
+      this.observer.disconnect();
+    }
+
+    clearTimeout(this.inTimer);
+    clearTimeout(this.outTimer);
   },
 
   methods: {
