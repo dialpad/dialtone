@@ -61,15 +61,15 @@ DIALTONE_EDITOR_ADD_LINK_BUTTON =
 
 DIALTONE_EMOJI_ROW_REACTION_LABEL =
   { $reactionCount ->
-  *[other] { $selected ->
-  *[false] { $reactionCount } people reacted with { $reaction }.
-  [true] { $reactionCount } people including you reacted with { $reaction }.
-      }
-  [one] { $selected ->
-  *[false] { $name } reacted with { $reaction }.
-  [true] You reacted with { $reaction }.
-      }
+    *[other] { $selected ->
+      *[false] { $reactionCount } people reacted with { $reaction }.
+      [true] { $reactionCount } people including you reacted with { $reaction }.
     }
+    [one] { $selected ->
+      *[false] { $name } reacted with { $reaction }.
+      [true] You reacted with { $reaction }.
+    }
+  }
 
 DIALTONE_FEED_ITEM_PILL_ARIA_LABEL =
   .title = Click to expand
