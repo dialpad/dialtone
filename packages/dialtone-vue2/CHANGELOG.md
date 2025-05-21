@@ -1,3 +1,10 @@
+# [2.190.0](https://github.com/dialpad/dialtone/compare/dialtone-vue2/v2.189.5...dialtone-vue2/v2.190.0) (2025-05-21)
+
+
+### Features
+
+* **Emoji Picker:** DLT-2562 custom emoji ([#602](https://github.com/dialpad/dialtone/issues/602)) ([6d06eac](https://github.com/dialpad/dialtone/commit/6d06eac6b35c134e1fb0c6b0f67afc34ac69d095))
+
 ## [2.189.5](https://github.com/dialpad/dialtone/compare/dialtone-vue2/v2.189.4...dialtone-vue2/v2.189.5) (2025-05-21)
 
 
