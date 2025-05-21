@@ -2,15 +2,12 @@ import { mergeConfig } from 'vite';
 
 /** @type { import('@storybook/vue-vite').StorybookConfig } */
 const config = {
+  framework: '@storybook/vue-vite',
   stories: [
     '../@(components|directives|recipes|prototypes|localization)/**/*.stories.@(js|jsx|ts|tsx)',
     '../@(components|directives|docs|functions|recipes|localization)/**/*.mdx',
   ],
   addons: ['@storybook/addon-links', '@storybook/addon-essentials', '@storybook/addon-a11y', 'storybook-dark-mode'],
-  framework: {
-    name: '@storybook/vue-vite',
-    options: {},
-  },
   docs: {
     autodocs: false,
   },
