@@ -1,3 +1,10 @@
+# [8.58.0](https://github.com/dialpad/dialtone/compare/dialtone-css/v8.57.2...dialtone-css/v8.58.0) (2025-05-21)
+
+
+### Features
+
+* **Emoji Picker:** DLT-2562 custom emoji ([#602](https://github.com/dialpad/dialtone/issues/602)) ([6d06eac](https://github.com/dialpad/dialtone/commit/6d06eac6b35c134e1fb0c6b0f67afc34ac69d095))
+
 ## [8.57.2](https://github.com/dialpad/dialtone/compare/dialtone-css/v8.57.1...dialtone-css/v8.57.2) (2025-05-21)
 
 
