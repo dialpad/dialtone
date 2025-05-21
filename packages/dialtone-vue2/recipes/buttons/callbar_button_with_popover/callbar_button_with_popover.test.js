@@ -4,9 +4,7 @@ import { DtRecipeCallbarButton } from '@/recipes/buttons/callbar_button';
 import { DtPopover } from '@/components/popover';
 
 // Constants
-const basePropsData = {
-  arrowButtonLabel: 'arrowButton',
-};
+const basePropsData = {};
 
 describe('DtRecipeCallbarButtonWithPopover Tests', () => {
   let testContext;

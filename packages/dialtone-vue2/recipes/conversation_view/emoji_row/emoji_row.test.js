@@ -2,18 +2,24 @@ import { createLocalVue, mount } from '@vue/test-utils';
 import {
   itBehavesLikeFailsCustomPropValidation,
   itBehavesLikePassesCustomPropValidation,
-} from '../../../tests/shared_examples/validation';
+} from '@/tests/shared_examples/validation.js';
 import DtRecipeEmojiRow from './emoji_row.vue';
 import { DtTooltip } from '@/components/tooltip';
+import { useI18N } from '@dialpad/i18n-vue2';
+const { $t } = useI18N();
 
 // Constants
 const testEmojiObj = {
   emojiUnicodeOrShortname: '🙃',
   isSelected: false,
-  ariaLabel: 'Emoji aria label',
-  tooltip: 'You reacted with 🙃',
-  num: 99,
+  num: 2,
 };
+
+const MOCK_LOCALIZED_EMOJI_REACTION_ARIA_LABEL = $t('DIALTONE_EMOJI_ROW_REACTION_LABEL', {
+  reactionCount: testEmojiObj.num,
+  selected: testEmojiObj.isSelected.toString(),
+  reaction: testEmojiObj.emojiUnicodeOrShortname,
+});
 
 const basePropsData = {
   reactions: [
@@ -114,7 +120,7 @@ describe('DtRecipeEmojiRow Tests', function () {
 
     describe('Default Render', function () {
       it('should render a reaction button', () => {
-        expect(emojiReactionButton.attributes('aria-label')).toBe(testEmojiObj.ariaLabel);
+        expect(emojiReactionButton.attributes('aria-label')).toBe(MOCK_LOCALIZED_EMOJI_REACTION_ARIA_LABEL);
       });
     });
   });
