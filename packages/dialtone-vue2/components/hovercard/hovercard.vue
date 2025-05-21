@@ -233,7 +233,7 @@ export default {
 
   mounted () {
     this.$nextTick(() => {
-      this.anchorEl = this.$refs.popover?.$refs?.anchor;
+      this.anchorEl = this.$refs.popover?.$refs?.anchor?.firstElementChild;
 
       this.observer = new MutationObserver(() => {
         if (this.anchorEl && !this.anchorEl.isConnected) {

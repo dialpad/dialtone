@@ -219,7 +219,7 @@ const popover = ref(null);
 
 onMounted(() => {
   nextTick(() => {
-    anchorEl.value = popover.value?.$refs?.anchor;
+    anchorEl.value = popover.value?.$refs?.anchor?.firstElementChild;
 
     observer.value = new MutationObserver(() => {
       if (anchorEl.value && !anchorEl.value.isConnected) {
