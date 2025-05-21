@@ -4,9 +4,10 @@ export const DtScrollbarDirective = {
   name: 'dt-scrollbar-directive',
   install (Vue) {
     OverlayScrollbars.plugin(ClickScrollPlugin);
+    const instances = new WeakMap();
     Vue.directive('dt-scrollbar', {
       inserted (el, binding) {
-        OverlayScrollbars({
+        const os = OverlayScrollbars({
           target: el,
           elements: {
             viewport: el.children[0],
@@ -20,6 +21,10 @@ export const DtScrollbarDirective = {
         });
         el.setAttribute('data-overlayscrollbars-initialize', true);
         el.classList.add('d-scrollbar');
+        instances.set(el, os);
+      },
+      unbind (el) {
+        instances.get(el).destroy();
       },
     });
   },
