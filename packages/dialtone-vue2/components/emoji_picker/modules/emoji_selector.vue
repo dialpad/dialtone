@@ -56,7 +56,7 @@
               :alt="emoji.name"
               :aria-label="emoji.name"
               :title="emoji.name"
-              :src="emoji.date_added ? emoji.image : getImgSrc(emoji.unicode_character)"
+              :src="getImgSrc(emoji)"
               @error="handleImageError"
             >
           </button>
@@ -257,7 +257,6 @@ export default {
       this.setupFilteredRefs();
       this.setupTabLabelRefs();
       this.setTabLabelObserver();
-      // HACKATHON custom emojis
       this.setBottomScrollListener();
     });
   },
@@ -267,7 +266,6 @@ export default {
       this.tabLabelObserver.disconnect();
     }
 
-    // HACKATHON custom emojis
     if (this.$refs.listRef && this.handleScroll) {
       this.$refs.listRef.removeEventListener('scroll', this.handleScroll);
     }
@@ -340,7 +338,11 @@ export default {
     },
 
     getImgSrc: function (emoji) {
-      return this.CDN_URL + emoji + '.png';
+      if (emoji.date_added) { // if custom emoji
+        return emoji.image;
+      } else { // if regular emoji
+        return this.CDN_URL + emoji.unicode_character + '.png';
+      }
     },
 
     handleImageError: function (event) {
@@ -594,7 +596,6 @@ export default {
       }
     },
 
-    // HACKATHON custom emojis
     setBottomScrollListener () {
       this.handleScroll = () => {
         const container = this.$refs.listRef;

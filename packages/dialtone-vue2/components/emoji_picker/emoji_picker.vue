@@ -6,6 +6,7 @@
       <emoji-tabset
         ref="tabsetRef"
         :emoji-filter="internalSearchQuery"
+        :show-custom-emojis-tab="showCustomEmojisTab"
         :show-recently-used-tab="showRecentlyUsedTab"
         :scroll-into-tab="scrollIntoTab"
         :tab-set-labels="tabSetLabels"
@@ -49,7 +50,14 @@
       />
     </div>
     <div class="d-emoji-picker--footer">
-      <dt-button @click="$emit('add-emoji')" v-if="!highlightedEmoji" importance="outlined" class="d-label--xs" style="width: 115px">Add emoji</dt-button>
+      <dt-button
+        v-if="!!customEmojis && !highlightedEmoji"
+        importance="outlined"
+        class="d-emoji-picker__add-emoji"
+        @click="$emit('add-emoji')"
+      >
+        {{ addEmojiLabel }}
+      </dt-button>
       <emoji-description :emoji="highlightedEmoji" />
       <emoji-skin-selector
         ref="skinSelectorRef"
@@ -71,7 +79,7 @@ import EmojiSearch from './modules/emoji_search.vue';
 import EmojiSelector from './modules/emoji_selector.vue';
 import EmojiDescription from './modules/emoji_description.vue';
 import EmojiSkinSelector from './modules/emoji_skin_selector.vue';
-import { DtButton } from '../button'
+import { DtButton } from '../button';
 
 export default {
   name: 'DtEmojiPicker',
@@ -109,6 +117,19 @@ export default {
      */
     customEmojis: {
       type: Array,
+    },
+
+    /**
+     * The label for the add emoji button
+     * required false because it is still experimental
+     * @type {String}
+     * @example
+     * <dt-emoji-picker :addEmojiLabel="'Add emoji'" />
+     */
+    addEmojiLabel: {
+      type: String,
+      required: false,
+      default: 'Add emoji',
     },
 
     /**
@@ -221,6 +242,10 @@ export default {
   },
 
   computed: {
+    showCustomEmojisTab () {
+      return this.customEmojis?.length > 0;
+    },
+
     showRecentlyUsedTab () {
       return this.recentlyUsedEmojis?.length > 0;
     },

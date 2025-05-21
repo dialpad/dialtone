@@ -53,10 +53,10 @@ const recentlyUsedEmojis = [
 ];
 const customEmojis = [
   {
-    name: "shipit",
+    name: 'shipit',
     date_added: 1730918816847,
-    added_by: "Lucía Aberastury",
-    image: "https://storage.googleapis.com/uber-voice_custom_emojis/123/shipit",
+    added_by: 'Ignacio Ropolo',
+    image: 'https://github.githubassets.com/images/icons/emoji/shipit.png',
     unicode_character: '1f44d',
   },
   {
@@ -68,7 +68,7 @@ const customEmojis = [
     unicode_output: '1f44d',
     unicode_character: '1f44d',
   },
-]
+];
 
 export const argsData = {
   onSkinTone: action('skin-tone'),
@@ -86,10 +86,11 @@ export const argsData = {
     'Objects',
     'Symbols',
     'Flags',
-    'Custom'
+    'Custom',
   ],
   recentlyUsedEmojis,
   customEmojis,
+  addEmojiLabel: 'Add emoji',
   skinSelectorButtonTooltipLabel: 'Change default skin tone',
   searchNoResultsLabel: 'No results',
   searchResultsLabel: 'Search results',

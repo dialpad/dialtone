@@ -19,6 +19,7 @@
           @keydown="handleKeyDown($event, tab.id)"
         >
           <!--
+          TO DO
           Using <img because the shipit emoji should be get by API
           or provided by prop
           Quick hack for hackathon demo
@@ -26,14 +27,13 @@
           <img
             v-if="tab.custom"
             class="d-icon d-icon--size-400"
-            alt="shipit"
-            aria-label="shipit"
-            title="shipit"
+            :alt="tab.label"
+            :aria-label="tab.label"
             src="https://github.githubassets.com/images/icons/emoji/shipit.png"
           >
           <component
-            v-else
             :is="tab.icon"
+            v-else
             size="400"
           />
         </dt-tab>
@@ -73,6 +73,11 @@ export default {
      * @default false
      */
     showRecentlyUsedTab: {
+      type: Boolean,
+      default: false,
+    },
+
+    showCustomEmojisTab: {
       type: Boolean,
       default: false,
     },
@@ -119,7 +124,13 @@ export default {
 
   computed: {
     tabs () {
+      // if showRecentlyUsedTab is false remove first index of TABS_DATA
       const tabsData = this.showRecentlyUsedTab ? this.TABS_DATA : this.TABS_DATA.slice(1);
+      // if showCustomEmojisTab is false remove last index of TABS_DATA
+      if (!this.showCustomEmojisTab) {
+        tabsData.pop();
+      }
+
       return tabsData.map((tab, index) => ({
         ...tab,
         label: this.tabSetLabels[index],
