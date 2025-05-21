@@ -1,3 +1,10 @@
+## [2.189.5](https://github.com/dialpad/dialtone/compare/dialtone-vue2/v2.189.4...dialtone-vue2/v2.189.5) (2025-05-21)
+
+
+### Bug Fixes
+
+* **Hovercard:** DP-142048 remove hovercard when anchor is removed from the DOM ([#768](https://github.com/dialpad/dialtone/issues/768)) ([66bdd47](https://github.com/dialpad/dialtone/commit/66bdd47e53aba2fd026d1649aed2a10d76c03976))
+
 ## [2.189.4](https://github.com/dialpad/dialtone/compare/dialtone-vue2/v2.189.3...dialtone-vue2/v2.189.4) (2025-05-20)
 
 
