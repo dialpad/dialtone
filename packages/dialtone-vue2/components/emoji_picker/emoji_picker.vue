@@ -6,6 +6,7 @@
       <emoji-tabset
         ref="tabsetRef"
         :emoji-filter="internalSearchQuery"
+        :show-custom-emojis-tab="showCustomEmojisTab"
         :show-recently-used-tab="showRecentlyUsedTab"
         :scroll-into-tab="scrollIntoTab"
         :tab-set-labels="tabSetLabels"
@@ -37,6 +38,7 @@
         :search-results-label="searchResultsLabel"
         :search-no-results-label="searchNoResultsLabel"
         :recently-used-emojis="recentlyUsedEmojis"
+        :custom-emojis="customEmojis"
         :selected-tabset="selectedTabset"
         @scroll-into-tab="updateScrollIntoTab"
         @highlighted-emoji="updateHighlightedEmoji"
@@ -44,9 +46,18 @@
         @focus-skin-selector="$refs.skinSelectorRef.focusSkinSelector()"
         @focus-search-input="showSearch ? $refs.searchInputRef.focusSearchInput() : $refs.tabsetRef.focusTabset()"
         @keydown.esc.native="$emit('close')"
+        @scroll-bottom-reached="$emit('scroll-bottom-reached')"
       />
     </div>
     <div class="d-emoji-picker--footer">
+      <dt-button
+        v-if="showCustomEmojisTab && !highlightedEmoji"
+        importance="outlined"
+        class="d-emoji-picker__add-emoji"
+        @click="$emit('add-emoji')"
+      >
+        {{ addEmojiLabel }}
+      </dt-button>
       <emoji-description :emoji="highlightedEmoji" />
       <emoji-skin-selector
         ref="skinSelectorRef"
@@ -68,6 +79,7 @@ import EmojiSearch from './modules/emoji_search.vue';
 import EmojiSelector from './modules/emoji_selector.vue';
 import EmojiDescription from './modules/emoji_description.vue';
 import EmojiSkinSelector from './modules/emoji_skin_selector.vue';
+import { DtButton } from '../button';
 
 export default {
   name: 'DtEmojiPicker',
@@ -78,6 +90,7 @@ export default {
     EmojiSelector,
     EmojiDescription,
     EmojiSkinSelector,
+    DtButton,
   },
 
   props: {
@@ -92,6 +105,31 @@ export default {
     // TODO try to simplify this to achieve an array of unicode characters and not an entire emoji data object
     recentlyUsedEmojis: {
       type: Array,
+    },
+
+    /**
+     * The array with custom emojis object
+     * This list is necessary to fill the custom tab
+     * @type {Array}
+     * @default []
+     * @example
+     * <dt-emoji-picker :customEmojis="[emojiObject, emojiObject]" />
+     */
+    customEmojis: {
+      type: Array,
+    },
+
+    /**
+     * The label for the add emoji button
+     * required false because it is still experimental
+     * @type {String}
+     * @example
+     * <dt-emoji-picker :addEmojiLabel="'Add emoji'" />
+     */
+    addEmojiLabel: {
+      type: String,
+      required: false,
+      default: 'Add emoji',
     },
 
     /**
@@ -204,6 +242,10 @@ export default {
   },
 
   computed: {
+    showCustomEmojisTab () {
+      return this.customEmojis?.length > 0;
+    },
+
     showRecentlyUsedTab () {
       return this.recentlyUsedEmojis?.length > 0;
     },

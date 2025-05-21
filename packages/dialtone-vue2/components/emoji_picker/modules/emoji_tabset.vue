@@ -41,6 +41,7 @@ import {
   DtIconLightbulb,
   DtIconHeart,
   DtIconFlag,
+  DtIconTiktok,
 } from '@dialpad/dialtone-icons/vue2';
 
 export default {
@@ -58,6 +59,11 @@ export default {
      * @default false
      */
     showRecentlyUsedTab: {
+      type: Boolean,
+      default: false,
+    },
+
+    showCustomEmojisTab: {
       type: Boolean,
       default: false,
     },
@@ -97,13 +103,20 @@ export default {
         { label: EMOJI_PICKER_CATEGORIES.OBJECTS, icon: DtIconLightbulb },
         { label: EMOJI_PICKER_CATEGORIES.SYMBOLS, icon: DtIconHeart },
         { label: EMOJI_PICKER_CATEGORIES.FLAGS, icon: DtIconFlag },
+        { label: EMOJI_PICKER_CATEGORIES.CUSTOM, icon: DtIconTiktok },
       ],
     };
   },
 
   computed: {
     tabs () {
+      // if showRecentlyUsedTab is false remove first index of TABS_DATA
       const tabsData = this.showRecentlyUsedTab ? this.TABS_DATA : this.TABS_DATA.slice(1);
+      // if showCustomEmojisTab is false remove last index of TABS_DATA
+      if (!this.showCustomEmojisTab) {
+        tabsData.pop();
+      }
+
       return tabsData.map((tab, index) => ({
         ...tab,
         label: this.tabSetLabels[index],
