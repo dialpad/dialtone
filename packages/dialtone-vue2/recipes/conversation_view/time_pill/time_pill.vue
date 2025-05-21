@@ -15,7 +15,6 @@ export default {
   props: {
     /**
      * Date time display value
-     * TODO: Should this text be localized?
      */
     dateTimeDisplay: {
       type: String,
