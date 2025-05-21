@@ -1,35 +1,50 @@
 <template>
   <dt-stack
-    direction="row"
-    gap="400"
+    direction="column"
+    class="d-mention-suggestion__container"
+    gap="300"
   >
-    <dt-avatar
-      :full-name="name"
-      :image-src="avatarSrc"
-      :image-alt="name"
-      :show-presence="showDetails"
-      :presence="presence"
-      size="xs"
-    />
-    <!-- eslint-disable-next-line vue/no-restricted-class -->
-    <span class="d-mention-suggestion__name">
-      {{ name }}
-    </span>
-    <div v-if="showDetails">
+    <dt-stack
+      direction="row"
+      gap="400"
+    >
+      <dt-avatar
+        :full-name="name"
+        :image-src="avatarSrc"
+        :image-alt="name"
+        :show-presence="showDetails"
+        :presence="presence"
+        size="xs"
+      />
+      <!-- eslint-disable-next-line vue/no-restricted-class -->
+      <span class="d-mention-suggestion__name">
+        {{ name }}
+      </span>
+    </dt-stack>
+
+    <dt-stack
+      v-if="showDetails"
+      direction="row"
+      gap="300"
+      class="d-label--sm-plain"
+    >
       <span
         v-if="presenceText"
+        class="d-mention-suggestion__presence"
         :class="[presenceFontColorClass]"
       >
         {{ presenceText }}
       </span>
-      <dt-emoji-text-wrapper
+      <div v-if="status && presenceText">
+        •
+      </div>
+      <div
         v-if="status"
-        size="100"
-        element-type="span"
+        class="d-mention-suggestion__status"
       >
         {{ status }}
-      </dt-emoji-text-wrapper>
-    </div>
+      </div>
+    </dt-stack>
   </dt-stack>
 </template>
 
@@ -90,3 +105,19 @@ export default {
   },
 };
 </script>
+
+<style lang="less" scoped>
+.d-mention-suggestion__container {
+  width: 100%;
+}
+
+.d-mention-suggestion__presence {
+  min-width: fit-content;
+}
+
+.d-mention-suggestion__status {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+</style>
