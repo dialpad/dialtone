@@ -1,3 +1,10 @@
+# [4.39.0](https://github.com/dialpad/dialtone/compare/dialtone-icons/v4.38.1...dialtone-icons/v4.39.0) (2025-05-21)
+
+
+### Features
+
+* **Icon:** DLT-2553 add breakout-rooms and update coaching-hub ([#766](https://github.com/dialpad/dialtone/issues/766)) ([7d5bd5d](https://github.com/dialpad/dialtone/commit/7d5bd5dcbd37c0b895bd713cb56d743367da6123))
+
 ## [4.38.1](https://github.com/dialpad/dialtone/compare/dialtone-icons/v4.38.0...dialtone-icons/v4.38.1) (2025-05-16)
 
 
