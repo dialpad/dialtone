@@ -9,8 +9,8 @@
   >
     <template #anchor>
       <dt-recipe-message-input-button
-        :aria-label="linkButtonOptions.ariaLabel"
-        :tooltip-text="linkButtonOptions.tooltipText"
+        :aria-label="anchorButtonLabel['aria-label']"
+        :tooltip-text="anchorButtonLabel['tooltip-text']"
         :keyboard-shortcut-text="linkButtonOptions.keyboardShortcutText"
         data-qa="message-input-link-btn"
         :is-active="isSelectionActive('link')"
@@ -28,17 +28,16 @@
     <template #content>
       <dt-stack gap="500">
         <div
-          v-if="linkButtonOptions.dialogTitle.length > 0"
           class="d-recipe-message-input__link-dialog-title"
         >
-          {{ linkButtonOptions.dialogTitle }}
+          {{ $t('DIALTONE_MESSAGE_INPUT_LINK_DIALOG_TITLE') }}
         </div>
         <dt-input
           v-model="linkText"
-          :input-aria-label="linkButtonOptions.textLabel"
+          :input-aria-label="textInputLabel"
           size="xs"
           data-qa="dt-message-input-link-text-input"
-          :label="linkButtonOptions.textLabel"
+          :label="textInputLabel"
           input-wrapper-class="d-recipe-message-input__link-input"
           @click.stop
           @click.native.stop
@@ -47,11 +46,11 @@
         />
         <dt-input
           v-model="linkInput"
-          :input-aria-label="linkButtonOptions.linkLabel"
+          :input-aria-label="linkInputLabel"
           size="xs"
           data-qa="dt-message-input-link-input"
-          :placeholder="linkButtonOptions.linkPlaceholder"
-          :label="linkButtonOptions.linkLabel"
+          :placeholder="linkInputPlaceHolder"
+          :label="linkInputLabel"
           input-wrapper-class="d-recipe-message-input__link-input"
           @click.stop
           @click.native.stop
@@ -63,36 +62,39 @@
           class="d-recipe-message-input__link-dialog-buttons"
         >
           <dt-button
-            :aria-label="linkButtonOptions.removeLabel"
+            :aria-label="removeButtonLabel"
+            :title="removeButtonLabel"
             importance="clear"
             kind="danger"
             size="md"
             data-qa="dt-message-input-link-remove-btn"
             @click="$emit('remove-link', linkText, linkInput)"
           >
-            {{ linkButtonOptions.removeLabel }}
+            {{ removeButtonLabel }}
           </dt-button>
           <dt-stack
             direction="row"
             gap="400"
           >
             <dt-button
-              :aria-label="linkButtonOptions.cancelLabel"
+              :aria-label="cancelButtonLabel"
+              :title="cancelButtonLabel"
               importance="clear"
               kind="muted"
               size="md"
               data-qa="dt-message-input-link-cancel-btn"
               @click="isOpen = false"
             >
-              {{ linkButtonOptions.cancelLabel }}
+              {{ cancelButtonLabel }}
             </dt-button>
             <dt-button
               size="md"
-              :aria-label="linkButtonOptions.confirmLabel"
+              :aria-label="confirmButtonLabel"
+              :title="confirmButtonLabel"
               data-qa="dt-message-input-link-confirm-btn"
               @click="$emit('set-link', linkText, linkInput)"
             >
-              {{ linkButtonOptions.confirmLabel }}
+              {{ confirmButtonLabel }}
             </dt-button>
           </dt-stack>
         </dt-stack>
@@ -108,6 +110,8 @@ import { DtButton } from '@/components/button';
 import { DtStack } from '@/components/stack';
 import { DtIconLink2 } from '@dialpad/dialtone-icons/vue2';
 import DtRecipeMessageInputButton from './message_input_button.vue';
+import { DtLocalizationMixin } from '@/common/mixins';
+
 export default {
   name: 'MessageInputLink',
 
@@ -119,6 +123,8 @@ export default {
     DtIconLink2,
     DtRecipeMessageInputButton,
   },
+
+  mixins: [DtLocalizationMixin],
 
   props: {
     open: {
@@ -145,6 +151,16 @@ export default {
       linkInput: '',
       isOpen: false,
     };
+  },
+
+  computed: {
+    anchorButtonLabel () { return this.$ta('DIALTONE_MESSAGE_INPUT_LINK_BUTTON_LABEL'); },
+    textInputLabel () { return this.$t('DIALTONE_MESSAGE_INPUT_LINK_TEXT_LABEL'); },
+    linkInputLabel () { return this.$t('DIALTONE_MESSAGE_INPUT_LINK_LINK_LABEL'); },
+    linkInputPlaceHolder () { return this.$t('DIALTONE_MESSAGE_INPUT_LINK_LINK_PLACEHOLDER'); },
+    removeButtonLabel () { return this.$t('DIALTONE_MESSAGE_INPUT_LINK_REMOVE_LABEL'); },
+    cancelButtonLabel () { return this.$t('DIALTONE_MESSAGE_INPUT_LINK_CANCEL_LABEL'); },
+    confirmButtonLabel () { return this.$t('DIALTONE_MESSAGE_INPUT_LINK_CONFIRM_LABEL'); },
   },
 
   watch: {
