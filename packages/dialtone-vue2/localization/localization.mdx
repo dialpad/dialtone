@@ -1,0 +1,35 @@
+import { Meta, Subtitle, Canvas, Story } from '@storybook/blocks';
+import * as LocalizationStories from './localization.stories.js';
+
+<Meta of={LocalizationStories} />
+
+# Dialtone-vue localization plugin
+
+<Subtitle>
+  Enables Dialtone-vue components localization.
+  It is very simple and powerful as it allows you to quickly switch between languages and requires minimal setup.
+  <br/>
+  ⚠️ You MUST initialize the localization plugin before using any Dialtone-vue component to avoid issues.
+</Subtitle>
+
+<Canvas>
+  <Story of={LocalizationStories.Default} />
+</Canvas>
+
+## Usage
+
+### Import
+
+#### Named import
+
+`import { DialtoneLocalizationPlugin } from '@dialpad/dialtone/vue2';`
+
+#### Default import
+
+Preferred if using webpack as it is tree-shakeable by default
+
+`import { DialtoneLocalizationPlugin } from '@dialpad/dialtone/vue2/localization';`
+
+### Install
+
+`Vue.use(DialtoneLocalizationPlugin);`
