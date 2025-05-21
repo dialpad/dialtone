@@ -1,3 +1,15 @@
+# [9.120.0](https://github.com/dialpad/dialtone/compare/dialtone/v9.119.1...dialtone/v9.120.0) (2025-05-21)
+
+
+### Bug Fixes
+
+* **Hovercard:** DP-142048 remove hovercard when anchor is removed from the DOM ([#768](https://github.com/dialpad/dialtone/issues/768)) ([66bdd47](https://github.com/dialpad/dialtone/commit/66bdd47e53aba2fd026d1649aed2a10d76c03976))
+
+
+### Features
+
+* **Icon:** DLT-2553 add breakout-rooms and update coaching-hub ([#766](https://github.com/dialpad/dialtone/issues/766)) ([7d5bd5d](https://github.com/dialpad/dialtone/commit/7d5bd5dcbd37c0b895bd713cb56d743367da6123))
+
 ## [9.119.1](https://github.com/dialpad/dialtone/compare/dialtone/v9.119.0...dialtone/v9.119.1) (2025-05-20)
 
 
