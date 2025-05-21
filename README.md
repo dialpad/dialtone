@@ -131,11 +131,17 @@ import DtIllustrationBlankSpace from '@dialpad/dialtone-icons/vue3/blank-space';
 
 - Vue 2
 
+> ⚠️ Important ⚠️
+>
+> You MUST initialize the localization plugin before using any Dialtone-vue component to avoid issues.
+>
+> Refer to [Localization docs](https://dialtone.dialpad.com/vue/index.html?path=/docs/utilities-localization--docs) for more information.
+
 ```js
 // Named import
 import { DtButton } from "@dialpad/dialtone/vue2"
 
-// Default import (Prefered if using webpack as it is tree-shakeable by default)
+// Default import (Preferred if using webpack as it is tree-shakeable by default)
 import { DtButton } from "@dialpad/dialtone/vue2/lib/button"
 ```
 
