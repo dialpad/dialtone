@@ -338,6 +338,7 @@ export default {
     },
 
     getImgSrc: function (emoji) {
+      // TODO Update json structure to have a property for custom emojis and avoid using date_added
       if (emoji.date_added) { // if custom emoji
         return emoji.image;
       } else { // if regular emoji

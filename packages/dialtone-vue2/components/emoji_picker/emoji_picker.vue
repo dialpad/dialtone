@@ -51,7 +51,7 @@
     </div>
     <div class="d-emoji-picker--footer">
       <dt-button
-        v-if="!!customEmojis && !highlightedEmoji"
+        v-if="showCustomEmojisTab && !highlightedEmoji"
         importance="outlined"
         class="d-emoji-picker__add-emoji"
         @click="$emit('add-emoji')"
