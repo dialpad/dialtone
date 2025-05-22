@@ -2,6 +2,7 @@
   <dt-stack
     direction="column"
     class="d-mention-suggestion__container"
+    :class="{ 'd-mention-suggestion__container--disabled': disabled }"
     gap="300"
   >
     <dt-stack
@@ -75,6 +76,10 @@ export default {
       return this.item.avatarSrc;
     },
 
+    disabled () {
+      return this.presenceText === 'DND';
+    },
+
     presence () {
       return this.item.presence;
     },
@@ -118,5 +123,9 @@ export default {
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
+}
+
+.d-mention-suggestion__container--disabled {
+  opacity: 0.5;
 }
 </style>
