@@ -11,6 +11,12 @@ const WrapperComponent = {
 
 const testContext = {};
 
+const mocks = vi.hoisted(() => {
+  return {
+    destroy: vi.fn(),
+  };
+});
+
 describe('DtScrollbarDirective Tests', () => {
   let wrapper;
   let viewportElement;
@@ -29,6 +35,7 @@ describe('DtScrollbarDirective Tests', () => {
 
   beforeEach(() => {
     OverlayScrollbars.mockClear();
+    mocks.destroy.mockClear();
   });
 
   beforeAll(() => {
@@ -38,7 +45,7 @@ describe('DtScrollbarDirective Tests', () => {
     // Mock the overlayscrollbars plugin
     vi.mock('overlayscrollbars', () => {
       const mockPlugin = vi.fn(); // Mock the plugin method
-      const OverlayScrollbarsMock = vi.fn().mockImplementation(() => ({}));
+      const OverlayScrollbarsMock = vi.fn().mockImplementation(() => ({ destroy: mocks.destroy }));
       OverlayScrollbarsMock.plugin = mockPlugin;
       return {
         OverlayScrollbars: OverlayScrollbarsMock,
@@ -69,6 +76,11 @@ describe('DtScrollbarDirective Tests', () => {
         expect(OverlayScrollbars).toHaveBeenCalledTimes(1);
         expect(wrapper.element.getAttribute('data-overlayscrollbars-initialize')).toBe('true');
         expect(wrapper.element.classList.contains('d-scrollbar')).toBe(true);
+      });
+
+      it('should clean up directive', () => {
+        wrapper.destroy();
+        expect(mocks.destroy).toHaveBeenCalledTimes(1);
       });
     });
   });

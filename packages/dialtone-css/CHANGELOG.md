@@ -1,3 +1,39 @@
+# [8.58.0](https://github.com/dialpad/dialtone/compare/dialtone-css/v8.57.2...dialtone-css/v8.58.0) (2025-05-21)
+
+
+### Features
+
+* **Emoji Picker:** DLT-2562 custom emoji ([#602](https://github.com/dialpad/dialtone/issues/602)) ([6d06eac](https://github.com/dialpad/dialtone/commit/6d06eac6b35c134e1fb0c6b0f67afc34ac69d095))
+
+## [8.57.2](https://github.com/dialpad/dialtone/compare/dialtone-css/v8.57.1...dialtone-css/v8.57.2) (2025-05-21)
+
+
+### Bug Fixes
+
+* **Hovercard:** DP-142048 remove hovercard when anchor is removed from the DOM ([#768](https://github.com/dialpad/dialtone/issues/768)) ([66bdd47](https://github.com/dialpad/dialtone/commit/66bdd47e53aba2fd026d1649aed2a10d76c03976))
+
+## [8.57.1](https://github.com/dialpad/dialtone/compare/dialtone-css/v8.57.0...dialtone-css/v8.57.1) (2025-05-12)
+
+
+### Bug Fixes
+
+* **Ivr Node:** NO-JIRA fix connector color in dark mode ([#748](https://github.com/dialpad/dialtone/issues/748)) ([08ed4ad](https://github.com/dialpad/dialtone/commit/08ed4ad24c1b7899e7a9673fcbfe81ff464192f4))
+* **Utilities:** NO-JIRA add height utility classes for fit-content, max-content, and min-content ([#755](https://github.com/dialpad/dialtone/issues/755)) ([19130c8](https://github.com/dialpad/dialtone/commit/19130c841aba2bf098113f4b3636cec1f2972e24))
+
+# [8.57.0](https://github.com/dialpad/dialtone/compare/dialtone-css/v8.56.0...dialtone-css/v8.57.0) (2025-05-06)
+
+
+### Features
+
+* **Button:** DLT-2500 add unstyled variant ([#735](https://github.com/dialpad/dialtone/issues/735)) ([1b6114d](https://github.com/dialpad/dialtone/commit/1b6114dc54005ebd1a1072be1872e3e04cff989c))
+
+# [8.56.0](https://github.com/dialpad/dialtone/compare/dialtone-css/v8.55.0...dialtone-css/v8.56.0) (2025-05-05)
+
+
+### Features
+
+* **Breakpoints:** DLT-2463 migrate doc site to new breakpoints ([#739](https://github.com/dialpad/dialtone/issues/739)) ([df2f173](https://github.com/dialpad/dialtone/commit/df2f1739315e359d463ae54d2a4da34d6de546c0))
+
 # [8.55.0](https://github.com/dialpad/dialtone/compare/dialtone-css/v8.54.0...dialtone-css/v8.55.0) (2025-04-25)
 
 

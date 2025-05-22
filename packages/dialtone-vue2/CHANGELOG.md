@@ -1,3 +1,69 @@
+# [2.190.0](https://github.com/dialpad/dialtone/compare/dialtone-vue2/v2.189.5...dialtone-vue2/v2.190.0) (2025-05-21)
+
+
+### Features
+
+* **Emoji Picker:** DLT-2562 custom emoji ([#602](https://github.com/dialpad/dialtone/issues/602)) ([6d06eac](https://github.com/dialpad/dialtone/commit/6d06eac6b35c134e1fb0c6b0f67afc34ac69d095))
+
+## [2.189.5](https://github.com/dialpad/dialtone/compare/dialtone-vue2/v2.189.4...dialtone-vue2/v2.189.5) (2025-05-21)
+
+
+### Bug Fixes
+
+* **Hovercard:** DP-142048 remove hovercard when anchor is removed from the DOM ([#768](https://github.com/dialpad/dialtone/issues/768)) ([66bdd47](https://github.com/dialpad/dialtone/commit/66bdd47e53aba2fd026d1649aed2a10d76c03976))
+
+## [2.189.4](https://github.com/dialpad/dialtone/compare/dialtone-vue2/v2.189.3...dialtone-vue2/v2.189.4) (2025-05-20)
+
+
+### Bug Fixes
+
+* **Scrollbar:** DLT-2552 cleanup OverlayScollbars instances on unbind ([#765](https://github.com/dialpad/dialtone/issues/765)) ([3f5e36d](https://github.com/dialpad/dialtone/commit/3f5e36df066b1a65e788c405111095dab555beb2))
+
+## [2.189.3](https://github.com/dialpad/dialtone/compare/dialtone-vue2/v2.189.2...dialtone-vue2/v2.189.3) (2025-05-16)
+
+
+### Bug Fixes
+
+* NO-JIRA i18n dependencies ([#756](https://github.com/dialpad/dialtone/issues/756)) ([48aa9c8](https://github.com/dialpad/dialtone/commit/48aa9c8d7b396b4b1e8338d0533551d5af9a5b49))
+* **Rich Text Editor:** DLT-2544 fix memory leak ([#761](https://github.com/dialpad/dialtone/issues/761)) ([0b84241](https://github.com/dialpad/dialtone/commit/0b842413e17ff808e7e72605f1cadeee13e09919))
+
+## [2.189.2](https://github.com/dialpad/dialtone/compare/dialtone-vue2/v2.189.1...dialtone-vue2/v2.189.2) (2025-05-12)
+
+
+### Bug Fixes
+
+* **Editor:** DP-140768 recipe editor throwing console error ([#749](https://github.com/dialpad/dialtone/issues/749)) ([0246ce2](https://github.com/dialpad/dialtone/commit/0246ce2b0bd7c7e0d25d17ae2e2884bfa37212da))
+* **Ivr Node:** NO-JIRA fix connector color in dark mode ([#748](https://github.com/dialpad/dialtone/issues/748)) ([08ed4ad](https://github.com/dialpad/dialtone/commit/08ed4ad24c1b7899e7a9673fcbfe81ff464192f4))
+
+## [2.189.1](https://github.com/dialpad/dialtone/compare/dialtone-vue2/v2.189.0...dialtone-vue2/v2.189.1) (2025-05-07)
+
+
+### Bug Fixes
+
+* **Editor:** DP-140466 font family and font-color support in editor for qrs ([#742](https://github.com/dialpad/dialtone/issues/742)) ([156f874](https://github.com/dialpad/dialtone/commit/156f87483490e8dc9634168b048601a5a535081f))
+* NO-JIRA dependency issues and warnings ([#746](https://github.com/dialpad/dialtone/issues/746)) ([3e6d9eb](https://github.com/dialpad/dialtone/commit/3e6d9ebb940ec302a7323c39fbfc63950b5bb1c2))
+
+# [2.189.0](https://github.com/dialpad/dialtone/compare/dialtone-vue2/v2.188.0...dialtone-vue2/v2.189.0) (2025-05-06)
+
+
+### Features
+
+* **Editor:** DP-135938 update quick reply icon ([#744](https://github.com/dialpad/dialtone/issues/744)) ([c5bb007](https://github.com/dialpad/dialtone/commit/c5bb007f3a937ce1e6fa0dde21fe118d6452f70d))
+
+# [2.188.0](https://github.com/dialpad/dialtone/compare/dialtone-vue2/v2.187.0...dialtone-vue2/v2.188.0) (2025-05-06)
+
+
+### Features
+
+* **Button:** DLT-2500 add unstyled variant ([#735](https://github.com/dialpad/dialtone/issues/735)) ([1b6114d](https://github.com/dialpad/dialtone/commit/1b6114dc54005ebd1a1072be1872e3e04cff989c))
+
+# [2.187.0](https://github.com/dialpad/dialtone/compare/dialtone-vue2/v2.186.0...dialtone-vue2/v2.187.0) (2025-05-05)
+
+
+### Features
+
+* **Editor:** DP-115099 recipe editor support for focusing action bar buttons using arrow keys ([#732](https://github.com/dialpad/dialtone/issues/732)) ([011f042](https://github.com/dialpad/dialtone/commit/011f042d49bb0c874d12cd3eb702641b80f48d34))
+
 # [2.186.0](https://github.com/dialpad/dialtone/compare/dialtone-vue2/v2.185.0...dialtone-vue2/v2.186.0) (2025-04-25)
 
 

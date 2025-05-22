@@ -334,6 +334,12 @@
         "voice"
       ],
       "dialpad-logomark": [],
+      "dialpad-meetings-star": [
+        "dp",
+        "meetings",
+        "sparkle",
+        "star"
+      ],
       "dialpad-star-reversed": [
         "dp",
         "brand",
@@ -475,6 +481,11 @@
         "lightning",
         "list",
         "speed"
+      ],
+      "quick-reply": [
+        "message",
+        "chat",
+        "reply"
       ],
       "reply-all": [
         "email"
@@ -1547,6 +1558,10 @@
         "units",
         "collection",
         "cluster"
+      ],
+      "breakout-rooms": [
+        "rooms",
+        "groups"
       ],
       "bullet": [
         "dot",

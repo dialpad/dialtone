@@ -13,24 +13,12 @@ description: Utilities to change an element's font-family.
   </template>
 </dt-notice>
 
-## Custom
-
-Use `d-ff-custom` to apply the theme's font-family.
-
-<code-well-header class="d-d-flex d-jc-center d-fd-column d-p24 d-bgc-black-200 d-w100p d-hmn102" custom>
-  <p class="d-fs-300 d-ff-custom">The quick brown fox jumps over the lazy dog.</p>
-</code-well-header>
-
-```html
-<p class="d-ff-custom">...</p>
-```
-
 ## Sans-Serif
 
 Use `d-ff-sans` to apply a Sans-Serif font stack.
 
-<code-well-header class="d-d-flex d-jc-center d-fd-column d-p24 d-bgc-black-200 d-w100p d-hmn102" custom>
-  <p class="d-fs-300 d-ff-sans">The quick brown fox jumps over the lazy dog.</p>
+<code-well-header>
+  <p class="d-ff-sans">The quick brown fox jumps over the lazy dog.</p>
 </code-well-header>
 
 ```html
@@ -41,8 +29,8 @@ Use `d-ff-sans` to apply a Sans-Serif font stack.
 
 Use `d-ff-mono` to apply a Monospace font stack.
 
-<code-well-header class="d-d-flex d-jc-center d-fd-column d-p24 d-bgc-black-200 d-w100p d-hmn102" custom>
-  <p class="d-fs-300 d-ff-mono">The quick brown fox jumps over the lazy dog.</p>
+<code-well-header>
+  <p class="d-ff-mono">The quick brown fox jumps over the lazy dog.</p>
 </code-well-header>
 
 ```html
@@ -53,8 +41,8 @@ Use `d-ff-mono` to apply a Monospace font stack.
 
 Dialtone supports select marketing fonts and weights. Use the following combinations to apply the marketing font stack.
 
-<code-well-header class="d-d-flex d-jc-center d-fd-column d-p24 d-bgc-black-200 d-w100p d-hmn102" custom>
-  <p class="d-fs-300 d-ff-marketing">The quick brown fox jumps over the lazy dog.</p>
+<code-well-header>
+  <p class="d-ff-marketing">The quick brown fox jumps over the lazy dog.</p>
 </code-well-header>
 
 ```html

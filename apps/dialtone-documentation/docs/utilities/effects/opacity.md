@@ -7,12 +7,14 @@ description: Utility classes for changing an element's opacity.
 
 Use `d-o{n}` to change the opacity of your element.
 
-<code-well-header class="d-fl-col5 d-g8 d-fw-wrap d-p24 d-bgc-magenta-100 d-bgo50 d-w100p d-hmn102" custom>
-  <div class="d-fl-center d-p16 d-bar8 d-bgc-magenta-100 d-fc-magenta-400 d-fs-200 d-fw-bold d-o100">.d-o100</div>
-  <div class="d-fl-center d-p16 d-bar8 d-bgc-magenta-100 d-fc-magenta-400 d-fs-200 d-fw-bold d-o75">.d-o75</div>
-  <div class="d-fl-center d-p16 d-bar8 d-bgc-magenta-100 d-fc-magenta-400 d-fs-200 d-fw-bold d-o50">.d-o50</div>
-  <div class="d-fl-center d-p16 d-bar8 d-bgc-magenta-100 d-fc-magenta-400 d-fs-200 d-fw-bold d-o25">.d-o25</div>
-  <div class="d-fl-center d-p16 d-bar8 d-bgc-magenta-100 d-fc-magenta-400 d-fs-200 d-fw-bold d-o0">.d-o0</div>
+<code-well-header>
+  <dt-stack direction="row" gap="500">
+    <div class="d-p16 d-bar8 d-bgc-moderate d-o100">.d-o100</div>
+    <div class="d-p16 d-bar8 d-bgc-moderate d-o75">.d-o75</div>
+    <div class="d-p16 d-bar8 d-bgc-moderate d-o50">.d-o50</div>
+    <div class="d-p16 d-bar8 d-bgc-moderate d-o25">.d-o25</div>
+    <div class="d-p16 d-bar8 d-bgc-moderate d-o0">.d-o0</div>
+  </dt-stack>
 </code-well-header>
 
 ```html
@@ -27,36 +29,36 @@ Use `d-o{n}` to change the opacity of your element.
 
 Use `h:d-o{n}` to change an element's :hover state opacity.
 
-<code-well-header class="d-fl-col5 d-g8 d-fw-wrap d-p24 d-bgc-magenta-100 d-bgo50 d-w100p d-hmn102" custom>
-  <div class="d-fl-center d-p16 d-bar8 d-bgc-magenta-100 d-fc-magenta-400 d-fs-200 d-fw-bold h:d-o50">hover to opacity .d-o50</div>
+<code-well-header>
+  <dt-button kind="unstyled" class="d-p16 d-bar8 d-bgc-moderate h:d-o50">Hover me</dt-button>
 </code-well-header>
 
 ```html
-<p class="h:d-o50">...</p>
+<dt-button kind="unstyled" class="h:d-o50">...</dt-button>
 ```
 
 ## Focus
 
 Use `f:d-o{n}` to change an element's :focus and :focus-within state opacity.
 
-<code-well-header class="d-fl-col5 d-g8 d-fw-wrap d-p24 d-bgc-magenta-100 d-bgo50 d-w100p d-hmn102" custom>
-  <button class="d-ba-none d-fl-center d-p16 d-bar8 d-bgc-magenta-100 d-fc-magenta-400 d-fs-200 d-fw-bold f:d-o50">Click me to opacity .d-o50</button>
+<code-well-header>
+  <dt-button kind="unstyled" class="d-p16 d-bar8 d-bgc-moderate f:d-o50">Focus me</dt-button>
 </code-well-header>
 
 ```html
-<p class="f:d-o50">...</p>
+<dt-button kind="unstyled" class="f:d-o50">...</dt-button>
 ```
 
 ## Focus Visible
 
 Use `fv:d-o{n}` to change an element's :focus-visible state opacity [only when focused by keyboard].
 
-<code-well-header class="d-fl-col5 d-g8 d-fw-wrap d-p24 d-bgc-magenta-100 d-bgo50 d-w100p d-hmn102" custom>
-  <button class="d-ba-none d-fl-center d-p16 d-bar8 d-bgc-magenta-100 d-fc-magenta-400 d-fs-200 d-fw-bold fv:d-o50">Focus me to opacity .d-o50</button>
+<code-well-header>
+  <dt-button kind="unstyled" class="d-p16 d-bar8 d-bgc-moderate fv:d-o50">Keyboard focus me</dt-button>
 </code-well-header>
 
 ```html
-<p class="fv:d-o50">...</p>
+<dt-button kind="unstyled" class="fv:d-o50">...</dt-button>
 ```
 
 <script setup>

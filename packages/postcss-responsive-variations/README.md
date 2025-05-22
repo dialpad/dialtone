@@ -15,25 +15,25 @@
   .background-color: red;
 }
 
-@media (max-width: 480px){
+@media (min-width: 480px){
   .sm\:foo {
     .background-color: red;
   }
 }
 
-@media (max-width: 640px){
+@media (min-width: 640px){
   .md\:foo {
   .background-color: red;
   }
 }
 
-@media (max-width: 980px){
+@media (min-width: 980px){
   .lg\:foo {
   .background-color: red;
   }
 }
 
-@media (max-width: 1264px){
+@media (min-width: 1264px){
   .xl\:foo {
   .background-color: red;
   }
@@ -48,14 +48,14 @@
 npm install --save-dev postcss @dialpad/postcss-responsive-variations
 ```
 
-**Step 2:** Check you project for existed PostCSS config: `postcss.config.js`
+**Step 2:** Check your project for existing PostCSS config: `postcss.config.js`
 in the project root, `"postcss"` section in `package.json`
 or `postcss` in bundle config.
 
-If you do not use PostCSS, add it according to [official docs](https://github.com/postcss/postcss#usage)
+If you do not use PostCSS, add it according to the [official docs](https://github.com/postcss/postcss#usage)
 and set this plugin in settings.
 
-**Step 3:** Add the plugin to plugins list:
+**Step 3:** Add the plugin to the plugins list:
 
 ```diff
 module.exports = {
@@ -66,14 +66,14 @@ module.exports = {
 }
 ```
 
-**Step 4:** Create the responsive breakpoints and the classes you need and pass it to the plugin argument.
+**Step 4:** Create the responsive breakpoints and the classes you need and pass them to the plugin argument. Note: if you don't pass the breakpoints, the plugin will use the default ones, which are the ones shown in this example.
 
 ```diff
 +const breakpoints = [
-+  { prefix: 'sm\\:', mediaQuery: '(max-width: 480px)' },
-+  { prefix: 'md\\:', mediaQuery: '(max-width: 640px)' },
-+  { prefix: 'lg\\:', mediaQuery: '(max-width: 980px)' },
-+  { prefix: 'xl\\:', mediaQuery: '(max-width: 1264px)' },
++  { prefix: 'sm\\:', mediaQuery: '(min-width: 480px)' },
++  { prefix: 'md\\:', mediaQuery: '(min-width: 640px)' },
++  { prefix: 'lg\\:', mediaQuery: '(min-width: 980px)' },
++  { prefix: 'xl\\:', mediaQuery: '(min-width: 1264px)' },
 +];
 
 +const classes = [

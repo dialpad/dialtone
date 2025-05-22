@@ -3,10 +3,14 @@ title: Margins
 description: Utilities to adjust an element's exterior spacing between other objects.
 ---
 
+<dt-notice kind="warning" class="d-wmx100p d-mt24" hideClose>
+  Avoid applying margins directly. Lean toward using layout components like <router-link class="d-link d-link--muted" to="/components/stack/">Stack</router-link> for consistent and maintainable spacing <strong>between</strong> elements.
+</dt-notice>
+
 ## Add Margin to All Sides
 
-<code-well-header class="d-fl-center d-p24 d-bgc-purple-100 d-bgo50 d-w100p d-hmn216" custom>
-  <div class="d-bgc-purple-200 d-of-hidden"><div class="d-fl-center d-p16 d-m24 d-bgc-purple-300 d-bar4 d-code--md">d-m24</div></div>
+<code-well-header>
+  <div class="d-bgc-bold d-of-hidden"><div class="d-fl-center d-p16 d-m24 d-bgc-moderate d-bar4 d-code--md">d-m24</div></div>
 </code-well-header>
 
 ```html
@@ -15,11 +19,13 @@ description: Utilities to adjust an element's exterior spacing between other obj
 
 ## Add Margin to a Single Side
 
-<code-well-header class="d-d-flex d-fw-wrap d-ai-start d-jc-center d-bgc-green-100 d-bgo50 d-w100p d-hmn216 d-flow24" custom>
-  <div class="d-as-center d-bar8 d-bgc-green-100 d-of-hidden"><div class="d-fl-center d-mt12 d-p16 d-bgc-green-200 d-bbr4 d-code--md">d-mt12</div></div>
-  <div class="d-as-center d-bar8 d-bgc-green-100 d-of-hidden"><div class="d-fl-center d-mr16 d-p16 d-bgc-green-200 d-brl4 d-code--md">d-mr16</div></div>
-  <div class="d-as-center d-bar8 d-bgc-green-100 d-of-hidden"><div class="d-fl-center d-mb24 d-p16 d-bgc-green-200 d-btr4 d-code--md">d-mb24</div></div>
-  <div class="d-as-center d-bar8 d-bgc-green-100 d-of-hidden"><div class="d-fl-center d-ml32 d-p16 d-bgc-green-200 d-brr4 d-code--md">d-ml32</div></div>
+<code-well-header>
+  <div class="d-d-flex d-fw-wrap d-ai-start d-jc-center d-bgo50 d-w100p d-flow24">
+    <div class="d-as-center d-bar8 d-bgc-bold d-of-hidden"><div class="d-fl-center d-mt12 d-p16 d-bgc-moderate d-bbr4 d-code--md">d-mt12</div></div>
+    <div class="d-as-center d-bar8 d-bgc-bold d-of-hidden"><div class="d-fl-center d-mr16 d-p16 d-bgc-moderate d-brl4 d-code--md">d-mr16</div></div>
+    <div class="d-as-center d-bar8 d-bgc-bold d-of-hidden"><div class="d-fl-center d-mb24 d-p16 d-bgc-moderate d-btr4 d-code--md">d-mb24</div></div>
+    <div class="d-as-center d-bar8 d-bgc-bold d-of-hidden"><div class="d-fl-center d-ml32 d-p16 d-bgc-moderate d-brr4 d-code--md">d-ml32</div></div>
+  </div>
 </code-well-header>
 
 ```html
@@ -31,8 +37,8 @@ description: Utilities to adjust an element's exterior spacing between other obj
 
 ## Add Horizontal Margins
 
-<code-well-header class="d-d-flex d-fw-wrap d-ai-start d-jc-center d-bgc-magenta-100 d-bgo50 d-w100p d-hmn216" custom>
-  <div class="d-as-center d-bar8 d-bgc-magenta-100 d-of-hidden"><div class="d-fl-center d-mx24 d-p16 d-bgc-magenta-200 d-code--md">d-mx24</div></div>
+<code-well-header>
+  <div class="d-as-center d-bar8 d-bgc-bold d-of-hidden"><div class="d-fl-center d-mx16 d-p16 d-bgc-moderate d-code--md">d-mx16</div></div>
 </code-well-header>
 
 ```html
@@ -41,8 +47,8 @@ description: Utilities to adjust an element's exterior spacing between other obj
 
 ## Add Vertical Margins
 
-<code-well-header class="d-d-flex d-fw-wrap d-ai-start d-jc-center d-bgc-red-100 d-bgo50 d-w100p d-hmn216" custom>
-  <div class="d-as-center d-bar8 d-bgc-red-100 d-of-hidden"><div class="d-fl-center d-my24 d-p16 d-bgc-red-300 d-code--sm d-fc-primary-inverted">d-my24</div></div>
+<code-well-header>
+  <div class="d-as-center d-bar8 d-bgc-bold d-of-hidden"><div class="d-fl-center d-my16 d-p16 d-bgc-moderate d-code--sm">d-my16</div></div>
 </code-well-header>
 
 ```html
@@ -53,10 +59,12 @@ description: Utilities to adjust an element's exterior spacing between other obj
 
 Auto margins allow an element to fill a remaining space within an object. This is especially useful in flex layouts.
 
-<code-well-header class="d-bgc-gold-100 d-bgo50 d-w100p d-hmn216 d-p24 d-stack16" custom>
-  <div class="d-d-flex d-bar8 d-bgc-gold-100 d-of-hidden"><div class="d-fl-center d-mx-auto d-p16 d-bgc-gold-200 d-code--md">d-mx-auto</div></div>
-  <div class="d-d-flex d-bar8 d-bgc-gold-100 d-of-hidden"><div class="d-fl-center d-ml-auto d-p16 d-bgc-gold-200 d-code--md">d-ml-auto</div></div>
-  <div class="d-d-flex d-bar8 d-bgc-gold-100 d-of-hidden"><div class="d-fl-center d-mr-auto d-p16 d-bgc-gold-200 d-code--md">d-mr-auto</div></div>
+<code-well-header>
+  <div class="d-w100p d-stack16">
+    <div class="d-d-flex d-bar8 d-bgc-bold d-of-hidden"><div class="d-fl-center d-mx-auto d-p16 d-bgc-moderate d-code--md">d-mx-auto</div></div>
+    <div class="d-d-flex d-bar8 d-bgc-bold d-of-hidden"><div class="d-fl-center d-ml-auto d-p16 d-bgc-moderate d-code--md">d-ml-auto</div></div>
+    <div class="d-d-flex d-bar8 d-bgc-bold d-of-hidden"><div class="d-fl-center d-mr-auto d-p16 d-bgc-moderate d-code--md">d-mr-auto</div></div>
+  </div>
 </code-well-header>
 
 ```html

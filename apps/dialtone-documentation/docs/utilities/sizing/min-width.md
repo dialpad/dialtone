@@ -1,4 +1,4 @@
-z---
+---
 title: Min-width
 description: Utilities to control an element's minimum width.
 ---
@@ -7,8 +7,8 @@ description: Utilities to control an element's minimum width.
 
 Use `d-wmn{n}p` to set a minimum width percentage for an element. This can be combined with `d-w{n}p` and `d-wmx{n}` to have an element fill a certain height range.
 
-<code-well-header class="d-d-flex d-jc-center d-p24 d-bgc-purple-100 d-bgo50 d-w100p d-flow16" custom>
-  <div class="d-fl-center d-py16 d-px8 d-w64 d-wmn50p d-bgc-purple-300 d-bar4 d-fs-300 d-fw-bold d-ta-center">1</div>
+<code-well-header class="d-d-flex d-jc-center d-p24 d-bgc-secondary d-w100p d-flow16" custom>
+  <div class="d-fl-center d-py16 d-px8 d-w64 d-wmn50p d-bgc-moderate d-bar4 d-ta-center">1</div>
 </code-well-header>
 
 ```html
@@ -19,10 +19,10 @@ Use `d-wmn{n}p` to set a minimum width percentage for an element. This can be co
 
 Use `d-wmn{n}` to set a fixed minimum width for an element. This can be combined with `d-w{n}p` and `d-wmx{n}` to have an element fill a certain height range.
 
-<code-well-header class="d-d-flex d-p24 d-bgc-magenta-100 d-bgo50 d-w100p d-flow16 d-of-x-scroll d-fs-300 d-fw-bold d-ta-center" custom>
-  <div class="d-fl-center d-py16 d-px8 d-w64 d-h64 d-wmn64 d-bgc-magenta-100 d-bar4">1</div>
-  <div class="d-fl-center d-py16 d-px8 d-w64 d-h64 d-wmn96 d-bgc-magenta-100 d-bar4">2</div>
-  <div class="d-fl-center d-py16 d-px8 d-w64 d-h64 d-wmn332 d-bgc-magenta-100 d-bar4">3</div>
+<code-well-header class="d-d-flex d-p24 d-bgc-secondary d-w100p d-flow16 d-of-x-scroll d-ta-center" custom>
+  <div class="d-fl-center d-py16 d-px8 d-w64 d-h64 d-wmn64 d-bgc-moderate d-bar4">1</div>
+  <div class="d-fl-center d-py16 d-px8 d-w64 d-h64 d-wmn96 d-bgc-moderate d-bar4">2</div>
+  <div class="d-fl-center d-py16 d-px8 d-w64 d-h64 d-wmn332 d-bgc-moderate d-bar4">3</div>
 </code-well-header>
 
 ```html

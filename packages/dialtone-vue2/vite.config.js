@@ -43,13 +43,12 @@ export default defineConfig({
     minify: true,
     rollupOptions: {
       external: [
-        /^@dialpad\/dialtone/,
+        /^@dialpad/,
         /^@tiptap\/(?!vue-2)/,
         /^date-fns/,
         /^emoji-toolkit/,
         /^overlayscrollbars/,
         /^prosemirror/,
-        '@dialpad/i18n-services',
         'regex-combined-emojis',
         'deep-equal',
         'tippy.js',
@@ -75,14 +74,13 @@ export default defineConfig({
 
         // Dependencies
         'node_modules/@tiptap/vue-2': './node_modules/@tiptap/vue-2/dist/index.js',
-        'node_modules/@dialpad/i18n-vue2': './node_modules/@dialpad/i18n-vue2/dist/i18n-vue2.js',
         'node_modules/@linusborg/vue-simple-portal': './node_modules/@linusborg/vue-simple-portal/dist/index.esm.js',
 
         // Localization
-        'localization/index': './localization/index.js',
-        'localization/dp-DP': './localization/dp-DP.ftl?raw',
-        'localization/es-LA': './localization/es-LA.ftl?raw',
-        'localization/en-US': './localization/en-US.ftl?raw',
+        // 'localization/index': './localization/index.js',
+        // 'localization/dp-DP': './localization/dp-DP.ftl?raw',
+        // 'localization/es-LA': './localization/es-LA.ftl?raw',
+        // 'localization/en-US': './localization/en-US.ftl?raw',
       },
       formats: ['es', 'cjs'],
     },

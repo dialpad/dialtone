@@ -291,17 +291,7 @@ export default {
     },
   },
 
-  watch: {
-    // whenever question changes, this function will run
-    options () {
-      this.$nextTick(() => {
-        this.emitValue(this.$refs.selectElement.value, null);
-      });
-    },
-  },
-
   mounted () {
-    this.emitValue(this.$refs.selectElement.value, null);
     this.validateOptionsPresence();
   },
 

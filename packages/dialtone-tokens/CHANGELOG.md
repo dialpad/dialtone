@@ -1,3 +1,31 @@
+## [1.43.2](https://github.com/dialpad/dialtone/compare/dialtone-tokens/v1.43.1...dialtone-tokens/v1.43.2) (2025-05-12)
+
+
+### Bug Fixes
+
+* **Tokens:** DLT-2510 remove color tokens with a gradient for mobile ([#752](https://github.com/dialpad/dialtone/issues/752)) ([f02cfe1](https://github.com/dialpad/dialtone/commit/f02cfe1efc4d2f7413b1c9794c5bdfc48dc0534e))
+
+## [1.43.1](https://github.com/dialpad/dialtone/compare/dialtone-tokens/v1.43.0...dialtone-tokens/v1.43.1) (2025-05-07)
+
+
+### Bug Fixes
+
+* NO-JIRA dependency issues and warnings ([#746](https://github.com/dialpad/dialtone/issues/746)) ([3e6d9eb](https://github.com/dialpad/dialtone/commit/3e6d9ebb940ec302a7323c39fbfc63950b5bb1c2))
+
+# [1.43.0](https://github.com/dialpad/dialtone/compare/dialtone-tokens/v1.42.1...dialtone-tokens/v1.43.0) (2025-05-06)
+
+
+### Features
+
+* **Design Token:** NO-JIRA update brand gradient ([#745](https://github.com/dialpad/dialtone/issues/745)) ([b3e927c](https://github.com/dialpad/dialtone/commit/b3e927c3ebbd2bbc3d0572645f02e521a2b04d91))
+
+## [1.42.1](https://github.com/dialpad/dialtone/compare/dialtone-tokens/v1.42.0...dialtone-tokens/v1.42.1) (2025-05-05)
+
+
+### Bug Fixes
+
+* **Design Tokens:** NO-JIRA update color.surface.warning reference in dark mode ([#740](https://github.com/dialpad/dialtone/issues/740)) ([b20558a](https://github.com/dialpad/dialtone/commit/b20558a28b5af91f885d48ea60b204fd1f6e6c29))
+
 # [1.42.0](https://github.com/dialpad/dialtone/compare/dialtone-tokens/v1.41.2...dialtone-tokens/v1.42.0) (2025-04-25)
 
 

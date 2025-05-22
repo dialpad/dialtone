@@ -1,6 +1,6 @@
 {
   "name": "@dialpad/dialtone-tokens",
-  "version": "1.42.0",
+  "version": "1.43.2",
   "description": "Design tokens for Dialtone.",
   "type": "module",
   "scripts": {
@@ -42,6 +42,9 @@
     "postcss-cli": "11.0.0",
     "style-dictionary": "^4.1.0",
     "tsx": "^4.19.0"
+  },
+  "peerDependencies": {
+    "eslint": "^8.55.0"
   },
   "contributors": [
     {

@@ -17,12 +17,10 @@ description: Utilities to change an element's line-height.
 
 Use `d-lh-{n}` to change an element's line-height relatively. This means no unit is set with the line-height. Instead the line-height value is a multiple of the font-size.
 
-<code-well-header class="d-d-flex d-jc-center d-fd-column d-p24 d-g16 d-bgc-purple-100 d-w100p d-hmn102" custom>
+<code-well-header>
   <div v-for="{ class: stop } in relative" class="d-d-grid d-ai-center" style="grid-template-columns: 10rem 1fr">
     <div class="d-code--sm d-docsite-code">.d-lh-{{stop}}</div>
-    <div>
-        <p :class="`d-lh-${stop} d-fs-300 d-bgc-purple-200 d-bgo25`">The quick brown fox jumps over the lazy dog.</p>
-    </div>
+    <p :class="`d-lh-${stop} d-bgc-moderate`">The quick brown fox jumps over the lazy dog.</p>
   </div>
 </code-well-header>
 
@@ -40,11 +38,11 @@ Use `d-lh-{n}` to change an element's line-height relatively. This means no unit
 
 Use `d-lh{n}` to fix an element's line-height. This allows you to target a specific line-height based on the font-size. For example if a target 20px line-height is desired and the current font-size is 14px, apply `.d-lh6` to achieve this target (14px font-size + 6px = 20px target line-height).
 
-<code-well-header class="d-d-flex d-jc-center d-fd-column d-p24 d-g16 d-bgc-gold-100 d-w100p d-hmn102" custom>
+<code-well-header>
   <div v-for="{ class: stop } in fixed" class="d-d-grid d-ai-center" style="grid-template-columns: 10rem 1fr">
-    <div class="d-code--sm d-fc-gold-300">.d-lh{{stop}}</div>
+    <div class="d-code--sm d-docsite-code">.d-lh{{stop}}</div>
     <div>
-        <p :class="`d-lh${stop} d-fs-300 d-bgc-gold-200 d-bgo25`">The quick brown fox jumps over the lazy dog.</p>
+        <p :class="`d-lh${stop} d-fs-300 d-bgc-moderate`">The quick brown fox jumps over the lazy dog.</p>
     </div>
   </div>
 </code-well-header>

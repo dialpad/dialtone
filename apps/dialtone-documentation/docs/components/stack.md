@@ -11,7 +11,7 @@ storybook: https://dialtone.dialpad.com/vue/?path=/story/components-stack--defau
   <dt-stack direction="row" gap="600">
     <dt-stack
       gap="500"
-      class="d-bgc-magenta-100"
+      class="d-bgc-bold"
     >
       <div class="d-bgc-secondary">
         Stack item 1
@@ -26,7 +26,7 @@ storybook: https://dialtone.dialpad.com/vue/?path=/story/components-stack--defau
     <dt-stack
       gap="500"
       direction="row"
-      class="d-bgc-magenta-100"
+      class="d-bgc-bold"
     >
       <div class="d-bgc-secondary">
         Stack item 1
@@ -289,26 +289,26 @@ vueCode='
     gap="500"
     class="d-ai-flex-start d-w100p"
   >
-    <dt-stack class="d-w50p md:d-w100p">
+    <dt-stack class="d-w100p md:d-w50p">
       <h3 class="d-headline--md">Column</h3>
       <dt-stack
         :gap="selectedGap"
         ref="gapExample"
-        class="d-bgc-magenta-100 d-t d-td300 d-ttf-quint"
+        class="d-bgc-bold d-t d-td300 d-ttf-quint"
       >
         <div class="d-bgc-secondary">Stack item 1</div>
         <div class="d-bgc-secondary">Stack item 2</div>
         <div class="d-bgc-secondary">Stack item 3</div>
       </dt-stack>
     </dt-stack>
-    <dt-stack class="d-w50p md:d-w100p">
+    <dt-stack class="d-w100p md:d-w50p">
       <h3 class="d-headline--md">Row</h3>
       <div class="d-d-inline-flex">
         <dt-stack
           direction="row"
           :gap="selectedGap"
           ref="gapExample"
-          class="d-bgc-magenta-100 d-t d-td300 d-ttf-quint"
+          class="d-bgc-bold d-t d-td300 d-ttf-quint"
         >
           <div class="d-bgc-secondary">Stack item 1</div>
           <div class="d-bgc-secondary">Stack item 2</div>
@@ -580,7 +580,7 @@ vueCode='
 Stacks column at small screen size and column reverse at large screen
 
 <code-well-header>
-  <div class="d-stack d-stack--row d-stack--sm-column d-stack--lg-column-reverse d-stack--gap-500 d-bgc-magenta-100">
+  <div class="d-stack d-stack--row d-stack--sm-column d-stack--lg-column-reverse d-stack--gap-500 d-bgc-bold">
     <div class="d-bgc-secondary">
       Stack item 1
     </div>
@@ -621,7 +621,7 @@ showHtmlWarning />
 Set `200` as the default gap, `300` for small and larger, `400` for medium, `500` for large, and `600` for extra large. Learn more about how our breakpoints work in the [Responsive Breakpoints documentation](/utilities/responsive/breakpoints.md).
 
 <code-well-header>
-  <dt-stack :gap="{ default: '200', xl: '600', lg: '500', md: '400', sm: '300' }" class="d-bgc-magenta-100">
+  <dt-stack :gap="{ default: '200', xl: '600', lg: '500', md: '400', sm: '300' }" class="d-bgc-bold">
     <div class="d-bgc-secondary">
       Stack item 1
     </div>
@@ -637,9 +637,9 @@ Set `200` as the default gap, `300` for small and larger, `400` for medium, `500
 <code-example-tabs
 htmlCode='
 <div class="d-stack d-stack--gap-300 d-stack--sm-gap-300 d-stack--md-gap-400 d-stack--lg-gap-500 d-stack--xl-gap-600">
-  <div class="d-bgc-magenta-100">Stack item 1</div>
-  <div class="d-bgc-magenta-100">Stack item 2</div>
-  <div class="d-bgc-magenta-100">Stack item 3</div>
+  <div class="d-bgc-bold">Stack item 1</div>
+  <div class="d-bgc-bold">Stack item 2</div>
+  <div class="d-bgc-bold">Stack item 3</div>
 </div>
 '
 vueCode='

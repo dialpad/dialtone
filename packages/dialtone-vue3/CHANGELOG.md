@@ -1,3 +1,67 @@
+## [3.182.5](https://github.com/dialpad/dialtone/compare/dialtone-vue3/v3.182.4...dialtone-vue3/v3.182.5) (2025-05-21)
+
+
+### Bug Fixes
+
+* **Hovercard:** DP-142048 remove hovercard when anchor is removed from the DOM ([#768](https://github.com/dialpad/dialtone/issues/768)) ([66bdd47](https://github.com/dialpad/dialtone/commit/66bdd47e53aba2fd026d1649aed2a10d76c03976))
+
+## [3.182.4](https://github.com/dialpad/dialtone/compare/dialtone-vue3/v3.182.3...dialtone-vue3/v3.182.4) (2025-05-20)
+
+
+### Bug Fixes
+
+* **Scrollbar:** DLT-2552 cleanup OverlayScollbars instances on unbind ([#765](https://github.com/dialpad/dialtone/issues/765)) ([3f5e36d](https://github.com/dialpad/dialtone/commit/3f5e36df066b1a65e788c405111095dab555beb2))
+
+## [3.182.3](https://github.com/dialpad/dialtone/compare/dialtone-vue3/v3.182.2...dialtone-vue3/v3.182.3) (2025-05-16)
+
+
+### Bug Fixes
+
+* NO-JIRA i18n dependencies ([#756](https://github.com/dialpad/dialtone/issues/756)) ([48aa9c8](https://github.com/dialpad/dialtone/commit/48aa9c8d7b396b4b1e8338d0533551d5af9a5b49))
+
+## [3.182.2](https://github.com/dialpad/dialtone/compare/dialtone-vue3/v3.182.1...dialtone-vue3/v3.182.2) (2025-05-12)
+
+
+### Bug Fixes
+
+* **Editor:** DP-140768 recipe editor throwing console error ([#749](https://github.com/dialpad/dialtone/issues/749)) ([0246ce2](https://github.com/dialpad/dialtone/commit/0246ce2b0bd7c7e0d25d17ae2e2884bfa37212da))
+* **Ivr Node:** NO-JIRA fix connector color in dark mode ([#748](https://github.com/dialpad/dialtone/issues/748)) ([08ed4ad](https://github.com/dialpad/dialtone/commit/08ed4ad24c1b7899e7a9673fcbfe81ff464192f4))
+
+## [3.182.1](https://github.com/dialpad/dialtone/compare/dialtone-vue3/v3.182.0...dialtone-vue3/v3.182.1) (2025-05-07)
+
+
+### Bug Fixes
+
+* **Editor:** DP-140466 font family and font-color support in editor for qrs ([#742](https://github.com/dialpad/dialtone/issues/742)) ([156f874](https://github.com/dialpad/dialtone/commit/156f87483490e8dc9634168b048601a5a535081f))
+
+# [3.182.0](https://github.com/dialpad/dialtone/compare/dialtone-vue3/v3.181.0...dialtone-vue3/v3.182.0) (2025-05-06)
+
+
+### Features
+
+* **Editor:** DP-135938 update quick reply icon ([#744](https://github.com/dialpad/dialtone/issues/744)) ([c5bb007](https://github.com/dialpad/dialtone/commit/c5bb007f3a937ce1e6fa0dde21fe118d6452f70d))
+
+# [3.181.0](https://github.com/dialpad/dialtone/compare/dialtone-vue3/v3.180.0...dialtone-vue3/v3.181.0) (2025-05-06)
+
+
+### Features
+
+* **Button:** DLT-2500 add unstyled variant ([#735](https://github.com/dialpad/dialtone/issues/735)) ([1b6114d](https://github.com/dialpad/dialtone/commit/1b6114dc54005ebd1a1072be1872e3e04cff989c))
+
+# [3.180.0](https://github.com/dialpad/dialtone/compare/dialtone-vue3/v3.179.1...dialtone-vue3/v3.180.0) (2025-05-05)
+
+
+### Features
+
+* **Editor:** DP-115099 recipe editor support for focusing action bar buttons using arrow keys ([#732](https://github.com/dialpad/dialtone/issues/732)) ([011f042](https://github.com/dialpad/dialtone/commit/011f042d49bb0c874d12cd3eb702641b80f48d34))
+
+## [3.179.1](https://github.com/dialpad/dialtone/compare/dialtone-vue3/v3.179.0...dialtone-vue3/v3.179.1) (2025-04-29)
+
+
+### Bug Fixes
+
+* **Select Menu:** NO-JIRA avoid emitting value on mounted (vue 3 only) ([#734](https://github.com/dialpad/dialtone/issues/734)) ([78962c3](https://github.com/dialpad/dialtone/commit/78962c3eed952d1d07531a037a9037259ab117d2))
+
 # [3.179.0](https://github.com/dialpad/dialtone/compare/dialtone-vue3/v3.178.0...dialtone-vue3/v3.179.0) (2025-04-25)
 
 

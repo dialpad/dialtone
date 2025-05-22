@@ -24,30 +24,28 @@ When setting the scale of an element, use [Size](/design/size/index.md) units.
 
 ### Setting a Specific Spacing
 
-<div class="d-d-grid d-g24 d-g-cols3 md:d-g-cols1">
+<div class="d-d-grid d-g24 d-g-cols1 md:d-g-cols3">
 
 <div>
 
 When setting the gap between elements, utilize [Space Tokens](#tokens) for the gap value.
 
-👍
-`gap: var(--dt-space-400)`
+👍 `gap: var(--dt-space-400)`
 
-👎
-`gap: var(--dt-size-400)`
+👎 `gap: var(--dt-size-400)`
 </div>
 <div class="d-gc2">
 <code-well-header>
   <div class="d-d-grid d-g24 d-g-cols2 md:d-g-cols1 d-w100p">
     <div class="d-d-flex d-fd-row" :style="{ gap: selectedSpace }">
-      <div class="d-fl-center d-ba d-bc-purple-400 d-w100p">
+      <div class="d-fl-center d-ba d-bc-default d-w100p">
         Element A
       </div>
-      <div class="d-fl-center d-ba d-bc-purple-400 d-w100p">
+      <div class="d-fl-center d-ba d-bc-default d-w100p">
         Element B
       </div>
     </div>
-    <dt-select-menu label="gap" :options="spaceValues" @change="changeSpace" />
+    <dt-select-menu label="Gap" :options="spaceValues" @change="changeSpace" />
   </div>
 </code-well-header>
 
@@ -72,7 +70,7 @@ When setting the gap between elements, utilize [Space Tokens](#tokens) for the g
 
 ### Stacking
 
-<div class="d-d-grid d-g24 d-g-cols3 md:d-g-cols1">
+<div class="d-d-grid d-g24 d-g-cols1 md:d-g-cols3">
 <div>
 
 When adding space between elements, both vertically and horizontally, we can use either `space-between` or `gap` to define the space that separates each element. The value is set as a variable in Figma and as a token in code.
@@ -99,7 +97,7 @@ When adding space between elements, both vertically and horizontally, we can use
 
 ### Padding
 
-<div class="d-d-grid d-g24 d-g-cols3 md:d-g-cols1">
+<div class="d-d-grid d-g24 d-g-cols1 md:d-g-cols3">
 <div>
 
 When adding space around an element, use `padding` to create breathing room.
@@ -120,7 +118,7 @@ Avoid using `margin`, which adds space outside the element and can affect the la
 
 ### Grouping
 
-<div class="d-d-grid d-g16 d-g-cols3 md:d-g-cols1" >
+<div class="d-d-grid d-g16 d-g-cols1 md:d-g-cols3" >
   <div>
 <dt-stack direction="column" gap="400">
 <p>Group and adjust the distance between elements to guide users understanding of their relationships. Closer elements appear more connected, while larger gaps indicate less association.</p>
@@ -137,7 +135,7 @@ Avoid using `margin`, which adds space outside the element and can affect the la
 
 ### Guiding the Eye
 
-<div class="d-d-grid d-g16 d-g-cols3 md:d-g-cols1" >
+<div class="d-d-grid d-g16 d-g-cols1 md:d-g-cols3" >
   <div>
     <dt-stack direction="column" gap="400">
       <div>
@@ -159,16 +157,6 @@ Avoid using `margin`, which adds space outside the element and can affect the la
 Here are some frequently used tokens, don't use values outside the recommended range for specific types of spacing. For a complete list, visit the [Spacing Tokens](/tokens/index.md#space) section.
 
 <token-table category="space" :tokenList="true" :tokens="tokens" theme="light" />
-
-<dt-notice
-  kind="info"
-  title="Figma Variables"
-  :hideClose="true"
->
-  <template #default>
-    By April 2024, we aim to integrate sizing units into Figma Variables. This will simplify the process of setting these tokens on width, min-width, height, min-height in your Figma files, making it easier for engineers to obtain the correct variable for each case.
-  </template>
-</dt-notice>
 
 ## Key Takeaways
 

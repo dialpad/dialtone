@@ -15,6 +15,7 @@ const kindDescriptions = {
   positive: 'Used to communicate positive actions.',
   inverted: 'Use for placement on non-white, dark backgrounds.',
   muted: 'For non-primary actions and contexts where base style may not work.',
+  unstyled: 'Raw button devoid of any style.',
 };
 </script>
 
@@ -30,8 +31,10 @@ const kindDescriptions = {
       <tr>
         <th class="d-ta-left d-va-top" />
         <th v-for="importance in importanceModifiers" :key="importance" class="d-ta-left d-va-top">
-          {{ importance }}
-          <div class="d-fw-normal d-tt-none d-fs-200 d-lh-200">
+          <div class="d-mb4">
+            {{ importance }}
+          </div>
+          <div class="d-tt-none d-body--md-compact">
             {{ importanceDescriptions[importance] }}
           </div>
         </th>
@@ -43,7 +46,7 @@ const kindDescriptions = {
           <a class="d-link d-fs-100 d-fw-medium d-d-block d-mb4 d-tt-uppercase" :href="`#${kind}`">
             <strong>{{ kind }}</strong>
           </a>
-          <div class="d-fw-normal d-lh-200">
+          <div class="d-body--md-compact">
             {{ kindDescriptions[kind] }}
           </div>
         </th>
@@ -55,7 +58,8 @@ const kindDescriptions = {
             { 'd-bgc-contrast': kind === 'inverted' },
           ]"
         >
-          <dt-button v-if="importance !== 'primary' || kind !== 'muted'" :importance="importance" :kind="kind">
+          <span v-if="kind === 'unstyled'">N/A</span>
+          <dt-button v-else-if="importance !== 'primary' || kind !== 'muted'" :importance="importance" :kind="kind">
             Place call
           </dt-button>
           <span v-else>N/A</span>

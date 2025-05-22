@@ -18,8 +18,10 @@
       data-qa="dt-button-icon"
       :class="[
         'base-button__icon',
-        'd-btn__icon',
-        ICON_POSITION_MODIFIERS[iconPosition],
+        {
+          'd-btn__icon': kind !== 'unstyled',
+          [ICON_POSITION_MODIFIERS[iconPosition]]: kind !== 'unstyled',
+        },
       ]"
     >
       <!-- @slot Button icon -->
@@ -31,7 +33,11 @@
     <span
       v-if="$slots.default"
       data-qa="dt-button-label"
-      :class="['d-btn__label', 'base-button__label', labelClass]"
+      :class="[
+        'base-button__label',
+        { 'd-btn__label': kind !== 'unstyled' },
+        labelClass,
+      ]"
     >
       <!-- @slot Content within button -->
       <slot />
@@ -192,7 +198,7 @@ export default {
 
     /**
      * The color of the button.
-     * @values default, muted, danger, positive, inverted
+     * @values default, unstyled, muted, danger, positive, inverted
      */
     kind: {
       type: String,
@@ -308,6 +314,9 @@ export default {
           BUTTON_SIZE_MODIFIERS[this.size],
         ];
       }
+      if (this.kind === 'unstyled') {
+        return ['d-btn--unstyled'];
+      }
       return [
         'd-btn',
         BUTTON_IMPORTANCE_MODIFIERS[this.importance],
@@ -324,6 +333,11 @@ export default {
     },
 
     isInvalidPropCombination (circle, kind, importance) {
+      // Skip validation if unstyled is true
+      if (this.kind === 'unstyled') {
+        return true;
+      }
+
       for (const row of INVALID_COMBINATION) {
         if (circle === row.circle && kind === row.kind && importance === row.importance) {
           console.warn(row.message);
