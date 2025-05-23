@@ -1,49 +1,51 @@
 <template>
   <dt-stack
-    direction="column"
+    direction="row"
     class="d-mention-suggestion__container"
-    gap="300"
+    gap="400"
   >
+    <dt-avatar
+      :full-name="name"
+      :image-src="avatarSrc"
+      :image-alt="name"
+      :show-presence="showDetails"
+      :presence="presence"
+      size="xs"
+    />
     <dt-stack
-      direction="row"
-      gap="400"
+      class="d-mention-suggestion__details-container"
+      gap="200"
     >
-      <dt-avatar
-        :full-name="name"
-        :image-src="avatarSrc"
-        :image-alt="name"
-        :show-presence="showDetails"
-        :presence="presence"
-        size="xs"
-      />
       <!-- eslint-disable-next-line vue/no-restricted-class -->
       <span class="d-mention-suggestion__name">
         {{ name }}
       </span>
-    </dt-stack>
-
-    <dt-stack
-      v-if="showDetails"
-      direction="row"
-      gap="300"
-      class="d-label--sm-plain"
-    >
-      <span
-        v-if="presenceText"
-        class="d-mention-suggestion__presence"
-        :class="[presenceFontColorClass]"
+      <dt-stack
+        v-if="showDetails"
+        direction="row"
+        gap="300"
+        class="d-label--sm-plain"
       >
-        {{ presenceText }}
-      </span>
-      <div v-if="status && presenceText">
-        •
-      </div>
-      <div
-        v-if="status"
-        class="d-mention-suggestion__status"
-      >
-        {{ status }}
-      </div>
+        <span
+          v-if="presenceText"
+          class="d-mention-suggestion__presence"
+          :class="[presenceFontColorClass]"
+        >
+          {{ presenceText }}
+        </span>
+        <div
+          v-if="status && presenceText"
+          class="d-mention-suggestion__divider"
+        >
+          •
+        </div>
+        <div
+          v-if="status"
+          class="d-mention-suggestion__status"
+        >
+          {{ status }}
+        </div>
+      </dt-stack>
     </dt-stack>
   </dt-stack>
 </template>
@@ -109,14 +111,24 @@ export default {
 .d-mention-suggestion__container {
   width: 100%;
 }
+.d-mention-suggestion__details-container {
+  width: 90%;
+}
 
 .d-mention-suggestion__presence {
   min-width: fit-content;
+  margin-left: var(--dt-space-200);
 }
 
 .d-mention-suggestion__status {
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
+  color: var(--dt-color-foreground-tertiary);
+  margin-left: var(--dt-space-100);
+}
+
+.d-mention-suggestion__divider {
+  color: var(--dt-color-foreground-tertiary);
 }
 </style>
