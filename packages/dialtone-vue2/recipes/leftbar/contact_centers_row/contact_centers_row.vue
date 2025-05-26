@@ -186,7 +186,7 @@ export default {
         ? this.ariaLabel
         : safeConcatStrings([
           this.description,
-          this.$t('DIALTONE_UNREAD_MESSAGE_COUNT_TEXT', { unreadCount: count }),
+          this.i18n.$t('DIALTONE_UNREAD_MESSAGE_COUNT_TEXT', { unreadCount: count }),
         ]);
     },
 
@@ -195,7 +195,7 @@ export default {
     },
 
     menuButtonLabel () {
-      return this.$t('DIALTONE_CONTACT_CENTERS_ROW_MENU_BUTTON_LABEL');
+      return this.i18n.$t('DIALTONE_CONTACT_CENTERS_ROW_MENU_BUTTON_LABEL');
     },
   },
 

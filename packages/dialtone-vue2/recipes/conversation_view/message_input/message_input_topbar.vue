@@ -221,14 +221,14 @@ export default {
   emits: ['click'],
 
   computed: {
-    boldButtonLabel () { return this.$ta('DIALTONE_MESSAGE_INPUT_BOLD_BUTTON_LABEL'); },
-    italicButtonLabel () { return this.$ta('DIALTONE_MESSAGE_INPUT_ITALIC_BUTTON_LABEL'); },
-    strikeButtonLabel () { return this.$ta('DIALTONE_MESSAGE_INPUT_STRIKETHROUGH_BUTTON_LABEL'); },
-    bulletListButtonLabel () { return this.$ta('DIALTONE_MESSAGE_INPUT_BULLET_LIST_BUTTON_LABEL'); },
-    orderedListButtonLabel () { return this.$ta('DIALTONE_MESSAGE_INPUT_ORDERED_LIST_BUTTON_LABEL'); },
-    blockQuoteButtonLabel () { return this.$ta('DIALTONE_MESSAGE_INPUT_BLOCK_QUOTE_BUTTON_LABEL'); },
-    codeButtonLabel () { return this.$ta('DIALTONE_MESSAGE_INPUT_CODE_BUTTON_LABEL'); },
-    codeBlockButtonLabel () { return this.$ta('DIALTONE_MESSAGE_INPUT_CODE_BLOCK_BUTTON_LABEL'); },
+    boldButtonLabel () { return this.i18n.$ta('DIALTONE_MESSAGE_INPUT_BOLD_BUTTON_LABEL'); },
+    italicButtonLabel () { return this.i18n.$ta('DIALTONE_MESSAGE_INPUT_ITALIC_BUTTON_LABEL'); },
+    strikeButtonLabel () { return this.i18n.$ta('DIALTONE_MESSAGE_INPUT_STRIKETHROUGH_BUTTON_LABEL'); },
+    bulletListButtonLabel () { return this.i18n.$ta('DIALTONE_MESSAGE_INPUT_BULLET_LIST_BUTTON_LABEL'); },
+    orderedListButtonLabel () { return this.i18n.$ta('DIALTONE_MESSAGE_INPUT_ORDERED_LIST_BUTTON_LABEL'); },
+    blockQuoteButtonLabel () { return this.i18n.$ta('DIALTONE_MESSAGE_INPUT_BLOCK_QUOTE_BUTTON_LABEL'); },
+    codeButtonLabel () { return this.i18n.$ta('DIALTONE_MESSAGE_INPUT_CODE_BUTTON_LABEL'); },
+    codeBlockButtonLabel () { return this.i18n.$ta('DIALTONE_MESSAGE_INPUT_CODE_BLOCK_BUTTON_LABEL'); },
   },
 };
 </script>

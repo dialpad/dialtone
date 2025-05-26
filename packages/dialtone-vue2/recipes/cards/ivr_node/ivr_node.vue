@@ -220,11 +220,11 @@ export default {
 
     nodeAriaLabel () {
       const nodeType = this.nodeType.toUpperCase();
-      return this.$t(`DIALTONE_IVR_NODE_${nodeType}_ARIA_LABEL`);
+      return this.i18n.$t(`DIALTONE_IVR_NODE_${nodeType}_ARIA_LABEL`);
     },
 
     menuButtonAriaLabel () {
-      return this.$t('DIALTONE_IVR_NODE_MENU_BUTTON_ARIA_LABEL');
+      return this.i18n.$t('DIALTONE_IVR_NODE_MENU_BUTTON_ARIA_LABEL');
     },
   },
 

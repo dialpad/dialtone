@@ -212,16 +212,16 @@ export default {
     },
 
     prevAriaLabel () {
-      return this.isFirstPage ? this.$t('DIALTONE_PAGINATION_FIRST_PAGE') : this.$t('DIALTONE_PAGINATION_PREVIOUS_PAGE');
+      return this.isFirstPage ? this.i18n.$t('DIALTONE_PAGINATION_FIRST_PAGE') : this.i18n.$t('DIALTONE_PAGINATION_PREVIOUS_PAGE');
     },
 
     nextAriaLabel () {
-      return this.isLastPage ? this.$t('DIALTONE_PAGINATION_LAST_PAGE') : this.$t('DIALTONE_PAGINATION_NEXT_PAGE');
+      return this.isLastPage ? this.i18n.$t('DIALTONE_PAGINATION_LAST_PAGE') : this.i18n.$t('DIALTONE_PAGINATION_NEXT_PAGE');
     },
 
     pageNumberAriaLabel () {
       return (page) => {
-        return page === this.totalPages ? `${this.$t('DIALTONE_PAGINATION_LAST_PAGE')} ${page}` : `${this.$t('DIALTONE_PAGINATION_PAGE_NUMBER', { page })}`;
+        return page === this.totalPages ? `${this.i18n.$t('DIALTONE_PAGINATION_LAST_PAGE')} ${page}` : `${this.i18n.$t('DIALTONE_PAGINATION_PAGE_NUMBER', { page })}`;
       };
     },
   },

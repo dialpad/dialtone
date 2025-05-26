@@ -6,7 +6,7 @@
           <button
             data-qa="dt-recipe-feed-item-pill"
             :class="['d-recipe-feed-item-pill__button', toggleableClass, buttonClass]"
-            v-bind="$ta('DIALTONE_FEED_ITEM_PILL_ARIA_LABEL')"
+            v-bind="i18n.$ta('DIALTONE_FEED_ITEM_PILL_ARIA_LABEL')"
             @focusin="hover = true"
             @focusout="hover = false"
             @mouseenter="hover = true"

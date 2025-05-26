@@ -97,7 +97,7 @@ export default {
     },
 
     reactionLabel (reaction) {
-      return this.$t('DIALTONE_EMOJI_ROW_REACTION_LABEL', {
+      return this.i18n.$t('DIALTONE_EMOJI_ROW_REACTION_LABEL', {
         reactionCount: reaction.num,
         name: reaction.name || 'A person',
         selected: reaction.isSelected.toString(),

@@ -22,21 +22,21 @@
             importance="clear"
             @click="editLink"
           >
-            {{ $t('DIALTONE_RICH_TEXT_EDITOR_EDIT_BUTTON_LABEL') }}
+            {{ i18n.$t('DIALTONE_RICH_TEXT_EDITOR_EDIT_BUTTON_LABEL') }}
           </dt-button>
           <dt-button
             kind="muted"
             importance="clear"
             @click="openLink"
           >
-            {{ $t('DIALTONE_RICH_TEXT_EDITOR_OPEN_LINK_BUTTON_LABEL') }}
+            {{ i18n.$t('DIALTONE_RICH_TEXT_EDITOR_OPEN_LINK_BUTTON_LABEL') }}
           </dt-button>
           <dt-button
             kind="danger"
             importance="clear"
             @click="removeLink"
           >
-            {{ $t('DIALTONE_RICH_TEXT_EDITOR_REMOVE_BUTTON_LABEL') }}
+            {{ i18n.$t('DIALTONE_RICH_TEXT_EDITOR_REMOVE_BUTTON_LABEL') }}
           </dt-button>
         </dt-stack>
       </div>

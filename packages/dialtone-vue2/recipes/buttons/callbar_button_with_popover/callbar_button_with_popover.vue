@@ -336,7 +336,7 @@ export default {
     },
 
     arrowButtonLabel () {
-      return this.$ta('DIALTONE_CALLBAR_BUTTON_WITH_POPOVER_ARROW_BUTTON_LABEL');
+      return this.i18n.$ta('DIALTONE_CALLBAR_BUTTON_WITH_POPOVER_ARROW_BUTTON_LABEL');
     },
   },
 

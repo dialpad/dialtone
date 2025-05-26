@@ -574,11 +574,11 @@ export default {
       return [
         {
           showBtn: this.showQuickRepliesButton,
-          label: this.$t('DIALTONE_EDITOR_QUICK_REPLY_BUTTON_LABEL'),
+          label: this.i18n.$t('DIALTONE_EDITOR_QUICK_REPLY_BUTTON_LABEL'),
           selector: 'quickReplies',
           icon: DtIconQuickReply,
           dataQA: 'dt-recipe-editor-quick-replies-btn',
-          tooltipMessage: this.$t('DIALTONE_EDITOR_QUICK_REPLY_BUTTON_LABEL'),
+          tooltipMessage: this.i18n.$t('DIALTONE_EDITOR_QUICK_REPLY_BUTTON_LABEL'),
           onClick: this.onQuickRepliesClick,
         },
       ].filter(button => button.showBtn);
@@ -591,7 +591,7 @@ export default {
           selector: 'bold',
           icon: DtIconBold,
           dataQA: 'dt-recipe-editor-bold-btn',
-          tooltipMessage: this.$t('DIALTONE_EDITOR_BOLD_BUTTON_LABEL'),
+          tooltipMessage: this.i18n.$t('DIALTONE_EDITOR_BOLD_BUTTON_LABEL'),
           onClick: this.onBoldTextToggle,
         },
         {
@@ -599,7 +599,7 @@ export default {
           selector: 'italic',
           icon: DtIconItalic,
           dataQA: 'dt-recipe-editor-italics-btn',
-          tooltipMessage: this.$t('DIALTONE_EDITOR_ITALICS_BUTTON_LABEL'),
+          tooltipMessage: this.i18n.$t('DIALTONE_EDITOR_ITALICS_BUTTON_LABEL'),
           onClick: this.onItalicTextToggle,
         },
         {
@@ -607,7 +607,7 @@ export default {
           selector: 'underline',
           icon: DtIconUnderline,
           dataQA: 'dt-recipe-editor-underline-btn',
-          tooltipMessage: this.$t('DIALTONE_EDITOR_UNDERLINE_BUTTON_LABEL'),
+          tooltipMessage: this.i18n.$t('DIALTONE_EDITOR_UNDERLINE_BUTTON_LABEL'),
           onClick: this.onUnderlineTextToggle,
         },
         {
@@ -615,7 +615,7 @@ export default {
           selector: 'strike',
           icon: DtIconStrikethrough,
           dataQA: 'dt-recipe-editor-strike-btn',
-          tooltipMessage: this.$t('DIALTONE_EDITOR_STRIKE_BUTTON_LABEL'),
+          tooltipMessage: this.i18n.$t('DIALTONE_EDITOR_STRIKE_BUTTON_LABEL'),
           onClick: this.onStrikethroughTextToggle,
         },
       ].filter(button => button.showBtn);
@@ -628,7 +628,7 @@ export default {
           selector: { textAlign: 'left' },
           icon: DtIconAlignLeft,
           dataQA: 'dt-recipe-editor-align-left-btn',
-          tooltipMessage: this.$t('DIALTONE_EDITOR_ALIGN_LEFT_BUTTON_LABEL'),
+          tooltipMessage: this.i18n.$t('DIALTONE_EDITOR_ALIGN_LEFT_BUTTON_LABEL'),
           onClick: () => this.onTextAlign('left'),
         },
         {
@@ -636,7 +636,7 @@ export default {
           selector: { textAlign: 'center' },
           icon: DtIconAlignCenter,
           dataQA: 'dt-recipe-editor-align-center-btn',
-          tooltipMessage: this.$t('DIALTONE_EDITOR_ALIGN_CENTER_BUTTON_LABEL'),
+          tooltipMessage: this.i18n.$t('DIALTONE_EDITOR_ALIGN_CENTER_BUTTON_LABEL'),
           onClick: () => this.onTextAlign('center'),
         },
         {
@@ -644,7 +644,7 @@ export default {
           selector: { textAlign: 'right' },
           icon: DtIconAlignRight,
           dataQA: 'dt-recipe-editor-align-right-btn',
-          tooltipMessage: this.$t('DIALTONE_EDITOR_ALIGN_RIGHT_BUTTON_LABEL'),
+          tooltipMessage: this.i18n.$t('DIALTONE_EDITOR_ALIGN_RIGHT_BUTTON_LABEL'),
           onClick: () => this.onTextAlign('right'),
         },
         {
@@ -652,7 +652,7 @@ export default {
           selector: { textAlign: 'justify' },
           icon: DtIconAlignJustify,
           dataQA: 'dt-recipe-editor-align-justify-btn',
-          tooltipMessage: this.$t('DIALTONE_EDITOR_ALIGN_JUSTIFY_BUTTON_LABEL'),
+          tooltipMessage: this.i18n.$t('DIALTONE_EDITOR_ALIGN_JUSTIFY_BUTTON_LABEL'),
           onClick: () => this.onTextAlign('justify'),
         },
       ].filter(button => button.showBtn);
@@ -665,7 +665,7 @@ export default {
           selector: 'bulletList',
           icon: DtIconListBullet,
           dataQA: 'dt-recipe-editor-list-items-btn',
-          tooltipMessage: this.$t('DIALTONE_EDITOR_BULLET_LIST_BUTTON_LABEL'),
+          tooltipMessage: this.i18n.$t('DIALTONE_EDITOR_BULLET_LIST_BUTTON_LABEL'),
           onClick: this.onBulletListToggle,
         },
         {
@@ -673,7 +673,7 @@ export default {
           selector: 'orderedList',
           icon: DtIconListOrdered,
           dataQA: 'dt-recipe-editor-ordered-list-items-btn',
-          tooltipMessage: this.$t('DIALTONE_EDITOR_ORDERED_LIST_BUTTON_LABEL'),
+          tooltipMessage: this.i18n.$t('DIALTONE_EDITOR_ORDERED_LIST_BUTTON_LABEL'),
           onClick: this.onOrderedListToggle,
         },
       ].filter(button => button.showBtn);
@@ -686,7 +686,7 @@ export default {
           selector: 'blockquote',
           icon: DtIconQuote,
           dataQA: 'dt-recipe-editor-blockquote-btn',
-          tooltipMessage: this.$t('DIALTONE_EDITOR_QUOTE_BUTTON_LABEL'),
+          tooltipMessage: this.i18n.$t('DIALTONE_EDITOR_QUOTE_BUTTON_LABEL'),
           onClick: this.onBlockquoteToggle,
         },
         {
@@ -694,7 +694,7 @@ export default {
           selector: 'codeBlock',
           icon: DtIconCodeBlock,
           dataQA: 'dt-recipe-editor-code-block-btn',
-          tooltipMessage: this.$t('DIALTONE_EDITOR_CODE_BUTTON_LABEL'),
+          tooltipMessage: this.i18n.$t('DIALTONE_EDITOR_CODE_BUTTON_LABEL'),
           onClick: this.onCodeBlockToggle,
         },
         {
@@ -702,7 +702,7 @@ export default {
           selector: 'image',
           icon: DtIconImage,
           dataQA: 'dt-recipe-editor-inline-image-btn',
-          tooltipMessage: this.$t('DIALTONE_EDITOR_IMAGE_BUTTON_LABEL'),
+          tooltipMessage: this.i18n.$t('DIALTONE_EDITOR_IMAGE_BUTTON_LABEL'),
           onClick: this.onInsertInlineImageClick,
         },
       ].filter(button => button.showBtn);
@@ -714,25 +714,25 @@ export default {
         selector: 'link',
         icon: DtIconLink2,
         dataQA: 'dt-recipe-editor-add-link-btn',
-        tooltipMessage: this.$t('DIALTONE_EDITOR_LINK_BUTTON_LABEL'),
+        tooltipMessage: this.i18n.$t('DIALTONE_EDITOR_LINK_BUTTON_LABEL'),
         onClick: this.openLinkInput,
       };
     },
 
     confirmSetLinkButtonLabels () {
-      return this.$ta('DIALTONE_EDITOR_CONFIRM_SET_LINK_BUTTON');
+      return this.i18n.$ta('DIALTONE_EDITOR_CONFIRM_SET_LINK_BUTTON');
     },
 
     cancelSetLinkButtonLabels () {
-      return this.$ta('DIALTONE_EDITOR_CANCEL_SET_LINK_BUTTON');
+      return this.i18n.$ta('DIALTONE_EDITOR_CANCEL_SET_LINK_BUTTON');
     },
 
     removeLinkButtonLabels () {
-      return this.$ta('DIALTONE_EDITOR_REMOVE_LINK_BUTTON');
+      return this.i18n.$ta('DIALTONE_EDITOR_REMOVE_LINK_BUTTON');
     },
 
     showAddLinkButtonLabels () {
-      return this.$ta('DIALTONE_EDITOR_ADD_LINK_BUTTON');
+      return this.i18n.$ta('DIALTONE_EDITOR_ADD_LINK_BUTTON');
     },
   },
 

@@ -117,19 +117,19 @@ export default {
 
     unreadCountTooltip () {
       return safeConcatStrings([
-        this.unreadCount && this.$t('DIALTONE_UNREAD_MESSAGE_COUNT_TEXT', { unreadCount: this.messageCount }),
-        this.unreadMentionCount && this.$t('DIALTONE_UNREAD_MENTION_COUNT_TEXT', { unreadCount: this.mentionCount }),
+        this.unreadCount && this.i18n.$t('DIALTONE_UNREAD_MESSAGE_COUNT_TEXT', { unreadCount: this.messageCount }),
+        this.unreadMentionCount && this.i18n.$t('DIALTONE_UNREAD_MENTION_COUNT_TEXT', { unreadCount: this.mentionCount }),
       ]);
     },
 
     typingTooltip () {
-      return this.isTyping && this.$t('DIALTONE_TYPING_TEXT');
+      return this.isTyping && this.i18n.$t('DIALTONE_TYPING_TEXT');
     },
 
     ariaLabel () {
       return safeConcatStrings([
         this.typingTooltip,
-        this.$t('DIALTONE_GROUP_ROW_GROUP_COUNT_TEXT', { count: this.groupCount }),
+        this.i18n.$t('DIALTONE_GROUP_ROW_GROUP_COUNT_TEXT', { count: this.groupCount }),
         this.names,
         this.unreadCountTooltip,
       ]);

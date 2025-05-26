@@ -1,40 +1,65 @@
 import { LocaleManager, RawBundleSource, useI18N } from '@dialpad/i18n-vue2';
 
-/**
- * @type {{[key: string]: string}}
- */
-export const allowedLocales = {
-  ENGLISH: 'en-US',
-  SPANISH: 'es-LA',
-  DIALPADISTAN: 'dp-DP',
-};
+import enUS from './en-US.ftl?raw';
+import esLA from './es-LA.ftl?raw';
 
-export const DialtoneLocalizationPlugin = {
-  async install (Vue) {
-    const locales = Object.values(allowedLocales);
-    const dialtoneNamespace = 'dialtone';
+const dialtoneNamespace = 'dialtone';
+
+export class DialtoneLocalization {
+  constructor (locale = 'en-US') {
+    if (typeof DialtoneLocalization.instance === 'object') {
+      return DialtoneLocalization.instance;
+    }
+
+    this._locale = locale;
+    this._allowedLocales = {
+      ENGLISH: 'en-US',
+      SPANISH: 'es-LA',
+    };
+
     const bundleSource = new RawBundleSource({
-      resources: await RawBundleSource.dynamicResources(
-        locales.map(locale => [locale, dialtoneNamespace, import(`./${locale}.ftl?raw`)]),
-      ),
+      resources: RawBundleSource.builtResources([
+        ['en-US', dialtoneNamespace, enUS],
+        ['es-LA', dialtoneNamespace, esLA],
+      ]),
     });
-    const preferredLocale = locales[0];
 
-    const manager = new LocaleManager({
+    const localeManager = new LocaleManager({
       bundleSource,
-      preferredLocale,
-      allowedLocales: locales,
-      fallbackLocale: preferredLocale,
+      fallbackLocale: locale,
+      preferredLocale: locale,
       namespaces: [dialtoneNamespace],
     });
 
-    await manager.ready;
+    localeManager.install();
 
-    manager.install();
+    DialtoneLocalization.instance = this;
+    return this;
+  }
 
-    Vue.use(manager);
+  $t (...args) {
+    return useI18N().$t(...args);
+  }
 
-    const { setI18N } = useI18N();
-    setI18N(preferredLocale);
-  },
-};
+  $ta (...args) {
+    return useI18N().$ta(...args);
+  }
+
+  get currentLocale () {
+    return this._locale;
+  }
+
+  set currentLocale (newLocale) {
+    if (newLocale === this._locale) return;
+    if (!Object.values(this.allowedLocales).includes(newLocale)) {
+      throw new Error(`Locale ${newLocale} is not allowed, please use one of the following: ${Object.values(this.allowedLocales).join(', ')}`);
+    }
+
+    this._locale = newLocale;
+    useI18N().setI18N({ preferredLocale: newLocale });
+  }
+
+  get allowedLocales () {
+    return this._allowedLocales;
+  }
+}

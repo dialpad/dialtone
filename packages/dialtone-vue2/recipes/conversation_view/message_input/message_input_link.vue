@@ -30,7 +30,7 @@
         <div
           class="d-recipe-message-input__link-dialog-title"
         >
-          {{ $t('DIALTONE_MESSAGE_INPUT_LINK_DIALOG_TITLE') }}
+          {{ i18n.$t('DIALTONE_MESSAGE_INPUT_LINK_DIALOG_TITLE') }}
         </div>
         <dt-input
           v-model="linkText"
@@ -154,13 +154,13 @@ export default {
   },
 
   computed: {
-    anchorButtonLabel () { return this.$ta('DIALTONE_MESSAGE_INPUT_LINK_BUTTON_LABEL'); },
-    textInputLabel () { return this.$t('DIALTONE_MESSAGE_INPUT_LINK_TEXT_LABEL'); },
-    linkInputLabel () { return this.$t('DIALTONE_MESSAGE_INPUT_LINK_LINK_LABEL'); },
-    linkInputPlaceHolder () { return this.$t('DIALTONE_MESSAGE_INPUT_LINK_LINK_PLACEHOLDER'); },
-    removeButtonLabel () { return this.$t('DIALTONE_MESSAGE_INPUT_LINK_REMOVE_LABEL'); },
-    cancelButtonLabel () { return this.$t('DIALTONE_MESSAGE_INPUT_LINK_CANCEL_LABEL'); },
-    confirmButtonLabel () { return this.$t('DIALTONE_MESSAGE_INPUT_LINK_CONFIRM_LABEL'); },
+    anchorButtonLabel () { return this.i18n.$ta('DIALTONE_MESSAGE_INPUT_LINK_BUTTON_LABEL'); },
+    textInputLabel () { return this.i18n.$t('DIALTONE_MESSAGE_INPUT_LINK_TEXT_LABEL'); },
+    linkInputLabel () { return this.i18n.$t('DIALTONE_MESSAGE_INPUT_LINK_LINK_LABEL'); },
+    linkInputPlaceHolder () { return this.i18n.$t('DIALTONE_MESSAGE_INPUT_LINK_LINK_PLACEHOLDER'); },
+    removeButtonLabel () { return this.i18n.$t('DIALTONE_MESSAGE_INPUT_LINK_REMOVE_LABEL'); },
+    cancelButtonLabel () { return this.i18n.$t('DIALTONE_MESSAGE_INPUT_LINK_CANCEL_LABEL'); },
+    confirmButtonLabel () { return this.i18n.$t('DIALTONE_MESSAGE_INPUT_LINK_CONFIRM_LABEL'); },
   },
 
   watch: {

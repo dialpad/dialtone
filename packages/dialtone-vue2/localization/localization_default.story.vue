@@ -1,7 +1,6 @@
 <script>
 import { DtButton } from '@/components/button';
 import { DtStack } from '@/components/stack';
-import { allowedLocales } from '@/localization/index.js';
 import { DtLocalizationMixin } from '@/common/mixins';
 
 export default {
@@ -13,29 +12,6 @@ export default {
   },
 
   mixins: [DtLocalizationMixin],
-
-  data () {
-    return {
-      locale: this.currentLocale,
-    };
-  },
-
-  computed: {
-    allowedLocales () {
-      return allowedLocales;
-    },
-  },
-
-  async mounted () {
-    await this.setLocale('en-US');
-  },
-
-  methods: {
-    setLocale: async function (_locale) {
-      await this.setI18N({ preferredLocale: _locale });
-      this.locale = _locale;
-    },
-  },
 };
 </script>
 
@@ -44,16 +20,16 @@ export default {
     direction="row"
     gap="300"
   >
-    <span>{{ $t('STORYBOOK_SET_LANGUAGE') }}: </span>
+    <span>{{ i18n.$t('STORYBOOK_SET_LANGUAGE') }}: </span>
     <dt-button
-      v-for="(key, name) in allowedLocales"
+      v-for="(key, name) in i18n.allowedLocales"
       :key="key"
-      :active="key === locale"
+      :active="key === i18n.currentLocale"
       size="xs"
       importance="outlined"
-      @click="setLocale(key)"
+      @click="i18n.currentLocale = key"
     >
-      {{ $t(`STORYBOOK_LANGUAGE_${name}`) }}
+      {{ i18n.$t(`STORYBOOK_LANGUAGE_${name}`) }}
     </dt-button>
   </dt-stack>
 </template>

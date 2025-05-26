@@ -1,9 +1,7 @@
 import DtIcon from './icon.vue';
 import { mount } from '@vue/test-utils';
-import { useI18N } from '@dialpad/i18n-vue2';
-const { $t } = useI18N();
 
-const MOCK_LOCALIZED_ARIA_LABEL = $t('DIALTONE_ICON_ACCESSIBILITY');
+const MOCK_LOCALIZED_ARIA_LABEL = 'Accessibility icon';
 
 const baseProps = { name: 'accessibility' };
 

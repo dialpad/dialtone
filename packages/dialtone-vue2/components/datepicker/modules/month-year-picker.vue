@@ -12,7 +12,7 @@
     >
       <dt-tooltip
         :fallback-placements="['top-start', 'auto']"
-        :message="$t('DIALTONE_DATEPICKER_PREVIOUS_YEAR')"
+        :message="i18n.$t('DIALTONE_DATEPICKER_PREVIOUS_YEAR')"
         placement="top"
       >
         <template #anchor>
@@ -37,7 +37,7 @@
       </dt-tooltip>
       <dt-tooltip
         :fallback-placements="['top-start', 'auto']"
-        :message="$t('DIALTONE_DATEPICKER_PREVIOUS_MONTH')"
+        :message="i18n.$t('DIALTONE_DATEPICKER_PREVIOUS_MONTH')"
         placement="top"
       >
         <template #anchor>
@@ -77,7 +77,7 @@
     >
       <dt-tooltip
         :fallback-placements="['top-end', 'auto']"
-        :message="$t('DIALTONE_DATEPICKER_NEXT_MONTH')"
+        :message="i18n.$t('DIALTONE_DATEPICKER_NEXT_MONTH')"
         placement="top"
       >
         <template #anchor>
@@ -102,7 +102,7 @@
       </dt-tooltip>
       <dt-tooltip
         :fallback-placements="['top-end', 'auto']"
-        :message="$t('DIALTONE_DATEPICKER_NEXT_YEAR')"
+        :message="i18n.$t('DIALTONE_DATEPICKER_NEXT_YEAR')"
         placement="top"
       >
         <template #anchor>
@@ -219,19 +219,19 @@ export default {
     },
 
     previousYearAriaLabel () {
-      return `${this.$t('DIALTONE_DATEPICKER_CHANGE_TO')} ${this.$t('DIALTONE_DATEPICKER_PREVIOUS_YEAR')} ${this.selectYear - 1}`;
+      return `${this.i18n.$t('DIALTONE_DATEPICKER_CHANGE_TO')} ${this.i18n.$t('DIALTONE_DATEPICKER_PREVIOUS_YEAR')} ${this.selectYear - 1}`;
     },
 
     previousMonthAriaLabel () {
-      return `${this.$t('DIALTONE_DATEPICKER_CHANGE_TO')} ${this.$t('DIALTONE_DATEPICKER_PREVIOUS_MONTH')} ${this.formattedMonth(this.selectMonth - 1)}`;
+      return `${this.i18n.$t('DIALTONE_DATEPICKER_CHANGE_TO')} ${this.i18n.$t('DIALTONE_DATEPICKER_PREVIOUS_MONTH')} ${this.formattedMonth(this.selectMonth - 1)}`;
     },
 
     nextYearAriaLabel () {
-      return `${this.$t('DIALTONE_DATEPICKER_CHANGE_TO')} ${this.$t('DIALTONE_DATEPICKER_NEXT_YEAR')} ${this.selectYear + 1}`;
+      return `${this.i18n.$t('DIALTONE_DATEPICKER_CHANGE_TO')} ${this.i18n.$t('DIALTONE_DATEPICKER_NEXT_YEAR')} ${this.selectYear + 1}`;
     },
 
     nextMonthAriaLabel () {
-      return `${this.$t('DIALTONE_DATEPICKER_CHANGE_TO')} ${this.$t('DIALTONE_DATEPICKER_NEXT_MONTH')} ${this.formattedMonth(this.selectMonth + 1)}`;
+      return `${this.i18n.$t('DIALTONE_DATEPICKER_CHANGE_TO')} ${this.i18n.$t('DIALTONE_DATEPICKER_NEXT_MONTH')} ${this.formattedMonth(this.selectMonth + 1)}`;
     },
   },
 

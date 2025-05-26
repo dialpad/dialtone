@@ -9,7 +9,7 @@
     :disabled="disabled"
     :style="{ width: width }"
     :aria-live="computedAriaLive"
-    :aria-label="loading ? $t('DIALTONE_BUTTON_LOADING') : $attrs['aria-label']"
+    :aria-label="loading ? i18n.$t('DIALTONE_BUTTON_LOADING') : $attrs['aria-label']"
     v-on="buttonListeners"
   >
     <!-- NOTE(cormac): This span is needed since we can't apply styles to slots. -->
