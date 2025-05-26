@@ -1,6 +1,6 @@
 <template>
   <div
-    class="d-toggle-wrapper"
+    :class="['d-toggle-wrapper', wrapperClass]"
     v-bind="addClassStyleAttrs($attrs)"
   >
     <label
@@ -112,6 +112,14 @@ export default {
     labelClass: {
       type: [String, Array, Object],
       default: '',
+    },
+
+    /**
+     * Additional styling for the wrapper element
+     */
+    wrapperClass: {
+      type: [String, Array, Object],
+      default: undefined,
     },
 
     /**
