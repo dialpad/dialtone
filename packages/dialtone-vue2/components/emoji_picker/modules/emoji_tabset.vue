@@ -103,7 +103,6 @@ export default {
         { label: EMOJI_PICKER_CATEGORIES.OBJECTS, icon: DtIconLightbulb },
         { label: EMOJI_PICKER_CATEGORIES.SYMBOLS, icon: DtIconHeart },
         { label: EMOJI_PICKER_CATEGORIES.FLAGS, icon: DtIconFlag },
-        { label: EMOJI_PICKER_CATEGORIES.CUSTOM, icon: DtIconTiktok },
       ],
     };
   },
@@ -112,9 +111,9 @@ export default {
     tabs () {
       // if showRecentlyUsedTab is false remove first index of TABS_DATA
       const tabsData = this.showRecentlyUsedTab ? this.TABS_DATA : this.TABS_DATA.slice(1);
-      // if showCustomEmojisTab is false remove last index of TABS_DATA
-      if (!this.showCustomEmojisTab) {
-        tabsData.pop();
+      // if showCustomEmojisTab is true add custom emoji tab
+      if (this.showCustomEmojisTab) {
+        tabsData.push({ label: EMOJI_PICKER_CATEGORIES.CUSTOM, icon: DtIconTiktok });
       }
 
       return tabsData.map((tab, index) => ({
