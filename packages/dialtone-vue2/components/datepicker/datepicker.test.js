@@ -164,7 +164,7 @@ describe('DtDatepicker Tests', () => {
         const formattedDate = formatDate(`${MOCK_TODAY_YEAR}, ${MOCK_FORMATTED_TODAY_MONTH}, ${MOCK_DAY}`, INTL_MONTH_FORMAT, this.currentLocale);
 
         expect(days.at(26).attributes('aria-label'))
-          .toContain(` ${formattedDate}`);
+          .toContain(`Select day ${formattedDate}`);
       });
     });
 
