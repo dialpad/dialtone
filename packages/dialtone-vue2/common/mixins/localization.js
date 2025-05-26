@@ -1,3 +1,7 @@
+/**
+ * Simple mixin to reuse the i18n instance.
+ */
+
 import { DialtoneLocalization } from '@/localization';
 
 export default {
