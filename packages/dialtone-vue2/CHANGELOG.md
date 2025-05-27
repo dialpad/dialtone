@@ -1,3 +1,10 @@
+## [2.190.1](https://github.com/dialpad/dialtone/compare/dialtone-vue2/v2.190.0...dialtone-vue2/v2.190.1) (2025-05-27)
+
+
+### Bug Fixes
+
+* **Emoji Picker:** NO-JIRA fix emoji tabs being removed ([#773](https://github.com/dialpad/dialtone/issues/773)) ([eafe82d](https://github.com/dialpad/dialtone/commit/eafe82d8dca3c4224e777191d1deb70222b0868a))
+
 # [2.190.0](https://github.com/dialpad/dialtone/compare/dialtone-vue2/v2.189.5...dialtone-vue2/v2.190.0) (2025-05-21)
 
 
