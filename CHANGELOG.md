@@ -1,3 +1,20 @@
+# [9.122.0](https://github.com/dialpad/dialtone/compare/dialtone/v9.121.0...dialtone/v9.122.0) (2025-05-27)
+
+
+### Bug Fixes
+
+* **Emoji Picker:** NO-JIRA fix emoji tabs being removed ([#773](https://github.com/dialpad/dialtone/issues/773)) ([eafe82d](https://github.com/dialpad/dialtone/commit/eafe82d8dca3c4224e777191d1deb70222b0868a))
+
+
+### Documentation
+
+* NO-JIRA fix font weight variables ([#772](https://github.com/dialpad/dialtone/issues/772)) ([3f6ef22](https://github.com/dialpad/dialtone/commit/3f6ef22518e55cc53074efe1c3aa3635cc560a77))
+
+
+### Features
+
+* **Toggle:** NO-JIRA add wrapperClass vue3 only ([#774](https://github.com/dialpad/dialtone/issues/774)) ([e9cb700](https://github.com/dialpad/dialtone/commit/e9cb70059cfe945265226232b2c83266af7e4571))
+
 # [9.121.0](https://github.com/dialpad/dialtone/compare/dialtone/v9.120.0...dialtone/v9.121.0) (2025-05-21)
 
 
