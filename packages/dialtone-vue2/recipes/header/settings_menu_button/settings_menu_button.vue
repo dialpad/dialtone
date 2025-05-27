@@ -73,8 +73,8 @@ export default {
   computed: {
     buttonLabel () {
       return this.updateAvailable
-        ? this.$t('DIALTONE_SETTINGS_MENU_UPDATE_BUTTON_LABEL')
-        : this.$t('DIALTONE_SETTINGS_MENU_DEFAULT_BUTTON_LABEL');
+        ? this.i18n.$t('DIALTONE_SETTINGS_MENU_UPDATE_BUTTON_LABEL')
+        : this.i18n.$t('DIALTONE_SETTINGS_MENU_DEFAULT_BUTTON_LABEL');
     },
   },
 

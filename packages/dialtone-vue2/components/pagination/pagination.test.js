@@ -1,12 +1,10 @@
 import { createLocalVue, mount } from '@vue/test-utils';
 import DtPagination from './pagination.vue';
 import { DtButton } from '@/components/button';
-import { useI18N } from '@dialpad/i18n-vue2';
-const { $t } = useI18N();
 
-const MOCK_LOCALIZED_FIRST_PAGE = $t('DIALTONE_PAGINATION_FIRST_PAGE');
-const MOCK_LOCALIZED_NEXT_PAGE = $t('DIALTONE_PAGINATION_NEXT_PAGE');
-const MOCK_LOCALIZED_FIRST_PAGE_NUMBER = $t('DIALTONE_PAGINATION_PAGE_NUMBER', { page: 1 });
+const MOCK_LOCALIZED_FIRST_PAGE = `First page`;
+const MOCK_LOCALIZED_NEXT_PAGE = `Next page`;
+const MOCK_LOCALIZED_FIRST_PAGE_NUMBER = `Page number \u20681\u2069`;
 
 const baseProps = {
   totalPages: 5,

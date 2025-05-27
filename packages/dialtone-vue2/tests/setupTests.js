@@ -1,9 +1,9 @@
 import Vue from 'vue';
-import { DialtoneLocalizationPlugin } from '@/localization';
+import { DtTooltipDirective } from '@/directives/tooltip_directive';
 
 Vue.config.productionTip = false;
 Vue.config.devtools = false;
-Vue.use(DialtoneLocalizationPlugin);
+Vue.use(DtTooltipDirective);
 
 // Mock IntersectionObserver
 class MockObserver {

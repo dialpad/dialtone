@@ -795,19 +795,19 @@ export default {
     },
 
     sendButtonLabel () {
-      return this.$t('DIALTONE_MESSAGE_INPUT_SEND_BUTTON_ARIA_LABEL');
+      return this.i18n.$t('DIALTONE_MESSAGE_INPUT_SEND_BUTTON_ARIA_LABEL');
     },
 
     imagePickerButtonLabel () {
-      return this.$t('DIALTONE_MESSAGE_INPUT_IMAGE_PICKER_BUTTON_ARIA_LABEL');
+      return this.i18n.$t('DIALTONE_MESSAGE_INPUT_IMAGE_PICKER_BUTTON_ARIA_LABEL');
     },
 
     emojiPickerButtonLabel () {
-      return this.$t('DIALTONE_MESSAGE_INPUT_EMOJI_PICKER_BUTTON_ARIA_LABEL');
+      return this.i18n.$t('DIALTONE_MESSAGE_INPUT_EMOJI_PICKER_BUTTON_ARIA_LABEL');
     },
 
     cancelButtonLabel () {
-      return this.$t('DIALTONE_MESSAGE_INPUT_CANCEL_BUTTON_ARIA_LABEL');
+      return this.i18n.$t('DIALTONE_MESSAGE_INPUT_CANCEL_BUTTON_ARIA_LABEL');
     },
   },
 

@@ -1,14 +1,11 @@
-import { useI18N } from '@dialpad/i18n-vue2';
-const { $t, $ta, currentLocale, setI18N } = useI18N();
+/**
+ * Simple mixin to reuse the i18n instance.
+ */
+
+import { DialtoneLocalization } from '@/localization';
 
 export default {
-  methods: {
-    $t,
-    $ta,
-    setI18N,
-  },
-
-  computed: {
-    currentLocale: () => currentLocale,
+  data () {
+    return { i18n: new DialtoneLocalization() };
   },
 };

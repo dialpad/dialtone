@@ -425,25 +425,25 @@ export default {
 
     unreadCountTooltip () {
       return safeConcatStrings([
-        this.unreadCount && this.$t('DIALTONE_UNREAD_MESSAGE_COUNT_TEXT', { unreadCount: this.messageCount }),
-        this.unreadMentionCount && this.$t('DIALTONE_UNREAD_MENTION_COUNT_TEXT', { unreadCount: this.mentionCount }),
+        this.unreadCount && this.i18n.$t('DIALTONE_UNREAD_MESSAGE_COUNT_TEXT', { unreadCount: this.messageCount }),
+        this.unreadMentionCount && this.i18n.$t('DIALTONE_UNREAD_MENTION_COUNT_TEXT', { unreadCount: this.mentionCount }),
       ]);
     },
 
     dndTextTooltip () {
-      return this.dndText && this.$t('DIALTONE_GENERAL_ROW_DND_TEXT_TOOLTIP');
+      return this.dndText && this.i18n.$t('DIALTONE_GENERAL_ROW_DND_TEXT_TOOLTIP');
     },
 
     activeVoiceChatTooltip () {
-      return this.activeVoiceChat && this.$t('DIALTONE_GENERAL_ROW_ACTIVE_VOICE_CHAT_TEXT');
+      return this.activeVoiceChat && this.i18n.$t('DIALTONE_GENERAL_ROW_ACTIVE_VOICE_CHAT_TEXT');
     },
 
     callButtonTooltip () {
-      return this.$t('DIALTONE_GENERAL_ROW_CALL_BUTTON_TOOLTIP');
+      return this.i18n.$t('DIALTONE_GENERAL_ROW_CALL_BUTTON_TOOLTIP');
     },
 
     typingTooltip () {
-      return this.isTyping && this.$t('DIALTONE_TYPING_TEXT');
+      return this.isTyping && this.i18n.$t('DIALTONE_TYPING_TEXT');
     },
   },
 

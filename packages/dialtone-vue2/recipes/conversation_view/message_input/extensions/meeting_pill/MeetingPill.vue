@@ -18,7 +18,7 @@
             circle
             importance="clear"
             size="xs"
-            v-bind="$ta('DIALTONE_CLOSE_BUTTON')"
+            v-bind="i18n.$ta('DIALTONE_CLOSE_BUTTON')"
             @click="close"
           >
             <template #icon>

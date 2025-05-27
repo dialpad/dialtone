@@ -12,7 +12,7 @@
       data-qa="dt-notice-action-close-button"
       importance="clear"
       size="sm"
-      v-bind="$ta('DIALTONE_CLOSE_BUTTON')"
+      v-bind="i18n.$ta('DIALTONE_CLOSE_BUTTON')"
       v-on="noticeActionListeners"
     >
       <template #icon>

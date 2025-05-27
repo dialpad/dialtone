@@ -133,7 +133,7 @@ export default {
 
   methods: {
     dayAriaLabel (day) {
-      return this.$t('DIALTONE_DATEPICKER_SELECT_DAY') + ` ${formatDate(day.value, INTL_MONTH_FORMAT, this.currentLocale)}`;
+      return this.i18n.$t('DIALTONE_DATEPICKER_SELECT_DAY') + ` ${formatDate(day.value, INTL_MONTH_FORMAT, this.currentLocale)}`;
     },
 
     setDayRef (el, day) {

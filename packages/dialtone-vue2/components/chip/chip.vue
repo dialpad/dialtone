@@ -39,7 +39,7 @@
       v-if="!hideClose"
       :class="chipCloseButtonClasses()"
       data-qa="dt-chip-close"
-      v-bind="$ta('DIALTONE_CLOSE_BUTTON')"
+      v-bind="i18n.$ta('DIALTONE_CLOSE_BUTTON')"
       @click="$emit('close')"
     >
       <template #icon>

@@ -2,8 +2,6 @@ import { createLocalVue, mount } from '@vue/test-utils';
 import { formatDate, formatMonth } from '@/components/datepicker/utils.js';
 import DtDatepicker from './datepicker.vue';
 import { INTL_MONTH_FORMAT } from '@/components/datepicker/datepicker_constants.js';
-import { useI18N } from '@dialpad/i18n-vue2';
-const { $t } = useI18N();
 
 const MOCK_DAY = 21;
 const MOCK_MONTH = 6; // Note: month is zero-based, so 6 represents July
@@ -12,12 +10,14 @@ const MOCK_TEST_DATE = new Date(MOCK_YEAR, MOCK_MONTH, MOCK_DAY);
 
 const MOCK_TODAY_YEAR = MOCK_TEST_DATE.getFullYear();
 const MOCK_TODAY_MONTH = MOCK_TEST_DATE.getMonth();
+const MOCK_FORMATTED_LAST_MONTH = formatMonth(MOCK_TODAY_MONTH - 1, INTL_MONTH_FORMAT);
 const MOCK_FORMATTED_TODAY_MONTH = formatMonth(MOCK_TODAY_MONTH, INTL_MONTH_FORMAT);
+const MOCK_FORMATTED_NEXT_MONTH = formatMonth(MOCK_TODAY_MONTH + 1, INTL_MONTH_FORMAT);
 const MOCK_HEADER_SELECTED_DATE = `${MOCK_FORMATTED_TODAY_MONTH} ${MOCK_TODAY_YEAR}`;
-const MOCK_LOCALIZED_PREVIOUS_YEAR_LABEL = `${$t('DIALTONE_DATEPICKER_CHANGE_TO')} ${$t('DIALTONE_DATEPICKER_PREVIOUS_YEAR')} ${MOCK_TODAY_YEAR - 1}`;
-const MOCK_LOCALIZED_PREVIOUS_MONTH_LABEL = `${$t('DIALTONE_DATEPICKER_CHANGE_TO')} ${$t('DIALTONE_DATEPICKER_PREVIOUS_MONTH')} ${formatMonth(MOCK_TODAY_MONTH - 1, INTL_MONTH_FORMAT)}`;
-const MOCK_LOCALIZED_NEXT_MONTH_LABEL = `${$t('DIALTONE_DATEPICKER_CHANGE_TO')} ${$t('DIALTONE_DATEPICKER_NEXT_MONTH')} ${formatMonth(MOCK_TODAY_MONTH + 1, INTL_MONTH_FORMAT)}`;
-const MOCK_LOCALIZED_NEXT_YEAR_LABEL = `${$t('DIALTONE_DATEPICKER_CHANGE_TO')} ${$t('DIALTONE_DATEPICKER_NEXT_YEAR')} ${MOCK_TODAY_YEAR + 1}`;
+const MOCK_LOCALIZED_PREVIOUS_YEAR_LABEL = `Change to Previous year ${MOCK_TODAY_YEAR - 1}`;
+const MOCK_LOCALIZED_PREVIOUS_MONTH_LABEL = `Change to Previous month ${MOCK_FORMATTED_LAST_MONTH}`;
+const MOCK_LOCALIZED_NEXT_MONTH_LABEL = `Change to Next month ${MOCK_FORMATTED_NEXT_MONTH}`;
+const MOCK_LOCALIZED_NEXT_YEAR_LABEL = `Change to Next year ${MOCK_TODAY_YEAR + 1}`;
 
 const baseProps = {
   selectedDate: MOCK_TEST_DATE,
@@ -164,7 +164,7 @@ describe('DtDatepicker Tests', () => {
         const formattedDate = formatDate(`${MOCK_TODAY_YEAR}, ${MOCK_FORMATTED_TODAY_MONTH}, ${MOCK_DAY}`, INTL_MONTH_FORMAT, this.currentLocale);
 
         expect(days.at(26).attributes('aria-label'))
-          .toContain(`${$t('DIALTONE_DATEPICKER_SELECT_DAY')} ${formattedDate}`);
+          .toContain(`Select day ${formattedDate}`);
       });
     });
 

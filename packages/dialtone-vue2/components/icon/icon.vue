@@ -3,7 +3,7 @@
     :is="icon"
     v-if="icon"
     :size="size"
-    :aria-label="$t(localizationKey)"
+    :aria-label="i18n.$t(localizationKey)"
     :data-qa="$attrs['data-qa'] ?? 'dt-icon'"
   />
 </template>

@@ -71,8 +71,8 @@ export default {
   computed: {
     text () {
       return this.kind === 'mentions'
-        ? this.$t('DIALTONE_UNREAD_PILL_MENTIONS_TEXT')
-        : this.$t('DIALTONE_UNREAD_PILL_MESSAGES_TEXT');
+        ? this.i18n.$t('DIALTONE_UNREAD_PILL_MENTIONS_TEXT')
+        : this.i18n.$t('DIALTONE_UNREAD_PILL_MESSAGES_TEXT');
     },
   },
 };

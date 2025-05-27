@@ -78,7 +78,6 @@ export default defineConfig({
 
         // Localization
         // 'localization/index': './localization/index.js',
-        // 'localization/dp-DP': './localization/dp-DP.ftl?raw',
         // 'localization/es-LA': './localization/es-LA.ftl?raw',
         // 'localization/en-US': './localization/en-US.ftl?raw',
       },
