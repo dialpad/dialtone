@@ -10,11 +10,11 @@
       :image-alt="name"
       :show-presence="showDetails"
       :presence="presence"
-      size="xs"
+      size="sm"
     />
     <dt-stack
       class="d-mention-suggestion__details-container"
-      gap="200"
+      gap="100"
     >
       <!-- eslint-disable-next-line vue/no-restricted-class -->
       <span class="d-mention-suggestion__name">
