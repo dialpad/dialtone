@@ -189,13 +189,27 @@ export default {
     },
 
     tabLabels () {
-      return this.recentlyUsedEmojis.length
-        ? this.tabSetLabels.map((label) => ({ label }))
-        : this.tabSetLabels.slice(1).map((label) => ({ label }));
+      let updateTabLabels = this.tabSetLabels.map((label) => ({ label }));
+
+      if (!this.recentlyUsedEmojis.length) {
+        updateTabLabels = this.tabSetLabels.slice(1).map((label) => ({ label }));
+      }
+
+      if (!this.customEmojis.length) {
+        updateTabLabels.pop();
+      }
+
+      return updateTabLabels;
     },
 
     tabs () {
-      return this.recentlyUsedEmojis.length ? this.TABS_DATA : this.TABS_DATA.slice(1);
+      const updateTabsOrder = this.recentlyUsedEmojis.length ? this.TABS_DATA : this.TABS_DATA.slice(1);
+
+      if (!this.customEmojis.length) {
+        updateTabsOrder.pop();
+      }
+
+      return updateTabsOrder;
     },
   },
 

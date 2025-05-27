@@ -56,7 +56,7 @@
               :alt="emoji.name"
               :aria-label="emoji.name"
               :title="emoji.name"
-              :src="getImgSrc(emoji.unicode_character)"
+              :src="getImgSrc(emoji)"
               @error="handleImageError"
             >
           </button>
@@ -104,7 +104,7 @@
 /* eslint-disable max-len */
 /* eslint-disable max-lines */
 import { emojisGrouped as emojis } from '@dialpad/dialtone-emojis';
-import { computed, onMounted, onUnmounted, ref, watch, nextTick } from 'vue';
+import { computed, onMounted, onBeforeUnmount, ref, watch, nextTick } from 'vue';
 import { CDN_URL, ARROW_KEYS } from '@/components/emoji_picker/emoji_picker_constants';
 import { useKeyboardNavigation } from '@/components/emoji_picker/composables/useKeyboardNavigation';
 
@@ -167,6 +167,15 @@ const props = defineProps({
     type: Array,
     default: () => [],
   },
+
+  /**
+   * The list of custom emojis
+   * @type {Array}
+   */
+  customEmojis: {
+    type: Array,
+    default: () => [],
+  },
 });
 
 const emits = defineEmits([
@@ -190,6 +199,13 @@ const emits = defineEmits([
    * @param {Number} tab-index - The tab that was scrolled into
     */
   'scroll-into-tab',
+
+  /**
+   * Emitted when the user reach bottom scroll
+   * This event is used on handleScroll method
+   * @event scroll-bottom-reached
+   */
+  'scroll-bottom-reached',
 
   /**
    * Emitted when the user reach the end of the emoji list
@@ -237,18 +253,26 @@ const tabLabelObserver = ref(null);
  * The list of tabs
  * This is used to display the tabs
  */
-const TABS_DATA = ['Recently used', 'People', 'Nature', 'Food', 'Activity', 'Travel', 'Objects', 'Symbols', 'Flags'];
+const TABS_DATA = ['Recently used', 'People', 'Nature', 'Food', 'Activity', 'Travel', 'Objects', 'Symbols', 'Flags', 'Custom'];
 
 /**
  * The list of tab labels
  * This is used to display the tabs
- * This is a computed property because it will check if the recently used emojis list is empty
- * If it is empty, it will remove the recently used tab
+ * This is a computed property because it will check if the recently used emojis or custom emojis list is empty
+ * If it is empty, it will remove it
  */
 const tabLabels = computed(() => {
-  return props.recentlyUsedEmojis.length
-    ? props.tabsetLabels.map((label) => ({ label, ref: ref(null) }))
-    : props.tabsetLabels.slice(1).map((label) => ({ label, ref: ref(null) }));
+  let updateTabLabels = props.tabsetLabels.map((label) => ({ label, ref: ref(null) }));
+
+  if (props.recentlyUsedEmojis && !props.recentlyUsedEmojis.length) {
+    updateTabLabels = props.tabsetLabels.slice(1).map((label) => ({ label, ref: ref(null) }));
+  }
+
+  if (props.customEmojis && !props.customEmojis.length) {
+    updateTabLabels.pop();
+  }
+
+  return updateTabLabels;
 });
 
 /**
@@ -260,13 +284,19 @@ const fixedLabel = ref(tabLabels.value[0].label);
 /**
  * The list of tabs
  * This is used to display the tabs
- * This is a computed property because it will check if the recently used emojis list is empty
- * If it is empty, it will remove the recently used tab
+ * This is a computed property because it will check if the recently used emojis list or custom emojis is empty
+ * If it is empty, it will remove it
  * The difference between this and the tab labels is that this one will set the structure of tabs
  * and the tab labels will set the labels
  */
 const tabs = computed(() => {
-  return props.recentlyUsedEmojis.length ? TABS_DATA : TABS_DATA.slice(1);
+  const updateTabsOrder = props.recentlyUsedEmojis.length ? TABS_DATA : TABS_DATA.slice(1);
+
+  if (props.customEmojis && !props.customEmojis.length) {
+    updateTabsOrder.pop();
+  }
+
+  return updateTabsOrder;
 });
 
 /**
@@ -305,6 +335,19 @@ const debouncedSearch = debounce(() => {
 });
 
 /**
+ * handleScroll will be defined when user scroll
+ */
+const handleScroll = () => {
+  const container = listRef.value;
+  // TODO -- this will probably need to be updated if we add more emojis.
+  // because the container height will change.
+  // maybe with a nextTick similar of scrollToTab.
+  if (container.scrollTop + container.clientHeight >= container.scrollHeight) {
+    emits('scroll-bottom-reached');
+  }
+};
+
+/**
  * Update the current emojis list on skin tone changes
  * Also update the filtered emojis list
  * @listens skinTone
@@ -320,6 +363,15 @@ watch(currentEmojis, () => {
 watch(() => props.recentlyUsedEmojis,
   () => {
     emojis['Recently used'] = props.recentlyUsedEmojis;
+  }, { immediate: true });
+
+/**
+ * Update the custom emojis list on custom emojis prop changes
+ * @listens customEmojis
+ */
+watch(() => props.customEmojis,
+  () => {
+    emojis.Custom = props.customEmojis;
   }, { immediate: true });
 
 /**
@@ -381,7 +433,12 @@ function debounce (fn, delay = 300) {
 }
 
 function getImgSrc (emoji) {
-  return `${CDN_URL + emoji}.png`;
+  // TODO Update json structure to have a property for custom emojis and avoid using date_added
+  if (emoji.date_added) { // if custom emoji
+    return emoji.image;
+  } else { // if regular emoji
+    return CDN_URL + emoji.unicode_character + '.png';
+  }
 }
 
 /**
@@ -414,6 +471,10 @@ function resetScroll () {
   const container = listRef.value;
 
   container.scrollTop = 0;
+}
+
+function setBottomScrollListener () {
+  listRef.value.addEventListener('scroll', handleScroll);
 }
 
 /**
@@ -545,10 +606,12 @@ function focusLastEmoji () {
 
 onMounted(() => {
   setTabLabelObserver();
+  setBottomScrollListener();
 });
 
-onUnmounted(() => {
+onBeforeUnmount(() => {
   tabLabelObserver.value.disconnect();
+  listRef.value.removeEventListener('scroll', handleScroll);
 });
 
 defineExpose({
