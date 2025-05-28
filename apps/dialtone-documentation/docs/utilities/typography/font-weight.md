@@ -15,26 +15,29 @@ description: Utilities to change an element's font-weight.
 
 ## Usage
 
-Use `d-fw-{n}` to change an element's font-weight.
+Use `d-font-weight-{n}` to change an element's font-weight.
 
 <code-well-header>
-  <div class="d-d-grid d-g16 d-ai-center" style="grid-template-columns: 11rem 1fr">
-    <div class="d-code--sm d-docsite-code d-ws-nowrap">.d-fw-normal</div>
-    <div><p class="d-fw-normal">The quick brown fox jumps over the lazy dog.</p></div>
-    <div class="d-code--sm d-docsite-code d-ws-nowrap">.d-fw-medium</div>
-    <div><p class="d-fw-medium">The quick brown fox jumps over the lazy dog.</p></div>
-    <div class="d-code--sm d-docsite-code d-ws-nowrap">.d-fw-semibold</div>
-    <div><p class="d-fw-semibold">The quick brown fox jumps over the lazy dog.</p></div>
-    <div class="d-code--sm d-docsite-code d-ws-nowrap">.d-fw-bold</div>
-    <div><p class="d-fw-bold">The quick brown fox jumps over the lazy dog.</p></div>
+  <div class="d-d-grid d-g16 d-ai-center" style="grid-template-columns: 20rem 1fr">
+    <div class="d-code--sm d-docsite-code d-ws-nowrap">.d-font-weight-normal</div>
+    <div><p class="d-font-weight-normal">The quick brown fox jumps over the lazy dog.</p></div>
+    <div class="d-code--sm d-docsite-code d-ws-nowrap">.d-font-weight-medium</div>
+    <div><p class="d-font-weight-medium">The quick brown fox jumps over the lazy dog.</p></div>
+    <div class="d-code--sm d-docsite-code d-ws-nowrap">.d-font-weight-semibold</div>
+    <div><p class="d-font-weight-semibold">The quick brown fox jumps over the lazy dog.</p></div>
+    <div class="d-code--sm d-docsite-code d-ws-nowrap">.d-font-weight-bold</div>
+    <div><p class="d-font-weight-bold">The quick brown fox jumps over the lazy dog.</p></div>
+    <div class="d-code--sm d-docsite-code d-ws-nowrap">.d-font-weight-unset</div>
+    <div><p class="d-font-weight-unset">The quick brown fox jumps over the lazy dog.</p></div>
   </div>
 </code-well-header>
 
 ```html
-<p class="d-fw-normal">...</p>
-<p class="d-fw-medium">...</p>
-<p class="d-fw-semibold">...</p>
-<p class="d-fw-bold">...</p>
+<p class="d-font-weight-normal">...</p>
+<p class="d-font-weight-medium">...</p>
+<p class="d-font-weight-semibold">...</p>
+<p class="d-font-weight-bold">...</p>
+<p class="d-font-weight-unset">...</p>
 ```
 
 ## Variables
@@ -65,10 +68,18 @@ Use `d-fw-{n}` to change an element's font-weight.
     <tbody>
       <tr v-for="{ name, class: className, output } in weight">
         <th scope="row" class="d-code--sm d-docsite-code">
-          .d-fw-{{ className }}
+          .d-font-weight-{{ className }}
         </th>
         <td class="d-code--sm">
           font-weight: var(--dt-font-weight-{{ name }}) !important;
+        </td>
+      </tr>
+      <tr>
+        <th scope="row" class="d-code--sm d-docsite-code">
+          .d-font-weight-unset
+        </th>
+        <td class="d-code--sm">
+          font-weight: unset !important;
         </td>
       </tr>
     </tbody>
