@@ -171,7 +171,10 @@ const DefaultTemplate = (args, { argTypes }) => createTemplateFromVueFile(
 export const Default = {
   render: DefaultTemplate,
   decorators: [() => ({
-    template: `<div class="d-d-flex d-jc-center d-ai-center d-h464"><story />
+    template: `<div class="d-d-flex d-jc-center d-ai-center d-h464">
+      <div class="d-w164">
+        <story />
+      </div>
     </div>`,
   })],
 
