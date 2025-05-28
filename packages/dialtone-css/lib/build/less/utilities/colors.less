@@ -32,8 +32,20 @@
   background-image: unset !important;
 }
 
+.d-bgc-ai {
+  background-image: var(--dt-color-surface-ai) !important;
+}
+
 //  $$  BORDER COLORS
 //  ----------------------------------------------------------------------------
 .d-bc-transparent { border-color: transparent !important; }
 .d-bc-current { border-color: currentColor !important; }
 .d-bc-unset { border-color: unset !important; }
+
+/*
+ * Note: border-image is not compatible with border-radius, but it's the easiest way to get a linear gradient border.
+ * https://dev.to/afif/border-with-gradient-and-radius-387f
+ */
+.d-bc-ai {
+  border-image: var(--dt-color-border-ai) 1 !important;
+}
