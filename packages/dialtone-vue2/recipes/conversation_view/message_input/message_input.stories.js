@@ -218,6 +218,7 @@ export const argsData = {
       'Objects',
       'Symbols',
       'Flags',
+      'Custom',
     ],
     skinTone: 'Default',
   },
@@ -329,7 +330,7 @@ export const WithCustomEmoji = {
         'Objects',
         'Symbols',
         'Flags',
-        'Custom'
+        'Custom',
       ],
       skinTone: 'Default',
       customEmojis: [
@@ -348,8 +349,8 @@ export const WithCustomEmoji = {
           keywords: ['+1', 'hand', 'thumb', 'up', 'uc6'],
           unicode_output: '1f44d',
           unicode_character: '1f44d',
-        }
-      ]
-    }
+        },
+      ],
+    },
   },
 };
