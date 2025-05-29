@@ -290,7 +290,7 @@ const fixedLabel = ref(tabLabels.value[0].label);
  * and the tab labels will set the labels
  */
 const tabs = computed(() => {
-  const updateTabsOrder = props.recentlyUsedEmojis.length ? TABS_DATA : TABS_DATA.slice(1);
+  const updateTabsOrder = props.recentlyUsedEmojis.length ? TABS_DATA.slice() : TABS_DATA.slice(1);
 
   if (props.customEmojis && !props.customEmojis.length) {
     updateTabsOrder.pop();
