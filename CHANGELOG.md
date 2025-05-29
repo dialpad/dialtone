@@ -1,3 +1,10 @@
+## [9.123.1](https://github.com/dialpad/dialtone/compare/dialtone/v9.123.0...dialtone/v9.123.1) (2025-05-29)
+
+
+### Bug Fixes
+
+* **Background Clip, Font Family, Font Style, Font Weight:** conflicting class names ([#777](https://github.com/dialpad/dialtone/issues/777)) ([109a876](https://github.com/dialpad/dialtone/commit/109a8766e27f52f57b3f9dcf623986f6fb36ed2e))
+
 # [9.123.0](https://github.com/dialpad/dialtone/compare/dialtone/v9.122.0...dialtone/v9.123.0) (2025-05-29)
 
 
