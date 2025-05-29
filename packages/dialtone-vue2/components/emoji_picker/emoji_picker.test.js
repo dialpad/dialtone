@@ -372,7 +372,7 @@ describe('DtEmojiPicker Tests', () => {
     });
 
     it('Should jump to skin selector from emoji-selector', async () => {
-      const firstCustoms = wrapper.find('.d-emoji-picker__selector .d-emoji-picker__alignment:nth-child(11) button');
+      const firstCustoms = wrapper.find('.d-emoji-picker__selector .d-emoji-picker__alignment:nth-last-child(1) button');
       const skinSelector = wrapper.find('.d-emoji-picker__skin-selected button');
 
       await firstCustoms.trigger('keydown.tab');
