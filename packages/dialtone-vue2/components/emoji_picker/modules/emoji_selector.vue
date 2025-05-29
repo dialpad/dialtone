@@ -203,7 +203,7 @@ export default {
     },
 
     tabs () {
-      const updateTabsOrder = this.recentlyUsedEmojis.length ? this.TABS_DATA : this.TABS_DATA.slice(1);
+      const updateTabsOrder = this.recentlyUsedEmojis.length ? this.TABS_DATA.slice() : this.TABS_DATA.slice(1);
 
       if (!this.customEmojis.length) {
         updateTabsOrder.pop();
