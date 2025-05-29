@@ -1,3 +1,10 @@
+# [4.40.0](https://github.com/dialpad/dialtone/compare/dialtone-icons/v4.39.0...dialtone-icons/v4.40.0) (2025-05-29)
+
+
+### Features
+
+* **Icon:** DLT-2493 add freshdesk branding icon ([#778](https://github.com/dialpad/dialtone/issues/778)) ([88722d3](https://github.com/dialpad/dialtone/commit/88722d3f05f7602e3442843de91fbc28d1d8e3a5))
+
 # [4.39.0](https://github.com/dialpad/dialtone/compare/dialtone-icons/v4.38.1...dialtone-icons/v4.39.0) (2025-05-21)
 
 
