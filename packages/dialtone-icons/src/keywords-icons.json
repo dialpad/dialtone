@@ -241,6 +241,7 @@
       ],
       "evernote": [],
       "facebook": [],
+      "freshdesk": [],
       "freshsales-crm": [],
       "front": [],
       "giphy": [],
@@ -1558,6 +1559,10 @@
         "units",
         "collection",
         "cluster"
+      ],
+      "breakout-rooms": [
+        "rooms",
+        "groups"
       ],
       "bullet": [
         "dot",

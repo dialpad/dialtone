@@ -157,6 +157,7 @@
             <template #content="{ close }">
               <dt-emoji-picker
                 v-bind="emojiPickerProps"
+                @add-emoji="$emit('add-emoji')"
                 @skin-tone="onSkinTone"
                 @selected-emoji="(emoji) => onSelectEmoji(emoji, close)"
               />
@@ -780,6 +781,13 @@ export default {
      * @type {String}
      */
     'text-input',
+
+    /**
+     * Emitted when the 'Add emoji' button is clicked
+     * @event add-emoji
+     * @type {Boolean}
+     */
+    'add-emoji',
   ],
 
   data () {

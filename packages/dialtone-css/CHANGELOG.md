@@ -1,3 +1,17 @@
+# [8.58.0](https://github.com/dialpad/dialtone/compare/dialtone-css/v8.57.2...dialtone-css/v8.58.0) (2025-05-21)
+
+
+### Features
+
+* **Emoji Picker:** DLT-2562 custom emoji ([#602](https://github.com/dialpad/dialtone/issues/602)) ([6d06eac](https://github.com/dialpad/dialtone/commit/6d06eac6b35c134e1fb0c6b0f67afc34ac69d095))
+
+## [8.57.2](https://github.com/dialpad/dialtone/compare/dialtone-css/v8.57.1...dialtone-css/v8.57.2) (2025-05-21)
+
+
+### Bug Fixes
+
+* **Hovercard:** DP-142048 remove hovercard when anchor is removed from the DOM ([#768](https://github.com/dialpad/dialtone/issues/768)) ([66bdd47](https://github.com/dialpad/dialtone/commit/66bdd47e53aba2fd026d1649aed2a10d76c03976))
+
 ## [8.57.1](https://github.com/dialpad/dialtone/compare/dialtone-css/v8.57.0...dialtone-css/v8.57.1) (2025-05-12)
 
 

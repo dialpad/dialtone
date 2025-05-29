@@ -37,10 +37,6 @@ Use `d-fw-{n}` to change an element's font-weight.
 <p class="d-fw-bold">...</p>
 ```
 
-<script setup>
-  import { weight } from '@data/type.json';
-</script>
-
 ## Variables
 
 <div v-dt-scrollbar class="d-hmx464 d-bar8 d-ba d-bc-subtle">
@@ -48,13 +44,13 @@ Use `d-fw-{n}` to change an element's font-weight.
     <table class="d-table dialtone-doc-table">
       <thead class="d-bgc-primary d-ps-sticky d-zi-base1 d-t0">
           <tr>
-              <th scope="col" class="d-p0 d-bbw0 d-w25p"><div class="d-p16 d-bb d-bc-default d-bbw1">Variable</div></th>
+              <th scope="col" class="d-p0 d-bbw0"><div class="d-p16 d-bb d-bc-default d-bbw1">Variable</div></th>
               <th scope="col" class="d-p0 d-bbw0"><div class="d-p16 d-bb d-bc-default d-bbw1">Output</div></th>
           </tr>
       </thead>
       <tbody>
         <tr v-for="{ name, output } in weight">
-          <th scope="row" class="d-code--sm d-docsite-code">var(--fw-{{ name }})</th>
+          <th scope="row" class="d-code--sm d-docsite-code">var(--dt-font-weight-{{ name }})</th>
           <td class="d-code--sm">{{ output }}</td>
         </tr>
       </tbody>
@@ -67,14 +63,18 @@ Use `d-fw-{n}` to change an element's font-weight.
 <utility-class-table>
   <template #content>
     <tbody>
-      <tr v-for="{ name, output } in weight">
+      <tr v-for="{ name, class: className, output } in weight">
         <th scope="row" class="d-code--sm d-docsite-code">
-          .d-fw-{{ name }}
+          .d-fw-{{ className }}
         </th>
         <td class="d-code--sm">
-          font-weight: var(--fw-{{ name }}) !important;
+          font-weight: var(--dt-font-weight-{{ name }}) !important;
         </td>
       </tr>
     </tbody>
   </template>
 </utility-class-table>
+
+<script setup>
+  import { weight } from '@data/type.json';
+</script>

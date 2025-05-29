@@ -183,6 +183,12 @@ export const argTypesData = {
       disable: true,
     },
   },
+
+  onAddEmoji: {
+    table: {
+      disable: true,
+    },
+  },
 };
 
 // Set default values at the story level here.
@@ -236,6 +242,7 @@ export const argsData = {
   onJsonInput: action('json-input'),
   onHtmlInput: action('html-input'),
   onTextInput: action('text-input'),
+  onAddEmoji: action('add-emoji'),
   onSelectMedia: action('select-media'),
   onSelectedEmoji: action('selected-emoji'),
   onSelectedCommand: action('selected-command'),
@@ -300,5 +307,49 @@ export const WithMeetingPill = {
     },
     value: '<meeting-pill text="Start a meeting" close-button-aria-label="Delete meeting pill"/>',
     preventTyping: true,
+  },
+};
+
+export const WithCustomEmoji = {
+  render: (argsData) => createRenderConfig(DtRecipeMessageInput, DtRecipeMessageInputDefaultTemplate, argsData),
+  args: {
+    value: 'This is a test with custom emojis',
+    emojiPickerProps: {
+      searchNoResultsLabel: 'No results',
+      searchResultsLabel: 'Search results',
+      searchPlaceholderLabel: 'Search...',
+      skinSelectorButtonTooltipLabel: 'Change default skin tone',
+      tabSetLabels: [
+        'Most recently used',
+        'Smileys and people',
+        'Nature',
+        'Food',
+        'Activity',
+        'Travel',
+        'Objects',
+        'Symbols',
+        'Flags',
+        'Custom'
+      ],
+      skinTone: 'Default',
+      customEmojis: [
+        {
+          name: 'shipit',
+          date_added: 1730918816847,
+          added_by: 'Ignacio Ropolo',
+          image: 'https://github.githubassets.com/images/icons/emoji/shipit.png',
+          unicode_character: '1f44d',
+        },
+        {
+          name: 'thumbs up',
+          category: 'people',
+          shortname: ':thumbsup:',
+          shortname_alternates: [':+1:', ':thumbup:'],
+          keywords: ['+1', 'hand', 'thumb', 'up', 'uc6'],
+          unicode_output: '1f44d',
+          unicode_character: '1f44d',
+        }
+      ]
+    }
   },
 };

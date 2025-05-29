@@ -507,18 +507,22 @@
   ],
   "weight": [
     {
+      "class": "normal",
       "name": "normal",
       "output": "400"
     },
     {
+      "class": "medium",
       "name": "medium",
       "output": "500"
     },
     {
-      "name": "semibold",
+      "class": "semibold",
+      "name": "semi-bold",
       "output": "600"
     },
     {
+      "class": "bold",
       "name": "bold",
       "output": "700"
     }

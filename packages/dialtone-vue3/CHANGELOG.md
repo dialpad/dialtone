@@ -1,3 +1,24 @@
+# [3.183.0](https://github.com/dialpad/dialtone/compare/dialtone-vue3/v3.182.5...dialtone-vue3/v3.183.0) (2025-05-27)
+
+
+### Features
+
+* **Toggle:** NO-JIRA add wrapperClass vue3 only ([#774](https://github.com/dialpad/dialtone/issues/774)) ([e9cb700](https://github.com/dialpad/dialtone/commit/e9cb70059cfe945265226232b2c83266af7e4571))
+
+## [3.182.5](https://github.com/dialpad/dialtone/compare/dialtone-vue3/v3.182.4...dialtone-vue3/v3.182.5) (2025-05-21)
+
+
+### Bug Fixes
+
+* **Hovercard:** DP-142048 remove hovercard when anchor is removed from the DOM ([#768](https://github.com/dialpad/dialtone/issues/768)) ([66bdd47](https://github.com/dialpad/dialtone/commit/66bdd47e53aba2fd026d1649aed2a10d76c03976))
+
+## [3.182.4](https://github.com/dialpad/dialtone/compare/dialtone-vue3/v3.182.3...dialtone-vue3/v3.182.4) (2025-05-20)
+
+
+### Bug Fixes
+
+* **Scrollbar:** DLT-2552 cleanup OverlayScollbars instances on unbind ([#765](https://github.com/dialpad/dialtone/issues/765)) ([3f5e36d](https://github.com/dialpad/dialtone/commit/3f5e36df066b1a65e788c405111095dab555beb2))
+
 ## [3.182.3](https://github.com/dialpad/dialtone/compare/dialtone-vue3/v3.182.2...dialtone-vue3/v3.182.3) (2025-05-16)
 
 

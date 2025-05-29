@@ -1,3 +1,31 @@
+## [2.190.1](https://github.com/dialpad/dialtone/compare/dialtone-vue2/v2.190.0...dialtone-vue2/v2.190.1) (2025-05-27)
+
+
+### Bug Fixes
+
+* **Emoji Picker:** NO-JIRA fix emoji tabs being removed ([#773](https://github.com/dialpad/dialtone/issues/773)) ([eafe82d](https://github.com/dialpad/dialtone/commit/eafe82d8dca3c4224e777191d1deb70222b0868a))
+
+# [2.190.0](https://github.com/dialpad/dialtone/compare/dialtone-vue2/v2.189.5...dialtone-vue2/v2.190.0) (2025-05-21)
+
+
+### Features
+
+* **Emoji Picker:** DLT-2562 custom emoji ([#602](https://github.com/dialpad/dialtone/issues/602)) ([6d06eac](https://github.com/dialpad/dialtone/commit/6d06eac6b35c134e1fb0c6b0f67afc34ac69d095))
+
+## [2.189.5](https://github.com/dialpad/dialtone/compare/dialtone-vue2/v2.189.4...dialtone-vue2/v2.189.5) (2025-05-21)
+
+
+### Bug Fixes
+
+* **Hovercard:** DP-142048 remove hovercard when anchor is removed from the DOM ([#768](https://github.com/dialpad/dialtone/issues/768)) ([66bdd47](https://github.com/dialpad/dialtone/commit/66bdd47e53aba2fd026d1649aed2a10d76c03976))
+
+## [2.189.4](https://github.com/dialpad/dialtone/compare/dialtone-vue2/v2.189.3...dialtone-vue2/v2.189.4) (2025-05-20)
+
+
+### Bug Fixes
+
+* **Scrollbar:** DLT-2552 cleanup OverlayScollbars instances on unbind ([#765](https://github.com/dialpad/dialtone/issues/765)) ([3f5e36d](https://github.com/dialpad/dialtone/commit/3f5e36df066b1a65e788c405111095dab555beb2))
+
 ## [2.189.3](https://github.com/dialpad/dialtone/compare/dialtone-vue2/v2.189.2...dialtone-vue2/v2.189.3) (2025-05-16)
 
 

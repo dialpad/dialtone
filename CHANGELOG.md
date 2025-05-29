@@ -1,3 +1,46 @@
+# [9.122.0](https://github.com/dialpad/dialtone/compare/dialtone/v9.121.0...dialtone/v9.122.0) (2025-05-27)
+
+
+### Bug Fixes
+
+* **Emoji Picker:** NO-JIRA fix emoji tabs being removed ([#773](https://github.com/dialpad/dialtone/issues/773)) ([eafe82d](https://github.com/dialpad/dialtone/commit/eafe82d8dca3c4224e777191d1deb70222b0868a))
+
+
+### Documentation
+
+* NO-JIRA fix font weight variables ([#772](https://github.com/dialpad/dialtone/issues/772)) ([3f6ef22](https://github.com/dialpad/dialtone/commit/3f6ef22518e55cc53074efe1c3aa3635cc560a77))
+
+
+### Features
+
+* **Toggle:** NO-JIRA add wrapperClass vue3 only ([#774](https://github.com/dialpad/dialtone/issues/774)) ([e9cb700](https://github.com/dialpad/dialtone/commit/e9cb70059cfe945265226232b2c83266af7e4571))
+
+# [9.121.0](https://github.com/dialpad/dialtone/compare/dialtone/v9.120.0...dialtone/v9.121.0) (2025-05-21)
+
+
+### Features
+
+* **Emoji Picker:** DLT-2562 custom emoji ([#602](https://github.com/dialpad/dialtone/issues/602)) ([6d06eac](https://github.com/dialpad/dialtone/commit/6d06eac6b35c134e1fb0c6b0f67afc34ac69d095))
+
+# [9.120.0](https://github.com/dialpad/dialtone/compare/dialtone/v9.119.1...dialtone/v9.120.0) (2025-05-21)
+
+
+### Bug Fixes
+
+* **Hovercard:** DP-142048 remove hovercard when anchor is removed from the DOM ([#768](https://github.com/dialpad/dialtone/issues/768)) ([66bdd47](https://github.com/dialpad/dialtone/commit/66bdd47e53aba2fd026d1649aed2a10d76c03976))
+
+
+### Features
+
+* **Icon:** DLT-2553 add breakout-rooms and update coaching-hub ([#766](https://github.com/dialpad/dialtone/issues/766)) ([7d5bd5d](https://github.com/dialpad/dialtone/commit/7d5bd5dcbd37c0b895bd713cb56d743367da6123))
+
+## [9.119.1](https://github.com/dialpad/dialtone/compare/dialtone/v9.119.0...dialtone/v9.119.1) (2025-05-20)
+
+
+### Bug Fixes
+
+* **Scrollbar:** DLT-2552 cleanup OverlayScollbars instances on unbind ([#765](https://github.com/dialpad/dialtone/issues/765)) ([3f5e36d](https://github.com/dialpad/dialtone/commit/3f5e36df066b1a65e788c405111095dab555beb2))
+
 # [9.119.0](https://github.com/dialpad/dialtone/compare/dialtone/v9.118.0...dialtone/v9.119.0) (2025-05-16)
 
 
