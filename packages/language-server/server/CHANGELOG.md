@@ -1,3 +1,5 @@
+## [1.1.4-next.1](https://github.com/dialpad/dialtone/compare/language-server/v1.1.3...language-server/v1.1.4-next.1) (2025-05-29)
+
 ## [1.1.3](https://github.com/dialpad/dialtone/compare/language-server/v1.1.2...language-server/v1.1.3) (2025-05-09)
 
 ## [1.1.2](https://github.com/dialpad/dialtone/compare/language-server/v1.1.1...language-server/v1.1.2) (2025-04-02)
