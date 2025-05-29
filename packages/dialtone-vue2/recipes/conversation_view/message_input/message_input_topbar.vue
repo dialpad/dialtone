@@ -5,8 +5,8 @@
     class="d-recipe-message-input__button-stack"
   >
     <dt-recipe-message-input-button
-      :aria-label="boldButtonOptions.ariaLabel"
-      :tooltip-text="boldButtonOptions.tooltipText"
+      :aria-label="boldButtonLabel['aria-label']"
+      :tooltip-text="boldButtonLabel['tooltip-text']"
       :keyboard-shortcut-text="boldButtonOptions.keyboardShortcutText"
       data-qa="bold"
       :is-active="isSelectionActive('bold')"
@@ -19,10 +19,9 @@
         />
       </template>
     </dt-recipe-message-input-button>
-
     <dt-recipe-message-input-button
-      :aria-label="italicButtonOptions.ariaLabel"
-      :tooltip-text="italicButtonOptions.tooltipText"
+      :aria-label="italicButtonLabel['aria-label']"
+      :tooltip-text="italicButtonLabel['tooltip-text']"
       :keyboard-shortcut-text="italicButtonOptions.keyboardShortcutText"
       data-qa="italic"
       :is-active="isSelectionActive('italic')"
@@ -35,10 +34,9 @@
         />
       </template>
     </dt-recipe-message-input-button>
-
     <dt-recipe-message-input-button
-      :aria-label="strikeButtonOptions.ariaLabel"
-      :tooltip-text="strikeButtonOptions.tooltipText"
+      :aria-label="strikeButtonLabel['aria-label']"
+      :tooltip-text="strikeButtonLabel['tooltip-text']"
       :keyboard-shortcut-text="strikeButtonOptions.keyboardShortcutText"
       data-qa="strikethrough"
       :is-active="isSelectionActive('strike')"
@@ -59,8 +57,8 @@
     <div class="d-recipe-message-input--button-group-divider" />
 
     <dt-recipe-message-input-button
-      :aria-label="bulletListButtonOptions.ariaLabel"
-      :tooltip-text="bulletListButtonOptions.tooltipText"
+      :aria-label="bulletListButtonLabel['aria-label']"
+      :tooltip-text="bulletListButtonLabel['tooltip-text']"
       :keyboard-shortcut-text="bulletListButtonOptions.keyboardShortcutText"
       data-qa="bullet-list"
       :is-active="isSelectionActive('bulletList')"
@@ -73,10 +71,9 @@
         />
       </template>
     </dt-recipe-message-input-button>
-
     <dt-recipe-message-input-button
-      :aria-label="orderedListButtonOptions.ariaLabel"
-      :tooltip-text="orderedListButtonOptions.tooltipText"
+      :aria-label="orderedListButtonLabel['aria-label']"
+      :tooltip-text="orderedListButtonLabel['tooltip-text']"
       :keyboard-shortcut-text="orderedListButtonOptions.keyboardShortcutText"
       data-qa="ordered-list"
       :is-active="isSelectionActive('orderedList')"
@@ -90,9 +87,10 @@
       </template>
     </dt-recipe-message-input-button>
     <div class="d-recipe-message-input--button-group-divider" />
+
     <dt-recipe-message-input-button
-      :aria-label="blockQuoteButtonOptions.ariaLabel"
-      :tooltip-text="blockQuoteButtonOptions.tooltipText"
+      :aria-label="blockQuoteButtonLabel['aria-label']"
+      :tooltip-text="blockQuoteButtonLabel['tooltip-text']"
       :keyboard-shortcut-text="blockQuoteButtonOptions.keyboardShortcutText"
       data-qa="blockquote"
       :is-active="isSelectionActive('blockquote')"
@@ -109,8 +107,8 @@
     <div class="d-recipe-message-input--button-group-divider" />
 
     <dt-recipe-message-input-button
-      :aria-label="codeButtonOptions.ariaLabel"
-      :tooltip-text="codeButtonOptions.tooltipText"
+      :aria-label="codeButtonLabel['aria-label']"
+      :tooltip-text="codeButtonLabel['tooltip-text']"
       :keyboard-shortcut-text="codeButtonOptions.keyboardShortcutText"
       data-qa="code"
       :is-active="isSelectionActive('code')"
@@ -124,8 +122,8 @@
       </template>
     </dt-recipe-message-input-button>
     <dt-recipe-message-input-button
-      :aria-label="codeBlockButtonOptions.ariaLabel"
-      :tooltip-text="codeBlockButtonOptions.tooltipText"
+      :aria-label="codeBlockButtonLabel['aria-label']"
+      :tooltip-text="codeBlockButtonLabel['tooltip-text']"
       :keyboard-shortcut-text="codeBlockButtonOptions.keyboardShortcutText"
       data-qa="code-block"
       :is-active="isSelectionActive('codeBlock')"
@@ -143,15 +141,21 @@
 
 <script>
 import { DtStack } from '@/components/stack';
-
 import {
-  DtIconListBullet, DtIconBold, DtIconItalic, DtIconStrikethrough,
-  DtIconListOrdered, DtIconQuote, DtIconCode, DtIconCodeBlock,
+  DtIconListBullet,
+  DtIconBold,
+  DtIconItalic,
+  DtIconStrikethrough,
+  DtIconListOrdered,
+  DtIconQuote,
+  DtIconCode,
+  DtIconCodeBlock,
 } from '@dialpad/dialtone-icons/vue2';
-
 import DtRecipeMessageInputButton from './message_input_button.vue';
+import { DtLocalizationMixin } from '@/common/mixins';
+
 export default {
-  name: 'DtRecipeMesageInputTopbar',
+  name: 'DtRecipeMessageInputTopbar',
   components: {
     DtStack,
     DtIconListBullet,
@@ -164,6 +168,8 @@ export default {
     DtIconCodeBlock,
     DtRecipeMessageInputButton,
   },
+
+  mixins: [DtLocalizationMixin],
 
   props: {
     boldButtonOptions: {
@@ -213,5 +219,16 @@ export default {
   },
 
   emits: ['click'],
+
+  computed: {
+    boldButtonLabel () { return this.i18n.$ta('DIALTONE_MESSAGE_INPUT_BOLD_BUTTON_LABEL'); },
+    italicButtonLabel () { return this.i18n.$ta('DIALTONE_MESSAGE_INPUT_ITALIC_BUTTON_LABEL'); },
+    strikeButtonLabel () { return this.i18n.$ta('DIALTONE_MESSAGE_INPUT_STRIKETHROUGH_BUTTON_LABEL'); },
+    bulletListButtonLabel () { return this.i18n.$ta('DIALTONE_MESSAGE_INPUT_BULLET_LIST_BUTTON_LABEL'); },
+    orderedListButtonLabel () { return this.i18n.$ta('DIALTONE_MESSAGE_INPUT_ORDERED_LIST_BUTTON_LABEL'); },
+    blockQuoteButtonLabel () { return this.i18n.$ta('DIALTONE_MESSAGE_INPUT_BLOCK_QUOTE_BUTTON_LABEL'); },
+    codeButtonLabel () { return this.i18n.$ta('DIALTONE_MESSAGE_INPUT_CODE_BUTTON_LABEL'); },
+    codeBlockButtonLabel () { return this.i18n.$ta('DIALTONE_MESSAGE_INPUT_CODE_BLOCK_BUTTON_LABEL'); },
+  },
 };
 </script>

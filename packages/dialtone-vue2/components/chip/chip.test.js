@@ -3,12 +3,12 @@ import EmptyComponentFixture from '@/tests/fixtures/component.vue';
 import { DtChip } from '@/components/chip';
 
 const MOCK_DEFAULT_TEXT = 'TEXT';
-
-const baseProps = {
-  closeButtonProps: {
-    ariaLabel: 'close',
-  },
+const MOCK_LOCALIZED_CLOSE_BUTTON_ATTRIBUTES = {
+  'aria-label': 'Close',
+  title: 'Close',
 };
+
+const baseProps = {};
 const baseSlots = {};
 
 let mockProps = {};
@@ -94,7 +94,7 @@ describe('DtChip Tests', () => {
       });
 
       it('button should have aria-label', () => {
-        expect(remove.attributes('aria-label')).toBe('close');
+        expect(remove.attributes('aria-label')).toBe(MOCK_LOCALIZED_CLOSE_BUTTON_ATTRIBUTES['aria-label']);
       });
     });
 

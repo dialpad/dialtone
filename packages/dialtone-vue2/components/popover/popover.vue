@@ -68,7 +68,6 @@
           :content-class="headerClass"
           type="header"
           :show-close-button="showCloseButton"
-          :close-button-props="closeButtonProps"
           @close="closePopover"
         >
           <template #content>
@@ -110,8 +109,7 @@
           </template>
         </popover-header-footer>
         <sr-only-close-button
-          v-if="showVisuallyHiddenClose"
-          :visually-hidden-close-label="visuallyHiddenCloseLabel"
+          v-if="!showCloseButton"
           @close="closePopover"
         />
       </dt-lazy-show>
@@ -136,7 +134,6 @@ import { Portal } from '@linusborg/vue-simple-portal';
 import ModalMixin from '@/common/mixins/modal';
 import { createTippyPopover, getPopperOptions } from './tippy_utils';
 import PopoverHeaderFooter from './popover_header_footer.vue';
-import SrOnlyCloseButtonMixin from '@/common/mixins/sr_only_close_button';
 import SrOnlyCloseButton from '@/common/sr_only_close_button.vue';
 
 /**
@@ -156,7 +153,7 @@ export default {
     Portal,
   },
 
-  mixins: [ModalMixin, SrOnlyCloseButtonMixin],
+  mixins: [ModalMixin],
 
   props: {
     /**
@@ -228,15 +225,6 @@ export default {
     ariaLabel: {
       type: String,
       default: null,
-    },
-
-    /**
-     * A set of props to be passed into the popover's header close button.
-     * Requires an 'ariaLabel' property, when the header popover is visible
-     */
-    closeButtonProps: {
-      type: Object,
-      default: () => ({}),
     },
 
     /**

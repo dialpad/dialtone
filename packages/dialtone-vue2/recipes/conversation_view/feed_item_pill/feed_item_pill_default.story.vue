@@ -4,7 +4,6 @@
     :wrapper-class="$attrs.wrapperClass"
     :button-class="$attrs.buttonClass"
     :border-color="$attrs.borderColor"
-    :aria-label="$attrs.ariaLabel"
     :toggleable="$attrs.toggleable"
     :default-toggled="$attrs.defaultToggled"
   >

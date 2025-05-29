@@ -7,8 +7,6 @@
     :has-call-button="hasCallButton"
     :muted="muted"
     :is-typing="isTyping"
-    :call-button-tooltip="callButtonTooltip"
-    :unread-count-tooltip="unreadCountTooltip"
     v-bind="$attrs"
     data-qa="contact-row"
     v-on="$listeners"
@@ -65,8 +63,8 @@
 
 <script>
 import { DtRecipeGeneralRow } from '@/recipes/leftbar/general_row';
-import DtEmojiTextWrapper from '@/components/emoji_text_wrapper/emoji_text_wrapper.vue';
-import DtAvatar from '@/components/avatar/avatar.vue';
+import { DtEmojiTextWrapper } from '@/components/emoji_text_wrapper';
+import { DtAvatar } from '@/components/avatar';
 import { safeConcatStrings } from '@/common/utils';
 import { DtIconUser } from '@dialpad/dialtone-icons/vue2';
 
@@ -199,22 +197,6 @@ export default {
     hasCallButton: {
       type: Boolean,
       default: true,
-    },
-
-    /**
-     * Text shown when the call button is hovered.
-     */
-    callButtonTooltip: {
-      type: String,
-      default: '',
-    },
-
-    /**
-     * Text shown when the unread count is hovered.
-     */
-    unreadCountTooltip: {
-      type: String,
-      default: '',
     },
   },
 

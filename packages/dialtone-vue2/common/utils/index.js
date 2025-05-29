@@ -359,7 +359,7 @@ export function isEmailAddress (input) {
  * @returns {String}
  */
 export function safeConcatStrings (elements) {
-  return elements.filter(str => !!str).join(' ');
+  return elements.filter(str => !!str).join(', ');
 }
 
 /**
