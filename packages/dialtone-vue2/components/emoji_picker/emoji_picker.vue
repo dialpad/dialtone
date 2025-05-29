@@ -53,6 +53,7 @@
       <dt-button
         v-if="showCustomEmojisTab && !highlightedEmoji"
         importance="outlined"
+        :aria-label="addEmojiLabel"
         class="d-emoji-picker__add-emoji"
         @click="$emit('add-emoji')"
       >
@@ -176,7 +177,7 @@ export default {
      * @example
      * <dt-emoji-picker
      *  :tabSetLabels="['Most recently used', 'Smileys and people', 'Nature',
-     *    'Food', 'Activity', 'Travel', 'Objects', 'Symbols', 'Flags']" />
+     *    'Food', 'Activity', 'Travel', 'Objects', 'Symbols', 'Flags', 'Custom']" />
      */
     tabSetLabels: {
       type: Array,
