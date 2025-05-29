@@ -106,11 +106,6 @@ import DesignColorTable from '@baseComponents/DesignColorTable.vue';
 import ThemeColorTable from '@baseComponents/ThemeColorTable.vue';
 import ColorsCatalog from '@views/ColorsCatalog.vue';
 
-/*
-* Remove unwanted background-clip classes
-*@TODO: Remove this once background-clip classes are refactored to d-bgclip https://dialpad.atlassian.net/browse/DLT-2439
-*/
-const surfaceColorsExclusionList = ['box', 'text'];
 const textColorsExclusionList = ['critical',  'success',  'warning',  'info'];
 const statusTextColorsExclusionList = [
   'current',
