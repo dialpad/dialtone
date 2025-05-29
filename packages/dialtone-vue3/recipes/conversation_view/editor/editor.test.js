@@ -479,10 +479,14 @@ describe('DtRecipeEditor tests', () => {
     });
 
     describe('When alignment button is clicked', () => {
-      it('if alignment is left (default) then text output has no styles applied', async () => {
+      it('if alignment is default then text output has no styles applied', async () => {
+        expect(editor.html()).toContain('<p>In the beginning, it was a nice day.</p>');
+      });
+
+      it('if alignment is left then text output has no styles applied', async () => {
         await alignLeftBtn.trigger('click');
         await wrapper.vm.$nextTick();
-        expect(editor.html()).toContain('<p>In the beginning, it was a nice day.</p>');
+        expect(editor.html()).toContain('text-align: left');
       });
 
       it('if alignment is center then text should be aligned to the center', async () => {

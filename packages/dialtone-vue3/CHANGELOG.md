@@ -1,3 +1,24 @@
+# [3.184.0](https://github.com/dialpad/dialtone/compare/dialtone-vue3/v3.183.0...dialtone-vue3/v3.184.0) (2025-05-29)
+
+
+### Bug Fixes
+
+* **Hovercard:** NO-JIRA fix Hovercard stories ([#780](https://github.com/dialpad/dialtone/issues/780)) ([13c640f](https://github.com/dialpad/dialtone/commit/13c640f44552cd349f7233e500e6ec0da596d22f))
+* NO-JIRA update TipTap to fix memory leak bug ([#764](https://github.com/dialpad/dialtone/issues/764)) ([2070313](https://github.com/dialpad/dialtone/commit/20703132a6e6753efe58f04e0f99b1bbdd097309))
+
+
+### Features
+
+* **Emoji Picker:** DLT-2562 custom emojis feature on vue3 and tests ([#779](https://github.com/dialpad/dialtone/issues/779)) ([b08fbe0](https://github.com/dialpad/dialtone/commit/b08fbe0f63d1697cee6f4bee4e8a2cf62d53d6af))
+* **Emoji Suggestion:** DP-134897 show user presence and status in mentions selector ([#770](https://github.com/dialpad/dialtone/issues/770)) ([0bb26a5](https://github.com/dialpad/dialtone/commit/0bb26a5e4e73075cb7e9fe2ddb4da76969f47c32))
+
+# [3.183.0](https://github.com/dialpad/dialtone/compare/dialtone-vue3/v3.182.5...dialtone-vue3/v3.183.0) (2025-05-27)
+
+
+### Features
+
+* **Toggle:** NO-JIRA add wrapperClass vue3 only ([#774](https://github.com/dialpad/dialtone/issues/774)) ([e9cb700](https://github.com/dialpad/dialtone/commit/e9cb70059cfe945265226232b2c83266af7e4571))
+
 ## [3.182.5](https://github.com/dialpad/dialtone/compare/dialtone-vue3/v3.182.4...dialtone-vue3/v3.182.5) (2025-05-21)
 
 

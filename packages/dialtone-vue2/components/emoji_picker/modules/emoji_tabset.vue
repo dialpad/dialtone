@@ -40,6 +40,7 @@ import {
   DtIconLightbulb,
   DtIconHeart,
   DtIconFlag,
+  DtIconTiktok,
 } from '@dialpad/dialtone-icons/vue2';
 
 export default {
@@ -57,6 +58,11 @@ export default {
      * @default false
      */
     showRecentlyUsedTab: {
+      type: Boolean,
+      default: false,
+    },
+
+    showCustomEmojisTab: {
       type: Boolean,
       default: false,
     },
@@ -96,13 +102,20 @@ export default {
         { label: this.tabSetLabels[6], icon: DtIconLightbulb },
         { label: this.tabSetLabels[7], icon: DtIconHeart },
         { label: this.tabSetLabels[8], icon: DtIconFlag },
+        { label: this.tabSetLabels[9], icon: DtIconTiktok },
       ],
     };
   },
 
   computed: {
     tabs () {
+      // if showRecentlyUsedTab is false remove first index of TABS_DATA
       const tabsData = this.showRecentlyUsedTab ? this.TABS_DATA : this.TABS_DATA.slice(1);
+      // if showCustomEmojisTab is false remove last index of TABS_DATA
+      if (!this.showCustomEmojisTab) {
+        tabsData.pop();
+      }
+
       return tabsData.map((tab, index) => ({
         ...tab,
         // IDs on dt-tab component need to be on string

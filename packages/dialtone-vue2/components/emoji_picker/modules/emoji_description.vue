@@ -6,7 +6,7 @@
       :alt="emoji.name"
       :aria-label="emoji.name"
       :title="emoji.name"
-      :src="`${CDN_URL + emoji.unicode_character}.png`"
+      :src="getImgSrc(emoji)"
     >
     <div>{{ emoji?.name }}</div>
   </div>
@@ -34,6 +34,16 @@ export default {
     return {
       CDN_URL,
     };
+  },
+
+  methods: {
+    getImgSrc (emoji) {
+      if (emoji.date_added) { // if custom emoji
+        return emoji.image;
+      } else { // if regular emoji
+        return `${CDN_URL + emoji.unicode_character}.png`;
+      }
+    },
   },
 };
 </script>

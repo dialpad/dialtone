@@ -6,6 +6,7 @@
       <emoji-tabset
         ref="tabsetRef"
         :emoji-filter="internalSearchQuery"
+        :show-custom-emojis-tab="showCustomEmojisTab"
         :show-recently-used-tab="showRecentlyUsedTab"
         :scroll-into-tab="scrollIntoTab"
         :tab-set-labels="tabSetLabels"
@@ -37,6 +38,7 @@
         :search-results-label="searchResultsLabel"
         :search-no-results-label="searchNoResultsLabel"
         :recently-used-emojis="recentlyUsedEmojis"
+        :custom-emojis="customEmojis"
         :selected-tabset="selectedTabset"
         @scroll-into-tab="updateScrollIntoTab"
         @highlighted-emoji="updateHighlightedEmoji"
@@ -44,9 +46,19 @@
         @focus-skin-selector="$refs.skinSelectorRef.focusSkinSelector()"
         @focus-search-input="showSearch ? $refs.searchInputRef.focusSearchInput() : $refs.tabsetRef.focusTabset()"
         @keydown.esc.native="$emit('close')"
+        @scroll-bottom-reached="$emit('scroll-bottom-reached')"
       />
     </div>
     <div class="d-emoji-picker--footer">
+      <dt-button
+        v-if="showCustomEmojisTab && !highlightedEmoji"
+        importance="outlined"
+        :aria-label="addEmojiLabel"
+        class="d-emoji-picker__add-emoji"
+        @click="$emit('add-emoji')"
+      >
+        {{ addEmojiLabel }}
+      </dt-button>
       <emoji-description :emoji="highlightedEmoji" />
       <emoji-skin-selector
         ref="skinSelectorRef"
@@ -68,6 +80,7 @@ import EmojiSearch from './modules/emoji_search.vue';
 import EmojiSelector from './modules/emoji_selector.vue';
 import EmojiDescription from './modules/emoji_description.vue';
 import EmojiSkinSelector from './modules/emoji_skin_selector.vue';
+import { DtButton } from '../button';
 import { DtLocalizationMixin } from '@/common/mixins';
 
 export default {
@@ -79,6 +92,7 @@ export default {
     EmojiSelector,
     EmojiDescription,
     EmojiSkinSelector,
+    DtButton,
   },
 
   mixins: [DtLocalizationMixin],
@@ -96,6 +110,18 @@ export default {
     recentlyUsedEmojis: {
       type: Array,
       default: () => [],
+    },
+
+    /**
+     * The array with custom emojis object
+     * This list is necessary to fill the custom tab
+     * @type {Array}
+     * @default []
+     * @example
+     * <dt-emoji-picker :customEmojis="[emojiObject, emojiObject]" />
+     */
+    customEmojis: {
+      type: Array,
     },
 
     /**
@@ -145,6 +171,10 @@ export default {
   },
 
   computed: {
+    showCustomEmojisTab () {
+      return this.customEmojis?.length > 0;
+    },
+
     showRecentlyUsedTab () {
       return this.recentlyUsedEmojis?.length > 0;
     },
@@ -160,6 +190,7 @@ export default {
         this.i18n.$t('DIALTONE_EMOJI_PICKER_TABSET_OBJECTS_LABEL'),
         this.i18n.$t('DIALTONE_EMOJI_PICKER_TABSET_SYMBOLS_LABEL'),
         this.i18n.$t('DIALTONE_EMOJI_PICKER_TABSET_FLAGS_LABEL'),
+        this.i18n.$t('DIALTONE_EMOJI_PICKER_TABSET_CUSTOM_LABEL'),
       ];
     },
 
@@ -177,6 +208,10 @@ export default {
 
     skinSelectorButtonTooltipLabel () {
       return this.i18n.$t('DIALTONE_EMOJI_PICKER_SKIN_SELECTOR_BUTTON_TOOLTIP_LABEL');
+    },
+
+    addEmojiLabel () {
+      return this.i18n.$t('DIALTONE_EMOJI_PICKER_ADD_EMOJI_LABEL');
     },
   },
 
