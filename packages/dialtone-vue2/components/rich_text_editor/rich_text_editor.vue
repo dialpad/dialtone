@@ -596,7 +596,6 @@ export default {
 
       extensions.push(TextAlign.configure({
         types: ['paragraph'],
-        defaultAlignment: 'left',
       }));
 
       if (this.allowCode) {
