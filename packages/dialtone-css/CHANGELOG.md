@@ -1,3 +1,10 @@
+## [8.58.2](https://github.com/dialpad/dialtone/compare/dialtone-css/v8.58.1...dialtone-css/v8.58.2) (2025-05-29)
+
+
+### Bug Fixes
+
+* **Background Clip, Font Family, Font Style, Font Weight:** conflicting class names ([#777](https://github.com/dialpad/dialtone/issues/777)) ([109a876](https://github.com/dialpad/dialtone/commit/109a8766e27f52f57b3f9dcf623986f6fb36ed2e))
+
 ## [8.58.1](https://github.com/dialpad/dialtone/compare/dialtone-css/v8.58.0...dialtone-css/v8.58.1) (2025-05-29)
 
 
