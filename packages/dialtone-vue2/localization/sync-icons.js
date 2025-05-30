@@ -4,6 +4,7 @@ import iconsList from '@dialpad/dialtone-icons/icons.js';
 import { readFileSync, writeFileSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import path from 'node:path';
+import { toFluentKeyString } from '@/common/utils';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -14,10 +15,7 @@ const dialtoneFluentFile = readFileSync(fluentFilePath, 'utf-8');
 let result = '';
 
 const fluentKeys = iconsList.reduce((keys, item) => {
-  const fluentKey = item
-    .replaceAll(/[ -]/g, '_')
-    .replaceAll(/\W/g, '')
-    .toUpperCase();
+  const fluentKey = toFluentKeyString(item);
 
   const iconName = item[0].toUpperCase() +
     item.replaceAll('-', ' ').slice(1) +

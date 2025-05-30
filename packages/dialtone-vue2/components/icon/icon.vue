@@ -12,6 +12,7 @@
 import { icons } from '@dialpad/dialtone-icons/vue2';
 import { ICON_SIZE_MODIFIERS, ICON_NAMES } from './icon_constants';
 import { DtLocalizationMixin } from '@/common/mixins';
+import { toFluentKeyString } from '@/common/utils';
 
 /**
  * The Icon component provides a set of glyphs and sizes to provide context your application.
@@ -49,10 +50,7 @@ export default {
     },
 
     localizationKey () {
-      const fluentKey = this.name
-        .replaceAll(/[ -]/g, '_')
-        .replaceAll(/\W/g, '')
-        .toUpperCase();
+      const fluentKey = toFluentKeyString(this.name);
 
       return `DIALTONE_ICON_${fluentKey}`;
     },

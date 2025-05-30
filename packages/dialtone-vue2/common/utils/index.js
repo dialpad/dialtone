@@ -423,6 +423,19 @@ export function enableRootScrolling (rootElement = document.documentElement) {
   }
 }
 
+/**
+ * This will take a text string e.g "accessibility-mac"
+ * and convert it to our Fluent Key standard format "ACCESSIBILITY_MAC"
+ * @param text
+ * @returns {string}
+ */
+export function toFluentKeyString (text) {
+  return text
+    .replaceAll(/[ -]/g, '_')
+    .replaceAll(/\W/g, '')
+    .toUpperCase();
+}
+
 export default {
   getUniqueString,
   getRandomElement,
