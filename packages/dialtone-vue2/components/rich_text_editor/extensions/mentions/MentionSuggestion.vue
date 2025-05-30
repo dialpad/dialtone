@@ -106,29 +106,3 @@ export default {
   },
 };
 </script>
-
-<style lang="less" scoped>
-.d-mention-suggestion__container {
-  width: 100%;
-}
-.d-mention-suggestion__details-container {
-  width: 90%;
-}
-
-.d-mention-suggestion__presence {
-  min-width: fit-content;
-  margin-left: var(--dt-space-200);
-}
-
-.d-mention-suggestion__status {
-  overflow: hidden;
-  white-space: nowrap;
-  text-overflow: ellipsis;
-  color: var(--dt-color-foreground-tertiary);
-  margin-left: var(--dt-space-100);
-}
-
-.d-mention-suggestion__divider {
-  color: var(--dt-color-foreground-tertiary);
-}
-</style>
