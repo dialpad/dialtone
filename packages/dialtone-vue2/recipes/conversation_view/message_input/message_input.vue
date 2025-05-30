@@ -462,7 +462,8 @@ export default {
 
     /**
      * Send button defaults.
-     * TODO (Dialtone 10): Change to `showSendButton` and boolean only.
+     * TODO (Dialtone 10):
+     * - Change to `showSendButton`, boolean only.
      */
     showSend: {
       type: [Boolean, Object],
@@ -470,13 +471,13 @@ export default {
     },
 
     /**
-     * TODO (Dialtone 10): Add `sendButtonType` prop to handle text or icon (default) send buttons,
-     * the text will be localized in Dialtone.
+     * TODO (Dialtone 10):
+     * - Add a prop `iconOnly` default: true to control if localized send button text should be shown
      */
 
     /**
      * Cancel button defaults.
-     * TODO (Dialtone 10): Change to `showCancelButton` and boolean only.
+     * TODO (Dialtone 10): Change to `showCancelButton`, boolean only.
      */
     showCancel: {
       type: [Boolean, Object],
