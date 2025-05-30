@@ -1,11 +1,8 @@
 module.exports = {
-  '*.{js,mjs,cjs,vue}': [
-    'eslint --fix',
+  '*.{vue}': [
     'vitest related --run',
   ],
-  // using function syntax here so we can run the command without lint staged automatically passing filenames to it.
-  '**/dialtone-icons/src/keywords-*.json': (filenames) => 'nx run dialtone-icons:build --skip-nx-cache',
-  '*.json': [
+  '*.{vue,js,mjs,cjs,json}': [
     'eslint --fix',
   ],
   '*.less': [
