@@ -77,9 +77,9 @@ export default defineConfig({
         'node_modules/@linusborg/vue-simple-portal': './node_modules/@linusborg/vue-simple-portal/dist/index.esm.js',
 
         // Localization
-        // 'localization/index': './localization/index.js',
-        // 'localization/es-LA': './localization/es-LA.ftl?raw',
-        // 'localization/en-US': './localization/en-US.ftl?raw',
+        'localization/index': './localization/index.js',
+        'localization/es-LA': './localization/es-LA.ftl?raw',
+        'localization/en-US': './localization/en-US.ftl?raw',
       },
       formats: ['es', 'cjs'],
     },
