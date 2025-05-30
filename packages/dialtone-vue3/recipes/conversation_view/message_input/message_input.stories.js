@@ -212,6 +212,7 @@ export const argsData = {
       'Objects',
       'Symbols',
       'Flags',
+      'Custom',
     ],
     skinTone: 'Default',
   },

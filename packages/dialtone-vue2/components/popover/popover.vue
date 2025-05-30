@@ -4,7 +4,6 @@
     <portal v-if="modal && isOpen">
       <div
         class="d-modal--transparent"
-        :aria-hidden="modal && isOpen ? 'false' : 'true'"
         @click.prevent.stop
       />
     </portal>

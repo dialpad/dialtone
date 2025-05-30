@@ -1,3 +1,36 @@
+# [9.123.0](https://github.com/dialpad/dialtone/compare/dialtone/v9.122.0...dialtone/v9.123.0) (2025-05-29)
+
+
+### Bug Fixes
+
+* **Hovercard:** NO-JIRA fix Hovercard stories ([#780](https://github.com/dialpad/dialtone/issues/780)) ([13c640f](https://github.com/dialpad/dialtone/commit/13c640f44552cd349f7233e500e6ec0da596d22f))
+* **Message Input:** NO-JIRA add add-emoji event to message input ([#775](https://github.com/dialpad/dialtone/issues/775)) ([7b0dc9c](https://github.com/dialpad/dialtone/commit/7b0dc9c9d5f95570abf6316a198222a2849d5379))
+* NO-JIRA update TipTap to fix memory leak bug ([#764](https://github.com/dialpad/dialtone/issues/764)) ([2070313](https://github.com/dialpad/dialtone/commit/20703132a6e6753efe58f04e0f99b1bbdd097309))
+
+
+### Features
+
+* **Emoji Picker:** DLT-2562 custom emojis feature on vue3 and tests ([#779](https://github.com/dialpad/dialtone/issues/779)) ([b08fbe0](https://github.com/dialpad/dialtone/commit/b08fbe0f63d1697cee6f4bee4e8a2cf62d53d6af))
+* **Emoji Suggestion:** DP-134897 show user presence and status in mentions selector ([#770](https://github.com/dialpad/dialtone/issues/770)) ([0bb26a5](https://github.com/dialpad/dialtone/commit/0bb26a5e4e73075cb7e9fe2ddb4da76969f47c32))
+* **Icon:** DLT-2493 add freshdesk branding icon ([#778](https://github.com/dialpad/dialtone/issues/778)) ([88722d3](https://github.com/dialpad/dialtone/commit/88722d3f05f7602e3442843de91fbc28d1d8e3a5))
+
+# [9.122.0](https://github.com/dialpad/dialtone/compare/dialtone/v9.121.0...dialtone/v9.122.0) (2025-05-27)
+
+
+### Bug Fixes
+
+* **Emoji Picker:** NO-JIRA fix emoji tabs being removed ([#773](https://github.com/dialpad/dialtone/issues/773)) ([eafe82d](https://github.com/dialpad/dialtone/commit/eafe82d8dca3c4224e777191d1deb70222b0868a))
+
+
+### Documentation
+
+* NO-JIRA fix font weight variables ([#772](https://github.com/dialpad/dialtone/issues/772)) ([3f6ef22](https://github.com/dialpad/dialtone/commit/3f6ef22518e55cc53074efe1c3aa3635cc560a77))
+
+
+### Features
+
+* **Toggle:** NO-JIRA add wrapperClass vue3 only ([#774](https://github.com/dialpad/dialtone/issues/774)) ([e9cb700](https://github.com/dialpad/dialtone/commit/e9cb70059cfe945265226232b2c83266af7e4571))
+
 # [9.121.0](https://github.com/dialpad/dialtone/compare/dialtone/v9.120.0...dialtone/v9.121.0) (2025-05-21)
 
 

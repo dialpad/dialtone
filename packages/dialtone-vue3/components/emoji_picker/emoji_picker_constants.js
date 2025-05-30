@@ -26,6 +26,7 @@ export const EMOJI_PICKER_CATEGORIES = {
   OBJECTS: 'Objects',
   SYMBOLS: 'Symbols',
   FLAGS: 'Flags',
+  CUSTOM: 'Custom',
 };
 
 export default {
