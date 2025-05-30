@@ -1,6 +1,6 @@
 {
   "name": "@dialpad/dialtone",
-  "version": "9.123.0",
+  "version": "9.123.1",
   "packageManager": "pnpm@9.9.0",
   "description": "Dialpad's Dialtone design system monorepo",
   "scripts": {
@@ -24,8 +24,7 @@
       },
       "@tiptap/vue-2": {
         "peerDependencies": {
-          "vue": "^2.6.0",
-          "@tiptap/extension-bubble-menu": "2.6.6"
+          "vue": "^2.6.0"
         }
       },
       "@tiptap/vue-3": {

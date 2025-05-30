@@ -4,7 +4,7 @@ settings:
   autoInstallPeers: true
   excludeLinksFromLockfile: false
 
-packageExtensionsChecksum: de0fae41c27ac38aec6acdb6d502b77b
+packageExtensionsChecksum: 4365de530a363307a1f58f3474fbaed2
 
 importers:
 
@@ -771,7 +771,7 @@ importers:
         version: 2.12.0(@tiptap/core@2.12.0(@tiptap/pm@2.12.0))(@tiptap/pm@2.12.0)
       '@tiptap/vue-2':
         specifier: ^2.12.0
-        version: 2.12.0(@tiptap/core@2.12.0(@tiptap/pm@2.12.0))(@tiptap/extension-bubble-menu@2.12.0(@tiptap/core@2.12.0(@tiptap/pm@2.12.0))(@tiptap/pm@2.12.0))(@tiptap/pm@2.12.0)(vue@2.7.16)
+        version: 2.12.0(@tiptap/core@2.12.0(@tiptap/pm@2.12.0))(@tiptap/pm@2.12.0)(vue@2.7.16)
       date-fns:
         specifier: 4.1.0
         version: 4.1.0
@@ -4686,7 +4686,6 @@ packages:
     resolution: {integrity: sha512-vWtLP+935G65NxDGwCBJ3Uog2aJ49ax4aetrY21qnfAWb+v8d6LW3e1ZwhwGXWHamJl2oysWJHWFyPKQTMeAjA==}
     peerDependencies:
       '@tiptap/core': ^2.7.0
-      '@tiptap/extension-bubble-menu': 2.6.6
       '@tiptap/pm': ^2.7.0
       vue: ^2.6.0
 
@@ -20927,7 +20926,7 @@ snapshots:
       '@tiptap/core': 2.12.0(@tiptap/pm@2.12.0)
       '@tiptap/pm': 2.12.0
 
-  '@tiptap/vue-2@2.12.0(@tiptap/core@2.12.0(@tiptap/pm@2.12.0))(@tiptap/extension-bubble-menu@2.12.0(@tiptap/core@2.12.0(@tiptap/pm@2.12.0))(@tiptap/pm@2.12.0))(@tiptap/pm@2.12.0)(vue@2.7.16)':
+  '@tiptap/vue-2@2.12.0(@tiptap/core@2.12.0(@tiptap/pm@2.12.0))(@tiptap/pm@2.12.0)(vue@2.7.16)':
     dependencies:
       '@tiptap/core': 2.12.0(@tiptap/pm@2.12.0)
       '@tiptap/extension-bubble-menu': 2.12.0(@tiptap/core@2.12.0(@tiptap/pm@2.12.0))(@tiptap/pm@2.12.0)
