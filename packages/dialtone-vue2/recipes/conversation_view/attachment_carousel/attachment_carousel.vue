@@ -25,7 +25,7 @@
     <dt-button
       v-show="showLeftArrow"
       tabindex="-1"
-      :aria-label="$t('DIALTONE_ATTACHMENT_CAROUSEL_LEFT_ARROW_ARIA_LABEL')"
+      :aria-label="i18n.$t('DIALTONE_ATTACHMENT_CAROUSEL_LEFT_ARROW_ARIA_LABEL')"
       class="d-recipe-attachment-carousel__arrow d-recipe-attachment-carousel__arrow--left"
       circle
       size="xs"
@@ -41,7 +41,7 @@
     <dt-button
       v-show="showRightArrow"
       tabindex="-1"
-      :aria-label="$t('DIALTONE_ATTACHMENT_CAROUSEL_RIGHT_ARROW_ARIA_LABEL')"
+      :aria-label="i18n.$t('DIALTONE_ATTACHMENT_CAROUSEL_RIGHT_ARROW_ARIA_LABEL')"
       class="d-recipe-attachment-carousel__arrow d-recipe-attachment-carousel__arrow--right"
       circle
       size="xs"

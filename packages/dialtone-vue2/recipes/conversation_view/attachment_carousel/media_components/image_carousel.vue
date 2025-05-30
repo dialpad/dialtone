@@ -6,7 +6,7 @@
       image-button-class="d-recipe-attachment-carousel__image-viewer"
       :image-src="mediaItem.path"
       :image-alt="mediaItem.altText"
-      :aria-label="$t('DIALTONE_IMAGE_CAROUSEL_CLICK_TO_OPEN_ARIA_LABEL')"
+      :aria-label="i18n.$t('DIALTONE_IMAGE_CAROUSEL_CLICK_TO_OPEN_ARIA_LABEL')"
     />
 
     <!-- Loader / Close button -->
@@ -17,7 +17,7 @@
         v-if="mediaItem.isUploading"
         class="d-recipe-attachment-carousel__image-progress-bar"
         :progress="mediaItem.progress"
-        :aria-label="$t('DIALTONE_IMAGE_CAROUSEL_PROGRESS_BAR_ARIA_LABEL')"
+        :aria-label="i18n.$t('DIALTONE_IMAGE_CAROUSEL_PROGRESS_BAR_ARIA_LABEL')"
       />
       <dt-button
         :id="`closeButton-${index}`"
