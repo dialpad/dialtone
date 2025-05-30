@@ -5,11 +5,10 @@
     size="xs"
     icon-position="right"
     class="d-recipe-settings-menu-button-update"
-    :aria-label="buttonLabel"
-    :title="buttonLabel"
+    :aria-label="ariaLabel"
     v-on="$listeners"
   >
-    {{ buttonLabel }}
+    <slot />
     <template #icon>
       <dt-icon-more-vertical
         size="300"
@@ -21,8 +20,7 @@
     importance="clear"
     kind="inverted"
     class="d-recipe-settings-menu-button"
-    :aria-label="buttonLabel"
-    :title="buttonLabel"
+    :aria-label="ariaLabel"
     v-on="$listeners"
   >
     <template #icon>
@@ -34,9 +32,11 @@
 </template>
 
 <script>
+/*
+ * TODO (Dialtone 10): Localize this component as it'd be a breaking change localizing right now.
+ */
 import DtButton from '@/components/button/button.vue';
 import { DtIconMoreVertical } from '@dialpad/dialtone-icons/vue2';
-import { DtLocalizationMixin } from '@/common/mixins';
 
 export default {
   name: 'DtRecipeSettingsMenuButton',
@@ -45,8 +45,6 @@ export default {
     DtButton,
     DtIconMoreVertical,
   },
-
-  mixins: [DtLocalizationMixin],
 
   props: {
     /**
@@ -57,6 +55,14 @@ export default {
     updateAvailable: {
       type: Boolean,
       default: false,
+    },
+
+    /**
+     * Aria label
+     */
+    ariaLabel: {
+      type: String,
+      required: true,
     },
   },
 
@@ -69,14 +75,6 @@ export default {
      */
     'click',
   ],
-
-  computed: {
-    buttonLabel () {
-      return this.updateAvailable
-        ? this.i18n.$t('DIALTONE_SETTINGS_MENU_UPDATE_BUTTON_LABEL')
-        : this.i18n.$t('DIALTONE_SETTINGS_MENU_DEFAULT_BUTTON_LABEL');
-    },
-  },
 
 };
 </script>
