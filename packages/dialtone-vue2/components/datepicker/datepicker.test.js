@@ -18,6 +18,7 @@ const MOCK_LOCALIZED_PREVIOUS_YEAR_LABEL = `Change to Previous year ${MOCK_TODAY
 const MOCK_LOCALIZED_PREVIOUS_MONTH_LABEL = `Change to Previous month ${MOCK_FORMATTED_LAST_MONTH}`;
 const MOCK_LOCALIZED_NEXT_MONTH_LABEL = `Change to Next month ${MOCK_FORMATTED_NEXT_MONTH}`;
 const MOCK_LOCALIZED_NEXT_YEAR_LABEL = `Change to Next year ${MOCK_TODAY_YEAR + 1}`;
+const MOCK_CURRENT_LOCALE = 'en-US';
 
 const baseProps = {
   selectedDate: MOCK_TEST_DATE,
@@ -161,7 +162,7 @@ describe('DtDatepicker Tests', () => {
     describe('On calendar', () => {
       it('day should has correct aria label', () => {
         const days = wrapper.findAll('.d-datepicker__calendar button');
-        const formattedDate = formatDate(`${MOCK_TODAY_YEAR}, ${MOCK_FORMATTED_TODAY_MONTH}, ${MOCK_DAY}`, INTL_MONTH_FORMAT, this.currentLocale);
+        const formattedDate = formatDate(`${MOCK_TODAY_YEAR}, ${MOCK_FORMATTED_TODAY_MONTH}, ${MOCK_DAY}`, INTL_MONTH_FORMAT, MOCK_CURRENT_LOCALE);
 
         expect(days.at(26).attributes('aria-label'))
           .toContain(`Select day ${formattedDate}`);

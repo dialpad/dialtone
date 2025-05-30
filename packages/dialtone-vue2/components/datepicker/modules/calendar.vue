@@ -112,7 +112,7 @@ export default {
 
   computed: {
     weekDays () {
-      return getWeekDayNames(this.currentLocale, WEEK_START);
+      return getWeekDayNames(this.i18n.currentLocale, WEEK_START);
     },
   },
 
@@ -133,7 +133,7 @@ export default {
 
   methods: {
     dayAriaLabel (day) {
-      return this.i18n.$t('DIALTONE_DATEPICKER_SELECT_DAY') + ` ${formatDate(day.value, INTL_MONTH_FORMAT, this.currentLocale)}`;
+      return this.i18n.$t('DIALTONE_DATEPICKER_SELECT_DAY') + ` ${formatDate(day.value, INTL_MONTH_FORMAT, this.i18n.currentLocale)}`;
     },
 
     setDayRef (el, day) {

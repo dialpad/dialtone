@@ -215,7 +215,7 @@ export default {
     },
 
     formattedMonth () {
-      return (month) => formatMonth(month, INTL_MONTH_FORMAT, this.currentLocale);
+      return (month) => formatMonth(month, INTL_MONTH_FORMAT, this.i18n.currentLocale);
     },
 
     previousYearAriaLabel () {
