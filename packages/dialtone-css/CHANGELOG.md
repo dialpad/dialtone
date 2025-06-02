@@ -1,3 +1,10 @@
+## [8.58.3](https://github.com/dialpad/dialtone/compare/dialtone-css/v8.58.2...dialtone-css/v8.58.3) (2025-06-02)
+
+
+### Bug Fixes
+
+* **Mention Suggestion:** NO-JIRA add mention suggestions styles on build ([#783](https://github.com/dialpad/dialtone/issues/783)) ([dc81a00](https://github.com/dialpad/dialtone/commit/dc81a00c17b6082992b0fa4781547f6c09b301db))
+
 # [8.58.0](https://github.com/dialpad/dialtone/compare/dialtone-css/v8.57.2...dialtone-css/v8.58.0) (2025-05-21)
 
 
