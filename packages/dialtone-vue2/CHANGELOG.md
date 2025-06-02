@@ -1,3 +1,11 @@
+## [2.191.1](https://github.com/dialpad/dialtone/compare/dialtone-vue2/v2.191.0...dialtone-vue2/v2.191.1) (2025-06-02)
+
+
+### Bug Fixes
+
+* **Mention Suggestion:** NO-JIRA add mention suggestions styles on build ([#783](https://github.com/dialpad/dialtone/issues/783)) ([dc81a00](https://github.com/dialpad/dialtone/commit/dc81a00c17b6082992b0fa4781547f6c09b301db))
+* **Popover:** NO-JIRA remove aria-hidden ([#782](https://github.com/dialpad/dialtone/issues/782)) ([b9bb6ab](https://github.com/dialpad/dialtone/commit/b9bb6ab666399f035064f3fc505d306fa487b7fd))
+
 # [2.191.0](https://github.com/dialpad/dialtone/compare/dialtone-vue2/v2.190.1...dialtone-vue2/v2.191.0) (2025-05-29)
 
 
