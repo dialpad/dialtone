@@ -1,3 +1,11 @@
+## [9.123.2](https://github.com/dialpad/dialtone/compare/dialtone/v9.123.1...dialtone/v9.123.2) (2025-06-02)
+
+
+### Bug Fixes
+
+* **Mention Suggestion:** NO-JIRA add mention suggestions styles on build ([#783](https://github.com/dialpad/dialtone/issues/783)) ([dc81a00](https://github.com/dialpad/dialtone/commit/dc81a00c17b6082992b0fa4781547f6c09b301db))
+* **Popover:** NO-JIRA remove aria-hidden ([#782](https://github.com/dialpad/dialtone/issues/782)) ([b9bb6ab](https://github.com/dialpad/dialtone/commit/b9bb6ab666399f035064f3fc505d306fa487b7fd))
+
 # [9.123.0](https://github.com/dialpad/dialtone/compare/dialtone/v9.122.0...dialtone/v9.123.0) (2025-05-29)
 
 
