@@ -3,7 +3,7 @@
     :is="icon"
     v-if="icon"
     :size="size"
-    :aria-label="i18n.$t(localizationKey)"
+    :aria-label="ariaLabel || i18n.$t(localizationKey)"
     :data-qa="$attrs['data-qa'] ?? 'dt-icon'"
   />
 </template>
@@ -41,6 +41,14 @@ export default {
       type: String,
       required: true,
       validator: (name) => ICON_NAMES.includes(name),
+    },
+
+    /**
+     * The label of the icon as read out by a screenreader. Leave this unset if your icon is purely presentational
+     */
+    ariaLabel: {
+      type: String,
+      default: undefined,
     },
   },
 
