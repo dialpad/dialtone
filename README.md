@@ -12,9 +12,16 @@ The below usage instructions are for the combined package.
 
 ### Install it via NPM:
 
+#### Using Vue@3
+
 ```shell
-npm install @dialpad/dialtone@latest
+npm install @dialpad/dialtone
 ```
+
+#### Using Vue@2
+
+```shell
+npm install @dialpad/dialtone @dialpad/i18n-vue2
 
 ### Import packages:
 
