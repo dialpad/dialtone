@@ -1,8 +1,9 @@
 module.exports = {
-  '*.{vue}': [
+  '*.{js,mjs,cjs,vue}': [
+    'eslint --fix',
     'vitest related --run',
   ],
-  '*.{vue,js,mjs,cjs,json}': [
+  '*.json': [
     'eslint --fix',
   ],
   '*.less': [
