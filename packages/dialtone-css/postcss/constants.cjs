@@ -24,12 +24,13 @@ module.exports = {
   FLEX_COLUMNS: 12,
   BORDER_RADIUS_SIZES: {
     0: 'radius-0',
+    1: 'radius-100',
     2: 'radius-200',
     4: 'radius-300',
     8: 'radius-400',
-    12: '450',
+    12: 'radius-450',
     16: 'radius-500',
-    24: '550',
+    24: '550', // TODO: Remove as it doesn't have a valid token?
     32: 'radius-600',
   },
   GAP_SPACES: {
