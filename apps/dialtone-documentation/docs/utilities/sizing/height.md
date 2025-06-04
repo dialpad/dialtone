@@ -46,39 +46,40 @@ Use `d-h{n}` to set a fixed height for an element.
 
 ```html
 <div class="d-hmn264">
-  <div class="d-h0">1</div>
-  <div class="d-h1">2</div>
-  <div class="d-h2">3</div>
-  <div class="d-h4">4</div>
-  <div class="d-h6">5</div>
-  <div class="d-h8">6</div>
-  <div class="d-h12">7</div>
-  <div class="d-h16">8</div>
-  <div class="d-h24">9</div>
-  <div class="d-h32">10</div>
-  <div class="d-h42">11</div>
-  <div class="d-h48">12</div>
-  <div class="d-h64">13</div>
-  <div class="d-h72">14</div>
-  <div class="d-h84">15</div>
-  <div class="d-h96">16</div>
-  <div class="d-h102">17</div>
-  <div class="d-h114">18</div>
-  <div class="d-h128">19</div>
-  <div class="d-h164">20</div>
-  <div class="d-h216">21</div>
-  <div class="d-h264">22</div>
-  <div class="d-h332">23</div>
-  <div class="d-h464">24</div>
-  <div class="d-h512">25</div>
-  <div class="d-h628">26</div>
-  <div class="d-h764">27</div>
-  <div class="d-h828">28</div>
-  <div class="d-h912">29</div>
-  <div class="d-h1024">30</div>
-  <div class="d-h1140">31</div>
-  <div class="d-h1268">32</div>
-  <div class="d-h1340">33</div>
+  <div class="d-h0">...</div>
+  <div class="d-h1">...</div>
+  <div class="d-h2">...</div>
+  <div class="d-h4">...</div>
+  <div class="d-h6">...</div>
+  <div class="d-h8">...</div>
+  <div class="d-h12">...</div>
+  <div class="d-h16">...</div>
+  <div class="d-h20">...</div>
+  <div class="d-h24">...</div>
+  <div class="d-h32">...</div>
+  <div class="d-h42">...</div>
+  <div class="d-h48">...</div>
+  <div class="d-h64">...</div>
+  <div class="d-h72">...</div>
+  <div class="d-h84">...</div>
+  <div class="d-h96">...</div>
+  <div class="d-h102">...</div>
+  <div class="d-h114">...</div>
+  <div class="d-h128">...</div>
+  <div class="d-h164">...</div>
+  <div class="d-h216">...</div>
+  <div class="d-h264">...</div>
+  <div class="d-h332">...</div>
+  <div class="d-h464">...</div>
+  <div class="d-h512">...</div>
+  <div class="d-h628">...</div>
+  <div class="d-h764">...</div>
+  <div class="d-h828">...</div>
+  <div class="d-h912">...</div>
+  <div class="d-h1024">...</div>
+  <div class="d-h1140">...</div>
+  <div class="d-h1268">...</div>
+  <div class="d-h1340">...</div>
 </div>
 ```
 
@@ -91,7 +92,7 @@ Use `d-h100vh` to have an element cover the user's viewport.
 </code-well-header>
 
 ```html
-<div class="d-h100vh">...</div>
+<div class="d-h100vh d-w100vw">...</div>
 ```
 
 ## Auto
