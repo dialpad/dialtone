@@ -60,12 +60,12 @@ import illustrationsList from '@dialpad/dialtone-icons/illustrations.js';
 
 ## Committing
 
-1. Place the `.svg` files into the category folder inside these directory depending if it's an icon or an illustration:
+1. Place the `.svg` files into the category folder inside these directory depending on if it's an icon or an illustration:
 
     - icon: `src/svg/icons`
     - illustration: `src/svg/illustrations`
 
-2. Run `nx run dialtone-icons:build`
+2. Add necessary keywords to the `keywords-icons.json` or `keywords-illustrations.json` file.
 3. Commit and push your changes.
 
 ## Requesting features / reporting bugs
