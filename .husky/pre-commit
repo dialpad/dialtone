@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 . "$(dirname "$0")/_/husky.sh"
 
-if [ -n "$(git diff -s --exit-code packages/dialtone-icons/src)" ]; then
+if [ -n "$(git diff -s --exit-code --staged packages/dialtone-icons/src)" ]; then
   pnpm nx run dialtone-icons:build;
   node ./packages/dialtone-vue2/localization/sync-icons.js;
 fi
