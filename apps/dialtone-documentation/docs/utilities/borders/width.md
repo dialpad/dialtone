@@ -14,7 +14,7 @@ Use `d-baw{n}` to change the border width on your element.
   >
     <div
       v-for="r in [0, 1, 2, 4, 6]"
-      class="d-p16 d-ba d-baw2 d-bc-default"
+      class="d-p16 d-ba d-bc-default"
       :class="`d-baw${r}`"
     >
       d-baw{{r}}
