@@ -3,7 +3,8 @@
     id="sr-only-close-button"
     data-qa="dt-sr-only-close-button"
     class="d-vi-visible-sr"
-    v-bind="i18n.$ta('DIALTONE_CLOSE_BUTTON')"
+    :aria-label="closeButtonTitle"
+    :title="closeButtonTitle"
     @click="close"
     @keydown.space.prevent.stop="close"
   >
@@ -26,6 +27,12 @@ export default {
   mixins: [DtLocalizationMixin],
 
   emits: ['close'],
+
+  computed: {
+    closeButtonTitle () {
+      return this.i18n.$t('DIALTONE_CLOSE_BUTTON');
+    },
+  },
 
   methods: {
     close () {

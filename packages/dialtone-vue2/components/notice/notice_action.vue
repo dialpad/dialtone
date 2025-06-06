@@ -12,7 +12,8 @@
       data-qa="dt-notice-action-close-button"
       importance="clear"
       size="sm"
-      v-bind="i18n.$ta('DIALTONE_CLOSE_BUTTON')"
+      :aria-label="closeButtonTitle"
+      :title="closeButtonTitle"
       v-on="noticeActionListeners"
     >
       <template #icon>
@@ -84,6 +85,10 @@ export default {
           this.$emit('click', event);
         },
       };
+    },
+
+    closeButtonTitle () {
+      return this.i18n.$t('DIALTONE_CLOSE_BUTTON');
     },
   },
 

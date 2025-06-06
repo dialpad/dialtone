@@ -39,7 +39,8 @@
       v-if="!hideClose"
       :class="chipCloseButtonClasses()"
       data-qa="dt-chip-close"
-      v-bind="i18n.$ta('DIALTONE_CLOSE_BUTTON')"
+      :aria-label="closeButtonTitle"
+      :title="closeButtonTitle"
       @click="$emit('close')"
     >
       <template #icon>
@@ -193,6 +194,10 @@ export default {
 
     closeButtonIconSize () {
       return CHIP_ICON_SIZES[this.size];
+    },
+
+    closeButtonTitle () {
+      return this.i18n.$t('DIALTONE_CLOSE_BUTTON');
     },
   },
 

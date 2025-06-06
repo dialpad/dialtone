@@ -98,7 +98,8 @@
           circle
           size="lg"
           importance="clear"
-          v-bind="i18n.$ta('DIALTONE_CLOSE_BUTTON')"
+          :aria-label="closeButtonTitle"
+          :title="closeButtonTitle"
           @click="close"
         >
           <template #icon>
@@ -377,6 +378,10 @@ export default {
 
     bannerKindClass () {
       return MODAL_BANNER_KINDS[this.bannerKind];
+    },
+
+    closeButtonTitle () {
+      return this.i18n.$t('DIALTONE_CLOSE_BUTTON');
     },
   },
 

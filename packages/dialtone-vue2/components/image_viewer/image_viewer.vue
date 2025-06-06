@@ -49,7 +49,8 @@
             size="lg"
             importance="clear"
             kind="inverted"
-            v-bind="i18n.$ta('DIALTONE_CLOSE_BUTTON')"
+            :aria-label="closeButtonTitle"
+            :title="closeButtonTitle"
             @click="close"
           >
             <template #icon>
@@ -192,6 +193,10 @@ export default {
           }
         },
       };
+    },
+
+    closeButtonTitle () {
+      return this.i18n.$t('DIALTONE_CLOSE_BUTTON');
     },
   },
 

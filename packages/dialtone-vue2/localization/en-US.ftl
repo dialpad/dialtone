@@ -1,7 +1,5 @@
 # Dialtone
-DIALTONE_CLOSE_BUTTON =
-  .aria-label = Close
-  .title = Close
+DIALTONE_CLOSE_BUTTON = Click to close
 DIALTONE_BREADCRUMBS_ARIA_LABEL = breadcrumbs
 DIALTONE_BUTTON_LOADING = loading
 DIALTONE_UNREAD_MESSAGE_COUNT_TEXT =

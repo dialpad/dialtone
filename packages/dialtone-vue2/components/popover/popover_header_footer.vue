@@ -28,7 +28,8 @@
       importance="outlined"
       kind="muted"
       circle
-      v-bind="i18n.$ta('DIALTONE_CLOSE_BUTTON')"
+      :aria-label="closeButtonTitle"
+      :title="closeButtonTitle"
       @click="$emit('close')"
     >
       <template #icon>
@@ -90,6 +91,12 @@ export default {
      */
     'close',
   ],
+
+  computed: {
+    closeButtonTitle () {
+      return this.i18n.$t('DIALTONE_CLOSE_BUTTON');
+    },
+  },
 
   methods: {
     focusCloseButton () {

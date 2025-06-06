@@ -18,7 +18,8 @@
             circle
             importance="clear"
             size="xs"
-            v-bind="i18n.$ta('DIALTONE_CLOSE_BUTTON')"
+            :aria-label="closeButtonTitle"
+            :title="closeButtonTitle"
             @click="close"
           >
             <template #icon>
@@ -56,6 +57,12 @@ export default {
   props: nodeViewProps,
 
   emits: ['meeting-pill-close'],
+
+  computed: {
+    closeButtonTitle () {
+      return this.i18n.$t('DIALTONE_CLOSE_BUTTON');
+    },
+  },
 
   methods: {
     close (e) {

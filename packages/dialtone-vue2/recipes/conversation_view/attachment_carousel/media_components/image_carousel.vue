@@ -26,7 +26,8 @@
         circle
         size="xs"
         importance="clear"
-        v-bind="i18n.$ta('DIALTONE_CLOSE_BUTTON')"
+        :aria-label="closeButtonTitle"
+        :title="closeButtonTitle"
         @click="removeMediaItem(index)"
       >
         <template #icon>
@@ -80,6 +81,12 @@ export default {
      */
     'remove-media',
   ],
+
+  computed: {
+    closeButtonTitle () {
+      return this.i18n.$t('DIALTONE_CLOSE_BUTTON');
+    },
+  },
 
   methods: {
     removeMediaItem (index) {
