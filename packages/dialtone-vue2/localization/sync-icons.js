@@ -4,7 +4,7 @@ import iconsList from '@dialpad/dialtone-icons/icons.js';
 import { readFileSync, writeFileSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import path from 'node:path';
-import { toFluentKeyString } from '@/common/utils';
+import { toFluentKeyString } from '../common/utils/index.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
