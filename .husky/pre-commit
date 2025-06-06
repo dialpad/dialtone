@@ -4,9 +4,11 @@
 echo "Running pre-commit hook"
 
 if ! git diff --staged --quiet packages/dialtone-icons/src; then
-  echo "Detected changes to icons, rebuilding..."
+  echo "Detected changes to icons, rebuilding and syncing localization files..."
   pnpm nx run dialtone-icons:build;
-  git add packages/dialtone-icons/src/keywords-*;
+  node packages/dialtone-vue2/localization/sync-icons.js;
+
+  git add packages/dialtone-vue2/localization/en-US.ftl packages/dialtone-icons/src/keywords-*;
 fi
 
 pnpm exec lint-staged --relative
