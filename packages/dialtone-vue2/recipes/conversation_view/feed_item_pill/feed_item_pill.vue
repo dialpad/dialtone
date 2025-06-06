@@ -6,7 +6,8 @@
           <button
             data-qa="dt-recipe-feed-item-pill"
             :class="['d-recipe-feed-item-pill__button', toggleableClass, buttonClass]"
-            v-bind="i18n.$ta('DIALTONE_FEED_ITEM_PILL_ARIA_LABEL')"
+            :aria-label="anchorTitle"
+            :title="anchorTitle"
             @focusin="hover = true"
             @focusout="hover = false"
             @mouseenter="hover = true"
@@ -163,6 +164,10 @@ export default {
 
     borderClass () {
       return FEED_ITEM_PILL_BORDER_COLORS[this.borderColor];
+    },
+
+    anchorTitle () {
+      return this.i18n.$t('DIALTONE_FEED_ITEM_PILL_ARIA_LABEL');
     },
   },
 
