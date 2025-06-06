@@ -1,4 +1,12 @@
 #!/usr/bin/env bash
 . "$(dirname "$0")/_/husky.sh"
 
+echo "Running pre-commit hook"
+
+if ! git diff --staged --quiet packages/dialtone-icons/src; then
+  echo "Detected changes to icons, rebuilding..."
+  pnpm nx run dialtone-icons:build;
+  git add packages/dialtone-icons/src/keywords-*;
+fi
+
 pnpm exec lint-staged --relative
