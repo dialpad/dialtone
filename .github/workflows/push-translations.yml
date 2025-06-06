@@ -6,6 +6,7 @@ on:
       - staging
     paths:
       - 'packages/dialtone-vue2/localization/en-US.ftl'
+  workflow_dispatch:
 
 jobs:
   push-translations:
