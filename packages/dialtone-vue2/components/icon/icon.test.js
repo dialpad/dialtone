@@ -1,8 +1,6 @@
 import DtIcon from './icon.vue';
 import { mount } from '@vue/test-utils';
 
-const MOCK_LOCALIZED_ARIA_LABEL = 'Accessibility icon';
-
 const baseProps = { name: 'accessibility' };
 
 let mockProps = {};
@@ -52,12 +50,20 @@ describe('DtIcon Tests', () => {
   });
 
   describe('Accessibility Tests', () => {
-    it('sets aria-hidden to false', () => {
-      expect(icon.attributes()['aria-hidden']).toBe('false');
-    });
+    describe('When ariaLabel prop is set', () => {
+      beforeEach(async () => {
+        mockProps = { ariaLabel: 'icon description' };
 
-    it('sets aria-label to localized string', () => {
-      expect(icon.attributes()['aria-label']).toBe(MOCK_LOCALIZED_ARIA_LABEL);
+        await updateWrapper();
+      });
+
+      it('sets the aria-label attribute', () => {
+        expect(icon.attributes()['aria-label']).toBe('icon description');
+      });
+
+      it('sets aria-hidden to false', () => {
+        expect(icon.attributes()['aria-hidden']).toBe('false');
+      });
     });
   });
 });
