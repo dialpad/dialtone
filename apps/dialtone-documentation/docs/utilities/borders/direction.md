@@ -13,7 +13,7 @@ Use `d-ba` to add a border to all sides of your element.
     :direction="{ 'default': 'column', 'md': 'row' }"
   >
     <div
-      v-for="width in [0, 1, 2, 4, 6]"
+      v-for="width in [0, 1, 2, 4]"
       class="d-p16 d-ba d-bc-default d-bgc-primary"
       :class="`d-baw${width}`"
     >
@@ -27,7 +27,6 @@ Use `d-ba` to add a border to all sides of your element.
 <div class="d-p16 d-ba d-baw1 d-bc-default d-bgc-primary">d-baw1</div>
 <div class="d-p16 d-ba d-baw2 d-bc-default d-bgc-primary">d-baw2</div>
 <div class="d-p16 d-ba d-baw4 d-bc-default d-bgc-primary">d-baw4</div>
-<div class="d-p16 d-ba d-baw6 d-bc-default d-bgc-primary">d-baw6</div>
 ```
 
 ## Individual Sides

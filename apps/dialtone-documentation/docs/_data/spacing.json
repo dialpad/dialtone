@@ -34,6 +34,10 @@
       "output": "1.6rem"
     },
     {
+      "value": "20",
+      "output": "2.0rem"
+    },
+    {
       "value": "24",
       "output": "2.4rem"
     },
@@ -151,6 +155,13 @@
       "negative": "yes",
       "combo": "yes",
       "value": "16px"
+    },
+    {
+      "coordinate": "20",
+      "suffix": "px",
+      "negative": "yes",
+      "combo": "yes",
+      "value": "20px"
     },
     {
       "coordinate": "24",
