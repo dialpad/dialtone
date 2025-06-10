@@ -156,6 +156,11 @@
         "graphic",
         "asset"
       ],
+      "playlist": [
+        "play",
+        "list",
+        "music"
+      ],
       "something-went-wrong": [
         "error",
         "wrong",
