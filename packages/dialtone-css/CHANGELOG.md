@@ -1,3 +1,10 @@
+## [8.58.4](https://github.com/dialpad/dialtone/compare/dialtone-css/v8.58.3...dialtone-css/v8.58.4) (2025-06-10)
+
+
+### Bug Fixes
+
+* DLT-2597 missing size and space utility classes ([#788](https://github.com/dialpad/dialtone/issues/788)) ([421a634](https://github.com/dialpad/dialtone/commit/421a6348c3d14c5a5d357bbaaa2c016782ed7d2a))
+
 ## [8.58.3](https://github.com/dialpad/dialtone/compare/dialtone-css/v8.58.2...dialtone-css/v8.58.3) (2025-06-02)
 
 
