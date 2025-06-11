@@ -1,3 +1,10 @@
+## [2.191.2](https://github.com/dialpad/dialtone/compare/dialtone-vue2/v2.191.1...dialtone-vue2/v2.191.2) (2025-06-11)
+
+
+### Bug Fixes
+
+* **Combobox Multi Select:** DLT-2580 input text not hiding ([#791](https://github.com/dialpad/dialtone/issues/791)) ([57db0b5](https://github.com/dialpad/dialtone/commit/57db0b5a66d8bd956347e37375b6f7062425add5))
+
 ## [2.191.1](https://github.com/dialpad/dialtone/compare/dialtone-vue2/v2.191.0...dialtone-vue2/v2.191.1) (2025-06-02)
 
 
