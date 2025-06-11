@@ -405,7 +405,7 @@ npm run dev
 
 Currently, Dialtone packages are being released in two different ways: `scheduled` and `manually`.
 The `scheduled` release will only release changes to `production` while `manually` you can choose to release
-`alpha`, `beta` or `next` branches.
+`alpha` or `beta` branches.
 
 #### Production
 
@@ -433,11 +433,11 @@ This will trigger the [release action](.github/workflows/release.yml), release c
 3. Push the `production` branch.
 4. The [publish action](https://github.com/dialpad/dialtone/actions/workflows/publish.yml) will publish the packages with its corresponding tag.
 
-#### Alpha/Beta/Next
+#### Alpha/Beta
 
 1. Merge your changes to the branch you want to release, commit and push to origin. (Note: If your dialtone version number is behind the last production release number, it may fail. Merge in staging or update the version number manually.)
 2. Go to [GitHub](https://github.com/dialpad/dialtone/actions/workflows/release.yml) and click on `Run workflow`.
-3. Select `alpha`, `beta` or `next` branch.
+3. Select `alpha` or `beta` branch.
 4. Select the `package` that you want to release or leave it empty to release all of them.
 
 This will trigger the [release action](.github/workflows/release.yml), release changes on the selected branch and automatically publish the selected packages following the next steps:

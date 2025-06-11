@@ -53,7 +53,7 @@ jobs:
 
   release:
     needs: [get-branch-name, check-dialpad-member]
-    if: ${{ contains(fromJSON('["staging", "next", "alpha", "beta", "rebrand-2025-beta"]'), needs.get-branch-name.outputs.current_branch) }}
+    if: ${{ contains(fromJSON('["staging", "alpha", "beta"]'), needs.get-branch-name.outputs.current_branch) }}
     runs-on: ubuntu-latest
     permissions:
       contents: write

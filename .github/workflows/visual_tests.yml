@@ -2,7 +2,7 @@ name: Visual Tests
 
 on:
   push:
-    branches: [ staging, rebrand-2025-beta ]
+    branches: [ staging ]
   pull_request:
     types: [ unlabeled, labeled, synchronize, opened ]
 
@@ -93,5 +93,5 @@ jobs:
       - name: Run Dialtone-vue 2 Visual Tests
         env:
           PERCY_TOKEN: ${{ secrets.PERCY_TOKEN }}
-          PERCY_TARGET_BRANCH: ${{ needs.get-branch-name.outputs.current_branch == 'rebrand-2025-beta' && 'staging' || github.base_ref }}
+          PERCY_TARGET_BRANCH: ${{ github.base_ref }}
         run: pnpm nx run --verbose dialtone-vue2:test:visual
