@@ -3,8 +3,40 @@ name: Visual Tests
 on:
   push:
     branches: [ staging ]
+    paths:
+      - 'packages/dialtone-css/lib/build/less/**/*.less'
+      - 'packages/dialtone-css/postcss/*.cjs'
+      - 'packages/dialtone-css/gulpfile.cjs'
+      - 'packages/dialtone-emojis/src/**'
+      - 'packages/dialtone-icons/src/**'
+      - 'packages/dialtone-icons/gulpfile.cjs'
+      - 'packages/dialtone-tokens/*.js'
+      - 'packages/dialtone-tokens/postcss/**'
+      - 'packages/dialtone-tokens/themes/**'
+      - 'packages/dialtone-tokens/tokens/**'
+      - 'packages/dialtone-tokens/gulpfile.cjs'
+      - 'packages/dialtone-vue2/**/*.vue'
+      - 'packages/dialtone-vue2/**/*.stories.js'
+      - 'packages/dialtone-vue2/percy.config.js'
+      - '!**/*.test.*js'
   pull_request:
     types: [ unlabeled, labeled, synchronize, opened ]
+    paths:
+      - 'packages/dialtone-css/lib/build/less/**/*.less'
+      - 'packages/dialtone-css/postcss/*.cjs'
+      - 'packages/dialtone-css/gulpfile.cjs'
+      - 'packages/dialtone-emojis/src/**'
+      - 'packages/dialtone-icons/src/**'
+      - 'packages/dialtone-icons/gulpfile.cjs'
+      - 'packages/dialtone-tokens/*.js'
+      - 'packages/dialtone-tokens/postcss/**'
+      - 'packages/dialtone-tokens/themes/**'
+      - 'packages/dialtone-tokens/tokens/**'
+      - 'packages/dialtone-tokens/gulpfile.cjs'
+      - 'packages/dialtone-vue2/**/*.vue'
+      - 'packages/dialtone-vue2/**/*.stories.js'
+      - 'packages/dialtone-vue2/percy.config.js'
+      - '!**/*.test.*js'
 
 env:
   HUSKY: 0
@@ -14,37 +46,15 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  filter-actions:
-    runs-on: ubuntu-latest
-    permissions:
-      pull-requests: read
-    outputs:
-      dialtone-vue-2: ${{ steps.filter.outputs.dialtone-vue-2 }}
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-
-      - name: Filter actions by path
-        if: github.event_name == 'pull_request'
-        uses: dorny/paths-filter@v3
-        id: filter
-        with:
-          filters: |
-            dialtone-vue-2:
-              - 'packages/dialtone-css/**'
-              - 'packages/dialtone-icons/**'
-              - 'packages/dialtone-tokens/**'
-              - 'packages/dialtone-vue2/**'
-
   prompt-for-label:
-    needs: filter-actions
     runs-on: ubuntu-latest
+    if: ${{ github.event_name == 'pull_request' }}
     permissions:
       pull-requests: write
     steps:
       - name: Add label prompt message
         uses: mshick/add-pr-comment@v2
-        if: ${{ github.event_name == 'pull_request' && needs.filter-actions.outputs.dialtone-vue-2 == 'true' && (!contains(github.event.pull_request.labels.*.name, 'visual-test-ready') && !contains(github.event.pull_request.labels.*.name, 'no-visual-test')) }}
+        if: ${{ (!contains(github.event.pull_request.labels.*.name, 'visual-test-ready') && !contains(github.event.pull_request.labels.*.name, 'no-visual-test')) }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
@@ -54,18 +64,8 @@ jobs:
           message-id: 'missing-visual-test-label'
           refresh-message-position: true
 
-  get-branch-name:
-    runs-on: ubuntu-latest
-    outputs:
-      current_branch: ${{ steps.branch-name.outputs.current_branch }}
-    steps:
-      - name: Get branch name
-        id: branch-name
-        uses: tj-actions/branch-names@v8
-
   dialtone-vue-2:
-    needs: [filter-actions, get-branch-name]
-    if: ${{ github.event_name == 'push' || (needs.filter-actions.outputs.dialtone-vue-2 == 'true' && contains(github.event.pull_request.labels.*.name, 'visual-test-ready')) }}
+    if: ${{ github.event_name == 'push' || (github.event_name == 'pull_request' && contains(github.event.pull_request.labels.*.name, 'visual-test-ready')) }}
     runs-on: ubuntu-latest
     permissions:
       packages: read
@@ -73,22 +73,8 @@ jobs:
       - name: Check out branch
         uses: actions/checkout@v4
 
-      - name: Use pnpm
-        uses: pnpm/action-setup@v3
-
-      - name: Use Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version-file: ".nvmrc"
-          cache: "pnpm"
-          registry-url: "https://npm.pkg.github.com"
-          scope: "dialpad"
-        env:
-          NODE_AUTH_TOKEN: ${{ github.token }}
-
-      - name: Install dependencies
-        shell: bash
-        run: pnpm install --frozen-lockfile
+      - name: Setup Environment
+        uses: ./.github/actions/setup-environment
 
       - name: Run Dialtone-vue 2 Visual Tests
         env:
