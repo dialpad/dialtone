@@ -1,3 +1,10 @@
+# [8.59.0](https://github.com/dialpad/dialtone/compare/dialtone-css/v8.58.4...dialtone-css/v8.59.0) (2025-06-11)
+
+
+### Features
+
+* **Illustration:** DLT-2590 add playlist ([#789](https://github.com/dialpad/dialtone/issues/789)) ([5987aa1](https://github.com/dialpad/dialtone/commit/5987aa1d9d51ccdf4043d587f659a5026da03018))
+
 ## [8.58.4](https://github.com/dialpad/dialtone/compare/dialtone-css/v8.58.3...dialtone-css/v8.58.4) (2025-06-10)
 
 

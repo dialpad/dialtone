@@ -42,17 +42,12 @@ module.exports = {
   ],
   branches: [
     'staging',
-    'next',
     {
       name: 'beta',
       prerelease: true,
     },
     {
       name: 'alpha',
-      prerelease: true,
-    },
-    {
-      name: 'rebrand-2025-beta',
       prerelease: true,
     },
   ],

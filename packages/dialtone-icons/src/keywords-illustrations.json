@@ -151,15 +151,15 @@
         "orbital",
         "harmony"
       ],
-      "publish-graphic": [
-        "publish",
-        "graphic",
-        "asset"
-      ],
       "playlist": [
         "play",
         "list",
         "music"
+      ],
+      "publish-graphic": [
+        "publish",
+        "graphic",
+        "asset"
       ],
       "something-went-wrong": [
         "error",
