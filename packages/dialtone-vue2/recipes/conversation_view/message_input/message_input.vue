@@ -59,6 +59,7 @@
         :mention-suggestion="mentionSuggestion"
         :channel-suggestion="channelSuggestion"
         :slash-command-suggestion="slashCommandSuggestion"
+        :paste-rich-text="richText"
         :allow-blockquote="richText"
         :allow-bold="richText"
         :allow-bullet-list="richText"

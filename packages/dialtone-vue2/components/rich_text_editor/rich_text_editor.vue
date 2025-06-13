@@ -135,6 +135,15 @@ export default {
     },
 
     /**
+     * When this option is false the editor will only ever paste plain text, no rich text formatting will be applied,
+     * and any HTML will be rendered as text.
+     */
+    pasteRichText: {
+      type: Boolean,
+      default: true,
+    },
+
+    /**
      * Whether the input allows for line breaks to be introduced in the text by pressing enter. If this is disabled,
      * line breaks can still be entered by pressing shift+enter.
      */
@@ -702,42 +711,32 @@ export default {
         content: this.value,
         editable: this.editable,
         extensions: this.extensions,
+        parseOptions: {
+          preserveWhitespace: 'full',
+        },
+
         editorProps: {
           attributes: {
             ...this.inputAttrs,
             class: this.inputClass,
           },
 
-          handlePaste: (_, event) => {
-            // When having link and customLink props we should maintain default paste behavior
-            if (!this.link && !this.customLink) {
-              const regex = /^https?:\/\//;
+          handlePaste: (view, event, slice) => {
+            if (!this.pasteRichText) {
+              const clipboardData = event.clipboardData || window.clipboardData;
+              const textData = clipboardData.getData('text/plain');
 
-              if (!event?.clipboardData) {
-                return false;
+              if (textData) {
+                // Insert as plain text only (preserving any HTML tags as text)
+                const { tr } = view.state;
+                const { from, to } = view.state.selection;
+                tr.insertText(textData, from, to);
+                view.dispatch(tr);
+                return true; // Prevent default paste behavior
               }
-              const pastedContent = event.clipboardData.getData('text');
-
-              // Check if the pasted content is a valid URL (starting with http:// or https://)
-              // If it's not a URL, allow the default paste behavior
-              if (!regex.test(pastedContent)) {
-                return false;
-              }
-
-              // If `text/html` is missing from clipboard data, it's a plain link
-              // In this case, allow the default paste behavior
-              if (!event.clipboardData.getData('text/html')) {
-                return false;
-              }
-              const htmlContent = pastedContent
-                .replace(/\n/g, '<br>') // Convert newlines to <br>
-                .replace(/ {2}/g, '&nbsp;&nbsp;'); // Convert multiple spaces
-
-              this.editor.chain().focus().insertContent(htmlContent).run();
-              return true; // Prevent the default paste behavior
             }
 
-            return false; // Allow the default paste behavior
+            return false; // default paste behavior
           },
 
           // Moves the <br /> tags inside the previous closing tag to avoid
