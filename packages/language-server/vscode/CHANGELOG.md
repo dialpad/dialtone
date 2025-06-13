@@ -1,3 +1,5 @@
+## [1.1.4](https://github.com/dialpad/dialtone/compare/vscode-extension/v1.1.3...vscode-extension/v1.1.4) (2025-06-11)
+
 ## [1.1.3](https://github.com/dialpad/dialtone/compare/vscode-extension/v1.1.2...vscode-extension/v1.1.3) (2025-05-09)
 
 ## [1.1.2](https://github.com/dialpad/dialtone/compare/vscode-extension/v1.1.1...vscode-extension/v1.1.2) (2025-04-02)

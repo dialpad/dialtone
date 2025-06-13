@@ -1,3 +1,11 @@
+# [4.41.0](https://github.com/dialpad/dialtone/compare/dialtone-icons/v4.40.0...dialtone-icons/v4.41.0) (2025-06-11)
+
+
+### Features
+
+* **Icon:** DLT-2573 add google-meet and update dialpad-sparkle's gradient ([#786](https://github.com/dialpad/dialtone/issues/786)) ([5c0915c](https://github.com/dialpad/dialtone/commit/5c0915cb1e0624aecc759972e4fefe79995e3a02))
+* **Illustration:** DLT-2590 add playlist ([#789](https://github.com/dialpad/dialtone/issues/789)) ([5987aa1](https://github.com/dialpad/dialtone/commit/5987aa1d9d51ccdf4043d587f659a5026da03018))
+
 # [4.40.0](https://github.com/dialpad/dialtone/compare/dialtone-icons/v4.39.0...dialtone-icons/v4.40.0) (2025-05-29)
 
 

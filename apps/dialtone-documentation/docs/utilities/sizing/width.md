@@ -43,51 +43,52 @@ Use `d-w{n}` to set a fixed width for an element.
 </code-well-header>
 
 ```html
-<div class="d-w0">1</div>
-<div class="d-w1">2</div>
-<div class="d-w2">3</div>
-<div class="d-w4">4</div>
-<div class="d-w6">5</div>
-<div class="d-w8">6</div>
-<div class="d-w12">7</div>
-<div class="d-w16">8</div>
-<div class="d-w24">9</div>
-<div class="d-w32">10</div>
-<div class="d-w42">11</div>
-<div class="d-w48">12</div>
-<div class="d-w64">13</div>
-<div class="d-w72">14</div>
-<div class="d-w84">15</div>
-<div class="d-w96">16</div>
-<div class="d-w102">17</div>
-<div class="d-w114">18</div>
-<div class="d-w128">19</div>
-<div class="d-w164">20</div>
-<div class="d-w216">21</div>
-<div class="d-w264">22</div>
-<div class="d-w332">23</div>
-<div class="d-w464">24</div>
-<div class="d-w512">25</div>
-<div class="d-w628">26</div>
-<div class="d-w764">27</div>
-<div class="d-w828">28</div>
-<div class="d-w912">29</div>
-<div class="d-w1024">30</div>
-<div class="d-w1140">31</div>
-<div class="d-w1268">32</div>
-<div class="d-w1340">33</div>
+<div class="d-w0">...</div>
+<div class="d-w1">...</div>
+<div class="d-w2">...</div>
+<div class="d-w4">...</div>
+<div class="d-w6">...</div>
+<div class="d-w8">...</div>
+<div class="d-w12">...</div>
+<div class="d-w16">...</div>
+<div class="d-w20">...</div>
+<div class="d-w24">...</div>
+<div class="d-w32">...</div>
+<div class="d-w42">...</div>
+<div class="d-w48">...</div>
+<div class="d-w64">...</div>
+<div class="d-w72">...</div>
+<div class="d-w84">...</div>
+<div class="d-w96">...</div>
+<div class="d-w102">...</div>
+<div class="d-w114">...</div>
+<div class="d-w128">...</div>
+<div class="d-w164">...</div>
+<div class="d-w216">...</div>
+<div class="d-w264">...</div>
+<div class="d-w332">...</div>
+<div class="d-w464">...</div>
+<div class="d-w512">...</div>
+<div class="d-w628">...</div>
+<div class="d-w764">...</div>
+<div class="d-w828">...</div>
+<div class="d-w912">...</div>
+<div class="d-w1024">...</div>
+<div class="d-w1140">...</div>
+<div class="d-w1268">...</div>
+<div class="d-w1340">...</div>
 ```
 
 ## Screen
 
-Use `d-w100vh` to have an element cover the user's viewport.
+Use `d-w100vw` to have an element cover the user's viewport.
 
 <code-well-header class="d-ps-relative d-d-flex d-jc-center d-p24 d-bgc-secondary d-w100p d-h3 d-stack16 d-of-y-scroll" custom>
   <div class="d-fl-center d-py16 d-px8 d-w100vw d-h100vh d-bgc-moderate d-bar4 d-ta-center">Viewport</div>
 </code-well-header>
 
 ```html
-<div class="d-w100vw">...</div>
+<div class="d-h100vh d-w100vw">...</div>
 ```
 
 ## Auto
@@ -132,7 +133,7 @@ Use `d-w-auto` have the browser calculate and select a width.
       <tbody>
         <tr>
           <th scope="row" class="d-code--sm d-docsite-code">.d-w100vw</th>
-          <td class="d-code--sm">width: 100vh !important;</td>
+          <td class="d-code--sm">width: 100vw !important;</td>
         </tr>
         <tr v-for="i in other">
           <th scope="row" class="d-code--sm d-docsite-code">.d-w-{{ i }}</th>

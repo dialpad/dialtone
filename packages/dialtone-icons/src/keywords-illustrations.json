@@ -151,6 +151,11 @@
         "orbital",
         "harmony"
       ],
+      "playlist": [
+        "play",
+        "list",
+        "music"
+      ],
       "publish-graphic": [
         "publish",
         "graphic",

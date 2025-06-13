@@ -6,11 +6,8 @@ on:
     branches:
       - alpha
       - beta
-      - legacy
-      - next
       - production
       - staging
-      - rebrand-2025-beta
 
     paths:
       - 'packages/**'
@@ -80,8 +77,8 @@ jobs:
       DIALTONE_BUCKET_DIRECTORY: dialtone.dialpad.com${{ github.ref == 'refs/heads/production' && '/' || format('/{0}/', needs.get-branch-name.outputs.current_branch) }}
       DIALTONE_VUE_2_BUCKET_DIRECTORY: dialtone.dialpad.com/vue${{ github.ref == 'refs/heads/production' && '/' || format('/{0}/', needs.get-branch-name.outputs.current_branch) }}
       DIALTONE_VUE_3_BUCKET_DIRECTORY: dialtone.dialpad.com/vue3${{ github.ref == 'refs/heads/production' && '/' || format('/{0}/', needs.get-branch-name.outputs.current_branch) }}
-      DIALTONE_BUCKET_CLEANUP_EXCLUDE: '/alpha/|/beta/|/legacy/|/next/|/deploy-previews/|/vue/|/vue3/|/staging/|/rebrand-2025-beta/'
-      DIALTONE_VUE_BUCKET_CLEANUP_EXCLUDE: '/alpha/|/beta/|/legacy/|/next/|/deploy-previews/|/staging/|/rebrand-2025-beta/'
+      DIALTONE_BUCKET_CLEANUP_EXCLUDE: '/alpha/|/beta/|/deploy-previews/|/vue/|/vue3/|/staging/'
+      DIALTONE_VUE_BUCKET_CLEANUP_EXCLUDE: '/alpha/|/beta/|/deploy-previews/|/staging/'
     steps:
       - name: Checkout
         uses: actions/checkout@v4

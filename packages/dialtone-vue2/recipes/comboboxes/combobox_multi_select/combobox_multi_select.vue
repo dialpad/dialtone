@@ -728,22 +728,22 @@ export default {
     async handleInputFocusIn () {
       this.inputFocused = true;
       if (this.collapseOnFocusOut) {
+        this.hideInputText = false;
         await this.$nextTick();
         this.setInputPadding();
-        this.hideInputText = false;
       }
     },
 
     async handleInputFocusOut () {
       this.inputFocused = false;
       if (this.collapseOnFocusOut) {
+        this.hideInputText = true;
         const input = this.getInput();
         if (!input) return;
         // Hide the input text when is not on first line
         if (!input.style.paddingTop) {
           return;
         }
-        this.hideInputText = true;
         this.revertInputPadding(input);
       }
     },

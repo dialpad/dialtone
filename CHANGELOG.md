@@ -1,3 +1,17 @@
+# [9.124.0](https://github.com/dialpad/dialtone/compare/dialtone/v9.123.2...dialtone/v9.124.0) (2025-06-11)
+
+
+### Bug Fixes
+
+* **Combobox Multi Select:** DLT-2580 input text not hiding ([#791](https://github.com/dialpad/dialtone/issues/791)) ([57db0b5](https://github.com/dialpad/dialtone/commit/57db0b5a66d8bd956347e37375b6f7062425add5))
+* DLT-2597 missing size and space utility classes ([#788](https://github.com/dialpad/dialtone/issues/788)) ([421a634](https://github.com/dialpad/dialtone/commit/421a6348c3d14c5a5d357bbaaa2c016782ed7d2a))
+
+
+### Features
+
+* **Icon:** DLT-2573 add google-meet and update dialpad-sparkle's gradient ([#786](https://github.com/dialpad/dialtone/issues/786)) ([5c0915c](https://github.com/dialpad/dialtone/commit/5c0915cb1e0624aecc759972e4fefe79995e3a02))
+* **Illustration:** DLT-2590 add playlist ([#789](https://github.com/dialpad/dialtone/issues/789)) ([5987aa1](https://github.com/dialpad/dialtone/commit/5987aa1d9d51ccdf4043d587f659a5026da03018))
+
 ## [9.123.2](https://github.com/dialpad/dialtone/compare/dialtone/v9.123.1...dialtone/v9.123.2) (2025-06-02)
 
 

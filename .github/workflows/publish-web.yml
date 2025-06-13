@@ -24,8 +24,6 @@ on:
       - production
       - alpha
       - beta
-      - next
-      - rebrand-2025-beta
 
 env:
   HUSKY: 0

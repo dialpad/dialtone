@@ -13,8 +13,8 @@ Use `d-baw{n}` to change the border width on your element.
     :direction="{ 'default': 'column', 'md': 'row' }"
   >
     <div
-      v-for="r in [0, 1, 2, 4, 6]"
-      class="d-p16 d-ba d-baw2 d-bc-default"
+      v-for="r in [0, 1, 2, 4]"
+      class="d-p16 d-ba d-bc-default"
       :class="`d-baw${r}`"
     >
       d-baw{{r}}
@@ -27,7 +27,6 @@ Use `d-baw{n}` to change the border width on your element.
 <div class="d-ba d-baw1">...</div>
 <div class="d-ba d-baw2">...</div>
 <div class="d-ba d-baw4">...</div>
-<div class="d-ba d-baw6">...</div>
 ```
 
 ## Individual Sides
@@ -40,7 +39,7 @@ Use `d-b{a|t|r|b|l}w{n}` to change the border width of your direction on your el
     :direction="{ 'default': 'column', 'md': 'row' }"
   >
     <div
-      v-for="r in [0, 1, 2, 4, 6]"
+      v-for="r in [0, 1, 2, 4]"
       class="d-p16 d-ba d-baw0 d-bc-default d-bgc-primary"
       :class="`d-btw${r}`"
     >
@@ -54,7 +53,6 @@ Use `d-b{a|t|r|b|l}w{n}` to change the border width of your direction on your el
 <div class="d-bt d-btw1">...</div>
 <div class="d-br d-btw2">...</div>
 <div class="d-bb d-btw4">...</div>
-<div class="d-bl d-btw6">...</div>
 ```
 
 ## Classes
@@ -62,11 +60,11 @@ Use `d-b{a|t|r|b|l}w{n}` to change the border width of your direction on your el
 <utility-class-table>
   <template #content>
     <tbody v-for="i in ['all', 'top', 'right', 'bottom', 'left']">
-      <tr v-for="(val, key) in {0: '0', 1: '100', 2: '200', 4: '300', 6: '350'}">
+      <tr v-for="(val, key) in {0: '0', 1: '100', 2: '200', 4: '300'}">
         <th scope="row" class="d-code--sm d-docsite-code">.d-b{{ i[0] }}w{{ key }}</th>
         <td class="d-code--sm">
-          <span v-if="i === 'all'">border-width: var(--dt-size-{{ val }}) !important;</span>
-          <span v-else>border-{{i}}-width: var(--dt-size-{{ val }}) !important;</span>
+          <span v-if="i === 'all'">border-width: var(--dt-size-border-{{ val }}) !important;</span>
+          <span v-else>border-{{i}}-width: var(--dt-size-border-{{ val }}) !important;</span>
         </td>
       </tr>
     </tbody>
