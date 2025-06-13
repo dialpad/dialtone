@@ -12,7 +12,6 @@ export const argsData = {
   onOpened: action('opened'),
   imageSrc: defaultImage,
   imageAlt: 'Image Alt Text',
-  closeAriaLabel: 'Close',
   imageButtonClass: 'd-wmn64 d-hmn64 w-wmx332 d-hmx332',
   ariaLabel: 'Click to open image',
 };
@@ -88,19 +87,6 @@ export const argTypesData = {
     },
   },
 
-  closeAriaLabel: {
-    description: 'Aria label for close',
-    table: {
-      category: 'props',
-      type: {
-        summary: 'string',
-      },
-    },
-    control: {
-      type: 'text',
-    },
-  },
-
   // Events
   onOpened: {
     table: {
@@ -145,7 +131,6 @@ export const Default = {
   args: {
     imageSrc: defaultImage,
     imageAlt: 'Image Alt Text',
-    closeAriaLabel: 'Close',
     imageButtonClass: 'd-wmn64 d-hmn64 w-wmx332 d-hmx332',
     ariaLabel: 'Click to open image',
   },

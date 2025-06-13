@@ -60,8 +60,8 @@
 </template>
 
 <script>
+import DtCombobox from './combobox.vue';
 import { DtAvatar } from '@/components/avatar';
-import { DtCombobox } from '@/components/combobox';
 import { DtInput } from '@/components/input';
 import { DtListItem } from '@/components/list_item';
 

@@ -57,5 +57,5 @@ const emojisIndexed = [].concat(...Object.values(emojisGrouped)).reduce((accumul
 
 module.exports = {
   emojisGrouped,
-  emojisIndexed
-}
+  emojisIndexed,
+};

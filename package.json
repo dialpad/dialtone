@@ -24,8 +24,7 @@
       },
       "@tiptap/vue-2": {
         "peerDependencies": {
-          "vue": "^2.6.0",
-          "@tiptap/extension-bubble-menu": "2.6.6"
+          "vue": "^2.6.0"
         }
       },
       "@tiptap/vue-3": {
@@ -131,6 +130,7 @@
     "@commitlint/cli": "^18.4.3",
     "@commitlint/config-conventional": "^17.6.6",
     "@dialpad/conventional-changelog-angular": "^1.1.1",
+    "@dialpad/i18n-services": "1.3.0",
     "@dialpad/semantic-release-changelog-json": "^1.0.0",
     "@faker-js/faker": "8.4.1",
     "@percy/cli": "1.30.9",
