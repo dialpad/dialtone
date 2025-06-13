@@ -8,7 +8,24 @@ on:
       - beta
       - production
       - staging
-
+    paths:
+      - 'apps/dialtone-documentation/docs/**'
+      - 'packages/dialtone-css/**/*.less'
+      - 'packages/dialtone-css/postcss/*.cjs'
+      - 'packages/dialtone-css/gulpfile.cjs'
+      - 'packages/dialtone-emojis/src/**'
+      - 'packages/dialtone-icons/src/**'
+      - 'packages/dialtone-icons/gulpfile.cjs'
+      - 'packages/dialtone-tokens/*.js'
+      - 'packages/dialtone-tokens/postcss/**'
+      - 'packages/dialtone-tokens/themes/**'
+      - 'packages/dialtone-tokens/tokens/**'
+      - 'packages/dialtone-tokens/gulpfile.cjs'
+      - 'packages/dialtone-vue*/**/*.vue'
+      - 'packages/dialtone-vue*/**/*.*js'
+      - 'packages/dialtone-vue*/**/*.stories.js'
+      - '!**/*.test.*js'
+  pull_request:
     paths:
       - 'apps/dialtone-documentation/docs/**'
       - 'packages/dialtone-css/**/*.less'
@@ -29,6 +46,7 @@ on:
 
 env:
   HUSKY: 0
+  BASE_URL: /${{ github.event_name == 'push' && (github.ref_name != 'production' && format('{0}/', github.ref_name)) || format('deploy-previews/pr-{0}/', github.event.pull_request.number) }}
 
 concurrency:
   group: "${{ github.workflow }}-${{ github.ref }}"
@@ -101,6 +119,7 @@ jobs:
               - '!**/*.test.*js'
 
   check-dialpad-member:
+    if: ${{ github.event_name == 'push' }}
     runs-on: ubuntu-latest
     steps:
       # Will prevent the rest of the steps from running on fail
@@ -112,11 +131,12 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.DIALTONE_CI_TOKEN }}
 
   deploy:
-    name: Deploy sites
     needs: [ check-dialpad-member, filter-actions ]
     if: ${{ needs.filter-actions.outputs.packages != '[]' }}
     env:
-      BASE_URL: /${{ github.ref_name != 'production' && format('{0}/', github.ref_name) }}
+      DIALTONE_BUCKET_DIRECTORY: dialtone.dialpad.com${{ env.BASE_URL }}
+      DIALTONE_VUE_2_BUCKET_DIRECTORY: dialtone.dialpad.com/vue${{ env.BASE_URL }}
+      DIALTONE_VUE_3_BUCKET_DIRECTORY: dialtone.dialpad.com/vue3${{ env.BASE_URL }}
       BUCKET_CLEANUP_EXCLUDE: '/alpha/|/beta/|/deploy-previews/|/staging/|/vue/|/vue3/'
     strategy:
       fail-fast: false
@@ -129,11 +149,17 @@ jobs:
       packages: read
     steps:
       - name: Checkout
+        if: ${{ github.event_name == 'push' }}
         uses: actions/checkout@v4
+
+      - name: Checkout PR
+        if: ${{ github.event_name == 'pull_request' }}
+        uses: actions/checkout@v4
+        with:
+          ref: "refs/pull/${{ github.event.pull_request.number }}/merge"
 
       - name: Setup Environment
         uses: ./.github/actions/setup-environment
-
 
       # ------------------------------ #
       # Expand corresponding variables #
@@ -143,24 +169,22 @@ jobs:
         id: expand
         env:
           DIALTONE_DIST_DIRECTORY: apps/dialtone-documentation/docs/.vuepress/dist
-          DIALTONE_BUCKET_DIRECTORY: dialtone.dialpad.com${{ env.BASE_URL }}
-
           DIALTONE_VUE_2_DIST_DIRECTORY: packages/dialtone-vue2/storybook-static
-          DIALTONE_VUE_2_BUCKET_DIRECTORY: dialtone.dialpad.com/vue${{ env.BASE_URL }}
-
           DIALTONE_VUE_3_DIST_DIRECTORY: packages/dialtone-vue3/storybook-static
-          DIALTONE_VUE_3_BUCKET_DIRECTORY: dialtone.dialpad.com/vue3${{ env.BASE_URL }}
         run: |
           if [[ ${{ matrix.package }} == 'dialtone-documentation' ]]; then
             echo "VUEPRESS_BASE_URL=$BASE_URL" >> $GITHUB_ENV;
             echo "source_directory=$DIALTONE_DIST_DIRECTORY" >> $GITHUB_OUTPUT;
             echo "dest_directory=$DIALTONE_BUCKET_DIRECTORY" >> $GITHUB_OUTPUT;
+            echo "build_command=dialtone-documentation:build" >> $GITHUB_OUTPUT;
           elif [[ ${{ matrix.package }} == 'dialtone-vue2' ]]; then
             echo "source_directory=$DIALTONE_VUE_2_DIST_DIRECTORY" >> $GITHUB_OUTPUT;
             echo "dest_directory=$DIALTONE_VUE_2_BUCKET_DIRECTORY" >> $GITHUB_OUTPUT;
+            echo "build_command=dialtone-vue2:build-storybook" >> $GITHUB_OUTPUT;
           elif [[ ${{ matrix.package }} == 'dialtone-vue3' ]]; then
             echo "source_directory=$DIALTONE_VUE_3_DIST_DIRECTORY" >> $GITHUB_OUTPUT;
             echo "dest_directory=$DIALTONE_VUE_3_BUCKET_DIRECTORY" >> $GITHUB_OUTPUT;
+            echo "build_command=dialtone-vue3:build-storybook" >> $GITHUB_OUTPUT;
           fi
 
       # ---------- #
@@ -168,8 +192,7 @@ jobs:
       # ---------- #
 
       - name: Build ${{ matrix.package }} site
-        run: |
-          pnpm nx run --verbose ${{ matrix.package }}:build
+        run: pnpm nx run --verbose ${{steps.expand.outputs.build_command}}
 
       # --------- #
       # Setup GCP #
@@ -190,6 +213,7 @@ jobs:
       # -------------- #
 
       - name: Clean up bucket
+        continue-on-error: true
         run: >
           gcloud storage ls ${{ format('gs://{0}', steps.expand.outputs.dest_directory) }} |
           grep -v -E ${{ env.BUCKET_CLEANUP_EXCLUDE }} |
@@ -205,3 +229,23 @@ jobs:
           path: ${{ steps.expand.outputs.source_directory }}
           destination: ${{ steps.expand.outputs.dest_directory }}
           parent: false
+
+  add-preview-ready-message:
+    needs: [ filter-actions, deploy ]
+    if: ${{ github.event_name == 'pull_request' }}
+    runs-on: ubuntu-latest
+    permissions:
+      pull-requests: write
+    steps:
+      - name: Add comment
+        uses: mshick/add-pr-comment@v2
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          message: |
+            ✔️ Deploy previews ready!
+            ${{ contains(needs.filter-actions.outputs.packages, 'dialtone-documentation') && format('😎 Dialtone documentation preview: https://{0}', env.DIALTONE_BUCKET_DIRECTORY) }}
+            ${{ contains(needs.filter-actions.outputs.packages, 'dialtone-vue2') && format('😎 Dialtone-vue 2 preview: https://{0}', env.DIALTONE_VUE_2_BUCKET_DIRECTORY) }}
+            ${{ contains(needs.filter-actions.outputs.packages, 'dialtone-vue3') && format('😎 Dialtone-vue 3 the preview: https://{0}', env.DIALTONE_VUE_3_BUCKET_DIRECTORY) }}
+          message-id: 'deploy-preview-message'
+          refresh-message-position: true
