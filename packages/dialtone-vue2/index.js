@@ -50,6 +50,7 @@ export * from './components/lazy_show';
 export * from './components/link';
 export * from './components/list_item';
 export * from './components/list_item_group';
+export * from './components/loader';
 export * from './components/modal';
 export * from './components/notice';
 export * from './components/pagination';
