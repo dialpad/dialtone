@@ -47,6 +47,9 @@ on:
 env:
   HUSKY: 0
   BASE_URL: ${{ github.event_name == 'push' && (github.ref_name != 'production' && format('{0}/', github.ref_name)) || format('deploy-previews/pr-{0}/', github.event.pull_request.number) }}
+  DIALTONE_BUCKET_DIRECTORY: dialtone.dialpad.com
+  DIALTONE_VUE_2_BUCKET_DIRECTORY: dialtone.dialpad.com/vue
+  DIALTONE_VUE_3_BUCKET_DIRECTORY: dialtone.dialpad.com/vue3
 
 concurrency:
   group: "${{ github.workflow }}-${{ github.ref }}"
@@ -134,9 +137,6 @@ jobs:
     needs: [ check-dialpad-member, filter-actions ]
     if: ${{ needs.filter-actions.outputs.packages != '[]' }}
     env:
-      DIALTONE_BUCKET_DIRECTORY: dialtone.dialpad.com
-      DIALTONE_VUE_2_BUCKET_DIRECTORY: dialtone.dialpad.com/vue
-      DIALTONE_VUE_3_BUCKET_DIRECTORY: dialtone.dialpad.com/vue3
       BUCKET_CLEANUP_EXCLUDE: '/alpha/|/beta/|/deploy-previews/|/staging/|/vue/|/vue3/'
     strategy:
       fail-fast: false
