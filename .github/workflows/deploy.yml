@@ -46,7 +46,7 @@ on:
 
 env:
   HUSKY: 0
-  BASE_URL: /${{ github.event_name == 'push' && (github.ref_name != 'production' && format('{0}/', github.ref_name)) || format('deploy-previews/pr-{0}/', github.event.pull_request.number) }}
+  BASE_URL: ${{ github.event_name == 'push' && (github.ref_name != 'production' && format('{0}/', github.ref_name)) || format('deploy-previews/pr-{0}/', github.event.pull_request.number) }}
 
 concurrency:
   group: "${{ github.workflow }}-${{ github.ref }}"
@@ -134,9 +134,9 @@ jobs:
     needs: [ check-dialpad-member, filter-actions ]
     if: ${{ needs.filter-actions.outputs.packages != '[]' }}
     env:
-      DIALTONE_BUCKET_DIRECTORY: dialtone.dialpad.com${{ env.BASE_URL }}
-      DIALTONE_VUE_2_BUCKET_DIRECTORY: dialtone.dialpad.com/vue${{ env.BASE_URL }}
-      DIALTONE_VUE_3_BUCKET_DIRECTORY: dialtone.dialpad.com/vue3${{ env.BASE_URL }}
+      DIALTONE_BUCKET_DIRECTORY: dialtone.dialpad.com
+      DIALTONE_VUE_2_BUCKET_DIRECTORY: dialtone.dialpad.com/vue
+      DIALTONE_VUE_3_BUCKET_DIRECTORY: dialtone.dialpad.com/vue3
       BUCKET_CLEANUP_EXCLUDE: '/alpha/|/beta/|/deploy-previews/|/staging/|/vue/|/vue3/'
     strategy:
       fail-fast: false
@@ -173,17 +173,17 @@ jobs:
           DIALTONE_VUE_3_DIST_DIRECTORY: packages/dialtone-vue3/storybook-static
         run: |
           if [[ ${{ matrix.package }} == 'dialtone-documentation' ]]; then
-            echo "VUEPRESS_BASE_URL=$BASE_URL" >> $GITHUB_ENV;
+            echo "VUEPRESS_BASE_URL=/$BASE_URL" >> $GITHUB_ENV;
             echo "source_directory=$DIALTONE_DIST_DIRECTORY" >> $GITHUB_OUTPUT;
-            echo "dest_directory=$DIALTONE_BUCKET_DIRECTORY" >> $GITHUB_OUTPUT;
+            echo "dest_directory=$DIALTONE_BUCKET_DIRECTORY/$BASE_URL" >> $GITHUB_OUTPUT;
             echo "build_command=dialtone-documentation:build" >> $GITHUB_OUTPUT;
           elif [[ ${{ matrix.package }} == 'dialtone-vue2' ]]; then
             echo "source_directory=$DIALTONE_VUE_2_DIST_DIRECTORY" >> $GITHUB_OUTPUT;
-            echo "dest_directory=$DIALTONE_VUE_2_BUCKET_DIRECTORY" >> $GITHUB_OUTPUT;
+            echo "dest_directory=$DIALTONE_VUE_2_BUCKET_DIRECTORY/$BASE_URL" >> $GITHUB_OUTPUT;
             echo "build_command=dialtone-vue2:build-storybook" >> $GITHUB_OUTPUT;
           elif [[ ${{ matrix.package }} == 'dialtone-vue3' ]]; then
             echo "source_directory=$DIALTONE_VUE_3_DIST_DIRECTORY" >> $GITHUB_OUTPUT;
-            echo "dest_directory=$DIALTONE_VUE_3_BUCKET_DIRECTORY" >> $GITHUB_OUTPUT;
+            echo "dest_directory=$DIALTONE_VUE_3_BUCKET_DIRECTORY/$BASE_URL" >> $GITHUB_OUTPUT;
             echo "build_command=dialtone-vue3:build-storybook" >> $GITHUB_OUTPUT;
           fi
 
@@ -244,8 +244,8 @@ jobs:
         with:
           message: |
             ✔️ Deploy previews ready!
-            ${{ contains(needs.filter-actions.outputs.packages, 'dialtone-documentation') && format('😎 Dialtone documentation preview: https://{0}', env.DIALTONE_BUCKET_DIRECTORY) }}
-            ${{ contains(needs.filter-actions.outputs.packages, 'dialtone-vue2') && format('😎 Dialtone-vue 2 preview: https://{0}', env.DIALTONE_VUE_2_BUCKET_DIRECTORY) }}
-            ${{ contains(needs.filter-actions.outputs.packages, 'dialtone-vue3') && format('😎 Dialtone-vue 3 the preview: https://{0}', env.DIALTONE_VUE_3_BUCKET_DIRECTORY) }}
+            ${{ contains(needs.filter-actions.outputs.packages, 'dialtone-documentation') && format('😎 Dialtone documentation preview: https://{0}/{1}', env.DIALTONE_BUCKET_DIRECTORY, env.BASE_URL) }}
+            ${{ contains(needs.filter-actions.outputs.packages, 'dialtone-vue2') && format('😎 Dialtone-vue 2 preview: https://{0}/{1}', env.DIALTONE_VUE_2_BUCKET_DIRECTORY, env.BASE_URL) }}
+            ${{ contains(needs.filter-actions.outputs.packages, 'dialtone-vue3') && format('😎 Dialtone-vue 3 the preview: https://{0}/{1}', env.DIALTONE_VUE_3_BUCKET_DIRECTORY, env.BASE_URL) }}
           message-id: 'deploy-preview-message'
           refresh-message-position: true

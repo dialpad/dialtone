@@ -1,12 +1,8 @@
 name: Clean Preview
 
 on:
-  workflow_dispatch:
   pull_request_target:
     types: [closed]
-
-env:
-  BASE_URL: deploy-previews/pr-${{ github.event.pull_request.number }}/
 
 jobs:
   clean:
@@ -15,9 +11,9 @@ jobs:
       contents: 'read'
       id-token: 'write'
     env:
-      DIALTONE_BUCKET_DIRECTORY: dialtone.dialpad.com/${{ env.BASE_URL }}
-      DIALTONE_VUE_2_BUCKET_DIRECTORY: dialtone.dialpad.com/vue/${{ env.BASE_URL }}
-      DIALTONE_VUE_3_BUCKET_DIRECTORY: dialtone.dialpad.com/vue3/${{ env.BASE_URL }}
+      DIALTONE_BUCKET_DIRECTORY: dialtone.dialpad.com/deploy-previews/pr-${{ github.event.pull_request.number }}/
+      DIALTONE_VUE_2_BUCKET_DIRECTORY: dialtone.dialpad.com/vue/deploy-previews/pr-${{ github.event.pull_request.number }}/
+      DIALTONE_VUE_3_BUCKET_DIRECTORY: dialtone.dialpad.com/vue3/deploy-previews/pr-${{ github.event.pull_request.number }}/
     steps:
       - uses: actions/checkout@v4
 
