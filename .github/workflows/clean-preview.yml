@@ -5,45 +5,22 @@ on:
   pull_request_target:
     types: [closed]
 
+env:
+  BASE_URL: deploy-previews/pr-${{ github.event.pull_request.number }}/
+
 jobs:
-  filter-actions:
-    runs-on: ubuntu-latest
-    permissions:
-      pull-requests: read
-    outputs:
-      dialtone: ${{ steps.filter.outputs.dialtone }}
-      dialtone-vue-2: ${{ steps.filter.outputs.dialtone-vue-2 }}
-      dialtone-vue-3: ${{ steps.filter.outputs.dialtone-vue-3 }}
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-
-      - name: Filter actions by path
-        uses: dorny/paths-filter@v3
-        id: filter
-        with:
-          filters: |
-            dialtone:
-              - 'apps/dialtone-documentation/**'
-              - 'packages/**'
-            dialtone-vue-2:
-              - 'packages/**'
-            dialtone-vue-3:
-              - 'packages/**'
-
-
   clean:
-    needs: filter-actions
     runs-on: ubuntu-latest
     permissions:
       contents: 'read'
       id-token: 'write'
     env:
-      DIALTONE_BUCKET_DIRECTORY: dialtone.dialpad.com/deploy-previews/pr-${{ github.event.pull_request.number }}/
-      DIALTONE_VUE_2_BUCKET_DIRECTORY: dialtone.dialpad.com/vue/deploy-previews/pr-${{ github.event.pull_request.number }}/
-      DIALTONE_VUE_3_BUCKET_DIRECTORY: dialtone.dialpad.com/vue3/deploy-previews/pr-${{ github.event.pull_request.number }}/
+      DIALTONE_BUCKET_DIRECTORY: dialtone.dialpad.com/${{ env.BASE_URL }}
+      DIALTONE_VUE_2_BUCKET_DIRECTORY: dialtone.dialpad.com/vue/${{ env.BASE_URL }}
+      DIALTONE_VUE_3_BUCKET_DIRECTORY: dialtone.dialpad.com/vue3/${{ env.BASE_URL }}
     steps:
       - uses: actions/checkout@v4
+
       - id: auth
         name: Authenticate to Google Cloud
         uses: google-github-actions/auth@v2
@@ -54,18 +31,10 @@ jobs:
       - name: Set up Cloud SDK
         uses: google-github-actions/setup-gcloud@v2
 
-      - name: Clean up Dialtone preview
-        if: ${{ needs.filter-actions.outputs.dialtone == 'true' }}
+      - name: Clean up previews
         continue-on-error: true
-        run: gcloud storage rm --recursive ${{ format('gs://{0}', env.DIALTONE_BUCKET_DIRECTORY) }}
-
-      - name: Clean up Dialtone-vue 2 preview
-        if: ${{ needs.filter-actions.outputs.dialtone-vue-2 == 'true' }}
-        continue-on-error: true
-        run: gcloud storage rm --recursive ${{ format('gs://{0}', env.DIALTONE_VUE_2_BUCKET_DIRECTORY) }}
-
-      - name: Clean up Dialtone-vue 3 preview
-        if: ${{ needs.filter-actions.outputs.dialtone-vue-3 == 'true' }}
-        continue-on-error: true
-        run: gcloud storage rm --recursive ${{ format('gs://{0}', env.DIALTONE_VUE_3_BUCKET_DIRECTORY) }}
+        run: |
+          gcloud storage rm --recursive ${{ format('gs://{0}', env.DIALTONE_BUCKET_DIRECTORY) }}
+          gcloud storage rm --recursive ${{ format('gs://{0}', env.DIALTONE_VUE_2_BUCKET_DIRECTORY) }}
+          gcloud storage rm --recursive ${{ format('gs://{0}', env.DIALTONE_VUE_3_BUCKET_DIRECTORY) }}
 
