@@ -1,10 +1,9 @@
 name: Pull from translation service
 
 on:
-  push:
-    branches:
-      - staging
   workflow_dispatch:
+  schedule:
+    - cron: '0 20 * * *'
 
 jobs:
   pull-translations:
