@@ -8,45 +8,13 @@ on:
       - beta
       - production
       - staging
+
     paths:
-      - 'apps/dialtone-documentation/docs/**'
-      - 'packages/dialtone-css/**/*.less'
-      - 'packages/dialtone-css/postcss/*.cjs'
-      - 'packages/dialtone-css/gulpfile.cjs'
-      - 'packages/dialtone-emojis/src/**'
-      - 'packages/dialtone-icons/src/**'
-      - 'packages/dialtone-icons/gulpfile.cjs'
-      - 'packages/dialtone-tokens/*.js'
-      - 'packages/dialtone-tokens/postcss/**'
-      - 'packages/dialtone-tokens/themes/**'
-      - 'packages/dialtone-tokens/tokens/**'
-      - 'packages/dialtone-tokens/gulpfile.cjs'
-      - 'packages/dialtone-vue*/**/*.vue'
-      - 'packages/dialtone-vue*/**/*.*js'
-      - 'packages/dialtone-vue*/**/*.stories.js'
-      - '!**/*.test.*js'
-  pull_request:
-    paths:
-      - 'apps/dialtone-documentation/docs/**'
-      - 'packages/dialtone-css/**/*.less'
-      - 'packages/dialtone-css/postcss/*.cjs'
-      - 'packages/dialtone-css/gulpfile.cjs'
-      - 'packages/dialtone-emojis/src/**'
-      - 'packages/dialtone-icons/src/**'
-      - 'packages/dialtone-icons/gulpfile.cjs'
-      - 'packages/dialtone-tokens/*.js'
-      - 'packages/dialtone-tokens/postcss/**'
-      - 'packages/dialtone-tokens/themes/**'
-      - 'packages/dialtone-tokens/tokens/**'
-      - 'packages/dialtone-tokens/gulpfile.cjs'
-      - 'packages/dialtone-vue*/**/*.vue'
-      - 'packages/dialtone-vue*/**/*.*js'
-      - 'packages/dialtone-vue*/**/*.stories.js'
-      - '!**/*.test.*js'
+      - 'packages/**'
+      - 'apps/**'
 
 env:
   HUSKY: 0
-  BASE_URL: /${{ github.event_name == 'push' && (github.ref_name != 'production' && format('{0}/', github.ref_name)) || format('deploy-previews/pr-{0}/', github.event.pull_request.number) }}
 
 concurrency:
   group: "${{ github.workflow }}-${{ github.ref }}"
@@ -56,7 +24,9 @@ jobs:
   filter-actions:
     runs-on: ubuntu-latest
     outputs:
-      packages: ${{ steps.filter.outputs.changes  }}
+      dialtone: ${{ steps.filter.outputs.dialtone }}
+      dialtone-vue-2: ${{ steps.filter.outputs.dialtone-vue-2 }}
+      dialtone-vue-3: ${{ steps.filter.outputs.dialtone-vue-3 }}
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -65,134 +35,79 @@ jobs:
         uses: dorny/paths-filter@v3
         id: filter
         with:
-          base: ${{ github.ref }}
-          list-files: 'json'
           filters: |
-            dialtone-documentation:
-              - 'apps/dialtone-documentation/docs/**'
-              - 'packages/dialtone-css/**/*.less'
-              - 'packages/dialtone-css/postcss/*.cjs'
-              - 'packages/dialtone-css/gulpfile.cjs'
-              - 'packages/dialtone-emojis/src/**'
-              - 'packages/dialtone-icons/src/**'
-              - 'packages/dialtone-icons/gulpfile.cjs'
-              - 'packages/dialtone-tokens/*.js'
-              - 'packages/dialtone-tokens/postcss/**'
-              - 'packages/dialtone-tokens/themes/**'
-              - 'packages/dialtone-tokens/tokens/**'
-              - 'packages/dialtone-tokens/gulpfile.cjs'
-              - 'packages/dialtone-vue3/**/*.vue'
-              - 'packages/dialtone-vue3/**/*.*js'
-              - 'packages/dialtone-vue3/**/*.stories.js'
-              - '!**/*.test.*js'
-            dialtone-vue2:
-              - 'packages/dialtone-css/**/*.less'
-              - 'packages/dialtone-css/postcss/*.cjs'
-              - 'packages/dialtone-css/gulpfile.cjs'
-              - 'packages/dialtone-emojis/src/**'
-              - 'packages/dialtone-icons/src/**'
-              - 'packages/dialtone-icons/gulpfile.cjs'
-              - 'packages/dialtone-tokens/*.js'
-              - 'packages/dialtone-tokens/postcss/**'
-              - 'packages/dialtone-tokens/themes/**'
-              - 'packages/dialtone-tokens/tokens/**'
-              - 'packages/dialtone-tokens/gulpfile.cjs'
-              - 'packages/dialtone-vue2/**/*.vue'
-              - 'packages/dialtone-vue2/**/*.*js'
-              - 'packages/dialtone-vue2/**/*.stories.js'
-              - '!**/*.test.*js'
-            dialtone-vue3:
-              - 'packages/dialtone-css/**/*.less'
-              - 'packages/dialtone-css/postcss/*.cjs'
-              - 'packages/dialtone-css/gulpfile.cjs'
-              - 'packages/dialtone-emojis/src/**'
-              - 'packages/dialtone-icons/src/**'
-              - 'packages/dialtone-icons/gulpfile.cjs'
-              - 'packages/dialtone-tokens/*.js'
-              - 'packages/dialtone-tokens/postcss/**'
-              - 'packages/dialtone-tokens/themes/**'
-              - 'packages/dialtone-tokens/tokens/**'
-              - 'packages/dialtone-tokens/gulpfile.cjs'
-              - 'packages/dialtone-vue3/**/*.vue'
-              - 'packages/dialtone-vue3/**/*.*js'
-              - 'packages/dialtone-vue3/**/*.stories.js'
-              - '!**/*.test.*js'
+            dialtone:
+              - 'apps/dialtone-documentation/**'
+              - 'packages/**'
+            dialtone-vue-2:
+              - 'packages/**'
+            dialtone-vue-3:
+              - 'packages/**'
+
+  get-branch-name:
+    runs-on: ubuntu-latest
+    outputs:
+      current_branch: ${{ steps.branch-name.outputs.current_branch }}
+    steps:
+    - name: Get branch name
+      id: branch-name
+      uses: tj-actions/branch-names@v8
 
   check-dialpad-member:
-    if: ${{ github.event_name == 'push' }}
     runs-on: ubuntu-latest
     steps:
-      # Will prevent the rest of the steps from running on fail
-      - name: Check if user is a dialpad member
-        uses: octokit/request-action@v2.x
-        with:
-          route: GET /orgs/dialpad/members/${{ github.actor }}
-        env:
-          GITHUB_TOKEN: ${{ secrets.DIALTONE_CI_TOKEN }}
+    # Will prevent the rest of the steps from running on fail
+    - name: Check if user is a dialpad member
+      uses: octokit/request-action@v2.x
+      with:
+        route: GET /orgs/dialpad/members/${{ github.actor }}
+      env:
+        GITHUB_TOKEN: ${{ secrets.DIALTONE_CI_TOKEN }}
 
   deploy:
-    needs: [ check-dialpad-member, filter-actions ]
-    if: ${{ needs.filter-actions.outputs.packages != '[]' }}
-    env:
-      DIALTONE_BUCKET_DIRECTORY: dialtone.dialpad.com${{ env.BASE_URL }}
-      DIALTONE_VUE_2_BUCKET_DIRECTORY: dialtone.dialpad.com/vue${{ env.BASE_URL }}
-      DIALTONE_VUE_3_BUCKET_DIRECTORY: dialtone.dialpad.com/vue3${{ env.BASE_URL }}
-      BUCKET_CLEANUP_EXCLUDE: '/alpha/|/beta/|/deploy-previews/|/staging/|/vue/|/vue3/'
-    strategy:
-      fail-fast: false
-      matrix:
-        package: ${{ fromJSON(needs.filter-actions.outputs.packages) }}
+    name: Deploy sites
+    needs: [check-dialpad-member, get-branch-name, filter-actions]
     runs-on: ubuntu-latest
     permissions:
       contents: read
       id-token: write
       packages: read
+    env:
+      VUEPRESS_BASE_URL: ${{ github.ref == 'refs/heads/production' && '/' || format('/{0}/', needs.get-branch-name.outputs.current_branch) }}
+      DIALTONE_BUCKET_DIRECTORY: dialtone.dialpad.com${{ github.ref == 'refs/heads/production' && '/' || format('/{0}/', needs.get-branch-name.outputs.current_branch) }}
+      DIALTONE_VUE_2_BUCKET_DIRECTORY: dialtone.dialpad.com/vue${{ github.ref == 'refs/heads/production' && '/' || format('/{0}/', needs.get-branch-name.outputs.current_branch) }}
+      DIALTONE_VUE_3_BUCKET_DIRECTORY: dialtone.dialpad.com/vue3${{ github.ref == 'refs/heads/production' && '/' || format('/{0}/', needs.get-branch-name.outputs.current_branch) }}
+      DIALTONE_BUCKET_CLEANUP_EXCLUDE: '/alpha/|/beta/|/deploy-previews/|/vue/|/vue3/|/staging/'
+      DIALTONE_VUE_BUCKET_CLEANUP_EXCLUDE: '/alpha/|/beta/|/deploy-previews/|/staging/'
     steps:
       - name: Checkout
-        if: ${{ github.event_name == 'push' }}
         uses: actions/checkout@v4
 
-      - name: Checkout PR
-        if: ${{ github.event_name == 'pull_request' }}
-        uses: actions/checkout@v4
+      - name: Use pnpm
+        uses: pnpm/action-setup@v3
+
+      - name: Use Node.js
+        uses: actions/setup-node@v4
         with:
-          ref: "refs/pull/${{ github.event.pull_request.number }}/merge"
-
-      - name: Setup Environment
-        uses: ./.github/actions/setup-environment
-
-      # ------------------------------ #
-      # Expand corresponding variables #
-      # ------------------------------ #
-
-      - name: Expand variables
-        id: expand
+          node-version-file: ".nvmrc"
+          cache: "pnpm"
+          registry-url: "https://npm.pkg.github.com"
+          scope: "dialpad"
         env:
-          DIALTONE_DIST_DIRECTORY: apps/dialtone-documentation/docs/.vuepress/dist
-          DIALTONE_VUE_2_DIST_DIRECTORY: packages/dialtone-vue2/storybook-static
-          DIALTONE_VUE_3_DIST_DIRECTORY: packages/dialtone-vue3/storybook-static
-        run: |
-          if [[ ${{ matrix.package }} == 'dialtone-documentation' ]]; then
-            echo "VUEPRESS_BASE_URL=$BASE_URL" >> $GITHUB_ENV;
-            echo "source_directory=$DIALTONE_DIST_DIRECTORY" >> $GITHUB_OUTPUT;
-            echo "dest_directory=$DIALTONE_BUCKET_DIRECTORY" >> $GITHUB_OUTPUT;
-            echo "build_command=dialtone-documentation:build" >> $GITHUB_OUTPUT;
-          elif [[ ${{ matrix.package }} == 'dialtone-vue2' ]]; then
-            echo "source_directory=$DIALTONE_VUE_2_DIST_DIRECTORY" >> $GITHUB_OUTPUT;
-            echo "dest_directory=$DIALTONE_VUE_2_BUCKET_DIRECTORY" >> $GITHUB_OUTPUT;
-            echo "build_command=dialtone-vue2:build-storybook" >> $GITHUB_OUTPUT;
-          elif [[ ${{ matrix.package }} == 'dialtone-vue3' ]]; then
-            echo "source_directory=$DIALTONE_VUE_3_DIST_DIRECTORY" >> $GITHUB_OUTPUT;
-            echo "dest_directory=$DIALTONE_VUE_3_BUCKET_DIRECTORY" >> $GITHUB_OUTPUT;
-            echo "build_command=dialtone-vue3:build-storybook" >> $GITHUB_OUTPUT;
-          fi
+          NODE_AUTH_TOKEN: ${{ github.token }}
+
+      - name: Install dependencies
+        shell: bash
+        run: pnpm install --frozen-lockfile
 
       # ---------- #
       # Build docs #
       # ---------- #
 
-      - name: Build ${{ matrix.package }} site
-        run: pnpm nx run --verbose ${{steps.expand.outputs.build_command}}
+      - name: Build documentation sites
+        run: >
+          pnpm nx run --verbose dialtone-documentation:build &&
+          pnpm nx run-many --verbose --target=build-storybook --projects=dialtone-vue2,dialtone-vue3
 
       # --------- #
       # Setup GCP #
@@ -208,44 +123,71 @@ jobs:
       - name: Set up Cloud SDK
         uses: google-github-actions/setup-gcloud@v2
 
-      # -------------- #
-      # Cleanup bucket #
-      # -------------- #
+      # ------------------ #
+      # Cleanup production #
+      # ------------------ #
 
-      - name: Clean up bucket
-        continue-on-error: true
+      - name: Clean up bucket Dialtone
+        if: ${{ github.ref == 'refs/heads/production' }}
         run: >
-          gcloud storage ls ${{ format('gs://{0}', steps.expand.outputs.dest_directory) }} |
-          grep -v -E ${{ env.BUCKET_CLEANUP_EXCLUDE }} |
+          gcloud storage ls ${{ format('gs://{0}', env.DIALTONE_BUCKET_DIRECTORY) }} |
+          grep -v -E ${{ env.DIALTONE_BUCKET_CLEANUP_EXCLUDE }} |
           gcloud storage rm --recursive --read-paths-from-stdin
+
+      - name: Clean up bucket Dialtone Vue 2
+        if: ${{ github.ref == 'refs/heads/production' }}
+        run: >
+          gcloud storage ls ${{ format('gs://{0}', env.DIALTONE_VUE_2_BUCKET_DIRECTORY) }} |
+          grep -v -E ${{ env.DIALTONE_VUE_BUCKET_CLEANUP_EXCLUDE }} |
+          gcloud storage rm --recursive --read-paths-from-stdin
+
+      - name: Clean up bucket Dialtone Vue 3
+        if: ${{ github.ref == 'refs/heads/production' }}
+        run: >
+          gcloud storage ls ${{ format('gs://{0}', env.DIALTONE_VUE_3_BUCKET_DIRECTORY) }} |
+          grep -v -E ${{ env.DIALTONE_VUE_BUCKET_CLEANUP_EXCLUDE }} |
+          gcloud storage rm --recursive --read-paths-from-stdin
+
+      # ---------------------- #
+      # Cleanup other branches #
+      # ---------------------- #
+
+      - name: Clean up Dialtone ${{ needs.get-branch-name.outputs.current_branch }}
+        if: ${{ github.ref != 'refs/heads/production' }}
+        continue-on-error: true
+        run: gcloud storage rm --recursive ${{ format('gs://{0}', env.DIALTONE_BUCKET_DIRECTORY) }}
+
+      - name: Clean up Dialtone Vue 2 ${{ needs.get-branch-name.outputs.current_branch }}
+        if: ${{ github.ref != 'refs/heads/production' }}
+        continue-on-error: true
+        run: gcloud storage rm --recursive ${{ format('gs://{0}', env.DIALTONE_VUE_2_BUCKET_DIRECTORY) }}
+
+      - name: Clean up Dialtone Vue 3 ${{ needs.get-branch-name.outputs.current_branch }}
+        if: ${{ github.ref != 'refs/heads/production' }}
+        continue-on-error: true
+        run: gcloud storage rm --recursive ${{ format('gs://{0}', env.DIALTONE_VUE_3_BUCKET_DIRECTORY) }}
 
       # ---------- #
       # GCP Upload #
       # ---------- #
 
-      - name: Upload to GCP
+      - name: Upload Dialtone to GCP
         uses: google-github-actions/upload-cloud-storage@v2
         with:
-          path: ${{ steps.expand.outputs.source_directory }}
-          destination: ${{ steps.expand.outputs.dest_directory }}
+          path: apps/dialtone-documentation/docs/.vuepress/dist
+          destination: ${{ env.DIALTONE_BUCKET_DIRECTORY }}
           parent: false
 
-  add-preview-ready-message:
-    needs: [ filter-actions, deploy ]
-    if: ${{ github.event_name == 'pull_request' }}
-    runs-on: ubuntu-latest
-    permissions:
-      pull-requests: write
-    steps:
-      - name: Add comment
-        uses: mshick/add-pr-comment@v2
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Upload Dialtone-vue 2 to GCP
+        uses: google-github-actions/upload-cloud-storage@v2
         with:
-          message: |
-            ✔️ Deploy previews ready!
-            ${{ contains(needs.filter-actions.outputs.packages, 'dialtone-documentation') && format('😎 Dialtone documentation preview: https://{0}', env.DIALTONE_BUCKET_DIRECTORY) }}
-            ${{ contains(needs.filter-actions.outputs.packages, 'dialtone-vue2') && format('😎 Dialtone-vue 2 preview: https://{0}', env.DIALTONE_VUE_2_BUCKET_DIRECTORY) }}
-            ${{ contains(needs.filter-actions.outputs.packages, 'dialtone-vue3') && format('😎 Dialtone-vue 3 the preview: https://{0}', env.DIALTONE_VUE_3_BUCKET_DIRECTORY) }}
-          message-id: 'deploy-preview-message'
-          refresh-message-position: true
+          path: packages/dialtone-vue2/storybook-static
+          destination: ${{ env.DIALTONE_VUE_2_BUCKET_DIRECTORY }}
+          parent: false
+
+      - name: Upload Dialtone-vue 3 to GCP
+        uses: google-github-actions/upload-cloud-storage@v2
+        with:
+          path: packages/dialtone-vue3/storybook-static
+          destination: ${{ env.DIALTONE_VUE_3_BUCKET_DIRECTORY }}
+          parent: false
