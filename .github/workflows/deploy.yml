@@ -119,11 +119,11 @@ jobs:
               - '!**/*.test.*js'
 
   check-dialpad-member:
-    if: ${{ github.event_name == 'push' }}
     runs-on: ubuntu-latest
     steps:
       # Will prevent the rest of the steps from running on fail
       - name: Check if user is a dialpad member
+        if: ${{ github.event_name == 'push' }}
         uses: octokit/request-action@v2.x
         with:
           route: GET /orgs/dialpad/members/${{ github.actor }}
