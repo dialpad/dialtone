@@ -18,8 +18,8 @@
 </template>
 
 <script>
-import { DtListItem } from '../list_item';
-import { DtSkeleton } from '../skeleton';
+import { DtListItem } from '@/components/list_item';
+import { DtSkeleton } from '@/components/skeleton';
 
 export default {
   name: 'ComboboxLoadingList',

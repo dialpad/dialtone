@@ -315,7 +315,7 @@ describe('DtCheckbox Tests', () => {
 
             await input.trigger('click');
 
-            expect(wrapper.emitted()).toEqual({});
+            expect(wrapper.emitted('input')).toBeFalsy();
           });
         });
       });

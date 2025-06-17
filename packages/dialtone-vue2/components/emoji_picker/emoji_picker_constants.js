@@ -9,20 +9,6 @@ export const EMOJI_PICKER_SKIN_TONE_MODIFIERS = {
   DARK: 'Dark',
 };
 
-export const EMOJI_PICKER_CATEGORIES = {
-  MOST_RECENTLY_USED: 'Most recently used',
-  SMILEYS_AND_PEOPLE: 'Smileys and people',
-  NATURE: 'Nature',
-  FOOD: 'Food',
-  ACTIVITY: 'Activity',
-  TRAVEL: 'Travel',
-  OBJECTS: 'Objects',
-  SYMBOLS: 'Symbols',
-  FLAGS: 'Flags',
-  CUSTOM: 'Custom',
-};
-
 export default {
   EMOJI_PICKER_SKIN_TONE_MODIFIERS,
-  EMOJI_PICKER_CATEGORIES,
 };

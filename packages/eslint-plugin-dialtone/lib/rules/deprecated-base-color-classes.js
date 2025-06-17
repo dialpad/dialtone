@@ -4,9 +4,9 @@
  */
 'use strict';
 
-//------------------------------------------------------------------------------
+// ------------------------------------------------------------------------------
 // Rule Definition
-//------------------------------------------------------------------------------
+// ------------------------------------------------------------------------------
 
 const description = 'Usage of base color utility classes are deprecated and will be removed in the future.';
 
@@ -21,10 +21,10 @@ module.exports = {
     fixable: null, // Or `code` or `whitespace`
     schema: [], // Add a schema if the rule has options
     messages: {
-      recommendBackgroundSemanticColor: `${ description } Checkout the available replacements here: https://dialtone.dialpad.com/utilities/backgrounds/color.html`,
-      recommendForegroundSemanticColor: `${ description } Checkout the available replacements here: https://dialtone.dialpad.com/utilities/typography/font-color.html`,
-      recommendBorderSemanticColor: `${ description } Checkout the available replacements here: https://dialtone.dialpad.com/utilities/borders/color.html`,
-      recommendDivideSemanticColor: `${ description } Checkout the available replacements here: https://dialtone.dialpad.com/utilities/borders/divide-color.html`,
+      recommendBackgroundSemanticColor: `${description} Checkout the available replacements here: https://dialtone.dialpad.com/utilities/backgrounds/color.html`,
+      recommendForegroundSemanticColor: `${description} Checkout the available replacements here: https://dialtone.dialpad.com/utilities/typography/font-color.html`,
+      recommendBorderSemanticColor: `${description} Checkout the available replacements here: https://dialtone.dialpad.com/utilities/borders/color.html`,
+      recommendDivideSemanticColor: `${description} Checkout the available replacements here: https://dialtone.dialpad.com/utilities/borders/divide-color.html`,
     }, // Add messageId and message
   },
 
@@ -36,13 +36,13 @@ module.exports = {
         if (node.key.name === 'class') {
           const classes = node.value.value;
           if (classes.match(/d-bgc-\w+-\d{2,4}/)) {
-            context.report({ node: node, messageId: 'recommendBackgroundSemanticColor' });
+            context.report({ node, messageId: 'recommendBackgroundSemanticColor' });
           } else if (classes.match(/d-fc-\w+-\d{2,4}/)) {
-            context.report({ node: node, messageId: 'recommendForegroundSemanticColor' });
+            context.report({ node, messageId: 'recommendForegroundSemanticColor' });
           } else if (classes.match(/d-bc-\w+-\d{2,4}/)) {
-            context.report({ node: node, messageId: 'recommendBorderSemanticColor' });
+            context.report({ node, messageId: 'recommendBorderSemanticColor' });
           } else if (classes.match(/d-divide-\w+-\d{2,4}/)) {
-            context.report({ node: node, messageId: 'recommendDivideSemanticColor' });
+            context.report({ node, messageId: 'recommendDivideSemanticColor' });
           }
         }
       },

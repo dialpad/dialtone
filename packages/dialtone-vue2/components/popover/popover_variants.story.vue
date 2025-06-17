@@ -153,7 +153,6 @@
       initial-focus-element="first"
       max-height="20rem"
       max-width="50rem"
-      :close-button-props="$attrs.closeButtonProps"
     >
       <template
         slot="anchor"
@@ -227,7 +226,6 @@
       max-height="20rem"
       max-width="50rem"
       initial-focus-element="first"
-      :close-button-props="$attrs.closeButtonProps"
     >
       <template #anchor="{ attrs }">
         <dt-button
@@ -260,7 +258,6 @@
       max-height="20rem"
       max-width="50rem"
       initial-focus-element="first"
-      :close-button-props="$attrs.closeButtonProps"
     >
       <template
         slot="anchor"

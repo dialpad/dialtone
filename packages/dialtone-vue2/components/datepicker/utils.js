@@ -92,6 +92,10 @@ export const formatMonth = (month, monthFormat, locale) => {
   return new Intl.DateTimeFormat(locale, { month: monthFormat }).format(new Date(2000, month, 1));
 };
 
+export const formatDate = (date, dateFormat, locale) => {
+  return new Intl.DateTimeFormat(locale, { dateStyle: dateFormat }).format(new Date(date));
+};
+
 export const calculateNextFocusDate = (currentDate) => {
   const date = new Date(currentDate);
   const currentWeekday = getDay(date);

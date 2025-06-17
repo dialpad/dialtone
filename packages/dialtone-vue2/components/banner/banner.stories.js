@@ -1,20 +1,66 @@
+import { action } from '@storybook/addon-actions';
 import DtBanner from './banner.vue';
-import { createRenderConfig } from '@/common/storybook_utils';
-
+import { NOTICE_KINDS } from '@/components/notice/index.js';
 import BannerDefault from './banner_default.story.vue';
-import { argsData as noticeArgsData, argTypesData as noticeArgTypesData } from '../notice/notice.stories.js';
-
 import backgroundImage from '@/common/assets/dialpad-gradient.png';
+import { createRenderConfig, getIconNames } from '@/common/storybook_utils';
+
+const iconsList = getIconNames();
 
 export const argsData = {
-  ...noticeArgsData,
+  onClose: action('close'),
+  onClick: action('click'),
+  show: undefined,
   backgroundImage: null,
-  visuallyHiddenCloseLabel: 'Close Banner',
 };
 
 export const argTypesData = {
-  ...noticeArgTypesData,
-  role: {
+  // Slots
+  titleOverride: {
+    table: {
+      type: { summary: 'VNode' },
+    },
+    control: {
+      type: 'text',
+    },
+  },
+  icon: {
+    options: iconsList,
+    table: {
+      type: { summary: 'component' },
+    },
+    control: {
+      type: 'select',
+      labels: {
+        undefined: '(empty)',
+      },
+    },
+  },
+  default: {
+    table: {
+      type: { summary: 'VNode' },
+    },
+    control: {
+      type: 'text',
+    },
+  },
+  action: {
+    table: {
+      type: { summary: 'VNode' },
+    },
+    control: {
+      type: 'text',
+    },
+  },
+
+  // Props
+  kind: {
+    options: NOTICE_KINDS,
+    control: {
+      type: 'select',
+    },
+  },
+  show: {
     table: {
       disable: true,
     },
@@ -33,6 +79,11 @@ export const argTypesData = {
       },
     },
   },
+  hideClose: {
+    control: {
+      type: 'boolean',
+    },
+  },
   hideIcon: {
     control: {
       type: 'boolean',
@@ -41,6 +92,34 @@ export const argTypesData = {
   hideAction: {
     control: {
       type: 'boolean',
+    },
+  },
+  important: {
+    control: {
+      type: 'boolean',
+    },
+  },
+  pinned: {
+    control: {
+      type: 'boolean',
+    },
+  },
+
+  // Action Event Handlers
+  onClick: {
+    table: {
+      disable: true,
+    },
+  },
+  onClose: {
+    table: {
+      disable: true,
+    },
+  },
+  close: {
+    description: 'Close button click event',
+    table: {
+      type: { summary: 'event' },
     },
   },
 };
