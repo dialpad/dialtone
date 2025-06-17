@@ -742,7 +742,17 @@ export default {
           // Moves the <br /> tags inside the previous closing tag to avoid
           // Prosemirror wrapping them within another </p> tag.
           transformPastedHTML (html) {
-            return html.replace(/(<\/\w+>)((<br \/>)+)/g, '$2$3$1');
+            // Preserve line breaks by converting them to hard breaks before other transformations
+            const transformedHtml = html
+              // Convert standalone br tags to hard breaks
+              .replace(/<br\s*\/?>/gi, '<br />')
+              // Preserve line breaks at end of paragraphs and divs
+              .replace(/(<\/(?:p|div)>)\s*\n/gi, '$1<br />')
+              // Convert newlines followed by text to br tags
+              .replace(/\n(?=\S)/g, '<br />');
+
+            // Then apply the original transformation
+            return transformedHtml.replace(/(<\/\w+>)((<br \/>)+)/g, '$2$3$1');
           },
         },
       });
