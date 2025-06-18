@@ -57,6 +57,7 @@
         :allow-italic="richText"
         :allow-strike="richText"
         :allow-underline="richText"
+        :paste-rich-text="richText"
         :editable="editable"
         :input-aria-label="inputAriaLabel"
         :input-class="inputClass"
