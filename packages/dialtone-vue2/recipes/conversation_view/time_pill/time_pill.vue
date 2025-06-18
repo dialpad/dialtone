@@ -9,8 +9,6 @@
 </template>
 
 <script>
-import {} from './time_pill_constants';
-
 export default {
   name: 'DtRecipeTimePill',
 

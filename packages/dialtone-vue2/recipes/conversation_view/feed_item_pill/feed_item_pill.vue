@@ -5,8 +5,9 @@
         <template #anchor>
           <button
             data-qa="dt-recipe-feed-item-pill"
-            :aria-label="ariaLabel"
             :class="['d-recipe-feed-item-pill__button', toggleableClass, buttonClass]"
+            :aria-label="anchorTitle"
+            :title="anchorTitle"
             @focusin="hover = true"
             @focusout="hover = false"
             @mouseenter="hover = true"
@@ -83,11 +84,14 @@ import { FEED_ITEM_PILL_BORDER_COLORS } from './feed_item_pill_constants';
 import { DtItemLayout } from '@/components/item_layout';
 import { DtCollapsible } from '@/components/collapsible';
 import { DtIconChevronDown, DtIconChevronRight } from '@dialpad/dialtone-icons/vue2';
+import { DtLocalizationMixin } from '@/common/mixins';
 
 export default {
   name: 'DtRecipeFeedItemPill',
 
   components: { DtItemLayout, DtCollapsible },
+
+  mixins: [DtLocalizationMixin],
 
   props: {
     /**
@@ -112,14 +116,6 @@ export default {
     buttonClass: {
       type: [String, Array, Object],
       default: '',
-    },
-
-    /**
-     * Aria label for feed pill
-     */
-    ariaLabel: {
-      type: String,
-      required: true,
     },
 
     /**
@@ -168,6 +164,10 @@ export default {
 
     borderClass () {
       return FEED_ITEM_PILL_BORDER_COLORS[this.borderColor];
+    },
+
+    anchorTitle () {
+      return this.i18n.$t('DIALTONE_FEED_ITEM_PILL_ARIA_LABEL');
     },
   },
 

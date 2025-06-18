@@ -4,7 +4,6 @@
     :node-type="$attrs.nodeType"
     :is-selected="$attrs.isSelected"
     :dtmf-key="$attrs.dtmfKey"
-    :menu-button-aria-label="$attrs.menuButtonAriaLabel"
     @click="$attrs.onClick($event)"
   >
     <template

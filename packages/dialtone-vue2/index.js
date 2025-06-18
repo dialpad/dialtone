@@ -99,4 +99,4 @@ export * from './recipes/leftbar/group_row';
 export * from './recipes/leftbar/unread_pill';
 export * from './recipes/notices/top_banner_info';
 
-// export { DialtoneLocalizationPlugin } from './localization';
+export { DialtoneLocalization } from './localization';

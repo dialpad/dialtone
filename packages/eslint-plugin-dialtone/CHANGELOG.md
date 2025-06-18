@@ -1,3 +1,10 @@
+# [1.10.0](https://github.com/dialpad/dialtone/compare/eslint-plugin-dialtone/v1.9.0...eslint-plugin-dialtone/v1.10.0) (2025-06-17)
+
+
+### Features
+
+* **Localization:** NO-JIRA merge i18n base branch ([#785](https://github.com/dialpad/dialtone/issues/785)) ([8750dd7](https://github.com/dialpad/dialtone/commit/8750dd76ac78376e76c2eaeb4036406926fd910b))
+
 # [1.9.0](https://github.com/dialpad/dialtone/compare/eslint-plugin-dialtone/v1.8.2...eslint-plugin-dialtone/v1.9.0) (2025-04-25)
 
 

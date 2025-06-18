@@ -1,6 +1,7 @@
 import { mount, createLocalVue } from '@vue/test-utils';
 import DtRichTextEditor from './rich_text_editor.vue';
 import { Editor, EditorContent, BubbleMenu } from '@tiptap/vue-2';
+import { simulatePaste } from '../../tests/setupTests';
 
 const MOCK_INPUT_STUB = vi.fn();
 
@@ -123,6 +124,124 @@ describe('DtRichTextEditor tests', () => {
             expect(wrapper.emitted().input[0][0]).toBe('<p>new value</p>');
             expect(MOCK_INPUT_STUB).toHaveBeenCalled();
           });
+        });
+      });
+    });
+    describe('Copy paste tests', () => {
+      describe('When pasting plain text', () => {
+        it('should handle plain text paste correctly', async () => {
+          const pastedText = 'This is pasted plain text';
+
+          simulatePaste(pastedText, 'text/plain', editorEl);
+          await wrapper.vm.$nextTick();
+
+          expect(wrapper.vm.getOutput()).toContain(pastedText);
+        });
+      });
+
+      describe('When pasting HTML content', () => {
+        it('if pasteRichText is true, it should parse html content', async () => {
+          await wrapper.setProps({
+            pasteRichText: true,
+            allowBold: true,
+            outputFormat: 'html',
+            value: '',
+          });
+          editorEl = document.getElementsByClassName('qa-editor')[0];
+
+          const htmlContent = '<strong>bold pasted text</strong>';
+          const textContent = 'bold pasted text';
+          const clipboardData = new DataTransfer();
+          clipboardData.setData('text/html', htmlContent);
+          clipboardData.setData('text/plain', textContent);
+
+          const pasteEvent = new ClipboardEvent('paste', {
+            clipboardData,
+            bubbles: true,
+            cancelable: true,
+          });
+
+          editorEl.dispatchEvent(pasteEvent);
+          await wrapper.vm.$nextTick();
+
+          let output = wrapper.vm.getOutput();
+          // Verify html output
+          expect(output).toBe(`<p>${htmlContent}</p>`);
+          await wrapper.setProps({
+            outputFormat: 'text',
+          });
+          output = wrapper.vm.getOutput();
+          // Verify text output
+          expect(output).toBe(textContent);
+        });
+
+        it('if pasteRichText is false, html tags should be output as literal characters', async () => {
+          await wrapper.setProps({
+            pasteRichText: false,
+            allowBold: true,
+            outputFormat: 'html',
+            value: '',
+          });
+          editorEl = document.getElementsByClassName('qa-editor')[0];
+
+          const htmlContent = '<strong>bold pasted text</strong>';
+          const clipboardData = new DataTransfer();
+          clipboardData.setData('text/html', htmlContent);
+          clipboardData.setData('text/plain', '<strong>bold pasted text</strong>');
+
+          const pasteEvent = new ClipboardEvent('paste', {
+            clipboardData,
+            bubbles: true,
+            cancelable: true,
+          });
+
+          editorEl.dispatchEvent(pasteEvent);
+          await wrapper.vm.$nextTick();
+
+          let output = wrapper.vm.getOutput();
+          expect(output).toBe('<p>&lt;strong&gt;bold pasted text&lt;/strong&gt;</p>');
+          await wrapper.setProps({
+            outputFormat: 'text',
+          });
+          output = wrapper.vm.getOutput();
+          expect(output).toBe('<strong>bold pasted text</strong>');
+        });
+      });
+
+      describe('When pasting content with line breaks and white space', () => {
+        it('should retain the line breaks and white space', async () => {
+          await wrapper.setProps({
+            allowLineBreaks: true,
+            outputFormat: 'text',
+            value: '',
+          });
+          editorEl = document.getElementsByClassName('qa-editor')[0];
+
+          const textWithLineBreaks = 'Line 1\n  Line 2\n    Line 3';
+          simulatePaste(textWithLineBreaks, 'text/plain', editorEl);
+          await wrapper.vm.$nextTick();
+
+          const output = wrapper.vm.getOutput();
+          // Check that the line break content was pasted and contains the lines
+          expect(output).toBe(textWithLineBreaks);
+        });
+      });
+      describe('When pasting content with line breaks in html mode', () => {
+        it('line breaks should be converted to <p>', async () => {
+          await wrapper.setProps({
+            allowLineBreaks: true,
+            outputFormat: 'html',
+            value: '',
+          });
+          editorEl = document.getElementsByClassName('qa-editor')[0];
+
+          const textWithLineBreaks = 'Line 1\n  Line 2\n    Line 3';
+          simulatePaste(textWithLineBreaks, 'text/plain', editorEl);
+          await wrapper.vm.$nextTick();
+
+          const output = wrapper.vm.getOutput();
+          // Check that the line break content was pasted and converted to HTML paragraphs
+          expect(output).toBe('<p>Line 1</p><p>  Line 2</p><p>    Line 3</p>');
         });
       });
     });

@@ -55,8 +55,6 @@
         :auto-focus="false"
         :append-to="appendTo"
         :transition="transition"
-        :visually-hidden-close-label="visuallyHiddenCloseLabel"
-        :visually-hidden-close="visuallyHiddenClose"
         @opened="opened($event, arguments[1]);"
       >
         <template
@@ -117,11 +115,10 @@
 <script>
 import ComboboxLoadingList from '@/components/combobox/combobox_loading-list.vue';
 import ComboboxEmptyList from '@/components/combobox/combobox_empty-list.vue';
-import { DtCombobox, LABEL_SIZES } from '@/components/combobox';
+import { DtCombobox, COMBOBOX_LABEL_SIZES } from '@/components/combobox';
 import { DtPopover, POPOVER_APPEND_TO_VALUES, POPOVER_CONTENT_WIDTHS } from '@/components/popover';
 import { getUniqueString } from '@/common/utils';
 import { DROPDOWN_PADDING_CLASSES } from '@/components/dropdown';
-import SrOnlyCloseButtonMixin from '@/common/mixins/sr_only_close_button';
 
 export default {
   name: 'DtRecipeComboboxWithPopover',
@@ -132,8 +129,6 @@ export default {
     ComboboxLoadingList,
     ComboboxEmptyList,
   },
-
-  mixins: [SrOnlyCloseButtonMixin],
 
   props: {
     /**
@@ -160,7 +155,7 @@ export default {
     size: {
       type: String,
       default: null,
-      validator: (t) => Object.values(LABEL_SIZES).includes(t),
+      validator: (t) => Object.values(COMBOBOX_LABEL_SIZES).includes(t),
     },
 
     /**

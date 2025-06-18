@@ -136,6 +136,15 @@ export default {
     },
 
     /**
+     * When this option is false the editor will only ever paste plain text, no rich text formatting will be applied,
+     * and any HTML will be rendered as text.
+     */
+    pasteRichText: {
+      type: Boolean,
+      default: true,
+    },
+
+    /**
      * Whether the input allows for line breaks to be introduced in the text by pressing enter. If this is disabled,
      * line breaks can still be entered by pressing shift+enter.
      */
@@ -704,49 +713,48 @@ export default {
         content: this.modelValue,
         editable: this.editable,
         extensions: this.extensions,
+        parseOptions: {
+          preserveWhitespace: 'full',
+        },
+
         editorProps: {
           attributes: {
             ...this.inputAttrs,
             class: this.inputClass,
           },
 
-          handlePaste: (_, event) => {
-            // When having link and customLink props we should maintain default paste behavior
-            if (!this.link && !this.customLink) {
-              const regex = /^https?:\/\//;
+          handlePaste: (view, event, slice) => {
+            if (!this.pasteRichText) {
+              const clipboardData = event.clipboardData || window.clipboardData;
+              const textData = clipboardData.getData('text/plain');
 
-              if (!event?.clipboardData) {
-                return false;
+              if (textData) {
+                // Insert as plain text only (preserving any HTML tags as text)
+                const { tr } = view.state;
+                const { from, to } = view.state.selection;
+                tr.insertText(textData, from, to);
+                view.dispatch(tr);
+                return true; // Prevent default paste behavior
               }
-              const pastedContent = event.clipboardData.getData('text');
-
-              // Check if the pasted content is a valid URL (starting with http:// or https://)
-              // If it's not a URL, allow the default paste behavior
-              if (!regex.test(pastedContent)) {
-                return false;
-              }
-
-              // If `text/html` is missing from clipboard data, it's a plain link
-              // In this case, allow the default paste behavior
-              if (!event.clipboardData.getData('text/html')) {
-                return false;
-              }
-
-              const htmlContent = pastedContent
-                .replace(/\n/g, '<br>') // Convert newlines to <br>
-                .replace(/ {2}/g, '&nbsp;&nbsp;'); // Convert multiple spaces
-
-              this.editor.chain().focus().insertContent(htmlContent).run();
-              return true; // Prevent the default paste behavior
             }
 
-            return false; // Allow the default paste behavior
+            return false; // default paste behavior
           },
 
           // Moves the <br /> tags inside the previous closing tag to avoid
           // Prosemirror wrapping them within another </p> tag.
           transformPastedHTML (html) {
-            return html.replace(/(<\/\w+>)((<br \/>)+)/g, '$2$3$1');
+            // Preserve line breaks by converting them to hard breaks before other transformations
+            const transformedHtml = html
+              // Convert standalone br tags to hard breaks
+              .replace(/<br\s*\/?>/gi, '<br />')
+              // Preserve line breaks at end of paragraphs and divs
+              .replace(/(<\/(?:p|div)>)\s*\n/gi, '$1<br />')
+              // Convert newlines followed by text to br tags
+              .replace(/\n(?=\S)/g, '<br />');
+
+            // Then apply the original transformation
+            return transformedHtml.replace(/(<\/\w+>)((<br \/>)+)/g, '$2$3$1');
           },
         },
       });
@@ -884,7 +892,7 @@ export default {
         // When preventTyping is true and user wants to type, we revert to last value
         // If Backspace (keyCode = 8) is pressed, we allow updating the text
         if (this.preventTyping && this.editor.view?.input?.lastKeyCode !== 8) {
-          this.editor.commands.setContent(this.value, false);
+          this.editor.commands.setContent(this.modelValue, false);
           return;
         }
         this.triggerInputChangeEvents();

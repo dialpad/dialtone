@@ -59,6 +59,7 @@
         :mention-suggestion="mentionSuggestion"
         :channel-suggestion="channelSuggestion"
         :slash-command-suggestion="slashCommandSuggestion"
+        :paste-rich-text="richText"
         :allow-blockquote="richText"
         :allow-bold="richText"
         :allow-bullet-list="richText"
@@ -92,13 +93,13 @@
         >
           <dt-button
             v-if="showImagePicker"
-            v-dt-tooltip:top-start="showImagePicker?.tooltipLabel"
+            v-dt-tooltip:top-start="imagePickerButtonLabel"
             data-qa="dt-recipe-message-input-image-btn"
             size="sm"
             class="d-recipe-message-input__button"
             kind="muted"
             importance="clear"
-            :aria-label="showImagePicker.ariaLabel"
+            :aria-label="imagePickerButtonLabel"
             @click="onSelectImage"
             @mouseenter="imagePickerFocus = true"
             @mouseleave="imagePickerFocus = false"
@@ -128,14 +129,14 @@
           >
             <template #anchor="{ attrs }">
               <dt-button
-                v-dt-tooltip="emojiTooltipMessage"
+                v-dt-tooltip="emojiPickerButtonLabel"
                 v-bind="attrs"
                 data-qa="dt-recipe-message-input-emoji-picker-btn"
                 size="sm"
                 class="d-recipe-message-input__button"
                 kind="muted"
                 importance="clear"
-                :aria-label="emojiButtonAriaLabel"
+                :aria-label="emojiPickerButtonLabel"
                 @click="toggleEmojiPicker"
                 @mouseenter="emojiPickerFocus = true"
                 @mouseleave="emojiPickerFocus = false"
@@ -203,15 +204,16 @@
           <!-- Cancel button for edit mode -->
           <dt-button
             v-if="showCancel"
+            v-dt-tooltip="cancelButtonLabel"
             data-qa="dt-recipe-message-input-cancel-button"
             class="d-recipe-message-input__button d-recipe-message-input__cancel-button"
             size="sm"
             kind="muted"
             importance="clear"
-            :aria-label="showCancel.ariaLabel"
+            :aria-label="cancelButtonLabel"
             @click="onCancel"
           >
-            <p>{{ showCancel.text }}</p>
+            <p>{{ cancelButtonLabel }}</p>
           </dt-button>
 
           <!-- @slot Slot for sendButton picker -->
@@ -220,7 +222,7 @@
             <!-- Right positioned UI - send button -->
             <dt-button
               v-if="showSend"
-              v-dt-tooltip:top-end="showSend?.tooltipLabel"
+              v-dt-tooltip:top-end="sendButtonLabel"
               data-qa="dt-recipe-message-input-send-btn"
               size="sm"
               kind="default"
@@ -232,7 +234,7 @@
                   'd-btn--icon-only': showSendIcon,
                 },
               ]"
-              :aria-label="showSend.ariaLabel"
+              :aria-label="sendButtonLabel"
               :aria-disabled="isSendDisabled"
               @click="onSend"
             >
@@ -283,6 +285,7 @@ import {
 } from '@dialpad/dialtone-icons/vue2';
 import DtRecipeMessageInputTopbar from './message_input_topbar.vue';
 import DtRecipeMessageInputLink from './message_input_link.vue';
+import { DtLocalizationMixin } from '@/common/mixins';
 
 import {
   EDITOR_SUPPORTED_LINK_PROTOCOLS,
@@ -308,7 +311,7 @@ export default {
     DtIconSend,
   },
 
-  mixins: [],
+  mixins: [DtLocalizationMixin],
 
   inheritAttrs: false,
 
@@ -443,32 +446,6 @@ export default {
     emojiPickerProps: {
       type: Object,
       default: () => ({}),
-      validate (emojiPickerProps) {
-        return [
-          'searchNoResultsLabel',
-          'searchResultsLabel',
-          'searchPlaceholderLabel',
-          'skinSelectorButtonTooltipLabel',
-          'tabSetLabels',
-        ].every(prop => emojiPickerProps[prop] != null);
-      },
-    },
-
-    /**
-     * Emoji button tooltip label
-     */
-    emojiTooltipMessage: {
-      type: String,
-      default: 'Emoji',
-    },
-
-    // Aria label for buttons
-    /**
-     * Emoji button aria label
-     */
-    emojiButtonAriaLabel: {
-      type: String,
-      default: 'emoji button',
     },
 
     /**
@@ -481,11 +458,13 @@ export default {
 
     showImagePicker: {
       type: [Boolean, Object],
-      default: () => ({ tooltipLabel: 'Attach Image', ariaLabel: 'image button' }),
+      default: () => ({}),
     },
 
     /**
      * Send button defaults.
+     * TODO (Dialtone 10):
+     * - Change to `showSendButton`, boolean only.
      */
     showSend: {
       type: [Boolean, Object],
@@ -493,11 +472,17 @@ export default {
     },
 
     /**
+     * TODO (Dialtone 10):
+     * - Add a prop `iconOnly` default: true to control if localized send button text should be shown
+     */
+
+    /**
      * Cancel button defaults.
+     * TODO (Dialtone 10): Change to `showCancelButton`, boolean only.
      */
     showCancel: {
       type: [Boolean, Object],
-      default: () => ({ text: 'Cancel' }),
+      default: () => ({}),
     },
 
     /**
@@ -554,13 +539,11 @@ export default {
      * descriptive text fields for the bold button
      *
      * object format:
-     * { ariaLabel: string, tooltipText: string, keyboardShortcutText: string }
+     * { keyboardShortcutText: string }
      */
     boldButtonOptions: {
       type: Object,
       default: () => ({
-        ariaLabel: 'Toggle bold on selected text',
-        tooltipText: 'Bold',
         keyboardShortcutText: 'Mod + B',
       }),
     },
@@ -569,13 +552,11 @@ export default {
      * descriptive text fields for the italic button
      *
      * object format:
-     * { ariaLabel: string, tooltipText: string, keyboardShortcutText: string }
+     * { keyboardShortcutText: string }
      */
     italicButtonOptions: {
       type: Object,
       default: () => ({
-        ariaLabel: 'Toggle italic on selected text',
-        tooltipText: 'Italic',
         keyboardShortcutText: 'Mod + I',
       }),
     },
@@ -584,13 +565,11 @@ export default {
      * descriptive text fields for the strikethrough button
      *
      * object format:
-     * { ariaLabel: string, tooltipText: string, keyboardShortcutText: string }
+     * { keyboardShortcutText: string }
      */
     strikeButtonOptions: {
       type: Object,
       default: () => ({
-        ariaLabel: 'Toggle strikethrough on selected text',
-        tooltipText: 'Strikethrough',
         keyboardShortcutText: 'Mod + Shift + S',
       }),
     },
@@ -599,23 +578,14 @@ export default {
      * descriptive text fields for the link button
      *
      * object format:
-     * { ariaLabel: string, tooltipText: string, keyboardShortcutText: string }
+     * { keyboardShortcutText: string }
      */
     linkButtonOptions: {
       type: Object,
       default: () => ({
-        ariaLabel: 'Create or edit link on selected text',
-        tooltipText: 'Link',
         // TODO: implement mod k
         keyboardShortcutText: 'Mod + K',
-        dialogTitle: 'Add a link',
-        textLabel: 'Text to display (optional)',
-        linkLabel: 'Link',
         linkPlaceholder: 'e.g. https://www.dialpad.com',
-        removeLabel: 'Remove',
-        cancelLabel: 'Cancel',
-        confirmLabel: 'Done',
-        visuallyHiddenCloseText: 'Close link dialog',
       }),
     },
 
@@ -623,13 +593,11 @@ export default {
      * descriptive text fields for the bullet list button
      *
      * object format:
-     * { ariaLabel: string, tooltipText: string, keyboardShortcutText: string }
+     * { keyboardShortcutText: string }
      */
     bulletListButtonOptions: {
       type: Object,
       default: () => ({
-        ariaLabel: 'Toggle bullet list on selected text',
-        tooltipText: 'Bullet list',
         keyboardShortcutText: 'Mod + Shift + 8',
       }),
     },
@@ -638,13 +606,11 @@ export default {
      * descriptive text fields for the ordered list button
      *
      * object format:
-     * { ariaLabel: string, tooltipText: string, keyboardShortcutText: string }
+     * { keyboardShortcutText: string }
      */
     orderedListButtonOptions: {
       type: Object,
       default: () => ({
-        ariaLabel: 'Toggle ordered list on selected text',
-        tooltipText: 'Ordered list',
         keyboardShortcutText: 'Mod + Shift + 7',
       }),
     },
@@ -653,13 +619,11 @@ export default {
      * descriptive text fields for the italic button
      *
      * object format:
-     * { ariaLabel: string, tooltipText: string, keyboardShortcutText: string }
+     * { keyboardShortcutText: string }
      */
     blockQuoteButtonOptions: {
       type: Object,
       default: () => ({
-        ariaLabel: 'Toggle Blockquote on selected text',
-        tooltipText: 'Blockquote',
         keyboardShortcutText: 'Mod + Shift + B',
       }),
     },
@@ -668,13 +632,11 @@ export default {
      * descriptive text fields for the code button
      *
      * object format:
-     * { ariaLabel: string, tooltipText: string, keyboardShortcutText: string }
+     * { keyboardShortcutText: string }
      */
     codeButtonOptions: {
       type: Object,
       default: () => ({
-        ariaLabel: 'Toggle code tag on selected text',
-        tooltipText: 'Code',
         keyboardShortcutText: 'Mod + E',
       }),
     },
@@ -683,13 +645,11 @@ export default {
      * descriptive text fields for the code block button
      *
      * object format:
-     * { ariaLabel: string, tooltipText: string, keyboardShortcutText: string }
+     * { keyboardShortcutText: string }
      */
     codeBlockButtonOptions: {
       type: Object,
       default: () => ({
-        ariaLabel: 'Toggle code block on selected text',
-        tooltipText: 'Code block',
         keyboardShortcutText: 'Mod + Alt + C',
       }),
     },
@@ -836,18 +796,28 @@ export default {
       (this.showCharacterLimit && this.inputLength > this.showCharacterLimit.count);
     },
 
-    computedCloseButtonProps () {
-      return {
-        ariaLabel: 'Close',
-      };
-    },
-
     emojiPickerHovered () {
       return this.emojiPickerFocus || this.emojiPickerOpened;
     },
 
     sendIconSize () {
       return '300';
+    },
+
+    sendButtonLabel () {
+      return this.i18n.$t('DIALTONE_MESSAGE_INPUT_SEND_BUTTON_ARIA_LABEL');
+    },
+
+    imagePickerButtonLabel () {
+      return this.i18n.$t('DIALTONE_MESSAGE_INPUT_IMAGE_PICKER_BUTTON_ARIA_LABEL');
+    },
+
+    emojiPickerButtonLabel () {
+      return this.i18n.$t('DIALTONE_MESSAGE_INPUT_EMOJI_PICKER_BUTTON_ARIA_LABEL');
+    },
+
+    cancelButtonLabel () {
+      return this.i18n.$t('DIALTONE_MESSAGE_INPUT_CANCEL_BUTTON_ARIA_LABEL');
     },
   },
 

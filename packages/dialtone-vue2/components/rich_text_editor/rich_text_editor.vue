@@ -22,21 +22,21 @@
             importance="clear"
             @click="editLink"
           >
-            Edit
+            {{ i18n.$t('DIALTONE_RICH_TEXT_EDITOR_EDIT_BUTTON_LABEL') }}
           </dt-button>
           <dt-button
             kind="muted"
             importance="clear"
             @click="openLink"
           >
-            Open link
+            {{ i18n.$t('DIALTONE_RICH_TEXT_EDITOR_OPEN_LINK_BUTTON_LABEL') }}
           </dt-button>
           <dt-button
             kind="danger"
             importance="clear"
             @click="removeLink"
           >
-            Remove
+            {{ i18n.$t('DIALTONE_RICH_TEXT_EDITOR_REMOVE_BUTTON_LABEL') }}
           </dt-button>
         </dt-stack>
       </div>
@@ -97,6 +97,7 @@ import channelSuggestion from './extensions/channels/suggestion';
 import slashCommandSuggestion from './extensions/slash_command/suggestion';
 import { warnIfUnmounted } from '@/common/utils';
 import deepEqual from 'deep-equal';
+import { DtLocalizationMixin } from '@/common/mixins';
 
 export default {
   name: 'DtRichTextEditor',
@@ -107,6 +108,8 @@ export default {
     DtButton,
     DtStack,
   },
+
+  mixins: [DtLocalizationMixin],
 
   props: {
     /**
@@ -132,6 +135,15 @@ export default {
     preventTyping: {
       type: Boolean,
       default: false,
+    },
+
+    /**
+     * When this option is false the editor will only ever paste plain text, no rich text formatting will be applied,
+     * and any HTML will be rendered as text.
+     */
+    pasteRichText: {
+      type: Boolean,
+      default: true,
     },
 
     /**
@@ -702,48 +714,48 @@ export default {
         content: this.value,
         editable: this.editable,
         extensions: this.extensions,
+        parseOptions: {
+          preserveWhitespace: 'full',
+        },
+
         editorProps: {
           attributes: {
             ...this.inputAttrs,
             class: this.inputClass,
           },
 
-          handlePaste: (_, event) => {
-            // When having link and customLink props we should maintain default paste behavior
-            if (!this.link && !this.customLink) {
-              const regex = /^https?:\/\//;
+          handlePaste: (view, event, slice) => {
+            if (!this.pasteRichText) {
+              const clipboardData = event.clipboardData || window.clipboardData;
+              const textData = clipboardData.getData('text/plain');
 
-              if (!event?.clipboardData) {
-                return false;
+              if (textData) {
+                // Insert as plain text only (preserving any HTML tags as text)
+                const { tr } = view.state;
+                const { from, to } = view.state.selection;
+                tr.insertText(textData, from, to);
+                view.dispatch(tr);
+                return true; // Prevent default paste behavior
               }
-              const pastedContent = event.clipboardData.getData('text');
-
-              // Check if the pasted content is a valid URL (starting with http:// or https://)
-              // If it's not a URL, allow the default paste behavior
-              if (!regex.test(pastedContent)) {
-                return false;
-              }
-
-              // If `text/html` is missing from clipboard data, it's a plain link
-              // In this case, allow the default paste behavior
-              if (!event.clipboardData.getData('text/html')) {
-                return false;
-              }
-              const htmlContent = pastedContent
-                .replace(/\n/g, '<br>') // Convert newlines to <br>
-                .replace(/ {2}/g, '&nbsp;&nbsp;'); // Convert multiple spaces
-
-              this.editor.chain().focus().insertContent(htmlContent).run();
-              return true; // Prevent the default paste behavior
             }
 
-            return false; // Allow the default paste behavior
+            return false; // default paste behavior
           },
 
           // Moves the <br /> tags inside the previous closing tag to avoid
           // Prosemirror wrapping them within another </p> tag.
           transformPastedHTML (html) {
-            return html.replace(/(<\/\w+>)((<br \/>)+)/g, '$2$3$1');
+            // Preserve line breaks by converting them to hard breaks before other transformations
+            const transformedHtml = html
+              // Convert standalone br tags to hard breaks
+              .replace(/<br\s*\/?>/gi, '<br />')
+              // Preserve line breaks at end of paragraphs and divs
+              .replace(/(<\/(?:p|div)>)\s*\n/gi, '$1<br />')
+              // Convert newlines followed by text to br tags
+              .replace(/\n(?=\S)/g, '<br />');
+
+            // Then apply the original transformation
+            return transformedHtml.replace(/(<\/\w+>)((<br \/>)+)/g, '$2$3$1');
           },
         },
       });

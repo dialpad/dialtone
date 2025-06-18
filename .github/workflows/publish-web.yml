@@ -114,28 +114,18 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Use pnpm
-        uses: pnpm/action-setup@v3
-
-      - name: Use Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version-file: ".nvmrc"
-          cache: "pnpm"
-          registry-url: "https://npm.pkg.github.com"
-          scope: "dialpad"
-        env:
-          NODE_AUTH_TOKEN: ${{ github.token }}
-
-      - name: Install dependencies
-        shell: bash
-        run: pnpm install --frozen-lockfile
+      - name: Setup Environment
+        uses: ./.github/actions/setup-environment
 
       - name: Remove GitHub registry if publishing to npm
         if: matrix.registry == 'npm'
         run: |
           pnpm config delete @dialpad:registry;
           pnpm config set //registry.npmjs.org/:_authToken=${{ secrets.DIALTONE_NPM_TOKEN }}
+
+      - name: Delay job to avoid npm rate limits
+        if: matrix.package == 'dialtone-vue3'
+        run: wait 15
 
       # Publish npm/GitHub
       - name: Publish ${{ matrix.package }}@${{ env.RELEASE_TAG }}

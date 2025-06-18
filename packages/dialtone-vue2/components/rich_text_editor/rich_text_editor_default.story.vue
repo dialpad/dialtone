@@ -12,6 +12,7 @@
     :mention-suggestion="$attrs.mentionSuggestion"
     :channel-suggestion="$attrs.channelSuggestion"
     :slash-command-suggestion="$attrs.slashCommandSuggestion"
+    :paste-rich-text="$attrs.pasteRichText"
     :allow-blockquote="$attrs.allowBlockquote"
     :allow-bold="$attrs.allowBold"
     :allow-bullet-list="$attrs.allowBulletList"
