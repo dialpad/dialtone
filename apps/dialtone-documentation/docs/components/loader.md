@@ -1,7 +1,7 @@
 ---
 title: Loader
 description: A loader is a visual indicator that a task is in progress.
-status: ready
+status: beta
 thumb: false
 storybook: https://dialtone.dialpad.com/vue/?path=/story/components-loader--default
 ---
