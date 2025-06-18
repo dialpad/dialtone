@@ -1,10 +1,9 @@
 <template>
   <div
     class="d-loader"
-    :aria-label="ariaLabel || 'loading'"
+    :aria-label="loaderText"
     data-qa="dt-loader"
   >
-    <!-- Localize the aria-label -->
     <dt-icon-loading
       class="d-loader-icon"
       data-qa="dt-loader-icon"
@@ -16,6 +15,7 @@
 <script>
 import { DtIconLoading } from '@dialpad/dialtone-icons/vue2';
 import { ICON_SIZE_MODIFIERS } from '@/components/icon';
+import { DtLocalizationMixin } from '@/common/mixins';
 
 export default {
   name: 'DtLoader',
@@ -23,6 +23,8 @@ export default {
   components: {
     DtIconLoading,
   },
+
+  mixins: [DtLocalizationMixin],
 
   props: {
     /**
@@ -42,6 +44,12 @@ export default {
       type: String,
       default: '500',
       validator: (s) => Object.keys(ICON_SIZE_MODIFIERS).includes(s),
+    },
+  },
+
+  computed: {
+    loaderText () {
+      return this.ariaLabel || this.i18n.$t('DIALTONE_LOADING');
     },
   },
 };
