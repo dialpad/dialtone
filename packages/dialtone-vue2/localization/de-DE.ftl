@@ -1,7 +1,7 @@
 # Dialtone
 DIALTONE_CLOSE_BUTTON = Zum Schließen klicken
 DIALTONE_BREADCRUMBS_ARIA_LABEL = Brotkrumen
-DIALTONE_BUTTON_LOADING = Lädt ...
+DIALTONE_LOADING = Lädt ...
 DIALTONE_UNREAD_MESSAGE_COUNT_TEXT =
     { $unreadCount ->
         [0] Keine ungelesenen Nachrichten

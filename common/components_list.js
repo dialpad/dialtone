@@ -30,6 +30,7 @@ module.exports = [
   'link.vue',
   'list_item.vue',
   'list_item_group.vue',
+  'loader.vue',
   'modal.vue',
   'notice.vue',
   'pagination.vue',

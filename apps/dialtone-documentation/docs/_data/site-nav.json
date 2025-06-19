@@ -655,6 +655,10 @@
           "link": "/components/list-item-group.html"
         },
         {
+          "text": "Loader",
+          "link": "/components/loader.html"
+        },
+        {
           "text": "Modal",
           "link": "/components/modal.html"
         },

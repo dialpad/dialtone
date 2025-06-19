@@ -27,6 +27,7 @@ module.exports = {
       'Components/Input Group: Default',
       'Components/Keyboard Shortcut: Default',
       'Components/Link: Default',
+      'Components/Loader: Default',
       'Components/Pagination: Default',
       'Components/Popover: Default',
       'Components/Popover: Iframe Test',
