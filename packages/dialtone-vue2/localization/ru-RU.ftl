@@ -1,7 +1,6 @@
 # Dialtone
 DIALTONE_CLOSE_BUTTON = Нажмите, чтобы закрыть
 DIALTONE_BREADCRUMBS_ARIA_LABEL = Навигационная цепочка
-DIALTONE_LOADING = Идет загрузка
 DIALTONE_UNREAD_MESSAGE_COUNT_TEXT =
     { $unreadCount ->
         [0] Нет непрочитанных сообщений

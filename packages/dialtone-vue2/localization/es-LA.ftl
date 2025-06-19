@@ -1,7 +1,6 @@
 # Dialtone
 DIALTONE_CLOSE_BUTTON = Haga clic para cerrar
 DIALTONE_BREADCRUMBS_ARIA_LABEL = Breadcrumbs
-DIALTONE_LOADING = Cargando
 DIALTONE_UNREAD_MESSAGE_COUNT_TEXT =
     { $unreadCount ->
         [0] No hay mensajes sin leer
