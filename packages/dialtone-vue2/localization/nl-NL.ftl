@@ -1,6 +1,7 @@
 # Dialtone
 DIALTONE_CLOSE_BUTTON = Klik om te sluiten
 DIALTONE_BREADCRUMBS_ARIA_LABEL = Breadcrumbs
+DIALTONE_LOADING = Laden
 DIALTONE_UNREAD_MESSAGE_COUNT_TEXT =
     { $unreadCount ->
         [0] Geen ongelezen berichten
