@@ -135,11 +135,13 @@ export default {
     },
 
     /**
-     * Class to apply to the wrapper element,
-     * note: it only applies to "default" type
+     * Additional Classes to apply to the wrapper element,
+     * note: it only applies on "default" type
+     * Can accept all of: String, Object, and Array, i.e. has the
+     * same api as Vue's built-in handling of the class attribute.
      */
     wrapperClass: {
-      type: String,
+      type: [String, Object, Array],
       default: '',
     },
   },
