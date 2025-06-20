@@ -6,128 +6,126 @@ description: Drafting design....
 <div class="rgeerqweerqwe">
   <h1 class="d-headline--xxl d-mb8">Filter Pill</h1>
   <dt-stack gap="600">
-    <div class="d-p16 d-bgc-secondary d-bar8">
-      <dt-stack direction="row" gap="500">
-        <div>
-          <div class="d-label--sm d-mb8">No selection</div>
-          <span class="d-filter-pill">
-            <dt-popover :open="onOpen" placement="bottom-start" fallbackPlacements="top-start" :modal="false">
-              <template #anchor>
-                <dt-button size="sm" class="d-filter-pill__primary" kind="muted" importance="outlined" icon-position="right">
-                  <span class="d-filter-pill__label">
-                    <span class="d-filter-pill__label-alpha">Channel</span>
-                  </span>
-                  <template #icon>
-                    <dt-icon name="chevron-down" size="200" />
-                  </template>
-                </dt-button>
-              </template>
-              <template #content>
-                <div class="d-ta-center d-px32 d-py64 d-fc-tertiary d-body--sm">
-                  Popover or maybe Dropdown asdf
-                </div>
-              </template>
-            </dt-popover>
-          </span>
+    <dt-stack direction="row" gap="500">
+      <div>
+        <div class="d-label--sm d-mb4">No selection</div>
+        <span class="d-filter-pill">
+          <dt-popover :open="onOpen" placement="bottom-start" fallbackPlacements="top-start" :modal="false">
+            <template #anchor>
+              <dt-button size="sm" class="d-filter-pill__primary" kind="muted" importance="outlined" icon-position="right">
+                <span class="d-filter-pill__label">
+                  <span class="d-filter-pill__label-alpha">Channel</span>
+                </span>
+                <template #icon>
+                  <dt-icon name="chevron-down" size="200" />
+                </template>
+              </dt-button>
+            </template>
+            <template #content>
+              <div class="d-ta-center d-px32 d-py64 d-fc-tertiary d-body--sm">
+                Popover or maybe Dropdown asdf
+              </div>
+            </template>
+          </dt-popover>
+        </span>
+      </div>
+      <div>
+        <div class="d-label--sm d-mb4">Selected, show label/count, has clear</div>
+        <div class="d-filter-pill">
+          <dt-popover :open="onOpen" placement="bottom-start" fallbackPlacements="top-start" :modal="false">
+            <template #anchor>
+              <dt-button size="sm" class="d-filter-pill__primary d-filter-pill__primary--selected d-filter-pill__primary--has-clear" active importance="outlined" icon-position="right">
+                <span class="d-filter-pill__label">
+                  <span class="d-filter-pill__label-alpha">Contact Centers</span>
+                  <span class="d-filter-pill__label-omega">19</span>
+                </span>
+                <template #icon>
+                  <dt-icon name="chevron-down" size="200" />
+                </template>
+              </dt-button>
+            </template>
+            <template #content>
+              <div class="d-ta-center d-px32 d-py64 d-fc-tertiary d-body--sm">
+                Popover or maybe Dropdown
+              </div>
+            </template>
+          </dt-popover>
+          <dt-button onclick="alert('• Remove clear button\n• Remove `--selected` and `--has-clear`\n• Revert text label')" size="sm" class="d-filter-pill__clear d-filter-pill__clear--selected" active importance="outlined" v-dt-tooltip="`Remove`">
+            <template #icon>
+              <dt-icon name="close" size="200" />
+            </template>
+          </dt-button>
         </div>
-        <div>
-          <div class="d-label--sm d-mb8">Selected, show label/count, has clear</div>
-          <span class="d-filter-pill d-filter-pill--selected">
-            <dt-popover :open="onOpen" placement="bottom-start" fallbackPlacements="top-start" :modal="false">
-              <template #anchor>
-                <dt-button size="sm" class="d-filter-pill__primary d-filter-pill__primary--selected d-filter-pill__primary--has-clear" kind="muted" importance="outlined" icon-position="right">
-                  <span class="d-filter-pill__label">
-                    <span class="d-filter-pill__label-alpha">Contact Centers</span>
-                    <span class="d-filter-pill__label-omega">89</span>
-                  </span>
-                  <template #icon>
-                    <dt-icon name="chevron-down" size="200" />
-                  </template>
-                </dt-button>
-              </template>
-              <template #content>
-                <div class="d-ta-center d-px32 d-py64 d-fc-tertiary d-body--sm">
-                  Popover or maybe Dropdown
-                </div>
-              </template>
-            </dt-popover>
-            <dt-button onclick="alert('• Remove clear button\n• Remove `--selected` and `--has-clear`\n• Revert text label')" size="sm" class="d-filter-pill__clear d-filter-pill__clear--selected" kind="muted" importance="outlined" v-dt-tooltip="`Remove`">
-              <template #icon>
-                <dt-icon name="close" size="200" />
-              </template>
-            </dt-button>
-          </span>
+      </div>
+      <div>
+        <div class="d-label--sm d-mb4">Selected, overflow, label tooltip, has clear</div>
+        <div class="d-filter-pill">
+          <dt-popover :open="onOpen" placement="bottom-start" fallbackPlacements="top-start" :modal="false">
+            <template #anchor>
+              <dt-button size="sm" class="d-filter-pill__primary d-filter-pill__primary--selected d-filter-pill__primary--has-clear" active importance="outlined" icon-position="right" v-dt-tooltip="`Disposition`">
+                <span class="d-filter-pill__label">
+                  <span class="d-filter-pill__label-alpha">Merchandise Question (e.g. Size, Fit, etc)</span>
+                </span>
+                <template #icon>
+                  <dt-icon name="chevron-down" size="200" />
+                </template>
+              </dt-button>
+            </template>
+            <template #content>
+              <div class="d-ta-center d-px32 d-py64 d-fc-tertiary d-body--sm">
+                Popover or maybe Dropdown
+              </div>
+            </template>
+          </dt-popover>
+          <dt-button onclick="alert('• Remove clear button\n• Remove `--selected` and `--has-clear`\n• Revert text label')" size="sm" class="d-filter-pill__clear d-filter-pill__clear--selected" active importance="outlined" v-dt-tooltip="`Remove`">
+            <template #icon>
+              <dt-icon name="close" size="200" />
+            </template>
+          </dt-button>
         </div>
-        <div>
-          <div class="d-label--sm d-mb8">Selected, overflow, label tooltip, has clear</div>
-          <span class="d-filter-pill d-filter-pill--selected">
-            <dt-popover :open="onOpen" placement="bottom-start" fallbackPlacements="top-start" :modal="false">
-              <template #anchor>
-                <dt-button size="sm" class="d-filter-pill__primary d-filter-pill__primary--selected d-filter-pill__primary--has-clear" kind="muted" importance="outlined" icon-position="right" v-dt-tooltip="`Disposition`">
-                  <span class="d-filter-pill__label">
-                    <span class="d-filter-pill__label-alpha">Merchandise Question (e.g. Size, Fit, etc)</span>
-                  </span>
-                  <template #icon>
-                    <dt-icon name="chevron-down" size="200" />
-                  </template>
-                </dt-button>
-              </template>
-              <template #content>
-                <div class="d-ta-center d-px32 d-py64 d-fc-tertiary d-body--sm">
-                  Popover or maybe Dropdown
-                </div>
-              </template>
-            </dt-popover>
-            <dt-button onclick="alert('• Remove clear button\n• Remove `--selected` and `--has-clear`\n• Revert text label')" size="sm" class="d-filter-pill__clear d-filter-pill__clear--selected" kind="muted" importance="outlined" v-dt-tooltip="`Remove`">
-              <template #icon>
-                <dt-icon name="close" size="200" />
-              </template>
-            </dt-button>
-          </span>
+      </div>
+      <div>
+        <div class="d-label--sm d-mb4">Selected, label, no clear</div>
+        <div class="d-filter-pill">
+          <dt-dropdown navigation-type="arrow-keys" placement="bottom-start" fallbackPlacements="top-start" :modal="false">
+            <template #anchor="{ attrs }">
+              <dt-button size="sm" class="d-filter-pill__primary d-filter-pill__primary--selected" active importance="outlined" icon-position="right" v-dt-tooltip="`Call source`">
+                <span class="d-filter-pill__label">
+                  <span class="d-filter-pill__label-alpha">Internal and external</span>
+                </span>
+                <template #icon>
+                  <dt-icon name="chevron-down" size="200" />
+                </template>
+              </dt-button>
+            </template>
+            <template #list="{ close }">
+              <dt-list-item
+                v-for="(item) in items"
+                :key="item.id"
+                role="menuitem"
+                :navigation-type="arrow-keys"
+                @click="close"
+              >
+                {{ item.name }}
+              </dt-list-item>
+            </template>
+          </dt-dropdown>
         </div>
-        <div>
-          <div class="d-label--sm d-mb8">Selected, label, no clear</div>
-          <span class="d-filter-pill d-filter-pill--selected">
-            <dt-dropdown navigation-type="arrow-keys" placement="bottom-start" fallbackPlacements="top-start" :modal="false">
-              <template #anchor="{ attrs }">
-                <dt-button size="sm" class="d-filter-pill__primary d-filter-pill__primary--selected" kind="muted" importance="outlined" icon-position="right" v-dt-tooltip="`Call source`">
-                  <span class="d-filter-pill__label">
-                    <span class="d-filter-pill__label-alpha">Internal and external</span>
-                  </span>
-                  <template #icon>
-                    <dt-icon name="chevron-down" size="200" />
-                  </template>
-                </dt-button>
-              </template>
-              <template #list="{ close }">
-                <dt-list-item
-                  v-for="(item) in items"
-                  :key="item.id"
-                  role="menuitem"
-                  :navigation-type="arrow-keys"
-                  @click="close"
-                >
-                  {{ item.name }}
-                </dt-list-item>
-              </template>
-            </dt-dropdown>
-          </span>
+      </div>
+      <div>
+        <div class="d-label--sm d-mb4">Disabled</div>
+        <div class="d-filter-pill d-c-not-allowed">
+          <dt-button size="sm" class="d-filter-pill__primary d-btn--disabled" aria-disabled="true" kind="muted" importance="outlined" icon-position="right" v-dt-tooltip="`Conversation type is disabled because selected filters only work with calls.`">
+            <span class="d-filter-pill__label">
+              <span class="d-filter-pill__label-alpha">Conversation type</span>
+            </span>
+            <template #icon>
+              <dt-icon name="chevron-down" size="200" />
+            </template>
+          </dt-button>
         </div>
-        <div>
-          <div class="d-label--sm d-mb8">Disabled</div>
-          <span class="d-filter-pill d-c-not-allowed">
-            <dt-button size="sm" class="d-filter-pill__primary d-btn--disabled" aria-disabled="true" kind="muted" importance="outlined" icon-position="right" v-dt-tooltip="`Conversation type is disabled because selected filters only work with calls.`">
-              <span class="d-filter-pill__label">
-                <span class="d-filter-pill__label-alpha">Conversation type</span>
-              </span>
-              <template #icon>
-                <dt-icon name="chevron-down" size="200" />
-              </template>
-            </dt-button>
-          </span>
-        </div>
-      </dt-stack>
-    </div>
+      </div>
+    </dt-stack>
     <dt-stack gap="500">
       <dt-stack>
         <h2 class="d-headline--xl">All Calls</h2>
@@ -140,7 +138,7 @@ description: Drafting design....
         </dt-stack>
       </dt-stack>
       <dt-stack direction="row" gap="400" class="d-fw-wrap">
-        <span class="d-filter-pill">
+        <div class="d-filter-pill">
           <dt-popover :open="onOpen" placement="bottom-start" fallbackPlacements="top-start" :modal="false">
             <template #anchor>
               <dt-button size="sm" class="d-filter-pill__primary" kind="muted" importance="outlined" icon-position="right">
@@ -158,8 +156,8 @@ description: Drafting design....
               </div>
             </template>
           </dt-popover>
-        </span>
-        <span class="d-filter-pill">
+        </div>
+        <div class="d-filter-pill">
           <dt-popover :open="onOpen" placement="bottom-start" fallbackPlacements="top-start" :modal="false">
             <template #anchor>
               <dt-button size="sm" class="d-filter-pill__primary" kind="muted" importance="outlined" icon-position="right">
@@ -177,8 +175,8 @@ description: Drafting design....
               </div>
             </template>
           </dt-popover>
-        </span>
-        <span class="d-filter-pill">
+        </div>
+        <div class="d-filter-pill">
           <dt-popover :open="onOpen" placement="bottom-start" fallbackPlacements="top-start" :modal="false">
             <template #anchor>
               <dt-button size="sm" class="d-filter-pill__primary" kind="muted" importance="outlined" icon-position="right">
@@ -196,8 +194,8 @@ description: Drafting design....
               </div>
             </template>
           </dt-popover>
-        </span>
-        <span class="d-filter-pill">
+        </div>
+        <div class="d-filter-pill">
           <dt-popover :open="onOpen" placement="bottom-start" fallbackPlacements="top-start" :modal="false">
             <template #anchor>
               <dt-button size="sm" class="d-filter-pill__primary" kind="muted" importance="outlined" icon-position="right">
@@ -215,8 +213,8 @@ description: Drafting design....
               </div>
             </template>
           </dt-popover>
-        </span>
-        <span class="d-filter-pill">
+        </div>
+        <div class="d-filter-pill">
           <dt-popover :open="onOpen" placement="bottom-start" fallbackPlacements="top-start" :modal="false">
             <template #anchor>
               <dt-button size="sm" class="d-filter-pill__primary" kind="muted" importance="outlined" icon-position="right">
@@ -234,8 +232,8 @@ description: Drafting design....
               </div>
             </template>
           </dt-popover>
-        </span>
-        <span class="d-filter-pill">
+        </div>
+        <div class="d-filter-pill">
           <dt-popover :open="onOpen" placement="bottom-start" fallbackPlacements="top-start" :modal="false">
             <template #anchor>
               <dt-button size="sm" class="d-filter-pill__primary" kind="muted" importance="outlined" icon-position="right">
@@ -253,7 +251,7 @@ description: Drafting design....
               </div>
             </template>
           </dt-popover>
-        </span>
+        </div>
         <dt-button size="sm" kind="muted" importance="clear">
           All Filters
         </dt-button>
@@ -286,7 +284,7 @@ description: Drafting design....
             Texts
           </dt-tab>
         </template>
-        <div class="d-ba d-bc-default d-btw0 d-bar8 d-btr0 d-p128 d-ta-center d-fc-tertiary d-body--sm">
+        <div class="d-ba d-bgc-secondary d-bc-default d-btw0 d-bar8 d-btr0 d-p128 d-ta-center d-fc-tertiary d-body--sm">
           <dt-tab-panel id="tab1" tab-id="tab1">
             <div class="d-py128">(Calls table)</div>
           </dt-tab-panel>
@@ -317,10 +315,10 @@ description: Drafting design....
         </dt-stack>
       </dt-stack>
       <dt-stack direction="row" gap="400" class="d-fw-wrap">
-        <span class="d-filter-pill d-filter-pill--selected">
+        <div class="d-filter-pill">
           <dt-popover :open="onOpen" placement="bottom-start" fallbackPlacements="top-start" :modal="false">
             <template #anchor>
-              <dt-button size="sm" class="d-filter-pill__primary d-filter-pill__primary--selected" kind="muted" importance="outlined" icon-position="right" v-dt-tooltip="`Location`">
+              <dt-button size="sm" class="d-filter-pill__primary d-filter-pill__primary--selected" active importance="outlined" icon-position="right" v-dt-tooltip="`Location`">
                 <span class="d-filter-pill__label">
                   <span class="d-filter-pill__label-alpha">This office</span>
                 </span>
@@ -335,11 +333,11 @@ description: Drafting design....
               </div>
             </template>
           </dt-popover>
-        </span>
-        <span class="d-filter-pill d-filter-pill--selected">
+        </div>
+        <div class="d-filter-pill">
           <dt-popover :open="onOpen" placement="bottom-start" fallbackPlacements="top-start" :modal="false">
             <template #anchor>
-              <dt-button size="sm" class="d-filter-pill__primary d-filter-pill__primary--selected d-filter-pill__primary--has-clear" kind="muted" importance="outlined" icon-position="right" v-dt-tooltip="`Timeframe`">
+              <dt-button size="sm" class="d-filter-pill__primary d-filter-pill__primary--selected d-filter-pill__primary--has-clear" active importance="outlined" icon-position="right" v-dt-tooltip="`Timeframe`">
                 <span class="d-filter-pill__label">
                   <span class="d-filter-pill__label-alpha">Past 90 days</span>
                 </span>
@@ -354,16 +352,16 @@ description: Drafting design....
               </div>
             </template>
           </dt-popover>
-          <dt-button onclick="alert('• Remove clear button\n• Remove `--selected` and `--has-clear`\n• Revert text label')" size="sm" class="d-filter-pill__clear d-filter-pill__clear--selected" kind="muted" importance="outlined" v-dt-tooltip="`Remove`">
+          <dt-button onclick="alert('• Remove clear button\n• Remove `--selected` and `--has-clear`\n• Revert text label')" size="sm" class="d-filter-pill__clear d-filter-pill__clear--selected" active importance="outlined" v-dt-tooltip="`Remove`">
             <template #icon>
               <dt-icon name="close" size="200" />
             </template>
           </dt-button>
-        </span>
-        <span class="d-filter-pill">
+        </div>
+        <div class="d-filter-pill">
           <dt-popover :open="onOpen" placement="bottom-start" fallbackPlacements="top-start" :modal="false">
             <template #anchor>
-              <dt-button size="sm" class="d-filter-pill__primary" kind="muted" importance="outlined" icon-position="right">
+              <dt-button size="sm" class="d-filter-pill__primary d-filter-pill__primary--selected" active importance="outlined" icon-position="right">
                 <span class="d-filter-pill__label">
                   <span class="d-filter-pill__label-alpha">Keyword</span>
                 </span>
@@ -378,11 +376,11 @@ description: Drafting design....
               </div>
             </template>
           </dt-popover>
-        </span>
-        <span class="d-filter-pill">
+        </div>
+        <div class="d-filter-pill">
           <dt-popover :open="onOpen" placement="bottom-start" fallbackPlacements="top-start" :modal="false">
             <template #anchor>
-              <dt-button size="sm" class="d-filter-pill__primary" kind="muted" importance="outlined" icon-position="right">
+              <dt-button size="sm" class="d-filter-pill__primary d-filter-pill__primary--selected" active importance="outlined" icon-position="right">
                 <span class="d-filter-pill__label">
                   <span class="d-filter-pill__label-alpha">Moment</span>
                 </span>
@@ -397,8 +395,8 @@ description: Drafting design....
               </div>
             </template>
           </dt-popover>
-        </span>
-        <span class="d-filter-pill d-c-not-allowed">
+        </div>
+        <div class="d-filter-pill d-c-not-allowed">
           <dt-button size="sm" class="d-filter-pill__primary d-btn--disabled" aria-disabled="true" kind="muted" importance="outlined" icon-position="right" v-dt-tooltip="`Conversation type is disabled because selected filters only work with calls.`">
             <span class="d-filter-pill__label">
               <span class="d-filter-pill__label-alpha">Duration</span>
@@ -407,11 +405,11 @@ description: Drafting design....
               <dt-icon name="chevron-down" size="200" />
             </template>
           </dt-button>
-        </span>
-        <span class="d-filter-pill d-filter-pill--selected">
+        </div>
+        <div class="d-filter-pill">
           <dt-dropdown navigation-type="arrow-keys" placement="bottom-start" fallbackPlacements="top-start" :modal="false">
             <template #anchor="{ attrs }">
-              <dt-button size="sm" class="d-filter-pill__primary d-filter-pill__primary--selected" kind="muted" importance="outlined" icon-position="right" v-dt-tooltip="`Call source`">
+              <dt-button size="sm" class="d-filter-pill__primary d-filter-pill__primary--selected" active importance="outlined" icon-position="right" v-dt-tooltip="`Call source`">
                 <span class="d-filter-pill__label">
                   <span class="d-filter-pill__label-alpha">Internal and external</span>
                 </span>
@@ -432,7 +430,7 @@ description: Drafting design....
               </dt-list-item>
             </template>
           </dt-dropdown>
-        </span>
+        </div>
         <dt-button size="sm" kind="muted" importance="clear">
           All Filters
         </dt-button>
@@ -447,7 +445,7 @@ description: Drafting design....
           </dt-stack>
         </dt-stack>
       </div>
-      <div class="d-ba d-bc-default d-bar8 d-p128 d-ta-center d-fc-tertiary d-body--sm">
+      <div class="d-ba d-bgc-secondary d-bc-default d-bar8 d-p128 d-ta-center d-fc-tertiary d-body--sm">
         <div class="d-py128">(table)</div>
       </div>
     </dt-stack>
@@ -463,7 +461,7 @@ description: Drafting design....
         </dt-stack>
       </dt-stack>
       <dt-stack direction="row" gap="400" class="d-fw-wrap">
-        <span class="d-filter-pill">
+        <div class="d-filter-pill">
           <dt-popover :open="onOpen" placement="bottom-start" fallbackPlacements="top-start" :modal="false">
             <template #anchor>
               <dt-button size="sm" class="d-filter-pill__primary" kind="muted" importance="outlined" icon-position="right">
@@ -481,11 +479,11 @@ description: Drafting design....
               </div>
             </template>
           </dt-popover>
-        </span>
-        <span class="d-filter-pill d-filter-pill--selected">
+        </div>
+        <div class="d-filter-pill">
           <dt-popover :open="onOpen" placement="bottom-start" fallbackPlacements="top-start" :modal="false">
             <template #anchor>
-              <dt-button size="sm" class="d-filter-pill__primary d-filter-pill__primary--selected d-filter-pill__primary--has-clear" kind="muted" importance="outlined" icon-position="right" v-dt-tooltip="`Timeframe`">
+              <dt-button size="sm" class="d-filter-pill__primary d-filter-pill__primary--selected d-filter-pill__primary--has-clear" active importance="outlined" icon-position="right" v-dt-tooltip="`Timeframe`">
                 <span class="d-filter-pill__label">
                   <span class="d-filter-pill__label-alpha">Past 90 days</span>
                 </span>
@@ -500,16 +498,16 @@ description: Drafting design....
               </div>
             </template>
           </dt-popover>
-          <dt-button onclick="alert('• Remove clear button\n• Remove `--selected` and `--has-clear`\n• Revert text label')" size="sm" class="d-filter-pill__clear d-filter-pill__clear--selected" kind="muted" importance="outlined" v-dt-tooltip="`Remove`">
+          <dt-button onclick="alert('• Remove clear button\n• Remove `--selected` and `--has-clear`\n• Revert text label')" size="sm" class="d-filter-pill__clear d-filter-pill__clear--selected" active importance="outlined" v-dt-tooltip="`Remove`">
             <template #icon>
               <dt-icon name="close" size="200" />
             </template>
           </dt-button>
-        </span>
-        <span class="d-filter-pill d-filter-pill--selected">
+        </div>
+        <div class="d-filter-pill">
           <dt-popover :open="onOpen" placement="bottom-start" fallbackPlacements="top-start" :modal="false">
             <template #anchor>
-              <dt-button size="sm" class="d-filter-pill__primary d-filter-pill__primary--selected d-filter-pill__primary--has-clear" kind="muted" importance="outlined" icon-position="right">
+              <dt-button size="sm" class="d-filter-pill__primary d-filter-pill__primary--selected d-filter-pill__primary--has-clear" active importance="outlined" icon-position="right">
                 <span class="d-filter-pill__label">
                   <span class="d-filter-pill__label-alpha">Columns</span>
                   <span class="d-filter-pill__label-omega">7</span>
@@ -525,13 +523,13 @@ description: Drafting design....
               </div>
             </template>
           </dt-popover>
-          <dt-button onclick="alert('• Remove clear button\n• Remove `--selected` and `--has-clear`\n• Revert text label')" size="sm" class="d-filter-pill__clear d-filter-pill__clear--selected" kind="muted" importance="outlined" v-dt-tooltip="`Remove`">
+          <dt-button onclick="alert('• Remove clear button\n• Remove `--selected` and `--has-clear`\n• Revert text label')" size="sm" class="d-filter-pill__clear d-filter-pill__clear--selected" active importance="outlined" v-dt-tooltip="`Remove`">
             <template #icon>
               <dt-icon name="close" size="200" />
             </template>
           </dt-button>
-        </span>
-        <span class="d-filter-pill">
+        </div>
+        <div class="d-filter-pill">
           <dt-popover :open="onOpen" placement="bottom-start" fallbackPlacements="top-start" :modal="false">
             <template #anchor>
               <dt-button size="sm" class="d-filter-pill__primary" kind="muted" importance="outlined" icon-position="right">
@@ -549,8 +547,8 @@ description: Drafting design....
               </div>
             </template>
           </dt-popover>
-        </span>
-        <span class="d-filter-pill">
+        </div>
+        <div class="d-filter-pill">
           <dt-popover :open="onOpen" placement="bottom-start" fallbackPlacements="top-start" :modal="false">
             <template #anchor>
               <dt-button size="sm" class="d-filter-pill__primary" kind="muted" importance="outlined" icon-position="right">
@@ -568,8 +566,8 @@ description: Drafting design....
               </div>
             </template>
           </dt-popover>
-        </span>
-        <span class="d-filter-pill">
+        </div>
+        <div class="d-filter-pill">
           <dt-popover :open="onOpen" placement="bottom-start" fallbackPlacements="top-start" :modal="false">
             <template #anchor>
               <dt-button size="sm" class="d-filter-pill__primary" kind="muted" importance="outlined" icon-position="right">
@@ -587,8 +585,8 @@ description: Drafting design....
               </div>
             </template>
           </dt-popover>
-        </span>
-        <span class="d-filter-pill">
+        </div>
+        <div class="d-filter-pill">
           <dt-popover :open="onOpen" placement="bottom-start" fallbackPlacements="top-start" :modal="false">
             <template #anchor>
               <dt-button size="sm" class="d-filter-pill__primary" kind="muted" importance="outlined" icon-position="right">
@@ -606,8 +604,8 @@ description: Drafting design....
               </div>
             </template>
           </dt-popover>
-        </span>
-        <span class="d-filter-pill">
+        </div>
+        <div class="d-filter-pill">
           <dt-popover :open="onOpen" placement="bottom-start" fallbackPlacements="top-start" :modal="false">
             <template #anchor>
               <dt-button size="sm" class="d-filter-pill__primary" kind="muted" importance="outlined" icon-position="right">
@@ -625,11 +623,11 @@ description: Drafting design....
               </div>
             </template>
           </dt-popover>
-        </span>
-        <span class="d-filter-pill d-filter-pill--selected">
+        </div>
+        <div class="d-filter-pill">
           <dt-popover :open="onOpen" placement="bottom-start" fallbackPlacements="top-start" :modal="false">
             <template #anchor>
-              <dt-button size="sm" class="d-filter-pill__primary d-filter-pill__primary--selected d-filter-pill__primary--has-clear" kind="muted" importance="outlined" icon-position="right">
+              <dt-button size="sm" class="d-filter-pill__primary d-filter-pill__primary--selected d-filter-pill__primary--has-clear" active importance="outlined" icon-position="right">
                 <span class="d-filter-pill__label">
                   <span class="d-filter-pill__label-alpha">Dispositions</span>
                   <span class="d-filter-pill__label-omega">4</span>
@@ -645,16 +643,16 @@ description: Drafting design....
               </div>
             </template>
           </dt-popover>
-          <dt-button onclick="alert('• Remove clear button\n• Remove `--selected` and `--has-clear`\n• Revert text label')" size="sm" class="d-filter-pill__clear d-filter-pill__clear--selected" kind="muted" importance="outlined" v-dt-tooltip="`Remove`">
+          <dt-button onclick="alert('• Remove clear button\n• Remove `--selected` and `--has-clear`\n• Revert text label')" size="sm" class="d-filter-pill__clear d-filter-pill__clear--selected" active importance="outlined" v-dt-tooltip="`Remove`">
             <template #icon>
               <dt-icon name="close" size="200" />
             </template>
           </dt-button>
-        </span>
-        <span class="d-filter-pill d-filter-pill--selected">
+        </div>
+        <div class="d-filter-pill">
           <dt-popover :open="onOpen" placement="bottom-start" fallbackPlacements="top-start" :modal="false">
             <template #anchor>
-              <dt-button size="sm" class="d-filter-pill__primary d-filter-pill__primary--selected d-filter-pill__primary--has-clear" kind="muted" importance="outlined" icon-position="right" v-dt-tooltip="`Time of day`">
+              <dt-button size="sm" class="d-filter-pill__primary d-filter-pill__primary--selected d-filter-pill__primary--has-clear" active importance="outlined" icon-position="right" v-dt-tooltip="`Time of day`">
                 <span class="d-filter-pill__label">
                   <span class="d-filter-pill__label-alpha">10am – 12pm</span>
                 </span>
@@ -669,12 +667,12 @@ description: Drafting design....
               </div>
             </template>
           </dt-popover>
-          <dt-button onclick="alert('• Remove clear button\n• Remove `--selected` and `--has-clear`\n• Revert text label')" size="sm" class="d-filter-pill__clear d-filter-pill__clear--selected" kind="muted" importance="outlined" v-dt-tooltip="`Remove`">
+          <dt-button onclick="alert('• Remove clear button\n• Remove `--selected` and `--has-clear`\n• Revert text label')" size="sm" class="d-filter-pill__clear d-filter-pill__clear--selected" active importance="outlined" v-dt-tooltip="`Remove`">
             <template #icon>
               <dt-icon name="close" size="200" />
             </template>
           </dt-button>
-        </span>
+        </div>
         <dt-button size="sm" kind="muted" importance="clear">
           All Filters
         </dt-button>
@@ -689,7 +687,7 @@ description: Drafting design....
           </dt-stack>
         </dt-stack>
       </div>
-      <div class="d-ba d-bc-default d-bar8 d-p128 d-ta-center d-fc-tertiary d-body--sm">
+      <div class="d-ba d-bgc-secondary d-bc-default d-bar8 d-p128 d-ta-center d-fc-tertiary d-body--sm">
         <div class="d-py128">(table)</div>
       </div>
     </dt-stack>

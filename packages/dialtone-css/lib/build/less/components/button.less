@@ -209,12 +209,6 @@
 
 .d-btn__icon {
   display: flex;
-  // background-color: rgba(0,0,0,.5);
-
-  .d-icon {
-    // outline: 1px solid red;
-    // opacity: 0;
-  }
 }
 
 .d-btn__icon--left,
@@ -818,12 +812,10 @@ body:has(.d-filter-pill) {
 }
 
 .d-filter-pill {
+  --filter-pill-color-background-selected-hover: color-mix(in srgb, var(--dt-action-color-background-base-active), var(--dt-action-color-foreground-base-active) 5%);
+
   display: inline-flex;
   gap: 0;
-
-  &--selected {
-    gap: var(--dt-space-100);
-  }
 
   &__primary {
     &--has-clear {
@@ -832,11 +824,8 @@ body:has(.d-filter-pill) {
     }
 
     &--selected:not(:disabled) {
-      background-color: var(--dt-action-color-background-base-active);
-      border-color: var(--dt-color-neutral-transparent);
-
       &:hover {
-        background-color: var(--dt-action-color-background-base-hover);
+        background-color: var(--filter-pill-color-background-selected-hover);
       }
 
       &:active {
@@ -847,8 +836,8 @@ body:has(.d-filter-pill) {
 
   &__label {
     display: flex;
-    gap: var(--dt-space-350);
     max-width: var(--dt-size-875);
+    font-weight: var(--dt-font-weight-normal);
   }
 
   &__label-alpha {
@@ -860,15 +849,14 @@ body:has(.d-filter-pill) {
 
   &__label-omega {
     display: flex;
-    gap: var(--dt-space-350);
+    gap: var(--dt-space-300);
     align-items: center;
+    font-weight: var(--dt-font-weight-bold);
+    letter-spacing: var(--dt-size-50-negative);
+    font-variant-numeric: tabular-nums;
 
     &::before {
-      background-color: var(--button-color-text);
-      border-radius: var(--dt-size-radius-circle);
-      content: "";
-      inline-size: calc(var(--dt-size-100) * 3);
-      block-size: calc(var(--dt-size-100) * 3);
+      content: ":";
     }
   }
 
@@ -880,11 +868,8 @@ body:has(.d-filter-pill) {
     border-end-start-radius: 0;
 
     &--selected:not(:disabled) {
-      background-color: var(--dt-action-color-background-base-active);
-      border-color: var(--dt-color-neutral-transparent);
-
       &:hover {
-        background-color: var(--dt-action-color-background-base-hover);
+        background-color: var(--filter-pill-color-background-selected-hover);
       }
 
       &:active {
