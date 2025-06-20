@@ -25,6 +25,7 @@
       bottom-class="d-list-item__bottom"
       right-class="d-list-item__right"
       selected-class="d-list-item__selected"
+      data-qa="dt-list-item-wrapper"
     >
       <template
         v-for="(_, slotName) in $slots"

@@ -23,6 +23,7 @@ const testContext = {};
 
 describe('DtListItem tests', () => {
   let wrapper;
+  let listItemWrapper;
 
   const updateWrapper = () => {
     wrapper = mount(DtListItem, {
@@ -31,6 +32,8 @@ describe('DtListItem tests', () => {
       provide: { ...baseProvide, ...mockProvide },
       localVue: testContext.localVue,
     });
+
+    listItemWrapper = wrapper.find('[data-qa="dt-list-item-wrapper"]');
   };
 
   beforeAll(() => {
@@ -180,6 +183,18 @@ describe('DtListItem tests', () => {
         await wrapper.trigger('mouseleave');
 
         expect(wrapper.emitted().mouseleave.length).toBe(1);
+      });
+    });
+  });
+
+  describe('Extendability Tests', () => {
+    describe('When type is "default" and "wrapperClass" prop is provided', () => {
+      beforeEach(async () => {
+        await wrapper.setProps({ wrapperClass: 'custom-class' });
+      });
+
+      it('should apply the provided class to the wrapper.', () => {
+        expect(listItemWrapper.element.classList.contains('custom-class')).toBe(true);
       });
     });
   });
