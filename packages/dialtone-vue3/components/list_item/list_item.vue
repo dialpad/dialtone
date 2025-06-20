@@ -1,4 +1,3 @@
-<!-- eslint-disable vuejs-accessibility/mouse-events-have-key-events -->
 <template>
   <component
     :is="elementType"
@@ -18,7 +17,7 @@
     <dt-item-layout
       v-if="isDefaultType"
       unstyled
-      class="d-list-item__wrapper"
+      :class="['d-list-item__wrapper', wrapperClass]"
       left-class="d-list-item__left"
       content-class="d-list-item__content"
       title-class="d-list-item__title"
@@ -26,6 +25,7 @@
       bottom-class="d-list-item__bottom"
       right-class="d-list-item__right"
       selected-class="d-list-item__selected"
+      data-qa="dt-list-item-wrapper"
     >
       <template
         v-for="(_, slotName) in $slots"
@@ -133,6 +133,17 @@ export default {
       type: Boolean,
       default: false,
     },
+
+    /**
+     * Additional Classes to apply to the wrapper element,
+     * note: it only applies on "default" type
+     * Can accept all of: String, Object, and Array, i.e. has the
+     * same api as Vue's built-in handling of the class attribute.
+     */
+    wrapperClass: {
+      type: [String, Object, Array],
+      default: '',
+    },
   },
 
   emits: [
@@ -159,13 +170,6 @@ export default {
      * @type {MouseEvent}
      */
     'mouseleave',
-
-    /**
-     * Mouse down event
-     *
-     * @event mousedown
-     */
-    'mousedown',
   ],
 
   data () {
