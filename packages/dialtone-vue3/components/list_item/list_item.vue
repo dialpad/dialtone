@@ -1,4 +1,3 @@
-<!-- eslint-disable vuejs-accessibility/mouse-events-have-key-events -->
 <template>
   <component
     :is="elementType"
@@ -18,7 +17,7 @@
     <dt-item-layout
       v-if="isDefaultType"
       unstyled
-      class="d-list-item__wrapper"
+      :class="['d-list-item__wrapper', wrapperClass]"
       left-class="d-list-item__left"
       content-class="d-list-item__content"
       title-class="d-list-item__title"
@@ -133,6 +132,15 @@ export default {
       type: Boolean,
       default: false,
     },
+
+    /**
+     * Class to apply to the wrapper element,
+     * note: it only applies to "default" type
+     */
+    wrapperClass: {
+      type: String,
+      default: '',
+    },
   },
 
   emits: [
@@ -159,13 +167,6 @@ export default {
      * @type {MouseEvent}
      */
     'mouseleave',
-
-    /**
-     * Mouse down event
-     *
-     * @event mousedown
-     */
-    'mousedown',
   ],
 
   data () {

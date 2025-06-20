@@ -17,7 +17,7 @@
     <dt-item-layout
       v-if="isDefaultType"
       unstyled
-      class="d-list-item__wrapper"
+      :class="['d-list-item__wrapper', wrapperClass]"
       left-class="d-list-item__left"
       content-class="d-list-item__content"
       title-class="d-list-item__title"
@@ -131,6 +131,15 @@ export default {
       type: Boolean,
       default: false,
     },
+
+    /**
+     * Class to apply to the wrapper element,
+     * note: it only applies to "default" type
+     */
+    wrapperClass: {
+      type: String,
+      default: '',
+    },
   },
 
   emits: [
@@ -176,8 +185,7 @@ export default {
 
   computed: {
     isDefaultType () {
-      if (this.type === LIST_ITEM_TYPES.DEFAULT) return true;
-      return false;
+      return this.type === LIST_ITEM_TYPES.DEFAULT;
     },
 
     listItemListeners () {
