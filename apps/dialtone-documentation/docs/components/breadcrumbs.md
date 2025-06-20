@@ -5,7 +5,7 @@ status: ready
 thumb: true
 image: assets/images/components/breadcrumbs.png
 storybook: https://dialtone.dialpad.com/vue/?path=/story/components-breadcrumbs--default
-figma_url: https://www.figma.com/file/2adf7JhZOncRyjYiy2joil/DT-Core%3A-Components-7?node-id=8918%3A21306&viewport=-61%2C443%2C1.12&t=xHutRjwo1o5zMTgT-11
+figma_url: https://www.figma.com/design/W58r5BkO8qTw3vem9YieJd/DT9-Component-Library--Rebrand-2025-?node-id=2455-0
 ---
 
 <code-well-header>
@@ -42,11 +42,11 @@ Breadcrumbs show users where they are within a site’s hierarchy. Breadcrumbs h
 
 Breadcrumbs should be the first page element—placed directly above the page’s title. All pages that appear in the breadcrumb should link to their respective page. The page the user is on should always be the last page listed and not linked.
 
-### When not to use
+### When Not to Use
 
 Breadcrumbs are always treated as secondary and should not entirely replace the primary navigation. They shouldn’t be used for products that have single level navigation because they create unnecessary clutter.
 
-## Variants and examples
+## Variants and Examples
 
 ### Default
 
@@ -95,7 +95,7 @@ htmlCode='
 </nav>
 '
 vueCode='
-<dt-breadcrumbs 
+<dt-breadcrumbs
   :breadcrumbs="[
     {
       href: `#`,
@@ -169,7 +169,7 @@ htmlCode='
 </nav>
 '
 vueCode='
-<dt-breadcrumbs 
+<dt-breadcrumbs
   inverted
   :breadcrumbs="[
     {

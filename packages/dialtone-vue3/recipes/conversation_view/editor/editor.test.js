@@ -24,7 +24,7 @@ const testText = 'In the beginning, it was a nice day.';
 
 // Constants
 const baseProps = {
-  value: testText,
+  modelValue: testText,
   inputAriaLabel: 'aria-label text',
   inputClass: 'qa-editor',
   autoFocus: 'all',
@@ -44,20 +44,20 @@ const _setChildWrappers = () => {
   editor = wrapper.find('[data-qa="dt-rich-text-editor"]').find('div[contenteditable]');
 
   // buttons
-  boldFormatBtn = wrapper.find('[data-qa="dt-editor-bold-btn"]');
-  italicsFormatBtn = wrapper.find('[data-qa="dt-editor-italics-btn"]');
-  underlineFormatBtn = wrapper.find('[data-qa="dt-editor-underline-btn"]');
-  strikeFormatBtn = wrapper.find('[data-qa="dt-editor-strike-btn"]');
-  listItemsFormatBtn = wrapper.find('[data-qa="dt-editor-list-items-btn"]');
-  addLinkBtn = wrapper.find('[data-qa="dt-editor-add-link-btn"]');
-  alignLeftBtn = wrapper.find('[data-qa="dt-editor-align-left-btn"]');
-  alignCenterBtn = wrapper.find('[data-qa="dt-editor-align-center-btn"]');
-  alignRightBtn = wrapper.find('[data-qa="dt-editor-align-right-btn"]');
-  alignJustifyBtn = wrapper.find('[data-qa="dt-editor-align-justify-btn"]');
-  orderedListBtn = wrapper.find('[data-qa="dt-editor-ordered-list-items-btn"]');
-  blockquoteBtn = wrapper.find('[data-qa="dt-editor-blockquote-btn"]');
-  codeblockBtn = wrapper.find('[data-qa="dt-editor-code-block-btn"]');
-  quickRepliesBtn = wrapper.find('[data-qa="dt-editor-quick-replies-btn"]');
+  boldFormatBtn = wrapper.find('[data-qa="dt-recipe-editor-bold-btn"]');
+  italicsFormatBtn = wrapper.find('[data-qa="dt-recipe-editor-italics-btn"]');
+  underlineFormatBtn = wrapper.find('[data-qa="dt-recipe-editor-underline-btn"]');
+  strikeFormatBtn = wrapper.find('[data-qa="dt-recipe-editor-strike-btn"]');
+  listItemsFormatBtn = wrapper.find('[data-qa="dt-recipe-editor-list-items-btn"]');
+  addLinkBtn = wrapper.find('[data-qa="dt-recipe-editor-add-link-btn"]');
+  alignLeftBtn = wrapper.find('[data-qa="dt-recipe-editor-align-left-btn"]');
+  alignCenterBtn = wrapper.find('[data-qa="dt-recipe-editor-align-center-btn"]');
+  alignRightBtn = wrapper.find('[data-qa="dt-recipe-editor-align-right-btn"]');
+  alignJustifyBtn = wrapper.find('[data-qa="dt-recipe-editor-align-justify-btn"]');
+  orderedListBtn = wrapper.find('[data-qa="dt-recipe-editor-ordered-list-items-btn"]');
+  blockquoteBtn = wrapper.find('[data-qa="dt-recipe-editor-blockquote-btn"]');
+  codeblockBtn = wrapper.find('[data-qa="dt-recipe-editor-code-block-btn"]');
+  quickRepliesBtn = wrapper.find('[data-qa="dt-recipe-editor-quick-replies-btn"]');
 };
 
 const _mountWrapper = () => {
@@ -165,31 +165,31 @@ describe('DtRecipeEditor tests', () => {
 
       it('should not appear in the formatting options', () => {
         expect(wrapper
-          .find('[data-qa="dt-editor-bold-btn"]')
+          .find('[data-qa="dt-recipe-editor-bold-btn"]')
           .exists()).toBe(false);
 
         expect(wrapper
-          .find('[data-qa="dt-editor-italics-btn"]')
+          .find('[data-qa="dt-recipe-editor-italics-btn"]')
           .exists()).toBe(true);
 
         expect(wrapper
-          .find('[data-qa="dt-editor-underline-btn"]')
+          .find('[data-qa="dt-recipe-editor-underline-btn"]')
           .exists()).toBe(true);
 
         expect(wrapper
-          .find('[data-qa="dt-editor-strike-btn"]')
+          .find('[data-qa="dt-recipe-editor-strike-btn"]')
           .exists()).toBe(true);
 
         expect(wrapper
-          .find('[data-qa="dt-editor-list-items-btn"]')
+          .find('[data-qa="dt-recipe-editor-list-items-btn"]')
           .exists()).toBe(true);
 
         expect(wrapper
-          .find('[data-qa="dt-editor-quick-replies-btn"]')
+          .find('[data-qa="dt-recipe-editor-quick-replies-btn"]')
           .exists()).toBe(true);
 
         expect(wrapper
-          .find('[data-qa="dt-editor-add-link-btn"]')
+          .find('[data-qa="dt-recipe-editor-add-link-btn"]')
           .exists()).toBe(true);
       });
     });
@@ -204,31 +204,31 @@ describe('DtRecipeEditor tests', () => {
 
       it('should not appear in the formatting options', () => {
         expect(wrapper
-          .find('[data-qa="dt-editor-bold-btn"]')
+          .find('[data-qa="dt-recipe-editor-bold-btn"]')
           .exists()).toBe(true);
 
         expect(wrapper
-          .find('[data-qa="dt-editor-italics-btn"]')
+          .find('[data-qa="dt-recipe-editor-italics-btn"]')
           .exists()).toBe(false);
 
         expect(wrapper
-          .find('[data-qa="dt-editor-underline-btn"]')
+          .find('[data-qa="dt-recipe-editor-underline-btn"]')
           .exists()).toBe(true);
 
         expect(wrapper
-          .find('[data-qa="dt-editor-strike-btn"]')
+          .find('[data-qa="dt-recipe-editor-strike-btn"]')
           .exists()).toBe(true);
 
         expect(wrapper
-          .find('[data-qa="dt-editor-list-items-btn"]')
+          .find('[data-qa="dt-recipe-editor-list-items-btn"]')
           .exists()).toBe(true);
 
         expect(wrapper
-          .find('[data-qa="dt-editor-quick-replies-btn"]')
+          .find('[data-qa="dt-recipe-editor-quick-replies-btn"]')
           .exists()).toBe(true);
 
         expect(wrapper
-          .find('[data-qa="dt-editor-add-link-btn"]')
+          .find('[data-qa="dt-recipe-editor-add-link-btn"]')
           .exists()).toBe(true);
       });
     });
@@ -243,31 +243,31 @@ describe('DtRecipeEditor tests', () => {
 
       it('should not appear in the formatting options', () => {
         expect(wrapper
-          .find('[data-qa="dt-editor-bold-btn"]')
+          .find('[data-qa="dt-recipe-editor-bold-btn"]')
           .exists()).toBe(true);
 
         expect(wrapper
-          .find('[data-qa="dt-editor-italics-btn"]')
+          .find('[data-qa="dt-recipe-editor-italics-btn"]')
           .exists()).toBe(true);
 
         expect(wrapper
-          .find('[data-qa="dt-editor-underline-btn"]')
+          .find('[data-qa="dt-recipe-editor-underline-btn"]')
           .exists()).toBe(false);
 
         expect(wrapper
-          .find('[data-qa="dt-editor-strike-btn"]')
+          .find('[data-qa="dt-recipe-editor-strike-btn"]')
           .exists()).toBe(true);
 
         expect(wrapper
-          .find('[data-qa="dt-editor-list-items-btn"]')
+          .find('[data-qa="dt-recipe-editor-list-items-btn"]')
           .exists()).toBe(true);
 
         expect(wrapper
-          .find('[data-qa="dt-editor-quick-replies-btn"]')
+          .find('[data-qa="dt-recipe-editor-quick-replies-btn"]')
           .exists()).toBe(true);
 
         expect(wrapper
-          .find('[data-qa="dt-editor-add-link-btn"]')
+          .find('[data-qa="dt-recipe-editor-add-link-btn"]')
           .exists()).toBe(true);
       });
     });
@@ -282,31 +282,31 @@ describe('DtRecipeEditor tests', () => {
 
       it('should not appear in the formatting options', () => {
         expect(wrapper
-          .find('[data-qa="dt-editor-bold-btn"]')
+          .find('[data-qa="dt-recipe-editor-bold-btn"]')
           .exists()).toBe(true);
 
         expect(wrapper
-          .find('[data-qa="dt-editor-italics-btn"]')
+          .find('[data-qa="dt-recipe-editor-italics-btn"]')
           .exists()).toBe(true);
 
         expect(wrapper
-          .find('[data-qa="dt-editor-underline-btn"]')
+          .find('[data-qa="dt-recipe-editor-underline-btn"]')
           .exists()).toBe(true);
 
         expect(wrapper
-          .find('[data-qa="dt-editor-strike-btn"]')
+          .find('[data-qa="dt-recipe-editor-strike-btn"]')
           .exists()).toBe(false);
 
         expect(wrapper
-          .find('[data-qa="dt-editor-list-items-btn"]')
+          .find('[data-qa="dt-recipe-editor-list-items-btn"]')
           .exists()).toBe(true);
 
         expect(wrapper
-          .find('[data-qa="dt-editor-quick-replies-btn"]')
+          .find('[data-qa="dt-recipe-editor-quick-replies-btn"]')
           .exists()).toBe(true);
 
         expect(wrapper
-          .find('[data-qa="dt-editor-add-link-btn"]')
+          .find('[data-qa="dt-recipe-editor-add-link-btn"]')
           .exists()).toBe(true);
       });
     });
@@ -321,31 +321,31 @@ describe('DtRecipeEditor tests', () => {
 
       it('should not appear in the formatting options', () => {
         expect(wrapper
-          .find('[data-qa="dt-editor-bold-btn"]')
+          .find('[data-qa="dt-recipe-editor-bold-btn"]')
           .exists()).toBe(true);
 
         expect(wrapper
-          .find('[data-qa="dt-editor-italics-btn"]')
+          .find('[data-qa="dt-recipe-editor-italics-btn"]')
           .exists()).toBe(true);
 
         expect(wrapper
-          .find('[data-qa="dt-editor-underline-btn"]')
+          .find('[data-qa="dt-recipe-editor-underline-btn"]')
           .exists()).toBe(true);
 
         expect(wrapper
-          .find('[data-qa="dt-editor-strike-btn"]')
+          .find('[data-qa="dt-recipe-editor-strike-btn"]')
           .exists()).toBe(true);
 
         expect(wrapper
-          .find('[data-qa="dt-editor-list-items-btn"]')
+          .find('[data-qa="dt-recipe-editor-list-items-btn"]')
           .exists()).toBe(false);
 
         expect(wrapper
-          .find('[data-qa="dt-editor-quick-replies-btn"]')
+          .find('[data-qa="dt-recipe-editor-quick-replies-btn"]')
           .exists()).toBe(true);
 
         expect(wrapper
-          .find('[data-qa="dt-editor-add-link-btn"]')
+          .find('[data-qa="dt-recipe-editor-add-link-btn"]')
           .exists()).toBe(true);
       });
     });
@@ -360,31 +360,31 @@ describe('DtRecipeEditor tests', () => {
 
       it('should not appear in the formatting options', () => {
         expect(wrapper
-          .find('[data-qa="dt-editor-bold-btn"]')
+          .find('[data-qa="dt-recipe-editor-bold-btn"]')
           .exists()).toBe(true);
 
         expect(wrapper
-          .find('[data-qa="dt-editor-italics-btn"]')
+          .find('[data-qa="dt-recipe-editor-italics-btn"]')
           .exists()).toBe(true);
 
         expect(wrapper
-          .find('[data-qa="dt-editor-underline-btn"]')
+          .find('[data-qa="dt-recipe-editor-underline-btn"]')
           .exists()).toBe(true);
 
         expect(wrapper
-          .find('[data-qa="dt-editor-strike-btn"]')
+          .find('[data-qa="dt-recipe-editor-strike-btn"]')
           .exists()).toBe(true);
 
         expect(wrapper
-          .find('[data-qa="dt-editor-list-items-btn"]')
+          .find('[data-qa="dt-recipe-editor-list-items-btn"]')
           .exists()).toBe(true);
 
         expect(wrapper
-          .find('[data-qa="dt-editor-quick-replies-btn"]')
+          .find('[data-qa="dt-recipe-editor-quick-replies-btn"]')
           .exists()).toBe(false);
 
         expect(wrapper
-          .find('[data-qa="dt-editor-add-link-btn"]')
+          .find('[data-qa="dt-recipe-editor-add-link-btn"]')
           .exists()).toBe(true);
       });
     });
@@ -399,31 +399,31 @@ describe('DtRecipeEditor tests', () => {
 
       it('should not appear in the formatting options', () => {
         expect(wrapper
-          .find('[data-qa="dt-editor-bold-btn"]')
+          .find('[data-qa="dt-recipe-editor-bold-btn"]')
           .exists()).toBe(true);
 
         expect(wrapper
-          .find('[data-qa="dt-editor-italics-btn"]')
+          .find('[data-qa="dt-recipe-editor-italics-btn"]')
           .exists()).toBe(true);
 
         expect(wrapper
-          .find('[data-qa="dt-editor-underline-btn"]')
+          .find('[data-qa="dt-recipe-editor-underline-btn"]')
           .exists()).toBe(true);
 
         expect(wrapper
-          .find('[data-qa="dt-editor-strike-btn"]')
+          .find('[data-qa="dt-recipe-editor-strike-btn"]')
           .exists()).toBe(true);
 
         expect(wrapper
-          .find('[data-qa="dt-editor-list-items-btn"]')
+          .find('[data-qa="dt-recipe-editor-list-items-btn"]')
           .exists()).toBe(true);
 
         expect(wrapper
-          .find('[data-qa="dt-editor-quick-replies-btn"]')
+          .find('[data-qa="dt-recipe-editor-quick-replies-btn"]')
           .exists()).toBe(true);
 
         expect(wrapper
-          .find('[data-qa="dt-editor-add-link-btn"]')
+          .find('[data-qa="dt-recipe-editor-add-link-btn"]')
           .exists()).toBe(false);
       });
     });
@@ -442,6 +442,15 @@ describe('DtRecipeEditor tests', () => {
         await boldFormatBtn.trigger('click');
         await wrapper.vm.$nextTick();
         expect(editor.html()).toContain('<strong>In the beginning, it was a nice day.</strong>');
+      });
+    });
+
+    describe('When calling insert in message body', () => {
+      it('message content is inserted at current caret position', async () => {
+        await wrapper.vm.setCursorPosition(19);
+        await wrapper.vm.$nextTick();
+        await wrapper.vm.insertInMessageBody('all things considered, ');
+        expect(editor.html()).toContain('<p>In the beginning, all things considered, it was a nice day.</p>');
       });
     });
 
@@ -470,10 +479,14 @@ describe('DtRecipeEditor tests', () => {
     });
 
     describe('When alignment button is clicked', () => {
-      it('if alignment is left (default) then text output has no styles applied', async () => {
+      it('if alignment is default then text output has no styles applied', async () => {
+        expect(editor.html()).toContain('<p>In the beginning, it was a nice day.</p>');
+      });
+
+      it('if alignment is left then text output has no styles applied', async () => {
         await alignLeftBtn.trigger('click');
         await wrapper.vm.$nextTick();
-        expect(editor.html()).toContain('<p>In the beginning, it was a nice day.</p>');
+        expect(editor.html()).toContain('text-align: left');
       });
 
       it('if alignment is center then text should be aligned to the center', async () => {
@@ -545,6 +558,65 @@ describe('DtRecipeEditor tests', () => {
         await quickRepliesBtn.trigger('click');
         await wrapper.vm.$nextTick();
         expect('quick-replies-click' in wrapper.emitted()).toBeTruthy();
+      });
+    });
+
+    describe('When use div tags is enabled', () => {
+      beforeEach(async () => {
+        _mountWrapper();
+        await wrapper.setProps({ useDivTags: true });
+        await wrapper.vm.$nextTick();
+        _setChildWrappers();
+      });
+      it('should contain the initial value in div tags', function () {
+        expect(editor.html()).toContain(`<div>${testText}</div>`);
+      });
+    });
+
+    describe('Top Action Bar Tests', () => {
+      beforeEach(async () => {
+        _mountWrapper();
+        await wrapper.vm.$nextTick();
+      });
+
+      it('should have only the first button as a focusable item', async function () {
+        await quickRepliesBtn.trigger('focus');
+        expect(quickRepliesBtn.html()).toContain(`tabindex="0"`);
+        expect(boldFormatBtn.html()).toContain(`tabindex="-1"`);
+      });
+
+      it('should focus the next button to the right when right arrow key is pressed', async function () {
+        await quickRepliesBtn.trigger('focus');
+        await quickRepliesBtn.trigger('keydown', { key: 'Right' });
+        expect(quickRepliesBtn.html()).toContain(`tabindex="-1"`);
+        expect(boldFormatBtn.html()).toContain(`tabindex="0"`);
+        expect(document.activeElement).toBe(boldFormatBtn.element);
+      });
+
+      it('should focus the next button to the left when left arrow key is pressed', async function () {
+        await quickRepliesBtn.trigger('focus');
+        await quickRepliesBtn.trigger('keydown', { key: 'Right' });
+        await quickRepliesBtn.trigger('keydown', { key: 'Left' });
+        expect(quickRepliesBtn.html()).toContain(`tabindex="0"`);
+        expect(boldFormatBtn.html()).toContain(`tabindex="-1"`);
+        expect(document.activeElement).toBe(quickRepliesBtn.element);
+      });
+
+      it('should wrap around and only have the last button as a focusable item when the left arrow key button is pressed', async function () {
+        await quickRepliesBtn.trigger('focus');
+        await quickRepliesBtn.trigger('keydown', { key: 'Left' });
+        expect(addLinkBtn.html()).toContain(`tabindex="0"`);
+        expect(quickRepliesBtn.html()).toContain(`tabindex="-1"`);
+        expect(document.activeElement).toBe(addLinkBtn.element);
+      });
+
+      it('should wrap around and only have the first button as a focusable item when the right arrow key button is pressed past the last button', async function () {
+        await quickRepliesBtn.trigger('focus');
+        await quickRepliesBtn.trigger('keydown', { key: 'Left' });
+        await addLinkBtn.trigger('keydown', { key: 'Right' });
+        expect(document.activeElement).toBe(quickRepliesBtn.element);
+        expect(quickRepliesBtn.html()).toContain(`tabindex="0"`);
+        expect(addLinkBtn.html()).toContain(`tabindex="-1"`);
       });
     });
   });

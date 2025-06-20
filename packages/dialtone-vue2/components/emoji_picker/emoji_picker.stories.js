@@ -51,27 +51,33 @@ const recentlyUsedEmojis = [
     unicode_character: '1f470-1f3ff-2640',
   },
 ];
+const customEmojis = [
+  {
+    name: 'shipit',
+    date_added: 1730918816847,
+    added_by: 'Ignacio Ropolo',
+    image: 'https://github.githubassets.com/images/icons/emoji/shipit.png',
+    unicode_character: '1f44d',
+  },
+  {
+    name: 'thumbs up',
+    category: 'people',
+    shortname: ':thumbsup:',
+    shortname_alternates: [':+1:', ':thumbup:'],
+    keywords: ['+1', 'hand', 'thumb', 'up', 'uc6'],
+    unicode_output: '1f44d',
+    unicode_character: '1f44d',
+  },
+];
 
 export const argsData = {
   onSkinTone: action('skin-tone'),
+  onAddEmoji: action('add-emoji'),
   onSelectedEmoji: action('selected-emoji'),
   onClose: action('close'),
-  tabSetLabels: [
-    'Most recently used',
-    'Smileys and people',
-    'Nature',
-    'Food',
-    'Activity',
-    'Travel',
-    'Objects',
-    'Symbols',
-    'Flags',
-  ],
+  onScrollBottomReached: action('scroll-bottom-reached'),
   recentlyUsedEmojis,
-  skinSelectorButtonTooltipLabel: 'Change default skin tone',
-  searchNoResultsLabel: 'No results',
-  searchResultsLabel: 'Search results',
-  searchPlaceholderLabel: 'Search...',
+  customEmojis,
   skinTone: 'Default',
   showPopover: false,
 };
@@ -97,7 +103,17 @@ export const argTypesData = {
       disable: true,
     },
   },
+  onAddEmoji: {
+    table: {
+      disable: true,
+    },
+  },
   onClose: {
+    table: {
+      disable: true,
+    },
+  },
+  onScrollBottomReached: {
     table: {
       disable: true,
     },

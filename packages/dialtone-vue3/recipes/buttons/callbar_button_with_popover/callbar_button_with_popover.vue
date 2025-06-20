@@ -1,6 +1,7 @@
 <template>
   <div
-    class="dt-recipe--callbar-button-with-popover"
+    class="d-recipe-callbar-button-with-popover"
+    v-bind="addClassStyleAttrs($attrs)"
   >
     <dt-recipe-callbar-button
       :aria-label="ariaLabel"
@@ -10,7 +11,11 @@
       :button-class="buttonClass"
       :button-width-size="buttonWidthSize"
       :text-class="textClass"
-      class="dt-recipe--callbar-button-with-popover--main-button"
+      :inverted-tooltip="invertedTooltip"
+      :show-tooltip="showTooltip"
+      :tooltip-text="tooltipText"
+      :tooltip-delay="tooltipDelay"
+      class="d-recipe-callbar-button-with-popover--main-button"
       @click="buttonClick"
     >
       <template #icon>
@@ -31,10 +36,9 @@
       :show-close-button="showCloseButton"
       :offset="offset"
       padding="none"
-      class="dt-recipe--callbar-button-with-popover--popover-wrapper"
-      :dialog-class="['dt-recipe--callbar-button-with-popover--popover', contentClass]"
-      header-class="d-d-flex d-ai-center d-fw-normal d-px12"
-      v-bind="$attrs"
+      class="d-recipe-callbar-button-with-popover__popover-wrapper"
+      :dialog-class="['d-recipe-callbar-button-with-popover__popover', contentClass]"
+      v-bind="removeClassStyleAttrs($attrs)"
       :open-popover="showPopover"
       @opened="onModalIsOpened"
     >
@@ -43,8 +47,8 @@
           circle
           importance="clear"
           size="lg"
-          :class="['dt-recipe--callbar-button-with-popover--arrow',
-                   { 'dt-recipe--callbar-button-with-popover--arrow--large': !isCompactMode }]"
+          :class="['d-recipe-callbar-button-with-popover__arrow',
+                   { 'd-recipe-callbar-button-with-popover__arrow--large': !isCompactMode }]"
           width="2rem"
           :aria-label="arrowButtonLabel"
           :active="open"
@@ -52,7 +56,7 @@
         >
           <template #icon>
             <dt-icon-chevron-up
-              class="dt-recipe--callbar-button-with-popover--arrow__icon"
+              class="d-recipe-callbar-button-with-popover__arrow-icon"
               size="200"
             />
           </template>
@@ -76,9 +80,10 @@ import { DtButton } from '@/components/button';
 import { DtPopover } from '@/components/popover';
 import { DtIconChevronUp } from '@dialpad/dialtone-icons/vue3';
 import { DtRecipeCallbarButton, CALLBAR_BUTTON_VALID_WIDTH_SIZE } from '../callbar_button';
-import utils, { warnIfUnmounted } from '@/common/utils';
+import utils, { warnIfUnmounted, removeClassStyleAttrs, addClassStyleAttrs, returnFirstEl } from '@/common/utils';
 
 export default {
+  compatConfig: { MODE: 3 },
   name: 'DtRecipeCallbarButtonWithPopover',
 
   components: { DtRecipeCallbarButton, DtPopover, DtButton, DtIconChevronUp },
@@ -267,6 +272,42 @@ export default {
       type: Boolean,
       default: false,
     },
+
+    /**
+     * Whether the tooltip has an inverted background color.
+     * @values true, false
+     */
+    invertedTooltip: {
+      type: Boolean,
+      default: false,
+    },
+
+    /**
+     * Use this if you would like to manually override the logic for when the tooltip shows.
+     * Otherwise it will just show on hover/focus.
+     * @values null, true, false
+     */
+    showTooltip: {
+      type: Boolean,
+      default: null,
+    },
+
+    /**
+     * The message that displays in the tooltip. This will be overridden by the tooltip slot.
+     */
+    tooltipText: {
+      type: String,
+      default: undefined,
+    },
+
+    /**
+     * Whether there is a delay before the tooltip shows on hover/focus.
+     * @values true, false
+     */
+    tooltipDelay: {
+      type: Boolean,
+      default: undefined,
+    },
   },
 
   emits: [
@@ -315,10 +356,12 @@ export default {
   },
 
   mounted () {
-    warnIfUnmounted(this.$el, this.$options.name);
+    warnIfUnmounted(returnFirstEl(this.$el), this.$options.name);
   },
 
   methods: {
+    removeClassStyleAttrs,
+    addClassStyleAttrs,
     arrowClick (ev) {
       this.$emit('arrow-click', ev);
       return this.toggleOpen();
@@ -350,57 +393,3 @@ export default {
 
 };
 </script>
-
-<style lang="less">
-.dt-recipe--callbar-button-with-popover--arrow {
-  margin-top: var(--dt-space-450);
-  margin-left: calc(var(--dt-space-300-negative) * 5);
-  width: var(--dt-size-500);
-  height: var(--dt-size-500);
-  padding: var(--dt-space-400);
-  border-radius: var(--dt-size-300);
-
-  &.d-btn--active {
-    background: var(--dt-color-surface-moderate-opaque);
-  }
-
-  &--large {
-    margin-left: var(--dt-space-550-negative);
-  }
-
-  &__icon {
-    color: var(--dt-color-black-800);
-  }
-}
-
-.dt-recipe--callbar-button-with-popover--popover {
-  .d-popover__header {
-    background: var(--dt-color-surface-contrast);
-    color: var(--dt-color-foreground-primary-inverted);
-
-    .d-btn {
-      color: var(--dt-color-foreground-primary-inverted);
-    }
-  }
-}
-
-.dt-recipe--callbar-button-with-popover--button .d-tab--selected::after,
-.dt-recipe--callbar-button-with-popover--button .d-tab--selected:hover::after {
-  --tab--bgc: var(--dt-color-surface-contrast);
-}
-.dt-recipe--callbar-button-with-popover--button .tab-group {
-  display: flex;
-  flex-direction: column;
-  height: 100%;
-}
-
-.dt-recipe--callbar-button-with-popover--button .tab-content {
-  flex: 1 1 100%;
-  overflow-y: auto;
-}
-
-.dt-recipe--callbar-button-with-popover {
-  display: flex;
-  align-items: flex-start;
-}
-</style>

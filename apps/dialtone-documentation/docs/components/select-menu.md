@@ -5,23 +5,11 @@ status: ready
 thumb: true
 image: assets/images/components/select-menu.png
 storybook: https://dialtone.dialpad.com/vue/?path=/story/components-select-menu--default
-figma_url: https://www.figma.com/file/2adf7JhZOncRyjYiy2joil/DT-Core%3A-Components-7?node-id=8919%3A21569&viewport=-1857%2C206%2C0.37&t=xHutRjwo1o5zMTgT-11
+figma_url: https://www.figma.com/design/W58r5BkO8qTw3vem9YieJd/DT9-Component-Library--Rebrand-2025-?node-id=25737-2711
 ---
 
-<code-well-header>
-  <div class="d-w100p">
-    <div class="d-label">
-      <label for="Dialtone--SelectExample1">Label</label>
-    </div>
-    <div class="d-select">
-      <select class="d-select__input" id="Dialtone--SelectExample1">
-        <option value="" selected>Please select one</option>
-        <option value="option1">Option 1</option>
-        <option value="option2">Option 2</option>
-        <option value="option3">Option 3</option>
-      </select>
-    </div>
-  </div>
+<code-well-header class="d-d-block">
+  <example-select-menu label="Label" />
 </code-well-header>
 
 <!-- <component-combinator component-name="DtSelectMenu" /> -->
@@ -33,6 +21,7 @@ figma_url: https://www.figma.com/file/2adf7JhZOncRyjYiy2joil/DT-Core%3A-Componen
 
 - Use sparingly — only when a user needs to choose from about seven to 15 possible options, and you have limited space to display the options.
 </template>
+
 <template #dont>
 
 - For site navigation.
@@ -41,9 +30,10 @@ figma_url: https://www.figma.com/file/2adf7JhZOncRyjYiy2joil/DT-Core%3A-Componen
 - Avoid using the `multiple` attribute. Users often don’t understand how to select multiple items from the select element (e.g. by holding down a modifier key).
 - For selecting an action that takes immediate effect. A `select` is for selecting a choice that is only confirmed by a separate submit action (much like a [Checkbox](checkbox.md)). For immediate actions consider the [Dropdown](dropdown.md) component.
 </template>
+
 </dialtone-usage>
 
-### Best practices
+### Best Practices
 
 - Selects should be considered the “UI of last resort,” as users often find them confusing and difficult to use. Consider testing thoroughly with members of your target audience.
 - Avoid making options in one dropdown menu change based on the input to another. Users often don’t understand how selecting an item in one impacts another.
@@ -56,34 +46,10 @@ figma_url: https://www.figma.com/file/2adf7JhZOncRyjYiy2joil/DT-Core%3A-Componen
 
 A select is normally paired with a label, but there are times when it can be used without a label. Don't rely on the placeholder text as a label.
 
-<code-well-header bgclass="d-bgc-primary">
+<code-well-header bgclass="d-bgc-primary" class="d-d-block">
   <div class="d-stack16 d-w100p">
-    <div>
-      <div class="d-label">
-        <label for="Dialtone--SelectExample1">Default</label>
-      </div>
-      <div class="d-select">
-        <select class="d-select__input" id="Dialtone--SelectExample1">
-          <option value="" selected>Please select one</option>
-          <option value="option1">Option 1</option>
-          <option value="option2">Option 2</option>
-          <option value="option3">Option 3</option>
-        </select>
-      </div>
-    </div>
-    <div>
-      <div class="d-label">
-        <label for="Dialtone--SelectExample2">Disabled</label>
-      </div>
-      <div class="d-select d-select--disabled">
-        <select class="d-select__input" id="Dialtone--SelectExample2" disabled>
-          <option value="" selected>Please select one</option>
-          <option value="option1">Option 1</option>
-          <option value="option2">Option 2</option>
-          <option value="option3">Option 3</option>
-        </select>
-      </div>
-    </div>
+    <example-select-menu label="Default" />
+    <example-select-menu label="Disabled" disabled />
   </div>
 </code-well-header>
 
@@ -116,6 +82,7 @@ htmlCode='
 </div>
 '
 vueCode='
+<!-- IMPORTANT NOTE: Change model-value to just value in Vue 2 -->
 <dt-select-menu
   :options="[
         { value: ``, label: `Please select one` },
@@ -124,7 +91,7 @@ vueCode='
         { value: `3`, label: `Option 3` },
       ]"
   label="Default"
-  :value="value"
+  :model-value="modelValue"
   @input="onInput"
   @change="onChange"
 />
@@ -137,32 +104,17 @@ vueCode='
       ]"
   label="Disabled"
   disabled
-  :value="value"
+  :model-value="modelValue"
   @input="onInput"
   @change="onChange"
 />
 '
 showHtmlWarning />
 
-### With description text
+### With Description Text
 
-<code-well-header bgclass="d-bgc-primary">
-  <div class="d-w100p">
-    <div class="d-label">
-      <label for="Dialtone--SelectExample3">Label</label>
-    </div>
-    <div class="d-description">
-        <span>Optional description text</span>
-    </div>
-    <div class="d-select">
-      <select class="d-select__input" id="Dialtone--SelectExample3">
-        <option value="" selected>Please select one</option>
-        <option value="option1">Option 1</option>
-        <option value="option2">Option 2</option>
-        <option value="option3">Option 3</option>
-      </select>
-    </div>
-  </div>
+<code-well-header bgclass="d-bgc-primary" class="d-d-block">
+  <example-select-menu label="Label" description="Optional description text" />
 </code-well-header>
 
 <code-example-tabs
@@ -183,6 +135,7 @@ htmlCode='
 </div>
 '
 vueCode='
+<!-- IMPORTANT NOTE: Change model-value to just value in Vue 2 -->
 <dt-select-menu
   :options="[
         { value: ``, label: `Please select one` },
@@ -192,67 +145,31 @@ vueCode='
       ]"
   label="Label"
   description="Optional description text"
-  :value="value"
+  :model-value="modelValue"
   @input="onInput"
   @change="onChange"
 />
 '
 showHtmlWarning />
 
-### With validation states
+### With Validation States
 
 Provides feedback to the user based on their interaction, or lack thereof, with a select.
 
-<code-well-header bgclass="d-bgc-primary">
+<code-well-header bgclass="d-bgc-primary" class="d-d-block">
   <div class="d-stack16 d-w100p">
-    <div>
-      <div class="d-label">
-        <label for="Dialtone--SelectExample4">Label</label>
-      </div>
-      <div class="d-select">
-        <select class="d-select__input d-select__input--error" id="Dialtone--SelectExample4">
-          <option value="" selected>Please select one</option>
-          <option value="option1">Option 1</option>
-          <option value="option2">Option 2</option>
-          <option value="option3">Option 3</option>
-        </select>
-      </div>
-      <div class="d-validation-message d-validation-message--error">
-        <span>Error validation message</span>
-      </div>
-    </div>
-    <div>
-      <div class="d-label">
-        <label for="Dialtone--SelectExample5">Label</label>
-      </div>
-      <div class="d-select">
-        <select class="d-select__input d-select__input--success" id="Dialtone--SelectExample5">
-          <option value="" selected>Please select one</option>
-          <option value="option1">Option 1</option>
-          <option value="option2">Option 2</option>
-          <option value="option3">Option 3</option>
-        </select>
-      </div>
-      <div class="d-validation-message d-validation-message--success">
-        <span>Success validation message</span>
-      </div>
-    </div>
-    <div>
-      <div class="d-label">
-        <label for="Dialtone--SelectExample6">Label</label>
-      </div>
-      <div class="d-select">
-        <select class="d-select__input d-select__input--warning" id="Dialtone--SelectExample6">
-          <option value="" selected>Please select one</option>
-          <option value="option1">Option 1</option>
-          <option value="option2">Option 2</option>
-          <option value="option3">Option 3</option>
-        </select>
-      </div>
-      <div class="d-validation-message d-validation-message--warning">
-        <span>Warning validation message</span>
-      </div>
-    </div>
+    <example-select-menu
+      label="Label"
+      :messages='[{"message":"Error validation message","type":"error"}]'
+    />
+    <example-select-menu
+      label="Label"
+      :messages='[{"message":"Success validation message","type":"success"}]'
+    />
+    <example-select-menu
+      label="Label"
+      :messages='[{"message":"Warning validation message","type":"warning"}]'
+    />
   </div>
 </code-well-header>
 
@@ -308,6 +225,7 @@ htmlCode='
 </div>
 '
 vueCode='
+<!-- IMPORTANT NOTE: Change model-value to just value in Vue 2 -->
 <dt-select-menu
   :options="[
     { value: ``, label: `Please select one` },
@@ -317,7 +235,7 @@ vueCode='
   ]"
   :messages="[{ message: `Error validation message`, type: `error` }]"
   label="Label"
-  :value="value"
+  :model-value="modelValue"
   @input="onInput"
   @change="onChange"
 />
@@ -330,7 +248,7 @@ vueCode='
   ]"
   :messages="[{ message: `Success validation message`, type: `success` }]"
   label="Label"
-  :value="value"
+  :model-value="modelValue"
   @input="onInput"
   @change="onChange"
 />
@@ -343,84 +261,195 @@ vueCode='
   ]"
   :messages="[{ message: `Warning validation message`, type: `warning` }]"
   label="Label"
-  :value="value"
+  :model-value="modelValue"
   @input="onInput"
   @change="onChange"
 />
 '
 showHtmlWarning />
 
+### With Validation States Hidden
+
+<code-well-header bgclass="d-bgc-primary" class="d-d-block">
+  <div class="d-stack16 d-w100p" ref="messagesHidden">
+    <example-select-menu
+      label="Label"
+      :messages='[{"message":"Error validation message","type":"error"}]'
+      :show-messages="false"
+    />
+    <example-select-menu
+      label="Label"
+      :messages='[{"message":"Success validation message","type":"success"}]'
+      :show-messages="false"
+    />
+    <example-select-menu
+      label="Label"
+      :messages='[{"message":"Warning validation message","type":"warning"}]'
+      :show-messages="false"
+    />
+  </div>
+</code-well-header>
+
+<code-example-tabs
+:htmlCode="() => $refs.messagesHidden"
+vueCode='
+<!-- IMPORTANT NOTE: Change model-value to just value in Vue 2 -->
+<dt-select-menu
+  :options="[
+    { value: ``, label: `Please select one` },
+    { value: `1`, label: `Option 1` },
+    { value: `2`, label: `Option 2` },
+    { value: `3`, label: `Option 3` },
+  ]"
+  :messages="[{ message: `Error validation message`, type: `error` }]"
+  label="Label"
+  :model-value="modelValue"
+  @input="onInput"
+  @change="onChange"
+  :show-messages="false"
+/>
+<dt-select-menu
+  :options="[
+    { value:``, label: `Please select one` },
+    { value: `1`, label: `Option 1` },
+    { value: `2`, label: `Option 2` },
+    { value: `3`, label: `Option 3` },
+  ]"
+  :messages="[{ message: `Success validation message`, type: `success` }]"
+  label="Label"
+  :model-value="modelValue"
+  @input="onInput"
+  @change="onChange"
+  :show-messages="false"
+/>
+<dt-select-menu
+  :options="[
+    { value: ``, label: `Please select one` },
+    { value: `1`, label: `Option 1` },
+    { value: `2`, label: `Option 2` },
+    { value: `3`, label: `Option 3` },
+  ]"
+  :messages="[{ message: `Warning validation message`, type: `warning` }]"
+  label="Label"
+  :model-value="modelValue"
+  @input="onInput"
+  @change="onChange"
+  :show-messages="false"
+/>
+'
+/>
+
+### With Slotted Label
+
+<code-well-header class="d-d-block">
+  <example-select-menu ref="slottedLabel">
+    <template #label>
+      <div>Slotted label</div>
+    </template>
+  </example-select-menu>
+</code-well-header>
+
+<code-example-tabs
+:htmlCode="() => $refs.slottedLabel"
+vueCode='
+<!-- IMPORTANT NOTE: Change model-value to just value in Vue 2 -->
+<dt-select-menu
+  :options="[
+    { value: ``, label: `Please select one` },
+    { value: `1`, label: `Option 1` },
+    { value: `2`, label: `Option 2` },
+    { value: `3`, label: `Option 3` },
+  ]"
+  :model-value="modelValue"
+  @input="onInput"
+  @change="onChange"
+>
+  <template #label>
+    <div>Slotted label</div>
+  </template>
+</dt-select-menu>
+'
+/>
+
+### With Slotted Description
+
+<code-well-header class="d-d-block">
+  <example-select-menu ref="slottedDescription">
+    <template #description>
+      <div>Slotted description</div>
+    </template>
+  </example-select-menu>
+</code-well-header>
+
+<code-example-tabs
+:htmlCode="() => $refs.slottedDescription"
+vueCode='
+<!-- IMPORTANT NOTE: Change model-value to just value in Vue 2 -->
+<dt-select-menu
+  :options="[
+    { value: ``, label: `Please select one` },
+    { value: `1`, label: `Option 1` },
+    { value: `2`, label: `Option 2` },
+    { value: `3`, label: `Option 3` },
+  ]"
+  :model-value="modelValue"
+  @input="onInput"
+  @change="onChange"
+>
+  <template #description>
+    <div>Slotted description</div>
+  </template>
+</dt-select-menu>
+'
+/>
+
+### With Slotted Options
+
+<code-well-header class="d-d-block">
+  <dt-select-menu
+    label="With Slotted Options"
+    ref="slottedOptions"
+  >
+    <option value="">Slotted options</option>
+    <option value="1">Option 1</option>
+    <option value="2">Option 2</option>
+    <option value="3">Option 3</option>
+  </dt-select-menu>
+</code-well-header>
+
+<code-example-tabs
+:htmlCode="() => $refs.slottedOptions"
+vueCode='
+<!-- IMPORTANT NOTE: Change model-value to just value in Vue 2 -->
+<dt-select-menu
+  :model-value="modelValue"
+  @input="onInput"
+  @change="onChange"
+>
+  <template #options>
+    <option
+      v-for="option in options"
+      :key="`with-slotted-options-${option.value}`"
+      :value="option.value"
+    >
+      {{ option.label }}
+    </option>
+  </template>
+</dt-select-menu>
+'
+/>
+
 ## Sizes
 
 We offer different sizes for instances in which the interface requires a smaller or larger select. In general, though, use the base (medium) size select as much as possible, especially in forms.
 
-<code-well-header bgclass="d-bgc-primary">
+<code-well-header bgclass="d-bgc-primary" class="d-d-block">
   <div class="d-stack16 d-w100p">
-    <div>
-      <div class="d-label d-label--xs">
-        <label for="Dialtone--SelectExample7">Label</label>
-      </div>
-      <div class="d-select d-select--xs">
-        <select class="d-select__input" id="Dialtone--SelectExample7">
-          <option value="" selected>Please select one</option>
-          <option value="option1">Option 1</option>
-          <option value="option2">Option 2</option>
-          <option value="option3">Option 3</option>
-        </select>
-      </div>
-    </div>
-    <div>
-      <div class="d-label d-label--sm">
-        <label for="Dialtone--SelectExample8">Label</label>
-      </div>
-      <div class="d-select d-select--sm">
-        <select class="d-select__input" id="Dialtone--SelectExample8">
-          <option value="" selected>Please select one</option>
-          <option value="option1">Option 1</option>
-          <option value="option2">Option 2</option>
-          <option value="option3">Option 3</option>
-        </select>
-      </div>
-    </div>
-    <div>
-      <div class="d-label">
-        <label for="Dialtone--SelectExample9">Label</label>
-      </div>
-      <div class="d-select">
-        <select class="d-select__input" id="Dialtone--SelectExample9">
-          <option value="" selected>Please select one</option>
-          <option value="option1">Option 1</option>
-          <option value="option2">Option 2</option>
-          <option value="option3">Option 3</option>
-        </select>
-      </div>
-    </div>
-    <div>
-      <div class="d-label d-label--lg">
-        <label for="Dialtone--SelectExample10">Label</label>
-      </div>
-      <div class="d-select d-select--lg">
-        <select class="d-select__input" id="Dialtone--SelectExample10">
-          <option value="" selected>Please select one</option>
-          <option value="option1">Option 1</option>
-          <option value="option2">Option 2</option>
-          <option value="option3">Option 3</option>
-        </select>
-      </div>
-    </div>
-    <div>
-      <div class="d-label d-label--xl">
-        <label for="Dialtone--SelectExample11">Label</label>
-      </div>
-      <div class="d-select d-select--xl">
-        <select class="d-select__input" id="Dialtone--SelectExample11">
-          <option value="" selected>Please select one</option>
-          <option value="option1">Option 1</option>
-          <option value="option2">Option 2</option>
-          <option value="option3">Option 3</option>
-        </select>
-      </div>
-    </div>
+    <example-select-menu label="Label" size="xs" />
+    <example-select-menu label="Label" size="sm" />
+    <example-select-menu label="Label" size="md" />
+    <example-select-menu label="Label" size="lg" />
+    <example-select-menu label="Label" size="xl" />
   </div>
 </code-well-header>
 
@@ -454,6 +483,19 @@ htmlCode='
 </div>
 <div>
   <label>
+    <div class="d-label d-label--md">Label</div>
+    <div class="d-select d-select--md">
+      <select class="d-select__input">
+        <option class="" value=""> Please select one </option>
+        <option class="" value="1"> Option 1 </option>
+        <option class="" value="2"> Option 2 </option>
+        <option class="" value="3"> Option 3 </option>
+      </select>
+    </div>
+  </label>
+</div>
+<div>
+  <label>
     <div class="d-label d-label--lg">Label</div>
     <div class="d-select d-select--lg">
       <select class="d-select__input">
@@ -469,8 +511,7 @@ htmlCode='
   <label>
     <div class="d-label d-label--xl">Label</div>
     <div class="d-select d-select--xl">
-      <select class="d-select__input">
-        <option class="" value=""> Please select one </option>
+      <select class="" value=""> Please select one </option>
         <option class="" value="1"> Option 1 </option>
         <option class="" value="2"> Option 2 </option>
         <option class="" value="3"> Option 3 </option>
@@ -480,6 +521,7 @@ htmlCode='
 </div>
 '
 vueCode='
+<!-- IMPORTANT NOTE: Change model-value to just value in Vue 2 -->
 <dt-select-menu
   :options="[
     { value: ``, label: `Please select one` },
@@ -489,7 +531,7 @@ vueCode='
   ]"
   label="Label"
   size="xs"
-  :value="value"
+  :model-value="modelValue"
   @input="onInput"
   @change="onChange"
 />
@@ -502,7 +544,20 @@ vueCode='
   ]"
   label="Label"
   size="sm"
-  :value="value"
+  :model-value="modelValue"
+  @input="onInput"
+  @change="onChange"
+/>
+<dt-select-menu
+  :options="[
+    { value: ``, label: `Please select one` },
+    { value: `1`, label: `Option 1` },
+    { value: `2`, label: `Option 2` },
+    { value: `3`, label: `Option 3` },
+  ]"
+  label="Label"
+  size="md"
+  :model-value="modelValue"
   @input="onInput"
   @change="onChange"
 />
@@ -515,7 +570,7 @@ vueCode='
   ]"
   label="Label"
   size="lg"
-  :value="value"
+  :model-value="modelValue"
   @input="onInput"
   @change="onChange"
 />
@@ -528,7 +583,7 @@ vueCode='
   ]"
   label="Label"
   size="xl"
-  :value="value"
+  :model-value="modelValue"
   @input="onInput"
   @change="onChange"
 />
@@ -551,3 +606,7 @@ showHtmlWarning />
 ## Classes
 
 <component-class-table component-name="select" />
+
+<script setup>
+  import ExampleSelectMenu from '@exampleComponents/ExampleSelectMenu.vue';
+</script>

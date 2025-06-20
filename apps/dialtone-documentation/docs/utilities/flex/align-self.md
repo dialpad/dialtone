@@ -1,5 +1,5 @@
 ---
-title: Align self
+title: Align Self
 description: Utilities for setting how an element's is aligned along a parent's cross axis.
 ---
 
@@ -7,11 +7,11 @@ description: Utilities for setting how an element's is aligned along a parent's 
 
 Use `d-as-stretch` to stretch an item along a parent's cross axis.
 
-<code-well-header class="d-fl-center d-fd-column d-p24 d-bgc-purple-100 d-bgo50 d-w100p d-hmn216">
-  <div class="d-d-flex d-ai-flex-start d-p8 d-w100p d-hmn216 d-bar8 d-bgc-purple-100">
-    <div class="d-fl-center d-fl1 d-m8 d-p16 d-bgc-purple-300 d-bar4 d-fs-300 d-fw-bold">1</div>
-    <div class="d-fl-center d-fl1 d-as-stretch d-m8 d-p16 d-bgc-purple-300 d-bar4 d-fs-300 d-fw-bold">2</div>
-    <div class="d-fl-center d-fl1 d-m8 d-p16 d-bgc-purple-300 d-bar4 d-fs-300 d-fw-bold">3</div>
+<code-well-header>
+  <div class="d-d-flex d-ai-flex-start d-p8 d-w100p d-hmn216 d-bar8 d-bgc-moderate">
+    <div class="d-fl-center d-fl1 d-m8 d-p16 d-bgc-moderate-opaque d-bar4">1</div>
+    <div class="d-fl-center d-fl1 d-as-stretch d-m8 d-p16 d-bgc-bold-opaque d-bar4">2</div>
+    <div class="d-fl-center d-fl1 d-m8 d-p16 d-bgc-moderate-opaque d-bar4">3</div>
   </div>
 </code-well-header>
 
@@ -23,15 +23,15 @@ Use `d-as-stretch` to stretch an item along a parent's cross axis.
 </div>
 ```
 
-## Flex start
+## Flex Start
 
 Use `d-as-flex-start` to align an item to the start of the parent's cross axis.
 
-<code-well-header class="d-fl-center d-fd-column d-p24 d-bgc-magenta-100 d-bgo50 d-w100p d-hmn216">
-  <div class="d-d-flex d-p8 d-w100p d-hmn216 d-bar8 d-bgc-magenta-100">
-    <div class="d-fl-center d-fl1 d-m8 d-p16 d-bgc-magenta-200 d-bar4 d-fs-300 d-fw-bold">1</div>
-    <div class="d-fl-center d-fl1 d-as-flex-start d-m8 d-p16 d-bgc-magenta-200 d-bar4 d-fs-300 d-fw-bold">2</div>
-    <div class="d-fl-center d-fl1 d-m8 d-p16 d-bgc-magenta-200 d-bar4 d-fs-300 d-fw-bold">3</div>
+<code-well-header>
+  <div class="d-d-flex d-p8 d-w100p d-hmn216 d-bar8 d-bgc-moderate">
+    <div class="d-fl-center d-fl1 d-m8 d-p16 d-bgc-moderate-opaque d-bar4">1</div>
+    <div class="d-fl-center d-fl1 d-as-flex-start d-m8 d-p16 d-bgc-bold-opaque d-bar4">2</div>
+    <div class="d-fl-center d-fl1 d-m8 d-p16 d-bgc-moderate-opaque d-bar4">3</div>
   </div>
 </code-well-header>
 
@@ -47,11 +47,11 @@ Use `d-as-flex-start` to align an item to the start of the parent's cross axis.
 
 Use `d-as-center` to align an item along the center of the parent's cross axis.
 
-<code-well-header class="d-fl-center d-fd-column d-p24 d-bgc-green-100 d-bgo50 d-w100p d-hmn216">
-  <div class="d-d-flex d-p8 d-w100p d-hmn216 d-bar8 d-bgc-green-100">
-    <div class="d-fl-center d-fl1 d-m8 d-p16 d-bgc-green-200 d-bar4 d-fs-300 d-fw-bold">1</div>
-    <div class="d-fl-center d-fl1 d-as-center d-m8 d-p16 d-bgc-green-200 d-bar4 d-fs-300 d-fw-bold">2</div>
-    <div class="d-fl-center d-fl1 d-m8 d-p16 d-bgc-green-200 d-bar4 d-fs-300 d-fw-bold">3</div>
+<code-well-header>
+  <div class="d-d-flex d-p8 d-w100p d-hmn216 d-bar8 d-bgc-moderate">
+    <div class="d-fl-center d-fl1 d-m8 d-p16 d-bgc-moderate-opaque d-bar4">1</div>
+    <div class="d-fl-center d-fl1 d-as-center d-m8 d-p16 d-bgc-bold-opaque d-bar4">2</div>
+    <div class="d-fl-center d-fl1 d-m8 d-p16 d-bgc-moderate-opaque d-bar4">3</div>
   </div>
 </code-well-header>
 
@@ -63,15 +63,15 @@ Use `d-as-center` to align an item along the center of the parent's cross axis.
 </div>
 ```
 
-## Flex end
+## Flex End
 
 Use `d-as-flex-end` to align an item from the end of the parent's cross axis.
 
-<code-well-header class="d-fl-center d-fd-column d-p24 d-bgc-red-100 d-bgo50 d-w100p d-hmn216">
-  <div class="d-d-flex d-p8 d-w100p d-hmn216 d-bar8 d-bgc-red-100">
-    <div class="d-fl-center d-fl1 d-m8 d-p16 d-bgc-red-200 d-bar4 d-fs-300 d-fw-bold">1</div>
-    <div class="d-fl-center d-fl1 d-as-flex-end d-m8 d-p16 d-bgc-red-200 d-bar4 d-fs-300 d-fw-bold">2</div>
-    <div class="d-fl-center d-fl1 d-m8 d-p16 d-bgc-red-200 d-bar4 d-fs-300 d-fw-bold">3</div>
+<code-well-header>
+  <div class="d-d-flex d-p8 d-w100p d-hmn216 d-bar8 d-bgc-moderate">
+    <div class="d-fl-center d-fl1 d-m8 d-p16 d-bgc-moderate-opaque d-bar4">1</div>
+    <div class="d-fl-center d-fl1 d-as-flex-end d-m8 d-p16 d-bgc-bold-opaque d-bar4">2</div>
+    <div class="d-fl-center d-fl1 d-m8 d-p16 d-bgc-moderate-opaque d-bar4">3</div>
   </div>
 </code-well-header>
 
@@ -93,7 +93,7 @@ Use `d-as-flex-end` to align an item from the end of the parent's cross axis.
   <template #content>
     <tbody>
       <tr v-for=" { class: className, output } in alignSelf">
-        <th scope="row" class="d-code--sm d-fc-purple-400">.d-{{ className }}</th>
+        <th scope="row" class="d-code--sm d-docsite-code">.d-{{ className }}</th>
         <td class="d-code--sm">{{ output }}</td>
       </tr>
     </tbody>

@@ -2,6 +2,7 @@ import { mount } from '@vue/test-utils';
 import DtTabGroup from './tab_group.vue';
 import DtTabPanel from './tab_panel.vue';
 import DtTab from './tab.vue';
+import { returnFirstEl } from '@/common/utils';
 import { TAB_LIST_KIND_MODIFIERS, TAB_LIST_SIZE_MODIFIERS, TAB_LIST_IMPORTANCE_MODIFIERS } from './tabs_constants';
 import { h } from 'vue';
 
@@ -44,18 +45,18 @@ const optionTabs = [
 ];
 
 const tabPanelComponents = {
-  functional: true,
   render () {
-    return optionTabPanel.map(option => h(DtTabPanel, option, () => option.slot));
+    return h('div', {}, optionTabPanel.map(option => h(DtTabPanel, { id: option.id, tabId: option.tabId }, () => option.slot)));
   },
 };
 
 const tabComponents = {
-  functional: true,
   render () {
-    return optionTabs.map(option => h(DtTab, option, () => option.slot));
+    return h('div', {}, optionTabs.map(option => h(DtTab, { id: option.id, panelId: option.panelId, selected: option.selected, label: option.label }, () => option.slot)));
   },
 };
+
+const baseAttributes = {};
 
 describe('DtTabGroup Tests', () => {
   // Wrappers
@@ -63,10 +64,15 @@ describe('DtTabGroup Tests', () => {
   let tabList;
   let tabs;
   let tabPanels;
+  let attrs;
 
   const props = {
     label: 'area-label',
   };
+
+  beforeEach(() => {
+    attrs = baseAttributes;
+  });
 
   const _setWrappers = () => {
     tabList = wrapper.find('[role="tablist"]');
@@ -78,6 +84,7 @@ describe('DtTabGroup Tests', () => {
     wrapper = mount(DtTabGroup, {
       attachTo: document.body,
       props,
+      attrs,
       slots: {
         default: tabPanelComponents,
         tabs: tabComponents,
@@ -159,7 +166,7 @@ describe('DtTabGroup Tests', () => {
       beforeEach(async () => {
         _mountWrapper();
         // Simulating the third tab being set programmatically after the second tab was selected by a user.
-        tabs.at(1).vm.$el.click();
+        returnFirstEl(tabs.at(1).vm.$el).click();
         props.selected = optionTabs[2].panelId;
         await wrapper.setProps(props);
       });
@@ -187,7 +194,7 @@ describe('DtTabGroup Tests', () => {
 
     describe('Correct change event', () => {
       beforeEach(() => {
-        tabs.at(1).vm.$el.click();
+        returnFirstEl(tabs.at(1).vm.$el).click();
       });
 
       it('should emitted on click', () => {
@@ -195,10 +202,20 @@ describe('DtTabGroup Tests', () => {
       });
     });
 
+    describe('Correct before-change event', () => {
+      beforeEach(() => {
+        returnFirstEl(tabs.at(1).vm.$el).click();
+      });
+
+      it('should emitted on click', () => {
+        expect(wrapper.emitted('before-change').length).toBe(1);
+      });
+    });
+
     describe('Correct key navigation', () => {
       describe('On keyup left', () => {
         beforeEach(async () => {
-          tabs.at(0).vm.$el.focus();
+          returnFirstEl(tabs.at(0).vm.$el).focus();
           await tabList.trigger('keyup.left');
           await tabList.trigger('keyup.space');
         });
@@ -207,95 +224,98 @@ describe('DtTabGroup Tests', () => {
           expect(tabs.at(2).attributes('aria-selected')).toBe('true');
           expect(tabPanels.at(2).attributes('aria-hidden')).toBe('false');
         });
+      });
 
-        describe('On double keyup left and space', () => {
-          beforeEach(async () => {
-            tabs.at(0).vm.$el.focus();
-            await tabList.trigger('keyup.left');
-            await tabList.trigger('keyup.left');
-            await tabList.trigger('keyup.space');
-          });
+      describe('On double keyup left and space', () => {
+        beforeEach(async () => {
+          returnFirstEl(tabs.at(0).vm.$el).focus();
+          await tabList.trigger('keyup.left');
+          await tabList.trigger('keyup.left');
+          await tabList.trigger('keyup.space');
+        });
 
-          it('aria-selected should be "true"', () => {
-            expect(tabs.at(1).attributes('aria-selected')).toBe('true');
-          });
-
-          it('aria-hidden should be "false"', () => {
-            expect(tabPanels.at(1).attributes('aria-hidden')).toBe('false');
-          });
+        it('selected element should be correct', () => {
+          expect(tabs.at(1).attributes('aria-selected')).toBe('true');
+          expect(tabPanels.at(1).attributes('aria-hidden')).toBe('false');
         });
       });
 
       describe('On right and enter', () => {
         beforeEach(async () => {
-          tabs.at(0).vm.$el.focus();
+          returnFirstEl(tabs.at(0).vm.$el).focus();
           await tabList.trigger('keyup.right');
           await tabList.trigger('keyup.enter');
         });
 
-        it('aria-selected should be "true"', () => {
+        it('selected element should be correct', () => {
           expect(tabs.at(1).attributes('aria-selected')).toBe('true');
-        });
-
-        it('aria-hidden should be "false"', () => {
           expect(tabPanels.at(1).attributes('aria-hidden')).toBe('false');
         });
+      });
 
-        describe('On double keyup right and enter', () => {
-          beforeEach(async () => {
-            tabs.at(0).vm.$el.focus();
-            await tabList.trigger('keyup.right');
-            await tabList.trigger('keyup.right');
-            await tabList.trigger('keyup.enter');
-          });
+      describe('On double keyup right and enter', () => {
+        beforeEach(async () => {
+          returnFirstEl(tabs.at(0).vm.$el).focus();
+          await tabList.trigger('keyup.right');
+          await tabList.trigger('keyup.right');
+          await tabList.trigger('keyup.enter');
+        });
 
-          it('aria-selected should be "true"', () => {
-            expect(tabs.at(2).attributes('aria-selected')).toBe('true');
-          });
-
-          it('aria-hidden should be "false"', () => {
-            expect(tabPanels.at(2).attributes('aria-hidden')).toBe('false');
-          });
+        it('selected element should be correct', () => {
+          expect(tabs.at(2).attributes('aria-selected')).toBe('true');
+          expect(tabPanels.at(2).attributes('aria-hidden')).toBe('false');
         });
       });
 
       describe('On keydown home and enter', () => {
         beforeEach(async () => {
-          tabs.at(2).vm.$el.focus();
+          returnFirstEl(tabs.at(2).vm.$el).focus();
           await tabList.trigger('keydown.home');
           await tabList.trigger('keyup.enter');
         });
 
-        it('aria-selected should be "true"', () => {
+        it('selected element should be correct', () => {
           expect(tabs.at(0).attributes('aria-selected')).toBe('true');
-        });
-
-        it('aria-hidden should be "false"', () => {
           expect(tabPanels.at(0).attributes('aria-hidden')).toBe('false');
         });
       });
 
       describe('On keydown end and enter', () => {
         beforeEach(async () => {
-          tabs.at(0).vm.$el.focus();
+          returnFirstEl(tabs.at(0).vm.$el).focus();
           await tabList.trigger('keydown.end');
           await tabList.trigger('keyup.enter');
         });
 
-        it('aria-selected should be "true"', () => {
+        it('selected element should be correct', () => {
           expect(tabs.at(2).attributes('aria-selected')).toBe('true');
-        });
-
-        it('aria-hidden should be "false"', () => {
           expect(tabPanels.at(2).attributes('aria-hidden')).toBe('false');
         });
+      });
+    });
+
+    describe('When before-change prevents default event', () => {
+      beforeEach(async () => {
+        attrs = {
+          onBeforeChange: (event) => {
+            event.preventDefault();
+          },
+        };
+
+        _mountWrapper();
+
+        returnFirstEl(tabs.at(0).vm.$el).click();
+      });
+
+      it('Should prevent the change event', async () => {
+        expect(wrapper.emitted('change')).toBeUndefined();
       });
     });
   });
 
   describe('Accessibility Tests', () => {
     beforeEach(async () => {
-      tabs.at(0).vm.$el.focus();
+      returnFirstEl(tabs.at(0).vm.$el).focus();
       await tabList.trigger('keyup.enter');
     });
 
@@ -313,7 +333,7 @@ describe('DtTabGroup Tests', () => {
         let lastTab;
         let lastPanel;
         beforeEach(async () => {
-          tabs.at(0).vm.$el.focus();
+          returnFirstEl(tabs.at(0).vm.$el).focus();
           await tabList.trigger('keyup.left');
           await tabList.trigger('keyup.space');
           lastTab = tabs.at(2).attributes();
@@ -328,7 +348,7 @@ describe('DtTabGroup Tests', () => {
 
       describe('attributes after keyup right', () => {
         beforeEach(async () => {
-          tabs.at(0).vm.$el.focus();
+          returnFirstEl(tabs.at(0).vm.$el).focus();
           await tabList.trigger('keyup.right');
           await tabList.trigger('keyup.enter');
         });
@@ -346,7 +366,7 @@ describe('DtTabGroup Tests', () => {
 
       describe('attributes after keydown home', () => {
         beforeEach(async () => {
-          tabs.at(2).vm.$el.focus();
+          returnFirstEl(tabs.at(2).vm.$el).focus();
           await tabList.trigger('keydown.home');
           await tabList.trigger('keyup.enter');
         });
@@ -364,7 +384,7 @@ describe('DtTabGroup Tests', () => {
 
       describe('attributes after keydown end', () => {
         beforeEach(async () => {
-          tabs.at(0).vm.$el.focus();
+          returnFirstEl(tabs.at(0).vm.$el).focus();
           await tabList.trigger('keydown.end');
           await tabList.trigger('keyup.enter');
         });

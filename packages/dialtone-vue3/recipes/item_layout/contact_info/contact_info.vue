@@ -2,21 +2,24 @@
   <dt-item-layout
     :role="role"
     data-qa="contact-info"
-    class="dt-contact-info"
+    class="d-recipe-contact-info"
+    content-class="d-recipe-contact-info__content"
+    right-class="d-recipe-contact-info__right"
+    unstyled
   >
     <template
       v-if="showAvatar"
       #left
     >
       <button
-        class="dt-contact-info__left"
+        class="d-recipe-contact-info__left"
         data-qa="contact-info-left"
         :aria-labelledby="avatarLabelledBy"
         @click="avatarClick"
       >
         <span
           v-if="avatarList"
-          class="dt-contact-info--avatars"
+          class="d-recipe-contact-info__avatars"
         >
           <dt-avatar
             v-for="(avatar, index) in avatarList"
@@ -27,11 +30,14 @@
             :image-src="avatar.src"
             image-alt=""
             :overlay-text="avatar.text"
-            :avatar-class="[{ 'd-mln24': index > 0, 'd-bc-brand': !!avatar.halo }]"
+            :avatar-class="[
+              {
+                'd-recipe-contact-info__avatar-stacked': index > 0,
+                'd-recipe-contact-info__avatar-halo': !!avatar.halo,
+              },
+            ]"
           >
-            <template
-              #icon="{ iconSize }"
-            >
+            <template #icon="{ iconSize }">
               <!-- @slot Slot for avatar icon in a list -->
               <slot
                 name="avatarIcon"
@@ -56,9 +62,7 @@
           :color="avatarColor"
           :presence="presence"
         >
-          <template
-            #icon="{ iconSize }"
-          >
+          <template #icon="{ iconSize }">
             <!-- @slot Slot for avatar icon in a list -->
             <slot
               name="avatarIcon"
@@ -69,14 +73,20 @@
       </button>
     </template>
     <template #default>
-      <div data-qa="contact-info-header">
+      <div
+        class="d-recipe-contact-info__header"
+        data-qa="contact-info-header"
+      >
         <!-- @slot Slot for header information -->
         <slot name="header" />
       </div>
     </template>
 
     <template #subtitle>
-      <div data-qa="contact-info-subtitle">
+      <div
+        class="d-recipe-contact-info__subtitle"
+        data-qa="contact-info-subtitle"
+      >
         <!-- @slot Slot for subtitle information -->
         <slot name="subtitle" />
       </div>
@@ -86,7 +96,10 @@
       v-if="$slots.bottom"
       #bottom
     >
-      <div data-qa="contact-info-bottom">
+      <div
+        class="d-recipe-contact-info__bottom"
+        data-qa="contact-info-bottom"
+      >
         <!-- @slot Slot for information at the bottom -->
         <slot name="bottom" />
       </div>
@@ -107,9 +120,9 @@
 <script>
 import DtItemLayout from '@/components/item_layout/item_layout.vue';
 import DtAvatar from '@/components/avatar/avatar.vue';
-import { hasSlotContent } from '@/common/utils/index.js';
 
 export default {
+  compatConfig: { MODE: 3 },
   name: 'DtRecipeContactInfo',
 
   components: {
@@ -227,59 +240,3 @@ export default {
   },
 };
 </script>
-
-<style lang="less" scoped>
-.dt-contact-info {
-  --contact-info-avatar-border-color: var(--dt-color-surface-primary);
-
-  display: flex;
-
-  &:deep(.dt-item-layout) {
-    flex: 1 1 0;
-  }
-
-  &:deep(.dt-item-layout--content) {
-    /*
-    DP-74536: Add `min-width` to make the width of "contact info" adjustable.
-    */
-    min-width: var(--dt-space-825);
-  }
-
-  &:deep(.dt-item-layout--left) {
-    /*
-    DP-74536: To make 'Avatar' in fixed position when resizing the window.
-    */
-    min-width: var(--dt-space-650);
-    justify-content: flex-start;
-    align-items: center;
-  }
-
-  &:deep(.dt-item-layout--right) {
-    /*
-    DP-74536: Remove `min-width` which cause extra unused empty space on the right of "contact info".
-    */
-    min-width: 0;
-    align-items: center;
-  }
-
-  &__left {
-    position: relative;
-    background-color: transparent;
-    background-image: none;
-    border-width: 0;
-    cursor: pointer;
-  }
-
-  &--avatars {
-    margin-right: var(--dt-space-300-negative);
-    display: flex;
-    flex-direction: row;
-
-    .d-avatar {
-      border-radius: var(--dt-size-radius-pill);
-      border: var(--dt-size-300) solid var(--contact-info-avatar-border-color);
-      box-sizing: unset;
-    }
-  }
-}
-</style>

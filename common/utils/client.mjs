@@ -43,5 +43,5 @@ export default {
   getUniqueString,
   kebabCaseToPascalCase,
   flushPromises,
-  PascalCaseToKebabCase
+  PascalCaseToKebabCase,
 };

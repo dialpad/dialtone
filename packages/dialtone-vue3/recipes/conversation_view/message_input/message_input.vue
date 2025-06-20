@@ -1,9 +1,10 @@
-<!-- eslint-disable vue/no-restricted-class -->
+<!-- eslint-disable max-lines -->
 <template>
   <div
-    data-qa="dt-message-input"
+    data-qa="dt-recipe-message-input"
     role="presentation"
-    :class="['dt-message-input']"
+    class="d-recipe-message-input"
+    v-bind="addClassStyleAttrs($attrs)"
     @dragover.prevent
     @drop.prevent="onDrop"
     @paste="onPaste"
@@ -11,44 +12,81 @@
   >
     <!-- @slot Renders above the input, but still within the borders. -->
     <slot name="top" />
+
+    <!-- set key to selectedText to force update. otherwise this component may not reflect the active selection -->
+    <dt-recipe-message-input-topbar
+      v-if="richText"
+      :key="selectedText"
+      :bold-button-options="boldButtonOptions"
+      :italic-button-options="italicButtonOptions"
+      :strike-button-options="strikeButtonOptions"
+      :bullet-list-button-options="bulletListButtonOptions"
+      :ordered-list-button-options="orderedListButtonOptions"
+      :block-quote-button-options="blockQuoteButtonOptions"
+      :code-button-options="codeButtonOptions"
+      :code-block-button-options="codeBlockButtonOptions"
+      :is-selection-active="isSelectionActive"
+      @click="handleTopbarClick"
+    >
+      <template #link>
+        <dt-recipe-message-input-link
+          ref="link"
+          :open="linkDialogOpen"
+          :link-button-options="linkButtonOptions"
+          :is-selection-active="isSelectionActive"
+          @opened="linkDialogOpened"
+          @set-link="setLink"
+          @remove-link="removeLink"
+        />
+      </template>
+    </dt-recipe-message-input-topbar>
     <!-- Some wrapper to restrict the height and show the scrollbar -->
     <div
       v-dt-scrollbar
-      class="dt-message-input__editor-wrapper"
+      class="d-recipe-message-input__editor-wrapper"
       :style="{ 'max-height': maxHeight }"
     >
       <dt-rich-text-editor
         ref="richTextEditor"
         v-model="internalInputValue"
-        :allow-blockquote="allowBlockquote"
-        :allow-bold="allowBold"
-        :allow-bullet-list="allowBulletList"
-        :allow-codeblock="allowCodeblock"
-        :allow-italic="allowItalic"
-        :allow-strike="allowStrike"
-        :allow-underline="allowUnderline"
+        :allow-blockquote="richText"
+        :allow-bold="richText"
+        :allow-bullet-list="richText"
+        :allow-code="richText"
+        :allow-codeblock="richText"
+        :allow-italic="richText"
+        :allow-strike="richText"
+        :allow-underline="richText"
+        :paste-rich-text="richText"
         :editable="editable"
         :input-aria-label="inputAriaLabel"
         :input-class="inputClass"
         :output-format="outputFormat"
         :auto-focus="autoFocus"
-        :link="link"
+        :link="richText"
         :placeholder="placeholder"
         :prevent-typing="preventTyping"
         :mention-suggestion="mentionSuggestion"
         :channel-suggestion="channelSuggestion"
         :slash-command-suggestion="slashCommandSuggestion"
         :additional-extensions="additionalExtensions"
-        v-bind="$attrs"
+        :hide-link-bubble-menu="hideLinkBubbleMenu"
+        v-bind="removeClassStyleAttrs($attrs)"
         @input="onInput"
+        @text-input="onTextInput"
+        @enter="onSend"
+        @selected="selectedText = $event"
+        @edit-link="initLinkDialog"
+        @focus="isFocused = true"
+        @blur="isFocused = false"
       />
     </div>
     <!-- @slot Slot for attachment carousel -->
     <slot name="middle" />
     <!-- Section for the bottom UI -->
-    <section class="dt-message-input__bottom-section">
+    <section class="d-recipe-message-input__bottom-section">
       <!-- Left content -->
-      <div class="dt-message-input__bottom-section-left">
+      <div class="d-recipe-message-input__bottom-section-left">
         <dt-stack
           gap="200"
           direction="row"
@@ -56,9 +94,9 @@
           <dt-button
             v-if="showImagePicker"
             v-dt-tooltip:top-start="showImagePicker?.tooltipLabel"
-            data-qa="dt-message-input-image-btn"
+            data-qa="dt-recipe-message-input-image-btn"
             size="sm"
-            class="dt-message-input__button"
+            class="d-recipe-message-input__button"
             kind="muted"
             importance="clear"
             :aria-label="showImagePicker.ariaLabel"
@@ -74,18 +112,18 @@
           </dt-button>
           <dt-input
             ref="messageInputImageUpload"
-            data-qa="dt-message-input-image-input"
+            data-qa="dt-recipe-message-input-image-input"
             accept="image/*, video/*"
             type="file"
-            class="dt-message-input__image-input"
+            class="d-recipe-message-input__image-input"
             multiple
             hidden
             @input="onImageUpload"
           />
           <dt-popover
             v-if="showEmojiPicker"
-            v-model:open="emojiPickerOpened"
-            data-qa="dt-message-input-emoji-picker-popover"
+            open.sync="emojiPickerOpened"
+            data-qa="dt-recipe-message-input-emoji-picker-popover"
             initial-focus-element="#searchInput"
             padding="none"
           >
@@ -93,9 +131,9 @@
               <dt-button
                 v-dt-tooltip="emojiTooltipMessage"
                 v-bind="attrs"
-                data-qa="dt-message-input-emoji-picker-btn"
+                data-qa="dt-recipe-message-input-emoji-picker-btn"
                 size="sm"
-                class="dt-message-input__button"
+                class="d-recipe-message-input__button"
                 kind="muted"
                 importance="clear"
                 :aria-label="emojiButtonAriaLabel"
@@ -121,34 +159,31 @@
               <dt-emoji-picker
                 v-bind="emojiPickerProps"
                 @skin-tone="onSkinTone"
-                @selected-emoji="
-                  (emoji) => {
-                    close();
-                    onSelectEmoji(emoji);
-                  }
-                "
+                @selected-emoji="(emoji) => onSelectEmoji(emoji, close)"
               />
             </template>
           </dt-popover>
           <!-- @slot Slot for emojiGiphy picker -->
           <slot name="emojiGiphyPicker" />
+          <!-- @slot Slot to add extra action icons next to default ones -->
+          <slot name="customActionIcons" />
         </dt-stack>
       </div>
       <!-- Right content -->
-      <div class="dt-message-input__bottom-section-right">
+      <div class="d-recipe-message-input__bottom-section-right">
         <dt-stack
           direction="row"
           gap="300"
         >
           <!-- @slot Slot for sms count -->
-          <div class="d-d-flex d-ai-center">
+          <div class="d-recipe-message-input__sms-count">
             <slot name="smsCount" />
           </div>
 
           <!-- Optionally displayed remaining character counter -->
           <dt-tooltip
             v-if="Boolean(showCharacterLimit)"
-            class="dt-message-input__remaining-char-tooltip"
+            class="d-recipe-message-input__remaining-char-tooltip"
             placement="top-end"
             :enabled="characterLimitTooltipEnabled"
             :message="showCharacterLimit.message"
@@ -157,8 +192,8 @@
             <template #anchor>
               <p
                 v-show="displayCharacterLimitWarning"
-                class="dt-message-input__remaining-char"
-                data-qa="dt-message-input-character-limit"
+                class="d-recipe-message-input__remaining-char"
+                data-qa="dt-recipe-message-input-character-limit"
               >
                 {{ showCharacterLimit.count - inputLength }}
               </p>
@@ -168,8 +203,8 @@
           <!-- Cancel button for edit mode -->
           <dt-button
             v-if="showCancel"
-            data-qa="dt-message-input-cancel-button"
-            class="dt-message-input__button dt-message-input__cancel-button"
+            data-qa="dt-recipe-message-input-cancel-button"
+            class="d-recipe-message-input__button d-recipe-message-input__cancel-button"
             size="sm"
             kind="muted"
             importance="clear"
@@ -186,14 +221,14 @@
             <dt-button
               v-if="showSend"
               v-dt-tooltip:top-end="showSend?.tooltipLabel"
-              data-qa="dt-message-input-send-btn"
+              data-qa="dt-recipe-message-input-send-btn"
               size="sm"
               kind="default"
               importance="primary"
               :class="[
-                'dt-message-input__button dt-message-input__send-button',
+                'd-recipe-message-input__button d-recipe-message-input__send-button',
                 {
-                  'dt-message-input__send-button--disabled': isSendDisabled,
+                  'd-recipe-message-input__send-button--disabled': isSendDisabled,
                   'd-btn--icon-only': showSendIcon,
                 },
               ]"
@@ -231,6 +266,8 @@ import {
   RICH_TEXT_EDITOR_OUTPUT_FORMATS,
   RICH_TEXT_EDITOR_AUTOFOCUS_TYPES,
 } from '@/components/rich_text_editor';
+import lastActiveNodes from './last_active_nodes';
+import { removeClassStyleAttrs, returnFirstEl, addClassStyleAttrs } from '@/common/utils';
 import MeetingPill from './extensions/meeting_pill/meeting_pill';
 import { DtButton } from '@/components/button';
 import { DtEmojiPicker } from '@/components/emoji_picker';
@@ -239,13 +276,18 @@ import { DtInput } from '@/components/input';
 import { DtTooltip } from '@/components/tooltip';
 import { DtStack } from '@/components/stack';
 import {
-  DtIconImage,
-  DtIconVerySatisfied,
-  DtIconSatisfied,
-  DtIconSend,
+  DtIconImage, DtIconVerySatisfied, DtIconSatisfied, DtIconSend,
 } from '@dialpad/dialtone-icons/vue3';
+import DtRecipeMessageInputTopbar from './message_input_topbar.vue';
+import DtRecipeMessageInputLink from './message_input_link.vue';
+
+import {
+  EDITOR_SUPPORTED_LINK_PROTOCOLS,
+  EDITOR_DEFAULT_LINK_PREFIX,
+} from '../editor/editor_constants.js';
 
 export default {
+  compatConfig: { MODE: 3 },
   name: 'DtRecipeMessageInput',
 
   components: {
@@ -253,6 +295,8 @@ export default {
     DtEmojiPicker,
     DtInput,
     DtPopover,
+    DtRecipeMessageInputTopbar,
+    DtRecipeMessageInputLink,
     DtRichTextEditor,
     DtTooltip,
     DtStack,
@@ -267,6 +311,19 @@ export default {
   inheritAttrs: false,
 
   props: {
+    /**
+     * Displays all the buttons for rich text formatting above the message input, and enables it within the editor.
+     * Rich text formatting for the purposes of this component is defined as:
+     *
+     * bold, italic, strikethrough, lists, blockquotes, inline code tags, and code blocks.
+     *
+     * If you are sending a message to a phone rather than a Dialpad to Dialpad message, you should have this as false.
+     */
+    richText: {
+      type: Boolean,
+      default: true,
+    },
+
     /**
      * Value of the input. The object format should match TipTap's JSON
      * document structure: https://tiptap.dev/guide/output#option-1-json
@@ -341,18 +398,10 @@ export default {
      */
     outputFormat: {
       type: String,
-      default: 'text',
+      default: 'json',
       validator (outputFormat) {
         return RICH_TEXT_EDITOR_OUTPUT_FORMATS.includes(outputFormat);
       },
-    },
-
-    /**
-     * Enables the Link extension and optionally passes configurations to it
-     */
-    link: {
-      type: [Boolean, Object],
-      default: true,
     },
 
     /**
@@ -503,59 +552,147 @@ export default {
     },
 
     /**
-     * Whether the input allows for block quote.
+     * descriptive text fields for the bold button
+     *
+     * object format:
+     * { ariaLabel: string, tooltipText: string, keyboardShortcutText: string }
      */
-    allowBlockquote: {
-      type: Boolean,
-      default: true,
+    boldButtonOptions: {
+      type: Object,
+      default: () => ({
+        ariaLabel: 'Toggle bold on selected text',
+        tooltipText: 'Bold',
+        keyboardShortcutText: 'Mod + B',
+      }),
     },
 
     /**
-     * Whether the input allows for bold to be introduced in the text.
+     * descriptive text fields for the italic button
+     *
+     * object format:
+     * { ariaLabel: string, tooltipText: string, keyboardShortcutText: string }
      */
-    allowBold: {
-      type: Boolean,
-      default: true,
+    italicButtonOptions: {
+      type: Object,
+      default: () => ({
+        ariaLabel: 'Toggle italic on selected text',
+        tooltipText: 'Italic',
+        keyboardShortcutText: 'Mod + I',
+      }),
     },
 
     /**
-     * Whether the input allows for bullet list to be introduced in the text.
+     * descriptive text fields for the strikethrough button
+     *
+     * object format:
+     * { ariaLabel: string, tooltipText: string, keyboardShortcutText: string }
      */
-    allowBulletList: {
-      type: Boolean,
-      default: true,
+    strikeButtonOptions: {
+      type: Object,
+      default: () => ({
+        ariaLabel: 'Toggle strikethrough on selected text',
+        tooltipText: 'Strikethrough',
+        keyboardShortcutText: 'Mod + Shift + S',
+      }),
     },
 
     /**
-     * Whether the input allows for italic to be introduced in the text.
+     * descriptive text fields for the link button
+     *
+     * object format:
+     * { ariaLabel: string, tooltipText: string, keyboardShortcutText: string }
      */
-    allowItalic: {
-      type: Boolean,
-      default: true,
+    linkButtonOptions: {
+      type: Object,
+      default: () => ({
+        ariaLabel: 'Create or edit link on selected text',
+        tooltipText: 'Link',
+        // TODO: implement mod k
+        keyboardShortcutText: 'Mod + K',
+        dialogTitle: 'Add a link',
+        textLabel: 'Text to display (optional)',
+        linkLabel: 'Link',
+        linkPlaceholder: 'e.g. https://www.dialpad.com',
+        removeLabel: 'Remove',
+        cancelLabel: 'Cancel',
+        confirmLabel: 'Done',
+        visuallyHiddenCloseText: 'Close link dialog',
+      }),
     },
 
     /**
-     * Whether the input allows for strike to be introduced in the text.
+     * descriptive text fields for the bullet list button
+     *
+     * object format:
+     * { ariaLabel: string, tooltipText: string, keyboardShortcutText: string }
      */
-    allowStrike: {
-      type: Boolean,
-      default: true,
+    bulletListButtonOptions: {
+      type: Object,
+      default: () => ({
+        ariaLabel: 'Toggle bullet list on selected text',
+        tooltipText: 'Bullet list',
+        keyboardShortcutText: 'Mod + Shift + 8',
+      }),
     },
 
     /**
-     * Whether the input allows for underline to be introduced in the text.
+     * descriptive text fields for the ordered list button
+     *
+     * object format:
+     * { ariaLabel: string, tooltipText: string, keyboardShortcutText: string }
      */
-    allowUnderline: {
-      type: Boolean,
-      default: true,
+    orderedListButtonOptions: {
+      type: Object,
+      default: () => ({
+        ariaLabel: 'Toggle ordered list on selected text',
+        tooltipText: 'Ordered list',
+        keyboardShortcutText: 'Mod + Shift + 7',
+      }),
     },
 
     /**
-     * Whether the input allows codeblock to be introduced in the text.
+     * descriptive text fields for the italic button
+     *
+     * object format:
+     * { ariaLabel: string, tooltipText: string, keyboardShortcutText: string }
      */
-    allowCodeblock: {
-      type: Boolean,
-      default: true,
+    blockQuoteButtonOptions: {
+      type: Object,
+      default: () => ({
+        ariaLabel: 'Toggle Blockquote on selected text',
+        tooltipText: 'Blockquote',
+        keyboardShortcutText: 'Mod + Shift + B',
+      }),
+    },
+
+    /**
+     * descriptive text fields for the code button
+     *
+     * object format:
+     * { ariaLabel: string, tooltipText: string, keyboardShortcutText: string }
+     */
+    codeButtonOptions: {
+      type: Object,
+      default: () => ({
+        ariaLabel: 'Toggle code tag on selected text',
+        tooltipText: 'Code',
+        keyboardShortcutText: 'Mod + E',
+      }),
+    },
+
+    /**
+     * descriptive text fields for the code block button
+     *
+     * object format:
+     * { ariaLabel: string, tooltipText: string, keyboardShortcutText: string }
+     */
+    codeBlockButtonOptions: {
+      type: Object,
+      default: () => ({
+        ariaLabel: 'Toggle code block on selected text',
+        tooltipText: 'Code block',
+        keyboardShortcutText: 'Mod + Alt + C',
+      }),
     },
   },
 
@@ -638,25 +775,45 @@ export default {
      * @type {String|JSON}
      */
     'update:modelValue',
+
+    /**
+     * Emitted when input changes, returns text content only
+     * @event text-input
+     * @type {String}
+     */
+    'text-input',
   ],
 
   data () {
     return {
+      // If an ordered list is nested within an unordered list, we only want to show the currently selected list as
+      // active. This function performs the logic to determine the farthest active node from the root.
+      lastActiveNodes,
       additionalExtensions: [MeetingPill],
       internalInputValue: this.modelValue, // internal input content
       imagePickerFocus: false,
       emojiPickerFocus: false,
       emojiPickerOpened: false,
+      isFocused: false,
+      linkOptions: {
+        class: 'd-link d-c-text d-d-inline-block',
+      },
+
+      linkDialogOpen: false,
+      selectedText: '',
+      text: '',
+      hideLinkBubbleMenu: false,
     };
   },
 
   computed: {
+
     showSendIcon () {
       return !this.showSend.text;
     },
 
     inputLength () {
-      return this.internalInputValue.length;
+      return this.text.length;
     },
 
     displayCharacterLimitWarning () {
@@ -712,13 +869,74 @@ export default {
   created () {
     if (this.modelValue && this.outputFormat === 'text') {
       this.internalInputValue = this.modelValue.replace(/\n/g, '<br>');
+    } else {
+      this.internalInputValue = this.modelValue;
     }
   },
 
   methods: {
+    removeClassStyleAttrs,
+    addClassStyleAttrs,
+
+    linkDialogOpened (value) {
+      this.linkDialogOpen = value;
+      if (value === true) {
+        this.initLinkDialog();
+      } else {
+        this.hideLinkBubbleMenu = false;
+        this.$refs.richTextEditor?.focusEditor();
+      }
+    },
+
+    // eslint-disable-next-line complexity
+    handleTopbarClick (type) {
+      const editor = this.$refs.richTextEditor?.editor;
+      // Key is the name returned in the event, value is the name of the TipTap command function to run.
+      const typeToCommandMap = {
+        bold: () => editor?.chain().focus().toggleBold().run(),
+        italic: () => editor?.chain().focus().toggleItalic().run(),
+        strike: () => editor?.chain().focus().toggleStrike().run(),
+        bulletList: () => editor?.chain().focus().toggleBulletList().run(),
+        orderedList: () => editor?.chain().focus().toggleOrderedList().run(),
+        blockquote: () => editor?.chain().focus().toggleBlockquote().run(),
+        code: () => editor?.chain().focus().toggleCode().run(),
+        codeBlock: () => editor?.chain().focus().toggleCodeBlock().run(),
+      };
+
+      if (editor && typeToCommandMap[type]) {
+        typeToCommandMap[type]();
+      }
+    },
+
+    // Checks if the node currently selected is active ex/ the bold button is active if the selected text is bold
+    isSelectionActive (type) {
+      if (['bulletList', 'orderedList'].includes(type)) {
+        return this.lastActiveNodes(this.$refs.richTextEditor?.editor?.state, [{ type: 'bulletList' }, { type: 'orderedList' }]).includes(type) && this.isFocused;
+      }
+      return this.$refs.richTextEditor?.editor?.isActive(type) && this.isFocused;
+    },
+
+    initLinkDialog () {
+      this.$refs.link.setInitialValues(this.selectedText, this.$refs.richTextEditor?.editor?.getAttributes('link')?.href);
+      this.hideLinkBubbleMenu = true;
+      this.linkDialogOpen = true;
+    },
+
+    removeLink () {
+      this.$refs.richTextEditor?.removeLink();
+      this.linkDialogOpen = false;
+    },
+
+    setLink (linkText, linkInput) {
+      this.$refs.richTextEditor.setLink(
+        linkInput, linkText, this.linkOptions, EDITOR_SUPPORTED_LINK_PROTOCOLS, EDITOR_DEFAULT_LINK_PREFIX,
+      );
+      this.linkDialogOpen = false;
+    },
+
     // Mousedown instead of click because it fires before the blur event.
     onMousedown (e) {
-      const isWithinInput = this.$refs.richTextEditor.$el
+      const isWithinInput = returnFirstEl(this.$refs.richTextEditor.$el)
         .querySelector('.tiptap')
         .contains(e.target);
 
@@ -750,9 +968,13 @@ export default {
       this.$emit('skin-tone', skinTone);
     },
 
-    onSelectEmoji (emoji) {
+    onSelectEmoji (emoji, close) {
       if (!emoji) {
         return;
+      }
+
+      if (!emoji.shift_key) {
+        close();
       }
 
       // Insert emoji into the editor
@@ -794,77 +1016,11 @@ export default {
     onInput (event) {
       this.$emit('update:modelValue', event);
     },
+
+    onTextInput (event) {
+      this.text = event;
+      this.$emit('text-input', event);
+    },
   },
 };
 </script>
-
-<style lang="less">
-.dt-message-input {
-  display: flex;
-  flex-direction: column;
-  border-radius: var(--dt-size-radius-400);
-  border: var(--dt-size-border-100) solid;
-  border-color: var(--dt-color-border-default);
-  line-height: var(--dt-font-line-height-400);
-  cursor: text;
-  transition-property: border-color, box-shadow, opacity;
-  transition-duration: var(--td50);
-  transition-timing-function: var(--ttf-in-out);
-
-  &:focus-within {
-    border-color: var(--dt-color-border-bold);
-    box-shadow: 0 0 var(--dt-size-300) 0 var(--dt-color-surface-moderate-opaque);
-  }
-
-  &__editor-wrapper {
-    padding: var(--dt-space-450) var(--dt-space-500) var(--dt-space-300);
-  }
-
-  &__remaining-char-tooltip {
-    margin-top: auto;
-    margin-bottom: auto;
-  }
-
-  &__remaining-char {
-    color: var(--dt-color-foreground-critical);
-    font-size: var(--dt-font-size-100);
-    margin-right: var(--dt-space-300);
-  }
-
-  &__button {
-    max-height: 2.8rem;
-    max-width: 2.8rem;
-    border-radius: var(--dt-size-radius-300);
-  }
-
-  &__send-button.dt-message-input__button:not(.d-btn--icon-only),
-  &__cancel-button {
-    max-width: unset;
-    padding: var(--dt-space-350);
-  }
-
-  &__send-button--disabled {
-    background-color: unset;
-    color: var(--dt-color-foreground-muted);
-    cursor: default;
-  }
-
-  &__bottom-section {
-    display: flex;
-    justify-content: space-between;
-    padding: var(--dt-space-300) var(--dt-space-400) var(--dt-space-400);
-  }
-
-  &__bottom-section-left {
-    display: flex;
-  }
-
-  &__bottom-section-right {
-    display: flex;
-  }
-
-  &__image-input {
-    position: absolute;
-  }
-}
-</style>

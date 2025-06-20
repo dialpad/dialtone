@@ -29,6 +29,7 @@ import { DtIconChevronDown } from '@dialpad/dialtone-icons/vue3';
 import { getUniqueString } from '@/common/utils';
 
 export default {
+  compatConfig: { MODE: 3 },
   name: 'SplitButtonOmega',
   components: {
     DtButton,

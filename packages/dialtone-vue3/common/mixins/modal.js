@@ -1,3 +1,5 @@
+import { returnFirstEl } from '@/common/utils';
+
 const focusableAttrs = ':not(:disabled):not([aria-disabled="true"]):not([role="presentation"])';
 const tabbableAttrs = `${focusableAttrs}:not([tabindex="-1"])`;
 const focusableElementsList = `button,[href],input,select,textarea,details,[tabindex]`;
@@ -36,13 +38,13 @@ export default {
      *  will default to the root node of the vue component
      */
     async focusFirstElement (el = this.$el) {
-      const elToFocus = await this.getFirstFocusableElement(el);
+      const elToFocus = await this.getFirstFocusableElement(returnFirstEl(el));
       elToFocus?.focus({ preventScroll: true });
     },
 
     async focusElementById (elementId) {
       await this.$nextTick();
-      const result = this.$el?.querySelector(elementId);
+      const result = returnFirstEl(this.$el)?.querySelector(elementId);
       if (result) {
         result.focus();
         return;
@@ -83,6 +85,7 @@ export default {
      * @param {bool} includeNegativeTabIndex - will include tabindex="-1" in the list of focusable elements.
      */
     _getFocusableElements (el = this.$el, includeNegativeTabIndex = false) {
+      el = returnFirstEl(el);
       if (!el) return [];
       const focusableContent = [...el.querySelectorAll(focusableElementsList)];
       return focusableContent.filter((fc) => {

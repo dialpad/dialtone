@@ -3,7 +3,6 @@ import DtRecipeGroupRow from './group_row.vue';
 
 // Constants
 const basePropsData = {
-  groupCount: 2,
   names: 'Jaqueline Nackos, Lori Smith',
   avatarFullName: 'Jaqueline Nackos',
   avatarSrc: 'avatar1.png',
@@ -29,8 +28,8 @@ describe('DtRecipeGroupRow Tests', () => {
 
   // Helpers
   const _setChildWrappers = () => {
-    description = wrapper.find('.dt-leftbar-row__description');
-    unreadBadge = wrapper.find('[data-qa="dt-leftbar-row-unread-badge"]');
+    description = wrapper.find('.d-recipe-leftbar-row__description');
+    unreadBadge = wrapper.find('[data-qa="dt-recipe-leftbar-row-unread-badge"]');
   };
 
   const _setWrappers = () => {
@@ -100,7 +99,7 @@ describe('DtRecipeGroupRow Tests', () => {
       });
 
       it('should render the selected group row', () => {
-        expect(wrapper.classes().includes('dt-leftbar-row--selected')).toBe(true);
+        expect(wrapper.classes().includes('d-recipe-leftbar-row--selected')).toBe(true);
       });
     });
   });

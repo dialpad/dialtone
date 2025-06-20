@@ -1,5 +1,5 @@
 ---
-title: Radio group
+title: Radio Group
 description: Radio groups are control elements that allow the user to make a single selection from a list of options.
 status: ready
 thumb: true
@@ -9,7 +9,7 @@ storybook: https://dialtone.dialpad.com/vue/?path=/story/components-radio-group-
 
 <code-well-header>
   <dt-radio-group
-    value=""
+    model-value=""
     class="d-input-group__fieldset"
     name="fruits-radio-group-00"
     legend="Fruits"
@@ -26,7 +26,7 @@ storybook: https://dialtone.dialpad.com/vue/?path=/story/components-radio-group-
 
 <code-well-header>
   <dt-radio-group
-    value=""
+    model-value=""
     name="fruits-radio-group-01"
     class="d-input-group__fieldset"
     legend="Fruits"
@@ -77,7 +77,7 @@ htmlCode='
 '
 vueCode='
 <dt-radio-group
-  value=""
+  model-value=""
   name="fruits-radio-group-01"
   legend="Fruits"
 >
@@ -220,7 +220,7 @@ vueCode='
 '
 />
 
-### With validation states
+### With Validation States
 
 <code-well-header>
   <div class="d-stack16">

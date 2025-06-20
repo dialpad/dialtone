@@ -69,7 +69,7 @@ module.exports = {
         let foundIndex;
 
         deprecatedComponents.forEach(item => {
-          const regex = new RegExp(`^.*${item.fileName}(?:\\.vue)?$`, 'g');
+          const regex = new RegExp(`^.*/${item.fileName}(?:\\.vue)?$`, 'g');
           foundIndex = node.source.value.toLowerCase().search(regex);
 
           if (foundIndex !== -1) {

@@ -1,11 +1,15 @@
 module.exports = {
-  '*.{js, mjs, cjs, vue}': [
-    'pnpm exec eslint --fix',
+  '*.{js,mjs,cjs,vue}': [
+    'eslint --fix',
+    'vitest related --run',
+  ],
+  '*.json': [
+    'eslint --fix',
   ],
   '*.less': [
-    'pnpm exec stylelint --fix'
+    'stylelint --fix --allow-empty-input',
   ],
-  '*.{md, mdx}': [
-    'pnpm exec markdownlint'
-  ]
+  '*.{md,mdx}': [
+    'markdownlint --fix',
+  ],
 };

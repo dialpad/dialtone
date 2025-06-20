@@ -37,7 +37,7 @@ export default {
     DtButton,
   },
 
-  inject: ['changeContentPanel', 'groupContext', 'setFocus'],
+  inject: ['groupContext', 'setFocus'],
 
   inheritAttrs: false,
 
@@ -109,7 +109,6 @@ export default {
         ...this.$listeners,
 
         click: event => {
-          this.selectPanel();
           this.$emit('click', event);
         },
 
@@ -122,22 +121,9 @@ export default {
   },
 
   mounted () {
-    this.setSelectedPanelByDefault();
-  },
-
-  methods: {
-    setSelectedPanelByDefault () {
-      if (this.selected) {
-        this.selectPanel(true);
-      }
-    },
-
-    selectPanel (selectOverride = false) {
-      this.changeContentPanel({
-        selected: this.panelId,
-        selectOverride,
-      });
-    },
+    if (this.selected) {
+      this.groupContext.selected = this.panelId;
+    }
   },
 };
 </script>

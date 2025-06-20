@@ -1,0 +1,101 @@
+.d-recipe-feed-item-pill--toggleable {
+  cursor: pointer;
+}
+
+.d-recipe-feed-item-pill__wrapper {
+  padding: var(--dt-space-400);
+  background-color: var(--dt-color-surface-secondary);
+}
+
+.d-recipe-feed-item-pill__button {
+  width: var(--dt-size-100-percent);
+  text-align: left;
+  background-color: var(--dt-color-surface-moderate);
+  border-width: 0;
+  border-radius: var(--dt-size-radius-600);
+  cursor: pointer;
+
+  --button-padding-x: var(--button-padding-y-md);
+  --button-padding-y: var(--button-padding-y-md);
+  --button-color-text: var(--dt-action-color-foreground-muted-default);
+  --button-border-radius: var(--dt-size-radius-600);
+}
+
+.d-recipe-feed-item-pill__layout {
+  gap: var(--dt-space-300);
+  width: var(--dt-size-100-percent);
+  padding: var(--dt-space-400);
+  line-height: var(--dt-font-line-height-300)
+}
+
+.d-recipe-feed-item-pill__icon {
+  display: grid;
+  place-content: center;
+  min-width: var(--dt-size-600);
+  height: var(--dt-size-100-percent);
+
+  & svg {
+    animation: d-recipe-feed-item-pill-fade 0.15s ease-in;
+  }
+}
+
+.d-recipe-feed-item-pill__content {
+  display: flex;
+  justify-content: center;
+}
+
+.d-recipe-feed-item-pill__title {
+  display: grid;
+  align-content: center;
+  height: var(--dt-size-100-percent);
+  font-weight: var(--dt-font-weight-bold);
+}
+
+.d-recipe-feed-item-pill__subtitle {
+  margin-top: var(--dt-space-200-negative);
+  color: var(--dt-color-foreground-tertiary);
+  font-size: var(--dt-font-size-100);
+}
+
+.d-recipe-feed-item-pill__bottom {
+  margin-top: var(--dt-space-200);
+}
+
+.d-recipe-feed-item-pill__right {
+  display: grid;
+  place-content: center;
+  min-width: var(--dt-size-600);
+  height: var(--dt-size-100-percent);
+}
+
+// Gradient radius solution taken from https://stackoverflow.com/a/53037637
+.d-recipe-feed-item-pill__border {
+  overflow: hidden;
+  background-clip: content-box, border-box;
+  background-origin: border-box;
+  border: double var(--dt-size-100) transparent;
+  border-radius: var(--dt-size-radius-600);
+}
+
+.d-recipe-feed-item-pill__border--default {
+  background: var(--dt-color-border-default)
+}
+
+.d-recipe-feed-item-pill__border--ai {
+  background-image: linear-gradient(var(--dt-color-surface-primary), var(--dt-color-surface-primary)),
+  var(--dt-badge-color-background-ai);
+}
+
+.d-recipe-feed-item-pill__border--critical {
+  background: var(--dt-color-foreground-critical);
+}
+
+@keyframes d-recipe-feed-item-pill-fade {
+  0% {
+    transform: scale(0);
+  }
+
+  100% {
+    transform: scale(1);
+  }
+}

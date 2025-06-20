@@ -1,53 +1,55 @@
 <template>
-  <div>
-    <label>
-      <div :class="['d-checkbox-group', { 'd-checkbox-group--disabled': internalDisabled }]">
-        <div class="d-checkbox__input">
-          <input
-            type="checkbox"
-            :checked="internalChecked"
-            :name="internalName"
-            :value="value"
-            :disabled="internalDisabled"
-            :class="['d-checkbox', inputValidationClass, inputClass]"
-            v-bind="$attrs"
-            :indeterminate.prop="internalIndeterminate"
-            v-on="inputListeners"
-          >
-        </div>
-        <div
-          v-if="hasLabelOrDescription"
-          class="d-checkbox__copy d-checkbox__label"
-          data-qa="checkbox-label-description-container"
+  <div
+    v-bind="addClassStyleAttrs($attrs)"
+  >
+    <label :class="['d-checkbox-group', { 'd-checkbox-group--disabled': internalDisabled }]">
+      <div class="d-checkbox__input">
+        <input
+          type="checkbox"
+          :checked="internalChecked"
+          :name="internalName"
+          :value="value"
+          :disabled="internalDisabled"
+          :class="['d-checkbox', inputValidationClass, inputClass]"
+          v-bind="removeClassStyleAttrs($attrs)"
+          :indeterminate.prop="internalIndeterminate"
+          v-on="inputListeners"
         >
-          <div
-            v-if="hasLabel"
-            :class="labelClass"
-            v-bind="labelChildProps"
-            data-qa="checkbox-label"
-          >
-            <!-- @slot slot for Checkbox Label -->
-            <slot>{{ label }}</slot>
-          </div>
-          <div
-            v-if="hasDescription"
-            :class="['d-description', descriptionClass]"
-            v-bind="descriptionChildProps"
-            data-qa="checkbox-description"
-          >
-            <!-- @slot slot for Checkbox Description -->
-            <slot name="description">{{ description }}</slot>
-          </div>
-          <dt-validation-messages
-            :validation-messages="formattedMessages"
-            :show-messages="showMessages"
-            :class="messagesClass"
-            v-bind="messagesChildProps"
-            data-qa="dt-checkbox-validation-messages"
-          />
-        </div>
+      </div>
+      <div
+        v-if="hasLabel"
+        :class="[labelClass, 'd-checkbox__copy d-checkbox__label']"
+        v-bind="labelChildProps"
+        data-qa="checkbox-label"
+      >
+        <!-- @slot slot for Checkbox Label -->
+        <slot>{{ label }}</slot>
       </div>
     </label>
+    <div
+      v-if="$slots.description || description || hasMessages"
+      class="d-checkbox__messages"
+      data-qa="checkbox-description-messages"
+    >
+      <div
+        v-if="$slots.description || description"
+        :class="['d-description', descriptionClass]"
+        v-bind="descriptionChildProps"
+        data-qa="checkbox-description"
+      >
+        <!-- @slot slot for Checkbox Description -->
+        <slot name="description">
+          {{ description }}
+        </slot>
+      </div>
+      <dt-validation-messages
+        :validation-messages="formattedMessages"
+        :show-messages="showMessages"
+        :class="messagesClass"
+        v-bind="messagesChildProps"
+        data-qa="dt-checkbox-validation-messages"
+      />
+    </div>
   </div>
 </template>
 
@@ -59,6 +61,7 @@ import {
   GroupableMixin,
   MessagesMixin,
 } from '@/common/mixins/input';
+import { removeClassStyleAttrs, addClassStyleAttrs } from '@/common/utils';
 import { CHECKBOX_INPUT_VALIDATION_CLASSES } from './checkbox_constants';
 import { DtValidationMessages } from '../validation_messages';
 
@@ -68,6 +71,7 @@ import { DtValidationMessages } from '../validation_messages';
  * @see https://dialtone.dialpad.com/components/checkbox.html
  */
 export default {
+  compatConfig: { MODE: 3 },
   name: 'DtCheckbox',
 
   components: { DtValidationMessages },
@@ -84,6 +88,13 @@ export default {
      * @type {Boolean}
      */
     'input',
+    /**
+     * Event fired to sync the modelValue prop with the parent component
+     *
+     * @event update:modelValue
+     * @type {Boolean}
+     */
+    'update:modelValue',
 
     /**
      * Native input focusin event
@@ -115,12 +126,8 @@ export default {
       return !!(this.$slots.default || this.label);
     },
 
-    hasDescription () {
-      return !!(this.$slots.description || this.description);
-    },
-
-    hasLabelOrDescription () {
-      return this.hasLabel || this.hasDescription;
+    hasMessages () {
+      return this.formattedMessages.length && this.showMessages;
     },
 
     inputListeners () {
@@ -155,6 +162,9 @@ export default {
   },
 
   methods: {
+    removeClassStyleAttrs,
+    addClassStyleAttrs,
+
     emitValue (target) {
       let { value, checked } = target;
       // Expected: Indeterminate -> unchecked. We need to manually set DOM property `checked` to false
@@ -169,6 +179,7 @@ export default {
 
       // emit the state of the checkbox
       this.$emit('input', checked);
+      this.$emit('update:modelValue', checked);
     },
 
     runValidations () {

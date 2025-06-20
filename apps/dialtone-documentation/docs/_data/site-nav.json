@@ -24,12 +24,12 @@
         },
         {
           "text": "For Designers",
-          "link": "/tokens/for-designers",
+          "link": "/tokens/for-designers/",
           "planned": true
         },
         {
           "text": "For Developers",
-          "link": "/tokens/for-developers",
+          "link": "/tokens/for-developers/",
           "planned": true
         }
       ]
@@ -121,7 +121,7 @@
         },
         {
           "text": "Typography",
-          "link": "/design/typography"
+          "link": "/design/typography/"
         },
         {
           "text": "Icons",
@@ -653,6 +653,10 @@
         {
           "text": "List Item Group",
           "link": "/components/list-item-group.html"
+        },
+        {
+          "text": "Loader",
+          "link": "/components/loader.html"
         },
         {
           "text": "Modal",

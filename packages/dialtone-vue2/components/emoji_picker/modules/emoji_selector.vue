@@ -56,7 +56,7 @@
               :alt="emoji.name"
               :aria-label="emoji.name"
               :title="emoji.name"
-              :src="getImgSrc(emoji.unicode_character)"
+              :src="getImgSrc(emoji)"
               @error="handleImageError"
             >
           </button>
@@ -144,6 +144,11 @@ export default {
       type: Array,
       default: () => [],
     },
+
+    customEmojis: {
+      type: Array,
+      default: () => [],
+    },
   },
 
   data () {
@@ -155,7 +160,7 @@ export default {
       hoverFirstEmoji: true,
       fixedLabel: '',
       filteredEmojis: [],
-      TABS_DATA: ['Recently used', 'People', 'Nature', 'Food', 'Activity', 'Travel', 'Objects', 'Symbols', 'Flags'],
+      TABS_DATA: ['Recently used', 'People', 'Nature', 'Food', 'Activity', 'Travel', 'Objects', 'Symbols', 'Flags', 'Custom'],
       tabLabelObserver: null,
     };
   },
@@ -184,13 +189,27 @@ export default {
     },
 
     tabLabels () {
-      return this.recentlyUsedEmojis.length
-        ? this.tabSetLabels.map((label) => ({ label }))
-        : this.tabSetLabels.slice(1).map((label) => ({ label }));
+      let updateTabLabels = this.tabSetLabels.map((label) => ({ label }));
+
+      if (!this.recentlyUsedEmojis.length) {
+        updateTabLabels = this.tabSetLabels.slice(1).map((label) => ({ label }));
+      }
+
+      if (!this.customEmojis.length) {
+        updateTabLabels.pop();
+      }
+
+      return updateTabLabels;
     },
 
     tabs () {
-      return this.recentlyUsedEmojis.length ? this.TABS_DATA : this.TABS_DATA.slice(1);
+      const updateTabsOrder = this.recentlyUsedEmojis.length ? this.TABS_DATA.slice() : this.TABS_DATA.slice(1);
+
+      if (!this.customEmojis.length) {
+        updateTabsOrder.pop();
+      }
+
+      return updateTabsOrder;
     },
   },
 
@@ -206,6 +225,14 @@ export default {
     recentlyUsedEmojis: {
       handler (newValue) {
         this.emojis['Recently used'] = newValue;
+      },
+
+      immediate: true,
+    },
+
+    customEmojis: {
+      handler (newValue) {
+        this.emojis.Custom = newValue;
       },
 
       immediate: true,
@@ -244,12 +271,17 @@ export default {
       this.setupFilteredRefs();
       this.setupTabLabelRefs();
       this.setTabLabelObserver();
+      this.setBottomScrollListener();
     });
   },
 
   beforeDestroy () {
     if (this.tabLabelObserver) {
       this.tabLabelObserver.disconnect();
+    }
+
+    if (this.$refs.listRef && this.handleScroll) {
+      this.$refs.listRef.removeEventListener('scroll', this.handleScroll);
     }
   },
 
@@ -320,7 +352,12 @@ export default {
     },
 
     getImgSrc: function (emoji) {
-      return this.CDN_URL + emoji + '.png';
+      // TODO Update json structure to have a property for custom emojis and avoid using date_added
+      if (emoji.date_added) { // if custom emoji
+        return emoji.image;
+      } else { // if regular emoji
+        return this.CDN_URL + emoji.unicode_character + '.png';
+      }
     },
 
     handleImageError: function (event) {
@@ -572,6 +609,17 @@ export default {
       if (event.key === 'Enter') {
         this.handleEmojiSelection(emoji, event);
       }
+    },
+
+    setBottomScrollListener () {
+      this.handleScroll = () => {
+        const container = this.$refs.listRef;
+        if (container.scrollTop + container.clientHeight >= container.scrollHeight) {
+          this.$emit('scroll-bottom-reached');
+        }
+      };
+
+      this.$refs.listRef.addEventListener('scroll', this.handleScroll);
     },
 
     setTabLabelObserver () {

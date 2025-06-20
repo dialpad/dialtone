@@ -278,6 +278,71 @@ describe('DtButton Tests', () => {
           });
         });
       });
+
+      describe('When button has kind set to unstyled', () => {
+        it('Should have unstyled class', async () => {
+          await wrapper.setProps({
+            kind: 'unstyled',
+          });
+
+          button = wrapper.find('.base-button__button');
+
+          expect(button.classes().includes('d-btn--unstyled')).toBe(true);
+        });
+      });
+
+      describe('When button has kind set to default', () => {
+        it('Should not have unstyled class', async () => {
+          await wrapper.setProps({
+            kind: 'default',
+          });
+
+          button = wrapper.find('.base-button__button');
+
+          expect(button.classes().includes('d-btn--unstyled')).toBe(false);
+        });
+      });
+
+      describe('When button has kind set to unstyled with any importance', () => {
+        const importances = ['clear', 'outlined', 'primary'];
+        importances.forEach(importance => {
+          it(`should not render importance class for kind="unstyled" and importance="${importance}"`, async () => {
+            await wrapper.setProps({ kind: 'unstyled', importance });
+            button = wrapper.find('.base-button__button');
+            // Should only have d-btn--unstyled, not any importance class
+            expect(button.classes().includes('d-btn--unstyled')).toBe(true);
+            expect(button.classes().includes('d-btn--outlined')).toBe(false);
+            expect(button.classes().includes('d-btn--primary')).toBe(false);
+          });
+        });
+      });
+
+      describe('When button is unstyled and has icon and label', () => {
+        it('Should not have d-btn classes on icon and label', async () => {
+          mockSlots = {
+            default: 'Button Text',
+            icon: EmptyComponentFixture,
+          };
+
+          updateWrapper();
+
+          await wrapper.setProps({
+            kind: 'unstyled',
+          });
+
+          icon = wrapper.find('[data-qa="dt-button-icon"]');
+          label = wrapper.find('[data-qa="dt-button-label"]');
+
+          // Icon should have base-button__icon class but not d-btn__icon
+          expect(icon.classes().includes('base-button__icon')).toBe(true);
+          expect(icon.classes().includes('d-btn__icon')).toBe(false);
+          expect(icon.classes().some(cls => cls.startsWith('d-btn__icon--'))).toBe(false);
+
+          // Label should have base-button__label class but not d-btn__label
+          expect(label.classes().includes('base-button__label')).toBe(true);
+          expect(label.classes().includes('d-btn__label')).toBe(false);
+        });
+      });
     });
 
     describe('With icon slot populated', () => {

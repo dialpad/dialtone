@@ -1,18 +1,22 @@
 ---
-title: Box shadows
+title: Box Shadows
 description: Utilities for controlling an element's box shadows.
 ---
 
-## Outer shadow
+## Outer Shadow
 
 Use `d-bs-{n}` to add an outer box shadow to an element.
 
-<code-well-header class="d-bar8 d-fl-col2 d-g32 d-bgc-secondary d-fw-wrap d-p32 d-w100p" custom>
-  <div v-for="className in boxShadowSizes" class="d-fl-center d-p32 d-bar8 d-bgc-primary d-fs-200 d-fw-bold" :class="`d-bs-${className}`">.d-bs-{{ className }}</div>
+<code-well-header>
+  <dt-stack
+    gap="600"
+    :direction="{ 'default': 'column', 'lg': 'row' }"
+  >
+    <div v-for="className in boxShadowSizes" class="d-fl-center d-p16 d-bar8 d-bgc-primary" :class="`d-bs-${className}`">d-bs-{{ className }}</div>
+  </dt-stack>
 </code-well-header>
 
 ```html
-
 <div class="d-bs-sm">...</div>
 <div class="d-bs-md">...</div>
 <div class="d-bs-lg">...</div>
@@ -20,16 +24,15 @@ Use `d-bs-{n}` to add an outer box shadow to an element.
 <div class="d-bs-card">...</div>
 ```
 
-## No shadow
+## No Shadow
 
 Use `d-bs-none` to remove a box shadow to an element.
 
-<code-well-header class="d-fl-center d-p24 d-bgc-secondary d-w100p" custom>
-  <div class="d-fl-center d-p32 d-bar8 d-bgc-primary d-fs-200 d-fw-bold d-bs-none">.d-bs-none</div>
+<code-well-header>
+  <div class="d-p16 d-bar8 d-bgc-primary d-bs-none">.d-bs-none</div>
 </code-well-header>
 
 ```html
-
 <div class="d-bs-none">...</div>
 ```
 
@@ -38,12 +41,11 @@ Use `d-bs-none` to remove a box shadow to an element.
 Use `h:d-bs-{n}` to change an element's `:hover` state box shadow.
 
 <code-well-header class="d-fl-center d-p24 d-bgc-secondary d-w100p" custom>
-  <div class="d-fl-center d-p32 d-bar8 d-bgc-primary d-fs-200 d-fw-bold d-bs-none h:d-bs-lg">Hover over me</div>
+  <dt-button kind="unstyled" class="d-p16 d-bar8 d-bgc-primary h:d-bs-md">Hover over me</dt-button>
 </code-well-header>
 
 ```html
-
-<div class="d-bs-none h:d-bs-lg">Hover over me</div>
+<dt-button kind="unstyled" class="h:d-bs-md">Hover over me</dt-button>
 ```
 
 ## Focus
@@ -51,25 +53,23 @@ Use `h:d-bs-{n}` to change an element's `:hover` state box shadow.
 Use `f:d-bs-{n}` to change an element's `:focus` and `:focus-within` state box shadow.
 
 <code-well-header class="d-fl-center d-p24 d-bgc-secondary d-w100p" custom>
-  <div tabindex="0" class="d-fl-center d-p32 d-bar8 d-bgc-primary d-fs-200 d-fw-bold d-bs-none f:d-bs-lg">Click on me</div>
+  <dt-button kind="unstyled" class="d-p16 d-bar8 d-bgc-primary f:d-bs-md">Focus me</dt-button>
 </code-well-header>
 
 ```html
-
-<div tabindex="0" class="d-bs-none f:d-bs-lg">Click on me</div>
+<dt-button kind="unstyled" class="f:d-bs-md">Focus me</dt-button>
 ```
 
-## Focus visible
+## Focus Visible
 
 Use `fv:d-bs-{n}` to change an element's `:focus-visible` state box shadow [only when focused by keyboard].
 
 <code-well-header class="d-fl-center d-p24 d-bgc-secondary d-w100p" custom>
-  <div tabindex="0" class="d-fl-center d-p32 d-bar8 d-bgc-primary d-fs-200 d-fw-bold d-bs-none fv:d-bs-lg">Focus on me</div>
+  <dt-button kind="unstyled" class="d-p16 d-bar8 d-bgc-primary fv:d-bs-md">Keyboard focus me</dt-button>
 </code-well-header>
 
 ```html
-
-<div tabindex="0" class="d-bs-none fv:d-bs-lg">Click on me</div>
+<dt-button kind="unstyled" class="fv:d-bs-md">Keyboard focus me</dt-button>
 ```
 
 ## Classes
@@ -78,7 +78,7 @@ Use `fv:d-bs-{n}` to change an element's `:focus-visible` state box shadow [only
   <template #content>
     <tbody>
       <tr v-for="size in boxShadowSizes">
-        <th scope="row" class="d-code--sm d-fc-purple-400">.d-bs-{{ size }}</th>
+        <th scope="row" class="d-code--sm d-docsite-code">.d-bs-{{ size }}</th>
         <td v-if="size !== 'card'" class="d-code--sm">
             box-shadow: var(--dt-shadow-{{ size }}-0-x) var(--dt-shadow-{{ size }}-0-y) var(--dt-shadow-{{ size }}-0-blur) var(--dt-shadow-{{ size }}-0-spread) var(--dt-shadow-{{ size }}-0-color) !important;
         </td>
@@ -90,11 +90,11 @@ Use `fv:d-bs-{n}` to change an element's `:focus-visible` state box shadow [only
         </td>
       </tr>
       <tr>
-        <th scope="row" class="d-code--sm d-fc-purple-400">.d-bs-none</th>
+        <th scope="row" class="d-code--sm d-docsite-code">.d-bs-none</th>
         <td class="d-code--sm">box-shadow: none !important;</td>
       </tr>
       <tr>
-        <th scope="row" class="d-code--sm d-fc-purple-400">.d-bs-unset</th>
+        <th scope="row" class="d-code--sm d-docsite-code">.d-bs-unset</th>
         <td class="d-code--sm">box-shadow: unset !important;</td>
       </tr>
     </tbody>

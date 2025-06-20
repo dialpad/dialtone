@@ -3,25 +3,22 @@ title: About Dialtone
 description: Dialtone is Dialpad's Design System that unites product teams around a common visual language.
 ---
 
-## Release notes
+## Release Notes
 
-<div class="d-d-grid d-g16 d-g-cols2 md:d-g-cols1">
-  <div>
-    <dt-stack class="d-ai-center" direction="row" gap="400">
-      <h3 class="d-docsite--header-3">Dialtone</h3>
-      <a
-        class="d-d-inline-flex d-pt12"
-        href="https://github.com/dialpad/dialtone/"
-      >
-        <img
-          alt="Dialtone version number"
-          src="https://img.shields.io/github/package-json/v/dialpad/dialtone?color=D3BCFF&label=Dialtone"
-        />
-      </a>
-    </dt-stack>
-    <dialtone-changelog />
-  </div>
-</div>
+<p>
+  <a
+    class="d-d-inline-flex d-pt12"
+    href="https://github.com/dialpad/dialtone/"
+  >
+    <img
+      alt="Dialtone version number"
+      src="https://img.shields.io/github/package-json/v/dialpad/dialtone?color=D3BCFF&label=Dialtone"
+    />
+  </a>
+</p>
+<dialtone-changelog />
+
+### [All Releases](https://github.com/dialpad/dialtone/releases)
 
 ## Components
 
@@ -32,7 +29,7 @@ Dialtone provides two options to use the components: CSS and Vue.
 
 ### Vue components (recommended)
 
-Use [Vue components](https://dialtone.dialpad.com/vue) in the case your project supports Vue since these components are built conforming to [WCAG AA Accessibility Guidelines](https://www.w3.org/WAI/standards-guidelines/wcag/glance/)
+Use [Vue components](https://dialtone.dialpad.com/vue3/index.html) in the case your project supports Vue since these components are built conforming to [WCAG AA Accessibility Guidelines](https://www.w3.org/WAI/standards-guidelines/wcag/glance/)
 and with usability and performance in mind.
 
 ### CSS components

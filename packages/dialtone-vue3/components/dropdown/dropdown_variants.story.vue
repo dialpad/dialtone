@@ -12,8 +12,8 @@
         :open="$attrs.open"
         @highlight="$attrs.onHighlight"
       >
-        <template #anchor>
-          <dt-button>
+        <template #anchor="{ attrs }">
+          <dt-button v-bind="attrs">
             {{ variant }} aligned dropdown
           </dt-button>
         </template>
@@ -43,9 +43,7 @@
         :transition="$attrs.transition"
         @opened="$attrs.onOpened"
       >
-        <template
-          #anchor="{ attrs }"
-        >
+        <template #anchor="{ attrs }">
           <div
             v-if="$attrs.anchor"
             v-html="$attrs.anchor"
@@ -57,9 +55,7 @@
             with sections
           </dt-button>
         </template>
-        <template
-          #list="{ close }"
-        >
+        <template #list="{ close }">
           <dt-list-item-group
             :list-class="$attrs.listClass"
           >
@@ -102,9 +98,7 @@
         :transition="$attrs.transition"
         @opened="$attrs.onOpened"
       >
-        <template
-          #anchor="{ attrs }"
-        >
+        <template #anchor="{ attrs }">
           <div
             v-if="$attrs.anchor"
             v-html="$attrs.anchor"
@@ -116,9 +110,7 @@
             with sections and headings
           </dt-button>
         </template>
-        <template
-          #list="{ close }"
-        >
+        <template #list="{ close }">
           <dt-list-item-group
             heading-class="d-py4 d-px8 d-fw-semibold d-c-default"
             :list-class="$attrs.listClass"
@@ -156,6 +148,35 @@
           </dt-list-item-group>
         </template>
       </dt-dropdown>
+
+      <dt-dropdown
+        class="d-mr8"
+        :open="$attrs.open"
+      >
+        <template #anchor="{ attrs }">
+          <dt-button v-bind="attrs">
+            with footer
+          </dt-button>
+        </template>
+        <template #list="{ close }">
+          <dt-list-item
+            v-for="(item) in items"
+            :key="item.id"
+            role="menuitem"
+            :navigation-type="$attrs.navigationType"
+            @click="close"
+          >
+            {{ item.name }}
+          </dt-list-item>
+        </template>
+        <template #footer="{ close }">
+          <div class="d-px12">
+            <dt-button @click="close">
+              Dropdown footer
+            </dt-button>
+          </div>
+        </template>
+      </dt-dropdown>
     </div>
     <div class="d-d-flex d-fd-column">
       <p class="d-fw-bold d-mb2">
@@ -173,9 +194,7 @@
           :open-on-context="true"
           :transition="$attrs.transition"
         >
-          <template
-            #anchor="{ attrs }"
-          >
+          <template #anchor="{ attrs }">
             <div
               v-bind="attrs"
               class="d-ba d-bas-dashed d-w264 d-py48 d-ta-center d-bgc-black-300"
@@ -183,9 +202,7 @@
               Right click to open
             </div>
           </template>
-          <template
-            #list="{ close }"
-          >
+          <template #list="{ close }">
             <dt-list-item
               v-for="(item) in items"
               :key="item.id"

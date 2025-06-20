@@ -5,7 +5,7 @@ status: ready
 thumb: true
 image: assets/images/components/popover.png
 storybook: https://dialtone.dialpad.com/vue/?path=/story/components-popover--default
-figma_url: https://www.figma.com/file/2adf7JhZOncRyjYiy2joil/DT-Core%3A-Components-7?node-id=8921%3A22411&viewport=831%2C-269%2C0.43&t=xHutRjwo1o5zMTgT-11
+figma_url: https://www.figma.com/design/W58r5BkO8qTw3vem9YieJd/DT9-Component-Library--Rebrand-2025-?node-id=7298-20354
 ---
 <code-well-header>
   <example-popover modal />
@@ -48,7 +48,7 @@ The content slot will be rendered lazily when the popover is open. By default, t
 
 </dialtone-usage>
 
-### Best practices
+### Best Practices
 
 - Popovers should be fairly small. If you are looking for more of a full size dialog solution see [Modal](modal.md)
 - Trigger using an anchor element, such as a button.
@@ -58,7 +58,7 @@ The content slot will be rendered lazily when the popover is open. By default, t
 - Close non-modal dialogs if they are scrolled out of visibility.
 - Set the z-index of the dialog to var(--zi-modal-element) if modal, var(--zi-popover) if not.
 
-## Variants and examples
+## Variants and Examples
 
 ### Popover - Modal
 
@@ -331,7 +331,7 @@ vueCode='
 '
 showHtmlWarning />
 
-### Fallback placements
+### Fallback Placements
 
 The popover uses [headless-tippy](https://atomiks.github.io/tippyjs/v6/headless-tippy/) and
 [popper](https://popper.js.org/docs/v2/modifiers/flip/), if the popover opens in a placement where it will
@@ -408,7 +408,7 @@ vueCode='
 '
 />
 
-### Force close all opened instances
+### Force Close All Opened Instances
 
 When the popover is open, it will attach an event listener into the window object, so you can close the instances dispatching the `dt-popover-close` event in the window object:
 
@@ -429,7 +429,7 @@ Popover must contain an anchor and content element. d-modal--transparent can be 
 
 ## Accessibility
 
-If your popover is modal, please see the accessibility section of this page regarding "focus trapping": <a href="components/modal/#accessibility">Modal Accessibility</a>. The same rules will apply here if your popover is modal.
+If your popover is modal, please see the accessibility section of this page regarding "focus trapping": [Modal Accessibility](/components/modal.md#accessibility). The same rules will apply here if your popover is modal.
 
 Popovers, in their current implementation, are accessible when used as interactive components. Content will be read to screen reader users, and the popover markup by is appended to the `<body>`.
 
@@ -458,7 +458,7 @@ By default, the dialog content will be labeled by the entire anchor element. To 
 - Pass `aria-label`, which is the text label that will be applied to the dialog content.
 - Pass `aria-labelledby`, which is an ID of the element that should be used as the descriptive label.
 
-### Keyboard support
+### Keyboard Support
 
 The below keyboard functionality is automatically implemented when using the popover component:
 

@@ -17,6 +17,7 @@ const {
   PADDING_SIZES,
   GAP_SPACES,
   WIDTH_HEIGHTS,
+  HSLA_EXCLUDED_COLORS,
 } = require('./constants.cjs');
 const {
   appendHoverFocusSelectors,
@@ -103,10 +104,10 @@ const generatedRules = {
  * @param { Declaration } declaration
  */
 function colorUtilities (clonedSource, declaration) {
-  const baseColorsRegex = new RegExp(`(dtColor(Neutral)?(${REGEX_OPTIONS.COLORS})([0-9]{3})?)`);
-  const foregroundColorsRegex = new RegExp(`(dtColorForeground(${REGEX_OPTIONS.FONT_COLORS})(${REGEX_OPTIONS.FONT_COLOR_VARIATIONS})?)`, 'i');
-  const surfaceColorsRegex = new RegExp(`(dtColorSurface(${REGEX_OPTIONS.BACKGROUND_COLORS})(${REGEX_OPTIONS.BACKGROUND_COLOR_VARIATIONS})?)`, 'i');
-  const borderColorsRegex = new RegExp(`(dtColorBorder(${REGEX_OPTIONS.BORDER_COLORS})(${REGEX_OPTIONS.BORDER_COLOR_VARIATIONS})?)`, 'i');
+  const foregroundColorsRegex = /dtColorForeground.+/i;
+  const surfaceColorsRegex = /dtColorSurface.+/i;
+  const borderColorsRegex = /dtColorBorder.+/i;
+  const baseColorsRegex = /dtColor(?!(Foreground|Surface|Border|Brand|Gradient|Link)).+/i;
 
   const tokens = { ...TokensBaseLight, ...TokensDpLight };
 
@@ -115,40 +116,48 @@ function colorUtilities (clonedSource, declaration) {
   const surfaceColors = Object.entries(tokens).filter(([key]) => surfaceColorsRegex.test(key)).reduce(processColors, []);
   const borderColors = Object.entries(tokens).filter(([key]) => borderColorsRegex.test(key)).reduce(processColors, []);
 
+  function _generateColorNodes (token, prop, opacityVar) {
+    return [
+      declaration.clone({
+        prop: opacityVar,
+        value: HSLA_EXCLUDED_COLORS.includes(token)
+          ? `100%`
+          : `var(${token}-a)`,
+      }),
+      declaration.clone({
+        prop,
+        value: HSLA_EXCLUDED_COLORS.includes(token)
+          ? `var(${token}) !important`
+          : `hsl(var(${token}-h) var(${token}-s) var(${token}-l) / var(${opacityVar})) !important`,
+      }),
+    ];
+  }
   function _generateForegroundColors (token, colorName) {
     generatedRules.fontColor.push(new Rule({
       source: clonedSource,
       selector: appendHoverFocusSelectors(`.d-fc-${colorName}`),
-      nodes: [
-        declaration.clone({ prop: '--fco', value: `var(${token}-a)` }),
-        declaration.clone({ prop: 'color', value: `hsl(var(${token}-h) var(${token}-s) var(${token}-l) / var(--fco)) !important` }),
-      ],
+      nodes: _generateColorNodes(token, 'color', '--fco'),
     }));
   }
   function _generateSurfaceColors (token, colorName) {
     generatedRules.backgroundColor.push(new Rule({
       source: clonedSource,
       selector: appendHoverFocusSelectors(`.d-bgc-${colorName}`),
-      nodes: [
-        declaration.clone({ prop: '--bgo', value: `var(${token}-a)` }),
-        declaration.clone({
-          prop: 'background-color',
-          value: `hsl(var(${token}-h) var(${token}-s) var(${token}-l) / var(--bgo)) !important`,
-        }),
-      ],
+      nodes: _generateColorNodes(token, 'background-color', '--bgo'),
     }));
   }
   function _generateBorderColors (token, colorName) {
     generatedRules.borderColor.push(new Rule({
       source: clonedSource,
       selector: appendHoverFocusSelectors(`.d-bc-${colorName}`),
-      nodes: [
-        declaration.clone({ prop: '--bco', value: `var(${token}-a)` }),
-        declaration.clone({
-          prop: 'border-color',
-          value: `hsl(var(${token}-h) var(${token}-s) var(${token}-l) / var(--bco)) !important`,
-        }),
-      ],
+      nodes: _generateColorNodes(token, 'border-color', '--bco'),
+    }));
+  }
+  function _generateDividerColors (token, colorName) {
+    generatedRules.dividerColor.push(new Rule({
+      source: clonedSource,
+      selector: `.d-divide-${colorName} > * + *`,
+      nodes: _generateColorNodes(token, 'border-color', '--dco'),
     }));
   }
 
@@ -156,49 +165,41 @@ function colorUtilities (clonedSource, declaration) {
     _generateForegroundColors(token, colorName);
     _generateBorderColors(token, colorName);
     _generateSurfaceColors(token, colorName);
-    generatedRules.dividerColor.push(new Rule({
-      source: clonedSource,
-      selector: `.d-divide-${colorName} > * + *`,
-      nodes: [
-        declaration.clone({ prop: '--dco', value: `var(${token}-a)` }),
-        declaration.clone({
-          prop: 'border-color',
-          value: `hsl(var(${token}-h) var(${token}-s) var(${token}-l) / var(--dco)) !important`,
-        }),
-      ],
-    }));
+    _generateDividerColors(token, colorName);
     generatedRules.backgroundGradientFromColor.push(new Rule({
       source: clonedSource,
       selector: appendHoverFocusSelectors(`.d-bgg-from-${colorName}`),
       nodes: [
-        declaration.clone({ prop: '--bgg-from-opacity', value: '100%' }),
-        declaration.clone({
-          prop: '--bgg-from',
-          value: `hsl(var(${token}-h) var(${token}-s) var(${token}-l) / var(--bgg-from-opacity))`,
-        }),
+        ..._generateColorNodes(token, '--bgg-from', '--bgg-from-opacity'),
         declaration.clone({
           prop: '--bgg-to',
-          value: `hsl(var(${token}-h) var(${token}-s) var(${token}-l) / 0%)`,
+          value: HSLA_EXCLUDED_COLORS.includes(token)
+            ? `var(${token}) !important`
+            : `hsl(var(${token}-h) var(${token}-s) var(${token}-l) / 0%) !important`,
         }),
       ],
     }));
     generatedRules.backgroundGradientToColor.push(new Rule({
       source: clonedSource,
       selector: appendHoverFocusSelectors(`.d-bgg-to-${colorName}`),
-      nodes: [
-        declaration.clone({ prop: '--bgg-to-opacity', value: '100%' }),
-        declaration.clone({ prop: '--bgg-to', value: `hsl(var(${token}-h) var(${token}-s) var(${token}-l) / var(--bgg-to-opacity)) !important` }),
-      ],
+      nodes: _generateColorNodes(token, '--bgg-to', '--bgg-to-opacity'),
     }));
   });
   foregroundColors.forEach(({ token, colorName }) => {
     _generateForegroundColors(token, colorName);
   });
   surfaceColors.forEach(({ token, colorName }) => {
+    // Exclude as it is a gradient color and it is being generated manually
+    if (token === '--dt-color-surface-ai') return;
+
     _generateSurfaceColors(token, colorName);
   });
   borderColors.forEach(({ token, colorName }) => {
+    // Exclude as it is a gradient color and it is being generated manually
+    if (token === '--dt-color-border-ai') return;
+
     _generateBorderColors(token, colorName);
+    _generateDividerColors(token, colorName);
   });
 }
 
@@ -775,7 +776,12 @@ function _generateHoverFocusVariations (rule) {
     textDecorationRegex,
     opacityRegex,
   ].some(regex => regex.test(rule.selector));
-  if (!found) return;
+
+  if (
+    !found ||
+    rule.selectors.some(selector => REGEX_OPTIONS.HOVER_FOCUS_PREFIXES.test(selector))
+  ) return;
+
   const selectors = rule.selectors.map(selector => appendHoverFocusSelectors(selector));
   rule.selector = selectors.filter(selector => !!selector).join(', ');
 }
@@ -793,7 +799,9 @@ module.exports = () => {
 
       _generateUtilities(clonedSource, declaration);
 
-      root.insertAfter(rootSelector, Object.values(generatedRules).flat());
+      const rules = Object.values(generatedRules).flat();
+
+      root.insertAfter(rootSelector, rules);
     },
     Root (root) {
       root.walkRules(rule => {

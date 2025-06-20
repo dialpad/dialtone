@@ -1,11 +1,12 @@
 import { viteCommonjs } from '@originjs/vite-plugin-commonjs';
 import { defineUserConfig } from 'vuepress';
-import { getDirname, path } from '@vuepress/utils';
+import { getDirname } from '@vuepress/utils';
 import { viteBundler } from '@vuepress/bundler-vite';
 import viteSvgLoader from 'vite-svg-loader';
 import { googleAnalyticsPlugin } from '@vuepress/plugin-google-analytics';
 import { seoPlugin } from 'vuepress-plugin-seo2';
 import anchor from 'markdown-it-anchor';
+import path from 'path';
 
 const sidebar = require('../_data/site-nav.json');
 const { dialtoneVuepressTheme } = require('./theme');
@@ -55,15 +56,18 @@ export default defineUserConfig({
       },
       resolve: {
         alias: {
-          vue$: 'vue/dist/vue.esm-bundler.js',
+          'vue/server-renderer': path.resolve(__dirname, '../../node_modules/vue/server-renderer/index.js'),
+          vue: path.resolve(__dirname, '../../node_modules/vue/dist/vue.esm-bundler.js'),
         },
+      },
+      define: {
+        __VUE_PROD_HYDRATION_MISMATCH_DETAILS__: false,
       },
     },
     vuePluginOptions: {
       template: {
         compilerOptions: {
           whitespace: 'preserve',
-          // isCustomElement: (tag) => tag.startsWith('dt-'),
         },
       },
     },
@@ -106,6 +110,7 @@ export default defineUserConfig({
     '@baseComponents': path.resolve(__dirname, './baseComponents'),
     '@views': path.resolve(__dirname, './views'),
     '@mixins': path.resolve(__dirname, './common/mixins/'),
+    '@utilities': path.resolve(__dirname, './common/utilities.js'),
     '@projectRoot': path.resolve(__dirname, '../../'),
     '@': path.resolve(__dirname, '../'),
     '@workspaceRoot': path.resolve(__dirname, '../../../../'),

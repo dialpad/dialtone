@@ -123,7 +123,7 @@ import {
   MODAL_KIND_MODIFIERS,
   MODAL_SIZE_MODIFIERS,
 } from './modal_constants';
-import { getUniqueString, hasSlotContent, disableRootScrolling, enableRootScrolling } from '@/common/utils';
+import { returnFirstEl, getUniqueString, hasSlotContent, disableRootScrolling, enableRootScrolling } from '@/common/utils';
 import { DtLazyShow } from '@/components/lazy_show';
 import { EVENT_KEYNAMES } from '@/common/constants';
 import SrOnlyCloseButtonMixin from '@/common/mixins/sr_only_close_button';
@@ -136,6 +136,7 @@ import { NOTICE_KINDS } from '@/components/notice';
  * @see https://dialtone.dialpad.com/components/modal.html
  */
 export default {
+  compatConfig: { MODE: 3 },
   name: 'DtModal',
 
   components: {
@@ -414,9 +415,9 @@ export default {
         if (isShowing) {
           // Set a reference to the previously-active element, to which we'll return focus on modal close.
           this.previousActiveElement = document.activeElement;
-          disableRootScrolling(this.$el.getRootNode().host);
+          disableRootScrolling(returnFirstEl(this.$el).getRootNode().host);
         } else {
-          enableRootScrolling(this.$el.getRootNode().host);
+          enableRootScrolling(returnFirstEl(this.$el).getRootNode().host);
           // Modal is being hidden, so return focus to the previously active element before clearing the reference.
           this.previousActiveElement?.focus();
           this.previousActiveElement = null;

@@ -1,18 +1,65 @@
+<!-- eslint-disable vue/no-static-inline-styles -->
+<!-- eslint-disable vue/no-bare-strings-in-template -->
+<!-- eslint-disable vue/no-restricted-class -->
 <template>
-  <editor-content
-    :editor="editor"
-    data-qa="dt-rich-text-editor"
-    class="dt-rich-text-editor"
-    v-bind="attrs"
-  />
+  <div>
+    <!-- why the hell is this visibility: hidden by default??? -->
+    <bubble-menu
+      v-if="editor && link && !hideLinkBubbleMenu"
+      :editor="editor"
+      :should-show="bubbleMenuShouldShow"
+      :tippy-options="tippyOptions"
+      style="visibility: visible;"
+    >
+      <div class="d-popover__dialog">
+        <dt-stack
+          direction="row"
+          class="d-rich-text-editor-bubble-menu__button-stack"
+          gap="0"
+        >
+          <dt-button
+            kind="muted"
+            importance="clear"
+            @click="editLink"
+          >
+            Edit
+          </dt-button>
+          <dt-button
+            kind="muted"
+            importance="clear"
+            @click="openLink"
+          >
+            Open link
+          </dt-button>
+          <dt-button
+            kind="danger"
+            importance="clear"
+            @click="removeLink"
+          >
+            Remove
+          </dt-button>
+        </dt-stack>
+      </div>
+    </bubble-menu>
+    <editor-content
+      ref="editor"
+      :editor="editor"
+      class="d-rich-text-editor"
+      data-qa="dt-rich-text-editor"
+      v-bind="attrs"
+    />
+  </div>
 </template>
 
 <script>
 /* eslint-disable max-lines */
-import { Editor, EditorContent } from '@tiptap/vue-3';
-import { Slice, Fragment } from '@tiptap/pm/model';
+import { Editor, EditorContent, BubbleMenu } from '@tiptap/vue-3';
+import { Extension } from '@tiptap/core';
+import { DtButton } from '../button';
+import { DtStack } from '../stack';
 import Blockquote from '@tiptap/extension-blockquote';
 import CodeBlock from '@tiptap/extension-code-block';
+import Code from '@tiptap/extension-code';
 import Document from '@tiptap/extension-document';
 import HardBreak from '@tiptap/extension-hard-break';
 import Paragraph from '@tiptap/extension-paragraph';
@@ -28,8 +75,13 @@ import Underline from '@tiptap/extension-underline';
 import Text from '@tiptap/extension-text';
 import TextAlign from '@tiptap/extension-text-align';
 import History from '@tiptap/extension-history';
+import TextStyle from '@tiptap/extension-text-style';
+import Color from '@tiptap/extension-color';
+import FontFamily from '@tiptap/extension-font-family';
 import Emoji from './extensions/emoji';
 import CustomLink from './extensions/custom_link';
+import ConfigurableImage from './extensions/image';
+import DivParagraph from './extensions/div';
 import { MentionPlugin } from './extensions/mentions/mention';
 import { ChannelPlugin } from './extensions/channels/channel';
 import { SlashCommandPlugin } from './extensions/slash_command/slash_command';
@@ -43,13 +95,18 @@ import { emojiPattern } from 'regex-combined-emojis';
 import mentionSuggestion from './extensions/mentions/suggestion';
 import channelSuggestion from './extensions/channels/suggestion';
 import slashCommandSuggestion from './extensions/slash_command/suggestion';
-import { warnIfUnmounted } from '@/common/utils';
+import { warnIfUnmounted, returnFirstEl } from '@/common/utils';
+import deepEqual from 'deep-equal';
 
 export default {
+  compatConfig: { MODE: 3 },
   name: 'DtRichTextEditor',
 
   components: {
     EditorContent,
+    BubbleMenu,
+    DtButton,
+    DtStack,
   },
 
   props: {
@@ -76,6 +133,15 @@ export default {
     preventTyping: {
       type: Boolean,
       default: false,
+    },
+
+    /**
+     * When this option is false the editor will only ever paste plain text, no rich text formatting will be applied,
+     * and any HTML will be rendered as text.
+     */
+    pasteRichText: {
+      type: Boolean,
+      default: true,
     },
 
     /**
@@ -244,7 +310,7 @@ export default {
 
     /**
      * Whether the input allows for bullet list to be introduced in the text.
-    */
+     */
     allowBulletList: {
       type: Boolean,
       default: true,
@@ -275,11 +341,43 @@ export default {
     },
 
     /**
+     * Whether the input allows inline code (wrapped in backticks).
+     */
+    allowCode: {
+      type: Boolean,
+      default: true,
+    },
+
+    /**
      * Whether the input allows codeblock to be introduced in the text.
      */
     allowCodeblock: {
       type: Boolean,
       default: true,
+    },
+
+    /**
+     * Whether the input allows inline images to be rendered.
+     */
+    allowInlineImages: {
+      type: Boolean,
+      default: false,
+    },
+
+    /**
+     * Whether the input allows color to be introduced in the text.
+     */
+    allowFontColor: {
+      type: Boolean,
+      default: false,
+    },
+
+    /**
+     * Whether the input allows different font-families to be introduced in the text.
+     */
+    allowFontFamily: {
+      type: Boolean,
+      default: false,
     },
 
     /**
@@ -291,9 +389,19 @@ export default {
     },
 
     /**
-     * Use default paste handler.
+     * Manually hide the link bubble menu. The link bubble menu is shown when a link is selected via the cursor.
+     * There are some cases when you may want the link to remain selected but hide the bubble menu such as when You
+     * are showing a custom link editor popup.
      */
-    useDefaultPasteHandler: {
+    hideLinkBubbleMenu: {
+      type: Boolean,
+      default: false,
+    },
+
+    /**
+     * Show text in HTML div tags instead of paragraph tags
+     */
+    useDivTags: {
       type: Boolean,
       default: false,
     },
@@ -306,6 +414,27 @@ export default {
      * @type {String|JSON}
      */
     'input',
+
+    /**
+     * Input event always in JSON format.
+     * @event input
+     * @type {JSON}
+     */
+    'json-input',
+
+    /**
+     * Input event always in HTML format.
+     * @event input
+     * @type {HTML}
+     */
+    'html-input',
+
+    /**
+     * Input event always in text format.
+     * @event input
+     * @type {String}
+     */
+    'text-input',
 
     /**
      * Event to sync the value with the parent
@@ -334,11 +463,31 @@ export default {
      * @type {String}
      */
     'enter',
+
+    /**
+     * "Edit link" button was clicked. Fires an event for the consuming component to handle the editing of the link.
+     * event contains the link object with two properties href and text.
+     * @event edit-link
+     * @type {Object}
+     */
+    'edit-link',
+
+    /**
+     * "Selected" event is fired when the user selects text in the editor. returns the currently selected text.
+     * If the selected text is partially a link, the full link text is returned.
+     * @event selected
+     * @type {String}
+     */
+    'selected',
   ],
 
   data () {
     return {
       editor: null,
+      tippyOptions: {
+        appendTo: () => returnFirstEl(this.$refs.editor.$el).getRootNode()?.querySelector('body'),
+        placement: 'top-start',
+      },
     };
   },
 
@@ -355,19 +504,9 @@ export default {
     // eslint-disable-next-line complexity
     extensions () {
       // These are the default extensions needed just for plain text.
-      const extensions = [Document, Paragraph, Text, History];
-      if (this.link) {
-        extensions.push(TipTapLink.extend({ inclusive: false }).configure({
-          HTMLAttributes: {
-            class: 'd-link d-wb-break-all',
-          },
-          autolink: true,
-          protocols: RICH_TEXT_EDITOR_SUPPORTED_LINK_PROTOCOLS,
-        }));
-      }
-      if (this.customLink) {
-        extensions.push(this.getExtension(CustomLink, this.customLink));
-      }
+      const extensions = [Document, Text, History, HardBreak];
+      extensions.push(this.useDivTags ? DivParagraph : Paragraph);
+
       if (this.allowBlockquote) {
         extensions.push(Blockquote);
       }
@@ -376,7 +515,11 @@ export default {
       }
       if (this.allowBulletList) {
         extensions.push(BulletList);
-        extensions.push(ListItem);
+        extensions.push(ListItem.extend({
+          renderText ({ node }) {
+            return node.textContent;
+          },
+        }));
         extensions.push(OrderedList);
       }
       if (this.allowItalic) {
@@ -396,28 +539,47 @@ export default {
         );
       }
 
-      // make sure that this is defined before any other extensions
-      // where Enter and Shift+Enter should have its own interaction. otherwise it will be ignored
-      if (!this.allowLineBreaks) {
-        const self = this;
-        extensions.push(
-          HardBreak.extend({
-            addKeyboardShortcuts () {
-              return {
-                Enter: () => {
-                  self.$emit('enter');
-                  return true;
-                },
-                'Shift-Enter': () => {
-                  this.editor.commands.setHardBreak();
-                  return true;
-                },
-              };
+      const self = this;
+      const ShiftEnter = Extension.create({
+        addKeyboardShortcuts () {
+          return {
+            'Shift-Enter': ({ editor }) => {
+              if (self.allowLineBreaks) {
+                return false;
+              }
+              editor.commands.first(({ commands }) => [
+                () => commands.newlineInCode(),
+                () => self.allowBulletList && commands.splitListItem('listItem'),
+                () => commands.createParagraphNear(),
+                () => commands.liftEmptyBlock(),
+                () => commands.splitBlock(),
+              ]);
+              return true;
             },
-          }),
-        );
-      } else {
-        extensions.push(HardBreak);
+            Enter: () => {
+              if (self.allowLineBreaks) {
+                return false;
+              }
+              self.$emit('enter');
+              return true;
+            },
+          };
+        },
+      });
+      extensions.push(ShiftEnter);
+
+      if (this.link) {
+        extensions.push(TipTapLink.extend({ inclusive: false }).configure({
+          HTMLAttributes: {
+            class: 'd-link d-wb-break-all',
+          },
+          openOnClick: false,
+          autolink: true,
+          protocols: RICH_TEXT_EDITOR_SUPPORTED_LINK_PROTOCOLS,
+        }));
+      }
+      if (this.customLink) {
+        extensions.push(this.getExtension(CustomLink, this.customLink));
       }
 
       if (this.mentionSuggestion) {
@@ -444,15 +606,38 @@ export default {
 
       extensions.push(TextAlign.configure({
         types: ['paragraph'],
-        defaultAlignment: 'left',
       }));
 
+      if (this.allowCode) {
+        extensions.push(Code);
+      }
+
       if (this.allowCodeblock) {
-        extensions.push(CodeBlock.configure({
+        extensions.push(CodeBlock.extend({
+          renderText ({ node }) {
+            return `\`\`\`\n${node.textContent}\n\`\`\``;
+          },
+        }).configure({
           HTMLAttributes: {
-            class: 'dt-rich-text-editor--code-block',
+            class: 'd-rich-text-editor__code-block',
           },
         }));
+      }
+
+      if (this.allowInlineImages) {
+        extensions.push(ConfigurableImage);
+      }
+
+      if (this.allowFontFamily || this.allowFontColor) {
+        extensions.push(TextStyle);
+
+        if (this.allowFontColor) {
+          extensions.push(Color);
+        }
+
+        if (this.allowFontFamily) {
+          extensions.push(FontFamily);
+        }
       }
 
       if (this.additionalExtensions.length) {
@@ -476,10 +661,10 @@ export default {
   },
 
   /**
-    * Because the Editor instance is initialized when mounted it does not get
-    * updated props automatically, so the ones that can change after mount have
-    * to be hooked up to the Editor's own API.
-    */
+   * Because the Editor instance is initialized when mounted it does not get
+   * updated props automatically, so the ones that can change after mount have
+   * to be hooked up to the Editor's own API.
+   */
   watch: {
     editable (isEditable) {
       this.editor.setEditable(isEditable);
@@ -515,7 +700,7 @@ export default {
   },
 
   mounted () {
-    warnIfUnmounted(this.$el, this.$options.name);
+    warnIfUnmounted(returnFirstEl(this.$el), this.$options.name);
     this.processValue(this.modelValue, false);
   },
 
@@ -528,73 +713,145 @@ export default {
         content: this.modelValue,
         editable: this.editable,
         extensions: this.extensions,
+        parseOptions: {
+          preserveWhitespace: 'full',
+        },
+
         editorProps: {
           attributes: {
             ...this.inputAttrs,
             class: this.inputClass,
           },
 
-          /* Absolutely crazy that this is what's needed to paste line breaks properly in prosemirror, but it does seem
-            to fix our issue of line breaks outputting as paragraphs. Code taken from this thread:
-            https://discuss.prosemirror.net/t/how-to-preserve-hard-breaks-when-pasting-html-into-a-plain-text-schema/4202/4
-          */
-          ...(!this.useDefaultPasteHandler && { handlePaste: this.handlerPreserveBreaksOnPaste }),
+          handlePaste: (view, event, slice) => {
+            if (!this.pasteRichText) {
+              const clipboardData = event.clipboardData || window.clipboardData;
+              const textData = clipboardData.getData('text/plain');
+
+              if (textData) {
+                // Insert as plain text only (preserving any HTML tags as text)
+                const { tr } = view.state;
+                const { from, to } = view.state.selection;
+                tr.insertText(textData, from, to);
+                view.dispatch(tr);
+                return true; // Prevent default paste behavior
+              }
+            }
+
+            return false; // default paste behavior
+          },
+
+          // Moves the <br /> tags inside the previous closing tag to avoid
+          // Prosemirror wrapping them within another </p> tag.
+          transformPastedHTML (html) {
+            // Preserve line breaks by converting them to hard breaks before other transformations
+            const transformedHtml = html
+              // Convert standalone br tags to hard breaks
+              .replace(/<br\s*\/?>/gi, '<br />')
+              // Preserve line breaks at end of paragraphs and divs
+              .replace(/(<\/(?:p|div)>)\s*\n/gi, '$1<br />')
+              // Convert newlines followed by text to br tags
+              .replace(/\n(?=\S)/g, '<br />');
+
+            // Then apply the original transformation
+            return transformedHtml.replace(/(<\/\w+>)((<br \/>)+)/g, '$2$3$1');
+          },
         },
       });
       this.addEditorListeners();
     },
 
-    handlerPreserveBreaksOnPaste (view, event, slice) {
-      const { state } = view;
-      const { tr } = state;
-
-      if (!state.schema.nodes.hardBreak) {
-        return false;
-      }
-
-      const clipboardText = event.clipboardData?.getData('text/plain').trim();
-
-      if (!clipboardText) {
-        return false;
-      }
-
-      const textLines = clipboardText.split(/(?:\r\n|\r|\n)/g);
-
-      const nodes = textLines.reduce((nodes, line, index) => {
-        if (line.length > 0) {
-          nodes.push(state.schema.text(line));
-        }
-
-        if (index < textLines.length - 1) {
-          nodes.push(state.schema.nodes.hardBreak.create());
-        }
-
-        return nodes;
-      }, []);
-
-      view.dispatch(
-        tr.replaceSelection(Slice.maxOpen(Fragment.fromArray(nodes))).scrollIntoView(),
-      );
-
-      return true;
+    bubbleMenuShouldShow ({ editor, view, state, oldState, from, to }) {
+      return editor.isActive('link');
     },
 
-    processValue (newValue, returnIfEqual = true) {
-      let currentValue = this.getOutput();
-      if (this.outputFormat === 'json') {
-        newValue = JSON.stringify(newValue);
-        currentValue = JSON.stringify(currentValue);
+    /**
+     * If the selection contains a link, return the existing link text.
+     * Otherwise, use just the selected text.
+     * @param editor the editor instance.
+     */
+    getSelectedLinkText (editor) {
+      const { view, state } = editor;
+      const { from, to } = view.state.selection;
+      const text = state.doc.textBetween(from, to, '');
+      const linkNode = this.editor.state.doc.nodeAt(from);
+      if (linkNode && linkNode.marks?.at(0)?.type?.name === 'link') {
+        return linkNode.textContent;
+      } else {
+        return text;
       }
-      if (returnIfEqual && newValue === currentValue) {
+    },
+
+    editLink () {
+      const linkText = this.getSelectedLinkText(this.editor);
+
+      const link = {
+        href: this.editor.getAttributes('link').href,
+        text: linkText,
+      };
+      this.$emit('edit-link', link);
+    },
+
+    removeLink () {
+      this.editor?.chain()?.focus()?.unsetLink()?.run();
+    },
+
+    openLink () {
+      this.editor?.chain()?.focus();
+      const link = this.editor.getAttributes('link').href;
+      window.open(link, '_blank');
+    },
+
+    // eslint-disable-next-line complexity
+    setLink (linkInput, linkText, linkOptions, linkProtocols = RICH_TEXT_EDITOR_SUPPORTED_LINK_PROTOCOLS,
+      defaultPrefix) {
+      if (!linkInput) {
+        // If link text is set to empty string,
+        // remove any existing links.
+        this.removeLink();
+        return;
+      }
+
+      // Check if input matches any of the supported link formats
+      const prefix = linkProtocols.find(prefixRegex => prefixRegex.test(linkInput));
+
+      if (!prefix) {
+        // If no matching pattern is found, prepend default prefix
+        linkInput = `${defaultPrefix}${linkInput}`;
+      }
+
+      this.editor
+        .chain()
+        .focus()
+        .extendMarkRange('link')
+        .run();
+
+      const selection = this.editor?.view?.state?.selection;
+
+      this.editor
+        .chain()
+        .focus()
+        .insertContent(linkText)
+        .setTextSelection({ from: selection.from, to: selection.from + linkText.length })
+        .setLink({ href: linkInput, class: linkOptions.class })
+        .run();
+    },
+
+    // eslint-disable-next-line complexity
+    processValue (newValue, returnIfEqual = true) {
+      const currentValue = this.getOutput();
+
+      if (returnIfEqual && deepEqual(newValue, currentValue)) {
         // The new value came from this component and was passed back down
         // through the parent, so don't do anything here.
         return;
       }
 
-      const inputUnicodeRegex = new RegExp(`(${emojiPattern})`, 'g');
-
       // If the text contains emoji characters convert them to emoji component tags
-      newValue = newValue.replace(inputUnicodeRegex, '<emoji-component code="$1"></emoji-component>');
+      if (typeof newValue === 'string' && this.outputFormat === 'text') {
+        const inputUnicodeRegex = new RegExp(`(${emojiPattern})`, 'g');
+        newValue = newValue?.replace(inputUnicodeRegex, '<emoji-component code="$1"></emoji-component>');
+      }
 
       // Otherwise replace the content (resets the cursor position).
       this.editor.commands.setContent(newValue, false);
@@ -604,22 +861,45 @@ export default {
       this.editor.destroy();
     },
 
+    triggerInputChangeEvents () {
+      const value = this.getOutput();
+      this.$emit('input', value);
+      this.$emit('update:modelValue', value);
+
+      // Always output JSON in a separate event
+      const jsonValue = this.editor.getJSON();
+      this.$emit('json-input', jsonValue);
+
+      // Always output HTML in a separate event
+      const htmlValue = this.editor.getHTML();
+      this.$emit('html-input', htmlValue);
+
+      // Always output HTML in a separate event
+      const textValue = this.editor.getText({ blockSeparator: '\n' });
+      this.$emit('text-input', textValue);
+    },
+
     /**
      * The Editor exposes event hooks that we have to map our emits into. See
      * https://tiptap.dev/api/events for all events.
      */
     addEditorListeners () {
+      this.editor.on('create', () => {
+        this.triggerInputChangeEvents();
+      });
       // The content has changed.
       this.editor.on('update', () => {
-        const value = this.getOutput();
         // When preventTyping is true and user wants to type, we revert to last value
         // If Backspace (keyCode = 8) is pressed, we allow updating the text
         if (this.preventTyping && this.editor.view?.input?.lastKeyCode !== 8) {
-          this.editor.commands.setContent(this.value, false);
+          this.editor.commands.setContent(this.modelValue, false);
           return;
         }
-        this.$emit('input', value);
-        this.$emit('update:modelValue', value);
+        this.triggerInputChangeEvents();
+      });
+
+      this.editor.on('selectionUpdate', ({ editor }) => {
+        this.$emit('selected', this.getSelectedLinkText(editor));
       });
 
       // The editor is focused.
@@ -641,7 +921,7 @@ export default {
           return this.editor.getHTML();
         case 'text':
         default:
-          return this.editor.getText();
+          return this.editor.getText({ blockSeparator: '\n' });
       }
     },
 
@@ -670,42 +950,3 @@ export default {
   },
 };
 </script>
-
-<style lang="less">
-  .dt-rich-text-editor {
-    &--code-block {
-      background: var(--dt-color-surface-secondary);
-      padding: var(--dt-space-400);
-    }
-
-    > .ProseMirror {
-      box-shadow: none;
-
-      p.is-editor-empty:first-child::before {
-        content: attr(data-placeholder);
-        float: left;
-        color: var(--dt-color-foreground-placeholder);
-        pointer-events: none;
-        height: 0;
-      }
-
-      ul, ol {
-        padding-left: var(--dt-space-525);
-      }
-
-      ul > li {
-        list-style-type: disc;
-      }
-
-      ol > li {
-        list-style-type: decimal;
-      }
-
-      blockquote {
-        padding-left: var(--dt-space-400);
-        border-left: var(--dt-size-border-300) solid var(--dt-color-foreground-muted-inverted);
-        margin-left: 0;
-      }
-    }
-  }
-</style>

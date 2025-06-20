@@ -1,7 +1,7 @@
 <template>
   <component
-    v-if="isIconType"
     :is="getIconName"
+    v-if="isIconType"
     :size="iconSize"
   />
   <div
@@ -10,7 +10,7 @@
   />
   <div
     v-else-if="isDialbotType"
-    :class="dialbotClasses"
+    class="d-recipe-leftbar-general-row__icon"
     data-qa="general-row-dialbot"
   >
     <dt-icon-dialbot
@@ -115,16 +115,8 @@ export default {
 
     contactCenterIconClasses () {
       return [
-        'dt-leftbar-row__icon-cc',
+        'd-recipe-leftbar-row__icon-cc',
         COLORS[this.color],
-      ];
-    },
-
-    dialbotClasses () {
-      return [
-        'd-d-flex',
-        'd-ai-center',
-        'd-jc-center',
       ];
     },
   },

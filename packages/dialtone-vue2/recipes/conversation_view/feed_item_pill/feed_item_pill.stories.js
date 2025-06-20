@@ -9,7 +9,6 @@ const iconsList = getIconNames();
 const args = {
   leftIcon: 'video',
   title: 'This meeting has ended',
-  ariaLabel: 'Click to expand',
   wrapperClass: 'd-w628',
   buttonClass: 'd-bar24',
 };

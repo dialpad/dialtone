@@ -21,7 +21,6 @@ export const argsData = {
   offset: [0, 4],
   appendTo: 'body',
   onOpened: action('opened'),
-  visuallyHiddenCloseLabel: 'Close popover',
 };
 
 export const argTypesData = {
@@ -166,11 +165,6 @@ export const argTypesData = {
       type: 'boolean',
     },
   },
-  visuallyHiddenClose: {
-    control: {
-      type: 'boolean',
-    },
-  },
 
   // Events
   onOpened: {
@@ -206,7 +200,11 @@ export default {
 export const Default = {
   render: (argsData) => createRenderConfig(DtPopover, PopoverDefault, argsData),
 
-  args: {},
+  args: {
+    headerContent: '',
+    footerContent: '',
+    content: '',
+  },
 
   decorators: [
     () => ({

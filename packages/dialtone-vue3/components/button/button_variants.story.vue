@@ -4,6 +4,18 @@
     class="d-stack16"
   >
     <div class="d-flow8">
+      <!-- Unstyled -->
+      <dt-button kind="unstyled">
+        Unstyled
+      </dt-button>
+    </div>
+    <div class="d-flow8">
+      <!-- Unstyled -->
+      <dt-button kind="unstyled">
+        Unstyled
+      </dt-button>
+    </div>
+    <div class="d-flow8">
       <!-- Default -->
       <dt-button>
         Primary
@@ -23,6 +35,11 @@
       <!-- Danger -->
       <dt-button kind="danger">
         Danger
+      </dt-button>
+
+      <!-- Positive -->
+      <dt-button kind="positive">
+        Positive
       </dt-button>
 
       <!-- Inverted -->
@@ -176,6 +193,14 @@
         kind="danger"
       >
         Active Danger button
+      </dt-button>
+
+      <!-- Active Positive Button -->
+      <dt-button
+        active
+        kind="positive"
+      >
+        Active Positive button
       </dt-button>
     </div>
   </div>

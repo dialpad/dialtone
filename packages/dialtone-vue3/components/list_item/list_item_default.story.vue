@@ -9,6 +9,7 @@
       :type="$attrs.type"
       :navigation-type="$attrs.navigationType"
       :selected="$attrs.selected"
+      :wrapper-class="$attrs.wrapperClass"
     >
       <template #left>
         <dt-icon :name="$attrs.left" />

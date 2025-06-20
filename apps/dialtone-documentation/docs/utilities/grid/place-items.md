@@ -1,5 +1,5 @@
 ---
-title: Place items
+title: Place Items
 description: Utilities for controlling how grid items are aligned along their block and inline axis directions.
 ---
 
@@ -7,12 +7,12 @@ description: Utilities for controlling how grid items are aligned along their bl
 
 Use `d-pli-stretch{-n}` to stretch grid items along their block and inline axis.
 
-<code-well-header class="d-fl-center d-fd-column d-p24 d-bgc-purple-100 d-bgo50 d-w100p d-hmn102" custom>
-  <div class="d-d-grid d-g-cols2 d-pli-stretch d-g16 d-p16 d-w100p d-hmn216 d-bar8 d-bgc-purple-100">
-    <div class="d-fl-center d-p16 d-bgc-purple-300 d-bar4 d-fs-300 d-fw-bold">1</div>
-    <div class="d-fl-center d-p16 d-bgc-purple-300 d-bar4 d-fs-300 d-fw-bold">2</div>
-    <div class="d-fl-center d-p16 d-bgc-purple-300 d-bar4 d-fs-300 d-fw-bold">3</div>
-    <div class="d-fl-center d-p16 d-bgc-purple-300 d-bar4 d-fs-300 d-fw-bold">4</div>
+<code-well-header>
+  <div class="d-d-grid d-g-cols2 d-pli-stretch d-g16 d-w100p d-hmn216 d-bar8 d-bgc-moderate">
+    <div class="d-fl-center d-p16 d-bgc-moderate-opaque d-bar4">1</div>
+    <div class="d-fl-center d-p16 d-bgc-moderate-opaque d-bar4">2</div>
+    <div class="d-fl-center d-p16 d-bgc-moderate-opaque d-bar4">3</div>
+    <div class="d-fl-center d-p16 d-bgc-moderate-opaque d-bar4">4</div>
   </div>
 </code-well-header>
 
@@ -29,12 +29,12 @@ Use `d-pli-stretch{-n}` to stretch grid items along their block and inline axis.
 
 Use `d-pli-start{-n}` to align grid items along the start of their block and/or inline axis.
 
-<code-well-header class="d-fl-center d-fd-column d-p24 d-bgc-green-100 d-bgo50 d-w100p d-hmn102" custom>
-  <div class="d-d-grid d-g-cols2 d-pli-start d-g16 d-p16 d-w100p d-h216d-bar8 d-bgc-green-100">
-    <div class="d-fl-center d-p16 d-w64 d-h64 d-bgc-green-200 d-bar4 d-fs-300 d-fw-bold">1</div>
-    <div class="d-fl-center d-p16 d-w64 d-h64 d-bgc-green-200 d-bar4 d-fs-300 d-fw-bold">2</div>
-    <div class="d-fl-center d-p16 d-w64 d-h64 d-bgc-green-200 d-bar4 d-fs-300 d-fw-bold">3</div>
-    <div class="d-fl-center d-p16 d-w64 d-h64 d-bgc-green-200 d-bar4 d-fs-300 d-fw-bold">4</div>
+<code-well-header>
+  <div class="d-d-grid d-g-cols2 d-pli-start d-g16 d-w100p d-h216 d-bar8 d-bgc-moderate">
+    <div class="d-fl-center d-p16 d-w64 d-h64 d-bgc-moderate-opaque d-bar4">1</div>
+    <div class="d-fl-center d-p16 d-w64 d-h64 d-bgc-moderate-opaque d-bar4">2</div>
+    <div class="d-fl-center d-p16 d-w64 d-h64 d-bgc-moderate-opaque d-bar4">3</div>
+    <div class="d-fl-center d-p16 d-w64 d-h64 d-bgc-moderate-opaque d-bar4">4</div>
   </div>
 </code-well-header>
 
@@ -51,12 +51,12 @@ Use `d-pli-start{-n}` to align grid items along the start of their block and/or 
 
 Use `d-pli-end{-n}` to align grid items along the end of their block and/or inline axis.
 
-<code-well-header class="d-fl-center d-fd-column d-p24 d-bgc-magenta-100 d-bgo50 d-w100p d-hmn102" custom>
-  <div class="d-d-grid d-g-cols2 d-pli-end d-g16 d-p16 d-w100p d-h216d-bar8 d-bgc-magenta-100">
-    <div class="d-fl-center d-p16 d-w64 d-h64 d-bgc-magenta-200 d-bar4 d-fs-300 d-fw-bold">1</div>
-    <div class="d-fl-center d-p16 d-w64 d-h64 d-bgc-magenta-200 d-bar4 d-fs-300 d-fw-bold">2</div>
-    <div class="d-fl-center d-p16 d-w64 d-h64 d-bgc-magenta-200 d-bar4 d-fs-300 d-fw-bold">3</div>
-    <div class="d-fl-center d-p16 d-w64 d-h64 d-bgc-magenta-200 d-bar4 d-fs-300 d-fw-bold">4</div>
+<code-well-header>
+  <div class="d-d-grid d-g-cols2 d-pli-end d-g16 d-w100p d-h216 d-bar8 d-bgc-moderate">
+    <div class="d-fl-center d-p16 d-w64 d-h64 d-bgc-moderate-opaque d-bar4">1</div>
+    <div class="d-fl-center d-p16 d-w64 d-h64 d-bgc-moderate-opaque d-bar4">2</div>
+    <div class="d-fl-center d-p16 d-w64 d-h64 d-bgc-moderate-opaque d-bar4">3</div>
+    <div class="d-fl-center d-p16 d-w64 d-h64 d-bgc-moderate-opaque d-bar4">4</div>
   </div>
 </code-well-header>
 
@@ -73,12 +73,12 @@ Use `d-pli-end{-n}` to align grid items along the end of their block and/or inli
 
 Use `d-pli-center{-n}` to align grid items along the center of their block and/or inline axis.
 
-<code-well-header class="d-fl-center d-fd-column d-p24 d-bgc-red-100 d-bgo50 d-w100p d-hmn102" custom>
-  <div class="d-d-grid d-g-cols2 d-pli-center d-g16 d-p16 d-w100p d-h216d-bar8 d-bgc-red-100">
-    <div class="d-fl-center d-p16 d-w64 d-h64 d-bgc-red-200 d-bar4 d-fs-300 d-fw-bold">1</div>
-    <div class="d-fl-center d-p16 d-w64 d-h64 d-bgc-red-200 d-bar4 d-fs-300 d-fw-bold">2</div>
-    <div class="d-fl-center d-p16 d-w64 d-h64 d-bgc-red-200 d-bar4 d-fs-300 d-fw-bold">3</div>
-    <div class="d-fl-center d-p16 d-w64 d-h64 d-bgc-red-200 d-bar4 d-fs-300 d-fw-bold">4</div>
+<code-well-header>
+  <div class="d-d-grid d-g-cols2 d-pli-center d-g16 d-w100p d-h216 d-bar8 d-bgc-moderate">
+    <div class="d-fl-center d-p16 d-w64 d-h64 d-bgc-moderate-opaque d-bar4">1</div>
+    <div class="d-fl-center d-p16 d-w64 d-h64 d-bgc-moderate-opaque d-bar4">2</div>
+    <div class="d-fl-center d-p16 d-w64 d-h64 d-bgc-moderate-opaque d-bar4">3</div>
+    <div class="d-fl-center d-p16 d-w64 d-h64 d-bgc-moderate-opaque d-bar4">4</div>
   </div>
 </code-well-header>
 
@@ -97,23 +97,21 @@ Use `d-pli-center{-n}` to align grid items along the center of their block and/o
 
 ## Classes
 
-<div class="d-h464 d-of-y-scroll d-bb d-bc-black-200">
-  <utility-class-table>
-    <template #content>
-      <tbody>
-        <div v-for="c in alignments" style="display: contents">
-          <tr v-for="i in alignments">
-            <th scope="row" class="d-code--sm d-fc-purple-400">
-              <span v-if="i !== c">.d-pli-{{ c }}-{{ i }}</span>
-              <span v-else>.d-pli-{{ c }}</span>
-            </th>
-            <td class="d-code--sm">
-              <span v-if="i !== c">place-items: {{ c }} {{ i }} !important;</span>
-              <span v-else>place-items: {{ c }} !important;</span>
-            </td>
-          </tr>
-        </div>
-      </tbody>
-    </template>
-  </utility-class-table>
-</div>
+<utility-class-table>
+  <template #content>
+    <tbody>
+      <div v-for="c in alignments" style="display: contents">
+        <tr v-for="i in alignments">
+          <th scope="row" class="d-code--sm d-docsite-code">
+            <span v-if="i !== c">.d-pli-{{ c }}-{{ i }}</span>
+            <span v-else>.d-pli-{{ c }}</span>
+          </th>
+          <td class="d-code--sm">
+            <span v-if="i !== c">place-items: {{ c }} {{ i }} !important;</span>
+            <span v-else>place-items: {{ c }} !important;</span>
+          </td>
+        </tr>
+      </div>
+    </tbody>
+  </template>
+</utility-class-table>

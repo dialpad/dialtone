@@ -6,13 +6,13 @@ import { glob } from 'glob';
 import dts from 'vite-plugin-dts';
 
 const iconEntries = glob.sync('../src/icons/*.vue').reduce((entries, path) => {
-  const entryName = path.replace(/^\.\.\/src\/icons\/(.*)\.vue$/, 'components/$1');
+  const entryName = path.replace(/^\.\.\/src\/icons\/(.*)\.vue$/, 'components/icons/$1');
   entries[entryName] = path;
   return entries;
 }, {});
 
 const illustrationEntries = glob.sync('../src/illustrations/*.vue').reduce((entries, path) => {
-  const entryName = path.replace(/^\.\.\/src\/illustrations\/(.*)\.vue$/, 'components/$1');
+  const entryName = path.replace(/^\.\.\/src\/illustrations\/(.*)\.vue$/, 'components/illustrations/$1');
   entries[entryName] = path;
   return entries;
 }, {});

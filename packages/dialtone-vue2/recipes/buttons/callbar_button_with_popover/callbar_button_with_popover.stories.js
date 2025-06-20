@@ -105,6 +105,12 @@ export const argTypesData = {
   openPopover: {
     control: 'boolean',
   },
+  invertedTooltip: {
+    control: 'boolean',
+  },
+  showTooltip: {
+    control: 'boolean',
+  },
 
   // Popover slots
   content: {
@@ -216,7 +222,6 @@ const defaultArgs = {
   default: 'Button',
   tooltip: 'Tooltip Text',
   ariaLabel: 'Button',
-  arrowButtonLabel: 'Open popover',
   content: 'Popover body content',
   contentClass: ['d-h464', 'd-w512'],
   headerContent: 'Header content',

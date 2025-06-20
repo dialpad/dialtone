@@ -1,6 +1,8 @@
 ---
 title: Component status
 description: Overview of the components health status
+prev: { link: "/components/", text: "Overview" }
+next: { link: "/components/avatar/", text: "Avatar" }
 no_preview: true
 ---
 

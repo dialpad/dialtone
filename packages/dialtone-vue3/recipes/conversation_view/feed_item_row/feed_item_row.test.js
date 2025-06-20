@@ -34,12 +34,12 @@ describe('DtFeedItemRow tests', () => {
   // Helpers
   const _setChildWrappers = () => {
     avatarImgWrapper = wrapper.find('[data-qa="dt-avatar-image"]');
-    headerWrapper = wrapper.find('[data-qa="dt-feed-item-row--header"]');
-    leftTimeWrapper = wrapper.find('[data-qa="dt-feed-item-row--left-time"]');
-    contentWrapper = wrapper.find('[data-qa="dt-feed-item-row--content"]');
-    attachmentWrapper = wrapper.find('[data-qa="dt-feed-item-row--attachment"]');
-    reactionsWrapper = wrapper.find('[data-qa="dt-feed-item-row--reactions"]');
-    menuWrapper = wrapper.find('[data-qa="dt-feed-item-row--menu"]');
+    headerWrapper = wrapper.find('[data-qa="dt-recipe-feed-item-row--header"]');
+    leftTimeWrapper = wrapper.find('[data-qa="dt-recipe-feed-item-row--left-time"]');
+    contentWrapper = wrapper.find('[data-qa="dt-recipe-feed-item-row--content"]');
+    attachmentWrapper = wrapper.find('[data-qa="dt-recipe-feed-item-row--attachment"]');
+    reactionsWrapper = wrapper.find('[data-qa="dt-recipe-feed-item-row--reactions"]');
+    menuWrapper = wrapper.find('[data-qa="dt-recipe-feed-item-row--menu"]');
   };
 
   // Test Setup
@@ -104,7 +104,7 @@ describe('DtFeedItemRow tests', () => {
         props = {
           ...baseProps,
           showHeader: true,
-          avatarImageUrl: 'https://i1.sndcdn.com/avatars-000181324408-652e57-t500x500.jpg',
+          avatarImageUrl: '/avatar1.png',
         };
         _mountWrapper();
         _setChildWrappers();
@@ -213,12 +213,12 @@ describe('DtFeedItemRow tests', () => {
       });
 
       it('should not add highlight background to the feed row', () => {
-        expect(wrapper.classes('dt-feed-item-row--active')).toBe(false);
+        expect(wrapper.classes('d-recipe-feed-item-row--active')).toBe(false);
       });
 
       it('should add highlight background to the feed row when isActive is toggled', async () => {
         await wrapper.setProps({ isActive: true });
-        expect(wrapper.classes('dt-feed-item-row--active')).toBe(true);
+        expect(wrapper.classes('d-recipe-feed-item-row--active')).toBe(true);
       });
     });
   });

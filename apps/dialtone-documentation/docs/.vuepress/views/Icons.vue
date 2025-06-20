@@ -68,6 +68,11 @@ export default {
       type: Boolean,
       default: false,
     },
+
+    excludedIcons: {
+      type: Array,
+      default: () => [],
+    },
   },
 
   data: () => ({
@@ -82,7 +87,7 @@ export default {
 
   async beforeCreate () {
     const importedModule = await import(`../../_data/svg-${this.kind}.json`);
-    this.icons = importedModule.default;
+    this.icons = importedModule.default.filter(icon => !this.excludedIcons.includes(icon.name));
   },
 };
 </script>

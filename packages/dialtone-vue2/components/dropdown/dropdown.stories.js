@@ -13,12 +13,11 @@ import { POPOVER_DIRECTIONS } from '../popover/popover_constants';
 export const argsData = {
   onHighlight: action('highlight'),
   onOpened: action('opened'),
-  visuallyHiddenCloseLabel: 'Close Dropdown',
   navigationType: 'arrow-keys',
   placement: 'bottom',
   appendTo: 'body',
   padding: 'none',
-  contentWidth: 'null',
+  contentWidth: '',
 };
 
 export const argTypesData = {
@@ -35,6 +34,17 @@ export const argTypesData = {
     },
   },
   list: {
+    table: {
+      category: 'slots',
+      type: {
+        summary: 'VNode',
+      },
+    },
+    control: {
+      type: 'text',
+    },
+  },
+  footer: {
     table: {
       category: 'slots',
       type: {
@@ -103,11 +113,6 @@ export const argTypesData = {
       type: 'boolean',
     },
   },
-  visuallyHiddenClose: {
-    control: {
-      type: 'boolean',
-    },
-  },
 
   // Action Event Handlers
   onOpened: {
@@ -151,7 +156,10 @@ export default {
 
 export const Default = {
   render: (argsData) => createRenderConfig(DtDropdown, DtDropdownDefaultTemplate, argsData),
-  args: {},
+  args: {
+    footer: '',
+    list: '',
+  },
 
   parameters: {
     percy: {

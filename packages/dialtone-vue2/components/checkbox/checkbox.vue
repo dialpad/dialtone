@@ -1,53 +1,53 @@
 <template>
   <div>
-    <label>
-      <div :class="['d-checkbox-group', { 'd-checkbox-group--disabled': internalDisabled }]">
-        <div class="d-checkbox__input">
-          <input
-            type="checkbox"
-            :checked="internalChecked"
-            :name="internalName"
-            :value="value"
-            :disabled="internalDisabled"
-            :class="['d-checkbox', inputValidationClass, inputClass]"
-            v-bind="$attrs"
-            :indeterminate.prop="internalIndeterminate"
-            v-on="inputListeners"
-          >
-        </div>
-        <div
-          v-if="hasLabelOrDescription"
-          class="d-checkbox__copy d-checkbox__label"
-          data-qa="checkbox-label-description-container"
+    <label :class="['d-checkbox-group', { 'd-checkbox-group--disabled': internalDisabled }]">
+      <div class="d-checkbox__input">
+        <input
+          type="checkbox"
+          :checked="internalChecked"
+          :name="internalName"
+          :value="value"
+          :disabled="internalDisabled"
+          :class="['d-checkbox', inputValidationClass, inputClass]"
+          v-bind="$attrs"
+          :indeterminate.prop="internalIndeterminate"
+          v-on="inputListeners"
         >
-          <div
-            v-if="hasLabel"
-            :class="labelClass"
-            v-bind="labelChildProps"
-            data-qa="checkbox-label"
-          >
-            <!-- @slot slot for Checkbox Label -->
-            <slot>{{ label }}</slot>
-          </div>
-          <div
-            v-if="hasDescription"
-            :class="['d-description', descriptionClass]"
-            v-bind="descriptionChildProps"
-            data-qa="checkbox-description"
-          >
-            <!-- @slot slot for Checkbox Description -->
-            <slot name="description">{{ description }}</slot>
-          </div>
-          <dt-validation-messages
-            :validation-messages="formattedMessages"
-            :show-messages="showMessages"
-            :class="messagesClass"
-            v-bind="messagesChildProps"
-            data-qa="dt-checkbox-validation-messages"
-          />
-        </div>
+      </div>
+      <div
+        v-if="hasLabel"
+        :class="[labelClass, 'd-checkbox__copy d-checkbox__label']"
+        v-bind="labelChildProps"
+        data-qa="checkbox-label"
+      >
+        <!-- @slot slot for Checkbox Label -->
+        <slot>{{ label }}</slot>
       </div>
     </label>
+    <div
+      v-if="$slots.description || description || hasMessages"
+      class="d-checkbox__messages"
+      data-qa="checkbox-description-messages"
+    >
+      <div
+        v-if="$slots.description || description"
+        :class="['d-description', descriptionClass]"
+        v-bind="descriptionChildProps"
+        data-qa="checkbox-description"
+      >
+        <!-- @slot slot for Checkbox Description -->
+        <slot name="description">
+          {{ description }}
+        </slot>
+      </div>
+      <dt-validation-messages
+        :validation-messages="formattedMessages"
+        :show-messages="showMessages"
+        :class="messagesClass"
+        v-bind="messagesChildProps"
+        data-qa="dt-checkbox-validation-messages"
+      />
+    </div>
   </div>
 </template>
 
@@ -115,12 +115,8 @@ export default {
       return !!(this.$slots.default || this.label);
     },
 
-    hasDescription () {
-      return !!(this.$slots.description || this.description);
-    },
-
-    hasLabelOrDescription () {
-      return this.hasLabel || this.hasDescription;
+    hasMessages () {
+      return this.formattedMessages.length && this.showMessages;
     },
 
     inputListeners () {

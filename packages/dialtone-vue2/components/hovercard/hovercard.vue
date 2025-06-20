@@ -1,9 +1,11 @@
-<!-- eslint-disable vue/multi-word-component-names -->
 <template>
   <dt-popover
     :id="id"
+    ref="popover"
+    :open="hovercardOpen"
     :placement="placement"
     :content-class="contentClass"
+    :dialog-class="dialogClass"
     :fallback-placements="fallbackPlacements"
     :padding="padding"
     :transition="transition ? 'fade' : null"
@@ -13,10 +15,14 @@
     :header-class="headerClass"
     :footer-class="footerClass"
     :append-to="appendTo"
-    :hovercard="true"
-    :timer="timer"
     data-qa="dt-hovercard"
+    :enter-delay="enterDelay"
+    :leave-delay="leaveDelay"
     @opened="(e) => ($emit('opened', e))"
+    @mouseenter-popover="onMouseEnter"
+    @mouseleave-popover="onMouseLeave"
+    @mouseenter-popover-anchor="onMouseEnter"
+    @mouseleave-popover-anchor="onMouseLeave"
   >
     <template #anchor="{ attrs }">
       <slot
@@ -39,9 +45,8 @@
 
 <script>
 import { POPOVER_APPEND_TO_VALUES, POPOVER_PADDING_CLASSES, DtPopover } from '@/components/popover/index.js';
-import { TOOLTIP_DIRECTIONS } from '@/components/tooltip/index.js';
+import { TOOLTIP_DIRECTIONS, TOOLTIP_DELAY_MS } from '@/components/tooltip/index.js';
 import { getUniqueString } from '@/common/utils';
-import useTimer from './timer';
 
 export default {
   name: 'DtHovercard',
@@ -52,6 +57,17 @@ export default {
 
   props: {
   /**
+     * Controls whether the hovercard is shown. Leaving this null will have the hovercard trigger on hover by default.
+     * If you set this value, the default trigger behavior will be disabled, and you can control it as you need.
+     * Supports .sync modifier
+     * @values null, true, false
+     */
+    open: {
+      type: Boolean,
+      default: null,
+    },
+
+    /**
    * Fade transition when the content display is toggled.
    * @type boolean
    * @values true, false
@@ -165,6 +181,24 @@ export default {
             (appendTo instanceof HTMLElement);
       },
     },
+
+    /**
+     * The enter delay in milliseconds before the hovercard is shown.
+     * @type number
+     */
+    enterDelay: {
+      type: Number,
+      default: TOOLTIP_DELAY_MS,
+    },
+
+    /**
+     * The leave delay in milliseconds before the hovercard is hidden.
+     * @type number
+     */
+    leaveDelay: {
+      type: Number,
+      default: TOOLTIP_DELAY_MS,
+    },
   },
 
   emits: [
@@ -179,8 +213,77 @@ export default {
 
   data () {
     return {
-      timer: useTimer(),
+      hovercardOpen: this.open,
+      anchorEl: null,
+      observer: null,
+      inTimer: null,
+      outTimer: null,
     };
+  },
+
+  watch: {
+    open: {
+      handler: function (open) {
+        this.hovercardOpen = open;
+      },
+
+      immediate: true,
+    },
+  },
+
+  mounted () {
+    this.$nextTick(() => {
+      this.anchorEl = this.$refs.popover?.$refs?.anchor?.firstElementChild;
+
+      this.observer = new MutationObserver(() => {
+        if (this.anchorEl && !this.anchorEl.isConnected) {
+          // If the anchor element is removed from the DOM, close the hovercard
+          this.hovercardOpen = false;
+        }
+      });
+
+      this.observer.observe(document.body, {
+        childList: true,
+        subtree: true,
+      });
+    });
+  },
+
+  beforeDestroy () {
+    if (this.observer) {
+      this.observer.disconnect();
+    }
+
+    clearTimeout(this.inTimer);
+    clearTimeout(this.outTimer);
+  },
+
+  methods: {
+    setInTimer () {
+      this.inTimer = setTimeout(() => {
+        this.hovercardOpen = true;
+      }, this.enterDelay);
+    },
+
+    setOutTimer () {
+      this.outTimer = setTimeout(() => {
+        this.hovercardOpen = false;
+      }, this.leaveDelay);
+    },
+
+    onMouseEnter () {
+      if (this.open === null) {
+        clearTimeout(this.outTimer);
+        this.setInTimer();
+      }
+    },
+
+    onMouseLeave () {
+      if (this.open === null) {
+        clearTimeout(this.inTimer);
+        this.setOutTimer();
+      }
+    },
   },
 };
 </script>

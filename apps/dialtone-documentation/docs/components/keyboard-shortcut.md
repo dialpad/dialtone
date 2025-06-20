@@ -5,7 +5,7 @@ status: ready
 thumb: true
 image: assets/images/components/keyboard-shortcut.png
 storybook: https://dialtone.dialpad.com/vue/?path=/story/components-keyboard-shortcut--default
-figma_url: https://www.figma.com/file/2adf7JhZOncRyjYiy2joil/DT-Core%3A-Components?type=design&node-id=8922-20524&mode=design&t=4VsDQfzhbBwFVFl2-11
+figma_url: https://www.figma.com/design/W58r5BkO8qTw3vem9YieJd/DT9-Component-Library--Rebrand-2025-?node-id=7239-203541
 ---
 
 <code-well-header>
@@ -65,7 +65,7 @@ vueCode='
 '
 showHtmlWarning />
 
-### Shortcut size variation
+### Shortcut Size Variation
 
 <code-well-header>
   <dt-keyboard-shortcut
@@ -82,7 +82,7 @@ vueCode='
 '
 />
 
-### All available shortcut aliases
+### All Available Shortcut Aliases
 
 <code-well-header>
   <dt-keyboard-shortcut
@@ -100,7 +100,7 @@ vueCode='
 '
 />
 
-### Inline with text and screen reader text
+### Inline with Text and Screen Reader Text
 
 <code-well-header>
   <div ref="inlineExample">

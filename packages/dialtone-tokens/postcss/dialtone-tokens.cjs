@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-var-requires */
 const Color = require('colorjs.io').default;
 const {
   PLATFORM_FONT_SIZES,
@@ -86,6 +87,10 @@ function boxShadows (shadowDeclarations, Declaration) {
  */
 function wrapInCalc (declaration) {
   if ([' * ', ' + '].some(str => declaration.value.includes(str)) && !declaration.value.startsWith('calc')) {
+    if (declaration.value.includes('var(--dt-font-size-root)')) {
+      // replace referenced root font size with 1 rem so they output as rem instead of px.
+      declaration.value = declaration.value.replace('var(--dt-font-size-root)', '1rem');
+    }
     declaration.value = `calc(${declaration.value})`;
   }
 }
@@ -94,6 +99,7 @@ function wrapInCalc (declaration) {
  * Generate HSL CSS Variables.
  * @param { Declaration } declaration
  */
+// eslint-disable-next-line complexity
 function generateColorHsla (declaration) {
   // Prevent regenerating hsla variables that have already been generated, since postcss will run this
   // even for newly generated variables.
@@ -111,31 +117,32 @@ function generateColorHsla (declaration) {
     !isHSLA &&
     !HSLA_EXCLUDED_COLORS.includes(prop);
 
-  if (shouldHaveHSLAGenerated(declaration.prop)) {
-    if (isReferenceToken(declaration.value)) {
-      const varName = declaration.value.substring(4, declaration.value.length - 1);
-      declaration.before({ prop: `${declaration.prop}-h`, value: `var(${varName}-h)` });
-      declaration.before({ prop: `${declaration.prop}-s`, value: `var(${varName}-s)` });
-      declaration.before({ prop: `${declaration.prop}-l`, value: `var(${varName}-l)` });
-      declaration.before({ prop: `${declaration.prop}-a`, value: `var(${varName}-a)` });
-      declaration.before({ prop: `${declaration.prop}-hsl`, value: `var(${varName}-hsl)` });
-      declaration.before({ prop: `${declaration.prop}-hsla`, value: `var(${varName}-hsla)` });
-    } else {
-      const color = new Color(declaration.value).to('hsl');
-      let [hue, saturation, lightness] = color.coords;
-      const alpha = ((color.alpha?.raw || color.alpha) * 100).toFixed(0);
-      hue = hue?.raw || (isNaN(hue) ? 0 : hue);
-      saturation = saturation?.raw || saturation;
-      lightness = lightness?.raw || lightness;
+  if (!shouldHaveHSLAGenerated(declaration.prop)) return;
 
-      declaration.before({ prop: `${declaration.prop}-h`, value: `${hue}` });
-      declaration.before({ prop: `${declaration.prop}-s`, value: `${saturation}%` });
-      declaration.before({ prop: `${declaration.prop}-l`, value: `${lightness}%` });
-      declaration.before({ prop: `${declaration.prop}-a`, value: `${alpha}%` });
-      declaration.before({ prop: `${declaration.prop}-hsl`, value: `var(${declaration.prop}-h) var(${declaration.prop}-s) var(${declaration.prop}-l)` });
-      declaration.before({ prop: `${declaration.prop}-hsla`, value: `hsl(var(${declaration.prop}-h) var(${declaration.prop}-s) var(${declaration.prop}-l) / var(--alpha, ${alpha}%))` });
-    }
+  if (isReferenceToken(declaration.value)) {
+    const varName = declaration.value.substring(4, declaration.value.length - 1);
+    declaration.before({ prop: `${declaration.prop}-h`, value: `var(${varName}-h)` });
+    declaration.before({ prop: `${declaration.prop}-s`, value: `var(${varName}-s)` });
+    declaration.before({ prop: `${declaration.prop}-l`, value: `var(${varName}-l)` });
+    declaration.before({ prop: `${declaration.prop}-a`, value: `var(${varName}-a)` });
+    declaration.before({ prop: `${declaration.prop}-hsl`, value: `var(${varName}-hsl)` });
+    declaration.before({ prop: `${declaration.prop}-hsla`, value: `var(${varName}-hsla)` });
+    return;
   }
+
+  const color = new Color(declaration.value).to('hsl');
+  let [hue, saturation, lightness] = color.coords;
+  const alpha = ((color.alpha?.raw || color.alpha) * 100).toFixed(0);
+  hue = hue?.raw || (isNaN(hue) ? 0 : hue);
+  saturation = saturation?.raw || saturation;
+  lightness = lightness?.raw || lightness;
+
+  declaration.before({ prop: `${declaration.prop}-h`, value: `${hue}` });
+  declaration.before({ prop: `${declaration.prop}-s`, value: `${saturation}%` });
+  declaration.before({ prop: `${declaration.prop}-l`, value: `${lightness}%` });
+  declaration.before({ prop: `${declaration.prop}-a`, value: `${alpha}%` });
+  declaration.before({ prop: `${declaration.prop}-hsl`, value: `var(${declaration.prop}-h) var(${declaration.prop}-s) var(${declaration.prop}-l)` });
+  declaration.before({ prop: `${declaration.prop}-hsla`, value: `hsl(var(${declaration.prop}-h) var(${declaration.prop}-s) var(${declaration.prop}-l) / var(--alpha, ${alpha}%))` });
 }
 
 /**
@@ -211,7 +218,7 @@ function getThemeFromFilename (filename) {
 /**
  * @type {import('postcss').PluginCreator}
  */
-module.exports = (opts = {}) => {
+module.exports = () => {
   return {
     postcssPlugin: 'dialtone-tokens',
     async Once (root, { Declaration }) {

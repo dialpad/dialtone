@@ -3,6 +3,7 @@
     :is="clickable ? 'button' : 'div'"
     :id="id"
     :class="avatarClasses"
+    :style="$attrs.style"
     data-qa="dt-avatar"
     @click="handleClick"
   >
@@ -96,6 +97,7 @@ import { extractInitialsFromName } from './utils';
  * @see https://dialtone.dialpad.com/components/avatar.html
  */
 export default {
+  compatConfig: { MODE: 3 },
   name: 'DtAvatar',
   components: { DtPresence },
 
@@ -301,6 +303,7 @@ export default {
     avatarClasses () {
       return [
         'd-avatar',
+        this.$attrs.class,
         AVATAR_SIZE_MODIFIERS[this.validatedSize],
         this.avatarClass,
         {
@@ -426,71 +429,3 @@ export default {
   },
 };
 </script>
-
-<style lang="less">
-//TODO: Move these classes to dialtone and document.
-.d-avatar--image-loaded {
-  background-color: transparent;
-  background-image: unset;
-}
-
-.d-avatar__count {
-  z-index: var(--zi-base);
-}
-
-.d-avatar__presence {
-  z-index: var(--zi-base);
-}
-
-.d-avatar__overlay {
-  background-color: var(--dt-color-surface-contrast-opaque);
-  opacity: var(--dt-opacity-900);
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: var(--dt-size-radius-circle);
-  z-index: var(--zi-base);
-}
-
-.d-avatar__overlay-icon {
-  color: var(--dt-color-foreground-primary-inverted);
-  width: 100%;
-}
-
-.d-avatar__overlay-text {
-  color: var(--dt-color-foreground-primary-inverted);
-  font-weight: var(--dt-font-weight-bold);
-  font-size: var(--dt-font-size-200);
-  width: 100%;
-  text-align: center;
-}
-
-.d-avatar--clickable {
-  --avatar-color-border: transparent;
-
-  cursor: pointer;
-  padding: 0;
-  background-color: transparent;
-
-  border-radius: var(--dt-size-radius-circle);
-  border: var(--dt-size-border-100) solid var(--avatar-color-border);
-
-  &:focus-visible {
-    outline: none;
-    box-shadow: var(--dt-shadow-focus);
-  }
-
-  &:hover {
-    --avatar-color-border: var(--dt-color-border-default);
-  }
-
-  &:active {
-    --avatar-color-border: var(--dt-color-border-moderate);
-
-    transform: scale(0.98);
-  }
-}
-</style>

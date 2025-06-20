@@ -6,8 +6,8 @@
       {
         'd-root-layout--fixed': fixed,
         'd-root-layout--inverted': isInverted,
-        [`d-root-layout__responsive--${responsiveBreakpoint}`]: !!responsiveBreakpoint,
       },
+      responsiveBreakpointClass,
     ]"
     data-qa="dt-root-layout"
   >
@@ -55,6 +55,7 @@ import { ROOT_LAYOUT_SIDEBAR_POSITIONS, ROOT_LAYOUT_RESPONSIVE_BREAKPOINTS } fro
  * A root layout provides a standardized group of containers to display content at the root level.
  */
 export default {
+  compatConfig: { MODE: 3 },
   name: 'DtRootLayout',
 
   props: {
@@ -166,6 +167,12 @@ export default {
   computed: {
     isInverted () {
       return this.sidebarPosition === ROOT_LAYOUT_SIDEBAR_POSITIONS.RIGHT;
+    },
+
+    responsiveBreakpointClass () {
+      return this.responsiveBreakpoint
+        ? `d-root-layout__responsive--${this.responsiveBreakpoint}`
+        : 'd-root-layout__responsive--default';
     },
   },
 };

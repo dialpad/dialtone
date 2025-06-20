@@ -1,5 +1,5 @@
 ---
-title: Text decoration
+title: Text Decoration
 description: Utilities to change an element's text decoration styles.
 ---
 
@@ -7,8 +7,8 @@ description: Utilities to change an element's text decoration styles.
 
 Use `d-td-underline` to underline text.
 
-<code-well-header class="d-d-flex d-jc-center d-fd-column d-p24 d-bgc-magenta-100 d-w100p d-hmn102" custom>
-  <p class="d-fs-300 d-fc-magenta-300 d-td-underline">The quick brown fox jumps over the lazy dog.</p>
+<code-well-header>
+  <p class="d-td-underline">The quick brown fox jumps over the lazy dog.</p>
 </code-well-header>
 
 ```html
@@ -19,32 +19,32 @@ Use `d-td-underline` to underline text.
 
 Use `d-td-dotted` to apply a dotted underline style to the text.
 
-<code-well-header class="d-d-flex d-jc-center d-fd-column d-p24 d-bgc-purple-100 d-w100p d-hmn102" custom>
-  <p class="d-fs-300 d-fc-purple-400 d-td-dotted">The quick brown fox jumps over the lazy dog.</p>
+<code-well-header>
+  <p class="d-td-dotted">The quick brown fox jumps over the lazy dog.</p>
 </code-well-header>
 
 ```html
 <p class="d-td-dotted">...</p>
 ```
 
-## Line through
+## Line Through
 
 Use `d-td-line-through` to apply a line through the text.
 
-<code-well-header class="d-d-flex d-jc-center d-fd-column d-p24 d-bgc-green-100 d-w100p d-hmn102" custom>
-  <p class="d-fs-300 d-fc-green d-td-line-through">The quick brown fox jumps over the lazy dog.</p>
+<code-well-header>
+  <p class="d-td-line-through">The quick brown fox jumps over the lazy dog.</p>
 </code-well-header>
 
 ```html
 <p class="d-td-line-through">...</p>
 ```
 
-## No decorations
+## No Decorations
 
 Use `d-td-none` to remove text decorations.
 
-<code-well-header class="d-d-flex d-jc-center d-fd-column d-p24 d-bgc-red-100 d-w100p d-hmn102" custom>
-            <p class="d-fs-300 d-fc-red d-td-none">The quick brown fox jumps over the lazy dog.</p>
+<code-well-header>
+  <p class="d-td-none">The quick brown fox jumps over the lazy dog.</p>
 </code-well-header>
 
 ```html
@@ -56,40 +56,51 @@ Use `d-td-none` to remove text decorations.
 </script>
 
 ## Hover
+
 Use `h:d-td-{n}` to change an element's :hover state text decoration.
 
-<code-well-header class="d-d-flex d-jc-center d-fd-column d-p24 d-bgc-magenta-100 d-w100p d-hmn102" custom>
-  <p class="d-fs-300 d-fc-magenta-300 h:d-td-underline">The quick brown fox jumps over the lazy dog.</p>
+<code-well-header>
+  <dt-button kind="unstyled" class="h:d-td-underline">
+    The quick brown fox jumps over the lazy dog.
+  </dt-button>
 </code-well-header>
 
 ```html
-<p class="h:d-td-underline">...</p>
+<dt-button kind="unstyled" class="h:d-td-underline">
+  The quick brown fox jumps over the lazy dog.
+</dt-button>
 ```
 
 ## Focus
+
 Use `f:d-td-{n}` to change an element's :focus and :focus-within state text decoration.
 
-<code-well-header class="d-d-flex d-p24 d-bgc-magenta-100 d-w100p d-hmn102" custom>
-  <button class="d-ba-none d-bgc-magenta-100 d-fs-200 d-bs-none f:d-td-underline">
-    <p class="d-fs-300 d-fc-magenta-300 d-fc-red">Click me</p>
-  </button>
+<code-well-header>
+  <dt-button kind="unstyled" class="f:d-td-underline">
+    The quick brown fox jumps over the lazy dog.
+  </dt-button>
 </code-well-header>
 
 ```html
-<p class="f:d-td-underline">...</p>
+<dt-button kind="unstyled" class="f:d-td-underline">
+  The quick brown fox jumps over the lazy dog.
+</dt-button>
 ```
 
-## Focus visible
+## Focus Visible
+
 Use `fv:d-td-{n}` to change an element's :focus-visible state text decoration [only when focused by keyboard].
 
-<code-well-header class="d-d-flex d-p24 d-bgc-purple-100 d-w100p d-hmn102" custom>
-  <button class="d-ba-none d-bgc-purple-100 d-fs-200 d-bs-none fv:d-td-underline">
-    <p class="d-fs-300 d-fc-purple-300 d-fc-red">Focus me</p>
-  </button>
+<code-well-header>
+  <dt-button kind="unstyled" class="fv:d-td-underline">
+    The quick brown fox jumps over the lazy dog.
+  </dt-button>
 </code-well-header>
 
 ```html
-<p class="fv:d-td-underline">...</p>
+<dt-button kind="unstyled" class="fv:d-td-underline">
+  The quick brown fox jumps over the lazy dog.
+</dt-button>
 ```
 
 ## Classes
@@ -98,7 +109,7 @@ Use `fv:d-td-{n}` to change an element's :focus-visible state text decoration [o
   <template #content>
     <tbody>
       <tr v-for=" i in decoration">
-        <th scope="row" class="d-code--sm d-fc-purple-400">.d-td-{{ i }}</th>
+        <th scope="row" class="d-code--sm d-docsite-code">.d-td-{{ i }}</th>
         <td class="d-code--sm">
           <span v-if="i === 'dotted'">text-decoration: underline {{ i }} !important</span>
           <span v-else>text-decoration: {{ i }} !important</span>

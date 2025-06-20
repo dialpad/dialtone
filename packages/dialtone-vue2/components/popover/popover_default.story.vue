@@ -2,32 +2,30 @@
   <dt-popover
     :id="$attrs.id"
     :key="uniqueKey"
-    :open.sync="isOpen"
-    :placement="$attrs.placement"
-    :content-class="$attrs.contentClass"
-    :fallback-placements="$attrs.fallbackPlacements"
-    :padding="$attrs.padding"
-    :hide-on-click="$attrs.hideOnClick"
-    :role="$attrs.role"
-    :element-type="$attrs.elementType"
-    :transition="$attrs.transition"
-    :aria-labelledby="$attrs.ariaLabelledby"
+    :append-to="$attrs.appendTo"
     :aria-label="$attrs.ariaLabel"
-    :offset="$attrs.offset"
-    :modal="$attrs.modal"
-    :initial-focus-element="$attrs.initialFocusElement"
+    :aria-labelledby="$attrs.ariaLabelledby"
+    :content-class="$attrs.contentClass"
     :content-width="$attrs.contentWidth"
-    :show-close-button="$attrs.showCloseButton"
-    :header-class="$attrs.headerClass"
+    :element-type="$attrs.elementType"
+    :fallback-placements="$attrs.fallbackPlacements"
     :footer-class="$attrs.footerClass"
+    :header-class="$attrs.headerClass"
+    :hide-on-click="$attrs.hideOnClick"
+    :initial-focus-element="$attrs.initialFocusElement"
     :max-height="$attrs.maxHeight"
     :max-width="$attrs.maxWidth"
-    :tether="$attrs.tether"
-    :sticky="$attrs.sticky"
+    :modal="$attrs.modal"
+    :offset="$attrs.offset"
     :open-with-arrow-keys="$attrs.openWithArrowKeys"
-    :visually-hidden-close="$attrs.visuallyHiddenClose"
-    :visually-hidden-close-label="$attrs.visuallyHiddenCloseLabel"
-    :append-to="$attrs.appendTo"
+    :open.sync="isOpen"
+    :padding="$attrs.padding"
+    :placement="$attrs.placement"
+    :role="$attrs.role"
+    :show-close-button="$attrs.showCloseButton"
+    :sticky="$attrs.sticky"
+    :tether="$attrs.tether"
+    :transition="$attrs.transition"
     @opened="$attrs.onOpened"
   >
     <template
@@ -79,7 +77,7 @@
 
 <script>
 import { DtPopover } from './';
-import { DtButton } from '../button';
+import { DtButton } from '@/components/button';
 import { getUniqueString } from '@/common/utils';
 
 export default {

@@ -33,6 +33,7 @@
 
 //  $$   DIALPAD BAR ANIMATION
 //  ----------------------------------------------------------------------------
+/* stylelint-disable-next-line keyframes-name-pattern */
 @keyframes d-loading-bars__short {
   0% {
     min-height: var(--dt-size-300);
@@ -84,6 +85,7 @@
   }
 }
 
+/* stylelint-disable-next-line keyframes-name-pattern */
 @keyframes d-loading-bars__tall {
   0% {
     min-height: var(--dt-size-300);
@@ -174,10 +176,7 @@
 //  $   TRANSITION
 //  ----------------------------------------------------------------------------
 .d-t {
-    transition-delay: 0s;
-    transition-timing-function: var(--ttf-in-out);
-    transition-duration: var(--td50);
-    transition-property: all;
+    transition: all var(--td50) var(--ttf-in-out) 0s;
 }
 
 //  --  TRANSITION DURATION

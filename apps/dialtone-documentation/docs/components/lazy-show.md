@@ -1,5 +1,5 @@
 ---
-title: Lazy show
+title: Lazy Show
 description: Lazy show is a utility component that prevents its children from being rendered until the first time it is shown.
 status: ready
 thumb: true

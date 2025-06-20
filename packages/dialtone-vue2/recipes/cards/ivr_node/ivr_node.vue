@@ -1,13 +1,16 @@
 <template>
   <div
-    class="ivr_node"
+    :class="[
+      'd-recipe-ivr-node',
+      nodeClass,
+    ]"
     v-on="$listeners"
   >
     <div
       v-if="dtmfKey"
       data-qa="dt-top-connector-dtmf"
-      class="ivr-connector ivr-connector--dtmf"
-      :class="{ 'ivr-connector--dtmf--selected': isSelected }"
+      class="d-recipe-ivr-node__connector d-recipe-ivr-node__connector-dtmf"
+      :class="{ 'd-recipe-ivr-node__connector-dtmf--selected': isSelected }"
     >
       {{ dtmfKey }}
     </div>
@@ -18,44 +21,30 @@
     <div
       v-if="!dtmfKey && !$slots.connector"
       data-qa="dt-top-connector"
-      class="ivr-connector"
-      :class="{ 'ivr-connector--selected': isSelected }"
+      class="d-recipe-ivr-node__connector"
+      :class="{ 'd-recipe-ivr-node__connector--selected': isSelected }"
     />
-    <dt-card
-      content-class="d-bt d-bc-black-300 d-px12 d-pt8 d-pb12"
-      :container-class="[
-        'd-w100p',
-        { 'd-ba d-bar8 d-baw4': isSelected },
-        headerColor,
-      ]"
-      :header-class="[
-        'd-mtn1',
-        'd-bt',
-        'd-btw4',
-        'd-p0',
-        headerColor,
-        { 'd-btr4': !isSelected },
-      ]"
-    >
+    <dt-card>
       <template #header>
         <!-- node label and icon section on left of the header -->
-        <div class="ivr_node__header-left">
+        <div class="d-recipe-ivr-node__header-left">
           <dt-button
-            :aria-label="nodeType"
             importance="clear"
             kind="muted"
             data-qa="dt-ivr-node-icon"
+            :aria-label="nodeAriaLabel"
+            :title="nodeAriaLabel"
           >
             <template #icon>
               <component
                 :is="nodeIcon"
                 size="200"
-                :class="['', { 'ivr_node__goto_icon': isGotoNode }]"
+                :class="['', { 'd-recipe-ivr-node__goto-icon': isGotoNode }]"
               />
             </template>
           </dt-button>
           <p
-            class="ivr_node__label"
+            class="d-recipe-ivr-node__label"
             data-qa="ivr-node-label"
           >
             {{ nodeLabel }}
@@ -71,6 +60,7 @@
               importance="clear"
               kind="muted"
               :aria-label="menuButtonAriaLabel"
+              :title="menuButtonAriaLabel"
               @click.stop.prevent="openMenu"
             >
               <template #icon>
@@ -79,7 +69,7 @@
             </dt-button>
           </template>
           <template #list="{ close }">
-            <div class="ivr_node__dropdown-list">
+            <div class="d-recipe-ivr-node__dropdown-list">
               <slot
                 name="menuItems"
                 :close="close"
@@ -110,9 +100,10 @@ import {
   DtIconTransfer,
   DtIconPhoneHangUp,
   DtIconMoreVertical,
+  DtIconListBullet,
 } from '@dialpad/dialtone-icons/vue2';
 import {
-  IVR_NODE_COLOR_MAPPING,
+  IVR_NODE_CLASS_MAPPING,
   IVR_NODE_PROMPT_MENU,
   IVR_NODE_PROMPT_COLLECT,
   IVR_NODE_PROMPT_PLAY,
@@ -122,7 +113,9 @@ import {
   IVR_NODE_ASSIGN,
   IVR_NODE_TRANSFER,
   IVR_NODE_HANGUP,
+  IVR_NODE_CUSTOMER_DATA,
 } from './ivr_node_constants';
+import { DtLocalizationMixin } from '@/common/mixins';
 
 const typeToIcon = new Map([
   [IVR_NODE_PROMPT_MENU, DtIconKeypad],
@@ -132,6 +125,7 @@ const typeToIcon = new Map([
   [IVR_NODE_BRANCH, DtIconBranch],
   [IVR_NODE_GO_TO, DtIconCallMerge],
   [IVR_NODE_ASSIGN, DtIconChevronsRight],
+  [IVR_NODE_CUSTOMER_DATA, DtIconListBullet],
   [IVR_NODE_TRANSFER, DtIconTransfer],
   [IVR_NODE_HANGUP, DtIconPhoneHangUp],
 ]);
@@ -153,7 +147,10 @@ export default {
     DtIconTransfer,
     DtIconPhoneHangUp,
     DtIconMoreVertical,
+    DtIconListBullet,
   },
+
+  mixins: [DtLocalizationMixin],
 
   props: {
 
@@ -180,14 +177,6 @@ export default {
     isSelected: {
       type: Boolean,
       default: false,
-    },
-
-    /**
-     * Translated aria-label for header menu button
-     */
-    menuButtonAriaLabel: {
-      type: String,
-      required: true,
     },
 
     /**
@@ -220,13 +209,22 @@ export default {
       return typeToIcon.get(this.nodeType);
     },
 
-    headerColor () {
-      const { normal, selected } = IVR_NODE_COLOR_MAPPING[this.nodeType];
+    nodeClass () {
+      const { normal, selected } = IVR_NODE_CLASS_MAPPING[this.nodeType];
       return this.isSelected ? selected : normal;
     },
 
     isGotoNode () {
       return this.nodeType === IVR_NODE_GO_TO;
+    },
+
+    nodeAriaLabel () {
+      const nodeType = this.nodeType.toUpperCase();
+      return this.i18n.$t(`DIALTONE_IVR_NODE_${nodeType}_ARIA_LABEL`);
+    },
+
+    menuButtonAriaLabel () {
+      return this.i18n.$t('DIALTONE_IVR_NODE_MENU_BUTTON_ARIA_LABEL');
     },
   },
 
@@ -237,60 +235,3 @@ export default {
   },
 };
 </script>
-
-<style lang="less">
-.ivr_node {
-  width: 280px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  cursor: pointer;
-
-  &__header-left {
-    display: flex;
-    align-items: center;
-  }
-
-  &__label {
-    font-size: var(--dt-font-size-200);
-    font-weight: var(--dt-font-weight-bold);
-  }
-
-  &__dropdown-list {
-    width: var(--dt-size-825);
-  }
-}
-
-.ivr_node__goto_icon {
-  transform: rotate(90deg);
-}
-
-.ivr-connector {
-  z-index: var(--zi-base);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border-color: var(--dt-color-purple-600);
-  background-color: var(--dt-color-purple-600);
-  width: var(--dt-size-400);
-  height: var(--dt-size-400);
-  border-radius: var(--dt-size-radius-circle);
-  margin-bottom: var(--dt-space-300-negative);
-
-  &--selected {
-    margin-bottom: var(--dt-space-400-negative);
-  }
-
-  &.ivr-connector--dtmf {
-    width: var(--dt-size-550);
-    height: var(--dt-size-550);
-    margin-bottom: var(--dt-space-450-negative);
-    color: var(--dt-color-neutral-white);
-    font-size: var(--dt-font-size-200);
-
-    &--selected {
-      margin-bottom: var(--dt-space-500-negative);
-    }
-  }
-}
-</style>

@@ -5,7 +5,7 @@ status: ready
 thumb: true
 image: assets/images/components/badge.png
 storybook: https://dialtone.dialpad.com/vue/?path=/story/components-badge--default
-figma_url: https://www.figma.com/file/2adf7JhZOncRyjYiy2joil/DT-Core%3A-Components-7?node-id=8914%3A21227&viewport=656%2C314%2C0.55&t=xHutRjwo1o5zMTgT-11
+figma_url: https://www.figma.com/design/W58r5BkO8qTw3vem9YieJd/DT9-Component-Library--Rebrand-2025-?node-id=2128-0
 ---
 
 <code-well-header>
@@ -33,7 +33,7 @@ figma_url: https://www.figma.com/file/2adf7JhZOncRyjYiy2joil/DT-Core%3A-Componen
 
 </dialtone-usage>
 
-### Best practices
+### Best Practices
 
 - While the color variant used should not be the sole indicator of information, choose color patterns that users can quickly scan and identify its intention.
 - Avoid long values, favoring a brief scannable word.
@@ -402,7 +402,7 @@ showHtmlWarning />
 
 </dialtone-usage>
 
-### Best practices
+### Best Practices
 
 - Favor lighter shades over darker ones.
 - Use each color hue before using the next available shade.

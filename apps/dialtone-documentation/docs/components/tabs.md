@@ -4,7 +4,7 @@ status: ready
 thumb: true
 description: Tabs allow users to navigation between grouped content in different views while within the same page context.
 storybook: https://dialtone.dialpad.com/vue/?path=/story/components-tabs--default
-figma_url: https://www.figma.com/file/2adf7JhZOncRyjYiy2joil/DT-Core%3A-Components-7?node-id=8919%3A21321&viewport=306%2C-547%2C1.01&t=xHutRjwo1o5zMTgT-11
+figma_url: https://www.figma.com/design/W58r5BkO8qTw3vem9YieJd/DT9-Component-Library--Rebrand-2025-?node-id=2129-4760
 ---
 
 <code-well-header>
@@ -60,7 +60,7 @@ showHtmlWarning />
 Add a `d-tablist--no-border` to remove the bottom border of any tablist. Handy for small tablists and tablists serving as subtabs to a larger menu.
 
 <code-well-header>
-  <example-tabs hide-content borderless />
+  <example-tabs borderless />
 </code-well-header>
 
 <code-example-tabs
@@ -145,6 +145,49 @@ vueCode='
 '
 showHtmlWarning />
 
+### Disabled
+
+<code-well-header>
+  <example-tabs disabled />
+</code-well-header>
+
+<code-example-tabs
+htmlCode='
+<div class="d-tablist" role="tablist" aria-label="Label Example Group" tabindex="0">
+  <button id="base-tab-0" class="d-tab d-tab--selected" role="tab" disabled aria-selected="true" aria-controls="base-panel-0" tabindex="0">First tab </button>
+  <button id="base-tab-1" class="d-tab" role="tab" disabled aria-selected="false" aria-controls="base-panel-1" tabindex="-1">Second tab </button>
+  <button id="base-tab-2" class="d-tab" role="tab" disabled aria-selected="false" aria-controls="base-panel-2" tabindex="-1">Third tab </button>
+</div>
+'
+vueCode='
+<dt-tab-group :disabled="true">
+  <template #tabs>
+    <dt-tab id="1" panel-id="2" selected>
+      First
+    </dt-tab>
+    <dt-tab id="3" panel-id="4" disabled>
+      Second
+    </dt-tab>
+    <dt-tab id="5`" panel-id="6">
+      Third
+    </dt-tab>
+  </template>
+
+  <div>
+    <dt-tab-panel id="2" tab-id="1">
+      <p>First Panel</p>
+    </dt-tab-panel>
+    <dt-tab-panel id="4" tab-id="3">
+      <p>Second Panel</p>
+    </dt-tab-panel>
+    <dt-tab-panel id="6" tab-id="5">
+      <p>Third Panel</p>
+    </dt-tab-panel>
+  </div>
+</dt-tab-group>
+'
+/>
+
 ## Sizes
 
 ### Default
@@ -192,7 +235,7 @@ showHtmlWarning />
 ### Small
 
 <code-well-header>
-  <example-tabs hide-content size="small" />
+  <example-tabs size="sm" />
 </code-well-header>
 
 <code-example-tabs
@@ -228,6 +271,64 @@ vueCode='
     </dt-tab-panel>
   </div>
 </dt-tab-group>
+'
+showHtmlWarning />
+
+## Advanced Usages
+
+### Validation Before Changing Tabs
+
+If you need to do some validation before changing tabs, you can use the `before-change` event. If the event handler is prevented, the tab change will be cancelled.
+
+<code-well-header>
+  <example-tabs validate />
+</code-well-header>
+
+<code-example-tabs
+htmlCode='
+<div class="d-tablist d-tablist--sm" role="tablist" aria-label="Label Example Group" tabindex="0">
+  <button id="base-tab-0" class="d-tab d-tab--selected" role="tab" aria-selected="true" aria-controls="base-panel-0" tabindex="0">First tab </button>
+  <button id="base-tab-1" class="d-tab" role="tab" aria-selected="false" aria-controls="base-panel-1" tabindex="-1">Second tab </button>
+  <button id="base-tab-2" class="d-tab" role="tab" aria-selected="false" aria-controls="base-panel-2" tabindex="-1">Third tab </button>
+</div>'
+vueCode='
+<dt-tab-group
+  size="sm"
+  @before-change="confirmBeforeLeave"
+>
+  <template #tabs>
+    <dt-tab id="1" panel-id="2" selected>
+      First
+    </dt-tab>
+    <dt-tab id="3" panel-id="4">
+      Second
+    </dt-tab>
+    <dt-tab id="5`" panel-id="6">
+      Third
+    </dt-tab>
+  </template>
+  <template #default>
+    <div>
+      <dt-tab-panel id="2" tab-id="1">
+        <p>First Panel</p>
+      </dt-tab-panel>
+      <dt-tab-panel id="4" tab-id="3">
+        <p>Second Panel</p>
+      </dt-tab-panel>
+      <dt-tab-panel id="6" tab-id="5">
+        <p>Third Panel</p>
+      </dt-tab-panel>
+    </div>
+  </template>
+</dt-tab-group>
+<script setup>
+  function confirmBeforeLeave (event) {
+    const confirmed = confirm("Are you sure to change tab?");
+    if (!confirmed) {
+      event.preventDefault();
+    }
+  }
+</script>
 '
 showHtmlWarning />
 

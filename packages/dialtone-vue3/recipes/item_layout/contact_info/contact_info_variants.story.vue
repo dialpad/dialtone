@@ -358,8 +358,8 @@ import { DtButton } from '@/components/button';
 import { DtIcon } from '@/components/icon';
 import { DtLink } from '@/components/link';
 
-import avatar1 from '@/common/assets/avatar1.png';
-import avatar2 from '@/common/assets/avatar2.png';
+import avatar1 from '@/common/assets/avatar1.png?url';
+import avatar2 from '@/common/assets/avatar2.png?url';
 import { DtIconHear, DtIconUser } from '@dialpad/dialtone-icons/vue3';
 
 export default {

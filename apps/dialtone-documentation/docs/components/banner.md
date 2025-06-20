@@ -5,7 +5,7 @@ status: ready
 thumb: true
 image: assets/images/components/banner.png
 storybook: https://dialtone.dialpad.com/vue/?path=/story/components-banner--default
-figma_url: https://www.figma.com/file/2adf7JhZOncRyjYiy2joil/DT-Core%3A-Components-7?node-id=8922%3A20410&viewport=-178%2C151%2C0.23&t=xHutRjwo1o5zMTgT-11
+figma_url: https://www.figma.com/design/W58r5BkO8qTw3vem9YieJd/DT9-Component-Library--Rebrand-2025-?node-id=4516-0
 ---
 
 <code-well-header class="d-p0">
@@ -23,7 +23,7 @@ System banners are used for **system** messaging. They are full-width notices pl
 
 Banners are a type of notice and so you can use the following [Notice](notice.md) styles in conjunction with `.d-banner`.
 
-## Variants and examples
+## Variants and Examples
 
 ### Kind
 

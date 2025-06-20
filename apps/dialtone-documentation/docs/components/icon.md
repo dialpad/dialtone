@@ -4,7 +4,7 @@ description: Collection of customizable symbols and sizes
 status: ready
 thumb: true
 image: assets/images/components/icon.png
-storybook: https://dialtone.dialpad.com/vue/?path=/docs/components-icon--default
+storybook: https://dialtone.dialpad.com/vue/?path=/story/components-icon--default
 figma_url: https://www.figma.com/file/zz40wi0uW9MvaJ5RuhcRZR/DT-Core%3A-Icons-7?node-id=1473%3A3757&viewport=-168%2C479%2C1&t=OhX4ilCDvb7Tqkx4-11
 ---
 
@@ -12,7 +12,7 @@ figma_url: https://www.figma.com/file/zz40wi0uW9MvaJ5RuhcRZR/DT-Core%3A-Icons-7?
   <dt-icon-user-plus />
 </code-well-header>
 
-Check out our complete icon collection in the [icon catalog](/design/icons/#icon-catalog).
+Check out our complete icon collection in the [icon catalog](/design/icons/index.md#icon-catalog).
 
 ## Usage
 
@@ -34,7 +34,7 @@ import { DtIconUserPlus } from '@dialpad/dialtone-icons/vue3';
 <dt-icon-user-plus size="500" />
 ```
 
-### Without tree shaking (deprecated)
+### Without Tree Shaking (Deprecated)
 
 ```js
 import { DtIcon } from '@dialpad/dialtone'
@@ -44,13 +44,13 @@ import { DtIcon } from '@dialpad/dialtone'
 
 ## Changing Sizes
 
-<div class="d-d-grid d-g24 d-g-cols3 md:d-g-cols1">
+<div class="d-d-grid d-g24 d-g-cols1 md:d-g-cols3">
 
 Adjust the size using the `size` prop. Note that sizes 600, 700, and 800 are exclusively for devices.
 
 <div class="d-gc2">
 <code-well-header>
-  <div class="d-d-grid d-g24 d-g-cols2 md:d-g-cols1 d-w100p">
+  <div class="d-d-grid d-g24 d-g-cols1 md:d-g-cols2 d-w100p">
     <div class="d-fl-center">
       <dt-icon-settings :size="selectedSize" />
     </div>
@@ -65,15 +65,15 @@ Adjust the size using the `size` prop. Note that sizes 600, 700, and 800 are exc
 </div>
 </div>
 
-## Changing color
+## Changing Color
 
-<div class="d-d-grid d-g24 d-g-cols3 md:d-g-cols1">
+<div class="d-d-grid d-g24 d-g-cols1 md:d-g-cols3">
 
 The icon's color inherits from the parent's foreground color.
 
 <div class="d-gc2">
 <code-well-header>
-<div class="d-d-grid d-g24 d-g-cols2 md:d-g-cols1 d-w100p">
+<div class="d-d-grid d-g24 d-g-cols1 md:d-g-cols2 d-w100p">
   <div class="d-fl-center">
     <dt-stack :class="selectedColor" direction="row" as="div" gap="300">
       <dt-icon-settings size="300" />
@@ -94,7 +94,7 @@ The icon's color inherits from the parent's foreground color.
 </div>
 </div>
 
-<div class="d-d-grid d-g24 d-g-cols3 md:d-g-cols1">
+<div class="d-d-grid d-g24 d-g-cols1 md:d-g-cols3">
 
 When setting the color of an icon take these into considaration:
 
@@ -137,15 +137,15 @@ When setting the color of an icon take these into considaration:
 </div>
 </div>
 
-## Icon and text alignment
+## Icon and Text Alignment
 
-<div class="d-d-grid d-g24 d-g-cols3 md:d-g-cols1">
+<div class="d-d-grid d-g24 d-g-cols1 md:d-g-cols3">
 
-We encourage utilizing the [Stack component](/components/stack/) for aligning elements both horizontally and vertically.
+We encourage utilizing the [Stack component](/components/stack.md) for aligning elements both horizontally and vertically.
 
 <div class="d-gc2">
 <code-well-header>
-  <div class="d-d-grid d-g24 d-g-cols2 md:d-g-cols1 d-w100p">
+  <div class="d-d-grid d-g24 d-g-cols1 md:d-g-cols2 d-w100p">
     <div class="d-fl-center">
       <dt-stack :direction="selectedDirection" class="d-fl-center" gap="300">
       <dt-icon-settings size="300" />
@@ -172,31 +172,33 @@ We encourage utilizing the [Stack component](/components/stack/) for aligning el
 
 - Icons contrast guidelines are the same as Typography.
 
-- Avoid using icons as clickable elements; instead, use the [Icon Button](/components/button.html#icon-only) for interactive actions.
+- Avoid using icons as clickable elements; instead, use the [Icon Button](/components/button.md#icon-only) for interactive actions.
 
 ## Sizes
 
 Dialtone provides eight sizes for icons. Each of the sizes represents the width and a height the icon is going to have:
 
-<table class="d-table dialtone-doc-table">
-  <thead>
-    <tr>
-      <th scope="col" colspan="2">Size</th>
-      <th scope="col">Dimensions</th>
-      <th scope="col">Class</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr v-for="{size, width_height, className } in sizes">
-      <th scope="row">{{ size }}</th>
-      <td class="d-ta-center">
-        <dt-icon name="inbox" :size="size" />
-      </td>
-      <td class="d-code--sm">{{ width_height }}</td>
-      <td class="d-code--sm">.{{ className }}</td>
-    </tr>
-  </tbody>
-</table>
+<div class="d-bar8 d-ba d-bc-subtle">
+  <table class="d-table dialtone-doc-table">
+    <thead>
+      <tr>
+        <th scope="col" colspan="2">Size</th>
+        <th scope="col">Dimensions</th>
+        <th scope="col">Class</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr v-for="{size, width_height, className } in sizes">
+        <th scope="row">{{ size }}</th>
+        <td class="d-ta-center">
+          <dt-icon name="inbox" :size="size" />
+        </td>
+        <td class="d-code--sm d-docsite-code">{{ width_height }}</td>
+        <td class="d-code--sm d-docsite-code">.{{ className }}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
 
 ## Vue API
 

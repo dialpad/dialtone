@@ -2,6 +2,7 @@
   <div
     ref="container"
     :class="['d-input__root', { 'd-input--hidden': hidden }]"
+    v-bind="addClassStyleAttrs($attrs)"
     data-qa="dt-input"
   >
     <label
@@ -74,7 +75,7 @@
           :class="inputClasses()"
           :maxlength="shouldLimitMaxLength ? validationProps.length.max : null"
           data-qa="dt-input-input"
-          v-bind="$attrs"
+          v-bind="removeClassStyleAttrs($attrs)"
           v-on="inputListeners"
         />
         <input
@@ -88,7 +89,7 @@
           :class="inputClasses()"
           :maxlength="shouldLimitMaxLength ? validationProps.length.max : null"
           data-qa="dt-input-input"
-          v-bind="$attrs"
+          v-bind="removeClassStyleAttrs($attrs)"
           v-on="inputListeners"
         >
         <span
@@ -131,6 +132,8 @@ import {
   getUniqueString,
   getValidationState,
   hasSlotContent,
+  removeClassStyleAttrs,
+  addClassStyleAttrs,
 } from '@/common/utils';
 import { DtValidationMessages } from '@/components/validation_messages';
 import { MessagesMixin } from '@/common/mixins/input';
@@ -143,6 +146,7 @@ import { MessagesMixin } from '@/common/mixins/input';
  * @see https://dialtone.dialpad.com/components/input.html
  */
 export default {
+  compatConfig: { MODE: 3 },
   name: 'DtInput',
 
   components: { DtValidationMessages },
@@ -530,6 +534,8 @@ export default {
   },
 
   methods: {
+    removeClassStyleAttrs,
+    addClassStyleAttrs,
     inputClasses () {
       return [
         'd-input__input',

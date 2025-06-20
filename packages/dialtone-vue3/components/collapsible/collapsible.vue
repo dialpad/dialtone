@@ -88,6 +88,7 @@ import { DtIconChevronDown, DtIconChevronRight } from '@dialpad/dialtone-icons/v
  * @see https://dialtone.dialpad.com/components/collapsible.html
  */
 export default {
+  compatConfig: { MODE: 3 },
   name: 'DtCollapsible',
 
   components: {

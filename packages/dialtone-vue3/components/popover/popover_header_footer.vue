@@ -43,9 +43,10 @@
 <script>
 import { DtButton } from '@/components/button';
 import { DtIconClose } from '@dialpad/dialtone-icons/vue3';
-import { hasSlotContent } from '@/common/utils';
+import { hasSlotContent, returnFirstEl } from '@/common/utils';
 
 export default {
+  compatConfig: { MODE: 3 },
   name: 'PopoverHeaderFooter',
   components: {
     DtButton,
@@ -106,7 +107,7 @@ export default {
 
   methods: {
     focusCloseButton () {
-      const closeButton = this.$refs['popover__close-button']?.$el;
+      const closeButton = returnFirstEl(this.$refs['popover__close-button']?.$el);
       closeButton?.focus();
     },
   },

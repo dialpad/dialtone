@@ -39,13 +39,13 @@ const _setChildWrappers = () => {
   editor = wrapper.find('[data-qa="dt-rich-text-editor"]').find('div[contenteditable]');
 
   // buttons
-  imageBtn = wrapper.find('[data-qa="dt-message-input-image-btn"]');
-  emojiPickerBtn = wrapper.find('[data-qa="dt-message-input-emoji-picker-btn"]');
-  sendBtn = wrapper.find('[data-qa="dt-message-input-send-btn"]');
+  imageBtn = wrapper.find('[data-qa="dt-recipe-message-input-image-btn"]');
+  emojiPickerBtn = wrapper.find('[data-qa="dt-recipe-message-input-emoji-picker-btn"]');
+  sendBtn = wrapper.find('[data-qa="dt-recipe-message-input-send-btn"]');
 
   // Els
-  imageInputEl = wrapper.find('[data-qa="dt-message-input-image-input"]');
-  characterLimitEl = wrapper.find('[data-qa="dt-message-input-character-limit"]');
+  imageInputEl = wrapper.find('[data-qa="dt-recipe-message-input-image-input"]');
+  characterLimitEl = wrapper.find('[data-qa="dt-recipe-message-input-character-limit"]');
 };
 
 const _mountWrapper = () => {
@@ -125,6 +125,8 @@ describe('DtRecipeMessageInput tests', () => {
           },
           value: randoText,
         });
+        // for some reason this event doesn't fire on it's own initially. trigger it manually.
+        wrapper.findComponent({ ref: 'richTextEditor' }).vm.$emit('text-input', randoText);
         _setChildWrappers();
       });
 

@@ -18,10 +18,8 @@
         :hide-action="$attrs.hideAction"
         :hide-icon="$attrs.hideIcon"
         :duration="$attrs.duration"
-        :close-button-props="buttonCloseProps"
-        :visually-hidden-close="$attrs.visuallyHiddenClose"
-        :visually-hidden-close-label="$attrs.visuallyHiddenCloseLabel"
-        @close="$attrs.onClose($event)"
+        :layout="$attrs.layout"
+        @close="$attrs.onClose"
       >
         <span
           v-if="$attrs.default"
@@ -99,14 +97,6 @@ export default {
 
     linkClass () {
       return this.isInverted ? 'd-link--inverted' : 'd-link--muted';
-    },
-
-    buttonCloseProps () {
-      return {
-        ...this.$attrs.closeButtonProps,
-        kind: this.buttonKind,
-        ariaLabel: 'Close',
-      };
     },
   },
 

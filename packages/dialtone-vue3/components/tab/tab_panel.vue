@@ -16,12 +16,14 @@
 
 <script>
 import Modal from '@/common/mixins/modal';
+import { returnFirstEl } from '@/common/utils';
 
 /**
  * Tabs allow users to navigation between grouped content in different views while within the same page context.
  * @see https://dialtone.dialpad.com/components/tabs.html
  */
 export default {
+  compatConfig: { MODE: 3 },
   name: 'DtTabPanel',
 
   mixins: [Modal],
@@ -76,7 +78,7 @@ export default {
   },
 
   async mounted () {
-    const firstFocusableElement = await this.getFirstFocusableElement(this.$el);
+    const firstFocusableElement = await this.getFirstFocusableElement(returnFirstEl(this.$el));
 
     if (!firstFocusableElement) {
       this.isFirstElementFocusable = false;
@@ -98,7 +100,7 @@ export default {
           isFirstElement = false;
           break;
         }
-        current = current.parentNode !== this.$el ? current.parentNode : null;
+        current = current.parentNode !== returnFirstEl(this.$el) ? current.parentNode : null;
       }
 
       return isFirstElement;

@@ -9,14 +9,14 @@ import { MINIMAL_VIEWPORTS } from '@storybook/addon-viewport';
 import { setup } from '@storybook/vue3';
 import React from 'react';
 import { DocsContainer } from '@storybook/addon-docs';
-import { useDarkMode, DARK_MODE_EVENT_NAME } from "storybook-dark-mode";
+import { useDarkMode, DARK_MODE_EVENT_NAME } from 'storybook-dark-mode';
 import fixDefaultSlot from '../components/plugins/fixDefaultSlot';
 import { setEmojiAssetUrlSmall, setEmojiAssetUrlLarge, setCustomEmojiUrl, setCustomEmojiJson } from '@/common/emoji';
 import customEmojiJson from '@/common/custom-emoji.json';
 import { dialtoneDarkTheme, dialtoneLightTheme } from './dialtone-themes.js';
-import { DtTooltipDirective } from "@/directives/tooltip";
+import { DtTooltipDirective } from '@/directives/tooltip_directive';
+import { DtScrollbarDirective } from '@/directives/scrollbar_directive';
 import { faker } from '@faker-js/faker';
-import { DtScrollbarDirective } from "@/directives/scrollbar";
 
 setTheme(DpLight);
 
@@ -32,7 +32,7 @@ setCustomEmojiUrl('https://github.githubassets.com/images/icons/emoji/');
 setCustomEmojiJson(customEmojiJson);
 
 setup((app) => {
-  app.use(fixDefaultSlot)
+  app.use(fixDefaultSlot);
   app.use(DtTooltipDirective);
   app.use(DtScrollbarDirective);
   // global seed, to make sure results are reproducible on percy and don't change on every reload too.
@@ -52,13 +52,16 @@ export default {
         ],
       },
     },
+
     controls: {
       expanded: true,
       sort: 'requiredFirst',
     },
+
     viewport: {
       viewports: MINIMAL_VIEWPORTS,
     },
+
     options: {
       showPanel: 'bottom',
       storySort: {
@@ -94,13 +97,15 @@ export default {
         ],
       },
     },
+
     backgrounds: { disable: true },
     docs: {
       container: ({ children, ...props }) => {
         const isDark = useDarkMode();
         return <DocsContainer context={props.context} theme={isDark ? dialtoneDarkTheme : dialtoneLightTheme}>{children}</DocsContainer>;
-      }
+      },
     },
-    percy: { globalShow: true }
+
+    percy: { globalShow: true },
   },
-}
+};

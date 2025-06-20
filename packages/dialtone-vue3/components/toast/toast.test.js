@@ -100,7 +100,7 @@ describe('DtToast Tests', () => {
       });
 
       it('message prop is passed down correctly', () => {
-        expect(contentChild.text()).toBe(mockProps.message);
+        expect(contentChild.find('[data-qa="notice-content-message"]').text()).toBe(mockProps.message);
       });
 
       it('hideClose prop is passed down correctly', () => {
@@ -204,38 +204,6 @@ describe('DtToast Tests', () => {
   });
 
   describe('Validation Tests', () => {
-    describe('Role Validator', () => {
-      const MOCK_PROP = DtToast.props.role;
-
-      describe('When provided role is in TOAST_ROLES', () => {
-        it('passes custom prop validation', () => {
-          expect(MOCK_PROP.validator(MOCK_PROP.default)).toBe(true);
-        });
-      });
-
-      describe('When provided role is not in TOAST_ROLES', () => {
-        it('fails custom prop validation', () => {
-          expect(MOCK_PROP.validator(`INVALID_ROLE`)).toBe(false);
-        });
-      });
-    });
-
-    describe('Kind Validator', () => {
-      const MOCK_PROP = DtToast.props.kind;
-
-      describe('When provided kind is in NOTICE_KINDS', () => {
-        it('passes custom prop validation', () => {
-          expect(MOCK_PROP.validator(MOCK_PROP.default)).toBe(true);
-        });
-      });
-
-      describe('When provided kind is not in NOTICE_KINDS', () => {
-        it('fails custom prop validation', () => {
-          expect(MOCK_PROP.validator(`INVALID_KIND`)).toBe(false);
-        });
-      });
-    });
-
     describe('Duration Validator', () => {
       const MOCK_PROP = DtToast.props.duration;
       const MOCK_DURATION = TOAST_MIN_DURATION;

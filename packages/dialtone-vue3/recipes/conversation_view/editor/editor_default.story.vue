@@ -15,6 +15,7 @@
       :cancel-set-link-button="$attrs.cancelSetLinkButton"
       :confirm-set-link-button="$attrs.confirmSetLinkButton"
       :remove-link-button="$attrs.removeLinkButton"
+      :use-div-tags="$attrs.useDivTags"
       :show-bold-button="$attrs.showBoldButton"
       :show-italics-button="$attrs.showItalicsButton"
       :show-strike-button="$attrs.showStrikeButton"
@@ -28,11 +29,13 @@
       :show-quote-button="$attrs.showQuoteButton"
       :show-quick-replies-button="$attrs.showQuickRepliesButton"
       :show-code-block-button="$attrs.showCodeBlockButton"
-      :use-default-paste-handler="$attrs.useDefaultPasteHandler"
+      :show-inline-image-button="$attrs.showInlineImageButton"
       @focus="$attrs.onFocus"
       @blur="$attrs.onBlur"
       @input="$attrs.onInput"
       @quick-replies-click="$attrs.onQuickRepliesClick"
+      @inline-image-click="$attrs.onInlineImageClick"
+      @text-input="$attrs.onTextInput"
     />
     <p><strong>Editor content is:</strong></p>
     <span>{{ modelValue }}</span>
@@ -45,6 +48,7 @@ import DtRecipeEditor from './editor.vue';
 export default {
   name: 'DtRecipeEditorDefault',
   components: { DtRecipeEditor },
+
   data () {
     return {
       modelValue: this.$attrs.modelValue,

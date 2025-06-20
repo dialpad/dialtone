@@ -2,20 +2,21 @@
   <div class="d-h264">
     <dt-recipe-message-input
       ref="input"
-      v-model="$attrs.modelValue"
+      v-model="$attrs.value"
       :input-aria-label="$attrs.inputAriaLabel"
       :auto-focus="$attrs.autoFocus"
-      :allow-blockquote="$attrs.allowBlockquote"
-      :allow-bold="$attrs.allowBold"
-      :allow-bullet-list="$attrs.allowBulletList"
-      :allow-codeblock="$attrs.allowCodeblock"
-      :allow-italic="$attrs.allowItalic"
-      :allow-strike="$attrs.allowStrike"
-      :allow-underline="$attrs.allowUnderline"
+      :rich-text="$attrs.richText"
+      :bold-button-options="$attrs.boldButtonOptions"
+      :italic-button-options="$attrs.italicButtonOptions"
+      :strike-button-options="$attrs.strikeButtonOptions"
+      :link-button-options="$attrs.linkButtonOptions"
+      :ordered-list-button-options="$attrs.orderedListButtonOptions"
+      :block-quote-button-options="$attrs.blockQuoteButtonOptions"
+      :code-button-options="$attrs.codeButtonOptions"
+      :code-block-button-options="$attrs.codeBlockButtonOptions"
       :editable="$attrs.editable"
       :prevent-typing="$attrs.preventTyping"
       :input-class="$attrs.inputClass"
-      :link="$attrs.link"
       :output-format="$attrs.outputFormat"
       :placeholder="$attrs.placeholder"
       :disable-send="$attrs.disableSend"
@@ -31,10 +32,17 @@
       :show-image-picker="$attrs.showImagePicker"
       :show-send="$attrs.showSend"
       :show-cancel="$attrs.showCancel"
+      :confirm-set-link-button="$attrs.confirmSetLinkButton"
+      :remove-link-button="$attrs.removeLinkButton"
+      :cancel-set-link-button="$attrs.cancelSetLinkButton"
+      :set-link-placeholder="$attrs.setLinkPlaceholder"
       @submit="$attrs.onSubmit"
       @focus="$attrs.onFocus"
       @blur="$attrs.onBlur"
       @input="$attrs.onInput"
+      @json-input="$attrs.onJsonInput"
+      @html-input="$attrs.onHtmlInput"
+      @text-input="$attrs.onTextInput"
       @select-media="$attrs.onSelectMedia"
       @selected-emoji="$attrs.onSelectedEmoji"
       @selected-command="$attrs.onSelectedCommand"
@@ -50,6 +58,12 @@
         #emojiGiphyPicker
       >
         <span v-html="$attrs.emojiGiphyPicker" />
+      </template>
+      <template
+        v-if="$attrs.customActionIcons"
+        #customActionIcons
+      >
+        <span v-html="$attrs.customActionIcons" />
       </template>
       <template
         v-if="$attrs.middle"

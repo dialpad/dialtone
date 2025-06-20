@@ -258,11 +258,9 @@ html body {
   align-items: center;
   justify-content: space-between;
   height: var(--dt-size-700);
-  padding: var(--dt-space-500);
-  padding-left: var(--dt-space-400);
+  padding: var(--dt-space-500) var(--dt-space-500) var(--dt-space-500) var(--dt-space-400);
   background-color: var(--dt-color-surface-secondary);
-  // TODO: redo 😜
-  border-bottom: var(--dt-size-100) solid var(--dt-color-border-subtle);
+  border-bottom: var(--dt-size-border-50) solid var(--dt-color-border-subtle);
 }
 
 .dialtone-sidebar {
@@ -274,13 +272,11 @@ html body {
   background-color: var(--dt-color-surface-secondary);
   border-right: var(--dt-size-100) solid var(--dt-color-border-subtle);
 
-
   &__list {
     top: var(--dt-space-700);
     bottom: 0;
     width: calc(var(--dt-size-300) * 64);
-    /* stylelint-disable-next-line meowtec/no-px */
-    padding: var(--dt-size-550) var(--dt-size-500) 96px var(--dt-size-500);
+    padding: var(--dt-size-550) var(--dt-size-450) var(--dt-size-750);
   }
 }
 
@@ -300,9 +296,8 @@ a.header-anchor {
 .d-docsite--header-2 {
   margin-top: var(--dt-space-600);
   margin-bottom: var(--dt-space-400);
-  font-weight: var(--dt-font-weight-medium);
-  font-size: var(--dt-font-size-400);
-  line-height: var(--dt-font-line-height-200);
+  font: var(--dt-typography-headline-xl);
+  font-family: var(--dt-font-family-expressive);
 }
 
 .d-docsite--header-3 {
@@ -389,6 +384,11 @@ a.header-anchor {
   margin-bottom: var(--dt-space-300);
 }
 
+.d-docsite-code {
+  color: var(--dt-color-blue-500) !important;
+  font-weight: var(--dt-font-weight-normal) !important;
+}
+
 //  ============================================================================
 //  $   ICON GRID
 //      Styles our icon pages
@@ -415,6 +415,19 @@ a.header-anchor {
 
   &--large {
     grid-auto-rows: 18rem;
+
+    @media screen and (min-width: 375px) {
+      --icon-grid-columns: 1;
+    }
+
+    @media screen and (min-width: 480px) {
+      --icon-grid-columns: 2;
+    }
+
+    @media screen and (min-width: 1024px) {
+      --icon-grid-columns: 4;
+    }
+
     &:extend(.d-gl-docsite-icons);
 
     --icon-card-width: 18rem;
@@ -449,15 +462,11 @@ a.header-anchor {
   justify-content: center;
   width: var(--icon-card-width);
   height: 100%;
-  padding: var(--dt-space-400);
-  background-color: hsl(var(--dt-color-black-200-h), var(--dt-color-black-200-s), var(--dt-color-black-200-l), 0);
-  border-radius: var(--dt-size-400);
   cursor: pointer;
   transition: all 150ms var(--ttf-in-out);
 
-  &:hover,
   .dialtone-icon-card[data-selected='yes'] & {
-    background-color: hsl(var(--dt-color-black-200-h), var(--dt-color-black-200-s), var(--dt-color-black-200-l), 0.4);
+    background-color: var(--dt-action-color-background-muted-active);
   }
 
   &.logo-white {
@@ -565,6 +574,7 @@ a.header-anchor {
   &__inner-wrapper {
     padding-top: calc(var(--dt-space-300) * 32);
     padding-bottom: calc(var(--dt-space-300) * 32);
+    text-wrap: balance;
 
     @media (max-width: 640px) {
       flex-direction: column;
@@ -597,6 +607,7 @@ a.header-anchor {
 .links {
   padding-top: var(--dt-space-650);
   padding-bottom: var(--dt-space-650);
+  text-wrap: balance;
 
   @media (max-width: 640px) {
     display: block !important;
@@ -618,9 +629,7 @@ a.header-anchor {
 
 .dialtone-page-title {
   margin-bottom: var(--dt-space-400);
-  font-weight: var(--dt-font-weight-medium);
-  font-size: var(--dt-font-size-500);
-  line-height: var(--dt-font-line-height-200);
+  font: var(--dt-typography-headline-xxl);
 }
 
 //  ============================================================================
@@ -663,12 +672,13 @@ a.header-anchor {
     border: var(--dt-size-100) solid;
     border-color: var(--dt-color-border-default);
     border-radius: var(--dt-size-400);
+    opacity: .7;
     transition-timing-function: var(--ttf-in-out);
     transition-duration: var(--td200);
     transition-property: box-shadow;
 
-    &--disabled {
-      opacity: .7;
+    &:is(a) {
+      opacity: initial;
     }
 
     &:is(a):hover {

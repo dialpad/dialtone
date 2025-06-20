@@ -1,0 +1,60 @@
+.d-recipe-contact-info {
+  --contact-info-avatar-border-color: var(--dt-color-surface-primary);
+
+  padding: var(--dt-space-300) var(--dt-space-400);
+  column-gap: var(--dt-space-400);
+}
+
+.d-recipe-contact-info__left {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  min-width: var(--dt-space-650);
+  height: var(--dt-size-100-percent);
+  background-color: transparent;
+  background-image: none;
+  border-width: 0;
+  cursor: pointer;
+}
+
+.d-recipe-contact-info__content {
+  align-content: center;
+  line-height: var(--dt-font-line-height-300);
+}
+
+.d-recipe-contact-info__subtitle {
+  margin-top: var(--dt-space-200-negative);
+  color: var(--dt-color-foreground-tertiary);
+  font-size: var(--dt-font-size-100);
+}
+
+.d-recipe-contact-info__bottom {
+  margin-top: var(--dt-space-200);
+}
+
+.d-recipe-contact-info__right {
+  display: grid;
+  align-content: center;
+  min-width: 0;
+}
+
+.d-recipe-contact-info__avatars {
+  display: flex;
+  flex-direction: row;
+  margin-right: var(--dt-space-300-negative);
+
+  .d-avatar {
+    box-sizing: unset;
+    border: var(--dt-size-300) solid var(--contact-info-avatar-border-color);
+    border-radius: var(--dt-size-radius-pill);
+
+    &.d-recipe-contact-info__avatar-stacked {
+      margin-left: var(--dt-space-550-negative);
+    }
+
+    &.d-recipe-contact-info__avatar-halo {
+      border-color: var(--dt-color-border-brand);
+    }
+  }
+}

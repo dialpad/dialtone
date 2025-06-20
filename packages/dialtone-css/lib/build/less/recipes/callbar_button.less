@@ -1,0 +1,59 @@
+//
+//  DIALTONE
+//  RECIPES: CALLBAR BUTTON
+//
+//  TABLE OF CONTENTS
+//  • BASE STYLE
+//  • STATUS
+//  • VARIANTS
+//
+//  ============================================================================
+//  $   BASE STYLE
+//  ----------------------------------------------------------------------------
+.d-recipe-callbar-button {
+  padding-right: var(--dt-space-0);
+  padding-left: var(--dt-space-0);
+  color: var(--dt-color-foreground-primary);
+
+  &:not(.d-recipe-callbar-button--circle) {
+    line-height: var(--dt-font-line-height-300);
+  }
+
+  &.d-btn--disabled {
+    background-color: unset;
+    opacity: var(--dt-opacity-700);
+  }
+}
+
+.d-recipe-callbar-button__text {
+  font-size: var(--dt-font-size-100);
+
+  @media (max-width: 980px) {
+    display: none;
+  }
+}
+
+//  ============================================================================
+//  $   STATUS
+//  ----------------------------------------------------------------------------
+.d-recipe-callbar-button--active,
+.d-recipe-callbar-button--active:hover {
+  .base-button__icon {
+    color: var(--dt-theme-mention-color-background); // best replacement for --primary-color we have at the moment
+  }
+}
+
+.d-recipe-callbar-button--disabled {
+  cursor: not-allowed;
+}
+
+//  ============================================================================
+//  $   VARIANTS
+//  ----------------------------------------------------------------------------
+.d-recipe-callbar-button--circle {
+  border-radius: var(--dt-size-radius-circle);
+
+  &.d-btn[disabled] {
+    border-color: unset;
+  }
+}

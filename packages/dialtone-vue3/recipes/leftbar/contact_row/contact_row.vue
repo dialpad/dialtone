@@ -36,17 +36,17 @@
     </template>
     <template #label>
       <dt-emoji-text-wrapper
-        class="dt-leftbar-row__description"
-        data-qa="dt-leftbar-row-description"
+        class="d-recipe-leftbar-row__description"
+        data-qa="dt-recipe-leftbar-row-description"
         size="200"
       >
         {{ name }}
       </dt-emoji-text-wrapper>
-      <div class="dt-leftbar-row__status">
+      <div class="d-recipe-leftbar-row__status">
         <span
           v-if="presenceText"
-          data-qa="dt-leftbar-row-presence-text"
-          :class="['dt-leftbar-row__meta-context', presenceColorClass]"
+          data-qa="dt-recipe-leftbar-row-presence-text"
+          :class="['d-recipe-leftbar-row__meta-context', presenceFontColorClass]"
         >
           {{ presenceText }}
         </span>
@@ -54,8 +54,8 @@
           v-if="userStatus"
           size="100"
           element-type="span"
-          data-qa="dt-leftbar-row-user-status"
-          class="dt-leftbar-row__meta-custom"
+          data-qa="dt-recipe-leftbar-row-user-status"
+          class="d-recipe-leftbar-row__meta-custom"
         >
           {{ userStatus }}
         </dt-emoji-text-wrapper>
@@ -72,6 +72,7 @@ import { extractVueListeners, safeConcatStrings } from '@/common/utils';
 import { DtIconUser } from '@dialpad/dialtone-icons/vue3';
 
 export default {
+  compatConfig: { MODE: 3 },
   name: 'DtRecipeContactRow',
 
   components: {
@@ -230,17 +231,14 @@ export default {
   ],
 
   computed: {
-    presenceColorClass () {
-      switch (this.avatarPresence) {
-        case 'active':
-          return 'd-fc-success';
-        case 'busy':
-          return 'd-fc-critical';
-        case 'away':
-          return 'd-fc-warning';
-        default:
-          return undefined;
-      }
+    presenceFontColorClass () {
+      const presenceFontColors = {
+        active: 'd-recipe-contact-row--active',
+        busy: 'd-recipe-contact-row--busy',
+        away: 'd-recipe-contact-row--away',
+      };
+
+      return presenceFontColors[this.avatarPresence];
     },
 
     contactRowListeners () {

@@ -4,8 +4,8 @@ description: A visual control element indicating the current status of a user.
 status: ready
 thumb: true
 image: assets/images/components/presence.png
-storybook: https://dialtone.dialpad.com/vue/?path=/docs/components-presence--default
-figma_url: https://www.figma.com/file/2adf7JhZOncRyjYiy2joil/DT-Core%3A-Components-7?node-id=9628%3A59018&viewport=-1353%2C1919%2C1.91&t=xHutRjwo1o5zMTgT-11
+storybook: https://dialtone.dialpad.com/vue/?path=/story/components-presence--default
+figma_url: https://www.figma.com/design/W58r5BkO8qTw3vem9YieJd/DT9-Component-Library--Rebrand-2025-?node-id=9628-58458
 ---
 <code-well-header>
   <example-presence presence="active"/>
@@ -15,7 +15,7 @@ figma_url: https://www.figma.com/file/2adf7JhZOncRyjYiy2joil/DT-Core%3A-Componen
 
 Located at the bottom right of an avatar, the `presence` indicator displays a user's current availablity. At a glance, check if a user is available, in a meeting, on a call, away, offline, or set to 'Do Not Disturb'. It's important to note that this indicator is automatically set and cannot be changed manually by the user.
 
-## Variants and examples
+## Variants and Examples
 
 ### Active
 

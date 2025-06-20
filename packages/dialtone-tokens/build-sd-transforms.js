@@ -133,7 +133,14 @@ export async function run () {
           ],
         },
         android_xml: {
-          transforms: ['attribute/cti', 'name/snake', 'dt/android/xml/color', 'size/remToSp', 'size/remToDp'],
+          transforms: [
+            'attribute/cti',
+            'name/snake',
+            'dt/android/xml/size/resolveMath',
+            'dt/android/xml/color',
+            'dt/android/xml/color/modifiers',
+            'dt/android/xml/size/pxToDp',
+          ],
           actions: ['buildDocJson'],
           prefix: `dt_${themeName}`,
           theme: themeName,
@@ -144,6 +151,8 @@ export async function run () {
               format: 'android/resources',
               resourceType: 'color',
               filter: function (token) {
+                if (token.value.startsWith('linear-gradient')) return false;
+                if (token.path.includes('shadow')) return false;
                 return ['color'].includes(token.type) && token.isSource;
               },
             },
@@ -152,7 +161,8 @@ export async function run () {
               format: 'android/resources',
               resourceType: 'dimen',
               filter: function (token) {
-                if (['dtColorGradientMagentaPurple'].includes(token.name)) return false;
+                if (token.value.startsWith('linear-gradient')) return false;
+                if (token.path.includes('shadow')) return false;
                 return ['dimension'].includes(token.type) && token.isSource;
               },
             },
@@ -160,14 +170,15 @@ export async function run () {
         },
         android_compose: {
           transforms: [
+            'dt/android/compose/size/resolveMath',
             'dt/android/compose/fonts/transformToStack',
             'dt/android/compose/fonts/weight',
             'dt/android/compose/lineHeight/percentToDecimal',
             'dt/android/compose/opacity/percentToFloat',
             'dt/android/compose/size/pxToDp',
             'dt/android/compose/size/pxToSp',
-            'dt/android/compose/size/resolveMath',
             'dt/android/compose/color',
+            'dt/android/compose/color/modifiers',
             'dt/stringify',
             'attribute/cti',
             'name/camel',
@@ -188,13 +199,24 @@ export async function run () {
 
               filter: function (token) {
                 if (token.value.startsWith('linear-gradient')) return false;
+                if (token.path.includes('shadow')) return false;
                 return token.isSource;
               },
             },
           ],
         },
         ios: {
-          transforms: ['dt/ios/fonts/transformToStack', 'attribute/cti', 'name/camel', 'dt/ios/color', 'size/pxToRem', 'size/swift/remToCGFloat', 'dt/ios/lineHeight/percentToDecimal', 'dt/stringify'],
+          transforms: [
+            'dt/ios/fonts/transformToStack',
+            'attribute/cti',
+            'name/camel',
+            'dt/ios/color',
+            'dt/ios/color/modifiers',
+            'size/pxToRem',
+            'size/swift/remToCGFloat',
+            'dt/ios/lineHeight/percentToDecimal',
+            'dt/stringify',
+          ],
           actions: ['buildDocJson'],
           prefix: 'dt',
           theme: themeName,

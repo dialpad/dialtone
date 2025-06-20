@@ -1,15 +1,17 @@
 <script>
 import { DtEmoji } from '../emoji';
-import { findShortCodes } from '@/common/emoji';
-import { h } from 'vue';
+import { findEmojis, findShortCodes } from '@/common/emoji';
+import { h, resolveDynamicComponent } from 'vue';
 import { ICON_SIZE_MODIFIERS } from '@/components/icon/icon_constants';
-import { emojiPattern } from 'regex-combined-emojis';
+
+const COMMENT_TYPE = h(resolveDynamicComponent(null)).type;
 
 /**
  * Wrapper to find and replace shortcodes like :smile: or unicode chars such as 😄 with our custom Emojis implementation.
  * @see https://dialtone.dialpad.com/components/emoji_text_wrapper.html
  */
 export default {
+  compatConfig: { MODE: 3 },
   name: 'DtEmojiTextWrapper',
 
   components: {
@@ -52,17 +54,18 @@ export default {
      */
     replaceDtEmojis (replaceList, textContent) {
       if (!replaceList.length) return textContent;
+      // Escape the asterisk to avoid breaking the regex for the asterisk emoji
+      const escapedReplaceList = replaceList.map(item =>
+        item.replace(/\*/g, '\\*'),
+      );
 
-      const regexp = new RegExp(`(${replaceList.join('|')})`, 'g');
+      const regexp = new RegExp(`(${escapedReplaceList.join('|')})`, 'g');
       const items = textContent.split(regexp);
 
       return items
         .filter(item => item.trim() !== '')
         .map((item) => {
-          // Reset the regexp index to 0 to start from the beginning
-          // Otherwise, it will start from the last index
-          regexp.lastIndex = 0;
-          if (replaceList.includes(item) || regexp.test(item)) {
+          if (replaceList.includes(item)) {
             return h(DtEmoji, { code: item, size: this.size });
           }
           return h('span', { class: 'd-emoji-text-wrapper__text' }, item);
@@ -76,6 +79,7 @@ export default {
      */
     searchVNodes (VNode) {
       if (typeof VNode === 'string') return this.searchCodes(VNode);
+      if (VNode.type === COMMENT_TYPE) return VNode;
       if (typeof VNode.type === 'symbol') return this.searchCodes(VNode.children);
       if (VNode.props?.innerHTML) return this.searchVNodes(VNode.props.innerHTML);
 
@@ -95,8 +99,9 @@ export default {
      */
     searchCodes (textContent) {
       const shortcodes = findShortCodes(textContent);
+      const emojis = findEmojis(textContent);
 
-      const replaceList = [...shortcodes, emojiPattern];
+      const replaceList = [...shortcodes, ...emojis];
       if (replaceList.length === 0) return textContent;
       return this.replaceDtEmojis(replaceList, textContent);
     },

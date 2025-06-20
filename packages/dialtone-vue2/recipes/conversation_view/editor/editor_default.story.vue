@@ -12,9 +12,7 @@
       :placeholder="$attrs.placeholder"
       :max-height="$attrs.maxHeight"
       :show-add-link="$attrs.showAddLink"
-      :cancel-set-link-button="$attrs.cancelSetLinkButton"
-      :confirm-set-link-button="$attrs.confirmSetLinkButton"
-      :remove-link-button="$attrs.removeLinkButton"
+      :use-div-tags="$attrs.useDivTags"
       :show-bold-button="$attrs.showBoldButton"
       :show-italics-button="$attrs.showItalicsButton"
       :show-strike-button="$attrs.showStrikeButton"
@@ -27,12 +25,14 @@
       :show-align-justify-button="$attrs.showAlignJustifyButton"
       :show-quote-button="$attrs.showQuoteButton"
       :show-quick-replies-button="$attrs.showQuickRepliesButton"
+      :show-inline-image-button="$attrs.showInlineImageButton"
       :show-code-block-button="$attrs.showCodeBlockButton"
-      :use-default-paste-handler="$attrs.useDefaultPasteHandler"
       @focus="$attrs.onFocus"
       @blur="$attrs.onBlur"
       @input="$attrs.onInput"
       @quick-replies-click="$attrs.onQuickRepliesClick"
+      @inline-image-click="$attrs.onInlineImageClick"
+      @text-input="$attrs.onTextInput"
     />
     <p><strong>Editor content is:</strong></p>
     <span>{{ value }}</span>

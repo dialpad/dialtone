@@ -5,7 +5,7 @@ status: ready
 thumb: true
 image: assets/images/components/hovercard.png
 storybook: https://dialtone.dialpad.com/vue/?path=/story/components-hovercard--default
-figma_url: https://www.figma.com/design/2adf7JhZOncRyjYiy2joil/DT9-Component-Library?node-id=14395-441&t=l9JqN3TZt1kqjnzE-0
+figma_url: https://www.figma.com/design/W58r5BkO8qTw3vem9YieJd/DT9-Component-Library--Rebrand-2025-?node-id=14395-441
 ---
 
 The hovercard will appear upon the mouse entering the anchor, with a delay of 300 milliseconds. It will remain open as long as the mouse cursor is over either the open card or the anchor.
@@ -67,9 +67,7 @@ showHtmlWarning />
 
 ## Variants
 
-### Many hovercards
-
-Initially, there is a 300ms delay when numerous hovercards are present. However, when transitioning from one anchor to another, the delay is determined by the mouse movement time. This implies that the closer the anchors are, the faster the hovercard appears. To achieve this, the component uses a global timer. Move the mouse over the avatars to reveal the hovercards in the example.
+### Many Hovercards
 
 <code-well-header>
   <dt-stack direction="row" gap="500">

@@ -19,20 +19,23 @@
     <template #input="{ onInput }">
       <span
         ref="inputSlotWrapper"
-        class="combobox__input-wrapper"
+        class="d-recipe-combobox-multi-select__input-wrapper"
         @focusin="handleInputFocusIn"
         @focusout="handleInputFocusOut"
       >
         <span
           ref="chipsWrapper"
-          :class="['combobox__chip-wrapper', chipWrapperClass]"
+          :class="['d-recipe-combobox-multi-select__chip-wrapper', chipWrapperClass]"
         >
           <dt-chip
             v-for="item in selectedItems"
             ref="chips"
             :key="item"
             :label-class="['d-chip__label']"
-            :class="['combobox__chip', { 'combobox__chip--truncate': !!chipMaxWidth }]"
+            :class="[
+              'd-recipe-combobox-multi-select__chip',
+              { 'd-recipe-combobox-multi-select__chip--truncate': !!chipMaxWidth },
+            ]"
             :style="{ maxWidth: chipMaxWidth }"
             :close-button-props="{ ariaLabel: 'close' }"
             :size="CHIP_SIZES[size]"
@@ -47,8 +50,11 @@
         <dt-input
           ref="input"
           v-model="value"
-          class="combobox__input"
-          :input-class="[inputClass, { 'd-fc-transparent': hideInputText }]"
+          class="d-recipe-combobox-multi-select__input"
+          :input-class="[
+            inputClass, {
+              'd-recipe-combobox-multi-select__input--hidden': hideInputText,
+            }]"
           :input-wrapper-class="inputWrapperClass"
           :aria-label="label"
           :label="labelVisible ? label : ''"
@@ -82,6 +88,7 @@
     <template #list>
       <div
         ref="list"
+        class="d-recipe-combobox-multi-select__list"
         @mousedown.prevent
       >
         <slot
@@ -90,7 +97,7 @@
         />
         <div
           v-else
-          class="combobox__list--loading"
+          class="d-recipe-combobox-multi-select__list--loading"
         >
           {{ loadingMessage }}
         </div>
@@ -116,7 +123,7 @@ import DtInput from '@/components/input/input.vue';
 import DtChip from '@/components/chip/chip.vue';
 import DtValidationMessages from '@/components/validation_messages/validation_messages.vue';
 import { validationMessageValidator } from '@/common/validators';
-import { hasSlotContent } from '@/common/utils';
+import { hasSlotContent, returnFirstEl } from '@/common/utils';
 import {
   POPOVER_APPEND_TO_VALUES,
 } from '@/components/popover/popover_constants';
@@ -128,6 +135,7 @@ import {
 import SrOnlyCloseButtonMixin from '@/common/mixins/sr_only_close_button';
 
 export default {
+  compatConfig: { MODE: 3 },
   name: 'DtRecipeComboboxMultiSelect',
 
   components: {
@@ -462,7 +470,7 @@ export default {
 
     chipWrapperClass () {
       return {
-        [`combobox__chip-wrapper-${this.size}--collapsed`]: !this.inputFocused && this.collapseOnFocusOut,
+        [`d-recipe-combobox-multi-select__chip-wrapper-${this.size}--collapsed`]: !this.inputFocused && this.collapseOnFocusOut,
       };
     },
   },
@@ -540,6 +548,7 @@ export default {
     },
 
     onComboboxSelect (i) {
+      if (this.loading) return;
       this.value = '';
       this.$emit('select', i);
     },
@@ -555,11 +564,11 @@ export default {
     },
 
     getChipButtons () {
-      return this.$refs.chips && this.$refs.chips.map(chip => chip.$el.querySelector('button'));
+      return this.$refs.chips && this.$refs.chips.map(chip => returnFirstEl(chip.$el).querySelector('button'));
     },
 
     getChips () {
-      return this.$refs.chips && this.$refs.chips.map(chip => chip.$el);
+      return this.$refs.chips && this.$refs.chips.map(chip => returnFirstEl(chip.$el));
     },
 
     getLastChipButton () {
@@ -719,76 +728,25 @@ export default {
     async handleInputFocusIn () {
       this.inputFocused = true;
       if (this.collapseOnFocusOut) {
+        this.hideInputText = false;
         await this.$nextTick();
         this.setInputPadding();
-        this.hideInputText = false;
       }
     },
 
     async handleInputFocusOut () {
       this.inputFocused = false;
       if (this.collapseOnFocusOut) {
+        this.hideInputText = true;
         const input = this.getInput();
         if (!input) return;
         // Hide the input text when is not on first line
         if (!input.style.paddingTop) {
           return;
         }
-        this.hideInputText = true;
         this.revertInputPadding(input);
       }
     },
   },
 };
 </script>
-
-<style scoped lang="less">
-.combobox__input-wrapper {
-  position: relative;
-  display: block;
-}
-
-.combobox__chip-wrapper {
-  position: absolute;
-  margin-left: var(--dt-space-200);
-  margin-right: var(--dt-space-200);
-  padding-left: var(--dt-space-100);
-  max-width: calc(var(--dt-size-100-percent) - var(--dt-space-400));
-  max-height: initial;
-  overflow-y: visible;
-}
-
-.combobox__chip-wrapper-md--collapsed {
-  max-height: 2.8rem;
-  overflow-y: hidden;
-}
-
-.combobox__chip-wrapper-sm--collapsed,
-.combobox__chip-wrapper-xs--collapsed {
-  max-height: 2.5rem;
-  overflow-y: hidden;
-}
-
-.combobox__chip {
-  margin-top: var(--dt-space-300);
-  margin-left: var(--dt-space-200);
-  margin-right: var(--dt-space-200);
-  z-index: var(--zi-base1);
-  max-width: var(--dt-size-100-percent);
-}
-
-.combobox__input {
-  flex-grow: 1;
-}
-
-.combobox__list--loading {
-  text-align: center;
-  padding-top: var(--dt-space-500);
-  padding-bottom: var(--dt-space-500);
-}
-
-.combobox__chip--truncate {
-  white-space: nowrap;
-  text-overflow: ellipsis;
-}
-</style>

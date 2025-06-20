@@ -31,6 +31,7 @@
 .d-stack8   { > * + * { margin-top: var(--dt-space-400) !important; } }
 .d-stack12  { > * + * { margin-top: var(--dt-space-450) !important; } }
 .d-stack16  { > * + * { margin-top: var(--dt-space-500) !important; } }
+.d-stack20  { > * + * { margin-top: var(--dt-space-525) !important; } }
 .d-stack24  { > * + * { margin-top: var(--dt-space-550) !important; } }
 .d-stack32  { > * + * { margin-top: var(--dt-space-600) !important; } }
 .d-stack48  { > * + * { margin-top: var(--dt-space-650) !important; } }
@@ -53,6 +54,7 @@
 .d-flow8   { > * + * { margin-left: var(--dt-space-400) !important; } }
 .d-flow12  { > * + * { margin-left: var(--dt-space-450) !important; } }
 .d-flow16  { > * + * { margin-left: var(--dt-space-500) !important; } }
+.d-flow20  { > * + * { margin-left: var(--dt-space-525) !important; } }
 .d-flow24  { > * + * { margin-left: var(--dt-space-550) !important; } }
 .d-flow32  { > * + * { margin-left: var(--dt-space-600) !important; } }
 .d-flow48  { > * + * { margin-left: var(--dt-space-650) !important; } }
@@ -82,11 +84,25 @@
 .d-ml-auto { margin-left: auto !important; }
 .d-ml-unset { margin-left: unset !important; }
 
-.d-mx-auto { margin-right: auto !important; margin-left: auto !important; }
-.d-mx-unset { margin-right: unset !important; margin-left: unset !important; }
+.d-mx-auto {
+  margin-right: auto !important;
+  margin-left: auto !important;
+}
 
-.d-my-auto { margin-top: auto !important; margin-bottom: auto !important; }
-.d-my-unset { margin-top: unset !important; margin-bottom: unset !important; }
+.d-mx-unset {
+  margin-right: unset !important;
+  margin-left: unset !important;
+}
+
+.d-my-auto {
+  margin-top: auto !important;
+  margin-bottom: auto !important;
+ }
+
+.d-my-unset {
+  margin-top: unset !important;
+  margin-bottom: unset !important;
+}
 
 
 //  ============================================================================
@@ -102,9 +118,15 @@
 
 .d-pl-unset { padding-left: unset !important; }
 
-.d-px-unset { padding-right: unset !important; padding-left: unset !important; }
+.d-px-unset {
+  padding-right: unset !important;
+  padding-left: unset !important;
+}
 
-.d-py-unset { padding-top: unset !important; padding-bottom: unset !important; }
+.d-py-unset {
+  padding-top: unset !important;
+  padding-bottom: unset !important;
+}
 
 //  ============================================================================
 //  $   GAP

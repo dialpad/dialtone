@@ -1,3 +1,28 @@
+# [1.2.0](https://github.com/dialpad/dialtone/compare/dialtone-emojis/v1.1.3...dialtone-emojis/v1.2.0) (2025-06-17)
+
+
+### Features
+
+* **Localization:** NO-JIRA merge i18n base branch ([#785](https://github.com/dialpad/dialtone/issues/785)) ([8750dd7](https://github.com/dialpad/dialtone/commit/8750dd76ac78376e76c2eaeb4036406926fd910b))
+
+## [1.1.3](https://github.com/dialpad/dialtone/compare/dialtone-emojis/v1.1.2...dialtone-emojis/v1.1.3) (2025-06-11)
+
+## [1.1.2](https://github.com/dialpad/dialtone/compare/dialtone-emojis/v1.1.1...dialtone-emojis/v1.1.2) (2025-04-11)
+
+## [1.1.1](https://github.com/dialpad/dialtone/compare/dialtone-emojis/v1.1.0...dialtone-emojis/v1.1.1) (2025-04-02)
+
+
+### Bug Fixes
+
+* **Ci:** NO-JIRA changelog release order ([#689](https://github.com/dialpad/dialtone/issues/689)) ([bd4c080](https://github.com/dialpad/dialtone/commit/bd4c0802a59be6fdafb8f661a9c12c64ef764656))
+
+# [1.1.0](https://github.com/dialpad/dialtone/compare/dialtone-emojis/v1.0.8...dialtone-emojis/v1.1.0) (2024-12-13)
+
+
+### Features
+
+* DLT-2236 update emoji set ([#592](https://github.com/dialpad/dialtone/issues/592)) ([0292911](https://github.com/dialpad/dialtone/commit/029291158c9fa0257e09e76ff3dc9da8d4e756af))
+
 ## [1.0.8](https://github.com/dialpad/dialtone/compare/dialtone-emojis/v1.0.7...dialtone-emojis/v1.0.8) (2024-08-29)
 
 

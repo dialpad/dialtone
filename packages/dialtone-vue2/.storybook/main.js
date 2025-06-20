@@ -3,18 +3,18 @@ import { mergeConfig } from 'vite';
 /** @type { import('@storybook/vue-vite').StorybookConfig } */
 const config = {
   stories: [
-    '../@(components|directives|recipes|prototypes)/**/*.stories.@(js|jsx|ts|tsx)',
-    '../@(components|directives|docs|functions|recipes)/**/*.mdx',
+    '../@(components|directives|recipes|prototypes|localization)/**/*.stories.@(js|jsx|ts|tsx)',
+    '../@(components|directives|docs|functions|recipes|localization)/**/*.mdx',
   ],
-  addons: ["@storybook/addon-links", "@storybook/addon-essentials", "@storybook/addon-a11y", 'storybook-dark-mode'],
+  addons: ['@storybook/addon-links', '@storybook/addon-essentials', '@storybook/addon-a11y', 'storybook-dark-mode'],
   framework: {
-    name: "@storybook/vue-vite",
-    options: {}
+    name: '@storybook/vue-vite',
+    options: {},
   },
   docs: {
-    autodocs: false
+    autodocs: false,
   },
-  async viteFinal(config) {
+  async viteFinal (config) {
     // Merge custom configuration into the default config
     return mergeConfig(config, {
       build: {
@@ -25,5 +25,6 @@ const config = {
       },
     });
   },
+  staticDirs: ['../common/assets/'],
 };
 export default config;

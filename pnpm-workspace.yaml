@@ -2,6 +2,8 @@ packages:
   # documentation sites
   - 'apps/*'
   # npm publishable packages
-  - 'packages/**/*'
+  - 'packages/*'
+  - 'packages/dialtone-icons/*'
+  - 'packages/language-server/*'
   # yeoman generator
   - 'generator-dialtone'

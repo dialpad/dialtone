@@ -6,11 +6,14 @@
       <emoji-tabset
         ref="tabsetRef"
         :emoji-filter="internalSearchQuery"
+        :show-custom-emojis-tab="showCustomEmojisTab"
         :show-recently-used-tab="showRecentlyUsedTab"
         :scroll-into-tab="scrollIntoTab"
         :tabset-labels="tabSetLabels"
         @focus-skin-selector="$refs.skinSelectorRef.focusSkinSelector()"
-        @focus-search-input="showSearch ? $refs.searchInputRef.focusSearchInput() : $refs.emojiSelectorRef.focusEmojiSelector()"
+        @focus-search-input="showSearch
+          ? $refs.searchInputRef.focusSearchInput()
+          : $refs.emojiSelectorRef.focusEmojiSelector()"
         @selected-tabset="scrollToSelectedTabset"
         @keydown.esc="emits('close')"
       />
@@ -34,6 +37,7 @@
         :search-results-label="searchResultsLabel"
         :search-no-results-label="searchNoResultsLabel"
         :recently-used-emojis="recentlyUsedEmojis"
+        :custom-emojis="customEmojis"
         :selected-tabset="selectedTabset"
         @scroll-into-tab="updateScrollIntoTab"
         @highlighted-emoji="updateHighlightedEmoji"
@@ -41,9 +45,19 @@
         @focus-skin-selector="$refs.skinSelectorRef.focusSkinSelector()"
         @focus-search-input="showSearch ? $refs.searchInputRef.focusSearchInput() : $refs.tabsetRef.focusTabset()"
         @keydown.esc="emits('close')"
+        @scroll-bottom-reached="emits('scroll-bottom-reached')"
       />
     </div>
     <div class="d-emoji-picker--footer">
+      <dt-button
+        v-if="showCustomEmojisTab && !highlightedEmoji"
+        importance="outlined"
+        :aria-label="addEmojiLabel"
+        class="d-emoji-picker__add-emoji"
+        @click="emits('add-emoji')"
+      >
+        {{ addEmojiLabel }}
+      </dt-button>
       <emoji-description :emoji="highlightedEmoji" />
       <emoji-skin-selector
         ref="skinSelectorRef"
@@ -65,6 +79,7 @@ import EmojiTabset from './modules/emoji_tabset.vue';
 import EmojiSelector from './modules/emoji_selector.vue';
 import EmojiSkinSelector from './modules/emoji_skin_selector.vue';
 import EmojiDescription from './modules/emoji_description.vue';
+import { DtButton } from '../button';
 import { computed, ref, watch } from 'vue';
 
 const props = defineProps({
@@ -80,6 +95,30 @@ const props = defineProps({
   recentlyUsedEmojis: {
     type: Array,
     default: () => ([]),
+  },
+
+  /**
+     * The array with custom emojis object
+     * This list is necessary to fill the custom tab
+     * @type {Array}
+     * @default []
+     * @example
+     * <dt-emoji-picker :customEmojis="[emojiObject, emojiObject]" />
+     */
+  customEmojis: {
+    type: Array,
+  },
+  /**
+     * The label for the add emoji button
+     * required false because it is still experimental
+     * @type {String}
+     * @example
+     * <dt-emoji-picker :addEmojiLabel="'Add emoji'" />
+     */
+  addEmojiLabel: {
+    type: String,
+    required: false,
+    default: 'Add emoji',
   },
 
   /**
@@ -126,7 +165,7 @@ const props = defineProps({
    * @example
    * <dt-emoji-picker
    *  :tabSetLabels="['Most recently used', 'Smileys and people', 'Nature',
-   *    'Food', 'Activity', 'Travel', 'Objects', 'Symbols', 'Flags']" />
+   *    'Food', 'Activity', 'Travel', 'Objects', 'Symbols', 'Flags', 'Custom']" />
    */
   tabSetLabels: {
     type: Array,
@@ -192,6 +231,13 @@ const emits = defineEmits(
     'selected-emoji',
 
     /**
+   * Emitted when the user reach bottom scroll
+   * This is being handled by handleScroll method
+   * @event scroll-bottom-reached
+   */
+    'scroll-bottom-reached',
+
+    /**
      * It will emit the selected skin tone
      * @event skin-tone
      * @param {String} skin - The selected skin tone from the skin selector
@@ -203,6 +249,12 @@ const emits = defineEmits(
      * @event close
      */
     'close',
+
+    /**
+     * Emitted when the user clicks on the add emoji button
+     * @event add-emoji
+     */
+    'add-emoji',
   ],
 );
 
@@ -212,7 +264,8 @@ const selectedTabset = ref({});
 
 const scrollIntoTab = ref(0);
 
-const showRecentlyUsedTab = computed(() => props.recentlyUsedEmojis.length > 0);
+const showRecentlyUsedTab = computed(() => props.recentlyUsedEmojis?.length > 0);
+const showCustomEmojisTab = computed(() => props.customEmojis?.length > 0);
 
 watch(
   () => props.searchQuery,

@@ -1,11 +1,12 @@
 ---
 title: Size
 description: A system to maintain consistent size and scale.
+figma_url: https://www.figma.com/design/VjrRh4vvfONSmBQxnZrL3u/DT9-Design-Tokens--Rebrand-2025-?node-id=3746-13427&t=D8g6K4TrMGXNsvLT-11
 ---
 
 <svg-loader name="size-img" />
 
-## Choosing Size vs Space
+## Choosing Size vs. Space
 
 ### Size
 
@@ -13,13 +14,13 @@ Size design tokens define intrinsic **dimensions** of UI components. Example CSS
 
 ### Space
 
-[Space](/design/space/) design tokens focus on controlling **spatial relationships**; that is, the space between and around elements. Example CSS properties they correspond to: `padding`, `margin`, `gap`
+[Space](/design/space/index.md) design tokens focus on controlling **spatial relationships**; that is, the space between and around elements. Example CSS properties they correspond to: `padding`, `margin`, `gap`
 
 ## Usage
 
-### Setting a specific size
+### Setting a Specific Size
 
-<div class="d-d-grid d-g24 d-g-cols3 md:d-g-cols1">
+<div class="d-d-grid d-g24 d-g-cols1 md:d-g-cols3">
 <div>
 
 When assigning a size to an element, utilize [Size Tokens](#tokens) for the value.
@@ -33,7 +34,7 @@ When assigning a size to an element, utilize [Size Tokens](#tokens) for the valu
 <div class="d-gc2">
 <code-well-header>
   <div class="d-d-grid d-g24 d-g-cols2 md:d-g-cols1 d-w100p">
-    <div class="d-fl-center d-ba d-bc-purple-400 d-js-center" :style="{ width: 'fit-content', minWidth: selectedSize }">
+    <div class="d-fl-center d-ba d-bc-default d-js-center" :style="{ width: 'fit-content', minWidth: selectedSize }">
       Box
     </div>
     <dt-select-menu label="min-width" :options="sizeValues" @change="changeBoxSize" />
@@ -54,7 +55,7 @@ When assigning a size to an element, utilize [Size Tokens](#tokens) for the valu
 
 ### Widths and Heights
 
-<div class="d-d-grid d-g24 d-g-cols3 md:d-g-cols1">
+<div class="d-d-grid d-g24 d-g-cols1 md:d-g-cols3">
 <dt-stack direction="column" gap="100">
 <p>
 
@@ -74,9 +75,9 @@ Exceptions exist for select elements like Avatars, Icons, and Toggles. These ele
 </dt-stack>
 </div>
 
-### Variable sizing
+### Variable Sizing
 
-<div class="d-d-grid d-g24 d-g-cols3 md:d-g-cols1">
+<div class="d-d-grid d-g24 d-g-cols1 md:d-g-cols3">
 <div>
 
 The size of some components is determined by their content. Most expand vertically, while a select few expand horizontally.
@@ -94,7 +95,7 @@ The size of some components is determined by their content. Most expand vertical
 
 ### Responsiveness
 
-<div class="d-d-grid d-g24 d-g-cols3 md:d-g-cols1">
+<div class="d-d-grid d-g24 d-g-cols1 md:d-g-cols3">
 <div>
 
 Adapting to different devices, sizes should be fluid across breakpoints. While most Dialtone components are responsive, their fluidity depends on the layout they live within.
@@ -117,19 +118,9 @@ To ensure clickable and interactive areas are easily accessible, we recommend a 
 
 ## Tokens
 
-Here are some frequently used tokens. For a complete list, visit the [Size Tokens](/tokens/size/) section.
+Here are some frequently used tokens. For a complete list, visit the [Size Tokens](/tokens/index.md#size) section.
 
 <token-table category="size" :tokenList="true" :tokens="tokens" theme="light" />
-
-<dt-notice
-  kind="info"
-  title="Figma Variables"
-  :hideClose="true"
->
-  <template #default>
-    By April 2024, we aim to integrate sizing units into Figma Variables. This will simplify the process of setting these tokens on width, min-width, height, min-height in your Figma files, making it easier for engineers to obtain the correct variable for each case.
-  </template>
-</dt-notice>
 
 ## Key Takeaways
 

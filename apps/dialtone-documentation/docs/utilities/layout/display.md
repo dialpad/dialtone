@@ -5,22 +5,35 @@ description: Utilities for controlling the display box type of an element.
 
 ## Examples
 
-<code-well-header  class="d-p24 d-bgc-purple-100 d-bgo50 d-w100p d-hmn216 d-stack12" custom>
-  <div class="d-p8 d-ba d-baw4 d-bar4 d-bc-purple-300 d-bgc-purple-200 d-d-block">
-    <div class="d-fl-center d-fl1 d-as-stretch d-p8 d-bgc-purple-300 d-bar2 d-code--sm">d-d-block</div>
-  </div>
+<code-well-header>
+  <dt-stack gap="500" class="d-w100p">
+    <div class="d-p8 d-ba d-baw4 d-bar4 d-bc-default d-bgc-moderate d-d-block">
+      <div class="d-fl-center d-fl1 d-as-stretch d-p8 d-bgc-moderate-opaque d-bar2 d-code--sm">d-d-block</div>
+    </div>
+    <dt-stack direction="row" gap="400" class="d-p8 d-ba d-baw4 d-bar4 d-bc-default d-bgc-moderate">
+      <div>
+        <div class="d-fl-center d-fl1 d-as-stretch d-p8 d-bgc-moderate-opaque d-bar2 d-code--sm d-d-inline-block">d-d-inline-block</div>
+      </div>
+      <div>
+        <div class="d-fl-center d-fl1 d-as-stretch d-p8 d-bgc-moderate-opaque d-bar2 d-code--sm d-d-inline-block">d-d-inline-block</div>
+      </div>
+      <div>
+        <div class="d-fl-center d-fl1 d-as-stretch d-p8 d-bgc-moderate-opaque d-bar2 d-code--sm d-d-inline-block">d-d-inline-block</div>
+      </div>
+    </dt-stack>
+    <dt-stack direction="row" gap="400" class="d-p8 d-ba d-baw4 d-bar4 d-bc-default d-bgc-moderate">
+      <div>
+        <div class="d-fl-center d-fl1 d-as-stretch d-p4 d-bgc-moderate-opaque d-bar2 d-code--sm d-d-inline">d-d-inline</div>
+      </div>
+      <div>
+        <div class="d-fl-center d-fl1 d-as-stretch d-p4 d-bgc-moderate-opaque d-bar2 d-code--sm d-d-inline">d-d-inline</div>
+      </div>
+      <div>
+        <div class="d-fl-center d-fl1 d-as-stretch d-p4 d-bgc-moderate-opaque d-bar2 d-code--sm d-d-inline">d-d-inline</div>
+      </div>
+    </dt-stack>
+  </dt-stack>
 
-  <div class="d-p8 d-ba d-baw4 d-bar4 d-bc-purple-300 d-bgc-purple-200 d-stack4 d-flow4">
-    <div class="d-fl-center d-fl1 d-as-stretch d-p8 d-bgc-purple-300 d-bar2 d-code--sm d-d-inline-block">d-d-inline-block</div>
-    <div class="d-fl-center d-fl1 d-as-stretch d-p8 d-bgc-purple-300 d-bar2 d-code--sm d-d-inline-block">d-d-inline-block</div>
-    <div class="d-fl-center d-fl1 d-as-stretch d-p8 d-bgc-purple-300 d-bar2 d-code--sm d-d-inline-block">d-d-inline-block</div>
-  </div>
-
-  <div class="d-p8 d-ba d-baw4 d-bar4 d-bc-purple-300 d-bgc-purple-200 d-flow4">
-    <div class="d-fl-center d-fl1 d-as-stretch d-p4 d-bgc-purple-300 d-bar2 d-code--sm d-d-inline">d-d-inline</div>
-    <div class="d-fl-center d-fl1 d-as-stretch d-p4 d-bgc-purple-300 d-bar2 d-code--sm d-d-inline">d-d-inline</div>
-    <div class="d-fl-center d-fl1 d-as-stretch d-p4 d-bgc-purple-300 d-bar2 d-code--sm d-d-inline">d-d-inline</div>
-  </div>
 </code-well-header>
 
 ```html
@@ -41,7 +54,7 @@ description: Utilities for controlling the display box type of an element.
   <template #content>
     <tbody>
       <tr v-for=" { name, output } in display">
-        <th class="d-code--sm d-fc-purple-400">{{ name }}</th>
+        <th class="d-code--sm d-docsite-code">{{ name }}</th>
         <td class="d-code--sm">{{ output }}</td>
       </tr>
     </tbody>

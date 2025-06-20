@@ -1,17 +1,15 @@
 <template>
   <dt-emoji-picker
     :skin-tone.sync="isSkinTone"
-    :skin-selector-button-tooltip-label="$attrs.skinSelectorButtonTooltipLabel"
-    :tab-set-labels="$attrs.tabSetLabels"
     :recently-used-emojis="$attrs.recentlyUsedEmojis"
-    :search-results-label="$attrs.searchResultsLabel"
-    :search-no-results-label="$attrs.searchNoResultsLabel"
-    :search-placeholder-label="$attrs.searchPlaceholderLabel"
+    :custom-emojis="$attrs.customEmojis"
     :search-query="$attrs.searchQuery"
     :show-search="$attrs.showSearch"
     @skin-tone="isSkinTone = $event; $attrs.onSkinTone($event)"
     @close="$attrs.onClose($event)"
     @selected-emoji="$attrs.onSelectedEmoji($event)"
+    @scroll-bottom-reached="$attrs.onScrollBottomReached($event)"
+    @add-emoji="$attrs.onAddEmoji($event)"
   />
 </template>
 

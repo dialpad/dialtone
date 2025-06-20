@@ -27,7 +27,9 @@
 .d-br { border-right: var(--dt-size-100) solid !important; }
 .d-bb { border-bottom: var(--dt-size-100) solid !important; }
 .d-bl { border-left: var(--dt-size-100) solid !important; }
+
 .d-bx { .d-br(); .d-bl(); }
+
 .d-by { .d-bt(); .d-bb(); }
 .d-ba-none { border: none !important; }
 .d-ba-unset { border: unset !important; }
@@ -43,23 +45,51 @@
 
 //  $$ TOP
 //  ----------------------------------------------------------------------------
-.d-btr-circle { border-top-left-radius: var(--dt-size-radius-circle) !important; border-top-right-radius: var(--dt-size-radius-circle) !important; }
-.d-btr-pill { border-top-left-radius: var(--dt-size-radius-pill) !important; border-top-right-radius: var(--dt-size-radius-pill) !important; }
+.d-btr-circle {
+    border-top-left-radius: var(--dt-size-radius-circle) !important;
+    border-top-right-radius: var(--dt-size-radius-circle) !important;
+}
+
+.d-btr-pill {
+    border-top-left-radius: var(--dt-size-radius-pill) !important;
+    border-top-right-radius: var(--dt-size-radius-pill) !important;
+}
 
 //  $$ RIGHT
 //  ----------------------------------------------------------------------------
-.d-brr-circle { border-top-right-radius: var(--dt-size-radius-circle) !important; border-bottom-right-radius: var(--dt-size-radius-circle) !important; }
-.d-brr-pill { border-top-right-radius: var(--dt-size-radius-pill) !important; border-bottom-right-radius: var(--dt-size-radius-pill) !important; }
+.d-brr-circle {
+    border-top-right-radius: var(--dt-size-radius-circle) !important;
+    border-bottom-right-radius: var(--dt-size-radius-circle) !important;
+}
+
+.d-brr-pill {
+    border-top-right-radius: var(--dt-size-radius-pill) !important;
+    border-bottom-right-radius: var(--dt-size-radius-pill) !important;
+}
 
 //  $$ BOTTOM
 //  ----------------------------------------------------------------------------
-.d-bbr-circle { border-bottom-right-radius: var(--dt-size-radius-circle) !important; border-bottom-left-radius: var(--dt-size-radius-circle) !important; }
-.d-bbr-pill { border-bottom-right-radius: var(--dt-size-radius-pill) !important; border-bottom-left-radius: var(--dt-size-radius-pill) !important; }
+.d-bbr-circle {
+    border-bottom-right-radius: var(--dt-size-radius-circle) !important;
+     border-bottom-left-radius: var(--dt-size-radius-circle) !important;
+    }
+
+.d-bbr-pill {
+    border-bottom-right-radius: var(--dt-size-radius-pill) !important;
+    border-bottom-left-radius: var(--dt-size-radius-pill) !important;
+ }
 
 //  $$ RIGHT
 //  ----------------------------------------------------------------------------
-.d-blr-circle { border-top-left-radius: var(--dt-size-radius-circle) !important; border-bottom-left-radius: var(--dt-size-radius-circle) !important; }
-.d-blr-pill { border-top-left-radius: var(--dt-size-radius-pill) !important; border-bottom-left-radius: var(--dt-size-radius-pill) !important; }
+.d-blr-circle {
+    border-top-left-radius: var(--dt-size-radius-circle) !important;
+    border-bottom-left-radius: var(--dt-size-radius-circle) !important;
+}
+
+.d-blr-pill {
+    border-top-left-radius: var(--dt-size-radius-pill) !important;
+    border-bottom-left-radius: var(--dt-size-radius-pill) !important;
+}
 
 
 //  $$ STYLE
@@ -81,53 +111,46 @@
 
 //  $$ WIDTH
 //  ----------------------------------------------------------------------------
-.d-baw0 { border-width: 0 !important; }
-.d-baw1 { border-width: var(--dt-size-100) !important; }
-.d-baw2 { border-width: var(--dt-size-200) !important; }
-.d-baw4 { border-width: var(--dt-size-300) !important; }
-.d-baw6 { border-width: var(--dt-size-350) !important; }
+.d-baw0 { border-width: var(--dt-size-border-0) !important; }
+.d-baw1 { border-width: var(--dt-size-border-100) !important; }
+.d-baw2 { border-width: var(--dt-size-border-200) !important; }
+.d-baw4 { border-width: var(--dt-size-border-300) !important; }
 
 //  --  Top Border width
-.d-btw0 { border-top-width: 0 !important; }
-.d-btw1 { border-top-width: var(--dt-size-100) !important; }
-.d-btw2 { border-top-width: var(--dt-size-200) !important; }
-.d-btw4 { border-top-width: var(--dt-size-300) !important; }
-.d-btw6 { border-top-width: var(--dt-size-350) !important; }
+.d-btw0 { border-top-width: var(--dt-size-border-0) !important; }
+.d-btw1 { border-top-width: var(--dt-size-border-100) !important; }
+.d-btw2 { border-top-width: var(--dt-size-border-200) !important; }
+.d-btw4 { border-top-width: var(--dt-size-border-300) !important; }
 
 //  --  Right Border width
-.d-brw0 { border-right-width: 0 !important; }
-.d-brw1 { border-right-width: var(--dt-size-100) !important; }
-.d-brw2 { border-right-width: var(--dt-size-200) !important; }
-.d-brw4 { border-right-width: var(--dt-size-300) !important; }
-.d-brw6 { border-right-width: var(--dt-size-350) !important; }
+.d-brw0 { border-right-width: var(--dt-size-border-0) !important; }
+.d-brw1 { border-right-width: var(--dt-size-border-100) !important; }
+.d-brw2 { border-right-width: var(--dt-size-border-200) !important; }
+.d-brw4 { border-right-width: var(--dt-size-border-300) !important; }
 
 //  --  Bottom Border width
-.d-bbw0 { border-bottom-width: 0 !important; }
-.d-bbw1 { border-bottom-width: var(--dt-size-100) !important; }
-.d-bbw2 { border-bottom-width: var(--dt-size-200) !important; }
-.d-bbw4 { border-bottom-width: var(--dt-size-300) !important; }
-.d-bbw6 { border-bottom-width: var(--dt-size-350) !important; }
+.d-bbw0 { border-bottom-width: var(--dt-size-border-0) !important; }
+.d-bbw1 { border-bottom-width: var(--dt-size-border-100) !important; }
+.d-bbw2 { border-bottom-width: var(--dt-size-border-200) !important; }
+.d-bbw4 { border-bottom-width: var(--dt-size-border-300) !important; }
 
 //  --  Left Border width
-.d-blw0 { border-left-width: 0 !important; }
-.d-blw1 { border-left-width: var(--dt-size-100) !important; }
-.d-blw2 { border-left-width: var(--dt-size-200) !important; }
-.d-blw4 { border-left-width: var(--dt-size-300) !important; }
-.d-blw6 { border-left-width: var(--dt-size-350) !important; }
+.d-blw0 { border-left-width: var(--dt-size-border-0) !important; }
+.d-blw1 { border-left-width: var(--dt-size-border-100) !important; }
+.d-blw2 { border-left-width: var(--dt-size-border-200) !important; }
+.d-blw4 { border-left-width: var(--dt-size-border-300) !important; }
 
 //  --  X Border width
 .d-bxw0 { .d-brw0(); .d-blw0(); }
 .d-bxw1 { .d-brw1(); .d-blw1(); }
 .d-bxw2 { .d-brw2(); .d-blw2(); }
 .d-bxw4 { .d-brw4(); .d-blw4(); }
-.d-bxw6 { .d-brw6(); .d-blw6(); }
 
 //  --  Y Border width
 .d-byw0 { .d-btw0(); .d-bbw0(); }
 .d-byw1 { .d-btw1(); .d-bbw1(); }
 .d-byw2 { .d-btw2(); .d-bbw2(); }
 .d-byw4 { .d-btw4(); .d-bbw4(); }
-.d-byw6 { .d-btw6(); .d-bbw6(); }
 
 
 //  ============================================================================
@@ -194,3 +217,19 @@
     border-left: calc(~'4px * (1 - var(--divide-x-reverse))') solid !important;
 }
 .d-divide-x-reverse > * + * { --divide-x-reverse: 1; }
+
+
+//  $$ Border linear gradient
+//  ----------------------------------------------------------------------------
+
+/*
+ * Note: border-image is not compatible with border-radius, but it's the easiest way to get a linear gradient border.
+ * https://dev.to/afif/border-with-gradient-and-radius-387f
+ */
+.d-bc-ai {
+  border-image: var(--dt-color-border-ai) 1 !important;
+}
+
+.d-divide-ai > * + * {
+  border-image: var(--dt-color-border-ai) 1 !important;
+}

@@ -1,0 +1,29 @@
+{
+	"name": "@dialpad/dialtone-language-server",
+	"version": "1.1.4",
+	"author": "Tico Ortega <julio.ortega@dialpad.com>",
+	"bugs": {
+		"email": "dialtone@dialpad.com"
+	},
+	"license": "MIT",
+	"main": "out/index.js",
+	"files": [
+		"out/**/*.js",
+		"out/**/*.d.ts"
+	],
+	"bin": {
+		"dialtone-ls": "bin/server.js"
+	},
+	"dependencies": {
+		"@volar/language-core": "~2.4.8",
+		"@volar/language-server": "~2.4.8",
+		"@volar/language-service": "~2.4.8",
+		"vscode-html-languageservice": "~5.3.1",
+		"vscode-uri": "~3.0.8"
+	},
+	"devDependencies": {
+		"@dialpad/dialtone-css": "workspace:*",
+		"@dialpad/dialtone-vue": "workspace:^3",
+		"@dialpad/dialtone-tokens": "workspace:*"
+	}
+}

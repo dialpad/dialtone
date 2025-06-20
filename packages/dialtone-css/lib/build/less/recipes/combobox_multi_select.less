@@ -1,0 +1,57 @@
+.d-recipe-combobox-multi-select__chip {
+  z-index: var(--zi-base1);
+  max-width: var(--dt-size-100-percent);
+  margin-top: var(--dt-space-300);
+  margin-right: var(--dt-space-200);
+  margin-left: var(--dt-space-200);
+}
+
+.d-recipe-combobox-multi-select__chip-wrapper {
+  position: absolute;
+  max-width: calc(var(--dt-size-100-percent) - var(--dt-space-400));
+  max-height: initial;
+  margin-right: var(--dt-space-200);
+  margin-left: var(--dt-space-200);
+  padding-left: var(--dt-space-100);
+  overflow-y: visible;
+}
+
+.d-recipe-combobox-multi-select__chip-wrapper-md--collapsed {
+  max-height: 2.8rem;
+  overflow-y: hidden;
+}
+
+.d-recipe-combobox-multi-select__chip-wrapper-sm--collapsed,
+.d-recipe-combobox-multi-select__chip-wrapper-xs--collapsed {
+  max-height: 2.5rem;
+  overflow-y: hidden;
+}
+
+.d-recipe-combobox-multi-select__chip--truncate {
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.d-recipe-combobox-multi-select__input {
+  flex-grow: 1;
+}
+
+.d-recipe-combobox-multi-select__input--hidden {
+  color: transparent;
+}
+
+.d-recipe-combobox-multi-select__input-wrapper {
+  position: relative;
+  display: block;
+}
+
+.d-recipe-combobox-multi-select__list .d-list-item__content {
+  min-height: calc(var(--dt-size-550) + var(--dt-size-300));
+}
+
+
+.d-recipe-combobox-multi-select__list--loading {
+  padding-top: var(--dt-space-500);
+  padding-bottom: var(--dt-space-500);
+  text-align: center;
+}

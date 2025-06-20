@@ -5,7 +5,7 @@ status: ready
 thumb: true
 image: assets/images/components/input.png
 storybook: https://dialtone.dialpad.com/vue/?path=/story/components-input--default
-figma_url: https://www.figma.com/file/2adf7JhZOncRyjYiy2joil/DT-Core%3A-Components-7?node-id=8923%3A21866&viewport=-983%2C83%2C0.16&t=xHutRjwo1o5zMTgT-11
+figma_url: https://www.figma.com/design/W58r5BkO8qTw3vem9YieJd/DT9-Component-Library--Rebrand-2025-?node-id=25665-5366
 ---
 
 <code-well-header>
@@ -36,7 +36,7 @@ This component combines both the `input` and `textarea` elements as options with
 
 </dialtone-usage>
 
-### Best practices
+### Best Practices
 
 - The length of the text input provides a hint to users as to how much text to enter.
 - Only show error validation messages or stylings after a user has interacted with a particular field.
@@ -190,7 +190,8 @@ htmlCode='
 '
 vueCode='
 <dt-input label="Label" placeholder="Placeholder" />
-<dt-input label="Label" value="Value" />
+<!-- IMPORTANT NOTE: Change model-value to just value in Vue 2 -->
+<dt-input label="Label" model-value="Value" />
 <dt-input label="Label" placeholder="Placeholder" disabled />
 '
 showHtmlWarning />
@@ -220,7 +221,8 @@ htmlCode='
 '
 vueCode='
 <dt-input label="Label" placeholder="Placeholder" type="textarea" />
-<dt-input label="Label" type="textarea" value="Value" />
+<!-- IMPORTANT NOTE: Change model-value to just value in Vue 2 -->
+<dt-input label="Label" type="textarea" model-value="Value" />
 <dt-input label="Label" placeholder="Placeholder" type="textarea" disabled />
 '
 showHtmlWarning />
@@ -261,7 +263,7 @@ vueCode='
 '
 showHtmlWarning />
 
-### With validation states
+### With Validation States
 
 Provides feedback to the user based on their interaction, or lack thereof, with an input.
 
@@ -292,9 +294,10 @@ htmlCode='
 </div>
 '
 vueCode='
-<dt-input label="Label" type="email" value="Value" :messages="[messages.error]"/>
-<dt-input label="Label" type="email" value="Value" :messages="[messages.success]"/>
-<dt-input label="Label" type="email" value="Value" :messages="[messages.warning]"/>
+<!-- IMPORTANT NOTE: Change model-value to just value in Vue 2 -->
+<dt-input label="Label" type="email" model-value="Value" :messages="[messages.error]"/>
+<dt-input label="Label" type="email" model-value="Value" :messages="[messages.success]"/>
+<dt-input label="Label" type="email" model-value="Value" :messages="[messages.warning]"/>
 '
 showHtmlWarning />
 
@@ -325,13 +328,14 @@ htmlCode='
 </div>
 '
 vueCode='
-<dt-input label="Label" type="textarea" value="Value" :messages="[messages.error]"/>
-<dt-input label="Label" type="textarea" value="Value" :messages="[messages.success]"/>
-<dt-input label="Label" type="textarea" value="Value" :messages="[messages.warning]"/>
+<!-- IMPORTANT NOTE: Change model-value to just value in Vue 2 -->
+<dt-input label="Label" type="textarea" model-value="Value" :messages="[messages.error]"/>
+<dt-input label="Label" type="textarea" model-value="Value" :messages="[messages.success]"/>
+<dt-input label="Label" type="textarea" model-value="Value" :messages="[messages.warning]"/>
 '
 showHtmlWarning />
 
-### With multiple validation messages
+### With Multiple Validation Messages
 
 <code-well-header>
   <div class="d-w100p">
@@ -342,11 +346,12 @@ showHtmlWarning />
 <code-example-tabs
 :htmlCode='() => $refs.multipleMessages'
 vueCode='
-<dt-input label="Label" type="email" value="Value" :messages="multipleMessages" />
+<!-- IMPORTANT NOTE: Change model-value to just value in Vue 2 -->
+<dt-input label="Label" type="email" model-value="Value" :messages="multipleMessages" />
 '
 />
 
-### With maximum length validation
+### With Maximum Length Validation
 
 Adds validation for the input length. Make sure to provide the following props:
 
@@ -410,7 +415,7 @@ vueCode='
 '
 />
 
-### With custom maximum length validation message
+### With Custom Maximum Length Validation Message
 
 <code-well-header>
   <div class="d-w100p">
@@ -537,7 +542,7 @@ vueCode='
 '
 showHtmlWarning />
 
-## Icon support
+## Icon Support
 
 <code-well-header>
   <div class="d-stack16 d-w100p">

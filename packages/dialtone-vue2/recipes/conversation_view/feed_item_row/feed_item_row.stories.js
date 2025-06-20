@@ -6,14 +6,17 @@ import DtRecipeFeedItemRowVariantsTemplate from './feed_item_row_variants.story.
 
 import { DEFAULT_FEED_ROW_STATE, FEED_ROW_STATE_BACKGROUND_COLOR } from './feed_item_row_constants';
 
+import avatarImage from '@/common/assets/avatar1.png?url';
+import testImage from '@/common/assets/test.jpg?url';
+
 export const argsData = {
-  avatarImageUrl: 'https://i1.sndcdn.com/avatars-000181324408-652e57-t500x500.jpg',
+  avatarImageUrl: avatarImage,
   displayName: 'Dwight Schrute',
   time: '4:54 PM',
   shortTime: '4:54',
   onFocus: action('focus'),
   onHover: action('hover'),
-  attachment: '<img class="dt-feed-item-row__image" alt="dwight" src="https://i1.sndcdn.com/avatars-000181324408-652e57-t500x500.jpg"></img>',
+  attachment: `<img class="d-recipe-feed-item-row__image" alt="test image" src="${testImage}"></img>`,
   default: `Elementum fames :smile: nullam elementum velit proin vitae aliquet.
   Platea nulla consectetur consequat sagittis nullam et ultricies nisl rhoncus
   aliquet elementum venenatis :laughing: quisque.`,
@@ -99,6 +102,33 @@ export const argTypesData = {
       defaultValue: {
         summary: DEFAULT_FEED_ROW_STATE,
       },
+    },
+  },
+
+  displayNameSlot: {
+    name: 'displayName',
+    description: 'Slot for display name',
+    control: 'text',
+    table: {
+      category: 'slots',
+      type: {
+        summary: 'VNode',
+      },
+    },
+  },
+
+  // Props
+  displayName: {
+    name: 'displayName',
+    description: 'The display name of the user',
+    table: {
+      category: 'props',
+      type: {
+        summary: 'string',
+      },
+    },
+    control: {
+      type: 'text',
     },
   },
 

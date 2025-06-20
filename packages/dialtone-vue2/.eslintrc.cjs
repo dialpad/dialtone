@@ -1,5 +1,5 @@
 const componentsList = require('../../common/components_list.js');
-componentsList.push('btn', 'select', 'validation-message', 'label', 'description', 'split-btn');
+componentsList.push('btn', 'select', 'validation-message', 'label', 'description', 'split-btn', 'mention-suggestion', 'suggestion-list');
 const componentsNames = componentsList.map(name => name.replace('_', '-').replace('.vue', ''));
 
 module.exports = {
@@ -149,7 +149,7 @@ module.exports = {
       nonwords: false,
     }],
     'vue/template-curly-spacing': ['error', 'never'],
-    'vue/no-restricted-class': ['error', `/^d-(?!(${componentsNames.join('|')})).*/`],
+    'vue/no-restricted-class': ['error', `/^d-(?!(recipe|${componentsNames.join('|')})).*/`],
   },
   overrides: [
     {

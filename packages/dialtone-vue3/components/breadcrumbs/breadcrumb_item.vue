@@ -5,13 +5,14 @@
       'd-breadcrumbs__item',
       { [BREADCRUMB_ITEM_SELECTED_MODIFIER]: selected },
     ]"
+    v-bind="addClassStyleAttrs($attrs)"
   >
     <dt-link
       :kind="linkKind"
       :inverted="linkInverted"
       :aria-current="ariaCurrent"
       data-qa="breadcrumb-item"
-      v-bind="$attrs"
+      v-bind="removeClassStyleAttrs($attrs)"
     >
       <!-- @slot default slot for breadcrumb item's label -->
       <slot>
@@ -23,8 +24,8 @@
 
 <script>
 import { BREADCRUMB_ITEM_SELECTED_MODIFIER } from './breadcrumbs_constants';
-import { DtLink } from '../link';
-import { MUTED } from '../link/link_constants';
+import { removeClassStyleAttrs, addClassStyleAttrs } from '@/common/utils';
+import { DtLink, MUTED } from '@/components/link';
 
 export default {
   name: 'DtBreadcrumbItem',
@@ -64,6 +65,7 @@ export default {
   data () {
     return {
       BREADCRUMB_ITEM_SELECTED_MODIFIER,
+
     };
   },
 
@@ -79,6 +81,11 @@ export default {
     ariaCurrent () {
       return this.selected ? 'location' : undefined;
     },
+  },
+
+  methods: {
+    removeClassStyleAttrs,
+    addClassStyleAttrs,
   },
 };
 </script>

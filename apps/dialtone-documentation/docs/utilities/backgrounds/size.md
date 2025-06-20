@@ -1,5 +1,5 @@
 ---
-title: Background size
+title: Background Size
 description: Utilities for controlling an element's background size.
 ---
 
@@ -7,16 +7,16 @@ description: Utilities for controlling an element's background size.
 
 Use `d-bgs-{n}` to control the size of element's background image.
 
-<code-well-header class="d-fl-col4 d-fw-wrap d-g12 d-p12 d-bgc-black-200 d-bgo50" custom>
+<code-well-header class="d-fl-col5 d-fw-wrap d-g16 d-p16 d-bgc-secondary" custom>
   <div class="d-d-flex d-fd-column d-ai-center d-stack4" v-for="i in sizes">
       <div
-        class="d-fl-center d-w128 d-h128 d-bgc-magenta-200 d-bar8 d-bc-purple-200 d-of-hidden d-bgr-none"
-        style="background-image: url('https://4.bp.blogspot.com/-EVbXg5iW6qY/ULcKZEC-bnI/AAAAAAAACCI/kZDtjeKwQlo/s1600/puffin1.jpg');"
+        class="d-fl-center d-w128 d-h128 d-bgc-moderate d-bar8 d-of-hidden d-bgr-none"
+        style="background-image: url('/assets/images/puffin.jpg');"
         :style="i === 'var' ? '--bgg-size: 65% 65%;' : ''"
         :class="[{'d-bgp-center': i === 'auto'}, `d-bgs-${i}`]"
       >
       </div>
-      <code>.d-bgs-{{ i }}</code>
+      <code class="d-code--sm d-bgc-transparent">.d-bgs-{{ i }}</code>
   </div>
 </code-well-header>
 
@@ -38,7 +38,7 @@ Use `d-bgs-{n}` to control the size of element's background image.
   <template #content>
     <tbody>
       <tr v-for="i in sizes">
-        <th scope="row" class="d-code--sm d-fc-purple-400">.d-bgp-{{ i }}</th>
+        <th scope="row" class="d-code--sm d-docsite-code">.d-bgp-{{ i }}</th>
         <td class="d-code--sm">
           background-size:
             <span v-if="i === 'var'"> var(--bgg-size, 100% 100%); </span>

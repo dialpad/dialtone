@@ -17,8 +17,6 @@ export const argTypesData = {
         detail: `[{
           "emojiUnicodeOrShortname": string,
           "isSelected": boolean,
-          "ariaLabel": string,
-          "tooltip": string,
           "num": number,
         }]`,
       },
@@ -66,22 +64,22 @@ export const Default = {
       {
         emojiUnicodeOrShortname: '😀',
         isSelected: true,
-        ariaLabel: 'Emoji aria label',
-        tooltip: 'You reacted with 😀',
         num: 1,
       },
       {
         emojiUnicodeOrShortname: '😒',
         isSelected: false,
-        ariaLabel: 'Emoji aria label',
-        tooltip: 'You reacted with 😒',
+        name: 'John Doe',
         num: 1,
+      },
+      {
+        emojiUnicodeOrShortname: '😌',
+        isSelected: true,
+        num: 99,
       },
       {
         emojiUnicodeOrShortname: '🙃',
         isSelected: false,
-        ariaLabel: 'Emoji aria label',
-        tooltip: 'You reacted with 🙃',
         num: 99,
       },
     ],

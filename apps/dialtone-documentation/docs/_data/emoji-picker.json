@@ -21,6 +21,11 @@
       "description": "Emoji picker's footer wrapper."
     },
     {
+      "class": "d-emoji-picker__add-emoji",
+      "applies": ".d-emoji-picker",
+      "description": "Emoji picker's add emoji button."
+    },
+    {
       "class": "d-emoji-picker__alignment",
       "applies": ".d-emoji-picker",
       "description": "Align emoji picker's wrapper."

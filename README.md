@@ -12,17 +12,16 @@ The below usage instructions are for the combined package.
 
 ### Install it via NPM:
 
-#### Vue 3
+#### Using Vue@3
 
 ```shell
-npm install @dialpad/dialtone@latest @tiptap/vue-3
+npm install @dialpad/dialtone
 ```
 
-#### Vue 2
+#### Using Vue@2
 
 ```shell
-npm install @dialpad/dialtone@latest @linusborg/vue-simple-portal @tiptap/vue-2
-```
+npm install @dialpad/dialtone @dialpad/i18n-vue2
 
 ### Import packages:
 
@@ -34,21 +33,12 @@ If you don't care about theming and just want to use Dialtone with the default l
 
 ```css
 @import "@dialpad/dialtone/css-default-theme";
-/* If using vue components */
-@import "@dialpad/dialtone/vue2/css";
-/* Or */
-@import "@dialpad/dialtone/vue3/css";
-
 ```
 
 - Javascript
 
 ```js
 import "@dialpad/dialtone/css-default-theme";
-/* If using vue components */
-import "@dialpad/dialtone/vue2/css";
-/* Or */
-import "@dialpad/dialtone/vue3/css";
 ```
 
 #### With theming
@@ -59,20 +49,12 @@ If you want to use theming, import from the below path. This file does not inclu
 
 ```css
 @import "@dialpad/dialtone/css";
-/* If using vue components */
-@import "@dialpad/dialtone/vue2/css";
-/* Or */
-@import "@dialpad/dialtone/vue3/css";
 ```
 
 - Javascript
 
 ```js
 import "@dialpad/dialtone/css";
-/* If using vue components */
-import "@dialpad/dialtone/vue2/css";
-/* Or */
-import "@dialpad/dialtone/vue3/css";
 ```
 
 ##### Set theme via setTheme() javascript function (preferred)
@@ -160,7 +142,7 @@ import DtIllustrationBlankSpace from '@dialpad/dialtone-icons/vue3/blank-space';
 // Named import
 import { DtButton } from "@dialpad/dialtone/vue2"
 
-// Default import (Prefered if using webpack as it is tree-shakeable by default)
+// Default import (Preferred if using webpack as it is tree-shakeable by default)
 import { DtButton } from "@dialpad/dialtone/vue2/lib/button"
 ```
 
@@ -430,7 +412,7 @@ npm run dev
 
 Currently, Dialtone packages are being released in two different ways: `scheduled` and `manually`.
 The `scheduled` release will only release changes to `production` while `manually` you can choose to release
-`alpha`, `beta` or `next` branches.
+`alpha` or `beta` branches.
 
 #### Production
 
@@ -458,11 +440,11 @@ This will trigger the [release action](.github/workflows/release.yml), release c
 3. Push the `production` branch.
 4. The [publish action](https://github.com/dialpad/dialtone/actions/workflows/publish.yml) will publish the packages with its corresponding tag.
 
-#### Alpha/Beta/Next
+#### Alpha/Beta
 
 1. Merge your changes to the branch you want to release, commit and push to origin. (Note: If your dialtone version number is behind the last production release number, it may fail. Merge in staging or update the version number manually.)
 2. Go to [GitHub](https://github.com/dialpad/dialtone/actions/workflows/release.yml) and click on `Run workflow`.
-3. Select `alpha`, `beta` or `next` branch.
+3. Select `alpha` or `beta` branch.
 4. Select the `package` that you want to release or leave it empty to release all of them.
 
 This will trigger the [release action](.github/workflows/release.yml), release changes on the selected branch and automatically publish the selected packages following the next steps:

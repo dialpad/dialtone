@@ -5,7 +5,7 @@ status: ready
 thumb: true
 image: assets/images/components/list-item.png
 storybook: https://dialtone.dialpad.com/vue/?path=/story/components-list-item--default
-figma_url: https://www.figma.com/file/2adf7JhZOncRyjYiy2joil/DT-Core%3A-Components-7?node-id=10732%3A69390
+figma_url: https://www.figma.com/design/W58r5BkO8qTw3vem9YieJd/DT9-Component-Library--Rebrand-2025-?node-id=10732-69390
 ---
 
 <code-well-header class="d-d-block">
@@ -28,7 +28,7 @@ figma_url: https://www.figma.com/file/2adf7JhZOncRyjYiy2joil/DT-Core%3A-Componen
   </ul>
 </code-well-header>
 
-## Base style
+## Base Style
 
 A list item provides accessibility controls and common functionality. The component uses child components that provide styling and slots for different types of list items. If you want to create a custom list item you can pass a type "custom", which will let you define the structure of the content.
 
@@ -67,32 +67,32 @@ The **bottom** slot can be used to display content below the subtitle slot.
 <code-example-tabs
 htmlCode='
 <ul>
-  <li id="dt4" class="dt-list-item dt-list-item--focusable" tabindex="0" role="listitem">
-    <div class="dt-item-layout">
-      <section class="dt-item-layout--left">
+  <li id="dt4" class="d-list-item d-list-item--focusable" tabindex="0" role="listitem">
+    <div class="d-item-layout">
+      <section class="d-item-layout--left">
         <span class="d-icon__wrapper">
           <div aria-busy="true" role="status" aria-label="" class="d-icon d-icon--size-500" style="display: none;">
             <div
-              class="skeleton-placeholder d-bar-circle skeleton-placeholder--animate"
+              class="d-skeleton-placeholder d-bar-circle d-skeleton-placeholder--animate"
               style="animation-delay: 0ms; animation-duration: 1000ms; min-width: 100%; max-width: 100%; min-height: 100%; max-height: 100%;"
             ></div>
           </div>
           <svg>...</svg>
         </span>
       </section>
-      <section class="dt-item-layout--content">
-        <div class="dt-item-layout--subtitle">
+      <section class="d-item-layout--content">
+        <div class="d-item-layout--subtitle">
           {subtitle}
         </div>
-        <div class="dt-item-layout--bottom">
+        <div class="d-item-layout--bottom">
           {bottom}
         </div>
       </section>
-      <section class="dt-item-layout--right">
+      <section class="d-item-layout--right">
         <span class="d-icon__wrapper">
           <div aria-busy="true" role="status" aria-label="" class="d-icon d-icon--size-500" style="display: none;">
             <div
-              class="skeleton-placeholder d-bar-circle skeleton-placeholder--animate"
+              class="d-skeleton-placeholder d-bar-circle d-skeleton-placeholder--animate"
               style="animation-delay: 0ms; animation-duration: 1000ms; min-width: 100%; max-width: 100%; min-height: 100%; max-height: 100%;"
             ></div>
           </div>
@@ -126,7 +126,7 @@ vueCode='
 
 ## Variants
 
-### Custom list item
+### Custom List Item
 
 When `type` is set to "custom" the list item will not render any styles or slots. This type can be used when the list item has to support content that does not work with the default structure.
 

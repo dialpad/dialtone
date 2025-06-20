@@ -5,7 +5,7 @@ status: ready
 thumb: true
 image: assets/images/components/radio.png
 storybook: https://dialtone.dialpad.com/vue/?path=/story/components-radio--default
-figma_url: https://www.figma.com/file/2adf7JhZOncRyjYiy2joil/DT-Core%3A-Components-7?node-id=8919%3A22042&viewport=-451%2C205%2C0.6&t=xHutRjwo1o5zMTgT-11
+figma_url: https://www.figma.com/design/W58r5BkO8qTw3vem9YieJd/DT9-Component-Library--Rebrand-2025-?node-id=24935-9743
 ---
 
 <code-well-header>
@@ -39,14 +39,14 @@ Radio buttons are a common way to allow users to make a single selection from a 
 
 </dialtone-usage>
 
-### Best practices
+### Best Practices
 
 - Users should be able to tap on or click either the text `label` or the radio element itself to select an option.
 - Options that are listed vertically are easier to read than those listed horizontally. Horizontal listings can make it difficult to tell which label pertains to which radio button.
 - Make sure selections are adequately spaced for touch screens.
 - Use caution if you decide to set a default value as they cannot be unchecked. Setting a default value can discourage users from making conscious decisions, seem pushy, or alienate users who don’t fit into your assumptions. If you are unsure, leave nothing selected by default.
 
-## Variants and examples
+## Variants and Examples
 
 ### Base Styles
 
@@ -54,7 +54,7 @@ Radio buttons are a common way to allow users to make a single selection from a 
   <fieldset class="d-input-group__fieldset d-stack8">
     <dt-radio name="Value" value="Value" label="Radio label"/>
     <dt-radio name="Disabled" value="Disabled" label="Radio label thats been disabled" disabled/>
-    <dt-radio name="CheckedDisabled" value="Checked" label="Radio label thats been disabled & checked" checked disabled />
+    <dt-radio name="CheckedDisabled" value="Checked" label="Radio label thats been disabled & checked" :model-value="true" disabled />
   </fieldset>
 </code-well-header>
 
@@ -94,7 +94,7 @@ htmlCode='
 vueCode='
 <dt-radio name="Value" value="Value" label="Radio label"/>
 <dt-radio name="Disabled" value="Disabled" label="Radio label thats been disabled" disabled/>
-<dt-radio name="CheckedDisabled" value="Checked" label="Radio label thats been disabled & checked" checked disabled />
+<dt-radio name="CheckedDisabled" value="Checked" label="Radio label thats been disabled & checked" :model-value="true" disabled />
 '
 showHtmlWarning />
 
@@ -139,7 +139,7 @@ vueCode='
 '
 showHtmlWarning />
 
-### With validation states
+### With Validation States
 
 <code-well-header>
   <fieldset class="d-input-group__fieldset d-stack8">
@@ -238,7 +238,7 @@ vueCode='
 '
 showHtmlWarning />
 
-### With slotted label
+### With Slotted Label
 
 <code-well-header>
   <dt-radio
@@ -262,7 +262,7 @@ vueCode='
 '
 />
 
-### With slotted description
+### With Slotted Description
 
 <code-well-header>
   <dt-radio

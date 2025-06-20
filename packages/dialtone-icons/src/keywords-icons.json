@@ -227,14 +227,21 @@
       "dialbot": [],
       "dialpad-ai-color-reversed": [],
       "dialpad-ai-color": [],
+      "dialpad-logo": [],
       "dialpad-sparkle": [
         "ai",
         "sparkle"
       ],
       "diners-club": [],
       "discover": [],
+      "dpm-logo": [
+        "dialpad",
+        "meetings",
+        "logo"
+      ],
       "evernote": [],
       "facebook": [],
+      "freshdesk": [],
       "freshsales-crm": [],
       "front": [],
       "giphy": [],
@@ -244,6 +251,7 @@
       "google-docs": [],
       "google-drive": [],
       "google-glyph": [],
+      "google-meet": [],
       "google-sheets": [],
       "google-slides": [],
       "greenhouse": [],
@@ -328,6 +336,24 @@
         "voice"
       ],
       "dialpad-logomark": [],
+      "dialpad-meetings-star": [
+        "dp",
+        "meetings",
+        "sparkle",
+        "star"
+      ],
+      "dialpad-star-reversed": [
+        "dp",
+        "brand",
+        "sparkle",
+        "star"
+      ],
+      "dialpad-star": [
+        "star",
+        "dp",
+        "sparkle",
+        "brand"
+      ],
       "dialpad-wfm": [
         "workforce",
         "surfboard",
@@ -445,6 +471,24 @@
       "phone": [
         "call"
       ],
+      "power-dialer-off": [
+        "powerdialer",
+        "lightning",
+        "list",
+        "speed",
+        "strikethrough"
+      ],
+      "power-dialer": [
+        "powerdialer",
+        "lightning",
+        "list",
+        "speed"
+      ],
+      "quick-reply": [
+        "message",
+        "chat",
+        "reply"
+      ],
       "reply-all": [
         "email"
       ],
@@ -455,6 +499,12 @@
         "paper airplane",
         "paper aeroplane",
         "submit"
+      ],
+      "simultaneous-ring": [
+        "simultaneous",
+        "multi-ring",
+        "multiple calls",
+        "phone"
       ],
       "thread": [
         "conversation",
@@ -1511,6 +1561,10 @@
         "collection",
         "cluster"
       ],
+      "breakout-rooms": [
+        "rooms",
+        "groups"
+      ],
       "bullet": [
         "dot",
         "point",
@@ -1590,6 +1644,17 @@
       ],
       "gauge": [
         "dashboard"
+      ],
+      "graduation": [
+        "university",
+        "hat",
+        "cap",
+        "learn",
+        "study",
+        "education",
+        "ceremony",
+        "academic",
+        "diploma"
       ],
       "hash-bold": [
         "number",

@@ -52,6 +52,13 @@
         />
       </ul>
     </template>
+    <template #footerContent="{ close }">
+      <!-- @slot Slot for the footer content -->
+      <slot
+        name="footer"
+        :close="close"
+      />
+    </template>
   </dt-popover>
 </template>
 
@@ -66,6 +73,7 @@ import SrOnlyCloseButtonMixin from '@/common/mixins/sr_only_close_button';
 import SrOnlyCloseButton from '@/common/sr_only_close_button.vue';
 
 export default {
+  compatConfig: { MODE: 3 },
   name: 'DtDropdown',
 
   components: {
@@ -501,18 +509,3 @@ export default {
   },
 };
 </script>
-
-<style lang="less">
-.d-context-menu-list {
-  width: var(--dt-size-850);
-}
-.d-dropdown-list {
-  position: relative;
-  margin: var(--dt-space-300);
-  padding-left: var(--dt-space-0);
-  padding-right: var(--dt-space-0);
-  >.dt-list-item {
-    margin-top: var(--dt-space-200);
-  }
-}
-</style>

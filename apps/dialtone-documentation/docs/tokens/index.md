@@ -1,5 +1,5 @@
 ---
-title: Tokens
+title: Design Tokens
 description: Multi-platform values that make up Dialtone's design language
 ---
 

@@ -1,10 +1,25 @@
 {
   "categories": {
     "spot-illustrations": {
+      "access-denied": [
+        "access",
+        "denied",
+        "error",
+        "authentication"
+      ],
+      "atomic-pathway": [
+        "atomic",
+        "space"
+      ],
+      "black-hole": [
+        "black",
+        "hole"
+      ],
       "blank-space": [
         "blank",
         "space"
       ],
+      "browser-table-graph": [],
       "dialpad-logo-black": [
         "logo",
         "brand",
@@ -81,44 +96,86 @@
         "solid",
         "marketing"
       ],
-      "dialpad-wordmark-black": [
-        "logo",
-        "brand",
-        "branding",
-        "dialpad",
-        "word",
-        "marketing"
+      "file-upload": [
+        "upload",
+        "file",
+        "document",
+        "attachment"
       ],
-      "dialpad-wordmark-inverted": [
-        "logo",
-        "brand",
-        "branding",
-        "dialpad",
-        "word",
-        "marketing"
+      "login-error": [
+        "error",
+        "login",
+        "authentication",
+        "access"
       ],
-      "dialpad-wordmark-white": [
-        "logo",
-        "brand",
-        "branding",
-        "dialpad",
-        "word",
-        "marketing"
+      "magnifier": [
+        "magnifier",
+        "search",
+        "zoom",
+        "lens"
       ],
-      "dialpad-wordmark": [
-        "logo",
-        "brand",
-        "branding",
-        "dialpad",
-        "word",
-        "marketing"
+      "mic-detected": [
+        "mic",
+        "detected",
+        "audio",
+        "sound"
       ],
       "mind": [
         "mind"
       ],
+      "mobile-full-notifications": [
+        "mobile",
+        "notifications",
+        "phone",
+        "alert"
+      ],
+      "new-meeting": [
+        "new",
+        "meeting",
+        "calendar",
+        "schedule"
+      ],
+      "new-message": [
+        "new",
+        "message",
+        "chat",
+        "notification"
+      ],
+      "nothing-to-see-here": [
+        "nothing",
+        "empty",
+        "blank",
+        "space"
+      ],
+      "orbital-harmony": [
+        "orbital",
+        "harmony"
+      ],
+      "playlist": [
+        "play",
+        "list",
+        "music"
+      ],
+      "publish-graphic": [
+        "publish",
+        "graphic",
+        "asset"
+      ],
+      "something-went-wrong": [
+        "error",
+        "wrong",
+        "issue",
+        "problem"
+      ],
       "vector-vortex": [
         "vector",
         "vortex"
+      ],
+      "wireless-screenshare": [
+        "wireless",
+        "screenshare",
+        "screen",
+        "share"
       ]
     }
   }

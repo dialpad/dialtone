@@ -11,6 +11,9 @@
 //  • BACKGROUND/SURFACE COLORS
 //  • BORDER COLORS
 //
+// TODO: Remove `*-transparent` classes in favor of `*-neutral-transparent` classes.
+//  Both are existing and that's not ok, a migration will be needed on product.
+//
 //  $$  TEXT COLORS
 //  ----------------------------------------------------------------------------
 .d-fc-current { color: currentColor !important; }
@@ -19,8 +22,15 @@
 
 //  $$  BACKGROUND/SURFACE COLORS
 //  ----------------------------------------------------------------------------
-.d-bgc-transparent { background-color: transparent !important; background-image: none !important; }
-.d-bgc-unset { background-color: unset !important; background-image: unset !important; }
+.d-bgc-transparent {
+  background-color: transparent !important;
+  background-image: none !important;
+}
+
+.d-bgc-unset {
+  background-color: unset !important;
+  background-image: unset !important;
+}
 
 //  $$  BORDER COLORS
 //  ----------------------------------------------------------------------------

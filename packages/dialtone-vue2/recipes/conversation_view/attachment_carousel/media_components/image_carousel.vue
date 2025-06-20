@@ -1,33 +1,33 @@
 <template>
   <li
-    class="dt-attachment-image"
+    class="d-recipe-attachment-carousel__image"
   >
     <dt-image-viewer
-      image-button-class="dt-attachment-image__image-viewer"
+      image-button-class="d-recipe-attachment-carousel__image-viewer"
       :image-src="mediaItem.path"
       :image-alt="mediaItem.altText"
-      :close-aria-label="closeAriaLabel"
-      :aria-label="clickToOpenAriaLabel"
+      :aria-label="i18n.$t('DIALTONE_IMAGE_CAROUSEL_CLICK_TO_OPEN_ARIA_LABEL')"
     />
 
     <!-- Loader / Close button -->
     <div
-      class="dt-attachment-image__top-right"
+      class="d-recipe-attachment-carousel__image-top-right"
     >
       <dt-progress-bar
         v-if="mediaItem.isUploading"
-        class="dt-attachment-image__progress-bar"
+        class="d-recipe-attachment-carousel__image-progress-bar"
         :progress="mediaItem.progress"
-        :progressbar-aria-label="progressbarAriaLabel"
+        :aria-label="i18n.$t('DIALTONE_IMAGE_CAROUSEL_PROGRESS_BAR_ARIA_LABEL')"
       />
       <dt-button
         :id="`closeButton-${index}`"
         tabindex="0"
-        class="dt-attachment-image__close-button"
+        class="d-recipe-attachment-carousel__image-close-button"
         circle
         size="xs"
         importance="clear"
-        :aria-label="closeAriaLabel"
+        :aria-label="closeButtonTitle"
+        :title="closeButtonTitle"
         @click="removeMediaItem(index)"
       >
         <template #icon>
@@ -44,6 +44,7 @@
 import { DtImageViewer } from '@/components/image_viewer';
 import { DtButton } from '@/components/button';
 import { DtIconClose } from '@dialpad/dialtone-icons/vue2';
+import { DtLocalizationMixin } from '@/common/mixins';
 
 import DtProgressBar from './progress_bar.vue';
 
@@ -57,6 +58,8 @@ export default {
     DtProgressBar,
   },
 
+  mixins: [DtLocalizationMixin],
+
   props: {
     mediaItem: {
       type: Object,
@@ -65,21 +68,6 @@ export default {
 
     index: {
       type: Number,
-      required: true,
-    },
-
-    closeAriaLabel: {
-      type: String,
-      required: true,
-    },
-
-    clickToOpenAriaLabel: {
-      type: String,
-      required: true,
-    },
-
-    progressbarAriaLabel: {
-      type: String,
       required: true,
     },
   },
@@ -94,6 +82,12 @@ export default {
     'remove-media',
   ],
 
+  computed: {
+    closeButtonTitle () {
+      return this.i18n.$t('DIALTONE_CLOSE_BUTTON');
+    },
+  },
+
   methods: {
     removeMediaItem (index) {
       this.$emit('remove-media', index);
@@ -101,50 +95,3 @@ export default {
   },
 };
 </script>
-
-<style lang="less">
-.dt-attachment-image {
-  position: relative;
-
-  &:focus-within .dt-attachment-image__close-button, &:hover .dt-attachment-image__close-button {
-    opacity: 1;
-  }
-}
-.dt-attachment-image__image-viewer {
-  height: var(--dt-size-700);
-  width: var(--dt-size-700);
-  border: var(--dt-space-100) solid;
-  border-radius: var(--br4);
-  border-width: var(--dt-size-350);
-  border-color: var(--dt-color-border-subtle);
-  object-fit: cover;
-}
-.dt-attachment-image__top-right {
-  position: absolute;
-  top: var(--dt-size-100);
-  right: var(--dt-size-100);
-}
-.dt-attachment-image__close-button {
-  opacity: 0;
-  position: absolute;
-  top: inherit;
-  right: inherit;
-  color: var(--dt-color-neutral-white);
-  background-color: var(--dt-color-black-400);
-  border: var(--dt-space-100) solid;
-  border-width: var(--dt-size-200);
-  border-color: var(--dt-color-neutral-white);
-}
-.dt-attachment-image__progress-bar {
-  position: absolute;
-  top: inherit;
-  right: inherit;
-  background-color: var(--dt-color-neutral-white);
-  border-radius: 50%;
-  display: flex;
-  transform: rotate(-90deg);
-  border: var(--dt-space-100) solid;
-  border-width: var(--dt-size-200);
-  border-color: var(--dt-color-border-subtle);
-}
-</style>

@@ -8,7 +8,7 @@
 
 .d-presence {
   --presence-color-border-base: var(--dt-theme-sidebar-color-background);
-  --presence-color-border-offline: var(--dt-color-black-600);
+  --presence-color-border-offline: var(--dt-color-border-bold);
   --presence-color-background-active: var(--dt-theme-presence-color-background-available);
   --presence-color-background-busy: var(--dt-theme-presence-color-background-busy-unavailable);
   --presence-color-background-away: var(--dt-theme-presence-color-background-busy);
@@ -23,11 +23,11 @@
   border-width: var(--presence-border-size);
   border-radius: var(--dt-size-radius-circle);
 
-  .dt-leftbar-row--selected & {
+  .d-recipe-leftbar-row--selected & {
     --presence-color-border-base: var(--dt-theme-sidebar-selected-row-color-background);
   }
 
-  .dt-leftbar-row__primary:hover & {
+  .d-recipe-leftbar-row__primary:hover & {
     --presence-color-border-base: var(--dt-theme-sidebar-row-color-background-hover);
   }
 

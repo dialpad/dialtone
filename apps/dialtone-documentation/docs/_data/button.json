@@ -6,9 +6,9 @@
       "description": "Base button style."
     },
     {
-      "class": "d-btn__label",
-      "applies": "N/A",
-      "description": "Wraps the button text label."
+      "class": "d-btn--unstyled",
+      "applies": ".d-btn",
+      "description": "Unsets all button styles. Renders as raw text."
     },
     {
       "class": "d-btn--primary",
@@ -81,14 +81,19 @@
       "description": "Applies muted style."
     },
     {
+      "class": "d-btn--vertical",
+      "applies": ".d-btn",
+      "description": "To be applied when the icon will be positioned using --top or --bottom."
+    },
+    {
       "class": "d-btn__icon",
       "applies": "Child of .d-btn",
       "description": "Base style for including an icon with a label."
     },
     {
-      "class": "d-btn--vertical",
-      "applies": ".d-btn",
-      "description": "To be applied when the icon will be positioned using --top or --bottom."
+      "class": "d-btn__label",
+      "applies": "Child of .d-btn",
+      "description": "Wraps the button text label."
     },
     {
       "class": "d-btn__icon--left",

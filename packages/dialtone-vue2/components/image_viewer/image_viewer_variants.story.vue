@@ -4,7 +4,6 @@
     <dt-image-viewer
       :image-src="test"
       image-alt="Alt Text"
-      close-aria-label="Close"
       image-button-class="d-wmn64 d-hmn64 w-wmx332 d-hmx332"
       aria-label="Click to open image"
     />
@@ -12,7 +11,6 @@
     <dt-image-viewer
       :image-src="fry"
       image-alt="Alt Text"
-      close-aria-label="Close"
       image-button-class="d-wmn64 d-hmn64 w-wmx332 d-hmx332"
       aria-label="Click to open image"
     />
@@ -21,8 +19,8 @@
 
 <script>
 import DtImageViewer from './image_viewer.vue';
-import test from '@/common/assets/test.jpg';
-import fry from '@/common/assets/fry.gif';
+import test from '@/common/assets/test.jpg?url';
+import fry from '@/common/assets/fry.gif?url';
 
 export default {
   name: 'DtImageViewerVariants',

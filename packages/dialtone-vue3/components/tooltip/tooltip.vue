@@ -50,7 +50,7 @@ import {
 import {
   POPOVER_APPEND_TO_VALUES,
 } from '../popover/popover_constants';
-import { flushPromises, getUniqueString, hasSlotContent, warnIfUnmounted } from '@/common/utils';
+import { flushPromises, getUniqueString, hasSlotContent, warnIfUnmounted, returnFirstEl } from '@/common/utils';
 import {
   createTippy,
   getAnchor,
@@ -64,6 +64,7 @@ import {
  * @see https://dialtone.dialpad.com/components/tooltip.html
  */
 export default {
+  compatConfig: { MODE: 3 },
   name: 'DtTooltip',
 
   props: {
@@ -362,7 +363,7 @@ export default {
       await flushPromises();
       this.addExternalAnchorEventListeners();
     }
-    warnIfUnmounted(this.$el, this.$options.name);
+    warnIfUnmounted(returnFirstEl(this.$el), this.$options.name);
   },
 
   beforeUnmount () {
@@ -376,11 +377,11 @@ export default {
   methods: {
     calculateAnchorZindex () {
       // if a modal is currently active render at modal-element z-index, otherwise at tooltip z-index
-      if (this.$el.getRootNode()
+      if (returnFirstEl(this.$el).getRootNode()
         .querySelector('.d-modal[aria-hidden="false"], .d-modal--transparent[aria-hidden="false"]') ||
         // Special case because we don't have any dialtone drawer component yet. Render at 651 when
         // anchor of popover is within a drawer.
-        this.$el.closest('.d-zi-drawer')) {
+        returnFirstEl(this.$el).closest('.d-zi-drawer')) {
         return 651;
       } else {
         return 400;
@@ -521,24 +522,3 @@ export default {
   },
 };
 </script>
-
-<style lang="less">
-@import 'tippy.js/dist/svg-arrow.css';
-
-.tippy-box[data-reference-hidden] {
-  visibility: hidden;
-  pointer-events: none;
-}
-
-.tippy-box > .tippy-svg-arrow {
-  fill: var(--dt-color-surface-contrast);
-}
-
-.tippy-box[data-theme~='inverted'] > .tippy-svg-arrow {
-  fill: var(--dt-color-surface-moderate);
-}
-
-.tippy-box[data-animation='fade'][data-state='hidden'] {
-  opacity: 0;
-}
-</style>

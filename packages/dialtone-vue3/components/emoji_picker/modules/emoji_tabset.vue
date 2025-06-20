@@ -31,6 +31,7 @@
 <script setup>
 import { computed, ref, watch } from 'vue';
 import { DtTab, DtTabGroup } from '@/components/tab';
+import { returnFirstEl } from '@/common/utils';
 import { EMOJI_PICKER_CATEGORIES } from '@/components/emoji_picker/emoji_picker_constants.js';
 import {
   DtIconClock,
@@ -42,6 +43,7 @@ import {
   DtIconLightbulb,
   DtIconHeart,
   DtIconFlag,
+  DtIconTiktok,
 } from '@dialpad/dialtone-icons/vue3';
 
 const props = defineProps({
@@ -51,6 +53,16 @@ const props = defineProps({
    * @default false
    */
   showRecentlyUsedTab: {
+    type: Boolean,
+    default: false,
+  },
+
+  /**
+   * Whether to show the custom emojis tab or not
+   * @type {Boolean}
+   * @default false
+   */
+  showCustomEmojisTab: {
     type: Boolean,
     default: false,
   },
@@ -98,10 +110,15 @@ const TABS_DATA = [
   { label: EMOJI_PICKER_CATEGORIES.OBJECTS, icon: DtIconLightbulb },
   { label: EMOJI_PICKER_CATEGORIES.SYMBOLS, icon: DtIconHeart },
   { label: EMOJI_PICKER_CATEGORIES.FLAGS, icon: DtIconFlag },
+  { label: EMOJI_PICKER_CATEGORIES.CUSTOM, icon: DtIconTiktok },
 ];
 
 const tabs = computed(() => {
   const tabsData = props.showRecentlyUsedTab ? TABS_DATA : TABS_DATA.slice(1);
+  // if showCustomEmojisTab is false remove last index of TABS_DATA
+  if (!props.showCustomEmojisTab) {
+    tabsData.pop();
+  }
 
   return tabsData.map((tab, index) => ({
     ...tab,
@@ -148,7 +165,7 @@ function selectTabset (id) {
 function setTabsetRef (ref) {
   // We push the $el, because $el is the button inside the dt-tab component
   // and we need the button to focus it
-  tabsetRef.value.push(ref.$el);
+  tabsetRef.value.push(returnFirstEl(ref.$el));
 }
 
 function focusTabset () {

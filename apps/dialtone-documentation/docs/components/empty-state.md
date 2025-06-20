@@ -1,11 +1,11 @@
 ---
-title: Empty state
+title: Empty State
 description: Indicates no data is available to display, provides clarification, and guidance on how to proceed.
 status: ready
 thumb: true
 image: assets/images/components/empty-state.png
-figma: planned
 storybook: https://dialtone.dialpad.com/vue/?path=/story/components-empty-state--default
+figma_url: https://www.figma.com/design/W58r5BkO8qTw3vem9YieJd/DT9-Component-Library--Rebrand-2025-?node-id=17203-203
 ---
 
 <code-well-header>
@@ -20,7 +20,7 @@ storybook: https://dialtone.dialpad.com/vue/?path=/story/components-empty-state-
       </dt-stack>
     </template>
     <template #illustration>
-      <dt-illustration-mind></dt-illustration-mind>
+      <dt-illustration-nothing-to-see-here></dt-illustration-nothing-to-see-here>
     </template>
   </dt-empty-state>
 </code-well-header>
@@ -80,13 +80,13 @@ storybook: https://dialtone.dialpad.com/vue/?path=/story/components-empty-state-
 
 ### Scenarios
 
-The four most likely scenarios for an empty state are **Zero state**, **No results**, **New feature**, and **Not enabled**. This is not an exhaustive list, but a good starting point for most use cases.
+The four most likely scenarios for an empty state are **Zero State**, **No Results**, **New Feature**, and **Not Enabled**. This is not an exhaustive list, but a good starting point for most use cases.
 
-<div class="d-d-grid d-g-cols3 lg:d-g-cols1 d-bar8 d-bgc-secondary d-mb32">
+<div class="d-d-grid d-g-cols1 lg:d-g-cols3 d-bar8 d-bgc-secondary d-mb32">
 
   <div class="d-p16 d-p16 d-plc-center">
 
-#### Zero state
+#### Zero State
 
 The Empty State should guide the user on how to achieve a non-empty state. You might provide a useful tip, such as a shortcut or explanation of what needs to occur if no direct action can be taken.
 
@@ -96,11 +96,11 @@ The Empty State should guide the user on how to achieve a non-empty state. You m
   </div>
 </div>
 
-<div class="d-d-grid d-g-cols3 lg:d-g-cols1 d-bar8 d-bgc-secondary d-mb32">
+<div class="d-d-grid d-g-cols1 lg:d-g-cols3 d-bar8 d-bgc-secondary d-mb32">
 
   <div class="d-p16 d-p16 d-plc-center">
 
-#### No results
+#### No Results
 
 When an action results in no data or information to display, recommend alternate steps to take. For example, suggest an alternative filter if a table search yields no results, or guide the user on creating a new entry with the desired properties.
 
@@ -110,11 +110,11 @@ When an action results in no data or information to display, recommend alternate
   </div>
 </div>
 
-<div class="d-d-grid d-g-cols3 lg:d-g-cols1 d-bar8 d-bgc-secondary d-mb32">
+<div class="d-d-grid d-g-cols1 lg:d-g-cols3 d-bar8 d-bgc-secondary d-mb32">
 
   <div class="d-p16 d-p16 d-plc-center">
 
-#### New feature
+#### New Feature
 
 An opportunity to introduce something new or not yet take advantage of. If it includes a plan change, clearly inform the user. Use this space to entice the user to explore and utilize the new feature.
 
@@ -124,11 +124,11 @@ An opportunity to introduce something new or not yet take advantage of. If it in
   </div>
 </div>
 
-<div class="d-d-grid d-g-cols3 lg:d-g-cols1 d-bar8 d-bgc-secondary d-mb32">
+<div class="d-d-grid d-g-cols1 lg:d-g-cols3 d-bar8 d-bgc-secondary d-mb32">
 
   <div class="d-p16 d-p16 d-plc-center">
 
-#### Not enabled
+#### Not Enabled
 
 Appropriate for indicating that something is currently unavailable to them. Provide guidance on how they can gain access or why the feature is not enabled.
 
@@ -140,7 +140,7 @@ Appropriate for indicating that something is currently unavailable to them. Prov
 
 ## Variants
 
-A few rules to keep in mind when choosing a size variant.
+A few rules to keep in nothing-to-see-here when choosing a size variant.
 
 - Choosing a size adjusts the relative width, padding, and font size.
 - `lg` and `md` sizes
@@ -165,7 +165,7 @@ A few rules to keep in mind when choosing a size variant.
       </dt-stack>
     </template>
     <template #illustration>
-      <dt-illustration-mind></dt-illustration-mind>
+      <dt-illustration-nothing-to-see-here></dt-illustration-nothing-to-see-here>
     </template>
   </dt-empty-state>
 </code-well-header>
@@ -184,13 +184,13 @@ vueCode='
     </dt-stack>
   </template>
   <template #illustration>
-    <dt-illustration-mind></dt-illustration-mind>
+    <dt-illustration-nothing-to-see-here></dt-illustration-nothing-to-see-here>
   </template>
 </dt-empty-state>
 '
 showHtmlWarning />
 
-### Large with icon
+### Large with Icon
 
 <code-well-header>
   <dt-empty-state
@@ -246,7 +246,7 @@ showHtmlWarning />
       </dt-stack>
     </template>
     <template #illustration>
-      <dt-illustration-mind></dt-illustration-mind>
+      <dt-illustration-nothing-to-see-here></dt-illustration-nothing-to-see-here>
     </template>
   </dt-empty-state>
 </code-well-header>
@@ -266,13 +266,13 @@ vueCode='
     </dt-stack>
   </template>
   <template #illustration>
-    <dt-illustration-mind></dt-illustration-mind>
+    <dt-illustration-nothing-to-see-here></dt-illustration-nothing-to-see-here>
   </template>
 </dt-empty-state>
 '
 showHtmlWarning />
 
-### Medium with icon
+### Medium with Icon
 
 <code-well-header>
   <dt-empty-state
@@ -358,7 +358,7 @@ showHtmlWarning />
 
 ## Examples
 
-### No actions
+### No Actions
 
 <code-well-header>
   <dt-empty-state
@@ -367,7 +367,7 @@ showHtmlWarning />
     body-text="Looks like there is no data to display here."
   >
     <template #illustration>
-      <dt-illustration-mind></dt-illustration-mind>
+      <dt-illustration-nothing-to-see-here></dt-illustration-nothing-to-see-here>
     </template>
   </dt-empty-state>
 </code-well-header>
@@ -380,13 +380,13 @@ vueCode='
   body-text="Looks like there is no data to display here."
 >
   <template #illustration>
-    <dt-illustration-mind></dt-illustration-mind>
+    <dt-illustration-nothing-to-see-here></dt-illustration-nothing-to-see-here>
   </template>
 </dt-empty-state>
 '
 showHtmlWarning />
 
-### No description
+### No Description
 
 <code-well-header>
   <dt-empty-state
@@ -394,7 +394,7 @@ showHtmlWarning />
     header-text="Nothing to see here"
   >
     <template #illustration>
-      <dt-illustration-mind></dt-illustration-mind>
+      <dt-illustration-nothing-to-see-here></dt-illustration-nothing-to-see-here>
     </template>
   </dt-empty-state>
 </code-well-header>
@@ -406,7 +406,7 @@ vueCode='
   header-text="Nothing to see here"
 >
   <template #illustration>
-    <dt-illustration-mind></dt-illustration-mind>
+    <dt-illustration-nothing-to-see-here></dt-illustration-nothing-to-see-here>
   </template>
 </dt-empty-state>
 '
@@ -427,7 +427,7 @@ showHtmlWarning />
       </dt-stack>
     </template>
     <template #illustration>
-      <dt-illustration-mind></dt-illustration-mind>
+      <dt-illustration-nothing-to-see-here></dt-illustration-nothing-to-see-here>
     </template>
   </dt-empty-state>
 </code-well-header>
@@ -446,13 +446,13 @@ vueCode='
     </dt-stack>
   </template>
   <template #illustration>
-    <dt-illustration-mind></dt-illustration-mind>
+    <dt-illustration-nothing-to-see-here></dt-illustration-nothing-to-see-here>
   </template>
 </dt-empty-state>
 '
 showHtmlWarning />
 
-### Small, with muted actions
+### Small, with Muted Actions
 
 <code-well-header>
   <dt-empty-state
@@ -494,9 +494,9 @@ vueCode='
 '
 showHtmlWarning />
 
-## Writing guidelines
+## Writing Guidelines
 
-### Empty State parts
+### Empty State Parts
 
 #### Title
 
@@ -516,7 +516,7 @@ showHtmlWarning />
 
 ### Scenarios
 
-#### Zero state
+#### Zero State
 
 Encourage and guide the user through product engagement.
 
@@ -526,7 +526,7 @@ Description: Enable Ai for calls and meetings and check back here!
 Action: [Show me how]
 ```
 
-#### No results
+#### No Results
 
 Consider the user’s intent and provide guidance to resolve in a useful result.
 
@@ -535,7 +535,7 @@ Title: No matching results
 Description: Try adjusting your search criteria or filters.
 ```
 
-#### New feature
+#### New Feature
 
 Call out interesting new features or services, and entice the user to explore them.
 
@@ -545,7 +545,7 @@ Description: Enable Ai for calls and meetings to view and share a recap.
 Action: [Tell me more]
 ```
 
-#### Not available
+#### Not Available
 
 Be direct in communicating the unavailability of a feature or service, and provide quick actions.
 
@@ -567,7 +567,7 @@ At a minimum, empty state requires a body of content. It can optionally contain 
 
 <script setup>
 import {
-  DtIllustrationMind,
+  DtIllustrationNothingToSeeHere,
   DtIconBox,
 } from '@dialpad/dialtone-icons/vue3';
 </script>

@@ -1,11 +1,15 @@
 <template>
   <dt-tooltip
     :id="id"
+    :inverted="invertedTooltip"
+    v-bind="addClassStyleAttrs($attrs)"
+    :delay="tooltipDelay"
+    :show="showTooltip"
     :offset="[0, 24]"
   >
     <template #anchor>
       <span
-        :class="{ 'dt-recipe-callbar-button--disabled': disabled }"
+        :class="{ 'd-recipe-callbar-button--disabled': disabled }"
       >
         <dt-button
           :importance="buttonImportance"
@@ -16,7 +20,7 @@
           :label-class="callbarButtonTextClass"
           :width="buttonWidth"
           :class="callbarButtonClass"
-          v-bind="$attrs"
+          v-bind="removeClassStyleAttrs($attrs)"
           v-on="callbarButtonListeners"
         >
           <slot />
@@ -26,7 +30,9 @@
         </dt-button>
       </span>
     </template>
-    <slot name="tooltip" />
+    <slot name="tooltip">
+      {{ tooltipText }}
+    </slot>
   </dt-tooltip>
 </template>
 
@@ -34,9 +40,10 @@
 import { CALLBAR_BUTTON_VALID_WIDTH_SIZE } from './callbar_button_constants';
 import { DtButton } from '@/components/button';
 import { DtTooltip } from '@/components/tooltip';
-import utils, { extractVueListeners } from '@/common/utils';
+import utils, { extractVueListeners, removeClassStyleAttrs, addClassStyleAttrs } from '@/common/utils';
 
 export default {
+  compatConfig: { MODE: 3 },
   name: 'DtRecipeCallbarButton',
 
   components: { DtButton, DtTooltip },
@@ -141,6 +148,41 @@ export default {
       default: '',
     },
 
+    /**
+     * Whether the tooltip has an inverted background color.
+     * @values true, false
+     */
+    invertedTooltip: {
+      type: Boolean,
+      default: false,
+    },
+
+    /**
+     * Use this if you would like to manually override the logic for when the tooltip shows.
+     * Otherwise it will just show on hover/focus.
+     * @values null, true, false
+     */
+    showTooltip: {
+      type: Boolean,
+      default: null,
+    },
+
+    /**
+     * The message that displays in the tooltip. This will be overridden by the tooltip slot.
+     */
+    tooltipText: {
+      type: String,
+      default: undefined,
+    },
+
+    /**
+     * Whether there is a delay before the tooltip shows on hover/focus.
+     * @values true, false
+     */
+    tooltipDelay: {
+      type: Boolean,
+      default: undefined,
+    },
   },
 
   emits: [
@@ -157,20 +199,18 @@ export default {
     callbarButtonClass () {
       return [
         this.buttonClass,
-        'dt-recipe-callbar-button',
-        'd-px0',
+        'd-recipe-callbar-button',
         {
-          'dt-recipe-callbar-button--circle': this.circle,
-          'dt-recipe-callbar-button--active': this.active,
-          'dt-recipe-callbar-button--danger': this.danger,
-          'd-btn--disabled d-bgc-transparent': this.disabled,
-          'd-fc-primary': !this.disabled,
+          'd-recipe-callbar-button--circle': this.circle,
+          'd-recipe-callbar-button--active': this.active,
+          'd-recipe-callbar-button--danger': this.danger,
+          'd-btn--disabled': this.disabled,
         }];
     },
 
     callbarButtonTextClass () {
       return [
-        'd-fs-100 lg:d-d-none md:d-d-none sm:d-d-none',
+        'd-recipe-callbar-button__text',
         this.textClass,
       ];
     },
@@ -200,35 +240,10 @@ export default {
       };
     },
   },
+
+  methods: {
+    removeClassStyleAttrs,
+    addClassStyleAttrs,
+  },
 };
 </script>
-
-<style lang="less">
-.dt-recipe-callbar-button:not(.dt-recipe-callbar-button--circle) {
-  line-height: var(--dt-font-line-height-300);
-}
-
-.dt-recipe-callbar-button--circle {
-  border-radius: var(--dt-size-radius-circle);
-}
-
-.dt-recipe-callbar-button.d-btn[disabled] {
-  background-color: unset;
-  opacity: .5;
-}
-
-.dt-recipe-callbar-button--circle.d-btn[disabled] {
-  border-color: unset;
-}
-
-.dt-recipe-callbar-button--active,
-.dt-recipe-callbar-button--active:hover {
-  .base-button__icon {
-    color: var(--primary-color);
-  }
-}
-
-.dt-recipe-callbar-button--disabled {
-  cursor: not-allowed;
-}
-</style>

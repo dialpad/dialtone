@@ -5,7 +5,7 @@ status: ready
 thumb: true
 image: assets/images/components/link.png
 storybook: https://dialtone.dialpad.com/vue/?path=/story/components-link--default
-figma_url: https://www.figma.com/file/2adf7JhZOncRyjYiy2joil/DT-Core%3A-Components-7?node-id=8919%3A21226&viewport=-746%2C-197%2C1.41&t=xHutRjwo1o5zMTgT-11
+figma_url: https://www.figma.com/design/W58r5BkO8qTw3vem9YieJd/DT9-Component-Library--Rebrand-2025-?node-id=5531-26862
 ---
 
 <code-well-header>
@@ -31,7 +31,7 @@ figma_url: https://www.figma.com/file/2adf7JhZOncRyjYiy2joil/DT-Core%3A-Componen
 
 </dialtone-usage>
 
-### Best practices
+### Best Practices
 
 - Use useful, actionable, and descriptive text clearly conveying the hyperlink’s destination. For example, a generic label like "click here" doesn’t convey its target content.
 - Too many links can be overwhelming. Be selective about the number of links in a context.
@@ -43,7 +43,7 @@ figma_url: https://www.figma.com/file/2adf7JhZOncRyjYiy2joil/DT-Core%3A-Componen
 - Users must be able to identify links without relying on color alone.
 - Users must be able to activate hover and focus states with both a mouse and a keyboard.
 
-## Variants and examples
+## Variants and Examples
 
 ### Default
 

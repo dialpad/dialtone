@@ -17,6 +17,7 @@ import { nodeViewProps, NodeViewWrapper } from '@tiptap/vue-3';
 import { DtLink } from '@/components/link';
 
 export default {
+  compatConfig: { MODE: 3 },
   name: 'ChannelComponent',
   components: {
     NodeViewWrapper,

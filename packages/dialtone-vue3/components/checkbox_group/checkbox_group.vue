@@ -9,19 +9,16 @@ import { DtInputGroup } from '../input_group';
  * @see https://dialtone.dialpad.com/components/checkbox_group.html
  */
 export default {
+  compatConfig: { MODE: 3 },
   name: 'DtCheckboxGroup',
 
   extends: DtInputGroup,
-
-  model: {
-    prop: 'selectedValues',
-  },
 
   props: {
     /**
      * Not supported by this component, please use selectedValues
      */
-    value: {
+    modelValue: {
       type: [],
       default: null,
       validator: value => {
@@ -30,7 +27,7 @@ export default {
         }
 
         warn(
-          'Component uses selectedValues to initialize the model, value is not supported by this component',
+          'Component uses selectedValues to initialize the model, modelValue is not supported by this component',
           this,
         );
 
@@ -82,6 +79,13 @@ export default {
      * @type {Array}
      */
     'input',
+    /**
+     * Selected values for the checkbox group
+     *
+     * @event input
+     * @type {Array}
+     */
+    'update:selectedValues',
   ],
 
   data () {
@@ -121,6 +125,7 @@ export default {
       }
 
       this.$emit('input', this.internalValue);
+      this.$emit('update:selectedValues', this.internalValue);
     },
 
     getMessageKey (type, index) {

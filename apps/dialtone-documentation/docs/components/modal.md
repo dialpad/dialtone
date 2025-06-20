@@ -5,7 +5,7 @@ status: ready
 thumb: true
 image: assets/images/components/modal.png
 storybook: https://dialtone.dialpad.com/vue/?path=/story/components-modal--default
-figma_url: https://www.figma.com/file/2adf7JhZOncRyjYiy2joil/DT-Core%3A-Components-7?node-id=8923%3A20396&viewport=-724%2C-52%2C0.38&t=xHutRjwo1o5zMTgT-11
+figma_url: https://www.figma.com/design/W58r5BkO8qTw3vem9YieJd/DT9-Component-Library--Rebrand-2025-?node-id=4454-10944
 ---
 <code-well-header>
   <example-modal />
@@ -38,7 +38,7 @@ Although highly versatile, this doesn't mean modal dialogs are fit for all purpo
 
 </dialtone-usage>
 
-### Best practices
+### Best Practices
 
 - Ideally, users trigger the modal, not the system, and should not be a surprise. Its appearance should reflect user intent to invoke it.  Uninvited modals may surprise the user and result in a quick dismissal of the window.
 - Treat modals as a last resort. Consider whether there’s another component or UI that might be  less disruptive for the user.
@@ -60,7 +60,7 @@ Although highly versatile, this doesn't mean modal dialogs are fit for all purpo
 
 <component-accessible-table component-name="modal"></component-accessible-table>
 
-## Variants and examples
+## Variants and Examples
 
 ### Base Style
 
@@ -97,7 +97,7 @@ htmlCode='
         <span class="d-icon__wrapper">
           <div aria-busy="true" role="status" aria-label="" class="d-icon d-icon--size-300" style="display: none;">
             <div
-              class="skeleton-placeholder d-bar-circle skeleton-placeholder--animate"
+              class="d-skeleton-placeholder d-bar-circle d-skeleton-placeholder--animate"
               style="animation-delay: 0ms; animation-duration: 1000ms; min-width: 100%; max-width: 100%; min-height: 100%; max-height: 100%;"
             ></div>
           </div>
@@ -143,7 +143,7 @@ vueCode='
 '
 showHtmlWarning />
 
-### Fixed header and footer
+### Fixed Header and Footer
 
 This is the default behavior that adds the scroll automatically in the modal content and leaves the header and footer fixed.
 
@@ -180,7 +180,7 @@ htmlCode='
         <span class="d-icon__wrapper">
           <div aria-busy="true" role="status" aria-label="" class="d-icon d-icon--size-300" style="display: none;">
             <div
-              class="skeleton-placeholder d-bar-circle skeleton-placeholder--animate"
+              class="d-skeleton-placeholder d-bar-circle d-skeleton-placeholder--animate"
               style="animation-delay: 0ms; animation-duration: 1000ms; min-width: 100%; max-width: 100%; min-height: 100%; max-height: 100%;"
             ></div>
           </div>
@@ -265,7 +265,7 @@ htmlCode='
         <span class="d-icon__wrapper">
           <div aria-busy="true" role="status" aria-label="" class="d-icon d-icon--size-300" style="display: none;">
             <div
-              class="skeleton-placeholder d-bar-circle skeleton-placeholder--animate"
+              class="d-skeleton-placeholder d-bar-circle d-skeleton-placeholder--animate"
               style="animation-delay: 0ms; animation-duration: 1000ms; min-width: 100%; max-width: 100%; min-height: 100%; max-height: 100%;"
             ></div>
           </div>
@@ -350,7 +350,7 @@ htmlCode='
         <span class="d-icon__wrapper">
           <div aria-busy="true" role="status" aria-label="" class="d-icon d-icon--size-300" style="display: none;">
             <div
-              class="skeleton-placeholder d-bar-circle skeleton-placeholder--animate"
+              class="d-skeleton-placeholder d-bar-circle d-skeleton-placeholder--animate"
               style="animation-delay: 0ms; animation-duration: 1000ms; min-width: 100%; max-width: 100%; min-height: 100%; max-height: 100%;"
             ></div>
           </div>
@@ -449,7 +449,7 @@ htmlCode='
         <span class="d-icon__wrapper">
           <div aria-busy="true" role="status" aria-label="" class="d-icon d-icon--size-300" style="display: none;">
             <div
-              class="skeleton-placeholder d-bar-circle skeleton-placeholder--animate"
+              class="d-skeleton-placeholder d-bar-circle d-skeleton-placeholder--animate"
               style="animation-delay: 0ms; animation-duration: 1000ms; min-width: 100%; max-width: 100%; min-height: 100%; max-height: 100%;"
             ></div>
           </div>
@@ -497,7 +497,7 @@ vueCode='
 '
 showHtmlWarning />
 
-### Custom header and content
+### Custom Header and Content
 
 You're not limited to using plain title and copy text.
 

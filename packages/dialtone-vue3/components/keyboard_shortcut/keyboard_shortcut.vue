@@ -16,9 +16,9 @@
       v-for="(item, i) in formattedShortcutSplit"
     >
       <component
+        :is="icons[item]"
         v-if="icons[item]"
         :key="`${i}-${item}`"
-        :is="icons[item]"
         size="100"
         aria-hidden="true"
         :class="[
@@ -65,6 +65,7 @@ const SHORTCUTS_ICON_ALIASES = {
  * @see https://dialtone.dialpad.com/components/keyboard_shortcut.html
  */
 export default {
+  compatConfig: { MODE: 3 },
   name: 'DtKeyboardShortcut',
 
   components: {

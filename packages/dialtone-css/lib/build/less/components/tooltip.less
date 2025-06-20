@@ -27,11 +27,31 @@
 //  ============================================================================
 //  $   BASE STYLE
 //  ----------------------------------------------------------------------------
+
+@import (inline) 'tippy.js/dist/svg-arrow.css';
+
 .d-tooltip-container {
   position: relative;
   display: inline-flex;
   align-items: center;
   justify-content: center;
+}
+
+.tippy-box[data-reference-hidden] {
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.tippy-box > .tippy-svg-arrow {
+  fill: var(--dt-color-surface-contrast);
+}
+
+.tippy-box[data-theme~='inverted'] > .tippy-svg-arrow {
+  fill: var(--dt-color-surface-contrast-inverted);
+}
+
+.tippy-box[data-animation='fade'][data-state='hidden'] {
+  opacity: 0;
 }
 
 .d-tooltip {
@@ -54,6 +74,7 @@
   line-height: var(--tooltip-line-height);
   letter-spacing: calc(var(--dt-space-100) * 0.25);
   text-align: center;
+  overflow-wrap: break-word;
   background-color: var(--tooltip-color-background);
   border-radius: var(--tooltip-border-radius);
 
@@ -70,8 +91,8 @@
 .d-tooltip--inverted {
   //  --  COMPONENT CSS VARS
   //  -----------------------
-  --tooltip-color-background: var(--dt-color-surface-moderate);
-  --tooltip-color-text: var(--dt-color-foreground-secondary);
+  --tooltip-color-background: var(--dt-color-surface-contrast-inverted);
+  --tooltip-color-text: var(--dt-color-foreground-primary);
 }
 
 //  ============================================================================

@@ -1,10 +1,11 @@
 <template>
   <dt-toggle
-    :checked="$attrs.checked"
+    :model-value="$attrs.modelValue"
     :disabled="$attrs.disabled"
     :size="$attrs.size"
     :show-icon="$attrs.showIcon"
     :label-class="$attrs.labelClass"
+    :wrapper-class="$attrs.wrapperClass"
     :label-child-props="$attrs.labelChildProps"
     :toggle-on-click="$attrs.toggleOnClick"
     @change="$attrs.onChange"

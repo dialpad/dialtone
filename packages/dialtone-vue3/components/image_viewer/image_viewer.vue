@@ -67,11 +67,13 @@
 
 <script>
 import Modal from '@/common/mixins/modal';
+import { returnFirstEl } from '@/common/utils';
 import { EVENT_KEYNAMES } from '@/common/constants';
 import { DtIconClose } from '@dialpad/dialtone-icons/vue3';
 import { DtButton } from '@/components/button';
 
 export default {
+  compatConfig: { MODE: 3 },
   name: 'DtImageViewer',
 
   components: {
@@ -243,7 +245,7 @@ export default {
     },
 
     focusAfterOpen () {
-      this.$refs.closeImage?.$el.focus();
+      returnFirstEl(this.$refs.closeImage?.$el)?.focus();
     },
 
     trapFocus (e) {

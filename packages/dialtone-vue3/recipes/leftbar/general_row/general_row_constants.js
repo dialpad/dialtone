@@ -16,17 +16,17 @@ export const LEFTBAR_GENERAL_ROW_TYPES = {
 };
 
 export const LEFTBAR_GENERAL_ROW_CONTACT_CENTER_COLORS = {
-  'magenta-200': 'd-bgc-magenta-200',
-  'green-200': 'd-bgc-green-200',
-  'gold-300': 'd-bgc-gold-300',
-  'purple-600': 'd-bgc-purple-600',
-  'magenta-300': 'd-bgc-magenta-300',
-  'purple-300': 'd-bgc-purple-300',
-  'green-500': 'd-bgc-green-500',
-  'purple-100': 'd-bgc-purple-100',
-  'magenta-400': 'd-bgc-magenta-400',
-  'magenta-100': 'd-bgc-magenta-100',
-  'black-300': 'd-bgc-black-300',
+  'magenta-100': 'd-recipe-leftbar-general-row__contact-center--magenta-100',
+  'magenta-200': 'd-recipe-leftbar-general-row__contact-center--magenta-200',
+  'magenta-300': 'd-recipe-leftbar-general-row__contact-center--magenta-300',
+  'magenta-400': 'd-recipe-leftbar-general-row__contact-center--magenta-400',
+  'green-200': 'd-recipe-leftbar-general-row__contact-center--green-200',
+  'green-500': 'd-recipe-leftbar-general-row__contact-center--green-500',
+  'gold-300': 'd-recipe-leftbar-general-row__contact-center--gold-300',
+  'purple-100': 'd-recipe-leftbar-general-row__contact-center--purple-100',
+  'purple-300': 'd-recipe-leftbar-general-row__contact-center--purple-300',
+  'purple-600': 'd-recipe-leftbar-general-row__contact-center--purple-600',
+  'black-300': 'd-recipe-leftbar-general-row__contact-center--black-300',
 };
 
 export const LEFTBAR_GENERAL_ROW_CONTACT_CENTER_VALIDATION_ERROR = 'If type is contact center, color must be one' +

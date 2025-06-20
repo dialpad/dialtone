@@ -4,9 +4,9 @@
  * because sd-transforms handles the transforms for CSS.
  */
 
-import Color from 'tinycolor2';
+import { colorsFilter, colorModifiersFilter, DeviceObjectFormat, deviceTransformColorModifiers, tokenColorToDeviceColor } from './transform-util.js';
 
-const SIZE_IDENTIFIERS = ['fontSizes', 'sizing', 'borderWidth', 'borderRadius', 'blur', 'spread', 'x', 'y', 'dimension'];
+const SIZE_IDENTIFIERS = ['sizing', 'borderWidth', 'borderRadius', 'blur', 'spread', 'x', 'y', 'dimension'];
 const SPACING_IDENTIFIERS = ['spacing'];
 const FONT_FAMILY_IDENTIFIERS = ['fontFamily'];
 const FONT_SIZE_IDENTIFIERS = ['fontSizes', 'fontSize'];
@@ -65,38 +65,74 @@ export function registerDialtoneTransforms (styleDictionary) {
   });
 
   styleDictionary.registerTransform({
+    name: 'dt/android/xml/size/resolveMath',
+    type: 'value',
+    transitive: true,
+    filter: function (token) {
+      return [...SPACING_IDENTIFIERS, ...SIZE_IDENTIFIERS].includes(token.type);
+    },
+    transform: (token) => {
+      // replace unmathable characters with empty string
+      const mathString = token.value.replace(/dp|sp|em|px|%/g, '');
+      // eslint-disable-next-line no-eval
+      const result = eval(mathString).toFixed(2);
+      return `${result}dp`;
+    },
+  });
+
+  styleDictionary.registerTransform({
+    name: 'dt/android/xml/size/pxToDp',
+    type: 'value',
+    transitive: true,
+    filter: function (token) {
+      return [...SPACING_IDENTIFIERS, ...SIZE_IDENTIFIERS].includes(token.type);
+    },
+    transform: (token) => {
+      const floatVal = parseFloat(token.value);
+
+      if (isNaN(floatVal)) {
+        throwSizeError(token.path, token.value, 'dp');
+      }
+
+      return `${floatVal.toFixed(2)}dp`;
+    },
+  });
+
+  styleDictionary.registerTransform({
     name: 'dt/android/xml/color',
     type: 'value',
-    filter: function (token) {
-      return ['color'].includes(token.type);
-    },
+    filter: colorsFilter,
     transform: function (token) {
-      if (token.value === 'transparent') { return '#00ffffff'; }
-      const str = Color(token.value).toHex8();
-      return '#' + str.slice(6) + str.slice(0, 6);
+      return tokenColorToDeviceColor(token.value, DeviceObjectFormat.ANDROID_XML);
+    },
+  });
+
+  styleDictionary.registerTransform({
+    name: 'dt/android/xml/color/modifiers',
+    type: 'value',
+    transitive: true,
+    filter: colorModifiersFilter,
+    transform: function (token) {
+      return deviceTransformColorModifiers(token, DeviceObjectFormat.ANDROID_XML);
     },
   });
 
   styleDictionary.registerTransform({
     name: 'dt/android/compose/color',
     type: 'value',
-    transitive: true,
-    filter: function (token) {
-      return ['color'].includes(token.type);
-    },
+    filter: colorsFilter,
     transform: (token) => {
-      if (token.$extensions?.['studio.tokens']?.modify?.type === 'alpha') {
-        const alpha = parseFloat(token.$extensions['studio.tokens'].modify.value);
-        const alphaHex = Math.round(alpha * 255).toString(16).padStart(2, '0');
-        // ex: token.value = Color(0xff222222)
-        const rgb = token.value.slice(10, 16);
-        return `Color(0x${alphaHex + rgb})`;
-      }
-      if (!Color(token.value).isValid()) {
-        return token.value;
-      }
-      const hex8 = Color(token.value).toHex8();
-      return `Color(0x${hex8.slice(6) + hex8.slice(0, 6)})`;
+      return tokenColorToDeviceColor(token.value, DeviceObjectFormat.ANDROID_COMPOSE);
+    },
+  });
+
+  styleDictionary.registerTransform({
+    name: 'dt/android/compose/color/modifiers',
+    type: 'value',
+    transitive: true,
+    filter: colorModifiersFilter,
+    transform: (token) => {
+      return deviceTransformColorModifiers(token, DeviceObjectFormat.ANDROID_COMPOSE);
     },
   });
 
@@ -129,8 +165,12 @@ export function registerDialtoneTransforms (styleDictionary) {
   styleDictionary.registerTransform({
     name: 'dt/android/compose/size/pxToDp',
     type: 'value',
+    transitive: true,
     filter: function (token) {
-      return [...SPACING_IDENTIFIERS, ...SIZE_IDENTIFIERS].includes(token.type);
+      return [...SPACING_IDENTIFIERS, ...SIZE_IDENTIFIERS].includes(token.type) &&
+        // The fontSize token in typography tokens is a 'dimension' type for some reason,
+        // so have this special case to exclude it from this transform.
+        !FONT_SIZE_IDENTIFIERS.includes(token.name);
     },
     transform: (token) => {
       const floatVal = parseFloat(token.value);
@@ -147,8 +187,12 @@ export function registerDialtoneTransforms (styleDictionary) {
   styleDictionary.registerTransform({
     name: 'dt/android/compose/size/pxToSp',
     type: 'value',
+    transitive: true,
     filter: function (token) {
-      return [...FONT_SIZE_IDENTIFIERS].includes(token.type);
+      return [...FONT_SIZE_IDENTIFIERS].includes(token.type) ||
+        // The fontSize token in typography tokens is a 'dimension' type for some reason,
+        // so have this special case to include it in this transform.
+        FONT_SIZE_IDENTIFIERS.includes(token.name);
     },
     transform: (token) => {
       const floatVal = parseFloat(token.value);
@@ -174,7 +218,7 @@ export function registerDialtoneTransforms (styleDictionary) {
       if (token.value.includes('.dp')) unit = 'dp';
       if (token.value.includes('.sp')) unit = 'sp';
       if (token.value.includes('.em')) unit = 'em';
-      const mathString = token.value.replace(/\.dp|\.sp|\.em/g, '');
+      const mathString = token.value.replace(/\.dp|\.sp|\.em|px|%/g, '');
       // eslint-disable-next-line no-eval
       const result = eval(mathString);
       return `${result}.${unit}`;
@@ -249,15 +293,19 @@ export function registerDialtoneTransforms (styleDictionary) {
   styleDictionary.registerTransform({
     name: 'dt/ios/color',
     type: 'value',
-    filter: function (token) {
-      return ['color'].includes(token.type);
-    },
+    filter: colorsFilter,
     transform: (token) => {
-      const { r, g, b, a } = Color(token.value).toRgb();
-      const rFixed = (r / 255.0).toFixed(3);
-      const gFixed = (g / 255.0).toFixed(3);
-      const bFixed = (b / 255.0).toFixed(3);
-      return `UIColor(red: ${rFixed}, green: ${gFixed}, blue: ${bFixed}, alpha: ${a})`;
+      return tokenColorToDeviceColor(token.value, DeviceObjectFormat.IOS_SWIFT);
+    },
+  });
+
+  styleDictionary.registerTransform({
+    name: 'dt/ios/color/modifiers',
+    type: 'value',
+    transitive: true,
+    filter: colorModifiersFilter,
+    transform: (token) => {
+      return deviceTransformColorModifiers(token, DeviceObjectFormat.IOS_SWIFT);
     },
   });
 

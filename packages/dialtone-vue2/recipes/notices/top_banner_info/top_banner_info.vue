@@ -1,21 +1,21 @@
 <template>
   <div
-    class="dt-top-banner-info"
+    class="d-recipe-top-banner-info"
     :class="bannerInfoClass"
     data-qa="banner-info"
   >
-    <div class="dt-top-banner-info__left">
+    <div class="d-recipe-top-banner-info__left">
       <slot name="left" />
     </div>
 
     <div
-      class="dt-top-banner-info__middle"
+      class="d-recipe-top-banner-info__middle"
       data-qa="banner-info--middle"
     >
       <slot />
     </div>
 
-    <div class="dt-top-banner-info__right">
+    <div class="d-recipe-top-banner-info__right">
       <slot name="right" />
     </div>
   </div>
@@ -45,48 +45,17 @@ export default {
       const bgColors = {
         // these are too specific, so for now I'm at least updating the resultant semantic value
         // TODO: breaking change: update to be more abstract
-        green300: 'd-bgc-success',
-        green100: 'd-bgc-success',
-        red200: 'd-bgc-critical',
-        red100: 'd-bgc-critical',
-        gold200: 'd-bgc-warning',
-        gold100: 'd-bgc-warning',
-        black100: 'd-bgc-info',
-        white: 'd-bgc-primary',
+        green100: 'd-recipe-top-banner-info--success',
+        green300: 'd-recipe-top-banner-info--success',
+        red100: 'd-recipe-top-banner-info--critical',
+        red200: 'd-recipe-top-banner-info--critical',
+        gold100: 'd-recipe-top-banner-info--warning',
+        gold200: 'd-recipe-top-banner-info--warning',
+        black100: 'd-recipe-top-banner-info--info',
+        white: 'd-recipe-top-banner-info--primary',
       };
       return [bgColors[this.colorCode]];
     },
   },
 };
 </script>
-
-<style lang="less">
-.dt-top-banner-info {
-  font-size: var(--dt-font-size-100);
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  color: var(--dt-color-foreground-primary);
-
-   &__left {
-     margin: var(--dt-space-300) 0 var(--dt-space-300) var(--dt-space-400);
-     min-width: 20%;
-  }
-  &__middle {
-     display: flex;
-     align-items: center;
-     gap: var(--dt-size-300);
-     margin-top: var(--dt-space-300);
-    margin-bottom: var(--dt-space-300);
-  }
-  &__right {
-     display: flex;
-     align-items: baseline;
-     justify-content: flex-end;
-     gap: var(--dt-size-300);
-     margin: var(--dt-space-300) var(--dt-space-500) var(--dt-space-300) 0;
-     min-width: 20%;
-     text-align: right;
-  }
-}
-</style>

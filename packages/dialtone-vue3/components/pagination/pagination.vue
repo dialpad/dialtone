@@ -7,10 +7,9 @@
       class="d-pagination__button"
       data-qa="dt-pagination-prev"
       :aria-label="prevAriaLabel"
-      :kind="isFirstPage ? 'default' : 'muted'"
-      :importance="isFirstPage ? 'primary' : 'clear'"
+      kind="muted"
+      importance="clear"
       :disabled="isFirstPage"
-      :class="isFirstPage ? 'd-fc-black-300 d-bgc-transparent' : 'd-fc-tertiary'"
       @click="changePage(currentPage - 1)"
     >
       <template #icon>
@@ -53,8 +52,7 @@
       :aria-label="nextAriaLabel"
       :disabled="isLastPage"
       kind="muted"
-      :importance="isLastPage ? 'primary' : 'clear'"
-      :class="isLastPage ? 'd-fc-black-300 d-bgc-transparent' : 'd-fc-tertiary'"
+      importance="clear"
       @click="changePage(currentPage + 1)"
     >
       <template #icon>
@@ -75,6 +73,7 @@ import { DtIconChevronLeft, DtIconChevronRight, DtIconMoreHorizontal } from '@di
  * @see https://dialtone.dialpad.com/components/pagination.html
  */
 export default {
+  compatConfig: { MODE: 3 },
   name: 'DtPagination',
 
   components: {
@@ -142,6 +141,16 @@ export default {
       type: Number,
       default: 5,
     },
+
+    /**
+     * Sometimes you may need to hide start and end page number buttons when moving in between.
+     * This prop will be used to hide the first and last page buttons when not near the edges.
+     * This is useful when your backend does not support offset and you can only use cursor based pagination.
+     */
+    hideEdges: {
+      type: Boolean,
+      default: false,
+    },
   },
 
   emits: [
@@ -177,23 +186,57 @@ export default {
         return this.range(1, this.totalPages);
       }
 
-      const start = this.maxVisible - 1;
-      const end = this.totalPages - start + 1;
+      let start = this.maxVisible - 1;
+      let end = this.totalPages - start + 1;
+
+      // if hideEdges is true, modify the start and
+      // end to account for the hidden pages
+      if (this.hideEdges) {
+        start = start + 1;
+        end = end - 1;
+      }
 
       if (this.currentPage < start) {
-        return [...this.range(1, start), '...', this.totalPages];
+        const pages = [...this.range(1, start), '...'];
+        if (!this.hideEdges) {
+          // add last page to the end
+          pages.push(this.totalPages);
+        }
+        return pages;
       }
 
       if (this.currentPage > end) {
-        return [1, '...', ...this.range(end, this.totalPages)];
+        const pages = ['...', ...this.range(end, this.totalPages)];
+        if (!this.hideEdges) {
+          // add first page to the beginning
+          pages.unshift(1);
+        }
+        return pages;
       }
 
       // rounding to the nearest odd according to the maxlength to always show the page number in the middle.
       const total = this.maxVisible - (3 - this.maxVisible % 2);
       const centerIndex = Math.floor(total / 2);
-      const left = this.currentPage - centerIndex;
-      const right = this.currentPage + centerIndex;
-      return [1, '...', ...this.range(left, right), '...', this.totalPages];
+      let left = this.currentPage - centerIndex;
+      let right = this.currentPage + centerIndex;
+
+      // if hideEdge is true, modify the left and right to account for the hidden pages
+      if (this.hideEdges) {
+        left = left - 1;
+        right = right + 1;
+      }
+
+      const pages = ['...', ...this.range(left, right), '...'];
+      if (!this.hideEdges) {
+        return [1, ...pages, this.totalPages];
+      }
+      return pages;
+    },
+  },
+
+  watch: {
+    activePage () {
+      this.currentPage = this.activePage;
     },
   },
 

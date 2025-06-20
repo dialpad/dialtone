@@ -1,8 +1,8 @@
 <template>
   <button
-    :class="['dt-leftbar-unread-pill', `dt-leftbar-unread-pill--${kind}`]"
+    :class="['d-recipe-leftbar-unread-pill', `d-recipe-leftbar-unread-pill-${kind}`]"
     type="button"
-    data-qa="dt-leftbar-unread-pill"
+    data-qa="dt-recipe-leftbar-unread-pill"
     v-on="$listeners"
   >
     <dt-icon-arrow-up
@@ -13,8 +13,10 @@
       v-else
       size="300"
     />
-    <span data-qa="dt-leftbar-unread-pill__label">
-      <slot />
+    <span data-qa="dt-recipe-leftbar-unread-pill__label">
+      <slot>
+        {{ text }}
+      </slot>
     </span>
   </button>
 </template>
@@ -22,6 +24,8 @@
 <script>
 import { DtIconArrowUp, DtIconArrowDown } from '@dialpad/dialtone-icons/vue2';
 import { UNREAD_PILL_DIRECTIONS, UNREAD_PILL_KINDS } from './unread_pill_constants';
+import { DtLocalizationMixin } from '@/common/mixins';
+
 export default {
   name: 'DtRecipeUnreadPill',
 
@@ -29,6 +33,8 @@ export default {
     DtIconArrowUp,
     DtIconArrowDown,
   },
+
+  mixins: [DtLocalizationMixin],
 
   props: {
     /**
@@ -61,32 +67,13 @@ export default {
      */
     'click',
   ],
+
+  computed: {
+    text () {
+      return this.kind === 'mentions'
+        ? this.i18n.$t('DIALTONE_UNREAD_PILL_MENTIONS_TEXT')
+        : this.i18n.$t('DIALTONE_UNREAD_PILL_MESSAGES_TEXT');
+    },
+  },
 };
 </script>
-
-<style lang="less">
-.dt-leftbar-unread-pill {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: var(--dt-space-200) var(--dt-space-500) var(--dt-space-200) var(--dt-space-400);
-  gap: var(--dt-space-300);
-  font-size: var(--dt-font-size-100);
-  box-shadow: var(--dt-shadow-medium);
-  border-radius: var(--dt-size-radius-pill);
-  border: none;
-  line-height: var(--dt-font-line-height-600);
-  cursor: pointer;
-
-  &--mentions {
-    font-weight: var(--dt-font-weight-bold);
-    background-color: var(--dt-theme-mention-color-background);
-    color: var(--dt-theme-mention-color-foreground);
-  }
-
-  &--messages {
-    background-color: var(--dt-color-surface-contrast);
-    color: var(--dt-color-foreground-secondary-inverted);
-  }
-}
-</style>

@@ -1,19 +1,21 @@
 ---
-title: Columns & layouts
+title: Columns & Layouts
 description: Utilities for flex columns and common flex layouts.
 ---
 
-## Creating flex columns
+## Creating Flex Columns
 
 Use `d-fl-col{n}` to create uniformly sized children within an element.
 
-<code-well-header class="d-d-flex d-fd-column d-p16 d-bgc-purple-100 d-bgo50 d-w100p d-hmx464 d-of-y-scroll d-stack8" custom>
-  <div v-for="(i, index) in columns" class="d-d-flex d-fd-column d-p8 d-bar8 d-bgc-purple-100">
-    <code>.d-fl-col{{i}}</code>
-    <div class="d-cg8 d-of-auto" :class="`d-fl-col${i}`">
-      <div v-for="(col) in columns.slice(0, i)" class="d-fl-center d-p16 d-bar4 d-bgc-purple-300 d-fs-200 d-fw-bold">{{ col }}</div>
+<code-well-header>
+  <dt-stack gap="500" class="d-w100p">
+    <div v-for="(i, index) in columns" class="d-p8 d-bar8 d-bgc-moderate d-w100p">
+      <code class="d-bgc-transparent">.d-fl-col{{i}}</code>
+      <div class="d-cg8 d-of-auto" :class="`d-fl-col${i}`">
+        <div v-for="(col) in columns.slice(0, i)" class="d-fl-center d-p16 d-bar4 d-bgc-moderate-opaque">{{ col }}</div>
+      </div>
     </div>
-  </div>
+  </dt-stack>
 </code-well-header>
 
 ```html
@@ -31,19 +33,21 @@ Use `d-fl-col{n}` to create uniformly sized children within an element.
 <div class="d-fl-col12 d-cg8">...</div>
 ```
 
-## Flex column gaps
+## Flex Column Gaps
 
 Use `d-cg{n}` to create uniform gaps between flex columns within an element.
 
-<code-well-header class="d-d-flex d-fd-column d-p16 d-bgc-purple-100 d-bgo50 d-w100p d-hmx464 d-of-y-scroll d-stack8" custom>
-  <div class="d-d-flex d-fd-column d-p8 d-bar8 d-bgc-purple-100" v-for="i in gaps">
-    <code>.d-cg{{ i }}</code>
-    <div class="d-fl-col3 d-of-auto" :class="`d-cg${i}`">
-      <div class="d-fl-center d-p16 d-bar4 d-bgc-purple-300 d-fs-200 d-fw-bold">1</div>
-      <div class="d-fl-center d-p16 d-bar4 d-bgc-purple-300 d-fs-200 d-fw-bold">2</div>
-      <div class="d-fl-center d-p16 d-bar4 d-bgc-purple-300 d-fs-200 d-fw-bold">3</div>
-    </div>
-  </div>
+<code-well-header>
+  <dt-stack gap="500" class="d-w100p">
+    <dt-stack v-for="i in gaps" gap="400" class="d-p8 d-bar8 d-bgc-moderate d-w100p">
+      <code class="d-bgc-transparent">.d-cg{{ i }}</code>
+      <div class="d-fl-col3 d-of-auto" :class="`d-cg${i}`">
+        <div class="d-fl-center d-p16 d-bar4 d-bgc-moderate-opaque">1</div>
+        <div class="d-fl-center d-p16 d-bar4 d-bgc-moderate-opaque">2</div>
+        <div class="d-fl-center d-p16 d-bar4 d-bgc-moderate-opaque">3</div>
+      </div>
+    </dt-stack>
+  </dt-stack>
 </code-well-header>
 
 ```html
@@ -61,14 +65,16 @@ Use `d-cg{n}` to create uniform gaps between flex columns within an element.
 <div class="d-fl-col3 d-cg64">...</div>
 ```
 
-## Centering objects
+## Centering Objects
 
 By default flexed items align to `flex-start` both horizontally and vertically (effectively top, left). Use `d-fl-center` to center-center child items within an element.
 
-<code-well-header class="d-fl-center d-p24 d-bgc-green-100 d-bgo50 d-w100p d-hmn216" custom>
-  <div class="d-fl-center d-w48 d-h48 d-m8 d-p16 d-bgc-green-200 d-bar4 d-fs-300 d-fw-bold">1</div>
-  <div class="d-fl-center d-w64 d-h64 d-m8 d-p16 d-bgc-green-200 d-bar4 d-fs-300 d-fw-bold">2</div>
-  <div class="d-fl-center d-w48 d-h48 d-m8 d-p16 d-bgc-green-200 d-bar4 d-fs-300 d-fw-bold">3</div>
+<code-well-header>
+  <div class="d-fl-center d-w100p d-hmn216 d-bgc-moderate">
+    <div class="d-fl-center d-w48 d-h48 d-m8 d-p16 d-bgc-moderate-opaque d-bar4">1</div>
+    <div class="d-fl-center d-w64 d-h64 d-m8 d-p16 d-bgc-moderate-opaque d-bar4">2</div>
+    <div class="d-fl-center d-w48 d-h48 d-m8 d-p16 d-bgc-moderate-opaque d-bar4">3</div>
+  </div>
 </code-well-header>
 
 ```html
@@ -92,21 +98,19 @@ By default flexed items align to `flex-start` both horizontally and vertically (
 
 ## Classes
 
-<div class="d-h464 d-of-y-scroll d-bb d-bc-black-200">
-  <utility-class-table>
-    <template #content>
-      <tbody>
-        <tr v-for="i in columns">
-          <th scope="row" class="d-code--sm d-fc-purple-400">.d-fl-col{{ i }}</th>
-          <td class="d-code--sm d-ws-pre">> *{ flex-basis: calc({{ calcFlexBasis(i) }}% - (var(--fl-gap)* 2)); }</td>
-        </tr>
-      </tbody>
-      <tbody>
-        <tr v-for="i in gaps">
-          <th scope="row" class="d-code--sm d-fc-purple-400">.d-cg{{ i }}</th>
-          <td class="d-code--sm d-ws-pre">> * { --fl-gap: {{ calcGap(i) }} !important; }</td>
-        </tr>
-      </tbody>
-    </template>
-  </utility-class-table>
-</div>
+<utility-class-table>
+  <template #content>
+    <tbody>
+      <tr v-for="i in columns">
+        <th scope="row" class="d-code--sm d-docsite-code">.d-fl-col{{ i }}</th>
+        <td class="d-code--sm d-ws-pre">> *{ flex-basis: calc({{ calcFlexBasis(i) }}% - (var(--fl-gap)* 2)); }</td>
+      </tr>
+    </tbody>
+    <tbody>
+      <tr v-for="i in gaps">
+        <th scope="row" class="d-code--sm d-docsite-code">.d-cg{{ i }}</th>
+        <td class="d-code--sm d-ws-pre">> * { --fl-gap: {{ calcGap(i) }} !important; }</td>
+      </tr>
+    </tbody>
+  </template>
+</utility-class-table>

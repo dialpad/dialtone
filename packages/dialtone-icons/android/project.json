@@ -1,0 +1,30 @@
+{
+  "name": "dialtone-icons-android",
+  "targets": {
+    "clean-dist": {
+      "executor": "nx:run-commands",
+      "options": {
+        "cwd": "{projectRoot}",
+        "commands": [
+          "rm -rf ./dist",
+          "rm -rf ./src/kotlin",
+          "rm -rf ./src/res"
+        ]
+      }
+    },
+    "build:android": {
+      "executor": "nx:run-commands",
+      "dependsOn": ["clean-dist"],
+      "options": {
+        "cwd": "{projectRoot}",
+        "commands": [
+          "valkyrie-cli/bin/valkyrie iconpack --output-path=./src/kotlin/icons --package-name=dialtone.dialpad.icons --iconpack-name=DialtoneIcons",
+          "valkyrie-cli/bin/valkyrie svgxml2imagevector --input-path=./../dist/svg/icons --output-path=./src/kotlin/icons --package-name=dialtone.dialpad.icons --iconpack-name=DialtoneIcons",
+          "mkdir -p ./src/res/raw",
+          "ls ./src/kotlin/icons | grep -E '.*\\.kt' | grep -v DialtoneIcons | cut -d . -f 1 > ./src/res/raw/icons.txt"
+        ],
+        "parallel": false
+      }
+    }
+  }
+}
