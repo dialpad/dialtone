@@ -1,7 +1,6 @@
 # Dialtone
 DIALTONE_CLOSE_BUTTON = 点击关闭
 DIALTONE_BREADCRUMBS_ARIA_LABEL = 面包屑导航
-DIALTONE_LOADING = 正在加载
 DIALTONE_UNREAD_MESSAGE_COUNT_TEXT =
     { $unreadCount ->
         [0] 没有未读消息
