@@ -1,3 +1,10 @@
+# [8.60.0](https://github.com/dialpad/dialtone/compare/dialtone-css/v8.59.0...dialtone-css/v8.60.0) (2025-06-21)
+
+
+### Features
+
+* **Loader:** DLT-2556 component MVP ([#800](https://github.com/dialpad/dialtone/issues/800)) ([aac2d38](https://github.com/dialpad/dialtone/commit/aac2d381278ea35c44139b4f4ee4b183fca64c3c))
+
 # [8.59.0](https://github.com/dialpad/dialtone/compare/dialtone-css/v8.58.4...dialtone-css/v8.59.0) (2025-06-11)
 
 
