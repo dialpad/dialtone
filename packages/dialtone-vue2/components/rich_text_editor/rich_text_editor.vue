@@ -730,11 +730,8 @@ export default {
               const textData = clipboardData.getData('text/plain');
 
               if (textData) {
-                // Insert as plain text only (preserving any HTML tags as text)
-                const { tr } = view.state;
-                const { from, to } = view.state.selection;
-                tr.insertText(textData, from, to);
-                view.dispatch(tr);
+                // Insert as plain text preserving line breaks as hard breaks
+                this.insertPlainTextWithHardBreaks(view, textData);
                 return true; // Prevent default paste behavior
               }
             }
@@ -745,17 +742,7 @@ export default {
           // Moves the <br /> tags inside the previous closing tag to avoid
           // Prosemirror wrapping them within another </p> tag.
           transformPastedHTML (html) {
-            // Preserve line breaks by converting them to hard breaks before other transformations
-            const transformedHtml = html
-              // Convert standalone br tags to hard breaks
-              .replace(/<br\s*\/?>/gi, '<br />')
-              // Preserve line breaks at end of paragraphs and divs
-              .replace(/(<\/(?:p|div)>)\s*\n/gi, '$1<br />')
-              // Convert newlines followed by text to br tags
-              .replace(/\n(?=\S)/g, '<br />');
-
-            // Then apply the original transformation
-            return transformedHtml.replace(/(<\/\w+>)((<br \/>)+)/g, '$2$3$1');
+            return html.replace(/(<\/\w+>)((<br \/>)+)/g, '$2$3$1');
           },
         },
       });
@@ -855,11 +842,38 @@ export default {
       }
 
       // Otherwise replace the content (resets the cursor position).
-      this.editor.commands.setContent(newValue, false);
+      this.editor.commands.setContent(newValue, false, { preserveWhitespace: 'full' });
     },
 
     destroyEditor () {
       this.editor.destroy();
+    },
+
+    insertPlainTextWithHardBreaks (view, textData) {
+      const { tr } = view.state;
+      const { from, to } = view.state.selection;
+
+      // Delete selected content
+      tr.deleteRange(from, to);
+
+      // Split text by line breaks and insert with hard breaks
+      const lines = textData.split(/\r?\n/);
+      let pos = from;
+
+      for (let i = 0; i < lines.length; i++) {
+        if (i > 0) {
+          // Insert hard break for line breaks (except before first line)
+          tr.insert(pos, view.state.schema.nodes.hardBreak.create());
+          pos++;
+        }
+        if (lines[i]) {
+          // Insert text content
+          tr.insertText(lines[i], pos);
+          pos += lines[i].length;
+        }
+      }
+
+      view.dispatch(tr);
     },
 
     triggerInputChangeEvents () {

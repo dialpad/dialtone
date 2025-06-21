@@ -206,6 +206,32 @@ describe('DtRichTextEditor tests', () => {
           output = wrapper.vm.getOutput();
           expect(output).toBe('<strong>bold pasted text</strong>');
         });
+
+        it('if pasteRichText is false, line breaks should be preserved as hard breaks', async () => {
+          await wrapper.setProps({
+            pasteRichText: false,
+            outputFormat: 'html',
+            value: '',
+          });
+          editorEl = document.getElementsByClassName('qa-editor')[0];
+
+          const textWithLineBreaks = 'Line 1\nLine 2\nLine 3';
+          const clipboardData = new DataTransfer();
+          clipboardData.setData('text/plain', textWithLineBreaks);
+
+          const pasteEvent = new ClipboardEvent('paste', {
+            clipboardData,
+            bubbles: true,
+            cancelable: true,
+          });
+
+          editorEl.dispatchEvent(pasteEvent);
+          await wrapper.vm.$nextTick();
+
+          const output = wrapper.vm.getOutput();
+          // Line breaks should be converted to <br /> tags within a single paragraph
+          expect(output).toBe('<p>Line 1<br>Line 2<br>Line 3</p>');
+        });
       });
 
       describe('When pasting content with line breaks and white space', () => {
