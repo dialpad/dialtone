@@ -125,7 +125,8 @@ jobs:
 
       - name: Delay job to avoid npm rate limits
         if: matrix.package == 'dialtone-vue3'
-        run: wait 15
+        run: sleep 15s
+        shell: bash
 
       # Publish npm/GitHub
       - name: Publish ${{ matrix.package }}@${{ env.RELEASE_TAG }}
