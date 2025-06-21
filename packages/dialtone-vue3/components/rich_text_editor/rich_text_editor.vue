@@ -724,37 +724,17 @@ export default {
           },
 
           handlePaste: (view, event, slice) => {
-            if (!this.pasteRichText) {
-              const clipboardData = event.clipboardData || window.clipboardData;
-              const textData = clipboardData.getData('text/plain');
+            const clipboardData = event.clipboardData || window.clipboardData;
+            const textData = clipboardData.getData('text/plain');
+            const htmlData = clipboardData.getData('text/html');
 
-              if (textData) {
-                // Insert as plain text only (preserving any HTML tags as text)
-                const { tr } = view.state;
-                const { from, to } = view.state.selection;
-                tr.insertText(textData, from, to);
-                view.dispatch(tr);
-                return true; // Prevent default paste behavior
-              }
-            }
-
-            return false; // default paste behavior
+            return this.processPasteData(view, textData, htmlData);
           },
 
           // Moves the <br /> tags inside the previous closing tag to avoid
           // Prosemirror wrapping them within another </p> tag.
           transformPastedHTML (html) {
-            // Preserve line breaks by converting them to hard breaks before other transformations
-            const transformedHtml = html
-              // Convert standalone br tags to hard breaks
-              .replace(/<br\s*\/?>/gi, '<br />')
-              // Preserve line breaks at end of paragraphs and divs
-              .replace(/(<\/(?:p|div)>)\s*\n/gi, '$1<br />')
-              // Convert newlines followed by text to br tags
-              .replace(/\n(?=\S)/g, '<br />');
-
-            // Then apply the original transformation
-            return transformedHtml.replace(/(<\/\w+>)((<br \/>)+)/g, '$2$3$1');
+            return html.replace(/(<\/\w+>)((<br \/>)+)/g, '$2$3$1');
           },
         },
       });
@@ -854,11 +834,123 @@ export default {
       }
 
       // Otherwise replace the content (resets the cursor position).
-      this.editor.commands.setContent(newValue, false);
+      this.editor.commands.setContent(newValue, false, { preserveWhitespace: 'full' });
     },
 
     destroyEditor () {
       this.editor.destroy();
+    },
+
+    insertPlainTextWithHardBreaks (view, textData) {
+      const { tr } = view.state;
+      const { from, to } = view.state.selection;
+
+      // Delete selected content
+      tr.deleteRange(from, to);
+
+      // Split text by line breaks and insert with hard breaks
+      const lines = textData.split(/\r?\n/);
+      let pos = from;
+
+      for (let i = 0; i < lines.length; i++) {
+        if (i > 0) {
+          // Insert hard break for line breaks (except before first line)
+          tr.insert(pos, view.state.schema.nodes.hardBreak.create());
+          pos++;
+        }
+        // Insert text content (including empty strings for blank lines)
+        tr.insertText(lines[i], pos);
+        pos += lines[i].length;
+      }
+
+      view.dispatch(tr);
+    },
+
+    shouldPreserveLineBreaks (textData, htmlData) {
+      // When pasteRichText is false, always use plain text handling to ensure HTML tags are literal
+      if (!this.pasteRichText) {
+        return !!textData;
+      }
+      // When pasteRichText is true, preserve line breaks for plain text that contains blank lines
+      // or multiple consecutive line breaks to avoid losing formatting
+      return !htmlData && textData && this.hasBlankLines(textData);
+    },
+
+    processPasteData (view, textData, htmlData) {
+      if (this.shouldPreserveLineBreaks(textData, htmlData)) {
+        this.insertPlainTextWithHardBreaks(view, textData);
+        return true;
+      }
+
+      if (this.shouldHandlePreformattedHTML(htmlData)) {
+        const extractedText = this.extractPreformattedText(htmlData);
+        if (extractedText && extractedText.includes('\n')) {
+          this.insertPlainTextWithHardBreaks(view, extractedText);
+          return true;
+        }
+      }
+
+      return false;
+    },
+
+    shouldHandlePreformattedHTML (htmlData) {
+      return this.pasteRichText && htmlData && this.containsPreformattedContent(htmlData);
+    },
+
+    containsPreformattedContent (htmlData) {
+      const tempDiv = document.createElement('div');
+      tempDiv.innerHTML = htmlData;
+      const elements = tempDiv.querySelectorAll('*');
+
+      for (const element of elements) {
+        if (this.hasPreWhitespace(element) && this.hasLineBreaks(element)) {
+          return true;
+        }
+      }
+      return false;
+    },
+
+    hasPreWhitespace (element) {
+      const styleAttr = element.getAttribute('style') || '';
+      const elementStyle = element.style.whiteSpace || '';
+
+      const hasPreElementStyle = elementStyle === 'pre' || elementStyle === 'pre-wrap';
+      const hasPreInlineStyle = styleAttr.includes('white-space: pre');
+
+      return hasPreElementStyle || hasPreInlineStyle;
+    },
+
+    hasLineBreaks (element) {
+      return element.textContent && element.textContent.includes('\n');
+    },
+
+    hasBlankLines (textData) {
+      // Check for blank lines (empty lines between content) or multiple consecutive line breaks
+      return textData.includes('\n\n') || /\n\s*\n/.test(textData);
+    },
+
+    extractPreformattedText (htmlData) {
+      const tempDiv = document.createElement('div');
+      tempDiv.innerHTML = htmlData;
+      return this.walkAndExtractText(tempDiv);
+    },
+
+    walkAndExtractText (node) {
+      let result = '';
+
+      if (node.nodeType === Node.TEXT_NODE) {
+        result += node.textContent;
+      } else if (node.nodeType === Node.ELEMENT_NODE) {
+        if (this.hasPreWhitespace(node)) {
+          result += node.textContent;
+        } else {
+          for (const child of node.childNodes) {
+            result += this.walkAndExtractText(child);
+          }
+        }
+      }
+
+      return result;
     },
 
     triggerInputChangeEvents () {
