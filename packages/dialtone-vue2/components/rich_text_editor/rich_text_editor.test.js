@@ -206,6 +206,32 @@ describe('DtRichTextEditor tests', () => {
           output = wrapper.vm.getOutput();
           expect(output).toBe('<strong>bold pasted text</strong>');
         });
+
+        it('if pasteRichText is false, line breaks should be preserved as hard breaks', async () => {
+          await wrapper.setProps({
+            pasteRichText: false,
+            outputFormat: 'html',
+            value: '',
+          });
+          editorEl = document.getElementsByClassName('qa-editor')[0];
+
+          const textWithLineBreaks = 'Line 1\nLine 2\nLine 3';
+          const clipboardData = new DataTransfer();
+          clipboardData.setData('text/plain', textWithLineBreaks);
+
+          const pasteEvent = new ClipboardEvent('paste', {
+            clipboardData,
+            bubbles: true,
+            cancelable: true,
+          });
+
+          editorEl.dispatchEvent(pasteEvent);
+          await wrapper.vm.$nextTick();
+
+          const output = wrapper.vm.getOutput();
+          // Line breaks should be converted to <br /> tags within a single paragraph
+          expect(output).toBe('<p>Line 1<br>Line 2<br>Line 3</p>');
+        });
       });
 
       describe('When pasting content with line breaks and white space', () => {
@@ -242,6 +268,89 @@ describe('DtRichTextEditor tests', () => {
           const output = wrapper.vm.getOutput();
           // Check that the line break content was pasted and converted to HTML paragraphs
           expect(output).toBe('<p>Line 1</p><p>  Line 2</p><p>    Line 3</p>');
+        });
+      });
+
+      describe('When pasting preformatted HTML content', () => {
+        it('should preserve line breaks from white-space: pre-wrap content', async () => {
+          await wrapper.setProps({
+            pasteRichText: true,
+            outputFormat: 'html',
+            value: '',
+          });
+          editorEl = document.getElementsByClassName('qa-editor')[0];
+
+          const preformattedHTML = '<span style="white-space: pre-wrap;">Line 1\nLine 2\nLine 3</span>';
+          const clipboardData = new DataTransfer();
+          clipboardData.setData('text/html', preformattedHTML);
+          clipboardData.setData('text/plain', 'Line 1\nLine 2\nLine 3');
+
+          const pasteEvent = new ClipboardEvent('paste', {
+            clipboardData,
+            bubbles: true,
+            cancelable: true,
+          });
+
+          editorEl.dispatchEvent(pasteEvent);
+          await wrapper.vm.$nextTick();
+
+          const output = wrapper.vm.getOutput();
+          // Check that line breaks are preserved as hard breaks when pasting preformatted HTML
+          expect(output).toBe('<p>Line 1<br>Line 2<br>Line 3</p>');
+        });
+      });
+
+      describe('When pasting content with blank lines', () => {
+        it('should preserve blank lines when pasteRichText is true', async () => {
+          await wrapper.setProps({
+            pasteRichText: true,
+            outputFormat: 'html',
+            value: '',
+          });
+          editorEl = document.getElementsByClassName('qa-editor')[0];
+
+          const textWithBlankLines = '# go to ubervoice/static folder\ncd ~/src/firespotter/ubervoice/static\n\nnpm install';
+          const clipboardData = new DataTransfer();
+          clipboardData.setData('text/plain', textWithBlankLines);
+
+          const pasteEvent = new ClipboardEvent('paste', {
+            clipboardData,
+            bubbles: true,
+            cancelable: true,
+          });
+
+          editorEl.dispatchEvent(pasteEvent);
+          await wrapper.vm.$nextTick();
+
+          const output = wrapper.vm.getOutput();
+          // Check that blank lines are preserved as hard breaks
+          expect(output).toBe('<p># go to ubervoice/static folder<br>cd ~/src/firespotter/ubervoice/static<br><br>npm install</p>');
+        });
+
+        it('should still convert single line breaks to paragraphs when no blank lines present', async () => {
+          await wrapper.setProps({
+            pasteRichText: true,
+            outputFormat: 'html',
+            value: '',
+          });
+          editorEl = document.getElementsByClassName('qa-editor')[0];
+
+          const textWithSingleLineBreaks = 'Line 1\nLine 2\nLine 3';
+          const clipboardData = new DataTransfer();
+          clipboardData.setData('text/plain', textWithSingleLineBreaks);
+
+          const pasteEvent = new ClipboardEvent('paste', {
+            clipboardData,
+            bubbles: true,
+            cancelable: true,
+          });
+
+          editorEl.dispatchEvent(pasteEvent);
+          await wrapper.vm.$nextTick();
+
+          const output = wrapper.vm.getOutput();
+          // Check that single line breaks are converted to paragraphs (default TipTap behavior)
+          expect(output).toBe('<p>Line 1</p><p>Line 2</p><p>Line 3</p>');
         });
       });
     });
