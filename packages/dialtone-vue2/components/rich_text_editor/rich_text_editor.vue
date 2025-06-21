@@ -725,18 +725,11 @@ export default {
           },
 
           handlePaste: (view, event, slice) => {
-            if (!this.pasteRichText) {
-              const clipboardData = event.clipboardData || window.clipboardData;
-              const textData = clipboardData.getData('text/plain');
+            const clipboardData = event.clipboardData || window.clipboardData;
+            const textData = clipboardData.getData('text/plain');
+            const htmlData = clipboardData.getData('text/html');
 
-              if (textData) {
-                // Insert as plain text preserving line breaks as hard breaks
-                this.insertPlainTextWithHardBreaks(view, textData);
-                return true; // Prevent default paste behavior
-              }
-            }
-
-            return false; // default paste behavior
+            return this.processPasteData(view, textData, htmlData);
           },
 
           // Moves the <br /> tags inside the previous closing tag to avoid
@@ -866,14 +859,99 @@ export default {
           tr.insert(pos, view.state.schema.nodes.hardBreak.create());
           pos++;
         }
-        if (lines[i]) {
-          // Insert text content
-          tr.insertText(lines[i], pos);
-          pos += lines[i].length;
-        }
+        // Insert text content (including empty strings for blank lines)
+        tr.insertText(lines[i], pos);
+        pos += lines[i].length;
       }
 
       view.dispatch(tr);
+    },
+
+    shouldPreserveLineBreaks (textData, htmlData) {
+      // When pasteRichText is false, always use plain text handling to ensure HTML tags are literal
+      if (!this.pasteRichText) {
+        return !!textData;
+      }
+      // When pasteRichText is true, preserve line breaks for plain text that contains blank lines
+      // or multiple consecutive line breaks to avoid losing formatting
+      return !htmlData && textData && this.hasBlankLines(textData);
+    },
+
+    processPasteData (view, textData, htmlData) {
+      if (this.shouldPreserveLineBreaks(textData, htmlData)) {
+        this.insertPlainTextWithHardBreaks(view, textData);
+        return true;
+      }
+
+      if (this.shouldHandlePreformattedHTML(htmlData)) {
+        const extractedText = this.extractPreformattedText(htmlData);
+        if (extractedText && extractedText.includes('\n')) {
+          this.insertPlainTextWithHardBreaks(view, extractedText);
+          return true;
+        }
+      }
+
+      return false;
+    },
+
+    shouldHandlePreformattedHTML (htmlData) {
+      return this.pasteRichText && htmlData && this.containsPreformattedContent(htmlData);
+    },
+
+    containsPreformattedContent (htmlData) {
+      const tempDiv = document.createElement('div');
+      tempDiv.innerHTML = htmlData;
+      const elements = tempDiv.querySelectorAll('*');
+
+      for (const element of elements) {
+        if (this.hasPreWhitespace(element) && this.hasLineBreaks(element)) {
+          return true;
+        }
+      }
+      return false;
+    },
+
+    hasPreWhitespace (element) {
+      const styleAttr = element.getAttribute('style') || '';
+      const elementStyle = element.style.whiteSpace || '';
+
+      const hasPreElementStyle = elementStyle === 'pre' || elementStyle === 'pre-wrap';
+      const hasPreInlineStyle = styleAttr.includes('white-space: pre');
+
+      return hasPreElementStyle || hasPreInlineStyle;
+    },
+
+    hasLineBreaks (element) {
+      return element.textContent && element.textContent.includes('\n');
+    },
+
+    hasBlankLines (textData) {
+      // Check for blank lines (empty lines between content) or multiple consecutive line breaks
+      return textData.includes('\n\n') || /\n\s*\n/.test(textData);
+    },
+
+    extractPreformattedText (htmlData) {
+      const tempDiv = document.createElement('div');
+      tempDiv.innerHTML = htmlData;
+      return this.walkAndExtractText(tempDiv);
+    },
+
+    walkAndExtractText (node) {
+      let result = '';
+
+      if (node.nodeType === Node.TEXT_NODE) {
+        result += node.textContent;
+      } else if (node.nodeType === Node.ELEMENT_NODE) {
+        if (this.hasPreWhitespace(node)) {
+          result += node.textContent;
+        } else {
+          for (const child of node.childNodes) {
+            result += this.walkAndExtractText(child);
+          }
+        }
+      }
+
+      return result;
     },
 
     triggerInputChangeEvents () {
