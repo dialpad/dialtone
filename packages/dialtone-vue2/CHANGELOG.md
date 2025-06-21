@@ -1,3 +1,16 @@
+# [2.193.0](https://github.com/dialpad/dialtone/compare/dialtone-vue2/v2.192.0...dialtone-vue2/v2.193.0) (2025-06-21)
+
+
+### Bug Fixes
+
+* **Rich Text Editor:** DLT-2486 pasting bugs ([#807](https://github.com/dialpad/dialtone/issues/807)) ([33b2024](https://github.com/dialpad/dialtone/commit/33b20246d2d8c4284f8a2e764d8feea61fa39668))
+
+
+### Features
+
+* **List Item:** DLT-2505 add wrapper class ([#806](https://github.com/dialpad/dialtone/issues/806)) ([551434e](https://github.com/dialpad/dialtone/commit/551434ec5dd59635d6f3e1cc9d65a00e38dbfcdc))
+* **Loader:** DLT-2556 component MVP ([#800](https://github.com/dialpad/dialtone/issues/800)) ([aac2d38](https://github.com/dialpad/dialtone/commit/aac2d381278ea35c44139b4f4ee4b183fca64c3c))
+
 # [2.192.0](https://github.com/dialpad/dialtone/compare/dialtone-vue2/v2.191.2...dialtone-vue2/v2.192.0) (2025-06-17)
 
 
