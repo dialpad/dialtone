@@ -147,6 +147,7 @@ export const dialtoneVuepressTheme = (options) => {
       _extractFrontmatter(app, '/guides/content/', options);
       _extractFrontmatter(app, '/components/', options, ['/components/status/']);
       _extractFrontmatter(app, '/design/', options);
+      _extractFrontmatter(app, '/design/colors/', options);
       _extractComponentStatus(app);
     },
     // eslint-disable-next-line complexity
