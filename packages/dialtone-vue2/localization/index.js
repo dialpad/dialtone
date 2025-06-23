@@ -50,24 +50,23 @@ export class DialtoneLocalization {
 
     const localeManager = new LocaleManager({
       bundleSource,
-      allowedLocales: Object.values(this.allowedLocales),
       fallbackLocale: locale,
       preferredLocale: locale,
       namespaces: [dialtoneNamespace],
     });
 
-    localeManager.install(dialtoneNamespace);
+    localeManager.install();
 
     DialtoneLocalization.instance = this;
     return this;
   }
 
   $t (...args) {
-    return useI18N(dialtoneNamespace).$t(...args);
+    return useI18N().$t(...args);
   }
 
   $ta (...args) {
-    return useI18N(dialtoneNamespace).$ta(...args);
+    return useI18N().$ta(...args);
   }
 
   get currentLocale () {
@@ -81,7 +80,7 @@ export class DialtoneLocalization {
     }
 
     this._locale = newLocale;
-    useI18N(dialtoneNamespace).setI18N({ preferredLocale: newLocale }, dialtoneNamespace);
+    useI18N().setI18N({ preferredLocale: newLocale });
   }
 
   get allowedLocales () {

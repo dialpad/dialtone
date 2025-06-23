@@ -10,7 +10,6 @@
         "{projectRoot}/directives/**/*",
         "{projectRoot}/prototypes/**/*",
         "{projectRoot}/recipes/**/*",
-        "{projectRoot}/localization/*",
         "{projectRoot}/index.js",
         "{projectRoot}/package.json",
         "{projectRoot}/vite.config.js",
