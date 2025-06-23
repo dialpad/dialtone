@@ -1,3 +1,10 @@
+## [9.126.1](https://github.com/dialpad/dialtone/compare/dialtone/v9.126.0...dialtone/v9.126.1) (2025-06-23)
+
+
+### Bug Fixes
+
+* **Localization:** NO-JIRA add namespace ([#809](https://github.com/dialpad/dialtone/issues/809)) ([9b1679a](https://github.com/dialpad/dialtone/commit/9b1679a2fee81f9e307dacdbddfd0392589ed7a2))
+
 # [9.126.0](https://github.com/dialpad/dialtone/compare/dialtone/v9.125.0...dialtone/v9.126.0) (2025-06-21)
 
 
