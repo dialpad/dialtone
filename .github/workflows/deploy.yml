@@ -46,7 +46,7 @@ on:
 
 env:
   HUSKY: 0
-  BASE_URL: ${{ github.event_name == 'push' && (github.ref_name != 'production' && format('{0}/', github.ref_name)) || format('deploy-previews/pr-{0}/', github.event.pull_request.number) }}
+  BASE_URL: ${{ github.event_name == 'pull_request' && format('deploy-previews/pr-{0}/', github.event.pull_request.number) || (github.ref_name == 'production' && '' || format('{0}/', github.ref_name)) }}
   DIALTONE_BUCKET_DIRECTORY: dialtone.dialpad.com
   DIALTONE_VUE_2_BUCKET_DIRECTORY: dialtone.dialpad.com/vue
   DIALTONE_VUE_3_BUCKET_DIRECTORY: dialtone.dialpad.com/vue3
