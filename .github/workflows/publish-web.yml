@@ -24,6 +24,8 @@ on:
       - production
       - alpha
       - beta
+    paths:
+      - '**/package.json'
 
 env:
   HUSKY: 0
