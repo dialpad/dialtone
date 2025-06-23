@@ -216,7 +216,7 @@ jobs:
         continue-on-error: true
         run: >
           gcloud storage ls ${{ format('gs://{0}', steps.expand.outputs.dest_directory) }} |
-          grep -v -E ${{ env.BUCKET_CLEANUP_EXCLUDE }} |
+          grep -v -E "${{ env.BUCKET_CLEANUP_EXCLUDE }}" |
           gcloud storage rm --recursive --read-paths-from-stdin
 
       # ---------- #
