@@ -17,11 +17,14 @@
       :pinned="$attrs.pinned"
       :hide-close="$attrs.hideClose"
       :hide-action="$attrs.hideAction"
+      :close-button-props="buttonCloseProps"
       :class="{ 'd-ps-sticky': $attrs.show }"
       :hide-icon="$attrs.hideIcon"
       :background-image="$attrs.backgroundImage"
       :background-size="$attrs.backgroundSize"
       :dialog-class="$attrs.dialogClass"
+      :visually-hidden-close="$attrs.visuallyHiddenClose"
+      :visually-hidden-close-label="$attrs.visuallyHiddenCloseLabel"
       @close="displayBanner = false; $attrs.onClose($event)"
     >
       <span
@@ -97,6 +100,14 @@ export default {
 
     linkClass () {
       return this.isInverted ? 'd-link--inverted' : 'd-link--muted';
+    },
+
+    buttonCloseProps () {
+      return {
+        ...this.$attrs.closeButtonProps,
+        kind: this.buttonKind,
+        ariaLabel: 'Close',
+      };
     },
   },
 };

@@ -9,6 +9,9 @@
     :hide-action="$attrs.hideAction"
     :truncate-text="$attrs.truncateText"
     :hide-icon="$attrs.hideIcon"
+    :close-button-props="computedCloseButtonProps"
+    :visually-hidden-close="$attrs.visuallyHiddenClose"
+    :visually-hidden-close-label="$attrs.visuallyHiddenCloseLabel"
     @close="$attrs.onClose($event)"
   >
     <span
@@ -78,6 +81,14 @@ export default {
 
     linkClass () {
       return this.isInverted ? 'd-link--inverted' : 'd-link--muted';
+    },
+
+    computedCloseButtonProps () {
+      return {
+        ...this.$attrs.closeButtonProps,
+        kind: this.buttonKind,
+        ariaLabel: 'Close',
+      };
     },
   },
 };

@@ -13,6 +13,7 @@ import { POPOVER_DIRECTIONS } from '../popover/popover_constants';
 export const argsData = {
   onHighlight: action('highlight'),
   onOpened: action('opened'),
+  visuallyHiddenCloseLabel: 'Close Dropdown',
   navigationType: 'arrow-keys',
   placement: 'bottom',
   appendTo: 'body',
@@ -109,6 +110,11 @@ export const argTypesData = {
     },
   },
   tether: {
+    control: {
+      type: 'boolean',
+    },
+  },
+  visuallyHiddenClose: {
     control: {
       type: 'boolean',
     },

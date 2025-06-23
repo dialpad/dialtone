@@ -103,6 +103,11 @@ export const argTypesData = {
 // Set default values at the story level here.
 export const argsData = {
   mediaList,
+  closeAriaLabel: 'Close',
+  clickToOpenAriaLabel: 'Click to open',
+  progressbarAriaLabel: 'Uploading',
+  rightArrowAriaLabel: 'Next',
+  leftArrowAriaLabel: 'Previous',
   onRemoveMedia: action('remove-media'),
 };
 

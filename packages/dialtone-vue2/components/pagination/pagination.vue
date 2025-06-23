@@ -34,6 +34,7 @@
         />
         <!-- … -->
       </div>
+      <!-- eslint-enable vue/no-bare-strings-in-template -->
       <dt-button
         v-else
         :aria-label="pageNumberAriaLabel(page)"
@@ -66,7 +67,6 @@
 <script>
 import { DtButton } from '@/components/button';
 import { DtIconChevronLeft, DtIconChevronRight, DtIconMoreHorizontal } from '@dialpad/dialtone-icons/vue2';
-import { DtLocalizationMixin } from '@/common/mixins';
 
 /**
  * Pagination allows you to divide large amounts of content into smaller chunks across multiple pages.
@@ -82,8 +82,6 @@ export default {
     DtIconMoreHorizontal,
   },
 
-  mixins: [DtLocalizationMixin],
-
   props: {
     /**
      * Descriptive label for the pagination content.
@@ -98,6 +96,30 @@ export default {
      */
     totalPages: {
       type: Number,
+      required: true,
+    },
+
+    /**
+     * Descriptive label for the previous button.
+     */
+    prevAriaLabel: {
+      type: String,
+      required: true,
+    },
+
+    /**
+     * Descriptive label for the next button.
+     */
+    nextAriaLabel: {
+      type: String,
+      required: true,
+    },
+
+    /**
+     * A method that will be called to get the aria label of each page.
+     */
+    pageNumberAriaLabel: {
+      type: Function,
       required: true,
     },
 
@@ -155,7 +177,6 @@ export default {
       return this.currentPage === this.totalPages;
     },
 
-    // eslint-disable-next-line complexity
     pages () {
       if (this.maxVisible === 0) {
         return [];
@@ -209,20 +230,6 @@ export default {
         return [1, ...pages, this.totalPages];
       }
       return pages;
-    },
-
-    prevAriaLabel () {
-      return this.isFirstPage ? this.i18n.$t('DIALTONE_PAGINATION_FIRST_PAGE') : this.i18n.$t('DIALTONE_PAGINATION_PREVIOUS_PAGE');
-    },
-
-    nextAriaLabel () {
-      return this.isLastPage ? this.i18n.$t('DIALTONE_PAGINATION_LAST_PAGE') : this.i18n.$t('DIALTONE_PAGINATION_NEXT_PAGE');
-    },
-
-    pageNumberAriaLabel () {
-      return (page) => {
-        return page === this.totalPages ? `${this.i18n.$t('DIALTONE_PAGINATION_LAST_PAGE')} ${page}` : `${this.i18n.$t('DIALTONE_PAGINATION_PAGE_NUMBER', { page })}`;
-      };
     },
   },
 

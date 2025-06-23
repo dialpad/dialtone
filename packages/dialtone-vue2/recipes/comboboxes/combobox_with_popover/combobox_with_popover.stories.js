@@ -5,13 +5,13 @@ import DtRecipeComboboxWithPopover from './combobox_with_popover.vue';
 import DtRecipeComboboxWithPopoverDefaultTemplate from './combobox_with_popover_default.story.vue';
 import { POPOVER_CONTENT_WIDTHS } from '@/components/popover/popover_constants';
 import { DROPDOWN_PADDING_CLASSES } from '@/components/dropdown/dropdown_constants';
-import { COMBOBOX_LABEL_SIZES } from '@/components/combobox';
+import { LABEL_SIZES } from '@/components/combobox/combobox_constants';
 
 // Default Prop Values
 export const argsData = {
   label: 'Label Text',
   labelVisible: true,
-  size: COMBOBOX_LABEL_SIZES.DEFAULT,
+  size: LABEL_SIZES.DEFAULT,
   contentWidth: 'anchor',
   appendTo: 'body',
   padding: 'small',
@@ -22,6 +22,7 @@ export const argsData = {
   onHighlight: action('highlight'),
   onSelect: action('select'),
   onOpened: action('opened'),
+  visuallyHiddenCloseLabel: 'Close Combobox',
 };
 
 export const argTypesData = {
@@ -74,13 +75,13 @@ export const argTypesData = {
     },
   },
   size: {
-    options: Object.values(COMBOBOX_LABEL_SIZES),
+    options: Object.values(LABEL_SIZES),
     control: {
       type: 'select',
     },
     table: {
       defaultValue: {
-        summary: COMBOBOX_LABEL_SIZES.DEFAULT,
+        summary: LABEL_SIZES.DEFAULT,
       },
     },
   },

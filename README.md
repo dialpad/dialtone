@@ -12,16 +12,9 @@ The below usage instructions are for the combined package.
 
 ### Install it via NPM:
 
-#### Using Vue@3
-
 ```shell
-npm install @dialpad/dialtone
+npm install @dialpad/dialtone@latest
 ```
-
-#### Using Vue@2
-
-```shell
-npm install @dialpad/dialtone @dialpad/i18n-vue2
 
 ### Import packages:
 
@@ -142,7 +135,7 @@ import DtIllustrationBlankSpace from '@dialpad/dialtone-icons/vue3/blank-space';
 // Named import
 import { DtButton } from "@dialpad/dialtone/vue2"
 
-// Default import (Preferred if using webpack as it is tree-shakeable by default)
+// Default import (Prefered if using webpack as it is tree-shakeable by default)
 import { DtButton } from "@dialpad/dialtone/vue2/lib/button"
 ```
 

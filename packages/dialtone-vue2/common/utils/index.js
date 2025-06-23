@@ -2,7 +2,7 @@ import {
   DEFAULT_PREFIX,
   DEFAULT_VALIDATION_MESSAGE_TYPE,
   VALIDATION_MESSAGE_TYPES,
-} from '../constants/index.js';
+} from '../constants';
 import Vue from 'vue';
 
 let UNIQUE_ID_COUNTER = 0;
@@ -359,7 +359,7 @@ export function isEmailAddress (input) {
  * @returns {String}
  */
 export function safeConcatStrings (elements) {
-  return elements.filter(str => !!str).join(', ');
+  return elements.filter(str => !!str).join(' ');
 }
 
 /**
@@ -421,19 +421,6 @@ export function enableRootScrolling (rootElement = document.documentElement) {
   } else {
     rootElement.classList.remove('d-of-hidden');
   }
-}
-
-/**
- * This will take a text string e.g "accessibility-mac"
- * and convert it to our Fluent Key standard format "ACCESSIBILITY_MAC"
- * @param text
- * @returns {string}
- */
-export function toFluentKeyString (text) {
-  return text
-    .replaceAll(/[ -]/g, '_')
-    .replaceAll(/\W/g, '')
-    .toUpperCase();
 }
 
 export default {

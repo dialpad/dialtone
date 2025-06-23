@@ -20,7 +20,7 @@
 </template>
 
 <script>
-import { DT_STACK_GAP } from '@/components/stack';
+import { DT_STACK_GAP } from '../stack/stack_constants';
 import { DT_DESCRIPTION_LIST_DIRECTION } from './description_list_constants';
 import { itemsValidator } from './description_list_validators';
 

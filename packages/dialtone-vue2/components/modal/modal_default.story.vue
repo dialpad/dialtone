@@ -3,6 +3,7 @@
     <dt-modal
       :title="$attrs.title"
       :banner-title="$attrs.bannerTitle"
+      :close-button-props="buttonCloseProps"
       :show="isOpen"
       :kind="$attrs.kind"
       :size="$attrs.size"
@@ -15,6 +16,8 @@
       :hide-close="$attrs.hideClose"
       :labelled-by-id="$attrs.labelledById"
       :fixed-header-footer="$attrs.fixedHeaderFooter"
+      :visually-hidden-close="$attrs.visuallyHiddenClose"
+      :visually-hidden-close-label="$attrs.visuallyHiddenCloseLabel"
       :close-on-click="$attrs.closeOnClick"
       :initial-focus-element="$attrs.initialFocusElement"
       @update:show="updateShow"
@@ -98,6 +101,13 @@ export default {
   },
 
   computed: {
+    buttonCloseProps () {
+      return {
+        ...this.$attrs.closeButtonProps,
+        ariaLabel: 'Close',
+      };
+    },
+
     secondaryButtonKind () {
       return this.$attrs.kind === 'danger' ? 'muted' : 'default';
     },

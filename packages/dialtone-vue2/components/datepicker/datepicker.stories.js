@@ -7,6 +7,13 @@ import DtDatepickerWithPopoverTemplate from './datepicker_popover.story.vue';
 const defaultDate = new Date('2023-01-01T00:00:00');
 
 export const argsData = {
+  locale: 'en-US',
+  changeToLabel: 'Change to',
+  prevMonthLabel: 'Previous month',
+  nextMonthLabel: 'Next month',
+  prevYearLabel: 'Previous year',
+  nextYearLabel: 'Next year',
+  selectDayLabel: 'Select day',
   onSelectedDate: action('selected-date'),
   onCloseDatepicker: action('close-datepicker'),
   date: new Date(),
@@ -14,6 +21,62 @@ export const argsData = {
 };
 
 export const argTypesData = {
+  // Props
+  prevMonthLabel: {
+    control: 'text',
+    table: {
+      category: 'props',
+      type: {
+        summary: 'String',
+      },
+    },
+  },
+  nextMonthLabel: {
+    control: 'text',
+    table: {
+      category: 'props',
+      type: {
+        summary: 'String',
+      },
+    },
+  },
+  prevYearLabel: {
+    control: 'text',
+    table: {
+      category: 'props',
+      type: {
+        summary: 'String',
+      },
+    },
+  },
+  nextYearLabel: {
+    control: 'text',
+    table: {
+      category: 'props',
+      type: {
+        summary: 'String',
+      },
+    },
+  },
+  selectDayLabel: {
+    control: 'text',
+    table: {
+      category: 'props',
+      type: {
+        summary: 'String',
+      },
+    },
+  },
+  changeToLabel: {
+    control: 'text',
+    table: {
+      category: 'props',
+      type: {
+        summary: 'String',
+      },
+    },
+  },
+
   // Action Event Handlers
   onSelectedDate: {
     table: {

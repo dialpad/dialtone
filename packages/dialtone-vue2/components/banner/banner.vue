@@ -37,6 +37,9 @@
       <dt-notice-action
         :hide-action="hideAction"
         :hide-close="hideClose"
+        :close-button-props="closeButtonProps"
+        :visually-hidden-close="visuallyHiddenClose"
+        :visually-hidden-close-label="visuallyHiddenCloseLabel"
         v-on="$listeners"
       >
         <!-- @slot Enter a possible action for the user to take, such as a link to another page -->
@@ -50,6 +53,7 @@
 import { DtNoticeIcon, DtNoticeContent, DtNoticeAction, NOTICE_KINDS } from '@/components/notice';
 import Modal from '@/common/mixins/modal';
 import utils from '@/common/utils';
+import SrOnlyCloseButtonMixin from '@/common/mixins/sr_only_close_button';
 
 /**
  * Banners are a type of notice, delivering system and engagement messaging.
@@ -65,7 +69,7 @@ export default {
     DtNoticeAction,
   },
 
-  mixins: [Modal],
+  mixins: [Modal, SrOnlyCloseButtonMixin],
 
   props: {
     /**
@@ -124,6 +128,14 @@ export default {
       validate (kind) {
         return NOTICE_KINDS.includes(kind);
       },
+    },
+
+    /**
+     * Props for the notice close button.
+     */
+    closeButtonProps: {
+      type: Object,
+      default: () => ({}),
     },
 
     /**

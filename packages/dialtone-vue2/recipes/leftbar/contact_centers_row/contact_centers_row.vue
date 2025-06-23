@@ -55,8 +55,7 @@
           <dt-button
             class="d-recipe-leftbar-row__action"
             data-qa="dt-recipe-leftbar-row-action-button"
-            :aria-label="menuButtonLabel"
-            :title="menuButtonLabel"
+            :aria-label="menuButtonAriaLabel"
             importance="clear"
             size="xs"
             circle
@@ -79,9 +78,9 @@
 import { safeConcatStrings } from '@/common/utils';
 import { DtBadge } from '@/components/badge';
 import { DtButton } from '@/components/button';
-import { DtEmojiTextWrapper } from '@/components/emoji_text_wrapper';
-import { DtIconChevronDown, DtIconHeadphones } from '@dialpad/dialtone-icons/vue2';
-import { DtLocalizationMixin } from '@/common/mixins';
+import DtEmojiTextWrapper from '@/components/emoji_text_wrapper/emoji_text_wrapper.vue';
+import DtIconChevronDown from '@dialpad/dialtone-icons/vue2/chevron-down';
+import DtIconHeadphones from '@dialpad/dialtone-icons/vue2/headphones';
 
 export default {
   name: 'DtRecipeContactCentersRow',
@@ -93,8 +92,6 @@ export default {
     DtIconHeadphones,
     DtIconChevronDown,
   },
-
-  mixins: [DtLocalizationMixin],
 
   inheritAttrs: false,
 
@@ -137,10 +134,14 @@ export default {
     unreadCount: {
       type: String,
       default: null,
-      validator (value) {
-        if (!value) return true;
-        return /^\d+\+?$/.test(value);
-      },
+    },
+
+    /**
+     * Aria label for the menu button.
+     */
+    menuButtonAriaLabel: {
+      type: String,
+      required: true,
     },
   },
 
@@ -181,21 +182,13 @@ export default {
     },
 
     getAriaLabel () {
-      const count = isNaN(this.unreadCount) ? this.unreadCount : Number(this.unreadCount);
       return this.ariaLabel
         ? this.ariaLabel
-        : safeConcatStrings([
-          this.description,
-          this.i18n.$t('DIALTONE_UNREAD_MESSAGE_COUNT_TEXT', { unreadCount: count }),
-        ]);
+        : safeConcatStrings([this.description, this.unreadCountTooltip]);
     },
 
     showUnreadCount () {
       return !!this.unreadCount;
-    },
-
-    menuButtonLabel () {
-      return this.i18n.$t('DIALTONE_CONTACT_CENTERS_ROW_MENU_BUTTON_LABEL');
     },
   },
 

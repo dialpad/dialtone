@@ -13,9 +13,11 @@ export const argsData = {
   name: 'Jaqueline Nackos',
   avatarSrc: defaultImage,
   avatarColor: '',
+  callButtonTooltip: 'Call',
   hasUnreads: true,
   unreadCount: '55',
   avatarPresence: 'active',
+  unreadCountTooltip: '55 unread messages',
   onClick: action('click'),
   onCall: action('call'),
 };

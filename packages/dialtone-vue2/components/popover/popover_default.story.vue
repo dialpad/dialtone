@@ -23,9 +23,12 @@
     :placement="$attrs.placement"
     :role="$attrs.role"
     :show-close-button="$attrs.showCloseButton"
+    :close-button-props="$attrs.closeButtonProps"
     :sticky="$attrs.sticky"
     :tether="$attrs.tether"
     :transition="$attrs.transition"
+    :visually-hidden-close="$attrs.visuallyHiddenClose"
+    :visually-hidden-close-label="$attrs.visuallyHiddenCloseLabel"
     @opened="$attrs.onOpened"
   >
     <template

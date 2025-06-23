@@ -23,5 +23,5 @@ export {
 } from './skeleton';
 
 export {
-  default as DtLocalizationMixin,
-} from './localization';
+  default as DtSrOnlyCloseButtonMixin,
+} from './sr_only_close_button';

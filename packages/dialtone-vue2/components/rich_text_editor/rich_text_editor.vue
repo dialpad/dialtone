@@ -22,21 +22,21 @@
             importance="clear"
             @click="editLink"
           >
-            {{ i18n.$t('DIALTONE_RICH_TEXT_EDITOR_EDIT_BUTTON_LABEL') }}
+            Edit
           </dt-button>
           <dt-button
             kind="muted"
             importance="clear"
             @click="openLink"
           >
-            {{ i18n.$t('DIALTONE_RICH_TEXT_EDITOR_OPEN_LINK_BUTTON_LABEL') }}
+            Open link
           </dt-button>
           <dt-button
             kind="danger"
             importance="clear"
             @click="removeLink"
           >
-            {{ i18n.$t('DIALTONE_RICH_TEXT_EDITOR_REMOVE_BUTTON_LABEL') }}
+            Remove
           </dt-button>
         </dt-stack>
       </div>
@@ -97,7 +97,6 @@ import channelSuggestion from './extensions/channels/suggestion';
 import slashCommandSuggestion from './extensions/slash_command/suggestion';
 import { warnIfUnmounted } from '@/common/utils';
 import deepEqual from 'deep-equal';
-import { DtLocalizationMixin } from '@/common/mixins';
 
 export default {
   name: 'DtRichTextEditor',
@@ -108,8 +107,6 @@ export default {
     DtButton,
     DtStack,
   },
-
-  mixins: [DtLocalizationMixin],
 
   props: {
     /**

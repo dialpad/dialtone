@@ -21,6 +21,7 @@ export const argsData = {
   offset: [0, 4],
   appendTo: 'body',
   onOpened: action('opened'),
+  visuallyHiddenCloseLabel: 'Close popover',
 };
 
 export const argTypesData = {
@@ -161,6 +162,11 @@ export const argTypesData = {
     },
   },
   tether: {
+    control: {
+      type: 'boolean',
+    },
+  },
+  visuallyHiddenClose: {
     control: {
       type: 'boolean',
     },

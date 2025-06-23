@@ -8,6 +8,7 @@ import DtRecipeContactCentersRowVariantsTemplate from './contact_centers_row_var
 // Default Prop Values
 export const argsData = {
   description: 'Ai Contact Centers',
+  menuButtonAriaLabel: 'Menu button',
   click: action('click'),
   clickMenu: action('click-menu'),
 };

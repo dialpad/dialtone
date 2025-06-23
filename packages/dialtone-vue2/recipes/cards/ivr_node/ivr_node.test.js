@@ -5,6 +5,7 @@ import {
 } from '@/recipes/cards/ivr_node/ivr_node_constants';
 
 const basePropsData = {
+  menuButtonAriaLabel: 'Node menu',
   nodeType: IVR_NODE_HANGUP,
   nodeLabel: IVR_NODE_LABELS[IVR_NODE_HANGUP],
   isSelected: false,

@@ -1,8 +1,14 @@
 <template>
   <dt-emoji-picker
     :skin-tone.sync="isSkinTone"
+    :skin-selector-button-tooltip-label="$attrs.skinSelectorButtonTooltipLabel"
+    :tab-set-labels="$attrs.tabSetLabels"
     :recently-used-emojis="$attrs.recentlyUsedEmojis"
     :custom-emojis="$attrs.customEmojis"
+    :add-emoji-label="$attrs.addEmojiLabel"
+    :search-results-label="$attrs.searchResultsLabel"
+    :search-no-results-label="$attrs.searchNoResultsLabel"
+    :search-placeholder-label="$attrs.searchPlaceholderLabel"
     :search-query="$attrs.searchQuery"
     :show-search="$attrs.showSearch"
     @skin-tone="isSkinTone = $event; $attrs.onSkinTone($event)"

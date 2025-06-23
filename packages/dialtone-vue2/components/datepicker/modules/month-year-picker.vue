@@ -1,31 +1,31 @@
 <template>
   <dt-stack
-    class="d-datepicker__month-year"
     direction="row"
+    class="d-datepicker__month-year"
     gap="300"
   >
     <dt-stack
       as="nav"
-      class="d-datepicker__nav"
       direction="row"
       gap="200"
+      class="d-datepicker__nav"
     >
       <dt-tooltip
-        :fallback-placements="['top-start', 'auto']"
-        :message="i18n.$t('DIALTONE_DATEPICKER_PREVIOUS_YEAR')"
+        :message="prevYearLabel"
         placement="top"
+        :fallback-placements="['top-start', 'auto']"
       >
         <template #anchor>
           <dt-button
             id="prevYearButton"
             :ref="refNames[0]"
-            :aria-label="previousYearAriaLabel"
-            circle
-            class="d-datepicker__nav-btn"
+            size="xs"
             importance="clear"
             kind="muted"
-            size="xs"
+            :circle="true"
+            class="d-datepicker__nav-btn"
             type="button"
+            :aria-label="`${changeToLabel} ${prevYearLabel} ${selectYear - 1}`"
             @click="changeYear(-1)"
             @keydown="handleKeyDown($event)"
           >
@@ -36,21 +36,21 @@
         </template>
       </dt-tooltip>
       <dt-tooltip
-        :fallback-placements="['top-start', 'auto']"
-        :message="i18n.$t('DIALTONE_DATEPICKER_PREVIOUS_MONTH')"
+        :message="prevMonthLabel"
         placement="top"
+        :fallback-placements="['top-end', 'auto']"
       >
         <template #anchor>
           <dt-button
             id="prevMonthButton"
             :ref="refNames[1]"
-            :aria-label="previousMonthAriaLabel"
-            circle
-            class="d-datepicker__nav-btn"
+            size="xs"
             importance="clear"
             kind="muted"
-            size="xs"
+            :circle="true"
+            class="d-datepicker__nav-btn"
             type="button"
+            :aria-label="`${changeToLabel} ${prevMonthLabel} ${formattedMonth(selectMonth - 1)}`"
             @click="changeMonth(-1)"
             @keydown="handleKeyDown($event)"
           >
@@ -71,26 +71,26 @@
     </div>
     <dt-stack
       as="nav"
-      class="d-datepicker__nav"
       direction="row"
       gap="200"
+      class="d-datepicker__nav"
     >
       <dt-tooltip
-        :fallback-placements="['top-end', 'auto']"
-        :message="i18n.$t('DIALTONE_DATEPICKER_NEXT_MONTH')"
+        :message="nextMonthLabel"
         placement="top"
+        :fallback-placements="['top-start', 'auto']"
       >
         <template #anchor>
           <dt-button
             id="nextMonthButton"
             :ref="refNames[2]"
-            :aria-label="nextMonthAriaLabel"
-            circle
-            class="d-datepicker__nav-btn"
-            importance="clear"
-            kind="muted"
             size="xs"
+            importance="clear"
+            :circle="true"
+            kind="muted"
+            class="d-datepicker__nav-btn"
             type="button"
+            :aria-label="`${changeToLabel} ${nextMonthLabel} ${formattedMonth(selectMonth + 1)}`"
             @click="changeMonth(1)"
             @keydown="handleKeyDown($event)"
           >
@@ -101,21 +101,21 @@
         </template>
       </dt-tooltip>
       <dt-tooltip
-        :fallback-placements="['top-end', 'auto']"
-        :message="i18n.$t('DIALTONE_DATEPICKER_NEXT_YEAR')"
+        :message="nextYearLabel"
         placement="top"
+        :fallback-placements="['top-end', 'auto']"
       >
         <template #anchor>
           <dt-button
             id="nextYearButton"
             :ref="refNames[3]"
-            :aria-label="nextYearAriaLabel"
-            circle
-            class="d-datepicker__nav-btn"
-            importance="clear"
-            kind="muted"
             size="xs"
+            kind="muted"
+            :circle="true"
+            importance="clear"
+            class="d-datepicker__nav-btn"
             type="button"
+            :aria-label="`${changeToLabel} ${nextYearLabel} ${selectYear + 1}`"
             @click="changeYear(1)"
             @keydown="handleKeyDown($event)"
           >
@@ -130,19 +130,13 @@
 </template>
 
 <script>
-import {
-  DtIconChevronLeft,
-  DtIconChevronsLeft,
-  DtIconChevronRight,
-  DtIconChevronsRight,
-} from '@dialpad/dialtone-icons/vue2';
+import { DtIconChevronLeft, DtIconChevronsLeft, DtIconChevronRight, DtIconChevronsRight } from '@dialpad/dialtone-icons/vue2';
 import { getYear, addMonths, getMonth, set, subMonths, getDate } from 'date-fns';
 import { getCalendarDays, formatMonth } from '../utils';
 import { INTL_MONTH_FORMAT } from '../datepicker_constants';
-import { DtStack } from '@/components/stack';
-import { DtTooltip } from '@/components/tooltip';
-import { DtButton } from '@/components/button';
-import { DtLocalizationMixin } from '@/common/mixins';
+import DtStack from '@/components/stack/stack.vue';
+import DtTooltip from '@/components/tooltip/tooltip.vue';
+import DtButton from '@/components/button/button.vue';
 
 export default {
   name: 'DtDatepickerMonthYearPicker',
@@ -157,9 +151,37 @@ export default {
     DtIconChevronsRight,
   },
 
-  mixins: [DtLocalizationMixin],
-
   props: {
+    locale: {
+      type: String,
+      required: true,
+    },
+
+    prevMonthLabel: {
+      type: String,
+      required: true,
+    },
+
+    nextMonthLabel: {
+      type: String,
+      required: true,
+    },
+
+    prevYearLabel: {
+      type: String,
+      required: true,
+    },
+
+    nextYearLabel: {
+      type: String,
+      required: true,
+    },
+
+    changeToLabel: {
+      type: String,
+      required: true,
+    },
+
     selectedDate: {
       type: Date,
       required: true,
@@ -215,23 +237,7 @@ export default {
     },
 
     formattedMonth () {
-      return (month) => formatMonth(month, INTL_MONTH_FORMAT, this.i18n.currentLocale);
-    },
-
-    previousYearAriaLabel () {
-      return `${this.i18n.$t('DIALTONE_DATEPICKER_CHANGE_TO')} ${this.i18n.$t('DIALTONE_DATEPICKER_PREVIOUS_YEAR')} ${this.selectYear - 1}`;
-    },
-
-    previousMonthAriaLabel () {
-      return `${this.i18n.$t('DIALTONE_DATEPICKER_CHANGE_TO')} ${this.i18n.$t('DIALTONE_DATEPICKER_PREVIOUS_MONTH')} ${this.formattedMonth(this.selectMonth - 1)}`;
-    },
-
-    nextYearAriaLabel () {
-      return `${this.i18n.$t('DIALTONE_DATEPICKER_CHANGE_TO')} ${this.i18n.$t('DIALTONE_DATEPICKER_NEXT_YEAR')} ${this.selectYear + 1}`;
-    },
-
-    nextMonthAriaLabel () {
-      return `${this.i18n.$t('DIALTONE_DATEPICKER_CHANGE_TO')} ${this.i18n.$t('DIALTONE_DATEPICKER_NEXT_MONTH')} ${this.formattedMonth(this.selectMonth + 1)}`;
+      return (month) => formatMonth(month, INTL_MONTH_FORMAT, this.locale);
     },
   },
 

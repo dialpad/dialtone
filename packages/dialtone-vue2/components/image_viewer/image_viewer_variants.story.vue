@@ -4,6 +4,7 @@
     <dt-image-viewer
       :image-src="test"
       image-alt="Alt Text"
+      close-aria-label="Close"
       image-button-class="d-wmn64 d-hmn64 w-wmx332 d-hmx332"
       aria-label="Click to open image"
     />
@@ -11,6 +12,7 @@
     <dt-image-viewer
       :image-src="fry"
       image-alt="Alt Text"
+      close-aria-label="Close"
       image-button-class="d-wmn64 d-hmn64 w-wmx332 d-hmx332"
       aria-label="Click to open image"
     />

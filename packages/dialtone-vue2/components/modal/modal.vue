@@ -87,19 +87,14 @@
           <!-- @slot Slot for dialog footer content, often containing cancel and confirm buttons. -->
           <slot name="footer" />
         </footer>
-        <sr-only-close-button
-          v-if="hideClose"
-          @close="close"
-        />
         <dt-button
-          v-else
+          v-if="!hideClose"
           class="d-modal__close"
-          data-qa="dt-modal-close-button"
           circle
           size="lg"
           importance="clear"
-          :aria-label="closeButtonTitle"
-          :title="closeButtonTitle"
+          :aria-label="closeButtonProps.ariaLabel"
+          v-bind="closeButtonProps"
           @click="close"
         >
           <template #icon>
@@ -108,6 +103,11 @@
             />
           </template>
         </dt-button>
+        <sr-only-close-button
+          v-if="showVisuallyHiddenClose"
+          :visually-hidden-close-label="visuallyHiddenCloseLabel"
+          @close="close"
+        />
       </div>
     </transition>
   </dt-lazy-show>
@@ -126,9 +126,9 @@ import {
 import { getUniqueString, disableRootScrolling, enableRootScrolling } from '@/common/utils';
 import { DtLazyShow } from '@/components/lazy_show';
 import { EVENT_KEYNAMES } from '@/common/constants';
+import SrOnlyCloseButtonMixin from '@/common/mixins/sr_only_close_button';
 import SrOnlyCloseButton from '@/common/sr_only_close_button.vue';
 import { NOTICE_KINDS } from '@/components/notice';
-import { DtLocalizationMixin } from '@/common/mixins';
 
 /**
  * Modals focus the user’s attention exclusively on one task or piece of information
@@ -145,9 +145,21 @@ export default {
     SrOnlyCloseButton,
   },
 
-  mixins: [Modal, DtLocalizationMixin],
+  mixins: [Modal, SrOnlyCloseButtonMixin],
 
   props: {
+    /**
+     * A set of props to be passed into the modal's close button.
+     * Requires an 'ariaLabel' property.
+     */
+    closeButtonProps: {
+      type: Object,
+      required: true,
+      validator: (props) => {
+        return !!props.ariaLabel;
+      },
+    },
+
     /**
      * Body text to display as the modal's main content.
      */
@@ -379,10 +391,6 @@ export default {
     bannerKindClass () {
       return MODAL_BANNER_KINDS[this.bannerKind];
     },
-
-    closeButtonTitle () {
-      return this.i18n.$t('DIALTONE_CLOSE_BUTTON');
-    },
   },
 
   watch: {
@@ -398,6 +406,14 @@ export default {
           this.previousActiveElement?.focus();
           this.previousActiveElement = null;
         }
+      },
+    },
+
+    $props: {
+      immediate: true,
+      deep: true,
+      handler () {
+        this.validateProps();
       },
     },
   },
@@ -420,6 +436,13 @@ export default {
     trapFocus (e) {
       if (this.show) {
         this.focusTrappedTabPress(e);
+      }
+    },
+
+    validateProps () {
+      if (this.hideClose && !this.visuallyHiddenClose) {
+        console.error(`If hideClose prop is true, visuallyHiddenClose and visuallyHiddenCloseLabel props
+        need to be set so the component always includes a close button`);
       }
     },
   },

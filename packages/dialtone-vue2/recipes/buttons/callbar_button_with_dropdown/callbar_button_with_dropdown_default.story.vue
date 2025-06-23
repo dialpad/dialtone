@@ -2,6 +2,7 @@
   <dt-recipe-callbar-button-with-dropdown
     :id="$attrs.id"
     :aria-label="$attrs.ariaLabel"
+    :arrow-button-label="$attrs.arrowButtonLabel"
     :placement="$attrs.placement"
     :fallback-placements="$attrs.fallbackPlacements"
     :disabled="$attrs.disabled"

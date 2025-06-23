@@ -16,6 +16,7 @@ import { dialtoneDarkTheme, dialtoneLightTheme } from './dialtone-themes.js';
 import { DtTooltipDirective } from '@/directives/tooltip_directive';
 import { DtScrollbarDirective } from '@/directives/scrollbar_directive';
 import { faker } from '@faker-js/faker';
+import { DialtoneLocalizationPlugin } from '@/localization';
 
 setTheme(DpLight);
 
@@ -32,6 +33,7 @@ setCustomEmojiJson(customEmojiJson);
 
 Vue.use(DtTooltipDirective);
 Vue.use(DtScrollbarDirective);
+Vue.use(DialtoneLocalizationPlugin);
 
 // Fixes method "toJSON" is not defined on click event in Sb 6.5.11
 // See https://github.com/storybookjs/storybook/issues/14933#issuecomment-920578274

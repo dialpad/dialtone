@@ -21,6 +21,8 @@
     :collapse-on-focus-out="$attrs.collapseOnFocusOut"
     :max-selected-message="$attrs.maxSelectedMessage"
     :has-suggestion-list="$attrs.hasSuggestionList"
+    :visually-hidden-close="$attrs.visuallyHiddenClose"
+    :visually-hidden-close-label="$attrs.visuallyHiddenCloseLabel"
     :append-to="$attrs.appendTo"
     :transition="$attrs.transition"
     :reserved-right-space="$attrs.reservedRightSpace"

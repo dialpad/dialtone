@@ -6,6 +6,7 @@
       </h3>
       <dt-recipe-contact-centers-row
         description="Ai Contact Centers"
+        menu-button-aria-label="Menu button"
       >
         <template #right>
           <dt-button
@@ -38,6 +39,7 @@
       </h3>
       <dt-recipe-contact-centers-row
         description="Ai Contact Centers"
+        menu-button-aria-label="Menu button"
         selected
       >
         <template #right>

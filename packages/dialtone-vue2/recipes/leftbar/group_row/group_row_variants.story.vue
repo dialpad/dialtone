@@ -5,6 +5,7 @@
         Default behavior
       </h3>
       <dt-recipe-group-row
+        group-count-text="2 users"
         names="Jaqueline Nackos, Lori Smith"
       />
     </div>
@@ -13,6 +14,7 @@
         Ellipsed names
       </h3>
       <dt-recipe-group-row
+        group-count-text="4 users"
         names="Jaqueline Nackos, Lori Smith, Jaqueline Nackos, Lori Smith"
       />
     </div>
@@ -21,9 +23,10 @@
         With unread count
       </h3>
       <dt-recipe-group-row
+        group-count-text="2 users"
         names="Jaqueline Nackos, Lori Smith"
         :has-unreads="true"
-        unread-count="1"
+        unread-count-tooltip="1 unread message"
       />
     </div>
     <div>
@@ -31,6 +34,7 @@
         Selected
       </h3>
       <dt-recipe-group-row
+        group-count-text="2 users"
         names="Jaqueline Nackos, Lori Smith"
         selected
       />

@@ -3,6 +3,7 @@
   <dt-chip
     :id="$attrs.id"
     :hide-close="$attrs.hideClose"
+    :close-button-props="$attrs.closeButtonProps"
     :interactive="$attrs.interactive"
     :size="$attrs.size"
     :aria-label="$attrs.ariaLabel"
@@ -37,9 +38,9 @@
 
 <script>
 import DtChip from './chip.vue';
-import { CHIP_ICON_SIZES } from './chip_constants.js';
 import { DtIcon } from '@/components/icon';
-import { DtAvatar } from '@/components/avatar';
+import { CHIP_ICON_SIZES } from '@/components/chip/chip_constants';
+import DtAvatar from '@/components/avatar/avatar.vue';
 
 export default {
   name: 'DtChipDefault',

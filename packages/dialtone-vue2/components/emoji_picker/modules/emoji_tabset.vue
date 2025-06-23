@@ -1,22 +1,22 @@
 <template>
   <div class="d-emoji-picker__tabset">
     <dt-tab-group
-      :selected="selectedTab"
       size="sm"
       tab-list-class="d-emoji-picker__tabset-list"
+      :selected="selectedTab"
     >
       <template #tabs>
         <dt-tab
           v-for="(tab, index) in tabs"
           :id="tab.id"
-          :key="tab.id"
           :ref="`tabsetRef-${index}`"
-          :label="tab.label"
+          :key="tab.id"
           :panel-id="tab.panelId"
-          :tabindex="index + 1"
+          :label="tab.label"
           aria-controls="d-emoji-picker-list"
-          @keydown="handleKeyDown($event, tab.id)"
+          :tabindex="index + 1"
           @click.capture.stop="selectTabset(tab.id)"
+          @keydown="handleKeyDown($event, tab.id)"
         >
           <component
             :is="tab.icon"
@@ -30,6 +30,7 @@
 
 <script>
 import { DtTab, DtTabGroup } from '@/components/tab';
+import { EMOJI_PICKER_CATEGORIES } from '@/components/emoji_picker/emoji_picker_constants';
 import {
   DtIconClock,
   DtIconSatisfied,
@@ -93,16 +94,16 @@ export default {
       selectedTab: '1',
       tabsetRef: [],
       TABS_DATA: [
-        { label: this.tabSetLabels[0], icon: DtIconClock },
-        { label: this.tabSetLabels[1], icon: DtIconSatisfied },
-        { label: this.tabSetLabels[2], icon: DtIconLivingThing },
-        { label: this.tabSetLabels[3], icon: DtIconFood },
-        { label: this.tabSetLabels[4], icon: DtIconObject },
-        { label: this.tabSetLabels[5], icon: DtIconTransportation },
-        { label: this.tabSetLabels[6], icon: DtIconLightbulb },
-        { label: this.tabSetLabels[7], icon: DtIconHeart },
-        { label: this.tabSetLabels[8], icon: DtIconFlag },
-        { label: this.tabSetLabels[9], icon: DtIconTiktok },
+        { label: EMOJI_PICKER_CATEGORIES.MOST_RECENTLY_USED, icon: DtIconClock },
+        { label: EMOJI_PICKER_CATEGORIES.SMILEYS_AND_PEOPLE, icon: DtIconSatisfied },
+        { label: EMOJI_PICKER_CATEGORIES.NATURE, icon: DtIconLivingThing },
+        { label: EMOJI_PICKER_CATEGORIES.FOOD, icon: DtIconFood },
+        { label: EMOJI_PICKER_CATEGORIES.ACTIVITY, icon: DtIconObject },
+        { label: EMOJI_PICKER_CATEGORIES.TRAVEL, icon: DtIconTransportation },
+        { label: EMOJI_PICKER_CATEGORIES.OBJECTS, icon: DtIconLightbulb },
+        { label: EMOJI_PICKER_CATEGORIES.SYMBOLS, icon: DtIconHeart },
+        { label: EMOJI_PICKER_CATEGORIES.FLAGS, icon: DtIconFlag },
+        { label: EMOJI_PICKER_CATEGORIES.CUSTOM, icon: DtIconTiktok },
       ],
     };
   },
@@ -118,6 +119,7 @@ export default {
 
       return tabsData.map((tab, index) => ({
         ...tab,
+        label: this.tabSetLabels[index],
         // IDs on dt-tab component need to be on string
         id: (index + 1).toString(),
         panelId: (index + 1).toString(),

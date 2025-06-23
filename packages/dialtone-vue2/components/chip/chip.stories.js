@@ -12,6 +12,7 @@ export const argsData = {
   onClose: action('close'),
   onClick: action('click'),
   size: 'md',
+  closeButtonProps: { ariaLabel: 'close' },
   avatarSeed: '',
 };
 

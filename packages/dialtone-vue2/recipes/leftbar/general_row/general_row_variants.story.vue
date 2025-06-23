@@ -5,10 +5,10 @@
         Channel with unread messages
       </h3>
       <dt-recipe-general-row
-        description="Channel name 😄"
-        has-unreads
         type="channels"
+        description="Channel name 😄"
         unread-count="29"
+        unread-count-tooltip="29 unread messages"
       />
       <div class="d-mt8 d-fc-secondary d-fs-100">
         <strong>Note:</strong> the unread count is not limited to 99 or any number so make sure to add the necessary
@@ -20,9 +20,9 @@
         Contact Center
       </h3>
       <dt-recipe-general-row
-        color="magenta-200"
-        description="Contact Center name"
         type="contact center"
+        description="Contact Center name"
+        color="magenta-200"
       />
     </div>
     <div>
@@ -30,8 +30,8 @@
         Dialbot
       </h3>
       <dt-recipe-general-row
-        description="Dialbot"
         type="dialbot"
+        description="Dialbot"
       />
     </div>
     <div>
@@ -39,10 +39,10 @@
         Channel with unread messages
       </h3>
       <dt-recipe-general-row
-        description="Channel name"
-        has-unreads
         type="channels"
         unread-count="1"
+        :has-unreads="true"
+        description="Channel name"
       />
     </div>
     <div>
@@ -50,11 +50,11 @@
         Channel only show unread mentioned count with 'always' setting
       </h3>
       <dt-recipe-general-row
-        channel-setting="always"
-        description="Channel name"
-        has-unreads
         type="channels"
         unread-mention-count="1"
+        channel-setting="always"
+        :has-unreads="true"
+        description="Channel name"
       />
     </div>
     <div>
@@ -62,11 +62,11 @@
         Channel show unread mentioned count with other than 'always' setting
       </h3>
       <dt-recipe-general-row
-        channel-setting="mention"
-        description="Channel name"
-        has-unreads
         type="channels"
         unread-mention-count="1"
+        channel-setting="mention"
+        :has-unreads="true"
+        description="Channel name"
       />
     </div>
     <div>
@@ -74,11 +74,11 @@
         Channel show both unread and unread mention count
       </h3>
       <dt-recipe-general-row
-        description="Channel name"
-        has-unreads
         type="channels"
         unread-count="4"
+        :has-unreads="true"
         unread-mention-count="1"
+        description="Channel name"
       />
     </div>
     <div>
@@ -86,12 +86,12 @@
         Contact Center with DND and unread count
       </h3>
       <dt-recipe-general-row
-        has-unreads
-        color="magenta-200"
-        description="Long contact center name"
-        dnd-text="DND"
         type="contact center"
+        dnd-text="DND"
         unread-count="1"
+        :has-unreads="true"
+        description="Long contact center name"
+        color="magenta-200"
       />
     </div>
     <div>
@@ -99,9 +99,9 @@
         Contact Center with active voice chat
       </h3>
       <dt-recipe-general-row
-        active-voice-chat
-        color="magenta-200"
+        :active-voice-chat="true"
         description="Long contact center name :smile: with emoji"
+        color="magenta-200"
       />
     </div>
   </dt-stack>

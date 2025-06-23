@@ -58,6 +58,8 @@
         <dt-popover
           :open.sync="showLinkInput"
           :show-close-button="false"
+          :visually-hidden-close="true"
+          :visually-hidden-close-label="'Close link input popover'"
           data-qa="dt-recipe-editor-link-input-popover"
           padding="none"
           placement="bottom-start"
@@ -98,12 +100,14 @@
 
           <template #content>
             <div class="d-recipe-editor__popover-content">
-              <span>
-                {{ showAddLinkButtonLabels.title }}
+              <span
+                v-if="showAddLink.setLinkTitle.length > 0"
+              >
+                {{ showAddLink.setLinkTitle }}
               </span>
               <dt-input
                 v-model="linkInput"
-                :input-aria-label="showAddLinkButtonLabels['aria-label']"
+                :input-aria-label="showAddLink.setLinkInputAriaLabel"
                 :placeholder="setLinkPlaceholder"
                 data-qa="dt-recipe-editor-link-input"
                 input-wrapper-class="d-recipe-editor-link__input-wrapper"
@@ -121,32 +125,32 @@
               class="d-recipe-editor__popover-footer"
             >
               <dt-button
+                :aria-label="removeLinkButton.ariaLabel"
                 data-qa="dt-recipe-editor-remove-link-btn"
                 importance="clear"
                 kind="muted"
                 size="sm"
-                v-bind="removeLinkButtonLabels"
                 @click="removeLink"
               >
-                {{ removeLinkButtonLabels.title }}
+                {{ removeLinkButton.label }}
               </dt-button>
               <dt-button
+                :aria-label="cancelSetLinkButton.ariaLabel"
                 data-qa="dt-recipe-editor-set-link-cancel-btn"
                 importance="clear"
                 kind="muted"
                 size="sm"
-                v-bind="cancelSetLinkButtonLabels"
                 @click="closeLinkInput"
               >
-                {{ cancelSetLinkButtonLabels.title }}
+                {{ cancelSetLinkButton.label }}
               </dt-button>
               <dt-button
+                :aria-label="confirmSetLinkButton.ariaLabel"
                 data-qa="dt-recipe-editor-set-link-confirm-btn"
                 size="sm"
-                v-bind="confirmSetLinkButtonLabels"
                 @click="setLink"
               >
-                {{ confirmSetLinkButtonLabels.title }}
+                {{ confirmSetLinkButton.label }}
               </dt-button>
             </dt-stack>
           </template>
@@ -219,7 +223,6 @@ import {
   DtIconStrikethrough,
   DtIconUnderline,
 } from '@dialpad/dialtone-icons/vue2';
-import { DtLocalizationMixin } from '@/common/mixins';
 
 export default {
   name: 'DtRecipeEditor',
@@ -247,8 +250,6 @@ export default {
     DtIconLink2,
     DtIconImage,
   },
-
-  mixins: [DtLocalizationMixin],
 
   inheritAttrs: false,
 
@@ -326,6 +327,30 @@ export default {
     maxHeight: {
       type: String,
       default: 'unset',
+    },
+
+    /**
+     * Confirm set link button defaults.
+     */
+    confirmSetLinkButton: {
+      type: Object,
+      default: () => ({ label: 'Confirm', ariaLabel: 'Confirm set link' }),
+    },
+
+    /**
+     * Remove link button defaults.
+     */
+    removeLinkButton: {
+      type: Object,
+      default: () => ({ label: 'Remove', ariaLabel: 'Remove link' }),
+    },
+
+    /**
+     * Cancel set link button defaults.
+     */
+    cancelSetLinkButton: {
+      type: Object,
+      default: () => ({ label: 'Cancel', ariaLabel: 'Cancel set link' }),
     },
 
     /**
@@ -455,6 +480,8 @@ export default {
       type: Object,
       default: () => ({
         showAddLinkButton: true,
+        setLinkTitle: 'Add a link',
+        setLinkInputAriaLabel: 'Input field to add link',
       }),
     },
 
@@ -574,11 +601,11 @@ export default {
       return [
         {
           showBtn: this.showQuickRepliesButton,
-          label: this.i18n.$t('DIALTONE_EDITOR_QUICK_REPLY_BUTTON_LABEL'),
+          label: 'Quick reply',
           selector: 'quickReplies',
           icon: DtIconQuickReply,
           dataQA: 'dt-recipe-editor-quick-replies-btn',
-          tooltipMessage: this.i18n.$t('DIALTONE_EDITOR_QUICK_REPLY_BUTTON_LABEL'),
+          tooltipMessage: 'Quick Reply',
           onClick: this.onQuickRepliesClick,
         },
       ].filter(button => button.showBtn);
@@ -591,7 +618,7 @@ export default {
           selector: 'bold',
           icon: DtIconBold,
           dataQA: 'dt-recipe-editor-bold-btn',
-          tooltipMessage: this.i18n.$t('DIALTONE_EDITOR_BOLD_BUTTON_LABEL'),
+          tooltipMessage: 'Bold',
           onClick: this.onBoldTextToggle,
         },
         {
@@ -599,7 +626,7 @@ export default {
           selector: 'italic',
           icon: DtIconItalic,
           dataQA: 'dt-recipe-editor-italics-btn',
-          tooltipMessage: this.i18n.$t('DIALTONE_EDITOR_ITALICS_BUTTON_LABEL'),
+          tooltipMessage: 'Italics',
           onClick: this.onItalicTextToggle,
         },
         {
@@ -607,7 +634,7 @@ export default {
           selector: 'underline',
           icon: DtIconUnderline,
           dataQA: 'dt-recipe-editor-underline-btn',
-          tooltipMessage: this.i18n.$t('DIALTONE_EDITOR_UNDERLINE_BUTTON_LABEL'),
+          tooltipMessage: 'Underline',
           onClick: this.onUnderlineTextToggle,
         },
         {
@@ -615,7 +642,7 @@ export default {
           selector: 'strike',
           icon: DtIconStrikethrough,
           dataQA: 'dt-recipe-editor-strike-btn',
-          tooltipMessage: this.i18n.$t('DIALTONE_EDITOR_STRIKE_BUTTON_LABEL'),
+          tooltipMessage: 'Strike',
           onClick: this.onStrikethroughTextToggle,
         },
       ].filter(button => button.showBtn);
@@ -628,7 +655,7 @@ export default {
           selector: { textAlign: 'left' },
           icon: DtIconAlignLeft,
           dataQA: 'dt-recipe-editor-align-left-btn',
-          tooltipMessage: this.i18n.$t('DIALTONE_EDITOR_ALIGN_LEFT_BUTTON_LABEL'),
+          tooltipMessage: 'Align Left',
           onClick: () => this.onTextAlign('left'),
         },
         {
@@ -636,7 +663,7 @@ export default {
           selector: { textAlign: 'center' },
           icon: DtIconAlignCenter,
           dataQA: 'dt-recipe-editor-align-center-btn',
-          tooltipMessage: this.i18n.$t('DIALTONE_EDITOR_ALIGN_CENTER_BUTTON_LABEL'),
+          tooltipMessage: 'Align Center',
           onClick: () => this.onTextAlign('center'),
         },
         {
@@ -644,7 +671,7 @@ export default {
           selector: { textAlign: 'right' },
           icon: DtIconAlignRight,
           dataQA: 'dt-recipe-editor-align-right-btn',
-          tooltipMessage: this.i18n.$t('DIALTONE_EDITOR_ALIGN_RIGHT_BUTTON_LABEL'),
+          tooltipMessage: 'Align Right',
           onClick: () => this.onTextAlign('right'),
         },
         {
@@ -652,7 +679,7 @@ export default {
           selector: { textAlign: 'justify' },
           icon: DtIconAlignJustify,
           dataQA: 'dt-recipe-editor-align-justify-btn',
-          tooltipMessage: this.i18n.$t('DIALTONE_EDITOR_ALIGN_JUSTIFY_BUTTON_LABEL'),
+          tooltipMessage: 'Align Justify',
           onClick: () => this.onTextAlign('justify'),
         },
       ].filter(button => button.showBtn);
@@ -665,7 +692,7 @@ export default {
           selector: 'bulletList',
           icon: DtIconListBullet,
           dataQA: 'dt-recipe-editor-list-items-btn',
-          tooltipMessage: this.i18n.$t('DIALTONE_EDITOR_BULLET_LIST_BUTTON_LABEL'),
+          tooltipMessage: 'Bullet List',
           onClick: this.onBulletListToggle,
         },
         {
@@ -673,7 +700,7 @@ export default {
           selector: 'orderedList',
           icon: DtIconListOrdered,
           dataQA: 'dt-recipe-editor-ordered-list-items-btn',
-          tooltipMessage: this.i18n.$t('DIALTONE_EDITOR_ORDERED_LIST_BUTTON_LABEL'),
+          tooltipMessage: 'Ordered List',
           onClick: this.onOrderedListToggle,
         },
       ].filter(button => button.showBtn);
@@ -686,7 +713,7 @@ export default {
           selector: 'blockquote',
           icon: DtIconQuote,
           dataQA: 'dt-recipe-editor-blockquote-btn',
-          tooltipMessage: this.i18n.$t('DIALTONE_EDITOR_QUOTE_BUTTON_LABEL'),
+          tooltipMessage: 'Quote',
           onClick: this.onBlockquoteToggle,
         },
         {
@@ -694,7 +721,7 @@ export default {
           selector: 'codeBlock',
           icon: DtIconCodeBlock,
           dataQA: 'dt-recipe-editor-code-block-btn',
-          tooltipMessage: this.i18n.$t('DIALTONE_EDITOR_CODE_BUTTON_LABEL'),
+          tooltipMessage: 'Code',
           onClick: this.onCodeBlockToggle,
         },
         {
@@ -702,7 +729,7 @@ export default {
           selector: 'image',
           icon: DtIconImage,
           dataQA: 'dt-recipe-editor-inline-image-btn',
-          tooltipMessage: this.i18n.$t('DIALTONE_EDITOR_IMAGE_BUTTON_LABEL'),
+          tooltipMessage: 'Image',
           onClick: this.onInsertInlineImageClick,
         },
       ].filter(button => button.showBtn);
@@ -714,26 +741,11 @@ export default {
         selector: 'link',
         icon: DtIconLink2,
         dataQA: 'dt-recipe-editor-add-link-btn',
-        tooltipMessage: this.i18n.$t('DIALTONE_EDITOR_LINK_BUTTON_LABEL'),
+        tooltipMessage: 'Link',
         onClick: this.openLinkInput,
       };
     },
 
-    confirmSetLinkButtonLabels () {
-      return this.i18n.$ta('DIALTONE_EDITOR_CONFIRM_SET_LINK_BUTTON');
-    },
-
-    cancelSetLinkButtonLabels () {
-      return this.i18n.$ta('DIALTONE_EDITOR_CANCEL_SET_LINK_BUTTON');
-    },
-
-    removeLinkButtonLabels () {
-      return this.i18n.$ta('DIALTONE_EDITOR_REMOVE_LINK_BUTTON');
-    },
-
-    showAddLinkButtonLabels () {
-      return this.i18n.$ta('DIALTONE_EDITOR_ADD_LINK_BUTTON');
-    },
   },
 
   watch: {

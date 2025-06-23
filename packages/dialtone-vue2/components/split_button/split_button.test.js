@@ -14,9 +14,7 @@ const MOCK_OMEGA_BUTTON_STUB = vi.fn();
 const MOCK_ALPHA_TOOLTIP_TEXT = 'Alpha tooltip text';
 const MOCK_OMEGA_TOOLTIP_TEXT = 'Omega tooltip text';
 
-const baseProps = {
-  omegaTooltipText: MOCK_OMEGA_TOOLTIP_TEXT,
-};
+const baseProps = {};
 const baseSlots = {
   default: 'Button text',
 };
@@ -27,6 +25,7 @@ const baseStubs = {
 
 let mockProps = {};
 let mockSlots = {};
+let mockStubs = {};
 let mockListeners = {};
 
 const testContext = {};
@@ -42,7 +41,7 @@ describe('DtSplitButton Tests', function () {
     wrapper = mount(DtSplitButton, {
       propsData: { ...baseProps, ...mockProps },
       slots: { ...baseSlots, ...mockSlots },
-      stubs: { ...baseStubs },
+      stubs: { ...baseStubs, ...mockStubs },
       listeners: { ...mockListeners },
       localVue: testContext.localVue,
       attachTo: document.body,
@@ -77,6 +76,7 @@ describe('DtSplitButton Tests', function () {
   afterEach(() => {
     mockProps = {};
     mockSlots = {};
+    mockStubs = {};
     mockListeners = {};
     wrapper.destroy();
   });

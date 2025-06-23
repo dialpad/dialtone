@@ -3,8 +3,7 @@
     id="sr-only-close-button"
     data-qa="dt-sr-only-close-button"
     class="d-vi-visible-sr"
-    :aria-label="closeButtonTitle"
-    :title="closeButtonTitle"
+    :aria-label="visuallyHiddenCloseLabel"
     @click="close"
     @keydown.space.prevent.stop="close"
   >
@@ -15,7 +14,6 @@
 <script>
 import { DtIconClose } from '@dialpad/dialtone-icons/vue2';
 import { DtButton } from '@/components/button';
-import { DtLocalizationMixin } from '@/common/mixins';
 
 export default {
   name: 'SrOnlyCloseButton',
@@ -24,15 +22,18 @@ export default {
     DtButton,
   },
 
-  mixins: [DtLocalizationMixin],
-
-  emits: ['close'],
-
-  computed: {
-    closeButtonTitle () {
-      return this.i18n.$t('DIALTONE_CLOSE_BUTTON');
+  props: {
+    /**
+     * Label for the visually hidden close button
+     * Required if visuallyHiddenClose is set to `true`
+     */
+    visuallyHiddenCloseLabel: {
+      type: String,
+      default: null,
     },
   },
+
+  emits: ['close'],
 
   methods: {
     close () {

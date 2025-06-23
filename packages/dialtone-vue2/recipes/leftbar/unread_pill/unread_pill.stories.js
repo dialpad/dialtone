@@ -73,7 +73,7 @@ export const Default = {
   render: (argsData) => createRenderConfig(DtRecipeUnreadPill, DtRecipeUnreadPillDefaultTemplate, argsData),
 
   args: {
-    default: '',
+    default: 'Unread mentions',
     kind: 'mentions',
     direction: 'up',
   },

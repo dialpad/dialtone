@@ -3,7 +3,7 @@
     :is="icon"
     v-if="icon"
     :size="size"
-    :aria-label="iconAriaLabel"
+    :aria-label="ariaLabel"
     :data-qa="$attrs['data-qa'] ?? 'dt-icon'"
   />
 </template>
@@ -11,8 +11,6 @@
 <script>
 import { icons } from '@dialpad/dialtone-icons/vue2';
 import { ICON_SIZE_MODIFIERS, ICON_NAMES } from './icon_constants';
-// import { DtLocalizationMixin } from '@/common/mixins';
-// import { toFluentKeyString } from '@/common/utils';
 
 /**
  * The Icon component provides a set of glyphs and sizes to provide context your application.
@@ -20,8 +18,6 @@ import { ICON_SIZE_MODIFIERS, ICON_NAMES } from './icon_constants';
  */
 export default {
   name: 'DtIcon',
-
-  // mixins: [DtLocalizationMixin],
 
   props: {
     /**
@@ -55,12 +51,6 @@ export default {
   computed: {
     icon () {
       return icons[`./src/icons/${this.name}.vue`];
-    },
-
-    iconAriaLabel () {
-      // const fluentKey = toFluentKeyString(this.name);
-      // return this.ariaLabel || this.i18n.$t(`DIALTONE_ICON_${fluentKey}`);
-      return this.ariaLabel;
     },
   },
 };

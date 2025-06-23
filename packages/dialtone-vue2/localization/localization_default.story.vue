@@ -1,18 +1,21 @@
-<script>
-import { DtButton } from '@/components/button';
-import { DtStack } from '@/components/stack';
-import { DtLocalizationMixin } from '@/common/mixins';
+<script setup>
+import { DtButton } from '@/components/button/index.js';
+import { DtStack } from '@/components/stack/index.js';
+import { allowedLocales } from '@/localization/index.js';
+import { useI18N } from '@dialpad/i18n-vue2';
+import { onMounted, ref } from 'vue';
+const { $t, setI18N, currentLocale } = useI18N();
 
-export default {
-  name: 'LocalizationDefault',
+const locale = ref(currentLocale);
 
-  components: {
-    DtButton,
-    DtStack,
-  },
+async function setLocale (_locale) {
+  await setI18N({ preferredLocale: _locale });
+  locale.value = _locale;
+}
 
-  mixins: [DtLocalizationMixin],
-};
+onMounted(async () => {
+  await setLocale('en-US');
+});
 </script>
 
 <template>
@@ -20,16 +23,16 @@ export default {
     direction="row"
     gap="300"
   >
-    <span>{{ i18n.$t('STORYBOOK_SET_LANGUAGE') }}: </span>
+    <span>{{ $t('SET_LANGUAGE') }}: </span>
     <dt-button
-      v-for="(key, name) in i18n.allowedLocales"
+      v-for="(key, name) in allowedLocales"
       :key="key"
-      :active="key === i18n.currentLocale"
+      :active="key === locale"
       size="xs"
       importance="outlined"
-      @click="i18n.currentLocale = key"
+      @click="setLocale(key)"
     >
-      {{ i18n.$t(`STORYBOOK_LANGUAGE_${name}`) }}
+      {{ $t(name) }}
     </dt-button>
   </dt-stack>
 </template>

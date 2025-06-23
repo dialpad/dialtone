@@ -3,6 +3,7 @@
     :description="$attrs.description"
     :unread-count="$attrs.unreadCount"
     :aria-label="$attrs.ariaLabel"
+    :menu-button-aria-label="$attrs.menuButtonAriaLabel"
     :selected="$attrs.selected"
     :hide-actions="$attrs.hideActions"
     @click="$attrs.click"

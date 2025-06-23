@@ -13,6 +13,8 @@ import { LEFTBAR_GENERAL_ROW_ICON_SIZES } from './general_row_constants';
 // Default Prop Values
 export const argsData = {
   type: 'inbox',
+  callButtonTooltip: 'Call',
+  dndTextTooltip: 'Do not Disturb',
   description: 'Description',
   iconSize: '300',
   onClick: action('click'),

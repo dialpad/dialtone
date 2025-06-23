@@ -204,6 +204,22 @@ export const argsData = {
   inputAriaLabel: 'Input text field',
   maxHeight: '40vh',
   emojiPickerProps: {
+    searchNoResultsLabel: 'No results',
+    searchResultsLabel: 'Search results',
+    searchPlaceholderLabel: 'Search...',
+    skinSelectorButtonTooltipLabel: 'Change default skin tone',
+    tabSetLabels: [
+      'Most recently used',
+      'Smileys and people',
+      'Nature',
+      'Food',
+      'Activity',
+      'Travel',
+      'Objects',
+      'Symbols',
+      'Flags',
+      'Custom',
+    ],
     skinTone: 'Default',
   },
   setLinkPlaceholder: 'e.g. https://www.dialpad.com',
@@ -214,7 +230,8 @@ export const argsData = {
     message: 'You have exceeded the character limit',
   },
   showSend: {
-    text: '',
+    ariaLabel: 'send',
+    tooltipLabel: 'Send',
   },
   mentionSuggestion,
   channelSuggestion,
@@ -289,7 +306,7 @@ export const WithMeetingPill = {
         ];
       },
     },
-    value: '<meeting-pill text="Start a meeting"/>',
+    value: '<meeting-pill text="Start a meeting" close-button-aria-label="Delete meeting pill"/>',
     preventTyping: true,
   },
 };
@@ -299,6 +316,22 @@ export const WithCustomEmoji = {
   args: {
     value: 'This is a test with custom emojis',
     emojiPickerProps: {
+      searchNoResultsLabel: 'No results',
+      searchResultsLabel: 'Search results',
+      searchPlaceholderLabel: 'Search...',
+      skinSelectorButtonTooltipLabel: 'Change default skin tone',
+      tabSetLabels: [
+        'Most recently used',
+        'Smileys and people',
+        'Nature',
+        'Food',
+        'Activity',
+        'Travel',
+        'Objects',
+        'Symbols',
+        'Flags',
+        'Custom',
+      ],
       skinTone: 'Default',
       customEmojis: [
         {

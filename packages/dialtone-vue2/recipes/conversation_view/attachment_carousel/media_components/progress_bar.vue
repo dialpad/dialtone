@@ -2,7 +2,7 @@
 export default {
   name: 'DtProgressBar',
   props: {
-    ariaLabel: {
+    progressbarAriaLabel: {
       type: String,
       required: true,
     },
@@ -37,7 +37,7 @@ export default {
 <template>
   <div
     role="progressbar"
-    :aria-label="ariaLabel"
+    :aria-label="progressbarAriaLabel"
     tabindex="-1"
     :aria-valuenow="progress"
     aria-valuemin="0"

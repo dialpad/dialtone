@@ -11,6 +11,9 @@ export const argsData = {
   size: 'default',
   kind: 'default',
   bannerKind: 'warning',
+  closeButtonProps: {
+    ariaLabel: 'Close',
+  },
   copy: `Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed eget lacus quis velit \
 viverra iaculis. Interdum et malesuada fames ac ante ipsum primis in faucibus. Vestibulum \
 maximus ipsum ex. Curabitur elementum luctus augue, quis eleifend tortor feugiat vel. \
@@ -18,6 +21,7 @@ Maecenas maximus, ipsum et laoreet congue, diam massa aliquam libero, at pellent
 orci ipsum et velit.`,
   title: 'Example Title',
   toggleOpen: action('update:show'),
+  visuallyHiddenCloseLabel: 'Close Modal',
 };
 
 export const argTypesData = {
@@ -102,6 +106,11 @@ export const argTypesData = {
     },
   },
   show: {
+    control: {
+      type: 'boolean',
+    },
+  },
+  visuallyHiddenClose: {
     control: {
       type: 'boolean',
     },

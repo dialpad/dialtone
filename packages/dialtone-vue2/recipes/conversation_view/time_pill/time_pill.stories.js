@@ -35,7 +35,7 @@ export default {
   excludeStories: /.*Data$/,
 };
 
-const today = new Date();
+const today = new Date('1999-03-28');
 
 export const Default = {
   render: (argsData) => createRenderConfig(DtRecipeTimePill, DtRecipeTimePillDefaultTemplate, argsData),

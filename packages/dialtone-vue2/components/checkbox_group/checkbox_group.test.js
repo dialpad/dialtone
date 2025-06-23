@@ -236,7 +236,7 @@ describe('Checkbox Group Tests', () => {
 
           MOCK_SELECTED_CHECKBOX_FUNCTION(MOCK_SELECTED_VALUE);
 
-          expect(wrapper.emitted('input')).toBeFalsy();
+          expect(wrapper.emitted()).toEqual({});
         });
       });
     });

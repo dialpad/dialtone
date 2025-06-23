@@ -3,17 +3,17 @@
     <component
       :is="interactive ? 'button' : 'span'"
       :id="id"
-      :aria-label="ariaLabel"
-      :aria-labelledby="ariaLabel ? undefined : `${id}-content`"
-      :class="chipClasses()"
       :type="interactive && 'button'"
+      :class="chipClasses()"
       data-qa="dt-chip"
+      :aria-labelledby="ariaLabel ? undefined : `${id}-content`"
+      :aria-label="ariaLabel"
       v-on="chipListeners"
     >
       <span
         v-if="$slots.icon"
-        class="d-chip__icon"
         data-qa="dt-chip-icon"
+        class="d-chip__icon"
       >
         <!-- @slot slot for Chip icon -->
         <slot name="icon" />
@@ -28,8 +28,8 @@
       <span
         v-if="$slots.default"
         :id="`${id}-content`"
-        :class="['d-chip__text', contentClass]"
         data-qa="dt-chip-label"
+        :class="['d-chip__text', contentClass]"
       >
         <!-- @slot slot for Content within chip -->
         <slot />
@@ -37,10 +37,10 @@
     </component>
     <dt-button
       v-if="!hideClose"
+      v-bind="closeButtonProps"
       :class="chipCloseButtonClasses()"
       data-qa="dt-chip-close"
-      :aria-label="closeButtonTitle"
-      :title="closeButtonTitle"
+      :aria-label="closeButtonProps.ariaLabel"
       @click="$emit('close')"
     >
       <template #icon>
@@ -61,7 +61,6 @@ import {
   CHIP_ICON_SIZES,
 } from './chip_constants';
 import { getUniqueString } from '@/common/utils';
-import { DtLocalizationMixin } from '@/common/mixins';
 
 /**
  * A chip is a compact UI element that provides brief, descriptive information about an element.
@@ -77,9 +76,18 @@ export default {
     DtIconClose,
   },
 
-  mixins: [DtLocalizationMixin],
-
   props: {
+    /**
+     * A set of props to be passed into the modal's close button. Requires an 'ariaLabel' property.
+     */
+    closeButtonProps: {
+      type: Object,
+      default: function () { return { ariaLabel: 'close' }; },
+      validator: (props) => {
+        return !!props.ariaLabel;
+      },
+    },
+
     /**
      * Hides the close button on the chip
      * @values true, false
@@ -194,10 +202,6 @@ export default {
 
     closeButtonIconSize () {
       return CHIP_ICON_SIZES[this.size];
-    },
-
-    closeButtonTitle () {
-      return this.i18n.$t('DIALTONE_CLOSE_BUTTON');
     },
   },
 
