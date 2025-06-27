@@ -76,6 +76,7 @@
         @text-input="onTextInput"
         @enter="onSend"
         @selected="selectedText = $event"
+        @selected-command="$emit('selected-command', $event)"
         @edit-link="initLinkDialog"
         @focus="isFocused = true"
         @blur="isFocused = false"
