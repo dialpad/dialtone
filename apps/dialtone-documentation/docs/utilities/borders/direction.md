@@ -78,6 +78,9 @@ Use `d-b{t|r|b|l|x|y}` to add a border to only specific sides of your element.
             border-right: var(--dt-space-100) solid !important;<br/>
             border-left: var(--dt-space-100) solid !important;
           </span>
+          <span v-else-if="i === 'all'">
+            border: var(--dt-space-100) solid !important;
+          </span>
           <span v-else>
             border-{{i}}: var(--dt-space-100) solid !important;
           </span>
