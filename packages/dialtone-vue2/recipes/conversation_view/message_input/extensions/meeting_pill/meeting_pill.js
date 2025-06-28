@@ -3,10 +3,23 @@ import { VueNodeViewRenderer } from '@tiptap/vue-2';
 import MeetingPill from './MeetingPill.vue';
 
 export default Node.create({
+  name: 'meetingPill',
 
   atom: true,
   group: 'inline',
   inline: true,
+
+  addOptions () {
+    return {
+      onClose: () => {},
+    };
+  },
+
+  addStorage () {
+    return {
+      onClose: this.options.onClose,
+    };
+  },
 
   addNodeView () {
     return VueNodeViewRenderer(MeetingPill);

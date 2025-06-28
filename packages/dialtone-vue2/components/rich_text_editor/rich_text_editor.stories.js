@@ -27,6 +27,7 @@ export const argsData = {
   onHtmlInput: action('html-input'),
   onTextInput: action('text-input'),
   onEditLink: action('edit-link'),
+  onSelectedCommand: action('selected-command'),
 };
 
 export const argTypesData = {
@@ -107,6 +108,11 @@ export const argTypesData = {
     },
   },
   onEditLink: {
+    table: {
+      disable: true,
+    },
+  },
+  onSelectedCommand: {
     table: {
       disable: true,
     },
