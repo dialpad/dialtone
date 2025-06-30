@@ -1,3 +1,10 @@
+## [1.2.1](https://github.com/dialpad/dialtone/compare/postcss-responsive-variations/v1.2.0...postcss-responsive-variations/v1.2.1) (2025-06-30)
+
+
+### Bug Fixes
+
+* NO-JIRA update responsive plugin README ([6728cce](https://github.com/dialpad/dialtone/commit/6728cceac964ac5cc920ebdf2d16a52b4287950e))
+
 # [1.2.0](https://github.com/dialpad/dialtone/compare/postcss-responsive-variations/v1.1.5...postcss-responsive-variations/v1.2.0) (2025-04-25)
 
 
