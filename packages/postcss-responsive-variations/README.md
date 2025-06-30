@@ -5,7 +5,7 @@
 ```css
 /* Input example */
 .foo {
-    .background-color: red;
+  .background-color: red;
 }
 ```
 
@@ -23,19 +23,19 @@
 
 @media (min-width: 640px){
   .md\:foo {
-  .background-color: red;
+    .background-color: red;
   }
 }
 
 @media (min-width: 980px){
   .lg\:foo {
-  .background-color: red;
+    .background-color: red;
   }
 }
 
 @media (min-width: 1264px){
   .xl\:foo {
-  .background-color: red;
+    .background-color: red;
   }
 }
 ```
