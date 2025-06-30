@@ -3,11 +3,61 @@ title: Breakpoints
 description: All classes can have responsive variations. Using our plugin @dialpad/postcss-responsive-variations and configuring the breakpoint constants, you can create media queries represented in conditional prefixes. These prefixed classes allow you to apply a style or property within a specific breakpoint.
 ---
 
-## PostCSS
+## How Responsive Variations Work
 
-To create the responsive variations of classes we use [postcss](https://www.npmjs.com/package/postcss) and our custom plugin
-[@dialpad/postcss-responsive-variations](https://www.npmjs.com/package/@dialpad/postcss-responsive-variations).
-This plugin takes the breakpoints and the classes you need to have responsive variations as arguments.
+The `@dialpad/postcss-responsive-variations` plugin generates responsive versions of your CSS classes by:
+
+1. **Taking the base classes defined in the `classes` array in the configuration** (like `.d-d-block`)
+2. **Creating prefixed versions** (like `.sm:d-d-block`, `.md:d-d-block`)
+3. **Wrapping them in media queries** based on your breakpoint configuration
+
+### What the Plugin Does
+
+**Input CSS:**
+
+```css
+.d-d-block {
+  display: block;
+}
+```
+
+**Generated Output:**
+
+```css
+.d-d-block {
+  display: block;
+}
+
+@media (min-width: 480px) {
+  .sm\:d-d-block {
+    display: block;
+  }
+}
+
+@media (min-width: 640px) {
+  .md\:d-d-block {
+    display: block;
+  }
+}
+
+@media (min-width: 980px) {
+  .lg\:d-d-block {
+    display: block;
+  }
+}
+
+@media (min-width: 1264px) {
+  .xl\:d-d-block {
+    display: block;
+  }
+}
+```
+
+## Setup
+
+To use [PostCSS](https://www.npmjs.com/package/postcss) with our custom plugin
+[@dialpad/postcss-responsive-variations](https://www.npmjs.com/package/@dialpad/postcss-responsive-variations),
+install it and configure your PostCSS setup.
 
 ## Usage
 
@@ -21,11 +71,74 @@ This plugin takes the breakpoints and the classes you need to have responsive va
 
 ```html
 <div>...</div>
-<div class="d-d-none sm:d-d-block">...</div>
-<div class="d-d-none md:d-d-block">...</div>
-<div class="d-d-none lg:d-d-block">...</div>
 <div class="d-d-none xl:d-d-block">...</div>
+<div class="d-d-none lg:d-d-block">...</div>
+<div class="d-d-none md:d-d-block">...</div>
+<div class="d-d-none sm:d-d-block">...</div>
 ```
+
+## Configuration
+
+### Step 1: Install the Plugin
+
+```bash
+npm install @dialpad/postcss-responsive-variations
+```
+
+### Step 2: Configure PostCSS
+
+In your `postcss.config.js`, configure the plugin with two main options:
+
+```js
+import postcssResponsiveVariations from '@dialpad/postcss-responsive-variations';
+
+// Define your breakpoints
+const breakpoints = [
+  { prefix: 'sm\\:', mediaQuery: '(min-width: 480px)' },
+  { prefix: 'md\\:', mediaQuery: '(min-width: 640px)' },
+  { prefix: 'lg\\:', mediaQuery: '(min-width: 980px)' },
+  { prefix: 'xl\\:', mediaQuery: '(min-width: 1264px)' },
+];
+
+// Define which classes should get responsive variations
+const classes = [
+  /\.d-d-(flex|none|block)$/,  // Display utilities
+  /\.d-p[0-9]+$/,              // Padding utilities
+  /\.d-m[0-9]+$/,              // Margin utilities
+  '.d-w100p',                  // Width 100%
+];
+
+export default {
+  plugins: [
+    postcssResponsiveVariations({ breakpoints, classes }),
+  ],
+};
+```
+
+### Configuration Options
+
+**`breakpoints`** (optional): Array of breakpoint objects. Each object has:
+
+- `prefix`: The prefix to use (e.g., `'sm\:'`)
+- `mediaQuery`: The CSS media query (e.g., `'(min-width: 480px)'`)
+
+**`classes`**: Array of class selectors (strings or regex patterns) that should get responsive variations.
+
+### Examples of Class Patterns
+
+```js
+const classes = [
+  // Exact match
+  '.d-d-block',
+
+  // Regex for multiple related classes
+  /\.d-d-(flex|none|block)$/,     // Matches .d-d-flex, .d-d-none, .d-d-block
+  /\.d-p[0-9]+$/,                 // Matches .d-p8, .d-p16, .d-p24, etc.
+  /\.d-m[tblr]?[0-9]*$/,          // Matches .d-m8, .d-mt16, .d-ml24, etc.
+];
+```
+
+**Result**: The plugin will generate responsive versions like `sm:d-d-block`, `md:d-p16`, `lg:d-mt8`, etc.
 
 ## Classes
 
@@ -66,5 +179,3 @@ To help keep prefixes concise, we use abbreviations. This syntax is used consist
     </table>
   </div>
 </div>
-
-**Note:** These breakpoints may change.
