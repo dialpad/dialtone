@@ -114,12 +114,12 @@ export default {
   components: { DtRecipeMessageInput, DtIcon },
   data () {
     return {
-      value: this.$attrs.modelValue,
+      value: this.$attrs.value,
     };
   },
 
   watch: {
-    '$attrs.modelValue' (value) {
+    '$attrs.value' (value) {
       this.value = value;
     },
   },
