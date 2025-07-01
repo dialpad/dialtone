@@ -1,3 +1,18 @@
+## [9.126.2](https://github.com/dialpad/dialtone/compare/dialtone/v9.126.1...dialtone/v9.126.2) (2025-07-01)
+
+
+### Bug Fixes
+
+* **Message Input:** DLT-2605 fix slash command and close button ([#813](https://github.com/dialpad/dialtone/issues/813)) ([b4c687b](https://github.com/dialpad/dialtone/commit/b4c687b2a9aca29d65a4321229eb6af9ce483026))
+* **Modal:** NO-JIRA adds right padding on title to avoid close button overlap ([#803](https://github.com/dialpad/dialtone/issues/803)) ([e36e603](https://github.com/dialpad/dialtone/commit/e36e603d6fcda7c5605615173d931b75a83c81d0))
+* NO-JIRA update responsive plugin README ([6728cce](https://github.com/dialpad/dialtone/commit/6728cceac964ac5cc920ebdf2d16a52b4287950e))
+* **Select:** DP-147182 remove icon z-index ([#812](https://github.com/dialpad/dialtone/issues/812)) ([89f92c0](https://github.com/dialpad/dialtone/commit/89f92c01d8a182a8ea7d4138d48fbac43a7f43b0))
+
+
+### Documentation
+
+* NO-JIRA fix wrong border property ([88fb502](https://github.com/dialpad/dialtone/commit/88fb50255ae7308e2a26020a11b98102e1bd9476))
+
 ## [9.126.1](https://github.com/dialpad/dialtone/compare/dialtone/v9.126.0...dialtone/v9.126.1) (2025-06-23)
 
 
