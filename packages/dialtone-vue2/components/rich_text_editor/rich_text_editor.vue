@@ -481,6 +481,13 @@ export default {
      * @type {String}
      */
     'selected',
+
+    /**
+     * Event fired when a slash command is selected
+     * @event selected-command
+     * @type {String}
+     */
+    'selected-command',
   ],
 
   data () {
@@ -599,7 +606,12 @@ export default {
       if (this.slashCommandSuggestion) {
         // Add both the suggestion plugin as well as means for user to add suggestion items to the plugin
         const suggestionObject = { ...this.slashCommandSuggestion, ...slashCommandSuggestion };
-        extensions.push(SlashCommandPlugin.configure({ suggestion: suggestionObject }));
+        extensions.push(SlashCommandPlugin.configure({
+          suggestion: suggestionObject,
+          onSelectedCommand: (command) => {
+            this.$emit('selected-command', command);
+          },
+        }));
       }
 
       // Emoji has some interactions with Enter key
