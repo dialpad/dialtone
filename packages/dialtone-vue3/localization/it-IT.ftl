@@ -1,0 +1,167 @@
+# Dialtone
+DIALTONE_CLOSE_BUTTON = Clicca per chiudere
+DIALTONE_BREADCRUMBS_ARIA_LABEL = Breadcrumb
+DIALTONE_LOADING = Caricamento in corso
+DIALTONE_UNREAD_MESSAGE_COUNT_TEXT =
+    { $unreadCount ->
+        [0] Nessun messaggio non letto
+        [1] 1 messaggio non letto
+       *[other] { $unreadCount } messaggi non letti
+    }
+DIALTONE_UNREAD_MENTION_COUNT_TEXT =
+    { $unreadCount ->
+        [0] Nessuna menzione non letta
+        [1] 1 menzione non letta
+       *[other] { $unreadCount } menzioni non lette
+    }
+DIALTONE_TYPING_TEXT = Digitare
+DIALTONE_ATTACHMENT_CAROUSEL_CLICK_TO_OPEN_ARIA_LABEL = Clicca per aprire
+DIALTONE_ATTACHMENT_CAROUSEL_PROGRESS_BAR_ARIA_LABEL = Caricamento
+DIALTONE_ATTACHMENT_CAROUSEL_LEFT_ARROW_ARIA_LABEL = Precedente
+DIALTONE_ATTACHMENT_CAROUSEL_RIGHT_ARROW_ARIA_LABEL = AVANTI
+DIALTONE_CALLBAR_BUTTON_WITH_DROPDOWN_ARROW_BUTTON_ARIA_LABEL = Apri il menu a discesa
+DIALTONE_CALLBAR_BUTTON_WITH_POPOVER_ARROW_BUTTON_ARIA_LABEL = Apri popover
+DIALTONE_CONTACT_CENTERS_ROW_MENU_BUTTON_LABEL = Apri menu
+DIALTONE_DATEPICKER_PREVIOUS_MONTH = Mese precedente
+DIALTONE_DATEPICKER_NEXT_MONTH = il mese prossimo
+DIALTONE_DATEPICKER_PREVIOUS_YEAR = Anno precedente
+DIALTONE_DATEPICKER_NEXT_YEAR = l'anno prossimo
+DIALTONE_DATEPICKER_SELECT_DAY = Seleziona il giorno
+DIALTONE_DATEPICKER_CHANGE_TO = Cambia in
+DIALTONE_EDITOR_CONFIRM_SET_LINK_BUTTON =
+    .title = Conferma
+    .aria-label = Conferma il link impostato
+DIALTONE_EDITOR_REMOVE_LINK_BUTTON =
+    .title = Rimuovi
+    .aria-label = Rimuovi il link
+DIALTONE_EDITOR_CANCEL_SET_LINK_BUTTON =
+    .title = Annulla
+    .aria-label = Annulla il link impostato
+DIALTONE_EDITOR_QUICK_REPLY_BUTTON_LABEL = Risposta rapida
+DIALTONE_EDITOR_BOLD_BUTTON_LABEL = Grassetto
+DIALTONE_EDITOR_ITALICS_BUTTON_LABEL = Corsivo
+DIALTONE_EDITOR_UNDERLINE_BUTTON_LABEL = Sottolineato
+DIALTONE_EDITOR_STRIKE_BUTTON_LABEL = Barrato
+DIALTONE_EDITOR_ALIGN_LEFT_BUTTON_LABEL = Allineamento a sinistra
+DIALTONE_EDITOR_ALIGN_CENTER_BUTTON_LABEL = Allineamento al centro
+DIALTONE_EDITOR_ALIGN_RIGHT_BUTTON_LABEL = Allineamento a destra
+DIALTONE_EDITOR_ALIGN_JUSTIFY_BUTTON_LABEL = Allineamento giustificato
+DIALTONE_EDITOR_BULLET_LIST_BUTTON_LABEL = Elenco puntato
+DIALTONE_EDITOR_ORDERED_LIST_BUTTON_LABEL = Elenco ordinato
+DIALTONE_EDITOR_QUOTE_BUTTON_LABEL = Citazione
+DIALTONE_EDITOR_CODE_BUTTON_LABEL = Codice
+DIALTONE_EDITOR_IMAGE_BUTTON_LABEL = Immagine
+DIALTONE_EDITOR_LINK_BUTTON_LABEL = Link
+DIALTONE_EDITOR_ADD_LINK_BUTTON =
+    .title = Aggiungi link
+    .aria-label = Campo di input per aggiungere il link
+DIALTONE_EMOJI_ROW_REACTION_LABEL =
+    { $reactionCount ->
+        [one]
+            { $selected ->
+               *[false] { $name } ha reagito con { $reaction }.
+                [true] Hai reagito con { $reaction }.
+            }
+       *[other]
+            { $selected ->
+               *[false] { $reactionCount } persone hanno reagito con { $reaction }.
+                [true] { $reactionCount } persone, fra cui tu, hanno reagito con { $reaction }.
+            }
+    }
+DIALTONE_EMOJI_PICKER_ADD_EMOJI_LABEL = Aggiungi emoji
+DIALTONE_EMOJI_PICKER_SEARCH_NO_RESULTS_LABEL = Nessun risultato
+DIALTONE_EMOJI_PICKER_SEARCH_RESULTS_LABEL = ricerca risultati
+DIALTONE_EMOJI_PICKER_SEARCH_PLACEHOLDER_LABEL = Ricerca...
+DIALTONE_EMOJI_PICKER_SKIN_SELECTOR_BUTTON_TOOLTIP_LABEL = Modifica il tono predefinito della pelle
+DIALTONE_EMOJI_PICKER_TABSET_RECENTLY_USED_LABEL = Utilizzato più di recente
+DIALTONE_EMOJI_PICKER_TABSET_SMILEYS_AND_PEOPLE_LABEL = Smiley e persone
+DIALTONE_EMOJI_PICKER_TABSET_NATURE_LABEL = natura
+DIALTONE_EMOJI_PICKER_TABSET_FOOD_LABEL = cibo
+DIALTONE_EMOJI_PICKER_TABSET_ACTIVITY_LABEL = Attività
+DIALTONE_EMOJI_PICKER_TABSET_TRAVEL_LABEL = viaggi
+DIALTONE_EMOJI_PICKER_TABSET_OBJECTS_LABEL = Oggetti
+DIALTONE_EMOJI_PICKER_TABSET_SYMBOLS_LABEL = Simboli
+DIALTONE_EMOJI_PICKER_TABSET_FLAGS_LABEL = Bandiere
+DIALTONE_EMOJI_PICKER_TABSET_CUSTOM_LABEL = Personalizzato
+DIALTONE_FEED_ITEM_PILL_ARIA_LABEL = Clicca per ingrandire
+DIALTONE_GENERAL_ROW_ACTIVE_VOICE_CHAT_TEXT = Chat vocale attiva
+DIALTONE_GENERAL_ROW_CALL_BUTTON_TOOLTIP = Chiamata
+DIALTONE_GENERAL_ROW_DND_TEXT_TOOLTIP = Non disturbare
+DIALTONE_GROUP_ROW_GROUP_COUNT_TEXT =
+    { $count ->
+        [1] 1 utente
+       *[other] { $count } utenti
+    }
+DIALTONE_IVR_NODE_MENU_BUTTON_ARIA_LABEL = Apri menu
+DIALTONE_IVR_NODE_PROMPTMENU_ARIA_LABEL = nodo del menu di richiesta
+DIALTONE_IVR_NODE_PROMPTCOLLECT_ARIA_LABEL = nodo di raccolta prompt
+DIALTONE_IVR_NODE_PROMPTPLAY_ARIA_LABEL = nodo di riproduzione prompt
+DIALTONE_IVR_NODE_GOTOEXPERT_ARIA_LABEL = vai a nodo expert
+DIALTONE_IVR_NODE_BRANCH_ARIA_LABEL = nodo di branch
+DIALTONE_IVR_NODE_GOTO_ARIA_LABEL = vai al nodo
+DIALTONE_IVR_NODE_ASSIGN_ARIA_LABEL = assegna nodo
+DIALTONE_IVR_NODE_CUSTOMERDATA_ARIA_LABEL = nodo dati cliente
+DIALTONE_IVR_NODE_TRANSFER_ARIA_LABEL = nodo di trasferimento
+DIALTONE_IVR_NODE_HANGUP_ARIA_LABEL = nodo di riaggancio
+DIALTONE_MESSAGE_INPUT_SEND_BUTTON_ARIA_LABEL = Invia
+DIALTONE_MESSAGE_INPUT_IMAGE_PICKER_BUTTON_ARIA_LABEL = Allega immagine
+DIALTONE_MESSAGE_INPUT_EMOJI_PICKER_BUTTON_ARIA_LABEL = Seleziona emoji
+DIALTONE_MESSAGE_INPUT_CANCEL_BUTTON_ARIA_LABEL = Annulla
+DIALTONE_MESSAGE_INPUT_BOLD_BUTTON_LABEL =
+    .aria-label = Attiva/disattiva il grassetto per il testo selezionato
+    .tooltip-text = Grassetto
+DIALTONE_MESSAGE_INPUT_ITALIC_BUTTON_LABEL =
+    .aria-label = Attiva/disattiva il corsivo per il testo selezionato
+    .tooltip-text = Corsivo
+DIALTONE_MESSAGE_INPUT_STRIKETHROUGH_BUTTON_LABEL =
+    .aria-label = Attiva/disattiva il barrato per il testo selezionato
+    .tooltip-text = Barrato
+DIALTONE_MESSAGE_INPUT_BULLET_LIST_BUTTON_LABEL =
+    .aria-label = Crea o modifica l'elenco puntato per il testo selezionato
+    .tooltip-text = Elenco puntato
+DIALTONE_MESSAGE_INPUT_ORDERED_LIST_BUTTON_LABEL =
+    .aria-label = Crea o modifica un elenco ordinato per il testo selezionato
+    .tooltip-text = Elenco ordinato
+DIALTONE_MESSAGE_INPUT_BLOCK_QUOTE_BUTTON_LABEL =
+    .aria-label = Crea o modifica una citazione in blocco per il testo selezionato
+    .tooltip-text = Citazione in blocco
+DIALTONE_MESSAGE_INPUT_CODE_BUTTON_LABEL =
+    .aria-label = Crea o modifica il codice per il testo selezionato
+    .tooltip-text = Codice
+DIALTONE_MESSAGE_INPUT_CODE_BLOCK_BUTTON_LABEL =
+    .aria-label = Crea o modifica un blocco di codice per il testo selezionato
+    .tooltip-text = Blocco di codice
+DIALTONE_MESSAGE_INPUT_LINK_BUTTON_LABEL =
+    .aria-label = Crea o modifica un collegamento per il testo selezionato
+    .tooltip-text = Link
+DIALTONE_MESSAGE_INPUT_LINK_DIALOG_TITLE = Aggiungi un link
+DIALTONE_MESSAGE_INPUT_LINK_TEXT_LABEL = Testo da visualizzare (facoltativo)
+DIALTONE_MESSAGE_INPUT_LINK_LINK_LABEL = Link
+DIALTONE_MESSAGE_INPUT_LINK_LINK_PLACEHOLDER = es. https://www.dialpad.com
+DIALTONE_MESSAGE_INPUT_LINK_REMOVE_LABEL = Rimuovi
+DIALTONE_MESSAGE_INPUT_LINK_CANCEL_LABEL = Annulla
+DIALTONE_MESSAGE_INPUT_LINK_CONFIRM_LABEL = Fatto
+DIALTONE_PAGINATION_FIRST_PAGE = Prima pagina
+DIALTONE_PAGINATION_PREVIOUS_PAGE = Pagina precedente
+DIALTONE_PAGINATION_NEXT_PAGE = Pagina successiva
+DIALTONE_PAGINATION_LAST_PAGE = Ultima pagina
+DIALTONE_PAGINATION_PAGE_NUMBER = Pagina n. { $page }
+DIALTONE_RICH_TEXT_EDITOR_EDIT_BUTTON_LABEL = Modifica
+DIALTONE_RICH_TEXT_EDITOR_OPEN_LINK_BUTTON_LABEL = Apri il link
+DIALTONE_RICH_TEXT_EDITOR_REMOVE_BUTTON_LABEL = Rimuovi
+DIALTONE_SETTINGS_MENU_DEFAULT_BUTTON_LABEL = Impostazioni
+DIALTONE_SETTINGS_MENU_UPDATE_BUTTON_LABEL = Aggiorna
+DIALTONE_UNREAD_PILL_MENTIONS_TEXT = Menzioni non lette
+DIALTONE_UNREAD_PILL_MESSAGES_TEXT = Messaggi non letti
+# Storybook only
+STORYBOOK_LANGUAGE_ENGLISH = Inglese
+STORYBOOK_LANGUAGE_CHINESE = Cinese
+STORYBOOK_LANGUAGE_DUTCH = Olandese
+STORYBOOK_LANGUAGE_FRENCH = Francese
+STORYBOOK_LANGUAGE_GERMAN = Tedesco
+STORYBOOK_LANGUAGE_ITALIAN = Italiano
+STORYBOOK_LANGUAGE_JAPANESE = Giapponese
+STORYBOOK_LANGUAGE_PORTUGUESE = Portoghese
+STORYBOOK_LANGUAGE_RUSSIAN = Russo
+STORYBOOK_LANGUAGE_SPANISH = Spagnolo
+STORYBOOK_SET_LANGUAGE = Imposta la lingua
