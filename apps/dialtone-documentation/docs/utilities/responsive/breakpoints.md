@@ -59,24 +59,6 @@ To use [PostCSS](https://www.npmjs.com/package/postcss) with our custom plugin
 [@dialpad/postcss-responsive-variations](https://www.npmjs.com/package/@dialpad/postcss-responsive-variations),
 install it and configure your PostCSS setup.
 
-## Usage
-
-<code-well-header>
-  <div class="d-fl-center d-w100p d-m8 d-p16 d-bgc-moderate d-bar4 d-ta-center">This is visible on all screens</div>
-  <div class="d-fl-center d-w100p d-m8 d-p16 d-bgc-moderate d-bar4 d-ta-center d-d-none xl:d-d-block">This is visible on extra large screens</div>
-  <div class="d-fl-center d-w100p d-m8 d-p16 d-bgc-moderate d-bar4 d-ta-center d-d-none lg:d-d-block">This is visible on large screens</div>
-  <div class="d-fl-center d-w100p d-m8 d-p16 d-bgc-moderate d-bar4 d-ta-center d-d-none md:d-d-block">This is visible on medium screens</div>
-  <div class="d-fl-center d-w100p d-m8 d-p16 d-bgc-moderate d-bar4 d-ta-center d-d-none sm:d-d-block">This is visible on small screens</div>
-</code-well-header>
-
-```html
-<div>...</div>
-<div class="d-d-none xl:d-d-block">...</div>
-<div class="d-d-none lg:d-d-block">...</div>
-<div class="d-d-none md:d-d-block">...</div>
-<div class="d-d-none sm:d-d-block">...</div>
-```
-
 ## Configuration
 
 ### Step 1: Install the Plugin
@@ -139,6 +121,26 @@ const classes = [
 ```
 
 **Result**: The plugin will generate responsive versions like `sm:d-d-block`, `md:d-p16`, `lg:d-mt8`, etc.
+
+**⚠️ Performance Note**: Be mindful of CSS bundle size when adding classes to the configuration. Each class added to the `classes` array will generate 4 additional responsive variations (one for each breakpoint: `sm:`, `md:`, `lg:`, `xl:`), significantly increasing your CSS bundle size. Only include classes that are actually used in your application to keep bundle sizes optimal.
+
+## Usage
+
+<code-well-header>
+  <div class="d-fl-center d-w100p d-m8 d-p16 d-bgc-moderate d-bar4 d-ta-center">This is visible on all screens</div>
+  <div class="d-fl-center d-w100p d-m8 d-p16 d-bgc-moderate d-bar4 d-ta-center d-d-none xl:d-d-block">This is visible on extra large screens</div>
+  <div class="d-fl-center d-w100p d-m8 d-p16 d-bgc-moderate d-bar4 d-ta-center d-d-none lg:d-d-block">This is visible on large screens</div>
+  <div class="d-fl-center d-w100p d-m8 d-p16 d-bgc-moderate d-bar4 d-ta-center d-d-none md:d-d-block">This is visible on medium screens</div>
+  <div class="d-fl-center d-w100p d-m8 d-p16 d-bgc-moderate d-bar4 d-ta-center d-d-none sm:d-d-block">This is visible on small screens</div>
+</code-well-header>
+
+```html
+<div>...</div>
+<div class="d-d-none xl:d-d-block">...</div>
+<div class="d-d-none lg:d-d-block">...</div>
+<div class="d-d-none md:d-d-block">...</div>
+<div class="d-d-none sm:d-d-block">...</div>
+```
 
 ## Classes
 
