@@ -1,3 +1,10 @@
+## [2.193.2](https://github.com/dialpad/dialtone/compare/dialtone-vue2/v2.193.1...dialtone-vue2/v2.193.2) (2025-07-01)
+
+
+### Bug Fixes
+
+* **Message Input:** DLT-2605 fix slash command and close button ([#813](https://github.com/dialpad/dialtone/issues/813)) ([b4c687b](https://github.com/dialpad/dialtone/commit/b4c687b2a9aca29d65a4321229eb6af9ce483026))
+
 ## [2.193.1](https://github.com/dialpad/dialtone/compare/dialtone-vue2/v2.193.0...dialtone-vue2/v2.193.1) (2025-06-23)
 
 
