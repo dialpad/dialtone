@@ -1,0 +1,176 @@
+{
+  "color": {
+    "shell": {
+      "surface": {
+        "default": {
+          "value": "{color.black.200}",
+          "type": "color"
+        },
+        "hover": {
+          "value": "{color.black.900}",
+          "type": "color"
+        },
+        "active": {
+          "value": "{color.black.900}",
+          "type": "color"
+        },
+        "selected": {
+          "value": "{color.black.900}",
+          "type": "color"
+        },
+        "muted": {
+          "value": "{color.black.300}",
+          "type": "color"
+        },
+        "secondary": {
+          "default": {
+            "value": "{color.black.200}",
+            "type": "color"
+          },
+          "hover": {
+            "value": "{color.black.900}",
+            "type": "color"
+          },
+          "active": {
+            "value": "{color.black.900}",
+            "type": "color"
+          },
+          "selected": {
+            "value": "{color.black.900}",
+            "type": "color"
+          }
+        }
+      },
+      "foreground": {
+        "default": {
+          "value": "{color.black.900}",
+          "type": "color"
+        },
+        "hover": {
+          "value": "{color.black.700}",
+          "type": "color"
+        },
+        "active": {
+          "value": "{color.black.900}",
+          "type": "color"
+        },
+        "selected": {
+          "value": "{color.black.900}",
+          "type": "color"
+        },
+        "secondary": {
+          "default": {
+            "value": "{color.black.800}",
+            "type": "color"
+          },
+          "hover": {
+            "value": "{color.black.800}",
+            "type": "color"
+          },
+          "active": {
+            "value": "{color.black.800}",
+            "type": "color"
+          },
+          "selected": {
+            "value": "{color.black.800}",
+            "type": "color"
+          }
+        },
+        "disabled": {
+          "value": "{color.black.500}",
+          "type": "color"
+        },
+        "strong": {
+          "value": "{color.black.1000}",
+          "type": "color"
+        },
+        "muted": {
+          "value": "{color.black.900}",
+          "type": "color"
+        }
+      },
+      "border": {
+        "default": {
+          "value": "{color.black.1000}",
+          "type": "color"
+        },
+        "secondary": {
+          "value": "{color.black.1000}",
+          "type": "color"
+        }
+      }
+    },
+    "brand": {
+      "surface": {
+        "default": {
+          "value": "{color.purple.400}",
+          "type": "color"
+        },
+        "secondary": {
+          "value": "{color.purple.200}",
+          "type": "color"
+        }
+      },
+      "foreground": {
+        "default": {
+          "value": "{color.purple.100}",
+          "type": "color"
+        },
+        "secondary": {
+          "value": "{color.purple.1000}",
+          "type": "color"
+        }
+      }
+    },
+    "logo": {
+      "surface": {
+        "default": {
+          "value": "{color.purple.400}",
+          "type": "color"
+        },
+        "secondary": {
+          "value": "{color.purple.1000}",
+          "type": "color"
+        }
+      }
+    },
+    "presence": {
+      "surface": {
+        "available": {
+          "value": "{color.green.475}",
+          "type": "color"
+        },
+        "unavailable": {
+          "value": "{color.red.450}",
+          "type": "color"
+        },
+        "busy": {
+          "value": "{color.gold.400}",
+          "type": "color"
+        },
+        "offline": {
+          "value": "{color.black.500}",
+          "type": "color"
+        }
+      },
+      "foreground": {
+        "available": {
+          "value": "{color.green.500}",
+          "type": "color"
+        },
+        "unavailable": {
+          "value": "{color.red.500}",
+          "type": "color"
+        },
+        "offline": {
+          "value": "{color.black.500}",
+          "type": "color"
+        },
+        "busy": {
+          "value": "{color.gold.500}",
+          "type": "color"
+        }
+      }
+    }
+  }
+}
