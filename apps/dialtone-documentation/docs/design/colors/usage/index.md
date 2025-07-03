@@ -137,16 +137,18 @@ Theme colors are reserved for core UI elements like the top and left bars, ensur
 Use feedback colors consistently to maintain clear communication and avoid confusion.
 
 <dialtone-usage>
-<template #do>
 <div class="d-d-grid d-g24 d-g-cols2">
-  <div>
-    <div class="d-bgc-brand d-bar8"><svg-loader class="d-fl1" name="color-semantics-do" /></div>
-  </div>
-  <div>
-    <div class="d-bgc-brand d-bar8"><svg-loader class="d-fl1" name="color-semantics-dont" /></div>
-  </div>
+  <template #do>
+    <div>
+      <div class="d-bgc-brand d-bar8"><svg-loader class="d-fl1" name="color-semantics-do" /></div>
+    </div>
+  </template>
+  <template #dont>
+    <div>
+      <div class="d-bgc-brand d-bar8"><svg-loader class="d-fl1" name="color-semantics-dont" /></div>
+    </div>
+  </template>
 </div>
-</template>
 </dialtone-usage>
 
 <div class="d-m48"></div>
