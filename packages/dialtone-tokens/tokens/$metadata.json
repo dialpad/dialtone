@@ -5,6 +5,7 @@
     "base/dark",
     "base/deca",
     "base/deca-dark",
+    "base/light",
     "semantic/dp/default",
     "semantic/dp/dark",
     "semantic/deca/default",
@@ -15,13 +16,14 @@
     "semantic/tmo/dark",
     "semantic/cox/default",
     "semantic/cox/dark",
-    "chart",
+    "chart/chart",
     "components/avatar/default",
     "components/badge/default",
     "components/badge/dark",
     "components/button/default",
     "components/checkbox/default",
     "components/icon/default",
-    "components/radio/default"
+    "components/radio/default",
+    "dp-test/dp-light"
   ]
 }
