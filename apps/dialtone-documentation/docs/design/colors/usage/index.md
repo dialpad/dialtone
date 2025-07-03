@@ -14,7 +14,7 @@ What we prioritize is semantic clarity, ensuring each color serves a distinct pu
 <div class="d-m32"></div>
 
 <div class="d-bgc-brand d-bar8 ">
- <svg-loader class="d-fl1" name="color-table" />
+ <svg-loader name="color-table" />
  </div>
 
 ## Use Semantic Color Tokens
@@ -28,8 +28,6 @@ Dialtone uses **semantic tokens** for color, representing a color's *purpose* in
 It's crucial to understand that while these semantic tokens are built upon our underlying **base color palette**, the work of selecting the appropriate base color for each specific UI context has already been meticulously done for you.
 
  <div class="d-bgc-brand d-bar8"><svg-loader class="d-fl1" name="color-semantic" /></div>
-
----
 
 ## Color roles
 
