@@ -29,8 +29,6 @@ Blacks, whites, and grays—form the bedrock of our interfaces. They dictate sur
 
 Semantic colors are our messengers, conveying feedback, status, and urgency. They are fundamental to Dialtone's token system, ensuring that critical information is always visually prioritized.
 
-<div class="d-m96"></div>
-
 ---
 
 ## Use Semantic Color Tokens
@@ -45,8 +43,6 @@ It's crucial to understand that while these semantic tokens are built upon our u
 
  <div class="d-bgc-brand d-bar8"><svg-loader class="d-fl1" name="color-semantic" /></div>
 
-<div class="d-m96"></div>
-
 ---
 
 ## Color roles
@@ -56,8 +52,6 @@ Color roles describe the purpose of how color is used. Each uses neutrals for ge
  <div class="d-bgc-brand d-bar8"><svg-loader class="d-fl1" name="color-roles" /></div>
 
 We categorize color application by semantic roles such as: **text, surfaces, borders, and themes**. Each uses neutrals for general UI and status colors for impact.
-
-<div class="d-m48"></div>
 
 ### Text Colors
 
@@ -81,8 +75,6 @@ Text colors are the visual language of our content, applied across all text and 
   </div>
 </div>
 
-<div class="d-m48"></div>
-
 ### Surfaces
 
 Surface colors define the background of UI elements, from pages and modals to tables and cards. Neutrals provide the primary backdrop, while status colors add emphasis and context.
@@ -95,8 +87,6 @@ Surface colors define the background of UI elements, from pages and modals to ta
      <div class="d-bgc-brand d-bar8"><svg-loader class="d-fl1" name="color-surface-status" /></div>
   </div>
 </div>
-
-<div class="d-m48"></div>
 
 ### Borders
 
@@ -111,8 +101,6 @@ Borders delineate content areas and components, using neutrals for subtle defini
   </div>
 </div>
 
-<div class="d-m48"></div>
-
 ### Themable UI Parts
 
 Theme colors are reserved for core UI elements like the top and left bars, ensuring consistent visual treatment across our products.
@@ -126,8 +114,6 @@ Theme colors are reserved for core UI elements like the top and left bars, ensur
   </div>
 </div>
 
-<div class="d-m96"></div>
-
 ---
 
 ## Best Practices
@@ -137,41 +123,50 @@ Theme colors are reserved for core UI elements like the top and left bars, ensur
 Use feedback colors consistently to maintain clear communication and avoid confusion.
 
 <dialtone-usage>
-<div class="d-d-grid d-g24 d-g-cols2">
   <template #do>
-    <div>
-      <div class="d-bgc-brand d-bar8"><svg-loader class="d-fl1" name="color-semantics-do" /></div>
+    <div class="d-d-grid d-g24 d-g-cols2">
+      <div>
+        <div class="d-bgc-brand d-bar8">
+          <svg-loader class="d-fl1" name="color-semantics-do" />
+        </div>
+      </div>
     </div>
   </template>
   <template #dont>
-    <div>
-      <div class="d-bgc-brand d-bar8"><svg-loader class="d-fl1" name="color-semantics-dont" /></div>
+    <div class="d-d-grid d-g24 d-g-cols2">
+      <div>
+        <div class="d-bgc-brand d-bar8">
+          <svg-loader class="d-fl1" name="color-semantics-dont" />
+        </div>
+      </div>
     </div>
   </template>
-</div>
 </dialtone-usage>
-
-<div class="d-m48"></div>
 
 ### Semantics Over Base Values
 
 Embrace semantic tokens to separate color values from their contextual meaning, enhancing maintainability and clarity.
 
 <dialtone-usage>
-<template #do>
-
-<div class="d-bgc-brand d-bar8"><svg-loader class="d-fl1" name="color-token-do" /></div>
-</template>
-
-<template #dont>
-
-<div class="d-bgc-brand d-bar8"><svg-loader class="d-fl1" name="color-token-dont" /></div>
-
-</template>
-
+  <template #do>
+    <div class="d-d-grid d-g24 d-g-cols2">
+      <div>
+        <div class="d-bgc-brand d-bar8">
+          <svg-loader class="d-fl1" name="color-token-do" />
+        </div>
+      </div>
+    </div>
+  </template>
+  <template #dont>
+    <div class="d-d-grid d-g24 d-g-cols2">
+      <div>
+        <div class="d-bgc-brand d-bar8">
+          <svg-loader class="d-fl1" name="color-token-dont" />
+        </div>
+      </div>
+    </div>
+  </template>
 </dialtone-usage>
-
-<div class="d-m48"></div>
 
 ### Prioritize Contrast
 
@@ -180,40 +175,50 @@ Embrace semantic tokens to separate color values from their contextual meaning, 
 **Refer to Accessibility Guidelines for detailed information.**
 
 <dialtone-usage>
-<template #do>
-
-<div class="d-bgc-brand d-bar8"><svg-loader class="d-fl1" name="color-contrast-do" /></div>
-</template>
-
-<template #dont>
-
-<div class="d-bgc-brand d-bar8"><svg-loader class="d-fl1" name="color-contrast-dont" /></div>
-
-</template>
-
+  <template #do>
+    <div class="d-d-grid d-g24 d-g-cols2">
+      <div>
+        <div class="d-bgc-brand d-bar8">
+          <svg-loader class="d-fl1" name="color-contrast-do" />
+        </div>
+      </div>
+    </div>
+  </template>
+  <template #dont>
+    <div class="d-d-grid d-g24 d-g-cols2">
+      <div>
+        <div class="d-bgc-brand d-bar8">
+          <svg-loader class="d-fl1" name="color-contrast-dont" />
+        </div>
+      </div>
+    </div>
+  </template>
 </dialtone-usage>
-
-<div class="d-m48"></div>
 
 ### Uniformity
 
 Maintain color consistency across similar components to build intuitive user patterns.
 
 <dialtone-usage>
-<template #do>
-
-<div class="d-bgc-brand d-bar8"><svg-loader class="d-fl1" name="color-uniform-do" /></div>
-</template>
-
-<template #dont>
-
-<div class="d-bgc-brand d-bar8"><svg-loader class="d-fl1" name="color-uniform-dont" /></div>
-
-</template>
-
+  <template #do>
+    <div class="d-d-grid d-g24 d-g-cols2">
+      <div>
+        <div class="d-bgc-brand d-bar8">
+          <svg-loader class="d-fl1" name="color-uniform-do" />
+        </div>
+      </div>
+    </div>
+  </template>
+  <template #dont>
+    <div class="d-d-grid d-g24 d-g-cols2">
+      <div>
+        <div class="d-bgc-brand d-bar8">
+          <svg-loader class="d-fl1" name="color-uniform-dont" />
+        </div>
+      </div>
+    </div>
+  </template>
 </dialtone-usage>
-
-<div class="d-m96"></div>
 
 ---
 
@@ -224,8 +229,6 @@ Dialtone is designed to seamlessly support both light and dark themes. We supply
 <div class="d-bgc-brand d-bgo10 ">
  <svg-loader class="d-fl1" name="color-mode" />
  </div>
-
-<div class="d-m96"></div>
 
 ---
 
