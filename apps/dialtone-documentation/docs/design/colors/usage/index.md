@@ -61,7 +61,7 @@ We categorize color application by semantic roles such as: **text, surfaces, bor
 
 ### Foreground Colors
 
-Text colors are the visual language of our content, applied across all text and type elements. You can utilize foreground tokens which can be found within the [tokens documentation here](https://dialtone.dialpad.com/tokens/).
+Foreground colors are the visual language of our content, applied across all content considered to be "in the foreground", i.e. text and icons. You can utilize foreground tokens which can be found within the [tokens documentation here](https://dialtone.dialpad.com/tokens/).
 
 <div class="d-d-grid d-g24 d-g-cols2">
   <div>
