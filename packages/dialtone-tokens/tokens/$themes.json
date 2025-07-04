@@ -3868,9 +3868,7 @@
     "id": "dp-test-dp-light",
     "name": "dp-light",
     "group": "dp-test",
-    "selectedTokenSets": {
-      "dp-test/dp-light": "enabled"
-    },
+    "selectedTokenSets": {},
     "$figmaStyleReferences": {},
     "$figmaVariableReferences": {
       "color.shell.surface.default": "61214a8611fa5286c6ea40685c1e8b774cdbc817",
@@ -4011,8 +4009,7 @@
     "group": "base",
     "selectedTokenSets": {
       "root": "enabled",
-      "base/default": "enabled",
-      "base/light": "enabled"
+      "base/default": "enabled"
     },
     "$figmaStyleReferences": {},
     "$figmaVariableReferences": {
@@ -4381,9 +4378,7 @@
     "id": "base/default-base/default",
     "name": "base/default",
     "group": "base/default",
-    "selectedTokenSets": {
-      "base/default/base/default": "enabled"
-    },
+    "selectedTokenSets": {},
     "$figmaStyleReferences": {},
     "$figmaVariableReferences": {
       "color.black.900": "7d19ad4bb93b43e83614e5d7dd949af13b0d8779",
