@@ -106,6 +106,41 @@ export default {
 
 **`classes`**: Array of class selectors (strings or regex patterns) that should get responsive variations.
 
+### Recommended Breakpoints
+
+Dialtone uses a **mobile-first approach** with `min-width` media queries as the default recommendation.
+
+To take advantage of this, simply use the breakpoints provided by the plugin, which are:
+
+```js
+[
+  { prefix: 'sm\\:', mediaQuery: '(min-width: 480px)' },
+  { prefix: 'md\\:', mediaQuery: '(min-width: 640px)' },
+  { prefix: 'lg\\:', mediaQuery: '(min-width: 980px)' },
+  { prefix: 'xl\\:', mediaQuery: '(min-width: 1264px)' },
+]
+```
+
+And in the configuration define only the classes you want to have responsive variations:
+
+```js
+import postcssResponsiveVariations from '@dialpad/postcss-responsive-variations';
+
+// Define which classes should get responsive variations
+const classes = [
+  '.d-d-block',
+  ...otherClasses
+];
+
+export default {
+  plugins: [
+    postcssResponsiveVariations({ classes }),
+  ],
+};
+```
+
+For more context on this approach and its benefits, see our [What's New post about mobile-first design principles](https://dialtone.dialpad.com/about/whats-new/posts/2025-5-6.html).
+
 ### Examples of Class Patterns
 
 ```js
@@ -127,11 +162,11 @@ const classes = [
 ## Usage
 
 <code-well-header>
-  <div class="d-fl-center d-w100p d-m8 d-p16 d-bgc-moderate d-bar4 d-ta-center">This is visible on all screens</div>
-  <div class="d-fl-center d-w100p d-m8 d-p16 d-bgc-moderate d-bar4 d-ta-center d-d-none xl:d-d-block">This is visible on extra large screens</div>
-  <div class="d-fl-center d-w100p d-m8 d-p16 d-bgc-moderate d-bar4 d-ta-center d-d-none lg:d-d-block">This is visible on large screens</div>
-  <div class="d-fl-center d-w100p d-m8 d-p16 d-bgc-moderate d-bar4 d-ta-center d-d-none md:d-d-block">This is visible on medium screens</div>
-  <div class="d-fl-center d-w100p d-m8 d-p16 d-bgc-moderate d-bar4 d-ta-center d-d-none sm:d-d-block">This is visible on small screens</div>
+  <div class="d-ai-center d-w100p d-m8 d-p16 d-bgc-moderate d-bar4 d-ta-center">Visible on <strong>all</strong> screens</div>
+  <div class="d-fl-center d-w100p d-m8 d-p16 d-bgc-moderate d-bar4 d-ta-center d-d-none xl:d-d-block">Visible only on screens wider than <strong>extra-large</strong> breakpoint</div>
+  <div class="d-fl-center d-w100p d-m8 d-p16 d-bgc-moderate d-bar4 d-ta-center d-d-none lg:d-d-block">Visible only on screens wider than <strong>large</strong> breakpoint</div>
+  <div class="d-fl-center d-w100p d-m8 d-p16 d-bgc-moderate d-bar4 d-ta-center d-d-none md:d-d-block">Visible only on screens wider than <strong>medium</strong> breakpoint</div>
+  <div class="d-fl-center d-w100p d-m8 d-p16 d-bgc-moderate d-bar4 d-ta-center d-d-none sm:d-d-block">Visible only on screens wider than <strong>small</strong> breakpoint</div>
 </code-well-header>
 
 ```html
