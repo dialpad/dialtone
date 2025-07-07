@@ -1,4 +1,3 @@
-<!-- eslint-disable vue/multi-word-component-names -->
 <template>
   <table
     class="d-datepicker__calendar"
@@ -62,20 +61,11 @@
 <script setup>
 import { useCalendar } from '@/components/datepicker/composables/useCalendar.js';
 import { DtButton } from '@/components/button';
+// TODO: Add DtLocalizationMixin (When refactored to composable)
 
 const props = defineProps({
   calendarDays: {
     type: Array,
-    required: true,
-  },
-
-  locale: {
-    type: String,
-    required: true,
-  },
-
-  selectDayLabel: {
-    type: String,
     required: true,
   },
 });

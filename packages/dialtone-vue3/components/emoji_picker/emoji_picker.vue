@@ -94,7 +94,7 @@ const props = defineProps({
   // TODO try to simplify this to achieve an array of unicode characters and not an entire emoji data object
   recentlyUsedEmojis: {
     type: Array,
-    default: () => ([]),
+    default: () => [],
   },
 
   /**
@@ -108,69 +108,7 @@ const props = defineProps({
   customEmojis: {
     type: Array,
   },
-  /**
-     * The label for the add emoji button
-     * required false because it is still experimental
-     * @type {String}
-     * @example
-     * <dt-emoji-picker :addEmojiLabel="'Add emoji'" />
-     */
-  addEmojiLabel: {
-    type: String,
-    required: false,
-    default: 'Add emoji',
-  },
 
-  /**
-   * The placeholder text for the search input
-   * @type {String}
-   * @required
-   * @example
-   * <dt-emoji-picker :searchPlaceholderLabel="'Search...'" />
-   */
-  searchPlaceholderLabel: {
-    type: String,
-    required: true,
-  },
-
-  /**
-   * The label for the search results tab
-   * @type {String}
-   * @required
-   * @example
-   * <dt-emoji-picker :searchResultsLabel="'Search results'" />
-   */
-  searchResultsLabel: {
-    type: String,
-    required: true,
-  },
-
-  /**
-   * The label for the search no results
-   * @type {String}
-   * @required
-   * @example
-   * <dt-emoji-picker :searchNoResultsLabel="'No results'" />
-   */
-  searchNoResultsLabel: {
-    type: String,
-    required: true,
-  },
-
-  /**
-   * The list of tabsets to show, it is necessary to be updated with the correct language
-   * It must respect the provided order.
-   * @type {Array}
-   * @required
-   * @example
-   * <dt-emoji-picker
-   *  :tabSetLabels="['Most recently used', 'Smileys and people', 'Nature',
-   *    'Food', 'Activity', 'Travel', 'Objects', 'Symbols', 'Flags', 'Custom']" />
-   */
-  tabSetLabels: {
-    type: Array,
-    required: true,
-  },
 
   /**
    * The skin tone to show the emojis
@@ -187,18 +125,7 @@ const props = defineProps({
   },
 
   /**
-   * Tooltip shown when skin selector button is hovered.
-   * @type {String}
-   * @required
-   * @example
-   * <dt-emoji-picker :skin-selector-button-tooltip-label="'Change default skin tone'" />
-   */
-  skinSelectorButtonTooltipLabel: {
-    type: String,
-    required: true,
-  },
 
-  /**
    * Sets the search query that filters emojis.
    * @type {String}
    * @example
@@ -266,6 +193,26 @@ const scrollIntoTab = ref(0);
 
 const showRecentlyUsedTab = computed(() => props.recentlyUsedEmojis?.length > 0);
 const showCustomEmojisTab = computed(() => props.customEmojis?.length > 0);
+
+// TODO: Refactor DtLocalizationMixin
+const tabSetLabels = [
+  this.i18n.$t('DIALTONE_EMOJI_PICKER_TABSET_RECENTLY_USED_LABEL'),
+  this.i18n.$t('DIALTONE_EMOJI_PICKER_TABSET_SMILEYS_AND_PEOPLE_LABEL'),
+  this.i18n.$t('DIALTONE_EMOJI_PICKER_TABSET_NATURE_LABEL'),
+  this.i18n.$t('DIALTONE_EMOJI_PICKER_TABSET_FOOD_LABEL'),
+  this.i18n.$t('DIALTONE_EMOJI_PICKER_TABSET_ACTIVITY_LABEL'),
+  this.i18n.$t('DIALTONE_EMOJI_PICKER_TABSET_TRAVEL_LABEL'),
+  this.i18n.$t('DIALTONE_EMOJI_PICKER_TABSET_OBJECTS_LABEL'),
+  this.i18n.$t('DIALTONE_EMOJI_PICKER_TABSET_SYMBOLS_LABEL'),
+  this.i18n.$t('DIALTONE_EMOJI_PICKER_TABSET_FLAGS_LABEL'),
+  this.i18n.$t('DIALTONE_EMOJI_PICKER_TABSET_CUSTOM_LABEL'),
+];
+
+const searchPlaceholderLabel = this.i18n.$t('DIALTONE_EMOJI_PICKER_SEARCH_PLACEHOLDER_LABEL');
+const searchResultsLabel = this.i18n.$t('DIALTONE_EMOJI_PICKER_SEARCH_RESULTS_LABEL');
+const searchNoResultsLabel = this.i18n.$t('DIALTONE_EMOJI_PICKER_SEARCH_NO_RESULTS_LABEL');
+const skinSelectorButtonTooltipLabel = this.i18n.$t('DIALTONE_EMOJI_PICKER_SKIN_SELECTOR_BUTTON_TOOLTIP_LABEL');
+const addEmojiLabel = this.i18n.$t('DIALTONE_EMOJI_PICKER_ADD_EMOJI_LABEL');
 
 watch(
   () => props.searchQuery,

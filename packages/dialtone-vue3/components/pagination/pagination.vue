@@ -34,7 +34,6 @@
         />
         <!-- … -->
       </div>
-      <!-- eslint-enable vue/no-bare-strings-in-template -->
       <dt-button
         v-else
         :aria-label="pageNumberAriaLabel(page)"
@@ -101,30 +100,6 @@ export default {
     },
 
     /**
-     * Descriptive label for the previous button.
-     */
-    prevAriaLabel: {
-      type: String,
-      required: true,
-    },
-
-    /**
-     * Descriptive label for the next button.
-     */
-    nextAriaLabel: {
-      type: String,
-      required: true,
-    },
-
-    /**
-     * A method that will be called to get the aria label of each page.
-     */
-    pageNumberAriaLabel: {
-      type: Function,
-      required: true,
-    },
-
-    /**
      * The active current page in the list of pages, defaults to the first page
      */
     activePage: {
@@ -178,6 +153,7 @@ export default {
       return this.currentPage === this.totalPages;
     },
 
+    // eslint-disable-next-line complexity
     pages () {
       if (this.maxVisible === 0) {
         return [];
@@ -231,6 +207,20 @@ export default {
         return [1, ...pages, this.totalPages];
       }
       return pages;
+    },
+
+    prevAriaLabel () {
+      return this.isFirstPage ? this.i18n.$t('DIALTONE_PAGINATION_FIRST_PAGE') : this.i18n.$t('DIALTONE_PAGINATION_PREVIOUS_PAGE');
+    },
+
+    nextAriaLabel () {
+      return this.isLastPage ? this.i18n.$t('DIALTONE_PAGINATION_LAST_PAGE') : this.i18n.$t('DIALTONE_PAGINATION_NEXT_PAGE');
+    },
+
+    pageNumberAriaLabel () {
+      return (page) => {
+        return page === this.totalPages ? `${this.i18n.$t('DIALTONE_PAGINATION_LAST_PAGE')} ${page}` : `${this.i18n.$t('DIALTONE_PAGINATION_PAGE_NUMBER', { page })}`;
+      };
     },
   },
 

@@ -44,13 +44,8 @@
           name="list"
           :close="close"
         />
-        <sr-only-close-button
-          v-if="showVisuallyHiddenClose"
-          :visually-hidden-close-label="visuallyHiddenCloseLabel"
-          :tabindex="isArrowKeyNav ? -1 : 0"
-          @close="close"
-        />
       </ul>
+      <sr-only-close-button @close="close" />
     </template>
     <template #footerContent="{ close }">
       <!-- @slot Slot for the footer content -->
@@ -69,7 +64,6 @@ import { LIST_ITEM_NAVIGATION_TYPES } from '@/components/list_item';
 import { DROPDOWN_PADDING_CLASSES } from './dropdown_constants';
 import { getUniqueString } from '@/common/utils';
 import { EVENT_KEYNAMES } from '@/common/constants';
-import SrOnlyCloseButtonMixin from '@/common/mixins/sr_only_close_button';
 import SrOnlyCloseButton from '@/common/sr_only_close_button.vue';
 
 export default {
@@ -93,7 +87,6 @@ export default {
       activeItemKey: 'activeItemEl',
       focusOnKeyboardNavigation: true,
     }),
-    SrOnlyCloseButtonMixin,
   ],
 
   inheritAttrs: false,
@@ -426,7 +419,7 @@ export default {
     },
 
     afterHighlight () {
-      if (this.visuallyHiddenClose && this.highlightIndex === this._itemsLength() - 1) {
+      if (this.highlightIndex === this._itemsLength() - 1) {
         return;
       }
 

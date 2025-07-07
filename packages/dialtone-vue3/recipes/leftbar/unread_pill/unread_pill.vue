@@ -14,7 +14,9 @@
       size="300"
     />
     <span data-qa="dt-recipe-leftbar-unread-pill__label">
-      <slot />
+      <slot>
+        {{ text }}
+      </slot>
     </span>
   </button>
 </template>
@@ -22,6 +24,7 @@
 <script>
 import { DtIconArrowUp, DtIconArrowDown } from '@dialpad/dialtone-icons/vue3';
 import { UNREAD_PILL_DIRECTIONS, UNREAD_PILL_KINDS } from './unread_pill_constants';
+
 export default {
   compatConfig: { MODE: 3 },
   name: 'DtRecipeUnreadPill',
@@ -64,6 +67,12 @@ export default {
   ],
 
   computed: {
+    text () {
+      return this.kind === 'mentions'
+        ? this.i18n.$t('DIALTONE_UNREAD_PILL_MENTIONS_TEXT')
+        : this.i18n.$t('DIALTONE_UNREAD_PILL_MESSAGES_TEXT');
+    },
+
     unreadChipListeners () {
       return {
         click: event => this.$emit('click', event),

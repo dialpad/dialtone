@@ -2,15 +2,11 @@ import { mount } from '@vue/test-utils';
 import DtRecipeComboboxMultiSelect from './combobox_multi_select.vue';
 import { VALIDATION_MESSAGE_TYPES } from '@/common/constants';
 import { flushPromises } from '@/common/utils';
-import DtPopover from '@/components/popover/popover.vue';
-import { cleanSpy, initializeSpy } from '@/tests/shared_examples/validation';
-import { itBehavesLikeVisuallyHiddenCloseLabelIsNull } from '@/tests/shared_examples/sr_only_close_button';
 
 // Constants
 const baseProps = {
   showList: true,
   label: 'Label Text',
-  visuallyHiddenCloseLabel: 'Close combobox',
 };
 
 describe('DtRecipeComboboxMultiSelect Tests', () => {
@@ -21,6 +17,8 @@ describe('DtRecipeComboboxMultiSelect Tests', () => {
   let inputLabel;
   let inputDescription;
   let validationMsg;
+  let srOnlyCloseBtn;
+  let popoverContainer;
 
   // Environment
   let props = baseProps;
@@ -35,6 +33,8 @@ describe('DtRecipeComboboxMultiSelect Tests', () => {
     inputLabel = wrapper.find('[data-qa="dt-input-label"]');
     inputDescription = wrapper.find('[data-qa="dt-input-description"]');
     validationMsg = wrapper.find('[data-qa="validation-message"]');
+    srOnlyCloseBtn = wrapper.find('[data-qa="dt-sr-only-close-button"]');
+    popoverContainer = wrapper.find('[data-qa="dt-popover-container"]');
   };
 
   const _setWrappers = () => {
@@ -69,24 +69,17 @@ describe('DtRecipeComboboxMultiSelect Tests', () => {
   });
 
   describe('Presentation Tests', () => {
-    it(
-      'should render the component',
-      () => { expect(wrapper.exists()).toBe(true); },
-    );
-    it('should render the input', () => { expect(input.exists()).toBe(true); });
+    it('should render the component', () => {
+      expect(wrapper.exists()).toBe(true);
+    });
+    it('should render the input', () => {
+      expect(input.exists()).toBe(true);
+    });
     it('should render the input label', () => {
       expect(inputLabel.exists()).toBe(true);
     });
     it('should not render the chip if no selection', () => {
       expect(chips.length).toBe(0);
-    });
-    it('should not render the visually hidden close button', async () => {
-      await input.trigger('focus');
-      expect(wrapper
-        .findComponent(DtPopover)
-        .findComponent({ ref: 'content' })
-        .find('[data-qa="dt-sr-only-close-button"]')
-        .exists()).toBe(false);
     });
 
     describe('When description is provided', () => {
@@ -128,36 +121,6 @@ describe('DtRecipeComboboxMultiSelect Tests', () => {
 
       it('should be two chip components', () => {
         expect(chips.length).toBe(2);
-      });
-    });
-
-    describe('When visuallyHiddenClose is true', () => {
-      beforeEach(async () => {
-        await wrapper.setProps({ visuallyHiddenClose: true });
-        await input.trigger('focus');
-        _setChildWrappers();
-      });
-
-      it('should contain a visually hidden close button', async () => {
-        expect(wrapper
-          .findComponent(DtPopover)
-          .findComponent({ ref: 'content' })
-          .find('[data-qa="dt-sr-only-close-button"]')
-          .exists()).toBe(true)
-        ;
-      });
-
-      describe('When visuallyHiddenCloseLabel is null', () => {
-        beforeEach(async () => {
-          initializeSpy();
-          await wrapper.setProps({ visuallyHiddenCloseLabel: null });
-        });
-
-        afterEach(() => {
-          cleanSpy();
-        });
-
-        itBehavesLikeVisuallyHiddenCloseLabelIsNull();
       });
     });
   });
@@ -273,22 +236,28 @@ describe('DtRecipeComboboxMultiSelect Tests', () => {
       },
     );
 
-    describe('When sr-only close button is enabled and activated', () => {
-      let popoverContainer;
-
+    describe('When list is open', () => {
       beforeEach(async () => {
-        await wrapper.setProps({ visuallyHiddenClose: true });
         await input.trigger('focus');
-        popoverContainer = wrapper.find('[data-qa="dt-popover-container"]');
-        await wrapper
-          .findComponent(DtPopover)
-          .findComponent({ ref: 'content' })
-          .find('[data-qa="dt-sr-only-close-button"]')
-          .trigger('click');
+        _setChildWrappers();
       });
 
-      it('Does not contain modal-opened class', () => {
-        expect(popoverContainer.classes('d-popover__anchor--modal-opened')).toBe(false);
+      it('Should contain anchor-opened class', () => {
+        expect(popoverContainer.classes('d-popover__anchor--opened')).toBe(true);
+      });
+
+      it('Should contain a visually hidden close button', () => {
+        expect(srOnlyCloseBtn.exists()).toBe(true);
+      });
+
+      describe('When visually hidden close button is clicked', () => {
+        beforeEach(async () => {
+          await srOnlyCloseBtn.trigger('click');
+        });
+
+        it('Should not contain anchor-opened class', () => {
+          expect(popoverContainer.classes('d-popover__anchor--opened')).toBe(false);
+        });
       });
     });
   });

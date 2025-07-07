@@ -9,7 +9,7 @@
     :disabled="disabled"
     :style="{ width: width }"
     :aria-live="computedAriaLive"
-    :aria-label="loading ? 'loading' : $attrs['aria-label']"
+    :aria-label="loading ? i18n.$t('DIALTONE_BUTTON_LOADING') : $attrs['aria-label']"
     v-on="buttonListeners"
   >
     <!-- NOTE(cormac): This span is needed since we can't apply styles to slots. -->
@@ -60,6 +60,7 @@ import {
 } from './button_constants';
 
 import { LINK_KIND_MODIFIERS, getLinkKindModifier } from '@/components/link';
+import { DialtoneLocalization } from '@/localization';
 
 /**
  * A button is a UI element which allows users to take an action throughout the app.
@@ -200,7 +201,7 @@ export default {
 
     /**
      * The color of the button.
-     * @values default, unstyled, muted, danger, positive, inverted, unstyled
+     * @values default, unstyled, muted, danger, positive, inverted
      */
     kind: {
       type: String,
@@ -254,6 +255,7 @@ export default {
       // whether the button is currently in focus
       isInFocus: false,
       hasSlotContent,
+      i18n: new DialtoneLocalization(),
     };
   },
 

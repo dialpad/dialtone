@@ -7,7 +7,6 @@ import DtNoticeIcon from '../notice/notice_icon.vue';
 
 const baseProps = {
   title: '',
-  closeButtonProps: { ariaLabel: 'close' },
 };
 
 const baseSlots = {

@@ -1,6 +1,6 @@
 <template>
   <nav
-    :aria-label="ariaLabel"
+    :aria-label="ariaLabel || i18n.$t('DIALTONE_BREADCRUMBS_ARIA_LABEL')"
     data-qa="dt-breadcrumbs"
     :class="[
       'd-breadcrumbs',
@@ -67,7 +67,7 @@ export default {
      */
     ariaLabel: {
       type: String,
-      default: 'breadcrumb',
+      default: '',
     },
   },
 

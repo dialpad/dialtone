@@ -3,7 +3,6 @@
     <span
       v-for="reaction in reactions"
       :key="reaction.unicodeOutput"
-      :reaction="reaction"
     >
       <dt-tooltip
         class="d-recipe-emoji-row__tooltip"
@@ -13,7 +12,7 @@
       >
         <span aria-hidden="true">
           <dt-emoji-text-wrapper size="200">
-            {{ reaction.tooltip }}
+            {{ reactionLabel(reaction) }}
           </dt-emoji-text-wrapper>
         </span>
         <template #anchor="{ attrs }">
@@ -25,7 +24,7 @@
               'd-recipe-emoji-row__reaction',
               reaction.isSelected ? 'd-recipe-emoji-row__reaction--selected' : '',
             ]"
-            :aria-label="reaction.ariaLabel"
+            :aria-label="reactionLabel(reaction)"
             :attrs="attrs"
             @click="emojiClicked(reaction)"
           >
@@ -42,6 +41,7 @@
         </template>
       </dt-tooltip>
     </span>
+    <!-- TODO: Replace picker slot with a button with localized text and emit any event needed -->
     <!-- @slot Slot for emoji picker component, including the anchor. -->
     <slot name="picker" />
   </span>
@@ -49,10 +49,11 @@
 
 <script>
 import { REACTIONS_ATTRIBUTES } from './emoji_row_constants.js';
-import { DtButton } from '../../../components/button';
-import { DtTooltip } from '../../../components/tooltip';
-import { DtEmoji } from '../../../components/emoji';
-import { DtEmojiTextWrapper } from '../../../components/emoji_text_wrapper';
+import { DtButton } from '@/components/button';
+import { DtTooltip } from '@/components/tooltip';
+import { DtEmoji } from '@/components/emoji';
+import { DtEmojiTextWrapper } from '@/components/emoji_text_wrapper';
+import { DtLocalizationMixin } from '@/common/mixins';
 
 export default {
   compatConfig: { MODE: 3 },
@@ -60,7 +61,7 @@ export default {
 
   components: { DtTooltip, DtButton, DtEmoji, DtEmojiTextWrapper },
 
-  mixins: [],
+  mixins: [DtLocalizationMixin],
 
   props: {
     /**
@@ -93,6 +94,15 @@ export default {
       this.$emit('emoji-hovered', {
         reaction: reaction.emojiUnicodeOrShortname,
         state,
+      });
+    },
+
+    reactionLabel (reaction) {
+      return this.i18n.$t('DIALTONE_EMOJI_ROW_REACTION_LABEL', {
+        reactionCount: reaction.num,
+        name: reaction.name || 'A person',
+        selected: reaction.isSelected.toString(),
+        reaction: reaction.emojiUnicodeOrShortname,
       });
     },
   },

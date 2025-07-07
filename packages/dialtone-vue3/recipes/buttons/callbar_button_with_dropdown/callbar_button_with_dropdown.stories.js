@@ -178,7 +178,6 @@ const defaultArgs = {
   default: 'Button',
   tooltip: 'Tooltip Text',
   ariaLabel: 'Button',
-  arrowButtonLabel: 'Open dropdown',
   list: 'Dropdown body content',
   forceShowArrow: false,
   icon: 'dialpad-ai',

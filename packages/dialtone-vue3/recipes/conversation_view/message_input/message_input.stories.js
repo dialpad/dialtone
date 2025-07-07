@@ -198,22 +198,6 @@ export const argsData = {
   inputAriaLabel: 'Input text field',
   maxHeight: '40vh',
   emojiPickerProps: {
-    searchNoResultsLabel: 'No results',
-    searchResultsLabel: 'Search results',
-    searchPlaceholderLabel: 'Search...',
-    skinSelectorButtonTooltipLabel: 'Change default skin tone',
-    tabSetLabels: [
-      'Most recently used',
-      'Smileys and people',
-      'Nature',
-      'Food',
-      'Activity',
-      'Travel',
-      'Objects',
-      'Symbols',
-      'Flags',
-      'Custom',
-    ],
     skinTone: 'Default',
   },
   setLinkPlaceholder: 'e.g. https://www.dialpad.com',
@@ -224,8 +208,7 @@ export const argsData = {
     message: 'You have exceeded the character limit',
   },
   showSend: {
-    ariaLabel: 'send',
-    tooltipLabel: 'Send',
+    text: '',
   },
   mentionSuggestion,
   channelSuggestion,
@@ -306,7 +289,35 @@ export const WithMeetingPill = {
         ];
       },
     },
-    modelValue: '<meeting-pill text="Start a meeting" close-button-aria-label="Delete meeting pill"/>',
+    modelValue: '<meeting-pill text="Start a meeting"/>',
     preventTyping: true,
+  },
+};
+
+export const WithCustomEmoji = {
+  render: DefaultTemplate,
+  args: {
+    value: 'This is a test with custom emojis',
+    emojiPickerProps: {
+      skinTone: 'Default',
+      customEmojis: [
+        {
+          name: 'shipit',
+          date_added: 1730918816847,
+          added_by: 'Ignacio Ropolo',
+          image: 'https://github.githubassets.com/images/icons/emoji/shipit.png',
+          unicode_character: '1f44d',
+        },
+        {
+          name: 'thumbs up',
+          category: 'people',
+          shortname: ':thumbsup:',
+          shortname_alternates: [':+1:', ':thumbup:'],
+          keywords: ['+1', 'hand', 'thumb', 'up', 'uc6'],
+          unicode_output: '1f44d',
+          unicode_character: '1f44d',
+        },
+      ],
+    },
   },
 };

@@ -38,9 +38,6 @@
       <dt-notice-action
         :hide-action="hideAction"
         :hide-close="hideClose"
-        :close-button-props="closeButtonProps"
-        :visually-hidden-close="visuallyHiddenClose"
-        :visually-hidden-close-label="visuallyHiddenCloseLabel"
         v-bind="$attrs"
         @close="$emit('close')"
       >
@@ -54,7 +51,6 @@
 <script>
 import utils from '@/common/utils';
 import { DtNoticeIcon, DtNoticeContent, DtNoticeAction, NOTICE_KINDS } from '@/components/notice';
-import SrOnlyCloseButtonMixin from '@/common/mixins/sr_only_close_button';
 import { TOAST_ROLES } from '../toast_constants.js';
 export default {
   name: 'ToastLayoutDefault',
@@ -64,8 +60,6 @@ export default {
     DtNoticeContent,
     DtNoticeAction,
   },
-
-  mixins: [SrOnlyCloseButtonMixin],
 
   inheritAttrs: false,
 
@@ -141,14 +135,6 @@ export default {
     important: {
       type: Boolean,
       default: false,
-    },
-
-    /**
-     * Props for the toast close button.
-     */
-    closeButtonProps: {
-      type: Object,
-      default: () => ({}),
     },
 
     /**

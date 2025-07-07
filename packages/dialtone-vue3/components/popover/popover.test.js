@@ -2,7 +2,6 @@ import { mount } from '@vue/test-utils';
 import { DtPopover } from '@/components/popover';
 import SrOnlyCloseButtonComponent from '@/common/sr_only_close_button.vue';
 
-const defaultSrOnlyCloseButtonLabel = 'Close popover';
 const MOCK_DEFAULT_SLOT_MESSAGE = 'Message';
 const MOCK_HEADER_CONTENT = 'Popover Title';
 const MOCK_FOOTER_CONTENT = 'Popover Footer';
@@ -11,7 +10,6 @@ const baseProps = {
   id: 'popover-id',
   showCloseButton: true,
   initialFocusElement: 'first',
-  visuallyHiddenCloseLabel: defaultSrOnlyCloseButtonLabel,
 };
 const baseSlots = {
   content: MOCK_DEFAULT_SLOT_MESSAGE,
@@ -118,38 +116,30 @@ describe('DtPopover Tests', () => {
       it('should not render the visually hidden close button', () => {
         const buttonExists = wrapper.findComponent(SrOnlyCloseButtonComponent).exists();
 
-        expect(!buttonExists).toBe(true);
-      });
-    });
-
-    describe('When visuallyHiddenClose is true', () => {
-      beforeEach(async () => {
-        await wrapper.setProps({ visuallyHiddenClose: true });
-
-        await button.trigger('click');
+        expect(buttonExists).toBe(false);
       });
 
-      it('should contain a visually hidden close button', () => {
-        const buttonExists = wrapper.findComponent(SrOnlyCloseButtonComponent).exists();
+      describe('When showCloseButton is false', () => {
+        beforeEach(async () => {
+          await wrapper.setProps({ showCloseButton: false });
+        });
 
-        expect(buttonExists).toBe(true);
+        it('should contain a visually hidden close button', async () => {
+          const buttonExists = await wrapper.findComponent(SrOnlyCloseButtonComponent).exists();
+
+          expect(buttonExists).toBe(false);
+        });
       });
 
-      describe('When visuallyHiddenCloseLabel is null', () => {
-        it('should raise a validation error', async () => {
-          let consoleErrorSpy;
+      describe('When showCloseButton is false', () => {
+        beforeEach(async () => {
+          await wrapper.setProps({ showCloseButton: false });
+        });
 
-          consoleErrorSpy = vi.spyOn(console, 'error').mockClear();
+        it('should contain a visually hidden close button', async () => {
+          const buttonExists = await wrapper.findComponent(SrOnlyCloseButtonComponent).exists();
 
-          await wrapper.setProps({ visuallyHiddenCloseLabel: null });
-
-          const message = `If visuallyHiddenClose prop is true, the component includes
-           a visually hidden close button and you must set the visuallyHiddenCloseLabel prop.`;
-
-          expect(consoleErrorSpy).toHaveBeenCalledWith(message);
-
-          consoleErrorSpy = null;
-          console.error.mockRestore();
+          expect(buttonExists).toBe(true);
         });
       });
     });
@@ -275,7 +265,7 @@ describe('DtPopover Tests', () => {
 
         describe('When sr-only close button is enabled and activated', () => {
           it('should close the popover', async () => {
-            await wrapper.setProps({ visuallyHiddenClose: true });
+            await wrapper.setProps({ showCloseButton: false });
             await wrapper.findComponent(SrOnlyCloseButtonComponent).trigger('click');
 
             expect(popoverWindow.isVisible()).toBe(false);

@@ -1,22 +1,22 @@
 <template>
   <div class="d-emoji-picker__tabset">
     <dt-tab-group
+      :selected="selectedTab"
       size="sm"
       tab-list-class="d-emoji-picker__tabset-list"
-      :selected="selectedTab"
     >
       <template #tabs>
         <dt-tab
           v-for="(tab, index) in tabs"
           :id="tab.id"
-          :ref="el => { if (el) setTabsetRef(el) }"
           :key="tab.id"
-          :panel-id="tab.panelId"
+          :ref="el => { if (el) setTabsetRef(el) }"
           :label="tab.label"
-          aria-controls="d-emoji-picker-list"
+          :panel-id="tab.panelId"
           :tabindex="index + 1"
-          @click.capture.stop="selectTabset(tab.id)"
+          aria-controls="d-emoji-picker-list"
           @keydown="handleKeyDown($event, tab.id)"
+          @click.capture.stop="selectTabset(tab.id)"
         >
           <component
             :is="tab.icon"
@@ -101,16 +101,16 @@ const emits = defineEmits([
 ]);
 
 const TABS_DATA = [
-  { label: EMOJI_PICKER_CATEGORIES.MOST_RECENTLY_USED, icon: DtIconClock },
-  { label: EMOJI_PICKER_CATEGORIES.SMILEYS_AND_PEOPLE, icon: DtIconSatisfied },
-  { label: EMOJI_PICKER_CATEGORIES.NATURE, icon: DtIconLivingThing },
-  { label: EMOJI_PICKER_CATEGORIES.FOOD, icon: DtIconFood },
-  { label: EMOJI_PICKER_CATEGORIES.ACTIVITY, icon: DtIconObject },
-  { label: EMOJI_PICKER_CATEGORIES.TRAVEL, icon: DtIconTransportation },
-  { label: EMOJI_PICKER_CATEGORIES.OBJECTS, icon: DtIconLightbulb },
-  { label: EMOJI_PICKER_CATEGORIES.SYMBOLS, icon: DtIconHeart },
-  { label: EMOJI_PICKER_CATEGORIES.FLAGS, icon: DtIconFlag },
-  { label: EMOJI_PICKER_CATEGORIES.CUSTOM, icon: DtIconTiktok },
+  { label: props.tabSetLabels[0], icon: DtIconClock },
+  { label: props.tabSetLabels[1], icon: DtIconSatisfied },
+  { label: props.tabSetLabels[2], icon: DtIconLivingThing },
+  { label: props.tabSetLabels[3], icon: DtIconFood },
+  { label: props.tabSetLabels[4], icon: DtIconObject },
+  { label: props.tabSetLabels[5], icon: DtIconTransportation },
+  { label: props.tabSetLabels[6], icon: DtIconLightbulb },
+  { label: props.tabSetLabels[7], icon: DtIconHeart },
+  { label: props.tabSetLabels[8], icon: DtIconFlag },
+  { label: props.tabSetLabels[9], icon: DtIconTiktok },
 ];
 
 const tabs = computed(() => {
@@ -122,7 +122,6 @@ const tabs = computed(() => {
 
   return tabsData.map((tab, index) => ({
     ...tab,
-    label: props.tabsetLabels[index],
     // IDs on dt-tab component need to be on string
     id: (index + 1).toString(),
     panelId: (index + 1).toString(),

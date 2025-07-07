@@ -164,7 +164,7 @@ describe('DtRadio Tests', () => {
         it('no events are emitted', async () => {
           await wrapper.trigger('click');
 
-          expect(wrapper.emitted()).toEqual({});
+          expect(wrapper.emitted('input')).toBeFalsy();
         });
       });
     });
@@ -400,7 +400,7 @@ describe('DtRadio Tests', () => {
 
             await wrapper.trigger('click');
 
-            expect(wrapper.emitted()).toEqual({});
+            expect(wrapper.emitted('input')).toBeFalsy();
           });
         });
       });

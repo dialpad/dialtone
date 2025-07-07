@@ -28,7 +28,8 @@
       importance="outlined"
       kind="muted"
       circle
-      v-bind="closeButtonProps"
+      :aria-label="closeButtonTitle"
+      :title="closeButtonTitle"
       @click="$emit('close')"
     >
       <template #icon>
@@ -78,15 +79,6 @@ export default {
       type: Boolean,
       default: false,
     },
-
-    /**
-     * A set of props to be passed into the popover's header close button.
-     * Requires an 'ariaLabel' property.
-     */
-    closeButtonProps: {
-      type: Object,
-      default: () => {},
-    },
   },
 
   emits: [
@@ -103,6 +95,12 @@ export default {
     return {
       hasSlotContent,
     };
+  },
+
+  computed: {
+    closeButtonTitle () {
+      return this.i18n.$t('DIALTONE_CLOSE_BUTTON');
+    },
   },
 
   methods: {

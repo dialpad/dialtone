@@ -74,6 +74,11 @@ export default defineConfig({
 
         // Dependencies
         'node_modules/@tiptap/vue-3': './node_modules/@tiptap/vue-3/dist/index.js',
+
+        // Localization
+        'localization/index': './localization/index.js',
+        'localization/es-LA': './localization/es-LA.ftl?raw',
+        'localization/en-US': './localization/en-US.ftl?raw',
       },
       formats: ['es', 'cjs'],
     },

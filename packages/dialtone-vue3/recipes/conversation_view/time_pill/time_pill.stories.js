@@ -35,7 +35,7 @@ export default {
   excludeStories: /.*Data$/,
 };
 
-const today = new Date('1999-03-28');
+const today = new Date();
 
 // Templates
 const DefaultTemplate = (args, { argTypes }) =>

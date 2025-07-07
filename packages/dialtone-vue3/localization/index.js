@@ -14,7 +14,7 @@ import esLA from './es-LA.ftl?raw';
 const dialtoneNamespace = 'dialtone';
 
 export class DialtoneLocalization {
-  constructor (locale = 'en-US') {
+  constructor (app, locale = 'en-US') {
     if (typeof DialtoneLocalization.instance === 'object') {
       return DialtoneLocalization.instance;
     }
@@ -32,6 +32,7 @@ export class DialtoneLocalization {
       RUSSIAN: 'ru-RU',
       SPANISH: 'es-LA',
     };
+    this._app = app;
 
     const bundleSource = new RawBundleSource({
       resources: RawBundleSource.builtResources([
@@ -56,7 +57,7 @@ export class DialtoneLocalization {
       namespaces: [dialtoneNamespace],
     });
 
-    localeManager.install(dialtoneNamespace);
+    localeManager.install(app, dialtoneNamespace);
 
     DialtoneLocalization.instance = this;
     return this;
@@ -81,6 +82,7 @@ export class DialtoneLocalization {
     }
 
     this._locale = newLocale;
+    // TODO: this is not working onClick, might be related to our components not being `script setup`
     useI18N(dialtoneNamespace).setI18N({ preferredLocale: newLocale }, dialtoneNamespace);
   }
 

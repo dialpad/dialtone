@@ -1,31 +1,31 @@
 <template>
   <dt-stack
-    direction="row"
     class="d-datepicker__month-year"
+    direction="row"
     gap="300"
   >
     <dt-stack
       as="nav"
+      class="d-datepicker__nav"
       direction="row"
       gap="200"
-      class="d-datepicker__nav"
     >
       <dt-tooltip
-        :message="prevYearLabel"
-        placement="top"
         :fallback-placements="['top-start', 'auto']"
+        :message="i18n.$t('DIALTONE_DATEPICKER_PREVIOUS_YEAR')"
+        placement="top"
       >
         <template #anchor>
           <dt-button
             id="prevYearButton"
             :ref="el => { if (el) setDayRef(el) }"
-            size="xs"
-            importance="clear"
-            kind="muted"
+            :aria-label="previousYearAriaLabel"
             :circle="true"
             class="d-datepicker__nav-btn"
+            importance="clear"
+            kind="muted"
+            size="xs"
             type="button"
-            :aria-label="`${changeToLabel} ${prevYearLabel} ${selectYear - 1}`"
             @click="changeYear(-1)"
             @keydown="handleKeyDown($event)"
           >
@@ -36,23 +36,21 @@
         </template>
       </dt-tooltip>
       <dt-tooltip
-        :message="prevMonthLabel"
+        :fallback-placements="['top-start', 'auto']"
+        :message="i18n.$t('DIALTONE_DATEPICKER_PREVIOUS_MONTH')"
         placement="top"
-        :fallback-placements="['top-end', 'auto']"
       >
         <template #anchor>
           <dt-button
             id="prevMonthButton"
             :ref="el => { if (el) setDayRef(el) }"
-            size="xs"
-            importance="clear"
-            kind="muted"
+            :aria-label="previousMonthAriaLabel"
             :circle="true"
             class="d-datepicker__nav-btn"
+            importance="clear"
+            kind="muted"
+            size="xs"
             type="button"
-            :aria-label="
-              `${changeToLabel} ${prevMonthLabel} ${formattedMonth(selectMonth - 1, INTL_MONTH_FORMAT, locale)}`
-            "
             @click="changeMonth(-1)"
             @keydown="handleKeyDown($event)"
           >
@@ -67,34 +65,32 @@
       id="calendar-heading"
       class="d-datepicker__month-year-title"
     >
-      {{ formattedMonth(selectMonth, INTL_MONTH_FORMAT, locale) }}
+      {{ formattedMonth(selectMonth) }}
 
       {{ selectYear }}
     </div>
     <dt-stack
       as="nav"
+      class="d-datepicker__nav"
       direction="row"
       gap="200"
-      class="d-datepicker__nav"
     >
       <dt-tooltip
-        :message="nextMonthLabel"
+        :fallback-placements="['top-end', 'auto']"
+        :message="i18n.$t('DIALTONE_DATEPICKER_NEXT_MONTH')"
         placement="top"
-        :fallback-placements="['top-start', 'auto']"
       >
         <template #anchor>
           <dt-button
             id="nextMonthButton"
             :ref="el => { if (el) setDayRef(el) }"
-            size="xs"
-            importance="clear"
-            kind="muted"
+            :aria-label="nextMonthAriaLabel"
             :circle="true"
             class="d-datepicker__nav-btn"
+            importance="clear"
+            kind="muted"
+            size="xs"
             type="button"
-            :aria-label="
-              `${changeToLabel} ${nextMonthLabel} ${formattedMonth(selectMonth + 1, INTL_MONTH_FORMAT, locale)}`
-            "
             @click="changeMonth(1)"
             @keydown="handleKeyDown($event)"
           >
@@ -105,21 +101,21 @@
         </template>
       </dt-tooltip>
       <dt-tooltip
-        :message="nextYearLabel"
-        placement="top"
         :fallback-placements="['top-end', 'auto']"
+        :message="i18n.$t('DIALTONE_DATEPICKER_NEXT_YEAR')"
+        placement="top"
       >
         <template #anchor>
           <dt-button
             id="nextYearButton"
             :ref="el => { if (el) setDayRef(el) }"
-            size="xs"
-            importance="clear"
-            kind="muted"
+            :aria-label="nextYearAriaLabel"
             :circle="true"
             class="d-datepicker__nav-btn"
+            importance="clear"
+            kind="muted"
+            size="xs"
             type="button"
-            :aria-label="`${changeToLabel} ${nextYearLabel} ${selectYear + 1}`"
             @click="changeYear(1)"
             @keydown="handleKeyDown($event)"
           >
@@ -134,52 +130,29 @@
 </template>
 
 <script setup>
-import { DtIconChevronLeft, DtIconChevronsLeft, DtIconChevronRight, DtIconChevronsRight } from '@dialpad/dialtone-icons/vue3';
+import {
+  DtIconChevronLeft,
+  DtIconChevronsLeft,
+  DtIconChevronRight,
+  DtIconChevronsRight,
+} from '@dialpad/dialtone-icons/vue3';
 import { DtStack } from '@/components/stack';
 import { DtButton } from '@/components/button';
 import { DtTooltip } from '@/components/tooltip';
 import { INTL_MONTH_FORMAT } from '../datepicker_constants';
 import { onMounted } from 'vue';
 import { useMonthYearPicker } from '@/components/datepicker/composables/useMonthYearPicker.js';
+// TODO: Refactor to include DtLocalizationMixin (When refactored to composable)
 
 const props = defineProps({
-  locale: {
-    type: String,
-    required: true,
-  },
-
-  prevMonthLabel: {
-    type: String,
-    required: true,
-  },
-
-  nextMonthLabel: {
-    type: String,
-    required: true,
-  },
-
-  prevYearLabel: {
-    type: String,
-    required: true,
-  },
-
-  nextYearLabel: {
-    type: String,
-    required: true,
-  },
-
-  changeToLabel: {
-    type: String,
-    required: true,
-  },
-
   selectedDate: {
     type: Date,
     required: true,
   },
 });
+
 const emits = defineEmits([
-  /**
+    /**
      * Will retrieve the calendar days of the given date
      *
      * @event calendar-days

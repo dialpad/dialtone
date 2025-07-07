@@ -10,7 +10,6 @@ import defaultImage from '@/common/assets/avatar2.png?url';
 // Default Prop Values
 const argsData = {
   onClick: action('click'),
-  menuButtonAriaLabel: 'Node menu',
   isSelected: false,
   defaultImage,
 };

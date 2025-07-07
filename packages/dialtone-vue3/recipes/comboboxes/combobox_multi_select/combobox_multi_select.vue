@@ -8,8 +8,6 @@
     :max-width="listMaxWidth"
     :popover-offset="popoverOffset"
     :has-suggestion-list="hasSuggestionList"
-    :visually-hidden-close-label="visuallyHiddenCloseLabel"
-    :visually-hidden-close="visuallyHiddenClose"
     content-width="anchor"
     :append-to="appendTo"
     :transition="transition"
@@ -37,7 +35,6 @@
               { 'd-recipe-combobox-multi-select__chip--truncate': !!chipMaxWidth },
             ]"
             :style="{ maxWidth: chipMaxWidth }"
-            :close-button-props="{ ariaLabel: 'close' }"
             :size="CHIP_SIZES[size]"
             v-on="chipListeners"
             @keyup.backspace="onChipRemove(item)"
@@ -132,7 +129,6 @@ import {
   CHIP_SIZES,
   CHIP_TOP_POSITION,
 } from './combobox_multi_select_constants';
-import SrOnlyCloseButtonMixin from '@/common/mixins/sr_only_close_button';
 
 export default {
   compatConfig: { MODE: 3 },
@@ -144,8 +140,6 @@ export default {
     DtChip,
     DtValidationMessages,
   },
-
-  mixins: [SrOnlyCloseButtonMixin],
 
   props: {
     /**

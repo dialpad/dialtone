@@ -1,17 +1,24 @@
 <script>
 import { DtButton } from '@/components/button';
 import { DtStack } from '@/components/stack';
-import { DtLocalizationMixin } from '@/common/mixins';
+import { DialtoneLocalization } from '@/localization';
 
 export default {
   name: 'LocalizationDefault',
-
   components: {
     DtButton,
     DtStack,
   },
 
-  mixins: [DtLocalizationMixin],
+  data () {
+    return {
+      i18n: null,
+    };
+  },
+
+  mounted () {
+    this.i18n = new DialtoneLocalization(this.$.appContext.app);
+  },
 };
 </script>
 

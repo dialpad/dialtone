@@ -41,12 +41,12 @@
       <template #anchor>
         <dt-button
           :active="open"
-          :aria-label="arrowButtonLabel"
           :class="['dt-recipe--callbar-button-with-dropdown--arrow',
                    { 'dt-recipe--callbar-button-with-dropdown--arrow--large': !isCompactMode }]"
           circle
           importance="clear"
           size="lg"
+          v-bind="arrowButtonLabel"
           width="2rem"
           @click="arrowClick"
         >
@@ -74,11 +74,14 @@ import { DtDropdown } from '@/components/dropdown';
 import { DtIconChevronUp } from '@dialpad/dialtone-icons/vue3';
 import { DtRecipeCallbarButton, CALLBAR_BUTTON_VALID_WIDTH_SIZE } from '../callbar_button';
 import utils, { warnIfUnmounted, removeClassStyleAttrs, addClassStyleAttrs, returnFirstEl } from '@/common/utils';
+import { DtLocalizationMixin } from '@/common/mixins';
 
 export default {
   name: 'DtRecipeCallbarButtonWithDropdown',
 
   components: { DtRecipeCallbarButton, DtDropdown, DtButton, DtIconChevronUp },
+
+  mixins: [DtLocalizationMixin],
 
   /* inheritAttrs: false is generally an option we want to set on library
    components. This allows any attributes passed in that are not recognized
@@ -105,17 +108,6 @@ export default {
       default: null,
       validator: (label) => {
         return label || this.$slots.default;
-      },
-    },
-
-    /**
-     * Aria label for the arrow. Cannot be empty.
-     */
-    arrowButtonLabel: {
-      type: String,
-      required: true,
-      validator: (label) => {
-        return !!label;
       },
     },
 
@@ -302,13 +294,8 @@ export default {
       return this.buttonWidthSize === 'sm' || this.buttonWidthSize === 'md';
     },
 
-    showDropdown () {
-      if (!this.openDropdown || this.open) {
-        this.syncOpenState();
-        return false;
-      }
-
-      return this.toggleOpen();
+    arrowButtonLabel () {
+      return this.i18n.$ta('DIALTONE_CALLBAR_BUTTON_WITH_DROPDOWN_ARROW_BUTTON_LABEL');
     },
   },
 
