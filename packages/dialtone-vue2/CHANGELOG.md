@@ -1,3 +1,10 @@
+## [2.193.3](https://github.com/dialpad/dialtone/compare/dialtone-vue2/v2.193.2...dialtone-vue2/v2.193.3) (2025-07-08)
+
+
+### Bug Fixes
+
+* **Select:** NO-JIRA update validation to allow empty string value ([#816](https://github.com/dialpad/dialtone/issues/816)) ([82a2a6d](https://github.com/dialpad/dialtone/commit/82a2a6db4d45038c6528fd41d9c10ce303e6b512))
+
 ## [2.193.2](https://github.com/dialpad/dialtone/compare/dialtone-vue2/v2.193.1...dialtone-vue2/v2.193.2) (2025-07-01)
 
 
