@@ -1,3 +1,15 @@
+## [9.126.3](https://github.com/dialpad/dialtone/compare/dialtone/v9.126.2...dialtone/v9.126.3) (2025-07-08)
+
+
+### Bug Fixes
+
+* **Select:** NO-JIRA update validation to allow empty string value ([#816](https://github.com/dialpad/dialtone/issues/816)) ([82a2a6d](https://github.com/dialpad/dialtone/commit/82a2a6db4d45038c6528fd41d9c10ce303e6b512))
+
+
+### Documentation
+
+* **Color:** DLT-2480 DLT-2446 improve color usage guidelines ([#808](https://github.com/dialpad/dialtone/issues/808)) ([64168e2](https://github.com/dialpad/dialtone/commit/64168e248ba7c23e209288fd4b1e75d5a42d1da2))
+
 ## [9.126.2](https://github.com/dialpad/dialtone/compare/dialtone/v9.126.1...dialtone/v9.126.2) (2025-07-01)
 
 
