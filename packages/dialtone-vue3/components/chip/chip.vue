@@ -61,6 +61,7 @@ import {
   CHIP_ICON_SIZES,
 } from './chip_constants';
 import { getUniqueString, hasSlotContent } from '@/common/utils';
+import { DialtoneLocalization } from '@/localization';
 
 /**
  * A chip is a compact UI element that provides brief, descriptive information about an element.
@@ -170,6 +171,7 @@ export default {
     return {
       isActive: false,
       hasSlotContent,
+      i18n: new DialtoneLocalization(),
     };
   },
 
