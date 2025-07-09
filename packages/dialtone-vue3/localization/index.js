@@ -1,4 +1,5 @@
 import { LocaleManager, RawBundleSource, useI18N } from '@dialpad/i18n';
+import { getCurrentInstance } from 'vue';
 
 import enUS from './en-US.ftl?raw';
 import zhCN from './zh-CN.ftl?raw';
@@ -14,7 +15,7 @@ import esLA from './es-LA.ftl?raw';
 const dialtoneNamespace = 'dialtone';
 
 export class DialtoneLocalization {
-  constructor (app, locale = 'en-US') {
+  constructor (locale = 'en-US') {
     if (typeof DialtoneLocalization.instance === 'object') {
       return DialtoneLocalization.instance;
     }
@@ -32,7 +33,7 @@ export class DialtoneLocalization {
       RUSSIAN: 'ru-RU',
       SPANISH: 'es-LA',
     };
-    this._app = app;
+    this._app = getCurrentInstance().appContext.app;
 
     const bundleSource = new RawBundleSource({
       resources: RawBundleSource.builtResources([
@@ -57,7 +58,7 @@ export class DialtoneLocalization {
       namespaces: [dialtoneNamespace],
     });
 
-    localeManager.install(app, dialtoneNamespace);
+    localeManager.install(this._app, dialtoneNamespace);
 
     DialtoneLocalization.instance = this;
     return this;
@@ -82,7 +83,6 @@ export class DialtoneLocalization {
     }
 
     this._locale = newLocale;
-    // TODO: this is not working onClick, might be related to our components not being `script setup`
     useI18N(dialtoneNamespace).setI18N({ preferredLocale: newLocale }, dialtoneNamespace);
   }
 

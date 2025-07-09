@@ -840,8 +840,8 @@ importers:
         specifier: workspace:*
         version: link:../dialtone-icons
       '@dialpad/i18n':
-        specifier: 1.16.0
-        version: 1.16.0(@vue/composition-api@1.7.2(vue@3.4.15(typescript@5.6.3)))
+        specifier: 1.17.0-alpha.0
+        version: 1.17.0-alpha.0(@vue/composition-api@1.7.2(vue@3.4.15(typescript@5.6.3)))
       '@tiptap/core':
         specifier: 2.12.0
         version: 2.12.0(@tiptap/pm@2.12.0)
@@ -1928,8 +1928,8 @@ packages:
     peerDependencies:
       vue: 2.6.14
 
-  '@dialpad/i18n@1.16.0':
-    resolution: {integrity: sha512-IUSuJaTEgB0hZW0bHGyY+Sfh3nGUC5rCny8TkbNPg/bz8Iy7zdh8yy4jG9UQn6U7VeK33zSiUXl9njhnzB+Hyw==, tarball: https://npm.pkg.github.com/download/@dialpad/i18n/1.16.0/9e12ecdfe6a562dc813b1ef010d364d7a134cf7b}
+  '@dialpad/i18n@1.17.0-alpha.0':
+    resolution: {integrity: sha512-21eFQMJ9Y69Jdu5Ybz0e/tJ5M4yRueUFnDbFGDBjQXp3fmbdiCc2kCTT74SkyZutkIdEIj4LLV6zbbNm15YPlQ==, tarball: https://npm.pkg.github.com/download/@dialpad/i18n/1.17.0-alpha.0/f379df4c07054ad3f894e12558fc2ddd80869006}
 
   '@dialpad/postcss-responsive-variations@1.1.5':
     resolution: {integrity: sha512-vCeaoF+QKZOVPHYsenCRh/XSl1ppUmXS+XUZqRa2gXtQDe6je5qeAK2H7PIwZiNM9gMA7g6EyHs1PshCWDCl9w==, tarball: https://npm.pkg.github.com/download/@dialpad/postcss-responsive-variations/1.1.5/5dc2e9ce4c3b211755c0b945f408dbb8d01a0106}
@@ -17591,7 +17591,7 @@ snapshots:
       '@vue/composition-api': 1.7.2(vue@2.7.16)
       vue: 2.7.16
 
-  '@dialpad/i18n@1.16.0(@vue/composition-api@1.7.2(vue@3.4.15(typescript@5.6.3)))':
+  '@dialpad/i18n@1.17.0-alpha.0(@vue/composition-api@1.7.2(vue@3.4.15(typescript@5.6.3)))':
     dependencies:
       '@dialpad/i18n-services': 1.5.0(@vue/composition-api@1.7.2(vue@3.4.15(typescript@5.6.3)))(vue@3.3.4)
       vue: 3.3.4

@@ -12,12 +12,8 @@ export default {
 
   data () {
     return {
-      i18n: null,
+      i18n: new DialtoneLocalization(),
     };
-  },
-
-  mounted () {
-    this.i18n = new DialtoneLocalization(this.$.appContext.app);
   },
 };
 </script>
