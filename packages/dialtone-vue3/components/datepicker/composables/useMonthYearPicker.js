@@ -2,6 +2,7 @@ import { computed, ref, watch } from 'vue';
 import { addMonths, getDate, getMonth, getYear, set, subMonths } from 'date-fns';
 import { formatMonth, getCalendarDays } from '@/components/datepicker/utils.js';
 import { returnFirstEl } from '@/common/utils';
+import { DialtoneLocalization } from '@/localization';
 
 export function useMonthYearPicker (props, emits) {
   const selectMonth = ref(getMonth(props.selectedDate));
@@ -9,6 +10,7 @@ export function useMonthYearPicker (props, emits) {
   const highlightedDay = ref(null);
   const focusPicker = ref(0);
   const focusRefs = ref([]);
+  const i18n = new DialtoneLocalization();
 
   const calendarDays = computed(() => {
     return getCalendarDays(selectMonth.value, selectYear.value, highlightedDay.value);
@@ -115,6 +117,22 @@ export function useMonthYearPicker (props, emits) {
     changeMonth(-1);
   }
 
+  function previousYearAriaLabel () {
+    return `${i18n.$t('DIALTONE_DATEPICKER_CHANGE_TO')} ${i18n.$t('DIALTONE_DATEPICKER_PREVIOUS_YEAR')} ${selectYear.value - 1}`;
+  }
+
+  function previousMonthAriaLabel () {
+    return `${i18n.$t('DIALTONE_DATEPICKER_CHANGE_TO')} ${i18n.$t('DIALTONE_DATEPICKER_PREVIOUS_MONTH')} ${this.formattedMonth(selectMonth.value - 1)}`;
+  }
+
+  function nextYearAriaLabel () {
+    return `${i18n.$t('DIALTONE_DATEPICKER_CHANGE_TO')} ${i18n.$t('DIALTONE_DATEPICKER_NEXT_YEAR')} ${selectYear.value + 1}`;
+  }
+
+  function nextMonthAriaLabel () {
+    return `${i18n.$t('DIALTONE_DATEPICKER_CHANGE_TO')} ${i18n.$t('DIALTONE_DATEPICKER_NEXT_MONTH')} ${this.formattedMonth(selectMonth.value + 1)}`;
+  }
+
   return {
     selectMonth,
     selectYear,
@@ -126,5 +144,9 @@ export function useMonthYearPicker (props, emits) {
     changeYear,
     goToNextMonth,
     goToPrevMonth,
+    previousYearAriaLabel,
+    previousMonthAriaLabel,
+    nextYearAriaLabel,
+    nextMonthAriaLabel,
   };
 }

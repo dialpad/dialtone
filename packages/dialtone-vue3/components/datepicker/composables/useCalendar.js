@@ -1,13 +1,14 @@
 import { computed, ref, watch, nextTick } from 'vue';
-import { getWeekDayNames, calculateNextFocusDate, calculatePrevFocusDate } from '@/components/datepicker/utils.js';
-import { MONTH_FORMAT, WEEK_START } from '@/components/datepicker/datepicker_constants.js';
-import { format, getYear } from 'date-fns';
+import { getWeekDayNames, calculateNextFocusDate, calculatePrevFocusDate, formatDate } from '../utils.js';
+import { INTL_MONTH_FORMAT, WEEK_START } from '../datepicker_constants.js';
 import { returnFirstEl } from '@/common/utils';
+import { DialtoneLocalization } from '@/localization';
 
 export function useCalendar (props, emits) {
   const selectedDay = ref(null);
   const focusDay = ref(0);
   const daysRef = ref([]);
+  const i18n = new DialtoneLocalization();
 
   const weekDays = computed(() => {
     return getWeekDayNames(props.locale, WEEK_START);
@@ -20,7 +21,7 @@ export function useCalendar (props, emits) {
   });
 
   function dayAriaLabel (day) {
-    return `${props.selectDayLabel} ${day.text} ${format(day.value, MONTH_FORMAT)} ${getYear(day.value)}`;
+    return i18n.$t('DIALTONE_DATEPICKER_SELECT_DAY') + ` ${formatDate(day.value, INTL_MONTH_FORMAT, i18n.currentLocale)}`;
   }
 
   function setDayRef (el, day) {

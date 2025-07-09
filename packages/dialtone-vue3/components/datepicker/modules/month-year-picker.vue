@@ -139,10 +139,9 @@ import {
 import { DtStack } from '@/components/stack';
 import { DtButton } from '@/components/button';
 import { DtTooltip } from '@/components/tooltip';
-import { INTL_MONTH_FORMAT } from '../datepicker_constants';
 import { onMounted } from 'vue';
 import { useMonthYearPicker } from '@/components/datepicker/composables/useMonthYearPicker.js';
-// TODO: Refactor to include DtLocalizationMixin (When refactored to composable)
+import { DialtoneLocalization } from '@/localization';
 
 const props = defineProps({
   selectedDate: {
@@ -152,7 +151,7 @@ const props = defineProps({
 });
 
 const emits = defineEmits([
-    /**
+  /**
      * Will retrieve the calendar days of the given date
      *
      * @event calendar-days
@@ -182,6 +181,8 @@ const emits = defineEmits([
   'close-datepicker',
 ]);
 
+const i18n = new DialtoneLocalization();
+
 const {
   selectMonth,
   selectYear,
@@ -193,6 +194,10 @@ const {
   changeYear,
   goToNextMonth,
   goToPrevMonth,
+  previousYearAriaLabel,
+  previousMonthAriaLabel,
+  nextMonthAriaLabel,
+  nextYearAriaLabel,
 } = useMonthYearPicker(props, emits);
 
 onMounted(() => {
