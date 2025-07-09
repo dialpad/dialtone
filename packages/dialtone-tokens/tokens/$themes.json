@@ -4264,8 +4264,8 @@
     "name": "chart",
     "group": "chart",
     "selectedTokenSets": {
-      "root": "enabled",
-      "base/default": "enabled",
+      "root": "source",
+      "base/default": "source",
       "chart/chart": "enabled"
     },
     "$figmaStyleReferences": {},
