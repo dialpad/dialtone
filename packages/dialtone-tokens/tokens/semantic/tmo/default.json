@@ -52,7 +52,7 @@
         "type": "color"
       },
       "brand-opaque": {
-        "value": "#4B0027",
+        "value": "#FDBEDF",
         "type": "color",
         "$extensions": {
           "studio.tokens": {
@@ -65,13 +65,13 @@
         }
       },
       "brand-subtle-opaque": {
-        "value": "#35001C",
+        "value": "#FDBEDF",
         "type": "color",
         "$extensions": {
           "studio.tokens": {
             "modify": {
               "type": "alpha",
-              "value": "0.9",
+              "value": "0.25",
               "space": "hsl"
             }
           }

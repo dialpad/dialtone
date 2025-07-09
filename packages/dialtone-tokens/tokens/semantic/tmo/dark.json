@@ -50,6 +50,18 @@
       "brand-strong": {
         "value": "#FFB2DA",
         "type": "color"
+      },
+      "brand-inverted": {
+        "value": "#FFCCE6",
+        "type": "color"
+      },
+      "brand-subtle-inverted": {
+        "value": "#FFF0F8",
+        "type": "color"
+      },
+      "brand-strong-inverted": {
+        "value": "#E20074",
+        "type": "color"
       }
     },
     "border": {
