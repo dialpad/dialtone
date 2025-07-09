@@ -25,6 +25,7 @@
 import { BREADCRUMBS_INVERTED_MODIFIER } from './breadcrumbs_constants';
 import DtBreadcrumbItem from './breadcrumb_item.vue';
 import utils from '@/common/utils';
+import { DialtoneLocalization } from '@/localization';
 
 /**
  * Breadcrumbs are links used to provide context for the currently-viewed page
@@ -74,6 +75,7 @@ export default {
   data () {
     return {
       BREADCRUMBS_INVERTED_MODIFIER,
+      i18n: new DialtoneLocalization(),
     };
   },
 
