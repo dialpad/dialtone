@@ -2472,7 +2472,7 @@
             }
           }
         },
-        "thing-selected": {
+        "thing-active": {
           "value": "{shell.color.surface.thing}",
           "type": "color",
           "$extensions": {
@@ -2485,7 +2485,7 @@
             }
           }
         },
-        "thing-active": {
+        "thing-selected": {
           "value": "{shell.color.surface.thing}",
           "type": "color",
           "$extensions": {

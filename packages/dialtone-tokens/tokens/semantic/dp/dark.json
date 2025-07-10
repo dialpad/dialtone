@@ -945,5 +945,54 @@
         }
       }
     }
+  },
+  "shell": {
+    "color": {
+      "surface": {
+        "thing": {
+          "value": "{color.indigo.200}",
+          "type": "color"
+        },
+        "thing-hover": {
+          "value": "{shell.color.surface.thing}",
+          "type": "color",
+          "$extensions": {
+            "studio.tokens": {
+              "modify": {
+                "type": "lighten",
+                "value": ".1",
+                "space": "hsl"
+              }
+            }
+          }
+        },
+        "thing-active": {
+          "value": "{shell.color.surface.thing}",
+          "type": "color",
+          "$extensions": {
+            "studio.tokens": {
+              "modify": {
+                "type": "lighten",
+                "value": ".2",
+                "space": "hsl"
+              }
+            }
+          }
+        },
+        "thing-selected": {
+          "value": "{shell.color.surface.thing}",
+          "type": "color",
+          "$extensions": {
+            "studio.tokens": {
+              "modify": {
+                "type": "lighten",
+                "value": ".3",
+                "space": "hsl"
+              }
+            }
+          }
+        }
+      }
+    }
   }
 }
