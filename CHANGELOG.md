@@ -1,3 +1,10 @@
+## [9.126.2-beta.1](https://github.com/dialpad/dialtone/compare/dialtone/v9.126.1...dialtone/v9.126.2-beta.1) (2025-07-11)
+
+
+### Bug Fixes
+
+* **Emoji Row:** NO-JIRA add reaction tooltip back ([3a6e32b](https://github.com/dialpad/dialtone/commit/3a6e32b72691c3953e984a06d5ec16b581072d7f))
+
 ## [9.126.1](https://github.com/dialpad/dialtone/compare/dialtone/v9.126.0...dialtone/v9.126.1) (2025-06-23)
 
 
