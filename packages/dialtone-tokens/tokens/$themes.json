@@ -424,7 +424,8 @@
       "components/icon/default": "enabled",
       "components/radio/default": "enabled",
       "root": "source",
-      "components/button/default": "enabled"
+      "components/button/default": "enabled",
+      "shell/dark": "disabled"
     },
     "$figmaCollectionId": "VariableCollectionId:406:18994",
     "$figmaModeId": "406:0",
@@ -1396,7 +1397,8 @@
       "components/radio/default": "enabled",
       "root": "source",
       "components/badge/dark": "enabled",
-      "components/button/default": "enabled"
+      "components/button/default": "enabled",
+      "shell/dark": "disabled"
     },
     "$figmaCollectionId": "VariableCollectionId:406:18994",
     "$figmaModeId": "406:1",
@@ -2292,7 +2294,8 @@
       "components/icon/default": "enabled",
       "components/radio/default": "enabled",
       "root": "source",
-      "components/button/default": "enabled"
+      "components/button/default": "enabled",
+      "shell/dark": "disabled"
     },
     "$figmaCollectionId": "VariableCollectionId:406:19535",
     "$figmaModeId": "406:2",
@@ -2854,7 +2857,8 @@
       "components/radio/default": "enabled",
       "root": "source",
       "components/badge/dark": "enabled",
-      "components/button/default": "enabled"
+      "components/button/default": "enabled",
+      "shell/dark": "disabled"
     },
     "$figmaCollectionId": "VariableCollectionId:406:19535",
     "$figmaModeId": "406:3",
@@ -3409,7 +3413,8 @@
       "components/button/default": "enabled",
       "components/checkbox/default": "enabled",
       "components/icon/default": "enabled",
-      "components/radio/default": "enabled"
+      "components/radio/default": "enabled",
+      "shell/dark": "disabled"
     },
     "$figmaVariableReferences": {},
     "group": "deca"
@@ -3774,7 +3779,8 @@
       "components/checkbox/default": "enabled",
       "components/icon/default": "enabled",
       "components/radio/default": "enabled",
-      "semantic/dp/default": "enabled"
+      "semantic/dp/default": "enabled",
+      "shell/dark": "disabled"
     },
     "group": "expressive",
     "$figmaVariableReferences": {}
@@ -3794,7 +3800,8 @@
       "components/badge/default": "enabled",
       "components/checkbox/default": "enabled",
       "components/icon/default": "enabled",
-      "components/radio/default": "enabled"
+      "components/radio/default": "enabled",
+      "shell/dark": "disabled"
     },
     "group": "expressive",
     "$figmaVariableReferences": {}
@@ -3813,7 +3820,8 @@
       "components/checkbox/default": "enabled",
       "components/icon/default": "enabled",
       "components/radio/default": "enabled",
-      "semantic/expressive/default": "enabled"
+      "semantic/expressive/default": "enabled",
+      "shell/dark": "disabled"
     },
     "group": "expressive-sm",
     "$figmaVariableReferences": {}
@@ -3834,7 +3842,8 @@
       "components/checkbox/default": "enabled",
       "components/icon/default": "enabled",
       "components/radio/default": "enabled",
-      "semantic/expressive/default": "enabled"
+      "semantic/expressive/default": "enabled",
+      "shell/dark": "disabled"
     },
     "group": "expressive-sm",
     "$figmaVariableReferences": {}
@@ -3859,7 +3868,8 @@
       "components/button/default": "enabled",
       "components/checkbox/default": "enabled",
       "components/icon/default": "enabled",
-      "components/radio/default": "enabled"
+      "components/radio/default": "enabled",
+      "shell/dark": "disabled"
     },
     "$figmaVariableReferences": {},
     "group": "deca"
@@ -3870,7 +3880,8 @@
     "group": "base",
     "selectedTokenSets": {
       "root": "enabled",
-      "base/default": "enabled"
+      "base/default": "enabled",
+      "shell/dark": "disabled"
     },
     "$figmaStyleReferences": {},
     "$figmaVariableReferences": {
@@ -4056,7 +4067,8 @@
     "selectedTokenSets": {
       "root": "enabled",
       "base/default": "enabled",
-      "base/dark": "enabled"
+      "base/dark": "enabled",
+      "shell/dark": "disabled"
     },
     "$figmaStyleReferences": {},
     "$figmaVariableReferences": {
@@ -4240,7 +4252,8 @@
     "name": "default",
     "group": "shell",
     "selectedTokenSets": {
-      "shell/default": "enabled"
+      "shell/default": "enabled",
+      "shell/dark": "disabled"
     },
     "$figmaStyleReferences": {},
     "$figmaVariableReferences": {

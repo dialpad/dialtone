@@ -276,7 +276,7 @@
           "$extensions": {
             "studio.tokens": {
               "modify": {
-                "type": "darken",
+                "type": "lighten",
                 "value": "0.25",
                 "space": "hsl"
               }
@@ -289,8 +289,8 @@
           "$extensions": {
             "studio.tokens": {
               "modify": {
-                "type": "darken",
-                "value": "0.25",
+                "type": "lighten",
+                "value": "0.3",
                 "space": "hsl"
               }
             }
@@ -302,7 +302,7 @@
           "$extensions": {
             "studio.tokens": {
               "modify": {
-                "type": "darken",
+                "type": "lighten",
                 "value": "0.25",
                 "space": "hsl"
               }
@@ -438,7 +438,7 @@
       "color": {
         "surface": {
           "primary": {
-            "value": "{color.purple.400}",
+            "value": "{color.purple.500}",
             "type": "color"
           },
           "secondary": {
@@ -473,7 +473,7 @@
     "presence": {
       "color": {
         "available": {
-          "value": "{color.green.400}",
+          "value": "{color.green.475}",
           "type": "color"
         },
         "unavailable": {
@@ -481,7 +481,7 @@
           "type": "color"
         },
         "busy": {
-          "value": "{color.gold.400}",
+          "value": "{color.gold.450}",
           "type": "color"
         },
         "offline": {
