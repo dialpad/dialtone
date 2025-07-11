@@ -757,7 +757,7 @@
           "type": "color"
         },
         "03-hover": {
-          "value": "{color.blue.250}",
+          "value": "{color.blue.200}",
           "type": "color"
         },
         "03-selected": {
