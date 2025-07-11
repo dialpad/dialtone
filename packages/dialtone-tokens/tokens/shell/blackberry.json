@@ -409,7 +409,7 @@
       },
       "border": {
         "default": {
-          "value": "{color.blue.900}",
+          "value": "{color.blue.100}",
           "type": "color",
           "$extensions": {
             "studio.tokens": {
@@ -422,7 +422,7 @@
           }
         },
         "subtle": {
-          "value": "{color.blue.900}",
+          "value": "{color.blue.100}",
           "type": "color",
           "$extensions": {
             "studio.tokens": {
