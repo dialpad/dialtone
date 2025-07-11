@@ -3870,8 +3870,7 @@
     "group": "base",
     "selectedTokenSets": {
       "root": "enabled",
-      "base/default": "enabled",
-      "base/light": "enabled"
+      "base/default": "enabled"
     },
     "$figmaStyleReferences": {},
     "$figmaVariableReferences": {
