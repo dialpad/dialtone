@@ -75,7 +75,8 @@ export const Default = {
       {
         emojiUnicodeOrShortname: '😌',
         isSelected: true,
-        num: 99,
+        tooltip: 'Olivia Chen, Benjamin Carter, Sophia Rodriguez, William Kim and Isabella Garcia reacted with 😌',
+        num: 5,
       },
       {
         emojiUnicodeOrShortname: '🙃',
