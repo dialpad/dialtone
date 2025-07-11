@@ -829,7 +829,7 @@
           "type": "color"
         },
         "09-hover": {
-          "value": "{color.red.250}",
+          "value": "{color.red.200}",
           "type": "color"
         },
         "09-selected": {
@@ -902,7 +902,7 @@
         "type": "color"
       },
       "info-hover": {
-        "value": "{color.blue.250}",
+        "value": "{color.blue.200}",
         "type": "color"
       },
       "info-selected": {
@@ -914,7 +914,7 @@
         "type": "color"
       },
       "brand-hover": {
-        "value": "{color.purple.250}",
+        "value": "{color.purple.200}",
         "type": "color"
       },
       "brand-selected": {
