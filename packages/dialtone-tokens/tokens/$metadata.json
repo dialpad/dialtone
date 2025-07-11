@@ -22,6 +22,7 @@
     "components/button/default",
     "components/checkbox/default",
     "components/icon/default",
-    "components/radio/default"
+    "components/radio/default",
+    "shell/default"
   ]
 }
