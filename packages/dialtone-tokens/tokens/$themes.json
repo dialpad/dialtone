@@ -3868,9 +3868,7 @@
     "id": "shell-default",
     "name": "default",
     "group": "shell",
-    "selectedTokenSets": {
-      "shell/default": "enabled"
-    },
+    "selectedTokenSets": {},
     "$figmaStyleReferences": {},
     "$figmaVariableReferences": {
       "color.surface.app-bg": "61214a8611fa5286c6ea40685c1e8b774cdbc817",
