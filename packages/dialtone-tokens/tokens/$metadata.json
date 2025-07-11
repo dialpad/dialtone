@@ -23,6 +23,7 @@
     "components/icon/default",
     "components/radio/default",
     "shell/default",
-    "shell/dark"
+    "shell/dark",
+    "shell/blackberry"
   ]
 }
