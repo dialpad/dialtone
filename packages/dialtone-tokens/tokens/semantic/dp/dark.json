@@ -769,11 +769,11 @@
           "type": "color"
         },
         "04-hover": {
-          "value": "{color.gold.200}",
+          "value": "{color.gold.400}",
           "type": "color"
         },
         "04-selected": {
-          "value": "{color.gold.50}",
+          "value": "{color.gold.600}",
           "type": "color"
         },
         "05": {
@@ -781,11 +781,11 @@
           "type": "color"
         },
         "05-hover": {
-          "value": "{color.green.200}",
+          "value": "{color.green.350}",
           "type": "color"
         },
         "05-selected": {
-          "value": "{color.green.50}",
+          "value": "{color.green.425}",
           "type": "color"
         },
         "06": {
@@ -793,11 +793,11 @@
           "type": "color"
         },
         "06-hover": {
-          "value": "{color.berry.400}",
+          "value": "{color.berry.600}",
           "type": "color"
         },
         "06-selected": {
-          "value": "{color.berry.200}",
+          "value": "{color.berry.700}",
           "type": "color"
         },
         "07": {
@@ -805,11 +805,11 @@
           "type": "color"
         },
         "07-hover": {
-          "value": "{color.coral.200}",
+          "value": "{color.coral.400}",
           "type": "color"
         },
         "07-selected": {
-          "value": "{color.coral.50}",
+          "value": "{color.coral.700}",
           "type": "color"
         },
         "08": {
@@ -817,11 +817,11 @@
           "type": "color"
         },
         "08-hover": {
-          "value": "{color.olive.200}",
+          "value": "{color.olive.400}",
           "type": "color"
         },
         "08-selected": {
-          "value": "{color.olive.50}",
+          "value": "{color.olive.600}",
           "type": "color"
         },
         "09": {
@@ -829,11 +829,11 @@
           "type": "color"
         },
         "09-hover": {
-          "value": "{color.red.200}",
+          "value": "{color.red.350}",
           "type": "color"
         },
         "09-selected": {
-          "value": "{color.red.100}",
+          "value": "{color.red.450}",
           "type": "color"
         }
       },
@@ -842,11 +842,11 @@
         "type": "color"
       },
       "neutral-hover": {
-        "value": "{color.tan.500}",
+        "value": "{color.tan.700}",
         "type": "color"
       },
       "neutral-selected": {
-        "value": "{color.tan.300}",
+        "value": "{color.tan.900}",
         "type": "color"
       },
       "primary": {
@@ -854,11 +854,11 @@
         "type": "color"
       },
       "primary-hover": {
-        "value": "{color.indigo.200}",
+        "value": "{color.indigo.400}",
         "type": "color"
       },
       "primary-selected": {
-        "value": "{color.indigo.50}",
+        "value": "{color.indigo.600}",
         "type": "color"
       },
       "positive": {
@@ -866,11 +866,11 @@
         "type": "color"
       },
       "positive-hover": {
-        "value": "{color.green.200}",
+        "value": "{color.green.400}",
         "type": "color"
       },
       "positive-selected": {
-        "value": "{color.green.50}",
+        "value": "{color.green.600}",
         "type": "color"
       },
       "critical": {
@@ -878,11 +878,11 @@
         "type": "color"
       },
       "critical-hover": {
-        "value": "{color.red.200}",
+        "value": "{color.red.400}",
         "type": "color"
       },
       "critical-selected": {
-        "value": "{color.red.50}",
+        "value": "{color.red.500}",
         "type": "color"
       },
       "warning": {
@@ -890,11 +890,11 @@
         "type": "color"
       },
       "warning-hover": {
-        "value": "{color.gold.200}",
+        "value": "{color.gold.400}",
         "type": "color"
       },
       "warning-selected": {
-        "value": "{color.gold.50}",
+        "value": "{color.gold.600}",
         "type": "color"
       },
       "info": {
@@ -902,11 +902,11 @@
         "type": "color"
       },
       "info-hover": {
-        "value": "{color.blue.200}",
+        "value": "{color.blue.400}",
         "type": "color"
       },
       "info-selected": {
-        "value": "{color.blue.100}",
+        "value": "{color.blue.600}",
         "type": "color"
       },
       "brand": {
@@ -914,11 +914,11 @@
         "type": "color"
       },
       "brand-hover": {
-        "value": "{color.purple.200}",
+        "value": "{color.purple.350}",
         "type": "color"
       },
       "brand-selected": {
-        "value": "{color.purple.100}",
+        "value": "{color.purple.450}",
         "type": "color"
       },
       "monochrome": {
@@ -927,11 +927,11 @@
           "type": "color"
         },
         "01-hover": {
-          "value": "{color.indigo.100}",
+          "value": "{color.indigo.300}",
           "type": "color"
         },
         "01-selected": {
-          "value": "{color.indigo.50}",
+          "value": "{color.indigo.500}",
           "type": "color"
         },
         "02": {
@@ -939,11 +939,11 @@
           "type": "color"
         },
         "02-hover": {
-          "value": "{color.indigo.400}",
+          "value": "{color.indigo.600}",
           "type": "color"
         },
         "02-selected": {
-          "value": "{color.indigo.200}",
+          "value": "{color.indigo.800}",
           "type": "color"
         },
         "03": {
@@ -951,11 +951,11 @@
           "type": "color"
         },
         "03-hover": {
-          "value": "{color.indigo.500}",
+          "value": "{color.indigo.700}",
           "type": "color"
         },
         "03-selected": {
-          "value": "{color.indigo.400}",
+          "value": "{color.indigo.900}",
           "type": "color"
         },
         "04": {
@@ -963,11 +963,11 @@
           "type": "color"
         },
         "04-hover": {
-          "value": "{color.indigo.200}",
+          "value": "{color.indigo.400}",
           "type": "color"
         },
         "04-selected": {
-          "value": "{color.indigo.100}",
+          "value": "{color.indigo.600}",
           "type": "color"
         },
         "05": {
@@ -975,11 +975,11 @@
           "type": "color"
         },
         "05-hover": {
-          "value": "{color.indigo.50}",
+          "value": "{color.indigo.200}",
           "type": "color"
         },
         "05-selected": {
-          "value": "{color.indigo.50}",
+          "value": "{color.indigo.400}",
           "type": "color"
         },
         "06": {
@@ -987,11 +987,11 @@
           "type": "color"
         },
         "06-hover": {
-          "value": "{color.indigo.200}",
+          "value": "{color.indigo.400}",
           "type": "color"
         },
         "06-selected": {
-          "value": "{color.indigo.100}",
+          "value": "{color.indigo.600}",
           "type": "color"
         },
         "07": {
@@ -999,11 +999,11 @@
           "type": "color"
         },
         "07-hover": {
-          "value": "{color.indigo.50}",
+          "value": "{color.indigo.100}",
           "type": "color"
         },
         "07-selected": {
-          "value": "{color.indigo.50}",
+          "value": "{color.indigo.300}",
           "type": "color"
         }
       }
