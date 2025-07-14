@@ -1,3 +1,10 @@
+## [1.43.3-next.1](https://github.com/dialpad/dialtone/compare/dialtone-tokens/v1.43.2...dialtone-tokens/v1.43.3-next.1) (2025-07-14)
+
+
+### Bug Fixes
+
+* **Tokens:** DLT-2629 corrected tmo inverted surface colors ([#821](https://github.com/dialpad/dialtone/issues/821)) ([a1ea98f](https://github.com/dialpad/dialtone/commit/a1ea98fc147b184776b41a26c59e7c479b5135b9))
+
 ## [1.43.2](https://github.com/dialpad/dialtone/compare/dialtone-tokens/v1.43.1...dialtone-tokens/v1.43.2) (2025-05-12)
 
 
