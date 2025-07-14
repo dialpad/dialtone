@@ -8,6 +8,7 @@ on:
       - beta
       - production
       - staging
+      - next
     paths:
       - 'apps/dialtone-documentation/docs/**'
       - 'packages/dialtone-css/**/*.less'
@@ -137,7 +138,7 @@ jobs:
     needs: [ check-dialpad-member, filter-actions ]
     if: ${{ needs.filter-actions.outputs.packages != '[]' }}
     env:
-      BUCKET_CLEANUP_EXCLUDE: '/alpha/|/beta/|/deploy-previews/|/staging/|/vue/|/vue3/'
+      BUCKET_CLEANUP_EXCLUDE: '/alpha/|/beta/|/deploy-previews/|/staging/|/next/|/vue/|/vue3/'
     strategy:
       fail-fast: false
       matrix:
