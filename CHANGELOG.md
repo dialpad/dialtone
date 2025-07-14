@@ -1,31 +1,4 @@
-# [9.127.0](https://github.com/dialpad/dialtone/compare/dialtone/v9.126.6...dialtone/v9.127.0) (2025-07-23)
-
-
-### Bug Fixes
-
-* **Rich Text Editor:** DP-150683 allow enter on preventTyping ([#834](https://github.com/dialpad/dialtone/issues/834)) ([63b5b9f](https://github.com/dialpad/dialtone/commit/63b5b9ff8a61c2d276e0fea3e2a74ef79b1d2b68))
-
-
-### Features
-
-* DLT-2611 add localization to Vue 3 ([#831](https://github.com/dialpad/dialtone/issues/831)) ([26a0865](https://github.com/dialpad/dialtone/commit/26a086505115eaa999c10846321bc368437416c4))
-
-## [9.126.6](https://github.com/dialpad/dialtone/compare/dialtone/v9.126.5...dialtone/v9.126.6) (2025-07-18)
-
-
-### Bug Fixes
-
-* **Rich Text Editor:** DLT-2633 fix position out of range error ([#830](https://github.com/dialpad/dialtone/issues/830)) ([30b5512](https://github.com/dialpad/dialtone/commit/30b55121a7de9100fb4df3d6b8f9d550997d4e65))
-
-## [9.126.5](https://github.com/dialpad/dialtone/compare/dialtone/v9.126.4...dialtone/v9.126.5) (2025-07-18)
-
-
-### Bug Fixes
-
-* **Emoji Row:** NO-JIRA tooltip text ([#824](https://github.com/dialpad/dialtone/issues/824)) ([d6623d1](https://github.com/dialpad/dialtone/commit/d6623d1d11ee0674d412f65aff674368952a8cb1))
-* **Modal:** NO-JIRA prevent losing focus when clicking inside the modal ([#825](https://github.com/dialpad/dialtone/issues/825)) ([a7d3d7d](https://github.com/dialpad/dialtone/commit/a7d3d7dc801ed9aedcbee07fddd59a7b923a1158))
-
-## [9.126.4](https://github.com/dialpad/dialtone/compare/dialtone/v9.126.3...dialtone/v9.126.4) (2025-07-15)
+## [9.126.4-next.1](https://github.com/dialpad/dialtone/compare/dialtone/v9.126.3...dialtone/v9.126.4-next.1) (2025-07-14)
 
 
 ### Bug Fixes
