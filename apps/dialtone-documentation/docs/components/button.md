@@ -8,9 +8,174 @@ storybook: https://dialtone.dialpad.com/vue/?path=/story/components-button--defa
 figma_url: https://www.figma.com/design/W58r5BkO8qTw3vem9YieJd/DT9-Component-Library--Rebrand-2025-?node-id=19800-32233
 ---
 
-<code-well-header>
-  <dt-button> Place Call </dt-button>
-</code-well-header>
+<style lang="less">
+.dialtone-playground {
+  background-color: var(--dt-color-surface-secondary);
+  display: flex;
+  flex-direction: row;
+  border-radius: var(--dt-size-radius-400);
+  overflow: hidden;
+
+  &__component {
+    padding: var(--dt-space-500);
+    display: grid;
+    flex: 1;
+    align-items: center;
+    justify-content: center;
+    min-height: var(--dt-size-925);
+    position: relative;
+  }
+
+  &__fullscreen-toggle {
+    position: absolute;
+    inset-block-start: var(--dt-space-400);
+    inset-inline-end: var(--dt-space-400);
+  }
+
+  &__controls {
+    padding: var(--dt-space-500);
+    background-color: var(--dt-color-surface-secondary-opaque);
+    width: var(--dt-size-875);
+    max-height: var(--dt-size-950);
+  }
+}
+</style>
+
+<div class="dialtone-playground">
+  <div class="dialtone-playground__component">
+    <div class="dialtone-playground__fullscreen-toggle">
+      <dt-button v-dt-tooltip="`Fullscreen`" kind="muted" importance="clear" size="sm" circle>
+        <template #icon="{ iconSize }">
+          <dt-icon
+            name="expand"
+            :size="iconSize"
+          />
+        </template>
+      </dt-button>
+    </div>
+    <dt-button
+      size="xs"
+      importance="clear"
+      kind="default"
+      ref="component-default"
+    >
+      Place Call
+    </dt-button>
+  </div>
+  <div
+    class="
+      dialtone-playground__controls
+    "
+    v-dt-scrollbar:never
+  >
+    <dt-stack gap="500">
+      <dt-select-menu
+        size="sm"
+        :options="[
+              { value: `xs`, label: `xs` },
+              { value: `sm`, label: `sm` },
+              { value: `lg`, label: `lg` },
+              { value: `xl`, label: `xl` },
+            ]"
+        label="Size"
+      />
+      <dt-select-menu
+        size="sm"
+        :options="[
+              { value: `clear`, label: `clear` },
+              { value: `outlined`, label: `outlined` },
+              { value: `primary`, label: `primary` },
+            ]"
+        label="Importance"
+      />
+      <dt-select-menu
+        size="sm"
+        :options="[
+              { value: `default`, label: `default` },
+              { value: `muted`, label: `muted` },
+              { value: `danger`, label: `danger` },
+              { value: `positive`, label: `positive` },
+              { value: `inverted`, label: `inverted` },
+              { value: `unstyled`, label: `unstyled` },
+            ]"
+        label="Kind"
+      />
+      <dt-input label="Label" type="text" value="Place Call" size="sm" />
+      <dt-toggle labelClass="d-label--sm" size="sm" wrapperClass="d-jc-space-between">
+        Active
+      </dt-toggle>
+      <dt-toggle labelClass="d-label--sm" size="sm" wrapperClass="d-jc-space-between">
+        Circle
+      </dt-toggle>
+      <dt-toggle labelClass="d-label--sm" size="sm" wrapperClass="d-jc-space-between">
+        Icon
+      </dt-toggle>
+      <dt-select-menu
+        size="sm"
+        labelClass="d-vi-visible-sr"
+        :options="[
+              { value: `activity`, label: `activity` },
+              { value: `add`, label: `add` },
+              { value: `add-circle`, label: `add-circle` },
+              { value: `add-circle-outline`, label: `add-circle-outline` },
+              { value: `add-task`, label: `add-task` },
+              { value: `...`, label: `...` },
+              { value: `...`, label: `...` },
+            ]"
+        label="Icon name"
+      />
+      <dt-toggle labelClass="d-label--sm" size="sm" wrapperClass="d-jc-space-between">
+        Icon only
+      </dt-toggle>
+      <dt-select-menu
+        size="sm"
+        :options="[
+              { value: `left`, label: `left` },
+              { value: `right`, label: `right` },
+              { value: `top`, label: `top` },
+              { value: `bottom`, label: `bottom` },
+            ]"
+        label="Icon Position"
+      />
+      <dt-toggle labelClass="d-label--sm" size="sm" wrapperClass="d-jc-space-between">
+        Link
+      </dt-toggle>
+      <dt-toggle labelClass="d-label--sm" size="sm" wrapperClass="d-jc-space-between">
+        Link Inverted
+      </dt-toggle>
+      <dt-select-menu
+        size="sm"
+        :options="[
+              { value: `default`, label: `default` },
+              { value: `warning`, label: `warning` },
+              { value: `danger`, label: `danger` },
+              { value: `success`, label: `success` },
+              { value: `muted`, label: `muted` },
+              { value: `mention`, label: `mention` },
+            ]"
+        label="Link Kind"
+      />
+      <dt-toggle labelClass="d-label--sm" size="sm" wrapperClass="d-jc-space-between">
+        Loading
+      </dt-toggle>
+      <dt-toggle labelClass="d-label--sm" size="sm" wrapperClass="d-jc-space-between">
+        Disabled
+      </dt-toggle>
+    </dt-stack>
+  </div>
+</div>
+<code-example-tabs
+vueCode='
+<dt-button
+  size="xs"
+  importance="clear"
+  kind="default"
+>
+  Place Call
+</dt-button>
+'
+:htmlCode="() => $refs['component-default']"
+showHtmlWarning />
 
 <!-- <component-combinator component-name="DtButton" /> -->
 
