@@ -11,12 +11,21 @@ figma_url: https://www.figma.com/design/W58r5BkO8qTw3vem9YieJd/DT9-Component-Lib
 
 
 <style lang="less">
-.dialtone-playground {
+/*#asdfasdf {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
   background-color: var(--dt-color-surface-secondary);
-  display: flex;
-  flex-direction: row;
-  border-radius: var(--dt-size-radius-400);
-  overflow: hidden;
+}*/
+.dialtone-playground {
+  & {
+    background-color: var(--dt-color-surface-secondary);
+    display: flex;
+    flex-direction: row;
+    border-radius: var(--dt-size-radius-400);
+    overflow: hidden;
+  }
 
   &__component {
     padding: var(--dt-space-500);
@@ -43,7 +52,7 @@ figma_url: https://www.figma.com/design/W58r5BkO8qTw3vem9YieJd/DT9-Component-Lib
 }
 </style>
 
-<div id="combinator-playground">
+<div id="asdfasdf">
   <div class="dialtone-playground">
     <div class="dialtone-playground__component">
       <div class="dialtone-playground__fullscreen-toggle">
