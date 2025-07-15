@@ -1,3 +1,64 @@
+## [9.126.4](https://github.com/dialpad/dialtone/compare/dialtone/v9.126.3...dialtone/v9.126.4) (2025-07-15)
+
+
+### Bug Fixes
+
+* **Tokens:** DLT-2629 corrected tmo inverted surface colors ([#821](https://github.com/dialpad/dialtone/issues/821)) ([a1ea98f](https://github.com/dialpad/dialtone/commit/a1ea98fc147b184776b41a26c59e7c479b5135b9))
+
+
+### Documentation
+
+* **Breakpoints:** NO-JIRA improve documentation to include example ([#815](https://github.com/dialpad/dialtone/issues/815)) ([a09df39](https://github.com/dialpad/dialtone/commit/a09df39bc0ae1f8ee38c77896a3c43fb24443377))
+* **Color:** DLT-2626 fix broken link in color page ([#820](https://github.com/dialpad/dialtone/issues/820)) ([bb0aa4c](https://github.com/dialpad/dialtone/commit/bb0aa4cd613eaa7eeb50da8ccbf83c8da2674582))
+
+## [9.126.3](https://github.com/dialpad/dialtone/compare/dialtone/v9.126.2...dialtone/v9.126.3) (2025-07-08)
+
+
+### Bug Fixes
+
+* **Select:** NO-JIRA update validation to allow empty string value ([#816](https://github.com/dialpad/dialtone/issues/816)) ([82a2a6d](https://github.com/dialpad/dialtone/commit/82a2a6db4d45038c6528fd41d9c10ce303e6b512))
+
+
+### Documentation
+
+* **Color:** DLT-2480 DLT-2446 improve color usage guidelines ([#808](https://github.com/dialpad/dialtone/issues/808)) ([64168e2](https://github.com/dialpad/dialtone/commit/64168e248ba7c23e209288fd4b1e75d5a42d1da2))
+
+## [9.126.2](https://github.com/dialpad/dialtone/compare/dialtone/v9.126.1...dialtone/v9.126.2) (2025-07-01)
+
+
+### Bug Fixes
+
+* **Message Input:** DLT-2605 fix slash command and close button ([#813](https://github.com/dialpad/dialtone/issues/813)) ([b4c687b](https://github.com/dialpad/dialtone/commit/b4c687b2a9aca29d65a4321229eb6af9ce483026))
+* **Modal:** NO-JIRA adds right padding on title to avoid close button overlap ([#803](https://github.com/dialpad/dialtone/issues/803)) ([e36e603](https://github.com/dialpad/dialtone/commit/e36e603d6fcda7c5605615173d931b75a83c81d0))
+* NO-JIRA update responsive plugin README ([6728cce](https://github.com/dialpad/dialtone/commit/6728cceac964ac5cc920ebdf2d16a52b4287950e))
+* **Select:** DP-147182 remove icon z-index ([#812](https://github.com/dialpad/dialtone/issues/812)) ([89f92c0](https://github.com/dialpad/dialtone/commit/89f92c01d8a182a8ea7d4138d48fbac43a7f43b0))
+
+
+### Documentation
+
+* NO-JIRA fix wrong border property ([88fb502](https://github.com/dialpad/dialtone/commit/88fb50255ae7308e2a26020a11b98102e1bd9476))
+
+## [9.126.1](https://github.com/dialpad/dialtone/compare/dialtone/v9.126.0...dialtone/v9.126.1) (2025-06-23)
+
+
+### Bug Fixes
+
+* **Localization:** NO-JIRA add namespace ([#809](https://github.com/dialpad/dialtone/issues/809)) ([9b1679a](https://github.com/dialpad/dialtone/commit/9b1679a2fee81f9e307dacdbddfd0392589ed7a2))
+
+# [9.126.0](https://github.com/dialpad/dialtone/compare/dialtone/v9.125.0...dialtone/v9.126.0) (2025-06-21)
+
+
+### Bug Fixes
+
+* **Rich Text Editor:** DLT-2486 pasting bugs ([#807](https://github.com/dialpad/dialtone/issues/807)) ([33b2024](https://github.com/dialpad/dialtone/commit/33b20246d2d8c4284f8a2e764d8feea61fa39668))
+* **Rich Text Editor:** DLT-2486 rich text pasting vue 3 ([#802](https://github.com/dialpad/dialtone/issues/802)) ([787b43f](https://github.com/dialpad/dialtone/commit/787b43fea2f4ba5098d12d8232cc74258c8cb2f5))
+
+
+### Features
+
+* **List Item:** DLT-2505 add wrapper class ([#806](https://github.com/dialpad/dialtone/issues/806)) ([551434e](https://github.com/dialpad/dialtone/commit/551434ec5dd59635d6f3e1cc9d65a00e38dbfcdc))
+* **Loader:** DLT-2556 component MVP ([#800](https://github.com/dialpad/dialtone/issues/800)) ([aac2d38](https://github.com/dialpad/dialtone/commit/aac2d381278ea35c44139b4f4ee4b183fca64c3c))
+
 # [9.125.0](https://github.com/dialpad/dialtone/compare/dialtone/v9.124.0...dialtone/v9.125.0) (2025-06-17)
 
 

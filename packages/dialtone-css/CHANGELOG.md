@@ -1,3 +1,18 @@
+## [8.60.1](https://github.com/dialpad/dialtone/compare/dialtone-css/v8.60.0...dialtone-css/v8.60.1) (2025-07-01)
+
+
+### Bug Fixes
+
+* **Modal:** NO-JIRA adds right padding on title to avoid close button overlap ([#803](https://github.com/dialpad/dialtone/issues/803)) ([e36e603](https://github.com/dialpad/dialtone/commit/e36e603d6fcda7c5605615173d931b75a83c81d0))
+* **Select:** DP-147182 remove icon z-index ([#812](https://github.com/dialpad/dialtone/issues/812)) ([89f92c0](https://github.com/dialpad/dialtone/commit/89f92c01d8a182a8ea7d4138d48fbac43a7f43b0))
+
+# [8.60.0](https://github.com/dialpad/dialtone/compare/dialtone-css/v8.59.0...dialtone-css/v8.60.0) (2025-06-21)
+
+
+### Features
+
+* **Loader:** DLT-2556 component MVP ([#800](https://github.com/dialpad/dialtone/issues/800)) ([aac2d38](https://github.com/dialpad/dialtone/commit/aac2d381278ea35c44139b4f4ee4b183fca64c3c))
+
 # [8.59.0](https://github.com/dialpad/dialtone/compare/dialtone-css/v8.58.4...dialtone-css/v8.59.0) (2025-06-11)
 
 

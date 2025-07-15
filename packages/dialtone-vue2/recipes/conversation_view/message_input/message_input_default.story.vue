@@ -3,7 +3,7 @@
     <div class="d-h264">
       <dt-recipe-message-input
         ref="input"
-        v-model="$attrs.value"
+        v-model="value"
         :input-aria-label="$attrs.inputAriaLabel"
         :auto-focus="$attrs.autoFocus"
         :rich-text="$attrs.richText"
@@ -112,5 +112,16 @@ import { DtIcon } from '@/components/icon';
 export default {
   name: 'DtRecipeMessageInputDefault',
   components: { DtRecipeMessageInput, DtIcon },
+  data () {
+    return {
+      value: this.$attrs.value,
+    };
+  },
+
+  watch: {
+    '$attrs.value' (value) {
+      this.value = value;
+    },
+  },
 };
 </script>

@@ -117,7 +117,18 @@
         },
         {
           "text": "Colors",
-          "link": "/design/colors/"
+          "link": "/design/colors/",
+            "children": [
+            {
+              "text": "Usage",
+              "link": "/design/colors/usage/"
+            },
+            {
+              "text": "Color Palette",
+              "link": "/design/colors/palette/"
+            }
+
+          ]
         },
         {
           "text": "Typography",

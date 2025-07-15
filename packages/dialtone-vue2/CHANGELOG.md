@@ -1,3 +1,37 @@
+## [2.193.3](https://github.com/dialpad/dialtone/compare/dialtone-vue2/v2.193.2...dialtone-vue2/v2.193.3) (2025-07-08)
+
+
+### Bug Fixes
+
+* **Select:** NO-JIRA update validation to allow empty string value ([#816](https://github.com/dialpad/dialtone/issues/816)) ([82a2a6d](https://github.com/dialpad/dialtone/commit/82a2a6db4d45038c6528fd41d9c10ce303e6b512))
+
+## [2.193.2](https://github.com/dialpad/dialtone/compare/dialtone-vue2/v2.193.1...dialtone-vue2/v2.193.2) (2025-07-01)
+
+
+### Bug Fixes
+
+* **Message Input:** DLT-2605 fix slash command and close button ([#813](https://github.com/dialpad/dialtone/issues/813)) ([b4c687b](https://github.com/dialpad/dialtone/commit/b4c687b2a9aca29d65a4321229eb6af9ce483026))
+
+## [2.193.1](https://github.com/dialpad/dialtone/compare/dialtone-vue2/v2.193.0...dialtone-vue2/v2.193.1) (2025-06-23)
+
+
+### Bug Fixes
+
+* **Localization:** NO-JIRA add namespace ([#809](https://github.com/dialpad/dialtone/issues/809)) ([9b1679a](https://github.com/dialpad/dialtone/commit/9b1679a2fee81f9e307dacdbddfd0392589ed7a2))
+
+# [2.193.0](https://github.com/dialpad/dialtone/compare/dialtone-vue2/v2.192.0...dialtone-vue2/v2.193.0) (2025-06-21)
+
+
+### Bug Fixes
+
+* **Rich Text Editor:** DLT-2486 pasting bugs ([#807](https://github.com/dialpad/dialtone/issues/807)) ([33b2024](https://github.com/dialpad/dialtone/commit/33b20246d2d8c4284f8a2e764d8feea61fa39668))
+
+
+### Features
+
+* **List Item:** DLT-2505 add wrapper class ([#806](https://github.com/dialpad/dialtone/issues/806)) ([551434e](https://github.com/dialpad/dialtone/commit/551434ec5dd59635d6f3e1cc9d65a00e38dbfcdc))
+* **Loader:** DLT-2556 component MVP ([#800](https://github.com/dialpad/dialtone/issues/800)) ([aac2d38](https://github.com/dialpad/dialtone/commit/aac2d381278ea35c44139b4f4ee4b183fca64c3c))
+
 # [2.192.0](https://github.com/dialpad/dialtone/compare/dialtone-vue2/v2.191.2...dialtone-vue2/v2.192.0) (2025-06-17)
 
 
