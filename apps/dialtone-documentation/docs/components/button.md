@@ -76,44 +76,44 @@ figma_url: https://www.figma.com/design/W58r5BkO8qTw3vem9YieJd/DT9-Component-Lib
         id="playground-prop-size"
         size="sm"
         :options="[
-              { value: `xs`, label: `xs` },
-              { value: `sm`, label: `sm` },
-              { value: `lg`, label: `lg` },
-              { value: `xl`, label: `xl` },
-            ]"
+          { value: `xs`, label: `xs` },
+          { value: `sm`, label: `sm` },
+          { value: `lg`, label: `lg` },
+          { value: `xl`, label: `xl` },
+        ]"
         label="Size"
       />
       <dt-select-menu
         id="playground-prop-importance"
         size="sm"
         :options="[
-              { value: `clear`, label: `clear` },
-              { value: `outlined`, label: `outlined` },
-              { value: `primary`, label: `primary` },
-            ]"
+          { value: `clear`, label: `clear` },
+          { value: `outlined`, label: `outlined` },
+          { value: `primary`, label: `primary` },
+        ]"
         label="Importance"
       />
       <dt-select-menu
         id="playground-prop-kind"
         size="sm"
         :options="[
-              { value: `default`, label: `default` },
-              { value: `muted`, label: `muted` },
-              { value: `danger`, label: `danger` },
-              { value: `positive`, label: `positive` },
-              { value: `inverted`, label: `inverted` },
-              { value: `unstyled`, label: `unstyled` },
-            ]"
+          { value: `default`, label: `default` },
+          { value: `muted`, label: `muted` },
+          { value: `danger`, label: `danger` },
+          { value: `positive`, label: `positive` },
+          { value: `inverted`, label: `inverted` },
+          { value: `unstyled`, label: `unstyled` },
+        ]"
         label="Kind"
       />
-      <dt-toggle id="playground-prop-active" labelClass="d-label--sm" size="sm" wrapperClass="d-jc-space-between">
+      <dt-toggle id="playground-prop-active" labelClass="d-label--sm d-fc-secondary" size="sm" wrapperClass="d-jc-space-between">
         Active
       </dt-toggle>
       <dt-stack gap="400">
         <dt-toggle
           v-model="hasIcon"
           id="playground-prop-icon"
-          labelClass="d-label--sm"
+          labelClass="d-label--sm d-fc-secondary"
           size="sm"
           wrapperClass="d-jc-space-between"
         >
@@ -125,59 +125,59 @@ figma_url: https://www.figma.com/design/W58r5BkO8qTw3vem9YieJd/DT9-Component-Lib
           size="sm"
           labelClass="d-vi-visible-sr"
           :options="[
-                { value: `activity`, label: `activity` },
-                { value: `add`, label: `add` },
-                { value: `add-circle`, label: `add-circle` },
-                { value: `add-circle-outline`, label: `add-circle-outline` },
-                { value: `add-task`, label: `add-task` },
-                { value: `...`, label: `...` },
-                { value: `...`, label: `...` },
-              ]"
+            { value: `activity`, label: `activity` },
+            { value: `add`, label: `add` },
+            { value: `add-circle`, label: `add-circle` },
+            { value: `add-circle-outline`, label: `add-circle-outline` },
+            { value: `add-task`, label: `add-task` },
+            { value: `...`, label: `...` },
+            { value: `...`, label: `...` },
+          ]"
           label="Icon name"
         />
       </dt-stack>
-      <dt-toggle v-show="hasIcon" id="playground-prop-icon-only" labelClass="d-label--sm" size="sm" wrapperClass="d-jc-space-between">
-        Icon only
-      </dt-toggle>
-      <dt-toggle v-show="hasIcon" id="playground-prop-circle" labelClass="d-label--sm" size="sm" wrapperClass="d-jc-space-between">
-        Circle
-      </dt-toggle>
       <dt-select-menu
         v-show="hasIcon"
         id="playground-prop-icon-position"
         size="sm"
         :options="[
-              { value: `left`, label: `left` },
-              { value: `right`, label: `right` },
-              { value: `top`, label: `top` },
-              { value: `bottom`, label: `bottom` },
-            ]"
+          { value: `left`, label: `left` },
+          { value: `right`, label: `right` },
+          { value: `top`, label: `top` },
+          { value: `bottom`, label: `bottom` },
+        ]"
         label="Icon Position"
       />
-      <dt-toggle v-show="!hasIcon" id="playground-prop-link" labelClass="d-label--sm" size="sm" wrapperClass="d-jc-space-between">
+      <dt-toggle v-show="hasIcon" id="playground-prop-icon-only" labelClass="d-label--sm d-fc-secondary" size="sm" wrapperClass="d-jc-space-between">
+        Icon only
+      </dt-toggle>
+      <dt-toggle v-show="hasIcon" id="playground-prop-circle" labelClass="d-label--sm d-fc-secondary" size="sm" wrapperClass="d-jc-space-between">
+        Circle
+      </dt-toggle>
+      <dt-toggle v-model="isLink" v-show="!hasIcon" id="playground-prop-link" labelClass="d-label--sm d-fc-secondary" size="sm" wrapperClass="d-jc-space-between">
         Link
       </dt-toggle>
-      <dt-toggle v-show="!hasIcon" id="playground-prop-link-inverted" labelClass="d-label--sm" size="sm" wrapperClass="d-jc-space-between">
-        Link Inverted
-      </dt-toggle>
       <dt-select-menu
-        v-show="!hasIcon"
+        v-show="isLink && !hasIcon"
         id="playground-prop-link-kind"
         size="sm"
         :options="[
-              { value: `default`, label: `default` },
-              { value: `warning`, label: `warning` },
-              { value: `danger`, label: `danger` },
-              { value: `success`, label: `success` },
-              { value: `muted`, label: `muted` },
-              { value: `mention`, label: `mention` },
-            ]"
+          { value: `default`, label: `default` },
+          { value: `warning`, label: `warning` },
+          { value: `danger`, label: `danger` },
+          { value: `success`, label: `success` },
+          { value: `muted`, label: `muted` },
+          { value: `mention`, label: `mention` },
+        ]"
         label="Link Kind"
       />
-      <dt-toggle id="playground-prop-loading" labelClass="d-label--sm" size="sm" wrapperClass="d-jc-space-between">
+      <dt-toggle v-show="isLink && !hasIcon" id="playground-prop-link-inverted" labelClass="d-label--sm d-fc-secondary" size="sm" wrapperClass="d-jc-space-between">
+        Link Inverted
+      </dt-toggle>
+      <dt-toggle id="playground-prop-loading" labelClass="d-label--sm d-fc-secondary" size="sm" wrapperClass="d-jc-space-between">
         Loading
       </dt-toggle>
-      <dt-toggle id="playground-prop-disabled" labelClass="d-label--sm" size="sm" wrapperClass="d-jc-space-between">
+      <dt-toggle id="playground-prop-disabled" labelClass="d-label--sm d-fc-secondary" size="sm" wrapperClass="d-jc-space-between">
         Disabled
       </dt-toggle>
     </dt-stack>
@@ -1287,13 +1287,9 @@ We provide the following branded buttons for log-in and sign-up workflows.
 
 <script setup>
 import ButtonVariantsTable from '@baseComponents/ButtonVariantsTable.vue';
-import { ref, watch } from 'vue';
+import { ref } from 'vue';
 
 // Playground reactive data
 const hasIcon = ref(false);
-
-// Debug reactivity
-watch(hasIcon, (newValue) => {
-  console.log('hasIcon changed to:', newValue);
-});
+const isLink = ref(false);
 </script>
