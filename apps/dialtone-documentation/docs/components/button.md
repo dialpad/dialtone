@@ -8,6 +8,8 @@ storybook: https://dialtone.dialpad.com/vue/?path=/story/components-button--defa
 figma_url: https://www.figma.com/design/W58r5BkO8qTw3vem9YieJd/DT9-Component-Library--Rebrand-2025-?node-id=19800-32233
 ---
 
+
+
 <style lang="less">
 .dialtone-playground {
   background-color: var(--dt-color-surface-secondary);
@@ -69,6 +71,7 @@ figma_url: https://www.figma.com/design/W58r5BkO8qTw3vem9YieJd/DT9-Component-Lib
     v-dt-scrollbar:never
   >
     <dt-stack gap="500">
+      <dt-input id="playground-prop-label" label="Label" type="text" value="Place Call" size="sm" />
       <dt-select-menu
         id="playground-prop-size"
         size="sm"
@@ -103,15 +106,21 @@ figma_url: https://www.figma.com/design/W58r5BkO8qTw3vem9YieJd/DT9-Component-Lib
             ]"
         label="Kind"
       />
-      <dt-input id="playground-prop-label" label="Label" type="text" value="Place Call" size="sm" />
       <dt-toggle id="playground-prop-active" labelClass="d-label--sm" size="sm" wrapperClass="d-jc-space-between">
         Active
       </dt-toggle>
       <dt-stack gap="400">
-        <dt-toggle id="playground-prop-icon" labelClass="d-label--sm" size="sm" wrapperClass="d-jc-space-between">
+        <dt-toggle
+          v-model="hasIcon"
+          id="playground-prop-icon"
+          labelClass="d-label--sm"
+          size="sm"
+          wrapperClass="d-jc-space-between"
+        >
           Icon
         </dt-toggle>
         <dt-select-menu
+          v-show="hasIcon"
           id="playground-prop-icon-name"
           size="sm"
           labelClass="d-vi-visible-sr"
@@ -127,13 +136,14 @@ figma_url: https://www.figma.com/design/W58r5BkO8qTw3vem9YieJd/DT9-Component-Lib
           label="Icon name"
         />
       </dt-stack>
-      <dt-toggle id="playground-prop-icon-only" labelClass="d-label--sm" size="sm" wrapperClass="d-jc-space-between">
+      <dt-toggle v-show="hasIcon" id="playground-prop-icon-only" labelClass="d-label--sm" size="sm" wrapperClass="d-jc-space-between">
         Icon only
       </dt-toggle>
-      <dt-toggle id="playground-prop-circle" labelClass="d-label--sm" size="sm" wrapperClass="d-jc-space-between">
+      <dt-toggle v-show="hasIcon" id="playground-prop-circle" labelClass="d-label--sm" size="sm" wrapperClass="d-jc-space-between">
         Circle
       </dt-toggle>
       <dt-select-menu
+        v-show="hasIcon"
         id="playground-prop-icon-position"
         size="sm"
         :options="[
@@ -144,13 +154,14 @@ figma_url: https://www.figma.com/design/W58r5BkO8qTw3vem9YieJd/DT9-Component-Lib
             ]"
         label="Icon Position"
       />
-      <dt-toggle id="playground-prop-link" labelClass="d-label--sm" size="sm" wrapperClass="d-jc-space-between">
+      <dt-toggle v-show="!hasIcon" id="playground-prop-link" labelClass="d-label--sm" size="sm" wrapperClass="d-jc-space-between">
         Link
       </dt-toggle>
-      <dt-toggle id="playground-prop-link-inverted" labelClass="d-label--sm" size="sm" wrapperClass="d-jc-space-between">
+      <dt-toggle v-show="!hasIcon" id="playground-prop-link-inverted" labelClass="d-label--sm" size="sm" wrapperClass="d-jc-space-between">
         Link Inverted
       </dt-toggle>
       <dt-select-menu
+        v-show="!hasIcon"
         id="playground-prop-link-kind"
         size="sm"
         :options="[
@@ -1276,4 +1287,13 @@ We provide the following branded buttons for log-in and sign-up workflows.
 
 <script setup>
 import ButtonVariantsTable from '@baseComponents/ButtonVariantsTable.vue';
+import { ref, watch } from 'vue';
+
+// Playground reactive data
+const hasIcon = ref(false);
+
+// Debug reactivity
+watch(hasIcon, (newValue) => {
+  console.log('hasIcon changed to:', newValue);
+});
 </script>
