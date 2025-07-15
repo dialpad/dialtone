@@ -43,158 +43,155 @@ figma_url: https://www.figma.com/design/W58r5BkO8qTw3vem9YieJd/DT9-Component-Lib
 }
 </style>
 
-<div class="dialtone-playground">
-  <div class="dialtone-playground__component">
-    <div class="dialtone-playground__fullscreen-toggle">
-      <dt-button v-dt-tooltip="`Fullscreen`" kind="muted" importance="clear" size="sm" circle>
-        <template #icon="{ iconSize }">
-          <dt-icon
-            name="expand"
-            :size="iconSize"
-          />
-        </template>
+<div id="combinator-playground">
+  <div class="dialtone-playground">
+    <div class="dialtone-playground__component">
+      <div class="dialtone-playground__fullscreen-toggle">
+        <dt-button v-dt-tooltip="`Fullscreen`" kind="muted" importance="clear" size="sm">
+          <template #icon="{ iconSize }">
+            <dt-icon
+              name="expand"
+              :size="iconSize"
+            />
+          </template>
+        </dt-button>
+      </div>
+      <dt-button
+        size="xs"
+        importance="clear"
+        kind="default"
+        ref="component-default"
+      >
+        Place Call
       </dt-button>
     </div>
-    <dt-button
-      size="xs"
-      importance="clear"
-      kind="default"
-      ref="component-default"
-    >
-      Place Call
-    </dt-button>
-  </div>
-  <div
-    class="
-      dialtone-playground__controls
-    "
-    v-dt-scrollbar:never
-  >
-    <dt-stack gap="500">
-      <dt-input id="playground-prop-label" label="Label" type="text" value="Place Call" size="sm" />
-      <dt-select-menu
-        id="playground-prop-size"
-        size="sm"
-        :options="[
-          { value: `xs`, label: `xs` },
-          { value: `sm`, label: `sm` },
-          { value: `lg`, label: `lg` },
-          { value: `xl`, label: `xl` },
-        ]"
-        label="Size"
-      />
-      <dt-select-menu
-        id="playground-prop-importance"
-        size="sm"
-        :options="[
-          { value: `clear`, label: `clear` },
-          { value: `outlined`, label: `outlined` },
-          { value: `primary`, label: `primary` },
-        ]"
-        label="Importance"
-      />
-      <dt-select-menu
-        id="playground-prop-kind"
-        size="sm"
-        :options="[
-          { value: `default`, label: `default` },
-          { value: `muted`, label: `muted` },
-          { value: `danger`, label: `danger` },
-          { value: `positive`, label: `positive` },
-          { value: `inverted`, label: `inverted` },
-          { value: `unstyled`, label: `unstyled` },
-        ]"
-        label="Kind"
-      />
-      <dt-toggle id="playground-prop-active" labelClass="d-label--sm d-fc-secondary" size="sm" wrapperClass="d-jc-space-between">
-        Active
-      </dt-toggle>
-      <dt-stack gap="400">
-        <dt-toggle
-          v-model="hasIcon"
-          id="playground-prop-icon"
-          labelClass="d-label--sm d-fc-secondary"
+    <div class="dialtone-playground__controls" v-dt-scrollbar:never>
+      <dt-stack gap="500">
+        <dt-input id="playground-prop-label" label="Label" type="text" value="Place Call" size="sm" />
+        <dt-select-menu
+          id="playground-prop-size"
           size="sm"
-          wrapperClass="d-jc-space-between"
-        >
-          Icon
+          :options="[
+            { value: `xs`, label: `xs` },
+            { value: `sm`, label: `sm` },
+            { value: `lg`, label: `lg` },
+            { value: `xl`, label: `xl` },
+          ]"
+          label="Size"
+        />
+        <dt-select-menu
+          id="playground-prop-importance"
+          size="sm"
+          :options="[
+            { value: `clear`, label: `clear` },
+            { value: `outlined`, label: `outlined` },
+            { value: `primary`, label: `primary` },
+          ]"
+          label="Importance"
+        />
+        <dt-select-menu
+          id="playground-prop-kind"
+          size="sm"
+          :options="[
+            { value: `default`, label: `default` },
+            { value: `muted`, label: `muted` },
+            { value: `danger`, label: `danger` },
+            { value: `positive`, label: `positive` },
+            { value: `inverted`, label: `inverted` },
+            { value: `unstyled`, label: `unstyled` },
+          ]"
+          label="Kind"
+        />
+        <dt-toggle id="playground-prop-active" labelClass="d-label--sm d-fc-secondary" size="sm" wrapperClass="d-jc-space-between">
+          Active
         </dt-toggle>
+        <dt-stack gap="400">
+          <dt-toggle
+            v-model="hasIcon"
+            id="playground-prop-icon"
+            labelClass="d-label--sm d-fc-secondary"
+            size="sm"
+            wrapperClass="d-jc-space-between"
+          >
+            Icon
+          </dt-toggle>
+          <dt-select-menu
+            v-show="hasIcon"
+            id="playground-prop-icon-name"
+            size="sm"
+            labelClass="d-vi-visible-sr"
+            :options="[
+              { value: `activity`, label: `activity` },
+              { value: `add`, label: `add` },
+              { value: `add-circle`, label: `add-circle` },
+              { value: `add-circle-outline`, label: `add-circle-outline` },
+              { value: `add-task`, label: `add-task` },
+              { value: `...`, label: `...` },
+              { value: `...`, label: `...` },
+            ]"
+            label="Icon name"
+          />
+        </dt-stack>
         <dt-select-menu
           v-show="hasIcon"
-          id="playground-prop-icon-name"
+          id="playground-prop-icon-position"
           size="sm"
-          labelClass="d-vi-visible-sr"
           :options="[
-            { value: `activity`, label: `activity` },
-            { value: `add`, label: `add` },
-            { value: `add-circle`, label: `add-circle` },
-            { value: `add-circle-outline`, label: `add-circle-outline` },
-            { value: `add-task`, label: `add-task` },
-            { value: `...`, label: `...` },
-            { value: `...`, label: `...` },
+            { value: `left`, label: `left` },
+            { value: `right`, label: `right` },
+            { value: `top`, label: `top` },
+            { value: `bottom`, label: `bottom` },
           ]"
-          label="Icon name"
+          label="Icon Position"
         />
+        <dt-toggle v-show="hasIcon" id="playground-prop-icon-only" labelClass="d-label--sm d-fc-secondary" size="sm" wrapperClass="d-jc-space-between">
+          Icon only
+        </dt-toggle>
+        <dt-toggle v-show="hasIcon" id="playground-prop-circle" labelClass="d-label--sm d-fc-secondary" size="sm" wrapperClass="d-jc-space-between">
+          Circle
+        </dt-toggle>
+        <dt-toggle v-model="isLink" v-show="!hasIcon" id="playground-prop-link" labelClass="d-label--sm d-fc-secondary" size="sm" wrapperClass="d-jc-space-between">
+          Link
+        </dt-toggle>
+        <dt-select-menu
+          v-show="isLink && !hasIcon"
+          id="playground-prop-link-kind"
+          size="sm"
+          :options="[
+            { value: `default`, label: `default` },
+            { value: `warning`, label: `warning` },
+            { value: `danger`, label: `danger` },
+            { value: `success`, label: `success` },
+            { value: `muted`, label: `muted` },
+            { value: `mention`, label: `mention` },
+          ]"
+          label="Link Kind"
+        />
+        <dt-toggle v-show="isLink && !hasIcon" id="playground-prop-link-inverted" labelClass="d-label--sm d-fc-secondary" size="sm" wrapperClass="d-jc-space-between">
+          Link Inverted
+        </dt-toggle>
+        <dt-toggle id="playground-prop-loading" labelClass="d-label--sm d-fc-secondary" size="sm" wrapperClass="d-jc-space-between">
+          Loading
+        </dt-toggle>
+        <dt-toggle id="playground-prop-disabled" labelClass="d-label--sm d-fc-secondary" size="sm" wrapperClass="d-jc-space-between">
+          Disabled
+        </dt-toggle>
       </dt-stack>
-      <dt-select-menu
-        v-show="hasIcon"
-        id="playground-prop-icon-position"
-        size="sm"
-        :options="[
-          { value: `left`, label: `left` },
-          { value: `right`, label: `right` },
-          { value: `top`, label: `top` },
-          { value: `bottom`, label: `bottom` },
-        ]"
-        label="Icon Position"
-      />
-      <dt-toggle v-show="hasIcon" id="playground-prop-icon-only" labelClass="d-label--sm d-fc-secondary" size="sm" wrapperClass="d-jc-space-between">
-        Icon only
-      </dt-toggle>
-      <dt-toggle v-show="hasIcon" id="playground-prop-circle" labelClass="d-label--sm d-fc-secondary" size="sm" wrapperClass="d-jc-space-between">
-        Circle
-      </dt-toggle>
-      <dt-toggle v-model="isLink" v-show="!hasIcon" id="playground-prop-link" labelClass="d-label--sm d-fc-secondary" size="sm" wrapperClass="d-jc-space-between">
-        Link
-      </dt-toggle>
-      <dt-select-menu
-        v-show="isLink && !hasIcon"
-        id="playground-prop-link-kind"
-        size="sm"
-        :options="[
-          { value: `default`, label: `default` },
-          { value: `warning`, label: `warning` },
-          { value: `danger`, label: `danger` },
-          { value: `success`, label: `success` },
-          { value: `muted`, label: `muted` },
-          { value: `mention`, label: `mention` },
-        ]"
-        label="Link Kind"
-      />
-      <dt-toggle v-show="isLink && !hasIcon" id="playground-prop-link-inverted" labelClass="d-label--sm d-fc-secondary" size="sm" wrapperClass="d-jc-space-between">
-        Link Inverted
-      </dt-toggle>
-      <dt-toggle id="playground-prop-loading" labelClass="d-label--sm d-fc-secondary" size="sm" wrapperClass="d-jc-space-between">
-        Loading
-      </dt-toggle>
-      <dt-toggle id="playground-prop-disabled" labelClass="d-label--sm d-fc-secondary" size="sm" wrapperClass="d-jc-space-between">
-        Disabled
-      </dt-toggle>
-    </dt-stack>
+    </div>
   </div>
+  <code-example-tabs
+  vueCode='
+  <dt-button
+    size="xs"
+    importance="clear"
+    kind="default"
+  >
+    Place Call
+  </dt-button>
+  '
+  :htmlCode="() => $refs['component-default']"
+  showHtmlWarning />
 </div>
-<code-example-tabs
-vueCode='
-<dt-button
-  size="xs"
-  importance="clear"
-  kind="default"
->
-  Place Call
-</dt-button>
-'
-:htmlCode="() => $refs['component-default']"
-showHtmlWarning />
 
 <!-- <component-combinator component-name="DtButton" /> -->
 
