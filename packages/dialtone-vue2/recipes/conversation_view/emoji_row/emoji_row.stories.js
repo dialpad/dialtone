@@ -44,6 +44,7 @@ export const argTypesData = {
         detail: `[{
           "emojiUnicodeOrShortname": string,
           "isSelected": boolean,
+          "names": string,
           "num": number,
         }]`,
       },
