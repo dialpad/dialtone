@@ -7,53 +7,8 @@ image: assets/images/components/button.png
 storybook: https://dialtone.dialpad.com/vue/?path=/story/components-button--default
 figma_url: https://www.figma.com/design/W58r5BkO8qTw3vem9YieJd/DT9-Component-Library--Rebrand-2025-?node-id=19800-32233
 ---
-
-
-
-<style lang="less">
-/*#asdfasdf {
-  position: fixed;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  background-color: var(--dt-color-surface-secondary);
-}*/
-.dialtone-playground {
-  & {
-    background-color: var(--dt-color-surface-secondary);
-    display: flex;
-    flex-direction: row;
-    border-radius: var(--dt-size-radius-400);
-    overflow: hidden;
-  }
-
-  &__component {
-    padding: var(--dt-space-500);
-    display: grid;
-    flex: 1;
-    align-items: center;
-    justify-content: center;
-    min-height: var(--dt-size-925);
-    position: relative;
-  }
-
-  &__fullscreen-toggle {
-    position: absolute;
-    inset-block-start: var(--dt-space-400);
-    inset-inline-end: var(--dt-space-400);
-  }
-
-  &__controls {
-    padding: var(--dt-space-500);
-    background-color: var(--dt-color-surface-secondary-opaque);
-    width: var(--dt-size-875);
-    max-height: var(--dt-size-950);
-  }
-}
-</style>
-
-<div id="asdfasdf">
-  <div class="dialtone-playground">
+<div class="dialtone-playground">
+  <div class="dialtone-playground__start">
     <div class="dialtone-playground__component">
       <div class="dialtone-playground__fullscreen-toggle">
         <dt-button v-dt-tooltip="`Fullscreen`" kind="muted" importance="clear" size="sm">
@@ -74,7 +29,7 @@ figma_url: https://www.figma.com/design/W58r5BkO8qTw3vem9YieJd/DT9-Component-Lib
         Place Call
       </dt-button>
     </div>
-    <div class="dialtone-playground__controls" v-dt-scrollbar:never>
+    <div class="dialtone-playground__controls" v-dt-scrollbar>
       <dt-stack gap="500">
         <dt-input id="playground-prop-label" label="Label" type="text" value="Place Call" size="sm" />
         <dt-select-menu
@@ -188,18 +143,20 @@ figma_url: https://www.figma.com/design/W58r5BkO8qTw3vem9YieJd/DT9-Component-Lib
       </dt-stack>
     </div>
   </div>
-  <code-example-tabs
-  vueCode='
-  <dt-button
-    size="xs"
-    importance="clear"
-    kind="default"
-  >
-    Place Call
-  </dt-button>
-  '
-  :htmlCode="() => $refs['component-default']"
-  showHtmlWarning />
+  <div class="dialtone-playground__end">
+<code-example-tabs
+vueCode='
+<dt-button
+  size="xs"
+  importance="clear"
+  kind="default"
+>
+  Place Call
+</dt-button>
+'
+:htmlCode="() => $refs['component-default']"
+showHtmlWarning />
+  </div>
 </div>
 
 <!-- <component-combinator component-name="DtButton" /> -->
@@ -1299,3 +1256,68 @@ import { ref } from 'vue';
 const hasIcon = ref(false);
 const isLink = ref(false);
 </script>
+
+<style lang="less">
+.dialtone-playground {
+  & {
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__start {
+    flex-grow: 1;
+  }
+
+  &__end {
+    .dialtone-playground--fullscreen & {
+      background-color: var(--dt-color-surface-secondary-opaque);
+    }
+  }
+
+  &--fullscreen {
+    position: fixed;
+    inset: 0;
+    z-index: var(--zi-modal-element);
+    background-color: var(--dt-color-surface-secondary);
+  }
+
+  &__start {
+    background-color: var(--dt-color-surface-secondary);
+    display: flex;
+    flex-direction: row;
+    border-radius: var(--dt-size-radius-400);
+    overflow: hidden;
+
+    .dialtone-playground--fullscreen & {
+      border-bottom: 1px solid var(--dt-color-border-subtle)
+    }
+  }
+
+  &__component {
+    padding: var(--dt-space-500);
+    display: grid;
+    flex: 1;
+    align-items: center;
+    justify-content: center;
+    min-height: var(--dt-size-925);
+    position: relative;
+  }
+
+  &__fullscreen-toggle {
+    position: absolute;
+    inset-block-start: var(--dt-space-400);
+    inset-inline-end: var(--dt-space-400);
+  }
+
+  &__controls {
+    padding: var(--dt-space-500);
+    background-color: var(--dt-color-surface-secondary-opaque);
+    width: var(--dt-size-875);
+    max-height: var(--dt-size-950);
+
+    .dialtone-playground--fullscreen & {
+      max-height: 100%;
+    }
+  }
+}
+</style>
