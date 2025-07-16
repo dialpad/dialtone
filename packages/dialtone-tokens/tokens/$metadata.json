@@ -21,9 +21,6 @@
     "components/button/default",
     "components/checkbox/default",
     "components/icon/default",
-    "components/radio/default",
-    "shell/default",
-    "shell/dark",
-    "shell/blackberry"
+    "components/radio/default"
   ]
 }
