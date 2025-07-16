@@ -3792,5 +3792,27 @@
     "$figmaModeId": "2174:4",
     "$figmaCollectionId": "VariableCollectionId:2174:1883",
     "group": "base"
+  },
+  {
+    "id": "e1bb86aab7b9672d84c4f886f67aeae5155a4ebd",
+    "name": "dark",
+    "$figmaStyleReferences": {},
+    "selectedTokenSets": {
+      "root": "enabled",
+      "base/default": "enabled",
+      "base/dark": "enabled",
+      "theme/dp/default": "enabled",
+      "theme/dp/dark": "enabled",
+      "theme/blackberry/default": "enabled",
+      "theme/blackberry/dark": "enabled",
+      "components/avatar/default": "enabled",
+      "components/badge/default": "enabled",
+      "components/badge/dark": "enabled",
+      "components/button/default": "enabled",
+      "components/checkbox/default": "enabled",
+      "components/icon/default": "enabled",
+      "components/radio/default": "enabled"
+    },
+    "group": "blackberry"
   }
 ]
