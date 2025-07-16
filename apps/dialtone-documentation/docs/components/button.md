@@ -14,7 +14,7 @@ figma_url: https://www.figma.com/design/W58r5BkO8qTw3vem9YieJd/DT9-Component-Lib
         <dt-button @click="toggleFullscreen" v-dt-tooltip="`Fullscreen`" kind="muted" importance="clear" size="sm">
           <template #icon="{ iconSize }">
             <dt-icon
-              name="expand"
+              :name="isFullscreen ? 'minimize' : 'expand'"
               :size="iconSize"
             />
           </template>
@@ -31,9 +31,11 @@ figma_url: https://www.figma.com/design/W58r5BkO8qTw3vem9YieJd/DT9-Component-Lib
     </div>
     <div class="dialtone-playground__controls" v-dt-scrollbar>
       <dt-stack gap="500">
-        <dt-input id="playground-prop-label" label="Label" type="text" value="Place Call" size="sm" />
+        <div v-show="isFullscreen" class="d-headline--md">
+          DtButton
+        </div>
+        <dt-input label="Label" type="text" value="Place Call" size="sm" />
         <dt-select-menu
-          id="playground-prop-size"
           size="sm"
           :options="[
             { value: `xs`, label: `xs` },
@@ -44,7 +46,6 @@ figma_url: https://www.figma.com/design/W58r5BkO8qTw3vem9YieJd/DT9-Component-Lib
           label="Size"
         />
         <dt-select-menu
-          id="playground-prop-importance"
           size="sm"
           :options="[
             { value: `clear`, label: `clear` },
@@ -54,7 +55,6 @@ figma_url: https://www.figma.com/design/W58r5BkO8qTw3vem9YieJd/DT9-Component-Lib
           label="Importance"
         />
         <dt-select-menu
-          id="playground-prop-kind"
           size="sm"
           :options="[
             { value: `default`, label: `default` },
@@ -66,13 +66,12 @@ figma_url: https://www.figma.com/design/W58r5BkO8qTw3vem9YieJd/DT9-Component-Lib
           ]"
           label="Kind"
         />
-        <dt-toggle id="playground-prop-active" labelClass="d-label--sm d-fc-secondary" size="sm" wrapperClass="d-jc-space-between">
+        <dt-toggle labelClass="d-label--sm d-fc-secondary" size="sm" wrapperClass="d-jc-space-between">
           Active
         </dt-toggle>
         <dt-stack gap="400">
           <dt-toggle
             v-model="hasIcon"
-            id="playground-prop-icon"
             labelClass="d-label--sm d-fc-secondary"
             size="sm"
             wrapperClass="d-jc-space-between"
@@ -81,7 +80,6 @@ figma_url: https://www.figma.com/design/W58r5BkO8qTw3vem9YieJd/DT9-Component-Lib
           </dt-toggle>
           <dt-select-menu
             v-show="hasIcon"
-            id="playground-prop-icon-name"
             size="sm"
             labelClass="d-vi-visible-sr"
             :options="[
@@ -98,7 +96,6 @@ figma_url: https://www.figma.com/design/W58r5BkO8qTw3vem9YieJd/DT9-Component-Lib
         </dt-stack>
         <dt-select-menu
           v-show="hasIcon"
-          id="playground-prop-icon-position"
           size="sm"
           :options="[
             { value: `left`, label: `left` },
@@ -108,18 +105,17 @@ figma_url: https://www.figma.com/design/W58r5BkO8qTw3vem9YieJd/DT9-Component-Lib
           ]"
           label="Icon Position"
         />
-        <dt-toggle v-show="hasIcon" id="playground-prop-icon-only" labelClass="d-label--sm d-fc-secondary" size="sm" wrapperClass="d-jc-space-between">
+        <dt-toggle v-show="hasIcon" labelClass="d-label--sm d-fc-secondary" size="sm" wrapperClass="d-jc-space-between">
           Icon only
         </dt-toggle>
-        <dt-toggle v-show="hasIcon" id="playground-prop-circle" labelClass="d-label--sm d-fc-secondary" size="sm" wrapperClass="d-jc-space-between">
+        <dt-toggle v-show="hasIcon" labelClass="d-label--sm d-fc-secondary" size="sm" wrapperClass="d-jc-space-between">
           Circle
         </dt-toggle>
-        <dt-toggle v-model="isLink" v-show="!hasIcon" id="playground-prop-link" labelClass="d-label--sm d-fc-secondary" size="sm" wrapperClass="d-jc-space-between">
+        <dt-toggle v-model="isLink" v-show="!hasIcon" labelClass="d-label--sm d-fc-secondary" size="sm" wrapperClass="d-jc-space-between">
           Link
         </dt-toggle>
         <dt-select-menu
           v-show="isLink && !hasIcon"
-          id="playground-prop-link-kind"
           size="sm"
           :options="[
             { value: `default`, label: `default` },
@@ -131,13 +127,13 @@ figma_url: https://www.figma.com/design/W58r5BkO8qTw3vem9YieJd/DT9-Component-Lib
           ]"
           label="Link Kind"
         />
-        <dt-toggle v-show="isLink && !hasIcon" id="playground-prop-link-inverted" labelClass="d-label--sm d-fc-secondary" size="sm" wrapperClass="d-jc-space-between">
+        <dt-toggle v-show="isLink && !hasIcon" labelClass="d-label--sm d-fc-secondary" size="sm" wrapperClass="d-jc-space-between">
           Link Inverted
         </dt-toggle>
-        <dt-toggle id="playground-prop-loading" labelClass="d-label--sm d-fc-secondary" size="sm" wrapperClass="d-jc-space-between">
+        <dt-toggle labelClass="d-label--sm d-fc-secondary" size="sm" wrapperClass="d-jc-space-between">
           Loading
         </dt-toggle>
-        <dt-toggle id="playground-prop-disabled" labelClass="d-label--sm d-fc-secondary" size="sm" wrapperClass="d-jc-space-between">
+        <dt-toggle labelClass="d-label--sm d-fc-secondary" size="sm" wrapperClass="d-jc-space-between">
           Disabled
         </dt-toggle>
       </dt-stack>
