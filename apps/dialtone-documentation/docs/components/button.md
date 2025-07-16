@@ -11,16 +11,6 @@ figma_url: https://www.figma.com/design/W58r5BkO8qTw3vem9YieJd/DT9-Component-Lib
 <div class="dialtone-playground" :class="{ 'dialtone-playground--fullscreen': isFullscreen }">
   <div class="dialtone-playground__start">
     <div class="dialtone-playground__component">
-      <div class="dialtone-playground__fullscreen-toggle">
-        <dt-button @click="toggleFullscreen" v-dt-tooltip="`Fullscreen`" kind="muted" importance="clear" size="sm">
-          <template #icon="{ iconSize }">
-            <dt-icon
-              :name="isFullscreen ? 'minimize' : 'expand'"
-              :size="iconSize"
-            />
-          </template>
-        </dt-button>
-      </div>
       <dt-button
         ref="component-default"
         :size="buttonSize"
@@ -47,7 +37,22 @@ figma_url: https://www.figma.com/design/W58r5BkO8qTw3vem9YieJd/DT9-Component-Lib
     </div>
     <div class="dialtone-playground__controls" v-dt-scrollbar>
       <dt-stack gap="500">
-        <h2 v-show="isFullscreen" class="d-headline--lg">Button</h2>
+        <dt-stack direction="row" gap="500">
+          <h2
+            class="d-fl1"
+            :class="isFullscreen ? 'd-headline--lg' : 'd-headline--md'"
+          >
+            Button
+          </h2>
+          <dt-button @click="toggleFullscreen" v-dt-tooltip="`Fullscreen`" kind="muted" importance="clear" size="sm">
+            <template #icon="{ iconSize }">
+              <dt-icon
+                :name="isFullscreen ? 'minimize' : 'expand'"
+                :size="iconSize"
+              />
+            </template>
+          </dt-button>
+        </dt-stack>
         <dt-input v-model="buttonLabel" label="Label" type="text" size="sm" />
         <dt-input v-model="buttonLabelClass" label="Label class" type="text" size="sm" />
         <dt-select-menu
@@ -1345,6 +1350,8 @@ watch(buttonLabel, (newValue) => {
 
 // Computed property for dynamic Vue code generation
 // ‼️ ⚠️ This is all totally FAKE, it's just a prototype to fake the Vues
+// ‼️ ⚠️ This is all totally FAKE, it's just a prototype to fake the Vues
+// ‼️ ⚠️ This is all totally FAKE, it's just a prototype to fake the Vues
 const dynamicVueCode = computed(() => {
   const props = [];
 
@@ -1402,6 +1409,8 @@ const dynamicVueCode = computed(() => {
 });
 
 // Computed property for dynamic HTML code generation
+// ‼️ ⚠️ This is all totally FAKE, it's just a prototype to fake the rendered HTML
+// ‼️ ⚠️ This is all totally FAKE, it's just a prototype to fake the rendered HTML
 // ‼️ ⚠️ This is all totally FAKE, it's just a prototype to fake the rendered HTML
 const dynamicHtmlCode = computed(() => {
   const classNames = ['d-btn'];
@@ -1463,11 +1472,11 @@ const dynamicHtmlCode = computed(() => {
     if (isIconOnly.value) {
       content = iconHtml;
     } else {
-      const labelSpan = `<span class="base-button__label${buttonLabelClass.value ? ' ' + buttonLabelClass.value : ''}">${buttonLabel.value || 'Place Call'}</span>`;
+      const labelSpan = `<span class="d-btn__label${buttonLabelClass.value ? ' ' + buttonLabelClass.value : ''}">${buttonLabel.value || 'Place Call'}</span>`;
       content = iconPosition.value === 'right' ? `${labelSpan}\n  ${iconHtml}` : `${iconHtml}\n  ${labelSpan}`;
     }
   } else {
-    content = `<span class="base-button__label${buttonLabelClass.value ? ' ' + buttonLabelClass.value : ''}">${buttonLabel.value || 'Place Call'}</span>`;
+    content = `<span class="d-btn__label${buttonLabelClass.value ? ' ' + buttonLabelClass.value : ''}">${buttonLabel.value || 'Place Call'}</span>`;
   }
 
   return `<button ${attributesString}>\n  ${content}\n</button>`;
