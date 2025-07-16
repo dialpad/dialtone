@@ -37,14 +37,30 @@ figma_url: https://www.figma.com/design/W58r5BkO8qTw3vem9YieJd/DT9-Component-Lib
     </div>
     <div class="dialtone-playground__controls" v-dt-scrollbar>
       <dt-stack gap="500">
-        <dt-stack direction="row" gap="500">
+        <dt-stack
+          direction="row"
+          gap="500"
+          class="
+            d-mtn8
+            d-mbn8
+            d-mrn4
+            d-d-none
+            md:d-d-flex
+          "
+        >
           <h2
             class="d-fl1"
             :class="isFullscreen ? 'd-headline--lg' : 'd-headline--md'"
           >
             Button
           </h2>
-          <dt-button @click="toggleFullscreen" v-dt-tooltip="`Fullscreen`" kind="muted" importance="clear" size="sm">
+          <dt-button
+            @click="toggleFullscreen"
+            v-dt-tooltip="`Fullscreen`"
+            kind="muted"
+            importance="clear"
+            size="sm"
+          >
             <template #icon="{ iconSize }">
               <dt-icon
                 :name="isFullscreen ? 'minimize' : 'expand'"
@@ -1492,6 +1508,18 @@ const dynamicHtmlCode = computed(() => {
 
   &__start {
     flex-grow: 1;
+    background-color: var(--dt-color-surface-secondary);
+    border-radius: var(--dt-size-radius-400);
+
+    @media screen and (min-width: 640px) {
+      display: flex;
+      overflow: hidden;
+      flex-direction: row;
+    }
+
+    .dialtone-playground--fullscreen & {
+      border-block-end: var(--dt-size-border-100) solid var(--dt-color-border-subtle)
+    }
   }
 
   &__end {
@@ -1508,44 +1536,35 @@ const dynamicHtmlCode = computed(() => {
     background-color: var(--dt-color-surface-secondary);
   }
 
-  &__start {
-    background-color: var(--dt-color-surface-secondary);
-    display: flex;
-    flex-direction: row;
-    border-radius: var(--dt-size-radius-400);
-    overflow: hidden;
-
-    .dialtone-playground--fullscreen & {
-      border-block-end: var(--dt-size-border-100) solid var(--dt-color-border-subtle)
-    }
-  }
-
   &__component {
     padding: var(--dt-space-500);
     display: grid;
     flex: 1;
     align-items: center;
     justify-content: center;
-    min-block-size: var(--dt-size-925);
     position: relative;
-  }
 
-  &__fullscreen-toggle {
-    position: absolute;
-    inset-block-start: var(--dt-space-400);
-    inset-inline-end: var(--dt-space-400);
+    @media screen and (min-width: 640px) {
+      min-block-size: var(--dt-size-925);
+    }
   }
 
   &__controls {
     padding: var(--dt-space-500);
     background-color: var(--dt-color-surface-secondary-opaque);
-    inline-size: var(--dt-size-875);
-    max-block-size: var(--dt-size-950);
+
+    @media screen and (min-width: 640px) {
+      inline-size: var(--dt-size-875);
+      max-block-size: var(--dt-size-950);
+    }
 
     .dialtone-playground--fullscreen & {
-      max-block-size: 100%;
-      inline-size: var(--dt-size-900);
+      @media screen and (min-width: 640px) {
+        max-block-size: 100%;
+        inline-size: var(--dt-size-900);
+      }
     }
+
   }
 }
 </style>
