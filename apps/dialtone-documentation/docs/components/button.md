@@ -7,11 +7,11 @@ image: assets/images/components/button.png
 storybook: https://dialtone.dialpad.com/vue/?path=/story/components-button--default
 figma_url: https://www.figma.com/design/W58r5BkO8qTw3vem9YieJd/DT9-Component-Library--Rebrand-2025-?node-id=19800-32233
 ---
-<div class="dialtone-playground">
+<div class="dialtone-playground" :class="{ 'dialtone-playground--fullscreen': isFullscreen }">
   <div class="dialtone-playground__start">
     <div class="dialtone-playground__component">
       <div class="dialtone-playground__fullscreen-toggle">
-        <dt-button v-dt-tooltip="`Fullscreen`" kind="muted" importance="clear" size="sm">
+        <dt-button @click="toggleFullscreen" v-dt-tooltip="`Fullscreen`" kind="muted" importance="clear" size="sm">
           <template #icon="{ iconSize }">
             <dt-icon
               name="expand"
@@ -1255,6 +1255,12 @@ import { ref } from 'vue';
 // Playground reactive data
 const hasIcon = ref(false);
 const isLink = ref(false);
+const isFullscreen = ref(false);
+
+// Toggle fullscreen mode
+const toggleFullscreen = () => {
+  isFullscreen.value = !isFullscreen.value;
+};
 </script>
 
 <style lang="less">
