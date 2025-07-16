@@ -27,6 +27,12 @@ figma_url: https://www.figma.com/design/W58r5BkO8qTw3vem9YieJd/DT9-Component-Lib
         :kind="buttonKind"
         :active="isActive"
       >
+        <template v-if="hasIcon" #icon="{ iconSize }">
+          <dt-icon
+            :name="iconName"
+            :size="iconSize"
+          />
+        </template>
         {{ buttonLabel }}
       </dt-button>
     </div>
@@ -90,12 +96,38 @@ figma_url: https://www.figma.com/design/W58r5BkO8qTw3vem9YieJd/DT9-Component-Lib
             labelClass="d-vi-visible-sr"
             :options="[
               { value: `activity`, label: `activity` },
-              { value: `add`, label: `add` },
-              { value: `add-circle`, label: `add-circle` },
-              { value: `add-circle-outline`, label: `add-circle-outline` },
               { value: `add-task`, label: `add-task` },
+              { value: `agent-assist`, label: `agent-assist` },
+              { value: `ai-notes`, label: `ai-notes` },
+              { value: `ai-write`, label: `ai-write` },
+              { value: `airplay`, label: `airplay` },
+              { value: `airtable`, label: `airtable` },
+              { value: `alarm-check`, label: `alarm-check` },
+              { value: `alarm-clock-off`, label: `alarm-clock-off` },
+              { value: `alarm-minus`, label: `alarm-minus` },
+              { value: `alarm-plus`, label: `alarm-plus` },
+              { value: `album`, label: `album` },
+              { value: `alert-circle`, label: `alert-circle` },
+              { value: `alert-triangle`, label: `alert-triangle` },
+              { value: `align-center`, label: `align-center` },
+              { value: `align-justify`, label: `align-justify` },
+              { value: `align-left`, label: `align-left` },
+              { value: `align-right`, label: `align-right` },
+              { value: `amex`, label: `amex` },
+              { value: `app-store-badge`, label: `app-store-badge` },
+              { value: `apple`, label: `apple` },
+              { value: `archive`, label: `archive` },
+              { value: `archive-restore`, label: `archive-restore` },
+              { value: `arrow-down`, label: `arrow-down` },
+              { value: `arrow-down-left`, label: `arrow-down-left` },
+              { value: `arrow-down-right`, label: `arrow-down-right` },
+              { value: `arrow-left`, label: `arrow-left` },
+              { value: `arrow-left-right`, label: `arrow-left-right` },
+              { value: `arrow-right`, label: `arrow-right` },
+              { value: `arrow-up`, label: `arrow-up` },
               { value: `...`, label: `...` },
-              { value: `...`, label: `...` },
+              { value: `zoom-in`, label: `zoom-in` },
+              { value: `zoom-out`, label: `zoom-out` },
             ]"
             label="Icon name"
           />
