@@ -2812,7 +2812,7 @@
             "studio.tokens": {
               "modify": {
                 "type": "alpha",
-                "value": "0.75",
+                "value": "0.7",
                 "space": "hsl"
               }
             }
@@ -2879,7 +2879,7 @@
             "studio.tokens": {
               "modify": {
                 "type": "alpha",
-                "value": "0.12",
+                "value": "0.10",
                 "space": "hsl"
               }
             }
