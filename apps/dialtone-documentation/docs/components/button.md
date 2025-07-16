@@ -1486,7 +1486,7 @@ const dynamicHtmlCode = computed(() => {
   &__end {
     .dialtone-playground--fullscreen & {
       background-color: var(--dt-color-surface-secondary-opaque);
-      height: 33vh;
+      block-size: 33vh;
     }
   }
 
@@ -1505,7 +1505,7 @@ const dynamicHtmlCode = computed(() => {
     overflow: hidden;
 
     .dialtone-playground--fullscreen & {
-      border-bottom: 1px solid var(--dt-color-border-subtle)
+      border-block-end: var(--dt-size-border-100) solid var(--dt-color-border-subtle)
     }
   }
 
@@ -1515,7 +1515,7 @@ const dynamicHtmlCode = computed(() => {
     flex: 1;
     align-items: center;
     justify-content: center;
-    min-height: var(--dt-size-925);
+    min-block-size: var(--dt-size-925);
     position: relative;
   }
 
@@ -1528,12 +1528,12 @@ const dynamicHtmlCode = computed(() => {
   &__controls {
     padding: var(--dt-space-500);
     background-color: var(--dt-color-surface-secondary-opaque);
-    width: var(--dt-size-875);
-    max-height: var(--dt-size-950);
+    inline-size: var(--dt-size-875);
+    max-block-size: var(--dt-size-950);
 
     .dialtone-playground--fullscreen & {
-      max-height: 100%;
-      width: var(--dt-size-900);
+      max-block-size: 100%;
+      inline-size: var(--dt-size-900);
     }
   }
 }
