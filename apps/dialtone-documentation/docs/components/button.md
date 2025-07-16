@@ -1533,6 +1533,7 @@ const dynamicHtmlCode = computed(() => {
 
     .dialtone-playground--fullscreen & {
       max-height: 100%;
+      width: var(--dt-size-900);
     }
   }
 }
