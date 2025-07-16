@@ -21,10 +21,11 @@ figma_url: https://www.figma.com/design/W58r5BkO8qTw3vem9YieJd/DT9-Component-Lib
         </dt-button>
       </div>
       <dt-button
+        ref="component-default"
         :size="buttonSize"
         :importance="buttonImportance"
         :kind="buttonKind"
-        ref="component-default"
+        :active="isActive"
       >
         {{ buttonLabel }}
       </dt-button>
@@ -70,7 +71,7 @@ figma_url: https://www.figma.com/design/W58r5BkO8qTw3vem9YieJd/DT9-Component-Lib
           ]"
           label="Kind"
         />
-        <dt-toggle labelClass="d-label--sm d-fc-secondary" size="sm" wrapperClass="d-jc-space-between">
+        <dt-toggle v-model="isActive" labelClass="d-label--sm d-fc-secondary" size="sm" wrapperClass="d-jc-space-between">
           Active
         </dt-toggle>
         <dt-stack gap="400">
@@ -1260,12 +1261,13 @@ const hasIcon = ref(false);
 const isLink = ref(false);
 const isFullscreen = ref(false);
 const buttonLabel = ref('Place Call');
-const buttonSize = ref('xs');
-const buttonImportance = ref('clear');
+const buttonSize = ref('md');
+const buttonImportance = ref('primary');
 const buttonKind = ref('default');
 const iconName = ref('activity');
 const iconPosition = ref('left');
 const linkKind = ref('default');
+const isActive = ref(false);
 
 // Toggle fullscreen mode
 const toggleFullscreen = () => {
