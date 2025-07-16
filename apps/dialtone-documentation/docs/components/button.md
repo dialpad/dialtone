@@ -148,7 +148,7 @@ figma_url: https://www.figma.com/design/W58r5BkO8qTw3vem9YieJd/DT9-Component-Lib
         <dt-toggle v-model="isIconOnly" v-show="hasIcon" labelClass="d-label--sm d-fc-secondary" size="sm" wrapperClass="d-jc-space-between">
           Icon only
         </dt-toggle>
-        <dt-toggle v-show="hasIcon" labelClass="d-label--sm d-fc-secondary" size="sm" wrapperClass="d-jc-space-between">
+        <dt-toggle v-show="isIconOnly" labelClass="d-label--sm d-fc-secondary" size="sm" wrapperClass="d-jc-space-between">
           Circle
         </dt-toggle>
         <dt-toggle v-model="isLink" v-show="!hasIcon" labelClass="d-label--sm d-fc-secondary" size="sm" wrapperClass="d-jc-space-between">
