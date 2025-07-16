@@ -47,7 +47,7 @@ figma_url: https://www.figma.com/design/W58r5BkO8qTw3vem9YieJd/DT9-Component-Lib
     </div>
     <div class="dialtone-playground__controls" v-dt-scrollbar>
       <dt-stack gap="500">
-        <h2 v-show="isFullscreen" class="d-headline--lg">DtButton</h2>
+        <h2 v-show="isFullscreen" class="d-headline--lg">Button</h2>
         <dt-input v-model="buttonLabel" label="Label" type="text" size="sm" />
         <dt-input v-model="buttonLabelClass" label="Label class" type="text" size="sm" />
         <dt-select-menu
@@ -196,7 +196,7 @@ figma_url: https://www.figma.com/design/W58r5BkO8qTw3vem9YieJd/DT9-Component-Lib
   <div class="dialtone-playground__end">
 <code-example-tabs
 :vueCode="dynamicVueCode"
-:htmlCode="() => $refs['component-default']"
+:htmlCode="dynamicHtmlCode"
 showHtmlWarning />
   </div>
 </div>
@@ -1387,7 +1387,7 @@ const dynamicVueCode = computed(() => {
   if (isDisabled.value) {
     props.push(`  disabled`);
   }
-  
+
   // Add labelClass if not empty
   if (buttonLabelClass.value && buttonLabelClass.value.trim() !== '') {
     props.push(`  labelClass="${buttonLabelClass.value}"`);
@@ -1398,6 +1398,77 @@ const dynamicVueCode = computed(() => {
   const labelContent = buttonLabel.value || 'Place Call';
 
   return `<dt-button${propsString}>${iconTemplate}\n  ${labelContent}\n</dt-button>`;
+});
+
+// Computed property for dynamic HTML code generation
+const dynamicHtmlCode = computed(() => {
+  const classNames = ['base-button', 'base-button__button'];
+
+  // Add size class
+  if (buttonSize.value) {
+    classNames.push(`d-btn--${buttonSize.value}`);
+  }
+
+  // Add importance class
+  if (buttonImportance.value && buttonImportance.value !== 'primary') {
+    classNames.push(`d-btn--${buttonImportance.value}`);
+  } else if (buttonImportance.value === 'primary') {
+    classNames.push('d-btn--primary');
+  }
+
+  // Add kind class
+  if (buttonKind.value && buttonKind.value !== 'default') {
+    classNames.push(`d-btn--${buttonKind.value}`);
+  }
+
+  // Add state classes
+  if (isActive.value) {
+    classNames.push('d-btn--active');
+  }
+
+  if (isCircle.value) {
+    classNames.push('d-btn--circle');
+  }
+
+  if (isLink.value) {
+    classNames.push('d-btn--link');
+    if (linkKind.value && linkKind.value !== 'default') {
+      classNames.push(`d-btn--link-${linkKind.value}`);
+    }
+    if (isLinkInverted.value) {
+      classNames.push('d-btn--link-inverted');
+    }
+  }
+
+  if (isLoading.value) {
+    classNames.push('d-btn--loading');
+  }
+
+  // Build attributes
+  const attributes = [];
+  if (isDisabled.value) {
+    attributes.push('disabled="disabled"');
+  }
+  attributes.push('type="button"');
+
+  const classAttr = `class="${classNames.join(' ')}"`;
+  const attributesString = [classAttr, ...attributes].join(' ');
+
+  // Build content
+  let content = '';
+  if (hasIcon.value) {
+    const iconHtml = `<svg>...</svg>`;
+    if (isIconOnly.value) {
+      content = iconHtml;
+    } else {
+      const labelSpan = `<span class="base-button__label${buttonLabelClass.value ? ' ' + buttonLabelClass.value : ''}">${buttonLabel.value || 'Place Call'}</span>`;
+      content = iconPosition.value === 'right' ? `${labelSpan}\n  ${iconHtml}` : `${iconHtml}\n  ${labelSpan}`;
+    }
+  } else {
+    content = `<span class="base-button__label${buttonLabelClass.value ? ' ' + buttonLabelClass.value : ''}">${buttonLabel.value || 'Place Call'}</span>`;
+  }
+
+  return `<button ${attributesString}>\n  ${content}\n</button>`;
 });
 </script>
 
