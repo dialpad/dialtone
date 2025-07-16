@@ -55,19 +55,6 @@ DIALTONE_EDITOR_LINK_BUTTON_LABEL = Enlace
 DIALTONE_EDITOR_ADD_LINK_BUTTON =
     .title = Agregar enlace
     .aria-label = Campo de entrada para agregar enlace
-DIALTONE_EMOJI_ROW_REACTION_LABEL =
-    { $reactionCount ->
-        [one]
-            { $selected ->
-               *[false] { $name } reaccionó con { $reaction }.
-                [true] Reaccionaste con { $reaction }.
-            }
-       *[other]
-            { $selected ->
-               *[false] { $reactionCount } personas reaccionaron con { $reaction }.
-                [true] { $reactionCount } personas, incluido usted, reaccionaron con { $reaction }.
-            }
-    }
 DIALTONE_EMOJI_PICKER_ADD_EMOJI_LABEL = Agregar emoji
 DIALTONE_EMOJI_PICKER_SEARCH_NO_RESULTS_LABEL = No hay resultados
 DIALTONE_EMOJI_PICKER_SEARCH_RESULTS_LABEL = resultados de búsqueda
