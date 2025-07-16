@@ -2464,10 +2464,6 @@
             "value": "{color.black.200}",
             "type": "color"
           },
-          "tertiary": {
-            "value": "{color.black.200}",
-            "type": "color"
-          },
           "muted": {
             "value": "{color.black.200}",
             "type": "color"
@@ -2582,13 +2578,13 @@
           }
         },
         "muted": {
-          "value": "{color.black.900}",
+          "value": "{shell.base.color.surface.muted}",
           "type": "color",
           "$extensions": {
             "studio.tokens": {
               "modify": {
                 "type": "alpha",
-                "value": "0.06",
+                "value": ".5",
                 "space": "hsl"
               }
             }
@@ -2600,8 +2596,8 @@
           "$extensions": {
             "studio.tokens": {
               "modify": {
-                "type": "alpha",
-                "value": "0.08",
+                "type": "darken",
+                "value": "0.05",
                 "space": "hsl"
               }
             }
@@ -2613,8 +2609,21 @@
           "$extensions": {
             "studio.tokens": {
               "modify": {
-                "type": "alpha",
+                "type": "darken",
                 "value": "0.12",
+                "space": "hsl"
+              }
+            }
+          }
+        },
+        "muted-selected": {
+          "value": "{shell.color.surface.muted}",
+          "type": "color",
+          "$extensions": {
+            "studio.tokens": {
+              "modify": {
+                "type": "darken",
+                "value": "0.10",
                 "space": "hsl"
               }
             }
