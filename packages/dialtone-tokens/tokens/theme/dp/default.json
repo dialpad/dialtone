@@ -2512,8 +2512,17 @@
           }
         },
         "secondary": {
-          "value": "{color.black.800}",
-          "type": "color"
+          "value": "{shell.color.surface.base}",
+          "type": "color",
+          "$extensions": {
+            "studio.tokens": {
+              "modify": {
+                "type": "alpha",
+                "value": ".3",
+                "space": "hsl"
+              }
+            }
+          }
         },
         "secondary-hover": {
           "value": "{shell.color.surface.secondary}",
@@ -2521,8 +2530,8 @@
           "$extensions": {
             "studio.tokens": {
               "modify": {
-                "type": "alpha",
-                "value": "0.08",
+                "type": "darken",
+                "value": "0.18",
                 "space": "hsl"
               }
             }
@@ -2534,8 +2543,8 @@
           "$extensions": {
             "studio.tokens": {
               "modify": {
-                "type": "alpha",
-                "value": "0.12",
+                "type": "darken",
+                "value": ".4",
                 "space": "hsl"
               }
             }
@@ -2547,8 +2556,8 @@
           "$extensions": {
             "studio.tokens": {
               "modify": {
-                "type": "alpha",
-                "value": "0.1",
+                "type": "darken",
+                "value": "0.35",
                 "space": "hsl"
               }
             }
