@@ -2460,8 +2460,17 @@
           "type": "color"
         },
         "primary": {
-          "value": "{color.black.900}",
-          "type": "color"
+          "value": "{color.black.200}",
+          "type": "color",
+          "$extensions": {
+            "studio.tokens": {
+              "modify": {
+                "type": "alpha",
+                "value": ".3",
+                "space": "hsl"
+              }
+            }
+          }
         },
         "primary-hover": {
           "value": "{shell.color.surface.primary}",
@@ -2469,8 +2478,8 @@
           "$extensions": {
             "studio.tokens": {
               "modify": {
-                "type": "alpha",
-                "value": "0.06",
+                "type": "darken",
+                "value": "0.18",
                 "space": "hsl"
               }
             }
@@ -2482,8 +2491,8 @@
           "$extensions": {
             "studio.tokens": {
               "modify": {
-                "type": "alpha",
-                "value": "0.15",
+                "type": "darken",
+                "value": "0.4",
                 "space": "hsl"
               }
             }
@@ -2495,8 +2504,8 @@
           "$extensions": {
             "studio.tokens": {
               "modify": {
-                "type": "alpha",
-                "value": "0.1",
+                "type": "darken",
+                "value": "0.35",
                 "space": "hsl"
               }
             }
