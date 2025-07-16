@@ -145,7 +145,7 @@ figma_url: https://www.figma.com/design/W58r5BkO8qTw3vem9YieJd/DT9-Component-Lib
           ]"
           label="Icon Position"
         />
-        <dt-toggle v-show="hasIcon" labelClass="d-label--sm d-fc-secondary" size="sm" wrapperClass="d-jc-space-between">
+        <dt-toggle v-model="isIconOnly" v-show="hasIcon" labelClass="d-label--sm d-fc-secondary" size="sm" wrapperClass="d-jc-space-between">
           Icon only
         </dt-toggle>
         <dt-toggle v-show="hasIcon" labelClass="d-label--sm d-fc-secondary" size="sm" wrapperClass="d-jc-space-between">
@@ -1287,7 +1287,7 @@ We provide the following branded buttons for log-in and sign-up workflows.
 
 <script setup>
 import ButtonVariantsTable from '@baseComponents/ButtonVariantsTable.vue';
-import { ref } from 'vue';
+import { ref, watch } from 'vue';
 
 // Playground reactive data
 const hasIcon = ref(false);
@@ -1301,11 +1301,27 @@ const iconName = ref('activity');
 const iconPosition = ref('left');
 const linkKind = ref('default');
 const isActive = ref(false);
+const isIconOnly = ref(false);
 
 // Toggle fullscreen mode
 const toggleFullscreen = () => {
   isFullscreen.value = !isFullscreen.value;
 };
+
+// Two-way sync between icon only and button label
+watch(isIconOnly, (newValue) => {
+  if (newValue) {
+    // When icon only is turned on, clear the label
+    buttonLabel.value = '';
+  }
+});
+
+watch(buttonLabel, (newValue) => {
+  if (newValue && newValue.trim() !== '') {
+    // When label has content, turn off icon only
+    isIconOnly.value = false;
+  }
+});
 </script>
 
 <style lang="less">
