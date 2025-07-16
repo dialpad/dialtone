@@ -2453,14 +2453,32 @@
     }
   },
   "shell": {
+    "base": {
+      "color": {
+        "surface": {
+          "primary": {
+            "value": "{color.black.200}",
+            "type": "color"
+          },
+          "secondary": {
+            "value": "{color.black.200}",
+            "type": "color"
+          },
+          "tertiary": {
+            "value": "{color.black.200}",
+            "type": "color"
+          },
+          "muted": {
+            "value": "{color.black.200}",
+            "type": "color"
+          }
+        }
+      }
+    },
     "color": {
       "surface": {
-        "base": {
-          "value": "{color.black.200}",
-          "type": "color"
-        },
         "primary": {
-          "value": "{shell.color.surface.base}",
+          "value": "{shell.base.color.surface.primary}",
           "type": "color",
           "$extensions": {
             "studio.tokens": {
@@ -2512,7 +2530,7 @@
           }
         },
         "secondary": {
-          "value": "{shell.color.surface.base}",
+          "value": "{shell.base.color.surface.primary}",
           "type": "color",
           "$extensions": {
             "studio.tokens": {
@@ -2558,49 +2576,6 @@
               "modify": {
                 "type": "darken",
                 "value": "0.35",
-                "space": "hsl"
-              }
-            }
-          }
-        },
-        "tertiary": {
-          "value": "{color.black.700}",
-          "type": "color"
-        },
-        "tertiary-hover": {
-          "value": "{shell.color.surface.tertiary}",
-          "type": "color",
-          "$extensions": {
-            "studio.tokens": {
-              "modify": {
-                "type": "alpha",
-                "value": "0.08",
-                "space": "hsl"
-              }
-            }
-          }
-        },
-        "tertiary-active": {
-          "value": "{shell.color.surface.tertiary}",
-          "type": "color",
-          "$extensions": {
-            "studio.tokens": {
-              "modify": {
-                "type": "alpha",
-                "value": "0.15",
-                "space": "hsl"
-              }
-            }
-          }
-        },
-        "tertiary-selected": {
-          "value": "{shell.color.surface.tertiary}",
-          "type": "color",
-          "$extensions": {
-            "studio.tokens": {
-              "modify": {
-                "type": "alpha",
-                "value": "0.1",
                 "space": "hsl"
               }
             }
