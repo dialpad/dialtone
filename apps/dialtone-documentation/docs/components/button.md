@@ -32,6 +32,7 @@ figma_url: https://www.figma.com/design/W58r5BkO8qTw3vem9YieJd/DT9-Component-Lib
         :linkKind="linkKind"
         :linkInverted="isLinkInverted"
         :loading="isLoading"
+        :disabled="isDisabled"
       >
         <template v-if="hasIcon" #icon="{ iconSize }">
           <dt-icon
@@ -179,7 +180,7 @@ figma_url: https://www.figma.com/design/W58r5BkO8qTw3vem9YieJd/DT9-Component-Lib
         <dt-toggle v-model="isLoading" labelClass="d-label--sm d-fc-secondary" size="sm" wrapperClass="d-jc-space-between">
           Loading
         </dt-toggle>
-        <dt-toggle labelClass="d-label--sm d-fc-secondary" size="sm" wrapperClass="d-jc-space-between">
+        <dt-toggle v-model="isDisabled" labelClass="d-label--sm d-fc-secondary" size="sm" wrapperClass="d-jc-space-between">
           Disabled
         </dt-toggle>
       </dt-stack>
@@ -1310,6 +1311,7 @@ const isIconOnly = ref(false);
 const isCircle = ref(false);
 const isLinkInverted = ref(false);
 const isLoading = ref(false);
+const isDisabled = ref(false);
 
 // Store previous label for restoration
 let previousLabel = '';
