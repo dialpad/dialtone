@@ -110,8 +110,8 @@ const highlightedHtml = computed(() => {
   return typeof props.htmlCode === 'string' ? Prism.highlight(props.htmlCode.trim(), Prism.languages.html, 'html') : '';
 });
 
-const trimmedVueCode = props.vueCode.replace(/^\n/gm, '');
-const highlightedVue = Prism.highlight(props.vueCode.trim(), Prism.languages.html, 'html');
+const trimmedVueCode = computed(() => props.vueCode.replace(/^\n/gm, ''));
+const highlightedVue = computed(() => Prism.highlight(props.vueCode.trim(), Prism.languages.html, 'html'));
 
 const vueTabId = getUniqueString();
 const vuePanelId = getUniqueString();

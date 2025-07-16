@@ -52,6 +52,7 @@ figma_url: https://www.figma.com/design/W58r5BkO8qTw3vem9YieJd/DT9-Component-Lib
         <dt-select-menu
           v-model="buttonSize"
           size="sm"
+          value="md"
           :options="[
             { value: `xs`, label: `xs` },
             { value: `sm`, label: `sm` },
@@ -188,15 +189,7 @@ figma_url: https://www.figma.com/design/W58r5BkO8qTw3vem9YieJd/DT9-Component-Lib
   </div>
   <div class="dialtone-playground__end">
 <code-example-tabs
-vueCode='
-<dt-button
-  size="xs"
-  importance="clear"
-  kind="default"
->
-  Place Call
-</dt-button>
-'
+:vueCode="dynamicVueCode"
 :htmlCode="() => $refs['component-default']"
 showHtmlWarning />
   </div>
@@ -1293,7 +1286,7 @@ We provide the following branded buttons for log-in and sign-up workflows.
 
 <script setup>
 import ButtonVariantsTable from '@baseComponents/ButtonVariantsTable.vue';
-import { ref, watch } from 'vue';
+import { ref, watch, computed } from 'vue';
 
 // Playground reactive data
 const hasIcon = ref(false);
@@ -1341,6 +1334,58 @@ watch(buttonLabel, (newValue) => {
     // When label has content, turn off icon only
     isIconOnly.value = false;
   }
+});
+
+// Computed property for dynamic Vue code generation
+const dynamicVueCode = computed(() => {
+  const props = [];
+
+  // Always show core button props
+  props.push(`  size="${buttonSize.value}"`);
+  props.push(`  importance="${buttonImportance.value}"`);
+  props.push(`  kind="${buttonKind.value}"`);
+
+  // Add active if true
+  if (isActive.value) {
+    props.push(`  active`);
+  }
+
+  // Add icon-related props
+  if (hasIcon.value) {
+    if (iconPosition.value !== 'left') {
+      props.push(`  iconPosition="${iconPosition.value}"`);
+    }
+    if (isCircle.value) {
+      props.push(`  circle`);
+    }
+  }
+
+  // Add link-related props
+  if (isLink.value) {
+    props.push(`  link`);
+    if (linkKind.value !== 'default') {
+      props.push(`  linkKind="${linkKind.value}"`);
+    }
+    if (isLinkInverted.value) {
+      props.push(`  linkInverted`);
+    }
+  }
+
+  // Add loading if true
+  if (isLoading.value) {
+    props.push(`  loading`);
+  }
+
+  // Add disabled if true
+  if (isDisabled.value) {
+    props.push(`  disabled`);
+  }
+
+  const propsString = props.length > 0 ? '\n' + props.join('\n') + '\n' : '';
+  const iconTemplate = hasIcon.value ? `\n  <template #icon="{ iconSize }">\n    <dt-icon\n      name="${iconName.value}"\n      :size="iconSize"\n    />\n  </template>` : '';
+  const labelContent = buttonLabel.value || 'Place Call';
+
+  return `<dt-button${propsString}>${iconTemplate}\n  ${labelContent}\n</dt-button>`;
 });
 </script>
 
