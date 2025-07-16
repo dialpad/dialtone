@@ -9,6 +9,33 @@ export const argsData = {
   onEmojiHovered: action('emoji-hovered'),
 };
 
+export const sharedEmojiReactionsData = [
+  {
+    emojiUnicodeOrShortname: '😀',
+    isSelected: true,
+    names: 'You',
+    num: 1,
+  },
+  {
+    emojiUnicodeOrShortname: '😒',
+    isSelected: false,
+    names: 'John Doe',
+    num: 1,
+  },
+  {
+    emojiUnicodeOrShortname: '😌',
+    isSelected: true,
+    names: 'Olivia Chen, Benjamin Carter, Sophia Rodriguez, William Kim & Isabella Garcia',
+    num: 5,
+  },
+  {
+    emojiUnicodeOrShortname: '🙃',
+    names: 'You & John Doe',
+    isSelected: true,
+    num: 2,
+  },
+];
+
 export const argTypesData = {
   // Props
   reactions: {
@@ -60,31 +87,6 @@ export const Default = {
   render: (argsData) => createRenderConfig(DtRecipeEmojiRow, DtRecipeEmojiRowDefaultTemplate, argsData),
 
   args: {
-    reactions: [
-      {
-        emojiUnicodeOrShortname: '😀',
-        isSelected: true,
-        names: 'You',
-        num: 1,
-      },
-      {
-        emojiUnicodeOrShortname: '😒',
-        isSelected: false,
-        names: 'John Doe',
-        num: 1,
-      },
-      {
-        emojiUnicodeOrShortname: '😌',
-        isSelected: true,
-        names: 'Olivia Chen, Benjamin Carter, Sophia Rodriguez, William Kim & Isabella Garcia',
-        num: 5,
-      },
-      {
-        emojiUnicodeOrShortname: '🙃',
-        names: 'You & John Doe',
-        isSelected: true,
-        num: 2,
-      },
-    ],
+    reactions: sharedEmojiReactionsData,
   },
 };
