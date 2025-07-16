@@ -134,6 +134,7 @@ import { DtAvatar } from '@/components/avatar';
 import { DtIcon } from '@/components/icon';
 import { DtButton } from '@/components/button';
 import { DtStack } from '@/components/stack';
+import { sharedEmojiReactionsData } from '@/recipes/conversation_view/emoji_row/emoji_row.stories.js';
 
 export default {
   name: 'DtRecipeFeedItemRowDefault',
@@ -149,29 +150,7 @@ export default {
 
   data () {
     return {
-      mockReactions: [
-        {
-          emojiUnicodeOrShortname: '😀',
-          isSelected: true,
-          ariaLabel: 'Emoji aria label',
-          tooltip: 'You reacted with 😀',
-          num: 1,
-        },
-        {
-          emojiUnicodeOrShortname: '😒',
-          isSelected: false,
-          ariaLabel: 'Emoji aria label',
-          tooltip: 'You reacted with 😒',
-          num: 1,
-        },
-        {
-          emojiUnicodeOrShortname: '🙃',
-          isSelected: false,
-          ariaLabel: 'Emoji aria label',
-          tooltip: 'You reacted with 🙃',
-          num: 99,
-        },
-      ],
+      mockReactions: sharedEmojiReactionsData,
 
       hoverButtons: ['bell', 'living-thing', 'map-pin'],
 
