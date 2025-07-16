@@ -69,8 +69,6 @@ figma_url: https://www.figma.com/design/W58r5BkO8qTw3vem9YieJd/DT9-Component-Lib
             </template>
           </dt-button>
         </dt-stack>
-        <dt-input v-model="buttonLabel" label="Label" type="text" size="sm" />
-        <dt-input v-model="buttonLabelClass" label="Label class" type="text" size="sm" />
         <dt-select-menu
           :disabled="isLink"
           v-model="buttonSize"
@@ -109,9 +107,6 @@ figma_url: https://www.figma.com/design/W58r5BkO8qTw3vem9YieJd/DT9-Component-Lib
           ]"
           label="Kind"
         />
-        <dt-toggle :disabled="isLink" v-model="isActive" labelClass="d-label--sm d-fc-secondary" size="sm" wrapperClass="d-jc-space-between">
-          Active
-        </dt-toggle>
         <dt-stack gap="400">
           <dt-toggle
             :disabled="isLink"
@@ -205,12 +200,17 @@ figma_url: https://www.figma.com/design/W58r5BkO8qTw3vem9YieJd/DT9-Component-Lib
         <dt-toggle v-model="isLinkInverted" v-show="isLink && !hasIcon" labelClass="d-label--sm d-fc-secondary" size="sm" wrapperClass="d-jc-space-between">
           Link Inverted
         </dt-toggle>
+        <dt-toggle :disabled="isLink" v-model="isActive" labelClass="d-label--sm d-fc-secondary" size="sm" wrapperClass="d-jc-space-between">
+          Active
+        </dt-toggle>
         <dt-toggle :disabled="isLink" v-model="isLoading" labelClass="d-label--sm d-fc-secondary" size="sm" wrapperClass="d-jc-space-between">
           Loading
         </dt-toggle>
         <dt-toggle v-model="isDisabled" labelClass="d-label--sm d-fc-secondary" size="sm" wrapperClass="d-jc-space-between">
           Disabled
         </dt-toggle>
+        <dt-input v-model="buttonLabel" label="Label" type="text" size="sm" />
+        <dt-input v-model="buttonLabelClass" label="Label class" type="text" size="sm" />
       </dt-stack>
     </div>
   </div>
