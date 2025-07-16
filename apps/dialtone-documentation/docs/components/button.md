@@ -27,6 +27,7 @@ figma_url: https://www.figma.com/design/W58r5BkO8qTw3vem9YieJd/DT9-Component-Lib
         :kind="buttonKind"
         :active="isActive"
         :iconPosition="iconPosition"
+        :circle="isCircle"
       >
         <template v-if="hasIcon" #icon="{ iconSize }">
           <dt-icon
@@ -148,7 +149,7 @@ figma_url: https://www.figma.com/design/W58r5BkO8qTw3vem9YieJd/DT9-Component-Lib
         <dt-toggle v-model="isIconOnly" v-show="hasIcon" labelClass="d-label--sm d-fc-secondary" size="sm" wrapperClass="d-jc-space-between">
           Icon only
         </dt-toggle>
-        <dt-toggle v-show="isIconOnly" labelClass="d-label--sm d-fc-secondary" size="sm" wrapperClass="d-jc-space-between">
+        <dt-toggle v-model="isCircle" v-show="isIconOnly" labelClass="d-label--sm d-fc-secondary" size="sm" wrapperClass="d-jc-space-between">
           Circle
         </dt-toggle>
         <dt-toggle v-model="isLink" v-show="!hasIcon" labelClass="d-label--sm d-fc-secondary" size="sm" wrapperClass="d-jc-space-between">
@@ -1302,6 +1303,7 @@ const iconPosition = ref('left');
 const linkKind = ref('default');
 const isActive = ref(false);
 const isIconOnly = ref(false);
+const isCircle = ref(false);
 
 // Store previous label for restoration
 let previousLabel = '';
@@ -1318,10 +1320,11 @@ watch(isIconOnly, (newValue) => {
     previousLabel = buttonLabel.value;
     buttonLabel.value = '';
   } else {
-    // When icon only is turned off, restore the previous label
+    // When icon only is turned off, restore the previous label and turn off circle
     if (previousLabel) {
       buttonLabel.value = previousLabel;
     }
+    isCircle.value = false;
   }
 });
 
