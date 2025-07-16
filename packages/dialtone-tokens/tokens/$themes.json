@@ -417,14 +417,14 @@
     },
     "selectedTokenSets": {
       "base/default": "source",
-      "semantic/dp/default": "enabled",
       "components/avatar/default": "enabled",
       "components/badge/default": "enabled",
       "components/checkbox/default": "enabled",
       "components/icon/default": "enabled",
       "components/radio/default": "enabled",
       "root": "source",
-      "components/button/default": "enabled"
+      "components/button/default": "enabled",
+      "theme/dp/default": "enabled"
     },
     "$figmaCollectionId": "VariableCollectionId:2174:1524",
     "$figmaModeId": "2174:0",
@@ -1158,9 +1158,7 @@
     },
     "selectedTokenSets": {
       "base/dark": "source",
-      "semantic/dp/dark": "enabled",
       "base/default": "source",
-      "semantic/dp/default": "enabled",
       "components/avatar/default": "enabled",
       "components/badge/default": "enabled",
       "components/checkbox/default": "enabled",
@@ -1168,7 +1166,9 @@
       "components/radio/default": "enabled",
       "root": "source",
       "components/badge/dark": "enabled",
-      "components/button/default": "enabled"
+      "components/button/default": "enabled",
+      "theme/dp/default": "enabled",
+      "theme/dp/dark": "enabled"
     },
     "$figmaCollectionId": "VariableCollectionId:2174:1524",
     "$figmaModeId": "2174:1",
@@ -1832,15 +1832,15 @@
     },
     "selectedTokenSets": {
       "base/default": "source",
-      "semantic/dp/default": "enabled",
-      "semantic/tmo/default": "enabled",
       "components/avatar/default": "enabled",
       "components/badge/default": "enabled",
       "components/checkbox/default": "enabled",
       "components/icon/default": "enabled",
       "components/radio/default": "enabled",
       "root": "source",
-      "components/button/default": "enabled"
+      "components/button/default": "enabled",
+      "theme/dp/default": "enabled",
+      "theme/tmo/default": "enabled"
     },
     "$figmaCollectionId": "VariableCollectionId:406:19535",
     "$figmaModeId": "406:2",
@@ -2390,11 +2390,7 @@
     "$figmaStyleReferences": {},
     "selectedTokenSets": {
       "base/dark": "source",
-      "semantic/tmo/dark": "enabled",
-      "semantic/dp/dark": "enabled",
       "base/default": "source",
-      "semantic/dp/default": "enabled",
-      "semantic/tmo/default": "enabled",
       "components/avatar/default": "enabled",
       "components/badge/default": "enabled",
       "components/checkbox/default": "enabled",
@@ -2402,7 +2398,11 @@
       "components/radio/default": "enabled",
       "root": "source",
       "components/badge/dark": "enabled",
-      "components/button/default": "enabled"
+      "components/button/default": "enabled",
+      "theme/dp/default": "enabled",
+      "theme/dp/dark": "enabled",
+      "theme/tmo/default": "enabled",
+      "theme/tmo/dark": "enabled"
     },
     "$figmaCollectionId": "VariableCollectionId:406:19535",
     "$figmaModeId": "406:3",
@@ -2950,14 +2950,14 @@
       "root": "source",
       "base/default": "source",
       "base/deca": "source",
-      "semantic/dp/default": "enabled",
-      "semantic/deca/default": "enabled",
       "components/avatar/default": "enabled",
       "components/badge/default": "enabled",
       "components/button/default": "enabled",
       "components/checkbox/default": "enabled",
       "components/icon/default": "enabled",
-      "components/radio/default": "enabled"
+      "components/radio/default": "enabled",
+      "theme/dp/default": "enabled",
+      "theme/deca/default": "enabled"
     },
     "$figmaVariableReferences": {},
     "group": "deca"
@@ -3316,13 +3316,13 @@
     "selectedTokenSets": {
       "root": "source",
       "base/default": "source",
-      "semantic/expressive/default": "enabled",
       "components/avatar/default": "enabled",
       "components/badge/default": "enabled",
       "components/checkbox/default": "enabled",
       "components/icon/default": "enabled",
       "components/radio/default": "enabled",
-      "semantic/dp/default": "enabled"
+      "theme/dp/default": "enabled",
+      "theme/expressive/default": "enabled"
     },
     "group": "expressive",
     "$figmaVariableReferences": {}
@@ -3335,14 +3335,14 @@
       "root": "source",
       "base/default": "source",
       "base/dark": "source",
-      "semantic/dp/default": "enabled",
-      "semantic/dp/dark": "enabled",
-      "semantic/expressive/default": "enabled",
       "components/avatar/default": "enabled",
       "components/badge/default": "enabled",
       "components/checkbox/default": "enabled",
       "components/icon/default": "enabled",
-      "components/radio/default": "enabled"
+      "components/radio/default": "enabled",
+      "theme/dp/default": "enabled",
+      "theme/dp/dark": "enabled",
+      "theme/expressive/default": "enabled"
     },
     "group": "expressive",
     "$figmaVariableReferences": {}
@@ -3354,14 +3354,14 @@
     "selectedTokenSets": {
       "root": "source",
       "base/default": "source",
-      "semantic/dp/default": "enabled",
-      "semantic/expressive/sm": "enabled",
       "components/avatar/default": "enabled",
       "components/badge/default": "enabled",
       "components/checkbox/default": "enabled",
       "components/icon/default": "enabled",
       "components/radio/default": "enabled",
-      "semantic/expressive/default": "enabled"
+      "theme/dp/default": "enabled",
+      "theme/expressive/default": "enabled",
+      "theme/expressive/sm": "enabled"
     },
     "group": "expressive-sm",
     "$figmaVariableReferences": {}
@@ -3374,15 +3374,15 @@
       "root": "source",
       "base/default": "source",
       "base/dark": "source",
-      "semantic/dp/default": "enabled",
-      "semantic/dp/dark": "enabled",
-      "semantic/expressive/sm": "enabled",
       "components/avatar/default": "enabled",
       "components/badge/default": "enabled",
       "components/checkbox/default": "enabled",
       "components/icon/default": "enabled",
       "components/radio/default": "enabled",
-      "semantic/expressive/default": "enabled"
+      "theme/dp/default": "enabled",
+      "theme/dp/dark": "enabled",
+      "theme/expressive/default": "enabled",
+      "theme/expressive/sm": "enabled"
     },
     "group": "expressive-sm",
     "$figmaVariableReferences": {}
@@ -3397,17 +3397,17 @@
       "base/dark": "source",
       "base/deca": "source",
       "base/deca-dark": "source",
-      "semantic/dp/default": "enabled",
-      "semantic/dp/dark": "enabled",
-      "semantic/deca/default": "enabled",
-      "semantic/deca/dark": "enabled",
       "components/avatar/default": "enabled",
       "components/badge/default": "enabled",
       "components/badge/dark": "enabled",
       "components/button/default": "enabled",
       "components/checkbox/default": "enabled",
       "components/icon/default": "enabled",
-      "components/radio/default": "enabled"
+      "components/radio/default": "enabled",
+      "theme/dp/default": "enabled",
+      "theme/dp/dark": "enabled",
+      "theme/deca/default": "enabled",
+      "theme/deca/dark": "enabled"
     },
     "$figmaVariableReferences": {},
     "group": "deca"
