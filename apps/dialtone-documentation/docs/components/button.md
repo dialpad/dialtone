@@ -21,12 +21,12 @@ figma_url: https://www.figma.com/design/W58r5BkO8qTw3vem9YieJd/DT9-Component-Lib
         </dt-button>
       </div>
       <dt-button
-        size="xs"
+        :size="buttonSize"
         importance="clear"
         kind="default"
         ref="component-default"
       >
-        Place Call
+        {{ buttonLabel }}
       </dt-button>
     </div>
     <div class="dialtone-playground__controls" v-dt-scrollbar>
@@ -34,8 +34,9 @@ figma_url: https://www.figma.com/design/W58r5BkO8qTw3vem9YieJd/DT9-Component-Lib
         <div v-show="isFullscreen" class="d-headline--md">
           DtButton
         </div>
-        <dt-input label="Label" type="text" value="Place Call" size="sm" />
+        <dt-input v-model="buttonLabel" label="Label" type="text" size="sm" />
         <dt-select-menu
+          v-model="buttonSize"
           size="sm"
           :options="[
             { value: `xs`, label: `xs` },
@@ -1252,6 +1253,8 @@ import { ref } from 'vue';
 const hasIcon = ref(false);
 const isLink = ref(false);
 const isFullscreen = ref(false);
+const buttonLabel = ref('Place Call');
+const buttonSize = ref('xs');
 
 // Toggle fullscreen mode
 const toggleFullscreen = () => {
