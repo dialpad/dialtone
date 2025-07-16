@@ -22,8 +22,8 @@ figma_url: https://www.figma.com/design/W58r5BkO8qTw3vem9YieJd/DT9-Component-Lib
       </div>
       <dt-button
         :size="buttonSize"
-        importance="clear"
-        kind="default"
+        :importance="buttonImportance"
+        :kind="buttonKind"
         ref="component-default"
       >
         {{ buttonLabel }}
@@ -41,12 +41,14 @@ figma_url: https://www.figma.com/design/W58r5BkO8qTw3vem9YieJd/DT9-Component-Lib
           :options="[
             { value: `xs`, label: `xs` },
             { value: `sm`, label: `sm` },
+            { value: `md`, label: `md` },
             { value: `lg`, label: `lg` },
             { value: `xl`, label: `xl` },
           ]"
           label="Size"
         />
         <dt-select-menu
+          v-model="buttonImportance"
           size="sm"
           :options="[
             { value: `clear`, label: `clear` },
@@ -56,6 +58,7 @@ figma_url: https://www.figma.com/design/W58r5BkO8qTw3vem9YieJd/DT9-Component-Lib
           label="Importance"
         />
         <dt-select-menu
+          v-model="buttonKind"
           size="sm"
           :options="[
             { value: `default`, label: `default` },
@@ -80,6 +83,7 @@ figma_url: https://www.figma.com/design/W58r5BkO8qTw3vem9YieJd/DT9-Component-Lib
             Icon
           </dt-toggle>
           <dt-select-menu
+            v-model="iconName"
             v-show="hasIcon"
             size="sm"
             labelClass="d-vi-visible-sr"
@@ -96,6 +100,7 @@ figma_url: https://www.figma.com/design/W58r5BkO8qTw3vem9YieJd/DT9-Component-Lib
           />
         </dt-stack>
         <dt-select-menu
+          v-model="iconPosition"
           v-show="hasIcon"
           size="sm"
           :options="[
@@ -116,6 +121,7 @@ figma_url: https://www.figma.com/design/W58r5BkO8qTw3vem9YieJd/DT9-Component-Lib
           Link
         </dt-toggle>
         <dt-select-menu
+          v-model="linkKind"
           v-show="isLink && !hasIcon"
           size="sm"
           :options="[
@@ -1255,6 +1261,11 @@ const isLink = ref(false);
 const isFullscreen = ref(false);
 const buttonLabel = ref('Place Call');
 const buttonSize = ref('xs');
+const buttonImportance = ref('clear');
+const buttonKind = ref('default');
+const iconName = ref('activity');
+const iconPosition = ref('left');
+const linkKind = ref('default');
 
 // Toggle fullscreen mode
 const toggleFullscreen = () => {
