@@ -28,6 +28,9 @@ figma_url: https://www.figma.com/design/W58r5BkO8qTw3vem9YieJd/DT9-Component-Lib
         :active="isActive"
         :iconPosition="iconPosition"
         :circle="isCircle"
+        :link="isLink"
+        :linkKind="linkKind"
+        :linkInverted="isLinkInverted"
       >
         <template v-if="hasIcon" #icon="{ iconSize }">
           <dt-icon
@@ -169,7 +172,7 @@ figma_url: https://www.figma.com/design/W58r5BkO8qTw3vem9YieJd/DT9-Component-Lib
           ]"
           label="Link Kind"
         />
-        <dt-toggle v-show="isLink && !hasIcon" labelClass="d-label--sm d-fc-secondary" size="sm" wrapperClass="d-jc-space-between">
+        <dt-toggle v-model="isLinkInverted" v-show="isLink && !hasIcon" labelClass="d-label--sm d-fc-secondary" size="sm" wrapperClass="d-jc-space-between">
           Link Inverted
         </dt-toggle>
         <dt-toggle labelClass="d-label--sm d-fc-secondary" size="sm" wrapperClass="d-jc-space-between">
@@ -1304,6 +1307,7 @@ const linkKind = ref('default');
 const isActive = ref(false);
 const isIconOnly = ref(false);
 const isCircle = ref(false);
+const isLinkInverted = ref(false);
 
 // Store previous label for restoration
 let previousLabel = '';
