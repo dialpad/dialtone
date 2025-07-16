@@ -3428,7 +3428,8 @@
       "components/icon/default": "enabled",
       "components/radio/default": "enabled"
     },
-    "group": "blackberry"
+    "group": "blackberry",
+    "$figmaVariableReferences": {}
   },
   {
     "id": "base-light",
@@ -3813,6 +3814,7 @@
       "components/icon/default": "enabled",
       "components/radio/default": "enabled"
     },
-    "group": "blackberry"
+    "group": "blackberry",
+    "$figmaVariableReferences": {}
   }
 ]

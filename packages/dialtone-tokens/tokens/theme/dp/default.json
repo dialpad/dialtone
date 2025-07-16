@@ -2455,12 +2455,12 @@
   "shell": {
     "color": {
       "surface": {
-        "app-bg": {
-          "value": "{color.black.100}",
+        "base": {
+          "value": "{color.black.200}",
           "type": "color"
         },
         "primary": {
-          "value": "{color.black.200}",
+          "value": "{shell.color.surface.base}",
           "type": "color",
           "$extensions": {
             "studio.tokens": {
@@ -2868,27 +2868,31 @@
         }
       },
       "border": {
-        "default": {
+        "base": {
           "value": "{color.black.900}",
-          "type": "color",
-          "$extensions": {
-            "studio.tokens": {
-              "modify": {
-                "type": "alpha",
-                "value": "0.17",
-                "space": "hsl"
-              }
-            }
-          }
+          "type": "color"
         },
         "subtle": {
-          "value": "{color.black.900}",
+          "value": "{shell.color.border.base}",
           "type": "color",
           "$extensions": {
             "studio.tokens": {
               "modify": {
                 "type": "alpha",
                 "value": "0.10",
+                "space": "hsl"
+              }
+            }
+          }
+        },
+        "default": {
+          "value": "{shell.color.border.base}",
+          "type": "color",
+          "$extensions": {
+            "studio.tokens": {
+              "modify": {
+                "type": "alpha",
+                "value": "0.17",
                 "space": "hsl"
               }
             }
