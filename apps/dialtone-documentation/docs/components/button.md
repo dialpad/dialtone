@@ -7,6 +7,7 @@ image: assets/images/components/button.png
 storybook: https://dialtone.dialpad.com/vue/?path=/story/components-button--default
 figma_url: https://www.figma.com/design/W58r5BkO8qTw3vem9YieJd/DT9-Component-Library--Rebrand-2025-?node-id=19800-32233
 ---
+
 <div class="dialtone-playground" :class="{ 'dialtone-playground--fullscreen': isFullscreen }">
   <div class="dialtone-playground__start">
     <div class="dialtone-playground__component">
@@ -33,6 +34,7 @@ figma_url: https://www.figma.com/design/W58r5BkO8qTw3vem9YieJd/DT9-Component-Lib
         :linkInverted="isLinkInverted"
         :loading="isLoading"
         :disabled="isDisabled"
+        :labelClass="buttonLabelClass"
       >
         <template v-if="hasIcon" #icon="{ iconSize }">
           <dt-icon
@@ -45,14 +47,13 @@ figma_url: https://www.figma.com/design/W58r5BkO8qTw3vem9YieJd/DT9-Component-Lib
     </div>
     <div class="dialtone-playground__controls" v-dt-scrollbar>
       <dt-stack gap="500">
-        <div v-show="isFullscreen" class="d-headline--md">
-          DtButton
-        </div>
+        <h2 v-show="isFullscreen" class="d-headline--lg">DtButton</h2>
         <dt-input v-model="buttonLabel" label="Label" type="text" size="sm" />
+        <dt-input v-model="buttonLabelClass" label="Label class" type="text" size="sm" />
         <dt-select-menu
+          :disabled="isLink"
           v-model="buttonSize"
           size="sm"
-          value="md"
           :options="[
             { value: `xs`, label: `xs` },
             { value: `sm`, label: `sm` },
@@ -63,6 +64,7 @@ figma_url: https://www.figma.com/design/W58r5BkO8qTw3vem9YieJd/DT9-Component-Lib
           label="Size"
         />
         <dt-select-menu
+          :disabled="isLink"
           v-model="buttonImportance"
           size="sm"
           :options="[
@@ -73,6 +75,7 @@ figma_url: https://www.figma.com/design/W58r5BkO8qTw3vem9YieJd/DT9-Component-Lib
           label="Importance"
         />
         <dt-select-menu
+          :disabled="isLink"
           v-model="buttonKind"
           size="sm"
           :options="[
@@ -85,11 +88,12 @@ figma_url: https://www.figma.com/design/W58r5BkO8qTw3vem9YieJd/DT9-Component-Lib
           ]"
           label="Kind"
         />
-        <dt-toggle v-model="isActive" labelClass="d-label--sm d-fc-secondary" size="sm" wrapperClass="d-jc-space-between">
+        <dt-toggle :disabled="isLink" v-model="isActive" labelClass="d-label--sm d-fc-secondary" size="sm" wrapperClass="d-jc-space-between">
           Active
         </dt-toggle>
         <dt-stack gap="400">
           <dt-toggle
+            :disabled="isLink"
             v-model="hasIcon"
             labelClass="d-label--sm d-fc-secondary"
             size="sm"
@@ -98,6 +102,7 @@ figma_url: https://www.figma.com/design/W58r5BkO8qTw3vem9YieJd/DT9-Component-Lib
             Icon
           </dt-toggle>
           <dt-select-menu
+            :disabled="isLink"
             v-model="iconName"
             v-show="hasIcon"
             size="sm"
@@ -141,6 +146,7 @@ figma_url: https://www.figma.com/design/W58r5BkO8qTw3vem9YieJd/DT9-Component-Lib
           />
         </dt-stack>
         <dt-select-menu
+          :disabled="isLink"
           v-model="iconPosition"
           v-show="hasIcon"
           size="sm"
@@ -152,10 +158,10 @@ figma_url: https://www.figma.com/design/W58r5BkO8qTw3vem9YieJd/DT9-Component-Lib
           ]"
           label="Icon Position"
         />
-        <dt-toggle v-model="isIconOnly" v-show="hasIcon" labelClass="d-label--sm d-fc-secondary" size="sm" wrapperClass="d-jc-space-between">
+        <dt-toggle :disabled="isLink" v-model="isIconOnly" v-show="hasIcon" labelClass="d-label--sm d-fc-secondary" size="sm" wrapperClass="d-jc-space-between">
           Icon only
         </dt-toggle>
-        <dt-toggle v-model="isCircle" v-show="isIconOnly" labelClass="d-label--sm d-fc-secondary" size="sm" wrapperClass="d-jc-space-between">
+        <dt-toggle :disabled="isLink" v-model="isCircle" v-show="isIconOnly" labelClass="d-label--sm d-fc-secondary" size="sm" wrapperClass="d-jc-space-between">
           Circle
         </dt-toggle>
         <dt-toggle v-model="isLink" v-show="!hasIcon" labelClass="d-label--sm d-fc-secondary" size="sm" wrapperClass="d-jc-space-between">
@@ -178,7 +184,7 @@ figma_url: https://www.figma.com/design/W58r5BkO8qTw3vem9YieJd/DT9-Component-Lib
         <dt-toggle v-model="isLinkInverted" v-show="isLink && !hasIcon" labelClass="d-label--sm d-fc-secondary" size="sm" wrapperClass="d-jc-space-between">
           Link Inverted
         </dt-toggle>
-        <dt-toggle v-model="isLoading" labelClass="d-label--sm d-fc-secondary" size="sm" wrapperClass="d-jc-space-between">
+        <dt-toggle :disabled="isLink" v-model="isLoading" labelClass="d-label--sm d-fc-secondary" size="sm" wrapperClass="d-jc-space-between">
           Loading
         </dt-toggle>
         <dt-toggle v-model="isDisabled" labelClass="d-label--sm d-fc-secondary" size="sm" wrapperClass="d-jc-space-between">
@@ -1293,7 +1299,8 @@ const hasIcon = ref(false);
 const isLink = ref(false);
 const isFullscreen = ref(false);
 const buttonLabel = ref('Place Call');
-const buttonSize = ref('md');
+const buttonLabelClass = ref('');
+const buttonSize = ref('xs');
 const buttonImportance = ref('primary');
 const buttonKind = ref('default');
 const iconName = ref('activity');
@@ -1380,6 +1387,11 @@ const dynamicVueCode = computed(() => {
   if (isDisabled.value) {
     props.push(`  disabled`);
   }
+  
+  // Add labelClass if not empty
+  if (buttonLabelClass.value && buttonLabelClass.value.trim() !== '') {
+    props.push(`  labelClass="${buttonLabelClass.value}"`);
+  }
 
   const propsString = props.length > 0 ? '\n' + props.join('\n') + '\n' : '';
   const iconTemplate = hasIcon.value ? `\n  <template #icon="{ iconSize }">\n    <dt-icon\n      name="${iconName.value}"\n      :size="iconSize"\n    />\n  </template>` : '';
@@ -1403,6 +1415,7 @@ const dynamicVueCode = computed(() => {
   &__end {
     .dialtone-playground--fullscreen & {
       background-color: var(--dt-color-surface-secondary-opaque);
+      height: 33vh;
     }
   }
 
