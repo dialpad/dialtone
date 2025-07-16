@@ -26,6 +26,7 @@ figma_url: https://www.figma.com/design/W58r5BkO8qTw3vem9YieJd/DT9-Component-Lib
         :importance="buttonImportance"
         :kind="buttonKind"
         :active="isActive"
+        :iconPosition="iconPosition"
       >
         <template v-if="hasIcon" #icon="{ iconSize }">
           <dt-icon
