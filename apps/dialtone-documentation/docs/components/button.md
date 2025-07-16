@@ -1344,6 +1344,7 @@ watch(buttonLabel, (newValue) => {
 });
 
 // Computed property for dynamic Vue code generation
+// ‼️ ⚠️ This is all totally FAKE, it's just a prototype to fake the Vues
 const dynamicVueCode = computed(() => {
   const props = [];
 
@@ -1401,8 +1402,9 @@ const dynamicVueCode = computed(() => {
 });
 
 // Computed property for dynamic HTML code generation
+// ‼️ ⚠️ This is all totally FAKE, it's just a prototype to fake the rendered HTML
 const dynamicHtmlCode = computed(() => {
-  const classNames = ['base-button', 'base-button__button'];
+  const classNames = ['d-btn'];
 
   // Add size class
   if (buttonSize.value) {
