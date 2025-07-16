@@ -1303,6 +1303,9 @@ const linkKind = ref('default');
 const isActive = ref(false);
 const isIconOnly = ref(false);
 
+// Store previous label for restoration
+let previousLabel = '';
+
 // Toggle fullscreen mode
 const toggleFullscreen = () => {
   isFullscreen.value = !isFullscreen.value;
@@ -1311,8 +1314,14 @@ const toggleFullscreen = () => {
 // Two-way sync between icon only and button label
 watch(isIconOnly, (newValue) => {
   if (newValue) {
-    // When icon only is turned on, clear the label
+    // When icon only is turned on, save current label and clear it
+    previousLabel = buttonLabel.value;
     buttonLabel.value = '';
+  } else {
+    // When icon only is turned off, restore the previous label
+    if (previousLabel) {
+      buttonLabel.value = previousLabel;
+    }
   }
 });
 
