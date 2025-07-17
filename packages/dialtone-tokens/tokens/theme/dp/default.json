@@ -2684,7 +2684,7 @@
           }
         },
         "secondary": {
-          "value": "{color.black.800}",
+          "value": "{shell.base.color.foreground.secondary}",
           "type": "color"
         },
         "secondary-hover": {
@@ -2693,25 +2693,16 @@
           "$extensions": {
             "studio.tokens": {
               "modify": {
-                "type": "lighten",
-                "value": "0.15",
+                "type": "darken",
+                "value": ".4",
                 "space": "hsl"
               }
             }
           }
         },
         "secondary-active": {
-          "value": "{shell.color.foreground.secondary}",
-          "type": "color",
-          "$extensions": {
-            "studio.tokens": {
-              "modify": {
-                "type": "lighten",
-                "value": "0.25",
-                "space": "hsl"
-              }
-            }
-          }
+          "value": "{shell.color.foreground.secondary-hover}",
+          "type": "color"
         },
         "secondary-selected": {
           "value": "{shell.color.foreground.secondary}",
@@ -2719,8 +2710,8 @@
           "$extensions": {
             "studio.tokens": {
               "modify": {
-                "type": "lighten",
-                "value": "0.15",
+                "type": "darken",
+                "value": "0.8",
                 "space": "hsl"
               }
             }
