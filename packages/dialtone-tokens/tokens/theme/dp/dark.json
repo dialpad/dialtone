@@ -1145,7 +1145,7 @@
       },
       "surface": {
         "primary": {
-          "value": "{shell.base.color.surface.primary}",
+          "value": "{shell.color.surface.base}",
           "type": "color",
           "$extensions": {
             "studio.tokens": {

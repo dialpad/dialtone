@@ -2501,7 +2501,7 @@
     "color": {
       "surface": {
         "primary": {
-          "value": "{shell.base.color.surface.primary}",
+          "value": "{shell.color.surface.base}",
           "type": "color",
           "$extensions": {
             "studio.tokens": {
@@ -2553,7 +2553,7 @@
           }
         },
         "secondary": {
-          "value": "{shell.base.color.surface.primary}",
+          "value": "{shell.color.surface.base}",
           "type": "color",
           "$extensions": {
             "studio.tokens": {
@@ -2659,7 +2659,7 @@
       },
       "foreground": {
         "primary": {
-          "value": "{shell.base.color.foreground.primary}",
+          "value": "{shell.color.foreground.base}",
           "type": "color"
         },
         "primary-hover": {
