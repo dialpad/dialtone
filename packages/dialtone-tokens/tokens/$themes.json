@@ -467,7 +467,6 @@
       "color.border.default": "86f997ed85c1efc0a37d15a9ab034e198f95bbd6",
       "color.border.moderate": "084ad9da429e92fc04e613c58677a1e2fc275336",
       "color.border.bold": "0d3923270fdac2a178f8eb9d5e94bebe34ae757b",
-      "theme.color.base": "04d6ef66fd8a6dc54a0937823d449d984d84b2da",
       "color.surface.primary": "4b5ef23aca8372972221c684985adc36b8898a16",
       "theme.mention.color.background": "a0145f6426bd2215beff18e4bda223ba94aa38ea",
       "theme.mention.color.background-strong": "38da0d45df34ae9ebd03eb323922e28965aef4db",
@@ -737,7 +736,8 @@
       "radio.color.border.checked": "b2741c10e3a48cfeb320559f4ef5ce223c1f0f74",
       "radio.color.background.checked": "4dd75aa857ed04bf4a0ba27ca5643e20400b18e0",
       "radio.color.foreground.default": "2694d2296a9fd5d890cad4c79f33916cfa06f91e",
-      "radio.color.foreground.checked": "7be16c2ad233e60e835c023bc849c18af522bb30"
+      "radio.color.foreground.checked": "7be16c2ad233e60e835c023bc849c18af522bb30",
+      "shell.foo": "04d6ef66fd8a6dc54a0937823d449d984d84b2da"
     },
     "group": "dp"
   },
@@ -1212,7 +1212,6 @@
       "color.border.default": "86f997ed85c1efc0a37d15a9ab034e198f95bbd6",
       "color.border.moderate": "084ad9da429e92fc04e613c58677a1e2fc275336",
       "color.border.bold": "0d3923270fdac2a178f8eb9d5e94bebe34ae757b",
-      "theme.color.base": "04d6ef66fd8a6dc54a0937823d449d984d84b2da",
       "color.surface.primary": "4b5ef23aca8372972221c684985adc36b8898a16",
       "theme.mention.color.background": "a0145f6426bd2215beff18e4bda223ba94aa38ea",
       "theme.mention.color.background-strong": "38da0d45df34ae9ebd03eb323922e28965aef4db",
@@ -1482,7 +1481,8 @@
       "radio.color.border.checked": "b2741c10e3a48cfeb320559f4ef5ce223c1f0f74",
       "radio.color.background.checked": "4dd75aa857ed04bf4a0ba27ca5643e20400b18e0",
       "radio.color.foreground.default": "2694d2296a9fd5d890cad4c79f33916cfa06f91e",
-      "radio.color.foreground.checked": "7be16c2ad233e60e835c023bc849c18af522bb30"
+      "radio.color.foreground.checked": "7be16c2ad233e60e835c023bc849c18af522bb30",
+      "shell.foo": "04d6ef66fd8a6dc54a0937823d449d984d84b2da"
     },
     "group": "dp"
   },
@@ -1898,7 +1898,6 @@
       "avatar.color.background.1700": "07e9bb771c7c57bdac29a22d9b5f336e0902889d",
       "avatar.color.background.1800": "40a5e1b93476989ed52d0ec5b6fd4a220a7574d9",
       "avatar.color.background.000": "b68f6af8c44a3b9dc9f9240d0350c603c367f915",
-      "theme.color.base": "41292cdb195fd03aa3c272d4f6fe4ffd8086cc6a",
       "theme.mention.color.background": "4eff21df6f9e42a7eae5d349378b846e48a89b6c",
       "color.foreground.primary": "fc11c6b4cfff2e605b99ef76b90e694c030fdabf",
       "color.foreground.secondary": "e212e354e3c5e8783ab32cba50755193e509d129",
@@ -2383,7 +2382,8 @@
       "color.magenta.300": "d6d222e2c155dc5a46076f94de2ca735f743d0dd",
       "color.magenta.500": "04f6b215eb6aa48edd82e8fb24c90894503b3d6d",
       "color.link.critical-hoverasdf": "eacff71284e69068a28bc0948d853fe9dd49714b",
-      "color.link.critical-inverted-hoverasdf": "5fe6d7d862c78007fb3b61f3af54f20fb3855c3b"
+      "color.link.critical-inverted-hoverasdf": "5fe6d7d862c78007fb3b61f3af54f20fb3855c3b",
+      "shell.foo": "41292cdb195fd03aa3c272d4f6fe4ffd8086cc6a"
     },
     "group": "tmo"
   },
@@ -2461,7 +2461,6 @@
       "avatar.color.background.1700": "07e9bb771c7c57bdac29a22d9b5f336e0902889d",
       "avatar.color.background.1800": "40a5e1b93476989ed52d0ec5b6fd4a220a7574d9",
       "avatar.color.background.000": "b68f6af8c44a3b9dc9f9240d0350c603c367f915",
-      "theme.color.base": "41292cdb195fd03aa3c272d4f6fe4ffd8086cc6a",
       "theme.mention.color.background": "4eff21df6f9e42a7eae5d349378b846e48a89b6c",
       "color.foreground.muted": "66df745bdf26f849e29ad59adb4552d45fb5ed43",
       "color.foreground.placeholder": "a481fc620c2a55be318a245df38a6d0bce370480",
@@ -2942,7 +2941,8 @@
       "color.red.400": "415be204230e1e320e86c7ad947203b3fa36083b",
       "color.red.500": "be663a674f21754d2ebeebf500e496c913a7a18d",
       "color.magenta.300": "d6d222e2c155dc5a46076f94de2ca735f743d0dd",
-      "color.magenta.500": "04f6b215eb6aa48edd82e8fb24c90894503b3d6d"
+      "color.magenta.500": "04f6b215eb6aa48edd82e8fb24c90894503b3d6d",
+      "shell.foo": "41292cdb195fd03aa3c272d4f6fe4ffd8086cc6a"
     },
     "group": "tmo"
   },

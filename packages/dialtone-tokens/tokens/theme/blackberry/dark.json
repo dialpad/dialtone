@@ -1,10 +1,8 @@
 {
-  "theme": {
-    "color": {
-      "base": {
-        "value": "#00ADFA",
-        "type": "color"
-      }
+  "shell": {
+    "foo": {
+      "value": "red",
+      "type": "color"
     }
   }
 }

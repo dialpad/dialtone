@@ -2059,7 +2059,7 @@
     "topbar": {
       "color": {
         "foreground": {
-          "value": "{theme.color.base}",
+          "value": "{shell.foo}",
           "type": "color",
           "$extensions": {
             "studio.tokens": {
@@ -2079,7 +2079,7 @@
       "field": {
         "color": {
           "foreground": {
-            "value": "{theme.color.base}",
+            "value": "{shell.foo}",
             "type": "color",
             "$extensions": {
               "studio.tokens": {
@@ -2092,7 +2092,7 @@
             }
           },
           "foreground-hover": {
-            "value": "{theme.color.base}",
+            "value": "{shell.foo}",
             "type": "color",
             "$extensions": {
               "studio.tokens": {
@@ -2105,7 +2105,7 @@
             }
           },
           "background": {
-            "value": "{theme.color.base}",
+            "value": "{shell.foo}",
             "type": "color",
             "$extensions": {
               "studio.tokens": {
@@ -2118,7 +2118,7 @@
             }
           },
           "background-hover": {
-            "value": "{theme.color.base}",
+            "value": "{shell.foo}",
             "type": "color",
             "$extensions": {
               "studio.tokens": {
@@ -2131,7 +2131,7 @@
             }
           },
           "border": {
-            "value": "{theme.color.base}",
+            "value": "{shell.foo}",
             "type": "color",
             "$extensions": {
               "studio.tokens": {
@@ -2144,7 +2144,7 @@
             }
           },
           "border-hover": {
-            "value": "{theme.color.base}",
+            "value": "{shell.foo}",
             "type": "color",
             "$extensions": {
               "studio.tokens": {
@@ -2157,7 +2157,7 @@
             }
           },
           "border-active": {
-            "value": "{theme.color.base}",
+            "value": "{shell.foo}",
             "type": "color",
             "$extensions": {
               "studio.tokens": {
@@ -2174,7 +2174,7 @@
       "button": {
         "color": {
           "foreground": {
-            "value": "{theme.color.base}",
+            "value": "{shell.foo}",
             "type": "color",
             "$extensions": {
               "studio.tokens": {
@@ -2187,11 +2187,11 @@
             }
           },
           "foreground-hover": {
-            "value": "{theme.color.base}",
+            "value": "{shell.foo}",
             "type": "color"
           },
           "background": {
-            "value": "{theme.color.base}",
+            "value": "{shell.foo}",
             "type": "color",
             "$extensions": {
               "studio.tokens": {
@@ -2204,7 +2204,7 @@
             }
           },
           "background-hover": {
-            "value": "{theme.color.base}",
+            "value": "{shell.foo}",
             "type": "color",
             "$extensions": {
               "studio.tokens": {
@@ -2217,7 +2217,7 @@
             }
           },
           "background-active": {
-            "value": "{theme.color.base}",
+            "value": "{shell.foo}",
             "type": "color",
             "$extensions": {
               "studio.tokens": {
@@ -2251,7 +2251,7 @@
             }
           },
           "background": {
-            "value": "{theme.color.base}",
+            "value": "{shell.foo}",
             "type": "color",
             "$extensions": {
               "studio.tokens": {
@@ -2264,7 +2264,7 @@
             }
           },
           "background-inverted": {
-            "value": "{theme.color.base}",
+            "value": "{shell.foo}",
             "type": "color",
             "$extensions": {
               "studio.tokens": {
@@ -2277,7 +2277,7 @@
             }
           },
           "background-hover": {
-            "value": "{theme.color.base}",
+            "value": "{shell.foo}",
             "type": "color",
             "$extensions": {
               "studio.tokens": {
@@ -2290,7 +2290,7 @@
             }
           },
           "background-active": {
-            "value": "{theme.color.base}",
+            "value": "{shell.foo}",
             "type": "color",
             "$extensions": {
               "studio.tokens": {
@@ -2339,7 +2339,7 @@
       "row": {
         "color": {
           "background": {
-            "value": "{theme.color.base}",
+            "value": "{shell.foo}",
             "type": "color",
             "$extensions": {
               "studio.tokens": {
@@ -2352,7 +2352,7 @@
             }
           },
           "background-hover": {
-            "value": "{theme.color.base}",
+            "value": "{shell.foo}",
             "type": "color",
             "$extensions": {
               "studio.tokens": {
@@ -2365,7 +2365,7 @@
             }
           },
           "background-active": {
-            "value": "{theme.color.base}",
+            "value": "{shell.foo}",
             "type": "color",
             "$extensions": {
               "studio.tokens": {
@@ -2386,7 +2386,7 @@
             "type": "color"
           },
           "background": {
-            "value": "{theme.color.base}",
+            "value": "{shell.foo}",
             "type": "color",
             "$extensions": {
               "studio.tokens": {
@@ -2875,26 +2875,44 @@
         }
       }
     },
-    "badge": {
+    "mention": {
       "color": {
         "surface": {
           "primary": {
-            "value": "{color.purple.400}",
+            "value": "{badge.color.background.bulletin}",
             "type": "color"
           },
           "secondary": {
-            "value": "{color.purple.600}",
-            "type": "color"
+            "value": "{shell.mention.color.surface.primary}",
+            "type": "color",
+            "$extensions": {
+              "studio.tokens": {
+                "modify": {
+                  "type": "darken",
+                  "value": ".6",
+                  "space": "hsl"
+                }
+              }
+            }
           }
         },
         "foreground": {
           "primary": {
-            "value": "{color.purple.50}",
+            "value": "{badge.color.foreground.bulletin}",
             "type": "color"
           },
           "secondary": {
-            "value": "{color.purple.100}",
-            "type": "color"
+            "value": "{shell.mention.color.foreground.primary}",
+            "type": "color",
+            "$extensions": {
+              "studio.tokens": {
+                "modify": {
+                  "type": "alpha",
+                  "value": ".9",
+                  "space": "hsl"
+                }
+              }
+            }
           }
         }
       }
