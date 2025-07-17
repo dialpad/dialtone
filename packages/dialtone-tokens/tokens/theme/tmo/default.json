@@ -4,5 +4,17 @@
       "value": "blue",
       "type": "color"
     }
+  },
+  "shell": {
+    "mention": {
+      "color": {
+        "surface": {
+          "primary": {
+            "value": "#E20074",
+            "type": "color"
+          }
+        }
+      }
+    }
   }
 }

@@ -2902,7 +2902,7 @@
               "studio.tokens": {
                 "modify": {
                   "type": "darken",
-                  "value": ".6",
+                  "value": ".55",
                   "space": "hsl"
                 }
               }
@@ -2911,7 +2911,7 @@
         },
         "foreground": {
           "primary": {
-            "value": "{color.foreground.primary-inverted}",
+            "value": "{color.black.50}",
             "type": "color"
           },
           "secondary": {
@@ -2921,7 +2921,7 @@
               "studio.tokens": {
                 "modify": {
                   "type": "alpha",
-                  "value": ".9",
+                  "value": ".95",
                   "space": "hsl"
                 }
               }
