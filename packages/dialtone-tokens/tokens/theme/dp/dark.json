@@ -1123,7 +1123,7 @@
             "studio.tokens": {
               "modify": {
                 "type": "alpha",
-                "value": ".06",
+                "value": ".10",
                 "space": "hsl"
               }
             }
@@ -1136,7 +1136,7 @@
             "studio.tokens": {
               "modify": {
                 "type": "alpha",
-                "value": ".12",
+                "value": ".14",
                 "space": "hsl"
               }
             }
