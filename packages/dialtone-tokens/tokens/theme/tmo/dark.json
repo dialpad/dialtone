@@ -1,10 +1,4 @@
 {
-  "color": {
-    "foo": {
-      "value": "red",
-      "type": "color"
-    }
-  },
   "shell": {
     "mention": {
       "color": {

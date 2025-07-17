@@ -1,0 +1,24 @@
+{
+  "shell": {
+    "base": {
+      "color": {
+        "surface": {
+          "primary": {
+            "value": "{color.olive.100}",
+            "type": "color"
+          }
+        }
+      }
+    },
+    "mention": {
+      "color": {
+        "surface": {
+          "primary": {
+            "value": "{color.red.600}",
+            "type": "color"
+          }
+        }
+      }
+    }
+  }
+}

@@ -2456,6 +2456,10 @@
     "base": {
       "color": {
         "surface": {
+          "default": {
+            "value": "{color.surface.secondary}",
+            "type": "color"
+          },
           "primary": {
             "value": "{color.black.200}",
             "type": "color"
@@ -2504,6 +2508,10 @@
     },
     "color": {
       "surface": {
+        "default": {
+          "value": "{shell.base.color.surface.default}",
+          "type": "color"
+        },
         "primary": {
           "value": "{shell.base.color.surface.primary}",
           "type": "color",
