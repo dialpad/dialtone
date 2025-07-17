@@ -2694,7 +2694,7 @@
             "studio.tokens": {
               "modify": {
                 "type": "darken",
-                "value": "1",
+                "value": ".8",
                 "space": "hsl"
               }
             }

@@ -1,24 +1,18 @@
 {
-  "theme": {
-    "color": {
-      "base": {
-        "value": "{color.black.900}",
-        "type": "color"
-      }
-    }
-  },
-  "color": {
-    "foo": {
-      "value": "red",
-      "type": "color"
-    }
-  },
   "shell": {
     "base": {
       "color": {
         "foreground": {
           "primary": {
-            "value": "#280115",
+            "value": "#32011A",
+            "type": "color"
+          },
+          "secondary": {
+            "value": "#56012C",
+            "type": "color"
+          },
+          "tertiary": {
+            "value": "#7A003F",
             "type": "color"
           }
         }

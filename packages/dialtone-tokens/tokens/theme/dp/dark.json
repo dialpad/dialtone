@@ -987,7 +987,7 @@
             "studio.tokens": {
               "modify": {
                 "type": "lighten",
-                "value": "1",
+                "value": ".8",
                 "space": "hsl"
               }
             }
@@ -1164,7 +1164,7 @@
             "studio.tokens": {
               "modify": {
                 "type": "alpha",
-                "value": ".2",
+                "value": "1",
                 "space": "hsl"
               }
             }
