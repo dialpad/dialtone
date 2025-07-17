@@ -947,9 +947,59 @@
     }
   },
   "shell": {
-    "foo": {
-      "value": "red",
-      "type": "color"
+    "base": {
+      "color": {
+        "surface": {
+          "primary": {
+            "value": "{color.black.300}",
+            "type": "color"
+          },
+          "secondary": {
+            "value": "{color.black.300}",
+            "type": "color"
+          },
+          "muted": {
+            "value": "{color.black.300}",
+            "type": "color"
+          }
+        }
+      }
+    },
+    "color": {
+      "foreground": {
+        "primary-selected": {
+          "value": "{shell.color.foreground.primary}",
+          "type": "color",
+          "$extensions": {
+            "studio.tokens": {
+              "modify": {
+                "type": "lighten",
+                "value": "1",
+                "space": "hsl"
+              }
+            }
+          }
+        }
+      }
+    },
+    "mention": {
+      "color": {
+        "surface": {
+          "secondary": {
+            "value": "{shell.mention.color.surface.primary}",
+            "type": "color",
+            "$extensions": {
+              "studio.tokens": {
+                "modify": {
+                  "type": "lighten",
+                  "value": ".9",
+                  "space": "hsl"
+                }
+              }
+            }
+          }
+        }
+      }
     }
   }
 }

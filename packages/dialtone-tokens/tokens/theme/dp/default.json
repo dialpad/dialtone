@@ -2898,7 +2898,7 @@
         },
         "foreground": {
           "primary": {
-            "value": "{badge.color.foreground.bulletin}",
+            "value": "{color.foreground.primary-inverted}",
             "type": "color"
           },
           "secondary": {

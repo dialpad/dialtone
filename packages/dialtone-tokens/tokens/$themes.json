@@ -1481,8 +1481,7 @@
       "radio.color.border.checked": "b2741c10e3a48cfeb320559f4ef5ce223c1f0f74",
       "radio.color.background.checked": "4dd75aa857ed04bf4a0ba27ca5643e20400b18e0",
       "radio.color.foreground.default": "2694d2296a9fd5d890cad4c79f33916cfa06f91e",
-      "radio.color.foreground.checked": "7be16c2ad233e60e835c023bc849c18af522bb30",
-      "shell.foo": "04d6ef66fd8a6dc54a0937823d449d984d84b2da"
+      "radio.color.foreground.checked": "7be16c2ad233e60e835c023bc849c18af522bb30"
     },
     "group": "dp"
   },
@@ -2941,8 +2940,7 @@
       "color.red.400": "415be204230e1e320e86c7ad947203b3fa36083b",
       "color.red.500": "be663a674f21754d2ebeebf500e496c913a7a18d",
       "color.magenta.300": "d6d222e2c155dc5a46076f94de2ca735f743d0dd",
-      "color.magenta.500": "04f6b215eb6aa48edd82e8fb24c90894503b3d6d",
-      "shell.foo": "41292cdb195fd03aa3c272d4f6fe4ffd8086cc6a"
+      "color.magenta.500": "04f6b215eb6aa48edd82e8fb24c90894503b3d6d"
     },
     "group": "tmo"
   },
