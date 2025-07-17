@@ -12,5 +12,17 @@
       "value": "red",
       "type": "color"
     }
+  },
+  "shell": {
+    "base": {
+      "color": {
+        "foreground": {
+          "primary": {
+            "value": "#280115",
+            "type": "color"
+          }
+        }
+      }
+    }
   }
 }

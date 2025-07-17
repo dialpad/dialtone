@@ -1109,6 +1109,19 @@
               }
             }
           }
+        },
+        "strong": {
+          "value": "{shell.base.color.foreground.primary}",
+          "type": "color",
+          "$extensions": {
+            "studio.tokens": {
+              "modify": {
+                "type": "lighten",
+                "value": ".8",
+                "space": "hsl"
+              }
+            }
+          }
         }
       },
       "border": {

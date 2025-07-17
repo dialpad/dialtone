@@ -2807,8 +2807,17 @@
           "type": "color"
         },
         "strong": {
-          "value": "{color.black.1000}",
-          "type": "color"
+          "value": "{shell.base.color.foreground.primary}",
+          "type": "color",
+          "$extensions": {
+            "studio.tokens": {
+              "modify": {
+                "type": "darken",
+                "value": "0.8",
+                "space": "hsl"
+              }
+            }
+          }
         },
         "positive": {
           "value": "{shell.presence.color.available}",
