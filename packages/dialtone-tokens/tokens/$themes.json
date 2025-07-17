@@ -424,7 +424,8 @@
       "components/radio/default": "enabled",
       "root": "source",
       "components/button/default": "enabled",
-      "theme/dp/default": "enabled"
+      "theme/dp/default": "enabled",
+      "components/presence/default": "enabled"
     },
     "$figmaCollectionId": "VariableCollectionId:2174:1524",
     "$figmaModeId": "2174:0",
@@ -1168,7 +1169,8 @@
       "components/badge/dark": "enabled",
       "components/button/default": "enabled",
       "theme/dp/default": "enabled",
-      "theme/dp/dark": "enabled"
+      "theme/dp/dark": "enabled",
+      "components/presence/default": "enabled"
     },
     "$figmaCollectionId": "VariableCollectionId:2174:1524",
     "$figmaModeId": "2174:1",
@@ -1840,7 +1842,8 @@
       "root": "source",
       "components/button/default": "enabled",
       "theme/dp/default": "enabled",
-      "theme/tmo/default": "enabled"
+      "theme/tmo/default": "enabled",
+      "components/presence/default": "enabled"
     },
     "$figmaCollectionId": "VariableCollectionId:406:19535",
     "$figmaModeId": "406:2",
@@ -2402,7 +2405,8 @@
       "theme/dp/default": "enabled",
       "theme/dp/dark": "enabled",
       "theme/tmo/default": "enabled",
-      "theme/tmo/dark": "enabled"
+      "theme/tmo/dark": "enabled",
+      "components/presence/default": "enabled"
     },
     "$figmaCollectionId": "VariableCollectionId:406:19535",
     "$figmaModeId": "406:3",
@@ -2957,7 +2961,8 @@
       "components/icon/default": "enabled",
       "components/radio/default": "enabled",
       "theme/dp/default": "enabled",
-      "theme/deca/default": "enabled"
+      "theme/deca/default": "enabled",
+      "components/presence/default": "enabled"
     },
     "$figmaVariableReferences": {},
     "group": "deca"
@@ -2982,7 +2987,8 @@
       "theme/dp/default": "enabled",
       "theme/dp/dark": "enabled",
       "theme/deca/default": "enabled",
-      "theme/deca/dark": "enabled"
+      "theme/deca/dark": "enabled",
+      "components/presence/default": "enabled"
     },
     "$figmaVariableReferences": {},
     "group": "deca"
@@ -3347,7 +3353,8 @@
       "components/icon/default": "enabled",
       "components/radio/default": "enabled",
       "theme/dp/default": "enabled",
-      "theme/expressive/default": "enabled"
+      "theme/expressive/default": "enabled",
+      "components/presence/default": "enabled"
     },
     "$figmaVariableReferences": {},
     "group": "expressive"
@@ -3367,7 +3374,8 @@
       "components/radio/default": "enabled",
       "theme/dp/default": "enabled",
       "theme/dp/dark": "enabled",
-      "theme/expressive/default": "enabled"
+      "theme/expressive/default": "enabled",
+      "components/presence/default": "disabled"
     },
     "$figmaVariableReferences": {},
     "group": "expressive"
@@ -3386,7 +3394,8 @@
       "components/radio/default": "enabled",
       "theme/dp/default": "enabled",
       "theme/expressive/default": "enabled",
-      "theme/expressive/sm": "enabled"
+      "theme/expressive/sm": "enabled",
+      "components/presence/default": "enabled"
     },
     "$figmaVariableReferences": {},
     "group": "expressive-sm"
@@ -3407,7 +3416,8 @@
       "theme/dp/default": "enabled",
       "theme/dp/dark": "enabled",
       "theme/expressive/default": "enabled",
-      "theme/expressive/sm": "enabled"
+      "theme/expressive/sm": "enabled",
+      "components/presence/default": "enabled"
     },
     "$figmaVariableReferences": {},
     "group": "expressive-sm"
@@ -3426,17 +3436,19 @@
       "components/button/default": "enabled",
       "components/checkbox/default": "enabled",
       "components/icon/default": "enabled",
-      "components/radio/default": "enabled"
+      "components/radio/default": "enabled",
+      "components/presence/default": "enabled"
     },
-    "group": "blackberry",
-    "$figmaVariableReferences": {}
+    "$figmaVariableReferences": {},
+    "group": "blackberry"
   },
   {
     "id": "base-light",
     "name": "light",
     "selectedTokenSets": {
       "root": "enabled",
-      "base/default": "enabled"
+      "base/default": "enabled",
+      "components/presence/default": "disabled"
     },
     "$figmaStyleReferences": {},
     "$figmaVariableReferences": {
@@ -3614,7 +3626,8 @@
     "selectedTokenSets": {
       "root": "enabled",
       "base/default": "enabled",
-      "base/dark": "enabled"
+      "base/dark": "enabled",
+      "components/presence/default": "disabled"
     },
     "$figmaStyleReferences": {},
     "$figmaVariableReferences": {
@@ -3812,9 +3825,10 @@
       "components/button/default": "enabled",
       "components/checkbox/default": "enabled",
       "components/icon/default": "enabled",
-      "components/radio/default": "enabled"
+      "components/radio/default": "enabled",
+      "components/presence/default": "enabled"
     },
-    "group": "blackberry",
-    "$figmaVariableReferences": {}
+    "$figmaVariableReferences": {},
+    "group": "blackberry"
   }
 ]

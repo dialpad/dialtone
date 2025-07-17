@@ -21,6 +21,7 @@
     "components/button/default",
     "components/checkbox/default",
     "components/icon/default",
+    "components/presence/default",
     "components/radio/default"
   ]
 }
