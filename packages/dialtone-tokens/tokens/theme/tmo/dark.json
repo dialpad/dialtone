@@ -1,22 +1,8 @@
 {
-  "shell": {
-    "base": {
-      "color": {
-        "foreground": {
-          "primary": {
-            "value": "#FFF0F8",
-            "type": "color"
-          },
-          "secondary": {
-            "value": "#FACCE3",
-            "type": "color"
-          },
-          "tertiary": {
-            "value": "#FACCE3",
-            "type": "color"
-          }
-        }
-      }
+  "color": {
+    "foo": {
+      "value": "red",
+      "type": "color"
     }
   }
 }
