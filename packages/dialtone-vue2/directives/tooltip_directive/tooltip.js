@@ -79,10 +79,11 @@ export const DtTooltipDirective = {
       },
     });
 
+    // eslint-disable-next-line complexity
     function setupTooltip (anchor, binding) {
       const tooltipId = anchor.getAttribute('data-dt-tooltip-id') || getUniqueString();
-      const message = binding.value;
-      const placement = binding.arg || DEFAULT_PLACEMENT;
+      const message = typeof binding.value === 'object' ? binding.value.text : binding.value;
+      const placement = binding.arg || (typeof binding.value === 'object' ? binding.value.position : null) || DEFAULT_PLACEMENT;
 
       anchor.setAttribute('data-dt-tooltip-id', tooltipId);
       DtTooltipDirectiveApp.addOrUpdateTooltip(tooltipId, message, placement);
