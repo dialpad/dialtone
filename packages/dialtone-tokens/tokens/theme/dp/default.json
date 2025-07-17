@@ -2495,6 +2495,10 @@
               }
             }
           }
+        },
+        "border": {
+          "value": "{color.black.900}",
+          "type": "color"
         }
       }
     },
@@ -2847,12 +2851,8 @@
         }
       },
       "border": {
-        "base": {
-          "value": "{color.black.900}",
-          "type": "color"
-        },
         "subtle": {
-          "value": "{shell.color.border.base}",
+          "value": "{shell.base.color.border}",
           "type": "color",
           "$extensions": {
             "studio.tokens": {
@@ -2865,7 +2865,7 @@
           }
         },
         "default": {
-          "value": "{shell.color.border.base}",
+          "value": "{shell.base.color.border}",
           "type": "color",
           "$extensions": {
             "studio.tokens": {

@@ -1117,7 +1117,7 @@
           "type": "color"
         },
         "subtle": {
-          "value": "{shell.color.border.base}",
+          "value": "{shell.base.color.border}",
           "type": "color",
           "$extensions": {
             "studio.tokens": {
@@ -1130,7 +1130,7 @@
           }
         },
         "default": {
-          "value": "{shell.color.border.base}",
+          "value": "{shell.base.color.border}",
           "type": "color",
           "$extensions": {
             "studio.tokens": {
