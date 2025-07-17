@@ -2406,7 +2406,8 @@
       "theme/dp/dark": "enabled",
       "theme/tmo/default": "enabled",
       "theme/tmo/dark": "enabled",
-      "components/presence/default": "enabled"
+      "components/presence/default": "enabled",
+      "components/presence/dark": "enabled"
     },
     "$figmaCollectionId": "VariableCollectionId:406:19535",
     "$figmaModeId": "406:3",
