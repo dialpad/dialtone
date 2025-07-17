@@ -1079,19 +1079,6 @@
             }
           }
         },
-        "secondary": {
-          "value": "{shell.base.color.surface.primary}",
-          "type": "color",
-          "$extensions": {
-            "studio.tokens": {
-              "modify": {
-                "type": "alpha",
-                "value": ".3",
-                "space": "hsl"
-              }
-            }
-          }
-        },
         "secondary-hover": {
           "value": "{shell.color.surface.secondary}",
           "type": "color",
@@ -1126,19 +1113,6 @@
               "modify": {
                 "type": "lighten",
                 "value": "0.35",
-                "space": "hsl"
-              }
-            }
-          }
-        },
-        "muted": {
-          "value": "{shell.base.color.surface.muted}",
-          "type": "color",
-          "$extensions": {
-            "studio.tokens": {
-              "modify": {
-                "type": "alpha",
-                "value": ".4",
                 "space": "hsl"
               }
             }
