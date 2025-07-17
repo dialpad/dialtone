@@ -2765,7 +2765,7 @@
           }
         },
         "tertiary": {
-          "value": "{color.black.600}",
+          "value": "{shell.base.color.foreground.tertiary}",
           "type": "color"
         },
         "tertiary-hover": {
@@ -2774,25 +2774,16 @@
           "$extensions": {
             "studio.tokens": {
               "modify": {
-                "type": "lighten",
-                "value": "0.15",
+                "type": "darken",
+                "value": "0.3",
                 "space": "hsl"
               }
             }
           }
         },
         "tertiary-active": {
-          "value": "{shell.color.foreground.tertiary}",
-          "type": "color",
-          "$extensions": {
-            "studio.tokens": {
-              "modify": {
-                "type": "lighten",
-                "value": "0.25",
-                "space": "hsl"
-              }
-            }
-          }
+          "value": "{shell.color.foreground.tertiary-hover}",
+          "type": "color"
         },
         "tertiary-selected": {
           "value": "{shell.color.foreground.tertiary}",
@@ -2800,25 +2791,16 @@
           "$extensions": {
             "studio.tokens": {
               "modify": {
-                "type": "lighten",
-                "value": "0.15",
+                "type": "darken",
+                "value": ".6",
                 "space": "hsl"
               }
             }
           }
         },
         "muted": {
-          "value": "{color.black.900}",
-          "type": "color",
-          "$extensions": {
-            "studio.tokens": {
-              "modify": {
-                "type": "alpha",
-                "value": "0.7",
-                "space": "hsl"
-              }
-            }
-          }
+          "value": "{shell.base.color.foreground.muted}",
+          "type": "color"
         },
         "muted-hover": {
           "value": "{shell.color.foreground.muted}",
@@ -2826,8 +2808,8 @@
           "$extensions": {
             "studio.tokens": {
               "modify": {
-                "type": "alpha",
-                "value": "0.85",
+                "type": "darken",
+                "value": "1",
                 "space": "hsl"
               }
             }
