@@ -980,6 +980,27 @@
             }
           }
         }
+      },
+      "border": {
+        "base": {
+          "value": "{color.black.1000}",
+          "type": "color"
+        }
+      },
+      "surface": {
+        "primary": {
+          "value": "{shell.base.color.surface.primary}",
+          "type": "color",
+          "$extensions": {
+            "studio.tokens": {
+              "modify": {
+                "type": "alpha",
+                "value": ".2",
+                "space": "hsl"
+              }
+            }
+          }
+        }
       }
     },
     "mention": {

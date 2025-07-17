@@ -2867,7 +2867,7 @@
             "studio.tokens": {
               "modify": {
                 "type": "alpha",
-                "value": "0.17",
+                "value": ".17",
                 "space": "hsl"
               }
             }
