@@ -2468,6 +2468,24 @@
             "value": "{color.black.200}",
             "type": "color"
           }
+        },
+        "foreground": {
+          "primary": {
+            "value": "{color.foreground.primary}",
+            "type": "color"
+          },
+          "secondary": {
+            "value": "{color.foreground.secondary}",
+            "type": "color"
+          },
+          "tertiary": {
+            "value": "{color.foreground.tertiary}",
+            "type": "color"
+          },
+          "muted": {
+            "value": "{color.foreground.muted}",
+            "type": "color"
+          }
         }
       }
     },
@@ -2632,7 +2650,7 @@
       },
       "foreground": {
         "primary": {
-          "value": "{color.black.900}",
+          "value": "{shell.base.color.foreground.primary}",
           "type": "color"
         },
         "primary-hover": {
@@ -2641,25 +2659,16 @@
           "$extensions": {
             "studio.tokens": {
               "modify": {
-                "type": "lighten",
-                "value": "0.15",
+                "type": "darken",
+                "value": ".4",
                 "space": "hsl"
               }
             }
           }
         },
         "primary-active": {
-          "value": "{shell.color.foreground.primary}",
-          "type": "color",
-          "$extensions": {
-            "studio.tokens": {
-              "modify": {
-                "type": "lighten",
-                "value": "0.25",
-                "space": "hsl"
-              }
-            }
-          }
+          "value": "{shell.color.foreground.primary-hover}",
+          "type": "color"
         },
         "primary-selected": {
           "value": "{shell.color.foreground.primary}",
@@ -2667,8 +2676,8 @@
           "$extensions": {
             "studio.tokens": {
               "modify": {
-                "type": "lighten",
-                "value": "0.15",
+                "type": "darken",
+                "value": "1",
                 "space": "hsl"
               }
             }
