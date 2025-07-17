@@ -1136,7 +1136,7 @@
             "studio.tokens": {
               "modify": {
                 "type": "alpha",
-                "value": ".10",
+                "value": ".15",
                 "space": "hsl"
               }
             }
@@ -1149,7 +1149,7 @@
             "studio.tokens": {
               "modify": {
                 "type": "alpha",
-                "value": ".14",
+                "value": ".18",
                 "space": "hsl"
               }
             }
@@ -1177,7 +1177,7 @@
             "studio.tokens": {
               "modify": {
                 "type": "lighten",
-                "value": "0.18",
+                "value": "0.1",
                 "space": "hsl"
               }
             }
@@ -1190,7 +1190,7 @@
             "studio.tokens": {
               "modify": {
                 "type": "lighten",
-                "value": "0.4",
+                "value": "0.14",
                 "space": "hsl"
               }
             }
@@ -1203,7 +1203,7 @@
             "studio.tokens": {
               "modify": {
                 "type": "lighten",
-                "value": "0.35",
+                "value": "0.12",
                 "space": "hsl"
               }
             }
@@ -1216,7 +1216,7 @@
             "studio.tokens": {
               "modify": {
                 "type": "lighten",
-                "value": "0.18",
+                "value": "0.10",
                 "space": "hsl"
               }
             }
