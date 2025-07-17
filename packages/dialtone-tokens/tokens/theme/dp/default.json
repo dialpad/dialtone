@@ -2623,7 +2623,7 @@
             "studio.tokens": {
               "modify": {
                 "type": "darken",
-                "value": "0.8",
+                "value": "0.08",
                 "space": "hsl"
               }
             }
