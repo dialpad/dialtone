@@ -1,7 +1,7 @@
 {
   "shell": {
     "foo": {
-      "value": "red",
+      "value": "blue",
       "type": "color"
     }
   }

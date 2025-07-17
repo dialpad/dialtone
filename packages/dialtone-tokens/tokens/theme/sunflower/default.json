@@ -3,8 +3,12 @@
     "base": {
       "color": {
         "surface": {
+          "default": {
+            "value": "{color.olive.50}",
+            "type": "color"
+          },
           "primary": {
-            "value": "{color.olive.100}",
+            "value": "{color.olive.800}",
             "type": "color"
           }
         }
@@ -19,6 +23,12 @@
           }
         }
       }
+    }
+  },
+  "color": {
+    "foo": {
+      "value": "red",
+      "type": "color"
     }
   }
 }
