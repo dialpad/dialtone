@@ -2,15 +2,15 @@
   "presence": {
     "color": {
       "available": {
-        "value": "{color.green.425}",
+        "value": "{color.green.475}",
         "type": "color"
       },
       "unavailable": {
-        "value": "{color.red.400}",
+        "value": "{color.red.450}",
         "type": "color"
       },
       "busy": {
-        "value": "{color.gold.400}",
+        "value": "{color.gold.450}",
         "type": "color"
       },
       "offline": {

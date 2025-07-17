@@ -3374,8 +3374,7 @@
       "components/radio/default": "enabled",
       "theme/dp/default": "enabled",
       "theme/dp/dark": "enabled",
-      "theme/expressive/default": "enabled",
-      "components/presence/default": "disabled"
+      "theme/expressive/default": "enabled"
     },
     "$figmaVariableReferences": {},
     "group": "expressive"
@@ -3447,8 +3446,7 @@
     "name": "light",
     "selectedTokenSets": {
       "root": "enabled",
-      "base/default": "enabled",
-      "components/presence/default": "disabled"
+      "base/default": "enabled"
     },
     "$figmaStyleReferences": {},
     "$figmaVariableReferences": {
@@ -3626,8 +3624,7 @@
     "selectedTokenSets": {
       "root": "enabled",
       "base/default": "enabled",
-      "base/dark": "enabled",
-      "components/presence/default": "disabled"
+      "base/dark": "enabled"
     },
     "$figmaStyleReferences": {},
     "$figmaVariableReferences": {

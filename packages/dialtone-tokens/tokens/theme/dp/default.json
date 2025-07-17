@@ -2413,19 +2413,19 @@
       "color": {
         "background": {
           "available": {
-            "value": "{color.green.425}",
+            "value": "{presence.color.available}",
             "type": "color"
           },
           "busy-unavailable": {
-            "value": "{color.red.400}",
+            "value": "{presence.color.unavailable}",
             "type": "color"
           },
           "busy": {
-            "value": "{color.gold.400}",
+            "value": "{presence.color.busy}",
             "type": "color"
           },
           "offline": {
-            "value": "{color.neutral.white}",
+            "value": "{presence.color.offline}",
             "type": "color"
           }
         }
@@ -2489,7 +2489,7 @@
               "studio.tokens": {
                 "modify": {
                   "type": "alpha",
-                  "value": ".77",
+                  "value": ".8",
                   "space": "hsl"
                 }
               }
@@ -2736,29 +2736,11 @@
         },
         "positive": {
           "value": "{shell.presence.color.available}",
-          "type": "color",
-          "$extensions": {
-            "studio.tokens": {
-              "modify": {
-                "type": "darken",
-                "value": "0.25",
-                "space": "hsl"
-              }
-            }
-          }
+          "type": "color"
         },
         "critical": {
           "value": "{shell.presence.color.unavailable}",
-          "type": "color",
-          "$extensions": {
-            "studio.tokens": {
-              "modify": {
-                "type": "darken",
-                "value": "0.25",
-                "space": "hsl"
-              }
-            }
-          }
+          "type": "color"
         },
         "warning": {
           "value": "{shell.presence.color.busy}",
@@ -2914,19 +2896,19 @@
     "presence": {
       "color": {
         "available": {
-          "value": "{color.green.400}",
+          "value": "{presence.color.available}",
           "type": "color"
         },
         "unavailable": {
-          "value": "{color.red.450}",
+          "value": "{presence.color.unavailable}",
           "type": "color"
         },
         "busy": {
-          "value": "{color.gold.400}",
+          "value": "{presence.color.busy}",
           "type": "color"
         },
         "offline": {
-          "value": "{color.black.500}",
+          "value": "{presence.color.offline}",
           "type": "color"
         }
       }
