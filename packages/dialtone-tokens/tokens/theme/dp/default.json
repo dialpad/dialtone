@@ -2726,53 +2726,6 @@
             }
           }
         },
-        "disabled": {
-          "value": "{color.black.500}",
-          "type": "color"
-        },
-        "strong": {
-          "value": "{color.black.1000}",
-          "type": "color"
-        },
-        "positive": {
-          "value": "{shell.presence.color.available}",
-          "type": "color",
-          "$extensions": {
-            "studio.tokens": {
-              "modify": {
-                "type": "darken",
-                "value": ".1",
-                "space": "hsl"
-              }
-            }
-          }
-        },
-        "critical": {
-          "value": "{shell.presence.color.unavailable}",
-          "type": "color",
-          "$extensions": {
-            "studio.tokens": {
-              "modify": {
-                "type": "darken",
-                "value": ".1",
-                "space": "hsl"
-              }
-            }
-          }
-        },
-        "warning": {
-          "value": "{shell.presence.color.busy}",
-          "type": "color",
-          "$extensions": {
-            "studio.tokens": {
-              "modify": {
-                "type": "darken",
-                "value": "0.25",
-                "space": "hsl"
-              }
-            }
-          }
-        },
         "tertiary": {
           "value": "{shell.base.color.foreground.tertiary}",
           "type": "color"
@@ -2836,6 +2789,53 @@
               "modify": {
                 "type": "darken",
                 "value": "0.6",
+                "space": "hsl"
+              }
+            }
+          }
+        },
+        "disabled": {
+          "value": "{color.black.500}",
+          "type": "color"
+        },
+        "strong": {
+          "value": "{color.black.1000}",
+          "type": "color"
+        },
+        "positive": {
+          "value": "{shell.presence.color.available}",
+          "type": "color",
+          "$extensions": {
+            "studio.tokens": {
+              "modify": {
+                "type": "darken",
+                "value": ".1",
+                "space": "hsl"
+              }
+            }
+          }
+        },
+        "critical": {
+          "value": "{shell.presence.color.unavailable}",
+          "type": "color",
+          "$extensions": {
+            "studio.tokens": {
+              "modify": {
+                "type": "darken",
+                "value": ".1",
+                "space": "hsl"
+              }
+            }
+          }
+        },
+        "warning": {
+          "value": "{shell.presence.color.busy}",
+          "type": "color",
+          "$extensions": {
+            "studio.tokens": {
+              "modify": {
+                "type": "darken",
+                "value": "0.25",
                 "space": "hsl"
               }
             }
