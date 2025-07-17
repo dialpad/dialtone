@@ -2483,8 +2483,17 @@
             "type": "color"
           },
           "muted": {
-            "value": "{color.foreground.muted}",
-            "type": "color"
+            "value": "{color.foreground.tertiary}",
+            "type": "color",
+            "$extensions": {
+              "studio.tokens": {
+                "modify": {
+                  "type": "alpha",
+                  "value": ".77",
+                  "space": "hsl"
+                }
+              }
+            }
           }
         }
       }
@@ -2809,24 +2818,15 @@
             "studio.tokens": {
               "modify": {
                 "type": "darken",
-                "value": "1",
+                "value": ".4",
                 "space": "hsl"
               }
             }
           }
         },
         "muted-active": {
-          "value": "{shell.color.foreground.muted}",
-          "type": "color",
-          "$extensions": {
-            "studio.tokens": {
-              "modify": {
-                "type": "alpha",
-                "value": "0.95",
-                "space": "hsl"
-              }
-            }
-          }
+          "value": "{shell.color.foreground.muted-hover}",
+          "type": "color"
         },
         "muted-selected": {
           "value": "{shell.color.foreground.muted}",
@@ -2834,8 +2834,8 @@
           "$extensions": {
             "studio.tokens": {
               "modify": {
-                "type": "alpha",
-                "value": "0.85",
+                "type": "darken",
+                "value": "0.6",
                 "space": "hsl"
               }
             }
