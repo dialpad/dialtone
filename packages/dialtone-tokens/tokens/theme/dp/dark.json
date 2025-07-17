@@ -979,6 +979,45 @@
               }
             }
           }
+        },
+        "positive": {
+          "value": "{shell.presence.color.available}",
+          "type": "color",
+          "$extensions": {
+            "studio.tokens": {
+              "modify": {
+                "type": "lighten",
+                "value": ".1",
+                "space": "hsl"
+              }
+            }
+          }
+        },
+        "critical": {
+          "value": "{shell.presence.color.unavailable}",
+          "type": "color",
+          "$extensions": {
+            "studio.tokens": {
+              "modify": {
+                "type": "lighten",
+                "value": ".1",
+                "space": "hsl"
+              }
+            }
+          }
+        },
+        "warning": {
+          "value": "{shell.presence.color.busy}",
+          "type": "color",
+          "$extensions": {
+            "studio.tokens": {
+              "modify": {
+                "type": "lighten",
+                "value": ".15",
+                "space": "hsl"
+              }
+            }
+          }
         }
       },
       "border": {
