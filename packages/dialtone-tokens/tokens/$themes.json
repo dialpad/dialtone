@@ -3574,8 +3574,8 @@
       "components/radio/default": "enabled",
       "theme/plum/default": "enabled"
     },
-    "group": "plum",
-    "$figmaVariableReferences": {}
+    "$figmaVariableReferences": {},
+    "group": "plum"
   },
   {
     "id": "1154b4692f3253d85cc9fe1acf9dadca4950e59a",
@@ -3594,8 +3594,27 @@
       "components/radio/default": "enabled",
       "theme/buttercream/default": "enabled"
     },
-    "group": "buttercream",
-    "$figmaVariableReferences": {}
+    "$figmaVariableReferences": {},
+    "group": "buttercream"
+  },
+  {
+    "id": "50022f57bcc3475f222b79967932bce8e8b5b3b9",
+    "name": "light",
+    "$figmaStyleReferences": {},
+    "selectedTokenSets": {
+      "root": "enabled",
+      "base/default": "enabled",
+      "theme/dp/default": "enabled",
+      "components/avatar/default": "enabled",
+      "components/badge/default": "enabled",
+      "components/button/default": "enabled",
+      "components/checkbox/default": "enabled",
+      "components/icon/default": "enabled",
+      "components/presence/default": "enabled",
+      "components/radio/default": "enabled",
+      "theme/high-desert/default": "enabled"
+    },
+    "group": "high-desert"
   },
   {
     "id": "base-light",
