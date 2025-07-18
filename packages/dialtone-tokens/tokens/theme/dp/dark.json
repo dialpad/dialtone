@@ -1040,7 +1040,7 @@
               "studio.tokens": {
                 "modify": {
                   "type": "lighten",
-                  "value": ".8",
+                  "value": ".65",
                   "space": "lch"
                 }
               }
