@@ -713,10 +713,6 @@
         "value": "{color.blue.425}",
         "type": "color"
       }
-    },
-    "foo": {
-      "value": "red",
-      "type": "color"
     }
   },
   "inputs": {

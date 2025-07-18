@@ -3482,7 +3482,8 @@
       "components/radio/default": "enabled",
       "theme/melon/default": "enabled"
     },
-    "group": "melon"
+    "group": "melon",
+    "$figmaVariableReferences": {}
   },
   {
     "id": "06b9af5839efef1a01ab70c2e31517265a6745ee",
@@ -3506,7 +3507,8 @@
       "theme/melon/default": "enabled",
       "theme/melon/dark": "enabled"
     },
-    "group": "melon"
+    "group": "melon",
+    "$figmaVariableReferences": {}
   },
   {
     "id": "base-light",

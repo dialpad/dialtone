@@ -38,11 +38,5 @@
         }
       }
     }
-  },
-  "color": {
-    "foo": {
-      "value": "red",
-      "type": "color"
-    }
   }
 }
