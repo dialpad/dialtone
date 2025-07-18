@@ -3,6 +3,14 @@
     "foo": {
       "value": "blue",
       "type": "color"
+    },
+    "base": {
+      "color": {
+        "foreground": {
+          "value": "{color.red.1000}",
+          "type": "color"
+        }
+      }
     }
   }
 }
