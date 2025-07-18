@@ -1,0 +1,8 @@
+{
+  "shell": {
+    "foo": {
+      "value": "blue",
+      "type": "color"
+    }
+  }
+}
