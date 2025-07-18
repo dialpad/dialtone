@@ -2519,6 +2519,64 @@
           "type": "color"
         }
       },
+      "foreground": {
+        "disabled": {
+          "value": "{color.black.500}",
+          "type": "color"
+        },
+        "strong": {
+          "value": "{shell.base.color.foreground.primary}",
+          "type": "color",
+          "$extensions": {
+            "studio.tokens": {
+              "modify": {
+                "type": "darken",
+                "value": "0.8",
+                "space": "hsl"
+              }
+            }
+          }
+        },
+        "positive": {
+          "value": "{shell.presence.color.available}",
+          "type": "color",
+          "$extensions": {
+            "studio.tokens": {
+              "modify": {
+                "type": "darken",
+                "value": ".1",
+                "space": "hsl"
+              }
+            }
+          }
+        },
+        "critical": {
+          "value": "{shell.presence.color.unavailable}",
+          "type": "color",
+          "$extensions": {
+            "studio.tokens": {
+              "modify": {
+                "type": "darken",
+                "value": ".1",
+                "space": "hsl"
+              }
+            }
+          }
+        },
+        "warning": {
+          "value": "{shell.presence.color.busy}",
+          "type": "color",
+          "$extensions": {
+            "studio.tokens": {
+              "modify": {
+                "type": "darken",
+                "value": "0.25",
+                "space": "hsl"
+              }
+            }
+          }
+        }
+      },
       "border": {
         "subtle": {
           "value": "{shell.base.color.border}",
@@ -2840,62 +2898,6 @@
                 "modify": {
                   "type": "darken",
                   "value": "0.6",
-                  "space": "hsl"
-                }
-              }
-            }
-          },
-          "disabled": {
-            "value": "{color.black.500}",
-            "type": "color"
-          },
-          "strong": {
-            "value": "{shell.base.color.foreground.primary}",
-            "type": "color",
-            "$extensions": {
-              "studio.tokens": {
-                "modify": {
-                  "type": "darken",
-                  "value": "0.8",
-                  "space": "hsl"
-                }
-              }
-            }
-          },
-          "positive": {
-            "value": "{shell.presence.color.available}",
-            "type": "color",
-            "$extensions": {
-              "studio.tokens": {
-                "modify": {
-                  "type": "darken",
-                  "value": ".1",
-                  "space": "hsl"
-                }
-              }
-            }
-          },
-          "critical": {
-            "value": "{shell.presence.color.unavailable}",
-            "type": "color",
-            "$extensions": {
-              "studio.tokens": {
-                "modify": {
-                  "type": "darken",
-                  "value": ".1",
-                  "space": "hsl"
-                }
-              }
-            }
-          },
-          "warning": {
-            "value": "{shell.presence.color.busy}",
-            "type": "color",
-            "$extensions": {
-              "studio.tokens": {
-                "modify": {
-                  "type": "darken",
-                  "value": "0.25",
                   "space": "hsl"
                 }
               }
