@@ -736,6 +736,14 @@ export default {
             class: this.inputClass,
           },
 
+          handleKeyDown: (view, event) => {
+            // When preventTyping is true, only allow backspace to take effect
+            if (this.preventTyping && event.key !== 'Backspace') {
+              return true; // Prevent the event from being processed
+            }
+            return false; // Allow the event to be processed normally
+          },
+
           handlePaste: (view, event, slice) => {
             const clipboardData = event.clipboardData || window.clipboardData;
             const textData = clipboardData.getData('text/plain');
@@ -994,12 +1002,6 @@ export default {
       });
       // The content has changed.
       this.editor.on('update', () => {
-        // When preventTyping is true and user wants to type, we revert to last value
-        // If Backspace (keyCode = 8) is pressed, we allow updating the text
-        if (this.preventTyping && this.editor.view?.input?.lastKeyCode !== 8) {
-          this.editor.commands.setContent(this.value, false);
-          return;
-        }
         this.triggerInputChangeEvents();
       });
 
