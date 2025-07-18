@@ -2466,6 +2466,10 @@
         "border": {
           "value": "{color.black.900}",
           "type": "color"
+        },
+        "accent": {
+          "value": "{badge.color.background.bulletin}",
+          "type": "color"
         }
       },
       "action": {

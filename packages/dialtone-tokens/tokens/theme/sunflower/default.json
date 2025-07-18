@@ -1,19 +1,5 @@
 {
   "shell": {
-    "base": {
-      "color": {
-        "surface": {
-          "default": {
-            "value": "{color.olive.50}",
-            "type": "color"
-          },
-          "primary": {
-            "value": "{color.olive.800}",
-            "type": "color"
-          }
-        }
-      }
-    },
     "mention": {
       "color": {
         "surface": {
