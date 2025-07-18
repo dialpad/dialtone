@@ -955,16 +955,7 @@
       "foreground": {
         "positive": {
           "value": "{shell.base.color.status-positive}",
-          "type": "color",
-          "$extensions": {
-            "studio.tokens": {
-              "modify": {
-                "type": "lighten",
-                "value": ".1",
-                "space": "hsl"
-              }
-            }
-          }
+          "type": "color"
         },
         "critical": {
           "value": "{shell.base.color.status-critical}",
@@ -973,7 +964,7 @@
             "studio.tokens": {
               "modify": {
                 "type": "lighten",
-                "value": ".1",
+                "value": ".15",
                 "space": "hsl"
               }
             }
