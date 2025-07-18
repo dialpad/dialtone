@@ -2470,6 +2470,22 @@
         "accent": {
           "value": "{badge.color.background.bulletin}",
           "type": "color"
+        },
+        "status-positive": {
+          "value": "{presence.color.available}",
+          "type": "color"
+        },
+        "status-critical": {
+          "value": "{presence.color.unavailable}",
+          "type": "color"
+        },
+        "status-warning": {
+          "value": "{presence.color.busy}",
+          "type": "color"
+        },
+        "status-indeterminate": {
+          "value": "{presence.color.offline}",
+          "type": "color"
         }
       },
       "action": {
