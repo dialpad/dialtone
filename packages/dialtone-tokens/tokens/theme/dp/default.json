@@ -2456,16 +2456,12 @@
     "base": {
       "color": {
         "surface": {
-          "default": {
-            "value": "{color.surface.secondary}",
-            "type": "color"
-          }
+          "value": "{color.surface.secondary}",
+          "type": "color"
         },
         "foreground": {
-          "default": {
-            "value": "{color.foreground.primary}",
-            "type": "color"
-          }
+          "value": "{color.foreground.primary}",
+          "type": "color"
         },
         "border": {
           "value": "{color.black.900}",
@@ -2577,7 +2573,7 @@
       },
       "surface": {
         "default": {
-          "value": "{shell.base.color.surface.default}",
+          "value": "{shell.base.color.surface}",
           "type": "color"
         }
       },
