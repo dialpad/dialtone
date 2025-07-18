@@ -49,5 +49,9 @@ module.exports = {
       name: 'alpha',
       prerelease: true,
     },
+    {
+      name: 'next',
+      prerelease: true,
+    },
   ],
 };

@@ -288,6 +288,7 @@ import { DtAvatar } from '@/components/avatar';
 import { DtIcon } from '@/components/icon';
 import { DtImageViewer } from '@/components/image_viewer';
 import { DtButton } from '@/components/button';
+import { sharedEmojiReactionsData } from '@/recipes/conversation_view/emoji_row/emoji_row.stories.js';
 
 import fryImage from '@/common/assets/fry.gif';
 
@@ -309,29 +310,7 @@ export default {
   data () {
     return {
       fadeState: 'SEARCHED',
-      mockReactions: [
-        {
-          emojiUnicodeOrShortname: '😀',
-          isSelected: true,
-          ariaLabel: 'Emoji aria label',
-          tooltip: 'You reacted with 😀',
-          num: 1,
-        },
-        {
-          emojiUnicodeOrShortname: '😒',
-          isSelected: false,
-          ariaLabel: 'Emoji aria label',
-          tooltip: 'You reacted with 😒',
-          num: 1,
-        },
-        {
-          emojiUnicodeOrShortname: '🙃',
-          isSelected: false,
-          ariaLabel: 'Emoji aria label',
-          tooltip: 'You reacted with 🙃',
-          num: 99,
-        },
-      ],
+      mockReactions: sharedEmojiReactionsData,
 
       hoverButtons: ['bell', 'living-thing', 'map-pin'],
       persons: ['Jim Halpert', 'Michael Scott', 'Pam'],
