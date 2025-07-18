@@ -2526,7 +2526,7 @@
             "studio.tokens": {
               "modify": {
                 "type": "alpha",
-                "value": ".62",
+                "value": ".60",
                 "space": "hsl"
               }
             }
@@ -2794,12 +2794,12 @@
           }
         },
         "foreground": {
-          "primary": {
+          "primary-default": {
             "value": "{shell.color.foreground.primary}",
             "type": "color"
           },
           "primary-hover": {
-            "value": "{shell.action.color.foreground.primary}",
+            "value": "{shell.action.color.foreground.primary-default}",
             "type": "color",
             "$extensions": {
               "studio.tokens": {
@@ -2816,7 +2816,7 @@
             "type": "color"
           },
           "primary-selected": {
-            "value": "{shell.action.color.foreground.primary}",
+            "value": "{shell.action.color.foreground.primary-default}",
             "type": "color",
             "$extensions": {
               "studio.tokens": {
@@ -2828,12 +2828,12 @@
               }
             }
           },
-          "secondary": {
+          "secondary-default": {
             "value": "{shell.color.foreground.secondary}",
             "type": "color"
           },
           "secondary-hover": {
-            "value": "{shell.action.color.foreground.secondary}",
+            "value": "{shell.action.color.foreground.secondary-default}",
             "type": "color",
             "$extensions": {
               "studio.tokens": {
@@ -2850,7 +2850,7 @@
             "type": "color"
           },
           "secondary-selected": {
-            "value": "{shell.action.color.foreground.secondary}",
+            "value": "{shell.action.color.foreground.secondary-default}",
             "type": "color",
             "$extensions": {
               "studio.tokens": {
@@ -2862,12 +2862,12 @@
               }
             }
           },
-          "tertiary": {
+          "tertiary-default": {
             "value": "{shell.color.foreground.tertiary}",
             "type": "color"
           },
           "tertiary-hover": {
-            "value": "{shell.action.color.foreground.tertiary}",
+            "value": "{shell.action.color.foreground.tertiary-default}",
             "type": "color",
             "$extensions": {
               "studio.tokens": {
@@ -2884,7 +2884,7 @@
             "type": "color"
           },
           "tertiary-selected": {
-            "value": "{shell.action.color.foreground.tertiary}",
+            "value": "{shell.action.color.foreground.tertiary-default}",
             "type": "color",
             "$extensions": {
               "studio.tokens": {
@@ -2896,12 +2896,12 @@
               }
             }
           },
-          "muted": {
+          "muted-default": {
             "value": "{shell.color.foreground.muted}",
             "type": "color"
           },
           "muted-hover": {
-            "value": "{shell.action.color.foreground.muted}",
+            "value": "{shell.action.color.foreground.muted-default}",
             "type": "color",
             "$extensions": {
               "studio.tokens": {
@@ -2918,7 +2918,7 @@
             "type": "color"
           },
           "muted-selected": {
-            "value": "{shell.action.color.foreground.muted}",
+            "value": "{shell.action.color.foreground.muted-default}",
             "type": "color",
             "$extensions": {
               "studio.tokens": {
