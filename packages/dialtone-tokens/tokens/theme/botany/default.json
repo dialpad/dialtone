@@ -6,12 +6,8 @@
           "value": "#E6EBDB",
           "type": "color"
         },
-        "foreground": {
-          "value": "#022443",
-          "type": "color"
-        },
         "border": {
-          "value": "#360486",
+          "value": "#022443",
           "type": "color"
         },
         "accent": {

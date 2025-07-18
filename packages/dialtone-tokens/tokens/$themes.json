@@ -3574,7 +3574,8 @@
       "components/radio/default": "enabled",
       "theme/plum/default": "enabled"
     },
-    "group": "plum"
+    "group": "plum",
+    "$figmaVariableReferences": {}
   },
   {
     "id": "1154b4692f3253d85cc9fe1acf9dadca4950e59a",
@@ -3593,7 +3594,8 @@
       "components/radio/default": "enabled",
       "theme/buttercream/default": "enabled"
     },
-    "group": "buttercream"
+    "group": "buttercream",
+    "$figmaVariableReferences": {}
   },
   {
     "id": "base-light",
