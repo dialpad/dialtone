@@ -1,3 +1,11 @@
+## [9.126.5](https://github.com/dialpad/dialtone/compare/dialtone/v9.126.4...dialtone/v9.126.5) (2025-07-18)
+
+
+### Bug Fixes
+
+* **Emoji Row:** NO-JIRA tooltip text ([#824](https://github.com/dialpad/dialtone/issues/824)) ([d6623d1](https://github.com/dialpad/dialtone/commit/d6623d1d11ee0674d412f65aff674368952a8cb1))
+* **Modal:** NO-JIRA prevent losing focus when clicking inside the modal ([#825](https://github.com/dialpad/dialtone/issues/825)) ([a7d3d7d](https://github.com/dialpad/dialtone/commit/a7d3d7dc801ed9aedcbee07fddd59a7b923a1158))
+
 ## [9.126.4](https://github.com/dialpad/dialtone/compare/dialtone/v9.126.3...dialtone/v9.126.4) (2025-07-15)
 
 
