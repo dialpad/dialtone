@@ -3507,8 +3507,53 @@
       "theme/melon/default": "enabled",
       "theme/melon/dark": "enabled"
     },
-    "group": "melon",
-    "$figmaVariableReferences": {}
+    "$figmaVariableReferences": {},
+    "group": "melon"
+  },
+  {
+    "id": "88f27c1e1bc4fda4f2a9227488a48f17c18f5142",
+    "name": "light",
+    "$figmaStyleReferences": {},
+    "selectedTokenSets": {
+      "root": "enabled",
+      "base/default": "enabled",
+      "theme/dp/default": "enabled",
+      "components/avatar/default": "enabled",
+      "components/badge/default": "enabled",
+      "components/button/default": "enabled",
+      "components/checkbox/default": "enabled",
+      "components/icon/default": "enabled",
+      "components/presence/default": "enabled",
+      "components/radio/default": "enabled",
+      "theme/aegean/default": "enabled"
+    },
+    "group": "aegean"
+  },
+  {
+    "id": "c672b1a57ec7c262654d9e000d6d3b2a570f05dd",
+    "name": "dark",
+    "$figmaStyleReferences": {},
+    "selectedTokenSets": {
+      "root": "enabled",
+      "base/default": "enabled",
+      "base/dark": "enabled",
+      "theme/dp/default": "enabled",
+      "theme/dp/dark": "enabled",
+      "theme/melon/default": "enabled",
+      "theme/melon/dark": "enabled",
+      "theme/aegean/default": "enabled",
+      "theme/aegean/dark": "enabled",
+      "components/avatar/default": "enabled",
+      "components/badge/default": "enabled",
+      "components/badge/dark": "enabled",
+      "components/button/default": "enabled",
+      "components/checkbox/default": "enabled",
+      "components/icon/default": "enabled",
+      "components/presence/default": "enabled",
+      "components/presence/dark": "enabled",
+      "components/radio/default": "enabled"
+    },
+    "group": "aegean"
   },
   {
     "id": "base-light",
