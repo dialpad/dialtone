@@ -954,7 +954,7 @@
     "color": {
       "foreground": {
         "positive": {
-          "value": "{shell.presence.color.available}",
+          "value": "{shell.base.color.status-positive}",
           "type": "color",
           "$extensions": {
             "studio.tokens": {
@@ -967,7 +967,7 @@
           }
         },
         "critical": {
-          "value": "{shell.presence.color.unavailable}",
+          "value": "{shell.base.color.status-critical}",
           "type": "color",
           "$extensions": {
             "studio.tokens": {
@@ -980,7 +980,7 @@
           }
         },
         "warning": {
-          "value": "{shell.presence.color.busy}",
+          "value": "{shell.base.color.status-warning}",
           "type": "color",
           "$extensions": {
             "studio.tokens": {

@@ -2566,33 +2566,33 @@
           }
         },
         "positive": {
-          "value": "{shell.presence.color.available}",
+          "value": "{shell.base.color.status-positive}",
           "type": "color",
           "$extensions": {
             "studio.tokens": {
               "modify": {
                 "type": "darken",
-                "value": ".1",
+                "value": ".15",
                 "space": "hsl"
               }
             }
           }
         },
         "critical": {
-          "value": "{shell.presence.color.unavailable}",
+          "value": "{shell.base.color.status-critical}",
           "type": "color",
           "$extensions": {
             "studio.tokens": {
               "modify": {
                 "type": "darken",
-                "value": ".1",
+                "value": ".2",
                 "space": "hsl"
               }
             }
           }
         },
         "warning": {
-          "value": "{shell.presence.color.busy}",
+          "value": "{shell.base.color.status-warning}",
           "type": "color",
           "$extensions": {
             "studio.tokens": {
@@ -2919,19 +2919,19 @@
     "presence": {
       "color": {
         "available": {
-          "value": "{presence.color.available}",
+          "value": "{shell.base.color.status-positive}",
           "type": "color"
         },
         "unavailable": {
-          "value": "{presence.color.unavailable}",
+          "value": "{shell.base.color.status-critical}",
           "type": "color"
         },
         "busy": {
-          "value": "{presence.color.busy}",
+          "value": "{shell.base.color.status-warning}",
           "type": "color"
         },
         "offline": {
-          "value": "{presence.color.offline}",
+          "value": "{shell.base.color.status-indeterminate}",
           "type": "color"
         }
       }
