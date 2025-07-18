@@ -1,0 +1,42 @@
+{
+  "shell": {
+    "base": {
+      "color": {
+        "surface": {
+          "value": "#e6f6df",
+          "type": "color"
+        },
+        "foreground": {
+          "value": "#022443",
+          "type": "color"
+        },
+        "border": {
+          "value": "#360486",
+          "type": "color"
+        },
+        "accent": {
+          "value": "#6633BB",
+          "type": "color"
+        }
+      },
+      "action": {
+        "color": {
+          "background": {
+            "primary": {
+              "value": "#0d6d4c",
+              "type": "color"
+            },
+            "secondary": {
+              "value": "#0d6d4c",
+              "type": "color"
+            },
+            "muted": {
+              "value": "#0d6d4c",
+              "type": "color"
+            }
+          }
+        }
+      }
+    }
+  }
+}
