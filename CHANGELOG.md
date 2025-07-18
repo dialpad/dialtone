@@ -1,3 +1,10 @@
+## [9.126.6](https://github.com/dialpad/dialtone/compare/dialtone/v9.126.5...dialtone/v9.126.6) (2025-07-18)
+
+
+### Bug Fixes
+
+* **Rich Text Editor:** DLT-2633 fix position out of range error ([#830](https://github.com/dialpad/dialtone/issues/830)) ([30b5512](https://github.com/dialpad/dialtone/commit/30b55121a7de9100fb4df3d6b8f9d550997d4e65))
+
 ## [9.126.5](https://github.com/dialpad/dialtone/compare/dialtone/v9.126.4...dialtone/v9.126.5) (2025-07-18)
 
 
