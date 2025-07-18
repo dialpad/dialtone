@@ -2889,17 +2889,8 @@
             "type": "color"
           },
           "secondary": {
-            "value": "{shell.mention.color.foreground.primary}",
-            "type": "color",
-            "$extensions": {
-              "studio.tokens": {
-                "modify": {
-                  "type": "alpha",
-                  "value": ".95",
-                  "space": "hsl"
-                }
-              }
-            }
+            "value": "{color.black.900}",
+            "type": "color"
           }
         }
       }
