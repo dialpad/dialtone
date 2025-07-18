@@ -3423,7 +3423,7 @@
   },
   {
     "id": "07e6a26d3bf52b384d40bc4147bc20c98406c4a8",
-    "name": "default",
+    "name": "light",
     "$figmaStyleReferences": {},
     "selectedTokenSets": {
       "root": "source",
@@ -3467,7 +3467,7 @@
   },
   {
     "id": "f461c12181f88e5aad09d6ef2b58c10cd6c880d3",
-    "name": "default",
+    "name": "light",
     "$figmaStyleReferences": {},
     "selectedTokenSets": {
       "root": "enabled",
@@ -3482,8 +3482,8 @@
       "components/radio/default": "enabled",
       "theme/melon/default": "enabled"
     },
-    "group": "melon",
-    "$figmaVariableReferences": {}
+    "$figmaVariableReferences": {},
+    "group": "melon"
   },
   {
     "id": "06b9af5839efef1a01ab70c2e31517265a6745ee",
