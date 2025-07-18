@@ -1,12 +1,10 @@
 {
   "shell": {
-    "mention": {
+    "base": {
       "color": {
-        "surface": {
-          "primary": {
-            "value": "#E20074",
-            "type": "color"
-          }
+        "accent": {
+          "value": "#E20074",
+          "type": "color"
         }
       }
     }

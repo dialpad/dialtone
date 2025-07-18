@@ -2855,7 +2855,7 @@
             "type": "color"
           },
           "secondary": {
-            "value": "{shell.mention.color.surface.primary}",
+            "value": "{shell.base.color.accent}",
             "type": "color",
             "$extensions": {
               "studio.tokens": {
