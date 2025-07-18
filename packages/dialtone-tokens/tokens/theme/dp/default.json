@@ -2465,31 +2465,6 @@
           "default": {
             "value": "{color.foreground.primary}",
             "type": "color"
-          },
-          "primary": {
-            "value": "{color.foreground.primary}",
-            "type": "color"
-          },
-          "secondary": {
-            "value": "{color.foreground.secondary}",
-            "type": "color"
-          },
-          "tertiary": {
-            "value": "{color.foreground.tertiary}",
-            "type": "color"
-          },
-          "muted": {
-            "value": "{color.foreground.tertiary}",
-            "type": "color",
-            "$extensions": {
-              "studio.tokens": {
-                "modify": {
-                  "type": "alpha",
-                  "value": ".8",
-                  "space": "hsl"
-                }
-              }
-            }
           }
         },
         "border": {
@@ -2517,19 +2492,38 @@
       }
     },
     "color": {
-      "surface": {
-        "default": {
-          "value": "{shell.base.color.surface.default}",
-          "type": "color"
-        }
-      },
       "foreground": {
+        "primary": {
+          "value": "{color.foreground.primary}",
+          "type": "color"
+        },
+        "secondary": {
+          "value": "{color.foreground.secondary}",
+          "type": "color"
+        },
+        "tertiary": {
+          "value": "{color.foreground.tertiary}",
+          "type": "color"
+        },
+        "muted": {
+          "value": "{color.foreground.tertiary}",
+          "type": "color",
+          "$extensions": {
+            "studio.tokens": {
+              "modify": {
+                "type": "alpha",
+                "value": ".8",
+                "space": "hsl"
+              }
+            }
+          }
+        },
         "disabled": {
           "value": "{color.black.500}",
           "type": "color"
         },
         "strong": {
-          "value": "{shell.base.color.foreground.primary}",
+          "value": "{shell.color.foreground.primary}",
           "type": "color",
           "$extensions": {
             "studio.tokens": {
@@ -2579,6 +2573,12 @@
               }
             }
           }
+        }
+      },
+      "surface": {
+        "default": {
+          "value": "{shell.base.color.surface.default}",
+          "type": "color"
         }
       },
       "border": {
@@ -2772,7 +2772,7 @@
         },
         "foreground": {
           "primary": {
-            "value": "{shell.base.color.foreground.primary}",
+            "value": "{shell.color.foreground.primary}",
             "type": "color"
           },
           "primary-hover": {
@@ -2806,7 +2806,7 @@
             }
           },
           "secondary": {
-            "value": "{shell.base.color.foreground.secondary}",
+            "value": "{shell.color.foreground.secondary}",
             "type": "color"
           },
           "secondary-hover": {
@@ -2840,7 +2840,7 @@
             }
           },
           "tertiary": {
-            "value": "{shell.base.color.foreground.tertiary}",
+            "value": "{shell.color.foreground.tertiary}",
             "type": "color"
           },
           "tertiary-hover": {
@@ -2874,7 +2874,7 @@
             }
           },
           "muted": {
-            "value": "{shell.base.color.foreground.muted}",
+            "value": "{shell.color.foreground.muted}",
             "type": "color"
           },
           "muted-hover": {

@@ -993,7 +993,7 @@
           }
         },
         "strong": {
-          "value": "{shell.base.color.foreground.primary}",
+          "value": "{shell.color.foreground.primary}",
           "type": "color",
           "$extensions": {
             "studio.tokens": {
