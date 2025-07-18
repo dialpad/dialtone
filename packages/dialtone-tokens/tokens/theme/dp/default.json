@@ -2889,7 +2889,7 @@
             "type": "color"
           },
           "secondary": {
-            "value": "{color.black.900}",
+            "value": "{color.black.100}",
             "type": "color"
           }
         }
