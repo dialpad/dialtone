@@ -1,3 +1,11 @@
+## [3.185.3](https://github.com/dialpad/dialtone/compare/dialtone-vue3/v3.185.2...dialtone-vue3/v3.185.3) (2025-07-18)
+
+
+### Bug Fixes
+
+* **Emoji Row:** NO-JIRA tooltip text ([#824](https://github.com/dialpad/dialtone/issues/824)) ([d6623d1](https://github.com/dialpad/dialtone/commit/d6623d1d11ee0674d412f65aff674368952a8cb1))
+* **Modal:** NO-JIRA prevent losing focus when clicking inside the modal ([#825](https://github.com/dialpad/dialtone/issues/825)) ([a7d3d7d](https://github.com/dialpad/dialtone/commit/a7d3d7dc801ed9aedcbee07fddd59a7b923a1158))
+
 ## [3.185.2](https://github.com/dialpad/dialtone/compare/dialtone-vue3/v3.185.1...dialtone-vue3/v3.185.2) (2025-07-08)
 
 
