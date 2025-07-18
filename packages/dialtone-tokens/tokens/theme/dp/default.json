@@ -2549,19 +2549,6 @@
             }
           }
         },
-        "strong": {
-          "value": "{shell.base.color.foreground}",
-          "type": "color",
-          "$extensions": {
-            "studio.tokens": {
-              "modify": {
-                "type": "darken",
-                "value": "1",
-                "space": "hsl"
-              }
-            }
-          }
-        },
         "positive": {
           "value": "{shell.presence.color.available}",
           "type": "color",
@@ -2639,6 +2626,66 @@
     },
     "action": {
       "color": {
+        "foreground": {
+          "primary-default": {
+            "value": "{shell.color.foreground.secondary}",
+            "type": "color"
+          },
+          "primary-strong": {
+            "value": "{shell.color.foreground.primary}",
+            "type": "color"
+          },
+          "primary-disabled": {
+            "value": "{shell.color.foreground.disabled}",
+            "type": "color"
+          },
+          "secondary-default": {
+            "value": "{shell.color.foreground.secondary}",
+            "type": "color"
+          },
+          "secondary-disabled": {
+            "value": "{shell.color.foreground.disabled}",
+            "type": "color"
+          },
+          "tertiary-default": {
+            "value": "{shell.color.foreground.tertiary}",
+            "type": "color"
+          },
+          "muted-default": {
+            "value": "{shell.color.foreground.muted}",
+            "type": "color"
+          },
+          "muted-hover": {
+            "value": "{shell.action.color.foreground.muted-default}",
+            "type": "color",
+            "$extensions": {
+              "studio.tokens": {
+                "modify": {
+                  "type": "darken",
+                  "value": ".4",
+                  "space": "hsl"
+                }
+              }
+            }
+          },
+          "muted-active": {
+            "value": "{shell.action.color.foreground.muted-hover}",
+            "type": "color"
+          },
+          "muted-selected": {
+            "value": "{shell.action.color.foreground.muted-default}",
+            "type": "color",
+            "$extensions": {
+              "studio.tokens": {
+                "modify": {
+                  "type": "darken",
+                  "value": "0.6",
+                  "space": "hsl"
+                }
+              }
+            }
+          }
+        },
         "background": {
           "primary-default": {
             "value": "{shell.base.action.color.background.primary}",
@@ -2791,54 +2838,6 @@
                 "modify": {
                   "type": "alpha",
                   "value": "0.07",
-                  "space": "hsl"
-                }
-              }
-            }
-          }
-        },
-        "foreground": {
-          "primary-default": {
-            "value": "{shell.color.foreground.secondary}",
-            "type": "color"
-          },
-          "secondary-default": {
-            "value": "{shell.color.foreground.secondary}",
-            "type": "color"
-          },
-          "tertiary-default": {
-            "value": "{shell.color.foreground.tertiary}",
-            "type": "color"
-          },
-          "muted-default": {
-            "value": "{shell.color.foreground.muted}",
-            "type": "color"
-          },
-          "muted-hover": {
-            "value": "{shell.action.color.foreground.muted-default}",
-            "type": "color",
-            "$extensions": {
-              "studio.tokens": {
-                "modify": {
-                  "type": "darken",
-                  "value": ".4",
-                  "space": "hsl"
-                }
-              }
-            }
-          },
-          "muted-active": {
-            "value": "{shell.action.color.foreground.muted-hover}",
-            "type": "color"
-          },
-          "muted-selected": {
-            "value": "{shell.action.color.foreground.muted-default}",
-            "type": "color",
-            "$extensions": {
-              "studio.tokens": {
-                "modify": {
-                  "type": "darken",
-                  "value": "0.6",
                   "space": "hsl"
                 }
               }
