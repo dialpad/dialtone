@@ -1038,25 +1038,6 @@
           }
         }
       }
-    },
-    "mention": {
-      "color": {
-        "surface": {
-          "secondary": {
-            "value": "{shell.mention.color.surface.primary}",
-            "type": "color",
-            "$extensions": {
-              "studio.tokens": {
-                "modify": {
-                  "type": "lighten",
-                  "value": ".9",
-                  "space": "hsl"
-                }
-              }
-            }
-          }
-        }
-      }
     }
   }
 }

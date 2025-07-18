@@ -2851,7 +2851,7 @@
       "color": {
         "surface": {
           "primary": {
-            "value": "{badge.color.background.bulletin}",
+            "value": "{shell.base.color.accent}",
             "type": "color"
           },
           "secondary": {
