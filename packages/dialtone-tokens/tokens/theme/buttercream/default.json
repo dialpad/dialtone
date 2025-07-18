@@ -3,15 +3,19 @@
     "base": {
       "color": {
         "surface": {
-          "value": "#E4E0EB",
+          "value": "#f0e4cb",
+          "type": "color"
+        },
+        "foreground": {
+          "value": "#1b2f3b",
           "type": "color"
         },
         "border": {
-          "value": "#0a0029",
+          "value": "#15242e",
           "type": "color"
         },
         "accent": {
-          "value": "#DE0276",
+          "value": "#f4cd0b",
           "type": "color"
         }
       },
@@ -19,17 +23,27 @@
         "color": {
           "background": {
             "primary": {
-              "value": "#65318E",
+              "value": "#2b4b5f",
               "type": "color"
             },
             "secondary": {
-              "value": "#65318E",
+              "value": "#2b4b5f",
               "type": "color"
             },
             "muted": {
-              "value": "#65318E",
+              "value": "#2b4b5f",
               "type": "color"
             }
+          }
+        }
+      }
+    },
+    "mention": {
+      "color": {
+        "foreground": {
+          "primary": {
+            "value": "#15242e",
+            "type": "color"
           }
         }
       }
