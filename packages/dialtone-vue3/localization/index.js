@@ -13,27 +13,28 @@ import ruRU from './ru-RU.ftl?raw';
 import esLA from './es-LA.ftl?raw';
 
 const dialtoneNamespace = 'dialtone';
+const allowedLocales = {
+  ENGLISH: 'en-US',
+  CHINESE: 'zh-CN',
+  DUTCH: 'nl-NL',
+  FRENCH: 'fr-FR',
+  GERMAN: 'de-DE',
+  ITALIAN: 'it-IT',
+  JAPANESE: 'ja-JP',
+  PORTUGUESE: 'pt-BR',
+  RUSSIAN: 'ru-RU',
+  SPANISH: 'es-LA',
+};
+const fallbackLocale = 'en-US';
 
 export class DialtoneLocalization {
-  constructor (locale = 'en-US') {
+  constructor (locale = null) {
     if (typeof DialtoneLocalization.instance === 'object') {
       return DialtoneLocalization.instance;
     }
 
-    this._locale = locale;
-    this._allowedLocales = {
-      ENGLISH: 'en-US',
-      CHINESE: 'zh-CN',
-      DUTCH: 'nl-NL',
-      FRENCH: 'fr-FR',
-      GERMAN: 'de-DE',
-      ITALIAN: 'it-IT',
-      JAPANESE: 'ja-JP',
-      PORTUGUESE: 'pt-BR',
-      RUSSIAN: 'ru-RU',
-      SPANISH: 'es-LA',
-    };
-    this._app = getCurrentInstance().appContext.app;
+    const app = getCurrentInstance().appContext.app;
+    this._locale = locale || DialtoneLocalization.getPreferredLocale();
 
     const bundleSource = new RawBundleSource({
       resources: RawBundleSource.builtResources([
@@ -52,16 +53,41 @@ export class DialtoneLocalization {
 
     const localeManager = new LocaleManager({
       bundleSource,
-      allowedLocales: Object.values(this.allowedLocales),
-      fallbackLocale: locale,
-      preferredLocale: locale,
+      allowedLocales: Object.values(allowedLocales),
+      fallbackLocale,
+      preferredLocale: this._locale,
       namespaces: [dialtoneNamespace],
     });
 
-    localeManager.install(this._app, dialtoneNamespace);
+    localeManager.install(app, dialtoneNamespace);
+
+    /**
+     * @description
+     * When the browser storage changes, update the current locale
+     * @param event
+     */
+    window.onstorage = (event) => {
+      if (event.key === 'user-locale') {
+        this.currentLocale = event.newValue;
+      }
+    };
 
     DialtoneLocalization.instance = this;
     return this;
+  }
+
+  static getPreferredLocale () {
+    const localStorageLanguage = localStorage.getItem('user-locale');
+
+    // Get the first two letters of the navigator language and check if it's in the allowed locales
+    const navigatorLanguage = Object.values(allowedLocales)
+      .find(locale => locale.startsWith(navigator.language.slice(0, 2)));
+
+    return localStorageLanguage || navigatorLanguage || fallbackLocale;
+  }
+
+  static getAllowedLocales () {
+    return allowedLocales;
   }
 
   $t (...args) {
@@ -78,15 +104,11 @@ export class DialtoneLocalization {
 
   set currentLocale (newLocale) {
     if (newLocale === this._locale) return;
-    if (!Object.values(this.allowedLocales).includes(newLocale)) {
-      throw new Error(`Locale ${newLocale} is not allowed, please use one of the following: ${Object.values(this.allowedLocales).join(', ')}`);
+    if (!Object.values(allowedLocales).includes(newLocale)) {
+      throw new Error(`Locale ${newLocale} is not allowed, please use one of the following: ${Object.values(allowedLocales).join(', ')}`);
     }
 
     this._locale = newLocale;
     useI18N(dialtoneNamespace).setI18N({ preferredLocale: newLocale }, dialtoneNamespace);
-  }
-
-  get allowedLocales () {
-    return this._allowedLocales;
   }
 }

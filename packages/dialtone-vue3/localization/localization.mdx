@@ -109,27 +109,33 @@ The `DialtoneLocalization` is a class, and it is exported from the package as a 
 the dialtone components that include localization will use the instance or initialize it if
 it doesn't exist.
 
-However, you can also use the class directly to get some properties or change the current locale.
+You can also use the class directly to get some properties via static methods without an instance.
 
-### Initializing
+### Static methods
+
+#### Get the allowed locales
+
+`DialtoneLocalization.getAllowedLocales()`
+
+#### Get the preferred locale
+
+`DialtoneLocalization.getPreferredLocale()`
+
+### Creating an instance
 
 `const dialtonei18n = new DialtoneLocalization();`
 
-You can pass in a locale to the constructor. The default is `en-US`, e.g:
+You can pass in a locale to the constructor. The default is your browser locale or `en-US`, e.g:
 
 `const dialtonei18n = new DialtoneLocalization('es-LA');`
 
-### Set the current locale
+#### Set the current locale
 
 `dialtonei18n.currentLocale = 'en-US';`
 
-### Get the current locale
+#### Get the current locale
 
 `dialtonei18n.currentLocale`
-
-### Get the allowed locales
-
-`dialtonei18n.allowedLocales`
 
 ## Update Localized strings process
 

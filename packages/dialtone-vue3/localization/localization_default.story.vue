@@ -13,6 +13,7 @@ export default {
   data () {
     return {
       i18n: new DialtoneLocalization(),
+      allowedLocales: DialtoneLocalization.getAllowedLocales(),
     };
   },
 };
@@ -25,7 +26,7 @@ export default {
   >
     <span>{{ i18n.$t('STORYBOOK_SET_LANGUAGE') }}: </span>
     <dt-button
-      v-for="(key, name) in i18n.allowedLocales"
+      v-for="(key, name) in allowedLocales"
       :key="key"
       :active="key === i18n.currentLocale"
       size="xs"
