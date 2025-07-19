@@ -59,7 +59,7 @@
 </template>
 
 <script setup>
-import { useCalendar } from '@/components/datepicker/composables/useCalendar.js';
+import { useCalendar } from '../composables/useCalendar.js';
 import { DtButton } from '@/components/button';
 
 const props = defineProps({

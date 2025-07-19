@@ -1,6 +1,7 @@
 import { computed, ref, watch } from 'vue';
 import { addMonths, getDate, getMonth, getYear, set, subMonths } from 'date-fns';
-import { formatMonth, getCalendarDays } from '@/components/datepicker/utils.js';
+import { formatMonth, getCalendarDays } from '../utils.js';
+import { INTL_MONTH_FORMAT } from '../datepicker_constants';
 import { returnFirstEl } from '@/common/utils';
 import { DialtoneLocalization } from '@/localization';
 
@@ -17,7 +18,7 @@ export function useMonthYearPicker (props, emits) {
   });
 
   const formattedMonth = computed(() => {
-    return (month, format, locale) => formatMonth(month, format, locale);
+    return (month) => formatMonth(month, INTL_MONTH_FORMAT, i18n.currentLocale);
   });
 
   watch(selectMonth, () => {

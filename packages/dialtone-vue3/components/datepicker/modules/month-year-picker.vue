@@ -19,7 +19,7 @@
           <dt-button
             id="prevYearButton"
             :ref="el => { if (el) setDayRef(el) }"
-            :aria-label="previousYearAriaLabel"
+            :aria-label="previousYearAriaLabel()"
             :circle="true"
             class="d-datepicker__nav-btn"
             importance="clear"
@@ -44,7 +44,7 @@
           <dt-button
             id="prevMonthButton"
             :ref="el => { if (el) setDayRef(el) }"
-            :aria-label="previousMonthAriaLabel"
+            :aria-label="previousMonthAriaLabel()"
             :circle="true"
             class="d-datepicker__nav-btn"
             importance="clear"
@@ -84,7 +84,7 @@
           <dt-button
             id="nextMonthButton"
             :ref="el => { if (el) setDayRef(el) }"
-            :aria-label="nextMonthAriaLabel"
+            :aria-label="nextMonthAriaLabel()"
             :circle="true"
             class="d-datepicker__nav-btn"
             importance="clear"
@@ -109,7 +109,7 @@
           <dt-button
             id="nextYearButton"
             :ref="el => { if (el) setDayRef(el) }"
-            :aria-label="nextYearAriaLabel"
+            :aria-label="nextYearAriaLabel()"
             :circle="true"
             class="d-datepicker__nav-btn"
             importance="clear"
@@ -140,7 +140,7 @@ import { DtStack } from '@/components/stack';
 import { DtButton } from '@/components/button';
 import { DtTooltip } from '@/components/tooltip';
 import { onMounted } from 'vue';
-import { useMonthYearPicker } from '@/components/datepicker/composables/useMonthYearPicker.js';
+import { useMonthYearPicker } from '../composables/useMonthYearPicker.js';
 import { DialtoneLocalization } from '@/localization';
 
 const props = defineProps({
