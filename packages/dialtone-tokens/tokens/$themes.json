@@ -3617,6 +3617,27 @@
     "group": "high-desert"
   },
   {
+    "id": "996ec0fab25077f3d0b0d0a5feb31c07b2461bab",
+    "name": "dark",
+    "$figmaStyleReferences": {},
+    "selectedTokenSets": {
+      "root": "enabled",
+      "base/default": "enabled",
+      "base/dark": "enabled",
+      "theme/verdant-haze/dark": "enabled",
+      "components/avatar/default": "enabled",
+      "components/badge/default": "enabled",
+      "components/badge/dark": "enabled",
+      "components/button/default": "enabled",
+      "components/checkbox/default": "enabled",
+      "components/icon/default": "enabled",
+      "components/presence/default": "enabled",
+      "components/presence/dark": "enabled",
+      "components/radio/default": "enabled"
+    },
+    "group": "verdant-haze"
+  },
+  {
     "id": "base-light",
     "name": "light",
     "selectedTokenSets": {
