@@ -3980,6 +3980,24 @@
     "group": "high-desert"
   },
   {
+    "id": "2d765a018b820ae9ed67af2a26cce59f14dba003",
+    "name": "light",
+    "$figmaStyleReferences": {},
+    "selectedTokenSets": {
+      "root": "source",
+      "base/default": "source",
+      "theme/verdant-haze/default": "enabled",
+      "components/avatar/default": "enabled",
+      "components/badge/default": "enabled",
+      "components/button/default": "enabled",
+      "components/checkbox/default": "enabled",
+      "components/icon/default": "enabled",
+      "components/presence/default": "enabled",
+      "components/radio/default": "enabled"
+    },
+    "group": "verdant-haze"
+  },
+  {
     "id": "996ec0fab25077f3d0b0d0a5feb31c07b2461bab",
     "name": "dark",
     "$figmaStyleReferences": {},
