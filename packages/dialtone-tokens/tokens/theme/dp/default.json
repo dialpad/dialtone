@@ -2533,7 +2533,7 @@
             "studio.tokens": {
               "modify": {
                 "type": "alpha",
-                "value": ".76",
+                "value": ".72",
                 "space": "hsl"
               }
             }
