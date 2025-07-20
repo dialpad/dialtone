@@ -4,8 +4,7 @@
     "name": "light",
     "selectedTokenSets": {
       "root": "enabled",
-      "base/default": "enabled",
-      "theme/ceruleo/default": "disabled"
+      "base/default": "enabled"
     },
     "$figmaStyleReferences": {},
     "$figmaVariableReferences": {
@@ -183,8 +182,7 @@
     "selectedTokenSets": {
       "root": "enabled",
       "base/default": "enabled",
-      "base/dark": "enabled",
-      "theme/ceruleo/default": "disabled"
+      "base/dark": "enabled"
     },
     "$figmaStyleReferences": {},
     "$figmaVariableReferences": {
@@ -782,8 +780,7 @@
       "root": "source",
       "components/button/default": "enabled",
       "theme/dp/default": "enabled",
-      "components/presence/default": "enabled",
-      "theme/ceruleo/default": "disabled"
+      "components/presence/default": "enabled"
     },
     "$figmaCollectionId": "VariableCollectionId:2174:1524",
     "$figmaModeId": "2174:0",
@@ -1529,8 +1526,7 @@
       "theme/dp/default": "enabled",
       "theme/dp/dark": "enabled",
       "components/presence/default": "enabled",
-      "components/presence/dark": "enabled",
-      "theme/ceruleo/default": "disabled"
+      "components/presence/dark": "enabled"
     },
     "$figmaCollectionId": "VariableCollectionId:2174:1524",
     "$figmaModeId": "2174:1",
@@ -2202,8 +2198,7 @@
       "components/button/default": "enabled",
       "theme/dp/default": "enabled",
       "theme/tmo/default": "enabled",
-      "components/presence/default": "enabled",
-      "theme/ceruleo/default": "disabled"
+      "components/presence/default": "enabled"
     },
     "$figmaCollectionId": "VariableCollectionId:406:19535",
     "$figmaModeId": "406:2",
@@ -2767,8 +2762,7 @@
       "theme/tmo/default": "enabled",
       "theme/tmo/dark": "enabled",
       "components/presence/default": "enabled",
-      "components/presence/dark": "enabled",
-      "theme/ceruleo/default": "disabled"
+      "components/presence/dark": "enabled"
     },
     "$figmaCollectionId": "VariableCollectionId:406:19535",
     "$figmaModeId": "406:3",
@@ -3323,8 +3317,7 @@
       "components/radio/default": "enabled",
       "theme/dp/default": "enabled",
       "theme/deca/default": "enabled",
-      "components/presence/default": "enabled",
-      "theme/ceruleo/default": "disabled"
+      "components/presence/default": "enabled"
     },
     "$figmaVariableReferences": {},
     "group": "deca"
@@ -3350,8 +3343,7 @@
       "theme/dp/dark": "enabled",
       "theme/deca/default": "enabled",
       "theme/deca/dark": "enabled",
-      "components/presence/default": "enabled",
-      "theme/ceruleo/default": "disabled"
+      "components/presence/default": "enabled"
     },
     "$figmaVariableReferences": {},
     "group": "deca"
@@ -3717,8 +3709,7 @@
       "components/radio/default": "enabled",
       "theme/dp/default": "enabled",
       "theme/expressive/default": "enabled",
-      "components/presence/default": "enabled",
-      "theme/ceruleo/default": "disabled"
+      "components/presence/default": "enabled"
     },
     "$figmaVariableReferences": {},
     "group": "expressive"
@@ -3738,8 +3729,7 @@
       "components/radio/default": "enabled",
       "theme/dp/default": "enabled",
       "theme/dp/dark": "enabled",
-      "theme/expressive/default": "enabled",
-      "theme/ceruleo/default": "disabled"
+      "theme/expressive/default": "enabled"
     },
     "$figmaVariableReferences": {},
     "group": "expressive"
@@ -3759,8 +3749,7 @@
       "theme/dp/default": "enabled",
       "theme/expressive/default": "enabled",
       "theme/expressive/sm": "enabled",
-      "components/presence/default": "enabled",
-      "theme/ceruleo/default": "disabled"
+      "components/presence/default": "enabled"
     },
     "$figmaVariableReferences": {},
     "group": "expressive-sm"
@@ -3782,8 +3771,7 @@
       "theme/dp/dark": "enabled",
       "theme/expressive/default": "enabled",
       "theme/expressive/sm": "enabled",
-      "components/presence/default": "enabled",
-      "theme/ceruleo/default": "disabled"
+      "components/presence/default": "enabled"
     },
     "$figmaVariableReferences": {},
     "group": "expressive-sm"
@@ -3803,8 +3791,7 @@
       "components/icon/default": "enabled",
       "components/radio/default": "enabled",
       "components/presence/default": "enabled",
-      "theme/sunflower/default": "enabled",
-      "theme/ceruleo/default": "disabled"
+      "theme/sunflower/default": "enabled"
     },
     "$figmaVariableReferences": {},
     "group": "sunflower"
@@ -3828,8 +3815,7 @@
       "components/radio/default": "enabled",
       "components/presence/default": "enabled",
       "theme/sunflower/default": "enabled",
-      "theme/sunflower/dark": "enabled",
-      "theme/ceruleo/default": "disabled"
+      "theme/sunflower/dark": "enabled"
     },
     "$figmaVariableReferences": {},
     "group": "sunflower"
@@ -3849,8 +3835,7 @@
       "components/icon/default": "enabled",
       "components/presence/default": "enabled",
       "components/radio/default": "enabled",
-      "theme/melon/default": "enabled",
-      "theme/ceruleo/default": "disabled"
+      "theme/melon/default": "enabled"
     },
     "$figmaVariableReferences": {},
     "group": "melon"
@@ -3875,8 +3860,7 @@
       "components/presence/dark": "enabled",
       "components/radio/default": "enabled",
       "theme/melon/default": "enabled",
-      "theme/melon/dark": "enabled",
-      "theme/ceruleo/default": "disabled"
+      "theme/melon/dark": "enabled"
     },
     "$figmaVariableReferences": {},
     "group": "melon"
@@ -3896,8 +3880,7 @@
       "components/icon/default": "enabled",
       "components/presence/default": "enabled",
       "components/radio/default": "enabled",
-      "theme/aegean/default": "enabled",
-      "theme/ceruleo/default": "disabled"
+      "theme/aegean/default": "enabled"
     },
     "$figmaVariableReferences": {},
     "group": "aegean"
@@ -3924,8 +3907,7 @@
       "components/icon/default": "enabled",
       "components/presence/default": "enabled",
       "components/presence/dark": "enabled",
-      "components/radio/default": "enabled",
-      "theme/ceruleo/default": "disabled"
+      "components/radio/default": "enabled"
     },
     "$figmaVariableReferences": {},
     "group": "aegean"
@@ -3944,8 +3926,7 @@
       "components/checkbox/default": "enabled",
       "components/icon/default": "enabled",
       "components/presence/default": "enabled",
-      "components/radio/default": "enabled",
-      "theme/ceruleo/default": "disabled"
+      "components/radio/default": "enabled"
     },
     "group": "verdant-haze",
     "$figmaVariableReferences": {}
@@ -3967,8 +3948,7 @@
       "components/icon/default": "enabled",
       "components/presence/default": "enabled",
       "components/presence/dark": "enabled",
-      "components/radio/default": "enabled",
-      "theme/ceruleo/default": "disabled"
+      "components/radio/default": "enabled"
     },
     "group": "verdant-haze",
     "$figmaVariableReferences": {}
@@ -3988,8 +3968,7 @@
       "components/icon/default": "enabled",
       "components/presence/default": "enabled",
       "components/radio/default": "enabled",
-      "theme/plum/default": "enabled",
-      "theme/ceruleo/default": "disabled"
+      "theme/plum/default": "enabled"
     },
     "$figmaVariableReferences": {},
     "group": "plum"
@@ -4009,8 +3988,7 @@
       "components/icon/default": "enabled",
       "components/presence/default": "enabled",
       "components/radio/default": "enabled",
-      "theme/buttercream/default": "enabled",
-      "theme/ceruleo/default": "disabled"
+      "theme/buttercream/default": "enabled"
     },
     "$figmaVariableReferences": {},
     "group": "buttercream"
@@ -4030,8 +4008,7 @@
       "components/icon/default": "enabled",
       "components/presence/default": "enabled",
       "components/radio/default": "enabled",
-      "theme/high-desert/default": "enabled",
-      "theme/ceruleo/default": "disabled"
+      "theme/high-desert/default": "enabled"
     },
     "group": "high-desert",
     "$figmaVariableReferences": {}
@@ -4051,8 +4028,7 @@
       "components/icon/default": "enabled",
       "components/presence/default": "enabled",
       "components/radio/default": "enabled",
-      "theme/botany/default": "enabled",
-      "theme/ceruleo/default": "disabled"
+      "theme/botany/default": "enabled"
     },
     "group": "botany",
     "$figmaVariableReferences": {}
