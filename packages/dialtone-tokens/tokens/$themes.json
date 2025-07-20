@@ -3821,6 +3821,25 @@
     "group": "sunflower"
   },
   {
+    "id": "a8b179308cd9172deaa0ee0b738ada1362e58352",
+    "name": "default",
+    "$figmaStyleReferences": {},
+    "selectedTokenSets": {
+      "root": "source",
+      "base/default": "source",
+      "theme/dp/default": "enabled",
+      "theme/ceruleo/default": "enabled",
+      "components/avatar/default": "enabled",
+      "components/badge/default": "enabled",
+      "components/button/default": "enabled",
+      "components/checkbox/default": "enabled",
+      "components/icon/default": "enabled",
+      "components/presence/default": "enabled",
+      "components/radio/default": "enabled"
+    },
+    "group": "ceruleo"
+  },
+  {
     "id": "f461c12181f88e5aad09d6ef2b58c10cd6c880d3",
     "name": "light",
     "$figmaStyleReferences": {},
@@ -3928,8 +3947,8 @@
       "components/presence/default": "enabled",
       "components/radio/default": "enabled"
     },
-    "group": "verdant-haze",
-    "$figmaVariableReferences": {}
+    "$figmaVariableReferences": {},
+    "group": "verdant-haze"
   },
   {
     "id": "996ec0fab25077f3d0b0d0a5feb31c07b2461bab",
@@ -3950,8 +3969,8 @@
       "components/presence/dark": "enabled",
       "components/radio/default": "enabled"
     },
-    "group": "verdant-haze",
-    "$figmaVariableReferences": {}
+    "$figmaVariableReferences": {},
+    "group": "verdant-haze"
   },
   {
     "id": "8be6725ce7fc26c05011ffe2817e814b07751705",
@@ -4010,8 +4029,8 @@
       "components/radio/default": "enabled",
       "theme/high-desert/default": "enabled"
     },
-    "group": "high-desert",
-    "$figmaVariableReferences": {}
+    "$figmaVariableReferences": {},
+    "group": "high-desert"
   },
   {
     "id": "de1ea6c8f4b4375929bbfb8150660e80dc33a64b",
@@ -4030,7 +4049,31 @@
       "components/radio/default": "enabled",
       "theme/botany/default": "enabled"
     },
-    "group": "botany",
-    "$figmaVariableReferences": {}
+    "$figmaVariableReferences": {},
+    "group": "botany"
+  },
+  {
+    "id": "8f52b3565b7f1d4735db9e5e35b35db23f25b06d",
+    "name": "dark",
+    "$figmaStyleReferences": {},
+    "selectedTokenSets": {
+      "root": "source",
+      "base/default": "source",
+      "base/dark": "source",
+      "theme/dp/default": "enabled",
+      "theme/dp/dark": "enabled",
+      "components/avatar/default": "enabled",
+      "components/badge/default": "enabled",
+      "components/badge/dark": "enabled",
+      "components/button/default": "enabled",
+      "components/checkbox/default": "enabled",
+      "components/icon/default": "enabled",
+      "components/presence/default": "enabled",
+      "components/presence/dark": "enabled",
+      "components/radio/default": "enabled",
+      "theme/ceruleo/default": "enabled",
+      "theme/ceruleo/dark": "enabled"
+    },
+    "group": "ceruleo"
   }
 ]
