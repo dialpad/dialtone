@@ -671,46 +671,6 @@
         "value": "#ffffff00",
         "type": "color",
         "description": "Transparent color independent of any theme."
-      },
-      "b-alpha10": {
-        "value": "#ffffff0d",
-        "type": "color",
-        "description": "Transparent color independent of any theme."
-      },
-      "b-alpha20": {
-        "value": "#ffffff29",
-        "type": "color",
-        "description": "Transparent color independent of any theme."
-      },
-      "b-alpha30": {
-        "value": "#ffffff26",
-        "type": "color",
-        "description": "Transparent color independent of any theme."
-      },
-      "b-alpha40": {
-        "value": "#ffffff33",
-        "type": "color",
-        "description": "Transparent color independent of any theme."
-      },
-      "b-alpha50": {
-        "value": "#ffffff40",
-        "type": "color",
-        "description": "Transparent color independent of any theme."
-      },
-      "b-alpha60": {
-        "value": "#ffffff59",
-        "type": "color",
-        "description": "Transparent color independent of any theme."
-      },
-      "b-alpha70": {
-        "value": "#ffffff66",
-        "type": "color",
-        "description": "Transparent color independent of any theme."
-      },
-      "b-alpha80": {
-        "value": "#ffffff73",
-        "type": "color",
-        "description": "Transparent color independent of any theme."
       }
     },
     "brand": {
