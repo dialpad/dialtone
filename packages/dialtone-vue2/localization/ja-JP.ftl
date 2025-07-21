@@ -55,14 +55,7 @@ DIALTONE_EDITOR_LINK_BUTTON_LABEL = リンク
 DIALTONE_EDITOR_ADD_LINK_BUTTON =
     .title = リンクを追加
     .aria-label = リンクを追加するための入力フィールド
-DIALTONE_EMOJI_ROW_REACTION_LABEL =
-    { $reactionCount ->
-       *[other]
-            { $selected ->
-               *[false] { $reactionCount }人が { $reaction } で反応しました。
-                [true] 自分を含む{ $reactionCount }人が { $reaction } で反応しました。
-            }
-    }
+DIALTONE_EMOJI_ROW_REACTION_LABEL = { $names }が{ $reaction }で反応しました
 DIALTONE_EMOJI_PICKER_ADD_EMOJI_LABEL = 絵文字を追加
 DIALTONE_EMOJI_PICKER_SEARCH_NO_RESULTS_LABEL = 見つかりません
 DIALTONE_EMOJI_PICKER_SEARCH_RESULTS_LABEL = 検索結果
