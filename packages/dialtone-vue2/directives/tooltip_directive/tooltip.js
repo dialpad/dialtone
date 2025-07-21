@@ -82,8 +82,10 @@ export const DtTooltipDirective = {
     // eslint-disable-next-line complexity
     function setupTooltip (anchor, binding) {
       const tooltipId = anchor.getAttribute('data-dt-tooltip-id') || getUniqueString();
-      const message = typeof binding.value === 'object' ? binding.value.text : binding.value;
-      const placement = binding.arg || (typeof binding.value === 'object' ? binding.value.position : null) || DEFAULT_PLACEMENT;
+      const value = binding.value;
+      const isPlainObject = value && typeof value === 'object' && !Array.isArray(value);
+      const message = isPlainObject && Object.prototype.hasOwnProperty.call(value, 'text') ? value.text : value;
+      const placement = binding.arg || (isPlainObject && Object.prototype.hasOwnProperty.call(value, 'position') ? value.position : null) || DEFAULT_PLACEMENT;
 
       anchor.setAttribute('data-dt-tooltip-id', tooltipId);
       DtTooltipDirectiveApp.addOrUpdateTooltip(tooltipId, message, placement);
