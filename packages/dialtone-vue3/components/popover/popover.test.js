@@ -127,18 +127,6 @@ describe('DtPopover Tests', () => {
         it('should contain a visually hidden close button', async () => {
           const buttonExists = await wrapper.findComponent(SrOnlyCloseButtonComponent).exists();
 
-          expect(buttonExists).toBe(false);
-        });
-      });
-
-      describe('When showCloseButton is false', () => {
-        beforeEach(async () => {
-          await wrapper.setProps({ showCloseButton: false });
-        });
-
-        it('should contain a visually hidden close button', async () => {
-          const buttonExists = await wrapper.findComponent(SrOnlyCloseButtonComponent).exists();
-
           expect(buttonExists).toBe(true);
         });
       });

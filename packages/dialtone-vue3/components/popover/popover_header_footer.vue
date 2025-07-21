@@ -45,6 +45,7 @@
 import { DtButton } from '@/components/button';
 import { DtIconClose } from '@dialpad/dialtone-icons/vue3';
 import { hasSlotContent, returnFirstEl } from '@/common/utils';
+import { DialtoneLocalization } from '@/localization';
 
 export default {
   compatConfig: { MODE: 3 },
@@ -94,6 +95,7 @@ export default {
   data () {
     return {
       hasSlotContent,
+      i18n: new DialtoneLocalization(),
     };
   },
 
