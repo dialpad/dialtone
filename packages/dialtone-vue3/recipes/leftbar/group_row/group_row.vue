@@ -23,7 +23,7 @@
 import { DtRecipeGeneralRow } from '@/recipes/leftbar/general_row';
 import { DtIconUsers } from '@dialpad/dialtone-icons/vue3';
 import { safeConcatStrings, extractVueListeners } from '@/common/utils';
-import { DtLocalizationMixin } from '@/common/mixins';
+import { DialtoneLocalization } from '@/localization';
 
 export default {
   compatConfig: { MODE: 3 },
@@ -33,8 +33,6 @@ export default {
     DtIconUsers,
     DtRecipeGeneralRow,
   },
-
-  mixins: [DtLocalizationMixin],
 
   inheritAttrs: false,
 
@@ -90,8 +88,11 @@ export default {
     },
   },
 
-  emits: [
-  ],
+  data () {
+    return {
+      i18n: new DialtoneLocalization(),
+    };
+  },
 
   computed: {
     groupCount () {
