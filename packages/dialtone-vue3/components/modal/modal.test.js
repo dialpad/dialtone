@@ -18,10 +18,6 @@ const baseProps = {
 };
 
 const baseSlots = {};
-const baseStubs = {
-  // this gets around transition async problems. See https://v1.test-utils.vuejs.org/guides/common-tips.html
-  transition: MOCK_TRANSITION_STUB(),
-};
 
 let mockProps = {};
 let mockSlots = {};
@@ -57,7 +53,7 @@ describe('DtModal Tests', () => {
   afterEach(() => {
     mockProps = {};
     mockSlots = {};
-    wrapper.destroy();
+    wrapper.unmount();
   });
 
   afterAll(() => {
