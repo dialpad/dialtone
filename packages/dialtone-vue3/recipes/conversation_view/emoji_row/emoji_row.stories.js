@@ -13,23 +13,26 @@ export const sharedEmojiReactionsData = [
   {
     emojiUnicodeOrShortname: '😀',
     isSelected: true,
-    ariaLabel: 'Emoji aria label',
-    tooltip: 'You reacted with 😀',
+    names: 'You',
     num: 1,
   },
   {
     emojiUnicodeOrShortname: '😒',
     isSelected: false,
-    ariaLabel: 'Emoji aria label',
-    tooltip: 'You reacted with 😒',
+    names: 'John Doe',
     num: 1,
   },
   {
+    emojiUnicodeOrShortname: '😌',
+    isSelected: true,
+    names: 'Olivia Chen, Benjamin Carter, Sophia Rodriguez, William Kim & Isabella Garcia',
+    num: 5,
+  },
+  {
     emojiUnicodeOrShortname: '🙃',
-    isSelected: false,
-    ariaLabel: 'Emoji aria label',
-    tooltip: 'You reacted with 🙃',
-    num: 99,
+    names: 'You & John Doe',
+    isSelected: true,
+    num: 2,
   },
 ];
 
@@ -41,6 +44,7 @@ export const argTypesData = {
         detail: `[{
           "emojiUnicodeOrShortname": string,
           "isSelected": boolean,
+          "names": string,
           "num": number,
         }]`,
       },
