@@ -77,6 +77,7 @@ import { EVENT_KEYNAMES } from '@/common/constants';
 import { DtIconClose } from '@dialpad/dialtone-icons/vue3';
 import { DtButton } from '@/components/button';
 import SrOnlyCloseButton from '@/common/sr_only_close_button.vue';
+import { DialtoneLocalization } from '@/localization';
 
 export default {
   compatConfig: { MODE: 3 },
@@ -168,6 +169,7 @@ export default {
     return {
       showCloseButton: true,
       isOpen: false,
+      i18n: new DialtoneLocalization(),
     };
   },
 
