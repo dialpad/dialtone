@@ -66,6 +66,7 @@
 <script>
 import { DtButton } from '@/components/button';
 import { DtIconChevronLeft, DtIconChevronRight, DtIconMoreHorizontal } from '@dialpad/dialtone-icons/vue3';
+import { DialtoneLocalization } from '@/localization';
 
 /**
  * Pagination allows you to divide large amounts of content into smaller chunks across multiple pages.
@@ -141,6 +142,7 @@ export default {
   data () {
     return {
       currentPage: this.activePage,
+      i18n: new DialtoneLocalization(),
     };
   },
 
