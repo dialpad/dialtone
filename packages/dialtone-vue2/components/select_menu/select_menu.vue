@@ -128,9 +128,8 @@ export default {
 
     /**
      * Select Menu Options, overridden by default slot. Each option has the following structure:
-     * `{ index: number (optional), value: number || string (required), label: string (required) }`
+     * `{ value: number || string (required), label: string (required) }`
      * @param {Object[]} options - Optional - A list that can be used to create a list of select menu options
-     * @param {number} options[].index - Optional - The index of the option
      * @param {number|string} options[].value - Required - The option value
      * @param {string} options[].label - Required - The option Label
      */

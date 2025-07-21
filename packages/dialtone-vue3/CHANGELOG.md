@@ -1,3 +1,32 @@
+## [3.185.4](https://github.com/dialpad/dialtone/compare/dialtone-vue3/v3.185.3...dialtone-vue3/v3.185.4) (2025-07-18)
+
+
+### Bug Fixes
+
+* **Rich Text Editor:** DLT-2633 fix position out of range error ([#830](https://github.com/dialpad/dialtone/issues/830)) ([30b5512](https://github.com/dialpad/dialtone/commit/30b55121a7de9100fb4df3d6b8f9d550997d4e65))
+
+## [3.185.3](https://github.com/dialpad/dialtone/compare/dialtone-vue3/v3.185.2...dialtone-vue3/v3.185.3) (2025-07-18)
+
+
+### Bug Fixes
+
+* **Emoji Row:** NO-JIRA tooltip text ([#824](https://github.com/dialpad/dialtone/issues/824)) ([d6623d1](https://github.com/dialpad/dialtone/commit/d6623d1d11ee0674d412f65aff674368952a8cb1))
+* **Modal:** NO-JIRA prevent losing focus when clicking inside the modal ([#825](https://github.com/dialpad/dialtone/issues/825)) ([a7d3d7d](https://github.com/dialpad/dialtone/commit/a7d3d7dc801ed9aedcbee07fddd59a7b923a1158))
+
+## [3.185.2](https://github.com/dialpad/dialtone/compare/dialtone-vue3/v3.185.1...dialtone-vue3/v3.185.2) (2025-07-08)
+
+
+### Bug Fixes
+
+* **Select:** NO-JIRA update validation to allow empty string value ([#816](https://github.com/dialpad/dialtone/issues/816)) ([82a2a6d](https://github.com/dialpad/dialtone/commit/82a2a6db4d45038c6528fd41d9c10ce303e6b512))
+
+## [3.185.1](https://github.com/dialpad/dialtone/compare/dialtone-vue3/v3.185.0...dialtone-vue3/v3.185.1) (2025-07-01)
+
+
+### Bug Fixes
+
+* **Message Input:** DLT-2605 fix slash command and close button ([#813](https://github.com/dialpad/dialtone/issues/813)) ([b4c687b](https://github.com/dialpad/dialtone/commit/b4c687b2a9aca29d65a4321229eb6af9ce483026))
+
 # [3.185.0](https://github.com/dialpad/dialtone/compare/dialtone-vue3/v3.184.2...dialtone-vue3/v3.185.0) (2025-06-21)
 
 

@@ -343,8 +343,14 @@ export default {
         ...this.$listeners,
 
         click: event => {
-          if (!this.closeOnClick) return;
-          (event.target === event.currentTarget) && this.close();
+          // Handle backdrop clicks for closing modal
+          if (this.closeOnClick && event.target === event.currentTarget) {
+            this.close();
+          } else if (this.show && event.target !== event.currentTarget) {
+            // Ensure focus stays within modal when clicking inside it
+            this.handleModalClick(event);
+          }
+
           this.$emit('click', event);
         },
 
@@ -361,9 +367,9 @@ export default {
           this.$emit('keydown', event);
         },
 
-        'after-enter': event => {
+        'after-enter': async () => {
           this.$emit('update:show', true);
-          (event.target === event.currentTarget) && this.setFocusAfterTransition();
+          await this.setFocusAfterTransition();
         },
       };
     },
@@ -407,11 +413,11 @@ export default {
       this.$emit('update:show', false);
     },
 
-    setFocusAfterTransition () {
+    async setFocusAfterTransition () {
       if (this.initialFocusElement === 'first') {
-        this.focusFirstElement();
+        await this.focusFirstElement();
       } else if (this.initialFocusElement.startsWith('#')) {
-        this.focusElementById(this.initialFocusElement);
+        await this.focusElementById(this.initialFocusElement);
       } else if (this.initialFocusElement instanceof HTMLElement) {
         this.initialFocusElement.focus();
       }
@@ -420,6 +426,20 @@ export default {
     trapFocus (e) {
       if (this.show) {
         this.focusTrappedTabPress(e);
+      }
+    },
+
+    handleModalClick (event) {
+      // Ensure focus stays within modal when clicking inside it
+      const clickedElement = event.target;
+      const focusableElements = this._getFocusableElements();
+
+      // If the clicked element is not focusable, ensure focus stays in modal
+      if (focusableElements.length && !focusableElements.includes(clickedElement)) {
+        // Check if current active element is still within the modal
+        if (!focusableElements.includes(document.activeElement)) {
+          this.focusFirstElement();
+        }
       }
     },
   },

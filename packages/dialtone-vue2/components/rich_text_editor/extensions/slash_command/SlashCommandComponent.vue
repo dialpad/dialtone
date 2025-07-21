@@ -16,7 +16,9 @@ export default {
     NodeViewWrapper,
   },
 
-  props: nodeViewProps,
+  props: {
+    ...nodeViewProps,
+  },
 
   emits: ['selected-command'],
 
@@ -27,7 +29,16 @@ export default {
   },
 
   created () {
-    this.$parent.$emit('selected-command', this.$props.node.attrs.command);
+    const command = this.$props.node.attrs.command;
+
+    // First emit the event using the component's own emit
+    this.$emit('selected-command', command);
+
+    // Access the callback from the editor's storage
+    const onSelectedCommand = this.editor?.storage?.['slash-commands']?.onSelectedCommand;
+    if (onSelectedCommand && typeof onSelectedCommand === 'function') {
+      onSelectedCommand(command);
+    }
   },
 };
 </script>

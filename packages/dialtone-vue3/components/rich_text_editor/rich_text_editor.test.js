@@ -434,4 +434,73 @@ describe('DtRichTextEditor tests', () => {
       });
     });
   });
+
+  describe('Slash Command Event Tests', function () {
+    describe('When slash command suggestion is enabled', function () {
+      let mockSelectedCommandListener;
+      let slashCommandSuggestion;
+
+      beforeEach(async function () {
+        mockSelectedCommandListener = vi.fn();
+        slashCommandSuggestion = {
+          items: () => [
+            { command: 'test', description: 'Test command' },
+            { command: 'example', description: 'Example command' },
+          ],
+        };
+
+        await wrapper.setProps({
+          slashCommandSuggestion,
+        });
+
+        wrapper.vm.$on?.('selected-command', mockSelectedCommandListener) ||
+        wrapper.vm.$el?.addEventListener?.('selected-command', mockSelectedCommandListener);
+      });
+
+      it('should emit selected-command event when slash command component is created', async function () {
+        // Get the editor instance
+        const editorInstance = wrapper.vm.editor;
+
+        // Manually create a slash command node to simulate selection
+        const slashCommandNode = editorInstance.schema.nodes['slash-commands'].create({
+          command: 'test',
+        });
+
+        // Insert the node into the editor
+        const tr = editorInstance.state.tr.insert(0, slashCommandNode);
+        editorInstance.view.dispatch(tr);
+
+        await wrapper.vm.$nextTick();
+
+        // Check if the selected-command event was emitted
+        const emittedEvents = wrapper.emitted('selected-command');
+        expect(emittedEvents[0][0]).toBe('test');
+      });
+
+      it('should handle different slash commands correctly', async function () {
+        const editorInstance = wrapper.vm.editor;
+
+        // Test with different command
+        const slashCommandNode = editorInstance.schema.nodes['slash-commands'].create({
+          command: 'example',
+        });
+
+        const tr = editorInstance.state.tr.insert(0, slashCommandNode);
+        editorInstance.view.dispatch(tr);
+
+        await wrapper.vm.$nextTick();
+
+        const emittedEvents = wrapper.emitted('selected-command');
+        expect(emittedEvents[0][0]).toBe('example');
+      });
+    });
+
+    describe('When slash command suggestion is not enabled', function () {
+      it('should not emit selected-command events', function () {
+        // Default props don't include slashCommandSuggestion
+        const emittedEvents = wrapper.emitted('selected-command');
+        expect(emittedEvents).toBeFalsy();
+      });
+    });
+  });
 });

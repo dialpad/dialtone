@@ -9,6 +9,30 @@ export const argsData = {
   onEmojiHovered: action('emoji-hovered'),
 };
 
+export const sharedEmojiReactionsData = [
+  {
+    emojiUnicodeOrShortname: '😀',
+    isSelected: true,
+    ariaLabel: 'Emoji aria label',
+    tooltip: 'You reacted with 😀',
+    num: 1,
+  },
+  {
+    emojiUnicodeOrShortname: '😒',
+    isSelected: false,
+    ariaLabel: 'Emoji aria label',
+    tooltip: 'You reacted with 😒',
+    num: 1,
+  },
+  {
+    emojiUnicodeOrShortname: '🙃',
+    isSelected: false,
+    ariaLabel: 'Emoji aria label',
+    tooltip: 'You reacted with 🙃',
+    num: 99,
+  },
+];
+
 export const argTypesData = {
   // Props
   reactions: {
@@ -67,28 +91,6 @@ export const Default = {
   render: DefaultTemplate,
 
   args: {
-    reactions: [
-      {
-        emojiUnicodeOrShortname: '😀',
-        isSelected: true,
-        num: 1,
-      },
-      {
-        emojiUnicodeOrShortname: '😒',
-        isSelected: false,
-        name: 'John Doe',
-        num: 1,
-      },
-      {
-        emojiUnicodeOrShortname: '😌',
-        isSelected: true,
-        num: 99,
-      },
-      {
-        emojiUnicodeOrShortname: '🙃',
-        isSelected: false,
-        num: 99,
-      },
-    ],
+    reactions: sharedEmojiReactionsData,
   },
 };

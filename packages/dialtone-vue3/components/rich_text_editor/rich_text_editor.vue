@@ -480,6 +480,13 @@ export default {
      * @type {String}
      */
     'selected',
+
+    /**
+     * Event fired when a slash command is selected
+     * @event selected-command
+     * @type {String}
+     */
+    'selected-command',
   ],
 
   data () {
@@ -600,7 +607,12 @@ export default {
       if (this.slashCommandSuggestion) {
         // Add both the suggestion plugin as well as means for user to add suggestion items to the plugin
         const suggestionObject = { ...this.slashCommandSuggestion, ...slashCommandSuggestion };
-        extensions.push(SlashCommandPlugin.configure({ suggestion: suggestionObject }));
+        extensions.push(SlashCommandPlugin.configure({
+          suggestion: suggestionObject,
+          onSelectedCommand: (command) => {
+            this.$emit('selected-command', command);
+          },
+        }));
       }
 
       // Emoji has some interactions with Enter key
@@ -724,6 +736,14 @@ export default {
           attributes: {
             ...this.inputAttrs,
             class: this.inputClass,
+          },
+
+          handleKeyDown: (view, event) => {
+            // When preventTyping is true, only allow backspace to take effect
+            if (this.preventTyping && event.key !== 'Backspace') {
+              return true; // Prevent the event from being processed
+            }
+            return false; // Allow the event to be processed normally
           },
 
           handlePaste: (view, event, slice) => {
@@ -984,12 +1004,6 @@ export default {
       });
       // The content has changed.
       this.editor.on('update', () => {
-        // When preventTyping is true and user wants to type, we revert to last value
-        // If Backspace (keyCode = 8) is pressed, we allow updating the text
-        if (this.preventTyping && this.editor.view?.input?.lastKeyCode !== 8) {
-          this.editor.commands.setContent(this.modelValue, false);
-          return;
-        }
         this.triggerInputChangeEvents();
       });
 

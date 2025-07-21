@@ -70,7 +70,12 @@ export default {
 
   methods: {
     close (e) {
-      this.$parent.$emit('meeting-pill-close', e);
+      // Get the callback from extension storage
+      const onCloseCallback = this.editor?.storage?.meetingPill?.onClose;
+
+      if (onCloseCallback && typeof onCloseCallback === 'function') {
+        onCloseCallback(e);
+      }
     },
   },
 };

@@ -75,6 +75,7 @@
         @text-input="onTextInput"
         @enter="onSend"
         @selected="selectedText = $event"
+        @selected-command="$emit('selected-command', $event)"
         @edit-link="initLinkDialog"
         @focus="isFocused = true"
         @blur="isFocused = false"
@@ -755,7 +756,14 @@ export default {
       // If an ordered list is nested within an unordered list, we only want to show the currently selected list as
       // active. This function performs the logic to determine the farthest active node from the root.
       lastActiveNodes,
-      additionalExtensions: [MeetingPill],
+      additionalExtensions: [
+        MeetingPill.configure({
+          onClose: (event) => {
+            this.$emit('meeting-pill-close', event);
+          },
+        }),
+      ],
+
       internalInputValue: this.value, // internal input content
       imagePickerFocus: false,
       emojiPickerFocus: false,
@@ -773,7 +781,6 @@ export default {
   },
 
   computed: {
-
     showSendIcon () {
       return !this.showSend.text;
     },

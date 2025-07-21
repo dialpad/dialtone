@@ -9,6 +9,7 @@ import { DtTooltip } from '@/components/tooltip';
 // Constants
 const testEmojiObj = {
   emojiUnicodeOrShortname: '🙃',
+  names: 'John Doe & Olivia Chen',
   isSelected: false,
   num: 2,
 };
@@ -17,7 +18,7 @@ const testEmojiObj = {
 // They are non-printing characters that help text layout engines to ensure that the interpolated strings are handled correctly
 // in the situation where the text direction of the substitution might not match the text direction of the localized text.
 // https://github.com/django-ftl/fluent-compiler/blob/master/docs/usage.rst#formatting-messages
-const MOCK_LOCALIZED_EMOJI_REACTION_ARIA_LABEL = '\u20682\u2069 people reacted with \u2068🙃\u2069.';
+const MOCK_LOCALIZED_EMOJI_REACTION_ARIA_LABEL = `\u2068${testEmojiObj.names}\u2069 reacted with \u2068${testEmojiObj.emojiUnicodeOrShortname}\u2069`;
 
 const basePropsData = {
   reactions: [
@@ -112,7 +113,7 @@ describe('DtRecipeEmojiRow Tests', function () {
      */
 
     describe('Default Render', function () {
-      it('should render a reaction button', () => {
+      it('should render a reaction button with correct aria-label', () => {
         expect(emojiReactionButton.attributes('aria-label')).toContain(MOCK_LOCALIZED_EMOJI_REACTION_ARIA_LABEL);
       });
     });
