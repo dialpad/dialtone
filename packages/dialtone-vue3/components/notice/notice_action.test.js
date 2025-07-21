@@ -28,8 +28,6 @@ describe('DtNoticeAction tests', () => {
     _setChildWrappers();
   };
 
-  console.info(props);
-
   const _setChildWrappers = () => {
     closeButton = wrapper.find('[data-qa="dt-notice-action-close-button"]');
     srOnlyCloseButton = wrapper.find('[data-qa="dt-sr-only-close-button"]');
