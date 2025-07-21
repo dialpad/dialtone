@@ -183,6 +183,12 @@ export const argTypesData = {
       disable: true,
     },
   },
+
+  onAddEmoji: {
+    table: {
+      disable: true,
+    },
+  },
 };
 
 // Set default values at the story level here.
@@ -220,6 +226,7 @@ export const argsData = {
   onJsonInput: action('json-input'),
   onHtmlInput: action('html-input'),
   onTextInput: action('text-input'),
+  onAddEmoji: action('add-emoji'),
   onSelectMedia: action('select-media'),
   onSelectedEmoji: action('selected-emoji'),
   onSelectedCommand: action('selected-command'),
@@ -256,6 +263,7 @@ export const Default = {
 export const SendButtonWithText = {
   render: DefaultTemplate,
   args: {
+    ...argsData,
     showSend: {
       text: 'Save',
     },
