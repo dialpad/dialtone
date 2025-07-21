@@ -44,7 +44,6 @@
           :close="close"
         />
       </ul>
-      <sr-only-close-button @close="close" />
     </template>
     <template #footerContent="{ close }">
       <!-- @slot Slot for the footer content -->
@@ -63,14 +62,12 @@ import { LIST_ITEM_NAVIGATION_TYPES } from '@/components/list_item';
 import { DROPDOWN_PADDING_CLASSES } from './dropdown_constants';
 import { getUniqueString } from '@/common/utils';
 import { EVENT_KEYNAMES } from '@/common/constants';
-import SrOnlyCloseButton from '@/common/sr_only_close_button.vue';
 
 export default {
   name: 'DtDropdown',
 
   components: {
     DtPopover,
-    SrOnlyCloseButton,
   },
 
   mixins: [
