@@ -17,22 +17,36 @@ const baseProps = {
   getPos: () => 0,
   updateAttributes: vi.fn(),
   deleteNode: vi.fn(),
+  decorations: {},
+  selected: false,
+  extension: {},
 };
 
 const baseGlobal = {
   stubs: {
     'dt-item-layout': {
-      template: '<div><slot name="left" /><slot /><slot name="right" /></div>',
+      template: '<div class="d-recipe-message-input-meeting-pill__layout"><slot name="left" /><slot /><slot name="right" /></div>',
     },
     'dt-button': {
-      template: '<button @click="$emit(\'click\', $event)"><slot name="icon" /></button>',
-      emits: ['click'],
+      template: '<button @click="$emit(\'click\', $event)" :aria-label="$attrs[\'aria-label\']" :title="$attrs.title"><slot name="icon" /></button>',
+      inheritAttrs: false,
     },
     'dt-icon-video': {
       template: '<div data-testid="video-icon" />',
     },
     'dt-icon-close': {
       template: '<div data-testid="close-icon" />',
+    },
+    'node-view-wrapper': {
+      template: '<div class="d-d-inline-block"><slot /></div>',
+      provide () {
+        return {
+          onDragStart: () => {},
+          decorationClasses: {
+            value: '',
+          },
+        };
+      },
     },
   },
 };
@@ -66,6 +80,11 @@ describe('MeetingPill', () => {
       ],
       content: '',
     });
+
+    // Set up the editor storage properly
+    editor.storage.meetingPill = {
+      onClose: mockOnClose,
+    };
 
     baseProps.editor = editor;
 
@@ -103,16 +122,6 @@ describe('MeetingPill', () => {
     });
 
     it('renders the close button with correct aria-label', () => {
-      mockProps = {
-        node: {
-          attrs: {
-            text: 'Test Meeting',
-          },
-        },
-      };
-
-      updateWrapper();
-
       const closeButton = wrapper.find('button');
       expect(closeButton.exists()).toBe(true);
       expect(closeButton.attributes('aria-label')).toBe('Click to close');

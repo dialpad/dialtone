@@ -63,11 +63,6 @@ describe('MeetingPill', () => {
       propsData: { ...baseProps, ...mockProps },
       stubs: { ...baseStubs, ...mockStubs },
       localVue: testContext.localVue,
-      mocks: {
-        i18n: {
-          $t: vi.fn(() => 'Close'),
-        },
-      },
     });
   };
 
