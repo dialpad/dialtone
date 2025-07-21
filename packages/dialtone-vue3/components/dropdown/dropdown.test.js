@@ -1,5 +1,6 @@
 import { config, mount } from '@vue/test-utils';
 import DtDropdown from './dropdown.vue';
+import SrOnlyCloseButton from '@/common/sr_only_close_button.vue';
 
 const MOCK_HIGHLIGHT_STUB = vi.fn();
 
@@ -24,6 +25,8 @@ describe('DtDropdown Tests', () => {
   let wrapper;
   let anchorElement;
   let listWrapper;
+  let popover;
+  let popoverContent;
   let closeButton;
 
   const updateWrapper = () => {
@@ -40,8 +43,10 @@ describe('DtDropdown Tests', () => {
     });
 
     anchorElement = wrapper.find('#anchor');
-    listWrapper = wrapper.find('[data-qa="dt-dropdown-list-wrapper"]');
-    closeButton = wrapper.find('[data-qa="dt-sr-only-close-button"]');
+    popover = wrapper.findComponent({ ref: 'popover' });
+    popoverContent = popover.findComponent({ ref: 'content' });
+    listWrapper = popoverContent.find('[data-qa="dt-dropdown-list-wrapper"]');
+    closeButton = wrapper.findComponent(SrOnlyCloseButton);
   };
 
   beforeAll(() => {
