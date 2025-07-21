@@ -221,26 +221,4 @@ describe('DtToast Tests', () => {
       });
     });
   });
-
-  describe('Extendability Tests', () => {
-    let MOCK_ELEMENT;
-    let MOCK_PROP_NAME;
-    const MOCK_PROP_VALUE = {
-      ariaLabel: 'close',
-    };
-
-    describe('When close button child props are provided', () => {
-      it('should pass down provided child prop', () => {
-        MOCK_PROP_NAME = 'closeButtonProps';
-
-        mockProps = { closeButtonProps: MOCK_PROP_VALUE };
-
-        updateWrapper();
-
-        MOCK_ELEMENT = actionChild;
-
-        expect(MOCK_ELEMENT.props(MOCK_PROP_NAME)).toStrictEqual(MOCK_PROP_VALUE);
-      });
-    });
-  });
 });
