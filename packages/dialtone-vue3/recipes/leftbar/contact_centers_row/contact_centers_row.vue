@@ -83,6 +83,7 @@ import { DtBadge } from '@/components/badge';
 import { DtButton } from '@/components/button';
 import { DtEmojiTextWrapper } from '@/components/emoji_text_wrapper';
 import { DtIconChevronDown, DtIconHeadphones } from '@dialpad/dialtone-icons/vue3';
+import { DialtoneLocalization } from '@/localization';
 
 export default {
   compatConfig: { MODE: 3 },
@@ -95,8 +96,6 @@ export default {
     DtIconHeadphones,
     DtIconChevronDown,
   },
-
-  mixins: [DtLocalizationMixin],
 
   inheritAttrs: false,
 
@@ -167,6 +166,7 @@ export default {
   data () {
     return {
       labelWidth: 'auto',
+      i18n: new DialtoneLocalization(),
     };
   },
 
