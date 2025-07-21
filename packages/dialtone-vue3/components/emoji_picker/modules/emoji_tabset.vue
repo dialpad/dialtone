@@ -32,7 +32,6 @@
 import { computed, ref, watch } from 'vue';
 import { DtTab, DtTabGroup } from '@/components/tab';
 import { returnFirstEl } from '@/common/utils';
-import { EMOJI_PICKER_CATEGORIES } from '@/components/emoji_picker/emoji_picker_constants.js';
 import {
   DtIconClock,
   DtIconSatisfied,
@@ -82,7 +81,7 @@ const props = defineProps({
    * @type {Array}
    * @required
    */
-  tabsetLabels: {
+  tabSetLabels: {
     type: Array,
     required: true,
   },
