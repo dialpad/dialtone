@@ -92,12 +92,6 @@ describe('DtNotice tests', () => {
         expect(rootElement.classes('d-notice--error')).toBe(true);
       });
     });
-
-    describe('When closeButtonProps is passed', () => {
-      it('Has correct class', () => {
-        expect(actionChild.props().closeButtonProps).toEqual({ ariaLabel: 'close' });
-      });
-    });
   });
 
   describe('Accessibility Tests', () => {

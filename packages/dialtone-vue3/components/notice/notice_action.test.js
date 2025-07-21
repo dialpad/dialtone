@@ -28,6 +28,8 @@ describe('DtNoticeAction tests', () => {
     _setChildWrappers();
   };
 
+  console.info(props);
+
   const _setChildWrappers = () => {
     closeButton = wrapper.find('[data-qa="dt-notice-action-close-button"]');
     srOnlyCloseButton = wrapper.find('[data-qa="dt-sr-only-close-button"]');
@@ -63,6 +65,7 @@ describe('DtNoticeAction tests', () => {
       beforeEach(async () => {
         _setWrappers();
         await wrapper.setProps({ hideClose: true });
+        _setChildWrappers();
       });
 
       it('Close button is not displayed', () => {
@@ -79,7 +82,7 @@ describe('DtNoticeAction tests', () => {
     describe('When hideClose is false', () => {
       describe('When close button is clicked', () => {
         beforeEach(async () => {
-          closeButton.vm.$emit('click');
+          await closeButton.trigger('click');
         });
         it('emits event', () => {
           expect(wrapper.emitted('close')).toBeTruthy();
