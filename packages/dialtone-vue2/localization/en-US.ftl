@@ -4,16 +4,16 @@ DIALTONE_BREADCRUMBS_ARIA_LABEL = breadcrumbs
 DIALTONE_LOADING = loading
 DIALTONE_UNREAD_MESSAGE_COUNT_TEXT =
   { $unreadCount ->
-  [0] No unread messages
-  [1] 1 unread message
-  *[other] {$unreadCount} unread messages
-    }
+    [0] No unread messages
+    [1] 1 unread message
+    *[other] {$unreadCount} unread messages
+  }
 DIALTONE_UNREAD_MENTION_COUNT_TEXT =
   { $unreadCount ->
-  [0] No unread mentions
-  [1] 1 unread mention
-  *[other] {$unreadCount} unread mentions
-    }
+    [0] No unread mentions
+    [1] 1 unread mention
+    *[other] {$unreadCount} unread mentions
+  }
 DIALTONE_TYPING_TEXT = Typing
 
 DIALTONE_ATTACHMENT_CAROUSEL_CLICK_TO_OPEN_ARIA_LABEL = Click to open
@@ -88,9 +88,9 @@ DIALTONE_GENERAL_ROW_DND_TEXT_TOOLTIP = Do not disturb
 
 DIALTONE_GROUP_ROW_GROUP_COUNT_TEXT =
   { $count ->
-  [1] 1 user
-  *[other] {$count} users
-    }
+    [1] 1 user
+    *[other] {$count} users
+  }
 
 DIALTONE_IVR_NODE_MENU_BUTTON_ARIA_LABEL = Open menu
 DIALTONE_IVR_NODE_PROMPTMENU_ARIA_LABEL = prompt menu node
