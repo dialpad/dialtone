@@ -39,7 +39,6 @@
           @close="$emit('close')"
         />
       </div>
-
       <!-- Content Section -->
       <div class="d-toast-alternate__content">
         <slot>
@@ -53,15 +52,15 @@
 <script>
 import utils from '@/common/utils';
 import DtToastLayoutAlternateIcon from './toast_layout_alternate_icon.vue';
-import { DtNoticeContent, DtNoticeAction } from '@/components/notice';
+import { DtNoticeAction, DtNoticeContent } from '@/components/notice';
 import { TOAST_ROLES, TOAST_ALTERNATE_KINDS } from '../toast_constants.js';
 export default {
   name: 'ToastLayoutAlternate',
 
   components: {
-    DtToastLayoutAlternateIcon,
-    DtNoticeContent,
     DtNoticeAction,
+    DtNoticeContent,
+    DtToastLayoutAlternateIcon,
   },
 
   inheritAttrs: false,
@@ -149,8 +148,6 @@ export default {
       default: false,
     },
   },
-
-  emits: ['close'],
 
   computed: {
     kindClass () {
