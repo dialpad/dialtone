@@ -220,7 +220,7 @@ import {
   DtIconStrikethrough,
   DtIconUnderline,
 } from '@dialpad/dialtone-icons/vue3';
-import { DtLocalizationMixin } from '@/common/mixins';
+import { DialtoneLocalization } from '@/localization';
 
 export default {
   compatConfig: { MODE: 3 },
@@ -531,6 +531,7 @@ export default {
       showLinkInput: false,
       linkInput: '',
       currentButtonRefIndex: 0,
+      i18n: new DialtoneLocalization(),
     };
   },
 
