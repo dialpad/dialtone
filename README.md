@@ -15,7 +15,7 @@ The below usage instructions are for the combined package.
 #### Using Vue@3
 
 ```shell
-npm install @dialpad/dialtone
+npm install @dialpad/dialtone @dialpad/i18n
 ```
 
 #### Using Vue@2
