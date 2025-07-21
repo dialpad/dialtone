@@ -2,6 +2,7 @@ import { mount } from '@vue/test-utils';
 import DtRecipeComboboxMultiSelect from './combobox_multi_select.vue';
 import { VALIDATION_MESSAGE_TYPES } from '@/common/constants';
 import { flushPromises } from '@/common/utils';
+import SrOnlyCloseButtonComponent from '@/common/sr_only_close_button.vue';
 
 // Constants
 const baseProps = {
@@ -33,15 +34,20 @@ describe('DtRecipeComboboxMultiSelect Tests', () => {
     inputLabel = wrapper.find('[data-qa="dt-input-label"]');
     inputDescription = wrapper.find('[data-qa="dt-input-description"]');
     validationMsg = wrapper.find('[data-qa="validation-message"]');
-    srOnlyCloseBtn = wrapper.find('[data-qa="dt-sr-only-close-button"]');
+    srOnlyCloseBtn = wrapper.findComponent(SrOnlyCloseButtonComponent);
     popoverContainer = wrapper.find('[data-qa="dt-popover-container"]');
   };
 
   const _setWrappers = () => {
     wrapper = mount(DtRecipeComboboxMultiSelect, {
       props,
-      attrs,
       slots,
+      attrs,
+      global: {
+        stubs: {
+          transition: false,
+        },
+      },
       provide,
       attachTo: document.body,
     });
@@ -55,6 +61,7 @@ describe('DtRecipeComboboxMultiSelect Tests', () => {
     global.requestAnimationFrame = vi.fn();
     global.cancelAnimationFrame = vi.fn();
   });
+
   beforeEach(() => {
     _setWrappers();
   });
@@ -66,6 +73,12 @@ describe('DtRecipeComboboxMultiSelect Tests', () => {
     slots = {};
     provide = {};
     wrapper.unmount();
+  });
+
+  afterAll(() => {
+    // Restore RequestAnimationFrame and cancelAnimationFrame
+    global.requestAnimationFrame = undefined;
+    global.cancelAnimationFrame = undefined;
   });
 
   describe('Presentation Tests', () => {
@@ -246,7 +259,7 @@ describe('DtRecipeComboboxMultiSelect Tests', () => {
         expect(popoverContainer.classes('d-popover__anchor--opened')).toBe(true);
       });
 
-      it('Should contain a visually hidden close button', () => {
+      it('Should contain a visually hidden close button', async () => {
         expect(srOnlyCloseBtn.exists()).toBe(true);
       });
 
