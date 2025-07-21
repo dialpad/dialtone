@@ -108,7 +108,7 @@ import { DtButton } from '@/components/button';
 import { DtStack } from '@/components/stack';
 import { DtIconLink2 } from '@dialpad/dialtone-icons/vue3';
 import DtRecipeMessageInputButton from './message_input_button.vue';
-import { DtLocalizationMixin } from '@/common/mixins';
+import { DialtoneLocalization } from '@/localization';
 
 export default {
   compatConfig: { MODE: 3 },
@@ -122,8 +122,6 @@ export default {
     DtIconLink2,
     DtRecipeMessageInputButton,
   },
-
-  mixins: [DtLocalizationMixin],
 
   props: {
     open: {
@@ -149,6 +147,7 @@ export default {
       linkText: '',
       linkInput: '',
       isOpen: false,
+      i18n: new DialtoneLocalization(),
     };
   },
 

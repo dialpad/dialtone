@@ -281,7 +281,7 @@ import {
 } from '@dialpad/dialtone-icons/vue3';
 import DtRecipeMessageInputTopbar from './message_input_topbar.vue';
 import DtRecipeMessageInputLink from './message_input_link.vue';
-import { DtLocalizationMixin } from '@/common/mixins';
+import { DialtoneLocalization } from '@/localization';
 
 import {
   EDITOR_SUPPORTED_LINK_PROTOCOLS,
@@ -307,8 +307,6 @@ export default {
     DtIconSatisfied,
     DtIconSend,
   },
-
-  mixins: [DtLocalizationMixin],
 
   inheritAttrs: false,
 
@@ -759,6 +757,7 @@ export default {
       selectedText: '',
       text: '',
       hideLinkBubbleMenu: false,
+      i18n: new DialtoneLocalization(),
     };
   },
 

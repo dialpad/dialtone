@@ -39,7 +39,7 @@ import { NodeViewWrapper, nodeViewProps } from '@tiptap/vue-3';
 import { DtItemLayout } from '@/components/item_layout';
 import { DtIconClose, DtIconVideo } from '@dialpad/dialtone-icons/vue3';
 import { DtButton } from '@/components/button';
-import { DtLocalizationMixin } from '@/common/mixins';
+import { DialtoneLocalization } from '@/localization';
 
 export default {
   name: 'MeetingPill',
@@ -52,11 +52,15 @@ export default {
     DtIconVideo,
   },
 
-  mixins: [DtLocalizationMixin],
-
   props: nodeViewProps,
 
   emits: ['meeting-pill-close'],
+
+  data () {
+    return {
+      i18n: new DialtoneLocalization(),
+    };
+  },
 
   computed: {
     closeButtonTitle () {
