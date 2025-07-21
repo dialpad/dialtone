@@ -1,7 +1,6 @@
 <template>
   <dt-modal
     title="Example title"
-    :close-button-props="{ ariaLabel: 'Close modal' }"
     :show="isOpen"
     :banner-title="bannerTitle"
     :banner-kind="bannerKind"

@@ -6,7 +6,6 @@
       :important="important"
       :duration="duration"
       :kind="kind"
-      :close-button-props="{ ariaLabel: 'Close button' }"
       @close="$emit('close')"
       @update:show="$emit('update:show', $event)"
     >
