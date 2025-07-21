@@ -9,14 +9,7 @@ figma_url: https://www.figma.com/design/W58r5BkO8qTw3vem9YieJd/DT9-Component-Lib
 ---
 
 <code-well-header>
-  <dt-datepicker
-    change-to-label="Change to"
-    prev-month-label="Previous month"
-    next-month-label="Next month"
-    prev-year-label="Previous year"
-    next-year-label="Next year"
-    select-day-label="Select day"
-  />
+  <dt-datepicker />
 </code-well-header>
 
 ## Usage
@@ -37,14 +30,7 @@ With this we accomplish the requirement to have the previous year button focused
 ### Default
 
 <code-well-header>
-  <dt-datepicker
-    change-to-label="Change to"
-    prev-month-label="Previous month"
-    next-month-label="Next month"
-    prev-year-label="Previous year"
-    next-year-label="Next year"
-    select-day-label="Select day"
-  />
+  <dt-datepicker />
 </code-well-header>
 
 <code-example-tabs
@@ -170,15 +156,7 @@ htmlCode='
 </div>
 '
 vueCode='
-<dt-datepicker
-  change-to-label="Change to"
-  prev-month-label="Previous month"
-  next-month-label="Next month"
-  prev-year-label="Previous year"
-  next-year-label="Next year"
-  select-day-label="Select day"
-  :selected-date="new Date()"
-/>
+<dt-datepicker :selected-date="new Date()" />
 '
 showHtmlWarning />
 
@@ -209,15 +187,7 @@ showHtmlWarning />
       </dt-button>
     </template>
     <template #content>
-      <dt-datepicker
-        :locale="locale"
-        :prev-month-label="prevMonthLabel"
-        :next-month-label="nextMonthLabel"
-        :prev-year-label="prevYearLabel"
-        :next-year-label="nextYearLabel"
-        :select-day-label="selectDayLabel"
-        :change-to-label="changeToLabel"
-      />
+      <dt-datepicker />
     </template>
   </dt-popover>
 </code-well-header>
@@ -359,14 +329,7 @@ vueCode='
     </dt-button>
   </template>
   <template #content>
-    <dt-datepicker
-      change-to-label="Change to"
-      prev-month-label="Previous month"
-      next-month-label="Next month"
-      prev-year-label="Previous year"
-      next-year-label="Next year"
-      select-day-label="Select day"
-    />
+    <dt-datepicker />
   </template>
 </dt-popover>
 '
@@ -419,13 +382,6 @@ The following functions are available for date formatting.
   >
     <dt-stack class="d-ai-center">
       <dt-datepicker
-        :locale="locale"
-        :prev-month-label="prevMonthLabel"
-        :next-month-label="nextMonthLabel"
-        :prev-year-label="prevYearLabel"
-        :next-year-label="nextYearLabel"
-        :select-day-label="selectDayLabel"
-        :change-to-label="changeToLabel"
         :selected-date="currentSelectedDate"
         @selected-date="currentSelectedDate = $event;"
       />
@@ -569,14 +525,6 @@ import { ref, inject } from 'vue';
 
 const dialtoneUtils = inject('dialtoneUtils');
 const { formatLong, formatMedium, formatShort, formatNoYear, formatNumerical } = dialtoneUtils;
-
-const locale = 'en-US';
-const changeToLabel = 'Change to';
-const prevMonthLabel = 'Previous month';
-const nextMonthLabel = 'Next month';
-const prevYearLabel = 'Previous year';
-const nextYearLabel = 'Next year';
-const selectDayLabel = 'Select day';
 
 const currentSelectedDate = ref(new Date());
 const datepickerOpened = ref(false);
