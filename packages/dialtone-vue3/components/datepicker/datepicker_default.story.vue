@@ -12,31 +12,31 @@
       </tr>
       <tr>
         <td>formatLong</td>
-        <td>{{ formatLong(currentSelectedDate) }}</td>
+        <td>{{ formatLong(currentSelectedDate, $attrs.locale) }}</td>
       </tr>
       <tr>
         <td>formatMedium</td>
-        <td>{{ formatMedium(currentSelectedDate) }}</td>
+        <td>{{ formatMedium(currentSelectedDate, $attrs.locale) }}</td>
       </tr>
       <tr>
         <td>formatShort</td>
-        <td>{{ formatShort(currentSelectedDate) }}</td>
+        <td>{{ formatShort(currentSelectedDate, $attrs.locale) }}</td>
       </tr>
       <tr>
         <td>formatShort (no weekday)</td>
-        <td>{{ formatShort(currentSelectedDate, false) }}</td>
+        <td>{{ formatShort(currentSelectedDate, $attrs.locale, false) }}</td>
       </tr>
       <tr>
         <td>formatNoYear</td>
-        <td>{{ formatNoYear(currentSelectedDate) }}</td>
+        <td>{{ formatNoYear(currentSelectedDate, $attrs.locale) }}</td>
       </tr>
       <tr>
         <td>formatNoYear (abbreviated)</td>
-        <td>{{ formatNoYear(currentSelectedDate, true) }}</td>
+        <td>{{ formatNoYear(currentSelectedDate, $attrs.locale, true) }}</td>
       </tr>
       <tr>
         <td>formatNumerical</td>
-        <td>{{ formatNumerical(currentSelectedDate) }}</td>
+        <td>{{ formatNumerical(currentSelectedDate, $attrs.locale) }}</td>
       </tr>
     </table>
     <br>
