@@ -120,7 +120,8 @@
       "import": "./dist/lib/*/index.js",
       "require": "./dist/lib/*/index.cjs"
     },
-    "./component-documentation.json": "./dist/component-documentation.json"
+    "./component-documentation.json": "./dist/component-documentation.json",
+    "./*": "./dist/*"
   },
   "nx": {
     "includedScripts": [

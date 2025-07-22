@@ -17,10 +17,6 @@ export function useMonthYearPicker (props, emits) {
     return getCalendarDays(selectMonth.value, selectYear.value, highlightedDay.value);
   });
 
-  const formattedMonth = computed(() => {
-    return (month) => formatMonth(month, INTL_MONTH_FORMAT, i18n.currentLocale);
-  });
-
   watch(selectMonth, () => {
     highlightDay();
     emits('calendar-days', calendarDays.value);
@@ -30,6 +26,10 @@ export function useMonthYearPicker (props, emits) {
     highlightDay();
     emits('calendar-days', calendarDays.value);
   }, { immediate: true });
+
+  function formattedMonth (month) {
+    return formatMonth(month, INTL_MONTH_FORMAT, i18n.currentLocale);
+  }
 
   function setDayRef (el) {
     if (!focusRefs.value.includes(el)) {
@@ -123,7 +123,7 @@ export function useMonthYearPicker (props, emits) {
   }
 
   function previousMonthAriaLabel () {
-    return `${i18n.$t('DIALTONE_DATEPICKER_CHANGE_TO')} ${i18n.$t('DIALTONE_DATEPICKER_PREVIOUS_MONTH')} ${this.formattedMonth(selectMonth.value - 1)}`;
+    return `${i18n.$t('DIALTONE_DATEPICKER_CHANGE_TO')} ${i18n.$t('DIALTONE_DATEPICKER_PREVIOUS_MONTH')} ${formattedMonth(selectMonth.value - 1)}`;
   }
 
   function nextYearAriaLabel () {
@@ -131,7 +131,7 @@ export function useMonthYearPicker (props, emits) {
   }
 
   function nextMonthAriaLabel () {
-    return `${i18n.$t('DIALTONE_DATEPICKER_CHANGE_TO')} ${i18n.$t('DIALTONE_DATEPICKER_NEXT_MONTH')} ${this.formattedMonth(selectMonth.value + 1)}`;
+    return `${i18n.$t('DIALTONE_DATEPICKER_CHANGE_TO')} ${i18n.$t('DIALTONE_DATEPICKER_NEXT_MONTH')} ${formattedMonth(selectMonth.value + 1)}`;
   }
 
   return {

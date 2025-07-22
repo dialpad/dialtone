@@ -6,6 +6,7 @@ import 'overlayscrollbars/overlayscrollbars.css';
 import { OverlayScrollbars, ClickScrollPlugin } from 'overlayscrollbars';
 import { onBeforeMount, provide, ref } from 'vue';
 import { flushPromises } from '@workspaceRoot/common/utils/client.mjs';
+import { DialtoneLocalization } from '@dialpad/dialtone-vue/localization/index';
 
 // CSS
 import '@dialpad/dialtone-css/lib/dist/dialtone.css';
@@ -67,6 +68,8 @@ export default defineClientConfig({
       const preferredTheme = localStorage.getItem('preferredTheme') || 'system';
       const currentTheme = ref(preferredTheme);
       provide('currentTheme', currentTheme);
+      // eslint-disable-next-line no-unused-vars
+      const dialtoneLocalization = new DialtoneLocalization('en-US');
     });
   },
   layouts: {

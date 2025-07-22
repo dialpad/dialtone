@@ -9,7 +9,7 @@ figma_url: https://www.figma.com/design/W58r5BkO8qTw3vem9YieJd/DT9-Component-Lib
 ---
 
 <code-well-header>
-  <dt-datepicker />
+  <dt-datepicker></dt-datepicker>
 </code-well-header>
 
 ## Usage
@@ -30,7 +30,7 @@ With this we accomplish the requirement to have the previous year button focused
 ### Default
 
 <code-well-header>
-  <dt-datepicker />
+  <dt-datepicker></dt-datepicker>
 </code-well-header>
 
 <code-example-tabs
@@ -156,7 +156,7 @@ htmlCode='
 </div>
 '
 vueCode='
-<dt-datepicker :selected-date="new Date()" />
+<dt-datepicker :selected-date="new Date()"></dt-datepicker>
 '
 showHtmlWarning />
 
@@ -187,7 +187,7 @@ showHtmlWarning />
       </dt-button>
     </template>
     <template #content>
-      <dt-datepicker />
+      <dt-datepicker></dt-datepicker>
     </template>
   </dt-popover>
 </code-well-header>
@@ -329,7 +329,7 @@ vueCode='
     </dt-button>
   </template>
   <template #content>
-    <dt-datepicker />
+    <dt-datepicker></dt-datepicker>
   </template>
 </dt-popover>
 '
@@ -337,7 +337,7 @@ vueCode='
 
 ## Vue API
 
-<component-vue-api component-name="datepicker" />
+<component-vue-api component-name="datepicker"></component-vue-api>
 
 ## Accessibility
 
@@ -392,49 +392,49 @@ The following functions are available for date formatting.
     <table class="d-table d-body--sm d-bt d-bc-default d-fl1">
       <tr>
         <th scope="row" class="d-code--sm">formatLong</th>
-        <td>{{ formatLong(currentSelectedDate, locale) }}</td>
+        <td>{{ formatLong(currentSelectedDate) }}</td>
       </tr>
       <tr>
         <th scope="row" class="d-code--sm">formatMedium</th>
-        <td>{{ formatMedium(currentSelectedDate, locale) }}</td>
+        <td>{{ formatMedium(currentSelectedDate) }}</td>
       </tr>
       <tr>
         <th scope="row" class="d-code--sm">formatShort</th>
-        <td>{{ formatShort(currentSelectedDate, locale) }}</td>
+        <td>{{ formatShort(currentSelectedDate) }}</td>
       </tr>
       <tr>
         <th scope="row" class="d-code--sm">formatShort (no weekday)</th>
-        <td>{{ formatShort(currentSelectedDate, locale, false) }}</td>
+        <td>{{ formatShort(currentSelectedDate, false) }}</td>
       </tr>
       <tr>
         <th scope="row" class="d-code--sm">formatNoYear</th>
-        <td>{{ formatNoYear(currentSelectedDate, locale) }}</td>
+        <td>{{ formatNoYear(currentSelectedDate) }}</td>
       </tr>
       <tr>
         <th scope="row" class="d-code--sm">formatNoYear (abbreviated)</th>
-        <td>{{ formatNoYear(currentSelectedDate, locale, true) }}</td>
+        <td>{{ formatNoYear(currentSelectedDate, true) }}</td>
       </tr>
       <tr>
         <th scope="row" class="d-code--sm">formatNumerical</th>
-        <td>{{ formatNumerical(currentSelectedDate, locale) }}</td>
+        <td>{{ formatNumerical(currentSelectedDate) }}</td>
       </tr>
     </table>
   </dt-stack>
 </div>
 
-<!-- TODO: Autogenerate this docs from jsdocs in packages/dialtone-vue2/components/datepicker/formatUtils.js -->
+<!-- TODO: Autogenerate the docs from JSDocs in packages/dialtone-vue2/components/datepicker/formatUtils.js -->
 ### formatLong
 
-**formatLong**(`date`, `locale` = 'default'): `string`
+**formatLong**(`date`, `locale`): `string`
 
 Formats a date into a long format using the specified locale.
 
 #### Parameters
 
-| Name | Type | Description |
-| :------ | :------ | :------ |
-| `date` | `Date` | The date to format |
-| `locale` | `string` | The locale to use for formatting. Defaults to 'default'. |
+| Name | Type | Description                                                   |
+| :------ | :------ |:--------------------------------------------------------------|
+| `date` | `Date` | The date to format                                            |
+| `locale` | `string` | The locale to use for formatting. Defaults to Dialtone preferred locale. |
 
 #### Returns
 
@@ -444,7 +444,7 @@ The formatted date string.
 
 ### formatMedium
 
-**formatMedium**(`date`, `locale` = 'default'): `string`
+**formatMedium**(`date`, `locale`): `string`
 
 Formats the given date in medium format.
 
@@ -453,7 +453,7 @@ Formats the given date in medium format.
 | Name | Type | Description |
 | :------ | :------ | :------ |
 | `date` | `Date` | The date to format |
-| `locale` | `string` | The locale to use for formatting. Defaults to 'default'. |
+| `locale` | `string` | The locale to use for formatting. Defaults to Dialtone preferred locale. |
 
 #### Returns
 
@@ -463,7 +463,7 @@ The formatted date string.
 
 ### formatShort
 
-**formatShort**(`date`, `locale` = 'default', `showWeekday`= true): `string`
+**formatShort**(`date`, `locale`, `showWeekday`= true): `string`
 
 Formats a date into a short string representation.
 
@@ -472,7 +472,7 @@ Formats a date into a short string representation.
 | Name | Type | Description |
 | :------ | :------ | :------ |
 | `date` | `Date` | The date to format |
-| `locale` | `string` | The locale to use for formatting. Defaults to 'default'. |
+| `locale` | `string` | The locale to use for formatting. Defaults to Dialtone preferred locale. |
 | `showWeekday` | `boolean` | Whether to include the weekday in the formatted string. Defaults to true. |
 
 #### Returns
@@ -483,7 +483,7 @@ The formatted date string.
 
 ### formatNoYear
 
-**formatNoYear**(`date`, `locale` = 'default', `abbreviated`= false): `string`
+**formatNoYear**(`date`, `locale`, `abbreviated`= false): `string`
 
 Formats a date without the year.
 
@@ -492,7 +492,7 @@ Formats a date without the year.
 | Name | Type | Description |
 | :------ | :------ | :------ |
 | `date` | `Date` | The date to format |
-| `locale` | `string` | The locale to use for formatting. Defaults to 'default'. |
+| `locale` | `string` | The locale to use for formatting. Defaults to Dialtone preferred locale. |
 | `abbreviated` | `boolean` | Whether to use abbreviated month names. Defaults to false. |
 
 #### Returns
@@ -503,7 +503,7 @@ The formatted date without the year.
 
 ### formatNumerical
 
-**formatNumerical**(`date`, `locale` = 'default'): `string`
+**formatNumerical**(`date`, `locale`): `string`
 
 Formats a date into a numerical string representation.
 
@@ -512,7 +512,7 @@ Formats a date into a numerical string representation.
 | Name | Type | Description |
 | :------ | :------ | :------ |
 | `date` | `Date` | The date to format |
-| `locale` | `string` | The locale to use for formatting. Defaults to 'default'. |
+| `locale` | `string` | The locale to use for formatting. Defaults to Dialtone preferred locale. |
 
 #### Returns
 
