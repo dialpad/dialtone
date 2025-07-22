@@ -3,17 +3,17 @@ DIALTONE_CLOSE_BUTTON = クリックして閉じる
 DIALTONE_BREADCRUMBS_ARIA_LABEL = ブレッドクラム
 DIALTONE_LOADING = 読み込んでいます
 DIALTONE_UNREAD_MESSAGE_COUNT_TEXT =
-  { $unreadCount ->
-  [0] 未読メッセージはありません
-  [1] 1件の未読メッセージ
-  *[other] { $unreadCount }件の未読メッセージ
-      }
+    { $unreadCount ->
+        [0] 未読メッセージはありません
+        [1] 1件の未読メッセージ
+       *[other] { $unreadCount }件の未読メッセージ
+    }
 DIALTONE_UNREAD_MENTION_COUNT_TEXT =
-  { $unreadCount ->
-  [0] 未読メンションはありません
-  [1] 1件の未読メンション
-  *[other] { $unreadCount }件の未読メンション
-      }
+    { $unreadCount ->
+        [0] 未読メンションはありません
+        [1] 1件の未読メンション
+       *[other] { $unreadCount }件の未読メンション
+    }
 DIALTONE_TYPING_TEXT = 入力中
 DIALTONE_ATTACHMENT_CAROUSEL_CLICK_TO_OPEN_ARIA_LABEL = クリックして開く
 DIALTONE_ATTACHMENT_CAROUSEL_PROGRESS_BAR_ARIA_LABEL = アップロードしています...
@@ -29,14 +29,14 @@ DIALTONE_DATEPICKER_NEXT_YEAR = 来年
 DIALTONE_DATEPICKER_SELECT_DAY = 曜日を選択
 DIALTONE_DATEPICKER_CHANGE_TO = 次に変更 :
 DIALTONE_EDITOR_CONFIRM_SET_LINK_BUTTON =
-  .title = 確認
-  .aria-label = 設定リンクを確定
+    .title = 確認
+    .aria-label = 設定リンクを確定
 DIALTONE_EDITOR_REMOVE_LINK_BUTTON =
-  .title = 削除
-  .aria-label = リンクを削除
+    .title = 削除
+    .aria-label = リンクを削除
 DIALTONE_EDITOR_CANCEL_SET_LINK_BUTTON =
-  .title = キャンセル
-  .aria-label = 設定リンクをキャンセル
+    .title = キャンセル
+    .aria-label = 設定リンクをキャンセル
 DIALTONE_EDITOR_QUICK_REPLY_BUTTON_LABEL = クイック返信
 DIALTONE_EDITOR_BOLD_BUTTON_LABEL = 太字
 DIALTONE_EDITOR_ITALICS_BUTTON_LABEL = 斜体
@@ -53,16 +53,9 @@ DIALTONE_EDITOR_CODE_BUTTON_LABEL = コード
 DIALTONE_EDITOR_IMAGE_BUTTON_LABEL = 画像
 DIALTONE_EDITOR_LINK_BUTTON_LABEL = リンク
 DIALTONE_EDITOR_ADD_LINK_BUTTON =
-  .title = リンクを追加
-  .aria-label = リンクを追加するための入力フィールド
-DIALTONE_EMOJI_ROW_REACTION_LABEL =
-  { $reactionCount ->
-  *[other]
-              { $selected ->
-  *[false] { $reactionCount }人が { $reaction } で反応しました。
-  [true] 自分を含む{ $reactionCount }人が { $reaction } で反応しました。
-              }
-      }
+    .title = リンクを追加
+    .aria-label = リンクを追加するための入力フィールド
+DIALTONE_EMOJI_ROW_REACTION_LABEL = { $names }が{ $reaction }で反応しました
 DIALTONE_EMOJI_PICKER_ADD_EMOJI_LABEL = 絵文字を追加
 DIALTONE_EMOJI_PICKER_SEARCH_NO_RESULTS_LABEL = 見つかりません
 DIALTONE_EMOJI_PICKER_SEARCH_RESULTS_LABEL = 検索結果
@@ -83,10 +76,10 @@ DIALTONE_GENERAL_ROW_ACTIVE_VOICE_CHAT_TEXT = 進行中の音声チャット
 DIALTONE_GENERAL_ROW_CALL_BUTTON_TOOLTIP = 発信
 DIALTONE_GENERAL_ROW_DND_TEXT_TOOLTIP = プライバシーモード
 DIALTONE_GROUP_ROW_GROUP_COUNT_TEXT =
-  { $count ->
-  [1] 1ユーザー
-  *[other] { $count } ユーザー
-      }
+    { $count ->
+        [1] 1ユーザー
+       *[other] { $count } ユーザー
+    }
 DIALTONE_IVR_NODE_MENU_BUTTON_ARIA_LABEL = メニューを開く
 DIALTONE_IVR_NODE_PROMPTMENU_ARIA_LABEL = プロンプトメニューノード
 DIALTONE_IVR_NODE_PROMPTCOLLECT_ARIA_LABEL = プロンプト収集ノード
@@ -103,32 +96,32 @@ DIALTONE_MESSAGE_INPUT_IMAGE_PICKER_BUTTON_ARIA_LABEL = 画像を添付
 DIALTONE_MESSAGE_INPUT_EMOJI_PICKER_BUTTON_ARIA_LABEL = 絵文字を選択
 DIALTONE_MESSAGE_INPUT_CANCEL_BUTTON_ARIA_LABEL = キャンセル
 DIALTONE_MESSAGE_INPUT_BOLD_BUTTON_LABEL =
-  .aria-label = 選択したテキストの太字を切り替え
-  .tooltip-text = 太字
+    .aria-label = 選択したテキストの太字を切り替え
+    .tooltip-text = 太字
 DIALTONE_MESSAGE_INPUT_ITALIC_BUTTON_LABEL =
-  .aria-label = 選択したテキストの斜体を切り替え
-  .tooltip-text = 斜体
+    .aria-label = 選択したテキストの斜体を切り替え
+    .tooltip-text = 斜体
 DIALTONE_MESSAGE_INPUT_STRIKETHROUGH_BUTTON_LABEL =
-  .aria-label = 選択したテキストの取り消し線を切り替え
-  .tooltip-text = 取り消し線
+    .aria-label = 選択したテキストの取り消し線を切り替え
+    .tooltip-text = 取り消し線
 DIALTONE_MESSAGE_INPUT_BULLET_LIST_BUTTON_LABEL =
-  .aria-label = 選択したテキストの箇条書きを作成・編集
-  .tooltip-text = 箇条書きリスト
+    .aria-label = 選択したテキストの箇条書きを作成・編集
+    .tooltip-text = 箇条書きリスト
 DIALTONE_MESSAGE_INPUT_ORDERED_LIST_BUTTON_LABEL =
-  .aria-label = 選択したテキストの番号付きリストを作成・編集
-  .tooltip-text = 番号付きリスト
+    .aria-label = 選択したテキストの番号付きリストを作成・編集
+    .tooltip-text = 番号付きリスト
 DIALTONE_MESSAGE_INPUT_BLOCK_QUOTE_BUTTON_LABEL =
-  .aria-label = 選択したテキストの引用ブロックを作成・編集
-  .tooltip-text = 引用ブロック
+    .aria-label = 選択したテキストの引用ブロックを作成・編集
+    .tooltip-text = 引用ブロック
 DIALTONE_MESSAGE_INPUT_CODE_BUTTON_LABEL =
-  .aria-label = 選択したテキストのコードを作成・編集
-  .tooltip-text = コード
+    .aria-label = 選択したテキストのコードを作成・編集
+    .tooltip-text = コード
 DIALTONE_MESSAGE_INPUT_CODE_BLOCK_BUTTON_LABEL =
-  .aria-label = 選択したテキストのコードブロックを作成・編集
-  .tooltip-text = コードブロック
+    .aria-label = 選択したテキストのコードブロックを作成・編集
+    .tooltip-text = コードブロック
 DIALTONE_MESSAGE_INPUT_LINK_BUTTON_LABEL =
-  .aria-label = 選択したテキストのリンクを作成・編集
-  .tooltip-text = リンク
+    .aria-label = 選択したテキストのリンクを作成・編集
+    .tooltip-text = リンク
 DIALTONE_MESSAGE_INPUT_LINK_DIALOG_TITLE = リンクを追加
 DIALTONE_MESSAGE_INPUT_LINK_TEXT_LABEL = 表示するテキスト (任意)
 DIALTONE_MESSAGE_INPUT_LINK_LINK_LABEL = リンク

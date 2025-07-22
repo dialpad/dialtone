@@ -55,29 +55,7 @@ DIALTONE_EDITOR_LINK_BUTTON_LABEL = Ссылка
 DIALTONE_EDITOR_ADD_LINK_BUTTON =
     .title = Добавить ссылку
     .aria-label = Поле ввода для добавления ссылки
-DIALTONE_EMOJI_ROW_REACTION_LABEL =
-    { $reactionCount ->
-        [one]
-            { $selected ->
-               *[false] { $name } человек отреагировал ({ $reaction }).
-                [true] Вы отреагировали ({ $reaction }).
-            }
-        [few]
-            { $selected ->
-               *[false] { $reactionCount } человека отреагировало ({ $reaction }).
-                [true] { $reactionCount } человека, включая вас, отреагировало ({ $reaction }).
-            }
-        [many]
-            { $selected ->
-               *[false] { $reactionCount } человек отреагировало ({ $reaction }).
-                [true] { $reactionCount } человек, включая вас, отреагировало ({ $reaction }).
-            }
-       *[other]
-            { $selected ->
-               *[false] { $reactionCount } человека отреагировало { $reaction }.
-                [true] { $reactionCount } человека, включая вас, отреагировало ({ $reaction }).
-            }
-    }
+DIALTONE_EMOJI_ROW_REACTION_LABEL = Реакция { $reaction } от { $names }
 DIALTONE_EMOJI_PICKER_ADD_EMOJI_LABEL = Добавить смайлик
 DIALTONE_EMOJI_PICKER_SEARCH_NO_RESULTS_LABEL = Нет результатов
 DIALTONE_EMOJI_PICKER_SEARCH_RESULTS_LABEL = результаты поиска
