@@ -44,14 +44,15 @@
     >
       <template #anchor>
         <dt-button
-          circle
-          importance="clear"
-          size="lg"
+          :active="open"
           :class="['d-recipe-callbar-button-with-popover__arrow',
                    { 'd-recipe-callbar-button-with-popover__arrow--large': !isCompactMode }]"
-          width="2rem"
+          :circle="true"
+          importance="clear"
+          size="lg"
           :aria-label="arrowButtonLabel"
-          :active="open"
+          :title="arrowButtonLabel"
+          width="2rem"
           @click="arrowClick"
         >
           <template #icon>
@@ -81,6 +82,7 @@ import { DtPopover } from '@/components/popover';
 import { DtIconChevronUp } from '@dialpad/dialtone-icons/vue3';
 import { DtRecipeCallbarButton, CALLBAR_BUTTON_VALID_WIDTH_SIZE } from '../callbar_button';
 import utils, { warnIfUnmounted, removeClassStyleAttrs, addClassStyleAttrs, returnFirstEl } from '@/common/utils';
+import { DialtoneLocalization } from '@/localization';
 
 export default {
   compatConfig: { MODE: 3 },
@@ -113,17 +115,6 @@ export default {
       default: null,
       validator: (label) => {
         return label || this.$slots.default;
-      },
-    },
-
-    /**
-     * Aria label for the arrow. Cannot be empty.
-     */
-    arrowButtonLabel: {
-      type: String,
-      required: true,
-      validator: (label) => {
-        return !!label;
       },
     },
 
@@ -333,6 +324,7 @@ export default {
   data () {
     return {
       open: false,
+      i18n: new DialtoneLocalization(),
     };
   },
 
@@ -352,6 +344,10 @@ export default {
       }
 
       return this.toggleOpen();
+    },
+
+    arrowButtonLabel () {
+      return this.i18n.$t('DIALTONE_CALLBAR_BUTTON_WITH_POPOVER_ARROW_BUTTON_ARIA_LABEL');
     },
   },
 

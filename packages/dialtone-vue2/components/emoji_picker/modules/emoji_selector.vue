@@ -563,6 +563,7 @@ export default {
       this.$emit('selected-emoji', { ...emoji, shift_key: event.shiftKey });
     },
 
+    // @TODO(improvement): Sync with simplified Vue 3 version
     /* eslint-disable-next-line complexity */
     handleKeyDownFilteredEmojis (event, indexEmoji, emoji) {
       event.preventDefault();

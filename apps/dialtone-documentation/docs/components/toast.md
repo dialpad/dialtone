@@ -171,7 +171,7 @@ that require immediate attention such as:
 Meanwhile `role="status"` implies `aria-live="polite"` which
 means the toast will be read out after what's currently being has finished.
 
-It is possible to include a screen reader visible only close button setting `visually-hidden-close` and `visually-hidden-close-label` props.
+A screen reader visible only close button is added by default.
 
 <component-accessible-table component-name="toast" />
 

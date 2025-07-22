@@ -345,7 +345,7 @@ vueCode='
 
 ## Accessibility
 
-It is possible to include a screen reader visible only close button setting `visually-hidden-close` and `visually-hidden-close-label` props.
+A screen reader visible only close button is added by default.
 
 The dropdown menu has a role of "menu" and the list items have a role "menuitem". See [W3C guidelines](https://www.w3.org/WAI/ARIA/apg/#menubutton) for more information.
 

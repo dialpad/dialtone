@@ -11,7 +11,6 @@ export const argsData = {
   duration: 6000,
   onClose: action('close'),
   onClick: action('click'),
-  visuallyHiddenCloseLabel: 'Close Toast',
 };
 
 export const argTypesData = {

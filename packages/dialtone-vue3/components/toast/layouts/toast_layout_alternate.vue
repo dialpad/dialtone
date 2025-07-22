@@ -35,14 +35,10 @@
           :hide-action="true"
           :hide-close="hideClose"
           button-size="xs"
-          :close-button-props="closeButtonProps"
-          :visually-hidden-close="visuallyHiddenClose"
-          :visually-hidden-close-label="visuallyHiddenCloseLabel"
           v-bind="$attrs"
           @close="$emit('close')"
         />
       </div>
-
       <!-- Content Section -->
       <div class="d-toast-alternate__content">
         <slot>
@@ -55,20 +51,17 @@
 
 <script>
 import utils from '@/common/utils';
-import { DtNoticeContent, DtNoticeAction } from '@/components/notice';
 import DtToastLayoutAlternateIcon from './toast_layout_alternate_icon.vue';
-import SrOnlyCloseButtonMixin from '@/common/mixins/sr_only_close_button';
+import { DtNoticeAction, DtNoticeContent } from '@/components/notice';
 import { TOAST_ROLES, TOAST_ALTERNATE_KINDS } from '../toast_constants.js';
 export default {
   name: 'ToastLayoutAlternate',
 
   components: {
-    DtToastLayoutAlternateIcon,
-    DtNoticeContent,
     DtNoticeAction,
+    DtNoticeContent,
+    DtToastLayoutAlternateIcon,
   },
-
-  mixins: [SrOnlyCloseButtonMixin],
 
   inheritAttrs: false,
 
@@ -138,23 +131,6 @@ export default {
     },
 
     /**
-     * Used in scenarios where the message needs to visually dominate the screen.
-     * @values true, false
-     */
-    important: {
-      type: Boolean,
-      default: false,
-    },
-
-    /**
-     * Props for the toast close button.
-     */
-    closeButtonProps: {
-      type: Object,
-      default: () => ({}),
-    },
-
-    /**
      * Hides the close button from the toast
      * @values true, false
      */
@@ -172,8 +148,6 @@ export default {
       default: false,
     },
   },
-
-  emits: ['close'],
 
   computed: {
     kindClass () {

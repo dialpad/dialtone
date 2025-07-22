@@ -4,7 +4,6 @@ import DtImageViewer from './image_viewer.vue';
 const baseProps = {
   imageSrc: 'test.png',
   imageAlt: 'imageAltText',
-  closeAriaLabel: 'closeButtonAriaLabel',
   imageButtonClass: 'd-wmn64 d-hmn64 w-wmx332 d-hmx332',
   ariaLabel: 'Click to open image',
 };
@@ -89,7 +88,6 @@ describe('DtImageViewer Tests', () => {
         await _openModal();
 
         expect(fullImage.attributes('alt')).toBe(baseProps.imageAlt);
-        expect(closeButton.attributes('aria-label')).toBe(baseProps.closeAriaLabel);
       });
     });
   });

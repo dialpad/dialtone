@@ -9,7 +9,7 @@ figma_url: https://www.figma.com/design/W58r5BkO8qTw3vem9YieJd/DT9-Component-Lib
 ---
 
 <code-well-header class="d-p0">
-    <dt-banner title="Example banner" kind="info" class="d-ps-relative d-zi-base" :close-button-props="{ariaLabel: 'Close button'}">
+    <dt-banner title="Example banner" kind="info" class="d-ps-relative d-zi-base">
         Message body with a <dt-link kind="muted">Link</dt-link>
     </dt-banner>
 </code-well-header>
@@ -41,7 +41,6 @@ Banners are a type of notice and so you can use the following [Notice](notice.md
   :pinned="pinned"
   :important="important"
   :kind="selectedKind"
-  :close-button-props="{ariaLabel: 'Close button'}"
   title="Optional banner title"
   v-show="shownBanner === 'example-kind'"
   @close="closeBanner"
@@ -90,7 +89,6 @@ Pins the banner to the top of the window.
 
 <dt-banner
   :pinned="true"
-  :close-button-props="{ariaLabel: 'Close button'}"
   title="Optional banner title"
   v-show="shownBanner === 'example-pinned'"
   @close="closeBanner"

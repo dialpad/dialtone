@@ -20,7 +20,7 @@
             id="prevYearButton"
             :ref="refNames[0]"
             :aria-label="previousYearAriaLabel"
-            circle
+            :circle="true"
             class="d-datepicker__nav-btn"
             importance="clear"
             kind="muted"
@@ -45,7 +45,7 @@
             id="prevMonthButton"
             :ref="refNames[1]"
             :aria-label="previousMonthAriaLabel"
-            circle
+            :circle="true"
             class="d-datepicker__nav-btn"
             importance="clear"
             kind="muted"
@@ -85,7 +85,7 @@
             id="nextMonthButton"
             :ref="refNames[2]"
             :aria-label="nextMonthAriaLabel"
-            circle
+            :circle="true"
             class="d-datepicker__nav-btn"
             importance="clear"
             kind="muted"
@@ -110,7 +110,7 @@
             id="nextYearButton"
             :ref="refNames[3]"
             :aria-label="nextYearAriaLabel"
-            circle
+            :circle="true"
             class="d-datepicker__nav-btn"
             importance="clear"
             kind="muted"

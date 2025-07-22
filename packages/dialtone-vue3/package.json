@@ -16,6 +16,7 @@
   "dependencies": {
     "@dialpad/dialtone-emojis": "workspace:*",
     "@dialpad/dialtone-icons": "workspace:*",
+    "@dialpad/i18n": "1.17.0-alpha.0",
     "@tiptap/core": "2.12.0",
     "@tiptap/extension-blockquote": "2.12.0",
     "@tiptap/extension-bold": "2.12.0",
@@ -119,7 +120,8 @@
       "import": "./dist/lib/*/index.js",
       "require": "./dist/lib/*/index.cjs"
     },
-    "./component-documentation.json": "./dist/component-documentation.json"
+    "./component-documentation.json": "./dist/component-documentation.json",
+    "./*": "./dist/*"
   },
   "nx": {
     "includedScripts": [

@@ -29,10 +29,11 @@
         <!-- node label and icon section on left of the header -->
         <div class="d-recipe-ivr-node__header-left">
           <dt-button
-            :aria-label="nodeType"
             importance="clear"
             kind="muted"
             data-qa="dt-ivr-node-icon"
+            :aria-label="nodeAriaLabel"
+            :title="nodeAriaLabel"
           >
             <template #icon>
               <component
@@ -59,6 +60,7 @@
               importance="clear"
               kind="muted"
               :aria-label="menuButtonAriaLabel"
+              :title="menuButtonAriaLabel"
               @click.stop.prevent="openMenu"
             >
               <template #icon>
@@ -113,6 +115,7 @@ import {
   IVR_NODE_HANGUP,
   IVR_NODE_CUSTOMER_DATA,
 } from './ivr_node_constants';
+import { DialtoneLocalization } from '@/localization';
 
 const typeToIcon = new Map([
   [IVR_NODE_PROMPT_MENU, DtIconKeypad],
@@ -176,14 +179,6 @@ export default {
     },
 
     /**
-     * Translated aria-label for header menu button
-     */
-    menuButtonAriaLabel: {
-      type: String,
-      required: true,
-    },
-
-    /**
      * DTMF input
      */
     dtmfKey: {
@@ -205,6 +200,7 @@ export default {
   data () {
     return {
       isOpen: false,
+      i18n: new DialtoneLocalization(),
     };
   },
 
@@ -226,6 +222,15 @@ export default {
 
     isGotoNode () {
       return this.nodeType === IVR_NODE_GO_TO;
+    },
+
+    nodeAriaLabel () {
+      const nodeType = this.nodeType.toUpperCase();
+      return this.i18n.$t(`DIALTONE_IVR_NODE_${nodeType}_ARIA_LABEL`);
+    },
+
+    menuButtonAriaLabel () {
+      return this.i18n.$t('DIALTONE_IVR_NODE_MENU_BUTTON_ARIA_LABEL');
     },
   },
 

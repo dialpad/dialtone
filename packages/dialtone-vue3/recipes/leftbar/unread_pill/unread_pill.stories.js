@@ -85,7 +85,7 @@ export const Default = {
   render: DefaultTemplate,
 
   args: {
-    default: 'Unread mentions',
+    default: '',
     kind: 'mentions',
     direction: 'up',
   },

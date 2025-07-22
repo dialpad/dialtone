@@ -1,0 +1,142 @@
+import {Meta, Subtitle, Canvas, Story} from '@storybook/blocks';
+import * as LocalizationStories from './localization.stories.js';
+
+<Meta of={LocalizationStories}/>
+
+# Dialtone-vue localization
+
+<Subtitle>
+    Localization capabilities are included within some dialtone-vue components by default.
+    Mostly on aria-labels available only to screen readers, but some others might include localized text that's visible.
+</Subtitle>
+
+<Canvas>
+    <Story of={LocalizationStories.Default}/>
+</Canvas>
+
+## Included components
+
+Here’s a list with some of the components that include localization, not all of them might be listed here, this
+list is not exhaustive and might change in the future.
+
+<ul>
+    <li className={"d-lst-disc"}>
+        <b>DtButton</b>
+        loading state aria label
+    </li>
+    <li className={"d-lst-disc"}>
+        <b>DtChip</b>
+        close button
+        <i>(aria label and title)</i>
+    </li>
+    <li className={"d-lst-disc"}>
+        <b>DtDatepicker</b>
+        close button
+        <i>(aria labels, tooltip texts and displayed text)</i>
+    </li>
+    <li className={"d-lst-disc"}>
+        <b>DtEmojiPicker</b>
+        buttons
+        <i>(aria labels, tooltip texts and displayed text like tab labels, search placeholder, etc)</i>
+    </li>
+    <li className={"d-lst-disc"}>
+        <b>DtIcon</b>
+        svg
+        <i>(aria label)</i>
+    </li>
+    <li className={"d-lst-disc"}>
+        <b>DtPagination</b>
+        buttons
+        <i>(aria label)</i>
+    </li>
+    <li className={"d-lst-disc"}>
+        <b>DtRichTextEditor</b>
+        Bubble menu
+        <i>(displayed text)</i>
+    </li>
+    <li className={"d-lst-disc"}>
+        <b>DtModal, DtPopover, DtDropdown, DtNotice, DtImageViewer</b>
+        Close button (Visible and screen reader only)
+        <i>(aria-label and title)</i>
+    </li>
+    <li className={"d-lst-disc"}>
+        <b>DtRecipeAttachmentCarousel</b>
+        buttons
+        <i>(aria-label and title)</i>
+    </li>
+    <li className={"d-lst-disc"}>
+        <b>DtRecipeEditor</b> buttons
+        [Quick reply, Bold, Italics, Underline, etc]
+        <i>(aria-label and title)</i>
+    </li>
+    <li className={"d-lst-disc"}>
+        <b>DtRecipeEmojiRow</b>
+        [Reaction count]
+        <i>(aria-label and tooltip text)</i>
+    </li>
+    <li className={"d-lst-disc"}>
+        <b>DtRecipeGeneralRow</b>
+        [Typing icon, Active voice chat icon, unread count, dnd text, call button]
+        <i>(tooltip text, aria-label)</i>
+    </li>
+    <li className={"d-lst-disc"}>
+        <b>DtRecipeGroupRow</b>
+        buttons
+        <i>(aria-label, tooltip-text)</i>
+    </li>
+    <li className={"d-lst-disc"}>
+        <b>DtRecipeUnreadPill</b>
+        [Default slot]
+        <i>(Default text)</i>
+    </li>
+</ul>
+
+## Import
+
+### Named import
+
+`import { DialtoneLocalization } from '@dialpad/dialtone/vue3';`
+
+### Default import
+
+Preferred if using webpack as it is tree-shakeable by default
+
+`import { DialtoneLocalization } from '@dialpad/dialtone/vue3/localization';`
+
+## Usage
+
+The `DialtoneLocalization` is a class, and it is exported from the package as a singleton,
+the dialtone components that include localization will use the instance or initialize it if
+it doesn't exist.
+
+You can also use the class directly to get some properties via static methods without an instance.
+
+### Static methods
+
+#### Get the allowed locales
+
+`DialtoneLocalization.getAllowedLocales()`
+
+#### Get the preferred locale
+
+`DialtoneLocalization.getPreferredLocale()`
+
+### Creating an instance
+
+`const dialtonei18n = new DialtoneLocalization();`
+
+You can pass in a locale to the constructor. The default is your browser locale or `en-US`, e.g:
+
+`const dialtonei18n = new DialtoneLocalization('es-LA');`
+
+#### Set the current locale
+
+`dialtonei18n.currentLocale = 'en-US';`
+
+#### Get the current locale
+
+`dialtonei18n.currentLocale`
+
+## Update Localized strings process
+
+TODO...

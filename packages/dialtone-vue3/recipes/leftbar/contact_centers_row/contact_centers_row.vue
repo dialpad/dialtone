@@ -57,7 +57,8 @@
           <dt-button
             class="d-recipe-leftbar-row__action"
             data-qa="dt-recipe-leftbar-row-action-button"
-            :aria-label="menuButtonAriaLabel"
+            :aria-label="menuButtonLabel"
+            :title="menuButtonLabel"
             importance="clear"
             size="xs"
             circle
@@ -80,9 +81,9 @@
 import { extractVueListeners, safeConcatStrings, removeClassStyleAttrs, returnFirstEl, addClassStyleAttrs } from '@/common/utils';
 import { DtBadge } from '@/components/badge';
 import { DtButton } from '@/components/button';
-import DtEmojiTextWrapper from '@/components/emoji_text_wrapper/emoji_text_wrapper.vue';
-import DtIconChevronDown from '@dialpad/dialtone-icons/vue3/chevron-down';
-import DtIconHeadphones from '@dialpad/dialtone-icons/vue3/headphones';
+import { DtEmojiTextWrapper } from '@/components/emoji_text_wrapper';
+import { DtIconChevronDown, DtIconHeadphones } from '@dialpad/dialtone-icons/vue3';
+import { DialtoneLocalization } from '@/localization';
 
 export default {
   compatConfig: { MODE: 3 },
@@ -137,14 +138,10 @@ export default {
     unreadCount: {
       type: String,
       default: null,
-    },
-
-    /**
-     * Aria label for the menu button.
-     */
-    menuButtonAriaLabel: {
-      type: String,
-      required: true,
+      validator (value) {
+        if (!value) return true;
+        return /^\d+\+?$/.test(value);
+      },
     },
   },
 
@@ -169,6 +166,7 @@ export default {
   data () {
     return {
       labelWidth: 'auto',
+      i18n: new DialtoneLocalization(),
     };
   },
 
@@ -185,9 +183,13 @@ export default {
     },
 
     getAriaLabel () {
+      const count = isNaN(this.unreadCount) ? this.unreadCount : Number(this.unreadCount);
       return this.ariaLabel
         ? this.ariaLabel
-        : safeConcatStrings([this.description, this.unreadCountTooltip]);
+        : safeConcatStrings([
+          this.description,
+          this.i18n.$t('DIALTONE_UNREAD_MESSAGE_COUNT_TEXT', { unreadCount: count }),
+        ]);
     },
 
     contactRowListeners () {
@@ -196,6 +198,10 @@ export default {
 
     showUnreadCount () {
       return !!this.unreadCount;
+    },
+
+    menuButtonLabel () {
+      return this.i18n.$t('DIALTONE_CONTACT_CENTERS_ROW_MENU_BUTTON_LABEL');
     },
   },
 

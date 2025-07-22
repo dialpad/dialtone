@@ -94,7 +94,6 @@
   <dt-modal
     v-if="selectedIcon"
     :show="isModalOpen"
-    :close-button-props="{ ariaLabel: 'Close' }"
     size="full"
     content-class="d-wmx100p d-pr32"
     @update:show="isModalOpen = false"

@@ -42,10 +42,11 @@
           :active="open"
           :class="['dt-recipe--callbar-button-with-dropdown--arrow',
                    { 'dt-recipe--callbar-button-with-dropdown--arrow--large': !isCompactMode }]"
-          circle
+          :circle="true"
           importance="clear"
           size="lg"
-          v-bind="arrowButtonLabel"
+          :aria-label="arrowButtonLabel"
+          :title="arrowButtonLabel"
           width="2rem"
           @click="arrowClick"
         >
@@ -280,7 +281,7 @@ export default {
     },
 
     arrowButtonLabel () {
-      return this.i18n.$ta('DIALTONE_CALLBAR_BUTTON_WITH_DROPDOWN_ARROW_BUTTON_LABEL');
+      return this.i18n.$t('DIALTONE_CALLBAR_BUTTON_WITH_DROPDOWN_ARROW_BUTTON_ARIA_LABEL');
     },
   },
 

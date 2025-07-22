@@ -111,7 +111,6 @@ htmlCode='
 vueCode='
 <dt-modal
   title="Example title"
-  close-button-props="Close"
   :show="isOpen"
   @update:show="updateShow"
   copy="Lorem ipsum ..."
@@ -194,7 +193,6 @@ htmlCode='
 vueCode='
 <dt-modal
   title="Example title"
-  close-button-props="Close"
   :show="isOpen"
   @update:show="updateShow"
   :showFooter="true"
@@ -279,7 +277,6 @@ htmlCode='
 vueCode='
 <dt-modal
   title="Example title"
-  close-button-props="Close"
   :show="isOpen"
   kind="danger"
   copy="Sed at orci quis nunc finibus gravida eget vitae est..."
@@ -364,7 +361,6 @@ htmlCode='
 vueCode='
 <dt-modal
   title="Example title"
-  close-button-props="Close"
   :show="isOpen"
   size="full"
   copy="Sed at orci quis nunc finibus gravida eget vitae est..."
@@ -463,7 +459,6 @@ htmlCode='
 vueCode='
 <dt-modal
   title="Example title"
-  close-button-props="Close"
   :show="isOpen"
   banner-title="This banner can have different kinds."
   :bannerKind="selectedBannerKind"
@@ -507,7 +502,6 @@ In addition to the footer, custom elements can be inserted into the header and b
 
 <code-well-header>
   <dt-modal
-    :close-button-props="{ ariaLabel: 'Close' }"
     :show="isOpen"
     @update:show="updateShow"
   >
@@ -530,7 +524,6 @@ In addition to the footer, custom elements can be inserted into the header and b
 <code-example-tabs
 vueCode='
 <dt-modal
-  :close-button-props="{ ariaLabel: `Close` }"
   :show="isOpen"
   @update:show="updateShow"
 >

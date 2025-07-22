@@ -6,14 +6,15 @@ import {
 } from '@/tests/shared_examples/validation';
 import { UNREAD_PILL_DIRECTIONS, UNREAD_PILL_KINDS } from '@/recipes/leftbar/unread_pill/unread_pill_constants';
 
+const MOCK_UNREAD_MENTIONS_TEXT = 'Unread mentions';
+const MOCK_UNREAD_MESSAGES_TEXT = 'Unread messages';
+
 // Constants
 const baseProps = {
-  kind: UNREAD_PILL_KINDS[0],
-  direction: UNREAD_PILL_DIRECTIONS[0],
+  kind: 'mentions',
+  direction: 'up',
 };
-const baseSlots = {
-  default: 'Unread mentions',
-};
+const baseSlots = {};
 
 describe('DtRecipeUnreadPill Tests', () => {
   // Wrappers
@@ -60,9 +61,6 @@ describe('DtRecipeUnreadPill Tests', () => {
   describe('Presentation Tests', () => {
     describe('When the unread pill renders', () => {
       it('should exist', () => { expect(wrapper.exists()).toBeTruthy(); });
-      it('should render the text', () => {
-        expect(unreadPillLabel.text()).toBe(baseSlots.default);
-      });
       it('should render the icon', () => {
         expect(unreadPillIcon.exists()).toBeTruthy();
       });
@@ -76,6 +74,10 @@ describe('DtRecipeUnreadPill Tests', () => {
       it('should contain the correct class', () => {
         expect(wrapper.classes('d-recipe-leftbar-unread-pill-messages')).toBe(true);
       });
+
+      it('should render the correct text', () => {
+        expect(unreadPillLabel.text()).toBe(MOCK_UNREAD_MESSAGES_TEXT);
+      });
     });
 
     describe('When the kind is mentions', () => {
@@ -85,6 +87,10 @@ describe('DtRecipeUnreadPill Tests', () => {
 
       it('should contain the correct class', () => {
         expect(wrapper.classes('d-recipe-leftbar-unread-pill-mentions')).toBe(true);
+      });
+
+      it('should render the correct text', () => {
+        expect(unreadPillLabel.text()).toBe(MOCK_UNREAD_MENTIONS_TEXT);
       });
     });
 

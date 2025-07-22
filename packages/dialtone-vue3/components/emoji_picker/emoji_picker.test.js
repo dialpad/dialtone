@@ -80,18 +80,12 @@ const MOCK_TAB_SET_LABELS = [
 ];
 const MOCK_SKIN_SELECTOR_BUTTON_TOOLTIP_LABEL = 'Change default skin tone';
 const MOCK_SEARCH_RESULTS_LABEL = 'Search results';
-const MOCK_SEARCH_NO_RESULTS_LABEL = 'No results';
 const MOCK_SEARCH_PLACEHOLDER_LABEL = 'Search...';
 
 const baseProps = {
   skinTone: 'Light',
-  skinSelectorButtonTooltipLabel: MOCK_SKIN_SELECTOR_BUTTON_TOOLTIP_LABEL,
-  tabSetLabels: MOCK_TAB_SET_LABELS,
   recentlyUsedEmojis: MOCK_RECENTLY_USED_EMOJIS,
   customEmojis: MOCK_CUSTOM_EMOJIS,
-  searchResultsLabel: MOCK_SEARCH_RESULTS_LABEL,
-  searchNoResultsLabel: MOCK_SEARCH_NO_RESULTS_LABEL,
-  searchPlaceholderLabel: MOCK_SEARCH_PLACEHOLDER_LABEL,
 };
 
 let mockProps = {};
@@ -236,27 +230,17 @@ describe('DtEmojiPicker Tests', () => {
     });
 
     describe('When recently emojis is not provided', () => {
-      it('Should not render recently emojis tabset', () => {
-        mockProps = {
-          ...baseProps,
+      let firstButton;
+
+      beforeEach(async () => {
+        await wrapper.setProps({
           recentlyUsedEmojis: [],
-          tabSetLabels: [
-            'Smileys and people',
-            'Nature',
-            'Food',
-            'Activity',
-            'Travel',
-            'Objects',
-            'Symbols',
-            'Flags',
-            'Customs',
-          ],
-        };
+        });
 
-        updateWrapper();
+        firstButton = wrapper.find('.d-tablist').findAll('button').at(0);
+      });
 
-        const firstButton = wrapper.find('.d-tablist').findAll('button').at(0);
-
+      it('Should not render recently emojis tabset', async () => {
         expect(firstButton.exists()).toBe(true);
         expect(firstButton.attributes('aria-label')).not.toBe(MOCK_TAB_SET_LABELS[0]);
         expect(firstButton.attributes('aria-label')).toBe(MOCK_TAB_SET_LABELS[1]);

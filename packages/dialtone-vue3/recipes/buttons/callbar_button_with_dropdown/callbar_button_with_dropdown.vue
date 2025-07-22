@@ -41,12 +41,13 @@
       <template #anchor>
         <dt-button
           :active="open"
-          :aria-label="arrowButtonLabel"
           :class="['dt-recipe--callbar-button-with-dropdown--arrow',
                    { 'dt-recipe--callbar-button-with-dropdown--arrow--large': !isCompactMode }]"
-          circle
+          :circle="true"
           importance="clear"
           size="lg"
+          :aria-label="arrowButtonLabel"
+          :title="arrowButtonLabel"
           width="2rem"
           @click="arrowClick"
         >
@@ -74,6 +75,7 @@ import { DtDropdown } from '@/components/dropdown';
 import { DtIconChevronUp } from '@dialpad/dialtone-icons/vue3';
 import { DtRecipeCallbarButton, CALLBAR_BUTTON_VALID_WIDTH_SIZE } from '../callbar_button';
 import utils, { warnIfUnmounted, removeClassStyleAttrs, addClassStyleAttrs, returnFirstEl } from '@/common/utils';
+import { DialtoneLocalization } from '@/localization';
 
 export default {
   name: 'DtRecipeCallbarButtonWithDropdown',
@@ -105,17 +107,6 @@ export default {
       default: null,
       validator: (label) => {
         return label || this.$slots.default;
-      },
-    },
-
-    /**
-     * Aria label for the arrow. Cannot be empty.
-     */
-    arrowButtonLabel: {
-      type: String,
-      required: true,
-      validator: (label) => {
-        return !!label;
       },
     },
 
@@ -290,6 +281,7 @@ export default {
   data () {
     return {
       open: false,
+      i18n: new DialtoneLocalization(),
     };
   },
 
@@ -302,13 +294,8 @@ export default {
       return this.buttonWidthSize === 'sm' || this.buttonWidthSize === 'md';
     },
 
-    showDropdown () {
-      if (!this.openDropdown || this.open) {
-        this.syncOpenState();
-        return false;
-      }
-
-      return this.toggleOpen();
+    arrowButtonLabel () {
+      return this.i18n.$t('DIALTONE_CALLBAR_BUTTON_WITH_DROPDOWN_ARROW_BUTTON_ARIA_LABEL');
     },
   },
 

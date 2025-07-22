@@ -1,2 +1,1 @@
-export { default as DtRecipeWysiwygEditor } from './editor.vue';
-export {} from './editor_constants.js';
+export { default as DtRecipeEditor } from './editor.vue';
