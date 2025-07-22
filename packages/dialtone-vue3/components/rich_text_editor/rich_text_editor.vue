@@ -736,11 +736,14 @@ export default {
           },
 
           handleKeyDown: (view, event) => {
-            // When preventTyping is true, only allow backspace to take effect
-            if (this.preventTyping && event.key !== 'Backspace') {
-              return true; // Prevent the event from being processed
+            if (!this.preventTyping) return false;
+
+            const allowedKeys = ['Backspace'];
+            if (!this.allowLineBreaks && !event.shiftKey) {
+              allowedKeys.push('Enter');
             }
-            return false; // Allow the event to be processed normally
+
+            return !allowedKeys.includes(event.key);
           },
 
           handlePaste: (view, event, slice) => {
