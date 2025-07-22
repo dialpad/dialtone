@@ -1187,11 +1187,11 @@
           "type": "color"
         },
         "05-hover": {
-          "value": "{color.green.500}",
+          "value": "{color.green.475}",
           "type": "color"
         },
         "05-selected": {
-          "value": "{color.green.900}",
+          "value": "{color.green.600}",
           "type": "color"
         },
         "06": {
@@ -1272,11 +1272,11 @@
         "type": "color"
       },
       "positive-hover": {
-        "value": "{color.green.500}",
+        "value": "{color.green.475}",
         "type": "color"
       },
       "positive-selected": {
-        "value": "{color.green.900}",
+        "value": "{color.green.600}",
         "type": "color"
       },
       "critical": {
@@ -1284,11 +1284,11 @@
         "type": "color"
       },
       "critical-hover": {
-        "value": "{color.red.500}",
+        "value": "{color.red.450}",
         "type": "color"
       },
       "critical-selected": {
-        "value": "{color.red.700}",
+        "value": "{color.red.600}",
         "type": "color"
       },
       "warning": {
@@ -1300,7 +1300,7 @@
         "type": "color"
       },
       "warning-selected": {
-        "value": "{color.gold.700}",
+        "value": "{color.gold.600}",
         "type": "color"
       },
       "info": {
@@ -1312,7 +1312,7 @@
         "type": "color"
       },
       "info-selected": {
-        "value": "{color.blue.900}",
+        "value": "{color.blue.600}",
         "type": "color"
       },
       "brand": {
@@ -1324,7 +1324,7 @@
         "type": "color"
       },
       "brand-selected": {
-        "value": "{color.purple.600}",
+        "value": "{color.purple.550}",
         "type": "color"
       },
       "monochrome": {
