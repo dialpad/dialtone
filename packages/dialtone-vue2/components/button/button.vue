@@ -60,7 +60,7 @@ import {
 
 import { LINK_KIND_MODIFIERS, getLinkKindModifier } from '@/components/link';
 
-import { DtLocalizationMixin } from '@/common/mixins';
+import { DialtoneLocalization } from '@/localization';
 
 /**
  * A button is a UI element which allows users to take an action throughout the app.
@@ -70,8 +70,6 @@ import { DtLocalizationMixin } from '@/common/mixins';
  */
 export default {
   name: 'DtButton',
-
-  mixins: [DtLocalizationMixin],
 
   props: {
     /**
@@ -263,6 +261,7 @@ export default {
       ICON_POSITION_MODIFIERS,
       // whether the button is currently in focus
       isInFocus: false,
+      i18n: new DialtoneLocalization(),
     };
   },
 

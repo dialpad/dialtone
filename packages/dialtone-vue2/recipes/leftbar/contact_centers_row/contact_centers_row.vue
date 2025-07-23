@@ -81,7 +81,7 @@ import { DtBadge } from '@/components/badge';
 import { DtButton } from '@/components/button';
 import { DtEmojiTextWrapper } from '@/components/emoji_text_wrapper';
 import { DtIconChevronDown, DtIconHeadphones } from '@dialpad/dialtone-icons/vue2';
-import { DtLocalizationMixin } from '@/common/mixins';
+import { DialtoneLocalization } from '@/localization';
 
 export default {
   name: 'DtRecipeContactCentersRow',
@@ -93,8 +93,6 @@ export default {
     DtIconHeadphones,
     DtIconChevronDown,
   },
-
-  mixins: [DtLocalizationMixin],
 
   inheritAttrs: false,
 
@@ -165,6 +163,7 @@ export default {
   data () {
     return {
       labelWidth: 'auto',
+      i18n: new DialtoneLocalization(),
     };
   },
 
