@@ -1,3 +1,10 @@
+# [1.1.0](https://github.com/dialpad/dialtone/compare/combinator/v1.0.3...combinator/v1.1.0) (2025-07-23)
+
+
+### Features
+
+* DLT-2611 add localization to Vue 3 ([#831](https://github.com/dialpad/dialtone/issues/831)) ([26a0865](https://github.com/dialpad/dialtone/commit/26a086505115eaa999c10846321bc368437416c4))
+
 ## [1.0.3](https://github.com/dialpad/dialtone/compare/combinator/v1.0.2...combinator/v1.0.3) (2025-05-07)
 
 
