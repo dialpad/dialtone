@@ -1,3 +1,15 @@
+# [2.194.0](https://github.com/dialpad/dialtone/compare/dialtone-vue2/v2.193.5...dialtone-vue2/v2.194.0) (2025-07-23)
+
+
+### Bug Fixes
+
+* **Rich Text Editor:** DP-150683 allow enter on preventTyping ([#834](https://github.com/dialpad/dialtone/issues/834)) ([63b5b9f](https://github.com/dialpad/dialtone/commit/63b5b9ff8a61c2d276e0fea3e2a74ef79b1d2b68))
+
+
+### Features
+
+* DLT-2611 add localization to Vue 3 ([#831](https://github.com/dialpad/dialtone/issues/831)) ([26a0865](https://github.com/dialpad/dialtone/commit/26a086505115eaa999c10846321bc368437416c4))
+
 ## [2.193.5](https://github.com/dialpad/dialtone/compare/dialtone-vue2/v2.193.4...dialtone-vue2/v2.193.5) (2025-07-18)
 
 
