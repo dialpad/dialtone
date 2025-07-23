@@ -81,7 +81,7 @@ import EmojiSelector from './modules/emoji_selector.vue';
 import EmojiDescription from './modules/emoji_description.vue';
 import EmojiSkinSelector from './modules/emoji_skin_selector.vue';
 import { DtButton } from '../button';
-import { DtLocalizationMixin } from '@/common/mixins';
+import { DialtoneLocalization } from '@/localization';
 
 export default {
   name: 'DtEmojiPicker',
@@ -94,8 +94,6 @@ export default {
     EmojiSkinSelector,
     DtButton,
   },
-
-  mixins: [DtLocalizationMixin],
 
   props: {
     /**
@@ -167,6 +165,7 @@ export default {
       highlightedEmoji: null,
       selectedTabset: {},
       scrollIntoTab: 0,
+      i18n: new DialtoneLocalization(),
     };
   },
 

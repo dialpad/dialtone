@@ -97,7 +97,7 @@ import channelSuggestion from './extensions/channels/suggestion';
 import slashCommandSuggestion from './extensions/slash_command/suggestion';
 import { warnIfUnmounted } from '@/common/utils';
 import deepEqual from 'deep-equal';
-import { DtLocalizationMixin } from '@/common/mixins';
+import { DialtoneLocalization } from '@/localization';
 
 export default {
   name: 'DtRichTextEditor',
@@ -108,8 +108,6 @@ export default {
     DtButton,
     DtStack,
   },
-
-  mixins: [DtLocalizationMixin],
 
   props: {
     /**
@@ -497,6 +495,8 @@ export default {
         appendTo: () => this.$refs.editor.$el.getRootNode()?.querySelector('body'),
         placement: 'top-start',
       },
+
+      i18n: new DialtoneLocalization(),
     };
   },
 

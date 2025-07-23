@@ -62,13 +62,11 @@
 import { getWeekDayNames, calculateNextFocusDate, calculatePrevFocusDate, formatDate } from '../utils';
 import { WEEK_START, INTL_MONTH_FORMAT } from '../datepicker_constants.js';
 import { DtButton } from '@/components/button';
-import { DtLocalizationMixin } from '@/common/mixins';
+import { DialtoneLocalization } from '@/localization';
 
 export default {
   name: 'DtDatepickerCalendar',
   components: { DtButton },
-
-  mixins: [DtLocalizationMixin],
 
   props: {
     calendarDays: {
@@ -107,6 +105,7 @@ export default {
       selectedDay: null,
       focusDay: 0,
       daysRef: [],
+      i18n: new DialtoneLocalization(),
     };
   },
 

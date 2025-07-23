@@ -11,7 +11,7 @@
 <script>
 import { icons } from '@dialpad/dialtone-icons/vue2';
 import { ICON_SIZE_MODIFIERS, ICON_NAMES } from './icon_constants';
-// import { DtLocalizationMixin } from '@/common/mixins';
+// import { DialtoneLocalization } from '@/localization';
 // import { toFluentKeyString } from '@/common/utils';
 
 /**
@@ -20,8 +20,6 @@ import { ICON_SIZE_MODIFIERS, ICON_NAMES } from './icon_constants';
  */
 export default {
   name: 'DtIcon',
-
-  // mixins: [DtLocalizationMixin],
 
   props: {
     /**
@@ -44,12 +42,18 @@ export default {
     },
 
     /**
-     * The label of the icon as read out by a screenreader. Leave this unset if your icon is purely presentational
+     * The label of the icon as read out by a screen-reader. Leave this unset if your icon is purely presentational
      */
     ariaLabel: {
       type: String,
       default: undefined,
     },
+  },
+
+  data () {
+    return {
+      // i18n: new DialtoneLocalization(),
+    };
   },
 
   computed: {

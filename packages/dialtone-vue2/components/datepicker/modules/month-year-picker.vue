@@ -142,7 +142,7 @@ import { INTL_MONTH_FORMAT } from '../datepicker_constants';
 import { DtStack } from '@/components/stack';
 import { DtTooltip } from '@/components/tooltip';
 import { DtButton } from '@/components/button';
-import { DtLocalizationMixin } from '@/common/mixins';
+import { DialtoneLocalization } from '@/localization';
 
 export default {
   name: 'DtDatepickerMonthYearPicker',
@@ -156,8 +156,6 @@ export default {
     DtIconChevronRight,
     DtIconChevronsRight,
   },
-
-  mixins: [DtLocalizationMixin],
 
   props: {
     selectedDate: {
@@ -205,6 +203,7 @@ export default {
       focusPicker: 0,
       focusRefs: [],
       refNames: ['prevYearButtonRef', 'prevMonthButtonRef', 'nextMonthButtonRef', 'nextYearButtonRef'],
+      i18n: new DialtoneLocalization(),
     };
   },
 

@@ -152,7 +152,7 @@ import {
   DtIconCodeBlock,
 } from '@dialpad/dialtone-icons/vue2';
 import DtRecipeMessageInputButton from './message_input_button.vue';
-import { DtLocalizationMixin } from '@/common/mixins';
+import { DialtoneLocalization } from '@/localization';
 
 export default {
   name: 'DtRecipeMessageInputTopbar',
@@ -168,8 +168,6 @@ export default {
     DtIconCodeBlock,
     DtRecipeMessageInputButton,
   },
-
-  mixins: [DtLocalizationMixin],
 
   props: {
     boldButtonOptions: {
@@ -219,6 +217,12 @@ export default {
   },
 
   emits: ['click'],
+
+  data () {
+    return {
+      i18n: new DialtoneLocalization(),
+    };
+  },
 
   computed: {
     boldButtonLabel () { return this.i18n.$ta('DIALTONE_MESSAGE_INPUT_BOLD_BUTTON_LABEL'); },

@@ -15,7 +15,7 @@
 <script>
 import { DtIconLoading } from '@dialpad/dialtone-icons/vue2';
 import { ICON_SIZE_MODIFIERS } from '@/components/icon';
-import { DtLocalizationMixin } from '@/common/mixins';
+import { DialtoneLocalization } from '@/localization';
 
 export default {
   name: 'DtLoader',
@@ -23,8 +23,6 @@ export default {
   components: {
     DtIconLoading,
   },
-
-  mixins: [DtLocalizationMixin],
 
   props: {
     /**
@@ -45,6 +43,12 @@ export default {
       default: '500',
       validator: (s) => Object.keys(ICON_SIZE_MODIFIERS).includes(s),
     },
+  },
+
+  data () {
+    return {
+      i18n: new DialtoneLocalization(),
+    };
   },
 
   computed: {

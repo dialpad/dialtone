@@ -44,7 +44,7 @@
 import { DtImageViewer } from '@/components/image_viewer';
 import { DtButton } from '@/components/button';
 import { DtIconClose } from '@dialpad/dialtone-icons/vue2';
-import { DtLocalizationMixin } from '@/common/mixins';
+import { DialtoneLocalization } from '@/localization';
 
 import DtProgressBar from './progress_bar.vue';
 
@@ -57,8 +57,6 @@ export default {
     DtIconClose,
     DtProgressBar,
   },
-
-  mixins: [DtLocalizationMixin],
 
   props: {
     mediaItem: {
@@ -81,6 +79,12 @@ export default {
      */
     'remove-media',
   ],
+
+  data () {
+    return {
+      i18n: new DialtoneLocalization(),
+    };
+  },
 
   computed: {
     closeButtonTitle () {

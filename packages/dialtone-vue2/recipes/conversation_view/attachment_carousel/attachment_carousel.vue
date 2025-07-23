@@ -60,7 +60,7 @@
 <script>
 import { DtIconArrowRight, DtIconArrowLeft } from '@dialpad/dialtone-icons/vue2';
 import { DtButton } from '@/components/button';
-import { DtLocalizationMixin } from '@/common/mixins';
+import { DialtoneLocalization } from '@/localization';
 
 import DtImageCarousel from './media_components/image_carousel.vue';
 
@@ -75,8 +75,6 @@ export default {
     DtIconArrowLeft,
     DtImageCarousel,
   },
-
-  mixins: [DtLocalizationMixin],
 
   /* inheritAttrs: false is generally an option we want to set on library
     components. This allows any attributes passed in that are not recognized
@@ -116,6 +114,7 @@ export default {
       showRightArrow: true,
       showLeftArrow: false,
       isMounted: false,
+      i18n: new DialtoneLocalization(),
     };
   },
 
