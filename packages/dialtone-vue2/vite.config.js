@@ -38,6 +38,7 @@ const recipeEntries = _getEntries('lib', 'recipes/**/*.{js,vue}');
 
 // https://vitejs.dev/config/
 export default defineConfig({
+  assetsInclude: ['**/*.ftl'],
   build: {
     sourcemap: true,
     minify: true,
@@ -99,6 +100,7 @@ export default defineConfig({
     },
   },
   test: {
+    name: 'dialtone-vue2',
     globals: true,
     environment: 'jsdom',
     setupFiles: './tests/setupTests.js',
