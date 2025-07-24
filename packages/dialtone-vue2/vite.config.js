@@ -105,7 +105,43 @@ export default defineConfig({
     exclude: ['common/custom-emoji.test.js'],
     include: ['./{common,components,directives,recipes}/**/*.test.js'],
     coverage: {
-      reporter: ['text', 'html'],
+      provider: 'v8',
+      reporter: ['text', 'html', 'json'],
+      reportsDirectory: './coverage',
+      include: [
+        'components/**/*.{js,vue}',
+        'common/**/*.{js,vue}',
+        'directives/**/*.{js,vue}',
+        'recipes/**/*.{js,vue}',
+      ],
+      exclude: [
+        '**/*.test.js',
+        '**/*.story.vue',
+        '**/*.stories.js',
+        '**/*.config.js',
+        '**/*.config.cjs',
+        '**/tests/**',
+        '**/node_modules/**',
+        '**/dist/**',
+        '**/coverage/**',
+        'common/storybook_utils.js',
+        'common/v_html.js',
+        'common/mixins/keyboard_list_navigation_tester.vue',
+        'components/plugins/*',
+        '.storybook/**',
+        'storybook-static/**',
+      ],
+      all: true, // include all files in coverage report
+      clean: true, // clean coverage directory before running tests
+      skipFull: true, // skip full coverage report
+      thresholds: { // will fail the build if coverage is below these thresholds
+        global: {
+          branches: 80,
+          functions: 80,
+          lines: 85,
+          statements: 85,
+        },
+      },
     },
   },
 });

@@ -8,7 +8,8 @@
     "lint:docs": "markdownlint '**/*.mdx'",
     "test": "pnpm exec vitest run --test-timeout=10000",
     "test:one": "pnpm exec vitest related --run",
-    "test:watch": "pnpm exec vitest"
+    "test:watch": "pnpm exec vitest",
+    "test:coverage": "pnpm exec vitest run --coverage"
   },
   "files": [
     "dist"
