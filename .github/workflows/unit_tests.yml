@@ -45,9 +45,6 @@ jobs:
         shell: bash
         run: pnpm install --frozen-lockfile
 
-      - name: Run unit tests
-        run: pnpm nx run dialtone:test:vue
-
       - name: Run dialtone-vue2 tests with coverage
         run: cd packages/dialtone-vue2 && pnpm exec vitest run --coverage
 
