@@ -49,10 +49,10 @@ jobs:
         run: pnpm nx run dialtone:test:vue
 
       - name: Run dialtone-vue2 tests with coverage
-        run: pnpm nx run dialtone-vue2:test:coverage
+        run: cd packages/dialtone-vue2 && pnpm exec vitest run --coverage
 
       - name: Run dialtone-vue3 tests with coverage
-        run: pnpm nx run dialtone-vue3:test:coverage
+        run: cd packages/dialtone-vue3 && pnpm exec vitest run --coverage
 
       - name: Upload coverage reports
         uses: actions/upload-artifact@v4
