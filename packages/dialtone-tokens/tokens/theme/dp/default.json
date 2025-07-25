@@ -2483,7 +2483,7 @@
           "value": "{presence.color.busy}",
           "type": "color"
         },
-        "status-indeterminate": {
+        "status-away": {
           "value": "{presence.color.offline}",
           "type": "color"
         }
@@ -2534,6 +2534,19 @@
               "modify": {
                 "type": "alpha",
                 "value": ".72",
+                "space": "hsl"
+              }
+            }
+          }
+        },
+        "strong": {
+          "value": "{shell.base.color.foreground}",
+          "type": "color",
+          "$extensions": {
+            "studio.tokens": {
+              "modify": {
+                "type": "alpha",
+                "value": "1",
                 "space": "hsl"
               }
             }
@@ -2648,7 +2661,7 @@
             "type": "color"
           },
           "primary-strong": {
-            "value": "{shell.color.foreground.primary}",
+            "value": "{shell.color.foreground.strong}",
             "type": "color"
           },
           "primary-disabled": {
@@ -2922,7 +2935,7 @@
           "type": "color"
         },
         "offline": {
-          "value": "{shell.base.color.status-indeterminate}",
+          "value": "{shell.base.color.status-away}",
           "type": "color"
         }
       }
