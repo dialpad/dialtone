@@ -100,6 +100,7 @@ export default defineConfig({
     },
   },
   test: {
+    name: 'dialtone-vue2',
     globals: true,
     environment: 'jsdom',
     setupFiles: './tests/setupTests.js',

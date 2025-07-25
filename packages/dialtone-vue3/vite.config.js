@@ -99,6 +99,7 @@ export default defineConfig({
     },
   },
   test: {
+    name: 'dialtone-vue3',
     globals: true,
     environment: 'jsdom',
     setupFiles: './tests/setupTests.js',
