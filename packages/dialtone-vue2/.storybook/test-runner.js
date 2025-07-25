@@ -1,12 +1,13 @@
-import { injectAxe, checkA11y, configureAxe } from 'axe-playwright';
+/* eslint-disable storybook/default-exports */
+const { injectAxe, checkA11y, configureAxe } = require('axe-playwright');
 
-import { getStoryContext } from '@storybook/test-runner';
+const { getStoryContext } = require('@storybook/test-runner');
 
 /*
  * See https://storybook.js.org/docs/react/writing-tests/test-runner#test-hook-api-experimental
  * to learn more about the test-runner hooks API.
  */
-export default {
+module.exports = {
   async preRender (page) {
     await injectAxe(page);
   },
