@@ -451,3 +451,4 @@ This will trigger the [release action](.github/workflows/release.yml), release c
 
 1. Run the `release` target on selected packages (all if `package` is empty).
 2. The [publish action](https://github.com/dialpad/dialtone/actions/workflows/publish.yml) will publish the packages with its corresponding tag.
+# Testing lint-staged

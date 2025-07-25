@@ -560,11 +560,11 @@ export default {
           this.$emit('keydown', event);
         },
 
-        'after-leave': event => {
+        'after-leave': () => {
           this.onLeaveTransitionComplete();
         },
 
-        'after-enter': event => {
+        'after-enter': () => {
           this.onEnterTransitionComplete();
         },
       };

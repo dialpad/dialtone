@@ -37,7 +37,7 @@ export function useCalendar (props, emits) {
         focusDay.value -= 7;
         try {
           returnFirstEl(daysRef.value[focusDay.value].el.$el).focus();
-        } catch (error) {
+        } catch {
           const prevFocusDate = calculatePrevFocusDate(daysRef.value[focusDay.value + 7].day.value);
           emits('go-to-prev-month');
 
@@ -53,7 +53,7 @@ export function useCalendar (props, emits) {
         focusDay.value += 7;
         try {
           returnFirstEl(daysRef.value[focusDay.value].el.$el).focus();
-        } catch (error) {
+        } catch {
           const nextFocusDate = calculateNextFocusDate(daysRef.value[focusDay.value - 7].day.value);
           emits('go-to-next-month');
 

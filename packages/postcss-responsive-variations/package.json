@@ -1,6 +1,7 @@
 {
   "name": "@dialpad/postcss-responsive-variations",
   "version": "1.2.1",
+  "type": "module",
   "description": "PostCSS plugin for creating responsive variations from a list of classes",
   "scripts": {
     "test": "jest",
@@ -13,7 +14,11 @@
     "postcss": "^8.4.1"
   },
   "devDependencies": {
-    "clean-publish": "^3.4.2"
+    "@eslint/js": "^9.31.0",
+    "clean-publish": "^3.4.2",
+    "eslint": "^9.31.0",
+    "eslint-plugin-jest": "^28.11.0",
+    "globals": "^16.3.0"
   },
   "peerDependencies": {
     "postcss": "^8.4.1"

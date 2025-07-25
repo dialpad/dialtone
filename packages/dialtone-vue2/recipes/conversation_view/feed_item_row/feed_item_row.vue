@@ -123,7 +123,6 @@
 </template>
 
 <script>
-/* eslint-disable max-lines */
 import { DEFAULT_FEED_ROW_STATE, FEED_ROW_STATE_BACKGROUND_COLOR } from './feed_item_row_constants.js';
 import { DtAvatar } from '@/components/avatar';
 import { DtLazyShow } from '@/components/lazy_show';
@@ -299,7 +298,7 @@ export default {
   watch: {
     state: {
       immediate: true,
-      handler: function (newState, oldState) {
+      handler: function (newState) {
         if (newState !== DEFAULT_FEED_ROW_STATE) {
           this.transitionActive = true;
         }

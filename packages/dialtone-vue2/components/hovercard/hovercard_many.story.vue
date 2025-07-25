@@ -135,7 +135,7 @@
   </ul>
 </template>
 
-<script setup>
+<script>
 import DtHovercard from './hovercard.vue';
 import avatar1 from '@/common/assets/avatar1.png?url';
 import avatar2 from '@/common/assets/avatar2.png?url';
@@ -146,22 +146,39 @@ import { DtIcon } from '@/components/icon';
 import { DtButton } from '@/components/button';
 import { DtAvatar } from '@/components/avatar';
 
-const cardData = [{
-  name: 'Jaqueline Nackos', src: avatar2, time: '4:54 PM', default: `<p class="d-fs-200 d-lh-400 d-wmx90ch">
+export default {
+  name: 'HovercardManyStory',
+  components: {
+    DtHovercard,
+    DtRecipeFeedItemRow,
+    DtRecipeEmojiRow,
+    DtStack,
+    DtIcon,
+    DtButton,
+    DtAvatar,
+  },
+
+  data() {
+    return {
+      cardData: [{
+        name: 'Jaqueline Nackos', src: avatar2, time: '4:54 PM', default: `<p class="d-fs-200 d-lh-400 d-wmx90ch">
   Elementum fames nullam elementum velit proin vitae aliquet.
   Platea nulla consectetur consequat sagittis nullam et ultricies nisl rhoncus
   aliquet elementum venenatis quisque.</p>`,
-},
-{
-  name: 'Joseph Lumaban', src: avatar1, time: '5:05 PM', default: `<p class="d-fs-200 d-lh-400 d-wmx90ch">
+      },
+      {
+        name: 'Joseph Lumaban', src: avatar1, time: '5:05 PM', default: `<p class="d-fs-200 d-lh-400 d-wmx90ch">
   Elementum fames nullam elementum velit proin vitae aliquet.
   Platea nulla consectetur consequat sagittis nullam et ultricies nisl rhoncus
   aliquet elementum venenatis quisque.</p>`,
-},
-{
-  name: 'Purdie Afra', time: '5:16 PM', default: `<p class="d-fs-200 d-lh-400 d-wmx90ch">
+      },
+      {
+        name: 'Purdie Afra', time: '5:16 PM', default: `<p class="d-fs-200 d-lh-400 d-wmx90ch">
   Elementum fames nullam elementum velit proin vitae aliquet.
   Platea nulla consectetur consequat sagittis nullam et ultricies nisl rhoncus
   aliquet elementum venenatis quisque.</p>`,
-}];
+      }],
+    };
+  },
+};
 </script>

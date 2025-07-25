@@ -3,7 +3,7 @@ import { DtPopover } from '@/components/popover';
 import SrOnlyCloseButtonComponent from '@/common/sr_only_close_button.vue';
 
 const MOCK_TRANSITION_STUB = () => ({
-  render: function (h) {
+  render: function () {
     return this.$options._renderChildren;
   },
 });
