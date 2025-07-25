@@ -5,6 +5,7 @@
   >
     <div class="d-p24 d-pt64 lg:d-pt24">
       <page-header />
+      <!-- eslint-disable-next-line vue/no-undef-components -->
       <content />
       <dt-stack
         direction="row"
