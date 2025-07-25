@@ -4,17 +4,9 @@ import vueAccessibility from 'eslint-plugin-vuejs-accessibility';
 import storybook from 'eslint-plugin-storybook';
 import vitest from 'eslint-plugin-vitest';
 import globals from 'globals'
+import componentsList from '../../common/components_list.js';
 
-// Note: In ESLint 9 flat config, we need to handle dynamic imports differently
-// For now, we'll define the components list inline or use a static import
-const componentsList = [
-  'btn', 'select', 'validation-message', 'label', 'description',
-  'split-btn', 'mention-suggestion', 'suggestion-list', 'toggle', 'tooltip', 'toast', 'tablist', 'tab', 'stack',
-  'skeleton', 'root-layout', 'radio', 'presence', 'popover', 'pagination', 'notice', 'modal', 'loader',
-  'list-item', 'keyboard-shortcut', 'item-layout', 'input', 'radio', 'image-viewer', 'empty-state', 'emoji-picker',
-  'icon', 'datepicker', 'combobox', 'collapsible', 'chip', 'checkbox', 'card', 'breadcrumbs', 'banner', 'badge',
-  'avatar', 'emoji', 'codeblock',
-];
+componentsList.push('btn', 'select', 'validation-message', 'label', 'description', 'split-btn', 'mention-suggestion', 'suggestion-list');
 const componentsNames = componentsList.map(name => name.replace('_', '-').replace('.vue', ''));
 
 export default [
