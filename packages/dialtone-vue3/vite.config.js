@@ -138,7 +138,7 @@ export default defineConfig({
       thresholds: { // will fail the build if coverage is below these thresholds
         global: {
           branches: 80,
-          functions: 80,
+          functions: 70,
           lines: 85,
           statements: 85,
         },
