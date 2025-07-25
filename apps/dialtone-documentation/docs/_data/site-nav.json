@@ -126,6 +126,10 @@
             {
               "text": "Color Palette",
               "link": "/design/colors/palette/"
+            },
+           {
+              "text": "Data visualization",
+              "link": "/design/colors/dataviz/"
             }
 
           ]
