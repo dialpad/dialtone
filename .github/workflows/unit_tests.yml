@@ -50,13 +50,3 @@ jobs:
 
       - name: Run dialtone-vue3 tests with coverage
         run: pnpm nx run dialtone-vue3:test:coverage
-
-      - name: Upload coverage reports
-        uses: actions/upload-artifact@v4
-        if: always()
-        with:
-          name: coverage-reports
-          path: |
-            packages/dialtone-vue2/coverage/
-            packages/dialtone-vue3/coverage/
-          retention-days: 30
