@@ -191,6 +191,30 @@
       );
     }
 
+    &.d-avatar--clickable {
+      border-color: transparent;
+
+      &::before {
+        position: absolute;
+        background-color: transparent;
+        border: var(--dt-size-border-100) solid var(--avatar-color-border);
+        border-radius: var(--dt-size-radius-circle);
+        content: "";
+        inset: calc(var(--dt-space-100) * -1);
+        mask: radial-gradient(
+          circle calc(var(--avatar-presence-mask-size) / 2) at
+            calc(
+              100% - var(--avatar-presence-mask-offset-x) - var(--dt-size-100)
+            )
+            calc(
+              100% - var(--avatar-presence-mask-offset-y) - var(--dt-size-100)
+            ),
+          transparent 99%,
+          #fff 100%
+        );
+      }
+    }
+
     .d-presence {
       --presence-color-border-base: transparent;
     }
