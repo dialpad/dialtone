@@ -98,6 +98,22 @@
           />
         </clipPath>
         <clipPath
+          v-if="presence && validatedSize === 'xs' && clickable"
+          id="dt-avatar-xs-presence-clickable-clip"
+          clipPathUnits="objectBoundingBox"
+        >
+          <path
+            clip-rule="evenodd"
+            d="
+              M1 0.59019
+              C0.95587 0.56465 0.90465 0.55 0.85 0.55
+              C0.68431 0.55 0.55 0.68431 0.55 0.85
+              C0.55 0.90466 0.56469 0.95586 0.59023 1
+              H0V0H1V0.59019Z
+            "
+          />
+        </clipPath>
+        <clipPath
           v-if="presence && validatedSize === 'sm'"
           id="dt-avatar-sm-presence-clip"
           clipPathUnits="objectBoundingBox"
@@ -110,6 +126,22 @@
               C0.69391 0.58333 0.58333 0.69391 0.58333 0.83333
               C0.58333 0.88071 0.60759 0.95565 0.64705 1
               H0V0H1V0.64701Z
+            "
+          />
+        </clipPath>
+        <clipPath
+          v-if="presence && validatedSize === 'sm' && clickable"
+          id="dt-avatar-sm-presence-clickable-clip"
+          clipPathUnits="objectBoundingBox"
+        >
+          <path
+            clip-rule="evenodd"
+            d="
+              M1 0.68025
+              C0.9585 0.61792 0.88735 0.57692 0.80769 0.57692
+              C0.66727 0.57692 0.57692 0.66727 0.57692 0.80769
+              C0.57692 0.88736 0.61796 0.9585 0.68033 1
+              H0V0H1V0.68025Z
             "
           />
         </clipPath>
@@ -130,6 +162,22 @@
           />
         </clipPath>
         <clipPath
+          v-if="presence && validatedSize === 'md' && clickable"
+          id="dt-avatar-md-presence-clickable-clip"
+          clipPathUnits="objectBoundingBox"
+        >
+          <path
+            clip-rule="evenodd"
+            d="
+              M1 0.82353
+              C1 0.72607 0.921 0.64706 0.82353 0.64706
+              C0.72607 0.64706 0.64706 0.72607 0.64706 0.82353
+              C0.64706 0.921 0.72607 1 0.82353 1
+              H0V0H1V0.82353Z
+            "
+          />
+        </clipPath>
+        <clipPath
           v-if="presence && validatedSize === 'lg'"
           id="dt-avatar-lg-presence-clip"
           clipPathUnits="objectBoundingBox"
@@ -143,6 +191,23 @@
               C0.72917 0.9232 0.78513 0.97917 0.85417 0.97917
               C0.9232 0.97917 0.97917 0.9232 0.97917 0.85417
               C0.97917 0.78513 0.9232 0.72917 0.85417 0.72917Z
+            "
+          />
+        </clipPath>
+        <clipPath
+          v-if="presence && validatedSize === 'lg' && clickable"
+          id="dt-avatar-lg-presence-clickable-clip"
+          clipPathUnits="objectBoundingBox"
+        >
+          <path
+            clip-rule="evenodd"
+            d="
+              M1 1H0V0H1V1Z
+              M0.84 0.72
+              C0.77373 0.72 0.72 0.77373 0.72 0.84
+              C0.72 0.90627 0.77373 0.96 0.84 0.96
+              C0.90627 0.96 0.96 0.90627 0.96 0.84
+              C0.96 0.77373 0.90627 0.72 0.84 0.72Z
             "
           />
         </clipPath>

@@ -191,6 +191,20 @@
   }
 
   &:has(.d-presence) {
+    &.d-avatar--clickable {
+      border-color: transparent;
+
+      &::before {
+        position: absolute;
+        background-color: transparent;
+        border: var(--dt-size-border-100) solid var(--avatar-color-border);
+        border-radius: var(--dt-size-radius-circle);
+        content: "";
+        will-change: transform;
+        inset: calc(var(--dt-space-100) * -1);
+      }
+    }
+
     .d-presence {
       --presence-color-border-base: transparent;
     }
@@ -214,6 +228,12 @@
       .d-avatar__overlay {
         clip-path: url("#dt-avatar-xs-presence-clip");
       }
+
+      &.d-avatar--clickable {
+        &::before {
+          clip-path: url("#dt-avatar-xs-presence-clickable-clip");
+        }
+      }
     }
   }
 
@@ -227,6 +247,12 @@
       .d-avatar__canvas,
       .d-avatar__overlay {
         clip-path: url("#dt-avatar-sm-presence-clip");
+      }
+
+      &.d-avatar--clickable {
+        &::before {
+          clip-path: url("#dt-avatar-sm-presence-clickable-clip");
+        }
       }
     }
   }
@@ -242,6 +268,12 @@
       .d-avatar__overlay {
         clip-path: url("#dt-avatar-md-presence-clip");
       }
+
+      &.d-avatar--clickable {
+        &::before {
+          clip-path: url("#dt-avatar-md-presence-clickable-clip");
+        }
+      }
     }
   }
 
@@ -255,6 +287,12 @@
       .d-avatar__canvas,
       .d-avatar__overlay {
         clip-path: url("#dt-avatar-lg-presence-clip");
+      }
+
+      &.d-avatar--clickable:has(.d-presence) {
+        &::before {
+          clip-path: url("#dt-avatar-lg-presence-clickable-clip");
+        }
       }
     }
   }

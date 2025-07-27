@@ -255,11 +255,9 @@ describe('DtAvatar Tests', () => {
         expect(presence.classes('d-avatar__presence--lg')).toBe(true);
       });
     });
-
     describe('SVG ClipPath Rendering', () => {
       it('should render the SVG when presence is set', async () => {
         await wrapper.setProps({ presence: 'active' });
-
         const svg = wrapper.find('svg.d-avatar__clip');
         expect(svg.exists()).toBe(true);
         expect(svg.find('defs').exists()).toBe(true);
@@ -267,41 +265,68 @@ describe('DtAvatar Tests', () => {
 
       it('should NOT render the SVG when presence is not set', async () => {
         await wrapper.setProps({ presence: null });
-
         const svg = wrapper.find('svg.d-avatar__clip');
         expect(svg.exists()).toBe(false);
       });
 
-      it('should render the correct clipPath for xs size', async () => {
-        await wrapper.setProps({ presence: 'active', size: 'xs' });
-
+      // XS
+      it('should render only the regular clipPath for xs size when not clickable', async () => {
+        await wrapper.setProps({ presence: 'active', size: 'xs', clickable: false });
         const svg = wrapper.find('svg.d-avatar__clip');
-        expect(svg.exists()).toBe(true);
         expect(svg.find('#dt-avatar-xs-presence-clip').exists()).toBe(true);
+        expect(svg.find('#dt-avatar-xs-presence-clickable-clip').exists()).toBe(false);
       });
 
-      it('should render the correct clipPath for sm size', async () => {
-        await wrapper.setProps({ presence: 'active', size: 'sm' });
-
+      it('should render both the regular and clickable clipPaths for xs size when clickable', async () => {
+        await wrapper.setProps({ presence: 'active', size: 'xs', clickable: true });
         const svg = wrapper.find('svg.d-avatar__clip');
-        expect(svg.exists()).toBe(true);
+        expect(svg.find('#dt-avatar-xs-presence-clip').exists()).toBe(true);
+        expect(svg.find('#dt-avatar-xs-presence-clickable-clip').exists()).toBe(true);
+      });
+
+      // SM
+      it('should render only the regular clipPath for sm size when not clickable', async () => {
+        await wrapper.setProps({ presence: 'active', size: 'sm', clickable: false });
+        const svg = wrapper.find('svg.d-avatar__clip');
         expect(svg.find('#dt-avatar-sm-presence-clip').exists()).toBe(true);
+        expect(svg.find('#dt-avatar-sm-presence-clickable-clip').exists()).toBe(false);
       });
 
-      it('should render the correct clipPath for md size', async () => {
-        await wrapper.setProps({ presence: 'active', size: 'md' });
-
+      it('should render both the regular and clickable clipPaths for sm size when clickable', async () => {
+        await wrapper.setProps({ presence: 'active', size: 'sm', clickable: true });
         const svg = wrapper.find('svg.d-avatar__clip');
-        expect(svg.exists()).toBe(true);
+        expect(svg.find('#dt-avatar-sm-presence-clip').exists()).toBe(true);
+        expect(svg.find('#dt-avatar-sm-presence-clickable-clip').exists()).toBe(true);
+      });
+
+      // MD
+      it('should render only the regular clipPath for md size when not clickable', async () => {
+        await wrapper.setProps({ presence: 'active', size: 'md', clickable: false });
+        const svg = wrapper.find('svg.d-avatar__clip');
         expect(svg.find('#dt-avatar-md-presence-clip').exists()).toBe(true);
+        expect(svg.find('#dt-avatar-md-presence-clickable-clip').exists()).toBe(false);
       });
 
-      it('should render the correct clipPath for lg size', async () => {
-        await wrapper.setProps({ presence: 'active', size: 'lg' });
-
+      it('should render both the regular and clickable clipPaths for md size when clickable', async () => {
+        await wrapper.setProps({ presence: 'active', size: 'md', clickable: true });
         const svg = wrapper.find('svg.d-avatar__clip');
-        expect(svg.exists()).toBe(true);
+        expect(svg.find('#dt-avatar-md-presence-clip').exists()).toBe(true);
+        expect(svg.find('#dt-avatar-md-presence-clickable-clip').exists()).toBe(true);
+      });
+
+      // LG
+      it('should render only the regular clipPath for lg size when not clickable', async () => {
+        await wrapper.setProps({ presence: 'active', size: 'lg', clickable: false });
+        const svg = wrapper.find('svg.d-avatar__clip');
         expect(svg.find('#dt-avatar-lg-presence-clip').exists()).toBe(true);
+        expect(svg.find('#dt-avatar-lg-presence-clickable-clip').exists()).toBe(false);
+      });
+
+      it('should render both the regular and clickable clipPaths for lg size when clickable', async () => {
+        await wrapper.setProps({ presence: 'active', size: 'lg', clickable: true });
+        const svg = wrapper.find('svg.d-avatar__clip');
+        expect(svg.find('#dt-avatar-lg-presence-clip').exists()).toBe(true);
+        expect(svg.find('#dt-avatar-lg-presence-clickable-clip').exists()).toBe(true);
       });
     });
   });
