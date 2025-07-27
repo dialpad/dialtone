@@ -301,5 +301,54 @@
 
     width: var(--dt-size-550);
     height: var(--dt-size-550);
+
+    /* Groups need the data-group-count attribute to properly size the masking */
+
+    /* Without the attribute, they will fall back to the old box-shadow color */
+    &[data-group-count="single"] {
+      --avatar-count-color-shadow: transparent;
+
+      .d-avatar__count {
+        width:calc(var(--dt-size-450) + var(--dt-size-200));
+        box-shadow: none;
+      }
+
+      .d-avatar__canvas {
+        clip-path: path('M18 8.05664C17.6716 8.02033 17.3381 8 17 8C12.0294 8 8 12.0294 8 17C8 17.3381 8.02033 17.6716 8.05664 18H0V0H18V8.05664Z');
+        will-change: transform;
+      }
+    }
+
+    &[data-group-count="double"] {
+      --avatar-count-color-shadow: transparent;
+
+      .d-avatar__count {
+        width:calc(var(--dt-size-500) + var(--dt-size-200));
+        box-shadow: none;
+      }
+
+      .d-avatar__canvas {
+        clip-path: path('M18 8.05664C17.6716 8.02033 17.3381 8 17 8H13C8.02944 8 4 12.0294 4 17C4 17.3381 4.02033 17.6716 4.05664 18H0V0H18V8.05664Z');
+        will-change: transform;
+      }
+    }
+
+    &[data-group-count="triple"] {
+      --avatar-count-color-shadow: transparent;
+
+      .d-avatar__count {
+        width:calc(var(--dt-size-550) + var(--dt-size-200));
+        box-shadow: none;
+      }
+
+      .d-avatar__canvas {
+        clip-path: path('M18 8.05664C17.6716 8.02033 17.3381 8 17 8H5C3.14984 8 1.43011 8.55833 0 9.51562V0H18V8.05664Z');
+        will-change: transform;
+      }
+    }
+
+    &.d-avatar--clickable {
+      border:none !important;
+    }
   }
 }
