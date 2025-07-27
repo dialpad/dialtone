@@ -182,6 +182,38 @@ describe('DtAvatar Tests', () => {
       });
     });
 
+    describe('Group Count Data Attribute', () => {
+      it('should not set data-group-count when group is not set', async () => {
+        await wrapper.setProps({ group: undefined });
+        const avatar = wrapper.find('[data-qa="dt-avatar"]');
+        expect(avatar.attributes('data-group-count')).toBeUndefined();
+      });
+
+      it('should not set data-group-count when group is 1 or less', async () => {
+        await wrapper.setProps({ group: 1 });
+        const avatar = wrapper.find('[data-qa="dt-avatar"]');
+        expect(avatar.attributes('data-group-count')).toBeUndefined();
+      });
+
+      it('should set data-group-count="single" when group is between 2 and 9', async () => {
+        await wrapper.setProps({ group: 5 });
+        const avatar = wrapper.find('[data-qa="dt-avatar"]');
+        expect(avatar.attributes('data-group-count')).toBe('single');
+      });
+
+      it('should set data-group-count="double" when group is between 10 and 99', async () => {
+        await wrapper.setProps({ group: 25 });
+        const avatar = wrapper.find('[data-qa="dt-avatar"]');
+        expect(avatar.attributes('data-group-count')).toBe('double');
+      });
+
+      it('should set data-group-count="triple" when group is 100 or more', async () => {
+        await wrapper.setProps({ group: 100 });
+        const avatar = wrapper.find('[data-qa="dt-avatar"]');
+        expect(avatar.attributes('data-group-count')).toBe('triple');
+      });
+    });
+
     describe('When seed is set', () => {
       // note we keep these tests in sync with the android team, so do not change without communicating with them.
       it.each([

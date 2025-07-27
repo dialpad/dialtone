@@ -5,6 +5,7 @@
     :class="avatarClasses"
     :style="$attrs.style"
     data-qa="dt-avatar"
+    v-bind="groupCountDataAttr"
     @click="handleClick"
   >
     <div
@@ -328,6 +329,21 @@ export default {
 
     formattedGroup () {
       return this.group > 99 ? '99+' : this.group;
+    },
+
+    groupCountDataAttr () {
+      if (!this.showGroup) return null;
+
+      let countCategory;
+      if (this.group <= 9) {
+        countCategory = 'single';
+      } else if (this.group <= 99) {
+        countCategory = 'double';
+      } else {
+        countCategory = 'triple';
+      }
+
+      return { 'data-group-count': countCategory };
     },
 
     validatedSize () {

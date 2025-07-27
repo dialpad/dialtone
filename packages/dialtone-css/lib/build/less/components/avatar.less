@@ -230,6 +230,11 @@
     --avatar-presence-mask-size: var(--dt-size-450);
     --avatar-presence-mask-offset-x: var(--dt-space-200);
     --avatar-presence-mask-offset-y: var(--dt-space-200);
+
+    &.d-avatar--group {
+      --avatar-presence-mask-offset-x: var(--dt-space-300);
+      --avatar-presence-mask-offset-y: var(--dt-space-300);
+    }
   }
 
   &--sm {
@@ -277,5 +282,91 @@
 
     width: var(--dt-size-550);
     height: var(--dt-size-550);
+
+    --avatar-count-mask-size: calc(var(--dt-size-500) + var(--dt-size-200) + var(--dt-size-50));
+    --avatar-count-mask-outer-circle-radius: calc(var(--dt-size-400) + var(--dt-size-100));
+    --avatar-count-mask-outer-circle-x: calc(var(--dt-size-400) + var(--dt-size-100));
+    --avatar-count-mask-outer-circle-y: calc(var(--dt-size-400) + var(--dt-size-100));
+    --avatar-count-mask-inner-circle-radius: calc(var(--dt-size-400) + var(--dt-size-100));
+    --avatar-count-mask-inner-circle-x: calc(var(--dt-size-500) + var(--dt-size-100));
+    --avatar-count-mask-inner-circle-y: calc(var(--dt-size-500) + var(--dt-size-100));
+    --avatar-count-mask-offset-x: var(--dt-space-300);
+    --avatar-count-mask-offset-y: var(--dt-space-400);
+    --avatar-count-mask-svg-w: calc(var(--dt-size-625) - var(--dt-size-200));
+    --avatar-count-mask-svg-h: calc(var(--dt-size-500) + var(--dt-size-200));
+
+    /* Groups need the data-group-count attribute to properly size the masking */
+
+    /* Without the attribute, they will fall back to the old box-shadow color */
+      &:has(.d-avatar__count) {
+        &.d-avatar--clickable {
+          border: none !important;
+        }
+
+        &[data-group-count="single"] {
+          --avatar-count-mask-offset-x: var(--dt-space-100);
+          --avatar-count-mask-offset-y: var(--dt-space-100);
+          --avatar-count-color-shadow: transparent;
+
+          .d-avatar__canvas,
+          .d-avatar__overlay {
+            mask: radial-gradient(
+              circle calc(var(--avatar-count-mask-size) / 2) at
+                calc(100% - var(--avatar-count-mask-offset-x))
+                calc(100% - var(--avatar-count-mask-offset-y)),
+              transparent 99%,
+              #fff 100%
+            );
+            will-change: transform;
+          }
+        }
+
+        &[data-group-count="double"] {
+          --avatar-count-color-shadow: transparent;
+
+          .d-avatar__canvas,
+          .d-avatar__overlay {
+            mask: radial-gradient(
+                circle var(--avatar-count-mask-outer-circle-radius) at var(--avatar-count-mask-outer-circle-x)
+                  var(--avatar-count-mask-outer-circle-y),
+                #fff 99%,
+                transparent 100%
+              ),
+              url('data:image/svg+xml,<svg width="40" height="18" viewBox="0 0 40 18" fill="white" xmlns="http://www.w3.org/2000/svg"><rect width="40" height="18" rx="9" fill="white"/></svg>')
+                var(--avatar-count-mask-offset-x) var(--avatar-count-mask-offset-y) / var(--avatar-count-mask-svg-w) var(--avatar-count-mask-svg-h) no-repeat;
+            -webkit-mask-composite: subtract;
+            mask-composite: subtract;
+            will-change: transform;
+          }
+
+          .d-avatar__count {
+            width: calc(var(--dt-size-500) + var(--dt-size-200));
+          }
+        }
+
+        &[data-group-count="triple"] {
+          --avatar-count-color-shadow: transparent;
+          --avatar-count-mask-offset-x: var(--dt-space-300-negative);
+
+          .d-avatar__canvas,
+          .d-avatar__overlay {
+            mask: radial-gradient(
+                circle var(--avatar-count-mask-outer-circle-radius) at var(--avatar-count-mask-outer-circle-x)
+                  var(--avatar-count-mask-outer-circle-y),
+                #fff 99%,
+                transparent 100%
+              ),
+              url('data:image/svg+xml,<svg width="40" height="18" viewBox="0 0 40 18" fill="white" xmlns="http://www.w3.org/2000/svg"><rect width="40" height="18" rx="9" /></svg>')
+                var(--avatar-count-mask-offset-x) var(--avatar-count-mask-offset-y) / var(--avatar-count-mask-svg-w) var(--avatar-count-mask-svg-h) no-repeat;
+            -webkit-mask-composite: subtract;
+            mask-composite: subtract;
+            will-change: transform;
+          }
+
+          .d-avatar__count {
+            width: calc(var(--dt-size-550) + var(--dt-size-200));
+          }
+        }
+      }
   }
 }
