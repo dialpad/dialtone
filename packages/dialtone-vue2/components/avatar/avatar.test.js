@@ -255,6 +255,55 @@ describe('DtAvatar Tests', () => {
         expect(presence.classes('d-avatar__presence--lg')).toBe(true);
       });
     });
+
+    describe('SVG ClipPath Rendering', () => {
+      it('should render the SVG when presence is set', async () => {
+        await wrapper.setProps({ presence: 'active' });
+
+        const svg = wrapper.find('svg.d-avatar__clip');
+        expect(svg.exists()).toBe(true);
+        expect(svg.find('defs').exists()).toBe(true);
+      });
+
+      it('should NOT render the SVG when presence is not set', async () => {
+        await wrapper.setProps({ presence: null });
+
+        const svg = wrapper.find('svg.d-avatar__clip');
+        expect(svg.exists()).toBe(false);
+      });
+
+      it('should render the correct clipPath for xs size', async () => {
+        await wrapper.setProps({ presence: 'active', size: 'xs' });
+
+        const svg = wrapper.find('svg.d-avatar__clip');
+        expect(svg.exists()).toBe(true);
+        expect(svg.find('#dt-avatar-xs-presence-clip').exists()).toBe(true);
+      });
+
+      it('should render the correct clipPath for sm size', async () => {
+        await wrapper.setProps({ presence: 'active', size: 'sm' });
+
+        const svg = wrapper.find('svg.d-avatar__clip');
+        expect(svg.exists()).toBe(true);
+        expect(svg.find('#dt-avatar-sm-presence-clip').exists()).toBe(true);
+      });
+
+      it('should render the correct clipPath for md size', async () => {
+        await wrapper.setProps({ presence: 'active', size: 'md' });
+
+        const svg = wrapper.find('svg.d-avatar__clip');
+        expect(svg.exists()).toBe(true);
+        expect(svg.find('#dt-avatar-md-presence-clip').exists()).toBe(true);
+      });
+
+      it('should render the correct clipPath for lg size', async () => {
+        await wrapper.setProps({ presence: 'active', size: 'lg' });
+
+        const svg = wrapper.find('svg.d-avatar__clip');
+        expect(svg.exists()).toBe(true);
+        expect(svg.find('#dt-avatar-lg-presence-clip').exists()).toBe(true);
+      });
+    });
   });
 
   describe('Interactivity Tests', () => {

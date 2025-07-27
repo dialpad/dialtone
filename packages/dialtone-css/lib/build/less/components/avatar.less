@@ -102,6 +102,17 @@
     display: flex;
   }
 
+  &__clip {
+    position:absolute;
+    width:var(--dt-space-0);
+    height:var(--dt-space-0);
+    margin: var(--dt-size-100-negative);
+    overflow:hidden;
+    white-space: nowrap;
+    border-width:0;
+    clip: rect(0,0,0,0);
+  }
+
   &__count {
     position: absolute;
     right: var(--dt-space-0);
@@ -179,6 +190,17 @@
     }
   }
 
+  &:has(.d-presence) {
+    .d-presence {
+      --presence-color-border-base: transparent;
+    }
+
+    .d-avatar__canvas,
+    .d-avatar__overlay {
+        will-change: transform;
+    }
+  }
+
   //  --  SIZES
   //  ------------------------------------------------------------------------
 
@@ -186,6 +208,13 @@
     --avatar-size-shape: calc(var(--dt-size-500) + var(--dt-size-200));
     --avatar-presence-position-right: var(--dt-space-300-negative);
     --avatar-presence-position-bottom: var(--dt-space-300-negative);
+
+    &:has(.d-presence) {
+      .d-avatar__canvas,
+      .d-avatar__overlay {
+        clip-path: url("#dt-avatar-xs-presence-clip");
+      }
+    }
   }
 
   &--sm {
@@ -193,6 +222,13 @@
     --avatar-size-text: var(--dt-font-size-100);
     --avatar-presence-position-right: var(--dt-space-200-negative);
     --avatar-presence-position-bottom: var(--dt-space-200-negative);
+
+    &:has(.d-presence) {
+      .d-avatar__canvas,
+      .d-avatar__overlay {
+        clip-path: url("#dt-avatar-sm-presence-clip");
+      }
+    }
   }
 
   &--md {
@@ -200,6 +236,13 @@
     --avatar-size-text: var(--dt-font-size-200);
     --avatar-presence-position-right: var(--dt-space-100-negative);
     --avatar-presence-position-bottom: var(--dt-space-100-negative);
+
+    &:has(.d-presence) {
+      .d-avatar__canvas,
+      .d-avatar__overlay {
+        clip-path: url("#dt-avatar-md-presence-clip");
+      }
+    }
   }
 
   &--lg {
@@ -207,6 +250,13 @@
     --avatar-size-text: var(--dt-font-size-300);
     --avatar-presence-position-right: var(--dt-space-100);
     --avatar-presence-position-bottom: var(--dt-space-100);
+
+    &:has(.d-presence) {
+      .d-avatar__canvas,
+      .d-avatar__overlay {
+        clip-path: url("#dt-avatar-lg-presence-clip");
+      }
+    }
   }
 
   &--xl {

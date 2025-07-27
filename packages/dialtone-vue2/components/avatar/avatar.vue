@@ -73,6 +73,81 @@
       v-bind="presenceProps"
       data-qa="dt-presence"
     />
+    <svg
+      v-if="includeClipPath"
+      width="0"
+      height="0"
+      class="d-avatar__clip"
+    >
+      <defs>
+        <!-- AVATAR PRESENCE CLIPS -->
+        <clipPath
+          v-if="presence && validatedSize === 'xs'"
+          id="dt-avatar-xs-presence-clip"
+          clipPathUnits="objectBoundingBox"
+        >
+          <path
+            clip-rule="evenodd"
+            d="
+              M1 0.57454
+              C0.96524 0.56226 0.92785 0.55556 0.88889 0.55556
+              C0.70479 0.55556 0.55556 0.70479 0.55556 0.88889
+              C0.55556 0.92786 0.56231 0.96524 0.5746 1
+              H0V0H1V0.57454Z
+            "
+          />
+        </clipPath>
+        <clipPath
+          v-if="presence && validatedSize === 'sm'"
+          id="dt-avatar-sm-presence-clip"
+          clipPathUnits="objectBoundingBox"
+        >
+          <path
+            clip-rule="evenodd"
+            d="
+              M1 0.64701
+              C0.95565 0.60754 0.8807 0.58333 0.83333 0.58333
+              C0.69391 0.58333 0.58333 0.69391 0.58333 0.83333
+              C0.58333 0.88071 0.60759 0.95565 0.64705 1
+              H0V0H1V0.64701Z
+            "
+          />
+        </clipPath>
+        <clipPath
+          v-if="presence && validatedSize === 'md'"
+          id="dt-avatar-md-presence-clip"
+          clipPathUnits="objectBoundingBox"
+        >
+          <path
+            clip-rule="evenodd"
+            d="
+              M1 0.73996
+              C0.96641 0.68962 0.90897 0.65625 0.84375 0.65625
+              C0.73978 0.65625 0.65625 0.73978 0.65625 0.84375
+              C0.65625 0.90898 0.68964 0.96641 0.74002 1
+              H0V0H1V0.73996Z
+            "
+          />
+        </clipPath>
+        <clipPath
+          v-if="presence && validatedSize === 'lg'"
+          id="dt-avatar-lg-presence-clip"
+          clipPathUnits="objectBoundingBox"
+        >
+          <path
+            clip-rule="evenodd"
+            d="
+              M1 1H0V0H1V1Z
+              M0.85417 0.72917
+              C0.78513 0.72917 0.72917 0.78513 0.72917 0.85417
+              C0.72917 0.9232 0.78513 0.97917 0.85417 0.97917
+              C0.9232 0.97917 0.97917 0.9232 0.97917 0.85417
+              C0.97917 0.78513 0.9232 0.72917 0.85417 0.72917Z
+            "
+          />
+        </clipPath>
+      </defs>
+    </svg>
   </component>
 </template>
 
@@ -333,6 +408,10 @@ export default {
 
     showImage () {
       return this.imageLoadedSuccessfully !== false && this.imageSrc;
+    },
+
+    includeClipPath () {
+      return this.presence && this.presence !== 'none';
     },
   },
 
