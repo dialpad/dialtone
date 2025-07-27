@@ -12,6 +12,7 @@
 //    • CHILDREN
 //    • SIZES
 //    • VARIANTS
+//  • RECIPE STYLE OVERRIDES
 //
 //  ============================================================================
 //  $   BASE STYLE
@@ -368,5 +369,21 @@
           }
         }
       }
+  }
+}
+
+/* -- RECIPE STYLE OVERRIDES -- */
+.d-recipe-leftbar-row--selected .d-avatar,
+.d-recipe-leftbar-row:hover .d-avatar,
+.d-recipe-leftbar-row:focus-within .d-avatar,
+.d-recipe-leftbar-row__primary:hover .d-avatar {
+  // Presence Masking
+  .d-presence {
+    --presence-color-border-base: transparent;
+  }
+
+  // Group Masking
+  &.d-avatar--group .d-avatar__count {
+    --avatar-count-color-shadow: transparent;
   }
 }
