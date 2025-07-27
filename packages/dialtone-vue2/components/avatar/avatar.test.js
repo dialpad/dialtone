@@ -263,8 +263,8 @@ describe('DtAvatar Tests', () => {
         expect(svg.find('defs').exists()).toBe(true);
       });
 
-      it('should NOT render the SVG when presence is not set', async () => {
-        await wrapper.setProps({ presence: null });
+      it('should NOT render the SVG unless presence or group is set', async () => {
+        await wrapper.setProps({ presence: null, group: null });
         const svg = wrapper.find('svg.d-avatar__clip');
         expect(svg.exists()).toBe(false);
       });
@@ -327,6 +327,31 @@ describe('DtAvatar Tests', () => {
         const svg = wrapper.find('svg.d-avatar__clip');
         expect(svg.find('#dt-avatar-lg-presence-clip').exists()).toBe(true);
         expect(svg.find('#dt-avatar-lg-presence-clickable-clip').exists()).toBe(true);
+      });
+    });
+    describe('SVG Group ClipPath Rendering', () => {
+      it('should render the single group clipPath for group 2-9', async () => {
+        await wrapper.setProps({ group: 5 });
+        const svg = wrapper.find('svg.d-avatar__clip');
+        expect(svg.find('#dt-avatar-group-single-clip').exists()).toBe(true);
+        expect(svg.find('#dt-avatar-group-double-clip').exists()).toBe(false);
+        expect(svg.find('#dt-avatar-group-triple-clip').exists()).toBe(false);
+      });
+
+      it('should render the double group clipPath for group 10-99', async () => {
+        await wrapper.setProps({ group: 25 });
+        const svg = wrapper.find('svg.d-avatar__clip');
+        expect(svg.find('#dt-avatar-group-single-clip').exists()).toBe(false);
+        expect(svg.find('#dt-avatar-group-double-clip').exists()).toBe(true);
+        expect(svg.find('#dt-avatar-group-triple-clip').exists()).toBe(false);
+      });
+
+      it('should render the triple group clipPath for group 100+', async () => {
+        await wrapper.setProps({ group: 100 });
+        const svg = wrapper.find('svg.d-avatar__clip');
+        expect(svg.find('#dt-avatar-group-single-clip').exists()).toBe(false);
+        expect(svg.find('#dt-avatar-group-double-clip').exists()).toBe(false);
+        expect(svg.find('#dt-avatar-group-triple-clip').exists()).toBe(true);
       });
     });
   });

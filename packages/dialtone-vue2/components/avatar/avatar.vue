@@ -4,6 +4,7 @@
     :id="id"
     :class="avatarClasses"
     data-qa="dt-avatar"
+    v-bind="groupCountDataAttr"
     @click="handleClick"
   >
     <div
@@ -208,6 +209,56 @@
               C0.72 0.90627 0.77373 0.96 0.84 0.96
               C0.90627 0.96 0.96 0.90627 0.96 0.84
               C0.96 0.77373 0.90627 0.72 0.84 0.72Z
+            "
+          />
+        </clipPath>
+        <!-- AVATAR GROUP CLIPS -->
+        <clipPath
+          v-if="
+            showGroup &&
+              groupCountDataAttr['data-group-count'] !== 'double' &&
+              groupCountDataAttr['data-group-count'] !== 'triple'
+          "
+          id="dt-avatar-group-single-clip"
+          clipPathUnits="objectBoundingBox"
+        >
+          <path
+            clip-rule="evenodd"
+            d="
+              M1 0.44759C0.98176 0.44557 0.96212 0.44444 0.94444 0.44444
+              C0.66817 0.44444 0.44444 0.66817 0.44444 0.94444
+              C0.44444 0.96212 0.44557 0.98176 0.44759 1H0V0H1V0.44759Z
+            "
+          />
+        </clipPath>
+        <clipPath
+          v-if="showGroup && groupCountDataAttr['data-group-count'] === 'double'"
+          id="dt-avatar-group-double-clip"
+          clipPathUnits="objectBoundingBox"
+        >
+          <path
+            clip-rule="evenodd"
+            d="
+              M1 0.44759
+              C0.98176 0.44557 0.96323 0.44444 0.94444 0.44444
+              H0.72222
+              C0.44608 0.44444 0.22222 0.6683 0.22222 0.94444
+              C0.22222 0.96323 0.22335 0.98176 0.22537 1
+              H0V0H1V0.44759Z
+            "
+          />
+        </clipPath>
+        <clipPath
+          v-if="showGroup && groupCountDataAttr['data-group-count'] === 'triple'"
+          id="dt-avatar-group-triple-clip"
+          clipPathUnits="objectBoundingBox"
+        >
+          <path
+            clip-rule="evenodd"
+            d="
+              M1 0.44759C0.98176 0.44557 0.96211 0.44444 0.94444 0.44444
+              H0.27778C0.175 0.44444 0.07945 0.47546 0 0.52868
+              V0H1V0.44759Z
             "
           />
         </clipPath>
@@ -466,6 +517,21 @@ export default {
       return this.group > 99 ? '99+' : this.group;
     },
 
+    groupCountDataAttr () {
+      if (!this.showGroup) return null;
+
+      let countCategory;
+      if (this.group <= 9) {
+        countCategory = 'single';
+      } else if (this.group <= 99) {
+        countCategory = 'double';
+      } else {
+        countCategory = 'triple';
+      }
+
+      return { 'data-group-count': countCategory };
+    },
+
     validatedSize () {
       // TODO: Group only supports xs size for now. Remove this when we support other sizes.
       return this.group ? 'xs' : this.size;
@@ -476,7 +542,7 @@ export default {
     },
 
     includeClipPath () {
-      return this.presence && this.presence !== 'none';
+      return this.showGroup || (this.presence && this.presence !== 'none');
     },
   },
 

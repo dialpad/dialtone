@@ -312,5 +312,54 @@
 
     width: var(--dt-size-550);
     height: var(--dt-size-550);
+
+    /* Groups need the data-group-count attribute to properly size the masking */
+
+    /* Without the attribute, they will fall back to the old box-shadow color */
+    &[data-group-count="single"] {
+      --avatar-count-color-shadow: transparent;
+
+      .d-avatar__count {
+        width:calc(var(--dt-size-450) + var(--dt-size-200));
+        box-shadow: none;
+      }
+
+      .d-avatar__canvas {
+        clip-path: url("#dt-avatar-group-single-clip");
+        will-change: transform;
+      }
+    }
+
+    &[data-group-count="double"] {
+      --avatar-count-color-shadow: transparent;
+
+      .d-avatar__count {
+        width:calc(var(--dt-size-500) + var(--dt-size-200));
+        box-shadow: none;
+      }
+
+      .d-avatar__canvas {
+        clip-path: url("#dt-avatar-group-double-clip");
+        will-change: transform;
+      }
+    }
+
+    &[data-group-count="triple"] {
+      --avatar-count-color-shadow: transparent;
+
+      .d-avatar__count {
+        width:calc(var(--dt-size-550) + var(--dt-size-200));
+        box-shadow: none;
+      }
+
+      .d-avatar__canvas {
+        clip-path: url("#dt-avatar-group-triple-clip");
+        will-change: transform;
+      }
+    }
+
+    &.d-avatar--clickable {
+      border:none !important;
+    }
   }
 }
