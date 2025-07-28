@@ -240,7 +240,7 @@ vueCode='
 
 <code-example-tabs
 htmlCode='
-<div class="d-avatar d-avatar--group">
+<div class="d-avatar d-avatar--group" data-group-count="double">
   <div class="d-avatar__canvas">
     <img class="d-avatar__image" src="/assets/images/person.png" alt="Person Avatar"/>
   </div>
