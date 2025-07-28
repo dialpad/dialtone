@@ -2660,24 +2660,24 @@
             "value": "{shell.color.foreground.secondary}",
             "type": "color"
           },
+          "secondary-default": {
+            "value": "{shell.color.foreground.secondary}",
+            "type": "color"
+          },
           "primary-strong": {
             "value": "{shell.color.foreground.strong}",
+            "type": "color"
+          },
+          "tertiary-default": {
+            "value": "{shell.color.foreground.tertiary}",
             "type": "color"
           },
           "primary-disabled": {
             "value": "{shell.color.foreground.disabled}",
             "type": "color"
           },
-          "secondary-default": {
-            "value": "{shell.color.foreground.secondary}",
-            "type": "color"
-          },
           "secondary-disabled": {
             "value": "{shell.color.foreground.disabled}",
-            "type": "color"
-          },
-          "tertiary-default": {
-            "value": "{shell.color.foreground.tertiary}",
             "type": "color"
           },
           "muted-default": {
