@@ -1,3 +1,10 @@
+## [3.186.1](https://github.com/dialpad/dialtone/compare/dialtone-vue3/v3.186.0...dialtone-vue3/v3.186.1) (2025-07-29)
+
+
+### Code Refactoring
+
+* **Localization:** DLT-2668 sync vue3 and vue2 ([#835](https://github.com/dialpad/dialtone/issues/835)) ([ad3665a](https://github.com/dialpad/dialtone/commit/ad3665aeef763f37647fada6dbb31c29bf19c8ad))
+
 # [3.186.0](https://github.com/dialpad/dialtone/compare/dialtone-vue3/v3.185.4...dialtone-vue3/v3.186.0) (2025-07-23)
 
 
