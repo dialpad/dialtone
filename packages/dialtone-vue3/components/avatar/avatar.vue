@@ -501,6 +501,7 @@ export default {
           'd-avatar--group': this.showGroup,
           [`d-avatar--color-${this.getColor()}`]: !this.isIconType(),
           'd-avatar--clickable': this.clickable,
+          'd-avatar--presence': this.presence && !this.showGroup,
         },
       ];
     },

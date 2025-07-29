@@ -191,7 +191,75 @@
     }
   }
 
-  &:has(.d-presence) {
+  //  --  SIZES
+  //  ------------------------------------------------------------------------
+
+  &--xs {
+    --avatar-size-shape: calc(var(--dt-size-500) + var(--dt-size-200));
+    --avatar-presence-position-right: var(--dt-space-300-negative);
+    --avatar-presence-position-bottom: var(--dt-space-300-negative);
+  }
+
+  &--sm {
+    --avatar-size-shape: var(--dt-size-550);
+    --avatar-size-text: var(--dt-font-size-100);
+    --avatar-presence-position-right: var(--dt-space-200-negative);
+    --avatar-presence-position-bottom: var(--dt-space-200-negative);
+  }
+
+  &--md {
+    --avatar-size-shape: var(--dt-size-600);
+    --avatar-size-text: var(--dt-font-size-200);
+    --avatar-presence-position-right: var(--dt-space-100-negative);
+    --avatar-presence-position-bottom: var(--dt-space-100-negative);
+  }
+
+  &--lg {
+    --avatar-size-shape: var(--dt-size-650);
+    --avatar-size-text: var(--dt-font-size-300);
+    --avatar-presence-position-right: var(--dt-space-100);
+    --avatar-presence-position-bottom: var(--dt-space-100);
+  }
+
+  &--xl {
+    --avatar-size-shape: var(--dt-size-700);
+    --avatar-size-text: var(--dt-font-size-400);
+    --avatar-presence-position-right: var(--dt-space-300);
+    --avatar-presence-position-bottom: var(--dt-space-300);
+  }
+
+  //  --  PRESENCE
+  //  ------------------------------------------------------------------------
+
+  &--presence {
+    &.d-avatar--xs {
+      .d-avatar__canvas,
+      .d-avatar__overlay {
+        clip-path: url("#dt-avatar-xs-presence-clip");
+      }
+    }
+
+    &.d-avatar--sm {
+      .d-avatar__canvas,
+      .d-avatar__overlay {
+        clip-path: url("#dt-avatar-sm-presence-clip");
+      }
+    }
+
+    &.d-avatar--md {
+      .d-avatar__canvas,
+      .d-avatar__overlay {
+        clip-path: url("#dt-avatar-md-presence-clip");
+      }
+    }
+
+    &.d-avatar--lg {
+      .d-avatar__canvas,
+      .d-avatar__overlay {
+        clip-path: url("#dt-avatar-lg-presence-clip");
+      }
+    }
+
     &.d-avatar--clickable {
       border-color: transparent;
 
@@ -204,6 +272,30 @@
         will-change: transform;
         inset: calc(var(--dt-space-100) * -1);
       }
+
+      &.d-avatar--xs {
+        &::before {
+          clip-path: url("#dt-avatar-xs-presence-clickable-clip");
+        }
+      }
+
+      &.d-avatar--sm {
+        &::before {
+          clip-path: url("#dt-avatar-sm-presence-clickable-clip");
+        }
+      }
+
+      &.d-avatar--md {
+        &::before {
+          clip-path: url("#dt-avatar-md-presence-clickable-clip");
+        }
+      }
+
+      &.d-avatar--lg {
+        &::before {
+          clip-path: url("#dt-avatar-lg-presence-clickable-clip");
+        }
+      }
     }
 
     .d-presence {
@@ -214,95 +306,6 @@
     .d-avatar__overlay {
         will-change: transform;
     }
-  }
-
-  //  --  SIZES
-  //  ------------------------------------------------------------------------
-
-  &--xs {
-    --avatar-size-shape: calc(var(--dt-size-500) + var(--dt-size-200));
-    --avatar-presence-position-right: var(--dt-space-300-negative);
-    --avatar-presence-position-bottom: var(--dt-space-300-negative);
-
-    &:has(.d-presence) {
-      .d-avatar__canvas,
-      .d-avatar__overlay {
-        clip-path: url("#dt-avatar-xs-presence-clip");
-      }
-
-      &.d-avatar--clickable {
-        &::before {
-          clip-path: url("#dt-avatar-xs-presence-clickable-clip");
-        }
-      }
-    }
-  }
-
-  &--sm {
-    --avatar-size-shape: var(--dt-size-550);
-    --avatar-size-text: var(--dt-font-size-100);
-    --avatar-presence-position-right: var(--dt-space-200-negative);
-    --avatar-presence-position-bottom: var(--dt-space-200-negative);
-
-    &:has(.d-presence) {
-      .d-avatar__canvas,
-      .d-avatar__overlay {
-        clip-path: url("#dt-avatar-sm-presence-clip");
-      }
-
-      &.d-avatar--clickable {
-        &::before {
-          clip-path: url("#dt-avatar-sm-presence-clickable-clip");
-        }
-      }
-    }
-  }
-
-  &--md {
-    --avatar-size-shape: var(--dt-size-600);
-    --avatar-size-text: var(--dt-font-size-200);
-    --avatar-presence-position-right: var(--dt-space-100-negative);
-    --avatar-presence-position-bottom: var(--dt-space-100-negative);
-
-    &:has(.d-presence) {
-      .d-avatar__canvas,
-      .d-avatar__overlay {
-        clip-path: url("#dt-avatar-md-presence-clip");
-      }
-
-      &.d-avatar--clickable {
-        &::before {
-          clip-path: url("#dt-avatar-md-presence-clickable-clip");
-        }
-      }
-    }
-  }
-
-  &--lg {
-    --avatar-size-shape: var(--dt-size-650);
-    --avatar-size-text: var(--dt-font-size-300);
-    --avatar-presence-position-right: var(--dt-space-100);
-    --avatar-presence-position-bottom: var(--dt-space-100);
-
-    &:has(.d-presence) {
-      .d-avatar__canvas,
-      .d-avatar__overlay {
-        clip-path: url("#dt-avatar-lg-presence-clip");
-      }
-
-      &.d-avatar--clickable:has(.d-presence) {
-        &::before {
-          clip-path: url("#dt-avatar-lg-presence-clickable-clip");
-        }
-      }
-    }
-  }
-
-  &--xl {
-    --avatar-size-shape: var(--dt-size-700);
-    --avatar-size-text: var(--dt-font-size-400);
-    --avatar-presence-position-right: var(--dt-space-300);
-    --avatar-presence-position-bottom: var(--dt-space-300);
   }
 
   //  --  GROUP
