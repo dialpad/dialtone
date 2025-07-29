@@ -2939,6 +2939,10 @@
           "type": "color"
         }
       }
+    },
+    "foo": {
+      "value": "#392bff",
+      "type": "color"
     }
   }
 }
