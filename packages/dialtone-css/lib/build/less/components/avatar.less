@@ -180,7 +180,75 @@
     }
   }
 
-  &:has(.d-presence) {
+  //  --  SIZES
+  //  ------------------------------------------------------------------------
+
+  &--xs {
+    --avatar-size-shape: calc(var(--dt-size-500) + var(--dt-size-200));
+    --avatar-presence-position-right: var(--dt-space-300-negative);
+    --avatar-presence-position-bottom: var(--dt-space-300-negative);
+  }
+
+  &--sm {
+    --avatar-size-shape: var(--dt-size-550);
+    --avatar-size-text: var(--dt-font-size-100);
+    --avatar-presence-position-right: var(--dt-space-200-negative);
+    --avatar-presence-position-bottom: var(--dt-space-200-negative);
+  }
+
+  &--md {
+    --avatar-size-shape: var(--dt-size-600);
+    --avatar-size-text: var(--dt-font-size-200);
+    --avatar-presence-position-right: var(--dt-space-100-negative);
+    --avatar-presence-position-bottom: var(--dt-space-100-negative);
+  }
+
+  &--lg {
+    --avatar-size-shape: var(--dt-size-650);
+    --avatar-size-text: var(--dt-font-size-300);
+    --avatar-presence-position-right: var(--dt-space-100);
+    --avatar-presence-position-bottom: var(--dt-space-100);
+  }
+
+  &--xl {
+    --avatar-size-shape: var(--dt-size-700);
+    --avatar-size-text: var(--dt-font-size-400);
+    --avatar-presence-position-right: var(--dt-space-300);
+    --avatar-presence-position-bottom: var(--dt-space-300);
+  }
+
+  //  --  PRESENCE
+  //  ------------------------------------------------------------------------
+
+  &--presence {
+    &.d-avatar--xs {
+      .d-avatar__canvas,
+      .d-avatar__overlay {
+        clip-path: path('M18 10.3418C17.3744 10.1207 16.7013 10 16 10C12.6863 10 10 12.6863 10 16C10 16.7014 10.1216 17.3743 10.3428 18H0V0H18V10.3418Z');
+      }
+    }
+
+    &.d-avatar--sm {
+      .d-avatar__canvas,
+      .d-avatar__overlay {
+        clip-path: path('M24 15.5283C22.9385 14.5781 21.5368 14 20 14C16.6863 14 14 16.6863 14 20C14 21.5371 14.5788 22.9384 15.5293 24H0V0H24V15.5283Z');
+      }
+    }
+
+    &.d-avatar--md {
+      .d-avatar__canvas,
+      .d-avatar__overlay {
+        clip-path: path('M32 23.6826C30.9251 22.0658 29.0871 21 27 21C23.6863 21 21 23.6863 21 27C21 29.0874 22.0664 30.9252 23.6836 32H0V0H32V23.6826Z');
+      }
+    }
+
+    &.d-avatar--lg {
+      .d-avatar__canvas,
+      .d-avatar__overlay {
+        clip-path: path('M48 48H0V0H48V48ZM41 35C37.6863 35 35 37.6863 35 41C35 44.3137 37.6863 47 41 47C44.3137 47 47 44.3137 47 41C47 37.6863 44.3137 35 41 35Z');
+      }
+    }
+
     &.d-avatar--clickable {
       border-color: transparent;
 
@@ -193,6 +261,30 @@
         will-change: transform;
         inset: calc(var(--dt-space-100) * -1);
       }
+
+      &.d-avatar--xs {
+        &::before {
+          clip-path: path('M20 11.8037C19.1174 11.293 18.093 11 17 11C13.6863 11 11 13.6863 11 17C11 18.0932 11.2939 19.1173 11.8047 20H0V0H20V11.8037Z');
+        }
+      }
+
+      &.d-avatar--sm {
+        &::before {
+          clip-path: path('M26 17.6826C24.9251 16.0658 23.0871 15 21 15C17.6863 15 15 17.6863 15 21C15 23.0874 16.0664 24.9252 17.6836 26H0V0H26V17.6826Z');
+        }
+      }
+
+      &.d-avatar--md {
+        &::before {
+          clip-path: path('M34 28C34 24.6863 31.3137 22 28 22C24.6863 22 22 24.6863 22 28C22 31.3137 24.6863 34 28 34H0V0H34V28Z');
+        }
+      }
+
+      &.d-avatar--lg {
+      &::before {
+        clip-path: path('M50 50H0V0H50V50ZM42 36C38.6863 36 36 38.6863 36 42C36 45.3137 38.6863 48 42 48C45.3137 48 48 45.3137 48 42C48 38.6863 45.3137 36 42 36Z');
+      }
+      }
     }
 
     .d-presence {
@@ -203,95 +295,6 @@
     .d-avatar__overlay {
         will-change: transform;
     }
-  }
-
-  //  --  SIZES
-  //  ------------------------------------------------------------------------
-
-  &--xs {
-    --avatar-size-shape: calc(var(--dt-size-500) + var(--dt-size-200));
-    --avatar-presence-position-right: var(--dt-space-300-negative);
-    --avatar-presence-position-bottom: var(--dt-space-300-negative);
-
-    &:has(.d-presence) {
-      .d-avatar__canvas,
-      .d-avatar__overlay {
-        clip-path: path('M18 10.3418C17.3744 10.1207 16.7013 10 16 10C12.6863 10 10 12.6863 10 16C10 16.7014 10.1216 17.3743 10.3428 18H0V0H18V10.3418Z');
-      }
-
-      &.d-avatar--clickable {
-        &::before {
-          clip-path: path('M20 11.8037C19.1174 11.293 18.093 11 17 11C13.6863 11 11 13.6863 11 17C11 18.0932 11.2939 19.1173 11.8047 20H0V0H20V11.8037Z');
-        }
-      }
-    }
-  }
-
-  &--sm {
-    --avatar-size-shape: var(--dt-size-550);
-    --avatar-size-text: var(--dt-font-size-100);
-    --avatar-presence-position-right: var(--dt-space-200-negative);
-    --avatar-presence-position-bottom: var(--dt-space-200-negative);
-
-    &:has(.d-presence) {
-      .d-avatar__canvas,
-      .d-avatar__overlay {
-        clip-path: path('M24 15.5283C22.9385 14.5781 21.5368 14 20 14C16.6863 14 14 16.6863 14 20C14 21.5371 14.5788 22.9384 15.5293 24H0V0H24V15.5283Z');
-      }
-
-      &.d-avatar--clickable {
-        &::before {
-          clip-path: path('M26 17.6826C24.9251 16.0658 23.0871 15 21 15C17.6863 15 15 17.6863 15 21C15 23.0874 16.0664 24.9252 17.6836 26H0V0H26V17.6826Z');
-        }
-      }
-    }
-  }
-
-  &--md {
-    --avatar-size-shape: var(--dt-size-600);
-    --avatar-size-text: var(--dt-font-size-200);
-    --avatar-presence-position-right: var(--dt-space-100-negative);
-    --avatar-presence-position-bottom: var(--dt-space-100-negative);
-
-    &:has(.d-presence) {
-      .d-avatar__canvas,
-      .d-avatar__overlay {
-        clip-path: path('M32 23.6826C30.9251 22.0658 29.0871 21 27 21C23.6863 21 21 23.6863 21 27C21 29.0874 22.0664 30.9252 23.6836 32H0V0H32V23.6826Z');
-      }
-
-      &.d-avatar--clickable {
-        &::before {
-          clip-path: path('M34 28C34 24.6863 31.3137 22 28 22C24.6863 22 22 24.6863 22 28C22 31.3137 24.6863 34 28 34H0V0H34V28Z');
-        }
-      }
-    }
-  }
-
-  &--lg {
-    --avatar-size-shape: var(--dt-size-650);
-    --avatar-size-text: var(--dt-font-size-300);
-    --avatar-presence-position-right: var(--dt-space-100);
-    --avatar-presence-position-bottom: var(--dt-space-100);
-
-    &:has(.d-presence) {
-      .d-avatar__canvas,
-      .d-avatar__overlay {
-        clip-path: path('M48 48H0V0H48V48ZM41 35C37.6863 35 35 37.6863 35 41C35 44.3137 37.6863 47 41 47C44.3137 47 47 44.3137 47 41C47 37.6863 44.3137 35 41 35Z');
-      }
-    }
-
-    &.d-avatar--clickable:has(.d-presence) {
-      &::before {
-        clip-path: path('M50 50H0V0H50V50ZM42 36C38.6863 36 36 38.6863 36 42C36 45.3137 38.6863 48 42 48C45.3137 48 48 45.3137 48 42C48 38.6863 45.3137 36 42 36Z');
-      }
-    }
-  }
-
-  &--xl {
-    --avatar-size-shape: var(--dt-size-700);
-    --avatar-size-text: var(--dt-font-size-400);
-    --avatar-presence-position-right: var(--dt-space-300);
-    --avatar-presence-position-bottom: var(--dt-space-300);
   }
 
   //  --  GROUP
