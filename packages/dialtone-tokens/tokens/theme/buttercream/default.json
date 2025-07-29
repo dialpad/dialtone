@@ -3,11 +3,11 @@
     "base": {
       "color": {
         "surface": {
-          "value": "#f0e4cb",
+          "value": "#fff8e8",
           "type": "color"
         },
         "foreground": {
-          "value": "#1b2f3b",
+          "value": "{color.teal.950}",
           "type": "color"
         },
         "border": {
@@ -42,7 +42,7 @@
       "color": {
         "foreground": {
           "primary": {
-            "value": "#15242e",
+            "value": "#090f14",
             "type": "color"
           }
         }
