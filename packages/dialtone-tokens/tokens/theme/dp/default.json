@@ -82,6 +82,7 @@
       "muted-inverted": {
         "value": "{color.black.100}",
         "type": "color",
+        "description": "Muted text color that sits on high-contrast surfaces or backgrounds.",
         "$extensions": {
           "studio.tokens": {
             "modify": {
@@ -90,8 +91,7 @@
               "space": "hsl"
             }
           }
-        },
-        "description": "Muted text color that sits on high-contrast surfaces or backgrounds."
+        }
       },
       "placeholder-inverted": {
         "value": "{color.black.400}",
@@ -337,6 +337,7 @@
       "primary-opaque": {
         "value": "{color.surface.primary}",
         "type": "color",
+        "description": "Primary surface as opaque background color.",
         "$extensions": {
           "studio.tokens": {
             "modify": {
@@ -345,12 +346,12 @@
               "space": "hsl"
             }
           }
-        },
-        "description": "Primary surface as opaque background color."
+        }
       },
       "secondary-opaque": {
         "value": "{color.black.900}",
         "type": "color",
+        "description": "Secondary surface as opaque background color.",
         "$extensions": {
           "studio.tokens": {
             "modify": {
@@ -359,12 +360,12 @@
               "space": "hsl"
             }
           }
-        },
-        "description": "Secondary surface as opaque background color."
+        }
       },
       "moderate-opaque": {
         "value": "{color.black.900}",
         "type": "color",
+        "description": "Moderate surface as opaque background color.",
         "$extensions": {
           "studio.tokens": {
             "modify": {
@@ -373,12 +374,12 @@
               "space": "hsl"
             }
           }
-        },
-        "description": "Moderate surface as opaque background color."
+        }
       },
       "bold-opaque": {
         "value": "{color.black.900}",
         "type": "color",
+        "description": "Bold surface as opaque background color.",
         "$extensions": {
           "studio.tokens": {
             "modify": {
@@ -387,12 +388,12 @@
               "space": "hsl"
             }
           }
-        },
-        "description": "Bold surface as opaque background color."
+        }
       },
       "strong-opaque": {
         "value": "{color.black.900}",
         "type": "color",
+        "description": "Strong surface as opaque background color.",
         "$extensions": {
           "studio.tokens": {
             "modify": {
@@ -401,12 +402,12 @@
               "space": "hsl"
             }
           }
-        },
-        "description": "Strong surface as opaque background color."
+        }
       },
       "contrast-opaque": {
         "value": "{color.black.900}",
         "type": "color",
+        "description": "Contrast surface as opaque background color.",
         "$extensions": {
           "studio.tokens": {
             "modify": {
@@ -415,12 +416,12 @@
               "space": "hsl"
             }
           }
-        },
-        "description": "Contrast surface as opaque background color."
+        }
       },
       "critical-opaque": {
         "value": "{color.red.200}",
         "type": "color",
+        "description": "Critical surface as opaque background color.",
         "$extensions": {
           "studio.tokens": {
             "modify": {
@@ -429,12 +430,12 @@
               "space": "hsl"
             }
           }
-        },
-        "description": "Critical surface as opaque background color."
+        }
       },
       "warning-opaque": {
         "value": "{color.gold.200}",
         "type": "color",
+        "description": "Warning surface as opaque background color",
         "$extensions": {
           "studio.tokens": {
             "modify": {
@@ -443,12 +444,12 @@
               "space": "hsl"
             }
           }
-        },
-        "description": "Warning surface as opaque background color"
+        }
       },
       "success-opaque": {
         "value": "{color.green.200}",
         "type": "color",
+        "description": "Success surface as opaque background color.",
         "$extensions": {
           "studio.tokens": {
             "modify": {
@@ -457,12 +458,12 @@
               "space": "hsl"
             }
           }
-        },
-        "description": "Success surface as opaque background color."
+        }
       },
       "info-opaque": {
         "value": "{color.blue.200}",
         "type": "color",
+        "description": "Info surface as opaque background color.",
         "$extensions": {
           "studio.tokens": {
             "modify": {
@@ -471,12 +472,12 @@
               "space": "hsl"
             }
           }
-        },
-        "description": "Info surface as opaque background color."
+        }
       },
       "brand-opaque": {
         "value": "{color.purple.200}",
         "type": "color",
+        "description": "Info surface as opaque background color.",
         "$extensions": {
           "studio.tokens": {
             "modify": {
@@ -485,12 +486,12 @@
               "space": "hsl"
             }
           }
-        },
-        "description": "Info surface as opaque background color."
+        }
       },
       "critical-subtle-opaque": {
         "value": "{color.red.100}",
         "type": "color",
+        "description": "Critical subtle surface as opaque background color.",
         "$extensions": {
           "studio.tokens": {
             "modify": {
@@ -499,12 +500,12 @@
               "space": "hsl"
             }
           }
-        },
-        "description": "Critical subtle surface as opaque background color."
+        }
       },
       "warning-subtle-opaque": {
         "value": "{color.gold.100}",
         "type": "color",
+        "description": "Warning subtle surface as opaque background color",
         "$extensions": {
           "studio.tokens": {
             "modify": {
@@ -513,12 +514,12 @@
               "space": "hsl"
             }
           }
-        },
-        "description": "Warning subtle surface as opaque background color"
+        }
       },
       "success-subtle-opaque": {
         "value": "{color.green.100}",
         "type": "color",
+        "description": "Success subtle surface as opaque background color.",
         "$extensions": {
           "studio.tokens": {
             "modify": {
@@ -527,12 +528,12 @@
               "space": "hsl"
             }
           }
-        },
-        "description": "Success subtle surface as opaque background color."
+        }
       },
       "info-subtle-opaque": {
         "value": "{color.blue.100}",
         "type": "color",
+        "description": "Info surface as opaque background color.",
         "$extensions": {
           "studio.tokens": {
             "modify": {
@@ -541,12 +542,12 @@
               "space": "hsl"
             }
           }
-        },
-        "description": "Info surface as opaque background color."
+        }
       },
       "brand-subtle-opaque": {
         "value": "{color.purple.200}",
         "type": "color",
+        "description": "Info surface as opaque background color.",
         "$extensions": {
           "studio.tokens": {
             "modify": {
@@ -555,8 +556,7 @@
               "space": "hsl"
             }
           }
-        },
-        "description": "Info surface as opaque background color."
+        }
       },
       "primary-inverted": {
         "value": "{color.black.1000}",
@@ -666,6 +666,7 @@
       "primary-opaque-inverted": {
         "value": "{color.surface.primary-inverted}",
         "type": "color",
+        "description": "Secondary surface as opaque background color.",
         "$extensions": {
           "studio.tokens": {
             "modify": {
@@ -674,12 +675,12 @@
               "space": "hsl"
             }
           }
-        },
-        "description": "Secondary surface as opaque background color."
+        }
       },
       "secondary-opaque-inverted": {
         "value": "{color.black.50}",
         "type": "color",
+        "description": "Secondary surface as opaque background color.",
         "$extensions": {
           "studio.tokens": {
             "modify": {
@@ -688,12 +689,12 @@
               "space": "hsl"
             }
           }
-        },
-        "description": "Secondary surface as opaque background color."
+        }
       },
       "moderate-opaque-inverted": {
         "value": "{color.black.50}",
         "type": "color",
+        "description": "Moderate surface as opaque background color.",
         "$extensions": {
           "studio.tokens": {
             "modify": {
@@ -702,12 +703,12 @@
               "space": "hsl"
             }
           }
-        },
-        "description": "Moderate surface as opaque background color."
+        }
       },
       "bold-opaque-inverted": {
         "value": "{color.black.50}",
         "type": "color",
+        "description": "Bold surface as opaque background color.",
         "$extensions": {
           "studio.tokens": {
             "modify": {
@@ -716,12 +717,12 @@
               "space": "hsl"
             }
           }
-        },
-        "description": "Bold surface as opaque background color."
+        }
       },
       "strong-opaque-inverted": {
         "value": "{color.black.50}",
         "type": "color",
+        "description": "Strong surface as opaque background color.",
         "$extensions": {
           "studio.tokens": {
             "modify": {
@@ -730,12 +731,12 @@
               "space": "hsl"
             }
           }
-        },
-        "description": "Strong surface as opaque background color."
+        }
       },
       "contrast-opaque-inverted": {
         "value": "{color.black.50}",
         "type": "color",
+        "description": "Contrast surface as opaque background color.",
         "$extensions": {
           "studio.tokens": {
             "modify": {
@@ -744,12 +745,12 @@
               "space": "hsl"
             }
           }
-        },
-        "description": "Contrast surface as opaque background color."
+        }
       },
       "critical-opaque-inverted": {
         "value": "{color.red.700}",
         "type": "color",
+        "description": "Critical surface as opaque background color.",
         "$extensions": {
           "studio.tokens": {
             "modify": {
@@ -758,12 +759,12 @@
               "space": "hsl"
             }
           }
-        },
-        "description": "Critical surface as opaque background color."
+        }
       },
       "warning-opaque-inverted": {
         "value": "{color.gold.700}",
         "type": "color",
+        "description": "Warning surface as opaque background color",
         "$extensions": {
           "studio.tokens": {
             "modify": {
@@ -772,12 +773,12 @@
               "space": "hsl"
             }
           }
-        },
-        "description": "Warning surface as opaque background color"
+        }
       },
       "success-opaque-inverted": {
         "value": "{color.green.600}",
         "type": "color",
+        "description": "Success surface as opaque background color.",
         "$extensions": {
           "studio.tokens": {
             "modify": {
@@ -786,12 +787,12 @@
               "space": "hsl"
             }
           }
-        },
-        "description": "Success surface as opaque background color."
+        }
       },
       "info-opaque-inverted": {
         "value": "{color.blue.900}",
         "type": "color",
+        "description": "Info surface as opaque background color.",
         "$extensions": {
           "studio.tokens": {
             "modify": {
@@ -800,12 +801,12 @@
               "space": "hsl"
             }
           }
-        },
-        "description": "Info surface as opaque background color."
+        }
       },
       "brand-opaque-inverted": {
         "value": "{color.purple.600}",
         "type": "color",
+        "description": "Info surface as opaque background color.",
         "$extensions": {
           "studio.tokens": {
             "modify": {
@@ -814,12 +815,12 @@
               "space": "hsl"
             }
           }
-        },
-        "description": "Info surface as opaque background color."
+        }
       },
       "critical-subtle-opaque-inverted": {
         "value": "{color.red.1000}",
         "type": "color",
+        "description": "Critical subtle surface as opaque background color.",
         "$extensions": {
           "studio.tokens": {
             "modify": {
@@ -828,12 +829,12 @@
               "space": "hsl"
             }
           }
-        },
-        "description": "Critical subtle surface as opaque background color."
+        }
       },
       "warning-subtle-opaque-inverted": {
         "value": "{color.gold.1000}",
         "type": "color",
+        "description": "Warning subtle surface as opaque background color",
         "$extensions": {
           "studio.tokens": {
             "modify": {
@@ -842,12 +843,12 @@
               "space": "hsl"
             }
           }
-        },
-        "description": "Warning subtle surface as opaque background color"
+        }
       },
       "success-subtle-opaque-inverted": {
         "value": "{color.green.1000}",
         "type": "color",
+        "description": "Success subtle surface as opaque background color.",
         "$extensions": {
           "studio.tokens": {
             "modify": {
@@ -856,12 +857,12 @@
               "space": "hsl"
             }
           }
-        },
-        "description": "Success subtle surface as opaque background color."
+        }
       },
       "info-subtle-opaque-inverted": {
         "value": "{color.blue.1000}",
         "type": "color",
+        "description": "Info surface as opaque background color.",
         "$extensions": {
           "studio.tokens": {
             "modify": {
@@ -870,12 +871,12 @@
               "space": "hsl"
             }
           }
-        },
-        "description": "Info surface as opaque background color."
+        }
       },
       "brand-subtle-opaque-inverted": {
         "value": "{color.purple.1000}",
         "type": "color",
+        "description": "Info surface as opaque background color.",
         "$extensions": {
           "studio.tokens": {
             "modify": {
@@ -884,12 +885,12 @@
               "space": "hsl"
             }
           }
-        },
-        "description": "Info surface as opaque background color."
+        }
       },
       "backdrop": {
         "value": "{color.neutral.black}",
         "type": "color",
+        "description": "Background color for a modal-like backdrop.",
         "$extensions": {
           "studio.tokens": {
             "modify": {
@@ -898,8 +899,7 @@
               "space": "hsl"
             }
           }
-        },
-        "description": "Background color for a modal-like backdrop."
+        }
       },
       "ai": {
         "value": "{color.gradient.gold-red-magenta-purple}",
@@ -2059,7 +2059,7 @@
     "topbar": {
       "color": {
         "foreground": {
-          "value": "{theme.color.base}",
+          "value": "{shell.foo}",
           "type": "color",
           "$extensions": {
             "studio.tokens": {
@@ -2079,7 +2079,7 @@
       "field": {
         "color": {
           "foreground": {
-            "value": "{theme.color.base}",
+            "value": "{shell.foo}",
             "type": "color",
             "$extensions": {
               "studio.tokens": {
@@ -2092,7 +2092,7 @@
             }
           },
           "foreground-hover": {
-            "value": "{theme.color.base}",
+            "value": "{shell.foo}",
             "type": "color",
             "$extensions": {
               "studio.tokens": {
@@ -2105,7 +2105,7 @@
             }
           },
           "background": {
-            "value": "{theme.color.base}",
+            "value": "{shell.foo}",
             "type": "color",
             "$extensions": {
               "studio.tokens": {
@@ -2118,7 +2118,7 @@
             }
           },
           "background-hover": {
-            "value": "{theme.color.base}",
+            "value": "{shell.foo}",
             "type": "color",
             "$extensions": {
               "studio.tokens": {
@@ -2131,7 +2131,7 @@
             }
           },
           "border": {
-            "value": "{theme.color.base}",
+            "value": "{shell.foo}",
             "type": "color",
             "$extensions": {
               "studio.tokens": {
@@ -2144,7 +2144,7 @@
             }
           },
           "border-hover": {
-            "value": "{theme.color.base}",
+            "value": "{shell.foo}",
             "type": "color",
             "$extensions": {
               "studio.tokens": {
@@ -2157,7 +2157,7 @@
             }
           },
           "border-active": {
-            "value": "{theme.color.base}",
+            "value": "{shell.foo}",
             "type": "color",
             "$extensions": {
               "studio.tokens": {
@@ -2174,7 +2174,7 @@
       "button": {
         "color": {
           "foreground": {
-            "value": "{theme.color.base}",
+            "value": "{shell.foo}",
             "type": "color",
             "$extensions": {
               "studio.tokens": {
@@ -2187,11 +2187,11 @@
             }
           },
           "foreground-hover": {
-            "value": "{theme.color.base}",
+            "value": "{shell.foo}",
             "type": "color"
           },
           "background": {
-            "value": "{theme.color.base}",
+            "value": "{shell.foo}",
             "type": "color",
             "$extensions": {
               "studio.tokens": {
@@ -2204,7 +2204,7 @@
             }
           },
           "background-hover": {
-            "value": "{theme.color.base}",
+            "value": "{shell.foo}",
             "type": "color",
             "$extensions": {
               "studio.tokens": {
@@ -2217,7 +2217,7 @@
             }
           },
           "background-active": {
-            "value": "{theme.color.base}",
+            "value": "{shell.foo}",
             "type": "color",
             "$extensions": {
               "studio.tokens": {
@@ -2251,7 +2251,7 @@
             }
           },
           "background": {
-            "value": "{theme.color.base}",
+            "value": "{shell.foo}",
             "type": "color",
             "$extensions": {
               "studio.tokens": {
@@ -2264,7 +2264,7 @@
             }
           },
           "background-inverted": {
-            "value": "{theme.color.base}",
+            "value": "{shell.foo}",
             "type": "color",
             "$extensions": {
               "studio.tokens": {
@@ -2277,7 +2277,7 @@
             }
           },
           "background-hover": {
-            "value": "{theme.color.base}",
+            "value": "{shell.foo}",
             "type": "color",
             "$extensions": {
               "studio.tokens": {
@@ -2290,7 +2290,7 @@
             }
           },
           "background-active": {
-            "value": "{theme.color.base}",
+            "value": "{shell.foo}",
             "type": "color",
             "$extensions": {
               "studio.tokens": {
@@ -2339,7 +2339,7 @@
       "row": {
         "color": {
           "background": {
-            "value": "{theme.color.base}",
+            "value": "{shell.foo}",
             "type": "color",
             "$extensions": {
               "studio.tokens": {
@@ -2352,7 +2352,7 @@
             }
           },
           "background-hover": {
-            "value": "{theme.color.base}",
+            "value": "{shell.foo}",
             "type": "color",
             "$extensions": {
               "studio.tokens": {
@@ -2365,7 +2365,7 @@
             }
           },
           "background-active": {
-            "value": "{theme.color.base}",
+            "value": "{shell.foo}",
             "type": "color",
             "$extensions": {
               "studio.tokens": {
@@ -2386,7 +2386,7 @@
             "type": "color"
           },
           "background": {
-            "value": "{theme.color.base}",
+            "value": "{shell.foo}",
             "type": "color",
             "$extensions": {
               "studio.tokens": {
@@ -2413,19 +2413,19 @@
       "color": {
         "background": {
           "available": {
-            "value": "{color.green.425}",
+            "value": "{presence.color.available}",
             "type": "color"
           },
           "busy-unavailable": {
-            "value": "{color.red.400}",
+            "value": "{presence.color.unavailable}",
             "type": "color"
           },
           "busy": {
-            "value": "{color.gold.400}",
+            "value": "{presence.color.busy}",
             "type": "color"
           },
           "offline": {
-            "value": "{color.neutral.white}",
+            "value": "{presence.color.offline}",
             "type": "color"
           }
         }
@@ -2447,6 +2447,495 @@
         },
         "background-strong": {
           "value": "{color.purple.550}",
+          "type": "color"
+        }
+      }
+    }
+  },
+  "shell": {
+    "base": {
+      "color": {
+        "surface": {
+          "value": "{color.surface.secondary}",
+          "type": "color"
+        },
+        "foreground": {
+          "value": "{color.black.900}",
+          "type": "color"
+        },
+        "border": {
+          "value": "{color.black.900}",
+          "type": "color"
+        },
+        "accent": {
+          "value": "{badge.color.background.bulletin}",
+          "type": "color"
+        },
+        "status-positive": {
+          "value": "{presence.color.available}",
+          "type": "color"
+        },
+        "status-critical": {
+          "value": "{presence.color.unavailable}",
+          "type": "color"
+        },
+        "status-warning": {
+          "value": "{presence.color.busy}",
+          "type": "color"
+        },
+        "status-away": {
+          "value": "{presence.color.offline}",
+          "type": "color"
+        }
+      },
+      "action": {
+        "color": {
+          "background": {
+            "primary": {
+              "value": "{color.black.800}",
+              "type": "color"
+            },
+            "secondary": {
+              "value": "{color.black.800}",
+              "type": "color"
+            },
+            "muted": {
+              "value": "{color.black.800}",
+              "type": "color"
+            }
+          }
+        }
+      }
+    },
+    "color": {
+      "foreground": {
+        "primary": {
+          "value": "{shell.base.color.foreground}",
+          "type": "color"
+        },
+        "secondary": {
+          "value": "{shell.base.color.foreground}",
+          "type": "color",
+          "$extensions": {
+            "studio.tokens": {
+              "modify": {
+                "type": "alpha",
+                "value": ".86",
+                "space": "hsl"
+              }
+            }
+          }
+        },
+        "tertiary": {
+          "value": "{shell.base.color.foreground}",
+          "type": "color",
+          "$extensions": {
+            "studio.tokens": {
+              "modify": {
+                "type": "alpha",
+                "value": ".72",
+                "space": "hsl"
+              }
+            }
+          }
+        },
+        "strong": {
+          "value": "{shell.base.color.foreground}",
+          "type": "color",
+          "$extensions": {
+            "studio.tokens": {
+              "modify": {
+                "type": "alpha",
+                "value": "1",
+                "space": "hsl"
+              }
+            }
+          }
+        },
+        "muted": {
+          "value": "{shell.base.color.foreground}",
+          "type": "color",
+          "$extensions": {
+            "studio.tokens": {
+              "modify": {
+                "type": "alpha",
+                "value": ".60",
+                "space": "hsl"
+              }
+            }
+          }
+        },
+        "disabled": {
+          "value": "{shell.base.color.foreground}",
+          "type": "color",
+          "$extensions": {
+            "studio.tokens": {
+              "modify": {
+                "type": "alpha",
+                "value": ".57",
+                "space": "hsl"
+              }
+            }
+          }
+        },
+        "positive": {
+          "value": "{shell.base.color.status-positive}",
+          "type": "color",
+          "$extensions": {
+            "studio.tokens": {
+              "modify": {
+                "type": "darken",
+                "value": ".15",
+                "space": "hsl"
+              }
+            }
+          }
+        },
+        "critical": {
+          "value": "{shell.base.color.status-critical}",
+          "type": "color",
+          "$extensions": {
+            "studio.tokens": {
+              "modify": {
+                "type": "darken",
+                "value": ".2",
+                "space": "hsl"
+              }
+            }
+          }
+        },
+        "warning": {
+          "value": "{shell.base.color.status-warning}",
+          "type": "color",
+          "$extensions": {
+            "studio.tokens": {
+              "modify": {
+                "type": "darken",
+                "value": "0.25",
+                "space": "hsl"
+              }
+            }
+          }
+        }
+      },
+      "surface": {
+        "default": {
+          "value": "{shell.base.color.surface}",
+          "type": "color"
+        }
+      },
+      "border": {
+        "subtle": {
+          "value": "{shell.base.color.border}",
+          "type": "color",
+          "$extensions": {
+            "studio.tokens": {
+              "modify": {
+                "type": "alpha",
+                "value": "0.10",
+                "space": "hsl"
+              }
+            }
+          }
+        },
+        "default": {
+          "value": "{shell.base.color.border}",
+          "type": "color",
+          "$extensions": {
+            "studio.tokens": {
+              "modify": {
+                "type": "alpha",
+                "value": ".17",
+                "space": "hsl"
+              }
+            }
+          }
+        }
+      }
+    },
+    "action": {
+      "color": {
+        "foreground": {
+          "primary-default": {
+            "value": "{shell.color.foreground.secondary}",
+            "type": "color"
+          },
+          "secondary-default": {
+            "value": "{shell.color.foreground.secondary}",
+            "type": "color"
+          },
+          "primary-strong": {
+            "value": "{shell.color.foreground.strong}",
+            "type": "color"
+          },
+          "tertiary-default": {
+            "value": "{shell.color.foreground.tertiary}",
+            "type": "color"
+          },
+          "primary-disabled": {
+            "value": "{shell.color.foreground.disabled}",
+            "type": "color"
+          },
+          "secondary-disabled": {
+            "value": "{shell.color.foreground.disabled}",
+            "type": "color"
+          },
+          "muted-default": {
+            "value": "{shell.color.foreground.muted}",
+            "type": "color"
+          },
+          "muted-hover": {
+            "value": "{shell.action.color.foreground.muted-default}",
+            "type": "color",
+            "$extensions": {
+              "studio.tokens": {
+                "modify": {
+                  "type": "darken",
+                  "value": ".4",
+                  "space": "hsl"
+                }
+              }
+            }
+          },
+          "muted-active": {
+            "value": "{shell.action.color.foreground.muted-hover}",
+            "type": "color"
+          },
+          "muted-selected": {
+            "value": "{shell.action.color.foreground.muted-default}",
+            "type": "color",
+            "$extensions": {
+              "studio.tokens": {
+                "modify": {
+                  "type": "darken",
+                  "value": "0.6",
+                  "space": "hsl"
+                }
+              }
+            }
+          }
+        },
+        "background": {
+          "primary-default": {
+            "value": "{shell.base.action.color.background.primary}",
+            "type": "color",
+            "$extensions": {
+              "studio.tokens": {
+                "modify": {
+                  "type": "alpha",
+                  "value": "0",
+                  "space": "hsl"
+                }
+              }
+            }
+          },
+          "primary-hover": {
+            "value": "{shell.base.action.color.background.primary}",
+            "type": "color",
+            "$extensions": {
+              "studio.tokens": {
+                "modify": {
+                  "type": "alpha",
+                  "value": ".10",
+                  "space": "hsl"
+                }
+              }
+            }
+          },
+          "primary-active": {
+            "value": "{shell.base.action.color.background.primary}",
+            "type": "color",
+            "$extensions": {
+              "studio.tokens": {
+                "modify": {
+                  "type": "alpha",
+                  "value": ".16",
+                  "space": "hsl"
+                }
+              }
+            }
+          },
+          "primary-selected": {
+            "value": "{shell.base.action.color.background.primary}",
+            "type": "color",
+            "$extensions": {
+              "studio.tokens": {
+                "modify": {
+                  "type": "alpha",
+                  "value": ".13",
+                  "space": "hsl"
+                }
+              }
+            }
+          },
+          "secondary-default": {
+            "value": "{shell.base.action.color.background.secondary}",
+            "type": "color",
+            "$extensions": {
+              "studio.tokens": {
+                "modify": {
+                  "type": "alpha",
+                  "value": "0",
+                  "space": "hsl"
+                }
+              }
+            }
+          },
+          "secondary-hover": {
+            "value": "{shell.base.action.color.background.secondary}",
+            "type": "color",
+            "$extensions": {
+              "studio.tokens": {
+                "modify": {
+                  "type": "alpha",
+                  "value": ".10",
+                  "space": "hsl"
+                }
+              }
+            }
+          },
+          "secondary-active": {
+            "value": "{shell.base.action.color.background.secondary}",
+            "type": "color",
+            "$extensions": {
+              "studio.tokens": {
+                "modify": {
+                  "type": "alpha",
+                  "value": ".16",
+                  "space": "hsl"
+                }
+              }
+            }
+          },
+          "secondary-selected": {
+            "value": "{shell.base.action.color.background.secondary}",
+            "type": "color",
+            "$extensions": {
+              "studio.tokens": {
+                "modify": {
+                  "type": "alpha",
+                  "value": ".13",
+                  "space": "hsl"
+                }
+              }
+            }
+          },
+          "muted-default": {
+            "value": "{shell.base.action.color.background.muted}",
+            "type": "color",
+            "$extensions": {
+              "studio.tokens": {
+                "modify": {
+                  "type": "alpha",
+                  "value": "0.05",
+                  "space": "hsl"
+                }
+              }
+            }
+          },
+          "muted-hover": {
+            "value": "{shell.base.action.color.background.muted}",
+            "type": "color",
+            "$extensions": {
+              "studio.tokens": {
+                "modify": {
+                  "type": "alpha",
+                  "value": ".10",
+                  "space": "hsl"
+                }
+              }
+            }
+          },
+          "muted-active": {
+            "value": "{shell.base.action.color.background.muted}",
+            "type": "color",
+            "$extensions": {
+              "studio.tokens": {
+                "modify": {
+                  "type": "alpha",
+                  "value": ".07",
+                  "space": "hsl"
+                }
+              }
+            }
+          },
+          "muted-selected": {
+            "value": "{shell.base.action.color.background.muted}",
+            "type": "color",
+            "$extensions": {
+              "studio.tokens": {
+                "modify": {
+                  "type": "alpha",
+                  "value": "0.07",
+                  "space": "hsl"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "mention": {
+      "color": {
+        "surface": {
+          "primary": {
+            "value": "{shell.base.color.accent}",
+            "type": "color"
+          },
+          "secondary": {
+            "value": "{shell.base.color.accent}",
+            "type": "color",
+            "$extensions": {
+              "studio.tokens": {
+                "modify": {
+                  "type": "darken",
+                  "value": ".55",
+                  "space": "hsl"
+                }
+              }
+            }
+          }
+        },
+        "foreground": {
+          "primary": {
+            "value": "{color.black.50}",
+            "type": "color"
+          },
+          "secondary": {
+            "value": "{color.black.100}",
+            "type": "color"
+          }
+        }
+      }
+    },
+    "logo": {
+      "color": {
+        "star": {
+          "value": "{color.purple.400}",
+          "type": "color"
+        },
+        "wordmark": {
+          "value": "{color.purple.1000}",
+          "type": "color"
+        }
+      }
+    },
+    "presence": {
+      "color": {
+        "available": {
+          "value": "{shell.base.color.status-positive}",
+          "type": "color"
+        },
+        "unavailable": {
+          "value": "{shell.base.color.status-critical}",
+          "type": "color"
+        },
+        "busy": {
+          "value": "{shell.base.color.status-warning}",
+          "type": "color"
+        },
+        "offline": {
+          "value": "{shell.base.color.status-away}",
           "type": "color"
         }
       }
