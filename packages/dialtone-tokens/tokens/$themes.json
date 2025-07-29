@@ -3837,7 +3837,8 @@
       "components/presence/default": "enabled",
       "components/radio/default": "enabled"
     },
-    "group": "ceruleo"
+    "group": "ceruleo",
+    "$figmaVariableReferences": {}
   },
   {
     "id": "f461c12181f88e5aad09d6ef2b58c10cd6c880d3",
@@ -4074,6 +4075,7 @@
       "theme/ceruleo/default": "enabled",
       "theme/ceruleo/dark": "enabled"
     },
-    "group": "ceruleo"
+    "group": "ceruleo",
+    "$figmaVariableReferences": {}
   }
 ]

@@ -1,9 +1,5 @@
 {
   "shell": {
-    "foo": {
-      "value": "blue",
-      "type": "color"
-    },
     "base": {
       "color": {
         "surface": {
