@@ -286,6 +286,24 @@ describe('DtAvatar Tests', () => {
 
         expect(presence.classes('d-avatar__presence--lg')).toBe(true);
       });
+
+      it('should add d-avatar--presence when presence is set and not in group mode', async () => {
+        await wrapper.setProps({ presence: 'active', group: undefined });
+        const avatar = wrapper.find('[data-qa="dt-avatar"]');
+        expect(avatar.classes()).toContain('d-avatar--presence');
+      });
+
+      it('should not add d-avatar--presence when presence is not set', async () => {
+        await wrapper.setProps({ presence: undefined, group: undefined });
+        const avatar = wrapper.find('[data-qa="dt-avatar"]');
+        expect(avatar.classes()).not.toContain('d-avatar--presence');
+      });
+
+      it('should not add d-avatar--presence when showGroup is true (group is set)', async () => {
+        await wrapper.setProps({ presence: 'active', group: 5 });
+        const avatar = wrapper.find('[data-qa="dt-avatar"]');
+        expect(avatar.classes()).not.toContain('d-avatar--presence');
+      });
     });
   });
 
