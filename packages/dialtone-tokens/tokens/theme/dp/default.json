@@ -2413,19 +2413,19 @@
       "color": {
         "background": {
           "available": {
-            "value": "{presence.color.available}",
+            "value": "{color.green.425}",
             "type": "color"
           },
           "busy-unavailable": {
-            "value": "{presence.color.unavailable}",
+            "value": "{color.red.500}",
             "type": "color"
           },
           "busy": {
-            "value": "{presence.color.busy}",
+            "value": "{color.gold.500}",
             "type": "color"
           },
           "offline": {
-            "value": "{presence.color.offline}",
+            "value": "{color.black.500}",
             "type": "color"
           }
         }
@@ -2472,19 +2472,19 @@
           "type": "color"
         },
         "status-positive": {
-          "value": "{presence.color.available}",
+          "value": "{color.green.425}",
           "type": "color"
         },
         "status-critical": {
-          "value": "{presence.color.unavailable}",
+          "value": "{color.red.500}",
           "type": "color"
         },
         "status-warning": {
-          "value": "{presence.color.busy}",
+          "value": "{color.gold.500}",
           "type": "color"
         },
         "status-away": {
-          "value": "{presence.color.offline}",
+          "value": "{color.black.500}",
           "type": "color"
         }
       },
