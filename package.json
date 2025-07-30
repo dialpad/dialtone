@@ -52,7 +52,6 @@
     "./css": "./dist/css/dialtone.min.css",
     "./css-default-theme": "./dist/css/dialtone-default-theme.min.css",
     "./tokens/*.css": "./dist/tokens/css/*.css",
-    "./tokens/*.less": "./dist/tokens/less/*.less",
     "./tokens/postcss/*": {
       "types": "./dist/tokens/types/postcss/*.d.ts",
       "import": "./dist/tokens/postcss/*.js",
@@ -206,7 +205,7 @@
     "typedoc-plugin-markdown": "^4.6.1",
     "typescript": "^5.2",
     "vite": "^5.4.2",
-    "vite-bundle-visualizer": "^1.0.1",
+    "vite-bundle-visualizer": "^1.2.1",
     "vite-plugin-dts": "^4.0.3",
     "vitest": "^1.0.4",
     "vue-docgen-api": "^4.75.0",
