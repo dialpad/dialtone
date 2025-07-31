@@ -22,23 +22,8 @@ jobs:
       - name: Set TIMESTAMP env var
         run: echo "TIMESTAMP=$(date -u +'%Y-%m-%dT%H-%M')" >> $GITHUB_ENV
 
-      - name: Use Node.js 22
-        uses: actions/setup-node@v4
-        with:
-          node-version: 22
-
-      - name: Setup pnpm
-        uses: pnpm/action-setup@v3
-        with:
-          version: 8
-
-      - name: Authenticate to GitHub Packages
-        run: |
-          echo "//npm.pkg.github.com/:_authToken=${{ secrets.GITHUB_TOKEN }}" > ~/.npmrc
-          echo "@dialpad:registry=https://npm.pkg.github.com/" >> ~/.npmrc
-
-      - name: Install dependencies
-        run: pnpm install --frozen-lockfile
+      - name: Setup Environment
+        uses: ./.github/actions/setup-environment
 
       - name: Run test coverage for Vue3
         run: pnpm nx run dialtone-vue3:test:coverage

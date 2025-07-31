@@ -7,7 +7,6 @@
     "lint:code": "eslint . --ext .js,.vue,.json --ignore-path .eslintignore",
     "lint:docs": "markdownlint '**/*.mdx'",
     "test": "pnpm exec vitest run --test-timeout=10000",
-    "test:coverage": "pnpm exec vitest run --coverage --test-timeout=10000",
     "test:one": "pnpm exec vitest related --run",
     "test:watch": "pnpm exec vitest"
   },
