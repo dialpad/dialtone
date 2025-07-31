@@ -1,0 +1,50 @@
+name: Upload test coverage report to GCS
+
+on:
+  schedule:
+    - cron: '0 0 1 * *' # At midnight on the 1st of every month
+  workflow_dispatch:
+
+permissions:
+  packages: read
+
+jobs:
+  collect-and-upload:
+    runs-on: ubuntu-latest
+
+    env:
+      BUCKET_NAME: dialtone-adoption-data
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set TIMESTAMP env var
+        run: echo "TIMESTAMP=$(date -u +'%Y-%m-%dT%H-%M')" >> $GITHUB_ENV
+
+      - name: Setup Environment
+        uses: ./.github/actions/setup-environment
+
+      - name: Run test coverage for Vue3
+        run: pnpm nx run dialtone-vue3:test:coverage
+
+      - id: auth
+        name: Authenticate to Google Cloud
+        uses: google-github-actions/auth@v2
+        with:
+          workload_identity_provider: ${{ secrets.DIALTONE_GCP_WIP }}
+          service_account: ${{ secrets.DIALTONE_GCP_SA }}
+
+      - name: Set up Cloud SDK
+        uses: google-github-actions/setup-gcloud@v2
+
+      - name: Extract and upload coverage statistics
+        run: |
+          set -e
+
+          # Extract coverage statistics using the script
+          ./scripts/extract-coverage.sh
+
+          # Upload to GCS bucket
+          echo "Uploading coverage statistics to GCS bucket"
+          gsutil cp coverage-stats.json gs://${BUCKET_NAME}/test-coverage/test-coverage-${{ env.TIMESTAMP }}.json

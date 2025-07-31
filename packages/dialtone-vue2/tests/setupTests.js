@@ -62,4 +62,12 @@ beforeAll(() => {
   global.ResizeObserver = MockObserver;
   global.ClipboardEvent = ClipboardEvent;
   global.DataTransfer = DataTransfer;
+
+  // Add polyfill for :focus-visible selector in JSDOM
+  // see https://github.com/jsdom/jsdom/issues/3426
+  const matchesOriginal = HTMLElement.prototype.matches;
+  HTMLElement.prototype.matches = function (query) {
+    if (query === ':focus-visible') return false;
+    return matchesOriginal.call(this, query);
+  };
 });
