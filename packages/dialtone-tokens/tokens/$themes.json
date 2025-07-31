@@ -1,7 +1,7 @@
 [
   {
     "id": "base-light",
-    "name": "light",
+    "name": "default",
     "selectedTokenSets": {
       "root": "enabled",
       "base/default": "enabled"
@@ -356,7 +356,7 @@
   },
   {
     "id": "025593f9f8f0cc2511035095197b6266f41e0855",
-    "name": "light",
+    "name": "default",
     "$figmaStyleReferences": {
       "color.surface.primary": "S:07c504c8aaef5aa218313280e43ca0424c3b9911,",
       "color.surface.secondary": "S:325c0f319673ddada3203e85c09f8db7d9a4127f,",
@@ -771,13 +771,13 @@
       "action.color.border.positive.outlined.default": "S:74f5c663172f4d7466b7111a8b9d6ccad7abcac7,"
     },
     "selectedTokenSets": {
-      "base/default": "source",
+      "base/default": "enabled",
       "components/avatar/default": "enabled",
       "components/badge/default": "enabled",
       "components/checkbox/default": "enabled",
       "components/icon/default": "enabled",
       "components/radio/default": "enabled",
-      "root": "source",
+      "root": "enabled",
       "components/button/default": "enabled",
       "theme/dp/default": "enabled",
       "components/presence/default": "enabled"
