@@ -1,3 +1,10 @@
+## [2.194.2](https://github.com/dialpad/dialtone/compare/dialtone-vue2/v2.194.1...dialtone-vue2/v2.194.2) (2025-07-31)
+
+
+### Bug Fixes
+
+* **Editor:** DP-151532 change quick reply to template ([#846](https://github.com/dialpad/dialtone/issues/846)) ([e403c3e](https://github.com/dialpad/dialtone/commit/e403c3e5925649b97a0460f90c7f18c72e178b37))
+
 ## [2.194.1](https://github.com/dialpad/dialtone/compare/dialtone-vue2/v2.194.0...dialtone-vue2/v2.194.1) (2025-07-29)
 
 
