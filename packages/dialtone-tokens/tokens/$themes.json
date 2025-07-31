@@ -771,13 +771,13 @@
       "action.color.border.positive.outlined.default": "S:74f5c663172f4d7466b7111a8b9d6ccad7abcac7,"
     },
     "selectedTokenSets": {
-      "base/default": "enabled",
+      "base/default": "source",
       "components/avatar/default": "enabled",
       "components/badge/default": "enabled",
       "components/checkbox/default": "enabled",
       "components/icon/default": "enabled",
       "components/radio/default": "enabled",
-      "root": "enabled",
+      "root": "source",
       "components/button/default": "enabled",
       "theme/dp/default": "enabled",
       "components/presence/default": "enabled"
