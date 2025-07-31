@@ -136,6 +136,7 @@ const excludedIcons = [
   'dialpad-ai-reversed',
   'dialpad-ai',
   'dialpad-logomark',
+  'ai-notes',
 ];
 
 const searchIcon = () => {
