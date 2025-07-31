@@ -3998,5 +3998,29 @@
     },
     "$figmaVariableReferences": {},
     "group": "ceruleo"
+  },
+  {
+    "id": "d993dc174fb7b978e59e5d32dc3570d48c2b380d",
+    "name": "deca-light",
+    "$figmaStyleReferences": {},
+    "selectedTokenSets": {
+      "root": "enabled",
+      "base/default": "enabled",
+      "base/deca": "enabled"
+    },
+    "group": "base"
+  },
+  {
+    "id": "40c17e054eaf3a269fcae12da4e677825fff0a90",
+    "name": "deca-dark",
+    "$figmaStyleReferences": {},
+    "selectedTokenSets": {
+      "root": "enabled",
+      "base/default": "enabled",
+      "base/dark": "enabled",
+      "base/deca": "enabled",
+      "base/deca-dark": "enabled"
+    },
+    "group": "base"
   }
 ]
