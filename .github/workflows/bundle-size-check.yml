@@ -4,10 +4,6 @@ on:
   pull_request:
     branches: [ staging ]
     types: ['opened', 'synchronize', 'reopened']
-    paths:
-      - 'packages/**'
-      - 'package.json'
-      - 'pnpm-lock.yaml'
 
 env:
   INCREASE_THRESHOLD: 5
