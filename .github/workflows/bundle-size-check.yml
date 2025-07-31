@@ -3,7 +3,7 @@ name: Bundle Size Check
 on:
   pull_request:
     branches: [ staging ]
-    types: ['opened', 'synchronize', 'reopened']
+    types: ['opened', 'synchronize', 'reopened', 'labeled', 'unlabeled']
 
 env:
   INCREASE_THRESHOLD: 5
@@ -12,6 +12,7 @@ jobs:
   base-bundle-size:
     name: Check Base Bundle Size
     runs-on: ubuntu-latest
+    if: "!contains(github.event.pull_request.labels.*.name, 'skip-bundle-size-check')"
 
     outputs:
       SIZE: ${{ steps.current-size.outputs.size }}
@@ -40,6 +41,7 @@ jobs:
   pr-bundle-size:
     name: Check PR Bundle Size
     runs-on: ubuntu-latest
+    if: "!contains(github.event.pull_request.labels.*.name, 'skip-bundle-size-check')"
 
     outputs:
       SIZE: ${{ steps.current-size.outputs.size }}
@@ -67,6 +69,7 @@ jobs:
     name: Check Bundle Size Difference
     needs: [base-bundle-size, pr-bundle-size]
     runs-on: ubuntu-latest
+    if: "!contains(github.event.pull_request.labels.*.name, 'skip-bundle-size-check')"
     permissions:
       pull-requests: write
 
@@ -105,13 +108,15 @@ jobs:
 
             const message = `## ⚠️ Bundle Size Alert
 
-            The bundle size has increased by **${percentDiff}%**, which exceeds the ${{env.INCREASE_THRESHOLD}}% threshold.
+            The bundle size has increased above the ${{env.INCREASE_THRESHOLD}}% threshold.
 
-            | Base Size | Current Size | Increase |
+            | Staging Size | PR Size | Increase |
             | --------- | ------------ | -------- |
             | ${formatBytes(baseSize)} | ${formatBytes(currentSize)} | +${percentDiff}% |
 
-            Please review your changes to ensure this increase is necessary.`;
+            Please review your changes to ensure this increase is necessary.
+
+            If this increase is expected, please add the \`skip-bundle-size-check\` label to the PR.`;
 
             github.rest.issues.createComment({
               issue_number: context.issue.number,
