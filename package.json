@@ -5,7 +5,7 @@
   "description": "Dialpad's Dialtone design system monorepo",
   "scripts": {
     "prepare": "husky install",
-    "prepack": "nx run dialtone:build --skip-nx-cache"
+    "prepack": "nx run dialtone:build"
   },
   "pnpm": {
     "peerDependencyRules": {
