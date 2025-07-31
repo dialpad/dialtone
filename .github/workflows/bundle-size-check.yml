@@ -1,0 +1,130 @@
+name: Bundle Size Check
+
+on:
+  pull_request:
+    branches: [ staging ]
+    types: ['opened', 'synchronize', 'reopened']
+    paths:
+      - 'packages/**'
+      - 'package.json'
+      - 'pnpm-lock.yaml'
+
+env:
+  INCREASE_THRESHOLD: 5
+
+jobs:
+  base-bundle-size:
+    name: Check Base Bundle Size
+    runs-on: ubuntu-latest
+
+    outputs:
+      SIZE: ${{ steps.current-size.outputs.size }}
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.base_ref }}
+
+      - name: Setup Environment
+        uses: ./.github/actions/setup-environment
+
+      - name: Create package
+        run: pnpm pack
+        id: pack
+
+      - name: Get current package size
+        id: current-size
+        run: |
+          PACKAGE_FILE=$(ls dialpad-dialtone-*.tgz | head -n 1)
+          CURRENT_SIZE=$(wc -c < "$PACKAGE_FILE")
+          echo "Current package size: $CURRENT_SIZE bytes"
+          echo "size=$CURRENT_SIZE" >> $GITHUB_OUTPUT
+
+  pr-bundle-size:
+    name: Check PR Bundle Size
+    runs-on: ubuntu-latest
+
+    outputs:
+      SIZE: ${{ steps.current-size.outputs.size }}
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Environment
+        uses: ./.github/actions/setup-environment
+
+      - name: Create package
+        run: pnpm pack
+        id: pack
+
+      - name: Get current package size
+        id: current-size
+        run: |
+          PACKAGE_FILE=$(ls dialpad-dialtone-*.tgz | head -n 1)
+          CURRENT_SIZE=$(wc -c < "$PACKAGE_FILE")
+          echo "Current package size: $CURRENT_SIZE bytes"
+          echo "size=$CURRENT_SIZE" >> $GITHUB_OUTPUT
+
+  check-bundle-size-diff:
+    name: Check Bundle Size Difference
+    needs: [base-bundle-size, pr-bundle-size]
+    runs-on: ubuntu-latest
+    permissions:
+      pull-requests: write
+
+    steps:
+      - name: Compare package sizes
+        id: compare-sizes
+        run: |
+          BASE_SIZE=${{ needs.base-bundle-size.outputs.SIZE }}
+          PR_SIZE=${{ needs.pr-bundle-size.outputs.SIZE }}
+          SIZE_DIFF=$(($PR_SIZE - $BASE_SIZE))
+          THRESHOLD_EXCEEDED=0
+          if [ $SIZE_DIFF -gt $(($BASE_SIZE * $INCREASE_THRESHOLD / 100)) ]; then
+            THRESHOLD_EXCEEDED=1
+          fi
+          echo "size_diff=$SIZE_DIFF" >> $GITHUB_OUTPUT
+          echo "threshold_exceeded=$THRESHOLD_EXCEEDED" >> $GITHUB_OUTPUT
+
+      - name: Comment on PR if threshold exceeded
+        if: steps.compare-sizes.outputs.threshold_exceeded == 'true'
+        uses: actions/github-script@v7
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            const baseSize = parseInt('${{ needs.base-bundle-size.outputs.SIZE }}');
+            const currentSize = parseInt('${{ needs.pr-bundle-size.outputs.SIZE }}');
+            const sizeDiff = parseInt('${{ steps.compare-sizes.outputs.size_diff }}');
+
+            const formatBytes = (bytes) => {
+              if (bytes === 0) return '0 Bytes';
+              const k = 1024;
+              const sizes = ['Bytes', 'KB', 'MB', 'GB'];
+              const i = Math.floor(Math.log(bytes) / Math.log(k));
+              return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
+            };
+
+            const message = `## ⚠️ Bundle Size Alert
+
+            The bundle size has increased by **${sizeDiff}%**, which exceeds the ${{env.INCREASE_THRESHOLD}}% threshold.
+
+            | Base Size | Current Size | Increase |
+            | --------- | ------------ | -------- |
+            | ${formatBytes(baseSize)} | ${formatBytes(currentSize)} | +${sizeDiff}% |
+
+            Please review your changes to ensure this increase is necessary.`;
+
+            github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: message
+            });
+
+      - name: Fail if threshold exceeded
+        if: steps.compare-sizes.outputs.threshold_exceeded == 'true'
+        run: |
+          echo "Bundle size increased by ${{ steps.compare-sizes.outputs.size_diff }}%, which exceeds the ${{env.INCREASE_THRESHOLD}}% threshold."
+          exit 1
