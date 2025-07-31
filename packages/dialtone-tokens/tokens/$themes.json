@@ -424,8 +424,7 @@
       "components/icon/default": "enabled",
       "components/radio/default": "enabled",
       "root": "source",
-      "components/button/default": "enabled",
-      "themes/shell/dp": "disabled"
+      "components/button/default": "enabled"
     },
     "$figmaCollectionId": "VariableCollectionId:406:18994",
     "$figmaModeId": "406:0",
@@ -1397,8 +1396,7 @@
       "components/radio/default": "enabled",
       "root": "source",
       "components/badge/dark": "enabled",
-      "components/button/default": "enabled",
-      "themes/shell/dp": "disabled"
+      "components/button/default": "enabled"
     },
     "$figmaCollectionId": "VariableCollectionId:406:18994",
     "$figmaModeId": "406:1",
@@ -2294,8 +2292,7 @@
       "components/icon/default": "enabled",
       "components/radio/default": "enabled",
       "root": "source",
-      "components/button/default": "enabled",
-      "themes/shell/dp": "disabled"
+      "components/button/default": "enabled"
     },
     "$figmaCollectionId": "VariableCollectionId:406:19535",
     "$figmaModeId": "406:2",
@@ -2857,8 +2854,7 @@
       "components/radio/default": "enabled",
       "root": "source",
       "components/badge/dark": "enabled",
-      "components/button/default": "enabled",
-      "themes/shell/dp": "disabled"
+      "components/button/default": "enabled"
     },
     "$figmaCollectionId": "VariableCollectionId:406:19535",
     "$figmaModeId": "406:3",
@@ -3413,8 +3409,7 @@
       "components/button/default": "enabled",
       "components/checkbox/default": "enabled",
       "components/icon/default": "enabled",
-      "components/radio/default": "enabled",
-      "themes/shell/dp": "disabled"
+      "components/radio/default": "enabled"
     },
     "$figmaVariableReferences": {},
     "group": "deca"
@@ -3779,8 +3774,7 @@
       "components/checkbox/default": "enabled",
       "components/icon/default": "enabled",
       "components/radio/default": "enabled",
-      "semantic/dp/default": "enabled",
-      "themes/shell/dp": "disabled"
+      "semantic/dp/default": "enabled"
     },
     "group": "expressive",
     "$figmaVariableReferences": {}
@@ -3800,8 +3794,7 @@
       "components/badge/default": "enabled",
       "components/checkbox/default": "enabled",
       "components/icon/default": "enabled",
-      "components/radio/default": "enabled",
-      "themes/shell/dp": "disabled"
+      "components/radio/default": "enabled"
     },
     "group": "expressive",
     "$figmaVariableReferences": {}
@@ -3820,8 +3813,7 @@
       "components/checkbox/default": "enabled",
       "components/icon/default": "enabled",
       "components/radio/default": "enabled",
-      "semantic/expressive/default": "enabled",
-      "themes/shell/dp": "disabled"
+      "semantic/expressive/default": "enabled"
     },
     "group": "expressive-sm",
     "$figmaVariableReferences": {}
@@ -3842,8 +3834,7 @@
       "components/checkbox/default": "enabled",
       "components/icon/default": "enabled",
       "components/radio/default": "enabled",
-      "semantic/expressive/default": "enabled",
-      "themes/shell/dp": "disabled"
+      "semantic/expressive/default": "enabled"
     },
     "group": "expressive-sm",
     "$figmaVariableReferences": {}
@@ -4027,8 +4018,7 @@
     },
     "selectedTokenSets": {
       "root": "enabled",
-      "base/default": "enabled",
-      "themes/shell/dp": "disabled"
+      "base/default": "enabled"
     },
     "group": "base",
     "$figmaVariableReferences": {}
@@ -4213,8 +4203,7 @@
     "selectedTokenSets": {
       "root": "enabled",
       "base/default": "enabled",
-      "base/dark": "enabled",
-      "themes/shell/dp": "disabled"
+      "base/dark": "enabled"
     },
     "group": "base",
     "$figmaVariableReferences": {}
@@ -4226,8 +4215,7 @@
     "selectedTokenSets": {
       "root": "enabled",
       "base/default": "enabled",
-      "base/deca": "enabled",
-      "themes/shell/dp": "disabled"
+      "base/deca": "enabled"
     },
     "group": "base",
     "$figmaVariableReferences": {}
@@ -4252,8 +4240,7 @@
       "components/button/default": "enabled",
       "components/checkbox/default": "enabled",
       "components/icon/default": "enabled",
-      "components/radio/default": "enabled",
-      "themes/shell/dp": "disabled"
+      "components/radio/default": "enabled"
     },
     "$figmaVariableReferences": {},
     "group": "deca"
@@ -4267,8 +4254,7 @@
       "base/default": "enabled",
       "base/dark": "enabled",
       "base/deca": "enabled",
-      "base/deca-dark": "enabled",
-      "themes/shell/dp": "disabled"
+      "base/deca-dark": "enabled"
     },
     "group": "base",
     "$figmaVariableReferences": {}
