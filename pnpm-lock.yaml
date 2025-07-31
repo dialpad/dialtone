@@ -116,8 +116,8 @@ importers:
         specifier: 9.0.1
         version: 9.0.1
       linkifyjs:
-        specifier: 4.2.0
-        version: 4.2.0
+        specifier: 4.3.2
+        version: 4.3.2
       overlayscrollbars:
         specifier: 2.10.0
         version: 2.10.0
@@ -782,8 +782,8 @@ importers:
         specifier: 9.0.1
         version: 9.0.1
       linkifyjs:
-        specifier: 4.2.0
-        version: 4.2.0
+        specifier: 4.3.2
+        version: 4.3.2
       overlayscrollbars:
         specifier: 2.10.0
         version: 2.10.0
@@ -936,8 +936,8 @@ importers:
         specifier: 9.0.1
         version: 9.0.1
       linkifyjs:
-        specifier: 4.2.0
-        version: 4.2.0
+        specifier: 4.3.2
+        version: 4.3.2
       overlayscrollbars:
         specifier: 2.10.0
         version: 2.10.0
@@ -10705,8 +10705,8 @@ packages:
   linkify-it@5.0.0:
     resolution: {integrity: sha512-5aHCbzQRADcdP+ATqnDuhhJ/MRIqDkZX5pyjFHRRysS8vZ5AbqGEoFIb6pYHPZ+L/OC2Lc+xT8uHVVR5CAK/wQ==}
 
-  linkifyjs@4.2.0:
-    resolution: {integrity: sha512-pCj3PrQyATaoTYKHrgWRF3SJwsm61udVh+vuls/Rl6SptiDhgE7ziUIudAedRY9QEfynmM7/RmLEfPUyw1HPCw==}
+  linkifyjs@4.3.2:
+    resolution: {integrity: sha512-NT1CJtq3hHIreOianA8aSXn6Cw0JzYOuDQbOrSPe7gqFnCpKP++MQe3ODgO3oh2GJFORkAAdqredOa60z63GbA==}
 
   lint-staged@15.2.0:
     resolution: {integrity: sha512-TFZzUEV00f+2YLaVPWBWGAMq7So6yQx+GG8YRMDeOEIf95Zn5RyiLMsEiX4KTNl9vq/w+NqRJkLA1kPIo15ufQ==}
@@ -20911,7 +20911,7 @@ snapshots:
     dependencies:
       '@tiptap/core': 2.12.0(@tiptap/pm@2.12.0)
       '@tiptap/pm': 2.12.0
-      linkifyjs: 4.2.0
+      linkifyjs: 4.3.2
 
   '@tiptap/extension-list-item@2.12.0(@tiptap/core@2.12.0(@tiptap/pm@2.12.0))':
     dependencies:
@@ -28626,7 +28626,7 @@ snapshots:
     dependencies:
       uc.micro: 2.1.0
 
-  linkifyjs@4.2.0: {}
+  linkifyjs@4.3.2: {}
 
   lint-staged@15.2.0:
     dependencies:
