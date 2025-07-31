@@ -1,3 +1,10 @@
+# [3.187.0](https://github.com/dialpad/dialtone/compare/dialtone-vue3/v3.186.1...dialtone-vue3/v3.187.0) (2025-07-31)
+
+
+### Features
+
+* DLT-2173 add test coverage ([#836](https://github.com/dialpad/dialtone/issues/836)) ([563dd1d](https://github.com/dialpad/dialtone/commit/563dd1dc98e5feacdff62fad1125ecf227fef57a))
+
 ## [3.186.1](https://github.com/dialpad/dialtone/compare/dialtone-vue3/v3.186.0...dialtone-vue3/v3.186.1) (2025-07-29)
 
 
