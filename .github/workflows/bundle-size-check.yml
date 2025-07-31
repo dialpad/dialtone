@@ -77,11 +77,12 @@ jobs:
           BASE_SIZE=${{ needs.base-bundle-size.outputs.SIZE }}
           PR_SIZE=${{ needs.pr-bundle-size.outputs.SIZE }}
           SIZE_DIFF=$(($PR_SIZE - $BASE_SIZE))
+          PERCENT_DIFF=$(($SIZE_DIFF * 100 / $BASE_SIZE))
           THRESHOLD_EXCEEDED=0
           if [ $SIZE_DIFF -gt $(($BASE_SIZE * $INCREASE_THRESHOLD / 100)) ]; then
             THRESHOLD_EXCEEDED=1
           fi
-          echo "size_diff=$SIZE_DIFF" >> $GITHUB_OUTPUT
+          echo "percent_diff=$PERCENT_DIFF" >> $GITHUB_OUTPUT
           echo "threshold_exceeded=$THRESHOLD_EXCEEDED" >> $GITHUB_OUTPUT
 
       - name: Comment on PR if threshold exceeded
@@ -92,7 +93,7 @@ jobs:
           script: |
             const baseSize = parseInt('${{ needs.base-bundle-size.outputs.SIZE }}');
             const currentSize = parseInt('${{ needs.pr-bundle-size.outputs.SIZE }}');
-            const sizeDiff = parseInt('${{ steps.compare-sizes.outputs.size_diff }}');
+            const percentDiff = parseInt('${{ steps.compare-sizes.outputs.percent_diff }}');
 
             const formatBytes = (bytes) => {
               if (bytes === 0) return '0 Bytes';
@@ -104,11 +105,11 @@ jobs:
 
             const message = `## ⚠️ Bundle Size Alert
 
-            The bundle size has increased by **${sizeDiff}%**, which exceeds the ${{env.INCREASE_THRESHOLD}}% threshold.
+            The bundle size has increased by **${percentDiff}%**, which exceeds the ${{env.INCREASE_THRESHOLD}}% threshold.
 
             | Base Size | Current Size | Increase |
             | --------- | ------------ | -------- |
-            | ${formatBytes(baseSize)} | ${formatBytes(currentSize)} | +${sizeDiff}% |
+            | ${formatBytes(baseSize)} | ${formatBytes(currentSize)} | +${percentDiff}% |
 
             Please review your changes to ensure this increase is necessary.`;
 
@@ -122,5 +123,5 @@ jobs:
       - name: Fail if threshold exceeded
         if: steps.compare-sizes.outputs.threshold_exceeded == 1
         run: |
-          echo "Bundle size increased by ${{ steps.compare-sizes.outputs.size_diff }}%, which exceeds the ${{env.INCREASE_THRESHOLD}}% threshold."
+          echo "Bundle size increased by ${{ steps.compare-sizes.outputs.percent_diff }}%, which exceeds the ${{env.INCREASE_THRESHOLD}}% threshold."
           exit 1
