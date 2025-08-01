@@ -1,3 +1,15 @@
+# [9.129.0](https://github.com/dialpad/dialtone/compare/dialtone/v9.128.0...dialtone/v9.129.0) (2025-08-01)
+
+
+### Bug Fixes
+
+* NO-JIRA add fonts export back ([3e48be8](https://github.com/dialpad/dialtone/commit/3e48be880f5a096e0c268258a4aae6420e6b573d))
+
+
+### Features
+
+* **Icon:** DLT-2619 deprecate ai notes ([#839](https://github.com/dialpad/dialtone/issues/839)) ([5623cd9](https://github.com/dialpad/dialtone/commit/5623cd9c7068daf8db801d44106a44e064df07e2))
+
 # [9.128.0](https://github.com/dialpad/dialtone/compare/dialtone/v9.127.2...dialtone/v9.128.0) (2025-07-31)
 
 
