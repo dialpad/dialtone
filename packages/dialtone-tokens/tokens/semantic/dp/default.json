@@ -1349,11 +1349,6 @@
         "description": "Selected state for brand chart elements."
       },
       "sequential": {
-        "10": {
-          "value": "{color.indigo.1000}",
-          "type": "color",
-          "description": "Tenth color in sequential chart series, darkest shade."
-        },
         "01": {
           "value": "{color.indigo.50}",
           "type": "color",
@@ -1488,6 +1483,11 @@
           "value": "{color.indigo.1000}",
           "type": "color",
           "description": "Selected state for ninth sequential chart color."
+        },
+        "10": {
+          "value": "{color.indigo.1000}",
+          "type": "color",
+          "description": "Tenth color in sequential chart series, darkest shade."
         },
         "10-hover": {
           "value": "{color.indigo.1000}",
