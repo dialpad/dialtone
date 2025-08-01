@@ -1,3 +1,29 @@
+# [9.129.0](https://github.com/dialpad/dialtone/compare/dialtone/v9.128.0...dialtone/v9.129.0) (2025-08-01)
+
+
+### Bug Fixes
+
+* NO-JIRA add fonts export back ([3e48be8](https://github.com/dialpad/dialtone/commit/3e48be880f5a096e0c268258a4aae6420e6b573d))
+
+
+### Features
+
+* **Icon:** DLT-2619 deprecate ai notes ([#839](https://github.com/dialpad/dialtone/issues/839)) ([5623cd9](https://github.com/dialpad/dialtone/commit/5623cd9c7068daf8db801d44106a44e064df07e2))
+
+# [9.128.0](https://github.com/dialpad/dialtone/compare/dialtone/v9.127.2...dialtone/v9.128.0) (2025-07-31)
+
+
+### Features
+
+* DLT-2173 add test coverage ([#836](https://github.com/dialpad/dialtone/issues/836)) ([563dd1d](https://github.com/dialpad/dialtone/commit/563dd1dc98e5feacdff62fad1125ecf227fef57a))
+
+## [9.127.2](https://github.com/dialpad/dialtone/compare/dialtone/v9.127.1...dialtone/v9.127.2) (2025-07-31)
+
+
+### Bug Fixes
+
+* **Editor:** DP-151532 change quick reply to template ([#846](https://github.com/dialpad/dialtone/issues/846)) ([e403c3e](https://github.com/dialpad/dialtone/commit/e403c3e5925649b97a0460f90c7f18c72e178b37))
+
 ## [9.127.1](https://github.com/dialpad/dialtone/compare/dialtone/v9.127.0...dialtone/v9.127.1) (2025-07-29)
 
 

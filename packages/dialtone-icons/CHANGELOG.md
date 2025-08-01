@@ -1,3 +1,10 @@
+# [4.42.0](https://github.com/dialpad/dialtone/compare/dialtone-icons/v4.41.2...dialtone-icons/v4.42.0) (2025-08-01)
+
+
+### Features
+
+* **Icon:** DLT-2619 deprecate ai notes ([#839](https://github.com/dialpad/dialtone/issues/839)) ([5623cd9](https://github.com/dialpad/dialtone/commit/5623cd9c7068daf8db801d44106a44e064df07e2))
+
 ## [4.41.2](https://github.com/dialpad/dialtone/compare/dialtone-icons/v4.41.1...dialtone-icons/v4.41.2) (2025-07-15)
 
 ## [4.41.1](https://github.com/dialpad/dialtone/compare/dialtone-icons/v4.41.0...dialtone-icons/v4.41.1) (2025-06-13)
