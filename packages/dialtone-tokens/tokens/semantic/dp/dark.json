@@ -849,7 +849,7 @@
         "value": "{color.tan.900}",
         "type": "color"
       },
-      "primary": {
+      "accent": {
         "value": "{color.indigo.300}",
         "type": "color"
       },

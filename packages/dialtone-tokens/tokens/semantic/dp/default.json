@@ -1255,15 +1255,15 @@
         "value": "{color.tan.600}",
         "type": "color"
       },
-      "primary": {
+      "accent": {
         "value": "{color.indigo.500}",
         "type": "color"
       },
-      "primary-hover": {
+      "accent-hover": {
         "value": "{color.indigo.600}",
         "type": "color"
       },
-      "primary-selected": {
+      "accent-selected": {
         "value": "{color.indigo.800}",
         "type": "color"
       },
@@ -1327,7 +1327,7 @@
         "value": "{color.purple.550}",
         "type": "color"
       },
-      "monochrome": {
+      "sequential": {
         "01": {
           "value": "{color.indigo.800}",
           "type": "color"
