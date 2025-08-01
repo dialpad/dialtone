@@ -26,7 +26,6 @@ const paths = {
   input: {
     css: [
       './packages/dialtone-css/lib/dist/**',
-      '!./packages/dialtone-css/lib/dist/fonts/**',
       '!./packages/dialtone-css/lib/dist/js/**',
       '!./packages/dialtone-css/lib/dist/svg/**',
       '!./packages/dialtone-css/lib/dist/tokens/**',
