@@ -1,3 +1,10 @@
+## [9.129.1](https://github.com/dialpad/dialtone/compare/dialtone/v9.129.0...dialtone/v9.129.1) (2025-08-03)
+
+
+### Bug Fixes
+
+* **Tab:** DP-148500 tabs not loading instantly ([#849](https://github.com/dialpad/dialtone/issues/849)) ([623c014](https://github.com/dialpad/dialtone/commit/623c0144de9b2072dda17e94f1346ee1cbf61b62))
+
 # [9.129.0](https://github.com/dialpad/dialtone/compare/dialtone/v9.128.0...dialtone/v9.129.0) (2025-08-01)
 
 
