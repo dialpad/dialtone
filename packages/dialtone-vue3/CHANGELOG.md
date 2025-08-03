@@ -1,3 +1,10 @@
+## [3.187.1](https://github.com/dialpad/dialtone/compare/dialtone-vue3/v3.187.0...dialtone-vue3/v3.187.1) (2025-08-03)
+
+
+### Bug Fixes
+
+* **Tab:** DP-148500 tabs not loading instantly ([#849](https://github.com/dialpad/dialtone/issues/849)) ([623c014](https://github.com/dialpad/dialtone/commit/623c0144de9b2072dda17e94f1346ee1cbf61b62))
+
 # [3.187.0](https://github.com/dialpad/dialtone/compare/dialtone-vue3/v3.186.1...dialtone-vue3/v3.187.0) (2025-07-31)
 
 
