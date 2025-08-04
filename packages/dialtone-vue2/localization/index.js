@@ -75,7 +75,7 @@ export class DialtoneLocalization {
   }
 
   static getPreferredLocale () {
-    const localStorageLanguage = localStorage.getItem('user-locale');
+    const localStorageLanguage = localStorage?.getItem('user-locale');
 
     // Get the first two letters of the navigator language and check if it's in the allowed locales
     const navigatorLanguage = Object.values(allowedLocales)
