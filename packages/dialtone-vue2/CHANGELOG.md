@@ -1,3 +1,10 @@
+## [2.195.2](https://github.com/dialpad/dialtone/compare/dialtone-vue2/v2.195.1...dialtone-vue2/v2.195.2) (2025-08-04)
+
+
+### Bug Fixes
+
+* **Localization:** NO-JIRA add validation ([#856](https://github.com/dialpad/dialtone/issues/856)) ([7bc06f0](https://github.com/dialpad/dialtone/commit/7bc06f0344085a764fdc53940116f6a5e7a7cb70))
+
 ## [2.195.1](https://github.com/dialpad/dialtone/compare/dialtone-vue2/v2.195.0...dialtone-vue2/v2.195.1) (2025-08-03)
 
 
