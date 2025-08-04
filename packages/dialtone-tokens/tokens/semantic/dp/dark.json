@@ -839,172 +839,259 @@
       },
       "neutral": {
         "value": "{color.tan.600}",
-        "type": "color"
+        "type": "color",
+        "description": "Used for neutral or background elements in charts where no specific meaning is implied."
       },
       "neutral-hover": {
         "value": "{color.tan.700}",
-        "type": "color"
+        "type": "color",
+        "description": "Hover state for neutral chart elements."
       },
       "neutral-selected": {
         "value": "{color.tan.900}",
-        "type": "color"
+        "type": "color",
+        "description": "Selected state for neutral chart elements."
       },
       "accent": {
         "value": "{color.indigo.300}",
-        "type": "color"
+        "type": "color",
+        "description": "Main accent color for highlighting important chart elements or primary data series."
       },
-      "primary-hover": {
+      "accent-hover": {
         "value": "{color.indigo.400}",
-        "type": "color"
+        "type": "color",
+        "description": "Hover state for accent chart elements."
       },
-      "primary-selected": {
+      "accent-selected": {
         "value": "{color.indigo.600}",
-        "type": "color"
+        "type": "color",
+        "description": "Selected state for accent chart elements."
       },
       "positive": {
         "value": "{color.green.300}",
-        "type": "color"
+        "type": "color",
+        "description": "Used for positive values, growth, or success indicators in charts, aka success."
       },
       "positive-hover": {
         "value": "{color.green.400}",
-        "type": "color"
+        "type": "color",
+        "description": "Hover state for positive chart elements, aka success."
       },
       "positive-selected": {
         "value": "{color.green.600}",
-        "type": "color"
+        "type": "color",
+        "description": "Selected state for positive chart elements, aka success."
       },
       "critical": {
         "value": "{color.red.300}",
-        "type": "color"
+        "type": "color",
+        "description": "Used for negative values, errors, or critical indicators in charts, aka danger."
       },
       "critical-hover": {
         "value": "{color.red.400}",
-        "type": "color"
+        "type": "color",
+        "description": "Hover state for critical chart elements, aka danger."
       },
       "critical-selected": {
         "value": "{color.red.500}",
-        "type": "color"
+        "type": "color",
+        "description": "Selected state for critical chart elements, aka danger."
       },
       "warning": {
         "value": "{color.gold.300}",
-        "type": "color"
+        "type": "color",
+        "description": "Used for cautionary or warning indicators in charts."
       },
       "warning-hover": {
         "value": "{color.gold.400}",
-        "type": "color"
+        "type": "color",
+        "description": "Hover state for warning chart elements."
       },
       "warning-selected": {
         "value": "{color.gold.600}",
-        "type": "color"
+        "type": "color",
+        "description": "Selected state for warning chart elements."
       },
       "info": {
         "value": "{color.blue.300}",
-        "type": "color"
+        "type": "color",
+        "description": "Used for informational or neutral data points in charts."
       },
       "info-hover": {
         "value": "{color.blue.400}",
-        "type": "color"
+        "type": "color",
+        "description": "Hover state for info chart elements."
       },
       "info-selected": {
         "value": "{color.blue.600}",
-        "type": "color"
+        "type": "color",
+        "description": "Selected state for info chart elements."
       },
       "brand": {
         "value": "{color.purple.300}",
-        "type": "color"
+        "type": "color",
+        "description": "Used for brand-related data or to highlight company-specific information in charts."
       },
       "brand-hover": {
         "value": "{color.purple.350}",
-        "type": "color"
+        "type": "color",
+        "description": "Hover state for brand chart elements."
       },
       "brand-selected": {
         "value": "{color.purple.450}",
-        "type": "color"
+        "type": "color",
+        "description": "Selected state for brand chart elements."
       },
-      "monochrome": {
+      "sequential": {
+        "10": {
+          "value": "{color.indigo.50}",
+          "type": "color",
+          "description": "Tenth color in sequential chart series, lightest shade."
+        },
         "01": {
-          "value": "{color.indigo.200}",
-          "type": "color"
+          "value": "{color.indigo.900}",
+          "type": "color",
+          "description": "First color in sequential chart series, darkest shade."
         },
         "01-hover": {
-          "value": "{color.indigo.300}",
-          "type": "color"
+          "value": "{color.indigo.800}",
+          "type": "color",
+          "description": "Hover state for first sequential chart color."
         },
         "01-selected": {
-          "value": "{color.indigo.500}",
-          "type": "color"
+          "value": "{color.indigo.700}",
+          "type": "color",
+          "description": "Selected state for first sequential chart color."
         },
         "02": {
-          "value": "{color.indigo.500}",
-          "type": "color"
+          "value": "{color.indigo.800}",
+          "type": "color",
+          "description": "Second color in sequential chart series, very dark shade."
         },
         "02-hover": {
-          "value": "{color.indigo.600}",
-          "type": "color"
+          "value": "{color.indigo.700}",
+          "type": "color",
+          "description": "Hover state for second sequential chart color."
         },
         "02-selected": {
-          "value": "{color.indigo.800}",
-          "type": "color"
+          "value": "{color.indigo.600}",
+          "type": "color",
+          "description": "Selected state for second sequential chart color."
         },
         "03": {
-          "value": "{color.indigo.600}",
-          "type": "color"
+          "value": "{color.indigo.700}",
+          "type": "color",
+          "description": "Third color in sequential chart series, dark shade."
         },
         "03-hover": {
-          "value": "{color.indigo.700}",
-          "type": "color"
+          "value": "{color.indigo.600}",
+          "type": "color",
+          "description": "Hover state for third sequential chart color."
         },
         "03-selected": {
-          "value": "{color.indigo.900}",
-          "type": "color"
+          "value": "{color.indigo.500}",
+          "type": "color",
+          "description": "Selected state for third sequential chart color."
         },
         "04": {
-          "value": "{color.indigo.300}",
-          "type": "color"
+          "value": "{color.indigo.600}",
+          "type": "color",
+          "description": "Fourth color in sequential chart series, medium-dark shade."
         },
         "04-hover": {
-          "value": "{color.indigo.400}",
-          "type": "color"
+          "value": "{color.indigo.500}",
+          "type": "color",
+          "description": "Hover state for fourth sequential chart color."
         },
         "04-selected": {
-          "value": "{color.indigo.600}",
-          "type": "color"
+          "value": "{color.indigo.400}",
+          "type": "color",
+          "description": "Selected state for fourth sequential chart color."
         },
         "05": {
-          "value": "{color.indigo.100}",
-          "type": "color"
+          "value": "{color.indigo.500}",
+          "type": "color",
+          "description": "Fifth color in sequential chart series, medium shade."
         },
         "05-hover": {
-          "value": "{color.indigo.200}",
-          "type": "color"
+          "value": "{color.indigo.400}",
+          "type": "color",
+          "description": "Hover state for fifth sequential chart color."
         },
         "05-selected": {
-          "value": "{color.indigo.400}",
-          "type": "color"
+          "value": "{color.indigo.300}",
+          "type": "color",
+          "description": "Selected state for fifth sequential chart color."
         },
         "06": {
-          "value": "{color.indigo.300}",
-          "type": "color"
+          "value": "{color.indigo.400}",
+          "type": "color",
+          "description": "Sixth color in sequential chart series, medium-light shade."
         },
         "06-hover": {
-          "value": "{color.indigo.400}",
-          "type": "color"
+          "value": "{color.indigo.300}",
+          "type": "color",
+          "description": "Hover state for sixth sequential chart color."
         },
         "06-selected": {
-          "value": "{color.indigo.600}",
-          "type": "color"
+          "value": "{color.indigo.200}",
+          "type": "color",
+          "description": "Selected state for sixth sequential chart color."
         },
         "07": {
-          "value": "{color.indigo.50}",
-          "type": "color"
+          "value": "{color.indigo.300}",
+          "type": "color",
+          "description": "Seventh color in sequential chart series, light-medium shade."
         },
         "07-hover": {
-          "value": "{color.indigo.100}",
-          "type": "color"
+          "value": "{color.indigo.200}",
+          "type": "color",
+          "description": "Hover state for seventh sequential chart color."
         },
         "07-selected": {
-          "value": "{color.indigo.300}",
-          "type": "color"
+          "value": "{color.indigo.100}",
+          "type": "color",
+          "description": "Selected state for seventh sequential chart color."
+        },
+        "08": {
+          "value": "{color.indigo.200}",
+          "type": "color",
+          "description": "Eighth color in sequential chart series, light shade."
+        },
+        "08-hover": {
+          "value": "{color.indigo.100}",
+          "type": "color",
+          "description": "Hover state for eighth sequential chart color."
+        },
+        "08-selected": {
+          "value": "{color.indigo.50}",
+          "type": "color",
+          "description": "Selected state for eighth sequential chart color."
+        },
+        "09": {
+          "value": "{color.indigo.100}",
+          "type": "color",
+          "description": "Ninth color in sequential chart series, very light shade."
+        },
+        "09-hover": {
+          "value": "{color.indigo.50}",
+          "type": "color",
+          "description": "Hover state for ninth sequential chart color."
+        },
+        "09-selected": {
+          "value": "{color.indigo.50}",
+          "type": "color",
+          "description": "Selected state for ninth sequential chart color."
+        },
+        "10-hover": {
+          "value": "{color.indigo.50}",
+          "type": "color",
+          "description": "Hover state for tenth sequential chart color."
+        },
+        "10-selected": {
+          "value": "{color.indigo.50}",
+          "type": "color",
+          "description": "Selected state for tenth sequential chart color."
         }
       }
     },

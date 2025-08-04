@@ -1276,32 +1276,32 @@
       "positive": {
         "value": "{color.green.425}",
         "type": "color",
-        "description": "Used for positive values, growth, or success indicators in charts."
+        "description": "Used for positive values, growth, or success indicators in charts, aka success."
       },
       "positive-hover": {
         "value": "{color.green.475}",
         "type": "color",
-        "description": "Hover state for positive chart elements."
+        "description": "Hover state for positive chart elements, aka success."
       },
       "positive-selected": {
         "value": "{color.green.600}",
         "type": "color",
-        "description": "Selected state for positive chart elements."
+        "description": "Selected state for positive chart elements, aka success."
       },
       "critical": {
         "value": "{color.red.400}",
         "type": "color",
-        "description": "Used for negative values, errors, or critical indicators in charts."
+        "description": "Used for negative values, errors, or critical indicators in charts, aka danger."
       },
       "critical-hover": {
         "value": "{color.red.450}",
         "type": "color",
-        "description": "Hover state for critical chart elements."
+        "description": "Hover state for critical chart elements, aka danger."
       },
       "critical-selected": {
         "value": "{color.red.600}",
         "type": "color",
-        "description": "Selected state for critical chart elements."
+        "description": "Selected state for critical chart elements, aka danger."
       },
       "warning": {
         "value": "{color.gold.400}",
