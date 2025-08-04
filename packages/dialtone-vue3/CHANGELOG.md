@@ -1,3 +1,10 @@
+## [3.187.2](https://github.com/dialpad/dialtone/compare/dialtone-vue3/v3.187.1...dialtone-vue3/v3.187.2) (2025-08-04)
+
+
+### Bug Fixes
+
+* **Localization:** NO-JIRA add validation ([#856](https://github.com/dialpad/dialtone/issues/856)) ([7bc06f0](https://github.com/dialpad/dialtone/commit/7bc06f0344085a764fdc53940116f6a5e7a7cb70))
+
 ## [3.187.1](https://github.com/dialpad/dialtone/compare/dialtone-vue3/v3.187.0...dialtone-vue3/v3.187.1) (2025-08-03)
 
 
