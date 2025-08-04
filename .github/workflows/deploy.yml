@@ -85,8 +85,7 @@ jobs:
               - 'packages/dialtone-tokens/themes/**'
               - 'packages/dialtone-tokens/tokens/**'
               - 'packages/dialtone-tokens/gulpfile.cjs'
-              - 'packages/dialtone-vue3/**/*.vue'
-              - 'packages/dialtone-vue3/**/*.*js'
+              - 'packages/dialtone-vue3/{common,components,directives,localization,recipes}/**/!(*.story.vue|*.test.js|*.stories.js)'
             dialtone-vue2:
               - 'packages/dialtone-css/**/*.less'
               - 'packages/dialtone-css/postcss/*.cjs'
@@ -99,9 +98,7 @@ jobs:
               - 'packages/dialtone-tokens/themes/**'
               - 'packages/dialtone-tokens/tokens/**'
               - 'packages/dialtone-tokens/gulpfile.cjs'
-              - 'packages/dialtone-vue2/**/*.vue'
-              - 'packages/dialtone-vue2/**/*.*js'
-              - 'packages/dialtone-vue2/**/*.stories.js'
+              - 'packages/dialtone-vue2/**'
             dialtone-vue3:
               - 'packages/dialtone-css/**/*.less'
               - 'packages/dialtone-css/postcss/*.cjs'
@@ -114,9 +111,7 @@ jobs:
               - 'packages/dialtone-tokens/themes/**'
               - 'packages/dialtone-tokens/tokens/**'
               - 'packages/dialtone-tokens/gulpfile.cjs'
-              - 'packages/dialtone-vue3/**/*.vue'
-              - 'packages/dialtone-vue3/**/*.*js'
-              - 'packages/dialtone-vue3/**/*.stories.js'
+              - 'packages/dialtone-vue3/**'
 
   check-dialpad-member:
     runs-on: ubuntu-latest
