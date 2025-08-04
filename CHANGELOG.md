@@ -1,3 +1,10 @@
+## [9.129.2-beta.1](https://github.com/dialpad/dialtone/compare/dialtone/v9.129.1...dialtone/v9.129.2-beta.1) (2025-08-04)
+
+
+### Bug Fixes
+
+* **Localization:** NO-JIRA localStorage ([8362ca1](https://github.com/dialpad/dialtone/commit/8362ca1467583e1208af98704f70fb102ecee252))
+
 ## [9.129.1](https://github.com/dialpad/dialtone/compare/dialtone/v9.129.0...dialtone/v9.129.1) (2025-08-03)
 
 
