@@ -410,6 +410,9 @@ importers:
       '@dialpad/dialtone-vue':
         specifier: workspace:^3
         version: link:../../packages/dialtone-vue3
+      '@dialpad/i18n':
+        specifier: 1.16.1
+        version: 1.16.1(@vue/composition-api@1.7.2(vue@3.4.15(typescript@5.6.3)))
       '@dialpad/postcss-responsive-variations':
         specifier: 1.1.5
         version: 1.1.5(postcss@8.5.3)
@@ -1927,6 +1930,9 @@ packages:
     resolution: {integrity: sha512-VwETc0b8IYGWuOnYq5Y+w3LjQkc1rpcXODykQuYc4YRv9CRfm/BdD3NL+JA5DKXUX0i27yUw5+XQWwixS6wkIQ==, tarball: https://npm.pkg.github.com/download/@dialpad/i18n-vue2/1.2.0/e5c047c76d946359be73eabb30578324f91e7318}
     peerDependencies:
       vue: 2.6.14
+
+  '@dialpad/i18n@1.16.1':
+    resolution: {integrity: sha512-souIaYGOw0tC0rGwEISTo/IuARBtISgpEnXQhOYclzJNJSH8BjZY2yTZnZ+ybh97DIB1RopGHgLBJlZCn4/zCg==, tarball: https://npm.pkg.github.com/download/@dialpad/i18n/1.16.1/35d85833ee3ff1a92c812da3668259b68f0b204c}
 
   '@dialpad/i18n@1.17.0-alpha.0':
     resolution: {integrity: sha512-21eFQMJ9Y69Jdu5Ybz0e/tJ5M4yRueUFnDbFGDBjQXp3fmbdiCc2kCTT74SkyZutkIdEIj4LLV6zbbNm15YPlQ==, tarball: https://npm.pkg.github.com/download/@dialpad/i18n/1.17.0-alpha.0/f379df4c07054ad3f894e12558fc2ddd80869006}
@@ -5698,10 +5704,6 @@ packages:
 
   acorn-walk@7.2.0:
     resolution: {integrity: sha512-OPdCF6GsMIP+Az+aWfAAOEt2/+iVDKE7oy6lJ098aoe59oAmK76qV6Gw60SbZ8jHuG2wH058GF4pLFbYamYrVA==}
-    engines: {node: '>=0.4.0'}
-
-  acorn-walk@8.3.0:
-    resolution: {integrity: sha512-FS7hV565M5l1R08MXqo8odwMTB02C2UqzB17RVgu9EyuYFBqJZ3/ZY97sQD5FewVu1UyDFc1yztUDrAwT0EypA==}
     engines: {node: '>=0.4.0'}
 
   acorn-walk@8.3.4:
@@ -15864,8 +15866,8 @@ packages:
   vue-component-type-helpers@1.8.24:
     resolution: {integrity: sha512-lqWs/7fdRXoSBAlbouHBX+LNuaY6gI9xWW34m/ZIz9zVPYHEyw0b2/zaCBwlKx0NtKTeF/6pOpvrxVkh7nhIYg==}
 
-  vue-component-type-helpers@3.0.4:
-    resolution: {integrity: sha512-WtR3kPk8vqKYfCK/HGyT47lK/T3FaVyWxaCNuosaHYE8h9/k0lYRZ/PI/+T/z2wP+uuNKmL6z30rOcBboOu/YA==}
+  vue-component-type-helpers@3.0.5:
+    resolution: {integrity: sha512-uoNZaJ+a1/zppa/Vgmi8zIOP2PHXDN2rT8NyF+zQRK6ZG94lNB9prcV0GdLJbY9i9lrD47JOVIH92SaiA7oJ1A==}
 
   vue-demi@0.14.10:
     resolution: {integrity: sha512-nMZBOwuzabUO0nLgIcc6rycZEebF6eeUfaiQx9+WSk8e29IbLvPU9feI6tqW4kTo3hvoYAJkMh8n8D0fuISphg==}
@@ -17613,6 +17615,13 @@ snapshots:
       '@dialpad/i18n-services': 1.5.0(@vue/composition-api@1.7.2(vue@2.7.16))(vue@2.7.16)
       '@vue/composition-api': 1.7.2(vue@2.7.16)
       vue: 2.7.16
+
+  '@dialpad/i18n@1.16.1(@vue/composition-api@1.7.2(vue@3.4.15(typescript@5.6.3)))':
+    dependencies:
+      '@dialpad/i18n-services': 1.5.0(@vue/composition-api@1.7.2(vue@3.4.15(typescript@5.6.3)))(vue@3.3.4)
+      vue: 3.3.4
+    transitivePeerDependencies:
+      - '@vue/composition-api'
 
   '@dialpad/i18n@1.17.0-alpha.0(@vue/composition-api@1.7.2(vue@3.4.15(typescript@5.6.3)))':
     dependencies:
@@ -20820,7 +20829,7 @@ snapshots:
       ts-dedent: 2.2.0
       type-fest: 2.19.0
       vue: 3.4.15(typescript@5.6.3)
-      vue-component-type-helpers: 3.0.4
+      vue-component-type-helpers: 3.0.5
     transitivePeerDependencies:
       - encoding
       - supports-color
@@ -21885,7 +21894,7 @@ snapshots:
       '@vue/vue-loader-v15': vue-loader@15.11.1(@vue/compiler-sfc@3.4.15)(css-loader@6.8.1(webpack@5.95.0(@swc/core@1.3.96)))(ejs@3.1.9)(handlebars@4.7.8)(lodash@4.17.21)(nunjucks@3.2.4(chokidar@3.5.3))(pug@3.0.2)(react-dom@16.14.0(react@16.14.0))(react@16.14.0)(twig@1.17.1)(underscore@1.13.7)(vue-template-compiler@2.7.16(vue@3.4.15(typescript@5.6.3)))(webpack@5.95.0(@swc/core@1.3.96))
       '@vue/web-component-wrapper': 1.3.0
       acorn: 8.14.1
-      acorn-walk: 8.3.0
+      acorn-walk: 8.3.4
       address: 1.2.2
       autoprefixer: 10.4.16(postcss@8.5.3)
       browserslist: 4.22.1
@@ -22019,7 +22028,7 @@ snapshots:
 
   '@vue/compiler-core@3.3.4':
     dependencies:
-      '@babel/parser': 7.23.9
+      '@babel/parser': 7.28.0
       '@vue/shared': 3.3.4
       estree-walker: 2.0.2
       source-map-js: 1.2.1
@@ -22052,7 +22061,7 @@ snapshots:
 
   '@vue/compiler-sfc@3.3.4':
     dependencies:
-      '@babel/parser': 7.23.9
+      '@babel/parser': 7.28.0
       '@vue/compiler-core': 3.3.4
       '@vue/compiler-dom': 3.3.4
       '@vue/compiler-ssr': 3.3.4
@@ -22186,7 +22195,7 @@ snapshots:
 
   '@vue/reactivity-transform@3.3.4':
     dependencies:
-      '@babel/parser': 7.23.9
+      '@babel/parser': 7.28.0
       '@vue/compiler-core': 3.3.4
       '@vue/shared': 3.3.4
       estree-walker: 2.0.2
@@ -22806,8 +22815,6 @@ snapshots:
       acorn: 8.11.2
 
   acorn-walk@7.2.0: {}
-
-  acorn-walk@8.3.0: {}
 
   acorn-walk@8.3.4:
     dependencies:
@@ -33841,7 +33848,7 @@ snapshots:
       '@tsconfig/node16': 1.0.4
       '@types/node': 20.16.5
       acorn: 8.14.1
-      acorn-walk: 8.3.0
+      acorn-walk: 8.3.4
       arg: 4.1.3
       create-require: 1.1.1
       diff: 4.0.2
@@ -33862,7 +33869,7 @@ snapshots:
       '@tsconfig/node16': 1.0.4
       '@types/node': 22.8.4
       acorn: 8.14.1
-      acorn-walk: 8.3.0
+      acorn-walk: 8.3.4
       arg: 4.1.3
       create-require: 1.1.1
       diff: 4.0.2
@@ -34621,7 +34628,7 @@ snapshots:
 
   vue-component-type-helpers@1.8.24: {}
 
-  vue-component-type-helpers@3.0.4: {}
+  vue-component-type-helpers@3.0.5: {}
 
   vue-demi@0.14.10(@vue/composition-api@1.7.2(vue@2.7.16))(vue@2.7.16):
     dependencies:
@@ -35016,7 +35023,7 @@ snapshots:
     dependencies:
       '@discoveryjs/json-ext': 0.5.7
       acorn: 8.14.1
-      acorn-walk: 8.3.0
+      acorn-walk: 8.3.4
       commander: 7.2.0
       debounce: 1.2.1
       escape-string-regexp: 4.0.0
