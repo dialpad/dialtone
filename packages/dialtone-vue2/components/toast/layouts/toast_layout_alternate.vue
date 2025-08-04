@@ -1,5 +1,3 @@
-<!-- eslint-disable vue/no-bare-strings-in-template -->
-<!-- stub for the new alternate toast layout -->
 <template>
   <div
     v-if="isShown"

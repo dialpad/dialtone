@@ -5,7 +5,6 @@
       class="d-wmx-unset"
       title="Unsupported component"
       kind="warning"
-      :close-button-props="{ ariaLabel: 'Close warning' }"
       @close="hideUnsupportedMessage"
     >
       May have unexpected behaviour.

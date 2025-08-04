@@ -49,7 +49,8 @@
             size="lg"
             importance="clear"
             kind="inverted"
-            :aria-label="closeAriaLabel"
+            :aria-label="closeButtonTitle"
+            :title="closeButtonTitle"
             @click="close"
           >
             <template #icon>
@@ -59,6 +60,10 @@
               />
             </template>
           </dt-button>
+          <sr-only-close-button
+            v-else
+            @close="close"
+          />
         </transition>
       </div>
     </Teleport>
@@ -71,12 +76,15 @@ import { returnFirstEl } from '@/common/utils';
 import { EVENT_KEYNAMES } from '@/common/constants';
 import { DtIconClose } from '@dialpad/dialtone-icons/vue3';
 import { DtButton } from '@/components/button';
+import SrOnlyCloseButton from '@/common/sr_only_close_button.vue';
+import { DialtoneLocalization } from '@/localization';
 
 export default {
   compatConfig: { MODE: 3 },
   name: 'DtImageViewer',
 
   components: {
+    SrOnlyCloseButton,
     DtButton,
     DtIconClose,
   },
@@ -89,7 +97,7 @@ export default {
      * this behaviour by passing an appendTo prop that points to an id or an html tag from the root of the parent.
      * The appendTo prop expects a CSS selector string or an actual DOM node.
      * type: string | HTMLElement, default: 'body'
-    */
+     */
     appendTo: {
       type: String,
       default: 'body',
@@ -139,14 +147,6 @@ export default {
       type: String,
       required: true,
     },
-
-    /**
-     * Aria label for close button
-     */
-    closeAriaLabel: {
-      type: String,
-      required: true,
-    },
   },
 
   emits: [
@@ -169,6 +169,7 @@ export default {
     return {
       showCloseButton: true,
       isOpen: false,
+      i18n: new DialtoneLocalization(),
     };
   },
 
@@ -191,6 +192,10 @@ export default {
           }
         },
       };
+    },
+
+    closeButtonTitle () {
+      return this.i18n.$t('DIALTONE_CLOSE_BUTTON');
     },
   },
 

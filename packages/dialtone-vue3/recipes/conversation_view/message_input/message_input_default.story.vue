@@ -43,6 +43,7 @@
       @json-input="$attrs.onJsonInput"
       @html-input="$attrs.onHtmlInput"
       @text-input="$attrs.onTextInput"
+      @add-emoji="$attrs.onAddEmoji"
       @select-media="$attrs.onSelectMedia"
       @selected-emoji="$attrs.onSelectedEmoji"
       @selected-command="$attrs.onSelectedCommand"

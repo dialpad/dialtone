@@ -111,26 +111,52 @@ it doesn't exist.
 
 However, you can also use the class directly to get some properties or change the current locale.
 
-### Initializing
+### Static methods
+
+#### Get the allowed locales
+
+`DialtoneLocalization.getAllowedLocales()`
+
+#### Get the preferred locale
+
+`DialtoneLocalization.getPreferredLocale()`
+
+### Creating an instance
 
 `const dialtonei18n = new DialtoneLocalization();`
 
-You can pass in a locale to the constructor. The default is `en-US`, e.g:
+You can pass in a locale to the constructor. The default is your browser locale or `en-US`, e.g:
 
 `const dialtonei18n = new DialtoneLocalization('es-LA');`
 
-### Set the current locale
+#### Set the current locale
 
 `dialtonei18n.currentLocale = 'en-US';`
 
-### Get the current locale
+#### Get the current locale
 
 `dialtonei18n.currentLocale`
 
-### Get the allowed locales
+## Development
 
-`dialtonei18n.allowedLocales`
+To add new localized strings to the library, follow these steps:
 
-## Update Localized strings process
+1. Add the new strings to `/packages/dialtone-vue2/localization/en-US.ftl`. All strings must be prefixed with `DIALTONE_`.
+2. In the component that needs the strings, import the `DialtoneLocalization` class with `import { DialtoneLocalization } from '@/localization';`.
+3. Initialize the `DialtoneLocalization` instance in the component data so it is reactive with:
 
-TODO...
+    ```vue
+      data () {
+          return {
+            ...
+              i18n: new DialtoneLocalization(),
+            ...
+          };
+      }
+    ```
+
+4. Use the `i18n` property to access the strings like `i18n.$t('DIALTONE_STRING_NAME')`.
+5. Once the strings reach staging, they'll be automatically translated on our external translation platform.
+6. A PR will be created automatically when the strings are translated and ready.
+
+For more information on ftl file format, see [fluent syntax guide](https://projectfluent.org/fluent/guide/index.html).

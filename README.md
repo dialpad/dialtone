@@ -15,7 +15,7 @@ The below usage instructions are for the combined package.
 #### Using Vue@3
 
 ```shell
-npm install @dialpad/dialtone
+npm install @dialpad/dialtone @dialpad/i18n
 ```
 
 #### Using Vue@2
@@ -332,24 +332,6 @@ Access the local storybook server for Dialtone Vue 3 via `http://localhost:9011/
 nx run dialtone:build
 ```
 
-##### Run Vue unit tests
-
-```bash
-nx run dialtone:test:vue
-```
-
-##### Run Vue 2 tests
-
-```bash
-nx run dialtone-vue2:test
-```
-
-##### Run Vue 3 tests
-
-```bash
-nx run dialtone-vue3:test
-```
-
 Use the `--filter` flag to run commands for a specific package or app.
 
 ##### Adding dependencies for individual packages
@@ -451,3 +433,42 @@ This will trigger the [release action](.github/workflows/release.yml), release c
 
 1. Run the `release` target on selected packages (all if `package` is empty).
 2. The [publish action](https://github.com/dialpad/dialtone/actions/workflows/publish.yml) will publish the packages with its corresponding tag.
+
+#### Testing
+
+##### Run Vue unit tests
+
+```bash
+nx run dialtone:test:vue
+```
+
+##### Run Vue 2 tests
+
+```bash
+nx run dialtone-vue2:test
+```
+
+##### Run Vue 3 tests
+
+```bash
+nx run dialtone-vue3:test
+```
+
+##### Run Vue 2 unit tests with coverage
+
+```bash
+nx run dialtone-vue2:test:coverage
+```
+
+##### Run Vue 3 unit tests with coverage
+
+```bash
+nx run dialtone-vue3:test:coverage
+```
+
+These will generate a JSON and HTML report in the `coverage` directory.
+
+##### Test Coverage thresholds
+
+The coverage thresholds are defined in the `vitest.config.ts` file.
+When submitting a PR the CI will run the tests with coverage and fail if the coverage is below the thresholds.

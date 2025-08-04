@@ -2,12 +2,12 @@ export const IVR_NODE_PROMPT_MENU = 'promptmenu';
 export const IVR_NODE_PROMPT_COLLECT = 'promptcollect';
 export const IVR_NODE_PROMPT_PLAY = 'promptplay';
 export const IVR_NODE_EXPERT = 'gotoexpert';
-export const IVR_NODE_GO_TO = 'goto';
 export const IVR_NODE_BRANCH = 'branch';
-export const IVR_NODE_TRANSFER = 'transfer';
-export const IVR_NODE_HANGUP = 'hangup';
+export const IVR_NODE_GO_TO = 'goto';
 export const IVR_NODE_ASSIGN = 'assign';
 export const IVR_NODE_CUSTOMER_DATA = 'customerdata';
+export const IVR_NODE_TRANSFER = 'transfer';
+export const IVR_NODE_HANGUP = 'hangup';
 
 export const IVR_NODE_ICON_TYPES = {
   [IVR_NODE_PROMPT_MENU]: 'keypad',
@@ -29,10 +29,10 @@ export const IVR_NODE_LABELS = {
   [IVR_NODE_EXPERT]: 'Expert',
   [IVR_NODE_BRANCH]: 'Branch',
   [IVR_NODE_GO_TO]: 'Go-to',
-  [IVR_NODE_TRANSFER]: 'Transfer',
-  [IVR_NODE_HANGUP]: 'Hangup',
   [IVR_NODE_ASSIGN]: 'Assign',
   [IVR_NODE_CUSTOMER_DATA]: 'Customer Data',
+  [IVR_NODE_TRANSFER]: 'Transfer',
+  [IVR_NODE_HANGUP]: 'Hangup',
 };
 
 const IVR_NODE_CLASSES = {

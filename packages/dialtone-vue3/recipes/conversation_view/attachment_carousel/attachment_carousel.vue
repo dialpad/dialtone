@@ -16,9 +16,6 @@
         :key="`media-${index}`"
         :index="index"
         :media-item="mediaItem"
-        :close-aria-label="closeAriaLabel"
-        :click-to-open-aria-label="clickToOpenAriaLabel"
-        :progressbar-aria-label="progressbarAriaLabel"
         @remove-media="removeMediaItem(index)"
         @focusin="onItemFocus"
       />
@@ -28,7 +25,7 @@
     <dt-button
       v-show="showLeftArrow"
       tabindex="-1"
-      :aria-label="leftArrowAriaLabel"
+      :aria-label="i18n.$t('DIALTONE_ATTACHMENT_CAROUSEL_LEFT_ARROW_ARIA_LABEL')"
       class="d-recipe-attachment-carousel__arrow d-recipe-attachment-carousel__arrow--left"
       circle
       size="xs"
@@ -44,7 +41,7 @@
     <dt-button
       v-show="showRightArrow"
       tabindex="-1"
-      :aria-label="rightArrowAriaLabel"
+      :aria-label="i18n.$t('DIALTONE_ATTACHMENT_CAROUSEL_RIGHT_ARROW_ARIA_LABEL')"
       class="d-recipe-attachment-carousel__arrow d-recipe-attachment-carousel__arrow--right"
       circle
       size="xs"
@@ -63,6 +60,7 @@
 <script>
 import { DtIconArrowRight, DtIconArrowLeft } from '@dialpad/dialtone-icons/vue3';
 import { DtButton } from '@/components/button';
+import { DialtoneLocalization } from '@/localization';
 
 import DtImageCarousel from './media_components/image_carousel.vue';
 
@@ -78,8 +76,6 @@ export default {
     DtIconArrowLeft,
     DtImageCarousel,
   },
-
-  mixins: [],
 
   /* inheritAttrs: false is generally an option we want to set on library
     components. This allows any attributes passed in that are not recognized
@@ -101,31 +97,6 @@ export default {
       type: Array,
       default: () => [],
     },
-
-    closeAriaLabel: {
-      type: String,
-      required: true,
-    },
-
-    clickToOpenAriaLabel: {
-      type: String,
-      required: true,
-    },
-
-    progressbarAriaLabel: {
-      type: String,
-      required: true,
-    },
-
-    leftArrowAriaLabel: {
-      type: String,
-      required: true,
-    },
-
-    rightArrowAriaLabel: {
-      type: String,
-      required: true,
-    },
   },
 
   emits: [
@@ -144,6 +115,7 @@ export default {
       showRightArrow: true,
       showLeftArrow: false,
       isMounted: false,
+      i18n: new DialtoneLocalization(),
     };
   },
 

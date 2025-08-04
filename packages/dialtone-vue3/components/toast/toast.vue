@@ -9,7 +9,6 @@
     :role="role"
     :kind="kind"
     :important="important"
-    :close-button-props="closeButtonProps"
     :hide-close="hideClose"
     :hide-icon="hideIcon"
     :hide-action="hideAction"
@@ -38,7 +37,6 @@
 
 <script>
 import { TOAST_MIN_DURATION, TOAST_LAYOUTS } from './toast_constants.js';
-import SrOnlyCloseButtonMixin from '@/common/mixins/sr_only_close_button';
 import ToastLayoutDefault from './layouts/toast_layout_default.vue';
 import ToastLayoutAlternate from './layouts/toast_layout_alternate.vue';
 
@@ -55,8 +53,6 @@ export default {
     ToastLayoutDefault,
     ToastLayoutAlternate,
   },
-
-  mixins: [SrOnlyCloseButtonMixin],
 
   inheritAttrs: false,
 
@@ -133,14 +129,6 @@ export default {
     show: {
       type: Boolean,
       default: false,
-    },
-
-    /**
-     * Props for the toast close button.
-     */
-    closeButtonProps: {
-      type: Object,
-      default: undefined,
     },
 
     /**
@@ -249,11 +237,6 @@ export default {
   },
 
   methods: {
-    closeToast (event) {
-      this.$emit('update:show', false);
-      this.$emit('close', event);
-    },
-
     setTimeout () {
       if (this.shouldSetTimeout) {
         this.displayTimer = setTimeout(() => {

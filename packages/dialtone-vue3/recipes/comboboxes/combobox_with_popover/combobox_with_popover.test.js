@@ -2,8 +2,6 @@ import { mount } from '@vue/test-utils';
 import DtRecipeComboboxWithPopover from './combobox_with_popover.vue';
 import DtInput from '@/components/input/input.vue';
 import DtPopover from '@/components/popover/popover.vue';
-import { cleanSpy, initializeSpy } from '@/tests/shared_examples/validation';
-import { itBehavesLikeVisuallyHiddenCloseLabelIsNull } from '@/tests/shared_examples/sr_only_close_button';
 
 // Constants
 const baseProps = {
@@ -14,7 +12,6 @@ const baseProps = {
   listId: 'list',
   loading: false,
   showList: null,
-  visuallyHiddenCloseLabel: 'Close combobox',
 };
 
 describe('DtRecipeComboboxWithPopover Tests', () => {
@@ -92,17 +89,16 @@ describe('DtRecipeComboboxWithPopover Tests', () => {
   });
 
   describe('Presentation Tests', () => {
-    it(
-      'should render the component',
-      () => { expect(wrapper.exists()).toBe(true); },
-    );
-    it('should not render the visually hidden close button', async () => {
+    it('should render the component', () => {
+      expect(wrapper.exists()).toBe(true);
+    });
+    it('should contain a visually hidden close button', async () => {
       await _openComboboxPopover();
       expect(wrapper
         .findComponent(DtPopover)
         .findComponent({ ref: 'content' })
         .find('[data-qa="dt-sr-only-close-button"]')
-        .exists()).toBe(false);
+        .exists()).toBe(true);
     });
 
     describe('When a input is provided', () => {
@@ -212,41 +208,6 @@ describe('DtRecipeComboboxWithPopover Tests', () => {
           .findComponent({ ref: 'content' })
           .find('[data-qa="dt-combobox-empty-list"]')
           .exists()).toBe(true);
-      });
-    });
-
-    describe('When visuallyHiddenClose is true', function () {
-      beforeEach(async function () {
-        slots = {
-          input: '<template #input="{ inputProps }"><dt-input id="input" v-bind="inputProps" /></template>',
-          list: '<template #list="{ listProps }"><ol id="list" v-bind="listProps"></ol></template>',
-        };
-        _mountWrapper();
-        await wrapper.setProps({ visuallyHiddenClose: true });
-        await _openComboboxPopover();
-        _setChildWrappers();
-      });
-
-      it('should contain a visually hidden close button', async () => {
-        expect(wrapper
-          .findComponent(DtPopover)
-          .findComponent({ ref: 'content' })
-          .find('[data-qa="dt-sr-only-close-button"]')
-          .exists()).toBe(true)
-        ;
-      });
-
-      describe('When visuallyHiddenCloseLabel is null', () => {
-        beforeEach(async () => {
-          initializeSpy();
-          await wrapper.setProps({ visuallyHiddenCloseLabel: null });
-        });
-
-        afterEach(() => {
-          cleanSpy();
-        });
-
-        itBehavesLikeVisuallyHiddenCloseLabelIsNull();
       });
     });
   });
@@ -573,10 +534,9 @@ describe('DtRecipeComboboxWithPopover Tests', () => {
       );
     });
 
-    describe('When sr-only close button is enabled and activated', () => {
+    describe('When visually hidden close button is clicked', () => {
       beforeEach(async () => {
         await _openComboboxPopover();
-        await wrapper.setProps({ visuallyHiddenClose: true });
         await wrapper
           .findComponent(DtPopover)
           .findComponent({ ref: 'content' })
@@ -585,9 +545,7 @@ describe('DtRecipeComboboxWithPopover Tests', () => {
       });
 
       it('should call listener', () => { expect(openedStub).toHaveBeenCalled(); });
-      it(
-        'should emit open event',
-        () => { expect(wrapper.emitted().opened.length).toBe(2); },
+      it('should emit open event', () => { expect(wrapper.emitted().opened.length).toBe(2); },
       );
     });
   });

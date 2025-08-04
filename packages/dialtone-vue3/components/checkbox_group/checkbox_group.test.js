@@ -223,7 +223,7 @@ describe('Checkbox Group Tests', () => {
 
           MOCK_SELECTED_CHECKBOX_FUNCTION(MOCK_SELECTED_VALUE);
 
-          expect(wrapper.emitted()).toEqual({});
+          expect(wrapper.emitted('input')).toBeFalsy();
         });
       });
     });

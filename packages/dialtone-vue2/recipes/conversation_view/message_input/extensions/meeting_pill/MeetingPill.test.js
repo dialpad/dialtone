@@ -11,7 +11,6 @@ const baseProps = {
   node: {
     attrs: {
       text: 'Test Meeting',
-      'close-button-aria-label': 'Close meeting',
     },
   },
   editor: null,
@@ -64,11 +63,6 @@ describe('MeetingPill', () => {
       propsData: { ...baseProps, ...mockProps },
       stubs: { ...baseStubs, ...mockStubs },
       localVue: testContext.localVue,
-      mocks: {
-        i18n: {
-          $t: vi.fn(() => 'Close'),
-        },
-      },
     });
   };
 
@@ -114,7 +108,6 @@ describe('MeetingPill', () => {
         node: {
           attrs: {
             text: 'Daily Standup',
-            'close-button-aria-label': 'Close meeting',
           },
         },
       };
@@ -174,7 +167,6 @@ describe('MeetingPill', () => {
         node: {
           attrs: {
             text: 'Test Meeting',
-            'close-button-aria-label': 'Close meeting',
           },
         },
       };
@@ -200,7 +192,6 @@ describe('MeetingPill', () => {
         node: {
           attrs: {
             text: 'Test Meeting',
-            'close-button-aria-label': 'Close meeting',
           },
         },
       };
@@ -234,7 +225,6 @@ describe('MeetingPill', () => {
         node: {
           attrs: {
             text: 'Team Meeting',
-            'close-button-aria-label': 'Close meeting',
           },
         },
       };
@@ -242,12 +232,6 @@ describe('MeetingPill', () => {
       updateWrapper();
 
       expect(wrapper.text()).toContain('Team Meeting');
-    });
-
-    it('uses different aria-label based on node attributes', () => {
-      // Since the closeButtonTitle is computed from i18n, not from node attrs,
-      // let's test that the closeButtonTitle computed property works
-      expect(wrapper.vm.closeButtonTitle).toBe('Click to close');
     });
   });
 

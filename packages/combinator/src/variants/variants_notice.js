@@ -9,11 +9,6 @@ export default {
       title: {
         initialValue: 'Base title (optional)',
       },
-      closeButtonProps: {
-        initialValue: {
-          ariaLabel: 'close',
-        },
-      },
     },
   },
 };

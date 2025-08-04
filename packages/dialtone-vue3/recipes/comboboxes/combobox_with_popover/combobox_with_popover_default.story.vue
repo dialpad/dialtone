@@ -18,8 +18,6 @@
     :empty-list="$attrs.emptyList"
     :empty-state-message="$attrs.emptyStateMessage"
     :append-to="$attrs.appendTo"
-    :visually-hidden-close="$attrs.visuallyHiddenClose"
-    :visually-hidden-close-label="$attrs.visuallyHiddenCloseLabel"
     :transition="$attrs.transition"
     @escape="$attrs.onEscape"
     @highlight="$attrs.onHighlight"

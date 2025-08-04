@@ -1,8 +1,7 @@
 export const REACTIONS_ATTRIBUTES = [
   'emojiUnicodeOrShortname',
   'isSelected',
-  'ariaLabel',
-  'tooltip',
+  'names',
   'num',
 ];
 

@@ -20,7 +20,7 @@
             id="prevYearButton"
             :ref="refNames[0]"
             :aria-label="previousYearAriaLabel"
-            circle
+            :circle="true"
             class="d-datepicker__nav-btn"
             importance="clear"
             kind="muted"
@@ -45,7 +45,7 @@
             id="prevMonthButton"
             :ref="refNames[1]"
             :aria-label="previousMonthAriaLabel"
-            circle
+            :circle="true"
             class="d-datepicker__nav-btn"
             importance="clear"
             kind="muted"
@@ -85,7 +85,7 @@
             id="nextMonthButton"
             :ref="refNames[2]"
             :aria-label="nextMonthAriaLabel"
-            circle
+            :circle="true"
             class="d-datepicker__nav-btn"
             importance="clear"
             kind="muted"
@@ -110,7 +110,7 @@
             id="nextYearButton"
             :ref="refNames[3]"
             :aria-label="nextYearAriaLabel"
-            circle
+            :circle="true"
             class="d-datepicker__nav-btn"
             importance="clear"
             kind="muted"
@@ -142,7 +142,7 @@ import { INTL_MONTH_FORMAT } from '../datepicker_constants';
 import { DtStack } from '@/components/stack';
 import { DtTooltip } from '@/components/tooltip';
 import { DtButton } from '@/components/button';
-import { DtLocalizationMixin } from '@/common/mixins';
+import { DialtoneLocalization } from '@/localization';
 
 export default {
   name: 'DtDatepickerMonthYearPicker',
@@ -156,8 +156,6 @@ export default {
     DtIconChevronRight,
     DtIconChevronsRight,
   },
-
-  mixins: [DtLocalizationMixin],
 
   props: {
     selectedDate: {
@@ -205,6 +203,7 @@ export default {
       focusPicker: 0,
       focusRefs: [],
       refNames: ['prevYearButtonRef', 'prevMonthButtonRef', 'nextMonthButtonRef', 'nextYearButtonRef'],
+      i18n: new DialtoneLocalization(),
     };
   },
 

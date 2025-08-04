@@ -1,4 +1,3 @@
-<!-- eslint-disable vue/multi-word-component-names -->
 <template>
   <table
     class="d-datepicker__calendar"
@@ -60,22 +59,12 @@
 </template>
 
 <script setup>
-import { useCalendar } from '@/components/datepicker/composables/useCalendar.js';
+import { useCalendar } from '../composables/useCalendar.js';
 import { DtButton } from '@/components/button';
 
 const props = defineProps({
   calendarDays: {
     type: Array,
-    required: true,
-  },
-
-  locale: {
-    type: String,
-    required: true,
-  },
-
-  selectDayLabel: {
-    type: String,
     required: true,
   },
 });
