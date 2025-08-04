@@ -1,3 +1,10 @@
+## [9.129.2](https://github.com/dialpad/dialtone/compare/dialtone/v9.129.1...dialtone/v9.129.2) (2025-08-04)
+
+
+### Bug Fixes
+
+* **Localization:** NO-JIRA add validation ([#856](https://github.com/dialpad/dialtone/issues/856)) ([7bc06f0](https://github.com/dialpad/dialtone/commit/7bc06f0344085a764fdc53940116f6a5e7a7cb70))
+
 ## [9.129.1](https://github.com/dialpad/dialtone/compare/dialtone/v9.129.0...dialtone/v9.129.1) (2025-08-03)
 
 
