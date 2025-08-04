@@ -59,8 +59,6 @@ concurrency:
 jobs:
   filter-actions:
     runs-on: ubuntu-latest
-    permissions:
-      pull-requests: read
     outputs:
       packages: ${{ steps.filter.outputs.changes  }}
     steps:
@@ -89,7 +87,6 @@ jobs:
               - 'packages/dialtone-tokens/gulpfile.cjs'
               - 'packages/dialtone-vue3/**/*.vue'
               - 'packages/dialtone-vue3/**/*.*js'
-              - '!packages/dialtone-vue3/**/*.test.*js'
             dialtone-vue2:
               - 'packages/dialtone-css/**/*.less'
               - 'packages/dialtone-css/postcss/*.cjs'
@@ -105,7 +102,6 @@ jobs:
               - 'packages/dialtone-vue2/**/*.vue'
               - 'packages/dialtone-vue2/**/*.*js'
               - 'packages/dialtone-vue2/**/*.stories.js'
-              - '!packages/dialtone-vue2/**/*.test.*js'
             dialtone-vue3:
               - 'packages/dialtone-css/**/*.less'
               - 'packages/dialtone-css/postcss/*.cjs'
@@ -121,7 +117,6 @@ jobs:
               - 'packages/dialtone-vue3/**/*.vue'
               - 'packages/dialtone-vue3/**/*.*js'
               - 'packages/dialtone-vue3/**/*.stories.js'
-              - '!packages/dialtone-vue3/**/*.test.*js'
 
   check-dialpad-member:
     runs-on: ubuntu-latest
