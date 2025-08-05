@@ -1,3 +1,15 @@
+## [9.129.3](https://github.com/dialpad/dialtone/compare/dialtone/v9.129.2...dialtone/v9.129.3) (2025-08-05)
+
+
+### Bug Fixes
+
+* **Tooltip:** DLT-2644 fix z-index ([#857](https://github.com/dialpad/dialtone/issues/857)) ([840c1d9](https://github.com/dialpad/dialtone/commit/840c1d9f58878772c2c64161cf640d4da970aca6))
+
+
+### Documentation
+
+* NO-JIRA add missing dependency ([8fed0f2](https://github.com/dialpad/dialtone/commit/8fed0f207fe0679bb3767d73fd08d62c9b06d3c7))
+
 ## [9.129.2](https://github.com/dialpad/dialtone/compare/dialtone/v9.129.1...dialtone/v9.129.2) (2025-08-04)
 
 
