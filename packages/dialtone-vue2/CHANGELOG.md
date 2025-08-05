@@ -1,3 +1,10 @@
+## [2.195.3](https://github.com/dialpad/dialtone/compare/dialtone-vue2/v2.195.2...dialtone-vue2/v2.195.3) (2025-08-05)
+
+
+### Bug Fixes
+
+* **Tooltip:** DLT-2644 fix z-index ([#857](https://github.com/dialpad/dialtone/issues/857)) ([840c1d9](https://github.com/dialpad/dialtone/commit/840c1d9f58878772c2c64161cf640d4da970aca6))
+
 ## [2.195.2](https://github.com/dialpad/dialtone/compare/dialtone-vue2/v2.195.1...dialtone-vue2/v2.195.2) (2025-08-04)
 
 
