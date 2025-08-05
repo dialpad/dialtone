@@ -839,108 +839,87 @@
       },
       "neutral": {
         "value": "{color.tan.600}",
-        "type": "color",
-        "description": "Used for neutral or background elements in charts where no specific meaning is implied."
+        "type": "color"
       },
       "neutral-hover": {
         "value": "{color.tan.700}",
-        "type": "color",
-        "description": "Hover state for neutral chart elements."
+        "type": "color"
       },
       "neutral-selected": {
         "value": "{color.tan.900}",
-        "type": "color",
-        "description": "Selected state for neutral chart elements."
+        "type": "color"
       },
       "accent": {
         "value": "{color.indigo.300}",
-        "type": "color",
-        "description": "Main accent color for highlighting important chart elements or primary data series."
+        "type": "color"
       },
       "accent-hover": {
         "value": "{color.indigo.400}",
-        "type": "color",
-        "description": "Hover state for accent chart elements."
+        "type": "color"
       },
       "accent-selected": {
         "value": "{color.indigo.600}",
-        "type": "color",
-        "description": "Selected state for accent chart elements."
+        "type": "color"
       },
       "positive": {
         "value": "{color.green.300}",
-        "type": "color",
-        "description": "Used for positive values, growth, or success indicators in charts, aka success."
+        "type": "color"
       },
       "positive-hover": {
         "value": "{color.green.400}",
-        "type": "color",
-        "description": "Hover state for positive chart elements, aka success."
+        "type": "color"
       },
       "positive-selected": {
-        "value": "{color.green.600}",
-        "type": "color",
-        "description": "Selected state for positive chart elements, aka success."
+        "value": "{color.green.500}",
+        "type": "color"
       },
       "critical": {
         "value": "{color.red.300}",
-        "type": "color",
-        "description": "Used for negative values, errors, or critical indicators in charts, aka danger."
+        "type": "color"
       },
       "critical-hover": {
         "value": "{color.red.400}",
-        "type": "color",
-        "description": "Hover state for critical chart elements, aka danger."
+        "type": "color"
       },
       "critical-selected": {
-        "value": "{color.red.500}",
-        "type": "color",
-        "description": "Selected state for critical chart elements, aka danger."
+        "value": "{color.red.600}",
+        "type": "color"
       },
       "warning": {
         "value": "{color.gold.300}",
-        "type": "color",
-        "description": "Used for cautionary or warning indicators in charts."
+        "type": "color"
       },
       "warning-hover": {
         "value": "{color.gold.400}",
-        "type": "color",
-        "description": "Hover state for warning chart elements."
+        "type": "color"
       },
       "warning-selected": {
         "value": "{color.gold.600}",
-        "type": "color",
-        "description": "Selected state for warning chart elements."
+        "type": "color"
       },
       "info": {
         "value": "{color.blue.300}",
-        "type": "color",
-        "description": "Used for informational or neutral data points in charts."
+        "type": "color"
       },
       "info-hover": {
         "value": "{color.blue.400}",
-        "type": "color",
-        "description": "Hover state for info chart elements."
+        "type": "color"
       },
       "info-selected": {
         "value": "{color.blue.600}",
-        "type": "color",
-        "description": "Selected state for info chart elements."
+        "type": "color"
       },
       "brand": {
         "value": "{color.purple.300}",
-        "type": "color",
-        "description": "Used for brand-related data or to highlight company-specific information in charts."
+        "type": "color"
       },
       "brand-hover": {
         "value": "{color.purple.350}",
-        "type": "color",
-        "description": "Hover state for brand chart elements."
+        "type": "color"
       },
       "brand-selected": {
         "value": "{color.purple.450}",
-        "type": "color",
-        "description": "Selected state for brand chart elements."
+        "type": "color"
       }
     },
     "inputs": {
