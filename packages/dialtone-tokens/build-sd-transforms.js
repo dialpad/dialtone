@@ -236,6 +236,9 @@ export async function run () {
           ],
         },
       },
+      log: {
+        verbosity: 'verbose',
+      },
     };
   });
 
