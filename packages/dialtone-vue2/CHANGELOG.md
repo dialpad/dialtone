@@ -1,3 +1,10 @@
+## [2.195.2-beta.1](https://github.com/dialpad/dialtone/compare/dialtone-vue2/v2.195.1...dialtone-vue2/v2.195.2-beta.1) (2025-08-05)
+
+
+### Bug Fixes
+
+* **Localization:** NO-JIRA localStorage ([8362ca1](https://github.com/dialpad/dialtone/commit/8362ca1467583e1208af98704f70fb102ecee252))
+
 ## [2.195.1](https://github.com/dialpad/dialtone/compare/dialtone-vue2/v2.195.0...dialtone-vue2/v2.195.1) (2025-08-03)
 
 
