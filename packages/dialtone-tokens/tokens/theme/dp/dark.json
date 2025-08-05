@@ -855,7 +855,7 @@
       "button": {
         "color": {
           "background-hover": {
-            "value": "{shell.foo}",
+            "value": "{theme.color.base}",
             "type": "color",
             "$extensions": {
               "studio.tokens": {
