@@ -944,37 +944,37 @@
       },
       "sequential": {
         "10": {
-          "value": "{color.indigo.1000}",
+          "value": "{color.indigo.950}",
           "type": "color",
           "description": "Tenth color in sequential chart series, darkest shade."
         },
         "01": {
-          "value": "{color.indigo.50}",
+          "value": "{color.indigo.100}",
           "type": "color",
           "description": "First color in sequential chart series, lightest shade."
         },
         "01-hover": {
-          "value": "{color.indigo.100}",
+          "value": "{color.indigo.200}",
           "type": "color",
           "description": "Hover state for first sequential chart color."
         },
         "01-selected": {
-          "value": "{color.indigo.300}",
+          "value": "{color.indigo.400}",
           "type": "color",
           "description": "Selected state for first sequential chart color."
         },
         "02": {
-          "value": "{color.indigo.100}",
+          "value": "{color.indigo.200}",
           "type": "color",
           "description": "Second color in sequential chart series, very light shade."
         },
         "02-hover": {
-          "value": "{color.indigo.200}",
+          "value": "{color.indigo.300}",
           "type": "color",
           "description": "Hover state for second sequential chart color."
         },
         "02-selected": {
-          "value": "{color.indigo.400}",
+          "value": "{color.indigo.500}",
           "type": "color",
           "description": "Selected state for second sequential chart color."
         },
