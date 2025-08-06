@@ -1091,8 +1091,7 @@
       "radio.color.border.checked": "b2741c10e3a48cfeb320559f4ef5ce223c1f0f74",
       "radio.color.background.checked": "4dd75aa857ed04bf4a0ba27ca5643e20400b18e0",
       "radio.color.foreground.default": "2694d2296a9fd5d890cad4c79f33916cfa06f91e",
-      "radio.color.foreground.checked": "7be16c2ad233e60e835c023bc849c18af522bb30",
-      "shell.foo": "04d6ef66fd8a6dc54a0937823d449d984d84b2da"
+      "radio.color.foreground.checked": "7be16c2ad233e60e835c023bc849c18af522bb30"
     },
     "group": "dp"
   },
@@ -2737,8 +2736,7 @@
       "color.magenta.300": "d6d222e2c155dc5a46076f94de2ca735f743d0dd",
       "color.magenta.500": "04f6b215eb6aa48edd82e8fb24c90894503b3d6d",
       "color.link.critical-hoverasdf": "eacff71284e69068a28bc0948d853fe9dd49714b",
-      "color.link.critical-inverted-hoverasdf": "5fe6d7d862c78007fb3b61f3af54f20fb3855c3b",
-      "shell.foo": "41292cdb195fd03aa3c272d4f6fe4ffd8086cc6a"
+      "color.link.critical-inverted-hoverasdf": "5fe6d7d862c78007fb3b61f3af54f20fb3855c3b"
     },
     "group": "tmo"
   },
@@ -4008,7 +4006,8 @@
       "base/default": "enabled",
       "base/deca": "enabled"
     },
-    "group": "base"
+    "group": "base",
+    "$figmaVariableReferences": {}
   },
   {
     "id": "40c17e054eaf3a269fcae12da4e677825fff0a90",
@@ -4021,6 +4020,171 @@
       "base/deca": "enabled",
       "base/deca-dark": "enabled"
     },
-    "group": "base"
+    "group": "base",
+    "$figmaVariableReferences": {}
+  },
+  {
+    "id": "58fc325083aae6e1086fb2a43bc0a57d1b92f012",
+    "name": "light",
+    "$figmaStyleReferences": {},
+    "selectedTokenSets": {
+      "root": "source",
+      "base/default": "source",
+      "theme/dp/default": "enabled",
+      "theme/buttercream/default": "enabled",
+      "components/avatar/default": "enabled",
+      "components/badge/default": "enabled",
+      "components/button/default": "enabled",
+      "components/checkbox/default": "enabled",
+      "components/icon/default": "enabled",
+      "components/presence/default": "enabled",
+      "components/radio/default": "enabled"
+    },
+    "group": "buttercream"
+  },
+  {
+    "id": "8ce2636ddfa28393f15c8c625d88fdf544f1109a",
+    "name": "dark",
+    "$figmaStyleReferences": {},
+    "selectedTokenSets": {
+      "root": "source",
+      "base/default": "source",
+      "base/dark": "source",
+      "theme/dp/default": "source",
+      "theme/dp/dark": "source",
+      "theme/buttercream/default": "enabled",
+      "theme/buttercream/dark": "enabled",
+      "components/avatar/default": "enabled",
+      "components/badge/default": "enabled",
+      "components/button/default": "enabled",
+      "components/checkbox/default": "enabled",
+      "components/icon/default": "enabled",
+      "components/presence/default": "enabled",
+      "components/radio/default": "enabled"
+    },
+    "group": "buttercream"
+  },
+  {
+    "id": "a84667d23b2d6d2e212bc61de33a41335bc306e4",
+    "name": "light",
+    "$figmaStyleReferences": {},
+    "selectedTokenSets": {
+      "root": "source",
+      "base/default": "source",
+      "theme/dp/default": "source",
+      "theme/plum/default": "enabled",
+      "components/avatar/default": "enabled",
+      "components/badge/default": "enabled",
+      "components/button/default": "enabled",
+      "components/checkbox/default": "enabled",
+      "components/icon/default": "enabled",
+      "components/presence/default": "enabled",
+      "components/radio/default": "enabled"
+    },
+    "group": "plum"
+  },
+  {
+    "id": "2ed1c0606e61735f91af884002f1745695eddc8f",
+    "name": "dark",
+    "$figmaStyleReferences": {},
+    "selectedTokenSets": {
+      "root": "source",
+      "base/default": "source",
+      "base/dark": "source",
+      "theme/dp/default": "source",
+      "theme/dp/dark": "source",
+      "theme/plum/default": "enabled",
+      "theme/plum/dark": "enabled",
+      "components/avatar/default": "enabled",
+      "components/badge/default": "enabled",
+      "components/button/default": "enabled",
+      "components/checkbox/default": "enabled",
+      "components/icon/default": "enabled",
+      "components/presence/default": "enabled",
+      "components/radio/default": "enabled"
+    },
+    "group": "plum"
+  },
+  {
+    "id": "5d18a4abbd46abb650c49e716b30e11edaffeebb",
+    "name": "light",
+    "$figmaStyleReferences": {},
+    "selectedTokenSets": {
+      "root": "source",
+      "base/default": "source",
+      "theme/dp/default": "source",
+      "theme/botany/default": "enabled",
+      "components/avatar/default": "enabled",
+      "components/badge/default": "enabled",
+      "components/button/default": "enabled",
+      "components/checkbox/default": "enabled",
+      "components/icon/default": "enabled",
+      "components/presence/default": "enabled",
+      "components/radio/default": "enabled"
+    },
+    "group": "botany"
+  },
+  {
+    "id": "28890198f5b66d405b8afe5ec8aecd95abfa7737",
+    "name": "dark",
+    "$figmaStyleReferences": {},
+    "selectedTokenSets": {
+      "root": "source",
+      "base/default": "source",
+      "base/dark": "source",
+      "theme/dp/default": "source",
+      "theme/dp/dark": "source",
+      "theme/botany/default": "enabled",
+      "theme/botany/dark": "enabled",
+      "components/avatar/default": "enabled",
+      "components/badge/default": "enabled",
+      "components/button/default": "enabled",
+      "components/checkbox/default": "enabled",
+      "components/icon/default": "enabled",
+      "components/presence/default": "enabled",
+      "components/radio/default": "enabled"
+    },
+    "group": "botany"
+  },
+  {
+    "id": "5c517e255332294dcc124781436816fdc6d65dd3",
+    "name": "light",
+    "$figmaStyleReferences": {},
+    "selectedTokenSets": {
+      "root": "source",
+      "base/default": "source",
+      "theme/dp/default": "source",
+      "theme/high-desert/default": "enabled",
+      "components/avatar/default": "enabled",
+      "components/badge/default": "enabled",
+      "components/button/default": "enabled",
+      "components/checkbox/default": "enabled",
+      "components/icon/default": "enabled",
+      "components/presence/default": "enabled",
+      "components/radio/default": "enabled"
+    },
+    "group": "high-desert"
+  },
+  {
+    "id": "26f6fe0873c68314aeeaae93e10f6dfbe3130667",
+    "name": "dark",
+    "$figmaStyleReferences": {},
+    "selectedTokenSets": {
+      "root": "source",
+      "base/default": "source",
+      "base/dark": "source",
+      "theme/dp/default": "source",
+      "theme/dp/dark": "source",
+      "theme/high-desert/default": "enabled",
+      "theme/high-desert/dark": "enabled",
+      "components/avatar/default": "enabled",
+      "components/badge/default": "enabled",
+      "components/button/default": "enabled",
+      "components/checkbox/default": "enabled",
+      "components/icon/default": "enabled",
+      "components/presence/default": "enabled",
+      "components/radio/default": "enabled"
+    },
+    "group": "high-desert"
   }
 ]
