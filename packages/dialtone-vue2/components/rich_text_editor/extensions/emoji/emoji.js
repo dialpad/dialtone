@@ -72,12 +72,17 @@ export const Emoji = Node.create({
   },
 
   renderText ({ node }) {
-    // output emoji in text as unicode character rather than shortname for backwards compatibility with
-    // our backend.
-    if(node.attrs.code === null || node.attrs.code === undefined) {
-      return node.attrs.image;
+    /**
+     image -- custom emoji
+     code -- unicode emoji
+    */
+
+    const { image, code } = node.attrs;
+
+    if(image !== null) {
+      return image;
     }else{
-      const emojiData = codeToEmojiData(node.attrs.code);
+      const emojiData = codeToEmojiData(code);
       const unicodeEmoji = stringToUnicode(emojiData.unicode_output);
 
       return unicodeEmoji;
@@ -102,8 +107,6 @@ export const Emoji = Node.create({
           const start = range.from;
           const end = range.to;
           tr.replaceWith(start, end, this.type.create({ code: match[0] }));
-          tr.replaceWith(start, end, this.type.create({ image: match[1] }));
-          tr.replaceWith(start, end, this.type.create({ name: match[2] }));
         },
       }),
     ];

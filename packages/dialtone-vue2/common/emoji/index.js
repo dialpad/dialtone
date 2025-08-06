@@ -158,7 +158,6 @@ export function unicodeToString (emoji) {
 
 // Takes in unicode in string form ex: '1f91b-1f3fb' and converts it to an actual unicode character.
 export function stringToUnicode (str) {
-  console.log('String to unicode:', str);
   const uChars = str.split('-');
   let result = '';
   uChars.forEach((uChar) => {
@@ -169,7 +168,6 @@ export function stringToUnicode (str) {
 
 // Takes in a code (which could be unicode or shortcode) and returns the emoji data for it.
 export function codeToEmojiData (code) {
-  console.log('codeToEmojiData:', code);
   code = code?.trim();
   if (code.startsWith(':') && code.endsWith(':')) {
     return shortcodeToEmojiData(code);

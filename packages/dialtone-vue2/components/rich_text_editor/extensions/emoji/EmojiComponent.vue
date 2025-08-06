@@ -8,51 +8,60 @@
       size="500"
       :code="node.attrs.code"
     />
-    <img
-      v-else
-      class="d-icon d-icon--size-500"
-      :alt="node.attrs.name"
-      :aria-label="node.attrs.name"
-      :title="node.attrs.name"
-      :src="getImgSrc(node.attrs)"
-      @error="handleImageError"
-    >
+
+    <template v-else>
+      <dt-skeleton
+        v-if="showSkeleton"
+        :offset="0"
+        class="d-icon d-icon--size-500"
+        :shape-option="{ shape: 'circle', size: '100%' }"
+      />
+
+      <img
+        v-show="!showSkeleton"
+        class="d-icon d-icon--size-500"
+        :alt="node.attrs.name"
+        :aria-label="node.attrs.name"
+        :title="node.attrs.name"
+        :src="node.attrs.image"
+        @load="handleImageLoad"
+        @error="handleImageError"
+      >
+    </template>
+
   </node-view-wrapper>
 </template>
 
 <script>
 import { nodeViewProps, NodeViewWrapper } from '@tiptap/vue-2';
-import { CDN_URL } from '@/components/emoji_picker/emoji_picker_constants';
 import { DtEmoji } from '@/components/emoji';
+import { DtSkeleton } from '@/components/skeleton';
+
 
 export default {
   name: 'EmojiComponent',
   components: {
     NodeViewWrapper,
     DtEmoji,
+    DtSkeleton,
   },
 
   props: nodeViewProps,
 
-  computed: {
-    CDN_URL () {
-      return CDN_URL;
-    },
+  data () {
+    return {
+      showSkeleton: true,
+    };
   },
 
   methods: {
-    getImgSrc: function (emoji) {
-      // TODO Update json structure to have a property for custom emojis and avoid using date_added
-      if (emoji.image) { // if custom emoji
-        return emoji.image;
-      } else { // if regular emoji
-        return this.CDN_URL + emoji.code + '.png';
-      }
+    handleImageLoad () {
+      this.showSkeleton = false;
     },
 
     handleImageError: function (event) {
-      console.log('test error emoji');
-      // event.target.parentNode.style.display = 'none';
+      this.showSkeleton = false;
+      event.target.parentNode.remove();
     },
   }
 };
