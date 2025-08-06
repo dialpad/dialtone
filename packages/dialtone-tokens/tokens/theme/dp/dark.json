@@ -874,7 +874,7 @@
       "row": {
         "color": {
           "background-hover": {
-            "value": "{shell.foo}",
+            "value": "{theme.color.base}",
             "type": "color",
             "$extensions": {
               "studio.tokens": {
@@ -887,7 +887,7 @@
             }
           },
           "background-active": {
-            "value": "{shell.foo}",
+            "value": "{theme.color.base}",
             "type": "color",
             "$extensions": {
               "studio.tokens": {
@@ -904,7 +904,7 @@
       "selected-row": {
         "color": {
           "background": {
-            "value": "{shell.foo}",
+            "value": "{theme.color.base}",
             "type": "color",
             "$extensions": {
               "studio.tokens": {
