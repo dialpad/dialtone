@@ -1,18 +1,13 @@
 ---
-title: Data visualization
-description: Data visualization is crucial for clear communication, but inconsistent color usage can hinder comprehension and create visual noise.
+title: Chart Colors
+description: Chart Colors are crucial for clear communication, but inconsistent color usage can hinder comprehension and create visual noise.
 ---
 
 ## Overview & Purpose
 
-<div style="display: flex; justify-content: center; margin-bottom: 1.5rem;">
-  <svg width="800" height="350" viewBox="0 0 80 80" fill="none" aria-hidden="true">
-    <rect width="80" height="80" rx="16" fill="#F3F3F6"/>
-    <circle cx="40" cy="40" r="24" fill="#E0E0EA"/>
-    <rect x="28" y="28" width="24" height="24" rx="6" fill="#C1BFF3"/>
-    <rect x="36" y="36" width="8" height="8" rx="2" fill="#8B83F6"/>
-  </svg>
-</div>
+<div class="d-bgc-brand d-bar8 ">
+ <svg-loader name="chart-header" />
+ </div>
 
 Our Data Visualization Color Tokens provide a unified, robust, and accessible system for coloring charts and graphs across all Dialpad products.
 
