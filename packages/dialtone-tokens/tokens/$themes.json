@@ -4145,46 +4145,5 @@
       "components/radio/default": "enabled"
     },
     "group": "botany"
-  },
-  {
-    "id": "5c517e255332294dcc124781436816fdc6d65dd3",
-    "name": "light",
-    "$figmaStyleReferences": {},
-    "selectedTokenSets": {
-      "root": "source",
-      "base/default": "source",
-      "theme/dp/default": "source",
-      "theme/high-desert/default": "enabled",
-      "components/avatar/default": "enabled",
-      "components/badge/default": "enabled",
-      "components/button/default": "enabled",
-      "components/checkbox/default": "enabled",
-      "components/icon/default": "enabled",
-      "components/presence/default": "enabled",
-      "components/radio/default": "enabled"
-    },
-    "group": "high-desert"
-  },
-  {
-    "id": "26f6fe0873c68314aeeaae93e10f6dfbe3130667",
-    "name": "dark",
-    "$figmaStyleReferences": {},
-    "selectedTokenSets": {
-      "root": "source",
-      "base/default": "source",
-      "base/dark": "source",
-      "theme/dp/default": "source",
-      "theme/dp/dark": "source",
-      "theme/high-desert/default": "enabled",
-      "theme/high-desert/dark": "enabled",
-      "components/avatar/default": "enabled",
-      "components/badge/default": "enabled",
-      "components/button/default": "enabled",
-      "components/checkbox/default": "enabled",
-      "components/icon/default": "enabled",
-      "components/presence/default": "enabled",
-      "components/radio/default": "enabled"
-    },
-    "group": "high-desert"
   }
 ]
