@@ -4145,5 +4145,46 @@
       "components/radio/default": "enabled"
     },
     "group": "botany"
+  },
+  {
+    "id": "34b708c6ca2660807ac8232678d65871f026ecd0",
+    "name": "light",
+    "$figmaStyleReferences": {},
+    "selectedTokenSets": {
+      "root": "source",
+      "base/default": "source",
+      "theme/dp/default": "source",
+      "components/avatar/default": "enabled",
+      "components/badge/default": "enabled",
+      "components/button/default": "enabled",
+      "components/checkbox/default": "enabled",
+      "components/icon/default": "enabled",
+      "components/presence/default": "enabled",
+      "components/radio/default": "enabled",
+      "theme/high-desert/default": "enabled"
+    },
+    "group": "high-desert"
+  },
+  {
+    "id": "bc47c119fa9e1bf16eb86d620afcecea3f5bec25",
+    "name": "dark",
+    "$figmaStyleReferences": {},
+    "selectedTokenSets": {
+      "root": "source",
+      "base/default": "source",
+      "base/dark": "source",
+      "theme/dp/default": "source",
+      "theme/dp/dark": "source",
+      "theme/high-desert/default": "enabled",
+      "theme/high-desert/dark": "enabled",
+      "components/avatar/default": "enabled",
+      "components/badge/default": "enabled",
+      "components/button/default": "enabled",
+      "components/checkbox/default": "enabled",
+      "components/icon/default": "enabled",
+      "components/presence/default": "enabled",
+      "components/radio/default": "enabled"
+    },
+    "group": "high-desert"
   }
 ]
