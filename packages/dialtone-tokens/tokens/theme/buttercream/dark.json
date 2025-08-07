@@ -1,0 +1,52 @@
+{
+  "shell": {
+    "base": {
+      "color": {
+        "surface": {
+          "value": "#282317",
+          "type": "color"
+        },
+        "foreground": {
+          "value": "{color.teal.950}",
+          "type": "color"
+        },
+        "border": {
+          "value": "#d2edff",
+          "type": "color"
+        },
+        "accent": {
+          "value": "#f4cd0b",
+          "type": "color"
+        }
+      },
+      "action": {
+        "color": {
+          "background": {
+            "primary": {
+              "value": "#fff5d3",
+              "type": "color"
+            },
+            "secondary": {
+              "value": "#fff5d3",
+              "type": "color"
+            },
+            "muted": {
+              "value": "#fff5d3",
+              "type": "color"
+            }
+          }
+        }
+      }
+    },
+    "mention": {
+      "color": {
+        "foreground": {
+          "primary": {
+            "value": "#090f14",
+            "type": "color"
+          }
+        }
+      }
+    }
+  }
+}

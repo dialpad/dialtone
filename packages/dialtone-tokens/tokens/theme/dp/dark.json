@@ -1153,5 +1153,105 @@
         }
       }
     }
+  },
+  "shell": {
+    "color": {
+      "foreground": {
+        "positive": {
+          "value": "{shell.base.color.status-positive}",
+          "type": "color"
+        },
+        "critical": {
+          "value": "{shell.base.color.status-critical}",
+          "type": "color",
+          "$extensions": {
+            "studio.tokens": {
+              "modify": {
+                "type": "lighten",
+                "value": ".15",
+                "space": "hsl"
+              }
+            }
+          }
+        },
+        "warning": {
+          "value": "{shell.base.color.status-warning}",
+          "type": "color",
+          "$extensions": {
+            "studio.tokens": {
+              "modify": {
+                "type": "lighten",
+                "value": ".15",
+                "space": "hsl"
+              }
+            }
+          }
+        },
+        "strong": {
+          "value": "{shell.color.foreground.primary}",
+          "type": "color",
+          "$extensions": {
+            "studio.tokens": {
+              "modify": {
+                "type": "lighten",
+                "value": ".8",
+                "space": "hsl"
+              }
+            }
+          }
+        }
+      },
+      "border": {
+        "base": {
+          "value": "{color.black.1000}",
+          "type": "color"
+        },
+        "subtle": {
+          "value": "{shell.base.color.border}",
+          "type": "color",
+          "$extensions": {
+            "studio.tokens": {
+              "modify": {
+                "type": "alpha",
+                "value": ".15",
+                "space": "hsl"
+              }
+            }
+          }
+        },
+        "default": {
+          "value": "{shell.base.color.border}",
+          "type": "color",
+          "$extensions": {
+            "studio.tokens": {
+              "modify": {
+                "type": "alpha",
+                "value": ".18",
+                "space": "hsl"
+              }
+            }
+          }
+        }
+      }
+    },
+    "mention": {
+      "color": {
+        "surface": {
+          "secondary": {
+            "value": "{shell.base.color.accent}",
+            "type": "color",
+            "$extensions": {
+              "studio.tokens": {
+                "modify": {
+                  "type": "lighten",
+                  "value": ".65",
+                  "space": "lch"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
   }
 }
