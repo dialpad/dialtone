@@ -356,6 +356,153 @@ describe('DtRichTextEditor tests', () => {
     });
   });
 
+  describe('Interactivity Tests', () => {
+    describe('handleKeyDown functionality', () => {
+      let mockKeyEvent;
+      let mockView;
+
+      beforeEach(() => {
+        mockView = { state: { schema: {} } };
+        mockKeyEvent = {
+          key: '',
+          shiftKey: false,
+          preventDefault: vi.fn(),
+          stopPropagation: vi.fn(),
+        };
+      });
+
+      describe('When preventTyping is false', () => {
+        beforeEach(async () => {
+          await wrapper.setProps({ preventTyping: false });
+        });
+
+        it('should allow letter keys by returning false', () => {
+          const handleKeyDown = wrapper.vm.editor.options.editorProps.handleKeyDown;
+
+          mockKeyEvent.key = 'a';
+          expect(handleKeyDown(mockView, mockKeyEvent)).toBe(false);
+        });
+
+        it('should allow Enter key by returning false', () => {
+          const handleKeyDown = wrapper.vm.editor.options.editorProps.handleKeyDown;
+
+          mockKeyEvent.key = 'Enter';
+          expect(handleKeyDown(mockView, mockKeyEvent)).toBe(false);
+        });
+
+        it('should allow Backspace key by returning false', () => {
+          const handleKeyDown = wrapper.vm.editor.options.editorProps.handleKeyDown;
+
+          mockKeyEvent.key = 'Backspace';
+          expect(handleKeyDown(mockView, mockKeyEvent)).toBe(false);
+        });
+
+        it('should allow Space key by returning false', () => {
+          const handleKeyDown = wrapper.vm.editor.options.editorProps.handleKeyDown;
+
+          mockKeyEvent.key = 'Space';
+          expect(handleKeyDown(mockView, mockKeyEvent)).toBe(false);
+        });
+      });
+
+      describe('When preventTyping is true', () => {
+        beforeEach(async () => {
+          await wrapper.setProps({ preventTyping: true });
+        });
+
+        describe('Backspace key', () => {
+          it('should always allow Backspace key', () => {
+            const handleKeyDown = wrapper.vm.editor.options.editorProps.handleKeyDown;
+
+            mockKeyEvent.key = 'Backspace';
+            expect(handleKeyDown(mockView, mockKeyEvent)).toBe(false);
+          });
+        });
+
+        describe('Enter key with allowLineBreaks false', () => {
+          beforeEach(async () => {
+            await wrapper.setProps({
+              preventTyping: true,
+              allowLineBreaks: false,
+            });
+          });
+
+          it('should allow Enter key when shift is not pressed', () => {
+            const handleKeyDown = wrapper.vm.editor.options.editorProps.handleKeyDown;
+
+            mockKeyEvent.key = 'Enter';
+            mockKeyEvent.shiftKey = false;
+            expect(handleKeyDown(mockView, mockKeyEvent)).toBe(false);
+          });
+
+          it('should block Enter key when shift is pressed', () => {
+            const handleKeyDown = wrapper.vm.editor.options.editorProps.handleKeyDown;
+
+            mockKeyEvent.key = 'Enter';
+            mockKeyEvent.shiftKey = true;
+            expect(handleKeyDown(mockView, mockKeyEvent)).toBe(true);
+          });
+        });
+
+        describe('Enter key with allowLineBreaks true', () => {
+          beforeEach(async () => {
+            await wrapper.setProps({
+              preventTyping: true,
+              allowLineBreaks: true,
+            });
+          });
+
+          it('should block Enter key when shift is not pressed', () => {
+            const handleKeyDown = wrapper.vm.editor.options.editorProps.handleKeyDown;
+
+            mockKeyEvent.key = 'Enter';
+            mockKeyEvent.shiftKey = false;
+            expect(handleKeyDown(mockView, mockKeyEvent)).toBe(true);
+          });
+
+          it('should block Enter key when shift is pressed', () => {
+            const handleKeyDown = wrapper.vm.editor.options.editorProps.handleKeyDown;
+
+            mockKeyEvent.key = 'Enter';
+            mockKeyEvent.shiftKey = true;
+            expect(handleKeyDown(mockView, mockKeyEvent)).toBe(true);
+          });
+        });
+
+        describe('Other keys', () => {
+          it('should block letter keys', () => {
+            const handleKeyDown = wrapper.vm.editor.options.editorProps.handleKeyDown;
+
+            mockKeyEvent.key = 'a';
+            expect(handleKeyDown(mockView, mockKeyEvent)).toBe(true);
+          });
+
+          it('should block Tab key', () => {
+            const handleKeyDown = wrapper.vm.editor.options.editorProps.handleKeyDown;
+
+            mockKeyEvent.key = 'Tab';
+            mockKeyEvent.shiftKey = false;
+            expect(handleKeyDown(mockView, mockKeyEvent)).toBe(true);
+
+            mockKeyEvent.shiftKey = true;
+            expect(handleKeyDown(mockView, mockKeyEvent)).toBe(true);
+          });
+
+          it('should block Delete key', () => {
+            const handleKeyDown = wrapper.vm.editor.options.editorProps.handleKeyDown;
+
+            mockKeyEvent.key = 'Delete';
+            mockKeyEvent.shiftKey = false;
+            expect(handleKeyDown(mockView, mockKeyEvent)).toBe(true);
+
+            mockKeyEvent.shiftKey = true;
+            expect(handleKeyDown(mockView, mockKeyEvent)).toBe(true);
+          });
+        });
+      });
+    });
+  });
+
   describe('Accessibility Tests', () => {
     it('should have aria-multiline attribute', () => {
       expect(editor.attributes('aria-multiline')).toBe('true');

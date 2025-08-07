@@ -97,7 +97,7 @@ import channelSuggestion from './extensions/channels/suggestion';
 import slashCommandSuggestion from './extensions/slash_command/suggestion';
 import { warnIfUnmounted } from '@/common/utils';
 import deepEqual from 'deep-equal';
-import { DtLocalizationMixin } from '@/common/mixins';
+import { DialtoneLocalization } from '@/localization';
 
 export default {
   name: 'DtRichTextEditor',
@@ -108,8 +108,6 @@ export default {
     DtButton,
     DtStack,
   },
-
-  mixins: [DtLocalizationMixin],
 
   props: {
     /**
@@ -497,6 +495,8 @@ export default {
         appendTo: () => this.$refs.editor.$el.getRootNode()?.querySelector('body'),
         placement: 'top-start',
       },
+
+      i18n: new DialtoneLocalization(),
     };
   },
 
@@ -737,11 +737,14 @@ export default {
           },
 
           handleKeyDown: (view, event) => {
-            // When preventTyping is true, only allow backspace to take effect
-            if (this.preventTyping && event.key !== 'Backspace') {
-              return true; // Prevent the event from being processed
+            if (!this.preventTyping) return false;
+
+            const allowedKeys = ['Backspace'];
+            if (!this.allowLineBreaks && !event.shiftKey) {
+              allowedKeys.push('Enter');
             }
-            return false; // Allow the event to be processed normally
+
+            return !allowedKeys.includes(event.key);
           },
 
           handlePaste: (view, event, slice) => {

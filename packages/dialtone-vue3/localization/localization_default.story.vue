@@ -5,6 +5,7 @@ import { DialtoneLocalization } from '@/localization';
 
 export default {
   name: 'LocalizationDefault',
+
   components: {
     DtButton,
     DtStack,

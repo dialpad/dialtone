@@ -115,7 +115,7 @@ import {
   IVR_NODE_HANGUP,
   IVR_NODE_CUSTOMER_DATA,
 } from './ivr_node_constants';
-import { DtLocalizationMixin } from '@/common/mixins';
+import { DialtoneLocalization } from '@/localization';
 
 const typeToIcon = new Map([
   [IVR_NODE_PROMPT_MENU, DtIconKeypad],
@@ -149,8 +149,6 @@ export default {
     DtIconMoreVertical,
     DtIconListBullet,
   },
-
-  mixins: [DtLocalizationMixin],
 
   props: {
 
@@ -201,6 +199,7 @@ export default {
   data () {
     return {
       isOpen: false,
+      i18n: new DialtoneLocalization(),
     };
   },
 

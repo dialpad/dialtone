@@ -25,6 +25,7 @@ dist
 .temp
 .cache
 out
+coverage
 
 # Dialtone icons #
 packages/dialtone-icons/index.js

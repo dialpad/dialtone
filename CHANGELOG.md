@@ -1,3 +1,74 @@
+## [9.129.3](https://github.com/dialpad/dialtone/compare/dialtone/v9.129.2...dialtone/v9.129.3) (2025-08-05)
+
+
+### Bug Fixes
+
+* **Tooltip:** DLT-2644 fix z-index ([#857](https://github.com/dialpad/dialtone/issues/857)) ([840c1d9](https://github.com/dialpad/dialtone/commit/840c1d9f58878772c2c64161cf640d4da970aca6))
+
+
+### Documentation
+
+* NO-JIRA add missing dependency ([8fed0f2](https://github.com/dialpad/dialtone/commit/8fed0f207fe0679bb3767d73fd08d62c9b06d3c7))
+
+## [9.129.2](https://github.com/dialpad/dialtone/compare/dialtone/v9.129.1...dialtone/v9.129.2) (2025-08-04)
+
+
+### Bug Fixes
+
+* **Localization:** NO-JIRA add validation ([#856](https://github.com/dialpad/dialtone/issues/856)) ([7bc06f0](https://github.com/dialpad/dialtone/commit/7bc06f0344085a764fdc53940116f6a5e7a7cb70))
+
+## [9.129.1](https://github.com/dialpad/dialtone/compare/dialtone/v9.129.0...dialtone/v9.129.1) (2025-08-03)
+
+
+### Bug Fixes
+
+* **Tab:** DP-148500 tabs not loading instantly ([#849](https://github.com/dialpad/dialtone/issues/849)) ([623c014](https://github.com/dialpad/dialtone/commit/623c0144de9b2072dda17e94f1346ee1cbf61b62))
+
+# [9.129.0](https://github.com/dialpad/dialtone/compare/dialtone/v9.128.0...dialtone/v9.129.0) (2025-08-01)
+
+
+### Bug Fixes
+
+* NO-JIRA add fonts export back ([3e48be8](https://github.com/dialpad/dialtone/commit/3e48be880f5a096e0c268258a4aae6420e6b573d))
+
+
+### Features
+
+* **Icon:** DLT-2619 deprecate ai notes ([#839](https://github.com/dialpad/dialtone/issues/839)) ([5623cd9](https://github.com/dialpad/dialtone/commit/5623cd9c7068daf8db801d44106a44e064df07e2))
+
+# [9.128.0](https://github.com/dialpad/dialtone/compare/dialtone/v9.127.2...dialtone/v9.128.0) (2025-07-31)
+
+
+### Features
+
+* DLT-2173 add test coverage ([#836](https://github.com/dialpad/dialtone/issues/836)) ([563dd1d](https://github.com/dialpad/dialtone/commit/563dd1dc98e5feacdff62fad1125ecf227fef57a))
+
+## [9.127.2](https://github.com/dialpad/dialtone/compare/dialtone/v9.127.1...dialtone/v9.127.2) (2025-07-31)
+
+
+### Bug Fixes
+
+* **Editor:** DP-151532 change quick reply to template ([#846](https://github.com/dialpad/dialtone/issues/846)) ([e403c3e](https://github.com/dialpad/dialtone/commit/e403c3e5925649b97a0460f90c7f18c72e178b37))
+
+## [9.127.1](https://github.com/dialpad/dialtone/compare/dialtone/v9.127.0...dialtone/v9.127.1) (2025-07-29)
+
+
+### Code Refactoring
+
+* **Localization:** DLT-2668 sync vue3 and vue2 ([#835](https://github.com/dialpad/dialtone/issues/835)) ([ad3665a](https://github.com/dialpad/dialtone/commit/ad3665aeef763f37647fada6dbb31c29bf19c8ad))
+
+# [9.127.0](https://github.com/dialpad/dialtone/compare/dialtone/v9.126.6...dialtone/v9.127.0) (2025-07-23)
+
+
+### Bug Fixes
+
+* **Rich Text Editor:** DP-150683 allow enter on preventTyping ([#834](https://github.com/dialpad/dialtone/issues/834)) ([63b5b9f](https://github.com/dialpad/dialtone/commit/63b5b9ff8a61c2d276e0fea3e2a74ef79b1d2b68))
+
+
+### Features
+
+* DLT-2611 add localization to Vue 3 ([#831](https://github.com/dialpad/dialtone/issues/831)) ([26a0865](https://github.com/dialpad/dialtone/commit/26a086505115eaa999c10846321bc368437416c4))
+
 ## [9.126.6](https://github.com/dialpad/dialtone/compare/dialtone/v9.126.5...dialtone/v9.126.6) (2025-07-18)
 
 

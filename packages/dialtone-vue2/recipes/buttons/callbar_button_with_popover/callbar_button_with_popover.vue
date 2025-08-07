@@ -86,14 +86,12 @@ import { DtPopover } from '@/components/popover';
 import { DtIconChevronUp } from '@dialpad/dialtone-icons/vue2';
 import { DtRecipeCallbarButton, CALLBAR_BUTTON_VALID_WIDTH_SIZE } from '../callbar_button';
 import utils, { warnIfUnmounted } from '@/common/utils';
-import { DtLocalizationMixin } from '@/common/mixins';
+import { DialtoneLocalization } from '@/localization';
 
 export default {
   name: 'DtRecipeCallbarButtonWithPopover',
 
   components: { DtRecipeCallbarButton, DtPopover, DtButton, DtIconChevronUp },
-
-  mixins: [DtLocalizationMixin],
 
   /* inheritAttrs: false is generally an option we want to set on library
     components. This allows any attributes passed in that are not recognized
@@ -315,6 +313,7 @@ export default {
   data () {
     return {
       open: false,
+      i18n: new DialtoneLocalization(),
     };
   },
 

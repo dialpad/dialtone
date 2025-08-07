@@ -158,7 +158,7 @@ import { DtTooltip } from '@/components/tooltip';
 import { DtEmojiTextWrapper } from '@/components/emoji_text_wrapper';
 import DtRecipeLeftbarGeneralRowIcon from './leftbar_general_row_icon.vue';
 import { safeConcatStrings } from '@/common/utils';
-import { DtLocalizationMixin } from '@/common/mixins';
+import { DialtoneLocalization } from '@/localization';
 
 export default {
   name: 'DtRecipeGeneralRow',
@@ -172,8 +172,6 @@ export default {
     DtIconWaveform,
     DtRecipeLeftbarGeneralRowIcon,
   },
-
-  mixins: [DtLocalizationMixin],
 
   inheritAttrs: false,
 
@@ -335,6 +333,7 @@ export default {
     return {
       actionFocused: false,
       labelWidth: '100%',
+      i18n: new DialtoneLocalization(),
     };
   },
 

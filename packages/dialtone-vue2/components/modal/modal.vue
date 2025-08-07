@@ -128,7 +128,7 @@ import { DtLazyShow } from '@/components/lazy_show';
 import { EVENT_KEYNAMES } from '@/common/constants';
 import SrOnlyCloseButton from '@/common/sr_only_close_button.vue';
 import { NOTICE_KINDS } from '@/components/notice';
-import { DtLocalizationMixin } from '@/common/mixins';
+import { DialtoneLocalization } from '@/localization';
 
 /**
  * Modals focus the user’s attention exclusively on one task or piece of information
@@ -145,7 +145,7 @@ export default {
     SrOnlyCloseButton,
   },
 
-  mixins: [Modal, DtLocalizationMixin],
+  mixins: [Modal],
 
   props: {
     /**
@@ -334,6 +334,7 @@ export default {
       MODAL_SIZE_MODIFIERS,
       MODAL_BANNER_KINDS,
       EVENT_KEYNAMES,
+      i18n: new DialtoneLocalization(),
     };
   },
 

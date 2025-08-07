@@ -21,7 +21,3 @@ export {
 export {
   default as DtSkeletonMixin,
 } from './skeleton';
-
-export {
-  default as DtLocalizationMixin,
-} from './localization';

@@ -84,14 +84,12 @@ import { FEED_ITEM_PILL_BORDER_COLORS } from './feed_item_pill_constants';
 import { DtItemLayout } from '@/components/item_layout';
 import { DtCollapsible } from '@/components/collapsible';
 import { DtIconChevronDown, DtIconChevronRight } from '@dialpad/dialtone-icons/vue2';
-import { DtLocalizationMixin } from '@/common/mixins';
+import { DialtoneLocalization } from '@/localization';
 
 export default {
   name: 'DtRecipeFeedItemPill',
 
   components: { DtItemLayout, DtCollapsible },
-
-  mixins: [DtLocalizationMixin],
 
   props: {
     /**
@@ -146,6 +144,7 @@ export default {
     return {
       hover: false,
       expanded: this.defaultToggled,
+      i18n: new DialtoneLocalization(),
     };
   },
 

@@ -4,7 +4,7 @@ description: Utilities for controlling an element's border color.
 ---
 
 <dt-notice kind="warning" class="d-wmx100p d-mt24" hideClose>
-  Before using border color utilities, first consider <router-link class="d-link d-link--muted" to="/design/colors/#borders">semantic border colors</router-link>.
+  Before using border color utilities, first consider <router-link class="d-link d-link--muted" to="/design/colors/palette/#borders">semantic border colors</router-link>.
 </dt-notice>
 
 ## Usage

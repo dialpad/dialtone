@@ -53,7 +53,6 @@ export default {
 
   data () {
     return {
-      iconLoaded: false,
       // i18n: new DialtoneLocalization(),
     };
   },
