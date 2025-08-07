@@ -53,7 +53,6 @@ export const ReleaseNoteFormatter = {
 export function extractUtilityClasses (utilityClassDocs, prefix) {
   return Object.keys(utilityClassDocs)
     .filter(className => className.startsWith(prefix))
-    .sort(colorSorter)
     .reduce((result, className) => {
       result[className] = utilityClassDocs[className]
         .values
@@ -71,12 +70,16 @@ export function extractCSSVariableName (propValue) {
 
 /**
  * Sorts the colors putting the base colors at the bottom of the list.
- * @param {string} a
- * @returns {number}
+ * @param {Object} colorUtilityClasses
+ * @returns {Object}
  */
-export function colorSorter (a) {
-  if (/\d{2,4}$/.test(a)) return 1;
-  return -1;
+export function sortBaseColors (colorUtilityClasses) {
+  return Object.keys(colorUtilityClasses)
+    .sort((color) => (/\d{2,4}$/.test(color) ? 1 : -1))
+    .reduce((obj, key) => {
+      obj[key] = colorUtilityClasses[key];
+      return obj;
+    }, {});
 }
 
 export default {
@@ -84,5 +87,5 @@ export default {
   ReleaseNoteFormatter,
   extractUtilityClasses,
   extractCSSVariableName,
-  colorSorter,
+  sortBaseColors,
 };
