@@ -53,14 +53,12 @@ import { DtButton } from '@/components/button';
 import { DtTooltip } from '@/components/tooltip';
 import { DtEmoji } from '@/components/emoji';
 import { DtEmojiTextWrapper } from '@/components/emoji_text_wrapper';
-import { DtLocalizationMixin } from '@/common/mixins';
+import { DialtoneLocalization } from '@/localization';
 
 export default {
   name: 'DtRecipeEmojiRow',
 
   components: { DtTooltip, DtButton, DtEmoji, DtEmojiTextWrapper },
-
-  mixins: [DtLocalizationMixin],
 
   props: {
     /**
@@ -83,6 +81,12 @@ export default {
     'emoji-clicked',
     'emoji-hovered',
   ],
+
+  data () {
+    return {
+      i18n: new DialtoneLocalization(),
+    };
+  },
 
   methods: {
     emojiClicked (reaction) {

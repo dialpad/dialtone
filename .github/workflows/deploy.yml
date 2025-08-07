@@ -85,10 +85,7 @@ jobs:
               - 'packages/dialtone-tokens/themes/**'
               - 'packages/dialtone-tokens/tokens/**'
               - 'packages/dialtone-tokens/gulpfile.cjs'
-              - 'packages/dialtone-vue3/**/*.vue'
-              - 'packages/dialtone-vue3/**/*.*js'
-              - 'packages/dialtone-vue3/**/*.stories.js'
-              - '!**/*.test.*js'
+              - 'packages/dialtone-vue3/{common,components,directives,localization,recipes}/**/!(*.story.vue|*.test.js|*.stories.js)'
             dialtone-vue2:
               - 'packages/dialtone-css/**/*.less'
               - 'packages/dialtone-css/postcss/*.cjs'
@@ -101,10 +98,7 @@ jobs:
               - 'packages/dialtone-tokens/themes/**'
               - 'packages/dialtone-tokens/tokens/**'
               - 'packages/dialtone-tokens/gulpfile.cjs'
-              - 'packages/dialtone-vue2/**/*.vue'
-              - 'packages/dialtone-vue2/**/*.*js'
-              - 'packages/dialtone-vue2/**/*.stories.js'
-              - '!**/*.test.*js'
+              - 'packages/dialtone-vue2/**'
             dialtone-vue3:
               - 'packages/dialtone-css/**/*.less'
               - 'packages/dialtone-css/postcss/*.cjs'
@@ -117,10 +111,7 @@ jobs:
               - 'packages/dialtone-tokens/themes/**'
               - 'packages/dialtone-tokens/tokens/**'
               - 'packages/dialtone-tokens/gulpfile.cjs'
-              - 'packages/dialtone-vue3/**/*.vue'
-              - 'packages/dialtone-vue3/**/*.*js'
-              - 'packages/dialtone-vue3/**/*.stories.js'
-              - '!**/*.test.*js'
+              - 'packages/dialtone-vue3/**'
 
   check-dialpad-member:
     runs-on: ubuntu-latest
@@ -246,7 +237,7 @@ jobs:
           message: |
             ✔️ Deploy previews ready!
             ${{ contains(needs.filter-actions.outputs.packages, 'dialtone-documentation') && format('😎 Dialtone documentation preview: https://{0}/{1}', env.DIALTONE_BUCKET_DIRECTORY, env.BASE_URL) }}
-            ${{ contains(needs.filter-actions.outputs.packages, 'dialtone-vue2') && format('😎 Dialtone-vue 2 preview: https://{0}/{1}', env.DIALTONE_VUE_2_BUCKET_DIRECTORY, env.BASE_URL) }}
-            ${{ contains(needs.filter-actions.outputs.packages, 'dialtone-vue3') && format('😎 Dialtone-vue 3 the preview: https://{0}/{1}', env.DIALTONE_VUE_3_BUCKET_DIRECTORY, env.BASE_URL) }}
+            ${{ contains(needs.filter-actions.outputs.packages, 'dialtone-vue2') && format('😎 Dialtone-vue 2 preview: https://{0}/{1}', env.DIALTONE_VUE_2_BUCKET_DIRECTORY, env.BASE_URL) || '' }}
+            ${{ contains(needs.filter-actions.outputs.packages, 'dialtone-vue3') && format('😎 Dialtone-vue 3 the preview: https://{0}/{1}', env.DIALTONE_VUE_3_BUCKET_DIRECTORY, env.BASE_URL) || '' }}
           message-id: 'deploy-preview-message'
           refresh-message-position: true

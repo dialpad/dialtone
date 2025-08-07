@@ -11,10 +11,6 @@ figma_url: https://www.figma.com/design/W58r5BkO8qTw3vem9YieJd/DT9-Component-Lib
 <code-well-header>
   <dt-pagination
     :total-pages="25"
-    aria-label="Pagination"
-    prev-aria-label="Previous page"
-    next-aria-label="Next page"
-    :page-number-aria-label="(page) => `Page ${page}`"
   />
 </code-well-header>
 
@@ -90,10 +86,6 @@ htmlCode='
 vueCode='
 <dt-pagination
   :total-pages="25"
-  aria-label="Pagination"
-  prev-aria-label="Previous page"
-  next-aria-label="Next page"
-  :page-number-aria-label="(page) => `Page ${page}`"
 />
 '
 showHtmlWarning />
@@ -107,10 +99,6 @@ showHtmlWarning />
     ref="activePage"
     :total-pages="25"
     :active-page="5"
-    aria-label="Pagination"
-    prev-aria-label="Previous page"
-    next-aria-label="Next page"
-    :page-number-aria-label="(page) => `Page ${page}`"
   />
 </code-well-header>
 
@@ -120,10 +108,6 @@ vueCode='
 <dt-pagination
   :total-pages="25"
   :active-page="5"
-  aria-label="Pagination"
-  prev-aria-label="Previous page"
-  next-aria-label="Next page"
-  :page-number-aria-label="(page) => `Page ${page}`"
 />
 '
 />
@@ -135,10 +119,6 @@ vueCode='
     ref="maxVisible"
     :total-pages="25"
     :max-visible="7"
-    aria-label="Pagination"
-    prev-aria-label="Previous page"
-    next-aria-label="Next page"
-    :page-number-aria-label="(page) => `Page ${page}`"
   />
 </code-well-header>
 
@@ -148,10 +128,6 @@ vueCode='
 <dt-pagination
   :total-pages="25"
   :max-visible="7"
-  aria-label="Pagination"
-  prev-aria-label="Previous page"
-  next-aria-label="Next page"
-  :page-number-aria-label="(page) => `Page ${page}`"
 />
 '
 />

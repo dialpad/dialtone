@@ -18,6 +18,7 @@
       >
         <div
           v-if="isTyping"
+          v-dt-tooltip="typingTooltip"
           class="d-recipe-leftbar-row__is-typing"
         >
           <span /><span /><span />
@@ -70,6 +71,7 @@
       </dt-tooltip>
       <div
         v-if="activeVoiceChat"
+        v-dt-tooltip="activeVoiceChatTooltip"
         class="d-recipe-leftbar-row__active-voice"
       >
         <dt-icon-waveform
@@ -121,7 +123,7 @@
             <dt-button
               class="d-recipe-leftbar-row__action-button"
               data-qa="dt-recipe-leftbar-row-action-call-button"
-              :circle="true"
+              circle
               size="xs"
               kind="inverted"
               :aria-label="callButtonTooltip"
@@ -154,9 +156,10 @@ import { DtBadge } from '@/components/badge';
 import { DtIconPhone, DtIconWaveform } from '@dialpad/dialtone-icons/vue3';
 import { DtButton } from '@/components/button';
 import { DtTooltip } from '@/components/tooltip';
-import DtEmojiTextWrapper from '@/components/emoji_text_wrapper/emoji_text_wrapper.vue';
+import { DtEmojiTextWrapper } from '@/components/emoji_text_wrapper';
 import DtRecipeLeftbarGeneralRowIcon from './leftbar_general_row_icon.vue';
 import { extractVueListeners, safeConcatStrings, removeClassStyleAttrs, returnFirstEl, addClassStyleAttrs } from '@/common/utils';
+import { DialtoneLocalization } from '@/localization';
 
 export default {
   compatConfig: { MODE: 3 },
@@ -250,14 +253,6 @@ export default {
     },
 
     /**
-     * Text shown when the unread count is hovered.
-     */
-    unreadCountTooltip: {
-      type: String,
-      default: '',
-    },
-
-    /**
      * Determines if the row is selected
      */
     selected: {
@@ -291,27 +286,11 @@ export default {
     },
 
     /**
-     * Text shown in tooltip when you hover the dndText
-     */
-    dndTextTooltip: {
-      type: String,
-      default: '',
-    },
-
-    /**
      * Whether the row should have a call button. Usually only applicable to individual contact rows.
      */
     hasCallButton: {
       type: Boolean,
       default: false,
-    },
-
-    /**
-     * Text shown when the call button is hovered.
-     */
-    callButtonTooltip: {
-      type: String,
-      default: '',
     },
 
     /**
@@ -348,6 +327,7 @@ export default {
     return {
       actionFocused: false,
       labelWidth: '100%',
+      i18n: new DialtoneLocalization(),
     };
   },
 
@@ -383,9 +363,15 @@ export default {
     },
 
     getAriaLabel () {
-      return this.ariaLabel
-        ? this.ariaLabel
-        : safeConcatStrings([this.description, this.unreadCountTooltip, this.dndTextTooltip]);
+      if (this.ariaLabel) return this.ariaLabel;
+
+      return safeConcatStrings([
+        this.typingTooltip,
+        this.description,
+        this.unreadCountTooltip,
+        this.dndTextTooltip,
+        this.activeVoiceChatTooltip,
+      ]);
     },
 
     hasActions () {
@@ -420,6 +406,41 @@ export default {
      */
     shouldApplyCustomStyleForMentionOnly () {
       return this.channelSetting === 'always' && !this.hasUnreadCount && this.hasUnreadMentionCount;
+    },
+
+    messageCount () {
+      return isNaN(this.unreadCount)
+        ? this.unreadCount
+        : Number(this.unreadCount);
+    },
+
+    mentionCount () {
+      return isNaN(this.unreadMentionCount)
+        ? this.unreadMentionCount
+        : Number(this.unreadMentionCount);
+    },
+
+    unreadCountTooltip () {
+      return safeConcatStrings([
+        this.unreadCount && this.i18n.$t('DIALTONE_UNREAD_MESSAGE_COUNT_TEXT', { unreadCount: this.messageCount }),
+        this.unreadMentionCount && this.i18n.$t('DIALTONE_UNREAD_MENTION_COUNT_TEXT', { unreadCount: this.mentionCount }),
+      ]);
+    },
+
+    dndTextTooltip () {
+      return this.dndText && this.i18n.$t('DIALTONE_GENERAL_ROW_DND_TEXT_TOOLTIP');
+    },
+
+    activeVoiceChatTooltip () {
+      return this.activeVoiceChat && this.i18n.$t('DIALTONE_GENERAL_ROW_ACTIVE_VOICE_CHAT_TEXT');
+    },
+
+    callButtonTooltip () {
+      return this.i18n.$t('DIALTONE_GENERAL_ROW_CALL_BUTTON_TOOLTIP');
+    },
+
+    typingTooltip () {
+      return this.isTyping && this.i18n.$t('DIALTONE_TYPING_TEXT');
     },
   },
 

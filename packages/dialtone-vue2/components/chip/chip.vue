@@ -61,7 +61,7 @@ import {
   CHIP_ICON_SIZES,
 } from './chip_constants';
 import { getUniqueString } from '@/common/utils';
-import { DtLocalizationMixin } from '@/common/mixins';
+import { DialtoneLocalization } from '@/localization';
 
 /**
  * A chip is a compact UI element that provides brief, descriptive information about an element.
@@ -76,8 +76,6 @@ export default {
     DtButton,
     DtIconClose,
   },
-
-  mixins: [DtLocalizationMixin],
 
   props: {
     /**
@@ -171,6 +169,7 @@ export default {
   data () {
     return {
       isActive: false,
+      i18n: new DialtoneLocalization(),
     };
   },
 

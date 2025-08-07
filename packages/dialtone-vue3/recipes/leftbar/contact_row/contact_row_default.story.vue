@@ -7,7 +7,6 @@
     :avatar-color="$attrs.avatarColor"
     :presence-text="$attrs.presenceText"
     :unread-count="$attrs.unreadCount"
-    :unread-count-tooltip="$attrs.unreadCountTooltip"
     :user-status="$attrs.userStatus"
     :has-unreads="$attrs.hasUnreads"
     :muted="$attrs.muted"
@@ -15,7 +14,6 @@
     :no-initials="$attrs.noInitials"
     :is-typing="$attrs.isTyping"
     :has-call-button="$attrs.hasCallButton"
-    :call-button-tooltip="$attrs.callButtonTooltip"
     @click="$attrs.onClick"
     @call="$attrs.onCall"
   />

@@ -15,7 +15,7 @@
 <script>
 import { DtIconClose } from '@dialpad/dialtone-icons/vue2';
 import { DtButton } from '@/components/button';
-import { DtLocalizationMixin } from '@/common/mixins';
+import { DialtoneLocalization } from '@/localization';
 
 export default {
   name: 'SrOnlyCloseButton',
@@ -24,9 +24,13 @@ export default {
     DtButton,
   },
 
-  mixins: [DtLocalizationMixin],
-
   emits: ['close'],
+
+  data () {
+    return {
+      i18n: new DialtoneLocalization(),
+    };
+  },
 
   computed: {
     closeButtonTitle () {

@@ -94,7 +94,6 @@
   <dt-modal
     v-if="selectedIcon"
     :show="isModalOpen"
-    :close-button-props="{ ariaLabel: 'Close' }"
     size="full"
     content-class="d-wmx100p d-pr32"
     @update:show="isModalOpen = false"
@@ -137,6 +136,7 @@ const excludedIcons = [
   'dialpad-ai-reversed',
   'dialpad-ai',
   'dialpad-logomark',
+  'ai-notes',
 ];
 
 const searchIcon = () => {
@@ -197,7 +197,7 @@ const filterIconList = () => {
     .reduce((acc, category) => {
       const filteredCategory = Object.entries(categories[category])
         .filter(([name, keywords]) => {
-          if (!search.value) return true;
+          if (!search.value) return !excludedIcons.includes(name);
           return !excludedIcons.includes(name) && (regex.test(name) || regex.test(keywords.join(' ')));
         })
         .reduce((acc, [name, _]) => Object.assign(acc, { [name]: Object.freeze(categories[category][name]) }), {});

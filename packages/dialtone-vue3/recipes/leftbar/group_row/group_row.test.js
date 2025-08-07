@@ -3,7 +3,6 @@ import DtRecipeGroupRow from './group_row.vue';
 
 // Constants
 const baseProps = {
-  groupCount: 2,
   names: 'Jaqueline Nackos, Lori Smith',
   avatarFullName: 'Jaqueline Nackos',
   avatarSrc: 'avatar1.png',

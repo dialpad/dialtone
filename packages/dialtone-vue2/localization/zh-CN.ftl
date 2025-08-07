@@ -37,7 +37,7 @@ DIALTONE_EDITOR_REMOVE_LINK_BUTTON =
 DIALTONE_EDITOR_CANCEL_SET_LINK_BUTTON =
     .title = 取消
     .aria-label = 取消设置链接
-DIALTONE_EDITOR_QUICK_REPLY_BUTTON_LABEL = 快速回复
+DIALTONE_EDITOR_QUICK_REPLY_BUTTON_LABEL = 模板
 DIALTONE_EDITOR_BOLD_BUTTON_LABEL = 粗体
 DIALTONE_EDITOR_ITALICS_BUTTON_LABEL = 斜体
 DIALTONE_EDITOR_UNDERLINE_BUTTON_LABEL = 下划线
@@ -55,14 +55,7 @@ DIALTONE_EDITOR_LINK_BUTTON_LABEL = 链接
 DIALTONE_EDITOR_ADD_LINK_BUTTON =
     .title = 添加链接
     .aria-label = 添加链接的输入字段
-DIALTONE_EMOJI_ROW_REACTION_LABEL =
-    { $reactionCount ->
-       *[other]
-            { $selected ->
-               *[false] { $reactionCount } 个人使用了 { $reaction } 作为回复。
-                [true] 包括您在内的 { $reactionCount } 个人使用了 { $reaction } 作为回复。
-            }
-    }
+DIALTONE_EMOJI_ROW_REACTION_LABEL = { $names } 使用了 { $reaction } 作为回复
 DIALTONE_EMOJI_PICKER_ADD_EMOJI_LABEL = 添加表情符号
 DIALTONE_EMOJI_PICKER_SEARCH_NO_RESULTS_LABEL = 没有结果
 DIALTONE_EMOJI_PICKER_SEARCH_RESULTS_LABEL = 搜索结果

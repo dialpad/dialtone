@@ -3,7 +3,6 @@
     :important="important"
     :kind="kind"
     :title="title"
-    :close-button-props="{ ariaLabel: 'Close' }"
   >
     Message body with
     <dt-link

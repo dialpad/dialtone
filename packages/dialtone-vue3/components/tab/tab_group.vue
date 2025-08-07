@@ -258,8 +258,14 @@ export default {
     },
 
     getFocusedTabIndex () {
-      return this.tabs.findIndex((context) =>
-        this.focusId ? context.tabId === `${this.focusId}` : context.isSelected);
+      // Hot fix https://github.com/dialpad/dialtone/pull/849
+      // The main issue is that this.tabs is not being updated at the time this is being triggered.
+
+      const index = this.tabs.findIndex((context) =>
+        this.focusId ? context.tabId === `${this.focusId}` : context.isSelected,
+      );
+
+      return index === -1 ? 0 : index;
     },
 
     onHomeButton () {

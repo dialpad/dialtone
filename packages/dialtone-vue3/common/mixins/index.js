@@ -21,7 +21,3 @@ export {
 export {
   default as DtSkeletonMixin,
 } from './skeleton';
-
-export {
-  default as DtSrOnlyCloseButtonMixin,
-} from './sr_only_close_button';

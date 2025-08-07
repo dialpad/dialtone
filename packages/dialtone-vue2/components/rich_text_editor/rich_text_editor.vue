@@ -97,7 +97,7 @@ import channelSuggestion from './extensions/channels/suggestion';
 import slashCommandSuggestion from './extensions/slash_command/suggestion';
 import { warnIfUnmounted } from '@/common/utils';
 import deepEqual from 'deep-equal';
-import { DtLocalizationMixin } from '@/common/mixins';
+import { DialtoneLocalization } from '@/localization';
 
 export default {
   name: 'DtRichTextEditor',
@@ -108,8 +108,6 @@ export default {
     DtButton,
     DtStack,
   },
-
-  mixins: [DtLocalizationMixin],
 
   props: {
     /**
@@ -497,6 +495,8 @@ export default {
         appendTo: () => this.$refs.editor.$el.getRootNode()?.querySelector('body'),
         placement: 'top-start',
       },
+
+      i18n: new DialtoneLocalization(),
     };
   },
 
@@ -734,6 +734,17 @@ export default {
           attributes: {
             ...this.inputAttrs,
             class: this.inputClass,
+          },
+
+          handleKeyDown: (view, event) => {
+            if (!this.preventTyping) return false;
+
+            const allowedKeys = ['Backspace'];
+            if (!this.allowLineBreaks && !event.shiftKey) {
+              allowedKeys.push('Enter');
+            }
+
+            return !allowedKeys.includes(event.key);
           },
 
           handlePaste: (view, event, slice) => {
@@ -994,12 +1005,6 @@ export default {
       });
       // The content has changed.
       this.editor.on('update', () => {
-        // When preventTyping is true and user wants to type, we revert to last value
-        // If Backspace (keyCode = 8) is pressed, we allow updating the text
-        if (this.preventTyping && this.editor.view?.input?.lastKeyCode !== 8) {
-          this.editor.commands.setContent(this.value, false);
-          return;
-        }
         this.triggerInputChangeEvents();
       });
 

@@ -219,7 +219,7 @@ import {
   DtIconStrikethrough,
   DtIconUnderline,
 } from '@dialpad/dialtone-icons/vue2';
-import { DtLocalizationMixin } from '@/common/mixins';
+import { DialtoneLocalization } from '@/localization';
 
 export default {
   name: 'DtRecipeEditor',
@@ -247,8 +247,6 @@ export default {
     DtIconLink2,
     DtIconImage,
   },
-
-  mixins: [DtLocalizationMixin],
 
   inheritAttrs: false,
 
@@ -520,6 +518,7 @@ export default {
       showLinkInput: false,
       linkInput: '',
       currentButtonRefIndex: 0,
+      i18n: new DialtoneLocalization(),
     };
   },
 

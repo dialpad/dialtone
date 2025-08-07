@@ -37,7 +37,7 @@ DIALTONE_EDITOR_REMOVE_LINK_BUTTON =
 DIALTONE_EDITOR_CANCEL_SET_LINK_BUTTON =
     .title = Annulla
     .aria-label = Annulla il link impostato
-DIALTONE_EDITOR_QUICK_REPLY_BUTTON_LABEL = Risposta rapida
+DIALTONE_EDITOR_QUICK_REPLY_BUTTON_LABEL = Modello
 DIALTONE_EDITOR_BOLD_BUTTON_LABEL = Grassetto
 DIALTONE_EDITOR_ITALICS_BUTTON_LABEL = Corsivo
 DIALTONE_EDITOR_UNDERLINE_BUTTON_LABEL = Sottolineato
@@ -55,19 +55,7 @@ DIALTONE_EDITOR_LINK_BUTTON_LABEL = Link
 DIALTONE_EDITOR_ADD_LINK_BUTTON =
     .title = Aggiungi link
     .aria-label = Campo di input per aggiungere il link
-DIALTONE_EMOJI_ROW_REACTION_LABEL =
-    { $reactionCount ->
-        [one]
-            { $selected ->
-               *[false] { $name } ha reagito con { $reaction }.
-                [true] Hai reagito con { $reaction }.
-            }
-       *[other]
-            { $selected ->
-               *[false] { $reactionCount } persone hanno reagito con { $reaction }.
-                [true] { $reactionCount } persone, fra cui tu, hanno reagito con { $reaction }.
-            }
-    }
+DIALTONE_EMOJI_ROW_REACTION_LABEL = { $names } ha reagito con { $reaction }
 DIALTONE_EMOJI_PICKER_ADD_EMOJI_LABEL = Aggiungi emoji
 DIALTONE_EMOJI_PICKER_SEARCH_NO_RESULTS_LABEL = Nessun risultato
 DIALTONE_EMOJI_PICKER_SEARCH_RESULTS_LABEL = ricerca risultati

@@ -24,12 +24,7 @@
       <dt-emoji-picker
         ref="emojiPickerRef"
         :skin-tone="skinTone"
-        :skin-selector-button-tooltip-label="$attrs.skinSelectorButtonTooltipLabel"
-        :tab-set-labels="$attrs.tabSetLabels"
         :recently-used-emojis="$attrs.recentlyUsedEmojis"
-        :search-results-label="$attrs.searchResultsLabel"
-        :search-no-results-label="$attrs.searchNoResultsLabel"
-        :search-placeholder-label="$attrs.searchPlaceholderLabel"
         @skin-tone="skinTone = $event"
         @selected-emoji="$attrs.selectedEmoji"
       />

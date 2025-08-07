@@ -42,10 +42,11 @@
           :active="open"
           :class="['dt-recipe--callbar-button-with-dropdown--arrow',
                    { 'dt-recipe--callbar-button-with-dropdown--arrow--large': !isCompactMode }]"
-          circle
+          :circle="true"
           importance="clear"
           size="lg"
-          v-bind="arrowButtonLabel"
+          :aria-label="arrowButtonLabel"
+          :title="arrowButtonLabel"
           width="2rem"
           @click="arrowClick"
         >
@@ -73,14 +74,12 @@ import { DtDropdown } from '@/components/dropdown';
 import { DtIconChevronUp } from '@dialpad/dialtone-icons/vue2';
 import { DtRecipeCallbarButton, CALLBAR_BUTTON_VALID_WIDTH_SIZE } from '../callbar_button';
 import utils, { warnIfUnmounted } from '@/common/utils';
-import { DtLocalizationMixin } from '@/common/mixins';
+import { DialtoneLocalization } from '@/localization';
 
 export default {
   name: 'DtRecipeCallbarButtonWithDropdown',
 
   components: { DtRecipeCallbarButton, DtDropdown, DtButton, DtIconChevronUp },
-
-  mixins: [DtLocalizationMixin],
 
   /* inheritAttrs: false is generally an option we want to set on library
    components. This allows any attributes passed in that are not recognized
@@ -267,6 +266,7 @@ export default {
   data () {
     return {
       open: false,
+      i18n: new DialtoneLocalization(),
     };
   },
 
@@ -280,7 +280,7 @@ export default {
     },
 
     arrowButtonLabel () {
-      return this.i18n.$ta('DIALTONE_CALLBAR_BUTTON_WITH_DROPDOWN_ARROW_BUTTON_LABEL');
+      return this.i18n.$t('DIALTONE_CALLBAR_BUTTON_WITH_DROPDOWN_ARROW_BUTTON_ARIA_LABEL');
     },
   },
 

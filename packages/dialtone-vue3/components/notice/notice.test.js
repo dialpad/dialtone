@@ -7,7 +7,6 @@ import DtNoticeIcon from '../notice/notice_icon.vue';
 
 const baseProps = {
   title: '',
-  closeButtonProps: { ariaLabel: 'close' },
 };
 
 const baseSlots = {
@@ -91,12 +90,6 @@ describe('DtNotice tests', () => {
         await wrapper.setProps({ kind: 'error' });
 
         expect(rootElement.classes('d-notice--error')).toBe(true);
-      });
-    });
-
-    describe('When closeButtonProps is passed', () => {
-      it('Has correct class', () => {
-        expect(actionChild.props().closeButtonProps).toEqual({ ariaLabel: 'close' });
       });
     });
   });

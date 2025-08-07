@@ -44,7 +44,7 @@
 <script>
 import { DtButton } from '@/components/button';
 import { DtIconClose } from '@dialpad/dialtone-icons/vue2';
-import { DtLocalizationMixin } from '@/common/mixins';
+import { DialtoneLocalization } from '@/localization';
 
 export default {
   name: 'PopoverHeaderFooter',
@@ -52,8 +52,6 @@ export default {
     DtButton,
     DtIconClose,
   },
-
-  mixins: [DtLocalizationMixin],
 
   props: {
     // eslint-disable-next-line vue/require-default-prop
@@ -91,6 +89,12 @@ export default {
      */
     'close',
   ],
+
+  data () {
+    return {
+      i18n: new DialtoneLocalization(),
+    };
+  },
 
   computed: {
     closeButtonTitle () {

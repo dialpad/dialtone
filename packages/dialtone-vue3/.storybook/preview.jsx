@@ -40,6 +40,7 @@ setup((app) => {
 });
 
 export default {
+  name: 'StorybookPreview',
   parameters: {
     a11y: {
       config: {
@@ -102,7 +103,9 @@ export default {
     docs: {
       container: ({ children, ...props }) => {
         const isDark = useDarkMode();
-        return <DocsContainer context={props.context} theme={isDark ? dialtoneDarkTheme : dialtoneLightTheme}>{children}</DocsContainer>;
+        return <DocsContainer context={props.context} theme={isDark ? dialtoneDarkTheme : dialtoneLightTheme}>
+          {children}
+        </DocsContainer>;
       },
     },
 

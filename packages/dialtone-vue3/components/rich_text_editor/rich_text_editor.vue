@@ -22,21 +22,21 @@
             importance="clear"
             @click="editLink"
           >
-            Edit
+            {{ i18n.$t('DIALTONE_RICH_TEXT_EDITOR_EDIT_BUTTON_LABEL') }}
           </dt-button>
           <dt-button
             kind="muted"
             importance="clear"
             @click="openLink"
           >
-            Open link
+            {{ i18n.$t('DIALTONE_RICH_TEXT_EDITOR_OPEN_LINK_BUTTON_LABEL') }}
           </dt-button>
           <dt-button
             kind="danger"
             importance="clear"
             @click="removeLink"
           >
-            Remove
+            {{ i18n.$t('DIALTONE_RICH_TEXT_EDITOR_REMOVE_BUTTON_LABEL') }}
           </dt-button>
         </dt-stack>
       </div>
@@ -97,6 +97,7 @@ import channelSuggestion from './extensions/channels/suggestion';
 import slashCommandSuggestion from './extensions/slash_command/suggestion';
 import { warnIfUnmounted, returnFirstEl } from '@/common/utils';
 import deepEqual from 'deep-equal';
+import { DialtoneLocalization } from '@/localization';
 
 export default {
   compatConfig: { MODE: 3 },
@@ -495,6 +496,8 @@ export default {
         appendTo: () => returnFirstEl(this.$refs.editor.$el).getRootNode()?.querySelector('body'),
         placement: 'top-start',
       },
+
+      i18n: new DialtoneLocalization(),
     };
   },
 
@@ -733,6 +736,17 @@ export default {
           attributes: {
             ...this.inputAttrs,
             class: this.inputClass,
+          },
+
+          handleKeyDown: (view, event) => {
+            if (!this.preventTyping) return false;
+
+            const allowedKeys = ['Backspace'];
+            if (!this.allowLineBreaks && !event.shiftKey) {
+              allowedKeys.push('Enter');
+            }
+
+            return !allowedKeys.includes(event.key);
           },
 
           handlePaste: (view, event, slice) => {
@@ -993,12 +1007,6 @@ export default {
       });
       // The content has changed.
       this.editor.on('update', () => {
-        // When preventTyping is true and user wants to type, we revert to last value
-        // If Backspace (keyCode = 8) is pressed, we allow updating the text
-        if (this.preventTyping && this.editor.view?.input?.lastKeyCode !== 8) {
-          this.editor.commands.setContent(this.modelValue, false);
-          return;
-        }
         this.triggerInputChangeEvents();
       });
 

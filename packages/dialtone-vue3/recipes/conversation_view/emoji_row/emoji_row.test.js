@@ -2,18 +2,23 @@ import { mount } from '@vue/test-utils';
 import {
   itBehavesLikeFailsCustomPropValidation,
   itBehavesLikePassesCustomPropValidation,
-} from '../../../tests/shared_examples/validation';
+} from '@/tests/shared_examples/validation.js';
 import DtRecipeEmojiRow from './emoji_row.vue';
 import { DtTooltip } from '@/components/tooltip';
 
 // Constants
 const testEmojiObj = {
   emojiUnicodeOrShortname: '🙃',
+  names: 'John Doe & Olivia Chen',
   isSelected: false,
-  ariaLabel: 'Emoji aria label',
-  tooltip: 'You reacted with 🙃',
-  num: 99,
+  num: 2,
 };
+
+// \u2068 and \u2069 are Unicode bidi isolation characters.
+// They are non-printing characters that help text layout engines to ensure that the interpolated strings are handled correctly
+// in the situation where the text direction of the substitution might not match the text direction of the localized text.
+// https://github.com/django-ftl/fluent-compiler/blob/master/docs/usage.rst#formatting-messages
+const MOCK_LOCALIZED_EMOJI_REACTION_ARIA_LABEL = `\u2068${testEmojiObj.names}\u2069 reacted with \u2068${testEmojiObj.emojiUnicodeOrShortname}\u2069`;
 
 const basePropsData = {
   reactions: [
@@ -108,8 +113,8 @@ describe('DtRecipeEmojiRow Tests', function () {
      */
 
     describe('Default Render', function () {
-      it('should render a reaction button', () => {
-        expect(emojiReactionButton.attributes('aria-label')).toBe(testEmojiObj.ariaLabel);
+      it('should render a reaction button with correct aria-label', () => {
+        expect(emojiReactionButton.attributes('aria-label')).toContain(MOCK_LOCALIZED_EMOJI_REACTION_ARIA_LABEL);
       });
     });
   });

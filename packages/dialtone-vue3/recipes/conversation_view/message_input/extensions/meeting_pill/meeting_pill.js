@@ -30,7 +30,6 @@ export default Node.create({
       text: {
         default: 'Please pass in "text" attribute',
       },
-      'close-button-aria-label': {},
     };
   },
 

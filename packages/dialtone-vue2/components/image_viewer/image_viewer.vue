@@ -77,7 +77,7 @@ import { DtIconClose } from '@dialpad/dialtone-icons/vue2';
 import { DtButton } from '@/components/button';
 import { Portal } from '@linusborg/vue-simple-portal';
 import SrOnlyCloseButton from '@/common/sr_only_close_button.vue';
-import { DtLocalizationMixin } from '@/common/mixins';
+import { DialtoneLocalization } from '@/localization';
 
 export default {
   name: 'DtImageViewer',
@@ -89,7 +89,7 @@ export default {
     DtIconClose,
   },
 
-  mixins: [Modal, DtLocalizationMixin],
+  mixins: [Modal],
 
   props: {
     /**
@@ -169,6 +169,7 @@ export default {
     return {
       showCloseButton: true,
       isOpen: false,
+      i18n: new DialtoneLocalization(),
     };
   },
 

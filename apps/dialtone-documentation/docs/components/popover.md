@@ -437,7 +437,7 @@ There are a few important considerations to ensure popover controls are accessib
 
 - The popover content will have a generic role of "dialog" ( "menu" and "listbox" are also possible roles as well).
 - On open, focus will be transferred to the first focusable element within the popover, after close the triggering element will be focused.
-- It is possible to include a screen reader visible only close button setting "visually-hidden-close" and "visually-hidden-close-label" props.
+- A screen reader visible only close button is added by default when setting the `showCloseButton` prop to `false`.
 
 <component-accessible-table component-name="popover"/>
 

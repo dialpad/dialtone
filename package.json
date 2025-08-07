@@ -1,11 +1,11 @@
 {
   "name": "@dialpad/dialtone",
-  "version": "9.126.4",
+  "version": "9.129.3",
   "packageManager": "pnpm@9.9.0",
   "description": "Dialpad's Dialtone design system monorepo",
   "scripts": {
     "prepare": "husky install",
-    "prepack": "nx run dialtone:build --skip-nx-cache"
+    "prepack": "nx run dialtone:build"
   },
   "pnpm": {
     "peerDependencyRules": {
@@ -52,7 +52,6 @@
     "./css": "./dist/css/dialtone.min.css",
     "./css-default-theme": "./dist/css/dialtone-default-theme.min.css",
     "./tokens/*.css": "./dist/tokens/css/*.css",
-    "./tokens/*.less": "./dist/tokens/less/*.less",
     "./tokens/postcss/*": {
       "types": "./dist/tokens/types/postcss/*.d.ts",
       "import": "./dist/tokens/postcss/*.js",
@@ -121,7 +120,7 @@
     "deep-equal": "2.2.3",
     "docopt": "0.6.2",
     "emoji-toolkit": "9.0.1",
-    "linkifyjs": "4.2.0",
+    "linkifyjs": "4.3.2",
     "overlayscrollbars": "2.10.0",
     "regex-combined-emojis": "1.6.0",
     "tippy.js": "6.3.7"
@@ -130,7 +129,7 @@
     "@commitlint/cli": "^18.4.3",
     "@commitlint/config-conventional": "^17.6.6",
     "@dialpad/conventional-changelog-angular": "^1.1.1",
-    "@dialpad/i18n-services": "^1.4.0",
+    "@dialpad/i18n-services": "1.5.0",
     "@dialpad/semantic-release-changelog-json": "^1.0.0",
     "@faker-js/faker": "8.4.1",
     "@percy/cli": "1.30.9",
@@ -150,6 +149,7 @@
     "@types/node": "^20.4.5",
     "@vitejs/plugin-vue": "^5.2.3",
     "@vitejs/plugin-vue2": "^2.3.3",
+    "@vitest/coverage-v8": "^1.0.0",
     "@vue/tsconfig": "^0.4.0",
     "axe-core": "^4.7.2",
     "axe-playwright": "^2.0.3",
@@ -206,9 +206,9 @@
     "typedoc-plugin-markdown": "^4.6.1",
     "typescript": "^5.2",
     "vite": "^5.4.2",
-    "vite-bundle-visualizer": "^1.0.1",
+    "vite-bundle-visualizer": "^1.2.1",
     "vite-plugin-dts": "^4.0.3",
-    "vitest": "^1.0.4",
+    "vitest": "^1.6.1",
     "vue-docgen-api": "^4.75.0",
     "vue-template-compiler": "^2.7.16",
     "wait-on": "^7.2.0",

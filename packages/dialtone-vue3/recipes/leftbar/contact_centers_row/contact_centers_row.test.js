@@ -4,7 +4,6 @@ import DtRecipeContactCentersRow from './contact_centers_row.vue';
 // Constants
 const basePropsData = {
   description: 'Ai Contact Centers',
-  menuButtonAriaLabel: 'Menu button',
 };
 
 describe('DtRecipeContactCentersRow Tests', () => {

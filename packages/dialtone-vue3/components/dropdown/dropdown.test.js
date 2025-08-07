@@ -6,7 +6,6 @@ const MOCK_HIGHLIGHT_STUB = vi.fn();
 
 const baseProps = {
   open: true,
-  visuallyHiddenCloseLabel: 'Close dropdown',
 };
 const baseSlots = {
   anchor: `<template #anchor="attrs"><a id="anchor" href="#" v-bind="attrs">Link</a></template>`,
@@ -82,8 +81,8 @@ describe('DtDropdown Tests', () => {
       expect(wrapper.exists()).toBe(true);
     });
 
-    it('should not render the visually hidden close button', () => {
-      expect(closeButton.exists()).toBe(false);
+    it('should render the visually hidden close button', () => {
+      expect(closeButton.exists()).toBe(true);
     });
 
     describe('When a list is provided', () => {
@@ -97,34 +96,6 @@ describe('DtDropdown Tests', () => {
 
       it('should render the list', () => {
         expect(listWrapper.find('#list').exists()).toBe(true);
-      });
-    });
-
-    describe('When visuallyHiddenClose is true', () => {
-      beforeEach(() => {
-        mockProps = { visuallyHiddenClose: true };
-
-        updateWrapper();
-      });
-
-      it('should contain a visually hidden close button', () => {
-        expect(closeButton.exists()).toBe(true);
-      });
-
-      describe('When visuallyHiddenCloseLabel is null', () => {
-        it('should raise a validation error', async () => {
-          const message = `If visuallyHiddenClose prop is true, the component includes
-           a visually hidden close button and you must set the visuallyHiddenCloseLabel prop.`;
-
-          let consoleErrorSpy = vi.spyOn(console, 'error').mockClear();
-
-          await wrapper.setProps({ visuallyHiddenCloseLabel: null });
-
-          expect(consoleErrorSpy).toHaveBeenCalledWith(message);
-
-          consoleErrorSpy = null;
-          console.error.mockRestore();
-        });
       });
     });
   });
@@ -173,6 +144,14 @@ describe('DtDropdown Tests', () => {
         await listWrapper.trigger('mouseleave');
 
         expect(wrapper.vm.highlightIndex).toBe(-1);
+      });
+    });
+
+    describe('When visually hidden close button is clicked', () => {
+      it('should close the dropdown', async () => {
+        await closeButton.trigger('click');
+
+        expect(anchorElement.attributes('aria-expanded') === 'false').toBe(true);
       });
     });
   });

@@ -24,7 +24,7 @@
 <script>
 import { DtIconArrowUp, DtIconArrowDown } from '@dialpad/dialtone-icons/vue2';
 import { UNREAD_PILL_DIRECTIONS, UNREAD_PILL_KINDS } from './unread_pill_constants';
-import { DtLocalizationMixin } from '@/common/mixins';
+import { DialtoneLocalization } from '@/localization';
 
 export default {
   name: 'DtRecipeUnreadPill',
@@ -33,8 +33,6 @@ export default {
     DtIconArrowUp,
     DtIconArrowDown,
   },
-
-  mixins: [DtLocalizationMixin],
 
   props: {
     /**
@@ -67,6 +65,12 @@ export default {
      */
     'click',
   ],
+
+  data () {
+    return {
+      i18n: new DialtoneLocalization(),
+    };
+  },
 
   computed: {
     text () {

@@ -31,7 +31,8 @@
       "dependsOn": [
         "dialtone-css:build",
         "dialtone-icons:build",
-        "dialtone-tokens:build"
+        "dialtone-tokens:build",
+        "build-functions"
       ],
       "inputs": [
         "{projectRoot}/.storybook/*",
@@ -50,16 +51,22 @@
         "{projectRoot}/vite.config.js"
       ],
       "outputs": [
-        "{projectRoot}/storybook-static",
-        "{projectRoot}/functions/generated"
+        "{projectRoot}/storybook-static"
       ],
       "options": {
         "cwd": "{projectRoot}",
-        "commands": [
-          "pnpm exec typedoc --plugin typedoc-plugin-markdown",
-          "STORYBOOK_ENV=production pnpm exec storybook build"
-        ],
-        "parallel": false
+        "command": "STORYBOOK_ENV=production pnpm exec storybook build"
+      }
+    },
+    "build-functions": {
+      "executor": "nx:run-commands",
+      "inputs": [
+        "{projectRoot}/common/**/*"
+      ],
+      "outputs": [ "{projectRoot}/functions/generated" ],
+      "options": {
+        "cwd": "{projectRoot}",
+        "command": "pnpm exec typedoc --plugin typedoc-plugin-markdown"
       }
     },
     "publish": {
@@ -80,7 +87,8 @@
       "dependsOn": [
         "dialtone-css:build",
         "dialtone-icons:build",
-        "dialtone-tokens:build"
+        "dialtone-tokens:build",
+        "build-functions"
       ],
       "options": {
         "cwd": "{projectRoot}",
@@ -94,6 +102,14 @@
       "executor": "nx:run-script",
       "dependsOn": [ "dialtone-icons:build" ],
       "options": { "script": "test" }
+    },
+    "test:coverage": {
+      "executor": "nx:run-commands",
+      "dependsOn": [ "dialtone-icons:build" ],
+      "options": {
+        "cwd": "{projectRoot}",
+        "command": "pnpm exec vitest run --coverage"
+      }
     },
     "test:a11y": {
       "executor": "nx:run-commands",
