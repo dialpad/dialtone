@@ -186,9 +186,6 @@
     },
     "$figmaStyleReferences": {},
     "$figmaVariableReferences": {
-      "color.neutral.white": "53da522c22bc98a2abbe075e2552dbe701f0269b",
-      "color.neutral.black": "f03657910e2bc6507b4cc387219c2da0c9dc44e0",
-      "color.neutral.transparent": "70d1e56e10a3ed3d46b08d23e15770b013c1b2dd",
       "color.black.50": "9bfa4bdabd8c081632c3ae505c6590afae481678",
       "color.black.100": "a8c6f39d17297113defda6c835638b9975a32cfd",
       "color.black.200": "f1e6f4c0a3a54ea3a3660d92a4956d55a63c1dcd",
@@ -344,11 +341,7 @@
       "color.indigo.800": "9922489b59fd650bc3b33f07013aa1862cd5bfb5",
       "color.indigo.900": "5282eb6be3127b16918fb61f9a5a601cb1b313b2",
       "color.indigo.950": "45a8cb04a15cacb6a99e6ca3d0ac8876d0c21f81",
-      "color.indigo.1000": "69d7a9a9e11b83394783fbb71ee80edf04bf4301",
-      "color.brand.purple": "a56d64e7a2a0d576e95154b23131b7ecf194ac97",
-      "color.brand.magenta": "c0d7481f1affa648ade9ba7fb2f82cf872c169ab",
-      "color.brand.red": "00ade21ef146abb1571096d1596f4ac4c469a188",
-      "color.brand.gold": "d64f0c4398fcfb1519d2ca1227d49ee4161c97c1"
+      "color.indigo.1000": "69d7a9a9e11b83394783fbb71ee80edf04bf4301"
     },
     "$figmaModeId": "2174:4",
     "$figmaCollectionId": "VariableCollectionId:2174:1883",
@@ -4040,7 +4033,8 @@
       "components/presence/default": "enabled",
       "components/radio/default": "enabled"
     },
-    "group": "buttercream"
+    "group": "buttercream",
+    "$figmaVariableReferences": {}
   },
   {
     "id": "8ce2636ddfa28393f15c8c625d88fdf544f1109a",
@@ -4062,7 +4056,8 @@
       "components/presence/default": "enabled",
       "components/radio/default": "enabled"
     },
-    "group": "buttercream"
+    "group": "buttercream",
+    "$figmaVariableReferences": {}
   },
   {
     "id": "a84667d23b2d6d2e212bc61de33a41335bc306e4",
@@ -4081,7 +4076,8 @@
       "components/presence/default": "enabled",
       "components/radio/default": "enabled"
     },
-    "group": "plum"
+    "group": "plum",
+    "$figmaVariableReferences": {}
   },
   {
     "id": "2ed1c0606e61735f91af884002f1745695eddc8f",
@@ -4103,7 +4099,8 @@
       "components/presence/default": "enabled",
       "components/radio/default": "enabled"
     },
-    "group": "plum"
+    "group": "plum",
+    "$figmaVariableReferences": {}
   },
   {
     "id": "5d18a4abbd46abb650c49e716b30e11edaffeebb",
@@ -4122,7 +4119,8 @@
       "components/presence/default": "enabled",
       "components/radio/default": "enabled"
     },
-    "group": "botany"
+    "group": "botany",
+    "$figmaVariableReferences": {}
   },
   {
     "id": "28890198f5b66d405b8afe5ec8aecd95abfa7737",
@@ -4144,7 +4142,8 @@
       "components/presence/default": "enabled",
       "components/radio/default": "enabled"
     },
-    "group": "botany"
+    "group": "botany",
+    "$figmaVariableReferences": {}
   },
   {
     "id": "34b708c6ca2660807ac8232678d65871f026ecd0",
@@ -4163,7 +4162,8 @@
       "components/radio/default": "enabled",
       "theme/high-desert/default": "enabled"
     },
-    "group": "high-desert"
+    "group": "high-desert",
+    "$figmaVariableReferences": {}
   },
   {
     "id": "bc47c119fa9e1bf16eb86d620afcecea3f5bec25",
@@ -4185,6 +4185,7 @@
       "components/presence/default": "enabled",
       "components/radio/default": "enabled"
     },
-    "group": "high-desert"
+    "group": "high-desert",
+    "$figmaVariableReferences": {}
   }
 ]

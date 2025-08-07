@@ -655,45 +655,6 @@
         "value": "linear-gradient(135deg, #471571 0%, #551B84 3.08%, #7C229E 14.48%, #9024A4 23.67%, #B02290 35.5%, #D32B86 48.3%, #E92F6F 60.29%, #F6484F 74%, #FB7328 93%, #F3960F 98%, #F3960F 100%)",
         "type": "color"
       }
-    },
-    "neutral": {
-      "white": {
-        "value": "#ffffff",
-        "type": "color",
-        "description": "White color independent of any theme."
-      },
-      "black": {
-        "value": "#000000",
-        "type": "color",
-        "description": "Black color independent of any theme."
-      },
-      "transparent": {
-        "value": "#ffffff00",
-        "type": "color",
-        "description": "Transparent color independent of any theme."
-      }
-    },
-    "brand": {
-      "purple": {
-        "value": "#7c52ff",
-        "type": "color",
-        "description": "Primary brand color."
-      },
-      "magenta": {
-        "value": "#ff1ba4",
-        "type": "color",
-        "description": "Typically used as an accent color."
-      },
-      "red": {
-        "value": "#ff1356",
-        "type": "color",
-        "description": "Typically used as an accent color."
-      },
-      "gold": {
-        "value": "#ff9e0e",
-        "type": "color",
-        "description": "Typically used as an accent color."
-      }
     }
   },
   "shadow": {
