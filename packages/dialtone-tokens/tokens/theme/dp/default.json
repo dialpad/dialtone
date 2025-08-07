@@ -2059,7 +2059,7 @@
     "topbar": {
       "color": {
         "foreground": {
-          "value": "{color.surface.secondary}",
+          "value": "{theme.color.base}",
           "type": "color",
           "$extensions": {
             "studio.tokens": {
