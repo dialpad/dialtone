@@ -236,13 +236,6 @@ export async function run () {
           ],
         },
       },
-      log: {
-        warnings: 'disabled', // 'warn' | 'error' | 'disabled'
-        verbosity: 'verbose', // 'default' | 'silent' | 'verbose'
-        errors: {
-          brokenReferences: 'throw', // 'throw' | 'console'
-        },
-      },
     };
   });
 
