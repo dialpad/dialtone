@@ -8,7 +8,7 @@ The contrast ratio value is noted with the colors below.
 Please use **only** these colors or variations of these colors which pass WCAG 2.1 Level AA contrast ratio requirements.
 
 <dt-notice kind="warning" class="d-wmx100p d-mt24" hideClose>
-  Before using a Color utility, consider <router-link class="d-link d-link--muted" to="/design/colors/#text">semantic colors</router-link>.
+  Before using a Color utility, consider <router-link class="d-link d-link--muted" to="/design/colors/palette/#foreground">semantic colors</router-link>.
 </dt-notice>
 
 ## Usage
