@@ -14,11 +14,7 @@
     "postcss": "^8.4.1"
   },
   "devDependencies": {
-    "@eslint/js": "^9.31.0",
-    "clean-publish": "^3.4.2",
-    "eslint": "^9.31.0",
-    "eslint-plugin-jest": "^28.11.0",
-    "globals": "^16.3.0"
+    "clean-publish": "^3.4.2"
   },
   "peerDependencies": {
     "postcss": "^8.4.1"
