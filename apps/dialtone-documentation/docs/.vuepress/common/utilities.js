@@ -75,7 +75,7 @@ export function extractCSSVariableName (propValue) {
  * @returns {number}
  */
 export function colorSorter (a) {
-  if (/\d{2,4}$/.test(a)) return 1;
+  if (/\d{2,4}$/.test(a) || /chart/.test(a)) return 1;
   return -1;
 }
 
