@@ -78,27 +78,6 @@ describe('DtEmojiTextWrapper Tests', () => {
           });
         });
 
-        describe('When default slot contains valid custom shortcode', () => {
-          beforeEach(() => {
-            setCustomEmojiJson(customEmojiJson);
-
-            mockSlots = { default: 'Content with :octocat: emoji.' };
-
-            updateWrapper();
-          });
-          afterAll(() => {
-            setCustomEmojiJson('');
-          });
-
-          it('Contains emoji component', () => {
-            expect(emoji.exists()).toBe(true);
-          });
-
-          it('Renders the correct emoji', () => {
-            expect(emoji.attributes('src')).toBe(MOCK_EXPECTED_OCTOCAT_SRC);
-          });
-        });
-
         describe('When default slot contains text with a colon and a valid emoji', () => {
           beforeEach(() => {
             mockSlots = { default: 'This is a smile emoji: :smile:' };

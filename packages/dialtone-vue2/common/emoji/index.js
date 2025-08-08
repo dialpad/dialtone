@@ -52,11 +52,9 @@ export function setCustomEmojiJson (json) {
 export function validateCustomEmojiJson (json) {
   const customEmojiProps = ['extension', 'custom'];
   const customEmojiRequiredProps = [
+    'date_added',
+    'image',
     'name',
-    'category',
-    'shortname',
-    'extension',
-    'custom',
   ];
 
   /**

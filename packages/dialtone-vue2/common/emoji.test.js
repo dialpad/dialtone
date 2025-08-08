@@ -20,7 +20,7 @@ describe('Emoji Tests', () => {
 
       it('sets the custom emoji', async () => {
         const emojiData = getEmojiData();
-        expect(typeof emojiData.octocat).toBe('object');
+        expect(typeof emojiData.blinkingguy).toBe('object');
       });
     });
 
