@@ -1,6 +1,6 @@
 ---
 title: Themes
-description: Comprehensive theming system that enables consistent visual experiences across different contexts and user preferences within Dialpad products.
+description: Create diverse themes for projects using our simplified theming infrastructure.
 no_preview: true
 ---
 
@@ -8,35 +8,57 @@ no_preview: true
 
 ## Overview
 
-Dialtone's theming system provides a flexible foundation for creating consistent visual experiences across different contexts, user preferences, and product variations. Our theming approach leverages semantic color tokens to enable seamless switching between light, dark, and custom brand themes while maintaining accessibility and design consistency.
+Dialtone's theming system is a flexible foundation for creating consistent visual experiences. It lets you adapt the user interface to different contexts, preferences, and product variations. Our approach uses semantic color tokens to easily switch between themes and modes.
 
-What we prioritize is **contextual adaptability**, ensuring themes can be applied systematically across components while preserving semantic meaning and visual hierarchy throughout the user experience.
+Currently, the only themeable part of the application is the shell, which consists of the top and left navigation.
+
+### Mode
+
+A mode defines a visual style that applies across all themes. It determines the overall luminosity and contrast of the interface.
+
+- Light: The default mode, with a light background and dark text.
+
+- Dark: A dark background with light text, ideal for low-light environments.
+
+### Theme
+
+A theme represents a specific brand or product identity. It applies a unique set of colors to the shell, and it works in conjunction with a mode.
+
+- dp: The default Dialpad theme.
+
+- tmo: A custom theme for T-Mobile.
+
+- sunflower: A custom theme for the Sunflower brand.
 
 <div class="d-m32"></div>
 
-<div class="d-bgc-brand d-bar8">
- <svg-loader name="themes-overview" />
-</div>
+## Interactive Theme Preview
 
-## Default Themes for Dialpad
+Use the dropdowns below to explore how different themes and modes affect the visual appearance:
 
-Dialpad products ship with carefully crafted default themes that serve different use cases and user preferences. Each theme maintains our core design principles while adapting to specific contexts.
+<themes-demo />
+
+<div class="d-m32"></div>
+
+## Video Overview
+
+<div class="d-m16"></div>
+
+<video controls width="100%" style="max-width: 800px; border-radius: 8px;">
+  <source src="/path/to/your/video.mp4" type="video/mp4">
+  <source src="/path/to/your/video.webm" type="video/webm">
+  Your browser does not support the video tag.
+</video>
+
+<div class="d-m32"></div>
 
 <div class="d-bgc-brand d-bar8"><svg-loader class="d-fl1" name="default-themes" /></div>
 
 <div class="d-m32"></div>
 
-### Light Theme
+### Overriding in Dark Mode
 
-The primary theme optimized for daytime use and well-lit environments. Features high contrast ratios and clear visual hierarchy using our standard color palette.
-
-### Dark Theme  
-
-Designed for low-light environments and extended use sessions. Reduces eye strain while maintaining accessibility standards and visual clarity.
-
-### High Contrast Theme
-
-Enhanced accessibility theme with increased contrast ratios for users with visual impairments or challenging viewing conditions.
+Sometimes, when customizing themes, you might want a different accent color in light mode compared to dark mode. By changing base colors specifically within dark mode (or vice versa), you can create a diverse set of styles for your themes across both modes.
 
 <div class="d-bgc-brand d-bar8"><svg-loader class="d-fl1" name="theme-variations" /></div>
 
@@ -51,7 +73,7 @@ Our theming system is built on a hierarchical token structure that separates **b
 The token hierarchy follows this pattern:
 
 - **Base Palette Tokens**: Core color values (e.g., `--dt-color-purple-500`)
-- **Semantic Tokens**: Purpose-driven mappings (e.g., `--dt-color-foreground-primary`)  
+- **Semantic Tokens**: Purpose-driven mappings (e.g., `--dt-color-foreground-primary`)
 - **Theme Tokens**: Context-specific implementations (e.g., `--dt-theme-light-foreground-primary`)
 
 ### Token Naming Convention
@@ -91,119 +113,6 @@ When implementing themes in your components, always use semantic tokens rather t
 
 <div class="d-m32"></div>
 
-### CSS Implementation
-
-```css
-/* ✅ Correct - Uses theme-aware semantic tokens */
-.my-component {
-  background-color: var(--dt-theme-surface-primary);
-  color: var(--dt-theme-foreground-primary);
-  border-color: var(--dt-theme-border-default);
-}
-
-/* ❌ Incorrect - Uses base tokens that don't adapt to themes */
-.my-component {
-  background-color: var(--dt-color-black-100);
-  color: var(--dt-color-black-900);
-  border-color: var(--dt-color-black-300);
-}
-```
-
-## Customize Theming
-
-For advanced use cases, you can create custom themes by defining your own token mappings while maintaining the semantic structure.
-
-<div class="d-bgc-brand d-bar8"><svg-loader class="d-fl1" name="custom-themes" /></div>
-
-<div class="d-m32"></div>
-
-### Creating Custom Themes
-
-1. **Define your color palette**: Start with base color tokens that align with your brand
-2. **Map semantic meanings**: Assign base colors to semantic roles (primary, secondary, etc.)
-3. **Test accessibility**: Ensure contrast ratios meet WCAG guidelines
-4. **Validate consistency**: Check that your theme works across all component states
-
-### Custom Theme Example
-
-```css
-/* Custom brand theme */
-:root[data-theme="custom-brand"] {
-  --dt-theme-surface-primary: var(--dt-color-blue-50);
-  --dt-theme-surface-secondary: var(--dt-color-blue-100);
-  --dt-theme-foreground-primary: var(--dt-color-blue-900);
-  --dt-theme-foreground-secondary: var(--dt-color-blue-700);
-  --dt-theme-accent-default: var(--dt-color-gold-500);
-  --dt-theme-accent-hover: var(--dt-color-gold-600);
-}
-```
-
-## Apply Themes
-
-Themes are applied at the application level using data attributes or CSS classes, allowing for dynamic switching and scoped theme application.
-
-<div class="d-bgc-brand d-bar8"><svg-loader class="d-fl1" name="apply-themes" /></div>
-
-<div class="d-m32"></div>
-
-### Theme Application Methods
-
-#### Data Attribute Method (Recommended)
-
-```html
-<html data-theme="dark">
-  <!-- All child elements inherit dark theme -->
-</html>
-```
-
-#### CSS Class Method
-
-```html
-<div class="dt-theme-light">
-  <!-- Scoped light theme application -->
-</div>
-```
-
-### JavaScript Theme Switching
-
-```javascript
-// Switch to dark theme
-document.documentElement.setAttribute('data-theme', 'dark');
-
-// Switch to light theme  
-document.documentElement.setAttribute('data-theme', 'light');
-
-// Switch to custom theme
-document.documentElement.setAttribute('data-theme', 'custom-brand');
-```
-
-### Responsive Theme Application
-
-Themes can be applied responsively based on user preferences or system settings:
-
-```css
-/* Respect user's system preference */
-@media (prefers-color-scheme: dark) {
-  :root:not([data-theme]) {
-    /* Apply dark theme tokens */
-  }
-}
-
-@media (prefers-color-scheme: light) {
-  :root:not([data-theme]) {
-    /* Apply light theme tokens */
-  }
-}
-```
-
-<div class="d-m32"></div>
-
-## Best Practices
-
-- **Always use semantic tokens** when building components to ensure theme compatibility
-- **Test themes across all component states** including hover, focus, and disabled states  
-- **Maintain accessibility standards** by verifying contrast ratios in all theme variations
-- **Document custom themes** with clear usage guidelines and token mappings
-- **Consider user preferences** by supporting system-level theme detection where appropriate
-
-Embrace our theming system to create adaptable, accessible, and consistent experiences that can evolve with user needs and brand requirements.
+<script setup>
+import ThemesDemo from '@baseComponents/ThemesDemo.vue';
+</script>
