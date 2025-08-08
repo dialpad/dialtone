@@ -1,3 +1,38 @@
+## [3.187.3](https://github.com/dialpad/dialtone/compare/dialtone-vue3/v3.187.2...dialtone-vue3/v3.187.3) (2025-08-05)
+
+
+### Bug Fixes
+
+* **Tooltip:** DLT-2644 fix z-index ([#857](https://github.com/dialpad/dialtone/issues/857)) ([840c1d9](https://github.com/dialpad/dialtone/commit/840c1d9f58878772c2c64161cf640d4da970aca6))
+
+## [3.187.2](https://github.com/dialpad/dialtone/compare/dialtone-vue3/v3.187.1...dialtone-vue3/v3.187.2) (2025-08-04)
+
+
+### Bug Fixes
+
+* **Localization:** NO-JIRA add validation ([#856](https://github.com/dialpad/dialtone/issues/856)) ([7bc06f0](https://github.com/dialpad/dialtone/commit/7bc06f0344085a764fdc53940116f6a5e7a7cb70))
+
+## [3.187.1](https://github.com/dialpad/dialtone/compare/dialtone-vue3/v3.187.0...dialtone-vue3/v3.187.1) (2025-08-03)
+
+
+### Bug Fixes
+
+* **Tab:** DP-148500 tabs not loading instantly ([#849](https://github.com/dialpad/dialtone/issues/849)) ([623c014](https://github.com/dialpad/dialtone/commit/623c0144de9b2072dda17e94f1346ee1cbf61b62))
+
+# [3.187.0](https://github.com/dialpad/dialtone/compare/dialtone-vue3/v3.186.1...dialtone-vue3/v3.187.0) (2025-07-31)
+
+
+### Features
+
+* DLT-2173 add test coverage ([#836](https://github.com/dialpad/dialtone/issues/836)) ([563dd1d](https://github.com/dialpad/dialtone/commit/563dd1dc98e5feacdff62fad1125ecf227fef57a))
+
+## [3.186.1](https://github.com/dialpad/dialtone/compare/dialtone-vue3/v3.186.0...dialtone-vue3/v3.186.1) (2025-07-29)
+
+
+### Code Refactoring
+
+* **Localization:** DLT-2668 sync vue3 and vue2 ([#835](https://github.com/dialpad/dialtone/issues/835)) ([ad3665a](https://github.com/dialpad/dialtone/commit/ad3665aeef763f37647fada6dbb31c29bf19c8ad))
+
 # [3.186.0](https://github.com/dialpad/dialtone/compare/dialtone-vue3/v3.185.4...dialtone-vue3/v3.186.0) (2025-07-23)
 
 

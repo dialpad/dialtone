@@ -103,6 +103,14 @@
       "dependsOn": [ "dialtone-icons:build" ],
       "options": { "script": "test" }
     },
+    "test:coverage": {
+      "executor": "nx:run-commands",
+      "dependsOn": [ "dialtone-icons:build" ],
+      "options": {
+        "cwd": "{projectRoot}",
+        "command": "pnpm exec vitest run --coverage"
+      }
+    },
     "test:a11y": {
       "executor": "nx:run-commands",
       "dependsOn": [ "build-storybook" ],

@@ -116,8 +116,8 @@ importers:
         specifier: 9.0.1
         version: 9.0.1
       linkifyjs:
-        specifier: 4.2.0
-        version: 4.2.0
+        specifier: 4.3.2
+        version: 4.3.2
       overlayscrollbars:
         specifier: 2.10.0
         version: 2.10.0
@@ -200,6 +200,9 @@ importers:
       '@vitejs/plugin-vue2':
         specifier: ^2.3.3
         version: 2.3.3(vite@5.4.19(@types/node@20.19.9)(less@4.2.0)(sass@1.69.5)(sugarss@2.0.0)(terser@5.43.1))(vue@3.5.18(typescript@5.8.3))
+      '@vitest/coverage-v8':
+        specifier: ^1.0.0
+        version: 1.6.1(vitest@1.6.1(@types/node@20.19.9)(jsdom@24.1.3)(less@4.2.0)(sass@1.69.5)(sugarss@2.0.0)(terser@5.43.1))
       '@vue/tsconfig':
         specifier: ^0.4.0
         version: 0.4.0
@@ -310,7 +313,7 @@ importers:
         version: 4.1.5
       null-loader:
         specifier: ^4.0.1
-        version: 4.0.1(webpack@5.95.0(@swc/core@1.13.2)(esbuild@0.18.20))
+        version: 4.0.1(webpack@5.95.0(@swc/core@1.13.2))
       nx:
         specifier: 19.8.0
         version: 19.8.0(@swc/core@1.13.2)
@@ -413,6 +416,9 @@ importers:
       '@dialpad/dialtone-vue':
         specifier: workspace:^3
         version: link:../../packages/dialtone-vue3
+      '@dialpad/i18n':
+        specifier: 1.16.1
+        version: 1.16.1(@vue/composition-api@1.7.2(vue@3.4.15(typescript@5.8.3)))
       '@dialpad/postcss-responsive-variations':
         specifier: 1.1.5
         version: 1.1.5(postcss@8.5.3)
@@ -536,7 +542,7 @@ importers:
     devDependencies:
       '@vue/cli-plugin-unit-mocha':
         specifier: ^5.0.8
-        version: 5.0.8(@vue/cli-service@5.0.8(@swc/core@1.13.2)(@vue/compiler-sfc@3.5.18)(ejs@3.1.10)(encoding@0.1.13)(esbuild@0.18.20)(handlebars@4.7.8)(lodash@4.17.21)(nunjucks@3.2.4(chokidar@3.6.0))(pug@3.0.3)(react-dom@16.14.0(react@16.14.0))(react@16.14.0)(twig@1.17.1)(underscore@1.13.7)(vue-template-compiler@2.7.16(vue@3.4.15(typescript@5.8.3)))(vue@3.4.15(typescript@5.8.3))(webpack-sources@3.3.3))(encoding@0.1.13)(webpack@5.95.0(@swc/core@1.13.2)(esbuild@0.18.20))
+        version: 5.0.8(@vue/cli-service@5.0.8(@swc/core@1.13.2)(@vue/compiler-sfc@3.5.18)(ejs@3.1.10)(encoding@0.1.13)(handlebars@4.7.8)(lodash@4.17.21)(nunjucks@3.2.4(chokidar@3.6.0))(pug@3.0.3)(react-dom@16.14.0(react@16.14.0))(react@16.14.0)(twig@1.17.1)(underscore@1.13.7)(vue-template-compiler@2.7.16(vue@3.4.15(typescript@5.8.3)))(vue@3.4.15(typescript@5.8.3))(webpack-sources@3.3.3))(encoding@0.1.13)(webpack@5.95.0(@swc/core@1.13.2))
       chai:
         specifier: ^4.3.6
         version: 4.3.10
@@ -788,8 +794,8 @@ importers:
         specifier: 9.0.1
         version: 9.0.1
       linkifyjs:
-        specifier: 4.2.0
-        version: 4.2.0
+        specifier: 4.3.2
+        version: 4.3.2
       overlayscrollbars:
         specifier: 2.10.0
         version: 2.10.0
@@ -942,8 +948,8 @@ importers:
         specifier: 9.0.1
         version: 9.0.1
       linkifyjs:
-        specifier: 4.2.0
-        version: 4.2.0
+        specifier: 4.3.2
+        version: 4.3.2
       overlayscrollbars:
         specifier: 2.10.0
         version: 2.10.0
@@ -1968,6 +1974,9 @@ packages:
     resolution: {integrity: sha512-VwETc0b8IYGWuOnYq5Y+w3LjQkc1rpcXODykQuYc4YRv9CRfm/BdD3NL+JA5DKXUX0i27yUw5+XQWwixS6wkIQ==, tarball: https://npm.pkg.github.com/download/@dialpad/i18n-vue2/1.2.0/e5c047c76d946359be73eabb30578324f91e7318}
     peerDependencies:
       vue: 2.6.14
+
+  '@dialpad/i18n@1.16.1':
+    resolution: {integrity: sha512-souIaYGOw0tC0rGwEISTo/IuARBtISgpEnXQhOYclzJNJSH8BjZY2yTZnZ+ybh97DIB1RopGHgLBJlZCn4/zCg==, tarball: https://npm.pkg.github.com/download/@dialpad/i18n/1.16.1/35d85833ee3ff1a92c812da3668259b68f0b204c}
 
   '@dialpad/i18n@1.17.0-alpha.0':
     resolution: {integrity: sha512-21eFQMJ9Y69Jdu5Ybz0e/tJ5M4yRueUFnDbFGDBjQXp3fmbdiCc2kCTT74SkyZutkIdEIj4LLV6zbbNm15YPlQ==, tarball: https://npm.pkg.github.com/download/@dialpad/i18n/1.17.0-alpha.0/f379df4c07054ad3f894e12558fc2ddd80869006}
@@ -5477,6 +5486,11 @@ packages:
     peerDependencies:
       vite: ^5.0.0 || ^6.0.0
       vue: ^3.2.25
+
+  '@vitest/coverage-v8@1.6.1':
+    resolution: {integrity: sha512-6YeRZwuO4oTGKxD3bijok756oktHSIm3eczVVzNe3scqzuhLwltIF3S9ZL/vwOVIpURmU6SnZhziXXAfw8/Qlw==}
+    peerDependencies:
+      vitest: 1.6.1
 
   '@vitest/expect@1.6.1':
     resolution: {integrity: sha512-jXL+9+ZNIJKruofqXuuTClf44eSpcHlgj3CiuNihUF3Ioujtmc0zIa3UJOW5RjDK1YLBJZnWBlPuqhYycLioog==}
@@ -10763,6 +10777,10 @@ packages:
     resolution: {integrity: sha512-n3s8EwkdFIJCG3BPKBYvskgXGoy88ARzvegkitk60NxRdwltLOTaH7CUiMRXvwYorl0Q712iEjcWB+fK/MrWVw==}
     engines: {node: '>=10'}
 
+  istanbul-lib-source-maps@5.0.6:
+    resolution: {integrity: sha512-yg2d+Em4KizZC5niWhQaIomgf5WlL4vOOjZ5xGCmF8SnPE/mDWWXgvRExdcpCgh9lLRRa1/fSYp2ymmbJ1pI+A==}
+    engines: {node: '>=10'}
+
   istanbul-reports@3.1.7:
     resolution: {integrity: sha512-BewmUXImeuRk2YY0PVbxgKAysvhRPUQE0h5QRM++nVWyubKGV0l8qQ5op8+B2DOmwSe63Jivj0BjkPQVf8fP5g==}
     engines: {node: '>=8'}
@@ -11279,8 +11297,8 @@ packages:
   linkify-it@5.0.0:
     resolution: {integrity: sha512-5aHCbzQRADcdP+ATqnDuhhJ/MRIqDkZX5pyjFHRRysS8vZ5AbqGEoFIb6pYHPZ+L/OC2Lc+xT8uHVVR5CAK/wQ==}
 
-  linkifyjs@4.2.0:
-    resolution: {integrity: sha512-pCj3PrQyATaoTYKHrgWRF3SJwsm61udVh+vuls/Rl6SptiDhgE7ziUIudAedRY9QEfynmM7/RmLEfPUyw1HPCw==}
+  linkifyjs@4.3.2:
+    resolution: {integrity: sha512-NT1CJtq3hHIreOianA8aSXn6Cw0JzYOuDQbOrSPe7gqFnCpKP++MQe3ODgO3oh2GJFORkAAdqredOa60z63GbA==}
 
   lint-staged@15.5.2:
     resolution: {integrity: sha512-YUSOLq9VeRNAo/CTaVmhGDKG+LBtA8KF1X4K5+ykMSwWST1vDxJRB2kv2COgLb1fvpCo+A/y9A0G0znNVmdx4w==}
@@ -11527,6 +11545,9 @@ packages:
 
   magic-string@0.30.17:
     resolution: {integrity: sha512-sNPKHvyjVf7gyjwS4xGTaW/mCnF8wnjtifKBEhxfZ7E/S8tQ0rssrwGNn6q8JH/ohItJfSQp9mBtQYuTlH5QnA==}
+
+  magicast@0.3.5:
+    resolution: {integrity: sha512-L0WhttDl+2BOsybvEOLK7fW3UA0OQ0IQ2d6Zl2x/a6vVRs3bAY0ECOSHHeL5jD+SbOpOCUEi0y1DgHEn9Qn1AQ==}
 
   make-dir@2.1.0:
     resolution: {integrity: sha512-LS9X+dc8KLxXCb8dni79fLIIUA5VyZoyjSMCwTluaXA0o27cCK0bhXkpgw+sTXVpPy/lSO57ilRixqk0vDmtRA==}
@@ -18344,6 +18365,13 @@ snapshots:
       '@vue/composition-api': 1.7.2(vue@2.7.16)
       vue: 2.7.16
 
+  '@dialpad/i18n@1.16.1(@vue/composition-api@1.7.2(vue@3.4.15(typescript@5.8.3)))':
+    dependencies:
+      '@dialpad/i18n-services': 1.5.0(@vue/composition-api@1.7.2(vue@3.4.15(typescript@5.8.3)))(vue@3.3.4)
+      vue: 3.3.4
+    transitivePeerDependencies:
+      - '@vue/composition-api'
+
   '@dialpad/i18n@1.17.0-alpha.0(@vue/composition-api@1.7.2(vue@3.4.15(typescript@5.8.3)))':
     dependencies:
       '@dialpad/i18n-services': 1.5.0(@vue/composition-api@1.7.2(vue@3.4.15(typescript@5.8.3)))(vue@3.3.4)
@@ -21080,13 +21108,13 @@ snapshots:
     dependencies:
       '@sinonjs/commons': 3.0.1
 
-  '@soda/friendly-errors-webpack-plugin@1.8.1(webpack@5.95.0(@swc/core@1.13.2)(esbuild@0.18.20))':
+  '@soda/friendly-errors-webpack-plugin@1.8.1(webpack@5.95.0(@swc/core@1.13.2))':
     dependencies:
       chalk: 3.0.0
       error-stack-parser: 2.1.4
       string-width: 4.2.3
       strip-ansi: 6.0.1
-      webpack: 5.95.0(@swc/core@1.13.2)(esbuild@0.18.20)
+      webpack: 5.95.0(@swc/core@1.13.2)
 
   '@soda/get-current-script@1.0.2': {}
 
@@ -21937,7 +21965,7 @@ snapshots:
     dependencies:
       '@tiptap/core': 2.12.0(@tiptap/pm@2.12.0)
       '@tiptap/pm': 2.12.0
-      linkifyjs: 4.2.0
+      linkifyjs: 4.3.2
 
   '@tiptap/extension-list-item@2.12.0(@tiptap/core@2.12.0(@tiptap/pm@2.12.0))':
     dependencies:
@@ -22647,6 +22675,25 @@ snapshots:
       vite: 5.4.19(@types/node@20.19.9)(less@4.2.0)(sass@1.69.5)(sugarss@2.0.0)(terser@5.43.1)
       vue: 3.5.18(typescript@5.8.3)
 
+  '@vitest/coverage-v8@1.6.1(vitest@1.6.1(@types/node@20.19.9)(jsdom@24.1.3)(less@4.2.0)(sass@1.69.5)(sugarss@2.0.0)(terser@5.43.1))':
+    dependencies:
+      '@ampproject/remapping': 2.3.0
+      '@bcoe/v8-coverage': 0.2.3
+      debug: 4.4.1
+      istanbul-lib-coverage: 3.2.2
+      istanbul-lib-report: 3.0.1
+      istanbul-lib-source-maps: 5.0.6
+      istanbul-reports: 3.1.7
+      magic-string: 0.30.17
+      magicast: 0.3.5
+      picocolors: 1.1.1
+      std-env: 3.9.0
+      strip-literal: 2.1.1
+      test-exclude: 6.0.0
+      vitest: 1.6.1(@types/node@20.19.9)(jsdom@24.1.3)(less@4.2.0)(sass@1.69.5)(sugarss@2.0.0)(terser@5.43.1)
+    transitivePeerDependencies:
+      - supports-color
+
   '@vitest/expect@1.6.1':
     dependencies:
       '@vitest/spy': 1.6.1
@@ -22730,21 +22777,21 @@ snapshots:
 
   '@vue/cli-overlay@5.0.8': {}
 
-  '@vue/cli-plugin-router@5.0.8(@vue/cli-service@5.0.8(@swc/core@1.13.2)(@vue/compiler-sfc@3.5.18)(ejs@3.1.10)(encoding@0.1.13)(esbuild@0.18.20)(handlebars@4.7.8)(lodash@4.17.21)(nunjucks@3.2.4(chokidar@3.6.0))(pug@3.0.3)(react-dom@16.14.0(react@16.14.0))(react@16.14.0)(twig@1.17.1)(underscore@1.13.7)(vue-template-compiler@2.7.16(vue@3.4.15(typescript@5.8.3)))(vue@3.4.15(typescript@5.8.3))(webpack-sources@3.3.3))(encoding@0.1.13)':
+  '@vue/cli-plugin-router@5.0.8(@vue/cli-service@5.0.8(@swc/core@1.13.2)(@vue/compiler-sfc@3.5.18)(ejs@3.1.10)(encoding@0.1.13)(handlebars@4.7.8)(lodash@4.17.21)(nunjucks@3.2.4(chokidar@3.6.0))(pug@3.0.3)(react-dom@16.14.0(react@16.14.0))(react@16.14.0)(twig@1.17.1)(underscore@1.13.7)(vue-template-compiler@2.7.16(vue@3.4.15(typescript@5.8.3)))(vue@3.4.15(typescript@5.8.3))(webpack-sources@3.3.3))(encoding@0.1.13)':
     dependencies:
-      '@vue/cli-service': 5.0.8(@swc/core@1.13.2)(@vue/compiler-sfc@3.5.18)(ejs@3.1.10)(encoding@0.1.13)(esbuild@0.18.20)(handlebars@4.7.8)(lodash@4.17.21)(nunjucks@3.2.4(chokidar@3.6.0))(pug@3.0.3)(react-dom@16.14.0(react@16.14.0))(react@16.14.0)(twig@1.17.1)(underscore@1.13.7)(vue-template-compiler@2.7.16(vue@3.4.15(typescript@5.8.3)))(vue@3.4.15(typescript@5.8.3))(webpack-sources@3.3.3)
+      '@vue/cli-service': 5.0.8(@swc/core@1.13.2)(@vue/compiler-sfc@3.5.18)(ejs@3.1.10)(encoding@0.1.13)(handlebars@4.7.8)(lodash@4.17.21)(nunjucks@3.2.4(chokidar@3.6.0))(pug@3.0.3)(react-dom@16.14.0(react@16.14.0))(react@16.14.0)(twig@1.17.1)(underscore@1.13.7)(vue-template-compiler@2.7.16(vue@3.4.15(typescript@5.8.3)))(vue@3.4.15(typescript@5.8.3))(webpack-sources@3.3.3)
       '@vue/cli-shared-utils': 5.0.8(encoding@0.1.13)
     transitivePeerDependencies:
       - encoding
 
-  '@vue/cli-plugin-unit-mocha@5.0.8(@vue/cli-service@5.0.8(@swc/core@1.13.2)(@vue/compiler-sfc@3.5.18)(ejs@3.1.10)(encoding@0.1.13)(esbuild@0.18.20)(handlebars@4.7.8)(lodash@4.17.21)(nunjucks@3.2.4(chokidar@3.6.0))(pug@3.0.3)(react-dom@16.14.0(react@16.14.0))(react@16.14.0)(twig@1.17.1)(underscore@1.13.7)(vue-template-compiler@2.7.16(vue@3.4.15(typescript@5.8.3)))(vue@3.4.15(typescript@5.8.3))(webpack-sources@3.3.3))(encoding@0.1.13)(webpack@5.95.0(@swc/core@1.13.2)(esbuild@0.18.20))':
+  '@vue/cli-plugin-unit-mocha@5.0.8(@vue/cli-service@5.0.8(@swc/core@1.13.2)(@vue/compiler-sfc@3.5.18)(ejs@3.1.10)(encoding@0.1.13)(handlebars@4.7.8)(lodash@4.17.21)(nunjucks@3.2.4(chokidar@3.6.0))(pug@3.0.3)(react-dom@16.14.0(react@16.14.0))(react@16.14.0)(twig@1.17.1)(underscore@1.13.7)(vue-template-compiler@2.7.16(vue@3.4.15(typescript@5.8.3)))(vue@3.4.15(typescript@5.8.3))(webpack-sources@3.3.3))(encoding@0.1.13)(webpack@5.95.0(@swc/core@1.13.2))':
     dependencies:
-      '@vue/cli-service': 5.0.8(@swc/core@1.13.2)(@vue/compiler-sfc@3.5.18)(ejs@3.1.10)(encoding@0.1.13)(esbuild@0.18.20)(handlebars@4.7.8)(lodash@4.17.21)(nunjucks@3.2.4(chokidar@3.6.0))(pug@3.0.3)(react-dom@16.14.0(react@16.14.0))(react@16.14.0)(twig@1.17.1)(underscore@1.13.7)(vue-template-compiler@2.7.16(vue@3.4.15(typescript@5.8.3)))(vue@3.4.15(typescript@5.8.3))(webpack-sources@3.3.3)
+      '@vue/cli-service': 5.0.8(@swc/core@1.13.2)(@vue/compiler-sfc@3.5.18)(ejs@3.1.10)(encoding@0.1.13)(handlebars@4.7.8)(lodash@4.17.21)(nunjucks@3.2.4(chokidar@3.6.0))(pug@3.0.3)(react-dom@16.14.0(react@16.14.0))(react@16.14.0)(twig@1.17.1)(underscore@1.13.7)(vue-template-compiler@2.7.16(vue@3.4.15(typescript@5.8.3)))(vue@3.4.15(typescript@5.8.3))(webpack-sources@3.3.3)
       '@vue/cli-shared-utils': 5.0.8(encoding@0.1.13)
       jsdom: 18.1.1
       jsdom-global: 3.0.2(jsdom@18.1.1)
       mocha: 8.4.0
-      mochapack: 2.1.4(mocha@8.4.0)(webpack@5.95.0(@swc/core@1.13.2)(esbuild@0.18.20))
+      mochapack: 2.1.4(mocha@8.4.0)(webpack@5.95.0(@swc/core@1.13.2))
     transitivePeerDependencies:
       - bufferutil
       - canvas
@@ -22753,22 +22800,22 @@ snapshots:
       - utf-8-validate
       - webpack
 
-  '@vue/cli-plugin-vuex@5.0.8(@vue/cli-service@5.0.8(@swc/core@1.13.2)(@vue/compiler-sfc@3.5.18)(ejs@3.1.10)(encoding@0.1.13)(esbuild@0.18.20)(handlebars@4.7.8)(lodash@4.17.21)(nunjucks@3.2.4(chokidar@3.6.0))(pug@3.0.3)(react-dom@16.14.0(react@16.14.0))(react@16.14.0)(twig@1.17.1)(underscore@1.13.7)(vue-template-compiler@2.7.16(vue@3.4.15(typescript@5.8.3)))(vue@3.4.15(typescript@5.8.3))(webpack-sources@3.3.3))':
+  '@vue/cli-plugin-vuex@5.0.8(@vue/cli-service@5.0.8(@swc/core@1.13.2)(@vue/compiler-sfc@3.5.18)(ejs@3.1.10)(encoding@0.1.13)(handlebars@4.7.8)(lodash@4.17.21)(nunjucks@3.2.4(chokidar@3.6.0))(pug@3.0.3)(react-dom@16.14.0(react@16.14.0))(react@16.14.0)(twig@1.17.1)(underscore@1.13.7)(vue-template-compiler@2.7.16(vue@3.4.15(typescript@5.8.3)))(vue@3.4.15(typescript@5.8.3))(webpack-sources@3.3.3))':
     dependencies:
-      '@vue/cli-service': 5.0.8(@swc/core@1.13.2)(@vue/compiler-sfc@3.5.18)(ejs@3.1.10)(encoding@0.1.13)(esbuild@0.18.20)(handlebars@4.7.8)(lodash@4.17.21)(nunjucks@3.2.4(chokidar@3.6.0))(pug@3.0.3)(react-dom@16.14.0(react@16.14.0))(react@16.14.0)(twig@1.17.1)(underscore@1.13.7)(vue-template-compiler@2.7.16(vue@3.4.15(typescript@5.8.3)))(vue@3.4.15(typescript@5.8.3))(webpack-sources@3.3.3)
+      '@vue/cli-service': 5.0.8(@swc/core@1.13.2)(@vue/compiler-sfc@3.5.18)(ejs@3.1.10)(encoding@0.1.13)(handlebars@4.7.8)(lodash@4.17.21)(nunjucks@3.2.4(chokidar@3.6.0))(pug@3.0.3)(react-dom@16.14.0(react@16.14.0))(react@16.14.0)(twig@1.17.1)(underscore@1.13.7)(vue-template-compiler@2.7.16(vue@3.4.15(typescript@5.8.3)))(vue@3.4.15(typescript@5.8.3))(webpack-sources@3.3.3)
 
-  '@vue/cli-service@5.0.8(@swc/core@1.13.2)(@vue/compiler-sfc@3.5.18)(ejs@3.1.10)(encoding@0.1.13)(esbuild@0.18.20)(handlebars@4.7.8)(lodash@4.17.21)(nunjucks@3.2.4(chokidar@3.6.0))(pug@3.0.3)(react-dom@16.14.0(react@16.14.0))(react@16.14.0)(twig@1.17.1)(underscore@1.13.7)(vue-template-compiler@2.7.16(vue@3.4.15(typescript@5.8.3)))(vue@3.4.15(typescript@5.8.3))(webpack-sources@3.3.3)':
+  '@vue/cli-service@5.0.8(@swc/core@1.13.2)(@vue/compiler-sfc@3.5.18)(ejs@3.1.10)(encoding@0.1.13)(handlebars@4.7.8)(lodash@4.17.21)(nunjucks@3.2.4(chokidar@3.6.0))(pug@3.0.3)(react-dom@16.14.0(react@16.14.0))(react@16.14.0)(twig@1.17.1)(underscore@1.13.7)(vue-template-compiler@2.7.16(vue@3.4.15(typescript@5.8.3)))(vue@3.4.15(typescript@5.8.3))(webpack-sources@3.3.3)':
     dependencies:
       '@babel/helper-compilation-targets': 7.27.2
-      '@soda/friendly-errors-webpack-plugin': 1.8.1(webpack@5.95.0(@swc/core@1.13.2)(esbuild@0.18.20))
+      '@soda/friendly-errors-webpack-plugin': 1.8.1(webpack@5.95.0(@swc/core@1.13.2))
       '@soda/get-current-script': 1.0.2
       '@types/minimist': 1.2.5
       '@vue/cli-overlay': 5.0.8
-      '@vue/cli-plugin-router': 5.0.8(@vue/cli-service@5.0.8(@swc/core@1.13.2)(@vue/compiler-sfc@3.5.18)(ejs@3.1.10)(encoding@0.1.13)(esbuild@0.18.20)(handlebars@4.7.8)(lodash@4.17.21)(nunjucks@3.2.4(chokidar@3.6.0))(pug@3.0.3)(react-dom@16.14.0(react@16.14.0))(react@16.14.0)(twig@1.17.1)(underscore@1.13.7)(vue-template-compiler@2.7.16(vue@3.4.15(typescript@5.8.3)))(vue@3.4.15(typescript@5.8.3))(webpack-sources@3.3.3))(encoding@0.1.13)
-      '@vue/cli-plugin-vuex': 5.0.8(@vue/cli-service@5.0.8(@swc/core@1.13.2)(@vue/compiler-sfc@3.5.18)(ejs@3.1.10)(encoding@0.1.13)(esbuild@0.18.20)(handlebars@4.7.8)(lodash@4.17.21)(nunjucks@3.2.4(chokidar@3.6.0))(pug@3.0.3)(react-dom@16.14.0(react@16.14.0))(react@16.14.0)(twig@1.17.1)(underscore@1.13.7)(vue-template-compiler@2.7.16(vue@3.4.15(typescript@5.8.3)))(vue@3.4.15(typescript@5.8.3))(webpack-sources@3.3.3))
+      '@vue/cli-plugin-router': 5.0.8(@vue/cli-service@5.0.8(@swc/core@1.13.2)(@vue/compiler-sfc@3.5.18)(ejs@3.1.10)(encoding@0.1.13)(handlebars@4.7.8)(lodash@4.17.21)(nunjucks@3.2.4(chokidar@3.6.0))(pug@3.0.3)(react-dom@16.14.0(react@16.14.0))(react@16.14.0)(twig@1.17.1)(underscore@1.13.7)(vue-template-compiler@2.7.16(vue@3.4.15(typescript@5.8.3)))(vue@3.4.15(typescript@5.8.3))(webpack-sources@3.3.3))(encoding@0.1.13)
+      '@vue/cli-plugin-vuex': 5.0.8(@vue/cli-service@5.0.8(@swc/core@1.13.2)(@vue/compiler-sfc@3.5.18)(ejs@3.1.10)(encoding@0.1.13)(handlebars@4.7.8)(lodash@4.17.21)(nunjucks@3.2.4(chokidar@3.6.0))(pug@3.0.3)(react-dom@16.14.0(react@16.14.0))(react@16.14.0)(twig@1.17.1)(underscore@1.13.7)(vue-template-compiler@2.7.16(vue@3.4.15(typescript@5.8.3)))(vue@3.4.15(typescript@5.8.3))(webpack-sources@3.3.3))
       '@vue/cli-shared-utils': 5.0.8(encoding@0.1.13)
       '@vue/component-compiler-utils': 3.3.0(ejs@3.1.10)(handlebars@4.7.8)(lodash@4.17.21)(nunjucks@3.2.4(chokidar@3.6.0))(pug@3.0.3)(react-dom@16.14.0(react@16.14.0))(react@16.14.0)(twig@1.17.1)(underscore@1.13.7)
-      '@vue/vue-loader-v15': vue-loader@15.11.1(@vue/compiler-sfc@3.5.18)(css-loader@6.11.0(webpack@5.95.0(@swc/core@1.13.2)(esbuild@0.18.20)))(ejs@3.1.10)(handlebars@4.7.8)(lodash@4.17.21)(nunjucks@3.2.4(chokidar@3.6.0))(pug@3.0.3)(react-dom@16.14.0(react@16.14.0))(react@16.14.0)(twig@1.17.1)(underscore@1.13.7)(vue-template-compiler@2.7.16(vue@3.4.15(typescript@5.8.3)))(webpack@5.95.0(@swc/core@1.13.2)(esbuild@0.18.20))
+      '@vue/vue-loader-v15': vue-loader@15.11.1(@vue/compiler-sfc@3.5.18)(css-loader@6.11.0(webpack@5.95.0(@swc/core@1.13.2)))(ejs@3.1.10)(handlebars@4.7.8)(lodash@4.17.21)(nunjucks@3.2.4(chokidar@3.6.0))(pug@3.0.3)(react-dom@16.14.0(react@16.14.0))(react@16.14.0)(twig@1.17.1)(underscore@1.13.7)(vue-template-compiler@2.7.16(vue@3.4.15(typescript@5.8.3)))(webpack@5.95.0(@swc/core@1.13.2))
       '@vue/web-component-wrapper': 1.3.0
       acorn: 8.15.0
       acorn-walk: 8.3.4
@@ -22779,9 +22826,9 @@ snapshots:
       cli-highlight: 2.1.11
       clipboardy: 2.3.0
       cliui: 7.0.4
-      copy-webpack-plugin: 9.1.0(webpack@5.95.0(@swc/core@1.13.2)(esbuild@0.18.20))
-      css-loader: 6.11.0(webpack@5.95.0(@swc/core@1.13.2)(esbuild@0.18.20))
-      css-minimizer-webpack-plugin: 3.4.1(esbuild@0.18.20)(webpack@5.95.0(@swc/core@1.13.2)(esbuild@0.18.20))
+      copy-webpack-plugin: 9.1.0(webpack@5.95.0(@swc/core@1.13.2))
+      css-loader: 6.11.0(webpack@5.95.0(@swc/core@1.13.2))
+      css-minimizer-webpack-plugin: 3.4.1(webpack@5.95.0(@swc/core@1.13.2))
       cssnano: 5.1.15(postcss@8.5.3)
       debug: 4.4.1
       default-gateway: 6.0.3
@@ -22790,27 +22837,27 @@ snapshots:
       fs-extra: 9.1.0
       globby: 11.1.0
       hash-sum: 2.0.0
-      html-webpack-plugin: 5.6.3(webpack@5.95.0(@swc/core@1.13.2)(esbuild@0.18.20))
+      html-webpack-plugin: 5.6.3(webpack@5.95.0(@swc/core@1.13.2))
       is-file-esm: 1.0.0
       launch-editor-middleware: 2.10.0
       lodash.defaultsdeep: 4.6.1
       lodash.mapvalues: 4.6.0
-      mini-css-extract-plugin: 2.9.2(webpack@5.95.0(@swc/core@1.13.2)(esbuild@0.18.20))
+      mini-css-extract-plugin: 2.9.2(webpack@5.95.0(@swc/core@1.13.2))
       minimist: 1.2.8
       module-alias: 2.2.3
       portfinder: 1.0.37
       postcss: 8.5.3
-      postcss-loader: 6.2.1(postcss@8.5.3)(webpack@5.95.0(@swc/core@1.13.2)(esbuild@0.18.20))
-      progress-webpack-plugin: 1.0.16(webpack@5.95.0(@swc/core@1.13.2)(esbuild@0.18.20))
+      postcss-loader: 6.2.1(postcss@8.5.3)(webpack@5.95.0(@swc/core@1.13.2))
+      progress-webpack-plugin: 1.0.16(webpack@5.95.0(@swc/core@1.13.2))
       ssri: 8.0.1
-      terser-webpack-plugin: 5.3.14(@swc/core@1.13.2)(esbuild@0.18.20)(webpack@5.95.0(@swc/core@1.13.2)(esbuild@0.18.20))
-      thread-loader: 3.0.4(webpack@5.95.0(@swc/core@1.13.2)(esbuild@0.18.20))
-      vue-loader: 17.4.2(@vue/compiler-sfc@3.5.18)(vue@3.4.15(typescript@5.8.3))(webpack@5.95.0(@swc/core@1.13.2)(esbuild@0.18.20))
+      terser-webpack-plugin: 5.3.14(@swc/core@1.13.2)(webpack@5.95.0(@swc/core@1.13.2))
+      thread-loader: 3.0.4(webpack@5.95.0(@swc/core@1.13.2))
+      vue-loader: 17.4.2(@vue/compiler-sfc@3.5.18)(vue@3.4.15(typescript@5.8.3))(webpack@5.95.0(@swc/core@1.13.2))
       vue-style-loader: 4.1.3
-      webpack: 5.95.0(@swc/core@1.13.2)(esbuild@0.18.20)
+      webpack: 5.95.0(@swc/core@1.13.2)
       webpack-bundle-analyzer: 4.10.2
       webpack-chain: 6.5.1
-      webpack-dev-server: 4.15.2(debug@4.4.1)(webpack@5.95.0(@swc/core@1.13.2)(esbuild@0.18.20))
+      webpack-dev-server: 4.15.2(debug@4.4.1)(webpack@5.95.0(@swc/core@1.13.2))
       webpack-merge: 5.10.0
       webpack-virtual-modules: 0.4.6
       whatwg-fetch: 3.6.20
@@ -23269,7 +23316,7 @@ snapshots:
       '@vuepress/markdown': 2.0.0-beta.53
       '@vuepress/shared': 2.0.0-beta.53
       '@vuepress/utils': 2.0.0-beta.53
-      vue: 3.4.15(typescript@5.8.3)
+      vue: 3.5.18(typescript@5.8.3)
     transitivePeerDependencies:
       - supports-color
       - typescript
@@ -23391,7 +23438,7 @@ snapshots:
       '@vuepress/markdown': 2.0.0-beta.60
       '@vuepress/shared': 2.0.0-beta.60
       '@vuepress/utils': 2.0.0-beta.60
-      vue: 3.4.15(typescript@5.8.3)
+      vue: 3.5.18(typescript@5.8.3)
     transitivePeerDependencies:
       - supports-color
       - typescript
@@ -23429,7 +23476,7 @@ snapshots:
       '@vuepress/core': 2.0.0-beta.60(typescript@5.8.3)
       '@vuepress/utils': 2.0.0-beta.60
       medium-zoom: 1.0.8
-      vue: 3.4.15(typescript@5.8.3)
+      vue: 3.5.18(typescript@5.8.3)
     transitivePeerDependencies:
       - supports-color
       - typescript
@@ -23439,8 +23486,8 @@ snapshots:
       '@vuepress/client': 2.0.0-beta.60(typescript@5.8.3)
       '@vuepress/core': 2.0.0-beta.60(typescript@5.8.3)
       '@vuepress/utils': 2.0.0-beta.60
-      vue: 3.4.15(typescript@5.8.3)
-      vue-router: 4.2.5(vue@3.4.15(typescript@5.8.3))
+      vue: 3.5.18(typescript@5.8.3)
+      vue-router: 4.2.5(vue@3.5.18(typescript@5.8.3))
     transitivePeerDependencies:
       - supports-color
       - typescript
@@ -25414,7 +25461,7 @@ snapshots:
       each-props: 1.3.2
       is-plain-object: 5.0.0
 
-  copy-webpack-plugin@9.1.0(webpack@5.95.0(@swc/core@1.13.2)(esbuild@0.18.20)):
+  copy-webpack-plugin@9.1.0(webpack@5.95.0(@swc/core@1.13.2)):
     dependencies:
       fast-glob: 3.3.3
       glob-parent: 6.0.2
@@ -25422,7 +25469,7 @@ snapshots:
       normalize-path: 3.0.0
       schema-utils: 3.3.0
       serialize-javascript: 6.0.2
-      webpack: 5.95.0(@swc/core@1.13.2)(esbuild@0.18.20)
+      webpack: 5.95.0(@swc/core@1.13.2)
 
   core-js-compat@3.44.0:
     dependencies:
@@ -25556,7 +25603,20 @@ snapshots:
     optionalDependencies:
       webpack: 5.95.0(@swc/core@1.13.2)(esbuild@0.18.20)
 
-  css-minimizer-webpack-plugin@3.4.1(esbuild@0.18.20)(webpack@5.95.0(@swc/core@1.13.2)(esbuild@0.18.20)):
+  css-loader@6.11.0(webpack@5.95.0(@swc/core@1.13.2)):
+    dependencies:
+      icss-utils: 5.1.0(postcss@8.5.3)
+      postcss: 8.5.3
+      postcss-modules-extract-imports: 3.1.0(postcss@8.5.3)
+      postcss-modules-local-by-default: 4.2.0(postcss@8.5.3)
+      postcss-modules-scope: 3.2.1(postcss@8.5.3)
+      postcss-modules-values: 4.0.0(postcss@8.5.3)
+      postcss-value-parser: 4.2.0
+      semver: 7.7.2
+    optionalDependencies:
+      webpack: 5.95.0(@swc/core@1.13.2)
+
+  css-minimizer-webpack-plugin@3.4.1(webpack@5.95.0(@swc/core@1.13.2)):
     dependencies:
       cssnano: 5.1.15(postcss@8.5.3)
       jest-worker: 27.5.1
@@ -25564,9 +25624,7 @@ snapshots:
       schema-utils: 4.3.2
       serialize-javascript: 6.0.2
       source-map: 0.6.1
-      webpack: 5.95.0(@swc/core@1.13.2)(esbuild@0.18.20)
-    optionalDependencies:
-      esbuild: 0.18.20
+      webpack: 5.95.0(@swc/core@1.13.2)
 
   css-select@4.3.0:
     dependencies:
@@ -28413,7 +28471,7 @@ snapshots:
 
   html-tags@3.3.1: {}
 
-  html-webpack-plugin@5.6.3(webpack@5.95.0(@swc/core@1.13.2)(esbuild@0.18.20)):
+  html-webpack-plugin@5.6.3(webpack@5.95.0(@swc/core@1.13.2)):
     dependencies:
       '@types/html-minifier-terser': 6.1.0
       html-minifier-terser: 6.1.0
@@ -28421,7 +28479,7 @@ snapshots:
       pretty-error: 4.0.0
       tapable: 2.2.2
     optionalDependencies:
-      webpack: 5.95.0(@swc/core@1.13.2)(esbuild@0.18.20)
+      webpack: 5.95.0(@swc/core@1.13.2)
 
   htmlparser2@3.10.1:
     dependencies:
@@ -29194,6 +29252,14 @@ snapshots:
       debug: 4.4.1
       istanbul-lib-coverage: 3.2.2
       source-map: 0.6.1
+    transitivePeerDependencies:
+      - supports-color
+
+  istanbul-lib-source-maps@5.0.6:
+    dependencies:
+      '@jridgewell/trace-mapping': 0.3.29
+      debug: 4.4.1
+      istanbul-lib-coverage: 3.2.2
     transitivePeerDependencies:
       - supports-color
 
@@ -30078,7 +30144,7 @@ snapshots:
     dependencies:
       uc.micro: 2.1.0
 
-  linkifyjs@4.2.0: {}
+  linkifyjs@4.3.2: {}
 
   lint-staged@15.5.2:
     dependencies:
@@ -30336,6 +30402,12 @@ snapshots:
   magic-string@0.30.17:
     dependencies:
       '@jridgewell/sourcemap-codec': 1.5.4
+
+  magicast@0.3.5:
+    dependencies:
+      '@babel/parser': 7.28.0
+      '@babel/types': 7.28.2
+      source-map-js: 1.2.1
 
   make-dir@2.1.0:
     dependencies:
@@ -30786,11 +30858,11 @@ snapshots:
 
   min-indent@1.0.1: {}
 
-  mini-css-extract-plugin@2.9.2(webpack@5.95.0(@swc/core@1.13.2)(esbuild@0.18.20)):
+  mini-css-extract-plugin@2.9.2(webpack@5.95.0(@swc/core@1.13.2)):
     dependencies:
       schema-utils: 4.3.2
       tapable: 2.2.2
-      webpack: 5.95.0(@swc/core@1.13.2)(esbuild@0.18.20)
+      webpack: 5.95.0(@swc/core@1.13.2)
 
   minimalistic-assert@1.0.1: {}
 
@@ -30983,7 +31055,7 @@ snapshots:
       yargs-parser: 20.2.4
       yargs-unparser: 2.0.0
 
-  mochapack@2.1.4(mocha@8.4.0)(webpack@5.95.0(@swc/core@1.13.2)(esbuild@0.18.20)):
+  mochapack@2.1.4(mocha@8.4.0)(webpack@5.95.0(@swc/core@1.13.2)):
     dependencies:
       '@babel/runtime-corejs2': 7.26.0
       chalk: 2.4.2
@@ -31002,7 +31074,7 @@ snapshots:
       progress: 2.0.3
       source-map-support: 0.5.21
       toposort: 2.0.2
-      webpack: 5.95.0(@swc/core@1.13.2)(esbuild@0.18.20)
+      webpack: 5.95.0(@swc/core@1.13.2)
       yargs: 14.0.0
 
   modify-values@1.0.1: {}
@@ -31376,11 +31448,11 @@ snapshots:
     dependencies:
       boolbase: 1.0.0
 
-  null-loader@4.0.1(webpack@5.95.0(@swc/core@1.13.2)(esbuild@0.18.20)):
+  null-loader@4.0.1(webpack@5.95.0(@swc/core@1.13.2)):
     dependencies:
       loader-utils: 2.0.4
       schema-utils: 3.3.0
-      webpack: 5.95.0(@swc/core@1.13.2)(esbuild@0.18.20)
+      webpack: 5.95.0(@swc/core@1.13.2)
 
   num2fraction@1.2.2: {}
 
@@ -32359,13 +32431,13 @@ snapshots:
     dependencies:
       htmlparser2: 3.10.1
       postcss: 7.0.39
-      postcss-syntax: 0.36.2(postcss-html@0.36.0(postcss-syntax@0.36.2(postcss@8.5.6))(postcss@7.0.39))(postcss-jsx@0.36.4(postcss-syntax@0.36.2(postcss@8.5.6))(postcss@7.0.39))(postcss-less@3.1.4)(postcss-markdown@0.36.0)(postcss-scss@2.1.1)(postcss@7.0.39)
+      postcss-syntax: 0.36.2(postcss-html@0.36.0(postcss-syntax@0.36.2(postcss@8.5.6))(postcss@7.0.39))(postcss-jsx@0.36.4(postcss-syntax@0.36.2(postcss@8.5.6))(postcss@7.0.39))(postcss-less@3.1.4)(postcss-markdown@0.36.0(postcss-syntax@0.36.2(postcss@8.5.6))(postcss@7.0.39))(postcss-scss@2.1.1)(postcss@7.0.39)
 
   postcss-jsx@0.36.4(postcss-syntax@0.36.2(postcss@8.5.6))(postcss@7.0.39):
     dependencies:
       '@babel/core': 7.28.0
       postcss: 7.0.39
-      postcss-syntax: 0.36.2(postcss-html@0.36.0(postcss-syntax@0.36.2(postcss@8.5.6))(postcss@7.0.39))(postcss-jsx@0.36.4(postcss-syntax@0.36.2(postcss@8.5.6))(postcss@7.0.39))(postcss-less@3.1.4)(postcss-markdown@0.36.0)(postcss-scss@2.1.1)(postcss@7.0.39)
+      postcss-syntax: 0.36.2(postcss-html@0.36.0(postcss-syntax@0.36.2(postcss@8.5.6))(postcss@7.0.39))(postcss-jsx@0.36.4(postcss-syntax@0.36.2(postcss@8.5.6))(postcss@7.0.39))(postcss-less@3.1.4)(postcss-markdown@0.36.0(postcss-syntax@0.36.2(postcss@8.5.6))(postcss@7.0.39))(postcss-scss@2.1.1)(postcss@7.0.39)
     transitivePeerDependencies:
       - supports-color
 
@@ -32398,18 +32470,18 @@ snapshots:
       postcss: 8.4.39
       tsx: 4.19.0
 
-  postcss-loader@6.2.1(postcss@8.5.3)(webpack@5.95.0(@swc/core@1.13.2)(esbuild@0.18.20)):
+  postcss-loader@6.2.1(postcss@8.5.3)(webpack@5.95.0(@swc/core@1.13.2)):
     dependencies:
       cosmiconfig: 7.1.0
       klona: 2.0.6
       postcss: 8.5.3
       semver: 7.7.2
-      webpack: 5.95.0(@swc/core@1.13.2)(esbuild@0.18.20)
+      webpack: 5.95.0(@swc/core@1.13.2)
 
   postcss-markdown@0.36.0(postcss-syntax@0.36.2(postcss@8.5.6))(postcss@7.0.39):
     dependencies:
       postcss: 7.0.39
-      postcss-syntax: 0.36.2(postcss-html@0.36.0(postcss-syntax@0.36.2(postcss@8.5.6))(postcss@7.0.39))(postcss-jsx@0.36.4(postcss-syntax@0.36.2(postcss@8.5.6))(postcss@7.0.39))(postcss-less@3.1.4)(postcss-markdown@0.36.0)(postcss-scss@2.1.1)(postcss@7.0.39)
+      postcss-syntax: 0.36.2(postcss-html@0.36.0(postcss-syntax@0.36.2(postcss@8.5.6))(postcss@7.0.39))(postcss-jsx@0.36.4(postcss-syntax@0.36.2(postcss@8.5.6))(postcss@7.0.39))(postcss-less@3.1.4)(postcss-markdown@0.36.0(postcss-syntax@0.36.2(postcss@8.5.6))(postcss@7.0.39))(postcss-scss@2.1.1)(postcss@7.0.39)
       remark: 10.0.1
       unist-util-find-all-after: 1.0.5
 
@@ -32702,7 +32774,7 @@ snapshots:
       postcss-value-parser: 4.2.0
       svgo: 3.0.2
 
-  postcss-syntax@0.36.2(postcss-html@0.36.0(postcss-syntax@0.36.2(postcss@8.5.6))(postcss@7.0.39))(postcss-jsx@0.36.4(postcss-syntax@0.36.2(postcss@8.5.6))(postcss@7.0.39))(postcss-less@3.1.4)(postcss-markdown@0.36.0)(postcss-scss@2.1.1)(postcss@7.0.39):
+  postcss-syntax@0.36.2(postcss-html@0.36.0(postcss-syntax@0.36.2(postcss@8.5.6))(postcss@7.0.39))(postcss-jsx@0.36.4(postcss-syntax@0.36.2(postcss@8.5.6))(postcss@7.0.39))(postcss-less@3.1.4)(postcss-markdown@0.36.0(postcss-syntax@0.36.2(postcss@8.5.6))(postcss@7.0.39))(postcss-scss@2.1.1)(postcss@7.0.39):
     dependencies:
       postcss: 7.0.39
     optionalDependencies:
@@ -32813,12 +32885,12 @@ snapshots:
 
   proggy@2.0.0: {}
 
-  progress-webpack-plugin@1.0.16(webpack@5.95.0(@swc/core@1.13.2)(esbuild@0.18.20)):
+  progress-webpack-plugin@1.0.16(webpack@5.95.0(@swc/core@1.13.2)):
     dependencies:
       chalk: 2.4.2
       figures: 2.0.0
       log-update: 2.3.0
-      webpack: 5.95.0(@swc/core@1.13.2)(esbuild@0.18.20)
+      webpack: 5.95.0(@swc/core@1.13.2)
 
   progress@2.0.3: {}
 
@@ -34900,7 +34972,7 @@ snapshots:
       postcss-sass: 0.3.5
       postcss-scss: 2.1.1
       postcss-selector-parser: 3.1.2
-      postcss-syntax: 0.36.2(postcss-html@0.36.0(postcss-syntax@0.36.2(postcss@8.5.6))(postcss@7.0.39))(postcss-jsx@0.36.4(postcss-syntax@0.36.2(postcss@8.5.6))(postcss@7.0.39))(postcss-less@3.1.4)(postcss-markdown@0.36.0)(postcss-scss@2.1.1)(postcss@7.0.39)
+      postcss-syntax: 0.36.2(postcss-html@0.36.0(postcss-syntax@0.36.2(postcss@8.5.6))(postcss@7.0.39))(postcss-jsx@0.36.4(postcss-syntax@0.36.2(postcss@8.5.6))(postcss@7.0.39))(postcss-less@3.1.4)(postcss-markdown@0.36.0(postcss-syntax@0.36.2(postcss@8.5.6))(postcss@7.0.39))(postcss-scss@2.1.1)(postcss@7.0.39)
       postcss-value-parser: 3.3.1
       resolve-from: 4.0.0
       signal-exit: 3.0.7
@@ -35101,6 +35173,18 @@ snapshots:
     optionalDependencies:
       '@swc/core': 1.13.2
       esbuild: 0.18.20
+    optional: true
+
+  terser-webpack-plugin@5.3.14(@swc/core@1.13.2)(webpack@5.95.0(@swc/core@1.13.2)):
+    dependencies:
+      '@jridgewell/trace-mapping': 0.3.29
+      jest-worker: 27.5.1
+      schema-utils: 4.3.2
+      serialize-javascript: 6.0.2
+      terser: 5.43.1
+      webpack: 5.95.0(@swc/core@1.13.2)
+    optionalDependencies:
+      '@swc/core': 1.13.2
 
   terser@5.43.1:
     dependencies:
@@ -35147,14 +35231,14 @@ snapshots:
     dependencies:
       tslib: 2.8.1
 
-  thread-loader@3.0.4(webpack@5.95.0(@swc/core@1.13.2)(esbuild@0.18.20)):
+  thread-loader@3.0.4(webpack@5.95.0(@swc/core@1.13.2)):
     dependencies:
       json-parse-better-errors: 1.0.2
       loader-runner: 4.3.0
       loader-utils: 2.0.4
       neo-async: 2.6.2
       schema-utils: 3.3.0
-      webpack: 5.95.0(@swc/core@1.13.2)(esbuild@0.18.20)
+      webpack: 5.95.0(@swc/core@1.13.2)
 
   through2-filter@3.0.0:
     dependencies:
@@ -36258,15 +36342,15 @@ snapshots:
     dependencies:
       vue: 3.5.18(typescript@5.8.3)
 
-  vue-loader@15.11.1(@vue/compiler-sfc@3.5.18)(css-loader@6.11.0(webpack@5.95.0(@swc/core@1.13.2)(esbuild@0.18.20)))(ejs@3.1.10)(handlebars@4.7.8)(lodash@4.17.21)(nunjucks@3.2.4(chokidar@3.6.0))(pug@3.0.3)(react-dom@16.14.0(react@16.14.0))(react@16.14.0)(twig@1.17.1)(underscore@1.13.7)(vue-template-compiler@2.7.16(vue@3.4.15(typescript@5.8.3)))(webpack@5.95.0(@swc/core@1.13.2)(esbuild@0.18.20)):
+  vue-loader@15.11.1(@vue/compiler-sfc@3.5.18)(css-loader@6.11.0(webpack@5.95.0(@swc/core@1.13.2)))(ejs@3.1.10)(handlebars@4.7.8)(lodash@4.17.21)(nunjucks@3.2.4(chokidar@3.6.0))(pug@3.0.3)(react-dom@16.14.0(react@16.14.0))(react@16.14.0)(twig@1.17.1)(underscore@1.13.7)(vue-template-compiler@2.7.16(vue@3.4.15(typescript@5.8.3)))(webpack@5.95.0(@swc/core@1.13.2)):
     dependencies:
       '@vue/component-compiler-utils': 3.3.0(ejs@3.1.10)(handlebars@4.7.8)(lodash@4.17.21)(nunjucks@3.2.4(chokidar@3.6.0))(pug@3.0.3)(react-dom@16.14.0(react@16.14.0))(react@16.14.0)(twig@1.17.1)(underscore@1.13.7)
-      css-loader: 6.11.0(webpack@5.95.0(@swc/core@1.13.2)(esbuild@0.18.20))
+      css-loader: 6.11.0(webpack@5.95.0(@swc/core@1.13.2))
       hash-sum: 1.0.2
       loader-utils: 1.4.2
       vue-hot-reload-api: 2.3.4
       vue-style-loader: 4.1.3
-      webpack: 5.95.0(@swc/core@1.13.2)(esbuild@0.18.20)
+      webpack: 5.95.0(@swc/core@1.13.2)
     optionalDependencies:
       '@vue/compiler-sfc': 3.5.18
       vue-template-compiler: 2.7.16(vue@3.4.15(typescript@5.8.3))
@@ -36325,12 +36409,12 @@ snapshots:
       - walrus
       - whiskers
 
-  vue-loader@17.4.2(@vue/compiler-sfc@3.5.18)(vue@3.4.15(typescript@5.8.3))(webpack@5.95.0(@swc/core@1.13.2)(esbuild@0.18.20)):
+  vue-loader@17.4.2(@vue/compiler-sfc@3.5.18)(vue@3.4.15(typescript@5.8.3))(webpack@5.95.0(@swc/core@1.13.2)):
     dependencies:
       chalk: 4.1.2
       hash-sum: 2.0.0
       watchpack: 2.4.4
-      webpack: 5.95.0(@swc/core@1.13.2)(esbuild@0.18.20)
+      webpack: 5.95.0(@swc/core@1.13.2)
     optionalDependencies:
       '@vue/compiler-sfc': 3.5.18
       vue: 3.4.15(typescript@5.8.3)
@@ -36339,6 +36423,11 @@ snapshots:
     dependencies:
       '@vue/devtools-api': 6.5.1
       vue: 3.4.15(typescript@5.8.3)
+
+  vue-router@4.2.5(vue@3.5.18(typescript@5.8.3)):
+    dependencies:
+      '@vue/devtools-api': 6.5.1
+      vue: 3.5.18(typescript@5.8.3)
 
   vue-style-loader@4.1.3:
     dependencies:
@@ -36567,16 +36656,16 @@ snapshots:
       deepmerge: 1.5.2
       javascript-stringify: 2.1.0
 
-  webpack-dev-middleware@5.3.4(webpack@5.95.0(@swc/core@1.13.2)(esbuild@0.18.20)):
+  webpack-dev-middleware@5.3.4(webpack@5.95.0(@swc/core@1.13.2)):
     dependencies:
       colorette: 2.0.20
       memfs: 3.5.3
       mime-types: 2.1.35
       range-parser: 1.2.1
       schema-utils: 4.3.2
-      webpack: 5.95.0(@swc/core@1.13.2)(esbuild@0.18.20)
+      webpack: 5.95.0(@swc/core@1.13.2)
 
-  webpack-dev-server@4.15.2(debug@4.4.1)(webpack@5.95.0(@swc/core@1.13.2)(esbuild@0.18.20)):
+  webpack-dev-server@4.15.2(debug@4.4.1)(webpack@5.95.0(@swc/core@1.13.2)):
     dependencies:
       '@types/bonjour': 3.5.13
       '@types/connect-history-api-fallback': 1.5.4
@@ -36606,10 +36695,10 @@ snapshots:
       serve-index: 1.9.1
       sockjs: 0.3.24
       spdy: 4.0.2
-      webpack-dev-middleware: 5.3.4(webpack@5.95.0(@swc/core@1.13.2)(esbuild@0.18.20))
+      webpack-dev-middleware: 5.3.4(webpack@5.95.0(@swc/core@1.13.2))
       ws: 8.18.3
     optionalDependencies:
-      webpack: 5.95.0(@swc/core@1.13.2)(esbuild@0.18.20)
+      webpack: 5.95.0(@swc/core@1.13.2)
     transitivePeerDependencies:
       - bufferutil
       - debug
@@ -36627,6 +36716,36 @@ snapshots:
   webpack-virtual-modules@0.4.6: {}
 
   webpack-virtual-modules@0.6.2: {}
+
+  webpack@5.95.0(@swc/core@1.13.2):
+    dependencies:
+      '@types/estree': 1.0.8
+      '@webassemblyjs/ast': 1.14.1
+      '@webassemblyjs/wasm-edit': 1.14.1
+      '@webassemblyjs/wasm-parser': 1.14.1
+      acorn: 8.15.0
+      acorn-import-attributes: 1.9.5(acorn@8.15.0)
+      browserslist: 4.25.1
+      chrome-trace-event: 1.0.4
+      enhanced-resolve: 5.18.2
+      es-module-lexer: 1.7.0
+      eslint-scope: 5.1.1
+      events: 3.3.0
+      glob-to-regexp: 0.4.1
+      graceful-fs: 4.2.11
+      json-parse-even-better-errors: 2.3.1
+      loader-runner: 4.3.0
+      mime-types: 2.1.35
+      neo-async: 2.6.2
+      schema-utils: 3.3.0
+      tapable: 2.2.2
+      terser-webpack-plugin: 5.3.14(@swc/core@1.13.2)(webpack@5.95.0(@swc/core@1.13.2))
+      watchpack: 2.4.4
+      webpack-sources: 3.3.3
+    transitivePeerDependencies:
+      - '@swc/core'
+      - esbuild
+      - uglify-js
 
   webpack@5.95.0(@swc/core@1.13.2)(esbuild@0.18.20):
     dependencies:
@@ -36657,6 +36776,7 @@ snapshots:
       - '@swc/core'
       - esbuild
       - uglify-js
+    optional: true
 
   websocket-driver@0.7.4:
     dependencies:

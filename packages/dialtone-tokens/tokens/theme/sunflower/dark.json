@@ -1,0 +1,16 @@
+{
+  "shell": {
+    "base": {
+      "color": {
+        "foreground": {
+          "value": "{color.red.1000}",
+          "type": "color"
+        },
+        "accent": {
+          "value": "{color.coral.800}",
+          "type": "color"
+        }
+      }
+    }
+  }
+}

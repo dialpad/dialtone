@@ -1,11 +1,11 @@
 {
   "name": "@dialpad/dialtone",
-  "version": "9.127.0",
+  "version": "9.129.3",
   "packageManager": "pnpm@9.9.0",
   "description": "Dialpad's Dialtone design system monorepo",
   "scripts": {
     "prepare": "husky install",
-    "prepack": "nx run dialtone:build --skip-nx-cache"
+    "prepack": "nx run dialtone:build"
   },
   "pnpm": {
     "peerDependencyRules": {
@@ -52,7 +52,6 @@
     "./css": "./dist/css/dialtone.min.css",
     "./css-default-theme": "./dist/css/dialtone-default-theme.min.css",
     "./tokens/*.css": "./dist/tokens/css/*.css",
-    "./tokens/*.less": "./dist/tokens/less/*.less",
     "./tokens/postcss/*": {
       "types": "./dist/tokens/types/postcss/*.d.ts",
       "import": "./dist/tokens/postcss/*.js",
@@ -121,7 +120,7 @@
     "deep-equal": "2.2.3",
     "docopt": "0.6.2",
     "emoji-toolkit": "9.0.1",
-    "linkifyjs": "4.2.0",
+    "linkifyjs": "4.3.2",
     "overlayscrollbars": "2.10.0",
     "regex-combined-emojis": "1.6.0",
     "tippy.js": "6.3.7"
@@ -150,6 +149,7 @@
     "@types/node": "^20.19.9",
     "@vitejs/plugin-vue": "^5.2.4",
     "@vitejs/plugin-vue2": "^2.3.3",
+    "@vitest/coverage-v8": "^1.0.0",
     "@vue/tsconfig": "^0.4.0",
     "axe-core": "^4.10.3",
     "axe-playwright": "^2.1.0",

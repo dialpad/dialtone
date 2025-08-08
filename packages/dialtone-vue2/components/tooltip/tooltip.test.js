@@ -12,6 +12,8 @@ const MOCK_TRANSITION_STUB = () => ({
   },
 });
 
+const MOCK_GET_ROOT_NODE = () => document;
+
 // jsdom doesn't like this.anchor?.getRootNode() so use document.body.
 const baseProps = { delay: false, appendTo: document.body };
 const baseSlots = {
@@ -51,6 +53,9 @@ describe('DtTooltip tests', () => {
     tippyContent = document.body.querySelector('.tippy-content');
     tippyBox = document.body.querySelector('.tippy-box');
     anchor = wrapper.find('[data-qa="dt-tooltip-anchor"]');
+
+    // Mock getRootNode after wrapper is created
+    wrapper.vm.$el.getRootNode = MOCK_GET_ROOT_NODE;
   };
 
   beforeAll(() => {
@@ -208,6 +213,92 @@ describe('DtTooltip tests', () => {
 
           expect(tippyContent).toBeNull();
         });
+      });
+    });
+
+    describe('Z-index behavior with modals', () => {
+      afterEach(() => {
+        // Clean up any modal elements added during tests
+        const modals = document.querySelectorAll('.d-modal, .d-modal--transparent');
+        modals.forEach(modal => modal.remove());
+      });
+
+      it('should have higher z-index when modal is present', async () => {
+        // Create a mock modal element in the DOM
+        const modalElement = document.createElement('div');
+        modalElement.className = 'd-modal';
+        modalElement.setAttribute('aria-hidden', 'false');
+        document.body.appendChild(modalElement);
+
+        mockProps = { show: true };
+        updateWrapper();
+        await flushPromises();
+
+        tippyBox = document.body.querySelector('.tippy-box');
+        expect(tippyBox).not.toBeNull();
+
+        // Get the z-index from the tooltip component's calculated value
+        const tooltipZIndex = wrapper.vm.calculateAnchorZindex();
+
+        // Modal z-index is 600, modal-element is 650, so tooltip should be 651
+        expect(tooltipZIndex).toBe(651);
+        expect(tooltipZIndex).toBeGreaterThan(650); // Greater than modal-element z-index
+      });
+
+      it('should have higher z-index when transparent modal is present', async () => {
+        // Create a mock transparent modal element in the DOM
+        const modalElement = document.createElement('div');
+        modalElement.className = 'd-modal--transparent';
+        modalElement.setAttribute('aria-hidden', 'false');
+        document.body.appendChild(modalElement);
+
+        mockProps = { show: true };
+        updateWrapper();
+        await flushPromises();
+
+        tippyBox = document.body.querySelector('.tippy-box');
+        expect(tippyBox).not.toBeNull();
+
+        // Get the z-index from the tooltip component's calculated value
+        const tooltipZIndex = wrapper.vm.calculateAnchorZindex();
+
+        expect(tooltipZIndex).toBe(651);
+        expect(tooltipZIndex).toBeGreaterThan(650); // Greater than modal-element z-index
+      });
+
+      it('should have higher z-index when modal without aria-hidden is present', async () => {
+        // Create a mock modal element without aria-hidden attribute
+        const modalElement = document.createElement('div');
+        modalElement.className = 'd-modal';
+        document.body.appendChild(modalElement);
+
+        mockProps = { show: true };
+        updateWrapper();
+        await flushPromises();
+
+        tippyBox = document.body.querySelector('.tippy-box');
+        expect(tippyBox).not.toBeNull();
+
+        // Get the z-index from the tooltip component's calculated value
+        const tooltipZIndex = wrapper.vm.calculateAnchorZindex();
+
+        expect(tooltipZIndex).toBe(651);
+        expect(tooltipZIndex).toBeGreaterThan(650); // Greater than modal-element z-index
+      });
+
+      it('should have default z-index when no modal is present', async () => {
+        mockProps = { show: true };
+        updateWrapper();
+        await flushPromises();
+
+        tippyBox = document.body.querySelector('.tippy-box');
+        expect(tippyBox).not.toBeNull();
+
+        // Get the z-index from the tooltip component's calculated value
+        const tooltipZIndex = wrapper.vm.calculateAnchorZindex();
+
+        // Default tooltip z-index should be 400
+        expect(tooltipZIndex).toBe(400);
       });
     });
   });
