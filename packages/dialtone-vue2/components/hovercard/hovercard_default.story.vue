@@ -114,7 +114,8 @@
   </dt-hovercard>
 </template>
 
-<script>
+<script setup>
+// eslint-disable-next-line storybook/default-exports
 import DtHovercard from './hovercard.vue';
 import DtRecipeContactRow from '@/recipes/leftbar/contact_row/contact_row.vue';
 import defaultImage from '@/common/assets/avatar2.png';
@@ -122,13 +123,4 @@ import DtStack from '../stack/stack.vue';
 import DtIcon from '../icon/icon.vue';
 import DtButton from '../button/button.vue';
 import DtAvatar from '../avatar/avatar.vue';
-export default {
-  name: 'HovercardDefaultStory',
-  components: { DtHovercard, DtRecipeContactRow, DtStack, DtIcon, DtButton, DtAvatar },
-  data() {
-    return {
-      defaultImage,
-    };
-  },
-};
 </script>
