@@ -16,6 +16,7 @@
 import { inject, onMounted, ref } from 'vue';
 import BaseColor from '../baseComponents/BaseColor.vue';
 import tinycolor from 'tinycolor2';
+import { alphabeticalSorter } from '@utilities';
 
 const tokensDocs = inject('tokensDocs');
 const props = defineProps({
@@ -38,7 +39,8 @@ function getContrastRatio (hexValue) {
 
 onMounted(() => {
   colors.value = Object.keys(tokensDocs)
-    .filter(tokenName => tokenName.startsWith('--dt-color-') && /-\d{2,4}$/.test(tokenName))
+    .filter(tokenName => /--dt-color-\w+-\d{2,4}$/.test(tokenName))
+    .sort(alphabeticalSorter)
     .reduce((result, tokenName) => {
       const colorName = tokenName.replace(/--dt-color-(\w+).*/, '$1');
       const colorStop = tokenName.replace(/--dt-color-\w+-(\d{2,4})/, '$1');

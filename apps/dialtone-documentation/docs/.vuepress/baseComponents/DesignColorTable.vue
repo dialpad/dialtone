@@ -38,6 +38,7 @@ function processColorsDocs (excludedColors, classPrefix) {
       !excludedColors.some(color => className.includes(color)) &&
       !baseColorRegex.test(className),
     )
+    .sort((a, b) => a.localeCompare(b, 'en', { numeric: true }))
     .reduce((result, color) => {
       const tokenName = extractCSSVariableName(utilityClassDocs[color]);
       const colorName = color.replace(classPrefix, '').replace(/-/g, ' ');

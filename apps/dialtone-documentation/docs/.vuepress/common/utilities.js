@@ -79,10 +79,21 @@ export function colorSorter (a) {
   return -1;
 }
 
+/**
+ * Sorts alphabetically, considering numbers.
+ * @param a
+ * @param b
+ * @returns {number}
+ */
+export function alphabeticalSorter (a, b) {
+  return a.localeCompare(b, 'en', { numeric: true });
+}
+
 export default {
   debounce,
   ReleaseNoteFormatter,
   extractUtilityClasses,
   extractCSSVariableName,
   colorSorter,
+  alphabeticalSorter,
 };
