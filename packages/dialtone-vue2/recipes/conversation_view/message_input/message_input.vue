@@ -858,7 +858,7 @@ export default {
       }
     },
 
-    // eslint-disable-next-line complexity
+     
     handleTopbarClick (type) {
       const editor = this.$refs.richTextEditor?.editor;
       // Key is the name returned in the event, value is the name of the TipTap command function to run.

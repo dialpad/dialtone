@@ -454,7 +454,7 @@ export default {
           this.$emit('keyup', event);
         },
 
-        click: event => {
+        click: () => {
           if (this.hasSuggestionList) {
             this.showComboboxList();
           }

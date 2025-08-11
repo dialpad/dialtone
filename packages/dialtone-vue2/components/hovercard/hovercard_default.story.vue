@@ -115,6 +115,7 @@
 </template>
 
 <script setup>
+// eslint-disable-next-line storybook/default-exports
 import DtHovercard from './hovercard.vue';
 import DtRecipeContactRow from '@/recipes/leftbar/contact_row/contact_row.vue';
 import defaultImage from '@/common/assets/avatar2.png';

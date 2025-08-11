@@ -7,7 +7,7 @@ import {
 } from './tooltip_constants';
 
 const MOCK_TRANSITION_STUB = () => ({
-  render: function (h) {
+  render: function () {
     return this.$options._renderChildren;
   },
 });

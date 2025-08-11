@@ -1,4 +1,3 @@
-// eslint-disable-next-line import/no-absolute-path
 import supportedComponents from '/src/supported_components.json';
 import * as dialtone from '@dialpad/dialtone-vue';
 

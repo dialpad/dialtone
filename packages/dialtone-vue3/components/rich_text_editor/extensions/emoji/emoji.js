@@ -85,7 +85,7 @@ export const Emoji = Node.create({
 
           return inputRuleMatch(match);
         },
-        handler: ({ state, range, match, commands, chain, can }) => {
+        handler: ({ state, range, match}) => {
           const { tr } = state;
           const start = range.from;
           const end = range.to;

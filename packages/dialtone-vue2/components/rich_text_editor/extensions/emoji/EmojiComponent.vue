@@ -28,7 +28,6 @@
         @error="handleImageError"
       >
     </template>
-
   </node-view-wrapper>
 </template>
 
@@ -63,6 +62,6 @@ export default {
       this.showSkeleton = false;
       event.target.parentNode.remove();
     },
-  }
+  },
 };
 </script>

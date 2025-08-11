@@ -2,7 +2,7 @@ import { createLocalVue, mount } from '@vue/test-utils';
 import DtDropdown from './dropdown.vue';
 
 const MOCK_TRANSITION_STUB = () => ({
-  render: function (h) {
+  render: function () {
     return this.$options._renderChildren;
   },
 });

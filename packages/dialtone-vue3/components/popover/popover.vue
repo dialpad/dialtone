@@ -577,11 +577,11 @@ export default {
           this.onKeydown(event);
         },
 
-        'after-leave': event => {
+        'after-leave': () => {
           this.onLeaveTransitionComplete();
         },
 
-        'after-enter': event => {
+        'after-enter': () => {
           this.onEnterTransitionComplete();
         },
       };
