@@ -1,3 +1,10 @@
+# [8.61.0](https://github.com/dialpad/dialtone/compare/dialtone-css/v8.60.1...dialtone-css/v8.61.0) (2025-08-11)
+
+
+### Features
+
+* **Utilities:** DLT-2115 d-d-contents ([#862](https://github.com/dialpad/dialtone/issues/862)) ([4879654](https://github.com/dialpad/dialtone/commit/4879654e60b2f385196c9513a172b683bbf4967b))
+
 ## [8.60.1](https://github.com/dialpad/dialtone/compare/dialtone-css/v8.60.0...dialtone-css/v8.60.1) (2025-07-01)
 
 
