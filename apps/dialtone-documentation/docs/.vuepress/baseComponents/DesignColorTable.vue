@@ -4,7 +4,7 @@ import { extractCSSVariableName } from '@utilities';
 
 const tokensDocs = inject('tokensDocs');
 const utilityClassDocs = inject('utilityClassDocs');
-const baseColorRegex = /-\d{2,4}$/;
+const baseColorRegex = /d-(bgc|fc|bc|bgg)-\w+-\d{2,4}$/;
 const currentTheme = inject('currentTheme');
 
 const props = defineProps({
@@ -62,7 +62,7 @@ const colors = processColorsDocs(props.excludedColors, props.classPrefix);
       <table class="d-table dialtone-doc-table">
         <thead class="d-bgc-primary d-ps-sticky d-zi-base1 d-t0">
           <tr>
-            <th class="d-p0 d-bbw0" scope="col" colspan="3">
+            <th class="d-p0 d-bbw0" colspan="3" scope="col">
               <div class="d-p16 d-bb d-bc-default d-bbw1">
                 Color
               </div>
@@ -81,12 +81,12 @@ const colors = processColorsDocs(props.excludedColors, props.classPrefix);
         </thead>
         <tbody>
           <tr v-for="(color, index) in colors" :key="`${color.utilityClass}-${index}`">
-            <th scope="row" class="d-pr0" colspan="2">
+            <th class="d-pr0" colspan="2" scope="row">
               <div class="d-d-flex d-ai-center d-gg16">
-                <slot name="example" :color="color" />
+                <slot :color="color" name="example" />
               </div>
             </th>
-            <th scope="row" class="d-lh-300">
+            <th class="d-lh-300" scope="row">
               <span class="d-tt-capitalize" v-text="color.name" />
               <span v-if="color.description" class="d-d-block d-fw-normal d-fs-100" v-text="color.description" />
             </th>
