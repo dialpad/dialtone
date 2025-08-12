@@ -1,125 +1,59 @@
 <template>
   <div class="themes-visual-container d-p24 d-bar8" :class="containerClasses">
-    <svg
-      width="800"
-      height="400"
-      viewBox="0 0 800 400"
-      xmlns="http://www.w3.org/2000/svg"
-      class="themes-svg"
-    >
-      <!-- Background -->
-      <rect
-        width="800"
-        height="400"
-        :fill="colors.background"
-        rx="8"
-      />
+    <div class="themes-mockup">
+      <!-- Header -->
+      <div class="mockup-header" :style="{ backgroundColor: colors.surface }">
+        <div class="header-controls">
+          <div class="window-controls">
+            <span class="control" />
+            <span class="control" />
+            <span class="control" />
+          </div>
+          <div class="dialpad-logo">
+            <div class="logo-gradient" />
+          </div>
+          <div class="header-nav">
+            <span class="nav-item inactive" />
+            <span class="nav-item" />
+            <span class="nav-item" />
+          </div>
+          <div class="search-bar" :style="{ backgroundColor: `${colors.text}0D` }" />
+          <div class="header-actions">
+            <span class="action-btn" />
+            <span class="action-btn" />
+          </div>
+        </div>
+      </div>
 
-      <!-- Header Bar -->
-      <rect
-        x="0"
-        y="0"
-        width="800"
-        height="60"
-        :fill="colors.surface"
-        rx="8"
-      />
+      <!-- Main Content -->
+      <div class="mockup-content">
+        <!-- Sidebar -->
+        <div class="sidebar" :style="{ backgroundColor: colors.sidebar }">
+          <div
+            v-for="(item, index) in navItems"
+            :key="index"
+            class="nav-item-row"
+          >
+            <div
+              class="avatar"
+              :style="{ backgroundColor: item.avatarColor }"
+            />
+            <div class="nav-text">
+              <div class="text-primary" :style="{ backgroundColor: `${colors.text}99` }" />
+              <div class="text-secondary" :style="{ backgroundColor: `${colors.text}2B` }" />
+            </div>
+            <div
+              v-if="item.hasToggle"
+              class="toggle"
+              :style="{ backgroundColor: colors.brand }"
+            />
+          </div>
+        </div>
 
-      <!-- Header Text -->
-      <text
-        x="24"
-        y="38"
-        :fill="colors.text"
-        font-family="Inter, system-ui, sans-serif"
-        font-size="16"
-        font-weight="600"
-      >
-        {{ currentThemeLabel }} - {{ currentModeLabel }}
-      </text>
-
-      <!-- Sidebar -->
-      <rect
-        x="0"
-        y="60"
-        width="200"
-        height="340"
-        :fill="colors.sidebar"
-      />
-
-      <!-- Navigation Items -->
-      <g v-for="(item, index) in navItems" :key="index">
-        <rect
-          :x="16"
-          :y="80 + (index * 40)"
-          width="168"
-          height="32"
-          :fill="item.active ? colors.activeNav : 'transparent'"
-          rx="4"
-        />
-        <text
-          :x="24"
-          :y="100 + (index * 40)"
-          :fill="item.active ? colors.activeNavText : colors.navText"
-          font-family="Inter, system-ui, sans-serif"
-          font-size="14"
-          font-weight="500"
-        >
-          {{ item.label }}
-        </text>
-      </g>
-
-      <!-- Main Content Area -->
-      <rect
-        x="200"
-        y="60"
-        width="600"
-        height="340"
-        :fill="colors.background"
-      />
-
-      <!-- Content Cards -->
-      <g v-for="(card, index) in contentCards" :key="index">
-        <rect
-          :x="220 + (index % 3) * 180"
-          :y="80 + Math.floor(index / 3) * 120"
-          width="160"
-          height="100"
-          :fill="colors.card"
-          :stroke="colors.border"
-          stroke-width="1"
-          rx="6"
-        />
-        <text
-          :x="230 + (index % 3) * 180"
-          :y="105 + Math.floor(index / 3) * 120"
-          :fill="colors.text"
-          font-family="Inter, system-ui, sans-serif"
-          font-size="12"
-          font-weight="600"
-        >
-          Card {{ index + 1 }}
-        </text>
-        <text
-          :x="230 + (index % 3) * 180"
-          :y="125 + Math.floor(index / 3) * 120"
-          :fill="colors.textSecondary"
-          font-family="Inter, system-ui, sans-serif"
-          font-size="10"
-        >
-          Sample content
-        </text>
-      </g>
-
-      <!-- Brand Accent -->
-      <rect
-        x="24"
-        y="320"
-        width="152"
-        height="4"
-        :fill="colors.brand"
-        rx="2"
-      />
-    </svg>
+        <!-- Main Area -->
+        <div class="main-area" :style="{ backgroundColor: colors.background }" />
+      </div>
+    </div>
   </div>
 </template>
 
@@ -137,16 +71,14 @@ const props = defineProps({
   },
 });
 
-// Sample navigation items
+// Navigation items with avatar colors and toggle states
 const navItems = [
-  { label: 'Dashboard', active: true },
-  { label: 'Messages', active: false },
-  { label: 'Contacts', active: false },
-  { label: 'Settings', active: false },
+  { avatarColor: '#FFBE41', hasToggle: true },
+  { avatarColor: '#6497DE', hasToggle: true },
+  { avatarColor: '#41FF77', hasToggle: false },
+  { avatarColor: '#FF41BD', hasToggle: true },
+  { avatarColor: '#41FF77', hasToggle: false },
 ];
-
-// Sample content cards
-const contentCards = Array.from({ length: 6 }, (_, i) => ({ id: i + 1 }));
 
 // Theme configurations
 const themeColors = {
@@ -264,18 +196,6 @@ const themeColors = {
   },
 };
 
-const themeLabels = {
-  dp: 'Dialpad',
-  tmo: 'T-Mobile',
-  expressive: 'Expressive',
-  sunflower: 'Sunflower',
-};
-
-const modeLabels = {
-  light: 'Light Mode',
-  dark: 'Dark Mode',
-};
-
 const colors = computed(() => {
   return themeColors[props.theme]?.[props.mode] || themeColors.dp.light;
 });
@@ -286,14 +206,6 @@ const containerClasses = computed(() => {
     `mode-${props.mode}`,
   ];
 });
-
-const currentThemeLabel = computed(() => {
-  return themeLabels[props.theme] || 'Dialpad';
-});
-
-const currentModeLabel = computed(() => {
-  return modeLabels[props.mode] || 'Light Mode';
-});
 </script>
 
 <style scoped>
@@ -301,19 +213,148 @@ const currentModeLabel = computed(() => {
   transition: all 0.3s ease;
 }
 
-.themes-svg {
-  max-width: 100%;
-  height: auto;
-  display: block;
+.themes-mockup {
+  width: 100%;
+  max-width: 844px;
+  height: 380px;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
   margin: 0 auto;
 }
 
-/* Optional: Add subtle shadows based on mode */
-.mode-light .themes-svg {
-  filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.1));
+.mockup-header {
+  height: 60px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
 }
 
-.mode-dark .themes-svg {
-  filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.3));
+.header-controls {
+  display: flex;
+  align-items: center;
+  height: 100%;
+  padding: 0 20px;
+  gap: 16px;
+}
+
+.window-controls {
+  display: flex;
+  gap: 8px;
+}
+
+.control {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.3);
+}
+
+.dialpad-logo {
+  width: 28px;
+  height: 28px;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.logo-gradient {
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, #10022C 0%, #611F93 20%, #C52599 46%, #EA2F6F 66%, #FD6D2D 90%, #FF9E0E 100%);
+}
+
+.header-nav {
+  display: flex;
+  gap: 8px;
+}
+
+.nav-item {
+  width: 20px;
+  height: 20px;
+  border-radius: 10px;
+  background: rgba(0, 0, 0, 0.6);
+}
+
+.nav-item.inactive {
+  opacity: 0.4;
+}
+
+.search-bar {
+  flex: 1;
+  height: 32px;
+  border-radius: 16px;
+  margin: 0 16px;
+}
+
+.header-actions {
+  display: flex;
+  gap: 8px;
+}
+
+.action-btn {
+  width: 20px;
+  height: 20px;
+  border-radius: 10px;
+  background: rgba(0, 0, 0, 0.6);
+}
+
+.mockup-content {
+  display: flex;
+  height: 320px;
+}
+
+.sidebar {
+  width: 314px;
+  padding: 20px;
+  border-right: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.nav-item-row {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.avatar {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.nav-text {
+  flex: 1;
+}
+
+.text-primary {
+  height: 11px;
+  width: 105px;
+  border-radius: 5px;
+  margin-bottom: 6px;
+}
+
+.text-secondary {
+  height: 10px;
+  width: 173px;
+  border-radius: 5px;
+}
+
+.toggle {
+  width: 18px;
+  height: 12px;
+  border-radius: 6px;
+  flex-shrink: 0;
+}
+
+.main-area {
+  flex: 1;
+}
+
+/* Mode-based shadows */
+.mode-light .themes-mockup {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.mode-dark .themes-mockup {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
 }
 </style>

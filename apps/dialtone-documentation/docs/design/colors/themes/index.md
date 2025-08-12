@@ -12,55 +12,17 @@ Dialtone's theming system is a flexible foundation for creating consistent visua
 
 Currently, the only themeable part of the application is the shell, which consists of the top and left navigation.
 
+<themes-interactive />
+
+<div class="d-bgc-brand d-bar8"><svg-loader class="d-fl1" name="theme-variations" /></div>
+
 ### Mode
 
-A mode defines a visual style that applies across all themes. It determines the overall luminosity and contrast of the interface.
-
-- Light: The default mode, with a light background and dark text.
-
-- Dark: A dark background with light text, ideal for low-light environments.
+A mode defines a visual style that applies across all themes. It determines the overall luminosity and contrast of the interface. For example, light mode has a light background and dark text, while dark mode has a dark background and light text.
 
 ### Theme
 
-A theme represents a specific brand or product identity. It applies a unique set of colors to the shell, and it works in conjunction with a mode.
-
-- dp: The default Dialpad theme.
-
-- tmo: A custom theme for T-Mobile.
-
-- sunflower: A custom theme for the Sunflower brand.
-
-<div class="d-m32"></div>
-
-## Interactive Theme Preview
-
-Use the dropdowns below to explore how different themes and modes affect the visual appearance:
-
-<themes-demo />
-
-<div class="d-m32"></div>
-
-## Video Overview
-
-<div class="d-m16"></div>
-
-<video controls width="100%" style="max-width: 800px; border-radius: 8px;">
-  <source src="/path/to/your/video.mp4" type="video/mp4">
-  <source src="/path/to/your/video.webm" type="video/webm">
-  Your browser does not support the video tag.
-</video>
-
-<div class="d-m32"></div>
-
-<div class="d-bgc-brand d-bar8"><svg-loader class="d-fl1" name="default-themes" /></div>
-
-<div class="d-m32"></div>
-
-### Overriding in Dark Mode
-
-Sometimes, when customizing themes, you might want a different accent color in light mode compared to dark mode. By changing base colors specifically within dark mode (or vice versa), you can create a diverse set of styles for your themes across both modes.
-
-<div class="d-bgc-brand d-bar8"><svg-loader class="d-fl1" name="theme-variations" /></div>
+A theme represents a specific brand or product identity. It applies a unique set of colors to the shell, and it works in conjunction with a mode. For example, Dialpad default theme uses purple accents and T-mobile uses pink accents for the shell.
 
 ## Theming Token Structure
 
