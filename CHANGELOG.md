@@ -1,3 +1,10 @@
+# [9.131.0](https://github.com/dialpad/dialtone/compare/dialtone/v9.130.0...dialtone/v9.131.0) (2025-08-12)
+
+
+### Features
+
+* **Utilities:** DLT-2396 word-break: break-word and word-wrap: anywhere ([#864](https://github.com/dialpad/dialtone/issues/864)) ([079eab6](https://github.com/dialpad/dialtone/commit/079eab61c64714de728d35173bc01e11b55c03b1))
+
 # [9.130.0](https://github.com/dialpad/dialtone/compare/dialtone/v9.129.3...dialtone/v9.130.0) (2025-08-11)
 
 
