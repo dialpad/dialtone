@@ -77,11 +77,11 @@ export const Emoji = Node.create({
      code -- unicode emoji
     */
 
-    const { image, code } = node.attrs;
+    const { image, code, name } = node.attrs;
 
-    if(image !== null) {
-      return image;
-    }else{
+    if (image !== null) {
+      return `:${name}:`;
+    } else{
       const emojiData = codeToEmojiData(code);
       const unicodeEmoji = stringToUnicode(emojiData.unicode_output);
 
