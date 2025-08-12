@@ -44,7 +44,10 @@ const _mountWrapper = () => {
 };
 
 const _setValue = async (value) => {
-  editorEl.innerHTML = value;
+  // Use TipTap's setContent API and manually trigger events
+  wrapper.vm.editor.commands.setContent(value, false, { preserveWhitespace: 'full' });
+  // Manually trigger the input change events that would normally be called by the 'update' event
+  wrapper.vm.triggerInputChangeEvents();
   await wrapper.vm.$nextTick();
 };
 
@@ -91,7 +94,11 @@ describe('DtRichTextEditor tests', () => {
         const itBehavesLikeOutputsCorrectly = (value, output, onlyCheckOutputContained = false) => {
           it('should emit the output value', async () => {
             await _setValue(value);
-            const emittedOutput = wrapper.emitted().input[0][0];
+
+            // In Vue 3, check for update:modelValue event (v-model standard)
+            const emittedEvents = wrapper.emitted()['update:modelValue'] || wrapper.emitted().input;
+            const emittedOutput = emittedEvents?.[0]?.[0];
+
             if (onlyCheckOutputContained) {
               expect(emittedOutput).toContain(output);
             } else {

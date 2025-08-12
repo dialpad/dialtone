@@ -65,18 +65,6 @@ describe('DtEmoji Tests', () => {
         });
       });
 
-      describe('When a prop changes to a new custom emoji code', () => {
-        it('should display the correct emoji with the new custom code', async () => {
-          setCustomEmojiJson(customEmojiJson);
-
-          await wrapper.setProps({ code: ':shipit:' });
-
-          expect(emoji.attributes('src')).toBe(MOCK_EXPECTED_SHIP_IT);
-
-          setCustomEmojiJson('');
-        });
-      });
-
       describe('When a prop changes to an invalid code', () => {
         it('should display a "not found" image', async () => {
           await wrapper.setProps({ code: ':invalidcode:' });

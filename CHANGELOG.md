@@ -1,3 +1,31 @@
+# [9.131.0](https://github.com/dialpad/dialtone/compare/dialtone/v9.130.0...dialtone/v9.131.0) (2025-08-12)
+
+
+### Features
+
+* **Utilities:** DLT-2396 word-break: break-word and word-wrap: anywhere ([#864](https://github.com/dialpad/dialtone/issues/864)) ([079eab6](https://github.com/dialpad/dialtone/commit/079eab61c64714de728d35173bc01e11b55c03b1))
+
+# [9.130.0](https://github.com/dialpad/dialtone/compare/dialtone/v9.129.3...dialtone/v9.130.0) (2025-08-11)
+
+
+### Bug Fixes
+
+* **Rich Text Editor:** DLT-2690 custom emojis not working ([#860](https://github.com/dialpad/dialtone/issues/860)) ([60feffc](https://github.com/dialpad/dialtone/commit/60feffc86e2e7655543af0f3bbc5a3c33e459bb3))
+
+
+### Documentation
+
+* DLT-2669 update brand logos ([#858](https://github.com/dialpad/dialtone/issues/858)) ([6c376ea](https://github.com/dialpad/dialtone/commit/6c376ea69e62d94592b55718fd440c29844103d4))
+* NO-JIRA fix color palette links ([#863](https://github.com/dialpad/dialtone/issues/863)) ([225acc1](https://github.com/dialpad/dialtone/commit/225acc1ea6704c21af3db2fdf479e4386b68923b))
+* **Select Menu:** NO-JIRA use default instead of options ([#861](https://github.com/dialpad/dialtone/issues/861)) ([b9278b7](https://github.com/dialpad/dialtone/commit/b9278b74d4e437d2248498955a3928f4a1e8c268))
+
+
+### Features
+
+* **Color:** DLT-2571 added chart design tokens ([#822](https://github.com/dialpad/dialtone/issues/822)) ([3ecb49b](https://github.com/dialpad/dialtone/commit/3ecb49b292806b284bdd1ca02b4ab604db01fcc8))
+* **Color:** DLT-2594 shell design tokens ([#840](https://github.com/dialpad/dialtone/issues/840)) ([720fc47](https://github.com/dialpad/dialtone/commit/720fc475a5460502d21c000e36069b086190a608))
+* **Utilities:** DLT-2115 d-d-contents ([#862](https://github.com/dialpad/dialtone/issues/862)) ([4879654](https://github.com/dialpad/dialtone/commit/4879654e60b2f385196c9513a172b683bbf4967b))
+
 ## [9.129.3](https://github.com/dialpad/dialtone/compare/dialtone/v9.129.2...dialtone/v9.129.3) (2025-08-05)
 
 

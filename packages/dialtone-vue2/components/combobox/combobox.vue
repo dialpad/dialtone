@@ -312,7 +312,7 @@ export default {
       }
     },
 
-    loading (loading) {
+    loading () {
       this.$nextTick(() => {
         this.setInitialHighlightIndex();
       });

@@ -2,7 +2,7 @@ const postcss = require('postcss');
 
 const plugin = require('./dialtone-generators.cjs');
 
-async function run (input, output, opts = { }) {
+async function run (input, output) {
   const result = await postcss([plugin()]).process(input, { from: undefined });
   expect(result.css).toEqual(output);
   expect(result.warnings()).toHaveLength(0);

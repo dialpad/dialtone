@@ -426,7 +426,7 @@ vueCode='
   @input="onInput"
   @change="onChange"
 >
-  <template #options>
+  <template #default>
     <option
       v-for="option in options"
       :key="`with-slotted-options-${option.value}`"

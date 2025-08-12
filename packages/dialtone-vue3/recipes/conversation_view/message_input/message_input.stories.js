@@ -288,7 +288,7 @@ export const WithMeetingPill = {
   render: DefaultTemplate,
   args: {
     slashCommandSuggestion: {
-      items: ({ query }) => {
+      items: () => {
         return [
           {
             command: 'dpm',

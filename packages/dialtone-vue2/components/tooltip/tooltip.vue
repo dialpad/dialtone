@@ -23,6 +23,7 @@
       ref="content"
       data-qa="dt-tooltip"
       :class="[
+        // eslint-disable-next-line vue/no-restricted-class
         'd-tooltip',
         {
           [ TOOLTIP_KIND_MODIFIERS.inverted ]: inverted,
@@ -290,7 +291,7 @@ export default {
   },
 
   computed: {
-    // eslint-disable-next-line complexity
+     
     tippyProps () {
       return {
         offset: this.offset,

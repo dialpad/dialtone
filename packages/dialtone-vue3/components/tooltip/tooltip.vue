@@ -291,7 +291,7 @@ export default {
   },
 
   computed: {
-    // eslint-disable-next-line complexity
+     
     tippyProps () {
       return {
         offset: this.offset,

@@ -1,3 +1,4 @@
+/* eslint-disable storybook/default-exports */
 const { injectAxe, checkA11y, configureAxe } = require('axe-playwright');
 
 const { getStoryContext } = require('@storybook/test-runner');

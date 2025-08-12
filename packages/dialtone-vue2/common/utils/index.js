@@ -144,7 +144,7 @@ export const htmlFragment = {
   props: ['html'],
   render (h, ctx) {
     return new Vue({
-      // eslint-disable-next-line vue/multi-word-component-names
+
       name: 'Inner',
       beforeCreate () { this.$createElement = h; },
       template: `<div>${ctx.props.html}</div>`,
@@ -295,7 +295,7 @@ export function getPhoneNumberRegex (minLength = 7, maxLength = 15) {
       `{${minLength},${maxLength}}` +
       ')(?=\\b)(?=\\W(?=\\W|$)|\\s|$)',
     );
-  } catch (e) {
+  } catch {
     // eslint-disable-next-line no-console
     console.warn('This browser doesn\'t support regex lookahead/lookbehind');
   }

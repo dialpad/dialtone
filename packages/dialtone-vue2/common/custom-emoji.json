@@ -1,28 +1,23 @@
-{
-  "octocat": {
-    "name": "octocat",
-    "category": "",
-    "shortname": ":octocat:",
-    "shortname_alternates": [],
-    "keywords": [
-      "octo",
-      "cat",
-      "github"
-    ],
-    "extension": ".png",
-    "custom": true
+[
+  {
+    "added_by": "Ignacio Ropolo",
+    "content_type": "image/gif",
+    "date_added": 1730918926288,
+    "image": "https://storage.googleapis.com/uv-beta_custom_emojis/5646620347596800/blinkingguy",
+    "name": "blinkingguy"
   },
-  "shipit": {
-    "name": "ship it",
-    "category": "",
-    "shortname": ":shipit:",
-    "shortname_alternates": [],
-    "keywords": [
-      "ship",
-      "it",
-      "github"
-    ],
-    "extension": ".png",
-    "custom": true
+  {
+    "added_by": "Ignacio Ropolo",
+    "content_type": "image/jpeg",
+    "date_added": 1730918772008,
+    "image": "https://storage.googleapis.com/uv-beta_custom_emojis/5646620347596800/awkward_seal",
+    "name": "awkward_seal"
+  },
+  {
+    "added_by": "Ignacio Ropolo",
+    "content_type": "image/png",
+    "date_added": 1730918828527,
+    "image": "https://storage.googleapis.com/uv-beta_custom_emojis/5646620347596800/baby_yoda",
+    "name": "baby_yoda"
   }
-}
+]

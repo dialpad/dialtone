@@ -54,6 +54,12 @@ export const Emoji = Node.create({
       code: {
         default: null,
       },
+      image: {
+        default: null,
+      },
+      name: {
+        default: null,
+      },
     };
   },
 
@@ -66,10 +72,21 @@ export const Emoji = Node.create({
   },
 
   renderText ({ node }) {
-    // output emoji in text as unicode character rather than shortname for backwards compatibility with
-    // our backend.
-    const unicodeEmoji = stringToUnicode(codeToEmojiData(node.attrs.code).unicode_output);
-    return unicodeEmoji;
+    /**
+     image -- custom emoji
+     code -- unicode emoji
+    */
+
+    const { image, code } = node.attrs;
+
+    if(image !== null) {
+      return image;
+    }else{
+      const emojiData = codeToEmojiData(code);
+      const unicodeEmoji = stringToUnicode(emojiData.unicode_output);
+
+      return unicodeEmoji;
+    }
   },
 
   renderHTML ({ HTMLAttributes }) {
@@ -85,7 +102,7 @@ export const Emoji = Node.create({
 
           return inputRuleMatch(match);
         },
-        handler: ({ state, range, match, commands, chain, can }) => {
+        handler: ({ state, range, match}) => {
           const { tr } = state;
           const start = range.from;
           const end = range.to;
@@ -103,6 +120,8 @@ export const Emoji = Node.create({
         getAttributes (attrs) {
           return {
             code: attrs[0],
+            image: attrs[1],
+            name: attrs[2],
           };
         },
       }),
@@ -112,6 +131,8 @@ export const Emoji = Node.create({
         getAttributes (attrs) {
           return {
             code: attrs[0],
+            image: attrs[1],
+            name: attrs[2],
           };
         },
       }),
