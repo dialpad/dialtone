@@ -387,6 +387,57 @@ describe('DtRichTextEditor tests', () => {
   });
 
   describe('Interactivity Tests', () => {
+    describe('Link keyboard shortcut functionality', () => {
+      describe('When Mod+K is pressed and link is enabled', () => {
+        it('should emit edit-link event', async () => {
+          await wrapper.setProps({ link: true });
+
+          // Get the editor instance
+          const editorInstance = wrapper.vm.editor;
+
+          // Focus the editor
+          editorInstance.commands.focus();
+
+          // Simulate the keyboard shortcut by triggering it directly on the editor
+          // This tests that the edit-link event gets emitted when Mod+K shortcut is triggered
+          editorInstance.commands.keyboardShortcut('Mod-k');
+
+          await wrapper.vm.$nextTick();
+
+          // Check if the edit-link event was emitted
+          expect(wrapper.emitted('edit-link')).toBeTruthy();
+        });
+      });
+    });
+
+    describe('Blockquote keyboard shortcut functionality', () => {
+      describe('When Mod+Shift+B is pressed and blockquote is enabled', () => {
+        it('should toggle blockquote formatting', async () => {
+          await wrapper.setProps({
+            allowBlockquote: true,
+            outputFormat: 'html',
+            modelValue: 'Test text',
+          });
+
+          // Get the editor instance
+          const editorInstance = wrapper.vm.editor;
+
+          // Focus the editor and select all text
+          editorInstance.commands.focus();
+          editorInstance.commands.selectAll();
+
+          // Simulate the Mod+Shift+B keyboard shortcut
+          editorInstance.commands.keyboardShortcut('Mod-Shift-b');
+
+          await wrapper.vm.$nextTick();
+
+          // Check if the text is now wrapped in a blockquote
+          const output = wrapper.vm.getOutput();
+          expect(output).toBe('<blockquote><p>Test text</p></blockquote>');
+        });
+      });
+    });
+
     describe('handleKeyDown functionality', () => {
       let mockKeyEvent;
       let mockView;
