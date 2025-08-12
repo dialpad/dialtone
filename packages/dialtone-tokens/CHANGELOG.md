@@ -1,3 +1,10 @@
+## [1.44.1](https://github.com/dialpad/dialtone/compare/dialtone-tokens/v1.44.0...dialtone-tokens/v1.44.1) (2025-08-12)
+
+
+### Bug Fixes
+
+* **Tokens:** DLT-2712 remove prepended `color` from `inputs`, `action`, `theme` groups ([#869](https://github.com/dialpad/dialtone/issues/869)) ([4392bcb](https://github.com/dialpad/dialtone/commit/4392bcb63e81cd1c1a9c28f707a1a19a6dbae842))
+
 # [1.44.0](https://github.com/dialpad/dialtone/compare/dialtone-tokens/v1.43.3...dialtone-tokens/v1.44.0) (2025-08-11)
 
 
