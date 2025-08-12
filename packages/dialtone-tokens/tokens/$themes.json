@@ -4026,7 +4026,7 @@
   },
   {
     "id": "a8b179308cd9172deaa0ee0b738ada1362e58352",
-    "name": "default",
+    "name": "light",
     "$figmaStyleReferences": {},
     "selectedTokenSets": {
       "components/avatar/default": "enabled",
