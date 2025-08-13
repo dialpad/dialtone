@@ -72,7 +72,7 @@ export default [
       'vuejs-accessibility/aria-props': 'warn',
       'max-lines': ['warn', { max: 300, skipBlankLines: true, skipComments: true }],
       quotes: ['error', 'single', { allowTemplateLiterals: true }],
-      complexity: ['warn', 5],
+      complexity: ['warn', 8],
       // Vue core extensions
       'vue/array-bracket-spacing': ['error', 'never'],
       'vue/arrow-spacing': ['error', { before: true, after: true }],

@@ -111,7 +111,7 @@ export default [
       quotes: ['error', 'single', {
         allowTemplateLiterals: true,
       }],
-      complexity: ['warn', 5],
+      complexity: ['warn', 8],
       'vue/no-restricted-class': ['error', `/^d-(?!(recipe|${componentsNames.join('|')})).*/`],
     },
   },
