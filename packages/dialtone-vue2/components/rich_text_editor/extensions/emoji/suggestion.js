@@ -1,5 +1,5 @@
 import { VueRenderer } from '@tiptap/vue-2';
-import { emojisIndexed } from '@dialpad/dialtone-emojis';
+import { getEmojiData } from '@/common/emoji';
 
 import SuggestionList from '../suggestion/SuggestionList.vue';
 import EmojiSuggestion from './EmojiSuggestion.vue';
@@ -14,16 +14,16 @@ export default {
     if (query.length < 2) {
       return [];
     }
-    const emojiList = Object.values(emojisIndexed);
+    const emojiList = Object.values(getEmojiData());
     query = query.toLowerCase();
 
     const filteredEmoji = emojiList
       .filter(
         item => [
           item.name,
-          item.shortname.replaceAll(':', ''),
-          ...item.keywords,
-        ].some(text => text.startsWith(query)),
+          item.shortname?.replaceAll(':', ''),
+          ...(item.keywords || []),
+        ].some(text => text && text.startsWith(query)),
       ).splice(0, suggestionLimit);
     return filteredEmoji.map(item => ({ code: item.shortname }));
   },
