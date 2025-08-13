@@ -9,9 +9,17 @@ const currentTheme = inject('currentTheme');
 
 const props = defineProps({
   /**
-   * List of allowed colors to filter extracted docs
+   * List of colors to exclude from the table
    */
   excludedColors: {
+    type: Array,
+    default: () => [],
+  },
+
+  /**
+   * List of specific colors to include in the table (takes precedence over excludedColors)
+   */
+  includedColors: {
     type: Array,
     default: () => [],
   },
@@ -28,32 +36,45 @@ const props = defineProps({
 /**
  *
  * @param excludedColors
+ * @param includedColors
  * @param classPrefix
  * @returns {object[]}
  */
-function processColorsDocs (excludedColors, classPrefix) {
-  return Array.from(Object.keys(utilityClassDocs)
-    .filter(className =>
-      className.startsWith(classPrefix) &&
-      !excludedColors.some(color => className.includes(color)) &&
-      !baseColorRegex.test(className),
-    )
-    .reduce((result, color) => {
-      const tokenName = extractCSSVariableName(utilityClassDocs[color]);
-      const colorName = color.replace(classPrefix, '').replace(/-/g, ' ');
-      const token = tokensDocs[tokenName]?.[`dp-${currentTheme.value}`];
+function processColorsDocs (excludedColors, includedColors, classPrefix) {
+  // Get all utility classes that match the class prefix
+  let filteredClasses = Object.keys(utilityClassDocs).filter(className =>
+    className.startsWith(classPrefix) && !baseColorRegex.test(className),
+  );
 
-      result.add({
-        name: colorName,
-        tokenName,
-        utilityClass: color,
-        description: token?.description,
-      });
-      return result;
-    }, new Set()));
+  // If includedColors is provided and not empty, only include those specific colors
+  if (includedColors && includedColors.length > 0) {
+    filteredClasses = filteredClasses.filter(className =>
+      includedColors.some(color => className.includes(color)),
+    );
+  } else {
+    // Otherwise, apply the excludedColors filter
+    filteredClasses = filteredClasses.filter(className =>
+      !excludedColors.some(color => className.includes(color)),
+    );
+  }
+
+  // Process the filtered classes
+  return Array.from(filteredClasses.reduce((result, color) => {
+    const tokenName = extractCSSVariableName(utilityClassDocs[color]);
+    const colorName = color.replace(classPrefix, '').replace(/-/g, ' ');
+    const token = tokensDocs[tokenName]?.[`dp-${currentTheme.value}`];
+
+    result.add({
+      name: colorName,
+      tokenName,
+      utilityClass: color,
+      description: token?.description,
+    });
+    return result;
+  }, new Set()));
 }
 
-const colors = processColorsDocs(props.excludedColors, props.classPrefix);
+const colors = processColorsDocs(props.excludedColors, props.includedColors, props.classPrefix);
 </script>
 
 <template>

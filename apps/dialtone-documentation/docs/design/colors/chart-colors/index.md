@@ -69,8 +69,7 @@ Use to convey inherent meaning, status, severity, or sentiment (e.g., positive, 
 - Sentiment Analysis: Representing positive, neutral, or negative sentiment.
 - Brand Alignment: Emphasizing data related directly to Dialpad's core identity.
 
-<!-- Original DesignColorTable is hidden -->
-<!-- <DesignColorTable :included-colors="['chart-positive-strong','chart-positive','chart-positive-strong-hover','chart-positive-strong-selected','chart-positive-hover','chart-positive-selected','chart-negative-strong','chart-negative','chart-negative-strong-hover','chart-negative-strong-selected','chart-negative-hover','chart-negative-selected','chart-warning-strong','chart-warning','chart-warning-strong-hover','chart-warning-strong-selected','chart-warning-hover','chart-warning-selected','chart-info-strong','chart-info','chart-info-strong-hover','chart-info-strong-selected','chart-info-hover','chart-info-selected','chart-brand-strong','chart-brand','chart-brand-strong-hover','chart-brand-strong-selected','chart-brand-hover','chart-brand-selected']" class-prefix="d-bgc-">
+<DesignColorTable :included-colors="['chart-positive-strong','chart-positive','chart-positive-strong-hover','chart-positive-strong-selected','chart-positive-hover','chart-positive-selected','chart-negative-strong','chart-negative','chart-negative-strong-hover','chart-negative-strong-selected','chart-negative-hover','chart-negative-selected','chart-warning-strong','chart-warning','chart-warning-strong-hover','chart-warning-strong-selected','chart-warning-hover','chart-warning-selected','chart-info-strong','chart-info','chart-info-strong-hover','chart-info-strong-selected','chart-info-hover','chart-info-selected','chart-brand-strong','chart-brand','chart-brand-strong-hover','chart-brand-strong-selected','chart-brand-hover','chart-brand-selected']" class-prefix="d-bgc-">
   <template #example="{color}">
     <div
       class="d-bar-circle d-w42 d-h42 d-ba d-bc-moderate d-bas-dashed"
@@ -86,7 +85,7 @@ Use to convey inherent meaning, status, severity, or sentiment (e.g., positive, 
       {{ color.tokenName }}
     </span>
   </template>
-</DesignColorTable> -->
+</DesignColorTable>
 
 ### Categorical
 
@@ -97,8 +96,7 @@ Purpose: To differentiate distinct, unrelated categories of data where the color
 - Multi-series bar charts, pie charts, or line charts comparing different groups.
 - Visualizing discrete variables (e.g., customer segments, operating systems).
 
-<!-- Original DesignColorTable is hidden -->
-<!-- <DesignColorTable :included-colors="['chart-categorical-01','chart-categorical-01-hover','chart-categorical-01-selected','chart-categorical-02','chart-categorical-02-hover','chart-categorical-02-selected','chart-categorical-03','chart-categorical-03-hover','chart-categorical-03-selected','chart-categorical-04','chart-categorical-04-hover','chart-categorical-04-selected','chart-categorical-05','chart-categorical-05-hover','chart-categorical-05-selected','chart-categorical-06','chart-categorical-06-hover','chart-categorical-06-selected','chart-categorical-07','chart-categorical-07-hover','chart-categorical-07-selected']" class-prefix="d-bgc-">
+<DesignColorTable :included-colors="['chart-categorical-01','chart-categorical-01-hover','chart-categorical-01-selected','chart-categorical-02','chart-categorical-02-hover','chart-categorical-02-selected','chart-categorical-03','chart-categorical-03-hover','chart-categorical-03-selected','chart-categorical-04','chart-categorical-04-hover','chart-categorical-04-selected','chart-categorical-05','chart-categorical-05-hover','chart-categorical-05-selected','chart-categorical-06','chart-categorical-06-hover','chart-categorical-06-selected','chart-categorical-07','chart-categorical-07-hover','chart-categorical-07-selected']" class-prefix="d-bgc-">
   <template #example="{color}">
     <div
       class="d-bar-circle d-w42 d-h42 d-ba d-bc-moderate d-bas-dashed"
@@ -114,7 +112,7 @@ Purpose: To differentiate distinct, unrelated categories of data where the color
       {{ color.tokenName }}
     </span>
   </template>
-</DesignColorTable> -->
+</DesignColorTable>
 
 ### Sequential
 
@@ -126,8 +124,7 @@ To represent data using progressive shades or tints of a single color, emphasizi
 - Heatmaps or density visualizations for a single metric.
 - Situations requiring a strong visual connection to the Dialpad brand.
 
-<!-- Original DesignColorTable is hidden -->
-<!-- <DesignColorTable :included-colors="['chart-sequential-01','chart-sequential-01-hover','chart-sequential-01-selected','chart-sequential-02','chart-sequential-02-hover','chart-sequential-02-selected','chart-sequential-03','chart-sequential-03-hover','chart-sequential-03-selected','chart-sequential-04','chart-sequential-04-hover','chart-sequential-04-selected','chart-sequential-05','chart-sequential-05-hover','chart-sequential-05-selected','chart-sequential-06','chart-sequential-06-hover','chart-sequential-06-selected','chart-sequential-07','chart-sequential-07-hover','chart-sequential-07-selected']" class-prefix="d-bgc-">
+<DesignColorTable :included-colors="['chart-sequential-01','chart-sequential-01-hover','chart-sequential-01-selected','chart-sequential-02','chart-sequential-02-hover','chart-sequential-02-selected','chart-sequential-03','chart-sequential-03-hover','chart-sequential-03-selected','chart-sequential-04','chart-sequential-04-hover','chart-sequential-04-selected','chart-sequential-05','chart-sequential-05-hover','chart-sequential-05-selected','chart-sequential-06','chart-sequential-06-hover','chart-sequential-06-selected','chart-sequential-07','chart-sequential-07-hover','chart-sequential-07-selected']" class-prefix="d-bgc-">
   <template #example="{color}">
     <div
       class="d-bar-circle d-w42 d-h42 d-ba d-bc-moderate d-bas-dashed"
@@ -143,7 +140,7 @@ To represent data using progressive shades or tints of a single color, emphasizi
       {{ color.tokenName }}
     </span>
   </template>
-</DesignColorTable> -->
+</DesignColorTable>
 
 ## Accesibility Guidelines
 
