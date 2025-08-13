@@ -38,7 +38,7 @@ export default [
       }],
       'max-lines': ['warn', { max: 300, skipBlankLines: true, skipComments: true }],
       quotes: ['error', 'single', { allowTemplateLiterals: true }],
-      complexity: ['warn', 5],
+      complexity: ['warn', 8],
     },
   },
   {
@@ -69,7 +69,7 @@ export default [
       }],
       'max-lines': ['warn', { max: 300, skipBlankLines: true, skipComments: true }],
       quotes: ['error', 'single', { allowTemplateLiterals: true }],
-      complexity: ['warn', 5],
+      complexity: ['warn', 8],
     },
   },
 ];

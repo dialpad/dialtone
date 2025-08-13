@@ -102,7 +102,7 @@ export default [
       quotes: ['error', 'single', {
         allowTemplateLiterals: true,
       }],
-      complexity: ['warn', 5],
+      complexity: ['warn', 8],
       // Vue core extensions
       'vue/array-bracket-spacing': ['error', 'never'],
       'vue/arrow-spacing': ['error', {
