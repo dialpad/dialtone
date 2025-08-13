@@ -33,7 +33,7 @@ export function getComponentInfo (component, documentation) {
  * @param {object} info - The unprocessed info object.
  * @param {object} component - The target component.
  */
-// eslint-disable-next-line complexity
+ 
 function extendInfo (info, component) {
   if (!info) {
     return;

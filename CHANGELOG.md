@@ -1,3 +1,18 @@
+## [9.131.1](https://github.com/dialpad/dialtone/compare/dialtone/v9.131.0...dialtone/v9.131.1) (2025-08-12)
+
+
+### Bug Fixes
+
+* **Message Input:** DLT-2679 fix keyboard shortcuts ([#866](https://github.com/dialpad/dialtone/issues/866)) ([d318741](https://github.com/dialpad/dialtone/commit/d3187410f19bc6d5eb751014098bdb3f7380a9f0))
+* **Tokens:** DLT-2712 remove prepended `color` from `inputs`, `action`, `theme` groups ([#869](https://github.com/dialpad/dialtone/issues/869)) ([4392bcb](https://github.com/dialpad/dialtone/commit/4392bcb63e81cd1c1a9c28f707a1a19a6dbae842))
+
+# [9.131.0](https://github.com/dialpad/dialtone/compare/dialtone/v9.130.0...dialtone/v9.131.0) (2025-08-12)
+
+
+### Features
+
+* **Utilities:** DLT-2396 word-break: break-word and word-wrap: anywhere ([#864](https://github.com/dialpad/dialtone/issues/864)) ([079eab6](https://github.com/dialpad/dialtone/commit/079eab61c64714de728d35173bc01e11b55c03b1))
+
 # [9.130.0](https://github.com/dialpad/dialtone/compare/dialtone/v9.129.3...dialtone/v9.130.0) (2025-08-11)
 
 

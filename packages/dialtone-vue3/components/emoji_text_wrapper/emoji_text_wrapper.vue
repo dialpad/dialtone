@@ -88,7 +88,7 @@ export default {
     },
 
     // TODO: Find a way to crawl vue components
-    replaceVueComponentVNodeContent (VNode) {
+    replaceVueComponentVNodeContent () {
       //
     },
 

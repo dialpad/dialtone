@@ -1,3 +1,10 @@
+## [3.187.4](https://github.com/dialpad/dialtone/compare/dialtone-vue3/v3.187.3...dialtone-vue3/v3.187.4) (2025-08-12)
+
+
+### Bug Fixes
+
+* **Message Input:** DLT-2679 fix keyboard shortcuts ([#866](https://github.com/dialpad/dialtone/issues/866)) ([d318741](https://github.com/dialpad/dialtone/commit/d3187410f19bc6d5eb751014098bdb3f7380a9f0))
+
 ## [3.187.3](https://github.com/dialpad/dialtone/compare/dialtone-vue3/v3.187.2...dialtone-vue3/v3.187.3) (2025-08-05)
 
 

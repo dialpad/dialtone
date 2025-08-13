@@ -135,7 +135,7 @@ export default {
       return this.i18n.$t('DIALTONE_DATEPICKER_SELECT_DAY') + ` ${formatDate(day.value, INTL_MONTH_FORMAT, this.i18n.currentLocale)}`;
     },
 
-    setDayRef (el, day) {
+    setDayRef () {
       this.calendarDays.forEach((week, weekIndex) => {
         week.days.forEach((day, dayIndex) => {
           const refKey = `buttonRef_${weekIndex}_${dayIndex}`;
@@ -154,7 +154,7 @@ export default {
           this.focusDay -= 7;
           try {
             this.daysRef[this.focusDay].el.$el.focus();
-          } catch (error) {
+          } catch {
             const prevFocusDate = calculatePrevFocusDate(this.daysRef[this.focusDay + 7].day.value);
             this.$emit('go-to-prev-month');
             this.$nextTick(() => {
@@ -170,7 +170,7 @@ export default {
           this.focusDay += 7;
           try {
             this.daysRef[this.focusDay].el.$el.focus();
-          } catch (error) {
+          } catch {
             const nextFocusDate = calculateNextFocusDate(this.daysRef[this.focusDay - 7].day.value);
             this.$emit('go-to-next-month');
             this.$nextTick(() => {

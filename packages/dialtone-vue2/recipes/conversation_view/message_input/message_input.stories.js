@@ -281,7 +281,7 @@ export const WithMeetingPill = {
   render: (argsData) => createRenderConfig(DtRecipeMessageInput, DtRecipeMessageInputDefaultTemplate, argsData),
   args: {
     slashCommandSuggestion: {
-      items: ({ query }) => {
+      items: () => {
         return [
           {
             command: 'dpm',

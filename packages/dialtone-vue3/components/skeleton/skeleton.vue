@@ -154,7 +154,7 @@ export default {
   methods: {
     validator () {
       const filtered = Object.entries(this.validationOptions)
-        .filter(([_, option]) => option);
+        .filter(([, option]) => option);
       if (filtered.length >= 2) {
         const errorMessage = `Use only one of ${filtered.map(([key]) => key).join(' | ')} options at the same time`;
         console.error(errorMessage);
