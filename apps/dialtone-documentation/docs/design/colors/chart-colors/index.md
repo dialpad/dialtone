@@ -40,6 +40,11 @@ Use to provide clear visual feedback for user interactions or specific visual co
 - Indicating selected chart series or segments.
 - Dimming or disabling inactive chart elements.
 
+<token-table :tokens="semanticTokens" theme="light" :show-value="false" />
+<token-table :tokens="categoricalTokens" theme="light" :show-value="false" />
+<token-table :tokens="sequentialTokens" theme="light" :show-value="false" />
+<token-table :tokens="singleColorTokens" theme="light" :show-value="false" />
+
 <DesignColorTable :included-colors="['chart-neutral','chart-neutral-hover','chart-neutral-selected', 'chart-accent','chart-accent-hover','chart-accent-selected']" class-prefix="d-bgc-">
   <template #example="{color}">
     <div
@@ -263,6 +268,7 @@ Please reach out to the Design Systems team or submit an issue/request [here](ht
 import DesignColorTable from '@baseComponents/DesignColorTable.vue';
 import ThemeColorTable from '@baseComponents/ThemeColorTable.vue';
 import ColorsCatalog from '@views/ColorsCatalog.vue';
+import tokensJson from '@dialpad/dialtone-tokens/dist/doc.json';
 
 /*
 * Remove unwanted background-clip classes
@@ -282,4 +288,30 @@ const statusTextColorsExclusionList = [
   'disabled',
   'muted',
 ];
+const theme = "dp-light";
+
+const chartTokens = Object.keys(tokensJson[theme]).reduce((acc, curr) => {
+  if (!curr.startsWith('color/chart')) return acc;
+
+  const { name, value, description } = tokensJson[theme][curr]["css/variables"];
+
+  acc.push({
+    name,
+    tokenValue: value,
+    description,
+    exampleValue: value,
+    exampleName: name,
+  });
+  return acc;
+}, []);
+
+const isSemantic = (token) => /(warning|positive|info|critical|brand)/.test(token);
+const isCategorical = (token) => /(categorical)/.test(token);
+const isSequential = (token) => /(sequential)/.test(token);
+
+const semanticTokens = chartTokens.filter(({ name: token }) => isSemantic(token));
+const categoricalTokens = chartTokens.filter(({ name: token }) => isCategorical(token));
+const sequentialTokens = chartTokens.filter(({ name: token }) => isSequential(token));
+const singleColorTokens = chartTokens.filter(({ name: token }) => !(isSequential(token) || isCategorical(token) || isSemantic(token)));
+
 </script>
