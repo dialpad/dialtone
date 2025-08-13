@@ -103,7 +103,7 @@ They should be easy to scan for relevant and actionable information. Elements, l
 <dialtone-usage>
 <template #do>
  <div class="d-bgc-brand d-bar8">
- <svg-loader class="d-fl1" name="color-roles" />
+ <svg-loader class="d-fl1" name="chart-header" />
  </div>
 We categorize color application by semantic roles such as: **text, surfaces, borders, and themes**. Each uses neutrals for general UI and status colors for impact.
 </template>
