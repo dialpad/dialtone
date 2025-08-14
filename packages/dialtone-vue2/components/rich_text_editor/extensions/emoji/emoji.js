@@ -72,21 +72,8 @@ export const Emoji = Node.create({
   },
 
   renderText ({ node }) {
-    /**
-     image -- custom emoji
-     code -- unicode emoji
-    */
-
-    const { image, code } = node.attrs;
-
-    if(image !== null) {
-      return image;
-    }else{
-      const emojiData = codeToEmojiData(code);
-      const unicodeEmoji = stringToUnicode(emojiData.unicode_output);
-
-      return unicodeEmoji;
-    }
+    const unicodeEmoji = stringToUnicode(codeToEmojiData(node.attrs.code).unicode_output);
+    return unicodeEmoji;
   },
 
   renderHTML ({ HTMLAttributes }) {

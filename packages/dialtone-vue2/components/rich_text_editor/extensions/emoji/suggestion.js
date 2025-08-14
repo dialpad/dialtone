@@ -1,5 +1,5 @@
 import { VueRenderer } from '@tiptap/vue-2';
-import { emojisIndexed } from '@dialpad/dialtone-emojis';
+import { getEmojiData } from '@/common/emoji';
 
 import SuggestionList from '../suggestion/SuggestionList.vue';
 import EmojiSuggestion from './EmojiSuggestion.vue';
@@ -9,22 +9,37 @@ import hideOnEsc from '../tippy_plugins/hide_on_esc';
 
 const suggestionLimit = 20;
 
+const sortEmojis = (a, b, query) => {
+  const aShortname = a.shortname?.replaceAll(':', '');
+  const bShortname = b.shortname?.replaceAll(':', '');
+  const aStartsWith = aShortname.startsWith(query);
+  const bStartsWith = bShortname.startsWith(query);
+
+  // If one starts with query and the other doesn't, prioritize the one that starts
+  if (aStartsWith && !bStartsWith) return -1;
+  if (!aStartsWith && bStartsWith) return 1;
+
+  // Sort alphabetically
+  return aShortname.localeCompare(bShortname);
+};
+
 export default {
   items: ({ query }) => {
     if (query.length < 2) {
       return [];
     }
-    const emojiList = Object.values(emojisIndexed);
+    const emojiList = Object.values(getEmojiData());
     query = query.toLowerCase();
 
     const filteredEmoji = emojiList
       .filter(
         item => [
           item.name,
-          item.shortname.replaceAll(':', ''),
-          ...item.keywords,
-        ].some(text => text.startsWith(query)),
-      ).splice(0, suggestionLimit);
+          item.shortname?.replaceAll(':', ''),
+          ...(item.keywords || []),
+        ].some(text => text && text.startsWith(query)),
+      ).splice(0, suggestionLimit)
+      .sort((a, b) => sortEmojis(a, b, query));
     return filteredEmoji.map(item => ({ code: item.shortname }));
   },
 

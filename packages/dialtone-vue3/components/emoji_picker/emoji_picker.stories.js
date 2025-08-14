@@ -3,6 +3,7 @@ import { createTemplateFromVueFile } from '@/common/storybook_utils';
 import DtEmojiPicker from './emoji_picker.vue';
 import DtEmojiPickerDefaultTemplate from './emoji_picker_default.story.vue';
 import DtEmojiPickerWithPopoverTemplate from './emoji_picker_popover.story.vue';
+import customEmojiJson from '@/common/custom-emoji.json';
 
 const recentlyUsedEmojis = [
   {
@@ -52,24 +53,7 @@ const recentlyUsedEmojis = [
   },
 ];
 
-const customEmojis = [
-  {
-    name: 'shipit',
-    date_added: 1730918816847,
-    added_by: 'Ignacio Ropolo',
-    image: 'https://github.githubassets.com/images/icons/emoji/shipit.png',
-    unicode_character: '1f44d',
-  },
-  {
-    name: 'thumbs up',
-    category: 'people',
-    shortname: ':thumbsup:',
-    shortname_alternates: [':+1:', ':thumbup:'],
-    keywords: ['+1', 'hand', 'thumb', 'up', 'uc6'],
-    unicode_output: '1f44d',
-    unicode_character: '1f44d',
-  },
-];
+const customEmojis = customEmojiJson;
 
 export const argsData = {
   onSkinTone: action('skin-tone'),

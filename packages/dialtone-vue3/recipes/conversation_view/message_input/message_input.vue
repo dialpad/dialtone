@@ -962,6 +962,8 @@ export default {
         type: 'emoji',
         attrs: {
           code: emoji.shortname,
+          image: emoji.image,
+          name: emoji.name,
         },
       });
       this.$emit('selected-emoji', emoji);

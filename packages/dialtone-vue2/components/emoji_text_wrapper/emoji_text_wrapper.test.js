@@ -7,7 +7,7 @@ setEmojiAssetUrlLarge('https://mockstorage.com/emojis/', '.svg');
 setCustomEmojiUrl('https://mockstorage.com/emojis/');
 
 const MOCK_EXPECTED_SMILE_SRC = 'https://mockstorage.com/emojis/1f604.svg';
-const MOCK_EXPECTED_OCTOCAT_SRC = 'https://mockstorage.com/emojis/octocat.png';
+const MOCK_EXPECTED_BABY_YODA_SRC = 'https://storage.googleapis.com/uv-beta_custom_emojis/5646620347596800/baby_yoda';
 
 const baseProps = {};
 const baseSlots = {};
@@ -75,6 +75,27 @@ describe('DtEmojiTextWrapper Tests', () => {
 
           it('Renders the correct emoji', () => {
             expect(emoji.attributes('src')).toBe(MOCK_EXPECTED_SMILE_SRC);
+          });
+        });
+
+        describe('When default slot contains valid custom shortcode', () => {
+          beforeEach(() => {
+            setCustomEmojiJson(customEmojiJson);
+
+            mockSlots = { default: 'Content with :baby_yoda: emoji.' };
+
+            updateWrapper();
+          });
+          afterAll(() => {
+            setCustomEmojiJson('');
+          });
+
+          it('Contains emoji component', () => {
+            expect(emoji.exists()).toBe(true);
+          });
+
+          it('Renders the correct emoji', () => {
+            expect(emoji.attributes('src')).toBe(MOCK_EXPECTED_BABY_YODA_SRC);
           });
         });
 
