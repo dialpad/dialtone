@@ -181,9 +181,8 @@ You can also change the border color opacity value on `:hover`
 
 <script setup>
   import { inject } from 'vue';
-  import { extractUtilityClasses, sortBaseColors } from '@utilities';
+  import { extractUtilityClasses } from '@utilities';
 
   const utilityClassDocs = inject('utilityClassDocs');
-  const colors = extractUtilityClasses(utilityClassDocs, 'd-bc-');
-  const borderColors = sortBaseColors(colors);
+  const borderColors = extractUtilityClasses(utilityClassDocs, 'd-bc-');
 </script>
