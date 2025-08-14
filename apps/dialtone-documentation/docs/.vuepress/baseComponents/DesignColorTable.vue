@@ -1,10 +1,11 @@
 <script setup>
 import { inject } from 'vue';
 import { extractCSSVariableName } from '@utilities';
+import { sortUtilityClassesByCategory } from '../common/utilities.js';
 
 const tokensDocs = inject('tokensDocs');
 const utilityClassDocs = inject('utilityClassDocs');
-const baseColorRegex = /d-(bgc|fc|bc|bgg)-\w+-\d{2,4}$/;
+const isBaseColorClass = (string) => /d-(bgc|fc|bc|bgg)-\w+-\d{2,4}$/.test(string);
 const currentTheme = inject('currentTheme');
 
 const props = defineProps({
@@ -32,13 +33,17 @@ const props = defineProps({
  * @returns {object[]}
  */
 function processColorsDocs (excludedColors, classPrefix) {
-  return Array.from(Object.keys(utilityClassDocs)
+  // Get all utility classes that match the class prefix, are not excluded colors and are not base color classes
+  let filteredClasses = Object.keys(utilityClassDocs)
     .filter(className =>
       className.startsWith(classPrefix) &&
       !excludedColors.some(color => className.includes(color)) &&
-      !baseColorRegex.test(className),
-    )
-    .sort((a, b) => a.localeCompare(b, 'en', { numeric: true }))
+      !isBaseColorClass(className),
+    );
+
+  filteredClasses = sortUtilityClassesByCategory(filteredClasses);
+
+  return Array.from(filteredClasses
     .reduce((result, color) => {
       const tokenName = extractCSSVariableName(utilityClassDocs[color]);
       const colorName = color.replace(classPrefix, '').replace(/-/g, ' ');
