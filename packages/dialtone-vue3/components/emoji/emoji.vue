@@ -115,7 +115,7 @@ export default {
 
       // custom emoji
       if (this.emojiData?.custom) {
-        return customEmojiAssetUrl + this.emojiData.key + this.emojiData.extension;
+        return this.emojiData.image;
       }
 
       if (['100', '200'].includes(this.size)) {
