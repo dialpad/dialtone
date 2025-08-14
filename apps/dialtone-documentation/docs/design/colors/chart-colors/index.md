@@ -1,11 +1,11 @@
 ---
 title: Chart Colors
-description: Chart Colors are crucial for clear communication, but inconsistent color usage can hinder comprehension and create visual noise.
+description: Chart color guidance to communicate data clearly.
 ---
 
 ## Overview & Purpose
 
-<div class="d-bgc-brand d-bar8 ">
+<div class="d-bgc-brand d-bar8 d-mb16">
  <svg-loader name="chart-header" />
  </div>
 
@@ -23,16 +23,17 @@ These tokens are designed to:
 
 ## Types
 
-We have 4 types or groups of colors, these are:
+1. [Single Color](#single-color)
+2. [Semantic](#semantic)
+3. [Categorical](#categorical)
+4. [Sequential](#sequential)
 
-- Single color
-- Semantics
-- Categorical
-- Sequential
+### Single Color
 
-### Single color
+<div class="d-bgc-brand d-bar8 d-mb16"> <svg-loader name="chart-singlecolor" /> </div>
 
-Use to provide clear visual feedback for user interactions or specific visual conditions of chart elements. These apply broadly to chart components. Treat this one as a default, if you have doubts on which color to use, use this one.
+Use for data visualizations that only require a single color, with `chart.color.accent` as the default.
+Conversely, to bring to focus a data point within a set, use `chart.color.accent` for the focused data point and `chart.color.neutral` for the rest.
 
 **When to Use:**
 
@@ -42,9 +43,9 @@ Use to provide clear visual feedback for user interactions or specific visual co
 
 <token-table :tokens="singleColorTokens" theme="light" :show-value="false" />
 
-### Semantics
+### Semantic
 
-Use to convey inherent meaning, status, severity, or sentiment (e.g., positive, negative, warning, informational, or brand-specific).
+Apply colors that associate meaning to the data points, such as status, severity, or sentiment.
 
 **When to Use:**
 
@@ -57,7 +58,7 @@ Use to convey inherent meaning, status, severity, or sentiment (e.g., positive, 
 
 ### Categorical
 
-Purpose: To differentiate distinct, unrelated categories of data where the color itself does not carry inherent meaning (e.g., comparing product lines, regions).
+Apply unique colors to distinguish two or more unrelated data where color carries no meaning. Use in the predetermined numerical order, e.g. `01,`02`, etc. This ensures applied data can be visually distinguished from its adjacent data.
 
 **When to Use:**
 
@@ -108,7 +109,7 @@ While this system aims for robustness, be aware of potential challenges during i
 
 ## Do and Don'ts
 
-### Use the colors in the right order
+### Apply Categorical colors in numeric order
 
 <dialtone-usage>
 <template #do>
@@ -126,74 +127,56 @@ Avoid using categorical and sequential colors out of order, e.g. 10, 03, 05, etc
 
 </dialtone-usage>
 
-### Limit the number of colors used in one graph to 6 max
+### Limit chart colors
 
 <dialtone-usage>
 <template #do>
  <div class="d-bar8"> <svg-loader class="d-fl1" name="chart-dondont-2-1" />
  </div>
-When displaying information, limit the number of colors used in one graph to 6 max.
+Where possible, limit the number of colors in a single graph to no more than 6.
 </template>
 
 <template #dont>
  <div class="d-bar8"> <svg-loader class="d-fl1" name="chart-dondont-2-2" />
  </div>
-If you use more than 6 colors, the chart will be too complex and hard to read. Try show the most important data using the first 6 colors.
+Using more than 6 color may make the chart difficult to parse. Exhaust design possibilities before going beyond.
 </template>
 
 </dialtone-usage>
 
-### Don’t use more than one color in your data visualization if the additional colors don’t serve any communication purpose.
+### Use multiple colors only with purpose
 
 <dialtone-usage>
 <template #do>
  <div class="d-bar8"> <svg-loader class="d-fl1" name="chart-dondont-3-1" />
  </div>
-Don’t use more than one color in your data visualization if the additional colors don’t serve any communication purpose.
+Use more than one color only when it serves the data's communication.
 </template>
 
 <template #dont>
  <div class="d-bar8"> <svg-loader class="d-fl1" name="chart-dondont-3-2" />
  </div>
-- Add too many call-to-action elements to the same card. A card should only contain a single primary action.
-- Inform users about important changes.
+Using more than one color without purpose may make the chart difficult to parse and could confuse the user on the data's communication.
 </template>
 
 </dialtone-usage>
 
-### Add visual separator using white space
+### Use space to separate data
 
 <dialtone-usage>
 <template #do>
  <div class="d-bar8"> <svg-loader class="d-fl1" name="chart-dondont-4-1" />
  </div>
-- To display content and actions on a single topic.
+Use space to separate data and make it easier to understand to the user.
 </template>
 
 <template #dont>
  <div class="d-bar8"> <svg-loader class="d-fl1" name="chart-dondont-4-2" />
  </div>
-- Add too many call-to-action elements to the same card. A card should only contain a single primary action.
-- Inform users about important changes.
+avoid mixing the tokens next to each other as much as possible, so keep a space to separate data and more digestible for the user.
 </template>
 
 </dialtone-usage>
-
-### Best Practices
-
-- It should only contain a single idea that may feature a call-to-action, or the option to navigate to more detailed content.
-- The content of a card should be concise and offer only a preview of detailed content.
-- The headings should set clear expectations about the card’s purpose.
-
-## Contribution & Feedback
-
-This is a living system. Your feedback is crucial for its continuous improvement.
-
-- Found a missing token?
-- Have a use case not covered?
-- Encountered an issue?
-
-Please reach out to the Design Systems team or submit an issue/request [here](https://dialpad.atlassian.net/servicedesk/customer/portal/123/create/465).
 
 <script setup>
 import DesignColorTable from '@baseComponents/DesignColorTable.vue';
