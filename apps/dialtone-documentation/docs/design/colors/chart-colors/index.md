@@ -45,6 +45,8 @@ Conversely, to bring to focus a data point within a set, use `chart.color.accent
 
 ### Semantic
 
+<div class="d-bgc-brand d-bar8 d-mb16"> <svg-loader name="chart-semantic" /> </div>
+
 Apply colors that associate meaning to the data points, such as status, severity, or sentiment.
 
 **When to Use:**
@@ -58,6 +60,8 @@ Apply colors that associate meaning to the data points, such as status, severity
 
 ### Categorical
 
+<div class="d-bgc-brand d-bar8 d-mb16"> <svg-loader name="chart-categorical" /> </div>
+
 Apply unique colors to distinguish two or more unrelated data where color carries no meaning. Use in the predetermined numerical order, e.g. `01,`02`, etc. This ensures applied data can be visually distinguished from its adjacent data.
 
 **When to Use:**
@@ -68,6 +72,8 @@ Apply unique colors to distinguish two or more unrelated data where color carrie
 <token-table :tokens="categoricalTokens" theme="light" :show-value="false" />
 
 ### Sequential
+
+<div class="d-bgc-brand d-bar8 d-mb16"> <svg-loader name="chart-sequential" /> </div>
 
 To represent data using progressive shades or tints of a single color, emphasizing their relative depth within a single data series.
 
