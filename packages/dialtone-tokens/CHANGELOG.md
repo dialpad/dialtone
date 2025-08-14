@@ -1,3 +1,18 @@
+## [1.44.1](https://github.com/dialpad/dialtone/compare/dialtone-tokens/v1.44.0...dialtone-tokens/v1.44.1) (2025-08-12)
+
+
+### Bug Fixes
+
+* **Tokens:** DLT-2712 remove prepended `color` from `inputs`, `action`, `theme` groups ([#869](https://github.com/dialpad/dialtone/issues/869)) ([4392bcb](https://github.com/dialpad/dialtone/commit/4392bcb63e81cd1c1a9c28f707a1a19a6dbae842))
+
+# [1.44.0](https://github.com/dialpad/dialtone/compare/dialtone-tokens/v1.43.3...dialtone-tokens/v1.44.0) (2025-08-11)
+
+
+### Features
+
+* **Color:** DLT-2571 added chart design tokens ([#822](https://github.com/dialpad/dialtone/issues/822)) ([3ecb49b](https://github.com/dialpad/dialtone/commit/3ecb49b292806b284bdd1ca02b4ab604db01fcc8))
+* **Color:** DLT-2594 shell design tokens ([#840](https://github.com/dialpad/dialtone/issues/840)) ([720fc47](https://github.com/dialpad/dialtone/commit/720fc475a5460502d21c000e36069b086190a608))
+
 ## [1.43.3](https://github.com/dialpad/dialtone/compare/dialtone-tokens/v1.43.2...dialtone-tokens/v1.43.3) (2025-07-15)
 
 

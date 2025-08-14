@@ -1,3 +1,17 @@
+## [2.195.5](https://github.com/dialpad/dialtone/compare/dialtone-vue2/v2.195.4...dialtone-vue2/v2.195.5) (2025-08-12)
+
+
+### Bug Fixes
+
+* **Message Input:** DLT-2679 fix keyboard shortcuts ([#866](https://github.com/dialpad/dialtone/issues/866)) ([d318741](https://github.com/dialpad/dialtone/commit/d3187410f19bc6d5eb751014098bdb3f7380a9f0))
+
+## [2.195.4](https://github.com/dialpad/dialtone/compare/dialtone-vue2/v2.195.3...dialtone-vue2/v2.195.4) (2025-08-11)
+
+
+### Bug Fixes
+
+* **Rich Text Editor:** DLT-2690 custom emojis not working ([#860](https://github.com/dialpad/dialtone/issues/860)) ([60feffc](https://github.com/dialpad/dialtone/commit/60feffc86e2e7655543af0f3bbc5a3c33e459bb3))
+
 ## [2.195.3](https://github.com/dialpad/dialtone/compare/dialtone-vue2/v2.195.2...dialtone-vue2/v2.195.3) (2025-08-05)
 
 

@@ -200,7 +200,7 @@ const filterIconList = () => {
           if (!search.value) return !excludedIcons.includes(name);
           return !excludedIcons.includes(name) && (regex.test(name) || regex.test(keywords.join(' ')));
         })
-        .reduce((acc, [name, _]) => Object.assign(acc, { [name]: Object.freeze(categories[category][name]) }), {});
+        .reduce((acc, [name]) => Object.assign(acc, { [name]: Object.freeze(categories[category][name]) }), {});
 
       if (Object.keys(filteredCategory).length) {
         Object.assign(acc, { [category]: Object.freeze(filteredCategory) });

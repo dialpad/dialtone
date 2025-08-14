@@ -11,7 +11,7 @@ const MOCK_EXPECTED_SMILE_SRC = 'https://mockstorage.com/emojis/1f604.svg';
 const MOCK_EXPECTED_SMILE_SRC_SMALL = 'https://mockstorage.com/emojis/1f604.png';
 const MOCK_EXPECTED_LAUGHING_SRC = 'https://mockstorage.com/emojis/1f606.svg';
 const MOCK_EXPECTED_POINT_UP_LIGHT = 'https://mockstorage.com/emojis/261d-1f3fb.svg';
-const MOCK_EXPECTED_SHIP_IT = 'https://mockstorage.com/emojis/shipit.png';
+const MOCK_EXPECTED_BABY_YODA = 'https://storage.googleapis.com/uv-beta_custom_emojis/5646620347596800/baby_yoda';
 
 const baseProps = { code: '' };
 
@@ -69,9 +69,9 @@ describe('DtEmoji Tests', () => {
         it('should display the correct emoji with the new custom code', async () => {
           setCustomEmojiJson(customEmojiJson);
 
-          await wrapper.setProps({ code: ':shipit:' });
+          await wrapper.setProps({ code: ':baby_yoda:' });
 
-          expect(emoji.attributes('src')).toBe(MOCK_EXPECTED_SHIP_IT);
+          expect(emoji.attributes('src')).toBe(MOCK_EXPECTED_BABY_YODA);
 
           setCustomEmojiJson('');
         });

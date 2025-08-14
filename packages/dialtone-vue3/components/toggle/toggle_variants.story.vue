@@ -6,7 +6,7 @@
       label-class="d-mr6"
       label="Unchecked Initial"
     >
-      Checked Initial
+      Unchecked Initial
     </dt-toggle>
 
     <!-- Checked Initially -->
@@ -14,7 +14,7 @@
       class="d-mt6"
       label-class="d-mr6"
       label="Checked Initial"
-      :checked="true"
+      :model-value="true"
     >
       Checked Initial
     </dt-toggle>
@@ -23,7 +23,7 @@
     <dt-toggle
       class="d-mt6"
       label-class="d-mr6"
-      checked="mixed"
+      model-value="mixed"
     >
       Indeterminate
     </dt-toggle>
@@ -32,7 +32,7 @@
     <dt-toggle
       class="d-mt6"
       label-class="d-mr6"
-      :checked="true"
+      :model-value="true"
       :disabled="true"
     >
       Disabled Checked
@@ -51,7 +51,7 @@
     <dt-toggle
       class="d-mt6"
       label-class="d-mr6"
-      checked="mixed"
+      model-value="mixed"
       :disabled="true"
     >
       Indeterminate Disabled

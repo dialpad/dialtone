@@ -868,7 +868,6 @@ export default {
       }
     },
 
-    // eslint-disable-next-line complexity
     handleTopbarClick (type) {
       const editor = this.$refs.richTextEditor?.editor;
       // Key is the name returned in the event, value is the name of the TipTap command function to run.
@@ -889,6 +888,7 @@ export default {
     },
 
     // Checks if the node currently selected is active ex/ the bold button is active if the selected text is bold
+    // eslint-disable-next-line complexity
     isSelectionActive (type) {
       if (['bulletList', 'orderedList'].includes(type)) {
         return this.lastActiveNodes(this.$refs.richTextEditor?.editor?.state, [{ type: 'bulletList' }, { type: 'orderedList' }]).includes(type) && this.isFocused;
@@ -962,6 +962,8 @@ export default {
         type: 'emoji',
         attrs: {
           code: emoji.shortname,
+          image: emoji.image,
+          name: emoji.name,
         },
       });
       this.$emit('selected-emoji', emoji);

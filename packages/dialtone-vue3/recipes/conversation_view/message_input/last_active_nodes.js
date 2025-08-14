@@ -23,8 +23,8 @@ export default function lastActiveNodes (state, typesOrGroup) {
   if (typeof typesOrGroup === 'string') {
     // types is a name of a node group
     types = Object.entries(state.schema.nodes)
-      .filter(([name, nodeType]) => nodeType.groups.includes(typesOrGroup))
-      .map(([name, nodeType]) => {
+      .filter(([, nodeType]) => nodeType.groups.includes(typesOrGroup))
+      .map(([, nodeType]) => {
         return {
           type: nodeType,
         };
