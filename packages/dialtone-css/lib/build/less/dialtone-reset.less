@@ -97,7 +97,7 @@ u {
 abbr[title] {
   text-decoration: underline; /* 2 */
   text-decoration: underline dotted; /* 2 */
-  border-bottom: none; /* 1 */
+  border-block-end: none; /* 1 */
   text-underline-offset: calc(var(--dt-size-border-300) - var(--dt-size-border-100));
   text-decoration-thickness: var(--dt-size-border-100);
 }
@@ -150,11 +150,11 @@ sup {
 }
 
 sub {
-  bottom: -0.25em;
+  inset-block-end: -0.25em;
 }
 
 sup {
-  top: -0.5em;
+  inset-block-start: -0.5em;
 }
 
 ol, ul, li {

@@ -27,39 +27,39 @@
 //  ============================================================================
 //  $$  TOP
 //  ----------------------------------------------------------------------------
-.d-t50p { top: 50% !important; }
-.d-t100p { top: 100% !important; }
-.d-t100p-calc { top: calc(~'100% + var(--fixed-value, 8px)') !important; }
-.d-tn50p { top: -50% !important; }
-.d-tn100p { top: -100% !important; }
-.d-tn100p-calc { top: calc(~'-100% + var(--fixed-value, 8px)') !important; }
+.d-t50p { inset-block-start: 50% !important; }
+.d-t100p { inset-block-start: 100% !important; }
+.d-t100p-calc { inset-block-start: calc(~'100% + var(--fixed-value, 8px)') !important; }
+.d-tn50p { inset-block-start: -50% !important; }
+.d-tn100p { inset-block-start: -100% !important; }
+.d-tn100p-calc { inset-block-start: calc(~'-100% + var(--fixed-value, 8px)') !important; }
 
 //  $$  RIGHT
 //  ----------------------------------------------------------------------------
-.d-r50p { right: 50% !important; }
-.d-r100p { right: 100% !important; }
-.d-r100p-calc { right: calc(~'100% + var(--fixed-value, 8px)') !important; }
-.d-rn50p { right: -50% !important; }
-.d-rn100p { right: -100% !important; }
-.d-rn100p-calc { right: calc(~'-100% + var(--fixed-value, 8px)') !important; }
+.d-r50p { inset-inline-end: 50% !important; }
+.d-r100p { inset-inline-end: 100% !important; }
+.d-r100p-calc { inset-inline-end: calc(~'100% + var(--fixed-value, 8px)') !important; }
+.d-rn50p { inset-inline-end: -50% !important; }
+.d-rn100p { inset-inline-end: -100% !important; }
+.d-rn100p-calc { inset-inline-end: calc(~'-100% + var(--fixed-value, 8px)') !important; }
 
 //  $$  BOTTOM
 //  ----------------------------------------------------------------------------
-.d-b50p { bottom: 50% !important; }
-.d-b100p { bottom: 100% !important; }
-.d-b100p-calc { bottom: calc(~'100% + var(--fixed-value, 8px)') !important; }
-.d-bn50p { bottom: -50% !important; }
-.d-bn100p { bottom: -100% !important; }
-.d-bn100p-calc { bottom: calc(~'-100% + var(--fixed-value, 8px)') !important; }
+.d-b50p { inset-block-end: 50% !important; }
+.d-b100p { inset-block-end: 100% !important; }
+.d-b100p-calc { inset-block-end: calc(~'100% + var(--fixed-value, 8px)') !important; }
+.d-bn50p { inset-block-end: -50% !important; }
+.d-bn100p { inset-block-end: -100% !important; }
+.d-bn100p-calc { inset-block-end: calc(~'-100% + var(--fixed-value, 8px)') !important; }
 
 //  $$  LEFT
 //  ----------------------------------------------------------------------------
-.d-l50p { left: 50% !important; }
-.d-l100p { left: 100% !important; }
-.d-l100p-calc { left: calc(~'100% + var(--fixed-value, 8px)') !important; }
-.d-ln50p { left: -50% !important; }
-.d-ln100p { left: -100% !important; }
-.d-ln100p-calc { left: calc(~'-100% + var(--fixed-value, 8px)') !important; }
+.d-l50p { inset-inline-start: 50% !important; }
+.d-l100p { inset-inline-start: 100% !important; }
+.d-l100p-calc { inset-inline-start: calc(~'100% + var(--fixed-value, 8px)') !important; }
+.d-ln50p { inset-inline-start: -50% !important; }
+.d-ln100p { inset-inline-start: -100% !important; }
+.d-ln100p-calc { inset-inline-start: calc(~'-100% + var(--fixed-value, 8px)') !important; }
 
 
 //  ============================================================================
@@ -81,17 +81,17 @@
 //  $   OVERFLOW
 //  ============================================================================
 .d-of-auto { overflow: auto !important; }
-.d-of-x-auto { overflow-x: auto !important; }
-.d-of-y-auto { overflow-y: auto !important; }
+.d-of-x-auto { overflow-inline: auto !important; }
+.d-of-y-auto { overflow-block: auto !important; }
 .d-of-hidden { overflow: hidden !important; }
-.d-of-x-hidden { overflow-x: hidden !important; }
-.d-of-y-hidden { overflow-y: hidden !important; }
+.d-of-x-hidden { overflow-inline: hidden !important; }
+.d-of-y-hidden { overflow-block: hidden !important; }
 .d-of-scroll { overflow: scroll !important; }
-.d-of-x-scroll { overflow-x: scroll !important; }
-.d-of-y-scroll { overflow-y: scroll !important; }
+.d-of-x-scroll { overflow-inline: scroll !important; }
+.d-of-y-scroll { overflow-block: scroll !important; }
 .d-of-visible { overflow: visible !important; }
-.d-of-x-visible { overflow-x: visible !important; }
-.d-of-y-visible { overflow-y: visible !important; }
+.d-of-x-visible { overflow-inline: visible !important; }
+.d-of-y-visible { overflow-block: visible !important; }
 .d-of-unset { overflow: unset !important; }
 
 
