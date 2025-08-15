@@ -58,10 +58,10 @@
 
   &[aria-hidden='false'] {
     position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    min-height: 100%;
+    inset-block-start: 0;
+    inset-inline-start: 0;
+    inline-size: 100%;
+    min-block-size: 100%;
   }
 }
 
@@ -74,9 +74,9 @@
   flex-direction: column;
   gap: var(--dt-space-500); //
   box-sizing: border-box;
-  width: 100%;
-  max-width: var(--dt-size-1020); // 628
-  max-height: 100%;
+  inline-size: 100%;
+  max-inline-size: var(--dt-size-1020); // 628
+  max-block-size: 100%;
   padding: var(--modal-dialog-padding); // 32
   overflow-y: auto;
   color: var(--modal-dialog-color-text);
@@ -129,7 +129,7 @@
   --modal-header-padding: var(--dt-space-550); // 24
 
   margin: 0 !important;
-  padding-right: var(--modal-header-padding);
+  padding-inline-end: var(--modal-header-padding);
   color: var(--modal-header-color-text);
   font-weight: var(--dt-font-weight-medium);
   font-size: var(--dt-font-size-400);
@@ -139,7 +139,7 @@
 //  $$  CONTENT
 //  ----------------------------------------------------------------------------
 .d-modal__content {
-  max-width: 75ch;
+  max-inline-size: 75ch;
 }
 
 
@@ -148,8 +148,8 @@
 //  ----------------------------------------------------------------------------
 .d-modal__close {
   position: absolute;
-  top: var(--dt-space-500); // 16
-  right: var(--dt-space-500); // 16
+  inset-block-start: var(--dt-space-500); // 16
+  inset-inline-end: var(--dt-space-500); // 16
   margin: 0 !important;
 }
 
@@ -164,8 +164,8 @@
 
   position: relative;
   box-sizing: border-box;
-  width: 100%;
-  max-width: var(--dt-size-1020); // 628
+  inline-size: 100%;
+  max-inline-size: var(--dt-size-1020); // 628
   padding: var(--modal-banner-padding-y) var(--modal-banner-padding-x); // 16 32
   color: var(--dt-color-foreground-primary);
   font-size: var(--dt-font-size-200);
@@ -173,7 +173,7 @@
   background-color: var(--modal-banner-color-background);
   background-clip: padding-box;
   border: var(--dt-size-100) solid var(--modal-dialog-color-border);
-  border-bottom-width: 0;
+  border-block-end-width: 0;
   border-radius: var(--dt-size-500) var(--dt-size-500) 0 0;
   box-shadow: var(--modal-dialog-shadow);
 
@@ -200,19 +200,18 @@
   &::before {
     // 🤦 don't ask. or do, i'm not even sorry.
     position: absolute;
-    right: 0;
-    bottom: 0;
-    left: 0;
+    inset-inline: 0 0;
+    inset-block-end: 0;
     z-index: var(--zi-modal-element);
-    height: var(--modal-banner-padding-y);
+    block-size: var(--modal-banner-padding-y);
     background-color: var(--modal-banner-color-background);
     content: '';
   }
 
   &:not(.d-d-none) + .d-modal__dialog {
-    border-top-width: 0;
-    border-top-left-radius: 0;
-    border-top-right-radius: 0;
+    border-block-start-width: 0;
+    border-start-start-radius: 0;
+    border-start-end-radius: 0;
   }
 }
 
@@ -232,8 +231,8 @@
   .d-modal__dialog {
     display: flex;
     flex-direction: column;
-    max-width: unset;
-    height: 100%;
+    max-inline-size: unset;
+    block-size: 100%;
     border-radius: 0;
     transform: unset !important;
   }
@@ -243,17 +242,16 @@
   }
 
   .d-modal__content {
-    padding-right: 0;
-    padding-left: var(--dt-space-600); // 32
+    padding-inline: var(--dt-space-600) 0; // 32
   }
 
   .d-modal__footer {
-    margin-top: auto !important;
+    margin-block-start: auto !important;
     padding: 0 var(--dt-space-550) var(--dt-space-600) var(--dt-space-600); // 0 24 32 32
   }
 
   .d-modal__banner {
-    max-width: unset;
+    max-inline-size: unset;
     padding: var(--dt-space-450) var(--dt-space-600); // 12 32
     border-radius: 0;
   }
