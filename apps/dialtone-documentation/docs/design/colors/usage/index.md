@@ -94,8 +94,19 @@ Borders delineate content areas and components, using neutrals for subtle defini
 
 View our [Chart Colors](../chart-colors/index.md) documentation for more information.
 
-<div class="d-bgc-secondary d-bar8 d-mb16">
- <svg-loader name="chart-header" />
+<div class="d-d-grid d-g24 d-g-cols2">
+  <div class="d-bgc-secondary d-bar8">
+   <svg-loader name="chart-singlecolor" />
+  </div>
+  <div class="d-bgc-secondary d-bar8">
+   <svg-loader name="chart-semantic" />
+  </div>
+  <div class="d-bgc-secondary d-bar8">
+   <svg-loader name="chart-categorical" />
+  </div>
+  <div class="d-bgc-secondary d-bar8">
+   <svg-loader name="chart-sequential" />
+  </div>
 </div>
 
 ## Best Practices
