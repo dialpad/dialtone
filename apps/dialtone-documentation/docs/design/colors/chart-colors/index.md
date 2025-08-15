@@ -3,14 +3,14 @@ title: Chart Colors
 description: Chart color guidance to communicate data clearly.
 ---
 
-## Overview & Purpose
-
-<div class="d-bgc-brand d-bar8 d-mb16">
- <svg-loader name="chart-header" />
- </div>
+## Overview
 
 Data visualization is crucial for clear communication, but inconsistent color usage can hinder comprehension and create visual noise.
 **Chart Color Tokens** provide a unified, robust, and accessible system for coloring data visualizations  across all Dialpad products.
+
+<div class="d-bgc-secondary d-bar8 d-mb16">
+ <svg-loader name="chart-header" />
+</div>
 
 These tokens are designed to:
 
@@ -23,17 +23,16 @@ These tokens are designed to:
 
 ## Types
 
-1. [Single Color](#single-color)
-2. [Semantic](#semantic)
-3. [Categorical](#categorical)
-4. [Sequential](#sequential)
+Chart Colors are available for one of four types: [Single Color](#single-color), [Semantic](#semantic), [Categorical](#categorical), and [Sequential](#sequential).
 
 ### Single Color
 
-<div class="d-bgc-brand d-bar8 d-mb16"> <svg-loader name="chart-singlecolor" /> </div>
-
 Use for data visualizations that only require a single color, with `chart.color.accent` as the default.
 Conversely, to bring to focus a data point within a set, use `chart.color.accent` for the focused data point and `chart.color.neutral` for the rest.
+
+<div class="d-bgc-secondary d-bar8 d-mb16">
+  <svg-loader name="chart-singlecolor" />
+</div>
 
 **When to Use:**
 
@@ -45,9 +44,11 @@ Conversely, to bring to focus a data point within a set, use `chart.color.accent
 
 ### Semantic
 
-<div class="d-bgc-brand d-bar8 d-mb16"> <svg-loader name="chart-semantic" /> </div>
-
 Apply colors that associate meaning to the data points, such as status, severity, or sentiment.
+
+<div class="d-bgc-secondary d-bar8 d-mb16">
+  <svg-loader name="chart-semantic" />
+</div>
 
 **When to Use:**
 
@@ -60,9 +61,11 @@ Apply colors that associate meaning to the data points, such as status, severity
 
 ### Categorical
 
-<div class="d-bgc-brand d-bar8 d-mb16"> <svg-loader name="chart-categorical" /> </div>
-
 Apply unique colors to distinguish two or more unrelated data where color carries no meaning. Use in the predetermined numerical order, e.g. `01,`02`, etc. This ensures applied data can be visually distinguished from its adjacent data.
+
+<div class="d-bgc-secondary d-bar8 d-mb16">
+  <svg-loader name="chart-categorical" />
+</div>
 
 **When to Use:**
 
@@ -73,9 +76,11 @@ Apply unique colors to distinguish two or more unrelated data where color carrie
 
 ### Sequential
 
-<div class="d-bgc-brand d-bar8 d-mb16"> <svg-loader name="chart-sequential" /> </div>
-
 To represent data using progressive shades or tints of a single color, emphasizing their relative depth within a single data series.
+
+<div class="d-bgc-secondary d-bar8 d-mb16">
+  <svg-loader name="chart-sequential" />
+</div>
 
 **When to Use:**
 
@@ -84,6 +89,93 @@ To represent data using progressive shades or tints of a single color, emphasizi
 - Situations requiring a strong visual connection to the Dialpad brand.
 
 <token-table :tokens="sequentialTokens" theme="light" :show-value="false" />
+
+## Usage for Designers
+
+Designers should leverage these tokens directly from the Dialtone Figma Library.
+
+- Applying Colors: Apply color directly to chart elements (bars, lines, fills) via Figma Styles linked to tokens. Unlike other Dialtone colors, Chart Colors are not scoped to foreground, surface, border, etc.
+- Understanding Hover/Selected: Remember that hover and selected states for specific chart series (single color, semantic, categorical, and sequential) have predetermined contrasting colors, ensuring consistent interaction feedback.
+- Prototyping: Use these tokens in your Figma prototypes to demonstrate interactive states and theme switching.
+
+## Do and Don'ts
+
+### Apply Categorical colors in numeric order
+
+<dialtone-usage>
+<template #do>
+ <div class="d-bar8">
+  <svg-loader class="d-fl1" name="chart-dondont-1-1" />
+ </div>
+Use categorical and sequential colors in their predetermined order, e.g. 01, 02, 03, etc.
+</template>
+
+<template #dont>
+ <div class="d-bar8">
+  <svg-loader class="d-fl1" name="chart-dondont-1-2" />
+ </div>
+Avoid using categorical and sequential colors out of order, e.g. 10, 03, 05, etc.
+
+</template>
+
+</dialtone-usage>
+
+### Limit chart colors
+
+<dialtone-usage>
+<template #do>
+ <div class="d-bar8">
+  <svg-loader class="d-fl1" name="chart-dondont-2-1" />
+ </div>
+Where possible, limit the number of colors in a single graph to no more than 6.
+</template>
+
+<template #dont>
+ <div class="d-bar8">
+  <svg-loader class="d-fl1" name="chart-dondont-2-2" />
+ </div>
+Using more than 6 color may make the chart difficult to parse. Exhaust design possibilities before going beyond.
+</template>
+
+</dialtone-usage>
+
+### Use multiple colors only with purpose
+
+<dialtone-usage>
+<template #do>
+ <div class="d-bar8">
+  <svg-loader class="d-fl1" name="chart-dondont-3-1" />
+ </div>
+Use more than one color only when it serves the data's communication.
+</template>
+
+<template #dont>
+ <div class="d-bar8">
+  <svg-loader class="d-fl1" name="chart-dondont-3-2" />
+ </div>
+Using more than one color without purpose may make the chart difficult to parse and could confuse the user on the data's communication.
+</template>
+
+</dialtone-usage>
+
+### Use space to separate data
+
+<dialtone-usage>
+<template #do>
+ <div class="d-bar8">
+  <svg-loader class="d-fl1" name="chart-dondont-4-1" />
+ </div>
+Use space to separate data and make it easier to understand to the user.
+</template>
+
+<template #dont>
+ <div class="d-bar8">
+   <svg-loader class="d-fl1" name="chart-dondont-4-2" />
+ </div>
+Avoid mixing the tokens next to each other as much as possible, so keep a space to separate data and more digestible for the user.
+</template>
+
+</dialtone-usage>
 
 ## Accesibility Guidelines
 
@@ -97,14 +189,6 @@ Ensuring accessible data visualizations is a core tenet of Dialtone. When using 
   - Shapes/Stroke Styles: Varying shapes, line styles (dashed, dotted), or stroke widths.
 - Theming Impact: Token values are specifically defined for both light and dark modes to ensure optimal contrast and readability in any theme.
 
-## Usage for Designers
-
-Designers should leverage these tokens directly  from the Dialtone Figma Library.
-
-- Applying Colors: Apply color directly to chart elements (bars, lines, fills) via Figma Styles linked to tokens. Unlike other Dialtone colors, Chart Colors are not scoped to foreground, surface, border, etc.
-- Understanding Hover/Selected: Remember that hover and selected states for specific chart series (single color, semantic, categorical, and sequential) have predetermined contrasting colors, ensuring consistent interaction feedback.
-- Prototyping: Use these tokens in your Figma prototypes to demonstrate interactive states and theme switching.
-
 ## Known Issues & Troubleshooting
 
 While this system aims for robustness, be aware of potential challenges during implementation and adoption:
@@ -112,77 +196,6 @@ While this system aims for robustness, be aware of potential challenges during i
 - Charting Library Overrides: Some charting libraries might aggressively override inline styles or custom properties, requiring careful mapping or deeper customization.
 - Complex Color Logic: For very custom data-driven color calculations beyond simple references (e.g., dynamic gradients based on data range), you might still need to implement logic in code that consumes these Chart Color design tokens.
 - Transitioning Existing Charts: Migrating older charts not using design tokens will require dedicated refactoring effort.
-
-## Do and Don'ts
-
-### Apply Categorical colors in numeric order
-
-<dialtone-usage>
-<template #do>
- <div class="d-bar8"> <svg-loader class="d-fl1" name="chart-dondont-1-1" />
- </div>
-Use categorical and sequential colors in their predetermined order, e.g. 01, 02, 03, etc.
-</template>
-
-<template #dont>
- <div class="d-bar8"> <svg-loader class="d-fl1" name="chart-dondont-1-2" />
- </div>
-Avoid using categorical and sequential colors out of order, e.g. 10, 03, 05, etc.
-
-</template>
-
-</dialtone-usage>
-
-### Limit chart colors
-
-<dialtone-usage>
-<template #do>
- <div class="d-bar8"> <svg-loader class="d-fl1" name="chart-dondont-2-1" />
- </div>
-Where possible, limit the number of colors in a single graph to no more than 6.
-</template>
-
-<template #dont>
- <div class="d-bar8"> <svg-loader class="d-fl1" name="chart-dondont-2-2" />
- </div>
-Using more than 6 color may make the chart difficult to parse. Exhaust design possibilities before going beyond.
-</template>
-
-</dialtone-usage>
-
-### Use multiple colors only with purpose
-
-<dialtone-usage>
-<template #do>
- <div class="d-bar8"> <svg-loader class="d-fl1" name="chart-dondont-3-1" />
- </div>
-Use more than one color only when it serves the data's communication.
-</template>
-
-<template #dont>
- <div class="d-bar8"> <svg-loader class="d-fl1" name="chart-dondont-3-2" />
- </div>
-Using more than one color without purpose may make the chart difficult to parse and could confuse the user on the data's communication.
-</template>
-
-</dialtone-usage>
-
-### Use space to separate data
-
-<dialtone-usage>
-<template #do>
- <div class="d-bar8"> <svg-loader class="d-fl1" name="chart-dondont-4-1" />
- </div>
-Use space to separate data and make it easier to understand to the user.
-</template>
-
-<template #dont>
- <div class="d-bar8"> <svg-loader class="d-fl1" name="chart-dondont-4-2" />
- </div>
-avoid mixing the tokens next to each other as much as possible, so keep a space to separate data and more digestible for the user.
-</template>
-
-</dialtone-usage>
 
 <script setup>
 import DesignColorTable from '@baseComponents/DesignColorTable.vue';
