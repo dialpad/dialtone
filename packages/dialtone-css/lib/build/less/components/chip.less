@@ -30,7 +30,7 @@
   align-items: center;
   justify-content: center;
   box-sizing: border-box;
-  max-width: var(--dt-size-100-percent);
+  max-inline-size: var(--dt-size-100-percent);
   padding: var(--dt-space-300) var(--dt-space-400);
   color: var(--chip-color-text);
   font-size: var(--dt-font-size-200);
@@ -47,8 +47,8 @@
   // not nested within the chip. Only apply if close button exists (more than one child).
   &:not(:only-child)::after {
     flex-shrink: 0;
-    width: calc(var(--dt-size-500) + var(--dt-size-200));
-    height: calc(var(--dt-size-500) + var(--dt-size-200));
+    inline-size: calc(var(--dt-size-500) + var(--dt-size-200));
+    block-size: calc(var(--dt-size-500) + var(--dt-size-200));
     content: '';
   }
 
@@ -88,14 +88,14 @@
   .d-btn--circle();
 
   position: absolute;
-  right: var(--dt-space-200);
+  inset-inline-end: var(--dt-space-200);
   padding: calc(var(--dt-space-200) + var(--dt-space-100));
   border-width: 0;
 
   &::before {
     position: absolute;
-    width: 2.6rem; // magic number
-    height: 2.8rem; // magic number
+    inline-size: 2.6rem; // magic number
+    block-size: 2.8rem; // magic number
     content: '';
   }
 
@@ -111,7 +111,7 @@
 }
 
 .d-chip__icon {
-  padding-right: var(--dt-space-350);
+  padding-inline-end: var(--dt-space-350);
   line-height: 1;
 }
 
@@ -138,16 +138,15 @@
   // not nested within the chip.
   &:not(:only-child)::after {
     flex-shrink: 0;
-    width: var(--dt-size-450);
-    height: var(--dt-size-450);
+    inline-size: var(--dt-size-450);
+    block-size: var(--dt-size-450);
     content: '';
   }
 
   .d-avatar {
     --avatar-size-shape: var(--dt-size-500);
 
-    margin-right: var(--dt-space-350);
-    margin-left: var(--dt-space-300-negative);
+    margin-inline: var(--dt-space-300-negative) var(--dt-space-350);
   }
 }
 
@@ -156,8 +155,8 @@
 
   // Clickable area for the close button.
   &::before {
-    width: var(--dt-size-550);
-    height: var(--dt-size-550);
+    inline-size: var(--dt-size-550);
+    block-size: var(--dt-size-550);
   }
 }
 
@@ -171,15 +170,15 @@
   // not nested within the chip.
   &:not(:only-child)::after {
     flex-shrink: 0;
-    width: calc(var(--dt-size-500) - var(--dt-size-200)); // 14
-    height: calc(var(--dt-size-500) - var(--dt-size-200)); // 14
+    inline-size: calc(var(--dt-size-500) - var(--dt-size-200)); // 14
+    block-size: calc(var(--dt-size-500) - var(--dt-size-200)); // 14
     content: '';
   }
 
   .d-avatar {
     --avatar-size-shape: calc(var(--dt-size-500) + var(--dt-size-300)); // 20
 
-    margin-right: var(--dt-space-300);
+    margin-inline-end: var(--dt-space-300);
   }
 }
 
@@ -187,7 +186,7 @@
   padding: var(--dt-space-200);
 
   &::before {
-    width: var(--dt-size-550);
-    height: var(--dt-size-550);
+    inline-size: var(--dt-size-550);
+    block-size: var(--dt-size-550);
   }
 }

@@ -228,11 +228,11 @@
 }
 
 .d-btn__icon--left:not(:only-child) {
-  margin-left: var(--dt-space-200-negative);
+  margin-inline-start: var(--dt-space-200-negative);
 }
 
 .d-btn__icon--right:not(:only-child) {
-  margin-right: var(--dt-space-200-negative);
+  margin-inline-end: var(--dt-space-200-negative);
 }
 
 //  ============================================================================
@@ -618,10 +618,9 @@
   .d-btn__icon {
     align-items: center;
     justify-content: center;
-    width: 2em;
-    height: 2em;
-    margin-right: var(--dt-space-400);
-    margin-left: var(--dt-space-300-negative);
+    inline-size: 2em;
+    block-size: 2em;
+    margin-inline: var(--dt-space-300-negative) var(--dt-space-400);
     background-color: var(--dt-color-neutral-white);
     border-radius: var(--dt-size-radius-200);
   }
@@ -670,10 +669,10 @@
   //  Show the loading animation
   &::before {
     position: absolute;
-    width: var(--dt-size-500);
-    height: var(--dt-size-500);
+    inline-size: var(--dt-size-500);
+    block-size: var(--dt-size-500);
     border: var(--dt-size-200) solid currentColor;
-    border-left-color: transparent !important;
+    border-inline-start-color: transparent !important;
     border-radius: var(--dt-size-radius-circle);
     animation: d-loading-circle 900ms infinite linear;
     content: "";
@@ -693,7 +692,7 @@
   .d-popover,
   .d-popover div,
   .d-popover &__omega {
-    height: 100%;
+    block-size: 100%;
   }
 
   &__alpha,
@@ -713,10 +712,9 @@
     // vertical divider between the two buttons
     &::before {
       position: absolute;
-      top: var(--button-border-radius);
-      bottom: var(--button-border-radius);
-      left: var(--dt-size-100-negative);
-      width: var(--dt-size-100);
+      inset-block: var(--button-border-radius);
+      inset-inline-start: var(--dt-size-100-negative);
+      inline-size: var(--dt-size-100);
       background-color: var(
         --button-color-text
       ); // use text color for divider line
@@ -746,13 +744,11 @@
     &.d-btn:disabled::before,
     &.d-btn--outlined::before,
     &.d-btn--primary::before {
-      top: var(--dt-size-100-negative);
-      bottom: var(--dt-size-100-negative);
+      inset-block: var(--dt-size-100-negative);
     }
 
     &.d-btn--outlined::before {
-      top: var(--dt-size-50-negative);
-      bottom: var(--dt-size-50-negative);
+      inset-block: var(--dt-size-50-negative);
     }
   }
 
@@ -760,18 +756,18 @@
   &__alpha:disabled:not(.d-btn--primary),
   &__alpha.d-btn--primary,
   &__alpha.d-btn--outlined {
-    border-right: 0;
-    border-top-right-radius: 0;
-    border-bottom-right-radius: 0;
+    border-inline-end: 0;
+    border-start-end-radius: 0;
+    border-end-end-radius: 0;
   }
 
   &__omega:disabled:not(.d-btn--outlined),
   &__omega:disabled:not(.d-btn--primary),
   &__omega.d-btn--primary,
   &__omega.d-btn--outlined {
-    border-left: 0;
-    border-top-left-radius: 0;
-    border-bottom-left-radius: 0;
+    border-inline-start: 0;
+    border-start-start-radius: 0;
+    border-end-start-radius: 0;
   }
 
   // adjust x-padding for icon-only button at each size

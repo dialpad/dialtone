@@ -36,8 +36,8 @@
     //  [1] Check to see if we can use custom styles, if so reset the defaults
     //  ------------------------------------------------------------------------
     @supports ((-webkit-appearance: none) or (-moz-appearance: none) or (appearance: none)) {
-        width: var(--dt-size-500); // 16
-        height: var(--dt-size-500); // 16
+        inline-size: var(--dt-size-500); // 16
+        block-size: var(--dt-size-500); // 16
 
         //  [2]  Now re-style the checkboxes and radios
         //  --------------------------------------------------------------------
@@ -113,7 +113,7 @@
         align-items: baseline;
         justify-content: space-between;
         box-sizing: border-box;
-        margin-bottom: var(--dt-space-300);
+        margin-block-end: var(--dt-space-300);
         color: var(--dt-color-foreground-secondary);
         font-weight: var(--dt-font-weight-semi-bold);
         font-size: var(--dt-font-size-200);
@@ -133,7 +133,7 @@
 .d-radio__input {
     display: flex;
     align-self: flex-start;
-    padding-top: var(--dt-space-300);
+    padding-block-start: var(--dt-space-300);
 }
 
 
@@ -160,8 +160,8 @@
 
 .d-checkbox__messages,
 .d-radio__messages {
-    margin-top: var(--dt-space-200-negative);
-    margin-left: var(--dt-space-550);
+    margin-block-start: var(--dt-space-200-negative);
+    margin-inline-start: var(--dt-space-550);
 }
 
 .d-checkbox__description {

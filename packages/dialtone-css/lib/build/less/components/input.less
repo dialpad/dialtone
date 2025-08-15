@@ -41,8 +41,8 @@
     display: inline-flex;
     flex: 1 0%;
     box-sizing: border-box;
-    width: 100%;
-    min-width: 0;
+    inline-size: 100%;
+    min-inline-size: 0;
     padding: var(--input-padding-y) var(--input-padding-x);
     color: var(--input-color-text);
     font: var(--input-typography);
@@ -154,7 +154,7 @@
 }
 
 .d-input__length-description {
-    margin-bottom: var(--dt-space-200);
+    margin-block-end: var(--dt-space-200);
 }
 
 .d-input--hidden {
@@ -169,7 +169,7 @@
 
     .d-textarea + .d-input-icon--right {
       position: absolute;
-      right: var(--dt-space-450);
+      inset-inline-end: var(--dt-space-450);
     }
 
     .d-input-icon--left:has(+ .d-textarea) {
@@ -178,35 +178,35 @@
 
     .d-input-icon:has(+ .d-textarea),
     .d-textarea+.d-input-icon {
-        padding-top: calc(var(--input-padding-y) + var(--dt-space-200));
+        padding-block-start: calc(var(--input-padding-y) + var(--dt-space-200));
     }
 
     .d-input-icon:has(+ .d-textarea--xs),
     .d-textarea--xs + .d-input-icon {
         #d-internal__input-and-select-xs();
 
-        padding-top: calc(var(--input-padding-y) + var(--dt-space-100));
+        padding-block-start: calc(var(--input-padding-y) + var(--dt-space-100));
     }
 
     .d-input-icon:has(+ .d-textarea--sm),
     .d-textarea--sm+.d-input-icon {
         #d-internal__input-and-select-sm();
 
-        padding-top: calc(var(--input-padding-y) + var(--dt-space-100));
+        padding-block-start: calc(var(--input-padding-y) + var(--dt-space-100));
     }
 
     .d-input-icon:has(+ .d-textarea--lg),
     .d-textarea--lg+.d-input-icon {
         #d-internal__input-and-select-lg();
 
-        padding-top: calc(var(--input-padding-y) + var(--dt-space-100));
+        padding-block-start: calc(var(--input-padding-y) + var(--dt-space-100));
     }
 
     .d-input-icon:has(+ .d-textarea--xl),
     .d-textarea--xl+.d-input-icon {
         #d-internal__input-and-select-xl();
 
-        padding-top: calc(var(--input-padding-y) + (var(--dt-space-350) - var(--dt-space-100)));
+        padding-block-start: calc(var(--input-padding-y) + (var(--dt-space-350) - var(--dt-space-100)));
     }
 
     .d-input,
@@ -246,7 +246,7 @@
 //  $  TEXTAREAS
 //  ----------------------------------------------------------------------------
 .d-textarea {
-    min-height: calc(var(--dt-size-300) * 20); // 80
+    min-block-size: calc(var(--dt-size-300) * 20); // 80
     vertical-align: top;
     resize: vertical;
     scroll-padding-block: var(--input-padding-y);
@@ -257,25 +257,25 @@
 .d-textarea--xs {
     #d-internal__input-and-select-xs();
 
-    min-height: calc(var(--dt-size-300) * 10); // 40
+    min-block-size: calc(var(--dt-size-300) * 10); // 40
 }
 
 .d-textarea--sm {
     #d-internal__input-and-select-sm();
 
-    min-height: var(--dt-size-650); // 48
+    min-block-size: var(--dt-size-650); // 48
 }
 
 .d-textarea--lg {
     #d-internal__input-and-select-lg();
 
-    min-height: calc(var(--dt-size-300) * 23); // 92
+    min-block-size: calc(var(--dt-size-300) * 23); // 92
 }
 
 .d-textarea--xl {
     #d-internal__input-and-select-xl();
 
-    min-height: calc(var(--dt-size-300) * 25); // 100
+    min-block-size: calc(var(--dt-size-300) * 25); // 100
 }
 
 //  $$  VALIDATION STATES
@@ -304,14 +304,14 @@
     }
 
     &--right:not(:empty) {
-        margin-right: var(--dt-space-400);
+        margin-inline-end: var(--dt-space-400);
 
         .d-btn {
-            margin-right: var(--dt-space-350-negative);
+            margin-inline-end: var(--dt-space-350-negative);
         }
     }
 
     &--left:not(:empty) {
-        margin-left: var(--dt-space-400);
+        margin-inline-start: var(--dt-space-400);
     }
 }

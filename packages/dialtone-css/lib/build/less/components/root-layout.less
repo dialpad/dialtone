@@ -22,10 +22,10 @@
     'footer';
   grid-template-rows: min-content auto 1fr min-content;
   grid-template-columns: 1fr;
-  min-height: 100vh;
+  min-block-size: 100vh;
 
   &--fixed {
-    height: auto;
+    block-size: auto;
   }
 
   &__header {
@@ -33,14 +33,14 @@
 
     &--sticky {
       position: sticky;
-      top: 0;
+      inset-block-start: 0;
       z-index: var(--zi-navigation);
     }
   }
 
   &__sidebar {
     grid-area: sidebar;
-    height: 100%;
+    block-size: 100%;
     overflow: hidden auto;
     box-shadow: none;
 
@@ -81,7 +81,7 @@
   }
 
   &.d-root-layout--fixed{
-    height: 100vh;
+    block-size: 100vh;
   }
 }
 
@@ -103,7 +103,7 @@
     }
 
     &.d-root-layout--fixed {
-      height: 100vh;
+      block-size: 100vh;
     }
   }
 }
@@ -126,7 +126,7 @@
     }
 
     &.d-root-layout--fixed {
-      height: 100vh;
+      block-size: 100vh;
     }
   }
 }
@@ -149,7 +149,7 @@
     }
 
     &.d-root-layout--fixed {
-      height: 100vh;
+      block-size: 100vh;
     }
   }
 }
