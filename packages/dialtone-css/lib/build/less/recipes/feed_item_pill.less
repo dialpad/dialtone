@@ -8,8 +8,8 @@
 }
 
 .d-recipe-feed-item-pill__button {
-  width: var(--dt-size-100-percent);
-  text-align: left;
+  inline-size: var(--dt-size-100-percent);
+  text-align: start;
   background-color: var(--dt-color-surface-moderate);
   border-width: 0;
   border-radius: var(--dt-size-radius-600);
@@ -23,7 +23,7 @@
 
 .d-recipe-feed-item-pill__layout {
   gap: var(--dt-space-300);
-  width: var(--dt-size-100-percent);
+  inline-size: var(--dt-size-100-percent);
   padding: var(--dt-space-400);
   line-height: var(--dt-font-line-height-300)
 }
@@ -31,8 +31,8 @@
 .d-recipe-feed-item-pill__icon {
   display: grid;
   place-content: center;
-  min-width: var(--dt-size-600);
-  height: var(--dt-size-100-percent);
+  min-inline-size: var(--dt-size-600);
+  block-size: var(--dt-size-100-percent);
 
   & svg {
     animation: d-recipe-feed-item-pill-fade 0.15s ease-in;
@@ -47,25 +47,25 @@
 .d-recipe-feed-item-pill__title {
   display: grid;
   align-content: center;
-  height: var(--dt-size-100-percent);
+  block-size: var(--dt-size-100-percent);
   font-weight: var(--dt-font-weight-bold);
 }
 
 .d-recipe-feed-item-pill__subtitle {
-  margin-top: var(--dt-space-200-negative);
+  margin-block-start: var(--dt-space-200-negative);
   color: var(--dt-color-foreground-tertiary);
   font-size: var(--dt-font-size-100);
 }
 
 .d-recipe-feed-item-pill__bottom {
-  margin-top: var(--dt-space-200);
+  margin-block-start: var(--dt-space-200);
 }
 
 .d-recipe-feed-item-pill__right {
   display: grid;
   place-content: center;
-  min-width: var(--dt-size-600);
-  height: var(--dt-size-100-percent);
+  min-inline-size: var(--dt-size-600);
+  block-size: var(--dt-size-100-percent);
 }
 
 // Gradient radius solution taken from https://stackoverflow.com/a/53037637

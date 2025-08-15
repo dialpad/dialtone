@@ -1,7 +1,7 @@
 .d-recipe-feed-item-row {
   position: relative;
   box-sizing: border-box;
-  width: var(--dt-size-100-percent);
+  inline-size: var(--dt-size-100-percent);
   padding: var(--dt-space-300) var(--dt-space-500);
 
   &:focus-visible {
@@ -22,7 +22,7 @@
   }
 
   .d-list-item__bottom {
-    margin-top: 0;
+    margin-block-start: 0;
   }
 }
 
@@ -43,13 +43,11 @@
 }
 
 .d-recipe-feed-item-row__avatar-container {
-  padding-top: var(--dt-space-300);
-  padding-bottom: var(--dt-space-300);
+  padding-block: var(--dt-space-300) var(--dt-space-300);
 }
 
 .d-recipe-feed-item-row__attachment {
-  padding-top: var(--dt-space-200);
-  padding-bottom: var(--dt-space-300);
+  padding-block: var(--dt-space-200) var(--dt-space-300);
 }
 
 .d-recipe-feed-item-row__image {
@@ -64,7 +62,7 @@
 
 .d-recipe-feed-item-row__video {
   display: block;
-  height: 25.0rem;
+  block-size: 25.0rem;
 }
 
 .d-recipe-feed-item-row__header {
@@ -89,13 +87,11 @@
 .d-recipe-feed-item-row__reactions {
   display: flex;
   flex-wrap: wrap;
-  padding-top: var(--dt-space-200);
-  padding-bottom: var(--dt-space-200);
+  padding-block: var(--dt-space-200) var(--dt-space-200);
 }
 
 .d-recipe-feed-item-row__threading {
-  padding-top: var(--dt-space-200);
-  padding-bottom: var(--dt-space-200);
+  padding-block: var(--dt-space-200) var(--dt-space-200);
 }
 
 .d-recipe-feed-item-row__left-time {
@@ -108,6 +104,6 @@
 
 .d-recipe-feed-item-row__menu {
   position: absolute;
-  top: var(--dt-space-550-negative);
-  right: var(--dt-space-450);
+  inset-block-start: var(--dt-space-550-negative);
+  inset-inline-end: var(--dt-space-450);
 }

@@ -4,10 +4,10 @@
 }
 
 .d-recipe-callbar-button-with-popover__arrow {
-  width: var(--dt-size-500);
-  height: var(--dt-size-500);
-  margin-top: var(--dt-space-450);
-  margin-left: calc(var(--dt-space-300-negative) * 5);
+  inline-size: var(--dt-size-500);
+  block-size: var(--dt-size-500);
+  margin-block-start: var(--dt-space-450);
+  margin-inline-start: calc(var(--dt-space-300-negative) * 5);
   padding: var(--dt-space-400);
   border-radius: var(--dt-size-300);
 
@@ -17,7 +17,7 @@
 }
 
 .d-recipe-callbar-button-with-popover__arrow--large {
-  margin-left: var(--dt-space-550-negative);
+  margin-inline-start: var(--dt-space-550-negative);
 }
 
 .d-recipe-callbar-button-with-popover__arrow-icon {
@@ -37,8 +37,7 @@
   .d-popover__header__content {
     display: flex;
     align-items: center;
-    padding-right: var(--dt-space-450);
-    padding-left: var(--dt-space-450);
+    padding-inline: var(--dt-space-450) var(--dt-space-450);
     font-weight: normal;
   }
 }
@@ -52,7 +51,7 @@
   &.tab-group {
     display: flex;
     flex-direction: column;
-    height: 100%;
+    block-size: 100%;
   }
 
   &.tab-content {

@@ -50,7 +50,7 @@
 }
 
 .d-recipe-callbox__main-content-bottom {
-  border-top: var(--dt-size-border-100) solid var(--dt-color-border-subtle);
+  border-block-start: var(--dt-size-border-100) solid var(--dt-color-border-subtle);
 }
 
 .d-recipe-callbox__content {
@@ -63,18 +63,18 @@
 }
 
 .d-recipe-callbox__content-title {
-  width: 0;
-  min-width: 100%;
   padding: 0;
   overflow: clip;
-  color: var(--dt-color-foreground-primary);
   font: var(--dt-typography-headline-md);
+  font-weight: var(--dt-font-weight-bold);
   line-height: var(--dt-font-line-height-100);
   white-space: nowrap;
-  text-align: left;
+  text-align: start;
   text-overflow: ellipsis;
   background-color: var(--dt-color-surface-primary);
   border: none;
+  inline-size: 0;
+  min-inline-size: 100%;
 }
 
 .d-recipe-callbox__content-badge {
@@ -82,8 +82,8 @@
 }
 
 .d-recipe-callbox__content-subtitle {
-  width: 0;
-  min-width: 100%;
+  inline-size: 0;
+  min-inline-size: 100%;
   padding: 0;
   overflow: hidden;
   color: var(--dt-color-foreground-tertiary);
