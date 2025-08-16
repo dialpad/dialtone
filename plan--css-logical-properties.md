@@ -96,6 +96,190 @@ This document outlines the comprehensive strategy for migrating Dialtone's CSS a
 | `clear: left` | `clear: inline-start` | Clear inline start |
 | `clear: right` | `clear: inline-end` | Clear inline end |
 
+#### Overflow Properties
+
+| Physical Property | Logical Property | Notes |
+|------------------|------------------|-------|
+| `overflow-x` | `overflow-inline` | Overflow in inline direction |
+| `overflow-y` | `overflow-block` | Overflow in block direction |
+| `overscroll-behavior-x` | `overscroll-behavior-inline` | Overscroll in inline direction |
+| `overscroll-behavior-y` | `overscroll-behavior-block` | Overscroll in block direction |
+
+#### Resize Properties
+
+| Physical Property | Logical Property | Notes |
+|------------------|------------------|-------|
+| `resize: horizontal` | `resize: inline` | Resize in inline direction |
+| `resize: vertical` | `resize: block` | Resize in block direction |
+
+#### Scroll Properties
+
+| Physical Property | Logical Property | Notes |
+|------------------|------------------|-------|
+| `scroll-margin-top` | `scroll-margin-block-start` | Scroll margin at block start |
+| `scroll-margin-bottom` | `scroll-margin-block-end` | Scroll margin at block end |
+| `scroll-margin-left` | `scroll-margin-inline-start` | Scroll margin at inline start |
+| `scroll-margin-right` | `scroll-margin-inline-end` | Scroll margin at inline end |
+| `scroll-padding-top` | `scroll-padding-block-start` | Scroll padding at block start |
+| `scroll-padding-bottom` | `scroll-padding-block-end` | Scroll padding at block end |
+| `scroll-padding-left` | `scroll-padding-inline-start` | Scroll padding at inline start |
+| `scroll-padding-right` | `scroll-padding-inline-end` | Scroll padding at inline end |
+
+#### Caption and Table Properties
+
+| Physical Property | Logical Property | Notes |
+|------------------|------------------|-------|
+| `caption-side: left` | `caption-side: inline-start` | Caption at inline start |
+| `caption-side: right` | `caption-side: inline-end` | Caption at inline end |
+
+#### Contain Properties
+
+| Physical Property | Logical Property | Notes |
+|------------------|------------------|-------|
+| `contain-intrinsic-width` | `contain-intrinsic-inline-size` | Intrinsic inline size containment |
+| `contain-intrinsic-height` | `contain-intrinsic-block-size` | Intrinsic block size containment |
+
+## Migration Tooling Strategy
+
+### Automated Conversion Tools
+
+#### 1. CSS/LESS Codemod Script
+
+A custom Node.js script or codemod to automatically convert physical properties to logical equivalents:
+
+**Proposed Implementation:**
+- Use PostCSS AST parsing for accurate CSS manipulation
+- Create mapping dictionary for all property conversions
+- Support for LESS-specific syntax (variables, mixins, extends)
+- Preserve comments and formatting
+- Generate conversion report with statistics
+- Support dry-run mode for preview
+- Handle edge cases (calc(), var(), custom properties)
+
+**Example usage:**
+```bash
+# Dry run to preview changes
+node scripts/migrate-to-logical.js --dry-run --path="utilities/spacing.less"
+
+# Apply changes with backup
+node scripts/migrate-to-logical.js --path="utilities/" --backup
+
+# Generate report only
+node scripts/migrate-to-logical.js --report-only --path="components/"
+```
+
+#### 2. ESLint/Stylelint Rules
+
+**Custom Stylelint Plugin (`stylelint-plugin-logical-properties`):**
+
+**Rules to implement:**
+- `prefer-logical-properties`: Warn when physical properties are used
+- `no-physical-margins`: Error on margin-left/right/top/bottom
+- `no-physical-padding`: Error on padding-left/right/top/bottom
+- `no-physical-borders`: Error on border directional properties
+- `no-physical-position`: Error on top/right/bottom/left
+- `consistent-logical-notation`: Enforce consistent logical property syntax
+
+**Configuration example:**
+```json
+{
+  "plugins": ["logical-properties"],
+  "rules": {
+    "logical-properties/prefer-logical-properties": "warn",
+    "logical-properties/no-physical-margins": "error",
+    "logical-properties/no-physical-padding": "error"
+  }
+}
+```
+
+**Auto-fix capability:** Rules should support `--fix` flag to automatically convert properties
+
+#### 3. Pre-commit Hooks
+
+**Husky + lint-staged configuration:**
+
+```json
+// package.json
+{
+  "lint-staged": {
+    "*.{css,less}": [
+      "stylelint --fix --plugin=logical-properties",
+      "node scripts/check-logical-properties.js"
+    ]
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged",
+      "pre-push": "npm run test:rtl"
+    }
+  }
+}
+```
+
+**Pre-commit checks:**
+- Prevent new physical properties from being added
+- Auto-convert simple cases
+- Generate warning report for complex cases requiring manual review
+- Block commit if critical physical properties are detected
+
+#### 4. Migration Progress Dashboard
+
+**Web-based dashboard showing:**
+
+**Metrics to track:**
+- Total files: X / Y migrated
+- Properties converted: X physical → Y logical
+- Component migration status (traffic light system)
+- RTL test coverage percentage
+- Browser compatibility score
+- Bundle size impact analysis
+
+**Implementation approach:**
+- Node.js script scanning codebase on build
+- Generate JSON metrics file
+- Simple HTML/CSS dashboard consuming metrics
+- GitHub Actions integration for CI/CD reporting
+- Slack/Teams notifications for milestones
+
+**Dashboard features:**
+- File-by-file migration checklist
+- Property usage heatmap
+- Before/after code comparisons
+- Team member assignment tracking
+- Timeline visualization with progress
+
+### Additional Tooling Considerations
+
+#### PostCSS Plugin for Build Process
+
+**`postcss-dialtone-logical`:**
+- Transforms physical to logical at build time
+- Adds fallbacks for older browsers if needed
+- Generates source maps for debugging
+- Reports on transformation statistics
+
+#### VS Code Extension
+
+**Features:**
+- Real-time property conversion suggestions
+- Quick fixes for physical properties
+- RTL preview toggle
+- Property reference tooltip
+- Migration checklist integration
+
+#### Testing Utilities
+
+**RTL Testing Helper:**
+```javascript
+// test-utils/rtl-helper.js
+export function testBidiComponent(Component, options) {
+  // Automatically test component in both LTR and RTL
+  // Generate visual diffs
+  // Assert logical property usage
+  // Check for directional regressions
+}
+```
+
 ## Migration Strategy by File Type
 
 ### 1. Utility Files Priority Order
