@@ -148,6 +148,7 @@ This document outlines the comprehensive strategy for migrating Dialtone's CSS a
 A custom Node.js script or codemod to automatically convert physical properties to logical equivalents:
 
 **Proposed Implementation:**
+
 - Use PostCSS AST parsing for accurate CSS manipulation
 - Create mapping dictionary for all property conversions
 - Support for LESS-specific syntax (variables, mixins, extends)
@@ -157,6 +158,7 @@ A custom Node.js script or codemod to automatically convert physical properties 
 - Handle edge cases (calc(), var(), custom properties)
 
 **Example usage:**
+
 ```bash
 # Dry run to preview changes
 node scripts/migrate-to-logical.js --dry-run --path="utilities/spacing.less"
@@ -173,6 +175,7 @@ node scripts/migrate-to-logical.js --report-only --path="components/"
 **Custom Stylelint Plugin (`stylelint-plugin-logical-properties`):**
 
 **Rules to implement:**
+
 - `prefer-logical-properties`: Warn when physical properties are used
 - `no-physical-margins`: Error on margin-left/right/top/bottom
 - `no-physical-padding`: Error on padding-left/right/top/bottom
@@ -181,6 +184,7 @@ node scripts/migrate-to-logical.js --report-only --path="components/"
 - `consistent-logical-notation`: Enforce consistent logical property syntax
 
 **Configuration example:**
+
 ```json
 {
   "plugins": ["logical-properties"],
@@ -217,6 +221,7 @@ node scripts/migrate-to-logical.js --report-only --path="components/"
 ```
 
 **Pre-commit checks:**
+
 - Prevent new physical properties from being added
 - Auto-convert simple cases
 - Generate warning report for complex cases requiring manual review
@@ -227,6 +232,7 @@ node scripts/migrate-to-logical.js --report-only --path="components/"
 **Web-based dashboard showing:**
 
 **Metrics to track:**
+
 - Total files: X / Y migrated
 - Properties converted: X physical → Y logical
 - Component migration status (traffic light system)
@@ -235,6 +241,7 @@ node scripts/migrate-to-logical.js --report-only --path="components/"
 - Bundle size impact analysis
 
 **Implementation approach:**
+
 - Node.js script scanning codebase on build
 - Generate JSON metrics file
 - Simple HTML/CSS dashboard consuming metrics
@@ -242,6 +249,7 @@ node scripts/migrate-to-logical.js --report-only --path="components/"
 - Slack/Teams notifications for milestones
 
 **Dashboard features:**
+
 - File-by-file migration checklist
 - Property usage heatmap
 - Before/after code comparisons
@@ -253,6 +261,7 @@ node scripts/migrate-to-logical.js --report-only --path="components/"
 #### PostCSS Plugin for Build Process
 
 **`postcss-dialtone-logical`:**
+
 - Transforms physical to logical at build time
 - Adds fallbacks for older browsers if needed
 - Generates source maps for debugging
@@ -261,6 +270,7 @@ node scripts/migrate-to-logical.js --report-only --path="components/"
 #### VS Code Extension
 
 **Features:**
+
 - Real-time property conversion suggestions
 - Quick fixes for physical properties
 - RTL preview toggle
@@ -270,6 +280,7 @@ node scripts/migrate-to-logical.js --report-only --path="components/"
 #### Testing Utilities
 
 **RTL Testing Helper:**
+
 ```javascript
 // test-utils/rtl-helper.js
 export function testBidiComponent(Component, options) {
@@ -309,7 +320,7 @@ Based on current Dialtone structure, migrate in this order:
 
 ## Implementation Phases
 
-### Phase 1: PostCSS Generator (Week 1)
+### Phase 1: PostCSS Generator
 
 **Critical First Step - Files to Update:**
 
@@ -323,7 +334,7 @@ Based on current Dialtone structure, migrate in this order:
 - Update `layoutUtilities()` function: `left` → `inset-inline-start`, `right` → `inset-inline-end`, etc.
 - Rebuild CSS after generator changes to update all generated utilities
 
-### Phase 2: Foundation Files (Week 2)
+### Phase 2: Foundation Files
 
 **Files to Update:**
 
@@ -337,7 +348,7 @@ Based on current Dialtone structure, migrate in this order:
 - Verify generated utilities are working correctly
 - Update any static utility classes not covered by the generator
 
-### Phase 3: Components (Week 3-4)
+### Phase 3: Components
 
 **Files to Update:**
 
@@ -350,14 +361,14 @@ Based on current Dialtone structure, migrate in this order:
 - Maintain existing class names - only update CSS properties
 - Preserve all current class naming conventions
 
-### Phase 4: Complex Components (Week 5-6)
+### Phase 4: Complex Components
 
 **Files to Update:**
 
 - High-complexity components (modal, dropdown, popover)
 - Layout components (root-layout, item-layout)
 
-### Phase 5: Finalization (Week 7-8)
+### Phase 5: Finalization
 
 **Files to Update:**
 
@@ -414,6 +425,7 @@ Keep existing class names and update their properties to logical equivalents:
 | `.d-b*` | `bottom` | `inset-block-end` |
 
 ### Implementation Example
+
 ```less
 // Before
 .d-ml-4 {
@@ -534,6 +546,7 @@ The `/postcss/dialtone-generators.cjs` file contains several functions that gene
 | `layoutUtilities()` | `left`, `right`, `top`, `bottom` | `inset-inline-start`, `inset-inline-end`, `inset-block-start`, `inset-block-end` |
 
 ### Generator Impact
+
 - **Generated utilities**: `.d-ml-*`, `.d-mr-*`, `.d-pl-*`, `.d-pr-*`, `.d-l*`, `.d-r*`, etc.
 - **Build process**: After updating generator, rebuild CSS to propagate changes
 - **Testing**: Verify all generated utility classes work in RTL context
