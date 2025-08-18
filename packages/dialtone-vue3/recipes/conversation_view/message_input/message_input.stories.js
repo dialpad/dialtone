@@ -190,6 +190,12 @@ export const argTypesData = {
       disable: true,
     },
   },
+
+  onEmojiScrollBottomReached: {
+    table: {
+      disable: true,
+    },
+  },
 };
 
 // Set default values at the story level here.
@@ -237,6 +243,7 @@ export const argsData = {
   onNoticeClose: action('notice-close'),
   onSkinTone: action('skin-tone'),
   onCancel: action('cancel'),
+  onEmojiScrollBottomReached: action('emoji-scroll-bottom-reached'),
 };
 
 // Story Collection
