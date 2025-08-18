@@ -54,7 +54,7 @@
         @paste-media="$attrs.onPasteMedia"
         @notice-close="$attrs.onNoticeClose"
         @cancel="$attrs.onCancel"
-        @scroll-bottom-reached="$attrs.onScrollBottomReached"
+        @emoji-scroll-bottom-reached="$attrs.onEmojiScrollBottomReached"
       >
         <template
           v-if="$attrs.emojiGiphyPicker"

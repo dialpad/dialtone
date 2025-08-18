@@ -191,7 +191,7 @@ export const argTypesData = {
     },
   },
 
-  onScrollBottomReached: {
+  onEmojiScrollBottomReached: {
     table: {
       disable: true,
     },
@@ -243,7 +243,7 @@ export const argsData = {
   onNoticeClose: action('notice-close'),
   onSkinTone: action('skin-tone'),
   onCancel: action('cancel'),
-  onScrollBottomReached: action('scroll-bottom-reached'),
+  onEmojiScrollBottomReached: action('emoji-scroll-bottom-reached'),
 };
 
 // Story Collection
