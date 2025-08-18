@@ -58,6 +58,9 @@ export const getTokensStructure = () => ({
     components: {
       _children: [],
     },
+    chart: {
+      _children: [],
+    },
     base: {
       _children: [],
     },

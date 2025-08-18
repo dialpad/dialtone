@@ -111,9 +111,8 @@ Use `d-fco{n}` to change an element's text color opacity. You can also change fo
 
 <script setup>
   import { inject } from 'vue';
-  import { extractUtilityClasses, sortBaseColors } from '@utilities';
+  import { extractUtilityClasses } from '@utilities';
 
   const utilityClassDocs = inject('utilityClassDocs');
-  const colors = extractUtilityClasses(utilityClassDocs, 'd-fc-');
-  const fontColors = sortBaseColors(colors);
+  const fontColors = extractUtilityClasses(utilityClassDocs, 'd-fc-');
 </script>
