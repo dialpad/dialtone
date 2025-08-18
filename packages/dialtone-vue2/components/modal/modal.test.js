@@ -2,7 +2,7 @@ import { DtModal, MODAL_BANNER_KINDS } from '@/components/modal';
 import { createLocalVue, mount } from '@vue/test-utils';
 
 const MOCK_TRANSITION_STUB = () => ({
-  render: function (h) {
+  render: function () {
     return this.$options._renderChildren;
   },
 });

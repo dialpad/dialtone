@@ -70,7 +70,7 @@ export default {
       default: () => [],
       validator: (reactions) => {
         for (const reaction of reactions) {
-          const validInput = REACTIONS_ATTRIBUTES.every((attribute) => reaction[attribute] !== undefined ?? false);
+          const validInput = REACTIONS_ATTRIBUTES.every((attribute) => reaction[attribute] !== undefined);
           if (!validInput) return false;
         }
         return true;

@@ -516,12 +516,14 @@ export default {
       const extensions = [Document, Text, History, HardBreak];
       extensions.push(this.useDivTags ? DivParagraph : Paragraph);
 
-      if (this.allowBlockquote) {
-        extensions.push(Blockquote);
-      }
+      // bold must come before blockquote due to keyboard shortcuts
       if (this.allowBold) {
         extensions.push(Bold);
       }
+      if (this.allowBlockquote) {
+        extensions.push(Blockquote);
+      }
+
       if (this.allowBulletList) {
         extensions.push(BulletList);
         extensions.push(ListItem.extend({
@@ -578,7 +580,17 @@ export default {
       extensions.push(ShiftEnter);
 
       if (this.link) {
-        extensions.push(TipTapLink.extend({ inclusive: false }).configure({
+        extensions.push(TipTapLink.extend({
+          inclusive: false,
+          addKeyboardShortcuts () {
+            return {
+              'Mod-k': () => {
+                self.$emit('edit-link');
+                return true;
+              },
+            };
+          },
+        }).configure({
           HTMLAttributes: {
             class: 'd-link d-wb-break-all',
           },
@@ -747,7 +759,7 @@ export default {
             return !allowedKeys.includes(event.key);
           },
 
-          handlePaste: (view, event, slice) => {
+          handlePaste: (view, event) => {
             const clipboardData = event.clipboardData || window.clipboardData;
             const textData = clipboardData.getData('text/plain');
             const htmlData = clipboardData.getData('text/html');
@@ -765,7 +777,7 @@ export default {
       this.addEditorListeners();
     },
 
-    bubbleMenuShouldShow ({ editor, view, state, oldState, from, to }) {
+    bubbleMenuShouldShow ({ editor }) {
       return editor.isActive('link');
     },
 

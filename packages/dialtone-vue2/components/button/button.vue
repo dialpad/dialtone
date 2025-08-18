@@ -273,11 +273,11 @@ export default {
       }
       return {
         ...this.$listeners,
-        focusin: (e) => {
+        focusin: () => {
           this.isInFocus = true;
         },
 
-        focusout: (e) => {
+        focusout: () => {
           this.isInFocus = false;
         },
       };

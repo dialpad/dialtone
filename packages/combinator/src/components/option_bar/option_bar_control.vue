@@ -155,7 +155,7 @@ const controlBindings = computed(() => {
   const component = controlComponent.value;
   if (!component.props) { return null; }
   return Object.fromEntries(
-    Object.entries(controlArgs.value).filter(([arg, _]) => {
+    Object.entries(controlArgs.value).filter(([arg]) => {
       const controlProps = Object.keys(component.props);
       return controlProps.includes(arg);
     }),

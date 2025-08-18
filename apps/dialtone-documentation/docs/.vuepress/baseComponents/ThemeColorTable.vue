@@ -87,6 +87,7 @@
 
 <script setup>
 import { inject } from 'vue';
+import { alphabeticalSorter } from '@utilities';
 
 const tokensDocs = inject('tokensDocs');
 const excludedThemeColors = ['--dt-shell-base'];
@@ -96,6 +97,7 @@ const themeColors = Object.keys(tokensDocs)
     /--dt-shell-(\w+)-.+/.test(token) &&
     !excludedThemeColors.some(excluded => token.startsWith(excluded)),
   )
+  .sort(alphabeticalSorter)
   .map(token => {
     return {
       section: token.replace(/--dt-shell(-\w+)?-color-.*/, '$1').replace('-', ' ') || '-',

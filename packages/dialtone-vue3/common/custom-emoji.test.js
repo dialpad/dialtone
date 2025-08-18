@@ -1,42 +1,21 @@
 export const withValidCustomEmojis = {
-  octocat: {
-    name: 'octocat',
-    category: '',
-    shortname: ':octocat:',
+  blinkingguy: {
+    added_by: 'Ignacio Ropolo',
+    content_type: 'image/gif',
+    date_added: 1730918926288,
+    image: 'https://storage.googleapis.com/uv-beta_custom_emojis/5646620347596800/blinkingguy',
+    name: 'blinkingguy',
+    unicode_output: '3a-62-6c-69-6e-6b-69-6e-67-67-75-79-3a',
+    shortname: ':blinkingguy:',
     shortname_alternates: [],
-    keywords: [
-      'octo',
-      'cat',
-      'github',
-    ],
-    extension: '.png',
-    custom: true,
+    custom: true
   },
 };
 
 export const withNotAllRequiredProps = {
-  octocat: {
-    name: 'octocat',
-    category: '',
-    shortname: ':octocat:',
-    shortname_alternates: [],
-    keywords: [
-      'octo',
-      'cat',
-      'github',
-    ],
-    extension: '.png',
-    custom: true,
-  },
   notallrequiredprops: {
-    name: 'not all required props',
-    category: '',
-    shortname: ':notallrequiredprops:',
-    shortname_alternates: [],
-    keywords: [
-      'not',
-    ],
-    custom: true,
+    image: 'https://storage.googleapis.com/uv-beta_custom_emojis/5646620347596800/blinkingguy',
+    name: 'blinkingguy',
   },
 };
 

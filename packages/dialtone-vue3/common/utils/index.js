@@ -369,7 +369,7 @@ export function getPhoneNumberRegex (minLength = 7, maxLength = 15) {
       `{${minLength},${maxLength}}` +
       ')(?=\\b)(?=\\W(?=\\W|$)|\\s|$)',
     );
-  } catch (e) {
+  } catch {
     // eslint-disable-next-line no-console
     console.warn('This browser doesn\'t support regex lookahead/lookbehind');
   }

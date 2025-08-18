@@ -146,7 +146,7 @@ export default {
     inputListeners () {
       return {
         ...this.$listeners,
-        click: _ => this.toggleCheckedValue(),
+        click: () => this.toggleCheckedValue(),
       };
     },
 

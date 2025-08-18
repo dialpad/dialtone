@@ -5,6 +5,7 @@ import DtRecipeMessageInputDefaultTemplate from './message_input_default.story.v
 import mentionSuggestion from '@/components/rich_text_editor/mention_suggestion';
 import channelSuggestion from '@/components/rich_text_editor/channel_suggestion';
 import slashCommandSuggestion from '@/components/rich_text_editor/slash_command_suggestion';
+import customEmojiJson from '@/common/custom-emoji.json';
 
 const iconsList = getIconNames();
 
@@ -189,6 +190,12 @@ export const argTypesData = {
       disable: true,
     },
   },
+
+  onEmojiScrollBottomReached: {
+    table: {
+      disable: true,
+    },
+  },
 };
 
 // Set default values at the story level here.
@@ -236,6 +243,7 @@ export const argsData = {
   onNoticeClose: action('notice-close'),
   onSkinTone: action('skin-tone'),
   onCancel: action('cancel'),
+  onEmojiScrollBottomReached: action('emoji-scroll-bottom-reached'),
 };
 
 // Story Collection
@@ -288,7 +296,7 @@ export const WithMeetingPill = {
   render: DefaultTemplate,
   args: {
     slashCommandSuggestion: {
-      items: ({ query }) => {
+      items: () => {
         return [
           {
             command: 'dpm',
@@ -308,24 +316,7 @@ export const WithCustomEmoji = {
     value: 'This is a test with custom emojis',
     emojiPickerProps: {
       skinTone: 'Default',
-      customEmojis: [
-        {
-          name: 'shipit',
-          date_added: 1730918816847,
-          added_by: 'Ignacio Ropolo',
-          image: 'https://github.githubassets.com/images/icons/emoji/shipit.png',
-          unicode_character: '1f44d',
-        },
-        {
-          name: 'thumbs up',
-          category: 'people',
-          shortname: ':thumbsup:',
-          shortname_alternates: [':+1:', ':thumbup:'],
-          keywords: ['+1', 'hand', 'thumb', 'up', 'uc6'],
-          unicode_output: '1f44d',
-          unicode_character: '1f44d',
-        },
-      ],
+      customEmojis: customEmojiJson,
     },
   },
 };

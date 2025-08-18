@@ -18,7 +18,7 @@ import SvgLoader from './baseComponents/SvgLoader.vue';
 import DialtoneUsage from './baseComponents/DialtoneUsage.vue';
 
 export default defineClientConfig({
-  enhance ({ app, router, siteData }) {
+  enhance ({ app }) {
     // Common views
     app.component('Icons', Icons);
     app.component('Overview', Overview);
