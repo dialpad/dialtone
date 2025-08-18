@@ -27,7 +27,7 @@ export const BRANDS = [
 ];
 
 export const CATEGORY_MAP = {
-  color: ['color', 'opacity', 'shell', 'theme'],
+  color: ['color', 'opacity', 'shell'],
   typography: ['typography', 'font'],
   size: ['size'],
   space: ['space'],
