@@ -12,8 +12,9 @@ export const THEMES = [
 export const BRANDS = [
   { value: 'dp', label: 'Dialpad' },
   { value: 'tmo', label: 'T-Mobile' },
-  { value: 'expressive', label: 'Expressive' },
-  { value: 'expressive-sm', label: 'Expressive Small' },
+  // { value: 'expressive', label: 'Expressive' },
+  // { value: 'expressive-sm', label: 'Expressive Small' },
+  // { value: 'deca', label: 'Deca' },
   { value: 'aegean', label: 'Aegean' },
   { value: 'botany', label: 'Botany' },
   { value: 'buttercream', label: 'Buttercream' },
