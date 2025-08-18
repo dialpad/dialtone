@@ -17,14 +17,6 @@ const props = defineProps({
   },
 
   /**
-   * List of specific colors to include in the table (takes precedence over excludedColors)
-   */
-  includedColors: {
-    type: Array,
-    default: () => [],
-  },
-
-  /**
    * Class prefix to filter the extracted docs
    */
   classPrefix: {
