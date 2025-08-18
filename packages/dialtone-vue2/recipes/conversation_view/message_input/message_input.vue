@@ -162,6 +162,7 @@
                 @add-emoji="$emit('add-emoji')"
                 @skin-tone="onSkinTone"
                 @selected-emoji="(emoji) => onSelectEmoji(emoji, close)"
+                @scroll-bottom-reached="$emit('scroll-bottom-reached')"
               />
             </template>
           </dt-popover>
@@ -747,6 +748,12 @@ export default {
      * @type {Boolean}
      */
     'add-emoji',
+
+    /**
+     * Emitted when the emoji picker scroll reaches the bottom
+     * @event scroll-bottom-reached
+     */
+    'scroll-bottom-reached',
   ],
 
   data () {
