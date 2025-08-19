@@ -22,63 +22,89 @@
       </dt-stack>
     </dt-stack>
 
-    <!-- Theme Visual Preview -->
+    <!-- SVG Theme Visual Preview -->
     <div class="d-mt16">
       <div :class="containerClasses" class="themes-container">
-        <div class="themes-mockup" :style="{ backgroundColor: colors.background }">
-          <!-- Header -->
-          <div class="mockup-header" :style="{ backgroundColor: colors.surface }">
-            <div class="header-controls">
-              <div class="window-controls">
-                <span class="control" />
-                <span class="control" />
-                <span class="control" />
-              </div>
-              <div class="dialpad-logo">
-                <div class="logo-gradient" />
-              </div>
-              <div class="header-nav">
-                <span class="nav-item" />
-                <span class="nav-item inactive" />
-                <span class="nav-item inactive" />
-              </div>
-              <div class="search-bar" :style="{ backgroundColor: `${colors.text}0D` }" />
-              <div class="header-actions">
-                <span class="action-btn" />
-                <span class="action-btn" />
-              </div>
-            </div>
-          </div>
+        <svg
+          class="themes-svg"
+          viewBox="0 0 844 380"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <defs>
+            <linearGradient id="logoGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#10022C" />
+              <stop offset="20%" stop-color="#611F93" />
+              <stop offset="46%" stop-color="#C52599" />
+              <stop offset="66%" stop-color="#EA2F6F" />
+              <stop offset="90%" stop-color="#FD6D2D" />
+              <stop offset="100%" stop-color="#FF9E0E" />
+            </linearGradient>
+          </defs>
 
-          <!-- Content Area -->
-          <div class="mockup-content">
-            <!-- Sidebar -->
-            <div class="sidebar" :style="{ backgroundColor: colors.sidebar }">
-              <div
-                v-for="(item, index) in navItems"
-                :key="index"
-                class="nav-item-row"
-              >
-                <div
-                  class="avatar"
-                  :style="{ backgroundColor: item.avatarColor }"
-                />
-                <div class="nav-text">
-                  <div class="text-primary" :style="{ backgroundColor: `${colors.text}99` }" />
-                  <div class="text-secondary" :style="{ backgroundColor: `${colors.text}2B` }" />
-                </div>
-                <div
-                  v-if="item.hasToggle"
-                  class="toggle"
-                  :style="{ backgroundColor: item.toggleColor }"
-                />
-              </div>
-            </div>
+          <!-- Main Background -->
+          <rect width="844" height="380" rx="8" :fill="svgColors.background" />
 
-            <!-- Main Area -->
-            <div class="main-area" :style="{ backgroundColor: colors.background }" />
-          </div>
-        </div>
+          <!-- Header Background -->
+          <rect width="844" height="60" :fill="svgColors.surface" />
+
+          <!-- Window Controls -->
+          <circle cx="21" cy="30" r="6" fill="#FF5F57" />
+          <circle cx="43" cy="30" r="6" fill="#FFBD2E" />
+          <circle cx="65" cy="30" r="6" fill="#28CA42" />
+
+          <!-- Dialpad Logo -->
+          <rect x="104" y="16" width="28" height="28" rx="4" fill="url(#logoGradient)" />
+
+          <!-- Header Navigation Dots -->
+          <circle cx="162" cy="30" r="6" :fill="svgColors.navActive" />
+          <circle cx="182" cy="30" r="6" :fill="svgColors.navInactive" />
+          <circle cx="202" cy="30" r="6" :fill="svgColors.navInactive" />
+          <circle cx="222" cy="30" r="6" :fill="svgColors.navInactive" />
+
+          <!-- Search Bar -->
+          <rect x="275" y="14" width="490" height="32" rx="16" :fill="svgColors.searchBg" />
+
+          <!-- Header Action Buttons -->
+          <circle cx="784" cy="30" r="6" :fill="svgColors.actionBtn" />
+          <circle cx="810" cy="30" r="6" :fill="svgColors.actionBtn" />
+
+          <!-- Sidebar Background -->
+          <rect x="0" y="60" width="314" height="320" :fill="svgColors.sidebar" />
+
+          <!-- Sidebar Border -->
+          <line x1="314" y1="60" x2="314" y2="380" :stroke="svgColors.border" stroke-width="1" />
+
+          <!-- Navigation Item 1 - Orange Avatar with Toggle -->
+          <circle cx="39" cy="115" r="19" fill="var(--dt-color-coral-400)" />
+          <rect x="73" y="100" width="125" height="8" rx="4" :fill="svgColors.textPrimary" />
+          <rect x="73" y="115" width="173" height="6" rx="3" :fill="svgColors.textSecondary" />
+          <rect x="276" y="107" width="18" height="12" rx="6" :fill="svgColors.brand" />
+
+          <!-- Navigation Item 2 - Blue Avatar -->
+          <circle cx="39" cy="175" r="19" fill="var(--dt-color-blue-400)" />
+          <rect x="73" y="160" width="125" height="8" rx="4" :fill="svgColors.textPrimary" />
+          <rect x="73" y="175" width="173" height="6" rx="3" :fill="svgColors.textSecondary" />
+
+          <!-- Navigation Item 3 - Purple Avatar with Toggle -->
+          <circle cx="39" cy="235" r="19" fill="var(--dt-color-purple-400)" />
+          <rect x="73" y="220" width="125" height="8" rx="4" :fill="svgColors.textPrimary" />
+          <rect x="73" y="235" width="173" height="6" rx="3" :fill="svgColors.textSecondary" />
+          <rect x="276" y="227" width="18" height="12" rx="6" :fill="svgColors.brand" />
+
+          <!-- Navigation Item 4 - Green Avatar -->
+          <circle cx="39" cy="295" r="19" fill="var(--dt-color-teal-400)" />
+          <rect x="73" y="280" width="125" height="8" rx="4" :fill="svgColors.textPrimary" />
+          <rect x="73" y="295" width="173" height="6" rx="3" :fill="svgColors.textSecondary" />
+
+          <!-- Navigation Item 5 - Pink Avatar with Toggle -->
+          <circle cx="39" cy="355" r="19" fill="var(--dt-color-magenta-400)" />
+          <rect x="73" y="340" width="125" height="8" rx="4" :fill="svgColors.textPrimary" />
+          <rect x="73" y="355" width="173" height="6" rx="3" :fill="svgColors.textSecondary" />
+          <rect x="276" y="347" width="18" height="12" rx="6" :fill="svgColors.brand" />
+
+          <!-- Main Content Area -->
+          <rect x="314" y="60" width="530" height="320" :fill="svgColors.background" />
+        </svg>
       </div>
     </div>
   </div>
@@ -113,105 +139,106 @@ const updateTheme = (newTheme) => {
   selectedTheme.value = newTheme;
 };
 
-// Theme color configurations
-const themeColors = {
+// Theme color configurations using Dialtone tokens
+const themeTokens = {
   dp: {
     light: {
-      background: '#ffffff',
-      surface: '#f5f5f5',
-      sidebar: '#eaeaea',
-      text: '#1c1c1c',
-      brand: '#6c23ce',
+      background: 'var(--dt-color-black-100)',
+      surface: 'var(--dt-color-black-100)',
+      sidebar: 'var(--dt-color-black-200)',
+      border: 'var(--dt-color-black-300)',
+      brand: 'var(--dt-color-purple-500)',
+      textPrimary: 'var(--dt-color-black-400)',
+      textSecondary: 'var(--dt-color-black-400)',
     },
     dark: {
-      background: '#1c1c1c',
-      surface: '#414141',
-      sidebar: '#686868',
-      text: '#ffffff',
-      brand: '#b28ae5',
+      background: 'var(--dt-color-black-900)',
+      surface: 'var(--dt-color-black-800)',
+      sidebar: 'var(--dt-color-black-800)',
+      border: 'var(--dt-color-black-700)',
+      brand: 'var(--dt-color-purple-300)',
+      textPrimary: 'var(--dt-color-black-500)',
+      textSecondary: 'var(--dt-color-black-500)',
     },
   },
   tmo: {
     light: {
-      background: '#ffffff',
-      surface: '#f5f5f5',
-      sidebar: '#eaeaea',
-      text: '#1c1c1c',
-      brand: '#e20074',
+      background: 'var(--dt-color-black-100)',
+      surface: 'var(--dt-color-black-100)',
+      sidebar: 'var(--dt-color-black-200)',
+      border: 'var(--dt-color-black-300)',
+      brand: '#E20074',
+      textPrimary: 'var(--dt-color-black-400)',
+      textSecondary: 'var(--dt-color-black-400)',
     },
     dark: {
-      background: '#1c1c1c',
-      surface: '#414141',
-      sidebar: '#686868',
-      text: '#ffffff',
-      brand: '#ff6bb3',
+      background: 'var(--dt-color-black-900)',
+      surface: 'var(--dt-color-black-800)',
+      sidebar: 'var(--dt-color-black-800)',
+      border: 'var(--dt-color-black-700)',
+      brand: '#E20074',
+      textPrimary: 'var(--dt-color-black-500)',
+      textSecondary: 'var(--dt-color-black-500)',
     },
   },
   expressive: {
     light: {
-      background: '#ffffff',
-      surface: '#f5f5f5',
-      sidebar: '#eaeaea',
-      text: '#1c1c1c',
-      brand: '#ff6900',
+      background: 'var(--dt-color-black-100)',
+      surface: 'var(--dt-color-black-100)',
+      sidebar: 'var(--dt-color-black-200)',
+      border: 'var(--dt-color-black-300)',
+      brand: 'var(--dt-color-coral-500)',
+      textPrimary: 'var(--dt-color-black-400)',
+      textSecondary: 'var(--dt-color-black-400)',
     },
     dark: {
-      background: '#1c1c1c',
-      surface: '#414141',
-      sidebar: '#686868',
-      text: '#ffffff',
-      brand: '#ff9500',
+      background: 'var(--dt-color-black-900)',
+      surface: 'var(--dt-color-black-800)',
+      sidebar: 'var(--dt-color-black-800)',
+      border: 'var(--dt-color-black-700)',
+      brand: 'var(--dt-color-coral-300)',
+      textPrimary: 'var(--dt-color-black-500)',
+      textSecondary: 'var(--dt-color-black-500)',
     },
   },
   sunflower: {
     light: {
-      background: '#ffffff',
-      surface: '#f5f5f5',
-      sidebar: '#eaeaea',
-      text: '#1c1c1c',
-      brand: '#ffbe41',
+      background: 'var(--dt-color-black-100)',
+      surface: 'var(--dt-color-gold-100)',
+      sidebar: 'var(--dt-color-gold-100)',
+      border: 'var(--dt-color-black-300)',
+      brand: 'var(--dt-color-gold-500)',
+      textPrimary: 'var(--dt-color-gold-600)',
+      textSecondary: 'var(--dt-color-gold-600)',
     },
     dark: {
-      background: '#1c1c1c',
-      surface: '#414141',
-      sidebar: '#686868',
-      text: '#ffffff',
-      brand: '#ffd700',
+      background: 'var(--dt-color-black-900)',
+      surface: 'var(--dt-color-gold-700)',
+      sidebar: 'var(--dt-color-gold-700)',
+      border: 'var(--dt-color-gold-700)',
+      brand: 'var(--dt-color-gold-300)',
+      textPrimary: 'var(--dt-color-gold-300)',
+      textSecondary: 'var(--dt-color-gold-300)',
     },
   },
 };
 
-const colors = computed(() => {
-  return themeColors[selectedTheme.value]?.[selectedMode.value] || themeColors.dp.light;
+const svgColors = computed(() => {
+  const baseColors = themeTokens[selectedTheme.value]?.[selectedMode.value] || themeTokens.dp.light;
+  return {
+    ...baseColors,
+    controlInactive: selectedMode.value === 'dark' ? 'var(--dt-color-black-600)' : 'var(--dt-color-black-500)',
+    navActive: baseColors.textPrimary,
+    navInactive: selectedMode.value === 'dark' ? 'var(--dt-color-black-600)' : 'var(--dt-color-black-500)',
+    searchBg: selectedMode.value === 'dark' ? 'var(--dt-color-black-700)' : 'var(--dt-color-black-200)',
+    actionBtn: selectedMode.value === 'dark' ? 'var(--dt-color-black-600)' : 'var(--dt-color-black-500)',
+  };
 });
 
 const containerClasses = computed(() => {
   return [
     `theme-${selectedTheme.value}`,
     `mode-${selectedMode.value}`,
-  ];
-});
-
-const navItems = computed(() => {
-  return [
-    {
-      avatarColor: '#FFBE41',
-      hasToggle: true,
-      toggleColor: colors.value.brand,
-    },
-    {
-      avatarColor: '#7C52FF',
-      hasToggle: false,
-    },
-    {
-      avatarColor: '#FF6B9D',
-      hasToggle: true,
-      toggleColor: colors.value.brand,
-    },
-    {
-      avatarColor: '#4ECDC4',
-      hasToggle: false,
-    },
   ];
 });
 </script>
@@ -226,148 +253,14 @@ const navItems = computed(() => {
   transition: all 0.3s ease;
 }
 
-.themes-mockup {
+.themes-svg {
   width: 100%;
-  max-width: 844px;
-  height: 380px;
+  height: auto;
   border-radius: 8px;
-  overflow: hidden;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
   margin: 0 auto;
-}
-
-.mockup-header {
-  height: 60px;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
-}
-
-.header-controls {
-  display: flex;
-  align-items: center;
-  height: 100%;
-  padding: 0 20px;
-  gap: 16px;
-}
-
-.window-controls {
-  display: flex;
-  gap: 8px;
-}
-
-.control {
-  width: 12px;
-  height: 12px;
-  border-radius: 50%;
-  background: rgba(0, 0, 0, 0.3);
-}
-
-.dialpad-logo {
-  width: 28px;
-  height: 28px;
+  display: block;
+  transition: all 0.3s ease;
   border-radius: 4px;
-  overflow: hidden;
-}
-
-.logo-gradient {
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(135deg, #10022C 0%, #611F93 20%, #C52599 46%, #EA2F6F 66%, #FD6D2D 90%, #FF9E0E 100%);
-}
-
-.header-nav {
-  display: flex;
-  gap: 8px;
-}
-
-.nav-item {
-  width: 20px;
-  height: 20px;
-  border-radius: 10px;
-  background: rgba(0, 0, 0, 0.6);
-}
-
-.nav-item.inactive {
-  opacity: 0.4;
-}
-
-.search-bar {
-  flex: 1;
-  height: 32px;
-  border-radius: 16px;
-  margin: 0 16px;
-}
-
-.header-actions {
-  display: flex;
-  gap: 8px;
-}
-
-.action-btn {
-  width: 20px;
-  height: 20px;
-  border-radius: 10px;
-  background: rgba(0, 0, 0, 0.6);
-}
-
-.mockup-content {
-  display: flex;
-  height: 320px;
-}
-
-.sidebar {
-  width: 314px;
-  padding: 20px;
-  border-right: 1px solid rgba(0, 0, 0, 0.1);
-}
-
-.nav-item-row {
-  display: flex;
-  align-items: center;
-  gap: 16px;
-  margin-bottom: 24px;
-}
-
-.avatar {
-  width: 38px;
-  height: 38px;
-  border-radius: 50%;
-  flex-shrink: 0;
-}
-
-.nav-text {
-  flex: 1;
-}
-
-.text-primary {
-  height: 11px;
-  width: 105px;
-  border-radius: 5px;
-  margin-bottom: 6px;
-}
-
-.text-secondary {
-  height: 10px;
-  width: 173px;
-  border-radius: 5px;
-}
-
-.toggle {
-  width: 18px;
-  height: 12px;
-  border-radius: 6px;
-  flex-shrink: 0;
-}
-
-.main-area {
-  flex: 1;
-}
-
-/* Mode-based shadows */
-.mode-light .themes-mockup {
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-}
-
-.mode-dark .themes-mockup {
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  border:1px solid var(--dt-color-black-300);
 }
 </style>

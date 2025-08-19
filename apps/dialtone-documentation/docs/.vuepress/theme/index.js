@@ -146,7 +146,7 @@ export const dialtoneVuepressTheme = (options) => {
         ]);
       _extractFrontmatter(app, '/guides/content/', options);
       _extractFrontmatter(app, '/components/', options, ['/components/status/']);
-      _extractFrontmatter(app, '/design/', options, ['/design/colors/usage/', '/design/colors/palette/']);
+      _extractFrontmatter(app, '/design/', options, ['/design/colors/usage/', '/design/colors/palette/', '/design/colors/themes/', '/design/colors/chart-colors/']);
       _extractFrontmatter(app, '/design/colors/', options);
       _extractComponentStatus(app);
     },
