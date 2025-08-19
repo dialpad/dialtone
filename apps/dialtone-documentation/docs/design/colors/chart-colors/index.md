@@ -177,7 +177,7 @@ Avoid mixing the tokens next to each other as much as possible, so keep a space 
 
 </dialtone-usage>
 
-## Accesibility Guidelines
+## Accessibility Guidelines
 
 Ensuring accessible data visualizations is a core tenet of Dialtone. When using these tokens:
 
