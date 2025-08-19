@@ -198,7 +198,8 @@ While this system aims for robustness, be aware of potential challenges during i
 - Transitioning Existing Charts: Migrating older charts not using design tokens will require dedicated refactoring effort.
 
 <script setup>
-import tokensJson from '@dialpad/dialtone-tokens/dist/doc.json';
+import tokensJson from '@dialpad/dialtone-tokens/dist/doc.json'; 
+import { alphabeticalSorter } from '@utilities'; 
 
 /*
 * Remove unwanted background-clip classes
@@ -219,29 +220,28 @@ const statusTextColorsExclusionList = [
   'muted',
 ];
 const theme = "dp-light";
-
-const chartTokens = Object.keys(tokensJson[theme]).reduce((acc, curr) => {
-  if (!curr.startsWith('color/chart')) return acc;
-
-  const { name, value, description } = tokensJson[theme][curr]["css/variables"];
-
-  acc.push({
-    name,
-    tokenValue: value,
-    description,
-    exampleValue: value,
-    exampleName: name,
-  });
-  return acc;
-}, []);
-
 const isSemantic = (token) => /(warning|positive|info|critical|brand)/.test(token);
 const isCategorical = (token) => /(categorical)/.test(token);
 const isSequential = (token) => /(sequential)/.test(token);
 
-const semanticTokens = chartTokens.filter(({ name: token }) => isSemantic(token));
-const categoricalTokens = chartTokens.filter(({ name: token }) => isCategorical(token));
-const sequentialTokens = chartTokens.filter(({ name: token }) => isSequential(token));
-const singleColorTokens = chartTokens.filter(({ name: token }) => !(isSequential(token) || isCategorical(token) || isSemantic(token)));
-
+const { 
+  semanticTokens, 
+  categoricalTokens,
+  sequentialTokens,
+  singleColorTokens 
+} = Object.keys(tokensJson[theme]).sort(alphabeticalSorter).reduce((acc, curr) => {
+    if (!curr.startsWith('color/chart')) return acc;
+  
+    const { name, value, description } = tokensJson[theme][curr]["css/variables"];
+  
+    const tokenCategory = isSemantic(name) ? 'semanticTokens' : isCategorical(name) ? 'categoricalTokens' : isSequential(name) ? 'sequentialTokens' : 'singleColorTokens';
+    acc[tokenCategory].push({ name, tokenValue: value, description, exampleValue: value, exampleName: name });
+  
+    return acc;
+  }, {
+    semanticTokens: [],
+    categoricalTokens: [],
+    sequentialTokens: [],
+    singleColorTokens: [],
+  });
 </script>
