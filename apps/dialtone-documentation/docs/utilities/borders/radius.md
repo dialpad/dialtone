@@ -14,7 +14,7 @@ Use `d-bar{n}` to change the border radius on all corners of your element.
   >
     <div
       v-for="r in [0, 1, 2, 4, 8, 12, 16, 24, 32]"
-      class="d-p16 d-ba d-baw2 d-bc-default d-bgc-primary d-ws-nowrap"
+      class="d-p16 d-ba d-baw2 d-bgc-primary d-ws-nowrap"
       :class="`d-bar${r}`"
     >
       d-bar{{ r }}
@@ -45,7 +45,7 @@ Use `d-b{t|r|b|l}r{n}` to change the border radius on a side of your element.
   >
     <div
       v-for="r in [4, 8, 12, 16]"
-      class="d-p16 d-ba d-baw2 d-bc-default d-bgc-primary d-ws-nowrap"
+      class="d-p16 d-ba d-baw2 d-bgc-primary d-ws-nowrap"
       :class="`d-btr${r}`"
     >
       d-btr{{ r }}
@@ -69,7 +69,7 @@ Use `d-b{a|t|r|b|l}r-pill` to change the border radius of your element to a pill
     gap="400"
     :direction="{ 'default': 'column', 'md': 'row' }"
   >
-    <div class="d-p16 d-ba d-baw2 d-bc-default d-bgc-primary d-ws-nowrap d-bar-pill">
+    <div class="d-p16 d-ba d-baw2 d-bgc-primary d-ws-nowrap d-bar-pill">
       d-bar-pill
     </div>
   </dt-stack>
@@ -88,7 +88,7 @@ Use `d-b{a|t|r|b|l}r-circle` to change the border radius of your element to a ci
     gap="400"
     :direction="{ 'default': 'column', 'md': 'row' }"
    >
-    <div class="d-fl-center d-p16 d-h128 d-w128 d-ba d-baw2 d-bc-default d-bgc-primary d-ws-nowrap d-bar-circle ">
+    <div class="d-fl-center d-p16 d-h128 d-w128 d-ba d-baw2 d-bgc-primary d-ws-nowrap d-bar-circle ">
       d-bar-circle
     </div>
   </dt-stack>
