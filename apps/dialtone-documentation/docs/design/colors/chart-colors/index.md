@@ -19,8 +19,6 @@ These tokens are designed to:
 - **Streamline Workflow:** Offer a single source of truth for both designers and developers, reducing guesswork and speeding up development.
 - **Improve Maintainability:** Simplify global color updates and future-proof our data experiences.
 
-<div class="d-m32"></div>
-
 ## Types
 
 Chart Colors are available for one of four types: [Single Color](#single-color), [Semantic](#semantic), [Categorical](#categorical), and [Sequential](#sequential).
@@ -198,8 +196,8 @@ While this system aims for robustness, be aware of potential challenges during i
 - Transitioning Existing Charts: Migrating older charts not using design tokens will require dedicated refactoring effort.
 
 <script setup>
-import tokensJson from '@dialpad/dialtone-tokens/dist/doc.json'; 
-import { alphabeticalSorter } from '@utilities'; 
+import tokensJson from '@dialpad/dialtone-tokens/dist/doc.json';
+import { alphabeticalSorter } from '@utilities';
 
 /*
 * Remove unwanted background-clip classes
@@ -224,19 +222,19 @@ const isSemantic = (token) => /(warning|positive|info|critical|brand)/.test(toke
 const isCategorical = (token) => /(categorical)/.test(token);
 const isSequential = (token) => /(sequential)/.test(token);
 
-const { 
-  semanticTokens, 
+const {
+  semanticTokens,
   categoricalTokens,
   sequentialTokens,
-  singleColorTokens 
+  singleColorTokens
 } = Object.keys(tokensJson[theme]).sort(alphabeticalSorter).reduce((acc, curr) => {
     if (!curr.startsWith('color/chart')) return acc;
-  
+
     const { name, value, description } = tokensJson[theme][curr]["css/variables"];
-  
+
     const tokenCategory = isSemantic(name) ? 'semanticTokens' : isCategorical(name) ? 'categoricalTokens' : isSequential(name) ? 'sequentialTokens' : 'singleColorTokens';
     acc[tokenCategory].push({ name, tokenValue: value, description, exampleValue: value, exampleName: name });
-  
+
     return acc;
   }, {
     semanticTokens: [],
