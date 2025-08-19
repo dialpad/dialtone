@@ -66,7 +66,7 @@
           >
             <!-- TODO replace this with DT menu -->
             <div
-              class="d-d-flex d-bgc-primary d-bar-pill d-bc-default d-ba"
+              class="d-d-flex d-bgc-primary d-bar-pill d-ba"
               role="group"
             >
               <dt-button

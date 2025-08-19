@@ -8,7 +8,7 @@
               scope="col"
               class="d-p0 d-bbw0 d-label--sm-compact d-tt-none"
             >
-              <div class="d-p16 d-bb d-bc-default d-bbw1">
+              <div class="d-p16 d-bb d-bbw1">
                 Preview
               </div>
             </th>
@@ -16,7 +16,7 @@
               scope="col"
               class="d-p0 d-bbw0 d-label--sm-compact d-tt-none"
             >
-              <div class="d-p16 d-bb d-bc-default d-bbw1">
+              <div class="d-p16 d-bb d-bbw1">
                 Token Name
               </div>
             </th>
@@ -24,7 +24,7 @@
               scope="col"
               class="d-p0 d-bbw0 d-label--sm-compact d-tt-none d-ta-right"
             >
-              <div class="d-p16 d-bb d-bc-default d-bbw1">
+              <div class="d-p16 d-bb d-bbw1">
                 {{ tokenList ? "REM" : "Value" }}
               </div>
             </th>
@@ -33,7 +33,7 @@
               scope="col"
               class="d-p0 d-bbw0 d-label--sm-compact"
             >
-              <div class="d-p16 d-bb d-bc-default d-bbw1">
+              <div class="d-p16 d-bb d-bbw1">
                 PX
               </div>
             </th>

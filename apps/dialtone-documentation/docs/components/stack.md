@@ -346,16 +346,16 @@ vueCode='
       <thead class="d-bgc-primary d-ps-sticky d-zi-base1 d-t0">
         <tr>
           <th scope="col" class="d-p0 d-bbw0">
-            <div class="d-p16 d-bb d-bc-default d-bbw1">Size</div>
+            <div class="d-p16 d-bb d-bbw1">Size</div>
           </th>
           <th scope="col" class="d-p0 d-bbw0">
-            <div class="d-p16 d-bb d-bc-default d-bbw1">Design Token</div>
+            <div class="d-p16 d-bb d-bbw1">Design Token</div>
           </th>
           <th scope="col" class="d-ta-right d-p0 d-bbw0">
-            <div class="d-p16 d-bb d-bc-default d-bbw1">REM</div>
+            <div class="d-p16 d-bb d-bbw1">REM</div>
           </th>
           <th scope="col" class="d-ta-right d-p0 d-bbw0">
-            <div class="d-p16 d-bb d-bc-default d-bbw1">PX</div>
+            <div class="d-p16 d-bb d-bbw1">PX</div>
           </th>
         </tr>
       </thead>
@@ -661,18 +661,18 @@ Stacks row with gap 300 and stacks in row reverse the nested stack with gap 600.
 
 <code-well-header>
     <section class="d-stack d-stack--row d-stack--gap-300 d-bgc-magenta-100 d-ai-stretch">
-      <div class="d-bgc-secondary d-ba d-bc-default">
+      <div class="d-bgc-secondary d-ba">
         Stack item 1
       </div>
       <div>
-        <div class="d-bgc-secondary d-ba d-bc-default">
+        <div class="d-bgc-secondary d-ba">
           Stack item 2
         </div>
         <div class="d-stack d-stack--row-reverse d-stack--gap-600 d-bgc-magenta-100">
-          <div class="d-bgc-secondary d-ba d-bc-default">
+          <div class="d-bgc-secondary d-ba">
             Stack item 3
           </div>
-          <div class="d-bgc-secondary d-ba d-bc-default">
+          <div class="d-bgc-secondary d-ba">
             Stack item 4
           </div>
         </div>

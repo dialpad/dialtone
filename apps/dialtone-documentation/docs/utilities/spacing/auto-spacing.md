@@ -56,9 +56,9 @@ The Stack and Flow layouts work by using the adjacent sibling combinator (`+`) t
     <table class="d-table dialtone-doc-table">
       <thead class="d-bgc-primary d-ps-sticky d-zi-base1 d-t0">
         <tr>
-          <th scope="col" class="d-p0 d-bbw0 d-w25p"><div class="d-p16 d-bb d-bc-default d-bbw1">Value</div></th>
-          <th scope="col" class="d-p0 d-bbw0"><div class="d-p16 d-bb d-bc-default d-bbw1">Vertical Class</div></th>
-          <th scope="col" class="d-p0 d-bbw0"><div class="d-p16 d-bb d-bc-default d-bbw1">Horizontal Class</div></th>
+          <th scope="col" class="d-p0 d-bbw0 d-w25p"><div class="d-p16 d-bb d-bbw1">Value</div></th>
+          <th scope="col" class="d-p0 d-bbw0"><div class="d-p16 d-bb d-bbw1">Vertical Class</div></th>
+          <th scope="col" class="d-p0 d-bbw0"><div class="d-p16 d-bb d-bbw1">Horizontal Class</div></th>
         </tr>
       </thead>
       <tbody>
