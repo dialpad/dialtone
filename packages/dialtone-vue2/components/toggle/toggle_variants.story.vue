@@ -6,7 +6,7 @@
       label-class="d-mr6"
       label="Unchecked Initial"
     >
-      Checked Initial
+      Unchecked Initial
     </dt-toggle>
 
     <!-- Checked Initially -->

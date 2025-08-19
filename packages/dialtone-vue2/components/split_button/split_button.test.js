@@ -5,7 +5,7 @@ import { DtIconSend } from '@dialpad/dialtone-icons/vue2';
 import { DtTooltipDirective } from '@/directives/tooltip_directive';
 
 const MOCK_TRANSITION_STUB = () => ({
-  render: function (h) {
+  render: function () {
     return this.$options._renderChildren;
   },
 });

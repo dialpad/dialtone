@@ -15,7 +15,7 @@ const rule = require("../../../lib/rules/deprecated-directive"), RuleTester = re
 // Tests
 //------------------------------------------------------------------------------
 const ruleTester = new RuleTester({
-  // eslint-disable-next-line node/no-extraneous-require
+  // eslint-disable-next-line n/no-extraneous-require
   parser: require.resolve('vue-eslint-parser'),
   parserOptions: { ecmaVersion: 'latest' }
 })

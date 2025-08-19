@@ -1,3 +1,57 @@
+# [9.132.0](https://github.com/dialpad/dialtone/compare/dialtone/v9.131.1...dialtone/v9.132.0) (2025-08-19)
+
+
+### Bug Fixes
+
+* **Message Input:** NO-JIRA replace internal input value when adding custom emojis ([#868](https://github.com/dialpad/dialtone/issues/868)) ([e0874a3](https://github.com/dialpad/dialtone/commit/e0874a34672ecba01c96e9a4f907d7c8f2c1c3d3))
+
+
+### Documentation
+
+* **Color:** DLT-2570 chart tokens ([#865](https://github.com/dialpad/dialtone/issues/865)) ([7f2b06d](https://github.com/dialpad/dialtone/commit/7f2b06d9d6095098f29ff2ac70f8078f4cf651ae))
+* **Toggle:** DLT-2623 fix vue 3 toggle variants ([#871](https://github.com/dialpad/dialtone/issues/871)) ([e981daa](https://github.com/dialpad/dialtone/commit/e981daa84f2437fca29f9cf494647d36724ef4de))
+
+
+### Features
+
+* **Message Input:** DLT-2714 add scroll-bottom-reached event on input ([#873](https://github.com/dialpad/dialtone/issues/873)) ([ce22b39](https://github.com/dialpad/dialtone/commit/ce22b398315ce29761e8c672156c5cb273fa7271))
+
+## [9.131.1](https://github.com/dialpad/dialtone/compare/dialtone/v9.131.0...dialtone/v9.131.1) (2025-08-12)
+
+
+### Bug Fixes
+
+* **Message Input:** DLT-2679 fix keyboard shortcuts ([#866](https://github.com/dialpad/dialtone/issues/866)) ([d318741](https://github.com/dialpad/dialtone/commit/d3187410f19bc6d5eb751014098bdb3f7380a9f0))
+* **Tokens:** DLT-2712 remove prepended `color` from `inputs`, `action`, `theme` groups ([#869](https://github.com/dialpad/dialtone/issues/869)) ([4392bcb](https://github.com/dialpad/dialtone/commit/4392bcb63e81cd1c1a9c28f707a1a19a6dbae842))
+
+# [9.131.0](https://github.com/dialpad/dialtone/compare/dialtone/v9.130.0...dialtone/v9.131.0) (2025-08-12)
+
+
+### Features
+
+* **Utilities:** DLT-2396 word-break: break-word and word-wrap: anywhere ([#864](https://github.com/dialpad/dialtone/issues/864)) ([079eab6](https://github.com/dialpad/dialtone/commit/079eab61c64714de728d35173bc01e11b55c03b1))
+
+# [9.130.0](https://github.com/dialpad/dialtone/compare/dialtone/v9.129.3...dialtone/v9.130.0) (2025-08-11)
+
+
+### Bug Fixes
+
+* **Rich Text Editor:** DLT-2690 custom emojis not working ([#860](https://github.com/dialpad/dialtone/issues/860)) ([60feffc](https://github.com/dialpad/dialtone/commit/60feffc86e2e7655543af0f3bbc5a3c33e459bb3))
+
+
+### Documentation
+
+* DLT-2669 update brand logos ([#858](https://github.com/dialpad/dialtone/issues/858)) ([6c376ea](https://github.com/dialpad/dialtone/commit/6c376ea69e62d94592b55718fd440c29844103d4))
+* NO-JIRA fix color palette links ([#863](https://github.com/dialpad/dialtone/issues/863)) ([225acc1](https://github.com/dialpad/dialtone/commit/225acc1ea6704c21af3db2fdf479e4386b68923b))
+* **Select Menu:** NO-JIRA use default instead of options ([#861](https://github.com/dialpad/dialtone/issues/861)) ([b9278b7](https://github.com/dialpad/dialtone/commit/b9278b74d4e437d2248498955a3928f4a1e8c268))
+
+
+### Features
+
+* **Color:** DLT-2571 added chart design tokens ([#822](https://github.com/dialpad/dialtone/issues/822)) ([3ecb49b](https://github.com/dialpad/dialtone/commit/3ecb49b292806b284bdd1ca02b4ab604db01fcc8))
+* **Color:** DLT-2594 shell design tokens ([#840](https://github.com/dialpad/dialtone/issues/840)) ([720fc47](https://github.com/dialpad/dialtone/commit/720fc475a5460502d21c000e36069b086190a608))
+* **Utilities:** DLT-2115 d-d-contents ([#862](https://github.com/dialpad/dialtone/issues/862)) ([4879654](https://github.com/dialpad/dialtone/commit/4879654e60b2f385196c9513a172b683bbf4967b))
+
 ## [9.129.3](https://github.com/dialpad/dialtone/compare/dialtone/v9.129.2...dialtone/v9.129.3) (2025-08-05)
 
 

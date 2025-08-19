@@ -78,6 +78,11 @@ const addTokensToCategories = (token, format, structure) => {
     return;
   }
 
+  if (key.startsWith('color/chart')) {
+    structure.color.chart._children.push(displayToken);
+    return;
+  }
+
   if (key.startsWith('color')) {
     structure.color.base._children.push(displayToken);
     return;

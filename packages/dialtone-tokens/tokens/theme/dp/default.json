@@ -1,0 +1,3325 @@
+{
+  "color": {
+    "foreground": {
+      "primary": {
+        "value": "{color.black.900}",
+        "type": "color",
+        "description": "Default text color throughout the UI."
+      },
+      "secondary": {
+        "value": "{color.black.700}",
+        "type": "color",
+        "description": "Example uses include introduction paragraphs, labels, and descriptions paired with form elements."
+      },
+      "tertiary": {
+        "value": "{color.black.600}",
+        "type": "color",
+        "description": "Used to imply visual hierarchy relative to primary and secondary text colors, e.g. headlines and labels."
+      },
+      "muted": {
+        "value": "{color.black.1000}",
+        "type": "color",
+        "$extensions": {
+          "studio.tokens": {
+            "modify": {
+              "type": "alpha",
+              "value": ".5",
+              "space": "hsl"
+            }
+          }
+        }
+      },
+      "placeholder": {
+        "value": "{color.black.500}",
+        "type": "color",
+        "description": "Text color for placeholder text within form elements."
+      },
+      "disabled": {
+        "value": "{color.black.500}",
+        "type": "color",
+        "description": "Used for text paired with disabled content or components, like the form elements."
+      },
+      "critical": {
+        "value": "{color.red.450}",
+        "type": "color",
+        "description": "Expresses an error, danger, or otherwise critical state."
+      },
+      "critical-strong": {
+        "value": "{color.red.500}",
+        "type": "color",
+        "description": "Expresses an error, danger, or otherwise critical state on surfaces that require a stronger contrast."
+      },
+      "success": {
+        "value": "{color.green.500}",
+        "type": "color",
+        "description": "Indicates a positive state."
+      },
+      "success-strong": {
+        "value": "{color.green.600}",
+        "type": "color",
+        "description": "Indicates a strong positive state on surfaces that require a stronger contrast."
+      },
+      "warning": {
+        "value": "{color.gold.600}",
+        "type": "color",
+        "description": "Indicates information that requires user’s attention and further action may be necessary."
+      },
+      "primary-inverted": {
+        "value": "{color.black.100}",
+        "type": "color",
+        "description": "Primary text that sits on high-contrast surfaces or backgrounds."
+      },
+      "secondary-inverted": {
+        "value": "{color.black.200}",
+        "type": "color",
+        "description": "Secondary text color that sits on high-contrast surfaces or backgrounds."
+      },
+      "tertiary-inverted": {
+        "value": "{color.black.300}",
+        "type": "color",
+        "description": "Tertiary text color that sits on high-contrast surfaces or backgrounds."
+      },
+      "muted-inverted": {
+        "value": "{color.black.100}",
+        "type": "color",
+        "$extensions": {
+          "studio.tokens": {
+            "modify": {
+              "type": "alpha",
+              "value": ".65",
+              "space": "hsl"
+            }
+          }
+        },
+        "description": "Muted text color that sits on high-contrast surfaces or backgrounds."
+      },
+      "placeholder-inverted": {
+        "value": "{color.black.400}",
+        "type": "color",
+        "description": "Placeholder text color that sits on high-contrast surfaces or backgrounds."
+      },
+      "disabled-inverted": {
+        "value": "{color.black.400}",
+        "type": "color",
+        "description": "Disabled text color that sits on high-contrast surfaces or backgrounds."
+      },
+      "critical-inverted": {
+        "value": "{color.red.300}",
+        "type": "color",
+        "description": "Critical text that sits on high-contrast surfaces or backgrounds"
+      },
+      "critical-strong-inverted": {
+        "value": "{color.red.200}",
+        "type": "color",
+        "description": "Critical strong text that sits on high-contrast surfaces or backgrounds"
+      },
+      "success-inverted": {
+        "value": "{color.green.350}",
+        "type": "color",
+        "description": "Success text that sits on high-contrast surfaces or backgrounds"
+      },
+      "success-strong-inverted": {
+        "value": "{color.green.200}",
+        "type": "color",
+        "description": "Success strong text that sits on high-contrast surfaces or backgrounds"
+      },
+      "warning-inverted": {
+        "value": "{color.gold.400}",
+        "type": "color",
+        "description": "Warning text that sits on high-contrast surfaces or backgrounds"
+      }
+    },
+    "link": {
+      "primary": {
+        "value": "{color.purple.400}",
+        "type": "color"
+      },
+      "primary-hover": {
+        "value": "{color.purple.500}",
+        "type": "color"
+      },
+      "critical": {
+        "value": "{color.foreground.critical}",
+        "type": "color"
+      },
+      "critical-hover": {
+        "value": "{color.foreground.critical-strong}",
+        "type": "color"
+      },
+      "success": {
+        "value": "{color.foreground.success}",
+        "type": "color",
+        "description": "positive"
+      },
+      "success-hover": {
+        "value": "{color.foreground.success-strong}",
+        "type": "color"
+      },
+      "warning": {
+        "value": "{color.foreground.warning}",
+        "type": "color"
+      },
+      "warning-hover": {
+        "value": "{color.gold.700}",
+        "type": "color"
+      },
+      "muted": {
+        "value": "{color.foreground.secondary}",
+        "type": "color"
+      },
+      "muted-hover": {
+        "value": "{color.foreground.primary}",
+        "type": "color"
+      },
+      "disabled": {
+        "value": "{color.foreground.disabled}",
+        "type": "color"
+      },
+      "disabled-hover": {
+        "value": "{color.link.disabled}",
+        "type": "color"
+      },
+      "primary-inverted": {
+        "value": "{color.purple.250}",
+        "type": "color"
+      },
+      "primary-inverted-hover": {
+        "value": "{color.purple.200}",
+        "type": "color"
+      },
+      "critical-inverted": {
+        "value": "{color.foreground.critical-inverted}",
+        "type": "color"
+      },
+      "critical-inverted-hover": {
+        "value": "{color.foreground.critical-strong-inverted}",
+        "type": "color"
+      },
+      "success-inverted": {
+        "value": "{color.foreground.success-inverted}",
+        "type": "color"
+      },
+      "success-inverted-hover": {
+        "value": "{color.foreground.success-strong-inverted}",
+        "type": "color"
+      },
+      "warning-inverted": {
+        "value": "{color.foreground.warning-inverted}",
+        "type": "color"
+      },
+      "warning-inverted-hover": {
+        "value": "{color.gold.300}",
+        "type": "color"
+      },
+      "muted-inverted": {
+        "value": "{color.foreground.secondary-inverted}",
+        "type": "color"
+      },
+      "muted-inverted-hover": {
+        "value": "{color.black.100}",
+        "type": "color"
+      },
+      "disabled-inverted": {
+        "value": "{color.foreground.disabled-inverted}",
+        "type": "color"
+      },
+      "disabled-inverted-hover": {
+        "value": "{color.foreground.disabled-inverted}",
+        "type": "color"
+      }
+    },
+    "surface": {
+      "primary": {
+        "value": "{color.black.50}",
+        "type": "color",
+        "description": "Default surface color for the majority of surfaces."
+      },
+      "secondary": {
+        "value": "{color.black.100}",
+        "type": "color",
+        "description": "For adjacent or complementary regions."
+      },
+      "moderate": {
+        "value": "{color.black.200}",
+        "type": "color",
+        "description": "A tertiary surface level, prominent without being too overpowering."
+      },
+      "bold": {
+        "value": "{color.black.300}",
+        "type": "color",
+        "description": "Highlight or call attention to specific areas of the interface."
+      },
+      "strong": {
+        "value": "{color.black.600}",
+        "type": "color",
+        "description": "Use sparingly to draw the eye to a relatively important region."
+      },
+      "contrast": {
+        "value": "{color.black.800}",
+        "type": "color",
+        "description": "An inverted surface for lightened content and elements, most likely paired with inverted foreground colors."
+      },
+      "critical": {
+        "value": "{color.red.100}",
+        "type": "color",
+        "description": "Background surface color containing error, danger, or otherwise critical messaging or elements."
+      },
+      "warning": {
+        "value": "{color.gold.100}",
+        "type": "color",
+        "description": "Background surface color highlighting messaging or elements that may require user's attention."
+      },
+      "success": {
+        "value": "{color.green.100}",
+        "type": "color",
+        "description": "Background surface color containing messaging or elements expressing a positive or successful state."
+      },
+      "info": {
+        "value": "{color.blue.100}",
+        "type": "color",
+        "description": "Background surface color containing messaging or elements communicated as generally informational."
+      },
+      "brand": {
+        "value": "{color.purple.100}",
+        "type": "color",
+        "description": "Background surface color containing messaging or elements communicated as generally informational."
+      },
+      "critical-subtle": {
+        "value": "{color.red.50}",
+        "type": "color",
+        "description": "A softer version of the Critical surface."
+      },
+      "warning-subtle": {
+        "value": "{color.gold.50}",
+        "type": "color",
+        "description": "A softer version of the default warning surface."
+      },
+      "success-subtle": {
+        "value": "{color.green.50}",
+        "type": "color",
+        "description": "A softer version of the default success surface."
+      },
+      "info-subtle": {
+        "value": "{color.blue.50}",
+        "type": "color",
+        "description": "A softer version of the default informational surface."
+      },
+      "brand-subtle": {
+        "value": "{color.purple.50}",
+        "type": "color",
+        "description": "A softer version of the default informational surface."
+      },
+      "critical-strong": {
+        "value": "{color.red.450}",
+        "type": "color",
+        "description": "A contrasting critical surface, most likely paired with inverted foreground colors."
+      },
+      "warning-strong": {
+        "value": "{color.gold.350}",
+        "type": "color",
+        "description": "A contrasting warning surface, most likely paired with inverted foreground colors."
+      },
+      "success-strong": {
+        "value": "{color.green.500}",
+        "type": "color",
+        "description": "A contrasting positive state surface, most likely paired with inverted foreground colors."
+      },
+      "info-strong": {
+        "value": "{color.blue.500}",
+        "type": "color",
+        "description": "A contrasting informational surface, most likely paired with inverted foreground colors."
+      },
+      "brand-strong": {
+        "value": "{color.purple.400}",
+        "type": "color",
+        "description": "A contrasting informational surface, most likely paired with inverted foreground colors."
+      },
+      "primary-opaque": {
+        "value": "{color.surface.primary}",
+        "type": "color",
+        "$extensions": {
+          "studio.tokens": {
+            "modify": {
+              "type": "alpha",
+              "value": ".96",
+              "space": "hsl"
+            }
+          }
+        },
+        "description": "Primary surface as opaque background color."
+      },
+      "secondary-opaque": {
+        "value": "{color.black.900}",
+        "type": "color",
+        "$extensions": {
+          "studio.tokens": {
+            "modify": {
+              "type": "alpha",
+              "value": ".02",
+              "space": "hsl"
+            }
+          }
+        },
+        "description": "Secondary surface as opaque background color."
+      },
+      "moderate-opaque": {
+        "value": "{color.black.900}",
+        "type": "color",
+        "$extensions": {
+          "studio.tokens": {
+            "modify": {
+              "type": "alpha",
+              "value": ".10",
+              "space": "hsl"
+            }
+          }
+        },
+        "description": "Moderate surface as opaque background color."
+      },
+      "bold-opaque": {
+        "value": "{color.black.900}",
+        "type": "color",
+        "$extensions": {
+          "studio.tokens": {
+            "modify": {
+              "type": "alpha",
+              "value": ".19",
+              "space": "hsl"
+            }
+          }
+        },
+        "description": "Bold surface as opaque background color."
+      },
+      "strong-opaque": {
+        "value": "{color.black.900}",
+        "type": "color",
+        "$extensions": {
+          "studio.tokens": {
+            "modify": {
+              "type": "alpha",
+              "value": ".76",
+              "space": "hsl"
+            }
+          }
+        },
+        "description": "Strong surface as opaque background color."
+      },
+      "contrast-opaque": {
+        "value": "{color.black.900}",
+        "type": "color",
+        "$extensions": {
+          "studio.tokens": {
+            "modify": {
+              "type": "alpha",
+              "value": ".94",
+              "space": "hsl"
+            }
+          }
+        },
+        "description": "Contrast surface as opaque background color."
+      },
+      "critical-opaque": {
+        "value": "{color.red.200}",
+        "type": "color",
+        "$extensions": {
+          "studio.tokens": {
+            "modify": {
+              "type": "alpha",
+              "value": ".31",
+              "space": "hsl"
+            }
+          }
+        },
+        "description": "Critical surface as opaque background color."
+      },
+      "warning-opaque": {
+        "value": "{color.gold.200}",
+        "type": "color",
+        "$extensions": {
+          "studio.tokens": {
+            "modify": {
+              "type": "alpha",
+              "value": ".50",
+              "space": "hsl"
+            }
+          }
+        },
+        "description": "Warning surface as opaque background color"
+      },
+      "success-opaque": {
+        "value": "{color.green.200}",
+        "type": "color",
+        "$extensions": {
+          "studio.tokens": {
+            "modify": {
+              "type": "alpha",
+              "value": ".25",
+              "space": "hsl"
+            }
+          }
+        },
+        "description": "Success surface as opaque background color."
+      },
+      "info-opaque": {
+        "value": "{color.blue.200}",
+        "type": "color",
+        "$extensions": {
+          "studio.tokens": {
+            "modify": {
+              "type": "alpha",
+              "value": ".35",
+              "space": "hsl"
+            }
+          }
+        },
+        "description": "Info surface as opaque background color."
+      },
+      "brand-opaque": {
+        "value": "{color.purple.200}",
+        "type": "color",
+        "$extensions": {
+          "studio.tokens": {
+            "modify": {
+              "type": "alpha",
+              "value": ".27",
+              "space": "hsl"
+            }
+          }
+        },
+        "description": "Info surface as opaque background color."
+      },
+      "critical-subtle-opaque": {
+        "value": "{color.red.100}",
+        "type": "color",
+        "$extensions": {
+          "studio.tokens": {
+            "modify": {
+              "type": "alpha",
+              "value": ".5",
+              "space": "hsl"
+            }
+          }
+        },
+        "description": "Critical subtle surface as opaque background color."
+      },
+      "warning-subtle-opaque": {
+        "value": "{color.gold.100}",
+        "type": "color",
+        "$extensions": {
+          "studio.tokens": {
+            "modify": {
+              "type": "alpha",
+              "value": ".50",
+              "space": "hsl"
+            }
+          }
+        },
+        "description": "Warning subtle surface as opaque background color"
+      },
+      "success-subtle-opaque": {
+        "value": "{color.green.100}",
+        "type": "color",
+        "$extensions": {
+          "studio.tokens": {
+            "modify": {
+              "type": "alpha",
+              "value": ".50",
+              "space": "hsl"
+            }
+          }
+        },
+        "description": "Success subtle surface as opaque background color."
+      },
+      "info-subtle-opaque": {
+        "value": "{color.blue.100}",
+        "type": "color",
+        "$extensions": {
+          "studio.tokens": {
+            "modify": {
+              "type": "alpha",
+              "value": ".50",
+              "space": "hsl"
+            }
+          }
+        },
+        "description": "Info surface as opaque background color."
+      },
+      "brand-subtle-opaque": {
+        "value": "{color.purple.200}",
+        "type": "color",
+        "$extensions": {
+          "studio.tokens": {
+            "modify": {
+              "type": "alpha",
+              "value": ".20",
+              "space": "hsl"
+            }
+          }
+        },
+        "description": "Info surface as opaque background color."
+      },
+      "primary-inverted": {
+        "value": "{color.black.1000}",
+        "type": "color",
+        "description": "An inverted surface for lightened content and elements, most likely paired with inverted foreground colors."
+      },
+      "secondary-inverted": {
+        "value": "{color.black.800}",
+        "type": "color",
+        "description": "For adjacent or complementary regions."
+      },
+      "moderate-inverted": {
+        "value": "{color.black.700}",
+        "type": "color",
+        "description": "A tertiary surface level, prominent without being too overpowering."
+      },
+      "bold-inverted": {
+        "value": "{color.black.600}",
+        "type": "color",
+        "description": "Highlight or call attention to specific areas of the interface."
+      },
+      "strong-inverted": {
+        "value": "{color.black.400}",
+        "type": "color",
+        "description": "Use sparingly to draw the eye to a relatively important region."
+      },
+      "contrast-inverted": {
+        "value": "{color.black.100}",
+        "type": "color",
+        "description": "An inverted surface for lightened content and elements, most likely paired with inverted foreground colors."
+      },
+      "critical-inverted": {
+        "value": "{color.red.900}",
+        "type": "color",
+        "description": "Background surface color containing error, danger, or otherwise critical messaging or elements."
+      },
+      "warning-inverted": {
+        "value": "{color.gold.900}",
+        "type": "color",
+        "description": "Background surface color highlighting messaging or elements that may require user's attention."
+      },
+      "success-inverted": {
+        "value": "{color.green.900}",
+        "type": "color",
+        "description": "Background surface color containing messaging or elements expressing a positive or successful state."
+      },
+      "info-inverted": {
+        "value": "{color.blue.900}",
+        "type": "color",
+        "description": "Background surface color containing messaging or elements communicated as generally informational."
+      },
+      "brand-inverted": {
+        "value": "{color.purple.600}",
+        "type": "color",
+        "description": "Background surface color containing messaging or elements communicated as generally informational."
+      },
+      "critical-subtle-inverted": {
+        "value": "{color.red.1000}",
+        "type": "color",
+        "description": "A softer version of the Critical surface."
+      },
+      "warning-subtle-inverted": {
+        "value": "{color.gold.1000}",
+        "type": "color",
+        "description": "A softer version of the default warning surface."
+      },
+      "success-subtle-inverted": {
+        "value": "{color.green.1000}",
+        "type": "color",
+        "description": "A softer version of the default success surface."
+      },
+      "info-subtle-inverted": {
+        "value": "{color.blue.1000}",
+        "type": "color",
+        "description": "A softer version of the default informational surface."
+      },
+      "brand-subtle-inverted": {
+        "value": "{color.purple.1000}",
+        "type": "color",
+        "description": "A softer version of the default informational surface."
+      },
+      "critical-strong-inverted": {
+        "value": "{color.red.300}",
+        "type": "color",
+        "description": "A contrasting critical surface, most likely paired with inverted foreground colors."
+      },
+      "warning-strong-inverted": {
+        "value": "{color.gold.300}",
+        "type": "color",
+        "description": "A contrasting warning surface, most likely paired with inverted foreground colors."
+      },
+      "success-strong-inverted": {
+        "value": "{color.green.350}",
+        "type": "color",
+        "description": "A contrasting positive state surface, most likely paired with inverted foreground colors."
+      },
+      "info-strong-inverted": {
+        "value": "{color.blue.425}",
+        "type": "color",
+        "description": "A contrasting informational surface, most likely paired with inverted foreground colors."
+      },
+      "brand-strong-inverted": {
+        "value": "{color.purple.250}",
+        "type": "color",
+        "description": "A contrasting informational surface, most likely paired with inverted foreground colors."
+      },
+      "primary-opaque-inverted": {
+        "value": "{color.surface.primary-inverted}",
+        "type": "color",
+        "$extensions": {
+          "studio.tokens": {
+            "modify": {
+              "type": "alpha",
+              "value": ".85",
+              "space": "hsl"
+            }
+          }
+        },
+        "description": "Secondary surface as opaque background color."
+      },
+      "secondary-opaque-inverted": {
+        "value": "{color.black.50}",
+        "type": "color",
+        "$extensions": {
+          "studio.tokens": {
+            "modify": {
+              "type": "alpha",
+              "value": ".15",
+              "space": "hsl"
+            }
+          }
+        },
+        "description": "Secondary surface as opaque background color."
+      },
+      "moderate-opaque-inverted": {
+        "value": "{color.black.50}",
+        "type": "color",
+        "$extensions": {
+          "studio.tokens": {
+            "modify": {
+              "type": "alpha",
+              "value": ".23",
+              "space": "hsl"
+            }
+          }
+        },
+        "description": "Moderate surface as opaque background color."
+      },
+      "bold-opaque-inverted": {
+        "value": "{color.black.50}",
+        "type": "color",
+        "$extensions": {
+          "studio.tokens": {
+            "modify": {
+              "type": "alpha",
+              "value": ".32",
+              "space": "hsl"
+            }
+          }
+        },
+        "description": "Bold surface as opaque background color."
+      },
+      "strong-opaque-inverted": {
+        "value": "{color.black.50}",
+        "type": "color",
+        "$extensions": {
+          "studio.tokens": {
+            "modify": {
+              "type": "alpha",
+              "value": ".67",
+              "space": "hsl"
+            }
+          }
+        },
+        "description": "Strong surface as opaque background color."
+      },
+      "contrast-opaque-inverted": {
+        "value": "{color.black.50}",
+        "type": "color",
+        "$extensions": {
+          "studio.tokens": {
+            "modify": {
+              "type": "alpha",
+              "value": ".97",
+              "space": "hsl"
+            }
+          }
+        },
+        "description": "Contrast surface as opaque background color."
+      },
+      "critical-opaque-inverted": {
+        "value": "{color.red.700}",
+        "type": "color",
+        "$extensions": {
+          "studio.tokens": {
+            "modify": {
+              "type": "alpha",
+              "value": ".50",
+              "space": "hsl"
+            }
+          }
+        },
+        "description": "Critical surface as opaque background color."
+      },
+      "warning-opaque-inverted": {
+        "value": "{color.gold.700}",
+        "type": "color",
+        "$extensions": {
+          "studio.tokens": {
+            "modify": {
+              "type": "alpha",
+              "value": ".35",
+              "space": "hsl"
+            }
+          }
+        },
+        "description": "Warning surface as opaque background color"
+      },
+      "success-opaque-inverted": {
+        "value": "{color.green.600}",
+        "type": "color",
+        "$extensions": {
+          "studio.tokens": {
+            "modify": {
+              "type": "alpha",
+              "value": ".30",
+              "space": "hsl"
+            }
+          }
+        },
+        "description": "Success surface as opaque background color."
+      },
+      "info-opaque-inverted": {
+        "value": "{color.blue.900}",
+        "type": "color",
+        "$extensions": {
+          "studio.tokens": {
+            "modify": {
+              "type": "alpha",
+              "value": ".6",
+              "space": "hsl"
+            }
+          }
+        },
+        "description": "Info surface as opaque background color."
+      },
+      "brand-opaque-inverted": {
+        "value": "{color.purple.600}",
+        "type": "color",
+        "$extensions": {
+          "studio.tokens": {
+            "modify": {
+              "type": "alpha",
+              "value": ".8",
+              "space": "hsl"
+            }
+          }
+        },
+        "description": "Info surface as opaque background color."
+      },
+      "critical-subtle-opaque-inverted": {
+        "value": "{color.red.1000}",
+        "type": "color",
+        "$extensions": {
+          "studio.tokens": {
+            "modify": {
+              "type": "alpha",
+              "value": ".6",
+              "space": "hsl"
+            }
+          }
+        },
+        "description": "Critical subtle surface as opaque background color."
+      },
+      "warning-subtle-opaque-inverted": {
+        "value": "{color.gold.1000}",
+        "type": "color",
+        "$extensions": {
+          "studio.tokens": {
+            "modify": {
+              "type": "alpha",
+              "value": ".7",
+              "space": "hsl"
+            }
+          }
+        },
+        "description": "Warning subtle surface as opaque background color"
+      },
+      "success-subtle-opaque-inverted": {
+        "value": "{color.green.1000}",
+        "type": "color",
+        "$extensions": {
+          "studio.tokens": {
+            "modify": {
+              "type": "alpha",
+              "value": ".66",
+              "space": "hsl"
+            }
+          }
+        },
+        "description": "Success subtle surface as opaque background color."
+      },
+      "info-subtle-opaque-inverted": {
+        "value": "{color.blue.1000}",
+        "type": "color",
+        "$extensions": {
+          "studio.tokens": {
+            "modify": {
+              "type": "alpha",
+              "value": ".66",
+              "space": "hsl"
+            }
+          }
+        },
+        "description": "Info surface as opaque background color."
+      },
+      "brand-subtle-opaque-inverted": {
+        "value": "{color.purple.1000}",
+        "type": "color",
+        "$extensions": {
+          "studio.tokens": {
+            "modify": {
+              "type": "alpha",
+              "value": ".66",
+              "space": "hsl"
+            }
+          }
+        },
+        "description": "Info surface as opaque background color."
+      },
+      "backdrop": {
+        "value": "{color.neutral.black}",
+        "type": "color",
+        "$extensions": {
+          "studio.tokens": {
+            "modify": {
+              "type": "alpha",
+              "value": ".65",
+              "space": "hsl"
+            }
+          }
+        },
+        "description": "Background color for a modal-like backdrop."
+      },
+      "ai": {
+        "value": "{color.gradient.gold-red-magenta-purple}",
+        "type": "color"
+      }
+    },
+    "border": {
+      "subtle": {
+        "value": "{color.black.900}",
+        "type": "color",
+        "$extensions": {
+          "studio.tokens": {
+            "modify": {
+              "type": "alpha",
+              "value": ".11",
+              "space": "hsl"
+            }
+          }
+        }
+      },
+      "default": {
+        "value": "{color.black.900}",
+        "type": "color",
+        "$extensions": {
+          "studio.tokens": {
+            "modify": {
+              "type": "alpha",
+              "value": ".17",
+              "space": "hsl"
+            }
+          }
+        }
+      },
+      "moderate": {
+        "value": "{color.black.900}",
+        "type": "color",
+        "$extensions": {
+          "studio.tokens": {
+            "modify": {
+              "type": "alpha",
+              "value": ".3",
+              "space": "hsl"
+            }
+          }
+        }
+      },
+      "bold": {
+        "value": "{color.black.900}",
+        "type": "color",
+        "$extensions": {
+          "studio.tokens": {
+            "modify": {
+              "type": "alpha",
+              "value": ".5",
+              "space": "hsl"
+            }
+          }
+        }
+      },
+      "critical": {
+        "value": "{color.red.450}",
+        "type": "color"
+      },
+      "success": {
+        "value": "{color.green.475}",
+        "type": "color"
+      },
+      "warning": {
+        "value": "{color.gold.400}",
+        "type": "color"
+      },
+      "brand": {
+        "value": "{color.brand.purple}",
+        "type": "color"
+      },
+      "critical-subtle": {
+        "value": "{color.red.300}",
+        "type": "color"
+      },
+      "success-subtle": {
+        "value": "{color.green.300}",
+        "type": "color"
+      },
+      "warning-subtle": {
+        "value": "{color.gold.300}",
+        "type": "color"
+      },
+      "brand-subtle": {
+        "value": "{color.purple.250}",
+        "type": "color"
+      },
+      "critical-strong": {
+        "value": "{color.red.600}",
+        "type": "color"
+      },
+      "success-strong": {
+        "value": "{color.green.600}",
+        "type": "color"
+      },
+      "warning-strong": {
+        "value": "{color.gold.500}",
+        "type": "color"
+      },
+      "brand-strong": {
+        "value": "{color.purple.500}",
+        "type": "color"
+      },
+      "subtle-inverted": {
+        "value": "{color.neutral.white}",
+        "type": "color",
+        "$extensions": {
+          "studio.tokens": {
+            "modify": {
+              "type": "alpha",
+              "value": ".12",
+              "space": "hsl"
+            }
+          }
+        }
+      },
+      "default-inverted": {
+        "value": "{color.neutral.white}",
+        "type": "color",
+        "$extensions": {
+          "studio.tokens": {
+            "modify": {
+              "type": "alpha",
+              "value": ".2",
+              "space": "hsl"
+            }
+          }
+        }
+      },
+      "moderate-inverted": {
+        "value": "{color.neutral.white}",
+        "type": "color",
+        "$extensions": {
+          "studio.tokens": {
+            "modify": {
+              "type": "alpha",
+              "value": ".35",
+              "space": "hsl"
+            }
+          }
+        }
+      },
+      "bold-inverted": {
+        "value": "{color.neutral.white}",
+        "type": "color",
+        "$extensions": {
+          "studio.tokens": {
+            "modify": {
+              "type": "alpha",
+              "value": ".5",
+              "space": "hsl"
+            }
+          }
+        }
+      },
+      "critical-inverted": {
+        "value": "{color.red.300}",
+        "type": "color"
+      },
+      "success-inverted": {
+        "value": "{color.green.425}",
+        "type": "color"
+      },
+      "warning-inverted": {
+        "value": "{color.gold.450}",
+        "type": "color"
+      },
+      "brand-inverted": {
+        "value": "{color.purple.300}",
+        "type": "color"
+      },
+      "critical-subtle-inverted": {
+        "value": "{color.red.700}",
+        "type": "color"
+      },
+      "success-subtle-inverted": {
+        "value": "{color.green.600}",
+        "type": "color"
+      },
+      "warning-subtle-inverted": {
+        "value": "{color.gold.600}",
+        "type": "color"
+      },
+      "brand-subtle-inverted": {
+        "value": "{color.purple.400}",
+        "type": "color"
+      },
+      "critical-strong-inverted": {
+        "value": "{color.red.200}",
+        "type": "color"
+      },
+      "success-strong-inverted": {
+        "value": "{color.green.400}",
+        "type": "color"
+      },
+      "warning-strong-inverted": {
+        "value": "{color.gold.300}",
+        "type": "color"
+      },
+      "brand-strong-inverted": {
+        "value": "{color.purple.200}",
+        "type": "color"
+      },
+      "focus": {
+        "value": "{color.blue.425}",
+        "type": "color"
+      },
+      "ai": {
+        "value": "{color.gradient.gold-red-magenta-purple}",
+        "type": "color"
+      },
+      "accent": {
+        "value": "{color.brand.magenta}",
+        "type": "color"
+      }
+    },
+    "chart": {
+      "categorical": {
+        "10": {
+          "value": "{color.teal.600}",
+          "type": "color"
+        },
+        "10-hover": {
+          "value": "{color.teal.700}",
+          "type": "color"
+        },
+        "10-selected": {
+          "value": "{color.teal.900}",
+          "type": "color"
+        },
+        "01": {
+          "value": "{color.purple.450}",
+          "type": "color"
+        },
+        "01-hover": {
+          "value": "{color.purple.500}",
+          "type": "color"
+        },
+        "01-selected": {
+          "value": "{color.purple.600}",
+          "type": "color"
+        },
+        "02": {
+          "value": "{color.magenta.300}",
+          "type": "color"
+        },
+        "02-hover": {
+          "value": "{color.magenta.400}",
+          "type": "color"
+        },
+        "02-selected": {
+          "value": "{color.magenta.600}",
+          "type": "color"
+        },
+        "03": {
+          "value": "{color.blue.400}",
+          "type": "color"
+        },
+        "03-hover": {
+          "value": "{color.blue.450}",
+          "type": "color"
+        },
+        "03-selected": {
+          "value": "{color.blue.600}",
+          "type": "color"
+        },
+        "04": {
+          "value": "{color.gold.400}",
+          "type": "color"
+        },
+        "04-hover": {
+          "value": "{color.gold.500}",
+          "type": "color"
+        },
+        "04-selected": {
+          "value": "{color.gold.700}",
+          "type": "color"
+        },
+        "05": {
+          "value": "{color.green.425}",
+          "type": "color"
+        },
+        "05-hover": {
+          "value": "{color.green.475}",
+          "type": "color"
+        },
+        "05-selected": {
+          "value": "{color.green.600}",
+          "type": "color"
+        },
+        "06": {
+          "value": "{color.berry.300}",
+          "type": "color"
+        },
+        "06-hover": {
+          "value": "{color.berry.400}",
+          "type": "color"
+        },
+        "06-selected": {
+          "value": "{color.berry.600}",
+          "type": "color"
+        },
+        "07": {
+          "value": "{color.coral.400}",
+          "type": "color"
+        },
+        "07-hover": {
+          "value": "{color.coral.500}",
+          "type": "color"
+        },
+        "07-selected": {
+          "value": "{color.coral.900}",
+          "type": "color"
+        },
+        "08": {
+          "value": "{color.olive.500}",
+          "type": "color"
+        },
+        "08-hover": {
+          "value": "{color.olive.600}",
+          "type": "color"
+        },
+        "08-selected": {
+          "value": "{color.olive.800}",
+          "type": "color"
+        },
+        "09": {
+          "value": "{color.red.350}",
+          "type": "color"
+        },
+        "09-hover": {
+          "value": "{color.red.400}",
+          "type": "color"
+        },
+        "09-selected": {
+          "value": "{color.red.600}",
+          "type": "color"
+        }
+      },
+      "neutral": {
+        "value": "{color.tan.300}",
+        "type": "color",
+        "description": "Used for neutral or background elements in charts where no specific meaning is implied."
+      },
+      "neutral-hover": {
+        "value": "{color.tan.400}",
+        "type": "color",
+        "description": "Hover state for neutral chart elements."
+      },
+      "neutral-selected": {
+        "value": "{color.tan.600}",
+        "type": "color",
+        "description": "Selected state for neutral chart elements."
+      },
+      "accent": {
+        "value": "{color.indigo.500}",
+        "type": "color",
+        "description": "Main accent color for highlighting important chart elements or primary data series."
+      },
+      "accent-hover": {
+        "value": "{color.indigo.600}",
+        "type": "color",
+        "description": "Hover state for accent chart elements."
+      },
+      "accent-selected": {
+        "value": "{color.indigo.800}",
+        "type": "color",
+        "description": "Selected state for accent chart elements."
+      },
+      "positive": {
+        "value": "{color.green.425}",
+        "type": "color",
+        "description": "Used for positive values, growth, or success indicators in charts, aka success."
+      },
+      "positive-hover": {
+        "value": "{color.green.475}",
+        "type": "color",
+        "description": "Hover state for positive chart elements, aka success."
+      },
+      "positive-selected": {
+        "value": "{color.green.600}",
+        "type": "color",
+        "description": "Selected state for positive chart elements, aka success."
+      },
+      "critical": {
+        "value": "{color.red.400}",
+        "type": "color",
+        "description": "Used for negative values, errors, or critical indicators in charts, aka danger."
+      },
+      "critical-hover": {
+        "value": "{color.red.450}",
+        "type": "color",
+        "description": "Hover state for critical chart elements, aka danger."
+      },
+      "critical-selected": {
+        "value": "{color.red.600}",
+        "type": "color",
+        "description": "Selected state for critical chart elements, aka danger."
+      },
+      "warning": {
+        "value": "{color.gold.400}",
+        "type": "color",
+        "description": "Used for cautionary or warning indicators in charts."
+      },
+      "warning-hover": {
+        "value": "{color.gold.500}",
+        "type": "color",
+        "description": "Hover state for warning chart elements."
+      },
+      "warning-selected": {
+        "value": "{color.gold.600}",
+        "type": "color",
+        "description": "Selected state for warning chart elements."
+      },
+      "info": {
+        "value": "{color.blue.425}",
+        "type": "color",
+        "description": "Used for informational or neutral data points in charts."
+      },
+      "info-hover": {
+        "value": "{color.blue.475}",
+        "type": "color",
+        "description": "Hover state for info chart elements."
+      },
+      "info-selected": {
+        "value": "{color.blue.600}",
+        "type": "color",
+        "description": "Selected state for info chart elements."
+      },
+      "brand": {
+        "value": "{color.purple.400}",
+        "type": "color",
+        "description": "Used for brand-related data or to highlight company-specific information in charts."
+      },
+      "brand-hover": {
+        "value": "{color.purple.450}",
+        "type": "color",
+        "description": "Hover state for brand chart elements."
+      },
+      "brand-selected": {
+        "value": "{color.purple.550}",
+        "type": "color",
+        "description": "Selected state for brand chart elements."
+      },
+      "sequential": {
+        "10": {
+          "value": "{color.indigo.950}",
+          "type": "color",
+          "description": "Tenth color in sequential chart series, darkest shade."
+        },
+        "01": {
+          "value": "{color.indigo.100}",
+          "type": "color",
+          "description": "First color in sequential chart series, lightest shade."
+        },
+        "01-hover": {
+          "value": "{color.indigo.200}",
+          "type": "color",
+          "description": "Hover state for first sequential chart color."
+        },
+        "01-selected": {
+          "value": "{color.indigo.400}",
+          "type": "color",
+          "description": "Selected state for first sequential chart color."
+        },
+        "02": {
+          "value": "{color.indigo.200}",
+          "type": "color",
+          "description": "Second color in sequential chart series, very light shade."
+        },
+        "02-hover": {
+          "value": "{color.indigo.300}",
+          "type": "color",
+          "description": "Hover state for second sequential chart color."
+        },
+        "02-selected": {
+          "value": "{color.indigo.500}",
+          "type": "color",
+          "description": "Selected state for second sequential chart color."
+        },
+        "03": {
+          "value": "{color.indigo.300}",
+          "type": "color",
+          "description": "Third color in sequential chart series, light shade."
+        },
+        "03-hover": {
+          "value": "{color.indigo.400}",
+          "type": "color",
+          "description": "Hover state for third sequential chart color."
+        },
+        "03-selected": {
+          "value": "{color.indigo.600}",
+          "type": "color",
+          "description": "Selected state for third sequential chart color."
+        },
+        "04": {
+          "value": "{color.indigo.400}",
+          "type": "color",
+          "description": "Fourth color in sequential chart series, light-medium shade."
+        },
+        "04-hover": {
+          "value": "{color.indigo.500}",
+          "type": "color",
+          "description": "Hover state for fourth sequential chart color."
+        },
+        "04-selected": {
+          "value": "{color.indigo.700}",
+          "type": "color",
+          "description": "Selected state for fourth sequential chart color."
+        },
+        "05": {
+          "value": "{color.indigo.500}",
+          "type": "color",
+          "description": "Fifth color in sequential chart series, medium shade."
+        },
+        "05-hover": {
+          "value": "{color.indigo.600}",
+          "type": "color",
+          "description": "Hover state for fifth sequential chart color."
+        },
+        "05-selected": {
+          "value": "{color.indigo.800}",
+          "type": "color",
+          "description": "Selected state for fifth sequential chart color."
+        },
+        "06": {
+          "value": "{color.indigo.600}",
+          "type": "color",
+          "description": "Sixth color in sequential chart series, medium-dark shade."
+        },
+        "06-hover": {
+          "value": "{color.indigo.700}",
+          "type": "color",
+          "description": "Hover state for sixth sequential chart color."
+        },
+        "06-selected": {
+          "value": "{color.indigo.950}",
+          "type": "color",
+          "description": "Selected state for sixth sequential chart color."
+        },
+        "07": {
+          "value": "{color.indigo.700}",
+          "type": "color",
+          "description": "Seventh color in sequential chart series, dark shade."
+        },
+        "07-hover": {
+          "value": "{color.indigo.800}",
+          "type": "color",
+          "description": "Hover state for seventh sequential chart color."
+        },
+        "07-selected": {
+          "value": "{color.indigo.1000}",
+          "type": "color",
+          "description": "Selected state for seventh sequential chart color."
+        },
+        "08": {
+          "value": "{color.indigo.800}",
+          "type": "color",
+          "description": "Eighth color in sequential chart series, very dark shade."
+        },
+        "08-hover": {
+          "value": "{color.indigo.900}",
+          "type": "color",
+          "description": "Hover state for eighth sequential chart color."
+        },
+        "08-selected": {
+          "value": "{color.indigo.950}",
+          "type": "color",
+          "description": "Selected state for eighth sequential chart color."
+        },
+        "09": {
+          "value": "{color.indigo.900}",
+          "type": "color",
+          "description": "Ninth color in sequential chart series, extremely dark shade."
+        },
+        "09-hover": {
+          "value": "{color.indigo.950}",
+          "type": "color",
+          "description": "Hover state for ninth sequential chart color."
+        },
+        "09-selected": {
+          "value": "{color.indigo.1000}",
+          "type": "color",
+          "description": "Selected state for ninth sequential chart color."
+        },
+        "10-hover": {
+          "value": "{color.indigo.1000}",
+          "type": "color",
+          "description": "Hover state for tenth sequential chart color."
+        },
+        "10-selected": {
+          "value": "{color.indigo.1000}",
+          "type": "color",
+          "description": "Selected state for tenth sequential chart color."
+        }
+      }
+    }
+  },
+  "typography": {
+    "body": {
+      "md": {
+        "value": {
+          "fontFamily": "{font.family.body}",
+          "fontWeight": "{font.weight.normal}",
+          "lineHeight": "{font.lineHeight.400}",
+          "fontSize": "{font.size.200}",
+          "textCase": "{font.text-case.none}"
+        },
+        "type": "typography",
+        "description": "Base default medium text style for main content."
+      },
+      "md-compact": {
+        "value": {
+          "fontFamily": "{font.family.body}",
+          "fontWeight": "{font.weight.normal}",
+          "lineHeight": "{font.lineHeight.300}",
+          "fontSize": "{font.size.200}",
+          "textCase": "{font.text-case.none}"
+        },
+        "type": "typography",
+        "description": "A tighter-spaced version of medium body style."
+      },
+      "sm": {
+        "value": {
+          "fontFamily": "{font.family.body}",
+          "fontWeight": "{font.weight.normal}",
+          "lineHeight": "{font.lineHeight.300}",
+          "fontSize": "{font.size.100}",
+          "textCase": "{font.text-case.none}"
+        },
+        "type": "typography",
+        "description": "Reduced small text style for less prominent or adjacent content."
+      },
+      "sm-compact": {
+        "value": {
+          "fontFamily": "{font.family.body}",
+          "fontWeight": "{font.weight.normal}",
+          "lineHeight": "{font.lineHeight.200}",
+          "fontSize": "{font.size.100}",
+          "textCase": "{font.text-case.none}"
+        },
+        "type": "typography",
+        "description": "A tighter-spaced version of small body style."
+      }
+    },
+    "headline": {
+      "eyebrow": {
+        "value": {
+          "fontFamily": "{font.family.body}",
+          "fontWeight": "{font.weight.normal}",
+          "lineHeight": "{font.lineHeight.300}",
+          "fontSize": "{font.size.100}",
+          "textCase": "{font.text-case.uppercase}"
+        },
+        "type": "typography",
+        "description": "Visually concise and uppercase title text used above a paired headline. Also known as a kicker or overline."
+      },
+      "sm": {
+        "value": {
+          "fontFamily": "{font.family.body}",
+          "fontWeight": "{font.weight.bold}",
+          "lineHeight": "{font.lineHeight.300}",
+          "fontSize": "{font.size.100}",
+          "textCase": "{font.text-case.none}"
+        },
+        "type": "typography",
+        "description": "Smaller text size for secondary information or subheadings."
+      },
+      "sm-compact": {
+        "value": {
+          "fontFamily": "{font.family.body}",
+          "fontWeight": "{font.weight.bold}",
+          "lineHeight": "{font.lineHeight.200}",
+          "fontSize": "{font.size.100}",
+          "textCase": "{font.text-case.none}"
+        },
+        "type": "typography",
+        "description": "A tighter-spaced version of small headline style."
+      },
+      "sm-soft": {
+        "value": {
+          "fontFamily": "{font.family.body}",
+          "fontWeight": "{font.weight.medium}",
+          "lineHeight": "{font.lineHeight.300}",
+          "fontSize": "{font.size.100}",
+          "textCase": "{font.text-case.none}"
+        },
+        "type": "typography",
+        "description": "A softer font weight version of small headline style."
+      },
+      "sm-soft-compact": {
+        "value": {
+          "fontFamily": "{font.family.body}",
+          "fontWeight": "{font.weight.medium}",
+          "lineHeight": "{font.lineHeight.200}",
+          "fontSize": "{font.size.100}",
+          "textCase": "{font.text-case.none}"
+        },
+        "type": "typography",
+        "description": "A softer font weight, tighter-spaced version of small headline style."
+      },
+      "md": {
+        "value": {
+          "fontFamily": "{font.family.body}",
+          "fontWeight": "{font.weight.bold}",
+          "lineHeight": "{font.lineHeight.400}",
+          "fontSize": "{font.size.200}",
+          "textCase": "{font.text-case.none}"
+        },
+        "type": "typography",
+        "description": "Medium-sized base text style for headlines."
+      },
+      "md-compact": {
+        "value": {
+          "fontFamily": "{font.family.body}",
+          "fontWeight": "{font.weight.bold}",
+          "lineHeight": "{font.lineHeight.300}",
+          "fontSize": "{font.size.200}",
+          "textCase": "{font.text-case.none}"
+        },
+        "type": "typography",
+        "description": "A tighter-spaced version of medium headline style."
+      },
+      "lg": {
+        "value": {
+          "fontFamily": "{font.family.body}",
+          "fontWeight": "{font.weight.bold}",
+          "lineHeight": "{font.lineHeight.400}",
+          "fontSize": "{font.size.300}",
+          "textCase": "{font.text-case.none}"
+        },
+        "type": "typography",
+        "description": "Large text style for headlines to attract attention."
+      },
+      "lg-soft": {
+        "value": {
+          "fontFamily": "{font.family.body}",
+          "fontWeight": "{font.weight.medium}",
+          "lineHeight": "{font.lineHeight.400}",
+          "fontSize": "{font.size.300}",
+          "textCase": "{font.text-case.none}"
+        },
+        "type": "typography",
+        "description": "A softer font weight version of large headline style."
+      },
+      "lg-compact": {
+        "value": {
+          "fontFamily": "{font.family.body}",
+          "fontWeight": "{font.weight.bold}",
+          "lineHeight": "{font.lineHeight.200}",
+          "fontSize": "{font.size.300}",
+          "textCase": "{font.text-case.none}"
+        },
+        "type": "typography",
+        "description": "A tighter-spaced version of large body style."
+      },
+      "lg-soft-compact": {
+        "value": {
+          "fontFamily": "{font.family.body}",
+          "fontWeight": "{font.weight.medium}",
+          "lineHeight": "{font.lineHeight.200}",
+          "fontSize": "{font.size.300}",
+          "textCase": "{font.text-case.none}"
+        },
+        "type": "typography",
+        "description": "A softer font weight, tighter spaced version of large headline style."
+      },
+      "xl": {
+        "value": {
+          "fontFamily": "{font.family.body}",
+          "fontWeight": "{font.weight.medium}",
+          "lineHeight": "{font.lineHeight.200}",
+          "fontSize": "{font.size.400}",
+          "textCase": "{font.text-case.none}"
+        },
+        "type": "typography",
+        "description": "Extra large text style for high importance headlines."
+      },
+      "xl-compact": {
+        "value": {
+          "fontFamily": "{font.family.body}",
+          "fontWeight": "{font.weight.medium}",
+          "lineHeight": "{font.lineHeight.100}",
+          "fontSize": "{font.size.400}",
+          "textCase": "{font.text-case.none}"
+        },
+        "type": "typography",
+        "description": "A tighter-spaced version of extra large headline style."
+      },
+      "xxl": {
+        "value": {
+          "fontFamily": "{font.family.body}",
+          "fontWeight": "{font.weight.medium}",
+          "lineHeight": "{font.lineHeight.200}",
+          "fontSize": "{font.size.500}",
+          "textCase": "{font.text-case.none}"
+        },
+        "type": "typography",
+        "description": "Largest text style for extra extra large content."
+      },
+      "xxl-compact": {
+        "value": {
+          "fontFamily": "{font.family.body}",
+          "fontWeight": "{font.weight.medium}",
+          "lineHeight": "{font.lineHeight.100}",
+          "fontSize": "{font.size.500}",
+          "textCase": "{font.text-case.none}"
+        },
+        "type": "typography",
+        "description": "A tighter-spaced version of extra extra large headline style."
+      }
+    },
+    "label": {
+      "md": {
+        "value": {
+          "fontFamily": "{font.family.body}",
+          "fontWeight": "{font.weight.semiBold}",
+          "lineHeight": "{font.lineHeight.400}",
+          "fontSize": "{font.size.200}",
+          "textCase": "{font.text-case.none}"
+        },
+        "type": "typography",
+        "description": "Base default medium-sized text style for labels, providing clear identification and categorization."
+      },
+      "md-compact": {
+        "value": {
+          "fontFamily": "{font.family.body}",
+          "fontWeight": "{font.weight.semiBold}",
+          "lineHeight": "{font.lineHeight.300}",
+          "fontSize": "{font.size.200}",
+          "textCase": "{font.text-case.none}"
+        },
+        "type": "typography",
+        "description": "A tighter-spaced version of medium label style."
+      },
+      "md-plain": {
+        "value": {
+          "fontFamily": "{font.family.body}",
+          "fontWeight": "{font.weight.normal}",
+          "lineHeight": "{font.lineHeight.400}",
+          "fontSize": "{font.size.200}",
+          "textCase": "{font.text-case.none}"
+        },
+        "type": "typography",
+        "description": "A non-bold version of medium label style."
+      },
+      "md-plain-compact": {
+        "value": {
+          "fontFamily": "{font.family.body}",
+          "fontWeight": "{font.weight.normal}",
+          "lineHeight": "{font.lineHeight.300}",
+          "fontSize": "{font.size.200}",
+          "textCase": "{font.text-case.none}"
+        },
+        "type": "typography",
+        "description": "A non-bolded, tighter-spaced version of medium label style."
+      },
+      "sm": {
+        "value": {
+          "fontFamily": "{font.family.body}",
+          "fontWeight": "{font.weight.semiBold}",
+          "lineHeight": "{font.lineHeight.300}",
+          "fontSize": "{font.size.100}",
+          "textCase": "{font.text-case.none}"
+        },
+        "type": "typography",
+        "description": "Smaller text style for labels when space is limited or for secondary information or to convey a slightly lower hierachy."
+      },
+      "sm-compact": {
+        "value": {
+          "fontFamily": "{font.family.body}",
+          "fontWeight": "{font.weight.semiBold}",
+          "lineHeight": "{font.lineHeight.200}",
+          "fontSize": "{font.size.100}",
+          "textCase": "{font.text-case.none}"
+        },
+        "type": "typography",
+        "description": "A tighter-spaced version of small label style."
+      },
+      "sm-plain": {
+        "value": {
+          "fontFamily": "{font.family.body}",
+          "fontWeight": "{font.weight.normal}",
+          "lineHeight": "{font.lineHeight.300}",
+          "fontSize": "{font.size.100}",
+          "textCase": "{font.text-case.none}"
+        },
+        "type": "typography",
+        "description": "A non-bold version of small label style."
+      },
+      "sm-plain-compact": {
+        "value": {
+          "fontFamily": "{font.family.body}",
+          "fontWeight": "{font.weight.normal}",
+          "lineHeight": "{font.lineHeight.200}",
+          "fontSize": "{font.size.100}",
+          "textCase": "{font.text-case.none}"
+        },
+        "type": "typography",
+        "description": "A non-bolded, tighter-spaced version of small label style."
+      }
+    },
+    "helper": {
+      "md": {
+        "value": {
+          "fontFamily": "{font.family.body}",
+          "fontWeight": "{font.weight.normal}",
+          "lineHeight": "{font.lineHeight.300}",
+          "fontSize": "{font.size.200}",
+          "textCase": "{font.text-case.none}"
+        },
+        "type": "typography",
+        "description": "Base default medium-sized text style for supplementary contextual information."
+      },
+      "sm": {
+        "value": {
+          "fontFamily": "{font.family.body}",
+          "fontWeight": "{font.weight.normal}",
+          "lineHeight": "{font.lineHeight.200}",
+          "fontSize": "{font.size.100}",
+          "textCase": "{font.text-case.none}"
+        },
+        "type": "typography",
+        "description": "Smaller text size for subtle guidance or additional context, minimizing visual disruption."
+      }
+    },
+    "code": {
+      "md": {
+        "value": {
+          "fontFamily": "{font.family.mono}",
+          "fontWeight": "{font.weight.normal}",
+          "lineHeight": "{font.lineHeight.200}",
+          "fontSize": "{font.size.200}",
+          "textCase": "{font.text-case.none}"
+        },
+        "type": "typography",
+        "description": "Base default medium-sized text style for monospace code snippets of technical content."
+      },
+      "sm": {
+        "value": {
+          "fontFamily": "{font.family.mono}",
+          "fontWeight": "{font.weight.normal}",
+          "lineHeight": "{font.lineHeight.200}",
+          "fontSize": "{font.size.100}",
+          "textCase": "{font.text-case.none}"
+        },
+        "type": "typography",
+        "description": "Smaller text size for monospace code, suitable for inline references or less prominent code examples."
+      }
+    },
+    "inputs": {
+      "xs": {
+        "value": {
+          "fontFamily": "{font.family.body}",
+          "fontWeight": "{inputs.font.weight.xs}",
+          "fontSize": "{inputs.font.size.xs}",
+          "lineHeight": "{inputs.lineHeight.xs}"
+        },
+        "type": "typography",
+        "description": "Text style for extra small inputs (e.g. input and textarea)"
+      },
+      "sm": {
+        "value": {
+          "fontFamily": "{font.family.body}",
+          "fontWeight": "{inputs.font.weight.sm}",
+          "fontSize": "{inputs.font.size.sm}",
+          "lineHeight": "{inputs.lineHeight.sm}"
+        },
+        "type": "typography",
+        "description": "Text style for small inputs (e.g. input and textarea)"
+      },
+      "md": {
+        "value": {
+          "fontFamily": "{font.family.body}",
+          "fontWeight": "{inputs.font.weight.md}",
+          "fontSize": "{inputs.font.size.md}",
+          "lineHeight": "{inputs.lineHeight.md}"
+        },
+        "type": "typography",
+        "description": "Text style for medium inputs (e.g. input and textarea)"
+      },
+      "lg": {
+        "value": {
+          "fontFamily": "{font.family.body}",
+          "fontWeight": "{inputs.font.weight.lg}",
+          "fontSize": "{inputs.font.size.lg}",
+          "lineHeight": "{inputs.lineHeight.lg}"
+        },
+        "type": "typography",
+        "description": "Text style for large inputs (e.g. input and textarea)"
+      },
+      "xl": {
+        "value": {
+          "fontFamily": "{font.family.body}",
+          "fontWeight": "{inputs.font.weight.xl}",
+          "fontSize": "{inputs.font.size.xl}",
+          "lineHeight": "{inputs.lineHeight.xl}"
+        },
+        "type": "typography",
+        "description": "Text style for extra large inputs (e.g. input and textarea)"
+      }
+    }
+  },
+  "size": {
+    "border": {
+      "focus": {
+        "value": "{size.border.200} + {size.border.100}",
+        "type": "borderWidth"
+      }
+    }
+  },
+  "inputs": {
+    "size": {
+      "border": {
+        "default": {
+          "value": "{size.border.150}",
+          "type": "borderWidth"
+        },
+        "status": {
+          "value": "{size.border.200}",
+          "type": "borderWidth"
+        }
+      },
+      "radius": {
+        "xs": {
+          "value": "{size.radius.300}",
+          "type": "borderRadius"
+        },
+        "sm": {
+          "value": "{size.radius.400}",
+          "type": "borderRadius"
+        },
+        "md": {
+          "value": "{size.radius.400}",
+          "type": "borderRadius"
+        },
+        "lg": {
+          "value": "{size.radius.450}",
+          "type": "borderRadius"
+        },
+        "xl": {
+          "value": "{size.radius.500}",
+          "type": "borderRadius"
+        }
+      }
+    },
+    "lineHeight": {
+      "xs": {
+        "value": "{font.lineHeight.200}",
+        "type": "lineHeights",
+        "description": "Line height for extra small inputs (e.g. input and textarea)"
+      },
+      "sm": {
+        "value": "{font.lineHeight.200}",
+        "type": "lineHeights",
+        "description": "Line height for small inputs (e.g. input and textarea)"
+      },
+      "md": {
+        "value": "{font.lineHeight.200}",
+        "type": "lineHeights",
+        "description": "Line height for medium inputs (e.g. input and textarea)"
+      },
+      "lg": {
+        "value": "{font.lineHeight.200}",
+        "type": "lineHeights",
+        "description": "Line height for large inputs (e.g. input and textarea)"
+      },
+      "xl": {
+        "value": "{font.lineHeight.200}",
+        "type": "lineHeights",
+        "description": "Line height for extra large inputs (e.g. input and textarea)"
+      }
+    },
+    "font": {
+      "size": {
+        "xs": {
+          "value": "{font.size.100}",
+          "type": "fontSizes",
+          "description": "Font size for extra small inputs (e.g. input and textarea)"
+        },
+        "sm": {
+          "value": "{font.size.100}",
+          "type": "fontSizes",
+          "description": "Font size for small inputs (e.g. input and textarea)"
+        },
+        "md": {
+          "value": "{font.size.200}",
+          "type": "fontSizes",
+          "description": "Font size for medium inputs (e.g. input and textarea)"
+        },
+        "lg": {
+          "value": "{font.size.300}",
+          "type": "fontSizes",
+          "description": "Font size for large inputs (e.g. input and textarea)"
+        },
+        "xl": {
+          "value": "{font.size.400}",
+          "type": "fontSizes",
+          "description": "Font size for extra large inputs (e.g. input and textarea)"
+        }
+      },
+      "weight": {
+        "xs": {
+          "value": "{font.weight.normal}",
+          "type": "fontWeights",
+          "description": "Font weight for extra small inputs (e.g. input and textarea)"
+        },
+        "sm": {
+          "value": "{font.weight.normal}",
+          "type": "fontWeights",
+          "description": "Font weight for small inputs (e.g. input and textarea)"
+        },
+        "md": {
+          "value": "{font.weight.normal}",
+          "type": "fontWeights",
+          "description": "Font weight for medium inputs (e.g. input and textarea)"
+        },
+        "lg": {
+          "value": "{font.weight.normal}",
+          "type": "fontWeights",
+          "description": "Font weight for large inputs (e.g. input and textarea)"
+        },
+        "xl": {
+          "value": "{font.weight.normal}",
+          "type": "fontWeights",
+          "description": "Font weight for extra large inputs (e.g. input and textarea)"
+        }
+      }
+    },
+    "color": {
+      "foreground": {
+        "default": {
+          "value": "{color.foreground.secondary}",
+          "type": "color"
+        },
+        "placeholder": {
+          "value": "{color.foreground.placeholder}",
+          "type": "color"
+        },
+        "disabled": {
+          "value": "{color.foreground.disabled}",
+          "type": "color"
+        }
+      },
+      "border": {
+        "default": {
+          "value": "{color.border.default}",
+          "type": "color"
+        },
+        "hover": {
+          "value": "{color.border.moderate}",
+          "type": "color"
+        },
+        "focus": {
+          "value": "{color.border.focus}",
+          "type": "color"
+        },
+        "critical": {
+          "value": "{color.border.critical}",
+          "type": "color"
+        },
+        "success": {
+          "value": "{color.border.success}",
+          "type": "color"
+        },
+        "warning": {
+          "value": "{color.border.warning}",
+          "type": "color"
+        },
+        "disabled": {
+          "value": "{color.neutral.transparent}",
+          "type": "color"
+        }
+      },
+      "background": {
+        "default": {
+          "value": "{color.surface.secondary-opaque}",
+          "type": "color"
+        },
+        "focus": {
+          "value": "{color.black.100}",
+          "type": "color"
+        },
+        "disabled": {
+          "value": "{color.surface.moderate-opaque}",
+          "type": "color"
+        }
+      }
+    }
+  },
+  "action": {
+    "color": {
+      "foreground": {
+        "base": {
+          "default": {
+            "value": "{color.link.primary}",
+            "type": "color"
+          },
+          "hover": {
+            "value": "{color.link.primary-hover}",
+            "type": "color"
+          },
+          "active": {
+            "value": "{action.color.foreground.base.hover}",
+            "type": "color"
+          },
+          "primary": {
+            "default": {
+              "value": "{color.black.50}",
+              "type": "color"
+            }
+          }
+        },
+        "critical": {
+          "default": {
+            "value": "{color.link.critical}",
+            "type": "color"
+          },
+          "hover": {
+            "value": "{color.link.critical-hover}",
+            "type": "color"
+          },
+          "active": {
+            "value": "{action.color.foreground.critical.hover}",
+            "type": "color"
+          },
+          "primary": {
+            "default": {
+              "value": "{color.black.50}",
+              "type": "color"
+            }
+          }
+        },
+        "inverted": {
+          "default": {
+            "value": "{color.foreground.primary-inverted}",
+            "type": "color"
+          },
+          "hover": {
+            "value": "{action.color.foreground.inverted.default}",
+            "type": "color"
+          },
+          "active": {
+            "value": "{action.color.foreground.inverted.hover}",
+            "type": "color"
+          },
+          "primary": {
+            "default": {
+              "value": "{color.link.primary}",
+              "type": "color"
+            },
+            "hover": {
+              "value": "{color.link.primary-hover}",
+              "type": "color"
+            },
+            "active": {
+              "value": "{action.color.foreground.inverted.primary.hover}",
+              "type": "color"
+            }
+          }
+        },
+        "muted": {
+          "default": {
+            "value": "{color.link.muted}",
+            "type": "color"
+          },
+          "hover": {
+            "value": "{color.link.muted-hover}",
+            "type": "color"
+          },
+          "active": {
+            "value": "{action.color.foreground.muted.hover}",
+            "type": "color"
+          }
+        },
+        "disabled": {
+          "default": {
+            "value": "{color.foreground.disabled}",
+            "type": "color"
+          }
+        },
+        "positive": {
+          "default": {
+            "value": "{color.link.success}",
+            "type": "color"
+          },
+          "hover": {
+            "value": "{color.link.success-hover}",
+            "type": "color"
+          },
+          "active": {
+            "value": "{action.color.foreground.positive.hover}",
+            "type": "color"
+          },
+          "primary": {
+            "default": {
+              "value": "{color.black.50}",
+              "type": "color"
+            }
+          }
+        }
+      },
+      "background": {
+        "base": {
+          "default": {
+            "value": "{color.neutral.transparent}",
+            "type": "color"
+          },
+          "hover": {
+            "value": "{color.surface.brand-opaque}",
+            "type": "color"
+          },
+          "active": {
+            "value": "{action.color.background.base.hover}",
+            "type": "color",
+            "$extensions": {
+              "studio.tokens": {
+                "modify": {
+                  "type": "darken",
+                  "value": ".11",
+                  "space": "hsl"
+                }
+              }
+            }
+          },
+          "primary": {
+            "default": {
+              "value": "{color.purple.400}",
+              "type": "color"
+            },
+            "hover": {
+              "value": "{color.purple.450}",
+              "type": "color"
+            },
+            "active": {
+              "value": "{color.purple.500}",
+              "type": "color"
+            }
+          }
+        },
+        "critical": {
+          "default": {
+            "value": "{color.neutral.transparent}",
+            "type": "color"
+          },
+          "hover": {
+            "value": "{color.surface.critical-opaque}",
+            "type": "color"
+          },
+          "active": {
+            "value": "{action.color.background.critical.hover}",
+            "type": "color",
+            "$extensions": {
+              "studio.tokens": {
+                "modify": {
+                  "type": "darken",
+                  "value": ".11",
+                  "space": "hsl"
+                }
+              }
+            }
+          },
+          "primary": {
+            "default": {
+              "value": "{color.red.400}",
+              "type": "color"
+            },
+            "hover": {
+              "value": "{color.red.450}",
+              "type": "color"
+            },
+            "active": {
+              "value": "{color.red.500}",
+              "type": "color"
+            }
+          }
+        },
+        "inverted": {
+          "default": {
+            "value": "{color.neutral.transparent}",
+            "type": "color"
+          },
+          "hover": {
+            "value": "{color.surface.moderate-opaque-inverted}",
+            "type": "color"
+          },
+          "active": {
+            "value": "{color.surface.bold-opaque-inverted}",
+            "type": "color"
+          },
+          "primary": {
+            "default": {
+              "value": "{color.black.100}",
+              "type": "color"
+            },
+            "hover": {
+              "value": "{color.surface.brand}",
+              "type": "color"
+            },
+            "active": {
+              "value": "{color.purple.200}",
+              "type": "color"
+            }
+          }
+        },
+        "muted": {
+          "default": {
+            "value": "{color.neutral.transparent}",
+            "type": "color"
+          },
+          "hover": {
+            "value": "{color.surface.moderate-opaque}",
+            "type": "color"
+          },
+          "active": {
+            "value": "{action.color.background.muted.hover}",
+            "type": "color",
+            "$extensions": {
+              "studio.tokens": {
+                "modify": {
+                  "type": "alpha",
+                  "value": ".14",
+                  "space": "hsl"
+                }
+              }
+            }
+          }
+        },
+        "disabled": {
+          "default": {
+            "value": "{color.surface.bold-opaque}",
+            "type": "color"
+          }
+        },
+        "positive": {
+          "default": {
+            "value": "{color.neutral.transparent}",
+            "type": "color"
+          },
+          "hover": {
+            "value": "{color.surface.success-opaque}",
+            "type": "color"
+          },
+          "active": {
+            "value": "{action.color.background.positive.hover}",
+            "type": "color",
+            "$extensions": {
+              "studio.tokens": {
+                "modify": {
+                  "type": "darken",
+                  "value": ".3",
+                  "space": "hsl"
+                }
+              }
+            }
+          },
+          "primary": {
+            "default": {
+              "value": "{color.green.475}",
+              "type": "color",
+              "description": "Postive, accepting, or success actions."
+            },
+            "hover": {
+              "value": "{color.green.500}",
+              "type": "color"
+            },
+            "active": {
+              "value": "{action.color.background.positive.primary.hover}",
+              "type": "color",
+              "$extensions": {
+                "studio.tokens": {
+                  "modify": {
+                    "type": "darken",
+                    "value": ".11",
+                    "space": "hsl"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "border": {
+        "base": {
+          "outlined": {
+            "default": {
+              "value": "{color.border.brand}",
+              "type": "color"
+            }
+          }
+        },
+        "critical": {
+          "outlined": {
+            "default": {
+              "value": "{color.border.critical}",
+              "type": "color"
+            }
+          }
+        },
+        "inverted": {
+          "outlined": {
+            "default": {
+              "value": "{color.border.default-inverted}",
+              "type": "color"
+            }
+          }
+        },
+        "muted": {
+          "outlined": {
+            "default": {
+              "value": "{color.border.default}",
+              "type": "color"
+            }
+          }
+        },
+        "positive": {
+          "outlined": {
+            "default": {
+              "value": "{color.border.success}",
+              "type": "color"
+            }
+          }
+        }
+      }
+    }
+  },
+  "theme": {
+    "color": {
+      "base": {
+        "value": "{color.black.900}",
+        "type": "color"
+      }
+    },
+    "topbar": {
+      "color": {
+        "foreground": {
+          "value": "{theme.color.base}",
+          "type": "color",
+          "$extensions": {
+            "studio.tokens": {
+              "modify": {
+                "type": "alpha",
+                "value": ".8",
+                "space": "hsl"
+              }
+            }
+          }
+        },
+        "background": {
+          "value": "{color.surface.secondary}",
+          "type": "color"
+        }
+      },
+      "field": {
+        "color": {
+          "foreground": {
+            "value": "{theme.color.base}",
+            "type": "color",
+            "$extensions": {
+              "studio.tokens": {
+                "modify": {
+                  "type": "alpha",
+                  "value": ".5",
+                  "space": "hsl"
+                }
+              }
+            }
+          },
+          "foreground-hover": {
+            "value": "{theme.color.base}",
+            "type": "color",
+            "$extensions": {
+              "studio.tokens": {
+                "modify": {
+                  "type": "alpha",
+                  "value": ".75",
+                  "space": "hsl"
+                }
+              }
+            }
+          },
+          "background": {
+            "value": "{theme.color.base}",
+            "type": "color",
+            "$extensions": {
+              "studio.tokens": {
+                "modify": {
+                  "type": "alpha",
+                  "value": ".05",
+                  "space": "hsl"
+                }
+              }
+            }
+          },
+          "background-hover": {
+            "value": "{theme.color.base}",
+            "type": "color",
+            "$extensions": {
+              "studio.tokens": {
+                "modify": {
+                  "type": "lighten",
+                  "value": "1",
+                  "space": "hsl"
+                }
+              }
+            }
+          },
+          "border": {
+            "value": "{theme.color.base}",
+            "type": "color",
+            "$extensions": {
+              "studio.tokens": {
+                "modify": {
+                  "type": "alpha",
+                  "value": "0",
+                  "space": "hsl"
+                }
+              }
+            }
+          },
+          "border-hover": {
+            "value": "{theme.color.base}",
+            "type": "color",
+            "$extensions": {
+              "studio.tokens": {
+                "modify": {
+                  "type": "alpha",
+                  "value": ".1",
+                  "space": "hsl"
+                }
+              }
+            }
+          },
+          "border-active": {
+            "value": "{theme.color.base}",
+            "type": "color",
+            "$extensions": {
+              "studio.tokens": {
+                "modify": {
+                  "type": "alpha",
+                  "value": ".2",
+                  "space": "hsl"
+                }
+              }
+            }
+          }
+        }
+      },
+      "button": {
+        "color": {
+          "foreground": {
+            "value": "{theme.color.base}",
+            "type": "color",
+            "$extensions": {
+              "studio.tokens": {
+                "modify": {
+                  "type": "alpha",
+                  "value": ".65",
+                  "space": "hsl"
+                }
+              }
+            }
+          },
+          "foreground-hover": {
+            "value": "{theme.color.base}",
+            "type": "color"
+          },
+          "background": {
+            "value": "{theme.color.base}",
+            "type": "color",
+            "$extensions": {
+              "studio.tokens": {
+                "modify": {
+                  "type": "alpha",
+                  "value": "0",
+                  "space": "hsl"
+                }
+              }
+            }
+          },
+          "background-hover": {
+            "value": "{theme.color.base}",
+            "type": "color",
+            "$extensions": {
+              "studio.tokens": {
+                "modify": {
+                  "type": "alpha",
+                  "value": ".05",
+                  "space": "hsl"
+                }
+              }
+            }
+          },
+          "background-active": {
+            "value": "{theme.color.base}",
+            "type": "color",
+            "$extensions": {
+              "studio.tokens": {
+                "modify": {
+                  "type": "alpha",
+                  "value": ".1",
+                  "space": "hsl"
+                }
+              }
+            }
+          }
+        }
+      },
+      "profile": {
+        "color": {
+          "foreground": {
+            "value": "{theme.topbar.color.foreground}",
+            "type": "color"
+          },
+          "foreground-inverted": {
+            "value": "{color.foreground.primary-inverted}",
+            "type": "color",
+            "$extensions": {
+              "studio.tokens": {
+                "modify": {
+                  "type": "alpha",
+                  "value": ".75",
+                  "space": "hsl"
+                }
+              }
+            }
+          },
+          "background": {
+            "value": "{theme.color.base}",
+            "type": "color",
+            "$extensions": {
+              "studio.tokens": {
+                "modify": {
+                  "type": "alpha",
+                  "value": ".05",
+                  "space": "hsl"
+                }
+              }
+            }
+          },
+          "background-inverted": {
+            "value": "{theme.color.base}",
+            "type": "color",
+            "$extensions": {
+              "studio.tokens": {
+                "modify": {
+                  "type": "alpha",
+                  "value": ".75",
+                  "space": "hsl"
+                }
+              }
+            }
+          },
+          "background-hover": {
+            "value": "{theme.color.base}",
+            "type": "color",
+            "$extensions": {
+              "studio.tokens": {
+                "modify": {
+                  "type": "alpha",
+                  "value": ".10",
+                  "space": "hsl"
+                }
+              }
+            }
+          },
+          "background-active": {
+            "value": "{theme.color.base}",
+            "type": "color",
+            "$extensions": {
+              "studio.tokens": {
+                "modify": {
+                  "type": "alpha",
+                  "value": ".14",
+                  "space": "hsl"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "sidebar": {
+      "color": {
+        "foreground": {
+          "value": "{color.foreground.secondary}",
+          "type": "color"
+        },
+        "foreground-unread": {
+          "value": "{color.foreground.primary}",
+          "type": "color"
+        },
+        "background": {
+          "value": "{theme.topbar.color.background}",
+          "type": "color"
+        }
+      },
+      "icon": {
+        "color": {
+          "foreground": {
+            "value": "{theme.sidebar.color.foreground}",
+            "type": "color"
+          }
+        }
+      },
+      "status": {
+        "color": {
+          "foreground": {
+            "value": "{color.foreground.tertiary}",
+            "type": "color"
+          }
+        }
+      },
+      "row": {
+        "color": {
+          "background": {
+            "value": "{theme.color.base}",
+            "type": "color",
+            "$extensions": {
+              "studio.tokens": {
+                "modify": {
+                  "type": "alpha",
+                  "value": "0",
+                  "space": "hsl"
+                }
+              }
+            }
+          },
+          "background-hover": {
+            "value": "{theme.color.base}",
+            "type": "color",
+            "$extensions": {
+              "studio.tokens": {
+                "modify": {
+                  "type": "alpha",
+                  "value": "0.11",
+                  "space": "hsl"
+                }
+              }
+            }
+          },
+          "background-active": {
+            "value": "{theme.color.base}",
+            "type": "color",
+            "$extensions": {
+              "studio.tokens": {
+                "modify": {
+                  "type": "alpha",
+                  "value": ".15",
+                  "space": "hsl"
+                }
+              }
+            }
+          }
+        }
+      },
+      "selected-row": {
+        "color": {
+          "foreground": {
+            "value": "{color.foreground.primary}",
+            "type": "color"
+          },
+          "background": {
+            "value": "{theme.color.base}",
+            "type": "color",
+            "$extensions": {
+              "studio.tokens": {
+                "modify": {
+                  "type": "alpha",
+                  "value": ".09",
+                  "space": "hsl"
+                }
+              }
+            }
+          }
+        }
+      },
+      "section": {
+        "color": {
+          "foreground": {
+            "value": "{color.foreground.tertiary}",
+            "type": "color"
+          }
+        }
+      }
+    },
+    "presence": {
+      "color": {
+        "background": {
+          "available": {
+            "value": "{color.green.425}",
+            "type": "color"
+          },
+          "busy-unavailable": {
+            "value": "{color.red.500}",
+            "type": "color"
+          },
+          "busy": {
+            "value": "{color.gold.500}",
+            "type": "color"
+          },
+          "offline": {
+            "value": "{color.black.500}",
+            "type": "color"
+          }
+        }
+      }
+    },
+    "mention": {
+      "color": {
+        "foreground": {
+          "value": "{color.black.50}",
+          "type": "color"
+        },
+        "foreground-strong": {
+          "value": "{color.foreground.primary-inverted}",
+          "type": "color"
+        },
+        "background": {
+          "value": "{color.surface.brand-strong}",
+          "type": "color"
+        },
+        "background-strong": {
+          "value": "{color.purple.550}",
+          "type": "color"
+        }
+      }
+    }
+  },
+  "shell": {
+    "base": {
+      "color": {
+        "surface": {
+          "value": "{color.surface.secondary}",
+          "type": "color"
+        },
+        "foreground": {
+          "value": "{color.black.900}",
+          "type": "color"
+        },
+        "border": {
+          "value": "{color.black.900}",
+          "type": "color"
+        },
+        "accent": {
+          "value": "{badge.color.background.bulletin}",
+          "type": "color"
+        },
+        "status-positive": {
+          "value": "{color.green.425}",
+          "type": "color"
+        },
+        "status-critical": {
+          "value": "{color.red.500}",
+          "type": "color"
+        },
+        "status-warning": {
+          "value": "{color.gold.500}",
+          "type": "color"
+        },
+        "status-away": {
+          "value": "{color.black.500}",
+          "type": "color"
+        }
+      },
+      "action": {
+        "color": {
+          "background": {
+            "primary": {
+              "value": "{color.black.800}",
+              "type": "color"
+            },
+            "secondary": {
+              "value": "{color.black.800}",
+              "type": "color"
+            },
+            "muted": {
+              "value": "{color.black.800}",
+              "type": "color"
+            }
+          }
+        }
+      }
+    },
+    "color": {
+      "foreground": {
+        "primary": {
+          "value": "{shell.base.color.foreground}",
+          "type": "color"
+        },
+        "secondary": {
+          "value": "{shell.base.color.foreground}",
+          "type": "color",
+          "$extensions": {
+            "studio.tokens": {
+              "modify": {
+                "type": "alpha",
+                "value": ".86",
+                "space": "hsl"
+              }
+            }
+          }
+        },
+        "tertiary": {
+          "value": "{shell.base.color.foreground}",
+          "type": "color",
+          "$extensions": {
+            "studio.tokens": {
+              "modify": {
+                "type": "alpha",
+                "value": ".72",
+                "space": "hsl"
+              }
+            }
+          }
+        },
+        "strong": {
+          "value": "{shell.base.color.foreground}",
+          "type": "color",
+          "$extensions": {
+            "studio.tokens": {
+              "modify": {
+                "type": "alpha",
+                "value": "1",
+                "space": "hsl"
+              }
+            }
+          }
+        },
+        "muted": {
+          "value": "{shell.base.color.foreground}",
+          "type": "color",
+          "$extensions": {
+            "studio.tokens": {
+              "modify": {
+                "type": "alpha",
+                "value": ".60",
+                "space": "hsl"
+              }
+            }
+          }
+        },
+        "disabled": {
+          "value": "{shell.base.color.foreground}",
+          "type": "color",
+          "$extensions": {
+            "studio.tokens": {
+              "modify": {
+                "type": "alpha",
+                "value": ".57",
+                "space": "hsl"
+              }
+            }
+          }
+        },
+        "positive": {
+          "value": "{shell.base.color.status-positive}",
+          "type": "color",
+          "$extensions": {
+            "studio.tokens": {
+              "modify": {
+                "type": "darken",
+                "value": ".15",
+                "space": "hsl"
+              }
+            }
+          }
+        },
+        "critical": {
+          "value": "{shell.base.color.status-critical}",
+          "type": "color",
+          "$extensions": {
+            "studio.tokens": {
+              "modify": {
+                "type": "darken",
+                "value": ".2",
+                "space": "hsl"
+              }
+            }
+          }
+        },
+        "warning": {
+          "value": "{shell.base.color.status-warning}",
+          "type": "color",
+          "$extensions": {
+            "studio.tokens": {
+              "modify": {
+                "type": "darken",
+                "value": "0.25",
+                "space": "hsl"
+              }
+            }
+          }
+        }
+      },
+      "surface": {
+        "default": {
+          "value": "{shell.base.color.surface}",
+          "type": "color"
+        }
+      },
+      "border": {
+        "subtle": {
+          "value": "{shell.base.color.border}",
+          "type": "color",
+          "$extensions": {
+            "studio.tokens": {
+              "modify": {
+                "type": "alpha",
+                "value": "0.10",
+                "space": "hsl"
+              }
+            }
+          }
+        },
+        "default": {
+          "value": "{shell.base.color.border}",
+          "type": "color",
+          "$extensions": {
+            "studio.tokens": {
+              "modify": {
+                "type": "alpha",
+                "value": ".17",
+                "space": "hsl"
+              }
+            }
+          }
+        }
+      }
+    },
+    "action": {
+      "color": {
+        "foreground": {
+          "primary-default": {
+            "value": "{shell.color.foreground.secondary}",
+            "type": "color"
+          },
+          "secondary-default": {
+            "value": "{shell.color.foreground.secondary}",
+            "type": "color"
+          },
+          "primary-strong": {
+            "value": "{shell.color.foreground.strong}",
+            "type": "color"
+          },
+          "tertiary-default": {
+            "value": "{shell.color.foreground.tertiary}",
+            "type": "color"
+          },
+          "primary-disabled": {
+            "value": "{shell.color.foreground.disabled}",
+            "type": "color"
+          },
+          "secondary-disabled": {
+            "value": "{shell.color.foreground.disabled}",
+            "type": "color"
+          },
+          "muted-default": {
+            "value": "{shell.color.foreground.muted}",
+            "type": "color"
+          },
+          "muted-hover": {
+            "value": "{shell.action.color.foreground.muted-default}",
+            "type": "color",
+            "$extensions": {
+              "studio.tokens": {
+                "modify": {
+                  "type": "darken",
+                  "value": ".4",
+                  "space": "hsl"
+                }
+              }
+            }
+          },
+          "muted-active": {
+            "value": "{shell.action.color.foreground.muted-hover}",
+            "type": "color"
+          },
+          "muted-selected": {
+            "value": "{shell.action.color.foreground.muted-default}",
+            "type": "color",
+            "$extensions": {
+              "studio.tokens": {
+                "modify": {
+                  "type": "darken",
+                  "value": "0.6",
+                  "space": "hsl"
+                }
+              }
+            }
+          }
+        },
+        "background": {
+          "primary-default": {
+            "value": "{shell.base.action.color.background.primary}",
+            "type": "color",
+            "$extensions": {
+              "studio.tokens": {
+                "modify": {
+                  "type": "alpha",
+                  "value": "0",
+                  "space": "hsl"
+                }
+              }
+            }
+          },
+          "primary-hover": {
+            "value": "{shell.base.action.color.background.primary}",
+            "type": "color",
+            "$extensions": {
+              "studio.tokens": {
+                "modify": {
+                  "type": "alpha",
+                  "value": ".10",
+                  "space": "hsl"
+                }
+              }
+            }
+          },
+          "primary-active": {
+            "value": "{shell.base.action.color.background.primary}",
+            "type": "color",
+            "$extensions": {
+              "studio.tokens": {
+                "modify": {
+                  "type": "alpha",
+                  "value": ".16",
+                  "space": "hsl"
+                }
+              }
+            }
+          },
+          "primary-selected": {
+            "value": "{shell.base.action.color.background.primary}",
+            "type": "color",
+            "$extensions": {
+              "studio.tokens": {
+                "modify": {
+                  "type": "alpha",
+                  "value": ".13",
+                  "space": "hsl"
+                }
+              }
+            }
+          },
+          "secondary-default": {
+            "value": "{shell.base.action.color.background.secondary}",
+            "type": "color",
+            "$extensions": {
+              "studio.tokens": {
+                "modify": {
+                  "type": "alpha",
+                  "value": "0",
+                  "space": "hsl"
+                }
+              }
+            }
+          },
+          "secondary-hover": {
+            "value": "{shell.base.action.color.background.secondary}",
+            "type": "color",
+            "$extensions": {
+              "studio.tokens": {
+                "modify": {
+                  "type": "alpha",
+                  "value": ".10",
+                  "space": "hsl"
+                }
+              }
+            }
+          },
+          "secondary-active": {
+            "value": "{shell.base.action.color.background.secondary}",
+            "type": "color",
+            "$extensions": {
+              "studio.tokens": {
+                "modify": {
+                  "type": "alpha",
+                  "value": ".16",
+                  "space": "hsl"
+                }
+              }
+            }
+          },
+          "secondary-selected": {
+            "value": "{shell.base.action.color.background.secondary}",
+            "type": "color",
+            "$extensions": {
+              "studio.tokens": {
+                "modify": {
+                  "type": "alpha",
+                  "value": ".13",
+                  "space": "hsl"
+                }
+              }
+            }
+          },
+          "muted-default": {
+            "value": "{shell.base.action.color.background.muted}",
+            "type": "color",
+            "$extensions": {
+              "studio.tokens": {
+                "modify": {
+                  "type": "alpha",
+                  "value": "0.05",
+                  "space": "hsl"
+                }
+              }
+            }
+          },
+          "muted-hover": {
+            "value": "{shell.base.action.color.background.muted}",
+            "type": "color",
+            "$extensions": {
+              "studio.tokens": {
+                "modify": {
+                  "type": "alpha",
+                  "value": ".10",
+                  "space": "hsl"
+                }
+              }
+            }
+          },
+          "muted-active": {
+            "value": "{shell.base.action.color.background.muted}",
+            "type": "color",
+            "$extensions": {
+              "studio.tokens": {
+                "modify": {
+                  "type": "alpha",
+                  "value": ".07",
+                  "space": "hsl"
+                }
+              }
+            }
+          },
+          "muted-selected": {
+            "value": "{shell.base.action.color.background.muted}",
+            "type": "color",
+            "$extensions": {
+              "studio.tokens": {
+                "modify": {
+                  "type": "alpha",
+                  "value": "0.07",
+                  "space": "hsl"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "mention": {
+      "color": {
+        "surface": {
+          "primary": {
+            "value": "{shell.base.color.accent}",
+            "type": "color"
+          },
+          "secondary": {
+            "value": "{shell.base.color.accent}",
+            "type": "color",
+            "$extensions": {
+              "studio.tokens": {
+                "modify": {
+                  "type": "darken",
+                  "value": ".55",
+                  "space": "hsl"
+                }
+              }
+            }
+          }
+        },
+        "foreground": {
+          "primary": {
+            "value": "{color.black.50}",
+            "type": "color"
+          },
+          "secondary": {
+            "value": "{color.black.100}",
+            "type": "color"
+          }
+        }
+      }
+    },
+    "logo": {
+      "color": {
+        "star": {
+          "value": "{color.purple.400}",
+          "type": "color"
+        },
+        "wordmark": {
+          "value": "{color.purple.1000}",
+          "type": "color"
+        }
+      }
+    },
+    "presence": {
+      "color": {
+        "available": {
+          "value": "{shell.base.color.status-positive}",
+          "type": "color"
+        },
+        "unavailable": {
+          "value": "{shell.base.color.status-critical}",
+          "type": "color"
+        },
+        "busy": {
+          "value": "{shell.base.color.status-warning}",
+          "type": "color"
+        },
+        "offline": {
+          "value": "{shell.base.color.status-away}",
+          "type": "color"
+        }
+      }
+    }
+  }
+}

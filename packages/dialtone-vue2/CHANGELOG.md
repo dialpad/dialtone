@@ -1,3 +1,34 @@
+# [2.196.0](https://github.com/dialpad/dialtone/compare/dialtone-vue2/v2.195.5...dialtone-vue2/v2.196.0) (2025-08-19)
+
+
+### Bug Fixes
+
+* **Message Input:** NO-JIRA replace internal input value when adding custom emojis ([#868](https://github.com/dialpad/dialtone/issues/868)) ([e0874a3](https://github.com/dialpad/dialtone/commit/e0874a34672ecba01c96e9a4f907d7c8f2c1c3d3))
+
+
+### Documentation
+
+* **Toggle:** DLT-2623 fix vue 3 toggle variants ([#871](https://github.com/dialpad/dialtone/issues/871)) ([e981daa](https://github.com/dialpad/dialtone/commit/e981daa84f2437fca29f9cf494647d36724ef4de))
+
+
+### Features
+
+* **Message Input:** DLT-2714 add scroll-bottom-reached event on input ([#873](https://github.com/dialpad/dialtone/issues/873)) ([ce22b39](https://github.com/dialpad/dialtone/commit/ce22b398315ce29761e8c672156c5cb273fa7271))
+
+## [2.195.5](https://github.com/dialpad/dialtone/compare/dialtone-vue2/v2.195.4...dialtone-vue2/v2.195.5) (2025-08-12)
+
+
+### Bug Fixes
+
+* **Message Input:** DLT-2679 fix keyboard shortcuts ([#866](https://github.com/dialpad/dialtone/issues/866)) ([d318741](https://github.com/dialpad/dialtone/commit/d3187410f19bc6d5eb751014098bdb3f7380a9f0))
+
+## [2.195.4](https://github.com/dialpad/dialtone/compare/dialtone-vue2/v2.195.3...dialtone-vue2/v2.195.4) (2025-08-11)
+
+
+### Bug Fixes
+
+* **Rich Text Editor:** DLT-2690 custom emojis not working ([#860](https://github.com/dialpad/dialtone/issues/860)) ([60feffc](https://github.com/dialpad/dialtone/commit/60feffc86e2e7655543af0f3bbc5a3c33e459bb3))
+
 ## [2.195.3](https://github.com/dialpad/dialtone/compare/dialtone-vue2/v2.195.2...dialtone-vue2/v2.195.3) (2025-08-05)
 
 

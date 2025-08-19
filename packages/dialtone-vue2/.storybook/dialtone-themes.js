@@ -1,7 +1,9 @@
+/* eslint-disable storybook/default-exports */
 /**
  * For more theme related documentation, please check out:
  * https://storybook.js.org/docs/react/configure/theming
  */
+
 import { create } from '@storybook/theming/create';
 
 const _baseThemeVariables = {

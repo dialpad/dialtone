@@ -159,7 +159,7 @@ const copyURLToClipboard = async () => {
   try {
     await navigator.clipboard.writeText(window.location.href);
     shareLinkTooltip.value = 'Copied';
-  } catch (err) {
+  } catch {
     shareLinkTooltip.value = 'Error copying to clipboard';
   }
 

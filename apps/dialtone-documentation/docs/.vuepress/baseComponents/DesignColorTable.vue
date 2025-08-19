@@ -1,10 +1,10 @@
 <script setup>
 import { inject } from 'vue';
-import { extractCSSVariableName } from '@utilities';
+import { extractCSSVariableName, sortUtilityClassesByCategory } from '@utilities';
 
 const tokensDocs = inject('tokensDocs');
 const utilityClassDocs = inject('utilityClassDocs');
-const baseColorRegex = /-\d{2,4}$/;
+const isBaseColorClass = (string) => /d-(bgc|fc|bc|bgg)-\w+-\d{2,4}$/.test(string);
 const currentTheme = inject('currentTheme');
 
 const props = defineProps({
@@ -32,25 +32,30 @@ const props = defineProps({
  * @returns {object[]}
  */
 function processColorsDocs (excludedColors, classPrefix) {
-  // Get all utility classes that match the class prefix
-  const filteredClasses = Object.keys(utilityClassDocs).filter(className =>
-    className.startsWith(classPrefix) && !baseColorRegex.test(className),
-  );
+  // Get all utility classes that match the class prefix, are not excluded colors and are not base color classes
+  let filteredClasses = Object.keys(utilityClassDocs)
+    .filter(className =>
+      className.startsWith(classPrefix) &&
+      !excludedColors.some(color => className.includes(color)) &&
+      !isBaseColorClass(className),
+    );
 
-  // Process the filtered classes
-  return Array.from(filteredClasses.reduce((result, color) => {
-    const tokenName = extractCSSVariableName(utilityClassDocs[color]);
-    const colorName = color.replace(classPrefix, '').replace(/-/g, ' ');
-    const token = tokensDocs[tokenName]?.[`dp-${currentTheme.value}`];
+  filteredClasses = sortUtilityClassesByCategory(filteredClasses);
 
-    result.add({
-      name: colorName,
-      tokenName,
-      utilityClass: color,
-      description: token?.description,
-    });
-    return result;
-  }, new Set()));
+  return Array.from(filteredClasses
+    .reduce((result, color) => {
+      const tokenName = extractCSSVariableName(utilityClassDocs[color]);
+      const colorName = color.replace(classPrefix, '').replace(/-/g, ' ');
+      const token = tokensDocs[tokenName]?.[`dp-${currentTheme.value}`];
+
+      result.add({
+        name: colorName,
+        tokenName,
+        utilityClass: color,
+        description: token?.description,
+      });
+      return result;
+    }, new Set()));
 }
 
 const colors = processColorsDocs(props.excludedColors, props.classPrefix);
@@ -62,7 +67,7 @@ const colors = processColorsDocs(props.excludedColors, props.classPrefix);
       <table class="d-table dialtone-doc-table">
         <thead class="d-bgc-primary d-ps-sticky d-zi-base1 d-t0">
           <tr>
-            <th class="d-p0 d-bbw0" scope="col" colspan="3">
+            <th class="d-p0 d-bbw0" colspan="3" scope="col">
               <div class="d-p16 d-bb d-bc-default d-bbw1">
                 Color
               </div>
@@ -81,12 +86,12 @@ const colors = processColorsDocs(props.excludedColors, props.classPrefix);
         </thead>
         <tbody>
           <tr v-for="(color, index) in colors" :key="`${color.utilityClass}-${index}`">
-            <th scope="row" class="d-pr0" colspan="2">
+            <th class="d-pr0" colspan="2" scope="row">
               <div class="d-d-flex d-ai-center d-gg16">
-                <slot name="example" :color="color" />
+                <slot :color="color" name="example" />
               </div>
             </th>
-            <th scope="row" class="d-lh-300">
+            <th class="d-lh-300" scope="row">
               <span class="d-tt-capitalize" v-text="color.name" />
               <span v-if="color.description" class="d-d-block d-fw-normal d-fs-100" v-text="color.description" />
             </th>

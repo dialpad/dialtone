@@ -44,7 +44,10 @@ const _mountWrapper = () => {
 };
 
 const _setValue = async (value) => {
-  editorEl.innerHTML = value;
+  // Use TipTap's setContent API and manually trigger events
+  wrapper.vm.editor.commands.setContent(value, false, { preserveWhitespace: 'full' });
+  // Manually trigger the input change events that would normally be called by the 'update' event
+  wrapper.vm.triggerInputChangeEvents();
   await wrapper.vm.$nextTick();
 };
 
@@ -91,7 +94,11 @@ describe('DtRichTextEditor tests', () => {
         const itBehavesLikeOutputsCorrectly = (value, output, onlyCheckOutputContained = false) => {
           it('should emit the output value', async () => {
             await _setValue(value);
-            const emittedOutput = wrapper.emitted().input[0][0];
+
+            // In Vue 3, check for update:modelValue event (v-model standard)
+            const emittedEvents = wrapper.emitted()['update:modelValue'] || wrapper.emitted().input;
+            const emittedOutput = emittedEvents?.[0]?.[0];
+
             if (onlyCheckOutputContained) {
               expect(emittedOutput).toContain(output);
             } else {
@@ -380,6 +387,57 @@ describe('DtRichTextEditor tests', () => {
   });
 
   describe('Interactivity Tests', () => {
+    describe('Link keyboard shortcut functionality', () => {
+      describe('When Mod+K is pressed and link is enabled', () => {
+        it('should emit edit-link event', async () => {
+          await wrapper.setProps({ link: true });
+
+          // Get the editor instance
+          const editorInstance = wrapper.vm.editor;
+
+          // Focus the editor
+          editorInstance.commands.focus();
+
+          // Simulate the keyboard shortcut by triggering it directly on the editor
+          // This tests that the edit-link event gets emitted when Mod+K shortcut is triggered
+          editorInstance.commands.keyboardShortcut('Mod-k');
+
+          await wrapper.vm.$nextTick();
+
+          // Check if the edit-link event was emitted
+          expect(wrapper.emitted('edit-link')).toBeTruthy();
+        });
+      });
+    });
+
+    describe('Blockquote keyboard shortcut functionality', () => {
+      describe('When Mod+Shift+B is pressed and blockquote is enabled', () => {
+        it('should toggle blockquote formatting', async () => {
+          await wrapper.setProps({
+            allowBlockquote: true,
+            outputFormat: 'html',
+            modelValue: 'Test text',
+          });
+
+          // Get the editor instance
+          const editorInstance = wrapper.vm.editor;
+
+          // Focus the editor and select all text
+          editorInstance.commands.focus();
+          editorInstance.commands.selectAll();
+
+          // Simulate the Mod+Shift+B keyboard shortcut
+          editorInstance.commands.keyboardShortcut('Mod-Shift-b');
+
+          await wrapper.vm.$nextTick();
+
+          // Check if the text is now wrapped in a blockquote
+          const output = wrapper.vm.getOutput();
+          expect(output).toBe('<blockquote><p>Test text</p></blockquote>');
+        });
+      });
+    });
+
     describe('handleKeyDown functionality', () => {
       let mockKeyEvent;
       let mockView;
