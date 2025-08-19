@@ -28,27 +28,14 @@ const props = defineProps({
 /**
  *
  * @param excludedColors
- * @param includedColors
  * @param classPrefix
  * @returns {object[]}
  */
-function processColorsDocs (excludedColors, includedColors, classPrefix) {
+function processColorsDocs (excludedColors, classPrefix) {
   // Get all utility classes that match the class prefix
-  let filteredClasses = Object.keys(utilityClassDocs).filter(className =>
+  const filteredClasses = Object.keys(utilityClassDocs).filter(className =>
     className.startsWith(classPrefix) && !baseColorRegex.test(className),
   );
-
-  // If includedColors is provided and not empty, only include those specific colors
-  if (includedColors && includedColors.length > 0) {
-    filteredClasses = filteredClasses.filter(className =>
-      includedColors.some(color => className.includes(color)),
-    );
-  } else {
-    // Otherwise, apply the excludedColors filter
-    filteredClasses = filteredClasses.filter(className =>
-      !excludedColors.some(color => className.includes(color)),
-    );
-  }
 
   // Process the filtered classes
   return Array.from(filteredClasses.reduce((result, color) => {
@@ -66,7 +53,7 @@ function processColorsDocs (excludedColors, includedColors, classPrefix) {
   }, new Set()));
 }
 
-const colors = processColorsDocs(props.excludedColors, props.includedColors, props.classPrefix);
+const colors = processColorsDocs(props.excludedColors, props.classPrefix);
 </script>
 
 <template>

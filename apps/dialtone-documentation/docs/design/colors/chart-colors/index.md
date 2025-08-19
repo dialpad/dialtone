@@ -198,9 +198,6 @@ While this system aims for robustness, be aware of potential challenges during i
 - Transitioning Existing Charts: Migrating older charts not using design tokens will require dedicated refactoring effort.
 
 <script setup>
-import DesignColorTable from '@baseComponents/DesignColorTable.vue';
-import ThemeColorTable from '@baseComponents/ThemeColorTable.vue';
-import ColorsCatalog from '@views/ColorsCatalog.vue';
 import tokensJson from '@dialpad/dialtone-tokens/dist/doc.json';
 
 /*
