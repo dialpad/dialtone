@@ -12,13 +12,22 @@ export const THEMES = [
 export const BRANDS = [
   { value: 'dp', label: 'Dialpad' },
   { value: 'tmo', label: 'T-Mobile' },
-  { value: 'expressive', label: 'Expressive' },
-  { value: 'expressive-sm', label: 'Expressive Small' },
+  // { value: 'expressive', label: 'Expressive' },
+  // { value: 'expressive-sm', label: 'Expressive Small' },
   // { value: 'deca', label: 'Deca' },
+  { value: 'aegean', label: 'Aegean' },
+  { value: 'botany', label: 'Botany' },
+  { value: 'buttercream', label: 'Buttercream' },
+  { value: 'ceruleo', label: 'Ceruleo' },
+  { value: 'high-desert', label: 'High Desert' },
+  { value: 'melon', label: 'Melon' },
+  { value: 'plum', label: 'Plum' },
+  { value: 'sunflower', label: 'Sunflower' },
+  { value: 'verdant-haze', label: 'Verdant Haze' },
 ];
 
 export const CATEGORY_MAP = {
-  color: ['color', 'opacity', 'theme'],
+  color: ['color', 'opacity', 'shell'],
   typography: ['typography', 'font'],
   size: ['size'],
   space: ['space'],
