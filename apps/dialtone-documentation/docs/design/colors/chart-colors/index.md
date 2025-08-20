@@ -101,78 +101,53 @@ Designers should leverage these tokens directly from the Dialtone Figma Library.
 ### Apply Categorical colors in numeric order
 
 <dialtone-usage>
-<template #do>
- <div class="d-bar8">
-  <svg-loader class="d-fl1" name="chart-dondont-1-1" />
- </div>
-Use categorical and sequential colors in their predetermined order, e.g. 01, 02, 03, etc.
-</template>
-
-<template #dont>
- <div class="d-bar8">
-  <svg-loader class="d-fl1" name="chart-dondont-1-2" />
- </div>
-Avoid using categorical and sequential colors out of order, e.g. 10, 03, 05, etc.
-
-</template>
-
+  <template #do>
+    <svg-loader name="chart-dondont-1-1" />
+    Use categorical and sequential colors in their predetermined order, e.g. 01, 02, 03, etc.
+  </template>
+  <template #dont>
+    <svg-loader name="chart-dondont-1-2" />
+    Avoid using categorical and sequential colors out of order, e.g. 10, 03, 05, etc.
+  </template>
 </dialtone-usage>
 
 ### Limit chart colors
 
 <dialtone-usage>
-<template #do>
- <div class="d-bar8">
-  <svg-loader class="d-fl1" name="chart-dondont-2-1" />
- </div>
-Where possible, limit the number of colors in a single graph to no more than 6.
-</template>
-
-<template #dont>
- <div class="d-bar8">
-  <svg-loader class="d-fl1" name="chart-dondont-2-2" />
- </div>
-Using more than 6 color may make the chart difficult to parse. Exhaust design possibilities before going beyond.
-</template>
-
+  <template #do>
+    <svg-loader name="chart-dondont-2-1" />
+    Where possible, limit the number of colors in a single graph to no more than 6.
+  </template>
+  <template #dont>
+    <svg-loader name="chart-dondont-2-2" />
+    Using more than 6 color may make the chart difficult to parse. Exhaust design possibilities before going beyond.
+  </template>
 </dialtone-usage>
 
 ### Use multiple colors only with purpose
 
 <dialtone-usage>
-<template #do>
- <div class="d-bar8">
-  <svg-loader class="d-fl1" name="chart-dondont-3-1" />
- </div>
-Use more than one color only when it serves the data's communication.
-</template>
-
-<template #dont>
- <div class="d-bar8">
-  <svg-loader class="d-fl1" name="chart-dondont-3-2" />
- </div>
-Using more than one color without purpose may make the chart difficult to parse and could confuse the user on the data's communication.
-</template>
-
+  <template #do>
+    <svg-loader name="chart-dondont-3-1" />
+    Use more than one color only when it serves the data's communication.
+  </template>
+  <template #dont>
+    <svg-loader name="chart-dondont-3-2" />
+    Using more than one color without purpose may make the chart difficult to parse and could confuse the user on the data's communication.
+  </template>
 </dialtone-usage>
 
 ### Use space to separate data
 
 <dialtone-usage>
-<template #do>
- <div class="d-bar8">
-  <svg-loader class="d-fl1" name="chart-dondont-4-1" />
- </div>
-Use space to separate data and make it easier to understand to the user.
-</template>
-
-<template #dont>
- <div class="d-bar8">
-   <svg-loader class="d-fl1" name="chart-dondont-4-2" />
- </div>
-Avoid mixing the tokens next to each other as much as possible, so keep a space to separate data and more digestible for the user.
-</template>
-
+  <template #do>
+    <svg-loader name="chart-dondont-4-1" />
+    Use space to separate data and make it easier to understand to the user.
+  </template>
+  <template #dont>
+    <svg-loader name="chart-dondont-4-2" />
+    Avoid mixing the tokens next to each other as much as possible, so keep a space to separate data and more digestible for the user.
+  </template>
 </dialtone-usage>
 
 ## Accessibility Guidelines
