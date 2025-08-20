@@ -13,27 +13,27 @@ What we prioritize is semantic clarity, ensuring each color serves a distinct pu
 
 <div class="d-m32"></div>
 
-<div class="d-bgc-brand d-bar8 ">
+<div class="d-bgc-secondary d-bar8">
  <svg-loader name="color-table" />
- </div>
+</div>
 
 ## Use Semantic Color Tokens
 
 Dialtone uses **semantic tokens** for color, representing a color's *purpose* in the UI. See our [See our design token list](https://dialtone.dialpad.com/tokens/) for descriptions guiding their application.
 
-<div class="d-bgc-brand d-bar8"><svg-loader class="d-fl1" name="color-tokens" /></div>
+<div class="d-bgc-secondary d-bar8"><svg-loader class="d-fl1" name="color-tokens" /></div>
 
 <div class="d-m32"></div>
 
 It's crucial to understand that while these semantic tokens are built upon our underlying **base color palette**, the work of selecting the appropriate base color for each specific UI context has already been meticulously done for you.
 
- <div class="d-bgc-brand d-bar8"><svg-loader class="d-fl1" name="color-semantic" /></div>
+<div class="d-bgc-secondary d-bar8"><svg-loader class="d-fl1" name="color-semantic" /></div>
 
 ## Color roles
 
 Color roles describe the purpose of how color is used. Each uses neutrals for general UI and status colors for impact.
 
- <div class="d-bgc-brand d-bar8"><svg-loader class="d-fl1" name="color-roles" /></div>
+<div class="d-bgc-secondary d-bar8"><svg-loader class="d-fl1" name="color-roles" /></div>
 
 We categorize color application by semantic roles such as: **text, surfaces, borders, and themes**. Each uses neutrals for general UI and status colors for impact.
 
@@ -43,12 +43,12 @@ Foreground colors are the visual language of our content, applied across all con
 
 <div class="d-d-grid d-g24 d-g-cols2">
   <div>
-    <div class="d-bgc-brand d-bar8"><svg-loader class="d-fl1" name="color-text-f" /></div>
+    <div class="d-bgc-secondary d-bar8"><svg-loader class="d-fl1" name="color-text-f" /></div>
     <h4>Foreground Text</h4>
     Neutral text colors form the backbone of our content, used for headers, body text, forms, and more.
   </div>
   <div>
-     <div class="d-bgc-brand d-bar8"><svg-loader class="d-fl1" name="color-text-s" /></div>
+     <div class="d-bgc-secondary d-bar8"><svg-loader class="d-fl1" name="color-text-s" /></div>
     <h4>Status Text</h4>
     Status text colors are critical for highlighting key information:
     <ul>
@@ -58,7 +58,7 @@ Foreground colors are the visual language of our content, applied across all con
     </ul>
   </div>
 <div>
-   <div class="d-bgc-brand d-bar8"><svg-loader class="d-fl1" name="color-foreground-icon" /></div>
+   <div class="d-bgc-secondary d-bar8"><svg-loader class="d-fl1" name="color-foreground-icon" /></div>
     <h4>Icons</h4>
     Icon colors profoundly impact readability, user interaction, communicating meaning and status at a glance.
   </div>
@@ -70,10 +70,10 @@ Surface colors define the background of UI elements, from pages and modals to ta
 
 <div class="d-d-grid d-g24 d-g-cols2">
   <div>
-    <div class="d-bgc-brand d-bar8"><svg-loader class="d-fl1" name="color-surface-neutral" /></div>
+    <div class="d-bgc-secondary d-bar8"><svg-loader class="d-fl1" name="color-surface-neutral" /></div>
   </div>
   <div>
-     <div class="d-bgc-brand d-bar8"><svg-loader class="d-fl1" name="color-surface-status" /></div>
+     <div class="d-bgc-secondary d-bar8"><svg-loader class="d-fl1" name="color-surface-status" /></div>
   </div>
 </div>
 
@@ -83,23 +83,29 @@ Borders delineate content areas and components, using neutrals for subtle defini
 
 <div class="d-d-grid d-g24 d-g-cols2">
   <div>
-    <div class="d-bgc-brand d-bar8"><svg-loader class="d-fl1" name="color-border-ai" /></div>
+    <div class="d-bgc-secondary d-bar8"><svg-loader class="d-fl1" name="color-border-ai" /></div>
   </div>
   <div>
-     <div class="d-bgc-brand d-bar8"><svg-loader class="d-fl1" name="color-border-status" /></div>
+     <div class="d-bgc-secondary d-bar8"><svg-loader class="d-fl1" name="color-border-status" /></div>
   </div>
 </div>
 
-### Themable UI Parts
+### Charts
 
-Theme colors are reserved for core UI elements like the top and left bars, ensuring consistent visual treatment across our products.
+View our [Chart Colors](../chart-colors/index.md) documentation for more information.
 
 <div class="d-d-grid d-g24 d-g-cols2">
-  <div>
-    <div class="d-bgc-brand d-bar8"><svg-loader class="d-fl1" name="color-theme-side" /></div>
+  <div class="d-bgc-secondary d-bar8">
+   <svg-loader name="chart-singlecolor" />
   </div>
-  <div>
-     <div class="d-bgc-brand d-bar8"><svg-loader class="d-fl1" name="color-theme-top" /></div>
+  <div class="d-bgc-secondary d-bar8">
+   <svg-loader name="chart-semantic" />
+  </div>
+  <div class="d-bgc-secondary d-bar8">
+   <svg-loader name="chart-categorical" />
+  </div>
+  <div class="d-bgc-secondary d-bar8">
+   <svg-loader name="chart-sequential" />
   </div>
 </div>
 
@@ -111,12 +117,12 @@ Use feedback colors consistently to maintain clear communication and avoid confu
 
 <dialtone-usage class="d-d-grid d-g24 d-g-cols2">
   <template #do>
-    <div class="d-bgc-brand d-bar8">
+    <div class="d-bgc-secondary d-bar8">
       <svg-loader class="d-fl1" name="color-semantics-do" />
     </div>
   </template>
   <template #dont>
-    <div class="d-bgc-brand d-bar8">
+    <div class="d-bgc-secondary d-bar8">
       <svg-loader class="d-fl1" name="color-semantics-dont" />
     </div>
   </template>
@@ -128,12 +134,12 @@ Embrace semantic tokens to separate color values from their contextual meaning, 
 
 <dialtone-usage class="d-d-grid d-g24 d-g-cols2">
   <template #do>
-    <div class="d-bgc-brand d-bar8">
+    <div class="d-bgc-secondary d-bar8">
       <svg-loader class="d-fl1" name="color-token-do" />
     </div>
   </template>
   <template #dont>
-    <div class="d-bgc-brand d-bar8">
+    <div class="d-bgc-secondary d-bar8">
       <svg-loader class="d-fl1" name="color-token-dont" />
     </div>
   </template>
@@ -147,12 +153,12 @@ We primarily employ the APCA for precise contrast evaluation, ensuring readabili
 
 <dialtone-usage class="d-d-grid d-g24 d-g-cols2">
   <template #do>
-    <div class="d-bgc-brand d-bar8">
+    <div class="d-bgc-secondary d-bar8">
       <svg-loader class="d-fl1" name="color-contrast-do" />
     </div>
   </template>
   <template #dont>
-    <div class="d-bgc-brand d-bar8">
+    <div class="d-bgc-secondary d-bar8">
       <svg-loader class="d-fl1" name="color-contrast-dont" />
     </div>
   </template>
@@ -164,12 +170,12 @@ Maintain color consistency across similar components to build intuitive user pat
 
 <dialtone-usage class="d-d-grid d-g24 d-g-cols2">
   <template #do>
-    <div class="d-bgc-brand d-bar8">
+    <div class="d-bgc-secondary d-bar8">
       <svg-loader class="d-fl1" name="color-uniform-do" />
     </div>
   </template>
   <template #dont>
-    <div class="d-bgc-brand d-bar8">
+    <div class="d-bgc-secondary d-bar8">
       <svg-loader class="d-fl1" name="color-uniform-dont" />
     </div>
   </template>
@@ -179,9 +185,9 @@ Maintain color consistency across similar components to build intuitive user pat
 
 Dialtone is designed to seamlessly support both light and dark themes. We supply colors through semantic tokens that automatically adapt their underlying values depending on the active mode, ensuring consistent meaning and optimal contrast in any environment.
 
-<div class="d-bgc-brand d-bgo10 ">
+<div class="d-bgc-secondary d-bgo10 ">
  <svg-loader class="d-fl1" name="color-mode" />
- </div>
+</div>
 
 ## Related
 

@@ -1,7 +1,6 @@
 <script setup>
 import { inject } from 'vue';
-import { extractCSSVariableName } from '@utilities';
-import { sortUtilityClassesByCategory } from '../common/utilities.js';
+import { extractCSSVariableName, sortUtilityClassesByCategory } from '@utilities';
 
 const tokensDocs = inject('tokensDocs');
 const utilityClassDocs = inject('utilityClassDocs');
@@ -10,7 +9,7 @@ const currentTheme = inject('currentTheme');
 
 const props = defineProps({
   /**
-   * List of allowed colors to filter extracted docs
+   * List of colors to exclude from the table
    */
   excludedColors: {
     type: Array,
