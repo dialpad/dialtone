@@ -150,7 +150,7 @@ describe('DtRecipeComboboxMultiSelect Tests', () => {
 
         describe('When LEFT key is pressed', () => {
           beforeEach(async () => {
-            await secondChip.trigger('keyup', { code: 'arrowleft' });
+            await secondChip.trigger('keydown', { code: 'arrowleft' });
           });
 
           it('should focus the first chip', () => {
@@ -166,7 +166,7 @@ describe('DtRecipeComboboxMultiSelect Tests', () => {
 
         describe('When RIGHT key is pressed', () => {
           beforeEach(async () => {
-            await firstChip.trigger('keyup', { code: 'arrowright' });
+            await firstChip.trigger('keydown', { code: 'arrowright' });
           });
 
           it('should focus the second chip', () => {
@@ -194,7 +194,7 @@ describe('DtRecipeComboboxMultiSelect Tests', () => {
 
         describe('When LEFT key is pressed', () => {
           beforeEach(async () => {
-            input.trigger('keyup', { code: 'arrowleft' });
+            input.trigger('keydown', { code: 'arrowleft' });
           });
 
           it('should focus the last chip', () => {
@@ -202,13 +202,35 @@ describe('DtRecipeComboboxMultiSelect Tests', () => {
           });
         });
 
+        describe('When input contains text and LEFT key is pressed', () => {
+          beforeEach(async () => {
+            await input.setValue('a');
+            input.trigger('keydown', { code: 'arrowleft' });
+          });
+
+          it('should keep focus on the input', () => {
+            expect(document.activeElement).toBe(input.element);
+          });
+        });
+
         describe('When BACKSPACE key is pressed', () => {
           beforeEach(async () => {
-            input.trigger('keyup', { code: 'backspace' });
+            input.trigger('keydown', { code: 'backspace' });
           });
 
           it('should focus the last chip', () => {
             expect(document.activeElement).toBe(lastChip.element);
+          });
+        });
+
+        describe('When input contains text and BACKSPACE key is pressed', () => {
+          beforeEach(async () => {
+            await input.setValue('a');
+            input.trigger('keydown', { code: 'backspace' });
+          });
+
+          it('should keep focus on the input', () => {
+            expect(document.activeElement).toBe(input.element);
           });
         });
       });
@@ -220,7 +242,7 @@ describe('DtRecipeComboboxMultiSelect Tests', () => {
 
         describe('When RIGHT key is pressed', () => {
           beforeEach(async () => {
-            lastChip.trigger('keyup', { code: 'arrowright' });
+            lastChip.trigger('keydown', { code: 'arrowright' });
           });
 
           it('should focus the input', () => {
@@ -241,7 +263,7 @@ describe('DtRecipeComboboxMultiSelect Tests', () => {
       'Should emit "remove" event when close the chip and focus back to input',
       () => {
         const chip = chips.at(0);
-        chip.trigger('keyup', { code: 'delete' });
+        chip.trigger('keydown', { code: 'delete' });
         expect(wrapper.emitted().remove[0][0]).toBe('1');
         expect(document.activeElement).toBe(input.element);
       },
