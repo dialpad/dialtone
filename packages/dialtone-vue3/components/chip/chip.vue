@@ -165,6 +165,14 @@ export default {
      * @type {KeyboardEvent}
      */
     'keyup',
+
+    /**
+     * Native chip key down event
+     *
+     * @event keydown
+     * @type {KeyboardEvent}
+     */
+    'keydown',
   ],
 
   data () {
@@ -182,12 +190,16 @@ export default {
           if (this.interactive) this.$emit('click', event);
         },
 
-        keyup: event => {
+        keydown: event => {
           if (event.code?.toLowerCase() === 'delete') {
             this.onClose();
           } else {
-            this.$emit('keyup', event);
+            this.$emit('keydown', event);
           }
+        },
+
+        keyup: event => {
+          this.$emit('keyup', event);
         },
       };
     },

@@ -162,7 +162,7 @@ export default {
     inputListeners () {
       return {
         ...removeClassStyleAttrs(this.$attrs),
-        onClick: _ => this.toggleCheckedValue(),
+        onClick: () => this.toggleCheckedValue(),
       };
     },
 

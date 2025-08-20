@@ -1,4 +1,9 @@
 let timer;
+const isBaseColorClass = (string) => /d-(bgc|fc|bc|bgg)-\w+-\d{2,4}$/.test(string);
+const isChartColorClass = (string) => /chart/.test(string);
+const isSingleColor = (token) => /(neutral|transparent|current|unset)/.test(token);
+const isCategorical = (token) => /(categorical)/.test(token);
+const isSequential = (token) => /(sequential)/.test(token);
 
 /*
 * Set's a global timer to debounce the execution of a function.
@@ -51,16 +56,18 @@ export const ReleaseNoteFormatter = {
 };
 
 export function extractUtilityClasses (utilityClassDocs, prefix) {
-  return Object.keys(utilityClassDocs)
-    .filter(className => className.startsWith(prefix))
-    .sort(colorSorter)
-    .reduce((result, className) => {
-      result[className] = utilityClassDocs[className]
-        .values
-        .map(declaration => `${declaration.prop}: ${declaration.value};`)
-        .join('\n');
-      return result;
-    }, {});
+  let utilityClasses = Object.keys(utilityClassDocs)
+    .filter(className => className.startsWith(prefix));
+
+  utilityClasses = sortUtilityClassesByCategory(utilityClasses);
+
+  return utilityClasses.reduce((result, className) => {
+    result[className] = utilityClassDocs[className]
+      .values
+      .map(declaration => `${declaration.prop}: ${declaration.value};`)
+      .join('\n');
+    return result;
+  }, {});
 }
 
 export function extractCSSVariableName (propValue) {
@@ -70,13 +77,48 @@ export function extractCSSVariableName (propValue) {
 }
 
 /**
- * Sorts the colors putting the base colors at the bottom of the list.
- * @param {string} a
+ * Sorts alphabetically, considering numbers.
+ * @param a
+ * @param b
  * @returns {number}
  */
-export function colorSorter (a) {
-  if (/\d{2,4}$/.test(a)) return 1;
-  return -1;
+export function alphabeticalSorter (a, b) {
+  return a.localeCompare(b, 'en', { numeric: true });
+}
+
+/**
+ *
+ * @param utilityClasses {Array<String>}
+ * @returns {Array<String>}
+ */
+export function sortUtilityClassesByCategory (utilityClasses) {
+  const categories = new Map();
+
+  // Determines the order of the categories
+  categories.set('single_color', []);
+  categories.set('semantic', []);
+  categories.set('chart_single_color', []);
+  categories.set('chart_semantic', []);
+  categories.set('chart_categorical', []);
+  categories.set('chart_sequential', []);
+  categories.set('base', []);
+
+  utilityClasses
+    .sort(alphabeticalSorter)
+    .reduce((result, className) => {
+      if (isChartColorClass(className)) {
+        if (isSingleColor(className)) result.set('chart_single_color', [...result.get('chart_single_color'), className]);
+        else if (isCategorical(className)) result.set('chart_categorical', [...result.get('chart_categorical'), className]);
+        else if (isSequential(className)) result.set('chart_sequential', [...result.get('chart_sequential'), className]);
+        else result.set('chart_semantic', [...result.get('chart_semantic'), className]);
+      } else if (isBaseColorClass(className)) result.set('base', [...result.get('base'), className]);
+      else if (isSingleColor(className)) result.set('single_color', [...result.get('single_color'), className]);
+      else result.set('semantic', [...result.get('semantic'), className]);
+
+      return result;
+    }, categories);
+
+  return Array.from(categories.values()).flat();
 }
 
 export default {
@@ -84,5 +126,6 @@ export default {
   ReleaseNoteFormatter,
   extractUtilityClasses,
   extractCSSVariableName,
-  colorSorter,
+  alphabeticalSorter,
+  sortUtilityClassesByCategory,
 };

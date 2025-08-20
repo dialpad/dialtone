@@ -146,6 +146,7 @@ import { DtIcon } from '@/components/icon';
 import { DtButton } from '@/components/button';
 import { DtAvatar } from '@/components/avatar';
 
+// eslint-disable-next-line storybook/default-exports
 const cardData = [{
   name: 'Jaqueline Nackos', src: avatar2, time: '4:54 PM', default: `<p class="d-fs-200 d-lh-400 d-wmx90ch">
   Elementum fames nullam elementum velit proin vitae aliquet.

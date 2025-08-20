@@ -291,7 +291,7 @@ export default {
   },
 
   computed: {
-    // eslint-disable-next-line complexity
+     
     tippyProps () {
       return {
         offset: this.offset,
@@ -378,7 +378,11 @@ export default {
     calculateAnchorZindex () {
       // if a modal is currently active render at modal-element z-index, otherwise at tooltip z-index
       if (returnFirstEl(this.$el).getRootNode()
-        .querySelector('.d-modal[aria-hidden="false"], .d-modal--transparent[aria-hidden="false"]') ||
+        .querySelector(
+          `.d-modal[aria-hidden="false"],
+          .d-modal--transparent[aria-hidden="false"],
+          .d-modal:not([aria-hidden]),
+          .d-modal--transparent:not([aria-hidden])`) ||
         // Special case because we don't have any dialtone drawer component yet. Render at 651 when
         // anchor of popover is within a drawer.
         returnFirstEl(this.$el).closest('.d-zi-drawer')) {

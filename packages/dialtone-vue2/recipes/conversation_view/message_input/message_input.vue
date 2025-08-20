@@ -162,6 +162,7 @@
                 @add-emoji="$emit('add-emoji')"
                 @skin-tone="onSkinTone"
                 @selected-emoji="(emoji) => onSelectEmoji(emoji, close)"
+                @scroll-bottom-reached="$emit('emoji-scroll-bottom-reached')"
               />
             </template>
           </dt-popover>
@@ -747,6 +748,12 @@ export default {
      * @type {Boolean}
      */
     'add-emoji',
+
+    /**
+     * Emitted when the emoji picker scroll reaches the bottom
+     * @event emoji-scroll-bottom-reached
+     */
+    'emoji-scroll-bottom-reached',
   ],
 
   data () {
@@ -858,7 +865,6 @@ export default {
       }
     },
 
-    // eslint-disable-next-line complexity
     handleTopbarClick (type) {
       const editor = this.$refs.richTextEditor?.editor;
       // Key is the name returned in the event, value is the name of the TipTap command function to run.
@@ -879,6 +885,7 @@ export default {
     },
 
     // Checks if the node currently selected is active ex/ the bold button is active if the selected text is bold
+    // eslint-disable-next-line complexity
     isSelectionActive (type) {
       if (['bulletList', 'orderedList'].includes(type)) {
         return this.lastActiveNodes(this.$refs.richTextEditor?.editor?.state, [{ type: 'bulletList' }, { type: 'orderedList' }]).includes(type) && this.isFocused;
@@ -950,6 +957,8 @@ export default {
         type: 'emoji',
         attrs: {
           code: emoji.shortname,
+          image: emoji.image,
+          name: emoji.name,
         },
       });
       this.$emit('selected-emoji', emoji);

@@ -1,0 +1,50 @@
+{
+  "shell": {
+    "base": {
+      "color": {
+        "surface": {
+          "value": "{color.teal.100}",
+          "type": "color"
+        },
+        "border": {
+          "value": "#c6e4ff",
+          "type": "color"
+        },
+        "accent": {
+          "value": "{color.purple.550}",
+          "type": "color"
+        }
+      },
+      "action": {
+        "color": {
+          "background": {
+            "primary": {
+              "value": "#ffdfbf",
+              "type": "color"
+            },
+            "secondary": {
+              "value": "#ffdfbf",
+              "type": "color"
+            },
+            "muted": {
+              "value": "#ffdfbf",
+              "type": "color"
+            }
+          }
+        }
+      }
+    },
+    "logo": {
+      "color": {
+        "star": {
+          "value": "{color.purple.1000}",
+          "type": "color"
+        },
+        "wordmark": {
+          "value": "{color.purple.1000}",
+          "type": "color"
+        }
+      }
+    }
+  }
+}

@@ -44,7 +44,7 @@
                 <div
                   :style="{
                     color: `var(${color.variable})`,
-                    'background-color': `var(--dt-theme-mention-color-background)`,
+                    'background-color': `var(--dt-shell-mention-color-background)`,
                   }"
                   class="d-bar-circle d-w42 d-h42 d-fs-300 d-d-flex d-ai-center d-jc-center d-fw-medium"
                 >
@@ -87,18 +87,20 @@
 
 <script setup>
 import { inject } from 'vue';
+import { alphabeticalSorter } from '@utilities';
 
 const tokensDocs = inject('tokensDocs');
-const excludedThemeColors = ['--dt-theme-color-base'];
+const excludedThemeColors = ['--dt-shell-base'];
 const themeColors = Object.keys(tokensDocs)
   .filter(token =>
     !/-(h|s|l|a|hsl|hsla)$/.test(token) &&
-    /--dt-theme-(\w+)-.+/.test(token) &&
-    !excludedThemeColors.includes(token),
+    /--dt-shell-(\w+)-.+/.test(token) &&
+    !excludedThemeColors.some(excluded => token.startsWith(excluded)),
   )
+  .sort(alphabeticalSorter)
   .map(token => {
     return {
-      section: token.replace(/--dt-theme-([\w-]+)-color.+/, '$1').replace('-', ' '),
+      section: token.replace(/--dt-shell(-\w+)?-color-.*/, '$1').replace('-', ' ') || '-',
       states: getTokenStates(token),
       property: getTokenProperty(token),
       variable: token,
@@ -106,9 +108,9 @@ const themeColors = Object.keys(tokensDocs)
   });
 
 function getTokenProperty (token) {
-  if (token.includes('-color-foreground')) return 'color';
-  else if (token.includes('-color-background')) return 'background-color';
-  else if (token.includes('-color-border')) return 'border-color';
+  if (token.includes('foreground')) return 'color';
+  else if (['background', 'surface', 'presence', 'logo'].some(suffix => token.includes(suffix))) return 'background-color';
+  else if (token.includes('border')) return 'border-color';
   else return '-';
 }
 

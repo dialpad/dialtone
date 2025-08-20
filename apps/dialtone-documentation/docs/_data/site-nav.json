@@ -126,6 +126,10 @@
             {
               "text": "Color Palette",
               "link": "/design/colors/palette/"
+            },
+           {
+              "text": "Chart Colors",
+              "link": "/design/colors/chart-colors/"
             }
 
           ]

@@ -50,13 +50,19 @@ export function setCustomEmojiJson (json) {
  * Validate custom emoji json
  */
 export function validateCustomEmojiJson (json) {
-  const customEmojiProps = ['extension', 'custom'];
-  const customEmojiRequiredProps = [
-    'name',
-    'category',
-    'shortname',
-    'extension',
+  const customEmojiProps = [
     'custom',
+    'date_added',
+    'image',
+  ];
+  const customEmojiRequiredProps = [
+    'date_added',
+    'image',
+    'unicode_output',
+    'shortname',
+    'shortname_alternates',
+    'custom',
+    'name',
   ];
 
   /**

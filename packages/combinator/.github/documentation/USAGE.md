@@ -5,6 +5,7 @@ The purpose of this document is to instruct how to implement Dialtone Combinator
 `$COMPONENT$` represents the component you want to combinate™ from Dialtone Vue.
 
 ## Combinator
+
 _Required_
 
 ### Import
@@ -21,19 +22,20 @@ import { $COMPONENT$ } from '@dialpad/dialtone-vue';
 import { DtcCombinator } from '@dialpad/dialtone-combinator';
 ```
 
-*Ideally component-documentation should be included as an export in dialtone-vue, 
+*Ideally component-documentation should be included as an export in dialtone-vue,
 but it isn't currently, so it has to be imported using the node_modules path.
 
 ### Use
 
 ```vue
-<dtc-combinator 
+<dtc-combinator
   :component="$COMPONENT$"
   :documentation="documentation"
 />
 ```
 
 ## Component Library
+
 _Optional_, _Recommended_
 
 A library _should_ be provided to allow rendering of external components
@@ -59,7 +61,7 @@ import { ref } from 'vue';
 ### Use
 
 ```vue
-<dtc-combinator 
+<dtc-combinator
   :component="dialtoneVue.DtButton"
   :documentation="documentation"
   :library="dialtoneVueComponents"
@@ -98,11 +100,11 @@ overridden by declaring it and setting custom data on members.
 <pre>
 <code>
 {
-    VARIANT_NAME: 
+    VARIANT_NAME:
     {
-        MEMBER_GROUP: 
+        MEMBER_GROUP:
         {
-            MEMBER: 
+            MEMBER:
             {
                 MEMBER_FIELD: VALUE,
                 ...
@@ -152,6 +154,7 @@ Any data provided will be set on the 'info' object for the member it is provided
 Most of the time this is overriding data generated from the Dialtone Vue documentation.
 
 There are some special fields that are intended to be used just by variants:
+
 * hideControl: Hides the control for the member in the sidebar
 * lockControl: Locks the control for the member in the sidebar
 
@@ -160,6 +163,7 @@ A good place to look to see many of the fields that are used by a member is
 underlying control.
 
 ## Variant Bank
+
 _Optional_
 
 A storage of shared variants can be imported to use with the combinator.
@@ -178,7 +182,7 @@ import { ref } from 'vue';
 ### Use
 
 ```vue
-<dtc-combinator 
+<dtc-combinator
   :component="DtButton"
   :documentation="documentation"
   :variants="componentVariants"

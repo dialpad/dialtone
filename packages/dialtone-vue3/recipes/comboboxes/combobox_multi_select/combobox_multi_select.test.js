@@ -156,7 +156,7 @@ describe('DtRecipeComboboxMultiSelect Tests', () => {
 
         describe('When LEFT key is pressed', () => {
           beforeEach(async () => {
-            await secondChip.trigger('keyup', { code: 'arrowleft' });
+            await secondChip.trigger('keydown', { code: 'arrowleft' });
           });
 
           it('should focus the first chip', () => {
@@ -172,7 +172,7 @@ describe('DtRecipeComboboxMultiSelect Tests', () => {
 
         describe('When RIGHT key is pressed', () => {
           beforeEach(async () => {
-            await firstChip.trigger('keyup', { code: 'arrowright' });
+            await firstChip.trigger('keydown', { code: 'arrowright' });
           });
 
           it('should focus the second chip', () => {
@@ -191,26 +191,44 @@ describe('DtRecipeComboboxMultiSelect Tests', () => {
 
       describe('When input is focused', () => {
         beforeEach(async () => {
-          input.trigger('focus');
+          await input.trigger('focus');
         });
 
         describe('When LEFT key is pressed', () => {
           beforeEach(async () => {
-            input.trigger('keyup', { code: 'arrowleft' });
+            input.trigger('keydown', { code: 'arrowleft' });
           });
 
           it('should focus the last chip', () => {
             expect(document.activeElement).toBe(lastChip.element);
+          });
+        });
+
+        describe('When input contains text and LEFT key is pressed', () => {
+          it('should not call moveFromInputToChip when input has text', async () => {
+            const spy = vi.spyOn(wrapper.vm, 'moveFromInputToChip');
+            await input.setValue('a');
+            await input.trigger('keydown', { code: 'arrowleft' });
+            expect(spy).not.toHaveBeenCalled();
           });
         });
 
         describe('When BACKSPACE key is pressed', () => {
           beforeEach(async () => {
-            input.trigger('keyup', { code: 'backspace' });
+            input.trigger('keydown', { code: 'backspace' });
           });
 
           it('should focus the last chip', () => {
             expect(document.activeElement).toBe(lastChip.element);
+          });
+        });
+
+        describe('When input contains text and BACKSPACE key is pressed', () => {
+          it('should not call moveFromInputToChip when input has text', async () => {
+            const spy = vi.spyOn(wrapper.vm, 'moveFromInputToChip');
+            await input.setValue('a');
+            await input.trigger('keydown', { code: 'backspace' });
+            expect(spy).not.toHaveBeenCalled();
           });
         });
       });
@@ -222,7 +240,7 @@ describe('DtRecipeComboboxMultiSelect Tests', () => {
 
         describe('When RIGHT key is pressed', () => {
           beforeEach(async () => {
-            lastChip.trigger('keyup', { code: 'arrowright' });
+            lastChip.trigger('keydown', { code: 'arrowright' });
           });
 
           it('should focus the input', () => {
@@ -243,7 +261,7 @@ describe('DtRecipeComboboxMultiSelect Tests', () => {
       'Should emit "remove" event when close the chip and focus back to input',
       () => {
         const chip = chips.at(0);
-        chip.trigger('keyup', { code: 'delete' });
+        chip.trigger('keydown', { code: 'delete' });
         expect(wrapper.emitted().remove[0][0]).toBe('1');
         expect(document.activeElement).toBe(input.element);
       },

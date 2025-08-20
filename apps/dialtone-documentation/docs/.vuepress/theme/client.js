@@ -46,7 +46,7 @@ export default defineClientConfig({
       await registerDialtoneIcons(app);
       await importDocumentation(app);
     }
-    router.options.scrollBehavior = async (to, from, savedPosition) => {
+    router.options.scrollBehavior = async (to) => {
       if (to.hash) {
         const html = document.querySelector('html');
         // vue-router does not incorporate scroll-padding-top on its own.

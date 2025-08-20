@@ -31,6 +31,20 @@ Use `d-ww-break-word` to allow unbreakable words to be broken. Is a more conserv
 <p class="d-ww-break-word">...</p>
 ```
 
+## Anywhere
+
+Use `d-ww-anywhere` to break words at any point in the string (not just at allowed break points) to prevent long strings from overflowing their container.
+
+<code-well-header>
+  <div class="d-bgc-moderate d-py8 d-px16 d-bar8 lg:d-w216 d-w332">
+    <p class="d-ww-break-word">Here's an example sentence to show how word-wrap works. Thisisasignlewordtodenotethedifferencebetweenthedifferentwaytowrapaword. Vivamus ullamcorperatduiaultrices eu lobortis nulla, sed vulputate orci. 这是一个中文例句，以举例说明断字的工作方式。単語分割の動作の例を示す日本語のサンプル文は次のとおりです。다음은 단어 분리 작동 방식의 예를 제공하는 한국어 샘플 문장입니다.</p>
+  </div>
+</code-well-header>
+
+```html
+<p class="d-ww-anywhere">...</p>
+```
+
 ## Initial
 
 Use `d-ww-initial`to set this property to its default value.
@@ -61,13 +75,12 @@ Use `d-ww-inherit` to inherit this property from its parent element.
 
 ## Classes
 
-<utility-class-table>
-  <template #content>
-    <tbody>
-      <tr v-for="i in ['normal', 'break-word', 'initial', 'inherit']">
-        <th scope="row" class="d-code--sm d-docsite-code">.d-ww-{{ i }}</th>
-        <td class="d-code--sm">word-wrap: {{ i }} !important;</td>
-      </tr>
-    </tbody>
-  </template>
-</utility-class-table>
+<new-utility-class-table :classes="wordWrap"></new-utility-class-table>
+
+<script setup>
+  import { inject } from 'vue';
+  import { extractUtilityClasses } from '@utilities';
+
+  const utilityClassDocs = inject('utilityClassDocs');
+  const wordWrap = extractUtilityClasses(utilityClassDocs, 'd-ww-');
+</script>
