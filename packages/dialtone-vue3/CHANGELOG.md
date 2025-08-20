@@ -1,3 +1,10 @@
+## [3.188.1](https://github.com/dialpad/dialtone/compare/dialtone-vue3/v3.188.0...dialtone-vue3/v3.188.1) (2025-08-20)
+
+
+### Bug Fixes
+
+* **Combobox Multi Select:** NO-JIRA prevent losing focus on input ([#875](https://github.com/dialpad/dialtone/issues/875)) ([d064f61](https://github.com/dialpad/dialtone/commit/d064f61d21f32a140736056c392478426b85ecae))
+
 # [3.188.0](https://github.com/dialpad/dialtone/compare/dialtone-vue3/v3.187.4...dialtone-vue3/v3.188.0) (2025-08-19)
 
 
