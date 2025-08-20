@@ -1,3 +1,15 @@
+## [9.132.1](https://github.com/dialpad/dialtone/compare/dialtone/v9.132.0...dialtone/v9.132.1) (2025-08-20)
+
+
+### Bug Fixes
+
+* **Combobox Multi Select:** NO-JIRA prevent losing focus on input ([#875](https://github.com/dialpad/dialtone/issues/875)) ([d064f61](https://github.com/dialpad/dialtone/commit/d064f61d21f32a140736056c392478426b85ecae))
+
+
+### Documentation
+
+* **Color:** DLT-2568 chart design tokens ([#838](https://github.com/dialpad/dialtone/issues/838)) ([c0f0c36](https://github.com/dialpad/dialtone/commit/c0f0c36a88fb6e5a90c51efb916801350ee42335))
+
 # [9.132.0](https://github.com/dialpad/dialtone/compare/dialtone/v9.131.1...dialtone/v9.132.0) (2025-08-19)
 
 
