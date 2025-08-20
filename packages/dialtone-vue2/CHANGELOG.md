@@ -1,3 +1,10 @@
+## [2.196.1](https://github.com/dialpad/dialtone/compare/dialtone-vue2/v2.196.0...dialtone-vue2/v2.196.1) (2025-08-20)
+
+
+### Bug Fixes
+
+* **Combobox Multi Select:** NO-JIRA prevent losing focus on input ([#875](https://github.com/dialpad/dialtone/issues/875)) ([d064f61](https://github.com/dialpad/dialtone/commit/d064f61d21f32a140736056c392478426b85ecae))
+
 # [2.196.0](https://github.com/dialpad/dialtone/compare/dialtone-vue2/v2.195.5...dialtone-vue2/v2.196.0) (2025-08-19)
 
 
