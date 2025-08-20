@@ -2,20 +2,30 @@ import js from '@eslint/js';
 import vue from 'eslint-plugin-vue';
 import vueAccessibility from 'eslint-plugin-vuejs-accessibility';
 import jest from 'eslint-plugin-jest';
-import globals from 'globals';
+// Define globals manually instead of importing from 'globals' package
 
 export default [
   js.configs.recommended,
-  ...vue.configs['flat/base'],
-  ...vue.configs['flat/recommended'],
-  ...vueAccessibility.configs['flat/recommended'],
+  // Use Vue recommended config
+  vue.configs.recommended,
+  // Use Vue accessibility recommended config
+  vueAccessibility.configs.recommended,
   {
     languageOptions: {
       ecmaVersion: 'latest',
       sourceType: 'module',
       globals: {
-        ...globals.node,
-        ...globals.browser,
+        // Node.js globals
+        __dirname: 'readonly',
+        __filename: 'readonly',
+        exports: 'writable',
+        module: 'readonly',
+        require: 'readonly',
+        // Browser globals
+        document: 'readonly',
+        navigator: 'readonly',
+        window: 'readonly',
+        // VuePress specific
         __VUEPRESS_SSR__: 'readonly',
       },
     },
@@ -122,9 +132,25 @@ export default [
     },
     languageOptions: {
       globals: {
-        ...globals.browser,
-        ...globals.node,
-        ...globals.jest,
+        // Browser globals
+        document: 'readonly',
+        navigator: 'readonly',
+        window: 'readonly',
+        // Node.js globals
+        __dirname: 'readonly',
+        __filename: 'readonly',
+        exports: 'writable',
+        module: 'readonly',
+        require: 'readonly',
+        // Jest globals
+        jest: 'readonly',
+        expect: 'readonly',
+        test: 'readonly',
+        describe: 'readonly',
+        beforeEach: 'readonly',
+        afterEach: 'readonly',
+        beforeAll: 'readonly',
+        afterAll: 'readonly',
       },
     },
     rules: {
