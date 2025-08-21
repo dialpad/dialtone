@@ -62,9 +62,8 @@ Use `d-divide-x{n}` to create a divider between an element's child items.
 
 <script setup>
   import { inject } from 'vue';
-  import { extractUtilityClasses, sortBaseColors } from '@utilities';
+  import { extractUtilityClasses } from '@utilities';
 
   const utilityClassDocs = inject('utilityClassDocs');
-  const colors = extractUtilityClasses(utilityClassDocs, 'd-divide-');
-  const divideColors = sortBaseColors(colors);
+  const divideColors = extractUtilityClasses(utilityClassDocs, 'd-divide-');
 </script>

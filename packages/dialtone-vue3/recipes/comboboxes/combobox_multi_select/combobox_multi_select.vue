@@ -37,7 +37,7 @@
             :style="{ maxWidth: chipMaxWidth }"
             :size="CHIP_SIZES[size]"
             v-on="chipListeners"
-            @keyup.backspace="onChipRemove(item)"
+            @keydown.backspace="onChipRemove(item)"
             @close="onChipRemove(item)"
           >
             {{ item }}
@@ -404,6 +404,14 @@ export default {
     'keyup',
 
     /**
+     * Native keydown event
+     *
+     * @event keydown
+     * @type {KeyboardEvent}
+      */
+    'keydown',
+
+    /**
      * Event fired when combobox item is highlighted
      *
      * @event combobox-highlight
@@ -433,9 +441,9 @@ export default {
 
     chipListeners () {
       return {
-        keyup: event => {
-          this.onChipKeyup(event);
-          this.$emit('keyup', event);
+        keydown: event => {
+          this.onChipKeyDown(event);
+          this.$emit('keydown', event);
         },
       };
     },
@@ -449,8 +457,11 @@ export default {
           }
         },
 
+        keydown: event => {
+          this.onInputKeyDown(event);
+        },
+
         keyup: event => {
-          this.onInputKeyup(event);
           this.$emit('keyup', event);
         },
 
@@ -581,7 +592,7 @@ export default {
       return this.$refs.input?.$refs.input;
     },
 
-    onChipKeyup (event) {
+    onChipKeyDown (event) {
       const key = event.code?.toLowerCase();
       if (key === 'arrowleft') {
         // Move to the previous chip
@@ -597,11 +608,15 @@ export default {
       }
     },
 
-    onInputKeyup (event) {
+    onInputKeyDown (event) {
       const key = event.code?.toLowerCase();
       // If the cursor is at the start of the text,
       // press 'backspace' or 'left' focuses the last chip
       if (this.selectedItems.length > 0 && event.target.selectionStart === 0) {
+        // if there is selected text, do not focus the last chip
+        if (event.target.selectionEnd !== event.target.selectionStart) {
+          return;
+        }
         if (key === 'backspace' || key === 'arrowleft') {
           this.moveFromInputToChip();
         }

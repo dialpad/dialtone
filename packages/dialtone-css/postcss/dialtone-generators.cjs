@@ -107,7 +107,8 @@ function colorUtilities (clonedSource, declaration) {
   const foregroundColorsRegex = /dtColorForeground.+/i;
   const surfaceColorsRegex = /dtColorSurface.+/i;
   const borderColorsRegex = /dtColorBorder.+/i;
-  const baseColorsRegex = /dtColor(?!(Foreground|Surface|Border|Brand|Gradient|Link)).+/i;
+  const baseColorsRegex = /dtColor(?!(Foreground|Surface|Border|Brand|Gradient|Link|Chart)).+/i;
+  const chartColorsRegex = /dtColorChart.+/i;
 
   const tokens = { ...TokensBaseLight, ...TokensDpLight };
 
@@ -115,6 +116,7 @@ function colorUtilities (clonedSource, declaration) {
   const foregroundColors = Object.entries(tokens).filter(([key]) => foregroundColorsRegex.test(key)).reduce(processColors, []);
   const surfaceColors = Object.entries(tokens).filter(([key]) => surfaceColorsRegex.test(key)).reduce(processColors, []);
   const borderColors = Object.entries(tokens).filter(([key]) => borderColorsRegex.test(key)).reduce(processColors, []);
+  const chartColors = Object.entries(tokens).filter(([key]) => chartColorsRegex.test(key)).reduce(processColors, []);
 
   function _generateColorNodes (token, prop, opacityVar) {
     return [
@@ -200,6 +202,10 @@ function colorUtilities (clonedSource, declaration) {
 
     _generateBorderColors(token, colorName);
     _generateDividerColors(token, colorName);
+  });
+  chartColors.forEach(({ token, colorName }) => {
+    _generateBorderColors(token, colorName);
+    _generateSurfaceColors(token, colorName);
   });
 }
 

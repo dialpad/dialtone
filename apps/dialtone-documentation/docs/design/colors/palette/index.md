@@ -51,7 +51,7 @@ Foreground colors distinguishing important information with a status role.
 
 ## Surface
 
-Background colors for application UI surfaces. Surface colors are containing blocks — such as pages, modals, tables, headers, and cards — containing foreground content or elements.
+Background colors for application UI surfaces. Surface colors are container blocks — such as pages, modals, tables, headers, and cards — containing foreground content or elements.
 
 <DesignColorTable :excluded-colors="surfaceColorsExclusionList" class-prefix="d-bgc-">
   <template #example="{color}">
@@ -79,7 +79,7 @@ Define the edge of key content area, components, or surfaces.
   </template>
 </DesignColorTable>
 
-## Theme
+## Theme Shell
 
 CSS variables for themeable parts of the UI, primarily targeting the top bar and left bar.
 

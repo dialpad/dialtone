@@ -1,3 +1,33 @@
+## [9.132.1](https://github.com/dialpad/dialtone/compare/dialtone/v9.132.0...dialtone/v9.132.1) (2025-08-20)
+
+
+### Bug Fixes
+
+* **Combobox Multi Select:** NO-JIRA prevent losing focus on input ([#875](https://github.com/dialpad/dialtone/issues/875)) ([d064f61](https://github.com/dialpad/dialtone/commit/d064f61d21f32a140736056c392478426b85ecae))
+
+
+### Documentation
+
+* **Color:** DLT-2568 chart design tokens ([#838](https://github.com/dialpad/dialtone/issues/838)) ([c0f0c36](https://github.com/dialpad/dialtone/commit/c0f0c36a88fb6e5a90c51efb916801350ee42335))
+
+# [9.132.0](https://github.com/dialpad/dialtone/compare/dialtone/v9.131.1...dialtone/v9.132.0) (2025-08-19)
+
+
+### Bug Fixes
+
+* **Message Input:** NO-JIRA replace internal input value when adding custom emojis ([#868](https://github.com/dialpad/dialtone/issues/868)) ([e0874a3](https://github.com/dialpad/dialtone/commit/e0874a34672ecba01c96e9a4f907d7c8f2c1c3d3))
+
+
+### Documentation
+
+* **Color:** DLT-2570 chart tokens ([#865](https://github.com/dialpad/dialtone/issues/865)) ([7f2b06d](https://github.com/dialpad/dialtone/commit/7f2b06d9d6095098f29ff2ac70f8078f4cf651ae))
+* **Toggle:** DLT-2623 fix vue 3 toggle variants ([#871](https://github.com/dialpad/dialtone/issues/871)) ([e981daa](https://github.com/dialpad/dialtone/commit/e981daa84f2437fca29f9cf494647d36724ef4de))
+
+
+### Features
+
+* **Message Input:** DLT-2714 add scroll-bottom-reached event on input ([#873](https://github.com/dialpad/dialtone/issues/873)) ([ce22b39](https://github.com/dialpad/dialtone/commit/ce22b398315ce29761e8c672156c5cb273fa7271))
+
 ## [9.131.1](https://github.com/dialpad/dialtone/compare/dialtone/v9.131.0...dialtone/v9.131.1) (2025-08-12)
 
 

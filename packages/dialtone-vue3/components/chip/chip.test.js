@@ -141,7 +141,7 @@ describe('DtChip Tests', () => {
 
     describe('When delete is pressed on a chip', () => {
       it('should emit close event', async () => {
-        await chip.trigger('keyup', { code: 'DELETE' });
+        await chip.trigger('keydown', { code: 'DELETE' });
 
         expect('close' in wrapper.emitted()).toBeTruthy();
       });

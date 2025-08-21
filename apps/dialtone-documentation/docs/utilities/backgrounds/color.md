@@ -123,12 +123,11 @@ Use `d-bgo{stop}` to change an element's background color opacity. You can also 
 
 <script setup>
   import { inject } from 'vue';
-  import { extractUtilityClasses, sortBaseColors } from '@utilities';
+  import { extractUtilityClasses } from '@utilities';
 
   /*Excluded classes that have incorrect naming, should be renamed to `d-bgclip` to avoid conflicts*/
   const excludedClasses = ['d-bgc-border-box', 'd-bgc-content-box', 'd-bgc-padding-box', 'd-bgc-text'];
 
   const utilityClassDocs = inject('utilityClassDocs');
-  const colors = extractUtilityClasses(utilityClassDocs, 'd-bgc-');
-  const backgroundColors = sortBaseColors(colors);
+  const backgroundColors = extractUtilityClasses(utilityClassDocs, 'd-bgc-');
 </script>
