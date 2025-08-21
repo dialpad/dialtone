@@ -234,7 +234,7 @@
 
   &__label {
     flex: 0 1;
-    min-width: 0;
+    min-inline-size: 0;
   }
 
   &__omega {
@@ -263,15 +263,15 @@
   }
 
   &__unread-count-badge {
-    border-top-right-radius: var(--dt-size-radius-0);
-    border-bottom-right-radius: var(--dt-size-radius-0);
+    border-start-end-radius: var(--dt-size-radius-0);
+    border-end-end-radius: var(--dt-size-radius-0);
   }
 
   &__unread-mention-count-badge {
     color: var(--dt-theme-mention-color-foreground-strong);
     background-color: var(--dt-theme-mention-color-background-strong);
-    border-top-left-radius: var(--dt-size-radius-0);
-    border-bottom-left-radius: var(--dt-size-radius-0);
+    border-start-start-radius: var(--dt-size-radius-0);
+    border-end-start-radius: var(--dt-size-radius-0);
   }
 
   &__unread-mention-only-count-badge {
@@ -313,7 +313,7 @@
       display: inline-flex;
       align-items: center;
       justify-content: flex-end;
-      min-width: var(--dt-size-600);
+      min-inline-size: var(--dt-size-600);
       block-size: var(--dt-size-500);
     }
   }
