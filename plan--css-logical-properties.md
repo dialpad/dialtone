@@ -170,62 +170,226 @@ node scripts/migrate-to-logical.js --path="utilities/" --backup
 node scripts/migrate-to-logical.js --report-only --path="components/"
 ```
 
-#### 2. ESLint/Stylelint Rules
+#### 2. Stylelint Rules Implementation
 
-**Custom Stylelint Plugin (`stylelint-plugin-logical-properties`):**
+**Integration with Existing Dialtone Stylelint Plugin:**
 
-**Rules to implement:**
+Based on the existing project structure, CSS Logical Properties rules should be added to the existing `@dialpad/stylelint-plugin-dialtone` plugin located at `/packages/stylelint-plugin-dialtone/`.
 
-- `prefer-logical-properties`: Warn when physical properties are used
-- `no-physical-margins`: Error on margin-left/right/top/bottom
-- `no-physical-padding`: Error on padding-left/right/top/bottom
-- `no-physical-borders`: Error on border directional properties
-- `no-physical-position`: Error on top/right/bottom/left
-- `consistent-logical-notation`: Enforce consistent logical property syntax
-
-**Configuration example:**
-
-```json
-{
-  "plugins": ["logical-properties"],
-  "rules": {
-    "logical-properties/prefer-logical-properties": "warn",
-    "logical-properties/no-physical-margins": "error",
-    "logical-properties/no-physical-padding": "error"
-  }
-}
+**Current Dialtone Plugin Structure:**
+```
+packages/stylelint-plugin-dialtone/
+├── lib/
+│   ├── index.js                    # Plugin entry point
+│   └── rules/
+│       ├── no-mixins.js           # Existing rule
+│       ├── use-dialtone-tokens.js # Existing rule
+│       └── recommend-font-style-tokens.js # Existing rule
+├── docs/rules/                     # Rule documentation
+└── tests/lib/rules/               # Rule tests
 ```
 
-**Auto-fix capability:** Rules should support `--fix` flag to automatically convert properties
+**New Rules to Add:**
 
-#### 3. Pre-commit Hooks
+1. **`prefer-logical-properties`** - Primary rule that detects and auto-fixes physical properties
+2. **`no-physical-directional-properties`** - Stricter rule that errors on any physical directional property
 
-**Husky + lint-staged configuration:**
+**Rule Implementation Files to Create:**
 
-```json
-// package.json
-{
-  "lint-staged": {
-    "*.{css,less}": [
-      "stylelint --fix --plugin=logical-properties",
-      "node scripts/check-logical-properties.js"
-    ]
+1. `/packages/stylelint-plugin-dialtone/lib/rules/prefer-logical-properties.js`
+2. `/packages/stylelint-plugin-dialtone/lib/rules/no-physical-directional-properties.js`
+3. `/packages/stylelint-plugin-dialtone/docs/rules/prefer-logical-properties.md`
+4. `/packages/stylelint-plugin-dialtone/docs/rules/no-physical-directional-properties.md`
+5. `/packages/stylelint-plugin-dialtone/tests/lib/rules/prefer-logical-properties.mjs`
+6. `/packages/stylelint-plugin-dialtone/tests/lib/rules/no-physical-directional-properties.mjs`
+
+**Example Rule Implementation:**
+
+```javascript
+// lib/rules/prefer-logical-properties.js
+const stylelint = require("stylelint");
+
+const {
+  createPlugin,
+  utils: { report, ruleMessages, validateOptions },
+} = stylelint;
+
+const ruleName = '@dialpad/stylelint-plugin-dialtone/prefer-logical-properties';
+
+const messages = ruleMessages(ruleName, {
+  preferLogicalProperty: (physical, logical) => 
+    `Use logical property "${logical}" instead of physical property "${physical}" for better RTL support.`,
+});
+
+// Physical to logical property mappings
+const PROPERTY_MAPPINGS = {
+  'margin-left': 'margin-inline-start',
+  'margin-right': 'margin-inline-end',
+  'margin-top': 'margin-block-start', 
+  'margin-bottom': 'margin-block-end',
+  'padding-left': 'padding-inline-start',
+  'padding-right': 'padding-inline-end',
+  'padding-top': 'padding-block-start',
+  'padding-bottom': 'padding-block-end',
+  'border-left': 'border-inline-start',
+  'border-right': 'border-inline-end',
+  'border-top': 'border-block-start',
+  'border-bottom': 'border-block-end',
+  'border-top-left-radius': 'border-start-start-radius',
+  'border-top-right-radius': 'border-start-end-radius',
+  'border-bottom-left-radius': 'border-end-start-radius',
+  'border-bottom-right-radius': 'border-end-end-radius',
+  'left': 'inset-inline-start',
+  'right': 'inset-inline-end',
+  'top': 'inset-block-start',
+  'bottom': 'inset-block-end',
+  'width': 'inline-size',
+  'height': 'block-size',
+  'min-width': 'min-inline-size',
+  'max-width': 'max-inline-size',
+  'min-height': 'min-block-size',
+  'max-height': 'max-block-size'
+};
+
+const meta = {
+  url: "https://github.com/dialpad/dialtone/blob/staging/packages/stylelint-plugin-dialtone/docs/rules/prefer-logical-properties.md",
+  fixable: true,
+};
+
+const ruleFunction = (primary) => {
+  return (root, result) => {
+    const validOptions = validateOptions(result, ruleName, {
+      actual: primary,
+    });
+
+    if (!validOptions) return;
+
+    root.walkDecls((declNode) => {
+      const physicalProperty = declNode.prop;
+      const logicalProperty = PROPERTY_MAPPINGS[physicalProperty];
+      
+      if (logicalProperty) {
+        report({
+          result,
+          ruleName,
+          node: declNode,
+          message: messages.preferLogicalProperty(physicalProperty, logicalProperty),
+          fix: () => {
+            declNode.prop = logicalProperty;
+          }
+        });
+      }
+    });
+  };
+};
+
+ruleFunction.ruleName = ruleName;
+ruleFunction.messages = messages;
+ruleFunction.meta = meta;
+
+module.exports = createPlugin(ruleName, ruleFunction);
+```
+
+**Integration into Main Plugin:**
+
+Update `/packages/stylelint-plugin-dialtone/lib/index.js`:
+```javascript
+"use strict";
+
+const noMixins = require("./rules/no-mixins");
+const recommendFontStyleTokens = require("./rules/recommend-font-style-tokens");
+const useDialtoneTokens = require("./rules/use-dialtone-tokens");
+const preferLogicalProperties = require("./rules/prefer-logical-properties");
+const noPhysicalDirectionalProperties = require("./rules/no-physical-directional-properties");
+
+module.exports = [
+  noMixins, 
+  recommendFontStyleTokens, 
+  useDialtoneTokens,
+  preferLogicalProperties,
+  noPhysicalDirectionalProperties
+];
+```
+
+**Configuration in Main Stylelint Config:**
+
+Update `/stylelint.config.cjs`:
+```javascript
+module.exports = {
+  // ... existing config
+  plugins: [
+    'stylelint-less',
+    'stylelint-no-px',
+    '@dialpad/stylelint-plugin-dialtone', // Add the Dialtone plugin
+  ],
+  rules: {
+    // ... existing rules
+    '@dialpad/stylelint-plugin-dialtone/prefer-logical-properties': true,
+    '@dialpad/stylelint-plugin-dialtone/no-physical-directional-properties': 'error',
   },
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged",
-      "pre-push": "npm run test:rtl"
-    }
+};
+```
+
+**Auto-fix Capability:**
+- Rules support `--fix` flag through the `fix` function in the rule implementation
+- Integrates with existing `pnpm exec stylelint 'lib/build/less/**/*.less' --fix` command
+- Works with pre-commit hooks via lint-staged
+
+#### 3. Pre-commit Hooks Integration
+
+**Current Dialtone Pre-commit Setup:**
+
+Dialtone already uses Husky and lint-staged. The configuration is in:
+- **Main lint-staged config**: `/.lintstagedrc.js`
+- **Package-specific configs**: Each package has `.lintstagedrc.cjs` that extends the main config
+- **Husky hooks**: `/.husky/pre-commit` runs lint-staged
+
+**Current CSS Package lint-staged Configuration:**
+
+Located at `/packages/dialtone-css/.lintstagedrc.cjs`:
+```javascript
+module.exports = {
+  ...require('../../.lintstagedrc.js'),
+  '*.less': ['stylelint --fix --allow-empty-input'],
+};
+```
+
+**Enhanced Configuration for CSS Logical Properties:**
+
+Update `/packages/dialtone-css/.lintstagedrc.cjs`:
+```javascript
+module.exports = {
+  ...require('../../.lintstagedrc.js'),
+  '*.less': [
+    'stylelint --fix --allow-empty-input', // This will now include logical properties rules
+    'echo "✅ CSS Logical Properties enforcement complete"'
+  ],
+};
+```
+
+**Integration with Existing Scripts:**
+
+The CSS package already has:
+```json
+{
+  "scripts": {
+    "lint": "run-s lint:code lint:library",
+    "lint:library": "pnpm exec stylelint 'lib/build/less/**/*.less'"
   }
 }
 ```
 
-**Pre-commit checks:**
+With the updated stylelint configuration, running `pnpm run lint:library` will automatically:
+- Check for physical properties
+- Auto-fix them to logical properties (with `--fix` flag)
+- Report any issues that couldn't be auto-fixed
 
-- Prevent new physical properties from being added
-- Auto-convert simple cases
-- Generate warning report for complex cases requiring manual review
-- Block commit if critical physical properties are detected
+**Pre-commit Protection Benefits:**
+
+- **Prevent new physical properties** from being committed
+- **Auto-convert physical properties** to logical equivalents during commit
+- **Enforce consistency** across the entire design system
+- **Zero configuration required** - works with existing workflow
 
 #### 4. Migration Progress Dashboard
 
@@ -551,8 +715,88 @@ The `/postcss/dialtone-generators.cjs` file contains several functions that gene
 - **Build process**: After updating generator, rebuild CSS to propagate changes
 - **Testing**: Verify all generated utility classes work in RTL context
 
+## Linting Implementation Plan
+
+### Phase 1: Create Stylelint Rules (1-2 days)
+
+**Files to Create:**
+
+1. **`/packages/stylelint-plugin-dialtone/lib/rules/prefer-logical-properties.js`**
+   - Main rule implementation with auto-fix capability
+   - Physical-to-logical property mappings
+   - Detailed error messages with suggestions
+
+2. **`/packages/stylelint-plugin-dialtone/lib/rules/no-physical-directional-properties.js`**
+   - Stricter rule that errors on any physical directional property
+   - Used for enforcing migration completion
+
+3. **Documentation files:**
+   - `/packages/stylelint-plugin-dialtone/docs/rules/prefer-logical-properties.md`
+   - `/packages/stylelint-plugin-dialtone/docs/rules/no-physical-directional-properties.md`
+
+4. **Test files:**
+   - `/packages/stylelint-plugin-dialtone/tests/lib/rules/prefer-logical-properties.mjs`
+   - `/packages/stylelint-plugin-dialtone/tests/lib/rules/no-physical-directional-properties.mjs`
+
+### Phase 2: Update Plugin Configuration (30 minutes)
+
+**Files to Update:**
+
+1. **`/packages/stylelint-plugin-dialtone/lib/index.js`**
+   - Add new rules to exported rules array
+
+2. **`/stylelint.config.cjs`**
+   - Add `@dialpad/stylelint-plugin-dialtone` to plugins array
+   - Configure the new logical properties rules
+
+### Phase 3: Test and Validate (1 day)
+
+**Testing Steps:**
+
+1. **Run tests:** `pnpm test` in stylelint-plugin-dialtone package
+2. **Test auto-fix:** `pnpm run lint:library --fix` in dialtone-css package
+3. **Validate pre-commit hooks:** Make a test commit with physical properties
+4. **Check existing files:** Ensure rules work on current codebase
+
+### Phase 4: Documentation and Rollout (1 day)
+
+**Documentation Updates:**
+
+1. Update plugin README with new rules
+2. Add examples to rule documentation files
+3. Update main project README with linting information
+4. Create migration guide for developers
+
+### Command Examples
+
+**Manual Linting:**
+```bash
+# Lint and auto-fix CSS files
+cd packages/dialtone-css
+pnpm run lint:library --fix
+
+# Lint specific file
+pnpm exec stylelint 'lib/build/less/components/button.less' --fix
+```
+
+**Pre-commit Integration:**
+```bash
+# Test pre-commit hook
+git add .
+git commit -m "test: add physical properties"
+# Should auto-fix properties and show warnings
+```
+
+**CI/CD Integration:**
+```bash
+# Add to CI pipeline
+pnpm run lint:library
+# Will fail build if unfixable physical properties exist
+```
+
 ## Success Metrics
 
+### Migration Completion Metrics
 - [ ] **PostCSS generator** updated to use logical properties
 - [ ] All **generated utility classes** use logical properties correctly
 - [ ] All `.css` and `.less` files migrated to logical properties
@@ -562,6 +806,16 @@ The `/postcss/dialtone-generators.cjs` file contains several functions that gene
 - [ ] Browser support maintained (modern browsers only)
 - [ ] Performance impact is negligible
 - [ ] Documentation updated with logical property examples
+
+### Linting Implementation Metrics
+- [ ] **Stylelint rules created** and added to `@dialpad/stylelint-plugin-dialtone`
+- [ ] **Auto-fix functionality** working for all supported physical properties
+- [ ] **Pre-commit hooks** preventing new physical properties from being committed
+- [ ] **CI/CD integration** failing builds with unfixed physical properties
+- [ ] **Developer documentation** updated with linting guidance
+- [ ] **Zero false positives** in rule detection
+- [ ] **100% test coverage** for new stylelint rules
+- [ ] **Team training** completed on new linting rules
 
 ---
 
