@@ -32,11 +32,11 @@ Currently, the only themeable part of the application is the shell, which consis
         </td>
         <td>
           <dt-stack direction="row" gap="200">
-            <div class="color-swatch" style="background-color: var(--dt-color-black-100);" title="Background"></div>
-            <div class="color-swatch" style="background-color: var(--dt-color-black-200);" title="Sidebar"></div>
-            <div class="color-swatch" style="background-color: var(--dt-color-black-300);" title="Border"></div>
-            <div class="color-swatch" style="background-color: var(--dt-color-purple-500);" title="Brand"></div>
-            <div class="color-swatch" style="background-color: var(--dt-color-black-400);" title="Text"></div>
+            <div class="color-swatch" style="background-color: var(--dt-shell-color-surface-default);" title="Background"></div>
+            <div class="color-swatch" style="background-color: var(--dt-shell-color-foreground-primary);" title="Sidebar"></div>
+            <div class="color-swatch" style="background-color: var(--dt-shell-mention-surface-primary);" title="Border"></div>
+            <div class="color-swatch" style="background-color: var(--dt-shell-color-foreground-muted);" title="Brand"></div>
+            <div class="color-swatch" style="background-color: var(--dt-shell-action-color-background-muted-default);" title="Text"></div>
           </dt-stack>
         </td>
         <td>

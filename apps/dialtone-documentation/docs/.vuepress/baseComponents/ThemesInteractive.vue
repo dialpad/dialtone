@@ -24,7 +24,7 @@
 
     <!-- SVG Theme Visual Preview -->
     <div class="d-mt16">
-      <div :class="containerClasses" class="themes-container">
+      <div :class="containerClasses" :data-theme="selectedTheme" :data-mode="selectedMode" class="themes-container">
         <svg
           class="themes-svg"
           viewBox="0 0 844 380"
@@ -128,7 +128,6 @@ const THEMES = [
   { value: 'dp', label: 'Dialpad' },
   { value: 'tmo', label: 'T-Mobile' },
   { value: 'expressive', label: 'Expressive' },
-  { value: 'sunflower', label: 'Sunflower' },
 ];
 
 const updateMode = (newMode) => {
@@ -139,99 +138,21 @@ const updateTheme = (newTheme) => {
   selectedTheme.value = newTheme;
 };
 
-// Theme color configurations using Dialtone tokens
-const themeTokens = {
-  dp: {
-    light: {
-      background: 'var(--dt-color-black-100)',
-      surface: 'var(--dt-color-black-100)',
-      sidebar: 'var(--dt-color-black-200)',
-      border: 'var(--dt-color-black-300)',
-      brand: 'var(--dt-color-purple-500)',
-      textPrimary: 'var(--dt-color-black-400)',
-      textSecondary: 'var(--dt-color-black-400)',
-    },
-    dark: {
-      background: 'var(--dt-color-black-900)',
-      surface: 'var(--dt-color-black-800)',
-      sidebar: 'var(--dt-color-black-800)',
-      border: 'var(--dt-color-black-700)',
-      brand: 'var(--dt-color-purple-300)',
-      textPrimary: 'var(--dt-color-black-500)',
-      textSecondary: 'var(--dt-color-black-500)',
-    },
-  },
-  tmo: {
-    light: {
-      background: 'var(--dt-color-black-100)',
-      surface: 'var(--dt-color-black-100)',
-      sidebar: 'var(--dt-color-black-200)',
-      border: 'var(--dt-color-black-300)',
-      brand: '#E20074',
-      textPrimary: 'var(--dt-color-black-400)',
-      textSecondary: 'var(--dt-color-black-400)',
-    },
-    dark: {
-      background: 'var(--dt-color-black-900)',
-      surface: 'var(--dt-color-black-800)',
-      sidebar: 'var(--dt-color-black-800)',
-      border: 'var(--dt-color-black-700)',
-      brand: '#E20074',
-      textPrimary: 'var(--dt-color-black-500)',
-      textSecondary: 'var(--dt-color-black-500)',
-    },
-  },
-  expressive: {
-    light: {
-      background: 'var(--dt-color-black-100)',
-      surface: 'var(--dt-color-black-100)',
-      sidebar: 'var(--dt-color-black-200)',
-      border: 'var(--dt-color-black-300)',
-      brand: 'var(--dt-color-coral-500)',
-      textPrimary: 'var(--dt-color-black-400)',
-      textSecondary: 'var(--dt-color-black-400)',
-    },
-    dark: {
-      background: 'var(--dt-color-black-900)',
-      surface: 'var(--dt-color-black-800)',
-      sidebar: 'var(--dt-color-black-800)',
-      border: 'var(--dt-color-black-700)',
-      brand: 'var(--dt-color-coral-300)',
-      textPrimary: 'var(--dt-color-black-500)',
-      textSecondary: 'var(--dt-color-black-500)',
-    },
-  },
-  sunflower: {
-    light: {
-      background: 'var(--dt-color-black-100)',
-      surface: 'var(--dt-color-gold-100)',
-      sidebar: 'var(--dt-color-gold-100)',
-      border: 'var(--dt-color-black-300)',
-      brand: 'var(--dt-color-gold-500)',
-      textPrimary: 'var(--dt-color-gold-600)',
-      textSecondary: 'var(--dt-color-gold-600)',
-    },
-    dark: {
-      background: 'var(--dt-color-black-900)',
-      surface: 'var(--dt-color-gold-700)',
-      sidebar: 'var(--dt-color-gold-700)',
-      border: 'var(--dt-color-gold-700)',
-      brand: 'var(--dt-color-gold-300)',
-      textPrimary: 'var(--dt-color-gold-300)',
-      textSecondary: 'var(--dt-color-gold-300)',
-    },
-  },
-};
-
+// Use Dialtone's semantic tokens directly - no custom datasets needed
 const svgColors = computed(() => {
-  const baseColors = themeTokens[selectedTheme.value]?.[selectedMode.value] || themeTokens.dp.light;
   return {
-    ...baseColors,
-    controlInactive: selectedMode.value === 'dark' ? 'var(--dt-color-black-600)' : 'var(--dt-color-black-500)',
-    navActive: baseColors.textPrimary,
-    navInactive: selectedMode.value === 'dark' ? 'var(--dt-color-black-600)' : 'var(--dt-color-black-500)',
-    searchBg: selectedMode.value === 'dark' ? 'var(--dt-color-black-700)' : 'var(--dt-color-black-200)',
-    actionBtn: selectedMode.value === 'dark' ? 'var(--dt-color-black-600)' : 'var(--dt-color-black-500)',
+    background: 'var(--dt-color-surface-primary)',
+    surface: 'var(--dt-color-surface-secondary)',
+    sidebar: 'var(--dt-color-surface-moderate)',
+    border: 'var(--dt-color-border-default)',
+    brand: 'var(--dt-color-link-primary)',
+    textPrimary: 'var(--dt-color-foreground-primary)',
+    textSecondary: 'var(--dt-color-foreground-secondary)',
+    controlInactive: 'var(--dt-color-foreground-disabled)',
+    navActive: 'var(--dt-color-foreground-primary)',
+    navInactive: 'var(--dt-color-foreground-tertiary)',
+    searchBg: 'var(--dt-color-surface-moderate)',
+    actionBtn: 'var(--dt-color-foreground-tertiary)',
   };
 });
 
@@ -244,6 +165,9 @@ const containerClasses = computed(() => {
 </script>
 
 <style scoped>
+@import url('@dialpad/dialtone/css');
+/* @import url("@dialpad/dialtone/vue3/css"); */
+
 .themes-interactive {
   margin: 2rem 0;
   transition: all 0.3s ease;
@@ -252,6 +176,15 @@ const containerClasses = computed(() => {
 .themes-container {
   transition: all 0.3s ease;
 }
+
+/* Theme switching using Dialtone's token system */
+/* Each theme automatically uses its semantic token dataset */
+.themes-container {
+  /* Default uses base Dialtone semantic tokens */
+}
+
+/* Themes will be handled by Dialtone's CSS token system */
+/* The data-theme attribute should trigger Dialtone's theme switching */
 
 .themes-svg {
   width: 100%;
