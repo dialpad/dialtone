@@ -67,7 +67,7 @@ All product UI text can be characterized as one of **Headline**, **Body**, **Lab
 <el class="d-{category}--{size}-{strength}-{density}">...</el>
 ```
 
-<div class="d-bb d-bc-default">
+<div class="d-bb">
   <table class="d-table">
     <thead>
       <tr>
@@ -252,7 +252,7 @@ Code snippets, technical commands, or data values rendered as a monospaced font.
 
 Each typography style is expressed through a shorthand `font` property, and its value's design token contains all font styles, e.g. `font-size`, `line-height`, `font-family`, etc,
 
-<div class="d-hmx464 d-of-y-auto d-bb d-bc-default">
+<div class="d-hmx464 d-of-y-auto d-bb">
   <table class="d-table dialtone-doc-table">
     <thead>
       <tr>

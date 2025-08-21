@@ -61,7 +61,7 @@
         aria-label="Copy SVG markup"
       />
     </div>
-    <div class="d-d-flex d-ai-flex-end d-bb d-bc-default d-pb16">
+    <div class="d-d-flex d-ai-flex-end d-bb d-pb16">
       <div class="d-fl-grow1">
         <dt-input
           class="d-ff-mono"

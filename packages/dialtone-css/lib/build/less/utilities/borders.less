@@ -22,11 +22,27 @@
 //  ============================================================================
 //  $$ DIRECTION
 //  ----------------------------------------------------------------------------
-.d-ba { border: var(--dt-size-100) solid !important; }
-.d-bt { border-top: var(--dt-size-100) solid !important; }
-.d-br { border-right: var(--dt-size-100) solid !important; }
-.d-bb { border-bottom: var(--dt-size-100) solid !important; }
-.d-bl { border-left: var(--dt-size-100) solid !important; }
+.d-ba {
+  border-color: var(--dt-color-border-default) !important;
+  border-style: solid !important;
+  border-width: var(--dt-size-border-100) !important;
+}
+
+.d-bt {
+  border-top: var(--dt-size-border-100) solid var(--dt-color-border-default) !important;
+}
+
+.d-br {
+  border-right: var(--dt-size-border-100) solid var(--dt-color-border-default) !important;
+}
+
+.d-bb {
+  border-bottom: var(--dt-size-border-100) solid var(--dt-color-border-default) !important;
+}
+
+.d-bl {
+  border-left: var(--dt-size-border-100) solid var(--dt-color-border-default) !important;
+}
 
 .d-bx { .d-br(); .d-bl(); }
 
@@ -161,29 +177,29 @@
 .d-divide-y > * + * {
     --divide-y-reverse: 0;
 
-    border-top: calc(~'1px * (1 - var(--divide-y-reverse))') solid !important;
-    border-bottom: calc(~'1px * var(--divide-y-reverse)') solid !important;
+    border-top: calc(~'1px * (1 - var(--divide-y-reverse))') solid var(--dt-color-border-default) !important;
+    border-bottom: calc(~'1px * var(--divide-y-reverse)') solid var(--dt-color-border-default) !important;
 }
 
 .d-divide-y0 > * + * {
     --divide-y-reverse: 0;
 
-    border-top: calc(~'0 * (1 - var(--divide-y-reverse))') solid !important;
-    border-bottom: calc(~'0 * var(--divide-y-reverse)') solid !important;
+    border-top: calc(~'0 * (1 - var(--divide-y-reverse))') solid var(--dt-color-border-default) !important;
+    border-bottom: calc(~'0 * var(--divide-y-reverse)') solid var(--dt-color-border-default) !important;
 }
 
 .d-divide-y2 > * + * {
     --divide-y-reverse: 0;
 
-    border-top: calc(~'2px * (1 - var(--divide-y-reverse))') solid !important;
-    border-bottom: calc(~'2px * var(--divide-y-reverse)') solid !important;
+    border-top: calc(~'2px * (1 - var(--divide-y-reverse))') solid var(--dt-color-border-default) !important;
+    border-bottom: calc(~'2px * var(--divide-y-reverse)') solid var(--dt-color-border-default) !important;
 }
 
 .d-divide-y4 > * + * {
     --divide-y-reverse: 0;
 
-    border-top: calc(~'4px * (1 - var(--divide-y-reverse))') solid !important;
-    border-bottom: calc(~'4px * var(--divide-y-reverse)') solid !important;
+    border-top: calc(~'4px * (1 - var(--divide-y-reverse))') solid var(--dt-color-border-default) !important;
+    border-bottom: calc(~'4px * var(--divide-y-reverse)') solid var(--dt-color-border-default) !important;
 }
 .d-divide-y-reverse > * + * { --divide-y-reverse: 1; }
 
@@ -192,29 +208,29 @@
 .d-divide-x > * + * {
     --divide-x-reverse: 0;
 
-    border-right: calc(~'1px * var(--divide-x-reverse)') solid !important;
-    border-left: calc(~'1px * (1 - var(--divide-x-reverse))') solid !important;
+    border-right: calc(~'1px * var(--divide-x-reverse)') solid var(--dt-color-border-default) !important;
+    border-left: calc(~'1px * (1 - var(--divide-x-reverse))') solid var(--dt-color-border-default) !important;
 }
 
 .d-divide-x0 > * + * {
     --divide-x-reverse: 0;
 
-    border-right: calc(~'0 * var(--divide-x-reverse)') solid !important;
-    border-left: calc(~'0 * (1 - var(--divide-x-reverse))') solid !important;
+    border-right: calc(~'0 * var(--divide-x-reverse)') solid var(--dt-color-border-default) !important;
+    border-left: calc(~'0 * (1 - var(--divide-x-reverse))') solid var(--dt-color-border-default) !important;
 }
 
 .d-divide-x2 > * + * {
     --divide-x-reverse: 0;
 
-    border-right: calc(~'2px * var(--divide-x-reverse)') solid !important;
-    border-left: calc(~'2px * (1 - var(--divide-x-reverse))') solid !important;
+    border-right: calc(~'2px * var(--divide-x-reverse)') solid var(--dt-color-border-default) !important;
+    border-left: calc(~'2px * (1 - var(--divide-x-reverse))') solid var(--dt-color-border-default) !important;
 }
 
 .d-divide-x4 > * + * {
     --divide-x-reverse: 0;
 
-    border-right: calc(~'4px * var(--divide-x-reverse)') solid !important;
-    border-left: calc(~'4px * (1 - var(--divide-x-reverse))') solid !important;
+    border-right: calc(~'4px * var(--divide-x-reverse)') solid var(--dt-color-border-default) !important;
+    border-left: calc(~'4px * (1 - var(--divide-x-reverse))') solid var(--dt-color-border-default) !important;
 }
 .d-divide-x-reverse > * + * { --divide-x-reverse: 1; }
 

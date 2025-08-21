@@ -4,16 +4,16 @@
     class="d-px8"
   >
     <h2>Variants</h2>
-    <table class="d-table d-bt d-bb d-bbw2 d-bc-default">
+    <table class="d-table d-bt d-bb d-bbw2">
       <thead>
         <tr>
-          <td class="d-ba d-bc-default">
+          <td class="d-ba">
             &nbsp;
           </td>
           <th
             v-for="importance in importanceList"
             :key="importance"
-            class="d-ta-center d-br d-bc-default"
+            class="d-ta-center d-br"
           >
             {{ importance }}
           </th>
@@ -26,7 +26,7 @@
           :class="{ 'd-bgc-contrast': kind === 'inverted' }"
         >
           <th
-            class="d-ta-right d-ba d-brw2 d-bc-default"
+            class="d-ta-right d-ba d-brw2"
             scope="row"
             :class="{ 'd-bc-default-inverted d-fc-primary-inverted': kind === 'inverted' }"
           >
@@ -85,7 +85,7 @@
       <!-- Sizes  -->
       <dt-stack
         gap="500"
-        class="d-br d-bc-default d-pr16"
+        class="d-br d-pr16"
       >
         <h2>Sizes</h2>
         <dt-stack gap="500">
@@ -110,7 +110,7 @@
       <!-- With alpha icon  -->
       <dt-stack
         gap="500"
-        class="d-br d-bc-default d-pr16"
+        class="d-br d-pr16"
       >
         <h2>With alpha icon</h2>
         <dt-stack gap="500">
@@ -142,7 +142,7 @@
       <!-- With custom omega icon  -->
       <dt-stack
         gap="500"
-        class="d-br d-bc-default d-pr16"
+        class="d-br d-pr16"
       >
         <h2>With custom omega icon</h2>
         <dt-stack gap="500">
@@ -170,7 +170,7 @@
       <!-- Status  -->
       <dt-stack
         gap="500"
-        class="d-br d-bc-default d-pr16"
+        class="d-br d-pr16"
       >
         <h2>Status</h2>
         <dt-stack gap="500">
@@ -211,7 +211,7 @@
       <!-- With tooltip -->
       <dt-stack
         gap="500"
-        class="d-br d-bc-default d-pr16"
+        class="d-br d-pr16"
       >
         <h2>With tooltip</h2>
         <dt-stack gap="500">
@@ -243,7 +243,7 @@
       <!-- Icon-only  -->
       <dt-stack
         gap="500"
-        class="d-br d-bc-default d-pr16"
+        class="d-br d-pr16"
       >
         <h2>Icon only</h2>
         <dt-stack gap="500">

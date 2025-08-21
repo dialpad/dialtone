@@ -100,7 +100,7 @@ When setting the color of an icon take these into considaration:
 
 <div class="d-gc1">
 <div style="background: var(--dt-color-purple-100)" class="d-p16 d-hmn164 d-bar8 d-d-flex d-ai-center">
-<dt-stack direction="row" as="section" gap="100" class="d-bgc-primary d-bc-default d-bar32 d-py8 d-px16 d-w100p">
+<dt-stack direction="row" as="section" gap="100" class="d-bgc-primary d-bar32 d-py8 d-px16 d-w100p">
 <dt-stack direction="row" as="section" gap="300" class="d-fl1">
 <dt-icon name="headphones" size="300" ariaLabel="Headphones icon" />
 <p class="d-body--md d-truncate d-w100p d-wmx102">Ai Contact Center</p>
@@ -119,7 +119,7 @@ When setting the color of an icon take these into considaration:
 
 <div class="d-gc1">
 <div class="d-bgc-critical-subtle-opaque d-p16 d-hmn164 d-bar8 d-d-flex d-ai-center">
-<dt-stack direction="row" as="section" gap="100" class="d-bgc-primary d-bc-default d-bar32 d-py8 d-px16 d-w100p">
+<dt-stack direction="row" as="section" gap="100" class="d-bgc-primary d-bar32 d-py8 d-px16 d-w100p">
 <dt-stack direction="row" as="section" gap="300" class="d-fl1">
 <dt-icon name="headphones" size="300" ariaLabel="Headphones icon" />
 <p class="d-body--md d-truncate d-w100p d-wmx102">Ai Contact Center</p>

@@ -38,10 +38,10 @@ When setting the gap between elements, utilize [Space Tokens](#tokens) for the g
 <code-well-header>
   <div class="d-d-grid d-g24 d-g-cols2 md:d-g-cols1 d-w100p">
     <div class="d-d-flex d-fd-row" :style="{ gap: selectedSpace }">
-      <div class="d-fl-center d-ba d-bc-default d-w100p">
+      <div class="d-fl-center d-ba d-w100p">
         Element A
       </div>
-      <div class="d-fl-center d-ba d-bc-default d-w100p">
+      <div class="d-fl-center d-ba d-w100p">
         Element B
       </div>
     </div>
