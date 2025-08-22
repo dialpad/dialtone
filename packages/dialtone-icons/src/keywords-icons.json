@@ -227,6 +227,7 @@
       "dialbot": [],
       "dialpad-ai-color-reversed": [],
       "dialpad-ai-color": [],
+      "dialpad-analytics-ai": [],
       "dialpad-logo": [],
       "dialpad-sparkle": [
         "ai",
@@ -332,7 +333,6 @@
         "intelligence",
         "voice"
       ],
-      "dialpad-analytics-ai": [],
       "dialpad-logomark": [],
       "dialpad-meetings-star": [
         "dp",
