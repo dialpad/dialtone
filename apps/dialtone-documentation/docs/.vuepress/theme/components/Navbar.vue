@@ -135,6 +135,7 @@
       :circle="true"
       importance="clear"
       kind="muted"
+      hidden
       @click="toggleTheme"
     >
       <template #icon>
