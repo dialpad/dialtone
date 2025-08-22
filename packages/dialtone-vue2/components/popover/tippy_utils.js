@@ -28,7 +28,6 @@ export const createTippy = (anchorElement, options) => {
 export const getPopperOptions = ({
   boundary = 'clippingParents',
   fallbackPlacements = [],
-  onChangePlacement = () => {},
   hasHideModifierEnabled = false,
   // If set to false the dialog will display over top of the anchor when there is insufficient space.
   // if set to true it will never move from its position relative to the anchor and will clip instead.

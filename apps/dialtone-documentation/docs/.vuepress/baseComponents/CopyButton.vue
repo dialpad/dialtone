@@ -38,7 +38,7 @@ const copyToClipboard = async () => {
     message.value = 'Copied';
     await new Promise(resolve => setTimeout(resolve, 750));
     message.value = props.ariaLabel;
-  } catch (err) {
+  } catch {
     console.error('Error copying to clipboard', props.text);
   }
 };

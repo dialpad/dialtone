@@ -41,7 +41,7 @@ export default Node.create({
     ];
   },
 
-  renderText ({ node }) {
+  renderText () {
     return '/dpm';
   },
 

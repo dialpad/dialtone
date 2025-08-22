@@ -1,3 +1,76 @@
+## [2.196.1](https://github.com/dialpad/dialtone/compare/dialtone-vue2/v2.196.0...dialtone-vue2/v2.196.1) (2025-08-20)
+
+
+### Bug Fixes
+
+* **Combobox Multi Select:** NO-JIRA prevent losing focus on input ([#875](https://github.com/dialpad/dialtone/issues/875)) ([d064f61](https://github.com/dialpad/dialtone/commit/d064f61d21f32a140736056c392478426b85ecae))
+
+# [2.196.0](https://github.com/dialpad/dialtone/compare/dialtone-vue2/v2.195.5...dialtone-vue2/v2.196.0) (2025-08-19)
+
+
+### Bug Fixes
+
+* **Message Input:** NO-JIRA replace internal input value when adding custom emojis ([#868](https://github.com/dialpad/dialtone/issues/868)) ([e0874a3](https://github.com/dialpad/dialtone/commit/e0874a34672ecba01c96e9a4f907d7c8f2c1c3d3))
+
+
+### Documentation
+
+* **Toggle:** DLT-2623 fix vue 3 toggle variants ([#871](https://github.com/dialpad/dialtone/issues/871)) ([e981daa](https://github.com/dialpad/dialtone/commit/e981daa84f2437fca29f9cf494647d36724ef4de))
+
+
+### Features
+
+* **Message Input:** DLT-2714 add scroll-bottom-reached event on input ([#873](https://github.com/dialpad/dialtone/issues/873)) ([ce22b39](https://github.com/dialpad/dialtone/commit/ce22b398315ce29761e8c672156c5cb273fa7271))
+
+## [2.195.5](https://github.com/dialpad/dialtone/compare/dialtone-vue2/v2.195.4...dialtone-vue2/v2.195.5) (2025-08-12)
+
+
+### Bug Fixes
+
+* **Message Input:** DLT-2679 fix keyboard shortcuts ([#866](https://github.com/dialpad/dialtone/issues/866)) ([d318741](https://github.com/dialpad/dialtone/commit/d3187410f19bc6d5eb751014098bdb3f7380a9f0))
+
+## [2.195.4](https://github.com/dialpad/dialtone/compare/dialtone-vue2/v2.195.3...dialtone-vue2/v2.195.4) (2025-08-11)
+
+
+### Bug Fixes
+
+* **Rich Text Editor:** DLT-2690 custom emojis not working ([#860](https://github.com/dialpad/dialtone/issues/860)) ([60feffc](https://github.com/dialpad/dialtone/commit/60feffc86e2e7655543af0f3bbc5a3c33e459bb3))
+
+## [2.195.3](https://github.com/dialpad/dialtone/compare/dialtone-vue2/v2.195.2...dialtone-vue2/v2.195.3) (2025-08-05)
+
+
+### Bug Fixes
+
+* **Tooltip:** DLT-2644 fix z-index ([#857](https://github.com/dialpad/dialtone/issues/857)) ([840c1d9](https://github.com/dialpad/dialtone/commit/840c1d9f58878772c2c64161cf640d4da970aca6))
+
+## [2.195.2](https://github.com/dialpad/dialtone/compare/dialtone-vue2/v2.195.1...dialtone-vue2/v2.195.2) (2025-08-04)
+
+
+### Bug Fixes
+
+* **Localization:** NO-JIRA add validation ([#856](https://github.com/dialpad/dialtone/issues/856)) ([7bc06f0](https://github.com/dialpad/dialtone/commit/7bc06f0344085a764fdc53940116f6a5e7a7cb70))
+
+## [2.195.1](https://github.com/dialpad/dialtone/compare/dialtone-vue2/v2.195.0...dialtone-vue2/v2.195.1) (2025-08-03)
+
+
+### Bug Fixes
+
+* **Tab:** DP-148500 tabs not loading instantly ([#849](https://github.com/dialpad/dialtone/issues/849)) ([623c014](https://github.com/dialpad/dialtone/commit/623c0144de9b2072dda17e94f1346ee1cbf61b62))
+
+# [2.195.0](https://github.com/dialpad/dialtone/compare/dialtone-vue2/v2.194.2...dialtone-vue2/v2.195.0) (2025-07-31)
+
+
+### Features
+
+* DLT-2173 add test coverage ([#836](https://github.com/dialpad/dialtone/issues/836)) ([563dd1d](https://github.com/dialpad/dialtone/commit/563dd1dc98e5feacdff62fad1125ecf227fef57a))
+
+## [2.194.2](https://github.com/dialpad/dialtone/compare/dialtone-vue2/v2.194.1...dialtone-vue2/v2.194.2) (2025-07-31)
+
+
+### Bug Fixes
+
+* **Editor:** DP-151532 change quick reply to template ([#846](https://github.com/dialpad/dialtone/issues/846)) ([e403c3e](https://github.com/dialpad/dialtone/commit/e403c3e5925649b97a0460f90c7f18c72e178b37))
+
 ## [2.194.1](https://github.com/dialpad/dialtone/compare/dialtone-vue2/v2.194.0...dialtone-vue2/v2.194.1) (2025-07-29)
 
 

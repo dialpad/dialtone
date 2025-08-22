@@ -4,7 +4,7 @@ description: Utilities for setting the background color.
 ---
 
 <dt-notice kind="warning" class="d-wmx100p d-mt24" hideClose>
-  Before using background color utilities, first consider <router-link class="d-link d-link--muted" to="/design/colors/#surface">semantic surface colors</router-link>.
+  Before using background color utilities, first consider <router-link class="d-link d-link--muted" to="/design/colors/palette/#surface">semantic surface colors</router-link>.
 </dt-notice>
 
 ## Usage
@@ -129,11 +129,5 @@ Use `d-bgo{stop}` to change an element's background color opacity. You can also 
   const excludedClasses = ['d-bgc-border-box', 'd-bgc-content-box', 'd-bgc-padding-box', 'd-bgc-text'];
 
   const utilityClassDocs = inject('utilityClassDocs');
-  const colors = extractUtilityClasses(utilityClassDocs, 'd-bgc-');
-  const backgroundColors = Object.keys(colors)
-    .filter(className => !excludedClasses.includes(className))
-    .reduce((obj, key) => {
-      obj[key] = colors[key];
-      return obj;
-    }, {});
+  const backgroundColors = extractUtilityClasses(utilityClassDocs, 'd-bgc-');
 </script>

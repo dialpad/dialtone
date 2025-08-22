@@ -227,6 +227,7 @@
       "dialbot": [],
       "dialpad-ai-color-reversed": [],
       "dialpad-ai-color": [],
+      "dialpad-analytics-ai": [],
       "dialpad-logo": [],
       "dialpad-sparkle": [
         "ai",
@@ -317,10 +318,7 @@
         "conversation",
         "chat"
       ],
-      "ai-notes": [
-        "artificial",
-        "intelligence"
-      ],
+      "ai-notes": [],
       "coaching-hub": [],
       "default-ai-agent-fab": [
         "fab",

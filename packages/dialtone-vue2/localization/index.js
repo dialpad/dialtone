@@ -59,23 +59,30 @@ export class DialtoneLocalization {
 
     localeManager.install(dialtoneNamespace);
 
-    /**
-     * @description
-     * When the browser storage changes, update the current locale
-     * @param event
-     */
-    window.onstorage = (event) => {
-      if (event.key === 'user-locale') {
-        this.currentLocale = event.newValue;
-      }
-    };
-
     DialtoneLocalization.instance = this;
+
+    if (typeof window !== 'undefined') {
+      /**
+       * @description
+       * When the browser storage changes, update the current locale
+       * @param event
+       */
+      window.onstorage = (event) => {
+        if (event.key === 'user-locale') {
+          this.currentLocale = event.newValue;
+        }
+      };
+    }
+
     return this;
   }
 
   static getPreferredLocale () {
-    const localStorageLanguage = localStorage.getItem('user-locale');
+    if (typeof window === 'undefined' || !window.localStorage) {
+      return fallbackLocale;
+    }
+
+    const localStorageLanguage = window.localStorage.getItem('user-locale');
 
     // Get the first two letters of the navigator language and check if it's in the allowed locales
     const navigatorLanguage = Object.values(allowedLocales)

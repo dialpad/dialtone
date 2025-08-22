@@ -21,6 +21,7 @@
               </div>
             </th>
             <th
+              v-if="showValue"
               scope="col"
               class="d-p0 d-bbw0 d-label--sm-compact d-tt-none d-ta-right"
             >
@@ -80,12 +81,12 @@
                 {{ description }}
               </div>
               <token-value
-                v-if="isSmallDevice"
+                v-if="isSmallDevice && showValue"
                 :token-value="valueToString(tokenValue)"
                 :tokens="tokens"
               />
             </th>
-            <td v-if="!isSmallDevice" class="d-code--sm  d-fc-blue-500 d-ta-right d-wmx164">
+            <td v-if="!isSmallDevice && showValue" class="d-code--sm  d-fc-blue-500 d-ta-right d-wmx164">
               <token-value :token-value="valueToString(tokenValue)" :tokens="tokens" />
             </td>
             <td
@@ -138,6 +139,11 @@ export default {
     theme: {
       type: String,
       required: true,
+    },
+
+    showValue: {
+      type: Boolean,
+      default: true,
     },
   },
 

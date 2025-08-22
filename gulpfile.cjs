@@ -24,9 +24,15 @@ const paths = {
     dist: ['./dist/**'],
   },
   input: {
-    css: './packages/dialtone-css/lib/dist/**',
+    css: [
+      './packages/dialtone-css/lib/dist/**',
+      '!./packages/dialtone-css/lib/dist/js/**',
+      '!./packages/dialtone-css/lib/dist/svg/**',
+      '!./packages/dialtone-css/lib/dist/tokens/**',
+    ],
     tokens: [
       './packages/dialtone-tokens/dist/**',
+      '!./packages/dialtone-tokens/dist/less/**',
       '!./packages/dialtone-tokens/dist/android/**',
       '!./packages/dialtone-tokens/dist/ios/**',
     ],

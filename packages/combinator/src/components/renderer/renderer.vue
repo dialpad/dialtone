@@ -98,7 +98,7 @@ const emit = defineEmits([
 const renderedSlots = computed(() => {
   if (!props.options.slots) { return null; }
   return Object.fromEntries(
-    Object.entries(props.options.slots).filter(([_, slot]) => slot),
+    Object.entries(props.options.slots).filter(([, slot]) => slot),
   );
 });
 
