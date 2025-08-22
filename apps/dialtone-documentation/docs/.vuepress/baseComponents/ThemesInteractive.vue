@@ -165,9 +165,6 @@ const containerClasses = computed(() => {
 </script>
 
 <style scoped>
-@import url('@dialpad/dialtone/css');
-/* @import url("@dialpad/dialtone/vue3/css"); */
-
 .themes-interactive {
   margin: 2rem 0;
   transition: all 0.3s ease;
