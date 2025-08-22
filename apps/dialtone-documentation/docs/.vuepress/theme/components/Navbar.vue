@@ -231,7 +231,11 @@ const setCss = () => {
     themeName += currentMode.value;
   }
 
-  setTheme(themes[themeName]);
+  console.warn(`Theme ${themeName} does not exists, using default theme`);
+
+  const theme = themes[themeName] || themes['dp-light'];
+
+  setTheme(theme);
 };
 
 onMounted(() => {
