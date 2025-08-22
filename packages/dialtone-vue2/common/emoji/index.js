@@ -121,7 +121,6 @@ export function validateCustomEmojiJson (json) {
 // recursively searches the emoji data object containing data for all emojis
 // and returns the object with the specified shortcode.
 export function shortcodeToEmojiData (shortcode) {
-  // eslint-disable-next-line complexity
   function f (o, key) {
     if (!o || typeof o !== 'object') {
       return;
@@ -141,6 +140,11 @@ export function shortcodeToEmojiData (shortcode) {
   let reference;
   f(getEmojiData(), null);
   return reference;
+}
+
+export function emojiToShortcode (emoji) {
+  const unicode = unicodeToString(emoji);
+  return emojiJson[unicode]?.shortname;
 }
 
 // Takes in an emoji unicode character(s) and converts it to an emoji string in the format the emoji data object expects

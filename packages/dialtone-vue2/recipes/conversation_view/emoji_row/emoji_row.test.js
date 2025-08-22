@@ -5,6 +5,7 @@ import {
 } from '@/tests/shared_examples/validation.js';
 import DtRecipeEmojiRow from './emoji_row.vue';
 import { DtTooltip } from '@/components/tooltip';
+import { emojiToShortcode } from '@/common/emoji';
 
 // Constants
 const testEmojiObj = {
@@ -13,12 +14,13 @@ const testEmojiObj = {
   isSelected: false,
   num: 2,
 };
+const emojiShortcode = emojiToShortcode(testEmojiObj.emojiUnicodeOrShortname);
 
 // \u2068 and \u2069 are Unicode bidi isolation characters.
 // They are non-printing characters that help text layout engines to ensure that the interpolated strings are handled correctly
 // in the situation where the text direction of the substitution might not match the text direction of the localized text.
 // https://github.com/django-ftl/fluent-compiler/blob/master/docs/usage.rst#formatting-messages
-const MOCK_LOCALIZED_EMOJI_REACTION_ARIA_LABEL = `\u2068${testEmojiObj.names}\u2069 reacted with \u2068${testEmojiObj.emojiUnicodeOrShortname}\u2069`;
+const MOCK_LOCALIZED_EMOJI_REACTION_ARIA_LABEL = `reacted with \u2068${emojiShortcode}\u2069`;
 
 const basePropsData = {
   reactions: [
