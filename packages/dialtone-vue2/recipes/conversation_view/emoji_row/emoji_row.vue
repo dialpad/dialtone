@@ -40,7 +40,8 @@
           >
             <span class="d-recipe-emoji-row__emoji">
               <dt-emoji
-                size="300"
+                class="d-recipe-emoji-row__emoji"
+                img-class="d-recipe-emoji-row__emoji-img"
                 :code="reaction.emojiUnicodeOrShortname"
               />
             </span>

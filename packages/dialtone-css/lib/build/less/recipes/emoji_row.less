@@ -52,7 +52,7 @@
   }
 
   &:hover {
-    --emoji-item-color-inset-shadow: var(--dt-color-border-subtle);
+    --emoji-item-color-inset-shadow: var(--dt-color-border-moderate);
     --emoji-item-color-foreground: var(--dt-action-color-foreground-muted-hover);
   }
 
@@ -94,6 +94,15 @@
 }
 
 .d-recipe-emoji-row__emoji {
+  --emoji-size: calc(var(--dt-icon-size-200) + .2rem);
+
   display: inline-flex;
-  margin-right: var(--dt-space-300);
+  margin-inline-end: var(--dt-space-300);
+  inline-size: var(--emoji-size);
+  block-size: var(--emoji-size);
+}
+
+.d-recipe-emoji-row__emoji-img {
+  inline-size: var(--emoji-size);
+  block-size: var(--emoji-size);
 }
