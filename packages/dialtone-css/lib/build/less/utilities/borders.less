@@ -22,11 +22,27 @@
 //  ============================================================================
 //  $$ DIRECTION
 //  ----------------------------------------------------------------------------
-.d-ba { border: var(--dt-size-100) solid !important; }
-.d-bt { border-block-start: var(--dt-size-100) solid !important; }
-.d-br { border-inline-end: var(--dt-size-100) solid !important; }
-.d-bb { border-block-end: var(--dt-size-100) solid !important; }
-.d-bl { border-inline-start: var(--dt-size-100) solid !important; }
+.d-ba {
+  border-color: var(--dt-color-border-default) !important;
+  border-style: solid !important;
+  border-width: var(--dt-size-border-100) !important;
+}
+
+.d-bt {
+  border-block-start: var(--dt-size-border-100) solid var(--dt-color-border-default) !important;
+}
+
+.d-br {
+  border-inline-end: var(--dt-size-border-100) solid var(--dt-color-border-default) !important;
+}
+
+.d-bb {
+  border-block-end: var(--dt-size-border-100) solid var(--dt-color-border-default) !important;
+}
+
+.d-bl {
+  border-inline-start: var(--dt-size-border-100) solid var(--dt-color-border-default) !important;
+}
 
 .d-bx { .d-br(); .d-bl(); }
 
@@ -161,29 +177,29 @@
 .d-divide-y > * + * {
     --divide-y-reverse: 0;
 
-    border-block-start: calc(~'1px * (1 - var(--divide-y-reverse))') solid !important;
-    border-block-end: calc(~'1px * var(--divide-y-reverse)') solid !important;
+    border-block-start: calc(~'1px * (1 - var(--divide-y-reverse))') solid var(--dt-color-border-default) !important;
+    border-block-end: calc(~'1px * var(--divide-y-reverse)') solid var(--dt-color-border-default) !important;
 }
 
 .d-divide-y0 > * + * {
     --divide-y-reverse: 0;
 
-    border-block-start: calc(~'0 * (1 - var(--divide-y-reverse))') solid !important;
-    border-block-end: calc(~'0 * var(--divide-y-reverse)') solid !important;
+    border-block-start: calc(~'0 * (1 - var(--divide-y-reverse))') solid var(--dt-color-border-default) !important;
+    border-block-end: calc(~'0 * var(--divide-y-reverse)') solid var(--dt-color-border-default) !important;
 }
 
 .d-divide-y2 > * + * {
     --divide-y-reverse: 0;
 
-    border-block-start: calc(~'2px * (1 - var(--divide-y-reverse))') solid !important;
-    border-block-end: calc(~'2px * var(--divide-y-reverse)') solid !important;
+    border-block-start: calc(~'2px * (1 - var(--divide-y-reverse))') solid var(--dt-color-border-default) !important;
+    border-block-end: calc(~'2px * var(--divide-y-reverse)') solid var(--dt-color-border-default) !important;
 }
 
 .d-divide-y4 > * + * {
     --divide-y-reverse: 0;
 
-    border-block-start: calc(~'4px * (1 - var(--divide-y-reverse))') solid !important;
-    border-block-end: calc(~'4px * var(--divide-y-reverse)') solid !important;
+    border-block-start: calc(~'4px * (1 - var(--divide-y-reverse))') solid var(--dt-color-border-default) !important;
+    border-block-end: calc(~'4px * var(--divide-y-reverse)') solid var(--dt-color-border-default) !important;
 }
 .d-divide-y-reverse > * + * { --divide-y-reverse: 1; }
 
@@ -192,29 +208,29 @@
 .d-divide-x > * + * {
     --divide-x-reverse: 0;
 
-    border-inline-end: calc(~'1px * var(--divide-x-reverse)') solid !important;
-    border-inline-start: calc(~'1px * (1 - var(--divide-x-reverse))') solid !important;
+    border-inline-end: calc(~'1px * var(--divide-x-reverse)') solid var(--dt-color-border-default) !important;
+    border-inline-start: calc(~'1px * (1 - var(--divide-x-reverse))') solid var(--dt-color-border-default) !important;
 }
 
 .d-divide-x0 > * + * {
     --divide-x-reverse: 0;
 
-    border-inline-end: calc(~'0 * var(--divide-x-reverse)') solid !important;
-    border-inline-start: calc(~'0 * (1 - var(--divide-x-reverse))') solid !important;
+    border-inline-end: calc(~'0 * var(--divide-x-reverse)') solid var(--dt-color-border-default) !important;
+    border-inline-start: calc(~'0 * (1 - var(--divide-x-reverse))') solid var(--dt-color-border-default) !important;
 }
 
 .d-divide-x2 > * + * {
     --divide-x-reverse: 0;
 
-    border-inline-end: calc(~'2px * var(--divide-x-reverse)') solid !important;
-    border-inline-start: calc(~'2px * (1 - var(--divide-x-reverse))') solid !important;
+    border-inline-end: calc(~'2px * var(--divide-x-reverse)') solid var(--dt-color-border-default) !important;
+    border-inline-start: calc(~'2px * (1 - var(--divide-x-reverse))') solid var(--dt-color-border-default) !important;
 }
 
 .d-divide-x4 > * + * {
     --divide-x-reverse: 0;
 
-    border-inline-end: calc(~'4px * var(--divide-x-reverse)') solid !important;
-    border-inline-start: calc(~'4px * (1 - var(--divide-x-reverse))') solid !important;
+    border-inline-end: calc(~'4px * var(--divide-x-reverse)') solid var(--dt-color-border-default) !important;
+    border-inline-start: calc(~'4px * (1 - var(--divide-x-reverse))') solid var(--dt-color-border-default) !important;
 }
 .d-divide-x-reverse > * + * { --divide-x-reverse: 1; }
 
@@ -227,9 +243,11 @@
  * https://dev.to/afif/border-with-gradient-and-radius-387f
  */
 .d-bc-ai {
-  border-image: var(--dt-color-border-ai) 1 !important;
+  border-image-source: var(--dt-color-border-ai) !important;
+  border-image-slice: 1 !important;
 }
 
 .d-divide-ai > * + * {
-  border-image: var(--dt-color-border-ai) 1 !important;
+  border-image-source: var(--dt-color-border-ai) !important;
+  border-image-slice: 1 !important;
 }

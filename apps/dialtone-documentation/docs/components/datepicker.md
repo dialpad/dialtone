@@ -389,7 +389,7 @@ The following functions are available for date formatting.
         {{ currentSelectedDate }}
       </p>
     </dt-stack>
-    <table class="d-table d-body--sm d-bt d-bc-default d-fl1">
+    <table class="d-table d-body--sm d-bt d-fl1">
       <tr>
         <th scope="row" class="d-code--sm">formatLong</th>
         <td>{{ formatLong(currentSelectedDate) }}</td>

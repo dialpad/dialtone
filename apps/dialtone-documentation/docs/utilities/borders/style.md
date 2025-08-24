@@ -14,7 +14,7 @@ Use `d-b{a|t|r|b|l}s-dashed` to change the border style to dashed on your elemen
   >
     <div
       v-for="style in ['bas', 'bts', 'brs', 'bbs', 'bls']"
-      class="d-p16 d-baw2 d-bc-bold d-bgc-primary d-ws-nowrap"
+      class="d-p16 d-ba d-baw2 d-bgc-primary d-ws-nowrap"
       :class="`d-${style}-dashed`"
     >
       d-{{ style }}-dashed
@@ -23,11 +23,11 @@ Use `d-b{a|t|r|b|l}s-dashed` to change the border style to dashed on your elemen
 </code-well-header>
 
 ```html
-<div class="d-p16 d-baw2 d-bc-bold d-bgc-primary d-ws-nowrap d-bas-dashed">...</div>
-<div class="d-p16 d-baw2 d-bc-bold d-bgc-primary d-ws-nowrap d-bts-dashed">...</div>
-<div class="d-p16 d-baw2 d-bc-bold d-bgc-primary d-ws-nowrap d-brs-dashed">...</div>
-<div class="d-p16 d-baw2 d-bc-bold d-bgc-primary d-ws-nowrap d-bbs-dashed">...</div>
-<div class="d-p16 d-baw2 d-bc-bold d-bgc-primary d-ws-nowrap d-bls-dashed">...</div>
+<div class="d-p16 d-ba d-baw2 d-bgc-primary d-ws-nowrap d-bas-dashed">...</div>
+<div class="d-p16 d-ba d-baw2 d-bgc-primary d-ws-nowrap d-bts-dashed">...</div>
+<div class="d-p16 d-ba d-baw2 d-bgc-primary d-ws-nowrap d-brs-dashed">...</div>
+<div class="d-p16 d-ba d-baw2 d-bgc-primary d-ws-nowrap d-bbs-dashed">...</div>
+<div class="d-p16 d-ba d-baw2 d-bgc-primary d-ws-nowrap d-bls-dashed">...</div>
 ```
 
 ## Dotted Borders
@@ -41,7 +41,7 @@ Use `d-b{a|t|r|b|l}s-dotted` to change the border style to dotted on your elemen
   >
     <div
       v-for="style in ['bas', 'bts', 'brs', 'bbs', 'bls']"
-      class="d-p16 d-baw2 d-bc-bold d-bgc-primary d-ws-nowrap"
+      class="d-p16 d-ba d-baw2 d-bgc-primary d-ws-nowrap"
       :class="`d-${style}-dotted`"
     >
       d-{{ style }}-dotted
@@ -50,11 +50,11 @@ Use `d-b{a|t|r|b|l}s-dotted` to change the border style to dotted on your elemen
 </code-well-header>
 
 ```html
-<div class="d-p16 d-baw2 d-bc-bold d-bgc-primary d-ws-nowrap d-bas-dotted">...</div>
-<div class="d-p16 d-baw2 d-bc-bold d-bgc-primary d-ws-nowrap d-bts-dotted">...</div>
-<div class="d-p16 d-baw2 d-bc-bold d-bgc-primary d-ws-nowrap d-brs-dotted">...</div>
-<div class="d-p16 d-baw2 d-bc-bold d-bgc-primary d-ws-nowrap d-bbs-dotted">...</div>
-<div class="d-p16 d-baw2 d-bc-bold d-bgc-primary d-ws-nowrap d-bls-dotted">...</div>
+<div class="d-p16 d-ba d-baw2 d-bgc-primary d-ws-nowrap d-bas-dotted">...</div>
+<div class="d-p16 d-ba d-baw2 d-bgc-primary d-ws-nowrap d-bts-dotted">...</div>
+<div class="d-p16 d-ba d-baw2 d-bgc-primary d-ws-nowrap d-brs-dotted">...</div>
+<div class="d-p16 d-ba d-baw2 d-bgc-primary d-ws-nowrap d-bbs-dotted">...</div>
+<div class="d-p16 d-ba d-baw2 d-bgc-primary d-ws-nowrap d-bls-dotted">...</div>
 ```
 
 ## Classes

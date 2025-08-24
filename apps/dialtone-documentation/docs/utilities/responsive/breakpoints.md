@@ -186,9 +186,9 @@ To help keep prefixes concise, we use abbreviations. This syntax is used consist
     <table class="d-table dialtone-doc-table">
       <thead class="d-bgc-primary d-ps-sticky d-zi-base1 d-t0">
         <tr>
-          <th scope="col" class="d-p0 d-bbw0 d-w25p"><div class="d-p16 d-bb d-bc-default d-bbw1">Class Prefix</div></th>
-          <th scope="col" class="d-p0 d-bbw0 d-w25p"><div class="d-p16 d-bb d-bc-default d-bbw1">Media Query</div></th>
-          <th scope="col" class="d-p0 d-bbw0 "><div class="d-p16 d-bb d-bc-default d-bbw1">Description</div></th>
+          <th scope="col" class="d-p0 d-bbw0 d-w25p"><div class="d-p16 d-bb d-bbw1">Class Prefix</div></th>
+          <th scope="col" class="d-p0 d-bbw0 d-w25p"><div class="d-p16 d-bb d-bbw1">Media Query</div></th>
+          <th scope="col" class="d-p0 d-bbw0 "><div class="d-p16 d-bb d-bbw1">Description</div></th>
         </tr>
       </thead>
       <tbody>
