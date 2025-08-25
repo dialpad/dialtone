@@ -1,3 +1,23 @@
+# [9.133.0-next.1](https://github.com/dialpad/dialtone/compare/dialtone/v9.132.1...dialtone/v9.133.0-next.1) (2025-08-25)
+
+
+### Bug Fixes
+
+* **Docs:** DLT-2716 add chart-colors to design colors extraction path ([#881](https://github.com/dialpad/dialtone/issues/881)) ([7dda1cf](https://github.com/dialpad/dialtone/commit/7dda1cf326088883de74cdf3b085c8deaac39529))
+
+
+### Documentation
+
+* **Color:** DLT-2569 chart design tokens migration guide ([#879](https://github.com/dialpad/dialtone/issues/879)) ([f8c9611](https://github.com/dialpad/dialtone/commit/f8c9611b9a39ca7f0212df386eaf02ebef49fc79))
+* NO-JIRA rename brand to theme ([#877](https://github.com/dialpad/dialtone/issues/877)) ([cf50f5b](https://github.com/dialpad/dialtone/commit/cf50f5b301981e7f6a79aed80c6c08ff7aff1e88))
+
+
+### Features
+
+* **Css Utility:** DLT-2715 add default color for border css utilities ([#874](https://github.com/dialpad/dialtone/issues/874)) ([71310ab](https://github.com/dialpad/dialtone/commit/71310ab483fde976d56c69e0456bce70cb6d372d))
+* **Icon:** DLT-2720 dialpad analytics AI ([#878](https://github.com/dialpad/dialtone/issues/878)) ([bff71fd](https://github.com/dialpad/dialtone/commit/bff71fd0f8c4b6a4ef4998de4b29592a9eb9701d))
+* **Themes:** DLT-2702  shell design tokens ([#867](https://github.com/dialpad/dialtone/issues/867)) ([287d60e](https://github.com/dialpad/dialtone/commit/287d60e9dbf796639c8a9402a93738fb455ab3b3))
+
 ## [9.132.1](https://github.com/dialpad/dialtone/compare/dialtone/v9.132.0...dialtone/v9.132.1) (2025-08-20)
 
 
