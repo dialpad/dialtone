@@ -6,7 +6,7 @@
         :key="colorName"
         :color-name="colorName"
         :stops="stops || []"
-        :theme="theme"
+        :mode="mode"
       />
     </div>
   </section>
@@ -20,13 +20,13 @@ import { alphabeticalSorter } from '@utilities';
 
 const tokensDocs = inject('tokensDocs');
 const props = defineProps({
-  theme: {
+  mode: {
     type: String,
     default: 'light',
   },
 });
-const foregroundPrimaryValue = tokensDocs['--dt-color-foreground-primary'][`dp-${props.theme}`].value;
-const foregroundPrimaryInvertedValue = tokensDocs['--dt-color-foreground-primary-inverted'][`dp-${props.theme}`].value;
+const foregroundPrimaryValue = tokensDocs['--dt-color-foreground-primary'][`dp-${props.mode}`].value;
+const foregroundPrimaryInvertedValue = tokensDocs['--dt-color-foreground-primary-inverted'][`dp-${props.mode}`].value;
 
 const colors = ref(undefined);
 
@@ -44,7 +44,7 @@ onMounted(() => {
     .reduce((result, tokenName) => {
       const colorName = tokenName.replace(/--dt-color-(\w+).*/, '$1');
       const colorStop = tokenName.replace(/--dt-color-\w+-(\d{2,4})/, '$1');
-      const token = tokensDocs[tokenName][`base-${props.theme}`];
+      const token = tokensDocs[tokenName][`base-${props.mode}`];
       const colorValue = token?.value;
       const contrastRatio = getContrastRatio(colorValue);
 

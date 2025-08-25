@@ -4,12 +4,12 @@ export const FORMAT_MAP = {
   iOS: 'ios-swift/enum.swift',
 };
 
-export const THEMES = [
+export const MODES = [
   { value: 'light', label: 'Light' },
   { value: 'dark', label: 'Dark' },
 ];
 
-export const BRANDS = [
+export const THEMES = [
   { value: 'dp', label: 'Dialpad' },
   { value: 'tmo', label: 'T-Mobile' },
   // { value: 'expressive', label: 'Expressive' },
@@ -58,7 +58,7 @@ export const getTokensStructure = () => ({
     neutral: {
       _children: [],
     },
-    brand: {
+    theme: {
       _children: [],
     },
     opacity: {

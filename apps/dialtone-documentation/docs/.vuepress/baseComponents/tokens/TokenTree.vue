@@ -4,7 +4,7 @@
       v-if="isChild(subNodeKey) && hasContent(subNodeKey)"
       :category="category"
       :tokens="node[subNodeKey]"
-      :theme="props.theme"
+      :mode="props.mode"
     />
     <div v-else-if="!isChild(subNodeKey)">
       <component
@@ -23,7 +23,7 @@
         :node="node[subNodeKey]"
         :category="category === null ? subNodeKey : category"
         :level="level + 1"
-        :theme="props.theme"
+        :mode="props.mode"
       />
     </div>
   </div>
@@ -48,7 +48,7 @@ const props = defineProps({
     required: true,
   },
 
-  theme: {
+  mode: {
     type: String,
     required: true,
   },

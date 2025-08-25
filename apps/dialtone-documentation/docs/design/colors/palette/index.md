@@ -96,11 +96,11 @@ Each of the colors listed above references these. For example, in Light mode
 
 ### Light Theme
 
-<ColorsCatalog theme="light"></ColorsCatalog>
+<ColorsCatalog mode="light"></ColorsCatalog>
 
 ### Dark Theme
 
-<ColorsCatalog theme="dark"></ColorsCatalog>
+<ColorsCatalog mode="dark"></ColorsCatalog>
 
 <script setup>
 import DesignColorTable from '@baseComponents/DesignColorTable.vue';

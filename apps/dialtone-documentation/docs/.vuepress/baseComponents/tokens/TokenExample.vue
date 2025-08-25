@@ -84,7 +84,7 @@ const props = defineProps({
     default: '',
   },
 
-  theme: {
+  mode: {
     type: String,
     required: true,
   },
@@ -122,7 +122,7 @@ const getBorderStyle = () => {
 };
 
 const foregroundBackgroundColor = computed(() => {
-  if (props.theme === 'light') {
+  if (props.mode === 'light') {
     if (props.name.includes('inverted')) {
       return 'var(--dt-color-neutral-black)';
     }

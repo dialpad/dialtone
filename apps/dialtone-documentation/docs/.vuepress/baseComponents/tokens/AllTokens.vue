@@ -2,15 +2,15 @@
   <tokens-bar
     v-model:search="searchCriteria"
     v-model:format="format"
+    v-model:mode="mode"
     v-model:theme="theme"
-    v-model:brand="brand"
     @filter="filterTokens"
   />
   <div v-if="noSearchResults" class="d-body d-fc-tertiary d-p16 d-ta-center">
     No results found for
     <strong class="d-fw-semibold"> &OpenCurlyDoubleQuote;{{ searchCriteria }}&CloseCurlyDoubleQuote;</strong>
   </div>
-  <token-tree v-else :node="filteredTokens" :category="null" :level="2" :theme="theme" />
+  <token-tree v-else :node="filteredTokens" :category="null" :level="2" :mode="mode" />
 </template>
 
 <script setup>
@@ -22,16 +22,19 @@ import { onBeforeRouteLeave, useRoute } from 'vue-router';
 
 const route = useRoute();
 const format = ref(route.query.format || 'CSS');
-const theme = ref(route.query.theme || 'light');
-const brand = ref(route.query.brand || 'dp');
+const mode = ref(route.query.mode || 'light');
+const theme = ref(route.query.theme || 'dp');
 const searchCriteria = ref(route.query.search || null);
 const processedTokens = {}; // is set beforeMount and never changes
 const filteredTokens = ref({}); // same as processedTokens but filtered by format, theme and search
 const filteredHeaders = ref([]); // to fill the dynamic table of contents
 
+const noSearchResults = computed(() => filteredTokens.value === null);
+const themeKey = computed(() => `${theme.value}-${mode.value}`);
+
 const filterTokens = () => {
   if (!searchCriteria.value) {
-    filteredTokens.value = structuredClone(processedTokens[format.value][brandThemeKey.value]);
+    filteredTokens.value = structuredClone(processedTokens[format.value][themeKey.value]);
     updateHeaders();
     return;
   }
@@ -39,10 +42,10 @@ const filterTokens = () => {
   // Replace '/' and '-' characters for ' ' to allow to search by the name shown in Figma:
   // typography/label/md-plain should match var(--dt-typography-label-plain)
   // or dtTypographyLabelMdPlain
-  const searchValues = searchCriteria.value.replace(/\/|-/g, ' ').split(' ');
+  const searchValues = searchCriteria.value.replace(/[/-]/g, ' ').split(' ');
   const searchRegexArray = searchValues.map(value => value.replace(/\(/, '\\(').replace(/\)/, '\\)')); // escape parenthesis
   const regexArray = searchRegexArray.map(searchRegex => new RegExp(searchRegex, 'i'));
-  filteredTokens.value = filterTokenNode(processedTokens[format.value][brandThemeKey.value], null, regexArray);
+  filteredTokens.value = filterTokenNode(processedTokens[format.value][themeKey.value], null, regexArray);
   updateHeaders();
 };
 
@@ -80,9 +83,6 @@ const filterTokenNode = (node, name, regexArray) => {
   }
   return null;
 };
-
-const noSearchResults = computed(() => filteredTokens.value === null);
-const brandThemeKey = computed(() => `${brand.value}-${theme.value}`);
 
 const updateHeaders = () => {
   if (filteredTokens.value === null) return [];

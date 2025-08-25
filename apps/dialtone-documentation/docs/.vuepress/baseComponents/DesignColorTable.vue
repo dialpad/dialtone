@@ -5,7 +5,7 @@ import { extractCSSVariableName, sortUtilityClassesByCategory } from '@utilities
 const tokensDocs = inject('tokensDocs');
 const utilityClassDocs = inject('utilityClassDocs');
 const isBaseColorClass = (string) => /d-(bgc|fc|bc|bgg)-\w+-\d{2,4}$/.test(string);
-const currentTheme = inject('currentTheme');
+const currentMode = inject('currentMode');
 
 const props = defineProps({
   /**
@@ -46,7 +46,7 @@ function processColorsDocs (excludedColors, classPrefix) {
     .reduce((result, color) => {
       const tokenName = extractCSSVariableName(utilityClassDocs[color]);
       const colorName = color.replace(classPrefix, '').replace(/-/g, ' ');
-      const token = tokensDocs[tokenName]?.[`dp-${currentTheme.value}`];
+      const token = tokensDocs[tokenName]?.[`dp-${currentMode.value}`];
 
       result.add({
         name: colorName,
