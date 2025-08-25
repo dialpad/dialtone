@@ -1,3 +1,20 @@
+# [8.63.0-next.1](https://github.com/dialpad/dialtone/compare/dialtone-css/v8.62.0...dialtone-css/v8.63.0-next.1) (2025-08-25)
+
+
+### Code Refactoring
+
+* **Css:** DLT-1876 css logical properties ([#872](https://github.com/dialpad/dialtone/issues/872)) ([1acd6c9](https://github.com/dialpad/dialtone/commit/1acd6c900053b0c820309faa4a870ff1dceced04))
+
+
+### Documentation
+
+* **Color:** DLT-2570 chart tokens ([#865](https://github.com/dialpad/dialtone/issues/865)) ([7f2b06d](https://github.com/dialpad/dialtone/commit/7f2b06d9d6095098f29ff2ac70f8078f4cf651ae))
+
+
+### Features
+
+* **Css Utility:** DLT-2715 add default color for border css utilities ([#874](https://github.com/dialpad/dialtone/issues/874)) ([71310ab](https://github.com/dialpad/dialtone/commit/71310ab483fde976d56c69e0456bce70cb6d372d))
+
 # [8.62.0](https://github.com/dialpad/dialtone/compare/dialtone-css/v8.61.0...dialtone-css/v8.62.0) (2025-08-12)
 
 
