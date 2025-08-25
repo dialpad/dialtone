@@ -116,20 +116,20 @@ Use `d-b{a|t|r|b|l}r-circle` to change the border radius of your element to a ci
             <div class="d-fl-grow1 d-code--sm">
               <span v-if="i === 'a'">border-radius: var({{ token }}) !important;</span>
               <span v-else-if="i === 't'">
-                border-top-left-radius: var({{ token }}) !important;<br/>
-                border-top-right-radius: var({{ token }}) !important;
+                border-start-start-radius: var({{ token }}) !important;<br/>
+                border-start-end-radius: var({{ token }}) !important;
               </span>
               <span v-else-if="i === 'r'">
-                border-top-right-radius: var({{ token }}) !important;<br/>
-                border-bottom-right-radius: var({{ token }}) !important;
+                border-start-end-radius: var({{ token }}) !important;<br/>
+                border-end-end-radius: var({{ token }}) !important;
               </span>
               <span v-else-if="i === 'b'">
-                border-bottom-left-radius: var({{ token }}) !important;<br/>
-                border-bottom-right-radius: var({{ token }}) !important;
+                border-end-start-radius: var({{ token }}) !important;<br/>
+                border-end-end-radius: var({{ token }}) !important;
               </span>
               <span v-else-if="i === 'l'">
-                border-bottom-left-radius: var({{ token }}) !important;
-                border-top-left-radius: var({{ token }}) !important;<br/>
+                border-end-start-radius: var({{ token }}) !important;
+                border-start-start-radius: var({{ token }}) !important;<br/>
               </span>
             </div>
             <div

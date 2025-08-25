@@ -1,14 +1,14 @@
 .d-recipe-attachment-carousel {
   position: relative;
-  width: var(--dt-space-1000);
-  max-height: 100px; /* stylelint-disable-line meowtec/no-px */
+  inline-size: var(--dt-space-1000);
+  max-block-size: 100px; /* stylelint-disable-line meowtec/no-px */
 }
 
 .d-recipe-attachment-carousel__media-list {
   display: flex;
   flex-direction: row;
-  padding-left: 0;
-  overflow-x: scroll;
+  padding-inline-start: 0;
+  overflow-inline: scroll;
 }
 
 .d-recipe-attachment-carousel__media-list::-webkit-scrollbar {
@@ -17,7 +17,7 @@
 
 .d-recipe-attachment-carousel__arrow {
   position: absolute;
-  top: var(--dt-space-30-percent);
+  inset-block-start: var(--dt-space-30-percent);
   background-color: var(--dt-color-neutral-white);
   border: var(--dt-space-100) solid;
   border-color: var(--bc-default);
@@ -30,11 +30,11 @@
 }
 
 .d-recipe-attachment-carousel__arrow--left {
-  left: var(--dt-space-300);
+  inset-inline-start: var(--dt-space-300);
 }
 
 .d-recipe-attachment-carousel__arrow--right {
-  right: var(--dt-space-300);
+  inset-inline-end: var(--dt-space-300);
 }
 
 .d-recipe-attachment-carousel__image {
@@ -43,8 +43,8 @@
 
 .d-recipe-attachment-carousel__image-close-button {
   position: absolute;
-  top: inherit;
-  right: inherit;
+  inset-block-start: inherit;
+  inset-inline-end: inherit;
   color: var(--dt-color-neutral-white);
   background-color: var(--dt-color-black-400);
   border: var(--dt-space-100) solid;
@@ -58,8 +58,8 @@
 }
 
 .d-recipe-attachment-carousel__image-viewer {
-  width: var(--dt-size-700);
-  height: var(--dt-size-700);
+  inline-size: var(--dt-size-700);
+  block-size: var(--dt-size-700);
   object-fit: cover;
   border: var(--dt-space-100) solid;
   border-color: var(--dt-color-border-subtle);
@@ -69,14 +69,14 @@
 
 .d-recipe-attachment-carousel__image-top-right {
   position: absolute;
-  top: var(--dt-size-100);
-  right: var(--dt-size-100);
+  inset-block-start: var(--dt-size-100);
+  inset-inline-end: var(--dt-size-100);
 }
 
 .d-recipe-attachment-carousel__image-progress-bar {
   position: absolute;
-  top: inherit;
-  right: inherit;
+  inset-block-start: inherit;
+  inset-inline-end: inherit;
   display: flex;
   background-color: var(--dt-color-neutral-white);
   border: var(--dt-space-100) solid;
@@ -87,8 +87,8 @@
 }
 
 .d-recipe-attachment-carousel__progress-bar {
-  width: var(--dt-size-550);
-  height: var(--dt-size-550);
+  inline-size: var(--dt-size-550);
+  block-size: var(--dt-size-550);
 }
 
 .d-recipe-attachment-carousel__progress-bar-circle {

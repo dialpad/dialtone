@@ -53,7 +53,7 @@ import { nextTick, ref } from 'vue';
 
 import defaultAvatar from './person.png';
 
-/* eslint-disable max-len */
+ 
 const messages = [
   'lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec auctor,nisl eget ultrices aliquam, nunc nisl aliquet nunc, eget aliquam nisl ni loremlorem ipsum dolor sit amet, consectetur adipiscing elit. Donec auctor, nisl eget ultrices aliquam, nunc nisl aliquet nunc, eget aliquam nisl ni loremlorem ipsum dolor sit amet, consectetur adipiscing elit. Donec auctor, nisl eget ultrices aliquam',
   'lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec auctor, nisl eget ultrices aliquam, nunc nisl aliquet nunc, eget aliquam nisl',
@@ -117,10 +117,10 @@ function replaceItems () {
 }
 
 .image{
-  width: 25px;
-  height: 25px;
+  inline-size: 25px;
+  block-size: 25px;
   border-radius: 50%;
-  margin-right: 10px;
+  margin-inline-end: 10px;
   object-fit: cover;
 }
 
@@ -129,10 +129,10 @@ function replaceItems () {
   align-items: center;
   div {
     background-color: red;
-    width: 5px;
-    height: 5px;
+    inline-size: 5px;
+    block-size: 5px;
     border-radius: 25px;
-    margin-left: 5px;
+    margin-inline-start: 5px;
 
     &.enabled{
       background-color: #00ff00;

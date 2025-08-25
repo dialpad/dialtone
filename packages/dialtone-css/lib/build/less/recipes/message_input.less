@@ -31,29 +31,28 @@
 }
 
 .d-recipe-message-input__link-popover {
-  width: 36.0rem;
+  inline-size: 36.0rem;
 }
 
 .d-recipe-message-input__remaining-char {
-  margin-right: var(--dt-space-300);
+  margin-inline-end: var(--dt-space-300);
   color: var(--dt-color-foreground-critical);
   font-size: var(--dt-font-size-100);
 }
 
 .d-recipe-message-input__remaining-char-tooltip {
-  margin-top: auto;
-  margin-bottom: auto;
+  margin-block: auto;
 }
 
 .d-recipe-message-input__button {
-  max-width: 2.8rem;
-  max-height: 2.8rem;
+  max-inline-size: 2.8rem;
+  max-block-size: 2.8rem;
   border-radius: var(--dt-size-radius-300);
 }
 
 .d-recipe-message-input__send-button.d-recipe-message-input__button:not(.d-btn--icon-only),
 .d-recipe-message-input__cancel-button {
-  max-width: unset;
+  max-inline-size: unset;
   padding: var(--dt-space-350);
 }
 
@@ -83,11 +82,11 @@
 }
 
 .d-recipe-message-input-meeting-pill__layout {
-  grid-template-areas: 'left content right';
+  grid-template-areas: 'start content end';
   grid-template-columns: minmax(0, max-content) 1fr minmax(0, max-content);
   gap: var(--dt-space-400);
   align-items: center;
-  max-width: var(--dt-size-905);
+  max-inline-size: var(--dt-size-905);
   padding: var(--dt-space-200) var(--dt-space-400);
   font: var(--dt-typography-headline-md);
   border: var(--dt-size-border-100) solid var(--dt-color-border-default);
@@ -111,10 +110,9 @@
 }
 
 .d-recipe-message-input--button-group-divider {
-  width: var(--dt-size-100);
-  height: calc(var(--dt-size-550) + var(--dt-size-300));
-  margin-right: var(--dt-space-300);
-  margin-left: var(--dt-space-300);
+  inline-size: var(--dt-size-100);
+  block-size: calc(var(--dt-size-550) + var(--dt-size-300));
+  margin-inline: var(--dt-space-300);
   background: var(--dt-color-border-subtle);
 }
 
@@ -127,9 +125,8 @@
 }
 
 .d-recipe-message-input__link-input {
-  margin-top: var(--dt-space-350);
-  padding-top: var(--dt-space-200);
-  padding-bottom: var(--dt-space-200);
+  margin-block-start: var(--dt-space-350);
+  padding-block: var(--dt-space-200);
   background-color: var(--dt-color-surface-secondary);
   border: var(--dt-space-100) solid;
   border-color: var(--dt-color-border-default);

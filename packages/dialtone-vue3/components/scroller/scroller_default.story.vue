@@ -112,11 +112,11 @@ function switchAutoScrolling () {
 }
 
 .user {
-  height: 25px;
+  block-size: 25px;
   padding: 0 12px;
   display: flex;
   align-items: center;
-  border-bottom: 1px solid #eee;
+  border-block-end: 1px solid #eee;
 }
 
 .autoscrolling{
@@ -124,10 +124,10 @@ function switchAutoScrolling () {
   align-items: center;
   div {
     background-color: red;
-    width: 5px;
-    height: 5px;
+    inline-size: 5px;
+    block-size: 5px;
     border-radius: 25px;
-    margin-left: 5px;
+    margin-inline-start: 5px;
 
     &.enabled{
       background-color: #00ff00;

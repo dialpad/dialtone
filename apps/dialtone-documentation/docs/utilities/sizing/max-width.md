@@ -49,19 +49,19 @@ Use `d-wmx{n}` to set a fixed minimum width for an element. This can be combined
       <tbody>
         <tr v-for="i in percentage">
           <th scope="row" class="d-code--sm d-docsite-code">.d-wmx{{ i }}p</th>
-          <td class="d-code--sm">max-width: {{ i }}% !important;</td>
+          <td class="d-code--sm">max-inline-size: {{ i }}% !important;</td>
         </tr>
       </tbody>
       <tbody>
         <tr v-for="i in fixed">
           <th scope="row" class="d-code--sm d-docsite-code">.d-wmx{{ i }}</th>
-          <td class="d-code--sm">max-width: {{ i }}px !important;</td>
+          <td class="d-code--sm">max-inline-size: {{ i }}px !important;</td>
         </tr>
       </tbody>
       <tbody>
         <tr v-for="i in other">
           <th scope="row" class="d-code--sm d-docsite-code">.d-wmx-{{ i }}</th>
-          <td class="d-code--sm">max-width: {{ i }} !important;</td>
+          <td class="d-code--sm">max-inline-size: {{ i }} !important;</td>
         </tr>
       </tbody>
     </table>

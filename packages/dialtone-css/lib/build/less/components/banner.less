@@ -19,15 +19,14 @@
     --banner-dialog-padding-x: var(--dt-space-500);
 
     position: fixed;
-    top: 0;
-    right: 0;
-    left: 0;
+    inset-block-start: 0;
+    inset-inline: 0;
     z-index: var(--zi-navigation-fixed);
-    max-width: 100%;
-    min-height: var(--dt-size-650); // 48
+    max-inline-size: 100%;
+    min-block-size: var(--dt-size-650); // 48
     padding: 0;
     line-height: var(--banner-line-height);
-    border-bottom: 1px solid var(--banner-color-border);
+    border-block-end: 1px solid var(--banner-color-border);
     border-radius: 0;
     box-shadow: none;
 
@@ -54,9 +53,9 @@
     position: relative;
     display: flex;
     align-items: center;
-    width: 100%;
-    max-width: 128rem;
-    min-height: 100%;
+    inline-size: 100%;
+    max-inline-size: 128rem;
+    min-block-size: 100%;
     margin: 0 auto;
     padding: var(--banner-dialog-padding-y) var(--banner-dialog-padding-x);
 

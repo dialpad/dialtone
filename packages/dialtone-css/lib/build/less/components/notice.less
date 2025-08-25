@@ -30,8 +30,8 @@
     display: flex;
     align-items: center;
     box-sizing: border-box;
-    width: 100%;
-    max-width: var(--dt-size-1020);
+    inline-size: 100%;
+    max-inline-size: var(--dt-size-1020);
     padding: var(--notice-padding);
     color: var(--notice-color-text);
     font-size: var(--notice-font-size);
@@ -50,7 +50,7 @@
     display: flex;
     flex: 1 auto;
     flex-direction: column;
-    margin-right: var(--dt-space-500);
+    margin-inline-end: var(--dt-space-500);
 }
 
 //  $$  ACTIONS
@@ -71,11 +71,11 @@
 .d-notice__icon {
     display: flex;
     flex: 0 auto;
-    margin-right: var(--dt-space-450);
+    margin-inline-end: var(--dt-space-450);
     color: var(--notice-color-icon);
 
     .d-banner & {
-        margin-right: var(--dt-space-400);
+        margin-inline-end: var(--dt-space-400);
     }
 }
 

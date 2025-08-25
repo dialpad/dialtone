@@ -15,8 +15,7 @@
   align-items: center;
   justify-content: center;
   box-sizing: border-box;
-  padding-right: var(--dt-space-300);
-  padding-left: var(--dt-space-300);
+  padding-inline: var(--dt-space-300) var(--dt-space-300);
   font-size: var(--dt-font-size-100);
   font-family: var(--dt-font-family-body);
   border: var(--dt-size-100) solid;
@@ -34,8 +33,8 @@
   /* https://css-tricks.com/inclusively-hidden/ */
   &--sr-only:not(:focus, :active) {
     position: absolute;
-    width: 1px;
-    height: 1px;
+    inline-size: 1px;
+    block-size: 1px;
     overflow: hidden;
     white-space: nowrap;
     clip: rect(0 0 0 0);
@@ -44,7 +43,7 @@
 
   &__icon,
   &__item {
-    margin-right: var(--dt-space-200);
+    margin-inline-end: var(--dt-space-200);
     color: var(--dt-color-foreground-tertiary);
 
     &--inverted {

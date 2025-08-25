@@ -68,8 +68,8 @@ export default {
 
 .container {
   position: relative;
-  width: 800px;
-  height: 300px;
+  inline-size: 800px;
+  block-size: 300px;
   background-color: var(--black-050);
   padding: 10px;
   border-radius: 10px;
@@ -79,13 +79,13 @@ export default {
 }
 
 .some-text {
-  height: 400px;
+  block-size: 400px;
   cursor: pointer;
   padding: 100px 10px 0;
 
 }
 
 .tooltip {
-  margin-left: 4px;
+  margin-inline-start: 4px;
 }
 </style>

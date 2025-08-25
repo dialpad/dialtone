@@ -19,14 +19,14 @@
 
   flex: none;
   flex-shrink: 0;
-  width: var(--icon-size);
-  height: var(--icon-size);
-  margin-right: var(--dt-space-400);
+  inline-size: var(--icon-size);
+  block-size: var(--icon-size);
+  margin-inline-end: var(--dt-space-400);
   fill: currentColor;
 }
 
 .d-collapsible__anchor-text {
-  margin-right: auto;
+  margin-inline-end: auto;
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
@@ -35,5 +35,5 @@
 .d-collapsible__enter-active,
 .d-collapsible__leave-active {
   overflow: hidden;
-  transition: height var(--td300) var(--ttf-out-quint);
+  transition: block-size var(--td300) var(--ttf-out-quint);
 }

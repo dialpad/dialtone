@@ -11,8 +11,8 @@
 //  ----------------------------------------------------------------------------
 .d-toast-wrapper {
   position: absolute;
-  top: var(--dt-space-600); // 32
-  left: 50%;
+  inset-block-start: var(--dt-space-600); // 32
+  inset-inline-start: 50%;
   z-index: var(--zi-notification);
   display: flex;
   flex-direction: column;
@@ -31,7 +31,7 @@
 
     z-index: var(--zi-notification);
     display: block;
-    max-width: var(--dt-size-975);
+    max-inline-size: var(--dt-size-975);
     word-break: normal;
     box-shadow: var(--toast-box-shadow);
     pointer-events: all;
@@ -63,7 +63,7 @@
 
 
     .d-notice__actions button:first-child {
-        margin-left: var(--dt-space-600); // 32
+        margin-inline-start: var(--dt-space-600); // 32
     }
 }
 
@@ -107,7 +107,7 @@
 .d-toast--viewing {
   --toast-border-radius: var(--dt-size-radius-200);
 
-  border-top: var(--dt-size-300) solid var(--dt-color-magenta-300);
+  border-block-start: var(--dt-size-300) solid var(--dt-color-magenta-300);
 
   .d-notice__icon {
     color: var(--dt-color-magenta-300);
@@ -146,7 +146,7 @@
   display: flex;
   align-items: center;
   box-sizing: border-box;
-  width: var(--dt-size-925);
+  inline-size: var(--dt-size-925);
   padding: var(--dt-space-350) var(--dt-space-350) var(--dt-space-450) var(--dt-space-450);
   color: var(--toast-alternate-color-text);
   font-size: var(--toast-alternate-font-size);
@@ -177,7 +177,7 @@
   .d-toast-layout-alternate__icon {
     display: flex;
     flex: 0 auto;
-    margin-right: var(--dt-space-300);
+    margin-inline-end: var(--dt-space-300);
     color: var(--toast-alternate-color-icon);
   }
 
@@ -199,7 +199,7 @@
   display: flex;
   flex: 1 auto;
   flex-direction: column;
-  margin-right: var(--dt-space-500);
+  margin-inline-end: var(--dt-space-500);
   color: var(--dt-color-foreground-primary);
   font-weight: var(--dt-font-weight-normal);
   font-size: var(--dt-font-size-200);
@@ -208,11 +208,11 @@
 .d-toast-alternate__dialog {
   position: relative;
   align-items: center;
-  width: var(--dt-size-100-percent);
+  inline-size: var(--dt-size-100-percent);
 
 
   .d-notice__actions button:first-child {
-    margin-left: var(--dt-space-600); // 32
+    margin-inline-start: var(--dt-space-600); // 32
   }
 }
 

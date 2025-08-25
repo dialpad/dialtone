@@ -10,8 +10,8 @@
   display: flex;
   align-items: center;
   justify-content: flex-start;
-  min-width: var(--dt-space-650);
-  height: var(--dt-size-100-percent);
+  min-inline-size: var(--dt-space-650);
+  block-size: var(--dt-size-100-percent);
   background-color: transparent;
   background-image: none;
   border-width: 0;
@@ -24,25 +24,25 @@
 }
 
 .d-recipe-contact-info__subtitle {
-  margin-top: var(--dt-space-200-negative);
+  margin-block-start: var(--dt-space-200-negative);
   color: var(--dt-color-foreground-tertiary);
   font-size: var(--dt-font-size-100);
 }
 
 .d-recipe-contact-info__bottom {
-  margin-top: var(--dt-space-200);
+  margin-block-start: var(--dt-space-200);
 }
 
 .d-recipe-contact-info__right {
   display: grid;
   align-content: center;
-  min-width: 0;
+  min-inline-size: 0;
 }
 
 .d-recipe-contact-info__avatars {
   display: flex;
   flex-direction: row;
-  margin-right: var(--dt-space-300-negative);
+  margin-inline-end: var(--dt-space-300-negative);
 
   .d-avatar {
     box-sizing: unset;
@@ -50,7 +50,7 @@
     border-radius: var(--dt-size-radius-pill);
 
     &.d-recipe-contact-info__avatar-stacked {
-      margin-left: var(--dt-space-550-negative);
+      margin-inline-start: var(--dt-space-550-negative);
     }
 
     &.d-recipe-contact-info__avatar-halo {

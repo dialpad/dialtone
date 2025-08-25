@@ -13,8 +13,8 @@
 /* https://css-tricks.com/inclusively-hidden/ */
 .sr-only:not(:focus, :active) {
   position: absolute;
-  width: 1px;
-  height: 1px;
+  inline-size: 1px;
+  block-size: 1px;
   overflow: hidden;
   white-space: nowrap;
   clip: rect(0 0 0 0);
@@ -30,5 +30,5 @@
 
 // CSS override to avoid header links to move while changing theme on Docs mode
 .css-1ofkq6d {
-  margin-left: var(--dt-space-550-negative) !important;
+  margin-inline-start: var(--dt-space-550-negative) !important;
 }

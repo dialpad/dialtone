@@ -61,9 +61,9 @@ const SHADOW_COMPOSITION_TOKENS = ['small', 'medium', 'large', 'extra-large', 'c
 const isTypography = (name, key) => name.includes('--dt-typography') && name.includes(key);
 const isFont = (name, key) => name.includes(`--dt-font-${key}`);
 const getRectSizeStyle = (value) => {
-  if (value.endsWith('%')) return { width: value };
+  if (value.endsWith('%')) return { 'inline-size': value };
   const size = parseFloat(value.replace('rem', ''));
-  if (size < 12.8 && size > -12.8) return { width: `${Math.abs(size)}rem` };
+  if (size < 12.8 && size > -12.8) return { 'inline-size': `${Math.abs(size)}rem` };
   return null;
 };
 
@@ -156,13 +156,13 @@ const getShadowStyle = computed(() => {
 const getSizeStyle = computed(() => {
   if (props.name.includes('radius')) {
     if (props.name.includes('circle')) {
-      return { width: 'var(--dt-size-600)', borderRadius: props.value };
+      return { 'inline-size': 'var(--dt-size-600)', borderRadius: props.value };
     }
-    return { width: 'var(--dt-size-100-percent)', borderRadius: props.value };
+    return { 'inline-size': 'var(--dt-size-100-percent)', borderRadius: props.value };
   }
   if (props.name.includes('border')) {
     return {
-      width: 'var(--dt-size-100-percent)',
+      'inline-size': 'var(--dt-size-100-percent)',
       backgroundColor: 'var(--dt-color-neutral-transparent)',
       border: `${props.value} solid var(--dt-color-border-brand)`,
     };
@@ -177,7 +177,7 @@ const displaySpaceReference = computed(() => {
 });
 
 const getSpaceAfterStyle = computed(() => {
-  return { left: props.value };
+  return { 'inset-inline-start': props.value };
 });
 
 const isPercentage = computed(() => props.value.endsWith('%'));
@@ -189,21 +189,21 @@ const isPercentage = computed(() => props.value.endsWith('%'));
 }
 
 .link-example {
-  border-bottom: var(--dt-size-200) solid;
+  border-block-end: var(--dt-size-200) solid;
   line-height: initial;
 }
 
 .sizeRectangle {
-  height: var(--dt-size-600);
+  block-size: var(--dt-size-600);
   background-color: var(--dt-color-purple-400);
   border-radius: var(--dt-size-radius-300);
-  width: 0;
+  inline-size: 0;
 }
 
 .spaceRectangle {
-  height: var(--dt-size-600);
+  block-size: var(--dt-size-600);
   background-color: var(--dt-color-purple-400);
-  width: 0;
+  inline-size: 0;
 }
 
 .space {
@@ -212,8 +212,8 @@ const isPercentage = computed(() => props.value.endsWith('%'));
 }
 
 .spaceReference {
-  height: var(--dt-size-600);
-  width: var(--dt-size-500);
+  block-size: var(--dt-size-600);
+  inline-size: var(--dt-size-500);
   background-color: var(--dt-color-surface-moderate);
   display: flex;
   align-items: center;
@@ -221,19 +221,19 @@ const isPercentage = computed(() => props.value.endsWith('%'));
   font: var(--dt-typography-body-sm);
   color: var(--dt-color-foreground-muted);
   padding: var(--dt-space-400) var(--dt-space-200);
-  border-top-right-radius: var(--dt-size-radius-300);
-  border-bottom-right-radius: var(--dt-size-radius-300);
+  border-start-end-radius: var(--dt-size-radius-300);
+  border-end-end-radius: var(--dt-size-radius-300);
   &.spaceBefore {
     border-radius: var(--dt-size-radius-0);
-    border-top-left-radius: var(--dt-size-radius-300);
-    border-bottom-left-radius: var(--dt-size-radius-300);
+    border-start-start-radius: var(--dt-size-radius-300);
+    border-end-start-radius: var(--dt-size-radius-300);
   }
 }
 
 .spaceReference.percentage {
   position: absolute;
   &.spaceBefore {
-    right: 100%;
+    inset-inline-end: 100%;
   }
 }
 </style>

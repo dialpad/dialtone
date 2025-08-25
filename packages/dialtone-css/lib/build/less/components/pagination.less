@@ -23,8 +23,7 @@
 //  $   PREV & NEXT BUTTONS
 //  ----------------------------------------------------------------------------
 .d-pagination__button {
-  padding-right: var(--dt-space-400);
-  padding-left: var(--dt-space-400);
+  padding-inline: var(--dt-space-400) var(--dt-space-400);
 
   &:disabled {
     color: var(--dt-color-foreground-secondary-inverted);
@@ -40,7 +39,7 @@
 }
 
 .d-pagination__separator-icon {
-  width: var(--dt-size-550);
+  inline-size: var(--dt-size-550);
   color: var(--dt-color-foreground-tertiary);
   text-align: center;
 }

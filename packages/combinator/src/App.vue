@@ -121,7 +121,7 @@ onMounted(async () => {
 
 <style>
   .dtc-preview {
-    padding-left: var(--dt-space-800);
-    padding-right: var(--dt-space-800);
+    padding-inline-start: var(--dt-space-800);
+    padding-inline-end: var(--dt-space-800);
   }
 </style>

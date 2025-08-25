@@ -14,8 +14,8 @@
   flex-direction: column;
   // fixed width to achieve accessibility in keyboard (372px)
   // with this width we have 9 emoji per row
-  width: calc(var(--dt-size-925) + var(--dt-size-600) + var(--dt-size-400));
-  height: 100%;
+  inline-size: calc(var(--dt-size-925) + var(--dt-size-600) + var(--dt-size-400));
+  block-size: 100%;
   background-color: var(--dt-color-surface-primary);
   border-radius: var(--dt-size-radius-300);
 
@@ -25,10 +25,9 @@
 
     &::after {
       position: absolute;
-      right: 0;
-      bottom: 0;
-      left: 0;
-      height: var(--dt-size-border-200);
+      inset-inline: 0 0;
+      inset-block-end: 0;
+      block-size: var(--dt-size-border-200);
       background-color: var(--dt-color-surface-moderate) !important;
       content: '';
     }
@@ -37,8 +36,8 @@
   &__alignment {
     // !important to default value to override popover dialog box-sizing: border-box style
     box-sizing: content-box !important;
-    width: auto;
-    max-width: calc(var(--dt-size-925) + var(--dt-size-400));
+    inline-size: auto;
+    max-inline-size: calc(var(--dt-size-925) + var(--dt-size-400));
     margin: 0 var(--dt-space-500);
   }
 
@@ -47,10 +46,10 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    height: calc(var(--dt-size-650) + var(--dt-size-400) + var(--dt-size-200));
+    block-size: calc(var(--dt-size-650) + var(--dt-size-400) + var(--dt-size-200));
     padding: 0 var(--dt-space-500);
     background: var(--dt-color-surface-secondary);
-    border-top: var(--dt-size-border-100) solid var(--dt-color-border-subtle);
+    border-block-start: var(--dt-size-border-100) solid var(--dt-color-border-subtle);
   }
 
   &__add-emoji {
@@ -74,7 +73,7 @@
 
         &.d-tab--selected {
           &::after {
-            height: var(--dt-size-border-200);
+            block-size: var(--dt-size-border-200);
           }
         }
     }
@@ -90,8 +89,8 @@
     border-radius: var(--dt-size-radius-pill);
 
     button {
-      width: var(--dt-size-600);
-      height: var(--dt-size-600);
+      inline-size: var(--dt-size-600);
+      block-size: var(--dt-size-600);
       margin: 0;
       padding: 0;
       background: none;
@@ -114,8 +113,8 @@
   &__skin-selected {
     button {
       display: inline-block;
-      width: var(--dt-size-625);
-      height: var(--dt-size-625);
+      inline-size: var(--dt-size-625);
+      block-size: var(--dt-size-625);
       margin: 0;
       padding: calc(var(--dt-space-350) + var(--dt-space-100));
       background: var(--dt-color-surface-moderate-opaque);
@@ -131,10 +130,10 @@
   }
 
   &__selector {
-    min-height: calc(var(--dt-size-905) + var(--dt-size-600) + var(--dt-size-100));
+    min-block-size: calc(var(--dt-size-905) + var(--dt-size-600) + var(--dt-size-100));
 
     p {
-      padding-bottom: var(--dt-space-300);
+      padding-block-end: var(--dt-space-300);
       color: var(--dt-color-foreground-secondary);
       font: var(--dt-typography-headline-eyebrow);
       text-transform: var(--dt-typography-headline-eyebrow-text-case);
@@ -143,8 +142,8 @@
 
   &__category {
     position: sticky;
-    top: 0;
-    width: 100%;
+    inset-block-start: 0;
+    inline-size: 100%;
     margin: 0;
     padding: var(--dt-space-500) var(--dt-space-500) 0 var(--dt-space-500);
     background: var(--dt-color-surface-primary);
@@ -152,42 +151,42 @@
 
   &__list {
     position: relative;
-    height: 100%;
-    max-height: calc(var(--dt-size-905) + var(--dt-size-600) + var(--dt-size-100));
-    padding-bottom: calc(var(--dt-space-300) + var(--dt-space-100));
+    block-size: 100%;
+    max-block-size: calc(var(--dt-size-905) + var(--dt-size-600) + var(--dt-size-100));
+    padding-block-end: calc(var(--dt-space-300) + var(--dt-space-100));
     overflow: hidden auto;
 
     div:not(:first-child) {
       p {
-        margin-top: var(--dt-space-500);
+        margin-block-start: var(--dt-space-500);
       }
     }
   }
 
   &__search-label {
-    padding-top: var(--dt-space-500);
+    padding-block-start: var(--dt-space-500);
   }
 
   &__search-x-button {
-    margin-right: var(--dt-space-300-negative);
+    margin-inline-end: var(--dt-space-300-negative);
   }
 
   &__tab {
     display: flex;
     flex-wrap: wrap;
     gap: var(--dt-space-200);
-    width: calc(100% + calc(var(--dt-size-500) - var(--dt-size-100)));
-    max-width: calc(var(--dt-size-925) + var(--dt-size-400));
+    inline-size: calc(100% + calc(var(--dt-size-500) - var(--dt-size-100)));
+    max-inline-size: calc(var(--dt-size-925) + var(--dt-size-400));
     // We use this margin left to align the emoji list with the tabset label
-    margin-left: var(--dt-space-350-negative);
-    padding-top: var(--dt-space-300);
+    margin-inline-start: var(--dt-space-350-negative);
+    padding-block-start: var(--dt-space-300);
 
     button {
       display: flex;
       align-items: center;
       justify-content: center;
-      width: calc(var(--dt-size-600) + var(--dt-size-300));
-      height: calc(var(--dt-size-600) + var(--dt-size-300));
+      inline-size: calc(var(--dt-size-600) + var(--dt-size-300));
+      block-size: calc(var(--dt-size-600) + var(--dt-size-300));
       margin: 0;
       padding: 0;
       background: none;
@@ -231,8 +230,8 @@
     display: flex;
     gap: var(--dt-space-400);
     align-items: center;
-    width: 100%;
-    max-width: calc(var(--dt-size-905) + var(--dt-size-550) + var(--dt-size-200));
+    inline-size: 100%;
+    max-inline-size: calc(var(--dt-size-905) + var(--dt-size-550) + var(--dt-size-200));
     color: var(--dt-color-foreground-tertiary);
     font: var(--dt-typography-body-md);
   }
