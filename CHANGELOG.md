@@ -1,3 +1,10 @@
+# [9.133.0-next.2](https://github.com/dialpad/dialtone/compare/dialtone/v9.133.0-next.1...dialtone/v9.133.0-next.2) (2025-08-25)
+
+
+### Code Refactoring
+
+* **Css:** DLT-1876 css logical properties ([#872](https://github.com/dialpad/dialtone/issues/872)) ([1acd6c9](https://github.com/dialpad/dialtone/commit/1acd6c900053b0c820309faa4a870ff1dceced04))
+
 # [9.133.0-next.1](https://github.com/dialpad/dialtone/compare/dialtone/v9.132.1...dialtone/v9.133.0-next.1) (2025-08-25)
 
 
