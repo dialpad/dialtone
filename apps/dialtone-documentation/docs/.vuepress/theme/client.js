@@ -6,7 +6,6 @@ import 'overlayscrollbars/overlayscrollbars.css';
 import { OverlayScrollbars, ClickScrollPlugin } from 'overlayscrollbars';
 import { onBeforeMount, provide, ref } from 'vue';
 import { flushPromises } from '@workspaceRoot/common/utils/client.mjs';
-import { DialtoneLocalization } from '@dialpad/dialtone-vue/localization/index';
 
 // CSS
 import '@dialpad/dialtone-css/lib/dist/dialtone.css';
@@ -45,6 +44,7 @@ export default defineClientConfig({
       // await registerDialtoneCombinator(app);
       await registerDialtoneIcons(app);
       await importDocumentation(app);
+      importDialtoneThemes(app);
     }
     router.options.scrollBehavior = async (to) => {
       if (to.hash) {
@@ -65,11 +65,14 @@ export default defineClientConfig({
   },
   setup () {
     onBeforeMount(() => {
-      const preferredTheme = localStorage.getItem('preferredTheme') || 'system';
+      const preferredMode = localStorage.getItem('preferredMode') || 'system';
+      const preferredTheme = localStorage.getItem('preferredTheme') || 'dp';
+
+      const currentMode = ref(preferredMode);
       const currentTheme = ref(preferredTheme);
+
+      provide('currentMode', currentMode);
       provide('currentTheme', currentTheme);
-      // eslint-disable-next-line no-unused-vars
-      const dialtoneLocalization = new DialtoneLocalization('en-US');
     });
   },
   layouts: {
@@ -147,4 +150,19 @@ async function importDocumentation (app) {
   } catch (error) {
     console.error(`Couldn't import dialtone documentation: ${error}`);
   }
+}
+
+function importDialtoneThemes (app) {
+  const dialtoneThemeFiles = import.meta.globEager('../../../node_modules/@dialpad/dialtone-tokens/dist/themes/*.js')
+  const themes = {};
+  const excludedThemeImports = ['config', 'debug']
+
+  for (const path in dialtoneThemeFiles) {
+    const themeName = path.split('/').pop().split('.').shift();
+
+    if (excludedThemeImports.includes(themeName)) continue;
+
+    themes[themeName] = dialtoneThemeFiles[path].default;
+  }
+  app.provide('themes', themes)
 }

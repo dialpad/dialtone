@@ -55,7 +55,7 @@
                 :category="category"
                 :name="exampleName || name"
                 :value="exampleValue.toString()"
-                :theme="theme"
+                :mode="mode"
               />
             </td>
             <th scope="row">
@@ -136,7 +136,7 @@ export default {
       default: false,
     },
 
-    theme: {
+    mode: {
       type: String,
       required: true,
     },

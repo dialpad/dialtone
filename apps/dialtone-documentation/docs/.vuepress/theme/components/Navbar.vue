@@ -118,28 +118,29 @@
       </span>
     </a>
     <dt-button
-      v-dt-tooltip:bottom="`${currentTheme.charAt(0).toUpperCase() + currentTheme.slice(1)} `"
+      v-dt-tooltip:bottom="`Mode: ${currentMode.charAt(0).toUpperCase() + currentMode.slice(1)} `"
       importance="clear"
       kind="muted"
-      @click="toggleTheme"
+      @click="toggleMode"
     >
       <template #icon>
         <dt-icon
           size="400"
-          :name="currentThemeIconName"
+          :name="currentModeIconName"
         />
       </template>
     </dt-button>
     <dt-button
-      v-dt-tooltip:bottom="`Brand: ${currentBrand}`"
-      circle
+      v-dt-tooltip:bottom="`Theme: ${currentTheme.charAt(0).toUpperCase() + currentTheme.slice(1)} `"
+      :circle="true"
       importance="clear"
       kind="muted"
       hidden
-      @click="toggleBrand"
+      @click="toggleTheme"
     >
       <template #icon>
         <dt-icon
+          class="theme-toggle-button"
           size="400"
           name="triangle"
         />
@@ -164,14 +165,8 @@
 
 <script setup>
 import { useRoute } from 'vue-router';
-import { onMounted, onUnmounted, inject, computed, ref } from 'vue';
+import { onMounted, onUnmounted, inject, computed } from 'vue';
 import { setTheme } from '@dialpad/dialtone-tokens/themes/config';
-import DpLight from '@dialpad/dialtone-tokens/themes/dp-light';
-import DpDark from '@dialpad/dialtone-tokens/themes/dp-dark';
-import DpDecaLight from '@dialpad/dialtone-tokens/themes/dp-deca-light';
-import DpDecaDark from '@dialpad/dialtone-tokens/themes/dp-deca-dark';
-import TmoLight from '@dialpad/dialtone-tokens/themes/tmo-light';
-import TmoDark from '@dialpad/dialtone-tokens/themes/tmo-dark';
 
 defineProps({
   items: {
@@ -182,14 +177,22 @@ defineProps({
 defineEmits(['search']);
 
 const route = useRoute();
+const currentMode = inject('currentMode');
 const currentTheme = inject('currentTheme');
-const currentBrand = ref('dialpad');
-const themes = ['system', 'light', 'dark'];
-const brands = ['dialpad', 'tmobile', 'deca'];
-const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
+const modes = ['system', 'light', 'dark'];
+const themes = inject('themes');
+const excludedThemeNames = ['dp-deca', 'expressive'];
+const prefersDarkMediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
+const themesKeys = Array.from(
+  new Set(
+    Object.keys(themes)
+      .filter(key => !excludedThemeNames.some(exclusion => key.startsWith(exclusion)))
+      .map(key => key.replace(/-(dark|light)/, '')),
+  ),
+);
 
-const currentThemeIconName = computed(() => {
-  switch (currentTheme.value) {
+const currentModeIconName = computed(() => {
+  switch (currentMode.value) {
     case 'dark':
       return 'moon';
     case 'light':
@@ -203,53 +206,51 @@ const isActiveLink = (text) => {
   return route.path.search(linkBase) !== -1;
 };
 
-const toggleTheme = () => {
-  const currentIndex = themes.indexOf(currentTheme.value);
-  const nextIndex = (currentIndex + 1) % themes.length;
-  currentTheme.value = themes[nextIndex];
+const toggleMode = () => {
+  const currentIndex = modes.indexOf(currentMode.value);
+  const nextIndex = (currentIndex + 1) % modes.length;
+  currentMode.value = modes[nextIndex];
 
-  setCssForTheme(currentTheme.value);
+  setCss();
+  localStorage.setItem('preferredMode', currentMode.value);
+};
+
+const toggleTheme = () => {
+  const currentIndex = themesKeys.indexOf(currentTheme.value);
+  const nextIndex = (currentIndex + 1) % themesKeys.length;
+  currentTheme.value = themesKeys[nextIndex];
+  setCss();
   localStorage.setItem('preferredTheme', currentTheme.value);
 };
 
-const toggleBrand = () => {
-  const currentIndex = brands.indexOf(currentBrand.value);
-  const nextIndex = (currentIndex + 1) % brands.length;
-  currentBrand.value = brands[nextIndex];
-  setCssForBrand(currentBrand.value);
-};
+const setCss = () => {
+  let themeName = `${currentTheme.value}-`;
 
-const setCssForTheme = (currentTheme) => {
-  if (currentTheme === 'system') {
-    mediaQuery.matches ? setTheme(DpDark) : setTheme(DpLight);
-  } else if (currentTheme === 'dark') {
-    setTheme(DpDark);
+  if (currentMode.value === 'system') {
+    themeName += prefersDarkMediaQuery.matches ? 'dark' : 'light';
   } else {
-    setTheme(DpLight);
+    themeName += currentMode.value;
   }
-};
 
-// eslint-disable-next-line complexity
-const setCssForBrand = (currentBrand) => {
-  let theme = currentTheme.value;
-  if (theme === 'system') {
-    mediaQuery.matches ? theme = 'dark' : theme = 'light';
-  }
-  if (currentBrand === 'deca') {
-    theme === 'dark' ? setTheme(DpDecaDark) : setTheme(DpDecaLight);
-  } else if (currentBrand === 'tmobile') {
-    theme === 'dark' ? setTheme(TmoDark) : setTheme(TmoLight);
-  } else {
-    theme === 'dark' ? setTheme(DpDark) : setTheme(DpLight);
-  }
+  console.warn(`Theme ${themeName} does not exists, using default theme`);
+
+  const theme = themes[themeName] || themes['dp-light'];
+
+  setTheme(theme);
 };
 
 onMounted(() => {
-  mediaQuery.addEventListener('change', toggleTheme);
-  setCssForTheme(currentTheme.value);
+  prefersDarkMediaQuery.addEventListener('change', setCss);
+  setCss();
 });
 
 onUnmounted(() => {
-  mediaQuery.removeEventListener('change', toggleTheme);
+  prefersDarkMediaQuery.removeEventListener('change', setCss);
 });
 </script>
+
+<style>
+.theme-toggle-button {
+  color: var(--dt-shell-mention-color-surface-primary);
+}
+</style>
