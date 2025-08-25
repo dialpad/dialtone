@@ -144,13 +144,13 @@ export const dialtoneVuepressTheme = (options) => {
           '/guides/content/inclusive-language/',
           '/guides/content/voice-and-tone/',
         ]);
-      _extractFrontmatter(app, '/guides/content/', options);
-      _extractFrontmatter(app, '/components/', options, ['/components/status/']);
-      _extractFrontmatter(app, '/design/', options, ['/design/colors/usage/', '/design/colors/palette/']);
-      _extractFrontmatter(app, '/design/colors/', options);
-      _extractComponentStatus(app);
+        _extractFrontmatter(app, '/guides/content/', options);
+        _extractFrontmatter(app, '/components/', options, ['/components/status/']);
+        _extractFrontmatter(app, '/design/', options, ['/design/colors/usage/', '/design/colors/palette/', '/design/colors/chart-colors/']);
+        _extractFrontmatter(app, '/design/colors/', options);
+        _extractComponentStatus(app);
     },
-    // eslint-disable-next-line complexity
+     
     extendsPage: (page) => {
       switch (page.path) {
         case '/about/whats-new/':
