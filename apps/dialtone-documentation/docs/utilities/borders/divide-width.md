@@ -103,24 +103,24 @@ If an element's `flex-direction` is reversed, apply `d-divide-{y|x}-reverse` to 
         <td class="d-code--sm">
           --divide-{{ d }}-reverse: 0;<br/>
           <span v-if="d === 'y'">
-            border-top: calc(
+            border-block-start: calc(
               <span v-if="i === 'default'">1</span>
               <span v-else>{{ i }}</span>
               px *(1 - var(--divide-{{ d }}-reverse))
             ) solid !important;<br/>
-            border-bottom: calc(
+            border-block-end: calc(
               <span v-if="i === 'default'">1</span>
               <span v-else>{{ i }}</span>
 * var(--divide-{{ d }}-reverse)
             ) solid !important;
           </span>
           <span v-else>
-            border-right: calc(
+            border-inline-end: calc(
               <span v-if="i === 'default'">1</span>
               <span v-else>{{ i }}</span>
               px*var(--divide-{{ d }}-reverse)
             ) solid !important;<br/>
-            border-left: calc(
+            border-inline-start: calc(
               <span v-if="i === 'default'">1</span>
               <span v-else>{{ i }}</span>
 *(1 - var(--divide-{{ d }}-reverse))

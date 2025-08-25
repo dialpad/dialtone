@@ -21,7 +21,7 @@ div[class*="language-"] {
 	}
 
 	&[class*="html"] {
-		margin-top: var(--dt-space-400-negative);
+		margin-block-start: var(--dt-space-400-negative);
 		border-radius: 0 0 var(--dt-size-400) var(--dt-size-400) !important;
 	}
 }
@@ -40,7 +40,7 @@ pre[class*="language-"] {
 	font: var(--dt-typography-code-sm);
 	line-height: var(--dt-font-line-height-400);
 	white-space: pre;
-	text-align: left;
+	text-align: start;
 	word-wrap: normal;
 	word-break: normal;
 	word-spacing: normal;
@@ -142,7 +142,7 @@ pre[class*="language-"] {
 
 pre[class*="language-"].line-numbers {
 	position: relative;
-	padding-left: var(--dt-space-600);
+	padding-inline-start: var(--dt-space-600);
 	counter-reset: linenumber;
 }
 
@@ -153,12 +153,12 @@ pre[class*="language-"].line-numbers > code {
 
 .line-numbers .line-numbers-rows {
 	position: absolute;
-	top: 0;
-	left: var(--dt-space-negative-600);
-	width: var(--dt-size-600);
+	inset-block-start: 0;
+	inset-inline-start: var(--dt-space-negative-600);
+	inline-size: var(--dt-size-600);
 	font-size: 100%;
 	letter-spacing: var(--dt-space-negative-100);
-	border-right: var(--dt-size-100) solid var(--dt-color-black-600);
+	border-inline-end: var(--dt-size-100) solid var(--dt-color-black-600);
 	-webkit-user-select: none;
 	-moz-user-select: none;
 	-ms-user-select: none;
@@ -172,27 +172,27 @@ pre[class*="language-"].line-numbers > code {
 
   &::before {
     display: block;
-    padding-right: var(--dt-space-400);
+    padding-inline-end: var(--dt-space-400);
     color: var(--dt-color-black-600);
-    text-align: right;
+    text-align: end;
     content: counter(linenumber);
   }
 }
 
 .command-line-prompt {
 	display: block;
-	float: left;
-	margin-right: var(--dt-space-negative-450);
+	float: inline-start;
+	margin-inline-end: var(--dt-space-negative-450);
 	font-size: 100%;
 	letter-spacing: var(--dt-space-negative-100);
-	border-right: var(--dt-size-100) solid var(--dt-color-black-600);
+	border-inline-end: var(--dt-size-100) solid var(--dt-color-black-600);
 	user-select: none;
 	pointer-events: none;
 }
 
 .command-line-prompt > span::before {
 	display: block;
-	padding-right: var(--dt-space-400);
+	padding-inline-end: var(--dt-space-400);
 	color: var(--dt-color-black-600);
 	content: ' ';
 }

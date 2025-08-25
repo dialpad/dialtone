@@ -71,18 +71,18 @@ Use `d-b{t|r|b|l|x|y}` to add a border to only specific sides of your element.
         <th scope="row" class="d-code--sm d-docsite-code">.d-b{{ i[0] }}</th>
         <td class="d-code--sm">
           <span v-if="i === 'y'">
-            border-top: var(--dt-space-100) solid !important;<br/>
-            border-bottom: var(--dt-space-100) solid !important;
+            border-block-start: var(--dt-space-100) solid !important;<br/>
+            border-block-end: var(--dt-space-100) solid !important;
           </span>
           <span v-else-if="i === 'x'">
-            border-right: var(--dt-space-100) solid !important;<br/>
-            border-left: var(--dt-space-100) solid !important;
+            border-inline-end: var(--dt-space-100) solid !important;<br/>
+            border-inline-start: var(--dt-space-100) solid !important;
           </span>
           <span v-else-if="i === 'all'">
             border: var(--dt-space-100) solid !important;
           </span>
           <span v-else>
-            border-{{i}}: var(--dt-space-100) solid !important;
+            border-{{ i === 'top' ? 'block-start' : i === 'bottom' ? 'block-end' : i === 'left' ? 'inline-start' : i === 'right' ? 'inline-end' : i }}: var(--dt-space-100) solid !important;
           </span>
         </td>
       </tr>

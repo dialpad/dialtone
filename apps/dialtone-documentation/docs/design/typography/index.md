@@ -293,9 +293,9 @@ Each typography style is expressed through a shorthand `font` property, and its 
     &__btn {
       display: none;
       position: absolute;
-      right: 0;
+      inset-inline-end: 0;
       background-color: var(--dt-color-surface-secondary);
-      padding-left: var(--dt-space-300);
+      padding-inline-start: var(--dt-space-300);
 
       .dialtone-copy-utility:hover & {
         display: block;

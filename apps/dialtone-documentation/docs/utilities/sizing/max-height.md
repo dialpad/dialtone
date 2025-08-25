@@ -35,19 +35,19 @@ Use `d-hmx{n}p` or `d-hmx{n}` to set a maximum height percentage for an element.
       <tbody>
         <tr v-for="i in percentage">
           <th scope="row" class="d-code--sm d-docsite-code">.d-hmx{{ i }}p</th>
-          <td class="d-code--sm">max-height: {{ i }}% !important;</td>
+          <td class="d-code--sm">max-block-size: {{ i }}% !important;</td>
         </tr>
       </tbody>
       <tbody>
         <tr v-for="i in fixed">
           <th scope="row" class="d-code--sm d-docsite-code">.d-hmx{{ i }}</th>
-          <td class="d-code--sm">max-height: {{ i }}px !important;</td>
+          <td class="d-code--sm">max-block-size: {{ i }}px !important;</td>
         </tr>
       </tbody>
       <tbody>
         <tr v-for="i in other">
           <th scope="row" class="d-code--sm d-docsite-code">.d-hmx-{{ i }}</th>
-          <td class="d-code--sm">max-height: {{ i }} !important;</td>
+          <td class="d-code--sm">max-block-size: {{ i }} !important;</td>
         </tr>
       </tbody>
     </table>

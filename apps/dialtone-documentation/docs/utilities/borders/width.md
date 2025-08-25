@@ -64,7 +64,7 @@ Use `d-b{a|t|r|b|l}w{n}` to change the border width of your direction on your el
         <th scope="row" class="d-code--sm d-docsite-code">.d-b{{ i[0] }}w{{ key }}</th>
         <td class="d-code--sm">
           <span v-if="i === 'all'">border-width: var(--dt-size-border-{{ val }}) !important;</span>
-          <span v-else>border-{{i}}-width: var(--dt-size-border-{{ val }}) !important;</span>
+          <span v-else>border-{{ i === 'top' ? 'block-start' : i === 'bottom' ? 'block-end' : i === 'left' ? 'inline-start' : i === 'right' ? 'inline-end' : i }}-width: var(--dt-size-border-{{ val }}) !important;</span>
         </td>
       </tr>
     </tbody>

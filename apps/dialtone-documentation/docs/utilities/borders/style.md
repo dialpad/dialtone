@@ -72,7 +72,7 @@ Use `d-b{a|t|r|b|l}s-dotted` to change the border style to dotted on your elemen
         <th scope="row" class="d-code--sm d-docsite-code">.d-b{{ i[0] }}s-{{ s }}</th>
         <td class="d-code--sm">
           <span v-if="i === 'all'">border-style: {{ s }} !important;</span>
-          <span v-else>border-{{i}}-style: {{ s }} !important;</span>
+          <span v-else>border-{{ i === 'top' ? 'block-start' : i === 'bottom' ? 'block-end' : i === 'left' ? 'inline-start' : i === 'right' ? 'inline-end' : i }}-style: {{ s }} !important;</span>
         </td>
       </tr>
     </tbody>

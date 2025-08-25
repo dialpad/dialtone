@@ -75,11 +75,11 @@ function toggleSiteNav () {
 
     svg {
       position: absolute;
-      top: 50%;
-      left: 50%;
+      inset-block-start: 50%;
+      inset-inline-start: 50%;
       transform: translate(-50%, -50%);
-      width: 1.5rem;
-      height: 1.5rem;
+      inline-size: 1.5rem;
+      block-size: 1.5rem;
     }
 
     &--top {
@@ -88,14 +88,14 @@ function toggleSiteNav () {
   }
 
   .d-breadcrumbs .d-breadcrumbs__item:not(:last-of-type):before {
-    right: -1rem;
-    margin-top: 0;
+    inset-inline-end: -1rem;
+    margin-block-start: 0;
   }
 
   .mobile-header-drop-down-navigation {
-    top: var(--dt-space-800);
-    height: 100%;
-    padding-bottom: 15.2rem;
+    inset-block-start: var(--dt-space-800);
+    block-size: 100%;
+    padding-block-end: 15.2rem;
 
     ul {
       list-style-type: none;

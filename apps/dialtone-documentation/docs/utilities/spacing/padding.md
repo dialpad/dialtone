@@ -74,15 +74,15 @@ Padding can be added to an element by using a utility class (i.e. `.d-p[#]`) or 
             </th>
             <td class="d-code--sm">
                 <span v-if="i == 'y'">
-                  padding-top: {{ output }} !important;<br/>
-                  padding-bottom: {{ output }} !important;
+                  padding-block-start: {{ output }} !important;<br/>
+                  padding-block-end: {{ output }} !important;
                 </span>
                 <span v-else-if="i == 'x'">
-                  padding-right: {{ output }} !important;<br/>
-                  padding-left: {{ output }} !important;
+                  padding-inline-end: {{ output }} !important;<br/>
+                  padding-inline-start: {{ output }} !important;
                 </span>
                 <span v-else>
-                  <span v-if="i !== 'All'">padding-{{ i }}: {{ output }} !important; </span>
+                  <span v-if="i !== 'All'">padding-{{ i === 'top' ? 'block-start' : i === 'bottom' ? 'block-end' : i === 'left' ? 'inline-start' : i === 'right' ? 'inline-end' : i }}: {{ output }} !important; </span>
                   <span v-else>padding: {{ output }} !important</span>
                 </span>
             </td>
@@ -97,15 +97,15 @@ Padding can be added to an element by using a utility class (i.e. `.d-p[#]`) or 
         </th>
         <td class="d-code--sm">
           <span v-if="i == 'y'">
-            padding-top: unset !important;<br/>
-            padding-bottom: unset !important;
+            padding-block-start: unset !important;<br/>
+            padding-block-end: unset !important;
           </span>
           <span v-else-if="i == 'x'">
-            padding-right: unset !important;<br/>
-            padding-left: unset !important;
+            padding-inline-end: unset !important;<br/>
+            padding-inline-start: unset !important;
           </span>
           <span v-else>
-            <span v-if="i !== 'All'">padding-{{ i }}: unset !important; </span>
+            <span v-if="i !== 'All'">padding-{{ i === 'top' ? 'block-start' : i === 'bottom' ? 'block-end' : i === 'left' ? 'inline-start' : i === 'right' ? 'inline-end' : i }}: unset !important; </span>
             <span v-else>padding: unset !important</span>
           </span>
         </td>
