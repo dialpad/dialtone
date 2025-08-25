@@ -5,7 +5,7 @@ import {
 } from '@/tests/shared_examples/validation.js';
 import DtRecipeEmojiRow from './emoji_row.vue';
 import { DtTooltip } from '@/components/tooltip';
-import { emojiToShortcode } from '@/common/emoji';
+import { getEmojiShortCode } from '@/common/emoji';
 
 // Constants
 const testEmojiObj = {
@@ -14,7 +14,7 @@ const testEmojiObj = {
   isSelected: false,
   num: 2,
 };
-const emojiShortcode = emojiToShortcode(testEmojiObj.emojiUnicodeOrShortname);
+const emojiShortcode = getEmojiShortCode(testEmojiObj.emojiUnicodeOrShortname);
 
 // \u2068 and \u2069 are Unicode bidi isolation characters.
 // They are non-printing characters that help text layout engines to ensure that the interpolated strings are handled correctly

@@ -142,7 +142,9 @@ export function shortcodeToEmojiData (shortcode) {
   return reference;
 }
 
-export function emojiToShortcode (emoji) {
+export function getEmojiShortCode (emoji) {
+  if (emoji.startsWith(':')) return emoji;
+
   const unicode = unicodeToString(emoji);
   return emojiJson[unicode]?.shortname;
 }

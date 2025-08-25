@@ -65,7 +65,7 @@ import { DtTooltip } from '@/components/tooltip';
 import { DtEmoji } from '@/components/emoji';
 import { DtEmojiTextWrapper } from '@/components/emoji_text_wrapper';
 import { DialtoneLocalization } from '@/localization';
-import { emojiToShortcode } from '@/common/emoji';
+import { getEmojiShortCode } from '@/common/emoji';
 
 export default {
   name: 'DtRecipeEmojiRow',
@@ -114,7 +114,7 @@ export default {
 
     reactionLabel (reaction) {
       return this.i18n.$t('DIALTONE_EMOJI_ROW_REACTION_LABEL', {
-        reaction: emojiToShortcode(reaction.emojiUnicodeOrShortname),
+        reaction: getEmojiShortCode(reaction.emojiUnicodeOrShortname),
       });
     },
   },
