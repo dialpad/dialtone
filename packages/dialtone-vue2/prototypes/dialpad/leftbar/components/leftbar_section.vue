@@ -74,8 +74,8 @@ export default {
 <style lang="less" scoped>
 .leftbar-section-header__action {
     position: absolute;
-    right: var(--dt-size-300);
-    top: 50%;
+    inset-inline-end: var(--dt-size-300);
+    inset-block-start: 50%;
     transform: translateY(-50%);
 }
 </style>
