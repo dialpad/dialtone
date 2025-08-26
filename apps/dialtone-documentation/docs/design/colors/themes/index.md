@@ -12,7 +12,15 @@ Dialtone's theming system is a flexible foundation for creating consistent visua
 
 Currently, the only themeable part of the application is the shell, which consists of the top and left navigation.
 
-<themes-interactive />
+<div class="d-bgc-secondary d-bar8"><svg-loader class="d-fl1" name="theme-image" /></div>
+
+### Mode
+
+A mode defines a visual style that applies across all themes. It determines the overall luminosity and contrast of the interface. For example, light mode has a light background and dark text, while dark mode has a dark background and light text.
+
+### Theme
+
+A theme represents a specific brand or product identity. It applies a unique set of colors to the shell, and it works in conjunction with a mode. For example, Dialpad default theme uses purple accents and T-mobile uses pink accents for the shell.
 
 ### Theme List
 
@@ -32,20 +40,20 @@ Currently, the only themeable part of the application is the shell, which consis
         </td>
         <td>
           <dt-stack direction="row" gap="200">
-            <div class="color-swatch" style="background-color: var(--dt-shell-color-surface-default);" title="Background"></div>
-            <div class="color-swatch" style="background-color: var(--dt-shell-color-foreground-primary);" title="Sidebar"></div>
-            <div class="color-swatch" style="background-color: var(--dt-shell-mention-surface-primary);" title="Border"></div>
-            <div class="color-swatch" style="background-color: var(--dt-shell-color-foreground-muted);" title="Brand"></div>
-            <div class="color-swatch" style="background-color: var(--dt-shell-action-color-background-muted-default);" title="Text"></div>
+            <div class="color-swatch" style="background-color: #1C1C1C;" title="Background"></div>
+            <div class="color-swatch" style="background-color: #252525;" title="Sidebar"></div>
+            <div class="color-swatch" style="background-color: #F9F9F9;" title="Border"></div>
+            <div class="color-swatch" style="background-color: #7C5CF6;" title="Brand"></div>
+            <div class="color-swatch" style="background-color: #999999;" title="Text"></div>
           </dt-stack>
         </td>
         <td>
           <dt-stack direction="row" gap="200">
-            <div class="color-swatch" style="background-color: var(--dt-color-black-900);" title="Background"></div>
-            <div class="color-swatch" style="background-color: var(--dt-color-black-800);" title="Sidebar"></div>
-            <div class="color-swatch" style="background-color: var(--dt-color-black-700);" title="Border"></div>
-            <div class="color-swatch" style="background-color: var(--dt-color-purple-300);" title="Brand"></div>
-            <div class="color-swatch" style="background-color: var(--dt-color-black-500);" title="Text"></div>
+            <div class="color-swatch" style="background-color: #E6E6E6;" title="Background"></div>
+            <div class="color-swatch" style="background-color: #1F1F1F;" title="Sidebar"></div>
+            <div class="color-swatch" style="background-color: #D4D4D4;" title="Border"></div>
+            <div class="color-swatch" style="background-color: #B8A6FC;" title="Brand"></div>
+            <div class="color-swatch" style="background-color: #cccccc;" title="Text"></div>
           </dt-stack>
         </td>
       </tr>
@@ -55,43 +63,20 @@ Currently, the only themeable part of the application is the shell, which consis
         </td>
         <td>
           <dt-stack direction="row" gap="200">
-            <div class="color-swatch" style="background-color: var(--dt-color-black-100);" title="Background"></div>
-            <div class="color-swatch" style="background-color: var(--dt-color-black-200);" title="Sidebar"></div>
-            <div class="color-swatch" style="background-color: var(--dt-color-black-300);" title="Border"></div>
+            <div class="color-swatch" style="background-color: #1C1C1C;" title="Background"></div>
+            <div class="color-swatch" style="background-color: #252525;" title="Sidebar"></div>
+            <div class="color-swatch" style="background-color: #F9F9F9;" title="Border"></div>
             <div class="color-swatch" style="background-color: #E20074;" title="Brand"></div>
-            <div class="color-swatch" style="background-color: var(--dt-color-black-400);" title="Text"></div>
+            <div class="color-swatch" style="background-color: #999999;" title="Text"></div>
           </dt-stack>
         </td>
         <td>
           <dt-stack direction="row" gap="200">
-            <div class="color-swatch" style="background-color: var(--dt-color-black-900);" title="Background"></div>
-            <div class="color-swatch" style="background-color: var(--dt-color-black-800);" title="Sidebar"></div>
-            <div class="color-swatch" style="background-color: var(--dt-color-black-700);" title="Border"></div>
-            <div class="color-swatch" style="background-color: #E20074;" title="Brand"></div>
-            <div class="color-swatch" style="background-color: var(--dt-color-black-500);" title="Text"></div>
-          </dt-stack>
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <code class="d-code--sm">Expressive</code>
-        </td>
-        <td>
-          <dt-stack direction="row" gap="200">
-            <div class="color-swatch" style="background-color: var(--dt-color-black-100);" title="Background"></div>
-            <div class="color-swatch" style="background-color: var(--dt-color-black-200);" title="Sidebar"></div>
-            <div class="color-swatch" style="background-color: var(--dt-color-black-300);" title="Border"></div>
-            <div class="color-swatch" style="background-color: var(--dt-color-coral-500);" title="Brand"></div>
-            <div class="color-swatch" style="background-color: var(--dt-color-black-400);" title="Text"></div>
-          </dt-stack>
-        </td>
-        <td>
-          <dt-stack direction="row" gap="200">
-            <div class="color-swatch" style="background-color: var(--dt-color-black-900);" title="Background"></div>
-            <div class="color-swatch" style="background-color: var(--dt-color-black-800);" title="Sidebar"></div>
-            <div class="color-swatch" style="background-color: var(--dt-color-black-700);" title="Border"></div>
-            <div class="color-swatch" style="background-color: var(--dt-color-coral-300);" title="Brand"></div>
-            <div class="color-swatch" style="background-color: var(--dt-color-black-500);" title="Text"></div>
+            <div class="color-swatch" style="background-color: #E6E6E6;" title="Background"></div>
+            <div class="color-swatch" style="background-color: #1F1F1F;" title="Sidebar"></div>
+            <div class="color-swatch" style="background-color: #D4D4D4;" title="Border"></div>
+            <div class="color-swatch" style="background-color: #F8A6CB;" title="Brand"></div>
+            <div class="color-swatch" style="background-color: #cccccc;" title="Text"></div>
           </dt-stack>
         </td>
       </tr>
@@ -101,20 +86,204 @@ Currently, the only themeable part of the application is the shell, which consis
         </td>
         <td>
           <dt-stack direction="row" gap="200">
-            <div class="color-swatch" style="background-color: var(--dt-color-black-100);" title="Background"></div>
-            <div class="color-swatch" style="background-color: var(--dt-color-gold-100);" title="Sidebar"></div>
-            <div class="color-swatch" style="background-color: var(--dt-color-black-300);" title="Border"></div>
-            <div class="color-swatch" style="background-color: var(--dt-color-gold-500);" title="Brand"></div>
-            <div class="color-swatch" style="background-color: var(--dt-color-gold-600);" title="Text"></div>
+            <div class="color-swatch" style="background-color: #380010;" title="Background"></div>
+            <div class="color-swatch" style="background-color: #6A652A;" title="Sidebar"></div>
+            <div class="color-swatch" style="background-color: #FFF9E5;" title="Border"></div>
+            <div class="color-swatch" style="background-color: #93173A;" title="Brand"></div>
+            <div class="color-swatch" style="background-color: #999999;" title="Text"></div>
           </dt-stack>
         </td>
         <td>
           <dt-stack direction="row" gap="200">
-            <div class="color-swatch" style="background-color: var(--dt-color-black-900);" title="Background"></div>
-            <div class="color-swatch" style="background-color: var(--dt-color-gold-700);" title="Sidebar"></div>
-            <div class="color-swatch" style="background-color: var(--dt-color-gold-700);" title="Border"></div>
-            <div class="color-swatch" style="background-color: var(--dt-color-gold-300);" title="Brand"></div>
-            <div class="color-swatch" style="background-color: var(--dt-color-gold-300);" title="Text"></div>
+            <div class="color-swatch" style="background-color: #1F1C00;" title="Background"></div>
+            <div class="color-swatch" style="background-color: #FE1F76;" title="Sidebar"></div>
+            <div class="color-swatch" style="background-color: #FFF2F3;" title="Border"></div>
+            <div class="color-swatch" style="background-color: #FA8D62;" title="Brand"></div>
+            <div class="color-swatch" style="background-color: #cccccc;" title="Text"></div>
+          </dt-stack>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <code class="d-code--sm">Ceruleo</code>
+        </td>
+        <td>
+          <dt-stack direction="row" gap="200">
+            <div class="color-swatch" style="background-color: #003165;" title="Background"></div>
+            <div class="color-swatch" style="background-color: #98DCFF;" title="Sidebar"></div>
+            <div class="color-swatch" style="background-color: #E8E9E9;" title="Border"></div>
+            <div class="color-swatch" style="background-color: #FF1356;" title="Brand"></div>
+            <div class="color-swatch" style="background-color: #999999;" title="Text"></div>
+          </dt-stack>
+        </td>
+        <td>
+          <dt-stack direction="row" gap="200">
+            <div class="color-swatch" style="background-color: #052133;" title="Background"></div>
+            <div class="color-swatch" style="background-color: #5FC4F9;" title="Sidebar"></div>
+            <div class="color-swatch" style="background-color: #F5F9FD;" title="Border"></div>
+            <div class="color-swatch" style="background-color: #FF716F;" title="Brand"></div>
+            <div class="color-swatch" style="background-color: #FFFFFF;" title="Text"></div>
+          </dt-stack>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <code class="d-code--sm">Melon</code>
+        </td>
+        <td>
+          <dt-stack direction="row" gap="200">
+            <div class="color-swatch" style="background-color: #FFE6FD;" title="Background"></div>
+            <div class="color-swatch" style="background-color: #190826;" title="Sidebar"></div>
+            <div class="color-swatch" style="background-color: #511E76;" title="Border"></div>
+            <div class="color-swatch" style="background-color: #9A006A;" title="Brand"></div>
+            <div class="color-swatch" style="background-color: #321249;" title="Text"></div>
+          </dt-stack>
+        </td>
+        <td>
+          <dt-stack direction="row" gap="200">
+            <div class="color-swatch" style="background-color: #190826;" title="Background"></div>
+            <div class="color-swatch" style="background-color: #FFE6FD;" title="Sidebar"></div>
+            <div class="color-swatch" style="background-color: #FFF0FE;" title="Border"></div>
+            <div class="color-swatch" style="background-color: #FFB1CF;" title="Brand"></div>
+            <div class="color-swatch" style="background-color: #cccccc;" title="Text"></div>
+          </dt-stack>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <code class="d-code--sm">Aegean</code>
+        </td>
+        <td>
+          <dt-stack direction="row" gap="200">
+            <div class="color-swatch" style="background-color: #D3E0F4;" title="Background"></div>
+            <div class="color-swatch" style="background-color: #10022C;" title="Sidebar"></div>
+            <div class="color-swatch" style="background-color: #228782;" title="Border"></div>
+            <div class="color-swatch" style="background-color: #651E06;" title="Brand"></div>
+            <div class="color-swatch" style="background-color: #143A52;" title="Text"></div>
+          </dt-stack>
+        </td>
+        <td>
+          <dt-stack direction="row" gap="200">
+            <div class="color-swatch" style="background-color: #072C2A;" title="Background"></div>
+            <div class="color-swatch" style="background-color: #8CBAEB;" title="Sidebar"></div>
+            <div class="color-swatch" style="background-color: #8CBAEB;" title="Border"></div>
+            <div class="color-swatch" style="background-color: #F4B59F;" title="Brand"></div>
+            <div class="color-swatch" style="background-color: #F9F6FF;" title="Text"></div>
+          </dt-stack>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <code class="d-code--sm">Verdant Haze</code>
+        </td>
+        <td>
+          <dt-stack direction="row" gap="200">
+            <div class="color-swatch" style="background-color: #EDF0EB;" title="Background"></div>
+            <div class="color-swatch" style="background-color: #1A2214;" title="Sidebar"></div>
+            <div class="color-swatch" style="background-color: #344626;" title="Border"></div>
+            <div class="color-swatch" style="background-color: #C0CAAE;" title="Brand"></div>
+            <div class="color-swatch" style="background-color: #3F5F01;" title="Text"></div>
+          </dt-stack>
+        </td>
+        <td>
+          <dt-stack direction="row" gap="200">
+            <div class="color-swatch" style="background-color: #C0CAAE;" title="Background"></div>
+            <div class="color-swatch" style="background-color: #1A2214;" title="Sidebar"></div>
+            <div class="color-swatch" style="background-color: #3F5F01;" title="Border"></div>
+            <div class="color-swatch" style="background-color: #EDF0EB;" title="Brand"></div>
+            <div class="color-swatch" style="background-color: #cccccc;" title="Text"></div>
+          </dt-stack>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <code class="d-code--sm">Plum</code>
+        </td>
+        <td>
+          <dt-stack direction="row" gap="200">
+            <div class="color-swatch" style="background-color: #E4E0E8;" title="Background"></div>
+            <div class="color-swatch" style="background-color: #0A0029;" title="Sidebar"></div>
+            <div class="color-swatch" style="background-color: #1C1C1C;" title="Border"></div>
+            <div class="color-swatch" style="background-color: #DE0276;" title="Brand"></div>
+            <div class="color-swatch" style="background-color: #65318E;" title="Text"></div>
+          </dt-stack>
+        </td>
+        <td>
+          <dt-stack direction="row" gap="200">
+            <div class="color-swatch" style="background-color: #0A0029;" title="Background"></div>
+            <div class="color-swatch" style="background-color: #10022C;" title="Sidebar"></div>
+            <div class="color-swatch" style="background-color: #65318E;" title="Border"></div>
+            <div class="color-swatch" style="background-color: #E2A4E5;" title="Brand"></div>
+            <div class="color-swatch" style="background-color: #F6E6E6;" title="Text"></div>
+          </dt-stack>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <code class="d-code--sm">Buttercream</code>
+        </td>
+        <td>
+          <dt-stack direction="row" gap="200">
+            <div class="color-swatch" style="background-color: #F0E4CB;" title="Background"></div>
+            <div class="color-swatch" style="background-color: #15242E;" title="Sidebar"></div>
+            <div class="color-swatch" style="background-color: #1B2F3B;" title="Border"></div>
+            <div class="color-swatch" style="background-color: #F4CD0B;" title="Brand"></div>
+            <div class="color-swatch" style="background-color: #2B485F;" title="Text"></div>
+          </dt-stack>
+        </td>
+        <td>
+          <dt-stack direction="row" gap="200">
+            <div class="color-swatch" style="background-color: #282317;" title="Background"></div>
+            <div class="color-swatch" style="background-color: #D2E0FF;" title="Sidebar"></div>
+            <div class="color-swatch" style="background-color: #ECF9F8;" title="Border"></div>
+            <div class="color-swatch" style="background-color: #F4CD0B;" title="Brand"></div>
+            <div class="color-swatch" style="background-color: #FFF5D3;" title="Text"></div>
+          </dt-stack>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <code class="d-code--sm">Botany</code>
+        </td>
+        <td>
+          <dt-stack direction="row" gap="200">
+            <div class="color-swatch" style="background-color: #E6EBD8;" title="Background"></div>
+            <div class="color-swatch" style="background-color: #022443;" title="Sidebar"></div>
+            <div class="color-swatch" style="background-color: #0D6D4C;" title="Border"></div>
+            <div class="color-swatch" style="background-color: #6633BB;" title="Brand"></div>
+            <div class="color-swatch" style="background-color: #1C1C1C;" title="Text"></div>
+          </dt-stack>
+        </td>
+        <td>
+          <dt-stack direction="row" gap="200">
+            <div class="color-swatch" style="background-color: #072C2A;" title="Background"></div>
+            <div class="color-swatch" style="background-color: #C6E4FF;" title="Sidebar"></div>
+            <div class="color-swatch" style="background-color: #D3BCFF;" title="Border"></div>
+            <div class="color-swatch" style="background-color: #E6E6E6;" title="Brand"></div>
+            <div class="color-swatch" style="background-color: #FEDFBF;" title="Text"></div>
+          </dt-stack>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <code class="d-code--sm">High Desert</code>
+        </td>
+        <td>
+          <dt-stack direction="row" gap="200">
+            <div class="color-swatch" style="background-color: #ECE2CE;" title="Background"></div>
+            <div class="color-swatch" style="background-color: #141F00;" title="Sidebar"></div>
+            <div class="color-swatch" style="background-color: #223300;" title="Border"></div>
+            <div class="color-swatch" style="background-color: #E45C10;" title="Brand"></div>
+            <div class="color-swatch" style="background-color: #7A5608;" title="Text"></div>
+          </dt-stack>
+        </td>
+        <td>
+          <dt-stack direction="row" gap="200">
+            <div class="color-swatch" style="background-color: #3F3D3C;" title="Background"></div>
+            <div class="color-swatch" style="background-color: #DCD138;" title="Sidebar"></div>
+            <div class="color-swatch" style="background-color: #F48662;" title="Border"></div>
+            <div class="color-swatch" style="background-color: #FAEBA4;" title="Brand"></div>
+            <div class="color-swatch" style="background-color: #FFE89C;" title="Text"></div>
           </dt-stack>
         </td>
       </tr>
@@ -122,15 +291,7 @@ Currently, the only themeable part of the application is the shell, which consis
   </table>
 </div>
 
-<div class="d-bgc-brand d-bar8"><svg-loader class="d-fl1" name="theme-variations" /></div>
-
-### Mode
-
-A mode defines a visual style that applies across all themes. It determines the overall luminosity and contrast of the interface. For example, light mode has a light background and dark text, while dark mode has a dark background and light text.
-
-### Theme
-
-A theme represents a specific brand or product identity. It applies a unique set of colors to the shell, and it works in conjunction with a mode. For example, Dialpad default theme uses purple accents and T-mobile uses pink accents for the shell.
+<div class="d-bgc-secondary d-bar8"><svg-loader class="d-fl1" name="theme-variations" /></div>
 
 ## Theming with Shell Tokens
 
@@ -140,7 +301,7 @@ The shell tokens are a specialized set of tokens for theming the topbar and side
 
 These are the core reference colors for the shell. They are directly linked to the base tokens and determine the overall color palette of the topbar and sidebar. These base tokens are the only ones that should be modified when creating a custom theme.
 
-<div class="d-bgc-brand d-bar8"><svg-loader class="d-fl1" name="base-tokens" /></div>
+<div class="d-bgc-secondary d-bar8"><svg-loader class="d-fl1" name="base-tokens" /></div>
 
 <div class="d-m32"></div>
 
@@ -148,12 +309,12 @@ These are the core reference colors for the shell. They are directly linked to t
 
 These tokens, such as shell-action, shell-status, shell-core, and shell-accent, inherit their values from the shell base tokens. They use modifiers to create variations and specific color states (e.g., hover, active, disabled) for interactive elements within the topbar and sidebar.
 
-<div class="d-bgc-brand d-bar8"><svg-loader class="d-fl1" name="base-shell-token" /></div>
+<div class="d-bgc-secondary d-bar8"><svg-loader class="d-fl1" name="base-shell-token" /></div>
 
 <div class="d-m32"></div>
 
 This structure allows for a cascading effect: changing a shell base token automatically updates all related shell modifier tokens, making it simple to create and manage custom themes for the application's shell.
-<div class="d-bgc-brand d-bar8"><svg-loader class="d-fl1" name="token-structure" /></div>
+<div class="d-bgc-secondary d-bar8"><svg-loader class="d-fl1" name="token-structure" /></div>
 
 <div class="d-m32"></div>
 
@@ -163,12 +324,12 @@ When creating a custom theme, it is important to ensure that the colors used are
 
 <dialtone-usage class="d-d-grid d-g24 d-g-cols2">
   <template #do>
-    <div class="d-bgc-brand d-bar8">
+    <div class="d-bgc-secondary d-bar8">
       <svg-loader class="d-fl1" name="theme-contrast-do" />
     </div>
   </template>
   <template #dont>
-    <div class="d-bgc-brand d-bar8">
+    <div class="d-bgc-secondary d-bar8">
       <svg-loader class="d-fl1" name="theme-contrast-dont" />
     </div>
   </template>
@@ -178,10 +339,6 @@ When creating a custom theme, it is important to ensure that the colors used are
 
 - If you need full list of all the shell tokens, [Check out our list of colors](../palette/index.md).
 - [See our entire token catalog with full descriptions and values of all tokens.](../../../tokens/index.md).
-
-<script setup>
-import ThemesInteractive from '@baseComponents/ThemesInteractive.vue';
-</script>
 
 <style scoped>
 .color-swatch {
