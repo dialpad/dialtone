@@ -1,3 +1,10 @@
+# [1.45.0](https://github.com/dialpad/dialtone/compare/dialtone-tokens/v1.44.1...dialtone-tokens/v1.45.0) (2025-08-26)
+
+
+### Features
+
+* **Themes:** DLT-2702  shell design tokens ([#867](https://github.com/dialpad/dialtone/issues/867)) ([287d60e](https://github.com/dialpad/dialtone/commit/287d60e9dbf796639c8a9402a93738fb455ab3b3))
+
 ## [1.44.1](https://github.com/dialpad/dialtone/compare/dialtone-tokens/v1.44.0...dialtone-tokens/v1.44.1) (2025-08-12)
 
 

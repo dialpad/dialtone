@@ -27,12 +27,12 @@
       <div class="d-d-flex d-fd-column d-fs-100 d-lh2 d-fw-bold d-bar-sm d-px4 py2">
         <span
           v-if="stop.primaryContrast >= minAAContrastRatio"
-          :class="fontColorMap[theme].primary"
+          :class="fontColorMap[mode].primary"
           v-text="formattedContrast(stop.primaryContrast)"
         />
         <span
           v-if="stop.invertedContrast >= minAAContrastRatio"
-          :class="fontColorMap[theme].inverted"
+          :class="fontColorMap[mode].inverted"
           v-text="formattedContrast(stop.invertedContrast)"
         />
       </div>
@@ -67,7 +67,7 @@ const props = defineProps({
     type: String,
     required: true,
   },
-  theme: {
+  mode: {
     type: String,
     required: true,
   },
@@ -75,8 +75,8 @@ const props = defineProps({
 
 function fontColorClass (primaryContrast, invertedContrast) {
   return primaryContrast > invertedContrast
-    ? fontColorMap[props.theme].primary
-    : fontColorMap[props.theme].inverted;
+    ? fontColorMap[props.mode].primary
+    : fontColorMap[props.mode].inverted;
 }
 function formattedContrast (contrast) {
   const contrastGrade = contrast >= minAAAContrastRatio ? 'AAA' : (contrast >= minAAContrastRatio ? 'AA' : 'A');
