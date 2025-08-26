@@ -78,6 +78,7 @@ export default {
      * @returns {VNode|*}
      */
     searchVNodes (VNode) {
+      if (!VNode) return;
       if (typeof VNode === 'string') return this.searchCodes(VNode);
       if (VNode.type === COMMENT_TYPE) return VNode;
       if (typeof VNode.type === 'symbol') return this.searchCodes(VNode.children);

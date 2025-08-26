@@ -143,6 +143,13 @@ export function shortcodeToEmojiData (shortcode) {
   return reference;
 }
 
+export function getEmojiShortCode (emoji) {
+  if (emoji.startsWith(':')) return emoji;
+
+  const unicode = unicodeToString(emoji);
+  return emojiJson[unicode]?.shortname;
+}
+
 // Takes in an emoji unicode character(s) and converts it to an emoji string in the format the emoji data object expects
 // as a key. There can be multiple unicode characters in an emoji to denote the emoji itself, skin tone, gender
 // and such. Note that this function does NOT return variation selectors (fe0f) or zero width joiners (200d), as these

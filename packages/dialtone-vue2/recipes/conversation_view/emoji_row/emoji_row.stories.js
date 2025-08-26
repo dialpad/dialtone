@@ -24,12 +24,12 @@ export const sharedEmojiReactionsData = [
   },
   {
     emojiUnicodeOrShortname: '😌',
-    isSelected: true,
+    isSelected: false,
     names: 'Olivia Chen, Benjamin Carter, Sophia Rodriguez, William Kim & Isabella Garcia',
     num: 5,
   },
   {
-    emojiUnicodeOrShortname: '🙃',
+    emojiUnicodeOrShortname: ':blinkingguy:',
     names: 'You & John Doe',
     isSelected: true,
     num: 2,

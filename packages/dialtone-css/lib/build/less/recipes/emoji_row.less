@@ -9,7 +9,29 @@
 }
 
 .d-recipe-emoji-row__tooltip-content {
-   max-width: var(--dt-size-975);
+   max-inline-size: var(--dt-size-875);
+}
+
+.d-recipe-emoji-row__tooltip-emoji {
+  display: inline-block;
+  padding: var(--dt-space-300);
+  background-color: var(--dt-color-neutral-white);
+  border-radius: var(--dt-size-radius-300);
+  margin-block: var(--dt-space-300) var(--dt-space-350);
+
+  .d-emoji {
+    height: var(--icon-size);
+  }
+}
+
+.d-recipe-emoji-row__tooltip-names {
+  display: inline-block;
+  font-weight: var(--dt-font-weight-semi-bold);
+}
+
+.d-recipe-emoji-row__tooltip-label {
+  color: var(--dt-color-foreground-secondary-inverted);
+  font-weight: var(--dt-font-weight-medium);
 }
 
 .d-recipe-emoji-row__reaction {
@@ -30,7 +52,7 @@
   }
 
   &:hover {
-    --emoji-item-color-inset-shadow: var(--dt-color-border-subtle);
+    --emoji-item-color-inset-shadow: var(--dt-color-border-moderate);
     --emoji-item-color-foreground: var(--dt-action-color-foreground-muted-hover);
   }
 
@@ -72,6 +94,15 @@
 }
 
 .d-recipe-emoji-row__emoji {
+  --emoji-size: calc(var(--dt-icon-size-200) + .2rem);
+
   display: inline-flex;
-  margin-right: var(--dt-space-300);
+  margin-inline-end: var(--dt-space-300);
+  inline-size: var(--emoji-size);
+  block-size: var(--emoji-size);
+}
+
+.d-recipe-emoji-row__emoji-img {
+  inline-size: var(--emoji-size);
+  block-size: var(--emoji-size);
 }
