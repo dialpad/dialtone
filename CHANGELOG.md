@@ -1,3 +1,15 @@
+# [9.134.0](https://github.com/dialpad/dialtone/compare/dialtone/v9.133.0...dialtone/v9.134.0) (2025-08-26)
+
+
+### Bug Fixes
+
+* **Toast:** DP-154396 fix toast class and listeners vue3 ([#883](https://github.com/dialpad/dialtone/issues/883)) ([777a28e](https://github.com/dialpad/dialtone/commit/777a28e57fafac8ce7c5ef48208353120e50e097))
+
+
+### Features
+
+* **Emoji Row:** DLT-2248 display larger emoji and inline shortcode in emoji row tooltip ([#880](https://github.com/dialpad/dialtone/issues/880)) ([9875bb4](https://github.com/dialpad/dialtone/commit/9875bb408e1b0166edcab303a6b7c4370713483a))
+
 # [9.133.0](https://github.com/dialpad/dialtone/compare/dialtone/v9.132.1...dialtone/v9.133.0) (2025-08-26)
 
 
