@@ -1,3 +1,15 @@
+# [8.63.0](https://github.com/dialpad/dialtone/compare/dialtone-css/v8.62.0...dialtone-css/v8.63.0) (2025-08-26)
+
+
+### Documentation
+
+* **Color:** DLT-2570 chart tokens ([#865](https://github.com/dialpad/dialtone/issues/865)) ([7f2b06d](https://github.com/dialpad/dialtone/commit/7f2b06d9d6095098f29ff2ac70f8078f4cf651ae))
+
+
+### Features
+
+* **Emoji Row:** DLT-2248 display larger emoji and inline shortcode in emoji row tooltip ([#880](https://github.com/dialpad/dialtone/issues/880)) ([9875bb4](https://github.com/dialpad/dialtone/commit/9875bb408e1b0166edcab303a6b7c4370713483a))
+
 # [8.62.0](https://github.com/dialpad/dialtone/compare/dialtone-css/v8.61.0...dialtone-css/v8.62.0) (2025-08-12)
 
 
