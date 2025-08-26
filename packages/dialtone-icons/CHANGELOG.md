@@ -1,3 +1,10 @@
+# [4.43.0](https://github.com/dialpad/dialtone/compare/dialtone-icons/v4.42.2...dialtone-icons/v4.43.0) (2025-08-26)
+
+
+### Features
+
+* **Icon:** DLT-2720 dialpad analytics AI ([#878](https://github.com/dialpad/dialtone/issues/878)) ([bff71fd](https://github.com/dialpad/dialtone/commit/bff71fd0f8c4b6a4ef4998de4b29592a9eb9701d))
+
 ## [4.42.2](https://github.com/dialpad/dialtone/compare/dialtone-icons/v4.42.1...dialtone-icons/v4.42.2) (2025-08-19)
 
 ## [4.42.1](https://github.com/dialpad/dialtone/compare/dialtone-icons/v4.42.0...dialtone-icons/v4.42.1) (2025-08-12)
