@@ -3,6 +3,7 @@
     v-if="isShown"
     :class="[
       'd-toast-alternate',
+      $attrs.class,
       kindClass,
     ]"
     data-qa="dt-toast"
@@ -14,7 +15,7 @@
           v-if="!hideIcon"
           :kind="kind"
           size="200"
-          v-bind="$attrs"
+          v-bind="toastListeners"
         >
           <slot name="icon" />
         </dt-toast-layout-alternate-icon>
@@ -23,7 +24,7 @@
           :content-id="contentId"
           :title="title"
           :role="role"
-          v-bind="$attrs"
+          v-bind="toastListeners"
         >
           <template #titleOverride>
             <slot name="titleOverride" />
@@ -35,7 +36,7 @@
           :hide-action="true"
           :hide-close="hideClose"
           button-size="xs"
-          v-bind="$attrs"
+          v-bind="toastListeners"
           @close="$emit('close')"
         />
       </div>
@@ -54,6 +55,8 @@ import utils from '@/common/utils';
 import DtToastLayoutAlternateIcon from './toast_layout_alternate_icon.vue';
 import { DtNoticeAction, DtNoticeContent } from '@/components/notice';
 import { TOAST_ROLES, TOAST_ALTERNATE_KINDS } from '../toast_constants.js';
+import { extractVueListeners } from "@/common/utils/index.js";
+
 export default {
   name: 'ToastLayoutAlternate',
 
@@ -160,6 +163,10 @@ export default {
       };
 
       return kindClasses[this.kind];
+    },
+
+    toastListeners () {
+      return extractVueListeners(this.$attrs);
     },
   },
 };
