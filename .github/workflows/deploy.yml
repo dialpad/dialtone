@@ -127,6 +127,7 @@ jobs:
 
   deploy:
     needs: [ check-dialpad-member, filter-actions ]
+    name: Deploy sites
     if: ${{ needs.filter-actions.outputs.packages != '[]' }}
     env:
       BUCKET_CLEANUP_EXCLUDE: '/alpha/|/beta/|/deploy-previews/|/staging/|/next/|/vue/|/vue3/'
