@@ -1,3 +1,10 @@
+# [2.197.0](https://github.com/dialpad/dialtone/compare/dialtone-vue2/v2.196.1...dialtone-vue2/v2.197.0) (2025-08-26)
+
+
+### Features
+
+* **Emoji Row:** DLT-2248 display larger emoji and inline shortcode in emoji row tooltip ([#880](https://github.com/dialpad/dialtone/issues/880)) ([9875bb4](https://github.com/dialpad/dialtone/commit/9875bb408e1b0166edcab303a6b7c4370713483a))
+
 ## [2.196.1](https://github.com/dialpad/dialtone/compare/dialtone-vue2/v2.196.0...dialtone-vue2/v2.196.1) (2025-08-20)
 
 
