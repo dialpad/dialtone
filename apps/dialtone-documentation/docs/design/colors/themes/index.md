@@ -307,7 +307,7 @@ These are the core reference colors for the shell. They are directly linked to t
 
 ### Shell Modifier Tokens
 
-These tokens, such as shell-action, shell-status, shell-core, and shell-accent, inherit their values from the shell base tokens. They use modifiers to create variations and specific color states (e.g., hover, active, disabled) for interactive elements within the topbar and sidebar.
+These tokens, such as `shell-action...`, `shell-status...` `shell-mention...`, inherit their values from the shell base tokens. For example, they use modifiers to create variations or color states (e.g., `hover`, `active`, `disabled`).
 
 <div class="d-bgc-secondary d-bar8"><svg-loader class="d-fl1" name="base-shell-token" /></div>
 
