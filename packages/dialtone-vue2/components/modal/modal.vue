@@ -95,16 +95,16 @@
           v-else
           class="d-modal__close"
           data-qa="dt-modal-close-button"
-          circle
-          size="lg"
+          size="md"
+          kind="muted"
           importance="clear"
           :aria-label="closeButtonTitle"
           :title="closeButtonTitle"
           @click="close"
         >
-          <template #icon>
+          <template #icon="{ iconSize }">
             <dt-icon-close
-              size="400"
+              :size="iconSize"
             />
           </template>
         </dt-button>
