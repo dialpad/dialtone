@@ -20,7 +20,7 @@ A mode defines a visual style that applies across all themes. It determines the 
 
 ### Theme
 
-A theme represents a specific brand or product identity. It applies a unique set of colors to the shell, and it works in conjunction with a mode. For example, Dialpad default theme uses purple accents and T-mobile uses pink accents for the shell.
+A theme represents the core color scheme. It applies a unique set of colors to themeable regions, and it works in conjunction with a mode. For example, the default "Dialpad" theme accent may be purple, while a "Sunflower" theme's is a deep yellow.
 
 ### Theme List
 
