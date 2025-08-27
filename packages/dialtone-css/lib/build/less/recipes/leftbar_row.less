@@ -59,7 +59,7 @@
 
   &:hover,
   &:focus-within {
-    --leftbar-row-color-background: var(--dt-shell-color-background-primary-hover);
+    --leftbar-row-color-background: var(--dt-shell-action-color-background-primary-hover);
 
     .d-presence {
       --presence-color-border-base: var(--dt-color-black-200);
@@ -187,7 +187,7 @@
     width: 100%;
     margin: 0;
     padding: 0;
-    color: var(--leftbar-row-color-foreground);
+    color: var(--dt-shell-color-foreground-primary);
     font-size: inherit;
     line-height: inherit;
     text-align: left;
@@ -229,7 +229,7 @@
     height: var(--leftbar-row-alpha-height);
     padding-right: var(--dt-space-400);
     padding-left: var(--dt-space-400);
-    color: var(--leftbar-row-alpha-color-foreground);
+    color: var(--dt-shell-color-foreground-primary);
     border-radius: var(--leftbar-row-radius) 0 0 var(--leftbar-row-radius);
   }
 
@@ -370,15 +370,15 @@
 //  $   Contact Row
 //  ----------------------------------------------------------------------------
 .d-recipe-contact-row--active {
-  color: var(--dt-color-foreground-success);
+  color: var(--dt-shell-color-foreground-positive);
 }
 
 .d-recipe-contact-row--busy {
-  color: var(--dt-color-foreground-critical);
+  color: var(--dt-shell-color-foreground-critical);
 }
 
 .d-recipe-contact-row--away {
-  color: var(--dt-color-foreground-warning);
+  color: var(--dt-shell-color-foreground-warning);
 }
 
 //  ============================================================================
