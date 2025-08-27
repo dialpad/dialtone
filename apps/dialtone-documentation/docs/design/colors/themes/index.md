@@ -43,7 +43,7 @@ A theme represents the core color scheme. It applies a unique set of colors to t
             <div class="color-swatch" style="background-color: #1C1C1C;" title="Background"></div>
             <div class="color-swatch" style="background-color: #252525;" title="Sidebar"></div>
             <div class="color-swatch" style="background-color: #F9F9F9;" title="Border"></div>
-            <div class="color-swatch" style="background-color: #7C5CF6;" title="Brand"></div>
+            <div class="color-swatch" style="background-color: #7C5CF6;" title="Accent"></div>
             <div class="color-swatch" style="background-color: #999999;" title="Text"></div>
           </dt-stack>
         </td>
