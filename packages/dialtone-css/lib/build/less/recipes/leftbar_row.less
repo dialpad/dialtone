@@ -179,6 +179,24 @@
   //   <button class="d-recipe-leftbar-row__action-button d-btn ..." ...>...</button>
   // </div>
   //
+
+    // Style overrides for leftbar button icon and background, using the shell tokens for theming
+  .d-btn--inverted.d-btn--primary {
+    --button-color-text: var(--dt-shell-mention-color-surface-primary);
+  }
+
+  .d-btn--inverted.d-btn--primary:hover:not([disabled]) {
+    --button-color-background: color-mix(in srgb, var(--dt-shell-mention-color-surface-primary) 10%, white 100%);
+  }
+
+  .d-btn--inverted.d-btn--primary:active:not([disabled]) {
+    --button-color-background: color-mix(in srgb, var(--dt-shell-mention-color-surface-primary) 30%, white 100%);
+  }
+
+  .d-fc-success {
+    color:var(--dt-shell-color-foreground-positive)!important;
+  }
+
   &__primary {
     // contains extra style properties to support both <button> and <a>
     display: flex;
