@@ -78,6 +78,14 @@ export const argTypesData = {
       type: 'text',
     },
   },
+  scheduleMessage: {
+    table: {
+      type: { summary: 'VNode' },
+    },
+    control: {
+      type: 'text',
+    },
+  },
   smsCount: {
     table: {
       type: { summary: 'VNode' },

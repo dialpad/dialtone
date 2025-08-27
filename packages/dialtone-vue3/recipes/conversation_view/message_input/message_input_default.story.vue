@@ -94,6 +94,12 @@
         <span v-html="$attrs.sendButton" />
       </template>
       <template
+        v-if="$attrs.scheduleMessage"
+        #scheduleMessage
+      >
+        <span v-html="$attrs.scheduleMessage" />
+      </template>
+      <template
         v-if="$attrs.smsCount"
         #smsCount
       >
