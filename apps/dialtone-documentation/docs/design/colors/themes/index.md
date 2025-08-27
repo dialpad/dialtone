@@ -1,6 +1,6 @@
 ---
 title: Themes
-description: Create diverse themes for projects using our simplified theming infrastructure.
+Theme options that allow user customization of Dialpad products.
 no_preview: true
 ---
 
