@@ -10,7 +10,7 @@ no_preview: true
 
 Dialtone's theming system is a flexible foundation for creating consistent visual experiences. It lets you adapt the user interface to different contexts, preferences, and product variations. Our approach uses semantic color tokens to easily switch between themes and modes.
 
-Currently, the only themeable part of the application is the shell, which consists of the top and left navigation.
+Theming is limited to the application's navigation regions, consisting of the top and left.
 
 <div class="d-bgc-secondary d-bar8"><svg-loader class="d-fl1" name="theme-image" /></div>
 
