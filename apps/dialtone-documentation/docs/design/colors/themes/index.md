@@ -1,6 +1,6 @@
 ---
 title: Themes
-Theme options that allow user customization of Dialpad products.
+description: Theme options that allow user customization of Dialpad products.
 no_preview: true
 ---
 
