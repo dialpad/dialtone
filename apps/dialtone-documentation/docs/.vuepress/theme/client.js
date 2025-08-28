@@ -65,8 +65,11 @@ export default defineClientConfig({
   },
   setup () {
     onBeforeMount(() => {
+      // Set the theme to 'dp' by default
+      localStorage.setItem('preferredTheme', 'dp');
+
       const preferredMode = localStorage.getItem('preferredMode') || 'system';
-      const preferredTheme = localStorage.getItem('preferredTheme') || 'dp';
+      const preferredTheme = localStorage.getItem('preferredTheme');
 
       const currentMode = ref(preferredMode);
       const currentTheme = ref(preferredTheme);
