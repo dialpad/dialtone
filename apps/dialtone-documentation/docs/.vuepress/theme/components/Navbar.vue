@@ -224,6 +224,11 @@ const toggleTheme = () => {
 };
 
 const setCss = () => {
+  if (!modes.includes(currentMode.value)) {
+    currentMode.value = 'system';
+    localStorage.setItem('preferredMode', currentMode.value);
+  }
+
   const mode = currentMode.value === 'system' ? (prefersDarkMediaQuery.matches ? 'dark' : 'light') : currentMode.value
 
   const preferredTheme = `${currentTheme.value}-${mode}`;
