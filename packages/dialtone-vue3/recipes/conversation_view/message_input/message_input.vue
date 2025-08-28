@@ -178,6 +178,11 @@
           direction="row"
           gap="300"
         >
+          <!-- @slot Slot for schedule message -->
+          <div class="d-recipe-message-input__schedule-message">
+            <slot name="scheduleMessage" />
+          </div>
+
           <!-- @slot Slot for sms count -->
           <div class="d-recipe-message-input__sms-count">
             <slot name="smsCount" />
