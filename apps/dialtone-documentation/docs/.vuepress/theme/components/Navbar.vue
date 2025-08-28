@@ -224,17 +224,16 @@ const toggleTheme = () => {
 };
 
 const setCss = () => {
-  let themeName = `${currentTheme.value}-`;
+  const mode = currentMode.value === 'system' ? (prefersDarkMediaQuery.matches ? 'dark' : 'light') : currentMode.value
 
-  if (currentMode.value === 'system') {
-    themeName += prefersDarkMediaQuery.matches ? 'dark' : 'light';
-  } else {
-    themeName += currentMode.value;
+  const preferredTheme = `${currentTheme.value}-${mode}`;
+  let theme = themes[preferredTheme];
+
+  if (!theme) {
+    const defaultTheme = `dp-${mode}`;
+    console.warn(`Theme [${preferredTheme}] does not exists, using default theme [${defaultTheme}]`);
+    theme = themes[defaultTheme];
   }
-
-  console.warn(`Theme ${themeName} does not exists, using default theme`);
-
-  const theme = themes[themeName] || themes['dp-light'];
 
   setTheme(theme);
 };
