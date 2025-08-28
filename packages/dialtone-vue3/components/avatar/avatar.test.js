@@ -355,10 +355,11 @@ describe('DtAvatar Tests', () => {
     describe('When provided with names containing special characters', () => {
       it('should remove special characters and extract initials', () => {
         expect(extractInitialsFromName('John Doe (General Manager)')).toBe('JM');
+        expect(extractInitialsFromName('John Doe [Contractor]')).toBe('JC');
       });
 
       it('should handle names with numbers', () => {
-        expect(extractInitialsFromName('John Doe [Contractor]')).toBe('JC');
+        expect(extractInitialsFromName('John Doe 123')).toBe('J1');
       });
     });
 
