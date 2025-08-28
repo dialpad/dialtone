@@ -2,20 +2,20 @@
   //  ============================================================================
   //  $   CSS CUSTOM PROPERTIES
   //  ----------------------------------------------------------------------------
-  --leftbar-row-color-foreground: var(--dt-theme-sidebar-color-foreground);
-  --leftbar-row-color-background: var(--dt-theme-sidebar-row-color-background);
+  --leftbar-row-color-foreground: var(--dt-shell-color-foreground-primary);
+  --leftbar-row-color-background: var(--dt-shell-color-surface-default);
   --leftbar-row-radius: var(--dt-size-radius-pill);
   --leftbar-row-opacity: 100%;
-  --leftbar-row-alpha-color-foreground: var(--dt-theme-sidebar-icon-color-foreground);
+  --leftbar-row-alpha-color-foreground: var(--dt-shell-color-foreground-primary);
   --leftbar-row-alpha-width: calc(var(--dt-size-300) * 10);
   --leftbar-row-alpha-height: calc(var(--dt-size-300) * 9);
   --leftbar-row-omega-height: var(--leftbar-row-alpha-height);
   --leftbar-row-unread-badge-display: inline-flex;
-  --leftbar-row-description-color-foreground: var(--dt-theme-sidebar-color-foreground);
+  --leftbar-row-description-color-foreground: var(--dt-shell-color-foreground-primary);
   --leftbar-row-description-font-weight: var(--dt-font-weight-normal);
   --leftbar-row-description-font-size: var(--dt-font-size-200);
   --leftbar-row-description-line-height: var(--dt-font-line-height-200);
-  --leftbar-row-status-color-foreground: var(--dt-theme-sidebar-status-color-foreground);
+  --leftbar-row-status-color-foreground: var(--dt-shell-color-foreground-muted);
   --leftbar-row-status-font-size: var(--dt-font-size-100);
   --leftbar-row-status-line-height: var(--dt-font-line-height-100);
   --leftbar-row-action-position-right: var(--dt-size-400);
@@ -28,7 +28,7 @@
   //  ----------------------------------------------------------------------------
   position: relative;
   display: flex;
-  background-color: var(--dt-theme-sidebar-row-color-background);
+  background-color: var(--dt-shell-color-surface-default);
   border-radius: var(--leftbar-row-radius);
   cursor: pointer;
   opacity: var(--leftbar-row-opacity);
@@ -59,14 +59,14 @@
 
   &:hover,
   &:focus-within {
-    --leftbar-row-color-background: var(--dt-theme-sidebar-row-color-background-hover);
+    --leftbar-row-color-background: var(--dt-shell-action-color-background-primary-hover);
 
     .d-presence {
       --presence-color-border-base: var(--dt-color-black-200);
     }
 
     .d-avatar__count {
-      --avatar-count-color-shadow: var(--dt-theme-sidebar-selected-row-color-background);
+      --avatar-count-color-shadow: var(--dt-shell-action-color-background-primary-selected);
     }
   }
 
@@ -103,14 +103,14 @@
   }
 
   &__meta-context ~ &__meta-custom:not(:empty)::before {
-    color: var(--dt-theme-sidebar-status-color-foreground);
+    color: var(--dt-shell-color-foreground-muted);
     content: " • ";
   }
 
   &--has-unread {
     --leftbar-row-description-font-weight: var(--dt-font-weight-bold);
-    --leftbar-row-description-color-foreground: var(--dt-theme-sidebar-color-foreground-unread);
-    --leftbar-row-alpha-color-foreground: var(--dt-theme-sidebar-color-foreground-unread);
+    --leftbar-row-description-color-foreground: var(--dt-shell-color-foreground-strong);
+    --leftbar-row-alpha-color-foreground: var(--dt-shell-color-foreground-strong);
   }
 
   &--muted {
@@ -118,15 +118,15 @@
   }
 
   &--selected {
-    --leftbar-row-color-background: var(--dt-theme-sidebar-selected-row-color-background);
-    --leftbar-row-description-color-foreground: var(--dt-theme-sidebar-selected-row-color-foreground);
+    --leftbar-row-color-background: var(--dt-shell-action-color-background-primary-selected);
+    --leftbar-row-description-color-foreground: var(--dt-shell-action-color-foreground-primary-selected);
 
     .d-presence {
       --presence-color-border-base: var(--dt-color-black-200);
     }
 
     .d-avatar__count {
-      --avatar-count-color-shadow: var(--dt-theme-sidebar-selected-row-color-background);
+      --avatar-count-color-shadow: var(--dt-shell-action-color-background-primary-selected);
     }
   }
 
@@ -179,6 +179,24 @@
   //   <button class="d-recipe-leftbar-row__action-button d-btn ..." ...>...</button>
   // </div>
   //
+
+    // Style overrides for leftbar button icon and background, using the shell tokens for theming
+  .d-btn--inverted.d-btn--primary {
+    --button-color-text: var(--dt-shell-mention-color-surface-primary);
+  }
+
+  .d-btn--inverted.d-btn--primary:hover:not([disabled]) {
+    --button-color-background: color-mix(in srgb, var(--dt-shell-mention-color-surface-primary) 10%, white 100%);
+  }
+
+  .d-btn--inverted.d-btn--primary:active:not([disabled]) {
+    --button-color-background: color-mix(in srgb, var(--dt-shell-mention-color-surface-primary) 30%, white 100%);
+  }
+
+  .d-fc-success {
+    color:var(--dt-shell-color-foreground-positive)!important;
+  }
+
   &__primary {
     // contains extra style properties to support both <button> and <a>
     display: flex;
@@ -198,7 +216,7 @@
     appearance: none;
 
     &:active {
-      --leftbar-row-color-background: var(--dt-theme-sidebar-row-color-background-active);
+      --leftbar-row-color-background: var(--dt-shell-action-color-background-primary-active);
     }
 
     &:focus-visible {
@@ -238,6 +256,8 @@
     min-width: 0;
   }
 
+
+
   &__omega {
     position: absolute;
     top: var(--leftbar-row-action-position-bottom);
@@ -253,8 +273,8 @@
 
   &__unread-badge {
     display: var(--leftbar-row-unread-badge-display);
-    color: var(--dt-theme-mention-color-foreground);
-    background-color: var(--dt-theme-mention-color-background);
+    color: var(--dt-shell-mention-color-foreground-primary);
+    background-color: var(--dt-shell-mention-color-surface-primary);
   }
 
   &__unread-count {
@@ -269,15 +289,15 @@
   }
 
   &__unread-mention-count-badge {
-    color: var(--dt-theme-mention-color-foreground-strong);
-    background-color: var(--dt-theme-mention-color-background-strong);
+    color: var(--dt-shell-mention-color-foreground-secondary);
+    background-color: var(--dt-shell-mention-color-surface-secondary);
     border-top-left-radius: var(--dt-size-radius-0);
     border-bottom-left-radius: var(--dt-size-radius-0);
   }
 
   &__unread-mention-only-count-badge {
-    color: var(--dt-theme-mention-color-foreground-strong);
-    background-color: var(--dt-theme-mention-color-background-strong);
+    color: var(--dt-shell-mention-color-foreground-secondary);
+    background-color: var(--dt-shell-mention-color-surface-secondary);
   }
 
   &__active-voice {
@@ -370,15 +390,15 @@
 //  $   Contact Row
 //  ----------------------------------------------------------------------------
 .d-recipe-contact-row--active {
-  color: var(--dt-color-foreground-success);
+  color: var(--dt-shell-color-foreground-positive);
 }
 
 .d-recipe-contact-row--busy {
-  color: var(--dt-color-foreground-critical);
+  color: var(--dt-shell-color-foreground-critical);
 }
 
 .d-recipe-contact-row--away {
-  color: var(--dt-color-foreground-warning);
+  color: var(--dt-shell-color-foreground-warning);
 }
 
 //  ============================================================================
@@ -437,5 +457,3 @@
     }
   }
 }
-
-
