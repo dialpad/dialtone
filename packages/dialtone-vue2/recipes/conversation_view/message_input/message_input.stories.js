@@ -207,6 +207,7 @@ export const argsData = {
   emojiGiphyPicker: '',
   customActionIcons: '',
   sendButton: '',
+  scheduleMessage: '',
   smsCount: '',
   placeholder: 'New message',
   inputAriaLabel: 'Input text field',
