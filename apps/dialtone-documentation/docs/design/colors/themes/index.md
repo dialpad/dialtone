@@ -80,7 +80,7 @@ A theme represents the core color scheme. It applies a unique set of colors to t
           </dt-stack>
         </td>
       </tr>
-      <tr>
+      <!-- <tr>
         <td>
           <code class="d-code--sm">Sunflower</code>
         </td>
@@ -286,12 +286,10 @@ A theme represents the core color scheme. It applies a unique set of colors to t
             <div class="color-swatch" style="background-color: #FFE89C;" title="Text"></div>
           </dt-stack>
         </td>
-      </tr>
+      </tr> -->
     </tbody>
   </table>
 </div>
-
-<div class="d-bgc-secondary d-bar8"><svg-loader class="d-fl1" name="theme-variations" /></div>
 
 ## Theming with Shell Tokens
 
