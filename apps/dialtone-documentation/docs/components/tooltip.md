@@ -53,6 +53,18 @@ It's possible to change the tooltip default placement with directive arguments, 
 <dt-button v-dt-tooltip:bottom-start="`Tooltip text`">Placeholder Button</dt-button>
 ```
 
+#### With Object Syntax
+
+It's possible to change any property of the tooltip with object syntax.
+
+<code-well-header class='d-hmn164'>
+<dt-button v-dt-tooltip="{ message: 'Tooltip text', placement: 'bottom-start', delay: false }">Placeholder Button</dt-button>
+</code-well-header>
+
+```javascript
+<dt-button v-dt-tooltip="{ message: 'Tooltip text', placement: 'bottom-start', delay: false }">Placeholder Button</dt-button>
+```
+
 ### Import
 
 Import the directive from dialtone-vue
