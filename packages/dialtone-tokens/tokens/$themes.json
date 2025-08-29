@@ -3513,6 +3513,7 @@
     "selectedTokenSets": {
       "root": "source",
       "base/default": "source",
+      "base/deca": "source",
       "components/avatar/default": "enabled",
       "components/badge/default": "enabled",
       "components/button/default": "enabled",
