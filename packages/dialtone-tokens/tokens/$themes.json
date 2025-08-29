@@ -3514,6 +3514,7 @@
       "root": "source",
       "base/default": "source",
       "base/deca": "source",
+      "base/foo": "source",
       "components/avatar/default": "enabled",
       "components/badge/default": "enabled",
       "components/button/default": "enabled",
