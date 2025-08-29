@@ -53,7 +53,7 @@
     {
       "class": "flex",
       "values": [0, 1, 2, 3, 4, 5],
-      "description": "Set an item's flex-basis to auto and flex-grow and flex-shrink values to"
+      "description": "Set an item's flex-grow to"
     },
     {
       "class": "fl-grow",
