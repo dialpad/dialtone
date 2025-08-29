@@ -64,8 +64,14 @@ DIALTONE_EDITOR_ADD_LINK_BUTTON =
 
 DIALTONE_EMOJI_ROW_REACTION_LABEL =
   { $personCount ->
-    *[other] reacted with { $reaction }
-    [one] reacted with { $reaction }
+    *[other] { $youIncluded ->
+      *[true] reacted with { $reaction }
+      [false] reacted with { $reaction }
+    }
+    [one] { $youIncluded ->
+      *[true] reacted with { $reaction }
+      [false] reacted with { $reaction }
+    }
   }
 
 DIALTONE_EMOJI_PICKER_ADD_EMOJI_LABEL = Add emoji
