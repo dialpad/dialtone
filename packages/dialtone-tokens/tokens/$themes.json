@@ -3513,7 +3513,6 @@
     "selectedTokenSets": {
       "root": "source",
       "base/default": "source",
-      "base/deca": "source",
       "components/avatar/default": "enabled",
       "components/badge/default": "enabled",
       "components/button/default": "enabled",
@@ -3535,8 +3534,6 @@
       "root": "source",
       "base/default": "source",
       "base/dark": "source",
-      "base/deca": "source",
-      "base/deca-dark": "source",
       "components/avatar/default": "enabled",
       "components/badge/default": "enabled",
       "components/badge/dark": "enabled",
@@ -4210,8 +4207,7 @@
     "$figmaStyleReferences": {},
     "selectedTokenSets": {
       "root": "enabled",
-      "base/default": "enabled",
-      "base/deca": "enabled"
+      "base/default": "enabled"
     },
     "group": "base",
     "$figmaVariableReferences": {}
@@ -4223,9 +4219,7 @@
     "selectedTokenSets": {
       "root": "enabled",
       "base/default": "enabled",
-      "base/dark": "enabled",
-      "base/deca": "enabled",
-      "base/deca-dark": "enabled"
+      "base/dark": "enabled"
     },
     "group": "base",
     "$figmaVariableReferences": {}
