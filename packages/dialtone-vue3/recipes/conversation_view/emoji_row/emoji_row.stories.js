@@ -2,6 +2,8 @@ import { action } from '@storybook/addon-actions';
 import { createTemplateFromVueFile } from '@/common/storybook_utils';
 import DtRecipeEmojiRow from './emoji_row.vue';
 import DtRecipeEmojiRowDefaultTemplate from './emoji_row_default.story.vue';
+import { DialtoneLocalization } from '@/localization/index.js';
+const i18n = new DialtoneLocalization();
 
 // Default Prop Values
 export const argsData = {
@@ -13,7 +15,7 @@ export const sharedEmojiReactionsData = [
   {
     emojiUnicodeOrShortname: '😀',
     isSelected: true,
-    names: 'You',
+    names: i18n.$t('STORYBOOK_YOU'),
     num: 1,
   },
   {
@@ -25,12 +27,12 @@ export const sharedEmojiReactionsData = [
   {
     emojiUnicodeOrShortname: '😌',
     isSelected: false,
-    names: 'Olivia Chen, Benjamin Carter, Sophia Rodriguez, William Kim & Isabella Garcia',
+    names: i18n.$t('STORYBOOK_REACTION_NAMES_2'),
     num: 5,
   },
   {
     emojiUnicodeOrShortname: ':blinkingguy:',
-    names: 'You & John Doe',
+    names: i18n.$t('STORYBOOK_REACTION_NAMES_3'),
     isSelected: true,
     num: 2,
   },
