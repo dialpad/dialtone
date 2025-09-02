@@ -51,7 +51,7 @@
     "@dialpad/dialtone-icons": "workspace:*",
     "@dialpad/dialtone-tokens": "workspace:*",
     "@dialpad/dialtone-vue": "workspace:^3",
-    "@dialpad/i18n": "1.16.1",
+    "@dialpad/i18n": "1.20.1",
     "@dialpad/postcss-responsive-variations": "1.1.5",
     "@docsearch/js": "^3.5.1",
     "@originjs/vite-plugin-commonjs": "^1.0.3",
