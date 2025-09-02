@@ -98,6 +98,7 @@ import slashCommandSuggestion from './extensions/slash_command/suggestion';
 import { warnIfUnmounted } from '@/common/utils';
 import deepEqual from 'deep-equal';
 import { DialtoneLocalization } from '@/localization';
+import TurndownService from 'turndown';
 
 export default {
   name: 'DtRichTextEditor',
@@ -195,9 +196,9 @@ export default {
 
     /**
      * The output format that the editor uses when emitting the "@input" event.
-     * One of `text`, `json`, `html`. See https://tiptap.dev/guide/output for
+     * One of `text`, `json`, `html`, `markdown`. See https://tiptap.dev/guide/output for
      * examples.
-     * @values text, json, html
+     * @values text, json, html, markdown
      */
     outputFormat: {
       type: String,
@@ -437,6 +438,13 @@ export default {
     'text-input',
 
     /**
+     * Input event always in markdown format.
+     * @event input
+     * @type {String}
+     */
+    'markdown-input',
+
+    /**
      * Event to sync the value with the parent
      * @event update:value
      * @type {String|JSON}
@@ -497,6 +505,115 @@ export default {
       },
 
       i18n: new DialtoneLocalization(),
+
+      // TurndownService for HTML to markdown conversion
+      turndownService: (() => {
+        const service = new TurndownService({
+          bulletListMarker: '-',
+          codeBlockStyle: 'fenced',
+          emDelimiter: '*',
+        });
+
+        // Helper function to process custom components
+        const processCustomComponent = (node) => {
+          const componentMap = {
+            'mention-component': (node) => {
+              const name = node.getAttribute('name') || '';
+              return `@${name}`;
+            },
+            'channel-component': (node) => {
+              const name = node.getAttribute('name') || '';
+              return `#${name}`;
+            },
+            'command-component': (node) => {
+              const command = node.getAttribute('command') || '';
+              const parameters = node.getAttribute('parameters') || '';
+              return `/${command}${parameters ? ` ${parameters}` : ''}`;
+            },
+            'emoji-component': (node) => {
+              const code = node.getAttribute('code') || '';
+              return code;
+            },
+          };
+
+          const tagName = node.tagName.toLowerCase();
+          const processor = componentMap[tagName];
+          return processor ? processor(node) : '';
+        };
+
+        // Add custom rules for our custom components
+        ['mention-component', 'channel-component', 'command-component', 'emoji-component'].forEach(tag => {
+          service.addRule(tag, {
+            filter: tag,
+            replacement: (content, node) => processCustomComponent(node),
+          });
+        });
+
+        // Add custom rule for strikethrough
+        service.addRule('strikethrough', {
+          filter: ['s', 'strike', 'del'],
+          replacement: function (content) {
+            return '~~' + content + '~~';
+          },
+        });
+
+        // Helper function to process paragraph children
+        const processParagraphChildren = (node) => {
+          let processedContent = '';
+          const customTags = ['mention-component', 'channel-component', 'command-component', 'emoji-component'];
+
+          for (const child of node.childNodes) {
+            if (child.nodeType === 1) { // Element node
+              const tagName = child.tagName.toLowerCase();
+              if (customTags.includes(tagName)) {
+                processedContent += processCustomComponent(child);
+              } else {
+                processedContent += service.turndown(child);
+              }
+            } else if (child.nodeType === 3) { // Text node
+              processedContent += child.textContent;
+            }
+          }
+          return processedContent;
+        };
+
+        // Override paragraph rule to ensure custom components are processed first
+        service.addRule('customParagraph', {
+          filter: 'p',
+          replacement: function (content, node) {
+            // Check if this paragraph contains any custom components
+            const customTags = ['mention-component', 'channel-component', 'command-component', 'emoji-component'];
+            const hasCustomComponents = customTags.some(tag => node.querySelector(tag));
+
+            if (!hasCustomComponents) {
+              // Fall back to default paragraph behavior for regular content
+              return content ? content + '\n' : '';
+            }
+
+            // Process all child nodes manually only if custom components are present
+            const processedContent = processParagraphChildren(node);
+            return processedContent ? processedContent + '\n' : '';
+          },
+        });
+
+        // Custom rule for bullet list items to reduce spacing
+        service.addRule('listItem', {
+          filter: 'li',
+          replacement: function (content, node, options) {
+            // Remove excessive whitespace and newlines that come from nested paragraphs
+            content = content
+              .replace(/^\s*\n+/, '') // remove leading whitespace and newlines
+              .replace(/\n+\s*$/, '') // remove trailing newlines and whitespace
+              .replace(/\n\s*\n+/g, '\n') // collapse multiple newlines to single newlines
+              .replace(/\n/gm, '\n  '); // indent any remaining newlines with 2 spaces
+
+            const prefix = options.bulletListMarker + ' ';
+            return prefix + content + (node.nextSibling ? '\n' : '');
+          },
+        });
+
+        return service;
+      })(),
     };
   },
 
@@ -818,7 +935,7 @@ export default {
       window.open(link, '_blank');
     },
 
-    // eslint-disable-next-line complexity
+     
     setLink (linkInput, linkText, linkOptions, linkProtocols = RICH_TEXT_EDITOR_SUPPORTED_LINK_PROTOCOLS,
       defaultPrefix) {
       if (!linkInput) {
@@ -853,7 +970,7 @@ export default {
         .run();
     },
 
-    // eslint-disable-next-line complexity
+     
     processValue (newValue, returnIfEqual = true) {
       const currentValue = this.getOutput();
 
@@ -1002,9 +1119,13 @@ export default {
       const htmlValue = this.editor.getHTML();
       this.$emit('html-input', htmlValue);
 
-      // Always output HTML in a separate event
+      // Always output text in a separate event
       const textValue = this.editor.getText({ blockSeparator: '\n' });
       this.$emit('text-input', textValue);
+
+      // Always output markdown in a separate event
+      const markdownValue = this.turndownService.turndown(htmlValue);
+      this.$emit('markdown-input', markdownValue);
     },
 
     /**
@@ -1041,6 +1162,8 @@ export default {
           return this.editor.getJSON();
         case 'html':
           return this.editor.getHTML();
+        case 'markdown':
+          return this.turndownService.turndown(this.editor.getHTML());
         case 'text':
         default:
           return this.editor.getText({ blockSeparator: '\n' });

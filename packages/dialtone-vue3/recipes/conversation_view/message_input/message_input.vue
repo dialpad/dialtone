@@ -74,6 +74,7 @@
         v-bind="removeClassStyleAttrs($attrs)"
         @input="onInput"
         @text-input="onTextInput"
+        @markdown-input="onMarkdownInput"
         @enter="onSend"
         @selected="selectedText = $event"
         @selected-command="$emit('selected-command', $event)"
@@ -746,6 +747,13 @@ export default {
     'text-input',
 
     /**
+     * Emitted when input changes, returns markdown content only
+     * @event markdown-input
+     * @type {String}
+     */
+    'markdown-input',
+
+    /**
      * Emitted when the 'Add emoji' button is clicked
      * @event add-emoji
      * @type {Boolean}
@@ -900,7 +908,7 @@ export default {
     },
 
     // Checks if the node currently selected is active ex/ the bold button is active if the selected text is bold
-    // eslint-disable-next-line complexity
+     
     isSelectionActive (type) {
       if (['bulletList', 'orderedList'].includes(type)) {
         return this.lastActiveNodes(this.$refs.richTextEditor?.editor?.state, [{ type: 'bulletList' }, { type: 'orderedList' }]).includes(type) && this.isFocused;
@@ -1014,6 +1022,10 @@ export default {
     onTextInput (event) {
       this.text = event;
       this.$emit('text-input', event);
+    },
+
+    onMarkdownInput (event) {
+      this.$emit('markdown-input', event);
     },
   },
 };

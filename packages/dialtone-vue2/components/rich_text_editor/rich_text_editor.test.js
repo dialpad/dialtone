@@ -125,6 +125,141 @@ describe('DtRichTextEditor tests', () => {
             expect(MOCK_INPUT_STUB).toHaveBeenCalled();
           });
         });
+
+        describe('When using markdown output', () => {
+          it('should convert HTML to markdown correctly', async () => {
+            const wrapper = mount(DtRichTextEditor, {
+              props: {
+                outputFormat: 'markdown',
+                inputAriaLabel: 'Test',
+              },
+            });
+
+            // Test TurndownService directly
+            const turndownService = wrapper.vm.turndownService;
+            const htmlInput = '<p><strong>bold text</strong></p>';
+            const output = turndownService.turndown(htmlInput);
+            expect(output).toBe('**bold text**');
+          });
+
+          it('should convert italic text to markdown correctly', async () => {
+            const wrapper = mount(DtRichTextEditor, {
+              props: {
+                outputFormat: 'markdown',
+                allowItalic: true,
+                inputAriaLabel: 'Test',
+              },
+            });
+
+            // Test TurndownService directly
+            const turndownService = wrapper.vm.turndownService;
+            const htmlInput = '<p><em>italic text</em></p>';
+            const output = turndownService.turndown(htmlInput);
+            expect(output).toBe('*italic text*');
+          });
+
+          it('should convert strikethrough text to markdown correctly', async () => {
+            const wrapper = mount(DtRichTextEditor, {
+              props: {
+                outputFormat: 'markdown',
+                allowStrike: true,
+                inputAriaLabel: 'Test',
+              },
+            });
+
+            // Test TurndownService directly
+            const turndownService = wrapper.vm.turndownService;
+            const htmlInput = '<p><s>strikethrough text</s></p>';
+            const output = turndownService.turndown(htmlInput);
+            expect(output).toBe('~~strikethrough text~~');
+          });
+
+          it('should convert links to markdown correctly', async () => {
+            const wrapper = mount(DtRichTextEditor, {
+              props: {
+                outputFormat: 'markdown',
+                link: true,
+                inputAriaLabel: 'Test',
+              },
+            });
+
+            // Test TurndownService directly
+            const turndownService = wrapper.vm.turndownService;
+            const htmlInput = '<p><a href="https://example.com">link text</a></p>';
+            const output = turndownService.turndown(htmlInput);
+            expect(output).toBe('[link text](https://example.com)');
+          });
+
+          it('should convert bullet lists to markdown without extra newlines', async () => {
+            const wrapper = mount(DtRichTextEditor, {
+              props: {
+                outputFormat: 'markdown',
+                allowBulletList: true,
+                inputAriaLabel: 'Test',
+              },
+            });
+
+            // Test TurndownService directly
+            const turndownService = wrapper.vm.turndownService;
+            const htmlInput = '<ul><li><p>First item</p></li><li><p>Second item</p></li><li><p>Third item</p></li></ul>';
+            const output = turndownService.turndown(htmlInput);
+            expect(output).toBe('- First item\n- Second item\n- Third item');
+          });
+
+          it('should convert bullet lists with formatting to markdown correctly', async () => {
+            const wrapper = mount(DtRichTextEditor, {
+              props: {
+                outputFormat: 'markdown',
+                allowBulletList: true,
+                allowBold: true,
+                allowItalic: true,
+                inputAriaLabel: 'Test',
+              },
+            });
+
+            // Test TurndownService directly
+            const turndownService = wrapper.vm.turndownService;
+            const htmlInput = '<ul><li><p>Item with <strong>bold</strong> text</p></li><li><p>Item with <em>italic</em> text</p></li><li><p>Regular item</p></li></ul>';
+            const output = turndownService.turndown(htmlInput);
+            expect(output).toBe('- Item with **bold** text\n- Item with *italic* text\n- Regular item');
+          });
+
+          it('should convert mixed formatting to markdown correctly', async () => {
+            const wrapper = mount(DtRichTextEditor, {
+              props: {
+                outputFormat: 'markdown',
+                allowBold: true,
+                allowItalic: true,
+                allowStrike: true,
+                link: true,
+                inputAriaLabel: 'Test',
+              },
+            });
+
+            // Test TurndownService directly
+            const turndownService = wrapper.vm.turndownService;
+            const htmlInput = '<p>This has <strong>bold</strong>, <em>italic</em>, <s>strikethrough</s>, and a <a href="https://example.com">link</a>.</p>';
+            const output = turndownService.turndown(htmlInput);
+            expect(output).toBe('This has **bold**, *italic*, ~~strikethrough~~, and a [link](https://example.com).');
+          });
+
+          it('should handle nested formatting correctly', async () => {
+            const wrapper = mount(DtRichTextEditor, {
+              props: {
+                outputFormat: 'markdown',
+                allowBold: true,
+                allowItalic: true,
+                inputAriaLabel: 'Test',
+              },
+            });
+
+            // Test TurndownService directly
+            const turndownService = wrapper.vm.turndownService;
+            const htmlInput = '<p><strong>Bold and <em>italic</em> nested</strong></p>';
+            const output = turndownService.turndown(htmlInput);
+            expect(output).toBe('**Bold and *italic* nested**');
+          });
+        });
       });
     });
     describe('Copy paste tests', () => {
