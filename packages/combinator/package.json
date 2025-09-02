@@ -30,7 +30,9 @@
     "change-case": "^4.1.2",
     "js-beautify": "^1.14.4",
     "json5-with-undefined": "^2.1.301",
-    "just-clone": "^6.1.1"
+    "just-clone": "^6.1.1",
+    "prettier": "3.3.2",
+    "prismjs": "^1.30.0"
   },
   "devDependencies": {
     "@vue/cli-plugin-unit-mocha": "^5.0.8",
