@@ -299,11 +299,6 @@ export default {
      * @type {Boolean | Array}
      */
     'opened',
-
-    /**
-     * Event fired to sync the open prop with the parent component
-     * @event update:open
-     */
   ],
 
   data () {
