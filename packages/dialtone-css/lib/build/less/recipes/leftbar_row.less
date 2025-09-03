@@ -23,6 +23,14 @@
   --leftbar-row-action-width: var(--dt-size-550);
   --leftbar-row-action-height: var(--leftbar-row-action-width);
 
+  .d-presence {
+    // Presence colors in shell have specific tokens
+    --presence-color-border-offline: var(--dt-shell-presence-color-offline);
+    --presence-color-background-active: var(--dt-shell-presence-color-available);
+    --presence-color-background-busy: var(--dt-shell-presence-color-unavailable);
+    --presence-color-background-away: var(--dt-shell-presence-color-busy);
+  }
+
   //  ============================================================================
   //  $   BASE STYLE
   //  ----------------------------------------------------------------------------
@@ -62,10 +70,12 @@
     --leftbar-row-color-background: var(--dt-shell-action-color-background-primary-hover);
 
     .d-presence {
+      // TODO: Remove this once @jeverhart-dialpad's DLT-2665 PR
       --presence-color-border-base: var(--dt-color-black-200);
     }
 
     .d-avatar__count {
+      // TODO: Remove this once @jeverhart-dialpad's DLT-2665 PR
       --avatar-count-color-shadow: var(--dt-shell-action-color-background-primary-selected);
     }
   }
@@ -180,7 +190,7 @@
   // </div>
   //
 
-    // Style overrides for leftbar button icon and background, using the shell tokens for theming
+  // Style overrides for leftbar button icon and background, using the shell tokens for theming
   .d-btn--inverted.d-btn--primary {
     --button-color-text: var(--dt-shell-mention-color-surface-primary);
   }
@@ -255,8 +265,6 @@
     flex: 0 1;
     min-width: 0;
   }
-
-
 
   &__omega {
     position: absolute;
