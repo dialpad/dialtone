@@ -63,6 +63,7 @@ import { LIST_ITEM_NAVIGATION_TYPES } from '@/components/list_item';
 import { DROPDOWN_PADDING_CLASSES } from './dropdown_constants';
 import { getUniqueString } from '@/common/utils';
 import { EVENT_KEYNAMES } from '@/common/constants';
+import { extractVueListeners } from "@/common/utils";
 
 export default {
   compatConfig: { MODE: 3 },
@@ -318,8 +319,16 @@ export default {
   },
 
   computed: {
+
+    popoverListeners () {
+      return extractVueListeners(this.$attrs);
+    },
+
     dropdownListeners () {
       return {
+
+        ...this.popoverListeners,
+
         opened: isPopoverOpen => {
           this.updateInitialHighlightIndex(isPopoverOpen);
         },
