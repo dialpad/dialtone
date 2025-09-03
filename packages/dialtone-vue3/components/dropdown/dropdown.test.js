@@ -122,7 +122,7 @@ describe('DtDropdown Tests', () => {
 
   describe('Interactivity Tests', () => {
     beforeEach(() => {
-      mockAttrs = { onHighlight: MOCK_HIGHLIGHT_STUB };
+      mockAttrs = { onHighlight: MOCK_HIGHLIGHT_STUB, 'onUpdate:open': MOCK_UPDATE_OPEN_STUB };
 
       updateWrapper();
     });
@@ -142,9 +142,6 @@ describe('DtDropdown Tests', () => {
     });
 
     it('should pass listeners to the popover', async () => {
-      mockAttrs = { 'onUpdate:open': MOCK_UPDATE_OPEN_STUB };
-      updateWrapper();
-
       await wrapper.findComponent(DtPopover).vm.$emit('update:open', false);
 
       expect(MOCK_UPDATE_OPEN_STUB).toHaveBeenCalledWith(false);

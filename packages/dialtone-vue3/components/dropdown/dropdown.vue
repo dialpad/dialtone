@@ -63,7 +63,6 @@ import { LIST_ITEM_NAVIGATION_TYPES } from '@/components/list_item';
 import { DROPDOWN_PADDING_CLASSES } from './dropdown_constants';
 import { getUniqueString } from '@/common/utils';
 import { EVENT_KEYNAMES } from '@/common/constants';
-import { extractVueListeners } from "@/common/utils";
 
 export default {
   compatConfig: { MODE: 3 },
@@ -305,7 +304,6 @@ export default {
      * Event fired to sync the open prop with the parent component
      * @event update:open
      */
-    'update:open',
   ],
 
   data () {
@@ -320,14 +318,13 @@ export default {
 
   computed: {
 
-    popoverListeners () {
-      return extractVueListeners(this.$attrs);
-    },
 
     dropdownListeners () {
       return {
 
-        ...this.popoverListeners,
+        'update:open': value => {
+          this.$emit('update:open', value);
+        },
 
         opened: isPopoverOpen => {
           this.updateInitialHighlightIndex(isPopoverOpen);
