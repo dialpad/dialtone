@@ -1,8 +1,10 @@
 import { config, mount } from '@vue/test-utils';
 import DtDropdown from './dropdown.vue';
 import SrOnlyCloseButton from '@/common/sr_only_close_button.vue';
+import { DtPopover } from '@/components/popover';
 
 const MOCK_HIGHLIGHT_STUB = vi.fn();
+const MOCK_UPDATE_OPEN_STUB = vi.fn();
 
 const baseProps = {
   open: true,
@@ -120,7 +122,7 @@ describe('DtDropdown Tests', () => {
 
   describe('Interactivity Tests', () => {
     beforeEach(() => {
-      mockAttrs = { onHighlight: MOCK_HIGHLIGHT_STUB };
+      mockAttrs = { onHighlight: MOCK_HIGHLIGHT_STUB, 'onUpdate:open': MOCK_UPDATE_OPEN_STUB };
 
       updateWrapper();
     });
@@ -137,6 +139,12 @@ describe('DtDropdown Tests', () => {
       it('should emit highlight event', () => {
         expect(wrapper.emitted().highlight.length).toBe(1);
       });
+    });
+
+    it('should pass listeners to the popover', async () => {
+      await wrapper.findComponent(DtPopover).vm.$emit('update:open', false);
+
+      expect(MOCK_UPDATE_OPEN_STUB).toHaveBeenCalledWith(false);
     });
 
     describe('When mouseleave is detected on the list wrapper', () => {
