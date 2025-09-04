@@ -64,8 +64,8 @@ DIALTONE_EMOJI_ROW_REACTION_LABEL =
             }
        *[other]
             { $youIncluded ->
-               *[true] ha reagito con { $reaction }
-                [false] ha reagito con { $reaction }
+               *[true] hanno reagito con { $reaction }
+                [false] hanno reagito con { $reaction }
             }
     }
 DIALTONE_EMOJI_PICKER_ADD_EMOJI_LABEL = Aggiungi emoji
