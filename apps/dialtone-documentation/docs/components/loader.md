@@ -21,7 +21,7 @@ The base loader should be the go-to loader for most of your needs. When in doubt
 <code-example-tabs
 htmlCode='
 <div aria-label="loading" class="d-loader" size="500">
-  <svg class="d-icon d-icon--loading d-loader-icon d-icon--size-500">...</svg>
+  <svg class="d-icon d-loader__icon d-icon--size-500">...</svg>
 </div>
 '
 vueCode='
@@ -52,28 +52,28 @@ The base loader size is 24px and should be used in most cases.
 <code-example-tabs
 htmlCode='
 <div aria-label="loading" class="d-loader" size="100">
-  <svg class="d-icon d-icon--loading d-loader-icon d-icon--size-100">...</svg>
+  <svg class="d-icon d-loader__icon d-icon--size-100">...</svg>
 </div>
 <div aria-label="loading" class="d-loader" size="200">
-  <svg class="d-icon d-icon--loading d-loader-icon d-icon--size-200">...</svg>
+  <svg class="d-icon d-loader__icon d-icon--size-200">...</svg>
 </div>
 <div aria-label="loading" class="d-loader" size="300">
-  <svg class="d-icon d-icon--loading d-loader-icon d-icon--size-300">...</svg>
+  <svg class="d-icon d-loader__icon d-icon--size-300">...</svg>
 </div>
 <div aria-label="loading" class="d-loader" size="400">
-  <svg class="d-icon d-icon--loading d-loader-icon d-icon--size-400">...</svg>
+  <svg class="d-icon d-loader__icon d-icon--size-400">...</svg>
 </div>
 <div aria-label="loading" class="d-loader" size="500">
-  <svg class="d-icon d-icon--loading d-loader-icon d-icon--size-500">...</svg>
+  <svg class="d-icon d-loader__icon d-icon--size-500">...</svg>
 </div>
 <div aria-label="loading" class="d-loader" size="600">
-  <svg class="d-icon d-icon--loading d-loader-icon d-icon--size-600">...</svg>
+  <svg class="d-icon d-loader__icon d-icon--size-600">...</svg>
 </div>
 <div aria-label="loading" class="d-loader" size="700">
-  <svg class="d-icon d-icon--loading d-loader-icon d-icon--size-700">...</svg>
+  <svg class="d-icon d-loader__icon d-icon--size-700">...</svg>
 </div>
 <div aria-label="loading" class="d-loader" size="800">
-  <svg class="d-icon d-icon--loading d-loader-icon d-icon--size-800">...</svg>
+  <svg class="d-icon d-loader__icon d-icon--size-800">...</svg>
 </div>
 '
 vueCode='

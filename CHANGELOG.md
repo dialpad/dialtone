@@ -1,3 +1,36 @@
+## [9.135.1](https://github.com/dialpad/dialtone/compare/dialtone/v9.135.0...dialtone/v9.135.1) (2025-09-04)
+
+
+### Bug Fixes
+
+* **Loader:** DLT-2754 loader container size and alignment ([#898](https://github.com/dialpad/dialtone/issues/898)) ([7e5cb43](https://github.com/dialpad/dialtone/commit/7e5cb438263a68daed04c351cc01bd958952315c))
+* NO-JIRA update @dialpad/i18n to 1.20.1 in documentation ([#896](https://github.com/dialpad/dialtone/issues/896)) ([3390abd](https://github.com/dialpad/dialtone/commit/3390abda465a708891d9018813cafce581a4ce5c))
+* **Split Button:** DLT-2746 dropdown not working ([#899](https://github.com/dialpad/dialtone/issues/899)) ([1e84095](https://github.com/dialpad/dialtone/commit/1e84095a3b399e451ae50f6c4100f8aa556c7746))
+
+# [9.135.0](https://github.com/dialpad/dialtone/compare/dialtone/v9.134.0...dialtone/v9.135.0) (2025-09-02)
+
+
+### Bug Fixes
+
+* **Avatar:** DLT-2693 sanitize full name before extracting initials ([#884](https://github.com/dialpad/dialtone/issues/884)) ([f8d2a7b](https://github.com/dialpad/dialtone/commit/f8d2a7b70fcef4bdf119082d113374415bdb2ccc))
+* **Avatar:** NO-JIRA tests for vue 3 ([da902fc](https://github.com/dialpad/dialtone/commit/da902fc4bc169ec668f07ea5ecb22b4b6da5b6a7))
+* **Emoji Row:** NO-JIRA reaction label localization ([#891](https://github.com/dialpad/dialtone/issues/891)) ([8db72f9](https://github.com/dialpad/dialtone/commit/8db72f98c09cd6ea00be065794c865e24d1b7376))
+* **Modal:** DLT-2628 improve close button positioning ([#887](https://github.com/dialpad/dialtone/issues/887)) ([87ca255](https://github.com/dialpad/dialtone/commit/87ca255b142adfeb2a49528fa04febdf001c6492))
+
+
+### Documentation
+
+* **Color:** DLT-2592 theming guidelines ([#845](https://github.com/dialpad/dialtone/issues/845)) ([2eb2ed8](https://github.com/dialpad/dialtone/commit/2eb2ed85c135c4c58fe99d7ab21040257f2eef80))
+* **Dialtone:** NO-JIRA fix documentation site issues and warnings ([#888](https://github.com/dialpad/dialtone/issues/888)) ([6fb1dec](https://github.com/dialpad/dialtone/commit/6fb1decdec286f4b5b2550c12a8267bde39c48d8))
+* **Flex:** NO-JIRA fix description ([#892](https://github.com/dialpad/dialtone/issues/892)) ([d9fe86b](https://github.com/dialpad/dialtone/commit/d9fe86b11d022ab14d924eba70caaa0047e065b5))
+
+
+### Features
+
+* **Message Input:** DLT-2743 add slot for schedule message icon ([#886](https://github.com/dialpad/dialtone/issues/886)) ([5df518d](https://github.com/dialpad/dialtone/commit/5df518d904be39034719ffd1bfda3aeeba5a8e1b))
+* **Tokens:** DLT-2689 apply new shell tokens to dialtone css and vue ([#882](https://github.com/dialpad/dialtone/issues/882)) ([69dae2a](https://github.com/dialpad/dialtone/commit/69dae2ad70b84022bb35cdbd0e630a4799c6bf96))
+* **Tooltip:** DLT-2741 add props support on tooltip directive ([#876](https://github.com/dialpad/dialtone/issues/876)) ([97858aa](https://github.com/dialpad/dialtone/commit/97858aa078f7b1f6f79f60f0e5160b09102e845d))
+
 # [9.134.0](https://github.com/dialpad/dialtone/compare/dialtone/v9.133.0...dialtone/v9.134.0) (2025-08-26)
 
 

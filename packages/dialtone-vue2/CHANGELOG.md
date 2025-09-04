@@ -1,3 +1,27 @@
+## [2.198.1](https://github.com/dialpad/dialtone/compare/dialtone-vue2/v2.198.0...dialtone-vue2/v2.198.1) (2025-09-04)
+
+
+### Bug Fixes
+
+* **Loader:** DLT-2754 loader container size and alignment ([#898](https://github.com/dialpad/dialtone/issues/898)) ([7e5cb43](https://github.com/dialpad/dialtone/commit/7e5cb438263a68daed04c351cc01bd958952315c))
+* **Split Button:** DLT-2746 dropdown not working ([#899](https://github.com/dialpad/dialtone/issues/899)) ([1e84095](https://github.com/dialpad/dialtone/commit/1e84095a3b399e451ae50f6c4100f8aa556c7746))
+
+# [2.198.0](https://github.com/dialpad/dialtone/compare/dialtone-vue2/v2.197.0...dialtone-vue2/v2.198.0) (2025-09-02)
+
+
+### Bug Fixes
+
+* **Avatar:** DLT-2693 sanitize full name before extracting initials ([#884](https://github.com/dialpad/dialtone/issues/884)) ([f8d2a7b](https://github.com/dialpad/dialtone/commit/f8d2a7b70fcef4bdf119082d113374415bdb2ccc))
+* **Emoji Row:** NO-JIRA reaction label localization ([#891](https://github.com/dialpad/dialtone/issues/891)) ([8db72f9](https://github.com/dialpad/dialtone/commit/8db72f98c09cd6ea00be065794c865e24d1b7376))
+* **Modal:** DLT-2628 improve close button positioning ([#887](https://github.com/dialpad/dialtone/issues/887)) ([87ca255](https://github.com/dialpad/dialtone/commit/87ca255b142adfeb2a49528fa04febdf001c6492))
+
+
+### Features
+
+* **Message Input:** DLT-2743 add slot for schedule message icon ([#886](https://github.com/dialpad/dialtone/issues/886)) ([5df518d](https://github.com/dialpad/dialtone/commit/5df518d904be39034719ffd1bfda3aeeba5a8e1b))
+* **Tokens:** DLT-2689 apply new shell tokens to dialtone css and vue ([#882](https://github.com/dialpad/dialtone/issues/882)) ([69dae2a](https://github.com/dialpad/dialtone/commit/69dae2ad70b84022bb35cdbd0e630a4799c6bf96))
+* **Tooltip:** DLT-2741 add props support on tooltip directive ([#876](https://github.com/dialpad/dialtone/issues/876)) ([97858aa](https://github.com/dialpad/dialtone/commit/97858aa078f7b1f6f79f60f0e5160b09102e845d))
+
 # [2.197.0](https://github.com/dialpad/dialtone/compare/dialtone-vue2/v2.196.1...dialtone-vue2/v2.197.0) (2025-08-26)
 
 

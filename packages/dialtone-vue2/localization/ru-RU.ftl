@@ -55,7 +55,29 @@ DIALTONE_EDITOR_LINK_BUTTON_LABEL = Ссылка
 DIALTONE_EDITOR_ADD_LINK_BUTTON =
     .title = Добавить ссылку
     .aria-label = Поле ввода для добавления ссылки
-DIALTONE_EMOJI_ROW_REACTION_LABEL = Реакция { $reaction } от { $names }
+DIALTONE_EMOJI_ROW_REACTION_LABEL =
+    { $personCount ->
+        [one]
+            { $youIncluded ->
+               *[true] реагирует с { $reaction }
+                [false] реагирует с { $reaction }
+            }
+        [few]
+            { $youIncluded ->
+               *[true] реагируют с { $reaction }
+                [false] реагируют с { $reaction }
+            }
+        [many]
+            { $youIncluded ->
+               *[true] реагируют с { $reaction }
+                [false] реагируют с { $reaction }
+            }
+       *[other]
+            { $youIncluded ->
+               *[true] реагируют с { $reaction }
+                [false] реагируют с { $reaction }
+            }
+    }
 DIALTONE_EMOJI_PICKER_ADD_EMOJI_LABEL = Добавить смайлик
 DIALTONE_EMOJI_PICKER_SEARCH_NO_RESULTS_LABEL = Нет результатов
 DIALTONE_EMOJI_PICKER_SEARCH_RESULTS_LABEL = результаты поиска
@@ -153,3 +175,6 @@ STORYBOOK_LANGUAGE_PORTUGUESE = Португальский
 STORYBOOK_LANGUAGE_RUSSIAN = Русский
 STORYBOOK_LANGUAGE_SPANISH = Испанский
 STORYBOOK_SET_LANGUAGE = Установить язык
+STORYBOOK_YOU = Вы
+STORYBOOK_REACTION_NAMES_2 = Оливия Чен, Бенджамин Картер, София Родригес, Уильям Ким и Изабелла Гарсия
+STORYBOOK_REACTION_NAMES_3 = Оливия Чен и { STORYBOOK_YOU }

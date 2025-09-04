@@ -1,3 +1,22 @@
+## [8.64.1](https://github.com/dialpad/dialtone/compare/dialtone-css/v8.64.0...dialtone-css/v8.64.1) (2025-09-04)
+
+
+### Bug Fixes
+
+* **Loader:** DLT-2754 loader container size and alignment ([#898](https://github.com/dialpad/dialtone/issues/898)) ([7e5cb43](https://github.com/dialpad/dialtone/commit/7e5cb438263a68daed04c351cc01bd958952315c))
+
+# [8.64.0](https://github.com/dialpad/dialtone/compare/dialtone-css/v8.63.0...dialtone-css/v8.64.0) (2025-09-02)
+
+
+### Bug Fixes
+
+* **Modal:** DLT-2628 improve close button positioning ([#887](https://github.com/dialpad/dialtone/issues/887)) ([87ca255](https://github.com/dialpad/dialtone/commit/87ca255b142adfeb2a49528fa04febdf001c6492))
+
+
+### Features
+
+* **Tokens:** DLT-2689 apply new shell tokens to dialtone css and vue ([#882](https://github.com/dialpad/dialtone/issues/882)) ([69dae2a](https://github.com/dialpad/dialtone/commit/69dae2ad70b84022bb35cdbd0e630a4799c6bf96))
+
 # [8.63.0](https://github.com/dialpad/dialtone/compare/dialtone-css/v8.62.0...dialtone-css/v8.63.0) (2025-08-26)
 
 
