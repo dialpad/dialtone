@@ -1,3 +1,11 @@
+## [2.198.1](https://github.com/dialpad/dialtone/compare/dialtone-vue2/v2.198.0...dialtone-vue2/v2.198.1) (2025-09-04)
+
+
+### Bug Fixes
+
+* **Loader:** DLT-2754 loader container size and alignment ([#898](https://github.com/dialpad/dialtone/issues/898)) ([7e5cb43](https://github.com/dialpad/dialtone/commit/7e5cb438263a68daed04c351cc01bd958952315c))
+* **Split Button:** DLT-2746 dropdown not working ([#899](https://github.com/dialpad/dialtone/issues/899)) ([1e84095](https://github.com/dialpad/dialtone/commit/1e84095a3b399e451ae50f6c4100f8aa556c7746))
+
 # [2.198.0](https://github.com/dialpad/dialtone/compare/dialtone-vue2/v2.197.0...dialtone-vue2/v2.198.0) (2025-09-02)
 
 
