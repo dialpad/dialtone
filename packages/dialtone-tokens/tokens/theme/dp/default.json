@@ -838,7 +838,7 @@
           "studio.tokens": {
             "modify": {
               "type": "alpha",
-              "value": ".7",
+              "value": ".3",
               "space": "hsl"
             }
           }
@@ -1137,9 +1137,9 @@
             "studio.tokens": {
               "modify": {
                 "type": "mix",
-                "value": ".7",
+                "value": ".3",
                 "space": "hsl",
-                "color": "{color.chart.categorical.03} "
+                "color": "{color.chart.categorical.04} "
               }
             }
           }
@@ -1151,9 +1151,9 @@
             "studio.tokens": {
               "modify": {
                 "type": "mix",
-                "value": ".7",
+                "value": ".3",
                 "space": "hsl",
-                "color": "{color.chart.categorical.04} "
+                "color": "{color.chart.categorical.05} "
               }
             }
           }
@@ -1165,9 +1165,9 @@
             "studio.tokens": {
               "modify": {
                 "type": "mix",
-                "value": ".7",
+                "value": ".3",
                 "space": "hsl",
-                "color": "{color.chart.categorical.05} "
+                "color": "{color.chart.categorical.06} "
               }
             }
           }
@@ -1179,9 +1179,9 @@
             "studio.tokens": {
               "modify": {
                 "type": "mix",
-                "value": ".7",
+                "value": ".3",
                 "space": "hsl",
-                "color": "{color.chart.categorical.06} "
+                "color": "{color.chart.categorical.01} "
               }
             }
           }
@@ -1193,9 +1193,9 @@
             "studio.tokens": {
               "modify": {
                 "type": "mix",
-                "value": ".7",
+                "value": ".3",
                 "space": "hsl",
-                "color": "{color.chart.categorical.07} "
+                "color": "{color.chart.categorical.08} "
               }
             }
           }
@@ -1207,9 +1207,9 @@
             "studio.tokens": {
               "modify": {
                 "type": "mix",
-                "value": ".7",
+                "value": ".3",
                 "space": "hsl",
-                "color": "{color.chart.categorical.08} "
+                "color": "{color.chart.categorical.09} "
               }
             }
           }
@@ -1221,9 +1221,9 @@
             "studio.tokens": {
               "modify": {
                 "type": "mix",
-                "value": ".7",
+                "value": ".3",
                 "space": "hsl",
-                "color": "{color.chart.categorical.09} "
+                "color": "{color.chart.categorical.10} "
               }
             }
           }
@@ -1235,9 +1235,9 @@
             "studio.tokens": {
               "modify": {
                 "type": "mix",
-                "value": ".7",
+                "value": ".9",
                 "space": "hsl",
-                "color": "{color.chart.categorical.10} "
+                "color": "{color.chart.categorical.03} "
               }
             }
           }
@@ -1249,9 +1249,9 @@
             "studio.tokens": {
               "modify": {
                 "type": "mix",
-                "value": ".7",
+                "value": ".3",
                 "space": "hsl",
-                "color": "{color.chart.categorical.11} "
+                "color": "{color.chart.categorical.12} "
               }
             }
           }
@@ -1263,9 +1263,9 @@
             "studio.tokens": {
               "modify": {
                 "type": "mix",
-                "value": ".7",
+                "value": ".3",
                 "space": "hsl",
-                "color": "{color.chart.categorical.12}"
+                "color": "{color.chart.categorical.13}"
               }
             }
           }
@@ -1277,9 +1277,9 @@
             "studio.tokens": {
               "modify": {
                 "type": "mix",
-                "value": ".7",
+                "value": ".3",
                 "space": "hsl",
-                "color": "{color.chart.categorical.13}"
+                "color": "{color.chart.categorical.14}"
               }
             }
           }
@@ -1291,9 +1291,9 @@
             "studio.tokens": {
               "modify": {
                 "type": "mix",
-                "value": ".7",
+                "value": ".3",
                 "space": "hsl",
-                "color": "{color.chart.categorical.14} "
+                "color": "{color.chart.categorical.15} "
               }
             }
           }
@@ -1305,9 +1305,9 @@
             "studio.tokens": {
               "modify": {
                 "type": "mix",
-                "value": ".7",
+                "value": ".3",
                 "space": "hsl",
-                "color": "{color.chart.categorical.15} "
+                "color": "{color.chart.categorical.04} "
               }
             }
           }
@@ -1319,9 +1319,9 @@
             "studio.tokens": {
               "modify": {
                 "type": "mix",
-                "value": ".7",
+                "value": ".3",
                 "space": "hsl",
-                "color": "{color.chart.categorical.16} "
+                "color": "{color.chart.categorical.17} "
               }
             }
           }
@@ -1335,7 +1335,7 @@
                 "type": "mix",
                 "value": ".7",
                 "space": "hsl",
-                "color": "{color.chart.categorical.17} "
+                "color": "{color.chart.categorical.18} "
               }
             }
           }
@@ -1347,9 +1347,9 @@
             "studio.tokens": {
               "modify": {
                 "type": "mix",
-                "value": ".7",
+                "value": ".3",
                 "space": "hsl",
-                "color": "{color.chart.categorical.18} "
+                "color": "{color.chart.categorical.03} "
               }
             }
           }
@@ -1361,9 +1361,9 @@
             "studio.tokens": {
               "modify": {
                 "type": "mix",
-                "value": ".7",
+                "value": ".3",
                 "space": "hsl",
-                "color": "{color.chart.categorical.19} "
+                "color": "{color.chart.categorical.20} "
               }
             }
           }
@@ -1375,9 +1375,9 @@
             "studio.tokens": {
               "modify": {
                 "type": "mix",
-                "value": ".7",
+                "value": ".3",
                 "space": "hsl",
-                "color": "{color.chart.categorical.20} "
+                "color": "{color.chart.categorical.23} "
               }
             }
           }
@@ -1389,9 +1389,9 @@
             "studio.tokens": {
               "modify": {
                 "type": "mix",
-                "value": ".7",
+                "value": ".3",
                 "space": "hsl",
-                "color": "{color.chart.categorical.21} "
+                "color": "{color.chart.categorical.22} "
               }
             }
           }
