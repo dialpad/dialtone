@@ -908,6 +908,90 @@
       "info-selected": {
         "value": "{color.blue.475}",
         "type": "color"
+      },
+      "sequential": {
+        "range": {
+          "01-start": {
+            "value": "{color.purple.200}",
+            "type": "color"
+          },
+          "01-end": {
+            "value": "{color.purple.600}",
+            "type": "color"
+          },
+          "02-start": {
+            "value": "{color.magenta.200}",
+            "type": "color"
+          },
+          "02-end": {
+            "value": "{color.magenta.900}",
+            "type": "color"
+          },
+          "03-start": {
+            "value": "{color.blue.200}",
+            "type": "color"
+          },
+          "03-end": {
+            "value": "{color.blue.600}",
+            "type": "color"
+          },
+          "04-start": {
+            "value": "{color.gold.200}",
+            "type": "color"
+          },
+          "04-end": {
+            "value": "{color.gold.900}",
+            "type": "color"
+          },
+          "05-start": {
+            "value": "{color.green.200}",
+            "type": "color"
+          },
+          "05-end": {
+            "value": "{color.green.900}",
+            "type": "color"
+          },
+          "06-start": {
+            "value": "{color.berry.200}",
+            "type": "color"
+          },
+          "06-end": {
+            "value": "{color.berry.950}",
+            "type": "color"
+          },
+          "07-start": {
+            "value": "{color.coral.200}",
+            "type": "color"
+          },
+          "07-end": {
+            "value": "{color.coral.950}",
+            "type": "color"
+          },
+          "08-start": {
+            "value": "{color.olive.200}",
+            "type": "color"
+          },
+          "08-end": {
+            "value": "{color.olive.950}",
+            "type": "color"
+          },
+          "09-start": {
+            "value": "{color.red.200}",
+            "type": "color"
+          },
+          "09-end": {
+            "value": "{color.red.900}",
+            "type": "color"
+          },
+          "10-start": {
+            "value": "{color.teal.200}",
+            "type": "color"
+          },
+          "10-end": {
+            "value": "{color.teal.900}",
+            "type": "color"
+          }
+        }
       }
     }
   },
