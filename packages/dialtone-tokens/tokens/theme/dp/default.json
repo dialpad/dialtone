@@ -1324,12 +1324,12 @@
         "description": "Used for informational or neutral data points in charts."
       },
       "info-hover": {
-        "value": "{color.blue.475}",
+        "value": "{color.blue.450}",
         "type": "color",
         "description": "Hover state for info chart elements."
       },
       "info-selected": {
-        "value": "{color.blue.600}",
+        "value": "{color.blue.500}",
         "type": "color",
         "description": "Selected state for info chart elements."
       },
