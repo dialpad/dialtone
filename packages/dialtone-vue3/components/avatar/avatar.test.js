@@ -198,8 +198,8 @@ describe('DtAvatar Tests', () => {
         expect(wrapper.classes('d-avatar--group')).toBe(true);
         expect(wrapper.classes('d-avatar--group-digits-2')).toBe(false);
         expect(wrapper.classes('d-avatar--group-digits-3')).toBe(true);
-        const countEl = wrapper.find('[data-qa="dt-avatar-count"]');
-        expect(countEl.text()).toBe('99+');
+        const count = wrapper.find('[data-qa="dt-avatar-count"]');
+        expect(count.text()).toBe('99+');
       });
     });
 
