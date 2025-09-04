@@ -8,7 +8,12 @@ storybook: https://dialtone.dialpad.com/vue/?path=/story/components-presence--de
 figma_url: https://www.figma.com/design/W58r5BkO8qTw3vem9YieJd/DT9-Component-Library--Rebrand-2025-?node-id=9628-58458
 ---
 <code-well-header>
-  <example-presence presence="active"/>
+  <dt-stack direction="row" gap="500">
+    <example-presence presence="active"/>
+    <example-presence presence="away"/>
+    <example-presence presence="busy"/>
+    <example-presence presence="offline"/>
+  </dt-stack>
 </code-well-header>
 
 ## Usage
@@ -21,19 +26,13 @@ Located at the bottom right of an avatar, the `presence` indicator displays a us
 
 When a user is available.
 <code-well-header>
-  <example-presence presence="active"/>
+  <example-presence presence="active" ref="activeExample"/>
 </code-well-header>
 
 <code-example-tabs
-htmlCode='
-<div class="d-presence">
-  <div class="d-presence__inner d-presence__inner--active"></div>
-</div>
-'
+:htmlCode='() => $refs.activeExample'
 vueCode='
-<dt-presence
-  presence="active"
-/>
+<dt-presence presence="active"  />
 '
 showHtmlWarning />
 
@@ -41,19 +40,13 @@ showHtmlWarning />
 
 When a user is unavailable, either due to being **'On a call'**, **'In a meeting'**, or set to **'DND (Do Not Disturb)'**. Additionally, a text label indicating their specific status will appear under the user's name.
 <code-well-header>
-  <example-presence presence="busy"/>
+  <example-presence presence="busy" ref="busyExample"/>
 </code-well-header>
 
 <code-example-tabs
-htmlCode='
-<div class="d-presence">
-  <div class="d-presence__inner d-presence__inner--busy"></div>
-</div>
-'
+:htmlCode='() => $refs.busyExample'
 vueCode='
-<dt-presence
-  presence="busy"
-/>
+<dt-presence presence="busy" />
 '
 showHtmlWarning />
 
@@ -61,19 +54,13 @@ showHtmlWarning />
 
 When a user has a scheduled meeting on their synced calendar (Google G Suite or Microsoft Office 365) and is not actively participating in it through the app. Additionally, **'In a meeting'** will appear under the user's name.
 <code-well-header>
-  <example-presence presence="away"/>
+  <example-presence presence="away" ref="awayExample"/>
 </code-well-header>
 
 <code-example-tabs
-htmlCode='
-<div class="d-presence">
-  <div class="d-presence__inner d-presence__inner--away"></div>
-</div>
-'
+:htmlCode='() => $refs.awayExample'
 vueCode='
-<dt-presence
-  presence="away"
-/>
+<dt-presence presence="away" />
 '
 showHtmlWarning />
 
@@ -81,19 +68,13 @@ showHtmlWarning />
 
 When a user has not logged in for their first time.
 <code-well-header>
-  <example-presence presence="offline"/>
+  <example-presence presence="offline" ref="offlineExample"/>
 </code-well-header>
 
 <code-example-tabs
-htmlCode='
-<div class="d-presence">
-  <div class="d-presence__inner d-presence__inner--offline"></div>
-</div>
-'
+:htmlCode='() => $refs.offlineExample'
 vueCode='
-<dt-presence
-  presence="offline"
-/>
+<dt-presence presence="offline" />
 '
 showHtmlWarning />
 

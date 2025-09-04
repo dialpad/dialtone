@@ -7,13 +7,13 @@
 //  visit https://dialtone.dialpad.com/components/presence
 
 .d-presence {
-  --presence-color-border-base: var(--dt-shell-color-surface-default);
-  --presence-color-border-offline: var(--dt-color-border-bold);
-  --presence-color-background-active: var(--dt-shell-presence-color-available);
-  --presence-color-background-busy: var(--dt-shell-presence-color-unavailable);
-  --presence-color-background-away: var(--dt-shell-presence-color-busy);
-  --presence-color-background-offline: var(--dt-shell-presence-color-offline);
-  --presence-border-size: var(--dt-size-200);
+  --presence-color-border-base: var(--dt-color-surface-secondary); // Probably won't be necessary after @jeverhart-dialpad's DLT-2665 PR
+  --presence-color-border-offline: var(--dt-presence-color-offline);
+  --presence-color-background-active: var(--dt-presence-color-available);
+  --presence-color-background-busy: var(--dt-presence-color-unavailable);
+  --presence-color-background-away: var(--dt-presence-color-busy);
+  --presence-color-background-offline: var(--dt-color-surface-primary);
+  --presence-border-size: var(--dt-size-border-200);
   --presence-size: var(--dt-size-400);
 
   display: inline-block;
@@ -24,7 +24,7 @@
   border-radius: var(--dt-size-radius-circle);
 
   .d-recipe-leftbar-row--selected & {
-    --presence-color-border-base: var(--dt-shell-color-surface-default);
+    --presence-color-border-base: var(--dt-color-surface-secondary);
   }
 
   .d-recipe-leftbar-row__primary:hover & {
@@ -33,8 +33,8 @@
 
   &__inner {
     box-sizing: border-box;
-    width: var(--presence-size);
-    height: var(--presence-size);
+    inline-size: var(--presence-size);
+    block-size: var(--presence-size);
     border: none;
     border-radius: 50%;
 
@@ -54,7 +54,7 @@
       background-color: var(--presence-color-background-offline);
       border-color: var(--presence-color-border-offline);
       border-style: solid;
-      border-width: var(--dt-size-200);
+      border-width: var(--dt-size-border-200);
     }
   }
 }
