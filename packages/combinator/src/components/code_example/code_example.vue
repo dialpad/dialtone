@@ -37,13 +37,13 @@
     >
       <div
         v-dt-scrollbar
-        class="language-html d-hmx332"
+        class="language-vue d-hmx332"
         data-ext="html"
       >
-        <!--        <pre-->
-        <!--          class="language-html"-->
-        <!--          v-html="highlightedVue"-->
-        <!--        />-->
+        <pre
+          class="language-vue"
+          v-html="highlightedVue"
+        />
       </div>
     </dt-tab-panel>
     <!--    <dt-tab-panel-->
@@ -73,6 +73,7 @@
   </dt-tab-group>
 </template>
 
+<!-- TODO: Get the HTML and Vue code -->
 <script setup>
 import { computed, onMounted, ref } from 'vue';
 import { DtTab, DtTabPanel, DtBanner, DtTabGroup } from '@dialpad/dialtone-vue';
@@ -133,7 +134,7 @@ const formattedHTML = ref(null);
 // });
 
 // const trimmedVueCode = props.vueCode.replace(/^\n/gm, '');
-// const highlightedVue = Prism.highlight(props.vueCode.trim(), Prism.languages.html, 'html');
+const highlightedVue = Prism.highlight('<dt-button size="sm">Some text</dt-button>', Prism.languages.html, 'html');
 
 const vueTabId = getUniqueString();
 const vuePanelId = getUniqueString();
@@ -141,15 +142,6 @@ const htmlTabId = getUniqueString();
 const htmlPanelId = getUniqueString();
 
 const selectedPanelId = ref(vuePanelId);
-
-onMounted(async () => {
-  console.log(props.component)
-  // if (typeof props.htmlCode === 'function') {
-  //   const componentRef = props.htmlCode();
-  //   const el = componentRef.$el ?? componentRef;
-  //   formattedHTML.value = await formatHTML(el.outerHTML);
-  // }
-});
 
 /**
  * Transforms a single-line HTML string to an indented multiline HTML string.
