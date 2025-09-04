@@ -1,3 +1,10 @@
+## [3.190.1](https://github.com/dialpad/dialtone/compare/dialtone-vue3/v3.190.0...dialtone-vue3/v3.190.1) (2025-09-04)
+
+
+### Bug Fixes
+
+* **Loader:** DLT-2754 loader container size and alignment ([#898](https://github.com/dialpad/dialtone/issues/898)) ([7e5cb43](https://github.com/dialpad/dialtone/commit/7e5cb438263a68daed04c351cc01bd958952315c))
+
 # [3.190.0](https://github.com/dialpad/dialtone/compare/dialtone-vue3/v3.189.0...dialtone-vue3/v3.190.0) (2025-09-02)
 
 
