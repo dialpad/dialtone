@@ -1,3 +1,10 @@
+## [8.64.1](https://github.com/dialpad/dialtone/compare/dialtone-css/v8.64.0...dialtone-css/v8.64.1) (2025-09-04)
+
+
+### Bug Fixes
+
+* **Loader:** DLT-2754 loader container size and alignment ([#898](https://github.com/dialpad/dialtone/issues/898)) ([7e5cb43](https://github.com/dialpad/dialtone/commit/7e5cb438263a68daed04c351cc01bd958952315c))
+
 # [8.64.0](https://github.com/dialpad/dialtone/compare/dialtone-css/v8.63.0...dialtone-css/v8.64.0) (2025-09-02)
 
 

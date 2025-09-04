@@ -1,3 +1,12 @@
+## [9.135.1](https://github.com/dialpad/dialtone/compare/dialtone/v9.135.0...dialtone/v9.135.1) (2025-09-04)
+
+
+### Bug Fixes
+
+* **Loader:** DLT-2754 loader container size and alignment ([#898](https://github.com/dialpad/dialtone/issues/898)) ([7e5cb43](https://github.com/dialpad/dialtone/commit/7e5cb438263a68daed04c351cc01bd958952315c))
+* NO-JIRA update @dialpad/i18n to 1.20.1 in documentation ([#896](https://github.com/dialpad/dialtone/issues/896)) ([3390abd](https://github.com/dialpad/dialtone/commit/3390abda465a708891d9018813cafce581a4ce5c))
+* **Split Button:** DLT-2746 dropdown not working ([#899](https://github.com/dialpad/dialtone/issues/899)) ([1e84095](https://github.com/dialpad/dialtone/commit/1e84095a3b399e451ae50f6c4100f8aa556c7746))
+
 # [9.135.0](https://github.com/dialpad/dialtone/compare/dialtone/v9.134.0...dialtone/v9.135.0) (2025-09-02)
 
 
