@@ -1763,6 +1763,108 @@
             }
           },
           "description": "Selected state for tenth sequential chart color."
+        },
+        "range": {
+          "01-start": {
+            "value": "{color.purple.100}",
+            "type": "color",
+            "description": "Start color value for first sequential range. Use to create a dynamically generated sequential series, must be paired with an end color."
+          },
+          "01-end": {
+            "value": "{color.purple.550}",
+            "type": "color",
+            "description": "Ending color for first sequential range. Use to create a dynamically generated sequential series, must be paired with an start color."
+          },
+          "02-start": {
+            "value": "{color.magenta.100}",
+            "type": "color",
+            "description": "Start color for second sequential range. Use to create a dynamically generated sequential series, must be paired with an end color."
+          },
+          "02-end": {
+            "value": "{color.magenta.600}",
+            "type": "color",
+            "description": "End color for second sequential range. Use to create a dynamically generated sequential series, must be paired with an start color."
+          },
+          "03-start": {
+            "value": "{color.blue.100}",
+            "type": "color",
+            "description": "Start color for third sequential range. Use to create a dynamically generated sequential series, must be paired with an end color."
+          },
+          "03-end": {
+            "value": "{color.blue.600}",
+            "type": "color",
+            "description": "End color for third sequential range. Use to create a dynamically generated sequential series, must be paired with an start color."
+          },
+          "04-start": {
+            "value": "{color.gold.50}",
+            "type": "color",
+            "description": "Start color for fourth sequential range. Use to create a dynamically generated sequential series, must be paired with an end color."
+          },
+          "04-end": {
+            "value": "{color.gold.600}",
+            "type": "color",
+            "description": "End color for fourth sequential range. Use to create a dynamically generated sequential series, must be paired with an start color."
+          },
+          "05-start": {
+            "value": "{color.green.100}",
+            "type": "color",
+            "description": "Start color for fifth sequential range. Use to create a dynamically generated sequential series, must be paired with an end color."
+          },
+          "05-end": {
+            "value": "{color.green.600}",
+            "type": "color",
+            "description": "End color for fifth sequential range. Use to create a dynamically generated sequential series, must be paired with an start color."
+          },
+          "06-start": {
+            "value": "{color.berry.100}",
+            "type": "color",
+            "description": "Start color for sixth sequential range. Use to create a dynamically generated sequential series, must be paired with an end color."
+          },
+          "06-end": {
+            "value": "{color.berry.900}",
+            "type": "color",
+            "description": "End color for sixth sequential range. Use to create a dynamically generated sequential series, must be paired with an start color."
+          },
+          "07-start": {
+            "value": "{color.coral.100}",
+            "type": "color",
+            "description": "Start color for seventh sequential range. Use to create a dynamically generated sequential series, must be paired with an end color."
+          },
+          "07-end": {
+            "value": "{color.coral.900}",
+            "type": "color",
+            "description": "End color for seventh sequential range. Use to create a dynamically generated sequential series, must be paired with an start color."
+          },
+          "08-start": {
+            "value": "{color.olive.100}",
+            "type": "color",
+            "description": "Start color for eighth sequential range. Use to create a dynamically generated sequential series, must be paired with an end color."
+          },
+          "08-end": {
+            "value": "{color.olive.900}",
+            "type": "color",
+            "description": "End color for eighth sequential range. Use to create a dynamically generated sequential series, must be paired with an start color."
+          },
+          "09-start": {
+            "value": "{color.red.100}",
+            "type": "color",
+            "description": "Start color for ninth sequential range. Use to create a dynamically generated sequential series, must be paired with an end color."
+          },
+          "09-end": {
+            "value": "{color.red.700}",
+            "type": "color",
+            "description": "End color for ninth sequential range. Use to create a dynamically generated sequential series, must be paired with an start color."
+          },
+          "10-start": {
+            "value": "{color.teal.100}",
+            "type": "color",
+            "description": "Start color for tenth sequential range. Use to create a dynamically generated sequential series, must be paired with an end color."
+          },
+          "10-end": {
+            "value": "{color.teal.900}",
+            "type": "color",
+            "description": "End color for tenth sequential range. Use to create a dynamically generated sequential series, must be paired with an start color."
+          }
         }
       }
     }
