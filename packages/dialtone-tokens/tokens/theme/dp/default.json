@@ -1126,13 +1126,275 @@
           "value": "{color.teal.600}",
           "type": "color"
         },
-        "10-hover": {
-          "value": "{color.teal.700}",
+        "11": {
+          "value": "{color.tan.300}",
           "type": "color"
         },
-        "10-selected": {
-          "value": "{color.teal.900}",
-          "type": "color"
+        "12": {
+          "value": "{color.chart.categorical.01}",
+          "type": "color",
+          "$extensions": {
+            "studio.tokens": {
+              "modify": {
+                "type": "mix",
+                "value": ".7",
+                "space": "hsl",
+                "color": "{color.chart.categorical.03} "
+              }
+            }
+          }
+        },
+        "13": {
+          "value": "{color.chart.categorical.02}",
+          "type": "color",
+          "$extensions": {
+            "studio.tokens": {
+              "modify": {
+                "type": "mix",
+                "value": ".7",
+                "space": "hsl",
+                "color": "{color.chart.categorical.04} "
+              }
+            }
+          }
+        },
+        "14": {
+          "value": "{color.chart.categorical.03}",
+          "type": "color",
+          "$extensions": {
+            "studio.tokens": {
+              "modify": {
+                "type": "mix",
+                "value": ".7",
+                "space": "hsl",
+                "color": "{color.chart.categorical.05} "
+              }
+            }
+          }
+        },
+        "15": {
+          "value": "{color.chart.categorical.04}",
+          "type": "color",
+          "$extensions": {
+            "studio.tokens": {
+              "modify": {
+                "type": "mix",
+                "value": ".7",
+                "space": "hsl",
+                "color": "{color.chart.categorical.06} "
+              }
+            }
+          }
+        },
+        "16": {
+          "value": "{color.chart.categorical.05}",
+          "type": "color",
+          "$extensions": {
+            "studio.tokens": {
+              "modify": {
+                "type": "mix",
+                "value": ".7",
+                "space": "hsl",
+                "color": "{color.chart.categorical.07} "
+              }
+            }
+          }
+        },
+        "17": {
+          "value": "{color.chart.categorical.06}",
+          "type": "color",
+          "$extensions": {
+            "studio.tokens": {
+              "modify": {
+                "type": "mix",
+                "value": ".7",
+                "space": "hsl",
+                "color": "{color.chart.categorical.08} "
+              }
+            }
+          }
+        },
+        "18": {
+          "value": "{color.chart.categorical.07}",
+          "type": "color",
+          "$extensions": {
+            "studio.tokens": {
+              "modify": {
+                "type": "mix",
+                "value": ".7",
+                "space": "hsl",
+                "color": "{color.chart.categorical.09} "
+              }
+            }
+          }
+        },
+        "19": {
+          "value": "{color.chart.categorical.08}",
+          "type": "color",
+          "$extensions": {
+            "studio.tokens": {
+              "modify": {
+                "type": "mix",
+                "value": ".7",
+                "space": "hsl",
+                "color": "{color.chart.categorical.10} "
+              }
+            }
+          }
+        },
+        "20": {
+          "value": "{color.chart.categorical.09}",
+          "type": "color",
+          "$extensions": {
+            "studio.tokens": {
+              "modify": {
+                "type": "mix",
+                "value": ".7",
+                "space": "hsl",
+                "color": "{color.chart.categorical.11} "
+              }
+            }
+          }
+        },
+        "21": {
+          "value": "{color.chart.categorical.10}",
+          "type": "color",
+          "$extensions": {
+            "studio.tokens": {
+              "modify": {
+                "type": "mix",
+                "value": ".7",
+                "space": "hsl",
+                "color": "{color.chart.categorical.12}"
+              }
+            }
+          }
+        },
+        "22": {
+          "value": "{color.chart.categorical.11}",
+          "type": "color",
+          "$extensions": {
+            "studio.tokens": {
+              "modify": {
+                "type": "mix",
+                "value": ".7",
+                "space": "hsl",
+                "color": "{color.chart.categorical.13}"
+              }
+            }
+          }
+        },
+        "23": {
+          "value": "{color.chart.categorical.12}",
+          "type": "color",
+          "$extensions": {
+            "studio.tokens": {
+              "modify": {
+                "type": "mix",
+                "value": ".7",
+                "space": "hsl",
+                "color": "{color.chart.categorical.14} "
+              }
+            }
+          }
+        },
+        "24": {
+          "value": "{color.chart.categorical.13}",
+          "type": "color",
+          "$extensions": {
+            "studio.tokens": {
+              "modify": {
+                "type": "mix",
+                "value": ".7",
+                "space": "hsl",
+                "color": "{color.chart.categorical.15} "
+              }
+            }
+          }
+        },
+        "25": {
+          "value": "{color.chart.categorical.14}",
+          "type": "color",
+          "$extensions": {
+            "studio.tokens": {
+              "modify": {
+                "type": "mix",
+                "value": ".7",
+                "space": "hsl",
+                "color": "{color.chart.categorical.16} "
+              }
+            }
+          }
+        },
+        "26": {
+          "value": "{color.chart.categorical.15}",
+          "type": "color",
+          "$extensions": {
+            "studio.tokens": {
+              "modify": {
+                "type": "mix",
+                "value": ".7",
+                "space": "hsl",
+                "color": "{color.chart.categorical.17} "
+              }
+            }
+          }
+        },
+        "27": {
+          "value": "{color.chart.categorical.16}",
+          "type": "color",
+          "$extensions": {
+            "studio.tokens": {
+              "modify": {
+                "type": "mix",
+                "value": ".7",
+                "space": "hsl",
+                "color": "{color.chart.categorical.18} "
+              }
+            }
+          }
+        },
+        "28": {
+          "value": "{color.chart.categorical.17}",
+          "type": "color",
+          "$extensions": {
+            "studio.tokens": {
+              "modify": {
+                "type": "mix",
+                "value": ".7",
+                "space": "hsl",
+                "color": "{color.chart.categorical.19} "
+              }
+            }
+          }
+        },
+        "29": {
+          "value": "{color.chart.categorical.18}",
+          "type": "color",
+          "$extensions": {
+            "studio.tokens": {
+              "modify": {
+                "type": "mix",
+                "value": ".7",
+                "space": "hsl",
+                "color": "{color.chart.categorical.20} "
+              }
+            }
+          }
+        },
+        "30": {
+          "value": "{color.chart.categorical.19}",
+          "type": "color",
+          "$extensions": {
+            "studio.tokens": {
+              "modify": {
+                "type": "mix",
+                "value": ".7",
+                "space": "hsl",
+                "color": "{color.chart.categorical.21} "
+              }
+            }
+          }
         },
         "01": {
           "value": "{color.purple.350}",
@@ -1240,6 +1502,14 @@
         },
         "09-selected": {
           "value": "{color.red.600}",
+          "type": "color"
+        },
+        "10-hover": {
+          "value": "{color.teal.700}",
+          "type": "color"
+        },
+        "10-selected": {
+          "value": "{color.teal.900}",
           "type": "color"
         }
       },
