@@ -22,7 +22,7 @@
     <!-- @slot Omega (right) content slot, overrides omega button styling and functionality completely -->
     <slot name="omega">
       <dt-dropdown
-        v-if="$slots.dropdownList"
+        v-if="dropdownSlotIsSet"
         :placement="dropdownPlacement"
         @click="isDropdownOpen = true"
         @opened="open => isDropdownOpen = open"
@@ -50,7 +50,6 @@
           />
         </template>
       </dt-dropdown>
-
       <split-button-omega
         v-else
         v-bind="omegaButtonProps"
@@ -317,6 +316,10 @@ export default {
 
     omegaSlotIsSet () {
       return this.$scopedSlots.omega && this.$scopedSlots.omega();
+    },
+
+    dropdownSlotIsSet () {
+      return this.$scopedSlots.dropdownList && this.$scopedSlots.dropdownList();
     },
   },
 
