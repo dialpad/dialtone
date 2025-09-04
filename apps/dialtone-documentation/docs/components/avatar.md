@@ -233,6 +233,7 @@ vueCode='
 
 <code-well-header>
     <div class="d-d-inline-flex d-ai-center d-flow8">
+        <dt-avatar :group="100" image-src="/assets/images/person.png" image-alt="Person Avatar" />
         <dt-avatar :group="11" image-src="/assets/images/person.png" image-alt="Person Avatar" />
         <dt-avatar :group="3" image-src="/assets/images/person.png" image-alt="Person Avatar" />
     </div>
@@ -240,7 +241,13 @@ vueCode='
 
 <code-example-tabs
 htmlCode='
-<div class="d-avatar d-avatar--group">
+<div class="d-avatar d-avatar--group d-avatar--group-digits-3">
+  <div class="d-avatar__canvas">
+    <img class="d-avatar__image" src="/assets/images/person.png" alt="Person Avatar"/>
+  </div>
+  <span class="d-avatar__count"><span class="d-avatar__count-number">12</span></span>
+</div>
+<div class="d-avatar d-avatar--group d-avatar--group-digits-2">
   <div class="d-avatar__canvas">
     <img class="d-avatar__image" src="/assets/images/person.png" alt="Person Avatar"/>
   </div>
@@ -254,6 +261,7 @@ htmlCode='
 </div>
 '
 vueCode='
+<dt-avatar :group="100" image-src="/assets/images/person.png" image-alt="Person Avatar" />
 <dt-avatar :group="11" image-src="/assets/images/person.png" image-alt="Person Avatar" />
 <dt-avatar :group="3" image-src="/assets/images/person.png" image-alt="Person Avatar" />
 '
@@ -269,20 +277,20 @@ Positions the [Presence](/components/presence.md) component at each size.
         <dt-avatar size="sm" presence="away" image-src="/assets/images/person.png" image-alt="Person Avatar" />
         <dt-avatar size="md" presence="busy" image-src="/assets/images/person.png" image-alt="Person Avatar" />
         <dt-avatar size="lg" presence="offline" image-src="/assets/images/person.png" image-alt="Person Avatar" />
-        <dt-avatar size="xl" image-src="/assets/images/person.png" image-alt="Person Avatar" />
+        <dt-avatar size="xl" presence="active" image-src="/assets/images/person.png" image-alt="Person Avatar" />
     </div>
     <div class="d-d-inline-flex d-ai-center d-flow8">
         <dt-avatar size="xs" presence="active" color="1200" />
         <dt-avatar size="sm" presence="away" color="500" full-name="W" />
         <dt-avatar size="md" presence="busy" color="800" full-name="FR" />
         <dt-avatar size="lg" presence="offline" color="1200" full-name="JH" />
-        <dt-avatar size="xl" color="1500" full-name="AE" />
+        <dt-avatar size="xl" presence="active" color="1500" full-name="AE" />
     </div>
 </code-well-header>
 
 <code-example-tabs
 htmlCode='
-<div class="d-avatar d-avatar--{$size)">
+<div class="d-avatar d-avatar--{$size) d-avatar--presence">
   <div class="d-avatar__canvas">
     ...
   </div>
