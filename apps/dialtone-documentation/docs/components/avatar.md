@@ -231,6 +231,8 @@ vueCode='
 
 ### Group
 
+Adds a count badge and CSS mask to the avatar based on the number of digits (1, 2, or 3). Currently available only with the `xs` avatar size.
+
 <code-well-header>
     <div class="d-d-inline-flex d-ai-center d-flow8">
         <dt-avatar :group="100" image-src="/assets/images/person.png" image-alt="Person Avatar" />
@@ -269,7 +271,7 @@ vueCode='
 
 ### Presence
 
-Positions the [Presence](/components/presence.md) component at each size.
+Positions the [Presence](/components/presence.md) component at each size and applies a CSS mask to the avatar.
 
 <code-well-header>
     <div class="d-d-inline-flex d-ai-center d-flow8">
