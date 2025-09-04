@@ -862,7 +862,7 @@
         "type": "color"
       },
       "positive": {
-        "value": "{color.green.300}",
+        "value": "{color.green.350}",
         "type": "color"
       },
       "positive-hover": {
@@ -870,11 +870,11 @@
         "type": "color"
       },
       "positive-selected": {
-        "value": "{color.green.500}",
+        "value": "{color.green.475}",
         "type": "color"
       },
       "critical": {
-        "value": "{color.red.300}",
+        "value": "{color.red.350}",
         "type": "color"
       },
       "critical-hover": {
@@ -882,11 +882,11 @@
         "type": "color"
       },
       "critical-selected": {
-        "value": "{color.red.600}",
+        "value": "{color.red.500}",
         "type": "color"
       },
       "warning": {
-        "value": "{color.gold.300}",
+        "value": "{color.gold.350}",
         "type": "color"
       },
       "warning-hover": {
@@ -894,31 +894,19 @@
         "type": "color"
       },
       "warning-selected": {
-        "value": "{color.gold.600}",
+        "value": "{color.gold.500}",
         "type": "color"
       },
       "info": {
-        "value": "{color.blue.300}",
-        "type": "color"
-      },
-      "info-hover": {
         "value": "{color.blue.400}",
         "type": "color"
       },
+      "info-hover": {
+        "value": "{color.blue.425}",
+        "type": "color"
+      },
       "info-selected": {
-        "value": "{color.blue.600}",
-        "type": "color"
-      },
-      "brand": {
-        "value": "{color.purple.300}",
-        "type": "color"
-      },
-      "brand-hover": {
-        "value": "{color.purple.350}",
-        "type": "color"
-      },
-      "brand-selected": {
-        "value": "{color.purple.450}",
+        "value": "{color.blue.475}",
         "type": "color"
       }
     }
