@@ -1334,2165 +1334,435 @@
         "description": "Selected state for info chart elements."
       },
       "sequential": {
-        "00": {
-          "step-01": {
-            "value": "{color.indigo.100}",
-            "type": "color",
-            "description": "First color in sequential chart series, lightest shade."
-          },
-          "step-01-hover": {
-            "value": "{color.chart.sequential.00.step-01}",
-            "type": "color",
-            "$extensions": {
-              "studio.tokens": {
-                "modify": {
-                  "type": "mix",
-                  "value": ".15",
-                  "space": "hsl",
-                  "color": "{color.surface.primary-inverted} "
-                }
-              }
-            },
-            "description": "Hover state for first sequential chart color."
-          },
-          "step-01-selected": {
-            "value": "{color.chart.sequential.00.step-01}",
-            "type": "color",
-            "$extensions": {
-              "studio.tokens": {
-                "modify": {
-                  "type": "mix",
-                  "value": ".3",
-                  "space": "hsl",
-                  "color": "{color.surface.primary-inverted} "
-                }
-              }
-            },
-            "description": "Selected state for first sequential chart color."
-          },
-          "step-02": {
-            "value": "{color.chart.sequential.00.step-01}",
-            "type": "color",
-            "$extensions": {
-              "studio.tokens": {
-                "modify": {
-                  "type": "mix",
-                  "value": ".1",
-                  "space": "hsl",
-                  "color": "{color.chart.sequential.00.step-10} "
-                }
-              }
-            },
-            "description": "Second color in sequential chart series, very light shade."
-          },
-          "step-02-hover": {
-            "value": "{color.chart.sequential.00.step-02}",
-            "type": "color",
-            "$extensions": {
-              "studio.tokens": {
-                "modify": {
-                  "type": "mix",
-                  "value": ".15",
-                  "space": "hsl",
-                  "color": "{color.surface.primary-inverted} "
-                }
-              }
-            },
-            "description": "Hover state for second sequential chart color."
-          },
-          "step-02-selected": {
-            "value": "{color.chart.sequential.00.step-02}",
-            "type": "color",
-            "$extensions": {
-              "studio.tokens": {
-                "modify": {
-                  "type": "mix",
-                  "value": ".3",
-                  "space": "hsl",
-                  "color": "{color.surface.primary-inverted} "
-                }
-              }
-            },
-            "description": "Selected state for second sequential chart color."
-          },
-          "step-03": {
-            "value": "{color.chart.sequential.00.step-01}",
-            "type": "color",
-            "$extensions": {
-              "studio.tokens": {
-                "modify": {
-                  "type": "mix",
-                  "value": ".21",
-                  "space": "hsl",
-                  "color": "{color.chart.sequential.00.step-10} "
-                }
-              }
-            },
-            "description": "Third color in sequential chart series, light shade."
-          },
-          "step-03-hover": {
-            "value": "{color.chart.sequential.00.step-03}",
-            "type": "color",
-            "$extensions": {
-              "studio.tokens": {
-                "modify": {
-                  "type": "mix",
-                  "value": ".15",
-                  "space": "hsl",
-                  "color": "{color.surface.primary-inverted} "
-                }
-              }
-            },
-            "description": "Hover state for third sequential chart color."
-          },
-          "step-03-selected": {
-            "value": "{color.chart.sequential.00.step-03}",
-            "type": "color",
-            "$extensions": {
-              "studio.tokens": {
-                "modify": {
-                  "type": "mix",
-                  "value": ".3",
-                  "space": "hsl",
-                  "color": "{color.surface.primary-inverted} "
-                }
-              }
-            },
-            "description": "Selected state for third sequential chart color."
-          },
-          "step-04": {
-            "value": "{color.chart.sequential.00.step-01}",
-            "type": "color",
-            "$extensions": {
-              "studio.tokens": {
-                "modify": {
-                  "type": "mix",
-                  "value": ".33",
-                  "space": "hsl",
-                  "color": "{color.chart.sequential.00.step-10} "
-                }
-              }
-            },
-            "description": "Fourth color in sequential chart series, light-medium shade."
-          },
-          "step-04-hover": {
-            "value": "{color.chart.sequential.00.step-04}",
-            "type": "color",
-            "$extensions": {
-              "studio.tokens": {
-                "modify": {
-                  "type": "mix",
-                  "value": ".15",
-                  "space": "hsl",
-                  "color": "{color.surface.primary-inverted} "
-                }
-              }
-            },
-            "description": "Hover state for fourth sequential chart color."
-          },
-          "step-04-selected": {
-            "value": "{color.chart.sequential.00.step-04}",
-            "type": "color",
-            "$extensions": {
-              "studio.tokens": {
-                "modify": {
-                  "type": "mix",
-                  "value": ".3",
-                  "space": "hsl",
-                  "color": "{color.surface.primary-inverted} "
-                }
-              }
-            },
-            "description": "Selected state for fourth sequential chart color."
-          },
-          "step-05": {
-            "value": "{color.chart.sequential.00.step-01}",
-            "type": "color",
-            "$extensions": {
-              "studio.tokens": {
-                "modify": {
-                  "type": "mix",
-                  "value": ".44",
-                  "space": "hsl",
-                  "color": "{color.chart.sequential.00.step-10} "
-                }
-              }
-            },
-            "description": "Fifth color in sequential chart series, medium shade."
-          },
-          "step-05-hover": {
-            "value": "{color.chart.sequential.00.step-05}",
-            "type": "color",
-            "$extensions": {
-              "studio.tokens": {
-                "modify": {
-                  "type": "mix",
-                  "value": ".15",
-                  "space": "hsl",
-                  "color": "{color.surface.primary-inverted} "
-                }
-              }
-            },
-            "description": "Hover state for fifth sequential chart color."
-          },
-          "step-05-selected": {
-            "value": "{color.chart.sequential.00.step-05}",
-            "type": "color",
-            "$extensions": {
-              "studio.tokens": {
-                "modify": {
-                  "type": "mix",
-                  "value": ".3",
-                  "space": "hsl",
-                  "color": "{color.surface.primary-inverted} "
-                }
-              }
-            },
-            "description": "Selected state for fifth sequential chart color."
-          },
-          "step-06": {
-            "value": "{color.chart.sequential.00.step-01}",
-            "type": "color",
-            "$extensions": {
-              "studio.tokens": {
-                "modify": {
-                  "type": "mix",
-                  "value": ".56",
-                  "space": "hsl",
-                  "color": "{color.chart.sequential.00.step-10} "
-                }
-              }
-            },
-            "description": "Sixth color in sequential chart series, medium-dark shade."
-          },
-          "step-06-hover": {
-            "value": "{color.chart.sequential.00.step-06}",
-            "type": "color",
-            "$extensions": {
-              "studio.tokens": {
-                "modify": {
-                  "type": "mix",
-                  "value": ".15",
-                  "space": "hsl",
-                  "color": "{color.surface.primary-inverted} "
-                }
-              }
-            },
-            "description": "Hover state for sixth sequential chart color."
-          },
-          "step-06-selected": {
-            "value": "{color.chart.sequential.00.step-06}",
-            "type": "color",
-            "$extensions": {
-              "studio.tokens": {
-                "modify": {
-                  "type": "mix",
-                  "value": ".3",
-                  "space": "hsl",
-                  "color": "{color.surface.primary-inverted} "
-                }
-              }
-            },
-            "description": "Selected state for sixth sequential chart color."
-          },
-          "step-07": {
-            "value": "{color.chart.sequential.00.step-01}",
-            "type": "color",
-            "$extensions": {
-              "studio.tokens": {
-                "modify": {
-                  "type": "mix",
-                  "value": ".67",
-                  "space": "hsl",
-                  "color": "{color.chart.sequential.00.step-10} "
-                }
-              }
-            },
-            "description": "Seventh color in sequential chart series, dark shade."
-          },
-          "step-07-hover": {
-            "value": "{color.chart.sequential.00.step-07}",
-            "type": "color",
-            "$extensions": {
-              "studio.tokens": {
-                "modify": {
-                  "type": "mix",
-                  "value": ".15",
-                  "space": "hsl",
-                  "color": "{color.surface.primary-inverted} "
-                }
-              }
-            },
-            "description": "Hover state for seventh sequential chart color."
-          },
-          "step-07-selected": {
-            "value": "{color.chart.sequential.00.step-07}",
-            "type": "color",
-            "$extensions": {
-              "studio.tokens": {
-                "modify": {
-                  "type": "mix",
-                  "value": ".3",
-                  "space": "hsl",
-                  "color": "{color.surface.primary-inverted} "
-                }
-              }
-            },
-            "description": "Selected state for seventh sequential chart color."
-          },
-          "step-08": {
-            "value": "{color.chart.sequential.00.step-01}",
-            "type": "color",
-            "$extensions": {
-              "studio.tokens": {
-                "modify": {
-                  "type": "mix",
-                  "value": ".79",
-                  "space": "hsl",
-                  "color": "{color.chart.sequential.00.step-10} "
-                }
-              }
-            },
-            "description": "Eighth color in sequential chart series, very dark shade."
-          },
-          "step-08-hover": {
-            "value": "{color.chart.sequential.00.step-08}",
-            "type": "color",
-            "$extensions": {
-              "studio.tokens": {
-                "modify": {
-                  "type": "mix",
-                  "value": ".15",
-                  "space": "hsl",
-                  "color": "{color.surface.primary-inverted} "
-                }
-              }
-            },
-            "description": "Hover state for eighth sequential chart color."
-          },
-          "step-08-selected": {
-            "value": "{color.chart.sequential.00.step-08}",
-            "type": "color",
-            "$extensions": {
-              "studio.tokens": {
-                "modify": {
-                  "type": "mix",
-                  "value": ".3",
-                  "space": "hsl",
-                  "color": "{color.surface.primary-inverted} "
-                }
-              }
-            },
-            "description": "Selected state for eighth sequential chart color."
-          },
-          "step-09": {
-            "value": "{color.chart.sequential.00.step-01}",
-            "type": "color",
-            "$extensions": {
-              "studio.tokens": {
-                "modify": {
-                  "type": "mix",
-                  "value": ".9",
-                  "space": "hsl",
-                  "color": "{color.chart.sequential.00.step-10} "
-                }
-              }
-            },
-            "description": "Ninth color in sequential chart series, extremely dark shade."
-          },
-          "step-09-hover": {
-            "value": "{color.chart.sequential.00.step-09}",
-            "type": "color",
-            "$extensions": {
-              "studio.tokens": {
-                "modify": {
-                  "type": "mix",
-                  "value": ".15",
-                  "space": "hsl",
-                  "color": "{color.surface.primary-inverted} "
-                }
-              }
-            },
-            "description": "Hover state for ninth sequential chart color."
-          },
-          "step-09-selected": {
-            "value": "{color.chart.sequential.00.step-09}",
-            "type": "color",
-            "$extensions": {
-              "studio.tokens": {
-                "modify": {
-                  "type": "mix",
-                  "value": ".3",
-                  "space": "hsl",
-                  "color": "{color.surface.primary-inverted} "
-                }
-              }
-            },
-            "description": "Selected state for ninth sequential chart color."
-          },
-          "step-10": {
-            "value": "{color.indigo.900}",
-            "type": "color",
-            "description": "Tenth color in sequential chart series, darkest shade."
-          },
-          "step-10-hover": {
-            "value": "{color.chart.sequential.00.step-10}",
-            "type": "color",
-            "$extensions": {
-              "studio.tokens": {
-                "modify": {
-                  "type": "mix",
-                  "value": ".15",
-                  "space": "hsl",
-                  "color": "{color.surface.primary-inverted} "
-                }
-              }
-            },
-            "description": "Hover state for tenth sequential chart color."
-          },
-          "step-10-selected": {
-            "value": "{color.chart.sequential.00.step-10}",
-            "type": "color",
-            "$extensions": {
-              "studio.tokens": {
-                "modify": {
-                  "type": "mix",
-                  "value": ".3",
-                  "space": "hsl",
-                  "color": "{color.surface.primary-inverted} "
-                }
-              }
-            },
-            "description": "Selected state for tenth sequential chart color."
-          }
+        "10": {
+          "value": "{color.indigo.900}",
+          "type": "color",
+          "description": "Tenth color in sequential chart series."
         },
         "01": {
-          "step-01": {
-            "value": "{color.purple.100}",
-            "type": "color",
-            "description": "First color in sequential chart series, lightest shade."
-          },
-          "step-01-hover": {
-            "value": "{color.chart.sequential.01.step-01}",
-            "type": "color",
-            "$extensions": {
-              "studio.tokens": {
-                "modify": {
-                  "type": "mix",
-                  "value": ".15",
-                  "space": "hsl",
-                  "color": "{color.surface.primary-inverted} "
-                }
+          "value": "{color.indigo.100}",
+          "type": "color",
+          "description": "First color in sequential chart series."
+        },
+        "01-hover": {
+          "value": "{color.chart.sequential.01}",
+          "type": "color",
+          "$extensions": {
+            "studio.tokens": {
+              "modify": {
+                "type": "mix",
+                "value": ".15",
+                "space": "hsl",
+                "color": "{color.surface.primary-inverted}"
               }
-            },
-            "description": "Hover state for first sequential chart color."
+            }
           },
-          "step-01-selected": {
-            "value": "{color.chart.sequential.01.step-01}",
-            "type": "color",
-            "$extensions": {
-              "studio.tokens": {
-                "modify": {
-                  "type": "mix",
-                  "value": ".3",
-                  "space": "hsl",
-                  "color": "{color.surface.primary-inverted} "
-                }
+          "description": "Hover state for first sequential chart color."
+        },
+        "01-selected": {
+          "value": "{color.chart.sequential.01}",
+          "type": "color",
+          "$extensions": {
+            "studio.tokens": {
+              "modify": {
+                "type": "mix",
+                "value": ".3",
+                "space": "hsl",
+                "color": "{color.surface.primary-inverted}"
               }
-            },
-            "description": "Selected state for first sequential chart color."
+            }
           },
-          "step-02": {
-            "value": "{color.chart.sequential.01.step-01}",
-            "type": "color",
-            "$extensions": {
-              "studio.tokens": {
-                "modify": {
-                  "type": "mix",
-                  "value": ".1",
-                  "space": "hsl",
-                  "color": "{color.chart.sequential.01.step-10} "
-                }
-              }
-            },
-            "description": "Second color in sequential chart series, very light shade."
-          },
-          "step-02-hover": {
-            "value": "{color.chart.sequential.01.step-02}",
-            "type": "color",
-            "$extensions": {
-              "studio.tokens": {
-                "modify": {
-                  "type": "mix",
-                  "value": ".15",
-                  "space": "hsl",
-                  "color": "{color.surface.primary-inverted} "
-                }
-              }
-            },
-            "description": "Hover state for second sequential chart color."
-          },
-          "step-02-selected": {
-            "value": "{color.chart.sequential.01.step-02}",
-            "type": "color",
-            "$extensions": {
-              "studio.tokens": {
-                "modify": {
-                  "type": "mix",
-                  "value": ".3",
-                  "space": "hsl",
-                  "color": "{color.surface.primary-inverted} "
-                }
-              }
-            },
-            "description": "Selected state for second sequential chart color."
-          },
-          "step-03": {
-            "value": "{color.chart.sequential.01.step-01}",
-            "type": "color",
-            "$extensions": {
-              "studio.tokens": {
-                "modify": {
-                  "type": "mix",
-                  "value": ".21",
-                  "space": "hsl",
-                  "color": "{color.chart.sequential.01.step-10} "
-                }
-              }
-            },
-            "description": "Third color in sequential chart series, light shade."
-          },
-          "step-03-hover": {
-            "value": "{color.chart.sequential.01.step-03}",
-            "type": "color",
-            "$extensions": {
-              "studio.tokens": {
-                "modify": {
-                  "type": "mix",
-                  "value": ".15",
-                  "space": "hsl",
-                  "color": "{color.surface.primary-inverted} "
-                }
-              }
-            },
-            "description": "Hover state for third sequential chart color."
-          },
-          "step-03-selected": {
-            "value": "{color.chart.sequential.01.step-03}",
-            "type": "color",
-            "$extensions": {
-              "studio.tokens": {
-                "modify": {
-                  "type": "mix",
-                  "value": ".3",
-                  "space": "hsl",
-                  "color": "{color.surface.primary-inverted} "
-                }
-              }
-            },
-            "description": "Selected state for third sequential chart color."
-          },
-          "step-04": {
-            "value": "{color.chart.sequential.01.step-01}",
-            "type": "color",
-            "$extensions": {
-              "studio.tokens": {
-                "modify": {
-                  "type": "mix",
-                  "value": ".33",
-                  "space": "hsl",
-                  "color": "{color.chart.sequential.01.step-10} "
-                }
-              }
-            },
-            "description": "Fourth color in sequential chart series, light-medium shade."
-          },
-          "step-04-hover": {
-            "value": "{color.chart.sequential.01.step-04}",
-            "type": "color",
-            "$extensions": {
-              "studio.tokens": {
-                "modify": {
-                  "type": "mix",
-                  "value": ".15",
-                  "space": "hsl",
-                  "color": "{color.surface.primary-inverted} "
-                }
-              }
-            },
-            "description": "Hover state for fourth sequential chart color."
-          },
-          "step-04-selected": {
-            "value": "{color.chart.sequential.01.step-04}",
-            "type": "color",
-            "$extensions": {
-              "studio.tokens": {
-                "modify": {
-                  "type": "mix",
-                  "value": ".3",
-                  "space": "hsl",
-                  "color": "{color.surface.primary-inverted} "
-                }
-              }
-            },
-            "description": "Selected state for fourth sequential chart color."
-          },
-          "step-05": {
-            "value": "{color.chart.sequential.01.step-01}",
-            "type": "color",
-            "$extensions": {
-              "studio.tokens": {
-                "modify": {
-                  "type": "mix",
-                  "value": ".44",
-                  "space": "hsl",
-                  "color": "{color.chart.sequential.01.step-10} "
-                }
-              }
-            },
-            "description": "Fifth color in sequential chart series, medium shade."
-          },
-          "step-05-hover": {
-            "value": "{color.chart.sequential.01.step-05}",
-            "type": "color",
-            "$extensions": {
-              "studio.tokens": {
-                "modify": {
-                  "type": "mix",
-                  "value": ".15",
-                  "space": "hsl",
-                  "color": "{color.surface.primary-inverted} "
-                }
-              }
-            },
-            "description": "Hover state for fifth sequential chart color."
-          },
-          "step-05-selected": {
-            "value": "{color.chart.sequential.01.step-05}",
-            "type": "color",
-            "$extensions": {
-              "studio.tokens": {
-                "modify": {
-                  "type": "mix",
-                  "value": ".3",
-                  "space": "hsl",
-                  "color": "{color.surface.primary-inverted} "
-                }
-              }
-            },
-            "description": "Selected state for fifth sequential chart color."
-          },
-          "step-06": {
-            "value": "{color.chart.sequential.01.step-01}",
-            "type": "color",
-            "$extensions": {
-              "studio.tokens": {
-                "modify": {
-                  "type": "mix",
-                  "value": ".56",
-                  "space": "hsl",
-                  "color": "{color.chart.sequential.01.step-10} "
-                }
-              }
-            },
-            "description": "Sixth color in sequential chart series, medium-dark shade."
-          },
-          "step-06-hover": {
-            "value": "{color.chart.sequential.01.step-06}",
-            "type": "color",
-            "$extensions": {
-              "studio.tokens": {
-                "modify": {
-                  "type": "mix",
-                  "value": ".15",
-                  "space": "hsl",
-                  "color": "{color.surface.primary-inverted} "
-                }
-              }
-            },
-            "description": "Hover state for sixth sequential chart color."
-          },
-          "step-06-selected": {
-            "value": "{color.chart.sequential.01.step-06}",
-            "type": "color",
-            "$extensions": {
-              "studio.tokens": {
-                "modify": {
-                  "type": "mix",
-                  "value": ".3",
-                  "space": "hsl",
-                  "color": "{color.surface.primary-inverted} "
-                }
-              }
-            },
-            "description": "Selected state for sixth sequential chart color."
-          },
-          "step-07": {
-            "value": "{color.chart.sequential.01.step-01}",
-            "type": "color",
-            "$extensions": {
-              "studio.tokens": {
-                "modify": {
-                  "type": "mix",
-                  "value": ".67",
-                  "space": "hsl",
-                  "color": "{color.chart.sequential.01.step-10} "
-                }
-              }
-            },
-            "description": "Seventh color in sequential chart series, dark shade."
-          },
-          "step-07-hover": {
-            "value": "{color.chart.sequential.01.step-07}",
-            "type": "color",
-            "$extensions": {
-              "studio.tokens": {
-                "modify": {
-                  "type": "mix",
-                  "value": ".15",
-                  "space": "hsl",
-                  "color": "{color.surface.primary-inverted} "
-                }
-              }
-            },
-            "description": "Hover state for seventh sequential chart color."
-          },
-          "step-07-selected": {
-            "value": "{color.chart.sequential.01.step-07}",
-            "type": "color",
-            "$extensions": {
-              "studio.tokens": {
-                "modify": {
-                  "type": "mix",
-                  "value": ".3",
-                  "space": "hsl",
-                  "color": "{color.surface.primary-inverted} "
-                }
-              }
-            },
-            "description": "Selected state for seventh sequential chart color."
-          },
-          "step-08": {
-            "value": "{color.chart.sequential.01.step-01}",
-            "type": "color",
-            "$extensions": {
-              "studio.tokens": {
-                "modify": {
-                  "type": "mix",
-                  "value": ".79",
-                  "space": "hsl",
-                  "color": "{color.chart.sequential.01.step-10} "
-                }
-              }
-            },
-            "description": "Eighth color in sequential chart series, very dark shade."
-          },
-          "step-08-hover": {
-            "value": "{color.chart.sequential.01.step-08}",
-            "type": "color",
-            "$extensions": {
-              "studio.tokens": {
-                "modify": {
-                  "type": "mix",
-                  "value": ".15",
-                  "space": "hsl",
-                  "color": "{color.surface.primary-inverted} "
-                }
-              }
-            },
-            "description": "Hover state for eighth sequential chart color."
-          },
-          "step-08-selected": {
-            "value": "{color.chart.sequential.01.step-08}",
-            "type": "color",
-            "$extensions": {
-              "studio.tokens": {
-                "modify": {
-                  "type": "mix",
-                  "value": ".3",
-                  "space": "hsl",
-                  "color": "{color.surface.primary-inverted} "
-                }
-              }
-            },
-            "description": "Selected state for eighth sequential chart color."
-          },
-          "step-09": {
-            "value": "{color.chart.sequential.01.step-01}",
-            "type": "color",
-            "$extensions": {
-              "studio.tokens": {
-                "modify": {
-                  "type": "mix",
-                  "value": ".9",
-                  "space": "hsl",
-                  "color": "{color.chart.sequential.01.step-10} "
-                }
-              }
-            },
-            "description": "Ninth color in sequential chart series, extremely dark shade."
-          },
-          "step-09-hover": {
-            "value": "{color.chart.sequential.01.step-09}",
-            "type": "color",
-            "$extensions": {
-              "studio.tokens": {
-                "modify": {
-                  "type": "mix",
-                  "value": ".15",
-                  "space": "hsl",
-                  "color": "{color.surface.primary-inverted} "
-                }
-              }
-            },
-            "description": "Hover state for ninth sequential chart color."
-          },
-          "step-09-selected": {
-            "value": "{color.chart.sequential.01.step-09}",
-            "type": "color",
-            "$extensions": {
-              "studio.tokens": {
-                "modify": {
-                  "type": "mix",
-                  "value": ".3",
-                  "space": "hsl",
-                  "color": "{color.surface.primary-inverted} "
-                }
-              }
-            },
-            "description": "Selected state for ninth sequential chart color."
-          },
-          "step-10": {
-            "value": "{color.purple.550}",
-            "type": "color",
-            "description": "Tenth color in sequential chart series, darkest shade."
-          },
-          "step-10-hover": {
-            "value": "{color.chart.sequential.01.step-10}",
-            "type": "color",
-            "$extensions": {
-              "studio.tokens": {
-                "modify": {
-                  "type": "mix",
-                  "value": ".15",
-                  "space": "hsl",
-                  "color": "{color.surface.primary-inverted} "
-                }
-              }
-            },
-            "description": "Hover state for tenth sequential chart color."
-          },
-          "step-10-selected": {
-            "value": "{color.chart.sequential.01.step-10}",
-            "type": "color",
-            "$extensions": {
-              "studio.tokens": {
-                "modify": {
-                  "type": "mix",
-                  "value": ".3",
-                  "space": "hsl",
-                  "color": "{color.surface.primary-inverted} "
-                }
-              }
-            },
-            "description": "Selected state for tenth sequential chart color."
-          }
+          "description": "Selected state for first sequential chart color."
         },
         "02": {
-          "step-01": {
-            "value": "{color.magenta.100}",
-            "type": "color",
-            "description": "First color in sequential chart series, lightest shade."
-          },
-          "step-01-hover": {
-            "value": "{color.chart.sequential.02.step-01}",
-            "type": "color",
-            "$extensions": {
-              "studio.tokens": {
-                "modify": {
-                  "type": "mix",
-                  "value": ".15",
-                  "space": "hsl",
-                  "color": "{color.surface.primary-inverted} "
-                }
+          "value": "{color.chart.sequential.01}",
+          "type": "color",
+          "$extensions": {
+            "studio.tokens": {
+              "modify": {
+                "type": "mix",
+                "value": ".1",
+                "space": "hsl",
+                "color": "{color.chart.sequential.10}"
               }
-            },
-            "description": "Hover state for first sequential chart color."
+            }
           },
-          "step-01-selected": {
-            "value": "{color.chart.sequential.02.step-01}",
-            "type": "color",
-            "$extensions": {
-              "studio.tokens": {
-                "modify": {
-                  "type": "mix",
-                  "value": ".3",
-                  "space": "hsl",
-                  "color": "{color.surface.primary-inverted} "
-                }
+          "description": "Second color in sequential chart series, very light shade."
+        },
+        "02-hover": {
+          "value": "{color.chart.sequential.02}",
+          "type": "color",
+          "$extensions": {
+            "studio.tokens": {
+              "modify": {
+                "type": "mix",
+                "value": ".15",
+                "space": "hsl",
+                "color": "{color.surface.primary-inverted}"
               }
-            },
-            "description": "Selected state for first sequential chart color."
+            }
           },
-          "step-02": {
-            "value": "{color.chart.sequential.02.step-01}",
-            "type": "color",
-            "$extensions": {
-              "studio.tokens": {
-                "modify": {
-                  "type": "mix",
-                  "value": ".1",
-                  "space": "hsl",
-                  "color": "{color.chart.sequential.02.step-10} "
-                }
+          "description": "Hover state for second sequential chart color."
+        },
+        "02-selected": {
+          "value": "{color.chart.sequential.02}",
+          "type": "color",
+          "$extensions": {
+            "studio.tokens": {
+              "modify": {
+                "type": "mix",
+                "value": ".3",
+                "space": "hsl",
+                "color": "{color.surface.primary-inverted}"
               }
-            },
-            "description": "Second color in sequential chart series, very light shade."
+            }
           },
-          "step-02-hover": {
-            "value": "{color.chart.sequential.02.step-02}",
-            "type": "color",
-            "$extensions": {
-              "studio.tokens": {
-                "modify": {
-                  "type": "mix",
-                  "value": ".15",
-                  "space": "hsl",
-                  "color": "{color.surface.primary-inverted} "
-                }
-              }
-            },
-            "description": "Hover state for second sequential chart color."
-          },
-          "step-02-selected": {
-            "value": "{color.chart.sequential.02.step-02}",
-            "type": "color",
-            "$extensions": {
-              "studio.tokens": {
-                "modify": {
-                  "type": "mix",
-                  "value": ".3",
-                  "space": "hsl",
-                  "color": "{color.surface.primary-inverted} "
-                }
-              }
-            },
-            "description": "Selected state for second sequential chart color."
-          },
-          "step-03": {
-            "value": "{color.chart.sequential.02.step-01}",
-            "type": "color",
-            "$extensions": {
-              "studio.tokens": {
-                "modify": {
-                  "type": "mix",
-                  "value": ".21",
-                  "space": "hsl",
-                  "color": "{color.chart.sequential.02.step-10} "
-                }
-              }
-            },
-            "description": "Third color in sequential chart series, light shade."
-          },
-          "step-03-hover": {
-            "value": "{color.chart.sequential.02.step-03}",
-            "type": "color",
-            "$extensions": {
-              "studio.tokens": {
-                "modify": {
-                  "type": "mix",
-                  "value": ".15",
-                  "space": "hsl",
-                  "color": "{color.surface.primary-inverted} "
-                }
-              }
-            },
-            "description": "Hover state for third sequential chart color."
-          },
-          "step-03-selected": {
-            "value": "{color.chart.sequential.02.step-03}",
-            "type": "color",
-            "$extensions": {
-              "studio.tokens": {
-                "modify": {
-                  "type": "mix",
-                  "value": ".3",
-                  "space": "hsl",
-                  "color": "{color.surface.primary-inverted} "
-                }
-              }
-            },
-            "description": "Selected state for third sequential chart color."
-          },
-          "step-04": {
-            "value": "{color.chart.sequential.02.step-01}",
-            "type": "color",
-            "$extensions": {
-              "studio.tokens": {
-                "modify": {
-                  "type": "mix",
-                  "value": ".33",
-                  "space": "hsl",
-                  "color": "{color.chart.sequential.02.step-10} "
-                }
-              }
-            },
-            "description": "Fourth color in sequential chart series, light-medium shade."
-          },
-          "step-04-hover": {
-            "value": "{color.chart.sequential.02.step-04}",
-            "type": "color",
-            "$extensions": {
-              "studio.tokens": {
-                "modify": {
-                  "type": "mix",
-                  "value": ".15",
-                  "space": "hsl",
-                  "color": "{color.surface.primary-inverted} "
-                }
-              }
-            },
-            "description": "Hover state for fourth sequential chart color."
-          },
-          "step-04-selected": {
-            "value": "{color.chart.sequential.02.step-04}",
-            "type": "color",
-            "$extensions": {
-              "studio.tokens": {
-                "modify": {
-                  "type": "mix",
-                  "value": ".3",
-                  "space": "hsl",
-                  "color": "{color.surface.primary-inverted} "
-                }
-              }
-            },
-            "description": "Selected state for fourth sequential chart color."
-          },
-          "step-05": {
-            "value": "{color.chart.sequential.02.step-01}",
-            "type": "color",
-            "$extensions": {
-              "studio.tokens": {
-                "modify": {
-                  "type": "mix",
-                  "value": ".44",
-                  "space": "hsl",
-                  "color": "{color.chart.sequential.02.step-10} "
-                }
-              }
-            },
-            "description": "Fifth color in sequential chart series, medium shade."
-          },
-          "step-05-hover": {
-            "value": "{color.chart.sequential.02.step-05}",
-            "type": "color",
-            "$extensions": {
-              "studio.tokens": {
-                "modify": {
-                  "type": "mix",
-                  "value": ".15",
-                  "space": "hsl",
-                  "color": "{color.surface.primary-inverted} "
-                }
-              }
-            },
-            "description": "Hover state for fifth sequential chart color."
-          },
-          "step-05-selected": {
-            "value": "{color.chart.sequential.02.step-05}",
-            "type": "color",
-            "$extensions": {
-              "studio.tokens": {
-                "modify": {
-                  "type": "mix",
-                  "value": ".3",
-                  "space": "hsl",
-                  "color": "{color.surface.primary-inverted} "
-                }
-              }
-            },
-            "description": "Selected state for fifth sequential chart color."
-          },
-          "step-06": {
-            "value": "{color.chart.sequential.02.step-01}",
-            "type": "color",
-            "$extensions": {
-              "studio.tokens": {
-                "modify": {
-                  "type": "mix",
-                  "value": ".56",
-                  "space": "hsl",
-                  "color": "{color.chart.sequential.02.step-10} "
-                }
-              }
-            },
-            "description": "Sixth color in sequential chart series, medium-dark shade."
-          },
-          "step-06-hover": {
-            "value": "{color.chart.sequential.02.step-06}",
-            "type": "color",
-            "$extensions": {
-              "studio.tokens": {
-                "modify": {
-                  "type": "mix",
-                  "value": ".15",
-                  "space": "hsl",
-                  "color": "{color.surface.primary-inverted} "
-                }
-              }
-            },
-            "description": "Hover state for sixth sequential chart color."
-          },
-          "step-06-selected": {
-            "value": "{color.chart.sequential.02.step-06}",
-            "type": "color",
-            "$extensions": {
-              "studio.tokens": {
-                "modify": {
-                  "type": "mix",
-                  "value": ".3",
-                  "space": "hsl",
-                  "color": "{color.surface.primary-inverted} "
-                }
-              }
-            },
-            "description": "Selected state for sixth sequential chart color."
-          },
-          "step-07": {
-            "value": "{color.chart.sequential.02.step-01}",
-            "type": "color",
-            "$extensions": {
-              "studio.tokens": {
-                "modify": {
-                  "type": "mix",
-                  "value": ".67",
-                  "space": "hsl",
-                  "color": "{color.chart.sequential.02.step-10} "
-                }
-              }
-            },
-            "description": "Seventh color in sequential chart series, dark shade."
-          },
-          "step-07-hover": {
-            "value": "{color.chart.sequential.02.step-07}",
-            "type": "color",
-            "$extensions": {
-              "studio.tokens": {
-                "modify": {
-                  "type": "mix",
-                  "value": ".15",
-                  "space": "hsl",
-                  "color": "{color.surface.primary-inverted} "
-                }
-              }
-            },
-            "description": "Hover state for seventh sequential chart color."
-          },
-          "step-07-selected": {
-            "value": "{color.chart.sequential.02.step-07}",
-            "type": "color",
-            "$extensions": {
-              "studio.tokens": {
-                "modify": {
-                  "type": "mix",
-                  "value": ".3",
-                  "space": "hsl",
-                  "color": "{color.surface.primary-inverted} "
-                }
-              }
-            },
-            "description": "Selected state for seventh sequential chart color."
-          },
-          "step-08": {
-            "value": "{color.chart.sequential.02.step-01}",
-            "type": "color",
-            "$extensions": {
-              "studio.tokens": {
-                "modify": {
-                  "type": "mix",
-                  "value": ".79",
-                  "space": "hsl",
-                  "color": "{color.chart.sequential.02.step-10} "
-                }
-              }
-            },
-            "description": "Eighth color in sequential chart series, very dark shade."
-          },
-          "step-08-hover": {
-            "value": "{color.chart.sequential.02.step-08}",
-            "type": "color",
-            "$extensions": {
-              "studio.tokens": {
-                "modify": {
-                  "type": "mix",
-                  "value": ".15",
-                  "space": "hsl",
-                  "color": "{color.surface.primary-inverted} "
-                }
-              }
-            },
-            "description": "Hover state for eighth sequential chart color."
-          },
-          "step-08-selected": {
-            "value": "{color.chart.sequential.02.step-08}",
-            "type": "color",
-            "$extensions": {
-              "studio.tokens": {
-                "modify": {
-                  "type": "mix",
-                  "value": ".3",
-                  "space": "hsl",
-                  "color": "{color.surface.primary-inverted} "
-                }
-              }
-            },
-            "description": "Selected state for eighth sequential chart color."
-          },
-          "step-09": {
-            "value": "{color.chart.sequential.02.step-01}",
-            "type": "color",
-            "$extensions": {
-              "studio.tokens": {
-                "modify": {
-                  "type": "mix",
-                  "value": ".9",
-                  "space": "hsl",
-                  "color": "{color.chart.sequential.02.step-10} "
-                }
-              }
-            },
-            "description": "Ninth color in sequential chart series, extremely dark shade."
-          },
-          "step-09-hover": {
-            "value": "{color.chart.sequential.02.step-09}",
-            "type": "color",
-            "$extensions": {
-              "studio.tokens": {
-                "modify": {
-                  "type": "mix",
-                  "value": ".15",
-                  "space": "hsl",
-                  "color": "{color.surface.primary-inverted} "
-                }
-              }
-            },
-            "description": "Hover state for ninth sequential chart color."
-          },
-          "step-09-selected": {
-            "value": "{color.chart.sequential.02.step-09}",
-            "type": "color",
-            "$extensions": {
-              "studio.tokens": {
-                "modify": {
-                  "type": "mix",
-                  "value": ".3",
-                  "space": "hsl",
-                  "color": "{color.surface.primary-inverted} "
-                }
-              }
-            },
-            "description": "Selected state for ninth sequential chart color."
-          },
-          "step-10": {
-            "value": "{color.magenta.600}",
-            "type": "color",
-            "description": "Tenth color in sequential chart series, darkest shade."
-          },
-          "step-10-hover": {
-            "value": "{color.chart.sequential.02.step-10}",
-            "type": "color",
-            "$extensions": {
-              "studio.tokens": {
-                "modify": {
-                  "type": "mix",
-                  "value": ".15",
-                  "space": "hsl",
-                  "color": "{color.surface.primary-inverted} "
-                }
-              }
-            },
-            "description": "Hover state for tenth sequential chart color."
-          },
-          "step-10-selected": {
-            "value": "{color.chart.sequential.02.step-10}",
-            "type": "color",
-            "$extensions": {
-              "studio.tokens": {
-                "modify": {
-                  "type": "mix",
-                  "value": ".3",
-                  "space": "hsl",
-                  "color": "{color.surface.primary-inverted} "
-                }
-              }
-            },
-            "description": "Selected state for tenth sequential chart color."
-          }
+          "description": "Selected state for second sequential chart color."
         },
         "03": {
-          "step-01": {
-            "value": "{color.blue.100}",
-            "type": "color",
-            "description": "First color in sequential chart series, lightest shade."
-          },
-          "step-01-hover": {
-            "value": "{color.chart.sequential.03.step-01}",
-            "type": "color",
-            "$extensions": {
-              "studio.tokens": {
-                "modify": {
-                  "type": "mix",
-                  "value": ".15",
-                  "space": "hsl",
-                  "color": "{color.surface.primary-inverted} "
-                }
+          "value": "{color.chart.sequential.01}",
+          "type": "color",
+          "$extensions": {
+            "studio.tokens": {
+              "modify": {
+                "type": "mix",
+                "value": ".21",
+                "space": "hsl",
+                "color": "{color.chart.sequential.10}"
               }
-            },
-            "description": "Hover state for first sequential chart color."
+            }
           },
-          "step-01-selected": {
-            "value": "{color.chart.sequential.03.step-01}",
-            "type": "color",
-            "$extensions": {
-              "studio.tokens": {
-                "modify": {
-                  "type": "mix",
-                  "value": ".3",
-                  "space": "hsl",
-                  "color": "{color.surface.primary-inverted} "
-                }
+          "description": "Third color in sequential chart series, light shade."
+        },
+        "03-hover": {
+          "value": "{color.chart.sequential.03}",
+          "type": "color",
+          "$extensions": {
+            "studio.tokens": {
+              "modify": {
+                "type": "mix",
+                "value": ".15",
+                "space": "hsl",
+                "color": "{color.surface.primary-inverted}"
               }
-            },
-            "description": "Selected state for first sequential chart color."
+            }
           },
-          "step-02": {
-            "value": "{color.chart.sequential.03.step-01}",
-            "type": "color",
-            "$extensions": {
-              "studio.tokens": {
-                "modify": {
-                  "type": "mix",
-                  "value": ".1",
-                  "space": "hsl",
-                  "color": "{color.chart.sequential.03.step-10} "
-                }
+          "description": "Hover state for third sequential chart color."
+        },
+        "03-selected": {
+          "value": "{color.chart.sequential.03}",
+          "type": "color",
+          "$extensions": {
+            "studio.tokens": {
+              "modify": {
+                "type": "mix",
+                "value": ".3",
+                "space": "hsl",
+                "color": "{color.surface.primary-inverted}"
               }
-            },
-            "description": "Second color in sequential chart series, very light shade."
+            }
           },
-          "step-02-hover": {
-            "value": "{color.chart.sequential.03.step-02}",
-            "type": "color",
-            "$extensions": {
-              "studio.tokens": {
-                "modify": {
-                  "type": "mix",
-                  "value": ".15",
-                  "space": "hsl",
-                  "color": "{color.surface.primary-inverted} "
-                }
-              }
-            },
-            "description": "Hover state for second sequential chart color."
-          },
-          "step-02-selected": {
-            "value": "{color.chart.sequential.03.step-02}",
-            "type": "color",
-            "$extensions": {
-              "studio.tokens": {
-                "modify": {
-                  "type": "mix",
-                  "value": ".3",
-                  "space": "hsl",
-                  "color": "{color.surface.primary-inverted} "
-                }
-              }
-            },
-            "description": "Selected state for second sequential chart color."
-          },
-          "step-03": {
-            "value": "{color.chart.sequential.03.step-01}",
-            "type": "color",
-            "$extensions": {
-              "studio.tokens": {
-                "modify": {
-                  "type": "mix",
-                  "value": ".21",
-                  "space": "hsl",
-                  "color": "{color.chart.sequential.03.step-10} "
-                }
-              }
-            },
-            "description": "Third color in sequential chart series, light shade."
-          },
-          "step-03-hover": {
-            "value": "{color.chart.sequential.03.step-03}",
-            "type": "color",
-            "$extensions": {
-              "studio.tokens": {
-                "modify": {
-                  "type": "mix",
-                  "value": ".15",
-                  "space": "hsl",
-                  "color": "{color.surface.primary-inverted} "
-                }
-              }
-            },
-            "description": "Hover state for third sequential chart color."
-          },
-          "step-03-selected": {
-            "value": "{color.chart.sequential.03.step-03}",
-            "type": "color",
-            "$extensions": {
-              "studio.tokens": {
-                "modify": {
-                  "type": "mix",
-                  "value": ".3",
-                  "space": "hsl",
-                  "color": "{color.surface.primary-inverted} "
-                }
-              }
-            },
-            "description": "Selected state for third sequential chart color."
-          },
-          "step-04": {
-            "value": "{color.chart.sequential.03.step-01}",
-            "type": "color",
-            "$extensions": {
-              "studio.tokens": {
-                "modify": {
-                  "type": "mix",
-                  "value": ".33",
-                  "space": "hsl",
-                  "color": "{color.chart.sequential.03.step-10} "
-                }
-              }
-            },
-            "description": "Fourth color in sequential chart series, light-medium shade."
-          },
-          "step-04-hover": {
-            "value": "{color.chart.sequential.03.step-04}",
-            "type": "color",
-            "$extensions": {
-              "studio.tokens": {
-                "modify": {
-                  "type": "mix",
-                  "value": ".15",
-                  "space": "hsl",
-                  "color": "{color.surface.primary-inverted} "
-                }
-              }
-            },
-            "description": "Hover state for fourth sequential chart color."
-          },
-          "step-04-selected": {
-            "value": "{color.chart.sequential.03.step-04}",
-            "type": "color",
-            "$extensions": {
-              "studio.tokens": {
-                "modify": {
-                  "type": "mix",
-                  "value": ".3",
-                  "space": "hsl",
-                  "color": "{color.surface.primary-inverted} "
-                }
-              }
-            },
-            "description": "Selected state for fourth sequential chart color."
-          },
-          "step-05": {
-            "value": "{color.chart.sequential.03.step-01}",
-            "type": "color",
-            "$extensions": {
-              "studio.tokens": {
-                "modify": {
-                  "type": "mix",
-                  "value": ".44",
-                  "space": "hsl",
-                  "color": "{color.chart.sequential.03.step-10} "
-                }
-              }
-            },
-            "description": "Fifth color in sequential chart series, medium shade."
-          },
-          "step-05-hover": {
-            "value": "{color.chart.sequential.03.step-05}",
-            "type": "color",
-            "$extensions": {
-              "studio.tokens": {
-                "modify": {
-                  "type": "mix",
-                  "value": ".15",
-                  "space": "hsl",
-                  "color": "{color.surface.primary-inverted} "
-                }
-              }
-            },
-            "description": "Hover state for fifth sequential chart color."
-          },
-          "step-05-selected": {
-            "value": "{color.chart.sequential.03.step-05}",
-            "type": "color",
-            "$extensions": {
-              "studio.tokens": {
-                "modify": {
-                  "type": "mix",
-                  "value": ".3",
-                  "space": "hsl",
-                  "color": "{color.surface.primary-inverted} "
-                }
-              }
-            },
-            "description": "Selected state for fifth sequential chart color."
-          },
-          "step-06": {
-            "value": "{color.chart.sequential.03.step-01}",
-            "type": "color",
-            "$extensions": {
-              "studio.tokens": {
-                "modify": {
-                  "type": "mix",
-                  "value": ".56",
-                  "space": "hsl",
-                  "color": "{color.chart.sequential.03.step-10} "
-                }
-              }
-            },
-            "description": "Sixth color in sequential chart series, medium-dark shade."
-          },
-          "step-06-hover": {
-            "value": "{color.chart.sequential.03.step-06}",
-            "type": "color",
-            "$extensions": {
-              "studio.tokens": {
-                "modify": {
-                  "type": "mix",
-                  "value": ".15",
-                  "space": "hsl",
-                  "color": "{color.surface.primary-inverted} "
-                }
-              }
-            },
-            "description": "Hover state for sixth sequential chart color."
-          },
-          "step-06-selected": {
-            "value": "{color.chart.sequential.03.step-06}",
-            "type": "color",
-            "$extensions": {
-              "studio.tokens": {
-                "modify": {
-                  "type": "mix",
-                  "value": ".3",
-                  "space": "hsl",
-                  "color": "{color.surface.primary-inverted} "
-                }
-              }
-            },
-            "description": "Selected state for sixth sequential chart color."
-          },
-          "step-07": {
-            "value": "{color.chart.sequential.03.step-01}",
-            "type": "color",
-            "$extensions": {
-              "studio.tokens": {
-                "modify": {
-                  "type": "mix",
-                  "value": ".67",
-                  "space": "hsl",
-                  "color": "{color.chart.sequential.03.step-10} "
-                }
-              }
-            },
-            "description": "Seventh color in sequential chart series, dark shade."
-          },
-          "step-07-hover": {
-            "value": "{color.chart.sequential.03.step-07}",
-            "type": "color",
-            "$extensions": {
-              "studio.tokens": {
-                "modify": {
-                  "type": "mix",
-                  "value": ".15",
-                  "space": "hsl",
-                  "color": "{color.surface.primary-inverted} "
-                }
-              }
-            },
-            "description": "Hover state for seventh sequential chart color."
-          },
-          "step-07-selected": {
-            "value": "{color.chart.sequential.03.step-07}",
-            "type": "color",
-            "$extensions": {
-              "studio.tokens": {
-                "modify": {
-                  "type": "mix",
-                  "value": ".3",
-                  "space": "hsl",
-                  "color": "{color.surface.primary-inverted} "
-                }
-              }
-            },
-            "description": "Selected state for seventh sequential chart color."
-          },
-          "step-08": {
-            "value": "{color.chart.sequential.03.step-01}",
-            "type": "color",
-            "$extensions": {
-              "studio.tokens": {
-                "modify": {
-                  "type": "mix",
-                  "value": ".79",
-                  "space": "hsl",
-                  "color": "{color.chart.sequential.03.step-10} "
-                }
-              }
-            },
-            "description": "Eighth color in sequential chart series, very dark shade."
-          },
-          "step-08-hover": {
-            "value": "{color.chart.sequential.03.step-08}",
-            "type": "color",
-            "$extensions": {
-              "studio.tokens": {
-                "modify": {
-                  "type": "mix",
-                  "value": ".15",
-                  "space": "hsl",
-                  "color": "{color.surface.primary-inverted} "
-                }
-              }
-            },
-            "description": "Hover state for eighth sequential chart color."
-          },
-          "step-08-selected": {
-            "value": "{color.chart.sequential.03.step-08}",
-            "type": "color",
-            "$extensions": {
-              "studio.tokens": {
-                "modify": {
-                  "type": "mix",
-                  "value": ".3",
-                  "space": "hsl",
-                  "color": "{color.surface.primary-inverted} "
-                }
-              }
-            },
-            "description": "Selected state for eighth sequential chart color."
-          },
-          "step-09": {
-            "value": "{color.chart.sequential.03.step-01}",
-            "type": "color",
-            "$extensions": {
-              "studio.tokens": {
-                "modify": {
-                  "type": "mix",
-                  "value": ".9",
-                  "space": "hsl",
-                  "color": "{color.chart.sequential.03.step-10} "
-                }
-              }
-            },
-            "description": "Ninth color in sequential chart series, extremely dark shade."
-          },
-          "step-09-hover": {
-            "value": "{color.chart.sequential.03.step-09}",
-            "type": "color",
-            "$extensions": {
-              "studio.tokens": {
-                "modify": {
-                  "type": "mix",
-                  "value": ".15",
-                  "space": "hsl",
-                  "color": "{color.surface.primary-inverted} "
-                }
-              }
-            },
-            "description": "Hover state for ninth sequential chart color."
-          },
-          "step-09-selected": {
-            "value": "{color.chart.sequential.03.step-09}",
-            "type": "color",
-            "$extensions": {
-              "studio.tokens": {
-                "modify": {
-                  "type": "mix",
-                  "value": ".3",
-                  "space": "hsl",
-                  "color": "{color.surface.primary-inverted} "
-                }
-              }
-            },
-            "description": "Selected state for ninth sequential chart color."
-          },
-          "step-10": {
-            "value": "{color.blue.600}",
-            "type": "color",
-            "description": "Tenth color in sequential chart series, darkest shade."
-          },
-          "step-10-hover": {
-            "value": "{color.chart.sequential.03.step-10}",
-            "type": "color",
-            "$extensions": {
-              "studio.tokens": {
-                "modify": {
-                  "type": "mix",
-                  "value": ".15",
-                  "space": "hsl",
-                  "color": "{color.surface.primary-inverted} "
-                }
-              }
-            },
-            "description": "Hover state for tenth sequential chart color."
-          },
-          "step-10-selected": {
-            "value": "{color.chart.sequential.03.step-10}",
-            "type": "color",
-            "$extensions": {
-              "studio.tokens": {
-                "modify": {
-                  "type": "mix",
-                  "value": ".3",
-                  "space": "hsl",
-                  "color": "{color.surface.primary-inverted} "
-                }
-              }
-            },
-            "description": "Selected state for tenth sequential chart color."
-          }
+          "description": "Selected state for third sequential chart color."
         },
         "04": {
-          "step-01": {
-            "value": "{color.gold.50}",
-            "type": "color",
-            "description": "First color in sequential chart series, lightest shade."
-          },
-          "step-01-hover": {
-            "value": "{color.chart.sequential.04.step-01}",
-            "type": "color",
-            "$extensions": {
-              "studio.tokens": {
-                "modify": {
-                  "type": "mix",
-                  "value": ".15",
-                  "space": "hsl",
-                  "color": "{color.surface.primary-inverted} "
-                }
+          "value": "{color.chart.sequential.01}",
+          "type": "color",
+          "$extensions": {
+            "studio.tokens": {
+              "modify": {
+                "type": "mix",
+                "value": ".33",
+                "space": "hsl",
+                "color": "{color.chart.sequential.10}"
               }
-            },
-            "description": "Hover state for first sequential chart color."
+            }
           },
-          "step-01-selected": {
-            "value": "{color.chart.sequential.04.step-01}",
-            "type": "color",
-            "$extensions": {
-              "studio.tokens": {
-                "modify": {
-                  "type": "mix",
-                  "value": ".3",
-                  "space": "hsl",
-                  "color": "{color.surface.primary-inverted} "
-                }
+          "description": "Fourth color in sequential chart series, light-medium shade."
+        },
+        "04-hover": {
+          "value": "{color.chart.sequential.04}",
+          "type": "color",
+          "$extensions": {
+            "studio.tokens": {
+              "modify": {
+                "type": "mix",
+                "value": ".15",
+                "space": "hsl",
+                "color": "{color.surface.primary-inverted}"
               }
-            },
-            "description": "Selected state for first sequential chart color."
+            }
           },
-          "step-02": {
-            "value": "{color.chart.sequential.04.step-01}",
-            "type": "color",
-            "$extensions": {
-              "studio.tokens": {
-                "modify": {
-                  "type": "mix",
-                  "value": ".1",
-                  "space": "hsl",
-                  "color": "{color.chart.sequential.04.step-10} "
-                }
+          "description": "Hover state for fourth sequential chart color."
+        },
+        "04-selected": {
+          "value": "{color.chart.sequential.04}",
+          "type": "color",
+          "$extensions": {
+            "studio.tokens": {
+              "modify": {
+                "type": "mix",
+                "value": ".3",
+                "space": "hsl",
+                "color": "{color.surface.primary-inverted}"
               }
-            },
-            "description": "Second color in sequential chart series, very light shade."
+            }
           },
-          "step-02-hover": {
-            "value": "{color.chart.sequential.04.step-02}",
-            "type": "color",
-            "$extensions": {
-              "studio.tokens": {
-                "modify": {
-                  "type": "mix",
-                  "value": ".15",
-                  "space": "hsl",
-                  "color": "{color.surface.primary-inverted} "
-                }
+          "description": "Selected state for fourth sequential chart color."
+        },
+        "05": {
+          "value": "{color.chart.sequential.01}",
+          "type": "color",
+          "$extensions": {
+            "studio.tokens": {
+              "modify": {
+                "type": "mix",
+                "value": ".44",
+                "space": "hsl",
+                "color": "{color.chart.sequential.10}"
               }
-            },
-            "description": "Hover state for second sequential chart color."
+            }
           },
-          "step-02-selected": {
-            "value": "{color.chart.sequential.04.step-02}",
-            "type": "color",
-            "$extensions": {
-              "studio.tokens": {
-                "modify": {
-                  "type": "mix",
-                  "value": ".3",
-                  "space": "hsl",
-                  "color": "{color.surface.primary-inverted} "
-                }
+          "description": "Fifth color in sequential chart series, medium shade."
+        },
+        "05-hover": {
+          "value": "{color.chart.sequential.05}",
+          "type": "color",
+          "$extensions": {
+            "studio.tokens": {
+              "modify": {
+                "type": "mix",
+                "value": ".15",
+                "space": "hsl",
+                "color": "{color.surface.primary-inverted}"
               }
-            },
-            "description": "Selected state for second sequential chart color."
+            }
           },
-          "step-03": {
-            "value": "{color.chart.sequential.04.step-01}",
-            "type": "color",
-            "$extensions": {
-              "studio.tokens": {
-                "modify": {
-                  "type": "mix",
-                  "value": ".21",
-                  "space": "hsl",
-                  "color": "{color.chart.sequential.04.step-10} "
-                }
+          "description": "Hover state for fifth sequential chart color."
+        },
+        "05-selected": {
+          "value": "{color.chart.sequential.05}",
+          "type": "color",
+          "$extensions": {
+            "studio.tokens": {
+              "modify": {
+                "type": "mix",
+                "value": ".3",
+                "space": "hsl",
+                "color": "{color.surface.primary-inverted}"
               }
-            },
-            "description": "Third color in sequential chart series, light shade."
+            }
           },
-          "step-03-hover": {
-            "value": "{color.chart.sequential.04.step-03}",
-            "type": "color",
-            "$extensions": {
-              "studio.tokens": {
-                "modify": {
-                  "type": "mix",
-                  "value": ".15",
-                  "space": "hsl",
-                  "color": "{color.surface.primary-inverted} "
-                }
+          "description": "Selected state for fifth sequential chart color."
+        },
+        "06": {
+          "value": "{color.chart.sequential.01}",
+          "type": "color",
+          "$extensions": {
+            "studio.tokens": {
+              "modify": {
+                "type": "mix",
+                "value": ".56",
+                "space": "hsl",
+                "color": "{color.chart.sequential.10}"
               }
-            },
-            "description": "Hover state for third sequential chart color."
+            }
           },
-          "step-03-selected": {
-            "value": "{color.chart.sequential.04.step-03}",
-            "type": "color",
-            "$extensions": {
-              "studio.tokens": {
-                "modify": {
-                  "type": "mix",
-                  "value": ".3",
-                  "space": "hsl",
-                  "color": "{color.surface.primary-inverted} "
-                }
+          "description": "Sixth color in sequential chart series, medium-dark shade."
+        },
+        "06-hover": {
+          "value": "{color.chart.sequential.06}",
+          "type": "color",
+          "$extensions": {
+            "studio.tokens": {
+              "modify": {
+                "type": "mix",
+                "value": ".15",
+                "space": "hsl",
+                "color": "{color.surface.primary-inverted}"
               }
-            },
-            "description": "Selected state for third sequential chart color."
+            }
           },
-          "step-04": {
-            "value": "{color.chart.sequential.04.step-01}",
-            "type": "color",
-            "$extensions": {
-              "studio.tokens": {
-                "modify": {
-                  "type": "mix",
-                  "value": ".33",
-                  "space": "hsl",
-                  "color": "{color.chart.sequential.04.step-10} "
-                }
+          "description": "Hover state for sixth sequential chart color."
+        },
+        "06-selected": {
+          "value": "{color.chart.sequential.06}",
+          "type": "color",
+          "$extensions": {
+            "studio.tokens": {
+              "modify": {
+                "type": "mix",
+                "value": ".3",
+                "space": "hsl",
+                "color": "{color.surface.primary-inverted}"
               }
-            },
-            "description": "Fourth color in sequential chart series, light-medium shade."
+            }
           },
-          "step-04-hover": {
-            "value": "{color.chart.sequential.04.step-04}",
-            "type": "color",
-            "$extensions": {
-              "studio.tokens": {
-                "modify": {
-                  "type": "mix",
-                  "value": ".15",
-                  "space": "hsl",
-                  "color": "{color.surface.primary-inverted} "
-                }
+          "description": "Selected state for sixth sequential chart color."
+        },
+        "07": {
+          "value": "{color.chart.sequential.01}",
+          "type": "color",
+          "$extensions": {
+            "studio.tokens": {
+              "modify": {
+                "type": "mix",
+                "value": ".67",
+                "space": "hsl",
+                "color": "{color.chart.sequential.10}"
               }
-            },
-            "description": "Hover state for fourth sequential chart color."
+            }
           },
-          "step-04-selected": {
-            "value": "{color.chart.sequential.04.step-04}",
-            "type": "color",
-            "$extensions": {
-              "studio.tokens": {
-                "modify": {
-                  "type": "mix",
-                  "value": ".3",
-                  "space": "hsl",
-                  "color": "{color.surface.primary-inverted} "
-                }
+          "description": "Seventh color in sequential chart series, dark shade."
+        },
+        "07-hover": {
+          "value": "{color.chart.sequential.07}",
+          "type": "color",
+          "$extensions": {
+            "studio.tokens": {
+              "modify": {
+                "type": "mix",
+                "value": ".15",
+                "space": "hsl",
+                "color": "{color.surface.primary-inverted}"
               }
-            },
-            "description": "Selected state for fourth sequential chart color."
+            }
           },
-          "step-05": {
-            "value": "{color.chart.sequential.04.step-01}",
-            "type": "color",
-            "$extensions": {
-              "studio.tokens": {
-                "modify": {
-                  "type": "mix",
-                  "value": ".44",
-                  "space": "hsl",
-                  "color": "{color.chart.sequential.04.step-10} "
-                }
+          "description": "Hover state for seventh sequential chart color."
+        },
+        "07-selected": {
+          "value": "{color.chart.sequential.07}",
+          "type": "color",
+          "$extensions": {
+            "studio.tokens": {
+              "modify": {
+                "type": "mix",
+                "value": ".3",
+                "space": "hsl",
+                "color": "{color.surface.primary-inverted}"
               }
-            },
-            "description": "Fifth color in sequential chart series, medium shade."
+            }
           },
-          "step-05-hover": {
-            "value": "{color.chart.sequential.04.step-05}",
-            "type": "color",
-            "$extensions": {
-              "studio.tokens": {
-                "modify": {
-                  "type": "mix",
-                  "value": ".15",
-                  "space": "hsl",
-                  "color": "{color.surface.primary-inverted} "
-                }
+          "description": "Selected state for seventh sequential chart color."
+        },
+        "08": {
+          "value": "{color.chart.sequential.01}",
+          "type": "color",
+          "$extensions": {
+            "studio.tokens": {
+              "modify": {
+                "type": "mix",
+                "value": ".79",
+                "space": "hsl",
+                "color": "{color.chart.sequential.10}"
               }
-            },
-            "description": "Hover state for fifth sequential chart color."
+            }
           },
-          "step-05-selected": {
-            "value": "{color.chart.sequential.04.step-05}",
-            "type": "color",
-            "$extensions": {
-              "studio.tokens": {
-                "modify": {
-                  "type": "mix",
-                  "value": ".3",
-                  "space": "hsl",
-                  "color": "{color.surface.primary-inverted} "
-                }
+          "description": "Eighth color in sequential chart series, very dark shade."
+        },
+        "08-hover": {
+          "value": "{color.chart.sequential.08}",
+          "type": "color",
+          "$extensions": {
+            "studio.tokens": {
+              "modify": {
+                "type": "mix",
+                "value": ".15",
+                "space": "hsl",
+                "color": "{color.surface.primary-inverted}"
               }
-            },
-            "description": "Selected state for fifth sequential chart color."
+            }
           },
-          "step-06": {
-            "value": "{color.chart.sequential.04.step-01}",
-            "type": "color",
-            "$extensions": {
-              "studio.tokens": {
-                "modify": {
-                  "type": "mix",
-                  "value": ".56",
-                  "space": "hsl",
-                  "color": "{color.chart.sequential.04.step-10} "
-                }
+          "description": "Hover state for eighth sequential chart color."
+        },
+        "08-selected": {
+          "value": "{color.chart.sequential.08}",
+          "type": "color",
+          "$extensions": {
+            "studio.tokens": {
+              "modify": {
+                "type": "mix",
+                "value": ".3",
+                "space": "hsl",
+                "color": "{color.surface.primary-inverted}"
               }
-            },
-            "description": "Sixth color in sequential chart series, medium-dark shade."
+            }
           },
-          "step-06-hover": {
-            "value": "{color.chart.sequential.04.step-06}",
-            "type": "color",
-            "$extensions": {
-              "studio.tokens": {
-                "modify": {
-                  "type": "mix",
-                  "value": ".15",
-                  "space": "hsl",
-                  "color": "{color.surface.primary-inverted} "
-                }
+          "description": "Selected state for eighth sequential chart color."
+        },
+        "09": {
+          "value": "{color.chart.sequential.01}",
+          "type": "color",
+          "$extensions": {
+            "studio.tokens": {
+              "modify": {
+                "type": "mix",
+                "value": ".9",
+                "space": "hsl",
+                "color": "{color.chart.sequential.10}"
               }
-            },
-            "description": "Hover state for sixth sequential chart color."
+            }
           },
-          "step-06-selected": {
-            "value": "{color.chart.sequential.04.step-06}",
-            "type": "color",
-            "$extensions": {
-              "studio.tokens": {
-                "modify": {
-                  "type": "mix",
-                  "value": ".3",
-                  "space": "hsl",
-                  "color": "{color.surface.primary-inverted} "
-                }
+          "description": "Ninth color in sequential chart series, extremely dark shade."
+        },
+        "09-hover": {
+          "value": "{color.chart.sequential.09}",
+          "type": "color",
+          "$extensions": {
+            "studio.tokens": {
+              "modify": {
+                "type": "mix",
+                "value": ".15",
+                "space": "hsl",
+                "color": "{color.surface.primary-inverted}"
               }
-            },
-            "description": "Selected state for sixth sequential chart color."
+            }
           },
-          "step-07": {
-            "value": "{color.chart.sequential.04.step-01}",
-            "type": "color",
-            "$extensions": {
-              "studio.tokens": {
-                "modify": {
-                  "type": "mix",
-                  "value": ".67",
-                  "space": "hsl",
-                  "color": "{color.chart.sequential.04.step-10} "
-                }
+          "description": "Hover state for ninth sequential chart color."
+        },
+        "09-selected": {
+          "value": "{color.chart.sequential.09}",
+          "type": "color",
+          "$extensions": {
+            "studio.tokens": {
+              "modify": {
+                "type": "mix",
+                "value": ".3",
+                "space": "hsl",
+                "color": "{color.surface.primary-inverted}"
               }
-            },
-            "description": "Seventh color in sequential chart series, dark shade."
+            }
           },
-          "step-07-hover": {
-            "value": "{color.chart.sequential.04.step-07}",
-            "type": "color",
-            "$extensions": {
-              "studio.tokens": {
-                "modify": {
-                  "type": "mix",
-                  "value": ".15",
-                  "space": "hsl",
-                  "color": "{color.surface.primary-inverted} "
-                }
+          "description": "Selected state for ninth sequential chart color."
+        },
+        "10-hover": {
+          "value": "{color.chart.sequential.10}",
+          "type": "color",
+          "$extensions": {
+            "studio.tokens": {
+              "modify": {
+                "type": "mix",
+                "value": ".15",
+                "space": "hsl",
+                "color": "{color.surface.primary-inverted}"
               }
-            },
-            "description": "Hover state for seventh sequential chart color."
+            }
           },
-          "step-07-selected": {
-            "value": "{color.chart.sequential.04.step-07}",
-            "type": "color",
-            "$extensions": {
-              "studio.tokens": {
-                "modify": {
-                  "type": "mix",
-                  "value": ".3",
-                  "space": "hsl",
-                  "color": "{color.surface.primary-inverted} "
-                }
+          "description": "Hover state for tenth sequential chart color."
+        },
+        "10-selected": {
+          "value": "{color.chart.sequential.10}",
+          "type": "color",
+          "$extensions": {
+            "studio.tokens": {
+              "modify": {
+                "type": "mix",
+                "value": ".3",
+                "space": "hsl",
+                "color": "{color.surface.primary-inverted}"
               }
-            },
-            "description": "Selected state for seventh sequential chart color."
+            }
           },
-          "step-08": {
-            "value": "{color.chart.sequential.04.step-01}",
-            "type": "color",
-            "$extensions": {
-              "studio.tokens": {
-                "modify": {
-                  "type": "mix",
-                  "value": ".79",
-                  "space": "hsl",
-                  "color": "{color.chart.sequential.04.step-10} "
-                }
-              }
-            },
-            "description": "Eighth color in sequential chart series, very dark shade."
-          },
-          "step-08-hover": {
-            "value": "{color.chart.sequential.04.step-08}",
-            "type": "color",
-            "$extensions": {
-              "studio.tokens": {
-                "modify": {
-                  "type": "mix",
-                  "value": ".15",
-                  "space": "hsl",
-                  "color": "{color.surface.primary-inverted} "
-                }
-              }
-            },
-            "description": "Hover state for eighth sequential chart color."
-          },
-          "step-09": {
-            "value": "{color.chart.sequential.04.step-01}",
-            "type": "color",
-            "$extensions": {
-              "studio.tokens": {
-                "modify": {
-                  "type": "mix",
-                  "value": ".9",
-                  "space": "hsl",
-                  "color": "{color.chart.sequential.04.step-10} "
-                }
-              }
-            },
-            "description": "Ninth color in sequential chart series, extremely dark shade."
-          },
-          "step-08-selected": {
-            "value": "{color.chart.sequential.04.step-08}",
-            "type": "color",
-            "$extensions": {
-              "studio.tokens": {
-                "modify": {
-                  "type": "mix",
-                  "value": ".3",
-                  "space": "hsl",
-                  "color": "{color.surface.primary-inverted} "
-                }
-              }
-            },
-            "description": "Selected state for eighth sequential chart color."
-          },
-          "step-09-hover": {
-            "value": "{color.chart.sequential.04.step-09}",
-            "type": "color",
-            "$extensions": {
-              "studio.tokens": {
-                "modify": {
-                  "type": "mix",
-                  "value": ".15",
-                  "space": "hsl",
-                  "color": "{color.surface.primary-inverted} "
-                }
-              }
-            },
-            "description": "Hover state for ninth sequential chart color."
-          },
-          "step-09-selected": {
-            "value": "{color.chart.sequential.04.step-09}",
-            "type": "color",
-            "$extensions": {
-              "studio.tokens": {
-                "modify": {
-                  "type": "mix",
-                  "value": ".3",
-                  "space": "hsl",
-                  "color": "{color.surface.primary-inverted} "
-                }
-              }
-            },
-            "description": "Selected state for ninth sequential chart color."
-          },
-          "step-10": {
-            "value": "{color.gold.600}",
-            "type": "color",
-            "description": "Tenth color in sequential chart series, darkest shade."
-          },
-          "step-10-hover": {
-            "value": "{color.chart.sequential.04.step-10}",
-            "type": "color",
-            "$extensions": {
-              "studio.tokens": {
-                "modify": {
-                  "type": "mix",
-                  "value": ".15",
-                  "space": "hsl",
-                  "color": "{color.surface.primary-inverted} "
-                }
-              }
-            },
-            "description": "Hover state for tenth sequential chart color."
-          },
-          "step-10-selected": {
-            "value": "{color.chart.sequential.04.step-10}",
-            "type": "color",
-            "$extensions": {
-              "studio.tokens": {
-                "modify": {
-                  "type": "mix",
-                  "value": ".3",
-                  "space": "hsl",
-                  "color": "{color.surface.primary-inverted} "
-                }
-              }
-            },
-            "description": "Selected state for tenth sequential chart color."
-          }
+          "description": "Selected state for tenth sequential chart color."
         }
       }
     }
