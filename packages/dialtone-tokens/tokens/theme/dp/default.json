@@ -1135,15 +1135,15 @@
           "type": "color"
         },
         "01": {
-          "value": "{color.purple.450}",
+          "value": "{color.purple.350}",
           "type": "color"
         },
         "01-hover": {
-          "value": "{color.purple.500}",
+          "value": "{color.purple.400}",
           "type": "color"
         },
         "01-selected": {
-          "value": "{color.purple.600}",
+          "value": "{color.purple.500}",
           "type": "color"
         },
         "02": {
@@ -1155,11 +1155,11 @@
           "type": "color"
         },
         "02-selected": {
-          "value": "{color.magenta.600}",
+          "value": "{color.magenta.475}",
           "type": "color"
         },
         "03": {
-          "value": "{color.blue.400}",
+          "value": "{color.blue.425}",
           "type": "color"
         },
         "03-hover": {
@@ -1167,7 +1167,7 @@
           "type": "color"
         },
         "03-selected": {
-          "value": "{color.blue.600}",
+          "value": "{color.blue.500}",
           "type": "color"
         },
         "04": {
@@ -1175,11 +1175,11 @@
           "type": "color"
         },
         "04-hover": {
-          "value": "{color.gold.500}",
+          "value": "{color.gold.450}",
           "type": "color"
         },
         "04-selected": {
-          "value": "{color.gold.700}",
+          "value": "{color.gold.600}",
           "type": "color"
         },
         "05": {
@@ -1215,7 +1215,7 @@
           "type": "color"
         },
         "07-selected": {
-          "value": "{color.coral.900}",
+          "value": "{color.coral.700}",
           "type": "color"
         },
         "08": {
@@ -1332,21 +1332,6 @@
         "value": "{color.blue.600}",
         "type": "color",
         "description": "Selected state for info chart elements."
-      },
-      "brand": {
-        "value": "{color.purple.400}",
-        "type": "color",
-        "description": "Used for brand-related data or to highlight company-specific information in charts."
-      },
-      "brand-hover": {
-        "value": "{color.purple.450}",
-        "type": "color",
-        "description": "Hover state for brand chart elements."
-      },
-      "brand-selected": {
-        "value": "{color.purple.550}",
-        "type": "color",
-        "description": "Selected state for brand chart elements."
       },
       "sequential": {
         "10": {
