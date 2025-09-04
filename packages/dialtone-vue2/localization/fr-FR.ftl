@@ -64,8 +64,8 @@ DIALTONE_EMOJI_ROW_REACTION_LABEL =
             }
        *[other]
             { $youIncluded ->
-               *[true] a réagi avec { $reaction }
-                [false] a réagi avec { $reaction }
+               *[true] ont réagi avec { $reaction }
+                [false] ont réagi avec { $reaction }
             }
     }
 DIALTONE_EMOJI_PICKER_ADD_EMOJI_LABEL = Ajouter un émoji
@@ -166,5 +166,5 @@ STORYBOOK_LANGUAGE_RUSSIAN = Russe
 STORYBOOK_LANGUAGE_SPANISH = Espagnol
 STORYBOOK_SET_LANGUAGE = Définir la langue
 STORYBOOK_YOU = Vous
-STORYBOOK_REACTION_NAMES_2 = Olivia Chen, Benjamin Carter, Sophia Rodriguez, William Kim & Isabella Garcia
-STORYBOOK_REACTION_NAMES_3 = Olivia Chen & { STORYBOOK_YOU }
+STORYBOOK_REACTION_NAMES_2 = Olivia Chen, Benjamin Carter, Sophia Rodriguez, William Kim et Isabella Garcia
+STORYBOOK_REACTION_NAMES_3 = Olivia Chen et { STORYBOOK_YOU }
