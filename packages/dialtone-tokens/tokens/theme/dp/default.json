@@ -1179,7 +1179,7 @@
             "studio.tokens": {
               "modify": {
                 "type": "mix",
-                "value": ".3",
+                "value": ".2",
                 "space": "hsl",
                 "color": "{color.chart.categorical.01} "
               }
@@ -1243,15 +1243,15 @@
           }
         },
         "20": {
-          "value": "{color.chart.categorical.09}",
+          "value": "{color.chart.categorical.03}",
           "type": "color",
           "$extensions": {
             "studio.tokens": {
               "modify": {
                 "type": "mix",
-                "value": ".3",
+                "value": ".2",
                 "space": "hsl",
-                "color": "{color.chart.categorical.12} "
+                "color": "{color.chart.categorical.06} "
               }
             }
           }
@@ -1263,7 +1263,7 @@
             "studio.tokens": {
               "modify": {
                 "type": "mix",
-                "value": ".3",
+                "value": ".5",
                 "space": "hsl",
                 "color": "{color.chart.categorical.13}"
               }
@@ -1277,7 +1277,7 @@
             "studio.tokens": {
               "modify": {
                 "type": "mix",
-                "value": ".3",
+                "value": ".4",
                 "space": "hsl",
                 "color": "{color.chart.categorical.14}"
               }
@@ -1321,21 +1321,21 @@
                 "type": "mix",
                 "value": ".3",
                 "space": "hsl",
-                "color": "{color.chart.categorical.17} "
+                "color": "{color.chart.categorical.18} "
               }
             }
           }
         },
         "26": {
-          "value": "{color.chart.categorical.15}",
+          "value": "{color.chart.categorical.04}",
           "type": "color",
           "$extensions": {
             "studio.tokens": {
               "modify": {
                 "type": "mix",
-                "value": ".7",
+                "value": ".3",
                 "space": "hsl",
-                "color": "{color.chart.categorical.18} "
+                "color": "{color.chart.categorical.01} "
               }
             }
           }
@@ -1355,15 +1355,15 @@
           }
         },
         "28": {
-          "value": "{color.chart.categorical.17}",
+          "value": "{color.chart.categorical.03}",
           "type": "color",
           "$extensions": {
             "studio.tokens": {
               "modify": {
                 "type": "mix",
-                "value": ".3",
+                "value": ".2",
                 "space": "hsl",
-                "color": "{color.chart.categorical.20} "
+                "color": "{color.chart.categorical.06} "
               }
             }
           }
