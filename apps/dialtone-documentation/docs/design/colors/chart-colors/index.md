@@ -25,8 +25,7 @@ Chart Colors are available for one of four types: [Single Color](#single-color),
 
 ### Single Color
 
-Use for data visualizations that only require a single color, with `chart.color.accent` as the default.
-Conversely, to bring to focus a data point within a set, use `chart.color.accent` for the focused data point and `chart.color.neutral` for the rest.
+Use for data visualizations that only require comparing one or two data points, or a single data point against a series of adjacent neutral data. Use `chart.color.accent` as the default. To bring a data point to focus, use `chart.color.accent` for the focused data point and `chart.color.neutral` for the rest.
 
 <div class="d-bgc-secondary d-bar8 d-mb16">
   <svg-loader name="chart-singlecolor" />
@@ -102,7 +101,7 @@ The default range are a fixed number of 10 available colors for a single data se
 
 ### Developers
 
-Apply to chart elements (bars, lines, fills) via CSS Variables (e.g. `--dp-color-chart-color-accent`) or corresponding CSS Utilities, e.g. `d-bgc-chart-neutral`, `d-bc-chart-warning`, etc.
+Apply to chart elements (bars, lines, fills) via CSS Variables (e.g. `var(--dp-color-chart-color-accent)`) or corresponding CSS Utilities, e.g. `d-bgc-chart-neutral`, `d-bc-chart-warning`, etc.
 
 ### Designers
 
