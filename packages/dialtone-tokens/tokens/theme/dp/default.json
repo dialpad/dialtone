@@ -2555,6 +2555,16 @@
           "description": "Selected state for tenth sequential chart color."
         },
         "range": {
+          "00-start": {
+            "value": "{color.chart.sequential.01}",
+            "type": "color",
+            "description": "Start color value for default sequential range. Use to create a dynamically generated sequential series, must be paired with an end color."
+          },
+          "00-end": {
+            "value": "{color.chart.sequential.10}",
+            "type": "color",
+            "description": "Start color value for default sequential range. Use to create a dynamically generated sequential series, must be paired with a start color."
+          },
           "01-start": {
             "value": "{color.purple.100}",
             "type": "color",
