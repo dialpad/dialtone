@@ -19,7 +19,7 @@
       />
     </div>
     <div class="dialtone-playground__end">
-      <dtc-code-example :component="library" />
+      <!-- <dtc-code-example :component="library" /> -->
     </div>
   </div>
 </template>
@@ -27,7 +27,7 @@
 <script setup>
 import DtcOptionBar from './option_bar/option_bar.vue';
 import DtcRenderer from './renderer/renderer.vue';
-import DtcCodeExample from './code_example/code_example.vue';
+// import DtcCodeExample from './code_example/code_example.vue';
 
 // import DtcCodePanel from './code_panel/code_panel.vue';
 // import DtcSettingsMenu from './settings_menu/settings_menu.vue';
