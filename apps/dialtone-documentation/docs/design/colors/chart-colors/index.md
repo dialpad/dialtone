@@ -86,19 +86,42 @@ To represent data using progressive shades or tints of a single color, emphasizi
 - Heatmaps or density visualizations for a single metric.
 - Situations requiring a strong visual connection to the Dialpad brand.
 
-<token-table :tokens="sequentialTokens" theme="light" :show-value="false" />
+#### Sequential Range
+
+Using sequential range tokens enable the ability to dynamically create varying number of color steps for a single data series with `start` and `end` tokens.
 
 <token-table :tokens="sequentialRangeTokens" theme="light" :show-value="false" />
 
-## Usage for Designers
+#### Sequential Default
 
-Designers should leverage these tokens directly from the Dialtone Figma Library.
+The default range are a fixed number of 10 available colors for a single data series. If you need to create fewer or more colors, use the sequential range tokens.
 
-- Applying Colors: Apply color directly to chart elements (bars, lines, fills) via Figma Styles linked to tokens. Unlike other Dialtone colors, Chart Colors are not scoped to foreground, surface, border, etc.
-- Understanding Hover/Selected: Remember that hover and selected states for specific chart series (single color, semantic, categorical, and sequential) have predetermined contrasting colors, ensuring consistent interaction feedback.
-- Prototyping: Use these tokens in your Figma prototypes to demonstrate interactive states and theme switching.
+<token-table :tokens="sequentialTokens" theme="light" :show-value="false" />
+
+## Usage
+
+### Developers
+
+Apply to chart elements (bars, lines, fills) via CSS Variables (e.g. `--dp-color-chart-color-accent`) or corresponding CSS Utilities, e.g. `d-bgc-chart-neutral`, `d-bc-chart-warning`, etc.
+
+### Designers
+
+- **Applying Colors:** Apply color directly to chart elements (bars, lines, fills) via Figma Styles linked to tokens. Unlike other Dialtone colors, Chart Colors are not scoped to foreground, surface, border, etc.
+- **Understanding Hover/Selected:** Remember that hover and selected states for specific chart series (single color, semantic, categorical, and sequential) have predetermined contrasting colors, ensuring consistent interaction feedback.
+- **Prototyping:** Use these tokens in your Figma prototypes to demonstrate interactive states and theme switching.
 
 ## Do and Don'ts
+
+### Use chart colors only for data
+
+<dialtone-usage>
+  <template #do>
+    Use chart colors for the data itself, not for other purposes.
+  </template>
+  <template #dont>
+    Do not use chart colors for non-data purposes, e.g. supporting text labels, grid lines, etc. Use Dialtone's semantic colors for those purposes, e.g. "foreground primary", "border subtle", "background secondary", etc.
+  </template>
+</dialtone-usage>
 
 ### Apply Categorical colors in numeric order
 
@@ -156,21 +179,21 @@ Designers should leverage these tokens directly from the Dialtone Figma Library.
 
 Ensuring accessible data visualizations is a core tenet of Dialtone. When using these tokens:
 
-- Contrast Ratios: All token color combinations are designed to meet WCAG AA contrast standards (minimum 3:1 for graphics/UI components).
-- Color-Blindness Compatibility: Palettes have been vetted for common forms of color blindness (e.g., using tools like Viz Palette).
-- Redundancy is Key: Never rely solely on color to convey critical information. Always provide supplementary visual cues such as:
+- **Contrast Ratios:** All token color combinations are designed to meet WCAG AA contrast standards (minimum 3:1 for graphics/UI components).
+- **Color-Blindness Compatibility:** Palettes have been vetted for common forms of color blindness (e.g., using tools like Viz Palette).
+- **Redundancy is Key:** Never rely solely on color to convey critical information. Always provide supplementary visual cues such as:
   - Labels/Text: Directly annotating data points with values.
   - Icons/Patterns: Using distinct icons or patterns for categories.
   - Shapes/Stroke Styles: Varying shapes, line styles (dashed, dotted), or stroke widths.
-- Theming Impact: Token values are specifically defined for both light and dark modes to ensure optimal contrast and readability in any theme.
+- **Theming Impact:** Token values are specifically defined for both light and dark modes to ensure optimal contrast and readability in any theme.
 
 ## Known Issues & Troubleshooting
 
 While this system aims for robustness, be aware of potential challenges during implementation and adoption:
 
-- Charting Library Overrides: Some charting libraries might aggressively override inline styles or custom properties, requiring careful mapping or deeper customization.
-- Complex Color Logic: For very custom data-driven color calculations beyond simple references (e.g., dynamic gradients based on data range), you might still need to implement logic in code that consumes these Chart Color design tokens.
-- Transitioning Existing Charts: Migrating older charts not using design tokens will require dedicated refactoring effort.
+- **Charting Library Overrides:** Some charting libraries might aggressively override inline styles or custom properties, requiring careful mapping or deeper customization.
+- **Complex Color Logic:** For very custom data-driven color calculations beyond simple references (e.g., dynamic gradients based on data range), you might still need to implement logic in code that consumes these Chart Color design tokens.
+- **Transitioning Existing Charts:** Migrating older charts not using design tokens will require dedicated refactoring effort.
 
 <script setup>
 import tokensJson from '@dialpad/dialtone-tokens/dist/doc.json';
@@ -211,10 +234,10 @@ const {
 
     const { name, value, description } = tokensJson[theme][curr]["css/variables"];
 
-    const tokenCategory = isSemantic(name) ? 'semanticTokens' : 
-                          isCategorical(name) ? 'categoricalTokens' : 
+    const tokenCategory = isSemantic(name) ? 'semanticTokens' :
+                          isCategorical(name) ? 'categoricalTokens' :
                           isSequentialRange(name) ? 'sequentialRangeTokens' :
-                          isSequential(name) ? 'sequentialTokens' : 
+                          isSequential(name) ? 'sequentialTokens' :
                           'singleColorTokens';
     acc[tokenCategory].push({ name, tokenValue: value, description, exampleValue: value, exampleName: name });
 
@@ -226,4 +249,24 @@ const {
     sequentialRangeTokens: [],
     singleColorTokens: [],
   });
+
+// Sort sequential range tokens so 'start' comes before 'end' for each range number
+sequentialRangeTokens.sort((a, b) => {
+  const aMatch = a.name.match(/range-(\d+)-(start|end)/);
+  const bMatch = b.name.match(/range-(\d+)-(start|end)/);
+
+  if (aMatch && bMatch) {
+    const aNum = parseInt(aMatch[1]);
+    const bNum = parseInt(bMatch[1]);
+
+    if (aNum !== bNum) {
+      return aNum - bNum;
+    }
+
+    // For same number, 'start' comes before 'end'
+    return aMatch[2] === 'start' ? -1 : 1;
+  }
+
+  return 0;
+});
 </script>
