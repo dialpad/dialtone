@@ -59,7 +59,7 @@ Apply colors that associate meaning to the data points, such as status, severity
 
 ### Categorical
 
-Apply unique colors to distinguish two or more unrelated data where color carries no meaning. Use in the predetermined numerical order, e.g. `01,`02`, etc. This ensures applied data can be visually distinguished from its adjacent data.
+Apply unique colors to distinguish two or more unrelated data where color carries no meaning. Use in the predetermined numerical order, e.g. `01`, `02`, etc. This ensures applied data can be visually distinguished from its adjacent data.
 
 <div class="d-bgc-secondary d-bar8 d-mb16">
   <svg-loader name="chart-categorical" />
@@ -87,6 +87,8 @@ To represent data using progressive shades or tints of a single color, emphasizi
 - Situations requiring a strong visual connection to the Dialpad brand.
 
 <token-table :tokens="sequentialTokens" theme="light" :show-value="false" />
+
+<token-table :tokens="sequentialRangeTokens" theme="light" :show-value="false" />
 
 ## Usage for Designers
 
@@ -195,19 +197,25 @@ const statusTextColorsExclusionList = [
 const theme = "dp-light";
 const isSemantic = (token) => /(warning|positive|info|critical|brand)/.test(token);
 const isCategorical = (token) => /(categorical)/.test(token);
-const isSequential = (token) => /(sequential)/.test(token);
+const isSequential = (token) => /(sequential)/.test(token) && !/(range)/.test(token);
+const isSequentialRange = (token) => /(sequential-range-\d+-(start|end))/.test(token);
 
 const {
   semanticTokens,
   categoricalTokens,
   sequentialTokens,
+  sequentialRangeTokens,
   singleColorTokens
 } = Object.keys(tokensJson[theme]).sort(alphabeticalSorter).reduce((acc, curr) => {
     if (!curr.startsWith('color/chart')) return acc;
 
     const { name, value, description } = tokensJson[theme][curr]["css/variables"];
 
-    const tokenCategory = isSemantic(name) ? 'semanticTokens' : isCategorical(name) ? 'categoricalTokens' : isSequential(name) ? 'sequentialTokens' : 'singleColorTokens';
+    const tokenCategory = isSemantic(name) ? 'semanticTokens' : 
+                          isCategorical(name) ? 'categoricalTokens' : 
+                          isSequentialRange(name) ? 'sequentialRangeTokens' :
+                          isSequential(name) ? 'sequentialTokens' : 
+                          'singleColorTokens';
     acc[tokenCategory].push({ name, tokenValue: value, description, exampleValue: value, exampleName: name });
 
     return acc;
@@ -215,6 +223,7 @@ const {
     semanticTokens: [],
     categoricalTokens: [],
     sequentialTokens: [],
+    sequentialRangeTokens: [],
     singleColorTokens: [],
   });
 </script>
