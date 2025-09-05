@@ -7,7 +7,8 @@
         "dialtone-css:build",
         "dialtone-icons:build",
         "dialtone-tokens:build",
-        "dialtone-vue3:build"
+        "dialtone-vue3:build",
+        "dialtone-combinator:build"
       ],
       "inputs": [
         "{projectRoot}/docs/**/*",
@@ -27,7 +28,8 @@
         "dialtone-css:build",
         "dialtone-icons:build",
         "dialtone-tokens:build",
-        "dialtone-vue3:build"
+        "dialtone-vue3:build",
+        "dialtone-combinator:build"
       ],
       "options": {
         "cwd": "{projectRoot}",
