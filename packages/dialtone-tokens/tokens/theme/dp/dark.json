@@ -737,19 +737,19 @@
           "type": "color"
         },
         "01-selected": {
-          "value": "{color.purple.450}",
+          "value": "{color.purple.400}",
           "type": "color"
         },
         "02": {
-          "value": "{color.magenta.500}",
+          "value": "{color.magenta.400}",
           "type": "color"
         },
         "02-hover": {
-          "value": "{color.magenta.600}",
+          "value": "{color.magenta.425}",
           "type": "color"
         },
         "02-selected": {
-          "value": "{color.magenta.900}",
+          "value": "{color.magenta.500}",
           "type": "color"
         },
         "03": {
@@ -765,7 +765,7 @@
           "type": "color"
         },
         "04": {
-          "value": "{color.gold.300}",
+          "value": "{color.gold.350}",
           "type": "color"
         },
         "04-hover": {
@@ -773,7 +773,7 @@
           "type": "color"
         },
         "04-selected": {
-          "value": "{color.gold.600}",
+          "value": "{color.gold.500}",
           "type": "color"
         },
         "05": {
@@ -785,7 +785,7 @@
           "type": "color"
         },
         "05-selected": {
-          "value": "{color.green.425}",
+          "value": "{color.green.400}",
           "type": "color"
         },
         "06": {
@@ -797,7 +797,7 @@
           "type": "color"
         },
         "06-selected": {
-          "value": "{color.berry.700}",
+          "value": "{color.berry.800}",
           "type": "color"
         },
         "07": {
@@ -809,31 +809,31 @@
           "type": "color"
         },
         "07-selected": {
-          "value": "{color.coral.700}",
+          "value": "{color.coral.600}",
           "type": "color"
         },
         "08": {
-          "value": "{color.olive.300}",
-          "type": "color"
-        },
-        "08-hover": {
           "value": "{color.olive.400}",
           "type": "color"
         },
+        "08-hover": {
+          "value": "{color.olive.500}",
+          "type": "color"
+        },
         "08-selected": {
-          "value": "{color.olive.600}",
+          "value": "{color.olive.700}",
           "type": "color"
         },
         "09": {
-          "value": "{color.red.300}",
-          "type": "color"
-        },
-        "09-hover": {
           "value": "{color.red.350}",
           "type": "color"
         },
+        "09-hover": {
+          "value": "{color.red.400}",
+          "type": "color"
+        },
         "09-selected": {
-          "value": "{color.red.450}",
+          "value": "{color.red.500}",
           "type": "color"
         }
       },
@@ -862,7 +862,7 @@
         "type": "color"
       },
       "positive": {
-        "value": "{color.green.300}",
+        "value": "{color.green.350}",
         "type": "color"
       },
       "positive-hover": {
@@ -870,11 +870,11 @@
         "type": "color"
       },
       "positive-selected": {
-        "value": "{color.green.500}",
+        "value": "{color.green.475}",
         "type": "color"
       },
       "critical": {
-        "value": "{color.red.300}",
+        "value": "{color.red.350}",
         "type": "color"
       },
       "critical-hover": {
@@ -882,11 +882,11 @@
         "type": "color"
       },
       "critical-selected": {
-        "value": "{color.red.600}",
+        "value": "{color.red.500}",
         "type": "color"
       },
       "warning": {
-        "value": "{color.gold.300}",
+        "value": "{color.gold.350}",
         "type": "color"
       },
       "warning-hover": {
@@ -894,32 +894,104 @@
         "type": "color"
       },
       "warning-selected": {
-        "value": "{color.gold.600}",
+        "value": "{color.gold.500}",
         "type": "color"
       },
       "info": {
-        "value": "{color.blue.300}",
-        "type": "color"
-      },
-      "info-hover": {
         "value": "{color.blue.400}",
         "type": "color"
       },
+      "info-hover": {
+        "value": "{color.blue.425}",
+        "type": "color"
+      },
       "info-selected": {
-        "value": "{color.blue.600}",
+        "value": "{color.blue.475}",
         "type": "color"
       },
-      "brand": {
-        "value": "{color.purple.300}",
-        "type": "color"
-      },
-      "brand-hover": {
-        "value": "{color.purple.350}",
-        "type": "color"
-      },
-      "brand-selected": {
-        "value": "{color.purple.450}",
-        "type": "color"
+      "sequential": {
+        "range": {
+          "01-start": {
+            "value": "{color.purple.200}",
+            "type": "color"
+          },
+          "01-end": {
+            "value": "{color.purple.600}",
+            "type": "color"
+          },
+          "02-start": {
+            "value": "{color.magenta.200}",
+            "type": "color"
+          },
+          "02-end": {
+            "value": "{color.magenta.900}",
+            "type": "color"
+          },
+          "03-start": {
+            "value": "{color.blue.200}",
+            "type": "color"
+          },
+          "03-end": {
+            "value": "{color.blue.600}",
+            "type": "color"
+          },
+          "04-start": {
+            "value": "{color.gold.200}",
+            "type": "color"
+          },
+          "04-end": {
+            "value": "{color.gold.900}",
+            "type": "color"
+          },
+          "05-start": {
+            "value": "{color.green.200}",
+            "type": "color"
+          },
+          "05-end": {
+            "value": "{color.green.900}",
+            "type": "color"
+          },
+          "06-start": {
+            "value": "{color.berry.200}",
+            "type": "color"
+          },
+          "06-end": {
+            "value": "{color.berry.950}",
+            "type": "color"
+          },
+          "07-start": {
+            "value": "{color.coral.200}",
+            "type": "color"
+          },
+          "07-end": {
+            "value": "{color.coral.950}",
+            "type": "color"
+          },
+          "08-start": {
+            "value": "{color.olive.200}",
+            "type": "color"
+          },
+          "08-end": {
+            "value": "{color.olive.950}",
+            "type": "color"
+          },
+          "09-start": {
+            "value": "{color.red.200}",
+            "type": "color"
+          },
+          "09-end": {
+            "value": "{color.red.900}",
+            "type": "color"
+          },
+          "10-start": {
+            "value": "{color.teal.200}",
+            "type": "color"
+          },
+          "10-end": {
+            "value": "{color.teal.900}",
+            "type": "color"
+          }
+        }
       }
     }
   },
