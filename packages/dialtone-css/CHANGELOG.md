@@ -1,3 +1,10 @@
+## [8.64.2](https://github.com/dialpad/dialtone/compare/dialtone-css/v8.64.1...dialtone-css/v8.64.2) (2025-09-04)
+
+
+### Bug Fixes
+
+* **Presence:** DLT-2755 correct offline's border / background colors ([#901](https://github.com/dialpad/dialtone/issues/901)) ([a8fee92](https://github.com/dialpad/dialtone/commit/a8fee92023ee8b06e165603fb23f375b4a5a48e9))
+
 ## [8.64.1](https://github.com/dialpad/dialtone/compare/dialtone-css/v8.64.0...dialtone-css/v8.64.1) (2025-09-04)
 
 
