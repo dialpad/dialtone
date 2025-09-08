@@ -23,7 +23,7 @@
 	},
 	"devDependencies": {
 		"@dialpad/dialtone-css": "workspace:*",
-		"@dialpad/dialtone-vue": "workspace:^3",
+		"@dialpad/dialtone-vue": "workspace:vue3-next",
 		"@dialpad/dialtone-tokens": "workspace:*"
 	}
 }
