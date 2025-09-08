@@ -23,7 +23,7 @@
           "type": "color"
         },
         "status-positive": {
-          "value": "{color.green.425}",
+          "value": "{color.green.475}",
           "type": "color"
         },
         "status-critical": {
