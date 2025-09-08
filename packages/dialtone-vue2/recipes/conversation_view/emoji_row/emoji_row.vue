@@ -7,12 +7,22 @@
       <dt-tooltip
         class="d-recipe-emoji-row__tooltip"
         content-class="d-recipe-emoji-row__tooltip-content"
+        :fallback-placements="['top', 'bottom']"
         sticky="popper"
         @shown="(shown) => emojiHovered(reaction, shown)"
       >
         <span aria-hidden="true">
-          <dt-emoji-text-wrapper size="200">
-            {{ reactionLabel(reaction) }}
+          <dt-emoji-text-wrapper size="800">
+            <p class="d-recipe-emoji-row__tooltip-emoji">
+              {{ reaction.emojiUnicodeOrShortname }}
+            </p>
+            <p class="d-recipe-emoji-row__tooltip-names">
+              {{ reaction.names }}
+              <span
+                class="d-recipe-emoji-row__tooltip-label"
+                v-text="reactionLabel(reaction)"
+              />
+            </p>
           </dt-emoji-text-wrapper>
         </span>
         <template #anchor="{ attrs }">
@@ -30,7 +40,8 @@
           >
             <span class="d-recipe-emoji-row__emoji">
               <dt-emoji
-                size="200"
+                class="d-recipe-emoji-row__emoji"
+                img-class="d-recipe-emoji-row__emoji-img"
                 :code="reaction.emojiUnicodeOrShortname"
               />
             </span>
@@ -54,6 +65,7 @@ import { DtTooltip } from '@/components/tooltip';
 import { DtEmoji } from '@/components/emoji';
 import { DtEmojiTextWrapper } from '@/components/emoji_text_wrapper';
 import { DialtoneLocalization } from '@/localization';
+import { getEmojiShortCode } from '@/common/emoji';
 
 export default {
   name: 'DtRecipeEmojiRow',
@@ -102,8 +114,9 @@ export default {
 
     reactionLabel (reaction) {
       return this.i18n.$t('DIALTONE_EMOJI_ROW_REACTION_LABEL', {
-        names: reaction.names,
-        reaction: reaction.emojiUnicodeOrShortname,
+        reaction: getEmojiShortCode(reaction.emojiUnicodeOrShortname),
+        personCount: reaction.num,
+        youIncluded: reaction.isSelected,
       });
     },
   },

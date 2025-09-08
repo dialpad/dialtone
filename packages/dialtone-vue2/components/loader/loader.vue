@@ -5,7 +5,7 @@
     data-qa="dt-loader"
   >
     <dt-icon-loading
-      class="d-loader-icon"
+      class="d-loader__icon"
       data-qa="dt-loader-icon"
       :size="size"
     />

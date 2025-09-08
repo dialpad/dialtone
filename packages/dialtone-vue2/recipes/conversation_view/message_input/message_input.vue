@@ -178,6 +178,11 @@
           direction="row"
           gap="300"
         >
+          <!-- @slot Slot for schedule message -->
+          <div class="d-recipe-message-input__schedule-message">
+            <slot name="scheduleMessage" />
+          </div>
+
           <!-- @slot Slot for sms count -->
           <div class="d-recipe-message-input__sms-count">
             <slot name="smsCount" />
@@ -885,7 +890,7 @@ export default {
     },
 
     // Checks if the node currently selected is active ex/ the bold button is active if the selected text is bold
-    // eslint-disable-next-line complexity
+     
     isSelectionActive (type) {
       if (['bulletList', 'orderedList'].includes(type)) {
         return this.lastActiveNodes(this.$refs.richTextEditor?.editor?.state, [{ type: 'bulletList' }, { type: 'orderedList' }]).includes(type) && this.isFocused;

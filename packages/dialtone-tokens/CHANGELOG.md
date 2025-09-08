@@ -1,4 +1,4 @@
-# [1.45.0-next.1](https://github.com/dialpad/dialtone/compare/dialtone-tokens/v1.44.1...dialtone-tokens/v1.45.0-next.1) (2025-08-25)
+# [1.45.0](https://github.com/dialpad/dialtone/compare/dialtone-tokens/v1.44.1...dialtone-tokens/v1.45.0) (2025-08-26)
 
 
 ### Features

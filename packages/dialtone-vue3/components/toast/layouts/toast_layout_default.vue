@@ -4,6 +4,7 @@
     :class="[
       'd-toast',
       kindClass,
+      $attrs.class,
       { 'd-toast--important': important },
     ]"
     data-qa="dt-toast"
@@ -13,7 +14,7 @@
       <dt-notice-icon
         v-if="!hideIcon"
         :kind="kind"
-        v-bind="$attrs"
+        v-bind="toastListeners"
       >
         <!-- @slot Slot for custom icon -->
         <slot name="icon" />
@@ -23,7 +24,7 @@
         :content-id="contentId"
         :title="title"
         :role="role"
-        v-bind="$attrs"
+        v-bind="toastListeners"
       >
         <template #titleOverride>
           <!-- @slot Allows you to override the title, only use this if you need to override
@@ -38,7 +39,7 @@
       <dt-notice-action
         :hide-action="hideAction"
         :hide-close="hideClose"
-        v-bind="$attrs"
+        v-bind="toastListeners"
         @close="$emit('close')"
       >
         <!-- @slot Enter a possible action for the user to take, such as a link to another page -->
@@ -52,6 +53,8 @@
 import utils from '@/common/utils';
 import { DtNoticeIcon, DtNoticeContent, DtNoticeAction, NOTICE_KINDS } from '@/components/notice';
 import { TOAST_ROLES } from '../toast_constants.js';
+import { extractVueListeners } from '@/common/utils/index.js';
+
 export default {
   name: 'ToastLayoutDefault',
 
@@ -178,6 +181,10 @@ export default {
       };
 
       return kindClasses[this.kind];
+    },
+
+    toastListeners () {
+      return extractVueListeners(this.$attrs);
     },
   },
 };

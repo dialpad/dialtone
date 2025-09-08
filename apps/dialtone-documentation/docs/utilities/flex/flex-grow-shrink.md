@@ -38,7 +38,7 @@ control the grow and shrink flex values separately with their own utility classe
         <tr v-for="v in properties[0].values">
           <th scope="row" class="d-code--sm d-docsite-code">.d-fl{{ v }}</th>
           <td class="d-code--sm">flex: {{ v }} auto !important;</td>
-          <td>{{ properties[0].description }} {{ v }}.</td>
+          <td>{{ properties[0].description }} {{ v }}, flex-shrink to 1 and flex-basis to auto.</td>
         </tr>
         <tr>
           <th scope="row" class="d-code--sm d-docsite-code">.d-fl-unset</th>

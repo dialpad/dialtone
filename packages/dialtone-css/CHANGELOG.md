@@ -1,9 +1,30 @@
-# [8.63.0-next.1](https://github.com/dialpad/dialtone/compare/dialtone-css/v8.62.0...dialtone-css/v8.63.0-next.1) (2025-08-25)
+## [8.64.2](https://github.com/dialpad/dialtone/compare/dialtone-css/v8.64.1...dialtone-css/v8.64.2) (2025-09-04)
 
 
-### Code Refactoring
+### Bug Fixes
 
-* **Css:** DLT-1876 css logical properties ([#872](https://github.com/dialpad/dialtone/issues/872)) ([1acd6c9](https://github.com/dialpad/dialtone/commit/1acd6c900053b0c820309faa4a870ff1dceced04))
+* **Presence:** DLT-2755 correct offline's border / background colors ([#901](https://github.com/dialpad/dialtone/issues/901)) ([a8fee92](https://github.com/dialpad/dialtone/commit/a8fee92023ee8b06e165603fb23f375b4a5a48e9))
+
+## [8.64.1](https://github.com/dialpad/dialtone/compare/dialtone-css/v8.64.0...dialtone-css/v8.64.1) (2025-09-04)
+
+
+### Bug Fixes
+
+* **Loader:** DLT-2754 loader container size and alignment ([#898](https://github.com/dialpad/dialtone/issues/898)) ([7e5cb43](https://github.com/dialpad/dialtone/commit/7e5cb438263a68daed04c351cc01bd958952315c))
+
+# [8.64.0](https://github.com/dialpad/dialtone/compare/dialtone-css/v8.63.0...dialtone-css/v8.64.0) (2025-09-02)
+
+
+### Bug Fixes
+
+* **Modal:** DLT-2628 improve close button positioning ([#887](https://github.com/dialpad/dialtone/issues/887)) ([87ca255](https://github.com/dialpad/dialtone/commit/87ca255b142adfeb2a49528fa04febdf001c6492))
+
+
+### Features
+
+* **Tokens:** DLT-2689 apply new shell tokens to dialtone css and vue ([#882](https://github.com/dialpad/dialtone/issues/882)) ([69dae2a](https://github.com/dialpad/dialtone/commit/69dae2ad70b84022bb35cdbd0e630a4799c6bf96))
+
+# [8.63.0](https://github.com/dialpad/dialtone/compare/dialtone-css/v8.62.0...dialtone-css/v8.63.0) (2025-08-26)
 
 
 ### Documentation
@@ -13,7 +34,7 @@
 
 ### Features
 
-* **Css Utility:** DLT-2715 add default color for border css utilities ([#874](https://github.com/dialpad/dialtone/issues/874)) ([71310ab](https://github.com/dialpad/dialtone/commit/71310ab483fde976d56c69e0456bce70cb6d372d))
+* **Emoji Row:** DLT-2248 display larger emoji and inline shortcode in emoji row tooltip ([#880](https://github.com/dialpad/dialtone/issues/880)) ([9875bb4](https://github.com/dialpad/dialtone/commit/9875bb408e1b0166edcab303a6b7c4370713483a))
 
 # [8.62.0](https://github.com/dialpad/dialtone/compare/dialtone-css/v8.61.0...dialtone-css/v8.62.0) (2025-08-12)
 

@@ -299,12 +299,6 @@ export default {
      * @type {Boolean | Array}
      */
     'opened',
-
-    /**
-     * Event fired to sync the open prop with the parent component
-     * @event update:open
-     */
-    'update:open',
   ],
 
   data () {
@@ -320,6 +314,11 @@ export default {
   computed: {
     dropdownListeners () {
       return {
+
+        'update:open': value => {
+          this.$emit('update:open', value);
+        },
+
         opened: isPopoverOpen => {
           this.updateInitialHighlightIndex(isPopoverOpen);
         },

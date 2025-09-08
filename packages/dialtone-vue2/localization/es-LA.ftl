@@ -55,7 +55,19 @@ DIALTONE_EDITOR_LINK_BUTTON_LABEL = Enlace
 DIALTONE_EDITOR_ADD_LINK_BUTTON =
     .title = Agregar enlace
     .aria-label = Campo de entrada para agregar enlace
-DIALTONE_EMOJI_ROW_REACTION_LABEL = { $names } reaccionó con { $reaction }
+DIALTONE_EMOJI_ROW_REACTION_LABEL =
+    { $personCount ->
+        [one]
+            { $youIncluded ->
+               *[true] reaccionó con { $reaction }
+                [false] reaccionó con { $reaction }
+            }
+       *[other]
+            { $youIncluded ->
+               *[true] reaccionaron con { $reaction }
+                [false] reaccionaron con { $reaction }
+            }
+    }
 DIALTONE_EMOJI_PICKER_ADD_EMOJI_LABEL = Agregar emoji
 DIALTONE_EMOJI_PICKER_SEARCH_NO_RESULTS_LABEL = No hay resultados
 DIALTONE_EMOJI_PICKER_SEARCH_RESULTS_LABEL = resultados de búsqueda
@@ -153,3 +165,6 @@ STORYBOOK_LANGUAGE_PORTUGUESE = Portugués
 STORYBOOK_LANGUAGE_RUSSIAN = Ruso
 STORYBOOK_LANGUAGE_SPANISH = Español
 STORYBOOK_SET_LANGUAGE = Establecer idioma
+STORYBOOK_YOU = Usted
+STORYBOOK_REACTION_NAMES_2 = Olivia Chen, Benjamin Carter, Sophia Rodríguez, William Kim e Isabella García
+STORYBOOK_REACTION_NAMES_3 = Olivia Chen y { STORYBOOK_YOU }

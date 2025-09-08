@@ -2,6 +2,7 @@ import { mount } from '@vue/test-utils';
 import { DtIconUser } from '@dialpad/dialtone-icons/vue3';
 import DtAvatar from './avatar.vue';
 import { AVATAR_KIND_MODIFIERS, AVATAR_SIZE_MODIFIERS } from './avatar_constants';
+import { extractInitialsFromName } from './utils';
 
 const MOCK_AVATAR_STUB = vi.fn();
 const MOCK_IMAGE_SOURCE = 'image.png';
@@ -336,6 +337,41 @@ describe('DtAvatar Tests', () => {
         MOCK_ELEMENT = wrapper.find('[data-qa="dt-avatar"]');
 
         expect(wrapper.find('.my-custom-class').html()).toBe(MOCK_ELEMENT.html());
+      });
+    });
+  });
+
+  describe('extractInitialsFromName Utility Tests', () => {
+    describe('When provided with valid names', () => {
+      it('should extract initials from first and last name', () => {
+        expect(extractInitialsFromName('John Doe')).toBe('JD');
+      });
+
+      it('should extract initials from multiple names (first and last only)', () => {
+        expect(extractInitialsFromName('John Michael Doe')).toBe('JD');
+      });
+    });
+
+    describe('When provided with names containing special characters', () => {
+      it('should remove special characters and extract initials', () => {
+        expect(extractInitialsFromName('John Doe (General Manager)')).toBe('JM');
+        expect(extractInitialsFromName('John Doe [Contractor]')).toBe('JC');
+      });
+
+      it('should handle names with numbers', () => {
+        expect(extractInitialsFromName('John Doe 123')).toBe('J1');
+      });
+    });
+
+    describe('When provided with international names', () => {
+      it('should handle Japanese kanji characters', () => {
+        expect(extractInitialsFromName('田中太郎')).toBe('田中');
+      });
+    });
+
+    describe('When provided with emojis', () => {
+      it('should remove emojis from names', () => {
+        expect(extractInitialsFromName('John Doe 😀')).toBe('JD');
       });
     });
   });

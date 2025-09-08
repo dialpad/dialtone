@@ -79,6 +79,14 @@ export const argTypesData = {
       type: 'text',
     },
   },
+  scheduleMessage: {
+    table: {
+      type: { summary: 'VNode' },
+    },
+    control: {
+      type: 'text',
+    },
+  },
   smsCount: {
     table: {
       type: { summary: 'VNode' },
@@ -206,6 +214,7 @@ export const argsData = {
   emojiGiphyPicker: '',
   customActionIcons: '',
   sendButton: '',
+  scheduleMessage: '',
   smsCount: '',
   placeholder: 'New message',
   inputAriaLabel: 'Input text field',
