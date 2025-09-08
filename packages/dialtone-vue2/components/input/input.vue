@@ -1,7 +1,7 @@
 <template>
   <div
     ref="container"
-    :class="['d-input__root', { 'd-input--hidden': hidden }]"
+    :class="[rootClass, 'd-input__root', { 'd-input--hidden': hidden }]"
     data-qa="dt-input"
   >
     <label
@@ -244,6 +244,16 @@ export default {
     },
 
     /**
+     * Additional class name for the root element.
+     * Can accept all of String, Object, and Array, i.e. has the
+     * same api as Vue's built-in handling of the class attribute.
+     */
+    rootClass: {
+      type: [String, Object, Array],
+      default: '',
+    },
+
+    /**
      * The current character length that the user has entered into the input.
      * This will only need to be used if you are using `validate.length` and
      * the string contains abnormal characters.
@@ -457,7 +467,6 @@ export default {
     },
 
     shouldValidateLength () {
-      // eslint-disable-next-line max-lines
       return !!(
         this.validationProps.length.description &&
         this.validationProps.length.max
@@ -468,7 +477,6 @@ export default {
       return this.shouldValidateLength && this.validationProps.length.limitMaxLength;
     },
 
-    // eslint-disable-next-line complexity
     showLengthLimitValidation () {
       return (
         this.shouldValidateLength &&
