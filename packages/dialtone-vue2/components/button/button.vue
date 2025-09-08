@@ -9,7 +9,7 @@
     :disabled="disabled"
     :style="{ width: width }"
     :aria-live="computedAriaLive"
-    :aria-label="loading ? 'loading' : $attrs['aria-label']"
+    :aria-label="loading ? i18n.$t('DIALTONE_LOADING') : $attrs['aria-label']"
     v-on="buttonListeners"
   >
     <!-- NOTE(cormac): This span is needed since we can't apply styles to slots. -->
@@ -18,8 +18,10 @@
       data-qa="dt-button-icon"
       :class="[
         'base-button__icon',
-        'd-btn__icon',
-        ICON_POSITION_MODIFIERS[iconPosition],
+        {
+          'd-btn__icon': kind !== 'unstyled',
+          [ICON_POSITION_MODIFIERS[iconPosition]]: kind !== 'unstyled',
+        },
       ]"
     >
       <!-- @slot Button icon -->
@@ -31,7 +33,11 @@
     <span
       v-if="$slots.default"
       data-qa="dt-button-label"
-      :class="['d-btn__label', 'base-button__label', labelClass]"
+      :class="[
+        'base-button__label',
+        { 'd-btn__label': kind !== 'unstyled' },
+        labelClass,
+      ]"
     >
       <!-- @slot Content within button -->
       <slot />
@@ -53,6 +59,8 @@ import {
 } from './button_constants';
 
 import { LINK_KIND_MODIFIERS, getLinkKindModifier } from '@/components/link';
+
+import { DialtoneLocalization } from '@/localization';
 
 /**
  * A button is a UI element which allows users to take an action throughout the app.
@@ -192,7 +200,7 @@ export default {
 
     /**
      * The color of the button.
-     * @values default, muted, danger, inverted
+     * @values default, unstyled, muted, danger, positive, inverted
      */
     kind: {
       type: String,
@@ -253,6 +261,7 @@ export default {
       ICON_POSITION_MODIFIERS,
       // whether the button is currently in focus
       isInFocus: false,
+      i18n: new DialtoneLocalization(),
     };
   },
 
@@ -264,11 +273,11 @@ export default {
       }
       return {
         ...this.$listeners,
-        focusin: (e) => {
+        focusin: () => {
           this.isInFocus = true;
         },
 
-        focusout: (e) => {
+        focusout: () => {
           this.isInFocus = false;
         },
       };
@@ -308,6 +317,9 @@ export default {
           BUTTON_SIZE_MODIFIERS[this.size],
         ];
       }
+      if (this.kind === 'unstyled') {
+        return ['d-btn--unstyled'];
+      }
       return [
         'd-btn',
         BUTTON_IMPORTANCE_MODIFIERS[this.importance],
@@ -324,6 +336,11 @@ export default {
     },
 
     isInvalidPropCombination (circle, kind, importance) {
+      // Skip validation if unstyled is true
+      if (this.kind === 'unstyled') {
+        return true;
+      }
+
       for (const row of INVALID_COMBINATION) {
         if (circle === row.circle && kind === row.kind && importance === row.importance) {
           console.warn(row.message);

@@ -33,6 +33,10 @@
       "output": "1.6rem"
     },
     {
+      "value": "20",
+      "output": "2.0rem"
+    },
+    {
       "value": "24",
       "output": "2.4rem"
     },

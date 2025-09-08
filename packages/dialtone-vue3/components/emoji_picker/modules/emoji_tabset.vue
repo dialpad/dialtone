@@ -1,26 +1,26 @@
 <template>
   <div class="d-emoji-picker__tabset">
     <dt-tab-group
+      :selected="selectedTab"
       size="sm"
       tab-list-class="d-emoji-picker__tabset-list"
-      :selected="selectedTab"
     >
       <template #tabs>
         <dt-tab
           v-for="(tab, index) in tabs"
           :id="tab.id"
-          :ref="el => { if (el) setTabsetRef(el) }"
           :key="tab.id"
-          :panel-id="tab.panelId"
+          :ref="el => { if (el) setTabsetRef(el) }"
           :label="tab.label"
-          aria-controls="d-emoji-picker-list"
+          :panel-id="tab.panelId"
           :tabindex="index + 1"
-          @click.capture.stop="selectTabset(tab.id)"
+          aria-controls="d-emoji-picker-list"
           @keydown="handleKeyDown($event, tab.id)"
+          @click.capture.stop="selectTabset(tab.id)"
         >
-          <dt-icon
+          <component
+            :is="tab.icon"
             size="400"
-            :name="tab.icon"
           />
         </dt-tab>
       </template>
@@ -29,10 +29,21 @@
 </template>
 
 <script setup>
-import { computed, ref, toRefs, watch } from 'vue';
-import { DtTab, DtTabGroup } from '@/components/tabs';
-import { DtIcon } from '@/components/icon';
-import { EMOJI_PICKER_CATEGORIES } from '@/components/emoji_picker';
+import { computed, ref, watch } from 'vue';
+import { DtTab, DtTabGroup } from '@/components/tab';
+import { returnFirstEl } from '@/common/utils';
+import {
+  DtIconClock,
+  DtIconSatisfied,
+  DtIconLivingThing,
+  DtIconFood,
+  DtIconObject,
+  DtIconTransportation,
+  DtIconLightbulb,
+  DtIconHeart,
+  DtIconFlag,
+  DtIconTiktok,
+} from '@dialpad/dialtone-icons/vue3';
 
 const props = defineProps({
   /**
@@ -45,14 +56,19 @@ const props = defineProps({
     default: false,
   },
 
+  /**
+   * Whether to show the custom emojis tab or not
+   * @type {Boolean}
+   * @default false
+   */
+  showCustomEmojisTab: {
+    type: Boolean,
+    default: false,
+  },
+
   scrollIntoTab: {
     type: Number,
     required: true,
-  },
-
-  isScrolling: {
-    type: Boolean,
-    default: false,
   },
 
   emojiFilter: {
@@ -65,7 +81,7 @@ const props = defineProps({
    * @type {Array}
    * @required
    */
-  tabsetLabels: {
+  tabSetLabels: {
     type: Array,
     required: true,
   },
@@ -84,23 +100,28 @@ const emits = defineEmits([
 ]);
 
 const TABS_DATA = [
-  { label: EMOJI_PICKER_CATEGORIES.MOST_RECENTLY_USED, icon: 'clock' },
-  { label: EMOJI_PICKER_CATEGORIES.SMILEYS_AND_PEOPLE, icon: 'satisfied' },
-  { label: EMOJI_PICKER_CATEGORIES.NATURE, icon: 'living-thing' },
-  { label: EMOJI_PICKER_CATEGORIES.FOOD, icon: 'food' },
-  { label: EMOJI_PICKER_CATEGORIES.ACTIVITY, icon: 'object' },
-  { label: EMOJI_PICKER_CATEGORIES.TRAVEL, icon: 'transportation' },
-  { label: EMOJI_PICKER_CATEGORIES.OBJECTS, icon: 'lightbulb' },
-  { label: EMOJI_PICKER_CATEGORIES.SYMBOLS, icon: 'heart' },
-  { label: EMOJI_PICKER_CATEGORIES.FLAGS, icon: 'flag' },
+  { label: props.tabSetLabels[0], icon: DtIconClock },
+  { label: props.tabSetLabels[1], icon: DtIconSatisfied },
+  { label: props.tabSetLabels[2], icon: DtIconLivingThing },
+  { label: props.tabSetLabels[3], icon: DtIconFood },
+  { label: props.tabSetLabels[4], icon: DtIconObject },
+  { label: props.tabSetLabels[5], icon: DtIconTransportation },
+  { label: props.tabSetLabels[6], icon: DtIconLightbulb },
+  { label: props.tabSetLabels[7], icon: DtIconHeart },
+  { label: props.tabSetLabels[8], icon: DtIconFlag },
+  { label: props.tabSetLabels[9], icon: DtIconTiktok },
 ];
 
 const tabs = computed(() => {
   const tabsData = props.showRecentlyUsedTab ? TABS_DATA : TABS_DATA.slice(1);
+  // if showCustomEmojisTab is false remove last index of TABS_DATA
+  if (!props.showCustomEmojisTab) {
+    tabsData.pop();
+  }
 
   return tabsData.map((tab, index) => ({
     ...tab,
-    label: props.tabsetLabels[index],
+    // IDs on dt-tab component need to be on string
     id: (index + 1).toString(),
     panelId: (index + 1).toString(),
   }));
@@ -110,13 +131,11 @@ const isSearching = computed(() => props.emojiFilter.length > 0);
 
 const selectedTab = ref('1');
 
-const { isScrolling } = toRefs(props);
-
 const tabsetRef = ref([]);
 
 watch(() => props.scrollIntoTab,
   () => {
-    if (!isScrolling.value && !isSearching.value) {
+    if (!isSearching.value) {
       selectedTab.value = (props.scrollIntoTab + 1).toString();
     }
   });
@@ -134,16 +153,17 @@ watch(isSearching,
  * dt-tab component
  */
 function selectTabset (id) {
-  if (!isScrolling.value) {
-    selectedTab.value = id;
-  }
-  emits('selected-tabset', id);
+  // IDs on scrollToTab need to be on number
+  const parseId = parseInt(id);
+  // IDs on dt-tab component need to be on string
+  selectedTab.value = id;
+  emits('selected-tabset', parseId);
 }
 
 function setTabsetRef (ref) {
   // We push the $el, because $el is the button inside the dt-tab component
   // and we need the button to focus it
-  tabsetRef.value.push(ref.$el);
+  tabsetRef.value.push(returnFirstEl(ref.$el));
 }
 
 function focusTabset () {

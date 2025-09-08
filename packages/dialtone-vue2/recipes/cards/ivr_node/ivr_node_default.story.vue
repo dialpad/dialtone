@@ -4,7 +4,6 @@
     :node-type="$attrs.nodeType"
     :is-selected="$attrs.isSelected"
     :dtmf-key="$attrs.dtmfKey"
-    :menu-button-aria-label="$attrs.menuButtonAriaLabel"
     @click="$attrs.onClick($event)"
   >
     <template
@@ -12,7 +11,7 @@
       #connector
     >
       <div
-        class="ivr-connector d-w-auto d-px8 d-h24 d-bar-pill d-mbn12 d-fc-neutral-white d-fs-100"
+        class="d-recipe-ivr-node__connector d-w-auto d-px8 d-h24 d-bar-pill d-mbn12 d-fc-primary-inverted d-fs-100"
       >
         Add branch
       </div>
@@ -41,10 +40,7 @@
         >
           Launch Expert
           <template #icon>
-            <dt-icon
-              size="300"
-              name="external-link"
-            />
+            <dt-icon-external-link size="300" />
           </template>
         </dt-button>
       </div>
@@ -59,7 +55,7 @@
           <p>Carolina Garcia Rodriguez</p>
         </div>
       </div>
-      <div v-if="hangup || branch || goTo || assign">
+      <div v-if="hangup || branch || goTo || assign || customerData">
         <p class="d-fw-bold">
           Name
         </p>
@@ -133,13 +129,17 @@ import DtRecipeIvrNode from './ivr_node.vue';
 import {
   IVR_NODE_ASSIGN,
   IVR_NODE_BRANCH,
-  IVR_NODE_EXPERT, IVR_NODE_GO_TO, IVR_NODE_HANGUP,
+  IVR_NODE_CUSTOMER_DATA,
+  IVR_NODE_EXPERT,
+  IVR_NODE_GO_TO,
+  IVR_NODE_HANGUP,
   IVR_NODE_LABELS,
   IVR_NODE_PROMPT_COLLECT,
   IVR_NODE_PROMPT_MENU,
-  IVR_NODE_PROMPT_PLAY, IVR_NODE_TRANSFER,
+  IVR_NODE_PROMPT_PLAY,
+  IVR_NODE_TRANSFER,
 } from './ivr_node_constants';
-import { DtIcon } from '@/components/icon';
+import { DtIconExternalLink } from '@dialpad/dialtone-icons/vue2';
 import { DtButton } from '@/components/button';
 import { DtAvatar } from '@/components/avatar';
 import { DtListItem } from '@/components/list_item';
@@ -147,7 +147,14 @@ import { DtKeyboardShortcut } from '@/components/keyboard_shortcut';
 
 export default {
   name: 'DtRecipeIvrNodeDefault',
-  components: { DtButton, DtRecipeIvrNode, DtIcon, DtAvatar, DtListItem, DtKeyboardShortcut },
+  components: {
+    DtButton,
+    DtRecipeIvrNode,
+    DtIconExternalLink,
+    DtAvatar,
+    DtListItem,
+    DtKeyboardShortcut,
+  },
 
   computed: {
     items () {
@@ -184,6 +191,10 @@ export default {
 
     assign () {
       return this.$attrs.nodeType === IVR_NODE_ASSIGN;
+    },
+
+    customerData () {
+      return this.$attrs.nodeType === IVR_NODE_CUSTOMER_DATA;
     },
 
     transfer () {

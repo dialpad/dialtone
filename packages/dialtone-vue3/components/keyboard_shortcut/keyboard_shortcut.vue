@@ -15,10 +15,10 @@
     <template
       v-for="(item, i) in formattedShortcutSplit"
     >
-      <dt-icon
+      <component
+        :is="icons[item]"
         v-if="icons[item]"
         :key="`${i}-${item}`"
-        :name="icons[item]"
         size="100"
         aria-hidden="true"
         :class="[
@@ -41,18 +41,41 @@
 </template>
 
 <script>
-import { DtIcon } from '@/components/icon';
-import { SHORTCUTS_ICON_ALIASES, SHORTCUTS_ICON_SEPARATOR } from './keyboard_shortcut_constants';
+import {
+  DtIconLayoutGrid,
+  DtIconArrowRight,
+  DtIconArrowLeft,
+  DtIconArrowUp,
+  DtIconArrowDown,
+  DtIconCommand,
+  DtIconPlus,
+} from '@dialpad/dialtone-icons/vue3';
+
+const SHORTCUTS_ICON_ALIASES = {
+  '{win}': DtIconLayoutGrid,
+  '{arrow-right}': DtIconArrowRight,
+  '{arrow-left}': DtIconArrowLeft,
+  '{arrow-up}': DtIconArrowUp,
+  '{arrow-down}': DtIconArrowDown,
+  '{cmd}': DtIconCommand,
+};
 
 /**
  * This component displays a visual representation of a keyboard shortcut to the user.
  * @see https://dialtone.dialpad.com/components/keyboard_shortcut.html
  */
 export default {
+  compatConfig: { MODE: 3 },
   name: 'DtKeyboardShortcut',
 
   components: {
-    DtIcon,
+    DtIconLayoutGrid,
+    DtIconArrowRight,
+    DtIconArrowLeft,
+    DtIconArrowUp,
+    DtIconArrowDown,
+    DtIconCommand,
+    DtIconPlus,
   },
 
   props: {
@@ -85,14 +108,16 @@ export default {
 
   data () {
     return {
-      SHORTCUTS_ICON_ALIASES,
       separator: /\+/gi,
     };
   },
 
   computed: {
     icons () {
-      return { ...SHORTCUTS_ICON_ALIASES, ...SHORTCUTS_ICON_SEPARATOR };
+      return {
+        ...SHORTCUTS_ICON_ALIASES,
+        '{plus}': DtIconPlus,
+      };
     },
 
     shortcutWithSeparator () {

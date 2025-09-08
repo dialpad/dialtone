@@ -1,3 +1,4 @@
+<!-- eslint-disable vue/no-static-inline-styles -->
 <template>
   <dt-recipe-combobox-with-popover
     ref="comboboxWithPopover"
@@ -7,8 +8,6 @@
     :max-width="listMaxWidth"
     :popover-offset="popoverOffset"
     :has-suggestion-list="hasSuggestionList"
-    :visually-hidden-close-label="visuallyHiddenCloseLabel"
-    :visually-hidden-close="visuallyHiddenClose"
     content-width="anchor"
     :append-to="appendTo"
     :transition="transition"
@@ -18,24 +17,27 @@
     <template #input="{ onInput }">
       <span
         ref="inputSlotWrapper"
-        class="combobox__input-wrapper"
+        class="d-recipe-combobox-multi-select__input-wrapper"
         @focusin="handleInputFocusIn"
         @focusout="handleInputFocusOut"
       >
         <span
           ref="chipsWrapper"
-          :class="['combobox__chip-wrapper', chipWrapperClass]"
+          :class="['d-recipe-combobox-multi-select__chip-wrapper', chipWrapperClass]"
         >
           <dt-chip
             v-for="({ item, key }) in selectedItemsWithKeys"
             ref="chips"
             :key="key"
             :label-class="['d-chip__label']"
-            class="combobox__chip"
-            :close-button-props="{ ariaLabel: 'close' }"
+            :class="[
+              'd-recipe-combobox-multi-select__chip',
+              { 'd-recipe-combobox-multi-select__chip--truncate': !!chipMaxWidth },
+            ]"
+            :style="{ maxWidth: chipMaxWidth }"
             :size="CHIP_SIZES[size]"
             v-on="chipListeners"
-            @keyup.backspace="onChipRemove(item)"
+            @keydown.backspace="onChipRemove(item)"
             @close="onChipRemove(item)"
           >
             {{ item }}
@@ -45,8 +47,12 @@
         <dt-input
           ref="input"
           v-model="value"
-          class="combobox__input"
-          :input-class="{ 'd-fc-transparent': hideInputText }"
+          class="d-recipe-combobox-multi-select__input"
+          :input-class="[
+            inputClass, {
+              'd-recipe-combobox-multi-select__input--hidden': hideInputText,
+            }]"
+          :input-wrapper-class="inputWrapperClass"
           :aria-label="label"
           :label="labelVisible ? label : ''"
           :description="description"
@@ -56,6 +62,7 @@
           :size="size"
           v-on="inputListeners"
           @input="onInput"
+          @select.stop
         />
 
         <dt-validation-messages
@@ -79,6 +86,7 @@
     <template #list>
       <div
         ref="list"
+        class="d-recipe-combobox-multi-select__list"
         @mousedown.prevent
       >
         <slot
@@ -87,7 +95,7 @@
         />
         <div
           v-else
-          class="combobox__list--loading"
+          class="d-recipe-combobox-multi-select__list--loading"
         >
           {{ loadingMessage }}
         </div>
@@ -121,7 +129,6 @@ import {
   CHIP_SIZES,
   CHIP_TOP_POSITION,
 } from './combobox_multi_select_constants';
-import SrOnlyCloseButtonMixin from '@/common/mixins/sr_only_close_button';
 import { getUniqueString } from '@/common/utils';
 
 export default {
@@ -133,8 +140,6 @@ export default {
     DtChip,
     DtValidationMessages,
   },
-
-  mixins: [SrOnlyCloseButtonMixin],
 
   props: {
     /**
@@ -315,6 +320,46 @@ export default {
       type: String,
       default: '',
     },
+
+    /**
+    * Amount of reserved space (in px) on the right side of the input
+    * before the chips and the input caret jump to the next line.
+    * default is 64
+    */
+    reservedRightSpace: {
+      type: Number,
+      default: 64,
+    },
+
+    /**
+     * Determines the maximum width of a single chip. If the text within this chip exceeds the value
+     * it will be truncated with ellipses.
+     * Possible units rem|px|em
+     */
+    chipMaxWidth: {
+      type: String,
+      default: '',
+    },
+
+    /**
+     * Additional class name for the input element.
+     * Can accept String, Object, and Array, i.e. has the
+     * same API as Vue's built-in handling of the class attribute.
+     */
+    inputClass: {
+      type: [String, Object, Array],
+      default: '',
+    },
+
+    /**
+     * Additional class name for the input wrapper element.
+     * Can accept all of String, Object, and Array, i.e. has the
+     * same api as Vue's built-in handling of the class attribute.
+     */
+    inputWrapperClass: {
+      type: [String, Object, Array],
+      default: '',
+    },
   },
 
   emits: [
@@ -359,6 +404,14 @@ export default {
     'keyup',
 
     /**
+     * Native keydown event
+     *
+     * @event keydown
+     * @type {KeyboardEvent}
+      */
+    'keydown',
+
+    /**
      * Event fired when combobox item is highlighted
      *
      * @event combobox-highlight
@@ -388,9 +441,9 @@ export default {
     chipListeners () {
       return {
         ...this.$listeners,
-        keyup: event => {
-          this.onChipKeyup(event);
-          this.$emit('keyup', event);
+        keydown: event => {
+          this.onChipKeyDown(event);
+          this.$emit('keydown', event);
         },
       };
     },
@@ -405,12 +458,15 @@ export default {
           }
         },
 
+        keydown: event => {
+          this.onInputKeyDown(event);
+        },
+
         keyup: event => {
-          this.onInputKeyup(event);
           this.$emit('keyup', event);
         },
 
-        click: event => {
+        click: () => {
           if (this.hasSuggestionList) {
             this.showComboboxList();
           }
@@ -427,13 +483,19 @@ export default {
 
     chipWrapperClass () {
       return {
-        [`combobox__chip-wrapper-${this.size}--collapsed`]: !this.inputFocused && this.collapseOnFocusOut,
+        [`d-recipe-combobox-multi-select__chip-wrapper-${this.size}--collapsed`]: !this.inputFocused && this.collapseOnFocusOut,
       };
     },
   },
 
   watch: {
     selectedItems: {
+      async handler () {
+        this.initSelectedItems();
+      },
+    },
+
+    chipMaxWidth: {
       async handler () {
         this.initSelectedItems();
       },
@@ -498,6 +560,7 @@ export default {
     },
 
     onComboboxSelect (i) {
+      if (this.loading) return;
       this.value = '';
       this.$emit('select', i);
     },
@@ -536,7 +599,7 @@ export default {
       return this.$refs.input?.$refs.input;
     },
 
-    onChipKeyup (event) {
+    onChipKeyDown (event) {
       const key = event.code?.toLowerCase();
       if (key === 'arrowleft') {
         // Move to the previous chip
@@ -552,11 +615,15 @@ export default {
       }
     },
 
-    onInputKeyup (event) {
+    onInputKeyDown (event) {
       const key = event.code?.toLowerCase();
       // If the cursor is at the start of the text,
       // press 'backspace' or 'left' focuses the last chip
       if (this.selectedItems.length > 0 && event.target.selectionStart === 0) {
+        // if there is selected text, do not focus the last chip
+        if (event.target.selectionEnd !== event.target.selectionStart) {
+          return;
+        }
         if (key === 'backspace' || key === 'arrowleft') {
           this.moveFromInputToChip();
         }
@@ -613,18 +680,25 @@ export default {
       // Get the position of the last chip
       // The input cursor should be the same "top" as that chip and next besides it
       const left = lastChip.offsetLeft + this.getFullWidth(lastChip);
-      input.style.paddingLeft = left + 'px';
+      const spaceLeft = input.getBoundingClientRect().width - left;
+      // input.style.paddingLeft = left + 'px';
 
-      // Get the chip size minus the 4px padding
-      const chipsSize = chipsWrapper.getBoundingClientRect().height - 4;
+      if (spaceLeft > this.reservedRightSpace) {
+        input.style.paddingLeft = left + 'px';
+      } else {
+        input.style.paddingLeft = '4px';
+      }
+
+      // Get the chip wrapper height minus the 4px padding
+      const chipsWrapperHeight = chipsWrapper.getBoundingClientRect().height - 4;
+      const lastChipHeight = lastChip.getBoundingClientRect().height - 4;
 
       // Get lastChip offsetTop plus 2px of the input padding.
-      const top = lastChip.offsetTop + 2;
+      const top = spaceLeft > this.reservedRightSpace
+        ? lastChip.offsetTop + 2
+        : (chipsWrapperHeight + lastChipHeight - 9);
 
-      // Add padding to Top only if the chips need more space
-      if (chipsSize > this.initialInputHeight) {
-        input.style.paddingTop = `${top}px`;
-      }
+      input.style.paddingTop = `${top}px`;
     },
 
     revertInputPadding (input) {
@@ -670,71 +744,25 @@ export default {
     async handleInputFocusIn () {
       this.inputFocused = true;
       if (this.collapseOnFocusOut) {
+        this.hideInputText = false;
         await this.$nextTick();
         this.setInputPadding();
-        this.hideInputText = false;
       }
     },
 
     async handleInputFocusOut () {
       this.inputFocused = false;
       if (this.collapseOnFocusOut) {
+        this.hideInputText = true;
         const input = this.getInput();
         if (!input) return;
         // Hide the input text when is not on first line
         if (!input.style.paddingTop) {
           return;
         }
-        this.hideInputText = true;
         this.revertInputPadding(input);
       }
     },
   },
 };
 </script>
-
-<style scoped lang="less">
-.combobox__input-wrapper {
-  position: relative;
-  display: block;
-}
-
-.combobox__chip-wrapper {
-  position: absolute;
-  margin-left: var(--dt-space-200);
-  margin-right: var(--dt-space-200);
-  padding-left: var(--dt-space-100);
-  max-width: calc(var(--dt-size-100-percent) - var(--dt-space-400));
-  max-height: initial;
-  overflow-y: visible;
-}
-
-.combobox__chip-wrapper-md--collapsed {
-  max-height: 2.8rem;
-  overflow-y: hidden;
-}
-
-.combobox__chip-wrapper-sm--collapsed,
-.combobox__chip-wrapper-xs--collapsed {
-  max-height: 2.5rem;
-  overflow-y: hidden;
-}
-
-.combobox__chip {
-  margin-top: var(--dt-space-300);
-  margin-left: var(--dt-space-200);
-  margin-right: var(--dt-space-200);
-  z-index: var(--zi-base1);
-  max-width: var(--dt-size-100-percent);
-}
-
-.combobox__input {
-  flex-grow: 1;
-}
-
-.combobox__list--loading {
-  text-align: center;
-  padding-top: var(--dt-space-500);
-  padding-bottom: var(--dt-space-500);
-}
-</style>

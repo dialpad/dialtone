@@ -19,6 +19,7 @@ module.exports = {
     'stylelint-less',
     'stylelint-no-px',
   ],
+  fix: true,
   customSyntax: 'postcss-less',
   rules: {
     'at-rule-no-unknown': [
@@ -60,7 +61,7 @@ module.exports = {
     'meowtec/no-px': [
       true,
       {
-        message: 'Use dialtone variables such as line-height: var(--lh-200) or width: var(--size-600) or' +
+        message: 'Use dialtone variables such as line-height: var(--lh-200) or width: var(--size-600) or ' +
         'padding: var(--space-400) rather than directly setting px. See the lib/build/less/variables folder.',
       },
     ],

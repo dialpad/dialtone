@@ -24,12 +24,12 @@
         },
         {
           "text": "For Designers",
-          "link": "/tokens/for-designers",
+          "link": "/tokens/for-designers/",
           "planned": true
         },
         {
           "text": "For Developers",
-          "link": "/tokens/for-developers",
+          "link": "/tokens/for-developers/",
           "planned": true
         }
       ]
@@ -65,7 +65,7 @@
             },
             {
               "text": "Grammar and Mechanics",
-              "link": "/guides/content/grammar-mechanics/"
+              "link": "/guides/content/grammar-and-mechanics/"
             },
             {
               "text": "Help Content",
@@ -77,7 +77,7 @@
             },
             {
               "text": "Voice and Tone",
-              "link": "/guides/content/voice-tone/"
+              "link": "/guides/content/voice-and-tone/"
             }
           ]
         },
@@ -117,11 +117,30 @@
         },
         {
           "text": "Colors",
-          "link": "/design/colors/"
+          "link": "/design/colors/",
+            "children": [
+            {
+              "text": "Usage",
+              "link": "/design/colors/usage/"
+            },
+            {
+              "text": "Color Palette",
+              "link": "/design/colors/palette/"
+            },
+           {
+              "text": "Chart Colors",
+              "link": "/design/colors/chart-colors/"
+            },
+            {
+              "text": "Themes",
+              "link": "/design/colors/themes/"
+            }
+
+          ]
         },
         {
           "text": "Typography",
-          "link": "/design/typography"
+          "link": "/design/typography/"
         },
         {
           "text": "Icons",
@@ -275,6 +294,10 @@
         {
           "text": "Flex, Grow, and Shrink",
           "link": "/utilities/flex/flex-grow-shrink.html"
+        },
+        {
+          "text": "Gap",
+          "link": "/utilities/flex/gap.html"
         },
         {
           "text": "Justify Content",
@@ -656,6 +679,10 @@
           "link": "/components/list-item-group.html"
         },
         {
+          "text": "Loader",
+          "link": "/components/loader.html"
+        },
+        {
           "text": "Modal",
           "link": "/components/modal.html"
         },
@@ -682,6 +709,10 @@
         {
           "text": "Radio Group",
           "link": "/components/radio-group.html"
+        },
+        {
+          "text": "Rich Text Editor",
+          "link": "/components/rich-text-editor.html"
         },
         {
           "text": "Root Layout",

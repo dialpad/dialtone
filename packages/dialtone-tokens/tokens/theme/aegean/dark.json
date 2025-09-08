@@ -1,0 +1,16 @@
+{
+  "shell": {
+    "base": {
+      "color": {
+        "surface": {
+          "value": "{color.teal.100}",
+          "type": "color"
+        },
+        "accent": {
+          "value": "{color.indigo.700}",
+          "type": "color"
+        }
+      }
+    }
+  }
+}

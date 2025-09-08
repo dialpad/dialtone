@@ -5,11 +5,11 @@ status: ready
 thumb: true
 image: assets/images/components/input.png
 storybook: https://dialtone.dialpad.com/vue/?path=/story/components-input--default
-figma_url: https://www.figma.com/file/2adf7JhZOncRyjYiy2joil/DT-Core%3A-Components-7?node-id=8923%3A21866&viewport=-983%2C83%2C0.16&t=xHutRjwo1o5zMTgT-11
+figma_url: https://www.figma.com/design/W58r5BkO8qTw3vem9YieJd/DT9-Component-Library--Rebrand-2025-?node-id=25665-5366
 ---
 
 <code-well-header>
-  <div class="d-d-grid d-gg16 d-g-cols2 d-w100p">
+  <div class="d-d-grid d-g16 d-g-cols2 d-w100p">
     <dt-input label="Label" placeholder="Placeholder" />
     <dt-input label="Label" type="textarea" placeholder="Placeholder" />
   </div>
@@ -36,7 +36,7 @@ This component combines both the `input` and `textarea` elements as options with
 
 </dialtone-usage>
 
-### Best practices
+### Best Practices
 
 - The length of the text input provides a hint to users as to how much text to enter.
 - Only show error validation messages or stylings after a user has interacted with a particular field.
@@ -48,7 +48,7 @@ This component combines both the `input` and `textarea` elements as options with
 We offer different sizes for instances in which the interface requires a smaller or larger input. In general, though, use the base (medium) size input as much as possible, especially in forms.
 
 <code-well-header>
-  <div class="d-d-grid d-gg16 d-g-cols2 d-w100p">
+  <div class="d-d-grid d-g16 d-g-cols2 d-w100p">
     <dt-input label="Extra Small" type="text" placeholder="Placeholder" size="xs" />
     <dt-input label="Extra Small" type="textarea" placeholder="Placeholder" size="xs" />
     <dt-input label="Small" type="text" placeholder="Placeholder" size="sm" />
@@ -190,7 +190,8 @@ htmlCode='
 '
 vueCode='
 <dt-input label="Label" placeholder="Placeholder" />
-<dt-input label="Label" value="Value" />
+<!-- IMPORTANT NOTE: Change model-value to just value in Vue 2 -->
+<dt-input label="Label" model-value="Value" />
 <dt-input label="Label" placeholder="Placeholder" disabled />
 '
 showHtmlWarning />
@@ -220,7 +221,8 @@ htmlCode='
 '
 vueCode='
 <dt-input label="Label" placeholder="Placeholder" type="textarea" />
-<dt-input label="Label" type="textarea" value="Value" />
+<!-- IMPORTANT NOTE: Change model-value to just value in Vue 2 -->
+<dt-input label="Label" type="textarea" model-value="Value" />
 <dt-input label="Label" placeholder="Placeholder" type="textarea" disabled />
 '
 showHtmlWarning />
@@ -261,7 +263,7 @@ vueCode='
 '
 showHtmlWarning />
 
-### With validation states
+### With Validation States
 
 Provides feedback to the user based on their interaction, or lack thereof, with an input.
 
@@ -292,9 +294,10 @@ htmlCode='
 </div>
 '
 vueCode='
-<dt-input label="Label" type="email" value="Value" :messages="[messages.error]"/>
-<dt-input label="Label" type="email" value="Value" :messages="[messages.success]"/>
-<dt-input label="Label" type="email" value="Value" :messages="[messages.warning]"/>
+<!-- IMPORTANT NOTE: Change model-value to just value in Vue 2 -->
+<dt-input label="Label" type="email" model-value="Value" :messages="[messages.error]"/>
+<dt-input label="Label" type="email" model-value="Value" :messages="[messages.success]"/>
+<dt-input label="Label" type="email" model-value="Value" :messages="[messages.warning]"/>
 '
 showHtmlWarning />
 
@@ -325,13 +328,14 @@ htmlCode='
 </div>
 '
 vueCode='
-<dt-input label="Label" type="textarea" value="Value" :messages="[messages.error]"/>
-<dt-input label="Label" type="textarea" value="Value" :messages="[messages.success]"/>
-<dt-input label="Label" type="textarea" value="Value" :messages="[messages.warning]"/>
+<!-- IMPORTANT NOTE: Change model-value to just value in Vue 2 -->
+<dt-input label="Label" type="textarea" model-value="Value" :messages="[messages.error]"/>
+<dt-input label="Label" type="textarea" model-value="Value" :messages="[messages.success]"/>
+<dt-input label="Label" type="textarea" model-value="Value" :messages="[messages.warning]"/>
 '
 showHtmlWarning />
 
-### With multiple validation messages
+### With Multiple Validation Messages
 
 <code-well-header>
   <div class="d-w100p">
@@ -342,11 +346,12 @@ showHtmlWarning />
 <code-example-tabs
 :htmlCode='() => $refs.multipleMessages'
 vueCode='
-<dt-input label="Label" type="email" value="Value" :messages="multipleMessages" />
+<!-- IMPORTANT NOTE: Change model-value to just value in Vue 2 -->
+<dt-input label="Label" type="email" model-value="Value" :messages="multipleMessages" />
 '
 />
 
-### With maximum length validation
+### With Maximum Length Validation
 
 Adds validation for the input length. Make sure to provide the following props:
 
@@ -410,7 +415,7 @@ vueCode='
 '
 />
 
-### With custom maximum length validation message
+### With Custom Maximum Length Validation Message
 
 <code-well-header>
   <div class="d-w100p">
@@ -466,30 +471,20 @@ const validate = () => {
 
 ### Search
 
-<dt-notice
-  kind="warning"
-  :hide-close="true"
-  class="d-wmx100p d-my16"
->
-  <template #default>
-    The use of <code>type="search"</code> is not recommended as it may cause a style collision with a browser's native Shadow DOM, e.g. its clearing functionality. Instead, refer to the below example code if you need to implement a search input with clearing functionality.
-  </template>
-</dt-notice>
-
-Use `type="text"` with a clear button in the `icon` slot. When the input is not empty, the clear button will render and will clears the input field when triggered.
+Use `type="search"` with a clear button in the `icon` slot. When the input is not empty, the clear button will render and will clear the input field when triggered.
 
 <code-well-header>
   <div class="d-w100p">
     <dt-input
       aria-label="Search items"
       placeholder="Search Items"
-      type="text"
-      v-model="inputValue"
+      type="search"
+      v-model="inputSearchValue"
     >
       <template #leftIcon="{ iconSize }">
         <dt-icon name="search" :size="iconSize" />
       </template>
-      <template v-if="inputValue.length !== 0" #rightIcon="{ clear }">
+      <template v-if="inputSearchValue.length !== 0" #rightIcon="{ clear }">
         <dt-button
           kind="muted"
           importance="clear"
@@ -511,7 +506,7 @@ Use `type="text"` with a clear button in the `icon` slot. When the input is not 
 htmlCode='
 <div class="d-input__wrapper">
   <span class="base-input__icon--left d-input-icon--left d-input-icon">...</span>
-  <input type="text" autocomplete="off" class="base-input__input d-input d-input-icon--left d-input-icon--right" placeholder="Search Items">
+  <input type="search" autocomplete="off" class="base-input__input d-input d-input-icon--left d-input-icon--right" placeholder="Search Items">
   <span class="base-input__icon--right d-input-icon--right d-input-icon undefined" data-qa="dt-input-right-icon-wrapper">
     <button class="base-button__button d-btn d-btn--muted d-btn--xs d-btn--circle d-btn--icon-only" data-qa="dt-button" type="button" aria-label="Clear search">
       <span class="base-button__icon d-btn__icon d-btn__icon--left">...</span>
@@ -523,7 +518,7 @@ vueCode='
 <dt-input
   aria-label="Search items"
   placeholder="Search Items"
-  type="text"
+  type="search"
   v-model="inputValue"
 >
   <template #leftIcon="{ iconSize }">
@@ -547,7 +542,7 @@ vueCode='
 '
 showHtmlWarning />
 
-## Icon support
+## Icon Support
 
 <code-well-header>
   <div class="d-stack16 d-w100p">
@@ -761,6 +756,7 @@ showHtmlWarning />
 import { ref } from 'vue';
 
 const inputValue = ref('');
+const inputSearchValue = ref('Some text');
 
 const messages = {
   warning: { "message": "Warning validation message", "type": "warning" },

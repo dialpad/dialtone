@@ -28,7 +28,7 @@ or standalone as SVG files.
 }
 ```
 
-- Run `nx build dialtone-icons`
+- Run `nx run dialtone-icons:build`
 - Add, commit and push your changes.
 - Open a pull request.
 - Once approved it can be merged into staging and will go out in the next release.
@@ -41,7 +41,7 @@ Because our SVG's come from Figma, it's possible to have duplicated identifiers 
 So we're converting our icons into Vue components and using a common function called `getUniqueString()` from [dialtone common utils](../../../common/utils.js)
 to prefix the identifiers of every icon with `dt-icon`, that way even if we have multiple instances of the same icon, they'll have different identifiers.
 
-Generated Vue icons are output to the `src/icons/` folder when you do `nx build dialtone-icons`
+Generated Vue icons are output to the `src/icons/` folder when you do `nx run dialtone-icons:build`
 
 ## Important Folders and Files
 

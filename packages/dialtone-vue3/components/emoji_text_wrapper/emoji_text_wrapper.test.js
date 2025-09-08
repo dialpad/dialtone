@@ -7,7 +7,7 @@ setEmojiAssetUrlLarge('https://mockstorage.com/emojis/', '.svg');
 setCustomEmojiUrl('https://mockstorage.com/emojis/');
 
 const MOCK_EXPECTED_SMILE_SRC = 'https://mockstorage.com/emojis/1f604.svg';
-const MOCK_EXPECTED_OCTOCAT_SRC = 'https://mockstorage.com/emojis/octocat.png';
+const MOCK_EXPECTED_BABY_YODA_SRC = 'https://storage.googleapis.com/uv-beta_custom_emojis/5646620347596800/baby_yoda';
 
 const baseProps = {};
 const baseSlots = {};
@@ -76,7 +76,7 @@ describe('DtEmojiTextWrapper Tests', () => {
           beforeEach(() => {
             setCustomEmojiJson(customEmojiJson);
 
-            mockSlots = { default: 'Content with :octocat: emoji.' };
+            mockSlots = { default: 'Content with :baby_yoda: emoji.' };
 
             updateWrapper();
           });
@@ -89,7 +89,7 @@ describe('DtEmojiTextWrapper Tests', () => {
           });
 
           it('Renders the correct emoji', () => {
-            expect(emoji.attributes('src')).toBe(MOCK_EXPECTED_OCTOCAT_SRC);
+            expect(emoji.attributes('src')).toBe(MOCK_EXPECTED_BABY_YODA_SRC);
           });
         });
 
@@ -141,6 +141,22 @@ describe('DtEmojiTextWrapper Tests', () => {
           it('Renders the correct emoji', () => {
             expect(emoji.attributes('src')).toBe(MOCK_EXPECTED_SMILE_SRC);
           });
+        });
+      });
+
+      describe('When default slot contains html', () => {
+        beforeEach(() => {
+          mockSlots = { default: 'this <strong>noun</strong> being <em>bolded :star_struck:</em> is <!--slightly--> impressive!' }
+
+          updateWrapper();
+        });
+
+        it('Contains emoji component', () => {
+          expect(emoji.exists()).toBe(true);
+        });
+
+        it('Does not render comments as text', () => {
+          expect(wrapper.text()).not.toContain('slightly');
         });
       });
     });

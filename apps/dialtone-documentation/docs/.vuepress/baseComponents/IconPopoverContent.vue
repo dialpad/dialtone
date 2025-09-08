@@ -61,7 +61,7 @@
         aria-label="Copy SVG markup"
       />
     </div>
-    <div class="d-d-flex d-ai-flex-end">
+    <div class="d-d-flex d-ai-flex-end d-bb d-bc-default d-pb16">
       <div class="d-fl-grow1">
         <dt-input
           class="d-ff-mono"
@@ -76,6 +76,33 @@
         class="d-ml8"
         :text="vueExample"
         aria-label="Copy Vue markup"
+      />
+    </div>
+    <div class="d-d-flex d-ai-flex-end">
+      <div class="d-fl-grow1">
+        <dt-input
+          class="d-ff-mono"
+          label="Deprecated"
+          tabindex="-1"
+          readonly
+          size="sm"
+          :value="vueExampleDeprecated"
+        >
+          <template #description>
+            <p>
+              This Vue approach does not include tree-shaking.
+              Please use the Vue snippet above.
+              <dt-link href="/about/whats-new/posts/2024-4-15.html" target="_blank">
+                About this change.
+              </dt-link>
+            </p>
+          </template>
+        </dt-input>
+      </div>
+      <copy-button
+        class="d-ml8"
+        :text="vueExampleDeprecated"
+        aria-label="Copy Vue Deprecated markup"
       />
     </div>
   </div>
@@ -100,6 +127,9 @@ const sizeOptions = computed(() => {
   return sizes.map(item => item.size.toString());
 });
 const vueExample = computed(() => {
+  return `<dt-icon-${props.iconName} size="${selectedSize.value}" />`;
+});
+const vueExampleDeprecated = computed(() => {
   return `<dt-icon name="${props.iconName}" size="${selectedSize.value}" />`;
 });
 const changeIconSize = (size) => {

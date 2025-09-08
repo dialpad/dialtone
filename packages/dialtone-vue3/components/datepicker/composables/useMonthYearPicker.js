@@ -1,6 +1,9 @@
 import { computed, ref, watch } from 'vue';
 import { addMonths, getDate, getMonth, getYear, set, subMonths } from 'date-fns';
-import { formatMonth, getCalendarDays } from '@/components/datepicker/utils.js';
+import { formatMonth, getCalendarDays } from '../utils.js';
+import { INTL_MONTH_FORMAT } from '../datepicker_constants';
+import { returnFirstEl } from '@/common/utils';
+import { DialtoneLocalization } from '@/localization';
 
 export function useMonthYearPicker (props, emits) {
   const selectMonth = ref(getMonth(props.selectedDate));
@@ -8,13 +11,10 @@ export function useMonthYearPicker (props, emits) {
   const highlightedDay = ref(null);
   const focusPicker = ref(0);
   const focusRefs = ref([]);
+  const i18n = new DialtoneLocalization();
 
   const calendarDays = computed(() => {
     return getCalendarDays(selectMonth.value, selectYear.value, highlightedDay.value);
-  });
-
-  const formattedMonth = computed(() => {
-    return (month, format, locale) => formatMonth(month, format, locale);
   });
 
   watch(selectMonth, () => {
@@ -27,6 +27,10 @@ export function useMonthYearPicker (props, emits) {
     emits('calendar-days', calendarDays.value);
   }, { immediate: true });
 
+  function formattedMonth (month) {
+    return formatMonth(month, INTL_MONTH_FORMAT, i18n.currentLocale);
+  }
+
   function setDayRef (el) {
     if (!focusRefs.value.includes(el)) {
       focusRefs.value.push(el);
@@ -34,7 +38,7 @@ export function useMonthYearPicker (props, emits) {
   }
 
   function focusMonthYearPicker () {
-    focusRefs.value[0].$el.focus();
+    returnFirstEl(focusRefs.value[0].$el).focus();
   }
 
   function handleKeyDown (event) {
@@ -43,10 +47,10 @@ export function useMonthYearPicker (props, emits) {
         event.preventDefault();
         if (focusPicker.value === 0) {
           focusPicker.value = 3;
-          focusRefs.value[focusPicker.value].$el.focus();
+          returnFirstEl(focusRefs.value[focusPicker.value].$el).focus();
         } else {
           focusPicker.value--;
-          focusRefs.value[focusPicker.value].$el.focus();
+          returnFirstEl(focusRefs.value[focusPicker.value].$el).focus();
         }
         break;
 
@@ -54,10 +58,10 @@ export function useMonthYearPicker (props, emits) {
         event.preventDefault();
         if (focusPicker.value === 3) {
           focusPicker.value = 0;
-          focusRefs.value[focusPicker.value].$el.focus();
+          returnFirstEl(focusRefs.value[focusPicker.value].$el).focus();
         } else {
           focusPicker.value++;
-          focusRefs.value[focusPicker.value].$el.focus();
+          returnFirstEl(focusRefs.value[focusPicker.value].$el).focus();
         }
         break;
 
@@ -114,6 +118,22 @@ export function useMonthYearPicker (props, emits) {
     changeMonth(-1);
   }
 
+  function previousYearAriaLabel () {
+    return `${i18n.$t('DIALTONE_DATEPICKER_CHANGE_TO')} ${i18n.$t('DIALTONE_DATEPICKER_PREVIOUS_YEAR')} ${selectYear.value - 1}`;
+  }
+
+  function previousMonthAriaLabel () {
+    return `${i18n.$t('DIALTONE_DATEPICKER_CHANGE_TO')} ${i18n.$t('DIALTONE_DATEPICKER_PREVIOUS_MONTH')} ${formattedMonth(selectMonth.value - 1)}`;
+  }
+
+  function nextYearAriaLabel () {
+    return `${i18n.$t('DIALTONE_DATEPICKER_CHANGE_TO')} ${i18n.$t('DIALTONE_DATEPICKER_NEXT_YEAR')} ${selectYear.value + 1}`;
+  }
+
+  function nextMonthAriaLabel () {
+    return `${i18n.$t('DIALTONE_DATEPICKER_CHANGE_TO')} ${i18n.$t('DIALTONE_DATEPICKER_NEXT_MONTH')} ${formattedMonth(selectMonth.value + 1)}`;
+  }
+
   return {
     selectMonth,
     selectYear,
@@ -125,5 +145,9 @@ export function useMonthYearPicker (props, emits) {
     changeYear,
     goToNextMonth,
     goToPrevMonth,
+    previousYearAriaLabel,
+    previousMonthAriaLabel,
+    nextYearAriaLabel,
+    nextMonthAriaLabel,
   };
 }

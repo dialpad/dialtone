@@ -13,11 +13,9 @@ export const argsData = {
   name: 'Jaqueline Nackos',
   avatarSrc: defaultImage,
   avatarColor: '',
-  callButtonTooltip: 'Call',
   hasUnreads: true,
   unreadCount: '55',
   avatarPresence: 'active',
-  unreadCountTooltip: '55 unread messages',
   onClick: action('click'),
   onCall: action('call'),
 };
@@ -77,7 +75,7 @@ export const argTypesData = {
 };
 
 const decorator = () => ({
-  template: `<div style="background-color: var(--dt-theme-sidebar-color-background)" class="d-wmx264 d-p8"><story />
+  template: `<div style="background-color: var(--dt-shell-color-surface-default)" class="d-wmx264 d-p8"><story />
   </div>`,
 });
 

@@ -1,11 +1,11 @@
 ---
-title: Font family
+title: Font Family
 description: Utilities to change an element's font-family.
 ---
 
 <dt-notice
   kind="warning"
-  hideClose="true"
+  :hideClose="true"
   class="d-wmx100p"
 >
   <template #default>
@@ -13,24 +13,12 @@ description: Utilities to change an element's font-family.
   </template>
 </dt-notice>
 
-## Custom
-
-Use `d-ff-custom` to apply the theme's font-family.
-
-<code-well-header class="d-d-flex d-jc-center d-fd-column d-p24 d-bgc-black-200 d-w100p d-hmn102" custom>
-  <p class="d-fs-300 d-ff-custom">The quick brown fox jumps over the lazy dog.</p>
-</code-well-header>
-
-```html
-<p class="d-ff-custom">...</p>
-```
-
-## Sans-serif
+## Sans-Serif
 
 Use `d-ff-sans` to apply a Sans-Serif font stack.
 
-<code-well-header class="d-d-flex d-jc-center d-fd-column d-p24 d-bgc-black-200 d-w100p d-hmn102" custom>
-  <p class="d-fs-300 d-ff-sans">The quick brown fox jumps over the lazy dog.</p>
+<code-well-header>
+  <p class="d-ff-sans">The quick brown fox jumps over the lazy dog.</p>
 </code-well-header>
 
 ```html
@@ -41,8 +29,8 @@ Use `d-ff-sans` to apply a Sans-Serif font stack.
 
 Use `d-ff-mono` to apply a Monospace font stack.
 
-<code-well-header class="d-d-flex d-jc-center d-fd-column d-p24 d-bgc-black-200 d-w100p d-hmn102" custom>
-  <p class="d-fs-300 d-ff-mono">The quick brown fox jumps over the lazy dog.</p>
+<code-well-header>
+  <p class="d-ff-mono">The quick brown fox jumps over the lazy dog.</p>
 </code-well-header>
 
 ```html
@@ -53,8 +41,8 @@ Use `d-ff-mono` to apply a Monospace font stack.
 
 Dialtone supports select marketing fonts and weights. Use the following combinations to apply the marketing font stack.
 
-<code-well-header class="d-d-flex d-jc-center d-fd-column d-p24 d-bgc-black-200 d-w100p d-hmn102" custom>
-  <p class="d-fs-300 d-ff-marketing">The quick brown fox jumps over the lazy dog.</p>
+<code-well-header>
+  <p class="d-ff-marketing">The quick brown fox jumps over the lazy dog.</p>
 </code-well-header>
 
 ```html
@@ -65,36 +53,44 @@ Dialtone supports select marketing fonts and weights. Use the following combinat
   import { fontFamily } from '@data/type.json';
 </script>
 
-## CSS variables
+## CSS Variables
 
-<table class="d-table dialtone-doc-table">
-  <thead>
-    <tr>
-      <th scope="col" class="d-w40p">Variable</th>
-      <th scope="col">Output</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr v-for="{ var: varName, output } in fontFamily.slice(0, -1)">
-      <td class="d-code--sm d-fc-purple-400">var(--ff-{{ varName }})</td>
-      <td class="d-code--sm">{{ output }}</td>
-    </tr>
-  </tbody>
-</table>
+<div v-dt-scrollbar class="d-hmx464 d-bar8 d-ba d-bc-subtle">
+  <div>
+    <table class="d-table dialtone-doc-table">
+      <thead class="d-bgc-primary d-ps-sticky d-zi-base1 d-t0">
+        <tr>
+          <th scope="col" class="d-p0 d-bbw0 d-w40p"><div class="d-p16 d-bb d-bc-default d-bbw1">Variable</div></th>
+          <th scope="col" class="d-p0 d-bbw0"><div class="d-p16 d-bb d-bc-default d-bbw1">Output</div></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr v-for="{ var: varName, output } in fontFamily.slice(0, -1)">
+          <td class="d-code--sm d-docsite-code">var(--ff-{{ varName }})</td>
+          <td class="d-code--sm">{{ output }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
 
 ## Classes
 
-<table class="d-table dialtone-doc-table">
-  <thead>
-    <tr>
-      <th scope="col" class="d-w40p">Class</th>
-      <th scope="col">Output</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr v-for="{ var: varName, output } in fontFamily">
-      <td class="d-code--sm d-fc-purple-400">.d-ff-{{ varName }}</td>
-      <td class="d-code--sm">font-family: {{ output }} !important;</td>
-    </tr>
-  </tbody>
-</table>
+<div v-dt-scrollbar class="d-hmx464 d-bar8 d-ba d-bc-subtle">
+  <div>
+    <table class="d-table dialtone-doc-table">
+      <thead class="d-bgc-primary d-ps-sticky d-zi-base1 d-t0">
+        <tr>
+          <th scope="col" class="d-p0 d-bbw0 d-w40p"><div class="d-p16 d-bb d-bc-default d-bbw1">Class</div></th>
+          <th scope="col" class="d-p0 d-bbw0"><div class="d-p16 d-bb d-bc-default d-bbw1">Output</div></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr v-for="{ var: varName, output } in fontFamily">
+          <td class="d-code--sm d-docsite-code">.d-ff-{{ varName }}</td>
+          <td class="d-code--sm">font-family: {{ output }} !important;</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

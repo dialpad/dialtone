@@ -1,0 +1,141 @@
+name: Publish Web
+
+on:
+  workflow_dispatch:
+    inputs:
+      package:
+        description: 'Select the package you want to publish'
+        required: true
+        default: 'dialtone'
+        type: 'choice'
+        options:
+          - dialtone
+          - dialtone-css
+          - dialtone-emojis
+          - dialtone-icons
+          - dialtone-tokens
+          - dialtone-vue2
+          - dialtone-vue3
+          - eslint-plugin-dialtone
+          - stylelint-plugin-dialtone
+          - postcss-responsive-variations
+  push:
+    branches:
+      - production
+      - alpha
+      - beta
+      - next
+    paths:
+      - '**/package.json'
+
+env:
+  HUSKY: 0
+
+jobs:
+  variables-setup:
+    runs-on: ubuntu-latest
+    outputs:
+      current_branch: ${{ steps.branch-name.outputs.current_branch }}
+      release_tag: ${{ steps.branch-name.outputs.current_branch == 'production' && 'latest' || steps.branch-name.outputs.current_branch }}
+      dialtone_vue3_release_tag: ${{ steps.branch-name.outputs.current_branch == 'production' && 'vue3' || format('vue3-{0}', steps.branch-name.outputs.current_branch) }}
+    steps:
+      - name: Get branch name
+        id: branch-name
+        uses: tj-actions/branch-names@v8
+
+  filter-actions:
+    runs-on: ubuntu-latest
+    outputs:
+      packages: ${{ github.event_name == 'push' && steps.filter-path.outputs.changes || steps.filter-input.outputs.package }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Filter actions by path
+        if: ${{ github.event_name == 'push' }}
+        uses: dorny/paths-filter@v3
+        id: filter-path
+        with:
+          base: ${{ github.ref }}
+          list-files: 'json'
+          filters: |
+            dialtone:
+              - 'package.json'
+            dialtone-css:
+              - 'packages/dialtone-css/package.json'
+            dialtone-emojis:
+              - 'packages/dialtone-emojis/package.json'
+            dialtone-icons:
+              - 'packages/dialtone-icons/package.json'
+            dialtone-tokens:
+              - 'packages/dialtone-tokens/package.json'
+            dialtone-vue2:
+              - 'packages/dialtone-vue2/package.json'
+            dialtone-vue3:
+              - 'packages/dialtone-vue3/package.json'
+            eslint-plugin-dialtone:
+              - 'packages/eslint-plugin-dialtone/package.json'
+            stylelint-plugin-dialtone:
+              - 'packages/stylelint-plugin-dialtone/package.json'
+            postcss-responsive-variations:
+              - 'packages/postcss-responsive-variations/package.json'
+
+      - name: Filter actions by input
+        if: ${{ github.event_name == 'workflow_dispatch' }}
+        id: filter-input
+        run: |
+          echo 'package=["${{ github.event.inputs.package }}"]' >> $GITHUB_OUTPUT
+
+  check-dialpad-member:
+    runs-on: ubuntu-latest
+    steps:
+      # Will prevent the rest of the steps from running on fail
+      - name: Check if user is a dialpad member
+        uses: octokit/request-action@v2.x
+        with:
+          route: GET /orgs/dialpad/members/${{ github.actor }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.DIALTONE_CI_TOKEN }}
+
+  publish:
+    needs: [ variables-setup, check-dialpad-member, filter-actions ]
+    if: ${{ github.event_name == 'workflow_dispatch' || (github.event_name == 'push' && needs.filter-actions.outputs.packages != '[]') }}
+    strategy:
+      fail-fast: false
+      matrix:
+        package: ${{ fromJSON(needs.filter-actions.outputs.packages) }}
+        registry: [ npm, GitHub ]
+        include:
+          - registry: GitHub
+            registry_url: //npm.pkg.github.com/
+          - registry: npm
+            registry_url: //registry.npmjs.org/
+    runs-on: ubuntu-latest
+    permissions:
+      packages: write
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Environment
+        uses: ./.github/actions/setup-environment
+
+      - name: Remove GitHub registry if publishing to npm
+        if: matrix.registry == 'npm'
+        run: |
+          pnpm config delete @dialpad:registry;
+          pnpm config set //registry.npmjs.org/:_authToken=${{ secrets.DIALTONE_NPM_TOKEN }}
+
+      - name: Delay job to avoid npm rate limits
+        if: matrix.package == 'dialtone-vue3'
+        run: sleep 15s
+        shell: bash
+
+      # Publish npm/GitHub
+      - name: Publish ${{ matrix.package }}@${{ env.RELEASE_TAG }}
+        env:
+          RELEASE_TAG: ${{ matrix.package == 'dialtone-vue3' && needs.variables-setup.outputs.dialtone_vue3_release_tag || needs.variables-setup.outputs.release_tag }}
+        run: >
+          pnpm nx run ${{ matrix.package }}:publish
+          --publish-branch=${{ needs.variables-setup.outputs.current_branch }}
+          --tag=${{ env.RELEASE_TAG }}

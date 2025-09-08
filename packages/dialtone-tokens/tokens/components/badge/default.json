@@ -7,64 +7,50 @@
           "type": "color"
         },
         "info": {
-          "value": "{color.surface.info}",
+          "value": "{color.blue.200}",
           "type": "color"
         },
         "success": {
-          "value": "{color.surface.success}",
+          "value": "{color.green.200}",
           "type": "color"
         },
         "warning": {
-          "value": "{color.surface.warning}",
+          "value": "{color.gold.200}",
           "type": "color"
         },
         "critical": {
-          "value": "{color.surface.critical}",
+          "value": "{color.red.200}",
           "type": "color"
         },
         "bulletin": {
-          "value": "{color.brand.purple}",
+          "value": "{color.surface.brand-strong}",
           "type": "color"
         },
         "bulletin-subtle": {
-          "value": "{color.brand.purple}",
-          "type": "color",
-          "$extensions": {
-            "studio.tokens": {
-              "modify": {
-                "type": "alpha",
-                "value": ".1",
-                "space": "hsl"
-              }
-            }
-          }
+          "value": "{color.purple.200}",
+          "type": "color"
         },
         "ai": {
-          "value": "{color.gradient.magenta-purple}",
+          "value": "{color.gradient.gold-red-magenta-purple}",
           "type": "color"
         }
       },
       "foreground": {
         "default": {
-          "value": "{color.foreground.primary}",
+          "value": "{color.black.1000}",
           "type": "color"
         },
         "bulletin": {
-          "value": "{color.neutral.white}",
+          "value": "{color.black.50}",
           "type": "color"
         },
         "bulletin-subtle": {
-          "value": "{color.brand.purple}",
-          "type": "color",
-          "$extensions": {
-            "studio.tokens": {
-              "modify": {
-                "type": "darken",
-                "value": "0.6",
-                "space": "hsl"
-              }
-            }
-          }
+          "value": "{color.purple.550}",
+          "type": "color"
+        },
+        "ai": {
+          "value": "{color.neutral.white}",
+          "type": "color"
         }
       },
       "border": {

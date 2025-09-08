@@ -2,8 +2,11 @@
 <template>
   <dt-popover
     :id="id"
+    ref="popover"
+    :open="hovercardOpen"
     :placement="placement"
     :content-class="contentClass"
+    :dialog-class="dialogClass"
     :fallback-placements="fallbackPlacements"
     :padding="padding"
     :transition="transition ? 'fade' : null"
@@ -13,10 +16,14 @@
     :header-class="headerClass"
     :footer-class="footerClass"
     :append-to="appendTo"
-    :hovercard="true"
-    :timer="timer"
     data-qa="dt-hovercard"
+    :enter-delay="enterDelay"
+    :leave-delay="leaveDelay"
     @opened="(e) => ($emit('opened', e))"
+    @mouseenter-popover="onMouseEnter"
+    @mouseleave-popover="onMouseLeave"
+    @mouseenter-popover-anchor="onMouseEnter"
+    @mouseleave-popover-anchor="onMouseLeave"
   >
     <template #anchor="{ attrs }">
       <!-- @slot Anchor element that activates the hovercard. Usually a button. -->
@@ -42,15 +49,12 @@
 </template>
 
 <script setup>
-import { reactive } from 'vue';
+import { ref, watch, nextTick, onMounted, onBeforeUnmount } from 'vue';
 import { POPOVER_APPEND_TO_VALUES, POPOVER_PADDING_CLASSES, DtPopover } from '@/components/popover/index.js';
-import { TOOLTIP_DIRECTIONS } from '@/components/tooltip/index.js';
+import { TOOLTIP_DIRECTIONS, TOOLTIP_DELAY_MS } from '@/components/tooltip/index.js';
 import { getUniqueString } from '@/common/utils';
-import useTimer from './timer';
 
-const timer = reactive(useTimer());
-
-defineProps({
+const props = defineProps({
   /**
      * Fade transition when the content display is toggled.
      * @type boolean
@@ -59,6 +63,17 @@ defineProps({
   transition: {
     type: Boolean,
     default: false,
+  },
+
+  /**
+     * Controls whether the hovercard is shown. Leaving this null will have the hovercard trigger on hover by default.
+     * If you set this value, the default trigger behavior will be disabled, and you can control it as you need.
+     * Supports .sync modifier
+     * @values null, true, false
+     */
+  open: {
+    type: Boolean,
+    default: null,
   },
 
   /**
@@ -165,6 +180,24 @@ defineProps({
             (appendTo instanceof HTMLElement);
     },
   },
+
+  /**
+   * The enter delay in milliseconds before the hovercard is shown.
+   * @type number
+   */
+  enterDelay: {
+    type: Number,
+    default: TOOLTIP_DELAY_MS,
+  },
+
+  /**
+   * The leave delay in milliseconds before the hovercard is hidden.
+   * @type number
+   */
+  leaveDelay: {
+    type: Number,
+    default: TOOLTIP_DELAY_MS,
+  },
 });
 
 defineEmits([
@@ -176,4 +209,65 @@ defineEmits([
    */
   'opened',
 ]);
+
+const hovercardOpen = ref(props.open);
+const inTimer = ref(null);
+const outTimer = ref(null);
+const anchorEl = ref(null);
+const observer = ref(null);
+const popover = ref(null);
+
+onMounted(() => {
+  nextTick(() => {
+    anchorEl.value = popover.value?.$refs?.anchor?.firstElementChild;
+
+    observer.value = new MutationObserver(() => {
+      if (anchorEl.value && !anchorEl.value.isConnected) {
+        hovercardOpen.value = false;
+      }
+    });
+
+    observer.value.observe(document.body, {
+      childList: true,
+      subtree: true,
+    });
+  });
+});
+
+onBeforeUnmount(() => {
+  if (observer.value) {
+    observer.value.disconnect();
+  }
+  clearTimeout(inTimer);
+  clearTimeout(outTimer);
+});
+watch(() => props.open, (open) => {
+  hovercardOpen.value = open;
+}, { immediate: true });
+
+function setInTimer () {
+  inTimer.value = setTimeout(() => {
+    hovercardOpen.value = true;
+  }, props.enterDelay);
+}
+
+function setOutTimer () {
+  outTimer.value = setTimeout(() => {
+    hovercardOpen.value = false;
+  }, props.leaveDelay);
+}
+
+function onMouseEnter () {
+  if (props.open === null) {
+    clearTimeout(outTimer.value);
+    setInTimer();
+  }
+}
+
+function onMouseLeave () {
+  if (props.open === null) {
+    clearTimeout(inTimer.value);
+    setOutTimer();
+  }
+}
 </script>

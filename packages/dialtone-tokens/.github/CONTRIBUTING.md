@@ -28,7 +28,7 @@ To do this we use:
 - [sd-transforms](https://github.com/tokens-studio/sd-transforms) for web.
 - [transform](../sync-scripts/transform.ts) As a custom translator for [Figma Variables](https://help.figma.com/hc/en-us/articles/15339657135383-Guide-to-variables-in-Figma).
 
-It can also be run as part of `nx build dialtone-tokens` which will build and output all different formats.
+It can also be run as part of `nx run dialtone-tokens:build` which will build and output all different formats.
 
 Next in the process is running Style Dictionary which will output tokens to a variety of different formats.
 We currently output the following:
@@ -40,7 +40,7 @@ We currently output the following:
 - LESS
 - CSS
 
-All of these are output to the dist folder when you do `nx build dialtone-tokens`
+All of these are output to the dist folder when you do `nx run dialtone-tokens:build`
 
 ## Style Dictionary Configuration
 
@@ -56,11 +56,19 @@ Because our design tokens are consumed on a variety of different platforms, we o
 
 ### Web
 
-Our web package is output via npm. Even though it is meant for web we contain the files for all platforms in the package (android, ios) for maximum flexibility. Everything in the `dist` folder after you run `nx build dialtone-tokens` is included in the NPM package. You can access the NPM package here: [@dialpad/dialtone-tokens](https://www.npmjs.com/package/@dialpad/dialtone-tokens)
+Our web package is output via npm. Even though it is meant for web we contain the files for all platforms in the package (android, ios) for maximum flexibility.
+Everything in the `dist` folder after you run `nx run dialtone-tokens:build` is included in the NPM package.
+You can access the NPM package here: [@dialpad/dialtone-tokens](https://www.npmjs.com/package/@dialpad/dialtone-tokens)
 
 ### Android
 
-Upon build, the Android source code is output to `dist/android` folder. If we are looking to publish the package, this source must be compiled into an Android package. This is done via Gradle by running `publish:android-package`. The compiled package will contain kotlin as well as resource files for Dialtone's tokens. The Android package is served through GitHub Packages and can be found here: [design.dialpad.tokens.dialtone-tokens](https://github.com/dialpad/dialtone-tokens/packages/1646082). You do not have to run this command locally unless you are looking to debug something related to the Android package. The android package will be built and released on CI via our regular release process.
+Upon build, the Android source code is output to `dist/android` folder.
+If we are looking to publish the package, this source must be compiled into an Android package.
+This is done via Gradle by running `build:android`.
+The compiled package will contain kotlin as well as resource files for Dialtone's tokens.
+The Android package is served through GitHub Packages and can be found here: [design.dialpad.tokens.dialtone-tokens](https://github.com/dialpad/dialtone-tokens/packages/1646082).
+You do not have to run this command locally unless you are looking to debug something related to the Android package.
+The android package will be built and released on CI via our regular release process.
 
 If you would like to build the Android package locally for debugging purposes you will need to:
 
@@ -74,6 +82,10 @@ sdk.dir=PATH_TO_YOUR_ANDROID_SDK_GOES_HERE
 
 ### iOS
 
-Upon build the iOS swift source code is output to the `dist/ios` folder. The contents of the Swift package are included in `dist_ios` when running `publish:ios-package`. Swift packages are hosted directly from github repositories so we have a separate repository we deploy to to serve this package. This can be found here: [dialtone-tokens-swift](https://github.com/dialpad/dialtone-tokens-swift)
+Upon build the iOS swift source code is output to the `dist/ios` folder.
+The contents of the Swift package are included in `dist_ios` when running `build:ios`.
+Swift packages are hosted directly from github repositories so we have a separate repository we deploy to to serve this package.
+This can be found here: [dialtone-tokens-swift](https://github.com/dialpad/dialtone-tokens-swift)
 
-The deploy process is performed by the github actions workflow `.github/workflows/release.yml` and is triggered whenever we push the production branch. For more info on how to release, see [RELEASING.md](RELEASING.md)
+The deploy process is performed by the github actions workflow `.github/workflows/release.yml` and is triggered whenever we push the production branch.
+For more info on how to release, see [RELEASING.md](RELEASING.md)

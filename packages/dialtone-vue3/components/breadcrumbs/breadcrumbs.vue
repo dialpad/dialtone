@@ -1,6 +1,6 @@
 <template>
   <nav
-    :aria-label="ariaLabel"
+    :aria-label="ariaLabel || i18n.$t('DIALTONE_BREADCRUMBS_ARIA_LABEL')"
     data-qa="dt-breadcrumbs"
     :class="[
       'd-breadcrumbs',
@@ -25,6 +25,7 @@
 import { BREADCRUMBS_INVERTED_MODIFIER } from './breadcrumbs_constants';
 import DtBreadcrumbItem from './breadcrumb_item.vue';
 import utils from '@/common/utils';
+import { DialtoneLocalization } from '@/localization';
 
 /**
  * Breadcrumbs are links used to provide context for the currently-viewed page
@@ -32,6 +33,7 @@ import utils from '@/common/utils';
  * @see https://dialtone.dialpad.com/components/breadcrumbs.html
  */
 export default {
+  compatConfig: { MODE: 3 },
   name: 'DtBreadcrumbs',
 
   components: {
@@ -66,13 +68,14 @@ export default {
      */
     ariaLabel: {
       type: String,
-      default: 'breadcrumb',
+      default: '',
     },
   },
 
   data () {
     return {
       BREADCRUMBS_INVERTED_MODIFIER,
+      i18n: new DialtoneLocalization(),
     };
   },
 

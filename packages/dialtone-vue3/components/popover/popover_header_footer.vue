@@ -28,12 +28,12 @@
       importance="outlined"
       kind="muted"
       circle
-      v-bind="closeButtonProps"
+      :aria-label="closeButtonTitle"
+      :title="closeButtonTitle"
       @click="$emit('close')"
     >
       <template #icon>
-        <dt-icon
-          name="close"
+        <dt-icon-close
           size="300"
         />
       </template>
@@ -43,14 +43,16 @@
 
 <script>
 import { DtButton } from '@/components/button';
-import { DtIcon } from '@/components/icon';
-import { hasSlotContent } from '@/common/utils';
+import { DtIconClose } from '@dialpad/dialtone-icons/vue3';
+import { hasSlotContent, returnFirstEl } from '@/common/utils';
+import { DialtoneLocalization } from '@/localization';
 
 export default {
+  compatConfig: { MODE: 3 },
   name: 'PopoverHeaderFooter',
   components: {
     DtButton,
-    DtIcon,
+    DtIconClose,
   },
 
   props: {
@@ -78,15 +80,6 @@ export default {
       type: Boolean,
       default: false,
     },
-
-    /**
-     * A set of props to be passed into the popover's header close button.
-     * Requires an 'ariaLabel' property.
-     */
-    closeButtonProps: {
-      type: Object,
-      default: () => {},
-    },
   },
 
   emits: [
@@ -102,12 +95,19 @@ export default {
   data () {
     return {
       hasSlotContent,
+      i18n: new DialtoneLocalization(),
     };
+  },
+
+  computed: {
+    closeButtonTitle () {
+      return this.i18n.$t('DIALTONE_CLOSE_BUTTON');
+    },
   },
 
   methods: {
     focusCloseButton () {
-      const closeButton = this.$refs['popover__close-button']?.$el;
+      const closeButton = returnFirstEl(this.$refs['popover__close-button']?.$el);
       closeButton?.focus();
     },
   },

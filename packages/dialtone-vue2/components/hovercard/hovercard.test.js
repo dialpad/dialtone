@@ -59,7 +59,6 @@ describe('DtHovercard Tests', () => {
     vi.useRealTimers();
     vi.clearAllTimers();
     wrapper.destroy();
-    document.body.innerHTML = '';
   });
 
   describe('Presentation Tests', () => {
@@ -95,9 +94,8 @@ describe('DtHovercard Tests', () => {
         await anchor.trigger('mouseleave');
         await vi.runAllTimers();
 
-        content = getHovercardContent();
-
-        expect(content).toBeNull();
+        const dialog = document.querySelector('[data-qa="dt-hovercard__dialog"] > div');
+        expect(dialog.style.display).toBe('none');
       });
     });
 
@@ -120,6 +118,21 @@ describe('DtHovercard Tests', () => {
         content = getHovercardContent();
 
         expect(content).toBeNull();
+      });
+    });
+
+    describe('When anchor is removed from DOM', () => {
+      it('hovercardOpen is set to false', async () => {
+        vi.useFakeTimers();
+        await anchor.trigger('mouseenter');
+        await vi.runAllTimers();
+
+        // Remove anchor from DOM
+        anchor.element.parentNode.removeChild(anchor.element);
+        // Advance timers to allow hovercard to react
+        await vi.runAllTimers();
+
+        expect(wrapper.vm.hovercardOpen).toBe(false);
       });
     });
   });

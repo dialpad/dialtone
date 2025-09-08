@@ -1,6 +1,8 @@
 import { mount } from '@vue/test-utils';
+import { DtIconUser } from '@dialpad/dialtone-icons/vue3';
 import DtAvatar from './avatar.vue';
 import { AVATAR_KIND_MODIFIERS, AVATAR_SIZE_MODIFIERS } from './avatar_constants';
+import { extractInitialsFromName } from './utils';
 
 const MOCK_AVATAR_STUB = vi.fn();
 const MOCK_IMAGE_SOURCE = 'image.png';
@@ -9,6 +11,7 @@ const MOCK_INITIALS = 'JN';
 const MOCK_SIZE = 'lg';
 const MOCK_GROUP = 25;
 const MOCK_CUSTOM_CLASS = 'my-custom-class';
+const MOCK_ICON_SLOT = '<dt-icon-user />';
 let MOCK_ELEMENT = null;
 
 const baseProps = {
@@ -19,22 +22,31 @@ const baseAttrs = {};
 
 let mockProps = {};
 let mockAttrs = {};
+let mockSlots = {};
 
 describe('DtAvatar Tests', () => {
   let wrapper;
   let image;
   let count;
   let presence;
+  let iconWrapper;
 
   const updateWrapper = () => {
     wrapper = mount(DtAvatar, {
       props: { ...baseProps, ...mockProps },
       attrs: { ...baseAttrs, ...mockAttrs },
+      slots: { ...mockSlots },
+      global: {
+        components: {
+          DtIconUser,
+        },
+      },
     });
 
     image = wrapper.find('[data-qa="dt-avatar-image"]');
     count = wrapper.find('[data-qa="dt-avatar-count"]');
     presence = wrapper.find('[data-qa="dt-presence"]');
+    iconWrapper = wrapper.find('[data-qa="dt-avatar-icon"]');
   };
 
   beforeEach(() => {
@@ -43,6 +55,7 @@ describe('DtAvatar Tests', () => {
 
   afterEach(() => {
     mockProps = {};
+    mockSlots = {};
   });
 
   describe('Presentation Tests', () => {
@@ -76,19 +89,23 @@ describe('DtAvatar Tests', () => {
       });
     });
 
-    describe('When the iconName is provided', () => {
+    describe('When the icon slot is provided', () => {
       beforeEach(() => {
-        mockProps = { iconName: 'accessibility' };
+        mockSlots = { icon: MOCK_ICON_SLOT };
 
         updateWrapper();
       });
 
-      it('icon should exist', () => {
-        expect(wrapper.find('svg').exists()).toBeTruthy();
+      it('should render icon wrapper', () => {
+        expect(iconWrapper.exists()).toBeTruthy();
       });
 
       it('should have correct class', () => {
-        expect(wrapper.find('svg').classes(AVATAR_KIND_MODIFIERS.icon)).toBe(true);
+        expect(iconWrapper.classes(AVATAR_KIND_MODIFIERS.icon)).toBe(true);
+      });
+
+      it('should render the custom icon', () => {
+        expect(iconWrapper.findComponent(DtIconUser).exists()).toBe(true);
       });
     });
 
@@ -320,6 +337,41 @@ describe('DtAvatar Tests', () => {
         MOCK_ELEMENT = wrapper.find('[data-qa="dt-avatar"]');
 
         expect(wrapper.find('.my-custom-class').html()).toBe(MOCK_ELEMENT.html());
+      });
+    });
+  });
+
+  describe('extractInitialsFromName Utility Tests', () => {
+    describe('When provided with valid names', () => {
+      it('should extract initials from first and last name', () => {
+        expect(extractInitialsFromName('John Doe')).toBe('JD');
+      });
+
+      it('should extract initials from multiple names (first and last only)', () => {
+        expect(extractInitialsFromName('John Michael Doe')).toBe('JD');
+      });
+    });
+
+    describe('When provided with names containing special characters', () => {
+      it('should remove special characters and extract initials', () => {
+        expect(extractInitialsFromName('John Doe (General Manager)')).toBe('JM');
+        expect(extractInitialsFromName('John Doe [Contractor]')).toBe('JC');
+      });
+
+      it('should handle names with numbers', () => {
+        expect(extractInitialsFromName('John Doe 123')).toBe('J1');
+      });
+    });
+
+    describe('When provided with international names', () => {
+      it('should handle Japanese kanji characters', () => {
+        expect(extractInitialsFromName('田中太郎')).toBe('田中');
+      });
+    });
+
+    describe('When provided with emojis', () => {
+      it('should remove emojis from names', () => {
+        expect(extractInitialsFromName('John Doe 😀')).toBe('JD');
       });
     });
   });

@@ -28,6 +28,7 @@
 import { BUTTON_ICON_SIZES, DtButton } from '@/components/button';
 
 export default {
+  compatConfig: { MODE: 3 },
   name: 'SplitButtonAlpha',
 
   components: {

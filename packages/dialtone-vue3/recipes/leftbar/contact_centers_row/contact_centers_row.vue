@@ -1,37 +1,38 @@
 <template>
   <div
     :class="[
-      'dt-leftbar-row__container',
-      { 'dt-leftbar-row__container--off-duty': $slots.timer },
+      'd-recipe-leftbar-row__container',
+      { 'd-recipe-leftbar-row__container--off-duty': $slots.timer },
     ]"
+    v-bind="addClassStyleAttrs($attrs)"
   >
     <div
       :class="leftbarContactCentersRowClasses"
       data-qa="dt-recipe-contact-centers-row"
     >
       <a
-        class="dt-leftbar-row__primary"
-        :data-qa="$attrs['data-qa'] ?? 'dt-leftbar-row-link'"
+        class="d-recipe-leftbar-row__primary"
+        :data-qa="$attrs['data-qa'] ?? 'd-recipe-leftbar-row-link'"
         :aria-label="getAriaLabel"
         :title="description"
         :href="$attrs.href ?? 'javascript:void(0)'"
-        v-bind="$attrs"
+        v-bind="removeClassStyleAttrs($attrs)"
         v-on="contactRowListeners"
         @click="$emit('click', $event)"
       >
-        <div class="dt-leftbar-row__alpha">
+        <div class="d-recipe-leftbar-row__alpha">
           <dt-icon-headphones
             size="300"
-            data-qa="dt-leftbar-row-icon"
+            data-qa="dt-recipe-leftbar-row-icon"
           />
         </div>
         <div
-          class="dt-leftbar-row__label"
+          class="d-recipe-leftbar-row__label"
           :style="`flex-basis: ${labelWidth}`"
         >
           <dt-emoji-text-wrapper
-            class="dt-leftbar-row__description"
-            data-qa="dt-leftbar-row-description"
+            class="d-recipe-leftbar-row__description"
+            data-qa="dt-recipe-leftbar-row-description"
             size="200"
           >
             {{ description }}
@@ -40,23 +41,24 @@
       </a>
       <div
         v-if="!hideActions"
-        class="dt-leftbar-row__omega"
+        class="d-recipe-leftbar-row__omega"
       >
         <slot name="right" />
-        <div class="dt-leftbar-row__action-container">
+        <div class="d-recipe-leftbar-row__action-container">
           <dt-badge
             v-if="showUnreadCount"
-            class="dt-leftbar-row__unread-badge"
-            data-qa="dt-leftbar-row-unread-badge"
+            class="d-recipe-leftbar-row__unread-badge"
+            data-qa="dt-recipe-leftbar-row-unread-badge"
             kind="count"
             type="bulletin"
           >
             {{ unreadCount }}
           </dt-badge>
           <dt-button
-            class="dt-leftbar-row__action"
-            data-qa="dt-leftbar-row-action-button"
-            :aria-label="menuButtonAriaLabel"
+            class="d-recipe-leftbar-row__action"
+            data-qa="dt-recipe-leftbar-row-action-button"
+            :aria-label="menuButtonLabel"
+            :title="menuButtonLabel"
             importance="clear"
             size="xs"
             circle
@@ -69,21 +71,22 @@
         </div>
       </div>
     </div>
-    <div class="dt-leftbar-row__bottom">
+    <div class="d-recipe-leftbar-row__bottom">
       <slot name="timer" />
     </div>
   </div>
 </template>
 
 <script>
-import { extractVueListeners, safeConcatStrings } from '@/common/utils';
+import { extractVueListeners, safeConcatStrings, removeClassStyleAttrs, returnFirstEl, addClassStyleAttrs } from '@/common/utils';
 import { DtBadge } from '@/components/badge';
 import { DtButton } from '@/components/button';
-import DtEmojiTextWrapper from '@/components/emoji_text_wrapper/emoji_text_wrapper.vue';
-import DtIconChevronDown from '@dialpad/dialtone-icons/vue3/chevron-down';
-import DtIconHeadphones from '@dialpad/dialtone-icons/vue3/headphones';
+import { DtEmojiTextWrapper } from '@/components/emoji_text_wrapper';
+import { DtIconChevronDown, DtIconHeadphones } from '@dialpad/dialtone-icons/vue3';
+import { DialtoneLocalization } from '@/localization';
 
 export default {
+  compatConfig: { MODE: 3 },
   name: 'DtRecipeContactCentersRow',
 
   components: {
@@ -135,14 +138,10 @@ export default {
     unreadCount: {
       type: String,
       default: null,
-    },
-
-    /**
-     * Aria label for the menu button.
-     */
-    menuButtonAriaLabel: {
-      type: String,
-      required: true,
+      validator (value) {
+        if (!value) return true;
+        return /^\d+\+?$/.test(value);
+      },
     },
   },
 
@@ -167,25 +166,30 @@ export default {
   data () {
     return {
       labelWidth: 'auto',
+      i18n: new DialtoneLocalization(),
     };
   },
 
   computed: {
     leftbarContactCentersRowClasses () {
       return [
-        'dt-leftbar-row',
-        'dt-leftbar-row--contact-centers',
+        'd-recipe-leftbar-row',
+        'd-recipe-leftbar-row--contact-centers',
         {
-          'dt-leftbar-row--unread-count': this.showUnreadCount,
-          'dt-leftbar-row--selected': this.selected,
+          'd-recipe-leftbar-row__unread-count': this.showUnreadCount,
+          'd-recipe-leftbar-row--selected': this.selected,
         },
       ];
     },
 
     getAriaLabel () {
+      const count = isNaN(this.unreadCount) ? this.unreadCount : Number(this.unreadCount);
       return this.ariaLabel
         ? this.ariaLabel
-        : safeConcatStrings([this.description, this.unreadCountTooltip]);
+        : safeConcatStrings([
+          this.description,
+          this.i18n.$t('DIALTONE_UNREAD_MESSAGE_COUNT_TEXT', { unreadCount: count }),
+        ]);
     },
 
     contactRowListeners () {
@@ -194,6 +198,10 @@ export default {
 
     showUnreadCount () {
       return !!this.unreadCount;
+    },
+
+    menuButtonLabel () {
+      return this.i18n.$t('DIALTONE_CONTACT_CENTERS_ROW_MENU_BUTTON_LABEL');
     },
   },
 
@@ -209,7 +217,7 @@ export default {
 
   mounted () {
     this.resizeObserver = new ResizeObserver(this.adjustLabelWidth);
-    this.resizeObserver.observe(this.$el);
+    this.resizeObserver.observe(returnFirstEl(this.$el));
     this.adjustLabelWidth();
   },
 
@@ -218,17 +226,16 @@ export default {
   },
 
   methods: {
+    removeClassStyleAttrs,
+    addClassStyleAttrs,
+
     adjustLabelWidth () {
-      const labelWidth = this.$el?.querySelector('.dt-leftbar-row__primary')?.clientWidth || 0;
-      const omegaWidth = this.$el?.querySelector('.dt-leftbar-row__omega')?.clientWidth || 0;
-      const alphaWidth = this.$el?.querySelector('.dt-leftbar-row__alpha')?.clientWidth || 0;
+      const labelWidth = returnFirstEl(this.$el)?.querySelector('.d-recipe-leftbar-row__primary')?.clientWidth || 0;
+      const omegaWidth = returnFirstEl(this.$el)?.querySelector('.d-recipe-leftbar-row__omega')?.clientWidth || 0;
+      const alphaWidth = returnFirstEl(this.$el)?.querySelector('.d-recipe-leftbar-row__alpha')?.clientWidth || 0;
       const paddings = 12;
       this.labelWidth = labelWidth - (omegaWidth + alphaWidth + paddings) + 'px';
     },
   },
 };
 </script>
-
-<style lang="less" scoped>
-@import "../style/leftbar_row.less";
-</style>

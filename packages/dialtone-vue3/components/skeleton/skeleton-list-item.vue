@@ -35,6 +35,7 @@ import DtSkeletonShape from './skeleton-shape.vue';
 import DtSkeletonParagraph from './skeleton-paragraph.vue';
 
 export default {
+  compatConfig: { MODE: 3 },
   name: 'DtSkeletonListItem',
 
   components: {

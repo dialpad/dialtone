@@ -1,17 +1,16 @@
 <template>
   <time
-    data-qa="dt-time-pill"
+    data-qa="dt-recipe-time-pill"
     :dateTime="dateTime"
-    class="dt-time-pill"
+    class="d-recipe-time-pill"
   >
     {{ dateTimeDisplay }}
   </time>
 </template>
 
 <script>
-import {} from './time_pill_constants';
-
 export default {
+  compatConfig: { MODE: 3 },
   name: 'DtRecipeTimePill',
 
   props: {
@@ -42,18 +41,3 @@ export default {
   },
 };
 </script>
-
-<style lang="less">
-.dt-time-pill {
-  border: var(--dt-size-100) solid;
-  border-radius: var(--dt-size-radius-pill);
-  border-width: var(--dt-size-100);
-  --bco: 100%;
-  border-color: var(--dt-color-black-300);
-  padding-left: var(--dt-space-500);
-  padding-right: var(--dt-space-500);
-  padding-top: var(--dt-space-300);
-  padding-bottom: var(--dt-space-300);
-  font-size: var(--dt-font-size-100);
-}
-</style>

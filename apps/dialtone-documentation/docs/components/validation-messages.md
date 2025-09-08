@@ -5,7 +5,7 @@ thumb: true
 image: assets/images/components/validation-messages.png
 description: Validation messages are used to convey information to the user about the current state of the input element. These messages can have an error, warning or success type.
 storybook: https://dialtone.dialpad.com/vue/?path=/story/components-validation-messages--default
-figma_url: https://www.figma.com/file/2adf7JhZOncRyjYiy2joil/DT-Core%3A-Components-7?node-id=11399%3A76354&t=LqzEvQfr3DMHh7Og-11
+figma_url: https://www.figma.com/design/W58r5BkO8qTw3vem9YieJd/DT9-Component-Library--Rebrand-2025-?node-id=11399-76353
 ---
 
 <code-well-header>
@@ -14,6 +14,10 @@ figma_url: https://www.figma.com/file/2adf7JhZOncRyjYiy2joil/DT-Core%3A-Componen
     :validationMessages='[{"message":"Positive validation message","type":"success"}]'
   />
 </code-well-header>
+
+## Usage
+
+Validation messages are typically paired with an input element. They are currently built in to some of our shared input components such as `dt-input` and `dt-radio-group`.
 
 ## Variants
 
@@ -72,7 +76,7 @@ showHtmlWarning />
 <code-well-header>
   <dt-validation-messages
     id="sample--04"
-    :validationMessages='[{"message":"Critical validation message","type":"warning"}]'
+    :validationMessages='[{"message":"Warning validation message","type":"warning"}]'
   />
 </code-well-header>
 
@@ -80,14 +84,14 @@ showHtmlWarning />
 htmlCode='
 <div class="base-input__messages d-validation-message__container">
   <div role="status" aria-live="polite" class="base-input__message d-validation-message base-input__message--warning d-validation-message--warning">
-    <p>Critical validation message</p>
+    <p>Warning validation message</p>
   </div>
 </div>
 '
 vueCode='
 <dt-validation-messages
   id="sample--04"
-  :validationMessages=`[{"message":"Critical validation message","type":"warning"}]`
+  :validationMessages=`[{"message":"Warning validation message","type":"warning"}]`
 />
 '
 showHtmlWarning />

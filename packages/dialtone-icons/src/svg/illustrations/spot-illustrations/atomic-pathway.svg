@@ -1,0 +1,20 @@
+<svg width="200" height="200" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+<circle cx="74.9676" cy="111.584" r="57.5418" stroke="var(--dt-color-surface-contrast)" stroke-dasharray="2 2"/>
+<circle cx="74.968" cy="111.584" r="35.4006" fill="url(#paint0_linear_1442_183)"/>
+<circle cx="5.82409" cy="5.82409" r="5.82409" transform="matrix(-1 0 0 1 186.643 50.2524)" fill="var(--dt-color-surface-contrast)"/>
+<circle cx="5.82409" cy="5.82409" r="5.82409" transform="matrix(-1 0 0 1 44.8509 17.1189)" fill="var(--dt-color-surface-contrast)"/>
+<circle cx="167.268" cy="157.963" r="6.17617" fill="var(--dt-color-surface-contrast)"/>
+<circle cx="70.6146" cy="186.352" r="6.84948" fill="var(--dt-color-surface-contrast)"/>
+<circle cx="100.088" cy="100.088" r="96.5883" stroke="var(--dt-color-surface-contrast)" stroke-dasharray="2 2"/>
+<path d="M127.841 92.7378V111.349" stroke="var(--dt-color-surface-contrast)" stroke-width="2.27211" stroke-miterlimit="10"/>
+<path d="M118.533 102.046H137.144" stroke="var(--dt-color-surface-contrast)" stroke-width="2.27211" stroke-miterlimit="10"/>
+<path d="M121.256 95.4614L134.421 108.626" stroke="var(--dt-color-surface-contrast)" stroke-width="2.27211" stroke-miterlimit="10"/>
+<path d="M121.256 108.626L134.421 95.4614" stroke="var(--dt-color-surface-contrast)" stroke-width="2.27211" stroke-miterlimit="10"/>
+<defs>
+<linearGradient id="paint0_linear_1442_183" x1="121.996" y1="160.057" x2="83.1019" y2="63.6407" gradientUnits="userSpaceOnUse">
+<stop offset="0.297344" stop-color="#7C52FF"/>
+<stop offset="0.762314" stop-color="#F9008E"/>
+<stop offset="1" stop-color="#F6AB3C"/>
+</linearGradient>
+</defs>
+</svg>

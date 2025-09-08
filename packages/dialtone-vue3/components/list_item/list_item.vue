@@ -1,21 +1,31 @@
-<!-- eslint-disable vuejs-accessibility/mouse-events-have-key-events -->
 <template>
   <component
     :is="elementType"
     :id="id"
-    :class="['dt-list-item', {
-      'dt-list-item--focusable': isFocusable,
-      'dt-list-item--highlighted': isHighlighted,
-      'dt-list-item--static': !isHoverable,
-    }]"
+    :class="[
+      'd-list-item',
+      {
+        'd-list-item--focusable': isFocusable,
+        'd-list-item--highlighted': isHighlighted,
+        'd-list-item--static': !isHoverable,
+      }]"
     :tabindex="isFocusable ? 0 : -1"
     :role="role"
     :aria-selected="role === 'listitem' ? undefined : isHighlighted"
     v-on="listItemListeners"
   >
-    <component
-      :is="listItemType"
-      v-if="listItemType"
+    <dt-item-layout
+      v-if="isDefaultType"
+      unstyled
+      :class="['d-list-item__wrapper', wrapperClass]"
+      left-class="d-list-item__left"
+      content-class="d-list-item__content"
+      title-class="d-list-item__title"
+      subtitle-class="d-list-item__subtitle"
+      bottom-class="d-list-item__bottom"
+      right-class="d-list-item__right"
+      selected-class="d-list-item__selected"
+      data-qa="dt-list-item-wrapper"
     >
       <template
         v-for="(_, slotName) in $slots"
@@ -28,13 +38,9 @@
         v-if="selected"
         #selected
       >
-        <dt-icon
-          name="check"
-          size="400"
-          class="dt-list-item--selected-icon"
-        />
+        <dt-icon-check size="400" />
       </template>
-    </component>
+    </dt-item-layout>
     <!-- @slot slot for the main content -->
     <slot v-else />
   </component>
@@ -46,7 +52,7 @@ import {
   LIST_ITEM_NAVIGATION_TYPES,
 } from './list_item_constants';
 import utils from '@/common/utils';
-import { DtIcon } from '@/components/icon';
+import { DtIconCheck } from '@dialpad/dialtone-icons/vue3';
 import { DtItemLayout } from '@/components/item_layout';
 
 const ROLES = ['listitem', 'menuitem', 'option'];
@@ -56,11 +62,12 @@ const ROLES = ['listitem', 'menuitem', 'option'];
  * @see https://dialtone.dialpad.com/components/list_item.html
  */
 export default {
+  compatConfig: { MODE: 3 },
   name: 'DtListItem',
 
   components: {
     DtItemLayout,
-    DtIcon,
+    DtIconCheck,
   },
 
   /**
@@ -126,6 +133,17 @@ export default {
       type: Boolean,
       default: false,
     },
+
+    /**
+     * Additional Classes to apply to the wrapper element,
+     * note: it only applies on "default" type
+     * Can accept all of: String, Object, and Array, i.e. has the
+     * same api as Vue's built-in handling of the class attribute.
+     */
+    wrapperClass: {
+      type: [String, Object, Array],
+      default: '',
+    },
   },
 
   emits: [
@@ -152,13 +170,6 @@ export default {
      * @type {MouseEvent}
      */
     'mouseleave',
-
-    /**
-     * Mouse down event
-     *
-     * @event mousedown
-     */
-    'mousedown',
   ],
 
   data () {
@@ -169,13 +180,8 @@ export default {
   },
 
   computed: {
-    listItemType () {
-      switch (this.type) {
-        case LIST_ITEM_TYPES.DEFAULT:
-          return DtItemLayout;
-        default:
-          return null;
-      }
+    isDefaultType () {
+      return this.type === LIST_ITEM_TYPES.DEFAULT;
     },
 
     listItemListeners () {
@@ -240,34 +246,3 @@ export default {
   },
 };
 </script>
-
-<style lang="less">
-.dt-list-item {
-  list-style: none;
-  background-color: var(--dt-action-color-background-muted-default);
-
-  &:not(.dt-list-item--static) {
-    cursor: pointer;
-    border-radius: var(--dt-size-radius-300);
-  }
-
-  &--focusable:focus,
-  &--focusable:focus-within,
-  &--highlighted {
-    background-color: var(--dt-action-color-background-muted-hover);
-  }
-
-  &--highlighted:active {
-    background-color: var(--dt-action-color-background-muted-active);
-  }
-
-  &--selected-icon {
-    margin-left: var(--dt-space-400);
-  }
-
-  :focus-visible {
-    outline: none;
-    box-shadow: var(--dt-shadow-focus);
-  }
-}
-</style>

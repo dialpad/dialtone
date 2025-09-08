@@ -12,7 +12,6 @@
 
 <script>
 import { nodeViewProps, NodeViewWrapper } from '@tiptap/vue-2';
-
 import { DtEmoji } from '@/components/emoji';
 
 export default {

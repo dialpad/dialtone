@@ -1,12 +1,12 @@
 <template>
   <div
-    class="dt-attachment-carousel"
+    class="d-recipe-attachment-carousel"
     role="presentation"
   >
     <ul
       v-if="mediaList.length > 0"
       ref="carousel"
-      class="dt-attachment-carousel__media-list"
+      class="d-recipe-attachment-carousel__media-list"
       @scroll="handleScroll"
     >
       <!-- media list -->
@@ -16,9 +16,6 @@
         :key="`media-${index}`"
         :index="index"
         :media-item="mediaItem"
-        :close-aria-label="closeAriaLabel"
-        :click-to-open-aria-label="clickToOpenAriaLabel"
-        :progressbar-aria-label="progressbarAriaLabel"
         @remove-media="removeMediaItem(index)"
         @focusin="onItemFocus"
       />
@@ -28,16 +25,15 @@
     <dt-button
       v-show="showLeftArrow"
       tabindex="-1"
-      :aria-label="leftArrowAriaLabel"
-      class="dt-attachment-carousel__arrow dt-attachment-carousel__arrow--left"
+      :aria-label="i18n.$t('DIALTONE_ATTACHMENT_CAROUSEL_LEFT_ARROW_ARIA_LABEL')"
+      class="d-recipe-attachment-carousel__arrow d-recipe-attachment-carousel__arrow--left"
       circle
       size="xs"
       importance="clear"
       @click="leftScroll"
     >
       <template #icon>
-        <dt-icon
-          name="arrow-left"
+        <dt-icon-arrow-left
           size="100"
         />
       </template>
@@ -45,16 +41,15 @@
     <dt-button
       v-show="showRightArrow"
       tabindex="-1"
-      :aria-label="rightArrowAriaLabel"
-      class="dt-attachment-carousel__arrow dt-attachment-carousel__arrow--right"
+      :aria-label="i18n.$t('DIALTONE_ATTACHMENT_CAROUSEL_RIGHT_ARROW_ARIA_LABEL')"
+      class="d-recipe-attachment-carousel__arrow d-recipe-attachment-carousel__arrow--right"
       circle
       size="xs"
       importance="clear"
       @click="rightScroll"
     >
       <template #icon>
-        <dt-icon
-          name="arrow-right"
+        <dt-icon-arrow-right
           size="100"
         />
       </template>
@@ -63,8 +58,9 @@
 </template>
 
 <script>
-import { DtIcon } from '@/components/icon';
+import { DtIconArrowRight, DtIconArrowLeft } from '@dialpad/dialtone-icons/vue2';
 import { DtButton } from '@/components/button';
+import { DialtoneLocalization } from '@/localization';
 
 import DtImageCarousel from './media_components/image_carousel.vue';
 
@@ -75,11 +71,10 @@ export default {
 
   components: {
     DtButton,
-    DtIcon,
+    DtIconArrowRight,
+    DtIconArrowLeft,
     DtImageCarousel,
   },
-
-  mixins: [],
 
   /* inheritAttrs: false is generally an option we want to set on library
     components. This allows any attributes passed in that are not recognized
@@ -101,31 +96,6 @@ export default {
       type: Array,
       default: () => [],
     },
-
-    closeAriaLabel: {
-      type: String,
-      required: true,
-    },
-
-    clickToOpenAriaLabel: {
-      type: String,
-      required: true,
-    },
-
-    progressbarAriaLabel: {
-      type: String,
-      required: true,
-    },
-
-    leftArrowAriaLabel: {
-      type: String,
-      required: true,
-    },
-
-    rightArrowAriaLabel: {
-      type: String,
-      required: true,
-    },
   },
 
   emits: [
@@ -144,6 +114,7 @@ export default {
       showRightArrow: true,
       showLeftArrow: false,
       isMounted: false,
+      i18n: new DialtoneLocalization(),
     };
   },
 
@@ -205,50 +176,3 @@ export default {
   },
 };
 </script>
-
-<style lang="less">
-.dt-attachment-carousel {
-  position: relative;
-  max-height: 100px;
-  width: var(--dt-space-1000);
-}
-
-.dt-attachment-carousel__media-list {
-  display: flex;
-  flex-direction: row;
-  padding-left: 0px;
-  overflow-x: scroll;
-  &::-webkit-scrollbar {
-    display: none;
-  }
-}
-
-.dt-attachment-carousel__arrow {
-  position: absolute;
-  opacity: 0;
-
-  .dt-attachment-carousel:hover & {
-    opacity: 1;
-  }
-  background-color: var(--dt-color-neutral-white);
-  top: var(--dt-space-30-percent);
-  border: var(--dt-space-100) solid;
-  border-width: var(--dt-size-100);
-  border-color: var(--bc-default);
-}
-.dt-attachment-carousel__arrow--left {
-  left: var(--dt-space-300);
-}
-.dt-attachment-carousel__arrow--right {
-  right: var(--dt-space-300);
-}
-
-.dt-attachment-carousel__image-viewer {
-  height: var(--dt-size-700);
-  width: var(--dt-size-700);
-  border-radius: var(--br4);
-  border: var(--dt-space-100) solid;
-  border-width: var(--dt-size-350);
-  border-color: var(--dt-color-border-subtle);
-}
-</style>

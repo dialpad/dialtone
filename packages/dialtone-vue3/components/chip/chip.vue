@@ -3,17 +3,17 @@
     <component
       :is="interactive ? 'button' : 'span'"
       :id="id"
-      :type="interactive && 'button'"
-      :class="chipClasses()"
-      data-qa="dt-chip"
-      :aria-labelledby="ariaLabel ? undefined : `${id}-content`"
       :aria-label="ariaLabel"
+      :aria-labelledby="ariaLabel ? undefined : `${id}-content`"
+      :class="chipClasses()"
+      :type="interactive && 'button'"
+      data-qa="dt-chip"
       v-on="chipListeners"
     >
       <span
         v-if="hasSlotContent($slots.icon)"
-        data-qa="dt-chip-icon"
         class="d-chip__icon"
+        data-qa="dt-chip-icon"
       >
         <!-- @slot slot for Chip icon -->
         <slot name="icon" />
@@ -28,8 +28,8 @@
       <span
         v-if="hasSlotContent($slots.default)"
         :id="`${id}-content`"
-        data-qa="dt-chip-label"
         :class="['d-chip__text', contentClass]"
+        data-qa="dt-chip-label"
       >
         <!-- @slot slot for Content within chip -->
         <slot />
@@ -37,15 +37,14 @@
     </component>
     <dt-button
       v-if="!hideClose"
-      v-bind="closeButtonProps"
       :class="chipCloseButtonClasses()"
       data-qa="dt-chip-close"
-      :aria-label="closeButtonProps.ariaLabel"
+      :aria-label="closeButtonTitle"
+      :title="closeButtonTitle"
       @click="$emit('close')"
     >
       <template #icon>
-        <dt-icon
-          name="close"
+        <dt-icon-close
           :size="closeButtonIconSize"
         />
       </template>
@@ -55,13 +54,14 @@
 
 <script>
 import { DtButton } from '@/components/button';
-import { DtIcon } from '@/components/icon';
+import { DtIconClose } from '@dialpad/dialtone-icons/vue3';
 import {
   CHIP_CLOSE_BUTTON_SIZE_MODIFIERS,
   CHIP_SIZE_MODIFIERS,
   CHIP_ICON_SIZES,
 } from './chip_constants';
 import { getUniqueString, hasSlotContent } from '@/common/utils';
+import { DialtoneLocalization } from '@/localization';
 
 /**
  * A chip is a compact UI element that provides brief, descriptive information about an element.
@@ -70,25 +70,15 @@ import { getUniqueString, hasSlotContent } from '@/common/utils';
  * @see https://dialtone.dialpad.com/components/chip.html
  */
 export default {
+  compatConfig: { MODE: 3 },
   name: 'DtChip',
 
   components: {
     DtButton,
-    DtIcon,
+    DtIconClose,
   },
 
   props: {
-    /**
-     * A set of props to be passed into the modal's close button. Requires an 'ariaLabel' property.
-     */
-    closeButtonProps: {
-      type: Object,
-      default: function () { return { ariaLabel: 'close' }; },
-      validator: (props) => {
-        return !!props.ariaLabel;
-      },
-    },
-
     /**
      * Hides the close button on the chip
      * @values true, false
@@ -175,12 +165,21 @@ export default {
      * @type {KeyboardEvent}
      */
     'keyup',
+
+    /**
+     * Native chip key down event
+     *
+     * @event keydown
+     * @type {KeyboardEvent}
+     */
+    'keydown',
   ],
 
   data () {
     return {
       isActive: false,
       hasSlotContent,
+      i18n: new DialtoneLocalization(),
     };
   },
 
@@ -191,18 +190,26 @@ export default {
           if (this.interactive) this.$emit('click', event);
         },
 
-        keyup: event => {
+        keydown: event => {
           if (event.code?.toLowerCase() === 'delete') {
             this.onClose();
           } else {
-            this.$emit('keyup', event);
+            this.$emit('keydown', event);
           }
+        },
+
+        keyup: event => {
+          this.$emit('keyup', event);
         },
       };
     },
 
     closeButtonIconSize () {
       return CHIP_ICON_SIZES[this.size];
+    },
+
+    closeButtonTitle () {
+      return this.i18n.$t('DIALTONE_CLOSE_BUTTON');
     },
   },
 

@@ -4,10 +4,10 @@ description: Utilities for setting the type of mouse cursor, if any, to show whe
 ---
 ## Usage
 
-<code-well-header class="d-fl-col5 d-ta-center d-flg8 d-fw-wrap d-p24 d-bgc-purple-100 d-bgo50 d-w100p d-hmn102" custom>
-  <div class="d-d-flex d-fw-wrap d-ac-center d-p8 d-w100p d-hmn216 d-bar8">
-    <div v-for="{ class: className, output } in cursor" class="d-fl-center d-m8 d-p16 d-bgc-purple-300 d-code--sm d-bar4" :class="className">.{{ className }}</div>
-  </div>
+<code-well-header>
+  <dt-stack direction="row" gap="400" class="d-fw-wrap d-w100p d-bar8 d-plc-center">
+    <div v-for="{ class: className, output } in cursor" class="d-p16 d-bgc-moderate d-code--sm d-bar4" :class="className">{{ className }}</div>
+  </dt-stack>
 </code-well-header>
 
 ```html
@@ -39,15 +39,13 @@ description: Utilities for setting the type of mouse cursor, if any, to show whe
 
 ## Classes
 
-<div class="d-h464 d-of-y-scroll d-bb d-bc-black-200">
-  <utility-class-table>
-    <template #content>
-      <tbody>
-        <tr v-for="{ class: className, output } in cursor">
-          <th scope="row" class="d-code--sm d-fw-normal d-fc-purple-400">.{{ className }}</th>
-          <td class="d-code--sm">{{ output }}</td>
-        </tr>
-      </tbody>
-    </template>
-  </utility-class-table>
-</div>
+<utility-class-table>
+  <template #content>
+    <tbody>
+      <tr v-for="{ class: className, output } in cursor">
+        <th scope="row" class="d-code--sm d-docsite-code">.{{ className }}</th>
+        <td class="d-code--sm">{{ output }}</td>
+      </tr>
+    </tbody>
+  </template>
+</utility-class-table>

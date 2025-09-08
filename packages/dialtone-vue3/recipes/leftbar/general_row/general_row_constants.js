@@ -15,35 +15,18 @@ export const LEFTBAR_GENERAL_ROW_TYPES = {
   SCHEDULED: 'scheduled',
 };
 
-export const LEFTBAR_GENERAL_ROW_ICON_MAPPING = {
-  [LEFTBAR_GENERAL_ROW_TYPES.INBOX]: 'inbox',
-  [LEFTBAR_GENERAL_ROW_TYPES.CONTACTS]: 'contacts',
-  [LEFTBAR_GENERAL_ROW_TYPES.CHANNELS]: 'hash',
-  [LEFTBAR_GENERAL_ROW_TYPES.THREADS]: 'thread',
-  [LEFTBAR_GENERAL_ROW_TYPES.LAUNCHPAD]: 'layout-template',
-  [LEFTBAR_GENERAL_ROW_TYPES.LOCKED_CHANNEL]: 'lock',
-  [LEFTBAR_GENERAL_ROW_TYPES.QUICK_START]: 'sparkle',
-  [LEFTBAR_GENERAL_ROW_TYPES.COACHING_GROUP]: 'users',
-  [LEFTBAR_GENERAL_ROW_TYPES.COACHING_CENTER]: 'external-link',
-  'locked channel unread': 'lock-filled',
-  'channel unread': 'hash-bold',
-  [LEFTBAR_GENERAL_ROW_TYPES.ASSIGNED]: 'at-sign',
-  [LEFTBAR_GENERAL_ROW_TYPES.DIGITAL]: 'laptop-2',
-  [LEFTBAR_GENERAL_ROW_TYPES.SCHEDULED]: 'calendar-clock',
-};
-
 export const LEFTBAR_GENERAL_ROW_CONTACT_CENTER_COLORS = {
-  'magenta-200': 'd-bgc-magenta-200',
-  'green-200': 'd-bgc-green-200',
-  'gold-300': 'd-bgc-gold-300',
-  'purple-600': 'd-bgc-purple-600',
-  'magenta-300': 'd-bgc-magenta-300',
-  'purple-300': 'd-bgc-purple-300',
-  'green-500': 'd-bgc-green-500',
-  'purple-100': 'd-bgc-purple-100',
-  'magenta-400': 'd-bgc-magenta-400',
-  'magenta-100': 'd-bgc-magenta-100',
-  'black-300': 'd-bgc-black-300',
+  'magenta-100': 'd-recipe-leftbar-general-row__contact-center--magenta-100',
+  'magenta-200': 'd-recipe-leftbar-general-row__contact-center--magenta-200',
+  'magenta-300': 'd-recipe-leftbar-general-row__contact-center--magenta-300',
+  'magenta-400': 'd-recipe-leftbar-general-row__contact-center--magenta-400',
+  'green-200': 'd-recipe-leftbar-general-row__contact-center--green-200',
+  'green-500': 'd-recipe-leftbar-general-row__contact-center--green-500',
+  'gold-300': 'd-recipe-leftbar-general-row__contact-center--gold-300',
+  'purple-100': 'd-recipe-leftbar-general-row__contact-center--purple-100',
+  'purple-300': 'd-recipe-leftbar-general-row__contact-center--purple-300',
+  'purple-600': 'd-recipe-leftbar-general-row__contact-center--purple-600',
+  'black-300': 'd-recipe-leftbar-general-row__contact-center--black-300',
 };
 
 export const LEFTBAR_GENERAL_ROW_CONTACT_CENTER_VALIDATION_ERROR = 'If type is contact center, color must be one' +
@@ -56,7 +39,6 @@ export const LEFTBAR_GENERAL_ROW_ICON_SIZES = [
 
 export default {
   LEFTBAR_GENERAL_ROW_TYPES,
-  LEFTBAR_GENERAL_ROW_ICON_MAPPING,
   LEFTBAR_GENERAL_ROW_CONTACT_CENTER_COLORS,
   LEFTBAR_GENERAL_ROW_CONTACT_CENTER_VALIDATION_ERROR,
   LEFTBAR_GENERAL_ROW_ICON_SIZES,

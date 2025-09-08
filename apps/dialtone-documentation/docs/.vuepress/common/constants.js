@@ -1,4 +1,4 @@
-import dialtoneChangelog from '@dialpad/dialtone/CHANGELOG.json';
+import dialtoneChangelog from '@workspaceRoot/CHANGELOG.json';
 
 export const DIALTONE_CHANGELOGS = {
   Dialtone: {

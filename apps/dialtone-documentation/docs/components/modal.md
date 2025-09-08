@@ -5,7 +5,7 @@ status: ready
 thumb: true
 image: assets/images/components/modal.png
 storybook: https://dialtone.dialpad.com/vue/?path=/story/components-modal--default
-figma_url: https://www.figma.com/file/2adf7JhZOncRyjYiy2joil/DT-Core%3A-Components-7?node-id=8923%3A20396&viewport=-724%2C-52%2C0.38&t=xHutRjwo1o5zMTgT-11
+figma_url: https://www.figma.com/design/W58r5BkO8qTw3vem9YieJd/DT9-Component-Library--Rebrand-2025-?node-id=4454-10944
 ---
 <code-well-header>
   <example-modal />
@@ -24,6 +24,7 @@ Although highly versatile, this doesn't mean modal dialogs are fit for all purpo
 - Confirming a destructive action that is about to happen.
 - Ask for a user’s consent for an action.
 </template>
+
 <template #dont>
 
 - When its content or features can be part of the page without complicating the page’s intent.
@@ -34,9 +35,10 @@ Although highly versatile, this doesn't mean modal dialogs are fit for all purpo
 - Displaying complex forms or large amounts of information (instead: place content inline)
 - Displaying content unrelated to current task (instead: place content inline as a [Link](link.md) or [Banner](banner.md)).
 </template>
+
 </dialtone-usage>
 
-### Best practices
+### Best Practices
 
 - Ideally, users trigger the modal, not the system, and should not be a surprise. Its appearance should reflect user intent to invoke it.  Uninvited modals may surprise the user and result in a quick dismissal of the window.
 - Treat modals as a last resort. Consider whether there’s another component or UI that might be  less disruptive for the user.
@@ -58,7 +60,7 @@ Although highly versatile, this doesn't mean modal dialogs are fit for all purpo
 
 <component-accessible-table component-name="modal"></component-accessible-table>
 
-## Variants and examples
+## Variants and Examples
 
 ### Base Style
 
@@ -95,7 +97,7 @@ htmlCode='
         <span class="d-icon__wrapper">
           <div aria-busy="true" role="status" aria-label="" class="d-icon d-icon--size-300" style="display: none;">
             <div
-              class="skeleton-placeholder d-bar-circle skeleton-placeholder--animate"
+              class="d-skeleton-placeholder d-bar-circle d-skeleton-placeholder--animate"
               style="animation-delay: 0ms; animation-duration: 1000ms; min-width: 100%; max-width: 100%; min-height: 100%; max-height: 100%;"
             ></div>
           </div>
@@ -109,7 +111,6 @@ htmlCode='
 vueCode='
 <dt-modal
   title="Example title"
-  close-button-props="Close"
   :show="isOpen"
   @update:show="updateShow"
   copy="Lorem ipsum ..."
@@ -141,12 +142,12 @@ vueCode='
 '
 showHtmlWarning />
 
-### Fixed header and footer
+### Fixed Header and Footer
 
 This is the default behavior that adds the scroll automatically in the modal content and leaves the header and footer fixed.
 
 <code-well-header>
-  <example-modal kind="fixed" />
+  <example-modal fixed-header-footer :copy="fixedHeaderFooterCopy" />
 </code-well-header>
 
 <code-example-tabs
@@ -178,7 +179,7 @@ htmlCode='
         <span class="d-icon__wrapper">
           <div aria-busy="true" role="status" aria-label="" class="d-icon d-icon--size-300" style="display: none;">
             <div
-              class="skeleton-placeholder d-bar-circle skeleton-placeholder--animate"
+              class="d-skeleton-placeholder d-bar-circle d-skeleton-placeholder--animate"
               style="animation-delay: 0ms; animation-duration: 1000ms; min-width: 100%; max-width: 100%; min-height: 100%; max-height: 100%;"
             ></div>
           </div>
@@ -192,7 +193,6 @@ htmlCode='
 vueCode='
 <dt-modal
   title="Example title"
-  close-button-props="Close"
   :show="isOpen"
   @update:show="updateShow"
   :showFooter="true"
@@ -263,7 +263,7 @@ htmlCode='
         <span class="d-icon__wrapper">
           <div aria-busy="true" role="status" aria-label="" class="d-icon d-icon--size-300" style="display: none;">
             <div
-              class="skeleton-placeholder d-bar-circle skeleton-placeholder--animate"
+              class="d-skeleton-placeholder d-bar-circle d-skeleton-placeholder--animate"
               style="animation-delay: 0ms; animation-duration: 1000ms; min-width: 100%; max-width: 100%; min-height: 100%; max-height: 100%;"
             ></div>
           </div>
@@ -277,7 +277,6 @@ htmlCode='
 vueCode='
 <dt-modal
   title="Example title"
-  close-button-props="Close"
   :show="isOpen"
   kind="danger"
   copy="Sed at orci quis nunc finibus gravida eget vitae est..."
@@ -316,7 +315,7 @@ showHtmlWarning />
 To make this modal take up as much of the screen as possible.
 
 <code-well-header>
-  <example-modal kind="full-screen" />
+  <example-modal size="full" />
 </code-well-header>
 
 <code-example-tabs
@@ -348,7 +347,7 @@ htmlCode='
         <span class="d-icon__wrapper">
           <div aria-busy="true" role="status" aria-label="" class="d-icon d-icon--size-300" style="display: none;">
             <div
-              class="skeleton-placeholder d-bar-circle skeleton-placeholder--animate"
+              class="d-skeleton-placeholder d-bar-circle d-skeleton-placeholder--animate"
               style="animation-delay: 0ms; animation-duration: 1000ms; min-width: 100%; max-width: 100%; min-height: 100%; max-height: 100%;"
             ></div>
           </div>
@@ -362,7 +361,6 @@ htmlCode='
 vueCode='
 <dt-modal
   title="Example title"
-  close-button-props="Close"
   :show="isOpen"
   size="full"
   copy="Sed at orci quis nunc finibus gravida eget vitae est..."
@@ -400,7 +398,22 @@ showHtmlWarning />
 When there is a need of more context information regarding the content of the Modal
 
 <code-well-header>
-  <example-modal kind="default" bannerKind="success" bannerTitle="This banner can have different kinds." />
+  <dt-stack direction="row" gap="500" class="d-ai-flex-end">
+    <dt-select-menu
+      label="Kind of Banner"
+      size="md"
+      @change="changeBannerKind"
+    >
+      <option
+        v-for="option in bannerKinds()"
+        :key="option"
+        :selected="option === selectedBannerKind"
+        :value="option"
+        v-text="option"
+      />
+    </dt-select-menu>
+    <example-modal kind="default" :banner-kind="selectedBannerKind" banner-title="This banner can have different kinds." />
+  </dt-stack>
 </code-well-header>
 
 <code-example-tabs
@@ -432,7 +445,7 @@ htmlCode='
         <span class="d-icon__wrapper">
           <div aria-busy="true" role="status" aria-label="" class="d-icon d-icon--size-300" style="display: none;">
             <div
-              class="skeleton-placeholder d-bar-circle skeleton-placeholder--animate"
+              class="d-skeleton-placeholder d-bar-circle d-skeleton-placeholder--animate"
               style="animation-delay: 0ms; animation-duration: 1000ms; min-width: 100%; max-width: 100%; min-height: 100%; max-height: 100%;"
             ></div>
           </div>
@@ -446,10 +459,9 @@ htmlCode='
 vueCode='
 <dt-modal
   title="Example title"
-  close-button-props="Close"
   :show="isOpen"
   banner-title="This banner can have different kinds."
-  banner-kind="success"
+  :bannerKind="selectedBannerKind"
   copy="Sed at orci quis nunc finibus gravida eget vitae est..."
   @update:show="updateShow"
 >
@@ -480,7 +492,7 @@ vueCode='
 '
 showHtmlWarning />
 
-### Custom header and content
+### Custom Header and Content
 
 You're not limited to using plain title and copy text.
 
@@ -490,7 +502,6 @@ In addition to the footer, custom elements can be inserted into the header and b
 
 <code-well-header>
   <dt-modal
-    :close-button-props="{ ariaLabel: 'Close' }"
     :show="isOpen"
     @update:show="updateShow"
   >
@@ -513,7 +524,6 @@ In addition to the footer, custom elements can be inserted into the header and b
 <code-example-tabs
 vueCode='
 <dt-modal
-  :close-button-props="{ ariaLabel: `Close` }"
   :show="isOpen"
   @update:show="updateShow"
 >
@@ -544,6 +554,12 @@ At minimum, modals contain a title and one button. They could also contain body 
   import { ref } from 'vue';
 
   const isOpen = ref(false);
+  const selectedBannerKind = ref('success');
+  const fixedHeaderFooterCopy = ref(`Sed at orci quis nunc finibus gravida eget vitae est. Praesent
+          ac laoreet mi. Cras porttitor mauris ex. Integer convallis tellus a ex egestas, id laoreet elit mollis. Mauris
+          ut elementum velit. Nam vel consectetur turpis. Aenean consequat purus non nunc tincidunt rutrum. In semper
+          pretium dui vel tempus. Proin et mi id mi egestas iaculis. Sed lacinia libero non molestie consequat. Sed
+          efficitur purus eget lacus viverra volutpat. Nam luctus ac eros eu iaculis. Fusce non condimentum lorem.`.repeat(10))
 
   const openModal = () => {
     isOpen.value = true;
@@ -551,5 +567,13 @@ At minimum, modals contain a title and one button. They could also contain body 
 
   const updateShow = (value) => {
     if (!value) isOpen.value = false;
+  };
+
+  const changeBannerKind = (kind) => {
+    selectedBannerKind.value = kind;
+  };
+
+  const bannerKinds = () => {
+    return Object.keys(window.DIALTONE_CONSTANTS.MODAL_BANNER_KINDS);
   };
 </script>

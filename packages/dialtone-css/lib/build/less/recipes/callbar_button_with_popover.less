@@ -1,0 +1,62 @@
+.d-recipe-callbar-button-with-popover {
+  display: flex;
+  align-items: flex-start;
+}
+
+.d-recipe-callbar-button-with-popover__arrow {
+  width: var(--dt-size-500);
+  height: var(--dt-size-500);
+  margin-top: var(--dt-space-450);
+  margin-left: calc(var(--dt-space-300-negative) * 5);
+  padding: var(--dt-space-400);
+  border-radius: var(--dt-size-300);
+
+  .d-btn--active {
+    background: var(--dt-color-surface-moderate-opaque);
+  }
+}
+
+.d-recipe-callbar-button-with-popover__arrow--large {
+  margin-left: var(--dt-space-550-negative);
+}
+
+.d-recipe-callbar-button-with-popover__arrow-icon {
+  color: var(--dt-color-black-800);
+}
+
+.d-recipe-callbar-button-with-popover__popover {
+  .d-popover__header {
+    color: var(--dt-color-foreground-primary-inverted);
+    background: var(--dt-color-surface-contrast);
+
+    .d-btn {
+      color: var(--dt-color-foreground-primary-inverted);
+    }
+  }
+
+  .d-popover__header__content {
+    display: flex;
+    align-items: center;
+    padding-right: var(--dt-space-450);
+    padding-left: var(--dt-space-450);
+    font-weight: normal;
+  }
+}
+
+.d-recipe-callbar-button-with-popover__button {
+  &.d-tab--selected::after,
+  &.d-tab--selected:hover::after {
+    --tab--bgc: var(--dt-color-surface-contrast);
+  }
+
+  &.tab-group {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+  }
+
+  &.tab-content {
+    flex: 1 1 100%;
+    overflow-y: auto;
+  }
+}

@@ -24,7 +24,6 @@ export const argsData = {
   onRemove: action('remove'),
   onMaxSelected: action('maxSelected'),
   onComboboxHighlight: action('comboboxHighlight'),
-  visuallyHiddenCloseLabel: 'Close Combobox',
 };
 
 export const argTypesData = {
@@ -199,5 +198,14 @@ export const WithCollapseOnFocusOut = {
   args: {
     selectedItems: ITEMS_LIST_DATA.map(item => item.value),
     collapseOnFocusOut: true,
+  },
+};
+
+export const WithStyledInput = {
+  render: Template,
+
+  args: {
+    selectedItems: ['item12', 'item13', 'item14'],
+    inputWrapperClass: ['d-ba-none', 'd-bgc-primary'],
   },
 };

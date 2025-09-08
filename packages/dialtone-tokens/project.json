@@ -1,15 +1,57 @@
 {
   "name": "dialtone-tokens",
   "targets": {
-    "publish:android-package": {
-      "executor": "nx:run-script",
-      "dependsOn": [{ "target": "build" }],
-      "options": { "script": "publish:android-package" }
+    "build": {
+      "executor": "nx:run-commands",
+      "inputs": [
+        "{projectRoot}/figma_tokens/*",
+        "{projectRoot}/postcss/*",
+        "{projectRoot}/themes/*",
+        "{projectRoot}/tokens/**/*",
+        "{projectRoot}/build.js",
+        "{projectRoot}/build-android.js",
+        "{projectRoot}/build-docs.js",
+        "{projectRoot}/build-ios.js",
+        "{projectRoot}/build-sd-transforms.js",
+        "{projectRoot}/dialtone-transforms.js",
+        "{projectRoot}/generate-themes.js",
+        "{projectRoot}/vite.config.js"
+      ],
+      "outputs": [
+        "{projectRoot}/dist",
+        "{projectRoot}/dist_android",
+        "{projectRoot}/dist_ios/Sources",
+        "{projectRoot}/token_transformer"
+      ],
+      "options": {
+        "cwd": "{projectRoot}",
+        "commands": [
+          "rm -rf dist",
+          "node ./build.js",
+          "pnpm exec vite build"
+        ],
+        "parallel": false
+      }
     },
-    "publish:ios-package": {
-      "executor": "nx:run-script",
-      "dependsOn": [{ "target": "build" }],
-      "options": { "script": "publish:ios-package" }
+    "build:android": {
+      "dependsOn": ["build"],
+      "executor": "nx:run-commands",
+      "options": {
+        "cwd": "{projectRoot}",
+        "commands": [
+          "cp ./AndroidManifest.xml dist/android",
+          "./gradlew publishToMavenLocal"
+        ],
+        "parallel": false
+      }
+    },
+    "build:ios": {
+      "dependsOn": ["build"],
+      "executor": "nx:run-commands",
+      "options": {
+        "cwd": "{projectRoot}",
+        "command": "node ./build-ios.js"
+      }
     },
     "publish": {
       "executor": "nx:run-commands",

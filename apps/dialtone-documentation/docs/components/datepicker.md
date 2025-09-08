@@ -5,18 +5,11 @@ image: assets/images/components/datepicker.png
 description: Datepicker component will provide a calendar to select a date.
 status: beta
 storybook: https://dialtone.dialpad.com/vue/?path=/story/components-datepicker--default
-figma_url: https://www.figma.com/file/2adf7JhZOncRyjYiy2joil/DT8-Component-Library?type=design&node-id=13998-87&mode=design&t=k5q7YXo32w6HoOmK-11
+figma_url: https://www.figma.com/design/W58r5BkO8qTw3vem9YieJd/DT9-Component-Library--Rebrand-2025-?node-id=13998-86
 ---
 
 <code-well-header>
-  <dt-datepicker
-    change-to-label="Change to"
-    prev-month-label="Previous month"
-    next-month-label="Next month"
-    prev-year-label="Previous year"
-    next-year-label="Next year"
-    select-day-label="Select day"
-  />
+  <dt-datepicker></dt-datepicker>
 </code-well-header>
 
 ## Usage
@@ -32,19 +25,12 @@ to the `dt-popover` component.
 
 With this we accomplish the requirement to have the previous year button focused when the datepicker is opened.
 
-## Variants and examples
+## Variants and Examples
 
 ### Default
 
 <code-well-header>
-  <dt-datepicker
-    change-to-label="Change to"
-    prev-month-label="Previous month"
-    next-month-label="Next month"
-    prev-year-label="Previous year"
-    next-year-label="Next year"
-    select-day-label="Select day"
-  />
+  <dt-datepicker></dt-datepicker>
 </code-well-header>
 
 <code-example-tabs
@@ -170,19 +156,11 @@ htmlCode='
 </div>
 '
 vueCode='
-<dt-datepicker
-  change-to-label="Change to"
-  prev-month-label="Previous month"
-  next-month-label="Next month"
-  prev-year-label="Previous year"
-  next-year-label="Next year"
-  select-day-label="Select day"
-  :selected-date="new Date()"
-/>
+<dt-datepicker :selected-date="new Date()"></dt-datepicker>
 '
 showHtmlWarning />
 
-### With popover
+### With Popover
 
 <code-well-header>
   <dt-popover
@@ -209,15 +187,7 @@ showHtmlWarning />
       </dt-button>
     </template>
     <template #content>
-      <dt-datepicker
-        :locale="locale"
-        :prev-month-label="prevMonthLabel"
-        :next-month-label="nextMonthLabel"
-        :prev-year-label="prevYearLabel"
-        :next-year-label="nextYearLabel"
-        :select-day-label="selectDayLabel"
-        :change-to-label="changeToLabel"
-      />
+      <dt-datepicker></dt-datepicker>
     </template>
   </dt-popover>
 </code-well-header>
@@ -359,14 +329,7 @@ vueCode='
     </dt-button>
   </template>
   <template #content>
-    <dt-datepicker
-      change-to-label="Change to"
-      prev-month-label="Previous month"
-      next-month-label="Next month"
-      prev-year-label="Previous year"
-      next-year-label="Next year"
-      select-day-label="Select day"
-    />
+    <dt-datepicker></dt-datepicker>
   </template>
 </dt-popover>
 '
@@ -374,7 +337,7 @@ vueCode='
 
 ## Vue API
 
-<component-vue-api component-name="datepicker" />
+<component-vue-api component-name="datepicker"></component-vue-api>
 
 ## Accessibility
 
@@ -407,23 +370,71 @@ In `calendar`:
 
 - Select day 20 July 2023
 
-## Date formats
+## Date Formats
 
-We are providing the following functions to format dates:
+The following functions are available for date formatting.
 
-<!-- TODO: Autogenerate this docs from jsdocs in packages/dialtone-vue2/components/datepicker/formatUtils.js -->
+<div class="d-bgc-secondary d-bar8 d-p16">
+  <dt-stack
+    :direction="{ 'default': 'column', 'md': 'row' }"
+    gap="600"
+    class="d-ai-flex-start"
+  >
+    <dt-stack class="d-ai-center">
+      <dt-datepicker
+        :selected-date="currentSelectedDate"
+        @selected-date="currentSelectedDate = $event;"
+      />
+      <p class="d-body--sm">
+        {{ currentSelectedDate }}
+      </p>
+    </dt-stack>
+    <table class="d-table d-body--sm d-bt d-bc-default d-fl1">
+      <tr>
+        <th scope="row" class="d-code--sm">formatLong</th>
+        <td>{{ formatLong(currentSelectedDate) }}</td>
+      </tr>
+      <tr>
+        <th scope="row" class="d-code--sm">formatMedium</th>
+        <td>{{ formatMedium(currentSelectedDate) }}</td>
+      </tr>
+      <tr>
+        <th scope="row" class="d-code--sm">formatShort</th>
+        <td>{{ formatShort(currentSelectedDate) }}</td>
+      </tr>
+      <tr>
+        <th scope="row" class="d-code--sm">formatShort (no weekday)</th>
+        <td>{{ formatShort(currentSelectedDate, false) }}</td>
+      </tr>
+      <tr>
+        <th scope="row" class="d-code--sm">formatNoYear</th>
+        <td>{{ formatNoYear(currentSelectedDate) }}</td>
+      </tr>
+      <tr>
+        <th scope="row" class="d-code--sm">formatNoYear (abbreviated)</th>
+        <td>{{ formatNoYear(currentSelectedDate, true) }}</td>
+      </tr>
+      <tr>
+        <th scope="row" class="d-code--sm">formatNumerical</th>
+        <td>{{ formatNumerical(currentSelectedDate) }}</td>
+      </tr>
+    </table>
+  </dt-stack>
+</div>
+
+<!-- TODO: Autogenerate the docs from JSDocs in packages/dialtone-vue2/components/datepicker/formatUtils.js -->
 ### formatLong
 
-▸ **formatLong**(`date`, `locale` = 'default'): `string`
+**formatLong**(`date`, `locale`): `string`
 
 Formats a date into a long format using the specified locale.
 
 #### Parameters
 
-| Name | Type | Description |
-| :------ | :------ | :------ |
-| `date` | `Date` | The date to format |
-| `locale` | `string` | The locale to use for formatting. Defaults to 'default'. |
+| Name | Type | Description                                                   |
+| :------ | :------ |:--------------------------------------------------------------|
+| `date` | `Date` | The date to format                                            |
+| `locale` | `string` | The locale to use for formatting. Defaults to Dialtone preferred locale. |
 
 #### Returns
 
@@ -431,11 +442,9 @@ Formats a date into a long format using the specified locale.
 
 The formatted date string.
 
-___
-
 ### formatMedium
 
-▸ **formatMedium**(`date`, `locale` = 'default'): `string`
+**formatMedium**(`date`, `locale`): `string`
 
 Formats the given date in medium format.
 
@@ -444,7 +453,7 @@ Formats the given date in medium format.
 | Name | Type | Description |
 | :------ | :------ | :------ |
 | `date` | `Date` | The date to format |
-| `locale` | `string` | The locale to use for formatting. Defaults to 'default'. |
+| `locale` | `string` | The locale to use for formatting. Defaults to Dialtone preferred locale. |
 
 #### Returns
 
@@ -452,11 +461,9 @@ Formats the given date in medium format.
 
 The formatted date string.
 
-___
-
 ### formatShort
 
-▸ **formatShort**(`date`, `locale` = 'default', `showWeekday`= true): `string`
+**formatShort**(`date`, `locale`, `showWeekday`= true): `string`
 
 Formats a date into a short string representation.
 
@@ -465,7 +472,7 @@ Formats a date into a short string representation.
 | Name | Type | Description |
 | :------ | :------ | :------ |
 | `date` | `Date` | The date to format |
-| `locale` | `string` | The locale to use for formatting. Defaults to 'default'. |
+| `locale` | `string` | The locale to use for formatting. Defaults to Dialtone preferred locale. |
 | `showWeekday` | `boolean` | Whether to include the weekday in the formatted string. Defaults to true. |
 
 #### Returns
@@ -474,11 +481,9 @@ Formats a date into a short string representation.
 
 The formatted date string.
 
-___
-
 ### formatNoYear
 
-▸ **formatNoYear**(`date`, `locale` = 'default', `abbreviated`= false): `string`
+**formatNoYear**(`date`, `locale`, `abbreviated`= false): `string`
 
 Formats a date without the year.
 
@@ -487,7 +492,7 @@ Formats a date without the year.
 | Name | Type | Description |
 | :------ | :------ | :------ |
 | `date` | `Date` | The date to format |
-| `locale` | `string` | The locale to use for formatting. Defaults to 'default'. |
+| `locale` | `string` | The locale to use for formatting. Defaults to Dialtone preferred locale. |
 | `abbreviated` | `boolean` | Whether to use abbreviated month names. Defaults to false. |
 
 #### Returns
@@ -496,11 +501,9 @@ Formats a date without the year.
 
 The formatted date without the year.
 
-___
-
 ### formatNumerical
 
-▸ **formatNumerical**(`date`, `locale` = 'default'): `string`
+**formatNumerical**(`date`, `locale`): `string`
 
 Formats a date into a numerical string representation.
 
@@ -509,7 +512,7 @@ Formats a date into a numerical string representation.
 | Name | Type | Description |
 | :------ | :------ | :------ |
 | `date` | `Date` | The date to format |
-| `locale` | `string` | The locale to use for formatting. Defaults to 'default'. |
+| `locale` | `string` | The locale to use for formatting. Defaults to Dialtone preferred locale. |
 
 #### Returns
 
@@ -517,76 +520,11 @@ Formats a date into a numerical string representation.
 
 The formatted numerical date string.
 
-### Examples
-
-<div>
-  <p>
-    Selected date: {{ currentSelectedDate }}
-  </p>
-  <br>
-  <br>
-  <table class="d-table">
-    <tr>
-      <th>Format</th>
-      <th>Result</th>
-    </tr>
-    <tr>
-      <td>formatLong</td>
-      <td>{{ formatLong(currentSelectedDate, locale) }}</td>
-    </tr>
-    <tr>
-      <td>formatMedium</td>
-      <td>{{ formatMedium(currentSelectedDate, locale) }}</td>
-    </tr>
-    <tr>
-      <td>formatShort</td>
-      <td>{{ formatShort(currentSelectedDate, locale) }}</td>
-    </tr>
-    <tr>
-      <td>formatShort (no weekday)</td>
-      <td>{{ formatShort(currentSelectedDate, locale, false) }}</td>
-    </tr>
-    <tr>
-      <td>formatNoYear</td>
-      <td>{{ formatNoYear(currentSelectedDate, locale) }}</td>
-    </tr>
-    <tr>
-      <td>formatNoYear (abbreviated)</td>
-      <td>{{ formatNoYear(currentSelectedDate, locale, true) }}</td>
-    </tr>
-    <tr>
-      <td>formatNumerical</td>
-      <td>{{ formatNumerical(currentSelectedDate, locale) }}</td>
-    </tr>
-  </table>
-  <br>
-  <br>
-  <dt-datepicker
-    :locale="locale"
-    :prev-month-label="prevMonthLabel"
-    :next-month-label="nextMonthLabel"
-    :prev-year-label="prevYearLabel"
-    :next-year-label="nextYearLabel"
-    :select-day-label="selectDayLabel"
-    :change-to-label="changeToLabel"
-    :selected-date="currentSelectedDate"
-    @selected-date="currentSelectedDate = $event;"
-  />
-</div>
-
 <script setup>
 import { ref, inject } from 'vue';
 
-const dialtoneComponents = inject('dialtoneComponents');
-const { formatLong, formatMedium, formatShort, formatNoYear, formatNumerical } = dialtoneComponents;
-
-const locale = 'en-US';
-const changeToLabel = 'Change to';
-const prevMonthLabel = 'Previous month';
-const nextMonthLabel = 'Next month';
-const prevYearLabel = 'Previous year';
-const nextYearLabel = 'Next year';
-const selectDayLabel = 'Select day';
+const dialtoneUtils = inject('dialtoneUtils');
+const { formatLong, formatMedium, formatShort, formatNoYear, formatNumerical } = dialtoneUtils;
 
 const currentSelectedDate = ref(new Date());
 const datepickerOpened = ref(false);

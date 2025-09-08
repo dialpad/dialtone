@@ -1,4 +1,5 @@
 import Dom from './dom';
+import { returnFirstEl } from '@/common/utils';
 
 const ERROR_INVALID_LIST_ELEMENT = (
   'listElementKey is required or the referenced ' +
@@ -74,7 +75,7 @@ export default ({
     // this[listElement]() can return a Vue component, in which case we need to target
     // the $el property, or it can simply be an html element.
     _getListElement () {
-      return this[listElementKey]()?.$el || this[listElementKey]();
+      return returnFirstEl(this[listElementKey]()?.$el) || this[listElementKey]();
     },
 
     // Gets the length of all the items in the list, uses the listItemRole param to determine

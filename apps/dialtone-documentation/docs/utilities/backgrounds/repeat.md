@@ -1,5 +1,5 @@
 ---
-title: Background repeat
+title: Background Repeat
 description: Utilities for controlling if or how an element's background image repeats.
 ---
 
@@ -7,14 +7,14 @@ description: Utilities for controlling if or how an element's background image r
 
 Use `d-bgr-{n}` to how an element's background image repeats.
 
-<code-well-header class="d-fl-col4 d-fw-wrap d-flg12 d-p12 d-bgc-green-100 d-bgo50" custom>
+<code-well-header class="d-fl-col3 d-fw-wrap d-g16 d-p16 d-bgc-secondary" custom>
   <div class="d-d-flex d-fd-column d-ai-center d-stack4" v-for="i in repeat">
       <div
-        class="d-fl-center d-w128 d-h128 d-bgc-green-200 d-bar8 d-bc-purple-200 d-of-hidden d-bgp-tl d-bgs-var" style="--bgg-size: 65% 65%; background-image: url('https://cdn.jpegmini.com/user/images/slider_puffin_before_mobile.jpg');"
+        class="d-fl-center d-w128 d-h128 d-bgc-moderate d-bar8 d-of-hidden d-bgp-tl d-bgs-var" style="--bgg-size: 65% 65%; background-image: url('/assets/images/puffin.jpg');"
         :class="`d-bgr-${i}`"
       >
       </div>
-      `.d-bgr-{{ i }}`
+      <code class="d-code--sm d-bgc-transparent">.d-bgr-{{ i }}</code>
   </div>
 </code-well-header>
 
@@ -37,7 +37,7 @@ const repeat = ['repeat', 'repeat-x', 'repeat-y', 'space', 'none', 'unset'];
   <template #content>
     <tbody>
       <tr v-for="i in repeat">
-          <th scope="row" class="d-code--sm d-fc-purple-400">.d-bgr-{{ i }}</th>
+          <th scope="row" class="d-code--sm d-docsite-code">.d-bgr-{{ i }}</th>
           <td class="d-code--sm">
             background-repeat: {{ i }} !important;
           </td>

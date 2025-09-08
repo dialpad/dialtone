@@ -1,0 +1,12 @@
+{
+  "shell": {
+    "base": {
+      "color": {
+        "accent": {
+          "value": "#F49AC8",
+          "type": "color"
+        }
+      }
+    }
+  }
+}

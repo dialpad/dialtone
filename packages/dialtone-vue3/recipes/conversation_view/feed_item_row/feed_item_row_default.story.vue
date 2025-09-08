@@ -28,6 +28,12 @@
       />
     </template>
     <template
+      v-if="$attrs.displayNameSlot"
+      #displayName
+    >
+      <span v-html="$attrs.displayNameSlot" />
+    </template>
+    <template
       v-if="$attrs.attachment"
       #attachment
     >
@@ -40,7 +46,6 @@
       #threading
     >
       <dt-stack
-        class="feed-item-row__thread d-p4 d-d-flex d-ai-center"
         direction="row"
         gap="400"
       >
@@ -80,7 +85,7 @@
               size="sm"
               aria-label="Add reaction"
               data-qa="feed-item-reaction-button"
-              class="dt-emoji-row__reaction dt-emoji-row__picker"
+              class="d-recipe-emoji-row__reaction d-recipe-emoji-row__picker"
             >
               <span class="d-d-inline-flex">
                 <dt-icon
@@ -129,6 +134,7 @@ import { DtAvatar } from '@/components/avatar';
 import { DtIcon } from '@/components/icon';
 import { DtButton } from '@/components/button';
 import { DtStack } from '@/components/stack';
+import { sharedEmojiReactionsData } from '@/recipes/conversation_view/emoji_row/emoji_row.stories.js';
 
 export default {
   name: 'DtRecipeFeedItemRowDefault',
@@ -144,29 +150,7 @@ export default {
 
   data () {
     return {
-      mockReactions: [
-        {
-          emojiUnicodeOrShortname: '😀',
-          isSelected: true,
-          ariaLabel: 'Emoji aria label',
-          tooltip: 'You reacted with 😀',
-          num: 1,
-        },
-        {
-          emojiUnicodeOrShortname: '😒',
-          isSelected: false,
-          ariaLabel: 'Emoji aria label',
-          tooltip: 'You reacted with 😒',
-          num: 1,
-        },
-        {
-          emojiUnicodeOrShortname: '🙃',
-          isSelected: false,
-          ariaLabel: 'Emoji aria label',
-          tooltip: 'You reacted with 🙃',
-          num: 99,
-        },
-      ],
+      mockReactions: sharedEmojiReactionsData,
 
       hoverButtons: ['bell', 'living-thing', 'map-pin'],
 

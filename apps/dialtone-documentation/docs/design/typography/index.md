@@ -1,11 +1,12 @@
 ---
 title: Typography
 description: Clear, legible, and easy-to-read text.
+figma_url: https://www.figma.com/design/VjrRh4vvfONSmBQxnZrL3u/DT9-Design-Tokens--Rebrand-2025-?node-id=3746-13426&t=D8g6K4TrMGXNsvLT-11
 ---
 
-## Font properties
+## Font Properties
 
-### Font family
+### Font Family
 
 Dialtone's product UI font stack defers to the user's default system font, ensuring a seamless native experience.
 
@@ -16,7 +17,7 @@ Dialtone's product UI font stack defers to the user's default system font, ensur
   <svg-loader class="d-fl1" name="ff-linux" />
 </dt-stack>
 
-### Font weight
+### Font Weight
 
 Four weights for clear hierarchy and visual contrast among different elements.
 
@@ -27,7 +28,7 @@ Four weights for clear hierarchy and visual contrast among different elements.
   <svg-loader name="fw-bold" />
 </dt-stack>
 
-### Font size
+### Font Size
 
 Dictates the scale of text, enhancing readability and defining information hierarchy across content.
 
@@ -39,7 +40,7 @@ Dictates the scale of text, enhancing readability and defining information hiera
   <svg-loader name="fs-500" />
 </dt-stack>
 
-### Line height
+### Line Height
 
 Adjusts vertical spacing between lines of text, optimizing legibility and text flow.
 
@@ -162,11 +163,11 @@ All product UI text can be characterized as one of **Headline**, **Body**, **Lab
 Titles and headings to establish hierarchy and set the tone of contextual groupings.
 
 <code-well-header class="d-d-flex d-jc-center d-fd-column d-p24 d-bgc-secondary d-w100p d-hmn102" custom>
-  <div class="d-d-grid d-gg16 d-ai-center" style="grid-template-columns: 52rem 1fr">
+  <div class="d-d-grid d-g16 d-ai-center" style="grid-template-columns: 52rem 1fr">
     <template v-for="{ var: varName } in typographyStylesHeadlines">
       <div class="d-truncate"><p :class="[varName, 'd-truncate', 'd-bgc-moderate-opaque']">{{ example }}</p></div>
       <dt-stack direction="row" class="d-jc-space-between dialtone-copy-utility">
-        <span class="dialtone-copy-utility__utility d-code--sm d-fc-purple-400">{{ varName }}</span>
+        <span class="dialtone-copy-utility__utility d-code--sm d-fc-blue-500">{{ varName }}</span>
         <div class="dialtone-copy-utility__btn">
           <copy-button :text="varName" aria-label="Copy" />
         </div>
@@ -180,11 +181,11 @@ Titles and headings to establish hierarchy and set the tone of contextual groupi
 Default text style for longer-form prose content, designed for comfort and clarity in reading varying lengths.
 
 <code-well-header class="d-d-flex d-jc-center d-fd-column d-p24 d-bgc-secondary d-w100p d-hmn102" custom>
-  <div class="d-d-grid d-gg16 d-ai-center" style="grid-template-columns: 52rem 1fr">
+  <div class="d-d-grid d-g16 d-ai-center" style="grid-template-columns: 52rem 1fr">
     <template v-for="{ var: varName } in typographyStylesBody">
       <div class="d-truncate"><p :class="[varName, 'd-truncate', 'd-bgc-moderate-opaque']">{{ example }}</p></div>
       <dt-stack direction="row" class="d-jc-space-between dialtone-copy-utility">
-        <span class="dialtone-copy-utility__utility d-code--sm d-fc-purple-400">{{ varName }}</span>
+        <span class="dialtone-copy-utility__utility d-code--sm d-fc-blue-500">{{ varName }}</span>
         <div class="dialtone-copy-utility__btn">
           <copy-button :text="varName" aria-label="Copy" />
         </div>
@@ -198,11 +199,11 @@ Default text style for longer-form prose content, designed for comfort and clari
 Shorter-length copy like form fields, buttons, and other UI-labeling elements, ensuring clear navigation and interaction.
 
 <code-well-header class="d-d-flex d-jc-center d-fd-column d-p24 d-bgc-secondary d-w100p d-hmn102" custom>
-  <div class="d-d-grid d-gg16 d-ai-center" style="grid-template-columns: 52rem 1fr">
+  <div class="d-d-grid d-g16 d-ai-center" style="grid-template-columns: 52rem 1fr">
     <template v-for="{ var: varName } in typographyStylesLabel">
       <div class="d-truncate"><p :class="[varName, 'd-truncate', 'd-bgc-moderate-opaque']">{{ example }}</p></div>
       <dt-stack direction="row" class="d-jc-space-between dialtone-copy-utility">
-        <span class="dialtone-copy-utility__utility d-code--sm d-fc-purple-400">{{ varName }}</span>
+        <span class="dialtone-copy-utility__utility d-code--sm d-fc-blue-500">{{ varName }}</span>
         <div class="dialtone-copy-utility__btn">
           <copy-button :text="varName" aria-label="Copy" />
         </div>
@@ -216,11 +217,11 @@ Shorter-length copy like form fields, buttons, and other UI-labeling elements, e
 Complementary information or guidance, such as tooltips and hints, to aid user understanding without overwhelming.
 
 <code-well-header class="d-d-flex d-jc-center d-fd-column d-p24 d-bgc-secondary d-w100p d-hmn102" custom>
-  <div class="d-d-grid d-gg16 d-ai-center" style="grid-template-columns: 52rem 1fr">
+  <div class="d-d-grid d-g16 d-ai-center" style="grid-template-columns: 52rem 1fr">
     <template v-for="{ var: varName } in typographyStylesHelper">
       <div class="d-truncate"><p :class="[varName, 'd-truncate', 'd-bgc-moderate-opaque']">{{ example }}</p></div>
       <dt-stack direction="row" class="d-jc-space-between dialtone-copy-utility">
-        <span class="dialtone-copy-utility__utility d-code--sm d-fc-purple-400">{{ varName }}</span>
+        <span class="dialtone-copy-utility__utility d-code--sm d-fc-blue-500">{{ varName }}</span>
         <div class="dialtone-copy-utility__btn">
           <copy-button :text="varName" aria-label="Copy" />
         </div>
@@ -234,11 +235,11 @@ Complementary information or guidance, such as tooltips and hints, to aid user u
 Code snippets, technical commands, or data values rendered as a monospaced font.
 
 <code-well-header class="d-d-flex d-jc-center d-fd-column d-p24 d-bgc-secondary d-w100p d-hmn102" custom>
-  <div class="d-d-grid d-gg16 d-ai-center" style="grid-template-columns: 52rem 1fr">
+  <div class="d-d-grid d-g16 d-ai-center" style="grid-template-columns: 52rem 1fr">
     <template v-for="{ var: varName } in typographyStylesCode">
       <div class="d-truncate"><p :class="[varName, 'd-truncate', 'd-bgc-moderate-opaque']">{{ example }}</p></div>
       <dt-stack direction="row" class="d-jc-space-between dialtone-copy-utility">
-        <span class="dialtone-copy-utility__utility d-code--sm d-fc-purple-400">{{ varName }}</span>
+        <span class="dialtone-copy-utility__utility d-code--sm d-fc-blue-500">{{ varName }}</span>
         <div class="dialtone-copy-utility__btn">
           <copy-button :text="varName" aria-label="Copy" />
         </div>
@@ -261,7 +262,7 @@ Each typography style is expressed through a shorthand `font` property, and its 
     </thead>
     <tbody>
       <tr v-for="{ var: varName, output } in typographyStyles">
-        <td class="d-code--sm d-fc-purple-400">.{{ varName }}</td>
+        <td class="d-code--sm d-docsite-code">.{{ varName }}</td>
         <td class="d-code--sm">{{ output }}</td>
       </tr>
     </tbody>
@@ -269,7 +270,7 @@ Each typography style is expressed through a shorthand `font` property, and its 
 </div>
 
 <script setup>
-  import { typographyVariants, typographyStyles, fontSize, lineHeight } from '@data/type.json';
+  import { typographyVariants, typographyStyles } from '@data/type.json';
   import CopyButton from '@baseComponents/CopyButton.vue';
   import SvgLoader from '@baseComponents/SvgLoader.vue';
 
@@ -279,34 +280,14 @@ Each typography style is expressed through a shorthand `font` property, and its 
   const typographyStylesHelper = typographyStyles.filter(type => type.var.startsWith("d-helper"));
   const typographyStylesCode = typographyStyles.filter(type => type.var.startsWith("d-code"));
 
-  const example = "The quick brown fox jumps over the lazy dog."
-
-  const fontSizeValues = fontSize.product.reduce((accum, curr) => {
-    accum.push(`d-fs-${curr.stop}`);
-    return accum;
-  }, []);
-  fontSizeValues.push('d-headline36', 'd-headline48', 'd-headline54');
-
-  const lineHeightValues = lineHeight.reduce((accum, curr) => {
-    if (curr.class.startsWith('-') && !curr.class.endsWith('unset')) {
-      accum.push(`d-lh${curr.class}`);
-    }
-    return accum;
-  }, []);
-
-  const exampleAi = "Ai that works for you."
-
+  const example = "The quick brown fox jumps over the lazy dog.";
 </script>
 
 <style lang="less" scoped>
   .dialtone-copy-utility {
-
     & {
       position: relative;
       cursor: default;
-    }
-
-    &__utility {
     }
 
     &__btn {

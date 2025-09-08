@@ -4,9 +4,7 @@ import { DtRecipeCallbarButton } from '@/recipes/buttons/callbar_button';
 import { DtPopover } from '@/components/popover';
 
 // Constants
-const baseProps = {
-  arrowButtonLabel: 'arrowButton',
-};
+const baseProps = {};
 
 describe('DtRecipeCallbarButtonWithPopover Tests', () => {
   // Wrappers
@@ -24,7 +22,7 @@ describe('DtRecipeCallbarButtonWithPopover Tests', () => {
   // Helpers
   const _setChildWrappers = () => {
     button = wrapper.findComponent(DtRecipeCallbarButton);
-    arrow = wrapper.findComponent('.dt-recipe--callbar-button-with-popover--arrow');
+    arrow = wrapper.findComponent('.d-recipe-callbar-button-with-popover__arrow');
     popover = wrapper.findComponent(DtPopover);
   };
 
@@ -110,7 +108,7 @@ describe('DtRecipeCallbarButtonWithPopover Tests', () => {
     );
 
     it(
-      'should propagate placement, initialFocusElement and showCloseButton props to the popover component',
+      'should propagate placement and initialFocusElement props to the popover component',
       async () => {
         await wrapper.setProps({
           placement: 'mock',

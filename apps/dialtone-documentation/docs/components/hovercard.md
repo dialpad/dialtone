@@ -5,7 +5,7 @@ status: ready
 thumb: true
 image: assets/images/components/hovercard.png
 storybook: https://dialtone.dialpad.com/vue/?path=/story/components-hovercard--default
-figma_url: https://www.figma.com/design/2adf7JhZOncRyjYiy2joil/DT9-Component-Library?node-id=14395-441&t=l9JqN3TZt1kqjnzE-0
+figma_url: https://www.figma.com/design/W58r5BkO8qTw3vem9YieJd/DT9-Component-Library--Rebrand-2025-?node-id=14395-441
 ---
 
 The hovercard will appear upon the mouse entering the anchor, with a delay of 300 milliseconds. It will remain open as long as the mouse cursor is over either the open card or the anchor.
@@ -65,10 +65,35 @@ vueCode='
 '
 showHtmlWarning />
 
+## Variants
+
+### Many Hovercards
+
+<code-well-header>
+  <dt-stack direction="row" gap="500">
+    <example-hovercard v-for="data in exampleData" :label="data.label" :content="data.content" />
+  </dt-stack>
+</code-well-header>
+
 ## Vue API
 
 <component-vue-api component-name="hovercard" />
 
 <script setup>
   import ExampleHovercard from '@exampleComponents/ExampleHovercard.vue';
+
+  const exampleData = [
+    {
+      label: 'Example 1',
+      content: 'Content 1',
+    },
+    {
+      label: 'Example 2',
+      content: 'Content 2',
+    },
+    {
+      label: 'Example 3',
+      content: 'Content 3',
+    },
+  ];
 </script>

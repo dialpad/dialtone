@@ -43,6 +43,7 @@
         <select
           id="Dialtone--SelectCategory"
           v-model="selectedCategory"
+          aria-labelledby="#Dialtone--SelectCategory"
           class="d-select__input d-tt-capitalize"
         >
           <option
@@ -93,7 +94,6 @@
   <dt-modal
     v-if="selectedIcon"
     :show="isModalOpen"
-    :close-button-props="{ ariaLabel: 'Close' }"
     size="full"
     content-class="d-wmx100p d-pr32"
     @update:show="isModalOpen = false"
@@ -128,6 +128,16 @@ const isModalOpen = ref(false);
 const isPopoverOpen = ref({});
 const filteredIconsList = ref({});
 const selectedIcon = ref(undefined);
+const excludedIcons = [
+  'brand-dialpad-meetings',
+  'brand-dialpad',
+  'dialpad-ai-color-reversed',
+  'dialpad-ai-color',
+  'dialpad-ai-reversed',
+  'dialpad-ai',
+  'dialpad-logomark',
+  'ai-notes',
+];
 
 const searchIcon = () => {
   debounce(() => {
@@ -177,7 +187,7 @@ const hasSearchResults = computed(() => Object.keys(filteredIconsList.value).len
  * In each category, iterate over the icons and filter by the search text or bypass it if the search in empty
  * If category has icons after filter, gets added to the categories Object.
  *
- * The filteredIconsList gets updated with a freezed object to improve performance.
+ * The filteredIconsList gets updated with a frozen object to improve performance.
  * @returns void
  */
 const filterIconList = () => {
@@ -187,10 +197,10 @@ const filterIconList = () => {
     .reduce((acc, category) => {
       const filteredCategory = Object.entries(categories[category])
         .filter(([name, keywords]) => {
-          if (!search.value) return true;
-          return regex.test(name) || regex.test(keywords.join(' '));
+          if (!search.value) return !excludedIcons.includes(name);
+          return !excludedIcons.includes(name) && (regex.test(name) || regex.test(keywords.join(' ')));
         })
-        .reduce((acc, [name, _]) => Object.assign(acc, { [name]: Object.freeze(categories[category][name]) }), {});
+        .reduce((acc, [name]) => Object.assign(acc, { [name]: Object.freeze(categories[category][name]) }), {});
 
       if (Object.keys(filteredCategory).length) {
         Object.assign(acc, { [category]: Object.freeze(filteredCategory) });

@@ -1,12 +1,10 @@
 {
-  // See https://go.microsoft.com/fwlink/?LinkId=733558
-  // for the documentation about the tasks.json format
   "version": "2.0.0",
   "tasks": [
     {
       "label": "start: dialtone docsite",
       "type": "shell",
-      "command": "nx start:dialtone",
+      "command": "pnpm nx run dialtone-documentation:start",
       "problemMatcher": [
         "$vite"
       ],
@@ -15,7 +13,7 @@
     {
       "label": "start: dialtone vue 2 storybook",
       "type": "shell",
-      "command": "nx start:dialtone-vue2",
+      "command": "pnpm nx run dialtone-vue2:start",
       "problemMatcher": [
         "$vite"
       ],
@@ -24,19 +22,7 @@
     {
       "label": "start: dialtone vue 3 storybook",
       "type": "shell",
-      "command": "nx start:dialtone-vue3",
-      "problemMatcher": [
-        "$vite"
-      ],
-      "isBackground": true
-    },
-    {
-      "label": "start: all",
-      "dependsOn": [
-        "start: dialtone docsite",
-        "start: dialtone vue 2 storybook",
-        "start: dialtone vue 3 storybook"
-      ],
+      "command": "pnpm nx run dialtone-vue3:start",
       "problemMatcher": [
         "$vite"
       ],
@@ -45,7 +31,7 @@
     {
       "label": "lint: all",
       "type": "shell",
-      "command": "nx lint",
+      "command": "pnpm nx run dialtone:lint:all",
       "problemMatcher": [
         "$eslint-stylish"
       ]
@@ -53,14 +39,63 @@
     {
       "label": "test: all",
       "type": "shell",
-      "command": "nx test",
+      "command": "pnpm nx run dialtone:test:all",
       "problemMatcher": []
     },
     {
       "label": "build: all",
       "type": "shell",
-      "command": "nx build",
+      "command": "pnpm nx run dialtone:build",
       "problemMatcher": []
+    },
+    {
+      "label": "build: language-server",
+      "type": "npm",
+      "script": "build",
+      "group": "build",
+      "presentation": {
+				"panel": "dedicated",
+				"reveal": "never"
+			},
+			"problemMatcher": {
+				"pattern": {
+					"regexp": "__________"
+				},
+				"background": {
+					"beginsPattern": "building\\.\\.\\.",
+					"endsPattern": "finished\\."
+				}
+			},
+      "options": {
+        "cwd": "${workspaceFolder}/packages/language-server/vscode"
+      }
+    },
+    {
+      "label": "watch: language-server",
+      "type": "npm",
+      "script": "watch",
+      "isBackground": true,
+      "group": {
+				"kind": "build",
+				"isDefault": true
+			},
+			"presentation": {
+				"panel": "dedicated",
+				"reveal": "never"
+			},
+			"problemMatcher": {
+				"pattern": {
+					"regexp": "__________"
+				},
+				"background": {
+					"activeOnStart": true,
+					"beginsPattern": "building\\.\\.\\.",
+					"endsPattern": "watching\\.\\.\\."
+				}
+			},
+      "options": {
+        "cwd": "${workspaceFolder}/packages/language-server/vscode"
+      }
     }
   ]
 }

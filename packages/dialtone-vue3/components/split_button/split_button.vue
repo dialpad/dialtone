@@ -78,9 +78,10 @@ import {
 import SplitButtonAlpha from './split_button-alpha.vue';
 import SplitButtonOmega from './split_button-omega.vue';
 import { DtDropdown } from '@/components/dropdown';
-import { hasSlotContent } from '@/common/utils';
+import { hasSlotContent, warnIfUnmounted, returnFirstEl } from '@/common/utils';
 
 export default {
+  compatConfig: { MODE: 3 },
   name: 'DtSplitButton',
 
   components: {
@@ -294,6 +295,7 @@ export default {
         size: this.size,
         tooltipText: this.alphaTooltipText,
         class: this.$attrs.class,
+        style: this.$attrs.style,
       };
     },
 
@@ -308,6 +310,7 @@ export default {
         size: this.size,
         tooltipText: this.omegaTooltipText,
         class: this.$attrs.class,
+        style: this.$attrs.style,
       };
     },
   },
@@ -318,6 +321,10 @@ export default {
 
   updated () {
     this.validateProps();
+  },
+
+  mounted () {
+    warnIfUnmounted(returnFirstEl(this.$el), this.$options.name);
   },
 
   methods: {

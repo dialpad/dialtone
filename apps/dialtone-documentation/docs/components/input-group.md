@@ -107,7 +107,7 @@ export default {
 
 ## Variants
 
-### With legend
+### With Legend
 
 <code-well-header>
   <dt-input-group
@@ -131,7 +131,7 @@ vueCode='
 '
 />
 
-### With slotted legend
+### With Slotted Legend
 
 <code-well-header>
   <dt-input-group name="input-group-with-slotted-legend">
@@ -183,7 +183,7 @@ vueCode='
 '
 />
 
-### With validation messages
+### With Validation Messages
 
 <code-well-header>
   <div class="d-stack16">
@@ -243,7 +243,7 @@ vueCode='
 '
 />
 
-### With validation messages hidden
+### With Validation Messages Hidden
 
 <code-well-header>
   <dt-input-group

@@ -44,13 +44,14 @@
           name="list"
           :close="close"
         />
-        <sr-only-close-button
-          v-if="showVisuallyHiddenClose"
-          :visually-hidden-close-label="visuallyHiddenCloseLabel"
-          :tabindex="isArrowKeyNav ? -1 : 0"
-          @close="close"
-        />
       </ul>
+    </template>
+    <template #footerContent="{ close }">
+      <!-- @slot Slot for the footer content -->
+      <slot
+        name="footer"
+        :close="close"
+      />
     </template>
   </dt-popover>
 </template>
@@ -62,15 +63,13 @@ import { LIST_ITEM_NAVIGATION_TYPES } from '@/components/list_item';
 import { DROPDOWN_PADDING_CLASSES } from './dropdown_constants';
 import { getUniqueString } from '@/common/utils';
 import { EVENT_KEYNAMES } from '@/common/constants';
-import SrOnlyCloseButtonMixin from '@/common/mixins/sr_only_close_button';
-import SrOnlyCloseButton from '@/common/sr_only_close_button.vue';
 
 export default {
+  compatConfig: { MODE: 3 },
   name: 'DtDropdown',
 
   components: {
     DtPopover,
-    SrOnlyCloseButton,
   },
 
   mixins: [
@@ -85,7 +84,6 @@ export default {
       activeItemKey: 'activeItemEl',
       focusOnKeyboardNavigation: true,
     }),
-    SrOnlyCloseButtonMixin,
   ],
 
   inheritAttrs: false,
@@ -301,12 +299,6 @@ export default {
      * @type {Boolean | Array}
      */
     'opened',
-
-    /**
-     * Event fired to sync the open prop with the parent component
-     * @event update:open
-     */
-    'update:open',
   ],
 
   data () {
@@ -322,6 +314,11 @@ export default {
   computed: {
     dropdownListeners () {
       return {
+
+        'update:open': value => {
+          this.$emit('update:open', value);
+        },
+
         opened: isPopoverOpen => {
           this.updateInitialHighlightIndex(isPopoverOpen);
         },
@@ -418,7 +415,7 @@ export default {
     },
 
     afterHighlight () {
-      if (this.visuallyHiddenClose && this.highlightIndex === this._itemsLength() - 1) {
+      if (this.highlightIndex === this._itemsLength() - 1) {
         return;
       }
 
@@ -501,18 +498,3 @@ export default {
   },
 };
 </script>
-
-<style lang="less">
-.d-context-menu-list {
-  width: var(--dt-size-850);
-}
-.d-dropdown-list {
-  position: relative;
-  margin: var(--dt-space-300);
-  padding-left: var(--dt-space-0);
-  padding-right: var(--dt-space-0);
-  >.dt-list-item {
-    margin-top: var(--dt-space-200);
-  }
-}
-</style>

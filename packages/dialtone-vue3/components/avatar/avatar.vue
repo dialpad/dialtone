@@ -3,6 +3,7 @@
     :is="clickable ? 'button' : 'div'"
     :id="id"
     :class="avatarClasses"
+    :style="$attrs.style"
     data-qa="dt-avatar"
     @click="handleClick"
   >
@@ -22,14 +23,19 @@
         :src="imageSrc"
         :alt="imageAlt"
       >
-      <dt-icon
-        v-else-if="iconName"
-        :name="iconName"
-        :aria-label="iconAriaLabel"
-        :size="iconSize || AVATAR_ICON_SIZES[size]"
+      <div
+        v-else-if="isIconType()"
         :class="[iconClass, AVATAR_KIND_MODIFIERS.icon]"
-        data-qa="dt-avatar-icon"
-      />
+        :aria-label="clickable ? iconAriaLabel : ''"
+        :data-qa="iconDataQa"
+        :role="clickable ? 'button' : ''"
+      >
+        <!-- @slot Slot for avatar icon. It will display if no imageSrc is provided -->
+        <slot
+          name="icon"
+          :icon-size="iconSize || AVATAR_ICON_SIZES[size]"
+        />
+      </div>
       <span
         v-else
         :class="[AVATAR_KIND_MODIFIERS.initials]"
@@ -38,13 +44,13 @@
       </span>
     </div>
     <div
-      v-if="overlayIcon || overlayText"
+      v-if="hasOverlayIcon || overlayText"
       :class="overlayClasses"
     >
-      <dt-icon
-        v-if="overlayIcon"
-        class="d-avatar__overlay-icon"
-        :name="overlayIcon"
+      <!-- @slot Slot for overlay icon. -->
+      <slot
+        v-if="hasOverlayIcon"
+        name="overlayIcon"
       />
       <p
         v-else-if="overlayText"
@@ -72,9 +78,8 @@
 </template>
 
 <script>
-import { getUniqueString, getRandomElement } from '@/common/utils';
+import { getUniqueString, getRandomElement, hasSlotContent } from '@/common/utils';
 import { DtPresence } from '../presence';
-import { DtIcon } from '@/components/icon';
 import {
   AVATAR_KIND_MODIFIERS,
   AVATAR_SIZE_MODIFIERS,
@@ -84,19 +89,17 @@ import {
   AVATAR_GROUP_VALIDATOR,
   AVATAR_ICON_SIZES,
 } from './avatar_constants';
-import { getIconNames } from '@/common/storybook_utils.js';
 import { ICON_SIZE_MODIFIERS } from '@/components/icon/icon_constants.js';
 import { extractInitialsFromName } from './utils';
-
-const ICONS_LIST = getIconNames();
 
 /**
  * An avatar is a visual representation of a user or object.
  * @see https://dialtone.dialpad.com/components/avatar.html
  */
 export default {
+  compatConfig: { MODE: 3 },
   name: 'DtAvatar',
-  components: { DtPresence, DtIcon },
+  components: { DtPresence },
 
   inheritAttrs: false,
 
@@ -195,14 +198,6 @@ export default {
     },
 
     /**
-     * The icon that overlays the avatar
-     */
-    overlayIcon: {
-      type: String,
-      default: '',
-    },
-
-    /**
      * The text that overlays the avatar
      */
     overlayText: {
@@ -234,15 +229,6 @@ export default {
     imageAlt: {
       type: String,
       default: undefined,
-    },
-
-    /**
-     * Icon name to be displayed on the avatar
-     */
-    iconName: {
-      type: String,
-      default: undefined,
-      validator: (name) => ICONS_LIST.includes(name),
     },
 
     /**
@@ -301,22 +287,28 @@ export default {
       imageLoadedSuccessfully: null,
       formattedInitials: '',
       initializing: false,
+      hasSlotContent,
     };
   },
 
   computed: {
-    isNotIconType () {
-      return !this.iconName;
+    hasOverlayIcon () {
+      return hasSlotContent(this.$slots.overlayIcon);
+    },
+
+    iconDataQa () {
+      return 'dt-avatar-icon';
     },
 
     avatarClasses () {
       return [
         'd-avatar',
+        this.$attrs.class,
         AVATAR_SIZE_MODIFIERS[this.validatedSize],
         this.avatarClass,
         {
           'd-avatar--group': this.showGroup,
-          [`d-avatar--color-${this.getColor()}`]: this.isNotIconType,
+          [`d-avatar--color-${this.getColor()}`]: !this.isIconType(),
           'd-avatar--clickable': this.clickable,
         },
       ];
@@ -326,6 +318,7 @@ export default {
       return [
         'd-avatar__overlay',
         this.overlayClass,
+        { 'd-avatar__overlay-icon': this.hasOverlayIcon },
       ];
     },
 
@@ -384,6 +377,10 @@ export default {
   },
 
   methods: {
+    isIconType () {
+      return hasSlotContent(this.$slots.icon);
+    },
+
     async setImageListeners () {
       await this.$nextTick();
       const el = this.$refs.avatarImage;
@@ -432,71 +429,3 @@ export default {
   },
 };
 </script>
-
-<style lang="less">
-//TODO: Move these classes to dialtone and document.
-.d-avatar--image-loaded {
-  background-color: transparent;
-  background-image: unset;
-}
-
-.d-avatar__count {
-  z-index: var(--zi-base);
-}
-
-.d-avatar__presence {
-  z-index: var(--zi-base);
-}
-
-.d-avatar__overlay {
-  background-color: var(--dt-color-surface-contrast-opaque);
-  opacity: var(--dt-opacity-900);
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: var(--dt-size-radius-circle);
-  z-index: var(--zi-base);
-}
-
-.d-avatar__overlay-icon {
-  color: var(--dt-color-foreground-primary-inverted);
-  width: 100%;
-}
-
-.d-avatar__overlay-text {
-  color: var(--dt-color-foreground-primary-inverted);
-  font-weight: var(--dt-font-weight-bold);
-  font-size: var(--dt-font-size-200);
-  width: 100%;
-  text-align: center;
-}
-
-.d-avatar--clickable {
-  --avatar-color-border: transparent;
-
-  cursor: pointer;
-  padding: 0;
-  background-color: transparent;
-
-  border-radius: var(--dt-size-radius-circle);
-  border: var(--dt-size-border-100) solid var(--avatar-color-border);
-
-  &:focus-visible {
-    outline: none;
-    box-shadow: var(--dt-shadow-focus);
-  }
-
-  &:hover {
-    --avatar-color-border: var(--dt-color-border-default);
-  }
-
-  &:active {
-    --avatar-color-border: var(--dt-color-border-moderate);
-
-    transform: scale(0.98);
-  }
-}
-</style>

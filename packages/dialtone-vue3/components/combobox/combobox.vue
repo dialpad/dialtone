@@ -49,11 +49,11 @@
 </template>
 
 <script>
-import KeyboardNavigation from '@/common/mixins/keyboard_list_navigation';
-import { getUniqueString, hasSlotContent } from '@/common/utils';
 import ComboboxLoadingList from './combobox_loading-list.vue';
 import ComboboxEmptyList from './combobox_empty-list.vue';
-import { LABEL_SIZES } from '@/components/combobox/combobox_constants';
+import { DtKeyboardListNavigationMixin } from '@/common/mixins';
+import { getUniqueString, hasSlotContent } from '@/common/utils';
+import { COMBOBOX_LABEL_SIZES } from '@/components/combobox';
 
 /**
  * A combobox is a semantic component that displays an input element combined with a listbox,
@@ -61,6 +61,7 @@ import { LABEL_SIZES } from '@/components/combobox/combobox_constants';
  * @see https://dialtone.dialpad.com/components/combobox.html
  */
 export default {
+  compatConfig: { MODE: 3 },
   name: 'DtCombobox',
 
   components: {
@@ -69,7 +70,7 @@ export default {
   },
 
   mixins: [
-    KeyboardNavigation({
+    DtKeyboardListNavigationMixin({
       indexKey: 'highlightIndex',
       idKey: 'highlightId',
       listElementKey: 'getListElement',
@@ -105,7 +106,7 @@ export default {
     size: {
       type: String,
       default: null,
-      validator: (t) => Object.values(LABEL_SIZES).includes(t),
+      validator: (t) => Object.values(COMBOBOX_LABEL_SIZES).includes(t),
     },
 
     /**
@@ -313,7 +314,7 @@ export default {
       }
     },
 
-    loading (loading) {
+    loading () {
       this.$nextTick(() => {
         this.setInitialHighlightIndex();
       });

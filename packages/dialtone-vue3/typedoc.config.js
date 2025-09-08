@@ -4,11 +4,15 @@ export default {
   entryPoints: ['common/*/index.js'],
 
   // Non-public modules should be added here.
-  exclude: ['**/*.test.js', 'common/storybook_utils.js', 'common/custom-emoji-test.js', 'common/mixins'],
+  exclude: [
+    '**/*.test.js',
+    'common/storybook_utils.js',
+    'common/v_html.js',
+    'common/mixins',
+  ],
   out: 'functions/generated',
   githubPages: false,
   name: 'Date and Time',
-  hideInPageTOC: true,
   hideBreadcrumbs: true,
   entryPointStrategy: 'expand',
 };

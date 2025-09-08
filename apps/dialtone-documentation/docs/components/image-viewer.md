@@ -8,7 +8,7 @@ storybook: https://dialtone.dialpad.com/vue/?path=/story/components-image-viewer
 
 <code-well-header>
   <dt-image-viewer
-    image-src="https://dialtone.dialpad.com/vue/assets/test-mtc3yI39.jpg"
+    :image-src="$withBase('/assets/images/test.jpg')"
     image-alt="Image Alt Text"
     image-button-class="d-wmn64 d-hmn64 w-wmx332 d-hmx332"
     aria-label="Click to open image"
@@ -18,12 +18,12 @@ storybook: https://dialtone.dialpad.com/vue/?path=/story/components-image-viewer
 
 ## Examples
 
-### JPG image
+### JPG Image
 
 <code-well-header>
   <dt-image-viewer
     ref="jpgExample"
-    image-src="https://dialtone.dialpad.com/vue/assets/test-mtc3yI39.jpg"
+    :image-src="$withBase('/assets/images/test.jpg')"
     image-alt="Image Alt Text"
     image-button-class="d-wmn64 d-hmn64 w-wmx332 d-hmx332"
     aria-label="Click to open image"
@@ -35,7 +35,7 @@ storybook: https://dialtone.dialpad.com/vue/?path=/story/components-image-viewer
 :htmlCode='() => $refs.jpgExample'
 vueCode='
 <dt-image-viewer
-  image-src="https://dialtone.dialpad.com/vue/assets/test-mtc3yI39.jpg"
+  image-src="url/to/image"
   image-alt="Image Alt Text"
   image-button-class="d-wmn64 d-hmn64 w-wmx332 d-hmx332"
   aria-label="Click to open image"
@@ -44,12 +44,12 @@ vueCode='
 '
 />
 
-### GIF image
+### GIF Image
 
 <code-well-header>
   <dt-image-viewer
     ref="gifExample"
-    image-src="https://dialtone.dialpad.com/vue/assets/fry-0Qyk-dGv.gif"
+    :image-src="$withBase('/assets/images/fry.gif')"
     image-alt="Image Alt Text"
     image-button-class="d-wmn64 d-hmn64 w-wmx332 d-hmx332"
     aria-label="Click to open image"
@@ -61,7 +61,7 @@ vueCode='
 :htmlCode='() => $refs.gifExample'
 vueCode='
 <dt-image-viewer
-  image-src="https://dialtone.dialpad.com/vue/assets/fry-0Qyk-dGv.gif"
+  image-src="/url/to/gif"
   image-alt="Image Alt Text"
   image-button-class="d-wmn64 d-hmn64 w-wmx332 d-hmx332"
   aria-label="Click to open image"

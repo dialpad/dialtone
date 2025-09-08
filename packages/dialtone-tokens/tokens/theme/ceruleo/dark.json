@@ -1,0 +1,54 @@
+{
+  "shell": {
+    "base": {
+      "color": {
+        "surface": {
+          "value": "{color.indigo.100}",
+          "type": "color"
+        },
+        "foreground": {
+          "value": "{color.blue.1000}",
+          "type": "color"
+        },
+        "border": {
+          "value": "{color.neutral.white}",
+          "type": "color"
+        },
+        "accent": {
+          "value": "{color.red.600}",
+          "type": "color"
+        },
+        "status-positive": {
+          "value": "{color.green.425}",
+          "type": "color"
+        },
+        "status-critical": {
+          "value": "{color.red.600}",
+          "type": "color"
+        },
+        "status-warning": {
+          "value": "{color.gold.600}",
+          "type": "color"
+        }
+      },
+      "action": {
+        "color": {
+          "background": {
+            "primary": {
+              "value": "{color.blue.475}",
+              "type": "color"
+            },
+            "secondary": {
+              "value": "{color.blue.475}",
+              "type": "color"
+            },
+            "muted": {
+              "value": "{color.blue.475}",
+              "type": "color"
+            }
+          }
+        }
+      }
+    }
+  }
+}

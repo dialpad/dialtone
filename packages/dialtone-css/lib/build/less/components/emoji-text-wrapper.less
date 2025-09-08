@@ -1,9 +1,10 @@
 .d-emoji-text-wrapper {
-  .d-emoji {
+  // Only inline emojis need this adjustments
+  >.d-emoji {
     height: 1em;
 
-    .d-icon {
-      top: calc(50% - 1px);
+    img.d-icon {
+      inset-block-start: calc(50% - 1px);
     }
   }
 }

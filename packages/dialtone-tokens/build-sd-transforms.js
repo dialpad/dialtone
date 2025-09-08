@@ -5,7 +5,7 @@
 import { register, getTransforms, expandTypesMap } from '@tokens-studio/sd-transforms';
 import StyleDictionary from 'style-dictionary';
 import { promises, readFileSync } from 'fs';
-import { kebabCaseToPascalCase } from '../../common/utils.mjs';
+import { kebabCaseToPascalCase } from '../../common/utils/client.mjs';
 
 import { registerDialtoneTransforms } from './dialtone-transforms.js';
 import { buildDocs } from './build-docs.js';
@@ -80,6 +80,16 @@ export async function run () {
           basePxFontSize: Number.parseFloat(BASE_FONT_SIZE),
           buildPath: 'dist/css/',
           theme: themeName,
+          options: {
+            outputReferences: (token) => {
+              // Don't output references for tokens that have been modified via studio tokens extension, also
+              // for box shadow colors because they use rgb
+              if (token.$extensions?.['studio.tokens']?.modify || (token.$extensions?.['studio.tokens']?.originalType === 'boxShadow' && token.type === 'color')) {
+                return false;
+              }
+              return true;
+            },
+          },
           files: [
             {
               destination: `tokens-${themeName}.css`,
@@ -123,7 +133,14 @@ export async function run () {
           ],
         },
         android_xml: {
-          transforms: ['attribute/cti', 'name/snake', 'dt/android/xml/color', 'size/remToSp', 'size/remToDp'],
+          transforms: [
+            'attribute/cti',
+            'name/snake',
+            'dt/android/xml/size/resolveMath',
+            'dt/android/xml/color',
+            'dt/android/xml/color/modifiers',
+            'dt/android/xml/size/pxToDp',
+          ],
           actions: ['buildDocJson'],
           prefix: `dt_${themeName}`,
           theme: themeName,
@@ -134,6 +151,8 @@ export async function run () {
               format: 'android/resources',
               resourceType: 'color',
               filter: function (token) {
+                if (token.value.startsWith('linear-gradient')) return false;
+                if (token.path.includes('shadow')) return false;
                 return ['color'].includes(token.type) && token.isSource;
               },
             },
@@ -142,14 +161,28 @@ export async function run () {
               format: 'android/resources',
               resourceType: 'dimen',
               filter: function (token) {
-                if (['dtColorGradientMagentaPurple'].includes(token.name)) return false;
+                if (token.value.startsWith('linear-gradient')) return false;
+                if (token.path.includes('shadow')) return false;
                 return ['dimension'].includes(token.type) && token.isSource;
               },
             },
           ],
         },
         android_compose: {
-          transforms: ['ts/resolveMath', 'dt/android/compose/fonts/transformToStack', 'dt/android/compose/fonts/weight', 'dt/android/compose/lineHeight/percentToDecimal', 'dt/android/compose/opacity/percentToFloat', 'dt/android/compose/size/pxToDp', 'dt/android/compose/size/pxToSp', 'dt/android/compose/color', 'dt/stringify', 'attribute/cti', 'name/camel'],
+          transforms: [
+            'dt/android/compose/size/resolveMath',
+            'dt/android/compose/fonts/transformToStack',
+            'dt/android/compose/fonts/weight',
+            'dt/android/compose/lineHeight/percentToDecimal',
+            'dt/android/compose/opacity/percentToFloat',
+            'dt/android/compose/size/pxToDp',
+            'dt/android/compose/size/pxToSp',
+            'dt/android/compose/color',
+            'dt/android/compose/color/modifiers',
+            'dt/stringify',
+            'attribute/cti',
+            'name/camel',
+          ],
           actions: ['buildDocJson'],
           prefix: 'dt',
           theme: themeName,
@@ -165,14 +198,25 @@ export async function run () {
               },
 
               filter: function (token) {
-                if (['dtColorGradientMagentaPurple'].includes(token.name)) return false;
+                if (token.value.startsWith('linear-gradient')) return false;
+                if (token.path.includes('shadow')) return false;
                 return token.isSource;
               },
             },
           ],
         },
         ios: {
-          transforms: ['dt/ios/fonts/transformToStack', 'attribute/cti', 'name/camel', 'dt/ios/color', 'size/pxToRem', 'size/swift/remToCGFloat', 'dt/ios/lineHeight/percentToDecimal', 'dt/stringify'],
+          transforms: [
+            'dt/ios/fonts/transformToStack',
+            'attribute/cti',
+            'name/camel',
+            'dt/ios/color',
+            'dt/ios/color/modifiers',
+            'size/pxToRem',
+            'size/swift/remToCGFloat',
+            'dt/ios/lineHeight/percentToDecimal',
+            'dt/stringify',
+          ],
           actions: ['buildDocJson'],
           prefix: 'dt',
           theme: themeName,
@@ -185,11 +229,18 @@ export async function run () {
                 className: `DialtoneTokens${kebabCaseToPascalCase(themeName)}`,
               },
               filter: function (token) {
-                if (['dtColorGradientMagentaPurple'].includes(token.name)) return false;
+                if (token.value.startsWith('linear-gradient')) return false;
                 return token.isSource;
               },
             },
           ],
+        },
+      },
+      log: {
+        warnings: 'disabled', // 'warn' | 'error' | 'disabled'
+        verbosity: 'verbose', // 'default' | 'silent' | 'verbose'
+        errors: {
+          brokenReferences: 'throw', // 'throw' | 'console'
         },
       },
     };

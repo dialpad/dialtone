@@ -4,9 +4,9 @@
  * because sd-transforms handles the transforms for CSS.
  */
 
-import Color from 'tinycolor2';
+import { colorsFilter, colorModifiersFilter, DeviceObjectFormat, deviceTransformColorModifiers, tokenColorToDeviceColor } from './transform-util.js';
 
-const SIZE_IDENTIFIERS = ['fontSizes', 'sizing', 'borderWidth', 'borderRadius', 'blur', 'spread', 'x', 'y', 'dimension'];
+const SIZE_IDENTIFIERS = ['sizing', 'borderWidth', 'borderRadius', 'blur', 'spread', 'x', 'y', 'dimension'];
 const SPACING_IDENTIFIERS = ['spacing'];
 const FONT_FAMILY_IDENTIFIERS = ['fontFamily'];
 const FONT_SIZE_IDENTIFIERS = ['fontSizes', 'fontSize'];
@@ -30,7 +30,7 @@ const pxToRemTransformer = (token, options) => {
   const floatVal = parseFloat(token.value);
 
   if (isNaN(floatVal)) {
-    throwSizeError(token.name, token.value, 'rem');
+    throwSizeError(token.path, token.value, 'rem');
   }
 
   if (floatVal === 0) {
@@ -49,7 +49,8 @@ export function registerDialtoneTransforms (styleDictionary) {
     name: 'dt/size/pxToRem',
     type: 'value',
     filter: function (token) {
-      return [...FONT_SIZE_IDENTIFIERS, ...SIZE_IDENTIFIERS].includes(token.type);
+      return [...FONT_SIZE_IDENTIFIERS, ...SIZE_IDENTIFIERS].includes(token.type) &&
+      !(token.filePath === 'tokens/root.json');
     },
     transform: pxToRemTransformer,
   });
@@ -64,28 +65,74 @@ export function registerDialtoneTransforms (styleDictionary) {
   });
 
   styleDictionary.registerTransform({
+    name: 'dt/android/xml/size/resolveMath',
+    type: 'value',
+    transitive: true,
+    filter: function (token) {
+      return [...SPACING_IDENTIFIERS, ...SIZE_IDENTIFIERS].includes(token.type);
+    },
+    transform: (token) => {
+      // replace unmathable characters with empty string
+      const mathString = token.value.replace(/dp|sp|em|px|%/g, '');
+      // eslint-disable-next-line no-eval
+      const result = eval(mathString).toFixed(2);
+      return `${result}dp`;
+    },
+  });
+
+  styleDictionary.registerTransform({
+    name: 'dt/android/xml/size/pxToDp',
+    type: 'value',
+    transitive: true,
+    filter: function (token) {
+      return [...SPACING_IDENTIFIERS, ...SIZE_IDENTIFIERS].includes(token.type);
+    },
+    transform: (token) => {
+      const floatVal = parseFloat(token.value);
+
+      if (isNaN(floatVal)) {
+        throwSizeError(token.path, token.value, 'dp');
+      }
+
+      return `${floatVal.toFixed(2)}dp`;
+    },
+  });
+
+  styleDictionary.registerTransform({
     name: 'dt/android/xml/color',
     type: 'value',
-    filter: function (token) {
-      return ['color'].includes(token.type);
-    },
+    filter: colorsFilter,
     transform: function (token) {
-      if (token.value === 'transparent') { return '#00ffffff'; }
-      const str = Color(token.value).toHex8();
-      return '#' + str.slice(6) + str.slice(0, 6);
+      return tokenColorToDeviceColor(token.value, DeviceObjectFormat.ANDROID_XML);
+    },
+  });
+
+  styleDictionary.registerTransform({
+    name: 'dt/android/xml/color/modifiers',
+    type: 'value',
+    transitive: true,
+    filter: colorModifiersFilter,
+    transform: function (token) {
+      return deviceTransformColorModifiers(token, DeviceObjectFormat.ANDROID_XML);
     },
   });
 
   styleDictionary.registerTransform({
     name: 'dt/android/compose/color',
     type: 'value',
-    transitive: true,
-    filter: function (token) {
-      return ['color'].includes(token.type);
-    },
+    filter: colorsFilter,
     transform: (token) => {
-      const hex8 = Color(token.value).toHex8();
-      return `Color(0x${hex8.slice(6) + hex8.slice(0, 6)})`;
+      return tokenColorToDeviceColor(token.value, DeviceObjectFormat.ANDROID_COMPOSE);
+    },
+  });
+
+  styleDictionary.registerTransform({
+    name: 'dt/android/compose/color/modifiers',
+    type: 'value',
+    transitive: true,
+    filter: colorModifiersFilter,
+    transform: (token) => {
+      return deviceTransformColorModifiers(token, DeviceObjectFormat.ANDROID_COMPOSE);
     },
   });
 
@@ -118,14 +165,18 @@ export function registerDialtoneTransforms (styleDictionary) {
   styleDictionary.registerTransform({
     name: 'dt/android/compose/size/pxToDp',
     type: 'value',
+    transitive: true,
     filter: function (token) {
-      return [...SPACING_IDENTIFIERS, ...SIZE_IDENTIFIERS].includes(token.type);
+      return [...SPACING_IDENTIFIERS, ...SIZE_IDENTIFIERS].includes(token.type) &&
+        // The fontSize token in typography tokens is a 'dimension' type for some reason,
+        // so have this special case to exclude it from this transform.
+        !FONT_SIZE_IDENTIFIERS.includes(token.name);
     },
     transform: (token) => {
       const floatVal = parseFloat(token.value);
 
       if (isNaN(floatVal)) {
-        throwSizeError(token.name, token.value, 'dp');
+        throwSizeError(token.path, token.value, 'dp');
       }
 
       return `${floatVal}.dp`;
@@ -136,17 +187,41 @@ export function registerDialtoneTransforms (styleDictionary) {
   styleDictionary.registerTransform({
     name: 'dt/android/compose/size/pxToSp',
     type: 'value',
+    transitive: true,
     filter: function (token) {
-      return [...FONT_SIZE_IDENTIFIERS].includes(token.type);
+      return [...FONT_SIZE_IDENTIFIERS].includes(token.type) ||
+        // The fontSize token in typography tokens is a 'dimension' type for some reason,
+        // so have this special case to include it in this transform.
+        FONT_SIZE_IDENTIFIERS.includes(token.name);
     },
     transform: (token) => {
       const floatVal = parseFloat(token.value);
 
       if (isNaN(floatVal)) {
-        throwSizeError(token.name, token.value, 'sp');
+        throwSizeError(token.path, token.value, 'sp');
       }
 
       return `${floatVal}.sp`;
+    },
+  });
+
+  styleDictionary.registerTransform({
+    name: 'dt/android/compose/size/resolveMath',
+    type: 'value',
+    transitive: true,
+    filter: function (token) {
+      return [...SPACING_IDENTIFIERS, ...SIZE_IDENTIFIERS, ...FONT_SIZE_IDENTIFIERS].includes(token.type);
+    },
+    transform: (token) => {
+      // replace unmathable characters with empty string
+      let unit;
+      if (token.value.includes('.dp')) unit = 'dp';
+      if (token.value.includes('.sp')) unit = 'sp';
+      if (token.value.includes('.em')) unit = 'em';
+      const mathString = token.value.replace(/\.dp|\.sp|\.em|px|%/g, '');
+      // eslint-disable-next-line no-eval
+      const result = eval(mathString);
+      return `${result}.${unit}`;
     },
   });
 
@@ -160,7 +235,7 @@ export function registerDialtoneTransforms (styleDictionary) {
       const floatVal = parseFloat(token.value);
 
       if (isNaN(floatVal)) {
-        throwSizeError(token.name, token.value, '%');
+        throwSizeError(token.path, token.value, '%');
       }
 
       if (floatVal === 0) {
@@ -182,7 +257,7 @@ export function registerDialtoneTransforms (styleDictionary) {
       const floatVal = parseFloat(token.value);
 
       if (isNaN(floatVal)) {
-        throwSizeError(token.name, token.value, '%');
+        throwSizeError(token.path, token.value, '%');
       }
 
       return `${floatVal}F`;
@@ -203,6 +278,7 @@ export function registerDialtoneTransforms (styleDictionary) {
   styleDictionary.registerTransform({
     name: 'dt/ios/fonts/transformToStack',
     type: 'value',
+    transitive: true,
     filter: function (token) {
       return FONT_FAMILY_IDENTIFIERS.includes(token.type);
     },
@@ -217,15 +293,19 @@ export function registerDialtoneTransforms (styleDictionary) {
   styleDictionary.registerTransform({
     name: 'dt/ios/color',
     type: 'value',
-    filter: function (token) {
-      return ['color'].includes(token.type);
-    },
+    filter: colorsFilter,
     transform: (token) => {
-      const { r, g, b, a } = Color(token.value).toRgb();
-      const rFixed = (r / 255.0).toFixed(3);
-      const gFixed = (g / 255.0).toFixed(3);
-      const bFixed = (b / 255.0).toFixed(3);
-      return `UIColor(red: ${rFixed}, green: ${gFixed}, blue: ${bFixed}, alpha: ${a})`;
+      return tokenColorToDeviceColor(token.value, DeviceObjectFormat.IOS_SWIFT);
+    },
+  });
+
+  styleDictionary.registerTransform({
+    name: 'dt/ios/color/modifiers',
+    type: 'value',
+    transitive: true,
+    filter: colorModifiersFilter,
+    transform: (token) => {
+      return deviceTransformColorModifiers(token, DeviceObjectFormat.IOS_SWIFT);
     },
   });
 
@@ -239,7 +319,7 @@ export function registerDialtoneTransforms (styleDictionary) {
       const floatVal = parseFloat(token.value);
 
       if (isNaN(floatVal)) {
-        throwSizeError(token.name, token.value, 'dp');
+        throwSizeError(token.path, token.value, 'dp');
       }
 
       return `CGFloat(${(floatVal).toFixed(2)})`;
@@ -256,7 +336,7 @@ export function registerDialtoneTransforms (styleDictionary) {
       const floatVal = parseFloat(token.value);
 
       if (isNaN(floatVal)) {
-        throwSizeError(token.name, token.value, '%');
+        throwSizeError(token.path, token.value, '%');
       }
 
       return `CGFloat(${(floatVal).toFixed(2)})`;
@@ -273,7 +353,7 @@ export function registerDialtoneTransforms (styleDictionary) {
       const floatVal = parseFloat(token.value);
 
       if (isNaN(floatVal)) {
-        throwSizeError(token.name, token.value, '%');
+        throwSizeError(token.path, token.value, '%');
       }
 
       if (floatVal === 0) {
@@ -310,7 +390,7 @@ export function registerDialtoneTransforms (styleDictionary) {
       const floatVal = parseFloat(token.value);
 
       if (isNaN(floatVal)) {
-        throwSizeError(token.name, token.value, '%');
+        throwSizeError(token.path, token.value, '%');
       }
 
       if (floatVal === 0) {

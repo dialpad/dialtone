@@ -1,6 +1,6 @@
 <!-- eslint-disable max-lines -->
 <template>
-  <div class="d-d-flex d-jc-space-between d-fw-wrap d-w100p d-flg12 d-fl-col2">
+  <div class="d-d-flex d-jc-space-between d-fw-wrap d-w100p d-cg12 d-fl-col2">
     <dt-popover
       :open="$attrs.open"
       :modal="$attrs.modal"
@@ -137,9 +137,6 @@
       initial-focus-element="first"
       max-height="20rem"
       max-width="50rem"
-      :close-button-props="{
-        ariaLabel: 'Close popover',
-      }"
     >
       <template #anchor="{ attrs }">
         <dt-tooltip>
@@ -210,9 +207,6 @@
       max-height="20rem"
       max-width="50rem"
       initial-focus-element="first"
-      :close-button-props="{
-        ariaLabel: 'Close popover',
-      }"
     >
       <template #anchor="{ attrs }">
         <dt-button
@@ -245,9 +239,6 @@
       max-height="20rem"
       max-width="50rem"
       initial-focus-element="first"
-      :close-button-props="{
-        ariaLabel: 'Close popover',
-      }"
     >
       <template #anchor="{ attrs }">
         <dt-button

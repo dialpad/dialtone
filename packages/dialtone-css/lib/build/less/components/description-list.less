@@ -1,0 +1,30 @@
+.d-description-list {
+  display: flex;
+  flex-flow: row wrap;
+  gap: var(--description-list-gap);
+  align-items: flex-start;
+  font: var(--dt-typography-body-sm);
+
+  --description-list-gap: var(--dt-space-400);
+  each(range(0, 600, 100), {
+    &--gap-@{value} {
+     --description-list-gap: ~"var(--dt-space-@{value})";
+    }
+  });
+
+  &--column {
+    flex-direction: column;
+  }
+
+  &__term {
+    flex: 0 1 40%;
+    color: var(--dt-color-foreground-tertiary);
+    font: var(--dt-typography-label-sm);
+  }
+
+  &__description {
+    flex: 1 1 50%;
+    margin-left: 0;
+    color: var(--dt-color-foreground-primary);
+  }
+}

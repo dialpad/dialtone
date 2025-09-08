@@ -1,5 +1,5 @@
 export default {
-  install (Vue, options) {
+  install (Vue) {
     Vue.mixin({
       computed: {
         defaultSlot () {

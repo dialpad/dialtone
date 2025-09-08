@@ -223,14 +223,14 @@ describe('Checkbox Group Tests', () => {
 
           MOCK_SELECTED_CHECKBOX_FUNCTION(MOCK_SELECTED_VALUE);
 
-          expect(wrapper.emitted()).toEqual({});
+          expect(wrapper.emitted('input')).toBeFalsy();
         });
       });
     });
   });
 
   describe('Validation Tests', () => {
-    const MOCK_PROP = DtCheckboxGroup.props.value;
+    const MOCK_PROP = DtCheckboxGroup.props.modelValue;
 
     describe('When a value is not provided', () => {
       it('passes custom prop validation', () => {

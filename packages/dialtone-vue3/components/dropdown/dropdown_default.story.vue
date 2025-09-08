@@ -11,8 +11,6 @@
     :list-class="$attrs.listClass"
     :navigation-type="$attrs.navigationType"
     :open-on-context="$attrs.openOnContext"
-    :visually-hidden-close="$attrs.visuallyHiddenClose"
-    :visually-hidden-close-label="$attrs.visuallyHiddenCloseLabel"
     :tether="$attrs.tether"
     :transition="$attrs.transition"
     @highlight="$attrs.onHighlight"
@@ -45,6 +43,12 @@
       >
         {{ item.name }}
       </dt-list-item>
+    </template>
+    <template #footer>
+      <div
+        v-if="$attrs.footer"
+        v-html="$attrs.footer"
+      />
     </template>
   </dt-dropdown>
 </template>

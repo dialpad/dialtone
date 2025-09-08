@@ -2,18 +2,25 @@ import { createLocalVue, mount } from '@vue/test-utils';
 import {
   itBehavesLikeFailsCustomPropValidation,
   itBehavesLikePassesCustomPropValidation,
-} from '../../../tests/shared_examples/validation';
+} from '@/tests/shared_examples/validation.js';
 import DtRecipeEmojiRow from './emoji_row.vue';
 import { DtTooltip } from '@/components/tooltip';
+import { getEmojiShortCode } from '@/common/emoji';
 
 // Constants
 const testEmojiObj = {
   emojiUnicodeOrShortname: '🙃',
+  names: 'John Doe & Olivia Chen',
   isSelected: false,
-  ariaLabel: 'Emoji aria label',
-  tooltip: 'You reacted with 🙃',
-  num: 99,
+  num: 2,
 };
+const emojiShortcode = getEmojiShortCode(testEmojiObj.emojiUnicodeOrShortname);
+
+// \u2068 and \u2069 are Unicode bidi isolation characters.
+// They are non-printing characters that help text layout engines to ensure that the interpolated strings are handled correctly
+// in the situation where the text direction of the substitution might not match the text direction of the localized text.
+// https://github.com/django-ftl/fluent-compiler/blob/master/docs/usage.rst#formatting-messages
+const MOCK_LOCALIZED_EMOJI_REACTION_ARIA_LABEL = `reacted with \u2068${emojiShortcode}\u2069`;
 
 const basePropsData = {
   reactions: [
@@ -42,7 +49,7 @@ describe('DtRecipeEmojiRow Tests', function () {
   };
 
   const transitionStub = () => ({
-    render: function (h) {
+    render: function () {
       return this.$options._renderChildren;
     },
   });
@@ -58,7 +65,6 @@ describe('DtRecipeEmojiRow Tests', function () {
       slots,
       provide,
       localVue: testContext.localVue,
-      attachTo: document.body,
     });
     _setChildWrappers();
   };
@@ -114,8 +120,8 @@ describe('DtRecipeEmojiRow Tests', function () {
      */
 
     describe('Default Render', function () {
-      it('should render a reaction button', () => {
-        expect(emojiReactionButton.attributes('aria-label')).toBe(testEmojiObj.ariaLabel);
+      it('should render a reaction button with correct aria-label', () => {
+        expect(emojiReactionButton.attributes('aria-label')).toContain(MOCK_LOCALIZED_EMOJI_REACTION_ARIA_LABEL);
       });
     });
   });

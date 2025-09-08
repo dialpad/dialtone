@@ -5,11 +5,11 @@ import customEmojis from '@data/custom-emoji.json';
 import 'overlayscrollbars/overlayscrollbars.css';
 import { OverlayScrollbars, ClickScrollPlugin } from 'overlayscrollbars';
 import { onBeforeMount, provide, ref } from 'vue';
-import { flushPromises } from '@workspaceRoot/common/utils';
+import { flushPromises } from '@workspaceRoot/common/utils/client.mjs';
 
 // CSS
 import '@dialpad/dialtone-css/lib/dist/dialtone.css';
-import '@dialpad/dialtone/vue3/css';
+// import '@dialpad/dialtone-combinator/css';
 import './assets/less/dialtone-docs.less';
 import './assets/less/dialtone-syntax.less';
 
@@ -42,8 +42,11 @@ export default defineClientConfig({
       await initOverlayScrollbars();
       await registerDialtoneVue(app);
       // await registerDialtoneCombinator(app);
+      await registerDialtoneIcons(app);
+      await importDocumentation(app);
+      importDialtoneThemes(app);
     }
-    router.options.scrollBehavior = async (to, from, savedPosition) => {
+    router.options.scrollBehavior = async (to) => {
       if (to.hash) {
         const html = document.querySelector('html');
         // vue-router does not incorporate scroll-padding-top on its own.
@@ -62,8 +65,16 @@ export default defineClientConfig({
   },
   setup () {
     onBeforeMount(() => {
-      const preferredTheme = localStorage.getItem('preferredTheme') || 'system';
+      // Set the theme to 'dp' by default
+      localStorage.setItem('preferredTheme', 'dp');
+
+      const preferredMode = localStorage.getItem('preferredMode') || 'system';
+      const preferredTheme = localStorage.getItem('preferredTheme');
+
+      const currentMode = ref(preferredMode);
       const currentTheme = ref(preferredTheme);
+
+      provide('currentMode', currentMode);
       provide('currentTheme', currentTheme);
     });
   },
@@ -75,36 +86,86 @@ export default defineClientConfig({
 
 async function registerDialtoneVue (app) {
   const module = await import('@dialpad/dialtone-vue');
+  const documentation = await import('@dialpad/dialtone-vue/component-documentation.json');
+
   const dialtoneConstants = [];
   const dialtoneComponents = [];
+  const dialtoneUtils = [];
 
   Object.keys(module).forEach(key => {
     if (/^[A-Z_]+$/.test(key)) {
       dialtoneConstants[key] = module[key];
     } else if (key.endsWith('Directive')) {
       app.use(module[key]);
-    } else {
+    } else if (key.startsWith('Dt')) {
       dialtoneComponents[key] = module[key];
       app.component(key, module[key]);
+    } else {
+      dialtoneUtils[key] = module[key];
     }
   });
 
+  app.provide('dialtoneUtils', dialtoneUtils);
   app.provide('dialtoneComponents', dialtoneComponents);
+  app.provide('dialtoneComponentsDocumentation', documentation.default);
 
   window.DIALTONE_CONSTANTS = dialtoneConstants;
 
   // setup custom emojis
-  const { setCustomEmojiUrl, setCustomEmojiJson } = dialtoneComponents;
+  const { setCustomEmojiUrl, setCustomEmojiJson } = dialtoneUtils;
   setCustomEmojiUrl('https://github.githubassets.com/images/icons/emoji/');
   setCustomEmojiJson(customEmojis);
 }
 
-// This is commented because we are currently not using the combinator and it's
-// adding some wrong styles to the page for the dt-list-item component.
-
 // async function registerDialtoneCombinator (app) {
-//   const module = await import('@dialpad/dialtone-combinator');
-//   app.component('DtcCombinator', module.DtcCombinator);
-//   app.component('DtcSection', module.DtcSection);
-//   app.provide('variantBank', module.variantBank());
+//  const { DtcCombinator } = await import('@dialpad/dialtone-combinator');
+//  app.component('DtcCombinator', DtcCombinator);
 // }
+
+async function registerDialtoneIcons (app) {
+  const icons = await import('@dialpad/dialtone-icons/vue3');
+
+  const dialtoneIcons = [];
+  const dialtoneIllustrations = [];
+
+  Object.keys(icons).forEach(key => {
+    if (key.startsWith('DtIcon')) {
+      dialtoneIcons[key] = icons[key];
+    } else if (key.startsWith('DtIllustration')) {
+      dialtoneIllustrations[key] = icons[key];
+    }
+  });
+
+  app.provide('dialtoneIcons', dialtoneIcons);
+  app.provide('dialtoneIllustrations', dialtoneIllustrations);
+}
+
+async function importDocumentation (app) {
+  try {
+    console.info('Importing Utility Class documentation');
+    const utilityClassDocsModule = (await import('../../../node_modules/@dialpad/dialtone-css/lib/dist/dialtone-docs.json'))?.default;
+
+    console.info('Importing Tokens documentation');
+    const tokensDocsModule = (await import('../../../node_modules/@dialpad/dialtone-css/lib/dist/tokens-docs.json'))?.default;
+
+    app.provide('utilityClassDocs', utilityClassDocsModule);
+    app.provide('tokensDocs', tokensDocsModule);
+  } catch (error) {
+    console.error(`Couldn't import dialtone documentation: ${error}`);
+  }
+}
+
+function importDialtoneThemes (app) {
+  const dialtoneThemeFiles = import.meta.globEager('../../../node_modules/@dialpad/dialtone-tokens/dist/themes/*.js')
+  const themes = {};
+  const excludedThemeImports = ['config', 'debug']
+
+  for (const path in dialtoneThemeFiles) {
+    const themeName = path.split('/').pop().split('.').shift();
+
+    if (excludedThemeImports.includes(themeName)) continue;
+
+    themes[themeName] = dialtoneThemeFiles[path].default;
+  }
+  app.provide('themes', themes)
+}

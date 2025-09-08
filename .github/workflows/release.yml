@@ -10,16 +10,22 @@ on:
         options:
           - all
           - dialtone
+          - combinator
           - css
           - emojis
           - icons
+          - language-server
           - tokens
           - vue2
           - vue3
           - eslint-plugin
           - stylelint-plugin
+          - postcss-responsive-variations
   schedule:
     - cron: "0 10 * * 2"
+
+permissions:
+  packages: read
 
 env:
   HUSKY: 0
@@ -47,7 +53,7 @@ jobs:
 
   release:
     needs: [get-branch-name, check-dialpad-member]
-    if: ${{ contains(fromJSON('["staging", "alpha", "beta"]'), needs.get-branch-name.outputs.current_branch) }}
+    if: ${{ contains(fromJSON('["staging", "alpha", "beta", "next"]'), needs.get-branch-name.outputs.current_branch) }}
     runs-on: ubuntu-latest
     permissions:
       contents: write
@@ -56,7 +62,6 @@ jobs:
       pull-requests: write
     env:
       RELEASE_TAG: ${{ needs.get-branch-name.outputs.current_branch == 'staging' && 'latest' || needs.get-branch-name.outputs.current_branch }}
-      DIALTONE_RELEASE_TAG: ${{ needs.get-branch-name.outputs.current_branch == 'staging' && 'next' || needs.get-branch-name.outputs.current_branch }}
       DIALTONE_VUE3_RELEASE_TAG: ${{ needs.get-branch-name.outputs.current_branch == 'staging' && 'vue3' || needs.get-branch-name.outputs.current_branch }}
       NPM_TOKEN: ${{ secrets.DIALTONE_NPM_TOKEN }}
       GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -67,71 +72,73 @@ jobs:
           fetch-depth: 0
           token: ${{ secrets.DIALTONE_CI_TOKEN_2 }}
 
+      - name: Use pnpm
+        uses: pnpm/action-setup@v3
+
       - name: Use Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: 20
-
-      - name: Use pnpm
-        uses: pnpm/action-setup@v3
-        with:
-          version: 9
-          run_install: false
-
-      - name: Get pnpm store directory
-        shell: bash
-        run: |
-          echo "STORE_PATH=$(pnpm store path --silent)" >> $GITHUB_ENV
-
-      - name: Setup pnpm cache
-        uses: actions/cache@v4
-        with:
-          path: ${{ env.STORE_PATH }}
-          key: "${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}"
-          restore-keys: |
-            ${{ runner.os }}-pnpm-store-
+          node-version-file: ".nvmrc"
+          cache: "pnpm"
+          registry-url: "https://npm.pkg.github.com"
+          scope: "dialpad"
+        env:
+          NODE_AUTH_TOKEN: ${{ github.token }}
 
       - name: Install dependencies
+        shell: bash
         run: pnpm install --frozen-lockfile
 
       # Release to GitHub
-      - name: Release dialtone ${{ env.DIALTONE_RELEASE_TAG }}
-        if: ${{ github.event_name == 'schedule' || github.event.inputs.package == 'all' || github.event.inputs.package == 'dialtone' }}
-        run: pnpm nx run dialtone:release
+      - name: Release Dialtone Combinator ${{ env.RELEASE_TAG }}
+        if: ${{ github.event_name == 'schedule' || github.event.inputs.package == 'all' || github.event.inputs.package == 'combinator' }}
+        run: pnpm nx run dialtone-combinator:release
 
-      - name: Release dialtone css ${{ env.RELEASE_TAG }}
+      - name: Release Dialtone CSS ${{ env.RELEASE_TAG }}
         if: ${{ github.event_name == 'schedule' || github.event.inputs.package == 'all' || github.event.inputs.package == 'css' }}
         run: pnpm nx run dialtone-css:release
 
-      - name: Release dialtone emojis ${{ env.RELEASE_TAG }}
+      - name: Release Dialtone Emojis ${{ env.RELEASE_TAG }}
         if: ${{ github.event_name == 'schedule' || github.event.inputs.package == 'all' || github.event.inputs.package == 'emojis' }}
         run: pnpm nx run dialtone-emojis:release
 
-      - name: Release dialtone icons ${{ env.RELEASE_TAG }}
+      - name: Release Dialtone Icons ${{ env.RELEASE_TAG }}
         if: ${{ github.event_name == 'schedule' || github.event.inputs.package == 'all' || github.event.inputs.package == 'icons' }}
         run: pnpm nx run dialtone-icons:release
 
-      - name: Release dialtone tokens ${{ env.RELEASE_TAG }}
+      - name: Release Dialtone Language server ${{ env.RELEASE_TAG }}
+        if: ${{ github.event_name == 'schedule' || github.event.inputs.package == 'all' || github.event.inputs.package == 'language-server' }}
+        run: pnpm nx run dialtone-language-server:release
+
+      - name: Release Dialtone Tokens ${{ env.RELEASE_TAG }}
         if: ${{ github.event_name == 'schedule' || github.event.inputs.package == 'all' || github.event.inputs.package == 'tokens' }}
         run: pnpm nx run dialtone-tokens:release
 
-      - name: Release dialtone-vue@${{ env.RELEASE_TAG }}
+      - name: Release Dialtone Vue@${{ env.RELEASE_TAG }}
         if: ${{ github.event_name == 'schedule' || github.event.inputs.package == 'all' || github.event.inputs.package == 'vue2' }}
         run: pnpm nx run dialtone-vue2:release
 
-      - name: Release dialtone-vue@${{ env.DIALTONE_VUE3_RELEASE_TAG }}
+      - name: Release Dialtone Vue@${{ env.DIALTONE_VUE3_RELEASE_TAG }}
         if: ${{ github.event_name == 'schedule' || github.event.inputs.package == 'all' || github.event.inputs.package == 'vue3' }}
         run: pnpm nx run dialtone-vue3:release
 
-      - name: Release Dialtone eslint plugin ${{ env.RELEASE_TAG }}
+      - name: Release Dialtone ESLint Plugin ${{ env.RELEASE_TAG }}
         if: ${{ github.event_name == 'schedule' || github.event.inputs.package == 'all' || github.event.inputs.package == 'eslint-plugin' }}
         run: pnpm nx run eslint-plugin-dialtone:release
 
-      - name: Release Dialtone stylelint plugin ${{ env.RELEASE_TAG }}
+      - name: Release Dialtone StyleLint Plugin ${{ env.RELEASE_TAG }}
         if: ${{ github.event_name == 'schedule' || github.event.inputs.package == 'all' || github.event.inputs.package == 'stylelint-plugin' }}
         run: pnpm nx run stylelint-plugin-dialtone:release
 
-  push:
+      - name: Release Dialtone PostCSS Responsive Variations Plugin ${{ env.RELEASE_TAG }}
+        if: ${{ github.event_name == 'schedule' || github.event.inputs.package == 'all' || github.event.inputs.package == 'postcss-responsive-variations' }}
+        run: pnpm nx run postcss-responsive-variations:release
+
+      - name: Release Dialtone ${{ env.RELEASE_TAG }}
+        if: ${{ github.event_name == 'schedule' || github.event.inputs.package == 'all' || github.event.inputs.package == 'dialtone' }}
+        run: pnpm nx run dialtone:release
+
+  update-production:
     needs: [ release ]
     if: ${{ needs.get-branch-name.outputs.current_branch == 'staging' }}
     runs-on: ubuntu-latest

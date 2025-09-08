@@ -1,14 +1,16 @@
+/* eslint-disable storybook/default-exports */
 /**
  * For more theme related documentation, please check out:
  * https://storybook.js.org/docs/react/configure/theming
  */
+
 import { create } from '@storybook/theming/create';
 
 const _baseThemeVariables = {
   brandTitle: 'Dialpad storybook',
   brandUrl: 'https://dialtone.dialpad.com',
   fontBase: '-apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif',
-}
+};
 
 export const dialtoneDarkTheme = create({
   base: 'dark',

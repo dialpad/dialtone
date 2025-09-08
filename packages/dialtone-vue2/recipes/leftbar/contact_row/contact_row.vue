@@ -7,8 +7,6 @@
     :has-call-button="hasCallButton"
     :muted="muted"
     :is-typing="isTyping"
-    :call-button-tooltip="callButtonTooltip"
-    :unread-count-tooltip="unreadCountTooltip"
     v-bind="$attrs"
     data-qa="contact-row"
     v-on="$listeners"
@@ -19,26 +17,33 @@
         :image-src="avatarSrc"
         :color="avatarColor"
         image-alt=""
-        :icon-name="iconName"
-        icon-size="200"
         size="sm"
         :seed="avatarSeed"
         :presence="avatarPresence"
-      />
+      >
+        <template
+          v-if="noInitials"
+          #icon
+        >
+          <dt-icon-user
+            size="200"
+          />
+        </template>
+      </dt-avatar>
     </template>
     <template #label>
       <dt-emoji-text-wrapper
-        class="dt-leftbar-row__description"
-        data-qa="dt-leftbar-row-description"
+        class="d-recipe-leftbar-row__description"
+        data-qa="dt-recipe-leftbar-row-description"
         size="200"
       >
         {{ name }}
       </dt-emoji-text-wrapper>
-      <div class="dt-leftbar-row__status">
+      <div class="d-recipe-leftbar-row__status">
         <span
           v-if="presenceText"
-          data-qa="dt-leftbar-row-presence-text"
-          :class="['dt-leftbar-row__meta-context', presenceColorClass]"
+          data-qa="dt-recipe-leftbar-row-presence-text"
+          :class="['d-recipe-leftbar-row__meta-context', presenceFontColorClass]"
         >
           {{ presenceText }}
         </span>
@@ -46,8 +51,8 @@
           v-if="userStatus"
           size="100"
           element-type="span"
-          data-qa="dt-leftbar-row-user-status"
-          class="dt-leftbar-row__meta-custom"
+          data-qa="dt-recipe-leftbar-row-user-status"
+          class="d-recipe-leftbar-row__meta-custom"
         >
           {{ userStatus }}
         </dt-emoji-text-wrapper>
@@ -58,9 +63,10 @@
 
 <script>
 import { DtRecipeGeneralRow } from '@/recipes/leftbar/general_row';
-import DtEmojiTextWrapper from '@/components/emoji_text_wrapper/emoji_text_wrapper.vue';
-import DtAvatar from '@/components/avatar/avatar.vue';
+import { DtEmojiTextWrapper } from '@/components/emoji_text_wrapper';
+import { DtAvatar } from '@/components/avatar';
 import { safeConcatStrings } from '@/common/utils';
+import { DtIconUser } from '@dialpad/dialtone-icons/vue2';
 
 export default {
   name: 'DtRecipeContactRow',
@@ -69,6 +75,7 @@ export default {
     DtAvatar,
     DtRecipeGeneralRow,
     DtEmojiTextWrapper,
+    DtIconUser,
   },
 
   inheritAttrs: false,
@@ -191,22 +198,6 @@ export default {
       type: Boolean,
       default: true,
     },
-
-    /**
-     * Text shown when the call button is hovered.
-     */
-    callButtonTooltip: {
-      type: String,
-      default: '',
-    },
-
-    /**
-     * Text shown when the unread count is hovered.
-     */
-    unreadCountTooltip: {
-      type: String,
-      default: '',
-    },
   },
 
   emits: [
@@ -228,25 +219,18 @@ export default {
   ],
 
   computed: {
-    presenceColorClass () {
-      switch (this.avatarPresence) {
-        case 'active':
-          return 'd-fc-success';
-        case 'busy':
-          return 'd-fc-critical';
-        case 'away':
-          return 'd-fc-warning';
-        default:
-          return undefined;
-      }
+    presenceFontColorClass () {
+      const presenceFontColors = {
+        active: 'd-recipe-contact-row--active',
+        busy: 'd-recipe-contact-row--busy',
+        away: 'd-recipe-contact-row--away',
+      };
+
+      return presenceFontColors[this.avatarPresence];
     },
 
     contactDescription () {
       return safeConcatStrings([this.name, this.presenceText, this.userStatus]);
-    },
-
-    iconName () {
-      return this.noInitials ? 'user' : null;
     },
   },
 };

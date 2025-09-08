@@ -3,6 +3,7 @@ import { createTemplateFromVueFile } from '@/common/storybook_utils';
 import DtEmojiPicker from './emoji_picker.vue';
 import DtEmojiPickerDefaultTemplate from './emoji_picker_default.story.vue';
 import DtEmojiPickerWithPopoverTemplate from './emoji_picker_popover.story.vue';
+import customEmojiJson from '@/common/custom-emoji.json';
 
 const recentlyUsedEmojis = [
   {
@@ -52,26 +53,16 @@ const recentlyUsedEmojis = [
   },
 ];
 
+const customEmojis = customEmojiJson;
+
 export const argsData = {
   onSkinTone: action('skin-tone'),
+  onAddEmoji: action('add-emoji'),
   onSelectedEmoji: action('selected-emoji'),
   onClose: action('close'),
-  tabSetLabels: [
-    'Most recently used',
-    'Smileys and people',
-    'Nature',
-    'Food',
-    'Activity',
-    'Travel',
-    'Objects',
-    'Symbols',
-    'Flags',
-  ],
+  onScrollBottomReached: action('scroll-bottom-reached'),
   recentlyUsedEmojis,
-  skinSelectorButtonTooltipLabel: 'Change default skin tone',
-  searchNoResultsLabel: 'No results',
-  searchResultsLabel: 'Search results',
-  searchPlaceholderLabel: 'Search...',
+  customEmojis,
   skinTone: 'Default',
   showPopover: false,
 };
@@ -97,7 +88,17 @@ export const argTypesData = {
       disable: true,
     },
   },
+  onAddEmoji: {
+    table: {
+      disable: true,
+    },
+  },
   onClose: {
+    table: {
+      disable: true,
+    },
+  },
+  onScrollBottomReached: {
     table: {
       disable: true,
     },

@@ -2,6 +2,13 @@
   <dt-item-layout
     :as="$attrs.as"
     :unstyled="$attrs.unstyled"
+    :left-class="$attrs.leftClass"
+    :content-class="$attrs.contentClass"
+    :title-class="$attrs.titleClass"
+    :subtitle-class="$attrs.subtitleClass"
+    :bottom-class="$attrs.bottomClass"
+    :right-class="$attrs.rightClass"
+    :selected-class="$attrs.selectedClass"
   >
     <template #left>
       <span

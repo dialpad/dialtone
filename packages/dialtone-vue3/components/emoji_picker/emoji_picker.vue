@@ -6,12 +6,14 @@
       <emoji-tabset
         ref="tabsetRef"
         :emoji-filter="internalSearchQuery"
+        :show-custom-emojis-tab="showCustomEmojisTab"
         :show-recently-used-tab="showRecentlyUsedTab"
         :scroll-into-tab="scrollIntoTab"
-        :tabset-labels="tabSetLabels"
-        :is-scrolling="isScrolling"
+        :tab-set-labels="tabSetLabels"
         @focus-skin-selector="$refs.skinSelectorRef.focusSkinSelector()"
-        @focus-search-input="showSearch ? $refs.searchInputRef.focusSearchInput() : $refs.emojiSelectorRef.focusEmojiSelector()"
+        @focus-search-input="showSearch
+          ? $refs.searchInputRef.focusSearchInput()
+          : $refs.emojiSelectorRef.focusEmojiSelector()"
         @selected-tabset="scrollToSelectedTabset"
         @keydown.esc="emits('close')"
       />
@@ -35,17 +37,27 @@
         :search-results-label="searchResultsLabel"
         :search-no-results-label="searchNoResultsLabel"
         :recently-used-emojis="recentlyUsedEmojis"
+        :custom-emojis="customEmojis"
         :selected-tabset="selectedTabset"
         @scroll-into-tab="updateScrollIntoTab"
-        @is-scrolling="updateIsScrolling"
         @highlighted-emoji="updateHighlightedEmoji"
         @selected-emoji="emits('selected-emoji', $event)"
         @focus-skin-selector="$refs.skinSelectorRef.focusSkinSelector()"
         @focus-search-input="showSearch ? $refs.searchInputRef.focusSearchInput() : $refs.tabsetRef.focusTabset()"
         @keydown.esc="emits('close')"
+        @scroll-bottom-reached="emits('scroll-bottom-reached')"
       />
     </div>
     <div class="d-emoji-picker--footer">
+      <dt-button
+        v-if="showCustomEmojisTab && !highlightedEmoji"
+        importance="outlined"
+        :aria-label="addEmojiLabel"
+        class="d-emoji-picker__add-emoji"
+        @click="emits('add-emoji')"
+      >
+        {{ addEmojiLabel }}
+      </dt-button>
       <emoji-description :emoji="highlightedEmoji" />
       <emoji-skin-selector
         ref="skinSelectorRef"
@@ -67,7 +79,9 @@ import EmojiTabset from './modules/emoji_tabset.vue';
 import EmojiSelector from './modules/emoji_selector.vue';
 import EmojiSkinSelector from './modules/emoji_skin_selector.vue';
 import EmojiDescription from './modules/emoji_description.vue';
+import { DtButton } from '../button';
 import { computed, ref, watch } from 'vue';
+import { DialtoneLocalization } from '@/localization';
 
 const props = defineProps({
   /**
@@ -81,58 +95,19 @@ const props = defineProps({
   // TODO try to simplify this to achieve an array of unicode characters and not an entire emoji data object
   recentlyUsedEmojis: {
     type: Array,
-    default: () => ([]),
+    default: () => [],
   },
 
   /**
-   * The placeholder text for the search input
-   * @type {String}
-   * @required
-   * @example
-   * <dt-emoji-picker :searchPlaceholderLabel="'Search...'" />
-   */
-  searchPlaceholderLabel: {
-    type: String,
-    required: true,
-  },
-
-  /**
-   * The label for the search results tab
-   * @type {String}
-   * @required
-   * @example
-   * <dt-emoji-picker :searchResultsLabel="'Search results'" />
-   */
-  searchResultsLabel: {
-    type: String,
-    required: true,
-  },
-
-  /**
-   * The label for the search no results
-   * @type {String}
-   * @required
-   * @example
-   * <dt-emoji-picker :searchNoResultsLabel="'No results'" />
-   */
-  searchNoResultsLabel: {
-    type: String,
-    required: true,
-  },
-
-  /**
-   * The list of tabsets to show, it is necessary to be updated with the correct language
-   * It must respect the provided order.
-   * @type {Array}
-   * @required
-   * @example
-   * <dt-emoji-picker
-   *  :tabSetLabels="['Most recently used', 'Smileys and people', 'Nature',
-   *    'Food', 'Activity', 'Travel', 'Objects', 'Symbols', 'Flags']" />
-   */
-  tabSetLabels: {
+     * The array with custom emojis object
+     * This list is necessary to fill the custom tab
+     * @type {Array}
+     * @default []
+     * @example
+     * <dt-emoji-picker :customEmojis="[emojiObject, emojiObject]" />
+     */
+  customEmojis: {
     type: Array,
-    required: true,
   },
 
   /**
@@ -150,18 +125,7 @@ const props = defineProps({
   },
 
   /**
-   * Tooltip shown when skin selector button is hovered.
-   * @type {String}
-   * @required
-   * @example
-   * <dt-emoji-picker :skin-selector-button-tooltip-label="'Change default skin tone'" />
-   */
-  skinSelectorButtonTooltipLabel: {
-    type: String,
-    required: true,
-  },
 
-  /**
    * Sets the search query that filters emojis.
    * @type {String}
    * @example
@@ -194,6 +158,13 @@ const emits = defineEmits(
     'selected-emoji',
 
     /**
+   * Emitted when the user reach bottom scroll
+   * This is being handled by handleScroll method
+   * @event scroll-bottom-reached
+   */
+    'scroll-bottom-reached',
+
+    /**
      * It will emit the selected skin tone
      * @event skin-tone
      * @param {String} skin - The selected skin tone from the skin selector
@@ -205,6 +176,12 @@ const emits = defineEmits(
      * @event close
      */
     'close',
+
+    /**
+     * Emitted when the user clicks on the add emoji button
+     * @event add-emoji
+     */
+    'add-emoji',
   ],
 );
 
@@ -213,9 +190,30 @@ const highlightedEmoji = ref(null);
 const selectedTabset = ref({});
 
 const scrollIntoTab = ref(0);
-const isScrolling = ref(false);
 
-const showRecentlyUsedTab = computed(() => props.recentlyUsedEmojis.length > 0);
+const showRecentlyUsedTab = computed(() => props.recentlyUsedEmojis?.length > 0);
+const showCustomEmojisTab = computed(() => props.customEmojis?.length > 0);
+
+const i18n = new DialtoneLocalization();
+
+const tabSetLabels = [
+  i18n.$t('DIALTONE_EMOJI_PICKER_TABSET_RECENTLY_USED_LABEL'),
+  i18n.$t('DIALTONE_EMOJI_PICKER_TABSET_SMILEYS_AND_PEOPLE_LABEL'),
+  i18n.$t('DIALTONE_EMOJI_PICKER_TABSET_NATURE_LABEL'),
+  i18n.$t('DIALTONE_EMOJI_PICKER_TABSET_FOOD_LABEL'),
+  i18n.$t('DIALTONE_EMOJI_PICKER_TABSET_ACTIVITY_LABEL'),
+  i18n.$t('DIALTONE_EMOJI_PICKER_TABSET_TRAVEL_LABEL'),
+  i18n.$t('DIALTONE_EMOJI_PICKER_TABSET_OBJECTS_LABEL'),
+  i18n.$t('DIALTONE_EMOJI_PICKER_TABSET_SYMBOLS_LABEL'),
+  i18n.$t('DIALTONE_EMOJI_PICKER_TABSET_FLAGS_LABEL'),
+  i18n.$t('DIALTONE_EMOJI_PICKER_TABSET_CUSTOM_LABEL'),
+];
+
+const searchPlaceholderLabel = i18n.$t('DIALTONE_EMOJI_PICKER_SEARCH_PLACEHOLDER_LABEL');
+const searchResultsLabel = i18n.$t('DIALTONE_EMOJI_PICKER_SEARCH_RESULTS_LABEL');
+const searchNoResultsLabel = i18n.$t('DIALTONE_EMOJI_PICKER_SEARCH_NO_RESULTS_LABEL');
+const skinSelectorButtonTooltipLabel = i18n.$t('DIALTONE_EMOJI_PICKER_SKIN_SELECTOR_BUTTON_TOOLTIP_LABEL');
+const addEmojiLabel = i18n.$t('DIALTONE_EMOJI_PICKER_ADD_EMOJI_LABEL');
 
 watch(
   () => props.searchQuery,
@@ -231,11 +229,10 @@ watch(
  * Using this method, we are able to trigger the watcher in the child component even if the value being passed is the
  * same as the previous value.
  * @event selectedTabset
- * @param tabName {String} - The name of the tab that was selected
+ * @param tabId {String} - The id of the tab that was selected
  */
 function scrollToSelectedTabset (tabId) {
   internalSearchQuery.value = '';
-  selectedTabset.value = tabId;
   selectedTabset.value = { ...selectedTabset.value, tabId };
 }
 
@@ -243,9 +240,6 @@ function updateScrollIntoTab (value) {
   scrollIntoTab.value = value;
 }
 
-function updateIsScrolling (value) {
-  isScrolling.value = value;
-}
 function updateHighlightedEmoji (emoji) {
   highlightedEmoji.value = emoji;
 }

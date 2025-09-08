@@ -7,15 +7,13 @@
       class="d-pagination__button"
       data-qa="dt-pagination-prev"
       :aria-label="prevAriaLabel"
-      :kind="isFirstPage ? 'default' : 'muted'"
-      :importance="isFirstPage ? 'primary' : 'clear'"
+      kind="muted"
+      importance="clear"
       :disabled="isFirstPage"
-      :class="isFirstPage ? 'd-fc-black-300 d-bgc-transparent' : 'd-fc-tertiary'"
       @click="changePage(currentPage - 1)"
     >
       <template #icon>
-        <dt-icon
-          name="chevron-left"
+        <dt-icon-chevron-left
           size="300"
         />
       </template>
@@ -31,13 +29,11 @@
         class="d-pagination__separator-icon"
         data-qa="dt-pagination-separator"
       >
-        <dt-icon
-          name="more-horizontal"
+        <dt-icon-more-horizontal
           size="300"
         />
         <!-- … -->
       </div>
-      <!-- eslint-enable vue/no-bare-strings-in-template -->
       <dt-button
         v-else
         :aria-label="pageNumberAriaLabel(page)"
@@ -55,13 +51,11 @@
       :aria-label="nextAriaLabel"
       :disabled="isLastPage"
       kind="muted"
-      :importance="isLastPage ? 'primary' : 'clear'"
-      :class="isLastPage ? 'd-fc-black-300 d-bgc-transparent' : 'd-fc-tertiary'"
+      importance="clear"
       @click="changePage(currentPage + 1)"
     >
       <template #icon>
-        <dt-icon
-          name="chevron-right"
+        <dt-icon-chevron-right
           size="300"
         />
       </template>
@@ -71,18 +65,22 @@
 
 <script>
 import { DtButton } from '@/components/button';
-import { DtIcon } from '@/components/icon';
+import { DtIconChevronLeft, DtIconChevronRight, DtIconMoreHorizontal } from '@dialpad/dialtone-icons/vue3';
+import { DialtoneLocalization } from '@/localization';
 
 /**
  * Pagination allows you to divide large amounts of content into smaller chunks across multiple pages.
  * @see https://dialtone.dialpad.com/components/pagination.html
  */
 export default {
+  compatConfig: { MODE: 3 },
   name: 'DtPagination',
 
   components: {
     DtButton,
-    DtIcon,
+    DtIconChevronLeft,
+    DtIconChevronRight,
+    DtIconMoreHorizontal,
   },
 
   props: {
@@ -103,30 +101,6 @@ export default {
     },
 
     /**
-     * Descriptive label for the previous button.
-     */
-    prevAriaLabel: {
-      type: String,
-      required: true,
-    },
-
-    /**
-     * Descriptive label for the next button.
-     */
-    nextAriaLabel: {
-      type: String,
-      required: true,
-    },
-
-    /**
-     * A method that will be called to get the aria label of each page.
-     */
-    pageNumberAriaLabel: {
-      type: Function,
-      required: true,
-    },
-
-    /**
      * The active current page in the list of pages, defaults to the first page
      */
     activePage: {
@@ -143,6 +117,16 @@ export default {
       type: Number,
       default: 5,
     },
+
+    /**
+     * Sometimes you may need to hide start and end page number buttons when moving in between.
+     * This prop will be used to hide the first and last page buttons when not near the edges.
+     * This is useful when your backend does not support offset and you can only use cursor based pagination.
+     */
+    hideEdges: {
+      type: Boolean,
+      default: false,
+    },
   },
 
   emits: [
@@ -158,6 +142,7 @@ export default {
   data () {
     return {
       currentPage: this.activePage,
+      i18n: new DialtoneLocalization(),
     };
   },
 
@@ -170,6 +155,7 @@ export default {
       return this.currentPage === this.totalPages;
     },
 
+    // eslint-disable-next-line complexity
     pages () {
       if (this.maxVisible === 0) {
         return [];
@@ -178,23 +164,71 @@ export default {
         return this.range(1, this.totalPages);
       }
 
-      const start = this.maxVisible - 1;
-      const end = this.totalPages - start + 1;
+      let start = this.maxVisible - 1;
+      let end = this.totalPages - start + 1;
+
+      // if hideEdges is true, modify the start and
+      // end to account for the hidden pages
+      if (this.hideEdges) {
+        start = start + 1;
+        end = end - 1;
+      }
 
       if (this.currentPage < start) {
-        return [...this.range(1, start), '...', this.totalPages];
+        const pages = [...this.range(1, start), '...'];
+        if (!this.hideEdges) {
+          // add last page to the end
+          pages.push(this.totalPages);
+        }
+        return pages;
       }
 
       if (this.currentPage > end) {
-        return [1, '...', ...this.range(end, this.totalPages)];
+        const pages = ['...', ...this.range(end, this.totalPages)];
+        if (!this.hideEdges) {
+          // add first page to the beginning
+          pages.unshift(1);
+        }
+        return pages;
       }
 
       // rounding to the nearest odd according to the maxlength to always show the page number in the middle.
       const total = this.maxVisible - (3 - this.maxVisible % 2);
       const centerIndex = Math.floor(total / 2);
-      const left = this.currentPage - centerIndex;
-      const right = this.currentPage + centerIndex;
-      return [1, '...', ...this.range(left, right), '...', this.totalPages];
+      let left = this.currentPage - centerIndex;
+      let right = this.currentPage + centerIndex;
+
+      // if hideEdge is true, modify the left and right to account for the hidden pages
+      if (this.hideEdges) {
+        left = left - 1;
+        right = right + 1;
+      }
+
+      const pages = ['...', ...this.range(left, right), '...'];
+      if (!this.hideEdges) {
+        return [1, ...pages, this.totalPages];
+      }
+      return pages;
+    },
+
+    prevAriaLabel () {
+      return this.isFirstPage ? this.i18n.$t('DIALTONE_PAGINATION_FIRST_PAGE') : this.i18n.$t('DIALTONE_PAGINATION_PREVIOUS_PAGE');
+    },
+
+    nextAriaLabel () {
+      return this.isLastPage ? this.i18n.$t('DIALTONE_PAGINATION_LAST_PAGE') : this.i18n.$t('DIALTONE_PAGINATION_NEXT_PAGE');
+    },
+
+    pageNumberAriaLabel () {
+      return (page) => {
+        return page === this.totalPages ? `${this.i18n.$t('DIALTONE_PAGINATION_LAST_PAGE')} ${page}` : `${this.i18n.$t('DIALTONE_PAGINATION_PAGE_NUMBER', { page })}`;
+      };
+    },
+  },
+
+  watch: {
+    activePage () {
+      this.currentPage = this.activePage;
     },
   },
 

@@ -1,13 +1,13 @@
 ---
-title: Action language
+title: Action Language
 prev: { link: "/guides/content/", text: "Content" }
-next: { link: "/guides/content/error-messages/", text: "Error messages" }
+next: { link: "/guides/content/error-messages/", text: "Error Messages" }
 description: Customers use Dialpad to connect with others. Content should be written and structured to help them understand and take the most important actions.
 ---
 
-## Headings and subheadings
+## Headings and Subheadings
 
-### Basic structure
+### Basic Structure
 
 Headings and subheadings are titles and subtitles that refer to interface sections. These should be:
 
@@ -43,7 +43,7 @@ Headings and subheadings are titles and subtitles that refer to interface sectio
 
 Using articles (“the”, “a”, “an”) in titles depends on the message.
 
-#### Conversational headings
+#### Conversational Headings
 
 For conversational areas in the product, like empty states, use articles. It makes the language more approachable and helps users understand potentially new, complex concepts.
 
@@ -60,7 +60,7 @@ For conversational areas in the product, like empty states, use articles. It mak
 </template>
 </dialtone-usage>
 
-#### Microcopy headings
+#### Microcopy Headings
 
 For labels, titles, and microcopy, avoid using articles to keep content short and action-oriented. This increases readability and scannability, encouraging action.
 
@@ -140,7 +140,7 @@ Like headlines, buttons need to be clear and concise. Users should be able to an
 
 Like buttons, links need to be clear and predictable. Users should be able to anticipate what will happen when they click on a link. Never mislead someone by mislabeling a link. Never use “click here” or “here” as link text.
 
-### Links within sentences
+### Links Within Sentences
 
 When using links in sentences, avoid linking the entire sentence. Only link the text that describes the link. Whenever possible, keep link text to single terms or small phrases. This makes it easier for internationalization as word order may change with translations.
 
@@ -159,7 +159,7 @@ When using links in sentences, avoid linking the entire sentence. Only link the 
 </template>
 </dialtone-usage>
 
-### Links outside sentences
+### Links Outside Sentences
 
 Links outside sentences should follow the same approach as buttons. They should only be punctuated with question marks.
 
@@ -176,7 +176,7 @@ Links outside sentences should follow the same approach as buttons. They should 
 </template>
 </dialtone-usage>
 
-### “Learn more” links
+### “Learn More” Links
 
 When linking out to further documentation, link relevant keywords. Avoid adding additional sentences with “Learn more…” as it’s repetitive and takes up unnecessary space.
 
@@ -294,7 +294,7 @@ Secondary action:
 </template>
 </dialtone-usage>
 
-### Discarding changes while on a page
+### Discarding Changes While on a Page
 
 Primary action:
 
@@ -327,7 +327,7 @@ Secondary action:
 </template>
 </dialtone-usage>
 
-### Leaving a page with unsaved changes
+### Leaving a Page with Unsaved Changes
 
 Primary action:
 
@@ -363,17 +363,17 @@ Secondary action:
 </template>
 </dialtone-usage>
 
-## Directional language
+## Directional Language
 
 Just as links should never state “click here”, avoid using directional language such as “above” or “right”. This language is confusing and unhelpful when picked up by screen readers. It creates challenges for internationalization and can conflict with mobile-friendly designs.
 
 The use of directional language is often an indication of poor visual or content hierarchy. Whenever possible, keep instructional copy and related actions close together so directional language isn’t needed.
 
-## Save vs. done
+## Save vs. Done
 
 Use “Save” when the user is making an immediate change and “Done” for [deferred saves](#deferred-saves). Examples for when to use “Save” are when updating a contact, editing a channel’s description, or changing settings. Use “Done” when confirming changes inside a modal or popover that will be applied to the current page, but those updates won’t save to the database.
 
-### Saving in modals and sheets
+### Saving in Modals and Sheets
 
 Use “Save” in modals and popovers when the user’s changes are saved directly to the database.
 
@@ -392,7 +392,7 @@ Use “Save” in modals and popovers when the user’s changes are saved direct
 </template>
 </dialtone-usage>
 
-### Saving at the bottom of a page
+### Saving at the Bottom of a Page
 
 Use the “Save” + “noun” content formula for save button actions at the bottom of a page when you don’t have the provided context of a modal or compose bar.
 
@@ -412,7 +412,7 @@ Use the “Save” + “noun” content formula for save button actions at the b
 </template>
 </dialtone-usage>
 
-### Deferred saves
+### Deferred Saves
 
 Sometimes, when users confirm changes inside a modal or popover, those changes are applied as unsaved changes to the current page. These updates do not immediately save to the database, but require an additional “Save” action. In these instances, do not use the “Save” verb as this call to action would be misleading.
 
@@ -452,7 +452,7 @@ When using a datepicker, also use “Done”.
 </template>
 </dialtone-usage>
 
-## Close vs. accept
+## Close vs. Accept
 
 Use the verb “Close” when users confirm that they’ve finished reading something, but aren’t required to legally accept terms of service before continuing. Don’t use “OK” as that is an exclamation—not an action. When users click “Close”, they’re not saying “OK”—they’re completing a specific action.
 
@@ -490,7 +490,7 @@ Use the verb “Accept” when terms of service require legal confirmation befor
 </template>
 </dialtone-usage>
 
-## Close vs. cancel
+## Close vs. Cancel
 
 Use back arrow buttons as a call-to-action for modals and screens when the content is in a “view-only” state. Don’t use “Close” as the call-to-action when users can make changes to the screen, confirm they’ve read something, or accept terms of service (see “[Close vs. Accept](#close-vs-accept)”).
 
@@ -526,7 +526,7 @@ Use the “Cancel” action as an option for users to back out changes made on a
 </template>
 </dialtone-usage>
 
-## Select vs. choose
+## Select vs. Choose
 
 Use the verb “select” when:
 
@@ -574,7 +574,7 @@ Use the verb “choose” when:
 </template>
 </dialtone-usage>
 
-## Edit vs. manage
+## Edit vs. Manage
 
 Use the verb “edit” when you can change the value of an input field (letters, numbers, properties). Place the action next to the field or area that is editable. There’s no need for a noun in this instance unless it’s unclear what’s being edited.
 
@@ -611,7 +611,7 @@ Use the verb “manage” when multiple actions can be done or sections and sett
 </template>
 </dialtone-usage>
 
-## Change vs. switch
+## Change vs. Switch
 
 Use the verb “change” when users can replace an option, but not edit it. This is most common when changing an image or app theme. This action doesn’t include the ability to edit the properties. There’s no need for a noun unless it’s unclear what’s being changed.
 
@@ -645,7 +645,7 @@ Use the verb “switch” when it’s important for users to know what they’re
 </template>
 </dialtone-usage>
 
-## Create vs. add
+## Create vs. Add
 
 Use the verb “create” when encouraging users to generate something from scratch, like an office.
 
@@ -681,7 +681,7 @@ Use the verb “add” when encouraging users to extend something that already e
 </template>
 </dialtone-usage>
 
-## View vs. see
+## View vs. See
 
 Use the verb “view” when encouraging users to visit a specific page or section for more information, or to reveal more information. Use “view” in buttons, calls to action, and link text.
 
@@ -720,7 +720,7 @@ Use the verb “see” in more general, conversational descriptions without a sp
 </template>
 </dialtone-usage>
 
-## Need vs. must
+## Need vs. Must
 
 Use the verb “need” when telling users they’re required to do or should do something.
 
@@ -737,7 +737,7 @@ To allow agents time to wrap-up between calls, you must set a wrap-up time allow
 </template>
 </dialtone-usage>
 
-## Export vs download
+## Export vs. Download
 
 Use the verb “export” when a user needs to transfer data from Dialpad and convert it into a different format.
 
@@ -771,7 +771,7 @@ Use the verb “download” as a call to action when users need to copy data (of
 </template>
 </dialtone-usage>
 
-## Import vs upload
+## Import vs. Upload
 
 Use the verb “import” when a user needs to transfer data and convert it into a different format so it can be used in Dialpad.
 

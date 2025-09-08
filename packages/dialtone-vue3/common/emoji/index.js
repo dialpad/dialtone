@@ -1,8 +1,8 @@
 import { emojiPattern } from 'regex-combined-emojis';
-import { emojisIndexed } from '@dialpad/dialtone-emojis';
+import emojiJsonLocal from 'emoji-toolkit/emoji_strategy.json' with { type: 'json' };
 
 export const emojiRegex = new RegExp(emojiPattern, 'g');
-export const emojiVersion = '8.0';
+export const emojiVersion = '9.0';
 export const defaultEmojiAssetUrl = 'https://cdn.jsdelivr.net/joypixels/assets/' + emojiVersion + '/png/unicode/32/';
 export let customEmojiAssetUrl = null;
 
@@ -14,7 +14,7 @@ export let emojiFileExtensionSmall = '.png';
 export let emojiImageUrlLarge = defaultEmojiAssetUrl;
 export let emojiFileExtensionLarge = '.png';
 
-export const emojiJson = emojisIndexed;
+export const emojiJson = emojiJsonLocal;
 
 export const emojiShortCodeRegex = /(^| |(?<=:))(:\w+:)/g;
 
@@ -50,13 +50,19 @@ export function setCustomEmojiJson (json) {
  * Validate custom emoji json
  */
 export function validateCustomEmojiJson (json) {
-  const customEmojiProps = ['extension', 'custom'];
-  const customEmojiRequiredProps = [
-    'name',
-    'category',
-    'shortname',
-    'extension',
+    const customEmojiProps = [
     'custom',
+    'date_added',
+    'image',
+  ];
+  const customEmojiRequiredProps = [
+    'date_added',
+    'image',
+    'unicode_output',
+    'shortname',
+    'shortname_alternates',
+    'custom',
+    'name',
   ];
 
   /**
@@ -135,6 +141,13 @@ export function shortcodeToEmojiData (shortcode) {
   let reference;
   f(getEmojiData(), null);
   return reference;
+}
+
+export function getEmojiShortCode (emoji) {
+  if (emoji.startsWith(':')) return emoji;
+
+  const unicode = unicodeToString(emoji);
+  return emojiJson[unicode]?.shortname;
 }
 
 // Takes in an emoji unicode character(s) and converts it to an emoji string in the format the emoji data object expects

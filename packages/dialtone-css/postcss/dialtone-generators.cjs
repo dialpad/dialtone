@@ -17,11 +17,11 @@ const {
   PADDING_SIZES,
   GAP_SPACES,
   WIDTH_HEIGHTS,
+  HSLA_EXCLUDED_COLORS,
 } = require('./constants.cjs');
 const {
   appendHoverFocusSelectors,
   processColors,
-  removePrefixFromColor,
 } = require('./helpers.cjs');
 // This constant determines the order in which classes are going to be added to the root CSS
 const generatedRules = {
@@ -46,6 +46,11 @@ const generatedRules = {
   borderRightRadius: [],
   borderBottomRadius: [],
   borderLeftRadius: [],
+  gap: [],
+  rowGap: [],
+  columnGap: [],
+  gapEveryChild: [],
+  columnGapEveryChild: [],
   gridColumns: [],
   gridColumnStart: [],
   gridColumnEnd: [],
@@ -99,66 +104,108 @@ const generatedRules = {
  * @param { Declaration } declaration
  */
 function colorUtilities (clonedSource, declaration) {
-  const colorsRegex = new RegExp(`dtColor(Neutral)?(${REGEX_OPTIONS.COLORS})([0-9]{3})?`);
+  const foregroundColorsRegex = /dtColorForeground.+/i;
+  const surfaceColorsRegex = /dtColorSurface.+/i;
+  const borderColorsRegex = /dtColorBorder.+/i;
+  const baseColorsRegex = /dtColor(?!(Foreground|Surface|Border|Brand|Gradient|Link|Chart)).+/i;
+  const chartColorsRegex = /dtColorChart.+/i;
 
   const tokens = { ...TokensBaseLight, ...TokensDpLight };
 
-  const colors = Object.entries(tokens)
-    .filter(([key]) => colorsRegex.test(key))
-    .reduce(processColors, []);
+  const baseColors = Object.entries(tokens).filter(([key]) => baseColorsRegex.test(key)).reduce(processColors, []);
+  const foregroundColors = Object.entries(tokens).filter(([key]) => foregroundColorsRegex.test(key)).reduce(processColors, []);
+  const surfaceColors = Object.entries(tokens).filter(([key]) => surfaceColorsRegex.test(key)).reduce(processColors, []);
+  const borderColors = Object.entries(tokens).filter(([key]) => borderColorsRegex.test(key)).reduce(processColors, []);
+  const chartColors = Object.entries(tokens).filter(([key]) => chartColorsRegex.test(key)).reduce(processColors, []);
 
-  colors.forEach(({ colorName: color }) => {
-    const hslaColor = `hsla(var(${color}-h) var(${color}-s) var(${color}-l)`;
-    const colorNoPrefix = removePrefixFromColor(color);
+  function _generateColorNodes (token, prop, opacityVar) {
+    return [
+      declaration.clone({
+        prop: opacityVar,
+        value: HSLA_EXCLUDED_COLORS.includes(token)
+          ? `100%`
+          : `var(${token}-a)`,
+      }),
+      declaration.clone({
+        prop,
+        value: HSLA_EXCLUDED_COLORS.includes(token)
+          ? `var(${token}) !important`
+          : `hsl(var(${token}-h) var(${token}-s) var(${token}-l) / var(${opacityVar})) !important`,
+      }),
+    ];
+  }
+  function _generateForegroundColors (token, colorName) {
     generatedRules.fontColor.push(new Rule({
       source: clonedSource,
-      selector: appendHoverFocusSelectors(`.d-fc-${colorNoPrefix}`),
-      nodes: [
-        declaration.clone({ prop: '--fco', value: '100%' }),
-        declaration.clone({ prop: 'color', value: `${hslaColor} / var(--fco)) !important` }),
-      ],
+      selector: appendHoverFocusSelectors(`.d-fc-${colorName}`),
+      nodes: _generateColorNodes(token, 'color', '--fco'),
     }));
-    generatedRules.borderColor.push(new Rule({
-      source: clonedSource,
-      selector: appendHoverFocusSelectors(`.d-bc-${colorNoPrefix}`),
-      nodes: [
-        declaration.clone({ prop: '--bco', value: '100%' }),
-        declaration.clone({ prop: 'border-color', value: `${hslaColor} / var(--bco)) !important` }),
-      ],
-    }));
+  }
+  function _generateSurfaceColors (token, colorName) {
     generatedRules.backgroundColor.push(new Rule({
       source: clonedSource,
-      selector: appendHoverFocusSelectors(`.d-bgc-${colorNoPrefix}`),
-      nodes: [
-        declaration.clone({ prop: '--bgo', value: '100%' }),
-        declaration.clone({ prop: 'background-color', value: `${hslaColor} / var(--bgo)) !important` }),
-      ],
+      selector: appendHoverFocusSelectors(`.d-bgc-${colorName}`),
+      nodes: _generateColorNodes(token, 'background-color', '--bgo'),
     }));
+  }
+  function _generateBorderColors (token, colorName) {
+    generatedRules.borderColor.push(new Rule({
+      source: clonedSource,
+      selector: appendHoverFocusSelectors(`.d-bc-${colorName}`),
+      nodes: _generateColorNodes(token, 'border-color', '--bco'),
+    }));
+  }
+  function _generateDividerColors (token, colorName) {
     generatedRules.dividerColor.push(new Rule({
       source: clonedSource,
-      selector: `.d-divide-${colorNoPrefix} > * + *`,
-      nodes: [
-        declaration.clone({ prop: '--dco', value: '100%' }),
-        declaration.clone({ prop: 'border-color', value: `${hslaColor} / var(--dco)) !important` }),
-      ],
+      selector: `.d-divide-${colorName} > * + *`,
+      nodes: _generateColorNodes(token, 'border-color', '--dco'),
     }));
+  }
+
+  baseColors.forEach(({ token, colorName }) => {
+    _generateForegroundColors(token, colorName);
+    _generateBorderColors(token, colorName);
+    _generateSurfaceColors(token, colorName);
+    _generateDividerColors(token, colorName);
     generatedRules.backgroundGradientFromColor.push(new Rule({
       source: clonedSource,
-      selector: appendHoverFocusSelectors(`.d-bgg-from-${colorNoPrefix}`),
+      selector: appendHoverFocusSelectors(`.d-bgg-from-${colorName}`),
       nodes: [
-        declaration.clone({ prop: '--bgg-from-opacity', value: '100%' }),
-        declaration.clone({ prop: '--bgg-from', value: `${hslaColor} / var(--bgg-from-opacity))` }),
-        declaration.clone({ prop: '--bgg-to', value: `${hslaColor} / 0%)` }),
+        ..._generateColorNodes(token, '--bgg-from', '--bgg-from-opacity'),
+        declaration.clone({
+          prop: '--bgg-to',
+          value: HSLA_EXCLUDED_COLORS.includes(token)
+            ? `var(${token}) !important`
+            : `hsl(var(${token}-h) var(${token}-s) var(${token}-l) / 0%) !important`,
+        }),
       ],
     }));
     generatedRules.backgroundGradientToColor.push(new Rule({
       source: clonedSource,
-      selector: appendHoverFocusSelectors(`.d-bgg-to-${colorNoPrefix}`),
-      nodes: [
-        declaration.clone({ prop: '--bgg-to-opacity', value: '100%' }),
-        declaration.clone({ prop: '--bgg-to', value: `${hslaColor} / var(--bgg-to-opacity)) !important` }),
-      ],
+      selector: appendHoverFocusSelectors(`.d-bgg-to-${colorName}`),
+      nodes: _generateColorNodes(token, '--bgg-to', '--bgg-to-opacity'),
     }));
+  });
+  foregroundColors.forEach(({ token, colorName }) => {
+    _generateForegroundColors(token, colorName);
+  });
+  surfaceColors.forEach(({ token, colorName }) => {
+    // Exclude as it is a gradient color and it is being generated manually
+    if (token === '--dt-color-surface-ai') return;
+
+    _generateSurfaceColors(token, colorName);
+  });
+  borderColors.forEach(({ token, colorName }) => {
+    // Exclude as it is a gradient color and it is being generated manually
+    if (token === '--dt-color-border-ai') return;
+
+    _generateBorderColors(token, colorName);
+    _generateDividerColors(token, colorName);
+  });
+  chartColors.forEach(({ token, colorName }) => {
+    _generateBorderColors(token, colorName);
+    _generateSurfaceColors(token, colorName);
   });
 }
 
@@ -227,6 +274,7 @@ function opacityUtilities (clonedSource, declaration) {
  */
 function flexColumnsUtilities (clonedSource, declaration) {
   for (let i = 1; i <= FLEX_COLUMNS; i++) {
+    // TODO: Update d-fl-col* implementation on our next migration. https://dialpad.atlassian.net/browse/DLT-1763
     generatedRules.flexColumn.push(new Rule({
       source: clonedSource,
       selector: `.d-fl-col${i}`,
@@ -238,7 +286,7 @@ function flexColumnsUtilities (clonedSource, declaration) {
       source: clonedSource,
       selector: `.d-fl-col${i} > *`,
       nodes: [
-        declaration.clone({ prop: '--fl-gap', value: 0 }),
+        declaration.clone({ prop: '--fl-gap', value: 'var(--dt-space-0)' }),
         declaration.clone({ prop: '--fl-basis', value: `calc(100% / ${i})` }),
         declaration.clone({ prop: 'display', value: 'inline-flex' }),
         declaration.clone({ prop: 'margin', value: 'var(--fl-gap)' }),
@@ -249,7 +297,7 @@ function flexColumnsUtilities (clonedSource, declaration) {
       source: clonedSource,
       selector: `.d-fl-col${i} > *:nth-child(-n + ${i})`,
       nodes: [
-        declaration.clone({ prop: 'margin-top', value: 0 }),
+        declaration.clone({ prop: 'margin-top', value: 'var(--dt-space-0)' }),
       ],
     }));
     generatedRules.flexDirectionColumn.push(new Rule({
@@ -379,13 +427,52 @@ function gridUtilities (clonedSource, declaration) {
 }
 
 /**
- * Generate Grid gap utility classes.
+ * Generate gap utility classes.
  * @param { Source } clonedSource
  * @param { Declaration } declaration
  */
 function gapUtilities (clonedSource, declaration) {
   Object.keys(GAP_SPACES)
     .forEach(stop => {
+      generatedRules.gap.push(new Rule({
+        source: clonedSource,
+        selector: `.d-g${stop}`,
+        nodes: [
+          declaration.clone({ prop: 'gap', value: `var(--dt-space-${GAP_SPACES[stop]}) !important` }),
+        ],
+      }));
+      generatedRules.rowGap.push(new Rule({
+        source: clonedSource,
+        selector: `.d-rg${stop}`,
+        nodes: [
+          declaration.clone({ prop: 'row-gap', value: `var(--dt-space-${GAP_SPACES[stop]}) !important` }),
+        ],
+      }));
+      generatedRules.columnGap.push(new Rule({
+        source: clonedSource,
+        selector: `.d-cg${stop}`,
+        nodes: [
+          declaration.clone({ prop: 'column-gap', value: `var(--dt-space-${GAP_SPACES[stop]}) !important` }),
+        ],
+      }));
+      generatedRules.gapEveryChild.push(new Rule({
+        source: clonedSource,
+        selector: `.d-g${stop} > *`,
+        nodes: [
+          declaration.clone({ prop: '--fl-gap', value: `var(--dt-space-${GAP_SPACES[stop]})` }),
+          declaration.clone({ prop: 'margin', value: 'unset' }),
+        ],
+      }));
+      generatedRules.columnGapEveryChild.push(new Rule({
+        source: clonedSource,
+        selector: `.d-cg${stop} > *`,
+        nodes: [
+          declaration.clone({ prop: '--fl-gap', value: `var(--dt-space-${GAP_SPACES[stop]})` }),
+          declaration.clone({ prop: 'margin', value: 'unset' }),
+        ],
+      }));
+
+      // TODO: Deprecated classes, remove on our next migration. https://dialpad.atlassian.net/browse/DLT-1763
       generatedRules.gridGap.push(new Rule({
         source: clonedSource,
         selector: `.d-gg${stop}`,
@@ -680,9 +767,9 @@ function _generateUtilities (clonedSource, declaration) {
  */
 function _generateHoverFocusVariations (rule) {
   const backgroundGradientRegex = new RegExp(`\\.d-bgg-(${REGEX_OPTIONS.BACKGROUND_GRADIENTS})`);
-  const fontColorRegex = new RegExp(`\\.d-fc-(${REGEX_OPTIONS.FONT_COLORS})(-(${REGEX_OPTIONS.FONT_COLOR_VARIATIONS}))?`);
-  const backgroundColorRegex = new RegExp(`\\.d-bgc-(${REGEX_OPTIONS.BACKGROUND_COLORS})(-(${REGEX_OPTIONS.BACKGROUND_COLOR_VARIATIONS}))?`);
-  const borderColorRegex = new RegExp(`\\.d-bc-(${REGEX_OPTIONS.BORDER_COLORS})(-(${REGEX_OPTIONS.BORDER_COLOR_VARIATIONS}))?`);
+  const fontColorRegex = /\.d-fc-(current|transparent|unset)/;
+  const backgroundColorRegex = /\.d-bgc-(transparent|unset)/;
+  const borderColorRegex = /\.d-bc-(current|transparent|unset)/;
   const boxShadowRegex = new RegExp(`\\.d-bs-(${REGEX_OPTIONS.BOX_SHADOWS})`);
   const textDecorationRegex = new RegExp(`\\.d-td-(${REGEX_OPTIONS.TEXT_DECORATION})`);
   const opacityRegex = new RegExp(`\\.d-o(${REGEX_OPTIONS.OPACITY_VARIATIONS})`);
@@ -695,7 +782,12 @@ function _generateHoverFocusVariations (rule) {
     textDecorationRegex,
     opacityRegex,
   ].some(regex => regex.test(rule.selector));
-  if (!found) return;
+
+  if (
+    !found ||
+    rule.selectors.some(selector => REGEX_OPTIONS.HOVER_FOCUS_PREFIXES.test(selector))
+  ) return;
+
   const selectors = rule.selectors.map(selector => appendHoverFocusSelectors(selector));
   rule.selector = selectors.filter(selector => !!selector).join(', ');
 }
@@ -713,7 +805,9 @@ module.exports = () => {
 
       _generateUtilities(clonedSource, declaration);
 
-      root.insertAfter(rootSelector, Object.values(generatedRules).flat());
+      const rules = Object.values(generatedRules).flat();
+
+      root.insertAfter(rootSelector, rules);
     },
     Root (root) {
       root.walkRules(rule => {

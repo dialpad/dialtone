@@ -1,8 +1,9 @@
 {
+  "directions": ["both", "column", "row"],
   "values": [
     {
       "value": "0",
-      "output": "0"
+      "output": "0rem"
     },
     {
       "value": "1",
@@ -31,6 +32,10 @@
     {
       "value": "16",
       "output": "1.6rem"
+    },
+    {
+      "value": "20",
+      "output": "2.0rem"
     },
     {
       "value": "24",

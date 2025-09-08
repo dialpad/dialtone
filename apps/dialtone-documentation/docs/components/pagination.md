@@ -5,28 +5,24 @@ status: ready
 thumb: true
 image: assets/images/components/pagination.png
 storybook: https://dialtone.dialpad.com/vue/?path=/story/components-pagination--default
-figma_url: https://www.figma.com/file/2adf7JhZOncRyjYiy2joil/DT-Core%3A-Components-7?node-id=10984%3A76640
+figma_url: https://www.figma.com/design/W58r5BkO8qTw3vem9YieJd/DT9-Component-Library--Rebrand-2025-?node-id=10984-76640
 ---
 
 <code-well-header>
   <dt-pagination
     :total-pages="25"
-    aria-label="Pagination"
-    prev-aria-label="Previous page"
-    next-aria-label="Next page"
-    :page-number-aria-label="(page) => `Page ${page}`"
   />
 </code-well-header>
 
 <code-example-tabs
 htmlCode='
 <nav aria-label="Pagination" class="d-pagination">
-  <button class="base-button__button d-btn d-btn--primary d-btn--icon-only d-pagination__button d-fc-black-300 d-bgc-transparent" type="button" disabled="" aria-label="Previous page">
+  <button class="base-button__button d-btn d-btn--primary d-btn--icon-only d-pagination__button d-fco50 d-fc-disabled d-bgc-transparent" type="button" disabled="" aria-label="Previous page">
     <span class="base-button__icon d-btn__icon d-btn__icon--left">
       <span class="d-icon__wrapper">
         <div aria-busy="true" role="status" aria-label="" class="d-icon d-icon--size-300" style="display: none;">
           <div
-            class="skeleton-placeholder d-bar-circle skeleton-placeholder--animate"
+            class="d-skeleton-placeholder d-bar-circle d-skeleton-placeholder--animate"
             style="animation-delay: 0ms; animation-duration: 1000ms; min-width: 100%; max-width: 100%; min-height: 100%; max-height: 100%;"
           ></div>
         </div>
@@ -59,7 +55,7 @@ htmlCode='
       <span class="d-icon__wrapper">
         <div aria-busy="true" role="status" aria-label="" class="d-icon d-icon--size-300" style="display: none;">
           <div
-            class="skeleton-placeholder d-bar-circle skeleton-placeholder--animate"
+            class="d-skeleton-placeholder d-bar-circle d-skeleton-placeholder--animate"
             style="animation-delay: 0ms; animation-duration: 1000ms; min-width: 100%; max-width: 100%; min-height: 100%; max-height: 100%;"
           ></div>
         </div>
@@ -77,7 +73,7 @@ htmlCode='
       <span class="d-icon__wrapper">
         <div aria-busy="true" role="status" aria-label="" class="d-icon d-icon--size-300" style="display: none;">
           <div
-            class="skeleton-placeholder d-bar-circle skeleton-placeholder--animate"
+            class="d-skeleton-placeholder d-bar-circle d-skeleton-placeholder--animate"
             style="animation-delay: 0ms; animation-duration: 1000ms; min-width: 100%; max-width: 100%; min-height: 100%; max-height: 100%;"
           ></div>
         </div>
@@ -90,27 +86,19 @@ htmlCode='
 vueCode='
 <dt-pagination
   :total-pages="25"
-  aria-label="Pagination"
-  prev-aria-label="Previous page"
-  next-aria-label="Next page"
-  :page-number-aria-label="(page) => `Page ${page}`"
 />
 '
 showHtmlWarning />
 
 ## Variants
 
-### With active page
+### With Active Page
 
 <code-well-header>
   <dt-pagination
     ref="activePage"
     :total-pages="25"
     :active-page="5"
-    aria-label="Pagination"
-    prev-aria-label="Previous page"
-    next-aria-label="Next page"
-    :page-number-aria-label="(page) => `Page ${page}`"
   />
 </code-well-header>
 
@@ -120,25 +108,17 @@ vueCode='
 <dt-pagination
   :total-pages="25"
   :active-page="5"
-  aria-label="Pagination"
-  prev-aria-label="Previous page"
-  next-aria-label="Next page"
-  :page-number-aria-label="(page) => `Page ${page}`"
 />
 '
 />
 
-### With max-visible
+### With Max-Visible
 
 <code-well-header>
   <dt-pagination
     ref="maxVisible"
     :total-pages="25"
     :max-visible="7"
-    aria-label="Pagination"
-    prev-aria-label="Previous page"
-    next-aria-label="Next page"
-    :page-number-aria-label="(page) => `Page ${page}`"
   />
 </code-well-header>
 
@@ -148,10 +128,6 @@ vueCode='
 <dt-pagination
   :total-pages="25"
   :max-visible="7"
-  aria-label="Pagination"
-  prev-aria-label="Previous page"
-  next-aria-label="Next page"
-  :page-number-aria-label="(page) => `Page ${page}`"
 />
 '
 />

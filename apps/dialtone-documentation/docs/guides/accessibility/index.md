@@ -1,7 +1,7 @@
 ---
 title: Accessibility and inclusive design
 shortTitle: accessibility
-prev: { link: "/guides/content/voice-tone/", text: "Voice and tone" }
+prev: { link: "/guides/content/voice-and-tone/", text: "Voice and Tone" }
 description: Guidance on building products for everyone.
 ---
 
@@ -67,7 +67,7 @@ The interface and its content is designed and implemented in such a way that it 
 * Name, role and value.
 * Status messages, sending messaging to the user without interrupting their workflow by giving focus to an element. e.g. “added to cart” while shopping online should act as a message and not a redirection of activity and focus for the user.
 
-### Types of assistive technology
+### Types of Assistive Technology
 
 “Assistive technology” is a generic term that describes tools used by people with disabilities to accomplish tasks. Here are some examples:
 
@@ -94,7 +94,7 @@ The interface and its content is designed and implemented in such a way that it 
 * [Berkeley - Types of assistive technology](https://webaccess.berkeley.edu/resources/assistive-technology)
 * [UXcellence - Designing for Accessibility: An Introduction](https://uxcellence.com/2018/accessible-design-intro)
 
-## Accessibility principles by role
+## Accessibility Principles by Role
 
 How your role can address accessibility and inclusive design.
 
@@ -149,7 +149,7 @@ Pretty much everything above plus…
 
 ## Best Practices
 
-### Color contrast ratio
+### Color Contrast Ratio
 
 Dialpad strives to maintain  **WCAG 2.1 AA** compliance in our digital products, including color contrast. [WCAG guidelines](https://www.w3.org/TR/WCAG21/#contrast-minimum) require a minimum of 4:51 ratio for all content in regular-weight fonts.
 
@@ -171,7 +171,7 @@ Inversely, there may be times when you want a `button`, `select`, etc. element, 
 
 As an example, to recreate a `button` with a `div`, you would need to add in multiple ARIA attributes, manage focus, and then also add additional JavaScript to allow you to click it, or use the spacebar and enter key to activate it. You can learn more by watching [“Just Use a Button,”](https://www.youtube.com/watch?v=CZGqnp06DnI) as explained by Rob Dodson from the Google Chrome Team.
 
-#### Structural semantics and landmarks
+#### Structural Semantics and Landmarks
 
 The following HTML elements should be used to identify common elements of our products.
 
@@ -223,7 +223,7 @@ Do not underestimate the power of list elements. When there are more than two or
 
 By using a list element, a screen reader user knows how many items they can expect to go through, and where they are in the list. A screen reader will announce, “1 of 3 list items,” which is helpful context that allows a user to orient themselves and have a better expectation of what will come next.
 
-### Tab order
+### Tab Order
 
 Like the name suggests, tab order is the order in which elements receive focus when a user is navigating with a keyboard. The tab order should match the visual order, so users are able to logically navigate through content. This is important. The default keyboard navigation order must be logical and intuitive, which generally means that it follows the page’s visual flow: left to right, top to bottom -- header first, then main navigation, then page navigation (if applicable), and finally the footer.
 
@@ -244,13 +244,13 @@ By default, users can only navigate to links, buttons, and form controls with a 
 
 `Tabindex=”0”` can be used to add non-interactive elements into the tab flow. This is useful when coding custom elements that are not natively focused.
 
-### Visible focus
+### Visible Focus
 
 It is often difficult for keyboard users to tell where they are on the page. We must take care to ensure that it is easy to tell which item on the page currently has keyboard focus. All browsers by default display a visible outline around the element that currently has focus. Some browsers (i.e. Chrome and Safari) show an easy-to-see blue outline as their visible focus. However, other browsers show a thin, dotted line, which can be very difficult to see.
 
 Dialtone provides visible focus on all components. However, we cannot anticipate the various contexts in which each component will be inserted. Be sure to remember that focus indication can occur on different colored backgrounds and a minimum contrast ratio of 3:1 is required.
 
-### Skip navigation links
+### Skip Navigation Links
 
 A site or product’s main content is not usually the first thing on the page. Keyboard users generally must navigate a long list of navigation links, dropdowns, logos, search inputs, and other elements before ever arriving at the main content. This is particularly difficult for users with some forms of motor disabilities. Without some sort of system, for bypassing the long list of links at the top, some users are at a huge disadvantage. Consider users with no arm movement, who use computers by tapping their heads on a switch or that use a stick in their mouth to press keyboard keys. Requiring users to perform any action perhaps 100s of times before reaching the main content is simply unacceptable.
 
@@ -260,7 +260,7 @@ Often developers hide the skip navigation link so it is available for screen rea
 
 * [WebAim - “Skip Navigation Links”](https://webaim.org/techniques/skipnav/)
 
-### Form best practices
+### Form Best Practices
 
 Forms can be difficult, high-friction points for sighted and able users, which means if not done correctly, they can be simply unusable for users reliant on keyboard navigation or assistive technology. Users should be able to fill in forms, press buttons, use range sliders, select options, and operate controls with ease. Forms that use JavaScript to manipulate form data, set focus, change form elements, or submit forms can often create interactions that only work with a mouse. Ensure your forms can be understood and operated with the keyboard alone.
 
@@ -272,7 +272,7 @@ List-based inputs, such as `select`, comboboxes, or custom dropdown menus can be
 
 * [WebAim - “Creating Accessible Forms.”](https://webaim.org/techniques/forms/controls)
 
-### Focus vs focus-visible
+### Focus vs Focus-visible
 
 User agents can choose their own heuristics for when to match `:focus-visible`; however, the following (non-normative) suggestions can be used as a starting point:
 
@@ -292,7 +292,7 @@ In general, a rule of thumb is that: if an element is going to need the keyboard
 * Input
 * Select menu
 
-#### Focus visible
+#### Focus Visible
 
 * Button
 * Link
@@ -309,7 +309,7 @@ References
 
 ## Tooling
 
-### Browser extension
+### Browser Extension
 
 #### Chrome and Firefox
 
@@ -317,21 +317,21 @@ References
 
 ### Checklists
 
-#### Android accessibility checklist
+#### Android Accessibility Checklist
 
 * [Deque - Summary and Checklist: Android Native Application Accessibility](https://dequeuniversity.com/assets/pdf/module-android/module-android-checklist.pdf)
 
-#### iOS accessibility checklist
+#### iOS Accessibility Checklist
 
 * [Deque - Summary and Checklist: iOS Application Accessibility](https://dequeuniversity.com/assets/pdf/module-ios/module-ios-checklist.pdf)
 
-#### Web accessibility checklist
+#### Web Accessibility Checklist
 
 * [Deque - Web Accessibility Checklist](https://dequeuniversity.com/checklists/web/)
 
-### Figma plugins
+### Figma Plugins
 
-#### Adee comprehensive accessibility tool
+#### Adee Comprehensive Accessibility Tool
 
 * [Figma Plugins - Adee Comprehensive Accessibility Tool](https://www.figma.com/community/plugin/931280467863251825/Adee-Comprehensive-Accessibility-Tool)
 
@@ -339,15 +339,15 @@ References
 
 * [Figma Plugins - Stark](https://www.figma.com/community/plugin/732603254453395948/Stark)
 
-### Screen readers
+### Screen Readers
 
 To learn more about the various combinations of operating systems and screen reader software, read [WebAim’s 2021 Screen Reader User Survey.](https://webaim.org/projects/screenreadersurvey9/)
 
-#### VoiceOver for Apple computers
+#### VoiceOver for Apple Computers
 
 * [Apple - Appendix A: Commands and Gestures](https://www.apple.com/voiceover/info/guide/_1131.html)
 
-#### Narrator shortcuts for Windows
+#### Narrator Shortcuts for Windows
 
 * [Microsoft - Appendix B: Narrator keyboard commands and touch gestures](https://support.microsoft.com/en-us/windows/windows-keyboard-shortcuts-for-accessibility-021bcb62-45c8-e4ef-1e4f-41b8c1fc87fd)
 

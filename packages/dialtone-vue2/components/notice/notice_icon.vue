@@ -6,8 +6,8 @@
   >
     <!-- @slot Slot for the main content -->
     <slot>
-      <dt-icon
-        :name="defaultIcon"
+      <component
+        :is="defaultIcon"
         size="400"
       />
     </slot>
@@ -15,22 +15,32 @@
 </template>
 
 <script>
-import { DtIcon } from '@/components/icon';
-import { NOTICE_KINDS } from './notice_constants';
+import {
+  DtIconInfo,
+  DtIconCheckCircle,
+  DtIconAlertTriangle,
+  DtIconAlertCircle,
+  DtIconBell,
+} from '@dialpad/dialtone-icons/vue2';
+import { NOTICE_KINDS } from './notice_constants.js';
 
 const kindToIcon = new Map([
-  ['info', 'info'],
-  ['success', 'check-circle'],
-  ['warning', 'alert-triangle'],
-  ['error', 'alert-circle'],
-  ['base', 'bell'],
+  ['info', DtIconInfo],
+  ['success', DtIconCheckCircle],
+  ['warning', DtIconAlertTriangle],
+  ['error', DtIconAlertCircle],
+  ['base', DtIconBell],
 ]);
 
 export default {
   name: 'DtNoticeIcon',
 
   components: {
-    DtIcon,
+    DtIconInfo,
+    DtIconCheckCircle,
+    DtIconAlertTriangle,
+    DtIconAlertCircle,
+    DtIconBell,
   },
 
   props: {

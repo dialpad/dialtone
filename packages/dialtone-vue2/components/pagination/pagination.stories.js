@@ -10,9 +10,7 @@ export const argsData = {
   totalPages: 5,
   activePage: 1,
   maxVisible: 5,
-  ariaLabel: 'pagination',
-  prevAriaLabel: 'previous',
-  nextAriaLabel: 'next',
+  hideEdges: false,
   onChange: action('change'),
 };
 
@@ -33,19 +31,9 @@ export const argTypesData = {
       type: 'number',
     },
   },
-  ariaLabel: {
+  hideEdges: {
     control: {
-      type: 'text',
-    },
-  },
-  prevAriaLabel: {
-    control: {
-      type: 'text',
-    },
-  },
-  nextAriaLabel: {
-    control: {
-      type: 'text',
+      type: 'boolean',
     },
   },
 
@@ -87,9 +75,6 @@ export const Default = {
       :active-page="activePage"
       :max-visible="maxVisible"
       :aria-label="ariaLabel"
-      :prev-aria-label="prevAriaLabel"
-      :next-aria-label="nextAriaLabel"
-      :page-number-aria-label="getPageNumberAriaLabel"
       @change="onChange"
     />   `,
       },
@@ -114,9 +99,6 @@ export const Variants = {
         <dt-pagination
           :total-pages="10"
           :aria-label="'pagination with separator in the end'"
-          :prev-aria-label="'previous'"
-          :next-aria-label="'next'"
-          :page-number-aria-label="getPageNumberAriaLabel"
         />
       </div>
       <div class="d-m32">
@@ -127,9 +109,6 @@ export const Variants = {
           :total-pages="15"
           :active-page="13"
           :aria-label="'pagination with separator in the beginning'"
-          :prev-aria-label="'previous'"
-          :next-aria-label="'next'"
-          :page-number-aria-label="getPageNumberAriaLabel"
         />
       </div>
       <div class="d-m32">
@@ -140,9 +119,6 @@ export const Variants = {
           :total-pages="10"
           :active-page="5"
           :aria-label="'pagination with separator on both sides'"
-          :prev-aria-label="'previous'"
-          :next-aria-label="'next'"
-          :page-number-aria-label="getPageNumberAriaLabel"
         />
       </div>
     </div>

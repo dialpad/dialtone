@@ -2,33 +2,89 @@
   "typographyVariants": [
     {
       "category": "headline",
-      "size": ["eyebrow", "sm", "md", "lg", "xl", "xxl"],
-      "strength": ["-", "soft", "-", "soft", "-", "-"],
-      "density": ["-", "compact", "compact", "compact", "compact", "compact"]
+      "size": [
+        "eyebrow",
+        "sm",
+        "md",
+        "lg",
+        "xl",
+        "xxl"
+      ],
+      "strength": [
+        "-",
+        "soft",
+        "-",
+        "soft",
+        "-",
+        "-"
+      ],
+      "density": [
+        "-",
+        "compact",
+        "compact",
+        "compact",
+        "compact",
+        "compact"
+      ]
     },
     {
       "category": "body",
-      "size": ["sm", "md"],
-      "strength": ["-", "-"],
-      "density": ["compact", "compact"]
+      "size": [
+        "sm",
+        "md"
+      ],
+      "strength": [
+        "-",
+        "-"
+      ],
+      "density": [
+        "compact",
+        "compact"
+      ]
     },
     {
       "category": "label",
-      "size": ["sm", "md"],
-      "strength": ["plain", "plain"],
-      "density": ["compact", "compact"]
+      "size": [
+        "sm",
+        "md"
+      ],
+      "strength": [
+        "plain",
+        "plain"
+      ],
+      "density": [
+        "compact",
+        "compact"
+      ]
     },
     {
       "category": "helper",
-      "size": ["sm", "md"],
-      "strength": ["-", "-"],
-      "density": ["-"]
+      "size": [
+        "sm",
+        "md"
+      ],
+      "strength": [
+        "-",
+        "-"
+      ],
+      "density": [
+        "-"
+      ]
     },
     {
       "category": "code",
-      "size": ["sm", "md"],
-      "strength": ["-", "-"],
-      "density": ["-", "-"]
+      "size": [
+        "sm",
+        "md"
+      ],
+      "strength": [
+        "-",
+        "-"
+      ],
+      "density": [
+        "-",
+        "-"
+      ]
     }
   ],
   "typographyStyles": [
@@ -172,91 +228,95 @@
     },
     {
       "var": "marketing",
-      "output": "\"Archivo\", -apple-system, BlinkMacSystemFont, \"Segoe UI\", Helvetica, Cantarell, Ubuntu, Roboto, Arial, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\""
+      "output": "\"Season Mix\", -apple-system, BlinkMacSystemFont, \"Segoe UI\", Helvetica, Cantarell, Ubuntu, Roboto, Arial, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\""
     },
     {
       "var": "marketing-semi-expanded",
-      "output": "\"ArchivoSemiExpanded\", -apple-system, BlinkMacSystemFont, \"Segoe UI\", Helvetica, Cantarell, Ubuntu, Roboto, Arial, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\""
+      "output": "\"Season Mix\", -apple-system, BlinkMacSystemFont, \"Segoe UI\", Helvetica, Cantarell, Ubuntu, Roboto, Arial, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\""
     },
     {
       "var": "marketing-expanded",
-      "output": "\"ArchivoExpanded\", -apple-system, BlinkMacSystemFont, \"Segoe UI\", Helvetica, Cantarell, Ubuntu, Roboto, Arial,  sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\""
+      "output": "\"Season Mix\", -apple-system, BlinkMacSystemFont, \"Segoe UI\", Helvetica, Cantarell, Ubuntu, Roboto, Arial,  sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\""
     },
     {
       "var": "unset",
       "output": "unset"
     }
   ],
-  "lineHeight": [
-    {
-      "class": "-100",
-      "output": "1"
-    },
-    {
-      "class": "-200",
-      "output": "1.2"
-    },
-    {
-      "class": "-300",
-      "output": "1.4"
-    },
-    {
-      "class": "-400",
-      "output": "1.6"
-    },
-    {
-      "class": "-500",
-      "output": "1.8"
-    },
-    {
-      "class": "-600",
-      "output": "2"
-    },
-    {
-      "class": "0",
-      "output": "1em"
-    },
-    {
-      "class": "1",
-      "output": "calc(1em + 1px)"
-    },
-    {
-      "class": "2",
-      "output": "calc(1em + 2px)"
-    },
-    {
-      "class": "4",
-      "output": "calc(1em + 4px)"
-    },
-    {
-      "class": "6",
-      "output": "calc(1em + 6px)"
-    },
-    {
-      "class": "8",
-      "output": "calc(1em + 8px)"
-    },
-    {
-      "class": "12",
-      "output": "calc(1em + 12px)"
-    },
-    {
-      "class": "16",
-      "output": "calc(1em + 16px)"
-    },
-    {
-      "class": "20",
-      "output": "calc(1em + 20px)"
-    },
-    {
-      "class": "24",
-      "output": "calc(1em + 24px)"
-    },
-    {
-      "class": "-unset",
-      "output": "unset"
-    }
-  ],
+  "lineHeight": {
+    "relative": [
+      {
+        "class": "unset",
+        "output": "unset"
+      },
+      {
+        "class": "100",
+        "output": "1"
+      },
+      {
+        "class": "200",
+        "output": "1.2"
+      },
+      {
+        "class": "300",
+        "output": "1.4"
+      },
+      {
+        "class": "400",
+        "output": "1.6"
+      },
+      {
+        "class": "500",
+        "output": "1.8"
+      },
+      {
+        "class": "600",
+        "output": "2"
+      }
+    ],
+    "fixed": [
+      {
+        "class": "0",
+        "output": "1em"
+      },
+      {
+        "class": "1",
+        "output": "calc(1em + 1px)"
+      },
+      {
+        "class": "2",
+        "output": "calc(1em + 2px)"
+      },
+      {
+        "class": "4",
+        "output": "calc(1em + 4px)"
+      },
+      {
+        "class": "6",
+        "output": "calc(1em + 6px)"
+      },
+      {
+        "class": "8",
+        "output": "calc(1em + 8px)"
+      },
+      {
+        "class": "12",
+        "output": "calc(1em + 12px)"
+      },
+      {
+        "class": "16",
+        "output": "calc(1em + 16px)"
+      },
+      {
+        "class": "20",
+        "output": "calc(1em + 20px)"
+      },
+      {
+        "class": "24",
+        "output": "calc(1em + 24px)"
+      }
+    ]
+  },
   "fontSize": {
     "product": [
       {
@@ -389,84 +449,111 @@
   },
   "fontColorVars": [
     {
+      "var": "neutral-white",
+      "output": "dt-color-neutral-white"
+    },
+    {
+      "var": "neutral-black",
+      "output": "dt-color-neutral-black"
+    },
+    {
       "var": "primary",
-      "output": "black-900"
+      "output": "dt-color-foreground-primary"
     },
     {
       "var": "secondary",
-      "output": "black-700"
+      "output": "dt-color-foreground-secondary"
     },
     {
       "var": "tertiary",
-      "output": "black-600"
+      "output": "dt-color-foreground-tertiary"
     },
     {
       "var": "primary-inverted",
-      "output": "white"
+      "output": "dt-color-foreground-primary-inverted"
     },
     {
       "var": "secondary-inverted",
-      "output": "black-200"
+      "output": "dt-color-foreground-secondary-inverted"
     },
     {
       "var": "tertiary-inverted",
-      "output": "black-300"
+      "output": "dt-color-foreground-tertiary-inverted"
     },
     {
       "var": "muted",
-      "output": ""
-    },
-    {
-      "var": "purple",
-      "output": "purple-500"
+      "output": "dt-color-foreground-muted"
     },
     {
       "var": "placeholder",
-      "output": "black-500"
+      "output": "dt-color-foreground-placeholder"
     },
     {
       "var": "disabled",
-      "output": "black-500"
+      "output": "dt-color-foreground-disabled"
     },
     {
-      "var": "error",
-      "output": "red-400"
+      "var": "critical",
+      "output": "dt-color-foreground-critical"
     },
     {
       "var": "success",
-      "output": "green-400"
+      "output": "dt-color-foreground-success"
     },
     {
       "var": "warning",
-      "output": "green-500"
-    },
-    {
-      "var": "warning-hover",
-      "output": "black-900"
+      "output": "dt-color-foreground-warning"
     }
   ],
   "weight": [
     {
+      "class": "normal",
       "name": "normal",
       "output": "400"
     },
     {
+      "class": "medium",
       "name": "medium",
       "output": "500"
     },
     {
-      "name": "semibold",
+      "class": "semibold",
+      "name": "semi-bold",
       "output": "600"
     },
     {
+      "class": "bold",
       "name": "bold",
       "output": "700"
     }
   ],
-  "decoration": ["none", "underline", "dotted", "line-through", "unset"],
-  "lists": ["none", "disc", "circle", "content", "decimal", "unset"],
-  "style": ["normal", "italic", "unset"],
-  "align": ["left", "right", "center", "justify", "unset"],
+  "decoration": [
+    "none",
+    "underline",
+    "dotted",
+    "line-through",
+    "unset"
+  ],
+  "lists": [
+    "none",
+    "disc",
+    "circle",
+    "content",
+    "decimal",
+    "unset"
+  ],
+  "style": [
+    "normal",
+    "italic",
+    "unset"
+  ],
+  "align": [
+    "left",
+    "right",
+    "center",
+    "justify",
+    "unset"
+  ],
   "overflowWrap": [
     {
       "class": "normal",
@@ -485,7 +572,14 @@
       "description": "Resets to the initial, default line break rule."
     }
   ],
-  "transform": ["uppercase", "lowercase", "capitalize", "full-width", "none", "unset"],
+  "transform": [
+    "uppercase",
+    "lowercase",
+    "capitalize",
+    "full-width",
+    "none",
+    "unset"
+  ],
   "family": [
     {
       "class": "custom",
@@ -577,7 +671,16 @@
       "lh-class": "16"
     }
   ],
-  "opacity": [0, 10, 25, 50, 75, 90, 95, 99],
+  "opacity": [
+    0,
+    10,
+    25,
+    50,
+    75,
+    90,
+    95,
+    99
+  ],
   "fontVariantNumeric": [
     {
       "class": "normal",

@@ -28,12 +28,12 @@
       importance="outlined"
       kind="muted"
       circle
-      v-bind="closeButtonProps"
+      :aria-label="closeButtonTitle"
+      :title="closeButtonTitle"
       @click="$emit('close')"
     >
       <template #icon>
-        <dt-icon
-          name="close"
+        <dt-icon-close
           size="300"
         />
       </template>
@@ -43,13 +43,14 @@
 
 <script>
 import { DtButton } from '@/components/button';
-import { DtIcon } from '@/components/icon';
+import { DtIconClose } from '@dialpad/dialtone-icons/vue2';
+import { DialtoneLocalization } from '@/localization';
 
 export default {
   name: 'PopoverHeaderFooter',
   components: {
     DtButton,
-    DtIcon,
+    DtIconClose,
   },
 
   props: {
@@ -77,15 +78,6 @@ export default {
       type: Boolean,
       default: false,
     },
-
-    /**
-     * A set of props to be passed into the popover's header close button.
-     * Requires an 'ariaLabel' property.
-     */
-    closeButtonProps: {
-      type: Object,
-      default: () => {},
-    },
   },
 
   emits: [
@@ -97,6 +89,18 @@ export default {
      */
     'close',
   ],
+
+  data () {
+    return {
+      i18n: new DialtoneLocalization(),
+    };
+  },
+
+  computed: {
+    closeButtonTitle () {
+      return this.i18n.$t('DIALTONE_CLOSE_BUTTON');
+    },
+  },
 
   methods: {
     focusCloseButton () {

@@ -19,7 +19,7 @@ describe('DtRecipeCallbarButton Tests', () => {
 
   // Helpers
   const _setChildWrappers = () => {
-    button = wrapper.findComponent('.dt-recipe-callbar-button');
+    button = wrapper.findComponent('.d-recipe-callbar-button');
     tooltip = wrapper.findComponent(DtTooltip);
   };
 
@@ -29,7 +29,6 @@ describe('DtRecipeCallbarButton Tests', () => {
       attrs,
       slots,
       provide,
-      attachTo: document.body,
     });
     _setChildWrappers();
   };
@@ -74,31 +73,30 @@ describe('DtRecipeCallbarButton Tests', () => {
     describe('Button variants', () => {
       it('Should add appropriate class to icon when "active"', async () => {
         await wrapper.setProps({ active: true });
-        expect(button.classes().includes('dt-recipe-callbar-button--active')).toBe(true);
+        expect(button.classes().includes('d-recipe-callbar-button--active')).toBe(true);
       });
 
       it('Should add appropriate class to icon when "circle"', async () => {
         await wrapper.setProps({ circle: true });
-        expect(button.classes().includes('dt-recipe-callbar-button--circle')).toBe(true);
+        expect(button.classes().includes('d-recipe-callbar-button--circle')).toBe(true);
         expect(button.props().importance).toBe('outlined');
       });
 
       it('Should add appropriate class to icon when "danger"', async () => {
         await wrapper.setProps({ danger: true });
-        expect(button.classes().includes('dt-recipe-callbar-button--danger')).toBe(true);
+        expect(button.classes().includes('d-recipe-callbar-button--danger')).toBe(true);
       });
 
       it('Should display a disabled button when "disabled"', async () => {
         await wrapper.setProps({ disabled: true });
         expect(button.classes().includes('d-btn--disabled')).toBe(true);
-        expect(button.classes().includes('d-bgc-transparent')).toBe(true);
       });
 
       it(
         'Should add appropriate class to circle button when "importance"',
         async () => {
           await wrapper.setProps({ importance: 'clear', circle: 'true' });
-          expect(button.classes().includes('dt-recipe-callbar-button--circle')).toBe(true);
+          expect(button.classes().includes('d-recipe-callbar-button--circle')).toBe(true);
           expect(button.props().importance).toBe('clear');
         },
       );

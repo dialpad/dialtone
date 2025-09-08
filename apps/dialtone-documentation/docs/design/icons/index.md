@@ -2,7 +2,7 @@
 title: Icons
 shortTitle: icons
 description: An icon style for visually communicating commands, status, and more.
-storybook: https://vue.dialpad.design/?path=/docs/components-icon--default
+storybook: https://vue.dialpad.design/?path=/story/components-icon--default
 figma_url: https://www.figma.com/file/zz40wi0uW9MvaJ5RuhcRZR/DT-Core%3A-Icons-7?node-id=1473%3A3757&viewport=-168%2C479%2C1&t=OhX4ilCDvb7Tqkx4-11
 ---
 
@@ -12,7 +12,7 @@ figma_url: https://www.figma.com/file/zz40wi0uW9MvaJ5RuhcRZR/DT-Core%3A-Icons-7?
 
 ### In Figma
 
-<div class="d-d-grid d-gg24 d-g-cols3 md:d-g-cols1">
+<div class="d-d-grid d-g24 d-g-cols1 md:d-g-cols3">
 
 Find a list of available icons in [DT Core: Icons](https://www.figma.com/file/zz40wi0uW9MvaJ5RuhcRZR/DT8-Icon-Library), or search the icons in the search library within your Figma file.
 
@@ -24,13 +24,13 @@ Find a list of available icons in [DT Core: Icons](https://www.figma.com/file/zz
 
 ### In Vue
 
-<div class="d-d-grid d-gg24 d-g-cols3 md:d-g-cols1">
+<div class="d-d-grid d-g24 d-g-cols1 md:d-g-cols3">
 
-For detailed instructions on using the icons, check the [Icon component](/components/icon.html).
+For detailed instructions on using the icons, check the [Icon component](/components/icon.md).
 
 <div class="d-gc2">
 <code-well-header>
-  <div class="d-d-grid d-gg24 d-g-cols3 md:d-g-cols1 d-w100p">
+  <div class="d-d-grid d-g24 d-g-cols1 md:d-g-cols3 d-w100p">
     <div class="d-fl-center">
       <dt-icon :name="selectedIcon" :size="selectedSize" />
     </div>
@@ -39,21 +39,30 @@ For detailed instructions on using the icons, check the [Icon component](/compon
   </div>
 </code-well-header>
 
+#### Vue 2
+
 ```js
-import { DtIcon } from '@dialpad/dialtone-vue';
-<dt-icon name="icon-name" size="500" ariaLabel="Description" />
+import { DtIconCreditCard } from '@dialpad/dialtone-icons/vue2';
+<dt-icon-credit-card size="500" aria-label="Description" />
+```
+
+#### Vue 3
+
+```js
+import { DtIconCreditCard } from '@dialpad/dialtone-icons/vue3';
+<dt-icon-credit-card size="500" aria-label="Description" />
 ```
 
 </div>
 </div>
 
-### Choosing the right icon
+### Choosing the Right Icon
 
 Some icons are linked to specific actions, like the Settings gear <dt-icon name="settings" size="200" /> or the Edit pencil <dt-icon name="edit" size="200" />. For actions without a dedicated icon, avoid reusing icons that are already associated with other actions, this helps prevent confusion and ensures clear understanding. Instead, select an existing icon from the Icon Catalog without a specific action meaning or consider [creating a new one](#crafting-an-icon) that clearly represents the intended action.
 
 ### Sizing
 
-<div class="d-d-grid d-gg24 d-g-cols3 md:d-g-cols1">
+<div class="d-d-grid d-g24 d-g-cols1 md:d-g-cols3">
 
 The icon size is defined based on the context and text size next to it. These are the only available size options and no overrides should be needed to properly size the icons.
 
@@ -69,7 +78,7 @@ The icon size is defined based on the context and text size next to it. These ar
 </div>
 </div>
 
-## Crafting an icon
+## Crafting an Icon
 
 Our icons are designed for easy recognition and understanding. They are a visual support, helping people navigate the experience more effectively.
 
@@ -77,7 +86,7 @@ Our icons are designed for easy recognition and understanding. They are a visual
 
 Go to the [Icon Builder page](https://www.figma.com/file/zz40wi0uW9MvaJ5RuhcRZR/DT8-Icon-Library?type=design&node-id=12057-3505&mode=design&t=CNADHg9I1bsKDPiB-4) in Figma and follow the instructions. Remember to work on a branch and send a review when the icons are ready.
 
-<div class="d-d-grid d-gg24 d-g-cols3 md:d-g-cols1">
+<div class="d-d-grid d-g24 d-g-cols1 md:d-g-cols3">
 
 <div>
 
@@ -97,7 +106,7 @@ Go to the [Icon Builder page](https://www.figma.com/file/zz40wi0uW9MvaJ5RuhcRZR/
 
 1. [Create a new branch](https://github.com/dialpad/dialtone/tree/staging/packages/dialtone-css/.github/CONTRIBUTING.md#making-a-pull-request) in [dialtone](https://github.com/dialpad/dialtone/tree/staging) repo starting with "dlt-xxxx-" in the name.
 2. Place the exported SVG file(s) in the appropriate folder category inside `./src/svg/`, files names should be in kebab-case.
-3. Run `nx build dialtone-icons`
+3. Run `nx run dialtone-icons:build`
 4. Add keywords related to the icon(s) in the `packages/dialtone-icons/src/keywords-icons.json` file.
 5. [Commit](https://github.com/dialpad/dialtone/tree/staging/.github/COMMIT_CONVENTION.md) and push your branch to [dialtone](https://github.com/dialpad/dialtone/tree/staging).
 6. Open a pull request, once approved it can be merged into main and will go out in the next [dialtone](https://github.com/dialpad/dialtone/tree/staging) release.
@@ -126,4 +135,5 @@ const changeIcon = (newIcon) => {
 const changeIconSize = (newSize) => {
   selectedSize.value = newSize;
 };
+
 </script>

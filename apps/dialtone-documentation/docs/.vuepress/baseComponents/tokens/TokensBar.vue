@@ -41,20 +41,20 @@
         @change="updateFormat"
       />
       <dt-select-menu
+        name="mode-select"
+        label="Mode"
+        select-class="d-w128"
+        :value="mode"
+        :options="MODES"
+        @change="updateMode"
+      />
+      <dt-select-menu
         name="theme-select"
         label="Theme"
         select-class="d-w128"
         :value="theme"
         :options="THEMES"
         @change="updateTheme"
-      />
-      <dt-select-menu
-        name="brand-select"
-        label="Brand"
-        select-class="d-w128"
-        :value="brand"
-        :options="BRANDS"
-        @change="updateBrand"
       />
       <dt-button
         v-dt-tooltip:top-end="shareLinkTooltip"
@@ -78,7 +78,7 @@
 
 <script setup>
 import { computed, ref } from 'vue';
-import { FORMAT_MAP, THEMES, BRANDS } from './constants';
+import { FORMAT_MAP, THEMES, MODES } from './constants';
 import { debounce } from '../../common/utilities';
 import { useRoute, useRouter } from 'vue-router';
 
@@ -91,11 +91,11 @@ const props = defineProps({
     type: String,
     required: true,
   },
-  theme: {
+  mode: {
     type: String,
     required: true,
   },
-  brand: {
+  theme: {
     type: String,
     required: true,
   },
@@ -104,7 +104,7 @@ const props = defineProps({
 const route = useRoute();
 const router = useRouter();
 
-const emit = defineEmits(['filter', 'update:search', 'update:format', 'update:theme', 'update:brand']);
+const emit = defineEmits(['filter', 'update:search', 'update:format', 'update:theme', 'update:mode']);
 const searchCriteria = ref(props.search?.trim());
 const shareLinkTooltip = ref('Copy URL to clipboard');
 
@@ -139,17 +139,17 @@ const updateFormat = async (newFormat) => {
   emit('filter');
 };
 
+const updateMode = async (newMode) => {
+  if (props.mode === newMode) return;
+  await router.replace({ path: route.path, hash: route.hash, query: { ...route.query, mode: newMode } });
+  emit('update:mode', newMode);
+  emit('filter');
+};
+
 const updateTheme = async (newTheme) => {
   if (props.theme === newTheme) return;
   await router.replace({ path: route.path, hash: route.hash, query: { ...route.query, theme: newTheme } });
   emit('update:theme', newTheme);
-  emit('filter');
-};
-
-const updateBrand = async (newBrand) => {
-  if (props.brand === newBrand) return;
-  await router.replace({ path: route.path, hash: route.hash, query: { ...route.query, brand: newBrand } });
-  emit('update:brand', newBrand);
   emit('filter');
 };
 
@@ -159,7 +159,7 @@ const copyURLToClipboard = async () => {
   try {
     await navigator.clipboard.writeText(window.location.href);
     shareLinkTooltip.value = 'Copied';
-  } catch (err) {
+  } catch {
     shareLinkTooltip.value = 'Error copying to clipboard';
   }
 

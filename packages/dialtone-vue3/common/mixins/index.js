@@ -1,3 +1,5 @@
+export { default as DtDOMMixin } from './dom';
+
 export {
   InputMixin as DtInputMixin,
   CheckableMixin as DtCheckableInputMixin,
@@ -11,3 +13,11 @@ export {
 export {
   default as DtKeyboardListNavigationMixin,
 } from './keyboard_list_navigation';
+
+export {
+  default as DtModalMixin,
+} from './modal';
+
+export {
+  default as DtSkeletonMixin,
+} from './skeleton';

@@ -1,9 +1,9 @@
-import { mount } from '@vue/test-utils';
+import { flushPromises, mount } from '@vue/test-utils';
 import DtSplitButton from './split_button.vue';
 import SplitButtonAlpha from './split_button-alpha.vue';
 import SplitButtonOmega from './split_button-omega.vue';
 import { DtIconSend } from '@dialpad/dialtone-icons/vue3';
-import { DtTooltipDirective } from '@/directives/tooltip';
+import { DtTooltipDirective } from '@/directives/tooltip_directive';
 
 const MOCK_ALPHA_BUTTON_STUB = vi.fn();
 const MOCK_OMEGA_BUTTON_STUB = vi.fn();
@@ -199,6 +199,7 @@ describe('DtSplitButton Tests', function () {
       it('Should render the tooltip with correct text', async () => {
         mockProps = { alphaTooltipText: MOCK_ALPHA_TOOLTIP_TEXT };
         await updateWrapper();
+        await flushPromises();
         await alphaButton.trigger('mouseenter');
 
         const tooltip = document.body.querySelector('[data-qa="dt-tooltip"]');
@@ -211,6 +212,7 @@ describe('DtSplitButton Tests', function () {
       it('Should render the tooltip with correct text', async () => {
         mockProps = { omegaTooltipText: MOCK_OMEGA_TOOLTIP_TEXT };
         await updateWrapper();
+        await flushPromises();
         await omegaButton.trigger('mouseenter');
 
         const tooltip = document.body.querySelector('[data-qa="dt-tooltip"]');

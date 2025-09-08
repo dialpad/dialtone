@@ -26,6 +26,19 @@ export const SlashCommandPlugin = Mention.extend({
   group: 'inline',
   inline: true,
 
+  addOptions () {
+    return {
+      ...this.parent?.(),
+      onSelectedCommand: null,
+    };
+  },
+
+  addStorage () {
+    return {
+      onSelectedCommand: this.options.onSelectedCommand,
+    };
+  },
+
   addNodeView () {
     return VueNodeViewRenderer(SlashCommandComponent);
   },

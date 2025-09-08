@@ -7,11 +7,11 @@ description: Utilities to control an element's width.
 
 Use `d-w{n}p` to set a percentage width for an element.
 
-<code-well-header class="d-d-flex d-fd-column d-p24 d-bgc-purple-100 d-bgo50 d-w100p d-hmx332 d-stack16 d-code--md d-ta-center d-of-y-scroll" custom>
+<code-well-header class="d-d-flex d-fd-column d-p24 d-bgc-secondary d-w100p d-hmx332 d-stack16 d-code--md d-ta-center d-of-y-scroll" v-dt-scrollbar:never custom>
   <div v-for="i in percentage" class="d-d-flex d-fl-center d-ps-relative">
     <span class="d-zi-active d-h64 d-d-flex d-ai-center">d-w{{i}}p</span>
-    <div class="d-w100p d-h64 d-ps-absolute d-bgc-purple-200">
-      <div class="d-h64 d-bgc-purple-300 d-bar4" :class="`d-w${i}p`"></div>
+    <div class="d-w100p d-h64 d-ps-absolute d-bgc-moderate">
+      <div class="d-h64 d-bgc-moderate-opaque d-bar4" :class="`d-w${i}p`"></div>
     </div>
   </div>
 </code-well-header>
@@ -35,67 +35,68 @@ Use `d-w{n}p` to set a percentage width for an element.
 
 Use `d-w{n}` to set a fixed width for an element.
 
-<code-well-header class="d-d-flex d-fd-column d-p24 d-bgc-magenta-100 d-bgo50 d-w100p d-hmx332 d-stack16 d-fs-300 d-fw-bold d-ta-center d-of-scroll" custom>
+<code-well-header class="d-d-flex d-fd-column d-p24 d-bgc-secondary d-w100p d-hmx332 d-stack16 d-ta-center d-of-scroll" v-dt-scrollbar:never custom>
   <div v-for="(i, index) in fixed" class="d-d-flex d-pls-start d-ai-center">
-              <span class="d-w48">{{ index }}</span>
-              <div class="d-h64 d-bgc-magenta-100 d-bar4" :class="`d-w${i}`"></div>
-            </div>
+    <span class="d-w72">d-w{{i}}</span>
+    <div class="d-h64 d-bgc-moderate d-bar4" :class="`d-w${i}`"></div>
+  </div>
 </code-well-header>
 
 ```html
-<div class="d-w0">1</div>
-<div class="d-w1">2</div>
-<div class="d-w2">3</div>
-<div class="d-w4">4</div>
-<div class="d-w6">5</div>
-<div class="d-w8">6</div>
-<div class="d-w12">7</div>
-<div class="d-w16">8</div>
-<div class="d-w24">9</div>
-<div class="d-w32">10</div>
-<div class="d-w42">11</div>
-<div class="d-w48">12</div>
-<div class="d-w64">13</div>
-<div class="d-w72">14</div>
-<div class="d-w84">15</div>
-<div class="d-w96">16</div>
-<div class="d-w102">17</div>
-<div class="d-w114">18</div>
-<div class="d-w128">19</div>
-<div class="d-w164">20</div>
-<div class="d-w216">21</div>
-<div class="d-w264">22</div>
-<div class="d-w332">23</div>
-<div class="d-w464">24</div>
-<div class="d-w512">25</div>
-<div class="d-w628">26</div>
-<div class="d-w764">27</div>
-<div class="d-w828">28</div>
-<div class="d-w912">29</div>
-<div class="d-w1024">30</div>
-<div class="d-w1140">31</div>
-<div class="d-w1268">32</div>
-<div class="d-w1340">33</div>
+<div class="d-w0">...</div>
+<div class="d-w1">...</div>
+<div class="d-w2">...</div>
+<div class="d-w4">...</div>
+<div class="d-w6">...</div>
+<div class="d-w8">...</div>
+<div class="d-w12">...</div>
+<div class="d-w16">...</div>
+<div class="d-w20">...</div>
+<div class="d-w24">...</div>
+<div class="d-w32">...</div>
+<div class="d-w42">...</div>
+<div class="d-w48">...</div>
+<div class="d-w64">...</div>
+<div class="d-w72">...</div>
+<div class="d-w84">...</div>
+<div class="d-w96">...</div>
+<div class="d-w102">...</div>
+<div class="d-w114">...</div>
+<div class="d-w128">...</div>
+<div class="d-w164">...</div>
+<div class="d-w216">...</div>
+<div class="d-w264">...</div>
+<div class="d-w332">...</div>
+<div class="d-w464">...</div>
+<div class="d-w512">...</div>
+<div class="d-w628">...</div>
+<div class="d-w764">...</div>
+<div class="d-w828">...</div>
+<div class="d-w912">...</div>
+<div class="d-w1024">...</div>
+<div class="d-w1140">...</div>
+<div class="d-w1268">...</div>
+<div class="d-w1340">...</div>
 ```
 
 ## Screen
 
-Use `d-w100vh` to have an element cover the user's viewport.
+Use `d-w100vw` to have an element cover the user's viewport.
 
-<code-well-header class="d-ps-relative d-d-flex d-jc-center d-p24 d-bgc-gold-100 d-bgo50 d-w100p d-h3 d-stack16 d-of-y-scroll" custom>
-  <div class="d-fl-center d-py16 d-px8 d-w100vw d-h100vh d-bgc-gold-200 d-bar4 d-fs-300 d-fw-bold d-ta-center">Viewport</div>
+<code-well-header class="d-ps-relative d-d-flex d-jc-center d-p24 d-bgc-secondary d-w100p d-h3 d-stack16 d-of-y-scroll" custom>
+  <div class="d-fl-center d-py16 d-px8 d-w100vw d-h100vh d-bgc-moderate d-bar4 d-ta-center">Viewport</div>
 </code-well-header>
 
 ```html
-<div class="d-w100vw">...</div>
+<div class="d-h100vh d-w100vw">...</div>
 ```
 
 ## Auto
 
 Use `d-w-auto` have the browser calculate and select a width.
 
-<code-well-header class="d-ps-relative d-d-flex d-jc-center d-p24 d-bgc-blue-100 d-bgo50 d-w100p d-hmn102 d-stack16" custom>
-  <div class="d-fl-center d-py16 d-px8 d-h72 d-w-auto d-bgc-blue-200 d-bar4 d-fs-300 d-fw-bold d-ta-center">Auto</div>
+<code-well-header class="d-ps-relative d-d-flex d-jc-center d-p24 d-bgc-secondary d-w100p d-hmn102 d-stack16" custom>
+  <div class="d-fl-center d-py16 d-px8 d-h72 d-w-auto d-bgc-moderate d-bar4 d-ta-center">Auto</div>
 </code-well-header>
 
 ```html
@@ -108,35 +109,37 @@ Use `d-w-auto` have the browser calculate and select a width.
 
 ## Classes
 
-<div class="d-h464 d-of-y-scroll d-bb d-bc-black-200">
-  <table class="d-table dialtone-doc-table">
-    <thead>
-      <tr>
-        <th scope="col" class="d-w30p">Class</th>
-        <th scope="col">Output</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr v-for="i in percentage">
-        <th scope="row" class="d-code--sm d-fc-purple-400">.d-w{{ i }}p</th>
-        <td class="d-code--sm">width: {{ i }}% !important;</td>
-      </tr>
-    </tbody>
-    <tbody>
-      <tr v-for="i in fixed">
-        <th scope="row" class="d-code--sm d-fc-purple-400">.d-w{{ i }}</th>
-        <td class="d-code--sm">width: {{ i }}px !important;</td>
-      </tr>
-    </tbody>
-    <tbody>
-      <tr>
-        <th scope="row" class="d-code--sm d-fc-purple-400">.d-w100vw</th>
-        <td class="d-code--sm">width: 100vh !important;</td>
-      </tr>
-      <tr v-for="i in other">
-        <th scope="row" class="d-code--sm d-fc-purple-400">.d-w-{{ i }}</th>
-        <td class="d-code--sm">width: {{ i }} !important;</td>
-      </tr>
-    </tbody>
-  </table>
+<div v-dt-scrollbar class="d-hmx464 d-bar8 d-ba d-bc-subtle">
+  <div>
+    <table class="d-table dialtone-doc-table">
+      <thead class="d-bgc-primary d-ps-sticky d-zi-base1 d-t0">
+        <tr>
+          <th scope="col" class="d-p0 d-bbw0 d-w30p"><div class="d-p16 d-bb d-bc-default d-bbw1">Class</div></th>
+          <th scope="col" class="d-p0 d-bbw0"><div class="d-p16 d-bb d-bc-default d-bbw1">Output</div></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr v-for="i in percentage">
+          <th scope="row" class="d-code--sm d-docsite-code">.d-w{{ i }}p</th>
+          <td class="d-code--sm">width: {{ i }}% !important;</td>
+        </tr>
+      </tbody>
+      <tbody>
+        <tr v-for="i in fixed">
+          <th scope="row" class="d-code--sm d-docsite-code">.d-w{{ i }}</th>
+          <td class="d-code--sm">width: {{ i }}px !important;</td>
+        </tr>
+      </tbody>
+      <tbody>
+        <tr>
+          <th scope="row" class="d-code--sm d-docsite-code">.d-w100vw</th>
+          <td class="d-code--sm">width: 100vw !important;</td>
+        </tr>
+        <tr v-for="i in other">
+          <th scope="row" class="d-code--sm d-docsite-code">.d-w-{{ i }}</th>
+          <td class="d-code--sm">width: {{ i }} !important;</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
 </div>

@@ -50,13 +50,19 @@ export function setCustomEmojiJson (json) {
  * Validate custom emoji json
  */
 export function validateCustomEmojiJson (json) {
-  const customEmojiProps = ['extension', 'custom'];
-  const customEmojiRequiredProps = [
-    'name',
-    'category',
-    'shortname',
-    'extension',
+  const customEmojiProps = [
     'custom',
+    'date_added',
+    'image',
+  ];
+  const customEmojiRequiredProps = [
+    'date_added',
+    'image',
+    'unicode_output',
+    'shortname',
+    'shortname_alternates',
+    'custom',
+    'name',
   ];
 
   /**
@@ -115,7 +121,6 @@ export function validateCustomEmojiJson (json) {
 // recursively searches the emoji data object containing data for all emojis
 // and returns the object with the specified shortcode.
 export function shortcodeToEmojiData (shortcode) {
-  // eslint-disable-next-line complexity
   function f (o, key) {
     if (!o || typeof o !== 'object') {
       return;
@@ -135,6 +140,13 @@ export function shortcodeToEmojiData (shortcode) {
   let reference;
   f(getEmojiData(), null);
   return reference;
+}
+
+export function getEmojiShortCode (emoji) {
+  if (emoji.startsWith(':')) return emoji;
+
+  const unicode = unicodeToString(emoji);
+  return emojiJson[unicode]?.shortname;
 }
 
 // Takes in an emoji unicode character(s) and converts it to an emoji string in the format the emoji data object expects

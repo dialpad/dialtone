@@ -3,7 +3,7 @@ title: Lists
 description: Utilities for controlling list styling.
 ---
 
-## Resetting a list
+## Resetting a List
 
 Use `d-ls-reset` to reset the margin, padding, and list-style-type of a list. Reseting a list applies to the parent `ol` or `ul`, any child `li` elements, and any child `ol` or `ul` elements.
 
@@ -49,7 +49,7 @@ Use `d-ls-reset` to reset the margin, padding, and list-style-type of a list. Re
 </ul>
 ```
 
-## Changing the list style type
+## Changing the List Style Type
 
 Use `d-lst-{none|disc|circle|decimal|content|none}` to change a list item's bullet styling.
 
@@ -113,7 +113,7 @@ Use `d-lst-{none|disc|circle|decimal|content|none}` to change a list item's bull
 </dt-stack>
 ```
 
-## Custom starting number
+## Custom Starting Number
 
 Use the `start` attribute for an `<ol>` to set its starting number.
 
@@ -163,7 +163,7 @@ Use the `start` attribute for an `<ol>` to set its starting number.
   <template #content>
     <tbody>
       <tr>
-        <th scope="row" class="d-code--sm d-fc-purple-400">.d-ls-reset</th>
+        <th scope="row" class="d-code--sm d-docsite-code">.d-ls-reset</th>
         <td class="d-code--sm">
           margin: 0;<br/>
           padding: 0;<br/>
@@ -171,11 +171,11 @@ Use the `start` attribute for an `<ol>` to set its starting number.
         </td>
       </tr>
       <tr>
-        <th scope="row" class="d-code--sm d-fc-purple-400">.d-ls-none</th>
+        <th scope="row" class="d-code--sm d-docsite-code">.d-ls-none</th>
         <td class="d-code--sm">list-style: none !important;</td>
       </tr>
       <tr v-for="i in lists">
-        <th scope="row" class="d-code--sm d-fc-purple-400">.d-lst-{{ i }}</th>
+        <th scope="row" class="d-code--sm d-docsite-code">.d-lst-{{ i }}</th>
         <td class="d-code--sm">
           <span v-if="i === 'content'">list-style-type: var(--ls-content) !important;</span>
           <span v-else>list-style-type: {{ i }} !important;</span>

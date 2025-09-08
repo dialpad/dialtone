@@ -27,10 +27,11 @@
     //  Component CSS Vars
     //  ------------------------------------------------------------------------
     --input-color-border: var(--dt-inputs-color-border-default);
+    --input-color-border-hover: var(--dt-inputs-color-border-hover);
     --input-color-background: var(--dt-inputs-color-background-default);
     --input-color-background-disabled: var(--dt-inputs-color-background-disabled);
     --input-color-text: var(--dt-inputs-color-foreground-default);
-    --input-border-width: var(--dt-size-border-150);
+    --input-border-width: var(--dt-size-border-100);
     --input-border-radius: var(--dt-inputs-size-radius-md);
     --input-padding-y: calc(var(--dt-space-400) - var(--input-border-width));
     --input-padding-x: calc((var(--dt-space-500) - var(--dt-space-300)) - var(--input-border-width));
@@ -91,6 +92,12 @@
     &::-ms-clear {
         display: none;
     }
+    //  --  HOVER STATE
+
+    &:hover {
+        --input-color-border: var(--input-color-border-hover);
+    }
+
     //  --  FOCUS STATE
     &:focus,
     &:focus-within {
@@ -133,6 +140,15 @@
     }
 
     &::-ms-expand {
+        display: none;
+    }
+
+    //  --  SEARCH INPUTS
+    // remove the search input's default styling
+    input[type="search"]::-webkit-search-decoration,
+    input[type="search"]::-webkit-search-cancel-button,
+    input[type="search"]::-webkit-search-results-button,
+    input[type="search"]::-webkit-search-results-decoration {
         display: none;
     }
 }
@@ -289,6 +305,10 @@
 
     &--right:not(:empty) {
         margin-right: var(--dt-space-400);
+
+        .d-btn {
+            margin-right: var(--dt-space-350-negative);
+        }
     }
 
     &--left:not(:empty) {

@@ -50,6 +50,7 @@ import { hasSlotContent } from '@/common/utils';
  * @see https://dialtone.dialpad.com/components/card.html
  */
 export default {
+  compatConfig: { MODE: 3 },
   name: 'DtCard',
   props: {
     /**

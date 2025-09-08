@@ -1,0 +1,95 @@
+.d-rich-text-editor {
+  &__code-block {
+    padding: var(--dt-space-400);
+    font: var(--dt-typography-code-md);
+    background: var(--dt-color-surface-secondary);
+  }
+
+  code:not(.d-rich-text-editor__code-block > code) {
+    padding: var(--dt-space-200);
+    color: var(--dt-color-foreground-warning);
+    font: var(--dt-typography-code-md);
+    background-color: var(--dt-color-surface-secondary-opaque);
+    border: var(--dt-size-border-100) solid var(--dt-color-border-subtle);
+    border-radius: var(--dt-size-radius-200);
+  }
+
+  > .ProseMirror {
+    box-shadow: none;
+
+    p.is-editor-empty:first-child::before {
+      float: left;
+      height: 0;
+      color: var(--dt-color-foreground-placeholder);
+      content: attr(data-placeholder);
+      pointer-events: none;
+    }
+
+    ul, ol {
+      padding-left: var(--dt-space-525);
+    }
+
+    ul > li {
+      list-style-type: disc;
+    }
+
+    ol > li {
+      list-style-type: decimal;
+    }
+
+    blockquote {
+      margin-left: 0;
+      padding-left: var(--dt-space-400);
+      border-left: var(--dt-size-border-300) solid var(--dt-color-border-subtle);
+    }
+  }
+}
+
+.d-rich-text-editor-bubble-menu__button-stack {
+  padding: var(--dt-space-300);
+}
+
+.d-suggestion-list__container {
+  max-height: var(--dt-size-875);
+}
+
+.d-suggestion-list {
+  position: relative;
+  min-width: var(--dt-size-925);
+  max-width: var(--dt-size-975);
+  padding: var(--dt-size-300);
+}
+
+.d-suggestion-list__item {
+  border: var(--dt-size-100) solid transparent;
+}
+
+.d-mention-suggestion__name {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.d-mention-suggestion__container {
+  width: 100%;
+}
+.d-mention-suggestion__details-container {
+  width: 90%;
+}
+
+.d-mention-suggestion__presence {
+  min-width: fit-content;
+  margin-left: var(--dt-space-200);
+}
+
+.d-mention-suggestion__status {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  color: var(--dt-color-foreground-tertiary);
+  margin-left: var(--dt-space-100);
+}
+
+.d-mention-suggestion__divider {
+  color: var(--dt-color-foreground-tertiary);
+}

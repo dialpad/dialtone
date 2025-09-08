@@ -1,16 +1,15 @@
 ---
-title: Empty state
+title: Empty State
 description: Indicates no data is available to display, provides clarification, and guidance on how to proceed.
 status: ready
 thumb: true
 image: assets/images/components/empty-state.png
-figma: planned
 storybook: https://dialtone.dialpad.com/vue/?path=/story/components-empty-state--default
+figma_url: https://www.figma.com/design/W58r5BkO8qTw3vem9YieJd/DT9-Component-Library--Rebrand-2025-?node-id=17203-203
 ---
 
 <code-well-header>
   <dt-empty-state
-    illustration-name="mind"
     header-text="Nothing to see here"
     body-text="Looks like there is no data to display here."
   >
@@ -19,6 +18,9 @@ storybook: https://dialtone.dialpad.com/vue/?path=/story/components-empty-state-
         <dt-button importance="clear">Action</dt-button>
         <dt-button>Action</dt-button>
       </dt-stack>
+    </template>
+    <template #illustration>
+      <dt-illustration-nothing-to-see-here></dt-illustration-nothing-to-see-here>
     </template>
   </dt-empty-state>
 </code-well-header>
@@ -78,13 +80,13 @@ storybook: https://dialtone.dialpad.com/vue/?path=/story/components-empty-state-
 
 ### Scenarios
 
-The four most likely scenarios for an empty state are **Zero state**, **No results**, **New feature**, and **Not enabled**. This is not an exhaustive list, but a good starting point for most use cases.
+The four most likely scenarios for an empty state are **Zero State**, **No Results**, **New Feature**, and **Not Enabled**. This is not an exhaustive list, but a good starting point for most use cases.
 
-<div class="d-d-grid d-g-cols3 lg:d-g-cols1 d-bar8 d-bgc-secondary d-mb32">
+<div class="d-d-grid d-g-cols1 lg:d-g-cols3 d-bar8 d-bgc-secondary d-mb32">
 
   <div class="d-p16 d-p16 d-plc-center">
 
-#### Zero state
+#### Zero State
 
 The Empty State should guide the user on how to achieve a non-empty state. You might provide a useful tip, such as a shortcut or explanation of what needs to occur if no direct action can be taken.
 
@@ -94,11 +96,11 @@ The Empty State should guide the user on how to achieve a non-empty state. You m
   </div>
 </div>
 
-<div class="d-d-grid d-g-cols3 lg:d-g-cols1 d-bar8 d-bgc-secondary d-mb32">
+<div class="d-d-grid d-g-cols1 lg:d-g-cols3 d-bar8 d-bgc-secondary d-mb32">
 
   <div class="d-p16 d-p16 d-plc-center">
 
-#### No results
+#### No Results
 
 When an action results in no data or information to display, recommend alternate steps to take. For example, suggest an alternative filter if a table search yields no results, or guide the user on creating a new entry with the desired properties.
 
@@ -108,11 +110,11 @@ When an action results in no data or information to display, recommend alternate
   </div>
 </div>
 
-<div class="d-d-grid d-g-cols3 lg:d-g-cols1 d-bar8 d-bgc-secondary d-mb32">
+<div class="d-d-grid d-g-cols1 lg:d-g-cols3 d-bar8 d-bgc-secondary d-mb32">
 
   <div class="d-p16 d-p16 d-plc-center">
 
-#### New feature
+#### New Feature
 
 An opportunity to introduce something new or not yet take advantage of. If it includes a plan change, clearly inform the user. Use this space to entice the user to explore and utilize the new feature.
 
@@ -122,11 +124,11 @@ An opportunity to introduce something new or not yet take advantage of. If it in
   </div>
 </div>
 
-<div class="d-d-grid d-g-cols3 lg:d-g-cols1 d-bar8 d-bgc-secondary d-mb32">
+<div class="d-d-grid d-g-cols1 lg:d-g-cols3 d-bar8 d-bgc-secondary d-mb32">
 
   <div class="d-p16 d-p16 d-plc-center">
 
-#### Not enabled
+#### Not Enabled
 
 Appropriate for indicating that something is currently unavailable to them. Provide guidance on how they can gain access or why the feature is not enabled.
 
@@ -138,7 +140,7 @@ Appropriate for indicating that something is currently unavailable to them. Prov
 
 ## Variants
 
-A few rules to keep in mind when choosing a size variant.
+A few rules to keep in nothing-to-see-here when choosing a size variant.
 
 - Choosing a size adjusts the relative width, padding, and font size.
 - `lg` and `md` sizes
@@ -152,7 +154,7 @@ A few rules to keep in mind when choosing a size variant.
 
 <code-well-header>
   <dt-empty-state
-    illustration-name="mind"
+    ref="largeIllustrationExample"
     header-text="Nothing to see here"
     body-text="Looks like there is no data to display here."
   >
@@ -162,28 +164,16 @@ A few rules to keep in mind when choosing a size variant.
         <dt-button>Action</dt-button>
       </dt-stack>
     </template>
+    <template #illustration>
+      <dt-illustration-nothing-to-see-here></dt-illustration-nothing-to-see-here>
+    </template>
   </dt-empty-state>
 </code-well-header>
 
 <code-example-tabs
-htmlCode='
-<div class="d-stack d-stack--gap-0 d-empty-state d-empty-state--size-lg">
-  <span class="d-empty-state__illustration">
-    <svg>...</svg>
-  </span>
-  <div class="d-stack d-stack--gap-450 d-empty-state__content d-empty-state__content--lg">
-    <div class="d-empty-state__header-text d-headline--xxl">Nothing to see here</div>
-    <p class="d-empty-state__body-text d-body--md">Looks like there is no data to display here.</p>
-  </div>
-  <div class="d-stack d-stack--row d-stack--gap-300">
-    <button class="d-btn" type="button">...</button>
-    <button class="d-btn d-btn--primary" type="button">...</button>
-  </div>
-</div>
-'
+:htmlCode='() => $refs.largeIllustrationExample'
 vueCode='
 <dt-empty-state
-  illustration-name="mind"
   header-text="Nothing to see here"
   body-text="Looks like there is no data to display here."
 >
@@ -193,15 +183,18 @@ vueCode='
       <dt-button>Action</dt-button>
     </dt-stack>
   </template>
+  <template #illustration>
+    <dt-illustration-nothing-to-see-here></dt-illustration-nothing-to-see-here>
+  </template>
 </dt-empty-state>
 '
 showHtmlWarning />
 
-### Large with icon
+### Large with Icon
 
 <code-well-header>
   <dt-empty-state
-    icon-name="box"
+    ref="largeIconExample"
     header-text="Nothing to see here"
     body-text="Looks like there is no data to display here."
   >
@@ -211,28 +204,16 @@ showHtmlWarning />
         <dt-button>Action</dt-button>
       </dt-stack>
     </template>
+    <template #icon="{ iconSize }">
+      <dt-icon-box :size="iconSize"></dt-icon-box>
+    </template>
   </dt-empty-state>
 </code-well-header>
 
 <code-example-tabs
-htmlCode='
-<div class="d-stack d-stack--gap-0 d-empty-state d-empty-state--size-lg">
-  <span class="d-empty-state__icon">
-    <svg>...</svg>
-  </span>
-  <div class="d-stack d-stack--gap-450 d-empty-state__content d-empty-state__content--lg">
-    <div class="d-empty-state__header-text d-headline--xxl">Nothing to see here</div>
-    <p class="d-empty-state__body-text d-body--md">Looks like there is no data to display here.</p>
-  </div>
-  <div class="d-stack d-stack--row d-stack--gap-300">
-    <button class="d-btn" type="button">...</button>
-    <button class="d-btn d-btn--primary" type="button">...</button>
-  </div>
-</div>
-'
+:htmlCode='() => $refs.largeIconExample'
 vueCode='
 <dt-empty-state
-  icon-name="box"
   header-text="Nothing to see here"
   body-text="Looks like there is no data to display here."
 >
@@ -241,6 +222,9 @@ vueCode='
       <dt-button importance="clear">Action</dt-button>
       <dt-button>Action</dt-button>
     </dt-stack>
+  </template>
+  <template #icon="{ iconSize }">
+    <dt-icon-box :size="iconSize"></dt-icon-box>
   </template>
 </dt-empty-state>
 '
@@ -250,8 +234,8 @@ showHtmlWarning />
 
 <code-well-header>
   <dt-empty-state
+    ref="mediumIllustrationExample"
     size="md"
-    illustration-name="mind"
     header-text="Nothing to see here"
     body-text="Looks like there is no data to display here."
   >
@@ -261,26 +245,17 @@ showHtmlWarning />
         <dt-button>Action</dt-button>
       </dt-stack>
     </template>
+    <template #illustration>
+      <dt-illustration-nothing-to-see-here></dt-illustration-nothing-to-see-here>
+    </template>
   </dt-empty-state>
 </code-well-header>
 
 <code-example-tabs
-htmlCode='
-<div class="d-stack d-stack--gap-0 d-empty-state d-empty-state--size-md">
-  <span class="d-empty-state__illustration">
-    <svg>...</svg>
-  </span>
-  <div class="d-stack d-stack--gap-450 d-empty-state__content d-empty-state__content--md">
-    <div class="d-empty-state__header-text d-headline--xl">Nothing to see here</div>
-    <p class="d-empty-state__body-text d-body--sm">Looks like there is no data to display here.</p>
-  </div>
-  <div class="d-stack d-stack--row d-stack--gap-300"><button class="d-btn">Action</button> <button class="d-btn d-btn--primary">Action</button></div>
-</div>
-'
+:htmlCode='() => $refs.mediumIllustrationExample'
 vueCode='
 <dt-empty-state
   size="md"
-  icon-name="box"
   header-text="Nothing to see here"
   body-text="Looks like there is no data to display here."
 >
@@ -290,16 +265,19 @@ vueCode='
       <dt-button>Action</dt-button>
     </dt-stack>
   </template>
+  <template #illustration>
+    <dt-illustration-nothing-to-see-here></dt-illustration-nothing-to-see-here>
+  </template>
 </dt-empty-state>
 '
 showHtmlWarning />
 
-### Medium with icon
+### Medium with Icon
 
 <code-well-header>
   <dt-empty-state
+    ref="mediumIconExample"
     size="md"
-    icon-name="box"
     header-text="Nothing to see here"
     body-text="Looks like there is no data to display here."
   >
@@ -309,26 +287,17 @@ showHtmlWarning />
         <dt-button>Action</dt-button>
       </dt-stack>
     </template>
+    <template #icon="{ iconSize }">
+      <dt-icon-box :size="iconSize"></dt-icon-box>
+    </template>
   </dt-empty-state>
 </code-well-header>
 
 <code-example-tabs
-htmlCode='
-<div class="d-stack d-stack--gap-0 d-empty-state d-empty-state--size-md">
-  <span class="d-empty-state__icon">
-    <svg>...</svg>
-  </span>
-  <div class="d-stack d-stack--gap-450 d-empty-state__content d-empty-state__content--md">
-    <div class="d-empty-state__header-text d-headline--xl">Nothing to see here</div>
-    <p class="d-empty-state__body-text d-body--sm">Looks like there is no data to display here.</p>
-  </div>
-  <div class="d-stack d-stack--row d-stack--gap-300"><button class="d-btn">Action</button> <button class="d-btn d-btn--primary">Action</button></div>
-</div>
-'
+:htmlCode='() => $refs.mediumIconExample'
 vueCode='
 <dt-empty-state
   size="md"
-  icon-name="box"
   header-text="Nothing to see here"
   body-text="Looks like there is no data to display here."
 >
@@ -337,6 +306,9 @@ vueCode='
       <dt-button importance="clear">Action</dt-button>
       <dt-button>Action</dt-button>
     </dt-stack>
+  </template>
+  <template #icon="{ iconSize }">
+    <dt-icon-box :size="iconSize"></dt-icon-box>
   </template>
 </dt-empty-state>
 '
@@ -346,37 +318,28 @@ showHtmlWarning />
 
 <code-well-header>
   <dt-empty-state
+    ref="smallExample"
     size="sm"
-    icon-name="box"
     header-text="Nothing to see here"
     body-text="Looks like there is no data to display here."
   >
     <template #body>
       <dt-stack direction="row" gap="300">
-        <dt-button size="sm" importance="clear">Action</dt-button>
-        <dt-button size="sm">Action</dt-button>
+        <dt-button importance="clear">Action</dt-button>
+        <dt-button>Action</dt-button>
       </dt-stack>
+    </template>
+    <template #icon="{ iconSize }">
+      <dt-icon-box :size="iconSize"></dt-icon-box>
     </template>
   </dt-empty-state>
 </code-well-header>
 
 <code-example-tabs
-htmlCode='
-<div class="d-stack d-stack--gap-0 d-empty-state d-empty-state--size-sm">
-  <span class="d-empty-state__icon">
-    <svg>...</svg>
-  </span>
-  <div class="d-stack d-stack--gap-450 d-empty-state__content d-empty-state__content--sm">
-    <div class="d-empty-state__header-text d-headline--md">Nothing to see here</div>
-    <p class="d-empty-state__body-text d-body--sm">Looks like there is no data to display here.</p>
-  </div>
-  <div class="d-stack d-stack--row d-stack--gap-300"><button class="d-btn d-btn--sm">Action</button> <button class="d-btn d-btn--sm d-btn--primary">Action</button></div>
-</div>
-'
+:htmlCode='() => $refs.smallExample'
 vueCode='
 <dt-empty-state
   size="sm"
-  icon-name="box"
   header-text="Nothing to see here"
   body-text="Looks like there is no data to display here."
 >
@@ -386,81 +349,64 @@ vueCode='
       <dt-button>Action</dt-button>
     </dt-stack>
   </template>
+  <template #icon="{ iconSize }">
+    <dt-icon-box :size="iconSize"></dt-icon-box>
+  </template>
 </dt-empty-state>
 '
 showHtmlWarning />
 
 ## Examples
 
-### No actions
-
-<code-well-header>
-<dt-empty-state
-  illustration-name="mind"
-  header-text="Nothing to see here"
-  body-text="Looks like there is no data to display here."
-/>
-</code-well-header>
-
-<code-example-tabs
-htmlCode='
-<div class="d-stack d-stack--gap-0 d-empty-state d-empty-state--size-lg">
-  <span class="d-empty-state__illustration">
-    <svg>...</svg>
-  </span>
-  <div class="d-stack d-stack--gap-450 d-empty-state__content d-empty-state__content--lg">
-    <div class="d-empty-state__header-text d-headline--xxl">Nothing to see here</div>
-    <p class="d-empty-state__body-text d-body--md">Looks like there is no data to display here.</p>
-  </div>
-</div>
-'
-vueCode='
-<dt-empty-state
-  illustration-name="mind"
-  header-text="Nothing to see here"
-  body-text="Looks like there is no data to display here."
-/>
-'
-showHtmlWarning />
-
-### No description
+### No Actions
 
 <code-well-header>
   <dt-empty-state
-    illustration-name="mind"
+    ref="noActionsExample"
     header-text="Nothing to see here"
+    body-text="Looks like there is no data to display here."
   >
-    <template #body>
-      <dt-stack direction="row" gap="300">
-        <dt-button importance="clear">Action</dt-button>
-        <dt-button>Action</dt-button>
-      </dt-stack>
+    <template #illustration>
+      <dt-illustration-nothing-to-see-here></dt-illustration-nothing-to-see-here>
     </template>
   </dt-empty-state>
 </code-well-header>
 
 <code-example-tabs
-htmlCode='
-<div class="d-stack d-stack--gap-0 d-empty-state d-empty-state--size-lg">
-  <span class="d-empty-state__illustration">
-    <svg>...</svg>
-  </span>
-  <div class="d-stack d-stack--gap-450 d-empty-state__content d-empty-state__content--lg">
-    <div class="d-empty-state__header-text d-headline--xxl">Nothing to see here</div>
-  </div>
-  <div class="d-stack d-stack--row d-stack--gap-300"><button class="d-btn">Action</button> <button class="d-btn d-btn--primary">Action</button></div>
-</div>
-'
+:htmlCode='() => $refs.noActionsExample'
 vueCode='
 <dt-empty-state
-  illustration-name="mind"
+  header-text="Nothing to see here"
+  body-text="Looks like there is no data to display here."
+>
+  <template #illustration>
+    <dt-illustration-nothing-to-see-here></dt-illustration-nothing-to-see-here>
+  </template>
+</dt-empty-state>
+'
+showHtmlWarning />
+
+### No Description
+
+<code-well-header>
+  <dt-empty-state
+    ref="noDescriptionExample"
+    header-text="Nothing to see here"
+  >
+    <template #illustration>
+      <dt-illustration-nothing-to-see-here></dt-illustration-nothing-to-see-here>
+    </template>
+  </dt-empty-state>
+</code-well-header>
+
+<code-example-tabs
+:htmlCode='() => $refs.noDescriptionExample'
+vueCode='
+<dt-empty-state
   header-text="Nothing to see here"
 >
-  <template #body>
-    <dt-stack direction="row" gap="300">
-      <dt-button importance="clear">Action</dt-button>
-      <dt-button>Action</dt-button>
-    </dt-stack>
+  <template #illustration>
+    <dt-illustration-nothing-to-see-here></dt-illustration-nothing-to-see-here>
   </template>
 </dt-empty-state>
 '
@@ -470,7 +416,7 @@ showHtmlWarning />
 
 <code-well-header>
   <dt-empty-state
-    illustration-name="mind"
+    ref="everythingExample"
     header-text="Nothing to see here"
     body-text="Looks like there is no data to display here."
   >
@@ -480,25 +426,16 @@ showHtmlWarning />
         <dt-button>Action</dt-button>
       </dt-stack>
     </template>
+    <template #illustration>
+      <dt-illustration-nothing-to-see-here></dt-illustration-nothing-to-see-here>
+    </template>
   </dt-empty-state>
 </code-well-header>
 
 <code-example-tabs
-htmlCode='
-<div class="d-stack d-stack--gap-0 d-empty-state d-empty-state--size-lg">
-  <span class="d-empty-state__illustration">
-    <svg>...</svg>
-  </span>
-  <div class="d-stack d-stack--gap-450 d-empty-state__content d-empty-state__content--lg">
-    <div class="d-empty-state__header-text d-headline--xxl">Nothing to see here</div>
-    <p class="d-empty-state__body-text d-body--md">Looks like there is no data to display here.</p>
-  </div>
-  <div class="d-stack d-stack--row d-stack--gap-300"><button class="d-btn">Action</button> <button class="d-btn d-btn--primary">Action</button></div>
-</div>
-'
+:htmlCode='() => $refs.everythingExample'
 vueCode='
 <dt-empty-state
-  illustration-name="mind"
   header-text="Nothing to see here"
   body-text="Looks like there is no data to display here."
 >
@@ -508,16 +445,19 @@ vueCode='
       <dt-button>Action</dt-button>
     </dt-stack>
   </template>
+  <template #illustration>
+    <dt-illustration-nothing-to-see-here></dt-illustration-nothing-to-see-here>
+  </template>
 </dt-empty-state>
 '
 showHtmlWarning />
 
-### Small, with muted actions
+### Small, with Muted Actions
 
 <code-well-header>
   <dt-empty-state
+    ref="smallMutedActionsExample"
     size="sm"
-    icon-name="box"
     header-text="Nothing to see here"
     body-text="Looks like there is no data to display here."
   >
@@ -527,97 +467,89 @@ showHtmlWarning />
         <dt-button kind="muted" importance="outlined" size="sm">Action</dt-button>
       </dt-stack>
     </template>
+    <template #icon="{ iconSize }">
+      <dt-icon-box :size="iconSize"></dt-icon-box>
+    </template>
   </dt-empty-state>
 </code-well-header>
 
 <code-example-tabs
-htmlCode='
-<div class="d-stack d-stack--gap-0 d-empty-state d-empty-state--size-sm">
-  <span class="d-empty-state__icon">
-    <svg>...</svg>
-  </span>
-  <div class="d-stack d-stack--gap-450 d-empty-state__content d-empty-state__content--sm">
-    <div class="d-empty-state__header-text d-headline--md">Nothing to see here</div>
-    <p class="d-empty-state__body-text d-body--sm">Looks like there is no data to display here.</p>
-  </div>
-  <div class="d-stack d-stack--row d-stack--gap-300"><button class="d-btn d-btn--muted d-btn--sm">Action</button> <button class="d-btn d-btn--sm d-btn--muted d-btn--outlined">Action</button></div>
-</div>
-'
+:htmlCode='() => $refs.smallMutedActionsExample'
 vueCode='
 <dt-empty-state
   size="sm"
-  icon-name="box"
   header-text="Nothing to see here"
   body-text="Looks like there is no data to display here."
 >
   <template #body>
     <dt-stack direction="row" gap="300">
-      <dt-button importance="clear">Action</dt-button>
-      <dt-button>Action</dt-button>
+      <dt-button kind="muted" size="sm" importance="clear">Action</dt-button>
+      <dt-button kind="muted" importance="outlined" size="sm">Action</dt-button>
     </dt-stack>
+  </template>
+  <template #icon="{ iconSize }">
+    <dt-icon-box :size="iconSize"></dt-icon-box>
   </template>
 </dt-empty-state>
 '
 showHtmlWarning />
 
-## Writing guidelines
+## Writing Guidelines
 
-### Empty State parts
+### Empty State Parts
 
 #### Title
 
-* Should be scannable and informative.
-* Short and concise.
+- Should be scannable and informative.
+- Short and concise.
 
 #### Description
 
-* Short and to the point.
-* Avoid repeating the title's message, favoring complementary and useful information.
-* Inline text links (i.e. `<a class="d-link">...</a>`) may be appropriate given its use case, though first consider if it should be an action button.
+- Short and to the point.
+- Avoid repeating the title's message, favoring complementary and useful information.
+- Inline text links (i.e. `<a class="d-link">...</a>`) may be appropriate given its use case, though first consider if it should be an action button.
 
 #### Actions
 
-* Follow existing writing guidelines for Dialtone's Button commponent.
-* Connect its labels to the paired Title and Description.
-
+- Follow existing writing guidelines for Dialtone's Button commponent.
+- Connect its labels to the paired Title and Description.
 
 ### Scenarios
 
-
-#### Zero state
+#### Zero State
 
 Encourage and guide the user through product engagement.
 
-```
+```text
 Title: No Ai recaps yet
 Description: Enable Ai for calls and meetings and check back here!
 Action: [Show me how]
 ```
 
-#### No results
+#### No Results
 
 Consider the user’s intent and provide guidance to resolve in a useful result.
 
-```
+```text
 Title: No matching results
 Description: Try adjusting your search criteria or filters.
 ```
 
-#### New feature
+#### New Feature
 
 Call out interesting new features or services, and entice the user to explore them.
 
-```
+```text
 Title: Discover Ai recaps
 Description: Enable Ai for calls and meetings to view and share a recap.
 Action: [Tell me more]
 ```
 
-#### Not available
+#### Not Available
 
 Be direct in communicating the unavailability of a feature or service, and provide quick actions.
 
-```
+```text
 Title: Restricted access
 Description: Permission required. You can request access from the owner.
 Action: [Cancel] [Request access]
@@ -625,10 +557,17 @@ Action: [Cancel] [Request access]
 
 ## Vue API
 
-<component-vue-api component-name="empty-state" />
+<component-vue-api component-name="empty_state" />
 
 ## Classes
 
 At a minimum, empty state requires a body of content. It can optionally contain a header with buttons, or a footer with buttons/text.
 
 <component-class-table component-name="empty-state"></component-class-table>
+
+<script setup>
+import {
+  DtIllustrationNothingToSeeHere,
+  DtIconBox,
+} from '@dialpad/dialtone-icons/vue3';
+</script>

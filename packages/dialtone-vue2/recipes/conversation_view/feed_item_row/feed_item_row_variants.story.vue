@@ -27,7 +27,7 @@
             #threading
           >
             <dt-stack
-              class="feed-item-row__thread d-pl4 d-d-flex d-ai-center"
+              class="feed-item-row__thread d-d-flex d-ai-center"
               direction="row"
               gap="400"
             >
@@ -110,7 +110,7 @@
               :image-src="fryImage"
               image-alt="Alt Text"
               close-aria-label="Close"
-              image-button-class="dt-feed-item-row__image d-wmn64 d-hmn64 w-wmx332 d-hmx332"
+              image-button-class="d-recipe-feed-item-row__image d-wmn64 d-hmn64 w-wmx332 d-hmx332"
               aria-label="Click to open image"
             />
           </template>
@@ -147,7 +147,7 @@
           <template #attachment>
             <!-- eslint-disable-next-line vuejs-accessibility/media-has-caption -->
             <video
-              class="dt-feed-item-row__video"
+              class="d-recipe-feed-item-row__video"
               controls
               src="https://www.w3schools.com/html/mov_bbb.mp4"
             />
@@ -281,13 +281,14 @@
 import DtRecipeFeedItemRow from './feed_item_row.vue';
 
 import { DtRecipeEmojiRow } from '../emoji_row';
-import { DtRecipeFeedItemPill } from '../feed_pill';
+import { DtRecipeFeedItemPill } from '../feed_item_pill';
 import { DtStack } from '@/components/stack';
 import { DtEmojiTextWrapper } from '@/components/emoji_text_wrapper';
 import { DtAvatar } from '@/components/avatar';
 import { DtIcon } from '@/components/icon';
 import { DtImageViewer } from '@/components/image_viewer';
 import { DtButton } from '@/components/button';
+import { sharedEmojiReactionsData } from '@/recipes/conversation_view/emoji_row/emoji_row.stories.js';
 
 import fryImage from '@/common/assets/fry.gif';
 
@@ -309,29 +310,7 @@ export default {
   data () {
     return {
       fadeState: 'SEARCHED',
-      mockReactions: [
-        {
-          emojiUnicodeOrShortname: '😀',
-          isSelected: true,
-          ariaLabel: 'Emoji aria label',
-          tooltip: 'You reacted with 😀',
-          num: 1,
-        },
-        {
-          emojiUnicodeOrShortname: '😒',
-          isSelected: false,
-          ariaLabel: 'Emoji aria label',
-          tooltip: 'You reacted with 😒',
-          num: 1,
-        },
-        {
-          emojiUnicodeOrShortname: '🙃',
-          isSelected: false,
-          ariaLabel: 'Emoji aria label',
-          tooltip: 'You reacted with 🙃',
-          num: 99,
-        },
-      ],
+      mockReactions: sharedEmojiReactionsData,
 
       hoverButtons: ['bell', 'living-thing', 'map-pin'],
       persons: ['Jim Halpert', 'Michael Scott', 'Pam'],

@@ -1,3 +1,4 @@
+/* eslint-disable storybook/default-exports */
 const { injectAxe, checkA11y, configureAxe } = require('axe-playwright');
 
 const { getStoryContext } = require('@storybook/test-runner');
@@ -7,10 +8,10 @@ const { getStoryContext } = require('@storybook/test-runner');
  * to learn more about the test-runner hooks API.
  */
 module.exports = {
-  async preRender(page) {
+  async preRender (page) {
     await injectAxe(page);
   },
-  async postRender(page, context) {
+  async postRender (page, context) {
     // Get the entire context of a story, including parameters, args, argTypes, etc.
     const storyContext = await getStoryContext(page, context);
 

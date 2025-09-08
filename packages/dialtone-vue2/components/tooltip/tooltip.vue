@@ -23,6 +23,7 @@
       ref="content"
       data-qa="dt-tooltip"
       :class="[
+        // eslint-disable-next-line vue/no-restricted-class
         'd-tooltip',
         {
           [ TOOLTIP_KIND_MODIFIERS.inverted ]: inverted,
@@ -51,7 +52,7 @@ import {
 import {
   POPOVER_APPEND_TO_VALUES,
 } from '../popover/popover_constants';
-import { getUniqueString } from '@/common/utils';
+import { flushPromises, getUniqueString } from '@/common/utils';
 import {
   createTippy,
   getAnchor,
@@ -290,7 +291,7 @@ export default {
   },
 
   computed: {
-    // eslint-disable-next-line complexity
+     
     tippyProps () {
       return {
         offset: this.offset,
@@ -351,19 +352,23 @@ export default {
     },
   },
 
-  mounted () {
+  async mounted () {
     if (!this.enabled && this.show != null) {
       console.warn('Tooltip: You cannot use both the enabled and show props at the same time.');
       console.warn('The show prop will be ignored.');
     }
-    this.externalAnchor && this.addExternalAnchorEventListeners();
+
     this.tip = createTippy(this.anchor, this.initOptions());
+    if (this.externalAnchor) {
+      await flushPromises();
+      this.addExternalAnchorEventListeners();
+    }
   },
 
   beforeDestroy () {
     this.externalAnchor && this.removeExternalAnchorEventListeners();
 
-    if (this.tip) {
+    if (this.anchor?._tippy) {
       this.tip?.destroy();
     }
   },
@@ -372,7 +377,11 @@ export default {
     calculateAnchorZindex () {
       // if a modal is currently active render at modal-element z-index, otherwise at tooltip z-index
       if (this.$el.getRootNode()
-        .querySelector('.d-modal[aria-hidden="false"], .d-modal--transparent[aria-hidden="false"]') ||
+        .querySelector(
+          `.d-modal[aria-hidden="false"],
+          .d-modal--transparent[aria-hidden="false"],
+          .d-modal:not([aria-hidden]),
+          .d-modal--transparent:not([aria-hidden])`) ||
         // Special case because we don't have any dialtone drawer component yet. Render at 651 when
         // anchor of popover is within a drawer.
         this.$el.closest('.d-zi-drawer')) {
@@ -498,42 +507,21 @@ export default {
 
     addExternalAnchorEventListeners () {
       ['focusin', 'mouseenter'].forEach(listener => {
-        this.anchor.addEventListener(listener, (event) => this.onEnterAnchor(event));
+        this.anchor?.addEventListener(listener, (event) => this.onEnterAnchor(event));
       });
       ['focusout', 'mouseleave', 'keydown'].forEach(listener => {
-        this.anchor.addEventListener(listener, (event) => this.onLeaveAnchor(event));
+        this.anchor?.addEventListener(listener, (event) => this.onLeaveAnchor(event));
       });
     },
 
     removeExternalAnchorEventListeners () {
       ['focusin', 'mouseenter'].forEach(listener => {
-        this.anchor.removeEventListener(listener, (event) => this.onEnterAnchor(event));
+        this.anchor?.removeEventListener(listener, (event) => this.onEnterAnchor(event));
       });
       ['focusout', 'mouseleave', 'keydown'].forEach(listener => {
-        this.anchor.removeEventListener(listener, (event) => this.onLeaveAnchor(event));
+        this.anchor?.removeEventListener(listener, (event) => this.onLeaveAnchor(event));
       });
     },
   },
 };
 </script>
-
-<style lang="less">
-@import 'tippy.js/dist/svg-arrow.css';
-
-.tippy-box[data-reference-hidden] {
-  visibility: hidden;
-  pointer-events: none;
-}
-
-.tippy-box > .tippy-svg-arrow {
-  fill: var(--dt-color-surface-contrast);
-}
-
-.tippy-box[data-theme~='inverted'] > .tippy-svg-arrow {
-  fill: var(--dt-color-surface-moderate);
-}
-
-.tippy-box[data-animation='fade'][data-state='hidden'] {
-  opacity: 0;
-}
-</style>

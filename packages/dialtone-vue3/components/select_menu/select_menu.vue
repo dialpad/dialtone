@@ -1,5 +1,7 @@
 <template>
-  <div>
+  <div
+    v-bind="addClassStyleAttrs($attrs)"
+  >
     <label>
       <div
         v-if="hasSlotContent($slots.label) || label"
@@ -44,7 +46,7 @@
             'd-select__input',
             SELECT_STATE_MODIFIERS[state],
           ]"
-          v-bind="$attrs"
+          v-bind="removeClassStyleAttrs($attrs)"
           data-qa="dt-select"
           :disabled="disabled"
           v-on="selectListeners"
@@ -88,6 +90,8 @@ import {
   getUniqueString,
   getValidationState,
   hasSlotContent,
+  removeClassStyleAttrs,
+  addClassStyleAttrs,
 } from '@/common/utils';
 import { MessagesMixin } from '@/common/mixins/input';
 import { optionsValidator } from './select_menu_validators.js';
@@ -101,6 +105,7 @@ import { DtValidationMessages } from '../validation_messages';
  * @see https://dialtone.dialpad.com/components/select.html
  */
 export default {
+  compatConfig: { MODE: 3 },
   name: 'DtSelectMenu',
 
   components: { DtValidationMessages },
@@ -128,9 +133,8 @@ export default {
 
     /**
      * Select Menu Options, overridden by default slot. Each option has the following structure:
-     * `{ index: number (optional), value: number || string (required), label: string (required) }`
+     * `{ value: number || string (required), label: string (required) }`
      * @param {Object[]} options - Optional - A list that can be used to create a list of select menu options
-     * @param {number} options[].index - Optional - The index of the option
      * @param {number|string} options[].value - Required - The option value
      * @param {string} options[].label - Required - The option Label
      */
@@ -226,6 +230,14 @@ export default {
     'input',
 
     /**
+     * Event fired to sync the modelValue prop with the parent component
+     *
+     * @event input
+     * @type {String | Number}
+     */
+    'update:modelValue',
+
+    /**
      * Native change event
      *
      * @event change
@@ -278,17 +290,7 @@ export default {
     },
   },
 
-  watch: {
-    // whenever question changes, this function will run
-    options () {
-      this.$nextTick(() => {
-        this.emitValue(this.$refs.selectElement.value, null);
-      });
-    },
-  },
-
   mounted () {
-    this.emitValue(this.$refs.selectElement.value, null);
     this.validateOptionsPresence();
   },
 
@@ -297,7 +299,10 @@ export default {
   },
 
   methods: {
+    removeClassStyleAttrs,
+    addClassStyleAttrs,
     emitValue (value, event) {
+      this.$emit('update:modelValue', value, event);
       this.$emit('input', value, event);
       this.$emit('change', value, event);
     },

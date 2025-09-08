@@ -1,14 +1,17 @@
 <script>
 import { DtEmoji } from '../emoji';
 import { findEmojis, findShortCodes } from '@/common/emoji';
-import { h } from 'vue';
+import { h, resolveDynamicComponent } from 'vue';
 import { ICON_SIZE_MODIFIERS } from '@/components/icon/icon_constants';
+
+const COMMENT_TYPE = h(resolveDynamicComponent(null)).type;
 
 /**
  * Wrapper to find and replace shortcodes like :smile: or unicode chars such as 😄 with our custom Emojis implementation.
  * @see https://dialtone.dialpad.com/components/emoji_text_wrapper.html
  */
 export default {
+  compatConfig: { MODE: 3 },
   name: 'DtEmojiTextWrapper',
 
   components: {
@@ -51,8 +54,12 @@ export default {
      */
     replaceDtEmojis (replaceList, textContent) {
       if (!replaceList.length) return textContent;
+      // Escape the asterisk to avoid breaking the regex for the asterisk emoji
+      const escapedReplaceList = replaceList.map(item =>
+        item.replace(/\*/g, '\\*'),
+      );
 
-      const regexp = new RegExp(`(${replaceList.join('|')})`, 'g');
+      const regexp = new RegExp(`(${escapedReplaceList.join('|')})`, 'g');
       const items = textContent.split(regexp);
 
       return items
@@ -71,7 +78,9 @@ export default {
      * @returns {VNode|*}
      */
     searchVNodes (VNode) {
+      if (!VNode) return;
       if (typeof VNode === 'string') return this.searchCodes(VNode);
+      if (VNode.type === COMMENT_TYPE) return VNode;
       if (typeof VNode.type === 'symbol') return this.searchCodes(VNode.children);
       if (VNode.props?.innerHTML) return this.searchVNodes(VNode.props.innerHTML);
 
@@ -80,7 +89,7 @@ export default {
     },
 
     // TODO: Find a way to crawl vue components
-    replaceVueComponentVNodeContent (VNode) {
+    replaceVueComponentVNodeContent () {
       //
     },
 

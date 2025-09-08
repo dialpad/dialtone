@@ -1,26 +1,26 @@
 <template>
   <div class="d-emoji-picker__tabset">
     <dt-tab-group
+      :selected="selectedTab"
       size="sm"
       tab-list-class="d-emoji-picker__tabset-list"
-      :selected="selectedTab"
     >
       <template #tabs>
         <dt-tab
           v-for="(tab, index) in tabs"
           :id="tab.id"
-          :ref="`tabsetRef-${index}`"
           :key="tab.id"
-          :panel-id="tab.panelId"
+          :ref="`tabsetRef-${index}`"
           :label="tab.label"
-          aria-controls="d-emoji-picker-list"
+          :panel-id="tab.panelId"
           :tabindex="index + 1"
-          @click.capture.stop="selectTabset(tab.id)"
+          aria-controls="d-emoji-picker-list"
           @keydown="handleKeyDown($event, tab.id)"
+          @click.capture.stop="selectTabset(tab.id)"
         >
-          <dt-icon
+          <component
+            :is="tab.icon"
             size="400"
-            :name="tab.icon"
           />
         </dt-tab>
       </template>
@@ -29,10 +29,19 @@
 </template>
 
 <script>
-import DtTabGroup from '@/components/tabs/tab_group.vue';
-import DtTab from '@/components/tabs/tab.vue';
-import DtIcon from '@/components/icon/icon.vue';
-import { EMOJI_PICKER_CATEGORIES } from '@/components/emoji_picker';
+import { DtTab, DtTabGroup } from '@/components/tab';
+import {
+  DtIconClock,
+  DtIconSatisfied,
+  DtIconLivingThing,
+  DtIconFood,
+  DtIconObject,
+  DtIconTransportation,
+  DtIconLightbulb,
+  DtIconHeart,
+  DtIconFlag,
+  DtIconTiktok,
+} from '@dialpad/dialtone-icons/vue2';
 
 export default {
   name: 'EmojiTabset',
@@ -40,11 +49,20 @@ export default {
   components: {
     DtTabGroup,
     DtTab,
-    DtIcon,
   },
 
   props: {
+    /**
+     * Whether to show the recently used tab or not
+     * @type {Boolean}
+     * @default false
+     */
     showRecentlyUsedTab: {
+      type: Boolean,
+      default: false,
+    },
+
+    showCustomEmojisTab: {
       type: Boolean,
       default: false,
     },
@@ -54,16 +72,16 @@ export default {
       required: true,
     },
 
-    isScrolling: {
-      type: Boolean,
-      default: false,
-    },
-
     emojiFilter: {
       type: String,
       default: '',
     },
 
+    /**
+     * The labels for the aria-label
+     * @type {Array}
+     * @required
+     */
     tabSetLabels: {
       type: Array,
       required: true,
@@ -75,25 +93,32 @@ export default {
       selectedTab: '1',
       tabsetRef: [],
       TABS_DATA: [
-        { label: EMOJI_PICKER_CATEGORIES.MOST_RECENTLY_USED, icon: 'clock' },
-        { label: EMOJI_PICKER_CATEGORIES.SMILEYS_AND_PEOPLE, icon: 'satisfied' },
-        { label: EMOJI_PICKER_CATEGORIES.NATURE, icon: 'living-thing' },
-        { label: EMOJI_PICKER_CATEGORIES.FOOD, icon: 'food' },
-        { label: EMOJI_PICKER_CATEGORIES.ACTIVITY, icon: 'object' },
-        { label: EMOJI_PICKER_CATEGORIES.TRAVEL, icon: 'transportation' },
-        { label: EMOJI_PICKER_CATEGORIES.OBJECTS, icon: 'lightbulb' },
-        { label: EMOJI_PICKER_CATEGORIES.SYMBOLS, icon: 'heart' },
-        { label: EMOJI_PICKER_CATEGORIES.FLAGS, icon: 'flag' },
+        { label: this.tabSetLabels[0], icon: DtIconClock },
+        { label: this.tabSetLabels[1], icon: DtIconSatisfied },
+        { label: this.tabSetLabels[2], icon: DtIconLivingThing },
+        { label: this.tabSetLabels[3], icon: DtIconFood },
+        { label: this.tabSetLabels[4], icon: DtIconObject },
+        { label: this.tabSetLabels[5], icon: DtIconTransportation },
+        { label: this.tabSetLabels[6], icon: DtIconLightbulb },
+        { label: this.tabSetLabels[7], icon: DtIconHeart },
+        { label: this.tabSetLabels[8], icon: DtIconFlag },
+        { label: this.tabSetLabels[9], icon: DtIconTiktok },
       ],
     };
   },
 
   computed: {
     tabs () {
+      // if showRecentlyUsedTab is false remove first index of TABS_DATA
       const tabsData = this.showRecentlyUsedTab ? this.TABS_DATA : this.TABS_DATA.slice(1);
+      // if showCustomEmojisTab is false remove last index of TABS_DATA
+      if (!this.showCustomEmojisTab) {
+        tabsData.pop();
+      }
+
       return tabsData.map((tab, index) => ({
         ...tab,
-        label: this.tabSetLabels[index],
+        // IDs on dt-tab component need to be on string
         id: (index + 1).toString(),
         panelId: (index + 1).toString(),
       }));
@@ -106,7 +131,7 @@ export default {
 
   watch: {
     scrollIntoTab: function (newVal) {
-      if (!this.isScrolling && !this.isSearching) {
+      if (!this.isSearching) {
         this.selectedTab = (newVal + 1).toString();
       }
     },
@@ -126,10 +151,11 @@ export default {
 
   methods: {
     selectTabset (id) {
-      if (!this.isScrolling) {
-        this.selectedTab = id;
-      }
-      this.$emit('selected-tabset', id);
+      // IDs on scrollToTab need to be on number
+      const parseId = parseInt(id);
+      // IDs on dt-tab component need to be on string
+      this.selectedTab = id;
+      this.$emit('selected-tabset', parseId);
     },
 
     setTabsetRef () {

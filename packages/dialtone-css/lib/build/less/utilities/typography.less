@@ -273,8 +273,6 @@ ul {
 .d-headline48 { .d-headline--xxl(); }
 .d-headline54 { .d-headline--xxl(); }
 
-.d-fs-unset { font-size: unset !important; }
-
 //  ============================================================================
 //  $$  FONT STYLE
 //  ----------------------------------------------------------------------------
@@ -351,16 +349,19 @@ ul {
 //  $$  TEXT DECORATION
 //  ----------------------------------------------------------------------------
 .d-td-none { text-decoration: none !important; }
+
 .d-td-underline {
     text-decoration: underline !important;
     text-underline-offset: calc(var(--dt-size-border-300) - var(--dt-size-border-100)) !important;
     text-decoration-thickness: var(--dt-size-border-50) !important;
 }
+
 .d-td-dotted {
     text-decoration: underline dotted !important;
     text-underline-offset: calc(var(--dt-size-border-300) - var(--dt-size-border-100)) !important;
     text-decoration-thickness: var(--dt-size-border-100) !important;
 }
+
 .d-td-line-through {
     text-decoration: line-through !important;
     text-decoration-thickness: var(--dt-size-border-100) !important;
@@ -424,14 +425,16 @@ ul {
 //  ----------------------------------------------------------------------------
 .d-wb-normal { word-break: normal !important; }
 .d-wb-break-all { word-break: break-all !important; }
+.d-wb-break-word { word-break: break-word !important; }
 .d-wb-keep-all { word-break: keep-all !important; }
 .d-wb-unset { word-break: unset !important; }
 
 //  ============================================================================
 //  $$  WORD WRAP
 //  ----------------------------------------------------------------------------
-.d-ww-break-word { word-wrap: break-word !important; }
 .d-ww-normal { word-wrap: normal !important; }
+.d-ww-break-word { word-wrap: break-word !important; }
+.d-ww-anywhere { word-wrap: anywhere !important; }
 .d-ww-initial { word-wrap: initial !important; }
 .d-ww-inherit { word-wrap: inherit !important; }
 

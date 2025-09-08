@@ -6,12 +6,14 @@
       <emoji-tabset
         ref="tabsetRef"
         :emoji-filter="internalSearchQuery"
+        :show-custom-emojis-tab="showCustomEmojisTab"
         :show-recently-used-tab="showRecentlyUsedTab"
         :scroll-into-tab="scrollIntoTab"
         :tab-set-labels="tabSetLabels"
-        :is-scrolling="isScrolling"
         @focus-skin-selector="$refs.skinSelectorRef.focusSkinSelector()"
-        @focus-search-input="showSearch ? $refs.searchInputRef.focusSearchInput() : $refs.emojiSelectorRef.focusEmojiSelector()"
+        @focus-search-input="showSearch
+          ? $refs.searchInputRef.focusSearchInput()
+          : $refs.emojiSelectorRef.focusEmojiSelector()"
         @selected-tabset="scrollToSelectedTabset"
         @keydown.esc.native="$emit('close')"
       />
@@ -36,17 +38,27 @@
         :search-results-label="searchResultsLabel"
         :search-no-results-label="searchNoResultsLabel"
         :recently-used-emojis="recentlyUsedEmojis"
+        :custom-emojis="customEmojis"
         :selected-tabset="selectedTabset"
         @scroll-into-tab="updateScrollIntoTab"
-        @is-scrolling="updateIsScrolling"
         @highlighted-emoji="updateHighlightedEmoji"
         @selected-emoji="$emit('selected-emoji', $event)"
         @focus-skin-selector="$refs.skinSelectorRef.focusSkinSelector()"
         @focus-search-input="showSearch ? $refs.searchInputRef.focusSearchInput() : $refs.tabsetRef.focusTabset()"
         @keydown.esc.native="$emit('close')"
+        @scroll-bottom-reached="$emit('scroll-bottom-reached')"
       />
     </div>
     <div class="d-emoji-picker--footer">
+      <dt-button
+        v-if="showCustomEmojisTab && !highlightedEmoji"
+        importance="outlined"
+        :aria-label="addEmojiLabel"
+        class="d-emoji-picker__add-emoji"
+        @click="$emit('add-emoji')"
+      >
+        {{ addEmojiLabel }}
+      </dt-button>
       <emoji-description :emoji="highlightedEmoji" />
       <emoji-skin-selector
         ref="skinSelectorRef"
@@ -68,6 +80,8 @@ import EmojiSearch from './modules/emoji_search.vue';
 import EmojiSelector from './modules/emoji_selector.vue';
 import EmojiDescription from './modules/emoji_description.vue';
 import EmojiSkinSelector from './modules/emoji_skin_selector.vue';
+import { DtButton } from '../button';
+import { DialtoneLocalization } from '@/localization';
 
 export default {
   name: 'DtEmojiPicker',
@@ -78,6 +92,7 @@ export default {
     EmojiSelector,
     EmojiDescription,
     EmojiSkinSelector,
+    DtButton,
   },
 
   props: {
@@ -92,57 +107,19 @@ export default {
     // TODO try to simplify this to achieve an array of unicode characters and not an entire emoji data object
     recentlyUsedEmojis: {
       type: Array,
+      default: () => [],
     },
 
     /**
-     * The placeholder text for the search input
-     * @type {String}
-     * @required
-     * @example
-     * <dt-emoji-picker :searchPlaceholderLabel="'Search...'" />
-     */
-    searchPlaceholderLabel: {
-      type: String,
-      required: true,
-    },
-
-    /**
-     * The label for the search results tab
-     * @type {String}
-     * @required
-     * @example
-     * <dt-emoji-picker :searchResultsLabel="'Search results'" />
-     */
-    searchResultsLabel: {
-      type: String,
-      required: true,
-    },
-
-    /**
-     * The label for the search no results
-     * @type {String}
-     * @required
-     * @example
-     * <dt-emoji-picker :searchNoResultsLabel="'No results'" />
-     */
-    searchNoResultsLabel: {
-      type: String,
-      required: true,
-    },
-
-    /**
-     * The list of tabsets to show, it is necessary to be updated with the correct language
-     * It must respect the provided order.
+     * The array with custom emojis object
+     * This list is necessary to fill the custom tab
      * @type {Array}
-     * @required
+     * @default []
      * @example
-     * <dt-emoji-picker
-     *  :tabSetLabels="['Most recently used', 'Smileys and people', 'Nature',
-     *    'Food', 'Activity', 'Travel', 'Objects', 'Symbols', 'Flags']" />
+     * <dt-emoji-picker :customEmojis="[emojiObject, emojiObject]" />
      */
-    tabSetLabels: {
+    customEmojis: {
       type: Array,
-      required: true,
     },
 
     /**
@@ -157,18 +134,6 @@ export default {
     skinTone: {
       type: String,
       default: 'Default',
-    },
-
-    /**
-     * Tooltip shown when skin selector button is hovered.
-     * @type {String}
-     * @required
-     * @example
-     * <dt-emoji-picker :skin-selector-button-tooltip-label="'Change default skin tone'" />
-     */
-    skinSelectorButtonTooltipLabel: {
-      type: String,
-      required: true,
     },
 
     /**
@@ -200,13 +165,52 @@ export default {
       highlightedEmoji: null,
       selectedTabset: {},
       scrollIntoTab: 0,
-      isScrolling: false,
+      i18n: new DialtoneLocalization(),
     };
   },
 
   computed: {
+    showCustomEmojisTab () {
+      return this.customEmojis?.length > 0;
+    },
+
     showRecentlyUsedTab () {
       return this.recentlyUsedEmojis?.length > 0;
+    },
+
+    tabSetLabels () {
+      return [
+        this.i18n.$t('DIALTONE_EMOJI_PICKER_TABSET_RECENTLY_USED_LABEL'),
+        this.i18n.$t('DIALTONE_EMOJI_PICKER_TABSET_SMILEYS_AND_PEOPLE_LABEL'),
+        this.i18n.$t('DIALTONE_EMOJI_PICKER_TABSET_NATURE_LABEL'),
+        this.i18n.$t('DIALTONE_EMOJI_PICKER_TABSET_FOOD_LABEL'),
+        this.i18n.$t('DIALTONE_EMOJI_PICKER_TABSET_ACTIVITY_LABEL'),
+        this.i18n.$t('DIALTONE_EMOJI_PICKER_TABSET_TRAVEL_LABEL'),
+        this.i18n.$t('DIALTONE_EMOJI_PICKER_TABSET_OBJECTS_LABEL'),
+        this.i18n.$t('DIALTONE_EMOJI_PICKER_TABSET_SYMBOLS_LABEL'),
+        this.i18n.$t('DIALTONE_EMOJI_PICKER_TABSET_FLAGS_LABEL'),
+        this.i18n.$t('DIALTONE_EMOJI_PICKER_TABSET_CUSTOM_LABEL'),
+      ];
+    },
+
+    searchPlaceholderLabel () {
+      return this.i18n.$t('DIALTONE_EMOJI_PICKER_SEARCH_PLACEHOLDER_LABEL');
+    },
+
+    searchResultsLabel () {
+      return this.i18n.$t('DIALTONE_EMOJI_PICKER_SEARCH_RESULTS_LABEL');
+    },
+
+    searchNoResultsLabel () {
+      return this.i18n.$t('DIALTONE_EMOJI_PICKER_SEARCH_NO_RESULTS_LABEL');
+    },
+
+    skinSelectorButtonTooltipLabel () {
+      return this.i18n.$t('DIALTONE_EMOJI_PICKER_SKIN_SELECTOR_BUTTON_TOOLTIP_LABEL');
+    },
+
+    addEmojiLabel () {
+      return this.i18n.$t('DIALTONE_EMOJI_PICKER_ADD_EMOJI_LABEL');
     },
   },
 
@@ -224,10 +228,6 @@ export default {
 
     updateScrollIntoTab (value) {
       this.scrollIntoTab = value;
-    },
-
-    updateIsScrolling (value) {
-      this.isScrolling = value;
     },
 
     updateHighlightedEmoji (emoji) {

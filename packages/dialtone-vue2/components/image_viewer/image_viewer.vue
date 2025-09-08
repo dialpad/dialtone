@@ -14,8 +14,8 @@
       >
     </dt-button>
     <portal
-     v-if="isOpen"
-     :selector="appendTo"
+      v-if="isOpen"
+      :selector="appendTo"
     >
       <div
         :aria-hidden="!isOpen ? 'true' : 'false'"
@@ -49,17 +49,21 @@
             size="lg"
             importance="clear"
             kind="inverted"
-            :aria-label="closeAriaLabel"
+            :aria-label="closeButtonTitle"
+            :title="closeButtonTitle"
             @click="close"
           >
             <template #icon>
-              <dt-icon
+              <dt-icon-close
                 class="d-image-viewer__close-button"
-                name="close"
                 size="400"
               />
             </template>
           </dt-button>
+          <sr-only-close-button
+            v-else
+            @close="close"
+          />
         </transition>
       </div>
     </portal>
@@ -69,17 +73,20 @@
 <script>
 import Modal from '@/common/mixins/modal';
 import { EVENT_KEYNAMES } from '@/common/constants';
-import { DtIcon } from '@/components/icon';
+import { DtIconClose } from '@dialpad/dialtone-icons/vue2';
 import { DtButton } from '@/components/button';
 import { Portal } from '@linusborg/vue-simple-portal';
+import SrOnlyCloseButton from '@/common/sr_only_close_button.vue';
+import { DialtoneLocalization } from '@/localization';
 
 export default {
   name: 'DtImageViewer',
 
   components: {
     Portal,
+    SrOnlyCloseButton,
     DtButton,
-    DtIcon,
+    DtIconClose,
   },
 
   mixins: [Modal],
@@ -90,7 +97,7 @@ export default {
      * this behaviour by passing an appendTo prop that points to an id or an html tag from the root of the parent.
      * The appendTo prop expects a CSS selector string or an actual DOM node.
      * type: string | HTMLElement, default: 'body'
-    */
+     */
     appendTo: {
       type: String,
       default: 'body',
@@ -140,14 +147,6 @@ export default {
       type: String,
       required: true,
     },
-
-    /**
-     * Aria label for close button
-     */
-    closeAriaLabel: {
-      type: String,
-      required: true,
-    },
   },
 
   emits: [
@@ -170,6 +169,7 @@ export default {
     return {
       showCloseButton: true,
       isOpen: false,
+      i18n: new DialtoneLocalization(),
     };
   },
 
@@ -194,6 +194,10 @@ export default {
           }
         },
       };
+    },
+
+    closeButtonTitle () {
+      return this.i18n.$t('DIALTONE_CLOSE_BUTTON');
     },
   },
 
@@ -256,7 +260,6 @@ export default {
         this.focusTrappedTabPress(e);
       }
     },
-
   },
 };
 </script>

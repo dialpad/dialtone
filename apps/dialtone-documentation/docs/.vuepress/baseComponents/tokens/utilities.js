@@ -1,5 +1,5 @@
 import tokensJson from '@dialpad/dialtone-tokens/dist/doc.json';
-import { CATEGORY_MAP, SUBCATEGORY_MAP, FORMAT_MAP, THEMES, BRANDS, getTokensStructure } from './constants';
+import { CATEGORY_MAP, SUBCATEGORY_MAP, FORMAT_MAP, MODES, THEMES, getTokensStructure } from './constants';
 
 /**
   Process the file tokensJson and fill processedTokens with the data we want to show.
@@ -11,18 +11,18 @@ import { CATEGORY_MAP, SUBCATEGORY_MAP, FORMAT_MAP, THEMES, BRANDS, getTokensStr
 export const addTokensToStructure = (structure) => {
   Object.keys(FORMAT_MAP).forEach(format => {
     structure[format] = {};
-    for (const theme of THEMES) {
-      const baseThemeKey = `base-${theme.value}`;
+    for (const mode of MODES) {
+      const baseThemeKey = `base-${mode.value}`;
 
-      for (const brand of BRANDS) {
-        const brandThemeKey = `${brand.value}-${theme.value}`;
-        structure[format][brandThemeKey] = getTokensStructure();
+      for (const theme of THEMES) {
+        const themeKey = `${theme.value}-${mode.value}`;
+        structure[format][themeKey] = getTokensStructure();
 
-        const combined = { ...tokensJson[baseThemeKey], ...tokensJson[brandThemeKey] };
+        const combined = { ...tokensJson[baseThemeKey], ...tokensJson[themeKey] };
 
         // merge base and semantic tokens into one object per theme
         Object.entries(combined).forEach((token) => {
-          addTokensToCategories(token, format, structure[format][brandThemeKey]);
+          addTokensToCategories(token, format, structure[format][themeKey]);
         });
       }
     }
@@ -63,7 +63,7 @@ const addTokensToCategories = (token, format, structure) => {
   }
 
   if (key.startsWith('color/brand') || key.startsWith('color/gradient')) {
-    structure.color.brand._children.push(displayToken);
+    structure.color.theme._children.push(displayToken);
     return;
   }
 
@@ -73,8 +73,13 @@ const addTokensToCategories = (token, format, structure) => {
   }
 
   if ((CATEGORY_MAP.component.includes(splitKeys[0]) && (splitKeys[1] === 'color')) ||
-    (CATEGORY_MAP.component.includes(splitKeys[1]) && splitKeys[0] === 'theme')) {
+    (CATEGORY_MAP.component.includes(splitKeys[1]) && splitKeys[0] === 'shell')) {
     structure.color.components._children.push(displayToken);
+    return;
+  }
+
+  if (key.startsWith('color/chart')) {
+    structure.color.chart._children.push(displayToken);
     return;
   }
 

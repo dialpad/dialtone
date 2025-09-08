@@ -1,5 +1,5 @@
 import { getEmojiData, validateCustomEmojiJson, unicodeToString } from './emoji';
-import { withValidCustomEmojis, withNotAllRequiredProps, withValidUnicodeEmojis } from './custom-emoji-test.js';
+import { withValidCustomEmojis, withNotAllRequiredProps, withValidUnicodeEmojis } from './custom-emoji.test.js';
 
 describe('Emoji Tests', () => {
   describe('Validation Tests', () => {
@@ -20,7 +20,7 @@ describe('Emoji Tests', () => {
 
       it('sets the custom emoji', async () => {
         const emojiData = getEmojiData();
-        expect(typeof emojiData.octocat).toBe('object');
+        expect(typeof emojiData.blinkingguy).toBe('object');
       });
     });
 

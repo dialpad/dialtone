@@ -66,6 +66,7 @@
 //  $   DISPLAY
 //  ----------------------------------------------------------------------------
 .d-d-block { display: block !important; }
+.d-d-contents { display: contents !important; }
 .d-d-flex { display: flex !important; }
 .d-d-grid { display: grid !important; }
 .d-d-inline { display: inline !important; }
@@ -114,10 +115,10 @@
 
 .d-vi-visible-sr {
   position: absolute;
-  width: 1px;
-  height: 1px;
-  margin: -1px;
-  padding: 0;
+  width: var(--dt-size-100);
+  height: var(--dt-size-100);
+  margin: var(--dt-space-100-negative);
+  padding: var(--dt-space-0);
   overflow: hidden;
   word-wrap: normal;
   border: none;

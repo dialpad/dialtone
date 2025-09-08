@@ -3,10 +3,10 @@
     ref="skeleton"
     data-qa="skeleton-shape"
     :class="[
-      'skeleton-placeholder',
+      'd-skeleton-placeholder',
       SKELETON_SHAPES[shape],
       {
-        'skeleton-placeholder--animate': animate,
+        'd-skeleton-placeholder--animate': animate,
       },
       contentClass,
     ]"
@@ -22,6 +22,7 @@ import {
 } from './skeleton_constants';
 
 export default {
+  compatConfig: { MODE: 3 },
   name: 'DtSkeletonShape',
 
   mixins: [SkeletonAnimation],

@@ -8,7 +8,7 @@ import DtRecipeContactInfoVariantsTemplate from './contact_info_variants.story.v
 import { AVATAR_SIZE_MODIFIERS, AVATAR_COLORS } from '@/components/avatar';
 import { PRESENCE_STATES_LIST } from '@/components/presence';
 
-import avatarImage from '@/common/assets/avatar1.png';
+import avatarImage from '@/common/assets/avatar1.png?url';
 const iconsList = getIconNames();
 
 // Default Prop Values
@@ -158,6 +158,7 @@ export const Default = {
   render: DefaultTemplate,
 
   args: {
+    avatarIcon: 'user',
     avatarSrc: avatarImage,
     avatarSeed: 'JL',
     avatarFullName: 'Joseph Lumaban',
@@ -222,6 +223,7 @@ export const Variants = {
   render: VariantsTemplate,
 
   args: {
+    avatarIcon: 'user',
     avatarFullName: 'Natalie Woods',
     avatarSeed: 'NW',
     avatarSize: 'lg',

@@ -1,10 +1,4 @@
-const hasValidOptionIndex = option => !option.index || typeof option.index === 'number';
-
 const hasValidOptionValue = option => {
-  if (!option.value) {
-    return false;
-  }
-
   return typeof option.value === 'string' || typeof option.value === 'number';
 };
 
@@ -22,10 +16,6 @@ export const optionsValidator = options => {
   }
 
   return options.every(option => {
-    if (!hasValidOptionIndex(option)) {
-      return false;
-    }
-
     if (!hasValidOptionValue(option)) {
       return false;
     }

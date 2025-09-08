@@ -13,7 +13,7 @@ import slashCommandSuggestion from './slash_command_suggestion';
 
 // Default Prop Values
 export const argsData = {
-  modelValue: '<p>I am not a standalone component, please use Message Input instead <emoji-component code=":v_tone3:"></emoji-component><emoji-component code=":robot:"></emoji-component>!</p>',
+  modelValue: '<p>I am not a standalone component, please use Message Input instead ✌🏽🤖!</p>',
   editable: true,
   inputAriaLabel: 'This is a descriptive label',
   autoFocus: false,
@@ -23,6 +23,11 @@ export const argsData = {
   onInput: action('input'),
   onFocus: action('focus'),
   onEnter: action('enter'),
+  onJsonInput: action('json-input'),
+  onHtmlInput: action('html-input'),
+  onTextInput: action('text-input'),
+  onEditLink: action('edit-link'),
+  onSelectedCommand: action('selected-command'),
 };
 
 export const argTypesData = {
@@ -87,6 +92,31 @@ export const argTypesData = {
       disable: true,
     },
   },
+  onJsonInput: {
+    table: {
+      disable: true,
+    },
+  },
+  onHtmlInput: {
+    table: {
+      disable: true,
+    },
+  },
+  onTextInput: {
+    table: {
+      disable: true,
+    },
+  },
+  onEditLink: {
+    table: {
+      disable: true,
+    },
+  },
+  onSelectedCommand: {
+    table: {
+      disable: true,
+    },
+  },
 };
 
 // Story Collection
@@ -136,6 +166,9 @@ export const WithCustomExtensions = {
     allowItalic: false,
     allowStrike: false,
     allowUnderline: false,
+    allowCode: false,
     allowCodeblock: false,
+    link: false,
+    useDivTags: false,
   },
 };

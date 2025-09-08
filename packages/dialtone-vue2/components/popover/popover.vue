@@ -4,7 +4,6 @@
     <portal v-if="modal && isOpen">
       <div
         class="d-modal--transparent"
-        :aria-hidden="modal && isOpen ? 'false' : 'true'"
         @click.prevent.stop
       />
     </portal>
@@ -26,8 +25,8 @@
         @keydown.up.prevent="onArrowKeyPress"
         @keydown.down.prevent="onArrowKeyPress"
         @keydown.escape.capture="closePopover"
-        @mouseenter="onEnterAnchor"
-        @mouseleave="onLeaveAnchor"
+        @mouseenter="onMouseEnter"
+        @mouseleave="onMouseLeave"
       >
         <!-- @slot Anchor element that activates the popover. Usually a button. -->
         <slot
@@ -58,8 +57,8 @@
         :tabindex="contentTabindex"
         appear
         v-on="popoverListeners"
-        @mouseenter="onEnterContent"
-        @mouseleave="onLeaveContent"
+        @mouseenter="onMouseEnterAnchor"
+        @mouseleave="onMouseLeaveAnchor"
       >
         <popover-header-footer
           v-if="$slots.headerContent || showCloseButton"
@@ -68,7 +67,6 @@
           :content-class="headerClass"
           type="header"
           :show-close-button="showCloseButton"
-          :close-button-props="closeButtonProps"
           @close="closePopover"
         >
           <template #content>
@@ -95,7 +93,7 @@
           />
         </div>
         <popover-header-footer
-          v-if="$slots.footerContent"
+          v-if="hasFooter()"
           ref="popover__footer"
           type="footer"
           :class="POPOVER_HEADER_FOOTER_PADDING_CLASSES[padding]"
@@ -110,8 +108,7 @@
           </template>
         </popover-header-footer>
         <sr-only-close-button
-          v-if="showVisuallyHiddenClose"
-          :visually-hidden-close-label="visuallyHiddenCloseLabel"
+          v-if="!showCloseButton"
           @close="closePopover"
         />
       </dt-lazy-show>
@@ -130,15 +127,13 @@ import {
   POPOVER_ROLES,
   POPOVER_STICKY_VALUES,
 } from './popover_constants';
-import { getUniqueString, isOutOfViewPort } from '@/common/utils';
+import { getUniqueString, isOutOfViewPort, warnIfUnmounted, disableRootScrolling, enableRootScrolling } from '@/common/utils';
 import { DtLazyShow } from '@/components/lazy_show';
 import { Portal } from '@linusborg/vue-simple-portal';
 import ModalMixin from '@/common/mixins/modal';
 import { createTippyPopover, getPopperOptions } from './tippy_utils';
 import PopoverHeaderFooter from './popover_header_footer.vue';
-import SrOnlyCloseButtonMixin from '@/common/mixins/sr_only_close_button';
 import SrOnlyCloseButton from '@/common/sr_only_close_button.vue';
-import { TOOLTIP_DELAY_MS } from '@/components/tooltip/index.js';
 
 /**
  * A Popover displays a content overlay when its anchor element is activated.
@@ -157,7 +152,7 @@ export default {
     Portal,
   },
 
-  mixins: [ModalMixin, SrOnlyCloseButtonMixin],
+  mixins: [ModalMixin],
 
   props: {
     /**
@@ -229,15 +224,6 @@ export default {
     ariaLabel: {
       type: String,
       default: null,
-    },
-
-    /**
-     * A set of props to be passed into the popover's header close button.
-     * Requires an 'ariaLabel' property, when the header popover is visible
-     */
-    closeButtonProps: {
-      type: Object,
-      default: () => ({}),
     },
 
     /**
@@ -488,29 +474,6 @@ export default {
             (appendTo instanceof HTMLElement);
       },
     },
-
-    /**
-     * Set this prop to true and popover component will support hovercard behaviour
-     * It will open on mouseenter and close on mouseleave with timer delay of 300ms
-     */
-    hovercard: {
-      type: Boolean,
-      default: false,
-    },
-
-    /**
-     * The timer is used only when the hovercard prop is true.
-     * It defines the delays when opening several hovercards.
-     * It must have the keys: enter, leave and current.
-     * If null, the default delay of 300ms will be used.
-     */
-    timer: {
-      type: [Object, null],
-      default: null,
-      validator: timer => {
-        return timer === null || (timer.enter && timer.leave && Object.keys(timer).includes('current'));
-      },
-    },
   },
 
   emits: [
@@ -529,6 +492,34 @@ export default {
      * @type {Boolean | Array}
      */
     'update:open',
+
+    /**
+     * Emitted when the mouse enters the popover
+     *
+     * @event mouseenter-popover
+     */
+    'mouseenter-popover',
+
+    /**
+     * Emitted when the mouse leaves the popover
+     *
+     * @event mouseleave-popover
+     */
+    'mouseleave-popover',
+
+    /**
+     * Emitted when the mouse enters the popover anchor
+     *
+     * @event mouseenter-popover-anchor
+     */
+    'mouseenter-popover-anchor',
+
+    /**
+     * Emitted when the mouse leaves the popover anchor
+     *
+     * @event mouseleave-popover-anchor
+     */
+    'mouseleave-popover-anchor',
   ],
 
   data () {
@@ -540,8 +531,6 @@ export default {
       isOpen: false,
       anchorEl: null,
       popoverContentEl: null,
-      inTimer: null,
-      outTimer: null,
     };
   },
 
@@ -555,11 +544,11 @@ export default {
           this.$emit('keydown', event);
         },
 
-        'after-leave': event => {
+        'after-leave': () => {
           this.onLeaveTransitionComplete();
         },
 
-        'after-enter': event => {
+        'after-enter': () => {
           this.onEnterTransitionComplete();
         },
       };
@@ -576,10 +565,6 @@ export default {
       // aria-labelledby should be set only if aria-labelledby is passed as a prop, or if
       // there is no aria-label and the labelledby should point to the anchor.
       return this.ariaLabelledby || (!this.ariaLabel && getUniqueString('DtPopover__anchor'));
-    },
-
-    currentHovercard () {
-      return this.timer?.current.value;
     },
   },
 
@@ -647,19 +632,11 @@ export default {
         this.tip.hide();
       }
     },
-
-    currentHovercard () {
-      if (this.hovercard && this.timer) {
-        if (this.currentHovercard === this.id) {
-          this.isOpen = true;
-        } else {
-          this.isOpen = false;
-        }
-      }
-    },
   },
 
   mounted () {
+    warnIfUnmounted(this.$el, this.$options.name);
+
     const externalAnchorEl = this.externalAnchor
       ? this.$refs.anchor.getRootNode().querySelector(`#${this.externalAnchor}`)
       : null;
@@ -681,7 +658,7 @@ export default {
 
   beforeDestroy () {
     this.tip?.destroy();
-    this.intersectionObserver.disconnect();
+    this.intersectionObserver?.disconnect();
     this.removeReferences();
     this.removeEventListeners();
   },
@@ -690,7 +667,6 @@ export default {
    *     METHODS    *
    ******************/
   methods: {
-
     hasIntersectedViewport (entries) {
       const dialog = entries?.[0]?.target;
       if (!dialog) return;
@@ -727,7 +703,6 @@ export default {
     },
 
     defaultToggleOpen (e) {
-      if (this.hovercard) { return; }
       if (this.openOnContext) { return; }
 
       // Only use default toggle behaviour if the user has not set the open prop.
@@ -788,37 +763,18 @@ export default {
       this.isOpen = false;
     },
 
-    isDtScrollbarOnBody () {
-      if (document.documentElement.hasAttribute('data-overlayscrollbars')) {
-        return true;
-      }
-      return false;
-    },
-
-    disableDtScrollbar () {
-      document.documentElement.classList.add('d-scrollbar-disabled');
-    },
-
-    enableDtScrollbar () {
-      document.documentElement.classList.remove('d-scrollbar-disabled');
-    },
-
-    /*
-    * Prevents scrolling outside of the currently opened modal popover by:
-    *   - when anchor is not within another popover: setting the body to overflow: hidden
-    *   - when anchor is within another popover: set the popover dialog container to it's non-modal z-index
-    *     since it is no longer the active modal. This puts it underneath the overlay and prevents scrolling.
-    **/
+    /**
+     * Prevents scrolling outside of the currently opened modal popover by:
+     *   - when anchor is not within another popover: setting the body to overflow: hidden
+     *   - when anchor is within another popover: set the popover dialog container to it's non-modal z-index
+     *     since it is no longer the active modal. This puts it underneath the overlay and prevents scrolling.
+     */
     preventScrolling () {
       if (this.modal) {
         const element = this.anchorEl?.closest('body, .tippy-box');
         if (!element) return;
         if (element.tagName?.toLowerCase() === 'body') {
-          if (this.isDtScrollbarOnBody()) {
-            this.disableDtScrollbar();
-          } else {
-            element.classList.add('d-of-hidden');
-          }
+          disableRootScrolling(this.anchorEl.getRootNode().host);
           this.tip.setProps({ offset: this.offset });
         } else {
           element.classList.add('d-zi-popover');
@@ -826,18 +782,14 @@ export default {
       }
     },
 
-    /*
-    * Resets the prevent scrolling properties set in preventScrolling() back to normal.
-    **/
+    /**
+     * Resets the prevent scrolling properties set in preventScrolling() back to normal.
+     */
     enableScrolling () {
       const element = this.anchorEl?.closest('body, .tippy-box');
       if (!element) return;
       if (element.tagName?.toLowerCase() === 'body') {
-        if (this.isDtScrollbarOnBody()) {
-          this.enableDtScrollbar();
-        } else {
-          element.classList.remove('d-of-hidden');
-        }
+        enableRootScrolling(this.anchorEl.getRootNode().host);
         this.tip.setProps({ offset: this.offset });
       } else {
         element.classList.remove('d-zi-popover');
@@ -1027,55 +979,25 @@ export default {
       });
     },
 
-    //  ============================================================================
-    //  $ HOVERCARD
-    //  ----------------------------------------------------------------------------
-
-    setInTimer () {
-      this.inTimer = setTimeout(() => {
-        this.isOpen = true;
-      }, TOOLTIP_DELAY_MS);
+    onMouseEnter () {
+      this.$emit('mouseenter-popover');
     },
 
-    setOutTimer () {
-      this.outTimer = setTimeout(() => {
-        this.isOpen = false;
-      }, TOOLTIP_DELAY_MS);
+    onMouseLeave () {
+      this.$emit('mouseleave-popover');
     },
 
-    onEnterAnchor () {
-      if (!this.hovercard) return;
-      if (this.timer) this.timer.enter(this.id);
-      else {
-        clearTimeout(this.outTimer);
-        this.setInTimer();
-      }
+    onMouseEnterAnchor () {
+      this.$emit('mouseenter-popover-anchor');
     },
 
-    onLeaveAnchor () {
-      if (!this.hovercard) return;
-      if (this.timer) this.timer.leave();
-      else {
-        clearTimeout(this.inTimer);
-        this.setOutTimer();
-      }
+    onMouseLeaveAnchor () {
+      this.$emit('mouseleave-popover-anchor');
     },
 
-    onEnterContent () {
-      if (!this.hovercard) return;
-      if (this.timer) this.timer.enter(this.id);
-      else clearTimeout(this.outTimer);
+    hasFooter () {
+      return this.$slots.footerContent || this.$scopedSlots.footerContent?.();
     },
-
-    onLeaveContent () {
-      if (!this.hovercard) return;
-      if (this.timer) this.timer.leave();
-      else this.setOutTimer();
-    },
-
-    //  ============================================================================
-    //  $ HOVERCARD
-    //  ----------------------------------------------------------------------------
   },
 };
 </script>

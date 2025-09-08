@@ -1,0 +1,51 @@
+{
+  "folders": [
+    {
+      "name": "Root",
+      "path": "../"
+    },
+		{
+      "name": "Documentation",
+      "path": "../apps/dialtone-documentation"
+    },
+    {
+      "name": "CSS",
+      "path": "../packages/dialtone-css"
+    },
+		{
+      "name": "Emojis",
+      "path": "../packages/dialtone-emojis"
+    },
+		{
+      "name": "Icons",
+      "path": "../packages/dialtone-icons"
+    },
+		{
+      "name": "Tokens",
+      "path": "../packages/dialtone-tokens"
+    },
+    {
+      "name": "Vue 2",
+      "path": "../packages/dialtone-vue2"
+    },
+		{
+      "name": "Vue 3",
+      "path": "../packages/dialtone-vue3"
+    },
+		{
+      "name": "ESLint Plugin",
+      "path": "../packages/eslint-plugin-dialtone"
+    },
+		{
+      "name": "StyleLint Plugin",
+      "path": "../packages/stylelint-plugin-dialtone"
+    },
+  ],
+  "settings": {
+    "eslint.format.enable": true,
+    "eslint.run": "onSave",
+    "eslint.runtime": "node",
+    "stylelint.enable": true,
+    "stylelint.stylelintPath": "node_modules/stylelint/lib/index.js"
+  }
+}

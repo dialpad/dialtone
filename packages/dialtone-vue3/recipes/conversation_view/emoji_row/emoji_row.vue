@@ -1,19 +1,28 @@
 <template>
-  <span class="dt-emoji-row">
+  <span class="d-recipe-emoji-row">
     <span
       v-for="reaction in reactions"
       :key="reaction.unicodeOutput"
-      :reaction="reaction"
     >
       <dt-tooltip
-        class="dt-emoji-row__tooltip"
-        content-class="d-wmx464"
+        class="d-recipe-emoji-row__tooltip"
+        content-class="d-recipe-emoji-row__tooltip-content"
+        :fallback-placements="['top', 'bottom']"
         sticky="popper"
         @shown="(shown) => emojiHovered(reaction, shown)"
       >
         <span aria-hidden="true">
-          <dt-emoji-text-wrapper size="200">
-            {{ reaction.tooltip }}
+          <dt-emoji-text-wrapper size="800">
+            <p class="d-recipe-emoji-row__tooltip-emoji">
+              {{ reaction.emojiUnicodeOrShortname }}
+            </p>
+            <p class="d-recipe-emoji-row__tooltip-names">
+              {{ reaction.names }}
+              <span
+                class="d-recipe-emoji-row__tooltip-label"
+                v-text="reactionLabel(reaction)"
+              />
+            </p>
           </dt-emoji-text-wrapper>
         </span>
         <template #anchor="{ attrs }">
@@ -21,24 +30,29 @@
             importance="clear"
             size="sm"
             data-qa="feed-item-reaction-button"
-            :class="['dt-emoji-row__reaction', reaction.isSelected ? 'dt-emoji-row__reaction--selected' : '']"
-            :aria-label="reaction.ariaLabel"
+            :class="[
+              'd-recipe-emoji-row__reaction',
+              reaction.isSelected ? 'd-recipe-emoji-row__reaction--selected' : '',
+            ]"
+            :aria-label="reactionLabel(reaction)"
             :attrs="attrs"
             @click="emojiClicked(reaction)"
           >
-            <span class="dt-emoji-row__emoji">
+            <span class="d-recipe-emoji-row__emoji">
               <dt-emoji
-                size="200"
+                class="d-recipe-emoji-row__emoji"
+                img-class="d-recipe-emoji-row__emoji-img"
                 :code="reaction.emojiUnicodeOrShortname"
               />
             </span>
-            <span class="dt-emoji-row__reaction-number">
+            <span class="d-recipe-emoji-row__reaction-number">
               {{ reaction.num }}
             </span>
           </dt-button>
         </template>
       </dt-tooltip>
     </span>
+    <!-- TODO: Replace picker slot with a button with localized text and emit any event needed -->
     <!-- @slot Slot for emoji picker component, including the anchor. -->
     <slot name="picker" />
   </span>
@@ -46,17 +60,18 @@
 
 <script>
 import { REACTIONS_ATTRIBUTES } from './emoji_row_constants.js';
-import { DtButton } from '../../../components/button';
-import { DtTooltip } from '../../../components/tooltip';
-import { DtEmoji } from '../../../components/emoji';
-import { DtEmojiTextWrapper } from '../../../components/emoji_text_wrapper';
+import { DtButton } from '@/components/button';
+import { DtTooltip } from '@/components/tooltip';
+import { DtEmoji } from '@/components/emoji';
+import { DtEmojiTextWrapper } from '@/components/emoji_text_wrapper';
+import { DialtoneLocalization } from '@/localization';
+import { getEmojiShortCode } from '@/common/emoji';
 
 export default {
+  compatConfig: { MODE: 3 },
   name: 'DtRecipeEmojiRow',
 
   components: { DtTooltip, DtButton, DtEmoji, DtEmojiTextWrapper },
-
-  mixins: [],
 
   props: {
     /**
@@ -67,7 +82,7 @@ export default {
       default: () => [],
       validator: (reactions) => {
         for (const reaction of reactions) {
-          const validInput = REACTIONS_ATTRIBUTES.every((attribute) => reaction[attribute] !== undefined ?? false);
+          const validInput = REACTIONS_ATTRIBUTES.every((attribute) => reaction[attribute] !== undefined);
           if (!validInput) return false;
         }
         return true;
@@ -80,6 +95,12 @@ export default {
     'emoji-hovered',
   ],
 
+  data () {
+    return {
+      i18n: new DialtoneLocalization(),
+    };
+  },
+
   methods: {
     emojiClicked (reaction) {
       this.$emit('emoji-clicked', reaction.emojiUnicodeOrShortname);
@@ -91,82 +112,14 @@ export default {
         state,
       });
     },
+
+    reactionLabel (reaction) {
+      return this.i18n.$t('DIALTONE_EMOJI_ROW_REACTION_LABEL', {
+        reaction: getEmojiShortCode(reaction.emojiUnicodeOrShortname),
+        personCount: reaction.num,
+        youIncluded: reaction.isSelected,
+      });
+    },
   },
 };
 </script>
-
-<style lang="less">
-.dt-emoji-row {
-  display: flex;
-  flex-wrap: wrap;
-  gap: var(--dt-space-300);
-
-  &__tooltip {
-    display: inline-block;
-  }
-
-  &__reaction {
-    --emoji-item-color-inset-shadow: transparent;
-    --emoji-item-color-foreground: var(--dt-action-color-foreground-muted-default);
-    --emoji-item-color-background: var(--dt-action-color-background-muted-hover);
-
-    padding: var(--dt-space-300) var(--dt-space-400);
-    border-radius: var(--dt-size-radius-pill);
-    border: 0;
-    color: var(--emoji-item-color-foreground);
-    background-color: var(--emoji-item-color-background);
-    box-shadow: inset 0 0 0 var(--dt-size-border-150) var(--emoji-item-color-inset-shadow);
-    height: var(--dt-size-550);
-
-    &.dt-emoji-row__picker {
-      padding: var(--dt-space-200) var(--dt-space-350);
-    }
-
-    &:hover {
-      --emoji-item-color-inset-shadow: var(--dt-color-border-subtle);
-      --emoji-item-color-foreground: var(--dt-action-color-foreground-muted-hover);
-    }
-
-    &:active {
-      --emoji-item-color-background: var(--dt-action-color-background-muted-active);
-      --emoji-item-color-foreground: var(--dt-action-color-foreground-muted-active);
-
-      transform: scale(.98);
-    }
-
-    &--selected {
-      --emoji-item-color-inset-shadow: var(--dt-color-border-brand);
-      --emoji-item-color-foreground: var(--dt-color-link-primary);
-      --emoji-item-color-background: var(--dt-action-color-background-base-hover);
-
-      .dt-emoji-row__reaction-number {
-        font-weight: var(--dt-font-weight-bold);
-      }
-
-      &:hover {
-        --emoji-item-color-inset-shadow: var(--dt-color-border-brand-strong);
-        --emoji-item-color-foreground: var(--dt-color-link-primary-hover);
-      }
-
-      &:active {
-        --emoji-item-color-background: var(--dt-action-color-background-base-active);
-      }
-    }
-  }
-
-  &__emoji {
-    margin-right: var(--dt-space-300);
-    display: inline-flex;
-  }
-
-  &__reaction-number {
-    // set font properties individually to change line height,
-    // as font shorthand property will override line-height.
-    font-weight: var(--dt-typography-body-sm-font-weight);
-    font-size: var(--dt-typography-body-sm-font-size);
-    font-family: var(--dt-typography-body-sm-font-family);
-    line-height: var(--dt-font-line-height-100);
-    font-variant: tabular-nums;
-  }
-}
-</style>

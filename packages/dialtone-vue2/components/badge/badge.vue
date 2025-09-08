@@ -15,12 +15,13 @@
       class="d-badge__decorative"
     />
     <span
-      v-if="iconLeft"
+      v-if="hasLeftIcon"
       class="d-badge__icon-left"
     >
-      <dt-icon
-        :name="iconLeft"
-        size="200"
+      <!-- @slot Slot for left icon, icon-size slot prop defaults to '200' -->
+      <slot
+        name="leftIcon"
+        :icon-size="'200'"
       />
     </span>
     <span :class="['d-badge__label', labelClass]">
@@ -30,12 +31,13 @@
       </slot>
     </span>
     <span
-      v-if="iconRight"
+      v-if="hasRightIcon"
       class="d-badge__icon-right"
     >
-      <dt-icon
-        :name="iconRight"
-        size="200"
+      <!-- @slot Slot for right icon, icon-size slot prop defaults to '200' -->
+      <slot
+        name="rightIcon"
+        :icon-size="'200'"
       />
     </span>
   </span>
@@ -43,7 +45,6 @@
 
 <script>
 import { BADGE_TYPE_MODIFIERS, BADGE_KIND_MODIFIERS, BADGE_DECORATION_MODIFIERS } from './badge_constants';
-import { DtIcon } from '@/components/icon';
 
 /**
  * A badge is a compact UI element that provides brief, descriptive information about an element.
@@ -53,30 +54,7 @@ import { DtIcon } from '@/components/icon';
 export default {
   name: 'DtBadge',
 
-  components: {
-    DtIcon,
-  },
-
   props: {
-    /**
-     * Icon on the left side of the badge. Supports any valid icon name from the icon catalog at
-     * https://dialtone.dialpad.com/components/icon.html#icon-catalog. If type:'ai' is set, the ai icon
-     * will automatically be shown here, but this can be overridden by setting this prop.
-     */
-    iconLeft: {
-      type: String,
-      default: '',
-    },
-
-    /**
-     * Icon on the right side of the badge. Supports any valid icon name from the icon catalog at
-     * https://dialtone.dialpad.com/components/icon.html#icon-catalog
-     */
-    iconRight: {
-      type: String,
-      default: '',
-    },
-
     /**
      * Text for the badge content
      */
@@ -107,7 +85,7 @@ export default {
 
     /**
      * Decoration for the badge. This can be only used with kind: label and type: default
-     * with no iconLeft and iconRight
+     * with no left and right icons
      * @values default, black-400, black-500, black-900, red-200, red-300, red-400, purple-200,
      * purple-300, purple-400, purple-500, blue-200, blue-300, blue-400, green-300, green-400,
      * green-500, gold-300, gold-400, gold-500, magenta-200, magenta-300, magenta-400
@@ -153,19 +131,21 @@ export default {
   },
 
   computed: {
+    hasLeftIcon () {
+      return this.$scopedSlots.leftIcon && this.$scopedSlots.leftIcon();
+    },
+
+    hasRightIcon () {
+      return this.$scopedSlots.rightIcon && this.$scopedSlots.rightIcon();
+    },
+
     hasIcons () {
-      return this.iconLeft !== '' || this.iconRight !== '';
+      return this.hasLeftIcon || this.hasRightIcon;
     },
   },
 
-  watch: {
-    $props: {
-      immediate: true,
-      deep: true,
-      handler () {
-        this.validateProps();
-      },
-    },
+  updated () {
+    this.validateProps();
   },
 
   methods: {
@@ -191,7 +171,7 @@ export default {
       }
 
       if (this.hasIcons) {
-        console.error('DtBadge error: decoration prop cannot be used with iconLeft or iconRight.');
+        console.error('DtBadge error: decoration prop cannot be used with leftIcon or rightIcon.');
       }
     },
   },

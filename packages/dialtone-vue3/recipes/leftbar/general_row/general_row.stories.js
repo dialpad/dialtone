@@ -13,8 +13,6 @@ import { LEFTBAR_GENERAL_ROW_ICON_SIZES } from './general_row_constants';
 // Default Prop Values
 export const argsData = {
   type: 'inbox',
-  callButtonTooltip: 'Call',
-  dndTextTooltip: 'Do not Disturb',
   description: 'Description',
   iconSize: '300',
   onClick: action('click'),
@@ -83,7 +81,7 @@ export const argTypesData = {
 };
 
 const decorator = () => ({
-  template: `<div style="background-color: var(--dt-theme-sidebar-color-background)" class="d-wmx264 d-p8"><story />
+  template: `<div style="background-color: var--dt-shell-color-surface-default" class="d-wmx264 d-p8"><story />
   </div>`,
 });
 

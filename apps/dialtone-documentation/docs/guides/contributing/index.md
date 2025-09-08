@@ -3,7 +3,7 @@ title: Contributing
 description: Help Dialtone be even better.
 ---
 
-## Component contribution
+## Component Contribution
 
 ### Design
 
@@ -15,11 +15,11 @@ To make code changes in our Design System please first read the
 [CONTRIBUTING.md](https://github.com/dialpad/dialtone/blob/staging/.github/CONTRIBUTING.md#contributing)
 in our Dialtone repository.
 
-## Adding icons and illustrations
+## Adding Icons and Illustrations
 
 If you need to add an icon into Dialtone, here’s how you would go about doing that.
 
-### For system icons
+### For System Icons
 
 1. Create a new branch starting with "feat/" in the name.
 2. Place the exported SVG file(s) in the appropriate folder category inside `packages/dialtone-icons/src/svg/icons/`
@@ -40,7 +40,7 @@ If you need to add an icon into Dialtone, here’s how you would go about doing 
 5. Open a pull request.
 6. Once approved it can be merged into staging and will go out in the next release.
 
-### For system illustrations
+### For System Illustrations
 
 1. Create a new branch starting with "feat/" in the name.
 2. Place the exported SVG file(s) in the appropriate folder category inside `packages/dialtone-icons/src/svg/illustrations/`

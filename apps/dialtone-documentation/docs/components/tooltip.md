@@ -5,14 +5,14 @@ thumb: true
 image: assets/images/components/tooltip.png
 description: A tooltip is a floating label that briefly explains an action, function, or an element. Its content is exclusively text and shouldn't be vital information for users. If richer media is desired, consider using a popover instead.
 storybook: https://dialtone.dialpad.com/vue/?path=/story/components-tooltip--default
-figma_url: https://www.figma.com/file/2adf7JhZOncRyjYiy2joil/DT-Core%3A-Components-7?node-id=8919%3A21626&viewport=-614%2C359%2C0.86&t=xHutRjwo1o5zMTgT-11
+figma_url: https://www.figma.com/design/W58r5BkO8qTw3vem9YieJd/DT9-Component-Library--Rebrand-2025-?node-id=261-0
 ---
 
 <code-well-header>
   <dt-button v-dt-tooltip="`Simple tooltip`">Hover me</dt-button>
 </code-well-header>
 
-## Tooltip as a directive
+## Tooltip as a Directive
 
 ### Usage
 
@@ -21,9 +21,7 @@ figma_url: https://www.figma.com/file/2adf7JhZOncRyjYiy2joil/DT-Core%3A-Componen
 Default tooltip directive uses top as default placement
 
 <code-well-header class="d-hmn164">
-  <div class="d-tooltip d-tooltip__arrow--bottom-center d-tooltip--show">
-    <span>Tooltip</span>
-  </div>
+  <dt-button v-dt-tooltip="`Tooltip text`">Hover me</dt-button>
 </code-well-header>
 
 <code-example-tabs
@@ -39,7 +37,7 @@ htmlCode='
 </div>
 '
 vueCode='
-<dt-button v-dt-tooltip="Tooltip text">Placeholder Button</dt-button>
+<dt-button v-dt-tooltip="`Tooltip text`">Hover me</dt-button>
 '
 showHtmlWarning />
 
@@ -52,7 +50,19 @@ It's possible to change the tooltip default placement with directive arguments, 
 </code-well-header>
 
 ```javascript
-<dt-button v-dt-tooltip:bottom-start="Tooltip text">Placeholder Button</dt-button>
+<dt-button v-dt-tooltip:bottom-start="`Tooltip text`">Placeholder Button</dt-button>
+```
+
+#### With Object Syntax
+
+It's possible to change any property of the tooltip with object syntax.
+
+<code-well-header class='d-hmn164'>
+<dt-button v-dt-tooltip="{ message: 'Tooltip text', placement: 'bottom-start', delay: false }">Placeholder Button</dt-button>
+</code-well-header>
+
+```javascript
+<dt-button v-dt-tooltip="{ message: 'Tooltip text', placement: 'bottom-start', delay: false }">Placeholder Button</dt-button>
 ```
 
 ### Import
@@ -69,14 +79,28 @@ Install the directive into vue instance
 Vue.use(DtTooltipDirective);
 ```
 
-## Tooltip as a component
+## Tooltip as a Component
+
+The tooltip, also known as infotip or hint, is a common graphical user interface element in which, when hovering over a
+screen element or component, a text box displays information about that element (such as a description of a button's
+function, or what an abbreviation stands for). The tooltip is displayed continuously as long as the user hovers over the
+element
+
+A tooltip has two slots:
+
+1. **the anchor** required slot
+2. **the default** slot (which could be replaced with prop message)
 
 ### Base Styles
 
 <code-well-header class="d-hmn164">
-  <div class="d-tooltip d-tooltip__arrow--bottom-center d-tooltip--show">
-    <span>Tooltip</span>
-  </div>
+  <dt-tooltip message="tooltip">
+    <template #anchor>
+      <dt-button>
+        Hover me
+      </dt-button>
+    </template>
+  </dt-tooltip>
 </code-well-header>
 
 <code-example-tabs
@@ -101,17 +125,23 @@ vueCode='
 <dt-tooltip message="tooltip">
   <template #anchor>
     <dt-button>
-      Hover to show tooltip
+      Hover me
     </dt-button>
   </template>
 </dt-tooltip>
 '
 showHtmlWarning />
 
+### Inverted
+
 <code-well-header bgclass="d-bgc-contrast" class="d-hmn164">
-  <div class="d-tooltip d-tooltip__arrow--bottom-center d-tooltip--inverted d-tooltip--show">
-    <span>Tooltip</span>
-  </div>
+  <dt-tooltip inverted message="tooltip">
+    <template #anchor>
+      <dt-button>
+        Hover me
+      </dt-button>
+    </template>
+  </dt-tooltip>
 </code-well-header>
 
 <code-example-tabs
@@ -136,25 +166,72 @@ vueCode='
 <dt-tooltip inverted message="tooltip">
   <template #anchor>
     <dt-button>
-      Hover to show tooltip
+      Hover me
     </dt-button>
   </template>
 </dt-tooltip>
 '
 showHtmlWarning />
 
-### Arrow Directions
+### Placement
 
-No arrow direction is assigned by default. You must select a direction. Twelve directions are offered: three on each face of the tooltip.
+<code-well-header>
+  <example-tooltip-directions :directions="directions" />
+</code-well-header>
 
-<div class="d-d-grid d-gg16 d-g-cols3 sm:d-g-cols1 md:d-g-cols2">
-  <div v-for="dir in directions" class="d-p32 d-bgc-secondary d-bar8">
-    <div class="d-tooltip d-tooltip--show" :class="'d-tooltip__arrow--'+dir">
-      <div class="d-tt-capitalize d-mb4">{{ capitalizeDirection(dir) }}</div>
-      <div class="d-code--sm d-fc-muted-inverted">.d-tooltip__arrow--{{ dir }}</div>
-    </div>
-  </div>
-</div>
+<code-example-tabs
+vueCode='
+<dt-tooltip
+  message="This is a simple tooltip. The tooltip can be positioned in different directions."
+  :placement="placement"
+>
+  <template #anchor>
+    <dt-button>
+      {{ placement }}
+    </dt-button>
+  </template>
+</dt-tooltip>
+'
+/>
+
+### External anchor
+
+<code-well-header>
+  <dt-button
+    id="external-tooltip-anchor"
+    importance="outlined"
+  >
+    External anchor
+  </dt-button>
+  <dt-tooltip
+    external-anchor="#external-tooltip-anchor"
+  >
+    This is a tooltip with external anchor
+  </dt-tooltip>
+</code-well-header>
+
+<code-example-tabs
+vueCode='
+<dt-button
+  id="external-tooltip-anchor"
+  importance="outlined"
+>
+  External anchor
+</dt-button>
+<dt-tooltip
+  external-anchor="#external-tooltip-anchor"
+>
+  This is a tooltip with external anchor
+</dt-tooltip>
+'
+/>
+
+### Fallback Placements
+
+The tooltip uses [headless-tippy](https://atomiks.github.io/tippyjs/v6/headless-tippy/) and
+[popper](https://popper.js.org/docs/v2/modifiers/flip/), if the tooltip opens in a placement where it will
+be clipped, it will move to a new position. It will do this automatically by default, but if you want to
+manually specify which position it will move to in what order you can do so via the fallbackPlacements prop.
 
 ## Vue API
 
@@ -166,32 +243,29 @@ No arrow direction is assigned by default. You must select a direction. Twelve d
 
 ## Accessibility
 
+Reads out the tooltip content as a supplementary description for its trigger when the trigger is focused.
+See also [wai aria practices 1.1](https://www.w3.org/TR/wai-aria-practices-1.1/#tooltip).
+
+### Anchor
+
+The anchor element that activates the tooltip should be fully accessible by keyboard. The easiest way to do this is by
+using an element like an `DtButton` that is already accessible. When pressing the `ESC` key in a focused tooltip,
+tooltip will be closed.
+
+There are some required ARIA attributes for the anchor element (such as `aria-hidden` set based on `open`).
+To make this as straightforward as possible, these ARIA attributes are passed
+with the correct values as the `attrs` to the anchor slot. Applying them is as simple as using `v-bind`.
+
+### Focus & Keyboard
+
+Due to the different contexts in which a tooltip can be used, focus management and
+keyboard shortcut `ESC` is provided.
+You are encouraged to consult the ARIA documentation for the particular role.
+
 <component-accessible-table component-name="tooltip" />
 
-<script>
-export default {
-  data() {
-    return {
-      directions: [
-        'top-left',
-        'top-center',
-        'top-right',
-        'right-top',
-        'right-center',
-        'right-bottom',
-        'bottom-left',
-        'bottom-center',
-        'bottom-right',
-        'left-top',
-        'left-center',
-        'left-bottom',
-      ]
-    }
-  },
-  methods: {
-    capitalizeDirection(direction) {
-      return direction.split('-').join(' ');
-    },
-  },
-}
+<script setup>
+import ExampleTooltipDirections from '@exampleComponents/ExampleTooltipDirections.vue';
+
+const directions = window.DIALTONE_CONSTANTS.TOOLTIP_DIRECTIONS;
 </script>

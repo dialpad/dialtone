@@ -153,7 +153,7 @@ export default {
   methods: {
     validator () {
       const filtered = Object.entries(this.validationOptions)
-        .filter(([_, option]) => option);
+        .filter(([, option]) => option);
       if (filtered.length >= 2) {
         const errorMessage = `Use only one of ${filtered.map(([key]) => key).join(' | ')} options at the same time`;
         console.error(errorMessage);
@@ -162,36 +162,3 @@ export default {
   },
 };
 </script>
-
-<style lang="less">
-// The --placeholder-from-color and --placeholder-to-color
-// custom properties can be set on the parent class of the
-// placeholder to control the animation colors.
-.skeleton-placeholder {
-  display: flex;
-  stroke: none;
-  fill: var(--placeholder-from-color, var(--dt-color-black-300));
-  background: var(--placeholder-from-color, var(--dt-color-black-300));
-
-  &--animate {
-    animation-name: placeholder-throb;
-    animation-iteration-count: infinite;
-  }
-}
-
-// the animation is used by the skeleton component
-@keyframes placeholder-throb {
-  10% {
-    fill: var(--placeholder-from-color, var(--dt-color-black-300));
-    background: var(--placeholder-from-color, var(--dt-color-black-300));
-  }
-  50% {
-    fill: var(--placeholder-to-color, var(--dt-color-black-100));
-    background: var(--placeholder-to-color, var(--dt-color-black-100));
-  }
-  90% {
-    fill: var(--placeholder-from-color, var(--dt-color-black-300));
-    background: var(--placeholder-from-color, var(--dt-color-black-300));
-  }
-}
-</style>

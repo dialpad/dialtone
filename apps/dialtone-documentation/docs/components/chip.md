@@ -5,20 +5,52 @@ status: ready
 thumb: true
 image: assets/images/components/chip.png
 storybook: https://dialtone.dialpad.com/vue/?path=/story/components-chip--default
-figma_url: https://www.figma.com/file/2adf7JhZOncRyjYiy2joil/DT-Core%3A-Components-7?node-id=9937%3A64802
+figma_url: https://www.figma.com/design/W58r5BkO8qTw3vem9YieJd/DT9-Component-Library--Rebrand-2025-?node-id=9937-64802
 ---
 
 <code-well-header>
-  <example-chip label="Chip" with-avatar/>
+  <dt-stack direction="row" gap="400">
+    <example-chip size="sm" label="Chip" hide-close-btn :interactive="false"/>
+    <example-chip size="sm" label="Chip" :interactive="false"/>
+    <example-chip size="sm" label="Chip" with-avatar/>
+    <example-chip size="sm" label="Chip" with-icon/>
+  </dt-stack>
 </code-well-header>
 
 <!-- <component-combinator component-name="DtChip" /> -->
 
-## Variants and examples
+## Variants and Examples
 
-### Base
+### Non Interactive
 
-The base chip should be the go-to chip for most of your needs.
+Add `:interactive="false"` to make it a read-only, non-interactive Chip. This changes it from a `<button>` to a non-interactive, read-only Chip with no events or hover/active state. Note that this does not effect the interactivity of its `×` remove button.
+
+<code-well-header>
+  <example-chip label="Chip" :interactive="false"/>
+</code-well-header>
+
+<code-example-tabs
+htmlCode='
+<span class="d-chip">
+  <span class="d-chip__label">
+    <span class="d-chip__text">Chip</span>
+  </span>
+  <button class="d-chip__close" type="button" aria-label="close">
+    <span class="d-btn__icon">
+      <svg>...</svg>
+    </span>
+  </button>
+</span>
+'
+vueCode='
+<dt-chip :interactive="false">
+  Chip
+</dt-chip>
+'
+showHtmlWarning />
+
+### Default
+
 <code-well-header>
   <example-chip label="Chip"/>
 </code-well-header>
@@ -43,7 +75,7 @@ vueCode='
 '
 showHtmlWarning />
 
-### Without close button
+### Without Close Button
 
 <code-well-header>
   <example-chip label="Chip" hide-close-btn/>
@@ -64,7 +96,7 @@ vueCode='
 '
 showHtmlWarning />
 
-### With icon
+### With Icon
 
 <code-well-header>
   <example-chip label="Chip" with-icon hide-close-btn/>
@@ -96,7 +128,7 @@ vueCode='
 '
 showHtmlWarning />
 
-### With icon and close button
+### With Icon and Close Button
 
 <code-well-header>
   <example-chip label="Chip" with-icon/>
@@ -133,7 +165,7 @@ vueCode='
 '
 showHtmlWarning />
 
-### With Avatar and close button
+### With Avatar and Close Button
 
 <code-well-header>
   <example-chip label="Chip" with-avatar/>
@@ -163,35 +195,6 @@ vueCode='
   <template #default>
     Chip
   </template>
-</dt-chip>
-'
-showHtmlWarning />
-
-### Non Interactive
-
-To make Chip non-interactive, change the d-chip element from a button to a span. Note
-the close button can still be interactive even if the chip is non-interactive.
-
-<code-well-header>
-  <example-chip label="Chip" :interactive="false"/>
-</code-well-header>
-
-<code-example-tabs
-htmlCode='
-<span class="d-chip">
-  <span class="d-chip__label">
-    <span class="d-chip__text">Chip</span>
-  </span>
-  <button class="d-chip__close" type="button" aria-label="close">
-    <span class="d-btn__icon">
-      <svg>...</svg>
-    </span>
-  </button>
-</span>
-'
-vueCode='
-<dt-chip :interactive="false">
-  Chip
 </dt-chip>
 '
 showHtmlWarning />
@@ -227,9 +230,11 @@ showHtmlWarning />
 ### Sizes
 
 <code-well-header>
-  <example-chip label="Chip" size="xs"/>
-  <example-chip label="Chip" size="sm"/>
-  <example-chip label="Chip" />
+  <dt-stack direction="row" gap="400">
+    <example-chip :interactive="false" label="Chip" size="xs"/>
+    <example-chip :interactive="false" label="Chip" size="sm"/>
+    <example-chip :interactive="false" label="Chip" />
+  </dt-stack>
 </code-well-header>
 
 <code-example-tabs
@@ -273,13 +278,13 @@ htmlCode='
 </span>
 '
 vueCode='
-<dt-chip size="xs">
+<dt-chip :interactive="false" size="xs">
   chip
 </dt-chip>
-<dt-chip size="sm">
+<dt-chip :interactive="false" size="sm">
   chip
 </dt-chip>
-<dt-chip>
+<dt-chip :interactive="false">
   chip
 </dt-chip>
 '

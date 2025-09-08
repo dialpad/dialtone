@@ -4,15 +4,14 @@
     :aria-label="ariaLabel"
     :unread-count="unreadCount"
     :has-unreads="hasUnreads"
-    :unread-count-tooltip="unreadCountTooltip"
+    :unread-mention-count="unreadMentionCount"
     :selected="selected"
     :is-typing="isTyping"
     v-bind="$attrs"
     v-on="$listeners"
   >
     <template #left>
-      <dt-icon
-        name="users"
+      <dt-icon-users
         size="300"
       />
     </template>
@@ -21,28 +20,21 @@
 
 <script>
 import { DtRecipeGeneralRow } from '@/recipes/leftbar/general_row';
-import DtIcon from '@/components/icon/icon.vue';
+import { DtIconUsers } from '@dialpad/dialtone-icons/vue2';
 import { safeConcatStrings } from '@/common/utils';
+import { DialtoneLocalization } from '@/localization';
 
 export default {
   name: 'DtRecipeGroupRow',
 
   components: {
-    DtIcon,
+    DtIconUsers,
     DtRecipeGeneralRow,
   },
 
   inheritAttrs: false,
 
   props: {
-
-    /**
-     * Screen reader will read out the number of users in the group using this text. Ex: "2 users"
-     */
-    groupCountText: {
-      type: String,
-      default: '',
-    },
 
     /**
      * Names of the group members
@@ -61,9 +53,9 @@ export default {
     },
 
     /**
-     * Text shown when the unread count is hovered.
+     * Number of unread mention messages
      */
-    unreadCountTooltip: {
+    unreadMentionCount: {
       type: String,
       default: null,
     },
@@ -104,9 +96,47 @@ export default {
     'click',
   ],
 
+  data () {
+    return {
+      i18n: new DialtoneLocalization(),
+    };
+  },
+
   computed: {
+    groupCount () {
+      return this.names.split(',').length;
+    },
+
+    messageCount () {
+      return isNaN(this.unreadCount)
+        ? this.unreadCount
+        : Number(this.unreadCount);
+    },
+
+    mentionCount () {
+      return isNaN(this.unreadMentionCount)
+        ? this.unreadMentionCount
+        : Number(this.unreadMentionCount);
+    },
+
+    unreadCountTooltip () {
+      return safeConcatStrings([
+        this.unreadCount && this.i18n.$t('DIALTONE_UNREAD_MESSAGE_COUNT_TEXT', { unreadCount: this.messageCount }),
+        this.unreadMentionCount && this.i18n.$t('DIALTONE_UNREAD_MENTION_COUNT_TEXT', { unreadCount: this.mentionCount }),
+      ]);
+    },
+
+    typingTooltip () {
+      return this.isTyping && this.i18n.$t('DIALTONE_TYPING_TEXT');
+    },
+
     ariaLabel () {
-      return safeConcatStrings([this.groupCountText, this.names]);
+      return safeConcatStrings([
+        this.typingTooltip,
+        this.i18n.$t('DIALTONE_GROUP_ROW_GROUP_COUNT_TEXT', { count: this.groupCount }),
+        this.names,
+        this.unreadCountTooltip,
+      ]);
     },
   },
 };

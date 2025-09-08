@@ -25,11 +25,11 @@ module.exports = {
     ['@semantic-release/release-notes-generator', {
       config: '@dialpad/conventional-changelog-angular',
     }],
+    ['@semantic-release/changelog', { changelogFile: `${srcRoot}/CHANGELOG.md` }],
     ['@dialpad/semantic-release-changelog-json', {
       changelogFile: `${srcRoot}/CHANGELOG.md`,
       changelogJsonFile: `${srcRoot}/CHANGELOG.json`,
     }],
-    ['@semantic-release/changelog', { changelogFile: `${srcRoot}/CHANGELOG.md` }],
     ['@semantic-release/npm', { npmPublish: false }],
     ['@semantic-release/git', {
       assets: [
@@ -40,6 +40,10 @@ module.exports = {
       message: `chore(release): NO-JIRA ${name}` +
         '/v${nextRelease.version}\n\n${nextRelease.notes}',
     }],
+    ['@semantic-release/exec', {
+      prepareCmd: './gradlew setProperties -Pversion=${nextRelease.version} && git add ./gradle.properties && git commit -m \'chore(release): NO-JIRA ' + name + '/v${nextRelease.version} gradle\' && git push',
+      execCwd: `${srcRoot}/android`,
+    }],
     ['@semantic-release/github', {
       successComment: false,
       failTitle: false,
@@ -47,13 +51,16 @@ module.exports = {
   ],
   branches: [
     'staging',
-    'next',
     {
       name: 'beta',
       prerelease: true,
     },
     {
       name: 'alpha',
+      prerelease: true,
+    },
+    {
+      name: 'next',
       prerelease: true,
     },
   ],

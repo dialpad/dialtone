@@ -25,12 +25,13 @@
     //  Component specific CSS Vars
     //  ------------------------------------------------------------------------
     --check-radio-color-border: var(--dt-checkbox-color-border-unchecked);
+    --check-radio-color-border-hover: var(--dt-checkbox-color-border-unchecked-hover);
     --check-radio-color-border-checked: var(--dt-checkbox-color-border-checked);
     --check-radio-color-border-disabled: var(--dt-inputs-color-border-disabled);
     --check-radio-color-background: var(--dt-inputs-color-background-default);
     --check-radio-color-background-checked: var(--dt-checkbox-color-background-checked);
     --check-radio-color-background-disabled: var(--dt-inputs-color-background-disabled);
-    --check-radio-border-width: var(--dt-size-border-150);
+    --check-radio-border-width: var(--dt-size-border-100);
 
     //  [1] Check to see if we can use custom styles, if so reset the defaults
     //  ------------------------------------------------------------------------
@@ -55,10 +56,8 @@
             display: none;
         }
 
-        &:focus,
-        &:checked:focus {
-          outline: 0;
-          box-shadow: var(--dt-shadow-focus);
+        &:not(:disabled):hover {
+            border-color: var(--check-radio-color-border-hover);
         }
 
         &:checked {
@@ -159,6 +158,12 @@
     cursor: pointer;
 }
 
+.d-checkbox__messages,
+.d-radio__messages {
+    margin-top: var(--dt-space-200-negative);
+    margin-left: var(--dt-space-550);
+}
+
 .d-checkbox__description {
     display: flex;
     box-sizing: border-box;
@@ -176,9 +181,10 @@
     @supports ((-webkit-appearance: none) or (-moz-appearance: none) or (appearance: none)) {
         background-repeat: no-repeat;
         background-position: center center;
-        background-size: contain;
+        background-size: auto;
         border-radius: var(--dt-size-radius-300);
 
+        &:focus,
         &:focus-visible,
         &:checked:focus-visible {
             box-shadow: var(--dt-shadow-focus);
@@ -187,13 +193,18 @@
         &:checked {
             --check-radio-color-background: var(--check-radio-color-background-checked);
 
-            background-image: url("data:image/svg+xml,%3Csvg width='12' height='12' viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M9 16.2L4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4L9 16.2z' fill='%23fff'/%3E%3C/svg%3E");
+            background-image: url("data:image/svg+xml,<svg width='14' height='14' viewBox='0 0 14 14' fill='none' xmlns='http://www.w3.org/2000/svg'> <path fill-rule='evenodd' clip-rule='evenodd' d='M12.1083 3.05806C12.3524 3.30214 12.3524 3.69786 12.1083 3.94194L5.69162 10.3586C5.44754 10.6027 5.05181 10.6027 4.80773 10.3586L1.89107 7.44194C1.64699 7.19786 1.64699 6.80214 1.89107 6.55806C2.13514 6.31398 2.53087 6.31398 2.77495 6.55806L5.24967 9.03278L11.2244 3.05806C11.4685 2.81398 11.8642 2.81398 12.1083 3.05806Z' fill='white'/> </svg>");
+            border: 0;
+
+            [data-dt-theme="dark"] & {
+                background-image: url("data:image/svg+xml,<svg width='14' height='14' viewBox='0 0 14 14' fill='none' xmlns='http://www.w3.org/2000/svg'> <path fill-rule='evenodd' clip-rule='evenodd' d='M12.1083 3.05806C12.3524 3.30214 12.3524 3.69786 12.1083 3.94194L5.69162 10.3586C5.44754 10.6027 5.05181 10.6027 4.80773 10.3586L1.89107 7.44194C1.64699 7.19786 1.64699 6.80214 1.89107 6.55806C2.13514 6.31398 2.53087 6.31398 2.77495 6.55806L5.24967 9.03278L11.2244 3.05806C11.4685 2.81398 11.8642 2.81398 12.1083 3.05806Z' fill='black'/> </svg>");
+            }
 
             //  Disabled
             &[disabled] {
                 --check-radio-color-background: var(--check-radio-color-background-disabled);
 
-                background-image: url("data:image/svg+xml,%3Csvg width='12' height='12' viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M9 16.2L4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4L9 16.2z' fill='hsl(240, 10%, 51%)'/%3E%3C/svg%3E");
+                background-image: url("data:image/svg+xml,<svg width='14' height='14' viewBox='0 0 14 14' fill='none' xmlns='http://www.w3.org/2000/svg'> <path fill-rule='evenodd' clip-rule='evenodd' d='M12.1083 3.05806C12.3524 3.30214 12.3524 3.69786 12.1083 3.94194L5.69162 10.3586C5.44754 10.6027 5.05181 10.6027 4.80773 10.3586L1.89107 7.44194C1.64699 7.19786 1.64699 6.80214 1.89107 6.55806C2.13514 6.31398 2.53087 6.31398 2.77495 6.55806L5.24967 9.03278L11.2244 3.05806C11.4685 2.81398 11.8642 2.81398 12.1083 3.05806Z' fill='gray'/> </svg>");
             }
         }
 
@@ -201,7 +212,7 @@
             --check-radio-color-background: var(--check-radio-color-background-disabled);
             --check-radio-color-border: var(--check-radio-color-border-disabled);
 
-            background-image: url("data:image/svg+xml,%3Csvg width='12' height='12' viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M9 16.2L4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4L9 16.2z' fill='hsl(240, 10%, 51%)'/%3E%3C/svg%3E");
+            background-image: url("data:image/svg+xml,<svg width='14' height='14' viewBox='0 0 14 14' fill='none' xmlns='http://www.w3.org/2000/svg'> <path fill-rule='evenodd' clip-rule='evenodd' d='M12.1083 3.05806C12.3524 3.30214 12.3524 3.69786 12.1083 3.94194L5.69162 10.3586C5.44754 10.6027 5.05181 10.6027 4.80773 10.3586L1.89107 7.44194C1.64699 7.19786 1.64699 6.80214 1.89107 6.55806C2.13514 6.31398 2.53087 6.31398 2.77495 6.55806L5.24967 9.03278L11.2244 3.05806C11.4685 2.81398 11.8642 2.81398 12.1083 3.05806Z' fill='gray'/> </svg>");
         }
 
         &--indeterminate,
@@ -209,13 +220,18 @@
             --check-radio-color-background: var(--check-radio-color-background-checked);
             --check-radio-color-border: var(--check-radio-color-border-checked);
 
-            background-image: url("data:image/svg+xml,%3Csvg width='12' height='12' viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M19 13H5v-2h14v2z' fill='%23fff'/%3E%3C/svg%3E");
+            background-image: url("data:image/svg+xml,<svg width='14' height='14' viewBox='0 0 14 14' fill='none' xmlns='http://www.w3.org/2000/svg'> <path d='M11.9955 7C11.9955 7.55228 11.5478 8 10.9955 8H3.00415C2.45187 8 2.00415 7.55228 2.00415 7V7C2.00415 6.44772 2.45187 6 3.00415 6H10.9955C11.5478 6 11.9955 6.44772 11.9955 7V7Z' fill='white'/> </svg>");
+            border: 0;
+
+            [data-dt-theme="dark"] & {
+                background-image: url("data:image/svg+xml,<svg width='14' height='14' viewBox='0 0 14 14' fill='none' xmlns='http://www.w3.org/2000/svg'> <path d='M11.9955 7C11.9955 7.55228 11.5478 8 10.9955 8H3.00415C2.45187 8 2.00415 7.55228 2.00415 7V7C2.00415 6.44772 2.45187 6 3.00415 6H10.9955C11.5478 6 11.9955 6.44772 11.9955 7V7Z' fill='black'/> </svg>");
+            }
 
             &[disabled] {
                 --check-radio-color-background: var(--check-radio-color-background-disabled);
                 --check-radio-color-border: var(--check-radio-color-border-disabled);
 
-                background-image: url("data:image/svg+xml,%3Csvg width='12' height='12' viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M19 13H5v-2h14v2z' fill='hsl(240, 10%, 51%)'/%3E%3C/svg%3E");
+                background-image: url("data:image/svg+xml,<svg width='14' height='14' viewBox='0 0 14 14' fill='none' xmlns='http://www.w3.org/2000/svg'> <path d='M11.9955 7C11.9955 7.55228 11.5478 8 10.9955 8H3.00415C2.45187 8 2.00415 7.55228 2.00415 7V7C2.00415 6.44772 2.45187 6 3.00415 6H10.9955C11.5478 6 11.9955 6.44772 11.9955 7V7Z' fill='gray'/> </svg>");
             }
         }
 
@@ -224,7 +240,7 @@
             --check-radio-color-background: var(--check-radio-color-background-disabled);
             --check-radio-color-border: var(--check-radio-color-border-disabled);
 
-            background-image: url("data:image/svg+xml,%3Csvg width='12' height='12' viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M19 13H5v-2h14v2z' fill='hsl(240, 10%, 51%)'/%3E%3C/svg%3E");
+            background-image: url("data:image/svg+xml,<svg width='14' height='14' viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'><path d='M19 13H5v-2h14v2z' fill='hsl(240, 10%, 51%)'/></svg>");
         }
 
         //  Disabled
@@ -252,20 +268,22 @@
             --check-radio-color-background: var(--check-radio-color-background-disabled);
         }
 
-        &:focus-visible,
-        &:checked:focus-visible {
-          box-shadow: var(--dt-shadow-focus), inset 0 0 0 var(--dt-size-200) var(--dt-color-neutral-white);
-        }
-
         &:checked {
             --check-radio-color-background: var(--check-radio-color-background-checked);
 
-            box-shadow: inset 0 0 0 var(--dt-size-200) var(--dt-color-neutral-white);
+            border-color: transparent;
+            box-shadow: inset 0 0 0 var(--dt-size-200) var(--dt-radio-color-foreground-checked);
 
             // Disabled
             &[disabled] {
                 --check-radio-color-background: var(--check-radio-color-background-disabled);
             }
+        }
+
+        &:focus,
+        &:focus-visible,
+        &:checked:focus-visible {
+          box-shadow: var(--dt-shadow-focus), inset 0 0 0 var(--dt-size-200) var(--dt-radio-color-foreground-checked);
         }
 
         &--disabled:checked {

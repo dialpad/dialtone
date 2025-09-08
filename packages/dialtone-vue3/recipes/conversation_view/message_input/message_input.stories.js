@@ -1,10 +1,13 @@
 import { action } from '@storybook/addon-actions';
-import { createTemplateFromVueFile } from '@/common/storybook_utils';
+import { createTemplateFromVueFile, getIconNames } from '@/common/storybook_utils';
 import DtRecipeMessageInput from './message_input.vue';
 import DtRecipeMessageInputDefaultTemplate from './message_input_default.story.vue';
 import mentionSuggestion from '@/components/rich_text_editor/mention_suggestion';
 import channelSuggestion from '@/components/rich_text_editor/channel_suggestion';
 import slashCommandSuggestion from '@/components/rich_text_editor/slash_command_suggestion';
+import customEmojiJson from '@/common/custom-emoji.json';
+
+const iconsList = getIconNames();
 
 /*
   Controls
@@ -32,12 +35,32 @@ export const argTypesData = {
       type: 'text',
     },
   },
+  customActionIcons: {
+    table: {
+      type: { summary: 'VNode' },
+    },
+    control: {
+      type: 'text',
+    },
+  },
   middle: {
     table: {
       type: { summary: 'VNode' },
     },
     control: {
       type: 'text',
+    },
+  },
+  sendIcon: {
+    table: {
+      type: { summary: 'VNode' },
+    },
+    options: iconsList,
+    control: {
+      type: 'select',
+      labels: {
+        undefined: '(empty)',
+      },
     },
   },
   top: {
@@ -49,6 +72,14 @@ export const argTypesData = {
     },
   },
   sendButton: {
+    table: {
+      type: { summary: 'VNode' },
+    },
+    control: {
+      type: 'text',
+    },
+  },
+  scheduleMessage: {
     table: {
       type: { summary: 'VNode' },
     },
@@ -85,6 +116,24 @@ export const argTypesData = {
   },
 
   onInput: {
+    table: {
+      disable: true,
+    },
+  },
+
+  onJsonInput: {
+    table: {
+      disable: true,
+    },
+  },
+
+  onHtmlInput: {
+    table: {
+      disable: true,
+    },
+  },
+
+  onTextInput: {
     table: {
       disable: true,
     },
@@ -143,6 +192,18 @@ export const argTypesData = {
       disable: true,
     },
   },
+
+  onAddEmoji: {
+    table: {
+      disable: true,
+    },
+  },
+
+  onEmojiScrollBottomReached: {
+    table: {
+      disable: true,
+    },
+  },
 };
 
 // Set default values at the story level here.
@@ -151,38 +212,25 @@ export const argsData = {
   top: '',
   middle: '',
   emojiGiphyPicker: '',
+  customActionIcons: '',
   sendButton: '',
+  scheduleMessage: '',
   smsCount: '',
   placeholder: 'New message',
   inputAriaLabel: 'Input text field',
   maxHeight: '40vh',
   emojiPickerProps: {
-    searchNoResultsLabel: 'No results',
-    searchResultsLabel: 'Search results',
-    searchPlaceholderLabel: 'Search...',
-    skinSelectorButtonTooltipLabel: 'Change default skin tone',
-    tabSetLabels: [
-      'Most recently used',
-      'Smileys and people',
-      'Nature',
-      'Food',
-      'Activity',
-      'Travel',
-      'Objects',
-      'Symbols',
-      'Flags',
-    ],
     skinTone: 'Default',
   },
+  setLinkPlaceholder: 'e.g. https://www.dialpad.com',
+  sendIcon: undefined,
   showCharacterLimit: {
     count: 1000,
     warning: 500,
     message: 'You have exceeded the character limit',
   },
   showSend: {
-    icon: 'send',
-    ariaLabel: 'send',
-    tooltipLabel: 'Send',
+    text: '',
   },
   mentionSuggestion,
   channelSuggestion,
@@ -191,6 +239,10 @@ export const argsData = {
   onFocus: action('focus'),
   onBlur: action('blur'),
   onInput: action('input'),
+  onJsonInput: action('json-input'),
+  onHtmlInput: action('html-input'),
+  onTextInput: action('text-input'),
+  onAddEmoji: action('add-emoji'),
   onSelectMedia: action('select-media'),
   onSelectedEmoji: action('selected-emoji'),
   onSelectedCommand: action('selected-command'),
@@ -200,6 +252,7 @@ export const argsData = {
   onNoticeClose: action('notice-close'),
   onSkinTone: action('skin-tone'),
   onCancel: action('cancel'),
+  onEmojiScrollBottomReached: action('emoji-scroll-bottom-reached'),
 };
 
 // Story Collection
@@ -224,6 +277,16 @@ export const Default = {
   args: {},
 };
 
+export const SendButtonWithText = {
+  render: DefaultTemplate,
+  args: {
+    ...argsData,
+    showSend: {
+      text: 'Save',
+    },
+  },
+};
+
 export const InitializeWithLineBreaks = {
   render: DefaultTemplate,
   args: {
@@ -234,13 +297,7 @@ export const InitializeWithLineBreaks = {
 export const WithoutExtensions = {
   render: DefaultTemplate,
   args: {
-    allowBlockquote: false,
-    allowBold: false,
-    allowBulletList: false,
-    allowItalic: false,
-    allowStrike: false,
-    allowUnderline: false,
-    allowCodeblock: false,
+    richText: false,
   },
 };
 
@@ -248,7 +305,7 @@ export const WithMeetingPill = {
   render: DefaultTemplate,
   args: {
     slashCommandSuggestion: {
-      items: ({ query }) => {
+      items: () => {
         return [
           {
             command: 'dpm',
@@ -257,7 +314,18 @@ export const WithMeetingPill = {
         ];
       },
     },
-    modelValue: '<meeting-pill text="Start a meeting" close-button-aria-label="Delete meeting pill"/>',
+    modelValue: '<meeting-pill text="Start a meeting"/>',
     preventTyping: true,
+  },
+};
+
+export const WithCustomEmoji = {
+  render: DefaultTemplate,
+  args: {
+    value: 'This is a test with custom emojis',
+    emojiPickerProps: {
+      skinTone: 'Default',
+      customEmojis: customEmojiJson,
+    },
   },
 };

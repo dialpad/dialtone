@@ -42,9 +42,20 @@
 //      Sets the style, width, color, and other characteristics
 //      elements' outlines. These shouldn't be confused with borders.
 //  ----------------------------------------------------------------------------
-.d-ol-focusring { box-shadow: var(--dt-shadow-focus) !important; outline: none !important; }
-.d-ol-focusring-inset { box-shadow: var(--dt-shadow-focus-inset) !important; outline: none !important; }
-.d-ol-none { box-shadow: none !important; outline: none !important; }
+.d-ol-focusring {
+  outline: none !important;
+  box-shadow: var(--dt-shadow-focus) !important;
+}
+
+.d-ol-focusring-inset {
+  outline: none !important;
+  box-shadow: var(--dt-shadow-focus-inset) !important;
+ }
+
+.d-ol-none {
+  outline: none !important;
+  box-shadow: none !important;
+}
 
 //============================================================================
 //  $   POINTER EVENTS

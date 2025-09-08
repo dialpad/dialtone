@@ -1,5 +1,5 @@
 <template>
-  <div class="d-ml-auto d-d-none lg:d-d-flex d-ai-center">
+  <div class="d-ml-auto d-d-flex lg:d-d-none d-ai-center">
     <dt-button
       v-show="!isMenuOpen"
       importance="clear"

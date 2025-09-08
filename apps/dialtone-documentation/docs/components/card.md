@@ -22,7 +22,7 @@ storybook: https://dialtone.dialpad.com/vue/?path=/story/components-card--defaul
       <div>Content slot. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec fermentum molestie semper. Morbi finibus nulla turpis, nec molestie mi rutrum.</div>
     </div>
     <div class="d-card__footer">
-      <div class="d-d-flex d-gg8">
+      <div class="d-d-flex d-g8">
         <button type="button" class="d-btn d-btn--sm d-btn--outlined">Button</button>
       </div>
     </div>
@@ -39,11 +39,13 @@ They should be easy to scan for relevant and actionable information. Elements, l
 
 - To display content and actions on a single topic.
 </template>
+
 <template #dont>
 
 - Add too many call-to-action elements to the same card. A card should only contain a single primary action.
 - Inform users about important changes.
 </template>
+
 </dialtone-usage>
 
 ### Best Practices
@@ -52,7 +54,7 @@ They should be easy to scan for relevant and actionable information. Elements, l
 - The content of a card should be concise and offer only a preview of detailed content.
 - The headings should set clear expectations about the card’s purpose.
 
-## Variants and examples
+## Variants and Examples
 
 ### Base
 
@@ -165,7 +167,7 @@ showHtmlWarning />
       <div>Content slot. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec fermentum molestie semper. Morbi finibus nulla turpis, nec molestie mi rutrum.</div>
     </div>
     <div class="d-card__footer">
-      <div class="d-d-flex d-gg8">
+      <div class="d-d-flex d-g8">
         <button type="button" class="d-btn d-btn--sm d-btn--outlined">Button</button>
       </div>
     </div>
@@ -179,7 +181,7 @@ htmlCode='
     <div>Content slot. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec fermentum molestie semper. Morbi finibus nulla turpis, nec molestie mi rutrum.</div>
   </div>
   <div class="d-card__footer">
-    <div class="d-d-flex d-gg8">
+    <div class="d-d-flex d-g8">
       <button type="button" class="d-btn d-btn--sm d-btn--outlined">Button</button>
     </div>
   </div>
@@ -202,7 +204,7 @@ vueCode='
 '
 showHtmlWarning />
 
-### Content only
+### Content Only
 
 <code-well-header>
   <div class="d-card d-w264">
@@ -229,7 +231,7 @@ vueCode='
 '
 showHtmlWarning />
 
-### With Header, Footer and scrollable content
+### With Header, Footer and Scrollable Content
 
 <code-well-header>
   <div class="d-card d-w264">
@@ -245,7 +247,7 @@ showHtmlWarning />
       <div>Content slot. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec fermentum molestie semper. Morbi finibus nulla turpis, nec molestie mi rutrum.</div>
     </div>
     <div class="d-card__footer">
-      <div class="d-d-flex d-gg8">
+      <div class="d-d-flex d-g8">
         <button type="button" class="d-btn d-btn--sm d-btn--outlined">Button</button>
       </div>
     </div>
@@ -267,7 +269,7 @@ htmlCode='
     <div>Content slot. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec fermentum molestie semper. Morbi finibus nulla turpis, nec molestie mi rutrum.</div>
   </div>
   <div class="d-card__footer">
-    <div class="d-d-flex d-gg8">
+    <div class="d-d-flex d-g8">
       <button type="button" class="d-btn d-btn--sm d-btn--outlined">Button</button>
     </div>
   </div>

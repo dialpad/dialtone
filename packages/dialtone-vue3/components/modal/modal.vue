@@ -87,28 +87,27 @@
           <!-- @slot Slot for dialog footer content, often containing cancel and confirm buttons. -->
           <slot name="footer" />
         </footer>
+        <sr-only-close-button
+          v-if="hideClose"
+          @close="close"
+        />
         <dt-button
-          v-if="!hideClose"
+          v-else
           class="d-modal__close"
-          circle
-          size="lg"
+          data-qa="dt-modal-close-button"
+          size="md"
+          kind="muted"
           importance="clear"
-          :aria-label="closeButtonProps.ariaLabel"
-          v-bind="closeButtonProps"
+          :aria-label="closeButtonTitle"
+          :title="closeButtonTitle"
           @click="close"
         >
-          <template #icon>
-            <dt-icon
-              name="close"
-              size="400"
+          <template #icon="{ iconSize }">
+            <dt-icon-close
+              :size="iconSize"
             />
           </template>
         </dt-button>
-        <sr-only-close-button
-          v-if="showVisuallyHiddenClose"
-          :visually-hidden-close-label="visuallyHiddenCloseLabel"
-          @close="close"
-        />
       </div>
     </transition>
   </dt-lazy-show>
@@ -117,19 +116,19 @@
 <script>
 /* eslint-disable max-lines */
 import { DtButton } from '@/components/button';
-import { DtIcon } from '@/components/icon';
+import { DtIconClose } from '@dialpad/dialtone-icons/vue3';
 import Modal from '@/common/mixins/modal';
 import {
   MODAL_BANNER_KINDS,
   MODAL_KIND_MODIFIERS,
   MODAL_SIZE_MODIFIERS,
 } from './modal_constants';
-import { getUniqueString, hasSlotContent } from '@/common/utils';
+import { returnFirstEl, getUniqueString, hasSlotContent, disableRootScrolling, enableRootScrolling } from '@/common/utils';
 import { DtLazyShow } from '@/components/lazy_show';
 import { EVENT_KEYNAMES } from '@/common/constants';
-import SrOnlyCloseButtonMixin from '@/common/mixins/sr_only_close_button';
 import SrOnlyCloseButton from '@/common/sr_only_close_button.vue';
 import { NOTICE_KINDS } from '@/components/notice';
+import { DialtoneLocalization } from '@/localization';
 
 /**
  * Modals focus the user’s attention exclusively on one task or piece of information
@@ -137,30 +136,19 @@ import { NOTICE_KINDS } from '@/components/notice';
  * @see https://dialtone.dialpad.com/components/modal.html
  */
 export default {
+  compatConfig: { MODE: 3 },
   name: 'DtModal',
 
   components: {
     DtLazyShow,
     DtButton,
-    DtIcon,
+    DtIconClose,
     SrOnlyCloseButton,
   },
 
-  mixins: [Modal, SrOnlyCloseButtonMixin],
+  mixins: [Modal],
 
   props: {
-    /**
-     * A set of props to be passed into the modal's close button.
-     * Requires an 'ariaLabel' property.
-     */
-    closeButtonProps: {
-      type: Object,
-      required: true,
-      validator: (props) => {
-        return !!props.ariaLabel;
-      },
-    },
-
     /**
      * Body text to display as the modal's main content.
      */
@@ -364,6 +352,7 @@ export default {
       MODAL_BANNER_KINDS,
       EVENT_KEYNAMES,
       hasSlotContent,
+      i18n: new DialtoneLocalization(),
     };
   },
 
@@ -371,8 +360,14 @@ export default {
     modalListeners () {
       return {
         click: event => {
-          if (!this.closeOnClick) return;
-          (event.target === event.currentTarget) && this.close();
+          // Handle backdrop clicks for closing modal
+          if (this.closeOnClick && event.target === event.currentTarget) {
+            this.close();
+          } else if (this.show && event.target !== event.currentTarget) {
+            // Ensure focus stays within modal when clicking inside it
+            this.handleModalClick(event);
+          }
+
           this.$emit('click', event);
         },
 
@@ -389,9 +384,17 @@ export default {
           this.$emit('keydown', event);
         },
 
-        'after-enter': event => {
+        'after-enter': async () => {
           this.$emit('update:show', true);
-          (event.target === event.currentTarget) && this.setFocusAfterTransition();
+          await this.setFocusAfterTransition();
+        },
+
+        focusin: event => {
+          // Ensure focus stays within modal
+          if (this.show && !this.$el.contains(event.target)) {
+            event.preventDefault();
+            this.focusFirstElement();
+          }
         },
       };
     },
@@ -407,28 +410,25 @@ export default {
     bannerKindClass () {
       return MODAL_BANNER_KINDS[this.bannerKind];
     },
+
+    closeButtonTitle () {
+      return this.i18n.$t('DIALTONE_CLOSE_BUTTON');
+    },
   },
 
   watch: {
     show: {
-      immediate: true,
       handler (isShowing) {
         if (isShowing) {
           // Set a reference to the previously-active element, to which we'll return focus on modal close.
           this.previousActiveElement = document.activeElement;
+          disableRootScrolling(returnFirstEl(this.$el).getRootNode().host);
         } else {
+          enableRootScrolling(returnFirstEl(this.$el).getRootNode().host);
           // Modal is being hidden, so return focus to the previously active element before clearing the reference.
           this.previousActiveElement?.focus();
           this.previousActiveElement = null;
         }
-      },
-    },
-
-    $props: {
-      immediate: true,
-      deep: true,
-      handler () {
-        this.validateProps();
       },
     },
   },
@@ -438,11 +438,11 @@ export default {
       this.$emit('update:show', false);
     },
 
-    setFocusAfterTransition () {
+    async setFocusAfterTransition () {
       if (this.initialFocusElement === 'first') {
-        this.focusFirstElement();
+        await this.focusFirstElement();
       } else if (this.initialFocusElement.startsWith('#')) {
-        this.focusElementById(this.initialFocusElement);
+        await this.focusElementById(this.initialFocusElement);
       } else if (this.initialFocusElement instanceof HTMLElement) {
         this.initialFocusElement.focus();
       }
@@ -454,10 +454,17 @@ export default {
       }
     },
 
-    validateProps () {
-      if (this.hideClose && !this.visuallyHiddenClose) {
-        console.error(`If hideClose prop is true, visuallyHiddenClose and visuallyHiddenCloseLabel props
-        need to be set so the component always includes a close button`);
+    handleModalClick (event) {
+      // Ensure focus stays within modal when clicking inside it
+      const clickedElement = event.target;
+      const focusableElements = this._getFocusableElements();
+
+      // If the clicked element is not focusable, ensure focus stays in modal
+      if (focusableElements.length && !focusableElements.includes(clickedElement)) {
+        // Check if current active element is still within the modal
+        if (!focusableElements.includes(document.activeElement)) {
+          this.focusFirstElement();
+        }
       }
     },
   },

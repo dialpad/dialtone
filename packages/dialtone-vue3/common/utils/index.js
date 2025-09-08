@@ -2,7 +2,10 @@ import {
   DEFAULT_PREFIX,
   DEFAULT_VALIDATION_MESSAGE_TYPE,
   VALIDATION_MESSAGE_TYPES,
-} from '../constants';
+} from '../constants/index.js';
+import {
+  configVue2StyleClassAttrs,
+} from '../config';
 import {
   h,
   Comment,
@@ -198,9 +201,59 @@ export const pascalCaseToKebabCase = (string) => {
 
 export const extractVueListeners = (attrs) => {
   const listeners = Object.entries(attrs)
-    .filter(([key]) => key.startsWith('on'));
+    .filter(([key]) => key.match(/on[A-Z]/));
   return Object.fromEntries(listeners);
 };
+
+/**
+ * $el works very differently than in vue 2, if the first node in the template is a text node
+ * such as a comment it will return that instead of the first actual element. This function
+ * will recursively return the first element in the template instead of the first node.
+ * @param el
+ * @returns {HTMLElement} The first element in the template
+ */
+export const returnFirstEl = (el) => {
+  if (el?.nodeType === Node.ELEMENT_NODE) {
+    return el;
+  } else if (!el?.nodeType) {
+    return null;
+  } else {
+    return returnFirstEl(el?.nextSibling);
+  }
+};
+
+/**
+  Only will apply changes if the config option configVue2StyleClassAttrs is set to true. It is false by default.
+
+  Removes the class and style attributes from the $attrs. This is useful for vue 2 to vue 3 migration
+  purposes so we don't cause breaking changes due to INSTANCE_ATTRS_CLASS_STYLE
+  https://v3-migration.vuejs.org/breaking-changes/attrs-includes-class-style
+
+  Remove the class and style attributes from the v-bind like so so v-bind="removeClassStyleAttrs($attrs)",
+  and then apply them to the root element manually via:
+
+  :class="$attrs.class"
+  :style="$attrs.style"
+*/
+export function removeClassStyleAttrs (attrs) {
+  if (!configVue2StyleClassAttrs) return attrs;
+  const listeners = Object.entries(attrs)
+    .filter(([key]) => !['class', 'style'].includes(key));
+  return Object.fromEntries(listeners);
+}
+
+/**
+  This should be applied to the root element on components using inheritAttrs: false.
+  This will add the class and style attributes back to the root element if configVue2StyleClassAttrs
+  is enabled.
+*/
+export function addClassStyleAttrs (attrs) {
+  if (!configVue2StyleClassAttrs) return {};
+  return {
+    class: attrs.class,
+    style: attrs.style,
+  };
+}
 
 /*
 * Set's a global timer to debounce the execution of a function.
@@ -316,7 +369,7 @@ export function getPhoneNumberRegex (minLength = 7, maxLength = 15) {
       `{${minLength},${maxLength}}` +
       ')(?=\\b)(?=\\W(?=\\W|$)|\\s|$)',
     );
-  } catch (e) {
+  } catch {
     // eslint-disable-next-line no-console
     console.warn('This browser doesn\'t support regex lookahead/lookbehind');
   }
@@ -380,7 +433,7 @@ export function isEmailAddress (input) {
  * @returns {String}
  */
 export function safeConcatStrings (elements) {
-  return elements.filter(str => !!str).join(' ');
+  return elements.filter(str => !!str).join(', ');
 }
 
 /**
@@ -391,6 +444,70 @@ export function safeConcatStrings (elements) {
  */
 export function capitalizeFirstLetter (str, locale = 'en-US') {
   return str.replace(/^\p{CWU}/u, char => char.toLocaleUpperCase(locale));
+}
+
+/**
+ * Warns if the component is not mounted properly. Useful for tests.
+ * @param {HTMLElement} componentRef - the component reference
+ * @param {string} componentName - the component name
+ */
+// eslint-disable-next-line complexity
+export function warnIfUnmounted (componentRef, componentName) {
+  if (typeof process === 'undefined') return;
+  if (process.env.NODE_ENV !== 'test') return;
+  if (!componentRef || !(componentRef instanceof HTMLElement) || !document?.body) return;
+  if (!document.body.contains(componentRef)) {
+    console.warn(`The ${componentName} component is not attached to the document body. This may cause issues.`);
+  }
+}
+
+/**
+ * checks whether the dt-scrollbar is being used on the root element.
+ * @param rootElement {HTMLElement}
+ * @returns {boolean}
+ */
+function isDtScrollbarInUse (rootElement = document.documentElement) {
+  if (rootElement.hasAttribute('data-overlayscrollbars')) {
+    return true;
+  }
+  return false;
+}
+
+/**
+ * This will disable scrolling on the root element regardless of whether you are using dt-scrollbar or not.
+ * @param rootElement {HTMLElement}
+ */
+export function disableRootScrolling (rootElement = document.documentElement) {
+  if (isDtScrollbarInUse(rootElement)) {
+    rootElement.classList.add('d-scrollbar-disabled');
+  } else {
+    rootElement.classList.add('d-of-hidden');
+  }
+}
+
+/**
+ * This will enable scrolling on the root element regardless of whether you are using dt-scrollbar or not.
+ * @param rootElement {HTMLElement}
+ */
+export function enableRootScrolling (rootElement = document.documentElement) {
+  if (isDtScrollbarInUse(rootElement)) {
+    rootElement.classList.remove('d-scrollbar-disabled');
+  } else {
+    rootElement.classList.remove('d-of-hidden');
+  }
+}
+
+/**
+ * This will take a text string e.g "accessibility-mac"
+ * and convert it to our Fluent Key standard format "ACCESSIBILITY_MAC"
+ * @param text
+ * @returns {string}
+ */
+export function toFluentKeyString (text) {
+  return text
+    .replaceAll(/[ -]/g, '_')
+    .replaceAll(/\W/g, '')
+    .toUpperCase();
 }
 
 export default {
@@ -405,6 +522,9 @@ export default {
   flushPromises,
   kebabCaseToPascalCase,
   extractVueListeners,
+  removeClassStyleAttrs,
+  addClassStyleAttrs,
+  returnFirstEl,
   debounce,
   isOutOfViewPort,
   getPhoneNumberRegex,
@@ -414,4 +534,6 @@ export default {
   isURL,
   safeConcatStrings,
   capitalizeFirstLetter,
+  disableRootScrolling,
+  enableRootScrolling,
 };

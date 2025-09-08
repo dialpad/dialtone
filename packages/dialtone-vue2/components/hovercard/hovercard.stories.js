@@ -50,6 +50,11 @@ export const argTypesData = {
   },
 
   // Props
+  open: {
+    control: {
+      type: 'boolean',
+    },
+  },
   fallbackPlacements: {
     description: `If the popover does not fit in the direction described by "placement",
     it will attempt to change its direction to the "fallbackPlacements".
@@ -161,7 +166,10 @@ export default {
 export const Default = {
   render: (argsData) => createRenderConfig(DtHovercard, DtHovercardDefaultTemplate, argsData),
   decorators: [() => ({
-    template: `<div class="d-d-flex d-jc-center d-ai-center d-h464"><story />
+    template: `<div class="d-d-flex d-jc-center d-ai-center d-h464">
+      <div class="d-w164">
+        <story />
+      </div>
     </div>`,
   })],
 

@@ -33,6 +33,8 @@
     --modal-header-color-text: var(--dt-color-foreground-primary);
     --modal-dialog-shadow: var(--dt-shadow-large);
 
+    // If we don't set this the native app header region will override all click events on the modal overlay
+    -webkit-app-region: no-drag;
     position: fixed;
     inset: 0;
     z-index: var(--zi-hide);
@@ -50,6 +52,9 @@
 
 .d-modal--transparent {
   --modal-backdrop-color-background: var(--d-bgc-transparent);
+
+  // If we don't set this the native app header region will override all click events on the modal overlay
+  -webkit-app-region: no-drag;
 
   &[aria-hidden='false'] {
     position: fixed;
@@ -124,6 +129,7 @@
   --modal-header-padding: var(--dt-space-550); // 24
 
   margin: 0 !important;
+  padding-right: var(--modal-header-padding);
   color: var(--modal-header-color-text);
   font-weight: var(--dt-font-weight-medium);
   font-size: var(--dt-font-size-400);
@@ -142,8 +148,8 @@
 //  ----------------------------------------------------------------------------
 .d-modal__close {
   position: absolute;
-  top: var(--dt-space-500); // 16
-  right: var(--dt-space-500); // 16
+  inset-block-start: var(--dt-space-400);
+  inset-inline-end: var(--dt-space-400);
   margin: 0 !important;
 }
 

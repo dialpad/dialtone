@@ -30,6 +30,9 @@
     --popover-color-border: var(--dt-color-border-subtle);
     --popover-shadow: var(--dt-shadow-card);
 
+    // If we don't set this the native app header region will override all click events within the popover
+    -webkit-app-region: no-drag;
+
     &,
     *,
     *::before,
@@ -46,6 +49,7 @@
     border: var(--popover-border-width) solid var(--popover-color-border);
     border-radius: var(--popover-border-radius);
     box-shadow: var(--popover-shadow);
+    visibility: visible;
 
     // to be set on the dialog when it is modal
     &--modal {
@@ -96,5 +100,11 @@
   &__footer {
     grid-row: 3;
     border-top: var(--popover-border-width) solid var(--popover-color-border);
+  }
+}
+
+.tippy-box[data-popper-reference-hidden] {
+  .d-popover__dialog {
+    visibility: hidden;
   }
 }

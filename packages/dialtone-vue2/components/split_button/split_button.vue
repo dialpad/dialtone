@@ -22,7 +22,7 @@
     <!-- @slot Omega (right) content slot, overrides omega button styling and functionality completely -->
     <slot name="omega">
       <dt-dropdown
-        v-if="$slots.dropdownList"
+        v-if="dropdownSlotIsSet"
         :placement="dropdownPlacement"
         @click="isDropdownOpen = true"
         @opened="open => isDropdownOpen = open"
@@ -50,7 +50,6 @@
           />
         </template>
       </dt-dropdown>
-
       <split-button-omega
         v-else
         v-bind="omegaButtonProps"
@@ -78,6 +77,7 @@ import {
 import SplitButtonAlpha from './split_button-alpha.vue';
 import SplitButtonOmega from './split_button-omega.vue';
 import { DtDropdown } from '@/components/dropdown';
+import { warnIfUnmounted } from '@/common/utils';
 
 export default {
   name: 'DtSplitButton',
@@ -317,6 +317,10 @@ export default {
     omegaSlotIsSet () {
       return this.$scopedSlots.omega && this.$scopedSlots.omega();
     },
+
+    dropdownSlotIsSet () {
+      return this.$scopedSlots.dropdownList && this.$scopedSlots.dropdownList();
+    },
   },
 
   created () {
@@ -325,6 +329,10 @@ export default {
 
   updated () {
     this.validateProps();
+  },
+
+  mounted () {
+    warnIfUnmounted(this.$el, this.$options.name);
   },
 
   methods: {

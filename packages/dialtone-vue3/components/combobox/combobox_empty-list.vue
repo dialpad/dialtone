@@ -8,7 +8,7 @@
         role="option"
         navigation-type="none"
         type="custom"
-        :class="['dt-empty-list-item', itemClass]"
+        :class="['d-combobox__empty-list-item', itemClass]"
       >
         <span>{{ message }}</span>
       </dt-list-item>
@@ -17,7 +17,7 @@
 </template>
 
 <script>
-import { DtListItem } from '../list_item';
+import { DtListItem } from '@/components/list_item';
 
 export default {
   name: 'ComboboxEmptyList',
@@ -45,14 +45,3 @@ export default {
   },
 };
 </script>
-
-<style lang="less">
-.dt-empty-list-item {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: var(--dt-font-size-200);
-  line-height: var(--lh4);
-  padding: var(--dt-space-300) var(--dt-space-450);
-}
-</style>

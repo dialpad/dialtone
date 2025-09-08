@@ -21,12 +21,18 @@ const del = require('del');
 //  ================================================================================
 const paths = {
   clean: {
-    dist: './dist/**',
+    dist: ['./dist/**'],
   },
   input: {
-    css: './packages/dialtone-css/lib/dist/**',
+    css: [
+      './packages/dialtone-css/lib/dist/**',
+      '!./packages/dialtone-css/lib/dist/js/**',
+      '!./packages/dialtone-css/lib/dist/svg/**',
+      '!./packages/dialtone-css/lib/dist/tokens/**',
+    ],
     tokens: [
       './packages/dialtone-tokens/dist/**',
+      '!./packages/dialtone-tokens/dist/less/**',
       '!./packages/dialtone-tokens/dist/android/**',
       '!./packages/dialtone-tokens/dist/ios/**',
     ],
@@ -35,7 +41,6 @@ const paths = {
   },
   output: {
     css: './dist/css',
-    icons: './dist/icons',
     tokens: './dist/tokens',
     vue2: './dist/vue2',
     vue3: './dist/vue3',
@@ -61,7 +66,7 @@ const cleanUp = (items) => {
 
 //  --  Clean out dist folder
 const cleanDist = () => {
-  return cleanUp([paths.clean.dist]);
+  return cleanUp(paths.clean.dist);
 };
 
 //  ================================================================================

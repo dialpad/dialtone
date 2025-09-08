@@ -1,12 +1,13 @@
 <template>
-  <aside class="d-toast-wrapper">
+  <aside :class="['d-toast-wrapper', { 'd-ps-fixed': fixed }]">
     <dt-toast
       :title="title"
       :show="show"
       :important="important"
+      :duration="duration"
       :kind="kind"
-      :close-button-props="{ ariaLabel: 'Close button' }"
       @close="$emit('close')"
+      @update:show="$emit('update:show', $event)"
     >
       Message body with
       <dt-link
@@ -51,9 +52,19 @@ export default {
       type: String,
       default: 'base',
     },
+
+    duration: {
+      type: Number,
+      default: null,
+    },
+
+    fixed: {
+      type: Boolean,
+      default: true,
+    },
   },
 
-  emits: ['close'],
+  emits: ['close', 'update:show'],
   computed: {
     linkClass () {
       if (this.kind === 'warning' && this.important) return 'd-fc-neutral-black';

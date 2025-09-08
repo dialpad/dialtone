@@ -2,17 +2,17 @@
  * @fileoverview Utilities to set Font family, Font weight, Font size, and Line height separately are discouraged in favor of composed typography utilities
  * @author Nina Repetto
  */
-"use strict";
+'use strict';
 
-//------------------------------------------------------------------------------
+// ------------------------------------------------------------------------------
 // Rule Definition
-//------------------------------------------------------------------------------
+// ------------------------------------------------------------------------------
 
 module.exports = {
   meta: {
     type: 'suggestion', // `problem`, `suggestion`, or `layout`
     docs: {
-      description: "Utilities to set Font family, Font weight, Font size, and Line height separately are discouraged in favor of composed typography utilities",
+      description: 'Utilities to set Font family, Font weight, Font size, and Line height separately are discouraged in favor of composed typography utilities',
       recommended: false,
       url: 'https://github.com/dialpad/dialtone/blob/staging/packages/eslint-plugin-dialtone/docs/rules/recommend-typography-style.md', // URL to the documentation page for this rule
     },
@@ -26,24 +26,37 @@ module.exports = {
     }, // Add messageId and message
   },
 
-  create(context) {
-    return context.parserServices.defineTemplateBodyVisitor({
+  create (context) {
+    const sourceCode = context.sourceCode ?? context.getSourceCode();
+    return sourceCode.parserServices.defineTemplateBodyVisitor({
       // Visitor functions for Vue templates
-      VAttribute(node) {
+      VAttribute (node) {
         if (node.key.name === 'class') {
           const classes = node.value.value.split(' ');
-          const typographyClasses = ['d-fs', 'd-fw', 'd-lh', 'd-ff'];
+          const typographyClasses = [
+            'd-fs',
+            'd-fw-normal',
+            'd-fw-medium',
+            'd-fw-semibold',
+            'd-fw-bold',
+            'd-lh',
+            'd-ff-custom',
+            'd-ff-sans',
+            'd-ff-mono',
+            'd-ff-marketing',
+            'd-ff-unset',
+          ];
           const typographyClassesFound = classes.filter((className) =>
-            typographyClasses.some((typographyClass) => className.includes(typographyClass))
+            typographyClasses.some((typographyClass) => className.includes(typographyClass)),
           );
           if (typographyClassesFound.length > 0) {
             context.report({
-              node: node,
+              node,
               messageId: 'recommendTypographyStyle',
             });
           }
         }
-      }
+      },
     });
-  }
+  },
 };

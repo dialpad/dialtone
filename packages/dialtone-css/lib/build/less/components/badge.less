@@ -95,14 +95,15 @@
   }
 
   &--ai {
-    --badge-color-text: var(--dt-badge-color-foreground-bulletin); // missing token or is ok to use this one?
-    --badge-color-background: var(--dt-color-magenta-300);
+    --badge-color-text: var(--dt-badge-color-foreground-ai);
+    --badge-color-background: var(--dt-color-brand-magenta); // fallback to gradient
 
+    text-shadow: var(--dt-size-50) var(--dt-size-50) 0 hsl(var(--dt-color-neutral-black-h), var(--dt-color-neutral-black-s), var(--dt-color-neutral-black-l), 0.6);
     background-image: var(--dt-badge-color-background-ai);
   }
 
   &--outlined {
-    box-shadow: 0 0 0 var(--dt-size-border-150) var(--badge-color-outline) inset;
+    box-shadow: 0 0 0 var(--dt-size-border-100) var(--badge-color-outline) inset;
   }
 
   //  DECORATIVE

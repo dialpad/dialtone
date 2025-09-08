@@ -1,10 +1,11 @@
 import { createLocalVue, mount } from '@vue/test-utils';
+import { flushPromises } from '@/common/utils';
 import DtSplitButton from './split_button.vue';
 import { DtIconSend } from '@dialpad/dialtone-icons/vue2';
-import { DtTooltipDirective } from '@/directives/tooltip';
+import { DtTooltipDirective } from '@/directives/tooltip_directive';
 
 const MOCK_TRANSITION_STUB = () => ({
-  render: function (h) {
+  render: function () {
     return this.$options._renderChildren;
   },
 });
@@ -13,7 +14,9 @@ const MOCK_OMEGA_BUTTON_STUB = vi.fn();
 const MOCK_ALPHA_TOOLTIP_TEXT = 'Alpha tooltip text';
 const MOCK_OMEGA_TOOLTIP_TEXT = 'Omega tooltip text';
 
-const baseProps = {};
+const baseProps = {
+  omegaTooltipText: MOCK_OMEGA_TOOLTIP_TEXT,
+};
 const baseSlots = {
   default: 'Button text',
 };
@@ -24,7 +27,6 @@ const baseStubs = {
 
 let mockProps = {};
 let mockSlots = {};
-let mockStubs = {};
 let mockListeners = {};
 
 const testContext = {};
@@ -40,7 +42,7 @@ describe('DtSplitButton Tests', function () {
     wrapper = mount(DtSplitButton, {
       propsData: { ...baseProps, ...mockProps },
       slots: { ...baseSlots, ...mockSlots },
-      stubs: { ...baseStubs, ...mockStubs },
+      stubs: { ...baseStubs },
       listeners: { ...mockListeners },
       localVue: testContext.localVue,
       attachTo: document.body,
@@ -75,7 +77,6 @@ describe('DtSplitButton Tests', function () {
   afterEach(() => {
     mockProps = {};
     mockSlots = {};
-    mockStubs = {};
     mockListeners = {};
     wrapper.destroy();
   });
@@ -201,6 +202,7 @@ describe('DtSplitButton Tests', function () {
       it('Should render the tooltip with correct text', async () => {
         mockProps = { alphaTooltipText: MOCK_ALPHA_TOOLTIP_TEXT };
         await updateWrapper();
+        await flushPromises();
         await alphaButton.trigger('mouseenter');
 
         const tooltip = document.body.querySelector('[data-qa="dt-tooltip"]');
@@ -213,6 +215,7 @@ describe('DtSplitButton Tests', function () {
       it('Should render the tooltip with correct text', async () => {
         mockProps = { omegaTooltipText: MOCK_OMEGA_TOOLTIP_TEXT };
         await updateWrapper();
+        await flushPromises();
         await omegaButton.trigger('mouseenter');
 
         const tooltip = document.body.querySelector('[data-qa="dt-tooltip"]');

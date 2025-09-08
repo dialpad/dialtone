@@ -1,5 +1,8 @@
 <template>
-  <div class="d-toggle-wrapper">
+  <div
+    :class="['d-toggle-wrapper', wrapperClass]"
+    v-bind="addClassStyleAttrs($attrs)"
+  >
     <label
       v-if="hasSlotContent($slots.default)"
       :class="labelClass"
@@ -30,7 +33,7 @@
 
 <script>
 import { warn } from 'vue';
-import { getUniqueString, hasSlotContent } from '@/common/utils';
+import { getUniqueString, hasSlotContent, removeClassStyleAttrs, addClassStyleAttrs } from '@/common/utils';
 import { TOGGLE_CHECKED_VALUES, TOGGLE_SIZE_MODIFIERS } from '@/components/toggle/toggle_constants';
 
 /**
@@ -38,15 +41,11 @@ import { TOGGLE_CHECKED_VALUES, TOGGLE_SIZE_MODIFIERS } from '@/components/toggl
  * @see https://dialtone.dialpad.com/components/toggle.html
  */
 export default {
+  compatConfig: { MODE: 3 },
 
   name: 'DtToggle',
 
   inheritAttrs: false,
-
-  model: {
-    prop: 'checked',
-    event: 'change',
-  },
 
   props: {
 
@@ -69,10 +68,10 @@ export default {
 
     /**
      * Value of the toggle
-     * @model checked
+     * @model modelValue
      * @values true, false, 'mixed'
      */
-    checked: {
+    modelValue: {
       type: [Boolean, String],
       default: false,
       validator: (v) => TOGGLE_CHECKED_VALUES.includes(v),
@@ -116,6 +115,14 @@ export default {
     },
 
     /**
+     * Additional styling for the wrapper element
+     */
+    wrapperClass: {
+      type: [String, Array, Object],
+      default: undefined,
+    },
+
+    /**
      * A set of props that are passed into the label container
      */
     labelChildProps: {
@@ -133,11 +140,20 @@ export default {
      * @model change
      */
     'change',
+
+    /**
+     * v-model event event
+     *
+     * @event change
+     * @type {Boolean}
+     * @model change
+     */
+    'update:modelValue',
   ],
 
   data () {
     return {
-      internalChecked: this.checked,
+      internalChecked: this.modelValue,
       hasSlotContent,
     };
   },
@@ -145,8 +161,8 @@ export default {
   computed: {
     inputListeners () {
       return {
-        ...this.$attrs,
-        onClick: _ => this.toggleCheckedValue(),
+        ...removeClassStyleAttrs(this.$attrs),
+        onClick: () => this.toggleCheckedValue(),
       };
     },
 
@@ -172,7 +188,7 @@ export default {
   },
 
   watch: {
-    checked (newChecked) {
+    modelValue (newChecked) {
       this.internalChecked = newChecked;
     },
   },
@@ -182,8 +198,10 @@ export default {
   },
 
   methods: {
+    addClassStyleAttrs,
     toggleCheckedValue () {
       this.$emit('change', !this.internalChecked);
+      this.$emit('update:modelValue', !this.internalChecked);
 
       if (this.toggleOnClick) {
         this.internalChecked = !this.internalChecked;

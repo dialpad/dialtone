@@ -2,7 +2,6 @@
   <dt-recipe-callbar-button-with-popover
     :id="$attrs.id"
     :aria-label="$attrs.ariaLabel"
-    :arrow-button-label="$attrs.arrowButtonLabel"
     :placement="$attrs.placement"
     :initial-focus-element="$attrs.initialFocusElement"
     :show-close-button="$attrs.showCloseButton"
@@ -16,6 +15,10 @@
     :text-class="$attrs.textClass"
     :content-class="$attrs.contentClass"
     :open-popover="$attrs.openPopover"
+    :inverted-tooltip="$attrs.invertedTooltip"
+    :show-tooltip="$attrs.showTooltip"
+    :tooltip-text="$attrs.tooltipText"
+    :tooltip-delay="$attrs.tooltipDelay"
     @arrow-click="$attrs.onArrowClick"
     @click="$attrs.onClick"
     @opened="$attrs.onOpened"

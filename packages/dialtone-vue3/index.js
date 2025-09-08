@@ -11,6 +11,8 @@ export {
   formatMessages,
   filterFormattedMessages,
   getValidationState,
+  disableRootScrolling,
+  enableRootScrolling,
 } from './common/utils';
 export * from './common/dates';
 export * from './common/emoji';
@@ -50,6 +52,7 @@ export * from './components/lazy_show';
 export * from './components/link';
 export * from './components/list_item';
 export * from './components/list_item_group';
+export * from './components/loader';
 export * from './components/modal';
 export * from './components/notice';
 export * from './components/pagination';
@@ -64,19 +67,20 @@ export * from './components/select_menu';
 export * from './components/skeleton';
 export * from './components/split_button';
 export * from './components/stack';
-export * from './components/tabs';
+export * from './components/tab';
 export * from './components/toast';
 export * from './components/toggle';
 export * from './components/tooltip';
 export * from './components/validation_messages';
 
 // Directives
-export * from './directives/tooltip';
-export * from './directives/scrollbar';
+export * from './directives/tooltip_directive';
+export * from './directives/scrollbar_directive';
 
 /// Recipes
 export * from './recipes/buttons/callbar_button';
 export * from './recipes/buttons/callbar_button_with_popover';
+export * from './recipes/buttons/callbar_button_with_dropdown';
 export * from './recipes/cards/ivr_node';
 export * from './recipes/chips/grouped_chip';
 export * from './recipes/comboboxes/combobox_multi_select';
@@ -84,8 +88,8 @@ export * from './recipes/comboboxes/combobox_with_popover';
 export * from './recipes/conversation_view/attachment_carousel';
 export * from './recipes/conversation_view/editor';
 export * from './recipes/conversation_view/emoji_row';
+export * from './recipes/conversation_view/feed_item_pill';
 export * from './recipes/conversation_view/feed_item_row';
-export * from './recipes/conversation_view/feed_pill';
 export * from './recipes/conversation_view/message_input';
 export * from './recipes/conversation_view/time_pill';
 export * from './recipes/header/settings_menu_button';
@@ -97,3 +101,5 @@ export * from './recipes/leftbar/general_row';
 export * from './recipes/leftbar/group_row';
 export * from './recipes/leftbar/unread_pill';
 export * from './recipes/notices/top_banner_info';
+
+export { DialtoneLocalization } from './localization';

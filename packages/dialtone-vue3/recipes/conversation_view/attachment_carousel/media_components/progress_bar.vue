@@ -1,8 +1,9 @@
 <script>
 export default {
+  compatConfig: { MODE: 3 },
   name: 'DtProgressBar',
   props: {
-    progressbarAriaLabel: {
+    ariaLabel: {
       type: String,
       required: true,
     },
@@ -37,14 +38,14 @@ export default {
 <template>
   <div
     role="progressbar"
-    :aria-label="progressbarAriaLabel"
+    :aria-label="ariaLabel"
     tabindex="-1"
     :aria-valuenow="progress"
     aria-valuemin="0"
     aria-valuemax="100"
   >
     <svg
-      class="progress-bar"
+      class="d-recipe-attachment-carousel__progress-bar"
       :style="cssVars"
     >
       <circle
@@ -52,38 +53,14 @@ export default {
         r="8"
         cx="12"
         cy="12"
-        class="progress-bar__circle"
+        class="d-recipe-attachment-carousel__progress-bar-circle"
       />
       <circle
         r="8"
         cx="12"
         cy="12"
-        class="progress-bar__circle"
+        class="d-recipe-attachment-carousel__progress-bar-circle"
       />
     </svg>
   </div>
 </template>
-
-<style lang="less">
-.progress-bar {
-  width: var(--dt-size-550);
-  height: var(--dt-size-550);
-}
-
-.progress-bar__circle {
-  fill: none;
-  stroke-width: 2;
-  stroke-dasharray: var(--stroke-dasharray);
-}
-
-.progress-bar__circle:nth-child(1) {
-  stroke-dashoffset: 0;
-  stroke: var(--dt-color-black-100);
-}
-
-.progress-bar__circle:nth-child(2) {
-  stroke-dashoffset: var(--stroke-dashoffset);
-  stroke: var(--dt-color-purple-500);
-  transition: stroke-dashoffset 500ms linear;
-}
-</style>

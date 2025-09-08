@@ -27,9 +27,6 @@
     <dt-notice-action
       :hide-action="hideAction"
       :hide-close="hideClose"
-      :close-button-props="closeButtonProps"
-      :visually-hidden-close="visuallyHiddenClose"
-      :visually-hidden-close-label="visuallyHiddenCloseLabel"
       @close="$emit('close')"
     >
       <!-- @slot Enter a possible action for the user to take, such as a link to another page -->
@@ -43,13 +40,13 @@ import DtNoticeIcon from './notice_icon.vue';
 import DtNoticeContent from './notice_content.vue';
 import DtNoticeAction from './notice_action.vue';
 import { NOTICE_KINDS, NOTICE_ROLES } from './notice_constants';
-import SrOnlyCloseButtonMixin from '@/common/mixins/sr_only_close_button';
 
 /**
  * A notice is an informational and assistive message that appears inline with content.
  * @see https://dialtone.dialpad.com/components/notice.html
  */
 export default {
+  compatConfig: { MODE: 3 },
   name: 'DtNotice',
 
   components: {
@@ -57,8 +54,6 @@ export default {
     DtNoticeContent,
     DtNoticeAction,
   },
-
-  mixins: [SrOnlyCloseButtonMixin],
 
   props: {
     /**
@@ -121,14 +116,6 @@ export default {
       validate (kind) {
         return NOTICE_KINDS.includes(kind);
       },
-    },
-
-    /**
-     * Props for the notice close button.
-     */
-    closeButtonProps: {
-      type: Object,
-      default: () => ({}),
     },
 
     /**

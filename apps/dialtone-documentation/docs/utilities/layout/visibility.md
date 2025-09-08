@@ -5,11 +5,11 @@ description: Utilities for showing or hiding an element without changing the lay
 
 ## Usage
 
-<code-well-header bgclass='d-bgc-purple-100'>
+<code-well-header>
   <div class="d-w100p">
-    <div class="d-d-inline-block d-m8 d-p16 d-bgc-purple-300 d-bar4 d-code--md d-ta-center d-vi-visible">.d-vi-visible</div>
-    <div class="d-d-inline-block d-m8 d-p16 d-bgc-purple-300 d-bar4 d-code--md d-ta-center d-vi-visible-sr">.d-vi-visible-sr</div>
-    <div class="d-d-inline-block d-m8 d-p16 d-bgc-purple-300 d-bar4 d-code--md d-ta-center d-vi-hidden">.d-vi-hidden</div>
+    <div class="d-d-inline-block d-p16 d-bgc-moderate d-bar4 d-code--md d-ta-center d-vi-visible">.d-vi-visible</div>
+    <div class="d-d-inline-block d-p16 d-bgc-moderate d-bar4 d-code--md d-ta-center d-vi-visible-sr">.d-vi-visible-sr</div>
+    <div class="d-d-inline-block d-p16 d-bgc-moderate d-bar4 d-code--md d-ta-center d-vi-hidden">.d-vi-hidden</div>
   </div>
 </code-well-header>
 
@@ -29,11 +29,11 @@ Bear in mind using a visibility value of `hidden` on an element will remove it f
   <template #content>
     <tbody>
       <tr>
-        <th scope="row" class="d-code--sm d-fc-purple-400">.d-vi-visible</th>
+        <th scope="row" class="d-code--sm d-docsite-code">.d-vi-visible</th>
         <td class="d-code--sm">visibility: visible !important;</td>
       </tr>
       <tr>
-        <th scope="row" class="d-code--sm d-fc-purple-400">.d-vi-visible-sr</th>
+        <th scope="row" class="d-code--sm d-docsite-code">.d-vi-visible-sr</th>
         <td class="d-code--sm">border: 0;
         clip: rect(1px,1px,1px,1px);
         clip-path: inset(50%);
@@ -46,7 +46,7 @@ Bear in mind using a visibility value of `hidden` on an element will remove it f
         word-wrap: normal;</td>
       </tr>
       <tr>
-        <th scope="row" class="d-code--sm d-fc-purple-400">.d-vi-hidden</th>
+        <th scope="row" class="d-code--sm d-docsite-code">.d-vi-hidden</th>
         <td class="d-code--sm">visibility: hidden !important;</td>
       </tr>
     </tbody>

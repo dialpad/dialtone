@@ -4,6 +4,7 @@ This is a code from external library (https://github.com/Akryum/vue-virtual-scro
 We have modified it for our own specific use.
 */
 import { h } from 'vue';
+import { returnFirstEl } from '@/common/utils';
 
 export default {
   name: 'DtScrollerItem',
@@ -70,7 +71,7 @@ export default {
     watchData: 'updateWatchData',
 
     id (value, oldValue) {
-      this.$el.$_vs_id = this.id;
+      returnFirstEl(this.$el).$_vs_id = this.id;
       if (!this.size) {
         this.onDataUpdate();
       }
@@ -182,8 +183,8 @@ export default {
     computeSize (id) {
       this.$nextTick(() => {
         if (this.id === id) {
-          const width = this.$el.offsetWidth;
-          const height = this.$el.offsetHeight;
+          const width = returnFirstEl(this.$el).offsetWidth;
+          const height = returnFirstEl(this.$el).offsetHeight;
           this.applyWidthHeight(width, height);
         }
         this.$_pendingSizeUpdate = null;
@@ -208,7 +209,7 @@ export default {
     observeSize () {
       if (!this.vscrollResizeObserver) return;
       if (this.$_sizeObserved) return;
-      this.vscrollResizeObserver.observe(this.$el);
+      this.vscrollResizeObserver.observe(returnFirstEl(this.$el));
       this.$el.$_vs_id = this.id;
       this.$el.$_vs_onResize = this.onResize;
       this.$_sizeObserved = true;
@@ -217,7 +218,7 @@ export default {
     unobserveSize () {
       if (!this.vscrollResizeObserver) return;
       if (!this.$_sizeObserved) return;
-      this.vscrollResizeObserver.unobserve(this.$el);
+      this.vscrollResizeObserver.unobserve(returnFirstEl(this.$el));
       this.$el.$_vs_onResize = undefined;
       this.$_sizeObserved = false;
     },

@@ -44,7 +44,7 @@
             :ref="el => { if (el) setEmojiRef(el, indexTab, indexEmoji) }"
             type="button"
             :aria-label="emoji.name"
-            @click="selectEmoji(emoji)"
+            @click="event => selectEmoji(emoji, event)"
             @focusin="highlightEmoji(emoji)"
             @focusout="highlightEmoji(null)"
             @mouseover="highlightEmoji(emoji)"
@@ -56,7 +56,7 @@
               :alt="emoji.name"
               :aria-label="emoji.name"
               :title="emoji.name"
-              :src="getImgSrc(emoji.unicode_character)"
+              :src="getImgSrc(emoji)"
               @error="handleImageError"
             >
           </button>
@@ -79,7 +79,7 @@
             :class="{
               'hover-emoji': (index === 0 && hoverFirstEmoji),
             }"
-            @click="selectEmoji(emoji)"
+            @click="event => selectEmoji(emoji, event)"
             @focusin="highlightEmoji(emoji)"
             @focusout="highlightEmoji(null)"
             @mouseover="hoverEmoji(emoji)"
@@ -104,7 +104,7 @@
 /* eslint-disable max-len */
 /* eslint-disable max-lines */
 import { emojisGrouped as emojis } from '@dialpad/dialtone-emojis';
-import { computed, onMounted, onUnmounted, ref, watch, nextTick } from 'vue';
+import { computed, onMounted, onBeforeUnmount, ref, watch, nextTick } from 'vue';
 import { CDN_URL, ARROW_KEYS } from '@/components/emoji_picker/emoji_picker_constants';
 import { useKeyboardNavigation } from '@/components/emoji_picker/composables/useKeyboardNavigation';
 
@@ -167,6 +167,15 @@ const props = defineProps({
     type: Array,
     default: () => [],
   },
+
+  /**
+   * The list of custom emojis
+   * @type {Array}
+   */
+  customEmojis: {
+    type: Array,
+    default: () => [],
+  },
 });
 
 const emits = defineEmits([
@@ -192,11 +201,11 @@ const emits = defineEmits([
   'scroll-into-tab',
 
   /**
-   * Emitted when the scrollTo function starts scrolling and stops scrolling
-   * @event is-scrolling
-   * @param {Boolean} is-scrolling - Whether the user is scrolling with the scroll-to
-    */
-  'is-scrolling',
+   * Emitted when the user reach bottom scroll
+   * This event is used on handleScroll method
+   * @event scroll-bottom-reached
+   */
+  'scroll-bottom-reached',
 
   /**
    * Emitted when the user reach the end of the emoji list
@@ -244,18 +253,26 @@ const tabLabelObserver = ref(null);
  * The list of tabs
  * This is used to display the tabs
  */
-const TABS_DATA = ['Recently used', 'People', 'Nature', 'Food', 'Activity', 'Travel', 'Objects', 'Symbols', 'Flags'];
+const TABS_DATA = ['Recently used', 'People', 'Nature', 'Food', 'Activity', 'Travel', 'Objects', 'Symbols', 'Flags', 'Custom'];
 
 /**
  * The list of tab labels
  * This is used to display the tabs
- * This is a computed property because it will check if the recently used emojis list is empty
- * If it is empty, it will remove the recently used tab
+ * This is a computed property because it will check if the recently used emojis or custom emojis list is empty
+ * If it is empty, it will remove it
  */
 const tabLabels = computed(() => {
-  return props.recentlyUsedEmojis.length
-    ? props.tabsetLabels.map((label) => ({ label, ref: ref(null) }))
-    : props.tabsetLabels.slice(1).map((label) => ({ label, ref: ref(null) }));
+  let updateTabLabels = props.tabsetLabels.map((label) => ({ label, ref: ref(null) }));
+
+  if (props.recentlyUsedEmojis && !props.recentlyUsedEmojis.length) {
+    updateTabLabels = props.tabsetLabels.slice(1).map((label) => ({ label, ref: ref(null) }));
+  }
+
+  if (props.customEmojis && !props.customEmojis.length) {
+    updateTabLabels.pop();
+  }
+
+  return updateTabLabels;
 });
 
 /**
@@ -267,13 +284,19 @@ const fixedLabel = ref(tabLabels.value[0].label);
 /**
  * The list of tabs
  * This is used to display the tabs
- * This is a computed property because it will check if the recently used emojis list is empty
- * If it is empty, it will remove the recently used tab
+ * This is a computed property because it will check if the recently used emojis list or custom emojis is empty
+ * If it is empty, it will remove it
  * The difference between this and the tab labels is that this one will set the structure of tabs
  * and the tab labels will set the labels
  */
 const tabs = computed(() => {
-  return props.recentlyUsedEmojis.length ? TABS_DATA : TABS_DATA.slice(1);
+  const updateTabsOrder = props.recentlyUsedEmojis.length ? TABS_DATA.slice() : TABS_DATA.slice(1);
+
+  if (props.customEmojis && !props.customEmojis.length) {
+    updateTabsOrder.pop();
+  }
+
+  return updateTabsOrder;
 });
 
 /**
@@ -312,6 +335,19 @@ const debouncedSearch = debounce(() => {
 });
 
 /**
+ * handleScroll will be defined when user scroll
+ */
+const handleScroll = () => {
+  const container = listRef.value;
+  // TODO -- this will probably need to be updated if we add more emojis.
+  // because the container height will change.
+  // maybe with a nextTick similar of scrollToTab.
+  if (container.scrollTop + container.clientHeight >= container.scrollHeight) {
+    emits('scroll-bottom-reached');
+  }
+};
+
+/**
  * Update the current emojis list on skin tone changes
  * Also update the filtered emojis list
  * @listens skinTone
@@ -327,6 +363,15 @@ watch(currentEmojis, () => {
 watch(() => props.recentlyUsedEmojis,
   () => {
     emojis['Recently used'] = props.recentlyUsedEmojis;
+  }, { immediate: true });
+
+/**
+ * Update the custom emojis list on custom emojis prop changes
+ * @listens customEmojis
+ */
+watch(() => props.customEmojis,
+  () => {
+    emojis.Custom = props.customEmojis;
   }, { immediate: true });
 
 /**
@@ -388,7 +433,12 @@ function debounce (fn, delay = 300) {
 }
 
 function getImgSrc (emoji) {
-  return `${CDN_URL + emoji}.png`;
+  // TODO Update json structure to have a property for custom emojis and avoid using date_added
+  if (emoji.date_added) { // if custom emoji
+    return emoji.image;
+  } else { // if regular emoji
+    return CDN_URL + emoji.unicode_character + '.png';
+  }
 }
 
 /**
@@ -407,39 +457,7 @@ function scrollToTab (tabIndex, focusFirstEmoji = true) {
 
   nextTick(() => {
     const container = listRef.value;
-    const offsetTop = tabIndex === '1' ? 0 : tabElement.offsetTop - 20;
-
-    /**
-     * This variable is used to check if the user is scrolling inside the emoji picker
-     * This is used to check if the user is scrolling using the scrollTo function
-     * This is useful because this flag will prevent to update the fixed label when the user is scrolling
-     * using the scrollTo function
-     */
-    let isScrolling = true;
-
-    let prevScrollTop = container.scrollTop;
-    emits('is-scrolling', true);
-
-    /**
-     * This event listener checks whether the user is scrolling up or down by comparing the current scrollTop
-     * to prevScrollTop. If the scrollToTab function is scrolling from bottom to top and has reached the desired
-     * position (scrollTop <= offsetTop),or if the scrollToTab function is scrolling from top to bottom and has
-     * passed the desired position(scrollTop >= offsetTop), then isScrolling is set to false.
-     */
-    /* eslint-disable-next-line complexity */
-    container.addEventListener('scroll', () => {
-      if (isScrolling) {
-        const scrollTop = container.scrollTop;
-        if (
-          (prevScrollTop < scrollTop && scrollTop >= offsetTop) ||
-          (prevScrollTop > scrollTop && scrollTop <= offsetTop)
-        ) {
-          isScrolling = false;
-          emits('is-scrolling', false);
-        }
-        prevScrollTop = scrollTop;
-      }
-    });
+    const offsetTop = tabIndex === 1 ? 0 : tabElement.offsetTop - 15;
 
     container.scrollTop = offsetTop;
 
@@ -455,6 +473,10 @@ function resetScroll () {
   container.scrollTop = 0;
 }
 
+function setBottomScrollListener () {
+  listRef.value.addEventListener('scroll', handleScroll);
+}
+
 /**
  * This code creates an IntersectionObserver object that monitors the intersection between
  * the root element (tabCategoryRef) and its targets (the child elements of listRef),
@@ -466,7 +488,6 @@ function setTabLabelObserver () {
    * and checks whether the target intersects with the root and is positioned above or below it.
    */
   tabLabelObserver.value = new IntersectionObserver(async (entries) => {
-    emits('is-scrolling', false);
     // eslint-disable-next-line complexity
     entries.forEach(entry => {
       const { target } = entry;
@@ -523,7 +544,7 @@ const handleKeyDownFilteredEmojis = (event, indexEmoji, emoji) => {
       emits('focus-skin-selector');
       break;
     case 'Enter':
-      selectEmoji(emoji);
+      selectEmoji(emoji, event);
       break;
     default:
       break;
@@ -559,7 +580,7 @@ const handleKeyDown = (event, indexTab, indexEmoji, emoji) => {
       break;
 
     case 'Enter':
-      selectEmoji(emoji);
+      selectEmoji(emoji, event);
       break;
 
     default:
@@ -567,8 +588,8 @@ const handleKeyDown = (event, indexTab, indexEmoji, emoji) => {
   }
 };
 
-function selectEmoji (emoji) {
-  emits('selected-emoji', emoji);
+function selectEmoji (emoji, event) {
+  emits('selected-emoji', { ...emoji, shift_key: event.shiftKey });
 }
 
 function highlightEmoji (emoji) {
@@ -580,15 +601,17 @@ function focusEmojiSelector () {
 }
 
 function focusLastEmoji () {
-  focusEmoji(tabs.value.length - 1, 0);
+  scrollToTab(tabs.value.length, true);
 }
 
 onMounted(() => {
   setTabLabelObserver();
+  setBottomScrollListener();
 });
 
-onUnmounted(() => {
+onBeforeUnmount(() => {
   tabLabelObserver.value.disconnect();
+  listRef.value.removeEventListener('scroll', handleScroll);
 });
 
 defineExpose({

@@ -1,49 +1,51 @@
 ---
-title: Getting started
+title: Getting Started
 description: A quick start guide to add Dialtone to your project.
 ---
 
-## Adding Dialtone to your project
+## Adding Dialtone to Your Project
 
 To take advantage of Dialtone's customizations, classes, and variables in your project, you will want to install Dialtone via [npm](https://www.npmjs.com/).
 
 ```bash
-npm install @dialpad/dialtone
+npm install @dialpad/dialtone-css
 ```
 
 Add the following line in your Less file:
 
 ```less
-@import "node_modules/@dialpad/dialtone-css/lib/build/less/dialtone.less";
+@import "@dialpad/dialtone-css/lib/build/less/dialtone.less";
 ```
 
 If you only need access to Dialtone's variables and customizations to build a file and don't need the whole library exported, use this line instead in your Less file:
 
 ```less
-@import (reference) "node_modules/@dialpad/dialtone-css/lib/build/less/dialtone.less";
+@import (reference) "@dialpad/dialtone-css/lib/build/less/dialtone.less";
 ```
 
 ## Usage
 
 A general overview of Dialtone's utility classes, CSS components, and Vue components.
 
-### Utility-first
+### Utility-First
 
 Dialtone's CSS library offers a framework of utility-first classes. Each class is a small, [atomic style](https://css-tricks.com/lets-define-exactly-atomic-css/) declaration that, when chained together, should mitigate most situations in which custom CSS must be written. Just write these classes right in your mark-up and you're all set!
 
 <code-well-header>
-  <div class="d-p16 d-bgc-black-600 d-fc-primary-inverted">Box</div>
+  <div class="d-body--sm d-p8 d-bgc-contrast d-fc-primary-inverted d-bar8">Box</div>
 </code-well-header>
 
 ```html
-<div class="d-p16 d-bgc-black-600 d-fc-primary-inverted">Box</div>
+<div class="d-body--sm d-p8 d-bgc-contrast d-fc-primary-inverted d-bar8">Box</div>
 ```
 
 In the above example, we used:
 
-- Our [padding utility class](utilities/spacing/padding/) `.d-p16` to add 16px of padding
-- Our [background color utility class](utilities/backgrounds/color/) `.d-bgc-black-600` to add a purple background
-- Our [font color utility class](utilities/typography/color/) `.d-fc-primary-inverted` to change the font color to the inverted primary text color
+- Our [padding utility class](/utilities/spacing/padding.md) `.d-p8` to add 8px of padding on all sides.
+- Our [background color utility class](/utilities/backgrounds/color.md) `.d-bgc-contrast`.
+- Our [font color utility class](/utilities/typography/font-color.md) `.d-fc-primary-inverted` to change the font color to the inverted primary text color.
+- Our [border radius](/utilities/borders/radius.md) `.d-bar8` for rounded corners.
+- Our [text style](/design/typography/index.md) `.d-body--sm`.
 
 Though an atomic CSS approach comes with many advantages, we know it also offers a notable disadvantage: reducing the CSS cascade. This is especially true for repeated UI elements, which can end up creating redundant mark-up. For these instances, Dialtone offers components.
 
@@ -60,7 +62,7 @@ In the event Dialtone Vue doesn't suit your needs, Dialtone's CSS library offers
 <button class="d-btn d-btn--primary">Primary Button</button>
 ```
 
-### Writing CSS
+### Authoring Custom Style
 
 In the event you need to write CSS, use [BEM (Block Element Modifier)](http://getbem.com/). This is a simple, common naming convention that helps make our CSS easier to read and understand. If you aren't familiar with the approach, here's a [quick synposis](http://getbem.com/introduction/):
 
@@ -89,6 +91,7 @@ In the event you need to write CSS, use [BEM (Block Element Modifier)](http://ge
   display: flex;
   flex-direction: column;
   background-color: var(--card-color-background);
+  border: var(--dt-size-border-100) solid var(--dt-color-border-default);
 
   // Modifier for block
   &--featured {
@@ -126,7 +129,7 @@ In order to make Dialtone work across our supported browsers you need to manuall
 1. Focus-visible adds a listener to every element that should be keyboard-focused only and when the element is focused, it adds the .focus-visible class to it, follow the [focus-visible](https://github.com/WICG/focus-visible#installation) installation instructions.
 2. Postcss focus-visible plugin adds a .focus-visible class for every :focus-visible class found in your css, follow the [postcss-focus-visible](https://www.npmjs.com/package/postcss-focus-visible) installation instructions.
 
-### Box-sizing
+### Box-Sizing
 
 All Dialtone components are implemented with `box-sizing: border-box;` applied. To understand why we prefer `border-box` over `content-box`, please visit this [Stack Overflow Teams question](https://stackoverflow.com/c/dialpad/questions/121).
 
@@ -154,7 +157,7 @@ You should see the following response:
 v16.x.x
 ```
 
-### Clone project
+### Clone Project
 
 Download the project:
 
@@ -172,7 +175,7 @@ Then `cd` into the Dialtone directory:
 cd ./path/to/dialtone
 ```
 
-### Install dependencies
+### Install Dependencies
 
 Dialtone uses [Gulp](https://gulpjs.com/) to automate its various workflows.
 Run the following command to install Gulp and all other project dependencies:
@@ -186,7 +189,7 @@ pnpm install
 You're now ready to build Dialtone! To build and run the development server:
 
 ```bash
-nx start:dialtone
+nx run dialtone-documentation:start
 ```
 
 Once finished, visit [http://localhost:4000/](http://localhost:4000/).

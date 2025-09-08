@@ -5,18 +5,14 @@ status: ready
 thumb: true
 image: assets/images/components/radio.png
 storybook: https://dialtone.dialpad.com/vue/?path=/story/components-radio--default
-figma_url: https://www.figma.com/file/2adf7JhZOncRyjYiy2joil/DT-Core%3A-Components-7?node-id=8919%3A22042&viewport=-451%2C205%2C0.6&t=xHutRjwo1o5zMTgT-11
+figma_url: https://www.figma.com/design/W58r5BkO8qTw3vem9YieJd/DT9-Component-Library--Rebrand-2025-?node-id=24935-9743
 ---
 
 <code-well-header>
-  <div class="d-radio-group">
-    <div class="d-radio__input">
-      <input class="d-radio" type="radio" name="Dialtone-RadioGroup0" id="Dialtone-RadioExample0" />
-    </div>
-    <div class="d-radio__copy">
-      <label class="d-radio__label" for="Dialtone-RadioExample0">Radio label</label>
-    </div>
-  </div>
+  <dt-radio
+    value="optionValue"
+    label="Radio label"
+  />
 </code-well-header>
 
 <!-- <component-combinator component-name="DtRadio" /> -->
@@ -43,43 +39,22 @@ Radio buttons are a common way to allow users to make a single selection from a 
 
 </dialtone-usage>
 
-### Best practices
+### Best Practices
 
 - Users should be able to tap on or click either the text `label` or the radio element itself to select an option.
 - Options that are listed vertically are easier to read than those listed horizontally. Horizontal listings can make it difficult to tell which label pertains to which radio button.
 - Make sure selections are adequately spaced for touch screens.
 - Use caution if you decide to set a default value as they cannot be unchecked. Setting a default value can discourage users from making conscious decisions, seem pushy, or alienate users who don’t fit into your assumptions. If you are unsure, leave nothing selected by default.
 
-## Variants and examples
+## Variants and Examples
 
 ### Base Styles
 
 <code-well-header>
   <fieldset class="d-input-group__fieldset d-stack8">
-    <div class="d-radio-group">
-      <div class="d-radio__input">
-        <input class="d-radio" type="radio" name="Dialtone-RadioGroup1" id="Dialtone-RadioExample2" />
-      </div>
-      <div class="d-radio__copy">
-        <label class="d-radio__label" for="Dialtone-RadioExample2">Radio label</label>
-      </div>
-    </div>
-    <div class="d-radio-group d-radio-group--disabled">
-      <div class="d-radio__input">
-        <input class="d-radio" type="radio" name="Dialtone-RadioGroup1" id="Dialtone-RadioExample3" disabled />
-      </div>
-      <div class="d-radio__copy">
-        <label class="d-radio__label" for="Dialtone-RadioExample3">Radio label that's been disabled</label>
-      </div>
-    </div>
-    <div class="d-radio-group d-radio-group--disabled">
-      <div class="d-radio__input">
-        <input class="d-radio" type="radio" name="Dialtone-RadioGroup1" id="Dialtone-RadioExample4" disabled checked />
-      </div>
-      <div class="d-radio__copy">
-        <label class="d-radio__label" for="Dialtone-RadioExample4">Radio label that's been disabled & checked</label>
-      </div>
-    </div>
+    <dt-radio name="Value" value="Value" label="Radio label"/>
+    <dt-radio name="Disabled" value="Disabled" label="Radio label thats been disabled" disabled/>
+    <dt-radio name="CheckedDisabled" value="Checked" label="Radio label thats been disabled & checked" :model-value="true" disabled />
   </fieldset>
 </code-well-header>
 
@@ -119,7 +94,7 @@ htmlCode='
 vueCode='
 <dt-radio name="Value" value="Value" label="Radio label"/>
 <dt-radio name="Disabled" value="Disabled" label="Radio label thats been disabled" disabled/>
-<dt-radio name="CheckedDisabled" value="Checked" label="Radio label thats been disabled & checked" checked disabled />
+<dt-radio name="CheckedDisabled" value="Checked" label="Radio label thats been disabled & checked" :model-value="true" disabled />
 '
 showHtmlWarning />
 
@@ -128,24 +103,8 @@ showHtmlWarning />
 <code-well-header>
   <fieldset class="d-input-group__fieldset d-stack8">
     <legend class="d-label">Advanced missed call routing</legend>
-    <div class="d-radio-group">
-      <div class="d-radio__input">
-        <input class="d-radio" type="radio" name="Dialtone-RadioGroup3" id="Dialtone-RadioGroupBExample1" />
-      </div>
-      <div class="d-radio__copy">
-        <label class="d-radio__label" for="Dialtone-RadioGroupBExample1" checked>To voicemail</label>
-        <div class="d-description">So they can hear your voice</div>
-      </div>
-    </div>
-    <div class="d-radio-group">
-      <div class="d-radio__input">
-        <input class="d-radio" type="radio" disabled name="Dialtone-RadioGroup3" id="Dialtone-RadioGroupBExample1" />
-      </div>
-      <div class="d-radio__copy">
-        <label class="d-radio__label" for="Dialtone-RadioGroupBExample1" checked>Disabled</label>
-        <div class="d-description">With Description</div>
-      </div>
-    </div>
+    <dt-radio name="ValueWDesc" value="Value" label="To voicemail" description="So they can hear your voice"/>
+    <dt-radio name="DisabledWDesc" value="Disabled" label="Disabled" description="With Description" disabled />
   </fieldset>
 </code-well-header>
 
@@ -180,38 +139,32 @@ vueCode='
 '
 showHtmlWarning />
 
-### With validation states
+### With Validation States
 
 <code-well-header>
   <fieldset class="d-input-group__fieldset d-stack8">
     <legend class="d-label">Advanced missed call routing</legend>
-    <div class="d-radio-group">
-      <div class="d-radio__input">
-        <input class="d-radio d-radio--warning" type="radio" name="Dialtone-RadioGroup4" id="Dialtone-RadioGroupCExample1" />
-      </div>
-      <div class="d-radio__copy">
-        <label class="d-radio__label" for="Dialtone-RadioGroupCExample1">To voicemail</label>
-        <div class="d-validation-message d-validation-message--warning">So they can hear your voice</div>
-      </div>
-    </div>
-    <div class="d-radio-group">
-      <div class="d-radio__input">
-        <input class="d-radio d-radio--error" type="radio" name="Dialtone-RadioGroup4" id="Dialtone-RadioGroupCExample2" />
-      </div>
-      <div class="d-radio__copy">
-        <label class="d-radio__label" for="Dialtone-RadioGroupCExample2">To a message (no voicemail)</label>
-        <div class="d-validation-message d-validation-message--error">Because they probably don't need to leave a message anyway.</div>
-      </div>
-    </div>
-    <div class="d-radio-group">
-      <div class="d-radio__input">
-        <input class="d-radio d-radio--success" type="radio" name="Dialtone-RadioGroup4" id="Dialtone-RadioGroupCExample3" />
-      </div>
-      <div class="d-radio__copy">
-        <label class="d-radio__label" for="Dialtone-RadioGroupCExample3">To a team member or room phone</label>
-        <div class="d-validation-message d-validation-message--success">Because someone else might be able to talk to them.</div>
-      </div>
-    </div>
+    <dt-radio
+      name="ValidationMessages"
+      value="Validation Message Warning"
+      label="To voicemail"
+      validation-state="warning"
+      :messages="[{ message: `So they can hear your voice`, type: `warning` }]"
+    />
+    <dt-radio
+      name="ValidationMessages"
+      value="Validation Message Error"
+      label="To a message (no voicemail)"
+      validation-state="error"
+      :messages="[{ message: `Because they probably don't need to leave a message anyway.`, type: `error` }]"
+    />
+    <dt-radio
+      name="ValidationMessages"
+      value="Validation Message Success"
+      label="To a team member or room phone"
+      validation-state="success"
+      :messages="[{ message: `Because someone else might be able to talk to them.`, type: `success` }]"
+    />
   </fieldset>
 </code-well-header>
 
@@ -268,15 +221,12 @@ vueCode='
   label="To voicemail"
   validation-state="warning"
   :messages="[{ message: `So they can hear your voice`, type: `warning` }]"
-  checked
 />
 <dt-radio
   name="ValidationMessageError"
   value="Validation Message Error"
   label="To a message (no voicemail)"
   validation-state="error"
-  :messages="[{ message: `Because they probably dont need to leave a message anyway.`, type: `error` }]"
-  checked
 />
 <dt-radio
   name="ValidationMessageSuccess"
@@ -284,10 +234,63 @@ vueCode='
   label="To a team member or room phone"
   validation-state="success"
   :messages="[{ message: `Because someone else might be able to talk to them.`, type: `success` }]"
-  checked
 />
 '
 showHtmlWarning />
+
+### With Slotted Label
+
+<code-well-header>
+  <dt-radio
+    ref="slottedLabel"
+    name="ValueWSlot"
+    value="Value"
+  >
+    With Slotted Label
+  </dt-radio>
+</code-well-header>
+
+<code-example-tabs
+:htmlCode='() => $refs.slottedLabel'
+vueCode='
+<dt-radio
+  name="ValueWSlot"
+  value="Value"
+>
+  With Slotted Label
+</dt-radio>
+'
+/>
+
+### With Slotted Description
+
+<code-well-header>
+  <dt-radio
+    ref="slottedDescription"
+    name="ValueWSlottedDescription"
+    value="Value"
+    label="With"
+  >
+    <template #description>
+      Slotted Description
+    </template>
+  </dt-radio>
+</code-well-header>
+
+<code-example-tabs
+:htmlCode='() => $refs.slottedDescription'
+vueCode='
+<dt-radio
+  name="ValueWSlottedDescription"
+  value="Value"
+  label="With"
+>
+  <template #description>
+    Slotted Description
+  </template>
+</dt-radio>
+'
+/>
 
 ## Classes
 

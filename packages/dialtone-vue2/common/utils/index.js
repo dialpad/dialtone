@@ -2,7 +2,7 @@ import {
   DEFAULT_PREFIX,
   DEFAULT_VALIDATION_MESSAGE_TYPE,
   VALIDATION_MESSAGE_TYPES,
-} from '../constants';
+} from '../constants/index.js';
 import Vue from 'vue';
 
 let UNIQUE_ID_COUNTER = 0;
@@ -144,7 +144,7 @@ export const htmlFragment = {
   props: ['html'],
   render (h, ctx) {
     return new Vue({
-      // eslint-disable-next-line vue/multi-word-component-names
+
       name: 'Inner',
       beforeCreate () { this.$createElement = h; },
       template: `<div>${ctx.props.html}</div>`,
@@ -295,7 +295,7 @@ export function getPhoneNumberRegex (minLength = 7, maxLength = 15) {
       `{${minLength},${maxLength}}` +
       ')(?=\\b)(?=\\W(?=\\W|$)|\\s|$)',
     );
-  } catch (e) {
+  } catch {
     // eslint-disable-next-line no-console
     console.warn('This browser doesn\'t support regex lookahead/lookbehind');
   }
@@ -359,7 +359,7 @@ export function isEmailAddress (input) {
  * @returns {String}
  */
 export function safeConcatStrings (elements) {
-  return elements.filter(str => !!str).join(' ');
+  return elements.filter(str => !!str).join(', ');
 }
 
 /**
@@ -370,6 +370,70 @@ export function safeConcatStrings (elements) {
  */
 export function capitalizeFirstLetter (str, locale = 'en-US') {
   return str.replace(/^\p{CWU}/u, char => char.toLocaleUpperCase(locale));
+}
+
+/**
+ * Warns if the component is not mounted properly. Useful for tests.
+ * @param {HTMLElement} componentRef - the component reference
+ * @param {string} componentName - the component name
+ */
+// eslint-disable-next-line complexity
+export function warnIfUnmounted (componentRef, componentName) {
+  if (typeof process === 'undefined') return;
+  if (process.env.NODE_ENV !== 'test') return;
+  if (!componentRef || !(componentRef instanceof HTMLElement) || !document?.body) return;
+  if (!document.body.contains(componentRef)) {
+    console.warn(`The ${componentName} component is not attached to the document body. This may cause issues.`);
+  }
+}
+
+/**
+ * checks whether the dt-scrollbar is being used on the root element.
+ * @param rootElement {HTMLElement}
+ * @returns {boolean}
+ */
+function isDtScrollbarInUse (rootElement = document.documentElement) {
+  if (rootElement.hasAttribute('data-overlayscrollbars')) {
+    return true;
+  }
+  return false;
+}
+
+/**
+ * This will disable scrolling on the root element regardless of whether you are using dt-scrollbar or not.
+ * @param rootElement {HTMLElement}
+ */
+export function disableRootScrolling (rootElement = document.documentElement) {
+  if (isDtScrollbarInUse(rootElement)) {
+    rootElement.classList.add('d-scrollbar-disabled');
+  } else {
+    rootElement.classList.add('d-of-hidden');
+  }
+}
+
+/**
+ * This will enable scrolling on the root element regardless of whether you are using dt-scrollbar or not.
+ * @param rootElement {HTMLElement}
+ */
+export function enableRootScrolling (rootElement = document.documentElement) {
+  if (isDtScrollbarInUse(rootElement)) {
+    rootElement.classList.remove('d-scrollbar-disabled');
+  } else {
+    rootElement.classList.remove('d-of-hidden');
+  }
+}
+
+/**
+ * This will take a text string e.g "accessibility-mac"
+ * and convert it to our Fluent Key standard format "ACCESSIBILITY_MAC"
+ * @param text
+ * @returns {string}
+ */
+export function toFluentKeyString (text) {
+  return text
+    .replaceAll(/[ -]/g, '_')
+    .replaceAll(/\W/g, '')
+    .toUpperCase();
 }
 
 export default {
@@ -392,4 +456,6 @@ export default {
   isURL,
   safeConcatStrings,
   capitalizeFirstLetter,
+  disableRootScrolling,
+  enableRootScrolling,
 };

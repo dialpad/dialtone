@@ -7,21 +7,23 @@
     :size="$attrs.size"
     :placeholder="$attrs.placeholder"
     :input-messages="$attrs.inputMessages"
+    :input-class="$attrs.inputClass"
+    :input-wrapper-class="$attrs.inputWrapperClass"
     :show-input-messages="$attrs.showInputMessages"
     :loading="$attrs.loading"
     :loading-message="$attrs.loadingMessage"
     :show-list="$attrs.showList"
     :selected-items="$attrs.selectedItems"
+    :chip-max-width="$attrs.chipMaxWidth"
     :max-selected="$attrs.maxSelected"
     :list-max-height="$attrs.listMaxHeight"
     :list-max-width="$attrs.listMaxWidth"
     :collapse-on-focus-out="$attrs.collapseOnFocusOut"
     :max-selected-message="$attrs.maxSelectedMessage"
     :has-suggestion-list="$attrs.hasSuggestionList"
-    :visually-hidden-close="$attrs.visuallyHiddenClose"
-    :visually-hidden-close-label="$attrs.visuallyHiddenCloseLabel"
     :append-to="$attrs.appendTo"
     :transition="$attrs.transition"
+    :reserved-right-space="$attrs.reservedRightSpace"
     @input="onComboboxInput"
     @select="onComboboxSelect"
     @remove="onComboboxRemove"
@@ -99,6 +101,9 @@ export default {
         // Clear input box and unfilter list
         this.$refs.comboboxMultiSelect.$data.value = '';
         this.items = ITEMS_LIST_DATA;
+      } else {
+        const item = this.$refs.comboboxMultiSelect.$refs.input.value;
+        item && this.$attrs.selectedItems.push(item);
       }
     },
 

@@ -44,7 +44,7 @@
             :ref="`emojiRef-${indexTab}`"
             type="button"
             :aria-label="emoji.name"
-            @click="$emit('selected-emoji', emoji)"
+            @click="event => handleEmojiSelection(emoji, event)"
             @focusin="$emit('highlighted-emoji', emoji)"
             @focusout="$emit('highlighted-emoji', null)"
             @mouseover="$emit('highlighted-emoji', emoji)"
@@ -56,7 +56,7 @@
               :alt="emoji.name"
               :aria-label="emoji.name"
               :title="emoji.name"
-              :src="getImgSrc(emoji.unicode_character)"
+              :src="getImgSrc(emoji)"
               @error="handleImageError"
             >
           </button>
@@ -79,7 +79,7 @@
             :class="{
               'hover-emoji': (index === 0 && hoverFirstEmoji),
             }"
-            @click="$emit('selected-emoji', emoji)"
+            @click="event => handleEmojiSelection(emoji, event)"
             @focusin="$emit('highlighted-emoji', emoji)"
             @focusout="$emit('highlighted-emoji', null)"
             @mouseover="hoverEmoji(emoji)"
@@ -104,7 +104,7 @@
 /* eslint-disable max-len */
 /* eslint-disable max-lines */
 import { emojisGrouped as emojisImported } from '@dialpad/dialtone-emojis';
-import { CDN_URL, EMOJIS_PER_ROW } from '@/components/emoji_picker';
+import { CDN_URL, EMOJIS_PER_ROW } from '@/components/emoji_picker/emoji_picker_constants';
 
 export default {
   name: 'EmojiSelector',
@@ -144,17 +144,23 @@ export default {
       type: Array,
       default: () => [],
     },
+
+    customEmojis: {
+      type: Array,
+      default: () => [],
+    },
   },
 
   data () {
     return {
+      tabLabelsRefs: [],
       emojiRefs: [],
       emojiFilteredRefs: [],
       isFiltering: false,
       hoverFirstEmoji: true,
       fixedLabel: '',
       filteredEmojis: [],
-      TABS_DATA: ['Recently used', 'People', 'Nature', 'Food', 'Activity', 'Travel', 'Objects', 'Symbols', 'Flags'],
+      TABS_DATA: ['Recently used', 'People', 'Nature', 'Food', 'Activity', 'Travel', 'Objects', 'Symbols', 'Flags', 'Custom'],
       tabLabelObserver: null,
     };
   },
@@ -183,13 +189,27 @@ export default {
     },
 
     tabLabels () {
-      return this.recentlyUsedEmojis.length
-        ? this.tabSetLabels.map((label, index) => ({ label, ref: this.$refs[`tabLabelRef-${index}`] }))
-        : this.tabSetLabels.slice(1).map((label, index) => ({ label, ref: this.$refs[`tabLabelRef-${index}`] }));
+      let updateTabLabels = this.tabSetLabels.map((label) => ({ label }));
+
+      if (!this.recentlyUsedEmojis.length) {
+        updateTabLabels = this.tabSetLabels.slice(1).map((label) => ({ label }));
+      }
+
+      if (!this.customEmojis.length) {
+        updateTabLabels.pop();
+      }
+
+      return updateTabLabels;
     },
 
     tabs () {
-      return this.recentlyUsedEmojis.length ? this.TABS_DATA : this.TABS_DATA.slice(1);
+      const updateTabsOrder = this.recentlyUsedEmojis.length ? this.TABS_DATA.slice() : this.TABS_DATA.slice(1);
+
+      if (!this.customEmojis.length) {
+        updateTabsOrder.pop();
+      }
+
+      return updateTabsOrder;
     },
   },
 
@@ -205,6 +225,14 @@ export default {
     recentlyUsedEmojis: {
       handler (newValue) {
         this.emojis['Recently used'] = newValue;
+      },
+
+      immediate: true,
+    },
+
+    customEmojis: {
+      handler (newValue) {
+        this.emojis.Custom = newValue;
       },
 
       immediate: true,
@@ -243,6 +271,7 @@ export default {
       this.setupFilteredRefs();
       this.setupTabLabelRefs();
       this.setTabLabelObserver();
+      this.setBottomScrollListener();
     });
   },
 
@@ -250,14 +279,18 @@ export default {
     if (this.tabLabelObserver) {
       this.tabLabelObserver.disconnect();
     }
+
+    if (this.$refs.listRef && this.handleScroll) {
+      this.$refs.listRef.removeEventListener('scroll', this.handleScroll);
+    }
   },
 
   methods: {
     setupTabLabelRefs () {
-      this.tabSetLabels?.forEach((label, index) => {
+      this.tabSetLabels?.forEach((_, index) => {
         const refKey = `tabLabelRef-${index}`;
         if (this.$refs[refKey]) {
-          this.$set(this.tabLabels, index, { label, ref: this.$refs[refKey] });
+          this.$set(this.tabLabelsRefs, index, { ref: this.$refs[refKey] });
         }
       });
     },
@@ -319,7 +352,12 @@ export default {
     },
 
     getImgSrc: function (emoji) {
-      return this.CDN_URL + emoji + '.png';
+      // TODO Update json structure to have a property for custom emojis and avoid using date_added
+      if (emoji.date_added) { // if custom emoji
+        return emoji.image;
+      } else { // if regular emoji
+        return this.CDN_URL + emoji.unicode_character + '.png';
+      }
     },
 
     handleImageError: function (event) {
@@ -329,31 +367,11 @@ export default {
     scrollToTab: function (tabIndex, focusFirstEmoji) {
       const vm = this;
       if (focusFirstEmoji === undefined) { focusFirstEmoji = true; }
-      const tabLabel = vm.tabLabels[tabIndex - 1];
-      const tabElement = tabLabel.ref[0];
+      const tabElement = vm.tabLabelsRefs[tabIndex - 1].ref[0];
 
       vm.$nextTick(function () {
         const container = vm.$refs.listRef;
-        const offsetTop = tabIndex === '1' ? 0 : tabElement.offsetTop - 20;
-
-        let isScrolling = true;
-        let prevScrollTop = container.scrollTop;
-        vm.$emit('is-scrolling', true);
-
-        /* eslint-disable-next-line complexity */
-        container.addEventListener('scroll', function () {
-          if (isScrolling) {
-            const scrollTop = container.scrollTop;
-            if (
-              (prevScrollTop < scrollTop && scrollTop >= offsetTop) ||
-            (prevScrollTop > scrollTop && scrollTop <= offsetTop)
-            ) {
-              isScrolling = false;
-              vm.$emit('is-scrolling', false);
-            }
-            prevScrollTop = scrollTop;
-          }
-        });
+        const offsetTop = tabIndex === 1 ? 0 : tabElement.offsetTop - 15;
 
         container.scrollTop = offsetTop;
 
@@ -471,7 +489,7 @@ export default {
         this.handleHorizontalNavigation('right', indexTab, indexEmoji);
       }
 
-      if (event.key === 'Tab') {
+      if (event.key === 'Tab' && !event.shiftKey) {
         if (this.focusEmoji(indexTab + 1, 0)) {
           this.scrollToTab((indexTab + 1) + 1, false);
         } else {
@@ -490,7 +508,7 @@ export default {
       }
 
       if (event.key === 'Enter') {
-        this.$emit('selected-emoji', emoji);
+        this.handleEmojiSelection(emoji, event);
       }
     },
 
@@ -541,6 +559,11 @@ export default {
       }
     },
 
+    handleEmojiSelection (emoji, event) {
+      this.$emit('selected-emoji', { ...emoji, shift_key: event.shiftKey });
+    },
+
+    // @TODO(improvement): Sync with simplified Vue 3 version
     /* eslint-disable-next-line complexity */
     handleKeyDownFilteredEmojis (event, indexEmoji, emoji) {
       event.preventDefault();
@@ -585,13 +608,23 @@ export default {
       }
 
       if (event.key === 'Enter') {
-        this.$emit('selected-emoji', emoji);
+        this.handleEmojiSelection(emoji, event);
       }
+    },
+
+    setBottomScrollListener () {
+      this.handleScroll = () => {
+        const container = this.$refs.listRef;
+        if (container.scrollTop + container.clientHeight >= container.scrollHeight) {
+          this.$emit('scroll-bottom-reached');
+        }
+      };
+
+      this.$refs.listRef.addEventListener('scroll', this.handleScroll);
     },
 
     setTabLabelObserver () {
       this.tabLabelObserver = new IntersectionObserver(entries => {
-        this.$emit('is-scrolling', false);
         /* eslint-disable-next-line complexity */
         entries.forEach(entry => {
           const { target } = entry;
@@ -619,7 +652,7 @@ export default {
     },
 
     focusLastEmoji () {
-      this.focusEmoji(this.tabs.length - 1, 0);
+      this.scrollToTab(this.tabs.length, true);
     },
 
   },

@@ -8,7 +8,7 @@
       border-color="ai"
     >
       <template #subtitle>
-        <span>06:01</span>
+        <span class="d-fvn-tabular">06:01</span>
       </template>
       <template #right>
         <dt-button
@@ -17,10 +17,7 @@
           importance="clear"
         >
           <template #icon>
-            <dt-icon
-              name="dialpad-ai-color"
-              size="400"
-            />
+            <dt-icon-dialpad-sparkle size="400" />
           </template>
         </dt-button>
         <dt-button
@@ -30,10 +27,7 @@
           kind="danger"
         >
           <template #icon>
-            <dt-icon
-              name="phone-hang-up"
-              size="400"
-            />
+            <dt-icon-phone-hang-up size="400" />
           </template>
         </dt-button>
       </template>
@@ -43,7 +37,7 @@
       avatar-seed="1 Participant"
     >
       <template #subtitle>
-        <span>06:01</span>
+        <span class="d-fvn-tabular">06:01</span>
       </template>
       <template #right>
         <dt-button
@@ -52,10 +46,7 @@
           importance="clear"
         >
           <template #icon>
-            <dt-icon
-              name="mic"
-              size="400"
-            />
+            <dt-icon-mic size="400" />
           </template>
         </dt-button>
         <dt-button
@@ -64,10 +55,7 @@
           importance="clear"
         >
           <template #icon>
-            <dt-icon
-              name="video"
-              size="400"
-            />
+            <dt-icon-video size="400" />
           </template>
         </dt-button>
         <dt-button
@@ -77,10 +65,7 @@
           kind="danger"
         >
           <template #icon>
-            <dt-icon
-              name="phone-hang-up"
-              size="400"
-            />
+            <dt-icon-phone-hang-up size="400" />
           </template>
         </dt-button>
       </template>
@@ -97,7 +82,7 @@
         >
       </template>
       <template #subtitle>
-        <span>06:01</span>
+        <span class="d-fvn-tabular">06:01</span>
       </template>
       <template #right>
         <dt-button
@@ -106,10 +91,7 @@
           importance="clear"
         >
           <template #icon>
-            <dt-icon
-              name="mic"
-              size="400"
-            />
+            <dt-icon-mic size="400" />
           </template>
         </dt-button>
         <dt-button
@@ -118,10 +100,7 @@
           importance="clear"
         >
           <template #icon>
-            <dt-icon
-              name="video"
-              size="400"
-            />
+            <dt-icon-video size="400" />
           </template>
         </dt-button>
         <dt-button
@@ -131,10 +110,7 @@
           kind="danger"
         >
           <template #icon>
-            <dt-icon
-              name="phone-hang-up"
-              size="400"
-            />
+            <dt-icon-phone-hang-up size="400" />
           </template>
         </dt-button>
       </template>
@@ -148,7 +124,7 @@
       border-color="ai"
     >
       <template #subtitle>
-        <span>06:01</span>
+        <span class="d-fvn-tabular">06:01</span>
       </template>
       <template #right>
         <dt-button
@@ -157,10 +133,7 @@
           importance="clear"
         >
           <template #icon>
-            <dt-icon
-              name="dialpad-ai-color"
-              size="400"
-            />
+            <dt-icon-dialpad-sparkle size="400" />
           </template>
         </dt-button>
         <dt-button
@@ -170,10 +143,7 @@
           kind="danger"
         >
           <template #icon>
-            <dt-icon
-              name="phone-hang-up"
-              size="400"
-            />
+            <dt-icon-phone-hang-up size="400" />
           </template>
         </dt-button>
       </template>
@@ -190,11 +160,8 @@
           gap="300"
           class="d-ai-center"
         >
-          <dt-icon
-            name="share-screen"
-            size="100"
-          />
-          <span>06:01</span>
+          <dt-icon-share-screen size="100" />
+          <span class="d-fvn-tabular">06:01</span>
         </dt-stack>
       </template>
       <template #right>
@@ -205,10 +172,7 @@
           kind="muted"
         >
           <template #icon>
-            <dt-icon
-              name="share-screen"
-              size="400"
-            />
+            <dt-icon-share-screen size="400" />
           </template>
         </dt-button>
         <dt-button
@@ -217,10 +181,7 @@
           importance="clear"
         >
           <template #icon>
-            <dt-icon
-              name="dialpad-ai-color"
-              size="400"
-            />
+            <dt-icon-dialpad-sparkle size="400" />
           </template>
         </dt-button>
         <dt-button
@@ -230,10 +191,7 @@
           kind="danger"
         >
           <template #icon>
-            <dt-icon
-              name="phone-hang-up"
-              size="400"
-            />
+            <dt-icon-phone-hang-up size="400" />
           </template>
         </dt-button>
       </template>
@@ -250,10 +208,7 @@
           gap="300"
           class="d-ai-center"
         >
-          <dt-icon
-            name="share-screen"
-            size="100"
-          />
+          <dt-icon-share-screen size="100" />
           <p>Screenshare</p>
         </dt-stack>
       </template>
@@ -264,10 +219,7 @@
           kind="danger"
         >
           <template #icon>
-            <dt-icon
-              name="stop-filled"
-              size="300"
-            />
+            <dt-icon-stop-filled size="300" />
           </template>
           Stop
         </dt-button>
@@ -289,23 +241,24 @@
             direction="row"
             class="d-ai-center"
           >
-            <dt-icon
-              name="users"
+            <dt-icon-users
               size="100"
               class="d-mr2"
             />
             <span>3</span>
           </dt-stack>
-          <span class="d-fs-300">
+          <span
+            class="d-body--sm-compact"
+            aria-hidden="true"
+          >
             •
           </span>
           <dt-stack
             direction="row"
             class="d-ai-center d-of-x-hidden"
           >
-            <dt-icon
+            <dt-icon-waveform
               class="voice-chat-icon"
-              name="waveform"
               size="100"
             />
             <p class="d-to-ellipsis d-ws-nowrap d-of-hidden">
@@ -322,10 +275,7 @@
           circle
         >
           <template #icon>
-            <dt-icon
-              name="mic"
-              size="300"
-            />
+            <dt-icon-mic size="300" />
           </template>
         </dt-button>
         <dt-button
@@ -335,10 +285,7 @@
           kind="danger"
         >
           <template #icon>
-            <dt-icon
-              name="phone-hang-up"
-              size="400"
-            />
+            <dt-icon-phone-hang-up size="400" />
           </template>
         </dt-button>
       </template>
@@ -355,11 +302,8 @@
           gap="300"
           class="d-ai-center"
         >
-          <dt-icon
-            name="share-screen"
-            size="100"
-          />
-          <span>06:01</span>
+          <dt-icon-share-screen size="100" />
+          <span class="d-fvn-tabular">06:01</span>
         </dt-stack>
       </template>
       <template #right>
@@ -369,10 +313,7 @@
           importance="clear"
         >
           <template #icon>
-            <dt-icon
-              name="dialpad-ai-color"
-              size="400"
-            />
+            <dt-icon-dialpad-sparkle size="400" />
           </template>
         </dt-button>
         <dt-button
@@ -382,24 +323,29 @@
           kind="danger"
         >
           <template #icon>
-            <dt-icon
-              name="phone-hang-up"
-              size="400"
-            />
+            <dt-icon-phone-hang-up size="400" />
           </template>
         </dt-button>
       </template>
       <template #bottom>
-        <dt-item-layout>
+        <dt-item-layout
+          class="d-py4 d-px8"
+          content-class="d-ac-center"
+          unstyled
+        >
           <template #default>
-            <div class="d-d-flex d-ai-center">
-              <dt-icon
-                class="d-mr8"
-                name="share-screen"
-                size="400"
-              />
-              <span class="d-fs-100">Sharing screen</span>
-            </div>
+            <dt-stack
+              direction="row"
+              gap="400"
+              class="d-pl2"
+            >
+              <dt-stack
+                class="d-ai-center d-w24"
+              >
+                <dt-icon-share-screen size="400" />
+              </dt-stack>
+              <span class="d-body--sm-compact">Sharing screen</span>
+            </dt-stack>
           </template>
           <template #right>
             <dt-button
@@ -408,10 +354,7 @@
               kind="danger"
             >
               <template #icon>
-                <dt-icon
-                  name="stop-filled"
-                  size="300"
-                />
+                <dt-icon-stop-filled size="300" />
               </template>
               Stop
             </dt-button>
@@ -431,11 +374,8 @@
           gap="300"
           class="d-ai-center"
         >
-          <dt-icon
-            name="share-screen"
-            size="100"
-          />
-          <span>06:01</span>
+          <dt-icon-share-screen size="100" />
+          <span class="d-fvn-tabular">06:01</span>
         </dt-stack>
       </template>
       <template #right>
@@ -446,10 +386,7 @@
           kind="danger"
         >
           <template #icon>
-            <dt-icon
-              name="phone-hang-up"
-              size="400"
-            />
+            <dt-icon-phone-hang-up size="400" />
           </template>
         </dt-button>
       </template>
@@ -460,14 +397,37 @@
 <script>
 import DtRecipeCallbox from './callbox.vue';
 import DtButton from '@/components/button/button.vue';
-import DtIcon from '@/components/icon/icon.vue';
+import {
+  DtIconDialpadSparkle,
+  DtIconPhoneHangUp,
+  DtIconShareScreen,
+  DtIconStopFilled,
+  DtIconVideo,
+  DtIconMic,
+  DtIconUsers,
+  DtIconWaveform,
+} from '@dialpad/dialtone-icons/vue2';
 import DtItemLayout from '@/components/item_layout/item_layout.vue';
 import DtStack from '@/components/stack/stack.vue';
 import chattingPersonImage from '@/common/assets/chatting-person-example.png';
 
 export default {
   name: 'DtRecipeCallboxVariants',
-  components: { DtStack, DtItemLayout, DtIcon, DtButton, DtRecipeCallbox },
+  components: {
+    DtStack,
+    DtItemLayout,
+    DtButton,
+    DtRecipeCallbox,
+    DtIconDialpadSparkle,
+    DtIconPhoneHangUp,
+    DtIconShareScreen,
+    DtIconStopFilled,
+    DtIconVideo,
+    DtIconMic,
+    DtIconUsers,
+    DtIconWaveform,
+  },
+
   emits: [
     /**
      * Add click event here to prevent story from emitting clicks on Vue 3

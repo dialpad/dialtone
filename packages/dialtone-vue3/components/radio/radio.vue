@@ -1,50 +1,53 @@
 <template>
-  <div>
-    <label>
-      <div :class="['d-radio-group', { 'd-radio-group--disabled': internalDisabled }]">
-        <div class="d-radio__input">
-          <input
-            :checked="internalChecked"
-            :name="internalName"
-            :value="value"
-            :disabled="internalDisabled"
-            type="radio"
-            :class="['d-radio', inputValidationClass, inputClass]"
-            v-bind="$attrs"
-            v-on="inputListeners"
-          >
-        </div>
-        <div
-          class="d-radio__copy d-radio__label"
-          data-qa="radio-label-description-container"
+  <div
+    v-bind="addClassStyleAttrs($attrs)"
+  >
+    <label :class="['d-radio-group', { 'd-radio-group--disabled': internalDisabled }]">
+      <div class="d-radio__input">
+        <input
+          :checked="internalChecked"
+          :name="internalName"
+          :value="value"
+          :disabled="internalDisabled"
+          type="radio"
+          :class="['d-radio', inputValidationClass, inputClass]"
+          v-bind="removeClassStyleAttrs($attrs)"
+          v-on="inputListeners"
         >
-          <div
-            :class="labelClass"
-            v-bind="labelChildProps"
-            data-qa="radio-label"
-          >
-            <!-- @slot slot for Radio Label -->
-            <slot>{{ label }}</slot>
-          </div>
-          <div
-            v-if="$slots.description || description"
-            :class="['d-description', descriptionClass]"
-            v-bind="descriptionChildProps"
-            data-qa="radio-description"
-          >
-            <!-- @slot slot for Radio Description -->
-            <slot name="description">{{ description }}</slot>
-          </div>
-          <dt-validation-messages
-            :validation-messages="formattedMessages"
-            :show-messages="showMessages"
-            :class="messagesClass"
-            v-bind="messagesChildProps"
-            data-qa="dt-radio-validation-messages"
-          />
-        </div>
+      </div>
+      <div
+        :class="[labelClass, 'd-radio__copy d-radio__label']"
+        v-bind="labelChildProps"
+        data-qa="radio-label"
+      >
+        <!-- @slot slot for Radio Label -->
+        <slot>{{ label }}</slot>
       </div>
     </label>
+    <div
+      v-if="$slots.description || description || hasMessages"
+      class="d-radio__messages"
+      data-qa="radio-description-messages"
+    >
+      <div
+        v-if="$slots.description || description"
+        :class="['d-description', descriptionClass]"
+        v-bind="descriptionChildProps"
+        data-qa="radio-description"
+      >
+        <!-- @slot slot for Radio Description -->
+        <slot name="description">
+          {{ description }}
+        </slot>
+      </div>
+      <dt-validation-messages
+        :validation-messages="formattedMessages"
+        :show-messages="showMessages"
+        :class="messagesClass"
+        v-bind="messagesChildProps"
+        data-qa="dt-radio-validation-messages"
+      />
+    </div>
   </div>
 </template>
 
@@ -57,7 +60,7 @@ import {
 } from '@/common/mixins/input';
 import { RADIO_INPUT_VALIDATION_CLASSES } from './radio_constants';
 import { DtValidationMessages } from '../validation_messages';
-import { hasSlotContent } from '@/common/utils';
+import { hasSlotContent, removeClassStyleAttrs, addClassStyleAttrs } from '@/common/utils';
 
 /**
  * Radios are control elements that allow the user to make a single selection.
@@ -65,6 +68,7 @@ import { hasSlotContent } from '@/common/utils';
  * @see https://dialtone.dialpad.com/components/radio.html
  */
 export default {
+  compatConfig: { MODE: 3 },
   name: 'DtRadio',
 
   components: { DtValidationMessages },
@@ -91,6 +95,13 @@ export default {
      * @type {String | Number}
      */
     'input',
+    /**
+     * Event fired to sync the modelValue prop with the parent component
+     *
+     * @event input
+     * @type {String | Number}
+     */
+    'update:modelValue',
 
     /**
      * Native input focus event
@@ -153,6 +164,10 @@ export default {
         change: event => this.emitValue(event.target.value),
       };
     },
+
+    hasMessages () {
+      return this.formattedMessages.length && this.showMessages;
+    },
   },
 
   watch: {
@@ -168,12 +183,14 @@ export default {
   },
 
   methods: {
+    removeClassStyleAttrs,
+    addClassStyleAttrs,
     emitValue (value) {
       if (value !== this.radioGroupValue) {
         // update provided value if injected
         this.setGroupValue(value);
-
         this.$emit('input', value);
+        this.$emit('update:modelValue', value);
       }
     },
   },

@@ -3,7 +3,7 @@ import DtRecipeTimePill from './time_pill.vue';
 import {
   itBehavesLikeFailsCustomPropValidation,
   itBehavesLikePassesCustomPropValidation,
-} from '../../../tests/shared_examples/validation';
+} from '@/tests/shared_examples/validation.js';
 
 // Constants
 const today = new Date();
@@ -25,7 +25,7 @@ describe('DtRecipeTimePill Tests', () => {
 
   // Helpers
   const _setChildWrappers = () => {
-    timePill = wrapper.find('[data-qa="dt-time-pill"]');
+    timePill = wrapper.find('[data-qa="dt-recipe-time-pill"]');
   };
 
   const _setWrappers = () => {

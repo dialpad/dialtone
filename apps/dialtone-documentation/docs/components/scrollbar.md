@@ -6,7 +6,7 @@ thumb: true
 image: assets/images/components/scrollbar.png
 ---
 
-## Scrollbar directive
+## Scrollbar Directive
 
 Allows to add overlay scrollbars that will look the same for every browser. The directive sets up the scrollbars from the library [OverlayScrollbars](https://kingsora.github.io/OverlayScrollbars/).
 
@@ -58,16 +58,27 @@ vueCode='
 
 ## Usage
 
-Import the directive from dialtone-vue
+Import the directive and styling from dialtone
 
 ```javascript
-import { DtScrollbarDirective } from "@dialpad/dialtone-vue";
+// For Vue 2
+import { DtScrollbarDirective } from "@dialpad/dialtone/vue2";
+
+// For Vue 3+
+import { DtScrollbarDirective } from "@dialpad/dialtone/vue3";
+
+// Import styling
+import 'overlayscrollbars/overlayscrollbars.css';
 ```
 
 Install the directive into vue instance
 
 ```javascript
+// For Vue 2
 Vue.use(DtScrollbarDirective);
+
+// For Vue 3+
+app.use(DtScrollbarDirective);
 ```
 
 To add a custom overlay scrollbar to a scrollable region, apply the `v-dt-scrollbar` directive to the parent element of the desired region.
@@ -87,7 +98,7 @@ see [variants](#variants).
 
 To customize the behavior of the scrollbar, you can use different arguments with the directive. The allowed arguments are 'leave' (default), 'never', 'scroll', and 'move'.
 
-### Enter (default)
+### Enter (Default)
 
 Show the scrollbar when the mouse enters the scrollable area. This is the default option, so no argument is needed.
 
