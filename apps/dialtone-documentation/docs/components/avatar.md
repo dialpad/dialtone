@@ -292,7 +292,7 @@ Positions the [Presence](/components/presence.md) component at each size and app
 
 <code-example-tabs
 htmlCode='
-<div class="d-avatar d-avatar--{$size) d-avatar--presence">
+<div class="d-avatar d-avatar--{$size) d-avatar--presence-on-avatar">
   <div class="d-avatar__canvas">
     ...
   </div>

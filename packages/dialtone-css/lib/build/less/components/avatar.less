@@ -12,7 +12,6 @@
 //    • CHILDREN
 //    • SIZES
 //    • VARIANTS
-//  • RECIPE STYLE OVERRIDES
 //
 //  ============================================================================
 //  $   BASE STYLE
@@ -62,16 +61,16 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    width: var(--avatar-size-shape);
-    height: var(--avatar-size-shape);
+    inline-size: var(--avatar-size-shape);
+    block-size: var(--avatar-size-shape);
     overflow: hidden;
     background-color: var(--avatar-color-background);
     border-radius: var(--dt-size-radius-pill);
   }
 
   &__image {
-    width: var(--avatar-size-image);
-    height: var(--avatar-size-image);
+    inline-size: var(--avatar-size-image);
+    block-size: var(--avatar-size-image);
     object-fit: cover;
     border-radius: var(--dt-size-radius-pill);
   }
@@ -125,10 +124,11 @@
 
     .d-recipe-leftbar-row--selected &,
     .d-recipe-leftbar-row__primary:hover & {
-      --avatar-count-color-shadow: var(
-        --dt-shell-action-color-background-primary-hover
-      );
+      --avatar-count-color-shadow: var(--dt-shell-action-color-background-primary-hover);
     }
+
+    --avatar-count-color-shadow: transparent;
+
   }
 
   &--clickable {
@@ -162,19 +162,19 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    width: var(--dt-size-100-percent);
-    height: var(--dt-size-100-percent);
+    inline-size: var(--dt-size-100-percent);
+    block-size: var(--dt-size-100-percent);
     background-color: var(--dt-color-surface-contrast-opaque);
     border-radius: var(--dt-size-radius-circle);
     opacity: var(--dt-opacity-900);
 
     &-icon {
-      width: var(--dt-size-100-percent);
+      inline-size: var(--dt-size-100-percent);
       color: var(--dt-color-foreground-primary-inverted);
     }
 
     &-text {
-      width: var(--dt-size-100-percent);
+      inline-size: var(--dt-size-100-percent);
       color: var(--dt-color-foreground-primary-inverted);
       font-weight: var(--dt-font-weight-bold);
       font-size: var(--dt-font-size-200);
@@ -249,9 +249,9 @@
   //  --  PRESENCE
   //  ------------------------------------------------------------------------
 
-  &--presence {
-    .d-avatar__canvas,
-    .d-avatar__overlay {
+  &--presence-on-avatar {
+    > .d-avatar__canvas,
+    > .d-avatar__overlay {
       mask: radial-gradient(
         circle calc(var(--avatar-presence-mask-size) / 2) at
           calc(100% - var(--avatar-presence-mask-offset-x))
@@ -285,6 +285,16 @@
       }
     }
 
+    > .d-presence {
+      --presence-color-border-base: transparent;
+    }
+  }
+
+  // Recipe overrides (Leftbar states)
+  .d-recipe-leftbar-row--selected &,
+  .d-recipe-leftbar-row:hover &,
+  .d-recipe-leftbar-row:focus-within &,
+  .d-recipe-leftbar-row__primary:hover & {
     .d-presence {
       --presence-color-border-base: transparent;
     }
@@ -296,8 +306,8 @@
   &--group {
     --avatar-size-shape: calc(var(--dt-size-300) * 4.5);
 
-    width: var(--dt-size-550);
-    height: var(--dt-size-550);
+    inline-size: var(--dt-size-550);
+    block-size: var(--dt-size-550);
 
     --avatar-count-mask-size: calc(
       var(--dt-size-500) + var(--dt-size-200) + var(--dt-size-50)
@@ -330,8 +340,8 @@
       border: none !important;
     }
 
-    .d-avatar__canvas,
-    .d-avatar__overlay {
+    > .d-avatar__canvas,
+    > .d-avatar__overlay {
       mask: radial-gradient(
         circle calc(var(--avatar-count-mask-size) / 2) at
           calc(100% - var(--avatar-count-mask-offset-x))
@@ -341,77 +351,67 @@
       );
       will-change: transform;
     }
-
-    &.d-avatar--group-digits-2 {
-      --avatar-count-mask-offset-x: var(--dt-space-300);
-      --avatar-count-mask-offset-y: var(--dt-space-400);
-
-      .d-avatar__canvas,
-      .d-avatar__overlay {
-        mask:
-          radial-gradient(
-            circle var(--avatar-count-mask-outer-circle-radius) at
-              var(--avatar-count-mask-outer-circle-x)
-              var(--avatar-count-mask-outer-circle-y),
-            #fff 99%,
-            transparent 100%
-          ),
-          url('data:image/svg+xml,<svg width="40" height="18" viewBox="0 0 40 18" fill="white" xmlns="http://www.w3.org/2000/svg"><rect width="40" height="18" rx="9" fill="white"/></svg>')
-            var(--avatar-count-mask-offset-x)
-            var(--avatar-count-mask-offset-y) / var(--avatar-count-mask-svg-w)
-            var(--avatar-count-mask-svg-h) no-repeat;
-        -webkit-mask-composite: subtract;
-        mask-composite: subtract;
-        will-change: transform;
-      }
-
-      .d-avatar__count {
-        width: calc(var(--dt-size-500) + var(--dt-size-200));
-      }
-    }
-
-    &.d-avatar--group-digits-3 {
-      --avatar-count-mask-offset-x: var(--dt-space-300-negative);
-      --avatar-count-mask-offset-y: var(--dt-space-400);
-
-      .d-avatar__canvas,
-      .d-avatar__overlay {
-        mask:
-          radial-gradient(
-            circle var(--avatar-count-mask-outer-circle-radius) at
-              var(--avatar-count-mask-outer-circle-x)
-              var(--avatar-count-mask-outer-circle-y),
-            #fff 99%,
-            transparent 100%
-          ),
-          url('data:image/svg+xml,<svg width="40" height="18" viewBox="0 0 40 18" fill="white" xmlns="http://www.w3.org/2000/svg"><rect width="40" height="18" rx="9" /></svg>')
-            var(--avatar-count-mask-offset-x)
-            var(--avatar-count-mask-offset-y) / var(--avatar-count-mask-svg-w)
-            var(--avatar-count-mask-svg-h) no-repeat;
-        -webkit-mask-composite: subtract;
-        mask-composite: subtract;
-        will-change: transform;
-      }
-
-      .d-avatar__count {
-        width: calc(var(--dt-size-550) + var(--dt-size-200));
-      }
-    }
-  }
-}
-
-/* -- RECIPE STYLE OVERRIDES -- */
-.d-recipe-leftbar-row--selected .d-avatar,
-.d-recipe-leftbar-row:hover .d-avatar,
-.d-recipe-leftbar-row:focus-within .d-avatar,
-.d-recipe-leftbar-row__primary:hover .d-avatar {
-  // Presence Masking
-  .d-presence {
-    --presence-color-border-base: transparent;
   }
 
-  // Group Masking
-  &.d-avatar--group .d-avatar__count {
-    --avatar-count-color-shadow: transparent;
+  // -- GROUP DIGIT VARIANTS (flattened)
+  // These modifiers must be used together with `d-avatar--group`.
+  // Example: <div class="d-avatar d-avatar--group d-avatar--group-digits-2">
+
+  // Digits: 2
+  &--group-digits-2 {
+    --avatar-count-mask-offset-x: var(--dt-space-300);
+    --avatar-count-mask-offset-y: var(--dt-space-400);
+
+    > .d-avatar__canvas,
+    > .d-avatar__overlay {
+      mask:
+        radial-gradient(
+          circle var(--avatar-count-mask-outer-circle-radius) at
+            var(--avatar-count-mask-outer-circle-x)
+            var(--avatar-count-mask-outer-circle-y),
+          #fff 99%,
+          transparent 100%
+        ),
+        url('data:image/svg+xml,<svg width="40" height="18" viewBox="0 0 40 18" fill="white" xmlns="http://www.w3.org/2000/svg"><rect width="40" height="18" rx="9" fill="white"/></svg>')
+          var(--avatar-count-mask-offset-x)
+          var(--avatar-count-mask-offset-y) / var(--avatar-count-mask-svg-w)
+          var(--avatar-count-mask-svg-h) no-repeat;
+      -webkit-mask-composite: subtract;
+      mask-composite: subtract;
+      will-change: transform;
+    }
+
+    > .d-avatar__count {
+      inline-size: calc(var(--dt-size-500) + var(--dt-size-200));
+    }
+  }
+
+  // Digits: 3
+  &--group-digits-3 {
+    --avatar-count-mask-offset-x: var(--dt-space-300-negative);
+    --avatar-count-mask-offset-y: var(--dt-space-400);
+
+    > .d-avatar__canvas,
+    > .d-avatar__overlay {
+      mask:
+        radial-gradient(
+          circle var(--avatar-count-mask-outer-circle-radius) at
+            var(--avatar-count-mask-outer-circle-x)
+            var(--avatar-count-mask-outer-circle-y),
+          #fff 99%,
+          transparent 100%
+        ),
+        url('data:image/svg+xml,<svg width="40" height="18" viewBox="0 0 40 18" fill="white" xmlns="http://www.w3.org/2000/svg"><rect width="40" height="18" rx="9" /></svg>')
+          var(--avatar-count-mask-offset-x)
+          var(--avatar-count-mask-offset-y) / var(--avatar-count-mask-svg-w)
+          var(--avatar-count-mask-svg-h) no-repeat;
+      -webkit-mask-composite: subtract;
+      mask-composite: subtract;
+      will-change: transform;
+    }
+
+    > .d-avatar__count {
+      inline-size: calc(var(--dt-size-550) + var(--dt-size-200));
+    }
   }
 }
