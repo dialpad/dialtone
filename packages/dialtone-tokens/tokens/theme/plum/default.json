@@ -6,6 +6,10 @@
           "value": "{color.purple.50}",
           "type": "color"
         },
+        "foreground": {
+          "value": "#0a0029",
+          "type": "color"
+        },
         "border": {
           "value": "#0a0029",
           "type": "color"
@@ -13,24 +17,10 @@
         "accent": {
           "value": "#DE0276",
           "type": "color"
-        }
-      },
-      "action": {
-        "color": {
-          "background": {
-            "primary": {
-              "value": "#65318E",
-              "type": "color"
-            },
-            "secondary": {
-              "value": "#65318E",
-              "type": "color"
-            },
-            "muted": {
-              "value": "#65318E",
-              "type": "color"
-            }
-          }
+        },
+        "action": {
+          "value": "#65318E",
+          "type": "color"
         }
       }
     }

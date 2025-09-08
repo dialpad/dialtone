@@ -15,26 +15,12 @@
           "type": "color"
         },
         "accent": {
-          "value": "#F4CD0B",
+          "value": "#f4cd0b",
           "type": "color"
-        }
-      },
-      "action": {
-        "color": {
-          "background": {
-            "primary": {
-              "value": "#2b4b5f",
-              "type": "color"
-            },
-            "secondary": {
-              "value": "#2b4b5f",
-              "type": "color"
-            },
-            "muted": {
-              "value": "#2b4b5f",
-              "type": "color"
-            }
-          }
+        },
+        "action": {
+          "value": "#2b4b5f",
+          "type": "color"
         }
       }
     },

@@ -13,24 +13,10 @@
         "accent": {
           "value": "{color.purple.550}",
           "type": "color"
-        }
-      },
-      "action": {
-        "color": {
-          "background": {
-            "primary": {
-              "value": "#ffdfbf",
-              "type": "color"
-            },
-            "secondary": {
-              "value": "#ffdfbf",
-              "type": "color"
-            },
-            "muted": {
-              "value": "#ffdfbf",
-              "type": "color"
-            }
-          }
+        },
+        "action": {
+          "value": "#ffdfbf",
+          "type": "color"
         }
       }
     },

@@ -7,7 +7,7 @@
           "type": "color"
         },
         "foreground": {
-          "value": "{color.red.900}",
+          "value": "{color.red.1000}",
           "type": "color"
         },
         "border": {
@@ -17,24 +17,10 @@
         "accent": {
           "value": "{color.red.600}",
           "type": "color"
-        }
-      },
-      "action": {
-        "color": {
-          "background": {
-            "primary": {
-              "value": "{color.olive.800}",
-              "type": "color"
-            },
-            "secondary": {
-              "value": "{color.olive.800}",
-              "type": "color"
-            },
-            "muted": {
-              "value": "{color.olive.800}",
-              "type": "color"
-            }
-          }
+        },
+        "action": {
+          "value": "{color.olive.800}",
+          "type": "color"
         }
       }
     }
