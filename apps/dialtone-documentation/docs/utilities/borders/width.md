@@ -14,7 +14,7 @@ Use `d-baw{n}` to change the border width on your element.
   >
     <div
       v-for="r in [0, 1, 2, 4]"
-      class="d-p16 d-ba d-bc-default"
+      class="d-p16 d-ba"
       :class="`d-baw${r}`"
     >
       d-baw{{r}}
@@ -40,7 +40,7 @@ Use `d-b{a|t|r|b|l}w{n}` to change the border width of your direction on your el
   >
     <div
       v-for="r in [0, 1, 2, 4]"
-      class="d-p16 d-ba d-baw0 d-bc-default d-bgc-primary"
+      class="d-p16 d-ba d-baw0 d-bgc-primary"
       :class="`d-btw${r}`"
     >
       d-btw{{r}}
@@ -64,7 +64,7 @@ Use `d-b{a|t|r|b|l}w{n}` to change the border width of your direction on your el
         <th scope="row" class="d-code--sm d-docsite-code">.d-b{{ i[0] }}w{{ key }}</th>
         <td class="d-code--sm">
           <span v-if="i === 'all'">border-width: var(--dt-size-border-{{ val }}) !important;</span>
-          <span v-else>border-{{i}}-width: var(--dt-size-border-{{ val }}) !important;</span>
+          <span v-else>border-{{ i === 'top' ? 'block-start' : i === 'bottom' ? 'block-end' : i === 'left' ? 'inline-start' : i === 'right' ? 'inline-end' : i }}-width: var(--dt-size-border-{{ val }}) !important;</span>
         </td>
       </tr>
     </tbody>

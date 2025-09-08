@@ -41,14 +41,15 @@
 //  ============================================================================
 //  $  BACKGROUND POSITION
 //  ----------------------------------------------------------------------------
+// Note logical properties for background-position continue to use some measure of physical space, e.g. "top"
 .d-bgp-t { background-position: top !important; }
-.d-bgp-tr { background-position: top right !important; }
-.d-bgp-r { background-position: right !important; }
-.d-bgp-br { background-position: bottom right !important; }
+.d-bgp-tr { background-position: top end !important; }
+.d-bgp-r { background-position: end !important; }
+.d-bgp-br { background-position: bottom end !important; }
 .d-bgp-b { background-position: bottom !important; }
-.d-bgp-bl { background-position: bottom left !important; }
-.d-bgp-l { background-position: left !important; }
-.d-bgp-tl { background-position: top left !important; }
+.d-bgp-bl { background-position: bottom start !important; }
+.d-bgp-l { background-position: start !important; }
+.d-bgp-tl { background-position: top start !important; }
 .d-bgp-center { background-position: center !important; }
 .d-bgp-unset { background-position: unset !important; }
 
@@ -97,15 +98,14 @@
 //  --  BASE CLASS
 .d-bgg-pattern {
     position: relative;
-    padding-left: var(--dt-space-550) !important;
+    padding-inline-start: var(--dt-space-550) !important;
 
     &::after {
         position: absolute;
-        top: var(--dt-space-100);
-        bottom: var(--dt-space-100);
-        left: var(--dt-space-100);
-        min-width: 2rem;
-        min-height: 2rem;
+        inset-block: var(--dt-space-100) var(--dt-space-100);
+        inset-inline-start: var(--dt-space-100);
+        min-inline-size: 2rem;
+        min-block-size: 2rem;
         background-image: var(--bgg-pattern);
         background-repeat: repeat-y;
         background-position: top left;

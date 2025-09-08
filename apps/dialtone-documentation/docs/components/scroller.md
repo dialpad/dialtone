@@ -85,11 +85,11 @@ storybook: https://dialtone.dialpad.com/vue3/?path=/story/components-scroller--d
       >
       <template #default="{ item }">
               <div style="
-                height: 25px;
+                block-size: 25px;
                 padding: 0 12px;
                 display: flex;
                 align-items: center;
-                border-bottom: 1px solid #eee;
+                border-block-end: 1px solid #eee;
               ">
                 {{ item.name }}
               </div>
@@ -161,7 +161,7 @@ storybook: https://dialtone.dialpad.com/vue3/?path=/story/components-scroller--d
             padding: 0 12px;
             display: flex;
             align-items: center;
-            border-bottom: 1px solid #eee;"
+            border-block-end: 1px solid #eee;"
         >
           User {{ item.id}} <br />
           {{ item.message }}

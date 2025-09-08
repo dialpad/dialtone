@@ -44,26 +44,26 @@ Use `d-hmn{n}` to set a fixed minimum height for an element. This can be combine
     <table class="d-table dialtone-doc-table">
       <thead class="d-bgc-primary d-ps-sticky d-zi-base1 d-t0">
         <tr>
-          <th scope="col" class="d-p0 d-bbw0 d-w30p"><div class="d-p16 d-bb d-bc-default d-bbw1">Class</div></th>
-          <th scope="col" class="d-p0 d-bbw0"><div class="d-p16 d-bb d-bc-default d-bbw1">Output</div></th>
+          <th scope="col" class="d-p0 d-bbw0 d-w30p"><div class="d-p16 d-bb d-bbw1">Class</div></th>
+          <th scope="col" class="d-p0 d-bbw0"><div class="d-p16 d-bb d-bbw1">Output</div></th>
         </tr>
       </thead>
       <tbody>
         <tr v-for="i in percentage">
           <th scope="row" class="d-code--sm d-docsite-code">.d-hmn{{ i }}p</th>
-          <td class="d-code--sm">min-height: {{ i }}% !important;</td>
+          <td class="d-code--sm">min-block-size: {{ i }}% !important;</td>
         </tr>
       </tbody>
       <tbody>
         <tr v-for="i in fixed">
           <th scope="row" class="d-code--sm d-docsite-code">.d-hmn{{ i }}</th>
-          <td class="d-code--sm">min-height: {{ i }}px !important;</td>
+          <td class="d-code--sm">min-block-size: {{ i }}px !important;</td>
         </tr>
       </tbody>
       <tbody>
         <tr v-for="i in other">
           <th scope="row" class="d-code--sm d-docsite-code">.d-hmn-{{ i }}</th>
-          <td class="d-code--sm">min-height: {{ i }} !important;</td>
+          <td class="d-code--sm">min-block-size: {{ i }} !important;</td>
         </tr>
       </tbody>
     </table>

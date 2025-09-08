@@ -61,16 +61,16 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    width: var(--avatar-size-shape);
-    height: var(--avatar-size-shape);
+    inline-size: var(--avatar-size-shape);
+    block-size: var(--avatar-size-shape);
     overflow: hidden;
     background-color: var(--avatar-color-background);
     border-radius: var(--dt-size-radius-pill);
   }
 
   &__image {
-    width: var(--avatar-size-image);
-    height: var(--avatar-size-image);
+    inline-size: var(--avatar-size-image);
+    block-size: var(--avatar-size-image);
     object-fit: cover;
     border-radius: var(--dt-size-radius-pill);
   }
@@ -96,22 +96,22 @@
 
   &__presence {
     position: absolute;
-    right: var(--avatar-presence-position-right);
-    bottom: var(--avatar-presence-position-bottom);
+    inset-inline-end: var(--avatar-presence-position-right);
+    inset-block-end: var(--avatar-presence-position-bottom);
     z-index: var(--zi-base);
     display: flex;
   }
 
   &__count {
     position: absolute;
-    right: var(--dt-space-0);
-    bottom: var(--dt-space-0);
+    inset-inline-end: var(--dt-space-0);
+    inset-block-end: var(--dt-space-0);
     z-index: var(--zi-base);
     display: inline-flex;
     align-items: center;
     justify-content: center;
     box-sizing: border-box;
-    min-width: calc(var(--dt-size-300) * 3.5);
+    min-inline-size: calc(var(--dt-size-300) * 3.5);
     padding: var(--dt-space-200) calc(var(--dt-space-200) + var(--dt-space-100));
     color: var(--dt-color-foreground-primary-inverted);
     font-weight: var(--dt-font-weight-bold);
@@ -159,19 +159,19 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    width: var(--dt-size-100-percent);
-    height: var(--dt-size-100-percent);
+    inline-size: var(--dt-size-100-percent);
+    block-size: var(--dt-size-100-percent);
     background-color: var(--dt-color-surface-contrast-opaque);
     border-radius: var(--dt-size-radius-circle);
     opacity: var(--dt-opacity-900);
 
     &-icon {
-      width: var(--dt-size-100-percent);
+      inline-size: var(--dt-size-100-percent);
       color: var(--dt-color-foreground-primary-inverted);
     }
 
     &-text {
-      width: var(--dt-size-100-percent);
+      inline-size: var(--dt-size-100-percent);
       color: var(--dt-color-foreground-primary-inverted);
       font-weight: var(--dt-font-weight-bold);
       font-size: var(--dt-font-size-200);
@@ -222,7 +222,7 @@
   &--group {
     --avatar-size-shape: calc(var(--dt-size-300) * 4.5);
 
-    width: var(--dt-size-550);
-    height: var(--dt-size-550);
+    inline-size: var(--dt-size-550);
+    block-size: var(--dt-size-550);
   }
 }

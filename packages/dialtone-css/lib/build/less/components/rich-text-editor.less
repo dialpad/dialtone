@@ -18,15 +18,15 @@
     box-shadow: none;
 
     p.is-editor-empty:first-child::before {
-      float: left;
-      height: 0;
+      float: inline-start;
+      block-size: 0;
       color: var(--dt-color-foreground-placeholder);
       content: attr(data-placeholder);
       pointer-events: none;
     }
 
     ul, ol {
-      padding-left: var(--dt-space-525);
+      padding-inline-start: var(--dt-space-525);
     }
 
     ul > li {
@@ -38,9 +38,9 @@
     }
 
     blockquote {
-      margin-left: 0;
-      padding-left: var(--dt-space-400);
-      border-left: var(--dt-size-border-300) solid var(--dt-color-border-subtle);
+      margin-inline-start: 0;
+      padding-inline-start: var(--dt-space-400);
+      border-inline-start: var(--dt-size-border-300) solid var(--dt-color-border-subtle);
     }
   }
 }
@@ -50,13 +50,13 @@
 }
 
 .d-suggestion-list__container {
-  max-height: var(--dt-size-875);
+  max-block-size: var(--dt-size-875);
 }
 
 .d-suggestion-list {
   position: relative;
-  min-width: var(--dt-size-925);
-  max-width: var(--dt-size-975);
+  min-inline-size: var(--dt-size-925);
+  max-inline-size: var(--dt-size-975);
   padding: var(--dt-size-300);
 }
 
@@ -71,23 +71,24 @@
 }
 
 .d-mention-suggestion__container {
-  width: 100%;
+  inline-size: 100%;
 }
+
 .d-mention-suggestion__details-container {
-  width: 90%;
+  inline-size: 90%;
 }
 
 .d-mention-suggestion__presence {
-  min-width: fit-content;
-  margin-left: var(--dt-space-200);
+  min-inline-size: fit-content;
+  margin-inline-start: var(--dt-space-200);
 }
 
 .d-mention-suggestion__status {
   overflow: hidden;
+  color: var(--dt-color-foreground-tertiary);
   white-space: nowrap;
   text-overflow: ellipsis;
-  color: var(--dt-color-foreground-tertiary);
-  margin-left: var(--dt-space-100);
+  margin-inline-start: var(--dt-space-100);
 }
 
 .d-mention-suggestion__divider {

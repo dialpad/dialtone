@@ -103,7 +103,7 @@
   }
 
   &__status {
-    padding-bottom: var(--dt-space-100);
+    padding-block-end: var(--dt-space-100);
     overflow: hidden;
     color: var(--leftbar-row-status-color-foreground);
     font-size: var(--leftbar-row-status-font-size);
@@ -148,15 +148,15 @@
     gap: var(--dt-space-200);
     align-items: center;
     justify-content: center;
-    width: var(--is-typing-size-shape);
-    height: var(--is-typing-size-shape);
+    inline-size: var(--is-typing-size-shape);
+    block-size: var(--is-typing-size-shape);
     border-radius: var(--dt-size-radius-pill);
     opacity: 0.75;
 
     & span {
       display: inline-block;
-      width: var(--dt-size-300);
-      height: var(--dt-size-300);
+      inline-size: var(--dt-size-300);
+      block-size: var(--dt-size-300);
       padding: 0;
       background: var(--dt-color-surface-strong);
       border-radius: var(--dt-size-radius-pill);
@@ -212,13 +212,13 @@
     display: flex;
     flex: 1;
     align-items: center;
-    width: 100%;
+    inline-size: 100%;
     margin: 0;
     padding: 0;
     color: var(--leftbar-row-color-foreground);
     font-size: inherit;
     line-height: inherit;
-    text-align: left;
+    text-align: start;
     text-decoration: none;
     background-color: var(--leftbar-row-color-background);
     border: 0;
@@ -235,8 +235,8 @@
   }
 
   &__action-button {
-    width: var(--leftbar-row-action-width);
-    height: var(--leftbar-row-action-height);
+    inline-size: var(--leftbar-row-action-width);
+    block-size: var(--leftbar-row-action-height);
     opacity: 0;
   }
 
@@ -253,23 +253,22 @@
     align-items: center;
     justify-content: center;
     box-sizing: border-box;
-    width: var(--leftbar-row-alpha-width);
-    height: var(--leftbar-row-alpha-height);
-    padding-right: var(--dt-space-400);
-    padding-left: var(--dt-space-400);
+    inline-size: var(--leftbar-row-alpha-width);
+    block-size: var(--leftbar-row-alpha-height);
+    padding-inline: var(--dt-space-400) var(--dt-space-400);
     color: var(--leftbar-row-alpha-color-foreground);
     border-radius: var(--leftbar-row-radius) 0 0 var(--leftbar-row-radius);
   }
 
   &__label {
     flex: 0 1;
-    min-width: 0;
+    min-inline-size: 0;
   }
 
   &__omega {
     position: absolute;
-    top: var(--leftbar-row-action-position-bottom);
-    right: var(--leftbar-row-action-position-right);
+    inset-block-start: var(--leftbar-row-action-position-bottom);
+    inset-inline-end: var(--leftbar-row-action-position-right);
     display: flex;
     gap: var(--dt-space-300);
     align-items: center;
@@ -292,15 +291,15 @@
   }
 
   &__unread-count-badge {
-    border-top-right-radius: var(--dt-size-radius-0);
-    border-bottom-right-radius: var(--dt-size-radius-0);
+    border-start-end-radius: var(--dt-size-radius-0);
+    border-end-end-radius: var(--dt-size-radius-0);
   }
 
   &__unread-mention-count-badge {
     color: var(--dt-shell-mention-color-foreground-secondary);
     background-color: var(--dt-shell-mention-color-surface-secondary);
-    border-top-left-radius: var(--dt-size-radius-0);
-    border-bottom-left-radius: var(--dt-size-radius-0);
+    border-start-start-radius: var(--dt-size-radius-0);
+    border-end-start-radius: var(--dt-size-radius-0);
   }
 
   &__unread-mention-only-count-badge {
@@ -315,8 +314,8 @@
   }
 
   &__dnd {
-    padding-top: var(--dt-space-200);
-    padding-right: var(--dt-space-300);
+    padding-block-start: var(--dt-space-200);
+    padding-inline-end: var(--dt-space-300);
     color: var(--dt-color-foreground-tertiary);
     font-weight: var(--dt-font-weight-medium);
     font-size: var(--dt-font-size-100);
@@ -335,22 +334,21 @@
 
   &--contact-centers {
     .d-recipe-leftbar-row__alpha {
-      padding-right: var(--dt-space-450);
-      padding-left: var(--dt-space-450);
+      padding-inline: var(--dt-space-450) var(--dt-space-450);
     }
 
     .d-recipe-leftbar-row__action-container {
       display: inline-flex;
       align-items: center;
       justify-content: flex-end;
-      min-width: var(--dt-size-600);
-      height: var(--dt-size-500);
+      min-inline-size: var(--dt-size-600);
+      block-size: var(--dt-size-500);
     }
   }
 
   &__icon-cc {
-    width: calc(var(--dt-size-300) * 3.5);
-    height: calc(var(--dt-size-300) * 3.5);
+    inline-size: calc(var(--dt-size-300) * 3.5);
+    block-size: calc(var(--dt-size-300) * 3.5);
     border-radius: var(--dt-size-200);
   }
 }

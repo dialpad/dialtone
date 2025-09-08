@@ -15,7 +15,7 @@
   --datepicker-button-size: calc(var(--dt-size-600) - var(--dt-size-200)); // Emulates SM button since Vue component in lieu of Vue component using DT button
 
   box-sizing: border-box;
-  width: var(--datepicker-width);
+  inline-size: var(--datepicker-width);
   padding: var(--dt-space-500);
 
   &__hd {
@@ -25,7 +25,7 @@
 
   &__month-year {
     justify-content: space-between;
-    width: 100%;
+    inline-size: 100%;
     color: var(--dt-color-foreground-secondary);
     text-align: center;
   }
@@ -38,8 +38,8 @@
   }
 
   &__nav-btn {
-    width: var(--datepicker-button-size);
-    height: var(--datepicker-button-size);
+    inline-size: var(--datepicker-button-size);
+    block-size: var(--datepicker-button-size);
   }
 
   &__weekday {
@@ -50,24 +50,23 @@
   }
 
   &__calendar {
-    width: 100%;
+    inline-size: 100%;
     border-collapse: collapse;
   }
 
   &__cell {
     padding: 0;
-    padding-top: var(--dt-space-200);
+    padding-block-start: var(--dt-space-200);
     text-align: center;
 
     &--header {
-      padding-top: 0;
-      padding-bottom: var(--dt-space-400);
+      padding-block: 0 var(--dt-space-400);
     }
   }
 
   &__day {
-    width: var(--datepicker-button-size);
-    height: var(--datepicker-button-size);
+    inline-size: var(--datepicker-button-size);
+    block-size: var(--datepicker-button-size);
     font-variant-numeric: tabular-nums;
 
     &--selected {

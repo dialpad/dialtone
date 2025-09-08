@@ -297,7 +297,7 @@ function flexColumnsUtilities (clonedSource, declaration) {
       source: clonedSource,
       selector: `.d-fl-col${i} > *:nth-child(-n + ${i})`,
       nodes: [
-        declaration.clone({ prop: 'margin-top', value: 'var(--dt-space-0)' }),
+        declaration.clone({ prop: 'margin-block-start', value: 'var(--dt-space-0)' }),
       ],
     }));
     generatedRules.flexDirectionColumn.push(new Rule({
@@ -329,32 +329,32 @@ function borderUtilities (clonedSource, declaration) {
         source: clonedSource,
         selector: `.d-btr${size}`,
         nodes: [
-          declaration.clone({ prop: 'border-top-left-radius', value: `var(--dt-size-${BORDER_RADIUS_SIZES[size]}) !important` }),
-          declaration.clone({ prop: 'border-top-right-radius', value: `var(--dt-size-${BORDER_RADIUS_SIZES[size]}) !important` }),
+          declaration.clone({ prop: 'border-start-start-radius', value: `var(--dt-size-${BORDER_RADIUS_SIZES[size]}) !important` }),
+          declaration.clone({ prop: 'border-start-end-radius', value: `var(--dt-size-${BORDER_RADIUS_SIZES[size]}) !important` }),
         ],
       }));
       generatedRules.borderRightRadius.push(new Rule({
         source: clonedSource,
         selector: `.d-brr${size}`,
         nodes: [
-          declaration.clone({ prop: 'border-top-right-radius', value: `var(--dt-size-${BORDER_RADIUS_SIZES[size]}) !important` }),
-          declaration.clone({ prop: 'border-bottom-right-radius', value: `var(--dt-size-${BORDER_RADIUS_SIZES[size]}) !important` }),
+          declaration.clone({ prop: 'border-start-end-radius', value: `var(--dt-size-${BORDER_RADIUS_SIZES[size]}) !important` }),
+          declaration.clone({ prop: 'border-end-end-radius', value: `var(--dt-size-${BORDER_RADIUS_SIZES[size]}) !important` }),
         ],
       }));
       generatedRules.borderBottomRadius.push(new Rule({
         source: clonedSource,
         selector: `.d-bbr${size}`,
         nodes: [
-          declaration.clone({ prop: 'border-bottom-left-radius', value: `var(--dt-size-${BORDER_RADIUS_SIZES[size]}) !important` }),
-          declaration.clone({ prop: 'border-bottom-right-radius', value: `var(--dt-size-${BORDER_RADIUS_SIZES[size]}) !important` }),
+          declaration.clone({ prop: 'border-end-start-radius', value: `var(--dt-size-${BORDER_RADIUS_SIZES[size]}) !important` }),
+          declaration.clone({ prop: 'border-end-end-radius', value: `var(--dt-size-${BORDER_RADIUS_SIZES[size]}) !important` }),
         ],
       }));
       generatedRules.borderLeftRadius.push(new Rule({
         source: clonedSource,
         selector: `.d-blr${size}`,
         nodes: [
-          declaration.clone({ prop: 'border-top-left-radius', value: `var(--dt-size-${BORDER_RADIUS_SIZES[size]}) !important` }),
-          declaration.clone({ prop: 'border-bottom-left-radius', value: `var(--dt-size-${BORDER_RADIUS_SIZES[size]}) !important` }),
+          declaration.clone({ prop: 'border-start-start-radius', value: `var(--dt-size-${BORDER_RADIUS_SIZES[size]}) !important` }),
+          declaration.clone({ prop: 'border-end-start-radius', value: `var(--dt-size-${BORDER_RADIUS_SIZES[size]}) !important` }),
         ],
       }));
     });
@@ -509,54 +509,49 @@ function layoutUtilities (clonedSource, declaration) {
         source: clonedSource,
         selector: `.d-t${size}`,
         nodes: [
-          declaration.clone({ prop: 'top', value: `var(--dt-space-${LAYOUT_SIZES[size]}) !important` }),
+          declaration.clone({ prop: 'inset-block-start', value: `var(--dt-space-${LAYOUT_SIZES[size]}) !important` }),
         ],
       }));
       generatedRules.positionRight.push(new Rule({
         source: clonedSource,
         selector: `.d-r${size}`,
         nodes: [
-          declaration.clone({ prop: 'right', value: `var(--dt-space-${LAYOUT_SIZES[size]}) !important` }),
+          declaration.clone({ prop: 'inset-inline-end', value: `var(--dt-space-${LAYOUT_SIZES[size]}) !important` }),
         ],
       }));
       generatedRules.positionBottom.push(new Rule({
         source: clonedSource,
         selector: `.d-b${size}`,
         nodes: [
-          declaration.clone({ prop: 'bottom', value: `var(--dt-space-${LAYOUT_SIZES[size]}) !important` }),
+          declaration.clone({ prop: 'inset-block-end', value: `var(--dt-space-${LAYOUT_SIZES[size]}) !important` }),
         ],
       }));
       generatedRules.positionLeft.push(new Rule({
         source: clonedSource,
         selector: `.d-l${size}`,
         nodes: [
-          declaration.clone({ prop: 'left', value: `var(--dt-space-${LAYOUT_SIZES[size]}) !important` }),
+          declaration.clone({ prop: 'inset-inline-start', value: `var(--dt-space-${LAYOUT_SIZES[size]}) !important` }),
         ],
       }));
       generatedRules.positionVertical.push(new Rule({
         source: clonedSource,
         selector: `.d-y${size}`,
         nodes: [
-          declaration.clone({ prop: 'top', value: `var(--dt-space-${LAYOUT_SIZES[size]}) !important` }),
-          declaration.clone({ prop: 'bottom', value: `var(--dt-space-${LAYOUT_SIZES[size]}) !important` }),
+          declaration.clone({ prop: 'inset-block', value: `var(--dt-space-${LAYOUT_SIZES[size]}) !important` }),
         ],
       }));
       generatedRules.positionHorizontal.push(new Rule({
         source: clonedSource,
         selector: `.d-x${size}`,
         nodes: [
-          declaration.clone({ prop: 'right', value: `var(--dt-space-${LAYOUT_SIZES[size]}) !important` }),
-          declaration.clone({ prop: 'left', value: `var(--dt-space-${LAYOUT_SIZES[size]}) !important` }),
+          declaration.clone({ prop: 'inset-inline', value: `var(--dt-space-${LAYOUT_SIZES[size]}) !important` }),
         ],
       }));
       generatedRules.positionAll.push(new Rule({
         source: clonedSource,
         selector: `.d-all${size}`,
         nodes: [
-          declaration.clone({ prop: 'top', value: `var(--dt-space-${LAYOUT_SIZES[size]}) !important` }),
-          declaration.clone({ prop: 'right', value: `var(--dt-space-${LAYOUT_SIZES[size]}) !important` }),
-          declaration.clone({ prop: 'bottom', value: `var(--dt-space-${LAYOUT_SIZES[size]}) !important` }),
-          declaration.clone({ prop: 'left', value: `var(--dt-space-${LAYOUT_SIZES[size]}) !important` }),
+          declaration.clone({ prop: 'inset', value: `var(--dt-space-${LAYOUT_SIZES[size]}) !important` }),
         ],
       }));
     });
@@ -574,42 +569,42 @@ function sizingUtilities (clonedSource, declaration) {
         source: clonedSource,
         selector: `.d-h${size}`,
         nodes: [
-          declaration.clone({ prop: 'height', value: `var(--dt-size-${WIDTH_HEIGHTS[size]}) !important` }),
+          declaration.clone({ prop: 'block-size', value: `var(--dt-size-${WIDTH_HEIGHTS[size]}) !important` }),
         ],
       }));
       generatedRules.minHeight.push(new Rule({
         source: clonedSource,
         selector: `.d-hmn${size}`,
         nodes: [
-          declaration.clone({ prop: 'min-height', value: `var(--dt-size-${WIDTH_HEIGHTS[size]}) !important` }),
+          declaration.clone({ prop: 'min-block-size', value: `var(--dt-size-${WIDTH_HEIGHTS[size]}) !important` }),
         ],
       }));
       generatedRules.maxHeight.push(new Rule({
         source: clonedSource,
         selector: `.d-hmx${size}`,
         nodes: [
-          declaration.clone({ prop: 'max-height', value: `var(--dt-size-${WIDTH_HEIGHTS[size]}) !important` }),
+          declaration.clone({ prop: 'max-block-size', value: `var(--dt-size-${WIDTH_HEIGHTS[size]}) !important` }),
         ],
       }));
       generatedRules.fixedWidth.push(new Rule({
         source: clonedSource,
         selector: `.d-w${size}`,
         nodes: [
-          declaration.clone({ prop: 'width', value: `var(--dt-size-${WIDTH_HEIGHTS[size]}) !important` }),
+          declaration.clone({ prop: 'inline-size', value: `var(--dt-size-${WIDTH_HEIGHTS[size]}) !important` }),
         ],
       }));
       generatedRules.minWidth.push(new Rule({
         source: clonedSource,
         selector: `.d-wmn${size}`,
         nodes: [
-          declaration.clone({ prop: 'min-width', value: `var(--dt-size-${WIDTH_HEIGHTS[size]}) !important` }),
+          declaration.clone({ prop: 'min-inline-size', value: `var(--dt-size-${WIDTH_HEIGHTS[size]}) !important` }),
         ],
       }));
       generatedRules.maxWidth.push(new Rule({
         source: clonedSource,
         selector: `.d-wmx${size}`,
         nodes: [
-          declaration.clone({ prop: 'max-width', value: `var(--dt-size-${WIDTH_HEIGHTS[size]}) !important` }),
+          declaration.clone({ prop: 'max-inline-size', value: `var(--dt-size-${WIDTH_HEIGHTS[size]}) !important` }),
         ],
       }));
     });
@@ -626,44 +621,42 @@ function marginUtilities (clonedSource, declaration) {
       source: clonedSource,
       selector: `.d-mt${size}`,
       nodes: [
-        declaration.clone({ prop: 'margin-top', value: `var(--dt-space-${MARGIN_SIZES[size]}) !important` }),
+        declaration.clone({ prop: 'margin-block-start', value: `var(--dt-space-${MARGIN_SIZES[size]}) !important` }),
       ],
     }));
     generatedRules.marginRight.push(new Rule({
       source: clonedSource,
       selector: `.d-mr${size}`,
       nodes: [
-        declaration.clone({ prop: 'margin-right', value: `var(--dt-space-${MARGIN_SIZES[size]}) !important` }),
+        declaration.clone({ prop: 'margin-inline-end', value: `var(--dt-space-${MARGIN_SIZES[size]}) !important` }),
       ],
     }));
     generatedRules.marginBottom.push(new Rule({
       source: clonedSource,
       selector: `.d-mb${size}`,
       nodes: [
-        declaration.clone({ prop: 'margin-bottom', value: `var(--dt-space-${MARGIN_SIZES[size]}) !important` }),
+        declaration.clone({ prop: 'margin-block-end', value: `var(--dt-space-${MARGIN_SIZES[size]}) !important` }),
       ],
     }));
     generatedRules.marginLeft.push(new Rule({
       source: clonedSource,
       selector: `.d-ml${size}`,
       nodes: [
-        declaration.clone({ prop: 'margin-left', value: `var(--dt-space-${MARGIN_SIZES[size]}) !important` }),
+        declaration.clone({ prop: 'margin-inline-start', value: `var(--dt-space-${MARGIN_SIZES[size]}) !important` }),
       ],
     }));
     generatedRules.marginHorizontal.push(new Rule({
       source: clonedSource,
       selector: `.d-mx${size}`,
       nodes: [
-        declaration.clone({ prop: 'margin-left', value: `var(--dt-space-${MARGIN_SIZES[size]}) !important` }),
-        declaration.clone({ prop: 'margin-right', value: `var(--dt-space-${MARGIN_SIZES[size]}) !important` }),
+        declaration.clone({ prop: 'margin-inline', value: `var(--dt-space-${MARGIN_SIZES[size]}) !important` }),
       ],
     }));
     generatedRules.marginVertical.push(new Rule({
       source: clonedSource,
       selector: `.d-my${size}`,
       nodes: [
-        declaration.clone({ prop: 'margin-top', value: `var(--dt-space-${MARGIN_SIZES[size]}) !important` }),
-        declaration.clone({ prop: 'margin-bottom', value: `var(--dt-space-${MARGIN_SIZES[size]}) !important` }),
+        declaration.clone({ prop: 'margin-block', value: `var(--dt-space-${MARGIN_SIZES[size]}) !important` }),
       ],
     }));
     generatedRules.marginAll.push(new Rule({
@@ -688,44 +681,42 @@ function paddingUtilities (clonedSource, declaration) {
         source: clonedSource,
         selector: `.d-pt${size}`,
         nodes: [
-          declaration.clone({ prop: 'padding-top', value: `var(--dt-space-${PADDING_SIZES[size]}) !important` }),
+          declaration.clone({ prop: 'padding-block-start', value: `var(--dt-space-${PADDING_SIZES[size]}) !important` }),
         ],
       }));
       generatedRules.paddingRight.push(new Rule({
         source: clonedSource,
         selector: `.d-pr${size}`,
         nodes: [
-          declaration.clone({ prop: 'padding-right', value: `var(--dt-space-${PADDING_SIZES[size]}) !important` }),
+          declaration.clone({ prop: 'padding-inline-end', value: `var(--dt-space-${PADDING_SIZES[size]}) !important` }),
         ],
       }));
       generatedRules.paddingBottom.push(new Rule({
         source: clonedSource,
         selector: `.d-pb${size}`,
         nodes: [
-          declaration.clone({ prop: 'padding-bottom', value: `var(--dt-space-${PADDING_SIZES[size]}) !important` }),
+          declaration.clone({ prop: 'padding-block-end', value: `var(--dt-space-${PADDING_SIZES[size]}) !important` }),
         ],
       }));
       generatedRules.paddingLeft.push(new Rule({
         source: clonedSource,
         selector: `.d-pl${size}`,
         nodes: [
-          declaration.clone({ prop: 'padding-left', value: `var(--dt-space-${PADDING_SIZES[size]}) !important` }),
+          declaration.clone({ prop: 'padding-inline-start', value: `var(--dt-space-${PADDING_SIZES[size]}) !important` }),
         ],
       }));
       generatedRules.paddingHorizontal.push(new Rule({
         source: clonedSource,
         selector: `.d-px${size}`,
         nodes: [
-          declaration.clone({ prop: 'padding-left', value: `var(--dt-space-${PADDING_SIZES[size]}) !important` }),
-          declaration.clone({ prop: 'padding-right', value: `var(--dt-space-${PADDING_SIZES[size]}) !important` }),
+          declaration.clone({ prop: 'padding-inline', value: `var(--dt-space-${PADDING_SIZES[size]}) !important` }),
         ],
       }));
       generatedRules.paddingVertical.push(new Rule({
         source: clonedSource,
         selector: `.d-py${size}`,
         nodes: [
-          declaration.clone({ prop: 'padding-top', value: `var(--dt-space-${PADDING_SIZES[size]}) !important` }),
-          declaration.clone({ prop: 'padding-bottom', value: `var(--dt-space-${PADDING_SIZES[size]}) !important` }),
+          declaration.clone({ prop: 'padding-block', value: `var(--dt-space-${PADDING_SIZES[size]}) !important` }),
         ],
       }));
       generatedRules.paddingAll.push(new Rule({

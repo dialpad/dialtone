@@ -55,7 +55,7 @@ import utils from '@/common/utils';
 import DtToastLayoutAlternateIcon from './toast_layout_alternate_icon.vue';
 import { DtNoticeAction, DtNoticeContent } from '@/components/notice';
 import { TOAST_ROLES, TOAST_ALTERNATE_KINDS } from '../toast_constants.js';
-import { extractVueListeners } from "@/common/utils/index.js";
+import { extractVueListeners } from '@/common/utils/index.js';
 
 export default {
   name: 'ToastLayoutAlternate',

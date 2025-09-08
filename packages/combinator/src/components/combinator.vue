@@ -346,7 +346,7 @@ export default {
   }
 
   .dtc-root__sidebar {
-    border-left: var(--dt-space-100) solid currentColor;
+    border-inline-start: var(--dt-space-100) solid currentColor;
   }
 }
 
@@ -365,7 +365,7 @@ export default {
 
   .dtc-root__sidebar {
     grid-column-start: 1;
-    border-right: var(--dt-space-100) solid currentColor;
+    border-inline-end: var(--dt-space-100) solid currentColor;
   }
 }
 

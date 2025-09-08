@@ -40,19 +40,19 @@ Use `d-divide-{y|x}{n}` to change the divider width between an element's child i
 
 <code-well-header>
   <code>d-divide-x0</code>
-  <dt-stack direction="row" class="d-divide-x d-divide-x0 d-divide-default d-w100p d-ba d-bc-default">
+  <dt-stack direction="row" class="d-divide-x d-divide-x0 d-divide-default d-w100p d-ba">
     <div class="d-fl-center d-w100p d-p16">1</div>
     <div class="d-fl-center d-w100p d-p16">2</div>
     <div class="d-fl-center d-w100p d-p16">3</div>
   </dt-stack>
   <code>d-divide-x2</code>
-  <dt-stack direction="row" class="d-divide-x d-divide-x2 d-divide-default d-w100p d-ba d-bc-default d-baw2">
+  <dt-stack direction="row" class="d-divide-x d-divide-x2 d-divide-default d-w100p d-ba d-baw2">
     <div class="d-fl-center d-w100p d-p16">1</div>
     <div class="d-fl-center d-w100p d-p16">2</div>
     <div class="d-fl-center d-w100p d-p16">3</div>
   </dt-stack>
   <code>d-divide-x4</code>
-  <dt-stack direction="row" class="d-divide-x d-divide-x4 d-divide-default d-w100p d-ba d-bc-default d-baw4">
+  <dt-stack direction="row" class="d-divide-x d-divide-x4 d-divide-default d-w100p d-ba d-baw4">
     <div class="d-fl-center d-w100p d-p16">1</div>
     <div class="d-fl-center d-w100p d-p16">2</div>
     <div class="d-fl-center d-w100p d-p16">3</div>
@@ -60,13 +60,13 @@ Use `d-divide-{y|x}{n}` to change the divider width between an element's child i
 </code-well-header>
 
 ```html
-<dt-stack direction="row" class="d-divide-x d-divide-x0 d-divide-default d-w100p d-ba d-bc-default">
+<dt-stack direction="row" class="d-divide-x d-divide-x0 d-divide-default d-w100p d-ba">
   ...
 </dt-stack>
-<dt-stack direction="row" class="d-divide-x d-divide-x2 d-divide-default d-w100p d-ba d-bc-default d-baw2">
+<dt-stack direction="row" class="d-divide-x d-divide-x2 d-divide-default d-w100p d-ba d-baw2">
   ...
 </dt-stack>
-<dt-stack direction="row" class="d-divide-x d-divide-x4 d-divide-default d-w100p d-ba d-bc-default d-baw4">
+<dt-stack direction="row" class="d-divide-x d-divide-x4 d-divide-default d-w100p d-ba d-baw4">
   ...
 </dt-stack>
 ```
@@ -84,7 +84,7 @@ If an element's `flex-direction` is reversed, apply `d-divide-{y|x}-reverse` to 
 </code-well-header>
 
 ```html
-<dt-stack direction="row-reverse" class="d-divide-x d-divide-default d-divide-x-reverse d-w100p d-ba d-bc-default">
+<dt-stack direction="row-reverse" class="d-divide-x d-divide-default d-divide-x-reverse d-w100p d-ba">
   <div class="d-fl-center d-w100p d-p16">1</div>
   <div class="d-fl-center d-w100p d-p16">2</div>
   <div class="d-fl-center d-w100p d-p16">3</div>
@@ -103,24 +103,24 @@ If an element's `flex-direction` is reversed, apply `d-divide-{y|x}-reverse` to 
         <td class="d-code--sm">
           --divide-{{ d }}-reverse: 0;<br/>
           <span v-if="d === 'y'">
-            border-top: calc(
+            border-block-start: calc(
               <span v-if="i === 'default'">1</span>
               <span v-else>{{ i }}</span>
               px *(1 - var(--divide-{{ d }}-reverse))
             ) solid !important;<br/>
-            border-bottom: calc(
+            border-block-end: calc(
               <span v-if="i === 'default'">1</span>
               <span v-else>{{ i }}</span>
 * var(--divide-{{ d }}-reverse)
             ) solid !important;
           </span>
           <span v-else>
-            border-right: calc(
+            border-inline-end: calc(
               <span v-if="i === 'default'">1</span>
               <span v-else>{{ i }}</span>
               px*var(--divide-{{ d }}-reverse)
             ) solid !important;<br/>
-            border-left: calc(
+            border-inline-start: calc(
               <span v-if="i === 'default'">1</span>
               <span v-else>{{ i }}</span>
 *(1 - var(--divide-{{ d }}-reverse))

@@ -11,7 +11,7 @@ image: assets/images/components/scrollbar.png
 Allows to add overlay scrollbars that will look the same for every browser. The directive sets up the scrollbars from the library [OverlayScrollbars](https://kingsora.github.io/OverlayScrollbars/).
 
 <code-well-header>
-  <div class="d-hmx164 d-w30p d-bar8 d-ba d-bc-default" v-dt-scrollbar>
+  <div class="d-hmx164 d-w30p d-bar8 d-ba" v-dt-scrollbar>
     <dt-stack>
       <div v-for="item in items" class="item">
         {{ item}}
@@ -22,7 +22,7 @@ Allows to add overlay scrollbars that will look the same for every browser. The 
 
 <code-example-tabs
 htmlCode='
-<div class="d-hmx164 d-w30p d-bar8 d-ba d-bc-default d-scrollbar" data-overlayscrollbars="host"
+<div class="d-hmx164 d-w30p d-bar8 d-ba d-scrollbar" data-overlayscrollbars="host"
   data-overlayscrollbars-initialize="true">
   <div class="os-size-observer">
     <div class="os-size-observer-listener"></div>
@@ -46,7 +46,7 @@ htmlCode='
 </div>
 '
 vueCode='
-<div class="d-hmx164 d-w30p d-bar8 d-ba d-bc-default" v-dt-scrollbar>
+<div class="d-hmx164 d-w30p d-bar8 d-ba" v-dt-scrollbar>
   <dt-stack>
     <div v-for="item in items" class="item">
       {{ item}}
@@ -107,7 +107,7 @@ Show the scrollbar when the mouse enters the scrollable area. This is the defaul
 ```
 
 <code-well-header>
-  <div class="d-hmx164 d-w30p d-bar8 d-ba d-bc-default" v-dt-scrollbar>
+  <div class="d-hmx164 d-w30p d-bar8 d-ba" v-dt-scrollbar>
     <dt-stack>
       <div v-for="item in items" class="item">
         {{ item}}
@@ -125,7 +125,7 @@ Always show the scrollbar if the region is overflowing the available space.
 ```
 
 <code-well-header>
-  <div class="d-hmx164 d-w30p d-bar8 d-ba d-bc-default" v-dt-scrollbar:never>
+  <div class="d-hmx164 d-w30p d-bar8 d-ba" v-dt-scrollbar:never>
     <dt-stack>
       <div v-for="item in items" class="item">
         {{ item}}
@@ -143,7 +143,7 @@ Show the scrollbar on scroll.
 ```
 
 <code-well-header>
-  <div class="d-hmx164 d-w30p d-bar8 d-ba d-bc-default" v-dt-scrollbar:scroll>
+  <div class="d-hmx164 d-w30p d-bar8 d-ba" v-dt-scrollbar:scroll>
     <dt-stack>
       <div v-for="item in items" class="item">
         {{ item}}
@@ -161,7 +161,7 @@ Show the scrollbar when the mouse moves inside the scrollable area.
 ```
 
 <code-well-header>
-  <div class="d-hmx164 d-w30p d-bar8 d-ba d-bc-default" v-dt-scrollbar:move>
+  <div class="d-hmx164 d-w30p d-bar8 d-ba" v-dt-scrollbar:move>
     <dt-stack>
       <div v-for="item in items" class="item">
         {{ item}}
@@ -206,9 +206,9 @@ This can make it challenging to use with components that rely on event listeners
 <style lang="less" scoped>
 .item {
   padding: var(--dt-space-300) var(--dt-space-400);
-  border-bottom: var(--dt-size-border-100) solid var(--dt-color-border-default);
+  border-block-end: var(--dt-size-border-100) solid var(--dt-color-border-default);
   &:last-child {
-    border-bottom: none;
+    border-block-end: none;
   }
 }
 </style>

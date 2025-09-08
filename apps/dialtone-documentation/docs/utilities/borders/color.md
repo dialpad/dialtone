@@ -27,7 +27,7 @@ Use `d-bc-{color}` to set an element's border color.
 </code-well-header>
 
 ```html
-<div class="d-ba d-bc-default">...</div>
+<div class="d-ba d-bc-{color}">...</div>
 ```
 
 ## Hover
@@ -36,20 +36,20 @@ Use `h:d-bc-{color}` to change an element's border color spot on `:hover`.
 
 <code-well-header>
   <dt-stack direction="row" gap="500">
-    <dt-button kind="unstyled" class="d-p16 d-ba d-baw2 d-bc-default h:d-bc-moderate">
+    <dt-button kind="unstyled" class="d-p16 d-ba d-baw2 h:d-bc-moderate">
       Hover over me
     </dt-button>
-    <dt-button kind="unstyled" class="d-p16 d-ba d-baw2 d-bc-default h:d-bc-critical">
+    <dt-button kind="unstyled" class="d-p16 d-ba d-baw2 h:d-bc-critical">
       Hover over me
     </dt-button>
   </dt-stack>
 </code-well-header>
 
 ```html
-<dt-button kind="unstyled" class="d-p16 d-ba d-baw2 d-bc-default h:d-bc-moderate">
+<dt-button kind="unstyled" class="d-p16 d-ba d-baw2 h:d-bc-moderate">
   Hover over me
 </dt-button>
-<dt-button kind="unstyled" class="d-p16 d-ba d-baw2 d-bc-default h:d-bc-critical">
+<dt-button kind="unstyled" class="d-p16 d-ba d-baw2 h:d-bc-critical">
   Hover over me
 </dt-button>
 ```
@@ -60,20 +60,20 @@ Use `f:d-bc-{color}` to change an element's border color when in `:focus` or `:f
 
 <code-well-header>
   <dt-stack direction="row" gap="500">
-    <dt-button kind="unstyled" class="d-p16 d-ba d-baw2 d-bc-default f:d-bc-moderate">
+    <dt-button kind="unstyled" class="d-p16 d-ba d-baw2 f:d-bc-moderate">
       Focus me
     </dt-button>
-    <dt-button kind="unstyled" class="d-p16 d-ba d-baw2 d-bc-default f:d-bc-critical">
+    <dt-button kind="unstyled" class="d-p16 d-ba d-baw2 f:d-bc-critical">
       Focus me
     </dt-button>
   </dt-stack>
 </code-well-header>
 
 ```html
-<dt-button kind="unstyled" class="d-p16 d-ba d-baw2 d-bc-default f:d-bc-moderate">
+<dt-button kind="unstyled" class="d-p16 d-ba d-baw2 f:d-bc-moderate">
   Focus me
 </dt-button>
-<dt-button kind="unstyled" class="d-p16 d-ba d-baw2 d-bc-default f:d-bc-critical">
+<dt-button kind="unstyled" class="d-p16 d-ba d-baw2 f:d-bc-critical">
   Focus me
 </dt-button>
 ```
@@ -85,20 +85,20 @@ Use `fv:d-bc-{color}` to change an element's border color when in `:focus-visibl
 
 <code-well-header>
   <dt-stack direction="row" gap="500">
-    <dt-button kind="unstyled" class="d-p16 d-ba d-baw2 d-bc-default fv:d-bc-moderate">
+    <dt-button kind="unstyled" class="d-p16 d-ba d-baw2 fv:d-bc-moderate">
       Keyboard focus me
     </dt-button>
-    <dt-button kind="unstyled" class="d-p16 d-ba d-baw2 d-bc-default fv:d-bc-critical">
+    <dt-button kind="unstyled" class="d-p16 d-ba d-baw2 fv:d-bc-critical">
       Keyboard focus me
     </dt-button>
   </dt-stack>
 </code-well-header>
 
 ```html
-<dt-button kind="unstyled" class="d-p16 d-ba d-baw2 d-bc-default fv:d-bc-moderate">
+<dt-button kind="unstyled" class="d-p16 d-ba d-baw2 fv:d-bc-moderate">
   Keyboard focus me
 </dt-button>
-<dt-button kind="unstyled" class="d-p16 d-ba d-baw2 d-bc-default fv:d-bc-critical">
+<dt-button kind="unstyled" class="d-p16 d-ba d-baw2 fv:d-bc-critical">
   Keyboard focus me
 </dt-button>
 ```

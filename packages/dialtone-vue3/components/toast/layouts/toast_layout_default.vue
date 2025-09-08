@@ -53,7 +53,7 @@
 import utils from '@/common/utils';
 import { DtNoticeIcon, DtNoticeContent, DtNoticeAction, NOTICE_KINDS } from '@/components/notice';
 import { TOAST_ROLES } from '../toast_constants.js';
-import { extractVueListeners } from "@/common/utils/index.js";
+import { extractVueListeners } from '@/common/utils/index.js';
 
 export default {
   name: 'ToastLayoutDefault',
