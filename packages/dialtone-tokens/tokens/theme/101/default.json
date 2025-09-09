@@ -3,23 +3,23 @@
     "base": {
       "color": {
         "surface": {
-          "value": "#F5EBD7",
+          "value": "#000000",
           "type": "color"
         },
         "foreground": {
-          "value": "#223300",
+          "value": "#333333",
           "type": "color"
         },
         "border": {
-          "value": "#141F00",
+          "value": "#666666",
           "type": "color"
         },
         "accent": {
-          "value": "#E45C10",
+          "value": "#CCCCCC",
           "type": "color"
         },
         "action": {
-          "value": "#7A5608",
+          "value": "#F1F1F1",
           "type": "color"
         }
       }
