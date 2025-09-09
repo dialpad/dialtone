@@ -141,7 +141,7 @@
       "description": "Adjust size of CSS mask to display 3 digits in group count."
     },
     {
-      "class": "d-avatar--presence-on-avatar",
+      "class": "d-avatar--presence",
       "applies": ".d-avatar",
       "description": "Applies CSS mask to the avatar based on the size."
     },

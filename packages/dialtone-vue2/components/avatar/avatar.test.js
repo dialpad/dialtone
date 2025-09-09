@@ -237,7 +237,7 @@ describe('DtAvatar Tests', () => {
 
         expect(presence.exists()).toBe(true);
         expect(presence.classes('d-avatar__presence')).toBe(true);
-        expect(wrapper.classes('d-avatar--presence-on-avatar')).toBe(true);
+        expect(wrapper.classes('d-avatar--presence')).toBe(true);
       });
 
       it('should pass through data in presenceProps to the presence component', async () => {
@@ -283,7 +283,7 @@ describe('DtAvatar Tests', () => {
         presence = wrapper.find('[data-qa="dt-presence"]');
 
         expect(presence.exists()).toBe(false);
-        expect(wrapper.classes('d-avatar--presence-on-avatar')).toBe(false);
+        expect(wrapper.classes('d-avatar--presence')).toBe(false);
       });
     });
   });
