@@ -3,7 +3,7 @@
     "base": {
       "color": {
         "surface": {
-          "value": "#f5ebd7",
+          "value": "#F5EBD7",
           "type": "color"
         },
         "foreground": {
@@ -11,7 +11,7 @@
           "type": "color"
         },
         "border": {
-          "value": "#141f00",
+          "value": "#141F00",
           "type": "color"
         },
         "accent": {

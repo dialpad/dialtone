@@ -7,15 +7,15 @@
           "type": "color"
         },
         "foreground": {
-          "value": "#efecf9",
+          "value": "#EFECF9",
           "type": "color"
         },
         "border": {
-          "value": "#efecf9",
+          "value": "#EFECF9",
           "type": "color"
         },
         "accent": {
-          "value": "#e2aae5",
+          "value": "#E2AAE5",
           "type": "color"
         },
         "action": {

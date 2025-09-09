@@ -11,15 +11,15 @@
           "type": "color"
         },
         "border": {
-          "value": "#15242e",
+          "value": "#15242E",
           "type": "color"
         },
         "accent": {
-          "value": "#f4cd0b",
+          "value": "#F4CD0B",
           "type": "color"
         },
         "action": {
-          "value": "#2b4b5f",
+          "value": "#2B4B5F",
           "type": "color"
         }
       }
@@ -28,7 +28,7 @@
       "color": {
         "foreground": {
           "primary": {
-            "value": "#090f14",
+            "value": "#090F14",
             "type": "color"
           }
         }
