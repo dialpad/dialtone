@@ -15,7 +15,7 @@
         v-model:options="options"
         :component="component"
         :info="info"
-        @toggle-full-screen="isFullScreen = $event"
+        @toggle-full-screen="toggleFullScreen"
       />
     </div>
     <div class="dialtone-playground__end">
@@ -268,6 +268,16 @@ const codePanel = ref();
 
 function triggerEvent (event, value) {
   codePanel.value.trigger(event, value);
+}
+
+function toggleFullScreen ($event) {
+  if ($event) {
+    document.body.classList.add('d-of-hidden', 'd-h100vh');
+  } else {
+    document.body.classList.remove('d-of-hidden', 'd-h100vh');
+  }
+
+  isFullScreen.value = $event;
 }
 
 onErrorCaptured((exception) => {
