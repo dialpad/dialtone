@@ -7,30 +7,16 @@
           "type": "color"
         },
         "border": {
-          "value": "#c6e4ff",
+          "value": "#C6E4FF",
           "type": "color"
         },
         "accent": {
           "value": "{color.purple.550}",
           "type": "color"
-        }
-      },
-      "action": {
-        "color": {
-          "background": {
-            "primary": {
-              "value": "#ffdfbf",
-              "type": "color"
-            },
-            "secondary": {
-              "value": "#ffdfbf",
-              "type": "color"
-            },
-            "muted": {
-              "value": "#ffdfbf",
-              "type": "color"
-            }
-          }
+        },
+        "action": {
+          "value": "#FFDFBF",
+          "type": "color"
         }
       }
     },

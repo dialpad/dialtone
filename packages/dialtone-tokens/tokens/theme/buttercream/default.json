@@ -3,7 +3,7 @@
     "base": {
       "color": {
         "surface": {
-          "value": "#fff8e8",
+          "value": "#FFF8E8",
           "type": "color"
         },
         "foreground": {
@@ -11,30 +11,16 @@
           "type": "color"
         },
         "border": {
-          "value": "#15242e",
+          "value": "#15242E",
           "type": "color"
         },
         "accent": {
           "value": "#F4CD0B",
           "type": "color"
-        }
-      },
-      "action": {
-        "color": {
-          "background": {
-            "primary": {
-              "value": "#2b4b5f",
-              "type": "color"
-            },
-            "secondary": {
-              "value": "#2b4b5f",
-              "type": "color"
-            },
-            "muted": {
-              "value": "#2b4b5f",
-              "type": "color"
-            }
-          }
+        },
+        "action": {
+          "value": "#2B4B5F",
+          "type": "color"
         }
       }
     },
@@ -42,7 +28,7 @@
       "color": {
         "foreground": {
           "primary": {
-            "value": "#090f14",
+            "value": "#090F14",
             "type": "color"
           }
         }
