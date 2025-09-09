@@ -411,7 +411,7 @@ importers:
         specifier: workspace:*
         version: link:../../packages/dialtone-tokens
       '@dialpad/dialtone-vue':
-        specifier: workspace:^3
+        specifier: workspace:vue3-next
         version: link:../../packages/dialtone-vue3
       '@dialpad/i18n':
         specifier: 1.20.1
@@ -516,7 +516,7 @@ importers:
         specifier: workspace:*
         version: link:../dialtone-icons
       '@dialpad/dialtone-vue':
-        specifier: workspace:^3
+        specifier: workspace:vue3-next
         version: link:../dialtone-vue3
       change-case:
         specifier: ^4.1.2
@@ -1029,7 +1029,7 @@ importers:
         specifier: workspace:*
         version: link:../../dialtone-tokens
       '@dialpad/dialtone-vue':
-        specifier: workspace:^3
+        specifier: workspace:vue3-next
         version: link:../../dialtone-vue3
 
   packages/language-server/vscode:
