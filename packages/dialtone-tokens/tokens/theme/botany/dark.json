@@ -7,7 +7,7 @@
           "type": "color"
         },
         "border": {
-          "value": "#c6e4ff",
+          "value": "#C6E4FF",
           "type": "color"
         },
         "accent": {
@@ -15,7 +15,7 @@
           "type": "color"
         },
         "action": {
-          "value": "#ffdfbf",
+          "value": "#FFDFBF",
           "type": "color"
         }
       }

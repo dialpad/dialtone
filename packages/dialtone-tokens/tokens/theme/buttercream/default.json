@@ -3,7 +3,7 @@
     "base": {
       "color": {
         "surface": {
-          "value": "#fff8e8",
+          "value": "#FFF8E8",
           "type": "color"
         },
         "foreground": {

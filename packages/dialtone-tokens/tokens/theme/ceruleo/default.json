@@ -39,11 +39,11 @@
     "logo": {
       "color": {
         "wordmark": {
-          "value": "#ffffff",
+          "value": "#FFFFFF",
           "type": "color"
         },
         "star": {
-          "value": "#ffffff",
+          "value": "#FFFFFF",
           "type": "color"
         }
       }
