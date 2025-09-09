@@ -1,3 +1,10 @@
+## [2.198.2](https://github.com/dialpad/dialtone/compare/dialtone-vue2/v2.198.1...dialtone-vue2/v2.198.2) (2025-09-09)
+
+
+### Bug Fixes
+
+* **Input:** DLT-2757 add rootClass prop ([#904](https://github.com/dialpad/dialtone/issues/904)) ([980f215](https://github.com/dialpad/dialtone/commit/980f21528dbd186e778826c9b7549c702d904cd7))
+
 ## [2.198.1](https://github.com/dialpad/dialtone/compare/dialtone-vue2/v2.198.0...dialtone-vue2/v2.198.1) (2025-09-04)
 
 
