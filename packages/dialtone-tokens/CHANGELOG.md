@@ -1,3 +1,10 @@
+# [1.46.0](https://github.com/dialpad/dialtone/compare/dialtone-tokens/v1.45.0...dialtone-tokens/v1.46.0) (2025-09-09)
+
+
+### Features
+
+* **Tokens:** DLT-2758 DLT-2759 DLT-2760 refactor sequential and add categorical ([#905](https://github.com/dialpad/dialtone/issues/905)) ([79717b1](https://github.com/dialpad/dialtone/commit/79717b1cb200e0f0f60eaf41184b1720cce864a6))
+
 # [1.45.0](https://github.com/dialpad/dialtone/compare/dialtone-tokens/v1.44.1...dialtone-tokens/v1.45.0) (2025-08-26)
 
 

@@ -16,6 +16,7 @@
     :input-class="$attrs.inputClass"
     :retain-warning="$attrs.retainWarning"
     :input-wrapper-class="$attrs.inputWrapperClass"
+    :root-class="$attrs.rootClass"
     :current-length="$attrs.currentLength"
     :validate="validationConfig"
     @blur="$attrs.onBlur"
