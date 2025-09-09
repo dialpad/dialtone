@@ -27,28 +27,26 @@
 <script setup>
 import DtcOptionBar from './option_bar/option_bar.vue';
 import DtcRenderer from './renderer/renderer.vue';
-// import DtcCodeExample from './code_example/code_example.vue';
-
-// import DtcCodePanel from './code_panel/code_panel.vue';
-// import DtcSettingsMenu from './settings_menu/settings_menu.vue';
-// import DtcHeader from '@/src/components/header/header.vue';
-// import { DtNotice } from '@dialpad/dialtone-vue';
-
 import { enumerateGroups } from '@/src/lib/utils';
 import { computed, onErrorCaptured, reactive, ref } from 'vue';
 import { cachedRef, computedModel } from '@/src/lib/utils_vue';
 import { getComponentInfo } from '@/src/lib/info';
 import {
+  SETTINGS_BACKGROUND_KEY,
+  SETTINGS_INDENT_KEY,
+  SETTINGS_POSITIONING_KEY,
   SETTINGS_SCHEME_KEY,
+  SETTINGS_SIDEBAR_KEY,
   SETTINGS_THEME_KEY,
   SETTINGS_VERBOSE_KEY,
-  SETTINGS_BACKGROUND_KEY,
-  SETTINGS_POSITIONING_KEY,
-  SETTINGS_SIDEBAR_KEY,
-  SETTINGS_INDENT_KEY,
 } from '@/src/lib/constants';
 import defaultSettings from '@/src/settings.json';
-import supportedComponents from '@/src/supported_components.json';
+// import supportedComponents from '@/src/supported_components.json';
+// import DtcCodeExample from './code_example/code_example.vue';
+// import DtcCodePanel from './code_panel/code_panel.vue';
+// import DtcSettingsMenu from './settings_menu/settings_menu.vue';
+// import DtcHeader from '@/src/components/header/header.vue';
+// import { DtNotice } from '@dialpad/dialtone-vue';
 
 const props = defineProps({
   /**
@@ -103,35 +101,8 @@ const props = defineProps({
 
 const selectedVariant = ref('default');
 const isFullScreen = ref(false);
-
-// function updateVariant (e) {
-//   selectedVariant.value = e;
-// }
-
-/**
- * Gets a new instantiation of an info object.
- * Merges info from selected variant to the info object.
- *
- * @returns {object} The newly instantiated info object.
- */
-function initializeInfo () {
-  const info = getComponentInfo(props.component, props.documentation);
-
-  const variantInfo = props.variants?.[selectedVariant.value];
-
-  if (variantInfo) {
-    Object.entries(variantInfo).forEach(([memberGroup, members]) => {
-      Object.entries(members).forEach(([memberName, member]) => {
-        const infoMember = info[memberGroup].find(infoMember => infoMember.name === memberName);
-        if (infoMember) {
-          Object.assign(infoMember, member);
-        }
-      });
-    });
-  }
-
-  return info;
-}
+// const showUnsupportedWarning = ref(!supportedComponents.includes(props.component?.name));
+const codePanel = ref();
 
 /**
  * Container for all extended component information for the target component.
@@ -167,20 +138,6 @@ const info = computed(() => {
     },
   });
 });
-
-/**
- * Gets the values for a given 'options' member group with the provided defaults.
- *
- * @param info
- */
-function getInitialValues (info) {
-  const options = {};
-  info.members.enumerate((memberGroup, member) => {
-    options[memberGroup] = options[memberGroup] || {};
-    options[memberGroup][member.name] = member.initialValue;
-  });
-  return options;
-}
 
 /**
  * The options data object is the main reactive object that allows interactivity with the target component.
@@ -258,13 +215,52 @@ const settings = computedModel(
   },
 );
 
-const showUnsupportedWarning = ref(!supportedComponents.includes(props.component?.name));
+// function updateVariant (e) {
+//   selectedVariant.value = e;
+// }
 
-function hideUnsupportedMessage () {
-  showUnsupportedWarning.value = false;
+/**
+ * Gets a new instantiation of an info object.
+ * Merges info from selected variant to the info object.
+ *
+ * @returns {object} The newly instantiated info object.
+ */
+function initializeInfo () {
+  const info = getComponentInfo(props.component, props.documentation);
+
+  const variantInfo = props.variants?.[selectedVariant.value];
+
+  if (variantInfo) {
+    Object.entries(variantInfo).forEach(([memberGroup, members]) => {
+      Object.entries(members).forEach(([memberName, member]) => {
+        const infoMember = info[memberGroup].find(infoMember => infoMember.name === memberName);
+        if (infoMember) {
+          Object.assign(infoMember, member);
+        }
+      });
+    });
+  }
+
+  return info;
 }
 
-const codePanel = ref();
+/**
+ * Gets the values for a given 'options' member group with the provided defaults.
+ *
+ * @param info
+ */
+function getInitialValues (info) {
+  const options = {};
+  info.members.enumerate((memberGroup, member) => {
+    options[memberGroup] = options[memberGroup] || {};
+    options[memberGroup][member.name] = member.initialValue;
+  });
+  return options;
+}
+
+// function hideUnsupportedMessage () {
+//   showUnsupportedWarning.value = false;
+// }
 
 function triggerEvent (event, value) {
   codePanel.value.trigger(event, value);
