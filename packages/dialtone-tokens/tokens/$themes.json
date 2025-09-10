@@ -4568,5 +4568,46 @@
     },
     "$figmaVariableReferences": {},
     "group": "high-desert"
+  },
+  {
+    "id": "e85dec7dd0ed0cb1914aff15dafcfcc852451ca6",
+    "name": "light",
+    "$figmaStyleReferences": {},
+    "selectedTokenSets": {
+      "root": "source",
+      "base/default": "source",
+      "theme/dp/default": "enabled",
+      "theme/101/default": "enabled",
+      "components/avatar/default": "enabled",
+      "components/badge/default": "enabled",
+      "components/button/default": "enabled",
+      "components/checkbox/default": "enabled",
+      "components/icon/default": "enabled",
+      "components/presence/default": "enabled",
+      "components/radio/default": "enabled"
+    },
+    "group": "101"
+  },
+  {
+    "id": "ae903cbc4323421af53971d9434a21ffadf659b0",
+    "name": "dark",
+    "$figmaStyleReferences": {},
+    "selectedTokenSets": {
+      "root": "source",
+      "base/default": "source",
+      "base/dark": "source",
+      "theme/dp/default": "enabled",
+      "theme/dp/dark": "enabled",
+      "theme/101/default": "enabled",
+      "theme/101/dark": "enabled",
+      "components/avatar/default": "enabled",
+      "components/badge/default": "enabled",
+      "components/button/default": "enabled",
+      "components/checkbox/default": "enabled",
+      "components/icon/default": "enabled",
+      "components/presence/default": "enabled",
+      "components/radio/default": "enabled"
+    },
+    "group": "101"
   }
 ]
