@@ -1,3 +1,11 @@
+## [3.190.2](https://github.com/dialpad/dialtone/compare/dialtone-vue3/v3.190.1...dialtone-vue3/v3.190.2) (2025-09-09)
+
+
+### Bug Fixes
+
+* **Dropdown:** DP-154779 emit close event properly ([#897](https://github.com/dialpad/dialtone/issues/897)) ([bf9b50b](https://github.com/dialpad/dialtone/commit/bf9b50b738d0953d02d641ca542ea7bf2580d083))
+* **Input:** DLT-2757 add rootClass prop ([#904](https://github.com/dialpad/dialtone/issues/904)) ([980f215](https://github.com/dialpad/dialtone/commit/980f21528dbd186e778826c9b7549c702d904cd7))
+
 ## [3.190.1](https://github.com/dialpad/dialtone/compare/dialtone-vue3/v3.190.0...dialtone-vue3/v3.190.1) (2025-09-04)
 
 

@@ -3,11 +3,11 @@
     "base": {
       "color": {
         "surface": {
-          "value": "{color.teal.100}",
+          "value": "{color.indigo.100}",
           "type": "color"
         },
         "accent": {
-          "value": "{color.indigo.700}",
+          "value": "{color.teal.700}",
           "type": "color"
         }
       }

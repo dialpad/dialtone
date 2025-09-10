@@ -4187,7 +4187,9 @@
       "theme/dp/default": "enabled",
       "theme/dp/dark": "enabled",
       "theme/sunflower/default": "enabled",
-      "theme/sunflower/dark": "enabled"
+      "theme/sunflower/dark": "enabled",
+      "base/dark": "source",
+      "components/presence/dark": "enabled"
     },
     "$figmaVariableReferences": {},
     "group": "sunflower"

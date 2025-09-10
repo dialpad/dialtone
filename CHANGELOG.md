@@ -1,3 +1,16 @@
+# [9.136.0](https://github.com/dialpad/dialtone/compare/dialtone/v9.135.2...dialtone/v9.136.0) (2025-09-09)
+
+
+### Bug Fixes
+
+* **Dropdown:** DP-154779 emit close event properly ([#897](https://github.com/dialpad/dialtone/issues/897)) ([bf9b50b](https://github.com/dialpad/dialtone/commit/bf9b50b738d0953d02d641ca542ea7bf2580d083))
+* **Input:** DLT-2757 add rootClass prop ([#904](https://github.com/dialpad/dialtone/issues/904)) ([980f215](https://github.com/dialpad/dialtone/commit/980f21528dbd186e778826c9b7549c702d904cd7))
+
+
+### Features
+
+* **Tokens:** DLT-2758 DLT-2759 DLT-2760 refactor sequential and add categorical ([#905](https://github.com/dialpad/dialtone/issues/905)) ([79717b1](https://github.com/dialpad/dialtone/commit/79717b1cb200e0f0f60eaf41184b1720cce864a6))
+
 ## [9.135.2](https://github.com/dialpad/dialtone/compare/dialtone/v9.135.1...dialtone/v9.135.2) (2025-09-04)
 
 
