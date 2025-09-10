@@ -288,6 +288,7 @@
       }
     }
 
+    // override default presence border
     > .d-presence {
       --presence-color-border-base: transparent;
     }
@@ -355,10 +356,9 @@
       will-change: transform;
     }
 
-    // These modifiers must be used together with `d-avatar--group`.
+    // These modifiers set the mask and count size and must be used together with `d-avatar--group`.
     // Example: <div class="d-avatar d-avatar--group d-avatar--group-digits-2">
 
-    // Digits: 2
     &-digits-2 {
       --avatar-count-mask-offset-x: var(--dt-space-300);
       --avatar-count-mask-offset-y: var(--dt-space-400);
@@ -387,7 +387,6 @@
       }
     }
 
-    // Digits: 3
     &-digits-3 {
       --avatar-count-mask-offset-x: var(--dt-space-300-negative);
       --avatar-count-mask-offset-y: var(--dt-space-400);
