@@ -135,9 +135,9 @@ function getSlotControls () {
   return getStaticControl('slot');
 }
 
-function getEventControls () {
-  return getStaticControl('event');
-}
+// function getEventControls () {
+//   return getStaticControl('event');
+// }
 
 /**
  * Forces a singular default control and valid control.
@@ -175,9 +175,9 @@ function updateProps (e) {
   updateMember('props', e);
 }
 
-function updateAttributes (e) {
-  updateMember('attributes', e);
-}
+// function updateAttributes (e) {
+//   updateMember('attributes', e);
+// }
 </script>
 
 <script>
