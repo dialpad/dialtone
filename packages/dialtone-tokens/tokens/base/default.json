@@ -2,7 +2,7 @@
   "color": {
     "neutral": {
       "white": {
-        "value": "#ffffff",
+        "value": "#FFFFFF",
         "type": "color",
         "description": "White color independent of any theme."
       },
@@ -19,7 +19,7 @@
     },
     "black": {
       "50": {
-        "value": "#ffffff",
+        "value": "#FFFFFF",
         "type": "color"
       },
       "100": {
@@ -69,7 +69,7 @@
     },
     "purple": {
       "50": {
-        "value": "#f9f6ff",
+        "value": "#F9F6FF",
         "type": "color"
       },
       "100": {
@@ -119,7 +119,7 @@
     },
     "blue": {
       "50": {
-        "value": "#f5f9fd",
+        "value": "#F5F9FD",
         "type": "color"
       },
       "100": {
@@ -219,7 +219,7 @@
     },
     "gold": {
       "50": {
-        "value": "#fffae5",
+        "value": "#FFFAE5",
         "type": "color"
       },
       "100": {
@@ -269,7 +269,7 @@
     },
     "green": {
       "50": {
-        "value": "#f6fcf5",
+        "value": "#F6FCF5",
         "type": "color"
       },
       "100": {
@@ -691,7 +691,7 @@
         "description": "Typically used as an accent color."
       },
       "red": {
-        "value": "#ff1356",
+        "value": "#FF1356",
         "type": "color",
         "description": "Typically used as an accent color."
       },
@@ -899,7 +899,7 @@
           "y": "{size.200}",
           "blur": "{size.500}",
           "spread": "{size.0}",
-          "color": "#0000004d",
+          "color": "#0000004D",
           "type": "dropShadow"
         }
       ],
@@ -912,7 +912,7 @@
           "y": "{size.200}",
           "blur": "{size.600}",
           "spread": "{size.0}",
-          "color": "#0000004d",
+          "color": "#0000004D",
           "type": "dropShadow"
         }
       ],
@@ -933,7 +933,7 @@
           "y": "{size.200}",
           "blur": "{size.300}",
           "spread": "{size.0}",
-          "color": "#0000000a",
+          "color": "#0000000A",
           "type": "dropShadow"
         },
         {
