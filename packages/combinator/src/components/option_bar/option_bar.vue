@@ -1,38 +1,39 @@
 <template>
-  <section class="d-divide-y d-divide-default">
-    <dt-stack
-      gap="500"
-      direction="row"
-    >
-      <h2
-        class="d-fl1"
-        :class="isFullscreen ? 'd-headline--lg' : 'd-headline--md'"
+  <section
+    v-dt-scrollbar
+    class="dialtone-playground__controls"
+  >
+    <dt-stack gap="500">
+      <dt-stack
+        gap="500"
+        direction="row"
+        class="d-mtn8 d-mbn8 d-mrn4 d-d-none md:d-d-flex"
       >
-        Button
-      </h2>
-      <dt-button
-        v-dt-tooltip="`Fullscreen`"
-        kind="muted"
-        importance="clear"
-        size="sm"
-        @click="toggleFullScreen"
-      >
-        <template #icon="{ iconSize }">
-          <dt-icon-minimize
-            v-if="isFullscreen"
-            :size="iconSize"
-          />
-          <dt-icon-expand
-            v-else
-            :size="iconSize"
-          />
-        </template>
-      </dt-button>
-    </dt-stack>
-    <div
-      v-dt-scrollbar
-      class="dialtone-playground__controls"
-    >
+        <h2
+          class="d-fl1"
+          :class="isFullscreen ? 'd-headline--lg' : 'd-headline--md'"
+        >
+          Button
+        </h2>
+        <dt-button
+          v-dt-tooltip="`Fullscreen`"
+          kind="muted"
+          importance="clear"
+          size="sm"
+          @click="toggleFullScreen"
+        >
+          <template #icon="{ iconSize }">
+            <dt-icon-minimize
+              v-if="isFullscreen"
+              :size="iconSize"
+            />
+            <dt-icon-expand
+              v-else
+              :size="iconSize"
+            />
+          </template>
+        </dt-button>
+      </dt-stack>
       <dt-stack
         gap="500"
       >
@@ -60,7 +61,7 @@
           :control-selector="getEventControls"
         />-->
       </dt-stack>
-    </div>
+    </dt-stack>
   </section>
 </template>
 
