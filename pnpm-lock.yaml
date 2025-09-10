@@ -355,7 +355,7 @@ importers:
         version: 33.0.0(stylelint@15.11.0(typescript@5.8.3))
       stylelint-less:
         specifier: 3.0.1
-        version: 3.0.1(postcss@8.5.6)(stylelint@15.11.0(typescript@5.8.3))
+        version: 3.0.1(postcss@8.5.3)(stylelint@15.11.0(typescript@5.8.3))
       stylelint-no-px:
         specifier: ^1.0.1
         version: 1.0.1(stylelint@15.11.0(typescript@5.8.3))
@@ -417,8 +417,8 @@ importers:
         specifier: 1.20.1
         version: 1.20.1(@vue/composition-api@1.7.2(vue@3.4.15(typescript@5.8.3)))(vue@3.4.15(typescript@5.8.3))
       '@dialpad/postcss-responsive-variations':
-        specifier: 1.1.5
-        version: 1.1.5(postcss@8.5.3)
+        specifier: workspace:*
+        version: link:../../packages/postcss-responsive-variations
       '@docsearch/js':
         specifier: ^3.5.1
         version: 3.5.2(@algolia/client-search@4.20.0)(@types/react@18.2.37)(react-dom@17.0.2(react@17.0.2))(react@17.0.2)(search-insights@2.10.0)
@@ -516,14 +516,14 @@ importers:
         specifier: workspace:*
         version: link:../dialtone-icons
       '@dialpad/dialtone-vue':
-        specifier: workspace:^3
+        specifier: workspace:vue3
         version: link:../dialtone-vue3
       change-case:
         specifier: ^4.1.2
         version: 4.1.2
       eslint:
         specifier: ^9.31.0
-        version: 9.31.0(jiti@1.21.7)
+        version: 9.33.0(jiti@1.21.7)
       js-beautify:
         specifier: ^1.14.4
         version: 1.14.11
@@ -541,20 +541,23 @@ importers:
         version: 1.30.0
       vue:
         specifier: '>=3.2'
-        version: 3.4.15(typescript@5.8.3)
+        version: 3.5.18(typescript@5.8.3)
     devDependencies:
+      '@dialpad/postcss-responsive-variations':
+        specifier: workspace:*
+        version: link:../postcss-responsive-variations
       '@vue/cli-plugin-unit-mocha':
         specifier: ^5.0.8
-        version: 5.0.8(@vue/cli-service@5.0.8(@swc/core@1.13.2)(@vue/compiler-sfc@3.5.18)(ejs@3.1.10)(encoding@0.1.13)(handlebars@4.7.8)(lodash@4.17.21)(nunjucks@3.2.4(chokidar@3.6.0))(prettier@3.3.2)(pug@3.0.3)(react-dom@16.14.0(react@16.14.0))(react@16.14.0)(twig@1.17.1)(underscore@1.13.7)(vue-template-compiler@2.7.16(vue@3.4.15(typescript@5.8.3)))(vue@3.4.15(typescript@5.8.3))(webpack-sources@3.3.3))(encoding@0.1.13)(webpack@5.95.0(@swc/core@1.13.2))
+        version: 5.0.8(@vue/cli-service@5.0.8(@swc/core@1.13.2)(@vue/compiler-sfc@3.5.18)(ejs@3.1.10)(encoding@0.1.13)(handlebars@4.7.8)(lodash@4.17.21)(nunjucks@3.2.4(chokidar@3.6.0))(prettier@3.3.2)(pug@3.0.3)(react-dom@16.14.0(react@16.14.0))(react@16.14.0)(twig@1.17.1)(underscore@1.13.7)(vue-template-compiler@2.7.16(vue@3.5.18(typescript@5.8.3)))(vue@3.5.18(typescript@5.8.3))(webpack-sources@3.3.3))(encoding@0.1.13)(webpack@5.95.0(@swc/core@1.13.2))
       chai:
         specifier: ^4.3.6
         version: 4.3.10
       eslint-plugin-jsdoc:
         specifier: ^51.4.1
-        version: 51.4.1(eslint@9.31.0(jiti@1.21.7))
+        version: 51.4.1(eslint@9.33.0(jiti@1.21.7))
       eslint-plugin-mocha:
         specifier: ^10.1.0
-        version: 10.5.0(eslint@9.31.0(jiti@1.21.7))
+        version: 10.5.0(eslint@9.33.0(jiti@1.21.7))
 
   packages/dialtone-css:
     dependencies:
@@ -1971,12 +1974,6 @@ packages:
     resolution: {integrity: sha512-QBA3hEDvnurtKEG0BvVxpnjKNdfuZVfSBeta0+9MFgQSglGs0FVt/7MMrIXo7Znzj3HPgWwpcrGtvgLhhh95dw==, tarball: https://npm.pkg.github.com/download/@dialpad/i18n/1.20.1/6a1d5416005078640950525452ff7d147044019d}
     peerDependencies:
       vue: ^3.0.0
-
-  '@dialpad/postcss-responsive-variations@1.1.5':
-    resolution: {integrity: sha512-vCeaoF+QKZOVPHYsenCRh/XSl1ppUmXS+XUZqRa2gXtQDe6je5qeAK2H7PIwZiNM9gMA7g6EyHs1PshCWDCl9w==, tarball: https://npm.pkg.github.com/download/@dialpad/postcss-responsive-variations/1.1.5/5dc2e9ce4c3b211755c0b945f408dbb8d01a0106}
-    engines: {node: '>=12.0.0'}
-    peerDependencies:
-      postcss: ^8.4.1
 
   '@dialpad/semantic-release-changelog-json@1.0.0':
     resolution: {integrity: sha512-RIk5Wkco9pTucCO5Pi+4kx2CtmaDzY94V77bK/gluhb3IEDVktnzpS5SIWV+dTKtXUrHweoSXjCH+1cSifgefw==, tarball: https://npm.pkg.github.com/download/@dialpad/semantic-release-changelog-json/1.0.0/40fb236ee722da99879010c02f12b95cb2635ddc}
@@ -18466,10 +18463,6 @@ snapshots:
     transitivePeerDependencies:
       - '@vue/composition-api'
 
-  '@dialpad/postcss-responsive-variations@1.1.5(postcss@8.5.3)':
-    dependencies:
-      postcss: 8.5.3
-
   '@dialpad/semantic-release-changelog-json@1.0.0(semantic-release@21.1.2(typescript@5.8.3))':
     dependencies:
       '@semantic-release/error': 3.0.0
@@ -22905,16 +22898,16 @@ snapshots:
 
   '@vue/cli-overlay@5.0.8': {}
 
-  '@vue/cli-plugin-router@5.0.8(@vue/cli-service@5.0.8(@swc/core@1.13.2)(@vue/compiler-sfc@3.5.18)(ejs@3.1.10)(encoding@0.1.13)(handlebars@4.7.8)(lodash@4.17.21)(nunjucks@3.2.4(chokidar@3.6.0))(prettier@3.3.2)(pug@3.0.3)(react-dom@16.14.0(react@16.14.0))(react@16.14.0)(twig@1.17.1)(underscore@1.13.7)(vue-template-compiler@2.7.16(vue@3.4.15(typescript@5.8.3)))(vue@3.4.15(typescript@5.8.3))(webpack-sources@3.3.3))(encoding@0.1.13)':
+  '@vue/cli-plugin-router@5.0.8(@vue/cli-service@5.0.8(@swc/core@1.13.2)(@vue/compiler-sfc@3.5.18)(ejs@3.1.10)(encoding@0.1.13)(handlebars@4.7.8)(lodash@4.17.21)(nunjucks@3.2.4(chokidar@3.6.0))(prettier@3.3.2)(pug@3.0.3)(react-dom@16.14.0(react@16.14.0))(react@16.14.0)(twig@1.17.1)(underscore@1.13.7)(vue-template-compiler@2.7.16(vue@3.5.18(typescript@5.8.3)))(vue@3.5.18(typescript@5.8.3))(webpack-sources@3.3.3))(encoding@0.1.13)':
     dependencies:
-      '@vue/cli-service': 5.0.8(@swc/core@1.13.2)(@vue/compiler-sfc@3.5.18)(ejs@3.1.10)(encoding@0.1.13)(handlebars@4.7.8)(lodash@4.17.21)(nunjucks@3.2.4(chokidar@3.6.0))(prettier@3.3.2)(pug@3.0.3)(react-dom@16.14.0(react@16.14.0))(react@16.14.0)(twig@1.17.1)(underscore@1.13.7)(vue-template-compiler@2.7.16(vue@3.4.15(typescript@5.8.3)))(vue@3.4.15(typescript@5.8.3))(webpack-sources@3.3.3)
+      '@vue/cli-service': 5.0.8(@swc/core@1.13.2)(@vue/compiler-sfc@3.5.18)(ejs@3.1.10)(encoding@0.1.13)(handlebars@4.7.8)(lodash@4.17.21)(nunjucks@3.2.4(chokidar@3.6.0))(prettier@3.3.2)(pug@3.0.3)(react-dom@16.14.0(react@16.14.0))(react@16.14.0)(twig@1.17.1)(underscore@1.13.7)(vue-template-compiler@2.7.16(vue@3.5.18(typescript@5.8.3)))(vue@3.5.18(typescript@5.8.3))(webpack-sources@3.3.3)
       '@vue/cli-shared-utils': 5.0.8(encoding@0.1.13)
     transitivePeerDependencies:
       - encoding
 
-  '@vue/cli-plugin-unit-mocha@5.0.8(@vue/cli-service@5.0.8(@swc/core@1.13.2)(@vue/compiler-sfc@3.5.18)(ejs@3.1.10)(encoding@0.1.13)(handlebars@4.7.8)(lodash@4.17.21)(nunjucks@3.2.4(chokidar@3.6.0))(prettier@3.3.2)(pug@3.0.3)(react-dom@16.14.0(react@16.14.0))(react@16.14.0)(twig@1.17.1)(underscore@1.13.7)(vue-template-compiler@2.7.16(vue@3.4.15(typescript@5.8.3)))(vue@3.4.15(typescript@5.8.3))(webpack-sources@3.3.3))(encoding@0.1.13)(webpack@5.95.0(@swc/core@1.13.2))':
+  '@vue/cli-plugin-unit-mocha@5.0.8(@vue/cli-service@5.0.8(@swc/core@1.13.2)(@vue/compiler-sfc@3.5.18)(ejs@3.1.10)(encoding@0.1.13)(handlebars@4.7.8)(lodash@4.17.21)(nunjucks@3.2.4(chokidar@3.6.0))(prettier@3.3.2)(pug@3.0.3)(react-dom@16.14.0(react@16.14.0))(react@16.14.0)(twig@1.17.1)(underscore@1.13.7)(vue-template-compiler@2.7.16(vue@3.5.18(typescript@5.8.3)))(vue@3.5.18(typescript@5.8.3))(webpack-sources@3.3.3))(encoding@0.1.13)(webpack@5.95.0(@swc/core@1.13.2))':
     dependencies:
-      '@vue/cli-service': 5.0.8(@swc/core@1.13.2)(@vue/compiler-sfc@3.5.18)(ejs@3.1.10)(encoding@0.1.13)(handlebars@4.7.8)(lodash@4.17.21)(nunjucks@3.2.4(chokidar@3.6.0))(prettier@3.3.2)(pug@3.0.3)(react-dom@16.14.0(react@16.14.0))(react@16.14.0)(twig@1.17.1)(underscore@1.13.7)(vue-template-compiler@2.7.16(vue@3.4.15(typescript@5.8.3)))(vue@3.4.15(typescript@5.8.3))(webpack-sources@3.3.3)
+      '@vue/cli-service': 5.0.8(@swc/core@1.13.2)(@vue/compiler-sfc@3.5.18)(ejs@3.1.10)(encoding@0.1.13)(handlebars@4.7.8)(lodash@4.17.21)(nunjucks@3.2.4(chokidar@3.6.0))(prettier@3.3.2)(pug@3.0.3)(react-dom@16.14.0(react@16.14.0))(react@16.14.0)(twig@1.17.1)(underscore@1.13.7)(vue-template-compiler@2.7.16(vue@3.5.18(typescript@5.8.3)))(vue@3.5.18(typescript@5.8.3))(webpack-sources@3.3.3)
       '@vue/cli-shared-utils': 5.0.8(encoding@0.1.13)
       jsdom: 18.1.1
       jsdom-global: 3.0.2(jsdom@18.1.1)
@@ -22928,22 +22921,22 @@ snapshots:
       - utf-8-validate
       - webpack
 
-  '@vue/cli-plugin-vuex@5.0.8(@vue/cli-service@5.0.8(@swc/core@1.13.2)(@vue/compiler-sfc@3.5.18)(ejs@3.1.10)(encoding@0.1.13)(handlebars@4.7.8)(lodash@4.17.21)(nunjucks@3.2.4(chokidar@3.6.0))(prettier@3.3.2)(pug@3.0.3)(react-dom@16.14.0(react@16.14.0))(react@16.14.0)(twig@1.17.1)(underscore@1.13.7)(vue-template-compiler@2.7.16(vue@3.4.15(typescript@5.8.3)))(vue@3.4.15(typescript@5.8.3))(webpack-sources@3.3.3))':
+  '@vue/cli-plugin-vuex@5.0.8(@vue/cli-service@5.0.8(@swc/core@1.13.2)(@vue/compiler-sfc@3.5.18)(ejs@3.1.10)(encoding@0.1.13)(handlebars@4.7.8)(lodash@4.17.21)(nunjucks@3.2.4(chokidar@3.6.0))(prettier@3.3.2)(pug@3.0.3)(react-dom@16.14.0(react@16.14.0))(react@16.14.0)(twig@1.17.1)(underscore@1.13.7)(vue-template-compiler@2.7.16(vue@3.5.18(typescript@5.8.3)))(vue@3.5.18(typescript@5.8.3))(webpack-sources@3.3.3))':
     dependencies:
-      '@vue/cli-service': 5.0.8(@swc/core@1.13.2)(@vue/compiler-sfc@3.5.18)(ejs@3.1.10)(encoding@0.1.13)(handlebars@4.7.8)(lodash@4.17.21)(nunjucks@3.2.4(chokidar@3.6.0))(prettier@3.3.2)(pug@3.0.3)(react-dom@16.14.0(react@16.14.0))(react@16.14.0)(twig@1.17.1)(underscore@1.13.7)(vue-template-compiler@2.7.16(vue@3.4.15(typescript@5.8.3)))(vue@3.4.15(typescript@5.8.3))(webpack-sources@3.3.3)
+      '@vue/cli-service': 5.0.8(@swc/core@1.13.2)(@vue/compiler-sfc@3.5.18)(ejs@3.1.10)(encoding@0.1.13)(handlebars@4.7.8)(lodash@4.17.21)(nunjucks@3.2.4(chokidar@3.6.0))(prettier@3.3.2)(pug@3.0.3)(react-dom@16.14.0(react@16.14.0))(react@16.14.0)(twig@1.17.1)(underscore@1.13.7)(vue-template-compiler@2.7.16(vue@3.5.18(typescript@5.8.3)))(vue@3.5.18(typescript@5.8.3))(webpack-sources@3.3.3)
 
-  '@vue/cli-service@5.0.8(@swc/core@1.13.2)(@vue/compiler-sfc@3.5.18)(ejs@3.1.10)(encoding@0.1.13)(handlebars@4.7.8)(lodash@4.17.21)(nunjucks@3.2.4(chokidar@3.6.0))(prettier@3.3.2)(pug@3.0.3)(react-dom@16.14.0(react@16.14.0))(react@16.14.0)(twig@1.17.1)(underscore@1.13.7)(vue-template-compiler@2.7.16(vue@3.4.15(typescript@5.8.3)))(vue@3.4.15(typescript@5.8.3))(webpack-sources@3.3.3)':
+  '@vue/cli-service@5.0.8(@swc/core@1.13.2)(@vue/compiler-sfc@3.5.18)(ejs@3.1.10)(encoding@0.1.13)(handlebars@4.7.8)(lodash@4.17.21)(nunjucks@3.2.4(chokidar@3.6.0))(prettier@3.3.2)(pug@3.0.3)(react-dom@16.14.0(react@16.14.0))(react@16.14.0)(twig@1.17.1)(underscore@1.13.7)(vue-template-compiler@2.7.16(vue@3.5.18(typescript@5.8.3)))(vue@3.5.18(typescript@5.8.3))(webpack-sources@3.3.3)':
     dependencies:
       '@babel/helper-compilation-targets': 7.27.2
       '@soda/friendly-errors-webpack-plugin': 1.8.1(webpack@5.95.0(@swc/core@1.13.2))
       '@soda/get-current-script': 1.0.2
       '@types/minimist': 1.2.5
       '@vue/cli-overlay': 5.0.8
-      '@vue/cli-plugin-router': 5.0.8(@vue/cli-service@5.0.8(@swc/core@1.13.2)(@vue/compiler-sfc@3.5.18)(ejs@3.1.10)(encoding@0.1.13)(handlebars@4.7.8)(lodash@4.17.21)(nunjucks@3.2.4(chokidar@3.6.0))(prettier@3.3.2)(pug@3.0.3)(react-dom@16.14.0(react@16.14.0))(react@16.14.0)(twig@1.17.1)(underscore@1.13.7)(vue-template-compiler@2.7.16(vue@3.4.15(typescript@5.8.3)))(vue@3.4.15(typescript@5.8.3))(webpack-sources@3.3.3))(encoding@0.1.13)
-      '@vue/cli-plugin-vuex': 5.0.8(@vue/cli-service@5.0.8(@swc/core@1.13.2)(@vue/compiler-sfc@3.5.18)(ejs@3.1.10)(encoding@0.1.13)(handlebars@4.7.8)(lodash@4.17.21)(nunjucks@3.2.4(chokidar@3.6.0))(prettier@3.3.2)(pug@3.0.3)(react-dom@16.14.0(react@16.14.0))(react@16.14.0)(twig@1.17.1)(underscore@1.13.7)(vue-template-compiler@2.7.16(vue@3.4.15(typescript@5.8.3)))(vue@3.4.15(typescript@5.8.3))(webpack-sources@3.3.3))
+      '@vue/cli-plugin-router': 5.0.8(@vue/cli-service@5.0.8(@swc/core@1.13.2)(@vue/compiler-sfc@3.5.18)(ejs@3.1.10)(encoding@0.1.13)(handlebars@4.7.8)(lodash@4.17.21)(nunjucks@3.2.4(chokidar@3.6.0))(prettier@3.3.2)(pug@3.0.3)(react-dom@16.14.0(react@16.14.0))(react@16.14.0)(twig@1.17.1)(underscore@1.13.7)(vue-template-compiler@2.7.16(vue@3.5.18(typescript@5.8.3)))(vue@3.5.18(typescript@5.8.3))(webpack-sources@3.3.3))(encoding@0.1.13)
+      '@vue/cli-plugin-vuex': 5.0.8(@vue/cli-service@5.0.8(@swc/core@1.13.2)(@vue/compiler-sfc@3.5.18)(ejs@3.1.10)(encoding@0.1.13)(handlebars@4.7.8)(lodash@4.17.21)(nunjucks@3.2.4(chokidar@3.6.0))(prettier@3.3.2)(pug@3.0.3)(react-dom@16.14.0(react@16.14.0))(react@16.14.0)(twig@1.17.1)(underscore@1.13.7)(vue-template-compiler@2.7.16(vue@3.5.18(typescript@5.8.3)))(vue@3.5.18(typescript@5.8.3))(webpack-sources@3.3.3))
       '@vue/cli-shared-utils': 5.0.8(encoding@0.1.13)
       '@vue/component-compiler-utils': 3.3.0(ejs@3.1.10)(handlebars@4.7.8)(lodash@4.17.21)(nunjucks@3.2.4(chokidar@3.6.0))(pug@3.0.3)(react-dom@16.14.0(react@16.14.0))(react@16.14.0)(twig@1.17.1)(underscore@1.13.7)
-      '@vue/vue-loader-v15': vue-loader@15.11.1(@vue/compiler-sfc@3.5.18)(css-loader@6.11.0(webpack@5.95.0(@swc/core@1.13.2)))(ejs@3.1.10)(handlebars@4.7.8)(lodash@4.17.21)(nunjucks@3.2.4(chokidar@3.6.0))(prettier@3.3.2)(pug@3.0.3)(react-dom@16.14.0(react@16.14.0))(react@16.14.0)(twig@1.17.1)(underscore@1.13.7)(vue-template-compiler@2.7.16(vue@3.4.15(typescript@5.8.3)))(webpack@5.95.0(@swc/core@1.13.2))
+      '@vue/vue-loader-v15': vue-loader@15.11.1(@vue/compiler-sfc@3.5.18)(css-loader@6.11.0(webpack@5.95.0(@swc/core@1.13.2)))(ejs@3.1.10)(handlebars@4.7.8)(lodash@4.17.21)(nunjucks@3.2.4(chokidar@3.6.0))(prettier@3.3.2)(pug@3.0.3)(react-dom@16.14.0(react@16.14.0))(react@16.14.0)(twig@1.17.1)(underscore@1.13.7)(vue-template-compiler@2.7.16(vue@3.5.18(typescript@5.8.3)))(webpack@5.95.0(@swc/core@1.13.2))
       '@vue/web-component-wrapper': 1.3.0
       acorn: 8.15.0
       acorn-walk: 8.3.4
@@ -22980,7 +22973,7 @@ snapshots:
       ssri: 8.0.1
       terser-webpack-plugin: 5.3.14(@swc/core@1.13.2)(webpack@5.95.0(@swc/core@1.13.2))
       thread-loader: 3.0.4(webpack@5.95.0(@swc/core@1.13.2))
-      vue-loader: 17.4.2(@vue/compiler-sfc@3.5.18)(vue@3.4.15(typescript@5.8.3))(webpack@5.95.0(@swc/core@1.13.2))
+      vue-loader: 17.4.2(@vue/compiler-sfc@3.5.18)(vue@3.5.18(typescript@5.8.3))(webpack@5.95.0(@swc/core@1.13.2))
       vue-style-loader: 4.1.3
       webpack: 5.95.0(@swc/core@1.13.2)
       webpack-bundle-analyzer: 4.10.2
@@ -22990,7 +22983,7 @@ snapshots:
       webpack-virtual-modules: 0.4.6
       whatwg-fetch: 3.6.20
     optionalDependencies:
-      vue-template-compiler: 2.7.16(vue@3.4.15(typescript@5.8.3))
+      vue-template-compiler: 2.7.16(vue@3.5.18(typescript@5.8.3))
       webpack-sources: 3.3.3
     transitivePeerDependencies:
       - '@parcel/css'
@@ -23092,7 +23085,7 @@ snapshots:
       '@vue/shared': 3.4.15
       entities: 4.5.0
       estree-walker: 2.0.2
-      source-map-js: 1.2.0
+      source-map-js: 1.2.1
 
   '@vue/compiler-core@3.5.18':
     dependencies:
@@ -23120,7 +23113,7 @@ snapshots:
   '@vue/compiler-sfc@2.7.16':
     dependencies:
       '@babel/parser': 7.28.0
-      postcss: 8.5.6
+      postcss: 8.5.3
       source-map: 0.6.1
     optionalDependencies:
       prettier: 2.8.8
@@ -23135,7 +23128,7 @@ snapshots:
       '@vue/shared': 3.3.4
       estree-walker: 2.0.2
       magic-string: 0.30.17
-      postcss: 8.5.6
+      postcss: 8.5.3
       source-map-js: 1.2.1
 
   '@vue/compiler-sfc@3.4.15':
@@ -23147,7 +23140,7 @@ snapshots:
       '@vue/shared': 3.4.15
       estree-walker: 2.0.2
       magic-string: 0.30.11
-      postcss: 8.4.39
+      postcss: 8.5.3
       source-map-js: 1.2.0
 
   '@vue/compiler-sfc@3.5.18':
@@ -26950,14 +26943,14 @@ snapshots:
       - supports-color
       - typescript
 
-  eslint-plugin-jsdoc@51.4.1(eslint@9.31.0(jiti@1.21.7)):
+  eslint-plugin-jsdoc@51.4.1(eslint@9.33.0(jiti@1.21.7)):
     dependencies:
       '@es-joy/jsdoccomment': 0.52.0
       are-docs-informative: 0.0.2
       comment-parser: 1.4.1
       debug: 4.4.1
       escape-string-regexp: 4.0.0
-      eslint: 9.31.0(jiti@1.21.7)
+      eslint: 9.33.0(jiti@1.21.7)
       espree: 10.4.0
       esquery: 1.6.0
       parse-imports-exports: 0.2.4
@@ -26971,10 +26964,10 @@ snapshots:
       lodash: 4.17.21
       vscode-json-languageservice: 4.2.1
 
-  eslint-plugin-mocha@10.5.0(eslint@9.31.0(jiti@1.21.7)):
+  eslint-plugin-mocha@10.5.0(eslint@9.33.0(jiti@1.21.7)):
     dependencies:
-      eslint: 9.31.0(jiti@1.21.7)
-      eslint-utils: 3.0.0(eslint@9.31.0(jiti@1.21.7))
+      eslint: 9.33.0(jiti@1.21.7)
+      eslint-utils: 3.0.0(eslint@9.33.0(jiti@1.21.7))
       globals: 13.24.0
       rambda: 7.5.0
 
@@ -27071,9 +27064,9 @@ snapshots:
     dependencies:
       eslint-visitor-keys: 1.3.0
 
-  eslint-utils@3.0.0(eslint@9.31.0(jiti@1.21.7)):
+  eslint-utils@3.0.0(eslint@9.33.0(jiti@1.21.7)):
     dependencies:
-      eslint: 9.31.0(jiti@1.21.7)
+      eslint: 9.33.0(jiti@1.21.7)
       eslint-visitor-keys: 2.1.0
 
   eslint-visitor-keys@1.3.0: {}
@@ -32552,17 +32545,17 @@ snapshots:
     dependencies:
       postcss: 8.5.6
 
-  postcss-html@0.36.0(postcss-syntax@0.36.2(postcss@8.5.6))(postcss@7.0.39):
+  postcss-html@0.36.0(postcss-syntax@0.36.2(postcss@8.5.3))(postcss@7.0.39):
     dependencies:
       htmlparser2: 3.10.1
       postcss: 7.0.39
-      postcss-syntax: 0.36.2(postcss-html@0.36.0(postcss-syntax@0.36.2(postcss@8.5.6))(postcss@7.0.39))(postcss-jsx@0.36.4(postcss-syntax@0.36.2(postcss@8.5.6))(postcss@7.0.39))(postcss-less@3.1.4)(postcss-markdown@0.36.0(postcss-syntax@0.36.2(postcss@8.5.6))(postcss@7.0.39))(postcss-scss@2.1.1)(postcss@7.0.39)
+      postcss-syntax: 0.36.2(postcss-html@0.36.0(postcss-syntax@0.36.2(postcss@8.5.3))(postcss@7.0.39))(postcss-jsx@0.36.4(postcss-syntax@0.36.2(postcss@8.5.3))(postcss@7.0.39))(postcss-less@3.1.4)(postcss-markdown@0.36.0(postcss-syntax@0.36.2(postcss@8.5.3))(postcss@7.0.39))(postcss-scss@2.1.1)(postcss@7.0.39)
 
-  postcss-jsx@0.36.4(postcss-syntax@0.36.2(postcss@8.5.6))(postcss@7.0.39):
+  postcss-jsx@0.36.4(postcss-syntax@0.36.2(postcss@8.5.3))(postcss@7.0.39):
     dependencies:
       '@babel/core': 7.28.0
       postcss: 7.0.39
-      postcss-syntax: 0.36.2(postcss-html@0.36.0(postcss-syntax@0.36.2(postcss@8.5.6))(postcss@7.0.39))(postcss-jsx@0.36.4(postcss-syntax@0.36.2(postcss@8.5.6))(postcss@7.0.39))(postcss-less@3.1.4)(postcss-markdown@0.36.0(postcss-syntax@0.36.2(postcss@8.5.6))(postcss@7.0.39))(postcss-scss@2.1.1)(postcss@7.0.39)
+      postcss-syntax: 0.36.2(postcss-html@0.36.0(postcss-syntax@0.36.2(postcss@8.5.3))(postcss@7.0.39))(postcss-jsx@0.36.4(postcss-syntax@0.36.2(postcss@8.5.3))(postcss@7.0.39))(postcss-less@3.1.4)(postcss-markdown@0.36.0(postcss-syntax@0.36.2(postcss@8.5.3))(postcss@7.0.39))(postcss-scss@2.1.1)(postcss@7.0.39)
     transitivePeerDependencies:
       - supports-color
 
@@ -32603,10 +32596,10 @@ snapshots:
       semver: 7.7.2
       webpack: 5.95.0(@swc/core@1.13.2)
 
-  postcss-markdown@0.36.0(postcss-syntax@0.36.2(postcss@8.5.6))(postcss@7.0.39):
+  postcss-markdown@0.36.0(postcss-syntax@0.36.2(postcss@8.5.3))(postcss@7.0.39):
     dependencies:
       postcss: 7.0.39
-      postcss-syntax: 0.36.2(postcss-html@0.36.0(postcss-syntax@0.36.2(postcss@8.5.6))(postcss@7.0.39))(postcss-jsx@0.36.4(postcss-syntax@0.36.2(postcss@8.5.6))(postcss@7.0.39))(postcss-less@3.1.4)(postcss-markdown@0.36.0(postcss-syntax@0.36.2(postcss@8.5.6))(postcss@7.0.39))(postcss-scss@2.1.1)(postcss@7.0.39)
+      postcss-syntax: 0.36.2(postcss-html@0.36.0(postcss-syntax@0.36.2(postcss@8.5.3))(postcss@7.0.39))(postcss-jsx@0.36.4(postcss-syntax@0.36.2(postcss@8.5.3))(postcss@7.0.39))(postcss-less@3.1.4)(postcss-markdown@0.36.0(postcss-syntax@0.36.2(postcss@8.5.3))(postcss@7.0.39))(postcss-scss@2.1.1)(postcss@7.0.39)
       remark: 10.0.1
       unist-util-find-all-after: 1.0.5
 
@@ -32843,7 +32836,7 @@ snapshots:
 
   postcss-reporter@7.1.0(postcss@8.4.39):
     dependencies:
-      picocolors: 1.0.1
+      picocolors: 1.1.1
       postcss: 8.4.39
       thenby: 1.3.4
 
@@ -32853,9 +32846,9 @@ snapshots:
     dependencies:
       postcss: 7.0.39
 
-  postcss-safe-parser@6.0.0(postcss@8.5.6):
+  postcss-safe-parser@6.0.0(postcss@8.5.3):
     dependencies:
-      postcss: 8.5.6
+      postcss: 8.5.3
 
   postcss-sass@0.3.5:
     dependencies:
@@ -32899,14 +32892,14 @@ snapshots:
       postcss-value-parser: 4.2.0
       svgo: 3.0.2
 
-  postcss-syntax@0.36.2(postcss-html@0.36.0(postcss-syntax@0.36.2(postcss@8.5.6))(postcss@7.0.39))(postcss-jsx@0.36.4(postcss-syntax@0.36.2(postcss@8.5.6))(postcss@7.0.39))(postcss-less@3.1.4)(postcss-markdown@0.36.0(postcss-syntax@0.36.2(postcss@8.5.6))(postcss@7.0.39))(postcss-scss@2.1.1)(postcss@7.0.39):
+  postcss-syntax@0.36.2(postcss-html@0.36.0(postcss-syntax@0.36.2(postcss@8.5.3))(postcss@7.0.39))(postcss-jsx@0.36.4(postcss-syntax@0.36.2(postcss@8.5.3))(postcss@7.0.39))(postcss-less@3.1.4)(postcss-markdown@0.36.0(postcss-syntax@0.36.2(postcss@8.5.3))(postcss@7.0.39))(postcss-scss@2.1.1)(postcss@7.0.39):
     dependencies:
       postcss: 7.0.39
     optionalDependencies:
-      postcss-html: 0.36.0(postcss-syntax@0.36.2(postcss@8.5.6))(postcss@7.0.39)
-      postcss-jsx: 0.36.4(postcss-syntax@0.36.2(postcss@8.5.6))(postcss@7.0.39)
+      postcss-html: 0.36.0(postcss-syntax@0.36.2(postcss@8.5.3))(postcss@7.0.39)
+      postcss-jsx: 0.36.4(postcss-syntax@0.36.2(postcss@8.5.3))(postcss@7.0.39)
       postcss-less: 3.1.4
-      postcss-markdown: 0.36.0(postcss-syntax@0.36.2(postcss@8.5.6))(postcss@7.0.39)
+      postcss-markdown: 0.36.0(postcss-syntax@0.36.2(postcss@8.5.3))(postcss@7.0.39)
       postcss-scss: 2.1.1
 
   postcss-unique-selectors@5.1.1(postcss@8.5.3):
@@ -34949,13 +34942,13 @@ snapshots:
 
   stylelint-less@1.0.8(stylelint@14.16.1):
     dependencies:
-      postcss: 8.5.6
+      postcss: 8.5.3
       postcss-value-parser: 4.2.0
       stylelint: 14.16.1
 
-  stylelint-less@3.0.1(postcss@8.5.6)(stylelint@15.11.0(typescript@5.8.3)):
+  stylelint-less@3.0.1(postcss@8.5.3)(stylelint@15.11.0(typescript@5.8.3)):
     dependencies:
-      postcss: 8.5.6
+      postcss: 8.5.3
       postcss-resolve-nested-selector: 0.1.6
       postcss-value-parser: 4.2.0
       stylelint: 15.11.0(typescript@5.8.3)
@@ -35001,10 +34994,10 @@ snapshots:
       micromatch: 4.0.8
       normalize-path: 3.0.0
       picocolors: 1.1.1
-      postcss: 8.5.6
+      postcss: 8.5.3
       postcss-media-query-parser: 0.2.3
       postcss-resolve-nested-selector: 0.1.6
-      postcss-safe-parser: 6.0.0(postcss@8.5.6)
+      postcss-safe-parser: 6.0.0(postcss@8.5.3)
       postcss-selector-parser: 6.1.2
       postcss-value-parser: 4.2.0
       resolve-from: 5.0.0
@@ -35048,9 +35041,9 @@ snapshots:
       micromatch: 4.0.8
       normalize-path: 3.0.0
       picocolors: 1.1.1
-      postcss: 8.5.6
+      postcss: 8.5.3
       postcss-resolve-nested-selector: 0.1.6
-      postcss-safe-parser: 6.0.0(postcss@8.5.6)
+      postcss-safe-parser: 6.0.0(postcss@8.5.3)
       postcss-selector-parser: 6.1.2
       postcss-value-parser: 4.2.0
       resolve-from: 5.0.0
@@ -35092,10 +35085,10 @@ snapshots:
       normalize-selector: 0.2.0
       pify: 4.0.1
       postcss: 7.0.39
-      postcss-html: 0.36.0(postcss-syntax@0.36.2(postcss@8.5.6))(postcss@7.0.39)
-      postcss-jsx: 0.36.4(postcss-syntax@0.36.2(postcss@8.5.6))(postcss@7.0.39)
+      postcss-html: 0.36.0(postcss-syntax@0.36.2(postcss@8.5.3))(postcss@7.0.39)
+      postcss-jsx: 0.36.4(postcss-syntax@0.36.2(postcss@8.5.3))(postcss@7.0.39)
       postcss-less: 3.1.4
-      postcss-markdown: 0.36.0(postcss-syntax@0.36.2(postcss@8.5.6))(postcss@7.0.39)
+      postcss-markdown: 0.36.0(postcss-syntax@0.36.2(postcss@8.5.3))(postcss@7.0.39)
       postcss-media-query-parser: 0.2.3
       postcss-reporter: 6.0.1
       postcss-resolve-nested-selector: 0.1.6
@@ -35103,7 +35096,7 @@ snapshots:
       postcss-sass: 0.3.5
       postcss-scss: 2.1.1
       postcss-selector-parser: 3.1.2
-      postcss-syntax: 0.36.2(postcss-html@0.36.0(postcss-syntax@0.36.2(postcss@8.5.6))(postcss@7.0.39))(postcss-jsx@0.36.4(postcss-syntax@0.36.2(postcss@8.5.6))(postcss@7.0.39))(postcss-less@3.1.4)(postcss-markdown@0.36.0(postcss-syntax@0.36.2(postcss@8.5.6))(postcss@7.0.39))(postcss-scss@2.1.1)(postcss@7.0.39)
+      postcss-syntax: 0.36.2(postcss-html@0.36.0(postcss-syntax@0.36.2(postcss@8.5.3))(postcss@7.0.39))(postcss-jsx@0.36.4(postcss-syntax@0.36.2(postcss@8.5.3))(postcss@7.0.39))(postcss-less@3.1.4)(postcss-markdown@0.36.0(postcss-syntax@0.36.2(postcss@8.5.3))(postcss@7.0.39))(postcss-scss@2.1.1)(postcss@7.0.39)
       postcss-value-parser: 3.3.1
       resolve-from: 4.0.0
       signal-exit: 3.0.7
@@ -36478,7 +36471,7 @@ snapshots:
     dependencies:
       vue: 3.5.18(typescript@5.8.3)
 
-  vue-loader@15.11.1(@vue/compiler-sfc@3.5.18)(css-loader@6.11.0(webpack@5.95.0(@swc/core@1.13.2)))(ejs@3.1.10)(handlebars@4.7.8)(lodash@4.17.21)(nunjucks@3.2.4(chokidar@3.6.0))(prettier@3.3.2)(pug@3.0.3)(react-dom@16.14.0(react@16.14.0))(react@16.14.0)(twig@1.17.1)(underscore@1.13.7)(vue-template-compiler@2.7.16(vue@3.4.15(typescript@5.8.3)))(webpack@5.95.0(@swc/core@1.13.2)):
+  vue-loader@15.11.1(@vue/compiler-sfc@3.5.18)(css-loader@6.11.0(webpack@5.95.0(@swc/core@1.13.2)))(ejs@3.1.10)(handlebars@4.7.8)(lodash@4.17.21)(nunjucks@3.2.4(chokidar@3.6.0))(prettier@3.3.2)(pug@3.0.3)(react-dom@16.14.0(react@16.14.0))(react@16.14.0)(twig@1.17.1)(underscore@1.13.7)(vue-template-compiler@2.7.16(vue@3.5.18(typescript@5.8.3)))(webpack@5.95.0(@swc/core@1.13.2)):
     dependencies:
       '@vue/component-compiler-utils': 3.3.0(ejs@3.1.10)(handlebars@4.7.8)(lodash@4.17.21)(nunjucks@3.2.4(chokidar@3.6.0))(pug@3.0.3)(react-dom@16.14.0(react@16.14.0))(react@16.14.0)(twig@1.17.1)(underscore@1.13.7)
       css-loader: 6.11.0(webpack@5.95.0(@swc/core@1.13.2))
@@ -36490,7 +36483,7 @@ snapshots:
     optionalDependencies:
       '@vue/compiler-sfc': 3.5.18
       prettier: 3.3.2
-      vue-template-compiler: 2.7.16(vue@3.4.15(typescript@5.8.3))
+      vue-template-compiler: 2.7.16(vue@3.5.18(typescript@5.8.3))
     transitivePeerDependencies:
       - arc-templates
       - atpl
@@ -36546,7 +36539,7 @@ snapshots:
       - walrus
       - whiskers
 
-  vue-loader@17.4.2(@vue/compiler-sfc@3.5.18)(vue@3.4.15(typescript@5.8.3))(webpack@5.95.0(@swc/core@1.13.2)):
+  vue-loader@17.4.2(@vue/compiler-sfc@3.5.18)(vue@3.5.18(typescript@5.8.3))(webpack@5.95.0(@swc/core@1.13.2)):
     dependencies:
       chalk: 4.1.2
       hash-sum: 2.0.0
@@ -36554,7 +36547,7 @@ snapshots:
       webpack: 5.95.0(@swc/core@1.13.2)
     optionalDependencies:
       '@vue/compiler-sfc': 3.5.18
-      vue: 3.4.15(typescript@5.8.3)
+      vue: 3.5.18(typescript@5.8.3)
 
   vue-router@4.2.5(vue@3.4.15(typescript@5.8.3)):
     dependencies:
@@ -36576,13 +36569,6 @@ snapshots:
       de-indent: 1.0.2
       he: 1.2.0
       vue: 2.7.16
-
-  vue-template-compiler@2.7.16(vue@3.4.15(typescript@5.8.3)):
-    dependencies:
-      de-indent: 1.0.2
-      he: 1.2.0
-      vue: 3.4.15(typescript@5.8.3)
-    optional: true
 
   vue-template-compiler@2.7.16(vue@3.5.18(typescript@5.8.3)):
     dependencies:
