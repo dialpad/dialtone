@@ -224,18 +224,35 @@
       "bullhorn": [],
       "clockify": [],
       "copper-crm": [],
-      "dialbot": [],
-      "dialpad-ai-color-reversed": [],
-      "dialpad-ai-color": [],
-      "dialpad-analytics-ai": [],
-      "dialpad-logo": [],
+      "dialbot": [
+        "brand"
+      ],
+      "dialpad-ai-color-reversed": [
+        "brand"
+      ],
+      "dialpad-ai-color": [
+        "brand"
+      ],
+      "dialpad-analytics-ai": [
+        "brand"
+      ],
+      "dialpad-logo": [
+        "brand"
+      ],
       "dialpad-sparkle": [
         "ai",
-        "sparkle"
+        "sparkle",
+        "brand"
+      ],
+      "dialpad-star-mark-color": [
+        "dp",
+        "brand",
+        "agentic"
       ],
       "diners-club": [],
       "discover": [],
       "dpm-logo": [
+        "brand",
         "dialpad",
         "meetings",
         "logo"
@@ -316,12 +333,18 @@
       "agent-assist": [
         "ai",
         "conversation",
-        "chat"
+        "chat",
+        "brand"
       ],
-      "ai-notes": [],
-      "coaching-hub": [],
+      "ai-notes": [
+        "brand"
+      ],
+      "coaching-hub": [
+        "brand"
+      ],
       "default-ai-agent-fab": [
         "fab",
+        "brand",
         "agent"
       ],
       "dialpad-ai-reversed": [
@@ -331,14 +354,23 @@
       "dialpad-ai": [
         "artificial",
         "intelligence",
-        "voice"
+        "voice",
+        "brand"
       ],
-      "dialpad-logomark": [],
+      "dialpad-logomark": [
+        "brand"
+      ],
       "dialpad-meetings-star": [
         "dp",
         "meetings",
+        "brand",
         "sparkle",
         "star"
+      ],
+      "dialpad-star-mark": [
+        "dp",
+        "brand",
+        "agentic"
       ],
       "dialpad-star-reversed": [
         "dp",
@@ -347,21 +379,24 @@
         "star"
       ],
       "dialpad-star": [
-        "star",
-        "dp",
+        "brand",
         "sparkle",
-        "brand"
+        "star"
       ],
       "dialpad-wfm": [
+        "brand",
         "workforce",
         "surfboard",
         "management"
       ],
       "dp-phone": [
         "call",
-        "dialpad"
+        "dialpad",
+        "brand"
       ],
-      "waveform": [],
+      "waveform": [
+        "brand"
+      ],
       "zoom-logo": [
         "video",
         "competitor"
