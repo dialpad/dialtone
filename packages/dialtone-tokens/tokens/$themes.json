@@ -4652,7 +4652,7 @@
     "group": "102"
   },
   {
-    "id": "",
+    "id": "de4aff15dafcfcc4a6ccb191e7dd0852e51cd085",
     "name": "light",
     "$figmaStyleReferences": {},
     "selectedTokenSets": {
@@ -4671,7 +4671,7 @@
     "group": "103"
   },
   {
-    "id": "",
+    "id": "de4b191ed085a7dd0852e51cff15dafcfcc4a6cc",
     "name": "dark",
     "$figmaStyleReferences": {},
     "selectedTokenSets": {
