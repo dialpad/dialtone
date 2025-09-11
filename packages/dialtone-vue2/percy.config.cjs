@@ -20,6 +20,7 @@ module.exports = {
       'Components/Emoji: Default',
       'Components/Emoji: Custom Emoji',
       'Components/Emoji Text Wrapper: Default',
+      'Components/Filter Pill: Default',
       'Components/Hovercard: Default',
       'Components/Hovercard: Many',
       'Components/Icon: Default',
