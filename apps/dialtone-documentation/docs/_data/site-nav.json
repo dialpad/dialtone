@@ -627,8 +627,7 @@
         },
         {
           "text": "Filter Pill",
-          "link": "/components/filter-pill.html",
-          "planned": true
+          "link": "/components/filter-pill.html"
         },
         {
           "text": "Hovercard",
