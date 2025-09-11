@@ -1,106 +1,81 @@
 <template>
-  <dt-stack gap="400">
-    <dt-filter-pill
-      label="With header, content and footer"
-    >
-      <template slot="headerContent">
-        <dt-input
-          v-model="inputValue"
-          aria-label="Search items"
-          placeholder="Search Items"
-          type="text"
-          class="d-mr16"
-        >
-          <template #leftIcon="{ iconSize }">
-            <dt-icon-search
-              :size="iconSize"
-            />
-          </template>
-          <template
-            #rightIcon="{ clear }"
-          >
-            <dt-button
-              kind="muted"
-              importance="clear"
-              size="xs"
-              circle
-              aria-label="Clear search"
-              @click="clear"
-            >
-              <template #icon="{ iconSize }">
-                <dt-icon-close
-                  :size="iconSize"
-                />
-              </template>
-            </dt-button>
-          </template>
-        </dt-input>
-      </template>
-      <template slot="content">
-        <dt-checkbox
-          v-for="option in options"
-          :key="option"
-          :label="option"
-        />
-      </template>
-      <template slot="footerContent">
-        <div class="d-ta-right d-pr16">
-          <dt-button
-            kind="muted"
-            importance="outlined"
-            size="sm"
-          >
-            Apply
-          </dt-button>
-        </div>
-      </template>
-    </dt-filter-pill>
-    <dt-filter-pill
-      active
-      label="Active filter"
-    >
-      <template #content>
-        Default content
-      </template>
-    </dt-filter-pill>
-    <dt-filter-pill
-      active
-      label="Active filter with reset"
-      reset-button-aria-label="Reset"
-      show-reset
-    >
-      <template #content>
-        Default content
-      </template>
-    </dt-filter-pill>
-    <dt-filter-pill
-      disabled
-      label="Disabled"
-    />
-    <!-- Loading -->
+  <dt-stack gap="500">
+    <!-- No selection -->
     <dt-stack gap="300">
-      <h3>Loading</h3>
+      <span class="d-label--sm">No selection</span>
       <dt-filter-pill
-        label="Loading"
-        loading
-      >
-        <template #content>
-          Default content
-        </template>
-      </dt-filter-pill>
-      <h3>Loading with custom skeleton width</h3>
-      <dt-filter-pill
-        label="Loading with custom skeleton width"
-        loading
-        loading-skeleton-width="50px"
+        label="Channel"
       >
         <template #content>
           Default content
         </template>
       </dt-filter-pill>
     </dt-stack>
-    <!-- Sizes -->
+    <!-- Selected, show label/count, has clear -->
     <dt-stack gap="300">
+      <span class="d-label--sm">Selected, show label/count, has clear</span>
+      <dt-filter-pill
+        label="Contact centers"
+        :active-filter-count="activeContactCenters.length"
+        show-clear
+        active
+        omega-tooltip-text="Remove"
+        @clear="activeContactCenters = []"
+      >
+        <template #content>
+          <dt-checkbox-group
+            :selected-values="activeContactCenters"
+            legend="Contact Centers"
+            name="contact-centers"
+            @update:selected-values="($event) => activeContactCenters = $event"
+          >
+            <dt-checkbox
+              v-for="filter in contactCenters"
+              :key="filter"
+              :value="filter"
+              :label="filter"
+            />
+          </dt-checkbox-group>
+        </template>
+      </dt-filter-pill>
+    </dt-stack>
+    <!-- Selected, overflow, label tooltip, has clear -->
+    <dt-stack gap="300">
+      <span class="d-label--sm">Selected, overflow, label tooltip, has clear</span>
+      <dt-filter-pill
+        active
+        alpha-tooltip-text="Disposition"
+        show-clear
+        label="Merchandise Question (e.g. Size, Fit, etc)"
+        omega-tooltip-text="Remove"
+      >
+        <template #content>
+          Default content
+        </template>
+      </dt-filter-pill>
+    </dt-stack>
+    <!-- Selected, label, no clear -->
+    <dt-stack gap="300">
+      <span class="d-label--sm">Selected, label, no clear</span>
+      <dt-filter-pill
+        active
+        label="Internal and external"
+      >
+        <template #content>
+          Default content
+        </template>
+      </dt-filter-pill>
+    </dt-stack>
+    <!-- Disabled -->
+    <dt-stack gap="300">
+      <span class="d-label--sm">Disabled</span>
+      <dt-filter-pill
+        disabled
+        label="Conversation type"
+      />
+    </dt-stack>
+    <!-- Sizes -->
+    <dt-stack gap="500">
       <h3>Sizes</h3>
       <dt-filter-pill
         v-for="size in sizes"
@@ -118,33 +93,28 @@
 
 <script>
 import DtFilterPill from './filter_pill.vue';
-import { DtInput } from '@/components/input';
 import { DtCheckbox } from '@/components/checkbox';
-import { BUTTON_SIZE_MODIFIERS, DtButton } from '@/components/button';
+import { BUTTON_SIZE_MODIFIERS } from '@/components/button';
 import { DtStack } from '@/components/stack';
-import { DtIconClose, DtIconSearch } from '@dialpad/dialtone-icons/vue2';
+import { DtCheckboxGroup } from '@/components/checkbox_group';
 
 export default {
   name: 'DtFilterPillVariants',
   components: {
+    DtCheckboxGroup,
     DtFilterPill,
-    DtInput,
     DtCheckbox,
-    DtButton,
-    DtIconSearch,
-    DtIconClose,
     DtStack,
   },
 
   data () {
     return {
-      inputValue: '',
-      options: [
-        'Option 1',
-        'Option 2',
-        'Option 3',
-        'Option 4',
-        'Option 5',
+      contactCenters: [
+        'Filter 1',
+        'Filter 2',
+        'Filter 3',
+        'Filter 4',
+        'Filter 5',
       ],
 
       sizes: Object.keys(BUTTON_SIZE_MODIFIERS),
@@ -156,6 +126,10 @@ export default {
         lg: 'Large',
         xl: 'Extra Large',
       },
+
+      activeContactCenters: [
+        'Filter 1',
+      ],
     };
   },
 };

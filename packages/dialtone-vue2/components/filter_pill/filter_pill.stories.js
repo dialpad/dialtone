@@ -5,6 +5,15 @@ import DtFilterPillDefaultTemplate from './filter_pill_default.story.vue';
 import DtFilterPillVariantsTemplate from './filter_pill_variants.story.vue';
 import { action } from '@storybook/addon-actions';
 import { BUTTON_SIZE_MODIFIERS } from '@/components/button';
+import { POPOVER_PADDING_CLASSES } from '@/components/popover/index.js';
+
+// Set default values at the story level here.
+export const argsData = {
+  label: 'Users or groups',
+  content: 'This is a named slot with it\'s default set at the story level.',
+  onOpen: action('open'),
+  onClear: action('clear'),
+};
 
 export const argTypesData = {
   // Slots
@@ -22,10 +31,24 @@ export const argTypesData = {
     control: 'select',
     options: Object.keys(BUTTON_SIZE_MODIFIERS),
   },
+  active: {
+    control: {
+      type: 'boolean',
+    },
+  },
+  padding: {
+    table: {
+      defaultValue: { summary: 'large' },
+    },
+    options: Object.keys(POPOVER_PADDING_CLASSES),
+    control: {
+      type: 'select',
+    },
+  },
 
   // Events: Exclude this from the table as event names will automatically be added from the component itself.
-  onReset: {
-    action: 'reset',
+  onClear: {
+    action: 'clear',
     table: {
       disable: true,
     },
@@ -37,15 +60,6 @@ export const argTypesData = {
       disable: true,
     },
   },
-};
-
-// Set default values at the story level here.
-export const argsData = {
-  label: 'Users or groups',
-  content: 'This is a named slot with it\'s default set at the story level.',
-  onOpen: action('open'),
-  onReset: action('reset'),
-  size: 'md',
 };
 
 // Story Collection
@@ -60,6 +74,11 @@ export default {
 // Stories
 export const Default = {
   render: (argsData) => createRenderConfig(DtFilterPill, DtFilterPillDefaultTemplate, argsData),
+  decorators: [
+    () => ({
+      template: `<div class="d-p64"><story /></div>`,
+    }),
+  ],
 };
 
 export const Variants = {

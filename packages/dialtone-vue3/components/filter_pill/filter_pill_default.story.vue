@@ -1,14 +1,21 @@
 <template>
   <dt-filter-pill
-    :active="$attrs.active"
+    v-model:active="isActive"
+    :active-filter-count="$attrs.activeFilterCount"
+    :alpha-tooltip-text="$attrs.alphaTooltipText"
+    :append-to="$attrs.appendTo"
+    :show-clear="$attrs.showClear"
     :disabled="$attrs.disabled"
+    :fallback-placements="$attrs.fallbackPlacements"
     :label="$attrs.label"
     :loading="$attrs.loading"
-    :loading-skeleton-width="$attrs.loadingSkeletonWidth"
-    :reset-button-aria-label="$attrs.resetButtonAriaLabel"
-    :show-reset="$attrs.showReset"
+    :max-height="$attrs.maxHeight"
+    :max-width="$attrs.maxWidth"
+    :omega-tooltip-text="$attrs.omegaTooltipText"
+    :padding="$attrs.padding"
+    :placement="$attrs.placement"
     :size="$attrs.size"
-    @reset="$attrs.onReset"
+    @clear="$attrs.onClear"
     @open="$attrs.onOpen"
   >
     <template #content>
@@ -26,5 +33,20 @@ import DtFilterPill from './filter_pill.vue';
 export default {
   name: 'DtFilterPillDefault',
   components: { DtFilterPill },
+  data () {
+    return {
+      isActive: this.$attrs.active,
+    }
+  },
+
+  watch: {
+    $attrs: {
+      deep: true,
+      immediate: true,
+      handler: function (attrs) {
+        this.isActive = attrs.active;
+      },
+    },
+  },
 };
 </script>

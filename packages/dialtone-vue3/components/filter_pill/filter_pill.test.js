@@ -3,18 +3,19 @@ import DtFilterPill from './filter_pill.vue';
 import { DtPopover } from '@/components/popover';
 
 const MOCK_OPEN_STUB = vi.fn();
-const MOCK_RESET_STUB = vi.fn();
+const MOCK_CLEAR_STUB = vi.fn();
 
 const MOCK_LABEL = 'Filter pill label';
-const MOCK_HEADER_CONTENT = 'Popover header';
 const MOCK_CONTENT = 'Popover content';
-const MOCK_FOOTER_CONTENT = 'Popover footer';
 
 const baseProps = {};
-const baseSlots = {};
+const baseSlots = {
+  default: `<span>${MOCK_CONTENT}</span>`,
+};
+
 const baseAttrs = {
   onOpen: MOCK_OPEN_STUB,
-  onReset: MOCK_RESET_STUB,
+  onClear: MOCK_CLEAR_STUB,
 };
 
 let mockProps = {};
@@ -26,11 +27,8 @@ describe('DtFilterPill Tests', function () {
   let button;
   let label;
   let icon;
-  let resetButton;
-  let skeleton;
-  let headerContent;
+  let clearButton;
   let content;
-  let footerContent;
 
   const updateWrapper = () => {
     wrapper = mount(DtFilterPill, {
@@ -48,13 +46,10 @@ describe('DtFilterPill Tests', function () {
     button = wrapper.find('[data-qa="dt-filter-pill__button"]');
     label = button.find('[data-qa="dt-button-label"]');
     icon = wrapper.find('[data-qa="dt-filter-pill__icon"]');
-    resetButton = wrapper.find('[data-qa="dt-filter-pill__reset-button"]');
-    skeleton = wrapper.find('[data-qa="skeleton-text-body"]');
+    clearButton = wrapper.find('[data-qa="dt-filter-pill__clear-button"]');
   };
 
-  beforeEach(() => {
-    updateWrapper();
-  });
+  beforeEach(() => { updateWrapper(); });
 
   afterEach(() => {
     mockProps = {};
@@ -73,8 +68,8 @@ describe('DtFilterPill Tests', function () {
         expect(icon.exists()).toBe(true);
       });
 
-      it('Should not render reset button', () => {
-        expect(resetButton.exists()).toBe(false);
+      it('Should not render clear button', () => {
+        expect(clearButton.exists()).toBe(false);
       });
     });
 
@@ -84,7 +79,7 @@ describe('DtFilterPill Tests', function () {
 
         updateWrapper();
 
-        expect(button.classes().includes('d-filter-pill--active')).toBe(true);
+        expect(button.classes().includes('d-filter-pill--selected')).toBe(true);
       });
     });
 
@@ -108,39 +103,15 @@ describe('DtFilterPill Tests', function () {
       });
     });
 
-    describe('When loading is set', () => {
-      it('Should render skeleton', () => {
-        mockProps = { loading: true };
-
-        updateWrapper();
-
-        expect(skeleton.exists()).toBe(true);
-      });
-
-      describe('When loading-skeleton-width is set', () => {
-        it('Should have custom width', () => {
-          mockProps = {
-            loading: true,
-            loadingSkeletonWidth: '50px',
-          };
-
-          updateWrapper();
-
-          expect(skeleton.attributes('style')).toContain('width: 50px');
-        });
-      });
-    });
-
-    describe('When show-reset is set', () => {
-      it('Should render reset button', () => {
+    describe('When show-clear is set', () => {
+      it('Should render clear button', () => {
         mockProps = {
-          showReset: true,
-          resetButtonAriaLabel: 'Reset',
+          showClear: true,
         };
 
         updateWrapper();
 
-        expect(resetButton.exists()).toBe(true);
+        expect(clearButton.exists()).toBe(true);
       });
     });
   });
@@ -148,8 +119,7 @@ describe('DtFilterPill Tests', function () {
   describe('Interactivity Tests', () => {
     beforeEach(() => {
       mockProps = {
-        showReset: true,
-        resetButtonAriaLabel: 'Reset',
+        showClear: true,
       };
 
       updateWrapper();
@@ -169,44 +139,22 @@ describe('DtFilterPill Tests', function () {
       });
     });
 
-    describe('When reset button  is clicked', () => {
+    describe('When clear button  is clicked', () => {
       beforeEach(async () => {
-        await resetButton.trigger('click');
+        await clearButton.trigger('click');
       });
 
       it('Should call listener once', () => {
-        expect(MOCK_RESET_STUB).toHaveBeenCalledTimes(1);
+        expect(MOCK_CLEAR_STUB).toHaveBeenCalledTimes(1);
       });
 
-      it('Should emit "reset" event', () => {
-        expect(wrapper.emitted()).toHaveProperty('reset');
+      it('Should emit "clear" event', () => {
+        expect(wrapper.emitted()).toHaveProperty('clear');
       });
     });
   });
 
   describe('Extendability Tests', () => {
-    describe('When headerContent is set', () => {
-      beforeEach(async () => {
-        mockSlots = { headerContent: MOCK_HEADER_CONTENT };
-
-        updateWrapper();
-
-        await button.trigger('click');
-
-        headerContent = wrapper
-          .findComponent(DtPopover)
-          .findComponent({ ref: 'popover__header' });
-      });
-
-      it('Renders the popover header', async () => {
-        expect(headerContent.exists()).toBe(true);
-      });
-
-      it('Renders the content on the popover header', async () => {
-        expect(headerContent.html()).toContain(MOCK_HEADER_CONTENT);
-      });
-    });
-
     describe('When content is set', () => {
       beforeEach(async () => {
         mockSlots = { content: MOCK_CONTENT };
@@ -226,46 +174,6 @@ describe('DtFilterPill Tests', function () {
 
       it('Renders the content on the popover', async () => {
         expect(content.html()).toContain(MOCK_CONTENT);
-      });
-    });
-
-    describe('When footerContent is set', () => {
-      beforeEach(async () => {
-        mockSlots = { footerContent: MOCK_FOOTER_CONTENT };
-
-        updateWrapper();
-
-        await button.trigger('click');
-
-        footerContent = wrapper
-          .findComponent(DtPopover)
-          .findComponent({ ref: 'popover__footer' });
-      });
-
-      it('Renders the popover footer', async () => {
-        expect(footerContent.exists()).toBe(true);
-      });
-
-      it('Renders the content on the popover footer', async () => {
-        expect(footerContent.html()).toContain(MOCK_FOOTER_CONTENT);
-      });
-    });
-  });
-
-  describe('Validation Tests', () => {
-    describe('When show-reset is set and reset-button-aria-label is undefined', () => {
-      it('Should output console error', () => {
-        const message = 'DtFilterPill a11y: reset-button-aria-label prop must be set if show-reset is set';
-        let consoleError = vi.spyOn(console, 'error').mockClear();
-
-        mockProps = { showReset: true };
-
-        updateWrapper();
-
-        expect(consoleError).toHaveBeenCalledWith(message);
-
-        consoleError = null;
-        console.error.mockRestore();
       });
     });
   });

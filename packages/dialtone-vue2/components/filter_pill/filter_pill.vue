@@ -1,81 +1,86 @@
 <template>
-  <dt-popover
-    v-model="isPopoverOpen"
+  <div
     class="d-filter-pill"
     data-qa="dt-filter-pill"
-    :placement="placement"
-    :fallback-placements="fallbackPlacements"
-    :append-to="appendTo"
-    :max-height="maxHeight"
-    :max-width="maxWidth"
-    :padding="padding"
   >
-    <template #anchor>
-      <div class="d-filter-pill__wrapper">
+    <dt-popover
+      v-model="isPopoverOpen"
+      :append-to="appendTo"
+      :fallback-placements="fallbackPlacements"
+      :max-height="maxHeight"
+      :max-width="maxWidth"
+      :modal="false"
+      :padding="padding"
+      :placement="placement"
+    >
+      <template #anchor>
         <dt-button
+          v-dt-tooltip="alphaTooltipText"
+          :active="isActive"
+          :class="[
+            'd-filter-pill__primary',
+            {
+              'd-filter-pill--selected': isActive,
+              'd-filter-pill__primary--has-clear': hasClear,
+            },
+          ]"
+          :disabled="disabled"
+          :kind="buttonKind"
+          :size="size"
           data-qa="dt-filter-pill__button"
           icon-position="right"
           importance="outlined"
-          kind="muted"
-          :size="size"
-          :aria-busy="loading"
-          :aria-label="loading ? label : undefined"
-          :class="{ 'd-filter-pill--active': active }"
-          :disabled="disabled"
           @click="isPopoverOpen = true"
         >
-          <span v-if="!loading">
-            {{ label }}
+          <span class="d-filter-pill__label">
+            <span class="d-filter-pill__label-alpha">{{ label }}</span>
+            <span
+              v-if="activeFilterCount"
+              class="d-filter-pill__label-omega"
+            >{{ activeFilterCount }}</span>
           </span>
-          <dt-skeleton
-            v-else
-            :text-option="{ width: loadingSkeletonWidth }"
-          />
           <template #icon="{ iconSize }">
             <dt-icon-chevron-down
-              data-qa="dt-filter-pill__icon"
-              class="d-filter-pill__icon"
               :size="iconSize"
+              class="d-filter-pill__icon"
+              data-qa="dt-filter-pill__icon"
             />
           </template>
         </dt-button>
-        <dt-button
-          v-if="showReset"
-          data-qa="dt-filter-pill__reset-button"
-          class="d-filter-pill__reset"
-          circle
-          importance="clear"
-          kind="muted"
-          :size="size"
-          :aria-label="resetButtonAriaLabel"
-          @click="$emit('reset', $event)"
-        >
-          <template #icon="{ iconSize }">
-            <dt-icon-close :size="iconSize" />
-          </template>
-        </dt-button>
-      </div>
-    </template>
-    <template #headerContent>
-      <!-- @slot Header content of the opened popover -->
-      <slot name="headerContent" />
-    </template>
-    <template #content>
-      <!-- @slot Main content of the opened popover -->
-      <slot name="content" />
-    </template>
-    <template #footerContent>
-      <!-- @slot Footer content of the opened popover -->
-      <slot name="footerContent" />
-    </template>
-  </dt-popover>
+      </template>
+      <template #content>
+        <slot name="content" />
+      </template>
+    </dt-popover>
+    <dt-button
+      v-if="hasClear"
+      v-dt-tooltip="omegaTooltipText"
+      :active="isActive"
+      :aria-label="clearButtonAriaLabel"
+      :class="[
+        'd-filter-pill__clear',
+        { 'd-filter-pill__clear--selected': isActive },
+      ]"
+      :disabled="disabled"
+      :kind="buttonKind"
+      :size="size"
+      :title="clearButtonTitle"
+      data-qa="dt-filter-pill__clear-button"
+      importance="outlined"
+      @click="clearFilter"
+    >
+      <template #icon="{ iconSize }">
+        <dt-icon-close :size="iconSize" />
+      </template>
+    </dt-button>
+  </div>
 </template>
 
 <script>
 import { DtPopover, POPOVER_APPEND_TO_VALUES, POPOVER_PADDING_CLASSES } from '@/components/popover';
-import { DtSkeleton } from '@/components/skeleton';
 import { BUTTON_SIZE_MODIFIERS, DtButton } from '@/components/button';
 import { DtIconChevronDown, DtIconClose } from '@dialpad/dialtone-icons/vue2';
+import { DialtoneLocalization } from '@/localization';
 
 export default {
   name: 'DtFilterPill',
@@ -85,14 +90,15 @@ export default {
     DtButton,
     DtIconClose,
     DtIconChevronDown,
-    DtSkeleton,
   },
 
   inheritAttrs: false,
 
   props: {
     /**
-     * Sets the button highlighted styling
+     * Controls whether the filter pill is active and sets the button highlighted styling.
+     * Supports .sync modifier
+     * @values true, false
      */
     active: {
       type: Boolean,
@@ -100,10 +106,27 @@ export default {
     },
 
     /**
+     * Number of active filters to show in the pill
+     */
+    activeFilterCount: {
+      type: Number,
+      default: undefined,
+    },
+
+    /**
+     * Text shown in tooltip when you hover the alpha button,
+     * required if no content is passed to default slot
+     */
+    alphaTooltipText: {
+      type: String,
+      default: '',
+    },
+
+    /**
      * Sets the element to which the
      * <a class="d-link" href="https://dialtone.dialpad.com/components/popover.html#vue-api" target="_blank">popover component</a>
      *  is going to append to
-     * @values 'body', 'parent', 'root', HTMLElement
+     * @values body, parent, root, HTMLElement
      */
     appendTo: {
       type: [HTMLElement, String],
@@ -141,23 +164,6 @@ export default {
     },
 
     /**
-     * Determines if the filter is loading
-     */
-    loading: {
-      type: Boolean,
-      default: false,
-    },
-
-    /**
-     * Sets the size of the skeleton
-     * accepts CSS width attribute values
-     */
-    loadingSkeletonWidth: {
-      type: String,
-      default: '128px',
-    },
-
-    /**
      * Determines maximum height for the popover before overflow.
      * Possible units rem|px|em
      */
@@ -171,6 +177,15 @@ export default {
      * Possible units rem|px|%|em
      */
     maxWidth: {
+      type: String,
+      default: '',
+    },
+
+    /**
+     * Text shown in tooltip when you hover the omega button,
+     * required as it is an icon only button
+     */
+    omegaTooltipText: {
       type: String,
       default: '',
     },
@@ -198,18 +213,9 @@ export default {
     },
 
     /**
-     * Aria label for reset/clear button,
-     * required if showReset is set
+     * Shows the clear button
      */
-    resetButtonAriaLabel: {
-      type: String,
-      default: undefined,
-    },
-
-    /**
-     * Shows the reset/clear icon
-     */
-    showReset: {
+    showClear: {
       type: Boolean,
       default: false,
     },
@@ -227,12 +233,12 @@ export default {
 
   emits: [
     /**
-     * Emitted when clicking the reset/clear button
+     * Emitted when clicking the clear button
      *
-     * @event reset
+     * @event clear
      * @type {Boolean | Array}
      */
-    'reset',
+    'clear',
 
     /**
      * Emitted when popover is shown or hidden
@@ -241,12 +247,39 @@ export default {
      * @type {Boolean | Array}
      */
     'open',
+
+    /**
+     * Emitted to sync value with parent
+     *
+     * @event update:active
+     * @type {Boolean | Array}
+     */
+    'update:active',
   ],
 
   data () {
     return {
       isPopoverOpen: false,
+      isActive: this.active,
+      hasClear: this.showClear,
+      i18n: new DialtoneLocalization(),
     };
+  },
+
+  computed: {
+    buttonKind () {
+      return this.isActive ? 'default': 'muted';
+    },
+
+    clearButtonAriaLabel () {
+      return this.omegaTooltipText || this.i18n.$t('DIALTONE_FILTER_PILL_CLEAR_BUTTON_LABEL');
+    },
+
+    clearButtonTitle () {
+      if (this.omegaTooltipText) return;
+
+      return this.clearButtonAriaLabel
+    },
   },
 
   watch: {
@@ -254,19 +287,35 @@ export default {
       this.$emit('open', isOpen);
     },
 
-    showReset: {
+    active: {
       immediate: true,
-      handler () {
-        this.validateProps();
+      handler (isActive) {
+        this.$emit('update:active', isActive);
+        this.isActive = isActive;
       },
+    },
+
+    showClear (clear) {
+      this.hasClear = clear;
+    },
+
+    activeFilterCount (count) {
+      if (count > 0) {
+        this.isActive = true;
+        this.hasClear = true;
+      } else {
+        this.isActive = false;
+        this.hasClear = false;
+      }
+
     },
   },
 
   methods: {
-    validateProps () {
-      if (this.showReset && !this.resetButtonAriaLabel) {
-        console.error('DtFilterPill a11y: reset-button-aria-label prop must be set if show-reset is set');
-      }
+    clearFilter ($event) {
+      this.isActive = false;
+      this.hasClear = false;
+      this.$emit('clear', $event)
     },
   },
 };
