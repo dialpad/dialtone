@@ -5,12 +5,12 @@
       v-bind="controlBindings"
       @update:value="updateValue"
     >
-      <span>
+      <span v-dt-tooltip="description">
         <span
-          class="d-pr4"
+          class="d-tt-capitalize"
           data-qa="dtc-option-bar-control-label"
         >
-          {{ label }}
+          {{ controlLabel }}
         </span>
         <dt-icon-lock
           v-if="locked"
@@ -36,21 +36,15 @@
         </span>
       </span>
     </component>
-    <div
-      class="d-description d-p1"
-      data-qa="dtc-option-bar-control-description"
-    >
-      {{ description }}
-    </div>
   </div>
 </template>
 
 <script setup>
-import { DtIconLock } from '@dialpad/dialtone-icons/vue3';
+import DtIconLock from '@dialpad/dialtone-icons/vue3/lock';
 import { DtBadge } from '@dialpad/dialtone-vue';
 import { VALUE_UPDATE_EVENT } from '@/src/lib/constants';
 import { computed } from 'vue';
-import { serializeControlValue, deserializeControlValue } from '@/src/lib/control';
+import { deserializeControlValue, serializeControlValue } from '@/src/lib/control';
 
 const props = defineProps({
   /**
@@ -125,6 +119,8 @@ const controlValue = computed(() => {
     ? serializeControlValue(props.value)
     : props.value;
 });
+
+const controlLabel = computed(() => props.label.replaceAll('-', ' '))
 
 const controlComponent = computed(() => {
   return props.controlData.component;

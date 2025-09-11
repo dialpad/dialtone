@@ -7,7 +7,7 @@
     @input="e => emit(VALUE_UPDATE_EVENT, e)"
   >
     <template #labelSlot>
-      <span>
+      <span class="d-input__label-text d-label--sm">
         <slot />
       </span>
     </template>

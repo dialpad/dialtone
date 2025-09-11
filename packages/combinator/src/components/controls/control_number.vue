@@ -9,7 +9,9 @@
         @input="e => emit(VALUE_UPDATE_EVENT, parseInt(e))"
       >
         <template #labelSlot>
-          <slot />
+          <span class="d-input__label-text d-label--sm">
+            <slot />
+          </span>
         </template>
       </dt-input>
     </div>
