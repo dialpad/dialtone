@@ -3,17 +3,17 @@ DIALTONE_CLOSE_BUTTON = 点击关闭
 DIALTONE_BREADCRUMBS_ARIA_LABEL = 面包屑导航
 DIALTONE_LOADING = 正在加载
 DIALTONE_UNREAD_MESSAGE_COUNT_TEXT =
-  { $unreadCount ->
-  [0] 没有未读消息
-  [1] 1 条未读消息
-  *[other] { $unreadCount } 条未读消息
-      }
+    { $unreadCount ->
+        [0] 没有未读消息
+        [1] 1 条未读消息
+       *[other] { $unreadCount } 条未读消息
+    }
 DIALTONE_UNREAD_MENTION_COUNT_TEXT =
-  { $unreadCount ->
-  [0] 没有未读提及
-  [1] 1 条未读提及
-  *[other] { $unreadCount } 条未读提及
-      }
+    { $unreadCount ->
+        [0] 没有未读提及
+        [1] 1 条未读提及
+       *[other] { $unreadCount } 条未读提及
+    }
 DIALTONE_TYPING_TEXT = 正在打字
 DIALTONE_ATTACHMENT_CAROUSEL_CLICK_TO_OPEN_ARIA_LABEL = 点击打开
 DIALTONE_ATTACHMENT_CAROUSEL_PROGRESS_BAR_ARIA_LABEL = 上传
@@ -29,14 +29,14 @@ DIALTONE_DATEPICKER_NEXT_YEAR = 明年
 DIALTONE_DATEPICKER_SELECT_DAY = 选择日期
 DIALTONE_DATEPICKER_CHANGE_TO = 更改为
 DIALTONE_EDITOR_CONFIRM_SET_LINK_BUTTON =
-  .title = 确认
-  .aria-label = 确认设置链接
+    .title = 确认
+    .aria-label = 确认设置链接
 DIALTONE_EDITOR_REMOVE_LINK_BUTTON =
-  .title = 移除
-  .aria-label = 删除链接
+    .title = 移除
+    .aria-label = 删除链接
 DIALTONE_EDITOR_CANCEL_SET_LINK_BUTTON =
-  .title = 取消
-  .aria-label = 取消设置链接
+    .title = 取消
+    .aria-label = 取消设置链接
 DIALTONE_EDITOR_QUICK_REPLY_BUTTON_LABEL = 模板
 DIALTONE_EDITOR_BOLD_BUTTON_LABEL = 粗体
 DIALTONE_EDITOR_ITALICS_BUTTON_LABEL = 斜体
@@ -53,12 +53,12 @@ DIALTONE_EDITOR_CODE_BUTTON_LABEL = 代码
 DIALTONE_EDITOR_IMAGE_BUTTON_LABEL = 图像
 DIALTONE_EDITOR_LINK_BUTTON_LABEL = 链接
 DIALTONE_EDITOR_ADD_LINK_BUTTON =
-  .title = 添加链接
-  .aria-label = 添加链接的输入字段
+    .title = 添加链接
+    .aria-label = 添加链接的输入字段
 DIALTONE_EMOJI_ROW_REACTION_LABEL =
-  { $personCount ->
-  *[other] 使用了 { $reaction } 作为回复
-      }
+    { $personCount ->
+       *[other] 使用了 { $reaction } 作为回复
+    }
 DIALTONE_EMOJI_PICKER_ADD_EMOJI_LABEL = 添加表情符号
 DIALTONE_EMOJI_PICKER_SEARCH_NO_RESULTS_LABEL = 没有结果
 DIALTONE_EMOJI_PICKER_SEARCH_RESULTS_LABEL = 搜索结果
@@ -79,10 +79,10 @@ DIALTONE_GENERAL_ROW_ACTIVE_VOICE_CHAT_TEXT = 进行语音聊天
 DIALTONE_GENERAL_ROW_CALL_BUTTON_TOOLTIP = 呼叫
 DIALTONE_GENERAL_ROW_DND_TEXT_TOOLTIP = 请勿打扰
 DIALTONE_GROUP_ROW_GROUP_COUNT_TEXT =
-  { $count ->
-  [1] 1 位用户
-  *[other] { $count } 用户
-      }
+    { $count ->
+        [1] 1 位用户
+       *[other] { $count } 用户
+    }
 DIALTONE_IVR_NODE_MENU_BUTTON_ARIA_LABEL = 打开菜单
 DIALTONE_IVR_NODE_PROMPTMENU_ARIA_LABEL = 提示菜单节点
 DIALTONE_IVR_NODE_PROMPTCOLLECT_ARIA_LABEL = 提示收集节点
@@ -99,32 +99,32 @@ DIALTONE_MESSAGE_INPUT_IMAGE_PICKER_BUTTON_ARIA_LABEL = 附上图片
 DIALTONE_MESSAGE_INPUT_EMOJI_PICKER_BUTTON_ARIA_LABEL = 选择表情符号
 DIALTONE_MESSAGE_INPUT_CANCEL_BUTTON_ARIA_LABEL = 取消
 DIALTONE_MESSAGE_INPUT_BOLD_BUTTON_LABEL =
-  .aria-label = 切换选定文本的粗体
-  .tooltip-text = 粗体
+    .aria-label = 切换选定文本的粗体
+    .tooltip-text = 粗体
 DIALTONE_MESSAGE_INPUT_ITALIC_BUTTON_LABEL =
-  .aria-label = 切换所选文本的斜体
-  .tooltip-text = 斜体
+    .aria-label = 切换所选文本的斜体
+    .tooltip-text = 斜体
 DIALTONE_MESSAGE_INPUT_STRIKETHROUGH_BUTTON_LABEL =
-  .aria-label = 切换选定文本的删除线
-  .tooltip-text = 删除线
+    .aria-label = 切换选定文本的删除线
+    .tooltip-text = 删除线
 DIALTONE_MESSAGE_INPUT_BULLET_LIST_BUTTON_LABEL =
-  .aria-label = 在选定的文本上创建或编辑项目符号列表
-  .tooltip-text = 项目符号列表
+    .aria-label = 在选定的文本上创建或编辑项目符号列表
+    .tooltip-text = 项目符号列表
 DIALTONE_MESSAGE_INPUT_ORDERED_LIST_BUTTON_LABEL =
-  .aria-label = 创建或编辑选定文本的有序列表
-  .tooltip-text = 有序列表
+    .aria-label = 创建或编辑选定文本的有序列表
+    .tooltip-text = 有序列表
 DIALTONE_MESSAGE_INPUT_BLOCK_QUOTE_BUTTON_LABEL =
-  .aria-label = 在选定的文本上创建或编辑块引用
-  .tooltip-text = 块引用
+    .aria-label = 在选定的文本上创建或编辑块引用
+    .tooltip-text = 块引用
 DIALTONE_MESSAGE_INPUT_CODE_BUTTON_LABEL =
-  .aria-label = 在选定的文本上创建或编辑代码
-  .tooltip-text = 代码
+    .aria-label = 在选定的文本上创建或编辑代码
+    .tooltip-text = 代码
 DIALTONE_MESSAGE_INPUT_CODE_BLOCK_BUTTON_LABEL =
-  .aria-label = 在选定的文本上创建或编辑代码块
-  .tooltip-text = 代码块
+    .aria-label = 在选定的文本上创建或编辑代码块
+    .tooltip-text = 代码块
 DIALTONE_MESSAGE_INPUT_LINK_BUTTON_LABEL =
-  .aria-label = 在选定的文本上创建或编辑链接
-  .tooltip-text = 链接
+    .aria-label = 在选定的文本上创建或编辑链接
+    .tooltip-text = 链接
 DIALTONE_MESSAGE_INPUT_LINK_DIALOG_TITLE = 添加链接
 DIALTONE_MESSAGE_INPUT_LINK_TEXT_LABEL = 显示的文本（可选）
 DIALTONE_MESSAGE_INPUT_LINK_LINK_LABEL = 链接
