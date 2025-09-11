@@ -116,7 +116,6 @@ export default {
       return this.i18n.$t('DIALTONE_EMOJI_ROW_REACTION_LABEL', {
         reaction: getEmojiShortCode(reaction.emojiUnicodeOrShortname),
         personCount: reaction.num,
-        youIncluded: reaction.isSelected,
       });
     },
   },

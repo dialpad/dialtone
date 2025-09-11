@@ -3,17 +3,17 @@ DIALTONE_CLOSE_BUTTON = Нажмите, чтобы закрыть
 DIALTONE_BREADCRUMBS_ARIA_LABEL = Навигационная цепочка
 DIALTONE_LOADING = Идет загрузка
 DIALTONE_UNREAD_MESSAGE_COUNT_TEXT =
-    { $unreadCount ->
-        [0] Нет непрочитанных сообщений
-        [1] 1 непрочитанное сообщение
-       *[other] Непрочитанных сообщений: { $unreadCount }
-    }
+  { $unreadCount ->
+  [0] Нет непрочитанных сообщений
+  [1] 1 непрочитанное сообщение
+  *[other] Непрочитанных сообщений: { $unreadCount }
+      }
 DIALTONE_UNREAD_MENTION_COUNT_TEXT =
-    { $unreadCount ->
-        [0] Нет непрочитанных упоминаний
-        [1] 1 непрочитанное упоминание
-       *[other] Непрочитанных упоминаний: { $unreadCount }
-    }
+  { $unreadCount ->
+  [0] Нет непрочитанных упоминаний
+  [1] 1 непрочитанное упоминание
+  *[other] Непрочитанных упоминаний: { $unreadCount }
+      }
 DIALTONE_TYPING_TEXT = Пишет
 DIALTONE_ATTACHMENT_CAROUSEL_CLICK_TO_OPEN_ARIA_LABEL = Нажмите, чтобы открыть
 DIALTONE_ATTACHMENT_CAROUSEL_PROGRESS_BAR_ARIA_LABEL = Загрузка
@@ -29,14 +29,14 @@ DIALTONE_DATEPICKER_NEXT_YEAR = в следующем году
 DIALTONE_DATEPICKER_SELECT_DAY = Выберите день
 DIALTONE_DATEPICKER_CHANGE_TO = Изменить на
 DIALTONE_EDITOR_CONFIRM_SET_LINK_BUTTON =
-    .title = Подтвердить
-    .aria-label = Подтвердите заданную ссылку
+  .title = Подтвердить
+  .aria-label = Подтвердите заданную ссылку
 DIALTONE_EDITOR_REMOVE_LINK_BUTTON =
-    .title = Удалить
-    .aria-label = Удалить ссылку
+  .title = Удалить
+  .aria-label = Удалить ссылку
 DIALTONE_EDITOR_CANCEL_SET_LINK_BUTTON =
-    .title = Отмена
-    .aria-label = Отменить заданную ссылку
+  .title = Отмена
+  .aria-label = Отменить заданную ссылку
 DIALTONE_EDITOR_QUICK_REPLY_BUTTON_LABEL = Шаблон
 DIALTONE_EDITOR_BOLD_BUTTON_LABEL = Жирный
 DIALTONE_EDITOR_ITALICS_BUTTON_LABEL = Курсив
@@ -53,31 +53,15 @@ DIALTONE_EDITOR_CODE_BUTTON_LABEL = Код
 DIALTONE_EDITOR_IMAGE_BUTTON_LABEL = Изображение
 DIALTONE_EDITOR_LINK_BUTTON_LABEL = Ссылка
 DIALTONE_EDITOR_ADD_LINK_BUTTON =
-    .title = Добавить ссылку
-    .aria-label = Поле ввода для добавления ссылки
+  .title = Добавить ссылку
+  .aria-label = Поле ввода для добавления ссылки
 DIALTONE_EMOJI_ROW_REACTION_LABEL =
-    { $personCount ->
-        [one]
-            { $youIncluded ->
-               *[true] реагирует с { $reaction }
-                [false] реагирует с { $reaction }
-            }
-        [few]
-            { $youIncluded ->
-               *[true] реагируют с { $reaction }
-                [false] реагируют с { $reaction }
-            }
-        [many]
-            { $youIncluded ->
-               *[true] реагируют с { $reaction }
-                [false] реагируют с { $reaction }
-            }
-       *[other]
-            { $youIncluded ->
-               *[true] реагируют с { $reaction }
-                [false] реагируют с { $reaction }
-            }
-    }
+  { $personCount ->
+  [one] реагирует с { $reaction }
+  [few] реагируют с { $reaction }
+  [many] реагируют с { $reaction }
+  *[other] реагируют с { $reaction }
+      }
 DIALTONE_EMOJI_PICKER_ADD_EMOJI_LABEL = Добавить смайлик
 DIALTONE_EMOJI_PICKER_SEARCH_NO_RESULTS_LABEL = Нет результатов
 DIALTONE_EMOJI_PICKER_SEARCH_RESULTS_LABEL = результаты поиска
@@ -98,10 +82,10 @@ DIALTONE_GENERAL_ROW_ACTIVE_VOICE_CHAT_TEXT = Активный голосово�
 DIALTONE_GENERAL_ROW_CALL_BUTTON_TOOLTIP = Вызов
 DIALTONE_GENERAL_ROW_DND_TEXT_TOOLTIP = Режим «Не беспокоить»
 DIALTONE_GROUP_ROW_GROUP_COUNT_TEXT =
-    { $count ->
-        [1] 1 пользователь
-       *[other] { $count } пользователей
-    }
+  { $count ->
+  [1] 1 пользователь
+  *[other] { $count } пользователей
+      }
 DIALTONE_IVR_NODE_MENU_BUTTON_ARIA_LABEL = Открыть меню
 DIALTONE_IVR_NODE_PROMPTMENU_ARIA_LABEL = узел меню запросов
 DIALTONE_IVR_NODE_PROMPTCOLLECT_ARIA_LABEL = узел сбора запросов
@@ -118,32 +102,32 @@ DIALTONE_MESSAGE_INPUT_IMAGE_PICKER_BUTTON_ARIA_LABEL = Прикрепить и�
 DIALTONE_MESSAGE_INPUT_EMOJI_PICKER_BUTTON_ARIA_LABEL = Выбрать эмодзи
 DIALTONE_MESSAGE_INPUT_CANCEL_BUTTON_ARIA_LABEL = Отмена
 DIALTONE_MESSAGE_INPUT_BOLD_BUTTON_LABEL =
-    .aria-label = Переключить жирный шрифт в выбранном тексте
-    .tooltip-text = Жирный
+  .aria-label = Переключить жирный шрифт в выбранном тексте
+  .tooltip-text = Жирный
 DIALTONE_MESSAGE_INPUT_ITALIC_BUTTON_LABEL =
-    .aria-label = Включить курсив в выбранном тексте
-    .tooltip-text = Курсив
+  .aria-label = Включить курсив в выбранном тексте
+  .tooltip-text = Курсив
 DIALTONE_MESSAGE_INPUT_STRIKETHROUGH_BUTTON_LABEL =
-    .aria-label = Включить зачеркивание выбранного текста
-    .tooltip-text = Зачеркнутый
+  .aria-label = Включить зачеркивание выбранного текста
+  .tooltip-text = Зачеркнутый
 DIALTONE_MESSAGE_INPUT_BULLET_LIST_BUTTON_LABEL =
-    .aria-label = Создать или отредактировать маркированный список в выбранном тексте
-    .tooltip-text = Маркированный список
+  .aria-label = Создать или отредактировать маркированный список в выбранном тексте
+  .tooltip-text = Маркированный список
 DIALTONE_MESSAGE_INPUT_ORDERED_LIST_BUTTON_LABEL =
-    .aria-label = Создать или отредактировать упорядоченный список в выбранном тексте
-    .tooltip-text = Упорядоченный список
+  .aria-label = Создать или отредактировать упорядоченный список в выбранном тексте
+  .tooltip-text = Упорядоченный список
 DIALTONE_MESSAGE_INPUT_BLOCK_QUOTE_BUTTON_LABEL =
-    .aria-label = Создать или отредактировать блочную цитату в выбранном тексте
-    .tooltip-text = Блочная цитата
+  .aria-label = Создать или отредактировать блочную цитату в выбранном тексте
+  .tooltip-text = Блочная цитата
 DIALTONE_MESSAGE_INPUT_CODE_BUTTON_LABEL =
-    .aria-label = Создать или отредактировать код в выбранном тексте
-    .tooltip-text = Код
+  .aria-label = Создать или отредактировать код в выбранном тексте
+  .tooltip-text = Код
 DIALTONE_MESSAGE_INPUT_CODE_BLOCK_BUTTON_LABEL =
-    .aria-label = Создать или отредактировать блок кода в выбранном тексте
-    .tooltip-text = Блок кода
+  .aria-label = Создать или отредактировать блок кода в выбранном тексте
+  .tooltip-text = Блок кода
 DIALTONE_MESSAGE_INPUT_LINK_BUTTON_LABEL =
-    .aria-label = Создать или изменить ссылку в выделенном тексте
-    .tooltip-text = Ссылка
+  .aria-label = Создать или изменить ссылку в выделенном тексте
+  .tooltip-text = Ссылка
 DIALTONE_MESSAGE_INPUT_LINK_DIALOG_TITLE = Добавить ссылку
 DIALTONE_MESSAGE_INPUT_LINK_TEXT_LABEL = Текст для отображения (необязательно)
 DIALTONE_MESSAGE_INPUT_LINK_LINK_LABEL = Ссылка

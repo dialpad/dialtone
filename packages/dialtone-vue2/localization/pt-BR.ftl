@@ -3,17 +3,17 @@ DIALTONE_CLOSE_BUTTON = Clique para fechar
 DIALTONE_BREADCRUMBS_ARIA_LABEL = Breadcrumbs
 DIALTONE_LOADING = Carregando
 DIALTONE_UNREAD_MESSAGE_COUNT_TEXT =
-    { $unreadCount ->
-        [0] Nenhuma mensagem não lida
-        [1] 1 mensagem não lida
-       *[other] { $unreadCount } mensagens não lidas
-    }
+  { $unreadCount ->
+  [0] Nenhuma mensagem não lida
+  [1] 1 mensagem não lida
+  *[other] { $unreadCount } mensagens não lidas
+      }
 DIALTONE_UNREAD_MENTION_COUNT_TEXT =
-    { $unreadCount ->
-        [0] Sem menções não lidas
-        [1] 1 menção não lida
-       *[other] { $unreadCount } menções não lidas
-    }
+  { $unreadCount ->
+  [0] Sem menções não lidas
+  [1] 1 menção não lida
+  *[other] { $unreadCount } menções não lidas
+      }
 DIALTONE_TYPING_TEXT = Digitando
 DIALTONE_ATTACHMENT_CAROUSEL_CLICK_TO_OPEN_ARIA_LABEL = Clique para abrir
 DIALTONE_ATTACHMENT_CAROUSEL_PROGRESS_BAR_ARIA_LABEL = Carregando
@@ -29,14 +29,14 @@ DIALTONE_DATEPICKER_NEXT_YEAR = próximo ano
 DIALTONE_DATEPICKER_SELECT_DAY = Selecionar dia
 DIALTONE_DATEPICKER_CHANGE_TO = Mudar para
 DIALTONE_EDITOR_CONFIRM_SET_LINK_BUTTON =
-    .title = Confirmar
-    .aria-label = Confirmar link de definição
+  .title = Confirmar
+  .aria-label = Confirmar link de definição
 DIALTONE_EDITOR_REMOVE_LINK_BUTTON =
-    .title = Remover
-    .aria-label = Remover link
+  .title = Remover
+  .aria-label = Remover link
 DIALTONE_EDITOR_CANCEL_SET_LINK_BUTTON =
-    .title = Cancelar
-    .aria-label = Cancelar link de definição
+  .title = Cancelar
+  .aria-label = Cancelar link de definição
 DIALTONE_EDITOR_QUICK_REPLY_BUTTON_LABEL = Modelo
 DIALTONE_EDITOR_BOLD_BUTTON_LABEL = Negrito
 DIALTONE_EDITOR_ITALICS_BUTTON_LABEL = Itálico
@@ -53,21 +53,13 @@ DIALTONE_EDITOR_CODE_BUTTON_LABEL = Código
 DIALTONE_EDITOR_IMAGE_BUTTON_LABEL = Imagem
 DIALTONE_EDITOR_LINK_BUTTON_LABEL = Link
 DIALTONE_EDITOR_ADD_LINK_BUTTON =
-    .title = Adicionar link
-    .aria-label = Campo de entrada para adicionar link
+  .title = Adicionar link
+  .aria-label = Campo de entrada para adicionar link
 DIALTONE_EMOJI_ROW_REACTION_LABEL =
-    { $personCount ->
-        [one]
-            { $youIncluded ->
-               *[true] reagiu com { $reaction }
-                [false] reagiu com { $reaction }
-            }
-       *[other]
-            { $youIncluded ->
-               *[true] reagiram com { $reaction }
-                [false] reagiram com { $reaction }
-            }
-    }
+  { $personCount ->
+  [one] reagiu com { $reaction }
+  *[other] reagiram com { $reaction }
+      }
 DIALTONE_EMOJI_PICKER_ADD_EMOJI_LABEL = Adicionar emoji
 DIALTONE_EMOJI_PICKER_SEARCH_NO_RESULTS_LABEL = Nenhum resultado
 DIALTONE_EMOJI_PICKER_SEARCH_RESULTS_LABEL = resultados da pesquisa
@@ -88,10 +80,10 @@ DIALTONE_GENERAL_ROW_ACTIVE_VOICE_CHAT_TEXT = Chat de voz ativo
 DIALTONE_GENERAL_ROW_CALL_BUTTON_TOOLTIP = Ligar
 DIALTONE_GENERAL_ROW_DND_TEXT_TOOLTIP = Não Perturbe
 DIALTONE_GROUP_ROW_GROUP_COUNT_TEXT =
-    { $count ->
-        [1] 1 usuário
-       *[other] { $count } Usuários
-    }
+  { $count ->
+  [1] 1 usuário
+  *[other] { $count } Usuários
+      }
 DIALTONE_IVR_NODE_MENU_BUTTON_ARIA_LABEL = Abrir menu
 DIALTONE_IVR_NODE_PROMPTMENU_ARIA_LABEL = nó do menu de comandos
 DIALTONE_IVR_NODE_PROMPTCOLLECT_ARIA_LABEL = nó de coleta de comandos
@@ -108,32 +100,32 @@ DIALTONE_MESSAGE_INPUT_IMAGE_PICKER_BUTTON_ARIA_LABEL = Anexar imagem
 DIALTONE_MESSAGE_INPUT_EMOJI_PICKER_BUTTON_ARIA_LABEL = Selecione emoji
 DIALTONE_MESSAGE_INPUT_CANCEL_BUTTON_ARIA_LABEL = Cancelar
 DIALTONE_MESSAGE_INPUT_BOLD_BUTTON_LABEL =
-    .aria-label = Ativar negrito no texto selecionado
-    .tooltip-text = Negrito
+  .aria-label = Ativar negrito no texto selecionado
+  .tooltip-text = Negrito
 DIALTONE_MESSAGE_INPUT_ITALIC_BUTTON_LABEL =
-    .aria-label = Ativar itálico no texto selecionado
-    .tooltip-text = Itálico
+  .aria-label = Ativar itálico no texto selecionado
+  .tooltip-text = Itálico
 DIALTONE_MESSAGE_INPUT_STRIKETHROUGH_BUTTON_LABEL =
-    .aria-label = Ativar o tachado no texto selecionado
-    .tooltip-text = Tachado
+  .aria-label = Ativar o tachado no texto selecionado
+  .tooltip-text = Tachado
 DIALTONE_MESSAGE_INPUT_BULLET_LIST_BUTTON_LABEL =
-    .aria-label = Crie ou edite uma lista de marcadores no texto selecionado
-    .tooltip-text = Lista de marcadores
+  .aria-label = Crie ou edite uma lista de marcadores no texto selecionado
+  .tooltip-text = Lista de marcadores
 DIALTONE_MESSAGE_INPUT_ORDERED_LIST_BUTTON_LABEL =
-    .aria-label = Crie ou edite uma lista ordenada no texto selecionado
-    .tooltip-text = Lista ordenada
+  .aria-label = Crie ou edite uma lista ordenada no texto selecionado
+  .tooltip-text = Lista ordenada
 DIALTONE_MESSAGE_INPUT_BLOCK_QUOTE_BUTTON_LABEL =
-    .aria-label = Crie ou edite a citação em bloco no texto selecionado
-    .tooltip-text = Citação em bloco
+  .aria-label = Crie ou edite a citação em bloco no texto selecionado
+  .tooltip-text = Citação em bloco
 DIALTONE_MESSAGE_INPUT_CODE_BUTTON_LABEL =
-    .aria-label = Crie ou edite código no texto selecionado
-    .tooltip-text = Código
+  .aria-label = Crie ou edite código no texto selecionado
+  .tooltip-text = Código
 DIALTONE_MESSAGE_INPUT_CODE_BLOCK_BUTTON_LABEL =
-    .aria-label = Crie ou edite um bloco de código no texto selecionado
-    .tooltip-text = Bloco de código
+  .aria-label = Crie ou edite um bloco de código no texto selecionado
+  .tooltip-text = Bloco de código
 DIALTONE_MESSAGE_INPUT_LINK_BUTTON_LABEL =
-    .aria-label = Crie ou edite link no texto selecionado
-    .tooltip-text = Link
+  .aria-label = Crie ou edite link no texto selecionado
+  .tooltip-text = Link
 DIALTONE_MESSAGE_INPUT_LINK_DIALOG_TITLE = Adicionar um link
 DIALTONE_MESSAGE_INPUT_LINK_TEXT_LABEL = Texto a ser exibido (opcional)
 DIALTONE_MESSAGE_INPUT_LINK_LINK_LABEL = Link
