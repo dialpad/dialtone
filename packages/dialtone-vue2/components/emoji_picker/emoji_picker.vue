@@ -51,7 +51,7 @@
     </div>
     <div class="d-emoji-picker--footer">
       <dt-button
-        v-if="showCustomEmojisTab && !highlightedEmoji"
+        v-if="showAddEmojiButton && !highlightedEmoji"
         importance="outlined"
         :aria-label="addEmojiLabel"
         class="d-emoji-picker__add-emoji"
@@ -157,6 +157,17 @@ export default {
       type: Boolean,
       default: true,
     },
+
+    /**
+     * Shows the add emoji button in the footer when no emoji is highlighted
+     * @type {Boolean}
+     * @example
+     * <dt-emoji-picker :show-add-emoji-button="true" />
+     */
+    showAddEmojiButton: {
+      type: Boolean,
+      default: false,
+    }
   },
 
   data () {
