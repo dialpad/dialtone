@@ -3,17 +3,17 @@ DIALTONE_CLOSE_BUTTON = Zum Schließen klicken
 DIALTONE_BREADCRUMBS_ARIA_LABEL = Brotkrumen
 DIALTONE_LOADING = Lädt ...
 DIALTONE_UNREAD_MESSAGE_COUNT_TEXT =
-  { $unreadCount ->
-  [0] Keine ungelesenen Nachrichten
-  [1] 1 ungelesene Nachricht
-  *[other] { $unreadCount } ungelesene Nachrichten
-      }
+    { $unreadCount ->
+        [0] Keine ungelesenen Nachrichten
+        [1] 1 ungelesene Nachricht
+       *[other] { $unreadCount } ungelesene Nachrichten
+    }
 DIALTONE_UNREAD_MENTION_COUNT_TEXT =
-  { $unreadCount ->
-  [0] Keine ungelesenen Erwähnungen
-  [1] 1 ungelesene Erwähnung
-  *[other] { $unreadCount } ungelesene Erwähnungen
-      }
+    { $unreadCount ->
+        [0] Keine ungelesenen Erwähnungen
+        [1] 1 ungelesene Erwähnung
+       *[other] { $unreadCount } ungelesene Erwähnungen
+    }
 DIALTONE_TYPING_TEXT = schreibt
 DIALTONE_ATTACHMENT_CAROUSEL_CLICK_TO_OPEN_ARIA_LABEL = Zum Öffnen klicken
 DIALTONE_ATTACHMENT_CAROUSEL_PROGRESS_BAR_ARIA_LABEL = Wird hochgeladen
@@ -29,14 +29,14 @@ DIALTONE_DATEPICKER_NEXT_YEAR = nächstes Jahr
 DIALTONE_DATEPICKER_SELECT_DAY = Tag auswählen
 DIALTONE_DATEPICKER_CHANGE_TO = Wechseln zu
 DIALTONE_EDITOR_CONFIRM_SET_LINK_BUTTON =
-  .title = Bestätigen
-  .aria-label = Gesetzten Link bestätigen
+    .title = Bestätigen
+    .aria-label = Gesetzten Link bestätigen
 DIALTONE_EDITOR_REMOVE_LINK_BUTTON =
-  .title = Entfernen
-  .aria-label = Link entfernen
+    .title = Entfernen
+    .aria-label = Link entfernen
 DIALTONE_EDITOR_CANCEL_SET_LINK_BUTTON =
-  .title = ABBRECHEN
-  .aria-label = Set-Link abbrechen
+    .title = ABBRECHEN
+    .aria-label = Set-Link abbrechen
 DIALTONE_EDITOR_QUICK_REPLY_BUTTON_LABEL = Vorlage
 DIALTONE_EDITOR_BOLD_BUTTON_LABEL = Fett
 DIALTONE_EDITOR_ITALICS_BUTTON_LABEL = Kursiv
@@ -53,13 +53,13 @@ DIALTONE_EDITOR_CODE_BUTTON_LABEL = Code
 DIALTONE_EDITOR_IMAGE_BUTTON_LABEL = Bild
 DIALTONE_EDITOR_LINK_BUTTON_LABEL = Link
 DIALTONE_EDITOR_ADD_LINK_BUTTON =
-  .title = Link hinzufügen
-  .aria-label = Eingabefeld zum Hinzufügen eines Links
+    .title = Link hinzufügen
+    .aria-label = Eingabefeld zum Hinzufügen eines Links
 DIALTONE_EMOJI_ROW_REACTION_LABEL =
-  { $personCount ->
-  [one] reagierte mit { $reaction }
-  *[other] reagierten mit { $reaction }
-      }
+    { $personCount ->
+        [one] reagierte mit { $reaction }
+       *[other] reagierten mit { $reaction }
+    }
 DIALTONE_EMOJI_PICKER_ADD_EMOJI_LABEL = Emoji hinzufügen
 DIALTONE_EMOJI_PICKER_SEARCH_NO_RESULTS_LABEL = Keine Ergebnisse
 DIALTONE_EMOJI_PICKER_SEARCH_RESULTS_LABEL = Suchergebnisse
@@ -80,10 +80,10 @@ DIALTONE_GENERAL_ROW_ACTIVE_VOICE_CHAT_TEXT = Aktiver Voice-Chat
 DIALTONE_GENERAL_ROW_CALL_BUTTON_TOOLTIP = Anruf
 DIALTONE_GENERAL_ROW_DND_TEXT_TOOLTIP = Bitte nicht stören
 DIALTONE_GROUP_ROW_GROUP_COUNT_TEXT =
-  { $count ->
-  [1] 1 Benutzer
-  *[other] { $count } Benutzer
-      }
+    { $count ->
+        [1] 1 Benutzer
+       *[other] { $count } Benutzer
+    }
 DIALTONE_IVR_NODE_MENU_BUTTON_ARIA_LABEL = Menü öffnen
 DIALTONE_IVR_NODE_PROMPTMENU_ARIA_LABEL = Prompt-Menü-Knoten
 DIALTONE_IVR_NODE_PROMPTCOLLECT_ARIA_LABEL = Prompterfassung-Knoten
@@ -100,32 +100,32 @@ DIALTONE_MESSAGE_INPUT_IMAGE_PICKER_BUTTON_ARIA_LABEL = Bild anhängen
 DIALTONE_MESSAGE_INPUT_EMOJI_PICKER_BUTTON_ARIA_LABEL = Emoji auswählen
 DIALTONE_MESSAGE_INPUT_CANCEL_BUTTON_ARIA_LABEL = ABBRECHEN
 DIALTONE_MESSAGE_INPUT_BOLD_BUTTON_LABEL =
-  .aria-label = Ausgewählten Text auf fett umschalten
-  .tooltip-text = Fett
+    .aria-label = Ausgewählten Text auf fett umschalten
+    .tooltip-text = Fett
 DIALTONE_MESSAGE_INPUT_ITALIC_BUTTON_LABEL =
-  .aria-label = Ausgewählten Text auf kursiv umschalten
-  .tooltip-text = Kursiv
+    .aria-label = Ausgewählten Text auf kursiv umschalten
+    .tooltip-text = Kursiv
 DIALTONE_MESSAGE_INPUT_STRIKETHROUGH_BUTTON_LABEL =
-  .aria-label = Markierten Text durchstreichen
-  .tooltip-text = Durchstreichen
+    .aria-label = Markierten Text durchstreichen
+    .tooltip-text = Durchstreichen
 DIALTONE_MESSAGE_INPUT_BULLET_LIST_BUTTON_LABEL =
-  .aria-label = Erstellen oder Bearbeiten einer Aufzählung für ausgewählten Text
-  .tooltip-text = Aufzählung
+    .aria-label = Erstellen oder Bearbeiten einer Aufzählung für ausgewählten Text
+    .tooltip-text = Aufzählung
 DIALTONE_MESSAGE_INPUT_ORDERED_LIST_BUTTON_LABEL =
-  .aria-label = Erstellen oder Bearbeiten einer geordneten Liste für ausgewählten Text
-  .tooltip-text = Geordnete Liste
+    .aria-label = Erstellen oder Bearbeiten einer geordneten Liste für ausgewählten Text
+    .tooltip-text = Geordnete Liste
 DIALTONE_MESSAGE_INPUT_BLOCK_QUOTE_BUTTON_LABEL =
-  .aria-label = Erstellen oder Bearbeiten von Blockzitaten für ausgewählten Text
-  .tooltip-text = Blockzitat
+    .aria-label = Erstellen oder Bearbeiten von Blockzitaten für ausgewählten Text
+    .tooltip-text = Blockzitat
 DIALTONE_MESSAGE_INPUT_CODE_BUTTON_LABEL =
-  .aria-label = Erstellen oder Bearbeiten von Code für markierten Text
-  .tooltip-text = Code
+    .aria-label = Erstellen oder Bearbeiten von Code für markierten Text
+    .tooltip-text = Code
 DIALTONE_MESSAGE_INPUT_CODE_BLOCK_BUTTON_LABEL =
-  .aria-label = Erstellen oder Bearbeiten eines Codeblocks für ausgewählten Text
-  .tooltip-text = Codeblock
+    .aria-label = Erstellen oder Bearbeiten eines Codeblocks für ausgewählten Text
+    .tooltip-text = Codeblock
 DIALTONE_MESSAGE_INPUT_LINK_BUTTON_LABEL =
-  .aria-label = Erstellen oder Bearbeiten eines Links für ausgewählten Text
-  .tooltip-text = Link
+    .aria-label = Erstellen oder Bearbeiten eines Links für ausgewählten Text
+    .tooltip-text = Link
 DIALTONE_MESSAGE_INPUT_LINK_DIALOG_TITLE = Link hinzufügen
 DIALTONE_MESSAGE_INPUT_LINK_TEXT_LABEL = Anzuzeigender Text (optional)
 DIALTONE_MESSAGE_INPUT_LINK_LINK_LABEL = Link
