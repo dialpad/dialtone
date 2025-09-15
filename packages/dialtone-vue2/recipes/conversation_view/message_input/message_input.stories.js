@@ -318,6 +318,7 @@ export const WithCustomEmoji = {
     emojiPickerProps: {
       skinTone: 'Default',
       customEmojis: customEmojiJson,
+      showAddEmojiButton: true,
     },
   },
 };
