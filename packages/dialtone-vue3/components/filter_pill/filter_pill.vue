@@ -5,13 +5,13 @@
   >
     <dt-popover
       v-model="isPopoverOpen"
-      :append-to="appendTo"
-      :fallback-placements="fallbackPlacements"
-      :max-height="maxHeight"
-      :max-width="maxWidth"
+      :append-to="popoverAppendTo"
+      :fallback-placements="popoverFallbackPlacements"
+      :max-height="popoverMaxHeight"
+      :max-width="popoverMaxWidth"
       :modal="false"
-      :padding="padding"
-      :placement="placement"
+      :padding="popoverPadding"
+      :placement="popoverPlacement"
     >
       <template #anchor>
         <dt-button
@@ -128,7 +128,7 @@ export default {
      *  is going to append to
      * @values body, parent, root, HTMLElement
      */
-    appendTo: {
+    popoverAppendTo: {
       type: [HTMLElement, String],
       default: 'body',
       validator: appendTo => {
@@ -157,7 +157,7 @@ export default {
      * Determines maximum height for the popover before overflow.
      * Possible units rem|px|em
      */
-    maxHeight: {
+    popoverMaxHeight: {
       type: String,
       default: '',
     },
@@ -166,7 +166,7 @@ export default {
      * Determines maximum width for the popover before overflow.
      * Possible units rem|px|%|em
      */
-    maxWidth: {
+    popoverMaxWidth: {
       type: String,
       default: '',
     },
@@ -184,7 +184,7 @@ export default {
      * Padding size class for the popover content.
      * @values none, small, medium, large
      */
-    padding: {
+    popoverPadding: {
       type: String,
       default: 'large',
       validator: (padding) => {
@@ -197,9 +197,26 @@ export default {
      * <a class="d-link" href="https://atomiks.github.io/tippyjs/v6/all-props/#placement" target="_blank">Tippy.js docs</a>
      * @values top, top-start, top-end, right, right-start, right-end, left, left-start, left-end, bottom, bottom-start, bottom-end, auto, auto-start, auto-end
      */
-    placement: {
+    popoverPlacement: {
       type: String,
       default: 'bottom-start',
+    },
+
+    /**
+     * If the dropdown does not fit in the direction described by "popoverPlacement",
+     * it will attempt to change it's direction to the "popoverFallbackPlacements".
+     *
+     * @values top, top-start, top-end,
+     * right, right-start, right-end,
+     * left, left-start, left-end,
+     * bottom, bottom-start, bottom-end,
+     * auto, auto-start, auto-end
+     * */
+    popoverFallbackPlacements: {
+      type: Array,
+      default: () => {
+        return ['auto'];
+      },
     },
 
     /**
