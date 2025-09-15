@@ -3,7 +3,7 @@
     "base": {
       "color": {
         "surface": {
-          "value": "{color.berry.100}",
+          "value": "{color.berry.50}",
           "type": "color"
         },
         "foreground": {
@@ -17,24 +17,10 @@
         "accent": {
           "value": "{color.magenta.500}",
           "type": "color"
-        }
-      },
-      "action": {
-        "color": {
-          "background": {
-            "primary": {
-              "value": "{color.berry.900}",
-              "type": "color"
-            },
-            "secondary": {
-              "value": "{color.berry.900}",
-              "type": "color"
-            },
-            "muted": {
-              "value": "{color.berry.900}",
-              "type": "color"
-            }
-          }
+        },
+        "action": {
+          "value": "{color.berry.900}",
+          "type": "color"
         }
       }
     }

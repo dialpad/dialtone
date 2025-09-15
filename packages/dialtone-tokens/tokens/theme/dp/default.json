@@ -4019,6 +4019,10 @@
           "value": "{badge.color.background.bulletin}",
           "type": "color"
         },
+        "action": {
+          "value": "{color.black.800}",
+          "type": "color"
+        },
         "status-positive": {
           "value": "{color.green.425}",
           "type": "color"
@@ -4040,15 +4044,15 @@
         "color": {
           "background": {
             "primary": {
-              "value": "{color.black.800}",
+              "value": "{shell.base.color.action}",
               "type": "color"
             },
             "secondary": {
-              "value": "{color.black.800}",
+              "value": "{shell.base.color.action}",
               "type": "color"
             },
             "muted": {
-              "value": "{color.black.800}",
+              "value": "{shell.base.color.action}",
               "type": "color"
             }
           }

@@ -17,24 +17,10 @@
         "accent": {
           "value": "#3F5F01",
           "type": "color"
-        }
-      },
-      "action": {
-        "color": {
-          "background": {
-            "primary": {
-              "value": "#C0CAAE",
-              "type": "color"
-            },
-            "secondary": {
-              "value": "#C0CAAE",
-              "type": "color"
-            },
-            "muted": {
-              "value": "#C0CAAE",
-              "type": "color"
-            }
-          }
+        },
+        "action": {
+          "value": "#C0CAAE",
+          "type": "color"
         }
       }
     },
