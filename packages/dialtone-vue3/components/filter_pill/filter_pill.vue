@@ -33,11 +33,17 @@
           @click="isPopoverOpen = true"
         >
           <span class="d-filter-pill__label">
-            <span class="d-filter-pill__label-alpha">{{ label }}</span>
-            <span
-              v-if="activeFilterCount"
-              class="d-filter-pill__label-omega"
-            >{{ activeFilterCount }}</span>
+            <!-- @slot Allows you to override the label, only use this if you need to override with something other
+            than text. Otherwise use the "label" prop. -->
+            <slot name="label">
+              <span class="d-filter-pill__label-alpha">{{ label }}</span>
+              <span
+                v-if="activeFilterCount"
+                class="d-filter-pill__label-omega"
+              >
+                {{ activeFilterCount }}
+              </span>
+            </slot>
           </span>
           <template #icon="{ iconSize }">
             <dt-icon-chevron-down
@@ -233,7 +239,7 @@ export default {
      */
     size: {
       type: String,
-      default: 'md',
+      default: 'sm',
       validator: (s) => Object.keys(BUTTON_SIZE_MODIFIERS).includes(s),
     },
   },
