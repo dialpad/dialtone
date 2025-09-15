@@ -8,12 +8,11 @@ storybook: https://dialtone.dialpad.com/vue/?path=/story/components-button--defa
 figma_url: https://www.figma.com/design/W58r5BkO8qTw3vem9YieJd/DT9-Component-Library--Rebrand-2025-?node-id=19800-32233
 ---
 
-<!-- <code-well-header>
+<code-well-header>
   <dt-button> Place Call </dt-button>
-</code-well-header>-->
+</code-well-header>
 
-<!-- TODO: Comment out next line before merging, just for testing purposes -->
-<component-combinator component-name="DtButton" />
+<!-- <component-combinator component-name="DtButton" /> -->
 
 ## Usage
 
