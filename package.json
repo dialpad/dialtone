@@ -82,12 +82,17 @@
       "import": "./dist/tokens/themes/*.js",
       "require": "./dist/tokens/themes/*.cjs"
     },
+    "./mcp-server": {
+      "import": "./dist/mcp-server/build/index.js",
+      "require": "./dist/mcp-server/build/index.js"
+    },
     "./*": "./dist/*"
   },
   "dependencies": {
     "@dialpad/dialtone-emojis": "workspace:*",
     "@dialpad/dialtone-icons": "workspace:*",
     "@dialpad/dialtone-tokens": "workspace:*",
+    "@dialpad/dialtone-mcp-server": "workspace:*",
     "@tiptap/core": "2.12.0",
     "@tiptap/extension-blockquote": "2.12.0",
     "@tiptap/extension-bold": "2.12.0",
