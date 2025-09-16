@@ -6,7 +6,7 @@
         "type": "color"
       },
       "unavailable": {
-        "value": "{color.magenta.475}",
+        "value": "{color.magenta.425}",
         "type": "color"
       },
       "busy": {
