@@ -3,34 +3,8 @@
     "base": {
       "color": {
         "surface": {
-          "value": "#231F15",
+          "value": "#1d1d21",
           "type": "color"
-        },
-        "foreground": {
-          "value": "{color.teal.950}",
-          "type": "color"
-        },
-        "border": {
-          "value": "#D2EDFF",
-          "type": "color"
-        },
-        "accent": {
-          "value": "#F4CD0B",
-          "type": "color"
-        },
-        "action": {
-          "value": "#FFF5D3",
-          "type": "color"
-        }
-      }
-    },
-    "mention": {
-      "color": {
-        "foreground": {
-          "primary": {
-            "value": "#090F14",
-            "type": "color"
-          }
         }
       }
     }

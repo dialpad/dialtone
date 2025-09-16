@@ -7,11 +7,11 @@
           "type": "color"
         },
         "foreground": {
-          "value": "{color.black.1000}",
+          "value": "{color.indigo.1000}",
           "type": "color"
         },
         "border": {
-          "value": "{color.black.1000}",
+          "value": "{color.indigo.1000}",
           "type": "color"
         },
         "accent": {
@@ -19,7 +19,7 @@
           "type": "color"
         },
         "action": {
-          "value": "{color.black.900}",
+          "value": "{color.indigo.950}",
           "type": "color"
         }
       }
@@ -28,7 +28,7 @@
       "color": {
         "foreground": {
           "primary": {
-            "value": "#090F14",
+            "value": "{color.neutral.white}",
             "type": "color"
           }
         }
