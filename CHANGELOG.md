@@ -1,3 +1,27 @@
+# [9.138.0](https://github.com/dialpad/dialtone/compare/dialtone/v9.137.0...dialtone/v9.138.0) (2025-09-16)
+
+
+### Bug Fixes
+
+* **Checkbox, Radio:** DLT-2772 add pointer cursor to entire checkbox/radio label region ([#913](https://github.com/dialpad/dialtone/issues/913)) ([4bd0859](https://github.com/dialpad/dialtone/commit/4bd08592811f8dbbbfaa43fc79ab84d6209e5854))
+* **Localization:** DLT-2768  emoji row reaction label warnings ([#911](https://github.com/dialpad/dialtone/issues/911)) ([5a6713d](https://github.com/dialpad/dialtone/commit/5a6713dfd69d55d6dcbb850de48087829417d33c))
+
+
+### Code Refactoring
+
+* **Combinator:** DLT-2672 update styles ([#906](https://github.com/dialpad/dialtone/issues/906)) ([96f444c](https://github.com/dialpad/dialtone/commit/96f444c4b59c1a6ed0d29db151ed526d7f60d47b))
+* **Emoji Picker:** DLT-2776 new prop showAddEmojiButton ([#915](https://github.com/dialpad/dialtone/issues/915)) ([c37911b](https://github.com/dialpad/dialtone/commit/c37911b8f77a7453105f0421f24ac552ca935a88))
+
+
+### Documentation
+
+* NO-JIRA remove names from public docs ([#917](https://github.com/dialpad/dialtone/issues/917)) ([744736f](https://github.com/dialpad/dialtone/commit/744736f09e1086a7f5f7691045677a62cbe4e94c))
+
+
+### Features
+
+* **Mcp Server:** DLT-2707 add basic MCP server ([#914](https://github.com/dialpad/dialtone/issues/914)) ([3658e51](https://github.com/dialpad/dialtone/commit/3658e51689e541de91822656b5e8c73b1aa56be3))
+
 # [9.137.0](https://github.com/dialpad/dialtone/compare/dialtone/v9.136.0...dialtone/v9.137.0) (2025-09-10)
 
 
