@@ -34,5 +34,17 @@
         }
       }
     }
+  },
+  "color": {
+    "foreground": {
+      "critical": {
+        "value": "{color.magenta.475}",
+        "type": "color"
+      },
+      "success": {
+        "value": "{shell.base.color.accent}",
+        "type": "color"
+      }
+    }
   }
 }
