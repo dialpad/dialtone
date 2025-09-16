@@ -3,26 +3,26 @@
     v-model:active="isActive"
     :active-filter-count="$attrs.activeFilterCount"
     :alpha-tooltip-text="$attrs.alphaTooltipText"
-    :append-to="$attrs.appendTo"
     :show-clear="$attrs.showClear"
     :disabled="$attrs.disabled"
-    :fallback-placements="$attrs.fallbackPlacements"
     :label="$attrs.label"
     :loading="$attrs.loading"
-    :max-height="$attrs.maxHeight"
-    :max-width="$attrs.maxWidth"
     :omega-tooltip-text="$attrs.omegaTooltipText"
-    :padding="$attrs.padding"
-    :placement="$attrs.placement"
+    :popover-append-to="$attrs.popoverAppendTo"
+    :popover-fallback-placements="$attrs.popoverFallbackPlacements"
+    :popover-max-height="$attrs.popoverMaxHeight"
+    :popover-max-width="$attrs.popoverMaxWidth"
+    :popover-padding="$attrs.popoverPadding"
+    :popover-placement="$attrs.popoverPlacement"
     :size="$attrs.size"
     @clear="$attrs.onClear"
     @open="$attrs.onOpen"
   >
-    <template #content>
-      <span
-        v-if="$attrs.content"
-        v-html="$attrs.content"
-      />
+    <template
+      v-if="$attrs.content"
+      #content
+    >
+      <span v-html="$attrs.content" />
     </template>
   </dt-filter-pill>
 </template>

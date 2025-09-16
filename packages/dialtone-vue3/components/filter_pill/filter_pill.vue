@@ -5,6 +5,7 @@
   >
     <dt-popover
       v-model="isPopoverOpen"
+      v-model:open="isOpen"
       :append-to="popoverAppendTo"
       :fallback-placements="popoverFallbackPlacements"
       :max-height="popoverMaxHeight"
@@ -13,9 +14,10 @@
       :padding="popoverPadding"
       :placement="popoverPlacement"
     >
-      <template #anchor>
+      <template #anchor="{ attrs }">
         <dt-button
           v-dt-tooltip="alphaTooltipText"
+          v-bind="attrs"
           :active="isActive"
           :class="[
             'd-filter-pill__primary',
@@ -30,7 +32,7 @@
           data-qa="dt-filter-pill__button"
           icon-position="right"
           importance="outlined"
-          @click="isPopoverOpen = true"
+          @click="isOpen = true"
         >
           <span class="d-filter-pill__label">
             <!-- @slot Allows you to override the label, only use this if you need to override with something other
@@ -272,7 +274,7 @@ export default {
 
   data () {
     return {
-      isPopoverOpen: false,
+      isOpen: false,
       isActive: this.active,
       hasClear: this.showClear,
       i18n: new DialtoneLocalization(),
@@ -296,7 +298,7 @@ export default {
   },
 
   watch: {
-    isPopoverOpen (isOpen) {
+    isOpen (isOpen) {
       this.$emit('open', isOpen);
     },
 

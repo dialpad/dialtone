@@ -36,7 +36,7 @@ export const argTypesData = {
       type: 'boolean',
     },
   },
-  padding: {
+  popoverPadding: {
     table: {
       defaultValue: { summary: 'large' },
     },
@@ -45,7 +45,7 @@ export const argTypesData = {
       type: 'select',
     },
   },
-  placement: {
+  popoverPlacement: {
     options: POPOVER_DIRECTIONS,
     control: {
       type: 'select',
