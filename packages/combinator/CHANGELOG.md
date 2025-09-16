@@ -1,3 +1,15 @@
+## [1.1.1](https://github.com/dialpad/dialtone/compare/combinator/v1.1.0...combinator/v1.1.1) (2025-09-16)
+
+
+### Code Refactoring
+
+* **Combinator:** DLT-2672 update styles ([#906](https://github.com/dialpad/dialtone/issues/906)) ([96f444c](https://github.com/dialpad/dialtone/commit/96f444c4b59c1a6ed0d29db151ed526d7f60d47b))
+
+
+### Documentation
+
+* **Color:** DLT-2568 chart design tokens ([#838](https://github.com/dialpad/dialtone/issues/838)) ([c0f0c36](https://github.com/dialpad/dialtone/commit/c0f0c36a88fb6e5a90c51efb916801350ee42335))
+
 # [1.1.0](https://github.com/dialpad/dialtone/compare/combinator/v1.0.3...combinator/v1.1.0) (2025-07-23)
 
 
