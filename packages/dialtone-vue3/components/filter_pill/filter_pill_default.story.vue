@@ -1,12 +1,9 @@
 <template>
   <dt-filter-pill
-    v-model:active="isActive"
-    :active-filter-count="$attrs.activeFilterCount"
+    :model-value="$attrs.filters"
     :alpha-tooltip-text="$attrs.alphaTooltipText"
-    :show-clear="$attrs.showClear"
     :disabled="$attrs.disabled"
     :label="$attrs.label"
-    :loading="$attrs.loading"
     :omega-tooltip-text="$attrs.omegaTooltipText"
     :popover-append-to="$attrs.popoverAppendTo"
     :popover-fallback-placements="$attrs.popoverFallbackPlacements"
@@ -14,9 +11,11 @@
     :popover-max-width="$attrs.popoverMaxWidth"
     :popover-padding="$attrs.popoverPadding"
     :popover-placement="$attrs.popoverPlacement"
+    :hide-clear="$attrs.hideClear"
     :size="$attrs.size"
     @clear="$attrs.onClear"
     @open="$attrs.onOpen"
+    @update:model-value="$attrs.onUpdateModelValue"
   >
     <template v-if="defaultSlot">
       <span v-html="defaultSlot" />
@@ -36,20 +35,5 @@ import DtFilterPill from './filter_pill.vue';
 export default {
   name: 'DtFilterPillDefault',
   components: { DtFilterPill },
-  data () {
-    return {
-      isActive: this.$attrs.active,
-    }
-  },
-
-  watch: {
-    $attrs: {
-      deep: true,
-      immediate: true,
-      handler: function (attrs) {
-        this.isActive = attrs.active;
-      },
-    },
-  },
 };
 </script>

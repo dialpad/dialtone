@@ -10,9 +10,16 @@ import { POPOVER_DIRECTIONS, POPOVER_PADDING_CLASSES } from '@/components/popove
 // Set default values at the story level here.
 export const argsData = {
   label: 'Users or groups',
-  content: 'This is a named slot with it\'s default set at the story level.',
   onOpen: action('open'),
   onClear: action('clear'),
+  onUpdateModelValue: action('update:modelValue'),
+  modelValue: [
+    { name: 'Filter 1', active: true },
+    { name: 'Filter 2' },
+    { name: 'Filter 3' },
+    { name: 'Filter 4' },
+    { name: 'Filter 5', active: true },
+  ],
 };
 
 export const argTypesData = {
@@ -30,11 +37,6 @@ export const argTypesData = {
   size: {
     control: 'select',
     options: Object.keys(BUTTON_SIZE_MODIFIERS),
-  },
-  active: {
-    control: {
-      type: 'boolean',
-    },
   },
   popoverPadding: {
     table: {

@@ -5,14 +5,21 @@ import DtFilterPillDefaultTemplate from './filter_pill_default.story.vue';
 import DtFilterPillVariantsTemplate from './filter_pill_variants.story.vue';
 import { action } from '@storybook/addon-actions';
 import { BUTTON_SIZE_MODIFIERS } from '@/components/button';
-import { POPOVER_PADDING_CLASSES } from '@/components/popover/index.js';
+import { POPOVER_DIRECTIONS, POPOVER_PADDING_CLASSES } from '@/components/popover/index.js';
 
 // Set default values at the story level here.
 export const argsData = {
   label: 'Users or groups',
-  content: 'This is a named slot with it\'s default set at the story level.',
   onOpen: action('open'),
   onClear: action('clear'),
+  onUpdateValue: action('update:value'),
+  value: [
+    { name: 'Filter 1', active: true },
+    { name: 'Filter 2' },
+    { name: 'Filter 3' },
+    { name: 'Filter 4' },
+    { name: 'Filter 5', active: true },
+  ],
 };
 
 export const argTypesData = {
@@ -31,16 +38,17 @@ export const argTypesData = {
     control: 'select',
     options: Object.keys(BUTTON_SIZE_MODIFIERS),
   },
-  active: {
-    control: {
-      type: 'boolean',
-    },
-  },
-  padding: {
+  popoverPadding: {
     table: {
       defaultValue: { summary: 'large' },
     },
     options: Object.keys(POPOVER_PADDING_CLASSES),
+    control: {
+      type: 'select',
+    },
+  },
+  popoverPlacement: {
+    options: POPOVER_DIRECTIONS,
     control: {
       type: 'select',
     },

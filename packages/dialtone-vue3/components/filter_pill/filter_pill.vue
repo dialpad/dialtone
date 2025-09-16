@@ -4,7 +4,6 @@
     data-qa="dt-filter-pill"
   >
     <dt-popover
-      v-model="isPopoverOpen"
       v-model:open="isOpen"
       :append-to="popoverAppendTo"
       :fallback-placements="popoverFallbackPlacements"
@@ -35,8 +34,7 @@
           @click="isOpen = true"
         >
           <span class="d-filter-pill__label">
-            <!-- @slot Allows you to override the label, only use this if you need to override with something other
-            than text. Otherwise use the "label" prop. -->
+            <!-- @slot Allows you to override the label behavior -->
             <slot>
               <span class="d-filter-pill__label-alpha">{{ label }}</span>
               <span
@@ -56,8 +54,26 @@
           </template>
         </dt-button>
       </template>
-      <template #content>
-        <slot name="content" />
+      <template #content="{ close }">
+        <!-- @slot Allows you to override the popover content, only use this if you need custom behavior -->
+        <slot
+          :close="close"
+          name="content"
+        >
+          <dt-checkbox-group
+            :selected-values="activeFilters"
+            :aria-label="label"
+            name="contact-centers"
+          >
+            <dt-checkbox
+              v-for="filter in filters"
+              :key="filter.name"
+              :label="filter.name"
+              :value="filter.name"
+              @input="($event) => filter.active = $event"
+            />
+          </dt-checkbox-group>
+        </slot>
       </template>
     </dt-popover>
     <dt-button
@@ -89,11 +105,15 @@ import { DtPopover, POPOVER_APPEND_TO_VALUES, POPOVER_PADDING_CLASSES } from '@/
 import { BUTTON_SIZE_MODIFIERS, DtButton } from '@/components/button';
 import { DtIconChevronDown, DtIconClose } from '@dialpad/dialtone-icons/vue3';
 import { DialtoneLocalization } from '@/localization';
+import { DtCheckbox } from '@/components/checkbox';
+import { DtCheckboxGroup } from '@/components/checkbox_group';
 
 export default {
   name: 'DtFilterPill',
 
   components: {
+    DtCheckboxGroup,
+    DtCheckbox,
     DtPopover,
     DtButton,
     DtIconClose,
@@ -104,21 +124,12 @@ export default {
 
   props: {
     /**
-     * Controls whether the filter pill is active and sets the button highlighted styling.
-     * Supports .sync modifier
-     * @values true, false
+     * Array of filters to display in the popover,
+     * should be an array of objects with `name` and `active` properties
      */
-    active: {
-      type: Boolean,
-      default: false,
-    },
-
-    /**
-     * Number of active filters to show in the pill
-     */
-    activeFilterCount: {
-      type: Number,
-      default: undefined,
+    modelValue: {
+      type: Array,
+      default: () => [],
     },
 
     /**
@@ -126,6 +137,40 @@ export default {
      * required if no content is passed to default slot
      */
     alphaTooltipText: {
+      type: String,
+      default: '',
+    },
+
+    /**
+     * HTML disabled attribute
+     */
+    disabled: {
+      type: Boolean,
+      default: false,
+    },
+
+    /**
+     * Toggles the clear button visibility
+     * @values true, false
+     */
+    hideClear: {
+      type: Boolean,
+      default: false,
+    },
+
+    /**
+     * Label of the button
+     */
+    label: {
+      type: String,
+      default: undefined,
+    },
+
+    /**
+     * Text shown in tooltip when you hover the omega button,
+     * required as it is an icon only button
+     */
+    omegaTooltipText: {
       type: String,
       default: '',
     },
@@ -146,19 +191,20 @@ export default {
     },
 
     /**
-     * HTML disabled attribute
-     */
-    disabled: {
-      type: Boolean,
-      default: false,
-    },
-
-    /**
-     * Label of the button
-     */
-    label: {
-      type: String,
-      default: undefined,
+     * If the dropdown does not fit in the direction described by "popoverPlacement",
+     * it will attempt to change it's direction to the "popoverFallbackPlacements".
+     *
+     * @values top, top-start, top-end,
+     * right, right-start, right-end,
+     * left, left-start, left-end,
+     * bottom, bottom-start, bottom-end,
+     * auto, auto-start, auto-end
+     * */
+    popoverFallbackPlacements: {
+      type: Array,
+      default: () => {
+        return ['auto'];
+      },
     },
 
     /**
@@ -175,15 +221,6 @@ export default {
      * Possible units rem|px|%|em
      */
     popoverMaxWidth: {
-      type: String,
-      default: '',
-    },
-
-    /**
-     * Text shown in tooltip when you hover the omega button,
-     * required as it is an icon only button
-     */
-    omegaTooltipText: {
       type: String,
       default: '',
     },
@@ -208,31 +245,6 @@ export default {
     popoverPlacement: {
       type: String,
       default: 'bottom-start',
-    },
-
-    /**
-     * If the dropdown does not fit in the direction described by "popoverPlacement",
-     * it will attempt to change it's direction to the "popoverFallbackPlacements".
-     *
-     * @values top, top-start, top-end,
-     * right, right-start, right-end,
-     * left, left-start, left-end,
-     * bottom, bottom-start, bottom-end,
-     * auto, auto-start, auto-end
-     * */
-    popoverFallbackPlacements: {
-      type: Array,
-      default: () => {
-        return ['auto'];
-      },
-    },
-
-    /**
-     * Shows the clear button
-     */
-    showClear: {
-      type: Boolean,
-      default: false,
     },
 
     /**
@@ -264,20 +276,16 @@ export default {
     'open',
 
     /**
-     * Emitted to sync value with parent
-     *
-     * @event update:active
-     * @type {Boolean | Array}
+     * Emitted when the active filters change
      */
-    'update:active',
+    'update:modelValue',
   ],
 
   data () {
     return {
       isOpen: false,
-      isActive: this.active,
-      hasClear: this.showClear,
       i18n: new DialtoneLocalization(),
+      filters: this.modelValue,
     };
   },
 
@@ -295,6 +303,22 @@ export default {
 
       return this.clearButtonAriaLabel
     },
+
+    activeFilters () {
+      return this.filters.filter(filter => filter.active).map(filter => filter.name);
+    },
+
+    activeFilterCount () {
+      return this.activeFilters.length;
+    },
+
+    isActive () {
+      return this.activeFilterCount > 0;
+    },
+
+    hasClear () {
+      return !this.hideClear && this.activeFilterCount > 0;
+    },
   },
 
   watch: {
@@ -302,34 +326,14 @@ export default {
       this.$emit('open', isOpen);
     },
 
-    active: {
-      immediate: true,
-      handler (isActive) {
-        this.$emit('update:active', isActive);
-        this.isActive = isActive;
-      },
-    },
-
-    showClear (clear) {
-      this.hasClear = clear;
-    },
-
-    activeFilterCount (count) {
-      if (count > 0) {
-        this.isActive = true;
-        this.hasClear = true;
-      } else {
-        this.isActive = false;
-        this.hasClear = false;
-      }
-
+    filters (filters) {
+      this.$emit('update:modelValue', filters);
     },
   },
 
   methods: {
     clearFilter ($event) {
-      this.isActive = false;
-      this.hasClear = false;
+      this.filters.forEach(filter => delete filter.active);
       this.$emit('clear', $event)
     },
   },

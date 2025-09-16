@@ -4,65 +4,52 @@
     <dt-stack gap="300">
       <span class="d-label--sm">No selection</span>
       <dt-filter-pill
-        label="Channel"
-      >
-        <template #content>
-          Default content
-        </template>
-      </dt-filter-pill>
+        v-model="channels"
+        label="Channels"
+      />
     </dt-stack>
     <!-- Selected, show label/count, has clear -->
     <dt-stack gap="300">
       <span class="d-label--sm">Selected, show label/count, has clear</span>
       <dt-filter-pill
+        v-model="contactCenters"
         label="Contact centers"
-        :active-filter-count="activeContactCenters.length"
-        show-clear
-        active
         omega-tooltip-text="Remove"
-        @clear="activeContactCenters = []"
-      >
-        <template #content>
-          <dt-checkbox-group
-            :selected-values="activeContactCenters"
-            legend="Contact Centers"
-            name="contact-centers"
-            @update:selected-values="($event) => activeContactCenters = $event"
-          >
-            <dt-checkbox
-              v-for="filter in contactCenters"
-              :key="filter"
-              :value="filter"
-              :label="filter"
-            />
-          </dt-checkbox-group>
-        </template>
-      </dt-filter-pill>
+      />
     </dt-stack>
     <!-- Selected, overflow, label tooltip, has clear -->
     <dt-stack gap="300">
       <span class="d-label--sm">Selected, overflow, label tooltip, has clear</span>
       <dt-filter-pill
-        active
+        v-model="merchandise"
         alpha-tooltip-text="Disposition"
-        show-clear
         label="Merchandise Question (e.g. Size, Fit, etc)"
         omega-tooltip-text="Remove"
-      >
-        <template #content>
-          Default content
-        </template>
-      </dt-filter-pill>
+      />
     </dt-stack>
     <!-- Selected, label, no clear -->
     <dt-stack gap="300">
       <span class="d-label--sm">Selected, label, no clear</span>
       <dt-filter-pill
-        active
-        label="Internal and external"
+        v-model="internalExternal"
+        hide-clear
       >
+        <template #default>
+          {{ selectedIEFilter }}
+        </template>
         <template #content>
-          Default content
+          <dt-radio-group
+            v-model="selectedIEFilter"
+            name="internal-external-filter"
+          >
+            <dt-radio
+              v-for="filter in internalExternal"
+              :key="filter.name"
+              :label="filter.name"
+              :value="filter.name"
+              @input="$event => selectedIEFilter = $event"
+            />
+          </dt-radio-group>
         </template>
       </dt-filter-pill>
     </dt-stack>
@@ -84,7 +71,7 @@
         :size="size"
       >
         <template #content>
-          Default content
+          Popover content
         </template>
       </dt-filter-pill>
     </dt-stack>
@@ -93,28 +80,55 @@
 
 <script>
 import DtFilterPill from './filter_pill.vue';
-import { DtCheckbox } from '@/components/checkbox';
 import { BUTTON_SIZE_MODIFIERS } from '@/components/button';
 import { DtStack } from '@/components/stack';
-import { DtCheckboxGroup } from '@/components/checkbox_group';
+import { DtRadioGroup } from '@/components/radio_group';
+import { DtRadio } from '@/components/radio';
 
 export default {
   name: 'DtFilterPillVariants',
   components: {
-    DtCheckboxGroup,
+    DtRadio,
+    DtRadioGroup,
     DtFilterPill,
-    DtCheckbox,
     DtStack,
   },
 
   data () {
     return {
+      channels: [
+        { name: 'Channel 1' },
+        { name: 'Channel 2' },
+        { name: 'Channel 3' },
+        { name: 'Channel 4' },
+        { name: 'Channel 5' },
+      ],
+
       contactCenters: [
-        'Filter 1',
-        'Filter 2',
-        'Filter 3',
-        'Filter 4',
-        'Filter 5',
+        { name: 'Contact Center 1', active: true },
+        { name: 'Contact Center 2' },
+        { name: 'Contact Center 3' },
+        { name: 'Contact Center 4' },
+        { name: 'Contact Center 5' },
+      ],
+
+      merchandise: [
+        { name: 'Merchandise 1', active: true },
+        { name: 'Merchandise 2' },
+        { name: 'Merchandise 3' },
+        { name: 'Merchandise 4' },
+        { name: 'Merchandise 5' },
+      ],
+
+      internalExternal: [
+        { name: 'Internal and external', active: true },
+        { name: 'Internal only' },
+        { name: 'External only' },
+      ],
+
+      dropdownOptions: [
+        { name: 'Option 1' },
+        { name: 'Option 2', active: true },
       ],
 
       sizes: Object.keys(BUTTON_SIZE_MODIFIERS),
@@ -126,11 +140,42 @@ export default {
         lg: 'Large',
         xl: 'Extra Large',
       },
-
-      activeContactCenters: [
-        'Filter 1',
-      ],
     };
+  },
+
+  computed: {
+    selectedIEFilter: {
+      get () {
+        return this.internalExternal.find(f => f.active)?.name;
+      },
+
+      set (newValue) {
+        this.internalExternal = this.internalExternal.map(f => ({
+          ...f,
+          active: f.name === newValue,
+        }))
+      },
+    },
+
+    selectedDropdownFilter: {
+      get () {
+        return this.dropdownOptions.find(f => f.active)?.name;
+      },
+
+      set (newValue) {
+        this.dropdownOptions = this.dropdownOptions.map(f => ({
+          ...f,
+          active: f.name === newValue,
+        }))
+      },
+    },
+  },
+
+  methods: {
+    handleDropdownClick (filterName, close) {
+      this.selectedDropdownFilter = filterName;
+      close();
+    },
   },
 };
 </script>

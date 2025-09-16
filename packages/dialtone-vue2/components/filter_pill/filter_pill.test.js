@@ -7,11 +7,17 @@ const MOCK_CLEAR_STUB = vi.fn();
 
 const MOCK_LABEL = 'Filter pill label';
 const MOCK_CONTENT = 'Popover content';
+const MOCK_DEFAULT_SLOT = 'Default slot';
+const MOCK_TEST_FILTERS = [
+  { name: 'Test item 1' },
+  { name: 'Test item 2' },
+];
 
-const baseProps = {};
-const baseSlots = {
-  default: `<span>${MOCK_CONTENT}</span>`,
+const baseProps = {
+  value: MOCK_TEST_FILTERS,
 };
+
+const baseSlots = {};
 
 const baseListeners = {
   open: MOCK_OPEN_STUB,
@@ -75,9 +81,9 @@ describe('DtFilterPill Tests', function () {
       });
     });
 
-    describe('When active is set', () => {
+    describe('When an active element is passed', () => {
       it('Should have active styling', () => {
-        mockProps = { active: true };
+        mockProps = { value: [{ name: 'Test item 1', active: true }] };
 
         updateWrapper();
 
@@ -91,7 +97,7 @@ describe('DtFilterPill Tests', function () {
 
         updateWrapper();
 
-        expect(button.attributes('disabled')).toBe('disabled');
+        expect(button.attributes()).toHaveProperty('disabled');
       });
     });
 
@@ -105,28 +111,21 @@ describe('DtFilterPill Tests', function () {
       });
     });
 
-    describe('When show-clear is set', () => {
-      it('Should render clear button', () => {
+    describe('When hide-clear is set', () => {
+      it('Should not render clear button', () => {
         mockProps = {
-          showClear: true,
+          value: [{ name: 'Test item 1', active: true }],
+          hideClear: true,
         };
 
         updateWrapper();
 
-        expect(clearButton.exists()).toBe(true);
+        expect(clearButton.exists()).toBe(false);
       });
     });
   });
 
   describe('Interactivity Tests', () => {
-    beforeEach(() => {
-      mockProps = {
-        showClear: true,
-      };
-
-      updateWrapper();
-    });
-
     describe('When filter pill is clicked', () => {
       beforeEach(async () => {
         await button.trigger('click');
@@ -143,6 +142,12 @@ describe('DtFilterPill Tests', function () {
 
     describe('When clear button  is clicked', () => {
       beforeEach(async () => {
+        mockProps = {
+          value: [{ name: 'Test item 1', active: true }],
+        };
+
+        updateWrapper();
+
         await clearButton.trigger('click');
       });
 
@@ -157,7 +162,17 @@ describe('DtFilterPill Tests', function () {
   });
 
   describe('Extendability Tests', () => {
-    describe('When content is set', () => {
+    describe('When default slot is set', () => {
+      it('Should render custom label', () => {
+        mockSlots = { default: MOCK_DEFAULT_SLOT };
+
+        updateWrapper();
+
+        expect(wrapper.html()).toContain(MOCK_DEFAULT_SLOT);
+      });
+    });
+
+    describe('When content slot is set', () => {
       beforeEach(async () => {
         mockSlots = { content: MOCK_CONTENT };
 

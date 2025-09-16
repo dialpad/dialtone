@@ -4,18 +4,19 @@
     data-qa="dt-filter-pill"
   >
     <dt-popover
-      v-model="isPopoverOpen"
-      :append-to="appendTo"
-      :fallback-placements="fallbackPlacements"
-      :max-height="maxHeight"
-      :max-width="maxWidth"
+      v-model="isOpen"
+      :append-to="popoverAppendTo"
+      :fallback-placements="popoverFallbackPlacements"
+      :max-height="popoverMaxHeight"
+      :max-width="popoverMaxWidth"
       :modal="false"
-      :padding="padding"
-      :placement="placement"
+      :padding="popoverPadding"
+      :placement="popoverPlacement"
     >
-      <template #anchor>
+      <template #anchor="{ attrs }">
         <dt-button
           v-dt-tooltip="alphaTooltipText"
+          v-bind="attrs"
           :active="isActive"
           :class="[
             'd-filter-pill__primary',
@@ -30,14 +31,19 @@
           data-qa="dt-filter-pill__button"
           icon-position="right"
           importance="outlined"
-          @click="isPopoverOpen = true"
+          @click="isOpen = true"
         >
           <span class="d-filter-pill__label">
-            <span class="d-filter-pill__label-alpha">{{ label }}</span>
-            <span
-              v-if="activeFilterCount"
-              class="d-filter-pill__label-omega"
-            >{{ activeFilterCount }}</span>
+            <!-- @slot Allows you to override the label behavior -->
+            <slot>
+              <span class="d-filter-pill__label-alpha">{{ label }}</span>
+              <span
+                v-if="activeFilterCount"
+                class="d-filter-pill__label-omega"
+              >
+                {{ activeFilterCount }}
+              </span>
+            </slot>
           </span>
           <template #icon="{ iconSize }">
             <dt-icon-chevron-down
@@ -48,8 +54,26 @@
           </template>
         </dt-button>
       </template>
-      <template #content>
-        <slot name="content" />
+      <template #content="{ close }">
+        <!-- @slot Allows you to override the popover content, only use this if you need custom behavior -->
+        <slot
+          :close="close"
+          name="content"
+        >
+          <dt-checkbox-group
+            :selected-values="activeFilters"
+            :aria-label="label"
+            name="contact-centers"
+          >
+            <dt-checkbox
+              v-for="filter in filters"
+              :key="filter.name"
+              :label="filter.name"
+              :value="filter.name"
+              @input="$event => updateFilters(filter, $event)"
+            />
+          </dt-checkbox-group>
+        </slot>
       </template>
     </dt-popover>
     <dt-button
@@ -81,11 +105,15 @@ import { DtPopover, POPOVER_APPEND_TO_VALUES, POPOVER_PADDING_CLASSES } from '@/
 import { BUTTON_SIZE_MODIFIERS, DtButton } from '@/components/button';
 import { DtIconChevronDown, DtIconClose } from '@dialpad/dialtone-icons/vue2';
 import { DialtoneLocalization } from '@/localization';
+import { DtCheckbox } from '@/components/checkbox';
+import { DtCheckboxGroup } from '@/components/checkbox_group';
 
 export default {
   name: 'DtFilterPill',
 
   components: {
+    DtCheckboxGroup,
+    DtCheckbox,
     DtPopover,
     DtButton,
     DtIconClose,
@@ -96,21 +124,12 @@ export default {
 
   props: {
     /**
-     * Controls whether the filter pill is active and sets the button highlighted styling.
-     * Supports .sync modifier
-     * @values true, false
+     * Array of filters to display in the popover,
+     * should be an array of objects with `name` and `active` properties
      */
-    active: {
-      type: Boolean,
-      default: false,
-    },
-
-    /**
-     * Number of active filters to show in the pill
-     */
-    activeFilterCount: {
-      type: Number,
-      default: undefined,
+    value: {
+      type: Array,
+      default: () => [],
     },
 
     /**
@@ -123,21 +142,6 @@ export default {
     },
 
     /**
-     * Sets the element to which the
-     * <a class="d-link" href="https://dialtone.dialpad.com/components/popover.html#vue-api" target="_blank">popover component</a>
-     *  is going to append to
-     * @values body, parent, root, HTMLElement
-     */
-    appendTo: {
-      type: [HTMLElement, String],
-      default: 'body',
-      validator: appendTo => {
-        return POPOVER_APPEND_TO_VALUES.includes(appendTo) ||
-          (appendTo instanceof HTMLElement);
-      },
-    },
-
-    /**
      * HTML disabled attribute
      */
     disabled: {
@@ -146,13 +150,12 @@ export default {
     },
 
     /**
-     * If the popover does not fit in the direction described by "placement",
-     * it will attempt to change its direction to the "fallbackPlacements".
-     * <a class="d-link" href="https://popper.js.org/docs/v2/modifiers/flip/#fallbackplacements" target="_blank">Popper.js docs</a>
-     * */
-    fallbackPlacements: {
-      type: Array,
-      default: () => ['top-start', 'auto'],
+     * Toggles the clear button visibility
+     * @values true, false
+     */
+    hideClear: {
+      type: Boolean,
+      default: false,
     },
 
     /**
@@ -161,24 +164,6 @@ export default {
     label: {
       type: String,
       default: undefined,
-    },
-
-    /**
-     * Determines maximum height for the popover before overflow.
-     * Possible units rem|px|em
-     */
-    maxHeight: {
-      type: String,
-      default: '',
-    },
-
-    /**
-     * Determines maximum width for the popover before overflow.
-     * Possible units rem|px|%|em
-     */
-    maxWidth: {
-      type: String,
-      default: '',
     },
 
     /**
@@ -191,10 +176,60 @@ export default {
     },
 
     /**
+     * Sets the element to which the
+     * <a class="d-link" href="https://dialtone.dialpad.com/components/popover.html#vue-api" target="_blank">popover component</a>
+     *  is going to append to
+     * @values body, parent, root, HTMLElement
+     */
+    popoverAppendTo: {
+      type: [HTMLElement, String],
+      default: 'body',
+      validator: appendTo => {
+        return POPOVER_APPEND_TO_VALUES.includes(appendTo) ||
+          (appendTo instanceof HTMLElement);
+      },
+    },
+
+    /**
+     * If the dropdown does not fit in the direction described by "popoverPlacement",
+     * it will attempt to change it's direction to the "popoverFallbackPlacements".
+     *
+     * @values top, top-start, top-end,
+     * right, right-start, right-end,
+     * left, left-start, left-end,
+     * bottom, bottom-start, bottom-end,
+     * auto, auto-start, auto-end
+     * */
+    popoverFallbackPlacements: {
+      type: Array,
+      default: () => {
+        return ['auto'];
+      },
+    },
+
+    /**
+     * Determines maximum height for the popover before overflow.
+     * Possible units rem|px|em
+     */
+    popoverMaxHeight: {
+      type: String,
+      default: '',
+    },
+
+    /**
+     * Determines maximum width for the popover before overflow.
+     * Possible units rem|px|%|em
+     */
+    popoverMaxWidth: {
+      type: String,
+      default: '',
+    },
+
+    /**
      * Padding size class for the popover content.
      * @values none, small, medium, large
      */
-    padding: {
+    popoverPadding: {
       type: String,
       default: 'large',
       validator: (padding) => {
@@ -207,17 +242,9 @@ export default {
      * <a class="d-link" href="https://atomiks.github.io/tippyjs/v6/all-props/#placement" target="_blank">Tippy.js docs</a>
      * @values top, top-start, top-end, right, right-start, right-end, left, left-start, left-end, bottom, bottom-start, bottom-end, auto, auto-start, auto-end
      */
-    placement: {
+    popoverPlacement: {
       type: String,
       default: 'bottom-start',
-    },
-
-    /**
-     * Shows the clear button
-     */
-    showClear: {
-      type: Boolean,
-      default: false,
     },
 
     /**
@@ -226,7 +253,7 @@ export default {
      */
     size: {
       type: String,
-      default: 'md',
+      default: 'sm',
       validator: (s) => Object.keys(BUTTON_SIZE_MODIFIERS).includes(s),
     },
   },
@@ -249,20 +276,16 @@ export default {
     'open',
 
     /**
-     * Emitted to sync value with parent
-     *
-     * @event update:active
-     * @type {Boolean | Array}
+     * Emitted when the active filters change
      */
-    'update:active',
+    'update:value',
   ],
 
   data () {
     return {
-      isPopoverOpen: false,
-      isActive: this.active,
-      hasClear: this.showClear,
+      isOpen: false,
       i18n: new DialtoneLocalization(),
+      filters: this.value,
     };
   },
 
@@ -280,42 +303,49 @@ export default {
 
       return this.clearButtonAriaLabel
     },
+
+    activeFilters () {
+      return this.filters.filter(filter => filter.active).map(filter => filter.name);
+    },
+
+    activeFilterCount () {
+      return this.activeFilters.length;
+    },
+
+    isActive () {
+      return this.activeFilterCount > 0;
+    },
+
+    hasClear () {
+      return !this.hideClear && this.activeFilterCount > 0;
+    },
   },
 
   watch: {
-    isPopoverOpen (isOpen) {
+    isOpen (isOpen) {
       this.$emit('open', isOpen);
     },
 
-    active: {
-      immediate: true,
-      handler (isActive) {
-        this.$emit('update:active', isActive);
-        this.isActive = isActive;
-      },
-    },
-
-    showClear (clear) {
-      this.hasClear = clear;
-    },
-
-    activeFilterCount (count) {
-      if (count > 0) {
-        this.isActive = true;
-        this.hasClear = true;
-      } else {
-        this.isActive = false;
-        this.hasClear = false;
-      }
-
+    filters (filters) {
+      this.$emit('update:value', filters);
     },
   },
 
   methods: {
     clearFilter ($event) {
-      this.isActive = false;
-      this.hasClear = false;
+      this.filters = this.filters.map(filter => {
+        delete filter.active
+        return filter;
+      });
       this.$emit('clear', $event)
+    },
+
+    updateFilters (filter, isActive) {
+      this.filters = this.filters.map(f => {
+        if (f.name !== filter.name) return f;
+
+        return {...f, active: isActive};
+      })
     },
   },
 };
