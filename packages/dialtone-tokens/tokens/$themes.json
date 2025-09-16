@@ -4,8 +4,7 @@
     "name": "light",
     "selectedTokenSets": {
       "root": "enabled",
-      "base/default": "enabled",
-      "components/presence/default-prota-deuter": "disabled"
+      "base/default": "enabled"
     },
     "$figmaStyleReferences": {
       "color.neutral.white": "S:7de290343e9d21a7bdd87279d4ada45b4edc658b,",
@@ -349,8 +348,7 @@
     "selectedTokenSets": {
       "root": "enabled",
       "base/default": "enabled",
-      "base/dark": "enabled",
-      "components/presence/default-prota-deuter": "disabled"
+      "base/dark": "enabled"
     },
     "$figmaStyleReferences": {},
     "$figmaVariableReferences": {
@@ -1160,8 +1158,7 @@
       "root": "source",
       "components/button/default": "enabled",
       "components/presence/default": "enabled",
-      "theme/dp/default": "enabled",
-      "components/presence/default-prota-deuter": "disabled"
+      "theme/dp/default": "enabled"
     },
     "$figmaCollectionId": "VariableCollectionId:2174:1524",
     "$figmaModeId": "2174:0",
@@ -1906,8 +1903,7 @@
       "components/presence/default": "enabled",
       "components/presence/dark": "enabled",
       "theme/dp/default": "enabled",
-      "theme/dp/dark": "enabled",
-      "components/presence/default-prota-deuter": "disabled"
+      "theme/dp/dark": "enabled"
     },
     "$figmaCollectionId": "VariableCollectionId:2174:1524",
     "$figmaModeId": "2174:1",
@@ -2579,8 +2575,7 @@
       "components/button/default": "enabled",
       "components/presence/default": "enabled",
       "theme/dp/default": "enabled",
-      "theme/tmo/default": "enabled",
-      "components/presence/default-prota-deuter": "disabled"
+      "theme/tmo/default": "enabled"
     },
     "$figmaCollectionId": "VariableCollectionId:406:19535",
     "$figmaModeId": "406:2",
@@ -3143,8 +3138,7 @@
       "theme/dp/default": "enabled",
       "theme/dp/dark": "enabled",
       "theme/tmo/default": "enabled",
-      "theme/tmo/dark": "enabled",
-      "components/presence/default-prota-deuter": "disabled"
+      "theme/tmo/dark": "enabled"
     },
     "$figmaCollectionId": "VariableCollectionId:406:19535",
     "$figmaModeId": "406:3",
@@ -3698,8 +3692,7 @@
       "components/radio/default": "enabled",
       "components/presence/default": "enabled",
       "theme/dp/default": "source",
-      "theme/deca/default": "enabled",
-      "components/presence/default-prota-deuter": "disabled"
+      "theme/deca/default": "enabled"
     },
     "$figmaVariableReferences": {},
     "group": "deca"
@@ -3723,8 +3716,7 @@
       "theme/dp/default": "source",
       "theme/dp/dark": "source",
       "theme/deca/default": "enabled",
-      "theme/deca/dark": "enabled",
-      "components/presence/default-prota-deuter": "disabled"
+      "theme/deca/dark": "enabled"
     },
     "$figmaVariableReferences": {},
     "group": "deca"
@@ -4090,8 +4082,7 @@
       "components/radio/default": "enabled",
       "components/presence/default": "enabled",
       "theme/dp/default": "enabled",
-      "theme/expressive/default": "enabled",
-      "components/presence/default-prota-deuter": "disabled"
+      "theme/expressive/default": "enabled"
     },
     "$figmaVariableReferences": {},
     "group": "expressive"
@@ -4111,8 +4102,7 @@
       "components/radio/default": "enabled",
       "theme/dp/default": "enabled",
       "theme/dp/dark": "enabled",
-      "theme/expressive/default": "enabled",
-      "components/presence/default-prota-deuter": "disabled"
+      "theme/expressive/default": "enabled"
     },
     "$figmaVariableReferences": {},
     "group": "expressive"
@@ -4132,8 +4122,7 @@
       "components/presence/default": "enabled",
       "theme/dp/default": "enabled",
       "theme/expressive/default": "enabled",
-      "theme/expressive/sm": "enabled",
-      "components/presence/default-prota-deuter": "disabled"
+      "theme/expressive/sm": "enabled"
     },
     "$figmaVariableReferences": {},
     "group": "expressive-sm"
@@ -4155,8 +4144,7 @@
       "theme/dp/default": "enabled",
       "theme/dp/dark": "enabled",
       "theme/expressive/default": "enabled",
-      "theme/expressive/sm": "enabled",
-      "components/presence/default-prota-deuter": "disabled"
+      "theme/expressive/sm": "enabled"
     },
     "$figmaVariableReferences": {},
     "group": "expressive-sm"
@@ -4176,8 +4164,7 @@
       "root": "source",
       "base/default": "source",
       "theme/dp/default": "enabled",
-      "theme/sunflower/default": "enabled",
-      "components/presence/default-prota-deuter": "disabled"
+      "theme/sunflower/default": "enabled"
     },
     "$figmaVariableReferences": {},
     "group": "sunflower"
@@ -4202,8 +4189,7 @@
       "theme/sunflower/default": "enabled",
       "theme/sunflower/dark": "enabled",
       "base/dark": "source",
-      "components/presence/dark": "enabled",
-      "components/presence/default-prota-deuter": "disabled"
+      "components/presence/dark": "enabled"
     },
     "$figmaVariableReferences": {},
     "group": "sunflower"
@@ -4223,8 +4209,7 @@
       "root": "source",
       "base/default": "source",
       "theme/dp/default": "enabled",
-      "theme/ceruleo/default": "enabled",
-      "components/presence/default-prota-deuter": "disabled"
+      "theme/ceruleo/default": "enabled"
     },
     "$figmaVariableReferences": {},
     "group": "ceruleo"
@@ -4244,8 +4229,7 @@
       "root": "source",
       "base/default": "source",
       "theme/dp/default": "enabled",
-      "theme/melon/default": "enabled",
-      "components/presence/default-prota-deuter": "disabled"
+      "theme/melon/default": "enabled"
     },
     "$figmaVariableReferences": {},
     "group": "melon"
@@ -4270,8 +4254,7 @@
       "theme/dp/default": "enabled",
       "theme/dp/dark": "enabled",
       "theme/melon/default": "enabled",
-      "theme/melon/dark": "enabled",
-      "components/presence/default-prota-deuter": "disabled"
+      "theme/melon/dark": "enabled"
     },
     "$figmaVariableReferences": {},
     "group": "melon"
@@ -4291,8 +4274,7 @@
       "root": "source",
       "base/default": "source",
       "theme/dp/default": "enabled",
-      "theme/aegean/default": "enabled",
-      "components/presence/default-prota-deuter": "disabled"
+      "theme/aegean/default": "enabled"
     },
     "$figmaVariableReferences": {},
     "group": "aegean"
@@ -4317,8 +4299,7 @@
       "theme/dp/default": "enabled",
       "theme/dp/dark": "enabled",
       "theme/aegean/default": "enabled",
-      "theme/aegean/dark": "enabled",
-      "components/presence/default-prota-deuter": "disabled"
+      "theme/aegean/dark": "enabled"
     },
     "$figmaVariableReferences": {},
     "group": "aegean"
@@ -4338,8 +4319,7 @@
       "root": "source",
       "base/default": "source",
       "theme/dp/default": "enabled",
-      "theme/verdant-haze/default": "enabled",
-      "components/presence/default-prota-deuter": "disabled"
+      "theme/verdant-haze/default": "enabled"
     },
     "$figmaVariableReferences": {},
     "group": "verdant-haze"
@@ -4364,8 +4344,7 @@
       "theme/dp/default": "enabled",
       "theme/dp/dark": "enabled",
       "theme/verdant-haze/default": "enabled",
-      "theme/verdant-haze/dark": "enabled",
-      "components/presence/default-prota-deuter": "disabled"
+      "theme/verdant-haze/dark": "enabled"
     },
     "$figmaVariableReferences": {},
     "group": "verdant-haze"
@@ -4390,8 +4369,7 @@
       "theme/dp/default": "enabled",
       "theme/dp/dark": "enabled",
       "theme/ceruleo/default": "enabled",
-      "theme/ceruleo/dark": "enabled",
-      "components/presence/default-prota-deuter": "disabled"
+      "theme/ceruleo/dark": "enabled"
     },
     "$figmaVariableReferences": {},
     "group": "ceruleo"
@@ -4402,8 +4380,7 @@
     "$figmaStyleReferences": {},
     "selectedTokenSets": {
       "root": "enabled",
-      "base/default": "enabled",
-      "components/presence/default-prota-deuter": "disabled"
+      "base/default": "enabled"
     },
     "group": "base",
     "$figmaVariableReferences": {}
@@ -4415,8 +4392,7 @@
     "selectedTokenSets": {
       "root": "enabled",
       "base/default": "enabled",
-      "base/dark": "enabled",
-      "components/presence/default-prota-deuter": "disabled"
+      "base/dark": "enabled"
     },
     "group": "base",
     "$figmaVariableReferences": {}
@@ -4436,8 +4412,7 @@
       "components/checkbox/default": "enabled",
       "components/icon/default": "enabled",
       "components/presence/default": "enabled",
-      "components/radio/default": "enabled",
-      "components/presence/default-prota-deuter": "disabled"
+      "components/radio/default": "enabled"
     },
     "$figmaVariableReferences": {},
     "group": "buttercream"
@@ -4460,8 +4435,7 @@
       "components/checkbox/default": "enabled",
       "components/icon/default": "enabled",
       "components/presence/default": "enabled",
-      "components/radio/default": "enabled",
-      "components/presence/default-prota-deuter": "disabled"
+      "components/radio/default": "enabled"
     },
     "$figmaVariableReferences": {},
     "group": "buttercream"
@@ -4481,8 +4455,7 @@
       "components/checkbox/default": "enabled",
       "components/icon/default": "enabled",
       "components/presence/default": "enabled",
-      "components/radio/default": "enabled",
-      "components/presence/default-prota-deuter": "disabled"
+      "components/radio/default": "enabled"
     },
     "$figmaVariableReferences": {},
     "group": "plum"
@@ -4505,8 +4478,7 @@
       "components/checkbox/default": "enabled",
       "components/icon/default": "enabled",
       "components/presence/default": "enabled",
-      "components/radio/default": "enabled",
-      "components/presence/default-prota-deuter": "disabled"
+      "components/radio/default": "enabled"
     },
     "$figmaVariableReferences": {},
     "group": "plum"
@@ -4526,8 +4498,7 @@
       "components/checkbox/default": "enabled",
       "components/icon/default": "enabled",
       "components/presence/default": "enabled",
-      "components/radio/default": "enabled",
-      "components/presence/default-prota-deuter": "disabled"
+      "components/radio/default": "enabled"
     },
     "$figmaVariableReferences": {},
     "group": "botany"
@@ -4550,8 +4521,7 @@
       "components/checkbox/default": "enabled",
       "components/icon/default": "enabled",
       "components/presence/default": "enabled",
-      "components/radio/default": "enabled",
-      "components/presence/default-prota-deuter": "disabled"
+      "components/radio/default": "enabled"
     },
     "$figmaVariableReferences": {},
     "group": "botany"
@@ -4571,8 +4541,7 @@
       "components/icon/default": "enabled",
       "components/presence/default": "enabled",
       "components/radio/default": "enabled",
-      "theme/high-desert/default": "enabled",
-      "components/presence/default-prota-deuter": "disabled"
+      "theme/high-desert/default": "enabled"
     },
     "$figmaVariableReferences": {},
     "group": "high-desert"
@@ -4595,8 +4564,7 @@
       "components/checkbox/default": "enabled",
       "components/icon/default": "enabled",
       "components/presence/default": "enabled",
-      "components/radio/default": "enabled",
-      "components/presence/default-prota-deuter": "disabled"
+      "components/radio/default": "enabled"
     },
     "$figmaVariableReferences": {},
     "group": "high-desert"
@@ -4616,8 +4584,7 @@
       "components/checkbox/default": "enabled",
       "components/icon/default": "enabled",
       "components/presence/default": "enabled",
-      "components/radio/default": "enabled",
-      "components/presence/default-prota-deuter": "disabled"
+      "components/radio/default": "enabled"
     },
     "group": "101",
     "$figmaVariableReferences": {}
@@ -4640,8 +4607,7 @@
       "components/checkbox/default": "enabled",
       "components/icon/default": "enabled",
       "components/presence/default": "enabled",
-      "components/radio/default": "enabled",
-      "components/presence/default-prota-deuter": "disabled"
+      "components/radio/default": "enabled"
     },
     "group": "101",
     "$figmaVariableReferences": {}
@@ -4661,8 +4627,7 @@
       "components/checkbox/default": "enabled",
       "components/icon/default": "enabled",
       "components/presence/default": "enabled",
-      "components/radio/default": "enabled",
-      "components/presence/default-prota-deuter": "disabled"
+      "components/radio/default": "enabled"
     },
     "group": "102",
     "$figmaVariableReferences": {}
@@ -4685,8 +4650,7 @@
       "components/checkbox/default": "enabled",
       "components/icon/default": "enabled",
       "components/presence/default": "enabled",
-      "components/radio/default": "enabled",
-      "components/presence/default-prota-deuter": "disabled"
+      "components/radio/default": "enabled"
     },
     "group": "102",
     "$figmaVariableReferences": {}
@@ -4706,8 +4670,7 @@
       "components/checkbox/default": "enabled",
       "components/icon/default": "enabled",
       "components/presence/default": "enabled",
-      "components/radio/default": "enabled",
-      "components/presence/default-prota-deuter": "disabled"
+      "components/radio/default": "enabled"
     },
     "group": "103",
     "$figmaVariableReferences": {}
@@ -4730,8 +4693,7 @@
       "components/checkbox/default": "enabled",
       "components/icon/default": "enabled",
       "components/presence/default": "enabled",
-      "components/radio/default": "enabled",
-      "components/presence/default-prota-deuter": "disabled"
+      "components/radio/default": "enabled"
     },
     "group": "103",
     "$figmaVariableReferences": {}
@@ -4751,8 +4713,7 @@
       "components/checkbox/default": "enabled",
       "components/icon/default": "enabled",
       "components/presence/default": "enabled",
-      "components/radio/default": "enabled",
-      "components/presence/default-prota-deuter": "disabled"
+      "components/radio/default": "enabled"
     },
     "group": "104",
     "$figmaVariableReferences": {}
@@ -4775,8 +4736,7 @@
       "components/checkbox/default": "enabled",
       "components/icon/default": "enabled",
       "components/presence/default": "enabled",
-      "components/radio/default": "enabled",
-      "components/presence/default-prota-deuter": "disabled"
+      "components/radio/default": "enabled"
     },
     "group": "104",
     "$figmaVariableReferences": {}
@@ -4796,8 +4756,7 @@
       "components/checkbox/default": "enabled",
       "components/icon/default": "enabled",
       "components/presence/default": "enabled",
-      "components/radio/default": "enabled",
-      "components/presence/default-prota-deuter": "disabled"
+      "components/radio/default": "enabled"
     },
     "group": "105",
     "$figmaVariableReferences": {}
@@ -4820,8 +4779,7 @@
       "components/checkbox/default": "enabled",
       "components/icon/default": "enabled",
       "components/presence/default": "enabled",
-      "components/radio/default": "enabled",
-      "components/presence/default-prota-deuter": "disabled"
+      "components/radio/default": "enabled"
     },
     "group": "105",
     "$figmaVariableReferences": {}
@@ -4841,8 +4799,7 @@
       "components/checkbox/default": "enabled",
       "components/icon/default": "enabled",
       "components/presence/default": "enabled",
-      "components/radio/default": "enabled",
-      "components/presence/default-prota-deuter": "disabled"
+      "components/radio/default": "enabled"
     },
     "group": "106",
     "$figmaVariableReferences": {}
@@ -4865,8 +4822,7 @@
       "components/checkbox/default": "enabled",
       "components/icon/default": "enabled",
       "components/presence/default": "enabled",
-      "components/radio/default": "enabled",
-      "components/presence/default-prota-deuter": "disabled"
+      "components/radio/default": "enabled"
     },
     "group": "106",
     "$figmaVariableReferences": {}
@@ -4886,8 +4842,7 @@
       "components/checkbox/default": "enabled",
       "components/icon/default": "enabled",
       "components/presence/default": "enabled",
-      "components/radio/default": "enabled",
-      "components/presence/default-prota-deuter": "disabled"
+      "components/radio/default": "enabled"
     },
     "group": "107",
     "$figmaVariableReferences": {}
@@ -4910,8 +4865,7 @@
       "components/checkbox/default": "enabled",
       "components/icon/default": "enabled",
       "components/presence/default": "enabled",
-      "components/radio/default": "enabled",
-      "components/presence/default-prota-deuter": "disabled"
+      "components/radio/default": "enabled"
     },
     "group": "107",
     "$figmaVariableReferences": {}
@@ -4931,8 +4885,7 @@
       "components/checkbox/default": "enabled",
       "components/icon/default": "enabled",
       "components/presence/default": "enabled",
-      "components/radio/default": "enabled",
-      "components/presence/default-prota-deuter": "disabled"
+      "components/radio/default": "enabled"
     },
     "group": "108",
     "$figmaVariableReferences": {}
@@ -4955,8 +4908,7 @@
       "components/checkbox/default": "enabled",
       "components/icon/default": "enabled",
       "components/presence/default": "enabled",
-      "components/radio/default": "enabled",
-      "components/presence/default-prota-deuter": "disabled"
+      "components/radio/default": "enabled"
     },
     "group": "108",
     "$figmaVariableReferences": {}
@@ -4976,8 +4928,7 @@
       "components/checkbox/default": "enabled",
       "components/icon/default": "enabled",
       "components/presence/default": "enabled",
-      "components/radio/default": "enabled",
-      "components/presence/default-prota-deuter": "disabled"
+      "components/radio/default": "enabled"
     },
     "group": "109",
     "$figmaVariableReferences": {}
@@ -5000,8 +4951,7 @@
       "components/checkbox/default": "enabled",
       "components/icon/default": "enabled",
       "components/presence/default": "enabled",
-      "components/radio/default": "enabled",
-      "components/presence/default-prota-deuter": "disabled"
+      "components/radio/default": "enabled"
     },
     "group": "109",
     "$figmaVariableReferences": {}
@@ -5021,8 +4971,7 @@
       "components/checkbox/default": "enabled",
       "components/icon/default": "enabled",
       "components/presence/default": "enabled",
-      "components/radio/default": "enabled",
-      "components/presence/default-prota-deuter": "disabled"
+      "components/radio/default": "enabled"
     },
     "group": "110",
     "$figmaVariableReferences": {}
@@ -5045,8 +4994,7 @@
       "components/checkbox/default": "enabled",
       "components/icon/default": "enabled",
       "components/presence/default": "enabled",
-      "components/radio/default": "enabled",
-      "components/presence/default-prota-deuter": "disabled"
+      "components/radio/default": "enabled"
     },
     "group": "110",
     "$figmaVariableReferences": {}
@@ -5066,8 +5014,7 @@
       "components/checkbox/default": "enabled",
       "components/icon/default": "enabled",
       "components/presence/default": "enabled",
-      "components/radio/default": "enabled",
-      "components/presence/default-prota-deuter": "disabled"
+      "components/radio/default": "enabled"
     },
     "group": "111",
     "$figmaVariableReferences": {}
@@ -5090,8 +5037,7 @@
       "components/checkbox/default": "enabled",
       "components/icon/default": "enabled",
       "components/presence/default": "enabled",
-      "components/radio/default": "enabled",
-      "components/presence/default-prota-deuter": "disabled"
+      "components/radio/default": "enabled"
     },
     "group": "111",
     "$figmaVariableReferences": {}
@@ -5111,8 +5057,7 @@
       "components/checkbox/default": "enabled",
       "components/icon/default": "enabled",
       "components/presence/default": "enabled",
-      "components/radio/default": "enabled",
-      "components/presence/default-prota-deuter": "disabled"
+      "components/radio/default": "enabled"
     },
     "group": "112",
     "$figmaVariableReferences": {}
@@ -5135,8 +5080,7 @@
       "components/checkbox/default": "enabled",
       "components/icon/default": "enabled",
       "components/presence/default": "enabled",
-      "components/radio/default": "enabled",
-      "components/presence/default-prota-deuter": "disabled"
+      "components/radio/default": "enabled"
     },
     "group": "112",
     "$figmaVariableReferences": {}
@@ -5156,8 +5100,7 @@
       "components/checkbox/default": "enabled",
       "components/icon/default": "enabled",
       "components/presence/default": "enabled",
-      "components/radio/default": "enabled",
-      "components/presence/default-prota-deuter": "disabled"
+      "components/radio/default": "enabled"
     },
     "group": "113",
     "$figmaVariableReferences": {}
@@ -5180,8 +5123,7 @@
       "components/checkbox/default": "enabled",
       "components/icon/default": "enabled",
       "components/presence/default": "enabled",
-      "components/radio/default": "enabled",
-      "components/presence/default-prota-deuter": "disabled"
+      "components/radio/default": "enabled"
     },
     "group": "113",
     "$figmaVariableReferences": {}
@@ -5201,8 +5143,7 @@
       "components/checkbox/default": "enabled",
       "components/icon/default": "enabled",
       "components/presence/default": "enabled",
-      "components/radio/default": "enabled",
-      "components/presence/default-prota-deuter": "disabled"
+      "components/radio/default": "enabled"
     },
     "group": "114",
     "$figmaVariableReferences": {}
@@ -5225,8 +5166,7 @@
       "components/checkbox/default": "enabled",
       "components/icon/default": "enabled",
       "components/presence/default": "enabled",
-      "components/radio/default": "enabled",
-      "components/presence/default-prota-deuter": "disabled"
+      "components/radio/default": "enabled"
     },
     "group": "114",
     "$figmaVariableReferences": {}
@@ -5246,8 +5186,7 @@
       "components/checkbox/default": "enabled",
       "components/icon/default": "enabled",
       "components/presence/default": "enabled",
-      "components/radio/default": "enabled",
-      "components/presence/default-prota-deuter": "disabled"
+      "components/radio/default": "enabled"
     },
     "group": "115",
     "$figmaVariableReferences": {}
@@ -5270,8 +5209,7 @@
       "components/checkbox/default": "enabled",
       "components/icon/default": "enabled",
       "components/presence/default": "enabled",
-      "components/radio/default": "enabled",
-      "components/presence/default-prota-deuter": "disabled"
+      "components/radio/default": "enabled"
     },
     "group": "115",
     "$figmaVariableReferences": {}
@@ -5291,8 +5229,7 @@
       "components/checkbox/default": "enabled",
       "components/icon/default": "enabled",
       "components/presence/default": "enabled",
-      "components/radio/default": "enabled",
-      "components/presence/default-prota-deuter": "disabled"
+      "components/radio/default": "enabled"
     },
     "group": "116",
     "$figmaVariableReferences": {}
@@ -5315,8 +5252,7 @@
       "components/checkbox/default": "enabled",
       "components/icon/default": "enabled",
       "components/presence/default": "enabled",
-      "components/radio/default": "enabled",
-      "components/presence/default-prota-deuter": "disabled"
+      "components/radio/default": "enabled"
     },
     "group": "116",
     "$figmaVariableReferences": {}
@@ -5336,8 +5272,7 @@
       "components/checkbox/default": "enabled",
       "components/icon/default": "enabled",
       "components/presence/default": "enabled",
-      "components/radio/default": "enabled",
-      "components/presence/default-prota-deuter": "disabled"
+      "components/radio/default": "enabled"
     },
     "group": "117",
     "$figmaVariableReferences": {}
@@ -5360,8 +5295,7 @@
       "components/checkbox/default": "enabled",
       "components/icon/default": "enabled",
       "components/presence/default": "enabled",
-      "components/radio/default": "enabled",
-      "components/presence/default-prota-deuter": "disabled"
+      "components/radio/default": "enabled"
     },
     "group": "117",
     "$figmaVariableReferences": {}
@@ -5381,8 +5315,7 @@
       "components/checkbox/default": "enabled",
       "components/icon/default": "enabled",
       "components/presence/default": "enabled",
-      "components/radio/default": "enabled",
-      "components/presence/default-prota-deuter": "disabled"
+      "components/radio/default": "enabled"
     },
     "group": "118",
     "$figmaVariableReferences": {}
@@ -5405,8 +5338,7 @@
       "components/checkbox/default": "enabled",
       "components/icon/default": "enabled",
       "components/presence/default": "enabled",
-      "components/radio/default": "enabled",
-      "components/presence/default-prota-deuter": "disabled"
+      "components/radio/default": "enabled"
     },
     "group": "118",
     "$figmaVariableReferences": {}
@@ -5426,8 +5358,7 @@
       "components/checkbox/default": "enabled",
       "components/icon/default": "enabled",
       "components/presence/default": "enabled",
-      "components/radio/default": "enabled",
-      "components/presence/default-prota-deuter": "disabled"
+      "components/radio/default": "enabled"
     },
     "group": "119",
     "$figmaVariableReferences": {}
@@ -5450,8 +5381,7 @@
       "components/checkbox/default": "enabled",
       "components/icon/default": "enabled",
       "components/presence/default": "enabled",
-      "components/radio/default": "enabled",
-      "components/presence/default-prota-deuter": "disabled"
+      "components/radio/default": "enabled"
     },
     "group": "119",
     "$figmaVariableReferences": {}
@@ -5471,8 +5401,7 @@
       "components/checkbox/default": "enabled",
       "components/icon/default": "enabled",
       "components/presence/default": "enabled",
-      "components/radio/default": "enabled",
-      "components/presence/default-prota-deuter": "disabled"
+      "components/radio/default": "enabled"
     },
     "group": "120",
     "$figmaVariableReferences": {}
@@ -5495,8 +5424,7 @@
       "components/checkbox/default": "enabled",
       "components/icon/default": "enabled",
       "components/presence/default": "enabled",
-      "components/radio/default": "enabled",
-      "components/presence/default-prota-deuter": "disabled"
+      "components/radio/default": "enabled"
     },
     "group": "120",
     "$figmaVariableReferences": {}
@@ -5516,8 +5444,7 @@
       "components/checkbox/default": "enabled",
       "components/icon/default": "enabled",
       "components/presence/default": "enabled",
-      "components/radio/default": "enabled",
-      "components/presence/default-prota-deuter": "disabled"
+      "components/radio/default": "enabled"
     },
     "group": "121",
     "$figmaVariableReferences": {}
@@ -5540,8 +5467,7 @@
       "components/checkbox/default": "enabled",
       "components/icon/default": "enabled",
       "components/presence/default": "enabled",
-      "components/radio/default": "enabled",
-      "components/presence/default-prota-deuter": "disabled"
+      "components/radio/default": "enabled"
     },
     "group": "121",
     "$figmaVariableReferences": {}
@@ -5561,8 +5487,7 @@
       "components/checkbox/default": "enabled",
       "components/icon/default": "enabled",
       "components/presence/default": "enabled",
-      "components/radio/default": "enabled",
-      "components/presence/default-prota-deuter": "disabled"
+      "components/radio/default": "enabled"
     },
     "group": "122",
     "$figmaVariableReferences": {}
@@ -5585,8 +5510,7 @@
       "components/checkbox/default": "enabled",
       "components/icon/default": "enabled",
       "components/presence/default": "enabled",
-      "components/radio/default": "enabled",
-      "components/presence/default-prota-deuter": "disabled"
+      "components/radio/default": "enabled"
     },
     "group": "122",
     "$figmaVariableReferences": {}
@@ -5606,8 +5530,7 @@
       "components/checkbox/default": "enabled",
       "components/icon/default": "enabled",
       "components/presence/default": "enabled",
-      "components/radio/default": "enabled",
-      "components/presence/default-prota-deuter": "disabled"
+      "components/radio/default": "enabled"
     },
     "group": "123",
     "$figmaVariableReferences": {}
@@ -5630,8 +5553,7 @@
       "components/checkbox/default": "enabled",
       "components/icon/default": "enabled",
       "components/presence/default": "enabled",
-      "components/radio/default": "enabled",
-      "components/presence/default-prota-deuter": "disabled"
+      "components/radio/default": "enabled"
     },
     "group": "123",
     "$figmaVariableReferences": {}
@@ -5651,8 +5573,7 @@
       "components/checkbox/default": "enabled",
       "components/icon/default": "enabled",
       "components/presence/default": "enabled",
-      "components/radio/default": "enabled",
-      "components/presence/default-prota-deuter": "disabled"
+      "components/radio/default": "enabled"
     },
     "group": "124",
     "$figmaVariableReferences": {}
@@ -5675,8 +5596,7 @@
       "components/checkbox/default": "enabled",
       "components/icon/default": "enabled",
       "components/presence/default": "enabled",
-      "components/radio/default": "enabled",
-      "components/presence/default-prota-deuter": "disabled"
+      "components/radio/default": "enabled"
     },
     "group": "124",
     "$figmaVariableReferences": {}
@@ -5696,8 +5616,7 @@
       "components/checkbox/default": "enabled",
       "components/icon/default": "enabled",
       "components/presence/default": "enabled",
-      "components/radio/default": "enabled",
-      "components/presence/default-prota-deuter": "disabled"
+      "components/radio/default": "enabled"
     },
     "group": "125",
     "$figmaVariableReferences": {}
@@ -5720,8 +5639,7 @@
       "components/checkbox/default": "enabled",
       "components/icon/default": "enabled",
       "components/presence/default": "enabled",
-      "components/radio/default": "enabled",
-      "components/presence/default-prota-deuter": "disabled"
+      "components/radio/default": "enabled"
     },
     "group": "125",
     "$figmaVariableReferences": {}
@@ -5741,8 +5659,7 @@
       "components/checkbox/default": "enabled",
       "components/icon/default": "enabled",
       "components/presence/default": "enabled",
-      "components/radio/default": "enabled",
-      "components/presence/default-prota-deuter": "disabled"
+      "components/radio/default": "enabled"
     },
     "group": "126",
     "$figmaVariableReferences": {}
@@ -5765,8 +5682,7 @@
       "components/checkbox/default": "enabled",
       "components/icon/default": "enabled",
       "components/presence/default": "enabled",
-      "components/radio/default": "enabled",
-      "components/presence/default-prota-deuter": "disabled"
+      "components/radio/default": "enabled"
     },
     "group": "126",
     "$figmaVariableReferences": {}
@@ -5786,8 +5702,7 @@
       "components/checkbox/default": "enabled",
       "components/icon/default": "enabled",
       "components/presence/default": "enabled",
-      "components/radio/default": "enabled",
-      "components/presence/default-prota-deuter": "disabled"
+      "components/radio/default": "enabled"
     },
     "group": "127",
     "$figmaVariableReferences": {}
@@ -5810,8 +5725,7 @@
       "components/checkbox/default": "enabled",
       "components/icon/default": "enabled",
       "components/presence/default": "enabled",
-      "components/radio/default": "enabled",
-      "components/presence/default-prota-deuter": "disabled"
+      "components/radio/default": "enabled"
     },
     "group": "127",
     "$figmaVariableReferences": {}
@@ -5831,8 +5745,7 @@
       "components/checkbox/default": "enabled",
       "components/icon/default": "enabled",
       "components/presence/default": "enabled",
-      "components/radio/default": "enabled",
-      "components/presence/default-prota-deuter": "disabled"
+      "components/radio/default": "enabled"
     },
     "group": "128",
     "$figmaVariableReferences": {}
@@ -5855,8 +5768,7 @@
       "components/checkbox/default": "enabled",
       "components/icon/default": "enabled",
       "components/presence/default": "enabled",
-      "components/radio/default": "enabled",
-      "components/presence/default-prota-deuter": "disabled"
+      "components/radio/default": "enabled"
     },
     "group": "128",
     "$figmaVariableReferences": {}
@@ -5876,8 +5788,7 @@
       "components/checkbox/default": "enabled",
       "components/icon/default": "enabled",
       "components/presence/default": "enabled",
-      "components/radio/default": "enabled",
-      "components/presence/default-prota-deuter": "disabled"
+      "components/radio/default": "enabled"
     },
     "group": "129",
     "$figmaVariableReferences": {}
@@ -5900,8 +5811,7 @@
       "components/checkbox/default": "enabled",
       "components/icon/default": "enabled",
       "components/presence/default": "enabled",
-      "components/radio/default": "enabled",
-      "components/presence/default-prota-deuter": "disabled"
+      "components/radio/default": "enabled"
     },
     "group": "129",
     "$figmaVariableReferences": {}
@@ -5921,8 +5831,7 @@
       "components/checkbox/default": "enabled",
       "components/icon/default": "enabled",
       "components/presence/default": "enabled",
-      "components/radio/default": "enabled",
-      "components/presence/default-prota-deuter": "disabled"
+      "components/radio/default": "enabled"
     },
     "group": "130",
     "$figmaVariableReferences": {}
@@ -5945,8 +5854,7 @@
       "components/checkbox/default": "enabled",
       "components/icon/default": "enabled",
       "components/presence/default": "enabled",
-      "components/radio/default": "enabled",
-      "components/presence/default-prota-deuter": "disabled"
+      "components/radio/default": "enabled"
     },
     "group": "130",
     "$figmaVariableReferences": {}
@@ -5966,8 +5874,7 @@
       "components/checkbox/default": "enabled",
       "components/icon/default": "enabled",
       "components/presence/default": "enabled",
-      "components/radio/default": "enabled",
-      "components/presence/default-prota-deuter": "disabled"
+      "components/radio/default": "enabled"
     },
     "group": "131",
     "$figmaVariableReferences": {}
@@ -5990,8 +5897,7 @@
       "components/checkbox/default": "enabled",
       "components/icon/default": "enabled",
       "components/presence/default": "enabled",
-      "components/radio/default": "enabled",
-      "components/presence/default-prota-deuter": "disabled"
+      "components/radio/default": "enabled"
     },
     "group": "131",
     "$figmaVariableReferences": {}
@@ -6011,8 +5917,7 @@
       "components/checkbox/default": "enabled",
       "components/icon/default": "enabled",
       "components/presence/default": "enabled",
-      "components/radio/default": "enabled",
-      "components/presence/default-prota-deuter": "disabled"
+      "components/radio/default": "enabled"
     },
     "group": "132",
     "$figmaVariableReferences": {}
@@ -6035,8 +5940,7 @@
       "components/checkbox/default": "enabled",
       "components/icon/default": "enabled",
       "components/presence/default": "enabled",
-      "components/radio/default": "enabled",
-      "components/presence/default-prota-deuter": "disabled"
+      "components/radio/default": "enabled"
     },
     "group": "132",
     "$figmaVariableReferences": {}
@@ -6056,8 +5960,7 @@
       "components/checkbox/default": "enabled",
       "components/icon/default": "enabled",
       "components/presence/default": "enabled",
-      "components/radio/default": "enabled",
-      "components/presence/default-prota-deuter": "disabled"
+      "components/radio/default": "enabled"
     },
     "group": "133",
     "$figmaVariableReferences": {}
@@ -6080,8 +5983,7 @@
       "components/checkbox/default": "enabled",
       "components/icon/default": "enabled",
       "components/presence/default": "enabled",
-      "components/radio/default": "enabled",
-      "components/presence/default-prota-deuter": "disabled"
+      "components/radio/default": "enabled"
     },
     "group": "133",
     "$figmaVariableReferences": {}
@@ -6101,8 +6003,7 @@
       "components/checkbox/default": "enabled",
       "components/icon/default": "enabled",
       "components/presence/default": "enabled",
-      "components/radio/default": "enabled",
-      "components/presence/default-prota-deuter": "disabled"
+      "components/radio/default": "enabled"
     },
     "group": "134",
     "$figmaVariableReferences": {}
@@ -6125,8 +6026,7 @@
       "components/checkbox/default": "enabled",
       "components/icon/default": "enabled",
       "components/presence/default": "enabled",
-      "components/radio/default": "enabled",
-      "components/presence/default-prota-deuter": "disabled"
+      "components/radio/default": "enabled"
     },
     "group": "134",
     "$figmaVariableReferences": {}
@@ -6146,8 +6046,7 @@
       "components/checkbox/default": "enabled",
       "components/icon/default": "enabled",
       "components/presence/default": "enabled",
-      "components/radio/default": "enabled",
-      "components/presence/default-prota-deuter": "disabled"
+      "components/radio/default": "enabled"
     },
     "group": "135",
     "$figmaVariableReferences": {}
@@ -6170,8 +6069,7 @@
       "components/checkbox/default": "enabled",
       "components/icon/default": "enabled",
       "components/presence/default": "enabled",
-      "components/radio/default": "enabled",
-      "components/presence/default-prota-deuter": "disabled"
+      "components/radio/default": "enabled"
     },
     "group": "135",
     "$figmaVariableReferences": {}
@@ -6191,8 +6089,7 @@
       "components/checkbox/default": "enabled",
       "components/icon/default": "enabled",
       "components/presence/default": "enabled",
-      "components/radio/default": "enabled",
-      "components/presence/default-prota-deuter": "disabled"
+      "components/radio/default": "enabled"
     },
     "group": "136",
     "$figmaVariableReferences": {}
@@ -6215,8 +6112,7 @@
       "components/checkbox/default": "enabled",
       "components/icon/default": "enabled",
       "components/presence/default": "enabled",
-      "components/radio/default": "enabled",
-      "components/presence/default-prota-deuter": "disabled"
+      "components/radio/default": "enabled"
     },
     "group": "136",
     "$figmaVariableReferences": {}
@@ -6236,8 +6132,7 @@
       "components/checkbox/default": "enabled",
       "components/icon/default": "enabled",
       "components/presence/default": "enabled",
-      "components/radio/default": "enabled",
-      "components/presence/default-prota-deuter": "disabled"
+      "components/radio/default": "enabled"
     },
     "group": "137",
     "$figmaVariableReferences": {}
@@ -6260,8 +6155,7 @@
       "components/checkbox/default": "enabled",
       "components/icon/default": "enabled",
       "components/presence/default": "enabled",
-      "components/radio/default": "enabled",
-      "components/presence/default-prota-deuter": "disabled"
+      "components/radio/default": "enabled"
     },
     "group": "137",
     "$figmaVariableReferences": {}

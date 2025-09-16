@@ -8,5 +8,13 @@
         }
       }
     }
+  },
+  "color": {
+    "foreground": {
+      "success": {
+        "value": "#6D9DFF",
+        "type": "color"
+      }
+    }
   }
 }
