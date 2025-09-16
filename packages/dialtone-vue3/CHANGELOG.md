@@ -1,3 +1,20 @@
+## [3.190.3](https://github.com/dialpad/dialtone/compare/dialtone-vue3/v3.190.2...dialtone-vue3/v3.190.3) (2025-09-16)
+
+
+### Bug Fixes
+
+* **Localization:** DLT-2768  emoji row reaction label warnings ([#911](https://github.com/dialpad/dialtone/issues/911)) ([5a6713d](https://github.com/dialpad/dialtone/commit/5a6713dfd69d55d6dcbb850de48087829417d33c))
+
+
+### Code Refactoring
+
+* **Emoji Picker:** DLT-2776 new prop showAddEmojiButton ([#915](https://github.com/dialpad/dialtone/issues/915)) ([c37911b](https://github.com/dialpad/dialtone/commit/c37911b8f77a7453105f0421f24ac552ca935a88))
+
+
+### Documentation
+
+* NO-JIRA remove names from public docs ([#917](https://github.com/dialpad/dialtone/issues/917)) ([744736f](https://github.com/dialpad/dialtone/commit/744736f09e1086a7f5f7691045677a62cbe4e94c))
+
 ## [3.190.2](https://github.com/dialpad/dialtone/compare/dialtone-vue3/v3.190.1...dialtone-vue3/v3.190.2) (2025-09-09)
 
 
