@@ -1,0 +1,45 @@
+{
+  "priority": {
+    "description": "Priority order when recommending Dialtone solutions",
+    "order": ["component", "utility-class", "token"],
+    "details": {
+      "component": "Always prefer Vue components when available (e.g., DtButton over custom button styling)",
+      "utility-class": "Use utility classes for spacing, layout, and simple styling (e.g., d-pr2 for padding-right)",
+      "token": "Use design tokens for custom implementations or when components/utilities don't exist"
+    }
+  },
+  "colors": {
+    "description": "Color selection guidelines",
+    "preference": "semantic-over-base",
+    "details": {
+      "semantic": "Prefer semantic color tokens (e.g., --dt-color-foreground-primary) over base colors",
+      "base": "Use base color tokens (e.g., --dt-color-purple-400) only when semantic colors don't fit the use case",
+      "examples": {
+        "good": ["--dt-color-foreground-primary", "--dt-color-background-success", "--dt-color-border-critical"],
+        "avoid": ["--dt-color-purple-400", "--dt-color-red-500", "--dt-color-blue-300"]
+      }
+    }
+  },
+  "typography": {
+    "description": "Typography selection guidelines",
+    "preference": "typography-over-text-styles",
+    "details": {
+      "typography": "Prefer typography utility classes (e.g., d-body--md-compact) or typography tokens (e.g., --dt-typography-body-md) for complete text styling",
+      "text-styles": "Use individual text style tokens (e.g., --dt-font-size-200) only for fine-tuned control",
+      "examples": {
+        "good": ["d-body--md-compact", "--dt-typography-heading-lg", "--dt-typography-body-sm", "--dt-typography-label-md"],
+        "avoid": ["d-fs-200 d-lh-100", "--dt-font-size-300 + --dt-line-height-400 + --dt-font-weight-medium"]
+      }
+    }
+  },
+  "search": {
+    "description": "How to search Dialtone documentation effectively",
+    "tips": [
+      "Search by CSS property names (e.g., 'padding-right', 'margin-bottom')",
+      "Search by class name patterns (e.g., 'pr2', 'mb4', 'd-flex')",
+      "Search by component names (e.g., 'DtButton', 'DtModal')",
+      "Search by design token names (e.g., 'space-200', 'color-primary')",
+      "Use specific technical terms rather than natural language"
+    ]
+  }
+}
