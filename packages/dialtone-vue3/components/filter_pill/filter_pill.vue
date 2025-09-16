@@ -37,7 +37,7 @@
           <span class="d-filter-pill__label">
             <!-- @slot Allows you to override the label, only use this if you need to override with something other
             than text. Otherwise use the "label" prop. -->
-            <slot name="label">
+            <slot>
               <span class="d-filter-pill__label-alpha">{{ label }}</span>
               <span
                 v-if="activeFilterCount"

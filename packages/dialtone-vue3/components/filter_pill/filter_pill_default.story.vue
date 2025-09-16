@@ -18,6 +18,9 @@
     @clear="$attrs.onClear"
     @open="$attrs.onOpen"
   >
+    <template v-if="defaultSlot">
+      <span v-html="defaultSlot" />
+    </template>
     <template
       v-if="$attrs.content"
       #content

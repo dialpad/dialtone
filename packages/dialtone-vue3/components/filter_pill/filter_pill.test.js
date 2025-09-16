@@ -7,11 +7,10 @@ const MOCK_CLEAR_STUB = vi.fn();
 
 const MOCK_LABEL = 'Filter pill label';
 const MOCK_CONTENT = 'Popover content';
+const MOCK_DEFAULT_SLOT = 'Default slot';
 
 const baseProps = {};
-const baseSlots = {
-  default: `<span>${MOCK_CONTENT}</span>`,
-};
+const baseSlots = {};
 
 const baseAttrs = {
   onOpen: MOCK_OPEN_STUB,
@@ -112,6 +111,16 @@ describe('DtFilterPill Tests', function () {
         updateWrapper();
 
         expect(clearButton.exists()).toBe(true);
+      });
+    });
+
+    describe('When default slot is set', () => {
+      it('Should render custom label', () => {
+        mockSlots = { default: MOCK_DEFAULT_SLOT };
+
+        updateWrapper();
+
+        expect(wrapper.html()).toContain(MOCK_DEFAULT_SLOT);
       });
     });
   });
