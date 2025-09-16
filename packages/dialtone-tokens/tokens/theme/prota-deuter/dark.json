@@ -1,0 +1,12 @@
+{
+  "shell": {
+    "base": {
+      "color": {
+        "surface": {
+          "value": "#222226",
+          "type": "color"
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,38 @@
+{
+  "shell": {
+    "base": {
+      "color": {
+        "surface": {
+          "value": "#EDF3FF",
+          "type": "color"
+        },
+        "foreground": {
+          "value": "{color.indigo.1000}",
+          "type": "color"
+        },
+        "border": {
+          "value": "{color.indigo.1000}",
+          "type": "color"
+        },
+        "accent": {
+          "value": "#0058FB",
+          "type": "color"
+        },
+        "action": {
+          "value": "{color.indigo.950}",
+          "type": "color"
+        }
+      }
+    },
+    "mention": {
+      "color": {
+        "foreground": {
+          "primary": {
+            "value": "{color.neutral.white}",
+            "type": "color"
+          }
+        }
+      }
+    }
+  }
+}

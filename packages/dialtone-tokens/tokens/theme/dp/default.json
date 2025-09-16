@@ -3961,19 +3961,19 @@
       "color": {
         "background": {
           "available": {
-            "value": "{color.green.425}",
+            "value": "{presence.color.available}",
             "type": "color"
           },
           "busy-unavailable": {
-            "value": "{color.red.500}",
+            "value": "{presence.color.unavailable}",
             "type": "color"
           },
           "busy": {
-            "value": "{color.gold.500}",
+            "value": "{presence.color.busy}",
             "type": "color"
           },
           "offline": {
-            "value": "{color.black.500}",
+            "value": "{presence.color.offline}",
             "type": "color"
           }
         }
@@ -4024,15 +4024,15 @@
           "type": "color"
         },
         "status-positive": {
-          "value": "{color.green.425}",
+          "value": "{color.foreground.success}",
           "type": "color"
         },
         "status-critical": {
-          "value": "{color.red.500}",
+          "value": "{color.foreground.critical}",
           "type": "color"
         },
         "status-warning": {
-          "value": "{color.gold.500}",
+          "value": "{color.foreground.warning}",
           "type": "color"
         },
         "status-away": {
@@ -4475,19 +4475,19 @@
     "presence": {
       "color": {
         "available": {
-          "value": "{shell.base.color.status-positive}",
+          "value": "{presence.color.available}",
           "type": "color"
         },
         "unavailable": {
-          "value": "{shell.base.color.status-critical}",
+          "value": "{presence.color.unavailable}",
           "type": "color"
         },
         "busy": {
-          "value": "{shell.base.color.status-warning}",
+          "value": "{presence.color.busy}",
           "type": "color"
         },
         "offline": {
-          "value": "{shell.base.color.status-away}",
+          "value": "{presence.color.offline}",
           "type": "color"
         }
       }
