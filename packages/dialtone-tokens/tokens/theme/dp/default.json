@@ -4463,7 +4463,7 @@
     "logo": {
       "color": {
         "star": {
-          "value": "{color.purple.400}",
+          "value": "{color.surface.brand.strong}",
           "type": "color"
         },
         "wordmark": {
