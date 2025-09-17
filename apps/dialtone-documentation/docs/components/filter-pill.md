@@ -163,25 +163,28 @@ to create custom filter pill.
 <code-well-header>
   <dt-stack direction="row" gap="400">
     <dt-filter-pill
-      label="With content slot"
-      ref="clearableExample"
-      v-model="contentSlotFilters"
+      :label="selectedContentFilter || 'Select an option'"
+      ref="contentSlotExample"
+      v-model="contentSlotFiltersArray"
     >
-      <template #content>
-        Content slot example
+      <template #content="{ close }">
+        <dt-list-item
+          v-for="filter in contentSlotFilters"
+          :key="filter.name"
+          role="menuitem"
+          :selected="selectedContentFilter === filter.name"
+          @click="() => {
+            selectedContentFilter = filter.name;
+            contentSlotFiltersArray = [{name: filter.name, active: true}];
+            close();
+          }"
+        >
+          {{ filter.name }}
+        </dt-list-item>
       </template>
     </dt-filter-pill>
   </dt-stack>
 </code-well-header>
-
-<code-example-tabs
-:htmlCode='() => $refs.clearableExample'
-vueCode='<dt-filter-pill label="..." v-model="[...]">
-  <template #content>
-    Content slot example
-  </template>
-</dt-filter-pill>'
-showHtmlWarning />
 
 ## Vue API
 
@@ -230,7 +233,12 @@ const defaultSlotFilters = ref([
 const contentSlotFilters = ref([
   {name: 'Option 1'},
   {name: 'Option 2'},
+  {name: 'Option 3'},
+  {name: 'Option 4'},
 ]);
+const selectedContentFilter = ref(null);
+// Initialize with dummy data to satisfy filter pill validation
+const contentSlotFiltersArray = ref([{name: '', active: false}]);
 const sizes = Object.keys(window.DIALTONE_CONSTANTS.BUTTON_SIZE_MODIFIERS);
 const sizeNames = {
   xs: 'Extra small',
