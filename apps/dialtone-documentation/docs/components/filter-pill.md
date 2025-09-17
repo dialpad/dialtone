@@ -163,23 +163,39 @@ to create custom filter pill.
 <code-well-header>
   <dt-stack direction="row" gap="400">
     <dt-filter-pill
-      :label="selectedContentFilter || 'Select an option'"
+      :label="selectedContentFilter"
       ref="contentSlotExample"
       v-model="contentSlotFiltersArray"
+      popover-padding="small"
     >
       <template #content="{ close }">
         <dt-list-item
           v-for="filter in contentSlotFilters"
           :key="filter.name"
+          :id="`content-filter-${filter.name}`"
           role="menuitem"
-          :selected="selectedContentFilter === filter.name"
+          element-type="li"
+          type="default"
+          navigation-type="arrow-keys"
           @click="() => {
             selectedContentFilter = filter.name;
             contentSlotFiltersArray = [{name: filter.name, active: true}];
             close();
           }"
         >
-          {{ filter.name }}
+          <template v-if="filter.icon" #left>
+            <component :is="filter.icon" size="300" />
+          </template>
+          <span>{{ filter.name }}</span>
+          <template v-if="filter.subtitle" #subtitle>
+            {{ filter.subtitle }}
+          </template>
+          <template #right>
+            <dt-icon-check
+              size="200"
+              :class="selectedContentFilter === filter.name ? '' : 'd-o0'"
+            />
+          </template>
         </dt-list-item>
       </template>
     </dt-filter-pill>
@@ -196,7 +212,15 @@ to create custom filter pill.
 
 <script setup>
 import { ref, computed } from 'vue';
-import { DtIconSearch, DtIconClose } from '@dialpad/dialtone-icons/vue3';
+import {
+  DtIconSearch,
+  DtIconClose,
+  DtIconCheck,
+  DtIconGrid,
+  DtIconCheckCircle,
+  DtIconArchive,
+  DtIconClock
+} from '@dialpad/dialtone-icons/vue3';
 
 const inputValue = ref('');
 const exampleFilters = ref([
@@ -231,14 +255,14 @@ const defaultSlotFilters = ref([
   {name: 'Grapes'},
 ]);
 const contentSlotFilters = ref([
-  {name: 'Option 1'},
-  {name: 'Option 2'},
-  {name: 'Option 3'},
-  {name: 'Option 4'},
+  {name: 'All Items', subtitle: 'Show everything', icon: DtIconGrid},
+  {name: 'Active Only', subtitle: 'Show only active items', icon: DtIconCheckCircle},
+  {name: 'Archived', subtitle: 'Show archived items', icon: DtIconArchive},
+  {name: 'Recent', subtitle: 'Last 30 days', icon: DtIconClock},
 ]);
-const selectedContentFilter = ref(null);
+const selectedContentFilter = ref('All Items');
 // Initialize with dummy data to satisfy filter pill validation
-const contentSlotFiltersArray = ref([{name: '', active: false}]);
+const contentSlotFiltersArray = ref([{name: 'All Items', active: true}]);
 const sizes = Object.keys(window.DIALTONE_CONSTANTS.BUTTON_SIZE_MODIFIERS);
 const sizeNames = {
   xs: 'Extra small',
