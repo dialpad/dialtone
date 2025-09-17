@@ -41,10 +41,10 @@ export default defineClientConfig({
     if (!__VUEPRESS_SSR__) {
       await initOverlayScrollbars();
       await registerDialtoneVue(app);
-      await registerDialtoneCombinator(app);
+    //   await registerDialtoneCombinator(app);
       await registerDialtoneIcons(app);
       await importDocumentation(app);
-      importDialtoneThemes(app);
+      await importDialtoneThemes(app);
     }
     router.options.scrollBehavior = async (to) => {
       if (to.hash) {
@@ -117,10 +117,10 @@ async function registerDialtoneVue (app) {
   setCustomEmojiJson(customEmojis);
 }
 
-async function registerDialtoneCombinator (app) {
- const { DtcCombinator } = await import('@dialpad/dialtone-combinator');
- app.component('DtcCombinator', DtcCombinator);
-}
+// async function registerDialtoneCombinator (app) {
+//  const { DtcCombinator } = await import('@dialpad/dialtone-combinator');
+//  app.component('DtcCombinator', DtcCombinator);
+// }
 
 async function registerDialtoneIcons (app) {
   const icons = await import('@dialpad/dialtone-icons/vue3');
@@ -155,17 +155,21 @@ async function importDocumentation (app) {
   }
 }
 
-function importDialtoneThemes (app) {
-  const dialtoneThemeFiles = import.meta.globEager('../../../node_modules/@dialpad/dialtone-tokens/dist/themes/*.js')
-  const themes = {};
-  const excludedThemeImports = ['config', 'debug']
+async function importDialtoneThemes (app) {
+  try {
+    const dialtoneThemeFiles = {
+      '@dialpad/dialtone-tokens/themes/dp-light.js': (await import('@dialpad/dialtone-tokens/themes/dp-light')),
+      '@dialpad/dialtone-tokens/themes/dp-dark.js': (await import('@dialpad/dialtone-tokens/themes/dp-dark')),
+  };
+    const themes = {};
 
-  for (const path in dialtoneThemeFiles) {
-    const themeName = path.split('/').pop().split('.').shift();
+    for (const path in dialtoneThemeFiles) {
+      const themeName = path.split('/').pop().split('.').shift();
 
-    if (excludedThemeImports.includes(themeName)) continue;
-
-    themes[themeName] = dialtoneThemeFiles[path].default;
+      themes[themeName] = dialtoneThemeFiles[path].default;
+    }
+    app.provide('themes', themes)
+  } catch(error) {
+    console.error(`Couldn't import dialtone themes: ${error}`);
   }
-  app.provide('themes', themes)
 }

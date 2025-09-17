@@ -1,16 +1,16 @@
-import { viteCommonjs } from '@originjs/vite-plugin-commonjs';
-import { defineUserConfig } from 'vuepress';
-import { getDirname } from '@vuepress/utils';
 import { viteBundler } from '@vuepress/bundler-vite';
+import { defineUserConfig } from 'vuepress'
+// import { viteCommonjs } from '@originjs/vite-plugin-commonjs';
+// import { getDirname } from '@vuepress/utils';
 import viteSvgLoader from 'vite-svg-loader';
-import { googleAnalyticsPlugin } from '@vuepress/plugin-google-analytics';
-import { seoPlugin } from 'vuepress-plugin-seo2';
+// import { googleAnalyticsPlugin } from '@vuepress/plugin-google-analytics';
+// import { seoPlugin } from 'vuepress-plugin-seo2';
 import anchor from 'markdown-it-anchor';
 import path from 'path';
 
 const sidebar = require('../_data/site-nav.json');
 const { dialtoneVuepressTheme } = require('./theme');
-const siteURL = 'https://dialtone.dialpad.com';
+// const siteURL = 'https://dialtone.dialpad.com';
 const baseURL = (process.env.VUEPRESS_BASE_URL ?? '/');
 
 const themeConfig = {
@@ -31,7 +31,7 @@ const themeConfig = {
   contributors: false,
 };
 
-const __dirname = getDirname(import.meta.url);
+const __dirname = import.meta.url;
 
 export default defineUserConfig({
   // site config
@@ -48,11 +48,14 @@ export default defineUserConfig({
   bundler: viteBundler({
     viteOptions: {
       build: {
-        sourcemap: true,
+        sourcemap: false,
       },
-      plugins: [viteSvgLoader({ svgo: false }), viteCommonjs()],
+      plugins: [
+        viteSvgLoader({ svgo: false }),
+        // viteCommonjs()
+      ],
       css: {
-        devSourcemap: true,
+        devSourcemap: false,
       },
       resolve: {
         alias: {
@@ -61,7 +64,7 @@ export default defineUserConfig({
         },
       },
       define: {
-        __VUE_PROD_HYDRATION_MISMATCH_DETAILS__: false,
+        // __VUE_PROD_HYDRATION_MISMATCH_DETAILS__: false,
       },
     },
     vuePluginOptions: {
@@ -96,9 +99,6 @@ export default defineUserConfig({
         class: 'header-anchor d-link',
       }),
     },
-    code: {
-      lineNumbers: false,
-    },
     headers: {
       level: [2, 3], // Generated data header levels (used for toc)
     },
@@ -117,15 +117,15 @@ export default defineUserConfig({
   },
 
   plugins: [
-    googleAnalyticsPlugin({
-      id: 'G-0YV8QJ44LF',
-    }),
-    seoPlugin({
-      hostname: siteURL,
-      ogp: (ogp, page) => ({
-        ...ogp,
-        'og:image': siteURL + baseURL + page.frontmatter.image || ogp['og:image'],
-      }),
-    }),
+    // googleAnalyticsPlugin({
+    //   id: 'G-0YV8QJ44LF',
+    // }),
+    // seoPlugin({
+    //   hostname: siteURL,
+    //   ogp: (ogp, page) => ({
+    //     ...ogp,
+    //     'og:image': siteURL + baseURL + page.frontmatter.image || ogp['og:image'],
+    //   }),
+    // }),
   ],
 });

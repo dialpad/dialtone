@@ -10,16 +10,18 @@
     <template #header>
       <div class="dialtone-header">
         <dialtone-logo />
-        <navbar
-          v-if="!isMobile"
-          :items="navbarLinks"
-          @search="openSearch"
-        />
-        <mobile-navbar
-          v-else
-          :items="navbarLinks"
-          @search="openSearch"
-        />
+        <client-only>
+          <navbar
+            v-if="!isMobile"
+            :items="navbarLinks"
+            @search="openSearch"
+          />
+          <mobile-navbar
+            v-else
+            :items="navbarLinks"
+            @search="openSearch"
+          />
+        </client-only>
         <mobile-sidebar
           v-if="isMobile && route.path !== '/'"
         />
@@ -57,6 +59,7 @@ import Page from '../components/Page.vue';
 import MobileNavbar from '../components/MobileNavbar.vue';
 import MobileSidebar from '../components/MobileSidebar.vue';
 import { computed, ref, watch, onMounted } from 'vue';
+import { ClientOnly } from '@vuepress/client';
 import { useRoute } from 'vue-router';
 import { useThemeLocaleData } from '@vuepress/plugin-theme-data/client';
 import DialtoneLogo from '../components/DialtoneLogo.vue';
@@ -85,7 +88,7 @@ const currentItems = computed(() => {
 });
 
 // Finds the current item
-// eslint-disable-next-line complexity
+
 const findCurrent = () => {
   if (!currentItems.value) return;
 
