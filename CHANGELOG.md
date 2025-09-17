@@ -1,3 +1,15 @@
+# [9.139.0-next.2](https://github.com/dialpad/dialtone/compare/dialtone/v9.139.0-next.1...dialtone/v9.139.0-next.2) (2025-09-17)
+
+
+### Bug Fixes
+
+* **Mcp Server:** NO-JIRA publish package ([#922](https://github.com/dialpad/dialtone/issues/922)) ([5bbb725](https://github.com/dialpad/dialtone/commit/5bbb725c55615dced8958e687752a610898a663d))
+
+
+### Features
+
+* **Mcp Server:** DLT-2708 add JSON context to MCP server ([#918](https://github.com/dialpad/dialtone/issues/918)) ([d2221b4](https://github.com/dialpad/dialtone/commit/d2221b4e3a5262f71324fa2e1dfff3b8df91eac5))
+
 # [9.139.0-next.1](https://github.com/dialpad/dialtone/compare/dialtone/v9.138.0...dialtone/v9.139.0-next.1) (2025-09-17)
 
 
