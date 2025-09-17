@@ -1,3 +1,23 @@
+# [9.139.0-next.1](https://github.com/dialpad/dialtone/compare/dialtone/v9.138.0...dialtone/v9.139.0-next.1) (2025-09-17)
+
+
+### Bug Fixes
+
+* **Emoji Row:** DP-157752 make emoji always appear on top  ([#920](https://github.com/dialpad/dialtone/issues/920)) ([dc2fb80](https://github.com/dialpad/dialtone/commit/dc2fb80ab502f738aa24cb3e3db661d247453456))
+* **Leftbar Row:** DP-157563 call button wrong color on hover ([#919](https://github.com/dialpad/dialtone/issues/919)) ([5b77095](https://github.com/dialpad/dialtone/commit/5b770959a61cfb0772f965dc8dfd7700f8bcaf6d))
+
+
+### Code Refactoring
+
+* **Css:** DLT-1876 css logical properties ([#872](https://github.com/dialpad/dialtone/issues/872)) ([1acd6c9](https://github.com/dialpad/dialtone/commit/1acd6c900053b0c820309faa4a870ff1dceced04))
+
+
+### Features
+
+* **Css Utility:** DLT-2715 add default color for border css utilities ([#874](https://github.com/dialpad/dialtone/issues/874)) ([71310ab](https://github.com/dialpad/dialtone/commit/71310ab483fde976d56c69e0456bce70cb6d372d))
+* **Tokens:** DLT-2767 exploratory shell themes ([#909](https://github.com/dialpad/dialtone/issues/909)) ([3afcf63](https://github.com/dialpad/dialtone/commit/3afcf637d136733ff2f981a9ebbb63a3c4a37c99))
+* **Tokens:** DLT-2781 create color-assistive themes ([#921](https://github.com/dialpad/dialtone/issues/921)) ([a6cc397](https://github.com/dialpad/dialtone/commit/a6cc397bec52987f9ac2c3efca9b16f61c406807))
+
 # [9.138.0](https://github.com/dialpad/dialtone/compare/dialtone/v9.137.0...dialtone/v9.138.0) (2025-09-16)
 
 
