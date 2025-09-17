@@ -8,6 +8,10 @@
       "busy": {
         "value": "{color.gold.500}",
         "type": "color"
+      },
+      "available": {
+        "value": "#5CB8FF",
+        "type": "color"
       }
     }
   }

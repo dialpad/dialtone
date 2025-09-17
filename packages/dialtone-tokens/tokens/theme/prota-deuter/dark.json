@@ -11,6 +11,16 @@
           "type": "color"
         }
       }
+    },
+    "mention": {
+      "color": {
+        "foreground": {
+          "primary": {
+            "value": "{color.neutral.black}",
+            "type": "color"
+          }
+        }
+      }
     }
   },
   "color": {

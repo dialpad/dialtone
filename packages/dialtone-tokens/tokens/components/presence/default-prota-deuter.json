@@ -12,10 +12,6 @@
       "busy": {
         "value": "{color.gold.400}",
         "type": "color"
-      },
-      "offline": {
-        "value": "{color.black.500}",
-        "type": "color"
       }
     }
   }
