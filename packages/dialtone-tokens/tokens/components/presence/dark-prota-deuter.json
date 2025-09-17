@@ -1,10 +1,6 @@
 {
   "presence": {
     "color": {
-      "available": {
-        "value": "#3F7AFF",
-        "type": "color"
-      },
       "unavailable": {
         "value": "{color.magenta.425}",
         "type": "color"

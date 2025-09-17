@@ -5,14 +5,18 @@
         "surface": {
           "value": "#222226",
           "type": "color"
+        },
+        "accent": {
+          "value": "#5CB8FF",
+          "type": "color"
         }
       }
     }
   },
   "color": {
     "foreground": {
-      "success": {
-        "value": "#6D9DFF",
+      "warning": {
+        "value": "{color.gold.500}",
         "type": "color"
       }
     }
