@@ -15,22 +15,12 @@
           "type": "color"
         },
         "accent": {
-          "value": "#0058FB",
+          "value": "#1E6EF4",
           "type": "color"
         },
         "action": {
           "value": "{color.indigo.950}",
           "type": "color"
-        }
-      }
-    },
-    "mention": {
-      "color": {
-        "foreground": {
-          "primary": {
-            "value": "{color.neutral.white}",
-            "type": "color"
-          }
         }
       }
     }
@@ -43,6 +33,10 @@
       },
       "success": {
         "value": "{shell.base.color.accent}",
+        "type": "color"
+      },
+      "warning": {
+        "value": "#D55E00",
         "type": "color"
       }
     }

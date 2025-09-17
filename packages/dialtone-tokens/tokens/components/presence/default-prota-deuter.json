@@ -1,0 +1,18 @@
+{
+  "presence": {
+    "color": {
+      "available": {
+        "value": "#1E6EF4",
+        "type": "color"
+      },
+      "unavailable": {
+        "value": "{color.magenta.425}",
+        "type": "color"
+      },
+      "busy": {
+        "value": "{color.gold.400}",
+        "type": "color"
+      }
+    }
+  }
+}

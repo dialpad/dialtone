@@ -5,7 +5,41 @@
         "surface": {
           "value": "#222226",
           "type": "color"
+        },
+        "accent": {
+          "value": "#5CB8FF",
+          "type": "color"
         }
+      }
+    },
+    "logo": {
+      "color": {
+        "star": {
+          "value": "{color.purple.1000}",
+          "type": "color"
+        },
+        "wordmark": {
+          "value": "{color.purple.1000}",
+          "type": "color"
+        }
+      }
+    },
+    "mention": {
+      "color": {
+        "foreground": {
+          "primary": {
+            "value": "{color.neutral.black}",
+            "type": "color"
+          }
+        }
+      }
+    }
+  },
+  "color": {
+    "foreground": {
+      "warning": {
+        "value": "{color.gold.500}",
+        "type": "color"
       }
     }
   }
