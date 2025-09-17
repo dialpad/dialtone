@@ -1,3 +1,15 @@
+# [1.47.0-next.2](https://github.com/dialpad/dialtone/compare/dialtone-tokens/v1.47.0-next.1...dialtone-tokens/v1.47.0-next.2) (2025-09-17)
+
+
+### Bug Fixes
+
+* **Tokens:** DLT-2766 sunflower dark and correct shell base references ([#908](https://github.com/dialpad/dialtone/issues/908)) ([a44aa57](https://github.com/dialpad/dialtone/commit/a44aa577c5117efd3f6e8318be8aadbd0c333375))
+
+
+### Features
+
+* **Tokens:** DLT-2781 create color-assistive themes ([#921](https://github.com/dialpad/dialtone/issues/921)) ([a6cc397](https://github.com/dialpad/dialtone/commit/a6cc397bec52987f9ac2c3efca9b16f61c406807))
+
 ## [1.46.1](https://github.com/dialpad/dialtone/compare/dialtone-tokens/v1.46.0...dialtone-tokens/v1.46.1) (2025-09-10)
 
 
