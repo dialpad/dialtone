@@ -5,6 +5,7 @@
     :custom-emojis="$attrs.customEmojis"
     :search-query="$attrs.searchQuery"
     :show-search="$attrs.showSearch"
+    :show-add-emoji-button="$attrs.showAddEmojiButton"
     @skin-tone="skinTone = $event"
     @selected-emoji="$attrs.selectedEmoji"
     @scroll-bottom-reached="$attrs.scrollBottomReached"

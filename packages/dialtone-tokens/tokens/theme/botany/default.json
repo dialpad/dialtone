@@ -3,7 +3,7 @@
     "base": {
       "color": {
         "surface": {
-          "value": "#E6EBDB",
+          "value": "#E9EEDE",
           "type": "color"
         },
         "border": {
@@ -13,24 +13,10 @@
         "accent": {
           "value": "#6633BB",
           "type": "color"
-        }
-      },
-      "action": {
-        "color": {
-          "background": {
-            "primary": {
-              "value": "#0d6d4c",
-              "type": "color"
-            },
-            "secondary": {
-              "value": "#0d6d4c",
-              "type": "color"
-            },
-            "muted": {
-              "value": "#0d6d4c",
-              "type": "color"
-            }
-          }
+        },
+        "action": {
+          "value": "#396752",
+          "type": "color"
         }
       }
     }

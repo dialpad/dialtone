@@ -1,67 +1,78 @@
 <template>
-  <div class="dtc-option-bar d-as-stretch d-of-y-auto d-w100p">
-    <ul class="d-ls-reset">
-      <dtc-section
-        v-if="info.slots"
-        heading="Slots"
-        content-class="d-px12"
+  <section
+    v-dt-scrollbar
+    class="dialtone-playground__controls"
+  >
+    <dt-stack gap="500">
+      <dt-stack
+        gap="500"
+        direction="row"
+        class="d-mtn8 d-mbn8 d-mrn4 d-d-none md:d-d-flex"
       >
+        <h2
+          class="d-fl1"
+          :class="isFullscreen ? 'd-headline--lg' : 'd-headline--md'"
+        >
+          Button
+        </h2>
+        <dt-button
+          v-dt-tooltip="`Fullscreen`"
+          kind="muted"
+          importance="clear"
+          size="sm"
+          @click="toggleFullScreen"
+        >
+          <template #icon="{ iconSize }">
+            <dt-icon-minimize
+              v-if="isFullscreen"
+              :size="iconSize"
+            />
+            <dt-icon-expand
+              v-else
+              :size="iconSize"
+            />
+          </template>
+        </dt-button>
+      </dt-stack>
+      <dt-stack
+        gap="500"
+      >
+        <!-- Slots -->
         <dtc-option-bar-member-group
           :component="component"
+          :control-selector="getSlotControls"
           :members="info.slots"
           :values="options.slots"
-          :control-selector="getSlotControls"
           @update:member="updateSlots"
         />
-      </dtc-section>
-      <dtc-section
-        v-if="info.props"
-        heading="Props"
-        content-class="d-px12"
-      >
+        <!-- Props -->
         <dtc-option-bar-member-group
           :component="component"
+          :control-selector="(prop, value) => getBindingControls(prop, value, 'null')"
           :members="info.props"
           :values="options.props"
-          :control-selector="(prop, value) => getBindingControls(prop, value, 'null')"
           @update:member="updateProps"
         />
-      </dtc-section>
-      <dtc-section
-        v-if="info.attributes"
-        heading="Native HTML Attributes"
-        content-class="d-px12"
-      >
-        <dtc-option-bar-member-group
-          :component="component"
-          :members="info.attributes"
-          :values="options.attributes"
-          :control-selector="(attribute, value) => getBindingControls(attribute, value)"
-          @update:member="updateAttributes"
-        />
-      </dtc-section>
-      <dtc-section
-        v-if="info.events"
-        heading="Events"
-        content-class="d-px12"
-      >
-        <dtc-option-bar-member-group
+        <!-- Events -->
+        <!--<dtc-option-bar-member-group
           :component="component"
           :members="info.events"
           :values="options.events"
           :control-selector="getEventControls"
-        />
-      </dtc-section>
-    </ul>
-  </div>
+        />-->
+      </dt-stack>
+    </dt-stack>
+  </section>
 </template>
 
 <script setup>
 import DtcOptionBarMemberGroup from './option_bar_member_group.vue';
-import DtcSection from '../tools/section.vue';
-
+import { ref } from 'vue';
 import { OPTIONS_UPDATE_EVENT } from '@/src/lib/constants';
 import { getControlByMemberType, getControlByValue } from '@/src/lib/control';
+import { DtButton, DtStack } from '@dialpad/dialtone-vue';
+import DtIconMinimize from '@dialpad/dialtone-icons/vue3/minimize';
+import DtIconExpand from '@dialpad/dialtone-icons/vue3/expand';
 
 defineProps({
   /**
@@ -87,7 +98,14 @@ defineProps({
   },
 });
 
-const emit = defineEmits([OPTIONS_UPDATE_EVENT]);
+const emit = defineEmits([OPTIONS_UPDATE_EVENT, 'toggle-full-screen']);
+
+const isFullscreen = ref(false);
+
+const toggleFullScreen = () => {
+  isFullscreen.value = !isFullscreen.value;
+  emit('toggle-full-screen', isFullscreen.value);
+}
 
 /**
  * Gets an array of controls for a binding.
@@ -117,9 +135,9 @@ function getSlotControls () {
   return getStaticControl('slot');
 }
 
-function getEventControls () {
-  return getStaticControl('event');
-}
+// function getEventControls () {
+//   return getStaticControl('event');
+// }
 
 /**
  * Forces a singular default control and valid control.
@@ -149,9 +167,17 @@ function updateMember (memberGroup, { member, value }) {
   });
 }
 
-function updateSlots (e) { updateMember('slots', e); }
-function updateProps (e) { updateMember('props', e); }
-function updateAttributes (e) { updateMember('attributes', e); }
+function updateSlots (e) {
+  updateMember('slots', e);
+}
+
+function updateProps (e) {
+  updateMember('props', e);
+}
+
+// function updateAttributes (e) {
+//   updateMember('attributes', e);
+// }
 </script>
 
 <script>
@@ -163,10 +189,3 @@ export default {
   name: 'DtcOptionBar',
 };
 </script>
-
-<style>
-  .dtc-option-bar {
-    background-color: #FCFCFC;
-    color-scheme: light;
-  }
-</style>

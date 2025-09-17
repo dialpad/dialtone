@@ -380,100 +380,6 @@ vueCode='
 '
 showHtmlWarning />
 
-## Loading
-
-Loading buttons are useful for communicating a delay between the button interaction and its action taking place. Every button style can accept the loading button class, though we only provide a few possible examples.
-
-<code-well-header>
-  <dt-stack
-    gap="600"
-    :direction="{ 'default': 'column', 'md': 'row' }"
-  >
-    <dt-stack direction="row" gap="400">
-      <dt-button loading> Place Call </dt-button>
-      <dt-button v-dt-tooltip="`Tooltip`" loading>
-        <template #icon>
-          <dt-icon
-            name="phone"
-            size="300"
-          />
-        </template>
-      </dt-button>
-      <dt-button v-dt-tooltip="`Tooltip`" circle loading>
-        <template #icon>
-          <dt-icon
-            name="phone"
-            size="300"
-          />
-        </template>
-      </dt-button>
-    </dt-stack>
-    <dt-stack direction="row" gap="400">
-      <dt-button kind="muted" importance="outlined" loading> Place Call </dt-button>
-      <dt-button kind="muted" importance="outlined" v-dt-tooltip="`Tooltip`" loading>
-        <template #icon>
-          <dt-icon
-            name="phone"
-            size="300"
-          />
-        </template>
-      </dt-button>
-      <dt-button kind="muted" importance="outlined" v-dt-tooltip="`Tooltip`" circle loading>
-        <template #icon>
-          <dt-icon
-            name="phone"
-            size="300"
-          />
-        </template>
-      </dt-button>
-    </dt-stack>
-  </dt-stack>
-</code-well-header>
-
-<code-example-tabs
-htmlCode='
-<button class="d-btn d-btn--loading d-btn--primary" type="button"><span class="d-btn__label">Place Call</span></button>
-<button class="d-btn d-btn--loading d-btn--outlined" type="button"><span class="d-btn__label">Place Call</span></button>
-<button class="d-btn d-btn--danger d-btn--loading" type="button"><span class="d-btn__label">Place Call</span></button>
-'
-vueCode='
-<dt-button loading> Place Call </dt-button>
-<dt-button v-dt-tooltip="`Tooltip`" loading>
-  <template #icon>
-    <dt-icon
-      name="phone"
-      size="300"
-    />
-  </template>
-</dt-button>
-<dt-button v-dt-tooltip="`Tooltip`" circle loading>
-  <template #icon>
-    <dt-icon
-      name="phone"
-      size="300"
-    />
-  </template>
-</dt-button>
-<dt-button kind="muted" importance="outlined" loading> Place Call </dt-button>
-<dt-button kind="muted" importance="outlined" v-dt-tooltip="`Tooltip`" loading>
-  <template #icon>
-    <dt-icon
-      name="phone"
-      size="300"
-    />
-  </template>
-</dt-button>
-<dt-button kind="muted" importance="outlined" v-dt-tooltip="`Tooltip`" circle loading>
-  <template #icon>
-    <dt-icon
-      name="phone"
-      size="300"
-    />
-  </template>
-</dt-button>
-'
-showHtmlWarning />
-
 ## Icon Support
 
 ### Icon and Label
@@ -1043,6 +949,183 @@ vueCode='
       name="phone"
       size="300"
     />
+  </template>
+</dt-button>
+'
+showHtmlWarning />
+
+## Loading
+
+Loading buttons are useful for communicating a delay between the button interaction and its action taking place. Every button style can accept the loading button class, though we only provide a few possible examples.
+
+### Replace button label
+
+The width of the button remains determined by the length of the label, which is visually hidden in this state.
+
+<code-well-header>
+  <dt-stack
+    gap="600"
+    :direction="{ 'default': 'column', 'md': 'row' }"
+  >
+    <dt-stack direction="row" gap="400">
+      <dt-button loading> Place Call </dt-button>
+      <dt-button v-dt-tooltip="`Tooltip`" loading>
+        <template #icon>
+          <dt-icon
+            name="phone"
+            size="300"
+          />
+        </template>
+      </dt-button>
+      <dt-button v-dt-tooltip="`Tooltip`" circle loading>
+        <template #icon>
+          <dt-icon
+            name="phone"
+            size="300"
+          />
+        </template>
+      </dt-button>
+    </dt-stack>
+    <dt-stack direction="row" gap="400">
+      <dt-button kind="muted" importance="outlined" loading> Place Call </dt-button>
+      <dt-button kind="muted" importance="outlined" v-dt-tooltip="`Tooltip`" loading>
+        <template #icon>
+          <dt-icon
+            name="phone"
+            size="300"
+          />
+        </template>
+      </dt-button>
+      <dt-button kind="muted" importance="outlined" v-dt-tooltip="`Tooltip`" circle loading>
+        <template #icon>
+          <dt-icon
+            name="phone"
+            size="300"
+          />
+        </template>
+      </dt-button>
+    </dt-stack>
+  </dt-stack>
+</code-well-header>
+
+<code-example-tabs
+htmlCode='
+<button class="d-btn d-btn--loading d-btn--primary" type="button"><span class="d-btn__label">Place Call</span></button>
+<button class="d-btn d-btn--loading d-btn--outlined" type="button"><span class="d-btn__label">Place Call</span></button>
+<button class="d-btn d-btn--danger d-btn--loading" type="button"><span class="d-btn__label">Place Call</span></button>
+'
+vueCode='
+<dt-button loading> Place Call </dt-button>
+<dt-button v-dt-tooltip="`Tooltip`" loading>
+  <template #icon>
+    <dt-icon
+      name="phone"
+      size="300"
+    />
+  </template>
+</dt-button>
+<dt-button v-dt-tooltip="`Tooltip`" circle loading>
+  <template #icon>
+    <dt-icon
+      name="phone"
+      size="300"
+    />
+  </template>
+</dt-button>
+<dt-button kind="muted" importance="outlined" loading> Place Call </dt-button>
+<dt-button kind="muted" importance="outlined" v-dt-tooltip="`Tooltip`" loading>
+  <template #icon>
+    <dt-icon
+      name="phone"
+      size="300"
+    />
+  </template>
+</dt-button>
+<dt-button kind="muted" importance="outlined" v-dt-tooltip="`Tooltip`" circle loading>
+  <template #icon>
+    <dt-icon
+      name="phone"
+      size="300"
+    />
+  </template>
+</dt-button>
+'
+showHtmlWarning />
+
+### With label
+
+<code-well-header>
+  <dt-stack
+    gap="400"
+    direction="row"
+  >
+  <dt-button
+    icon-position="right"
+    size="xs"
+  >
+    Validating
+    <template #icon="{ iconSize }">
+      <dt-loader
+        :size="iconSize"
+      />
+    </template>
+  </dt-button>
+  <dt-button
+    icon-position="right"
+    size="sm"
+  >
+    Validating
+    <template #icon="{ iconSize }">
+      <dt-loader
+        :size="iconSize"
+      />
+    </template>
+  </dt-button>
+  <dt-button
+    icon-position="right"
+    size="md"
+  >
+    Validating
+    <template #icon="{ iconSize }">
+      <dt-loader
+        :size="iconSize"
+      />
+    </template>
+  </dt-button>
+  <dt-button
+    icon-position="right"
+    size="lg"
+  >
+    Validating
+    <template #icon="{ iconSize }">
+      <dt-loader
+        :size="iconSize"
+      />
+    </template>
+  </dt-button>
+</dt-stack>
+</code-well-header>
+
+<code-example-tabs
+htmlCode='
+<button class="d-btn d-btn--primary d-btn--sm" type="button">
+  <span class="d-btn__icon d-btn__icon--right">
+    <div class="d-loader" aria-label="loading">
+      <svg class="d-icon--size-200 d-icon d-icon--loading d-loader__icon" ...>
+        ...
+      </svg>
+    </div>
+  </span>
+  <span class="d-btn__label">
+    Validating
+  </span>
+</button>
+'
+vueCode='
+<dt-button icon-position="right">
+  Validating
+  <template #icon="{ iconSize }">
+    <dt-loader :size="iconSize" />
   </template>
 </dt-button>
 '

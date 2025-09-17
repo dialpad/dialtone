@@ -18,8 +18,12 @@
           "value": "{color.red.400}",
           "type": "color"
         },
+        "action": {
+          "value": "{color.blue.300}",
+          "type": "color"
+        },
         "status-positive": {
-          "value": "{color.green.350}",
+          "value": "{color.green.300}",
           "type": "color"
         },
         "status-critical": {
@@ -30,23 +34,17 @@
           "value": "{color.gold.300}",
           "type": "color"
         }
-      },
-      "action": {
-        "color": {
-          "background": {
-            "primary": {
-              "value": "{color.blue.300}",
-              "type": "color"
-            },
-            "secondary": {
-              "value": "{color.blue.300}",
-              "type": "color"
-            },
-            "muted": {
-              "value": "{color.blue.300}",
-              "type": "color"
-            }
-          }
+      }
+    },
+    "logo": {
+      "color": {
+        "wordmark": {
+          "value": "#FFFFFF",
+          "type": "color"
+        },
+        "star": {
+          "value": "#FFFFFF",
+          "type": "color"
         }
       }
     }

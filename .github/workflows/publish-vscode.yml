@@ -4,7 +4,7 @@ on:
   workflow_dispatch:
   push:
     tags:
-      - vscode-extension/v*
+      - 'vscode-extension/v[0-9]+.[0-9]+.[0-9]+'
 
 env:
   HUSKY: 0

@@ -838,7 +838,7 @@
           "studio.tokens": {
             "modify": {
               "type": "alpha",
-              "value": ".7",
+              "value": ".3",
               "space": "hsl"
             }
           }
@@ -1126,24 +1126,286 @@
           "value": "{color.teal.600}",
           "type": "color"
         },
-        "10-hover": {
-          "value": "{color.teal.700}",
+        "11": {
+          "value": "{color.tan.300}",
           "type": "color"
         },
-        "10-selected": {
-          "value": "{color.teal.900}",
-          "type": "color"
+        "12": {
+          "value": "{color.chart.categorical.01}",
+          "type": "color",
+          "$extensions": {
+            "studio.tokens": {
+              "modify": {
+                "type": "mix",
+                "value": ".3",
+                "space": "hsl",
+                "color": "{color.chart.categorical.04} "
+              }
+            }
+          }
+        },
+        "13": {
+          "value": "{color.chart.categorical.02}",
+          "type": "color",
+          "$extensions": {
+            "studio.tokens": {
+              "modify": {
+                "type": "mix",
+                "value": ".3",
+                "space": "hsl",
+                "color": "{color.chart.categorical.05} "
+              }
+            }
+          }
+        },
+        "14": {
+          "value": "{color.chart.categorical.03}",
+          "type": "color",
+          "$extensions": {
+            "studio.tokens": {
+              "modify": {
+                "type": "mix",
+                "value": ".3",
+                "space": "hsl",
+                "color": "{color.chart.categorical.06} "
+              }
+            }
+          }
+        },
+        "15": {
+          "value": "{color.chart.categorical.04}",
+          "type": "color",
+          "$extensions": {
+            "studio.tokens": {
+              "modify": {
+                "type": "mix",
+                "value": ".2",
+                "space": "hsl",
+                "color": "{color.chart.categorical.01} "
+              }
+            }
+          }
+        },
+        "16": {
+          "value": "{color.chart.categorical.05}",
+          "type": "color",
+          "$extensions": {
+            "studio.tokens": {
+              "modify": {
+                "type": "mix",
+                "value": ".3",
+                "space": "hsl",
+                "color": "{color.chart.categorical.08} "
+              }
+            }
+          }
+        },
+        "17": {
+          "value": "{color.chart.categorical.06}",
+          "type": "color",
+          "$extensions": {
+            "studio.tokens": {
+              "modify": {
+                "type": "mix",
+                "value": ".3",
+                "space": "hsl",
+                "color": "{color.chart.categorical.09} "
+              }
+            }
+          }
+        },
+        "18": {
+          "value": "{color.chart.categorical.07}",
+          "type": "color",
+          "$extensions": {
+            "studio.tokens": {
+              "modify": {
+                "type": "mix",
+                "value": ".3",
+                "space": "hsl",
+                "color": "{color.chart.categorical.10} "
+              }
+            }
+          }
+        },
+        "19": {
+          "value": "{color.chart.categorical.08}",
+          "type": "color",
+          "$extensions": {
+            "studio.tokens": {
+              "modify": {
+                "type": "mix",
+                "value": ".9",
+                "space": "hsl",
+                "color": "{color.chart.categorical.03} "
+              }
+            }
+          }
+        },
+        "20": {
+          "value": "{color.chart.categorical.03}",
+          "type": "color",
+          "$extensions": {
+            "studio.tokens": {
+              "modify": {
+                "type": "mix",
+                "value": ".2",
+                "space": "hsl",
+                "color": "{color.chart.categorical.06} "
+              }
+            }
+          }
+        },
+        "21": {
+          "value": "{color.chart.categorical.10}",
+          "type": "color",
+          "$extensions": {
+            "studio.tokens": {
+              "modify": {
+                "type": "mix",
+                "value": ".5",
+                "space": "hsl",
+                "color": "{color.chart.categorical.13}"
+              }
+            }
+          }
+        },
+        "22": {
+          "value": "{color.chart.categorical.11}",
+          "type": "color",
+          "$extensions": {
+            "studio.tokens": {
+              "modify": {
+                "type": "mix",
+                "value": ".4",
+                "space": "hsl",
+                "color": "{color.chart.categorical.14}"
+              }
+            }
+          }
+        },
+        "23": {
+          "value": "{color.chart.categorical.12}",
+          "type": "color",
+          "$extensions": {
+            "studio.tokens": {
+              "modify": {
+                "type": "mix",
+                "value": ".3",
+                "space": "hsl",
+                "color": "{color.chart.categorical.15} "
+              }
+            }
+          }
+        },
+        "24": {
+          "value": "{color.chart.categorical.13}",
+          "type": "color",
+          "$extensions": {
+            "studio.tokens": {
+              "modify": {
+                "type": "mix",
+                "value": ".3",
+                "space": "hsl",
+                "color": "{color.chart.categorical.04} "
+              }
+            }
+          }
+        },
+        "25": {
+          "value": "{color.chart.categorical.14}",
+          "type": "color",
+          "$extensions": {
+            "studio.tokens": {
+              "modify": {
+                "type": "mix",
+                "value": ".3",
+                "space": "hsl",
+                "color": "{color.chart.categorical.18} "
+              }
+            }
+          }
+        },
+        "26": {
+          "value": "{color.chart.categorical.04}",
+          "type": "color",
+          "$extensions": {
+            "studio.tokens": {
+              "modify": {
+                "type": "mix",
+                "value": ".3",
+                "space": "hsl",
+                "color": "{color.chart.categorical.01} "
+              }
+            }
+          }
+        },
+        "27": {
+          "value": "{color.chart.categorical.16}",
+          "type": "color",
+          "$extensions": {
+            "studio.tokens": {
+              "modify": {
+                "type": "mix",
+                "value": ".3",
+                "space": "hsl",
+                "color": "{color.chart.categorical.03} "
+              }
+            }
+          }
+        },
+        "28": {
+          "value": "{color.chart.categorical.03}",
+          "type": "color",
+          "$extensions": {
+            "studio.tokens": {
+              "modify": {
+                "type": "mix",
+                "value": ".2",
+                "space": "hsl",
+                "color": "{color.chart.categorical.06} "
+              }
+            }
+          }
+        },
+        "29": {
+          "value": "{color.chart.categorical.18}",
+          "type": "color",
+          "$extensions": {
+            "studio.tokens": {
+              "modify": {
+                "type": "mix",
+                "value": ".3",
+                "space": "hsl",
+                "color": "{color.chart.categorical.23} "
+              }
+            }
+          }
+        },
+        "30": {
+          "value": "{color.chart.categorical.19}",
+          "type": "color",
+          "$extensions": {
+            "studio.tokens": {
+              "modify": {
+                "type": "mix",
+                "value": ".3",
+                "space": "hsl",
+                "color": "{color.chart.categorical.10} "
+              }
+            }
+          }
         },
         "01": {
-          "value": "{color.purple.450}",
+          "value": "{color.purple.350}",
           "type": "color"
         },
         "01-hover": {
-          "value": "{color.purple.500}",
+          "value": "{color.purple.400}",
           "type": "color"
         },
         "01-selected": {
-          "value": "{color.purple.600}",
+          "value": "{color.purple.500}",
           "type": "color"
         },
         "02": {
@@ -1155,11 +1417,11 @@
           "type": "color"
         },
         "02-selected": {
-          "value": "{color.magenta.600}",
+          "value": "{color.magenta.475}",
           "type": "color"
         },
         "03": {
-          "value": "{color.blue.400}",
+          "value": "{color.blue.425}",
           "type": "color"
         },
         "03-hover": {
@@ -1167,7 +1429,7 @@
           "type": "color"
         },
         "03-selected": {
-          "value": "{color.blue.600}",
+          "value": "{color.blue.500}",
           "type": "color"
         },
         "04": {
@@ -1175,11 +1437,11 @@
           "type": "color"
         },
         "04-hover": {
-          "value": "{color.gold.500}",
+          "value": "{color.gold.450}",
           "type": "color"
         },
         "04-selected": {
-          "value": "{color.gold.700}",
+          "value": "{color.gold.600}",
           "type": "color"
         },
         "05": {
@@ -1215,7 +1477,7 @@
           "type": "color"
         },
         "07-selected": {
-          "value": "{color.coral.900}",
+          "value": "{color.coral.700}",
           "type": "color"
         },
         "08": {
@@ -1241,6 +1503,534 @@
         "09-selected": {
           "value": "{color.red.600}",
           "type": "color"
+        },
+        "10-hover": {
+          "value": "{color.teal.700}",
+          "type": "color"
+        },
+        "10-selected": {
+          "value": "{color.teal.900}",
+          "type": "color"
+        },
+        "11-hover": {
+          "value": "{color.chart.categorical.11}",
+          "type": "color",
+          "$extensions": {
+            "studio.tokens": {
+              "modify": {
+                "type": "darken",
+                "value": ".15",
+                "space": "hsl"
+              }
+            }
+          }
+        },
+        "11-selected": {
+          "value": "{color.chart.categorical.11}",
+          "type": "color",
+          "$extensions": {
+            "studio.tokens": {
+              "modify": {
+                "type": "darken",
+                "value": ".3",
+                "space": "hsl"
+              }
+            }
+          }
+        },
+        "12-hover": {
+          "value": "{color.chart.categorical.12}",
+          "type": "color",
+          "$extensions": {
+            "studio.tokens": {
+              "modify": {
+                "type": "darken",
+                "value": ".15",
+                "space": "hsl"
+              }
+            }
+          }
+        },
+        "12-selected": {
+          "value": "{color.chart.categorical.12}",
+          "type": "color",
+          "$extensions": {
+            "studio.tokens": {
+              "modify": {
+                "type": "darken",
+                "value": ".3",
+                "space": "hsl"
+              }
+            }
+          }
+        },
+        "13-hover": {
+          "value": "{color.chart.categorical.13}",
+          "type": "color",
+          "$extensions": {
+            "studio.tokens": {
+              "modify": {
+                "type": "darken",
+                "value": ".15",
+                "space": "hsl"
+              }
+            }
+          }
+        },
+        "13-selected": {
+          "value": "{color.chart.categorical.13}",
+          "type": "color",
+          "$extensions": {
+            "studio.tokens": {
+              "modify": {
+                "type": "darken",
+                "value": ".3",
+                "space": "hsl"
+              }
+            }
+          }
+        },
+        "14-hover": {
+          "value": "{color.chart.categorical.14}",
+          "type": "color",
+          "$extensions": {
+            "studio.tokens": {
+              "modify": {
+                "type": "darken",
+                "value": ".15",
+                "space": "hsl"
+              }
+            }
+          }
+        },
+        "14-selected": {
+          "value": "{color.chart.categorical.14}",
+          "type": "color",
+          "$extensions": {
+            "studio.tokens": {
+              "modify": {
+                "type": "darken",
+                "value": ".3",
+                "space": "hsl"
+              }
+            }
+          }
+        },
+        "15-hover": {
+          "value": "{color.chart.categorical.15}",
+          "type": "color",
+          "$extensions": {
+            "studio.tokens": {
+              "modify": {
+                "type": "darken",
+                "value": ".15",
+                "space": "hsl"
+              }
+            }
+          }
+        },
+        "15-selected": {
+          "value": "{color.chart.categorical.15}",
+          "type": "color",
+          "$extensions": {
+            "studio.tokens": {
+              "modify": {
+                "type": "darken",
+                "value": ".3",
+                "space": "hsl"
+              }
+            }
+          }
+        },
+        "16-hover": {
+          "value": "{color.chart.categorical.16}",
+          "type": "color",
+          "$extensions": {
+            "studio.tokens": {
+              "modify": {
+                "type": "darken",
+                "value": ".15",
+                "space": "hsl"
+              }
+            }
+          }
+        },
+        "16-selected": {
+          "value": "{color.chart.categorical.16}",
+          "type": "color",
+          "$extensions": {
+            "studio.tokens": {
+              "modify": {
+                "type": "darken",
+                "value": ".3",
+                "space": "hsl"
+              }
+            }
+          }
+        },
+        "17-hover": {
+          "value": "{color.chart.categorical.17}",
+          "type": "color",
+          "$extensions": {
+            "studio.tokens": {
+              "modify": {
+                "type": "darken",
+                "value": ".15",
+                "space": "hsl"
+              }
+            }
+          }
+        },
+        "17-selected": {
+          "value": "{color.chart.categorical.17}",
+          "type": "color",
+          "$extensions": {
+            "studio.tokens": {
+              "modify": {
+                "type": "darken",
+                "value": ".3",
+                "space": "hsl"
+              }
+            }
+          }
+        },
+        "18-hover": {
+          "value": "{color.chart.categorical.18}",
+          "type": "color",
+          "$extensions": {
+            "studio.tokens": {
+              "modify": {
+                "type": "darken",
+                "value": ".15",
+                "space": "hsl"
+              }
+            }
+          }
+        },
+        "18-selected": {
+          "value": "{color.chart.categorical.18}",
+          "type": "color",
+          "$extensions": {
+            "studio.tokens": {
+              "modify": {
+                "type": "darken",
+                "value": ".3",
+                "space": "hsl"
+              }
+            }
+          }
+        },
+        "19-hover": {
+          "value": "{color.chart.categorical.19}",
+          "type": "color",
+          "$extensions": {
+            "studio.tokens": {
+              "modify": {
+                "type": "darken",
+                "value": ".15",
+                "space": "hsl"
+              }
+            }
+          }
+        },
+        "19-selected": {
+          "value": "{color.chart.categorical.19}",
+          "type": "color",
+          "$extensions": {
+            "studio.tokens": {
+              "modify": {
+                "type": "darken",
+                "value": ".3",
+                "space": "hsl"
+              }
+            }
+          }
+        },
+        "20-hover": {
+          "value": "{color.chart.categorical.20}",
+          "type": "color",
+          "$extensions": {
+            "studio.tokens": {
+              "modify": {
+                "type": "darken",
+                "value": ".15",
+                "space": "hsl"
+              }
+            }
+          }
+        },
+        "20-selected": {
+          "value": "{color.chart.categorical.20}",
+          "type": "color",
+          "$extensions": {
+            "studio.tokens": {
+              "modify": {
+                "type": "darken",
+                "value": ".3",
+                "space": "hsl"
+              }
+            }
+          }
+        },
+        "21-hover": {
+          "value": "{color.chart.categorical.21}",
+          "type": "color",
+          "$extensions": {
+            "studio.tokens": {
+              "modify": {
+                "type": "darken",
+                "value": ".15",
+                "space": "hsl"
+              }
+            }
+          }
+        },
+        "21-selected": {
+          "value": "{color.chart.categorical.21}",
+          "type": "color",
+          "$extensions": {
+            "studio.tokens": {
+              "modify": {
+                "type": "darken",
+                "value": ".3",
+                "space": "hsl"
+              }
+            }
+          }
+        },
+        "22-hover": {
+          "value": "{color.chart.categorical.22}",
+          "type": "color",
+          "$extensions": {
+            "studio.tokens": {
+              "modify": {
+                "type": "darken",
+                "value": ".15",
+                "space": "hsl"
+              }
+            }
+          }
+        },
+        "22-selected": {
+          "value": "{color.chart.categorical.22}",
+          "type": "color",
+          "$extensions": {
+            "studio.tokens": {
+              "modify": {
+                "type": "darken",
+                "value": ".3",
+                "space": "hsl"
+              }
+            }
+          }
+        },
+        "23-hover": {
+          "value": "{color.chart.categorical.23}",
+          "type": "color",
+          "$extensions": {
+            "studio.tokens": {
+              "modify": {
+                "type": "darken",
+                "value": ".15",
+                "space": "hsl"
+              }
+            }
+          }
+        },
+        "23-selected": {
+          "value": "{color.chart.categorical.23}",
+          "type": "color",
+          "$extensions": {
+            "studio.tokens": {
+              "modify": {
+                "type": "darken",
+                "value": ".3",
+                "space": "hsl"
+              }
+            }
+          }
+        },
+        "24-hover": {
+          "value": "{color.chart.categorical.24}",
+          "type": "color",
+          "$extensions": {
+            "studio.tokens": {
+              "modify": {
+                "type": "darken",
+                "value": ".15",
+                "space": "hsl"
+              }
+            }
+          }
+        },
+        "24-selected": {
+          "value": "{color.chart.categorical.24}",
+          "type": "color",
+          "$extensions": {
+            "studio.tokens": {
+              "modify": {
+                "type": "darken",
+                "value": ".3",
+                "space": "hsl"
+              }
+            }
+          }
+        },
+        "25-hover": {
+          "value": "{color.chart.categorical.25}",
+          "type": "color",
+          "$extensions": {
+            "studio.tokens": {
+              "modify": {
+                "type": "darken",
+                "value": ".15",
+                "space": "hsl"
+              }
+            }
+          }
+        },
+        "25-selected": {
+          "value": "{color.chart.categorical.25}",
+          "type": "color",
+          "$extensions": {
+            "studio.tokens": {
+              "modify": {
+                "type": "darken",
+                "value": ".3",
+                "space": "hsl"
+              }
+            }
+          }
+        },
+        "26-hover": {
+          "value": "{color.chart.categorical.26}",
+          "type": "color",
+          "$extensions": {
+            "studio.tokens": {
+              "modify": {
+                "type": "darken",
+                "value": ".15",
+                "space": "hsl"
+              }
+            }
+          }
+        },
+        "26-selected": {
+          "value": "{color.chart.categorical.26}",
+          "type": "color",
+          "$extensions": {
+            "studio.tokens": {
+              "modify": {
+                "type": "darken",
+                "value": ".3",
+                "space": "hsl"
+              }
+            }
+          }
+        },
+        "27-hover": {
+          "value": "{color.chart.categorical.27}",
+          "type": "color",
+          "$extensions": {
+            "studio.tokens": {
+              "modify": {
+                "type": "darken",
+                "value": ".15",
+                "space": "hsl"
+              }
+            }
+          }
+        },
+        "27-selected": {
+          "value": "{color.chart.categorical.27}",
+          "type": "color",
+          "$extensions": {
+            "studio.tokens": {
+              "modify": {
+                "type": "darken",
+                "value": ".3",
+                "space": "hsl"
+              }
+            }
+          }
+        },
+        "28-hover": {
+          "value": "{color.chart.categorical.28}",
+          "type": "color",
+          "$extensions": {
+            "studio.tokens": {
+              "modify": {
+                "type": "darken",
+                "value": ".15",
+                "space": "hsl"
+              }
+            }
+          }
+        },
+        "28-selected": {
+          "value": "{color.chart.categorical.28}",
+          "type": "color",
+          "$extensions": {
+            "studio.tokens": {
+              "modify": {
+                "type": "darken",
+                "value": ".3",
+                "space": "hsl"
+              }
+            }
+          }
+        },
+        "29-hover": {
+          "value": "{color.chart.categorical.29}",
+          "type": "color",
+          "$extensions": {
+            "studio.tokens": {
+              "modify": {
+                "type": "darken",
+                "value": ".15",
+                "space": "hsl"
+              }
+            }
+          }
+        },
+        "29-selected": {
+          "value": "{color.chart.categorical.29}",
+          "type": "color",
+          "$extensions": {
+            "studio.tokens": {
+              "modify": {
+                "type": "darken",
+                "value": ".3",
+                "space": "hsl"
+              }
+            }
+          }
+        },
+        "30-hover": {
+          "value": "{color.chart.categorical.30}",
+          "type": "color",
+          "$extensions": {
+            "studio.tokens": {
+              "modify": {
+                "type": "darken",
+                "value": ".15",
+                "space": "hsl"
+              }
+            }
+          }
+        },
+        "30-selected": {
+          "value": "{color.chart.categorical.30}",
+          "type": "color",
+          "$extensions": {
+            "studio.tokens": {
+              "modify": {
+                "type": "darken",
+                "value": ".3",
+                "space": "hsl"
+              }
+            }
+          }
         }
       },
       "neutral": {
@@ -1303,15 +2093,15 @@
         "type": "color",
         "description": "Selected state for critical chart elements, aka danger."
       },
-      "warning": {
-        "value": "{color.gold.400}",
-        "type": "color",
-        "description": "Used for cautionary or warning indicators in charts."
-      },
       "warning-hover": {
         "value": "{color.gold.500}",
         "type": "color",
         "description": "Hover state for warning chart elements."
+      },
+      "warning": {
+        "value": "{color.gold.400}",
+        "type": "color",
+        "description": "Used for cautionary or warning indicators in charts."
       },
       "warning-selected": {
         "value": "{color.gold.600}",
@@ -1324,180 +2114,557 @@
         "description": "Used for informational or neutral data points in charts."
       },
       "info-hover": {
-        "value": "{color.blue.475}",
+        "value": "{color.blue.450}",
         "type": "color",
         "description": "Hover state for info chart elements."
       },
       "info-selected": {
-        "value": "{color.blue.600}",
+        "value": "{color.blue.500}",
         "type": "color",
         "description": "Selected state for info chart elements."
       },
-      "brand": {
-        "value": "{color.purple.400}",
-        "type": "color",
-        "description": "Used for brand-related data or to highlight company-specific information in charts."
-      },
-      "brand-hover": {
-        "value": "{color.purple.450}",
-        "type": "color",
-        "description": "Hover state for brand chart elements."
-      },
-      "brand-selected": {
-        "value": "{color.purple.550}",
-        "type": "color",
-        "description": "Selected state for brand chart elements."
-      },
       "sequential": {
         "10": {
-          "value": "{color.indigo.950}",
+          "value": "{color.indigo.900}",
           "type": "color",
-          "description": "Tenth color in sequential chart series, darkest shade."
+          "description": "Tenth color in sequential chart series."
         },
         "01": {
           "value": "{color.indigo.100}",
           "type": "color",
-          "description": "First color in sequential chart series, lightest shade."
+          "description": "First color in sequential chart series."
         },
         "01-hover": {
-          "value": "{color.indigo.200}",
+          "value": "{color.chart.sequential.01}",
           "type": "color",
+          "$extensions": {
+            "studio.tokens": {
+              "modify": {
+                "type": "mix",
+                "value": ".15",
+                "space": "hsl",
+                "color": "{color.surface.primary-inverted}"
+              }
+            }
+          },
           "description": "Hover state for first sequential chart color."
         },
         "01-selected": {
-          "value": "{color.indigo.400}",
+          "value": "{color.chart.sequential.01}",
           "type": "color",
+          "$extensions": {
+            "studio.tokens": {
+              "modify": {
+                "type": "mix",
+                "value": ".3",
+                "space": "hsl",
+                "color": "{color.surface.primary-inverted}"
+              }
+            }
+          },
           "description": "Selected state for first sequential chart color."
         },
         "02": {
-          "value": "{color.indigo.200}",
+          "value": "{color.chart.sequential.01}",
           "type": "color",
+          "$extensions": {
+            "studio.tokens": {
+              "modify": {
+                "type": "mix",
+                "value": ".1",
+                "space": "hsl",
+                "color": "{color.chart.sequential.10}"
+              }
+            }
+          },
           "description": "Second color in sequential chart series, very light shade."
         },
         "02-hover": {
-          "value": "{color.indigo.300}",
+          "value": "{color.chart.sequential.02}",
           "type": "color",
+          "$extensions": {
+            "studio.tokens": {
+              "modify": {
+                "type": "mix",
+                "value": ".15",
+                "space": "hsl",
+                "color": "{color.surface.primary-inverted}"
+              }
+            }
+          },
           "description": "Hover state for second sequential chart color."
         },
         "02-selected": {
-          "value": "{color.indigo.500}",
+          "value": "{color.chart.sequential.02}",
           "type": "color",
+          "$extensions": {
+            "studio.tokens": {
+              "modify": {
+                "type": "mix",
+                "value": ".3",
+                "space": "hsl",
+                "color": "{color.surface.primary-inverted}"
+              }
+            }
+          },
           "description": "Selected state for second sequential chart color."
         },
         "03": {
-          "value": "{color.indigo.300}",
+          "value": "{color.chart.sequential.01}",
           "type": "color",
+          "$extensions": {
+            "studio.tokens": {
+              "modify": {
+                "type": "mix",
+                "value": ".21",
+                "space": "hsl",
+                "color": "{color.chart.sequential.10}"
+              }
+            }
+          },
           "description": "Third color in sequential chart series, light shade."
         },
         "03-hover": {
-          "value": "{color.indigo.400}",
+          "value": "{color.chart.sequential.03}",
           "type": "color",
+          "$extensions": {
+            "studio.tokens": {
+              "modify": {
+                "type": "mix",
+                "value": ".15",
+                "space": "hsl",
+                "color": "{color.surface.primary-inverted}"
+              }
+            }
+          },
           "description": "Hover state for third sequential chart color."
         },
         "03-selected": {
-          "value": "{color.indigo.600}",
+          "value": "{color.chart.sequential.03}",
           "type": "color",
+          "$extensions": {
+            "studio.tokens": {
+              "modify": {
+                "type": "mix",
+                "value": ".3",
+                "space": "hsl",
+                "color": "{color.surface.primary-inverted}"
+              }
+            }
+          },
           "description": "Selected state for third sequential chart color."
         },
         "04": {
-          "value": "{color.indigo.400}",
+          "value": "{color.chart.sequential.01}",
           "type": "color",
+          "$extensions": {
+            "studio.tokens": {
+              "modify": {
+                "type": "mix",
+                "value": ".33",
+                "space": "hsl",
+                "color": "{color.chart.sequential.10}"
+              }
+            }
+          },
           "description": "Fourth color in sequential chart series, light-medium shade."
         },
         "04-hover": {
-          "value": "{color.indigo.500}",
+          "value": "{color.chart.sequential.04}",
           "type": "color",
+          "$extensions": {
+            "studio.tokens": {
+              "modify": {
+                "type": "mix",
+                "value": ".15",
+                "space": "hsl",
+                "color": "{color.surface.primary-inverted}"
+              }
+            }
+          },
           "description": "Hover state for fourth sequential chart color."
         },
         "04-selected": {
-          "value": "{color.indigo.700}",
+          "value": "{color.chart.sequential.04}",
           "type": "color",
+          "$extensions": {
+            "studio.tokens": {
+              "modify": {
+                "type": "mix",
+                "value": ".3",
+                "space": "hsl",
+                "color": "{color.surface.primary-inverted}"
+              }
+            }
+          },
           "description": "Selected state for fourth sequential chart color."
         },
         "05": {
-          "value": "{color.indigo.500}",
+          "value": "{color.chart.sequential.01}",
           "type": "color",
+          "$extensions": {
+            "studio.tokens": {
+              "modify": {
+                "type": "mix",
+                "value": ".44",
+                "space": "hsl",
+                "color": "{color.chart.sequential.10}"
+              }
+            }
+          },
           "description": "Fifth color in sequential chart series, medium shade."
         },
         "05-hover": {
-          "value": "{color.indigo.600}",
+          "value": "{color.chart.sequential.05}",
           "type": "color",
+          "$extensions": {
+            "studio.tokens": {
+              "modify": {
+                "type": "mix",
+                "value": ".15",
+                "space": "hsl",
+                "color": "{color.surface.primary-inverted}"
+              }
+            }
+          },
           "description": "Hover state for fifth sequential chart color."
         },
         "05-selected": {
-          "value": "{color.indigo.800}",
+          "value": "{color.chart.sequential.05}",
           "type": "color",
+          "$extensions": {
+            "studio.tokens": {
+              "modify": {
+                "type": "mix",
+                "value": ".3",
+                "space": "hsl",
+                "color": "{color.surface.primary-inverted}"
+              }
+            }
+          },
           "description": "Selected state for fifth sequential chart color."
         },
         "06": {
-          "value": "{color.indigo.600}",
+          "value": "{color.chart.sequential.01}",
           "type": "color",
+          "$extensions": {
+            "studio.tokens": {
+              "modify": {
+                "type": "mix",
+                "value": ".56",
+                "space": "hsl",
+                "color": "{color.chart.sequential.10}"
+              }
+            }
+          },
           "description": "Sixth color in sequential chart series, medium-dark shade."
         },
         "06-hover": {
-          "value": "{color.indigo.700}",
+          "value": "{color.chart.sequential.06}",
           "type": "color",
+          "$extensions": {
+            "studio.tokens": {
+              "modify": {
+                "type": "mix",
+                "value": ".15",
+                "space": "hsl",
+                "color": "{color.surface.primary-inverted}"
+              }
+            }
+          },
           "description": "Hover state for sixth sequential chart color."
         },
         "06-selected": {
-          "value": "{color.indigo.950}",
+          "value": "{color.chart.sequential.06}",
           "type": "color",
+          "$extensions": {
+            "studio.tokens": {
+              "modify": {
+                "type": "mix",
+                "value": ".3",
+                "space": "hsl",
+                "color": "{color.surface.primary-inverted}"
+              }
+            }
+          },
           "description": "Selected state for sixth sequential chart color."
         },
         "07": {
-          "value": "{color.indigo.700}",
+          "value": "{color.chart.sequential.01}",
           "type": "color",
+          "$extensions": {
+            "studio.tokens": {
+              "modify": {
+                "type": "mix",
+                "value": ".67",
+                "space": "hsl",
+                "color": "{color.chart.sequential.10}"
+              }
+            }
+          },
           "description": "Seventh color in sequential chart series, dark shade."
         },
         "07-hover": {
-          "value": "{color.indigo.800}",
+          "value": "{color.chart.sequential.07}",
           "type": "color",
+          "$extensions": {
+            "studio.tokens": {
+              "modify": {
+                "type": "mix",
+                "value": ".15",
+                "space": "hsl",
+                "color": "{color.surface.primary-inverted}"
+              }
+            }
+          },
           "description": "Hover state for seventh sequential chart color."
         },
         "07-selected": {
-          "value": "{color.indigo.1000}",
+          "value": "{color.chart.sequential.07}",
           "type": "color",
+          "$extensions": {
+            "studio.tokens": {
+              "modify": {
+                "type": "mix",
+                "value": ".3",
+                "space": "hsl",
+                "color": "{color.surface.primary-inverted}"
+              }
+            }
+          },
           "description": "Selected state for seventh sequential chart color."
         },
         "08": {
-          "value": "{color.indigo.800}",
+          "value": "{color.chart.sequential.01}",
           "type": "color",
+          "$extensions": {
+            "studio.tokens": {
+              "modify": {
+                "type": "mix",
+                "value": ".79",
+                "space": "hsl",
+                "color": "{color.chart.sequential.10}"
+              }
+            }
+          },
           "description": "Eighth color in sequential chart series, very dark shade."
         },
         "08-hover": {
-          "value": "{color.indigo.900}",
+          "value": "{color.chart.sequential.08}",
           "type": "color",
+          "$extensions": {
+            "studio.tokens": {
+              "modify": {
+                "type": "mix",
+                "value": ".15",
+                "space": "hsl",
+                "color": "{color.surface.primary-inverted}"
+              }
+            }
+          },
           "description": "Hover state for eighth sequential chart color."
         },
         "08-selected": {
-          "value": "{color.indigo.950}",
+          "value": "{color.chart.sequential.08}",
           "type": "color",
+          "$extensions": {
+            "studio.tokens": {
+              "modify": {
+                "type": "mix",
+                "value": ".3",
+                "space": "hsl",
+                "color": "{color.surface.primary-inverted}"
+              }
+            }
+          },
           "description": "Selected state for eighth sequential chart color."
         },
         "09": {
-          "value": "{color.indigo.900}",
+          "value": "{color.chart.sequential.01}",
           "type": "color",
+          "$extensions": {
+            "studio.tokens": {
+              "modify": {
+                "type": "mix",
+                "value": ".9",
+                "space": "hsl",
+                "color": "{color.chart.sequential.10}"
+              }
+            }
+          },
           "description": "Ninth color in sequential chart series, extremely dark shade."
         },
         "09-hover": {
-          "value": "{color.indigo.950}",
+          "value": "{color.chart.sequential.09}",
           "type": "color",
+          "$extensions": {
+            "studio.tokens": {
+              "modify": {
+                "type": "mix",
+                "value": ".15",
+                "space": "hsl",
+                "color": "{color.surface.primary-inverted}"
+              }
+            }
+          },
           "description": "Hover state for ninth sequential chart color."
         },
         "09-selected": {
-          "value": "{color.indigo.1000}",
+          "value": "{color.chart.sequential.09}",
           "type": "color",
+          "$extensions": {
+            "studio.tokens": {
+              "modify": {
+                "type": "mix",
+                "value": ".3",
+                "space": "hsl",
+                "color": "{color.surface.primary-inverted}"
+              }
+            }
+          },
           "description": "Selected state for ninth sequential chart color."
         },
         "10-hover": {
-          "value": "{color.indigo.1000}",
+          "value": "{color.chart.sequential.10}",
           "type": "color",
+          "$extensions": {
+            "studio.tokens": {
+              "modify": {
+                "type": "mix",
+                "value": ".15",
+                "space": "hsl",
+                "color": "{color.surface.primary-inverted}"
+              }
+            }
+          },
           "description": "Hover state for tenth sequential chart color."
         },
         "10-selected": {
-          "value": "{color.indigo.1000}",
+          "value": "{color.chart.sequential.10}",
           "type": "color",
+          "$extensions": {
+            "studio.tokens": {
+              "modify": {
+                "type": "mix",
+                "value": ".3",
+                "space": "hsl",
+                "color": "{color.surface.primary-inverted}"
+              }
+            }
+          },
           "description": "Selected state for tenth sequential chart color."
+        },
+        "range": {
+          "00-start": {
+            "value": "{color.chart.sequential.01}",
+            "type": "color",
+            "description": "Start color value for default sequential range. Use to create a dynamically generated sequential series, must be paired with an end color."
+          },
+          "00-end": {
+            "value": "{color.chart.sequential.10}",
+            "type": "color",
+            "description": "Start color value for default sequential range. Use to create a dynamically generated sequential series, must be paired with a start color."
+          },
+          "01-start": {
+            "value": "{color.purple.100}",
+            "type": "color",
+            "description": "Start color value for first sequential range. Use to create a dynamically generated sequential series, must be paired with an end color."
+          },
+          "01-end": {
+            "value": "{color.purple.550}",
+            "type": "color",
+            "description": "Ending color for first sequential range. Use to create a dynamically generated sequential series, must be paired with an start color."
+          },
+          "02-start": {
+            "value": "{color.magenta.100}",
+            "type": "color",
+            "description": "Start color for second sequential range. Use to create a dynamically generated sequential series, must be paired with an end color."
+          },
+          "02-end": {
+            "value": "{color.magenta.600}",
+            "type": "color",
+            "description": "End color for second sequential range. Use to create a dynamically generated sequential series, must be paired with an start color."
+          },
+          "03-start": {
+            "value": "{color.blue.100}",
+            "type": "color",
+            "description": "Start color for third sequential range. Use to create a dynamically generated sequential series, must be paired with an end color."
+          },
+          "03-end": {
+            "value": "{color.blue.600}",
+            "type": "color",
+            "description": "End color for third sequential range. Use to create a dynamically generated sequential series, must be paired with an start color."
+          },
+          "04-start": {
+            "value": "{color.gold.50}",
+            "type": "color",
+            "description": "Start color for fourth sequential range. Use to create a dynamically generated sequential series, must be paired with an end color."
+          },
+          "04-end": {
+            "value": "{color.gold.600}",
+            "type": "color",
+            "description": "End color for fourth sequential range. Use to create a dynamically generated sequential series, must be paired with an start color."
+          },
+          "05-start": {
+            "value": "{color.green.100}",
+            "type": "color",
+            "description": "Start color for fifth sequential range. Use to create a dynamically generated sequential series, must be paired with an end color."
+          },
+          "05-end": {
+            "value": "{color.green.600}",
+            "type": "color",
+            "description": "End color for fifth sequential range. Use to create a dynamically generated sequential series, must be paired with an start color."
+          },
+          "06-start": {
+            "value": "{color.berry.100}",
+            "type": "color",
+            "description": "Start color for sixth sequential range. Use to create a dynamically generated sequential series, must be paired with an end color."
+          },
+          "06-end": {
+            "value": "{color.berry.900}",
+            "type": "color",
+            "description": "End color for sixth sequential range. Use to create a dynamically generated sequential series, must be paired with an start color."
+          },
+          "07-start": {
+            "value": "{color.coral.100}",
+            "type": "color",
+            "description": "Start color for seventh sequential range. Use to create a dynamically generated sequential series, must be paired with an end color."
+          },
+          "07-end": {
+            "value": "{color.coral.900}",
+            "type": "color",
+            "description": "End color for seventh sequential range. Use to create a dynamically generated sequential series, must be paired with an start color."
+          },
+          "08-start": {
+            "value": "{color.olive.100}",
+            "type": "color",
+            "description": "Start color for eighth sequential range. Use to create a dynamically generated sequential series, must be paired with an end color."
+          },
+          "08-end": {
+            "value": "{color.olive.900}",
+            "type": "color",
+            "description": "End color for eighth sequential range. Use to create a dynamically generated sequential series, must be paired with an start color."
+          },
+          "09-start": {
+            "value": "{color.red.100}",
+            "type": "color",
+            "description": "Start color for ninth sequential range. Use to create a dynamically generated sequential series, must be paired with an end color."
+          },
+          "09-end": {
+            "value": "{color.red.700}",
+            "type": "color",
+            "description": "End color for ninth sequential range. Use to create a dynamically generated sequential series, must be paired with an start color."
+          },
+          "10-start": {
+            "value": "{color.teal.100}",
+            "type": "color",
+            "description": "Start color for tenth sequential range. Use to create a dynamically generated sequential series, must be paired with an end color."
+          },
+          "10-end": {
+            "value": "{color.teal.900}",
+            "type": "color",
+            "description": "End color for tenth sequential range. Use to create a dynamically generated sequential series, must be paired with an start color."
+          }
         }
       }
     }
@@ -2852,6 +4019,10 @@
           "value": "{badge.color.background.bulletin}",
           "type": "color"
         },
+        "action": {
+          "value": "{color.black.800}",
+          "type": "color"
+        },
         "status-positive": {
           "value": "{color.green.425}",
           "type": "color"
@@ -2873,15 +4044,15 @@
         "color": {
           "background": {
             "primary": {
-              "value": "{color.black.800}",
+              "value": "{shell.base.color.action}",
               "type": "color"
             },
             "secondary": {
-              "value": "{color.black.800}",
+              "value": "{shell.base.color.action}",
               "type": "color"
             },
             "muted": {
-              "value": "{color.black.800}",
+              "value": "{shell.base.color.action}",
               "type": "color"
             }
           }

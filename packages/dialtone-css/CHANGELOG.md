@@ -1,3 +1,24 @@
+## [8.64.3](https://github.com/dialpad/dialtone/compare/dialtone-css/v8.64.2...dialtone-css/v8.64.3) (2025-09-16)
+
+
+### Bug Fixes
+
+* **Checkbox, Radio:** DLT-2772 add pointer cursor to entire checkbox/radio label region ([#913](https://github.com/dialpad/dialtone/issues/913)) ([4bd0859](https://github.com/dialpad/dialtone/commit/4bd08592811f8dbbbfaa43fc79ab84d6209e5854))
+
+## [8.64.2](https://github.com/dialpad/dialtone/compare/dialtone-css/v8.64.1...dialtone-css/v8.64.2) (2025-09-04)
+
+
+### Bug Fixes
+
+* **Presence:** DLT-2755 correct offline's border / background colors ([#901](https://github.com/dialpad/dialtone/issues/901)) ([a8fee92](https://github.com/dialpad/dialtone/commit/a8fee92023ee8b06e165603fb23f375b4a5a48e9))
+
+## [8.64.1](https://github.com/dialpad/dialtone/compare/dialtone-css/v8.64.0...dialtone-css/v8.64.1) (2025-09-04)
+
+
+### Bug Fixes
+
+* **Loader:** DLT-2754 loader container size and alignment ([#898](https://github.com/dialpad/dialtone/issues/898)) ([7e5cb43](https://github.com/dialpad/dialtone/commit/7e5cb438263a68daed04c351cc01bd958952315c))
+
 # [8.64.0](https://github.com/dialpad/dialtone/compare/dialtone-css/v8.63.0...dialtone-css/v8.64.0) (2025-09-02)
 
 

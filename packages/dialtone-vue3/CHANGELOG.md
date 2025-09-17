@@ -1,3 +1,35 @@
+## [3.190.3](https://github.com/dialpad/dialtone/compare/dialtone-vue3/v3.190.2...dialtone-vue3/v3.190.3) (2025-09-16)
+
+
+### Bug Fixes
+
+* **Localization:** DLT-2768  emoji row reaction label warnings ([#911](https://github.com/dialpad/dialtone/issues/911)) ([5a6713d](https://github.com/dialpad/dialtone/commit/5a6713dfd69d55d6dcbb850de48087829417d33c))
+
+
+### Code Refactoring
+
+* **Emoji Picker:** DLT-2776 new prop showAddEmojiButton ([#915](https://github.com/dialpad/dialtone/issues/915)) ([c37911b](https://github.com/dialpad/dialtone/commit/c37911b8f77a7453105f0421f24ac552ca935a88))
+
+
+### Documentation
+
+* NO-JIRA remove names from public docs ([#917](https://github.com/dialpad/dialtone/issues/917)) ([744736f](https://github.com/dialpad/dialtone/commit/744736f09e1086a7f5f7691045677a62cbe4e94c))
+
+## [3.190.2](https://github.com/dialpad/dialtone/compare/dialtone-vue3/v3.190.1...dialtone-vue3/v3.190.2) (2025-09-09)
+
+
+### Bug Fixes
+
+* **Dropdown:** DP-154779 emit close event properly ([#897](https://github.com/dialpad/dialtone/issues/897)) ([bf9b50b](https://github.com/dialpad/dialtone/commit/bf9b50b738d0953d02d641ca542ea7bf2580d083))
+* **Input:** DLT-2757 add rootClass prop ([#904](https://github.com/dialpad/dialtone/issues/904)) ([980f215](https://github.com/dialpad/dialtone/commit/980f21528dbd186e778826c9b7549c702d904cd7))
+
+## [3.190.1](https://github.com/dialpad/dialtone/compare/dialtone-vue3/v3.190.0...dialtone-vue3/v3.190.1) (2025-09-04)
+
+
+### Bug Fixes
+
+* **Loader:** DLT-2754 loader container size and alignment ([#898](https://github.com/dialpad/dialtone/issues/898)) ([7e5cb43](https://github.com/dialpad/dialtone/commit/7e5cb438263a68daed04c351cc01bd958952315c))
+
 # [3.190.0](https://github.com/dialpad/dialtone/compare/dialtone-vue3/v3.189.0...dialtone-vue3/v3.190.0) (2025-09-02)
 
 

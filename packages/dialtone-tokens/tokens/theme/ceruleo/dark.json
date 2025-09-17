@@ -18,8 +18,12 @@
           "value": "{color.red.600}",
           "type": "color"
         },
+        "action": {
+          "value": "{color.blue.475}",
+          "type": "color"
+        },
         "status-positive": {
-          "value": "{color.green.425}",
+          "value": "{color.green.475}",
           "type": "color"
         },
         "status-critical": {
@@ -29,24 +33,6 @@
         "status-warning": {
           "value": "{color.gold.600}",
           "type": "color"
-        }
-      },
-      "action": {
-        "color": {
-          "background": {
-            "primary": {
-              "value": "{color.blue.475}",
-              "type": "color"
-            },
-            "secondary": {
-              "value": "{color.blue.475}",
-              "type": "color"
-            },
-            "muted": {
-              "value": "{color.blue.475}",
-              "type": "color"
-            }
-          }
         }
       }
     }

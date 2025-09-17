@@ -178,6 +178,10 @@ describe('DtEmojiPicker Tests', () => {
     });
 
     it('Should render add emoji button', () => {
+      mockProps = { showAddEmojiButton: true };
+
+      updateWrapper();
+
       const addEmojiButton = wrapper.find('.d-emoji-picker__add-emoji');
 
       expect(addEmojiButton.exists()).toBe(true);
@@ -243,6 +247,21 @@ describe('DtEmojiPicker Tests', () => {
   });
 
   describe('Interactivity Tests', () => {
+    it('Should emit add-emoji event when add emoji button is clicked', async () => {
+      mockProps = { showAddEmojiButton: true };
+
+      updateWrapper();
+
+      const addEmojiButton = wrapper.find('.d-emoji-picker__add-emoji');
+
+      expect(addEmojiButton.exists()).toBe(true);
+
+      await addEmojiButton.trigger('click');
+      await wrapper.vm.$nextTick();
+
+      expect(wrapper.emitted('add-emoji')).toBeTruthy();
+    });
+
     it('Should emit selected-emoji event when emoji is clicked', async () => {
       const emoji = wrapper.find('.d-emoji-picker__selector .d-emoji-picker__tab button');
 

@@ -1,0 +1,31 @@
+{
+  "name": "@dialpad/dialtone-mcp-server",
+  "version": "0.1.0",
+  "main": "build/index.js",
+  "type": "module",
+  "bin": {
+    "dialtone-mcp-server": "build/index.js"
+  },
+  "scripts": {
+    "build": "tsc",
+    "start": "node build/index.js",
+    "dev": "node --loader ts-node/esm src/index.ts",
+    "test": "echo \"No tests yet\" && exit 0"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "1.18.0"
+  },
+  "devDependencies": {
+    "@types/node": "24.3.1",
+    "ts-node": "10.9.2",
+    "typescript": "^5.2"
+  },
+  "keywords": ["mcp", "dialtone", "design-system", "model-context-protocol"],
+  "description": "MCP Server for Dialtone Design System",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/dialpad/dialtone.git",
+    "directory": "packages/dialtone-mcp-server"
+  },
+  "license": "MIT"
+}
