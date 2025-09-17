@@ -61,6 +61,7 @@
           name="content"
         >
           <dt-checkbox-group
+            v-if="modelValue?.length"
             :selected-values="activeFilters"
             :aria-label="label"
             name="contact-centers"
@@ -277,6 +278,7 @@ export default {
 
     /**
      * Emitted when the active filters change
+     * @type {Array}
      */
     'update:modelValue',
   ],
@@ -326,9 +328,18 @@ export default {
       this.$emit('open', isOpen);
     },
 
-    filters (filters) {
-      this.$emit('update:modelValue', filters);
+    filters: {
+      deep: true,
+      handler (filters) {
+        this.$emit('update:modelValue', filters);
+      },
     },
+  },
+
+  mounted () {
+    if (!(this.modelValue?.length || (this.$slots.content && this.$slots.content()))) {
+      console.warn('Please provide content through the v-model or the "content" slot.')
+    }
   },
 
   methods: {

@@ -61,6 +61,7 @@
           name="content"
         >
           <dt-checkbox-group
+            v-if="value.length"
             :selected-values="activeFilters"
             :aria-label="label"
             name="contact-centers"
@@ -277,6 +278,7 @@ export default {
 
     /**
      * Emitted when the active filters change
+     * @type {Array}
      */
     'update:value',
   ],

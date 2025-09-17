@@ -1,6 +1,6 @@
 <template>
   <dt-filter-pill
-    :model-value="$attrs.filters"
+    :model-value="$attrs.modelValue"
     :alpha-tooltip-text="$attrs.alphaTooltipText"
     :disabled="$attrs.disabled"
     :label="$attrs.label"

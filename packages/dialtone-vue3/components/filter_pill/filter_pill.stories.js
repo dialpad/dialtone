@@ -68,6 +68,12 @@ export const argTypesData = {
       disable: true,
     },
   },
+
+  onUpdateModelValue: {
+    table: {
+      disable: true,
+    },
+  },
 };
 
 // Story Collection
