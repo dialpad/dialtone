@@ -34,6 +34,13 @@
       "options": {
         "command": "pnpm publish --filter ./packages/dialtone-mcp-server"
       }
+    },
+    "release": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "pnpm semantic-release-plus --extends ./packages/dialtone-mcp-server/release-ci.config.cjs && sleep 3",
+        "parallel": false
+      }
     }
   }
 }
