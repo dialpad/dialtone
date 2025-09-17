@@ -16,6 +16,7 @@
             <p class="d-recipe-emoji-row__tooltip-emoji">
               {{ reaction.emojiUnicodeOrShortname }}
             </p>
+            <br>
             <p class="d-recipe-emoji-row__tooltip-names">
               {{ reaction.names }}
               <span
