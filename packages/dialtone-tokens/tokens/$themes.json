@@ -6204,5 +6204,47 @@
       "theme/prota-deuter/dark": "enabled"
     },
     "group": "prota-deuter"
+  },
+  {
+    "id": "eb76399134285a313a07f6e24c2c21732914e121",
+    "name": "light",
+    "$figmaStyleReferences": {},
+    "selectedTokenSets": {
+      "root": "source",
+      "base/default": "source",
+      "theme/dp/default": "enabled",
+      "theme/trita/default": "enabled",
+      "components/avatar/default": "enabled",
+      "components/badge/default": "enabled",
+      "components/button/default": "enabled",
+      "components/checkbox/default": "enabled",
+      "components/icon/default": "enabled",
+      "components/presence/default": "enabled",
+      "components/radio/default": "enabled"
+    },
+    "group": "trita"
+  },
+  {
+    "id": "fc24557ed077fe7c26e805d40c5e4bff25badbe3",
+    "name": "dark",
+    "$figmaStyleReferences": {},
+    "selectedTokenSets": {
+      "root": "source",
+      "base/default": "source",
+      "base/dark": "source",
+      "theme/dp/default": "enabled",
+      "theme/dp/dark": "enabled",
+      "components/avatar/default": "enabled",
+      "components/badge/default": "enabled",
+      "components/button/default": "enabled",
+      "components/checkbox/default": "enabled",
+      "components/icon/default": "enabled",
+      "components/presence/default": "enabled",
+      "components/presence/dark": "enabled",
+      "components/radio/default": "enabled",
+      "theme/trita/default": "enabled",
+      "theme/trita/dark": "enabled"
+    },
+    "group": "trita"
   }
 ]
