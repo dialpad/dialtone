@@ -1,6 +1,6 @@
 ---
 title: Filter Pill
-description: A Filter Pill offers a button paired with a popover to show and manage filtering options, the label and 
+description: A Filter Pill offers a button paired with a popover to show and manage filtering options, the label and
   content of the filter can be handled through slots and props.
 status: beta
 # storybook: https://dialtone.dialpad.com/vue/?path=/story/components-filter-pill--default @TODO: Uncomment once it's RFP
@@ -136,9 +136,12 @@ Using the "default" slot, you're able to override the `label` prop
       ref="clearableExample"
       v-model="defaultSlotFilters"
     >
-      <template #default>
-        With Default slot
-      </template>
+      <dt-stack v-if="defaultSlotValues" direction="row" gap="300">
+        <span>{{ defaultSlotText }}</span>
+        <strong>=</strong>
+        <span>{{ defaultSlotValues }}</span>
+      </dt-stack>
+      <span v-else>{{ defaultSlotText }}</span>
     </dt-filter-pill>
   </dt-stack>
 </code-well-header>
@@ -189,7 +192,7 @@ showHtmlWarning />
 <component-class-table component-name="filter-pill"></component-class-table>
 
 <script setup>
-import { ref } from 'vue';
+import { ref, computed } from 'vue';
 import { DtIconSearch, DtIconClose } from '@dialpad/dialtone-icons/vue3';
 
 const inputValue = ref('');
@@ -218,8 +221,11 @@ const nonClearableFilters = ref([
   {name: 'Option 3'}
 ]);
 const defaultSlotFilters = ref([
-  {name: 'Option 1'},
-  {name: 'Option 2'},
+  {name: 'Orange'},
+  {name: 'Apple'},
+  {name: 'Avocado'},
+  {name: 'Grapefruit'},
+  {name: 'Grapes'},
 ]);
 const contentSlotFilters = ref([
   {name: 'Option 1'},
@@ -233,4 +239,17 @@ const sizeNames = {
   lg: 'Large',
   xl: 'Extra Large',
 };
+
+const defaultSlotText = computed(() => 'Fruit');
+
+const defaultSlotValues = computed(() => {
+  const activeItems = defaultSlotFilters.value.filter(item => item.active);
+  if (activeItems.length === 0) return '';
+
+  const displayItems = activeItems.slice(0, 2).map(item => item.name);
+  if (activeItems.length > 2) {
+    displayItems.push(`+${activeItems.length - 2}`);
+  }
+  return displayItems.join(', ');
+});
 </script>
