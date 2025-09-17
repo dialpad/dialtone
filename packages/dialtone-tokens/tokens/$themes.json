@@ -6162,7 +6162,7 @@
   },
   {
     "id": "b177d2d025ea3e6b1d1258ddcdb46d2fecbf23bc",
-    "name": "default",
+    "name": "light",
     "$figmaStyleReferences": {},
     "selectedTokenSets": {
       "root": "source",
@@ -6177,6 +6177,31 @@
       "components/presence/default": "enabled",
       "components/presence/default-prota-deuter": "enabled",
       "components/radio/default": "enabled"
+    },
+    "group": "prota-deuter"
+  },
+  {
+    "id": "c2f22c48fcfd510008cb7c673299474727b3e357",
+    "name": "dark",
+    "$figmaStyleReferences": {},
+    "selectedTokenSets": {
+      "root": "source",
+      "base/default": "source",
+      "base/dark": "source",
+      "theme/dp/default": "enabled",
+      "theme/dp/dark": "enabled",
+      "components/avatar/default": "enabled",
+      "components/badge/default": "enabled",
+      "components/button/default": "enabled",
+      "components/checkbox/default": "enabled",
+      "components/icon/default": "enabled",
+      "components/presence/default": "enabled",
+      "components/presence/dark": "enabled",
+      "components/presence/default-prota-deuter": "enabled",
+      "components/presence/dark-prota-deuter": "enabled",
+      "components/radio/default": "enabled",
+      "theme/prota-deuter/default": "enabled",
+      "theme/prota-deuter/dark": "enabled"
     },
     "group": "prota-deuter"
   }
