@@ -1,3 +1,10 @@
+## [2.198.4](https://github.com/dialpad/dialtone/compare/dialtone-vue2/v2.198.3...dialtone-vue2/v2.198.4) (2025-09-17)
+
+
+### Bug Fixes
+
+* **Emoji Row:** DP-157752 make emoji always appear on top  ([#920](https://github.com/dialpad/dialtone/issues/920)) ([dc2fb80](https://github.com/dialpad/dialtone/commit/dc2fb80ab502f738aa24cb3e3db661d247453456))
+
 ## [2.198.3](https://github.com/dialpad/dialtone/compare/dialtone-vue2/v2.198.2...dialtone-vue2/v2.198.3) (2025-09-16)
 
 
