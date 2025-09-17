@@ -9,7 +9,7 @@ import { flushPromises } from '@workspaceRoot/common/utils/client.mjs';
 
 // CSS
 import '@dialpad/dialtone-css/lib/dist/dialtone.css';
-// import '@dialpad/dialtone-combinator/css';
+import '@dialpad/dialtone-combinator/css';
 import './assets/less/dialtone-docs.less';
 import './assets/less/dialtone-syntax.less';
 
@@ -41,7 +41,7 @@ export default defineClientConfig({
     if (!__VUEPRESS_SSR__) {
       await initOverlayScrollbars();
       await registerDialtoneVue(app);
-      // await registerDialtoneCombinator(app);
+      await registerDialtoneCombinator(app);
       await registerDialtoneIcons(app);
       await importDocumentation(app);
       importDialtoneThemes(app);
@@ -117,10 +117,10 @@ async function registerDialtoneVue (app) {
   setCustomEmojiJson(customEmojis);
 }
 
-// async function registerDialtoneCombinator (app) {
-//  const { DtcCombinator } = await import('@dialpad/dialtone-combinator');
-//  app.component('DtcCombinator', DtcCombinator);
-// }
+async function registerDialtoneCombinator (app) {
+ const { DtcCombinator } = await import('@dialpad/dialtone-combinator');
+ app.component('DtcCombinator', DtcCombinator);
+}
 
 async function registerDialtoneIcons (app) {
   const icons = await import('@dialpad/dialtone-icons/vue3');

@@ -2,13 +2,14 @@
   <dt-input
     :value="value"
     :disabled="disabled"
-    class="d-r-none"
-    type="textarea"
     spellcheck="false"
+    size="sm"
     @input="updateValue"
   >
     <template #labelSlot>
-      <slot />
+      <span class="d-input__label-text d-label--sm">
+        <slot />
+      </span>
     </template>
   </dt-input>
 </template>

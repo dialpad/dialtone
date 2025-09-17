@@ -28,15 +28,14 @@
         </span>
       </template>
     </dtc-suggestion>
-    <div class="d-mx128 lg:d-mx16">
-      <Combinator
-        :key="componentKey"
-        :component="component"
-        :variants="variants"
-        :documentation="componentDocumentation"
-        :library="library"
-      />
-    </div>
+    <Combinator
+      :key="componentKey"
+      class="d-wmn80p"
+      :component="component"
+      :variants="variants"
+      :documentation="componentDocumentation"
+      :library="library"
+    />
   </dt-stack>
 </template>
 
@@ -118,10 +117,3 @@ onMounted(async () => {
 });
 
 </script>
-
-<style>
-  .dtc-preview {
-    padding-inline-start: var(--dt-space-800);
-    padding-inline-end: var(--dt-space-800);
-  }
-</style>

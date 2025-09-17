@@ -57,16 +57,8 @@ DIALTONE_EDITOR_ADD_LINK_BUTTON =
     .aria-label = Invoerveld om link toe te voegen
 DIALTONE_EMOJI_ROW_REACTION_LABEL =
     { $personCount ->
-        [one]
-            { $youIncluded ->
-               *[true] heeft gereageerd met { $reaction }
-                [false] heeft gereageerd met { $reaction }
-            }
-       *[other]
-            { $youIncluded ->
-               *[true] hebben gereageerd met { $reaction }
-                [false] hebben gereageerd met { $reaction }
-            }
+        [one] heeft gereageerd met { $reaction }
+       *[other] hebben gereageerd met { $reaction }
     }
 DIALTONE_EMOJI_PICKER_ADD_EMOJI_LABEL = Emoji toevoegen
 DIALTONE_EMOJI_PICKER_SEARCH_NO_RESULTS_LABEL = Geen resultaten

@@ -1,14 +1,9 @@
-# [8.65.0-next.1](https://github.com/dialpad/dialtone/compare/dialtone-css/v8.64.2...dialtone-css/v8.65.0-next.1) (2025-09-09)
+## [8.64.3](https://github.com/dialpad/dialtone/compare/dialtone-css/v8.64.2...dialtone-css/v8.64.3) (2025-09-16)
 
 
-### Code Refactoring
+### Bug Fixes
 
-* **Css:** DLT-1876 css logical properties ([#872](https://github.com/dialpad/dialtone/issues/872)) ([1acd6c9](https://github.com/dialpad/dialtone/commit/1acd6c900053b0c820309faa4a870ff1dceced04))
-
-
-### Features
-
-* **Css Utility:** DLT-2715 add default color for border css utilities ([#874](https://github.com/dialpad/dialtone/issues/874)) ([71310ab](https://github.com/dialpad/dialtone/commit/71310ab483fde976d56c69e0456bce70cb6d372d))
+* **Checkbox, Radio:** DLT-2772 add pointer cursor to entire checkbox/radio label region ([#913](https://github.com/dialpad/dialtone/issues/913)) ([4bd0859](https://github.com/dialpad/dialtone/commit/4bd08592811f8dbbbfaa43fc79ab84d6209e5854))
 
 ## [8.64.2](https://github.com/dialpad/dialtone/compare/dialtone-css/v8.64.1...dialtone-css/v8.64.2) (2025-09-04)
 

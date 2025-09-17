@@ -1,14 +1,19 @@
-# [2.199.0-next.1](https://github.com/dialpad/dialtone/compare/dialtone-vue2/v2.198.2...dialtone-vue2/v2.199.0-next.1) (2025-09-09)
+## [2.198.3](https://github.com/dialpad/dialtone/compare/dialtone-vue2/v2.198.2...dialtone-vue2/v2.198.3) (2025-09-16)
+
+
+### Bug Fixes
+
+* **Localization:** DLT-2768  emoji row reaction label warnings ([#911](https://github.com/dialpad/dialtone/issues/911)) ([5a6713d](https://github.com/dialpad/dialtone/commit/5a6713dfd69d55d6dcbb850de48087829417d33c))
 
 
 ### Code Refactoring
 
-* **Css:** DLT-1876 css logical properties ([#872](https://github.com/dialpad/dialtone/issues/872)) ([1acd6c9](https://github.com/dialpad/dialtone/commit/1acd6c900053b0c820309faa4a870ff1dceced04))
+* **Emoji Picker:** DLT-2776 new prop showAddEmojiButton ([#915](https://github.com/dialpad/dialtone/issues/915)) ([c37911b](https://github.com/dialpad/dialtone/commit/c37911b8f77a7453105f0421f24ac552ca935a88))
 
 
-### Features
+### Documentation
 
-* **Css Utility:** DLT-2715 add default color for border css utilities ([#874](https://github.com/dialpad/dialtone/issues/874)) ([71310ab](https://github.com/dialpad/dialtone/commit/71310ab483fde976d56c69e0456bce70cb6d372d))
+* NO-JIRA remove names from public docs ([#917](https://github.com/dialpad/dialtone/issues/917)) ([744736f](https://github.com/dialpad/dialtone/commit/744736f09e1086a7f5f7691045677a62cbe4e94c))
 
 ## [2.198.2](https://github.com/dialpad/dialtone/compare/dialtone-vue2/v2.198.1...dialtone-vue2/v2.198.2) (2025-09-09)
 

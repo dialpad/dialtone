@@ -65,6 +65,7 @@ export const argsData = {
   customEmojis,
   skinTone: 'Default',
   showPopover: false,
+  showAddEmojiButton: true,
 };
 
 export const argTypesData = {
@@ -76,6 +77,9 @@ export const argTypesData = {
     control: 'text',
   },
   showSearch: {
+    control: 'boolean',
+  },
+  showAddEmojiButton: {
     control: 'boolean',
   },
   onSkinTone: {

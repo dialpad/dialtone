@@ -1,19 +1,21 @@
 <template>
   <div class="dtc-control-boolean">
-    <dt-checkbox
-      label-class="dtc-control-boolean__label"
-      :checked="value"
+    <dt-toggle
+      :value="value"
       :disabled="disabled"
+      label-class="d-label--sm d-fc-secondary"
+      size="sm"
+      wrapper-class="d-jc-space-between"
       data-qa="dtc-control-boolean-input"
-      @input="e => emit(VALUE_UPDATE_EVENT, e)"
+      @change="e => emit(VALUE_UPDATE_EVENT, e)"
     >
       <slot />
-    </dt-checkbox>
+    </dt-toggle>
   </div>
 </template>
 
 <script setup>
-import { DtCheckbox } from '@dialpad/dialtone-vue';
+import { DtToggle } from '@dialpad/dialtone-vue';
 import { VALUE_UPDATE_EVENT } from '@/src/lib/constants';
 
 defineProps({
