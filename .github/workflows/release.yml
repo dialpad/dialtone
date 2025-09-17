@@ -21,6 +21,7 @@ on:
           - eslint-plugin
           - stylelint-plugin
           - postcss-responsive-variations
+          - dialtone-mcp-server
   schedule:
     - cron: "0 10 * * 2"
 
@@ -133,6 +134,10 @@ jobs:
       - name: Release Dialtone PostCSS Responsive Variations Plugin ${{ env.RELEASE_TAG }}
         if: ${{ github.event_name == 'schedule' || github.event.inputs.package == 'all' || github.event.inputs.package == 'postcss-responsive-variations' }}
         run: pnpm nx run postcss-responsive-variations:release
+
+      - name: Release Dialtone MCP Server ${{ env.RELEASE_TAG }}
+        if: ${{ github.event_name == 'schedule' || github.event.inputs.package == 'all' || github.event.inputs.package == 'dialtone-mcp-server' }}
+        run: pnpm nx run dialtone-mcp-server:release
 
       - name: Release Dialtone ${{ env.RELEASE_TAG }}
         if: ${{ github.event_name == 'schedule' || github.event.inputs.package == 'all' || github.event.inputs.package == 'dialtone' }}
