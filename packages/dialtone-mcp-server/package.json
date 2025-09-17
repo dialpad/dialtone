@@ -9,18 +9,26 @@
   "scripts": {
     "build": "tsc",
     "start": "node build/index.js",
-    "dev": "node --loader ts-node/esm src/index.ts",
-    "test": "echo \"No tests yet\" && exit 0"
+    "dev": "tsx src/index.ts",
+    "test": "node test-simple.js",
+    "inspect": "npx @modelcontextprotocol/inspector npm run start"
   },
   "dependencies": {
     "@modelcontextprotocol/sdk": "1.18.0"
   },
   "devDependencies": {
+    "@modelcontextprotocol/inspector": "0.16.7",
     "@types/node": "24.3.1",
     "ts-node": "10.9.2",
+    "tsx": "^4.0.0",
     "typescript": "^5.2"
   },
-  "keywords": ["mcp", "dialtone", "design-system", "model-context-protocol"],
+  "keywords": [
+    "mcp",
+    "dialtone",
+    "design-system",
+    "model-context-protocol"
+  ],
   "description": "MCP Server for Dialtone Design System",
   "repository": {
     "type": "git",
