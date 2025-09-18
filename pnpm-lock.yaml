@@ -654,6 +654,12 @@ importers:
 
   packages/dialtone-mcp-server:
     dependencies:
+      '@dialpad/dialtone-css':
+        specifier: workspace:*
+        version: link:../dialtone-css
+      '@dialpad/dialtone-vue':
+        specifier: workspace:*
+        version: link:../dialtone-vue3
       '@modelcontextprotocol/sdk':
         specifier: 1.18.0
         version: 1.18.0

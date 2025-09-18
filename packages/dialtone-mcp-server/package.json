@@ -14,7 +14,9 @@
     "inspect": "npx @modelcontextprotocol/inspector npm run start"
   },
   "dependencies": {
-    "@modelcontextprotocol/sdk": "1.18.0"
+    "@modelcontextprotocol/sdk": "1.18.0",
+    "@dialpad/dialtone-css": "workspace:*",
+    "@dialpad/dialtone-vue": "workspace:*"
   },
   "devDependencies": {
     "@modelcontextprotocol/inspector": "0.16.7",

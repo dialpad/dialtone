@@ -1,13 +1,26 @@
 import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
 import { StdioServerTransport } from "@modelcontextprotocol/sdk/server/stdio.js";
-import { readFile } from "fs/promises";
-import { join, dirname } from "path";
-import { fileURLToPath } from "url";
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = dirname(__filename);
+async function loadJsonData() {
+  const [utilityClasses, tokens, components, clientRules] = await Promise.all([
+    import('@dialpad/dialtone-css/lib/dist/dialtone-docs.json', { with: { type: 'json' } }),
+    import('@dialpad/dialtone-css/lib/dist/tokens-docs.json', { with: { type: 'json' } }),
+    import('@dialpad/dialtone-vue/component-documentation.json', { with: { type: 'json' } }),
+    import('../client-rules.json', { with: { type: 'json' } })
+  ]);
+
+  return {
+    utilityClasses: utilityClasses.default,
+    tokens: tokens.default,
+    components: components.default,
+    clientRules: clientRules.default
+  };
+}
 
 async function main() {
+  // Load JSON data
+  const data = await loadJsonData();
+
   // Create server instance
   const server = new McpServer({
     name: "dialtone-mcp-server",
@@ -25,13 +38,11 @@ async function main() {
     description: "Complete documentation of Dialtone CSS utility classes",
     mimeType: "application/json",
   }, async () => {
-    const filePath = join(__dirname, "../../dialtone-css/lib/dist/dialtone-docs.json");
-    const content = await readFile(filePath, "utf-8");
     return {
       contents: [{
         uri: "dialtone://utility-classes",
         mimeType: "application/json",
-        text: content
+        text: JSON.stringify(data.utilityClasses, null, 2)
       }]
     };
   });
@@ -41,13 +52,11 @@ async function main() {
     description: "Complete documentation of Dialtone design tokens",
     mimeType: "application/json",
   }, async () => {
-    const filePath = join(__dirname, "../../dialtone-css/lib/dist/tokens-docs.json");
-    const content = await readFile(filePath, "utf-8");
     return {
       contents: [{
         uri: "dialtone://tokens",
         mimeType: "application/json",
-        text: content
+        text: JSON.stringify(data.tokens, null, 2)
       }]
     };
   });
@@ -57,13 +66,11 @@ async function main() {
     description: "Complete documentation of Dialtone Vue components",
     mimeType: "application/json",
   }, async () => {
-    const filePath = join(__dirname, "../../dialtone-vue3/dist/component-documentation.json");
-    const content = await readFile(filePath, "utf-8");
     return {
       contents: [{
         uri: "dialtone://components",
         mimeType: "application/json",
-        text: content
+        text: JSON.stringify(data.components, null, 2)
       }]
     };
   });
@@ -73,13 +80,11 @@ async function main() {
     description: "Guidelines and rules for AI clients when working with Dialtone",
     mimeType: "application/json",
   }, async () => {
-    const filePath = join(__dirname, "../client-rules.json");
-    const content = await readFile(filePath, "utf-8");
     return {
       contents: [{
         uri: "dialtone://client-rules",
         mimeType: "application/json",
-        text: content
+        text: JSON.stringify(data.clientRules, null, 2)
       }]
     };
   });
