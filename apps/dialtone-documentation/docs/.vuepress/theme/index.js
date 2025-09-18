@@ -157,6 +157,7 @@ export const dialtoneVuepressTheme = (options) => {
           page.data.componentsStatus = [];
           break;
       }
+      page.data.headers = page.headers;
     },
   };
 };
