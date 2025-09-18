@@ -98,7 +98,6 @@ import slashCommandSuggestion from './extensions/slash_command/suggestion';
 import { warnIfUnmounted } from '@/common/utils';
 import deepEqual from 'deep-equal';
 import { DialtoneLocalization } from '@/localization';
-import TurndownService from 'turndown';
 
 export default {
   name: 'DtRichTextEditor',
@@ -506,114 +505,118 @@ export default {
 
       i18n: new DialtoneLocalization(),
 
-      // TurndownService for HTML to markdown conversion
-      turndownService: (() => {
-        const service = new TurndownService({
-          bulletListMarker: '-',
-          codeBlockStyle: 'fenced',
-          emDelimiter: '*',
-        });
+      // JSON-to-markdown converter
+      jsonToMarkdownConverter: {
+        convertToMarkdown (doc) {
+          return this.processNode(doc);
+        },
 
-        // Helper function to process custom components
-        const processCustomComponent = (node) => {
-          const componentMap = {
-            'mention-component': (node) => {
-              const name = node.getAttribute('name') || '';
-              return `@${name}`;
-            },
-            'channel-component': (node) => {
-              const name = node.getAttribute('name') || '';
-              return `#${name}`;
-            },
-            'command-component': (node) => {
-              const command = node.getAttribute('command') || '';
-              const parameters = node.getAttribute('parameters') || '';
-              return `/${command}${parameters ? ` ${parameters}` : ''}`;
-            },
-            'emoji-component': (node) => {
-              const code = node.getAttribute('code') || '';
-              return code;
-            },
-          };
+        // eslint-disable-next-line complexity
+        processNode (node) {
+          if (!node) return '';
 
-          const tagName = node.tagName.toLowerCase();
-          const processor = componentMap[tagName];
-          return processor ? processor(node) : '';
-        };
+          switch (node.type) {
+            case 'doc':
+              return node.content ? node.content.map(child => this.processNode(child)).join('') : '';
 
-        // Add custom rules for our custom components
-        ['mention-component', 'channel-component', 'command-component', 'emoji-component'].forEach(tag => {
-          service.addRule(tag, {
-            filter: tag,
-            replacement: (content, node) => processCustomComponent(node),
-          });
-        });
+            case 'paragraph':
+              { const paragraphContent = node.content ? node.content.map(child => this.processNode(child)).join('') : '';
+              return paragraphContent ? paragraphContent + '\n' : '\n'; }
 
-        // Add custom rule for strikethrough
-        service.addRule('strikethrough', {
-          filter: ['s', 'strike', 'del'],
-          replacement: function (content) {
-            return '~~' + content + '~~';
-          },
-        });
-
-        // Helper function to process paragraph children
-        const processParagraphChildren = (node) => {
-          let processedContent = '';
-          const customTags = ['mention-component', 'channel-component', 'command-component', 'emoji-component'];
-
-          for (const child of node.childNodes) {
-            if (child.nodeType === 1) { // Element node
-              const tagName = child.tagName.toLowerCase();
-              if (customTags.includes(tagName)) {
-                processedContent += processCustomComponent(child);
-              } else {
-                processedContent += service.turndown(child);
+            case 'text':
+              { let text = node.text || '';
+              if (node.marks) {
+                text = this.applyMarks(text, node.marks);
               }
-            } else if (child.nodeType === 3) { // Text node
-              processedContent += child.textContent;
-            }
+              return text; }
+
+            case 'hardBreak':
+              return '\n';
+
+            case 'blockquote':
+              { const blockquoteContent = node.content ? node.content.map(child => this.processNode(child)).join('') : '';
+              return blockquoteContent.split('\n').map(line => line ? `> ${line}` : '>').join('\n') + '\n'; }
+
+            case 'bulletList':
+              return node.content ? node.content.map(child => this.processNode(child)).join('') : '';
+
+            case 'orderedList':
+              return node.content ? node.content.map((child, index) => {
+                const listItem = this.processNode(child);
+                return listItem.replace(/^- /, `${index + 1}. `);
+              }).join('') : '';
+
+            case 'listItem':
+              { const listContent = node.content ? node.content.map(child => this.processNode(child)).join('') : '';
+              return listContent ? `- ${listContent.replace(/\n$/, '')}\n` : ''; }
+
+            case 'codeBlock':
+              { const codeContent = node.content ? node.content.map(child => this.processNode(child)).join('') : '';
+              return `\`\`\`\n${codeContent}\n\`\`\``; }
+
+            case 'mention':
+              { const mentionName = node.attrs?.name || '';
+              const mentionId = node.attrs?.id || '';
+              const contactKey = node.attrs?.contactKey || '';
+              return `<!-- @mention: {"id": "${mentionId}", "contactKey": "${contactKey}", "name": "${mentionName}"} -->`; }
+
+            case 'channel':
+              { const channelName = node.attrs?.name || '';
+              const channelId = node.attrs?.id || '';
+              const locked = node.attrs?.locked.toString() || '';
+              return `<!-- @channel: {"id": "${channelId}", "name": "${channelName}", "locked": "${locked}"} -->`; }
+
+            case 'slash-commands':
+              { const command = node.attrs?.command || '';
+              const parameters = node.attrs?.parameters || '';
+              return `/${command}${parameters ? ` ${parameters}` : ''}`; }
+
+            case 'emoji':
+              return node.attrs?.code || '';
+
+            default:
+              // For unknown node types, process content if available
+              return node.content ? node.content.map(child => this.processNode(child)).join('') : '';
           }
-          return processedContent;
-        };
+        },
 
-        // Override paragraph rule to ensure custom components are processed first
-        service.addRule('customParagraph', {
-          filter: 'p',
-          replacement: function (content, node) {
-            // Check if this paragraph contains any custom components
-            const customTags = ['mention-component', 'channel-component', 'command-component', 'emoji-component'];
-            const hasCustomComponents = customTags.some(tag => node.querySelector(tag));
-
-            if (!hasCustomComponents) {
-              // Fall back to default paragraph behavior for regular content
-              return content ? content + '\n' : '';
+        applyMarks (text, marks) {
+          let result = text;
+          // Apply marks in a specific order to handle nesting correctly
+          const orderedMarks = [...marks].sort((a, b) => {
+            const order = { 'link': 0, 'bold': 1, 'italic': 2, 'strike': 3, 'code': 4 };
+            return (order[a.type] || 5) - (order[b.type] || 5);
+          });
+          
+          orderedMarks.forEach(mark => {
+            switch (mark.type) {
+              case 'bold':
+                result = `**${result}**`;
+                break;
+              case 'italic':
+                result = `*${result}*`;
+                break;
+              case 'strike':
+                result = `~~${result}~~`;
+                break;
+              case 'code':
+                result = `\`${result}\``;
+                break;
+              case 'link':
+                {
+                  const href = mark.attrs?.href || '';
+                  result = `[${result}](${href})`;
+                  break;
+                }
+              default:
+                // For unknown marks, leave text as-is
+                break;
             }
+          });
+          return result;
+        },
+      },
 
-            // Process all child nodes manually only if custom components are present
-            const processedContent = processParagraphChildren(node);
-            return processedContent ? processedContent + '\n' : '';
-          },
-        });
-
-        // Custom rule for bullet list items to reduce spacing
-        service.addRule('listItem', {
-          filter: 'li',
-          replacement: function (content, node, options) {
-            // Remove excessive whitespace and newlines that come from nested paragraphs
-            content = content
-              .replace(/^\s*\n+/, '') // remove leading whitespace and newlines
-              .replace(/\n+\s*$/, '') // remove trailing newlines and whitespace
-              .replace(/\n\s*\n+/g, '\n') // collapse multiple newlines to single newlines
-              .replace(/\n/gm, '\n  '); // indent any remaining newlines with 2 spaces
-
-            const prefix = options.bulletListMarker + ' ';
-            return prefix + content + (node.nextSibling ? '\n' : '');
-          },
-        });
-
-        return service;
-      })(),
     };
   },
 
@@ -935,7 +938,7 @@ export default {
       window.open(link, '_blank');
     },
 
-     
+
     setLink (linkInput, linkText, linkOptions, linkProtocols = RICH_TEXT_EDITOR_SUPPORTED_LINK_PROTOCOLS,
       defaultPrefix) {
       if (!linkInput) {
@@ -970,7 +973,7 @@ export default {
         .run();
     },
 
-     
+
     processValue (newValue, returnIfEqual = true) {
       const currentValue = this.getOutput();
 
@@ -1124,7 +1127,7 @@ export default {
       this.$emit('text-input', textValue);
 
       // Always output markdown in a separate event
-      const markdownValue = this.turndownService.turndown(htmlValue);
+      const markdownValue = this.jsonToMarkdownConverter.convertToMarkdown(jsonValue);
       this.$emit('markdown-input', markdownValue);
     },
 
@@ -1163,7 +1166,7 @@ export default {
         case 'html':
           return this.editor.getHTML();
         case 'markdown':
-          return this.turndownService.turndown(this.editor.getHTML());
+          return this.jsonToMarkdownConverter.convertToMarkdown(this.editor.getJSON());
         case 'text':
         default:
           return this.editor.getText({ blockSeparator: '\n' });
