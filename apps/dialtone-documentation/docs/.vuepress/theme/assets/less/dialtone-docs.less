@@ -44,11 +44,12 @@ html body {
   --docsearch-container-background: var(--dt-color-surface-backdrop);
   // --docsearch-logo-color
   --docsearch-modal-width: var(--dt-size-1000);
-  --docsearch-modal-height: var(--dt-size-1000);
+  --docsearch-modal-height: auto;
   --docsearch-modal-background: var(--dt-color-surface-secondary);
   --docsearch-modal-shadow: var(--dt-shadow-large);
   /* stylelint-disable-next-line meowtec/no-px */
   --docsearch-searchbox-height: 40px;
+  --docsearch-searchbox-initial-height: 40px;
   // --docsearch-searchbox-background
   --docsearch-searchbox-focus-background: var(--dt-inputs-color-background-default);
   --docsearch-searchbox-shadow: inset 0 0 0 var(--dt-size-border-100) var(--dt-inputs-color-border-default);
@@ -69,7 +70,6 @@ html body {
     background-clip: padding-box;
     border: var(--dt-size-100) solid var(--dt-color-border-subtle);
     border-radius: var(--dt-size-radius-500);
-    border-radius: var(--dt-size-500);
     box-shadow: var(--dt-shadow-large);
   }
 
@@ -80,23 +80,27 @@ html body {
   }
 
   .DocSearch-SearchBar {
-    padding-bottom: var(--dt-space-550);
+    padding: var(--docsearch-spacing);
     border-bottom: 1px solid var(--dt-color-border-subtle);
   }
 
   .DocSearch-Form {
+    padding: 0 var(--docsearch-spacing);
     padding-right: var(--dt-space-450);
     padding-left: var(--dt-space-450);
     border-radius: var(--dt-size-radius-400);
+    border: none;
+    box-shadow: var(--docsearch-searchbox-shadow);
   }
 
-  .DocSearch-MagnifierLabel,
-  .DocSearch-Reset {
+  .DocSearch-MagnifierLabel svg,
+  .DocSearch-Close svg {
     color: var(--dt-color-foreground-muted)
   }
 
   .DocSearch-Input {
     font-size: var(--dt-font-size-300);
+    padding-inline-start: var(--dt-space-400);
 
     &:focus-visible {
       box-shadow: none;
@@ -123,7 +127,7 @@ html body {
   }
 
   .DocSearch-Dropdown {
-    // no overrides
+    max-height: var(--dt-size-1000);
   }
 
   .DocSearch-Dropdown-Container {

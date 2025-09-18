@@ -4,10 +4,11 @@ import NotFound from './layouts/NotFound.vue';
 import customEmojis from '@data/custom-emoji.json';
 import 'overlayscrollbars/overlayscrollbars.css';
 import { OverlayScrollbars, ClickScrollPlugin } from 'overlayscrollbars';
-import { onBeforeMount, provide, ref } from 'vue';
+import { onBeforeMount, provide, ref, onMounted } from 'vue';
 import { flushPromises } from '@workspaceRoot/common/utils/client.mjs';
 
 // CSS
+import '@docsearch/css';
 import '@dialpad/dialtone-css/lib/dist/dialtone.css';
 import '@dialpad/dialtone-combinator/css';
 import './assets/less/dialtone-docs.less';
@@ -76,6 +77,17 @@ export default defineClientConfig({
 
       provide('currentMode', currentMode);
       provide('currentTheme', currentTheme);
+    });
+    onMounted(async () => {
+      const docsearch = (await import('@docsearch/js'))?.default;
+
+      docsearch({
+          apiKey: '6436ebddb959748daeec411eb388a99d',
+          indexName: 'dialpad',
+          appId: 'Y5HG9UX6KM',
+          placeholder: 'Search Dialtone',
+          container: '#docsearch',
+      });
     });
   },
   layouts: {

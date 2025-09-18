@@ -26,7 +26,8 @@
           v-if="isMobile && route.path !== '/'"
         />
         <!-- eslint-disable-next-line vue/no-undef-components -->
-        <docsearch
+        <div
+          id="docsearch"
           ref="docSearchBtn"
           class="d-d-none"
           options=""

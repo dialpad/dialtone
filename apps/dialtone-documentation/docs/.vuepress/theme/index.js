@@ -4,7 +4,6 @@ import { activeHeaderLinksPlugin } from '@vuepress/plugin-active-header-links';
 import { prismjsPlugin } from '@vuepress/plugin-prismjs';
 import { backToTopPlugin } from '@vuepress/plugin-back-to-top';
 import { gitPlugin } from '@vuepress/plugin-git';
-import { docsearchPlugin } from '@vuepress/plugin-docsearch';
 import { sitemapPlugin } from 'vuepress-plugin-sitemap2';
 import markdownItClass from '@toycode/markdown-it-class';
 
@@ -115,13 +114,6 @@ export const dialtoneVuepressTheme = (options) => {
       backToTopPlugin(),
       gitPlugin({
         // options
-      }),
-      docsearchPlugin({
-        indexName: 'dialpad',
-        apiKey: '6436ebddb959748daeec411eb388a99d',
-        container: '#algolia-search-container',
-        appId: 'Y5HG9UX6KM',
-        placeholder: 'Search Dialtone',
       }),
       sitemapPlugin({
         hostname: 'https://dialtone.dialpad.com',
