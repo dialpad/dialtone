@@ -68,7 +68,7 @@ import PageHeader from '../components/PageHeader.vue';
 import PageToc from '../components/PageToc.vue';
 import { computed, watch, inject } from 'vue';
 import { useRoute } from 'vue-router';
-import { usePageData } from '@vuepress/client';
+import { usePageData } from 'vuepress/client';
 import { useThemeLocaleData } from '@vuepress/plugin-theme-data/client';
 
 const props = defineProps({

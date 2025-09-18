@@ -1,4 +1,4 @@
-import { defineClientConfig } from '@vuepress/client';
+import { defineClientConfig } from 'vuepress/client';
 import Layout from './layouts/Layout.vue';
 import NotFound from './layouts/NotFound.vue';
 import customEmojis from '@data/custom-emoji.json';

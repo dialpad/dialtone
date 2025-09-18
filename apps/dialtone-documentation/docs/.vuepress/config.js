@@ -1,12 +1,11 @@
 import { viteBundler } from '@vuepress/bundler-vite';
 import { defineUserConfig } from 'vuepress'
 // import { viteCommonjs } from '@originjs/vite-plugin-commonjs';
-// import { getDirname } from '@vuepress/utils';
 import viteSvgLoader from 'vite-svg-loader';
 // import { googleAnalyticsPlugin } from '@vuepress/plugin-google-analytics';
 // import { seoPlugin } from 'vuepress-plugin-seo2';
 import anchor from 'markdown-it-anchor';
-import path from 'path';
+import { getDirname, path } from 'vuepress/utils'
 
 const sidebar = require('../_data/site-nav.json');
 const { dialtoneVuepressTheme } = require('./theme');
@@ -31,7 +30,7 @@ const themeConfig = {
   contributors: false,
 };
 
-const __dirname = import.meta.url;
+const __dirname = getDirname(import.meta.url);
 
 export default defineUserConfig({
   // site config

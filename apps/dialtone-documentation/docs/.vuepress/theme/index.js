@@ -1,4 +1,3 @@
-import { getDirname, path } from '@vuepress/utils';
 import { themeDataPlugin } from '@vuepress/plugin-theme-data';
 import { activeHeaderLinksPlugin } from '@vuepress/plugin-active-header-links';
 import { prismjsPlugin } from '@vuepress/plugin-prismjs';
@@ -6,6 +5,7 @@ import { backToTopPlugin } from '@vuepress/plugin-back-to-top';
 import { gitPlugin } from '@vuepress/plugin-git';
 import { sitemapPlugin } from 'vuepress-plugin-sitemap2';
 import markdownItClass from '@toycode/markdown-it-class';
+import { getDirname, path } from 'vuepress/utils'
 
 const __dirname = getDirname(import.meta.url);
 const mapping = {
@@ -98,8 +98,7 @@ function getChildrenPageNames (path, pages) {
   return getChildrenPageNames(child, children);
 }
 
-export const dialtoneVuepressTheme = (options) => {
-  return {
+export const dialtoneVuepressTheme = (options) => ({
     name: '@dialpad/vuepress-theme-dialtone',
     clientConfigFile: path.resolve(__dirname, 'client.js'),
     plugins: [
@@ -119,9 +118,11 @@ export const dialtoneVuepressTheme = (options) => {
         hostname: 'https://dialtone.dialpad.com',
       }),
     ],
-    extendsMarkdown: (md) => {
+
+  extendsMarkdown: (md) => {
       md.use(markdownItClass, mapping);
     },
+
     onInitialized (app) {
       _blogPostsFrontmatter(app);
       _extractFrontmatter(
@@ -142,7 +143,7 @@ export const dialtoneVuepressTheme = (options) => {
       _extractFrontmatter(app, '/design/colors/', options);
       _extractComponentStatus(app);
     },
-     
+
     extendsPage: (page) => {
       switch (page.path) {
         case '/about/whats-new/':
@@ -159,7 +160,6 @@ export const dialtoneVuepressTheme = (options) => {
       }
       page.data.headers = page.headers;
     },
-  };
-};
+});
 
 export default dialtoneVuepressTheme;
