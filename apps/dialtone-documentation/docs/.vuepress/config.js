@@ -1,15 +1,11 @@
 import { viteBundler } from '@vuepress/bundler-vite';
 import { defineUserConfig } from 'vuepress'
-// import { viteCommonjs } from '@originjs/vite-plugin-commonjs';
 import viteSvgLoader from 'vite-svg-loader';
-// import { googleAnalyticsPlugin } from '@vuepress/plugin-google-analytics';
-// import { seoPlugin } from 'vuepress-plugin-seo2';
 import anchor from 'markdown-it-anchor';
 import { getDirname, path } from 'vuepress/utils'
 
 const sidebar = require('../_data/site-nav.json');
 const { dialtoneVuepressTheme } = require('./theme');
-// const siteURL = 'https://dialtone.dialpad.com';
 const baseURL = (process.env.VUEPRESS_BASE_URL ?? '/');
 
 const themeConfig = {
@@ -47,23 +43,13 @@ export default defineUserConfig({
   bundler: viteBundler({
     viteOptions: {
       build: {
-        sourcemap: false,
+        sourcemap: true,
       },
       plugins: [
         viteSvgLoader({ svgo: false }),
-        // viteCommonjs()
       ],
       css: {
-        devSourcemap: false,
-      },
-      resolve: {
-        alias: {
-          'vue/server-renderer': path.resolve(__dirname, '../../node_modules/vue/server-renderer/index.js'),
-          vue: path.resolve(__dirname, '../../node_modules/vue/dist/vue.esm-bundler.js'),
-        },
-      },
-      define: {
-        // __VUE_PROD_HYDRATION_MISMATCH_DETAILS__: false,
+        devSourcemap: true,
       },
     },
     vuePluginOptions: {
@@ -114,17 +100,4 @@ export default defineUserConfig({
     '@': path.resolve(__dirname, '../'),
     '@workspaceRoot': path.resolve(__dirname, '../../../../'),
   },
-
-  plugins: [
-    // googleAnalyticsPlugin({
-    //   id: 'G-0YV8QJ44LF',
-    // }),
-    // seoPlugin({
-    //   hostname: siteURL,
-    //   ogp: (ogp, page) => ({
-    //     ...ogp,
-    //     'og:image': siteURL + baseURL + page.frontmatter.image || ogp['og:image'],
-    //   }),
-    // }),
-  ],
 });
