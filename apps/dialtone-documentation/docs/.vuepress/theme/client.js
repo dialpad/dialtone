@@ -1,7 +1,7 @@
 import { defineClientConfig } from 'vuepress/client';
 import Layout from './layouts/Layout.vue';
 import NotFound from './layouts/NotFound.vue';
-import customEmojis from '@data/custom-emoji.json';
+import customEmojis from '@data/custom-emoji';
 import 'overlayscrollbars/overlayscrollbars.css';
 import { OverlayScrollbars, ClickScrollPlugin } from 'overlayscrollbars';
 import { onBeforeMount, provide, ref, onMounted } from 'vue';
