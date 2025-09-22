@@ -20,7 +20,7 @@
     "@modelcontextprotocol/inspector": "0.16.7",
     "@types/node": "24.3.1",
     "@dialpad/dialtone-css": "workspace:*",
-    "@dialpad/dialtone-vue": "workspace:*",
+    "@dialpad/dialtone-vue": "workspace:^3",
     "@rollup/plugin-json": "^6.0.0",
     "@rollup/plugin-node-resolve": "^15.2.0",
     "@rollup/plugin-typescript": "^11.1.0",

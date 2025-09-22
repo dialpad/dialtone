@@ -6,12 +6,13 @@
       "inputs": [
         "{projectRoot}/src/**/*",
         "{projectRoot}/package.json",
-        "{projectRoot}/tsconfig.json"
+        "{projectRoot}/tsconfig.json",
+        "{projectRoot}/rollup.config.js"
       ],
       "outputs": ["{projectRoot}/build"],
       "options": {
         "cwd": "{projectRoot}",
-        "command": "pnpm exec tsc"
+        "command": "pnpm exec rollup -c"
       }
     },
     "start": {
