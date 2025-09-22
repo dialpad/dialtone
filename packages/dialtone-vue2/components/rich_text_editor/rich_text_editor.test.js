@@ -129,6 +129,15 @@ describe('DtRichTextEditor tests', () => {
         describe('When using markdown output', () => {
 
           let jsonToMarkdownConverter;
+          const jsonInputBase = (innerContent) => {
+            return {
+              type: 'doc',
+              content: [{
+                type: 'paragraph',
+                content: innerContent,
+              }],
+            }
+          };
 
           beforeEach(async () => {
             await wrapper.setProps({ outputFormat: 'markdown' });
@@ -137,17 +146,11 @@ describe('DtRichTextEditor tests', () => {
           });
 
           it('should convert JSON to markdown correctly', async () => {
-            const jsonInput = {
-              type: 'doc',
-              content: [{
-                type: 'paragraph',
-                content: [{
-                  type: 'text',
-                  text: 'bold text',
-                  marks: [{ type: 'bold' }],
-                }],
-              }],
-            };
+            const jsonInput = jsonInputBase([{
+              type: 'text',
+              text: 'bold text',
+              marks: [{ type: 'bold' }],
+            }]);
             const output = jsonToMarkdownConverter.convertToMarkdown(jsonInput);
             expect(output).toBe('**bold text**\n');
           });
@@ -155,17 +158,11 @@ describe('DtRichTextEditor tests', () => {
           it('should convert italic text to markdown correctly', async () => {
             await wrapper.setProps({ allowItalic: true });
 
-            const jsonInput = {
-              type: 'doc',
-              content: [{
-                type: 'paragraph',
-                content: [{
-                  type: 'text',
-                  text: 'italic text',
-                  marks: [{ type: 'italic' }],
-                }],
-              }],
-            };
+            const jsonInput = jsonInputBase([{
+              type: 'text',
+              text: 'italic text',
+              marks: [{ type: 'italic' }],
+            }]);
             const output = jsonToMarkdownConverter.convertToMarkdown(jsonInput);
             expect(output).toBe('*italic text*\n');
           });
@@ -175,17 +172,11 @@ describe('DtRichTextEditor tests', () => {
 
             // Test jsonToMarkdownConverter directly
             const jsonToMarkdownConverter = wrapper.vm.jsonToMarkdownConverter;
-            const jsonInput = {
-              type: 'doc',
-              content: [{
-                type: 'paragraph',
-                content: [{
-                  type: 'text',
-                  text: 'strikethrough text',
-                  marks: [{ type: 'strike' }],
-                }],
-              }],
-            };
+            const jsonInput = jsonInputBase([{
+              type: 'text',
+              text: 'strikethrough text',
+              marks: [{ type: 'strike' }],
+            }]);
             const output = jsonToMarkdownConverter.convertToMarkdown(jsonInput);
             expect(output).toBe('~~strikethrough text~~\n');
           });
@@ -193,17 +184,11 @@ describe('DtRichTextEditor tests', () => {
           it('should convert links to markdown correctly', async () => {
             await wrapper.setProps({ link: true });
 
-            const jsonInput = {
-              type: 'doc',
-              content: [{
-                type: 'paragraph',
-                content: [{
-                  type: 'text',
-                  text: 'link text',
-                  marks: [{ type: 'link', attrs: { href: 'https://example.com' } }],
-                }],
-              }],
-            };
+            const jsonInput = jsonInputBase([{
+              type: 'text',
+              text: 'link text',
+              marks: [{ type: 'link', attrs: { href: 'https://example.com' } }],
+            }]);
             const output = jsonToMarkdownConverter.convertToMarkdown(jsonInput);
             expect(output).toBe('[link text](https://example.com)\n');
           });
@@ -218,24 +203,15 @@ describe('DtRichTextEditor tests', () => {
                 content: [
                   {
                     type: 'listItem',
-                    content: [{
-                      type: 'paragraph',
-                      content: [{ type: 'text', text: 'First item' }],
-                    }],
+                    content: [jsonInputBase([{ type: 'text', text: 'First item' }]).content[0]],
                   },
                   {
                     type: 'listItem',
-                    content: [{
-                      type: 'paragraph',
-                      content: [{ type: 'text', text: 'Second item' }],
-                    }],
+                    content: [jsonInputBase([{ type: 'text', text: 'Second item' }]).content[0]],
                   },
                   {
                     type: 'listItem',
-                    content: [{
-                      type: 'paragraph',
-                      content: [{ type: 'text', text: 'Third item' }],
-                    }],
+                    content: [jsonInputBase([{ type: 'text', text: 'Third item' }]).content[0]],
                   },
                 ],
               }],
@@ -253,32 +229,23 @@ describe('DtRichTextEditor tests', () => {
                 content: [
                   {
                     type: 'listItem',
-                    content: [{
-                      type: 'paragraph',
-                      content: [
-                        { type: 'text', text: 'Item with ' },
-                        { type: 'text', text: 'bold', marks: [{ type: 'bold' }] },
-                        { type: 'text', text: ' text' },
-                      ],
-                    }],
+                    content: [jsonInputBase([
+                      { type: 'text', text: 'Item with ' },
+                      { type: 'text', text: 'bold', marks: [{ type: 'bold' }] },
+                      { type: 'text', text: ' text' },
+                    ]).content[0]],
                   },
                   {
                     type: 'listItem',
-                    content: [{
-                      type: 'paragraph',
-                      content: [
-                        { type: 'text', text: 'Item with ' },
-                        { type: 'text', text: 'italic', marks: [{ type: 'italic' }] },
-                        { type: 'text', text: ' text' },
-                      ],
-                    }],
+                    content: [jsonInputBase([
+                      { type: 'text', text: 'Item with ' },
+                      { type: 'text', text: 'italic', marks: [{ type: 'italic' }] },
+                      { type: 'text', text: ' text' },
+                    ]).content[0]],
                   },
                   {
                     type: 'listItem',
-                    content: [{
-                      type: 'paragraph',
-                      content: [{ type: 'text', text: 'Regular item' }],
-                    }],
+                    content: [jsonInputBase([{ type: 'text', text: 'Regular item' }]).content[0]],
                   },
                 ],
               }],
@@ -294,23 +261,17 @@ describe('DtRichTextEditor tests', () => {
                 allowStrike: true,
                 link: true,
             });
-            const jsonInput = {
-              type: 'doc',
-              content: [{
-                type: 'paragraph',
-                content: [
-                  { type: 'text', text: 'This has ' },
-                  { type: 'text', text: 'bold', marks: [{ type: 'bold' }] },
-                  { type: 'text', text: ', ' },
-                  { type: 'text', text: 'italic', marks: [{ type: 'italic' }] },
-                  { type: 'text', text: ', ' },
-                  { type: 'text', text: 'strikethrough', marks: [{ type: 'strike' }] },
-                  { type: 'text', text: ', and a ' },
-                  { type: 'text', text: 'link', marks: [{ type: 'link', attrs: { href: 'https://example.com' } }] },
-                  { type: 'text', text: '.' },
-                ],
-              }],
-            };
+            const jsonInput = jsonInputBase([
+              { type: 'text', text: 'This has ' },
+              { type: 'text', text: 'bold', marks: [{ type: 'bold' }] },
+              { type: 'text', text: ', ' },
+              { type: 'text', text: 'italic', marks: [{ type: 'italic' }] },
+              { type: 'text', text: ', ' },
+              { type: 'text', text: 'strikethrough', marks: [{ type: 'strike' }] },
+              { type: 'text', text: ', and a ' },
+              { type: 'text', text: 'link', marks: [{ type: 'link', attrs: { href: 'https://example.com' } }] },
+              { type: 'text', text: '.' },
+            ]);
             const output = jsonToMarkdownConverter.convertToMarkdown(jsonInput);
             expect(output).toBe('This has **bold**, *italic*, ~~strikethrough~~, and a [link](https://example.com).\n');
           });
@@ -321,86 +282,62 @@ describe('DtRichTextEditor tests', () => {
                 allowItalic: true,
             });
 
-            const jsonInput = {
-              type: 'doc',
-              content: [{
-                type: 'paragraph',
-                content: [
-                  { type: 'text', text: 'Bold and ', marks: [{ type: 'bold' }] },
-                  { type: 'text', text: 'italic', marks: [{ type: 'bold' }, { type: 'italic' }] },
-                  { type: 'text', text: ' nested', marks: [{ type: 'bold' }] },
-                ],
-              }],
-            };
+            const jsonInput = jsonInputBase([
+              { type: 'text', text: 'Bold and ', marks: [{ type: 'bold' }] },
+              { type: 'text', text: 'italic', marks: [{ type: 'bold' }, { type: 'italic' }] },
+              { type: 'text', text: ' nested', marks: [{ type: 'bold' }] },
+            ]);
             const output = jsonToMarkdownConverter.convertToMarkdown(jsonInput);
             expect(output).toBe('**Bold and *****italic***** nested**\n');
           });
 
           it('should convert mentions to markdown comments correctly', async () => {
-            const jsonInput = {
-              type: 'doc',
-              content: [{
-                type: 'paragraph',
-                content: [
-                  { type: 'text', text: 'Hello ' },
-                  {
-                    type: 'mention',
-                    attrs: {
-                      id: 'john.doe',
-                      name: 'John Doe',
-                      contactKey: 'contact-123',
-                    },
-                  },
-                  { type: 'text', text: ' how are you?' },
-                ],
-              }],
-            };
+            const jsonInput = jsonInputBase([
+              { type: 'text', text: 'Hello ' },
+              {
+                type: 'mention',
+                attrs: {
+                  id: 'john.doe',
+                  name: 'John Doe',
+                  contactKey: 'contact-123',
+                },
+              },
+              { type: 'text', text: ' how are you?' },
+            ]);
             const output = jsonToMarkdownConverter.convertToMarkdown(jsonInput);
             expect(output).toBe('Hello <!-- @mention: {"id": "john.doe", "contactKey": "contact-123", "name": "John Doe"} --> how are you?\n');
           });
 
           it('should convert channels to markdown comments correctly', async () => {
-            const jsonInput = {
-              type: 'doc',
-              content: [{
-                type: 'paragraph',
-                content: [
-                  { type: 'text', text: 'Check out ' },
-                  {
-                    type: 'channel',
-                    attrs: {
-                      id: 'general',
-                      name: 'general',
-                      locked: false,
-                    },
-                  },
-                  { type: 'text', text: ' channel' },
-                ],
-              }],
-            };
+            const jsonInput = jsonInputBase([
+              { type: 'text', text: 'Check out ' },
+              {
+                type: 'channel',
+                attrs: {
+                  id: 'general',
+                  name: 'general',
+                  locked: false,
+                },
+              },
+              { type: 'text', text: ' channel' },
+            ]);
             const output = jsonToMarkdownConverter.convertToMarkdown(jsonInput);
             expect(output).toBe('Check out <!-- @channel: {"id": "general", "name": "general", "locked": "false"} --> channel\n');
           });
 
           it('should convert locked channels to markdown comments correctly', async () => {
-            const jsonInput = {
-              type: 'doc',
-              content: [{
-                type: 'paragraph',
-                content: [
-                  { type: 'text', text: 'Check out ' },
-                  {
-                    type: 'channel',
-                    attrs: {
-                      id: 'dialtone-internal',
-                      name: 'dialtone-internal',
-                      locked: true,
-                    },
-                  },
-                  { type: 'text', text: ' channel' },
-                ],
-              }],
-            };
+            const jsonInput = jsonInputBase([
+              { type: 'text', text: 'Check out ' },
+              {
+                type: 'channel',
+                attrs: {
+                  id: 'dialtone-internal',
+                  name: 'dialtone-internal',
+                  locked: true,
+                },
+              },
+              { type: 'text', text: ' channel' },
+            ]);
             const output = jsonToMarkdownConverter.convertToMarkdown(jsonInput);
             expect(output).toBe('Check out <!-- @channel: {"id": "dialtone-internal", "name": "dialtone-internal", "locked": "true"} --> channel\n');
           });
