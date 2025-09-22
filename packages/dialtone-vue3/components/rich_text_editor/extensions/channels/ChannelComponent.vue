@@ -41,7 +41,6 @@ export default {
 
   computed: {
     text () {
-      console.log(nodeViewProps)
       if (this.$props.node.attrs.locked) {
         return this.$props.node.attrs.name;
       }

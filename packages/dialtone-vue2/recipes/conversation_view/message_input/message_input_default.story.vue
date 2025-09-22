@@ -44,7 +44,7 @@
         @json-input="$attrs.onJsonInput"
         @html-input="$attrs.onHtmlInput"
         @text-input="$attrs.onTextInput"
-        @markdown-input="(e) => { setMarkdownContent(e); $attrs.onMarkdownInput(e); }"
+        @markdown-input="$attrs.onMarkdownInput"
         @add-emoji="$attrs.onAddEmoji"
         @select-media="$attrs.onSelectMedia"
         @selected-emoji="$attrs.onSelectedEmoji"
@@ -109,12 +109,6 @@
           <span v-html="$attrs.smsCount" />
         </template>
       </dt-recipe-message-input>
-      <div>
-        Markdown:
-        <pre>
-{{ markdownContent }}
-        </pre>
-      </div>
     </div>
   </div>
 </template>
@@ -129,19 +123,12 @@ export default {
   data () {
     return {
       value: this.$attrs.value,
-      markdownContent: '',
     };
   },
 
   watch: {
     '$attrs.value' (value) {
       this.value = value;
-    },
-  },
-
-  methods: {
-    setMarkdownContent (event) {
-      this.markdownContent = event;
     },
   },
 };

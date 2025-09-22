@@ -403,9 +403,9 @@ export default {
 
     /**
      * The output format that the editor uses when emitting the "@input" event.
-     * One of `text`, `json`, `html`. See https://tiptap.dev/guide/output for
+     * One of `text`, `json`, `html`, `markdown`. See https://tiptap.dev/guide/output for
      * examples.
-     * @values text, json, html
+     * @values text, json, html, markdown
      */
     outputFormat: {
       type: String,
@@ -898,7 +898,7 @@ export default {
     },
 
     // Checks if the node currently selected is active ex/ the bold button is active if the selected text is bold
-     
+
     isSelectionActive (type) {
       if (['bulletList', 'orderedList'].includes(type)) {
         return this.lastActiveNodes(this.$refs.richTextEditor?.editor?.state, [{ type: 'bulletList' }, { type: 'orderedList' }]).includes(type) && this.isFocused;

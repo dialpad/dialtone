@@ -6,6 +6,9 @@ import mentionSuggestion from '@/components/rich_text_editor/mention_suggestion'
 import channelSuggestion from '@/components/rich_text_editor/channel_suggestion';
 import slashCommandSuggestion from '@/components/rich_text_editor/slash_command_suggestion';
 import customEmojiJson from '@/common/custom-emoji.json';
+import {
+  RICH_TEXT_EDITOR_OUTPUT_FORMATS,
+} from '@/components/rich_text_editor/rich_text_editor_constants.js'
 
 const iconsList = getIconNames();
 
@@ -94,6 +97,10 @@ export const argTypesData = {
     control: {
       type: 'text',
     },
+  },
+  outputFormat: {
+    control: 'select',
+    options: Object.values(RICH_TEXT_EDITOR_OUTPUT_FORMATS),
   },
 
   // Events
