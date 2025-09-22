@@ -127,16 +127,16 @@ describe('DtRichTextEditor tests', () => {
         });
 
         describe('When using markdown output', () => {
-          it('should convert JSON to markdown correctly', async () => {
-            const wrapper = mount(DtRichTextEditor, {
-              props: {
-                outputFormat: 'markdown',
-                inputAriaLabel: 'Test',
-              },
-            });
 
+          let jsonToMarkdownConverter;
+
+          beforeEach(async () => {
+            await wrapper.setProps({ outputFormat: 'markdown' });
             // Test jsonToMarkdownConverter directly
-            const jsonToMarkdownConverter = wrapper.vm.jsonToMarkdownConverter;
+            jsonToMarkdownConverter = wrapper.vm.jsonToMarkdownConverter;
+          });
+
+          it('should convert JSON to markdown correctly', async () => {
             const jsonInput = {
               type: 'doc',
               content: [{
@@ -153,16 +153,8 @@ describe('DtRichTextEditor tests', () => {
           });
 
           it('should convert italic text to markdown correctly', async () => {
-            const wrapper = mount(DtRichTextEditor, {
-              props: {
-                outputFormat: 'markdown',
-                allowItalic: true,
-                inputAriaLabel: 'Test',
-              },
-            });
+            await wrapper.setProps({ allowItalic: true });
 
-            // Test jsonToMarkdownConverter directly
-            const jsonToMarkdownConverter = wrapper.vm.jsonToMarkdownConverter;
             const jsonInput = {
               type: 'doc',
               content: [{
@@ -179,13 +171,7 @@ describe('DtRichTextEditor tests', () => {
           });
 
           it('should convert strikethrough text to markdown correctly', async () => {
-            const wrapper = mount(DtRichTextEditor, {
-              props: {
-                outputFormat: 'markdown',
-                allowStrike: true,
-                inputAriaLabel: 'Test',
-              },
-            });
+            await wrapper.setProps({ allowStrike: true });
 
             // Test jsonToMarkdownConverter directly
             const jsonToMarkdownConverter = wrapper.vm.jsonToMarkdownConverter;
@@ -205,16 +191,8 @@ describe('DtRichTextEditor tests', () => {
           });
 
           it('should convert links to markdown correctly', async () => {
-            const wrapper = mount(DtRichTextEditor, {
-              props: {
-                outputFormat: 'markdown',
-                link: true,
-                inputAriaLabel: 'Test',
-              },
-            });
+            await wrapper.setProps({ link: true });
 
-            // Test jsonToMarkdownConverter directly
-            const jsonToMarkdownConverter = wrapper.vm.jsonToMarkdownConverter;
             const jsonInput = {
               type: 'doc',
               content: [{
@@ -231,16 +209,8 @@ describe('DtRichTextEditor tests', () => {
           });
 
           it('should convert bullet lists to markdown without extra newlines', async () => {
-            const wrapper = mount(DtRichTextEditor, {
-              props: {
-                outputFormat: 'markdown',
-                allowBulletList: true,
-                inputAriaLabel: 'Test',
-              },
-            });
+            await wrapper.setProps({ allowBulletList: true });
 
-            // Test jsonToMarkdownConverter directly
-            const jsonToMarkdownConverter = wrapper.vm.jsonToMarkdownConverter;
             const jsonInput = {
               type: 'doc',
               content: [{
@@ -275,18 +245,7 @@ describe('DtRichTextEditor tests', () => {
           });
 
           it('should convert bullet lists with formatting to markdown correctly', async () => {
-            const wrapper = mount(DtRichTextEditor, {
-              props: {
-                outputFormat: 'markdown',
-                allowBulletList: true,
-                allowBold: true,
-                allowItalic: true,
-                inputAriaLabel: 'Test',
-              },
-            });
-
-            // Test jsonToMarkdownConverter directly
-            const jsonToMarkdownConverter = wrapper.vm.jsonToMarkdownConverter;
+            await wrapper.setProps({ allowBulletList: true, allowBold: true, allowItalic: true });
             const jsonInput = {
               type: 'doc',
               content: [{
@@ -329,19 +288,12 @@ describe('DtRichTextEditor tests', () => {
           });
 
           it('should convert mixed formatting to markdown correctly', async () => {
-            const wrapper = mount(DtRichTextEditor, {
-              props: {
-                outputFormat: 'markdown',
+            await wrapper.setProps({
                 allowBold: true,
                 allowItalic: true,
                 allowStrike: true,
                 link: true,
-                inputAriaLabel: 'Test',
-              },
             });
-
-            // Test jsonToMarkdownConverter directly
-            const jsonToMarkdownConverter = wrapper.vm.jsonToMarkdownConverter;
             const jsonInput = {
               type: 'doc',
               content: [{
@@ -364,17 +316,11 @@ describe('DtRichTextEditor tests', () => {
           });
 
           it('should handle nested formatting correctly', async () => {
-            const wrapper = mount(DtRichTextEditor, {
-              props: {
-                outputFormat: 'markdown',
+            await wrapper.setProps({
                 allowBold: true,
                 allowItalic: true,
-                inputAriaLabel: 'Test',
-              },
             });
 
-            // Test jsonToMarkdownConverter directly
-            const jsonToMarkdownConverter = wrapper.vm.jsonToMarkdownConverter;
             const jsonInput = {
               type: 'doc',
               content: [{
@@ -391,15 +337,6 @@ describe('DtRichTextEditor tests', () => {
           });
 
           it('should convert mentions to markdown comments correctly', async () => {
-            const wrapper = mount(DtRichTextEditor, {
-              props: {
-                outputFormat: 'markdown',
-                inputAriaLabel: 'Test',
-              },
-            });
-
-            // Test jsonToMarkdownConverter directly
-            const jsonToMarkdownConverter = wrapper.vm.jsonToMarkdownConverter;
             const jsonInput = {
               type: 'doc',
               content: [{
@@ -423,15 +360,6 @@ describe('DtRichTextEditor tests', () => {
           });
 
           it('should convert channels to markdown comments correctly', async () => {
-            const wrapper = mount(DtRichTextEditor, {
-              props: {
-                outputFormat: 'markdown',
-                inputAriaLabel: 'Test',
-              },
-            });
-
-            // Test jsonToMarkdownConverter directly
-            const jsonToMarkdownConverter = wrapper.vm.jsonToMarkdownConverter;
             const jsonInput = {
               type: 'doc',
               content: [{
@@ -455,15 +383,6 @@ describe('DtRichTextEditor tests', () => {
           });
 
           it('should convert locked channels to markdown comments correctly', async () => {
-            const wrapper = mount(DtRichTextEditor, {
-              props: {
-                outputFormat: 'markdown',
-                inputAriaLabel: 'Test',
-              },
-            });
-
-            // Test jsonToMarkdownConverter directly
-            const jsonToMarkdownConverter = wrapper.vm.jsonToMarkdownConverter;
             const jsonInput = {
               type: 'doc',
               content: [{
