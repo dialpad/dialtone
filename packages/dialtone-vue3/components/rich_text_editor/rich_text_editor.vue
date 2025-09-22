@@ -512,73 +512,102 @@ export default {
           return this.processNode(doc);
         },
 
-        // eslint-disable-next-line complexity
         processNode (node) {
           if (!node) return '';
 
-          switch (node.type) {
-            case 'doc':
-              return node.content ? node.content.map(child => this.processNode(child)).join('') : '';
+          const nodeTypeMap = {
+            doc: (node) => this.processDocNode(node),
+            paragraph: (node) => this.processParagraphNode(node),
+            text: (node) => this.processTextNode(node),
+            hardBreak: () => this.processHardBreakNode(),
+            blockquote: (node) => this.processBlockquoteNode(node),
+            bulletList: (node) => this.processBulletListNode(node),
+            orderedList: (node) => this.processOrderedListNode(node),
+            listItem: (node) => this.processListItemNode(node),
+            codeBlock: (node) => this.processCodeBlockNode(node),
+            mention: (node) => this.processMentionNode(node),
+            channel: (node) => this.processChannelNode(node),
+            'slash-commands': (node) => this.processSlashCommandsNode(node),
+            emoji: (node) => this.processEmojiNode(node),
+          };
 
-            case 'paragraph':
-              { const paragraphContent = node.content ? node.content.map(child => this.processNode(child)).join('') : '';
-              return paragraphContent ? paragraphContent + '\n' : '\n'; }
+          const processor = nodeTypeMap[node.type];
+          return processor ? processor(node) : this.processUnknownNode(node);
+        },
 
-            case 'text':
-              { let text = node.text || '';
-              if (node.marks) {
-                text = this.applyMarks(text, node.marks);
-              }
-              return text; }
+        processDocNode (node) {
+          return node.content ? node.content.map(child => this.processNode(child)).join('') : '';
+        },
 
-            case 'hardBreak':
-              return '\n';
+        processParagraphNode (node) {
+          const paragraphContent = node.content ? node.content.map(child => this.processNode(child)).join('') : '';
+          return paragraphContent ? paragraphContent + '\n' : '\n';
+        },
 
-            case 'blockquote':
-              { const blockquoteContent = node.content ? node.content.map(child => this.processNode(child)).join('') : '';
-              return blockquoteContent.split('\n').map(line => line ? `> ${line}` : '>').join('\n') + '\n'; }
-
-            case 'bulletList':
-              return node.content ? node.content.map(child => this.processNode(child)).join('') : '';
-
-            case 'orderedList':
-              return node.content ? node.content.map((child, index) => {
-                const listItem = this.processNode(child);
-                return listItem.replace(/^- /, `${index + 1}. `);
-              }).join('') : '';
-
-            case 'listItem':
-              { const listContent = node.content ? node.content.map(child => this.processNode(child)).join('') : '';
-              return listContent ? `- ${listContent.replace(/\n$/, '')}\n` : ''; }
-
-            case 'codeBlock':
-              { const codeContent = node.content ? node.content.map(child => this.processNode(child)).join('') : '';
-              return `\`\`\`\n${codeContent}\n\`\`\``; }
-
-            case 'mention':
-              { const mentionName = node.attrs?.name || '';
-              const mentionId = node.attrs?.id || '';
-              const contactKey = node.attrs?.contactKey || '';
-              return `<!-- @mention: {"id": "${mentionId}", "contactKey": "${contactKey}", "name": "${mentionName}"} -->`; }
-
-            case 'channel':
-              { const channelName = node.attrs?.name || '';
-              const channelId = node.attrs?.id || '';
-              const locked = node.attrs?.locked.toString() || '';
-              return `<!-- @channel: {"id": "${channelId}", "name": "${channelName}", "locked": "${locked}"} -->`; }
-
-            case 'slash-commands':
-              { const command = node.attrs?.command || '';
-              const parameters = node.attrs?.parameters || '';
-              return `/${command}${parameters ? ` ${parameters}` : ''}`; }
-
-            case 'emoji':
-              return node.attrs?.code || '';
-
-            default:
-              // For unknown node types, process content if available
-              return node.content ? node.content.map(child => this.processNode(child)).join('') : '';
+        processTextNode (node) {
+          let text = node.text || '';
+          if (node.marks) {
+            text = this.applyMarks(text, node.marks);
           }
+          return text;
+        },
+
+        processHardBreakNode () {
+          return '\n';
+        },
+
+        processBlockquoteNode (node) {
+          const blockquoteContent = node.content ? node.content.map(child => this.processNode(child)).join('') : '';
+          return blockquoteContent.split('\n').map(line => line ? `> ${line}` : '>').join('\n') + '\n';
+        },
+
+        processBulletListNode (node) {
+          return node.content ? node.content.map(child => this.processNode(child)).join('') : '';
+        },
+
+        processOrderedListNode (node) {
+          return node.content ? node.content.map((child, index) => {
+            const listItem = this.processNode(child);
+            return listItem.replace(/^- /, `${index + 1}. `);
+          }).join('') : '';
+        },
+
+        processListItemNode (node) {
+          const listContent = node.content ? node.content.map(child => this.processNode(child)).join('') : '';
+          return listContent ? `- ${listContent.replace(/\n$/, '')}\n` : '';
+        },
+
+        processCodeBlockNode (node) {
+          const codeContent = node.content ? node.content.map(child => this.processNode(child)).join('') : '';
+          return `\`\`\`\n${codeContent}\n\`\`\``;
+        },
+
+        processMentionNode (node) {
+          const mentionName = node.attrs?.name || '';
+          const mentionId = node.attrs?.id || '';
+          const contactKey = node.attrs?.contactKey || '';
+          return `<!-- @mention: {"id": "${mentionId}", "contactKey": "${contactKey}", "name": "${mentionName}"} -->`;
+        },
+
+        processChannelNode (node) {
+          const channelName = node.attrs?.name || '';
+          const channelId = node.attrs?.id || '';
+          const locked = node.attrs?.locked.toString() || '';
+          return `<!-- @channel: {"id": "${channelId}", "name": "${channelName}", "locked": "${locked}"} -->`;
+        },
+
+        processSlashCommandsNode (node) {
+          const command = node.attrs?.command || '';
+          const parameters = node.attrs?.parameters || '';
+          return `/${command}${parameters ? ` ${parameters}` : ''}`;
+        },
+
+        processEmojiNode (node) {
+          return node.attrs?.code || '';
+        },
+
+        processUnknownNode (node) {
+          return node.content ? node.content.map(child => this.processNode(child)).join('') : '';
         },
 
         applyMarks (text, marks) {
