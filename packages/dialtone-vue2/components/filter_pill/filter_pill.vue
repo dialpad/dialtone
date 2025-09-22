@@ -36,13 +36,15 @@
           <span class="d-filter-pill__label">
             <!-- @slot Allows you to override the label behavior -->
             <slot>
-              <span class="d-filter-pill__label-alpha">{{ label }}</span>
               <span
-                v-if="activeFilterCount"
+                class="d-filter-pill__label-alpha"
+                v-text="label"
+              />
+              <span
+                v-if="activeFilterList"
                 class="d-filter-pill__label-omega"
-              >
-                {{ activeFilterCount }}
-              </span>
+                v-text="activeFilterList"
+              />
             </slot>
           </span>
           <template #icon="{ iconSize }">
@@ -310,16 +312,20 @@ export default {
       return this.filters.filter(filter => filter.active).map(filter => filter.name);
     },
 
-    activeFilterCount () {
-      return this.activeFilters.length;
+    activeFilterList () {
+      if (this.activeFilters.length <= 2) {
+        return this.activeFilters.join(', ');
+      }
+
+      return this.activeFilters.slice(0, 2).join(', ') + ', + ' + (this.activeFilters.length - 2);
     },
 
     isActive () {
-      return this.activeFilterCount > 0;
+      return this.activeFilterList.length > 0;
     },
 
     hasClear () {
-      return !this.hideClear && this.activeFilterCount > 0;
+      return !this.hideClear && this.activeFilterList.length > 0;
     },
   },
 

@@ -9,16 +9,16 @@ import { POPOVER_DIRECTIONS, POPOVER_PADDING_CLASSES } from '@/components/popove
 
 // Set default values at the story level here.
 export const argsData = {
-  label: 'Users or groups',
+  label: 'Fruit',
   onOpen: action('open'),
   onClear: action('clear'),
   onUpdateModelValue: action('update:modelValue'),
   modelValue: [
-    { name: 'Filter 1', active: true },
-    { name: 'Filter 2' },
-    { name: 'Filter 3' },
-    { name: 'Filter 4' },
-    { name: 'Filter 5', active: true },
+    { name: 'Orange', active: true },
+    { name: 'Apple' },
+    { name: 'Avocado' },
+    { name: 'Grapefruit' },
+    { name: 'Strawberry' },
   ],
 };
 
