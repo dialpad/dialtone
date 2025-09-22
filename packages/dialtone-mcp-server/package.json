@@ -7,20 +7,24 @@
     "dialtone-mcp-server": "build/index.js"
   },
   "scripts": {
-    "build": "tsc",
+    "build": "rollup -c",
     "start": "node build/index.js",
     "dev": "tsx src/index.ts",
     "test": "node test-simple.js",
     "inspect": "npx @modelcontextprotocol/inspector npm run start"
   },
   "dependencies": {
-    "@modelcontextprotocol/sdk": "1.18.0",
-    "@dialpad/dialtone-css": "workspace:*",
-    "@dialpad/dialtone-vue": "workspace:*"
+    "@modelcontextprotocol/sdk": "1.18.0"
   },
   "devDependencies": {
     "@modelcontextprotocol/inspector": "0.16.7",
     "@types/node": "24.3.1",
+    "@dialpad/dialtone-css": "workspace:*",
+    "@dialpad/dialtone-vue": "workspace:*",
+    "@rollup/plugin-json": "^6.0.0",
+    "@rollup/plugin-node-resolve": "^15.2.0",
+    "@rollup/plugin-typescript": "^11.1.0",
+    "rollup": "^4.0.0",
     "ts-node": "10.9.2",
     "tsx": "^4.0.0",
     "typescript": "^5.2"

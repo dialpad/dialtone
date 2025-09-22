@@ -1,25 +1,23 @@
 import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
 import { StdioServerTransport } from "@modelcontextprotocol/sdk/server/stdio.js";
 
-async function loadJsonData() {
-  const [utilityClasses, tokens, components, clientRules] = await Promise.all([
-    import('@dialpad/dialtone-css/lib/dist/dialtone-docs.json', { with: { type: 'json' } }),
-    import('@dialpad/dialtone-css/lib/dist/tokens-docs.json', { with: { type: 'json' } }),
-    import('@dialpad/dialtone-vue/component-documentation.json', { with: { type: 'json' } }),
-    import('../client-rules.json', { with: { type: 'json' } })
-  ]);
+import utilityClasses from '@dialpad/dialtone-css/lib/dist/dialtone-docs.json';
+import tokens from '@dialpad/dialtone-css/lib/dist/tokens-docs.json';
+import components from '@dialpad/dialtone-vue/component-documentation.json';
+import clientRules from '../client-rules.json';
 
+function loadJsonData() {
   return {
-    utilityClasses: utilityClasses.default,
-    tokens: tokens.default,
-    components: components.default,
-    clientRules: clientRules.default
+    utilityClasses,
+    tokens,
+    components,
+    clientRules
   };
 }
 
 async function main() {
   // Load JSON data
-  const data = await loadJsonData();
+  const data = loadJsonData();
 
   // Create server instance
   const server = new McpServer({
