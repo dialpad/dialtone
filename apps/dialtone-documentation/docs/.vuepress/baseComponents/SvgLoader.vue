@@ -12,6 +12,7 @@
 </template>
 
 <script setup>
+// TODO: Move all the svg files that are being used here from the "public" directory to another directory outside "public" to remove the vuepress warnings
 import { defineAsyncComponent } from 'vue';
 
 defineOptions({

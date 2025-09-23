@@ -18,8 +18,8 @@
 </template>
 
 <script setup>
-import { useThemeLocaleData } from '@vuepress/plugin-theme-data/client';
 import SidebarItem from './SidebarItem.vue';
+import { useThemeLocaleData } from '@vuepress/plugin-theme-data/client';
 import { useSidebarItems } from '../composables/useSidebarItems';
 
 const items = useThemeLocaleData().value.sidebar;

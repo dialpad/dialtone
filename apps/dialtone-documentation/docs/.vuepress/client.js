@@ -1,4 +1,5 @@
-import { defineClientConfig } from '@vuepress/client';
+import { defineClientConfig } from 'vuepress/client';
+import { provide, shallowRef } from 'vue';
 
 // Common views
 import Icons from './views/Icons.vue';
@@ -36,6 +37,8 @@ export default defineClientConfig({
     app.component('SvgLoader', SvgLoader);
     app.component('DialtoneUsage', DialtoneUsage);
   },
-  setup () {},
-  rootComponents: [],
+  setup () {
+    const headers = shallowRef([]);
+    provide('headers', { headers })
+  },
 });

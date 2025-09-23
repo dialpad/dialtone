@@ -24,7 +24,8 @@
           v-if="isMobile && route.path !== '/'"
         />
         <!-- eslint-disable-next-line vue/no-undef-components -->
-        <docsearch
+        <div
+          id="docsearch"
           ref="docSearchBtn"
           class="d-d-none"
           options=""
@@ -85,7 +86,7 @@ const currentItems = computed(() => {
 });
 
 // Finds the current item
-// eslint-disable-next-line complexity
+
 const findCurrent = () => {
   if (!currentItems.value) return;
 

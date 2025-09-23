@@ -66,9 +66,9 @@
 <script setup>
 import PageHeader from '../components/PageHeader.vue';
 import PageToc from '../components/PageToc.vue';
-import { computed, watch, ref, nextTick } from 'vue';
+import { computed, watch, inject } from 'vue';
 import { useRoute } from 'vue-router';
-import { usePageData } from '@vuepress/client';
+import { usePageData } from 'vuepress/client';
 import { useThemeLocaleData } from '@vuepress/plugin-theme-data/client';
 
 const props = defineProps({
@@ -87,9 +87,6 @@ const props = defineProps({
     required: true,
   },
 });
-
-const headers = ref(null);
-
 const lastUpdated = computed(() => {
   const date = new Date(usePageData().value.git.updatedTime);
   return new Intl.DateTimeFormat('en-US', { dateStyle: 'full' }).format(date);
@@ -98,6 +95,7 @@ const gridClass = computed(() => {
   if (props.isMobile || !includeToc.value) return 'd-gl-docsite';
   return 'd-gl-docsite-toc';
 });
+const { headers } = inject('headers');
 
 const items = useThemeLocaleData().value.sidebar;
 const route = useRoute();
@@ -105,14 +103,18 @@ const includeToc = computed(() => {
   // get the item that matches the current route from site-nav without cosidering the last '/'
   const key = Object.keys(items).filter(item => route.path.includes(item.replace(/\/$/, '')));
   if (!items[key] || !Array.isArray(items[key])) return false;
+
   return headers.value && headers.value.length > 0;
 });
 
-watch(route, async () => {
-  // waits for the filteredHeaders to be set in the child page
-  await nextTick();
-  const { filteredHeaders } = window;
-  const pageHeaders = usePageData().value.headers;
-  headers.value = filteredHeaders ?? pageHeaders;
-}, { flush: 'pre', immediate: true, deep: true });
+watch(route, () => {
+  // Tokens page headers are handled in AllTokens.vue
+  if (route.path.includes('/tokens/')) return;
+
+  try {
+    headers.value = route.meta._pageChunk.data.headers;
+  } catch( e ) {
+    console.log('Error getting page headers', e)
+  }
+}, { flush: 'pre', immediate: true, deep: true })
 </script>
