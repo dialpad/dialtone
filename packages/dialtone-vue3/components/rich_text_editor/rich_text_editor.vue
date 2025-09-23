@@ -512,6 +512,10 @@ export default {
           return this.processNode(doc);
         },
 
+        processNodeContent (node) {
+          return node.content ? node.content.map(child => this.processNode(child)).join('') : '';
+        },
+
         processNode (node) {
           if (!node) return '';
 
@@ -536,11 +540,11 @@ export default {
         },
 
         processDocNode (node) {
-          return node.content ? node.content.map(child => this.processNode(child)).join('') : '';
+          return this.processNodeContent(node);
         },
 
         processParagraphNode (node) {
-          const paragraphContent = node.content ? node.content.map(child => this.processNode(child)).join('') : '';
+          const paragraphContent = this.processNodeContent(node);
           return paragraphContent ? paragraphContent + '\n' : '\n';
         },
 
@@ -557,12 +561,12 @@ export default {
         },
 
         processBlockquoteNode (node) {
-          const blockquoteContent = node.content ? node.content.map(child => this.processNode(child)).join('') : '';
+          const blockquoteContent = this.processNodeContent(node);
           return blockquoteContent.split('\n').map(line => line ? `> ${line}` : '>').join('\n') + '\n';
         },
 
         processBulletListNode (node) {
-          return node.content ? node.content.map(child => this.processNode(child)).join('') : '';
+          return this.processNodeContent(node);
         },
 
         processOrderedListNode (node) {
@@ -573,12 +577,12 @@ export default {
         },
 
         processListItemNode (node) {
-          const listContent = node.content ? node.content.map(child => this.processNode(child)).join('') : '';
+          const listContent = this.processNodeContent(node);
           return listContent ? `- ${listContent.replace(/\n$/, '')}\n` : '';
         },
 
         processCodeBlockNode (node) {
-          const codeContent = node.content ? node.content.map(child => this.processNode(child)).join('') : '';
+          const codeContent = this.processNodeContent(node);
           return `\`\`\`\n${codeContent}\n\`\`\``;
         },
 
@@ -607,7 +611,7 @@ export default {
         },
 
         processUnknownNode (node) {
-          return node.content ? node.content.map(child => this.processNode(child)).join('') : '';
+          return this.processNodeContent(node);
         },
 
         applyMarks (text, marks) {
