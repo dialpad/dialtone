@@ -31,6 +31,7 @@
     @json-input="$attrs.onJsonInput"
     @html-input="$attrs.onHtmlInput"
     @text-input="$attrs.onTextInput"
+    @markdown-input="$attrs.onMarkdownInput"
     @selected-command="$attrs.onSelectedCommand"
     @focus="$attrs.onFocus"
     @enter="$attrs.onEnter"

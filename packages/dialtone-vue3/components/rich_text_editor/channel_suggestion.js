@@ -1,4 +1,4 @@
-/* eslint-disable max-len */
+
 export default {
   items ({ query }) {
     const CHANNEL_LIST = [
