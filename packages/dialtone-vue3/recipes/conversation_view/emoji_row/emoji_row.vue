@@ -42,6 +42,7 @@
             <span class="d-recipe-emoji-row__emoji">
               <dt-emoji
                 class="d-recipe-emoji-row__emoji"
+                size="200"
                 img-class="d-recipe-emoji-row__emoji-img"
                 :code="reaction.emojiUnicodeOrShortname"
               />

@@ -1,3 +1,17 @@
+# [9.139.0](https://github.com/dialpad/dialtone/compare/dialtone/v9.138.0...dialtone/v9.139.0) (2025-09-17)
+
+
+### Bug Fixes
+
+* **Emoji Row:** DP-157752 make emoji always appear on top  ([#920](https://github.com/dialpad/dialtone/issues/920)) ([dc2fb80](https://github.com/dialpad/dialtone/commit/dc2fb80ab502f738aa24cb3e3db661d247453456))
+* **Leftbar Row:** DP-157563 call button wrong color on hover ([#919](https://github.com/dialpad/dialtone/issues/919)) ([5b77095](https://github.com/dialpad/dialtone/commit/5b770959a61cfb0772f965dc8dfd7700f8bcaf6d))
+* **Mcp Server:** NO-JIRA publish package ([#922](https://github.com/dialpad/dialtone/issues/922)) ([5bbb725](https://github.com/dialpad/dialtone/commit/5bbb725c55615dced8958e687752a610898a663d))
+
+
+### Features
+
+* **Mcp Server:** DLT-2708 add JSON context to MCP server ([#918](https://github.com/dialpad/dialtone/issues/918)) ([d2221b4](https://github.com/dialpad/dialtone/commit/d2221b4e3a5262f71324fa2e1dfff3b8df91eac5))
+
 # [9.138.0](https://github.com/dialpad/dialtone/compare/dialtone/v9.137.0...dialtone/v9.138.0) (2025-09-16)
 
 

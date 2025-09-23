@@ -1,3 +1,10 @@
+## [8.64.4](https://github.com/dialpad/dialtone/compare/dialtone-css/v8.64.3...dialtone-css/v8.64.4) (2025-09-17)
+
+
+### Bug Fixes
+
+* **Leftbar Row:** DP-157563 call button wrong color on hover ([#919](https://github.com/dialpad/dialtone/issues/919)) ([5b77095](https://github.com/dialpad/dialtone/commit/5b770959a61cfb0772f965dc8dfd7700f8bcaf6d))
+
 ## [8.64.3](https://github.com/dialpad/dialtone/compare/dialtone-css/v8.64.2...dialtone-css/v8.64.3) (2025-09-16)
 
 
