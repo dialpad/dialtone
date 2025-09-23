@@ -77,6 +77,13 @@ export const DtTooltipDirective = {
     });
 
     function setupTooltip (anchor, binding) {
+      if (binding.value === null || binding.value === undefined) {
+        const tooltipId = anchor.getAttribute('data-dt-tooltip-id');
+        if (tooltipId) {
+          DtTooltipDirectiveApp.removeTooltip(tooltipId);
+        }
+        return;
+      }
       const tooltipId = anchor.getAttribute('data-dt-tooltip-id') || getUniqueString();
 
       let tooltipConfig;
@@ -91,7 +98,7 @@ export const DtTooltipDirective = {
           ...binding.value,
         };
       } else {
-        console.error('DtTooltipDirective: binding value must be a string or object');
+        console.error('DtTooltipDirective: binding value must be string, object, null or undefined');
         return;
       }
 
