@@ -11,12 +11,8 @@ export default {
   },
   external: ['@modelcontextprotocol/sdk/server/mcp.js', '@modelcontextprotocol/sdk/server/stdio.js'],
   plugins: [
-    nodeResolve({
-      preferBuiltins: true,
-    }),
+    nodeResolve(),
     json(),
-    typescript({
-      tsconfig: './tsconfig.json',
-    }),
+    typescript(),
   ],
 };

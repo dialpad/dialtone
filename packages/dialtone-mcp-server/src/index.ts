@@ -6,19 +6,7 @@ import tokens from '@dialpad/dialtone-css/lib/dist/tokens-docs.json';
 import components from '@dialpad/dialtone-vue/component-documentation.json';
 import clientRules from '../client-rules.json';
 
-function loadJsonData() {
-  return {
-    utilityClasses,
-    tokens,
-    components,
-    clientRules
-  };
-}
-
 async function main() {
-  // Load JSON data
-  const data = loadJsonData();
-
   // Create server instance
   const server = new McpServer({
     name: "dialtone-mcp-server",
@@ -40,7 +28,7 @@ async function main() {
       contents: [{
         uri: "dialtone://utility-classes",
         mimeType: "application/json",
-        text: JSON.stringify(data.utilityClasses, null, 2)
+        text: JSON.stringify(utilityClasses, null, 2)
       }]
     };
   });
@@ -54,7 +42,7 @@ async function main() {
       contents: [{
         uri: "dialtone://tokens",
         mimeType: "application/json",
-        text: JSON.stringify(data.tokens, null, 2)
+        text: JSON.stringify(tokens, null, 2)
       }]
     };
   });
@@ -68,7 +56,7 @@ async function main() {
       contents: [{
         uri: "dialtone://components",
         mimeType: "application/json",
-        text: JSON.stringify(data.components, null, 2)
+        text: JSON.stringify(components, null, 2)
       }]
     };
   });
@@ -82,7 +70,7 @@ async function main() {
       contents: [{
         uri: "dialtone://client-rules",
         mimeType: "application/json",
-        text: JSON.stringify(data.clientRules, null, 2)
+        text: JSON.stringify(clientRules, null, 2)
       }]
     };
   });
