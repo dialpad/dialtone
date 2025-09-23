@@ -109,7 +109,9 @@ export const dialtoneVuepressTheme = (options) => ({
         headerLinkSelector: 'a.d-link',
         offset: 128,
       }),
-      prismjsPlugin({}),
+      prismjsPlugin({
+        lineNumbers: 'disable',
+      }),
       backToTopPlugin(),
       gitPlugin({
         // options
