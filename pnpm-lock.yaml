@@ -662,7 +662,7 @@ importers:
         specifier: workspace:*
         version: link:../dialtone-css
       '@dialpad/dialtone-vue':
-        specifier: workspace:*
+        specifier: workspace:^3
         version: link:../dialtone-vue3
       '@modelcontextprotocol/inspector':
         specifier: 0.16.7
