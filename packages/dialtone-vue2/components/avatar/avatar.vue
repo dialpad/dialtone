@@ -92,7 +92,7 @@ import { ICON_SIZE_MODIFIERS } from '@/components/icon/icon_constants.js';
 import { extractInitialsFromName } from './utils';
 
 /**
- * An avatar is a visual representation of a user or object.
+ * An avatar is a visual representation of a user or object
  * @see https://dialtone.dialpad.com/components/avatar.html
  */
 export default {
