@@ -156,7 +156,7 @@ const props = defineProps({
     showAddEmojiButton: {
       type: Boolean,
       default: false,
-    }
+    },
 });
 
 const emits = defineEmits(
