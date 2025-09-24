@@ -14,11 +14,11 @@
 </template>
 
 <script setup>
-import { capitalize, computed, ref, onBeforeMount } from 'vue';
+import { capitalize, computed, ref, shallowRef, onBeforeMount, inject } from 'vue';
 import TokenTree from './TokenTree.vue';
 import TokensBar from './TokensBar.vue';
 import { addTokensToStructure } from './utilities';
-import { onBeforeRouteLeave, useRoute } from 'vue-router';
+import { useRoute } from 'vue-router';
 
 const route = useRoute();
 const format = ref(route.query.format || 'CSS');
@@ -26,8 +26,9 @@ const mode = ref(route.query.mode || 'light');
 const theme = ref(route.query.theme || 'dp');
 const searchCriteria = ref(route.query.search || null);
 const processedTokens = {}; // is set beforeMount and never changes
-const filteredTokens = ref({}); // same as processedTokens but filtered by format, theme and search
-const filteredHeaders = ref([]); // to fill the dynamic table of contents
+const filteredTokens = shallowRef({}); // same as processedTokens but filtered by format, theme and search
+const filteredHeaders = shallowRef([]); // to fill the dynamic table of contents
+const { headers } = inject('headers');
 
 const noSearchResults = computed(() => filteredTokens.value === null);
 const themeKey = computed(() => `${theme.value}-${mode.value}`);
@@ -87,7 +88,7 @@ const filterTokenNode = (node, name, regexArray) => {
 const updateHeaders = () => {
   if (filteredTokens.value === null) return [];
   filteredHeaders.value = updateHeadersRecursively(filteredTokens.value, null);
-  window.filteredHeaders = filteredHeaders.value;
+  headers.value = filteredHeaders.value;
 };
 
 const updateHeadersRecursively = (node, category) => {
@@ -109,9 +110,5 @@ const updateHeadersRecursively = (node, category) => {
 onBeforeMount(() => {
   addTokensToStructure(processedTokens);
   filterTokens();
-});
-
-onBeforeRouteLeave(() => {
-  window.filteredHeaders = null;
 });
 </script>

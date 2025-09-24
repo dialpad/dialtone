@@ -167,7 +167,7 @@ export default {
     showAddEmojiButton: {
       type: Boolean,
       default: false,
-    }
+    },
   },
 
   data () {

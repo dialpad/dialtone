@@ -1,3 +1,14 @@
+## [9.139.1](https://github.com/dialpad/dialtone/compare/dialtone/v9.139.0...dialtone/v9.139.1) (2025-09-23)
+
+
+### Bug Fixes
+
+* **Emoji Row:** DP-168152 add default size to skeletons ([#930](https://github.com/dialpad/dialtone/issues/930)) ([16583e7](https://github.com/dialpad/dialtone/commit/16583e71b9e1851dc2fc83240ec1f12e957eb5b1))
+* **Pagination:** DLT-2765 active page and change page buttons ([#929](https://github.com/dialpad/dialtone/issues/929)) ([59044cd](https://github.com/dialpad/dialtone/commit/59044cd0a4001d1ff032d3b8cb17c15dbcccb4b7))
+* **Postcss Responsive Variations:** NO-JIRA filter empty atRules ([#927](https://github.com/dialpad/dialtone/issues/927)) ([6e89435](https://github.com/dialpad/dialtone/commit/6e89435110971f992afdc24bbd3f8ff48c847eb4))
+* **Tooltip:** DP-158069 fix DtTooltip error ([#931](https://github.com/dialpad/dialtone/issues/931)) ([5ec230c](https://github.com/dialpad/dialtone/commit/5ec230c4bb221ebe68316e102e0db00e94129e3e))
+* **Tooltip:** NO-JIRA less noisy on empty & handle wiping the tooltip on null ([#924](https://github.com/dialpad/dialtone/issues/924)) ([0b3b14a](https://github.com/dialpad/dialtone/commit/0b3b14af75820158f6d959ef8f6794fc9cb59525))
+
 # [9.139.0](https://github.com/dialpad/dialtone/compare/dialtone/v9.138.0...dialtone/v9.139.0) (2025-09-17)
 
 

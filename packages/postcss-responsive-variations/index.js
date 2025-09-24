@@ -54,6 +54,7 @@ function _prefixRule (rule, breakpoints, classes) {
     });
   });
 }
+
 function _escapeRegex (string) {
   return string.replace(/[/\-\\^$*+?.()|[\]{}]/g, '\\$&');
 }
@@ -83,9 +84,13 @@ module.exports = (opts = {}) => {
         _prefixRule(rule, processedBreakpoints, processedClasses);
       });
 
-      if (processedBreakpoints && processedBreakpoints[0].atRule.nodes) {
-        root.append(processedBreakpoints.map(breakpoint => breakpoint.atRule));
-      }
+      const atRules = processedBreakpoints
+        .filter(breakpoint => breakpoint.atRule.nodes?.length)
+        .map(breakpoint => breakpoint.atRule);
+
+      if (!atRules?.length) return;
+
+      root.append(atRules);
     },
   };
 };
