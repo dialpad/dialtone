@@ -4,4 +4,4 @@ description: In-depth guidance to support consistent, high-quality product desig
 no_preview: true
 ---
 
-<overview :pages="$page.enhancedFrontmatter" base-path="guides" />
+<overview :pages="$page.enhancedFrontmatter" />

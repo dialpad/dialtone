@@ -51,7 +51,7 @@ function _extractFrontmatter (app, path, options, exceptions = []) {
       const fileName = page.frontmatter.title.toLowerCase().replaceAll(' ', '-');
       return {
         fileName,
-        link: page.frontmatter.shortTitle || fileName,
+        link: page.path,
         ...page.frontmatter,
       };
     })
