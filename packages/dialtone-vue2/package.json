@@ -1,6 +1,6 @@
 {
   "name": "@dialpad/dialtone-vue",
-  "version": "2.199.0-next.1",
+  "version": "2.199.0-next.2",
   "description": "Vue component library for Dialpad's design system Dialtone",
   "scripts": {
     "lint": "run-s lint:code lint:docs",
@@ -53,7 +53,8 @@
     "linkifyjs": "4.3.2",
     "overlayscrollbars": "2.10.0",
     "regex-combined-emojis": "1.6.0",
-    "tippy.js": "6.3.7"
+    "tippy.js": "6.3.7",
+    "turndown": "7.2.0"
   },
   "devDependencies": {
     "@dialpad/dialtone-css": "workspace:*",

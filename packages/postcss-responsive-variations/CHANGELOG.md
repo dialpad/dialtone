@@ -1,3 +1,17 @@
+## [1.2.3](https://github.com/dialpad/dialtone/compare/postcss-responsive-variations/v1.2.2...postcss-responsive-variations/v1.2.3) (2025-09-23)
+
+
+### Bug Fixes
+
+* **Postcss Responsive Variations:** NO-JIRA filter empty atRules ([#927](https://github.com/dialpad/dialtone/issues/927)) ([6e89435](https://github.com/dialpad/dialtone/commit/6e89435110971f992afdc24bbd3f8ff48c847eb4))
+
+## [1.2.2](https://github.com/dialpad/dialtone/compare/postcss-responsive-variations/v1.2.1...postcss-responsive-variations/v1.2.2) (2025-09-16)
+
+
+### Code Refactoring
+
+* **Combinator:** DLT-2672 update styles ([#906](https://github.com/dialpad/dialtone/issues/906)) ([96f444c](https://github.com/dialpad/dialtone/commit/96f444c4b59c1a6ed0d29db151ed526d7f60d47b))
+
 ## [1.2.1](https://github.com/dialpad/dialtone/compare/postcss-responsive-variations/v1.2.0...postcss-responsive-variations/v1.2.1) (2025-06-30)
 
 

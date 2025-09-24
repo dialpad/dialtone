@@ -1,11 +1,22 @@
-# [9.137.0-next.2](https://github.com/dialpad/dialtone/compare/dialtone/v9.137.0-next.1...dialtone/v9.137.0-next.2) (2025-09-10)
+# [9.139.0-next.2](https://github.com/dialpad/dialtone/compare/dialtone/v9.139.0-next.1...dialtone/v9.139.0-next.2) (2025-09-17)
+
+
+### Bug Fixes
+
+* **Mcp Server:** NO-JIRA publish package ([#922](https://github.com/dialpad/dialtone/issues/922)) ([5bbb725](https://github.com/dialpad/dialtone/commit/5bbb725c55615dced8958e687752a610898a663d))
 
 
 ### Features
 
-* **Tokens:** DLT-2767 exploratory shell themes ([#909](https://github.com/dialpad/dialtone/issues/909)) ([3afcf63](https://github.com/dialpad/dialtone/commit/3afcf637d136733ff2f981a9ebbb63a3c4a37c99))
+* **Mcp Server:** DLT-2708 add JSON context to MCP server ([#918](https://github.com/dialpad/dialtone/issues/918)) ([d2221b4](https://github.com/dialpad/dialtone/commit/d2221b4e3a5262f71324fa2e1dfff3b8df91eac5))
 
-# [9.137.0-next.1](https://github.com/dialpad/dialtone/compare/dialtone/v9.136.0...dialtone/v9.137.0-next.1) (2025-09-09)
+# [9.139.0-next.1](https://github.com/dialpad/dialtone/compare/dialtone/v9.138.0...dialtone/v9.139.0-next.1) (2025-09-17)
+
+
+### Bug Fixes
+
+* **Emoji Row:** DP-157752 make emoji always appear on top  ([#920](https://github.com/dialpad/dialtone/issues/920)) ([dc2fb80](https://github.com/dialpad/dialtone/commit/dc2fb80ab502f738aa24cb3e3db661d247453456))
+* **Leftbar Row:** DP-157563 call button wrong color on hover ([#919](https://github.com/dialpad/dialtone/issues/919)) ([5b77095](https://github.com/dialpad/dialtone/commit/5b770959a61cfb0772f965dc8dfd7700f8bcaf6d))
 
 
 ### Code Refactoring
@@ -16,6 +27,44 @@
 ### Features
 
 * **Css Utility:** DLT-2715 add default color for border css utilities ([#874](https://github.com/dialpad/dialtone/issues/874)) ([71310ab](https://github.com/dialpad/dialtone/commit/71310ab483fde976d56c69e0456bce70cb6d372d))
+* **Tokens:** DLT-2767 exploratory shell themes ([#909](https://github.com/dialpad/dialtone/issues/909)) ([3afcf63](https://github.com/dialpad/dialtone/commit/3afcf637d136733ff2f981a9ebbb63a3c4a37c99))
+* **Tokens:** DLT-2781 create color-assistive themes ([#921](https://github.com/dialpad/dialtone/issues/921)) ([a6cc397](https://github.com/dialpad/dialtone/commit/a6cc397bec52987f9ac2c3efca9b16f61c406807))
+
+# [9.138.0](https://github.com/dialpad/dialtone/compare/dialtone/v9.137.0...dialtone/v9.138.0) (2025-09-16)
+
+
+### Bug Fixes
+
+* **Checkbox, Radio:** DLT-2772 add pointer cursor to entire checkbox/radio label region ([#913](https://github.com/dialpad/dialtone/issues/913)) ([4bd0859](https://github.com/dialpad/dialtone/commit/4bd08592811f8dbbbfaa43fc79ab84d6209e5854))
+* **Localization:** DLT-2768  emoji row reaction label warnings ([#911](https://github.com/dialpad/dialtone/issues/911)) ([5a6713d](https://github.com/dialpad/dialtone/commit/5a6713dfd69d55d6dcbb850de48087829417d33c))
+
+
+### Code Refactoring
+
+* **Combinator:** DLT-2672 update styles ([#906](https://github.com/dialpad/dialtone/issues/906)) ([96f444c](https://github.com/dialpad/dialtone/commit/96f444c4b59c1a6ed0d29db151ed526d7f60d47b))
+* **Emoji Picker:** DLT-2776 new prop showAddEmojiButton ([#915](https://github.com/dialpad/dialtone/issues/915)) ([c37911b](https://github.com/dialpad/dialtone/commit/c37911b8f77a7453105f0421f24ac552ca935a88))
+
+
+### Documentation
+
+* NO-JIRA remove names from public docs ([#917](https://github.com/dialpad/dialtone/issues/917)) ([744736f](https://github.com/dialpad/dialtone/commit/744736f09e1086a7f5f7691045677a62cbe4e94c))
+
+
+### Features
+
+* **Mcp Server:** DLT-2707 add basic MCP server ([#914](https://github.com/dialpad/dialtone/issues/914)) ([3658e51](https://github.com/dialpad/dialtone/commit/3658e51689e541de91822656b5e8c73b1aa56be3))
+
+# [9.137.0](https://github.com/dialpad/dialtone/compare/dialtone/v9.136.0...dialtone/v9.137.0) (2025-09-10)
+
+
+### Bug Fixes
+
+* **Tokens:** DLT-2766 sunflower dark and correct shell base references ([#908](https://github.com/dialpad/dialtone/issues/908)) ([a44aa57](https://github.com/dialpad/dialtone/commit/a44aa577c5117efd3f6e8318be8aadbd0c333375))
+
+
+### Features
+
+* **Icon:** DLT-2769 dialpad-star-mark and dialpad-star-mark-color ([#910](https://github.com/dialpad/dialtone/issues/910)) ([ad7b444](https://github.com/dialpad/dialtone/commit/ad7b4442b3d2bd06dbc0738308feb10744d9935c))
 
 # [9.136.0](https://github.com/dialpad/dialtone/compare/dialtone/v9.135.2...dialtone/v9.136.0) (2025-09-09)
 

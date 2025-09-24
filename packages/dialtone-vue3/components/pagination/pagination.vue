@@ -1,5 +1,6 @@
 <template>
   <nav
+    v-show="totalPages > 0"
     :aria-label="ariaLabel"
     class="d-pagination"
   >
@@ -229,6 +230,12 @@ export default {
   watch: {
     activePage () {
       this.currentPage = this.activePage;
+    },
+
+    totalPages (pages) {
+      if (this.currentPage > pages || this.currentPage <= 0){
+        this.currentPage = pages;
+      }
     },
   },
 

@@ -1,6 +1,6 @@
 {
   "name": "@dialpad/dialtone",
-  "version": "9.137.0-next.2",
+  "version": "9.139.0-next.2",
   "packageManager": "pnpm@9.9.0",
   "description": "Dialpad's Dialtone design system monorepo",
   "scripts": {
@@ -88,6 +88,7 @@
     "@dialpad/dialtone-emojis": "workspace:*",
     "@dialpad/dialtone-icons": "workspace:*",
     "@dialpad/dialtone-tokens": "workspace:*",
+    "@dialpad/dialtone-mcp-server": "workspace:*",
     "@tiptap/core": "2.12.0",
     "@tiptap/extension-blockquote": "2.12.0",
     "@tiptap/extension-bold": "2.12.0",

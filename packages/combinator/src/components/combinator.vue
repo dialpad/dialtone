@@ -1,59 +1,25 @@
 <template>
-  <div class="dtc-combinator">
-    <dt-notice
-      v-if="showUnsupportedWarning"
-      class="d-wmx-unset"
-      title="Unsupported component"
-      kind="warning"
-      @close="hideUnsupportedMessage"
-    >
-      May have unexpected behaviour.
-    </dt-notice>
-    <div class="d-d-flex d-hmx464">
-      <div
-        :class="[
-          'dtc-root d-d-grid d-of-hidden d-ba d-bar4 d-w100p',
-          `dtc-root--sidebar-${settings.root.sidebar}`,
-          rootClass,
-          { 'dtc-root--blueprint': blueprint },
-        ]"
-      >
-        <div class="dtc-root__top">
-          <dtc-renderer
-            v-model:settings="settings"
-            :component="component"
-            :info="info"
-            :options="options"
-            :library="library"
-            @event="(event, value) => triggerEvent(event, value)"
-          />
-        </div>
-        <div class="dtc-root__bottom d-bt">
-          <dtc-code-panel
-            ref="codePanel"
-            v-model:options="options"
-            :info="info"
-            :settings="settings"
-          >
-            <template
-              v-if="!blueprint"
-              #overlay
-            >
-              <dtc-settings-menu v-model:settings="settings" />
-            </template>
-          </dtc-code-panel>
-        </div>
-        <div
-          v-if="!blueprint"
-          class="dtc-root__sidebar"
-        >
-          <dtc-option-bar
-            v-model:options="options"
-            :component="component"
-            :info="info"
-          />
-        </div>
-      </div>
+  <div :class="['dialtone-playground', { 'dialtone-playground--fullscreen': isFullScreen }]">
+    <div class="dialtone-playground__start">
+      <dtc-renderer
+        v-model:settings="settings"
+        class="dialtone-playground__component"
+        :component="component"
+        :info="info"
+        :options="options"
+        :library="library"
+        @event="(event, value) => triggerEvent(event, value)"
+      />
+      <dtc-option-bar
+        v-if="!blueprint"
+        v-model:options="options"
+        :component="component"
+        :info="info"
+        @toggle-full-screen="toggleFullScreen"
+      />
+    </div>
+    <div class="dialtone-playground__end">
+      <!-- <dtc-code-example :component="library" /> -->
     </div>
   </div>
 </template>
@@ -61,26 +27,26 @@
 <script setup>
 import DtcOptionBar from './option_bar/option_bar.vue';
 import DtcRenderer from './renderer/renderer.vue';
-import DtcCodePanel from './code_panel/code_panel.vue';
-import DtcSettingsMenu from './settings_menu/settings_menu.vue';
-// import DtcHeader from '@/src/components/header/header.vue';
-import { DtNotice } from '@dialpad/dialtone-vue';
-
 import { enumerateGroups } from '@/src/lib/utils';
 import { computed, onErrorCaptured, reactive, ref } from 'vue';
 import { cachedRef, computedModel } from '@/src/lib/utils_vue';
 import { getComponentInfo } from '@/src/lib/info';
 import {
+  SETTINGS_BACKGROUND_KEY,
+  SETTINGS_INDENT_KEY,
+  SETTINGS_POSITIONING_KEY,
   SETTINGS_SCHEME_KEY,
+  SETTINGS_SIDEBAR_KEY,
   SETTINGS_THEME_KEY,
   SETTINGS_VERBOSE_KEY,
-  SETTINGS_BACKGROUND_KEY,
-  SETTINGS_POSITIONING_KEY,
-  SETTINGS_SIDEBAR_KEY,
-  SETTINGS_INDENT_KEY,
 } from '@/src/lib/constants';
 import defaultSettings from '@/src/settings.json';
-import supportedComponents from '@/src/supported_components.json';
+// import supportedComponents from '@/src/supported_components.json';
+// import DtcCodeExample from './code_example/code_example.vue';
+// import DtcCodePanel from './code_panel/code_panel.vue';
+// import DtcSettingsMenu from './settings_menu/settings_menu.vue';
+// import DtcHeader from '@/src/components/header/header.vue';
+// import { DtNotice } from '@dialpad/dialtone-vue';
 
 const props = defineProps({
   /**
@@ -102,7 +68,8 @@ const props = defineProps({
    */
   library: {
     type: Object,
-    default: () => {},
+    default: () => {
+    },
   },
   /**
    * The variants to select.
@@ -111,7 +78,8 @@ const props = defineProps({
    */
   variants: {
     type: Object,
-    default: () => {},
+    default: () => {
+    },
   },
   /**
    * Activate 'blueprint' mode, to use a simple version of the combinator.
@@ -132,35 +100,9 @@ const props = defineProps({
 });
 
 const selectedVariant = ref('default');
-
-// function updateVariant (e) {
-//   selectedVariant.value = e;
-// }
-
-/**
- * Gets a new instantiation of an info object.
- * Merges info from selected variant to the info object.
- *
- * @returns {object} The newly instantiated info object.
- */
-function initializeInfo () {
-  const info = getComponentInfo(props.component, props.documentation);
-
-  const variantInfo = props.variants?.[selectedVariant.value];
-
-  if (variantInfo) {
-    Object.entries(variantInfo).forEach(([memberGroup, members]) => {
-      Object.entries(members).forEach(([memberName, member]) => {
-        const infoMember = info[memberGroup].find(infoMember => infoMember.name === memberName);
-        if (infoMember) {
-          Object.assign(infoMember, member);
-        }
-      });
-    });
-  }
-
-  return info;
-}
+const isFullScreen = ref(false);
+// const showUnsupportedWarning = ref(!supportedComponents.includes(props.component?.name));
+const codePanel = ref();
 
 /**
  * Container for all extended component information for the target component.
@@ -196,20 +138,6 @@ const info = computed(() => {
     },
   });
 });
-
-/**
- * Gets the values for a given 'options' member group with the provided defaults.
- *
- * @param info
- */
-function getInitialValues (info) {
-  const options = {};
-  info.members.enumerate((memberGroup, member) => {
-    options[memberGroup] = options[memberGroup] || {};
-    options[memberGroup][member.name] = member.initialValue;
-  });
-  return options;
-}
 
 /**
  * The options data object is the main reactive object that allows interactivity with the target component.
@@ -287,16 +215,65 @@ const settings = computedModel(
   },
 );
 
-const showUnsupportedWarning = ref(!supportedComponents.includes(props.component?.name));
+// function updateVariant (e) {
+//   selectedVariant.value = e;
+// }
 
-function hideUnsupportedMessage () {
-  showUnsupportedWarning.value = false;
+/**
+ * Gets a new instantiation of an info object.
+ * Merges info from selected variant to the info object.
+ *
+ * @returns {object} The newly instantiated info object.
+ */
+function initializeInfo () {
+  const info = getComponentInfo(props.component, props.documentation);
+
+  const variantInfo = props.variants?.[selectedVariant.value];
+
+  if (variantInfo) {
+    Object.entries(variantInfo).forEach(([memberGroup, members]) => {
+      Object.entries(members).forEach(([memberName, member]) => {
+        const infoMember = info[memberGroup].find(infoMember => infoMember.name === memberName);
+        if (infoMember) {
+          Object.assign(infoMember, member);
+        }
+      });
+    });
+  }
+
+  return info;
 }
 
-const codePanel = ref();
+/**
+ * Gets the values for a given 'options' member group with the provided defaults.
+ *
+ * @param info
+ */
+function getInitialValues (info) {
+  const options = {};
+  info.members.enumerate((memberGroup, member) => {
+    options[memberGroup] = options[memberGroup] || {};
+    options[memberGroup][member.name] = member.initialValue;
+  });
+  return options;
+}
+
+// function hideUnsupportedMessage () {
+//   showUnsupportedWarning.value = false;
+// }
 
 function triggerEvent (event, value) {
   codePanel.value.trigger(event, value);
+}
+
+function toggleFullScreen ($event) {
+  if ($event) {
+    document.body.classList.add('d-of-hidden', 'd-h100vh');
+  } else {
+    document.body.classList.remove('d-of-hidden', 'd-h100vh');
+  }
+
+  isFullScreen.value = $event;
 }
 
 onErrorCaptured((exception) => {
@@ -316,65 +293,71 @@ export default {
 </script>
 
 <style lang="less">
-@import "@/src/assets/themes/base.less";
-
-.dtc-root {
-  grid-template-rows: repeat(2, 1fr);
-}
-
-.dtc-root__sidebar {
-  grid-row: span 2 / span 2;
-}
-
-.dtc-root--blueprint {
-  grid-template-columns: 1fr !important;
-
-  .dtc-root__top {
-    grid-column-start: 1 !important;
+.dialtone-playground {
+  & {
+    display: flex;
+    flex-direction: column;
   }
 
-  .dtc-root__bottom {
-    grid-column-start: 1 !important;
-  }
-}
+  &__start {
+    flex-grow: 1;
+    background-color: var(--dt-color-surface-secondary);
+    border-radius: var(--dt-size-radius-400);
 
-.dtc-root--sidebar-right {
-  grid-template-columns: minmax(0, 2fr) minmax(0, 1fr);
+    @media screen and (min-width: 640px) {
+      display: flex;
+      overflow: hidden;
+      flex-direction: row;
+    }
 
-  .dtc-root__bottom {
-    grid-row-start: 2;
-  }
-
-  .dtc-root__sidebar {
-    border-inline-start: var(--dt-space-100) solid currentColor;
-  }
-}
-
-.dtc-root--sidebar-left {
-  grid-template-columns: minmax(0, 1fr) minmax(0, 2fr);
-
-  .dtc-root__top {
-    grid-row-start: 1;
-    grid-column-start: 2;
+    .dialtone-playground--fullscreen & {
+      border-block-end: var(--dt-size-border-100) solid var(--dt-color-border-subtle)
+    }
   }
 
-  .dtc-root__bottom {
-    grid-row-start: 2;
-    grid-column-start: 2;
+  &__end {
+    .dialtone-playground--fullscreen & {
+      background-color: var(--dt-color-surface-secondary-opaque);
+      block-size: 33vh;
+    }
   }
 
-  .dtc-root__sidebar {
-    grid-column-start: 1;
-    border-inline-end: var(--dt-space-100) solid currentColor;
+  &--fullscreen {
+    position: fixed;
+    inset: 0;
+    z-index: var(--zi-modal-element);
+    background-color: var(--dt-color-surface-secondary);
   }
-}
 
-.dtc-root > * {
-  display: flex;
-  overflow: hidden;
-}
+  &__component {
+    padding: var(--dt-space-500);
+    display: grid;
+    flex: 1;
+    align-items: center;
+    justify-content: center;
+    position: relative;
 
-.dtc-icon[disabled] {
-  background-color: transparent !important;
+    @media screen and (min-width: 640px) {
+      min-block-size: var(--dt-size-925);
+    }
+  }
+
+  &__controls {
+    padding: var(--dt-space-500);
+    background-color: var(--dt-color-surface-secondary-opaque);
+
+    @media screen and (min-width: 640px) {
+      inline-size: var(--dt-size-875);
+      max-block-size: var(--dt-size-950);
+    }
+
+    .dialtone-playground--fullscreen & {
+      @media screen and (min-width: 640px) {
+        max-block-size: 100%;
+        inline-size: var(--dt-size-900);
+      }
+    }
+
+  }
 }
 </style>

@@ -3123,22 +3123,22 @@
     "name": "dark",
     "$figmaStyleReferences": {},
     "selectedTokenSets": {
+      "root": "source",
       "base/dark": "source",
       "base/default": "source",
+      "theme/dp/default": "enabled",
+      "theme/dp/dark": "enabled",
+      "theme/tmo/default": "enabled",
+      "theme/tmo/dark": "enabled",
       "components/avatar/default": "enabled",
       "components/badge/default": "enabled",
       "components/checkbox/default": "enabled",
       "components/icon/default": "enabled",
       "components/radio/default": "enabled",
-      "root": "source",
       "components/badge/dark": "enabled",
       "components/button/default": "enabled",
       "components/presence/default": "enabled",
-      "components/presence/dark": "enabled",
-      "theme/dp/default": "enabled",
-      "theme/dp/dark": "enabled",
-      "theme/tmo/default": "enabled",
-      "theme/tmo/dark": "enabled"
+      "components/presence/dark": "enabled"
     },
     "$figmaCollectionId": "VariableCollectionId:406:19535",
     "$figmaModeId": "406:3",
@@ -3684,15 +3684,15 @@
     "selectedTokenSets": {
       "root": "source",
       "base/default": "source",
+      "theme/dp/default": "source",
+      "theme/deca/default": "enabled",
       "components/avatar/default": "enabled",
       "components/badge/default": "enabled",
       "components/button/default": "enabled",
       "components/checkbox/default": "enabled",
       "components/icon/default": "enabled",
       "components/radio/default": "enabled",
-      "components/presence/default": "enabled",
-      "theme/dp/default": "source",
-      "theme/deca/default": "enabled"
+      "components/presence/default": "enabled"
     },
     "$figmaVariableReferences": {},
     "group": "deca"
@@ -3705,6 +3705,10 @@
       "root": "source",
       "base/default": "source",
       "base/dark": "source",
+      "theme/dp/default": "source",
+      "theme/dp/dark": "source",
+      "theme/deca/default": "enabled",
+      "theme/deca/dark": "enabled",
       "components/avatar/default": "enabled",
       "components/badge/default": "enabled",
       "components/badge/dark": "enabled",
@@ -3713,10 +3717,7 @@
       "components/icon/default": "enabled",
       "components/radio/default": "enabled",
       "components/presence/default": "enabled",
-      "theme/dp/default": "source",
-      "theme/dp/dark": "source",
-      "theme/deca/default": "enabled",
-      "theme/deca/dark": "enabled"
+      "components/presence/dark": "enabled"
     },
     "$figmaVariableReferences": {},
     "group": "deca"
@@ -4095,14 +4096,16 @@
       "root": "source",
       "base/default": "source",
       "base/dark": "source",
+      "theme/dp/default": "enabled",
+      "theme/dp/dark": "enabled",
+      "theme/expressive/default": "enabled",
       "components/avatar/default": "enabled",
       "components/badge/default": "enabled",
       "components/checkbox/default": "enabled",
       "components/icon/default": "enabled",
       "components/radio/default": "enabled",
-      "theme/dp/default": "enabled",
-      "theme/dp/dark": "enabled",
-      "theme/expressive/default": "enabled"
+      "components/presence/default": "enabled",
+      "components/presence/dark": "enabled"
     },
     "$figmaVariableReferences": {},
     "group": "expressive"
@@ -4114,15 +4117,15 @@
     "selectedTokenSets": {
       "root": "source",
       "base/default": "source",
+      "theme/dp/default": "enabled",
+      "theme/expressive/default": "enabled",
+      "theme/expressive/sm": "enabled",
       "components/avatar/default": "enabled",
       "components/badge/default": "enabled",
       "components/checkbox/default": "enabled",
       "components/icon/default": "enabled",
       "components/radio/default": "enabled",
-      "components/presence/default": "enabled",
-      "theme/dp/default": "enabled",
-      "theme/expressive/default": "enabled",
-      "theme/expressive/sm": "enabled"
+      "components/presence/default": "enabled"
     },
     "$figmaVariableReferences": {},
     "group": "expressive-sm"
@@ -4135,16 +4138,17 @@
       "root": "source",
       "base/default": "source",
       "base/dark": "source",
+      "theme/dp/default": "enabled",
+      "theme/dp/dark": "enabled",
+      "theme/expressive/default": "enabled",
+      "theme/expressive/sm": "enabled",
       "components/avatar/default": "enabled",
       "components/badge/default": "enabled",
       "components/checkbox/default": "enabled",
       "components/icon/default": "enabled",
       "components/radio/default": "enabled",
       "components/presence/default": "enabled",
-      "theme/dp/default": "enabled",
-      "theme/dp/dark": "enabled",
-      "theme/expressive/default": "enabled",
-      "theme/expressive/sm": "enabled"
+      "components/presence/dark": "enabled"
     },
     "$figmaVariableReferences": {},
     "group": "expressive-sm"
@@ -4154,17 +4158,17 @@
     "name": "light",
     "$figmaStyleReferences": {},
     "selectedTokenSets": {
+      "root": "source",
+      "base/default": "source",
+      "theme/dp/default": "enabled",
+      "theme/sunflower/default": "enabled",
       "components/avatar/default": "enabled",
       "components/badge/default": "enabled",
       "components/button/default": "enabled",
       "components/checkbox/default": "enabled",
       "components/icon/default": "enabled",
       "components/radio/default": "enabled",
-      "components/presence/default": "enabled",
-      "root": "source",
-      "base/default": "source",
-      "theme/dp/default": "enabled",
-      "theme/sunflower/default": "enabled"
+      "components/presence/default": "enabled"
     },
     "$figmaVariableReferences": {},
     "group": "sunflower"
@@ -4174,6 +4178,13 @@
     "name": "dark",
     "$figmaStyleReferences": {},
     "selectedTokenSets": {
+      "root": "source",
+      "base/default": "source",
+      "base/dark": "source",
+      "theme/dp/default": "enabled",
+      "theme/dp/dark": "enabled",
+      "theme/sunflower/default": "enabled",
+      "theme/sunflower/dark": "enabled",
       "components/avatar/default": "enabled",
       "components/badge/default": "enabled",
       "components/badge/dark": "enabled",
@@ -4182,13 +4193,6 @@
       "components/icon/default": "enabled",
       "components/radio/default": "enabled",
       "components/presence/default": "enabled",
-      "root": "source",
-      "base/default": "source",
-      "theme/dp/default": "enabled",
-      "theme/dp/dark": "enabled",
-      "theme/sunflower/default": "enabled",
-      "theme/sunflower/dark": "enabled",
-      "base/dark": "source",
       "components/presence/dark": "enabled"
     },
     "$figmaVariableReferences": {},
@@ -4199,17 +4203,17 @@
     "name": "light",
     "$figmaStyleReferences": {},
     "selectedTokenSets": {
+      "root": "source",
+      "base/default": "source",
+      "theme/dp/default": "enabled",
+      "theme/ceruleo/default": "enabled",
       "components/avatar/default": "enabled",
       "components/badge/default": "enabled",
       "components/button/default": "enabled",
       "components/checkbox/default": "enabled",
       "components/icon/default": "enabled",
       "components/presence/default": "enabled",
-      "components/radio/default": "enabled",
-      "root": "source",
-      "base/default": "source",
-      "theme/dp/default": "enabled",
-      "theme/ceruleo/default": "enabled"
+      "components/radio/default": "enabled"
     },
     "$figmaVariableReferences": {},
     "group": "ceruleo"
@@ -4219,17 +4223,17 @@
     "name": "light",
     "$figmaStyleReferences": {},
     "selectedTokenSets": {
+      "root": "source",
+      "base/default": "source",
+      "theme/dp/default": "enabled",
+      "theme/melon/default": "enabled",
       "components/avatar/default": "enabled",
       "components/badge/default": "enabled",
       "components/button/default": "enabled",
       "components/checkbox/default": "enabled",
       "components/icon/default": "enabled",
       "components/presence/default": "enabled",
-      "components/radio/default": "enabled",
-      "root": "source",
-      "base/default": "source",
-      "theme/dp/default": "enabled",
-      "theme/melon/default": "enabled"
+      "components/radio/default": "enabled"
     },
     "$figmaVariableReferences": {},
     "group": "melon"
@@ -4239,6 +4243,13 @@
     "name": "dark",
     "$figmaStyleReferences": {},
     "selectedTokenSets": {
+      "root": "source",
+      "base/default": "source",
+      "base/dark": "source",
+      "theme/dp/default": "enabled",
+      "theme/dp/dark": "enabled",
+      "theme/melon/default": "enabled",
+      "theme/melon/dark": "enabled",
       "components/avatar/default": "enabled",
       "components/badge/default": "enabled",
       "components/badge/dark": "enabled",
@@ -4247,14 +4258,7 @@
       "components/icon/default": "enabled",
       "components/presence/default": "enabled",
       "components/presence/dark": "enabled",
-      "components/radio/default": "enabled",
-      "root": "source",
-      "base/default": "source",
-      "base/dark": "source",
-      "theme/dp/default": "enabled",
-      "theme/dp/dark": "enabled",
-      "theme/melon/default": "enabled",
-      "theme/melon/dark": "enabled"
+      "components/radio/default": "enabled"
     },
     "$figmaVariableReferences": {},
     "group": "melon"
@@ -4264,17 +4268,17 @@
     "name": "light",
     "$figmaStyleReferences": {},
     "selectedTokenSets": {
+      "root": "source",
+      "base/default": "source",
+      "theme/dp/default": "enabled",
+      "theme/aegean/default": "enabled",
       "components/avatar/default": "enabled",
       "components/badge/default": "enabled",
       "components/button/default": "enabled",
       "components/checkbox/default": "enabled",
       "components/icon/default": "enabled",
       "components/presence/default": "enabled",
-      "components/radio/default": "enabled",
-      "root": "source",
-      "base/default": "source",
-      "theme/dp/default": "enabled",
-      "theme/aegean/default": "enabled"
+      "components/radio/default": "enabled"
     },
     "$figmaVariableReferences": {},
     "group": "aegean"
@@ -4284,6 +4288,13 @@
     "name": "dark",
     "$figmaStyleReferences": {},
     "selectedTokenSets": {
+      "root": "source",
+      "base/default": "source",
+      "base/dark": "source",
+      "theme/dp/default": "enabled",
+      "theme/dp/dark": "enabled",
+      "theme/aegean/default": "enabled",
+      "theme/aegean/dark": "enabled",
       "components/avatar/default": "enabled",
       "components/badge/default": "enabled",
       "components/badge/dark": "enabled",
@@ -4292,14 +4303,7 @@
       "components/icon/default": "enabled",
       "components/presence/default": "enabled",
       "components/presence/dark": "enabled",
-      "components/radio/default": "enabled",
-      "root": "source",
-      "base/default": "source",
-      "base/dark": "source",
-      "theme/dp/default": "enabled",
-      "theme/dp/dark": "enabled",
-      "theme/aegean/default": "enabled",
-      "theme/aegean/dark": "enabled"
+      "components/radio/default": "enabled"
     },
     "$figmaVariableReferences": {},
     "group": "aegean"
@@ -4309,17 +4313,17 @@
     "name": "light",
     "$figmaStyleReferences": {},
     "selectedTokenSets": {
+      "root": "source",
+      "base/default": "source",
+      "theme/dp/default": "enabled",
+      "theme/verdant-haze/default": "enabled",
       "components/avatar/default": "enabled",
       "components/badge/default": "enabled",
       "components/button/default": "enabled",
       "components/checkbox/default": "enabled",
       "components/icon/default": "enabled",
       "components/presence/default": "enabled",
-      "components/radio/default": "enabled",
-      "root": "source",
-      "base/default": "source",
-      "theme/dp/default": "enabled",
-      "theme/verdant-haze/default": "enabled"
+      "components/radio/default": "enabled"
     },
     "$figmaVariableReferences": {},
     "group": "verdant-haze"
@@ -4329,6 +4333,13 @@
     "name": "dark",
     "$figmaStyleReferences": {},
     "selectedTokenSets": {
+      "root": "source",
+      "base/default": "source",
+      "base/dark": "source",
+      "theme/dp/default": "enabled",
+      "theme/dp/dark": "enabled",
+      "theme/verdant-haze/default": "enabled",
+      "theme/verdant-haze/dark": "enabled",
       "components/avatar/default": "enabled",
       "components/badge/default": "enabled",
       "components/badge/dark": "enabled",
@@ -4337,14 +4348,7 @@
       "components/icon/default": "enabled",
       "components/presence/default": "enabled",
       "components/presence/dark": "enabled",
-      "components/radio/default": "enabled",
-      "root": "source",
-      "base/default": "source",
-      "base/dark": "source",
-      "theme/dp/default": "enabled",
-      "theme/dp/dark": "enabled",
-      "theme/verdant-haze/default": "enabled",
-      "theme/verdant-haze/dark": "enabled"
+      "components/radio/default": "enabled"
     },
     "$figmaVariableReferences": {},
     "group": "verdant-haze"
@@ -4354,6 +4358,13 @@
     "name": "dark",
     "$figmaStyleReferences": {},
     "selectedTokenSets": {
+      "root": "source",
+      "base/default": "source",
+      "base/dark": "source",
+      "theme/dp/default": "enabled",
+      "theme/dp/dark": "enabled",
+      "theme/ceruleo/default": "enabled",
+      "theme/ceruleo/dark": "enabled",
       "components/avatar/default": "enabled",
       "components/badge/default": "enabled",
       "components/badge/dark": "enabled",
@@ -4362,14 +4373,7 @@
       "components/icon/default": "enabled",
       "components/presence/default": "enabled",
       "components/presence/dark": "enabled",
-      "components/radio/default": "enabled",
-      "root": "source",
-      "base/default": "source",
-      "base/dark": "source",
-      "theme/dp/default": "enabled",
-      "theme/dp/dark": "enabled",
-      "theme/ceruleo/default": "enabled",
-      "theme/ceruleo/dark": "enabled"
+      "components/radio/default": "enabled"
     },
     "$figmaVariableReferences": {},
     "group": "ceruleo"
@@ -4435,6 +4439,7 @@
       "components/checkbox/default": "enabled",
       "components/icon/default": "enabled",
       "components/presence/default": "enabled",
+      "components/presence/dark": "enabled",
       "components/radio/default": "enabled"
     },
     "$figmaVariableReferences": {},
@@ -4478,6 +4483,7 @@
       "components/checkbox/default": "enabled",
       "components/icon/default": "enabled",
       "components/presence/default": "enabled",
+      "components/presence/dark": "enabled",
       "components/radio/default": "enabled"
     },
     "$figmaVariableReferences": {},
@@ -4521,6 +4527,7 @@
       "components/checkbox/default": "enabled",
       "components/icon/default": "enabled",
       "components/presence/default": "enabled",
+      "components/presence/dark": "enabled",
       "components/radio/default": "enabled"
     },
     "$figmaVariableReferences": {},
@@ -4534,14 +4541,14 @@
       "root": "source",
       "base/default": "source",
       "theme/dp/default": "enabled",
+      "theme/high-desert/default": "enabled",
       "components/avatar/default": "enabled",
       "components/badge/default": "enabled",
       "components/button/default": "enabled",
       "components/checkbox/default": "enabled",
       "components/icon/default": "enabled",
       "components/presence/default": "enabled",
-      "components/radio/default": "enabled",
-      "theme/high-desert/default": "enabled"
+      "components/radio/default": "enabled"
     },
     "$figmaVariableReferences": {},
     "group": "high-desert"
@@ -4564,6 +4571,7 @@
       "components/checkbox/default": "enabled",
       "components/icon/default": "enabled",
       "components/presence/default": "enabled",
+      "components/presence/dark": "enabled",
       "components/radio/default": "enabled"
     },
     "$figmaVariableReferences": {},
@@ -4586,7 +4594,8 @@
       "components/presence/default": "enabled",
       "components/radio/default": "enabled"
     },
-    "group": "101"
+    "group": "101",
+    "$figmaVariableReferences": {}
   },
   {
     "id": "ae903cbc4323421af53971d9434a21ffadf659b0",
@@ -4606,9 +4615,11 @@
       "components/checkbox/default": "enabled",
       "components/icon/default": "enabled",
       "components/presence/default": "enabled",
+      "components/presence/dark": "enabled",
       "components/radio/default": "enabled"
     },
-    "group": "101"
+    "group": "101",
+    "$figmaVariableReferences": {}
   },
   {
     "id": "dec7dd0852ed0cb1914aff15dafcfcc451ca6e85",
@@ -4627,7 +4638,8 @@
       "components/presence/default": "enabled",
       "components/radio/default": "enabled"
     },
-    "group": "102"
+    "group": "102",
+    "$figmaVariableReferences": {}
   },
   {
     "id": "dec7dd0852e51cd0cb1914aff15dafcfcc4a6e85",
@@ -4647,9 +4659,11 @@
       "components/checkbox/default": "enabled",
       "components/icon/default": "enabled",
       "components/presence/default": "enabled",
+      "components/presence/dark": "enabled",
       "components/radio/default": "enabled"
     },
-    "group": "102"
+    "group": "102",
+    "$figmaVariableReferences": {}
   },
   {
     "id": "de4aff15dafcfcc4a6ccb191e7dd0852e51cd085",
@@ -4668,7 +4682,8 @@
       "components/presence/default": "enabled",
       "components/radio/default": "enabled"
     },
-    "group": "103"
+    "group": "103",
+    "$figmaVariableReferences": {}
   },
   {
     "id": "de4b191ed085a7dd0852e51cff15dafcfcc4a6cc",
@@ -4688,9 +4703,11 @@
       "components/checkbox/default": "enabled",
       "components/icon/default": "enabled",
       "components/presence/default": "enabled",
+      "components/presence/dark": "enabled",
       "components/radio/default": "enabled"
     },
-    "group": "103"
+    "group": "103",
+    "$figmaVariableReferences": {}
   },
   {
     "id": "hio53zvwbkco8fgoxffo4b0ri0ctghsbulc0a5i6dwmq",
@@ -4709,7 +4726,8 @@
       "components/presence/default": "enabled",
       "components/radio/default": "enabled"
     },
-    "group": "104"
+    "group": "104",
+    "$figmaVariableReferences": {}
   },
   {
     "id": "dcm91o30atbwgc470jaxe4q0r5n8v3pr6tnt1hs1tu10",
@@ -4729,9 +4747,11 @@
       "components/checkbox/default": "enabled",
       "components/icon/default": "enabled",
       "components/presence/default": "enabled",
+      "components/presence/dark": "enabled",
       "components/radio/default": "enabled"
     },
-    "group": "104"
+    "group": "104",
+    "$figmaVariableReferences": {}
   },
   {
     "id": "obzc23qm7j7tiiu6t2aszq8dbg53957im5g7x9fbcfx7",
@@ -4750,7 +4770,8 @@
       "components/presence/default": "enabled",
       "components/radio/default": "enabled"
     },
-    "group": "105"
+    "group": "105",
+    "$figmaVariableReferences": {}
   },
   {
     "id": "w20zh4ur7r3qw75w83xvlq7mxl9f2zx7q8ou4b2owp9c",
@@ -4770,9 +4791,11 @@
       "components/checkbox/default": "enabled",
       "components/icon/default": "enabled",
       "components/presence/default": "enabled",
+      "components/presence/dark": "enabled",
       "components/radio/default": "enabled"
     },
-    "group": "105"
+    "group": "105",
+    "$figmaVariableReferences": {}
   },
   {
     "id": "8lm1r62vhdlk7qwcn4senfutnc7pza6j9d06wlw69ri5",
@@ -4791,7 +4814,8 @@
       "components/presence/default": "enabled",
       "components/radio/default": "enabled"
     },
-    "group": "106"
+    "group": "106",
+    "$figmaVariableReferences": {}
   },
   {
     "id": "8hn2u73str42grfwoq0v9jebxnsfjv9vsi90pw1tibfh",
@@ -4811,9 +4835,11 @@
       "components/checkbox/default": "enabled",
       "components/icon/default": "enabled",
       "components/presence/default": "enabled",
+      "components/presence/dark": "enabled",
       "components/radio/default": "enabled"
     },
-    "group": "106"
+    "group": "106",
+    "$figmaVariableReferences": {}
   },
   {
     "id": "wb8w88cvy989i4z3x85z0gul6plvwwo4xkclhlfxio6p",
@@ -4832,7 +4858,8 @@
       "components/presence/default": "enabled",
       "components/radio/default": "enabled"
     },
-    "group": "107"
+    "group": "107",
+    "$figmaVariableReferences": {}
   },
   {
     "id": "n1dnb1ocajhqzf68786k4n1fihox3wu2af9asd4t8qs9",
@@ -4852,9 +4879,11 @@
       "components/checkbox/default": "enabled",
       "components/icon/default": "enabled",
       "components/presence/default": "enabled",
+      "components/presence/dark": "enabled",
       "components/radio/default": "enabled"
     },
-    "group": "107"
+    "group": "107",
+    "$figmaVariableReferences": {}
   },
   {
     "id": "k0ne3226idq1tzk67j4lm2ygq2tlsm71q58mdto21214",
@@ -4873,7 +4902,8 @@
       "components/presence/default": "enabled",
       "components/radio/default": "enabled"
     },
-    "group": "108"
+    "group": "108",
+    "$figmaVariableReferences": {}
   },
   {
     "id": "lrznuulv1t343swbk0y6l976559utnatg18opzd4qrlr",
@@ -4893,9 +4923,11 @@
       "components/checkbox/default": "enabled",
       "components/icon/default": "enabled",
       "components/presence/default": "enabled",
+      "components/presence/dark": "enabled",
       "components/radio/default": "enabled"
     },
-    "group": "108"
+    "group": "108",
+    "$figmaVariableReferences": {}
   },
   {
     "id": "oex78x5ogc4x6djv530m6fvcmlgc9cdq020u6rwmy20v",
@@ -4914,7 +4946,8 @@
       "components/presence/default": "enabled",
       "components/radio/default": "enabled"
     },
-    "group": "109"
+    "group": "109",
+    "$figmaVariableReferences": {}
   },
   {
     "id": "vdx6p682o94pa85tjsnsq2vbvf1oiczydchm2c0mjywy",
@@ -4934,9 +4967,11 @@
       "components/checkbox/default": "enabled",
       "components/icon/default": "enabled",
       "components/presence/default": "enabled",
+      "components/presence/dark": "enabled",
       "components/radio/default": "enabled"
     },
-    "group": "109"
+    "group": "109",
+    "$figmaVariableReferences": {}
   },
   {
     "id": "3jgl49wvxjpssj4ff42l1a44vmvqfz96c8fzka7786x7",
@@ -4955,7 +4990,8 @@
       "components/presence/default": "enabled",
       "components/radio/default": "enabled"
     },
-    "group": "110"
+    "group": "110",
+    "$figmaVariableReferences": {}
   },
   {
     "id": "xmebc9m67dootss03vjgmpyjg9u0yo1cem6evtkqm4om",
@@ -4975,9 +5011,11 @@
       "components/checkbox/default": "enabled",
       "components/icon/default": "enabled",
       "components/presence/default": "enabled",
+      "components/presence/dark": "enabled",
       "components/radio/default": "enabled"
     },
-    "group": "110"
+    "group": "110",
+    "$figmaVariableReferences": {}
   },
   {
     "id": "fixi8or13hogs82r58k870erddhnuugmgacinx28jl4o",
@@ -4996,7 +5034,8 @@
       "components/presence/default": "enabled",
       "components/radio/default": "enabled"
     },
-    "group": "111"
+    "group": "111",
+    "$figmaVariableReferences": {}
   },
   {
     "id": "iz5w7rm7rlwiph66o8lydj6ivfllsix9vnedoy95i2ts",
@@ -5016,9 +5055,11 @@
       "components/checkbox/default": "enabled",
       "components/icon/default": "enabled",
       "components/presence/default": "enabled",
+      "components/presence/dark": "enabled",
       "components/radio/default": "enabled"
     },
-    "group": "111"
+    "group": "111",
+    "$figmaVariableReferences": {}
   },
   {
     "id": "vh604n3xyq56knb4xb90iisarz179trownv0sh9e0kko",
@@ -5037,7 +5078,8 @@
       "components/presence/default": "enabled",
       "components/radio/default": "enabled"
     },
-    "group": "112"
+    "group": "112",
+    "$figmaVariableReferences": {}
   },
   {
     "id": "xecfcnxshbvrfx0glxxvg3ct613xhle4wnia6q7f3vrk",
@@ -5057,9 +5099,11 @@
       "components/checkbox/default": "enabled",
       "components/icon/default": "enabled",
       "components/presence/default": "enabled",
+      "components/presence/dark": "enabled",
       "components/radio/default": "enabled"
     },
-    "group": "112"
+    "group": "112",
+    "$figmaVariableReferences": {}
   },
   {
     "id": "jfkc0xvoi23nbi4xvuhc0t03815k6igrxkzub1xnvf2w",
@@ -5078,7 +5122,8 @@
       "components/presence/default": "enabled",
       "components/radio/default": "enabled"
     },
-    "group": "113"
+    "group": "113",
+    "$figmaVariableReferences": {}
   },
   {
     "id": "jwkn16v1jx676wjzt21sqzvfok82n56wmn50b9xj9p7z",
@@ -5098,9 +5143,11 @@
       "components/checkbox/default": "enabled",
       "components/icon/default": "enabled",
       "components/presence/default": "enabled",
+      "components/presence/dark": "enabled",
       "components/radio/default": "enabled"
     },
-    "group": "113"
+    "group": "113",
+    "$figmaVariableReferences": {}
   },
   {
     "id": "h7pkdbidckznzv6xb019yqfz9zc7z7y5oer3cjuytu2i",
@@ -5119,7 +5166,8 @@
       "components/presence/default": "enabled",
       "components/radio/default": "enabled"
     },
-    "group": "114"
+    "group": "114",
+    "$figmaVariableReferences": {}
   },
   {
     "id": "irrgjgkoqudsks20oiicl0eqwpeu8r0spmtua4x0lomr",
@@ -5139,9 +5187,11 @@
       "components/checkbox/default": "enabled",
       "components/icon/default": "enabled",
       "components/presence/default": "enabled",
+      "components/presence/dark": "enabled",
       "components/radio/default": "enabled"
     },
-    "group": "114"
+    "group": "114",
+    "$figmaVariableReferences": {}
   },
   {
     "id": "ptelwj37ogkjajz4xwffyugxbbyqq8nd2bcjo1dzi6ep",
@@ -5160,7 +5210,8 @@
       "components/presence/default": "enabled",
       "components/radio/default": "enabled"
     },
-    "group": "115"
+    "group": "115",
+    "$figmaVariableReferences": {}
   },
   {
     "id": "nxdky5io7pqhx35o4mggml4o1v6ueg34g4pjg30j9pmx",
@@ -5180,9 +5231,11 @@
       "components/checkbox/default": "enabled",
       "components/icon/default": "enabled",
       "components/presence/default": "enabled",
+      "components/presence/dark": "enabled",
       "components/radio/default": "enabled"
     },
-    "group": "115"
+    "group": "115",
+    "$figmaVariableReferences": {}
   },
   {
     "id": "41xawy4coeybijk9wi6srxstt1uc2ned9cv2jhtsa6wn",
@@ -5201,7 +5254,8 @@
       "components/presence/default": "enabled",
       "components/radio/default": "enabled"
     },
-    "group": "116"
+    "group": "116",
+    "$figmaVariableReferences": {}
   },
   {
     "id": "dc20llpgj1c54lxcda37r64oxahhaic5cfesv7wlevli",
@@ -5221,9 +5275,11 @@
       "components/checkbox/default": "enabled",
       "components/icon/default": "enabled",
       "components/presence/default": "enabled",
+      "components/presence/dark": "enabled",
       "components/radio/default": "enabled"
     },
-    "group": "116"
+    "group": "116",
+    "$figmaVariableReferences": {}
   },
   {
     "id": "70ik8eh86x21as9vcutsib5cmhkpwy8y16rq98udowp0",
@@ -5242,7 +5298,8 @@
       "components/presence/default": "enabled",
       "components/radio/default": "enabled"
     },
-    "group": "117"
+    "group": "117",
+    "$figmaVariableReferences": {}
   },
   {
     "id": "p9yloer751zy6hxnlzqjlw4zt0765s4vuzhb0y1ocwp1",
@@ -5262,9 +5319,11 @@
       "components/checkbox/default": "enabled",
       "components/icon/default": "enabled",
       "components/presence/default": "enabled",
+      "components/presence/dark": "enabled",
       "components/radio/default": "enabled"
     },
-    "group": "117"
+    "group": "117",
+    "$figmaVariableReferences": {}
   },
   {
     "id": "otlsqb7na9raq3x847pmdatp6gk9drvnr3hdw7b3pirf",
@@ -5283,7 +5342,8 @@
       "components/presence/default": "enabled",
       "components/radio/default": "enabled"
     },
-    "group": "118"
+    "group": "118",
+    "$figmaVariableReferences": {}
   },
   {
     "id": "7irxw2756wmqru5w570fque1p99yqlgbo0gkq3xxbwt2",
@@ -5303,9 +5363,11 @@
       "components/checkbox/default": "enabled",
       "components/icon/default": "enabled",
       "components/presence/default": "enabled",
+      "components/presence/dark": "enabled",
       "components/radio/default": "enabled"
     },
-    "group": "118"
+    "group": "118",
+    "$figmaVariableReferences": {}
   },
   {
     "id": "r0e25eplaf78h7mbha0w36nq7q90adsaqerc9v2wjx31",
@@ -5324,7 +5386,8 @@
       "components/presence/default": "enabled",
       "components/radio/default": "enabled"
     },
-    "group": "119"
+    "group": "119",
+    "$figmaVariableReferences": {}
   },
   {
     "id": "jfukt5m9v2d2it9duho8l2985kc06itee6ftsb284om3",
@@ -5344,9 +5407,11 @@
       "components/checkbox/default": "enabled",
       "components/icon/default": "enabled",
       "components/presence/default": "enabled",
+      "components/presence/dark": "enabled",
       "components/radio/default": "enabled"
     },
-    "group": "119"
+    "group": "119",
+    "$figmaVariableReferences": {}
   },
   {
     "id": "b8vm94u066067aad4z2uj7xbchjwbod6osn92w0j8u71",
@@ -5365,7 +5430,8 @@
       "components/presence/default": "enabled",
       "components/radio/default": "enabled"
     },
-    "group": "120"
+    "group": "120",
+    "$figmaVariableReferences": {}
   },
   {
     "id": "idsi0izusxia6l18ry7pjkh7igmtfz3o6wyjf6lwmym7",
@@ -5385,9 +5451,11 @@
       "components/checkbox/default": "enabled",
       "components/icon/default": "enabled",
       "components/presence/default": "enabled",
+      "components/presence/dark": "enabled",
       "components/radio/default": "enabled"
     },
-    "group": "120"
+    "group": "120",
+    "$figmaVariableReferences": {}
   },
   {
     "id": "xyu8m4tjhsoecqg9q93gty9ezi76s6qeyayiy1vdfx84",
@@ -5406,7 +5474,8 @@
       "components/presence/default": "enabled",
       "components/radio/default": "enabled"
     },
-    "group": "121"
+    "group": "121",
+    "$figmaVariableReferences": {}
   },
   {
     "id": "xdccnhhu0l01pqm7n8rlbuxdd50t1jz6cti2i89qr9y6",
@@ -5426,9 +5495,11 @@
       "components/checkbox/default": "enabled",
       "components/icon/default": "enabled",
       "components/presence/default": "enabled",
+      "components/presence/dark": "enabled",
       "components/radio/default": "enabled"
     },
-    "group": "121"
+    "group": "121",
+    "$figmaVariableReferences": {}
   },
   {
     "id": "glp4o34rylojrvpfn2oglopf31zndpalz6clz8h0ihgj",
@@ -5447,7 +5518,8 @@
       "components/presence/default": "enabled",
       "components/radio/default": "enabled"
     },
-    "group": "122"
+    "group": "122",
+    "$figmaVariableReferences": {}
   },
   {
     "id": "lrqty0tdx4q9fa2temxoj4ia71p5zcj7gict5hdla4wz",
@@ -5467,9 +5539,11 @@
       "components/checkbox/default": "enabled",
       "components/icon/default": "enabled",
       "components/presence/default": "enabled",
+      "components/presence/dark": "enabled",
       "components/radio/default": "enabled"
     },
-    "group": "122"
+    "group": "122",
+    "$figmaVariableReferences": {}
   },
   {
     "id": "8f3g70f4acqk21m8kgh4790s1k9m45ptbflam2qks01j",
@@ -5488,7 +5562,8 @@
       "components/presence/default": "enabled",
       "components/radio/default": "enabled"
     },
-    "group": "123"
+    "group": "123",
+    "$figmaVariableReferences": {}
   },
   {
     "id": "17u4251ydtcl6ho6uji9pgxvbs3jq5ybszia1nua0nf1",
@@ -5508,9 +5583,11 @@
       "components/checkbox/default": "enabled",
       "components/icon/default": "enabled",
       "components/presence/default": "enabled",
+      "components/presence/dark": "enabled",
       "components/radio/default": "enabled"
     },
-    "group": "123"
+    "group": "123",
+    "$figmaVariableReferences": {}
   },
   {
     "id": "340lg4qaqh408y1wmz2i5m4x0aej02o1j2c689jcgff5",
@@ -5529,7 +5606,8 @@
       "components/presence/default": "enabled",
       "components/radio/default": "enabled"
     },
-    "group": "124"
+    "group": "124",
+    "$figmaVariableReferences": {}
   },
   {
     "id": "unmuqgl0fvhywi89y3wvx0aj4rmgeszjwza7ocm51x1s",
@@ -5549,9 +5627,11 @@
       "components/checkbox/default": "enabled",
       "components/icon/default": "enabled",
       "components/presence/default": "enabled",
+      "components/presence/dark": "enabled",
       "components/radio/default": "enabled"
     },
-    "group": "124"
+    "group": "124",
+    "$figmaVariableReferences": {}
   },
   {
     "id": "6p8tn9nyhphg7hftjdyi5e6bt9mj65cqf8y2mkik3o6z",
@@ -5570,7 +5650,8 @@
       "components/presence/default": "enabled",
       "components/radio/default": "enabled"
     },
-    "group": "125"
+    "group": "125",
+    "$figmaVariableReferences": {}
   },
   {
     "id": "is56fvugiui6e6nju9t7wj1hssffilgl6peed1qvjg11",
@@ -5590,9 +5671,11 @@
       "components/checkbox/default": "enabled",
       "components/icon/default": "enabled",
       "components/presence/default": "enabled",
+      "components/presence/dark": "enabled",
       "components/radio/default": "enabled"
     },
-    "group": "125"
+    "group": "125",
+    "$figmaVariableReferences": {}
   },
   {
     "id": "g9rfqnmaeulwdnmz766tbhbes3iocul0zni6zowswcnu",
@@ -5611,7 +5694,8 @@
       "components/presence/default": "enabled",
       "components/radio/default": "enabled"
     },
-    "group": "126"
+    "group": "126",
+    "$figmaVariableReferences": {}
   },
   {
     "id": "ymiyge5gz2446q9ppufqq0l7guuhh0zzb0ykpe6izgur",
@@ -5631,9 +5715,11 @@
       "components/checkbox/default": "enabled",
       "components/icon/default": "enabled",
       "components/presence/default": "enabled",
+      "components/presence/dark": "enabled",
       "components/radio/default": "enabled"
     },
-    "group": "126"
+    "group": "126",
+    "$figmaVariableReferences": {}
   },
   {
     "id": "hi63lk0tbkgcwn6xi6tvdbvxo9xz3qtkupc8sgzrcduv",
@@ -5652,7 +5738,8 @@
       "components/presence/default": "enabled",
       "components/radio/default": "enabled"
     },
-    "group": "127"
+    "group": "127",
+    "$figmaVariableReferences": {}
   },
   {
     "id": "9yd4vn4gju3sl4kjdn2hye3dt4w35jp4gz7yr6xq6607",
@@ -5672,9 +5759,11 @@
       "components/checkbox/default": "enabled",
       "components/icon/default": "enabled",
       "components/presence/default": "enabled",
+      "components/presence/dark": "enabled",
       "components/radio/default": "enabled"
     },
-    "group": "127"
+    "group": "127",
+    "$figmaVariableReferences": {}
   },
   {
     "id": "3bcn3j4epno0wolkd8kw38on8qwg01fyg8hfgtjmjvti",
@@ -5693,7 +5782,8 @@
       "components/presence/default": "enabled",
       "components/radio/default": "enabled"
     },
-    "group": "128"
+    "group": "128",
+    "$figmaVariableReferences": {}
   },
   {
     "id": "dtjebkoscfgvmixg9t29j1k5exwjs8pgssm7am3s93h1",
@@ -5713,9 +5803,11 @@
       "components/checkbox/default": "enabled",
       "components/icon/default": "enabled",
       "components/presence/default": "enabled",
+      "components/presence/dark": "enabled",
       "components/radio/default": "enabled"
     },
-    "group": "128"
+    "group": "128",
+    "$figmaVariableReferences": {}
   },
   {
     "id": "1zfeic4yen0t21vamj9wuvvbksa3yr20p7t75m0a5cfa",
@@ -5734,7 +5826,8 @@
       "components/presence/default": "enabled",
       "components/radio/default": "enabled"
     },
-    "group": "129"
+    "group": "129",
+    "$figmaVariableReferences": {}
   },
   {
     "id": "dw9pjanrye6m8wxa6bapijhnh150aro3myr7zbcwr8f8",
@@ -5754,9 +5847,11 @@
       "components/checkbox/default": "enabled",
       "components/icon/default": "enabled",
       "components/presence/default": "enabled",
+      "components/presence/dark": "enabled",
       "components/radio/default": "enabled"
     },
-    "group": "129"
+    "group": "129",
+    "$figmaVariableReferences": {}
   },
   {
     "id": "rarv7e7vet5w025vcdw5nbdm0zxvs8qof5bexo92wfbc",
@@ -5775,7 +5870,8 @@
       "components/presence/default": "enabled",
       "components/radio/default": "enabled"
     },
-    "group": "130"
+    "group": "130",
+    "$figmaVariableReferences": {}
   },
   {
     "id": "t6b8un2z5c3appyn8fbjkxo4vyai3bc14t8o358c724v",
@@ -5795,9 +5891,11 @@
       "components/checkbox/default": "enabled",
       "components/icon/default": "enabled",
       "components/presence/default": "enabled",
+      "components/presence/dark": "enabled",
       "components/radio/default": "enabled"
     },
-    "group": "130"
+    "group": "130",
+    "$figmaVariableReferences": {}
   },
   {
     "id": "l45h3mv4ezscyjvevpc1vc858c2rt08eovtbvtke22ea",
@@ -5816,7 +5914,8 @@
       "components/presence/default": "enabled",
       "components/radio/default": "enabled"
     },
-    "group": "131"
+    "group": "131",
+    "$figmaVariableReferences": {}
   },
   {
     "id": "bq58pi8fz99neybze8quz6px33mgr1xvx4m9m62x7ijo",
@@ -5836,9 +5935,11 @@
       "components/checkbox/default": "enabled",
       "components/icon/default": "enabled",
       "components/presence/default": "enabled",
+      "components/presence/dark": "enabled",
       "components/radio/default": "enabled"
     },
-    "group": "131"
+    "group": "131",
+    "$figmaVariableReferences": {}
   },
   {
     "id": "ikhkzsoglvhzjyukjhduecht1t91eoq5joty22yismxc",
@@ -5857,7 +5958,8 @@
       "components/presence/default": "enabled",
       "components/radio/default": "enabled"
     },
-    "group": "132"
+    "group": "132",
+    "$figmaVariableReferences": {}
   },
   {
     "id": "bah40eais5hifenhixv7dxs4ubcguuxu220aodxk1cov",
@@ -5877,9 +5979,11 @@
       "components/checkbox/default": "enabled",
       "components/icon/default": "enabled",
       "components/presence/default": "enabled",
+      "components/presence/dark": "enabled",
       "components/radio/default": "enabled"
     },
-    "group": "132"
+    "group": "132",
+    "$figmaVariableReferences": {}
   },
   {
     "id": "o3mrburd63qnfxz3m1w4ffzuk7bv20nft69hfjpv6i0s",
@@ -5898,7 +6002,8 @@
       "components/presence/default": "enabled",
       "components/radio/default": "enabled"
     },
-    "group": "133"
+    "group": "133",
+    "$figmaVariableReferences": {}
   },
   {
     "id": "rpq1sl4d96h6iyyn4jhrcsnbhzc0gg2djq1odltxhhro",
@@ -5918,9 +6023,11 @@
       "components/checkbox/default": "enabled",
       "components/icon/default": "enabled",
       "components/presence/default": "enabled",
+      "components/presence/dark": "enabled",
       "components/radio/default": "enabled"
     },
-    "group": "133"
+    "group": "133",
+    "$figmaVariableReferences": {}
   },
   {
     "id": "1587biikucwok7fk7aboqoepm2k96iospf97t52hcqoq",
@@ -5939,7 +6046,8 @@
       "components/presence/default": "enabled",
       "components/radio/default": "enabled"
     },
-    "group": "134"
+    "group": "134",
+    "$figmaVariableReferences": {}
   },
   {
     "id": "5bab9hlrjt84zmyooxjy986potrqelflxftmp8tige3b",
@@ -5959,9 +6067,11 @@
       "components/checkbox/default": "enabled",
       "components/icon/default": "enabled",
       "components/presence/default": "enabled",
+      "components/presence/dark": "enabled",
       "components/radio/default": "enabled"
     },
-    "group": "134"
+    "group": "134",
+    "$figmaVariableReferences": {}
   },
   {
     "id": "347z0xid0sjdp795x35ce565letnt2oqw81g2i3cjtp5",
@@ -5980,7 +6090,8 @@
       "components/presence/default": "enabled",
       "components/radio/default": "enabled"
     },
-    "group": "135"
+    "group": "135",
+    "$figmaVariableReferences": {}
   },
   {
     "id": "064byjl70vgn83ag7n9wzaz52on27z5g1jeqh5132w6h",
@@ -6000,9 +6111,11 @@
       "components/checkbox/default": "enabled",
       "components/icon/default": "enabled",
       "components/presence/default": "enabled",
+      "components/presence/dark": "enabled",
       "components/radio/default": "enabled"
     },
-    "group": "135"
+    "group": "135",
+    "$figmaVariableReferences": {}
   },
   {
     "id": "vtwj6xxhni6yoaltxixia2xrw5d6elxncocio6f9j1i0",
@@ -6021,7 +6134,8 @@
       "components/presence/default": "enabled",
       "components/radio/default": "enabled"
     },
-    "group": "136"
+    "group": "136",
+    "$figmaVariableReferences": {}
   },
   {
     "id": "vv4j4e8u1e122374htmhpk721bdrelttc2xn49tsfegn",
@@ -6041,9 +6155,11 @@
       "components/checkbox/default": "enabled",
       "components/icon/default": "enabled",
       "components/presence/default": "enabled",
+      "components/presence/dark": "enabled",
       "components/radio/default": "enabled"
     },
-    "group": "136"
+    "group": "136",
+    "$figmaVariableReferences": {}
   },
   {
     "id": "adma2wfaga4izda9eumgm8qam0f6irgvbwx19pfvya6s",
@@ -6062,7 +6178,8 @@
       "components/presence/default": "enabled",
       "components/radio/default": "enabled"
     },
-    "group": "137"
+    "group": "137",
+    "$figmaVariableReferences": {}
   },
   {
     "id": "pve52qln3tl5caamdgxk2ll6kjufthskk1ts7qd6a406",
@@ -6082,8 +6199,97 @@
       "components/checkbox/default": "enabled",
       "components/icon/default": "enabled",
       "components/presence/default": "enabled",
+      "components/presence/dark": "enabled",
       "components/radio/default": "enabled"
     },
-    "group": "137"
+    "group": "137",
+    "$figmaVariableReferences": {}
+  },
+  {
+    "id": "b177d2d025ea3e6b1d1258ddcdb46d2fecbf23bc",
+    "name": "light",
+    "$figmaStyleReferences": {},
+    "selectedTokenSets": {
+      "root": "source",
+      "base/default": "source",
+      "theme/dp/default": "enabled",
+      "theme/prota-deuter/default": "enabled",
+      "components/avatar/default": "enabled",
+      "components/badge/default": "enabled",
+      "components/button/default": "enabled",
+      "components/checkbox/default": "enabled",
+      "components/icon/default": "enabled",
+      "components/presence/default": "enabled",
+      "components/presence/default-prota-deuter": "enabled",
+      "components/radio/default": "enabled"
+    },
+    "group": "prota-deuter"
+  },
+  {
+    "id": "c2f22c48fcfd510008cb7c673299474727b3e357",
+    "name": "dark",
+    "$figmaStyleReferences": {},
+    "selectedTokenSets": {
+      "root": "source",
+      "base/default": "source",
+      "base/dark": "source",
+      "theme/dp/default": "enabled",
+      "theme/dp/dark": "enabled",
+      "theme/prota-deuter/default": "enabled",
+      "theme/prota-deuter/dark": "enabled",
+      "components/avatar/default": "enabled",
+      "components/badge/default": "enabled",
+      "components/button/default": "enabled",
+      "components/checkbox/default": "enabled",
+      "components/icon/default": "enabled",
+      "components/presence/default": "enabled",
+      "components/presence/dark": "enabled",
+      "components/presence/default-prota-deuter": "enabled",
+      "components/presence/dark-prota-deuter": "enabled",
+      "components/radio/default": "enabled"
+    },
+    "group": "prota-deuter"
+  },
+  {
+    "id": "eb76399134285a313a07f6e24c2c21732914e121",
+    "name": "light",
+    "$figmaStyleReferences": {},
+    "selectedTokenSets": {
+      "root": "source",
+      "base/default": "source",
+      "theme/dp/default": "enabled",
+      "theme/trita/default": "enabled",
+      "components/avatar/default": "enabled",
+      "components/badge/default": "enabled",
+      "components/button/default": "enabled",
+      "components/checkbox/default": "enabled",
+      "components/icon/default": "enabled",
+      "components/presence/default": "enabled",
+      "components/radio/default": "enabled"
+    },
+    "group": "trita"
+  },
+  {
+    "id": "fc24557ed077fe7c26e805d40c5e4bff25badbe3",
+    "name": "dark",
+    "$figmaStyleReferences": {},
+    "selectedTokenSets": {
+      "root": "source",
+      "base/default": "source",
+      "base/dark": "source",
+      "theme/dp/default": "enabled",
+      "theme/dp/dark": "enabled",
+      "theme/trita/default": "enabled",
+      "theme/trita/dark": "enabled",
+      "components/avatar/default": "enabled",
+      "components/badge/default": "enabled",
+      "components/button/default": "enabled",
+      "components/checkbox/default": "enabled",
+      "components/icon/default": "enabled",
+      "components/presence/default": "enabled",
+      "components/presence/dark": "enabled",
+      "components/radio/default": "enabled"
+    },
+    "group": "trita"
   }
 ]

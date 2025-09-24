@@ -31,6 +31,9 @@ export const MentionPlugin = Mention.extend({
       id: {
         default: '',
       },
+      contactKey: {
+        default: '',
+      },
     };
   },
 

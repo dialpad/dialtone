@@ -57,11 +57,7 @@ DIALTONE_EDITOR_ADD_LINK_BUTTON =
     .aria-label = 添加链接的输入字段
 DIALTONE_EMOJI_ROW_REACTION_LABEL =
     { $personCount ->
-       *[other]
-            { $youIncluded ->
-               *[true] 使用了 { $reaction } 作为回复
-                [false] 使用了 { $reaction } 作为回复
-            }
+       *[other] 使用了 { $reaction } 作为回复
     }
 DIALTONE_EMOJI_PICKER_ADD_EMOJI_LABEL = 添加表情符号
 DIALTONE_EMOJI_PICKER_SEARCH_NO_RESULTS_LABEL = 没有结果

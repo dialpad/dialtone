@@ -291,7 +291,7 @@ export default {
   },
 
   computed: {
-     
+
     tippyProps () {
       return {
         offset: this.offset,
@@ -337,6 +337,8 @@ export default {
     },
 
     internalShow (value) {
+      if (!this.tip) return;
+
       if (value) {
         this.setProps();
         this.tip.show();

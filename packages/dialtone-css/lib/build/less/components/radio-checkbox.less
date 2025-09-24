@@ -90,15 +90,17 @@
 .d-radio-group {
     display: inline-flex;
     gap: var(--dt-space-400); // 8
+    cursor: pointer;
+}
+//  --  Wrapper Disabled State
+.d-checkbox-group--disabled,
+.d-radio-group--disabled {
+    cursor: not-allowed;
 
-    //  --  Wrapper Disabled State
-    &.d-checkbox-group--disabled,
-    &.d-radio-group--disabled {
-        .d-checkbox__label,
-        .d-radio__label {
-            color: var(--dt-color-foreground-disabled);
-            cursor: not-allowed;
-        }
+    .d-checkbox__label,
+    .d-radio__label {
+        color: var(--dt-color-foreground-disabled);
+        cursor: not-allowed;
     }
 }
 

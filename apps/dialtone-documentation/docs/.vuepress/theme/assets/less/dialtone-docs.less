@@ -44,11 +44,12 @@ html body {
   --docsearch-container-background: var(--dt-color-surface-backdrop);
   // --docsearch-logo-color
   --docsearch-modal-width: var(--dt-size-1000);
-  --docsearch-modal-height: var(--dt-size-1000);
+  --docsearch-modal-height: auto;
   --docsearch-modal-background: var(--dt-color-surface-secondary);
   --docsearch-modal-shadow: var(--dt-shadow-large);
   /* stylelint-disable-next-line meowtec/no-px */
   --docsearch-searchbox-height: 40px;
+  --docsearch-searchbox-initial-height: 40px;
   // --docsearch-searchbox-background
   --docsearch-searchbox-focus-background: var(--dt-inputs-color-background-default);
   --docsearch-searchbox-shadow: inset 0 0 0 var(--dt-size-border-100) var(--dt-inputs-color-border-default);
@@ -69,7 +70,6 @@ html body {
     background-clip: padding-box;
     border: var(--dt-size-100) solid var(--dt-color-border-subtle);
     border-radius: var(--dt-size-radius-500);
-    border-radius: var(--dt-size-500);
     box-shadow: var(--dt-shadow-large);
   }
 
@@ -80,23 +80,27 @@ html body {
   }
 
   .DocSearch-SearchBar {
-    padding-block-end: var(--dt-space-550);
+    padding: var(--docsearch-spacing);
     border-block-end: 1px solid var(--dt-color-border-subtle);
   }
 
   .DocSearch-Form {
+    padding: 0 var(--docsearch-spacing);
     padding-inline-end: var(--dt-space-450);
     padding-inline-start: var(--dt-space-450);
     border-radius: var(--dt-size-radius-400);
+    border: none;
+    box-shadow: var(--docsearch-searchbox-shadow);
   }
 
-  .DocSearch-MagnifierLabel,
-  .DocSearch-Reset {
+  .DocSearch-MagnifierLabel svg,
+  .DocSearch-Close svg {
     color: var(--dt-color-foreground-muted)
   }
 
   .DocSearch-Input {
     font-size: var(--dt-font-size-300);
+    padding-inline-start: var(--dt-space-400);
 
     &:focus-visible {
       box-shadow: none;
@@ -110,8 +114,8 @@ html body {
   .DocSearch-LoadingIndicator svg,
   .DocSearch-MagnifierLabel svg,
   .DocSearch-Search-Icon {
-    width: var(--dt-icon-size-300) !important;
-    height: var(--dt-icon-size-300) !important;
+    inline-size: var(--dt-icon-size-300) !important;
+    block-size: var(--dt-icon-size-300) !important;
   }
 
   .DocSearch-Reset:hover {
@@ -123,7 +127,7 @@ html body {
   }
 
   .DocSearch-Dropdown {
-    // no overrides
+    max-block-size: var(--dt-size-1000);
   }
 
   .DocSearch-Dropdown-Container {
@@ -172,8 +176,8 @@ html body {
 
   .DocSearch-Hit-action svg,
   .DocSearch-Hit-icon svg {
-    width: var(--dt-icon-size-200);
-    height: var(--dt-icon-size-200);
+    inline-size: var(--dt-icon-size-200);
+    block-size: var(--dt-icon-size-200);
   }
 
   .DocSearch-Hit-content-wrapper {
@@ -257,7 +261,7 @@ html body {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  height: var(--dt-size-700);
+  block-size: var(--dt-size-700);
   padding: var(--dt-space-500) var(--dt-space-500) var(--dt-space-500) var(--dt-space-400);
   background-color: var(--dt-color-surface-secondary);
   border-block-end: var(--dt-size-border-50) solid var(--dt-color-border-subtle);
@@ -267,7 +271,7 @@ html body {
   position: sticky;
   inset-block-start: var(--dt-size-700);
   // TODO: redo 😜
-  height: calc(100vh - var(--dt-space-700));
+  block-size: calc(100vh - var(--dt-space-700));
   overflow-y: auto;
   background-color: var(--dt-color-surface-secondary);
   border-inline-end: var(--dt-size-100) solid var(--dt-color-border-subtle);
@@ -275,7 +279,7 @@ html body {
   &__list {
     inset-block-start: var(--dt-space-700);
     inset-block-end: 0;
-    width: calc(var(--dt-size-300) * 64);
+    inline-size: calc(var(--dt-size-300) * 64);
     padding: var(--dt-size-550) var(--dt-size-450) var(--dt-size-750);
   }
 }
@@ -345,7 +349,7 @@ a.header-anchor {
 }
 
 .d-docsite--paragraph {
-  max-width: 75ch;
+  max-inline-size: 75ch;
   margin-block-end: 1em;
   font-size: var(--dt-font-size-200);
   line-height: var(--dt-font-line-height-400);
@@ -369,7 +373,7 @@ a.header-anchor {
 }
 
 .d-docsite--list-element {
-  max-width: 75ch;
+  max-inline-size: 75ch;
   margin-block-end: var(--dt-space-300);
   font-size: var(--dt-font-size-200);
   line-height: var(--dt-font-line-height-400);
@@ -436,21 +440,21 @@ a.header-anchor {
 
 .dialtone-icon-grid__item {
   position: relative;
-  width: var(--dt-size-100-percent);
-  height: var(--dt-size-750);
+  inline-size: var(--dt-size-100-percent);
+  block-size: var(--dt-size-750);
 }
 
 .dialtone-icon-card {
   position: relative;
   display: flex;
-  width: 100%;
-  height: 100%;
+  inline-size: 100%;
+  block-size: 100%;
 
   .d-popover {
-    height: 100%;
+    block-size: 100%;
 
     > div {
-      height: 100%;
+      block-size: 100%;
     }
   }
 }
@@ -460,8 +464,8 @@ a.header-anchor {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  width: var(--icon-card-width);
-  height: 100%;
+  inline-size: var(--icon-card-width);
+  block-size: 100%;
   cursor: pointer;
   transition: all 150ms var(--ttf-in-out);
 
@@ -520,8 +524,8 @@ a.header-anchor {
   margin-block-end: var(--dt-space-300);
 
   svg {
-    width: 100%;
-    height: auto;
+    inline-size: 100%;
+    block-size: auto;
   }
 }
 
@@ -529,8 +533,8 @@ a.header-anchor {
   margin-block-end: var(--dt-space-300);
 
   svg {
-    width: 100%;
-    height: auto;
+    inline-size: 100%;
+    block-size: auto;
   }
 }
 
@@ -698,13 +702,13 @@ a.header-anchor {
   }
 
   &__thumb {
-    width: auto;
-    height: var(--dt-size-750);
+    inline-size: auto;
+    block-size: var(--dt-size-750);
 
     @media screen and (min-width: 640px) {
       display: block;
-      width: 100%;
-      height: auto;
+      inline-size: 100%;
+      block-size: auto;
     }
   }
 

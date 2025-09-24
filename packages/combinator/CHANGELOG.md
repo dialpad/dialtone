@@ -1,9 +1,16 @@
-## [1.1.1-next.1](https://github.com/dialpad/dialtone/compare/combinator/v1.1.0...combinator/v1.1.1-next.1) (2025-08-25)
+## [1.1.2-next.1](https://github.com/dialpad/dialtone/compare/combinator/v1.1.1...combinator/v1.1.2-next.1) (2025-09-17)
 
 
 ### Code Refactoring
 
 * **Css:** DLT-1876 css logical properties ([#872](https://github.com/dialpad/dialtone/issues/872)) ([1acd6c9](https://github.com/dialpad/dialtone/commit/1acd6c900053b0c820309faa4a870ff1dceced04))
+
+## [1.1.1](https://github.com/dialpad/dialtone/compare/combinator/v1.1.0...combinator/v1.1.1) (2025-09-16)
+
+
+### Code Refactoring
+
+* **Combinator:** DLT-2672 update styles ([#906](https://github.com/dialpad/dialtone/issues/906)) ([96f444c](https://github.com/dialpad/dialtone/commit/96f444c4b59c1a6ed0d29db151ed526d7f60d47b))
 
 
 ### Documentation

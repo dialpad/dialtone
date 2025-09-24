@@ -57,11 +57,7 @@ DIALTONE_EDITOR_ADD_LINK_BUTTON =
     .aria-label = リンクを追加するための入力フィールド
 DIALTONE_EMOJI_ROW_REACTION_LABEL =
     { $personCount ->
-       *[other]
-            { $youIncluded ->
-               *[true] が { $reaction } で反応しました
-                [false] が { $reaction } で反応しました
-            }
+       *[other] が { $reaction } で反応しました
     }
 DIALTONE_EMOJI_PICKER_ADD_EMOJI_LABEL = 絵文字を追加
 DIALTONE_EMOJI_PICKER_SEARCH_NO_RESULTS_LABEL = 見つかりません
@@ -161,3 +157,5 @@ STORYBOOK_LANGUAGE_RUSSIAN = ロシア語
 STORYBOOK_LANGUAGE_SPANISH = スペイン語
 STORYBOOK_SET_LANGUAGE = 言語を設定
 STORYBOOK_YOU = 自分
+STORYBOOK_REACTION_NAMES_2 = Olivia Chen、Benjamin Carter、Sophia Rodriguez、William KimとIsabella Garcia
+STORYBOOK_REACTION_NAMES_3 = Olivia Chenと{ STORYBOOK_YOU }

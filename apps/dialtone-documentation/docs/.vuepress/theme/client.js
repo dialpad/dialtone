@@ -1,15 +1,16 @@
-import { defineClientConfig } from '@vuepress/client';
+import { defineClientConfig } from 'vuepress/client';
 import Layout from './layouts/Layout.vue';
 import NotFound from './layouts/NotFound.vue';
-import customEmojis from '@data/custom-emoji.json';
+import customEmojis from '@data/custom-emoji';
 import 'overlayscrollbars/overlayscrollbars.css';
 import { OverlayScrollbars, ClickScrollPlugin } from 'overlayscrollbars';
-import { onBeforeMount, provide, ref } from 'vue';
+import { onBeforeMount, provide, ref, onMounted } from 'vue';
 import { flushPromises } from '@workspaceRoot/common/utils/client.mjs';
 
 // CSS
+import '@docsearch/css';
 import '@dialpad/dialtone-css/lib/dist/dialtone.css';
-// import '@dialpad/dialtone-combinator/css';
+import '@dialpad/dialtone-combinator/css';
 import './assets/less/dialtone-docs.less';
 import './assets/less/dialtone-syntax.less';
 
@@ -41,10 +42,10 @@ export default defineClientConfig({
     if (!__VUEPRESS_SSR__) {
       await initOverlayScrollbars();
       await registerDialtoneVue(app);
-      // await registerDialtoneCombinator(app);
+      await registerDialtoneCombinator(app);
       await registerDialtoneIcons(app);
       await importDocumentation(app);
-      importDialtoneThemes(app);
+      await importDialtoneThemes(app);
     }
     router.options.scrollBehavior = async (to) => {
       if (to.hash) {
@@ -76,6 +77,17 @@ export default defineClientConfig({
 
       provide('currentMode', currentMode);
       provide('currentTheme', currentTheme);
+    });
+    onMounted(async () => {
+      const docsearch = (await import('@docsearch/js'))?.default;
+
+      docsearch({
+          apiKey: '6436ebddb959748daeec411eb388a99d',
+          indexName: 'dialpad',
+          appId: 'Y5HG9UX6KM',
+          placeholder: 'Search Dialtone',
+          container: '#docsearch',
+      });
     });
   },
   layouts: {
@@ -117,10 +129,10 @@ async function registerDialtoneVue (app) {
   setCustomEmojiJson(customEmojis);
 }
 
-// async function registerDialtoneCombinator (app) {
-//  const { DtcCombinator } = await import('@dialpad/dialtone-combinator');
-//  app.component('DtcCombinator', DtcCombinator);
-// }
+async function registerDialtoneCombinator (app) {
+ const { DtcCombinator } = await import('@dialpad/dialtone-combinator');
+ app.component('DtcCombinator', DtcCombinator);
+}
 
 async function registerDialtoneIcons (app) {
   const icons = await import('@dialpad/dialtone-icons/vue3');
@@ -155,17 +167,21 @@ async function importDocumentation (app) {
   }
 }
 
-function importDialtoneThemes (app) {
-  const dialtoneThemeFiles = import.meta.globEager('../../../node_modules/@dialpad/dialtone-tokens/dist/themes/*.js')
-  const themes = {};
-  const excludedThemeImports = ['config', 'debug']
+async function importDialtoneThemes (app) {
+  try {
+    const dialtoneThemeFiles = {
+      '@dialpad/dialtone-tokens/themes/dp-light.js': (await import('@dialpad/dialtone-tokens/themes/dp-light')),
+      '@dialpad/dialtone-tokens/themes/dp-dark.js': (await import('@dialpad/dialtone-tokens/themes/dp-dark')),
+  };
+    const themes = {};
 
-  for (const path in dialtoneThemeFiles) {
-    const themeName = path.split('/').pop().split('.').shift();
+    for (const path in dialtoneThemeFiles) {
+      const themeName = path.split('/').pop().split('.').shift();
 
-    if (excludedThemeImports.includes(themeName)) continue;
-
-    themes[themeName] = dialtoneThemeFiles[path].default;
+      themes[themeName] = dialtoneThemeFiles[path].default;
+    }
+    app.provide('themes', themes)
+  } catch(error) {
+    console.error(`Couldn't import dialtone themes: ${error}`);
   }
-  app.provide('themes', themes)
 }

@@ -1,6 +1,6 @@
 import { computed } from 'vue';
 import { useRoute } from 'vue-router';
-import { usePageData } from '@vuepress/client';
+import { usePageData } from 'vuepress/client';
 
 /*
 * Get the sidebar items from the page data, that are listed in site-nav.
@@ -9,7 +9,7 @@ import { usePageData } from '@vuepress/client';
 */
 export function useSidebarItems (items) {
   const route = useRoute();
-  const sidebarItems = computed(() => {
+  return computed(() => {
     const key = Object.keys(items).filter(item => route.path.includes(item.replace(/\/$/, '')));
     if (!items[key]) return [];
     if (Array.isArray(items[key])) return items[key] || [];
@@ -21,6 +21,4 @@ export function useSidebarItems (items) {
       }),
     }];
   });
-
-  return sidebarItems;
 }
