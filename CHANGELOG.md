@@ -1,3 +1,16 @@
+# [9.140.0](https://github.com/dialpad/dialtone/compare/dialtone/v9.139.1...dialtone/v9.140.0) (2025-09-24)
+
+
+### Bug Fixes
+
+* **Documentation:** NO-JIRA out of memory issues ([#926](https://github.com/dialpad/dialtone/issues/926)) ([080770a](https://github.com/dialpad/dialtone/commit/080770a0b2b073e2c32452be931a26ddb603051d))
+* **Mcp Server:** NO-JIRA import JSON files on build ([#925](https://github.com/dialpad/dialtone/issues/925)) ([e23676a](https://github.com/dialpad/dialtone/commit/e23676ab7dcea013b3146a75141fd7602b37bf24))
+
+
+### Features
+
+* **Rich Text Editor:** DP-150640 implement markdown output ([#848](https://github.com/dialpad/dialtone/issues/848)) ([ff2110e](https://github.com/dialpad/dialtone/commit/ff2110ef949240c8796cb766ce6dd8ad07007519))
+
 ## [9.139.1](https://github.com/dialpad/dialtone/compare/dialtone/v9.139.0...dialtone/v9.139.1) (2025-09-23)
 
 
