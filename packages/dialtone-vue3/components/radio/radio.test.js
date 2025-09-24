@@ -5,6 +5,7 @@ import DtRadio from './radio.vue';
 
 const MOCK_VALUE = 'Value';
 const MOCK_GROUP_NAME = 'radioGroup';
+const MOCK_ROOT_CLASS = 'custom-class';
 
 const baseProps = {
   label: 'My Radio Label',
@@ -474,6 +475,18 @@ describe('DtRadio Tests', () => {
 
       it('should not be checked', () => {
         expect(input.element.checked).toBe(false);
+      });
+    });
+  });
+
+  describe('Extendability Tests', () => {
+    describe('When a rootClass is provided', () => {
+      it('should include the root class', () => {
+        mockProps = { rootClass: MOCK_ROOT_CLASS }
+
+        updateWrapper();
+
+        expect(wrapper.classes().includes(MOCK_ROOT_CLASS)).toBe(true);
       });
     });
   });

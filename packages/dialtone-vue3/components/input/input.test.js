@@ -4,6 +4,7 @@ import { DtIcon } from '@/components/icon';
 import DtInput from './input.vue';
 
 const MOCK_INPUT_STUB = vi.fn();
+const MOCK_ROOT_CLASS = 'custom-class';
 
 const baseProps = {
   type: 'text',
@@ -593,6 +594,16 @@ describe('DtInput tests', () => {
       await wrapper.setProps({ disabled: true });
 
       expect(nativeInput.element.disabled).toBe(true);
+    });
+
+    describe('When a rootClass is provided', () => {
+      it('should include the root class', () => {
+        mockProps = { rootClass: MOCK_ROOT_CLASS }
+
+        updateWrapper();
+
+        expect(wrapper.classes().includes(MOCK_ROOT_CLASS)).toBe(true);
+      });
     });
   });
 });
