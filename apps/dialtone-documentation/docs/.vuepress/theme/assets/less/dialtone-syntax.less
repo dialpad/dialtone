@@ -10,12 +10,13 @@ div[class*="language-"] {
 	border-radius: var(--dt-size-500);
 
 	& pre {
-		margin: 0 !important;
-		padding: var(--dt-space-450) !important;
+		margin: 0;
+		padding: var(--dt-space-450);
+    padding-top: var(--dt-space-550);
 
 		& code {
 			padding: 0;
-			color: var(--dt-color-foreground-secondary) !important;
+			color: var(--dt-color-foreground-secondary);
 			background-color: unset;
 		}
 	}
@@ -24,6 +25,11 @@ div[class*="language-"] {
 		margin-block-start: var(--dt-space-400-negative);
 		border-radius: 0 0 var(--dt-size-400) var(--dt-size-400) !important;
 	}
+
+  &::before {
+    font: var(--dt-typography-body-sm);
+    color: var(--dt-color-foreground-primary)
+  }
 }
 
 code:not(.d-code--md, .d-code--sm) {

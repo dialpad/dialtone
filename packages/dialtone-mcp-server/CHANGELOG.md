@@ -1,3 +1,10 @@
+## [1.0.1](https://github.com/dialpad/dialtone/compare/dialtone-mcp-server/v1.0.0...dialtone-mcp-server/v1.0.1) (2025-09-24)
+
+
+### Bug Fixes
+
+* **Mcp Server:** NO-JIRA import JSON files on build ([#925](https://github.com/dialpad/dialtone/issues/925)) ([e23676a](https://github.com/dialpad/dialtone/commit/e23676ab7dcea013b3146a75141fd7602b37bf24))
+
 # 1.0.0 (2025-09-17)
 
 

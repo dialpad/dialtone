@@ -82,10 +82,6 @@
       "import": "./dist/tokens/themes/*.js",
       "require": "./dist/tokens/themes/*.cjs"
     },
-    "./mcp-server": {
-      "import": "./dist/mcp-server/build/index.js",
-      "require": "./dist/mcp-server/build/index.js"
-    },
     "./*": "./dist/*"
   },
   "dependencies": {

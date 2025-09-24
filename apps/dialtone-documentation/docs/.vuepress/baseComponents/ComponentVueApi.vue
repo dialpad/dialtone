@@ -17,8 +17,7 @@
 </template>
 
 <script setup>
-import { computed } from 'vue';
-import ComponentDocs from '@dialpad/dialtone-vue/component-documentation.json';
+import { computed, inject } from 'vue';
 import ComponentVueApiTable from './ComponentVueApiTable.vue';
 
 const props = defineProps({
@@ -28,13 +27,14 @@ const props = defineProps({
   },
 });
 const formattedComponentName = computed(() => `Dt${props.componentName}`);
+const componentDocs = inject('dialtoneComponentsDocumentation');
 
 const isSameComponentName = (name) => {
   return name.toLowerCase() === formattedComponentName.value.toLowerCase() ||
     name.toLowerCase() === props.componentName.toLowerCase();
 };
 
-const docSlots = ComponentDocs.find(f => isSameComponentName(f.displayName))
+const docSlots = componentDocs.find(f => isSameComponentName(f.displayName))
   ?.slots?.map((item) => {
     return {
       name: item.name,
@@ -42,7 +42,7 @@ const docSlots = ComponentDocs.find(f => isSameComponentName(f.displayName))
     };
   });
 
-const docProps = ComponentDocs.find(f => isSameComponentName(f.displayName))
+const docProps = componentDocs.find(f => isSameComponentName(f.displayName))
   ?.props?.map((item) => {
     return {
       name: item?.name,
@@ -54,7 +54,7 @@ const docProps = ComponentDocs.find(f => isSameComponentName(f.displayName))
     };
   });
 
-const docEvents = ComponentDocs.find(f => isSameComponentName(f.displayName))
+const docEvents = componentDocs.find(f => isSameComponentName(f.displayName))
   ?.events?.map((item) => {
     return {
       name: item.name,

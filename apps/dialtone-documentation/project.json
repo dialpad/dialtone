@@ -19,7 +19,7 @@
       "outputs": ["{projectRoot}/docs/.vuepress/dist"],
       "options": {
         "cwd": "{projectRoot}",
-        "command": "NODE_OPTIONS=--max_old_space_size=6144 vuepress build docs"
+        "command": "vuepress build docs"
       }
     },
     "start": {
@@ -31,6 +31,11 @@
         "dialtone-vue3:build",
         "dialtone-combinator:build"
       ],
+      "inputs": [
+        "{projectRoot}/docs/**/*",
+        "{projectRoot}/package.json"
+      ],
+      "outputs": [],
       "options": {
         "cwd": "{projectRoot}",
         "commands": [
