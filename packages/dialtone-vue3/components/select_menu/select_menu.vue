@@ -1,5 +1,6 @@
 <template>
   <div
+    :class="rootClass"
     v-bind="addClassStyleAttrs($attrs)"
   >
     <label>
@@ -217,6 +218,16 @@ export default {
     disabled: {
       type: Boolean,
       default: false,
+    },
+
+    /**
+     * Additional class name for the root element.
+     * Can accept all of: String, Object, and Array, i.e. has the
+     * same api as Vue's built-in handling of the class attribute.
+     */
+    rootClass: {
+      type: [String, Object, Array],
+      default: '',
     },
   },
 
