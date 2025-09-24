@@ -52,10 +52,11 @@ function _extractFrontmatter (app, path, options, exceptions = []) {
       return {
         fileName,
         link: page.path,
+        name: page.frontmatter.shortTitle || fileName,
         ...page.frontmatter,
       };
     })
-    .sort((a, b) => sortingArr.indexOf(a.link) - sortingArr.indexOf(b.link));
+    .sort((a, b) => sortingArr.indexOf(a.name) - sortingArr.indexOf(b.name));
 }
 
 function _extractComponentStatus (app) {
