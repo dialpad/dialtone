@@ -4,4 +4,4 @@ description: Reusable components solving common UI needs, designed and built to 
 no_preview: true
 ---
 
-<overview :pages="$page.enhancedFrontmatter" base-path="components" />
+<overview :pages="$page.enhancedFrontmatter" />
