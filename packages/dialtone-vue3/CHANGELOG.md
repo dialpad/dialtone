@@ -1,3 +1,15 @@
+# [3.191.0](https://github.com/dialpad/dialtone/compare/dialtone-vue3/v3.190.5...dialtone-vue3/v3.191.0) (2025-09-24)
+
+
+### Bug Fixes
+
+* **Documentation:** NO-JIRA out of memory issues ([#926](https://github.com/dialpad/dialtone/issues/926)) ([080770a](https://github.com/dialpad/dialtone/commit/080770a0b2b073e2c32452be931a26ddb603051d))
+
+
+### Features
+
+* **Rich Text Editor:** DP-150640 implement markdown output ([#848](https://github.com/dialpad/dialtone/issues/848)) ([ff2110e](https://github.com/dialpad/dialtone/commit/ff2110ef949240c8796cb766ce6dd8ad07007519))
+
 ## [3.190.5](https://github.com/dialpad/dialtone/compare/dialtone-vue3/v3.190.4...dialtone-vue3/v3.190.5) (2025-09-23)
 
 
