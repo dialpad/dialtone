@@ -1,3 +1,10 @@
+# [2.199.0](https://github.com/dialpad/dialtone/compare/dialtone-vue2/v2.198.5...dialtone-vue2/v2.199.0) (2025-09-24)
+
+
+### Features
+
+* **Rich Text Editor:** DP-150640 implement markdown output ([#848](https://github.com/dialpad/dialtone/issues/848)) ([ff2110e](https://github.com/dialpad/dialtone/commit/ff2110ef949240c8796cb766ce6dd8ad07007519))
+
 ## [2.198.5](https://github.com/dialpad/dialtone/compare/dialtone-vue2/v2.198.4...dialtone-vue2/v2.198.5) (2025-09-23)
 
 
