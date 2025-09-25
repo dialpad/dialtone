@@ -626,6 +626,10 @@
           "link": "/components/empty-state.html"
         },
         {
+          "text": "Filter Pill",
+          "link": "/components/filter-pill.html"
+        },
+        {
           "text": "Hovercard",
           "link": "/components/hovercard.html"
         },

@@ -38,6 +38,7 @@ export * from './components/emoji';
 export * from './components/emoji_picker';
 export * from './components/emoji_text_wrapper';
 export * from './components/empty_state';
+export * from './components/filter_pill';
 export * from './components/hovercard';
 export * from './components/icon';
 export * from './components/illustration';

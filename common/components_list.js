@@ -19,6 +19,7 @@ module.exports = [
   'emoji_picker.vue',
   'emoji_text_wrapper.vue',
   'empty_state.vue',
+  'filter_pill.vue',
   'hovercard.vue',
   'icon.vue',
   'image_viewer.vue',
