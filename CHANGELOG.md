@@ -1,3 +1,16 @@
+## [9.140.1](https://github.com/dialpad/dialtone/compare/dialtone/v9.140.0...dialtone/v9.140.1) (2025-09-25)
+
+
+### Code Refactoring
+
+* **Emoji Picker:** DLT-2774 update custom emoji icon ([#935](https://github.com/dialpad/dialtone/issues/935)) ([22dd937](https://github.com/dialpad/dialtone/commit/22dd937841f1b9698fd6b469b90f821f3639ed27))
+
+
+### Documentation
+
+* NO-JIRA fix links ([#934](https://github.com/dialpad/dialtone/issues/934)) ([a7a54d8](https://github.com/dialpad/dialtone/commit/a7a54d87775d5c499960f256a8c95cba815c936e))
+* **Storybook:** DLT-2785 update react version ([#936](https://github.com/dialpad/dialtone/issues/936)) ([2a62e54](https://github.com/dialpad/dialtone/commit/2a62e54e241f3e123958bb3fa4a8ee976acf163b))
+
 # [9.140.0](https://github.com/dialpad/dialtone/compare/dialtone/v9.139.1...dialtone/v9.140.0) (2025-09-24)
 
 
