@@ -40,7 +40,7 @@ import {
   DtIconLightbulb,
   DtIconHeart,
   DtIconFlag,
-  DtIconTiktok,
+  DtIconDialpadStar,
 } from '@dialpad/dialtone-icons/vue2';
 
 export default {
@@ -102,7 +102,7 @@ export default {
         { label: this.tabSetLabels[6], icon: DtIconLightbulb },
         { label: this.tabSetLabels[7], icon: DtIconHeart },
         { label: this.tabSetLabels[8], icon: DtIconFlag },
-        { label: this.tabSetLabels[9], icon: DtIconTiktok },
+        { label: this.tabSetLabels[9], icon: DtIconDialpadStar },
       ],
     };
   },
@@ -173,7 +173,7 @@ export default {
       }
     },
 
-    // eslint-disable-next-line complexity
+     
     handleKeyDown (event, tabId) {
       if (event.key === 'Enter') {
         this.selectTabset(tabId);
