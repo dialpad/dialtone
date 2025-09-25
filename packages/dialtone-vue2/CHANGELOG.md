@@ -1,3 +1,15 @@
+## [2.199.1](https://github.com/dialpad/dialtone/compare/dialtone-vue2/v2.199.0...dialtone-vue2/v2.199.1) (2025-09-25)
+
+
+### Code Refactoring
+
+* **Emoji Picker:** DLT-2774 update custom emoji icon ([#935](https://github.com/dialpad/dialtone/issues/935)) ([22dd937](https://github.com/dialpad/dialtone/commit/22dd937841f1b9698fd6b469b90f821f3639ed27))
+
+
+### Documentation
+
+* **Storybook:** DLT-2785 update react version ([#936](https://github.com/dialpad/dialtone/issues/936)) ([2a62e54](https://github.com/dialpad/dialtone/commit/2a62e54e241f3e123958bb3fa4a8ee976acf163b))
+
 # [2.199.0](https://github.com/dialpad/dialtone/compare/dialtone-vue2/v2.198.5...dialtone-vue2/v2.199.0) (2025-09-24)
 
 
