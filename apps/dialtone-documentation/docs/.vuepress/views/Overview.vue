@@ -3,7 +3,7 @@
     <template v-for="page in pages" :key="page.title">
       <component
         :is="cardElType(page)"
-        :to="`/${basePath}/${page.link}/`"
+        :to="page.link"
         class="dialtone-wall__item"
       >
         <div v-if="page.thumb" class="dialtone-wall__image">
@@ -31,14 +31,11 @@
 
 <script setup>
 import SvgLoader from '../baseComponents/SvgLoader.vue';
+
 defineProps({
   pages: {
     type: Object,
     default: () => {},
-  },
-  basePath: {
-    type: String,
-    default: '/',
   },
 });
 

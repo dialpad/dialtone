@@ -51,11 +51,12 @@ function _extractFrontmatter (app, path, options, exceptions = []) {
       const fileName = page.frontmatter.title.toLowerCase().replaceAll(' ', '-');
       return {
         fileName,
-        link: page.frontmatter.shortTitle || fileName,
+        link: page.path,
+        name: page.frontmatter.shortTitle || fileName,
         ...page.frontmatter,
       };
     })
-    .sort((a, b) => sortingArr.indexOf(a.link) - sortingArr.indexOf(b.link));
+    .sort((a, b) => sortingArr.indexOf(a.name) - sortingArr.indexOf(b.name));
 }
 
 function _extractComponentStatus (app) {

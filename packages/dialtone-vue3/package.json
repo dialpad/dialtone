@@ -64,7 +64,7 @@
     "@storybook/vue3": "7.6.20",
     "@storybook/vue3-vite": "7.6.20",
     "@vue/test-utils": "^2.4.0",
-    "react": "17.0.2",
+    "react": "^18.3.1",
     "storybook-dark-mode": "^3.0.3",
     "vue": "^3.3.4"
   },

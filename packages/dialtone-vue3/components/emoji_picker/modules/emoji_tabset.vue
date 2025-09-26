@@ -42,7 +42,7 @@ import {
   DtIconLightbulb,
   DtIconHeart,
   DtIconFlag,
-  DtIconTiktok,
+  DtIconDialpadStar,
 } from '@dialpad/dialtone-icons/vue3';
 
 const props = defineProps({
@@ -109,7 +109,7 @@ const TABS_DATA = [
   { label: props.tabSetLabels[6], icon: DtIconLightbulb },
   { label: props.tabSetLabels[7], icon: DtIconHeart },
   { label: props.tabSetLabels[8], icon: DtIconFlag },
-  { label: props.tabSetLabels[9], icon: DtIconTiktok },
+  { label: props.tabSetLabels[9], icon: DtIconDialpadStar },
 ];
 
 const tabs = computed(() => {
