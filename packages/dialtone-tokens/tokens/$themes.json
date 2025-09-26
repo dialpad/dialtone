@@ -3678,51 +3678,6 @@
     "group": "tmo"
   },
   {
-    "id": "76d0ba74de0533b970fe27e938ab6e61e8011118",
-    "name": "light",
-    "$figmaStyleReferences": {},
-    "selectedTokenSets": {
-      "root": "source",
-      "base/default": "source",
-      "theme/dp/default": "source",
-      "theme/deca/default": "enabled",
-      "components/avatar/default": "enabled",
-      "components/badge/default": "enabled",
-      "components/button/default": "enabled",
-      "components/checkbox/default": "enabled",
-      "components/icon/default": "enabled",
-      "components/radio/default": "enabled",
-      "components/presence/default": "enabled"
-    },
-    "$figmaVariableReferences": {},
-    "group": "deca"
-  },
-  {
-    "id": "a1d802456db91e0aefe01a3e8d20140eec66a8dc",
-    "name": "dark",
-    "$figmaStyleReferences": {},
-    "selectedTokenSets": {
-      "root": "source",
-      "base/default": "source",
-      "base/dark": "source",
-      "theme/dp/default": "source",
-      "theme/dp/dark": "source",
-      "theme/deca/default": "enabled",
-      "theme/deca/dark": "enabled",
-      "components/avatar/default": "enabled",
-      "components/badge/default": "enabled",
-      "components/badge/dark": "enabled",
-      "components/button/default": "enabled",
-      "components/checkbox/default": "enabled",
-      "components/icon/default": "enabled",
-      "components/radio/default": "enabled",
-      "components/presence/default": "enabled",
-      "components/presence/dark": "enabled"
-    },
-    "$figmaVariableReferences": {},
-    "group": "deca"
-  },
-  {
     "id": "0372d8ab03e30b812857cd98434cdeb10d8db3a9",
     "name": "light",
     "$figmaStyleReferences": {
@@ -4377,29 +4332,6 @@
     },
     "$figmaVariableReferences": {},
     "group": "ceruleo"
-  },
-  {
-    "id": "d993dc174fb7b978e59e5d32dc3570d48c2b380d",
-    "name": "deca-light",
-    "$figmaStyleReferences": {},
-    "selectedTokenSets": {
-      "root": "enabled",
-      "base/default": "enabled"
-    },
-    "group": "base",
-    "$figmaVariableReferences": {}
-  },
-  {
-    "id": "40c17e054eaf3a269fcae12da4e677825fff0a90",
-    "name": "deca-dark",
-    "$figmaStyleReferences": {},
-    "selectedTokenSets": {
-      "root": "enabled",
-      "base/default": "enabled",
-      "base/dark": "enabled"
-    },
-    "group": "base",
-    "$figmaVariableReferences": {}
   },
   {
     "id": "58fc325083aae6e1086fb2a43bc0a57d1b92f012",
