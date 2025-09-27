@@ -4229,7 +4229,7 @@
       "color": {
         "foreground": {
           "primary-default": {
-            "value": "{shell.color.foreground.secondary}",
+            "value": "{shell.color.foreground.primary}",
             "type": "color"
           },
           "secondary-default": {

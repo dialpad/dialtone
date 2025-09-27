@@ -26,7 +26,7 @@
           "studio.tokens": {
             "modify": {
               "type": "alpha",
-              "value": ".33",
+              "value": ".50",
               "space": "hsl"
             }
           }
@@ -39,7 +39,7 @@
           "studio.tokens": {
             "modify": {
               "type": "alpha",
-              "value": ".5",
+              "value": ".66",
               "space": "hsl"
             }
           }
@@ -52,7 +52,7 @@
           "studio.tokens": {
             "modify": {
               "type": "alpha",
-              "value": ".66",
+              "value": ".85",
               "space": "hsl"
             }
           }
@@ -60,30 +60,7 @@
       },
       "bold": {
         "value": "{color.black.1000}",
-        "type": "color",
-        "$extensions": {
-          "studio.tokens": {
-            "modify": {
-              "type": "alpha",
-              "value": ".8",
-              "space": "hsl"
-            }
-          }
-        }
-      }
-    }
-  },
-  "shell": {
-    "base": {
-      "color": {
-        "foreground": {
-          "value": "{color.black.1000}",
-          "type": "color"
-        },
-        "border": {
-          "value": "{color.border.subtle}",
-          "type": "color"
-        }
+        "type": "color"
       }
     }
   },
@@ -119,6 +96,38 @@
             "value": "{color.border.subtle}",
             "type": "color"
           }
+        }
+      }
+    }
+  },
+  "shell": {
+    "color": {
+      "foreground": {
+        "primary": {
+          "value": "{shell.base.color.foreground}",
+          "type": "color"
+        },
+        "secondary": {
+          "value": "{shell.base.color.foreground}",
+          "type": "color"
+        },
+        "tertiary": {
+          "value": "{shell.base.color.foreground}",
+          "type": "color"
+        },
+        "muted": {
+          "value": "{shell.base.color.foreground}",
+          "type": "color"
+        }
+      },
+      "border": {
+        "subtle": {
+          "value": "{color.border.subtle}",
+          "type": "color"
+        },
+        "default": {
+          "value": "{color.border.default}",
+          "type": "color"
         }
       }
     }
