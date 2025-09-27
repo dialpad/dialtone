@@ -17,6 +17,110 @@
         "value": "{color.black.700}",
         "type": "color"
       }
+    },
+    "border": {
+      "subtle": {
+        "value": "{color.black.1000}",
+        "type": "color",
+        "$extensions": {
+          "studio.tokens": {
+            "modify": {
+              "type": "alpha",
+              "value": ".33",
+              "space": "hsl"
+            }
+          }
+        }
+      },
+      "default": {
+        "value": "{color.black.1000}",
+        "type": "color",
+        "$extensions": {
+          "studio.tokens": {
+            "modify": {
+              "type": "alpha",
+              "value": ".5",
+              "space": "hsl"
+            }
+          }
+        }
+      },
+      "moderate": {
+        "value": "{color.black.1000}",
+        "type": "color",
+        "$extensions": {
+          "studio.tokens": {
+            "modify": {
+              "type": "alpha",
+              "value": ".66",
+              "space": "hsl"
+            }
+          }
+        }
+      },
+      "bold": {
+        "value": "{color.black.1000}",
+        "type": "color",
+        "$extensions": {
+          "studio.tokens": {
+            "modify": {
+              "type": "alpha",
+              "value": ".8",
+              "space": "hsl"
+            }
+          }
+        }
+      }
+    }
+  },
+  "shell": {
+    "base": {
+      "color": {
+        "foreground": {
+          "value": "{color.black.1000}",
+          "type": "color"
+        },
+        "border": {
+          "value": "{color.border.subtle}",
+          "type": "color"
+        }
+      }
+    }
+  },
+  "action": {
+    "color": {
+      "border": {
+        "base": {
+          "default": {
+            "value": "{color.border.subtle}",
+            "type": "color"
+          }
+        },
+        "critical": {
+          "default": {
+            "value": "{color.border.subtle}",
+            "type": "color"
+          }
+        },
+        "inverted": {
+          "default": {
+            "value": "{color.border.subtle}",
+            "type": "color"
+          }
+        },
+        "muted": {
+          "default": {
+            "value": "{color.border.subtle}",
+            "type": "color"
+          }
+        },
+        "positive": {
+          "default": {
+            "value": "{color.border.subtle}",
+            "type": "color"
+          }
+        }
+      }
     }
   }
 }
