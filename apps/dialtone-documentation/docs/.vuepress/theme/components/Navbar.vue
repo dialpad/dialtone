@@ -181,7 +181,7 @@ const currentMode = inject('currentMode');
 const currentTheme = inject('currentTheme');
 const modes = ['system', 'light', 'dark'];
 const themes = inject('themes');
-const excludedThemeNames = ['dp-deca', 'expressive'];
+const excludedThemeNames = ['expressive'];
 const prefersDarkMediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
 const themesKeys = Array.from(
   new Set(

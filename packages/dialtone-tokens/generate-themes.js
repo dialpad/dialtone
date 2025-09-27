@@ -42,11 +42,7 @@ export async function generateThemeFiles () {
  * @param {string} mode - The mode (light or dark)
  */
 async function generateThemeFile (theme, mode) {
-  let fileName = `${theme}-${mode}.js`;
-
-  // Backwards compatibility to avoid breaking changes.
-  if (theme === 'deca') fileName = 'dp-' + fileName;
-
+  const fileName = `${theme}-${mode}.js`;
   const filePath = path.join(THEMES_OUTPUT_DIR, fileName);
 
   const content = `import Base from '@dialpad/dialtone-tokens/tokens-base-${mode}.css?inline';
