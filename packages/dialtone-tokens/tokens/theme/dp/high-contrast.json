@@ -1,0 +1,22 @@
+{
+  "color": {
+    "foreground": {
+      "primary": {
+        "value": "{color.black.1000}",
+        "type": "color"
+      },
+      "secondary": {
+        "value": "{color.black.900}",
+        "type": "color"
+      },
+      "tertiary": {
+        "value": "{color.black.800}",
+        "type": "color"
+      },
+      "muted": {
+        "value": "{color.black.700}",
+        "type": "color"
+      }
+    }
+  }
+}
