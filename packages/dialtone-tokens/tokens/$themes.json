@@ -550,7 +550,9 @@
       "theme/dp/default": "source",
       "theme/dp/high-contrast": "enabled",
       "components/presence/default": "source",
-      "components/badge/default": "source"
+      "components/badge/default": "source",
+      "theme/dp/dark": "source",
+      "base/dark": "source"
     },
     "group": "contrast"
   },
