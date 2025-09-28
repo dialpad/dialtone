@@ -264,8 +264,8 @@ const setCss = () => {
     theme = themes[defaultTheme];
   }
 
-  // Get contrast theme if high contrast is enabled
-  const contrastTheme = currentContrast.value === 'high' ? themes['high-contrast'] : null;
+  // Get mode-specific contrast theme if high contrast is enabled
+  const contrastTheme = currentContrast.value === 'high' ? themes[`high-contrast-${mode}`] : null;
 
   // Single unified theme application
   setTheme(theme, contrastTheme);

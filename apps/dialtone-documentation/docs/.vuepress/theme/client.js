@@ -175,7 +175,8 @@ async function importDialtoneThemes (app) {
     const dialtoneThemeFiles = {
       '@dialpad/dialtone-tokens/themes/dp-light.js': (await import('@dialpad/dialtone-tokens/themes/dp-light')),
       '@dialpad/dialtone-tokens/themes/dp-dark.js': (await import('@dialpad/dialtone-tokens/themes/dp-dark')),
-      '@dialpad/dialtone-tokens/themes/high-contrast.js': (await import('@dialpad/dialtone-tokens/themes/high-contrast')),
+      '@dialpad/dialtone-tokens/themes/high-contrast-light.js': (await import('@dialpad/dialtone-tokens/themes/high-contrast-light')),
+      '@dialpad/dialtone-tokens/themes/high-contrast-dark.js': (await import('@dialpad/dialtone-tokens/themes/high-contrast-dark')),
   };
     const themes = {};
 

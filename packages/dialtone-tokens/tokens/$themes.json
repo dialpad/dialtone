@@ -528,7 +528,21 @@
   },
   {
     "id": "8f142eb1823836816ba09d12c96b0455f8b4421a",
-    "name": "high",
+    "name": "high-light",
+    "$figmaStyleReferences": {},
+    "selectedTokenSets": {
+      "root": "source",
+      "base/default": "source",
+      "theme/dp/default": "source",
+      "theme/dp/high-contrast": "enabled",
+      "components/presence/default": "source",
+      "components/badge/default": "source"
+    },
+    "group": "contrast"
+  },
+  {
+    "id": "high-contrast-dark-universal",
+    "name": "high-dark",
     "$figmaStyleReferences": {},
     "selectedTokenSets": {
       "root": "source",
