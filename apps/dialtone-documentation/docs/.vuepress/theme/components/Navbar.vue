@@ -133,6 +133,7 @@
     </dt-button>
     <dt-button
       v-dt-tooltip:bottom="`Contrast: ${currentContrast.charAt(0).toUpperCase() + currentContrast.slice(1)} `"
+      hidden
       importance="clear"
       kind="muted"
       class="dialtone-shell-btn"
@@ -147,6 +148,7 @@
     </dt-button>
     <dt-button
       v-dt-tooltip:bottom="`Theme: ${currentTheme.charAt(0).toUpperCase() + currentTheme.slice(1)} `"
+      hidden
       class="theme-toggle-button dialtone-shell-btn"
       importance="clear"
       kind="muted"
@@ -155,7 +157,7 @@
       <template #icon>
         <dt-icon
           size="400"
-          name="triangle"
+          name="satisfied-filled"
         />
       </template>
     </dt-button>
@@ -290,7 +292,6 @@ onUnmounted(() => {
 
 <style scoped>
 .theme-toggle-button {
-  background-color: var(--dt-shell-mention-color-surface-primary);
-  color: var(--dt-shell-mention-color-foreground-primary);
+  color: var(--dt-shell-mention-color-surface-primary);
 }
 </style>
