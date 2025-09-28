@@ -172,9 +172,39 @@ async function importDocumentation (app) {
 
 async function importDialtoneThemes (app) {
   try {
+    // Import all available themes
     const dialtoneThemeFiles = {
+      // Core themes
       '@dialpad/dialtone-tokens/themes/dp-light.js': (await import('@dialpad/dialtone-tokens/themes/dp-light')),
       '@dialpad/dialtone-tokens/themes/dp-dark.js': (await import('@dialpad/dialtone-tokens/themes/dp-dark')),
+      '@dialpad/dialtone-tokens/themes/tmo-light.js': (await import('@dialpad/dialtone-tokens/themes/tmo-light')),
+      '@dialpad/dialtone-tokens/themes/tmo-dark.js': (await import('@dialpad/dialtone-tokens/themes/tmo-dark')),
+
+      // Color themes
+      '@dialpad/dialtone-tokens/themes/aegean-light.js': (await import('@dialpad/dialtone-tokens/themes/aegean-light')),
+      '@dialpad/dialtone-tokens/themes/aegean-dark.js': (await import('@dialpad/dialtone-tokens/themes/aegean-dark')),
+      '@dialpad/dialtone-tokens/themes/botany-light.js': (await import('@dialpad/dialtone-tokens/themes/botany-light')),
+      '@dialpad/dialtone-tokens/themes/botany-dark.js': (await import('@dialpad/dialtone-tokens/themes/botany-dark')),
+      '@dialpad/dialtone-tokens/themes/buttercream-light.js': (await import('@dialpad/dialtone-tokens/themes/buttercream-light')),
+      '@dialpad/dialtone-tokens/themes/buttercream-dark.js': (await import('@dialpad/dialtone-tokens/themes/buttercream-dark')),
+      '@dialpad/dialtone-tokens/themes/ceruleo-light.js': (await import('@dialpad/dialtone-tokens/themes/ceruleo-light')),
+      '@dialpad/dialtone-tokens/themes/ceruleo-dark.js': (await import('@dialpad/dialtone-tokens/themes/ceruleo-dark')),
+      '@dialpad/dialtone-tokens/themes/high-desert-light.js': (await import('@dialpad/dialtone-tokens/themes/high-desert-light')),
+      '@dialpad/dialtone-tokens/themes/high-desert-dark.js': (await import('@dialpad/dialtone-tokens/themes/high-desert-dark')),
+      '@dialpad/dialtone-tokens/themes/melon-light.js': (await import('@dialpad/dialtone-tokens/themes/melon-light')),
+      '@dialpad/dialtone-tokens/themes/melon-dark.js': (await import('@dialpad/dialtone-tokens/themes/melon-dark')),
+      '@dialpad/dialtone-tokens/themes/plum-light.js': (await import('@dialpad/dialtone-tokens/themes/plum-light')),
+      '@dialpad/dialtone-tokens/themes/plum-dark.js': (await import('@dialpad/dialtone-tokens/themes/plum-dark')),
+      '@dialpad/dialtone-tokens/themes/sunflower-light.js': (await import('@dialpad/dialtone-tokens/themes/sunflower-light')),
+      '@dialpad/dialtone-tokens/themes/sunflower-dark.js': (await import('@dialpad/dialtone-tokens/themes/sunflower-dark')),
+      '@dialpad/dialtone-tokens/themes/verdant-haze-light.js': (await import('@dialpad/dialtone-tokens/themes/verdant-haze-light')),
+      '@dialpad/dialtone-tokens/themes/verdant-haze-dark.js': (await import('@dialpad/dialtone-tokens/themes/verdant-haze-dark')),
+
+      // Numbered themes (sample - add more as needed)
+      '@dialpad/dialtone-tokens/themes/122-light.js': (await import('@dialpad/dialtone-tokens/themes/122-light')),
+      '@dialpad/dialtone-tokens/themes/122-dark.js': (await import('@dialpad/dialtone-tokens/themes/122-dark')),
+
+      // High contrast themes
       '@dialpad/dialtone-tokens/themes/high-contrast-light.js': (await import('@dialpad/dialtone-tokens/themes/high-contrast-light')),
       '@dialpad/dialtone-tokens/themes/high-contrast-dark.js': (await import('@dialpad/dialtone-tokens/themes/high-contrast-dark')),
   };

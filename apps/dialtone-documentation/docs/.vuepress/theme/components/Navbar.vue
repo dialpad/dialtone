@@ -148,7 +148,6 @@
       :circle="true"
       importance="clear"
       kind="muted"
-      hidden
       @click="toggleTheme"
     >
       <template #icon>
@@ -202,6 +201,7 @@ const themesKeys = Array.from(
   new Set(
     Object.keys(themes)
       .filter(key => !excludedThemeNames.some(exclusion => key.startsWith(exclusion)))
+      .filter(key => !key.startsWith('high-contrast')) // Exclude contrast themes from brand toggle
       .map(key => key.replace(/-(dark|light)/, '')),
   ),
 );
@@ -262,6 +262,12 @@ const setCss = () => {
     const defaultTheme = `dp-${mode}`;
     console.warn(`Theme [${preferredTheme}] does not exists, using default theme [${defaultTheme}]`);
     theme = themes[defaultTheme];
+  }
+
+  // Final safety check - if still no theme, don't proceed
+  if (!theme) {
+    console.error(`No theme available for mode [${mode}]. Available themes:`, Object.keys(themes));
+    return;
   }
 
   // Get mode-specific contrast theme if high contrast is enabled
