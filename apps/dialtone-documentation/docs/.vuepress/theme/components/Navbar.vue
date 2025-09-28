@@ -145,6 +145,7 @@
     </dt-button>
     <dt-button
       v-dt-tooltip:bottom="`Theme: ${currentTheme.charAt(0).toUpperCase() + currentTheme.slice(1)} `"
+      class="theme-toggle-button"
       :circle="true"
       importance="clear"
       kind="muted"
@@ -152,7 +153,6 @@
     >
       <template #icon>
         <dt-icon
-          class="theme-toggle-button"
           size="400"
           name="triangle"
         />
@@ -287,8 +287,9 @@ onUnmounted(() => {
 });
 </script>
 
-<style>
+<style scoped>
 .theme-toggle-button {
-  color: var(--dt-shell-mention-color-surface-primary);
+  background-color: var(--dt-shell-mention-color-surface-primary);
+  color: var(--dt-shell-mention-color-foreground-primary);
 }
 </style>
