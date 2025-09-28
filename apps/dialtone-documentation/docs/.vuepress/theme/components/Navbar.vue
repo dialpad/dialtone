@@ -220,10 +220,10 @@ const currentModeIconName = computed(() => {
 const currentContrastIconName = computed(() => {
   switch (currentContrast.value) {
     case 'high':
-      return 'accessibility';
+      return 'eye';
     case 'default':
     default:
-      return 'eye';
+      return 'eye-off';
   }
 });
 
