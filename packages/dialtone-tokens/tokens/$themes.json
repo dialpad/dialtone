@@ -518,8 +518,11 @@
     "name": "default",
     "$figmaStyleReferences": {},
     "selectedTokenSets": {
+      "root": "source",
       "base/default": "source",
-      "theme/dp/default": "source"
+      "theme/dp/default": "source",
+      "components/presence/default": "source",
+      "components/badge/default": "source"
     },
     "group": "contrast"
   },
@@ -528,9 +531,12 @@
     "name": "high",
     "$figmaStyleReferences": {},
     "selectedTokenSets": {
+      "root": "source",
       "base/default": "source",
       "theme/dp/default": "source",
-      "theme/dp/high-contrast": "enabled"
+      "theme/dp/high-contrast": "enabled",
+      "components/presence/default": "source",
+      "components/badge/default": "source"
     },
     "group": "contrast"
   },
