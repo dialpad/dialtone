@@ -33,6 +33,9 @@ export async function generateThemeFiles () {
     await generateThemeFile(theme, 'light');
   }
 
+  // Generate universal high-contrast theme
+  await generateHighContrastTheme();
+
   console.log('Theme files generation completed.');
 }
 
@@ -62,4 +65,23 @@ export default {
 
   fs.writeFileSync(filePath, content);
   console.log(`Generated ${fileName.replace('.js', '')} theme`);
+}
+
+/**
+ * Generate the universal high-contrast theme file
+ */
+async function generateHighContrastTheme () {
+  const fileName = 'high-contrast.js';
+  const filePath = path.join(THEMES_OUTPUT_DIR, fileName);
+
+  const content = `import Contrast from '@dialpad/dialtone-tokens/tokens-contrast-high.css?inline';
+
+export default {
+  css: Contrast,
+  name: 'high',
+};
+`;
+
+  fs.writeFileSync(filePath, content);
+  console.log('Generated high-contrast theme');
 }

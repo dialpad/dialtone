@@ -34,6 +34,38 @@ function _setStyleTag (id, content, rootNode) {
 }
 
 /**
+ * Apply or remove contrast theme
+ * @param contrastLevel 'default' | 'high'
+ * @param contrastTheme the high-contrast theme object (only needed for 'high')
+ * @param rootNode optional, the root node to apply the theme to, defaults to document.documentElement
+ */
+export function applyContrast (contrastLevel, contrastTheme = null, rootNode = document.documentElement) {
+  if (rootNode?.shadowRoot) {
+    rootNode = rootNode.shadowRoot;
+  }
+
+  if (contrastLevel === 'high' && contrastTheme) {
+    // Apply high-contrast CSS
+    _setStyleTag('dialtone-css-contrast', contrastTheme.css, rootNode);
+    rootNode.setAttribute('data-dt-contrast', 'high');
+  } else {
+    // Remove high-contrast CSS
+    _removeStyleTag('dialtone-css-contrast', rootNode);
+    rootNode.setAttribute('data-dt-contrast', 'default');
+  }
+}
+
+/**
+ * Remove a style tag with the given id
+ */
+function _removeStyleTag (id, rootNode) {
+  const existingStyleTag = rootNode.querySelector('#' + id);
+  if (existingStyleTag) {
+    existingStyleTag.remove();
+  }
+}
+
+/**
  * Set the dialtone theme and brand custom attributes on the root element
  */
 function _setThemeAttributeOnRoot (theme, brand, rootNode) {

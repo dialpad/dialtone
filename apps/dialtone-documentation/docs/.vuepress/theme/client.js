@@ -71,12 +71,15 @@ export default defineClientConfig({
 
       const preferredMode = localStorage.getItem('preferredMode') || 'system';
       const preferredTheme = localStorage.getItem('preferredTheme');
+      const preferredContrast = localStorage.getItem('preferredContrast') || 'default';
 
       const currentMode = ref(preferredMode);
       const currentTheme = ref(preferredTheme);
+      const currentContrast = ref(preferredContrast);
 
       provide('currentMode', currentMode);
       provide('currentTheme', currentTheme);
+      provide('currentContrast', currentContrast);
     });
     onMounted(async () => {
       const docsearch = (await import('@docsearch/js'))?.default;
@@ -172,6 +175,7 @@ async function importDialtoneThemes (app) {
     const dialtoneThemeFiles = {
       '@dialpad/dialtone-tokens/themes/dp-light.js': (await import('@dialpad/dialtone-tokens/themes/dp-light')),
       '@dialpad/dialtone-tokens/themes/dp-dark.js': (await import('@dialpad/dialtone-tokens/themes/dp-dark')),
+      '@dialpad/dialtone-tokens/themes/high-contrast.js': (await import('@dialpad/dialtone-tokens/themes/high-contrast')),
   };
     const themes = {};
 

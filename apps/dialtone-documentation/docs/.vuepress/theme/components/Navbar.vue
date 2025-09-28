@@ -131,6 +131,19 @@
       </template>
     </dt-button>
     <dt-button
+      v-dt-tooltip:bottom="`Contrast: ${currentContrast.charAt(0).toUpperCase() + currentContrast.slice(1)} `"
+      importance="clear"
+      kind="muted"
+      @click="toggleContrast"
+    >
+      <template #icon>
+        <dt-icon
+          size="400"
+          :name="currentContrastIconName"
+        />
+      </template>
+    </dt-button>
+    <dt-button
       v-dt-tooltip:bottom="`Theme: ${currentTheme.charAt(0).toUpperCase() + currentTheme.slice(1)} `"
       :circle="true"
       importance="clear"
@@ -166,7 +179,7 @@
 <script setup>
 import { useRoute } from 'vue-router';
 import { onMounted, onUnmounted, inject, computed } from 'vue';
-import { setTheme } from '@dialpad/dialtone-tokens/themes/config';
+import { setTheme, applyContrast } from '@dialpad/dialtone-tokens/themes/config';
 
 defineProps({
   items: {
@@ -179,7 +192,9 @@ defineEmits(['search']);
 const route = useRoute();
 const currentMode = inject('currentMode');
 const currentTheme = inject('currentTheme');
+const currentContrast = inject('currentContrast');
 const modes = ['system', 'light', 'dark'];
+const contrasts = ['default', 'high'];
 const themes = inject('themes');
 const excludedThemeNames = ['expressive'];
 const prefersDarkMediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
@@ -201,6 +216,17 @@ const currentModeIconName = computed(() => {
       return 'circle-half-filled';
   }
 });
+
+const currentContrastIconName = computed(() => {
+  switch (currentContrast.value) {
+    case 'high':
+      return 'accessibility';
+    case 'default':
+    default:
+      return 'eye';
+  }
+});
+
 const isActiveLink = (text) => {
   const linkBase = text.toLowerCase();
   return route.path.search(linkBase) !== -1;
@@ -223,6 +249,23 @@ const toggleTheme = () => {
   localStorage.setItem('preferredTheme', currentTheme.value);
 };
 
+const toggleContrast = () => {
+  const currentIndex = contrasts.indexOf(currentContrast.value);
+  const nextIndex = (currentIndex + 1) % contrasts.length;
+  currentContrast.value = contrasts[nextIndex];
+  applyCurrentContrast();
+  localStorage.setItem('preferredContrast', currentContrast.value);
+};
+
+const applyCurrentContrast = () => {
+  if (currentContrast.value === 'high') {
+    const contrastTheme = themes['high-contrast'];
+    applyContrast('high', contrastTheme);
+  } else {
+    applyContrast('default');
+  }
+};
+
 const setCss = () => {
   if (!modes.includes(currentMode.value)) {
     currentMode.value = 'system';
@@ -241,6 +284,7 @@ const setCss = () => {
   }
 
   setTheme(theme);
+  applyCurrentContrast();
 };
 
 onMounted(() => {
