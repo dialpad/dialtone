@@ -179,7 +179,7 @@
 <script setup>
 import { useRoute } from 'vue-router';
 import { onMounted, onUnmounted, inject, computed } from 'vue';
-import { setTheme } from '@dialpad/dialtone-tokens/themes/config';
+import { applyTheme } from '@dialpad/dialtone-tokens/themes/config';
 
 defineProps({
   items: {
@@ -268,7 +268,7 @@ const setCss = () => {
   const contrastTheme = currentContrast.value === 'high' ? themes[`high-contrast-${mode}`] : null;
 
   // Single unified theme application
-  setTheme(theme, contrastTheme);
+  applyTheme(theme, contrastTheme);
 };
 
 onMounted(() => {
