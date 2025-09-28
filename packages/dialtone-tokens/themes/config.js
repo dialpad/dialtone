@@ -1,21 +1,11 @@
 /**
- * Set the current theme and optionally the brand - BACKWARD COMPATIBLE
+ * Set the current theme, brand, and optionally contrast - BACKWARD COMPATIBLE
  * @param theme the theme object which contains two properties base and brand which refer to the css files.
  * @param rootNode optional, the root node to apply the theme to, defaults to document.documentElement, you will likely
  * only want to change this if you're using shadow dom.
- */
-export function setTheme (theme, rootNode = document.documentElement) {
-  applyTheme(theme, null, rootNode);
-}
-
-/**
- * Set the current theme, brand, and optionally contrast - NEW API
- * @param theme the theme object which contains two properties base and brand which refer to the css files.
  * @param contrastTheme optional contrast theme object, if provided applies high contrast
- * @param rootNode optional, the root node to apply the theme to, defaults to document.documentElement, you will likely
- * only want to change this if you're using shadow dom.
  */
-export function applyTheme (theme, contrastTheme = null, rootNode = document.documentElement) {
+export function setTheme (theme, rootNode = document.documentElement, contrastTheme = null) {
   _setThemeAttributeOnRoot(theme.base.name, theme.brand.name, rootNode);
   if (rootNode?.shadowRoot) {
     rootNode = rootNode.shadowRoot;
