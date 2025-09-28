@@ -21,10 +21,10 @@
           <dt-button
             v-if="!isSearchEmpty"
             id="search-input-button-close"
+            v-dt-tooltip="'Clear search'"
             kind="muted"
             importance="clear"
             size="xs"
-            circle
             aria-label="Clear filters"
             @click="resetSearch"
           >

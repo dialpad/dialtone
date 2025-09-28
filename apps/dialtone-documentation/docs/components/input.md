@@ -486,14 +486,14 @@ Use `type="search"` with a clear button in the `icon` slot. When the input is no
       </template>
       <template v-if="inputSearchValue.length !== 0" #rightIcon="{ clear }">
         <dt-button
+          v-dt-tooltip="'Clear search'"
           kind="muted"
           importance="clear"
           size="xs"
-          circle
           aria-label="Clear search"
           @click="clear"
         >
-        <template #icon="{ iconSize }">
+          <template #icon="{ iconSize }">
             <dt-icon name="close" :size="iconSize" />
           </template>
         </dt-button>
