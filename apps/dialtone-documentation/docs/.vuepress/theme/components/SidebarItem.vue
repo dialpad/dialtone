@@ -24,7 +24,7 @@
             :class="[
               'd-w100p d-fw-normal',
               {
-                'd-headline--eyebrow d-fw-semibold d-fc-secondary d-bgc-transparent d-c-default': !item.link,
+                'd-headline--eyebrow d-fw-semibold d-bgc-transparent d-c-default': !item.link,
                 'd-btn--active': isActiveLink(isExactActive, item.link),
               },
             ]"
@@ -63,10 +63,10 @@
               importance="clear"
               kind="muted"
               label-class="d-jc-flex-start"
+              :active="isActiveLink(isExactActive, subItem.link)"
               :class="[
-                'd-w100p d-fw-normal',
+                'dialtone-shell-btn d-w100p',
                 {
-                  'd-btn--active': isActiveLink(isExactActive, subItem.link),
                   'd-mt2': (index === 0 && nested), // add margin top to first nested item
                 },
               ]"

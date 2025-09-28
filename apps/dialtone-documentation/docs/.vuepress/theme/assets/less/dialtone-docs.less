@@ -267,7 +267,25 @@ html body {
   color: var(--dt-shell-color-foreground-primary);
   background-color: var(--dt-shell-color-surface-default);
   block-size: var(--dt-size-700);
-  // border-block-end: var(--dt-size-border-50) solid var(--dt-shell-color-border-subtle);
+}
+
+.dialtone-shell-btn {
+  --button-color-text: var(--dt-shell-action-color-foreground-secondary-default);
+  --button-color-background: var(--dt-shell-action-color-background-secondary-default);
+
+  // width: 100%;
+  font-weight: var(--dt-font-weight-normal);
+
+  &.d-btn--active:not(.d-btn--disabled) {
+    --button-color-text: var(--dt-shell-action-color-foreground-secondary-strong);
+    --button-color-background: var(--dt-shell-action-color-background-secondary-selected);
+  }
+
+  &:hover:not(.d-btn--disabled) {
+    --button-color-text: var(--dt-shell-action-color-foreground-secondary-hover);
+    --button-color-background: var(--dt-shell-action-color-background-secondary-hover);
+  }
+
 }
 
 .dialtone-sidebar {
@@ -287,11 +305,14 @@ html body {
 }
 
 .dialtone-content {
-  margin-right: var(--dt-space-500);
-  margin-bottom: var(--dt-space-500);
   background-color: var(--dt-color-surface-primary);
   border: var(--dt-size-border-100) solid var(--dt-color-border-subtle);
   border-radius: var(--dt-size-radius-500);
+
+  @media (min-width: 980px) {
+    margin-right: var(--dt-space-500);
+    margin-bottom: var(--dt-space-500);
+  }
 }
 
 a.header-anchor {

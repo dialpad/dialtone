@@ -10,7 +10,7 @@
       v-for="link in items"
       :key="link.text"
       :to="link.link"
-      class="d-btn d-btn--muted d-fw-normal"
+      class="d-btn d-btn--muted dialtone-shell-btn"
       :class="{ 'd-btn--active': isActiveLink(link.text) }"
     >
       <span class="d-btn__label">{{ link.text }}</span>
@@ -19,7 +19,7 @@
   <dt-stack direction="row" gap="300">
     <a
       v-dt-tooltip="'Storybook'"
-      class="d-btn d-btn--muted d-btn--icon-only"
+      class="d-btn d-btn--muted d-btn--icon-only dialtone-shell-btn"
       href="https://dialtone.dialpad.com/vue"
       target="_blank"
       rel="noreferrer noopener"
@@ -58,7 +58,7 @@
     </a>
     <a
       v-dt-tooltip="'Github Repository'"
-      class="d-btn d-btn--muted d-btn--icon-only"
+      class="d-btn d-btn--muted d-btn--icon-only dialtone-shell-btn"
       href="https://github.com/dialpad/dialtone"
       target="_blank"
       rel="noreferrer noopener"
@@ -85,7 +85,7 @@
     </a>
     <a
       v-dt-tooltip="'Codepen Template'"
-      class="d-btn d-btn--muted d-btn--icon-only"
+      class="d-btn d-btn--muted d-btn--icon-only dialtone-shell-btn"
       href="https://codepen.io/pen?template=oNmoRqO"
       target="_blank"
       rel="noopener noreferrer"
@@ -121,6 +121,7 @@
       v-dt-tooltip:bottom="`Mode: ${currentMode.charAt(0).toUpperCase() + currentMode.slice(1)} `"
       importance="clear"
       kind="muted"
+      class="dialtone-shell-btn"
       @click="toggleMode"
     >
       <template #icon>
@@ -134,6 +135,7 @@
       v-dt-tooltip:bottom="`Contrast: ${currentContrast.charAt(0).toUpperCase() + currentContrast.slice(1)} `"
       importance="clear"
       kind="muted"
+      class="dialtone-shell-btn"
       @click="toggleContrast"
     >
       <template #icon>
@@ -145,8 +147,7 @@
     </dt-button>
     <dt-button
       v-dt-tooltip:bottom="`Theme: ${currentTheme.charAt(0).toUpperCase() + currentTheme.slice(1)} `"
-      class="theme-toggle-button"
-      :circle="true"
+      class="theme-toggle-button dialtone-shell-btn"
       importance="clear"
       kind="muted"
       @click="toggleTheme"

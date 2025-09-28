@@ -3,7 +3,7 @@
     class="d-d-grid d-jc-center"
     :class="gridClass"
   >
-    <div class="d-p24 d-pt64 lg:d-pt24">
+    <div class="d-p24 d-pt96 lg:d-pt16">
       <page-header />
       <!-- eslint-disable-next-line vue/no-undef-components -->
       <content />
