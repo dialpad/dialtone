@@ -14,6 +14,14 @@
         "type": "color"
       },
       "muted": {
+        "value": "{color.black.1000}",
+        "type": "color"
+      },
+      "placeholder": {
+        "value": "{color.black.700}",
+        "type": "color"
+      },
+      "disabled": {
         "value": "{color.black.700}",
         "type": "color"
       }
