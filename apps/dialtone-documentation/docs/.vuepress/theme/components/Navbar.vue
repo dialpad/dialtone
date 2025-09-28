@@ -179,7 +179,7 @@
 <script setup>
 import { useRoute } from 'vue-router';
 import { onMounted, onUnmounted, inject, computed } from 'vue';
-import { setTheme, applyContrast } from '@dialpad/dialtone-tokens/themes/config';
+import { setTheme } from '@dialpad/dialtone-tokens/themes/config';
 
 defineProps({
   items: {
@@ -232,39 +232,20 @@ const isActiveLink = (text) => {
   return route.path.search(linkBase) !== -1;
 };
 
-const toggleMode = () => {
-  const currentIndex = modes.indexOf(currentMode.value);
-  const nextIndex = (currentIndex + 1) % modes.length;
-  currentMode.value = modes[nextIndex];
-
-  setCss();
-  localStorage.setItem('preferredMode', currentMode.value);
+const createToggle = (stateRef, optionsArray, storageKey) => {
+  return () => {
+    const currentIndex = optionsArray.indexOf(stateRef.value);
+    const nextIndex = (currentIndex + 1) % optionsArray.length;
+    stateRef.value = optionsArray[nextIndex];
+    setCss();
+    localStorage.setItem(storageKey, stateRef.value);
+  };
 };
 
-const toggleTheme = () => {
-  const currentIndex = themesKeys.indexOf(currentTheme.value);
-  const nextIndex = (currentIndex + 1) % themesKeys.length;
-  currentTheme.value = themesKeys[nextIndex];
-  setCss();
-  localStorage.setItem('preferredTheme', currentTheme.value);
-};
+const toggleMode = createToggle(currentMode, modes, 'preferredMode');
+const toggleTheme = createToggle(currentTheme, themesKeys, 'preferredTheme');
+const toggleContrast = createToggle(currentContrast, contrasts, 'preferredContrast');
 
-const toggleContrast = () => {
-  const currentIndex = contrasts.indexOf(currentContrast.value);
-  const nextIndex = (currentIndex + 1) % contrasts.length;
-  currentContrast.value = contrasts[nextIndex];
-  applyCurrentContrast();
-  localStorage.setItem('preferredContrast', currentContrast.value);
-};
-
-const applyCurrentContrast = () => {
-  if (currentContrast.value === 'high') {
-    const contrastTheme = themes['high-contrast'];
-    applyContrast('high', contrastTheme);
-  } else {
-    applyContrast('default');
-  }
-};
 
 const setCss = () => {
   if (!modes.includes(currentMode.value)) {
@@ -283,8 +264,11 @@ const setCss = () => {
     theme = themes[defaultTheme];
   }
 
-  setTheme(theme);
-  applyCurrentContrast();
+  // Get contrast theme if high contrast is enabled
+  const contrastTheme = currentContrast.value === 'high' ? themes['high-contrast'] : null;
+
+  // Single unified theme application
+  setTheme(theme, contrastTheme);
 };
 
 onMounted(() => {
