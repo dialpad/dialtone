@@ -1,3 +1,10 @@
+# [3.192.0-beta.1](https://github.com/dialpad/dialtone/compare/dialtone-vue3/v3.191.1...dialtone-vue3/v3.192.0-beta.1) (2025-09-29)
+
+
+### Features
+
+* **Tokens:** revert DLT-2689 apply new shell tokens to dialtone css and vue ([#882](https://github.com/dialpad/dialtone/issues/882)) ([ab314c7](https://github.com/dialpad/dialtone/commit/ab314c7abc5c0d1eec6804726e7ebc4961282be1))
+
 ## [3.191.1](https://github.com/dialpad/dialtone/compare/dialtone-vue3/v3.191.0...dialtone-vue3/v3.191.1) (2025-09-25)
 
 
