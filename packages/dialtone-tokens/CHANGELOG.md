@@ -1,3 +1,10 @@
+## [1.47.1-beta.1](https://github.com/dialpad/dialtone/compare/dialtone-tokens/v1.47.0...dialtone-tokens/v1.47.1-beta.1) (2025-09-29)
+
+
+### Reverts
+
+* Revert "feat(themes): DLT-2702  shell design tokens (#867)" ([270d75f](https://github.com/dialpad/dialtone/commit/270d75fc14cd117646ed0bcd1b232fe282ea7227)), closes [#867](https://github.com/dialpad/dialtone/issues/867)
+
 # [1.47.0](https://github.com/dialpad/dialtone/compare/dialtone-tokens/v1.46.1...dialtone-tokens/v1.47.0) (2025-09-24)
 
 
