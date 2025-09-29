@@ -14,7 +14,7 @@ export const argTypesData = {
 };
 
 const decorator = () => ({
-  template: `<div style="background-color: var(--dt-shell-color-surface-default)" class="d-wmx332 d-p16"><story />
+  template: `<div style="background-color: var(--dt-theme-sidebar-color-background)" class="d-wmx332 d-p16"><story />
   </div>`,
 });
 

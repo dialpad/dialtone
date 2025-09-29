@@ -7,13 +7,13 @@
 //  visit https://dialtone.dialpad.com/components/presence
 
 .d-presence {
-  --presence-color-border-base: var(--dt-color-surface-secondary); // Probably won't be necessary after @jeverhart-dialpad's DLT-2665 PR
-  --presence-color-border-offline: var(--dt-presence-color-offline);
-  --presence-color-background-active: var(--dt-presence-color-available);
-  --presence-color-background-busy: var(--dt-presence-color-unavailable);
-  --presence-color-background-away: var(--dt-presence-color-busy);
-  --presence-color-background-offline: var(--dt-color-surface-primary);
-  --presence-border-size: var(--dt-size-border-200);
+  --presence-color-border-base: var(--dt-theme-sidebar-color-background);
+  --presence-color-border-offline: var(--dt-color-border-bold);
+  --presence-color-background-active: var(--dt-theme-presence-color-background-available);
+  --presence-color-background-busy: var(--dt-theme-presence-color-background-busy-unavailable);
+  --presence-color-background-away: var(--dt-theme-presence-color-background-busy);
+  --presence-color-background-offline: var(--dt-theme-sidebar-color-background);
+  --presence-border-size: var(--dt-size-200);
   --presence-size: var(--dt-size-400);
 
   display: inline-block;
@@ -24,11 +24,11 @@
   border-radius: var(--dt-size-radius-circle);
 
   .d-recipe-leftbar-row--selected & {
-    --presence-color-border-base: var(--dt-color-surface-secondary);
+    --presence-color-border-base: var(--dt-theme-sidebar-selected-row-color-background);
   }
 
   .d-recipe-leftbar-row__primary:hover & {
-    --presence-color-border-base: var(--dt-shell-action-color-background-primary-hover);
+    --presence-color-border-base: var(--dt-theme-sidebar-row-color-background-hover);
   }
 
   &__inner {
