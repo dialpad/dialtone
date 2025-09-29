@@ -79,7 +79,7 @@ Define the edge of key content area, components, or surfaces.
   </template>
 </DesignColorTable>
 
-## Theme Shell
+## Theme
 
 CSS variables for themeable parts of the UI, primarily targeting the top bar and left bar.
 

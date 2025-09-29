@@ -73,7 +73,7 @@ const addTokensToCategories = (token, format, structure) => {
   }
 
   if ((CATEGORY_MAP.component.includes(splitKeys[0]) && (splitKeys[1] === 'color')) ||
-    (CATEGORY_MAP.component.includes(splitKeys[1]) && splitKeys[0] === 'shell')) {
+    (CATEGORY_MAP.component.includes(splitKeys[1]) && splitKeys[0] === 'theme')) {
     structure.color.components._children.push(displayToken);
     return;
   }

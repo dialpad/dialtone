@@ -4,7 +4,6 @@
 
 import { writeDocs } from './build-docs.js';
 import { run as runSdTransforms } from './build-sd-transforms.js';
-import { generateThemeFiles } from './generate-themes.js';
 import postcss from 'postcss';
 import fs from 'fs';
 import dialtoneTokensPlugin from './postcss/dialtone-tokens.cjs';
@@ -19,9 +18,6 @@ await runPostCss(TOKENS_OUTPUT_DIR);
 writeDocs();
 
 await generateDebugTheme();
-
-// Generate theme files based on tokens/theme directory
-await generateThemeFiles();
 
 /**
  * Generates the debug theme which shows all dialtone colors as bright orange so you can easily tell what is not
