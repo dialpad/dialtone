@@ -187,8 +187,6 @@ async function importDialtoneThemes (app) {
       '@dialpad/dialtone-tokens/themes/botany-dark.js': (await import('@dialpad/dialtone-tokens/themes/botany-dark')),
       '@dialpad/dialtone-tokens/themes/buttercream-light.js': (await import('@dialpad/dialtone-tokens/themes/buttercream-light')),
       '@dialpad/dialtone-tokens/themes/buttercream-dark.js': (await import('@dialpad/dialtone-tokens/themes/buttercream-dark')),
-      '@dialpad/dialtone-tokens/themes/ceruleo-light.js': (await import('@dialpad/dialtone-tokens/themes/ceruleo-light')),
-      '@dialpad/dialtone-tokens/themes/ceruleo-dark.js': (await import('@dialpad/dialtone-tokens/themes/ceruleo-dark')),
       '@dialpad/dialtone-tokens/themes/high-desert-light.js': (await import('@dialpad/dialtone-tokens/themes/high-desert-light')),
       '@dialpad/dialtone-tokens/themes/high-desert-dark.js': (await import('@dialpad/dialtone-tokens/themes/high-desert-dark')),
       '@dialpad/dialtone-tokens/themes/melon-light.js': (await import('@dialpad/dialtone-tokens/themes/melon-light')),

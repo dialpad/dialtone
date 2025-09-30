@@ -17,7 +17,6 @@ export const THEMES = [
   { value: 'aegean', label: 'Aegean' },
   { value: 'botany', label: 'Botany' },
   { value: 'buttercream', label: 'Buttercream' },
-  { value: 'ceruleo', label: 'Ceruleo' },
   { value: 'high-desert', label: 'High Desert' },
   { value: 'melon', label: 'Melon' },
   { value: 'plum', label: 'Plum' },
