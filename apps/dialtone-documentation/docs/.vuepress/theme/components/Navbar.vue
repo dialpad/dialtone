@@ -117,7 +117,7 @@
         </svg>
       </span>
     </a>
-    <dt-dropdown navigation-type="arrow-keys" placement="bottom-end">
+    <dt-dropdown navigation-type="arrow-keys" placement="bottom-start">
       <template #anchor>
         <dt-button
           v-dt-tooltip:bottom="`Mode: ${currentMode.charAt(0).toUpperCase() + currentMode.slice(1)} `"
@@ -135,13 +135,13 @@
       </template>
       <template #list>
         <dt-list-item-group
-          heading-class="d-py4 d-px8 d-fw-semibold d-c-default"
+          heading-class="d-pt4 d-pb2 d-px8 d-fw-bold d-c-default"
           heading="Mode"
         >
           <dt-list-item
             role="menuitem"
             navigation-type="arrow-keys"
-            @click="toggleMode"
+            @click="setMode('system')"
           >
             System
             <template #right>
@@ -151,7 +151,7 @@
           <dt-list-item
             role="menuitem"
             navigation-type="arrow-keys"
-            @click="toggleMode"
+            @click="setMode('light')"
           >
             Light
             <template #right>
@@ -161,7 +161,7 @@
           <dt-list-item
             role="menuitem"
             navigation-type="arrow-keys"
-            @click="toggleMode"
+            @click="setMode('dark')"
           >
             Dark
             <template #right>
@@ -171,13 +171,13 @@
         </dt-list-item-group>
         <dt-dropdown-separator />
         <dt-list-item-group
-          heading-class="d-py4 d-px8 d-fw-semibold d-c-default"
+          heading-class="d-pt4 d-pb2 d-px8 d-fw-bold d-c-default"
           heading="Contrast"
         >
           <dt-list-item
             role="menuitem"
             navigation-type="arrow-keys"
-            @click="toggleContrast"
+            @click="setContrast('default')"
           >
             Default
             <template #right>
@@ -187,7 +187,7 @@
           <dt-list-item
             role="menuitem"
             navigation-type="arrow-keys"
-            @click="toggleContrast"
+            @click="setContrast('high')"
           >
             High
             <template #right>
@@ -247,7 +247,6 @@ const currentMode = inject('currentMode');
 const currentTheme = inject('currentTheme');
 const currentContrast = inject('currentContrast');
 const modes = ['system', 'light', 'dark'];
-const contrasts = ['default', 'high'];
 const themes = inject('themes');
 const excludedThemeNames = ['expressive'];
 const prefersDarkMediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
@@ -286,10 +285,19 @@ const createToggle = (stateRef, optionsArray, storageKey) => {
   };
 };
 
-const toggleMode = createToggle(currentMode, modes, 'preferredMode');
 const toggleTheme = createToggle(currentTheme, themesKeys, 'preferredTheme');
-const toggleContrast = createToggle(currentContrast, contrasts, 'preferredContrast');
 
+const setMode = (mode) => {
+  currentMode.value = mode;
+  setCss();
+  localStorage.setItem('preferredMode', mode);
+};
+
+const setContrast = (contrast) => {
+  currentContrast.value = contrast;
+  setCss();
+  localStorage.setItem('preferredContrast', contrast);
+};
 
 const setCss = () => {
   if (!modes.includes(currentMode.value)) {
