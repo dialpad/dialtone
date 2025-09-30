@@ -117,35 +117,86 @@
         </svg>
       </span>
     </a>
-    <dt-button
-      v-dt-tooltip:bottom="`Mode: ${currentMode.charAt(0).toUpperCase() + currentMode.slice(1)} `"
-      importance="clear"
-      kind="muted"
-      class="dialtone-shell-btn"
-      @click="toggleMode"
-    >
-      <template #icon>
-        <dt-icon
-          size="400"
-          :name="currentModeIconName"
-        />
+    <dt-dropdown navigation-type="arrow-keys" placement="bottom-end">
+      <template #anchor>
+        <dt-button
+          v-dt-tooltip:bottom="`Mode: ${currentMode.charAt(0).toUpperCase() + currentMode.slice(1)} `"
+          importance="clear"
+          kind="muted"
+          class="dialtone-shell-btn"
+        >
+          <template #icon>
+            <dt-icon
+              size="400"
+              :name="currentModeIconName"
+            />
+          </template>
+        </dt-button>
       </template>
-    </dt-button>
-    <dt-button
-      v-dt-tooltip:bottom="`Contrast: ${currentContrast.charAt(0).toUpperCase() + currentContrast.slice(1)} `"
-      hidden
-      importance="clear"
-      kind="muted"
-      class="dialtone-shell-btn"
-      @click="toggleContrast"
-    >
-      <template #icon>
-        <dt-icon
-          size="400"
-          :name="currentContrastIconName"
-        />
+      <template #list>
+        <dt-list-item-group
+          heading-class="d-py4 d-px8 d-fw-semibold d-c-default"
+          heading="Mode"
+        >
+          <dt-list-item
+            role="menuitem"
+            navigation-type="arrow-keys"
+            @click="toggleMode"
+          >
+            System
+            <template #right>
+              <dt-icon :class="{ 'd-o0': currentMode !== 'system' }" name="check" size="200" />
+            </template>
+          </dt-list-item>
+          <dt-list-item
+            role="menuitem"
+            navigation-type="arrow-keys"
+            @click="toggleMode"
+          >
+            Light
+            <template #right>
+              <dt-icon :class="{ 'd-o0': currentMode !== 'light' }" name="check" size="200" />
+            </template>
+          </dt-list-item>
+          <dt-list-item
+            role="menuitem"
+            navigation-type="arrow-keys"
+            @click="toggleMode"
+          >
+            Dark
+            <template #right>
+              <dt-icon :class="{ 'd-o0': currentMode !== 'dark' }" name="check" size="200" />
+            </template>
+          </dt-list-item>
+        </dt-list-item-group>
+        <dt-dropdown-separator />
+        <dt-list-item-group
+          heading-class="d-py4 d-px8 d-fw-semibold d-c-default"
+          heading="Contrast"
+        >
+          <dt-list-item
+            role="menuitem"
+            navigation-type="arrow-keys"
+            @click="toggleContrast"
+          >
+            Default
+            <template #right>
+              <dt-icon :class="{ 'd-o0': currentContrast !== 'default' }" name="check" size="200" />
+            </template>
+          </dt-list-item>
+          <dt-list-item
+            role="menuitem"
+            navigation-type="arrow-keys"
+            @click="toggleContrast"
+          >
+            High
+            <template #right>
+              <dt-icon :class="{ 'd-o0': currentContrast !== 'high' }" name="check" size="200" />
+            </template>
+          </dt-list-item>
+        </dt-list-item-group>
       </template>
-    </dt-button>
+    </dt-dropdown>
     <dt-button
       v-dt-tooltip:bottom="`Theme: ${currentTheme.charAt(0).toUpperCase() + currentTheme.slice(1)} `"
       hidden
@@ -217,16 +268,6 @@ const currentModeIconName = computed(() => {
       return 'sun';
     default:
       return 'circle-half-filled';
-  }
-});
-
-const currentContrastIconName = computed(() => {
-  switch (currentContrast.value) {
-    case 'high':
-      return 'eye';
-    case 'default':
-    default:
-      return 'eye-off';
   }
 });
 
