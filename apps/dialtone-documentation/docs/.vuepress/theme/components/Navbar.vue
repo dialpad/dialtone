@@ -124,6 +124,7 @@
           importance="clear"
           kind="muted"
           class="dialtone-shell-btn"
+          @click="toggleHiddenThemeButton"
         >
           <template #icon>
             <dt-icon
@@ -198,6 +199,7 @@
       </template>
     </dt-dropdown>
     <dt-button
+      id="theme-toggle-button"
       v-dt-tooltip:bottom="`Theme: ${currentTheme.charAt(0).toUpperCase() + currentTheme.slice(1)} `"
       hidden
       class="theme-toggle-button dialtone-shell-btn"
@@ -297,6 +299,19 @@ const setContrast = (contrast) => {
   currentContrast.value = contrast;
   setCss();
   localStorage.setItem('preferredContrast', contrast);
+};
+
+const toggleHiddenThemeButton = (event) => {
+  if ((event.metaKey || event.ctrlKey) && event.shiftKey) {
+    const themeButton = document.getElementById('theme-toggle-button');
+    if (themeButton) {
+      if (themeButton.hasAttribute('hidden')) {
+        themeButton.removeAttribute('hidden');
+      } else {
+        themeButton.setAttribute('hidden', '');
+      }
+    }
+  }
 };
 
 const setCss = () => {
