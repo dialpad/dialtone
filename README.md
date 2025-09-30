@@ -180,6 +180,36 @@ dialtone/
 |--- scripts                      # Shared scripts
 ```
 
+## How does mono-package bundling works
+
+Dialtone is a mono-package that includes many packages within it to ease the maintenance of versions of 
+the library, to achieve this we needed to create certain configs on the monorepo to be able to handle them even if 
+they have the same package name e.g: `@dialpad/dialtone-vue`.
+
+1. In root [package.json](package.json):
+   - `pnpm`: 
+     - `peerDependencyRules` include `vue": "^2.6 || ^3.2"` to make sure we don't have warnings related to vue version 
+       mismatch.
+     - `packageExtensions` tells pnpm which Vue version to use for each package.
+   - `dependencies` doesn't include any specific Vue 2 or Vue 3 dependencies as this causes issues on the client when 
+     trying to use exports from `./vue2` or `./vue3`.
+2. On individual packages `package.json` files:
+   - Include the specific dependencies in case someone uses the individual package
+   - In `vite.config.js`[Vue 2](packages/dialtone-vue2/vite.config.js), 
+     [Vue 3](packages/dialtone-vue3/vite.config.js) add dependencies to external to make sure they don't cause 
+     issues on product. (This is more specific for the Vue 2 package, as product is depending on Vue 2.6 and any 
+     dependency that needs a newer Vue version will cause issues).
+3. In [project.json](project.json)
+   - Include implicit dependencies to make sure NX builds them before trying to copy the files to the mono-package.
+4. In `gulpfile.cjs`
+   - Copy the built files into the root `dist` folder.
+
+### Included packages
+- Dialtone CSS
+- Dialtone Tokens
+- Dialtone Vue 2
+- Dialtone Vue 3
+
 ### Available packages
 
 | Name                                                             | Description                                                                                                                                        | Version                                                                                                   |
@@ -434,9 +464,9 @@ This will trigger the [release action](.github/workflows/release.yml), release c
 1. Run the `release` target on selected packages (all if `package` is empty).
 2. The [publish action](https://github.com/dialpad/dialtone/actions/workflows/publish.yml) will publish the packages with its corresponding tag.
 
-#### Testing
+### Testing
 
-##### Run Vue unit tests
+#### Run Vue unit tests
 
 ```bash
 nx run dialtone:test:vue
