@@ -186,10 +186,14 @@ dialtone/
 |--- scripts                            # Shared scripts
 ```
 
-## How does mono-package bundling works
+### Dialtone mono-package
 
-Dialtone is a mono-package that includes many packages within it to ease the maintenance of versions of 
-the library, to achieve this we needed to create certain configs on the monorepo to be able to handle them even if 
+Dialtone is a mono-package that includes many packages within it to ease the maintenance of versions of
+the library.
+
+#### How does our bundling works
+
+To achieve this we needed to create certain configs through the monorepo to be able to handle them even if 
 they have the same package name e.g: `@dialpad/dialtone-vue`.
 
 1. In root [package.json](package.json):
@@ -210,11 +214,45 @@ they have the same package name e.g: `@dialpad/dialtone-vue`.
 4. In `gulpfile.cjs`
    - Copy the built files into the root `dist` folder.
 
-### Included packages
+#### Included packages
 - Dialtone CSS
 - Dialtone Tokens
 - Dialtone Vue 2
 - Dialtone Vue 3
+
+### Tree-shaking
+
+Tree-shaking is a feature that allows you to remove unused code from your bundle, and it is enabled by default in our 
+build process for Dialtone, Dialtone Vue, Dialtone Combinator and Dialtone Icons.
+
+We achieve tree-shaking primarily via three mechanisms across the packages:
+
+#### Marking packages as side effect free
+
+`sideEffects: false` is set so bundlers can drop unused imports.
+
+- `@dialpad/dialtone` → [package.json](package.json) line 242
+- `@dialpad/dialtone-vue` (vue2) → [package.json](packages/dialtone-vue2/package.json) line 145
+- `@dialpad/dialtone-vue` (vue3) → [package.json](packages/dialtone-vue3/package.json) line 145
+- `@dialpad/dialtone-combinator` → [package.json](packages/combinator/package.json) line 56
+- `@dialpad/dialtone-icons` → [package.json](packages/dialtone-icons/package.json) line 98
+
+#### Publishing ESM builds (with dual ESM/CJS via exports map)
+
+Packages expose ESM for bundlers to statically analyze and tree-shake, with CJS fallbacks.
+- `@dialpad/dialtone-vue` (vue3): 
+  - `"type"`: `"module"`,
+  - `"module"`: `"./dist/dialtone-vue.js"`,
+  - `"main"`: `"./dist/dialtone-vue.cjs"`,
+
+#### Deep, per-module entry points to enable fine-grained import paths
+
+Exports maps expose subpath entries so consumers can import only what they need (which aids tree-shaking and avoids 
+pulling entire bundles):
+
+- `@dialpad/dialtone` exposes `./vue3/lib/*` and `./vue2/lib/*` map to individual component imports.
+- `@dialpad/dialtone-vue` exposes `./lib/*` for individual component imports.
+- `@dialpad/dialtone-icons` exposes `./vue3/*` and `./vue2/*` for individual icon/illustration imports.
 
 ### Available packages
 
