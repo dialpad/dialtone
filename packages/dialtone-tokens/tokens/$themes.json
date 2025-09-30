@@ -524,7 +524,8 @@
       "components/presence/default": "source",
       "components/badge/default": "source"
     },
-    "group": "contrast"
+    "group": "contrast",
+    "$figmaVariableReferences": {}
   },
   {
     "id": "8f142eb1823836816ba09d12c96b0455f8b4421a",
@@ -538,7 +539,8 @@
       "components/presence/default": "source",
       "components/badge/default": "source"
     },
-    "group": "contrast"
+    "group": "contrast",
+    "$figmaVariableReferences": {}
   },
   {
     "id": "high-contrast-dark-universal",
@@ -554,7 +556,8 @@
       "theme/dp/dark": "source",
       "base/dark": "source"
     },
-    "group": "contrast"
+    "group": "contrast",
+    "$figmaVariableReferences": {}
   },
   {
     "id": "025593f9f8f0cc2511035095197b6266f41e0855",
