@@ -135,7 +135,7 @@
       </template>
       <template #list>
         <dt-list-item-group
-          heading-class="d-pt4 d-pb2 d-px8 d-fw-bold d-c-default"
+          heading-class="d-py4 d-px8 d-c-default d-fc-tertiary d-label--sm"
           heading="Mode"
         >
           <dt-list-item
@@ -171,7 +171,7 @@
         </dt-list-item-group>
         <dt-dropdown-separator />
         <dt-list-item-group
-          heading-class="d-pt4 d-pb2 d-px8 d-fw-bold d-c-default"
+          heading-class="d-py4 d-px8 d-c-default d-fc-tertiary d-label--sm"
           heading="Contrast"
         >
           <dt-list-item
