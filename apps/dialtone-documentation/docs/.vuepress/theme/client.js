@@ -205,12 +205,12 @@ async function importDialtoneThemes (app) {
       '@dialpad/dialtone-tokens/themes/trita-dark.js': (await import('@dialpad/dialtone-tokens/themes/trita-dark')),
 
       // All numbered themes (101-137)
-      // '@dialpad/dialtone-tokens/themes/101-light.js': (await import('@dialpad/dialtone-tokens/themes/101-light')),
-      // '@dialpad/dialtone-tokens/themes/101-dark.js': (await import('@dialpad/dialtone-tokens/themes/101-dark')),
-      // '@dialpad/dialtone-tokens/themes/102-light.js': (await import('@dialpad/dialtone-tokens/themes/102-light')),
-      // '@dialpad/dialtone-tokens/themes/102-dark.js': (await import('@dialpad/dialtone-tokens/themes/102-dark')),
-      // '@dialpad/dialtone-tokens/themes/103-light.js': (await import('@dialpad/dialtone-tokens/themes/103-light')),
-      // '@dialpad/dialtone-tokens/themes/103-dark.js': (await import('@dialpad/dialtone-tokens/themes/103-dark')),
+      '@dialpad/dialtone-tokens/themes/101-light.js': (await import('@dialpad/dialtone-tokens/themes/101-light')),
+      '@dialpad/dialtone-tokens/themes/101-dark.js': (await import('@dialpad/dialtone-tokens/themes/101-dark')),
+      '@dialpad/dialtone-tokens/themes/102-light.js': (await import('@dialpad/dialtone-tokens/themes/102-light')),
+      '@dialpad/dialtone-tokens/themes/102-dark.js': (await import('@dialpad/dialtone-tokens/themes/102-dark')),
+      '@dialpad/dialtone-tokens/themes/103-light.js': (await import('@dialpad/dialtone-tokens/themes/103-light')),
+      '@dialpad/dialtone-tokens/themes/103-dark.js': (await import('@dialpad/dialtone-tokens/themes/103-dark')),
       // '@dialpad/dialtone-tokens/themes/104-light.js': (await import('@dialpad/dialtone-tokens/themes/104-light')),
       // '@dialpad/dialtone-tokens/themes/104-dark.js': (await import('@dialpad/dialtone-tokens/themes/104-dark')),
       // '@dialpad/dialtone-tokens/themes/105-light.js': (await import('@dialpad/dialtone-tokens/themes/105-light')),
