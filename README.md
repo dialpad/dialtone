@@ -165,19 +165,25 @@ apps (apps folder):
 
 ```text
 dialtone/
-|--- .github                      # Github configuration and workflows
-|--- apps                         # Apps
-  |--- dialtone-documentation     # Documentation site
-|--- packages                     # NPM packages
-  |--- dialtone-css               # CSS library
-  |--- dialtone-emojis            # Emoji assets
-  |--- dialtone-vue2              # Vue component library compatible with vue@2
-  |--- dialtone-vue3              # Vue component library compatible with vue@3
-  |--- dialtone-icons             # SVG icons library
-  |--- dialtone-tokens            # Tokens library
-  |--- eslint-plugin-dialtone     # Custom ESLint rules for Dialtone users
-  |--- stylelint-plugin-dialtone  # Custom Stylelint rules for Dialtone users
-|--- scripts                      # Shared scripts
+|--- .github                            # Github configuration and workflows
+|--- apps                               # Buildable and deployable applications
+  |--- dialtone-documentation           # Documentation site
+|--- common                             # Common files shared between packages
+|--- generator-dialtone                 # Yeoman Generator for creating new packages
+|--- packages                           # Libraries that are being developed within the monorepo and published to NPM/GitHub
+  |--- combinator                       # Combinator component
+  |--- dialtone-css                     # CSS library
+  |--- dialtone-emojis                  # Emoji assets
+  |--- dialtone-icons                   # SVG and Vue icons library compatible with vue@2 and vue@3
+  |--- dialtone-mcp-server              # MCP Server
+  |--- dialtone-tokens                  # CSS Tokens library
+  |--- dialtone-vue2                    # Vue component library compatible with vue@2
+  |--- dialtone-vue3                    # Vue component library compatible with vue@3
+  |--- eslint-plugin-dialtone           # Custom ESLint rules for Dialtone users
+  |--- language-server                  # Language tools based on Volar Framework
+  |--- postcss-responsive-variations    # PostCSS plugin to generate responsive classes
+  |--- stylelint-plugin-dialtone        # Custom Stylelint rules for Dialtone users
+|--- scripts                            # Shared scripts
 ```
 
 ## How does mono-package bundling works
@@ -286,7 +292,7 @@ One of the main benefits of adding Nx to our PNPM workspace is speed via caching
 
 Running commands via NX will enable us to do several things:
 
-- Setup the project dependencies to other projects command,
+- Set up the project dependencies to other projects command,
 if they need to run before a specific command.
 - Improve the speed of the command execution by saving its output to cache.
 - Run the command on the [affected](https://nx.dev/nx-api/nx/documents/affected) projects only.
