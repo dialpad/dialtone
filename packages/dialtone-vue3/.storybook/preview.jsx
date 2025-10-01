@@ -5,6 +5,8 @@ import { addons } from '@storybook/preview-api';
 import { setTheme } from '@dialpad/dialtone-tokens/themes/config';
 import DpLight from '@dialpad/dialtone-tokens/themes/dp-light';
 import DpDark from '@dialpad/dialtone-tokens/themes/dp-dark';
+import HighContrastLight from '@dialpad/dialtone-tokens/themes/high-contrast-light';
+import HighContrastDark from '@dialpad/dialtone-tokens/themes/high-contrast-dark';
 import { MINIMAL_VIEWPORTS } from '@storybook/addon-viewport';
 import { setup } from '@storybook/vue3';
 import React from 'react';
@@ -18,12 +20,25 @@ import { DtTooltipDirective } from '@/directives/tooltip_directive';
 import { DtScrollbarDirective } from '@/directives/scrollbar_directive';
 import { faker } from '@faker-js/faker';
 
+let currentContrast = 'default';
+let currentDarkMode = false;
+
 setTheme(DpLight);
 
 const channel = addons.getChannel();
 
+const updateTheme = (isDark, isHighContrast) => {
+  currentDarkMode = isDark;
+  currentContrast = isHighContrast ? 'high' : 'default';
+
+  const baseTheme = isDark ? DpDark : DpLight;
+  const contrastTheme = isHighContrast ? (isDark ? HighContrastDark : HighContrastLight) : null;
+
+  setTheme(baseTheme, document.documentElement, contrastTheme);
+};
+
 channel.on(DARK_MODE_EVENT_NAME, (isDark) => {
-  setTheme(isDark ? DpDark : DpLight);
+  updateTheme(isDark, currentContrast === 'high');
 });
 
 setEmojiAssetUrlSmall('https://static.dialpadcdn.com/joypixels/png/unicode/32/', '.png');
@@ -41,6 +56,20 @@ setup((app) => {
 
 export default {
   name: 'StorybookPreview',
+  globalTypes: {
+    contrast: {
+      description: 'Contrast level',
+      toolbar: {
+        title: 'Contrast',
+        icon: 'contrast',
+        items: [
+          { value: 'default', icon: 'circlehollow', title: 'Default contrast' },
+          { value: 'high', icon: 'circle', title: 'High contrast' },
+        ],
+        dynamicTitle: true,
+      },
+    },
+  },
   parameters: {
     a11y: {
       config: {
@@ -111,4 +140,11 @@ export default {
 
     percy: { globalShow: true },
   },
+  decorators: [
+    (story, context) => {
+      const isHighContrast = context.globals.contrast === 'high';
+      updateTheme(currentDarkMode, isHighContrast);
+      return story();
+    },
+  ],
 };
