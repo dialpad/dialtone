@@ -58,14 +58,13 @@ export default {
   name: 'StorybookPreview',
   globalTypes: {
     contrast: {
-      description: 'Toggle high contrast mode',
-      defaultValue: 'default',
+      description: 'Contrast level',
       toolbar: {
         title: 'Contrast',
         icon: 'contrast',
         items: [
-          { value: 'default', title: 'Default', icon: 'contrast' },
-          { value: 'high', title: 'High Contrast', icon: 'contrast' },
+          { value: 'default', icon: 'circlehollow', title: 'Default contrast' },
+          { value: 'high', icon: 'circle', title: 'High contrast' },
         ],
         dynamicTitle: true,
       },
