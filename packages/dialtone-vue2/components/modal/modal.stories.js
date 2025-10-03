@@ -106,6 +106,12 @@ export const argTypesData = {
       type: 'boolean',
     },
   },
+  appendTo: {
+    options: [undefined, 'body', 'html'],
+    control: {
+      type: 'select',
+    },
+  },
 
   // Events
   'update:show': {
