@@ -1,3 +1,15 @@
+# [2.200.0](https://github.com/dialpad/dialtone/compare/dialtone-vue2/v2.199.1...dialtone-vue2/v2.200.0) (2025-10-06)
+
+
+### Documentation
+
+* **Localization, Monorepo, Tree Shaking:** NO-JIRA update documentation ([#939](https://github.com/dialpad/dialtone/issues/939)) ([1fdc0f8](https://github.com/dialpad/dialtone/commit/1fdc0f8aa0076bc01684906586012dadf379e7c2))
+
+
+### Features
+
+* **Modal:** DLT-2789 add appendTo prop ([#941](https://github.com/dialpad/dialtone/issues/941)) ([71073de](https://github.com/dialpad/dialtone/commit/71073de865eefe4b9884cd2c1f44a58d5f4d91de))
+
 ## [2.199.1](https://github.com/dialpad/dialtone/compare/dialtone-vue2/v2.199.0...dialtone-vue2/v2.199.1) (2025-09-25)
 
 
