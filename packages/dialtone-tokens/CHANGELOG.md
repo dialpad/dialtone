@@ -1,3 +1,11 @@
+## [1.47.1](https://github.com/dialpad/dialtone/compare/dialtone-tokens/v1.47.0...dialtone-tokens/v1.47.1) (2025-10-06)
+
+
+### Bug Fixes
+
+* DLT-2784 wiz warnings ([#937](https://github.com/dialpad/dialtone/issues/937)) ([7c8a86d](https://github.com/dialpad/dialtone/commit/7c8a86d4da11bc9ec68ebfe94728308cc6ba3b0d))
+* **Tokens:** NO-JIRA make root-to-host postcss plugin safer ([#940](https://github.com/dialpad/dialtone/issues/940)) ([edf3844](https://github.com/dialpad/dialtone/commit/edf3844ff73444b9a7e396c6a804defc5b70b881))
+
 # [1.47.0](https://github.com/dialpad/dialtone/compare/dialtone-tokens/v1.46.1...dialtone-tokens/v1.47.0) (2025-09-24)
 
 
