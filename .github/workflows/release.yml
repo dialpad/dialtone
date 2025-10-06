@@ -41,16 +41,16 @@ jobs:
         id: branch-name
         uses: tj-actions/branch-names@v8
 
-  check-dialpad-member:
-    runs-on: ubuntu-latest
-    steps:
-      # Will prevent the rest of the steps from running on fail
-      - name: Check if user is a dialpad member
-        uses: octokit/request-action@v2.x
-        env:
-          GITHUB_TOKEN: ${{ secrets.DIALTONE_CI_TOKEN_2 }}
-        with:
-          route: GET /orgs/dialpad/members/${{ github.actor }}
+  # check-dialpad-member:
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     # Will prevent the rest of the steps from running on fail
+  #     - name: Check if user is a dialpad member
+  #       uses: octokit/request-action@v2.x
+  #       env:
+  #         GITHUB_TOKEN: ${{ secrets.DIALTONE_CI_TOKEN_2 }}
+  #       with:
+  #         route: GET /orgs/dialpad/members/${{ github.actor }}
 
   release:
     needs: [get-branch-name, check-dialpad-member]
