@@ -53,7 +53,7 @@ jobs:
   #         route: GET /orgs/dialpad/members/${{ github.actor }}
 
   release:
-    needs: [get-branch-name, check-dialpad-member]
+    needs: [get-branch-name]
     if: ${{ contains(fromJSON('["staging", "alpha", "beta", "next"]'), needs.get-branch-name.outputs.current_branch) }}
     runs-on: ubuntu-latest
     permissions:
