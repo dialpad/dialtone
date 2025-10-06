@@ -1,3 +1,22 @@
+# [9.141.0](https://github.com/dialpad/dialtone/compare/dialtone/v9.140.1...dialtone/v9.141.0) (2025-10-06)
+
+
+### Bug Fixes
+
+* **Breadcrumb Item, Checkbox, Radio, Select Menu, Split Button:** DLT-2773 add root class (Vue3 only) ([#933](https://github.com/dialpad/dialtone/issues/933)) ([41fed64](https://github.com/dialpad/dialtone/commit/41fed640a7a341361c7adace4dddedb7ec5e5638))
+* DLT-2784 wiz warnings ([#937](https://github.com/dialpad/dialtone/issues/937)) ([7c8a86d](https://github.com/dialpad/dialtone/commit/7c8a86d4da11bc9ec68ebfe94728308cc6ba3b0d))
+* **Tokens:** NO-JIRA make root-to-host postcss plugin safer ([#940](https://github.com/dialpad/dialtone/issues/940)) ([edf3844](https://github.com/dialpad/dialtone/commit/edf3844ff73444b9a7e396c6a804defc5b70b881))
+
+
+### Documentation
+
+* **Localization, Monorepo, Tree Shaking:** NO-JIRA update documentation ([#939](https://github.com/dialpad/dialtone/issues/939)) ([1fdc0f8](https://github.com/dialpad/dialtone/commit/1fdc0f8aa0076bc01684906586012dadf379e7c2))
+
+
+### Features
+
+* **Modal:** DLT-2789 add appendTo prop ([#941](https://github.com/dialpad/dialtone/issues/941)) ([71073de](https://github.com/dialpad/dialtone/commit/71073de865eefe4b9884cd2c1f44a58d5f4d91de))
+
 ## [9.140.1](https://github.com/dialpad/dialtone/compare/dialtone/v9.140.0...dialtone/v9.140.1) (2025-09-25)
 
 
