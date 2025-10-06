@@ -1,3 +1,20 @@
+# [3.192.0](https://github.com/dialpad/dialtone/compare/dialtone-vue3/v3.191.1...dialtone-vue3/v3.192.0) (2025-10-06)
+
+
+### Bug Fixes
+
+* **Breadcrumb Item, Checkbox, Radio, Select Menu, Split Button:** DLT-2773 add root class (Vue3 only) ([#933](https://github.com/dialpad/dialtone/issues/933)) ([41fed64](https://github.com/dialpad/dialtone/commit/41fed640a7a341361c7adace4dddedb7ec5e5638))
+
+
+### Documentation
+
+* **Localization, Monorepo, Tree Shaking:** NO-JIRA update documentation ([#939](https://github.com/dialpad/dialtone/issues/939)) ([1fdc0f8](https://github.com/dialpad/dialtone/commit/1fdc0f8aa0076bc01684906586012dadf379e7c2))
+
+
+### Features
+
+* **Modal:** DLT-2789 add appendTo prop ([#941](https://github.com/dialpad/dialtone/issues/941)) ([71073de](https://github.com/dialpad/dialtone/commit/71073de865eefe4b9884cd2c1f44a58d5f4d91de))
+
 ## [3.191.1](https://github.com/dialpad/dialtone/compare/dialtone-vue3/v3.191.0...dialtone-vue3/v3.191.1) (2025-09-25)
 
 
