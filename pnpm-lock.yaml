@@ -12,7 +12,7 @@ overrides:
   nanoid: '>=3.3.8'
   sass: ^1.70.0
   sugarss: ^5.0.0
-  semver-regex: '>=3.1.4'
+  semver-regex: 3.1.4
   stylelint: ^15.11.0
   tar-fs: '>=2.1.3'
   trim: '>=0.0.3'
@@ -14806,9 +14806,9 @@ packages:
     resolution: {integrity: sha512-Ny/iyOzSSa8M5ML46IAx3iXc6tfOsYU2R4AXi2UpHk60Zrgyq6eqPj/xiOfS0rRl/iiQ/rdJkVjw/5cdUyCntQ==}
     engines: {node: '>= 0.10'}
 
-  semver-regex@4.0.5:
-    resolution: {integrity: sha512-hunMQrEy1T6Jr2uEVjrAIqjwWcQTgOAcIM52C8MY1EZSD3DDNft04XzvYKPqjED65bNVVko0YI38nYeEHCX3yw==}
-    engines: {node: '>=12'}
+  semver-regex@3.1.4:
+    resolution: {integrity: sha512-6IiqeZNgq01qGf0TId0t3NvKzSvUsjcpdEO3AQNeIjR6A2+ckTnQlDpl4qu1bjRv0RzN3FP9hzFmws3lKqRWkA==}
+    engines: {node: '>=8'}
 
   semver-truncate@1.1.2:
     resolution: {integrity: sha512-V1fGg9i4CL3qesB6U0L6XAm4xOJiHmt4QAacazumuasc03BvtFGIMCduv01JWQ69Nv+JST9TqhSCiJoxoY031w==}
@@ -16587,8 +16587,8 @@ packages:
   vue-component-type-helpers@1.8.24:
     resolution: {integrity: sha512-lqWs/7fdRXoSBAlbouHBX+LNuaY6gI9xWW34m/ZIz9zVPYHEyw0b2/zaCBwlKx0NtKTeF/6pOpvrxVkh7nhIYg==}
 
-  vue-component-type-helpers@3.1.0:
-    resolution: {integrity: sha512-cC1pYNRZkSS1iCvdlaMbbg2sjDwxX098FucEjtz9Yig73zYjWzQsnMe5M9H8dRNv55hAIDGUI29hF2BEUA4FMQ==}
+  vue-component-type-helpers@3.1.1:
+    resolution: {integrity: sha512-B0kHv7qX6E7+kdc5nsaqjdGZ1KwNKSUQDWGy7XkTYT7wFsOpkEyaJ1Vq79TjwrrtuLRgizrTV7PPuC4rRQo+vw==}
 
   vue-demi@0.14.10:
     resolution: {integrity: sha512-nMZBOwuzabUO0nLgIcc6rycZEebF6eeUfaiQx9+WSk8e29IbLvPU9feI6tqW4kTo3hvoYAJkMh8n8D0fuISphg==}
@@ -22238,7 +22238,7 @@ snapshots:
       ts-dedent: 2.2.0
       type-fest: 2.19.0
       vue: 3.4.15(typescript@5.8.3)
-      vue-component-type-helpers: 3.1.0
+      vue-component-type-helpers: 3.1.1
     transitivePeerDependencies:
       - encoding
       - supports-color
@@ -27611,15 +27611,15 @@ snapshots:
 
   find-versions@3.2.0:
     dependencies:
-      semver-regex: 4.0.5
+      semver-regex: 3.1.4
 
   find-versions@4.0.0:
     dependencies:
-      semver-regex: 4.0.5
+      semver-regex: 3.1.4
 
   find-versions@5.1.0:
     dependencies:
-      semver-regex: 4.0.5
+      semver-regex: 3.1.4
 
   find-yarn-workspace-root@2.0.0:
     dependencies:
@@ -34120,7 +34120,7 @@ snapshots:
     dependencies:
       sver-compat: 1.5.0
 
-  semver-regex@4.0.5: {}
+  semver-regex@3.1.4: {}
 
   semver-truncate@1.1.2:
     dependencies:
@@ -36225,7 +36225,7 @@ snapshots:
 
   vue-component-type-helpers@1.8.24: {}
 
-  vue-component-type-helpers@3.1.0: {}
+  vue-component-type-helpers@3.1.1: {}
 
   vue-demi@0.14.10(@vue/composition-api@1.7.2(vue@2.7.16))(vue@2.7.16):
     dependencies:
