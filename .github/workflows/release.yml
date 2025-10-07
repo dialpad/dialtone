@@ -48,7 +48,7 @@ jobs:
   #     - name: Check if user is a dialpad member
   #       uses: octokit/request-action@v2.x
   #       env:
-  #         GITHUB_TOKEN: ${{ secrets.DIALTONE_CI_TOKEN_2 }}
+  #         GITHUB_TOKEN: ${{ secrets.DIALTONE_CI_TOKEN }}
   #       with:
   #         route: GET /orgs/dialpad/members/${{ github.actor }}
 
@@ -155,7 +155,7 @@ jobs:
         with:
           ref: 'production'
           fetch-depth: 0
-          token: ${{ secrets.DIALTONE_CI_TOKEN_2 }}
+          token: ${{ secrets.DIALTONE_CI_TOKEN }}
 
       - name: Merge changes to production
         run: |
