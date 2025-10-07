@@ -11,6 +11,17 @@ export const argsData = {
 };
 
 export const argTypesData = {
+  // HTML attributes
+  href: {
+    description: 'HTML a href attribute',
+    type: {
+      summary: 'string',
+    },
+    table: {
+      category: 'html attributes',
+    },
+    control: 'text',
+  },
 };
 
 // Story Collection

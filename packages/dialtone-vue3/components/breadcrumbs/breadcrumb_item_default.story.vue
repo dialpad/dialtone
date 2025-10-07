@@ -4,6 +4,7 @@
     :selected="$attrs.selected"
     :label="$attrs.label"
     :href="$attrs.href"
+    :root-class="$attrs.rootClass"
   />
 </template>
 

@@ -1,34 +1,72 @@
-# [9.139.0-next.2](https://github.com/dialpad/dialtone/compare/dialtone/v9.139.0-next.1...dialtone/v9.139.0-next.2) (2025-09-17)
+# [9.141.0](https://github.com/dialpad/dialtone/compare/dialtone/v9.140.1...dialtone/v9.141.0) (2025-10-06)
 
 
 ### Bug Fixes
 
-* **Mcp Server:** NO-JIRA publish package ([#922](https://github.com/dialpad/dialtone/issues/922)) ([5bbb725](https://github.com/dialpad/dialtone/commit/5bbb725c55615dced8958e687752a610898a663d))
+* **Breadcrumb Item, Checkbox, Radio, Select Menu, Split Button:** DLT-2773 add root class (Vue3 only) ([#933](https://github.com/dialpad/dialtone/issues/933)) ([41fed64](https://github.com/dialpad/dialtone/commit/41fed640a7a341361c7adace4dddedb7ec5e5638))
+* DLT-2784 wiz warnings ([#937](https://github.com/dialpad/dialtone/issues/937)) ([7c8a86d](https://github.com/dialpad/dialtone/commit/7c8a86d4da11bc9ec68ebfe94728308cc6ba3b0d))
+* **Tokens:** NO-JIRA make root-to-host postcss plugin safer ([#940](https://github.com/dialpad/dialtone/issues/940)) ([edf3844](https://github.com/dialpad/dialtone/commit/edf3844ff73444b9a7e396c6a804defc5b70b881))
+
+
+### Documentation
+
+* **Localization, Monorepo, Tree Shaking:** NO-JIRA update documentation ([#939](https://github.com/dialpad/dialtone/issues/939)) ([1fdc0f8](https://github.com/dialpad/dialtone/commit/1fdc0f8aa0076bc01684906586012dadf379e7c2))
 
 
 ### Features
 
-* **Mcp Server:** DLT-2708 add JSON context to MCP server ([#918](https://github.com/dialpad/dialtone/issues/918)) ([d2221b4](https://github.com/dialpad/dialtone/commit/d2221b4e3a5262f71324fa2e1dfff3b8df91eac5))
+* **Modal:** DLT-2789 add appendTo prop ([#941](https://github.com/dialpad/dialtone/issues/941)) ([71073de](https://github.com/dialpad/dialtone/commit/71073de865eefe4b9884cd2c1f44a58d5f4d91de))
 
-# [9.139.0-next.1](https://github.com/dialpad/dialtone/compare/dialtone/v9.138.0...dialtone/v9.139.0-next.1) (2025-09-17)
+## [9.140.1](https://github.com/dialpad/dialtone/compare/dialtone/v9.140.0...dialtone/v9.140.1) (2025-09-25)
+
+
+### Code Refactoring
+
+* **Emoji Picker:** DLT-2774 update custom emoji icon ([#935](https://github.com/dialpad/dialtone/issues/935)) ([22dd937](https://github.com/dialpad/dialtone/commit/22dd937841f1b9698fd6b469b90f821f3639ed27))
+
+
+### Documentation
+
+* NO-JIRA fix links ([#934](https://github.com/dialpad/dialtone/issues/934)) ([a7a54d8](https://github.com/dialpad/dialtone/commit/a7a54d87775d5c499960f256a8c95cba815c936e))
+* **Storybook:** DLT-2785 update react version ([#936](https://github.com/dialpad/dialtone/issues/936)) ([2a62e54](https://github.com/dialpad/dialtone/commit/2a62e54e241f3e123958bb3fa4a8ee976acf163b))
+
+# [9.140.0](https://github.com/dialpad/dialtone/compare/dialtone/v9.139.1...dialtone/v9.140.0) (2025-09-24)
+
+
+### Bug Fixes
+
+* **Documentation:** NO-JIRA out of memory issues ([#926](https://github.com/dialpad/dialtone/issues/926)) ([080770a](https://github.com/dialpad/dialtone/commit/080770a0b2b073e2c32452be931a26ddb603051d))
+* **Mcp Server:** NO-JIRA import JSON files on build ([#925](https://github.com/dialpad/dialtone/issues/925)) ([e23676a](https://github.com/dialpad/dialtone/commit/e23676ab7dcea013b3146a75141fd7602b37bf24))
+
+
+### Features
+
+* **Rich Text Editor:** DP-150640 implement markdown output ([#848](https://github.com/dialpad/dialtone/issues/848)) ([ff2110e](https://github.com/dialpad/dialtone/commit/ff2110ef949240c8796cb766ce6dd8ad07007519))
+
+## [9.139.1](https://github.com/dialpad/dialtone/compare/dialtone/v9.139.0...dialtone/v9.139.1) (2025-09-23)
+
+
+### Bug Fixes
+
+* **Emoji Row:** DP-168152 add default size to skeletons ([#930](https://github.com/dialpad/dialtone/issues/930)) ([16583e7](https://github.com/dialpad/dialtone/commit/16583e71b9e1851dc2fc83240ec1f12e957eb5b1))
+* **Pagination:** DLT-2765 active page and change page buttons ([#929](https://github.com/dialpad/dialtone/issues/929)) ([59044cd](https://github.com/dialpad/dialtone/commit/59044cd0a4001d1ff032d3b8cb17c15dbcccb4b7))
+* **Postcss Responsive Variations:** NO-JIRA filter empty atRules ([#927](https://github.com/dialpad/dialtone/issues/927)) ([6e89435](https://github.com/dialpad/dialtone/commit/6e89435110971f992afdc24bbd3f8ff48c847eb4))
+* **Tooltip:** DP-158069 fix DtTooltip error ([#931](https://github.com/dialpad/dialtone/issues/931)) ([5ec230c](https://github.com/dialpad/dialtone/commit/5ec230c4bb221ebe68316e102e0db00e94129e3e))
+* **Tooltip:** NO-JIRA less noisy on empty & handle wiping the tooltip on null ([#924](https://github.com/dialpad/dialtone/issues/924)) ([0b3b14a](https://github.com/dialpad/dialtone/commit/0b3b14af75820158f6d959ef8f6794fc9cb59525))
+
+# [9.139.0](https://github.com/dialpad/dialtone/compare/dialtone/v9.138.0...dialtone/v9.139.0) (2025-09-17)
 
 
 ### Bug Fixes
 
 * **Emoji Row:** DP-157752 make emoji always appear on top  ([#920](https://github.com/dialpad/dialtone/issues/920)) ([dc2fb80](https://github.com/dialpad/dialtone/commit/dc2fb80ab502f738aa24cb3e3db661d247453456))
 * **Leftbar Row:** DP-157563 call button wrong color on hover ([#919](https://github.com/dialpad/dialtone/issues/919)) ([5b77095](https://github.com/dialpad/dialtone/commit/5b770959a61cfb0772f965dc8dfd7700f8bcaf6d))
-
-
-### Code Refactoring
-
-* **Css:** DLT-1876 css logical properties ([#872](https://github.com/dialpad/dialtone/issues/872)) ([1acd6c9](https://github.com/dialpad/dialtone/commit/1acd6c900053b0c820309faa4a870ff1dceced04))
+* **Mcp Server:** NO-JIRA publish package ([#922](https://github.com/dialpad/dialtone/issues/922)) ([5bbb725](https://github.com/dialpad/dialtone/commit/5bbb725c55615dced8958e687752a610898a663d))
 
 
 ### Features
 
-* **Css Utility:** DLT-2715 add default color for border css utilities ([#874](https://github.com/dialpad/dialtone/issues/874)) ([71310ab](https://github.com/dialpad/dialtone/commit/71310ab483fde976d56c69e0456bce70cb6d372d))
-* **Tokens:** DLT-2767 exploratory shell themes ([#909](https://github.com/dialpad/dialtone/issues/909)) ([3afcf63](https://github.com/dialpad/dialtone/commit/3afcf637d136733ff2f981a9ebbb63a3c4a37c99))
-* **Tokens:** DLT-2781 create color-assistive themes ([#921](https://github.com/dialpad/dialtone/issues/921)) ([a6cc397](https://github.com/dialpad/dialtone/commit/a6cc397bec52987f9ac2c3efca9b16f61c406807))
+* **Mcp Server:** DLT-2708 add JSON context to MCP server ([#918](https://github.com/dialpad/dialtone/issues/918)) ([d2221b4](https://github.com/dialpad/dialtone/commit/d2221b4e3a5262f71324fa2e1dfff3b8df91eac5))
 
 # [9.138.0](https://github.com/dialpad/dialtone/compare/dialtone/v9.137.0...dialtone/v9.138.0) (2025-09-16)
 

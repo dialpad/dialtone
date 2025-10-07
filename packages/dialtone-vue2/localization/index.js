@@ -25,7 +25,16 @@ const allowedLocales = {
   SPANISH: 'es-LA',
 };
 const fallbackLocale = 'en-US';
+/**
+ * Default key name used by the LocaleManager to store the user's preferred locale in localStorage
+ */
+const localeManagerStorageKey = 'user-locale';
 
+/**
+ * Dialtone localization class, follows the singleton pattern to make sure only one instance of the class is created.
+ * Initializes the localeManager and looks for changes on the browser storage to update the current locale.
+ * https://github.com/dialpad/goblin-client-tools/tree/main/packages/i18n#i18n-vue-3-compatible
+ */
 export class DialtoneLocalization {
   constructor (locale = null) {
     if (typeof DialtoneLocalization.instance === 'object') {
@@ -68,7 +77,7 @@ export class DialtoneLocalization {
        * @param event
        */
       window.onstorage = (event) => {
-        if (event.key === 'user-locale') {
+        if (event.key === localeManagerStorageKey) {
           this.currentLocale = event.newValue;
         }
       };
@@ -77,12 +86,19 @@ export class DialtoneLocalization {
     return this;
   }
 
+  /**
+   * Gets the preferred locale from user's locale stored in localStorage or the browser language
+   * @returns { string }
+   */
   static getPreferredLocale () {
+    /**
+     * Early return if we're not in the browser or if localStorage is not available
+     */
     if (typeof window === 'undefined' || !window.localStorage) {
       return fallbackLocale;
     }
 
-    const localStorageLanguage = window.localStorage.getItem('user-locale');
+    const localStorageLanguage = window.localStorage.getItem(localeManagerStorageKey);
 
     // Get the first two letters of the navigator language and check if it's in the allowed locales
     const navigatorLanguage = Object.values(allowedLocales)
@@ -95,10 +111,22 @@ export class DialtoneLocalization {
     return allowedLocales;
   }
 
+  /**
+   * Passthrough function to the i18n $t function including the dialtone namespace
+   * Returns a translated string based on a key and optional variables.
+   * It’s used for simple text translations.
+   * https://github.com/dialpad/goblin-client-tools/tree/main/packages/i18n#t
+   */
   $t (...args) {
     return useI18N(dialtoneNamespace).$t(...args);
   }
 
+  /**
+   * Passthrough function to the i18n $ta function including the dialtone namespace
+   * Returns an object containing translated attributes to pass directly as props to components, it can contain
+   * aria-label, title, etc, rather than just a plain text. It’s useful for handling element attributes in the UI.
+   * https://github.com/dialpad/goblin-client-tools/tree/main/packages/i18n#ta
+   */
   $ta (...args) {
     return useI18N(dialtoneNamespace).$ta(...args);
   }

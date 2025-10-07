@@ -2,6 +2,7 @@
   <li
     data-qa="dt-breadcrumb-item"
     :class="[
+      rootClass,
       'd-breadcrumbs__item',
       { [BREADCRUMB_ITEM_SELECTED_MODIFIER]: selected },
     ]"
@@ -58,6 +59,16 @@ export default {
      */
     label: {
       type: String,
+      default: '',
+    },
+
+    /**
+     * Additional class name for the root element.
+     * Can accept all of: String, Object, and Array, i.e. has the
+     * same api as Vue's built-in handling of the class attribute.
+     */
+    rootClass: {
+      type: [String, Object, Array],
       default: '',
     },
   },

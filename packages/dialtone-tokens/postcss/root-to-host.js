@@ -5,10 +5,16 @@ const creator = () => {
   return {
     postcssPlugin: 'postcss-dialtone-root-to-host',
     Once (root) {
-      const re = /.*?\/css\/tokens-.*?/;
-      if (!re.test(root.source.input.file)) return;
-      const rootRule = root.last;
-      rootRule.selector = ':host';
+      // Only process dialtone token files
+      if (!root.source?.input?.file || !/tokens-.*?\.css/.test(root.source.input.file)) {
+          return;
+      }
+
+      const lastRule = root.last;
+      // Only modify if it's a rule with a selector
+      if (lastRule && lastRule.type === 'rule' && lastRule.selector === ':root') {
+          lastRule.selector = ':host';
+      }
     },
   };
 };

@@ -343,6 +343,7 @@ describe('DtSelectMenu Tests', () => {
     const MOCK_CUSTOM_CLASS = 'my-custom-class';
     const MOCK_PROP_NAME = 'some';
     const MOCK_PROP_VALUE = 'prop';
+    const MOCK_ROOT_CLASS = 'custom-class';
 
     describe('When a label class is provided', () => {
       it('should apply custom class to child', () => {
@@ -441,6 +442,16 @@ describe('DtSelectMenu Tests', () => {
         MOCK_ELEMENT = select;
 
         expect(MOCK_ELEMENT.attributes(MOCK_PROP_NAME)).toBe(MOCK_PROP_VALUE);
+      });
+    });
+
+    describe('When a rootClass is provided', () => {
+      it('should include the root class', () => {
+        mockProps = { rootClass: MOCK_ROOT_CLASS }
+
+        updateWrapper();
+
+        expect(wrapper.classes().includes(MOCK_ROOT_CLASS)).toBe(true);
       });
     });
   });
