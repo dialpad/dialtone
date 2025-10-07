@@ -17,10 +17,10 @@ export function setTheme (theme, rootNode = document.documentElement, contrastTh
   // Apply contrast layer
   if (contrastTheme) {
     _setStyleTag('dialtone-css-contrast', contrastTheme.css, rootNode);
-    rootNode.setAttribute('data-dt-contrast', 'high');
+    rootNode?.setAttribute('data-dt-contrast', 'high');
   } else {
     _removeStyleTag('dialtone-css-contrast', rootNode);
-    rootNode.setAttribute('data-dt-contrast', 'default');
+    rootNode?.setAttribute('data-dt-contrast', 'default');
   }
 }
 
@@ -28,15 +28,15 @@ export function setTheme (theme, rootNode = document.documentElement, contrastTh
  * Set the content of a style tag with the given id, create it if the id doesn't exist.
  */
 function _setStyleTag (id, content, rootNode) {
-  if (!rootNode.querySelector('#' + id)) {
+  if (!rootNode?.querySelector('#' + id)) {
     const style = document.createElement('style');
     style.setAttribute('type', 'text/css');
     style.setAttribute('id', id);
     style.innerHTML = content;
-    if (rootNode.querySelector('head')) {
+    if (rootNode?.querySelector('head')) {
       rootNode.querySelector('head').appendChild(style);
     } else {
-      rootNode.appendChild(style);
+      rootNode?.appendChild(style);
     }
   } else {
     rootNode.querySelector('#' + id).innerHTML = content;
@@ -48,7 +48,7 @@ function _setStyleTag (id, content, rootNode) {
  * Remove a style tag with the given id
  */
 function _removeStyleTag (id, rootNode) {
-  const existingStyleTag = rootNode.querySelector('#' + id);
+  const existingStyleTag = rootNode?.querySelector('#' + id);
   if (existingStyleTag) {
     existingStyleTag.remove();
   }
@@ -58,6 +58,6 @@ function _removeStyleTag (id, rootNode) {
  * Set the dialtone theme and brand custom attributes on the root element
  */
 function _setThemeAttributeOnRoot (theme, brand, rootNode) {
-  rootNode.setAttribute('data-dt-theme', theme);
-  rootNode.setAttribute('data-dt-brand', brand);
+  rootNode?.setAttribute('data-dt-theme', theme);
+  rootNode?.setAttribute('data-dt-brand', brand);
 }
