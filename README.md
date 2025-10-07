@@ -165,20 +165,94 @@ apps (apps folder):
 
 ```text
 dialtone/
-|--- .github                      # Github configuration and workflows
-|--- apps                         # Apps
-  |--- dialtone-documentation     # Documentation site
-|--- packages                     # NPM packages
-  |--- dialtone-css               # CSS library
-  |--- dialtone-emojis            # Emoji assets
-  |--- dialtone-vue2              # Vue component library compatible with vue@2
-  |--- dialtone-vue3              # Vue component library compatible with vue@3
-  |--- dialtone-icons             # SVG icons library
-  |--- dialtone-tokens            # Tokens library
-  |--- eslint-plugin-dialtone     # Custom ESLint rules for Dialtone users
-  |--- stylelint-plugin-dialtone  # Custom Stylelint rules for Dialtone users
-|--- scripts                      # Shared scripts
+|--- .github                            # Github configuration and workflows
+|--- apps                               # Buildable and deployable applications
+  |--- dialtone-documentation           # Documentation site
+|--- common                             # Common files shared between packages
+|--- generator-dialtone                 # Yeoman Generator for creating new packages
+|--- packages                           # Libraries that are being developed within the monorepo and published to NPM/GitHub
+  |--- combinator                       # Combinator component
+  |--- dialtone-css                     # CSS library
+  |--- dialtone-emojis                  # Emoji assets
+  |--- dialtone-icons                   # SVG and Vue icons library compatible with vue@2 and vue@3
+  |--- dialtone-mcp-server              # MCP Server
+  |--- dialtone-tokens                  # CSS Tokens library
+  |--- dialtone-vue2                    # Vue component library compatible with vue@2
+  |--- dialtone-vue3                    # Vue component library compatible with vue@3
+  |--- eslint-plugin-dialtone           # Custom ESLint rules for Dialtone users
+  |--- language-server                  # Language tools based on Volar Framework
+  |--- postcss-responsive-variations    # PostCSS plugin to generate responsive classes
+  |--- stylelint-plugin-dialtone        # Custom Stylelint rules for Dialtone users
+|--- scripts                            # Shared scripts
 ```
+
+### Dialtone mono-package
+
+Dialtone is a mono-package that includes many packages within it to ease the maintenance of versions of
+the library.
+
+#### How does our bundling works
+
+To achieve this we needed to create certain configs through the monorepo to be able to handle them even if 
+they have the same package name e.g: `@dialpad/dialtone-vue`.
+
+1. In root [package.json](package.json):
+   - `pnpm`: 
+     - `peerDependencyRules` include `vue": "^2.6 || ^3.2"` to make sure we don't have warnings related to vue version 
+       mismatch.
+     - `packageExtensions` tells pnpm which Vue version to use for each package.
+   - `dependencies` doesn't include any specific Vue 2 or Vue 3 dependencies as this causes issues on the client when 
+     trying to use exports from `./vue2` or `./vue3`.
+2. On individual packages `package.json` files:
+   - Include the specific dependencies in case someone uses the individual package
+   - In `vite.config.js`[Vue 2](packages/dialtone-vue2/vite.config.js), 
+     [Vue 3](packages/dialtone-vue3/vite.config.js) add dependencies to external to make sure they don't cause 
+     issues on product. (This is more specific for the Vue 2 package, as product is depending on Vue 2.6 and any 
+     dependency that needs a newer Vue version will cause issues).
+3. In [project.json](project.json)
+   - Include implicit dependencies to make sure NX builds them before trying to copy the files to the mono-package.
+4. In `gulpfile.cjs`
+   - Copy the built files into the root `dist` folder.
+
+#### Included packages
+- Dialtone CSS
+- Dialtone Tokens
+- Dialtone Vue 2
+- Dialtone Vue 3
+
+### Tree-shaking
+
+Tree-shaking is a feature that allows you to remove unused code from your bundle, and it is enabled by default in our 
+build process for Dialtone, Dialtone Vue, Dialtone Combinator and Dialtone Icons.
+
+We achieve tree-shaking primarily via three mechanisms across the packages:
+
+#### Marking packages as side effect free
+
+`sideEffects: false` is set so bundlers can drop unused imports.
+
+- `@dialpad/dialtone` → [package.json](package.json) line 242
+- `@dialpad/dialtone-vue` (vue2) → [package.json](packages/dialtone-vue2/package.json) line 145
+- `@dialpad/dialtone-vue` (vue3) → [package.json](packages/dialtone-vue3/package.json) line 145
+- `@dialpad/dialtone-combinator` → [package.json](packages/combinator/package.json) line 56
+- `@dialpad/dialtone-icons` → [package.json](packages/dialtone-icons/package.json) line 98
+
+#### Publishing ESM builds (with dual ESM/CJS via exports map)
+
+Packages expose ESM for bundlers to statically analyze and tree-shake, with CJS fallbacks.
+- `@dialpad/dialtone-vue` (vue3): 
+  - `"type"`: `"module"`,
+  - `"module"`: `"./dist/dialtone-vue.js"`,
+  - `"main"`: `"./dist/dialtone-vue.cjs"`,
+
+#### Deep, per-module entry points to enable fine-grained import paths
+
+Exports maps expose subpath entries so consumers can import only what they need (which aids tree-shaking and avoids 
+pulling entire bundles):
+
+- `@dialpad/dialtone` exposes `./vue3/lib/*` and `./vue2/lib/*` map to individual component imports.
+- `@dialpad/dialtone-vue` exposes `./lib/*` for individual component imports.
+- `@dialpad/dialtone-icons` exposes `./vue3/*` and `./vue2/*` for individual icon/illustration imports.
 
 ### Available packages
 
@@ -256,7 +330,7 @@ One of the main benefits of adding Nx to our PNPM workspace is speed via caching
 
 Running commands via NX will enable us to do several things:
 
-- Setup the project dependencies to other projects command,
+- Set up the project dependencies to other projects command,
 if they need to run before a specific command.
 - Improve the speed of the command execution by saving its output to cache.
 - Run the command on the [affected](https://nx.dev/nx-api/nx/documents/affected) projects only.
@@ -434,9 +508,9 @@ This will trigger the [release action](.github/workflows/release.yml), release c
 1. Run the `release` target on selected packages (all if `package` is empty).
 2. The [publish action](https://github.com/dialpad/dialtone/actions/workflows/publish.yml) will publish the packages with its corresponding tag.
 
-#### Testing
+### Testing
 
-##### Run Vue unit tests
+#### Run Vue unit tests
 
 ```bash
 nx run dialtone:test:vue

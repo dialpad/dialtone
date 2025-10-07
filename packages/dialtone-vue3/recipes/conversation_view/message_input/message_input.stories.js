@@ -6,6 +6,9 @@ import mentionSuggestion from '@/components/rich_text_editor/mention_suggestion'
 import channelSuggestion from '@/components/rich_text_editor/channel_suggestion';
 import slashCommandSuggestion from '@/components/rich_text_editor/slash_command_suggestion';
 import customEmojiJson from '@/common/custom-emoji.json';
+import {
+  RICH_TEXT_EDITOR_OUTPUT_FORMATS,
+} from '@/components/rich_text_editor/rich_text_editor_constants.js'
 
 const iconsList = getIconNames();
 
@@ -95,6 +98,10 @@ export const argTypesData = {
       type: 'text',
     },
   },
+  outputFormat: {
+    control: 'select',
+    options: Object.values(RICH_TEXT_EDITOR_OUTPUT_FORMATS),
+  },
 
   // Events
   onSubmit: {
@@ -134,6 +141,12 @@ export const argTypesData = {
   },
 
   onTextInput: {
+    table: {
+      disable: true,
+    },
+  },
+
+  onMarkdownInput: {
     table: {
       disable: true,
     },
@@ -242,6 +255,7 @@ export const argsData = {
   onJsonInput: action('json-input'),
   onHtmlInput: action('html-input'),
   onTextInput: action('text-input'),
+  onMarkdownInput: action('markdown-input'),
   onAddEmoji: action('add-emoji'),
   onSelectMedia: action('select-media'),
   onSelectedEmoji: action('selected-emoji'),
@@ -326,6 +340,7 @@ export const WithCustomEmoji = {
     emojiPickerProps: {
       skinTone: 'Default',
       customEmojis: customEmojiJson,
+      showAddEmojiButton: true,
     },
   },
 };

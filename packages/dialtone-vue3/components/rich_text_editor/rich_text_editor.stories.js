@@ -26,6 +26,7 @@ export const argsData = {
   onJsonInput: action('json-input'),
   onHtmlInput: action('html-input'),
   onTextInput: action('text-input'),
+  onMarkdownInput: action('markdown-input'),
   onEditLink: action('edit-link'),
   onSelectedCommand: action('selected-command'),
 };
@@ -103,6 +104,11 @@ export const argTypesData = {
     },
   },
   onTextInput: {
+    table: {
+      disable: true,
+    },
+  },
+  onMarkdownInput: {
     table: {
       disable: true,
     },

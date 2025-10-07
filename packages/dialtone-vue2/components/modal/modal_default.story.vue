@@ -17,6 +17,7 @@
       :fixed-header-footer="$attrs.fixedHeaderFooter"
       :close-on-click="$attrs.closeOnClick"
       :initial-focus-element="$attrs.initialFocusElement"
+      :append-to="$attrs.appendTo"
       @update:show="updateShow"
     >
       <template

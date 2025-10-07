@@ -1,3 +1,12 @@
+## [4.44.1](https://github.com/dialpad/dialtone/compare/dialtone-icons/v4.44.0...dialtone-icons/v4.44.1) (2025-10-06)
+
+# [4.44.0](https://github.com/dialpad/dialtone/compare/dialtone-icons/v4.43.0...dialtone-icons/v4.44.0) (2025-09-10)
+
+
+### Features
+
+* **Icon:** DLT-2769 dialpad-star-mark and dialpad-star-mark-color ([#910](https://github.com/dialpad/dialtone/issues/910)) ([ad7b444](https://github.com/dialpad/dialtone/commit/ad7b4442b3d2bd06dbc0738308feb10744d9935c))
+
 # [4.43.0](https://github.com/dialpad/dialtone/compare/dialtone-icons/v4.42.2...dialtone-icons/v4.43.0) (2025-08-26)
 
 

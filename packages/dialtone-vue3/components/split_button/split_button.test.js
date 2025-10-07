@@ -9,6 +9,7 @@ const MOCK_ALPHA_BUTTON_STUB = vi.fn();
 const MOCK_OMEGA_BUTTON_STUB = vi.fn();
 const MOCK_ALPHA_TOOLTIP_TEXT = 'Alpha tooltip text';
 const MOCK_OMEGA_TOOLTIP_TEXT = 'Omega tooltip text';
+const MOCK_ROOT_CLASS = 'custom-class';
 
 const baseProps = {
   omegaTooltipText: MOCK_OMEGA_TOOLTIP_TEXT,
@@ -256,6 +257,18 @@ describe('DtSplitButton Tests', function () {
 
       it('Should emit omega-clicked event', () => {
         expect(wrapper.emitted()).toHaveProperty('omega-clicked');
+      });
+    });
+  });
+
+  describe('Extendability Tests', () => {
+    describe('When a rootClass is provided', () => {
+      it('should include the root class', () => {
+        mockProps = { rootClass: MOCK_ROOT_CLASS }
+
+        updateWrapper();
+
+        expect(wrapper.classes().includes(MOCK_ROOT_CLASS)).toBe(true);
       });
     });
   });

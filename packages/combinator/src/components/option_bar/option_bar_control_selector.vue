@@ -10,16 +10,14 @@
         v-for="label in selection.labels"
         :key="label"
       >
-        <span class="d-pr4">
-          <dt-button
-            class="dtc-control-selector__button d-px4 d-py1"
-            importance="outlined"
-            v-bind="getStyling(control)"
-            @click="() => updateControl(control)"
-          >
-            {{ label }}
-          </dt-button>
-        </span>
+        <dt-button
+          class="dtc-control-selector__button d-px4 d-py1"
+          importance="outlined"
+          v-bind="getStyling(control)"
+          @click="() => updateControl(control)"
+        >
+          {{ label }}
+        </dt-button>
       </template>
     </template>
   </dt-button-group>

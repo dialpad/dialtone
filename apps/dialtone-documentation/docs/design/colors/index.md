@@ -4,4 +4,4 @@ description: A systematic and accessible color palette that supports both functi
 no_preview: true
 ---
 
-<overview :pages="$page.enhancedFrontmatter" base-path="design/colors" />
+<overview :pages="$page.enhancedFrontmatter" />

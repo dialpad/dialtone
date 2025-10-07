@@ -16,6 +16,7 @@
       :labelled-by-id="$attrs.labelledById"
       :fixed-header-footer="$attrs.fixedHeaderFooter"
       :close-on-click="$attrs.closeOnClick"
+      :append-to="$attrs.appendTo"
       @update:show="close"
     >
       <template
@@ -110,7 +111,7 @@ export default {
 
   methods: {
     close (event) {
-      this.isOpen = !this.isOpen;
+      this.isOpen = event;
       this.$attrs.onClose(event);
     },
   },

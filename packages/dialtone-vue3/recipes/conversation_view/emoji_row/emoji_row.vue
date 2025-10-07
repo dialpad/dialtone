@@ -16,6 +16,7 @@
             <p class="d-recipe-emoji-row__tooltip-emoji">
               {{ reaction.emojiUnicodeOrShortname }}
             </p>
+            <br>
             <p class="d-recipe-emoji-row__tooltip-names">
               {{ reaction.names }}
               <span
@@ -41,6 +42,7 @@
             <span class="d-recipe-emoji-row__emoji">
               <dt-emoji
                 class="d-recipe-emoji-row__emoji"
+                size="200"
                 img-class="d-recipe-emoji-row__emoji-img"
                 :code="reaction.emojiUnicodeOrShortname"
               />
@@ -117,7 +119,6 @@ export default {
       return this.i18n.$t('DIALTONE_EMOJI_ROW_REACTION_LABEL', {
         reaction: getEmojiShortCode(reaction.emojiUnicodeOrShortname),
         personCount: reaction.num,
-        youIncluded: reaction.isSelected,
       });
     },
   },

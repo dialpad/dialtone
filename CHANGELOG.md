@@ -1,3 +1,109 @@
+# [9.141.0](https://github.com/dialpad/dialtone/compare/dialtone/v9.140.1...dialtone/v9.141.0) (2025-10-06)
+
+
+### Bug Fixes
+
+* **Breadcrumb Item, Checkbox, Radio, Select Menu, Split Button:** DLT-2773 add root class (Vue3 only) ([#933](https://github.com/dialpad/dialtone/issues/933)) ([41fed64](https://github.com/dialpad/dialtone/commit/41fed640a7a341361c7adace4dddedb7ec5e5638))
+* DLT-2784 wiz warnings ([#937](https://github.com/dialpad/dialtone/issues/937)) ([7c8a86d](https://github.com/dialpad/dialtone/commit/7c8a86d4da11bc9ec68ebfe94728308cc6ba3b0d))
+* **Tokens:** NO-JIRA make root-to-host postcss plugin safer ([#940](https://github.com/dialpad/dialtone/issues/940)) ([edf3844](https://github.com/dialpad/dialtone/commit/edf3844ff73444b9a7e396c6a804defc5b70b881))
+
+
+### Documentation
+
+* **Localization, Monorepo, Tree Shaking:** NO-JIRA update documentation ([#939](https://github.com/dialpad/dialtone/issues/939)) ([1fdc0f8](https://github.com/dialpad/dialtone/commit/1fdc0f8aa0076bc01684906586012dadf379e7c2))
+
+
+### Features
+
+* **Modal:** DLT-2789 add appendTo prop ([#941](https://github.com/dialpad/dialtone/issues/941)) ([71073de](https://github.com/dialpad/dialtone/commit/71073de865eefe4b9884cd2c1f44a58d5f4d91de))
+
+## [9.140.1](https://github.com/dialpad/dialtone/compare/dialtone/v9.140.0...dialtone/v9.140.1) (2025-09-25)
+
+
+### Code Refactoring
+
+* **Emoji Picker:** DLT-2774 update custom emoji icon ([#935](https://github.com/dialpad/dialtone/issues/935)) ([22dd937](https://github.com/dialpad/dialtone/commit/22dd937841f1b9698fd6b469b90f821f3639ed27))
+
+
+### Documentation
+
+* NO-JIRA fix links ([#934](https://github.com/dialpad/dialtone/issues/934)) ([a7a54d8](https://github.com/dialpad/dialtone/commit/a7a54d87775d5c499960f256a8c95cba815c936e))
+* **Storybook:** DLT-2785 update react version ([#936](https://github.com/dialpad/dialtone/issues/936)) ([2a62e54](https://github.com/dialpad/dialtone/commit/2a62e54e241f3e123958bb3fa4a8ee976acf163b))
+
+# [9.140.0](https://github.com/dialpad/dialtone/compare/dialtone/v9.139.1...dialtone/v9.140.0) (2025-09-24)
+
+
+### Bug Fixes
+
+* **Documentation:** NO-JIRA out of memory issues ([#926](https://github.com/dialpad/dialtone/issues/926)) ([080770a](https://github.com/dialpad/dialtone/commit/080770a0b2b073e2c32452be931a26ddb603051d))
+* **Mcp Server:** NO-JIRA import JSON files on build ([#925](https://github.com/dialpad/dialtone/issues/925)) ([e23676a](https://github.com/dialpad/dialtone/commit/e23676ab7dcea013b3146a75141fd7602b37bf24))
+
+
+### Features
+
+* **Rich Text Editor:** DP-150640 implement markdown output ([#848](https://github.com/dialpad/dialtone/issues/848)) ([ff2110e](https://github.com/dialpad/dialtone/commit/ff2110ef949240c8796cb766ce6dd8ad07007519))
+
+## [9.139.1](https://github.com/dialpad/dialtone/compare/dialtone/v9.139.0...dialtone/v9.139.1) (2025-09-23)
+
+
+### Bug Fixes
+
+* **Emoji Row:** DP-168152 add default size to skeletons ([#930](https://github.com/dialpad/dialtone/issues/930)) ([16583e7](https://github.com/dialpad/dialtone/commit/16583e71b9e1851dc2fc83240ec1f12e957eb5b1))
+* **Pagination:** DLT-2765 active page and change page buttons ([#929](https://github.com/dialpad/dialtone/issues/929)) ([59044cd](https://github.com/dialpad/dialtone/commit/59044cd0a4001d1ff032d3b8cb17c15dbcccb4b7))
+* **Postcss Responsive Variations:** NO-JIRA filter empty atRules ([#927](https://github.com/dialpad/dialtone/issues/927)) ([6e89435](https://github.com/dialpad/dialtone/commit/6e89435110971f992afdc24bbd3f8ff48c847eb4))
+* **Tooltip:** DP-158069 fix DtTooltip error ([#931](https://github.com/dialpad/dialtone/issues/931)) ([5ec230c](https://github.com/dialpad/dialtone/commit/5ec230c4bb221ebe68316e102e0db00e94129e3e))
+* **Tooltip:** NO-JIRA less noisy on empty & handle wiping the tooltip on null ([#924](https://github.com/dialpad/dialtone/issues/924)) ([0b3b14a](https://github.com/dialpad/dialtone/commit/0b3b14af75820158f6d959ef8f6794fc9cb59525))
+
+# [9.139.0](https://github.com/dialpad/dialtone/compare/dialtone/v9.138.0...dialtone/v9.139.0) (2025-09-17)
+
+
+### Bug Fixes
+
+* **Emoji Row:** DP-157752 make emoji always appear on top  ([#920](https://github.com/dialpad/dialtone/issues/920)) ([dc2fb80](https://github.com/dialpad/dialtone/commit/dc2fb80ab502f738aa24cb3e3db661d247453456))
+* **Leftbar Row:** DP-157563 call button wrong color on hover ([#919](https://github.com/dialpad/dialtone/issues/919)) ([5b77095](https://github.com/dialpad/dialtone/commit/5b770959a61cfb0772f965dc8dfd7700f8bcaf6d))
+* **Mcp Server:** NO-JIRA publish package ([#922](https://github.com/dialpad/dialtone/issues/922)) ([5bbb725](https://github.com/dialpad/dialtone/commit/5bbb725c55615dced8958e687752a610898a663d))
+
+
+### Features
+
+* **Mcp Server:** DLT-2708 add JSON context to MCP server ([#918](https://github.com/dialpad/dialtone/issues/918)) ([d2221b4](https://github.com/dialpad/dialtone/commit/d2221b4e3a5262f71324fa2e1dfff3b8df91eac5))
+
+# [9.138.0](https://github.com/dialpad/dialtone/compare/dialtone/v9.137.0...dialtone/v9.138.0) (2025-09-16)
+
+
+### Bug Fixes
+
+* **Checkbox, Radio:** DLT-2772 add pointer cursor to entire checkbox/radio label region ([#913](https://github.com/dialpad/dialtone/issues/913)) ([4bd0859](https://github.com/dialpad/dialtone/commit/4bd08592811f8dbbbfaa43fc79ab84d6209e5854))
+* **Localization:** DLT-2768  emoji row reaction label warnings ([#911](https://github.com/dialpad/dialtone/issues/911)) ([5a6713d](https://github.com/dialpad/dialtone/commit/5a6713dfd69d55d6dcbb850de48087829417d33c))
+
+
+### Code Refactoring
+
+* **Combinator:** DLT-2672 update styles ([#906](https://github.com/dialpad/dialtone/issues/906)) ([96f444c](https://github.com/dialpad/dialtone/commit/96f444c4b59c1a6ed0d29db151ed526d7f60d47b))
+* **Emoji Picker:** DLT-2776 new prop showAddEmojiButton ([#915](https://github.com/dialpad/dialtone/issues/915)) ([c37911b](https://github.com/dialpad/dialtone/commit/c37911b8f77a7453105f0421f24ac552ca935a88))
+
+
+### Documentation
+
+* NO-JIRA remove names from public docs ([#917](https://github.com/dialpad/dialtone/issues/917)) ([744736f](https://github.com/dialpad/dialtone/commit/744736f09e1086a7f5f7691045677a62cbe4e94c))
+
+
+### Features
+
+* **Mcp Server:** DLT-2707 add basic MCP server ([#914](https://github.com/dialpad/dialtone/issues/914)) ([3658e51](https://github.com/dialpad/dialtone/commit/3658e51689e541de91822656b5e8c73b1aa56be3))
+
+# [9.137.0](https://github.com/dialpad/dialtone/compare/dialtone/v9.136.0...dialtone/v9.137.0) (2025-09-10)
+
+
+### Bug Fixes
+
+* **Tokens:** DLT-2766 sunflower dark and correct shell base references ([#908](https://github.com/dialpad/dialtone/issues/908)) ([a44aa57](https://github.com/dialpad/dialtone/commit/a44aa577c5117efd3f6e8318be8aadbd0c333375))
+
+
+### Features
+
+* **Icon:** DLT-2769 dialpad-star-mark and dialpad-star-mark-color ([#910](https://github.com/dialpad/dialtone/issues/910)) ([ad7b444](https://github.com/dialpad/dialtone/commit/ad7b4442b3d2bd06dbc0738308feb10744d9935c))
+
 # [9.136.0](https://github.com/dialpad/dialtone/compare/dialtone/v9.135.2...dialtone/v9.136.0) (2025-09-09)
 
 

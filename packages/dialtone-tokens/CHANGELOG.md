@@ -1,3 +1,25 @@
+## [1.47.1](https://github.com/dialpad/dialtone/compare/dialtone-tokens/v1.47.0...dialtone-tokens/v1.47.1) (2025-10-06)
+
+
+### Bug Fixes
+
+* DLT-2784 wiz warnings ([#937](https://github.com/dialpad/dialtone/issues/937)) ([7c8a86d](https://github.com/dialpad/dialtone/commit/7c8a86d4da11bc9ec68ebfe94728308cc6ba3b0d))
+* **Tokens:** NO-JIRA make root-to-host postcss plugin safer ([#940](https://github.com/dialpad/dialtone/issues/940)) ([edf3844](https://github.com/dialpad/dialtone/commit/edf3844ff73444b9a7e396c6a804defc5b70b881))
+
+# [1.47.0](https://github.com/dialpad/dialtone/compare/dialtone-tokens/v1.46.1...dialtone-tokens/v1.47.0) (2025-09-24)
+
+
+### Features
+
+* **Rich Text Editor:** DP-150640 implement markdown output ([#848](https://github.com/dialpad/dialtone/issues/848)) ([ff2110e](https://github.com/dialpad/dialtone/commit/ff2110ef949240c8796cb766ce6dd8ad07007519))
+
+## [1.46.1](https://github.com/dialpad/dialtone/compare/dialtone-tokens/v1.46.0...dialtone-tokens/v1.46.1) (2025-09-10)
+
+
+### Bug Fixes
+
+* **Tokens:** DLT-2766 sunflower dark and correct shell base references ([#908](https://github.com/dialpad/dialtone/issues/908)) ([a44aa57](https://github.com/dialpad/dialtone/commit/a44aa577c5117efd3f6e8318be8aadbd0c333375))
+
 # [1.46.0](https://github.com/dialpad/dialtone/compare/dialtone-tokens/v1.45.0...dialtone-tokens/v1.46.0) (2025-09-09)
 
 

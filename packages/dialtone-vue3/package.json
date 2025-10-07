@@ -1,6 +1,6 @@
 {
   "name": "@dialpad/dialtone-vue",
-  "version": "3.190.2",
+  "version": "3.192.0",
   "description": "Vue component library for Dialpad's design system Dialtone",
   "scripts": {
     "lint": "run-s lint:code lint:docs",
@@ -16,7 +16,7 @@
   "dependencies": {
     "@dialpad/dialtone-emojis": "workspace:*",
     "@dialpad/dialtone-icons": "workspace:*",
-    "@dialpad/i18n": "1.17.0-alpha.0",
+    "@dialpad/i18n": "1.20.1",
     "@tiptap/core": "2.12.0",
     "@tiptap/extension-blockquote": "2.12.0",
     "@tiptap/extension-bold": "2.12.0",
@@ -52,7 +52,8 @@
     "linkifyjs": "4.3.2",
     "overlayscrollbars": "2.10.0",
     "regex-combined-emojis": "1.6.0",
-    "tippy.js": "6.3.7"
+    "tippy.js": "6.3.7",
+    "turndown": "7.2.0"
   },
   "devDependencies": {
     "@dialpad/dialtone-css": "workspace:*",
@@ -63,7 +64,7 @@
     "@storybook/vue3": "7.6.20",
     "@storybook/vue3-vite": "7.6.20",
     "@vue/test-utils": "^2.4.0",
-    "react": "17.0.2",
+    "react": "^18.3.1",
     "storybook-dark-mode": "^3.0.3",
     "vue": "^3.3.4"
   },
@@ -84,11 +85,6 @@
       "name": "Francis Rupert",
       "email": "francis.rupert@dialpad.com",
       "url": "https://github.com/francisrupert"
-    },
-    {
-      "name": "Julio Ortega",
-      "email": "julio.ortega@dialpad.com",
-      "url": "https://github.com/juliodialpad"
     },
     {
       "name": "Ignacio Ropolo",

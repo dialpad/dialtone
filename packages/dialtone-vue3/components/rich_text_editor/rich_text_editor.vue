@@ -196,9 +196,9 @@ export default {
 
     /**
      * The output format that the editor uses when emitting the "@input" event.
-     * One of `text`, `json`, `html`. See https://tiptap.dev/guide/output for
+     * One of `text`, `json`, `html`, `markdown`. See https://tiptap.dev/guide/output for
      * examples.
-     * @values text, json, html
+     * @values text, json, html, markdown
      */
     outputFormat: {
       type: String,
@@ -438,6 +438,13 @@ export default {
     'text-input',
 
     /**
+     * Input event always in markdown format.
+     * @event input
+     * @type {String}
+     */
+    'markdown-input',
+
+    /**
      * Event to sync the value with the parent
      * @event update:value
      * @type {String|JSON}
@@ -498,6 +505,152 @@ export default {
       },
 
       i18n: new DialtoneLocalization(),
+
+      // JSON-to-markdown converter
+      jsonToMarkdownConverter: {
+        convertToMarkdown (doc) {
+          return this.processNode(doc);
+        },
+
+        processNodeContent (node) {
+          return node.content ? node.content.map(child => this.processNode(child)).join('') : '';
+        },
+
+        processNode (node) {
+          if (!node) return '';
+
+          const nodeTypeMap = {
+            doc: (node) => this.processDocNode(node),
+            paragraph: (node) => this.processParagraphNode(node),
+            text: (node) => this.processTextNode(node),
+            hardBreak: () => this.processHardBreakNode(),
+            blockquote: (node) => this.processBlockquoteNode(node),
+            bulletList: (node) => this.processBulletListNode(node),
+            orderedList: (node) => this.processOrderedListNode(node),
+            listItem: (node) => this.processListItemNode(node),
+            codeBlock: (node) => this.processCodeBlockNode(node),
+            mention: (node) => this.processMentionNode(node),
+            channel: (node) => this.processChannelNode(node),
+            'slash-commands': (node) => this.processSlashCommandsNode(node),
+            emoji: (node) => this.processEmojiNode(node),
+          };
+
+          const processor = nodeTypeMap[node.type];
+          return processor ? processor(node) : this.processUnknownNode(node);
+        },
+
+        processDocNode (node) {
+          return this.processNodeContent(node);
+        },
+
+        processParagraphNode (node) {
+          const paragraphContent = this.processNodeContent(node);
+          return paragraphContent ? paragraphContent + '\n' : '\n';
+        },
+
+        processTextNode (node) {
+          let text = node.text || '';
+          if (node.marks) {
+            text = this.applyMarks(text, node.marks);
+          }
+          return text;
+        },
+
+        processHardBreakNode () {
+          return '\n';
+        },
+
+        processBlockquoteNode (node) {
+          const blockquoteContent = this.processNodeContent(node);
+          return blockquoteContent.split('\n').map(line => line ? `> ${line}` : '>').join('\n') + '\n';
+        },
+
+        processBulletListNode (node) {
+          return this.processNodeContent(node);
+        },
+
+        processOrderedListNode (node) {
+          return node.content ? node.content.map((child, index) => {
+            const listItem = this.processNode(child);
+            return listItem.replace(/^- /, `${index + 1}. `);
+          }).join('') : '';
+        },
+
+        processListItemNode (node) {
+          const listContent = this.processNodeContent(node);
+          return listContent ? `- ${listContent.replace(/\n$/, '')}\n` : '';
+        },
+
+        processCodeBlockNode (node) {
+          const codeContent = this.processNodeContent(node);
+          return `\`\`\`\n${codeContent}\n\`\`\``;
+        },
+
+        processMentionNode (node) {
+          const mentionName = node.attrs?.name || '';
+          const mentionId = node.attrs?.id || '';
+          const contactKey = node.attrs?.contactKey || '';
+          return `<!-- @mention: {"id": "${mentionId}", "contactKey": "${contactKey}", "name": "${mentionName}"} -->`;
+        },
+
+        processChannelNode (node) {
+          const channelName = node.attrs?.name || '';
+          const channelId = node.attrs?.id || '';
+          const locked = node.attrs?.locked.toString() || '';
+          return `<!-- @channel: {"id": "${channelId}", "name": "${channelName}", "locked": "${locked}"} -->`;
+        },
+
+        processSlashCommandsNode (node) {
+          const command = node.attrs?.command || '';
+          const parameters = node.attrs?.parameters || '';
+          return `/${command}${parameters ? ` ${parameters}` : ''}`;
+        },
+
+        processEmojiNode (node) {
+          return node.attrs?.code || '';
+        },
+
+        processUnknownNode (node) {
+          return this.processNodeContent(node);
+        },
+
+        applyMarks (text, marks) {
+          let result = text;
+          // Apply marks in a specific order to handle nesting correctly
+          const orderedMarks = [...marks].sort((a, b) => {
+            const order = { 'link': 0, 'bold': 1, 'italic': 2, 'strike': 3, 'code': 4 };
+            return (order[a.type] || 5) - (order[b.type] || 5);
+          });
+
+          orderedMarks.forEach(mark => {
+            switch (mark.type) {
+              case 'bold':
+                result = `**${result}**`;
+                break;
+              case 'italic':
+                result = `*${result}*`;
+                break;
+              case 'strike':
+                result = `~~${result}~~`;
+                break;
+              case 'code':
+                result = `\`${result}\``;
+                break;
+              case 'link':
+                {
+                  const href = mark.attrs?.href || '';
+                  result = `[${result}](${href})`;
+                  break;
+                }
+              default:
+                // For unknown marks, leave text as-is
+                break;
+            }
+          });
+          return result;
+        },
+      },
+
     };
   },
 
@@ -820,7 +973,7 @@ export default {
       window.open(link, '_blank');
     },
 
-    // eslint-disable-next-line complexity
+
     setLink (linkInput, linkText, linkOptions, linkProtocols = RICH_TEXT_EDITOR_SUPPORTED_LINK_PROTOCOLS,
       defaultPrefix) {
       if (!linkInput) {
@@ -855,7 +1008,7 @@ export default {
         .run();
     },
 
-    // eslint-disable-next-line complexity
+
     processValue (newValue, returnIfEqual = true) {
       const currentValue = this.getOutput();
 
@@ -1004,9 +1157,13 @@ export default {
       const htmlValue = this.editor.getHTML();
       this.$emit('html-input', htmlValue);
 
-      // Always output HTML in a separate event
+      // Always output text in a separate event
       const textValue = this.editor.getText({ blockSeparator: '\n' });
       this.$emit('text-input', textValue);
+
+      // Always output markdown in a separate event
+      const markdownValue = this.jsonToMarkdownConverter.convertToMarkdown(jsonValue);
+      this.$emit('markdown-input', markdownValue);
     },
 
     /**
@@ -1043,6 +1200,8 @@ export default {
           return this.editor.getJSON();
         case 'html':
           return this.editor.getHTML();
+        case 'markdown':
+          return this.jsonToMarkdownConverter.convertToMarkdown(this.editor.getJSON());
         case 'text':
         default:
           return this.editor.getText({ blockSeparator: '\n' });

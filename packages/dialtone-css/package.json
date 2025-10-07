@@ -1,6 +1,6 @@
 {
   "name": "@dialpad/dialtone-css",
-  "version": "8.64.2",
+  "version": "8.64.4",
   "description": "Dialpad's design system",
   "keywords": [
     "Dialpad",
@@ -23,11 +23,6 @@
       "name": "Francis Rupert",
       "email": "francis.rupert@dialpad.com",
       "url": "https://github.com/francisrupert"
-    },
-    {
-      "name": "Julio Ortega",
-      "email": "julio.ortega@dialpad.com",
-      "url": "https://github.com/juliodialpad"
     },
     {
       "name": "Ignacio Ropolo",

@@ -240,7 +240,7 @@ export default {
 
     /**
      * Additional class name for the input wrapper element.
-     * Can accept all of String, Object, and Array, i.e. has the
+     * Can accept all of: String, Object, and Array, i.e. has the
      * same api as Vue's built-in handling of the class attribute.
      */
     inputWrapperClass: {
@@ -250,7 +250,7 @@ export default {
 
     /**
      * Additional class name for the root element.
-     * Can accept all of String, Object, and Array, i.e. has the
+     * Can accept all of: String, Object, and Array, i.e. has the
      * same api as Vue's built-in handling of the class attribute.
      */
     rootClass: {

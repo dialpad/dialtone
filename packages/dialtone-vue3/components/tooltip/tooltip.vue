@@ -182,7 +182,7 @@ export default {
 
     /**
      * Additional css classes for the tooltip content element.
-     * Can accept all of String, Object, and Array, i.e. has the
+     * Can accept all of: String, Object, and Array, i.e. has the
      * same api as Vue's built-in handling of the class attribute.
      */
     contentClass: {
@@ -291,7 +291,7 @@ export default {
   },
 
   computed: {
-     
+
     tippyProps () {
       return {
         offset: this.offset,
@@ -337,6 +337,8 @@ export default {
     },
 
     internalShow (value) {
+      if (!this.tip) return;
+
       if (value) {
         this.setProps();
         this.tip.show();

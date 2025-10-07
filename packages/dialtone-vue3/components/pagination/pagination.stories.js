@@ -7,6 +7,7 @@ import DtPaginationVariantsTemplate from './pagination_variants.story.vue';
 
 // Default Prop Values
 export const argsData = {
+  ariaLabel: 'pagination',
   totalPages: 5,
   activePage: 1,
   maxVisible: 5,

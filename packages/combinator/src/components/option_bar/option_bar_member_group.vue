@@ -9,27 +9,6 @@
         class="d-py6"
         data-qa="dtc-option-bar-member-group-control"
       >
-        <div class="d-d-flex d-ai-center d-jc-space-between d-pb2">
-          <dtc-option-bar-control-selector
-            :selected="member.control"
-            :controls="member.validControls"
-            :types="member.types"
-            :disabled="member.lockControl"
-            @update:control="(e) => updateControl(e, key)"
-          />
-          <dt-button
-            v-if="hasDefaultValue(member)"
-            class="dtc-icon d-p4"
-            importance="clear"
-            size="sm"
-            :disabled="member.lockControl"
-            @click="() => resetMember(key)"
-          >
-            <template #icon="{ iconSize }">
-              <dt-icon-undo-2 :size="iconSize" />
-            </template>
-          </dt-button>
-        </div>
         <dtc-option-bar-control
           :value="values[key]"
           :label="member.label"
@@ -54,10 +33,7 @@
 </template>
 
 <script setup>
-import DtcOptionBarControlSelector from '@/src/components/option_bar/option_bar_control_selector.vue';
 import DtcOptionBarControl from './option_bar_control.vue';
-import { DtIconUndo2 } from '@dialpad/dialtone-icons/vue3';
-import { DtButton } from '@dialpad/dialtone-vue';
 import { MEMBER_UPDATE_EVENT } from '@/src/lib/constants';
 import { computed, reactive } from 'vue';
 import { convert } from '@/src/lib/convert';
@@ -170,17 +146,6 @@ function extendMember (member) {
     control,
     validControls,
   };
-}
-
-/**
- * Resets the control to default value.
- *
- * @param key
- */
-function resetMember (key) {
-  const member = memberMap.value[key];
-
-  updateMember(member.defaultValue, key);
 }
 
 /**
