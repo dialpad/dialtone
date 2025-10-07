@@ -1,7 +1,7 @@
 <template>
   <span
     data-qa="dt-split-button"
-    class="d-split-btn"
+    :class="[rootClass, 'd-split-btn']"
     :style="{ width }"
   >
     <split-button-alpha
@@ -253,6 +253,16 @@ export default {
     width: {
       type: String,
       default: null,
+    },
+
+    /**
+     * Additional class name for the root element.
+     * Can accept all of: String, Object, and Array, i.e. has the
+     * same api as Vue's built-in handling of the class attribute.
+     */
+    rootClass: {
+      type: [String, Object, Array],
+      default: '',
     },
   },
 

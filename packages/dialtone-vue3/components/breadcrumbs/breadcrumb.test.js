@@ -2,6 +2,8 @@ import { mount } from '@vue/test-utils';
 import DtBreadcrumb from './breadcrumbs.vue';
 import { BREADCRUMB_ITEM_SELECTED_MODIFIER, BREADCRUMBS_INVERTED_MODIFIER } from './breadcrumbs_constants';
 
+const MOCK_ROOT_CLASS = 'custom-class';
+
 const baseProps = {
   inverted: false,
   breadcrumbs: [{
@@ -115,6 +117,24 @@ describe('DtBreadcrumb Tests', () => {
         updateWrapper();
 
         expect(breadcrumbs.attributes('aria-label')).toBe('newAria');
+      });
+    });
+  });
+
+  describe('Extendability Tests', () => {
+    describe('When a rootClass is provided to a breadcrumb item', () => {
+      it('should include the root class', () => {
+        mockProps = {
+          breadcrumbs: [{
+            url: '#',
+            label: 'Root',
+            rootClass: MOCK_ROOT_CLASS,
+          }],
+        }
+
+        updateWrapper();
+
+        expect(breadcrumbItems[0].classes().includes(MOCK_ROOT_CLASS)).toBe(true);
       });
     });
   });

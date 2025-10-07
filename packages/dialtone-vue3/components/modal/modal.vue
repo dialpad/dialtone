@@ -1,116 +1,122 @@
 <template>
-  <dt-lazy-show
-    transition="d-zoom"
-    :show="show"
-    :class="[
-      'd-modal',
-      MODAL_KIND_MODIFIERS[kind],
-      MODAL_SIZE_MODIFIERS[size],
-      modalClass,
-    ]"
-    data-qa="dt-modal"
-    :aria-hidden="open"
-    v-on="modalListeners"
+  <teleport
+    :disabled="!appendTo"
+    :to="appendTo"
   >
-    <div
-      v-if="show && (hasSlotContent($slots.banner) || bannerTitle)"
-      data-qa="dt-modal-banner"
+    <dt-lazy-show
+      ref="modalRoot"
+      transition="d-zoom"
+      :show="show"
       :class="[
-        'd-modal__banner',
-        bannerClass,
-        bannerKindClass,
+        'd-modal',
+        MODAL_KIND_MODIFIERS[kind],
+        MODAL_SIZE_MODIFIERS[size],
+        modalClass,
       ]"
-    >
-      <!-- @slot Slot for the banner, defaults to bannerTitle prop -->
-      <slot name="banner">
-        {{ bannerTitle }}
-      </slot>
-    </div>
-    <transition
-      appear
-      name="d-modal__dialog"
+      data-qa="dt-modal"
+      :aria-hidden="open"
+      v-on="modalListeners"
     >
       <div
-        v-show="show"
+        v-if="show && (hasSlotContent($slots.banner) || bannerTitle)"
+        data-qa="dt-modal-banner"
         :class="[
-          'd-modal__dialog',
-          { 'd-modal__dialog--scrollable': fixedHeaderFooter },
-          dialogClass,
+          'd-modal__banner',
+          bannerClass,
+          bannerKindClass,
         ]"
-        role="dialog"
-        aria-modal="true"
-        :aria-describedby="describedById"
-        :aria-labelledby="labelledById"
+      >
+        <!-- @slot Slot for the banner, defaults to bannerTitle prop -->
+        <slot name="banner">
+          {{ bannerTitle }}
+        </slot>
+      </div>
+      <transition
+        appear
+        name="d-modal__dialog"
       >
         <div
-          v-if="hasSlotContent($slots.header)"
-          :id="labelledById"
-          class="d-modal__header"
-          data-qa="dt-modal-title"
-        >
-          <!-- @slot Slot for dialog header section, taking the place of any "title" text prop -->
-          <slot name="header" />
-        </div>
-        <h2
-          v-else
-          :id="labelledById"
-          class="d-modal__header"
-          data-qa="dt-modal-title"
-        >
-          {{ title }}
-        </h2>
-        <div
-          v-if="hasSlotContent($slots.default)"
+          v-show="show"
           :class="[
-            'd-modal__content',
-            contentClass,
+            'd-modal__dialog',
+            { 'd-modal__dialog--scrollable': fixedHeaderFooter },
+            dialogClass,
           ]"
-          data-qa="dt-modal-copy"
+          role="dialog"
+          aria-modal="true"
+          :aria-describedby="describedById"
+          :aria-labelledby="labelledById"
         >
-          <!-- @slot Default slot for dialog body section, taking the place of any "copy" text prop -->
-          <slot />
+          <div
+            v-if="hasSlotContent($slots.header)"
+            :id="labelledById"
+            class="d-modal__header"
+            data-qa="dt-modal-title"
+          >
+            <!-- @slot Slot for dialog header section, taking the place of any "title" text prop -->
+            <slot name="header" />
+          </div>
+          <h2
+            v-else
+            :id="labelledById"
+            class="d-modal__header"
+            data-qa="dt-modal-title"
+          >
+            {{ title }}
+          </h2>
+          <div
+            v-if="hasSlotContent($slots.default)"
+            :class="[
+              'd-modal__content',
+              contentClass,
+            ]"
+            data-qa="dt-modal-copy"
+          >
+            <!-- @slot Default slot for dialog body section, taking the place of any "copy" text prop -->
+            <slot />
+          </div>
+          <p
+            v-else
+            :class="[
+              'd-modal__content',
+              contentClass,
+            ]"
+            data-qa="dt-modal-copy"
+          >
+            {{ copy }}
+          </p>
+          <footer
+            v-if="hasFooterSlot"
+            class="d-modal__footer"
+          >
+            <!-- @slot Slot for dialog footer content, often containing cancel and confirm buttons. -->
+            <slot name="footer" />
+          </footer>
+          <sr-only-close-button
+            v-if="hideClose"
+            @close="close"
+          />
+          <dt-button
+            v-else
+            class="d-modal__close"
+            data-qa="dt-modal-close-button"
+            size="md"
+            kind="muted"
+            importance="clear"
+            :aria-label="closeButtonTitle"
+            :title="closeButtonTitle"
+            @click="close"
+          >
+            <template #icon="{ iconSize }">
+              <dt-icon-close
+                :size="iconSize"
+              />
+            </template>
+          </dt-button>
         </div>
-        <p
-          v-else
-          :class="[
-            'd-modal__content',
-            contentClass,
-          ]"
-          data-qa="dt-modal-copy"
-        >
-          {{ copy }}
-        </p>
-        <footer
-          v-if="hasFooterSlot"
-          class="d-modal__footer"
-        >
-          <!-- @slot Slot for dialog footer content, often containing cancel and confirm buttons. -->
-          <slot name="footer" />
-        </footer>
-        <sr-only-close-button
-          v-if="hideClose"
-          @close="close"
-        />
-        <dt-button
-          v-else
-          class="d-modal__close"
-          data-qa="dt-modal-close-button"
-          size="md"
-          kind="muted"
-          importance="clear"
-          :aria-label="closeButtonTitle"
-          :title="closeButtonTitle"
-          @click="close"
-        >
-          <template #icon="{ iconSize }">
-            <dt-icon-close
-              :size="iconSize"
-            />
-          </template>
-        </dt-button>
-      </div>
-    </transition>
-  </dt-lazy-show>
+      </transition>
+    </dt-lazy-show>
+  </teleport>
 </template>
 
 <script>
@@ -316,6 +322,14 @@ export default {
           initialFocusElement.startsWith('#');
       },
     },
+
+    /**
+     * A CSS selector string for the element to portal the modal to. If not provided, the modal will be rendered in its default location.
+     */
+    appendTo: {
+      type: String,
+      default: undefined,
+    },
   },
 
   emits: [
@@ -391,9 +405,10 @@ export default {
 
         focusin: event => {
           // Ensure focus stays within modal
-          if (this.show && !this.$el.contains(event.target)) {
+          const modalEl = this.$refs.modalRoot?.$el || this.$el;
+          if (this.show && modalEl && !modalEl.contains(event.target)) {
             event.preventDefault();
-            this.focusFirstElement();
+            this.focusFirstElement(modalEl);
           }
         },
       };
@@ -422,9 +437,11 @@ export default {
         if (isShowing) {
           // Set a reference to the previously-active element, to which we'll return focus on modal close.
           this.previousActiveElement = document.activeElement;
-          disableRootScrolling(returnFirstEl(this.$el).getRootNode().host);
+          const modalEl = this.$refs.modalRoot?.$el || this.$el;
+          disableRootScrolling(returnFirstEl(modalEl).getRootNode().host);
         } else {
-          enableRootScrolling(returnFirstEl(this.$el).getRootNode().host);
+          const modalEl = this.$refs.modalRoot?.$el || this.$el;
+          enableRootScrolling(returnFirstEl(modalEl).getRootNode().host);
           // Modal is being hidden, so return focus to the previously active element before clearing the reference.
           this.previousActiveElement?.focus();
           this.previousActiveElement = null;
@@ -439,8 +456,9 @@ export default {
     },
 
     async setFocusAfterTransition () {
+      const modalEl = this.$refs.modalRoot?.$el || this.$el;
       if (this.initialFocusElement === 'first') {
-        await this.focusFirstElement();
+        await this.focusFirstElement(modalEl);
       } else if (this.initialFocusElement.startsWith('#')) {
         await this.focusElementById(this.initialFocusElement);
       } else if (this.initialFocusElement instanceof HTMLElement) {
@@ -450,20 +468,22 @@ export default {
 
     trapFocus (e) {
       if (this.show) {
-        this.focusTrappedTabPress(e);
+        const modalEl = this.$refs.modalRoot?.$el || this.$el;
+        this.focusTrappedTabPress(e, modalEl);
       }
     },
 
     handleModalClick (event) {
       // Ensure focus stays within modal when clicking inside it
       const clickedElement = event.target;
-      const focusableElements = this._getFocusableElements();
+      const modalEl = this.$refs.modalRoot?.$el || this.$el;
+      const focusableElements = this._getFocusableElements(modalEl);
 
       // If the clicked element is not focusable, ensure focus stays in modal
       if (focusableElements.length && !focusableElements.includes(clickedElement)) {
         // Check if current active element is still within the modal
         if (!focusableElements.includes(document.activeElement)) {
-          this.focusFirstElement();
+          this.focusFirstElement(modalEl);
         }
       }
     },

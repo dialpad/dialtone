@@ -14,6 +14,7 @@
     :description-child-props="$attrs.descriptionChildProps"
     :indeterminate="$attrs.indeterminate"
     :messages="$attrs.messages"
+    :root-class="$attrs.rootClass"
     @input="$attrs.onInput"
     @focusin="$attrs.onFocusIn"
     @focusout="$attrs.onFocusOut"

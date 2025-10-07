@@ -9,6 +9,7 @@ const MOCK_INPUT_LISTENER_SPY = vi.fn();
 const MOCK_GROUP_NAME = 'checkboxGroup';
 
 let MOCK_ELEMENT = null;
+const MOCK_ROOT_CLASS = 'custom-class';
 const MOCK_CUSTOM_CLASS = 'my-custom-class';
 const MOCK_PROP_NAME = 'some';
 const MOCK_PROP_VALUE = 'prop';
@@ -499,6 +500,16 @@ describe('DtCheckbox Tests', () => {
         MOCK_ELEMENT = input;
 
         expect(MOCK_ELEMENT.attributes(MOCK_PROP_NAME)).toBe(MOCK_PROP_VALUE);
+      });
+    });
+
+    describe('When a rootClass is provided', () => {
+      it('should include the root class', () => {
+        mockProps = { rootClass: MOCK_ROOT_CLASS }
+
+        updateWrapper();
+
+        expect(wrapper.classes().includes(MOCK_ROOT_CLASS)).toBe(true);
       });
     });
   });

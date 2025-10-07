@@ -41,19 +41,19 @@ jobs:
         id: branch-name
         uses: tj-actions/branch-names@v8
 
-  check-dialpad-member:
-    runs-on: ubuntu-latest
-    steps:
-      # Will prevent the rest of the steps from running on fail
-      - name: Check if user is a dialpad member
-        uses: octokit/request-action@v2.x
-        env:
-          GITHUB_TOKEN: ${{ secrets.DIALTONE_CI_TOKEN_2 }}
-        with:
-          route: GET /orgs/dialpad/members/${{ github.actor }}
+  # check-dialpad-member:
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     # Will prevent the rest of the steps from running on fail
+  #     - name: Check if user is a dialpad member
+  #       uses: octokit/request-action@v2.x
+  #       env:
+  #         GITHUB_TOKEN: ${{ secrets.DIALTONE_CI_TOKEN }}
+  #       with:
+  #         route: GET /orgs/dialpad/members/${{ github.actor }}
 
   release:
-    needs: [get-branch-name, check-dialpad-member]
+    needs: [get-branch-name]
     if: ${{ contains(fromJSON('["staging", "alpha", "beta", "next"]'), needs.get-branch-name.outputs.current_branch) }}
     runs-on: ubuntu-latest
     permissions:
@@ -71,7 +71,7 @@ jobs:
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
-          token: ${{ secrets.DIALTONE_CI_TOKEN_2 }}
+          token: ${{ secrets.DIALTONE_CI_TOKEN }}
 
       - name: Use pnpm
         uses: pnpm/action-setup@v3
@@ -155,7 +155,7 @@ jobs:
         with:
           ref: 'production'
           fetch-depth: 0
-          token: ${{ secrets.DIALTONE_CI_TOKEN_2 }}
+          token: ${{ secrets.DIALTONE_CI_TOKEN }}
 
       - name: Merge changes to production
         run: |

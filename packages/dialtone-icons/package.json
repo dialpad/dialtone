@@ -1,6 +1,6 @@
 {
   "name": "@dialpad/dialtone-icons",
-  "version": "4.44.1-next.1",
+  "version": "4.44.1",
   "description": "Dialtone icon library",
   "files": [
     "dist",
@@ -69,11 +69,6 @@
       "name": "Francis Rupert",
       "email": "francis.rupert@dialpad.com",
       "url": "https://github.com/francisrupert"
-    },
-    {
-      "name": "Julio Ortega",
-      "email": "julio.ortega@dialpad.com",
-      "url": "https://github.com/juliodialpad"
     },
     {
       "name": "Ignacio Ropolo",
