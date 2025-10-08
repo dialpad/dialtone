@@ -8,62 +8,116 @@ storybook: https://dialtone.dialpad.com/vue/?path=/story/components-badge--defau
 figma_url: https://www.figma.com/design/W58r5BkO8qTw3vem9YieJd/DT9-Component-Library--Rebrand-2025-?node-id=2128-0
 ---
 
-<dt-stack direction="row" gap="500">
-  <mode-island mode="light">
-    <div style="font: var(--dt-typography-code-sm); border: 1px solid var(--dt-color-border-default); color: var(--dt-color-foreground-primary); background-color: var(--dt-color-surface-primary); padding: 16px;">
-      <strong style="font: var(--dt-typography-code-md); font-weight: bold">mode="light"</strong>
-      <div style="background-color: var(--dt-color-surface-secondary);">
-        background-color: var(--dt-color-surface-secondary);
+<dt-stack direction="row" gap="500" class="d-mb32">
+  <mode-island
+    mode="light"
+    class="d-fl1 d-code--sm d-fc-primary d-bgc-primary d-ba d-bc-subtle d-p16"
+  >
+    <dt-stack gap="400">
+      <strong class="d-code--md">mode="<strong>light</strong>"</strong>
+      <div class="d-ba d-bc-subtle d-p8 d-bgc-secondary">
+        d-bgc-secondary
       </div>
-      <div style="background-color: var(--dt-color-surface-critical);">
-        background-color: var(--dt-color-surface-critical);
+      <div class="d-ba d-bc-subtle d-p8 d-bgc-critical">
+        d-bgc-critical
       </div>
-      <div style="color: var(--dt-color-foreground-critical);">
-        color: var(--dt-color-foreground-critical);
+      <div class="d-ba d-bc-subtle d-p8 d-fc-critical">
+        d-fc-critical
       </div>
-      <div style="color: var(--dt-color-foreground-tertiary);">
-        color: var(--dt-color-foreground-tertiary);
+      <div class="d-ba d-bc-subtle d-p8 d-fc-tertiary">
+        d-fc-tertiary
       </div>
-    </div>
+      <dt-stack gap="300" direction="row" class="d-jc-space-between">
+        <dt-badge kind="count" text="8"></dt-badge>
+        <dt-badge kind="count" text="8" type="info"></dt-badge>
+        <dt-badge kind="count" text="8" type="success"></dt-badge>
+        <dt-badge kind="count" text="8" type="warning"></dt-badge>
+        <dt-badge kind="count" text="8" type="critical"></dt-badge>
+        <dt-badge kind="count" text="8" type="bulletin"></dt-badge>
+        <dt-badge kind="count" text="8" type="ai"></dt-badge>
+      </dt-stack>
+      <dt-stack gap="300" direction="row" class="d-jc-space-between">
+        <dt-button size="sm">bt</dt-button>
+        <dt-button size="sm" importance="clear" kind="muted">bt</dt-button>
+        <dt-button size="sm" importance="outlined" kind="muted">bt</dt-button>
+        <dt-button size="sm" kind="danger">bt</dt-button>
+        <dt-button size="sm" kind="positive">bt</dt-button>
+      </dt-stack>
+    </dt-stack>
   </mode-island>
-  <mode-island mode="dark">
-    <div style="font: var(--dt-typography-code-sm); border: 1px solid var(--dt-color-border-default); color: var(--dt-color-foreground-primary); background-color: var(--dt-color-surface-primary); padding: 16px;">
-      <strong style="font: var(--dt-typography-code-md); font-weight: bold">mode="dark"</strong>
-      <div style="background-color: var(--dt-color-surface-secondary);">
-        background-color: var(--dt-color-surface-secondary);
+  <mode-island
+    mode="dark"
+    class="d-fl1 d-code--sm d-fc-primary d-bgc-primary d-ba d-bc-subtle d-p16"
+  >
+    <dt-stack gap="400">
+      <strong class="d-code--md">mode="<strong>dark</strong>"</strong>
+      <div class="d-ba d-bc-subtle d-p8 d-bgc-secondary">
+        d-bgc-secondary
       </div>
-      <div style="background-color: var(--dt-color-surface-critical);">
-        background-color: var(--dt-color-surface-critical);
+      <div class="d-ba d-bc-subtle d-p8 d-bgc-critical">
+        d-bgc-critical
       </div>
-      <div style="color: var(--dt-color-foreground-critical);">
-        color: var(--dt-color-foreground-critical);
+      <div class="d-ba d-bc-subtle d-p8 d-fc-critical">
+        d-fc-critical
       </div>
-      <div style="color: var(--dt-color-foreground-tertiary);">
-        color: var(--dt-color-foreground-tertiary);
+      <div class="d-ba d-bc-subtle d-p8 d-fc-tertiary">
+        d-fc-tertiary
       </div>
-    </div>
+      <dt-stack gap="300" direction="row" class="d-jc-space-between">
+        <dt-badge kind="count" text="8"></dt-badge>
+        <dt-badge kind="count" text="8" type="info"></dt-badge>
+        <dt-badge kind="count" text="8" type="success"></dt-badge>
+        <dt-badge kind="count" text="8" type="warning"></dt-badge>
+        <dt-badge kind="count" text="8" type="critical"></dt-badge>
+        <dt-badge kind="count" text="8" type="bulletin"></dt-badge>
+        <dt-badge kind="count" text="8" type="ai"></dt-badge>
+      </dt-stack>
+      <dt-stack gap="300" direction="row" class="d-jc-space-between">
+        <dt-button size="sm">bt</dt-button>
+        <dt-button size="sm" importance="clear" kind="muted">bt</dt-button>
+        <dt-button size="sm" importance="outlined" kind="muted">bt</dt-button>
+        <dt-button size="sm" kind="danger">bt</dt-button>
+        <dt-button size="sm" kind="positive">bt</dt-button>
+      </dt-stack>
+    </dt-stack>
   </mode-island>
-  <mode-island mode="inverted">
-    <div style="font: var(--dt-typography-code-sm); border: 1px solid var(--dt-color-border-default); color: var(--dt-color-foreground-primary); background-color: var(--dt-color-surface-primary); padding: 16px;">
-      <strong style="font: var(--dt-typography-code-md); font-weight: bold">mode="inverted"</strong>
-      <div style="background-color: var(--dt-color-surface-secondary);">
-        background-color: var(--dt-color-surface-secondary);
+  <mode-island
+    mode="inverted"
+    class="d-fl1 d-code--sm d-fc-primary d-bgc-primary d-ba d-bc-subtle d-p16"
+  >
+    <dt-stack gap="400">
+      <strong class="d-code--md">mode="<strong>inverted</strong>"</strong>
+      <div class="d-ba d-bc-subtle d-p8 d-bgc-secondary">
+        d-bgc-secondary
       </div>
-      <div style="background-color: var(--dt-color-surface-critical);">
-        background-color: var(--dt-color-surface-critical);
+      <div class="d-ba d-bc-subtle d-p8 d-bgc-critical">
+        d-bgc-critical
       </div>
-      <div style="color: var(--dt-color-foreground-critical);">
-        color: var(--dt-color-foreground-critical);
+      <div class="d-ba d-bc-subtle d-p8 d-fc-critical">
+        d-fc-critical
       </div>
-      <div style="color: var(--dt-color-foreground-tertiary);">
-        color: var(--dt-color-foreground-tertiary);
+      <div class="d-ba d-bc-subtle d-p8 d-fc-tertiary">
+        d-fc-tertiary
       </div>
-    </div>
+      <dt-stack gap="300" direction="row" class="d-jc-space-between">
+        <dt-badge kind="count" text="8"></dt-badge>
+        <dt-badge kind="count" text="8" type="info"></dt-badge>
+        <dt-badge kind="count" text="8" type="success"></dt-badge>
+        <dt-badge kind="count" text="8" type="warning"></dt-badge>
+        <dt-badge kind="count" text="8" type="critical"></dt-badge>
+        <dt-badge kind="count" text="8" type="bulletin"></dt-badge>
+        <dt-badge kind="count" text="8" type="ai"></dt-badge>
+      </dt-stack>
+      <dt-stack gap="300" direction="row" class="d-jc-space-between">
+        <dt-button size="sm">bt</dt-button>
+        <dt-button size="sm" importance="clear" kind="muted">bt</dt-button>
+        <dt-button size="sm" importance="outlined" kind="muted">bt</dt-button>
+        <dt-button size="sm" kind="danger">bt</dt-button>
+        <dt-button size="sm" kind="positive">bt</dt-button>
+      </dt-stack>
+    </dt-stack>
   </mode-island>
 </dt-stack>
-
-
-asdf
 
 <code-well-header>
   <dt-stack direction="row" gap="400" class="d-ai-center">

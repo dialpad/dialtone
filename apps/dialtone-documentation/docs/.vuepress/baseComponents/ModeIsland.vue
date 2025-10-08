@@ -8,8 +8,10 @@
 
 <script setup>
 import { ref, onMounted, onUnmounted, inject, watch, computed } from 'vue';
+import dialtoneCSS from '@dialpad/dialtone-css/lib/dist/dialtone.css?inline';
 
 const STYLE_IDS = {
+  UTILITIES: 'dialtone-css-utilities',
   THEME: 'dialtone-css-theme',
   BRAND: 'dialtone-css-brand',
   CONTRAST: 'dialtone-css-contrast',
@@ -155,7 +157,14 @@ onMounted(() => {
     const shadowRoot = hostElement.value.attachShadow({ mode: 'open' });
     shadowRootRef.value = shadowRoot;
 
-    // Apply initial theme (styles must be injected before content)
+    // Inject Dialtone CSS utilities (required for utility classes to work in shadow DOM)
+    const utilitiesStyle = document.createElement('style');
+    utilitiesStyle.setAttribute('type', 'text/css');
+    utilitiesStyle.setAttribute('id', STYLE_IDS.UTILITIES);
+    utilitiesStyle.innerHTML = dialtoneCSS;
+    shadowRoot.appendChild(utilitiesStyle);
+
+    // Apply theme (injects theme CSS variables into shadow root)
     applyTheme(shadowRoot, themeName.value, currentContrast.value);
 
     // Move slot content into shadow root
