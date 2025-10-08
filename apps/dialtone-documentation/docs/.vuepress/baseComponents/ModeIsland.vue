@@ -17,6 +17,17 @@ const STYLE_IDS = {
   CONTRAST: 'dialtone-css-contrast',
 };
 
+// Shared CSSStyleSheet for all ModeIsland instances (created once, reused)
+let sharedDialtoneSheet = null;
+const getSharedDialtoneSheet = async () => {
+  if (!sharedDialtoneSheet) {
+    sharedDialtoneSheet = new CSSStyleSheet();
+    await sharedDialtoneSheet.replace(dialtoneCSS);
+    console.log('✓ Shared Dialtone stylesheet created');
+  }
+  return sharedDialtoneSheet;
+};
+
 const props = defineProps({
   mode: {
     type: String,
@@ -146,7 +157,7 @@ if (props.mode === 'inverted') {
   });
 }
 
-onMounted(() => {
+onMounted(async () => {
   if (!hostElement.value || !slotContent.value) {
     console.error('ModeIsland: Required refs not found');
     return;
@@ -157,12 +168,9 @@ onMounted(() => {
     const shadowRoot = hostElement.value.attachShadow({ mode: 'open' });
     shadowRootRef.value = shadowRoot;
 
-    // Inject Dialtone CSS utilities (required for utility classes to work in shadow DOM)
-    const utilitiesStyle = document.createElement('style');
-    utilitiesStyle.setAttribute('type', 'text/css');
-    utilitiesStyle.setAttribute('id', STYLE_IDS.UTILITIES);
-    utilitiesStyle.innerHTML = dialtoneCSS;
-    shadowRoot.appendChild(utilitiesStyle);
+    // Inject Dialtone CSS utilities using adoptedStyleSheets (shared across all instances)
+    const dialtoneSheet = await getSharedDialtoneSheet();
+    shadowRoot.adoptedStyleSheets = [dialtoneSheet];
 
     // Apply theme (injects theme CSS variables into shadow root)
     applyTheme(shadowRoot, themeName.value, currentContrast.value);
