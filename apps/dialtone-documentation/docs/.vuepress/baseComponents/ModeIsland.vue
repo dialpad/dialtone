@@ -1,5 +1,5 @@
 <template>
-  <div ref="hostElement" class="mode-island-host">
+  <div ref="hostElement">
     <div ref="slotContent">
       <slot />
     </div>
@@ -32,10 +32,13 @@ const themes = inject('themes', {});
 const currentMode = inject('currentMode', ref('light'));
 const currentContrast = inject('currentContrast', ref('default'));
 
+// Track system color scheme preference as a reactive value
+const systemPrefersDark = ref(window.matchMedia('(prefers-color-scheme: dark)').matches);
+
 // Computed: Get the effective page mode (resolves 'system' to actual mode)
 const effectivePageMode = computed(() => {
   if (currentMode.value === 'system') {
-    return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+    return systemPrefersDark.value ? 'dark' : 'light';
   }
   return currentMode.value;
 });
@@ -119,22 +122,26 @@ const updateTheme = () => {
 // Setup watchers
 let mediaQueryCleanup = null;
 
+// Watch system color scheme preference
+const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
+const handleSystemChange = (e) => {
+  systemPrefersDark.value = e.matches;
+};
+mediaQuery.addEventListener('change', handleSystemChange);
+mediaQueryCleanup = () => mediaQuery.removeEventListener('change', handleSystemChange);
+
 // Watch contrast changes (all modes)
 watch(currentContrast, updateTheme);
 
-// Watch for inverted mode changes
+// Watch for inverted mode changes (mode changes trigger themeName computed update)
 if (props.mode === 'inverted') {
   watch(currentMode, updateTheme);
-
-  // Watch system color scheme when page is in 'system' mode
-  const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
-  const handleSystemChange = () => {
-    if (currentMode.value === 'system') {
+  // Watch themeName changes (reactive to systemPrefersDark and currentMode)
+  watch(themeName, (newTheme, oldTheme) => {
+    if (newTheme !== oldTheme) {
       updateTheme();
     }
-  };
-  mediaQuery.addEventListener('change', handleSystemChange);
-  mediaQueryCleanup = () => mediaQuery.removeEventListener('change', handleSystemChange);
+  });
 }
 
 onMounted(() => {
@@ -148,16 +155,13 @@ onMounted(() => {
     const shadowRoot = hostElement.value.attachShadow({ mode: 'open' });
     shadowRootRef.value = shadowRoot;
 
-    // Move slot content into shadow root
-    const wrapper = document.createElement('div');
-    wrapper.className = 'mode-island-wrapper';
-    while (slotContent.value.firstChild) {
-      wrapper.appendChild(slotContent.value.firstChild);
-    }
-    shadowRoot.appendChild(wrapper);
-
-    // Apply initial theme
+    // Apply initial theme (styles must be injected before content)
     applyTheme(shadowRoot, themeName.value, currentContrast.value);
+
+    // Move slot content into shadow root
+    while (slotContent.value.firstChild) {
+      shadowRoot.appendChild(slotContent.value.firstChild);
+    }
 
     console.log('✓ ModeIsland initialized:', { mode: props.mode, theme: themeName.value, contrast: currentContrast.value });
   } catch (error) {
