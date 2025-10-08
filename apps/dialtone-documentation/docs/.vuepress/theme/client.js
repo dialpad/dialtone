@@ -44,6 +44,7 @@ export default defineClientConfig({
       await registerDialtoneVue(app);
       await registerDialtoneCombinator(app);
       await registerDialtoneIcons(app);
+      await registerBaseComponents(app);
       await importDocumentation(app);
       await importDialtoneThemes(app);
     }
@@ -170,8 +171,22 @@ async function importDocumentation (app) {
   }
 }
 
+async function registerBaseComponents (app) {
+  try {
+    const ModeIsland = (await import('../baseComponents/ModeIsland.vue')).default;
+    app.component('ModeIsland', ModeIsland);
+    console.info('✓ ModeIsland component registered');
+  } catch (error) {
+    console.error(`Couldn't register base components: ${error}`);
+  }
+}
+
 async function importDialtoneThemes (app) {
   try {
+    // Import setTheme config function from source
+    const { setTheme } = await import('@dialpad/dialtone-tokens/themes/config');
+    app.provide('setTheme', setTheme);
+
     // Import all available themes
     const dialtoneThemeFiles = {
       // Core themes

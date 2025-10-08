@@ -8,6 +8,62 @@ storybook: https://dialtone.dialpad.com/vue/?path=/story/components-badge--defau
 figma_url: https://www.figma.com/design/W58r5BkO8qTw3vem9YieJd/DT9-Component-Library--Rebrand-2025-?node-id=2128-0
 ---
 
+<mode-island mode="light">
+  <div style="color: var(--dt-color-foreground-primary); background-color: var(--dt-color-surface-primary); padding: 16px;">
+    <strong style="font: var(--dt-typography-code-md); font-weight: bold">mode="light"</strong>
+    <div style="background-color: var(--dt-color-surface-secondary);">
+      background-color: var(--dt-color-surface-secondary);
+    </div>
+    <div style="background-color: var(--dt-color-surface-critical);">
+      background-color: var(--dt-color-surface-critical);
+    </div>
+    <div style="color: var(--dt-color-foreground-critical);">
+      color: var(--dt-color-foreground-critical);
+    </div>
+    <div style="color: var(--dt-color-foreground-tertiary);">
+      color: var(--dt-color-foreground-tertiary);
+    </div>
+  </div>
+</mode-island>
+
+<mode-island mode="dark">
+  <div style="color: var(--dt-color-foreground-primary); background-color: var(--dt-color-surface-primary); padding: 16px;">
+    <strong style="font: var(--dt-typography-code-md); font-weight: bold">mode="dark"</strong>
+    <div style="background-color: var(--dt-color-surface-secondary);">
+      background-color: var(--dt-color-surface-secondary);
+    </div>
+    <div style="background-color: var(--dt-color-surface-critical);">
+      background-color: var(--dt-color-surface-critical);
+    </div>
+    <div style="color: var(--dt-color-foreground-critical);">
+      color: var(--dt-color-foreground-critical);
+    </div>
+    <div style="color: var(--dt-color-foreground-tertiary);">
+      color: var(--dt-color-foreground-tertiary);
+    </div>
+  </div>
+</mode-island>
+
+<mode-island mode="inverted">
+  <div style="color: var(--dt-color-foreground-primary); background-color: var(--dt-color-surface-primary); padding: 16px;">
+    <strong style="font: var(--dt-typography-code-md); font-weight: bold">mode="inverted"</strong>
+    <div style="background-color: var(--dt-color-surface-secondary);">
+      background-color: var(--dt-color-surface-secondary);
+    </div>
+    <div style="background-color: var(--dt-color-surface-critical);">
+      background-color: var(--dt-color-surface-critical);
+    </div>
+    <div style="color: var(--dt-color-foreground-critical);">
+      color: var(--dt-color-foreground-critical);
+    </div>
+    <div style="color: var(--dt-color-foreground-tertiary);">
+      color: var(--dt-color-foreground-tertiary);
+    </div>
+  </div>
+</mode-island>
+
+asdf
+
 <code-well-header>
   <dt-stack direction="row" gap="400" class="d-ai-center">
     <dt-badge text="Label"></dt-badge>
