@@ -1,13 +1,13 @@
 <template>
   <div ref="hostElement" class="dt-mode-island">
-    <div ref="slotContent">
+    <div ref="slotContent" style="display: none;">
       <slot />
     </div>
   </div>
 </template>
 
 <script setup>
-import { ref, onMounted, onUnmounted, inject, watch, computed } from 'vue';
+import { ref, onMounted, onUnmounted, inject, watch, computed, provide } from 'vue';
 import dialtoneCSS from '@dialpad/dialtone-css/lib/dist/dialtone.css?inline';
 
 // ============================================================================
@@ -62,6 +62,9 @@ const themes = inject('themes', {});
 const currentMode = inject('currentMode', ref('light'));
 const currentContrast = inject('currentContrast', ref('default'));
 
+// Check if we're nested inside another ModeIsland
+const parentModeIslandTheme = inject('modeIslandTheme', null);
+
 // Track system color scheme preference as a reactive value
 const systemPrefersDark = ref(window.matchMedia('(prefers-color-scheme: dark)').matches);
 
@@ -79,11 +82,21 @@ const effectivePageMode = computed(() => {
 // Get the theme name for this mode island
 const themeName = computed(() => {
   if (props.mode === 'inverted') {
+    // If nested inside another ModeIsland, invert relative to parent
+    if (parentModeIslandTheme?.value) {
+      const parentMode = parentModeIslandTheme.value.includes('light') ? 'light' : 'dark';
+      const invertedMode = parentMode === 'dark' ? 'light' : 'dark';
+      return `${BRAND}-${invertedMode}`;
+    }
+    // Otherwise, invert relative to page theme
     const invertedMode = effectivePageMode.value === 'dark' ? 'light' : 'dark';
     return `${BRAND}-${invertedMode}`;
   }
   return `${BRAND}-${props.mode}`;
 });
+
+// Provide this island's theme to nested ModeIslands
+provide('modeIslandTheme', themeName);
 
 // ============================================================================
 // STYLESHEET MANAGEMENT
