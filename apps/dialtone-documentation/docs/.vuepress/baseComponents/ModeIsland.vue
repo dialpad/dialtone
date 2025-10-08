@@ -10,19 +10,19 @@
 import { ref, onMounted, onUnmounted, inject, watch, computed } from 'vue';
 import dialtoneCSS from '@dialpad/dialtone-css/lib/dist/dialtone.css?inline';
 
-// Shared CSSStyleSheet for all ModeIsland instances (created once, reused)
-let sharedDialtoneSheet = null;
-const getSharedDialtoneSheet = async () => {
-  if (!sharedDialtoneSheet) {
-    sharedDialtoneSheet = new CSSStyleSheet();
-    await sharedDialtoneSheet.replace(dialtoneCSS);
-    console.log('✓ Shared Dialtone stylesheet created');
-  }
-  return sharedDialtoneSheet;
-};
+// ============================================================================
+// SHARED STYLESHEET CACHE (shared across all ModeIsland instances)
+// ============================================================================
 
-// Cache for theme CSSStyleSheets (one per unique theme+contrast combo)
+// Dialtone utilities stylesheet (created once, shared by all instances)
+let sharedDialtoneSheet = null;
+
+// Theme stylesheets cache (one per unique theme+contrast combination)
 const themeSheetCache = new Map();
+
+// ============================================================================
+// PROPS
+// ============================================================================
 
 const props = defineProps({
   mode: {
@@ -32,11 +32,24 @@ const props = defineProps({
   },
 });
 
+// ============================================================================
+// CONSTANTS
+// ============================================================================
+
+const BRAND = 'dp';
+
+// ============================================================================
+// REFS
+// ============================================================================
+
 const hostElement = ref(null);
 const slotContent = ref(null);
 const shadowRootRef = ref(null);
 
-// Inject theme context from client.js
+// ============================================================================
+// INJECT THEME CONTEXT
+// ============================================================================
+
 const themes = inject('themes', {});
 const currentMode = inject('currentMode', ref('light'));
 const currentContrast = inject('currentContrast', ref('default'));
@@ -44,24 +57,40 @@ const currentContrast = inject('currentContrast', ref('default'));
 // Track system color scheme preference as a reactive value
 const systemPrefersDark = ref(window.matchMedia('(prefers-color-scheme: dark)').matches);
 
-// Computed: Get the effective page mode (resolves 'system' to actual mode)
+// ============================================================================
+// COMPUTED PROPERTIES
+// ============================================================================
+
+// Get the effective page mode (resolves 'system' to actual light/dark)
 const effectivePageMode = computed(() => {
-  if (currentMode.value === 'system') {
-    return systemPrefersDark.value ? 'dark' : 'light';
-  }
-  return currentMode.value;
+  return currentMode.value === 'system'
+    ? (systemPrefersDark.value ? 'dark' : 'light')
+    : currentMode.value;
 });
 
-// Computed: Get the theme name for this mode island
+// Get the theme name for this mode island
 const themeName = computed(() => {
   if (props.mode === 'inverted') {
     const invertedMode = effectivePageMode.value === 'dark' ? 'light' : 'dark';
-    return `dp-${invertedMode}`;
+    return `${BRAND}-${invertedMode}`;
   }
-  return `dp-${props.mode}`;
+  return `${BRAND}-${props.mode}`;
 });
 
-// Get or create a cached CSSStyleSheet for theme CSS
+// ============================================================================
+// STYLESHEET MANAGEMENT
+// ============================================================================
+
+// Get or create the shared Dialtone utilities stylesheet
+const getSharedDialtoneSheet = async () => {
+  if (!sharedDialtoneSheet) {
+    sharedDialtoneSheet = new CSSStyleSheet();
+    await sharedDialtoneSheet.replace(dialtoneCSS);
+  }
+  return sharedDialtoneSheet;
+};
+
+// Get or create a cached theme stylesheet
 const getThemeSheet = async (themeNameValue, contrast) => {
   const cacheKey = `${themeNameValue}-${contrast}`;
 
@@ -75,32 +104,41 @@ const getThemeSheet = async (themeNameValue, contrast) => {
     return null;
   }
 
-  // Combine base + brand + contrast CSS into one sheet
-  let combinedCSS = themeObject.base.css.replace(/:root/g, ':host') + '\n' +
-                    themeObject.brand.css.replace(/:root/g, ':host');
+  // Combine base + brand CSS
+  const cssParts = [
+    themeObject.base.css,
+    themeObject.brand.css,
+  ];
 
-  // Add contrast if high
+  // Add contrast CSS if high
   if (contrast === 'high') {
     const mode = themeNameValue.includes('light') ? 'light' : 'dark';
     const contrastTheme = themes[`high-contrast-${mode}`];
     if (contrastTheme?.css) {
-      combinedCSS += '\n' + contrastTheme.css.replace(/:root/g, ':host');
+      cssParts.push(contrastTheme.css);
     }
   }
+
+  // Combine and replace :root with :host for shadow DOM
+  const combinedCSS = cssParts
+    .map(css => css.replace(/:root/g, ':host'))
+    .join('\n');
 
   // Create and cache the stylesheet
   const sheet = new CSSStyleSheet();
   await sheet.replace(combinedCSS);
   themeSheetCache.set(cacheKey, sheet);
-  console.log('✓ Theme stylesheet created and cached:', cacheKey);
 
   return sheet;
 };
 
-// Apply theme styles to shadow root using adoptedStyleSheets
+// ============================================================================
+// THEME APPLICATION
+// ============================================================================
+
+// Apply theme to shadow root via adoptedStyleSheets
 const applyTheme = async (shadowRoot, themeNameValue, contrast) => {
   const themeObject = themes[themeNameValue];
-
   if (!themeObject) {
     console.error(`Theme "${themeNameValue}" not found`);
     return;
@@ -108,51 +146,51 @@ const applyTheme = async (shadowRoot, themeNameValue, contrast) => {
 
   // Get cached theme sheet (or create if first time)
   const themeSheet = await getThemeSheet(themeNameValue, contrast);
-
   if (!themeSheet) return;
 
-  // Get the current utilities sheet
-  const utilitiesSheet = shadowRoot.adoptedStyleSheets[0];
-
   // Update adopted stylesheets: [utilities, theme]
+  const utilitiesSheet = shadowRoot.adoptedStyleSheets[0];
   shadowRoot.adoptedStyleSheets = [utilitiesSheet, themeSheet];
 
-  // Update data attributes on host
+  // Update data attributes on host element
   hostElement.value?.setAttribute('data-dt-theme', themeObject.base.name);
   hostElement.value?.setAttribute('data-dt-brand', themeObject.brand.name);
   hostElement.value?.setAttribute('data-dt-contrast', contrast);
 };
 
-// Update the mode island theme
+// Update the mode island theme (called by watchers)
 const updateTheme = async () => {
   if (!shadowRootRef.value) return;
   await applyTheme(shadowRootRef.value, themeName.value, currentContrast.value);
 };
 
-// Setup watchers
+// ============================================================================
+// WATCHERS
+// ============================================================================
+
 let mediaQueryCleanup = null;
 
-// Watch system color scheme preference
+// Watch system color scheme preference changes
 const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
-const handleSystemChange = (e) => {
+mediaQuery.addEventListener('change', (e) => {
   systemPrefersDark.value = e.matches;
-};
-mediaQuery.addEventListener('change', handleSystemChange);
-mediaQueryCleanup = () => mediaQuery.removeEventListener('change', handleSystemChange);
+});
+mediaQueryCleanup = () => mediaQuery.removeEventListener('change', (e) => {
+  systemPrefersDark.value = e.matches;
+});
 
-// Watch contrast changes (all modes)
+// Watch contrast changes (applies to all modes)
 watch(currentContrast, updateTheme);
 
-// Watch for inverted mode changes (mode changes trigger themeName computed update)
+// Watch for inverted mode changes
 if (props.mode === 'inverted') {
   watch(currentMode, updateTheme);
-  // Watch themeName changes (reactive to systemPrefersDark and currentMode)
-  watch(themeName, (newTheme, oldTheme) => {
-    if (newTheme !== oldTheme) {
-      updateTheme();
-    }
-  });
+  watch(themeName, updateTheme);
 }
+
+// ============================================================================
+// LIFECYCLE HOOKS
+// ============================================================================
 
 onMounted(async () => {
   if (!hostElement.value || !slotContent.value) {
@@ -161,23 +199,27 @@ onMounted(async () => {
   }
 
   try {
-    // Create shadow root and store reference
+    // Create shadow root
     const shadowRoot = hostElement.value.attachShadow({ mode: 'open' });
     shadowRootRef.value = shadowRoot;
 
-    // Inject Dialtone CSS utilities using adoptedStyleSheets (shared across all instances)
+    // Adopt shared Dialtone utilities stylesheet
     const dialtoneSheet = await getSharedDialtoneSheet();
     shadowRoot.adoptedStyleSheets = [dialtoneSheet];
 
-    // Apply theme (injects theme CSS variables into shadow root)
-    applyTheme(shadowRoot, themeName.value, currentContrast.value);
+    // Apply initial theme
+    await applyTheme(shadowRoot, themeName.value, currentContrast.value);
 
     // Move slot content into shadow root
     while (slotContent.value.firstChild) {
       shadowRoot.appendChild(slotContent.value.firstChild);
     }
 
-    console.log('✓ ModeIsland initialized:', { mode: props.mode, theme: themeName.value, contrast: currentContrast.value });
+    console.log('✓ ModeIsland initialized:', {
+      mode: props.mode,
+      theme: themeName.value,
+      contrast: currentContrast.value,
+    });
   } catch (error) {
     console.error('ModeIsland initialization error:', error);
     hostElement.value.innerHTML = `
