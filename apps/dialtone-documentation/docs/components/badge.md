@@ -8,10 +8,34 @@ storybook: https://dialtone.dialpad.com/vue/?path=/story/components-badge--defau
 figma_url: https://www.figma.com/design/W58r5BkO8qTw3vem9YieJd/DT9-Component-Library--Rebrand-2025-?node-id=2128-0
 ---
 
+<dt-popover
+:open="onOpen"
+>
+<template #anchor>
+  <dt-button>
+    View Popover
+  </dt-button>
+</template>
+<template
+  #content="{ close }"
+>
+  <div>
+    <p class="d-mb4">
+      This is content rendered within the popover.
+    </p>
+    <dt-button
+      @click="close"
+    >
+      Button
+    </dt-button>
+  </div>
+</template>
+</dt-popover>
+
 <dt-stack direction="row" gap="500" class="d-mb32">
   <mode-island
     mode="light"
-    class="d-fl1 d-code--sm d-fc-primary d-bgc-primary d-ba d-bc-subtle d-p16"
+    class="d-fl1 d-fc-primary d-bgc-primary d-ba d-bc-subtle d-p16"
   >
     <dt-stack gap="400">
       <strong class="d-code--md">mode="<strong>light</strong>"</strong>
@@ -43,11 +67,35 @@ figma_url: https://www.figma.com/design/W58r5BkO8qTw3vem9YieJd/DT9-Component-Lib
         <dt-button size="sm" kind="danger">bt</dt-button>
         <dt-button size="sm" kind="positive">bt</dt-button>
       </dt-stack>
+      <dt-popover
+        :open="onOpen"
+        append-to="parent"
+      >
+        <template #anchor>
+          <dt-button size="sm">
+            View Popover
+          </dt-button>
+        </template>
+        <template
+          #content="{ close }"
+        >
+          <div>
+            <p class="d-mb4">
+              This is content rendered within the popover.
+            </p>
+            <dt-button
+              @click="close"
+            >
+              Button
+            </dt-button>
+          </div>
+        </template>
+      </dt-popover>
     </dt-stack>
   </mode-island>
   <mode-island
     mode="dark"
-    class="d-fl1 d-code--sm d-fc-primary d-bgc-primary d-ba d-bc-subtle d-p16"
+    class="d-fl1 d-fc-primary d-bgc-primary d-ba d-bc-subtle d-p16"
   >
     <dt-stack gap="400">
       <strong class="d-code--md">mode="<strong>dark</strong>"</strong>
@@ -79,11 +127,35 @@ figma_url: https://www.figma.com/design/W58r5BkO8qTw3vem9YieJd/DT9-Component-Lib
         <dt-button size="sm" kind="danger">bt</dt-button>
         <dt-button size="sm" kind="positive">bt</dt-button>
       </dt-stack>
+      <dt-popover
+        :open="onOpen"
+        append-to="parent"
+      >
+        <template #anchor>
+          <dt-button size="sm">
+            View Popover
+          </dt-button>
+        </template>
+        <template
+          #content="{ close }"
+        >
+          <div>
+            <p class="d-mb4">
+              This is content rendered within the popover.
+            </p>
+            <dt-button
+              @click="close"
+            >
+              Button
+            </dt-button>
+          </div>
+        </template>
+      </dt-popover>
     </dt-stack>
   </mode-island>
   <mode-island
     mode="inverted"
-    class="d-fl1 d-code--sm d-fc-primary d-bgc-primary d-ba d-bc-subtle d-p16"
+    class="d-fl1 d-fc-primary d-bgc-primary d-ba d-bc-subtle d-p16"
   >
     <dt-stack gap="400">
       <strong class="d-code--md">mode="<strong>inverted</strong>"</strong>
@@ -115,6 +187,30 @@ figma_url: https://www.figma.com/design/W58r5BkO8qTw3vem9YieJd/DT9-Component-Lib
         <dt-button size="sm" kind="danger">bt</dt-button>
         <dt-button size="sm" kind="positive">bt</dt-button>
       </dt-stack>
+      <dt-popover
+        :open="onOpen"
+        append-to="parent"
+      >
+        <template #anchor>
+          <dt-button size="sm">
+            View Popover
+          </dt-button>
+        </template>
+        <template
+          #content="{ close }"
+        >
+          <div>
+            <p class="d-mb4">
+              This is content rendered within the popover.
+            </p>
+            <dt-button
+              @click="close"
+            >
+              Button
+            </dt-button>
+          </div>
+        </template>
+      </dt-popover>
     </dt-stack>
   </mode-island>
 </dt-stack>
