@@ -27,9 +27,49 @@ const shadowRootRef = ref(null);
 const themes = inject('themes', {});
 const setTheme = inject('setTheme');
 const currentMode = inject('currentMode', ref('light')); // Injected from client.js
+const currentContrast = inject('currentContrast', ref('default')); // Injected from client.js
+
+// Helper to update or create a style tag in shadow root
+const updateStyleTag = (shadowRoot, id, css, insertBefore = null) => {
+  let styleTag = shadowRoot.querySelector(`#${id}`);
+  if (!styleTag) {
+    styleTag = document.createElement('style');
+    styleTag.setAttribute('type', 'text/css');
+    styleTag.setAttribute('id', id);
+    if (insertBefore) {
+      shadowRoot.insertBefore(styleTag, insertBefore);
+    } else {
+      shadowRoot.appendChild(styleTag);
+    }
+  }
+  styleTag.innerHTML = css.replace(/:root/g, ':host');
+  return styleTag;
+};
+
+// Helper to apply contrast theme
+const applyContrast = (shadowRoot, themeName, contrast, brandStyle) => {
+  if (contrast !== 'high') {
+    const contrastStyle = shadowRoot.querySelector('#dialtone-css-contrast');
+    if (contrastStyle) contrastStyle.remove();
+    if (hostElement.value) hostElement.value.setAttribute('data-dt-contrast', 'default');
+    return;
+  }
+
+  const mode = themeName.includes('light') ? 'light' : 'dark';
+  const contrastThemeName = `high-contrast-${mode}`;
+  const contrastThemeObject = themes[contrastThemeName];
+
+  if (contrastThemeObject?.css) {
+    updateStyleTag(shadowRoot, 'dialtone-css-contrast', contrastThemeObject.css, brandStyle.nextSibling);
+    if (hostElement.value) hostElement.value.setAttribute('data-dt-contrast', 'high');
+    console.log('✓ High contrast applied:', contrastThemeName);
+  } else {
+    console.warn('High contrast theme not found:', contrastThemeName);
+  }
+};
 
 // Function to apply theme to shadow root
-const applyThemeToShadowRoot = (shadowRoot, themeName) => {
+const applyThemeToShadowRoot = (shadowRoot, themeName, contrast = 'default') => {
   const themeObject = themes[themeName];
 
   if (!themeObject) {
@@ -37,29 +77,12 @@ const applyThemeToShadowRoot = (shadowRoot, themeName) => {
     return;
   }
 
-  // Replace :root with :host in the CSS
-  const baseCSS = themeObject.base.css.replace(/:root/g, ':host');
-  const brandCSS = themeObject.brand.css.replace(/:root/g, ':host');
+  // Update theme and brand styles
+  const themeStyle = updateStyleTag(shadowRoot, 'dialtone-css-theme', themeObject.base.css, shadowRoot.firstChild);
+  const brandStyle = updateStyleTag(shadowRoot, 'dialtone-css-brand', themeObject.brand.css, themeStyle.nextSibling);
 
-  // Update or create theme style tag
-  let themeStyle = shadowRoot.querySelector('#dialtone-css-theme');
-  if (!themeStyle) {
-    themeStyle = document.createElement('style');
-    themeStyle.setAttribute('type', 'text/css');
-    themeStyle.setAttribute('id', 'dialtone-css-theme');
-    shadowRoot.insertBefore(themeStyle, shadowRoot.firstChild);
-  }
-  themeStyle.innerHTML = baseCSS;
-
-  // Update or create brand style tag
-  let brandStyle = shadowRoot.querySelector('#dialtone-css-brand');
-  if (!brandStyle) {
-    brandStyle = document.createElement('style');
-    brandStyle.setAttribute('type', 'text/css');
-    brandStyle.setAttribute('id', 'dialtone-css-brand');
-    shadowRoot.insertBefore(brandStyle, themeStyle.nextSibling);
-  }
-  brandStyle.innerHTML = brandCSS;
+  // Apply contrast
+  applyContrast(shadowRoot, themeName, contrast, brandStyle);
 
   // Update data attributes on host element
   if (hostElement.value) {
@@ -67,7 +90,7 @@ const applyThemeToShadowRoot = (shadowRoot, themeName) => {
     hostElement.value.setAttribute('data-dt-brand', themeObject.brand.name);
   }
 
-  console.log('✓ Theme updated to:', themeName);
+  console.log('✓ Theme updated to:', themeName, 'contrast:', contrast);
 };
 
 // Helper function to get the current effective mode (resolves 'system' to actual mode)
@@ -78,22 +101,34 @@ const getEffectiveMode = () => {
   return currentMode.value;
 };
 
-// Helper function to update inverted mode island
-const updateInvertedTheme = () => {
-  if (shadowRootRef.value) {
+// Helper function to update theme based on current mode
+const updateTheme = () => {
+  if (!shadowRootRef.value) return;
+
+  let themeName;
+  if (props.mode === 'inverted') {
     const pageMode = getEffectiveMode();
     const invertedMode = pageMode === 'dark' ? 'light' : 'dark';
-    const themeName = `dp-${invertedMode}`;
-    console.log('Updating inverted mode island to:', themeName, '(page is', pageMode + ')');
-    applyThemeToShadowRoot(shadowRootRef.value, themeName);
+    themeName = `dp-${invertedMode}`;
+  } else {
+    themeName = `dp-${props.mode}`;
   }
+
+  console.log('Updating mode island to:', themeName, 'contrast:', currentContrast.value);
+  applyThemeToShadowRoot(shadowRootRef.value, themeName, currentContrast.value);
 };
+
+// Watch for contrast changes (applies to all modes)
+watch(currentContrast, (newContrast) => {
+  console.log('Contrast changed to:', newContrast);
+  updateTheme();
+});
 
 // Watch for theme changes if mode is inverted
 if (props.mode === 'inverted') {
   // Watch for manual theme changes
   watch(currentMode, () => {
-    updateInvertedTheme();
+    updateTheme();
   });
 
   // Watch for system theme changes (always listen, check condition inside)
@@ -102,7 +137,7 @@ if (props.mode === 'inverted') {
     // Only update if the page is using 'system' mode
     if (currentMode.value === 'system') {
       console.log('System color scheme changed');
-      updateInvertedTheme();
+      updateTheme();
     }
   };
   mediaQuery.addEventListener('change', handleSystemThemeChange);
@@ -156,10 +191,8 @@ onMounted(async () => {
     // Add wrapper to shadow root
     shadowRoot.appendChild(wrapper);
 
-    // Apply initial theme
-    applyThemeToShadowRoot(shadowRoot, themeName);
-
-    hostElement.value.setAttribute('data-dt-contrast', 'default');
+    // Apply initial theme with current contrast
+    applyThemeToShadowRoot(shadowRoot, themeName, currentContrast.value);
 
     console.log('✓ Mode island created successfully with mode:', props.mode, '(theme:', themeName + ')');
   } catch (error) {
