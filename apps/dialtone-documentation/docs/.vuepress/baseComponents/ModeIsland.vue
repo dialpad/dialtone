@@ -10,13 +10,6 @@
 import { ref, onMounted, onUnmounted, inject, watch, computed } from 'vue';
 import dialtoneCSS from '@dialpad/dialtone-css/lib/dist/dialtone.css?inline';
 
-const STYLE_IDS = {
-  UTILITIES: 'dialtone-css-utilities',
-  THEME: 'dialtone-css-theme',
-  BRAND: 'dialtone-css-brand',
-  CONTRAST: 'dialtone-css-contrast',
-};
-
 // Shared CSSStyleSheet for all ModeIsland instances (created once, reused)
 let sharedDialtoneSheet = null;
 const getSharedDialtoneSheet = async () => {
@@ -27,6 +20,9 @@ const getSharedDialtoneSheet = async () => {
   }
   return sharedDialtoneSheet;
 };
+
+// Cache for theme CSSStyleSheets (one per unique theme+contrast combo)
+const themeSheetCache = new Map();
 
 const props = defineProps({
   mode: {
@@ -65,48 +61,44 @@ const themeName = computed(() => {
   return `dp-${props.mode}`;
 });
 
-// Update or create a style tag in shadow root
-const updateStyleTag = (shadowRoot, id, css, insertBefore = null) => {
-  let styleTag = shadowRoot.querySelector(`#${id}`);
-  if (!styleTag) {
-    styleTag = document.createElement('style');
-    styleTag.setAttribute('type', 'text/css');
-    styleTag.setAttribute('id', id);
-    if (insertBefore) {
-      shadowRoot.insertBefore(styleTag, insertBefore);
-    } else {
-      shadowRoot.appendChild(styleTag);
+// Get or create a cached CSSStyleSheet for theme CSS
+const getThemeSheet = async (themeNameValue, contrast) => {
+  const cacheKey = `${themeNameValue}-${contrast}`;
+
+  if (themeSheetCache.has(cacheKey)) {
+    return themeSheetCache.get(cacheKey);
+  }
+
+  const themeObject = themes[themeNameValue];
+  if (!themeObject) {
+    console.error(`Theme "${themeNameValue}" not found`);
+    return null;
+  }
+
+  // Combine base + brand + contrast CSS into one sheet
+  let combinedCSS = themeObject.base.css.replace(/:root/g, ':host') + '\n' +
+                    themeObject.brand.css.replace(/:root/g, ':host');
+
+  // Add contrast if high
+  if (contrast === 'high') {
+    const mode = themeNameValue.includes('light') ? 'light' : 'dark';
+    const contrastTheme = themes[`high-contrast-${mode}`];
+    if (contrastTheme?.css) {
+      combinedCSS += '\n' + contrastTheme.css.replace(/:root/g, ':host');
     }
   }
-  // Replace :root with :host for shadow DOM compatibility
-  styleTag.innerHTML = css.replace(/:root/g, ':host');
-  return styleTag;
+
+  // Create and cache the stylesheet
+  const sheet = new CSSStyleSheet();
+  await sheet.replace(combinedCSS);
+  themeSheetCache.set(cacheKey, sheet);
+  console.log('✓ Theme stylesheet created and cached:', cacheKey);
+
+  return sheet;
 };
 
-// Apply or remove contrast theme
-const applyContrast = (shadowRoot, themeNameValue, contrast, brandStyle) => {
-  const contrastStyle = shadowRoot.querySelector(`#${STYLE_IDS.CONTRAST}`);
-
-  if (contrast !== 'high') {
-    contrastStyle?.remove();
-    hostElement.value?.setAttribute('data-dt-contrast', 'default');
-    return;
-  }
-
-  const mode = themeNameValue.includes('light') ? 'light' : 'dark';
-  const contrastTheme = themes[`high-contrast-${mode}`];
-
-  if (!contrastTheme?.css) {
-    console.warn(`High contrast theme not found: high-contrast-${mode}`);
-    return;
-  }
-
-  updateStyleTag(shadowRoot, STYLE_IDS.CONTRAST, contrastTheme.css, brandStyle.nextSibling);
-  hostElement.value?.setAttribute('data-dt-contrast', 'high');
-};
-
-// Apply theme styles to shadow root
-const applyTheme = (shadowRoot, themeNameValue, contrast) => {
+// Apply theme styles to shadow root using adoptedStyleSheets
+const applyTheme = async (shadowRoot, themeNameValue, contrast) => {
   const themeObject = themes[themeNameValue];
 
   if (!themeObject) {
@@ -114,22 +106,27 @@ const applyTheme = (shadowRoot, themeNameValue, contrast) => {
     return;
   }
 
-  // Update theme and brand styles (order matters)
-  const themeStyle = updateStyleTag(shadowRoot, STYLE_IDS.THEME, themeObject.base.css, shadowRoot.firstChild);
-  const brandStyle = updateStyleTag(shadowRoot, STYLE_IDS.BRAND, themeObject.brand.css, themeStyle.nextSibling);
+  // Get cached theme sheet (or create if first time)
+  const themeSheet = await getThemeSheet(themeNameValue, contrast);
 
-  // Apply or remove contrast
-  applyContrast(shadowRoot, themeNameValue, contrast, brandStyle);
+  if (!themeSheet) return;
+
+  // Get the current utilities sheet
+  const utilitiesSheet = shadowRoot.adoptedStyleSheets[0];
+
+  // Update adopted stylesheets: [utilities, theme]
+  shadowRoot.adoptedStyleSheets = [utilitiesSheet, themeSheet];
 
   // Update data attributes on host
   hostElement.value?.setAttribute('data-dt-theme', themeObject.base.name);
   hostElement.value?.setAttribute('data-dt-brand', themeObject.brand.name);
+  hostElement.value?.setAttribute('data-dt-contrast', contrast);
 };
 
 // Update the mode island theme
-const updateTheme = () => {
+const updateTheme = async () => {
   if (!shadowRootRef.value) return;
-  applyTheme(shadowRootRef.value, themeName.value, currentContrast.value);
+  await applyTheme(shadowRootRef.value, themeName.value, currentContrast.value);
 };
 
 // Setup watchers
