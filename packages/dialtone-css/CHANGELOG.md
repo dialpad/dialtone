@@ -1,3 +1,10 @@
+# [8.65.0-next.3](https://github.com/dialpad/dialtone/compare/dialtone-css/v8.65.0-next.2...dialtone-css/v8.65.0-next.3) (2025-10-08)
+
+
+### Features
+
+* **Filter Pill:** DLT-2704 create component ([#473](https://github.com/dialpad/dialtone/issues/473)) ([6267445](https://github.com/dialpad/dialtone/commit/626744501640f18211ca9d41e4a68e099af3b6dd))
+
 # [8.65.0-next.2](https://github.com/dialpad/dialtone/compare/dialtone-css/v8.65.0-next.1...dialtone-css/v8.65.0-next.2) (2025-09-17)
 
 
