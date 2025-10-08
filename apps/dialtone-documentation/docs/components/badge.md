@@ -8,36 +8,15 @@ storybook: https://dialtone.dialpad.com/vue/?path=/story/components-badge--defau
 figma_url: https://www.figma.com/design/W58r5BkO8qTw3vem9YieJd/DT9-Component-Library--Rebrand-2025-?node-id=2128-0
 ---
 
-<dt-popover
-:open="onOpen"
->
-<template #anchor>
-  <dt-button>
-    View Popover
-  </dt-button>
-</template>
-<template
-  #content="{ close }"
->
-  <div>
-    <p class="d-mb4">
-      This is content rendered within the popover.
-    </p>
-    <dt-button
-      @click="close"
-    >
-      Button
-    </dt-button>
-  </div>
-</template>
-</dt-popover>
-
 <dt-stack direction="row" gap="500" class="d-mb32">
   <mode-island
     mode="light"
     class="d-fl1 d-fc-primary d-bgc-primary d-ba d-bc-subtle d-p16"
   >
-    <dt-stack gap="400">
+    <dt-stack gap="500">
+      <mode-island mode="inverted">
+        <div>asdf</div>
+      </mode-island>
       <strong class="d-code--md">mode="<strong>light</strong>"</strong>
       <div class="d-ba d-bc-subtle d-p8 d-bgc-secondary">
         d-bgc-secondary
@@ -51,6 +30,24 @@ figma_url: https://www.figma.com/design/W58r5BkO8qTw3vem9YieJd/DT9-Component-Lib
       <div class="d-ba d-bc-subtle d-p8 d-fc-tertiary">
         d-fc-tertiary
       </div>
+      <dt-input label="Small" type="text" placeholder="Placeholder" size="sm" />
+      <dt-notice
+        kind="error"
+      >
+        <span>
+          Notice
+        </span>
+        <template #action>
+          <dt-button
+            size="sm"
+            importance="outlined"
+            kind="muted"
+            @click="onClick"
+          >
+            Action
+          </dt-button>
+        </template>
+      </dt-notice>
       <dt-stack gap="300" direction="row" class="d-jc-space-between">
         <dt-badge kind="count" text="8"></dt-badge>
         <dt-badge kind="count" text="8" type="info"></dt-badge>
@@ -67,13 +64,14 @@ figma_url: https://www.figma.com/design/W58r5BkO8qTw3vem9YieJd/DT9-Component-Lib
         <dt-button size="sm" kind="danger">bt</dt-button>
         <dt-button size="sm" kind="positive">bt</dt-button>
       </dt-stack>
-      <dt-popover
-        :open="onOpen"
-        append-to="parent"
-      >
+      <dt-stack gap="300" direction="row" class="d-jc-space-between">
+        <dt-popover
+          :open="onOpen"
+          append-to="parent"
+        >
         <template #anchor>
-          <dt-button size="sm">
-            View Popover
+          <dt-button size="sm" kind="muted" importance="outlined">
+            Popover
           </dt-button>
         </template>
         <template
@@ -90,14 +88,49 @@ figma_url: https://www.figma.com/design/W58r5BkO8qTw3vem9YieJd/DT9-Component-Lib
             </dt-button>
           </div>
         </template>
-      </dt-popover>
+        </dt-popover>
+        <dt-dropdown navigation-type="arrow-keys" append-to="parent">
+          <template #anchor="{ attrs }">
+            <dt-button v-bind="attrs" size="sm" kind="muted" importance="outlined">
+              Dropdown
+            </dt-button>
+          </template>
+          <template #list="{ close }">
+            <dt-list-item
+              v-for="(item) in items"
+              :key="item.id"
+              role="menuitem"
+              :navigation-type="arrow-keys"
+              @click="close"
+            >
+              {{ item.name }}
+            </dt-list-item>
+          </template>
+        </dt-dropdown>
+        <dt-hovercard
+          append-to="parent"
+          padding="none"
+          contentClass="d-p8 d-body--sm"
+          placement="top"
+        >
+          <!-- dialogClass, contentClass, padding -->
+          <template #anchor>
+            <dt-button size="sm" kind="muted" importance="outlined">
+              Hovercard
+            </dt-button>
+          </template>
+          <template #content>
+            Lorem ipsum. Come and <dt-link>click me</dt-link>
+          </template>
+        </dt-hovercard>
+      </dt-stack>
     </dt-stack>
   </mode-island>
   <mode-island
     mode="dark"
     class="d-fl1 d-fc-primary d-bgc-primary d-ba d-bc-subtle d-p16"
   >
-    <dt-stack gap="400">
+    <dt-stack gap="500">
       <strong class="d-code--md">mode="<strong>dark</strong>"</strong>
       <div class="d-ba d-bc-subtle d-p8 d-bgc-secondary">
         d-bgc-secondary
@@ -111,6 +144,24 @@ figma_url: https://www.figma.com/design/W58r5BkO8qTw3vem9YieJd/DT9-Component-Lib
       <div class="d-ba d-bc-subtle d-p8 d-fc-tertiary">
         d-fc-tertiary
       </div>
+      <dt-input label="Small" type="text" placeholder="Placeholder" size="sm" />
+      <dt-notice
+        kind="error"
+      >
+        <span>
+          Notice
+        </span>
+        <template #action>
+          <dt-button
+            size="sm"
+            importance="outlined"
+            kind="muted"
+            @click="onClick"
+          >
+            Action
+          </dt-button>
+        </template>
+      </dt-notice>
       <dt-stack gap="300" direction="row" class="d-jc-space-between">
         <dt-badge kind="count" text="8"></dt-badge>
         <dt-badge kind="count" text="8" type="info"></dt-badge>
@@ -127,13 +178,14 @@ figma_url: https://www.figma.com/design/W58r5BkO8qTw3vem9YieJd/DT9-Component-Lib
         <dt-button size="sm" kind="danger">bt</dt-button>
         <dt-button size="sm" kind="positive">bt</dt-button>
       </dt-stack>
-      <dt-popover
-        :open="onOpen"
-        append-to="parent"
-      >
+      <dt-stack gap="300" direction="row" class="d-jc-space-between">
+        <dt-popover
+          :open="onOpen"
+          append-to="parent"
+        >
         <template #anchor>
-          <dt-button size="sm">
-            View Popover
+          <dt-button size="sm" kind="muted" importance="outlined">
+            Popover
           </dt-button>
         </template>
         <template
@@ -150,14 +202,49 @@ figma_url: https://www.figma.com/design/W58r5BkO8qTw3vem9YieJd/DT9-Component-Lib
             </dt-button>
           </div>
         </template>
-      </dt-popover>
+        </dt-popover>
+        <dt-dropdown navigation-type="arrow-keys" append-to="parent">
+          <template #anchor="{ attrs }">
+            <dt-button v-bind="attrs" size="sm" kind="muted" importance="outlined">
+              Dropdown
+            </dt-button>
+          </template>
+          <template #list="{ close }">
+            <dt-list-item
+              v-for="(item) in items"
+              :key="item.id"
+              role="menuitem"
+              :navigation-type="arrow-keys"
+              @click="close"
+            >
+              {{ item.name }}
+            </dt-list-item>
+          </template>
+        </dt-dropdown>
+        <dt-hovercard
+          append-to="parent"
+          padding="none"
+          contentClass="d-p8 d-body--sm"
+          placement="top"
+        >
+          <!-- dialogClass, contentClass, padding -->
+          <template #anchor>
+            <dt-button size="sm" kind="muted" importance="outlined">
+              Hovercard
+            </dt-button>
+          </template>
+          <template #content>
+            Lorem ipsum. Come and <dt-link>click me</dt-link>
+          </template>
+        </dt-hovercard>
+      </dt-stack>
     </dt-stack>
   </mode-island>
   <mode-island
     mode="inverted"
     class="d-fl1 d-fc-primary d-bgc-primary d-ba d-bc-subtle d-p16"
   >
-    <dt-stack gap="400">
+    <dt-stack gap="500">
       <strong class="d-code--md">mode="<strong>inverted</strong>"</strong>
       <div class="d-ba d-bc-subtle d-p8 d-bgc-secondary">
         d-bgc-secondary
@@ -171,6 +258,24 @@ figma_url: https://www.figma.com/design/W58r5BkO8qTw3vem9YieJd/DT9-Component-Lib
       <div class="d-ba d-bc-subtle d-p8 d-fc-tertiary">
         d-fc-tertiary
       </div>
+      <dt-input label="Small" type="text" placeholder="Placeholder" size="sm" />
+      <dt-notice
+        kind="error"
+      >
+        <span>
+          Notice
+        </span>
+        <template #action>
+          <dt-button
+            size="sm"
+            importance="outlined"
+            kind="muted"
+            @click="onClick"
+          >
+            Action
+          </dt-button>
+        </template>
+      </dt-notice>
       <dt-stack gap="300" direction="row" class="d-jc-space-between">
         <dt-badge kind="count" text="8"></dt-badge>
         <dt-badge kind="count" text="8" type="info"></dt-badge>
@@ -187,13 +292,14 @@ figma_url: https://www.figma.com/design/W58r5BkO8qTw3vem9YieJd/DT9-Component-Lib
         <dt-button size="sm" kind="danger">bt</dt-button>
         <dt-button size="sm" kind="positive">bt</dt-button>
       </dt-stack>
-      <dt-popover
-        :open="onOpen"
-        append-to="parent"
-      >
+      <dt-stack gap="300" direction="row" class="d-jc-space-between">
+        <dt-popover
+          :open="onOpen"
+          append-to="parent"
+        >
         <template #anchor>
-          <dt-button size="sm">
-            View Popover
+          <dt-button size="sm" kind="muted" importance="outlined">
+            Popover
           </dt-button>
         </template>
         <template
@@ -210,7 +316,42 @@ figma_url: https://www.figma.com/design/W58r5BkO8qTw3vem9YieJd/DT9-Component-Lib
             </dt-button>
           </div>
         </template>
-      </dt-popover>
+        </dt-popover>
+        <dt-dropdown navigation-type="arrow-keys" append-to="parent">
+          <template #anchor="{ attrs }">
+            <dt-button v-bind="attrs" size="sm" kind="muted" importance="outlined">
+              Dropdown
+            </dt-button>
+          </template>
+          <template #list="{ close }">
+            <dt-list-item
+              v-for="(item) in items"
+              :key="item.id"
+              role="menuitem"
+              :navigation-type="arrow-keys"
+              @click="close"
+            >
+              {{ item.name }}
+            </dt-list-item>
+          </template>
+        </dt-dropdown>
+        <dt-hovercard
+          append-to="parent"
+          padding="none"
+          contentClass="d-p8 d-body--sm"
+          placement="top"
+        >
+          <!-- dialogClass, contentClass, padding -->
+          <template #anchor>
+            <dt-button size="sm" kind="muted" importance="outlined">
+              Hovercard
+            </dt-button>
+          </template>
+          <template #content>
+            Lorem ipsum. Come and <dt-link>click me</dt-link>
+          </template>
+        </dt-hovercard>
+      </dt-stack>
     </dt-stack>
   </mode-island>
 </dt-stack>
@@ -708,4 +849,12 @@ showHtmlWarning />
     DtIconArrowUp,
     DtIconArrowDown,
   } from '@dialpad/dialtone-icons/vue3';
+
+  const items = [
+  { name: 'Menu item 1', id: 1 },
+  { name: 'Menu item 2', id: 2 },
+  { name: 'Another menu item 1', id: 3 },
+  { name: 'Menu item 3', id: 4 },
+  { name: 'Another menu item 2', id: 5 },
+];
 </script>

@@ -1,5 +1,5 @@
 <template>
-  <div ref="hostElement">
+  <div ref="hostElement" class="dt-mode-island">
     <div ref="slotContent">
       <slot />
     </div>
@@ -37,6 +37,14 @@ const props = defineProps({
 // ============================================================================
 
 const BRAND = 'dp';
+
+// Base styles for shadow root content
+const SHADOW_ROOT_STYLES = `
+  :host {
+    color: var(--dt-color-foreground-primary);
+    font: var(--dt-typography-body-md);
+  }
+`;
 
 // ============================================================================
 // REFS
@@ -209,6 +217,11 @@ onMounted(async () => {
 
     // Apply initial theme
     await applyTheme(shadowRoot, themeName.value, currentContrast.value);
+
+    // Add base styles for shadow root
+    const baseStyles = document.createElement('style');
+    baseStyles.innerHTML = SHADOW_ROOT_STYLES;
+    shadowRoot.appendChild(baseStyles);
 
     // Move slot content into shadow root
     while (slotContent.value.firstChild) {
