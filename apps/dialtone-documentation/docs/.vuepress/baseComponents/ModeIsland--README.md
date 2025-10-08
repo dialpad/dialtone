@@ -21,6 +21,31 @@ The component uses [Shadow DOM](https://developer.mozilla.org/en-US/docs/Web/API
 3. **Replaces `:root` selectors with `:host`** in theme CSS for shadow DOM compatibility
 4. **Moves slot content** into the shadow root where it inherits the isolated theme
 
+### The `:host` Magic
+
+A key insight: **`:host` in shadow root CSS targets the host element in light DOM**:
+
+```html
+<div class="host d-bgc-primary">          ← Light DOM (has global CSS access)
+  #shadow-root
+    <style>
+      :host {                              ← Targets the host element above!
+        --dt-color-surface-primary: #dark; ← Variable defined ON host element
+      }
+    </style>
+    <div class="d-bgc-secondary">...</div> ← Shadow DOM content
+  (end shadow root)
+</div>
+```
+
+**Why this works:**
+- Host element uses `.d-bgc-primary { background: var(--dt-color-surface-primary) }` from global CSS
+- `:host` defines `--dt-color-surface-primary` ON the host element itself
+- Host element's class uses its OWN CSS variable value (from `:host`)
+- Variables also cascade to shadow DOM children
+
+This allows the host element to use utility classes from global CSS while getting theme variables from the shadow root!
+
 ### CSS Variable Inheritance
 
 CSS custom properties (variables) normally inherit through the DOM tree, even across component boundaries. Without isolation, a "mode island" would inherit theme variables from parent elements, making true theme isolation impossible.
@@ -71,8 +96,22 @@ The most powerful feature - automatically inverts the page theme:
 | Prop | Type | Default | Description |
 |------|------|---------|-------------|
 | `mode` | `String` | `'dark'` | The theme mode for this island. Options: `'light'`, `'dark'`, `'inverted'` |
+| `class` | `String` | - | CSS utility classes to apply to the host element (e.g., `class="d-bgc-primary d-p16"`) |
+
+**Note on `class` prop:**
+- Classes are applied to the **host element** which is in light DOM
+- Host element can use Dialtone utility classes since it has access to global CSS
+- Theme variables on the host element come from the shadow root's `:host` styles
+- This allows the host to be styled with both utilities AND themed variables
 
 ## Features
+
+### Nested Mode Islands
+
+Mode islands can be nested within each other:
+- Child mode island with `mode="inverted"` inverts relative to its **parent** mode island
+- Example: Page is light → Parent island is dark → Child inverted island is light
+- Nesting is achieved via Vue's provide/inject pattern
 
 ### Reactive Theme Updates
 
@@ -142,6 +181,13 @@ Vue components rendered in the slot work, but:
 - ✅ Reactivity works (components update normally)
 - ⚠️ Components are moved into shadow DOM after initial render
 - ❌ Teleport/Portal components may not work correctly
+
+**Popovers, Modals, Tooltips:**
+Components that teleport content (like `DtPopover`, `DtModal`, `DtTooltip`) require special handling:
+- Use `append-to="parent"` prop to keep content within the shadow root
+- Example: `<dt-popover append-to="parent">...</dt-popover>`
+- This keeps the teleported content within the themed shadow boundary
+- Positioning may be limited compared to body-level positioning
 
 ### 3. Bundle Size Impact
 
@@ -421,6 +467,18 @@ interface ThemeObject {
 
 ## Examples
 
+### Styling the Host Element
+
+The host element is in light DOM and can use Dialtone utility classes:
+
+```vue
+<mode-island mode="dark" class="d-bgc-primary d-p16 d-ba d-bc-subtle">
+  <p>The host element uses light theme AND dark theme simultaneously!</p>
+  <p>Background color comes from :host variables in shadow root (dark theme)</p>
+  <p>Utility classes (d-p16, d-ba) come from global CSS</p>
+</mode-island>
+```
+
 ### Side-by-Side Theme Comparison
 
 ```vue
@@ -466,6 +524,40 @@ interface ThemeObject {
       Border contrast will increase in high contrast mode.
     </p>
   </div>
+</mode-island>
+```
+
+### Nested Mode Islands
+
+```vue
+<mode-island mode="dark" class="d-p16">
+  <p>Outer island: Dark theme</p>
+
+  <mode-island mode="inverted" class="d-p16 d-mt8">
+    <p>Nested island: Inverted (shows light theme because parent is dark)</p>
+
+    <mode-island mode="inverted" class="d-p16 d-mt8">
+      <p>Double nested: Inverted again (shows dark theme because parent is light)</p>
+    </mode-island>
+  </mode-island>
+</mode-island>
+```
+
+### Using Popovers Inside Mode Islands
+
+```vue
+<mode-island mode="light">
+  <dt-popover append-to="parent">
+    <template #anchor>
+      <dt-button>Open Popover</dt-button>
+    </template>
+    <template #content="{ close }">
+      <div class="d-p16">
+        <p>This popover inherits the mode island's light theme!</p>
+        <dt-button @click="close">Close</dt-button>
+      </div>
+    </template>
+  </dt-popover>
 </mode-island>
 ```
 
