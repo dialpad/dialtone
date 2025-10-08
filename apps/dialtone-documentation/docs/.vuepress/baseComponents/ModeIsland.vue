@@ -1,5 +1,5 @@
 <template>
-  <div ref="hostElement" class="dt-mode-island">
+  <div ref="hostElement" :class="$attrs.class">
     <div ref="slotContent" style="display: none;">
       <slot />
     </div>
@@ -9,6 +9,10 @@
 <script setup>
 import { ref, onMounted, onUnmounted, inject, watch, computed, provide } from 'vue';
 import dialtoneCSS from '@dialpad/dialtone-css/lib/dist/dialtone.css?inline';
+
+defineOptions({
+  inheritAttrs: false,
+});
 
 // ============================================================================
 // SHARED STYLESHEET CACHE (shared across all ModeIsland instances)

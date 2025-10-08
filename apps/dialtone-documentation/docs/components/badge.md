@@ -15,8 +15,11 @@ figma_url: https://www.figma.com/design/W58r5BkO8qTw3vem9YieJd/DT9-Component-Lib
   >
     <dt-stack gap="500">
       <strong class="d-code--md">mode="<strong>light</strong>"</strong>
-      <mode-island mode="inverted">
-        <div class="d-bgc-primary">Nested inverted ModeIsland</div>
+      <div class="d-bgc-primary">
+        asdf
+      </div>
+      <mode-island mode="inverted" class="d-bgc-primary">
+        Nested inverted ModeIsland.
       </mode-island>
       <div class="d-ba d-bc-subtle d-p8 d-bgc-secondary">
         d-bgc-secondary
@@ -132,8 +135,11 @@ figma_url: https://www.figma.com/design/W58r5BkO8qTw3vem9YieJd/DT9-Component-Lib
   >
     <dt-stack gap="500">
       <strong class="d-code--md">mode="<strong>dark</strong>"</strong>
-      <mode-island mode="inverted">
-        <div class="d-bgc-primary">Nested inverted ModeIsland</div>
+      <div class="d-bgc-primary">
+        asdf
+      </div>
+      <mode-island mode="inverted" class="d-bgc-primary">
+        Nested inverted ModeIsland.
       </mode-island>
       <div class="d-ba d-bc-subtle d-p8 d-bgc-secondary">
         d-bgc-secondary
@@ -249,8 +255,11 @@ figma_url: https://www.figma.com/design/W58r5BkO8qTw3vem9YieJd/DT9-Component-Lib
   >
     <dt-stack gap="500">
       <strong class="d-code--md">mode="<strong>inverted</strong>"</strong>
-      <mode-island mode="inverted">
-        <div class="d-bgc-primary">Nested inverted ModeIsland</div>
+      <div class="d-bgc-primary">
+        asdf
+      </div>
+      <mode-island mode="inverted" class="d-bgc-primary">
+        Nested inverted ModeIsland.
       </mode-island>
       <div class="d-ba d-bc-subtle d-p8 d-bgc-secondary">
         d-bgc-secondary
