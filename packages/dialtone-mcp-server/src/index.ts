@@ -1,6 +1,6 @@
 import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
 import { StdioServerTransport } from "@modelcontextprotocol/sdk/server/stdio.js";
-import { CallToolRequestSchema } from "@modelcontextprotocol/sdk/types.js";
+import { CallToolRequestSchema, ListToolsRequestSchema } from "@modelcontextprotocol/sdk/types.js";
 
 import utilityClasses from '@dialpad/dialtone-css/lib/dist/dialtone-docs.json';
 import tokens from '@dialpad/dialtone-css/lib/dist/tokens-docs.json';
@@ -34,7 +34,7 @@ function extractKeywords(query) {
   // Values (numbers followed by units or standalone)
   const valueMatches = normalized.match(/\d+(\.\d+)?(px|rem|em|%)?/g) || [];
   const values = valueMatches.flatMap(v => {
-    // Convert px to rem (8px = 0.8rem)
+    // Convert px to rem using Dialtone's 10-based scale (1rem = 10px)
     if (v.endsWith('px')) {
       const px = parseFloat(v);
       return [`${px}px`, `${px / 10}rem`];
@@ -118,10 +118,20 @@ function searchUtilityClasses(query, data) {
     }
   }
 
-  // Sort by score (descending) and return top 10
-  return results
-    .sort((a, b) => b.score - a.score)
-    .slice(0, 10);
+  // Sort by score (descending)
+  results.sort((a, b) => b.score - a.score);
+
+  // Debug logging - show top 15 results with scores
+  console.error(`\n[SEARCH DEBUG] Query: "${query}"`);
+  console.error(`[SEARCH DEBUG] Keywords extracted:`, JSON.stringify(keywords));
+  console.error(`[SEARCH DEBUG] Top 15 results by score:`);
+  results.slice(0, 15).forEach((r, i) => {
+    console.error(`  ${i + 1}. ${r.className} - Score: ${r.score}`);
+    console.error(`     Reasons: ${r.matchReasons.join(', ')}`);
+  });
+  console.error(`\n`);
+
+  return results.slice(0, 10);
 }
 
 /**
@@ -226,19 +236,27 @@ async function main() {
     };
   });
 
-  // Add a search tool - register metadata only (no callback needed)
-  // The actual implementation is in setRequestHandler below
-  server.tool("search_dialtone", async () => {
-    // This callback won't be called - setRequestHandler handles it
+  // Handle tool discovery - tell clients what tools are available
+  server.server.setRequestHandler(ListToolsRequestSchema, async () => {
     return {
-      content: [{
-        type: "text",
-        text: "Handled by setRequestHandler"
+      tools: [{
+        name: "search_dialtone",
+        description: "Search Dialtone design system for utility classes, components, and tokens. Examples: 'right padding 8px', 'button', 'd-flex', 'center text'",
+        inputSchema: {
+          type: "object",
+          properties: {
+            query: {
+              type: "string",
+              description: "Search query for Dialtone - CSS properties, class names, values, or component names"
+            }
+          },
+          required: ["query"]
+        }
       }]
     };
   });
 
-  // Handle tool calls with actual search implementation
+  // Handle tool execution with actual search implementation
   server.server.setRequestHandler(CallToolRequestSchema, async (request) => {
     console.error('[MCP] Tool call received:', JSON.stringify(request.params, null, 2));
 
