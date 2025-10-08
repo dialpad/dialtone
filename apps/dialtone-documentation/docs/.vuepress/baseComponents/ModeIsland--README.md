@@ -1,6 +1,63 @@
 # ModeIsland Component
 
-A Vue component that creates an isolated theme "island" within a page, allowing content to display in a different theme (light/dark) than the surrounding page, regardless of the page's current theme setting.
+> **🤖 AI Assistant Integration Guide**
+>
+> This component implements theme isolation using Shadow DOM and Web Components. Before integrating:
+> 1. Read sections: "How It Works", "Required Dependencies", "Critical Implementation Details"
+> 2. Understand the `:host` selector behavior (see "The :host Magic" section)
+> 3. Note the mandatory `provide()` setup (see "Injected Dependencies")
+> 4. Review "Common Pitfalls for AI Assistants" at the end of this document
+>
+> **Quick Facts:**
+> - **Technology:** Vue 3 Composition API + Shadow DOM + adoptedStyleSheets API
+> - **File Size:** ~250 lines of code
+> - **Bundle Impact:** +~500KB (Dialtone CSS import)
+> - **Memory:** Shared across instances via `CSSStyleSheet` objects
+> - **Browser Support:** Modern browsers only (Chrome 73+, Firefox 101+, Safari 16.4+)
+
+A Vue 3 component that creates an isolated theme "island" within a page, allowing content to display in a different theme (light/dark) than the surrounding page, regardless of the page's current theme setting.
+
+## Quick Start for AI Assistants
+
+### Step-by-Step Integration Checklist
+
+**Before writing any code, verify these prerequisites:**
+
+- [ ] Project uses Vue 3 (not Vue 2)
+- [ ] Project uses Vite as bundler (required for `?inline` imports)
+- [ ] `@dialpad/dialtone-css` is installed
+- [ ] `@dialpad/dialtone-tokens` is installed
+- [ ] You understand Shadow DOM and `adoptedStyleSheets` API
+
+**Integration steps (do in order):**
+
+1. **Copy the component file** to your project
+2. **Import and register** the component globally or locally
+3. **Set up provide/inject context** in your app root (see "Required Dependencies" section)
+4. **Import theme objects** from `@dialpad/dialtone-tokens/themes/*`
+5. **Test with a simple example** before complex usage
+
+**Minimal working example:**
+
+```javascript
+// App.vue or root component
+import { provide, ref } from 'vue';
+import DpLight from '@dialpad/dialtone-tokens/themes/dp-light';
+import DpDark from '@dialpad/dialtone-tokens/themes/dp-dark';
+
+provide('themes', { 'dp-light': DpLight, 'dp-dark': DpDark });
+provide('currentMode', ref('light'));
+// currentContrast is optional - component has fallback
+```
+
+```vue
+<!-- Usage in any component -->
+<mode-island mode="dark">
+  <div class="d-p16 d-bgc-surface-primary">
+    <p class="d-fc-primary">This is dark themed content!</p>
+  </div>
+</mode-island>
+```
 
 ## Purpose
 
@@ -713,13 +770,247 @@ When modifying this component:
 5. **Verify accessibility** - use screen reader to test shadow content
 6. **Update this README** - document any behavior changes
 
-## References
+## Critical Implementation Details
 
-- [Shadow DOM MDN](https://developer.mozilla.org/en-US/docs/Web/API/Web_components/Using_shadow_DOM)
-- [adoptedStyleSheets API](https://developer.mozilla.org/en-US/docs/Web/API/ShadowRoot/adoptedStyleSheets)
-- [CSS Custom Properties Inheritance](https://developer.mozilla.org/en-US/docs/Web/CSS/--*)
-- [Dialtone Theming Guide](../../README.md)
+### Required Dependencies (Non-Optional)
 
-## License
+**The component WILL fail without these:**
 
-Same as Dialtone - Apache 2.0
+1. **`@dialpad/dialtone-css` package**
+   - Must be installed: `npm install @dialpad/dialtone-css`
+   - Must be importable with `?inline` suffix (Vite requirement)
+   - Used at: Line 11 of component
+
+2. **`@dialpad/dialtone-tokens` package**
+   - Must be installed: `npm install @dialpad/dialtone-tokens`
+   - Provides theme objects with `base.css` and `brand.css` properties
+   - Injected via `provide('themes', themesObject)`
+
+3. **Vue provide/inject context**
+   - `themes`: Object with theme definitions (REQUIRED)
+   - `currentMode`: Ref with 'light' | 'dark' | 'system' (REQUIRED for inverted mode)
+   - `currentContrast`: Ref with 'default' | 'high' (OPTIONAL - has fallback)
+
+### Optional Contrast Support
+
+The component gracefully handles environments without contrast theming:
+
+```javascript
+// Line 67: Has fallback if not provided
+const currentContrast = inject('currentContrast', ref('default'));
+
+// Line 139-145: Only applies contrast if available
+if (contrast === 'high') {
+  const contrastTheme = themes[`high-contrast-${mode}`];
+  if (contrastTheme?.css) {  // ← Checks existence
+    cssParts.push(contrastTheme.css);
+  }
+}
+```
+
+**If your project doesn't have contrast theming:**
+- ✅ Component works normally
+- ✅ Simply omit `provide('currentContrast', ...)`
+- ✅ Or provide it with only 'default' value
+- ✅ Or omit high-contrast themes from the `themes` object
+
+### Theme Object Structure (CRITICAL)
+
+**The component expects theme objects with this EXACT structure:**
+
+```typescript
+// REQUIRED structure - do not deviate
+interface ThemeObject {
+  base: {
+    css: string;    // CSS string with :root { --variables }
+    name: string;   // e.g., 'light' or 'dark'
+  };
+  brand: {
+    css: string;    // CSS string with :root { --variables }
+    name: string;   // e.g., 'dp', 'tmo'
+  };
+}
+
+// OPTIONAL contrast theme structure
+interface ContrastTheme {
+  css: string;      // CSS string with :root { --variables }
+  name: string;     // e.g., 'high'
+  mode: string;     // e.g., 'light' or 'dark'
+}
+```
+
+**Example theme object:**
+```javascript
+// dp-light theme
+{
+  base: {
+    css: ':root { --dt-color-surface-primary: #ffffff; ... }',
+    name: 'light'
+  },
+  brand: {
+    css: ':root { --dt-brand-color-primary: #7C52FF; ... }',
+    name: 'dp'
+  }
+}
+```
+
+**Common mistake:** Providing themes with different structure will cause errors at line 102, 134, 135.
+
+### How Content Moves Into Shadow DOM
+
+**CRITICAL:** Understand this lifecycle to avoid bugs:
+
+```javascript
+// 1. Vue renders the component (line 2-6 of template)
+<div ref="hostElement">                    // ← Host element (light DOM)
+  <div ref="slotContent" style="display: none;">  // ← Staging area
+    <slot />                               // ← Your content renders here first
+  </div>
+</div>
+
+// 2. onMounted executes (line 220-252)
+const shadowRoot = hostElement.value.attachShadow({ mode: 'open' });
+
+// 3. Content is MOVED (not copied) from slotContent into shadow root (line 243-245)
+while (slotContent.value.firstChild) {
+  shadowRoot.appendChild(slotContent.value.firstChild);  // ← Physically moves DOM nodes
+}
+
+// 4. Final DOM structure:
+<div ref="hostElement">                    // ← Host (light DOM)
+  #shadow-root (open)                      // ← Shadow boundary
+    <style>:host { theme vars }</style>    // ← Adopted sheets + base styles
+    <div>Your actual content</div>         // ← Content now here
+  (end shadow root)
+  <div ref="slotContent" style="display: none;">  // ← Empty wrapper (hidden)
+  </div>
+</div>
+```
+
+**Implications:**
+- Content starts in light DOM, moves to shadow DOM during mount
+- Vue component refs work because nodes are moved, not cloned
+- Any JavaScript references to DOM nodes remain valid after move
+- Parent cannot style shadow content via CSS selectors
+
+## Common Pitfalls for AI Assistants
+
+### ❌ Pitfall #1: Trying to Simplify by Removing Shadow DOM
+
+**What you might think:**
+"Can we just use inline styles instead of shadow DOM?"
+
+**Why it fails:**
+- CSS variables defined as inline styles would be duplicated per instance (~5700 variables × N instances)
+- Would create 4x bloat compared to current implementation
+- We tried this - it was worse than the problem we're solving
+
+**Correct understanding:**
+Shadow DOM with `adoptedStyleSheets` is the ONLY efficient solution.
+
+### ❌ Pitfall #2: Keeping Content in Light DOM
+
+**What you might think:**
+"Can we keep slot content in light DOM and just use `:host` to style it?"
+
+**Why it fails:**
+- When an element has a shadow root, its light DOM children DON'T RENDER by default
+- You must use `<slot>` inside shadow root to render light DOM children
+- But then they become part of the shadow tree, losing global CSS access
+- We tried this - content was invisible in browser
+
+**Correct understanding:**
+Content must be moved into shadow DOM to render AND inherit theme variables.
+
+### ❌ Pitfall #3: Using `<link>` Tags to Reference CSS
+
+**What you might think:**
+"Can we use `<link href='/dialtone.css'>` in shadow root to avoid importing CSS?"
+
+**Why it fails:**
+- Requires CSS file to be served at a stable URL
+- Breaks portability (different projects serve CSS differently)
+- Build process dependency (must copy CSS to public folder)
+- Not self-contained
+
+**Correct understanding:**
+The `?inline` import makes the component self-contained and portable.
+
+### ❌ Pitfall #4: Assuming Contrast is Always Available
+
+**What you might check:**
+"Does this work if the project doesn't have high contrast themes?"
+
+**Answer:**
+✅ YES! The component has fallbacks:
+- Line 67: `inject('currentContrast', ref('default'))` - provides fallback
+- Line 142: `if (contrastTheme?.css)` - checks existence before using
+- Component works fine without contrast theming
+
+### ❌ Pitfall #5: Not Understanding `inheritAttrs: false`
+
+**What it does:**
+```javascript
+defineOptions({
+  inheritAttrs: false,  // ← Line 13-15
+});
+```
+
+**Why it's needed:**
+- Without this, Vue auto-applies `class` to root element
+- But we manually bind it: `:class="$attrs.class"` (line 2)
+- Without `inheritAttrs: false`, class would be duplicated
+- This is a Vue 3 pattern for custom attribute handling
+
+### ✅ Correct Pattern: Follow the Existing Implementation
+
+The current implementation is the result of extensive iteration and testing. Key decisions:
+
+1. **Shadow DOM is mandatory** - only way to achieve theme isolation
+2. **`adoptedStyleSheets` is optimal** - shares CSS across instances
+3. **Content must move into shadow DOM** - only way it renders and gets themed
+4. **`:host` replaces `:root`** - makes theme CSS target the host element
+5. **Caching is critical** - prevents re-parsing CSS for every instance
+
+## Required Dependencies
+
+### Package Dependencies
+
+```json
+{
+  "dependencies": {
+    "vue": "^3.0.0",
+    "@dialpad/dialtone-css": "^10.0.0",
+    "@dialpad/dialtone-tokens": "^10.0.0"
+  }
+}
+```
+
+### Peer Dependencies from Host Application
+
+The host application MUST provide via `provide()`:
+
+**Mandatory:**
+```javascript
+provide('themes', {
+  'dp-light': DpLightTheme,
+  'dp-dark': DpDarkTheme,
+  // ... other themes
+});
+
+provide('currentMode', ref('light')); // or 'dark' or 'system'
+```
+
+**Optional (has fallback):**
+```javascript
+provide('currentContrast', ref('default')); // or 'high'
+```
+
+**Optional (for nested islands):**
+```javascript
+// Parent ModeIsland automatically provides this
+// You don't need to provide it manually
+provide('modeIslandTheme', computed(() => 'dp-dark'));
+```
+
+## Purpose
