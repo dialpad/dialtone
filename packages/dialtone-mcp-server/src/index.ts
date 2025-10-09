@@ -12,126 +12,125 @@ import clientRules from '../client-rules.json';
 // ============================================================================
 
 /**
- * Extract keywords from a search query
+ * Build a set of all compound properties that exist in the data
+ * This is called once when the server starts
  */
-function extractKeywords(query) {
-  const normalized = query.toLowerCase();
+function buildCompoundPropertiesSet(data) {
+  const compoundProps = new Set();
 
-  // CSS properties
-  const properties = [
-    'padding', 'margin', 'color', 'background', 'border',
-    'display', 'flex', 'grid', 'width', 'height', 'font',
-    'text', 'align', 'justify', 'position', 'top', 'right',
-    'bottom', 'left', 'gap', 'space', 'radius'
-  ].filter(prop => normalized.includes(prop));
-
-  // Directions
-  const directions = [
-    'top', 'right', 'bottom', 'left',
-    'horizontal', 'vertical', 'x', 'y'
-  ].filter(dir => normalized.includes(dir));
-
-  // Values (numbers followed by units or standalone)
-  const valueMatches = normalized.match(/\d+(\.\d+)?(px|rem|em|%)?/g) || [];
-  const values = valueMatches.flatMap(v => {
-    // Convert px to rem using Dialtone's 10-based scale (1rem = 10px)
-    if (v.endsWith('px')) {
-      const px = parseFloat(v);
-      return [`${px}px`, `${px / 10}rem`];
+  for (const classData of Object.values(data)) {
+    for (const valueObj of classData.values) {
+      const prop = valueObj.prop?.toLowerCase();
+      if (prop && prop.includes('-')) {
+        // Store compound properties like "padding-right", "text-align", etc.
+        compoundProps.add(prop);
+      }
     }
-    return [v];
+  }
+
+  return compoundProps;
+}
+
+/**
+ * Extract keywords from a search query
+ * Detects compound properties (padding-right) from adjacent words (padding right)
+ */
+function extractKeywords(query, compoundProperties) {
+  const normalized = query.toLowerCase();
+  const words = normalized.split(/\s+/).filter(w => w.length > 0);
+
+  // Convert px values to rem for Dialtone's 10-based scale
+  const convertedWords = words.flatMap(word => {
+    if (word.endsWith('px')) {
+      const px = parseFloat(word);
+      const rem = `${px / 10}rem`;
+      return [word, rem];
+    }
+    return [word];
   });
 
+  // Detect compound properties from adjacent words
+  const compoundProps = [];
+  for (let i = 0; i < convertedWords.length - 1; i++) {
+    const word1 = convertedWords[i];
+    const word2 = convertedWords[i + 1];
+
+    // Skip if either word is a number/value
+    if (word1.match(/^\d/) || word2.match(/^\d/)) continue;
+    if (word1.endsWith('px') || word1.endsWith('rem') || word1.endsWith('%')) continue;
+    if (word2.endsWith('px') || word2.endsWith('rem') || word2.endsWith('%')) continue;
+
+    // Check if these two words form a compound property
+    const potential = `${word1}-${word2}`;
+    if (compoundProperties.has(potential)) {
+      compoundProps.push(potential);
+    }
+  }
+
   return {
-    properties,
-    directions,
-    values,
-    raw: normalized
+    words: convertedWords,
+    compoundProperties: compoundProps
   };
 }
 
 /**
- * Search utility classes
+ * Search utility classes using exact word matching (no scoring)
  */
-function searchUtilityClasses(query, data) {
+function searchUtilityClasses(query, data, compoundProperties) {
+  const keywords = extractKeywords(query, compoundProperties);
   const results = [];
-  const normalizedQuery = query.toLowerCase();
-  const keywords = extractKeywords(normalizedQuery);
+
+  // Debug logging
+  console.error(`\n[SEARCH DEBUG] Query: "${query}"`);
+  console.error(`[SEARCH DEBUG] Words:`, JSON.stringify(keywords.words));
+  console.error(`[SEARCH DEBUG] Compound properties detected:`, JSON.stringify(keywords.compoundProperties));
 
   // Search through all utility classes
   for (const [className, classData] of Object.entries(data)) {
-    let score = 0;
-    const matchReasons = [];
+    // Check if property matches
+    const propertyMatch = classData.values.some(v => {
+      const prop = v.prop?.toLowerCase() || '';
 
-    // 1. Exact class name match (highest priority)
-    if (className.toLowerCase() === normalizedQuery) {
-      score += 100;
-      matchReasons.push('exact class name match');
-    }
-    // 2. Partial class name match
-    else if (className.toLowerCase().includes(normalizedQuery)) {
-      score += 50;
-      matchReasons.push('class name contains query');
-    }
-
-    // 3. Check CSS properties and values
-    for (const valueObj of classData.values) {
-      const prop = valueObj.prop?.toLowerCase() || '';
-      const value = valueObj.value?.toLowerCase() || '';
-      const description = valueObj.description?.toLowerCase() || '';
-
-      // Match on CSS property
-      if (keywords.properties.some(p => prop.includes(p))) {
-        score += 30;
-        matchReasons.push(`matches property: ${valueObj.prop}`);
+      // Priority 1: Check if property matches any detected compound property
+      if (keywords.compoundProperties.length > 0) {
+        if (keywords.compoundProperties.some(compound => prop === compound)) {
+          return true;
+        }
       }
 
-      // Match on direction
-      if (keywords.directions.some(d => prop.includes(d))) {
-        score += 20;
-        matchReasons.push(`matches direction in property`);
-      }
+      // Priority 2: Check if property contains any individual word
+      return keywords.words.some(word => prop.includes(word));
+    });
 
-      // Match on value
-      if (keywords.values.some(v =>
-        value.includes(v) || description.includes(v)
-      )) {
-        score += 25;
-        matchReasons.push(`matches value: ${valueObj.description || valueObj.value}`);
-      }
+    // Check if ANY value/description contains ANY query word
+    const valueMatch = classData.values.some(v => {
+      const value = v.value?.toLowerCase() || '';
+      const description = v.description?.toLowerCase() || '';
+      return keywords.words.some(word =>
+        value.includes(word) || description.includes(word)
+      );
+    });
 
-      // General property match
-      if (prop.includes(normalizedQuery)) {
-        score += 15;
-        matchReasons.push('property contains query');
-      }
-    }
-
-    if (score > 0) {
+    // Include if BOTH property and value matched
+    if (propertyMatch && valueMatch) {
       results.push({
         type: 'utility-class',
         className,
-        properties: classData.values,
-        score,
-        matchReasons
+        properties: classData.values
       });
     }
   }
 
-  // Sort by score (descending)
-  results.sort((a, b) => b.score - a.score);
-
-  // Debug logging - show top 15 results with scores
-  console.error(`\n[SEARCH DEBUG] Query: "${query}"`);
-  console.error(`[SEARCH DEBUG] Keywords extracted:`, JSON.stringify(keywords));
-  console.error(`[SEARCH DEBUG] Top 15 results by score:`);
-  results.slice(0, 15).forEach((r, i) => {
-    console.error(`  ${i + 1}. ${r.className} - Score: ${r.score}`);
-    console.error(`     Reasons: ${r.matchReasons.join(', ')}`);
+  // Debug logging - show results count
+  console.error(`[SEARCH DEBUG] Found ${results.length} matches`);
+  console.error(`[SEARCH DEBUG] First 10 results:`);
+  results.slice(0, 10).forEach((r, i) => {
+    const prop = r.properties[0];
+    console.error(`  ${i + 1}. ${r.className} - ${prop.prop}: ${prop.description || prop.value}`);
   });
   console.error(`\n`);
 
-  return results.slice(0, 10);
+  return results;
 }
 
 /**
@@ -139,7 +138,7 @@ function searchUtilityClasses(query, data) {
  */
 function formatResults(results, query) {
   if (results.length === 0) {
-    return `No results found for "${query}".\n\nTry searching for:\n- CSS properties (padding, margin, flex)\n- Class names (d-pr2, d-flex)\n- Values (8px, 1rem)`;
+    return `No results found for "${query}".\n\nTry searching with:\n- Property + value (e.g., "padding right 8px", "display flex")\n- Full property name (e.g., "overflow hidden", "position relative")`;
   }
 
   let output = `Found ${results.length} result${results.length > 1 ? 's' : ''} for "${query}":\n\n`;
@@ -154,20 +153,17 @@ function formatResults(results, query) {
     });
 
     // Show usage example
-    output += `   Usage: <div class="${result.className}">...</div>\n`;
-
-    // Show match reason for debugging (first reason only)
-    if (result.matchReasons.length > 0) {
-      output += `   Match: ${result.matchReasons[0]}\n`;
-    }
-
-    output += '\n';
+    output += `   Usage: <div class="${result.className}">...</div>\n\n`;
   });
 
   return output;
 }
 
 async function main() {
+  // Build compound properties set from utility classes data (done once at startup)
+  const compoundProperties = buildCompoundPropertiesSet(utilityClasses);
+  console.error(`[INIT] Built compound properties set: ${compoundProperties.size} properties`);
+
   // Create server instance
   const server = new McpServer({
     name: "dialtone-mcp-server",
@@ -283,7 +279,7 @@ async function main() {
         }
 
         // Perform search
-        const results = searchUtilityClasses(query, utilityClasses);
+        const results = searchUtilityClasses(query, utilityClasses, compoundProperties);
         console.error('[search_dialtone] Found results:', results.length);
 
         // Format and return results
