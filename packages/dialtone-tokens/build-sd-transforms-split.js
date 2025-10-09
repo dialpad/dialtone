@@ -353,7 +353,8 @@ export async function runSplitTokens() {
 
   // Process each brand
   for (const [brandName, themes] of Object.entries(themesByBrand)) {
-    if (themes.light && themes.dark && ['dp', 'tmo', 'base'].includes(brandName)) {
+    // Only process brands that have both light and dark themes
+    if (themes.light && themes.dark) {
       console.log(`Building split tokens for brand: ${brandName}`);
 
       // Prepare configurations

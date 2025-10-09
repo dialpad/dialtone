@@ -127,7 +127,67 @@
     <div class="controls">
         <h3>Theme Controls</h3>
         <button class="toggle-button" onclick="toggleMode()">Toggle Mode</button>
-        <button class="toggle-button" onclick="toggleBrand()">Switch Brand</button>
+        <div style="margin-top: 1rem;">
+            <label for="brand-select" style="display: block; margin-bottom: 0.5rem; font-size: 0.875rem;">Select Brand:</label>
+            <select id="brand-select" onchange="changeBrand(this.value)" style="width: 100%; padding: 0.5rem; border-radius: 4px; border: 1px solid var(--dt-color-border-subtle); background: var(--dt-color-surface-primary); color: var(--dt-color-foreground-primary);">
+                <option value="dp">Dialpad</option>
+                <option value="tmo">T-Mobile</option>
+                <optgroup label="Named Themes">
+                    <option value="aegean">Aegean</option>
+                    <option value="botany">Botany</option>
+                    <option value="buttercream">Buttercream</option>
+                    <option value="ceruleo">Ceruleo</option>
+                    <option value="expressive">Expressive</option>
+                    <option value="expressive-sm">Expressive SM</option>
+                    <option value="high-desert">High Desert</option>
+                    <option value="melon">Melon</option>
+                    <option value="plum">Plum</option>
+                    <option value="prota-deuter">Prota Deuter</option>
+                    <option value="sunflower">Sunflower</option>
+                    <option value="trita">Trita</option>
+                    <option value="verdant-haze">Verdant Haze</option>
+                </optgroup>
+                <optgroup label="Numbered Themes">
+                    <option value="101">Theme 101</option>
+                    <option value="102">Theme 102</option>
+                    <option value="103">Theme 103</option>
+                    <option value="104">Theme 104</option>
+                    <option value="105">Theme 105</option>
+                    <option value="106">Theme 106</option>
+                    <option value="107">Theme 107</option>
+                    <option value="108">Theme 108</option>
+                    <option value="109">Theme 109</option>
+                    <option value="110">Theme 110</option>
+                    <option value="111">Theme 111</option>
+                    <option value="112">Theme 112</option>
+                    <option value="113">Theme 113</option>
+                    <option value="114">Theme 114</option>
+                    <option value="115">Theme 115</option>
+                    <option value="116">Theme 116</option>
+                    <option value="117">Theme 117</option>
+                    <option value="118">Theme 118</option>
+                    <option value="119">Theme 119</option>
+                    <option value="120">Theme 120</option>
+                    <option value="121">Theme 121</option>
+                    <option value="122">Theme 122</option>
+                    <option value="123">Theme 123</option>
+                    <option value="124">Theme 124</option>
+                    <option value="125">Theme 125</option>
+                    <option value="126">Theme 126</option>
+                    <option value="127">Theme 127</option>
+                    <option value="128">Theme 128</option>
+                    <option value="129">Theme 129</option>
+                    <option value="130">Theme 130</option>
+                    <option value="131">Theme 131</option>
+                    <option value="132">Theme 132</option>
+                    <option value="133">Theme 133</option>
+                    <option value="134">Theme 134</option>
+                    <option value="135">Theme 135</option>
+                    <option value="136">Theme 136</option>
+                    <option value="137">Theme 137</option>
+                </optgroup>
+            </select>
+        </div>
         <div style="margin-top: 1rem; font-size: 0.875rem;">
             <div>Current Mode: <strong id="current-mode">light</strong></div>
             <div>Current Brand: <strong id="current-brand" style="text-transform: uppercase;">dp</strong></div>
@@ -143,16 +203,20 @@
 
         <div class="metrics">
             <div class="metric-card">
-                <div class="metric-value">81%</div>
-                <div class="metric-label">Size Reduction</div>
+                <div class="metric-value">70%</div>
+                <div class="metric-label">Size Reduction Per Brand</div>
             </div>
             <div class="metric-card">
                 <div class="metric-value">0ms</div>
                 <div class="metric-label">Mode Switch Time</div>
             </div>
             <div class="metric-card">
+                <div class="metric-value">50+</div>
+                <div class="metric-label">Available Themes</div>
+            </div>
+            <div class="metric-card">
                 <div class="metric-value">3</div>
-                <div class="metric-label">CSS Files Total</div>
+                <div class="metric-label">Core CSS Files</div>
             </div>
         </div>
 
@@ -602,13 +666,31 @@
             document.getElementById('current-mode').textContent = mode;
             document.getElementById('current-brand').textContent = brand.toUpperCase();
 
-            // Update brand indicator
+            // Update dropdown selection
+            document.getElementById('brand-select').value = brand;
+
+            // Update brand indicator with nice names
             const brandName = document.getElementById('brand-name');
-            if (brand === 'tmo') {
-                brandName.textContent = 'T-MOBILE';
-            } else {
-                brandName.textContent = 'DIALPAD';
-            }
+            const brandNames = {
+                'dp': 'DIALPAD',
+                'tmo': 'T-MOBILE',
+                'aegean': 'AEGEAN',
+                'botany': 'BOTANY',
+                'buttercream': 'BUTTERCREAM',
+                'ceruleo': 'CERULEO',
+                'expressive': 'EXPRESSIVE',
+                'expressive-sm': 'EXPRESSIVE SM',
+                'high-desert': 'HIGH DESERT',
+                'melon': 'MELON',
+                'plum': 'PLUM',
+                'prota-deuter': 'PROTA DEUTER',
+                'sunflower': 'SUNFLOWER',
+                'trita': 'TRITA',
+                'verdant-haze': 'VERDANT HAZE',
+            };
+
+            // Use nice name if available, otherwise format the brand code
+            brandName.textContent = brandNames[brand] || `THEME ${brand}`;
         }
 
         // Toggle between light and dark modes
@@ -620,23 +702,21 @@
             updateDisplay();
         }
 
-        // Switch between brands - actually loads different CSS files
-        function toggleBrand() {
+        // Change brand via dropdown - actually loads different CSS files
+        function changeBrand(brandName) {
             const html = document.documentElement;
-            const currentBrand = html.getAttribute('data-dt-brand') || 'dp';
-            const newBrand = currentBrand === 'dp' ? 'tmo' : 'dp';
 
             // Update the data attribute
-            html.setAttribute('data-dt-brand', newBrand);
+            html.setAttribute('data-dt-brand', brandName);
 
             // Switch the CSS file
             const brandColors = document.getElementById('brand-colors');
-            brandColors.href = `dist/css/split/tokens-${newBrand}-colors.css`;
+            brandColors.href = `dist/css/split/tokens-${brandName}-colors.css`;
 
             updateDisplay();
 
             // Show a brief notification
-            console.log(`Switched to ${newBrand.toUpperCase()} brand colors`);
+            console.log(`Switched to ${brandName} brand colors`);
         }
 
         // Initialize display
