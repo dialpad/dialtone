@@ -223,8 +223,9 @@
                 <div class="metric-label">Available Themes</div>
             </div>
             <div class="metric-card">
-                <div class="metric-value">176KB</div>
+                <div class="metric-value">855KB</div>
                 <div class="metric-label">Base Load Size</div>
+                <div style="font-size: 0.65rem; color: var(--dt-color-foreground-secondary); margin-top: 0.25rem;">~75% is HSLA components</div>
             </div>
         </div>
 
@@ -233,14 +234,14 @@
                 <summary>How It Works</summary>
                 <p>The optimized architecture uses a layered approach with incredible efficiency:</p>
                 <ol>
-                    <li><strong>Core Tokens</strong> (64KB) - Typography, spacing, sizing, components - loaded once</li>
-                    <li><strong>Base Colors</strong> (23KB) - Fundamental color palette - loaded once</li>
-                    <li><strong>DP Base Theme</strong> (89KB) - Dialpad colors (light + dark) - loaded once</li>
+                    <li><strong>Core Tokens</strong> (50KB) - Typography, spacing, sizing, components, fonts - loaded once</li>
+                    <li><strong>Base Colors</strong> (177KB) - Fundamental color palette with HSLA components - loaded once</li>
+                    <li><strong>DP Base Theme</strong> (628KB) - Dialpad colors (light + dark) with HSLA - loaded once</li>
                     <li><strong>Theme Overrides</strong> (0.3-5KB) - Only the differences from DP!</li>
                 </ol>
 
                 <h3 style="margin-top: 1.5rem;">Layered Theme System</h3>
-                <p>Instead of loading a complete 89KB file for each theme, we:</p>
+                <p>Instead of loading a complete 628KB file for each theme, we:</p>
                 <ul>
                     <li>Load DP as the <strong>base theme</strong> (always present)</li>
                     <li>Layer theme-specific <strong>overrides</strong> on top</li>
@@ -249,7 +250,7 @@
 
                 <div style="background: var(--dt-color-surface-bold); padding: 1rem; border-radius: 4px; margin-top: 1rem;">
                     <strong>Example:</strong> T-Mobile theme is only <strong>0.54KB</strong> because it only changes the accent color!<br>
-                    <code style="font-size: 0.875rem;">dp (89KB base) + tmo (0.54KB override) = 89.54KB total</code>
+                    <code style="font-size: 0.875rem;">Base load (855KB) + tmo override (0.54KB) = 855.54KB total</code>
                 </div>
 
                 <h3>Example CSS Structure</h3>
@@ -908,39 +909,46 @@
             <table style="width: 100%; border-collapse: collapse; font-size: 0.875rem;">
                 <thead>
                     <tr style="background: var(--dt-color-surface-bold); text-align: left;">
-                        <th style="padding: 0.5rem;">Theme</th>
-                        <th style="padding: 0.5rem;">Old Size</th>
-                        <th style="padding: 0.5rem;">New Size (Override)</th>
-                        <th style="padding: 0.5rem;">Reduction</th>
+                        <th style="padding: 0.5rem;">Scenario</th>
+                        <th style="padding: 0.5rem;">Old System</th>
+                        <th style="padding: 0.5rem;">New System</th>
+                        <th style="padding: 0.5rem;">Change</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr style="border-bottom: 1px solid var(--dt-color-border-subtle);">
-                        <td style="padding: 0.5rem;"><strong>DP (base)</strong></td>
-                        <td style="padding: 0.5rem;">358KB (light) + 352KB (dark)</td>
-                        <td style="padding: 0.5rem;">89KB (combined)</td>
-                        <td style="padding: 0.5rem; color: var(--dt-color-foreground-success);">87.5%</td>
+                        <td style="padding: 0.5rem;"><strong>DP theme only</strong></td>
+                        <td style="padding: 0.5rem;">710KB (light + dark)</td>
+                        <td style="padding: 0.5rem;">855KB</td>
+                        <td style="padding: 0.5rem; color: var(--dt-color-foreground-warning);">+145KB (+20%)*</td>
                     </tr>
                     <tr style="border-bottom: 1px solid var(--dt-color-border-subtle);">
-                        <td style="padding: 0.5rem;">TMO</td>
-                        <td style="padding: 0.5rem;">710KB total</td>
-                        <td style="padding: 0.5rem;">0.54KB override</td>
-                        <td style="padding: 0.5rem; color: var(--dt-color-foreground-success);">99.4%</td>
+                        <td style="padding: 0.5rem;"><strong>Switch DP → TMO</strong></td>
+                        <td style="padding: 0.5rem;">Swap 710KB file</td>
+                        <td style="padding: 0.5rem;">Load 0.54KB override</td>
+                        <td style="padding: 0.5rem; color: var(--dt-color-foreground-success);">99.9% smaller</td>
                     </tr>
                     <tr style="border-bottom: 1px solid var(--dt-color-border-subtle);">
-                        <td style="padding: 0.5rem;">Sunflower</td>
-                        <td style="padding: 0.5rem;">710KB total</td>
-                        <td style="padding: 0.5rem;">4.15KB override</td>
-                        <td style="padding: 0.5rem; color: var(--dt-color-foreground-success);">95.3%</td>
+                        <td style="padding: 0.5rem;"><strong>Switch mode (light ↔ dark)</strong></td>
+                        <td style="padding: 0.5rem;">Swap 355KB file</td>
+                        <td style="padding: 0.5rem;">Change attribute (0KB)</td>
+                        <td style="padding: 0.5rem; color: var(--dt-color-foreground-success);">Instant (no load)</td>
                     </tr>
-                    <tr>
-                        <td style="padding: 0.5rem;">Theme 122</td>
-                        <td style="padding: 0.5rem;">710KB total</td>
-                        <td style="padding: 0.5rem;">4.13KB override</td>
-                        <td style="padding: 0.5rem; color: var(--dt-color-foreground-success);">95.4%</td>
+                    <tr style="border-bottom: 1px solid var(--dt-color-border-subtle);">
+                        <td style="padding: 0.5rem;"><strong>Storybook w/ 10 themes</strong></td>
+                        <td style="padding: 0.5rem;">7,100KB (10 × 710KB)</td>
+                        <td style="padding: 0.5rem;">895KB (base + 40KB overrides)</td>
+                        <td style="padding: 0.5rem; color: var(--dt-color-foreground-success);">87% smaller</td>
+                    </tr>
+                    <tr style="border-bottom: 1px solid var(--dt-color-border-subtle);">
+                        <td style="padding: 0.5rem;"><strong>All 50 themes available</strong></td>
+                        <td style="padding: 0.5rem;">35,500KB (50 × 710KB)</td>
+                        <td style="padding: 0.5rem;">1,052KB (base + all overrides)</td>
+                        <td style="padding: 0.5rem; color: var(--dt-color-foreground-success);">97% smaller</td>
                     </tr>
                 </tbody>
             </table>
+            <p style="font-size: 0.75rem; color: var(--dt-color-foreground-secondary); margin-top: 0.5rem;">* Single theme is 20% larger due to HSLA components (for dynamic color manipulation), but the architecture shines for theme switching and multi-theme apps</p>
         </div>
     </div>
 
