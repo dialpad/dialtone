@@ -835,6 +835,9 @@ Example: &lt;html data-dt-brand="tmo" data-dt-mode="dark" data-dt-contrast="high
                     <div class="color-swatch" style="background: var(--dt-color-surface-info); color: var(--dt-color-foreground-primary);">
                         Info Surface<br>var(--dt-color-surface-info)
                     </div>
+                    <div class="color-swatch" style="background: var(--dt-color-surface-ai); color: var(--dt-color-neutral-white);">
+                        Info Surface<br>var(--dt-color-surface-info)
+                    </div>
                 </div>
             </section>
 
@@ -948,6 +951,43 @@ Example: &lt;html data-dt-brand="tmo" data-dt-mode="dark" data-dt-contrast="high
                     <div class="color-swatch" style="background: var(--dt-color-surface-secondary); color: var(--dt-color-foreground-primary); border: 1px solid var(--dt-color-border-subtle);">
                         <div style="font: var(--dt-typography-code-md); margin-bottom: var(--dt-space-400);">Code MD</div>
                         <code>--dt-typography-code-md</code>
+                    </div>
+                </div>
+            </section>
+
+            <section>
+                <h3>Shadow Composites</h3>
+                <p>Shadow tokens combine offset, blur, spread, and color into CSS box-shadow values (adapts to light/dark mode):</p>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: var(--dt-space-400); margin-top: var(--dt-space-400);">
+                    <div style="background: var(--dt-color-surface-secondary); padding: var(--dt-space-400); border-radius: var(--dt-size-radius-300); text-align: center;">
+                        <div style="background: var(--dt-color-surface-primary); padding: var(--dt-space-500); border-radius: var(--dt-size-radius-300); box-shadow: var(--dt-shadow-small); margin-bottom: var(--dt-space-300);">
+                            Small
+                        </div>
+                        <code style="font-size: 0.75rem;">--dt-shadow-small</code>
+                    </div>
+                    <div style="background: var(--dt-color-surface-secondary); padding: var(--dt-space-400); border-radius: var(--dt-size-radius-300); text-align: center;">
+                        <div style="background: var(--dt-color-surface-primary); padding: var(--dt-space-500); border-radius: var(--dt-size-radius-300); box-shadow: var(--dt-shadow-medium); margin-bottom: var(--dt-space-300);">
+                            Medium
+                        </div>
+                        <code style="font-size: 0.75rem;">--dt-shadow-medium</code>
+                    </div>
+                    <div style="background: var(--dt-color-surface-secondary); padding: var(--dt-space-400); border-radius: var(--dt-size-radius-300); text-align: center;">
+                        <div style="background: var(--dt-color-surface-primary); padding: var(--dt-space-500); border-radius: var(--dt-size-radius-300); box-shadow: var(--dt-shadow-large); margin-bottom: var(--dt-space-300);">
+                            Large
+                        </div>
+                        <code style="font-size: 0.75rem;">--dt-shadow-large</code>
+                    </div>
+                    <div style="background: var(--dt-color-surface-secondary); padding: var(--dt-space-400); border-radius: var(--dt-size-radius-300); text-align: center;">
+                        <div style="background: var(--dt-color-surface-primary); padding: var(--dt-space-500); border-radius: var(--dt-size-radius-300); box-shadow: var(--dt-shadow-extra-large); margin-bottom: var(--dt-space-300);">
+                            XL
+                        </div>
+                        <code style="font-size: 0.75rem;">--dt-shadow-extra-large</code>
+                    </div>
+                    <div style="background: var(--dt-color-surface-secondary); padding: var(--dt-space-400); border-radius: var(--dt-size-radius-300); text-align: center;">
+                        <div style="background: var(--dt-color-surface-primary); padding: var(--dt-space-500); border-radius: var(--dt-size-radius-300); box-shadow: var(--dt-shadow-card); margin-bottom: var(--dt-space-300);">
+                            Card
+                        </div>
+                        <code style="font-size: 0.75rem;">--dt-shadow-card</code>
                     </div>
                 </div>
             </section>
