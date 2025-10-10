@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" data-dt-mode="light" data-dt-brand="dp">
+<html lang="en" data-dt-mode="dark" data-dt-brand="dp">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -90,8 +90,6 @@
             grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
             gap: 1rem;
             margin-top: 2rem;
-            padding: 1rem;
-            background: var(--dt-color-surface-primary);
             border-radius: 8px;
         }
 
@@ -100,17 +98,18 @@
             background: var(--dt-color-surface-primary);
             border-radius: 4px;
             text-align: center;
+            border: 1px solid var(--dt-color-border-subtle);
         }
 
         .metric-value {
             font-size: 2rem;
             font-weight: bold;
-            color: var(--dt-color-brand-purple);
+            color: var(--dt-color-foreground-tertiary);
         }
 
         .metric-label {
             font-size: 0.875rem;
-            color: var(--dt-color-foreground-secondary);
+            color: var(--dt-color-foreground-primary);
             margin-top: 0.5rem;
         }
 
@@ -193,10 +192,15 @@
             </select>
         </div>
         <div style="margin-top: 1rem; font-size: 0.875rem;">
-            <div>Current Mode: <strong id="current-mode">light</strong></div>
-            <div>Current Brand: <strong id="current-brand" style="text-transform: uppercase;">dp</strong></div>
-            <div id="brand-indicator" style="margin-top: 0.5rem; padding: 0.5rem; border-radius: 4px; background: var(--dt-shell-base-color-accent, var(--dt-color-brand-purple)); color: white; text-align: center; font-weight: bold;">
-                <span id="brand-name">DIALPAD</span>
+            <div style="margin-bottom: 1rem;">
+                <div>Current Mode: <strong id="current-mode">light</strong></div>
+                <div>Current Brand: <strong id="current-brand" style="text-transform: uppercase;">dp</strong></div>
+            </div>
+            <div style="display: flex; gap: .8rem;">
+                <div style="flex: 1; block-size: 2.4rem; color: transparent; background: var(--dt-shell-base-color-accent);" title="Accent" id="brand-indicator"></div>
+                <div style="flex: 1; block-size: 2.4rem; color: transparent; background: var(--dt-shell-base-color-surface);" title="Surface"></div>
+                <div style="flex: 1; block-size: 2.4rem; color: transparent; background: var(--dt-shell-base-color-action);" title="Action"></div>
+                <div style="flex: 1; block-size: 2.4rem; color: transparent; background: var(--dt-shell-base-color-foreground);" title="Foreground"></div>
             </div>
         </div>
     </div>
@@ -268,600 +272,604 @@
         </div>
 
         <div class="demo-section">
-            <h2>Base Color Palettes</h2>
-            <p style="font-size: 0.875rem; color: var(--dt-color-foreground-secondary); margin-bottom: 1.5rem;">Complete color ramps for all base colors (hover to see variable name)</p>
+            <section>
+                <h3>Shell Colors - Complete List</h3>
+                <p style="font-size: 0.875rem; color: var(--dt-color-foreground-secondary); margin-bottom: 1rem;">All shell-specific design tokens (57 total)</p>
+                <h4 style="margin-top: 1.5rem; margin-bottom: 1rem;">Shell Base Colors</h4>
+                <div class="color-grid">
+                    <div class="color-swatch" style="background: var(--dt-shell-base-color-accent, var(--dt-color-brand-purple)); color: white;">
+                        base-color-accent<br>(TMO: magenta)
+                    </div>
+                    <div class="color-swatch" style="background: var(--dt-shell-base-color-surface); color: var(--dt-shell-color-foreground-primary); border: 1px solid var(--dt-color-border-subtle);">
+                        base-color-surface
+                    </div>
+                    <div class="color-swatch" style="background: var(--dt-shell-base-color-action); color: white; border: 1px solid var(--dt-color-border-subtle);">
+                        base-color-action
+                    </div>
+                    <div class="color-swatch" style="background: var(--dt-color-surface-secondary); color: var(--dt-shell-base-color-foreground); border: 1px solid var(--dt-color-border-subtle);">
+                        <div style="font-size: 1.2rem; margin-bottom: 0.5rem;">Aa</div>
+                        base-color-foreground
+                    </div>
+                    <div class="color-swatch" style="background: var(--dt-color-surface-primary); border: 3px solid var(--dt-shell-base-color-border); color: var(--dt-color-foreground-secondary);">
+                        base-color-border
+                    </div>
+                </div>
+                <h4 style="margin-top: 1.5rem; margin-bottom: 1rem;">Shell Base Status Colors</h4>
+                <div class="color-grid">
+                    <div class="color-swatch" style="background: var(--dt-color-surface-secondary); color: var(--dt-shell-base-color-status-positive); border: 1px solid var(--dt-color-border-subtle);">
+                        <div style="font-size: 1.2rem; margin-bottom: 0.5rem;">✓</div>
+                        base-status-positive
+                    </div>
+                    <div class="color-swatch" style="background: var(--dt-color-surface-secondary); color: var(--dt-shell-base-color-status-critical); border: 1px solid var(--dt-color-border-subtle);">
+                        <div style="font-size: 1.2rem; margin-bottom: 0.5rem;">✗</div>
+                        base-status-critical
+                    </div>
+                    <div class="color-swatch" style="background: var(--dt-color-surface-secondary); color: var(--dt-shell-base-color-status-warning); border: 1px solid var(--dt-color-border-subtle);">
+                        <div style="font-size: 1.2rem; margin-bottom: 0.5rem;">⚠</div>
+                        base-status-warning
+                    </div>
+                    <div class="color-swatch" style="background: var(--dt-color-surface-secondary); color: var(--dt-shell-base-color-status-away); border: 1px solid var(--dt-color-border-subtle);">
+                        <div style="font-size: 1.2rem; margin-bottom: 0.5rem;">◯</div>
+                        base-status-away
+                    </div>
+                </div>
+                <h4 style="margin-top: 1.5rem; margin-bottom: 1rem;">Shell Base Action Backgrounds</h4>
+                <div class="color-grid">
+                    <div class="color-swatch" style="background: var(--dt-shell-base-action-color-background-primary); color: var(--dt-shell-color-foreground-primary); border: 1px solid var(--dt-color-border-subtle);">
+                        base-action-bg-primary
+                    </div>
+                    <div class="color-swatch" style="background: var(--dt-shell-base-action-color-background-secondary); color: var(--dt-shell-color-foreground-primary); border: 1px solid var(--dt-color-border-subtle);">
+                        base-action-bg-secondary
+                    </div>
+                    <div class="color-swatch" style="background: var(--dt-shell-base-action-color-background-muted); color: var(--dt-shell-color-foreground-primary); border: 1px solid var(--dt-color-border-subtle);">
+                        base-action-bg-muted
+                    </div>
+                </div>
+                <h4 style="margin-top: 1.5rem; margin-bottom: 1rem;">Shell Action Backgrounds (All States)</h4>
+                <div class="color-grid">
+                    <!-- Primary Actions -->
+                    <div class="color-swatch" style="background: var(--dt-shell-action-color-background-primary-default); color: var(--dt-shell-action-color-foreground-primary-default); border: 1px solid var(--dt-color-border-subtle);">
+                        action-primary-default
+                    </div>
+                    <div class="color-swatch" style="background: var(--dt-shell-action-color-background-primary-hover); color: var(--dt-shell-action-color-foreground-primary-default); border: 1px solid var(--dt-color-border-subtle);">
+                        action-primary-hover
+                    </div>
+                    <div class="color-swatch" style="background: var(--dt-shell-action-color-background-primary-active); color: var(--dt-shell-action-color-foreground-primary-default); border: 1px solid var(--dt-color-border-subtle);">
+                        action-primary-active
+                    </div>
+                    <div class="color-swatch" style="background: var(--dt-shell-action-color-background-primary-selected); color: var(--dt-shell-action-color-foreground-primary-default); border: 1px solid var(--dt-color-border-subtle);">
+                        action-primary-selected
+                    </div>
+                    <!-- Secondary Actions -->
+                    <div class="color-swatch" style="background: var(--dt-shell-action-color-background-secondary-default); color: var(--dt-shell-action-color-foreground-secondary-default); border: 1px solid var(--dt-color-border-subtle);">
+                        action-secondary-default
+                    </div>
+                    <div class="color-swatch" style="background: var(--dt-shell-action-color-background-secondary-hover); color: var(--dt-shell-action-color-foreground-secondary-default); border: 1px solid var(--dt-color-border-subtle);">
+                        action-secondary-hover
+                    </div>
+                    <div class="color-swatch" style="background: var(--dt-shell-action-color-background-secondary-active); color: var(--dt-shell-action-color-foreground-secondary-default); border: 1px solid var(--dt-color-border-subtle);">
+                        action-secondary-active
+                    </div>
+                    <div class="color-swatch" style="background: var(--dt-shell-action-color-background-secondary-selected); color: var(--dt-shell-action-color-foreground-secondary-default); border: 1px solid var(--dt-color-border-subtle);">
+                        action-secondary-selected
+                    </div>
+                    <!-- Muted Actions -->
+                    <div class="color-swatch" style="background: var(--dt-shell-action-color-background-muted-default); color: var(--dt-shell-action-color-foreground-muted-default); border: 1px solid var(--dt-color-border-subtle);">
+                        action-muted-default
+                    </div>
+                    <div class="color-swatch" style="background: var(--dt-shell-action-color-background-muted-hover); color: var(--dt-shell-action-color-foreground-muted-hover); border: 1px solid var(--dt-color-border-subtle);">
+                        action-muted-hover
+                    </div>
+                    <div class="color-swatch" style="background: var(--dt-shell-action-color-background-muted-active); color: var(--dt-shell-action-color-foreground-muted-active); border: 1px solid var(--dt-color-border-subtle);">
+                        action-muted-active
+                    </div>
+                    <div class="color-swatch" style="background: var(--dt-shell-action-color-background-muted-selected); color: var(--dt-shell-action-color-foreground-muted-selected); border: 1px solid var(--dt-color-border-subtle);">
+                        action-muted-selected
+                    </div>
+                </div>
+                <h4 style="margin-top: 1.5rem; margin-bottom: 1rem;">Shell Action Foregrounds</h4>
+                <div class="color-grid">
+                    <div class="color-swatch" style="background: var(--dt-color-surface-secondary); color: var(--dt-shell-action-color-foreground-primary-default); border: 1px solid var(--dt-color-border-subtle);">
+                        <div style="font-size: 1.2rem; margin-bottom: 0.5rem;">Aa</div>
+                        action-fg-primary
+                    </div>
+                    <div class="color-swatch" style="background: var(--dt-color-surface-secondary); color: var(--dt-shell-action-color-foreground-primary-strong); border: 1px solid var(--dt-color-border-subtle);">
+                        <div style="font-size: 1.2rem; margin-bottom: 0.5rem;">Aa</div>
+                        action-fg-primary-strong
+                    </div>
+                    <div class="color-swatch" style="background: var(--dt-color-surface-secondary); color: var(--dt-shell-action-color-foreground-primary-disabled); border: 1px solid var(--dt-color-border-subtle);">
+                        <div style="font-size: 1.2rem; margin-bottom: 0.5rem;">Aa</div>
+                        action-fg-primary-disabled
+                    </div>
+                    <div class="color-swatch" style="background: var(--dt-color-surface-secondary); color: var(--dt-shell-action-color-foreground-secondary-default); border: 1px solid var(--dt-color-border-subtle);">
+                        <div style="font-size: 1.2rem; margin-bottom: 0.5rem;">Aa</div>
+                        action-fg-secondary
+                    </div>
+                    <div class="color-swatch" style="background: var(--dt-color-surface-secondary); color: var(--dt-shell-action-color-foreground-secondary-disabled); border: 1px solid var(--dt-color-border-subtle);">
+                        <div style="font-size: 1.2rem; margin-bottom: 0.5rem;">Aa</div>
+                        action-fg-secondary-disabled
+                    </div>
+                    <div class="color-swatch" style="background: var(--dt-color-surface-secondary); color: var(--dt-shell-action-color-foreground-tertiary-default); border: 1px solid var(--dt-color-border-subtle);">
+                        <div style="font-size: 1.2rem; margin-bottom: 0.5rem;">Aa</div>
+                        action-fg-tertiary
+                    </div>
+                    <div class="color-swatch" style="background: var(--dt-color-surface-secondary); color: var(--dt-shell-action-color-foreground-muted-default); border: 1px solid var(--dt-color-border-subtle);">
+                        <div style="font-size: 1.2rem; margin-bottom: 0.5rem;">Aa</div>
+                        action-fg-muted-default
+                    </div>
+                    <div class="color-swatch" style="background: var(--dt-color-surface-secondary); color: var(--dt-shell-action-color-foreground-muted-hover); border: 1px solid var(--dt-color-border-subtle);">
+                        <div style="font-size: 1.2rem; margin-bottom: 0.5rem;">Aa</div>
+                        action-fg-muted-hover
+                    </div>
+                    <div class="color-swatch" style="background: var(--dt-color-surface-secondary); color: var(--dt-shell-action-color-foreground-muted-active); border: 1px solid var(--dt-color-border-subtle);">
+                        <div style="font-size: 1.2rem; margin-bottom: 0.5rem;">Aa</div>
+                        action-fg-muted-active
+                    </div>
+                    <div class="color-swatch" style="background: var(--dt-color-surface-secondary); color: var(--dt-shell-action-color-foreground-muted-selected); border: 1px solid var(--dt-color-border-subtle);">
+                        <div style="font-size: 1.2rem; margin-bottom: 0.5rem;">Aa</div>
+                        action-fg-muted-selected
+                    </div>
+                </div>
+                <h4 style="margin-top: 1.5rem; margin-bottom: 1rem;">Shell Foreground Colors</h4>
+                <div class="color-grid">
+                    <div class="color-swatch" style="background: var(--dt-color-surface-secondary); color: var(--dt-shell-color-foreground-primary); border: 1px solid var(--dt-color-border-subtle);">
+                        <div style="font-size: 1.2rem; margin-bottom: 0.5rem;">Aa</div>
+                        foreground-primary
+                    </div>
+                    <div class="color-swatch" style="background: var(--dt-color-surface-secondary); color: var(--dt-shell-color-foreground-secondary); border: 1px solid var(--dt-color-border-subtle);">
+                        <div style="font-size: 1.2rem; margin-bottom: 0.5rem;">Aa</div>
+                        foreground-secondary
+                    </div>
+                    <div class="color-swatch" style="background: var(--dt-color-surface-secondary); color: var(--dt-shell-color-foreground-tertiary); border: 1px solid var(--dt-color-border-subtle);">
+                        <div style="font-size: 1.2rem; margin-bottom: 0.5rem;">Aa</div>
+                        foreground-tertiary
+                    </div>
+                    <div class="color-swatch" style="background: var(--dt-color-surface-secondary); color: var(--dt-shell-color-foreground-muted); border: 1px solid var(--dt-color-border-subtle);">
+                        <div style="font-size: 1.2rem; margin-bottom: 0.5rem;">Aa</div>
+                        foreground-muted
+                    </div>
+                    <div class="color-swatch" style="background: var(--dt-color-surface-secondary); color: var(--dt-shell-color-foreground-strong); border: 1px solid var(--dt-color-border-subtle);">
+                        <div style="font-size: 1.2rem; margin-bottom: 0.5rem;">Aa</div>
+                        foreground-strong
+                    </div>
+                    <div class="color-swatch" style="background: var(--dt-color-surface-secondary); color: var(--dt-shell-color-foreground-disabled); border: 1px solid var(--dt-color-border-subtle);">
+                        <div style="font-size: 1.2rem; margin-bottom: 0.5rem;">Aa</div>
+                        foreground-disabled
+                    </div>
+                    <div class="color-swatch" style="background: var(--dt-color-surface-secondary); color: var(--dt-shell-color-foreground-positive); border: 1px solid var(--dt-color-border-subtle);">
+                        <div style="font-size: 1.2rem; margin-bottom: 0.5rem;">✓</div>
+                        foreground-positive
+                    </div>
+                    <div class="color-swatch" style="background: var(--dt-color-surface-secondary); color: var(--dt-shell-color-foreground-critical); border: 1px solid var(--dt-color-border-subtle);">
+                        <div style="font-size: 1.2rem; margin-bottom: 0.5rem;">✗</div>
+                        foreground-critical
+                    </div>
+                    <div class="color-swatch" style="background: var(--dt-color-surface-secondary); color: var(--dt-shell-color-foreground-warning); border: 1px solid var(--dt-color-border-subtle);">
+                        <div style="font-size: 1.2rem; margin-bottom: 0.5rem;">⚠</div>
+                        foreground-warning
+                    </div>
+                </div>
+                <h4 style="margin-top: 1.5rem; margin-bottom: 1rem;">Shell Surfaces & Borders</h4>
+                <div class="color-grid">
+                    <div class="color-swatch" style="background: var(--dt-shell-color-surface-default); color: var(--dt-shell-color-foreground-primary); border: 1px solid var(--dt-color-border-subtle);">
+                        surface-default
+                    </div>
+                    <div class="color-swatch" style="background: var(--dt-color-surface-primary); border: 3px solid var(--dt-shell-color-border-subtle); color: var(--dt-color-foreground-secondary);">
+                        border-subtle
+                    </div>
+                    <div class="color-swatch" style="background: var(--dt-color-surface-primary); border: 3px solid var(--dt-shell-color-border-default); color: var(--dt-color-foreground-secondary);">
+                        border-default
+                    </div>
+                    <div class="color-swatch" style="background: var(--dt-color-surface-primary); border: 3px solid var(--dt-shell-color-border-base); color: var(--dt-color-foreground-secondary);">
+                        border-base
+                    </div>
+                </div>
+                <h4 style="margin-top: 1.5rem; margin-bottom: 1rem;">Shell Presence Colors</h4>
+                <div class="color-grid">
+                    <div class="color-swatch" style="background: var(--dt-color-surface-secondary); border: 1px solid var(--dt-color-border-subtle);">
+                        <div style="width: 20px; height: 20px; background: var(--dt-shell-presence-color-available); border-radius: 50%; margin: 0 auto 0.5rem;"></div>
+                        presence-available
+                    </div>
+                    <div class="color-swatch" style="background: var(--dt-color-surface-secondary); border: 1px solid var(--dt-color-border-subtle);">
+                        <div style="width: 20px; height: 20px; background: var(--dt-shell-presence-color-busy); border-radius: 50%; margin: 0 auto 0.5rem;"></div>
+                        presence-busy
+                    </div>
+                    <div class="color-swatch" style="background: var(--dt-color-surface-secondary); border: 1px solid var(--dt-color-border-subtle);">
+                        <div style="width: 20px; height: 20px; background: var(--dt-shell-presence-color-unavailable); border-radius: 50%; margin: 0 auto 0.5rem;"></div>
+                        presence-unavailable
+                    </div>
+                    <div class="color-swatch" style="background: var(--dt-color-surface-secondary); border: 1px solid var(--dt-color-border-subtle);">
+                        <div style="width: 20px; height: 20px; background: var(--dt-shell-presence-color-offline); border-radius: 50%; margin: 0 auto 0.5rem;"></div>
+                        presence-offline
+                    </div>
+                </div>
+                <h4 style="margin-top: 1.5rem; margin-bottom: 1rem;">Shell Logo Colors</h4>
+                <div class="color-grid">
+                    <div class="color-swatch" style="background: var(--dt-shell-logo-color-wordmark); color: white;">
+                        logo-wordmark
+                    </div>
+                    <div class="color-swatch" style="background: var(--dt-shell-logo-color-star); color: white;">
+                        logo-star
+                    </div>
+                </div>
+                <h4 style="margin-top: 1.5rem; margin-bottom: 1rem;">Shell Mention Colors</h4>
+                <div class="color-grid">
+                    <div class="color-swatch" style="background: var(--dt-shell-mention-color-surface-primary, var(--dt-color-surface-brand)); color: var(--dt-shell-mention-color-foreground-primary); border: 1px solid var(--dt-color-border-subtle);">
+                        mention-surface-primary
+                    </div>
+                    <div class="color-swatch" style="background: var(--dt-shell-mention-color-surface-secondary, var(--dt-color-surface-brand)); color: var(--dt-shell-mention-color-foreground-secondary); border: 1px solid var(--dt-color-border-subtle);">
+                        mention-surface-secondary
+                    </div>
+                    <div class="color-swatch" style="background: var(--dt-color-surface-brand); color: var(--dt-shell-mention-color-foreground-primary); border: 1px solid var(--dt-color-border-subtle);">
+                        <div style="font-size: 1.2rem; margin-bottom: 0.5rem;">@</div>
+                        mention-fg-primary
+                    </div>
+                    <div class="color-swatch" style="background: var(--dt-color-surface-brand); color: var(--dt-shell-mention-color-foreground-secondary); border: 1px solid var(--dt-color-border-subtle);">
+                        <div style="font-size: 1.2rem; margin-bottom: 0.5rem;">@</div>
+                        mention-fg-secondary
+                    </div>
+                </div>
+            </section>
 
-            <div class="color-grid" style="grid-template-columns: repeat(auto-fill, minmax(74px, 1fr));">
-                <div class="color-swatch" style="background: var(--dt-color-black-50);" title="black-50"></div>
-                <div class="color-swatch" style="background: var(--dt-color-black-100);" title="black-100"></div>
-                <div class="color-swatch" style="background: var(--dt-color-black-200);" title="black-200"></div>
-                <div class="color-swatch" style="background: var(--dt-color-black-300);" title="black-300"></div>
-                <div class="color-swatch" style="background: var(--dt-color-black-400);" title="black-400"></div>
-                <div class="color-swatch" style="background: var(--dt-color-black-500);" title="black-500"></div>
-                <div class="color-swatch" style="background: var(--dt-color-black-600);" title="black-600"></div>
-                <div class="color-swatch" style="background: var(--dt-color-black-700);" title="black-700"></div>
-                <div class="color-swatch" style="background: var(--dt-color-black-800);" title="black-800"></div>
-                <div class="color-swatch" style="background: var(--dt-color-black-900);" title="black-900"></div>
-                <div class="color-swatch" style="background: var(--dt-color-black-950);" title="black-950"></div>
-                <div class="color-swatch" style="background: var(--dt-color-black-1000);" title="black-1000"></div>
-            </div>
-            <div class="color-grid" style="grid-template-columns: repeat(auto-fill, minmax(74px, 1fr));">
-                <div class="color-swatch" style="background: var(--dt-color-purple-50);" title="purple-50"></div>
-                <div class="color-swatch" style="background: var(--dt-color-purple-100);" title="purple-100"></div>
-                <div class="color-swatch" style="background: var(--dt-color-purple-200);" title="purple-200"></div>
-                <div class="color-swatch" style="background: var(--dt-color-purple-250);" title="purple-250"></div>
-                <div class="color-swatch" style="background: var(--dt-color-purple-300);" title="purple-300"></div>
-                <div class="color-swatch" style="background: var(--dt-color-purple-350);" title="purple-350"></div>
-                <div class="color-swatch" style="background: var(--dt-color-purple-400);" title="purple-400"></div>
-                <div class="color-swatch" style="background: var(--dt-color-purple-450);" title="purple-450"></div>
-                <div class="color-swatch" style="background: var(--dt-color-purple-500);" title="purple-500"></div>
-                <div class="color-swatch" style="background: var(--dt-color-purple-550);" title="purple-550"></div>
-                <div class="color-swatch" style="background: var(--dt-color-purple-600);" title="purple-600"></div>
-                <div class="color-swatch" style="background: var(--dt-color-purple-1000);" title="purple-1000"></div>
-            </div>
-            <div class="color-grid" style="grid-template-columns: repeat(auto-fill, minmax(74px, 1fr));">
-                <div class="color-swatch" style="background: var(--dt-color-blue-50);" title="blue-50"></div>
-                <div class="color-swatch" style="background: var(--dt-color-blue-100);" title="blue-100"></div>
-                <div class="color-swatch" style="background: var(--dt-color-blue-200);" title="blue-200"></div>
-                <div class="color-swatch" style="background: var(--dt-color-blue-300);" title="blue-300"></div>
-                <div class="color-swatch" style="background: var(--dt-color-blue-400);" title="blue-400"></div>
-                <div class="color-swatch" style="background: var(--dt-color-blue-425);" title="blue-425"></div>
-                <div class="color-swatch" style="background: var(--dt-color-blue-450);" title="blue-450"></div>
-                <div class="color-swatch" style="background: var(--dt-color-blue-475);" title="blue-475"></div>
-                <div class="color-swatch" style="background: var(--dt-color-blue-500);" title="blue-500"></div>
-                <div class="color-swatch" style="background: var(--dt-color-blue-600);" title="blue-600"></div>
-                <div class="color-swatch" style="background: var(--dt-color-blue-900);" title="blue-900"></div>
-                <div class="color-swatch" style="background: var(--dt-color-blue-1000);" title="blue-1000"></div>
-            </div>
-            <div class="color-grid" style="grid-template-columns: repeat(auto-fill, minmax(74px, 1fr));">
-                <div class="color-swatch" style="background: var(--dt-color-magenta-50);" title="magenta-50"></div>
-                <div class="color-swatch" style="background: var(--dt-color-magenta-100);" title="magenta-100"></div>
-                <div class="color-swatch" style="background: var(--dt-color-magenta-200);" title="magenta-200"></div>
-                <div class="color-swatch" style="background: var(--dt-color-magenta-250);" title="magenta-250"></div>
-                <div class="color-swatch" style="background: var(--dt-color-magenta-300);" title="magenta-300"></div>
-                <div class="color-swatch" style="background: var(--dt-color-magenta-400);" title="magenta-400"></div>
-                <div class="color-swatch" style="background: var(--dt-color-magenta-425);" title="magenta-425"></div>
-                <div class="color-swatch" style="background: var(--dt-color-magenta-475);" title="magenta-475"></div>
-                <div class="color-swatch" style="background: var(--dt-color-magenta-500);" title="magenta-500"></div>
-                <div class="color-swatch" style="background: var(--dt-color-magenta-600);" title="magenta-600"></div>
-                <div class="color-swatch" style="background: var(--dt-color-magenta-900);" title="magenta-900"></div>
-                <div class="color-swatch" style="background: var(--dt-color-magenta-1000);" title="magenta-1000"></div>
-            </div>
-            <div class="color-grid" style="grid-template-columns: repeat(auto-fill, minmax(74px, 1fr));">
-                <div class="color-swatch" style="background: var(--dt-color-red-50);" title="red-50"></div>
-                <div class="color-swatch" style="background: var(--dt-color-red-100);" title="red-100"></div>
-                <div class="color-swatch" style="background: var(--dt-color-red-200);" title="red-200"></div>
-                <div class="color-swatch" style="background: var(--dt-color-red-300);" title="red-300"></div>
-                <div class="color-swatch" style="background: var(--dt-color-red-350);" title="red-350"></div>
-                <div class="color-swatch" style="background: var(--dt-color-red-400);" title="red-400"></div>
-                <div class="color-swatch" style="background: var(--dt-color-red-450);" title="red-450"></div>
-                <div class="color-swatch" style="background: var(--dt-color-red-500);" title="red-500"></div>
-                <div class="color-swatch" style="background: var(--dt-color-red-600);" title="red-600"></div>
-                <div class="color-swatch" style="background: var(--dt-color-red-700);" title="red-700"></div>
-                <div class="color-swatch" style="background: var(--dt-color-red-900);" title="red-900"></div>
-                <div class="color-swatch" style="background: var(--dt-color-red-1000);" title="red-1000"></div>
-            </div>
-            <div class="color-grid" style="grid-template-columns: repeat(auto-fill, minmax(74px, 1fr));">
-                <div class="color-swatch" style="background: var(--dt-color-gold-50);" title="gold-50"></div>
-                <div class="color-swatch" style="background: var(--dt-color-gold-100);" title="gold-100"></div>
-                <div class="color-swatch" style="background: var(--dt-color-gold-200);" title="gold-200"></div>
-                <div class="color-swatch" style="background: var(--dt-color-gold-300);" title="gold-300"></div>
-                <div class="color-swatch" style="background: var(--dt-color-gold-350);" title="gold-350"></div>
-                <div class="color-swatch" style="background: var(--dt-color-gold-400);" title="gold-400"></div>
-                <div class="color-swatch" style="background: var(--dt-color-gold-450);" title="gold-450"></div>
-                <div class="color-swatch" style="background: var(--dt-color-gold-500);" title="gold-500"></div>
-                <div class="color-swatch" style="background: var(--dt-color-gold-600);" title="gold-600"></div>
-                <div class="color-swatch" style="background: var(--dt-color-gold-700);" title="gold-700"></div>
-                <div class="color-swatch" style="background: var(--dt-color-gold-900);" title="gold-900"></div>
-                <div class="color-swatch" style="background: var(--dt-color-gold-1000);" title="gold-1000"></div>
-            </div>
-            <div class="color-grid" style="grid-template-columns: repeat(auto-fill, minmax(74px, 1fr));">
-                <div class="color-swatch" style="background: var(--dt-color-green-50);" title="green-50"></div>
-                <div class="color-swatch" style="background: var(--dt-color-green-100);" title="green-100"></div>
-                <div class="color-swatch" style="background: var(--dt-color-green-200);" title="green-200"></div>
-                <div class="color-swatch" style="background: var(--dt-color-green-300);" title="green-300"></div>
-                <div class="color-swatch" style="background: var(--dt-color-green-350);" title="green-350"></div>
-                <div class="color-swatch" style="background: var(--dt-color-green-400);" title="green-400"></div>
-                <div class="color-swatch" style="background: var(--dt-color-green-425);" title="green-425"></div>
-                <div class="color-swatch" style="background: var(--dt-color-green-475);" title="green-475"></div>
-                <div class="color-swatch" style="background: var(--dt-color-green-500);" title="green-500"></div>
-                <div class="color-swatch" style="background: var(--dt-color-green-600);" title="green-600"></div>
-                <div class="color-swatch" style="background: var(--dt-color-green-900);" title="green-900"></div>
-                <div class="color-swatch" style="background: var(--dt-color-green-1000);" title="green-1000"></div>
-            </div>
-            <div class="color-grid" style="grid-template-columns: repeat(auto-fill, minmax(74px, 1fr));">
-                <div class="color-swatch" style="background: var(--dt-color-teal-50);" title="teal-50"></div>
-                <div class="color-swatch" style="background: var(--dt-color-teal-100);" title="teal-100"></div>
-                <div class="color-swatch" style="background: var(--dt-color-teal-200);" title="teal-200"></div>
-                <div class="color-swatch" style="background: var(--dt-color-teal-300);" title="teal-300"></div>
-                <div class="color-swatch" style="background: var(--dt-color-teal-400);" title="teal-400"></div>
-                <div class="color-swatch" style="background: var(--dt-color-teal-500);" title="teal-500"></div>
-                <div class="color-swatch" style="background: var(--dt-color-teal-600);" title="teal-600"></div>
-                <div class="color-swatch" style="background: var(--dt-color-teal-700);" title="teal-700"></div>
-                <div class="color-swatch" style="background: var(--dt-color-teal-800);" title="teal-800"></div>
-                <div class="color-swatch" style="background: var(--dt-color-teal-900);" title="teal-900"></div>
-                <div class="color-swatch" style="background: var(--dt-color-teal-950);" title="teal-950"></div>
-                <div class="color-swatch" style="background: var(--dt-color-teal-1000);" title="teal-1000"></div>
-            </div>
-            <div class="color-grid" style="grid-template-columns: repeat(auto-fill, minmax(74px, 1fr));">
-                <div class="color-swatch" style="background: var(--dt-color-indigo-50);" title="indigo-50"></div>
-                <div class="color-swatch" style="background: var(--dt-color-indigo-100);" title="indigo-100"></div>
-                <div class="color-swatch" style="background: var(--dt-color-indigo-200);" title="indigo-200"></div>
-                <div class="color-swatch" style="background: var(--dt-color-indigo-300);" title="indigo-300"></div>
-                <div class="color-swatch" style="background: var(--dt-color-indigo-400);" title="indigo-400"></div>
-                <div class="color-swatch" style="background: var(--dt-color-indigo-500);" title="indigo-500"></div>
-                <div class="color-swatch" style="background: var(--dt-color-indigo-600);" title="indigo-600"></div>
-                <div class="color-swatch" style="background: var(--dt-color-indigo-700);" title="indigo-700"></div>
-                <div class="color-swatch" style="background: var(--dt-color-indigo-800);" title="indigo-800"></div>
-                <div class="color-swatch" style="background: var(--dt-color-indigo-900);" title="indigo-900"></div>
-                <div class="color-swatch" style="background: var(--dt-color-indigo-950);" title="indigo-950"></div>
-                <div class="color-swatch" style="background: var(--dt-color-indigo-1000);" title="indigo-1000"></div>
-            </div>
-            <div class="color-grid" style="grid-template-columns: repeat(auto-fill, minmax(74px, 1fr));">
-                <div class="color-swatch" style="background: var(--dt-color-coral-50);" title="coral-50"></div>
-                <div class="color-swatch" style="background: var(--dt-color-coral-100);" title="coral-100"></div>
-                <div class="color-swatch" style="background: var(--dt-color-coral-200);" title="coral-200"></div>
-                <div class="color-swatch" style="background: var(--dt-color-coral-300);" title="coral-300"></div>
-                <div class="color-swatch" style="background: var(--dt-color-coral-400);" title="coral-400"></div>
-                <div class="color-swatch" style="background: var(--dt-color-coral-500);" title="coral-500"></div>
-                <div class="color-swatch" style="background: var(--dt-color-coral-600);" title="coral-600"></div>
-                <div class="color-swatch" style="background: var(--dt-color-coral-700);" title="coral-700"></div>
-                <div class="color-swatch" style="background: var(--dt-color-coral-800);" title="coral-800"></div>
-                <div class="color-swatch" style="background: var(--dt-color-coral-900);" title="coral-900"></div>
-                <div class="color-swatch" style="background: var(--dt-color-coral-950);" title="coral-950"></div>
-                <div class="color-swatch" style="background: var(--dt-color-coral-1000);" title="coral-1000"></div>
-            </div>
-            <div class="color-grid" style="grid-template-columns: repeat(auto-fill, minmax(74px, 1fr));">
-                <div class="color-swatch" style="background: var(--dt-color-berry-50);" title="berry-50"></div>
-                <div class="color-swatch" style="background: var(--dt-color-berry-100);" title="berry-100"></div>
-                <div class="color-swatch" style="background: var(--dt-color-berry-200);" title="berry-200"></div>
-                <div class="color-swatch" style="background: var(--dt-color-berry-300);" title="berry-300"></div>
-                <div class="color-swatch" style="background: var(--dt-color-berry-400);" title="berry-400"></div>
-                <div class="color-swatch" style="background: var(--dt-color-berry-500);" title="berry-500"></div>
-                <div class="color-swatch" style="background: var(--dt-color-berry-600);" title="berry-600"></div>
-                <div class="color-swatch" style="background: var(--dt-color-berry-700);" title="berry-700"></div>
-                <div class="color-swatch" style="background: var(--dt-color-berry-800);" title="berry-800"></div>
-                <div class="color-swatch" style="background: var(--dt-color-berry-900);" title="berry-900"></div>
-                <div class="color-swatch" style="background: var(--dt-color-berry-950);" title="berry-950"></div>
-                <div class="color-swatch" style="background: var(--dt-color-berry-1000);" title="berry-1000"></div>
-            </div>
-            <div class="color-grid" style="grid-template-columns: repeat(auto-fill, minmax(74px, 1fr));">
-                <div class="color-swatch" style="background: var(--dt-color-olive-50);" title="olive-50"></div>
-                <div class="color-swatch" style="background: var(--dt-color-olive-100);" title="olive-100"></div>
-                <div class="color-swatch" style="background: var(--dt-color-olive-200);" title="olive-200"></div>
-                <div class="color-swatch" style="background: var(--dt-color-olive-300);" title="olive-300"></div>
-                <div class="color-swatch" style="background: var(--dt-color-olive-400);" title="olive-400"></div>
-                <div class="color-swatch" style="background: var(--dt-color-olive-500);" title="olive-500"></div>
-                <div class="color-swatch" style="background: var(--dt-color-olive-600);" title="olive-600"></div>
-                <div class="color-swatch" style="background: var(--dt-color-olive-700);" title="olive-700"></div>
-                <div class="color-swatch" style="background: var(--dt-color-olive-800);" title="olive-800"></div>
-                <div class="color-swatch" style="background: var(--dt-color-olive-900);" title="olive-900"></div>
-                <div class="color-swatch" style="background: var(--dt-color-olive-950);" title="olive-950"></div>
-                <div class="color-swatch" style="background: var(--dt-color-olive-1000);" title="olive-1000"></div>
-            </div>
-            <div class="color-grid" style="grid-template-columns: repeat(auto-fill, minmax(74px, 1fr));">
-                <div class="color-swatch" style="background: var(--dt-color-tan-50);" title="tan-50"></div>
-                <div class="color-swatch" style="background: var(--dt-color-tan-100);" title="tan-100"></div>
-                <div class="color-swatch" style="background: var(--dt-color-tan-200);" title="tan-200"></div>
-                <div class="color-swatch" style="background: var(--dt-color-tan-300);" title="tan-300"></div>
-                <div class="color-swatch" style="background: var(--dt-color-tan-400);" title="tan-400"></div>
-                <div class="color-swatch" style="background: var(--dt-color-tan-500);" title="tan-500"></div>
-                <div class="color-swatch" style="background: var(--dt-color-tan-600);" title="tan-600"></div>
-                <div class="color-swatch" style="background: var(--dt-color-tan-700);" title="tan-700"></div>
-                <div class="color-swatch" style="background: var(--dt-color-tan-800);" title="tan-800"></div>
-                <div class="color-swatch" style="background: var(--dt-color-tan-900);" title="tan-900"></div>
-                <div class="color-swatch" style="background: var(--dt-color-tan-950);" title="tan-950"></div>
-                <div class="color-swatch" style="background: var(--dt-color-tan-1000);" title="tan-1000"></div>
-            </div>
+            <section>
+                <h3>Base Color Palettes</h3>
+                <p style="font-size: 0.875rem; color: var(--dt-color-foreground-secondary); margin-bottom: 1.5rem;">Complete color ramps for all base colors (hover to see variable name)</p>
+                <div class="color-grid" style="grid-template-columns: repeat(auto-fill, minmax(74px, 1fr));">
+                    <div class="color-swatch" style="background: var(--dt-color-black-50);" title="black-50"></div>
+                    <div class="color-swatch" style="background: var(--dt-color-black-100);" title="black-100"></div>
+                    <div class="color-swatch" style="background: var(--dt-color-black-200);" title="black-200"></div>
+                    <div class="color-swatch" style="background: var(--dt-color-black-300);" title="black-300"></div>
+                    <div class="color-swatch" style="background: var(--dt-color-black-400);" title="black-400"></div>
+                    <div class="color-swatch" style="background: var(--dt-color-black-500);" title="black-500"></div>
+                    <div class="color-swatch" style="background: var(--dt-color-black-600);" title="black-600"></div>
+                    <div class="color-swatch" style="background: var(--dt-color-black-700);" title="black-700"></div>
+                    <div class="color-swatch" style="background: var(--dt-color-black-800);" title="black-800"></div>
+                    <div class="color-swatch" style="background: var(--dt-color-black-900);" title="black-900"></div>
+                    <div class="color-swatch" style="background: var(--dt-color-black-950);" title="black-950"></div>
+                    <div class="color-swatch" style="background: var(--dt-color-black-1000);" title="black-1000"></div>
+                </div>
+                <div class="color-grid" style="grid-template-columns: repeat(auto-fill, minmax(74px, 1fr));">
+                    <div class="color-swatch" style="background: var(--dt-color-purple-50);" title="purple-50"></div>
+                    <div class="color-swatch" style="background: var(--dt-color-purple-100);" title="purple-100"></div>
+                    <div class="color-swatch" style="background: var(--dt-color-purple-200);" title="purple-200"></div>
+                    <div class="color-swatch" style="background: var(--dt-color-purple-250);" title="purple-250"></div>
+                    <div class="color-swatch" style="background: var(--dt-color-purple-300);" title="purple-300"></div>
+                    <div class="color-swatch" style="background: var(--dt-color-purple-350);" title="purple-350"></div>
+                    <div class="color-swatch" style="background: var(--dt-color-purple-400);" title="purple-400"></div>
+                    <div class="color-swatch" style="background: var(--dt-color-purple-450);" title="purple-450"></div>
+                    <div class="color-swatch" style="background: var(--dt-color-purple-500);" title="purple-500"></div>
+                    <div class="color-swatch" style="background: var(--dt-color-purple-550);" title="purple-550"></div>
+                    <div class="color-swatch" style="background: var(--dt-color-purple-600);" title="purple-600"></div>
+                    <div class="color-swatch" style="background: var(--dt-color-purple-1000);" title="purple-1000"></div>
+                </div>
+                <div class="color-grid" style="grid-template-columns: repeat(auto-fill, minmax(74px, 1fr));">
+                    <div class="color-swatch" style="background: var(--dt-color-blue-50);" title="blue-50"></div>
+                    <div class="color-swatch" style="background: var(--dt-color-blue-100);" title="blue-100"></div>
+                    <div class="color-swatch" style="background: var(--dt-color-blue-200);" title="blue-200"></div>
+                    <div class="color-swatch" style="background: var(--dt-color-blue-300);" title="blue-300"></div>
+                    <div class="color-swatch" style="background: var(--dt-color-blue-400);" title="blue-400"></div>
+                    <div class="color-swatch" style="background: var(--dt-color-blue-425);" title="blue-425"></div>
+                    <div class="color-swatch" style="background: var(--dt-color-blue-450);" title="blue-450"></div>
+                    <div class="color-swatch" style="background: var(--dt-color-blue-475);" title="blue-475"></div>
+                    <div class="color-swatch" style="background: var(--dt-color-blue-500);" title="blue-500"></div>
+                    <div class="color-swatch" style="background: var(--dt-color-blue-600);" title="blue-600"></div>
+                    <div class="color-swatch" style="background: var(--dt-color-blue-900);" title="blue-900"></div>
+                    <div class="color-swatch" style="background: var(--dt-color-blue-1000);" title="blue-1000"></div>
+                </div>
+                <div class="color-grid" style="grid-template-columns: repeat(auto-fill, minmax(74px, 1fr));">
+                    <div class="color-swatch" style="background: var(--dt-color-magenta-50);" title="magenta-50"></div>
+                    <div class="color-swatch" style="background: var(--dt-color-magenta-100);" title="magenta-100"></div>
+                    <div class="color-swatch" style="background: var(--dt-color-magenta-200);" title="magenta-200"></div>
+                    <div class="color-swatch" style="background: var(--dt-color-magenta-250);" title="magenta-250"></div>
+                    <div class="color-swatch" style="background: var(--dt-color-magenta-300);" title="magenta-300"></div>
+                    <div class="color-swatch" style="background: var(--dt-color-magenta-400);" title="magenta-400"></div>
+                    <div class="color-swatch" style="background: var(--dt-color-magenta-425);" title="magenta-425"></div>
+                    <div class="color-swatch" style="background: var(--dt-color-magenta-475);" title="magenta-475"></div>
+                    <div class="color-swatch" style="background: var(--dt-color-magenta-500);" title="magenta-500"></div>
+                    <div class="color-swatch" style="background: var(--dt-color-magenta-600);" title="magenta-600"></div>
+                    <div class="color-swatch" style="background: var(--dt-color-magenta-900);" title="magenta-900"></div>
+                    <div class="color-swatch" style="background: var(--dt-color-magenta-1000);" title="magenta-1000"></div>
+                </div>
+                <div class="color-grid" style="grid-template-columns: repeat(auto-fill, minmax(74px, 1fr));">
+                    <div class="color-swatch" style="background: var(--dt-color-red-50);" title="red-50"></div>
+                    <div class="color-swatch" style="background: var(--dt-color-red-100);" title="red-100"></div>
+                    <div class="color-swatch" style="background: var(--dt-color-red-200);" title="red-200"></div>
+                    <div class="color-swatch" style="background: var(--dt-color-red-300);" title="red-300"></div>
+                    <div class="color-swatch" style="background: var(--dt-color-red-350);" title="red-350"></div>
+                    <div class="color-swatch" style="background: var(--dt-color-red-400);" title="red-400"></div>
+                    <div class="color-swatch" style="background: var(--dt-color-red-450);" title="red-450"></div>
+                    <div class="color-swatch" style="background: var(--dt-color-red-500);" title="red-500"></div>
+                    <div class="color-swatch" style="background: var(--dt-color-red-600);" title="red-600"></div>
+                    <div class="color-swatch" style="background: var(--dt-color-red-700);" title="red-700"></div>
+                    <div class="color-swatch" style="background: var(--dt-color-red-900);" title="red-900"></div>
+                    <div class="color-swatch" style="background: var(--dt-color-red-1000);" title="red-1000"></div>
+                </div>
+                <div class="color-grid" style="grid-template-columns: repeat(auto-fill, minmax(74px, 1fr));">
+                    <div class="color-swatch" style="background: var(--dt-color-gold-50);" title="gold-50"></div>
+                    <div class="color-swatch" style="background: var(--dt-color-gold-100);" title="gold-100"></div>
+                    <div class="color-swatch" style="background: var(--dt-color-gold-200);" title="gold-200"></div>
+                    <div class="color-swatch" style="background: var(--dt-color-gold-300);" title="gold-300"></div>
+                    <div class="color-swatch" style="background: var(--dt-color-gold-350);" title="gold-350"></div>
+                    <div class="color-swatch" style="background: var(--dt-color-gold-400);" title="gold-400"></div>
+                    <div class="color-swatch" style="background: var(--dt-color-gold-450);" title="gold-450"></div>
+                    <div class="color-swatch" style="background: var(--dt-color-gold-500);" title="gold-500"></div>
+                    <div class="color-swatch" style="background: var(--dt-color-gold-600);" title="gold-600"></div>
+                    <div class="color-swatch" style="background: var(--dt-color-gold-700);" title="gold-700"></div>
+                    <div class="color-swatch" style="background: var(--dt-color-gold-900);" title="gold-900"></div>
+                    <div class="color-swatch" style="background: var(--dt-color-gold-1000);" title="gold-1000"></div>
+                </div>
+                <div class="color-grid" style="grid-template-columns: repeat(auto-fill, minmax(74px, 1fr));">
+                    <div class="color-swatch" style="background: var(--dt-color-green-50);" title="green-50"></div>
+                    <div class="color-swatch" style="background: var(--dt-color-green-100);" title="green-100"></div>
+                    <div class="color-swatch" style="background: var(--dt-color-green-200);" title="green-200"></div>
+                    <div class="color-swatch" style="background: var(--dt-color-green-300);" title="green-300"></div>
+                    <div class="color-swatch" style="background: var(--dt-color-green-350);" title="green-350"></div>
+                    <div class="color-swatch" style="background: var(--dt-color-green-400);" title="green-400"></div>
+                    <div class="color-swatch" style="background: var(--dt-color-green-425);" title="green-425"></div>
+                    <div class="color-swatch" style="background: var(--dt-color-green-475);" title="green-475"></div>
+                    <div class="color-swatch" style="background: var(--dt-color-green-500);" title="green-500"></div>
+                    <div class="color-swatch" style="background: var(--dt-color-green-600);" title="green-600"></div>
+                    <div class="color-swatch" style="background: var(--dt-color-green-900);" title="green-900"></div>
+                    <div class="color-swatch" style="background: var(--dt-color-green-1000);" title="green-1000"></div>
+                </div>
+                <div class="color-grid" style="grid-template-columns: repeat(auto-fill, minmax(74px, 1fr));">
+                    <div class="color-swatch" style="background: var(--dt-color-teal-50);" title="teal-50"></div>
+                    <div class="color-swatch" style="background: var(--dt-color-teal-100);" title="teal-100"></div>
+                    <div class="color-swatch" style="background: var(--dt-color-teal-200);" title="teal-200"></div>
+                    <div class="color-swatch" style="background: var(--dt-color-teal-300);" title="teal-300"></div>
+                    <div class="color-swatch" style="background: var(--dt-color-teal-400);" title="teal-400"></div>
+                    <div class="color-swatch" style="background: var(--dt-color-teal-500);" title="teal-500"></div>
+                    <div class="color-swatch" style="background: var(--dt-color-teal-600);" title="teal-600"></div>
+                    <div class="color-swatch" style="background: var(--dt-color-teal-700);" title="teal-700"></div>
+                    <div class="color-swatch" style="background: var(--dt-color-teal-800);" title="teal-800"></div>
+                    <div class="color-swatch" style="background: var(--dt-color-teal-900);" title="teal-900"></div>
+                    <div class="color-swatch" style="background: var(--dt-color-teal-950);" title="teal-950"></div>
+                    <div class="color-swatch" style="background: var(--dt-color-teal-1000);" title="teal-1000"></div>
+                </div>
+                <div class="color-grid" style="grid-template-columns: repeat(auto-fill, minmax(74px, 1fr));">
+                    <div class="color-swatch" style="background: var(--dt-color-indigo-50);" title="indigo-50"></div>
+                    <div class="color-swatch" style="background: var(--dt-color-indigo-100);" title="indigo-100"></div>
+                    <div class="color-swatch" style="background: var(--dt-color-indigo-200);" title="indigo-200"></div>
+                    <div class="color-swatch" style="background: var(--dt-color-indigo-300);" title="indigo-300"></div>
+                    <div class="color-swatch" style="background: var(--dt-color-indigo-400);" title="indigo-400"></div>
+                    <div class="color-swatch" style="background: var(--dt-color-indigo-500);" title="indigo-500"></div>
+                    <div class="color-swatch" style="background: var(--dt-color-indigo-600);" title="indigo-600"></div>
+                    <div class="color-swatch" style="background: var(--dt-color-indigo-700);" title="indigo-700"></div>
+                    <div class="color-swatch" style="background: var(--dt-color-indigo-800);" title="indigo-800"></div>
+                    <div class="color-swatch" style="background: var(--dt-color-indigo-900);" title="indigo-900"></div>
+                    <div class="color-swatch" style="background: var(--dt-color-indigo-950);" title="indigo-950"></div>
+                    <div class="color-swatch" style="background: var(--dt-color-indigo-1000);" title="indigo-1000"></div>
+                </div>
+                <div class="color-grid" style="grid-template-columns: repeat(auto-fill, minmax(74px, 1fr));">
+                    <div class="color-swatch" style="background: var(--dt-color-coral-50);" title="coral-50"></div>
+                    <div class="color-swatch" style="background: var(--dt-color-coral-100);" title="coral-100"></div>
+                    <div class="color-swatch" style="background: var(--dt-color-coral-200);" title="coral-200"></div>
+                    <div class="color-swatch" style="background: var(--dt-color-coral-300);" title="coral-300"></div>
+                    <div class="color-swatch" style="background: var(--dt-color-coral-400);" title="coral-400"></div>
+                    <div class="color-swatch" style="background: var(--dt-color-coral-500);" title="coral-500"></div>
+                    <div class="color-swatch" style="background: var(--dt-color-coral-600);" title="coral-600"></div>
+                    <div class="color-swatch" style="background: var(--dt-color-coral-700);" title="coral-700"></div>
+                    <div class="color-swatch" style="background: var(--dt-color-coral-800);" title="coral-800"></div>
+                    <div class="color-swatch" style="background: var(--dt-color-coral-900);" title="coral-900"></div>
+                    <div class="color-swatch" style="background: var(--dt-color-coral-950);" title="coral-950"></div>
+                    <div class="color-swatch" style="background: var(--dt-color-coral-1000);" title="coral-1000"></div>
+                </div>
+                <div class="color-grid" style="grid-template-columns: repeat(auto-fill, minmax(74px, 1fr));">
+                    <div class="color-swatch" style="background: var(--dt-color-berry-50);" title="berry-50"></div>
+                    <div class="color-swatch" style="background: var(--dt-color-berry-100);" title="berry-100"></div>
+                    <div class="color-swatch" style="background: var(--dt-color-berry-200);" title="berry-200"></div>
+                    <div class="color-swatch" style="background: var(--dt-color-berry-300);" title="berry-300"></div>
+                    <div class="color-swatch" style="background: var(--dt-color-berry-400);" title="berry-400"></div>
+                    <div class="color-swatch" style="background: var(--dt-color-berry-500);" title="berry-500"></div>
+                    <div class="color-swatch" style="background: var(--dt-color-berry-600);" title="berry-600"></div>
+                    <div class="color-swatch" style="background: var(--dt-color-berry-700);" title="berry-700"></div>
+                    <div class="color-swatch" style="background: var(--dt-color-berry-800);" title="berry-800"></div>
+                    <div class="color-swatch" style="background: var(--dt-color-berry-900);" title="berry-900"></div>
+                    <div class="color-swatch" style="background: var(--dt-color-berry-950);" title="berry-950"></div>
+                    <div class="color-swatch" style="background: var(--dt-color-berry-1000);" title="berry-1000"></div>
+                </div>
+                <div class="color-grid" style="grid-template-columns: repeat(auto-fill, minmax(74px, 1fr));">
+                    <div class="color-swatch" style="background: var(--dt-color-olive-50);" title="olive-50"></div>
+                    <div class="color-swatch" style="background: var(--dt-color-olive-100);" title="olive-100"></div>
+                    <div class="color-swatch" style="background: var(--dt-color-olive-200);" title="olive-200"></div>
+                    <div class="color-swatch" style="background: var(--dt-color-olive-300);" title="olive-300"></div>
+                    <div class="color-swatch" style="background: var(--dt-color-olive-400);" title="olive-400"></div>
+                    <div class="color-swatch" style="background: var(--dt-color-olive-500);" title="olive-500"></div>
+                    <div class="color-swatch" style="background: var(--dt-color-olive-600);" title="olive-600"></div>
+                    <div class="color-swatch" style="background: var(--dt-color-olive-700);" title="olive-700"></div>
+                    <div class="color-swatch" style="background: var(--dt-color-olive-800);" title="olive-800"></div>
+                    <div class="color-swatch" style="background: var(--dt-color-olive-900);" title="olive-900"></div>
+                    <div class="color-swatch" style="background: var(--dt-color-olive-950);" title="olive-950"></div>
+                    <div class="color-swatch" style="background: var(--dt-color-olive-1000);" title="olive-1000"></div>
+                </div>
+                <div class="color-grid" style="grid-template-columns: repeat(auto-fill, minmax(74px, 1fr));">
+                    <div class="color-swatch" style="background: var(--dt-color-tan-50);" title="tan-50"></div>
+                    <div class="color-swatch" style="background: var(--dt-color-tan-100);" title="tan-100"></div>
+                    <div class="color-swatch" style="background: var(--dt-color-tan-200);" title="tan-200"></div>
+                    <div class="color-swatch" style="background: var(--dt-color-tan-300);" title="tan-300"></div>
+                    <div class="color-swatch" style="background: var(--dt-color-tan-400);" title="tan-400"></div>
+                    <div class="color-swatch" style="background: var(--dt-color-tan-500);" title="tan-500"></div>
+                    <div class="color-swatch" style="background: var(--dt-color-tan-600);" title="tan-600"></div>
+                    <div class="color-swatch" style="background: var(--dt-color-tan-700);" title="tan-700"></div>
+                    <div class="color-swatch" style="background: var(--dt-color-tan-800);" title="tan-800"></div>
+                    <div class="color-swatch" style="background: var(--dt-color-tan-900);" title="tan-900"></div>
+                    <div class="color-swatch" style="background: var(--dt-color-tan-950);" title="tan-950"></div>
+                    <div class="color-swatch" style="background: var(--dt-color-tan-1000);" title="tan-1000"></div>
+                </div>
+            </section>
 
-            <h3>Surface Colors</h3>
-            <div class="color-grid">
-                <div class="color-swatch" style="background: var(--dt-color-surface-primary); color: var(--dt-color-foreground-primary); border: 1px solid var(--dt-color-border-subtle);">
-                    Primary Surface<br>var(--dt-color-surface-primary)
+            <section>
+                <h3>Surface Colors</h3>
+                <div class="color-grid">
+                    <div class="color-swatch" style="background: var(--dt-color-surface-primary); color: var(--dt-color-foreground-primary); border: 1px solid var(--dt-color-border-subtle);">
+                        Primary Surface<br>var(--dt-color-surface-primary)
+                    </div>
+                    <div class="color-swatch" style="background: var(--dt-color-surface-secondary); color: var(--dt-color-foreground-primary); border: 1px solid var(--dt-color-border-subtle);">
+                        Secondary Surface<br>var(--dt-color-surface-secondary)
+                    </div>
+                    <div class="color-swatch" style="background: var(--dt-color-surface-moderate); color: var(--dt-color-foreground-primary); border: 1px solid var(--dt-color-border-subtle);">
+                        Moderate Surface<br>var(--dt-color-surface-moderate)
+                    </div>
+                    <div class="color-swatch" style="background: var(--dt-color-surface-bold); color: var(--dt-color-foreground-primary); border: 1px solid var(--dt-color-border-subtle);">
+                        Bold Surface<br>var(--dt-color-surface-bold)
+                    </div>
+                    <div class="color-swatch" style="background: var(--dt-color-surface-strong); color: var(--dt-color-foreground-primary); border: 1px solid var(--dt-color-border-subtle);">
+                        Strong Surface<br>var(--dt-color-surface-strong)
+                    </div>
+                    <div class="color-swatch" style="background: var(--dt-color-surface-contrast); color: var(--dt-color-foreground-primary-inverted);">
+                        Contrast Surface<br>var(--dt-color-surface-contrast)
+                    </div>
+                    <div class="color-swatch" style="background: var(--dt-color-surface-critical); color: var(--dt-color-foreground-primary);">
+                        Critical Surface<br>var(--dt-color-surface-critical)
+                    </div>
+                    <div class="color-swatch" style="background: var(--dt-color-surface-warning); color: var(--dt-color-foreground-primary);">
+                        Warning Surface<br>var(--dt-color-surface-warning)
+                    </div>
+                    <div class="color-swatch" style="background: var(--dt-color-surface-success); color: var(--dt-color-foreground-primary);">
+                        Success Surface<br>var(--dt-color-surface-success)
+                    </div>
+                    <div class="color-swatch" style="background: var(--dt-color-surface-info); color: var(--dt-color-foreground-primary);">
+                        Info Surface<br>var(--dt-color-surface-info)
+                    </div>
                 </div>
-                <div class="color-swatch" style="background: var(--dt-color-surface-secondary); color: var(--dt-color-foreground-primary); border: 1px solid var(--dt-color-border-subtle);">
-                    Secondary Surface<br>var(--dt-color-surface-secondary)
-                </div>
-                <div class="color-swatch" style="background: var(--dt-color-surface-moderate); color: var(--dt-color-foreground-primary); border: 1px solid var(--dt-color-border-subtle);">
-                    Moderate Surface<br>var(--dt-color-surface-moderate)
-                </div>
-                <div class="color-swatch" style="background: var(--dt-color-surface-bold); color: var(--dt-color-foreground-primary); border: 1px solid var(--dt-color-border-subtle);">
-                    Bold Surface<br>var(--dt-color-surface-bold)
-                </div>
-                <div class="color-swatch" style="background: var(--dt-color-surface-strong); color: var(--dt-color-foreground-primary); border: 1px solid var(--dt-color-border-subtle);">
-                    Strong Surface<br>var(--dt-color-surface-strong)
-                </div>
-                <div class="color-swatch" style="background: var(--dt-color-surface-contrast); color: var(--dt-color-foreground-primary-inverted);">
-                    Contrast Surface<br>var(--dt-color-surface-contrast)
-                </div>
-                <div class="color-swatch" style="background: var(--dt-color-surface-critical); color: var(--dt-color-foreground-primary);">
-                    Critical Surface<br>var(--dt-color-surface-critical)
-                </div>
-                <div class="color-swatch" style="background: var(--dt-color-surface-warning); color: var(--dt-color-foreground-primary);">
-                    Warning Surface<br>var(--dt-color-surface-warning)
-                </div>
-                <div class="color-swatch" style="background: var(--dt-color-surface-success); color: var(--dt-color-foreground-primary);">
-                    Success Surface<br>var(--dt-color-surface-success)
-                </div>
-                <div class="color-swatch" style="background: var(--dt-color-surface-info); color: var(--dt-color-foreground-primary);">
-                    Info Surface<br>var(--dt-color-surface-info)
-                </div>
-            </div>
+            </section>
 
-            <h3>Foreground Colors</h3>
-            <div class="color-grid">
-                <div class="color-swatch" style="background: var(--dt-color-surface-secondary); color: var(--dt-color-foreground-primary); border: 1px solid var(--dt-color-border-subtle);">
-                    <div style="font-size: 1.2rem; margin-bottom: 0.5rem;">Aa</div>
-                    Primary Text<br>var(--dt-color-foreground-primary)
+            <section>
+                <h3>Foreground Colors</h3>
+                <div class="color-grid">
+                    <div class="color-swatch" style="background: var(--dt-color-surface-secondary); color: var(--dt-color-foreground-primary); border: 1px solid var(--dt-color-border-subtle);">
+                        <div style="font-size: 1.2rem; margin-bottom: 0.5rem;">Aa</div>
+                        Primary Text<br>var(--dt-color-foreground-primary)
+                    </div>
+                    <div class="color-swatch" style="background: var(--dt-color-surface-secondary); color: var(--dt-color-foreground-secondary); border: 1px solid var(--dt-color-border-subtle);">
+                        <div style="font-size: 1.2rem; margin-bottom: 0.5rem;">Aa</div>
+                        Secondary Text<br>var(--dt-color-foreground-secondary)
+                    </div>
+                    <div class="color-swatch" style="background: var(--dt-color-surface-secondary); color: var(--dt-color-foreground-tertiary); border: 1px solid var(--dt-color-border-subtle);">
+                        <div style="font-size: 1.2rem; margin-bottom: 0.5rem;">Aa</div>
+                        Tertiary Text<br>var(--dt-color-foreground-tertiary)
+                    </div>
+                    <div class="color-swatch" style="background: var(--dt-color-surface-secondary); color: var(--dt-color-foreground-muted); border: 1px solid var(--dt-color-border-subtle);">
+                        <div style="font-size: 1.2rem; margin-bottom: 0.5rem;">Aa</div>
+                        Muted Text<br>var(--dt-color-foreground-muted)
+                    </div>
+                    <div class="color-swatch" style="background: var(--dt-color-surface-secondary); color: var(--dt-color-foreground-placeholder); border: 1px solid var(--dt-color-border-subtle);">
+                        <div style="font-size: 1.2rem; margin-bottom: 0.5rem;">Aa</div>
+                        Placeholder<br>var(--dt-color-foreground-placeholder)
+                    </div>
+                    <div class="color-swatch" style="background: var(--dt-color-surface-contrast); color: var(--dt-color-foreground-primary-inverted);">
+                        <div style="font-size: 1.2rem; margin-bottom: 0.5rem;">Aa</div>
+                        Inverted Text<br>var(--dt-color-foreground-primary-inverted)
+                    </div>
                 </div>
-                <div class="color-swatch" style="background: var(--dt-color-surface-secondary); color: var(--dt-color-foreground-secondary); border: 1px solid var(--dt-color-border-subtle);">
-                    <div style="font-size: 1.2rem; margin-bottom: 0.5rem;">Aa</div>
-                    Secondary Text<br>var(--dt-color-foreground-secondary)
-                </div>
-                <div class="color-swatch" style="background: var(--dt-color-surface-secondary); color: var(--dt-color-foreground-tertiary); border: 1px solid var(--dt-color-border-subtle);">
-                    <div style="font-size: 1.2rem; margin-bottom: 0.5rem;">Aa</div>
-                    Tertiary Text<br>var(--dt-color-foreground-tertiary)
-                </div>
-                <div class="color-swatch" style="background: var(--dt-color-surface-secondary); color: var(--dt-color-foreground-muted); border: 1px solid var(--dt-color-border-subtle);">
-                    <div style="font-size: 1.2rem; margin-bottom: 0.5rem;">Aa</div>
-                    Muted Text<br>var(--dt-color-foreground-muted)
-                </div>
-                <div class="color-swatch" style="background: var(--dt-color-surface-secondary); color: var(--dt-color-foreground-placeholder); border: 1px solid var(--dt-color-border-subtle);">
-                    <div style="font-size: 1.2rem; margin-bottom: 0.5rem;">Aa</div>
-                    Placeholder<br>var(--dt-color-foreground-placeholder)
-                </div>
-                <div class="color-swatch" style="background: var(--dt-color-surface-contrast); color: var(--dt-color-foreground-primary-inverted);">
-                    <div style="font-size: 1.2rem; margin-bottom: 0.5rem;">Aa</div>
-                    Inverted Text<br>var(--dt-color-foreground-primary-inverted)
-                </div>
-            </div>
+            </section>
 
-            <h3>Border Colors</h3>
-            <div class="color-grid">
-                <div class="color-swatch" style="background: var(--dt-color-surface-primary); border: 3px solid var(--dt-color-border-subtle); color: var(--dt-color-foreground-secondary);">
-                    Subtle Border<br>var(--dt-color-border-subtle)
+            <section>
+                <h3>Border Colors</h3>
+                <div class="color-grid">
+                    <div class="color-swatch" style="background: var(--dt-color-surface-primary); border: 3px solid var(--dt-color-border-subtle); color: var(--dt-color-foreground-secondary);">
+                        Subtle Border<br>var(--dt-color-border-subtle)
+                    </div>
+                    <div class="color-swatch" style="background: var(--dt-color-surface-primary); border: 3px solid var(--dt-color-border-moderate); color: var(--dt-color-foreground-secondary);">
+                        Moderate Border<br>var(--dt-color-border-moderate)
+                    </div>
+                    <div class="color-swatch" style="background: var(--dt-color-surface-primary); border: 3px solid var(--dt-color-border-bold); color: var(--dt-color-foreground-secondary);">
+                        Bold Border<br>var(--dt-color-border-bold)
+                    </div>
+                    <div class="color-swatch" style="background: var(--dt-color-surface-primary); border: 3px solid var(--dt-color-border-strong); color: var(--dt-color-foreground-secondary);">
+                        Strong Border<br>var(--dt-color-border-strong)
+                    </div>
+                    <div class="color-swatch" style="background: var(--dt-color-surface-primary); border: 3px solid var(--dt-color-border-brand); color: var(--dt-color-foreground-secondary);">
+                        Brand Border<br>var(--dt-color-border-brand)
+                    </div>
+                    <div class="color-swatch" style="background: var(--dt-color-surface-primary); border: 3px solid var(--dt-color-border-critical); color: var(--dt-color-foreground-secondary);">
+                        Critical Border<br>var(--dt-color-border-critical)
+                    </div>
+                    <div class="color-swatch" style="background: var(--dt-color-surface-primary); border: 3px solid var(--dt-color-border-warning); color: var(--dt-color-foreground-secondary);">
+                        Warning Border<br>var(--dt-color-border-warning)
+                    </div>
+                    <div class="color-swatch" style="background: var(--dt-color-surface-primary); border: 3px solid var(--dt-color-border-success); color: var(--dt-color-foreground-secondary);">
+                        Success Border<br>var(--dt-color-border-success)
+                    </div>
                 </div>
-                <div class="color-swatch" style="background: var(--dt-color-surface-primary); border: 3px solid var(--dt-color-border-moderate); color: var(--dt-color-foreground-secondary);">
-                    Moderate Border<br>var(--dt-color-border-moderate)
-                </div>
-                <div class="color-swatch" style="background: var(--dt-color-surface-primary); border: 3px solid var(--dt-color-border-bold); color: var(--dt-color-foreground-secondary);">
-                    Bold Border<br>var(--dt-color-border-bold)
-                </div>
-                <div class="color-swatch" style="background: var(--dt-color-surface-primary); border: 3px solid var(--dt-color-border-strong); color: var(--dt-color-foreground-secondary);">
-                    Strong Border<br>var(--dt-color-border-strong)
-                </div>
-                <div class="color-swatch" style="background: var(--dt-color-surface-primary); border: 3px solid var(--dt-color-border-brand); color: var(--dt-color-foreground-secondary);">
-                    Brand Border<br>var(--dt-color-border-brand)
-                </div>
-                <div class="color-swatch" style="background: var(--dt-color-surface-primary); border: 3px solid var(--dt-color-border-critical); color: var(--dt-color-foreground-secondary);">
-                    Critical Border<br>var(--dt-color-border-critical)
-                </div>
-                <div class="color-swatch" style="background: var(--dt-color-surface-primary); border: 3px solid var(--dt-color-border-warning); color: var(--dt-color-foreground-secondary);">
-                    Warning Border<br>var(--dt-color-border-warning)
-                </div>
-                <div class="color-swatch" style="background: var(--dt-color-surface-primary); border: 3px solid var(--dt-color-border-success); color: var(--dt-color-foreground-secondary);">
-                    Success Border<br>var(--dt-color-border-success)
-                </div>
-            </div>
+            </section>
 
-            <h3>Action Colors</h3>
-            <div class="color-grid">
-                <div class="color-swatch" style="background: var(--dt-action-color-background-base-primary-default); color: var(--dt-action-color-foreground-base-primary-default);">
-                    Primary Action<br>var(--dt-action-color-background-base-primary-default)
+            <section>
+                <h3>Action Colors</h3>
+                <div class="color-grid">
+                    <div class="color-swatch" style="background: var(--dt-action-color-background-base-primary-default); color: var(--dt-action-color-foreground-base-primary-default);">
+                        Primary Action<br>var(--dt-action-color-background-base-primary-default)
+                    </div>
+                    <div class="color-swatch" style="background: var(--dt-action-color-background-base-primary-hover); color: var(--dt-action-color-foreground-base-primary-default);">
+                        Primary Hover<br>var(--dt-action-color-background-base-primary-hover)
+                    </div>
+                    <div class="color-swatch" style="background: var(--dt-action-color-background-base-primary-active); color: var(--dt-action-color-foreground-base-primary-default);">
+                        Primary Active<br>var(--dt-action-color-background-base-primary-active)
+                    </div>
+                    <div class="color-swatch" style="background: var(--dt-action-color-background-critical-primary-default); color: var(--dt-action-color-foreground-critical-primary-default);">
+                        Critical Action<br>var(--dt-action-color-background-critical-primary-default)
+                    </div>
+                    <div class="color-swatch" style="background: var(--dt-action-color-background-positive-primary-default); color: var(--dt-action-color-foreground-positive-primary-default);">
+                        Positive Action<br>var(--dt-action-color-background-positive-primary-default)
+                    </div>
                 </div>
-                <div class="color-swatch" style="background: var(--dt-action-color-background-base-primary-hover); color: var(--dt-action-color-foreground-base-primary-default);">
-                    Primary Hover<br>var(--dt-action-color-background-base-primary-hover)
-                </div>
-                <div class="color-swatch" style="background: var(--dt-action-color-background-base-primary-active); color: var(--dt-action-color-foreground-base-primary-default);">
-                    Primary Active<br>var(--dt-action-color-background-base-primary-active)
-                </div>
-                <div class="color-swatch" style="background: var(--dt-action-color-background-critical-primary-default); color: var(--dt-action-color-foreground-critical-primary-default);">
-                    Critical Action<br>var(--dt-action-color-background-critical-primary-default)
-                </div>
-                <div class="color-swatch" style="background: var(--dt-action-color-background-positive-primary-default); color: var(--dt-action-color-foreground-positive-primary-default);">
-                    Positive Action<br>var(--dt-action-color-background-positive-primary-default)
-                </div>
-            </div>
+            </section>
 
-            <h3>Shell Colors - Complete List</h3>
-            <p style="font-size: 0.875rem; color: var(--dt-color-foreground-secondary); margin-bottom: 1rem;">All shell-specific design tokens (57 total)</p>
-
-            <h4 style="margin-top: 1.5rem; margin-bottom: 1rem;">Shell Base Colors</h4>
-            <div class="color-grid">
-                <div class="color-swatch" style="background: var(--dt-shell-base-color-accent, var(--dt-color-brand-purple)); color: white;">
-                    base-color-accent<br>(TMO: magenta)
-                </div>
-                <div class="color-swatch" style="background: var(--dt-shell-base-color-surface); color: var(--dt-shell-color-foreground-primary); border: 1px solid var(--dt-color-border-subtle);">
-                    base-color-surface
-                </div>
-                <div class="color-swatch" style="background: var(--dt-shell-base-color-action); color: white; border: 1px solid var(--dt-color-border-subtle);">
-                    base-color-action
-                </div>
-                <div class="color-swatch" style="background: var(--dt-color-surface-secondary); color: var(--dt-shell-base-color-foreground); border: 1px solid var(--dt-color-border-subtle);">
-                    <div style="font-size: 1.2rem; margin-bottom: 0.5rem;">Aa</div>
-                    base-color-foreground
-                </div>
-                <div class="color-swatch" style="background: var(--dt-color-surface-primary); border: 3px solid var(--dt-shell-base-color-border); color: var(--dt-color-foreground-secondary);">
-                    base-color-border
-                </div>
-            </div>
-
-            <h4 style="margin-top: 1.5rem; margin-bottom: 1rem;">Shell Base Status Colors</h4>
-            <div class="color-grid">
-                <div class="color-swatch" style="background: var(--dt-color-surface-secondary); color: var(--dt-shell-base-color-status-positive); border: 1px solid var(--dt-color-border-subtle);">
-                    <div style="font-size: 1.2rem; margin-bottom: 0.5rem;">✓</div>
-                    base-status-positive
-                </div>
-                <div class="color-swatch" style="background: var(--dt-color-surface-secondary); color: var(--dt-shell-base-color-status-critical); border: 1px solid var(--dt-color-border-subtle);">
-                    <div style="font-size: 1.2rem; margin-bottom: 0.5rem;">✗</div>
-                    base-status-critical
-                </div>
-                <div class="color-swatch" style="background: var(--dt-color-surface-secondary); color: var(--dt-shell-base-color-status-warning); border: 1px solid var(--dt-color-border-subtle);">
-                    <div style="font-size: 1.2rem; margin-bottom: 0.5rem;">⚠</div>
-                    base-status-warning
-                </div>
-                <div class="color-swatch" style="background: var(--dt-color-surface-secondary); color: var(--dt-shell-base-color-status-away); border: 1px solid var(--dt-color-border-subtle);">
-                    <div style="font-size: 1.2rem; margin-bottom: 0.5rem;">◯</div>
-                    base-status-away
-                </div>
-            </div>
-
-            <h4 style="margin-top: 1.5rem; margin-bottom: 1rem;">Shell Base Action Backgrounds</h4>
-            <div class="color-grid">
-                <div class="color-swatch" style="background: var(--dt-shell-base-action-color-background-primary); color: var(--dt-shell-color-foreground-primary); border: 1px solid var(--dt-color-border-subtle);">
-                    base-action-bg-primary
-                </div>
-                <div class="color-swatch" style="background: var(--dt-shell-base-action-color-background-secondary); color: var(--dt-shell-color-foreground-primary); border: 1px solid var(--dt-color-border-subtle);">
-                    base-action-bg-secondary
-                </div>
-                <div class="color-swatch" style="background: var(--dt-shell-base-action-color-background-muted); color: var(--dt-shell-color-foreground-primary); border: 1px solid var(--dt-color-border-subtle);">
-                    base-action-bg-muted
-                </div>
-            </div>
-
-            <h4 style="margin-top: 1.5rem; margin-bottom: 1rem;">Shell Action Backgrounds (All States)</h4>
-            <div class="color-grid">
-                <!-- Primary Actions -->
-                <div class="color-swatch" style="background: var(--dt-shell-action-color-background-primary-default); color: var(--dt-shell-action-color-foreground-primary-default); border: 1px solid var(--dt-color-border-subtle);">
-                    action-primary-default
-                </div>
-                <div class="color-swatch" style="background: var(--dt-shell-action-color-background-primary-hover); color: var(--dt-shell-action-color-foreground-primary-default); border: 1px solid var(--dt-color-border-subtle);">
-                    action-primary-hover
-                </div>
-                <div class="color-swatch" style="background: var(--dt-shell-action-color-background-primary-active); color: var(--dt-shell-action-color-foreground-primary-default); border: 1px solid var(--dt-color-border-subtle);">
-                    action-primary-active
-                </div>
-                <div class="color-swatch" style="background: var(--dt-shell-action-color-background-primary-selected); color: var(--dt-shell-action-color-foreground-primary-default); border: 1px solid var(--dt-color-border-subtle);">
-                    action-primary-selected
-                </div>
-
-                <!-- Secondary Actions -->
-                <div class="color-swatch" style="background: var(--dt-shell-action-color-background-secondary-default); color: var(--dt-shell-action-color-foreground-secondary-default); border: 1px solid var(--dt-color-border-subtle);">
-                    action-secondary-default
-                </div>
-                <div class="color-swatch" style="background: var(--dt-shell-action-color-background-secondary-hover); color: var(--dt-shell-action-color-foreground-secondary-default); border: 1px solid var(--dt-color-border-subtle);">
-                    action-secondary-hover
-                </div>
-                <div class="color-swatch" style="background: var(--dt-shell-action-color-background-secondary-active); color: var(--dt-shell-action-color-foreground-secondary-default); border: 1px solid var(--dt-color-border-subtle);">
-                    action-secondary-active
-                </div>
-                <div class="color-swatch" style="background: var(--dt-shell-action-color-background-secondary-selected); color: var(--dt-shell-action-color-foreground-secondary-default); border: 1px solid var(--dt-color-border-subtle);">
-                    action-secondary-selected
-                </div>
-
-                <!-- Muted Actions -->
-                <div class="color-swatch" style="background: var(--dt-shell-action-color-background-muted-default); color: var(--dt-shell-action-color-foreground-muted-default); border: 1px solid var(--dt-color-border-subtle);">
-                    action-muted-default
-                </div>
-                <div class="color-swatch" style="background: var(--dt-shell-action-color-background-muted-hover); color: var(--dt-shell-action-color-foreground-muted-hover); border: 1px solid var(--dt-color-border-subtle);">
-                    action-muted-hover
-                </div>
-                <div class="color-swatch" style="background: var(--dt-shell-action-color-background-muted-active); color: var(--dt-shell-action-color-foreground-muted-active); border: 1px solid var(--dt-color-border-subtle);">
-                    action-muted-active
-                </div>
-                <div class="color-swatch" style="background: var(--dt-shell-action-color-background-muted-selected); color: var(--dt-shell-action-color-foreground-muted-selected); border: 1px solid var(--dt-color-border-subtle);">
-                    action-muted-selected
-                </div>
-            </div>
-
-            <h4 style="margin-top: 1.5rem; margin-bottom: 1rem;">Shell Action Foregrounds</h4>
-            <div class="color-grid">
-                <div class="color-swatch" style="background: var(--dt-color-surface-secondary); color: var(--dt-shell-action-color-foreground-primary-default); border: 1px solid var(--dt-color-border-subtle);">
-                    <div style="font-size: 1.2rem; margin-bottom: 0.5rem;">Aa</div>
-                    action-fg-primary
-                </div>
-                <div class="color-swatch" style="background: var(--dt-color-surface-secondary); color: var(--dt-shell-action-color-foreground-primary-strong); border: 1px solid var(--dt-color-border-subtle);">
-                    <div style="font-size: 1.2rem; margin-bottom: 0.5rem;">Aa</div>
-                    action-fg-primary-strong
-                </div>
-                <div class="color-swatch" style="background: var(--dt-color-surface-secondary); color: var(--dt-shell-action-color-foreground-primary-disabled); border: 1px solid var(--dt-color-border-subtle);">
-                    <div style="font-size: 1.2rem; margin-bottom: 0.5rem;">Aa</div>
-                    action-fg-primary-disabled
-                </div>
-                <div class="color-swatch" style="background: var(--dt-color-surface-secondary); color: var(--dt-shell-action-color-foreground-secondary-default); border: 1px solid var(--dt-color-border-subtle);">
-                    <div style="font-size: 1.2rem; margin-bottom: 0.5rem;">Aa</div>
-                    action-fg-secondary
-                </div>
-                <div class="color-swatch" style="background: var(--dt-color-surface-secondary); color: var(--dt-shell-action-color-foreground-secondary-disabled); border: 1px solid var(--dt-color-border-subtle);">
-                    <div style="font-size: 1.2rem; margin-bottom: 0.5rem;">Aa</div>
-                    action-fg-secondary-disabled
-                </div>
-                <div class="color-swatch" style="background: var(--dt-color-surface-secondary); color: var(--dt-shell-action-color-foreground-tertiary-default); border: 1px solid var(--dt-color-border-subtle);">
-                    <div style="font-size: 1.2rem; margin-bottom: 0.5rem;">Aa</div>
-                    action-fg-tertiary
-                </div>
-                <div class="color-swatch" style="background: var(--dt-color-surface-secondary); color: var(--dt-shell-action-color-foreground-muted-default); border: 1px solid var(--dt-color-border-subtle);">
-                    <div style="font-size: 1.2rem; margin-bottom: 0.5rem;">Aa</div>
-                    action-fg-muted-default
-                </div>
-                <div class="color-swatch" style="background: var(--dt-color-surface-secondary); color: var(--dt-shell-action-color-foreground-muted-hover); border: 1px solid var(--dt-color-border-subtle);">
-                    <div style="font-size: 1.2rem; margin-bottom: 0.5rem;">Aa</div>
-                    action-fg-muted-hover
-                </div>
-                <div class="color-swatch" style="background: var(--dt-color-surface-secondary); color: var(--dt-shell-action-color-foreground-muted-active); border: 1px solid var(--dt-color-border-subtle);">
-                    <div style="font-size: 1.2rem; margin-bottom: 0.5rem;">Aa</div>
-                    action-fg-muted-active
-                </div>
-                <div class="color-swatch" style="background: var(--dt-color-surface-secondary); color: var(--dt-shell-action-color-foreground-muted-selected); border: 1px solid var(--dt-color-border-subtle);">
-                    <div style="font-size: 1.2rem; margin-bottom: 0.5rem;">Aa</div>
-                    action-fg-muted-selected
-                </div>
-            </div>
-
-            <h4 style="margin-top: 1.5rem; margin-bottom: 1rem;">Shell Foreground Colors</h4>
-            <div class="color-grid">
-                <div class="color-swatch" style="background: var(--dt-color-surface-secondary); color: var(--dt-shell-color-foreground-primary); border: 1px solid var(--dt-color-border-subtle);">
-                    <div style="font-size: 1.2rem; margin-bottom: 0.5rem;">Aa</div>
-                    foreground-primary
-                </div>
-                <div class="color-swatch" style="background: var(--dt-color-surface-secondary); color: var(--dt-shell-color-foreground-secondary); border: 1px solid var(--dt-color-border-subtle);">
-                    <div style="font-size: 1.2rem; margin-bottom: 0.5rem;">Aa</div>
-                    foreground-secondary
-                </div>
-                <div class="color-swatch" style="background: var(--dt-color-surface-secondary); color: var(--dt-shell-color-foreground-tertiary); border: 1px solid var(--dt-color-border-subtle);">
-                    <div style="font-size: 1.2rem; margin-bottom: 0.5rem;">Aa</div>
-                    foreground-tertiary
-                </div>
-                <div class="color-swatch" style="background: var(--dt-color-surface-secondary); color: var(--dt-shell-color-foreground-muted); border: 1px solid var(--dt-color-border-subtle);">
-                    <div style="font-size: 1.2rem; margin-bottom: 0.5rem;">Aa</div>
-                    foreground-muted
-                </div>
-                <div class="color-swatch" style="background: var(--dt-color-surface-secondary); color: var(--dt-shell-color-foreground-strong); border: 1px solid var(--dt-color-border-subtle);">
-                    <div style="font-size: 1.2rem; margin-bottom: 0.5rem;">Aa</div>
-                    foreground-strong
-                </div>
-                <div class="color-swatch" style="background: var(--dt-color-surface-secondary); color: var(--dt-shell-color-foreground-disabled); border: 1px solid var(--dt-color-border-subtle);">
-                    <div style="font-size: 1.2rem; margin-bottom: 0.5rem;">Aa</div>
-                    foreground-disabled
-                </div>
-                <div class="color-swatch" style="background: var(--dt-color-surface-secondary); color: var(--dt-shell-color-foreground-positive); border: 1px solid var(--dt-color-border-subtle);">
-                    <div style="font-size: 1.2rem; margin-bottom: 0.5rem;">✓</div>
-                    foreground-positive
-                </div>
-                <div class="color-swatch" style="background: var(--dt-color-surface-secondary); color: var(--dt-shell-color-foreground-critical); border: 1px solid var(--dt-color-border-subtle);">
-                    <div style="font-size: 1.2rem; margin-bottom: 0.5rem;">✗</div>
-                    foreground-critical
-                </div>
-                <div class="color-swatch" style="background: var(--dt-color-surface-secondary); color: var(--dt-shell-color-foreground-warning); border: 1px solid var(--dt-color-border-subtle);">
-                    <div style="font-size: 1.2rem; margin-bottom: 0.5rem;">⚠</div>
-                    foreground-warning
-                </div>
-            </div>
-
-            <h4 style="margin-top: 1.5rem; margin-bottom: 1rem;">Shell Surfaces & Borders</h4>
-            <div class="color-grid">
-                <div class="color-swatch" style="background: var(--dt-shell-color-surface-default); color: var(--dt-shell-color-foreground-primary); border: 1px solid var(--dt-color-border-subtle);">
-                    surface-default
-                </div>
-                <div class="color-swatch" style="background: var(--dt-color-surface-primary); border: 3px solid var(--dt-shell-color-border-subtle); color: var(--dt-color-foreground-secondary);">
-                    border-subtle
-                </div>
-                <div class="color-swatch" style="background: var(--dt-color-surface-primary); border: 3px solid var(--dt-shell-color-border-default); color: var(--dt-color-foreground-secondary);">
-                    border-default
-                </div>
-                <div class="color-swatch" style="background: var(--dt-color-surface-primary); border: 3px solid var(--dt-shell-color-border-base); color: var(--dt-color-foreground-secondary);">
-                    border-base
-                </div>
-            </div>
-
-            <h4 style="margin-top: 1.5rem; margin-bottom: 1rem;">Shell Presence Colors</h4>
-            <div class="color-grid">
-                <div class="color-swatch" style="background: var(--dt-color-surface-secondary); border: 1px solid var(--dt-color-border-subtle);">
-                    <div style="width: 20px; height: 20px; background: var(--dt-shell-presence-color-available); border-radius: 50%; margin: 0 auto 0.5rem;"></div>
-                    presence-available
-                </div>
-                <div class="color-swatch" style="background: var(--dt-color-surface-secondary); border: 1px solid var(--dt-color-border-subtle);">
-                    <div style="width: 20px; height: 20px; background: var(--dt-shell-presence-color-busy); border-radius: 50%; margin: 0 auto 0.5rem;"></div>
-                    presence-busy
-                </div>
-                <div class="color-swatch" style="background: var(--dt-color-surface-secondary); border: 1px solid var(--dt-color-border-subtle);">
-                    <div style="width: 20px; height: 20px; background: var(--dt-shell-presence-color-unavailable); border-radius: 50%; margin: 0 auto 0.5rem;"></div>
-                    presence-unavailable
-                </div>
-                <div class="color-swatch" style="background: var(--dt-color-surface-secondary); border: 1px solid var(--dt-color-border-subtle);">
-                    <div style="width: 20px; height: 20px; background: var(--dt-shell-presence-color-offline); border-radius: 50%; margin: 0 auto 0.5rem;"></div>
-                    presence-offline
-                </div>
-            </div>
-
-            <h4 style="margin-top: 1.5rem; margin-bottom: 1rem;">Shell Logo Colors</h4>
-            <div class="color-grid">
-                <div class="color-swatch" style="background: var(--dt-shell-logo-color-wordmark); color: white;">
-                    logo-wordmark
-                </div>
-                <div class="color-swatch" style="background: var(--dt-shell-logo-color-star); color: white;">
-                    logo-star
-                </div>
-            </div>
-
-            <h4 style="margin-top: 1.5rem; margin-bottom: 1rem;">Shell Mention Colors</h4>
-            <div class="color-grid">
-                <div class="color-swatch" style="background: var(--dt-shell-mention-color-surface-primary, var(--dt-color-surface-brand)); color: var(--dt-shell-mention-color-foreground-primary); border: 1px solid var(--dt-color-border-subtle);">
-                    mention-surface-primary
-                </div>
-                <div class="color-swatch" style="background: var(--dt-shell-mention-color-surface-secondary, var(--dt-color-surface-brand)); color: var(--dt-shell-mention-color-foreground-secondary); border: 1px solid var(--dt-color-border-subtle);">
-                    mention-surface-secondary
-                </div>
-                <div class="color-swatch" style="background: var(--dt-color-surface-brand); color: var(--dt-shell-mention-color-foreground-primary); border: 1px solid var(--dt-color-border-subtle);">
-                    <div style="font-size: 1.2rem; margin-bottom: 0.5rem;">@</div>
-                    mention-fg-primary
-                </div>
-                <div class="color-swatch" style="background: var(--dt-color-surface-brand); color: var(--dt-shell-mention-color-foreground-secondary); border: 1px solid var(--dt-color-border-subtle);">
-                    <div style="font-size: 1.2rem; margin-bottom: 0.5rem;">@</div>
-                    mention-fg-secondary
-                </div>
-            </div>
         </div>
 
         <div class="demo-section">
             <h2>Composite Tokens</h2>
             <p>These are "shorthand" tokens that combine multiple properties into one convenient variable.</p>
 
-            <h3>Typography Composites</h3>
-            <p>Typography tokens combine font-weight, font-size, line-height, and font-family into CSS font shorthand:</p>
-            <div class="color-grid">
-                <div class="color-swatch" style="background: var(--dt-color-surface-secondary); color: var(--dt-color-foreground-primary); border: 1px solid var(--dt-color-border-subtle);">
-                    <div style="font: var(--dt-typography-body-sm); margin-bottom: 0.5rem;">Body SM</div>
-                    <code style="font-size: 0.75rem;">--dt-typography-body-sm</code>
+            <section>
+                <h3>Typography Composites</h3>
+                <p>Typography tokens combine font-weight, font-size, line-height, and font-family into CSS font shorthand:</p>
+                <div class="color-grid">
+                    <div class="color-swatch" style="background: var(--dt-color-surface-secondary); color: var(--dt-color-foreground-primary); border: 1px solid var(--dt-color-border-subtle);">
+                        <div style="font: var(--dt-typography-body-sm); margin-bottom: 0.5rem;">Body SM</div>
+                        <code style="font-size: 0.75rem;">--dt-typography-body-sm</code>
+                    </div>
+                    <div class="color-swatch" style="background: var(--dt-color-surface-secondary); color: var(--dt-color-foreground-primary); border: 1px solid var(--dt-color-border-subtle);">
+                        <div style="font: var(--dt-typography-body-md); margin-bottom: 0.5rem;">Body MD</div>
+                        <code style="font-size: 0.75rem;">--dt-typography-body-md</code>
+                    </div>
+                    <div class="color-swatch" style="background: var(--dt-color-surface-secondary); color: var(--dt-color-foreground-primary); border: 1px solid var(--dt-color-border-subtle);">
+                        <div style="font: var(--dt-typography-body-lg); margin-bottom: 0.5rem;">Body LG</div>
+                        <code style="font-size: 0.75rem;">--dt-typography-body-lg</code>
+                    </div>
+                    <div class="color-swatch" style="background: var(--dt-color-surface-secondary); color: var(--dt-color-foreground-primary); border: 1px solid var(--dt-color-border-subtle);">
+                        <div style="font: var(--dt-typography-label-sm); margin-bottom: 0.5rem;">Label SM</div>
+                        <code style="font-size: 0.75rem;">--dt-typography-label-sm</code>
+                    </div>
+                    <div class="color-swatch" style="background: var(--dt-color-surface-secondary); color: var(--dt-color-foreground-primary); border: 1px solid var(--dt-color-border-subtle);">
+                        <div style="font: var(--dt-typography-code-md); margin-bottom: 0.5rem;">Code MD</div>
+                        <code style="font-size: 0.75rem;">--dt-typography-code-md</code>
+                    </div>
                 </div>
-                <div class="color-swatch" style="background: var(--dt-color-surface-secondary); color: var(--dt-color-foreground-primary); border: 1px solid var(--dt-color-border-subtle);">
-                    <div style="font: var(--dt-typography-body-md); margin-bottom: 0.5rem;">Body MD</div>
-                    <code style="font-size: 0.75rem;">--dt-typography-body-md</code>
-                </div>
-                <div class="color-swatch" style="background: var(--dt-color-surface-secondary); color: var(--dt-color-foreground-primary); border: 1px solid var(--dt-color-border-subtle);">
-                    <div style="font: var(--dt-typography-body-lg); margin-bottom: 0.5rem;">Body LG</div>
-                    <code style="font-size: 0.75rem;">--dt-typography-body-lg</code>
-                </div>
-                <div class="color-swatch" style="background: var(--dt-color-surface-secondary); color: var(--dt-color-foreground-primary); border: 1px solid var(--dt-color-border-subtle);">
-                    <div style="font: var(--dt-typography-label-sm); margin-bottom: 0.5rem;">Label SM</div>
-                    <code style="font-size: 0.75rem;">--dt-typography-label-sm</code>
-                </div>
-                <div class="color-swatch" style="background: var(--dt-color-surface-secondary); color: var(--dt-color-foreground-primary); border: 1px solid var(--dt-color-border-subtle);">
-                    <div style="font: var(--dt-typography-code-md); margin-bottom: 0.5rem;">Code MD</div>
-                    <code style="font-size: 0.75rem;">--dt-typography-code-md</code>
-                </div>
-            </div>
+            </section>
 
-            <h3>HSLA Color Components</h3>
-            <p>Color tokens are split into H, S, L, A components for dynamic manipulation:</p>
-            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1rem; margin-top: 1rem;">
-                <div style="background: var(--dt-color-surface-secondary); padding: 1rem; border-radius: 4px; border: 1px solid var(--dt-color-border-subtle);">
-                    <div style="width: 100%; height: 60px; background: var(--dt-color-brand-purple); margin-bottom: 0.5rem; border-radius: 4px;"></div>
-                    <div style="font-size: 0.75rem; color: var(--dt-color-foreground-secondary);">
-                        <div>H: var(--dt-color-brand-purple-h)</div>
-                        <div>S: var(--dt-color-brand-purple-s)</div>
-                        <div>L: var(--dt-color-brand-purple-l)</div>
-                        <div>A: var(--dt-color-brand-purple-a)</div>
+            <section>
+                <h3>HSLA Color Components</h3>
+                <p>Color tokens are split into H, S, L, A components for dynamic manipulation:</p>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1rem; margin-top: 1rem;">
+                    <div style="background: var(--dt-color-surface-secondary); padding: 1rem; border-radius: 4px; border: 1px solid var(--dt-color-border-subtle);">
+                        <div style="width: 100%; height: 60px; background: var(--dt-color-brand-purple); margin-bottom: 0.5rem; border-radius: 4px;"></div>
+                        <div style="font-size: 0.75rem; color: var(--dt-color-foreground-secondary);">
+                            <div>H: var(--dt-color-brand-purple-h)</div>
+                            <div>S: var(--dt-color-brand-purple-s)</div>
+                            <div>L: var(--dt-color-brand-purple-l)</div>
+                            <div>A: var(--dt-color-brand-purple-a)</div>
+                        </div>
+                    </div>
+                    <div style="background: var(--dt-color-surface-secondary); padding: 1rem; border-radius: 4px; border: 1px solid var(--dt-color-border-subtle);">
+                        <div style="width: 100%; height: 60px; background: var(--dt-color-brand-purple-hsla); margin-bottom: 0.5rem; border-radius: 4px;"></div>
+                        <div style="font-size: 0.75rem; color: var(--dt-color-foreground-secondary);">
+                            HSLA Composite:<br>
+                            <code>var(--dt-color-brand-purple-hsla)</code>
+                        </div>
                     </div>
                 </div>
-                <div style="background: var(--dt-color-surface-secondary); padding: 1rem; border-radius: 4px; border: 1px solid var(--dt-color-border-subtle);">
-                    <div style="width: 100%; height: 60px; background: var(--dt-color-brand-purple-hsla); margin-bottom: 0.5rem; border-radius: 4px;"></div>
-                    <div style="font-size: 0.75rem; color: var(--dt-color-foreground-secondary);">
-                        HSLA Composite:<br>
-                        <code>var(--dt-color-brand-purple-hsla)</code>
-                    </div>
-                </div>
-            </div>
+            </section>
         </div>
 
         <div class="demo-section">
