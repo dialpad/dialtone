@@ -1,6 +1,6 @@
 <template>
   <dt-button
-    v-dt-tooltip="tooltipText"
+    v-dt-tooltip="{ message: tooltipText, inverted: kind === 'inverted' }"
     data-qa="dt-split-button-alpha"
     :active="active"
     :aria-label="ariaLabel"
