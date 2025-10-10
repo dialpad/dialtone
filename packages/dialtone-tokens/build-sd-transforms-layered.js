@@ -1,5 +1,5 @@
 /**
- * Builds and outputs split css tokens using sd-transforms.
+ * Builds and outputs layered css tokens using sd-transforms.
  * This generates separate files for core (non-color) tokens and brand-specific color tokens.
  */
 
@@ -125,12 +125,12 @@ StyleDictionary.registerTransformGroup({
 });
 
 /**
- * Build split tokens for a brand
+ * Build layered tokens for a brand
  * @param {string} brandName - Name of the brand (e.g., 'dp', 'tmo')
  * @param {Array} lightThemeConfig - Configuration for light theme
  * @param {Array} darkThemeConfig - Configuration for dark theme
  */
-async function buildSplitTokensForBrand(brandName, lightThemeConfig, darkThemeConfig) {
+async function buildLayeredTokensForBrand(brandName, lightThemeConfig, darkThemeConfig) {
   const configs = [];
 
   // 1. Build core tokens (only once, not brand-specific)
@@ -149,7 +149,7 @@ async function buildSplitTokensForBrand(brandName, lightThemeConfig, darkThemeCo
           actions: ['buildDocJson'],
           prefix: 'dt',
           basePxFontSize: Number.parseFloat(BASE_FONT_SIZE),
-          buildPath: 'dist/css/split/',
+          buildPath: 'dist/css/layered/',
           theme: 'core',
           options: {
             outputReferences: true,
@@ -189,7 +189,7 @@ async function buildSplitTokensForBrand(brandName, lightThemeConfig, darkThemeCo
         actions: ['buildDocJson'],
         prefix: 'dt',
         basePxFontSize: Number.parseFloat(BASE_FONT_SIZE),
-        buildPath: 'dist/css/split/',
+        buildPath: 'dist/css/layered/',
         theme: `${brandName}-light`,
         options: {
           outputReferences: (token) => {
@@ -232,7 +232,7 @@ async function buildSplitTokensForBrand(brandName, lightThemeConfig, darkThemeCo
         actions: ['buildDocJson'],
         prefix: 'dt',
         basePxFontSize: Number.parseFloat(BASE_FONT_SIZE),
-        buildPath: 'dist/css/split/',
+        buildPath: 'dist/css/layered/',
         theme: `${brandName}-dark`,
         options: {
           outputReferences: (token) => {
@@ -275,9 +275,9 @@ async function buildSplitTokensForBrand(brandName, lightThemeConfig, darkThemeCo
   const fs = await import('fs');
   const path = await import('path');
 
-  const lightFile = path.join('dist/css/split', `tokens-${brandName}-colors-light.css`);
-  const darkFile = path.join('dist/css/split', `tokens-${brandName}-colors-dark.css`);
-  const combinedFile = path.join('dist/css/split', `tokens-${brandName}-colors.css`);
+  const lightFile = path.join('dist/css/layered', `tokens-${brandName}-colors-light.css`);
+  const darkFile = path.join('dist/css/layered', `tokens-${brandName}-colors-dark.css`);
+  const combinedFile = path.join('dist/css/layered', `tokens-${brandName}-colors.css`);
 
   if (fs.existsSync(lightFile) && fs.existsSync(darkFile)) {
     let lightContent = fs.readFileSync(lightFile, 'utf8');
@@ -318,9 +318,9 @@ ${darkVars.split('\n').map(line => '  ' + line.trim()).filter(l => l.trim()).joi
 }
 
 /**
- * Main function to run split token generation
+ * Main function to run layered token generation
  */
-export async function runSplitTokens() {
+export async function runLayeredTokens() {
   const $themes = JSON.parse(await promises.readFile('tokens/$themes.json', 'utf-8'));
   const $metadata = JSON.parse(await promises.readFile('tokens/$metadata.json', 'utf-8'));
 
@@ -344,7 +344,7 @@ export async function runSplitTokens() {
   for (const [brandName, themes] of Object.entries(themesByBrand)) {
     // Only process brands that have both light and dark themes
     if (themes.light && themes.dark) {
-      console.log(`Building split tokens for brand: ${brandName}`);
+      console.log(`Building layered tokens for brand: ${brandName}`);
 
       // Prepare configurations
       const prepareConfig = (theme) => {
@@ -366,7 +366,7 @@ export async function runSplitTokens() {
       const lightConfig = prepareConfig(themes.light);
       const darkConfig = prepareConfig(themes.dark);
 
-      await buildSplitTokensForBrand(brandName, lightConfig, darkConfig);
+      await buildLayeredTokensForBrand(brandName, lightConfig, darkConfig);
     }
   }
 
@@ -398,7 +398,7 @@ export async function runSplitTokens() {
           transformGroup: 'custom/css/tokens-studio',
           prefix: 'dt',
           basePxFontSize: Number.parseFloat(BASE_FONT_SIZE),
-          buildPath: 'dist/css/split/contrast/',
+          buildPath: 'dist/css/layered/contrast/',
           theme: contrastTheme.name,
           options: {
             outputReferences: (token) => {
@@ -425,10 +425,10 @@ export async function runSplitTokens() {
     await sd.buildAllPlatforms();
   }
 
-  console.log('Split token generation complete!');
+  console.log('Layered token generation complete!');
 }
 
 // Allow running directly
 if (import.meta.url === `file://${process.argv[1]}`) {
-  runSplitTokens().catch(console.error);
+  runLayeredTokens().catch(console.error);
 }

@@ -1,14 +1,14 @@
 /**
- * Builds optimized split tokens where themes only contain overrides from the base dp theme
+ * Builds layered tokens where themes only contain overrides from the base dp theme
  */
 
 /* eslint-disable complexity */
 
 import { promises as fs, readFileSync, writeFileSync } from 'fs';
-import { runSplitTokens } from './build-sd-transforms-split.js';
+import { runLayeredTokens } from './build-sd-transforms-layered.js';
 import postcss from 'postcss';
 import dialtoneTokensPlugin from './postcss/dialtone-tokens.cjs';
-import splitTokensPlugin from './postcss/split-tokens.cjs';
+import layeredTokensPlugin from './postcss/layered-tokens.cjs';
 
 /**
  * Parse CSS file to extract variables
@@ -85,8 +85,8 @@ function generateOverridesCss(baseVars, themeVars, themeName) {
  * Run postcss on CSS files to generate composite tokens (typography, shadows)
  */
 async function runPostCss(file, useOriginalPlugin = false) {
-  // Use original plugin for :root files (core), split plugin for mode-specific files
-  const plugin = useOriginalPlugin ? dialtoneTokensPlugin : splitTokensPlugin;
+  // Use original plugin for :root files (core), layered plugin for mode-specific files
+  const plugin = useOriginalPlugin ? dialtoneTokensPlugin : layeredTokensPlugin;
   const postCssProcessor = postcss([plugin]);
 
   const css = readFileSync(file, 'utf8');
@@ -98,19 +98,19 @@ async function runPostCss(file, useOriginalPlugin = false) {
  * Main function to generate optimized theme files
  */
 async function main() {
-  console.log('Step 1: Generating full split tokens for all themes...\n');
+  console.log('Step 1: Generating full layered tokens for all themes...\n');
 
-  // First, generate all the split tokens
-  await runSplitTokens();
+  // First, generate all the layered tokens
+  await runLayeredTokens();
 
   console.log('\nStep 1b: Running postcss to generate composite tokens...\n');
 
-  const outputDir = 'dist/css/split';
+  const outputDir = 'dist/css/layered';
 
-  // Run postcss on files - use original plugin for :root, split plugin for mode-specific
+  // Run postcss on files - use original plugin for :root, layered plugin for mode-specific
   await runPostCss(`${outputDir}/tokens-core.css`, true); // Original plugin for :root
-  await runPostCss(`${outputDir}/tokens-base-colors.css`, false); // Split plugin for [data-dt-mode]
-  await runPostCss(`${outputDir}/tokens-dp-colors.css`, false); // Split plugin for [data-dt-mode]
+  await runPostCss(`${outputDir}/tokens-base-colors.css`, false); // Layered plugin for [data-dt-mode]
+  await runPostCss(`${outputDir}/tokens-dp-colors.css`, false); // Layered plugin for [data-dt-mode]
 
   console.log('Generated composite tokens (typography, shadows)');
 
@@ -237,7 +237,7 @@ ${darkVars}
 
   console.log('\n✅ Optimized build complete!');
   console.log('\nFinal structure:');
-  console.log('  dist/css/split/');
+  console.log('  dist/css/layered/');
   console.log('    ├── tokens-core.css (50KB) ← typography, spacing, components');
   console.log('    ├── tokens-base-colors.css (177KB)');
   console.log('    ├── tokens-dp-colors.css (628KB) ← base theme');
@@ -246,4 +246,10 @@ ${darkVars}
   console.log('        └── tokens-high-contrast.css ← high contrast overrides');
 }
 
-main().catch(console.error);
+// Export for use in build.js
+export { main as buildLayeredTokens };
+
+// Auto-run if executed directly
+if (import.meta.url === `file://${process.argv[1]}`) {
+  main().catch(console.error);
+}

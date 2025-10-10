@@ -1,11 +1,28 @@
+// Track if core tokens are loaded (for layered system)
+let coreTokensLoaded = false;
+
 /**
  * Set the current theme, brand, and optionally contrast - BACKWARD COMPATIBLE
- * @param theme the theme object which contains two properties base and brand which refer to the css files.
- * @param rootNode optional, the root node to apply the theme to, defaults to document.documentElement, you will likely
- * only want to change this if you're using shadow dom.
- * @param contrastTheme optional contrast theme object, if provided applies high contrast
+ * Auto-detects legacy vs layered theme format
+ * @param theme the theme object (legacy: {base, brand} or layered: {core, brand, contrast})
+ * @param rootNode optional, the root node to apply the theme to
+ * @param contrastTheme optional contrast theme object (legacy only)
  */
 export function setTheme (theme, rootNode = document.documentElement, contrastTheme = null) {
+  // Detect format: legacy has 'base', layered has 'core' or is just 'brand'
+  if (theme.base) {
+    // Legacy format
+    return _setThemeLegacy(theme, rootNode, contrastTheme);
+  } else {
+    // Layered format
+    return _setThemeLayered(theme, rootNode);
+  }
+}
+
+/**
+ * Legacy theme setter (original system)
+ */
+function _setThemeLegacy(theme, rootNode = document.documentElement, contrastTheme = null) {
   _setThemeAttributeOnRoot(theme.base.name, theme.brand.name, rootNode);
   if (rootNode?.shadowRoot) {
     rootNode = rootNode.shadowRoot;
@@ -21,6 +38,38 @@ export function setTheme (theme, rootNode = document.documentElement, contrastTh
   } else {
     _removeStyleTag('dialtone-css-contrast', rootNode);
     rootNode?.setAttribute('data-dt-contrast', 'default');
+  }
+}
+
+/**
+ * Layered theme setter (new optimized system)
+ */
+function _setThemeLayered(theme, rootNode = document.documentElement) {
+  if (rootNode?.shadowRoot) {
+    rootNode = rootNode.shadowRoot;
+  }
+
+  // Load core tokens only once
+  if (theme.core && !coreTokensLoaded) {
+    _setStyleTag('dialtone-css-core', theme.core, rootNode);
+    coreTokensLoaded = true;
+  }
+
+  // Load base colors only once
+  if (theme.baseColors && !rootNode?.querySelector('#dialtone-css-base-colors')) {
+    _setStyleTag('dialtone-css-base-colors', theme.baseColors, rootNode);
+  }
+
+  // Load brand colors (dp base is always loaded, others are overrides)
+  if (theme.brand) {
+    _setStyleTag('dialtone-css-brand-colors', theme.brand.css, rootNode);
+    rootNode?.setAttribute('data-dt-brand', theme.brand.name);
+  }
+
+  // Apply contrast layer if provided
+  if (theme.contrast) {
+    _setStyleTag('dialtone-css-contrast', theme.contrast.css, rootNode);
+    rootNode?.setAttribute('data-dt-contrast', theme.contrast.name);
   }
 }
 
@@ -60,4 +109,90 @@ function _removeStyleTag (id, rootNode) {
 function _setThemeAttributeOnRoot (theme, brand, rootNode) {
   rootNode?.setAttribute('data-dt-theme', theme);
   rootNode?.setAttribute('data-dt-brand', brand);
+}
+
+/**
+ * LAYERED SYSTEM HELPERS
+ * These functions work with the new layered token architecture
+ */
+
+/**
+ * Set mode (light/dark) - instant switching with layered system
+ * @param mode 'light' or 'dark'
+ * @param rootNode optional root element
+ */
+export function setMode(mode, rootNode = document.documentElement) {
+  if (mode !== 'light' && mode !== 'dark') {
+    console.warn(`Invalid mode: ${mode}. Must be 'light' or 'dark'`);
+    return;
+  }
+  rootNode?.setAttribute('data-dt-mode', mode);
+}
+
+/**
+ * Set brand - loads brand override CSS
+ * @param brandTheme theme object with brand property
+ * @param rootNode optional root element
+ */
+export function setBrand(brandTheme, rootNode = document.documentElement) {
+  if (rootNode?.shadowRoot) {
+    rootNode = rootNode.shadowRoot;
+  }
+
+  if (brandTheme.brand) {
+    _setStyleTag('dialtone-css-brand-colors', brandTheme.brand.css, rootNode);
+    rootNode?.setAttribute('data-dt-brand', brandTheme.brand.name);
+  }
+}
+
+/**
+ * Set contrast level
+ * @param contrastTheme theme object with contrast property, or null for default
+ * @param rootNode optional root element
+ */
+export function setContrast(contrastTheme, rootNode = document.documentElement) {
+  if (rootNode?.shadowRoot) {
+    rootNode = rootNode.shadowRoot;
+  }
+
+  if (contrastTheme && contrastTheme.contrast) {
+    _setStyleTag('dialtone-css-contrast', contrastTheme.contrast.css, rootNode);
+    rootNode?.setAttribute('data-dt-contrast', contrastTheme.contrast.name);
+  } else {
+    _removeStyleTag('dialtone-css-contrast', rootNode);
+    rootNode?.setAttribute('data-dt-contrast', 'default');
+  }
+}
+
+/**
+ * Initialize layered theme system - call once on app startup
+ * @param coreTheme theme object with core and baseColors properties
+ * @param brandTheme initial brand theme
+ * @param mode initial mode ('light' or 'dark')
+ * @param rootNode optional root element
+ */
+export function initLayeredTheme(coreTheme, brandTheme, mode = 'light', rootNode = document.documentElement) {
+  if (rootNode?.shadowRoot) {
+    rootNode = rootNode.shadowRoot;
+  }
+
+  // Load core tokens (once)
+  if (coreTheme.core) {
+    _setStyleTag('dialtone-css-core', coreTheme.core, rootNode);
+    coreTokensLoaded = true;
+  }
+
+  // Load base colors (once)
+  if (coreTheme.baseColors) {
+    _setStyleTag('dialtone-css-base-colors', coreTheme.baseColors, rootNode);
+  }
+
+  // Set initial mode
+  setMode(mode, rootNode);
+
+  // Set initial brand
+  setBrand(brandTheme, rootNode);
+
+  // Set default contrast
+  rootNode?.setAttribute('data-dt-contrast', 'default');
 }

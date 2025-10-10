@@ -117,6 +117,22 @@
         </svg>
       </span>
     </a>
+    <dt-button
+      id="theme-toggle-button"
+      v-dt-tooltip:bottom="`Theme: ${currentTheme.charAt(0).toUpperCase() + currentTheme.slice(1)} `"
+      hidden
+      class="theme-toggle-button dialtone-shell-btn"
+      importance="clear"
+      kind="muted"
+      @click="toggleTheme"
+    >
+      <template #icon>
+        <dt-icon
+          size="400"
+          name="satisfied-filled"
+        />
+      </template>
+    </dt-button>
     <dt-dropdown navigation-type="arrow-keys" placement="bottom-start">
       <template #anchor>
         <dt-button
@@ -199,22 +215,6 @@
       </template>
     </dt-dropdown>
     <dt-button
-      id="theme-toggle-button"
-      v-dt-tooltip:bottom="`Theme: ${currentTheme.charAt(0).toUpperCase() + currentTheme.slice(1)} `"
-      hidden
-      class="theme-toggle-button dialtone-shell-btn"
-      importance="clear"
-      kind="muted"
-      @click="toggleTheme"
-    >
-      <template #icon>
-        <dt-icon
-          size="400"
-          name="satisfied-filled"
-        />
-      </template>
-    </dt-button>
-    <dt-button
       importance="outlined"
       kind="muted"
       class="d-ml8 d-w164 d-bc-subtle h:d-bc-default h:d-bgc-transparent"
@@ -232,9 +232,16 @@
 </template>
 
 <script setup>
+/* eslint-disable max-lines, complexity */
 import { useRoute } from 'vue-router';
 import { onMounted, onUnmounted, inject, computed } from 'vue';
-import { setTheme } from '@dialpad/dialtone-tokens/themes/config';
+import {
+  setTheme,
+  initLayeredTheme,
+  setMode as setModeHelper,
+  setBrand as setBrandHelper,
+  setContrast as setContrastHelper,
+} from '@dialpad/dialtone-tokens/themes/config';
 
 defineProps({
   items: {
@@ -250,16 +257,21 @@ const currentTheme = inject('currentTheme');
 const currentContrast = inject('currentContrast');
 const modes = ['system', 'light', 'dark'];
 const themes = inject('themes');
+const layeredTokensEnabled = inject('layeredTokensEnabled', false);
 const excludedThemeNames = ['expressive'];
 const prefersDarkMediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
-const themesKeys = Array.from(
-  new Set(
-    Object.keys(themes)
-      .filter(key => !excludedThemeNames.some(exclusion => key.startsWith(exclusion)))
-      .filter(key => !key.startsWith('high-contrast')) // Exclude contrast themes from brand toggle
-      .map(key => key.replace(/-(dark|light)/, '')),
-  ),
-);
+
+// For layered system, theme keys are just the brand names
+const themesKeys = layeredTokensEnabled
+  ? Object.keys(themes).filter(key => !['core', 'high-contrast'].includes(key))
+  : Array.from(
+      new Set(
+        Object.keys(themes)
+          .filter(key => !excludedThemeNames.some(exclusion => key.startsWith(exclusion)))
+          .filter(key => !key.startsWith('high-contrast'))
+          .map(key => key.replace(/-(dark|light)/, '')),
+      ),
+    );
 
 const currentModeIconName = computed(() => {
   switch (currentMode.value) {
@@ -320,31 +332,57 @@ const setCss = () => {
     localStorage.setItem('preferredMode', currentMode.value);
   }
 
-  const mode = currentMode.value === 'system' ? (prefersDarkMediaQuery.matches ? 'dark' : 'light') : currentMode.value
+  const mode = currentMode.value === 'system' ? (prefersDarkMediaQuery.matches ? 'dark' : 'light') : currentMode.value;
 
-  const preferredTheme = `${currentTheme.value}-${mode}`;
-  let theme = themes[preferredTheme];
+  if (layeredTokensEnabled) {
+    // LAYERED SYSTEM - use new helpers
+    setModeHelper(mode);
 
-  if (!theme) {
-    const defaultTheme = `dp-${mode}`;
-    console.warn(`Theme [${preferredTheme}] does not exists, using default theme [${defaultTheme}]`);
-    theme = themes[defaultTheme];
+    const brandTheme = themes[currentTheme.value] || themes.dp;
+    setBrandHelper(brandTheme);
+
+    const contrastTheme = currentContrast.value === 'high' ? themes['high-contrast'] : null;
+    setContrastHelper(contrastTheme);
+  } else {
+    // LEGACY SYSTEM
+    const preferredTheme = `${currentTheme.value}-${mode}`;
+    let theme = themes[preferredTheme];
+
+    if (!theme) {
+      const defaultTheme = `dp-${mode}`;
+      console.warn(`Theme [${preferredTheme}] does not exists, using default theme [${defaultTheme}]`);
+      theme = themes[defaultTheme];
+    }
+
+    if (!theme) {
+      console.error(`No theme available for mode [${mode}]. Available themes:`, Object.keys(themes));
+      return;
+    }
+
+    const contrastTheme = currentContrast.value === 'high' ? themes[`high-contrast-${mode}`] : null;
+    setTheme(theme, document.documentElement, contrastTheme);
   }
-
-  // Final safety check - if still no theme, don't proceed
-  if (!theme) {
-    console.error(`No theme available for mode [${mode}]. Available themes:`, Object.keys(themes));
-    return;
-  }
-
-  // Get mode-specific contrast theme if high contrast is enabled
-  const contrastTheme = currentContrast.value === 'high' ? themes[`high-contrast-${mode}`] : null;
-
-  // Single unified theme application
-  setTheme(theme, document.documentElement, contrastTheme);
 };
 
 onMounted(() => {
+  // Initialize layered theme system on first load
+  if (layeredTokensEnabled && themes.core) {
+    const initialMode = currentMode.value === 'system'
+      ? (prefersDarkMediaQuery.matches ? 'dark' : 'light')
+      : currentMode.value;
+
+    initLayeredTheme(
+      themes.core,
+      themes[currentTheme.value] || themes.dp,
+      initialMode,
+    );
+
+    // Set initial contrast
+    if (currentContrast.value === 'high' && themes['high-contrast']) {
+      setContrastHelper(themes['high-contrast']);
+    }
+  }
+
   prefersDarkMediaQuery.addEventListener('change', setCss);
   setCss();
 });

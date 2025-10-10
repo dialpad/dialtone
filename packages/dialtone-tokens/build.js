@@ -20,7 +20,12 @@ writeDocs();
 
 await generateDebugTheme();
 
-// Generate theme files based on tokens/theme directory
+// Generate layered token system
+console.log('\n=== Generating Layered Token System ===\n');
+const { buildLayeredTokens } = await import('./build-layered.js');
+await buildLayeredTokens(); // Generate layered CSS files
+
+// Generate theme files (now uses layered system - REPLACES old system)
 await generateThemeFiles();
 
 // Build theme files for distribution
@@ -49,7 +54,9 @@ async function runPostCss (filesOrDirectory, plugins = [dialtoneTokensPlugin]) {
   const postCss = postcss(plugins);
   let files = Array.isArray(filesOrDirectory) ? filesOrDirectory : [filesOrDirectory];
   if (!Array.isArray(filesOrDirectory) && fs.lstatSync(filesOrDirectory).isDirectory()) {
-    files = fs.readdirSync(filesOrDirectory).map(file => path.join(filesOrDirectory, file));
+    files = fs.readdirSync(filesOrDirectory)
+      .map(file => path.join(filesOrDirectory, file))
+      .filter(file => fs.lstatSync(file).isFile() && file.endsWith('.css')); // Skip directories and non-CSS files
   }
   for (const file of files) {
     const css = fs.readFileSync(file);

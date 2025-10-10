@@ -6,14 +6,14 @@
     <title>Dialtone Layered Tokens Refactor Demo</title>
 
     <!-- Load the split CSS files -->
-    <link rel="stylesheet" href="dist/css/split/tokens-core.css">
-    <link rel="stylesheet" href="dist/css/split/tokens-base-colors.css">
+    <link rel="stylesheet" href="dist/css/layered/tokens-core.css">
+    <link rel="stylesheet" href="dist/css/layered/tokens-base-colors.css">
     <!-- DP is the base theme - always loaded -->
-    <link rel="stylesheet" href="dist/css/split/tokens-dp-colors.css">
+    <link rel="stylesheet" href="dist/css/layered/tokens-dp-colors.css">
     <!-- Theme overrides - only loaded when a non-dp theme is selected -->
     <link rel="stylesheet" id="theme-overrides" href="" disabled>
     <!-- High contrast overrides - only loaded when high contrast is enabled -->
-    <link rel="stylesheet" id="contrast-overrides" href="dist/css/split/contrast/tokens-high-contrast.css" disabled>
+    <link rel="stylesheet" id="contrast-overrides" href="dist/css/layered/contrast/tokens-high-contrast.css" disabled>
 
     <style>
         [data-dt-mode="light"], [data-dt-mode="dark"] {
@@ -1226,7 +1226,7 @@ Example: &lt;html data-dt-brand="tmo" data-dt-mode="dark" data-dt-contrast="high
                 themeOverrides.href = '';
             } else {
                 // Load theme-specific overrides on top of dp
-                themeOverrides.href = `dist/css/split/themes/tokens-${brandName}-colors.css`;
+                themeOverrides.href = `dist/css/layered/themes/tokens-${brandName}-colors.css`;
                 themeOverrides.disabled = false;
             }
 

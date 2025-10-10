@@ -106,7 +106,7 @@ function boxShadows (shadowDeclarations, Declaration, parentRule) {
  */
 module.exports = () => {
   return {
-    postcssPlugin: 'split-tokens',
+    postcssPlugin: 'layered-tokens',
     // Process each rule that matches our selectors
     Rule (rule, { Declaration }) {
       // Only process :root and [data-dt-mode] selectors
