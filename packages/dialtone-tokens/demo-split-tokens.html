@@ -1066,18 +1066,30 @@ Example: &lt;html data-dt-brand="tmo" data-dt-mode="dark" data-dt-contrast="high
         </div>
 
         <div class="demo-section">
-            <h2>Benefits</h2>
-            <ul>
-                <li>✅ <strong>95.7% reduction for theme overrides</strong> - Most themes: 89KB → 0.3-5KB</li>
-                <li>✅ <strong>Layered architecture</strong> - Base theme + tiny overrides</li>
-                <li>✅ <strong>Instant mode switching</strong> - No network requests needed</li>
-                <li>✅ <strong>Instant theme switching</strong> - Load only 0.5-4KB for theme changes</li>
-                <li>✅ <strong>Mixed modes on same page</strong> - Dark and light regions coexist</li>
-                <li>✅ <strong>50+ themes supported</strong> - Scalable to unlimited brands</li>
-                <li>✅ <strong>Better caching</strong> - Core + base theme cached indefinitely</li>
-                <li>✅ <strong>Extreme efficiency</strong> - TMO theme is only 0.54KB!</li>
-            </ul>
-
+            <h2>Break it down</h2>
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: var(--dt-space-500);">
+                <div>
+                    <h3>Pro</h3>
+                    <div>✅ <strong>95.7% reduction for theme overrides</strong> - Most themes: 627KB → 0.55-5KB</div>
+                    <div>✅ <strong>Layered architecture</strong> - Base theme + tiny overrides</div>
+                    <div>✅ <strong>Instant mode switching</strong> - No network requests needed</div>
+                    <div>✅ <strong>Instant theme switching</strong> - Load only 0.55-5KB for theme changes</div>
+                    <div>✅ <strong>Mixed modes on same page</strong> - Dark and light regions coexist</div>
+                    <div>✅ <strong>51 themes supported</strong> - Scalable to unlimited brands</div>
+                    <div>✅ <strong>High contrast support</strong> - New accessibility feature with minimal overhead</div>
+                    <div>✅ <strong>Better caching</strong> - Core + base theme cached indefinitely</div>
+                    <div>✅ <strong>Multi-theme apps win big</strong> - 97% reduction for apps using multiple themes</div>
+                </div>
+                <div>
+                    <h3>Con</h3>
+                    <div>⚠️ <strong>21% larger for single theme</strong> - 710KB → 862KB due to HSLA components</div>
+                    <div>⚠️ <strong>Breaking change</strong> - Requires migration from current system</div>
+                    <div>⚠️ <strong>Build </strong> - More and/or re-architected build steps (Style Dictionary → PostCSS → Override generation)</div>
+                    <div>⚠️ <strong>Required attributes</strong> - HTML must have data-dt-mode, data-dt-brand, data-dt-contrast</div>
+                    <div>⚠️ <strong>HSLA overhead</strong> - ~75% of payload is HSLA components (h, s, l, a, hsl, hsla per color)</div>
+                    <div>⚠️ <strong>Testing burden</strong> - 51 themes × 2 modes × 2 contrasts = 204 combinations to validate</div>
+                </div>
+            </div>
             <h3 style="margin-top: 1.5rem;">File Size Comparison</h3>
             <table style="width: 100%; border-collapse: collapse;">
                 <thead>
@@ -1103,9 +1115,9 @@ Example: &lt;html data-dt-brand="tmo" data-dt-mode="dark" data-dt-contrast="high
                     </tr>
                     <tr style="border-bottom: var(--dt-size-border-100) solid var(--dt-color-border-subtle);">
                         <td style="padding: var(--dt-space-300);"><strong>Switch mode (light ↔ dark)</strong></td>
-                        <td style="padding: var(--dt-space-300);">Swap 355KB file</td>
+                        <td style="padding: var(--dt-space-300);">Swap 710KB (base + brand)</td>
                         <td style="padding: var(--dt-space-300);">Change attribute (0KB)</td>
-                        <td style="padding: var(--dt-space-300); color: var(--dt-color-foreground-success);">Instant (no load)</td>
+                        <td style="padding: var(--dt-space-300); color: var(--dt-color-foreground-success);">100% smaller (instant)</td>
                     </tr>
                     <tr style="border-bottom: var(--dt-size-border-100) solid var(--dt-color-border-subtle);">
                         <td style="padding: var(--dt-space-300);"><strong>Enable high contrast</strong></td>
