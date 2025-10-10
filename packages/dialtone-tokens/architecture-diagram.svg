@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="1200" height="800" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <style>
+      .layer-box { fill: #7C52FF; stroke: #6538F1; stroke-width: 2; }
+      .layer-box-core { fill: #E9E9E9; stroke: #D2D2D2; stroke-width: 2; }
+      .layer-box-base { fill: #F5F0FF; stroke: #D3BCFF; stroke-width: 2; }
+      .layer-box-dp { fill: #A38FF9; stroke: #7C52FF; stroke-width: 2; }
+      .layer-box-theme { fill: #FFD646; stroke: #FFBE41; stroke-width: 2; }
+      .layer-box-contrast { fill: #77ECA6; stroke: #1AA340; stroke-width: 2; }
+      .title-text { font-family: system-ui, sans-serif; font-size: 28px; font-weight: bold; fill: #1C1C1C; }
+      .layer-title { font-family: system-ui, sans-serif; font-size: 18px; font-weight: bold; fill: #1C1C1C; }
+      .layer-subtitle { font-family: system-ui, sans-serif; font-size: 14px; fill: #3A3A3A; }
+      .layer-detail { font-family: system-ui, sans-serif; font-size: 12px; fill: #535353; }
+      .arrow { stroke: #808080; stroke-width: 2; fill: none; marker-end: url(#arrowhead); }
+      .dimension-label { font-family: system-ui, sans-serif; font-size: 16px; font-weight: 600; fill: #6538F1; }
+      .badge { fill: #FF67BE; stroke: #EC77BD; stroke-width: 1; }
+      .badge-text { font-family: system-ui, sans-serif; font-size: 11px; font-weight: bold; fill: white; }
+    </style>
+    <marker id="arrowhead" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+      <polygon points="0 0, 10 3, 0 6" fill="#808080" />
+    </marker>
+  </defs>
+
+  <!-- Title -->
+  <text x="600" y="40" text-anchor="middle" class="title-text">Dialtone Layered Theming Architecture</text>
+  <text x="600" y="65" text-anchor="middle" class="layer-subtitle">3-Dimensional Design Token System</text>
+
+  <!-- Layer 1: Core Tokens -->
+  <rect x="100" y="100" width="1000" height="90" rx="8" class="layer-box-core"/>
+  <text x="120" y="130" class="layer-title">Layer 1: Core Tokens</text>
+  <text x="120" y="150" class="layer-subtitle">tokens-core.css (50KB)</text>
+  <text x="120" y="170" class="layer-detail">Typography • Spacing • Sizing • Components • Fonts</text>
+  <rect x="950" y="110" width="130" height="24" rx="4" class="badge"/>
+  <text x="1015" y="127" text-anchor="middle" class="badge-text">LOADED ONCE</text>
+
+  <!-- Arrow -->
+  <line x1="600" y1="190" x2="600" y2="210" class="arrow"/>
+
+  <!-- Layer 2: Base Colors -->
+  <rect x="100" y="210" width="1000" height="90" rx="8" class="layer-box-base"/>
+  <text x="120" y="240" class="layer-title">Layer 2: Base Colors</text>
+  <text x="120" y="260" class="layer-subtitle">tokens-base-colors.css (177KB)</text>
+  <text x="120" y="280" class="layer-detail">Color Palette • Purple, Blue, Red, Green, etc. • HSLA Components</text>
+  <rect x="950" y="220" width="130" height="24" rx="4" class="badge"/>
+  <text x="1015" y="237" text-anchor="middle" class="badge-text">LOADED ONCE</text>
+
+  <!-- Arrow -->
+  <line x1="600" y1="300" x2="600" y2="320" class="arrow"/>
+
+  <!-- Layer 3: DP Base Theme -->
+  <rect x="100" y="320" width="1000" height="100" rx="8" class="layer-box-dp"/>
+  <text x="120" y="350" class="layer-title">Layer 3: DP Base Theme</text>
+  <text x="120" y="370" class="layer-subtitle">tokens-dp-colors.css (628KB)</text>
+  <text x="120" y="390" class="layer-detail">[data-dt-mode="light"] { ... } + [data-dt-mode="dark"] { ... }</text>
+  <rect x="950" y="330" width="130" height="24" rx="4" class="badge"/>
+  <text x="1015" y="347" text-anchor="middle" class="badge-text">LOADED ONCE</text>
+
+  <!-- Arrow -->
+  <line x1="600" y1="420" x2="600" y2="440" class="arrow"/>
+
+  <!-- Layer 4: Theme Overrides -->
+  <rect x="100" y="440" width="1000" height="100" rx="8" class="layer-box-theme"/>
+  <text x="120" y="470" class="layer-title">Layer 4: Theme Overrides (Optional)</text>
+  <text x="120" y="490" class="layer-subtitle">themes/tokens-{brand}-colors.css (0.3-5KB)</text>
+  <text x="120" y="510" class="layer-detail">TMO: 0.54KB • Sunflower: 4.15KB • 122: 4.13KB • 50+ themes available</text>
+  <rect x="950" y="450" width="130" height="24" rx="4" style="fill: #FF8C42; stroke: #F87E7E;"/>
+  <text x="1015" y="467" text-anchor="middle" class="badge-text">ON DEMAND</text>
+
+  <!-- Arrow -->
+  <line x1="600" y1="540" x2="600" y2="560" class="arrow"/>
+
+  <!-- Layer 5: High Contrast -->
+  <rect x="100" y="560" width="1000" height="100" rx="8" class="layer-box-contrast"/>
+  <text x="120" y="590" class="layer-title">Layer 5: High Contrast (Optional)</text>
+  <text x="120" y="610" class="layer-subtitle">contrast/tokens-high-contrast.css (3.5KB)</text>
+  <text x="120" y="630" class="layer-detail">[data-dt-mode="*"][data-dt-contrast="high"] { ... }</text>
+  <rect x="950" y="570" width="130" height="24" rx="4" style="fill: #FF8C42; stroke: #F87E7E;"/>
+  <text x="1015" y="587" text-anchor="middle" class="badge-text">ON DEMAND</text>
+
+  <!-- Three Dimensions -->
+  <text x="100" y="700" class="dimension-label">3 Dimensions:</text>
+
+  <!-- Dimension 1: Brand -->
+  <rect x="100" y="710" width="300" height="60" rx="6" style="fill: #FFD646; stroke: #FFBE41; stroke-width: 2;"/>
+  <text x="250" y="735" text-anchor="middle" class="layer-title">Brand (data-dt-brand)</text>
+  <text x="250" y="755" text-anchor="middle" class="layer-detail">dp, tmo, sunflower, 101-137... (50+)</text>
+
+  <!-- Dimension 2: Mode -->
+  <rect x="450" y="710" width="300" height="60" rx="6" style="fill: #A38FF9; stroke: #7C52FF; stroke-width: 2;"/>
+  <text x="600" y="735" text-anchor="middle" class="layer-title">Mode (data-dt-mode)</text>
+  <text x="600" y="755" text-anchor="middle" class="layer-detail">light, dark</text>
+
+  <!-- Dimension 3: Contrast -->
+  <rect x="800" y="710" width="300" height="60" rx="6" style="fill: #77ECA6; stroke: #1AA340; stroke-width: 2;"/>
+  <text x="950" y="735" text-anchor="middle" class="layer-title">Contrast (data-dt-contrast)</text>
+  <text x="950" y="755" text-anchor="middle" class="layer-detail">default, high</text>
+</svg>

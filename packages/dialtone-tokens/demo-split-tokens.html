@@ -51,7 +51,7 @@
 
 
         .demo-container {
-            max-width: 1200px;
+            max-width: 1080px;
             margin: 0 auto;
         }
 
@@ -83,9 +83,10 @@
             top: var(--dt-space-500);
             right: var(--dt-space-500);
             padding: var(--dt-space-400);
-            background: var(--dt-color-surface-bold);
+            background: var(--dt-color-surface-moderate);
+            border: 1px solid var(--dt-color-border-moderate);
             border-radius: var(--dt-size-radius-400);
-            box-shadow: 0 var(--dt-space-300) var(--dt-space-400) rgba(0,0,0,0.1);
+            box-shadow: var(--dt-shadow-medium);
         }
 
         .toggle-button {
@@ -139,10 +140,11 @@
         }
 
         pre {
-            background: var(--dt-color-surface-bold);
+            border: 1px solid var(--dt-color-border-subtle);
             padding: var(--dt-space-400);
             border-radius: var(--dt-size-radius-300);
             overflow-x: auto;
+            color: var(--dt-color-foreground-tertiary);
         }
 
         code {
@@ -153,11 +155,9 @@
 </head>
 <body>
     <div class="controls">
-        <h4 style="margin: 0;">Theme Controls</h4>
         <button onclick="toggleMode()">Toggle Mode</button>
         <button onclick="toggleContrast()">Toggle Contrast</button>
         <div style="margin-top: 1rem;">
-            <label for="brand-select">Select Brand:</label>
             <select id="brand-select" onchange="changeBrand(this.value)" style="width: 100%;">
                 <option value="dp">Dialpad</option>
                 <option value="tmo">T-Mobile</option>
@@ -217,18 +217,11 @@
                 </optgroup>
             </select>
         </div>
-        <div>
-            <div>
-                <div>Mode: <strong id="current-mode">light</strong></div>
-                <div>Brand: <strong id="current-brand" style="text-transform: uppercase;">dp</strong></div>
-                <div>Contrast: <strong id="current-contrast">default</strong></div>
-            </div>
-            <div style="display: flex; gap: .8rem;">
-                <div style="flex: 1; block-size: 2.4rem; color: transparent; background: var(--dt-shell-base-color-accent);" title="Accent" id="brand-indicator"></div>
-                <div style="flex: 1; block-size: 2.4rem; color: transparent; background: var(--dt-shell-base-color-surface);" title="Surface"></div>
-                <div style="flex: 1; block-size: 2.4rem; color: transparent; background: var(--dt-shell-base-color-action);" title="Action"></div>
-                <div style="flex: 1; block-size: 2.4rem; color: transparent; background: var(--dt-shell-base-color-foreground);" title="Foreground"></div>
-            </div>
+        <div style="margin-top: 1rem; display: flex; gap: .8rem;">
+            <div style="flex: 1; block-size: 2.4rem; color: transparent; background: var(--dt-shell-base-color-accent);" title="Accent" id="brand-indicator"></div>
+            <div style="flex: 1; block-size: 2.4rem; color: transparent; background: var(--dt-shell-base-color-surface);" title="Surface"></div>
+            <div style="flex: 1; block-size: 2.4rem; color: transparent; background: var(--dt-shell-base-color-action);" title="Action"></div>
+            <div style="flex: 1; block-size: 2.4rem; color: transparent; background: var(--dt-shell-base-color-foreground);" title="Foreground"></div>
         </div>
     </div>
 
@@ -259,7 +252,75 @@
         <div class="demo-section">
             <details>
                 <summary>How It Works</summary>
-                <p>The optimized architecture uses a layered approach with incredible efficiency:</p>
+            <pre style="background: var(--dt-color-surface-primary); padding: var(--dt-space-500); border-radius: var(--dt-size-radius-400); border: var(--dt-size-border-100) solid var(--dt-color-border-subtle); overflow-x: auto; line-height: 1.4;"><code style="font-size: var(--dt-font-size-100); color: var(--dt-color-foreground-primary);">
+╔════════════════════════════════════════════════════════════════════════════════════╗
+║                              3 DIMENSIONS OF THEMING                               ║
+╚════════════════════════════════════════════════════════════════════════════════════╝
+
+┏━━━━━━━━━━━━━━━━━━━━━━━━━━━┓  ┏━━━━━━━━━━━━━━━━━━━━━━━━━━┓  ┏━━━━━━━━━━━━━━━━━━━━━━━━┓
+┃  BRAND (data-dt-brand)    ┃  ┃  MODE (data-dt-mode)     ┃  ┃  CONTRAST              ┃
+┣━━━━━━━━━━━━━━━━━━━━━━━━━━━┫  ┣━━━━━━━━━━━━━━━━━━━━━━━━━━┫  ┣━━━━━━━━━━━━━━━━━━━━━━━━┫
+┃ • dp (Dialpad)            ┃  ┃ • light                  ┃  ┃ • default              ┃
+┃ • tmo (T-Mobile)          ┃  ┃ • dark                   ┃  ┃ • high                 ┃
+┃ • sunflower               ┃  ┃                          ┃  ┃                        ┃
+┃ • 101, 102, 103...        ┃  ┃ Instant switching!       ┃  ┃ +3.5KB only            ┃
+┃ • 50+ total               ┃  ┃ No network request       ┃  ┃                        ┃
+┗━━━━━━━━━━━━━━━━━━━━━━━━━━━┛  ┗━━━━━━━━━━━━━━━━━━━━━━━━━━┛  ┗━━━━━━━━━━━━━━━━━━━━━━━━┛
+
+        200+ POSSIBLE COMBINATIONS = 50 brands × 2 modes × 2 contrast levels
+
+Example: &lt;html data-dt-brand="tmo" data-dt-mode="dark" data-dt-contrast="high"&gt;
+         └─ Loads: 855KB base + 0.54KB (tmo) + 3.5KB (contrast) = 859KB total
+
+╔════════════════════════════════════════════════════════════════════════════════════╗
+║                    DIALTONE LAYERED THEMING ARCHITECTURE                           ║
+║                        3-Dimensional Design Token System                           ║
+╚════════════════════════════════════════════════════════════════════════════════════╝
+
+┌────────────────────────────────────────────────────────────────────────────────────┐
+│ LAYER 1: CORE TOKENS (50KB)                                    [LOADED ONCE]       │
+├────────────────────────────────────────────────────────────────────────────────────┤
+│ Typography • Spacing • Sizing • Components • Fonts                                 │
+│ :root { --dt-space-500, --dt-font-size-200, --dt-typography-body-md, ... }         │
+└────────────────────────────────────────────────────────────────────────────────────┘
+                                         ↓
+┌────────────────────────────────────────────────────────────────────────────────────┐
+│ LAYER 2: BASE COLORS (177KB)                                   [LOADED ONCE]       │
+├────────────────────────────────────────────────────────────────────────────────────┤
+│ Fundamental Color Palette with HSLA Components                                     │
+│ [data-dt-mode="light"] { --dt-color-purple-400, --dt-color-black-900, ... }        │
+│ [data-dt-mode="dark"]  { --dt-color-purple-400, --dt-color-black-900, ... }        │
+└────────────────────────────────────────────────────────────────────────────────────┘
+                                         ↓
+┌────────────────────────────────────────────────────────────────────────────────────┐
+│ LAYER 3: DP BASE THEME (628KB)                                 [LOADED ONCE]       │
+├────────────────────────────────────────────────────────────────────────────────────┤
+│ Dialpad Brand Colors (Light + Dark)                                                │
+│ [data-dt-mode="light"] { --dt-color-surface-primary, --dt-color-brand-purple }     │
+│ [data-dt-mode="dark"]  { --dt-color-surface-primary, --dt-color-brand-purple }     │
+└────────────────────────────────────────────────────────────────────────────────────┘
+                                         ↓
+┌────────────────────────────────────────────────────────────────────────────────────┐
+│ LAYER 4: THEME OVERRIDES (0.3-5KB)                             [ON DEMAND]         │
+├────────────────────────────────────────────────────────────────────────────────────┤
+│ Brand-Specific Overrides (Only differences from DP)                                │
+│ • TMO:        0.54KB  (accent color only)                                          │
+│ • Expressive: 0.34KB  (2 badge colors)                                             │
+│ • Sunflower:  4.15KB  (~25 shell colors)                                           │
+│ • Theme 122:  4.13KB  (~25 variables)                                              │
+│ • 50+ themes with avg 95.7% size reduction                                         │
+└────────────────────────────────────────────────────────────────────────────────────┘
+                                         ↓
+┌────────────────────────────────────────────────────────────────────────────────────┐
+│ LAYER 5: HIGH CONTRAST (3.5KB)                                 [ON DEMAND]         │
+├────────────────────────────────────────────────────────────────────────────────────┤
+│ Accessibility Overrides for Enhanced Contrast                                      │
+│ [data-dt-mode="light"][data-dt-contrast="high"] { border, foreground overrides }   │
+│ [data-dt-mode="dark"][data-dt-contrast="high"]  { border, foreground overrides }   │
+└────────────────────────────────────────────────────────────────────────────────────┘
+
+</code></pre>
+                <p>Layered approach with incredible efficiency:</p>
                 <ol>
                     <li><strong>Core Tokens</strong> (50KB) - Typography, spacing, sizing, components, fonts - loaded once</li>
                     <li><strong>Base Colors</strong> (177KB) - Fundamental color palette with HSLA components - loaded once</li>
@@ -296,6 +357,10 @@
     --dt-color-foreground-primary: #FFFFFF;
     /* ... more dark colors ... */
 }</code></pre>
+                <h3>Example HTML structure</h3>
+                <pre><code>&lt;html lang="en" data-dt-mode="light" data-dt-brand="dp" data-dt-contrast="default">
+    &lt;div data-dt-mode="light">Nested ModeIsland &lt;/div>
+&lt;/html></code></pre>
             </details>
         </div>
 
