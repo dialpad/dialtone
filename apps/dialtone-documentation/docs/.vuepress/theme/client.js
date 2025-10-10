@@ -179,39 +179,125 @@ async function importDocumentation (app) {
 
 async function importDialtoneThemes (app) {
   try {
-    console.info('Importing layered theme system');
+    console.info('Importing layered theme system - ALL 51 THEMES!');
 
-    // Import 10 themes for cycling + high contrast
-    // These are the CSS override contents for each theme
-    const [dpTheme, tmoTheme, sunflowerTheme, tritaTheme, protaDeuterTheme,
-           theme101, theme102, theme103, theme122, theme137, highContrastTheme] = await Promise.all([
+    // Import all themes explicitly (Vite doesn't like dynamic imports)
+    const themeModules = await Promise.all([
+      // Base theme
       import('@dialpad/dialtone-tokens/themes/dp'),
+      // Partner themes
       import('@dialpad/dialtone-tokens/themes/tmo'),
-      import('@dialpad/dialtone-tokens/themes/sunflower'),
-      import('@dialpad/dialtone-tokens/themes/trita'),
+      // Color assistive themes
       import('@dialpad/dialtone-tokens/themes/prota-deuter'),
+      import('@dialpad/dialtone-tokens/themes/trita'),
+      // Named themes
+      import('@dialpad/dialtone-tokens/themes/aegean'),
+      import('@dialpad/dialtone-tokens/themes/botany'),
+      import('@dialpad/dialtone-tokens/themes/buttercream'),
+      import('@dialpad/dialtone-tokens/themes/ceruleo'),
+      import('@dialpad/dialtone-tokens/themes/high-desert'),
+      import('@dialpad/dialtone-tokens/themes/melon'),
+      import('@dialpad/dialtone-tokens/themes/plum'),
+      import('@dialpad/dialtone-tokens/themes/sunflower'),
+      import('@dialpad/dialtone-tokens/themes/verdant-haze'),
+      // Numbered themes (not yet named)
       import('@dialpad/dialtone-tokens/themes/101'),
       import('@dialpad/dialtone-tokens/themes/102'),
       import('@dialpad/dialtone-tokens/themes/103'),
+      import('@dialpad/dialtone-tokens/themes/104'),
+      import('@dialpad/dialtone-tokens/themes/105'),
+      import('@dialpad/dialtone-tokens/themes/106'),
+      import('@dialpad/dialtone-tokens/themes/107'),
+      import('@dialpad/dialtone-tokens/themes/108'),
+      import('@dialpad/dialtone-tokens/themes/109'),
+      import('@dialpad/dialtone-tokens/themes/110'),
+      import('@dialpad/dialtone-tokens/themes/111'),
+      import('@dialpad/dialtone-tokens/themes/112'),
+      import('@dialpad/dialtone-tokens/themes/113'),
+      import('@dialpad/dialtone-tokens/themes/114'),
+      import('@dialpad/dialtone-tokens/themes/115'),
+      import('@dialpad/dialtone-tokens/themes/116'),
+      import('@dialpad/dialtone-tokens/themes/117'),
+      import('@dialpad/dialtone-tokens/themes/118'),
+      import('@dialpad/dialtone-tokens/themes/119'),
+      import('@dialpad/dialtone-tokens/themes/120'),
+      import('@dialpad/dialtone-tokens/themes/121'),
       import('@dialpad/dialtone-tokens/themes/122'),
+      import('@dialpad/dialtone-tokens/themes/123'),
+      import('@dialpad/dialtone-tokens/themes/124'),
+      import('@dialpad/dialtone-tokens/themes/125'),
+      import('@dialpad/dialtone-tokens/themes/126'),
+      import('@dialpad/dialtone-tokens/themes/127'),
+      import('@dialpad/dialtone-tokens/themes/128'),
+      import('@dialpad/dialtone-tokens/themes/129'),
+      import('@dialpad/dialtone-tokens/themes/130'),
+      import('@dialpad/dialtone-tokens/themes/131'),
+      import('@dialpad/dialtone-tokens/themes/132'),
+      import('@dialpad/dialtone-tokens/themes/133'),
+      import('@dialpad/dialtone-tokens/themes/134'),
+      import('@dialpad/dialtone-tokens/themes/135'),
+      import('@dialpad/dialtone-tokens/themes/136'),
       import('@dialpad/dialtone-tokens/themes/137'),
+      // High contrast
       import('@dialpad/dialtone-tokens/themes/high-contrast'),
     ]);
 
-    // Make themes available to components
+    // Build themes object with same order as in Navbar
     const themes = {
-      dp: dpTheme.default,
-      tmo: tmoTheme.default,
-      sunflower: sunflowerTheme.default,
-      trita: tritaTheme.default,
-      'prota-deuter': protaDeuterTheme.default,
-      '101': theme101.default,
-      '102': theme102.default,
-      '103': theme103.default,
-      '122': theme122.default,
-      '137': theme137.default,
-      'high-contrast': highContrastTheme.default,
+      'dp': themeModules[0].default,
+      'tmo': themeModules[1].default,
+      'prota-deuter': themeModules[2].default,
+      'trita': themeModules[3].default,
+      'aegean': themeModules[4].default,
+      'botany': themeModules[5].default,
+      'buttercream': themeModules[6].default,
+      'ceruleo': themeModules[7].default,
+      'high-desert': themeModules[8].default,
+      'melon': themeModules[9].default,
+      'plum': themeModules[10].default,
+      'sunflower': themeModules[11].default,
+      'verdant-haze': themeModules[12].default,
+      '101': themeModules[13].default,
+      '102': themeModules[14].default,
+      '103': themeModules[15].default,
+      '104': themeModules[16].default,
+      '105': themeModules[17].default,
+      '106': themeModules[18].default,
+      '107': themeModules[19].default,
+      '108': themeModules[20].default,
+      '109': themeModules[21].default,
+      '110': themeModules[22].default,
+      '111': themeModules[23].default,
+      '112': themeModules[24].default,
+      '113': themeModules[25].default,
+      '114': themeModules[26].default,
+      '115': themeModules[27].default,
+      '116': themeModules[28].default,
+      '117': themeModules[29].default,
+      '118': themeModules[30].default,
+      '119': themeModules[31].default,
+      '120': themeModules[32].default,
+      '121': themeModules[33].default,
+      '122': themeModules[34].default,
+      '123': themeModules[35].default,
+      '124': themeModules[36].default,
+      '125': themeModules[37].default,
+      '126': themeModules[38].default,
+      '127': themeModules[39].default,
+      '128': themeModules[40].default,
+      '129': themeModules[41].default,
+      '130': themeModules[42].default,
+      '131': themeModules[43].default,
+      '132': themeModules[44].default,
+      '133': themeModules[45].default,
+      '134': themeModules[46].default,
+      '135': themeModules[47].default,
+      '136': themeModules[48].default,
+      '137': themeModules[49].default,
+      'high-contrast': themeModules[50].default,
     };
+
+    console.log(`Successfully loaded ${Object.keys(themes).length - 1} themes + high contrast`);
 
     app.provide('themes', themes);
     app.provide('layeredTokensEnabled', true);

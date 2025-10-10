@@ -254,9 +254,24 @@ const layeredTokensEnabled = inject('layeredTokensEnabled', false);
 const excludedThemeNames = ['expressive'];
 const prefersDarkMediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
 
-// For layered system, use a fixed order for the 10 themes
+// For layered system, use ALL 51 themes in a logical order
 const themesKeys = layeredTokensEnabled
-  ? ['dp', 'tmo', 'sunflower', 'trita', 'prota-deuter', '101', '102', '103', '122', '137']
+  ? [
+      // Base theme
+      'dp',
+      // Partner themes
+      'tmo',
+      // Color assistive themes
+      'prota-deuter', 'trita',
+      // Named themes (alphabetical)
+      'aegean', 'botany', 'buttercream', 'ceruleo', 'high-desert',
+      'melon', 'plum', 'sunflower', 'verdant-haze',
+      // Numbered themes (not yet named)
+      '101', '102', '103', '104', '105', '106', '107', '108', '109', '110',
+      '111', '112', '113', '114', '115', '116', '117', '118', '119', '120',
+      '121', '122', '123', '124', '125', '126', '127', '128', '129', '130',
+      '131', '132', '133', '134', '135', '136', '137',
+    ]
   : Array.from(
       new Set(
         Object.keys(themes)
@@ -377,7 +392,10 @@ const setCss = () => {
     }
   }
 
-  console.log(`Theme: ${brandName}, Mode: ${mode}, Contrast: ${contrast}`);
+  // Show helpful info about current theme
+  const themeIndex = themesKeys.indexOf(brandName) + 1;
+  const totalThemes = themesKeys.length;
+  console.log(`Theme ${themeIndex}/${totalThemes}: ${brandName}, Mode: ${mode}, Contrast: ${contrast}`);
 };
 
 onMounted(() => {
