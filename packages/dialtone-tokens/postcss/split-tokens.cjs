@@ -1,8 +1,51 @@
+const Color = require('colorjs.io').default;
 const {
+  IS_COLOR_REGEX,
+  IS_THEME_COLOR_REGEX,
   IS_SHADOW_REGEX,
   IS_TYPOGRAPHY_REGEX,
   REGEX_OPTIONS,
+  HSLA_EXCLUDED_COLORS,
 } = require('./constants.cjs');
+
+/**
+ * Generate HSL CSS Variables for a color declaration
+ */
+function generateColorHsla (declaration) {
+  const isHSLA = ['-h', '-s', '-l', '-a', '-hsl', '-hsla'].some(suffix => declaration.prop.endsWith(suffix));
+  const isReferenceToken = (value) => value.includes('var(--');
+  const shouldHaveHSLAGenerated = (prop) =>
+    (IS_COLOR_REGEX.test(prop) || IS_THEME_COLOR_REGEX.test(prop)) &&
+    !isHSLA &&
+    !HSLA_EXCLUDED_COLORS.includes(prop);
+
+  if (!shouldHaveHSLAGenerated(declaration.prop)) return;
+
+  if (isReferenceToken(declaration.value)) {
+    const varName = declaration.value.substring(4, declaration.value.length - 1);
+    declaration.before({ prop: `${declaration.prop}-h`, value: `var(${varName}-h)` });
+    declaration.before({ prop: `${declaration.prop}-s`, value: `var(${varName}-s)` });
+    declaration.before({ prop: `${declaration.prop}-l`, value: `var(${varName}-l)` });
+    declaration.before({ prop: `${declaration.prop}-a`, value: `var(${varName}-a)` });
+    declaration.before({ prop: `${declaration.prop}-hsl`, value: `var(${varName}-hsl)` });
+    declaration.before({ prop: `${declaration.prop}-hsla`, value: `var(${varName}-hsla)` });
+    return;
+  }
+
+  const color = new Color(declaration.value).to('hsl');
+  let [hue, saturation, lightness] = color.coords;
+  const alpha = ((color.alpha?.raw || color.alpha) * 100).toFixed(0);
+  hue = hue?.raw || (isNaN(hue) ? 0 : hue);
+  saturation = saturation?.raw || saturation;
+  lightness = lightness?.raw || lightness;
+
+  declaration.before({ prop: `${declaration.prop}-h`, value: `${hue}` });
+  declaration.before({ prop: `${declaration.prop}-s`, value: `${saturation}%` });
+  declaration.before({ prop: `${declaration.prop}-l`, value: `${lightness}%` });
+  declaration.before({ prop: `${declaration.prop}-a`, value: `${alpha}%` });
+  declaration.before({ prop: `${declaration.prop}-hsl`, value: `var(${declaration.prop}-h) var(${declaration.prop}-s) var(${declaration.prop}-l)` });
+  declaration.before({ prop: `${declaration.prop}-hsla`, value: `hsl(var(${declaration.prop}-h) var(${declaration.prop}-s) var(${declaration.prop}-l) / var(--alpha, ${alpha}%))` });
+}
 
 /**
  * Compose typography tokens within a selector
@@ -79,6 +122,10 @@ module.exports = () => {
           typography(typographies, Declaration, rule);
         }
       }
+    },
+    // Process each declaration to generate HSLA components
+    Declaration (declaration) {
+      generateColorHsla(declaration);
     },
   };
 };

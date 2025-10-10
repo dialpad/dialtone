@@ -244,19 +244,22 @@
             <div class="metric-card">
                 <div class="metric-value">95.7%</div>
                 <div class="metric-label">Avg Theme Reduction</div>
+                <div style="font-size: var(--dt-font-size-100); color: var(--dt-color-foreground-muted); margin-top: 0.25rem;">3.85KB avg override size</div>
             </div>
             <div class="metric-card">
                 <div class="metric-value">0ms</div>
                 <div class="metric-label">Mode Switch Time</div>
+                <div style="font-size: var(--dt-font-size-100); color: var(--dt-color-foreground-muted); margin-top: 0.25rem;">Attribute toggle only</div>
             </div>
             <div class="metric-card">
-                <div class="metric-value">50+</div>
+                <div class="metric-value">51</div>
                 <div class="metric-label">Available Themes</div>
+                <div style="font-size: var(--dt-font-size-100); color: var(--dt-color-foreground-muted); margin-top: 0.25rem;">+ high contrast</div>
             </div>
             <div class="metric-card">
-                <div class="metric-value">855KB</div>
+                <div class="metric-value">862KB</div>
                 <div class="metric-label">Base Load Size</div>
-                <div style="font-size: 0.65rem; color: var(--dt-color-foreground-secondary); margin-top: 0.25rem;">~75% is HSLA components</div>
+                <div style="font-size: var(--dt-font-size-100); color: var(--dt-color-foreground-critical); margin-top: 0.25rem;">~75% is HSLA breakouts</div>
             </div>
         </div>
 
@@ -334,9 +337,10 @@ Example: &lt;html data-dt-brand="tmo" data-dt-mode="dark" data-dt-contrast="high
                 <p>Layered approach with incredible efficiency:</p>
                 <ol>
                     <li><strong>Core Tokens</strong> (50KB) - Typography, spacing, sizing, components, fonts - loaded once</li>
-                    <li><strong>Base Colors</strong> (177KB) - Fundamental color palette with HSLA components - loaded once</li>
-                    <li><strong>DP Base Theme</strong> (628KB) - Dialpad colors (light + dark) with HSLA - loaded once</li>
-                    <li><strong>Theme Overrides</strong> (0.3-5KB) - Only the differences from DP!</li>
+                    <li><strong>Base Colors</strong> (185KB) - Fundamental color palette with HSLA components - loaded once</li>
+                    <li><strong>DP Base Theme</strong> (627KB) - Dialpad colors (light + dark) with HSLA - loaded once</li>
+                    <li><strong>Theme Overrides</strong> (0.55-5KB) - Only the differences from DP! Avg: 3.85KB</li>
+                    <li><strong>High Contrast</strong> (3.5KB) - Optional accessibility layer</li>
                 </ol>
 
                 <h3 style="margin-top: 1.5rem;">Layered Theme System</h3>
@@ -347,9 +351,9 @@ Example: &lt;html data-dt-brand="tmo" data-dt-mode="dark" data-dt-contrast="high
                     <li>Most themes only override 10-50 variables!</li>
                 </ul>
 
-                <div style="background: var(--dt-color-surface-bold); padding: 1rem; border-radius: 4px; margin-top: 1rem;">
-                    <strong>Example:</strong> T-Mobile theme is only <strong>0.54KB</strong> because it only changes the accent color!<br>
-                    <code>Base load (855KB) + tmo override (0.54KB) = 855.54KB total</code>
+                <div style="background: var(--dt-color-surface-bold); padding: var(--dt-space-400); border-radius: var(--dt-size-radius-300); margin-top: var(--dt-space-400);">
+                    <strong>Example:</strong> T-Mobile theme is only <strong>0.55KB</strong> because it only changes the accent color!<br>
+                    <code style="font-size: var(--dt-font-size-100);">Base load (862KB) + tmo override (0.55KB) = 862.55KB total</code>
                 </div>
 
                 <h3>Example CSS Structure</h3>
@@ -1088,13 +1092,13 @@ Example: &lt;html data-dt-brand="tmo" data-dt-mode="dark" data-dt-contrast="high
                     <tr style="border-bottom: var(--dt-size-border-100) solid var(--dt-color-border-subtle);">
                         <td style="padding: var(--dt-space-300);"><strong>DP theme only</strong></td>
                         <td style="padding: var(--dt-space-300);">710KB (light + dark)</td>
-                        <td style="padding: var(--dt-space-300);">855KB</td>
-                        <td style="padding: var(--dt-space-300); color: var(--dt-color-foreground-warning);">+145KB (+20%)*</td>
+                        <td style="padding: var(--dt-space-300);">862KB</td>
+                        <td style="padding: var(--dt-space-300); color: var(--dt-color-foreground-warning);">+152KB (+21%)*</td>
                     </tr>
                     <tr style="border-bottom: var(--dt-size-border-100) solid var(--dt-color-border-subtle);">
                         <td style="padding: var(--dt-space-300);"><strong>Switch DP → TMO</strong></td>
                         <td style="padding: var(--dt-space-300);">Swap 710KB file</td>
-                        <td style="padding: var(--dt-space-300);">Load 0.54KB override</td>
+                        <td style="padding: var(--dt-space-300);">Load 0.55KB override</td>
                         <td style="padding: var(--dt-space-300); color: var(--dt-color-foreground-success);">99.9% smaller</td>
                     </tr>
                     <tr style="border-bottom: var(--dt-size-border-100) solid var(--dt-color-border-subtle);">
@@ -1112,18 +1116,20 @@ Example: &lt;html data-dt-brand="tmo" data-dt-mode="dark" data-dt-contrast="high
                     <tr style="border-bottom: var(--dt-size-border-100) solid var(--dt-color-border-subtle);">
                         <td style="padding: var(--dt-space-300);"><strong>Storybook w/ 10 themes</strong></td>
                         <td style="padding: var(--dt-space-300);">7,100KB (10 × 710KB)</td>
-                        <td style="padding: var(--dt-space-300);">895KB (base + 40KB overrides)</td>
+                        <td style="padding: var(--dt-space-300);">901KB (base + 39KB overrides)</td>
                         <td style="padding: var(--dt-space-300); color: var(--dt-color-foreground-success);">87% smaller</td>
                     </tr>
                     <tr style="border-bottom: var(--dt-size-border-100) solid var(--dt-color-border-subtle);">
-                        <td style="padding: var(--dt-space-300);"><strong>All 50 themes available</strong></td>
-                        <td style="padding: var(--dt-space-300);">35,500KB (50 × 710KB)</td>
-                        <td style="padding: var(--dt-space-300);">1,052KB (base + all overrides)</td>
+                        <td style="padding: var(--dt-space-300);"><strong>All 51 themes available</strong></td>
+                        <td style="padding: var(--dt-space-300);">36,210KB (51 × 710KB)</td>
+                        <td style="padding: var(--dt-space-300);">1,058KB (base + all overrides)</td>
                         <td style="padding: var(--dt-space-300); color: var(--dt-color-foreground-success);">97% smaller</td>
                     </tr>
                 </tbody>
             </table>
-            <p style="color: var(--dt-color-foreground-secondary); margin-top: 0.5rem;">* Single theme is 20% larger due to HSLA components (for dynamic color manipulation), but the architecture shines for theme switching and multi-theme apps</p>
+            <p style="color: var(--dt-color-foreground-secondary); margin-top: var(--dt-space-300); font-size: var(--dt-font-size-100);">
+                * <strong>Without HSLA breakouts:</strong> Base load would be <strong>~220KB</strong> <span style="color: var(--dt-color-foreground-success);">(75% reduction)</span>, and each theme would be <span style="color: var(--dt-color-foreground-success);">69% smaller</span> than old system.
+            </p>
         </div>
     </div>
 
