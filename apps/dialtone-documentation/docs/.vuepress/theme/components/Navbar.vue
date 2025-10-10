@@ -235,13 +235,6 @@
 /* eslint-disable max-lines, complexity */
 import { useRoute } from 'vue-router';
 import { onMounted, onUnmounted, inject, computed } from 'vue';
-import {
-  setTheme,
-  initLayeredTheme,
-  setMode as setModeHelper,
-  setBrand as setBrandHelper,
-  setContrast as setContrastHelper,
-} from '@dialpad/dialtone-tokens/themes/config';
 
 defineProps({
   items: {
@@ -261,9 +254,9 @@ const layeredTokensEnabled = inject('layeredTokensEnabled', false);
 const excludedThemeNames = ['expressive'];
 const prefersDarkMediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
 
-// For layered system, theme keys are just the brand names
+// For layered system, use a fixed order for the 10 themes
 const themesKeys = layeredTokensEnabled
-  ? Object.keys(themes).filter(key => !['core', 'high-contrast'].includes(key))
+  ? ['dp', 'tmo', 'sunflower', 'trita', 'prota-deuter', '101', '102', '103', '122', '137']
   : Array.from(
       new Set(
         Object.keys(themes)
@@ -333,58 +326,66 @@ const setCss = () => {
   }
 
   const mode = currentMode.value === 'system' ? (prefersDarkMediaQuery.matches ? 'dark' : 'light') : currentMode.value;
+  const brandName = currentTheme.value || 'dp';
+  const contrast = currentContrast.value || 'default';
 
-  if (layeredTokensEnabled) {
-    // LAYERED SYSTEM - use new helpers
-    setModeHelper(mode);
+  // Set HTML attributes (required for CSS selectors to work)
+  document.documentElement.setAttribute('data-dt-mode', mode);
+  document.documentElement.setAttribute('data-dt-brand', brandName);
+  document.documentElement.setAttribute('data-dt-contrast', contrast);
 
-    const brandTheme = themes[currentTheme.value] || themes.dp;
-    setBrandHelper(brandTheme);
+  // Manage brand override style tag
+  let brandOverrideTag = document.getElementById('dialtone-css-brand-override');
 
-    const contrastTheme = currentContrast.value === 'high' ? themes['high-contrast'] : null;
-    setContrastHelper(contrastTheme);
+  if (brandName === 'dp') {
+    // DP is the base theme - remove override if it exists
+    if (brandOverrideTag) {
+      brandOverrideTag.remove();
+    }
   } else {
-    // LEGACY SYSTEM
-    const preferredTheme = `${currentTheme.value}-${mode}`;
-    let theme = themes[preferredTheme];
-
-    if (!theme) {
-      const defaultTheme = `dp-${mode}`;
-      console.warn(`Theme [${preferredTheme}] does not exists, using default theme [${defaultTheme}]`);
-      theme = themes[defaultTheme];
+    // Load theme-specific overrides on top of DP
+    const theme = themes[brandName];
+    if (theme && theme.brand && theme.brand.css) {
+      if (!brandOverrideTag) {
+        brandOverrideTag = document.createElement('style');
+        brandOverrideTag.id = 'dialtone-css-brand-override';
+        brandOverrideTag.type = 'text/css';
+        document.head.appendChild(brandOverrideTag);
+      }
+      brandOverrideTag.innerHTML = theme.brand.css;
     }
-
-    if (!theme) {
-      console.error(`No theme available for mode [${mode}]. Available themes:`, Object.keys(themes));
-      return;
-    }
-
-    const contrastTheme = currentContrast.value === 'high' ? themes[`high-contrast-${mode}`] : null;
-    setTheme(theme, document.documentElement, contrastTheme);
   }
+
+  // Manage high contrast style tag
+  let contrastTag = document.getElementById('dialtone-css-contrast');
+
+  if (contrast === 'high') {
+    const contrastTheme = themes['high-contrast'];
+    if (contrastTheme && contrastTheme.contrast && contrastTheme.contrast.css) {
+      if (!contrastTag) {
+        contrastTag = document.createElement('style');
+        contrastTag.id = 'dialtone-css-contrast';
+        contrastTag.type = 'text/css';
+        document.head.appendChild(contrastTag);
+      }
+      contrastTag.innerHTML = contrastTheme.contrast.css;
+    }
+  } else {
+    // Remove contrast override when not needed
+    if (contrastTag) {
+      contrastTag.remove();
+    }
+  }
+
+  console.log(`Theme: ${brandName}, Mode: ${mode}, Contrast: ${contrast}`);
 };
 
 onMounted(() => {
-  // Initialize layered theme system on first load
-  if (layeredTokensEnabled && themes.core) {
-    const initialMode = currentMode.value === 'system'
-      ? (prefersDarkMediaQuery.matches ? 'dark' : 'light')
-      : currentMode.value;
-
-    initLayeredTheme(
-      themes.core,
-      themes[currentTheme.value] || themes.dp,
-      initialMode,
-    );
-
-    // Set initial contrast
-    if (currentContrast.value === 'high' && themes['high-contrast']) {
-      setContrastHelper(themes['high-contrast']);
-    }
-  }
-
-  prefersDarkMediaQuery.addEventListener('change', setCss);
+  // Initialize the theme on page load
   setCss();
+
+  // Listen for system theme changes
+  prefersDarkMediaQuery.addEventListener('change', setCss);
 });
 
 onUnmounted(() => {

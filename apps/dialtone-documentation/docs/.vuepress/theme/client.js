@@ -9,6 +9,13 @@ import { flushPromises } from '@workspaceRoot/common/utils/client.mjs';
 
 // CSS
 import '@docsearch/css';
+
+// Layered Theming System - Base layers (always loaded)
+import '@dialpad/dialtone-tokens/dist/css/layered/tokens-core.css';
+import '@dialpad/dialtone-tokens/dist/css/layered/tokens-base-colors.css';
+import '@dialpad/dialtone-tokens/dist/css/layered/tokens-dp-colors.css';
+
+// Legacy CSS (still needed for components)
 import '@dialpad/dialtone-css/lib/dist/dialtone.css';
 import '@dialpad/dialtone-combinator/css';
 import './assets/less/dialtone-docs.less';
@@ -174,18 +181,35 @@ async function importDialtoneThemes (app) {
   try {
     console.info('Importing layered theme system');
 
-    // Import layered themes (DIRECT REPLACEMENT)
-    const [coreTheme, dpTheme, tmoTheme, highContrastTheme] = await Promise.all([
-      import('@dialpad/dialtone-tokens/themes/core'),
+    // Import 10 themes for cycling + high contrast
+    // These are the CSS override contents for each theme
+    const [dpTheme, tmoTheme, sunflowerTheme, tritaTheme, protaDeuterTheme,
+           theme101, theme102, theme103, theme122, theme137, highContrastTheme] = await Promise.all([
       import('@dialpad/dialtone-tokens/themes/dp'),
       import('@dialpad/dialtone-tokens/themes/tmo'),
+      import('@dialpad/dialtone-tokens/themes/sunflower'),
+      import('@dialpad/dialtone-tokens/themes/trita'),
+      import('@dialpad/dialtone-tokens/themes/prota-deuter'),
+      import('@dialpad/dialtone-tokens/themes/101'),
+      import('@dialpad/dialtone-tokens/themes/102'),
+      import('@dialpad/dialtone-tokens/themes/103'),
+      import('@dialpad/dialtone-tokens/themes/122'),
+      import('@dialpad/dialtone-tokens/themes/137'),
       import('@dialpad/dialtone-tokens/themes/high-contrast'),
     ]);
 
+    // Make themes available to components
     const themes = {
-      core: coreTheme.default,
       dp: dpTheme.default,
       tmo: tmoTheme.default,
+      sunflower: sunflowerTheme.default,
+      trita: tritaTheme.default,
+      'prota-deuter': protaDeuterTheme.default,
+      '101': theme101.default,
+      '102': theme102.default,
+      '103': theme103.default,
+      '122': theme122.default,
+      '137': theme137.default,
       'high-contrast': highContrastTheme.default,
     };
 
