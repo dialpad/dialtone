@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" data-dt-mode="dark" data-dt-brand="dp">
+<html lang="en" data-dt-mode="light" data-dt-brand="dp" data-dt-contrast="default">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -12,6 +12,8 @@
     <link rel="stylesheet" href="dist/css/split/tokens-dp-colors.css">
     <!-- Theme overrides - only loaded when a non-dp theme is selected -->
     <link rel="stylesheet" id="theme-overrides" href="" disabled>
+    <!-- High contrast overrides - only loaded when high contrast is enabled -->
+    <link rel="stylesheet" id="contrast-overrides" href="dist/css/split/contrast/tokens-high-contrast.css" disabled>
 
     <style>
         body {
@@ -130,6 +132,7 @@
     <div class="controls">
         <h3>Theme Controls</h3>
         <button class="toggle-button" onclick="toggleMode()">Toggle Mode</button>
+        <button class="toggle-button" onclick="toggleContrast()">Toggle Contrast</button>
         <div style="margin-top: 1rem;">
             <label for="brand-select" style="display: block; margin-bottom: 0.5rem; font-size: 0.875rem;">Select Brand:</label>
             <select id="brand-select" onchange="changeBrand(this.value)" style="width: 100%; padding: 0.5rem; border-radius: 4px; border: 1px solid var(--dt-color-border-subtle); background: var(--dt-color-surface-primary); color: var(--dt-color-foreground-primary);">
@@ -193,8 +196,9 @@
         </div>
         <div style="margin-top: 1rem; font-size: 0.875rem;">
             <div style="margin-bottom: 1rem;">
-                <div>Current Mode: <strong id="current-mode">light</strong></div>
-                <div>Current Brand: <strong id="current-brand" style="text-transform: uppercase;">dp</strong></div>
+                <div>Mode: <strong id="current-mode">light</strong></div>
+                <div>Brand: <strong id="current-brand" style="text-transform: uppercase;">dp</strong></div>
+                <div>Contrast: <strong id="current-contrast">default</strong></div>
             </div>
             <div style="display: flex; gap: .8rem;">
                 <div style="flex: 1; block-size: 2.4rem; color: transparent; background: var(--dt-shell-base-color-accent);" title="Accent" id="brand-indicator"></div>
@@ -953,14 +957,16 @@
     </div>
 
     <script>
-        // Update current mode/brand display
+        // Update current mode/brand/contrast display
         function updateDisplay() {
             const html = document.documentElement;
             const mode = html.getAttribute('data-dt-mode') || 'light';
             const brand = html.getAttribute('data-dt-brand') || 'dp';
+            const contrast = html.getAttribute('data-dt-contrast') || 'default';
 
             document.getElementById('current-mode').textContent = mode;
             document.getElementById('current-brand').textContent = brand.toUpperCase();
+            document.getElementById('current-contrast').textContent = contrast;
 
             // Update dropdown selection
             document.getElementById('brand-select').value = brand;
@@ -987,6 +993,24 @@
 
             // Use nice name if available, otherwise format the brand code
             brandName.textContent = brandNames[brand] || `THEME ${brand}`;
+        }
+
+        // Toggle high contrast
+        function toggleContrast() {
+            const html = document.documentElement;
+            const currentContrast = html.getAttribute('data-dt-contrast') || 'default';
+            const newContrast = currentContrast === 'default' ? 'high' : 'default';
+
+            // Update the data attribute
+            html.setAttribute('data-dt-contrast', newContrast);
+
+            // Enable/disable the high contrast CSS
+            const contrastOverrides = document.getElementById('contrast-overrides');
+            contrastOverrides.disabled = (newContrast === 'default');
+
+            updateDisplay();
+
+            console.log(`Switched to ${newContrast} contrast`);
         }
 
         // Toggle between light and dark modes

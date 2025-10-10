@@ -2,7 +2,7 @@
  * Builds optimized split tokens where themes only contain overrides from the base dp theme
  */
 
- 
+/* eslint-disable complexity */
 
 import { promises as fs, readFileSync, writeFileSync } from 'fs';
 import { runSplitTokens } from './build-sd-transforms-split.js';
@@ -194,16 +194,68 @@ async function main() {
   }
 
   console.log(`Removed ${deletedCount} redundant full theme files`);
+
+  // Step 4: Process high contrast files and combine light/dark
+  console.log('\nStep 4: Processing high contrast overrides...\n');
+
+  const contrastDir = `${outputDir}/contrast`;
+  try {
+    const contrastFiles = await fs.readdir(contrastDir);
+
+    // Combine high-light and high-dark into a single file with selectors
+    const highLightFile = contrastFiles.find(f => f.includes('high-light'));
+    const highDarkFile = contrastFiles.find(f => f.includes('high-dark'));
+
+    if (highLightFile && highDarkFile) {
+      const lightContent = await fs.readFile(`${contrastDir}/${highLightFile}`, 'utf8');
+      const darkContent = await fs.readFile(`${contrastDir}/${highDarkFile}`, 'utf8');
+
+      const extractVars = (content) => {
+        const match = content.match(/:root\s*\{([^}]+)\}/s);
+        if (!match) return '';
+        return match[1].trim().split('\n')
+          .filter(line => line.trim() && !line.includes('color-scheme'))
+          .map(line => '  ' + line.trim())
+          .join('\n');
+      };
+
+      const lightVars = extractVars(lightContent);
+      const darkVars = extractVars(darkContent);
+
+      const combined = `/**
+ * Do not edit directly, this file was auto-generated.
+ * High contrast overrides for both light and dark modes
+ */
+
+/* High contrast - Light mode */
+[data-dt-mode="light"][data-dt-contrast="high"] {
+${lightVars}
+}
+
+/* High contrast - Dark mode */
+[data-dt-mode="dark"][data-dt-contrast="high"] {
+${darkVars}
+}`;
+
+      await fs.writeFile(`${contrastDir}/tokens-high-contrast.css`, combined);
+      await fs.unlink(`${contrastDir}/${highLightFile}`);
+      await fs.unlink(`${contrastDir}/${highDarkFile}`);
+
+      console.log('Generated high contrast override file');
+    }
+  } catch {
+    console.log('No high contrast files found, skipping...');
+  }
+
   console.log('\n✅ Optimized build complete!');
   console.log('\nFinal structure:');
   console.log('  dist/css/split/');
-  console.log('    ├── tokens-core.css (64KB) ← typography, spacing, components');
-  console.log('    ├── tokens-base-colors.css (23KB)');
-  console.log('    ├── tokens-dp-colors.css (89KB) ← base theme');
-  console.log('    └── themes/');
-  console.log('        ├── tokens-tmo-colors.css (0.54KB)');
-  console.log('        ├── tokens-sunflower-colors.css (4.15KB)');
-  console.log('        └── ... 49 more theme files ...');
+  console.log('    ├── tokens-core.css (50KB) ← typography, spacing, components');
+  console.log('    ├── tokens-base-colors.css (177KB)');
+  console.log('    ├── tokens-dp-colors.css (628KB) ← base theme');
+  console.log('    ├── themes/ (51 override files)');
+  console.log('    └── contrast/');
+  console.log('        └── tokens-high-contrast.css ← high contrast overrides');
 }
 
 main().catch(console.error);

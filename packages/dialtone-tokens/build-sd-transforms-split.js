@@ -3,7 +3,7 @@
  * This generates separate files for core (non-color) tokens and brand-specific color tokens.
  */
 
-/* eslint-disable complexity */
+/* eslint-disable complexity, max-lines */
 
 import { register, getTransforms, expandTypesMap } from '@tokens-studio/sd-transforms';
 import StyleDictionary from 'style-dictionary';
@@ -368,6 +368,61 @@ export async function runSplitTokens() {
 
       await buildSplitTokensForBrand(brandName, lightConfig, darkConfig);
     }
+  }
+
+  // Build high contrast tokens (separate from brand themes)
+  console.log('\nBuilding high contrast tokens...');
+
+  const highContrastThemes = $themes.filter(t => t.group === 'contrast' && t.name.includes('high'));
+
+  for (const contrastTheme of highContrastThemes) {
+    const include = $metadata.tokenSetOrder
+      .filter(set => Object.entries(contrastTheme.selectedTokenSets)
+        .filter(([, val]) => val === 'source')
+        .map(([key]) => key).includes(set))
+      .map(set => `tokens/${set}.json`);
+
+    const source = $metadata.tokenSetOrder
+      .filter(set => Object.entries(contrastTheme.selectedTokenSets)
+        .filter(([, val]) => val === 'enabled')
+        .map(([key]) => key).includes(set))
+      .map(set => `tokens/${set}.json`);
+
+    const contrastConfig = {
+      source,
+      preprocessors: ['tokens-studio'],
+      expand: { typesMap: expandTypesMap },
+      include,
+      platforms: {
+        css: {
+          transformGroup: 'custom/css/tokens-studio',
+          prefix: 'dt',
+          basePxFontSize: Number.parseFloat(BASE_FONT_SIZE),
+          buildPath: 'dist/css/split/contrast/',
+          theme: contrastTheme.name,
+          options: {
+            outputReferences: (token) => {
+              if (token.$extensions?.['studio.tokens']?.modify ||
+                  (token.$extensions?.['studio.tokens']?.originalType === 'boxShadow' && token.type === 'color')) {
+                return false;
+              }
+              return true;
+            },
+          },
+          files: [{
+            destination: `tokens-${contrastTheme.name}.css`,
+            format: 'css/variables',
+            filter: (token) => isColorToken(token) && token.isSource,
+          }],
+        },
+      },
+      log: { warnings: 'disabled', verbosity: 'default', errors: { brokenReferences: 'throw' } },
+    };
+
+    const sd = new StyleDictionary(contrastConfig);
+    await sd.hasInitialized;
+    await sd.cleanAllPlatforms();
+    await sd.buildAllPlatforms();
   }
 
   console.log('Split token generation complete!');
