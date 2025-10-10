@@ -3,7 +3,7 @@
  * This generates separate files for core (non-color) tokens and brand-specific color tokens.
  */
 
-/* eslint-disable complexity, max-lines */
+/* eslint-disable complexity */
 
 import { register, getTransforms, expandTypesMap } from '@tokens-studio/sd-transforms';
 import StyleDictionary from 'style-dictionary';
@@ -100,19 +100,12 @@ const isColorToken = (token) => {
 
 const isCoreToken = (token) => {
   // Core tokens are non-color tokens that don't change between themes
+  // This includes both base tokens AND component tokens
   return !isColorToken(token) &&
          token.isSource &&
          !token.path?.includes('action') && // Action tokens often have colors
          !token.path?.includes('shell') &&  // Shell tokens often have colors
          !token.path?.includes('theme');    // Theme tokens are brand-specific
-};
-
-const isComponentCoreToken = (token) => {
-  // Component tokens that are NOT color-related
-  return token.isSource &&
-         token.path?.[0] && // Has a path
-         ['button', 'checkbox', 'radio', 'icon', 'typography', 'inputs'].includes(token.path[0]) &&
-         !isColorToken(token);
 };
 
 StyleDictionary.registerAction({
@@ -165,11 +158,6 @@ async function buildSplitTokensForBrand(brandName, lightThemeConfig, darkThemeCo
               destination: 'tokens-core.css',
               format: 'css/variables',
               filter: isCoreToken,
-            },
-            {
-              destination: 'tokens-components-core.css',
-              format: 'css/variables',
-              filter: isComponentCoreToken,
             },
           ],
         },

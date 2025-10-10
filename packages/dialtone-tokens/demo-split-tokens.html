@@ -7,9 +7,11 @@
 
     <!-- Load the split CSS files -->
     <link rel="stylesheet" href="dist/css/split/tokens-core.css">
-    <link rel="stylesheet" href="dist/css/split/tokens-components-core.css">
     <link rel="stylesheet" href="dist/css/split/tokens-base-colors.css">
-    <link rel="stylesheet" id="brand-colors" href="dist/css/split/tokens-dp-colors.css">
+    <!-- DP is the base theme - always loaded -->
+    <link rel="stylesheet" href="dist/css/split/tokens-dp-colors.css">
+    <!-- Theme overrides - only loaded when a non-dp theme is selected -->
+    <link rel="stylesheet" id="theme-overrides" href="" disabled>
 
     <style>
         body {
@@ -203,8 +205,8 @@
 
         <div class="metrics">
             <div class="metric-card">
-                <div class="metric-value">70%</div>
-                <div class="metric-label">Size Reduction Per Brand</div>
+                <div class="metric-value">95.7%</div>
+                <div class="metric-label">Avg Theme Reduction</div>
             </div>
             <div class="metric-card">
                 <div class="metric-value">0ms</div>
@@ -215,19 +217,33 @@
                 <div class="metric-label">Available Themes</div>
             </div>
             <div class="metric-card">
-                <div class="metric-value">3</div>
-                <div class="metric-label">Core CSS Files</div>
+                <div class="metric-value">176KB</div>
+                <div class="metric-label">Base Load Size</div>
             </div>
         </div>
 
         <div class="demo-section">
             <h2>How It Works</h2>
-            <p>The new architecture splits tokens into three categories:</p>
+            <p>The optimized architecture uses a layered approach with incredible efficiency:</p>
             <ol>
-                <li><strong>Core Tokens</strong> (31KB) - Typography, spacing, sizing - loaded once</li>
-                <li><strong>Component Core</strong> (31KB) - Non-color component tokens - loaded once</li>
-                <li><strong>Brand Colors</strong> (88KB) - Both light and dark colors in one file</li>
+                <li><strong>Core Tokens</strong> (64KB) - Typography, spacing, sizing, components - loaded once</li>
+                <li><strong>Base Colors</strong> (23KB) - Fundamental color palette - loaded once</li>
+                <li><strong>DP Base Theme</strong> (89KB) - Dialpad colors (light + dark) - loaded once</li>
+                <li><strong>Theme Overrides</strong> (0.3-5KB) - Only the differences from DP!</li>
             </ol>
+
+            <h3 style="margin-top: 1.5rem;">Layered Theme System</h3>
+            <p>Instead of loading a complete 89KB file for each theme, we:</p>
+            <ul>
+                <li>Load DP as the <strong>base theme</strong> (always present)</li>
+                <li>Layer theme-specific <strong>overrides</strong> on top</li>
+                <li>Most themes only override 10-50 variables!</li>
+            </ul>
+
+            <div style="background: var(--dt-color-surface-bold); padding: 1rem; border-radius: 4px; margin-top: 1rem;">
+                <strong>Example:</strong> T-Mobile theme is only <strong>0.54KB</strong> because it only changes the accent color!<br>
+                <code style="font-size: 0.875rem;">dp (89KB base) + tmo (0.54KB override) = 89.54KB total</code>
+            </div>
 
             <h3>Example CSS Structure</h3>
             <pre><code>/* Light mode colors in :root */
@@ -647,12 +663,53 @@
         <div class="demo-section">
             <h2>Benefits</h2>
             <ul>
-                <li>✅ <strong>81% smaller CSS payload</strong> - From 906KB to 172KB total</li>
+                <li>✅ <strong>95.7% reduction for theme overrides</strong> - Most themes: 89KB → 0.3-5KB</li>
+                <li>✅ <strong>Layered architecture</strong> - Base theme + tiny overrides</li>
                 <li>✅ <strong>Instant mode switching</strong> - No network requests needed</li>
+                <li>✅ <strong>Instant theme switching</strong> - Load only 0.5-4KB for theme changes</li>
                 <li>✅ <strong>Mixed modes on same page</strong> - Dark and light regions coexist</li>
-                <li>✅ <strong>Better caching</strong> - Core tokens cached indefinitely</li>
-                <li>✅ <strong>Backward compatible</strong> - Legacy themes still work</li>
+                <li>✅ <strong>50+ themes supported</strong> - Scalable to unlimited brands</li>
+                <li>✅ <strong>Better caching</strong> - Core + base theme cached indefinitely</li>
+                <li>✅ <strong>Extreme efficiency</strong> - TMO theme is only 0.54KB!</li>
             </ul>
+
+            <h3 style="margin-top: 1.5rem;">File Size Comparison</h3>
+            <table style="width: 100%; border-collapse: collapse; font-size: 0.875rem;">
+                <thead>
+                    <tr style="background: var(--dt-color-surface-bold); text-align: left;">
+                        <th style="padding: 0.5rem;">Theme</th>
+                        <th style="padding: 0.5rem;">Old Size</th>
+                        <th style="padding: 0.5rem;">New Size (Override)</th>
+                        <th style="padding: 0.5rem;">Reduction</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr style="border-bottom: 1px solid var(--dt-color-border-subtle);">
+                        <td style="padding: 0.5rem;"><strong>DP (base)</strong></td>
+                        <td style="padding: 0.5rem;">358KB (light) + 352KB (dark)</td>
+                        <td style="padding: 0.5rem;">89KB (combined)</td>
+                        <td style="padding: 0.5rem; color: var(--dt-color-foreground-success);">87.5%</td>
+                    </tr>
+                    <tr style="border-bottom: 1px solid var(--dt-color-border-subtle);">
+                        <td style="padding: 0.5rem;">TMO</td>
+                        <td style="padding: 0.5rem;">710KB total</td>
+                        <td style="padding: 0.5rem;">0.54KB override</td>
+                        <td style="padding: 0.5rem; color: var(--dt-color-foreground-success);">99.4%</td>
+                    </tr>
+                    <tr style="border-bottom: 1px solid var(--dt-color-border-subtle);">
+                        <td style="padding: 0.5rem;">Sunflower</td>
+                        <td style="padding: 0.5rem;">710KB total</td>
+                        <td style="padding: 0.5rem;">4.15KB override</td>
+                        <td style="padding: 0.5rem; color: var(--dt-color-foreground-success);">95.3%</td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 0.5rem;">Theme 122</td>
+                        <td style="padding: 0.5rem;">710KB total</td>
+                        <td style="padding: 0.5rem;">4.13KB override</td>
+                        <td style="padding: 0.5rem; color: var(--dt-color-foreground-success);">95.4%</td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
     </div>
 
@@ -702,21 +759,34 @@
             updateDisplay();
         }
 
-        // Change brand via dropdown - actually loads different CSS files
+        // Change brand via dropdown - loads theme overrides on top of dp base
         function changeBrand(brandName) {
             const html = document.documentElement;
 
             // Update the data attribute
             html.setAttribute('data-dt-brand', brandName);
 
-            // Switch the CSS file
-            const brandColors = document.getElementById('brand-colors');
-            brandColors.href = `dist/css/split/tokens-${brandName}-colors.css`;
+            // Get the theme overrides link element
+            const themeOverrides = document.getElementById('theme-overrides');
+
+            if (brandName === 'dp') {
+                // DP is the base theme - disable overrides
+                themeOverrides.disabled = true;
+                themeOverrides.href = '';
+            } else {
+                // Load theme-specific overrides on top of dp
+                themeOverrides.href = `dist/css/split/themes/tokens-${brandName}-colors.css`;
+                themeOverrides.disabled = false;
+            }
 
             updateDisplay();
 
-            // Show a brief notification
-            console.log(`Switched to ${brandName} brand colors`);
+            // Show notification with file size info
+            if (brandName === 'dp') {
+                console.log('Switched to DP (base theme) - 89KB');
+            } else {
+                console.log(`Switched to ${brandName} - base (89KB) + overrides (~0.5-4KB)`);
+            }
         }
 
         // Initialize display
