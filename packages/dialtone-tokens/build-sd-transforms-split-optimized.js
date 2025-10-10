@@ -8,6 +8,7 @@ import { promises as fs, readFileSync, writeFileSync } from 'fs';
 import { runSplitTokens } from './build-sd-transforms-split.js';
 import postcss from 'postcss';
 import dialtoneTokensPlugin from './postcss/dialtone-tokens.cjs';
+import splitTokensPlugin from './postcss/split-tokens.cjs';
 
 /**
  * Parse CSS file to extract variables
@@ -83,25 +84,14 @@ function generateOverridesCss(baseVars, themeVars, themeName) {
 /**
  * Run postcss on CSS files to generate composite tokens (typography, shadows)
  */
-async function runPostCss(filesOrDirectory) {
-  const postCssProcessor = postcss([dialtoneTokensPlugin]);
-  let files = Array.isArray(filesOrDirectory) ? filesOrDirectory : [filesOrDirectory];
+async function runPostCss(file, useOriginalPlugin = false) {
+  // Use original plugin for :root files (core), split plugin for mode-specific files
+  const plugin = useOriginalPlugin ? dialtoneTokensPlugin : splitTokensPlugin;
+  const postCssProcessor = postcss([plugin]);
 
-  if (!Array.isArray(filesOrDirectory)) {
-    const stat = await fs.stat(filesOrDirectory);
-    if (stat.isDirectory()) {
-      const dirFiles = await fs.readdir(filesOrDirectory);
-      files = dirFiles
-        .filter(f => f.endsWith('.css'))
-        .map(f => `${filesOrDirectory}/${f}`);
-    }
-  }
-
-  for (const file of files) {
-    const css = readFileSync(file, 'utf8');
-    const result = await postCssProcessor.process(css, { from: file, to: file });
-    writeFileSync(file, result.css);
-  }
+  const css = readFileSync(file, 'utf8');
+  const result = await postCssProcessor.process(css, { from: file, to: file });
+  writeFileSync(file, result.css);
 }
 
 /**
@@ -117,12 +107,10 @@ async function main() {
 
   const outputDir = 'dist/css/split';
 
-  // Run postcss on the core files to generate typography/shadow composites
-  await runPostCss([
-    `${outputDir}/tokens-core.css`,
-    `${outputDir}/tokens-base-colors.css`,
-    `${outputDir}/tokens-dp-colors.css`,
-  ]);
+  // Run postcss on files - use original plugin for :root, split plugin for mode-specific
+  await runPostCss(`${outputDir}/tokens-core.css`, true); // Original plugin for :root
+  await runPostCss(`${outputDir}/tokens-base-colors.css`, false); // Split plugin for [data-dt-mode]
+  await runPostCss(`${outputDir}/tokens-dp-colors.css`, false); // Split plugin for [data-dt-mode]
 
   console.log('Generated composite tokens (typography, shadows)');
 

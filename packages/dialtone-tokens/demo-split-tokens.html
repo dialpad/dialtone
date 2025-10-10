@@ -22,13 +22,13 @@
         }
 
         html {
-            font-size: 10px;
+            font-size: var(--dt-font-size-root);
         }
         body {
             font: var(--dt-typography-body-md);
             margin: 0;
             padding: var(--dt-space-500);
-            background: var(--dt-shell-color-surface-default);
+            background: var(--dt-color-surface-primary);
             color: var(--dt-color-foreground-primary);
             -webkit-text-size-adjust: 100%;
             -webkit-font-smoothing: antialiased;
@@ -84,9 +84,16 @@
             right: var(--dt-space-500);
             padding: var(--dt-space-400);
             background: var(--dt-color-surface-moderate);
-            border: 1px solid var(--dt-color-border-moderate);
+            border: 1px solid var(--dt-color-border-default);
             border-radius: var(--dt-size-radius-400);
             box-shadow: var(--dt-shadow-medium);
+        }
+
+        .adsf {
+            display: none;
+        }
+        .controls:hover .adsf {
+            display: block;
         }
 
         .toggle-button {
@@ -155,73 +162,77 @@
 </head>
 <body>
     <div class="controls">
-        <button onclick="toggleMode()">Toggle Mode</button>
-        <button onclick="toggleContrast()">Toggle Contrast</button>
-        <div style="margin-top: 1rem;">
-            <select id="brand-select" onchange="changeBrand(this.value)" style="width: 100%;">
-                <option value="dp">Dialpad</option>
-                <option value="tmo">T-Mobile</option>
-                <optgroup label="Named Themes">
-                    <option value="aegean">Aegean</option>
-                    <option value="botany">Botany</option>
-                    <option value="buttercream">Buttercream</option>
-                    <option value="ceruleo">Ceruleo</option>
-                    <option value="expressive">Expressive</option>
-                    <option value="expressive-sm">Expressive SM</option>
-                    <option value="high-desert">High Desert</option>
-                    <option value="melon">Melon</option>
-                    <option value="plum">Plum</option>
-                    <option value="prota-deuter">Prota Deuter</option>
-                    <option value="sunflower">Sunflower</option>
-                    <option value="trita">Trita</option>
-                    <option value="verdant-haze">Verdant Haze</option>
-                </optgroup>
-                <optgroup label="Numbered Themes">
-                    <option value="101">Theme 101</option>
-                    <option value="102">Theme 102</option>
-                    <option value="103">Theme 103</option>
-                    <option value="104">Theme 104</option>
-                    <option value="105">Theme 105</option>
-                    <option value="106">Theme 106</option>
-                    <option value="107">Theme 107</option>
-                    <option value="108">Theme 108</option>
-                    <option value="109">Theme 109</option>
-                    <option value="110">Theme 110</option>
-                    <option value="111">Theme 111</option>
-                    <option value="112">Theme 112</option>
-                    <option value="113">Theme 113</option>
-                    <option value="114">Theme 114</option>
-                    <option value="115">Theme 115</option>
-                    <option value="116">Theme 116</option>
-                    <option value="117">Theme 117</option>
-                    <option value="118">Theme 118</option>
-                    <option value="119">Theme 119</option>
-                    <option value="120">Theme 120</option>
-                    <option value="121">Theme 121</option>
-                    <option value="122">Theme 122</option>
-                    <option value="123">Theme 123</option>
-                    <option value="124">Theme 124</option>
-                    <option value="125">Theme 125</option>
-                    <option value="126">Theme 126</option>
-                    <option value="127">Theme 127</option>
-                    <option value="128">Theme 128</option>
-                    <option value="129">Theme 129</option>
-                    <option value="130">Theme 130</option>
-                    <option value="131">Theme 131</option>
-                    <option value="132">Theme 132</option>
-                    <option value="133">Theme 133</option>
-                    <option value="134">Theme 134</option>
-                    <option value="135">Theme 135</option>
-                    <option value="136">Theme 136</option>
-                    <option value="137">Theme 137</option>
-                </optgroup>
-            </select>
-        </div>
-        <div style="margin-top: 1rem; display: flex; gap: .8rem;">
-            <div style="flex: 1; block-size: 2.4rem; color: transparent; background: var(--dt-shell-base-color-accent);" title="Accent" id="brand-indicator"></div>
-            <div style="flex: 1; block-size: 2.4rem; color: transparent; background: var(--dt-shell-base-color-surface);" title="Surface"></div>
-            <div style="flex: 1; block-size: 2.4rem; color: transparent; background: var(--dt-shell-base-color-action);" title="Action"></div>
-            <div style="flex: 1; block-size: 2.4rem; color: transparent; background: var(--dt-shell-base-color-foreground);" title="Foreground"></div>
+        <button onclick="toggleMode()">Mode</button>
+        <button onclick="toggleContrast()">Contrast</button>
+        <div class="adsf">
+            <div style="margin-top: 1rem;">
+                <select id="brand-select" onchange="changeBrand(this.value)" style="width: 100%;">
+                    <optgroup label="Base">
+                        <option value="dp">Dialpad</option>
+                        <option value="tmo">T-Mobile</option>
+                    </optgroup>
+                    <optgroup label="Color Assistive">
+                        <option value="prota-deuter">Prota Deuter</option>
+                        <option value="trita">Trita</option>
+                    </optgroup>
+                    <optgroup label="Named">
+                        <option value="aegean">Aegean</option>
+                        <option value="botany">Botany</option>
+                        <option value="buttercream">Buttercream</option>
+                        <option value="ceruleo">Ceruleo</option>
+                        <option value="high-desert">High Desert</option>
+                        <option value="melon">Melon</option>
+                        <option value="plum">Plum</option>
+                        <option value="sunflower">Sunflower</option>
+                        <option value="verdant-haze">Verdant Haze</option>
+                    </optgroup>
+                    <optgroup label="Not yet named">
+                        <option value="101">101</option>
+                        <option value="102">102</option>
+                        <option value="103">103</option>
+                        <option value="104">104</option>
+                        <option value="105">105</option>
+                        <option value="106">106</option>
+                        <option value="107">107</option>
+                        <option value="108">108</option>
+                        <option value="109">109</option>
+                        <option value="110">110</option>
+                        <option value="111">111</option>
+                        <option value="112">112</option>
+                        <option value="113">113</option>
+                        <option value="114">114</option>
+                        <option value="115">115</option>
+                        <option value="116">116</option>
+                        <option value="117">117</option>
+                        <option value="118">118</option>
+                        <option value="119">119</option>
+                        <option value="120">120</option>
+                        <option value="121">121</option>
+                        <option value="122">122</option>
+                        <option value="123">123</option>
+                        <option value="124">124</option>
+                        <option value="125">125</option>
+                        <option value="126">126</option>
+                        <option value="127">127</option>
+                        <option value="128">128</option>
+                        <option value="129">129</option>
+                        <option value="130">130</option>
+                        <option value="131">131</option>
+                        <option value="132">132</option>
+                        <option value="133">133</option>
+                        <option value="134">134</option>
+                        <option value="135">135</option>
+                        <option value="136">136</option>
+                        <option value="137">137</option>
+                    </optgroup>
+                </select>
+            </div>
+            <div style="margin-top: 1rem; display: flex; gap: .8rem;">
+                <div style="flex: 1; block-size: 2.4rem; color: transparent; background: var(--dt-shell-base-color-accent);" title="Accent" id="brand-indicator"></div>
+                <div style="flex: 1; block-size: 2.4rem; color: transparent; background: var(--dt-shell-base-color-surface);" title="Surface"></div>
+                <div style="flex: 1; block-size: 2.4rem; color: transparent; background: var(--dt-shell-base-color-action);" title="Action"></div>
+                <div style="flex: 1; block-size: 2.4rem; color: transparent; background: var(--dt-shell-base-color-foreground);" title="Foreground"></div>
+            </div>
         </div>
     </div>
 
