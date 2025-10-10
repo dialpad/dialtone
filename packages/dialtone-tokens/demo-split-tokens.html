@@ -962,42 +962,48 @@
             <table style="width: 100%; border-collapse: collapse;">
                 <thead>
                     <tr style="background: var(--dt-color-surface-bold); text-align: left;">
-                        <th style="padding: 0.5rem;">Scenario</th>
-                        <th style="padding: 0.5rem;">Old System</th>
-                        <th style="padding: 0.5rem;">New System</th>
-                        <th style="padding: 0.5rem;">Change</th>
+                        <th style="padding: var(--dt-space-300);">Scenario</th>
+                        <th style="padding: var(--dt-space-300);">Old System</th>
+                        <th style="padding: var(--dt-space-300);">New System</th>
+                        <th style="padding: var(--dt-space-300);">Change</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr style="border-bottom: 1px solid var(--dt-color-border-subtle);">
-                        <td style="padding: 0.5rem;"><strong>DP theme only</strong></td>
-                        <td style="padding: 0.5rem;">710KB (light + dark)</td>
-                        <td style="padding: 0.5rem;">855KB</td>
-                        <td style="padding: 0.5rem; color: var(--dt-color-foreground-warning);">+145KB (+20%)*</td>
+                    <tr style="border-bottom: var(--dt-size-border-100) solid var(--dt-color-border-subtle);">
+                        <td style="padding: var(--dt-space-300);"><strong>DP theme only</strong></td>
+                        <td style="padding: var(--dt-space-300);">710KB (light + dark)</td>
+                        <td style="padding: var(--dt-space-300);">855KB</td>
+                        <td style="padding: var(--dt-space-300); color: var(--dt-color-foreground-warning);">+145KB (+20%)*</td>
                     </tr>
-                    <tr style="border-bottom: 1px solid var(--dt-color-border-subtle);">
-                        <td style="padding: 0.5rem;"><strong>Switch DP → TMO</strong></td>
-                        <td style="padding: 0.5rem;">Swap 710KB file</td>
-                        <td style="padding: 0.5rem;">Load 0.54KB override</td>
-                        <td style="padding: 0.5rem; color: var(--dt-color-foreground-success);">99.9% smaller</td>
+                    <tr style="border-bottom: var(--dt-size-border-100) solid var(--dt-color-border-subtle);">
+                        <td style="padding: var(--dt-space-300);"><strong>Switch DP → TMO</strong></td>
+                        <td style="padding: var(--dt-space-300);">Swap 710KB file</td>
+                        <td style="padding: var(--dt-space-300);">Load 0.54KB override</td>
+                        <td style="padding: var(--dt-space-300); color: var(--dt-color-foreground-success);">99.9% smaller</td>
                     </tr>
-                    <tr style="border-bottom: 1px solid var(--dt-color-border-subtle);">
-                        <td style="padding: 0.5rem;"><strong>Switch mode (light ↔ dark)</strong></td>
-                        <td style="padding: 0.5rem;">Swap 355KB file</td>
-                        <td style="padding: 0.5rem;">Change attribute (0KB)</td>
-                        <td style="padding: 0.5rem; color: var(--dt-color-foreground-success);">Instant (no load)</td>
+                    <tr style="border-bottom: var(--dt-size-border-100) solid var(--dt-color-border-subtle);">
+                        <td style="padding: var(--dt-space-300);"><strong>Switch mode (light ↔ dark)</strong></td>
+                        <td style="padding: var(--dt-space-300);">Swap 355KB file</td>
+                        <td style="padding: var(--dt-space-300);">Change attribute (0KB)</td>
+                        <td style="padding: var(--dt-space-300); color: var(--dt-color-foreground-success);">Instant (no load)</td>
                     </tr>
-                    <tr style="border-bottom: 1px solid var(--dt-color-border-subtle);">
-                        <td style="padding: 0.5rem;"><strong>Storybook w/ 10 themes</strong></td>
-                        <td style="padding: 0.5rem;">7,100KB (10 × 710KB)</td>
-                        <td style="padding: 0.5rem;">895KB (base + 40KB overrides)</td>
-                        <td style="padding: 0.5rem; color: var(--dt-color-foreground-success);">87% smaller</td>
+                    <tr style="border-bottom: var(--dt-size-border-100) solid var(--dt-color-border-subtle);">
+                        <td style="padding: var(--dt-space-300);"><strong>Enable high contrast</strong></td>
+                        <td style="padding: var(--dt-space-300);">N/A (not supported)</td>
+                        <td style="padding: var(--dt-space-300);">Load 3.5KB override</td>
+                        <td style="padding: var(--dt-space-300); color: var(--dt-color-foreground-success);">New feature!</td>
                     </tr>
-                    <tr style="border-bottom: 1px solid var(--dt-color-border-subtle);">
-                        <td style="padding: 0.5rem;"><strong>All 50 themes available</strong></td>
-                        <td style="padding: 0.5rem;">35,500KB (50 × 710KB)</td>
-                        <td style="padding: 0.5rem;">1,052KB (base + all overrides)</td>
-                        <td style="padding: 0.5rem; color: var(--dt-color-foreground-success);">97% smaller</td>
+                    <tr style="border-bottom: var(--dt-size-border-100) solid var(--dt-color-border-subtle);">
+                        <td style="padding: var(--dt-space-300);"><strong>Storybook w/ 10 themes</strong></td>
+                        <td style="padding: var(--dt-space-300);">7,100KB (10 × 710KB)</td>
+                        <td style="padding: var(--dt-space-300);">895KB (base + 40KB overrides)</td>
+                        <td style="padding: var(--dt-space-300); color: var(--dt-color-foreground-success);">87% smaller</td>
+                    </tr>
+                    <tr style="border-bottom: var(--dt-size-border-100) solid var(--dt-color-border-subtle);">
+                        <td style="padding: var(--dt-space-300);"><strong>All 50 themes available</strong></td>
+                        <td style="padding: var(--dt-space-300);">35,500KB (50 × 710KB)</td>
+                        <td style="padding: var(--dt-space-300);">1,052KB (base + all overrides)</td>
+                        <td style="padding: var(--dt-space-300); color: var(--dt-color-foreground-success);">97% smaller</td>
                     </tr>
                 </tbody>
             </table>
