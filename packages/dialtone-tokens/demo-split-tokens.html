@@ -18,7 +18,7 @@
             font: var(--dt-typography-body-md);
             margin: 0;
             padding: 20px;
-            background: var(--dt-color-surface-primary);
+            background: var(--dt-shell-color-surface-default);
             color: var(--dt-color-foreground-primary);
             transition: background-color 0.3s, color 0.3s;
         }
@@ -32,7 +32,8 @@
             margin: 2rem 0;
             padding: 2rem;
             border-radius: 8px;
-            background: var(--dt-color-surface-secondary);
+            background: var(--dt-color-surface-primary);
+            color: var(--dt-shell-color-foreground-primary);
             border: 1px solid var(--dt-color-border-subtle);
         }
 
@@ -48,6 +49,7 @@
             border-radius: 4px;
             text-align: center;
             font-size: 0.875rem;
+            border: 1px solid var(--dt-color-border-subtle);
         }
 
         .controls {
@@ -89,7 +91,7 @@
             gap: 1rem;
             margin-top: 2rem;
             padding: 1rem;
-            background: var(--dt-color-surface-moderate);
+            background: var(--dt-color-surface-primary);
             border-radius: 8px;
         }
 
@@ -201,7 +203,7 @@
 
     <div class="demo-container">
         <h1>Dialtone Split Tokens Demo</h1>
-        <p>This demonstrates the new split token architecture with instant mode switching and nested color regions.</p>
+        <p>This demonstrates a would-be layered CSS Variable architecture, with instant mode switching and nested color regions.</p>
 
         <div class="metrics">
             <div class="metric-card">
@@ -223,63 +225,233 @@
         </div>
 
         <div class="demo-section">
-            <h2>How It Works</h2>
-            <p>The optimized architecture uses a layered approach with incredible efficiency:</p>
-            <ol>
-                <li><strong>Core Tokens</strong> (64KB) - Typography, spacing, sizing, components - loaded once</li>
-                <li><strong>Base Colors</strong> (23KB) - Fundamental color palette - loaded once</li>
-                <li><strong>DP Base Theme</strong> (89KB) - Dialpad colors (light + dark) - loaded once</li>
-                <li><strong>Theme Overrides</strong> (0.3-5KB) - Only the differences from DP!</li>
-            </ol>
+            <details>
+                <summary>How It Works</summary>
+                <p>The optimized architecture uses a layered approach with incredible efficiency:</p>
+                <ol>
+                    <li><strong>Core Tokens</strong> (64KB) - Typography, spacing, sizing, components - loaded once</li>
+                    <li><strong>Base Colors</strong> (23KB) - Fundamental color palette - loaded once</li>
+                    <li><strong>DP Base Theme</strong> (89KB) - Dialpad colors (light + dark) - loaded once</li>
+                    <li><strong>Theme Overrides</strong> (0.3-5KB) - Only the differences from DP!</li>
+                </ol>
 
-            <h3 style="margin-top: 1.5rem;">Layered Theme System</h3>
-            <p>Instead of loading a complete 89KB file for each theme, we:</p>
-            <ul>
-                <li>Load DP as the <strong>base theme</strong> (always present)</li>
-                <li>Layer theme-specific <strong>overrides</strong> on top</li>
-                <li>Most themes only override 10-50 variables!</li>
-            </ul>
+                <h3 style="margin-top: 1.5rem;">Layered Theme System</h3>
+                <p>Instead of loading a complete 89KB file for each theme, we:</p>
+                <ul>
+                    <li>Load DP as the <strong>base theme</strong> (always present)</li>
+                    <li>Layer theme-specific <strong>overrides</strong> on top</li>
+                    <li>Most themes only override 10-50 variables!</li>
+                </ul>
 
-            <div style="background: var(--dt-color-surface-bold); padding: 1rem; border-radius: 4px; margin-top: 1rem;">
-                <strong>Example:</strong> T-Mobile theme is only <strong>0.54KB</strong> because it only changes the accent color!<br>
-                <code style="font-size: 0.875rem;">dp (89KB base) + tmo (0.54KB override) = 89.54KB total</code>
-            </div>
+                <div style="background: var(--dt-color-surface-bold); padding: 1rem; border-radius: 4px; margin-top: 1rem;">
+                    <strong>Example:</strong> T-Mobile theme is only <strong>0.54KB</strong> because it only changes the accent color!<br>
+                    <code style="font-size: 0.875rem;">dp (89KB base) + tmo (0.54KB override) = 89.54KB total</code>
+                </div>
 
-            <h3>Example CSS Structure</h3>
-            <pre><code>/* Light mode colors in :root */
-:root {
-  color-scheme: light;
-  --dt-color-surface-primary: #FFFFFF;
-  --dt-color-foreground-primary: #000000;
-  /* ... more light colors ... */
-}
+                <h3>Example CSS Structure</h3>
+                <pre><code>/* Light mode colors in :root */
+    :root {
+      color-scheme: light;
+      --dt-color-surface-primary: #FFFFFF;
+      --dt-color-foreground-primary: #000000;
+      /* ... more light colors ... */
+    }
 
-/* Dark mode colors with selector */
-[data-dt-mode="dark"] {
-  color-scheme: dark;
-  --dt-color-surface-primary: #1C1C1C;
-  --dt-color-foreground-primary: #FFFFFF;
-  /* ... more dark colors ... */
-}</code></pre>
+    /* Dark mode colors with selector */
+    [data-dt-mode="dark"] {
+      color-scheme: dark;
+      --dt-color-surface-primary: #1C1C1C;
+      --dt-color-foreground-primary: #FFFFFF;
+      /* ... more dark colors ... */
+    }</code></pre>
+            </details>
         </div>
 
         <div class="demo-section">
-            <h2>Color Palette Demo</h2>
+            <h2>Base Color Palettes</h2>
+            <p style="font-size: 0.875rem; color: var(--dt-color-foreground-secondary); margin-bottom: 1.5rem;">Complete color ramps for all base colors (hover to see variable name)</p>
 
-            <h3>Brand Colors</h3>
-            <div class="color-grid">
-                <div class="color-swatch" style="background: var(--dt-color-brand-purple); color: white;">
-                    Purple<br>var(--dt-color-brand-purple)
-                </div>
-                <div class="color-swatch" style="background: var(--dt-color-brand-magenta); color: white;">
-                    Magenta<br>var(--dt-color-brand-magenta)
-                </div>
-                <div class="color-swatch" style="background: var(--dt-color-brand-red); color: white;">
-                    Red<br>var(--dt-color-brand-red)
-                </div>
-                <div class="color-swatch" style="background: var(--dt-color-brand-gold); color: black;">
-                    Gold<br>var(--dt-color-brand-gold)
-                </div>
+            <div class="color-grid" style="grid-template-columns: repeat(auto-fill, minmax(74px, 1fr));">
+                <div class="color-swatch" style="background: var(--dt-color-black-50);" title="black-50"></div>
+                <div class="color-swatch" style="background: var(--dt-color-black-100);" title="black-100"></div>
+                <div class="color-swatch" style="background: var(--dt-color-black-200);" title="black-200"></div>
+                <div class="color-swatch" style="background: var(--dt-color-black-300);" title="black-300"></div>
+                <div class="color-swatch" style="background: var(--dt-color-black-400);" title="black-400"></div>
+                <div class="color-swatch" style="background: var(--dt-color-black-500);" title="black-500"></div>
+                <div class="color-swatch" style="background: var(--dt-color-black-600);" title="black-600"></div>
+                <div class="color-swatch" style="background: var(--dt-color-black-700);" title="black-700"></div>
+                <div class="color-swatch" style="background: var(--dt-color-black-800);" title="black-800"></div>
+                <div class="color-swatch" style="background: var(--dt-color-black-900);" title="black-900"></div>
+                <div class="color-swatch" style="background: var(--dt-color-black-950);" title="black-950"></div>
+                <div class="color-swatch" style="background: var(--dt-color-black-1000);" title="black-1000"></div>
+            </div>
+            <div class="color-grid" style="grid-template-columns: repeat(auto-fill, minmax(74px, 1fr));">
+                <div class="color-swatch" style="background: var(--dt-color-purple-50);" title="purple-50"></div>
+                <div class="color-swatch" style="background: var(--dt-color-purple-100);" title="purple-100"></div>
+                <div class="color-swatch" style="background: var(--dt-color-purple-200);" title="purple-200"></div>
+                <div class="color-swatch" style="background: var(--dt-color-purple-250);" title="purple-250"></div>
+                <div class="color-swatch" style="background: var(--dt-color-purple-300);" title="purple-300"></div>
+                <div class="color-swatch" style="background: var(--dt-color-purple-350);" title="purple-350"></div>
+                <div class="color-swatch" style="background: var(--dt-color-purple-400);" title="purple-400"></div>
+                <div class="color-swatch" style="background: var(--dt-color-purple-450);" title="purple-450"></div>
+                <div class="color-swatch" style="background: var(--dt-color-purple-500);" title="purple-500"></div>
+                <div class="color-swatch" style="background: var(--dt-color-purple-550);" title="purple-550"></div>
+                <div class="color-swatch" style="background: var(--dt-color-purple-600);" title="purple-600"></div>
+                <div class="color-swatch" style="background: var(--dt-color-purple-1000);" title="purple-1000"></div>
+            </div>
+            <div class="color-grid" style="grid-template-columns: repeat(auto-fill, minmax(74px, 1fr));">
+                <div class="color-swatch" style="background: var(--dt-color-blue-50);" title="blue-50"></div>
+                <div class="color-swatch" style="background: var(--dt-color-blue-100);" title="blue-100"></div>
+                <div class="color-swatch" style="background: var(--dt-color-blue-200);" title="blue-200"></div>
+                <div class="color-swatch" style="background: var(--dt-color-blue-300);" title="blue-300"></div>
+                <div class="color-swatch" style="background: var(--dt-color-blue-400);" title="blue-400"></div>
+                <div class="color-swatch" style="background: var(--dt-color-blue-425);" title="blue-425"></div>
+                <div class="color-swatch" style="background: var(--dt-color-blue-450);" title="blue-450"></div>
+                <div class="color-swatch" style="background: var(--dt-color-blue-475);" title="blue-475"></div>
+                <div class="color-swatch" style="background: var(--dt-color-blue-500);" title="blue-500"></div>
+                <div class="color-swatch" style="background: var(--dt-color-blue-600);" title="blue-600"></div>
+                <div class="color-swatch" style="background: var(--dt-color-blue-900);" title="blue-900"></div>
+                <div class="color-swatch" style="background: var(--dt-color-blue-1000);" title="blue-1000"></div>
+            </div>
+            <div class="color-grid" style="grid-template-columns: repeat(auto-fill, minmax(74px, 1fr));">
+                <div class="color-swatch" style="background: var(--dt-color-magenta-50);" title="magenta-50"></div>
+                <div class="color-swatch" style="background: var(--dt-color-magenta-100);" title="magenta-100"></div>
+                <div class="color-swatch" style="background: var(--dt-color-magenta-200);" title="magenta-200"></div>
+                <div class="color-swatch" style="background: var(--dt-color-magenta-250);" title="magenta-250"></div>
+                <div class="color-swatch" style="background: var(--dt-color-magenta-300);" title="magenta-300"></div>
+                <div class="color-swatch" style="background: var(--dt-color-magenta-400);" title="magenta-400"></div>
+                <div class="color-swatch" style="background: var(--dt-color-magenta-425);" title="magenta-425"></div>
+                <div class="color-swatch" style="background: var(--dt-color-magenta-475);" title="magenta-475"></div>
+                <div class="color-swatch" style="background: var(--dt-color-magenta-500);" title="magenta-500"></div>
+                <div class="color-swatch" style="background: var(--dt-color-magenta-600);" title="magenta-600"></div>
+                <div class="color-swatch" style="background: var(--dt-color-magenta-900);" title="magenta-900"></div>
+                <div class="color-swatch" style="background: var(--dt-color-magenta-1000);" title="magenta-1000"></div>
+            </div>
+            <div class="color-grid" style="grid-template-columns: repeat(auto-fill, minmax(74px, 1fr));">
+                <div class="color-swatch" style="background: var(--dt-color-red-50);" title="red-50"></div>
+                <div class="color-swatch" style="background: var(--dt-color-red-100);" title="red-100"></div>
+                <div class="color-swatch" style="background: var(--dt-color-red-200);" title="red-200"></div>
+                <div class="color-swatch" style="background: var(--dt-color-red-300);" title="red-300"></div>
+                <div class="color-swatch" style="background: var(--dt-color-red-350);" title="red-350"></div>
+                <div class="color-swatch" style="background: var(--dt-color-red-400);" title="red-400"></div>
+                <div class="color-swatch" style="background: var(--dt-color-red-450);" title="red-450"></div>
+                <div class="color-swatch" style="background: var(--dt-color-red-500);" title="red-500"></div>
+                <div class="color-swatch" style="background: var(--dt-color-red-600);" title="red-600"></div>
+                <div class="color-swatch" style="background: var(--dt-color-red-700);" title="red-700"></div>
+                <div class="color-swatch" style="background: var(--dt-color-red-900);" title="red-900"></div>
+                <div class="color-swatch" style="background: var(--dt-color-red-1000);" title="red-1000"></div>
+            </div>
+            <div class="color-grid" style="grid-template-columns: repeat(auto-fill, minmax(74px, 1fr));">
+                <div class="color-swatch" style="background: var(--dt-color-gold-50);" title="gold-50"></div>
+                <div class="color-swatch" style="background: var(--dt-color-gold-100);" title="gold-100"></div>
+                <div class="color-swatch" style="background: var(--dt-color-gold-200);" title="gold-200"></div>
+                <div class="color-swatch" style="background: var(--dt-color-gold-300);" title="gold-300"></div>
+                <div class="color-swatch" style="background: var(--dt-color-gold-350);" title="gold-350"></div>
+                <div class="color-swatch" style="background: var(--dt-color-gold-400);" title="gold-400"></div>
+                <div class="color-swatch" style="background: var(--dt-color-gold-450);" title="gold-450"></div>
+                <div class="color-swatch" style="background: var(--dt-color-gold-500);" title="gold-500"></div>
+                <div class="color-swatch" style="background: var(--dt-color-gold-600);" title="gold-600"></div>
+                <div class="color-swatch" style="background: var(--dt-color-gold-700);" title="gold-700"></div>
+                <div class="color-swatch" style="background: var(--dt-color-gold-900);" title="gold-900"></div>
+                <div class="color-swatch" style="background: var(--dt-color-gold-1000);" title="gold-1000"></div>
+            </div>
+            <div class="color-grid" style="grid-template-columns: repeat(auto-fill, minmax(74px, 1fr));">
+                <div class="color-swatch" style="background: var(--dt-color-green-50);" title="green-50"></div>
+                <div class="color-swatch" style="background: var(--dt-color-green-100);" title="green-100"></div>
+                <div class="color-swatch" style="background: var(--dt-color-green-200);" title="green-200"></div>
+                <div class="color-swatch" style="background: var(--dt-color-green-300);" title="green-300"></div>
+                <div class="color-swatch" style="background: var(--dt-color-green-350);" title="green-350"></div>
+                <div class="color-swatch" style="background: var(--dt-color-green-400);" title="green-400"></div>
+                <div class="color-swatch" style="background: var(--dt-color-green-425);" title="green-425"></div>
+                <div class="color-swatch" style="background: var(--dt-color-green-475);" title="green-475"></div>
+                <div class="color-swatch" style="background: var(--dt-color-green-500);" title="green-500"></div>
+                <div class="color-swatch" style="background: var(--dt-color-green-600);" title="green-600"></div>
+                <div class="color-swatch" style="background: var(--dt-color-green-900);" title="green-900"></div>
+                <div class="color-swatch" style="background: var(--dt-color-green-1000);" title="green-1000"></div>
+            </div>
+            <div class="color-grid" style="grid-template-columns: repeat(auto-fill, minmax(74px, 1fr));">
+                <div class="color-swatch" style="background: var(--dt-color-teal-50);" title="teal-50"></div>
+                <div class="color-swatch" style="background: var(--dt-color-teal-100);" title="teal-100"></div>
+                <div class="color-swatch" style="background: var(--dt-color-teal-200);" title="teal-200"></div>
+                <div class="color-swatch" style="background: var(--dt-color-teal-300);" title="teal-300"></div>
+                <div class="color-swatch" style="background: var(--dt-color-teal-400);" title="teal-400"></div>
+                <div class="color-swatch" style="background: var(--dt-color-teal-500);" title="teal-500"></div>
+                <div class="color-swatch" style="background: var(--dt-color-teal-600);" title="teal-600"></div>
+                <div class="color-swatch" style="background: var(--dt-color-teal-700);" title="teal-700"></div>
+                <div class="color-swatch" style="background: var(--dt-color-teal-800);" title="teal-800"></div>
+                <div class="color-swatch" style="background: var(--dt-color-teal-900);" title="teal-900"></div>
+                <div class="color-swatch" style="background: var(--dt-color-teal-950);" title="teal-950"></div>
+                <div class="color-swatch" style="background: var(--dt-color-teal-1000);" title="teal-1000"></div>
+            </div>
+            <div class="color-grid" style="grid-template-columns: repeat(auto-fill, minmax(74px, 1fr));">
+                <div class="color-swatch" style="background: var(--dt-color-indigo-50);" title="indigo-50"></div>
+                <div class="color-swatch" style="background: var(--dt-color-indigo-100);" title="indigo-100"></div>
+                <div class="color-swatch" style="background: var(--dt-color-indigo-200);" title="indigo-200"></div>
+                <div class="color-swatch" style="background: var(--dt-color-indigo-300);" title="indigo-300"></div>
+                <div class="color-swatch" style="background: var(--dt-color-indigo-400);" title="indigo-400"></div>
+                <div class="color-swatch" style="background: var(--dt-color-indigo-500);" title="indigo-500"></div>
+                <div class="color-swatch" style="background: var(--dt-color-indigo-600);" title="indigo-600"></div>
+                <div class="color-swatch" style="background: var(--dt-color-indigo-700);" title="indigo-700"></div>
+                <div class="color-swatch" style="background: var(--dt-color-indigo-800);" title="indigo-800"></div>
+                <div class="color-swatch" style="background: var(--dt-color-indigo-900);" title="indigo-900"></div>
+                <div class="color-swatch" style="background: var(--dt-color-indigo-950);" title="indigo-950"></div>
+                <div class="color-swatch" style="background: var(--dt-color-indigo-1000);" title="indigo-1000"></div>
+            </div>
+            <div class="color-grid" style="grid-template-columns: repeat(auto-fill, minmax(74px, 1fr));">
+                <div class="color-swatch" style="background: var(--dt-color-coral-50);" title="coral-50"></div>
+                <div class="color-swatch" style="background: var(--dt-color-coral-100);" title="coral-100"></div>
+                <div class="color-swatch" style="background: var(--dt-color-coral-200);" title="coral-200"></div>
+                <div class="color-swatch" style="background: var(--dt-color-coral-300);" title="coral-300"></div>
+                <div class="color-swatch" style="background: var(--dt-color-coral-400);" title="coral-400"></div>
+                <div class="color-swatch" style="background: var(--dt-color-coral-500);" title="coral-500"></div>
+                <div class="color-swatch" style="background: var(--dt-color-coral-600);" title="coral-600"></div>
+                <div class="color-swatch" style="background: var(--dt-color-coral-700);" title="coral-700"></div>
+                <div class="color-swatch" style="background: var(--dt-color-coral-800);" title="coral-800"></div>
+                <div class="color-swatch" style="background: var(--dt-color-coral-900);" title="coral-900"></div>
+                <div class="color-swatch" style="background: var(--dt-color-coral-950);" title="coral-950"></div>
+                <div class="color-swatch" style="background: var(--dt-color-coral-1000);" title="coral-1000"></div>
+            </div>
+            <div class="color-grid" style="grid-template-columns: repeat(auto-fill, minmax(74px, 1fr));">
+                <div class="color-swatch" style="background: var(--dt-color-berry-50);" title="berry-50"></div>
+                <div class="color-swatch" style="background: var(--dt-color-berry-100);" title="berry-100"></div>
+                <div class="color-swatch" style="background: var(--dt-color-berry-200);" title="berry-200"></div>
+                <div class="color-swatch" style="background: var(--dt-color-berry-300);" title="berry-300"></div>
+                <div class="color-swatch" style="background: var(--dt-color-berry-400);" title="berry-400"></div>
+                <div class="color-swatch" style="background: var(--dt-color-berry-500);" title="berry-500"></div>
+                <div class="color-swatch" style="background: var(--dt-color-berry-600);" title="berry-600"></div>
+                <div class="color-swatch" style="background: var(--dt-color-berry-700);" title="berry-700"></div>
+                <div class="color-swatch" style="background: var(--dt-color-berry-800);" title="berry-800"></div>
+                <div class="color-swatch" style="background: var(--dt-color-berry-900);" title="berry-900"></div>
+                <div class="color-swatch" style="background: var(--dt-color-berry-950);" title="berry-950"></div>
+                <div class="color-swatch" style="background: var(--dt-color-berry-1000);" title="berry-1000"></div>
+            </div>
+            <div class="color-grid" style="grid-template-columns: repeat(auto-fill, minmax(74px, 1fr));">
+                <div class="color-swatch" style="background: var(--dt-color-olive-50);" title="olive-50"></div>
+                <div class="color-swatch" style="background: var(--dt-color-olive-100);" title="olive-100"></div>
+                <div class="color-swatch" style="background: var(--dt-color-olive-200);" title="olive-200"></div>
+                <div class="color-swatch" style="background: var(--dt-color-olive-300);" title="olive-300"></div>
+                <div class="color-swatch" style="background: var(--dt-color-olive-400);" title="olive-400"></div>
+                <div class="color-swatch" style="background: var(--dt-color-olive-500);" title="olive-500"></div>
+                <div class="color-swatch" style="background: var(--dt-color-olive-600);" title="olive-600"></div>
+                <div class="color-swatch" style="background: var(--dt-color-olive-700);" title="olive-700"></div>
+                <div class="color-swatch" style="background: var(--dt-color-olive-800);" title="olive-800"></div>
+                <div class="color-swatch" style="background: var(--dt-color-olive-900);" title="olive-900"></div>
+                <div class="color-swatch" style="background: var(--dt-color-olive-950);" title="olive-950"></div>
+                <div class="color-swatch" style="background: var(--dt-color-olive-1000);" title="olive-1000"></div>
+            </div>
+            <div class="color-grid" style="grid-template-columns: repeat(auto-fill, minmax(74px, 1fr));">
+                <div class="color-swatch" style="background: var(--dt-color-tan-50);" title="tan-50"></div>
+                <div class="color-swatch" style="background: var(--dt-color-tan-100);" title="tan-100"></div>
+                <div class="color-swatch" style="background: var(--dt-color-tan-200);" title="tan-200"></div>
+                <div class="color-swatch" style="background: var(--dt-color-tan-300);" title="tan-300"></div>
+                <div class="color-swatch" style="background: var(--dt-color-tan-400);" title="tan-400"></div>
+                <div class="color-swatch" style="background: var(--dt-color-tan-500);" title="tan-500"></div>
+                <div class="color-swatch" style="background: var(--dt-color-tan-600);" title="tan-600"></div>
+                <div class="color-swatch" style="background: var(--dt-color-tan-700);" title="tan-700"></div>
+                <div class="color-swatch" style="background: var(--dt-color-tan-800);" title="tan-800"></div>
+                <div class="color-swatch" style="background: var(--dt-color-tan-900);" title="tan-900"></div>
+                <div class="color-swatch" style="background: var(--dt-color-tan-950);" title="tan-950"></div>
+                <div class="color-swatch" style="background: var(--dt-color-tan-1000);" title="tan-1000"></div>
             </div>
 
             <h3>Surface Colors</h3>
