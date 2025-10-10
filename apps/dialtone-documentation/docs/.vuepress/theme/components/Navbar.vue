@@ -1,4 +1,4 @@
-<!-- eslint-disable max-len -->
+<!-- eslint-disable max-len, max-lines -->
 <template>
   <dt-stack
     as="nav"
@@ -117,22 +117,124 @@
         </svg>
       </span>
     </a>
-    <dt-button
-      id="theme-toggle-button"
-      v-dt-tooltip:bottom="`Theme: ${currentTheme.charAt(0).toUpperCase() + currentTheme.slice(1)} `"
-      hidden
-      class="theme-toggle-button dialtone-shell-btn"
-      importance="clear"
-      kind="muted"
-      @click="toggleTheme"
+    <dt-dropdown
+      id="theme-toggle-dropdown"
+      navigation-type="arrow-keys"
+      placement="bottom-start"
+      class="theme-toggle-dropdown"
+      max-height="33vh"
     >
-      <template #icon>
-        <dt-icon
-          size="400"
-          name="satisfied-filled"
-        />
+      <template #anchor>
+        <dt-button
+          v-dt-tooltip:bottom="`Theme: ${currentTheme.charAt(0).toUpperCase() + currentTheme.slice(1)} `"
+          class="theme-toggle-button dialtone-shell-btn"
+          importance="clear"
+          kind="muted"
+        >
+          <template #icon>
+            <dt-icon
+              size="400"
+              name="satisfied-filled"
+            />
+          </template>
+        </dt-button>
       </template>
-    </dt-button>
+      <template #list>
+        <dt-list-item-group
+          heading-class="d-py4 d-px8 d-c-default d-fc-tertiary d-label--sm"
+          heading="Base Theme"
+        >
+          <dt-list-item
+            role="menuitem"
+            navigation-type="arrow-keys"
+            @click="setTheme('dp')"
+          >
+            Dialpad (DP)
+            <template #right>
+              <dt-icon :class="{ 'd-o0': currentTheme !== 'dp' }" name="check" size="200" />
+            </template>
+          </dt-list-item>
+        </dt-list-item-group>
+        <dt-dropdown-separator />
+        <dt-list-item-group
+          heading-class="d-py4 d-px8 d-c-default d-fc-tertiary d-label--sm"
+          heading="Partner Themes"
+        >
+          <dt-list-item
+            role="menuitem"
+            navigation-type="arrow-keys"
+            @click="setTheme('tmo')"
+          >
+            T-Mobile (TMO)
+            <template #right>
+              <dt-icon :class="{ 'd-o0': currentTheme !== 'tmo' }" name="check" size="200" />
+            </template>
+          </dt-list-item>
+        </dt-list-item-group>
+        <dt-dropdown-separator />
+        <dt-list-item-group
+          heading-class="d-py4 d-px8 d-c-default d-fc-tertiary d-label--sm"
+          heading="Accessibility"
+        >
+          <dt-list-item
+            role="menuitem"
+            navigation-type="arrow-keys"
+            @click="setTheme('prota-deuter')"
+          >
+            Prota-Deuter
+            <template #right>
+              <dt-icon :class="{ 'd-o0': currentTheme !== 'prota-deuter' }" name="check" size="200" />
+            </template>
+          </dt-list-item>
+          <dt-list-item
+            role="menuitem"
+            navigation-type="arrow-keys"
+            @click="setTheme('trita')"
+          >
+            Trita
+            <template #right>
+              <dt-icon :class="{ 'd-o0': currentTheme !== 'trita' }" name="check" size="200" />
+            </template>
+          </dt-list-item>
+        </dt-list-item-group>
+        <dt-dropdown-separator />
+        <dt-list-item-group
+          heading-class="d-py4 d-px8 d-c-default d-fc-tertiary d-label--sm"
+          heading="Named Themes"
+        >
+          <dt-list-item
+            v-for="themeName in namedThemes"
+            :key="themeName"
+            role="menuitem"
+            navigation-type="arrow-keys"
+            @click="setTheme(themeName)"
+          >
+            {{ formatThemeName(themeName) }}
+            <template #right>
+              <dt-icon :class="{ 'd-o0': currentTheme !== themeName }" name="check" size="200" />
+            </template>
+          </dt-list-item>
+        </dt-list-item-group>
+        <dt-dropdown-separator />
+        <dt-list-item-group
+          heading-class="d-py4 d-px8 d-c-default d-fc-tertiary d-label--sm"
+          heading="Experimental (37 themes)"
+        >
+          <dt-list-item
+            v-for="themeNum in numberedThemes"
+            :key="themeNum"
+            role="menuitem"
+            navigation-type="arrow-keys"
+            @click="setTheme(themeNum)"
+          >
+            Theme {{ themeNum }}
+            <template #right>
+              <dt-icon :class="{ 'd-o0': currentTheme !== themeNum }" name="check" size="200" />
+            </template>
+          </dt-list-item>
+        </dt-list-item-group>
+      </template>
+    </dt-dropdown>
     <dt-dropdown navigation-type="arrow-keys" placement="bottom-start">
       <template #anchor>
         <dt-button
@@ -140,7 +242,6 @@
           importance="clear"
           kind="muted"
           class="dialtone-shell-btn"
-          @click="toggleHiddenThemeButton"
         >
           <template #icon>
             <dt-icon
@@ -232,7 +333,7 @@
 </template>
 
 <script setup>
-/* eslint-disable max-lines, complexity */
+/* eslint-disable complexity */
 import { useRoute } from 'vue-router';
 import { onMounted, onUnmounted, inject, computed } from 'vue';
 
@@ -297,17 +398,31 @@ const isActiveLink = (text) => {
   return route.path.search(linkBase) !== -1;
 };
 
-const createToggle = (stateRef, optionsArray, storageKey) => {
-  return () => {
-    const currentIndex = optionsArray.indexOf(stateRef.value);
-    const nextIndex = (currentIndex + 1) % optionsArray.length;
-    stateRef.value = optionsArray[nextIndex];
-    setCss();
-    localStorage.setItem(storageKey, stateRef.value);
-  };
+// Removed unused toggleTheme - now using dropdown with setTheme()
+
+// Helper arrays for the dropdown menu
+const namedThemes = ['aegean', 'botany', 'buttercream', 'ceruleo', 'high-desert',
+                     'melon', 'plum', 'sunflower', 'verdant-haze'];
+
+const numberedThemes = [
+  '101', '102', '103', '104', '105', '106', '107', '108', '109', '110',
+  '111', '112', '113', '114', '115', '116', '117', '118', '119', '120',
+  '121', '122', '123', '124', '125', '126', '127', '128', '129', '130',
+  '131', '132', '133', '134', '135', '136', '137',
+];
+
+// Format theme names for display
+const formatThemeName = (name) => {
+  return name.split('-').map(word =>
+    word.charAt(0).toUpperCase() + word.slice(1),
+  ).join(' ');
 };
 
-const toggleTheme = createToggle(currentTheme, themesKeys, 'preferredTheme');
+const setTheme = (theme) => {
+  currentTheme.value = theme;
+  setCss();
+  localStorage.setItem('preferredTheme', theme);
+};
 
 const setMode = (mode) => {
   currentMode.value = mode;
@@ -319,19 +434,6 @@ const setContrast = (contrast) => {
   currentContrast.value = contrast;
   setCss();
   localStorage.setItem('preferredContrast', contrast);
-};
-
-const toggleHiddenThemeButton = (event) => {
-  if ((event.metaKey || event.ctrlKey) && event.shiftKey) {
-    const themeButton = document.getElementById('theme-toggle-button');
-    if (themeButton) {
-      if (themeButton.hasAttribute('hidden')) {
-        themeButton.removeAttribute('hidden');
-      } else {
-        themeButton.setAttribute('hidden', '');
-      }
-    }
-  }
 };
 
 const setCss = () => {
