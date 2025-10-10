@@ -136,12 +136,13 @@ async function buildSplitTokensForBrand(brandName, lightThemeConfig, darkThemeCo
   // 1. Build core tokens (only once, not brand-specific)
   if (brandName === 'dp') { // Only build core tokens once
     const coreConfig = {
-      source: lightThemeConfig.source,
+      // Include both base AND dp sources to get all non-color tokens
+      source: [...lightThemeConfig.include, ...lightThemeConfig.source],
       preprocessors: ['tokens-studio'],
       expand: {
         typesMap: expandTypesMap,
       },
-      include: lightThemeConfig.include,
+      include: [],
       platforms: {
         css: {
           transformGroup: 'custom/css/tokens-studio',

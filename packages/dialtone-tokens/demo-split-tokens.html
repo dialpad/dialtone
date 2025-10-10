@@ -15,7 +15,7 @@
 
     <style>
         body {
-            font-family: system-ui, -apple-system, sans-serif;
+            font: var(--dt-typography-body-md);
             margin: 0;
             padding: 20px;
             background: var(--dt-color-surface-primary);
@@ -637,6 +637,57 @@
                 <div class="color-swatch" style="background: var(--dt-color-surface-brand); color: var(--dt-shell-mention-color-foreground-secondary); border: 1px solid var(--dt-color-border-subtle);">
                     <div style="font-size: 1.2rem; margin-bottom: 0.5rem;">@</div>
                     mention-fg-secondary
+                </div>
+            </div>
+        </div>
+
+        <div class="demo-section">
+            <h2>Composite Tokens</h2>
+            <p>These are "shorthand" tokens that combine multiple properties into one convenient variable.</p>
+
+            <h3>Typography Composites</h3>
+            <p>Typography tokens combine font-weight, font-size, line-height, and font-family into CSS font shorthand:</p>
+            <div class="color-grid">
+                <div class="color-swatch" style="background: var(--dt-color-surface-secondary); color: var(--dt-color-foreground-primary); border: 1px solid var(--dt-color-border-subtle);">
+                    <div style="font: var(--dt-typography-body-sm); margin-bottom: 0.5rem;">Body SM</div>
+                    <code style="font-size: 0.75rem;">--dt-typography-body-sm</code>
+                </div>
+                <div class="color-swatch" style="background: var(--dt-color-surface-secondary); color: var(--dt-color-foreground-primary); border: 1px solid var(--dt-color-border-subtle);">
+                    <div style="font: var(--dt-typography-body-md); margin-bottom: 0.5rem;">Body MD</div>
+                    <code style="font-size: 0.75rem;">--dt-typography-body-md</code>
+                </div>
+                <div class="color-swatch" style="background: var(--dt-color-surface-secondary); color: var(--dt-color-foreground-primary); border: 1px solid var(--dt-color-border-subtle);">
+                    <div style="font: var(--dt-typography-body-lg); margin-bottom: 0.5rem;">Body LG</div>
+                    <code style="font-size: 0.75rem;">--dt-typography-body-lg</code>
+                </div>
+                <div class="color-swatch" style="background: var(--dt-color-surface-secondary); color: var(--dt-color-foreground-primary); border: 1px solid var(--dt-color-border-subtle);">
+                    <div style="font: var(--dt-typography-label-sm); margin-bottom: 0.5rem;">Label SM</div>
+                    <code style="font-size: 0.75rem;">--dt-typography-label-sm</code>
+                </div>
+                <div class="color-swatch" style="background: var(--dt-color-surface-secondary); color: var(--dt-color-foreground-primary); border: 1px solid var(--dt-color-border-subtle);">
+                    <div style="font: var(--dt-typography-code-md); margin-bottom: 0.5rem;">Code MD</div>
+                    <code style="font-size: 0.75rem;">--dt-typography-code-md</code>
+                </div>
+            </div>
+
+            <h3>HSLA Color Components</h3>
+            <p>Color tokens are split into H, S, L, A components for dynamic manipulation:</p>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1rem; margin-top: 1rem;">
+                <div style="background: var(--dt-color-surface-secondary); padding: 1rem; border-radius: 4px; border: 1px solid var(--dt-color-border-subtle);">
+                    <div style="width: 100%; height: 60px; background: var(--dt-color-brand-purple); margin-bottom: 0.5rem; border-radius: 4px;"></div>
+                    <div style="font-size: 0.75rem; color: var(--dt-color-foreground-secondary);">
+                        <div>H: var(--dt-color-brand-purple-h)</div>
+                        <div>S: var(--dt-color-brand-purple-s)</div>
+                        <div>L: var(--dt-color-brand-purple-l)</div>
+                        <div>A: var(--dt-color-brand-purple-a)</div>
+                    </div>
+                </div>
+                <div style="background: var(--dt-color-surface-secondary); padding: 1rem; border-radius: 4px; border: 1px solid var(--dt-color-border-subtle);">
+                    <div style="width: 100%; height: 60px; background: var(--dt-color-brand-purple-hsla); margin-bottom: 0.5rem; border-radius: 4px;"></div>
+                    <div style="font-size: 0.75rem; color: var(--dt-color-foreground-secondary);">
+                        HSLA Composite:<br>
+                        <code>var(--dt-color-brand-purple-hsla)</code>
+                    </div>
                 </div>
             </div>
         </div>
