@@ -89,9 +89,9 @@ export default {
 
       // If mode is inverted, calculate based on parent
       if (this.mode === DT_MODE_ISLAND_TYPES.INVERTED) {
-        // Trigger reactivity when parent mode changes
-         
-        this.parentModeChangeCounter;
+        // Trigger reactivity when parent mode changes by accessing the counter
+        // The counter value isn't used, but accessing it creates the reactive dependency
+        const _trigger = this.parentModeChangeCounter; // eslint-disable-line no-unused-vars
 
         // First check if there's a parent mode island
         if (this.parentModeIslandMode) {

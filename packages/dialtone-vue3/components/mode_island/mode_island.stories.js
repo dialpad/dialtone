@@ -89,7 +89,7 @@ export const Interactive = {
       <div>
         <div class="d-mb24">
           <p class="d-body--md d-fc-tertiary">
-            Try changing the mode prop and toggling your browser's dark mode to see how the mode island behaves.
+            Toggle the mode toggle button to see how the mode island reacts.
           </p>
         </div>
         <dt-stack direction="row" gap="400">
