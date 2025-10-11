@@ -219,7 +219,7 @@ layout: Blank
   <dt-stack gap="500" direction="row">
     <div class="d-fl1 d-p16 d-ba d-bc-transparent d-bar16">
       <dt-stack gap="500">
-        <strong class="d-code--md d-fs-400">mode="<strong>auto</strong>"</strong>
+        <strong class="d-code--md d-fs-400">(root)</strong>
         <p>Follows the root theme</p>
         <div data-dt-mode="dark" class="d-bgc-primary d-p8 d-bar8">
           Nested dark.
