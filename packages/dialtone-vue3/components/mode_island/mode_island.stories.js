@@ -152,26 +152,37 @@ export const Interactive = {
 
 export const NestedIslands = {
   render: () => ({
-    components: { DtModeIsland },
+    components: { DtModeIsland, DtStack },
     template: `
       <div>
         <h3 class="d-headline--md d-mb16">Nested Mode Islands</h3>
-        <dt-mode-island mode="dark" class="d-p16 d-ba d-bc-subtle d-bar8 d-bgc-primary">
-          <p class="d-body--lg d-fw-semibold d-mb16">Dark Mode Island (Parent)</p>
-
-          <dt-mode-island class="d-p16 d-ba d-bc-subtle d-bar8 d-bgc-primary">
-            <p class="d-body--md d-fw-semibold d-mb8">Inverted Island (Child - Light)</p>
-
+        <dt-stack gap="500" direction="row">
+          <dt-mode-island class="d-fl1 d-p16 d-ba d-bc-subtle d-bar8 d-bgc-primary">
+            <p class="d-body--lg d-fw-semibold d-mb16">Inverted Mode Island (Parent)</p>
             <dt-mode-island class="d-p16 d-ba d-bc-subtle d-bar8 d-bgc-primary">
-              <p class="d-body--sm">Inverted Island (Grandchild - Dark)</p>
+              <p class="d-body--md d-fw-semibold d-mb8">Inverted Island (Child)</p>
+              <dt-mode-island class="d-p16 d-ba d-bc-subtle d-bar8 d-bgc-primary">
+                <p class="d-body--sm">Inverted Island (Grandchild)</p>
+              </dt-mode-island>
+            </dt-mode-island>
+            <dt-mode-island mode="light" class="d-mt16 d-p16 d-ba d-bc-subtle d-bar8 d-bgc-primary">
+              <p class="d-body--md">Explicit Light Island</p>
             </dt-mode-island>
           </dt-mode-island>
-
-          <dt-mode-island mode="light" class="d-mt16 d-p16 d-ba d-bc-subtle d-bar8 d-bgc-primary">
-            <p class="d-body--md">Explicit Light Island (Always Light)</p>
+          <dt-mode-island mode="dark" class="d-fl1 d-p16 d-ba d-bc-subtle d-bar8 d-bgc-primary">
+            <p class="d-body--lg d-fw-semibold d-mb16">Dark Mode Island (Parent)</p>
+            <dt-mode-island class="d-p16 d-ba d-bc-subtle d-bar8 d-bgc-primary">
+              <p class="d-body--md d-fw-semibold d-mb8">Inverted Island (Child - Light)</p>
+              <dt-mode-island class="d-p16 d-ba d-bc-subtle d-bar8 d-bgc-primary">
+                <p class="d-body--sm">Inverted Island (Grandchild - Dark)</p>
+              </dt-mode-island>
+            </dt-mode-island>
+            <dt-mode-island mode="light" class="d-mt16 d-p16 d-ba d-bc-subtle d-bar8 d-bgc-primary">
+              <p class="d-body--md">Explicit Light Island (Always Light)</p>
+            </dt-mode-island>
           </dt-mode-island>
-        </dt-mode-island>
-      </div>
+        </div>
+        </dt-stack>
     `,
   }),
 };
