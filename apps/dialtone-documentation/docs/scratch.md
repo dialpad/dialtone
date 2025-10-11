@@ -221,13 +221,13 @@ layout: Blank
       <dt-stack gap="500">
         <strong class="d-code--md d-fs-400">(root)</strong>
         <p>Follows the root theme</p>
-        <div data-dt-mode="dark" class="d-bgc-primary d-p8 d-bar8">
+        <dt-mode-island mode="dark" class="d-bgc-primary d-p8 d-bar8">
           <strong>Nested dark.</strong>
           <div class="d-body--sm d-p8 d-ba d-bc-subtle d-bgc-secondary">d-bgc-secondary</div>
           <div class="d-body--sm d-p8 d-ba d-bc-subtle d-bgc-critical">d-bgc-critical</div>
           <div class="d-body--sm d-p8 d-ba d-bc-subtle d-fc-critical">d-fc-critical</div>
           <div class="d-body--sm d-p8 d-ba d-bc-subtle d-fc-tertiary">d-fc-tertiary</div>
-        </div>
+        </dt-mode-island>
         <div class="d-body--sm d-p8 d-ba d-bc-subtle d-bgc-secondary">d-bgc-secondary</div>
         <div class="d-body--sm d-p8 d-ba d-bc-subtle d-bgc-critical">d-bgc-critical</div>
         <div class="d-body--sm d-p8 d-ba d-bc-subtle d-fc-critical">d-fc-critical</div>
@@ -264,7 +264,7 @@ layout: Blank
               <template #content="{ close }">
                 <div class="d-p8 d-bgc-secondary">
                   <p>This is content rendered within the popover.</p>
-                </div>
+                </dt-mode-island>
               </template>
             </dt-popover>
             <dt-popover padding="none" placement="bottom-start">
@@ -272,9 +272,9 @@ layout: Blank
                 <dt-button size="sm" kind="muted" importance="outlined"> Popover: light </dt-button>
               </template>
               <template #content="{ close }">
-                <div class="d-p8 d-bgc-secondary" data-dt-mode="light">
+                <dt-mode-island mode="light" class="d-p8 d-bgc-secondary">
                   <p>This is content rendered within the popover.</p>
-                </div>
+                </dt-mode-island>
               </template>
             </dt-popover>
             <dt-popover padding="none" placement="bottom-start">
@@ -282,9 +282,9 @@ layout: Blank
                 <dt-button size="sm" kind="muted" importance="outlined"> Popover: dark </dt-button>
               </template>
               <template #content="{ close }">
-                <div class="d-p8 d-bgc-secondary" data-dt-mode="dark">
+                <dt-mode-island mode="dark" class="d-p8 d-bgc-secondary">
                   <p>This is content rendered within the popover.</p>
-                </div>
+                </dt-mode-island>
               </template>
             </dt-popover>
           </dt-stack>
@@ -332,7 +332,7 @@ layout: Blank
                       </dt-button>
                     </dt-stack>
                   </dt-stack>
-                </div>
+                </dt-mode-island>
               </template>
             </dt-hovercard>
             <dt-hovercard padding="none" contentClass="d-body--sm" placement="top-start">
@@ -341,7 +341,7 @@ layout: Blank
                 <dt-button size="sm" kind="muted" importance="outlined"> Hovercard: light </dt-button>
               </template>
               <template #content>
-                <div class="d-p16 d-bgc-primary" data-dt-mode="light">
+                <dt-mode-island mode="light" class="d-p16 d-bgc-primary">
                   <dt-stack gap="500">
                     <dt-stack gap="400" class="d-jc-space-between">
                       <dt-stack gap="200">
@@ -378,7 +378,7 @@ layout: Blank
                       </dt-button>
                     </dt-stack>
                   </dt-stack>
-                </div>
+                </dt-mode-island>
               </template>
             </dt-hovercard>
             <dt-hovercard padding="none" contentClass="d-body--sm" placement="top-start">
@@ -387,7 +387,7 @@ layout: Blank
                 <dt-button size="sm" kind="muted" importance="outlined"> Hovercard: dark </dt-button>
               </template>
               <template #content>
-                <div class="d-p16 d-bgc-primary" data-dt-mode="dark">
+                <dt-mode-island mode="dark" class="d-p16 d-bgc-primary">
                   <dt-stack gap="500">
                     <dt-stack gap="400" class="d-jc-space-between">
                       <dt-stack gap="200">
@@ -424,7 +424,7 @@ layout: Blank
                       </dt-button>
                     </dt-stack>
                   </dt-stack>
-                </div>
+                </dt-mode-island>
               </template>
             </dt-hovercard>
           </dt-stack>
@@ -454,17 +454,17 @@ layout: Blank
         </dt-stack>
       </dt-stack>
     </div>
-    <div data-dt-mode="light" class="d-fl1 d-p16 d-ba d-bc-subtle d-bar16 d-bgc-primary">
+    <dt-mode-island mode="light" class="d-fl1 d-p16 d-ba d-bc-subtle d-bar16 d-bgc-primary">
       <dt-stack gap="500">
         <strong class="d-code--md d-fs-400">mode="<strong>light</strong>"</strong>
         <p>Always light no matter the root theme</p>
-        <div data-dt-mode="dark" class="d-bgc-primary d-p8 d-bar8">
+        <dt-mode-island mode="dark" class="d-bgc-primary d-p8 d-bar8">
           <strong>Nested dark.</strong>
           <div class="d-body--sm d-p8 d-ba d-bc-subtle d-bgc-secondary">d-bgc-secondary</div>
           <div class="d-body--sm d-p8 d-ba d-bc-subtle d-bgc-critical">d-bgc-critical</div>
           <div class="d-body--sm d-p8 d-ba d-bc-subtle d-fc-critical">d-fc-critical</div>
           <div class="d-body--sm d-p8 d-ba d-bc-subtle d-fc-tertiary">d-fc-tertiary</div>
-        </div>
+        </dt-mode-island>
         <div class="d-body--sm d-p8 d-ba d-bc-subtle d-bgc-secondary">d-bgc-secondary</div>
         <div class="d-body--sm d-p8 d-ba d-bc-subtle d-bgc-critical">d-bgc-critical</div>
         <div class="d-body--sm d-p8 d-ba d-bc-subtle d-fc-critical">d-fc-critical</div>
@@ -501,7 +501,7 @@ layout: Blank
               <template #content="{ close }">
                 <div class="d-p8 d-bgc-secondary">
                   <p>This is content rendered within the popover.</p>
-                </div>
+                </dt-mode-island>
               </template>
             </dt-popover>
             <dt-popover padding="none" placement="bottom-start">
@@ -509,9 +509,9 @@ layout: Blank
                 <dt-button size="sm" kind="muted" importance="outlined"> Popover: light </dt-button>
               </template>
               <template #content="{ close }">
-                <div class="d-p8 d-bgc-secondary" data-dt-mode="light">
+                <dt-mode-island mode="light" class="d-p8 d-bgc-secondary">
                   <p>This is content rendered within the popover.</p>
-                </div>
+                </dt-mode-island>
               </template>
             </dt-popover>
             <dt-popover padding="none" placement="bottom-start">
@@ -519,9 +519,9 @@ layout: Blank
                 <dt-button size="sm" kind="muted" importance="outlined"> Popover: dark </dt-button>
               </template>
               <template #content="{ close }">
-                <div class="d-p8 d-bgc-secondary" data-dt-mode="dark">
+                <dt-mode-island mode="dark" class="d-p8 d-bgc-secondary">
                   <p>This is content rendered within the popover.</p>
-                </div>
+                </dt-mode-island>
               </template>
             </dt-popover>
           </dt-stack>
@@ -569,7 +569,7 @@ layout: Blank
                       </dt-button>
                     </dt-stack>
                   </dt-stack>
-                </div>
+                </dt-mode-island>
               </template>
             </dt-hovercard>
             <dt-hovercard padding="none" contentClass="d-body--sm" placement="top-start">
@@ -578,7 +578,7 @@ layout: Blank
                 <dt-button size="sm" kind="muted" importance="outlined"> Hovercard: light </dt-button>
               </template>
               <template #content>
-                <div class="d-p16 d-bgc-primary" data-dt-mode="light">
+                <dt-mode-island mode="light" class="d-p16 d-bgc-primary">
                   <dt-stack gap="500">
                     <dt-stack gap="400" class="d-jc-space-between">
                       <dt-stack gap="200">
@@ -615,7 +615,7 @@ layout: Blank
                       </dt-button>
                     </dt-stack>
                   </dt-stack>
-                </div>
+                </dt-mode-island>
               </template>
             </dt-hovercard>
             <dt-hovercard padding="none" contentClass="d-body--sm" placement="top-start">
@@ -624,7 +624,7 @@ layout: Blank
                 <dt-button size="sm" kind="muted" importance="outlined"> Hovercard: dark </dt-button>
               </template>
               <template #content>
-                <div class="d-p16 d-bgc-primary" data-dt-mode="dark">
+                <dt-mode-island mode="dark" class="d-p16 d-bgc-primary">
                   <dt-stack gap="500">
                     <dt-stack gap="400" class="d-jc-space-between">
                       <dt-stack gap="200">
@@ -661,7 +661,7 @@ layout: Blank
                       </dt-button>
                     </dt-stack>
                   </dt-stack>
-                </div>
+                </dt-mode-island>
               </template>
             </dt-hovercard>
           </dt-stack>
@@ -691,17 +691,17 @@ layout: Blank
         </dt-stack>
       </dt-stack>
     </div>
-    <div data-dt-mode="dark" class="d-fl1 d-p16 d-ba d-bc-subtle d-bar16 d-bgc-primary">
+    <dt-mode-island mode="dark" class="d-fl1 d-p16 d-ba d-bc-subtle d-bar16 d-bgc-primary">
       <dt-stack gap="500">
         <strong class="d-code--md d-fs-400">mode="<strong>dark</strong>"</strong>
         <p>Always dark no matter the root theme</p>
-        <div data-dt-mode="light" class="d-bgc-primary d-p8 d-bar8">
+        <dt-mode-island mode="light" class="d-bgc-primary d-p8 d-bar8">
           <strong>Nested light.</strong>
           <div class="d-body--sm d-p8 d-ba d-bc-subtle d-bgc-secondary">d-bgc-secondary</div>
           <div class="d-body--sm d-p8 d-ba d-bc-subtle d-bgc-critical">d-bgc-critical</div>
           <div class="d-body--sm d-p8 d-ba d-bc-subtle d-fc-critical">d-fc-critical</div>
           <div class="d-body--sm d-p8 d-ba d-bc-subtle d-fc-tertiary">d-fc-tertiary</div>
-        </div>
+        </dt-mode-island>
         <div class="d-body--sm d-p8 d-ba d-bc-subtle d-bgc-secondary">d-bgc-secondary</div>
         <div class="d-body--sm d-p8 d-ba d-bc-subtle d-bgc-critical">d-bgc-critical</div>
         <div class="d-body--sm d-p8 d-ba d-bc-subtle d-fc-critical">d-fc-critical</div>
@@ -738,7 +738,7 @@ layout: Blank
               <template #content="{ close }">
                 <div class="d-p8 d-bgc-secondary">
                   <p>This is content rendered within the popover.</p>
-                </div>
+                </dt-mode-island>
               </template>
             </dt-popover>
             <dt-popover padding="none" placement="bottom-start">
@@ -746,9 +746,9 @@ layout: Blank
                 <dt-button size="sm" kind="muted" importance="outlined"> Popover: light </dt-button>
               </template>
               <template #content="{ close }">
-                <div class="d-p8 d-bgc-secondary" data-dt-mode="light">
+                <dt-mode-island mode="light" class="d-p8 d-bgc-secondary">
                   <p>This is content rendered within the popover.</p>
-                </div>
+                </dt-mode-island>
               </template>
             </dt-popover>
             <dt-popover padding="none" placement="bottom-start">
@@ -756,9 +756,9 @@ layout: Blank
                 <dt-button size="sm" kind="muted" importance="outlined"> Popover: dark </dt-button>
               </template>
               <template #content="{ close }">
-                <div class="d-p8 d-bgc-secondary" data-dt-mode="dark">
+                <dt-mode-island mode="dark" class="d-p8 d-bgc-secondary">
                   <p>This is content rendered within the popover.</p>
-                </div>
+                </dt-mode-island>
               </template>
             </dt-popover>
           </dt-stack>
@@ -806,7 +806,7 @@ layout: Blank
                       </dt-button>
                     </dt-stack>
                   </dt-stack>
-                </div>
+                </dt-mode-island>
               </template>
             </dt-hovercard>
             <dt-hovercard padding="none" contentClass="d-body--sm" placement="top-start">
@@ -815,7 +815,7 @@ layout: Blank
                 <dt-button size="sm" kind="muted" importance="outlined"> Hovercard: light </dt-button>
               </template>
               <template #content>
-                <div class="d-p16 d-bgc-primary" data-dt-mode="light">
+                <dt-mode-island mode="light" class="d-p16 d-bgc-primary">
                   <dt-stack gap="500">
                     <dt-stack gap="400" class="d-jc-space-between">
                       <dt-stack gap="200">
@@ -852,7 +852,7 @@ layout: Blank
                       </dt-button>
                     </dt-stack>
                   </dt-stack>
-                </div>
+                </dt-mode-island>
               </template>
             </dt-hovercard>
             <dt-hovercard padding="none" contentClass="d-body--sm" placement="top-start">
@@ -861,7 +861,7 @@ layout: Blank
                 <dt-button size="sm" kind="muted" importance="outlined"> Hovercard: dark </dt-button>
               </template>
               <template #content>
-                <div class="d-p16 d-bgc-primary" data-dt-mode="dark">
+                <dt-mode-island mode="dark" class="d-p16 d-bgc-primary">
                   <dt-stack gap="500">
                     <dt-stack gap="400" class="d-jc-space-between">
                       <dt-stack gap="200">
@@ -898,7 +898,7 @@ layout: Blank
                       </dt-button>
                     </dt-stack>
                   </dt-stack>
-                </div>
+                </dt-mode-island>
               </template>
             </dt-hovercard>
           </dt-stack>
@@ -928,17 +928,17 @@ layout: Blank
         </dt-stack>
       </dt-stack>
     </div>
-    <div data-dt-mode="light" class="d-fl1 d-p16 d-ba d-bc-subtle d-bar16 d-bgc-primary">
+    <dt-mode-island mode="light" class="d-fl1 d-p16 d-ba d-bc-subtle d-bar16 d-bgc-primary">
       <dt-stack gap="500">
         <strong class="d-code--md d-fs-400">mode="<strong>light</strong>"</strong>
         <p>Always light no matter the root theme</p>
-        <div data-dt-mode="dark" class="d-bgc-primary d-p8 d-bar8">
+        <dt-mode-island mode="dark" class="d-bgc-primary d-p8 d-bar8">
           <strong>Nested dark.</strong>
           <div class="d-body--sm d-p8 d-ba d-bc-subtle d-bgc-secondary">d-bgc-secondary</div>
           <div class="d-body--sm d-p8 d-ba d-bc-subtle d-bgc-critical">d-bgc-critical</div>
           <div class="d-body--sm d-p8 d-ba d-bc-subtle d-fc-critical">d-fc-critical</div>
           <div class="d-body--sm d-p8 d-ba d-bc-subtle d-fc-tertiary">d-fc-tertiary</div>
-        </div>
+        </dt-mode-island>
         <div class="d-body--sm d-p8 d-ba d-bc-subtle d-bgc-secondary">d-bgc-secondary</div>
         <div class="d-body--sm d-p8 d-ba d-bc-subtle d-bgc-critical">d-bgc-critical</div>
         <div class="d-body--sm d-p8 d-ba d-bc-subtle d-fc-critical">d-fc-critical</div>
@@ -975,7 +975,7 @@ layout: Blank
               <template #content="{ close }">
                 <div class="d-p8 d-bgc-secondary">
                   <p>This is content rendered within the popover.</p>
-                </div>
+                </dt-mode-island>
               </template>
             </dt-popover>
             <dt-popover padding="none" placement="bottom-start">
@@ -983,9 +983,9 @@ layout: Blank
                 <dt-button size="sm" kind="muted" importance="outlined"> Popover: light </dt-button>
               </template>
               <template #content="{ close }">
-                <div class="d-p8 d-bgc-secondary" data-dt-mode="light">
+                <dt-mode-island mode="light" class="d-p8 d-bgc-secondary">
                   <p>This is content rendered within the popover.</p>
-                </div>
+                </dt-mode-island>
               </template>
             </dt-popover>
             <dt-popover padding="none" placement="bottom-start">
@@ -993,9 +993,9 @@ layout: Blank
                 <dt-button size="sm" kind="muted" importance="outlined"> Popover: dark </dt-button>
               </template>
               <template #content="{ close }">
-                <div class="d-p8 d-bgc-secondary" data-dt-mode="dark">
+                <dt-mode-island mode="dark" class="d-p8 d-bgc-secondary">
                   <p>This is content rendered within the popover.</p>
-                </div>
+                </dt-mode-island>
               </template>
             </dt-popover>
           </dt-stack>
@@ -1043,7 +1043,7 @@ layout: Blank
                       </dt-button>
                     </dt-stack>
                   </dt-stack>
-                </div>
+                </dt-mode-island>
               </template>
             </dt-hovercard>
             <dt-hovercard padding="none" contentClass="d-body--sm" placement="top-start">
@@ -1052,7 +1052,7 @@ layout: Blank
                 <dt-button size="sm" kind="muted" importance="outlined"> Hovercard: light </dt-button>
               </template>
               <template #content>
-                <div class="d-p16 d-bgc-primary" data-dt-mode="light">
+                <dt-mode-island mode="light" class="d-p16 d-bgc-primary">
                   <dt-stack gap="500">
                     <dt-stack gap="400" class="d-jc-space-between">
                       <dt-stack gap="200">
@@ -1089,7 +1089,7 @@ layout: Blank
                       </dt-button>
                     </dt-stack>
                   </dt-stack>
-                </div>
+                </dt-mode-island>
               </template>
             </dt-hovercard>
             <dt-hovercard padding="none" contentClass="d-body--sm" placement="top-start">
@@ -1098,7 +1098,7 @@ layout: Blank
                 <dt-button size="sm" kind="muted" importance="outlined"> Hovercard: dark </dt-button>
               </template>
               <template #content>
-                <div class="d-p16 d-bgc-primary" data-dt-mode="dark">
+                <dt-mode-island mode="dark" class="d-p16 d-bgc-primary">
                   <dt-stack gap="500">
                     <dt-stack gap="400" class="d-jc-space-between">
                       <dt-stack gap="200">
@@ -1135,7 +1135,7 @@ layout: Blank
                       </dt-button>
                     </dt-stack>
                   </dt-stack>
-                </div>
+                </dt-mode-island>
               </template>
             </dt-hovercard>
           </dt-stack>
@@ -1164,7 +1164,7 @@ layout: Blank
           </dt-stack>
         </dt-stack>
       </dt-stack>
-    </div>
+    </dt-mode-island>
   </dt-stack>
 </dt-stack>
 

@@ -1,0 +1,106 @@
+import { Canvas, Story, Controls, Meta } from '@storybook/blocks';
+
+import * as ModeIslandStories from './mode_island.stories';
+
+<Meta of={ModeIslandStories} />
+
+# Mode Island
+
+Mode Island is a component that creates isolated sections with independent color modes (light/dark) within your application. It allows you to override the root theme for specific sections of your UI while maintaining proper contrast inheritance.
+
+## Usage
+
+Mode islands are useful when you need to:
+- Create sections that always display in a specific mode (light or dark)
+- Invert the current theme for emphasis or visual hierarchy
+- Build components that need consistent appearance regardless of user theme preference
+- Create nested theme contexts for complex layouts
+
+## Basic Example
+
+```vue
+<template>
+  <!-- Always inverts the parent/root mode -->
+  <dt-mode-island>
+    <p>This content uses the inverted mode</p>
+  </dt-mode-island>
+
+  <!-- Always light mode -->
+  <dt-mode-island mode="light">
+    <p>This content is always in light mode</p>
+  </dt-mode-island>
+
+  <!-- Always dark mode -->
+  <dt-mode-island mode="dark">
+    <p>This content is always in dark mode</p>
+  </dt-mode-island>
+</template>
+```
+
+## Props
+
+### `mode`
+Controls the color mode of the island.
+
+- **Type**: `String`
+- **Default**: `'inverted'`
+- **Values**:
+  - `'inverted'`: Opposite of the parent mode or root theme
+  - `'light'`: Always light mode
+  - `'dark'`: Always dark mode
+
+### `as`
+Specifies the HTML element to render.
+
+- **Type**: `String`
+- **Default**: `'div'`
+- **Common values**: `'div'`, `'section'`, `'article'`, `'nav'`, `'aside'`, `'header'`, `'footer'`, `'main'`
+
+## Features
+
+### Nested Mode Islands
+Mode islands can be nested to create complex theme hierarchies. When using `mode="inverted"`, the component will detect its parent mode island and invert accordingly.
+
+```vue
+<dt-mode-island mode="dark">
+  <!-- This is dark -->
+  <dt-mode-island mode="inverted">
+    <!-- This becomes light (inverted from parent) -->
+    <dt-mode-island mode="inverted">
+      <!-- This becomes dark again -->
+    </dt-mode-island>
+  </dt-mode-island>
+</dt-mode-island>
+```
+
+### Contrast Inheritance
+Mode islands automatically inherit the `data-dt-contrast` attribute from the root HTML element and update reactively when it changes. This ensures accessibility features like high contrast mode work correctly within mode islands.
+
+### Brand Protection
+The `data-dt-brand` attribute is explicitly prohibited on mode islands to maintain brand consistency. Brand theming should only be set at the root level. Attempting to set this attribute will throw an error.
+
+## Accessibility
+
+Mode islands are purely visual and don't affect the semantic structure of your HTML. They properly maintain contrast ratios and support high contrast mode through automatic contrast inheritance.
+
+## Best Practices
+
+1. **Use sparingly**: Mode islands should be used intentionally for specific UI needs, not as a general theming solution
+2. **Consider user preference**: Respect user theme preferences when possible; use explicit modes only when necessary for functionality
+3. **Test in both modes**: Always test your mode islands in both light and dark root themes
+4. **Maintain readability**: Ensure content remains readable when modes are inverted
+5. **Avoid deep nesting**: While nesting is supported, avoid excessive levels for better maintainability
+
+## Examples
+
+<Canvas>
+  <Story of={ModeIslandStories.Default} />
+</Canvas>
+
+## Interactive Playground
+
+<Canvas>
+  <Story of={ModeIslandStories.Interactive} />
+</Canvas>
+
+<Controls of={ModeIslandStories.Interactive} />
