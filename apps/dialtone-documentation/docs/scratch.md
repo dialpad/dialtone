@@ -216,8 +216,244 @@ layout: Blank
       </template>
     </dt-dropdown>
   </dt-stack>
-  <p>Content at root level. Mode is <strong>{{ currentMode }}</strong></p>
   <dt-stack gap="500" direction="row">
+    <div class="d-fl1 d-p16 d-ba d-bc-transparent d-bar16">
+      <dt-stack gap="500">
+        <strong class="d-code--md d-fs-400">mode="<strong>auto</strong>"</strong>
+        <p>Follows the root theme</p>
+        <div data-dt-mode="dark" class="d-bgc-primary d-p8 d-bar8">
+          Nested dark.
+          <div class="d-p8 d-ba d-bc-subtle d-bgc-secondary">d-bgc-secondary</div>
+          <div class="d-p8 d-ba d-bc-subtle d-bgc-critical">d-bgc-critical</div>
+          <div class="d-p8 d-ba d-bc-subtle d-fc-critical">d-fc-critical</div>
+          <div class="d-p8 d-ba d-bc-subtle d-fc-tertiary">d-fc-tertiary</div>
+        </div>
+        <div class="d-p8 d-ba d-bc-subtle d-bgc-secondary">d-bgc-secondary</div>
+        <div class="d-p8 d-ba d-bc-subtle d-bgc-critical">d-bgc-critical</div>
+        <div class="d-p8 d-ba d-bc-subtle d-fc-critical">d-fc-critical</div>
+        <div class="d-p8 d-ba d-bc-subtle d-fc-tertiary">d-fc-tertiary</div>
+        <dt-input label="Small" type="text" placeholder="Placeholder" size="sm" />
+        <dt-notice kind="info">
+          <span> Notice </span>
+          <template #action>
+            <dt-button size="sm" importance="outlined" kind="muted" @click="onClick"> Action </dt-button>
+          </template>
+        </dt-notice>
+        <dt-stack gap="300" direction="row" class="d-jc-space-between">
+          <dt-badge kind="count" text="8"></dt-badge>
+          <dt-badge kind="count" text="8" type="info"></dt-badge>
+          <dt-badge kind="count" text="8" type="success"></dt-badge>
+          <dt-badge kind="count" text="8" type="warning"></dt-badge>
+          <dt-badge kind="count" text="8" type="critical"></dt-badge>
+          <dt-badge kind="count" text="8" type="bulletin"></dt-badge>
+          <dt-badge kind="count" text="8" type="ai"></dt-badge>
+        </dt-stack>
+        <dt-stack gap="300" direction="row" class="d-jc-space-between">
+          <dt-button size="sm">Button</dt-button>
+          <dt-button size="sm" importance="clear" kind="muted">Button</dt-button>
+          <dt-button size="sm" importance="outlined" kind="muted">Button</dt-button>
+          <dt-button size="sm" kind="danger">Button</dt-button>
+          <dt-button size="sm" kind="positive">Button</dt-button>
+        </dt-stack>
+        <dt-stack gap="300" class="d-jc-space-between">
+          <dt-stack gap="300" direction="row">
+            <dt-popover padding="none" placement="bottom-start">
+              <template #anchor>
+                <dt-button size="sm" kind="muted" importance="outlined"> Popover: default </dt-button>
+              </template>
+              <template #content="{ close }">
+                <div class="d-p8 d-bgc-secondary">
+                  <p>This is content rendered within the popover.</p>
+                </div>
+              </template>
+            </dt-popover>
+            <dt-popover padding="none" placement="bottom-start">
+              <template #anchor>
+                <dt-button size="sm" kind="muted" importance="outlined"> Popover: light </dt-button>
+              </template>
+              <template #content="{ close }">
+                <div class="d-p8 d-bgc-secondary" data-dt-mode="light">
+                  <p>This is content rendered within the popover.</p>
+                </div>
+              </template>
+            </dt-popover>
+            <dt-popover padding="none" placement="bottom-start">
+              <template #anchor>
+                <dt-button size="sm" kind="muted" importance="outlined"> Popover: dark </dt-button>
+              </template>
+              <template #content="{ close }">
+                <div class="d-p8 d-bgc-secondary" data-dt-mode="dark">
+                  <p>This is content rendered within the popover.</p>
+                </div>
+              </template>
+            </dt-popover>
+          </dt-stack>
+          <dt-stack gap="300" direction="row">
+            <dt-hovercard padding="none" contentClass="d-body--sm" placement="top-start">
+              <!-- dialogClass, contentClass, padding -->
+              <template #anchor>
+                <dt-button size="sm" kind="muted" importance="outlined"> Hovercard: default </dt-button>
+              </template>
+              <template #content>
+                <div class="d-p16 d-bgc-primary">
+                  <dt-stack gap="500">
+                    <dt-stack gap="400" class="d-jc-space-between">
+                      <dt-stack gap="200">
+                        <h2 class="d-headline--xl-compact">Katie Rodriguez</h2>
+                        <dt-stack direction="row" gap="350">
+                          <span class="d-fc-success">Available</span>
+                          <span>&bull;</span>
+                          <span class="d-fc-tertiary">Troubleshooting stuffs</span>
+                        </dt-stack>
+                      </dt-stack>
+                      <dt-stack class="d-body--md-compact">
+                        <span class="d-fw-semibold d-fc-tertiary">Chief Customer Success Officer</span>
+                        <span><strong class="d-fw-semibold">6:19 am</strong> local time</span>
+                      </dt-stack>
+                    </dt-stack>
+                    <dt-stack gap="400" direction="row" class="d-jc-space-between">
+                      <dt-button class="d-fl1" kind="muted" importance="outlined">
+                        <template #icon="{ iconSize }">
+                          <dt-icon-phone :size="iconSize" />
+                        </template>
+                        Call
+                      </dt-button>
+                      <dt-button class="d-fl1" kind="muted" importance="outlined">
+                        <template #icon="{ iconSize }">
+                          <dt-icon-quick-reply :size="iconSize" />
+                        </template>
+                        Message
+                      </dt-button>
+                      <dt-button class="d-fl1" kind="muted" importance="outlined">
+                        <template #icon="{ iconSize }">
+                          <dt-icon-video :size="iconSize" />
+                        </template>
+                        Meet
+                      </dt-button>
+                    </dt-stack>
+                  </dt-stack>
+                </div>
+              </template>
+            </dt-hovercard>
+            <dt-hovercard padding="none" contentClass="d-body--sm" placement="top-start">
+              <!-- dialogClass, contentClass, padding -->
+              <template #anchor>
+                <dt-button size="sm" kind="muted" importance="outlined"> Hovercard: light </dt-button>
+              </template>
+              <template #content>
+                <div class="d-p16 d-bgc-primary" data-dt-mode="light">
+                  <dt-stack gap="500">
+                    <dt-stack gap="400" class="d-jc-space-between">
+                      <dt-stack gap="200">
+                        <h2 class="d-headline--xl-compact">Katie Rodriguez</h2>
+                        <dt-stack direction="row" gap="350">
+                          <span class="d-fc-success">Available</span>
+                          <span>&bull;</span>
+                          <span class="d-fc-tertiary">Troubleshooting stuffs</span>
+                        </dt-stack>
+                      </dt-stack>
+                      <dt-stack class="d-body--md-compact">
+                        <span class="d-fw-semibold d-fc-tertiary">Chief Customer Success Officer</span>
+                        <span><strong class="d-fw-semibold">6:19 am</strong> local time</span>
+                      </dt-stack>
+                    </dt-stack>
+                    <dt-stack gap="400" direction="row" class="d-jc-space-between">
+                      <dt-button class="d-fl1" kind="muted" importance="outlined">
+                        <template #icon="{ iconSize }">
+                          <dt-icon-phone :size="iconSize" />
+                        </template>
+                        Call
+                      </dt-button>
+                      <dt-button class="d-fl1" kind="muted" importance="outlined">
+                        <template #icon="{ iconSize }">
+                          <dt-icon-quick-reply :size="iconSize" />
+                        </template>
+                        Message
+                      </dt-button>
+                      <dt-button class="d-fl1" kind="muted" importance="outlined">
+                        <template #icon="{ iconSize }">
+                          <dt-icon-video :size="iconSize" />
+                        </template>
+                        Meet
+                      </dt-button>
+                    </dt-stack>
+                  </dt-stack>
+                </div>
+              </template>
+            </dt-hovercard>
+            <dt-hovercard padding="none" contentClass="d-body--sm" placement="top-start">
+              <!-- dialogClass, contentClass, padding -->
+              <template #anchor>
+                <dt-button size="sm" kind="muted" importance="outlined"> Hovercard: dark </dt-button>
+              </template>
+              <template #content>
+                <div class="d-p16 d-bgc-primary" data-dt-mode="dark">
+                  <dt-stack gap="500">
+                    <dt-stack gap="400" class="d-jc-space-between">
+                      <dt-stack gap="200">
+                        <h2 class="d-headline--xl-compact">Katie Rodriguez</h2>
+                        <dt-stack direction="row" gap="350">
+                          <span class="d-fc-success">Available</span>
+                          <span>&bull;</span>
+                          <span class="d-fc-tertiary">Troubleshooting stuffs</span>
+                        </dt-stack>
+                      </dt-stack>
+                      <dt-stack class="d-body--md-compact">
+                        <span class="d-fw-semibold d-fc-tertiary">Chief Customer Success Officer</span>
+                        <span><strong class="d-fw-semibold">6:19 am</strong> local time</span>
+                      </dt-stack>
+                    </dt-stack>
+                    <dt-stack gap="400" direction="row" class="d-jc-space-between">
+                      <dt-button class="d-fl1" kind="muted" importance="outlined">
+                        <template #icon="{ iconSize }">
+                          <dt-icon-phone :size="iconSize" />
+                        </template>
+                        Call
+                      </dt-button>
+                      <dt-button class="d-fl1" kind="muted" importance="outlined">
+                        <template #icon="{ iconSize }">
+                          <dt-icon-quick-reply :size="iconSize" />
+                        </template>
+                        Message
+                      </dt-button>
+                      <dt-button class="d-fl1" kind="muted" importance="outlined">
+                        <template #icon="{ iconSize }">
+                          <dt-icon-video :size="iconSize" />
+                        </template>
+                        Meet
+                      </dt-button>
+                    </dt-stack>
+                  </dt-stack>
+                </div>
+              </template>
+            </dt-hovercard>
+          </dt-stack>
+          <dt-stack gap="300" direction="row">
+            <dt-dropdown navigation-type="arrow-keys" placement="bottom-start">
+              <template #anchor="{ attrs }">
+                <dt-button v-bind="attrs" size="sm" kind="muted" importance="outlined" icon-position="right">
+                  Dropdown: default
+                  <template #icon="{ iconSize }">
+                    <dt-icon name="chevron-down" :size="iconSize" />
+                  </template>
+                </dt-button>
+              </template>
+              <template #list="{ close }">
+                <dt-list-item
+                  v-for="item in items"
+                  :key="item.id"
+                  role="menuitem"
+                  :navigation-type="arrow - keys"
+                  @click="close"
+                >
+                  {{ item.name }}
+                </dt-list-item>
+              </template>
+            </dt-dropdown>
+          </dt-stack>
+        </dt-stack>
+      </dt-stack>
+    </div>
     <div data-dt-mode="light" class="d-fl1 d-p16 d-ba d-bc-subtle d-bar16 d-bgc-primary">
       <dt-stack gap="500">
         <strong class="d-code--md d-fs-400">mode="<strong>light</strong>"</strong>
@@ -1008,6 +1244,12 @@ layout: Blank
     document.documentElement.setAttribute('data-dt-mode', mode);
     document.documentElement.setAttribute('data-dt-brand', brandName);
     document.documentElement.setAttribute('data-dt-contrast', contrast);
+
+    // Update all elements in the DOM that have data-dt-mode with the current contrast
+    const elementsWithMode = document.querySelectorAll('[data-dt-mode]');
+    elementsWithMode.forEach(element => {
+      element.setAttribute('data-dt-contrast', contrast);
+    });
 
     let brandOverrideTag = document.getElementById('dialtone-css-brand-override');
 
