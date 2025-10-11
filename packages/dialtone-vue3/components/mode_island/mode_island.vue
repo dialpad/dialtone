@@ -72,6 +72,7 @@ export default {
       contrastObserver: null,
       modeObserver: null,
       elementRef: null,
+      calculatedMode: null, // Store calculated mode as reactive data
     };
   },
 
@@ -86,27 +87,13 @@ export default {
         return this.mode;
       }
 
-      // If mode is inverted, calculate based on parent
-      if (this.mode === DT_MODE_ISLAND_TYPES.INVERTED) {
-        // First check if there's a parent mode island
-        if (this.parentModeIslandMode) {
-          const parentMode = typeof this.parentModeIslandMode === 'function'
-            ? this.parentModeIslandMode()
-            : this.parentModeIslandMode;
-          return getOppositeMode(parentMode);
-        }
-
-        // Otherwise, find the nearest parent with data-dt-mode
-        if (this.elementRef) {
-          const parentMode = findParentMode(this.elementRef);
-          return getOppositeMode(parentMode);
-        }
-
-        // Default fallback
-        return getOppositeMode(getRootMode());
+      // If mode is inverted, use the calculated mode if available
+      if (this.mode === DT_MODE_ISLAND_TYPES.INVERTED && this.calculatedMode) {
+        return this.calculatedMode;
       }
 
-      return this.mode;
+      // Otherwise calculate it now
+      return this.calculateInvertedMode();
     },
   },
 
@@ -126,6 +113,8 @@ export default {
 
     // Setup MutationObserver to watch for mode changes (only if inverted)
     if (this.isInverted) {
+      // Initialize the calculated mode
+      this.calculatedMode = this.calculateInvertedMode();
       this.setupModeObserver();
     }
 
@@ -146,6 +135,25 @@ export default {
   },
 
   methods: {
+    calculateInvertedMode () {
+      // First check if there's a parent mode island
+      if (this.parentModeIslandMode) {
+        const parentMode = typeof this.parentModeIslandMode === 'function'
+          ? this.parentModeIslandMode()
+          : this.parentModeIslandMode;
+        return getOppositeMode(parentMode);
+      }
+
+      // Otherwise, find the nearest parent with data-dt-mode
+      if (this.elementRef) {
+        const parentMode = findParentMode(this.elementRef);
+        return getOppositeMode(parentMode);
+      }
+
+      // Default fallback
+      return getOppositeMode(getRootMode());
+    },
+
     setupContrastObserver () {
       const config = {
         attributes: true,
@@ -174,8 +182,8 @@ export default {
       const callback = (mutationsList) => {
         for (const mutation of mutationsList) {
           if (mutation.type === 'attributes' && mutation.attributeName === 'data-dt-mode') {
-            // Force Vue to re-render this component to recalculate computedMode
-            this.$forceUpdate();
+            // Recalculate and update the reactive data property
+            this.calculatedMode = this.calculateInvertedMode();
           }
         }
       };
