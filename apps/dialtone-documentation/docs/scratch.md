@@ -222,17 +222,17 @@ layout: Blank
         <strong class="d-code--md d-fs-400">(root)</strong>
         <p>Follows the root theme</p>
         <div data-dt-mode="dark" class="d-bgc-primary d-p8 d-bar8">
-          Nested dark.
-          <div class="d-p8 d-ba d-bc-subtle d-bgc-secondary">d-bgc-secondary</div>
-          <div class="d-p8 d-ba d-bc-subtle d-bgc-critical">d-bgc-critical</div>
-          <div class="d-p8 d-ba d-bc-subtle d-fc-critical">d-fc-critical</div>
-          <div class="d-p8 d-ba d-bc-subtle d-fc-tertiary">d-fc-tertiary</div>
+          <strong>Nested dark.</strong>
+          <div class="d-body--sm d-p8 d-ba d-bc-subtle d-bgc-secondary">d-bgc-secondary</div>
+          <div class="d-body--sm d-p8 d-ba d-bc-subtle d-bgc-critical">d-bgc-critical</div>
+          <div class="d-body--sm d-p8 d-ba d-bc-subtle d-fc-critical">d-fc-critical</div>
+          <div class="d-body--sm d-p8 d-ba d-bc-subtle d-fc-tertiary">d-fc-tertiary</div>
         </div>
-        <div class="d-p8 d-ba d-bc-subtle d-bgc-secondary">d-bgc-secondary</div>
-        <div class="d-p8 d-ba d-bc-subtle d-bgc-critical">d-bgc-critical</div>
-        <div class="d-p8 d-ba d-bc-subtle d-fc-critical">d-fc-critical</div>
-        <div class="d-p8 d-ba d-bc-subtle d-fc-tertiary">d-fc-tertiary</div>
-        <dt-input label="Small" type="text" placeholder="Placeholder" size="sm" />
+        <div class="d-body--sm d-p8 d-ba d-bc-subtle d-bgc-secondary">d-bgc-secondary</div>
+        <div class="d-body--sm d-p8 d-ba d-bc-subtle d-bgc-critical">d-bgc-critical</div>
+        <div class="d-body--sm d-p8 d-ba d-bc-subtle d-fc-critical">d-fc-critical</div>
+        <div class="d-body--sm d-p8 d-ba d-bc-subtle d-fc-tertiary">d-fc-tertiary</div>
+        <dt-input label="Input field" type="text" placeholder="Placeholder" size="sm" />
         <dt-notice kind="info">
           <span> Notice </span>
           <template #action>
@@ -459,17 +459,17 @@ layout: Blank
         <strong class="d-code--md d-fs-400">mode="<strong>light</strong>"</strong>
         <p>Always light no matter the root theme</p>
         <div data-dt-mode="dark" class="d-bgc-primary d-p8 d-bar8">
-          Nested dark.
-          <div class="d-p8 d-ba d-bc-subtle d-bgc-secondary">d-bgc-secondary</div>
-          <div class="d-p8 d-ba d-bc-subtle d-bgc-critical">d-bgc-critical</div>
-          <div class="d-p8 d-ba d-bc-subtle d-fc-critical">d-fc-critical</div>
-          <div class="d-p8 d-ba d-bc-subtle d-fc-tertiary">d-fc-tertiary</div>
+          <strong>Nested dark.</strong>
+          <div class="d-body--sm d-p8 d-ba d-bc-subtle d-bgc-secondary">d-bgc-secondary</div>
+          <div class="d-body--sm d-p8 d-ba d-bc-subtle d-bgc-critical">d-bgc-critical</div>
+          <div class="d-body--sm d-p8 d-ba d-bc-subtle d-fc-critical">d-fc-critical</div>
+          <div class="d-body--sm d-p8 d-ba d-bc-subtle d-fc-tertiary">d-fc-tertiary</div>
         </div>
-        <div class="d-p8 d-ba d-bc-subtle d-bgc-secondary">d-bgc-secondary</div>
-        <div class="d-p8 d-ba d-bc-subtle d-bgc-critical">d-bgc-critical</div>
-        <div class="d-p8 d-ba d-bc-subtle d-fc-critical">d-fc-critical</div>
-        <div class="d-p8 d-ba d-bc-subtle d-fc-tertiary">d-fc-tertiary</div>
-        <dt-input label="Small" type="text" placeholder="Placeholder" size="sm" />
+        <div class="d-body--sm d-p8 d-ba d-bc-subtle d-bgc-secondary">d-bgc-secondary</div>
+        <div class="d-body--sm d-p8 d-ba d-bc-subtle d-bgc-critical">d-bgc-critical</div>
+        <div class="d-body--sm d-p8 d-ba d-bc-subtle d-fc-critical">d-fc-critical</div>
+        <div class="d-body--sm d-p8 d-ba d-bc-subtle d-fc-tertiary">d-fc-tertiary</div>
+        <dt-input label="Input field" type="text" placeholder="Placeholder" size="sm" />
         <dt-notice kind="info">
           <span> Notice </span>
           <template #action>
@@ -696,17 +696,17 @@ layout: Blank
         <strong class="d-code--md d-fs-400">mode="<strong>dark</strong>"</strong>
         <p>Always dark no matter the root theme</p>
         <div data-dt-mode="light" class="d-bgc-primary d-p8 d-bar8">
-          Nested light.
-          <div class="d-p8 d-ba d-bc-subtle d-bgc-secondary">d-bgc-secondary</div>
-          <div class="d-p8 d-ba d-bc-subtle d-bgc-critical">d-bgc-critical</div>
-          <div class="d-p8 d-ba d-bc-subtle d-fc-critical">d-fc-critical</div>
-          <div class="d-p8 d-ba d-bc-subtle d-fc-tertiary">d-fc-tertiary</div>
+          <strong>Nested light.</strong>
+          <div class="d-body--sm d-p8 d-ba d-bc-subtle d-bgc-secondary">d-bgc-secondary</div>
+          <div class="d-body--sm d-p8 d-ba d-bc-subtle d-bgc-critical">d-bgc-critical</div>
+          <div class="d-body--sm d-p8 d-ba d-bc-subtle d-fc-critical">d-fc-critical</div>
+          <div class="d-body--sm d-p8 d-ba d-bc-subtle d-fc-tertiary">d-fc-tertiary</div>
         </div>
-        <div class="d-p8 d-ba d-bc-subtle d-bgc-secondary">d-bgc-secondary</div>
-        <div class="d-p8 d-ba d-bc-subtle d-bgc-critical">d-bgc-critical</div>
-        <div class="d-p8 d-ba d-bc-subtle d-fc-critical">d-fc-critical</div>
-        <div class="d-p8 d-ba d-bc-subtle d-fc-tertiary">d-fc-tertiary</div>
-        <dt-input label="Small" type="text" placeholder="Placeholder" size="sm" />
+        <div class="d-body--sm d-p8 d-ba d-bc-subtle d-bgc-secondary">d-bgc-secondary</div>
+        <div class="d-body--sm d-p8 d-ba d-bc-subtle d-bgc-critical">d-bgc-critical</div>
+        <div class="d-body--sm d-p8 d-ba d-bc-subtle d-fc-critical">d-fc-critical</div>
+        <div class="d-body--sm d-p8 d-ba d-bc-subtle d-fc-tertiary">d-fc-tertiary</div>
+        <dt-input label="Input field" type="text" placeholder="Placeholder" size="sm" />
         <dt-notice kind="info">
           <span> Notice </span>
           <template #action>
@@ -933,17 +933,17 @@ layout: Blank
         <strong class="d-code--md d-fs-400">mode="<strong>light</strong>"</strong>
         <p>Always light no matter the root theme</p>
         <div data-dt-mode="dark" class="d-bgc-primary d-p8 d-bar8">
-          Nested dark.
-          <div class="d-p8 d-ba d-bc-subtle d-bgc-secondary">d-bgc-secondary</div>
-          <div class="d-p8 d-ba d-bc-subtle d-bgc-critical">d-bgc-critical</div>
-          <div class="d-p8 d-ba d-bc-subtle d-fc-critical">d-fc-critical</div>
-          <div class="d-p8 d-ba d-bc-subtle d-fc-tertiary">d-fc-tertiary</div>
+          <strong>Nested dark.</strong>
+          <div class="d-body--sm d-p8 d-ba d-bc-subtle d-bgc-secondary">d-bgc-secondary</div>
+          <div class="d-body--sm d-p8 d-ba d-bc-subtle d-bgc-critical">d-bgc-critical</div>
+          <div class="d-body--sm d-p8 d-ba d-bc-subtle d-fc-critical">d-fc-critical</div>
+          <div class="d-body--sm d-p8 d-ba d-bc-subtle d-fc-tertiary">d-fc-tertiary</div>
         </div>
-        <div class="d-p8 d-ba d-bc-subtle d-bgc-secondary">d-bgc-secondary</div>
-        <div class="d-p8 d-ba d-bc-subtle d-bgc-critical">d-bgc-critical</div>
-        <div class="d-p8 d-ba d-bc-subtle d-fc-critical">d-fc-critical</div>
-        <div class="d-p8 d-ba d-bc-subtle d-fc-tertiary">d-fc-tertiary</div>
-        <dt-input label="Small" type="text" placeholder="Placeholder" size="sm" />
+        <div class="d-body--sm d-p8 d-ba d-bc-subtle d-bgc-secondary">d-bgc-secondary</div>
+        <div class="d-body--sm d-p8 d-ba d-bc-subtle d-bgc-critical">d-bgc-critical</div>
+        <div class="d-body--sm d-p8 d-ba d-bc-subtle d-fc-critical">d-fc-critical</div>
+        <div class="d-body--sm d-p8 d-ba d-bc-subtle d-fc-tertiary">d-fc-tertiary</div>
+        <dt-input label="Input field" type="text" placeholder="Placeholder" size="sm" />
         <dt-notice kind="info">
           <span> Notice </span>
           <template #action>
