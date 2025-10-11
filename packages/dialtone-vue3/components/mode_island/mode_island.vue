@@ -72,7 +72,6 @@ export default {
       contrastObserver: null,
       modeObserver: null,
       elementRef: null,
-      parentModeChangeCounter: 0, // Used to trigger reactivity when parent mode changes
     };
   },
 
@@ -89,10 +88,6 @@ export default {
 
       // If mode is inverted, calculate based on parent
       if (this.mode === DT_MODE_ISLAND_TYPES.INVERTED) {
-        // Trigger reactivity when parent mode changes by accessing the counter
-        // The counter value isn't used, but accessing it creates the reactive dependency
-        const _trigger = this.parentModeChangeCounter; // eslint-disable-line no-unused-vars
-
         // First check if there's a parent mode island
         if (this.parentModeIslandMode) {
           const parentMode = typeof this.parentModeIslandMode === 'function'
@@ -179,8 +174,8 @@ export default {
       const callback = (mutationsList) => {
         for (const mutation of mutationsList) {
           if (mutation.type === 'attributes' && mutation.attributeName === 'data-dt-mode') {
-            // Increment counter to trigger reactivity in computedMode
-            this.parentModeChangeCounter++;
+            // Force Vue to re-render this component to recalculate computedMode
+            this.$forceUpdate();
           }
         }
       };
