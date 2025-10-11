@@ -92,23 +92,59 @@ export const Interactive = {
             Try changing the mode prop and toggling your browser's dark mode to see how the mode island behaves.
           </p>
         </div>
-        <dt-mode-island v-bind="args" class="d-p24 d-ba d-bc-subtle d-bar8 d-bgc-secondary">
-          <h3 class="d-headline--md d-mb8">Mode Island Content</h3>
-          <p class="d-body--md d-mb16">
-            This content is inside a mode island with mode: {{ args.mode }}
-          </p>
-          <dt-stack gap="400" direction="row">
-            <span>
-              <dt-button>Button</dt-button>
-            </span>
-            <span>
-              <dt-badge text="Badge" />
-            </span>
-            <span>
-              <dt-chip>Chip</dt-chip>
-            </span>
-          </dt-stack>
-        </dt-mode-island>
+        <dt-stack direction="row" gap="400">
+          <dt-mode-island v-bind="args" class="d-p16 d-ba d-bc-subtle d-bar8 d-bgc-primary">
+            <h3 class="d-headline--md d-mb8">Inverted</h3>
+            <p class="d-body--md d-mb16">
+              This one will use the parent mode to determine its mode.
+            </p>
+            <dt-stack gap="400" direction="row">
+              <span>
+                <dt-button>Button</dt-button>
+              </span>
+              <span>
+                <dt-badge text="Badge" />
+              </span>
+              <span>
+                <dt-chip>Chip</dt-chip>
+              </span>
+            </dt-stack>
+          </dt-mode-island>
+          <dt-mode-island mode="dark" class="d-p16 d-ba d-bc-subtle d-bar8 d-bgc-primary">
+            <h3 class="d-headline--md d-mb8">Dark</h3>
+            <p class="d-body--md d-mb16">
+              This one will always be dark mode.
+            </p>
+            <dt-stack gap="400" direction="row">
+              <span>
+                <dt-button>Button</dt-button>
+              </span>
+              <span>
+                <dt-badge text="Badge" />
+              </span>
+              <span>
+                <dt-chip>Chip</dt-chip>
+              </span>
+            </dt-stack>
+          </dt-mode-island>
+          <dt-mode-island mode="light" class="d-p16 d-ba d-bc-subtle d-bar8 d-bgc-primary">
+            <h3 class="d-headline--md d-mb8">Light</h3>
+            <p class="d-body--md d-mb16">
+              This one will always be light mode.
+            </p>
+            <dt-stack gap="400" direction="row">
+              <span>
+                <dt-button>Button</dt-button>
+              </span>
+              <span>
+                <dt-badge text="Badge" />
+              </span>
+              <span>
+                <dt-chip>Chip</dt-chip>
+              </span>
+            </dt-stack>
+          </dt-mode-island>
+        </dt-stack>
       </div>
     `,
   }),
@@ -170,6 +206,53 @@ export const SideBySide = {
               </dt-stack>
             </dt-stack>
           </dt-mode-island>
+          <dt-mode-island mode="dark" class="d-fl1 d-p16 d-ba d-bc-subtle d-bar8 d-bgc-primary">
+            <h4 class="d-headline--sm d-mb12">Explicit Dark Mode</h4>
+            <dt-stack gap="400">
+              <span>
+                <dt-button>Primary Button</dt-button>
+              </span>
+              <dt-input label="Input Field" placeholder="Enter text..." />
+              <dt-notice kind="info">
+                This is an info notice is inverted mode
+              </dt-notice>
+              <dt-stack direction="row" gap="400">
+                <span>
+                  <dt-badge text="Badge" />
+                </span>
+                <span>
+                  <dt-badge text="Info" type="info" />
+                </span>
+                <span>
+                  <dt-badge text="Success" type="success" />
+                </span>
+              </dt-stack>
+            </dt-stack>
+          </dt-mode-island>
+          <dt-mode-island mode="light" class="d-fl1 d-p16 d-ba d-bc-subtle d-bar8 d-bgc-primary">
+            <h4 class="d-headline--sm d-mb12">Explicit Light Mode</h4>
+            <dt-stack gap="400">
+              <span>
+                <dt-button>Primary Button</dt-button>
+              </span>
+              <dt-input label="Input Field" placeholder="Enter text..." />
+              <dt-notice kind="info">
+                This is an info notice is inverted mode
+              </dt-notice>
+              <dt-stack direction="row" gap="400">
+                <span>
+                  <dt-badge text="Badge" />
+                </span>
+                <span>
+                  <dt-badge text="Info" type="info" />
+                </span>
+                <span>
+                  <dt-badge text="Success" type="success" />
+                </span>
+              </dt-stack>
+            </dt-stack>
+          </dt-mode-island>
+
         </div>
       </div>
     `,
@@ -185,13 +268,13 @@ export const WithCustomElement = {
           Custom HTML Elements <span class="d-body--md">via <code class="d-fw-bold">as</code> prop</span>
         </h3>
         <dt-stack gap="400" direction="row">
-          <dt-mode-island as="section" class="d-p16 d-ba d-bc-subtle d-bar8 d-bgc-secondary">
+          <dt-mode-island as="section" class="d-p16 d-ba d-bc-subtle d-bar8 d-bgc-primary">
             <p class="d-body--md">This is a <code>&lt;section&gt;</code> element</p>
           </dt-mode-island>
-          <dt-mode-island as="article" class="d-p16 d-ba d-bc-subtle d-bar8 d-bgc-secondary">
+          <dt-mode-island as="article" class="d-p16 d-ba d-bc-subtle d-bar8 d-bgc-primary">
             <p class="d-body--md">This is an <code>&lt;article&gt;</code> element</p>
           </dt-mode-island>
-          <dt-mode-island as="nav" class="d-p16 d-ba d-bc-subtle d-bar8 d-bgc-secondary">
+          <dt-mode-island as="nav" class="d-p16 d-ba d-bc-subtle d-bar8 d-bgc-primary">
             <p class="d-body--md">This is a <code>&lt;nav&gt;</code> element</p>
           </dt-mode-island>
         </dt-stack>

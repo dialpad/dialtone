@@ -3,6 +3,7 @@
     :is="as"
     v-bind="$attrs"
     :data-dt-mode="computedMode"
+    :data-mode-island-inverted="isInverted ? '' : null"
     :data-dt-contrast="currentContrast"
   >
     <!-- @slot Slot for main content -->
@@ -69,11 +70,17 @@ export default {
     return {
       currentContrast: getRootContrast(),
       contrastObserver: null,
+      modeObserver: null,
       elementRef: null,
+      parentModeChangeCounter: 0, // Used to trigger reactivity when parent mode changes
     };
   },
 
   computed: {
+    isInverted () {
+      return this.mode === DT_MODE_ISLAND_TYPES.INVERTED;
+    },
+
     computedMode () {
       // If mode is explicitly light or dark, use it directly
       if (this.mode === DT_MODE_ISLAND_TYPES.LIGHT || this.mode === DT_MODE_ISLAND_TYPES.DARK) {
@@ -82,6 +89,10 @@ export default {
 
       // If mode is inverted, calculate based on parent
       if (this.mode === DT_MODE_ISLAND_TYPES.INVERTED) {
+        // Trigger reactivity when parent mode changes
+         
+        this.parentModeChangeCounter;
+
         // First check if there's a parent mode island
         if (this.parentModeIslandMode) {
           const parentMode = typeof this.parentModeIslandMode === 'function'
@@ -118,15 +129,24 @@ export default {
     // Setup MutationObserver to watch for contrast changes on root
     this.setupContrastObserver();
 
+    // Setup MutationObserver to watch for mode changes (only if inverted)
+    if (this.isInverted) {
+      this.setupModeObserver();
+    }
+
     // Initial contrast value
     this.currentContrast = getRootContrast();
   },
 
   beforeUnmount () {
-    // Cleanup observer
+    // Cleanup observers
     if (this.contrastObserver) {
       this.contrastObserver.disconnect();
       this.contrastObserver = null;
+    }
+    if (this.modeObserver) {
+      this.modeObserver.disconnect();
+      this.modeObserver = null;
     }
   },
 
@@ -147,6 +167,37 @@ export default {
 
       this.contrastObserver = new MutationObserver(callback);
       this.contrastObserver.observe(document.documentElement, config);
+    },
+
+    setupModeObserver () {
+      const config = {
+        attributes: true,
+        attributeFilter: ['data-dt-mode'],
+        subtree: false,
+      };
+
+      const callback = (mutationsList) => {
+        for (const mutation of mutationsList) {
+          if (mutation.type === 'attributes' && mutation.attributeName === 'data-dt-mode') {
+            // Increment counter to trigger reactivity in computedMode
+            this.parentModeChangeCounter++;
+          }
+        }
+      };
+
+      this.modeObserver = new MutationObserver(callback);
+
+      // Observe root element
+      this.modeObserver.observe(document.documentElement, config);
+
+      // Also observe all parent elements with data-dt-mode
+      let parent = this.elementRef?.parentElement;
+      while (parent) {
+        if (parent.hasAttribute('data-dt-mode')) {
+          this.modeObserver.observe(parent, config);
+        }
+        parent = parent.parentElement;
+      }
     },
   },
 };

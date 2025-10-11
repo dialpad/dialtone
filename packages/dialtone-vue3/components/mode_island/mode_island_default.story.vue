@@ -67,34 +67,30 @@
           Nested Mode Islands
         </h4>
         <dt-mode-island
-          mode="dark"
           class="d-p16 d-ba d-bc-subtle d-bar8 d-bgc-primary"
         >
           <p class="d-body--md d-mb16">
-            This is a dark mode island.
+            This will invert relative to the parent mode.
           </p>
 
           <dt-mode-island
-            mode="inverted"
             class="d-p16 d-ba d-bc-subtle d-bar8 d-bgc-primary"
           >
             <p class="d-body--md d-mb16">
-              This nested island inverts the parent (so it's light).
+              This nested island inverts the parent mode.
             </p>
 
             <dt-mode-island
-              mode="inverted"
               class="d-p16 d-ba d-bc-subtle d-bar8 d-bgc-primary"
             >
               <p class="d-body--md d-mb16">
-                This deeply nested island inverts again (back to dark).
+                This deeply nested island inverts again.
               </p>
               <dt-mode-island
-                mode="inverted"
                 class="d-p16 d-ba d-bc-subtle d-bar8 d-bgc-primary"
               >
                 <p class="d-body--md">
-                  And invert again (back to light).
+                  And invert again.
                 </p>
               </dt-mode-island>
             </dt-mode-island>
