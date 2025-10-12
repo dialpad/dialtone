@@ -454,7 +454,9 @@ layout: Blank
         </dt-stack>
       </dt-stack>
     </div>
-    <dt-mode-island class="d-fl1 d-p16 d-ba d-bc-subtle d-bar16 d-bgc-primary">
+    <dt-mode-island class="asdfasdfasdf d-fl1 d-p16 d-ba d-bc-subtle d-bar16 d-bgc-primary"
+      @click="$event.currentTarget.classList.toggle('asdfasdfasdf')"
+    >
       <dt-stack gap="500">
         <strong class="d-code--md d-fs-400">mode="<strong>inverted</strong>"</strong>
         <p>Inverted relative to parent</p>
@@ -691,7 +693,9 @@ layout: Blank
         </dt-stack>
       </dt-stack>
     </dt-mode-island>
-    <dt-mode-island mode="dark" class="d-fl1 d-p16 d-ba d-bc-subtle d-bar16 d-bgc-primary">
+    <dt-mode-island mode="dark" class="asdfasdfasdf d-fl1 d-p16 d-ba d-bc-subtle d-bar16 d-bgc-primary"
+      @click="$event.currentTarget.classList.toggle('asdfasdfasdf')"
+    >
       <dt-stack gap="500">
         <strong class="d-code--md d-fs-400">mode="<strong>dark</strong>"</strong>
         <p>Always dark no matter the root theme</p>
@@ -928,7 +932,9 @@ layout: Blank
         </dt-stack>
       </dt-stack>
     </dt-mode-island>
-    <dt-mode-island mode="light" class="d-fl1 d-p16 d-ba d-bc-subtle d-bar16 d-bgc-primary">
+    <dt-mode-island mode="light" class="asdfasdfasdf d-fl1 d-p16 d-ba d-bc-subtle d-bar16 d-bgc-primary"
+      @click="$event.currentTarget.classList.toggle('asdfasdfasdf')"
+    >
       <dt-stack gap="500">
         <strong class="d-code--md d-fs-400">mode="<strong>light</strong>"</strong>
         <p>Always light no matter the root theme</p>
@@ -1167,8 +1173,9 @@ layout: Blank
     </dt-mode-island>
   </dt-stack>
   <dt-mode-island
-    class="d-p16 d-ba d-bc-subtle d-bar8 d-bgc-primary"
-  >
+    class="d-p16 d-ba d-bc-subtle d-bar8 d-bgc-primary asdfasdfasdf"
+    @click="$event.currentTarget.classList.toggle('asdfasdfasdf')"
+    >
     <p class="d-body--md d-mb16">
       This will invert relative to the parent mode.
     </p>
@@ -1206,11 +1213,11 @@ layout: Blank
      d-ttf-quint
      d-o0
    "
-   style="transition-duration: calc(var(--td300) * 3) !important;"
+   style="transition-duration: calc(var(--td300) * 2) !important;"
   >
   <div
     class="
-      d-bgc-secondary
+      d-bgc-primary
       d-bgo90
       d-ba
       d-bc-subtle
@@ -1277,7 +1284,7 @@ layout: Blank
       </dt-stack>
       <dt-stack class="d-w20p">
         <div class="d-ml-auto">
-          <dt-button class="d-p12" circle size="lg" kind="danger" >
+          <dt-button class="d-p12" circle size="lg" kind="danger" @click="toggleCallbar">
             <template #icon> <dt-icon name="phone-hang-up" size="500" /> </template>
           </dt-button>
         </div>
@@ -1313,6 +1320,23 @@ layout: Blank
         return 'circle-half-filled';
     }
   });
+
+  const toggleCallbar = () => {
+    const el = document.getElementById('callbarr');
+    if (el) {
+      el.classList.toggle('d-bn100p');
+      el.classList.toggle('d-b16');
+      el.classList.toggle('d-o0');
+    }
+  };
+
+  const handleKeydown = (event) => {
+    // Check for Shift + C
+    if (event.shiftKey && event.key === 'C') {
+      toggleCallbar();
+    }
+  };
+
 
   const namedThemes = ['aegean', 'botany', 'buttercream', 'ceruleo', 'high-desert',
                        'melon', 'plum', 'sunflower', 'verdant-haze'];
@@ -1407,18 +1431,6 @@ layout: Blank
     }
   };
 
-  const handleKeydown = (event) => {
-    // Check for Shift + C
-    if (event.shiftKey && event.key === 'C') {
-      const element = document.getElementById('callbarr');
-      if (element) {
-        element.classList.toggle('d-bn100p');
-        element.classList.toggle('d-b16');
-
-        element.classList.toggle('d-o0');
-      }
-    }
-  };
 
   onMounted(() => {
     // Initialize the theme on page load
@@ -1436,3 +1448,12 @@ layout: Blank
     window.removeEventListener('keydown', handleKeydown);
   });
 </script>
+
+<style lang="less">
+  /* .asdfasdfasdf {
+    opacity: 0;
+  } */
+  .vp-back-to-top-button {
+    display: none;
+  }
+</style>
