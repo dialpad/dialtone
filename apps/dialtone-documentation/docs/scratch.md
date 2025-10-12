@@ -1,8 +1,7 @@
 ---
 layout: Blank
 ---
-
-<dt-stack gap="500" class="d-p16">
+<dt-stack gap="500" class="d-p16 d-pb96">
   <dt-stack gap="400" direction="row">
     <dt-dropdown
       id="theme-toggle-dropdown"
@@ -1166,9 +1165,35 @@ layout: Blank
       </dt-stack>
     </dt-mode-island>
   </dt-stack>
+  <dt-mode-island
+    class="d-p16 d-ba d-bc-subtle d-bar8 d-bgc-primary"
+  >
+    <p class="d-body--md d-mb16">
+      This will invert relative to the parent mode.
+    </p>
+    <dt-mode-island
+      class="d-p16 d-ba d-bc-subtle d-bar8 d-bgc-primary"
+    >
+      <p class="d-body--md d-mb16">
+        This nested island inverts the parent mode.
+      </p>
+      <dt-mode-island
+        class="d-p16 d-ba d-bc-subtle d-bar8 d-bgc-primary"
+      >
+        <p class="d-body--md d-mb16">
+          This deeply nested island inverts again.
+        </p>
+        <dt-mode-island
+          class="d-p16 d-ba d-bc-subtle d-bar8 d-bgc-primary"
+        >
+          <p class="d-body--md">
+            And invert again.
+          </p>
+        </dt-mode-island>
+      </dt-mode-island>
+    </dt-mode-island>
+  </dt-mode-island>
 </dt-stack>
-
-
 <script setup>
   import { inject, computed, onMounted, onUnmounted, ref } from 'vue';
   import { DtIconPhone, DtIconQuickReply, DtIconVideo } from '@dialpad/dialtone-icons/vue3';
