@@ -1195,7 +1195,7 @@ layout: Blank
     </dt-mode-island>
   </dt-mode-island>
 </dt-stack>
-<div
+<dt-mode-island
    id="callbarr"
    class="
      d-ps-fixed
@@ -1206,9 +1206,9 @@ layout: Blank
      d-ttf-quint
      d-o0
    "
-   style="transition-duration: .6s !important;"
+   style="transition-duration: calc(var(--td300) * 3) !important;"
   >
-  <dt-mode-island
+  <div
     class="
       d-bgc-secondary
       d-bgo90
@@ -1283,8 +1283,8 @@ layout: Blank
         </div>
       </dt-stack>
     </dt-stack>
-  </dt-mode-island>
-</div>
+  </div>
+</dt-mode-island>
 
 <script setup>
   import { inject, computed, onMounted, onUnmounted, ref } from 'vue';
