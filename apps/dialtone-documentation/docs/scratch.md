@@ -214,6 +214,7 @@ layout: Blank
         </dt-list-item-group>
       </template>
     </dt-dropdown>
+    <span class="d-ml-auto">Hint... <dt-keyboard-shortcut shortcut="Shift+C"/></span>
   </dt-stack>
   <dt-stack gap="500" direction="row">
     <div class="d-fl1 d-p16 d-ba d-bc-transparent d-bar16">
@@ -1194,6 +1195,88 @@ layout: Blank
     </dt-mode-island>
   </dt-mode-island>
 </dt-stack>
+<dt-mode-island
+  id="callbarr"
+  class="
+    d-ps-fixed
+    d-r16
+    d-bn100p
+    d-l16
+    d-bgc-secondary
+    d-bgo90
+    d-ba
+    d-bc-subtle
+    d-p8
+    d-py6
+    d-bar32
+    d-bs-md
+  "
+  style="backdrop-filter: blur(8px)"
+>
+  <dt-stack direction="row" gap="500">
+    <dt-stack class="d-w20p" gap="400" direction="row">
+      <dt-avatar
+        full-name="TA"
+        color="700"
+        size="lg"
+      />
+      <dt-stack gap="200">
+        <span class="d-label--md-compact">Ted Anderson</span>
+        <dt-stack direction="row" gap="300" class="d-ai-baseline d-helper--sm d-fc-tertiary">
+          <span >(913) 555-6745</span>
+          <span class="d-fc-muted">&bull;</span>
+          <span class="d-fvn-tabular">21:18</span>
+        </dt-stack>
+      </dt-stack>
+    </dt-stack>
+    <dt-stack class="d-fl1 d-jc-center" direction="row" gap="200">
+      <dt-button class="d-px8 d-w72" size="sm" kind="danger" icon-position="top">
+        <template #icon> <dt-icon name="more-vertical" size="400" /> </template>
+        Unmute
+      </dt-button>
+      <dt-button class="d-px8 d-w72" size="sm" kind="muted" importance="clear" icon-position="top">
+        <template #icon> <dt-icon name="hold" size="400" /> </template>
+        Hold
+      </dt-button>
+      <dt-button class="d-px8 d-w72" size="sm" kind="muted" importance="clear" icon-position="top">
+        <template #icon> <dt-icon name="transfer" size="400" /> </template>
+        Transfer
+      </dt-button>
+      <dt-button class="d-px8 d-w72" size="sm" kind="muted" importance="clear" icon-position="top">
+        <template #icon> <dt-icon name="record-filled" size="400" /> </template>
+        Record
+      </dt-button>
+      <dt-button class="d-px8 d-w72" size="sm" kind="muted" importance="clear" icon-position="top">
+        <template #icon> <dt-icon name="keypad" size="400" /> </template>
+        Keypad
+      </dt-button>
+      <dt-button class="d-px8 d-w72" size="sm" kind="muted" importance="clear" icon-position="top">
+        <template #icon> <dt-icon name="user-plus" size="400" /> </template>
+        Add
+      </dt-button>
+      <dt-button class="d-px8 d-w72" size="sm" kind="muted" importance="clear" icon-position="top">
+        <template #icon> <dt-icon name="park" size="400" /> </template>
+        Share
+      </dt-button>
+      <dt-button class="d-px8 d-w72" size="sm" kind="muted" importance="clear" icon-position="top">
+        <template #icon> <dt-icon name="mic" size="400" /> </template>
+        Park
+      </dt-button>
+      <dt-button class="d-px8 d-w72" size="sm" kind="muted" importance="clear" icon-position="top">
+        <template #icon> <dt-icon name="more-horizontal" size="400" /> </template>
+        More
+      </dt-button>
+    </dt-stack>
+    <dt-stack class="d-w20p">
+      <div class="d-ml-auto">
+        <dt-button class="d-p12" circle size="lg" kind="danger" >
+          <template #icon> <dt-icon name="phone-hang-up" size="500" /> </template>
+        </dt-button>
+      </div>
+    </dt-stack>
+  </dt-stack>
+</dt-mode-island>
+
 <script setup>
   import { inject, computed, onMounted, onUnmounted, ref } from 'vue';
   import { DtIconPhone, DtIconQuickReply, DtIconVideo } from '@dialpad/dialtone-icons/vue3';
@@ -1315,15 +1398,35 @@ layout: Blank
     }
   };
 
+  const handleKeydown = (event) => {
+    // Check for Shift + C
+    if (event.shiftKey && event.key === 'C') {
+      const element = document.getElementById('callbarr');
+      if (element) {
+        if (element.classList.contains('d-bn100p')) {
+          element.classList.remove('d-bn100p');
+          element.classList.add('d-b16');
+        } else {
+          element.classList.remove('d-b16');
+          element.classList.add('d-bn100p');
+        }
+      }
+    }
+  };
+
   onMounted(() => {
     // Initialize the theme on page load
     setCss();
 
     // Listen for system theme changes
     prefersDarkMediaQuery.addEventListener('change', setCss);
+
+    // Listen for Shift + C keypress
+    window.addEventListener('keydown', handleKeydown);
   });
 
   onUnmounted(() => {
     prefersDarkMediaQuery.removeEventListener('change', setCss);
+    window.removeEventListener('keydown', handleKeydown);
   });
 </script>
