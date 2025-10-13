@@ -3,6 +3,8 @@
 
 const TokensBaseLight = require('@dialpad/dialtone-tokens/dist/tokens-base-light.json');
 const TokensDpLight = require('@dialpad/dialtone-tokens/dist/tokens-dp-light.json');
+const TokensContrastHighLight = require('@dialpad/dialtone-tokens/dist/tokens-contrast-high-light.json');
+const TokensContrastHighDark = require('@dialpad/dialtone-tokens/dist/tokens-contrast-high-dark.json');
 
 const { Rule } = require('postcss');
 
@@ -118,6 +120,25 @@ function colorUtilities (clonedSource, declaration) {
   const borderColors = Object.entries(tokens).filter(([key]) => borderColorsRegex.test(key)).reduce(processColors, []);
   const chartColors = Object.entries(tokens).filter(([key]) => chartColorsRegex.test(key)).reduce(processColors, []);
 
+  // Colors that have high contrast overrides (don't have HSLA splits in high contrast mode)
+  // Dynamically extract from high contrast token files
+  function _generateTokenName (string) {
+    return string
+      .split(/([A-Z][a-z]+)(\d{2,})?/)
+      .filter(item => !!item)
+      .join('-')
+      .toLowerCase();
+  }
+
+  const highContrastKeys = new Set([
+    ...Object.keys(TokensContrastHighLight),
+    ...Object.keys(TokensContrastHighDark),
+  ]);
+
+  const HIGH_CONTRAST_COLORS = Array.from(highContrastKeys)
+    .filter(key => key.startsWith('dtColor'))
+    .map(key => `--${_generateTokenName(key)}`);
+
   function _generateColorNodes (token, prop, opacityVar) {
     return [
       declaration.clone({
@@ -134,12 +155,33 @@ function colorUtilities (clonedSource, declaration) {
       }),
     ];
   }
+
+  function _generateHighContrastColorNode (token, prop) {
+    return [
+      declaration.clone({
+        prop,
+        value: `var(${token}) !important`,
+      }),
+    ];
+  }
+
+  function _prependHighContrastSelector (selector) {
+    return selector.split(', ').map(s => `[data-dt-contrast="high"] ${s}`).join(', ');
+  }
   function _generateForegroundColors (token, colorName) {
     generatedRules.fontColor.push(new Rule({
       source: clonedSource,
       selector: appendHoverFocusSelectors(`.d-fc-${colorName}`),
       nodes: _generateColorNodes(token, 'color', '--fco'),
     }));
+    // High contrast override (only for colors that have high contrast overrides)
+    if (HIGH_CONTRAST_COLORS.includes(token)) {
+      generatedRules.fontColor.push(new Rule({
+        source: clonedSource,
+        selector: _prependHighContrastSelector(appendHoverFocusSelectors(`.d-fc-${colorName}`)),
+        nodes: _generateHighContrastColorNode(token, 'color'),
+      }));
+    }
   }
   function _generateSurfaceColors (token, colorName) {
     generatedRules.backgroundColor.push(new Rule({
@@ -147,6 +189,14 @@ function colorUtilities (clonedSource, declaration) {
       selector: appendHoverFocusSelectors(`.d-bgc-${colorName}`),
       nodes: _generateColorNodes(token, 'background-color', '--bgo'),
     }));
+    // High contrast override (only for colors that have high contrast overrides)
+    if (HIGH_CONTRAST_COLORS.includes(token)) {
+      generatedRules.backgroundColor.push(new Rule({
+        source: clonedSource,
+        selector: _prependHighContrastSelector(appendHoverFocusSelectors(`.d-bgc-${colorName}`)),
+        nodes: _generateHighContrastColorNode(token, 'background-color'),
+      }));
+    }
   }
   function _generateBorderColors (token, colorName) {
     generatedRules.borderColor.push(new Rule({
@@ -154,6 +204,14 @@ function colorUtilities (clonedSource, declaration) {
       selector: appendHoverFocusSelectors(`.d-bc-${colorName}`),
       nodes: _generateColorNodes(token, 'border-color', '--bco'),
     }));
+    // High contrast override (only for colors that have high contrast overrides)
+    if (HIGH_CONTRAST_COLORS.includes(token)) {
+      generatedRules.borderColor.push(new Rule({
+        source: clonedSource,
+        selector: _prependHighContrastSelector(appendHoverFocusSelectors(`.d-bc-${colorName}`)),
+        nodes: _generateHighContrastColorNode(token, 'border-color'),
+      }));
+    }
   }
   function _generateDividerColors (token, colorName) {
     generatedRules.dividerColor.push(new Rule({
