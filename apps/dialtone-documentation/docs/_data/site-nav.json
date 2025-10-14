@@ -682,6 +682,10 @@
           "link": "/components/loader.html"
         },
         {
+          "text": "Mode Island",
+          "link": "/components/mode-island.html"
+        },
+        {
           "text": "Modal",
           "link": "/components/modal.html"
         },
