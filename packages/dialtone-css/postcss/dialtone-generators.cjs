@@ -167,9 +167,12 @@ function colorUtilities (clonedSource, declaration) {
       }),
       declaration.clone({
         prop,
+        // Use relative color syntax to apply opacity
+        // Extracts l, c, h from the token and applies the opacity variable to alpha
+        // Alpha channel accepts percentages directly (75% = 0.75 opacity)
         value: HSLA_EXCLUDED_COLORS.includes(token)
           ? `var(${token}) !important`
-          : `hsl(var(${token}-h) var(${token}-s) var(${token}-l) / var(${opacityVar})) !important`,
+          : `oklch(from var(${token}) l c h / var(${opacityVar})) !important`,
       }),
     ];
   }
