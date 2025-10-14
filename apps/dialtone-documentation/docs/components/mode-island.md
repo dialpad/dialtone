@@ -5,9 +5,99 @@ status: beta
 ---
 
 <code-well-header>
-  <dt-mode-island mode="dark" class="d-p16 d-bar8">
-    <p class="d-body--md">Dark mode island in light theme</p>
-  </dt-mode-island>
+  <dt-dropdown navigation-type="arrow-keys" placement="bottom-start">
+    <template #anchor>
+      <dt-button
+        importance="outlined"
+        kind="muted"
+        class="dialtone-shell-btn"
+      >
+        <dt-stack gap="400" direction="row">
+          <span><strong>Mode:</strong> {{ currentMode.charAt(0).toUpperCase() + currentMode.slice(1) }}</span>
+          <span><strong>Contrast:</strong> {{ currentContrast.charAt(0).toUpperCase() + currentContrast.slice(1) }}</span>
+        </dt-stack>
+        <template #icon>
+          <dt-icon
+            size="300"
+            :name="currentModeIconName"
+          />
+        </template>
+      </dt-button>
+    </template>
+    <template #list>
+      <dt-list-item-group
+        heading-class="d-py4 d-px8 d-c-default d-fc-tertiary d-label--sm"
+        heading="Mode"
+      >
+        <dt-list-item
+          role="menuitem"
+          navigation-type="arrow-keys"
+          @click="setMode('system')"
+        >
+          System
+          <template #right>
+            <dt-icon :class="{ 'd-o0': currentMode !== 'system' }" name="check" size="200" />
+          </template>
+        </dt-list-item>
+        <dt-list-item
+          role="menuitem"
+          navigation-type="arrow-keys"
+          @click="setMode('light')"
+        >
+          Light
+          <template #right>
+            <dt-icon :class="{ 'd-o0': currentMode !== 'light' }" name="check" size="200" />
+          </template>
+        </dt-list-item>
+        <dt-list-item
+          role="menuitem"
+          navigation-type="arrow-keys"
+          @click="setMode('dark')"
+        >
+          Dark
+          <template #right>
+            <dt-icon :class="{ 'd-o0': currentMode !== 'dark' }" name="check" size="200" />
+          </template>
+        </dt-list-item>
+      </dt-list-item-group>
+      <dt-dropdown-separator />
+      <dt-list-item-group
+        heading-class="d-py4 d-px8 d-c-default d-fc-tertiary d-label--sm"
+        heading="Contrast"
+      >
+        <dt-list-item
+          role="menuitem"
+          navigation-type="arrow-keys"
+          @click="setContrast('default')"
+        >
+          Default
+          <template #right>
+            <dt-icon :class="{ 'd-o0': currentContrast !== 'default' }" name="check" size="200" />
+          </template>
+        </dt-list-item>
+        <dt-list-item
+          role="menuitem"
+          navigation-type="arrow-keys"
+          @click="setContrast('high')"
+        >
+          High
+          <template #right>
+            <dt-icon :class="{ 'd-o0': currentContrast !== 'high' }" name="check" size="200" />
+          </template>
+        </dt-list-item>
+      </dt-list-item-group>
+    </template>
+  </dt-dropdown>
+  <dt-stack gap="500">
+    <dt-mode-island class="d-p16 d-bar8 d-bgc-primary">
+      <h3 class="d-headline--lg">Inverted mode island</h3>
+      <dt-stack gap="400" direction="row">
+        <p class="d-body--md">Primary Text</p>
+        <p class="d-fc-tertiary">Tertiary Text</p>
+        <p class="d-fc-critical">Critical Text</p>
+      </dt-stack>
+    </dt-mode-island>
+  </dt-stack>
 </code-well-header>
 
 ## Usage
