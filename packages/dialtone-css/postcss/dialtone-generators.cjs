@@ -24,6 +24,7 @@ const {
 const {
   appendHoverFocusSelectors,
   processColors,
+  generateTokenName,
 } = require('./helpers.cjs');
 // This constant determines the order in which classes are going to be added to the root CSS
 const generatedRules = {
@@ -120,24 +121,41 @@ function colorUtilities (clonedSource, declaration) {
   const borderColors = Object.entries(tokens).filter(([key]) => borderColorsRegex.test(key)).reduce(processColors, []);
   const chartColors = Object.entries(tokens).filter(([key]) => chartColorsRegex.test(key)).reduce(processColors, []);
 
-  // Colors that have high contrast overrides (don't have HSLA splits in high contrast mode)
-  // Dynamically extract from high contrast token files
-  function _generateTokenName (string) {
-    return string
-      .split(/([A-Z][a-z]+)(\d{2,})?/)
-      .filter(item => !!item)
-      .join('-')
-      .toLowerCase();
-  }
-
+  /**
+   * High Contrast Color Utilities
+   *
+   * Problem: High contrast tokens redefine colors as complete hsl() values (e.g. hsl(0 0% 0% / 0.5)),
+   * but CSS utilities construct colors from HSLA split components:
+   *   - var(--dt-color-border-subtle-h)
+   *   - var(--dt-color-border-subtle-s)
+   *   - var(--dt-color-border-subtle-l)
+   *   - var(--dt-color-border-subtle-a)
+   *
+   * These split components don't exist in high contrast mode, causing utilities to fail.
+   *
+   * Solution: Generate [data-dt-contrast="high"] overrides that use the full token variable
+   * instead of constructing from splits. This ensures:
+   *   - Normal mode: HSLA splits work, opacity utilities (--fco, --bgo, --bco, --dco) functional
+   *   - High contrast mode: Full variable used, splits ignored
+   *
+   * The list of high contrast colors is dynamically extracted from token files to future-proof
+   * against token additions/removals. Only colors defined in high contrast token files receive
+   * override rules, minimizing CSS bloat (~14 rules for 10 colors).
+   */
   const highContrastKeys = new Set([
     ...Object.keys(TokensContrastHighLight),
     ...Object.keys(TokensContrastHighDark),
   ]);
 
+  // Only include semantic color tokens that are used in utilities
+  // Excludes brand, gradient, shell, and action colors which are handled differently
   const HIGH_CONTRAST_COLORS = Array.from(highContrastKeys)
-    .filter(key => key.startsWith('dtColor'))
-    .map(key => `--${_generateTokenName(key)}`);
+    .filter(key =>
+      key.startsWith('dtColorForeground') ||
+      key.startsWith('dtColorBorder') ||
+      key.startsWith('dtColorSurface'),
+    )
+    .map(key => `--${generateTokenName(key)}`);
 
   function _generateColorNodes (token, prop, opacityVar) {
     return [
