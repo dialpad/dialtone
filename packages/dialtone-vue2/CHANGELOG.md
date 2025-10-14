@@ -1,3 +1,10 @@
+## [2.200.1](https://github.com/dialpad/dialtone/compare/dialtone-vue2/v2.200.0...dialtone-vue2/v2.200.1) (2025-10-14)
+
+
+### Bug Fixes
+
+* **Popover:** DLT-2795 add aria-hidden attribute on popover ([#943](https://github.com/dialpad/dialtone/issues/943)) ([dc5bbe7](https://github.com/dialpad/dialtone/commit/dc5bbe7c78efc41e1f94cfed8822742318087564))
+
 # [2.200.0](https://github.com/dialpad/dialtone/compare/dialtone-vue2/v2.199.1...dialtone-vue2/v2.200.0) (2025-10-06)
 
 
