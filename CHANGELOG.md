@@ -1,3 +1,15 @@
+# [9.142.0](https://github.com/dialpad/dialtone/compare/dialtone/v9.141.0...dialtone/v9.142.0) (2025-10-14)
+
+
+### Bug Fixes
+
+* **Popover:** DLT-2795 add aria-hidden attribute on popover ([#943](https://github.com/dialpad/dialtone/issues/943)) ([dc5bbe7](https://github.com/dialpad/dialtone/commit/dc5bbe7c78efc41e1f94cfed8822742318087564))
+
+
+### Features
+
+* **Utilities:** NO-JIRA add 384 width-height ([#944](https://github.com/dialpad/dialtone/issues/944)) ([b49c21d](https://github.com/dialpad/dialtone/commit/b49c21d02996dbe8f298e77e4b81fe6137ad1505))
+
 # [9.141.0](https://github.com/dialpad/dialtone/compare/dialtone/v9.140.1...dialtone/v9.141.0) (2025-10-06)
 
 
