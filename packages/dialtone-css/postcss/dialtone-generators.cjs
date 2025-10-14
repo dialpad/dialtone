@@ -219,6 +219,14 @@ function colorUtilities (clonedSource, declaration) {
       selector: `.d-divide-${colorName} > * + *`,
       nodes: _generateColorNodes(token, 'border-color', '--dco'),
     }));
+    // High contrast override (only for colors that have high contrast overrides)
+    if (HIGH_CONTRAST_COLORS.includes(token)) {
+      generatedRules.dividerColor.push(new Rule({
+        source: clonedSource,
+        selector: `[data-dt-contrast="high"] .d-divide-${colorName} > * + *`,
+        nodes: _generateHighContrastColorNode(token, 'border-color'),
+      }));
+    }
   }
 
   baseColors.forEach(({ token, colorName }) => {
