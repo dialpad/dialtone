@@ -202,17 +202,13 @@ Contrast is not an option to set to a Mode Island. Contrast theme setting is inh
 The default mode, inverts the container relative to the parent or theme mode. If `mode` attribute is omitted, it defaults to `inverted`.
 
 <code-well-header>
-  <dt-mode-island class="d-p16 d-bar8 d-bgc-primary">
+  <dt-mode-island ref="invertedExample" class="d-p16 d-bar8 d-bgc-primary">
     <p>Inverted mode (opposite of parent)</p>
   </dt-mode-island>
 </code-well-header>
 
 <code-example-tabs
-htmlCode='
-<div data-dt-mode="light" data-mode-island-inverted class="d-p16 d-bar8 d-bgc-primary">
-  <p>Inverted mode (opposite of parent)</p>
-</div>
-'
+:htmlCode='() => $refs.invertedExample'
 vueCode='
 <dt-mode-island class="d-p16 d-bar8 d-bgc-primary">
   <p>Inverted mode (opposite of parent)</p>
@@ -225,17 +221,13 @@ showHtmlWarning />
 Always light mode regardless of parent or root mode.
 
 <code-well-header>
-  <dt-mode-island mode="light" class="d-p16 d-bar8 d-bgc-primary">
+  <dt-mode-island ref="lightExample" mode="light" class="d-p16 d-bar8 d-bgc-primary">
     <p>Always light mode</p>
   </dt-mode-island>
 </code-well-header>
 
 <code-example-tabs
-htmlCode='
-<div data-dt-mode="light" class="d-p16 d-bar8 d-bgc-primary">
-  <p>Always light mode</p>
-</div>
-'
+:htmlCode='() => $refs.lightExample'
 vueCode='
 <dt-mode-island mode="light" class="d-p16 d-bar8 d-bgc-primary">
   <p>Always light mode</p>
@@ -248,17 +240,13 @@ showHtmlWarning />
 Always dark mode regardless of parent or root mode.
 
 <code-well-header>
-  <dt-mode-island mode="dark" class="d-p16 d-bar8 d-bgc-primary">
+  <dt-mode-island ref="darkExample" mode="dark" class="d-p16 d-bar8 d-bgc-primary">
     <p>Always dark mode</p>
   </dt-mode-island>
 </code-well-header>
 
 <code-example-tabs
-htmlCode='
-<div data-dt-mode="dark" class="d-p16 d-bar8 d-bgc-primary">
-  <p>Always dark mode</p>
-</div>
-'
+:htmlCode='() => $refs.darkExample'
 vueCode='
 <dt-mode-island mode="dark" class="d-p16 d-bar8 d-bgc-primary">
   <p>Always dark mode</p>
@@ -271,17 +259,13 @@ showHtmlWarning />
 Polymorphic rendering via `as` prop—controls which HTML element wraps content. Ensures proper document structure and semantic markup. Example values: `section` for thematic grouping, `article` for self-contained content. Defaults to `div` where semantics aren't a concern.
 
 <code-well-header>
-  <dt-mode-island as="section" mode="dark" class="d-p16 d-bar8 d-bgc-primary">
+  <dt-mode-island ref="sectionExample" as="section" mode="dark" class="d-p16 d-bar8 d-bgc-primary">
     <p>Rendered as section element</p>
   </dt-mode-island>
 </code-well-header>
 
 <code-example-tabs
-htmlCode='
-<section data-dt-mode="dark" class="d-p16 d-bar8 d-bgc-primary">
-  <p>Rendered as section element</p>
-</section>
-'
+:htmlCode='() => $refs.sectionExample'
 vueCode='
 <dt-mode-island as="section" mode="dark" class="d-p16 d-bar8 d-bgc-primary">
   <p>Rendered as section element</p>
@@ -296,7 +280,7 @@ showHtmlWarning />
 Mode islands can be nested, though should rarely occur.
 
 <code-well-header>
-  <dt-mode-island mode="light" class="d-p16 d-bar8 d-bgc-primary">
+  <dt-mode-island ref="nestingExample" mode="light" class="d-p16 d-bar8 d-bgc-primary">
     <p>Light island</p>
     <dt-mode-island class="d-p16 d-bar8 d-bgc-primary">
       <p>Inverted → Dark island</p>
@@ -308,6 +292,7 @@ Mode islands can be nested, though should rarely occur.
 </code-well-header>
 
 <code-example-tabs
+:htmlCode='() => $refs.nestingExample'
 vueCode='
 <dt-mode-island mode="light" class="d-p16 d-bar8 d-bgc-primary">
   <p>Light island</p>
