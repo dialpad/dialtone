@@ -203,19 +203,19 @@ The default mode, inverts the container relative to the parent or theme mode. If
 
 <code-well-header>
   <dt-mode-island class="d-p16 d-bar8 d-bgc-primary">
-    <p class="d-body--md">Inverted mode (opposite of parent)</p>
+    <p>Inverted mode (opposite of parent)</p>
   </dt-mode-island>
 </code-well-header>
 
 <code-example-tabs
 htmlCode='
-<div data-dt-theme="light" data-mode-island-inverted class="d-p16 d-bar8">
-  <p class="d-body--md">Inverted mode (opposite of parent)</p>
+<div data-dt-mode="light" data-mode-island-inverted class="d-p16 d-bar8 d-bgc-primary">
+  <p>Inverted mode (opposite of parent)</p>
 </div>
 '
 vueCode='
-<dt-mode-island class="d-p16 d-bar8">
-  <p class="d-body--md">Inverted mode (opposite of parent)</p>
+<dt-mode-island class="d-p16 d-bar8 d-bgc-primary">
+  <p>Inverted mode (opposite of parent)</p>
 </dt-mode-island>
 '
 showHtmlWarning />
@@ -226,19 +226,19 @@ Always light mode regardless of parent or root mode.
 
 <code-well-header>
   <dt-mode-island mode="light" class="d-p16 d-bar8 d-bgc-primary">
-    <p class="d-body--md">Always light mode</p>
+    <p>Always light mode</p>
   </dt-mode-island>
 </code-well-header>
 
 <code-example-tabs
 htmlCode='
-<div data-dt-theme="light" class="d-p16 d-bar8">
-  <p class="d-body--md">Always light mode</p>
+<div data-dt-mode="light" class="d-p16 d-bar8 d-bgc-primary">
+  <p>Always light mode</p>
 </div>
 '
 vueCode='
-<dt-mode-island mode="light" class="d-p16 d-bar8">
-  <p class="d-body--md">Always light mode</p>
+<dt-mode-island mode="light" class="d-p16 d-bar8 d-bgc-primary">
+  <p>Always light mode</p>
 </dt-mode-island>
 '
 showHtmlWarning />
@@ -249,19 +249,19 @@ Always dark mode regardless of parent or root mode.
 
 <code-well-header>
   <dt-mode-island mode="dark" class="d-p16 d-bar8 d-bgc-primary">
-    <p class="d-body--md">Always dark mode</p>
+    <p>Always dark mode</p>
   </dt-mode-island>
 </code-well-header>
 
 <code-example-tabs
 htmlCode='
-<div data-dt-theme="dark" class="d-p16 d-bar8">
-  <p class="d-body--md">Always dark mode</p>
+<div data-dt-mode="dark" class="d-p16 d-bar8 d-bgc-primary">
+  <p>Always dark mode</p>
 </div>
 '
 vueCode='
-<dt-mode-island mode="dark" class="d-p16 d-bar8">
-  <p class="d-body--md">Always dark mode</p>
+<dt-mode-island mode="dark" class="d-p16 d-bar8 d-bgc-primary">
+  <p>Always dark mode</p>
 </dt-mode-island>
 '
 showHtmlWarning />
@@ -272,19 +272,19 @@ Polymorphic rendering via `as` prop—controls which HTML element wraps content.
 
 <code-well-header>
   <dt-mode-island as="section" mode="dark" class="d-p16 d-bar8 d-bgc-primary">
-    <p class="d-body--md">Rendered as section element</p>
+    <p>Rendered as section element</p>
   </dt-mode-island>
 </code-well-header>
 
 <code-example-tabs
 htmlCode='
-<section data-dt-theme="dark" class="d-p16 d-bar8">
-  <p class="d-body--md">Rendered as section element</p>
+<section data-dt-mode="dark" class="d-p16 d-bar8 d-bgc-primary">
+  <p>Rendered as section element</p>
 </section>
 '
 vueCode='
-<dt-mode-island as="section" mode="dark" class="d-p16 d-bar8">
-  <p class="d-body--md">Rendered as section element</p>
+<dt-mode-island as="section" mode="dark" class="d-p16 d-bar8 d-bgc-primary">
+  <p>Rendered as section element</p>
 </dt-mode-island>
 '
 showHtmlWarning />
@@ -297,11 +297,11 @@ Mode islands can be nested, though should rarely occur.
 
 <code-well-header>
   <dt-mode-island mode="light" class="d-p16 d-bar8 d-bgc-primary">
-    <p class="d-body--md d-mb8">Light island</p>
+    <p>Light island</p>
     <dt-mode-island class="d-p16 d-bar8 d-bgc-primary">
-      <p class="d-body--md d-mb8">Inverted → Dark island</p>
+      <p>Inverted → Dark island</p>
       <dt-mode-island class="d-p16 d-bar4 d-bgc-primary">
-        <p class="d-body--md">Inverted again → Light island</p>
+        <p>Inverted again → Light island</p>
       </dt-mode-island>
     </dt-mode-island>
   </dt-mode-island>
@@ -309,12 +309,12 @@ Mode islands can be nested, though should rarely occur.
 
 <code-example-tabs
 vueCode='
-<dt-mode-island mode="dark" class="d-p16 d-bar8">
-  <p class="d-body--md d-mb8">Dark island</p>
-  <dt-mode-island mode="inverted" class="d-p16 d-bar8">
-    <p class="d-body--md d-mb8">Inverted → Light island</p>
-    <dt-mode-island mode="inverted" class="d-p16 d-bar8">
-      <p class="d-body--md">Inverted again → Dark island</p>
+<dt-mode-island mode="light" class="d-p16 d-bar8 d-bgc-primary">
+  <p>Light island</p>
+  <dt-mode-island class="d-p16 d-bar8 d-bgc-primary">
+    <p>Inverted → Dark island</p>
+    <dt-mode-island class="d-p16 d-bar4 d-bgc-primary">
+      <p>Inverted again → Light island</p>
     </dt-mode-island>
   </dt-mode-island>
 </dt-mode-island>
