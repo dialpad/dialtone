@@ -6,6 +6,9 @@
   "bin": {
     "dialtone-mcp-server": "build/index.js"
   },
+  "files": [
+    "build"
+  ],
   "scripts": {
     "build": "rollup -c",
     "start": "node build/index.js",

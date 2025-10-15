@@ -34,7 +34,7 @@
     "publish": {
       "executor": "nx:run-commands",
       "options": {
-        "command": "pnpm publish --filter ./packages/dialtone-mcp-server"
+        "command": "pnpm publish --filter ./packages/dialtone-mcp-server --access public"
       }
     },
     "release": {
