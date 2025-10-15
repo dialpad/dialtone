@@ -163,6 +163,26 @@ status: beta
 
 Mode islands create isolated sections that can display content in a different color mode. Useful for forcing specific themes on UI sections or inverting against the overall theme for visual hierarchy.
 
+### Structure
+
+<code-example-tabs
+vueCode='
+<dt-mode-island class="d-bgc-primary">
+  Inverted
+</dt-mode-island>
+<dt-mode-island mode="light" class="d-bgc-primary">
+  Light
+</dt-mode-island>
+<dt-mode-island mode="dark" class="d-bgc-primary">
+  Dark
+</dt-mode-island>
+'
+/>
+
+A contrasing color e.g. `d-bgc-primary`, must be applied. Otherwise its background will just be the same as the parent's.
+
+### Guidance
+
 <dialtone-usage>
 <template #do>
 
@@ -191,7 +211,7 @@ Inverted islands reactively track parent/root mode changes. User switches light 
 
 Contrast is not an option to set to a Mode Island. Contrast theme setting is inherited from the root element, i.e. `<html>`.
 
-### Brand Protection
+### Brand Theme Protection
 
 `data-dt-brand` (aka "Theme", e.g. "tmo", "sunflower", etc) can not be set on Mode Islands. Brand theme can only be set at root level.
 
@@ -277,7 +297,7 @@ showHtmlWarning />
 
 ## Nesting
 
-Mode islands can be nested, though should rarely occur.
+Mode islands may be nested, though should rarely occur.
 
 <code-well-header>
   <dt-mode-island ref="nestingExample" mode="light" class="d-p16 d-bar8 d-bgc-primary">
@@ -306,6 +326,397 @@ vueCode='
 '
 />
 
+## Examples
+
+Positioned components like [Popovers](/components/popover.html), [Dropdowns](/components/dropdown.html), and [Hovercards](/components/hovercard.html) are typically rendered at the root element of the DOM tree, and thus inherit the page's mode by default. They can be forced to a specific mode using Mode Islands.
+
+### Hovercard
+
+<code-well-header>
+  <dt-stack gap="400" direction="row">
+    <dt-hovercard padding="none" contentClass="d-body--sm" placement="top-start">
+      <!-- dialogClass, contentClass, padding -->
+      <template #anchor>
+        <dt-button size="sm" kind="muted" importance="outlined">Default </dt-button>
+      </template>
+      <template #content>
+        <div class="d-p16">
+          <dt-stack gap="500">
+            <dt-stack gap="400" class="d-jc-space-between">
+              <dt-stack gap="200">
+                <h2 class="d-headline--xl-compact">Katie Rodriguez</h2>
+                <dt-stack direction="row" gap="350">
+                  <span class="d-fc-success">Available</span>
+                  <span>&bull;</span>
+                  <span class="d-fc-tertiary">Working from coffee shop</span>
+                </dt-stack>
+              </dt-stack>
+              <dt-stack class="d-body--md-compact">
+                <span class="d-fw-semibold d-fc-tertiary">Chief Customer Success Officer</span>
+                <span><strong class="d-fw-semibold">6:19 am</strong> local time</span>
+              </dt-stack>
+            </dt-stack>
+            <dt-stack gap="400" direction="row" class="d-jc-space-between">
+              <dt-button class="d-fl1" kind="muted" importance="outlined">
+                <template #icon="{ iconSize }">
+                  <dt-icon-phone :size="iconSize" />
+                </template>
+                Call
+              </dt-button>
+              <dt-button class="d-fl1" kind="muted" importance="outlined">
+                <template #icon="{ iconSize }">
+                  <dt-icon-quick-reply :size="iconSize" />
+                </template>
+                Message
+              </dt-button>
+              <dt-button class="d-fl1" kind="muted" importance="outlined">
+                <template #icon="{ iconSize }">
+                  <dt-icon-video :size="iconSize" />
+                </template>
+                Meet
+              </dt-button>
+            </dt-stack>
+          </dt-stack>
+        </div>
+      </template>
+    </dt-hovercard>
+    <dt-hovercard padding="none" contentClass="d-body--sm" placement="top-start">
+      <!-- dialogClass, contentClass, padding -->
+      <template #anchor>
+        <dt-button size="sm" kind="muted" importance="outlined">Inverted </dt-button>
+      </template>
+      <template #content>
+        <dt-mode-island class="d-p16 d-bgc-primary">
+          <dt-stack gap="500">
+            <dt-stack gap="400" class="d-jc-space-between">
+              <dt-stack gap="200">
+                <h2 class="d-headline--xl-compact">Katie Rodriguez</h2>
+                <dt-stack direction="row" gap="350">
+                  <span class="d-fc-success">Available</span>
+                  <span>&bull;</span>
+                  <span class="d-fc-tertiary">Working from coffee shop</span>
+                </dt-stack>
+              </dt-stack>
+              <dt-stack class="d-body--md-compact">
+                <span class="d-fw-semibold d-fc-tertiary">Chief Customer Success Officer</span>
+                <span><strong class="d-fw-semibold">6:19 am</strong> local time</span>
+              </dt-stack>
+            </dt-stack>
+            <dt-stack gap="400" direction="row" class="d-jc-space-between">
+              <dt-button class="d-fl1" kind="muted" importance="outlined">
+                <template #icon="{ iconSize }">
+                  <dt-icon-phone :size="iconSize" />
+                </template>
+                Call
+              </dt-button>
+              <dt-button class="d-fl1" kind="muted" importance="outlined">
+                <template #icon="{ iconSize }">
+                  <dt-icon-quick-reply :size="iconSize" />
+                </template>
+                Message
+              </dt-button>
+              <dt-button class="d-fl1" kind="muted" importance="outlined">
+                <template #icon="{ iconSize }">
+                  <dt-icon-video :size="iconSize" />
+                </template>
+                Meet
+              </dt-button>
+            </dt-stack>
+          </dt-stack>
+        </dt-mode-island>
+      </template>
+    </dt-hovercard>
+    <dt-hovercard padding="none" contentClass="d-body--sm" placement="top-start">
+      <!-- dialogClass, contentClass, padding -->
+      <template #anchor>
+        <dt-button size="sm" kind="muted" importance="outlined">Light </dt-button>
+      </template>
+      <template #content>
+        <dt-mode-island mode="light" class="d-p16 d-bgc-primary">
+          <dt-stack gap="500">
+            <dt-stack gap="400" class="d-jc-space-between">
+              <dt-stack gap="200">
+                <h2 class="d-headline--xl-compact">Katie Rodriguez</h2>
+                <dt-stack direction="row" gap="350">
+                  <span class="d-fc-success">Available</span>
+                  <span>&bull;</span>
+                  <span class="d-fc-tertiary">Working from coffee shop</span>
+                </dt-stack>
+              </dt-stack>
+              <dt-stack class="d-body--md-compact">
+                <span class="d-fw-semibold d-fc-tertiary">Chief Customer Success Officer</span>
+                <span><strong class="d-fw-semibold">6:19 am</strong> local time</span>
+              </dt-stack>
+            </dt-stack>
+            <dt-stack gap="400" direction="row" class="d-jc-space-between">
+              <dt-button class="d-fl1" kind="muted" importance="outlined">
+                <template #icon="{ iconSize }">
+                  <dt-icon-phone :size="iconSize" />
+                </template>
+                Call
+              </dt-button>
+              <dt-button class="d-fl1" kind="muted" importance="outlined">
+                <template #icon="{ iconSize }">
+                  <dt-icon-quick-reply :size="iconSize" />
+                </template>
+                Message
+              </dt-button>
+              <dt-button class="d-fl1" kind="muted" importance="outlined">
+                <template #icon="{ iconSize }">
+                  <dt-icon-video :size="iconSize" />
+                </template>
+                Meet
+              </dt-button>
+            </dt-stack>
+          </dt-stack>
+        </dt-mode-island>
+      </template>
+    </dt-hovercard>
+    <dt-hovercard padding="none" contentClass="d-body--sm" placement="top-start">
+      <!-- dialogClass, contentClass, padding -->
+      <template #anchor>
+        <dt-button size="sm" kind="muted" importance="outlined">Dark </dt-button>
+      </template>
+      <template #content>
+        <dt-mode-island mode="dark" class="d-p16 d-bgc-primary">
+          <dt-stack gap="500">
+            <dt-stack gap="400" class="d-jc-space-between">
+              <dt-stack gap="200">
+                <h2 class="d-headline--xl-compact">Katie Rodriguez</h2>
+                <dt-stack direction="row" gap="350">
+                  <span class="d-fc-success">Available</span>
+                  <span>&bull;</span>
+                  <span class="d-fc-tertiary">Working from coffee shop</span>
+                </dt-stack>
+              </dt-stack>
+              <dt-stack class="d-body--md-compact">
+                <span class="d-fw-semibold d-fc-tertiary">Chief Customer Success Officer</span>
+                <span><strong class="d-fw-semibold">6:19 am</strong> local time</span>
+              </dt-stack>
+            </dt-stack>
+            <dt-stack gap="400" direction="row" class="d-jc-space-between">
+              <dt-button class="d-fl1" kind="muted" importance="outlined">
+                <template #icon="{ iconSize }">
+                  <dt-icon-phone :size="iconSize" />
+                </template>
+                Call
+              </dt-button>
+              <dt-button class="d-fl1" kind="muted" importance="outlined">
+                <template #icon="{ iconSize }">
+                  <dt-icon-quick-reply :size="iconSize" />
+                </template>
+                Message
+              </dt-button>
+              <dt-button class="d-fl1" kind="muted" importance="outlined">
+                <template #icon="{ iconSize }">
+                  <dt-icon-video :size="iconSize" />
+                </template>
+                Meet
+              </dt-button>
+            </dt-stack>
+          </dt-stack>
+        </dt-mode-island>
+      </template>
+    </dt-hovercard>
+  </dt-stack>
+</code-well-header>
+
+### Popover
+
+<code-well-header>
+  <dt-stack gap="400" direction="row">
+    <dt-popover padding="none" placement="top-start" dialogClass="d-w216">
+      <template #anchor>
+        <dt-button size="sm" kind="muted" importance="outlined"> Default </dt-button>
+      </template>
+      <template #content="{ close }">
+        <div class="d-p16">
+          <p>This is just a default Popover, and does not use Mode Island.</p>
+        </div>
+      </template>
+    </dt-popover>
+    <dt-popover padding="none" placement="top-start" dialogClass="d-w216">
+      <template #anchor>
+        <dt-button size="sm" kind="muted" importance="outlined"> Inverted </dt-button>
+      </template>
+      <template #content="{ close }">
+        <dt-mode-island mode="inverted" class="d-p16 d-bgc-secondary">
+          <p>This Popover's content is in the <strong>inverted</strong> mode.</p>
+        </dt-mode-island>
+      </template>
+    </dt-popover>
+    <dt-popover padding="none" placement="top-start" dialogClass="d-w216">
+      <template #anchor>
+        <dt-button size="sm" kind="muted" importance="outlined"> Light </dt-button>
+      </template>
+      <template #content="{ close }">
+        <dt-mode-island mode="light" class="d-p16 d-bgc-secondary">
+          <p>This Popover's content is in explicit <strong>light</strong> mode.</p>
+        </dt-mode-island>
+      </template>
+    </dt-popover>
+    <dt-popover padding="none" placement="top-start" dialogClass="d-w216">
+      <template #anchor>
+        <dt-button size="sm" kind="muted" importance="outlined"> Dark </dt-button>
+      </template>
+      <template #content="{ close }">
+        <dt-mode-island mode="dark" class="d-p16 d-bgc-secondary">
+          <p>This Popover's content is in explicit <strong>dark</strong> mode.</p>
+        </dt-mode-island>
+      </template>
+    </dt-popover>
+  </dt-stack>
+</code-well-header>
+
+### Dropdown
+
+<code-well-header>
+  <dt-stack gap="400" direction="row">
+    <dt-dropdown navigation-type="arrow-keys" placement="bottom-start">
+      <template #anchor="{ attrs }">
+        <dt-button v-bind="attrs" size="sm" kind="muted" importance="outlined" icon-position="right">
+          Default
+          <template #icon="{ iconSize }">
+            <dt-icon name="chevron-down" :size="iconSize" />
+          </template>
+        </dt-button>
+      </template>
+      <template #list="{ close }">
+        <dt-list-item
+          v-for="item in items"
+          :key="item.id"
+          role="menuitem"
+          :navigation-type="arrow - keys"
+          @click="close"
+        >
+          {{ item.name }}
+        </dt-list-item>
+      </template>
+    </dt-dropdown>
+    <dt-dropdown navigation-type="arrow-keys" placement="bottom-start" listClass="d-m0" padding="small">
+      <template #anchor="{ attrs }">
+        <dt-button v-bind="attrs" size="sm" kind="muted" importance="outlined" icon-position="right">
+          Inverted
+          <template #icon="{ iconSize }">
+            <dt-icon name="chevron-down" :size="iconSize" />
+          </template>
+        </dt-button>
+      </template>
+      <template #list="{ close }">
+        <dt-mode-island class="d-bgc-secondary d-p4">
+          <dt-list-item
+            v-for="item in items"
+            :key="item.id"
+            role="menuitem"
+            :navigation-type="arrow - keys"
+            @click="close"
+          >
+            {{ item.name }}
+          </dt-list-item>
+        </dt-mode-island>
+      </template>
+    </dt-dropdown>
+    <dt-dropdown navigation-type="arrow-keys" placement="bottom-start" listClass="d-m0" padding="small">
+      <template #anchor="{ attrs }">
+        <dt-button v-bind="attrs" size="sm" kind="muted" importance="outlined" icon-position="right">
+          Light
+          <template #icon="{ iconSize }">
+            <dt-icon name="chevron-down" :size="iconSize" />
+          </template>
+        </dt-button>
+      </template>
+      <template #list="{ close }">
+        <dt-mode-island mode="light" class="d-bgc-secondary d-p4">
+          <dt-list-item
+            v-for="item in items"
+            :key="item.id"
+            role="menuitem"
+            :navigation-type="arrow - keys"
+            @click="close"
+          >
+            {{ item.name }}
+          </dt-list-item>
+        </dt-mode-island>
+      </template>
+    </dt-dropdown>
+    <dt-dropdown navigation-type="arrow-keys" placement="bottom-start" listClass="d-m0" padding="small">
+      <template #anchor="{ attrs }">
+        <dt-button v-bind="attrs" size="sm" kind="muted" importance="outlined" icon-position="right">
+          Dark
+          <template #icon="{ iconSize }">
+            <dt-icon name="chevron-down" :size="iconSize" />
+          </template>
+        </dt-button>
+      </template>
+      <template #list="{ close }">
+        <dt-mode-island mode="dark" class="d-bgc-secondary d-p4">
+          <dt-list-item
+            v-for="item in items"
+            :key="item.id"
+            role="menuitem"
+            :navigation-type="arrow - keys"
+            @click="close"
+          >
+            {{ item.name }}
+          </dt-list-item>
+        </dt-mode-island>
+      </template>
+    </dt-dropdown>
+  </dt-stack>
+</code-well-header>
+
+### Callbar
+
+<code-well-header>
+  <dt-mode-island class="d-bgc-primary d-ba d-bc-subtle d-p8 d-py4 d-bar32 d-bs-md d-w100p">
+    <dt-stack direction="row" gap="600">
+      <dt-stack gap="400" direction="row">
+        <dt-avatar
+          full-name="TA"
+          color="700"
+          size="lg"
+        />
+        <dt-stack gap="200">
+          <span class="d-label--md-compact">Ted Anderson</span>
+          <dt-stack direction="row" gap="300" class="d-ai-baseline d-helper--sm d-fc-tertiary">
+            <span class="d-fvn-tabular d-ws-nowrap" >(913) 555-6745</span>
+            <span class="d-fc-muted">&bull;</span>
+            <span class="d-fvn-tabular">21:18</span>
+          </dt-stack>
+        </dt-stack>
+      </dt-stack>
+      <dt-stack class="d-fl1 d-jc-center" direction="row" gap="200">
+        <dt-button class="d-px8 d-w72" size="sm" kind="danger" icon-position="top">
+          <template #icon> <dt-icon name="mic" size="400" /> </template>
+          Unmute
+        </dt-button>
+        <dt-button class="d-px8 d-w72" size="sm" kind="muted" importance="clear" icon-position="top">
+          <template #icon> <dt-icon name="record-filled" size="400" /> </template>
+          Record
+        </dt-button>
+        <dt-button class="d-px8 d-w72" size="sm" kind="muted" importance="clear" icon-position="top">
+          <template #icon> <dt-icon name="keypad" size="400" /> </template>
+          Keypad
+        </dt-button>
+        <dt-button class="d-px8 d-w72" size="sm" kind="muted" importance="clear" icon-position="top">
+          <template #icon> <dt-icon name="user-plus" size="400" /> </template>
+          Add
+        </dt-button>
+        <dt-button class="d-px8 d-w72" size="sm" kind="muted" importance="clear" icon-position="top">
+          <template #icon> <dt-icon name="more-horizontal" size="400" /> </template>
+          More
+        </dt-button>
+      </dt-stack>
+      <dt-stack>
+        <dt-button class="d-p12" circle size="lg" kind="danger">
+          <template #icon> <dt-icon name="phone-hang-up" size="500" /> </template>
+        </dt-button>
+      </dt-stack>
+    </dt-stack>
+  </dt-mode-island>
+  <p class="d-fc-muted d-mt8">* Not real, still just an example</p>
+</code-well-header>
+
 ## Vue API
 
 <component-vue-api component-name="modeisland" />
@@ -315,8 +726,9 @@ vueCode='
 Purely visual. No semantic HTML impact. Supports high contrast mode via auto contrast inheritance.
 
 <script setup>
+import { DtIconPhone, DtIconQuickReply, DtIconVideo } from '@dialpad/dialtone-icons/vue3';
 import { useThemeManager } from '@composables/useThemeManager';
-
+import { ref } from 'vue';
 // Use theme manager composable without theme switching (mode + contrast only)
 const {
   currentMode,
@@ -325,4 +737,11 @@ const {
   setMode,
   setContrast,
 } = useThemeManager({ includeThemes: false });
+
+const items = ref([
+  { id: '1', name: 'Option 1' },
+  { id: '2', name: 'Option 2' },
+  { id: '3', name: 'Option 3' },
+]);
+
 </script>

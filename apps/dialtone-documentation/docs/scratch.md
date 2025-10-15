@@ -1294,8 +1294,9 @@ layout: Blank
 </dt-mode-island>
 
 <script setup>
-  import { inject, computed, onMounted, onUnmounted, ref } from 'vue';
+  import { onMounted, onUnmounted, ref } from 'vue';
   import { DtIconPhone, DtIconQuickReply, DtIconVideo } from '@dialpad/dialtone-icons/vue3';
+  import { useThemeManager } from '@composables/useThemeManager';
 
   const items = ref([
     { id: '1', name: 'Option 1' },
@@ -1303,23 +1304,19 @@ layout: Blank
     { id: '3', name: 'Option 3' },
   ]);
 
-  const currentMode = inject('currentMode');
-  const currentTheme = inject('currentTheme');
-  const currentContrast = inject('currentContrast');
-  const modes = ['system', 'light', 'dark'];
-  const themes = inject('themes');
-  const prefersDarkMediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
-
-  const currentModeIconName = computed(() => {
-    switch (currentMode.value) {
-      case 'dark':
-        return 'moon';
-      case 'light':
-        return 'sun';
-      default:
-        return 'circle-half-filled';
-    }
-  });
+  // Use theme manager composable with full theme switching
+  const {
+    currentMode,
+    currentTheme,
+    currentContrast,
+    currentModeIconName,
+    setMode,
+    setContrast,
+    setTheme,
+    namedThemes,
+    numberedThemes,
+    formatThemeName,
+  } = useThemeManager({ includeThemes: true });
 
   const toggleCallbar = () => {
     const el = document.getElementById('callbarr');
@@ -1337,114 +1334,12 @@ layout: Blank
     }
   };
 
-
-  const namedThemes = ['aegean', 'botany', 'buttercream', 'ceruleo', 'high-desert',
-                       'melon', 'plum', 'sunflower', 'verdant-haze'];
-
-  const numberedThemes = [
-    '101', '102', '103', '104', '105', '106', '107', '108', '109', '110',
-    '111', '112', '113', '114', '115', '116', '117', '118', '119', '120',
-    '121', '122', '123', '124', '125', '126', '127', '128', '129', '130',
-    '131', '132', '133', '134', '135', '136', '137',
-  ];
-
-  const formatThemeName = (name) => {
-    return name.split('-').map(word =>
-      word.charAt(0).toUpperCase() + word.slice(1),
-    ).join(' ');
-  };
-
-  const setTheme = (theme) => {
-    currentTheme.value = theme;
-    setCss();
-    localStorage.setItem('preferredTheme', theme);
-  };
-
-  const setMode = (mode) => {
-    currentMode.value = mode;
-    setCss();
-    localStorage.setItem('preferredMode', mode);
-  };
-
-  const setContrast = (contrast) => {
-    currentContrast.value = contrast;
-    setCss();
-    localStorage.setItem('preferredContrast', contrast);
-  };
-
-  const setCss = () => {
-    if (!modes.includes(currentMode.value)) {
-      currentMode.value = 'system';
-      localStorage.setItem('preferredMode', currentMode.value);
-    }
-
-    const mode = currentMode.value === 'system' ? (prefersDarkMediaQuery.matches ? 'dark' : 'light') : currentMode.value;
-    const brandName = currentTheme.value || 'dp';
-    const contrast = currentContrast.value || 'default';
-
-    document.documentElement.setAttribute('data-dt-mode', mode);
-    document.documentElement.setAttribute('data-dt-brand', brandName);
-    document.documentElement.setAttribute('data-dt-contrast', contrast);
-
-    // Update all elements in the DOM that have data-dt-mode with the current contrast
-    const elementsWithMode = document.querySelectorAll('[data-dt-mode]');
-    elementsWithMode.forEach(element => {
-      element.setAttribute('data-dt-contrast', contrast);
-    });
-
-    let brandOverrideTag = document.getElementById('dialtone-css-brand-override');
-
-    if (brandName === 'dp') {
-      if (brandOverrideTag) {
-        brandOverrideTag.remove();
-      }
-    } else {
-      const theme = themes[brandName];
-      if (theme && theme.brand && theme.brand.css) {
-        if (!brandOverrideTag) {
-          brandOverrideTag = document.createElement('style');
-          brandOverrideTag.id = 'dialtone-css-brand-override';
-          brandOverrideTag.type = 'text/css';
-          document.head.appendChild(brandOverrideTag);
-        }
-        brandOverrideTag.innerHTML = theme.brand.css;
-      }
-    }
-
-    let contrastTag = document.getElementById('dialtone-css-contrast');
-
-    if (contrast === 'high') {
-      const contrastTheme = themes['high-contrast'];
-      if (contrastTheme && contrastTheme.contrast && contrastTheme.contrast.css) {
-        if (!contrastTag) {
-          contrastTag = document.createElement('style');
-          contrastTag.id = 'dialtone-css-contrast';
-          contrastTag.type = 'text/css';
-          document.head.appendChild(contrastTag);
-        }
-        contrastTag.innerHTML = contrastTheme.contrast.css;
-      }
-    } else {
-      if (contrastTag) {
-        contrastTag.remove();
-      }
-    }
-  };
-
-
   onMounted(() => {
-    // Initialize the theme on page load
-    setCss();
-
-    // Listen for system theme changes
-    prefersDarkMediaQuery.addEventListener('change', setCss);
-
     // Listen for Shift + C keypress
     window.addEventListener('keydown', handleKeydown);
   });
 
   onUnmounted(() => {
-    prefersDarkMediaQuery.removeEventListener('change', setCss);
     window.removeEventListener('keydown', handleKeydown);
   });
 </script>
