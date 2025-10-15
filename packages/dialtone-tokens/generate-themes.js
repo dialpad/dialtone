@@ -33,6 +33,10 @@ export async function generateThemeFiles () {
     await generateThemeFile(theme, 'light');
   }
 
+  // Generate universal high-contrast themes for both light and dark
+  await generateHighContrastTheme('light');
+  await generateHighContrastTheme('dark');
+
   console.log('Theme files generation completed.');
 }
 
@@ -42,11 +46,7 @@ export async function generateThemeFiles () {
  * @param {string} mode - The mode (light or dark)
  */
 async function generateThemeFile (theme, mode) {
-  let fileName = `${theme}-${mode}.js`;
-
-  // Backwards compatibility to avoid breaking changes.
-  if (theme === 'deca') fileName = 'dp-' + fileName;
-
+  const fileName = `${theme}-${mode}.js`;
   const filePath = path.join(THEMES_OUTPUT_DIR, fileName);
 
   const content = `import Base from '@dialpad/dialtone-tokens/tokens-base-${mode}.css?inline';
@@ -66,4 +66,26 @@ export default {
 
   fs.writeFileSync(filePath, content);
   console.log(`Generated ${fileName.replace('.js', '')} theme`);
+}
+
+/**
+ * Generate the universal high-contrast theme file for a specific mode
+ * @param {string} mode - The mode (light or dark)
+ */
+async function generateHighContrastTheme (mode) {
+  const fileName = `high-contrast-${mode}.js`;
+  const filePath = path.join(THEMES_OUTPUT_DIR, fileName);
+  const cssFileName = mode === 'light' ? 'contrast-high-light' : 'contrast-high-dark';
+
+  const content = `import Contrast from '@dialpad/dialtone-tokens/tokens-${cssFileName}.css?inline';
+
+export default {
+  css: Contrast,
+  name: 'high',
+  mode: '${mode}',
+};
+`;
+
+  fs.writeFileSync(filePath, content);
+  console.log(`Generated high-contrast-${mode} theme`);
 }

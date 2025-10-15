@@ -1,0 +1,143 @@
+{
+  "color": {
+    "foreground": {
+      "primary": {
+        "value": "{color.black.1000}",
+        "type": "color"
+      },
+      "secondary": {
+        "value": "{color.black.900}",
+        "type": "color"
+      },
+      "tertiary": {
+        "value": "{color.black.800}",
+        "type": "color"
+      },
+      "muted": {
+        "value": "{color.black.1000}",
+        "type": "color"
+      },
+      "placeholder": {
+        "value": "{color.black.700}",
+        "type": "color"
+      },
+      "disabled": {
+        "value": "{color.black.700}",
+        "type": "color"
+      }
+    },
+    "border": {
+      "subtle": {
+        "value": "{color.black.1000}",
+        "type": "color",
+        "$extensions": {
+          "studio.tokens": {
+            "modify": {
+              "type": "alpha",
+              "value": ".50",
+              "space": "hsl"
+            }
+          }
+        }
+      },
+      "default": {
+        "value": "{color.black.1000}",
+        "type": "color",
+        "$extensions": {
+          "studio.tokens": {
+            "modify": {
+              "type": "alpha",
+              "value": ".66",
+              "space": "hsl"
+            }
+          }
+        }
+      },
+      "moderate": {
+        "value": "{color.black.1000}",
+        "type": "color",
+        "$extensions": {
+          "studio.tokens": {
+            "modify": {
+              "type": "alpha",
+              "value": ".85",
+              "space": "hsl"
+            }
+          }
+        }
+      },
+      "bold": {
+        "value": "{color.black.1000}",
+        "type": "color"
+      }
+    }
+  },
+  "action": {
+    "color": {
+      "border": {
+        "base": {
+          "default": {
+            "value": "{color.border.subtle}",
+            "type": "color"
+          }
+        },
+        "critical": {
+          "default": {
+            "value": "{color.border.subtle}",
+            "type": "color"
+          }
+        },
+        "inverted": {
+          "default": {
+            "value": "{color.border.subtle}",
+            "type": "color"
+          }
+        },
+        "muted": {
+          "default": {
+            "value": "{color.border.subtle}",
+            "type": "color"
+          }
+        },
+        "positive": {
+          "default": {
+            "value": "{color.border.subtle}",
+            "type": "color"
+          }
+        }
+      }
+    }
+  },
+  "shell": {
+    "color": {
+      "foreground": {
+        "primary": {
+          "value": "{shell.base.color.foreground}",
+          "type": "color"
+        },
+        "secondary": {
+          "value": "{shell.base.color.foreground}",
+          "type": "color"
+        },
+        "tertiary": {
+          "value": "{shell.base.color.foreground}",
+          "type": "color"
+        },
+        "muted": {
+          "value": "{shell.base.color.foreground}",
+          "type": "color"
+        }
+      },
+      "border": {
+        "subtle": {
+          "value": "{color.border.subtle}",
+          "type": "color"
+        },
+        "default": {
+          "value": "{color.border.default}",
+          "type": "color"
+        }
+      }
+    }
+  }
+}

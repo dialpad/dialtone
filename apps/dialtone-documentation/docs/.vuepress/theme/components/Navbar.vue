@@ -10,7 +10,7 @@
       v-for="link in items"
       :key="link.text"
       :to="link.link"
-      class="d-btn d-btn--muted d-fw-normal"
+      class="d-btn d-btn--muted dialtone-shell-btn"
       :class="{ 'd-btn--active': isActiveLink(link.text) }"
     >
       <span class="d-btn__label">{{ link.text }}</span>
@@ -19,7 +19,7 @@
   <dt-stack direction="row" gap="300">
     <a
       v-dt-tooltip="'Storybook'"
-      class="d-btn d-btn--muted d-btn--icon-only"
+      class="d-btn d-btn--muted d-btn--icon-only dialtone-shell-btn"
       href="https://dialtone.dialpad.com/vue"
       target="_blank"
       rel="noreferrer noopener"
@@ -58,7 +58,7 @@
     </a>
     <a
       v-dt-tooltip="'Github Repository'"
-      class="d-btn d-btn--muted d-btn--icon-only"
+      class="d-btn d-btn--muted d-btn--icon-only dialtone-shell-btn"
       href="https://github.com/dialpad/dialtone"
       target="_blank"
       rel="noreferrer noopener"
@@ -85,7 +85,7 @@
     </a>
     <a
       v-dt-tooltip="'Codepen Template'"
-      class="d-btn d-btn--muted d-btn--icon-only"
+      class="d-btn d-btn--muted d-btn--icon-only dialtone-shell-btn"
       href="https://codepen.io/pen?template=oNmoRqO"
       target="_blank"
       rel="noopener noreferrer"
@@ -117,32 +117,100 @@
         </svg>
       </span>
     </a>
-    <dt-button
-      v-dt-tooltip:bottom="`Mode: ${currentMode.charAt(0).toUpperCase() + currentMode.slice(1)} `"
-      importance="clear"
-      kind="muted"
-      @click="toggleMode"
-    >
-      <template #icon>
-        <dt-icon
-          size="400"
-          :name="currentModeIconName"
-        />
+    <dt-dropdown navigation-type="arrow-keys" placement="bottom-start">
+      <template #anchor>
+        <dt-button
+          v-dt-tooltip:bottom="`Mode: ${currentMode.charAt(0).toUpperCase() + currentMode.slice(1)} `"
+          importance="clear"
+          kind="muted"
+          class="dialtone-shell-btn"
+          @click="toggleHiddenThemeButton"
+        >
+          <template #icon>
+            <dt-icon
+              size="400"
+              :name="currentModeIconName"
+            />
+          </template>
+        </dt-button>
       </template>
-    </dt-button>
+      <template #list>
+        <dt-list-item-group
+          heading-class="d-py4 d-px8 d-c-default d-fc-tertiary d-label--sm"
+          heading="Mode"
+        >
+          <dt-list-item
+            role="menuitem"
+            navigation-type="arrow-keys"
+            @click="setMode('system')"
+          >
+            System
+            <template #right>
+              <dt-icon :class="{ 'd-o0': currentMode !== 'system' }" name="check" size="200" />
+            </template>
+          </dt-list-item>
+          <dt-list-item
+            role="menuitem"
+            navigation-type="arrow-keys"
+            @click="setMode('light')"
+          >
+            Light
+            <template #right>
+              <dt-icon :class="{ 'd-o0': currentMode !== 'light' }" name="check" size="200" />
+            </template>
+          </dt-list-item>
+          <dt-list-item
+            role="menuitem"
+            navigation-type="arrow-keys"
+            @click="setMode('dark')"
+          >
+            Dark
+            <template #right>
+              <dt-icon :class="{ 'd-o0': currentMode !== 'dark' }" name="check" size="200" />
+            </template>
+          </dt-list-item>
+        </dt-list-item-group>
+        <dt-dropdown-separator />
+        <dt-list-item-group
+          heading-class="d-py4 d-px8 d-c-default d-fc-tertiary d-label--sm"
+          heading="Contrast"
+        >
+          <dt-list-item
+            role="menuitem"
+            navigation-type="arrow-keys"
+            @click="setContrast('default')"
+          >
+            Default
+            <template #right>
+              <dt-icon :class="{ 'd-o0': currentContrast !== 'default' }" name="check" size="200" />
+            </template>
+          </dt-list-item>
+          <dt-list-item
+            role="menuitem"
+            navigation-type="arrow-keys"
+            @click="setContrast('high')"
+          >
+            High
+            <template #right>
+              <dt-icon :class="{ 'd-o0': currentContrast !== 'high' }" name="check" size="200" />
+            </template>
+          </dt-list-item>
+        </dt-list-item-group>
+      </template>
+    </dt-dropdown>
     <dt-button
+      id="theme-toggle-button"
       v-dt-tooltip:bottom="`Theme: ${currentTheme.charAt(0).toUpperCase() + currentTheme.slice(1)} `"
-      :circle="true"
+      hidden
+      class="theme-toggle-button dialtone-shell-btn"
       importance="clear"
       kind="muted"
-      hidden
       @click="toggleTheme"
     >
       <template #icon>
         <dt-icon
-          class="theme-toggle-button"
           size="400"
-          name="triangle"
+          name="satisfied-filled"
         />
       </template>
     </dt-button>
@@ -179,14 +247,16 @@ defineEmits(['search']);
 const route = useRoute();
 const currentMode = inject('currentMode');
 const currentTheme = inject('currentTheme');
+const currentContrast = inject('currentContrast');
 const modes = ['system', 'light', 'dark'];
 const themes = inject('themes');
-const excludedThemeNames = ['dp-deca', 'expressive'];
+const excludedThemeNames = ['expressive'];
 const prefersDarkMediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
 const themesKeys = Array.from(
   new Set(
     Object.keys(themes)
       .filter(key => !excludedThemeNames.some(exclusion => key.startsWith(exclusion)))
+      .filter(key => !key.startsWith('high-contrast')) // Exclude contrast themes from brand toggle
       .map(key => key.replace(/-(dark|light)/, '')),
   ),
 );
@@ -201,26 +271,47 @@ const currentModeIconName = computed(() => {
       return 'circle-half-filled';
   }
 });
+
 const isActiveLink = (text) => {
   const linkBase = text.toLowerCase();
   return route.path.search(linkBase) !== -1;
 };
 
-const toggleMode = () => {
-  const currentIndex = modes.indexOf(currentMode.value);
-  const nextIndex = (currentIndex + 1) % modes.length;
-  currentMode.value = modes[nextIndex];
-
-  setCss();
-  localStorage.setItem('preferredMode', currentMode.value);
+const createToggle = (stateRef, optionsArray, storageKey) => {
+  return () => {
+    const currentIndex = optionsArray.indexOf(stateRef.value);
+    const nextIndex = (currentIndex + 1) % optionsArray.length;
+    stateRef.value = optionsArray[nextIndex];
+    setCss();
+    localStorage.setItem(storageKey, stateRef.value);
+  };
 };
 
-const toggleTheme = () => {
-  const currentIndex = themesKeys.indexOf(currentTheme.value);
-  const nextIndex = (currentIndex + 1) % themesKeys.length;
-  currentTheme.value = themesKeys[nextIndex];
+const toggleTheme = createToggle(currentTheme, themesKeys, 'preferredTheme');
+
+const setMode = (mode) => {
+  currentMode.value = mode;
   setCss();
-  localStorage.setItem('preferredTheme', currentTheme.value);
+  localStorage.setItem('preferredMode', mode);
+};
+
+const setContrast = (contrast) => {
+  currentContrast.value = contrast;
+  setCss();
+  localStorage.setItem('preferredContrast', contrast);
+};
+
+const toggleHiddenThemeButton = (event) => {
+  if ((event.metaKey || event.ctrlKey) && event.shiftKey) {
+    const themeButton = document.getElementById('theme-toggle-button');
+    if (themeButton) {
+      if (themeButton.hasAttribute('hidden')) {
+        themeButton.removeAttribute('hidden');
+      } else {
+        themeButton.setAttribute('hidden', '');
+      }
+    }
+  }
 };
 
 const setCss = () => {
@@ -240,7 +331,17 @@ const setCss = () => {
     theme = themes[defaultTheme];
   }
 
-  setTheme(theme);
+  // Final safety check - if still no theme, don't proceed
+  if (!theme) {
+    console.error(`No theme available for mode [${mode}]. Available themes:`, Object.keys(themes));
+    return;
+  }
+
+  // Get mode-specific contrast theme if high contrast is enabled
+  const contrastTheme = currentContrast.value === 'high' ? themes[`high-contrast-${mode}`] : null;
+
+  // Single unified theme application
+  setTheme(theme, document.documentElement, contrastTheme);
 };
 
 onMounted(() => {
@@ -253,7 +354,7 @@ onUnmounted(() => {
 });
 </script>
 
-<style>
+<style scoped>
 .theme-toggle-button {
   color: var(--dt-shell-mention-color-surface-primary);
 }

@@ -22,7 +22,7 @@
   //  ------------------------------------------------------------------------
   --button-color-text: var(--dt-action-color-foreground-base-default);
   --button-color-background: var(--dt-action-color-background-base-default);
-  --button-color-border: transparent;
+  --button-color-border: var(--dt-action-color-border-base-default);
   --button-gap: calc(var(--button-padding-x) / 2);
   --button-border-radius: var(--dt-button-size-radius-md);
   --button-border-width: var(--dt-size-border-100);
@@ -307,6 +307,7 @@
 //  ----------------------------------------------------------------------------
 .d-btn--primary {
   --button-color-text: var(--dt-action-color-foreground-base-primary-default);
+  --button-color-border: var(--dt-action-color-border-base-default);
   --button-color-background: var(
     --dt-action-color-background-base-primary-default
   );
@@ -332,6 +333,7 @@
 //  ----------------------------------------------------------------------------
 .d-btn--muted {
   --button-color-text: var(--dt-action-color-foreground-muted-default);
+  --button-color-border: var(--dt-action-color-border-muted-default);
 
   &:hover:not([disabled]) {
     --button-color-text: var(--dt-action-color-foreground-muted-hover);
@@ -355,6 +357,7 @@
 .d-btn--danger {
   --button-color-text: var(--dt-action-color-foreground-critical-default);
   --button-color-background: var(--dt-action-color-background-critical-default);
+  --button-color-border: var(--dt-action-color-border-critical-default);
 
   &:hover:not([disabled]) {
     --button-color-text: var(--dt-action-color-foreground-critical-hover);
@@ -411,6 +414,7 @@
 .d-btn--positive {
   --button-color-text: var(--dt-action-color-foreground-positive-default);
   --button-color-background: var(--dt-action-color-background-positive-default);
+  --button-color-border: var(--dt-action-color-border-positive-default);
 
   &:hover:not([disabled]) {
     --button-color-text: var(--dt-action-color-foreground-positive-hover);
@@ -468,6 +472,7 @@
 .d-btn--inverted {
   --button-color-text: var(--dt-action-color-foreground-inverted-default);
   --button-color-background: var(--dt-action-color-background-inverted-default);
+  --button-color-border: var(--dt-action-color-border-inverted-default);
 
   &:hover:not([disabled]) {
     --button-color-text: var(--dt-action-color-foreground-inverted-hover);

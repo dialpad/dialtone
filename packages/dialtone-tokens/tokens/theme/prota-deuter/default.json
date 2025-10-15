@@ -2,10 +2,6 @@
   "shell": {
     "base": {
       "color": {
-        "surface": {
-          "value": "#EDF3FF",
-          "type": "color"
-        },
         "foreground": {
           "value": "{color.indigo.1000}",
           "type": "color"

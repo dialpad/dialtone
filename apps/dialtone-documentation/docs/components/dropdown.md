@@ -17,7 +17,7 @@ figma_url: https://www.figma.com/design/W58r5BkO8qTw3vem9YieJd/DT9-Component-Lib
     </template>
     <template #list="{ close }">
       <dt-list-item-group
-        heading-class="d-py4 d-px8 d-fw-semibold d-c-default"
+        heading-class="d-py4 d-px8 d-c-default d-fc-tertiary d-label--sm"
         heading="Menu Heading A"
       >
         <dt-list-item
@@ -38,7 +38,7 @@ figma_url: https://www.figma.com/design/W58r5BkO8qTw3vem9YieJd/DT9-Component-Lib
       </dt-list-item-group>
       <dt-dropdown-separator />
       <dt-list-item-group
-        heading-class="d-py4 d-px8 d-fw-semibold d-c-default"
+        heading-class="d-py4 d-px8 d-c-default d-fc-tertiary d-label--sm"
         heading="Menu Heading B"
       >
         <dt-list-item
@@ -148,7 +148,7 @@ vueCode='
     </template>
     <template #list="{ close }">
       <dt-list-item-group
-        heading-class="d-py4 d-px8 d-fw-semibold d-c-default"
+        heading-class="d-py4 d-px8 d-c-default d-fc-tertiary d-label--sm"
         heading="Menu Heading A"
       >
         <dt-list-item
@@ -169,7 +169,7 @@ vueCode='
       </dt-list-item-group>
       <dt-dropdown-separator />
       <dt-list-item-group
-        heading-class="d-py4 d-px8 d-fw-semibold d-c-default"
+        heading-class="d-py4 d-px8 d-c-default d-fc-tertiary d-label--sm"
         heading="Menu Heading B"
       >
         <dt-list-item
@@ -248,7 +248,7 @@ vueCode='
   </template>
   <template #list="{ close }">
     <dt-list-item-group
-      heading-class="d-py4 d-px8 d-fw-semibold d-c-default"
+      heading-class="d-py4 d-px8 d-c-default d-fc-tertiary d-label--sm"
       heading="Menu Heading A"
     >
       <dt-list-item
@@ -269,7 +269,7 @@ vueCode='
     </dt-list-item-group>
     <dt-dropdown-separator />
     <dt-list-item-group
-      heading-class="d-py4 d-px8 d-fw-semibold d-c-default"
+      heading-class="d-py4 d-px8 d-c-default d-fc-tertiary d-label--sm"
       heading="Menu Heading B"
     >
       <dt-list-item

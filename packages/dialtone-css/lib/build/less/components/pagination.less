@@ -8,6 +8,7 @@
 //  • BASE STYLE
 //  • PREV & NEXT BUTTONS
 //  • SEPARATOR
+//  • ITEM
 //
 //  ============================================================================
 //  $   BASE STYLE
@@ -15,7 +16,7 @@
 .d-pagination {
   display: flex;
   flex-direction: row;
-  grid-gap: var(--dt-space-300);
+  gap: var(--dt-space-200);
   align-items: center;
 }
 
@@ -23,12 +24,24 @@
 //  $   PREV & NEXT BUTTONS
 //  ----------------------------------------------------------------------------
 .d-pagination__button {
-  padding-inline: var(--dt-space-400) var(--dt-space-400);
+  padding-inline: var(--dt-space-400);
 
   &:disabled {
     color: var(--dt-color-foreground-secondary-inverted);
     background-color: var(--dt-color-neutral-transparent);
   }
+}
+
+//  ============================================================================
+//  $   ITEM
+//  ----------------------------------------------------------------------------
+.d-pagination__item {
+  font-variant-numeric: tabular-nums;
+}
+
+.d-pagination__item-label {
+  letter-spacing: var(--dt-space-100-negative);
+  padding-inline-end: var(--dt-space-100);
 }
 
 //  ============================================================================
