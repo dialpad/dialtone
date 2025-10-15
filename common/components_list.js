@@ -33,6 +33,7 @@ module.exports = [
   'list_item_group.vue',
   'loader.vue',
   'modal.vue',
+  'mode_island.vue',
   'notice.vue',
   'pagination.vue',
   'popover.vue',

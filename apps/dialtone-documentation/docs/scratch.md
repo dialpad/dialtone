@@ -221,7 +221,7 @@ layout: Blank
       <dt-stack gap="500">
         <strong class="d-code--md d-fs-400">(root)</strong>
         <p>Follows the root theme</p>
-        <dt-mode-island mode="dark" class="d-bgc-primary d-p8 d-bar8">
+        <dt-mode-island mode="dark" class="d-p8 d-bar8">
           <strong>Nested dark.</strong>
           <div class="d-body--sm d-p8 d-ba d-bc-subtle d-bgc-secondary">d-bgc-secondary</div>
           <div class="d-body--sm d-p8 d-ba d-bc-subtle d-bgc-critical">d-bgc-critical</div>
@@ -295,7 +295,7 @@ layout: Blank
                 <dt-button size="sm" kind="muted" importance="outlined"> Hovercard: default </dt-button>
               </template>
               <template #content>
-                <dt-mode-island class="d-p16 d-bgc-primary">
+                <dt-mode-island class="d-p16">
                   <dt-stack gap="500">
                     <dt-stack gap="400" class="d-jc-space-between">
                       <dt-stack gap="200">
@@ -341,7 +341,7 @@ layout: Blank
                 <dt-button size="sm" kind="muted" importance="outlined"> Hovercard: light </dt-button>
               </template>
               <template #content>
-                <dt-mode-island mode="light" class="d-p16 d-bgc-primary">
+                <dt-mode-island mode="light" class="d-p16">
                   <dt-stack gap="500">
                     <dt-stack gap="400" class="d-jc-space-between">
                       <dt-stack gap="200">
@@ -387,7 +387,7 @@ layout: Blank
                 <dt-button size="sm" kind="muted" importance="outlined"> Hovercard: dark </dt-button>
               </template>
               <template #content>
-                <dt-mode-island mode="dark" class="d-p16 d-bgc-primary">
+                <dt-mode-island mode="dark" class="d-p16">
                   <dt-stack gap="500">
                     <dt-stack gap="400" class="d-jc-space-between">
                       <dt-stack gap="200">
@@ -454,13 +454,13 @@ layout: Blank
         </dt-stack>
       </dt-stack>
     </div>
-    <dt-mode-island class="asdfasdfasdf d-fl1 d-p16 d-ba d-bc-subtle d-bar16 d-bgc-primary"
+    <dt-mode-island class="asdfasdfasdf d-fl1 d-p16 d-ba d-bc-subtle d-bar16"
       @click="$event.currentTarget.classList.toggle('asdfasdfasdf')"
     >
       <dt-stack gap="500">
         <strong class="d-code--md d-fs-400">mode="<strong>inverted</strong>"</strong>
         <p>Inverted relative to parent</p>
-        <dt-mode-island mode="dark" class="d-bgc-primary d-p8 d-bar8">
+        <dt-mode-island mode="dark" class="d-p8 d-bar8">
           <strong>Nested dark.</strong>
           <div class="d-body--sm d-p8 d-ba d-bc-subtle d-bgc-secondary">d-bgc-secondary</div>
           <div class="d-body--sm d-p8 d-ba d-bc-subtle d-bgc-critical">d-bgc-critical</div>
@@ -534,7 +534,7 @@ layout: Blank
                 <dt-button size="sm" kind="muted" importance="outlined"> Hovercard: default </dt-button>
               </template>
               <template #content>
-                <dt-mode-island class="d-p16 d-bgc-primary">
+                <dt-mode-island class="d-p16">
                   <dt-stack gap="500">
                     <dt-stack gap="400" class="d-jc-space-between">
                       <dt-stack gap="200">
@@ -580,7 +580,7 @@ layout: Blank
                 <dt-button size="sm" kind="muted" importance="outlined"> Hovercard: light </dt-button>
               </template>
               <template #content>
-                <dt-mode-island mode="light" class="d-p16 d-bgc-primary">
+                <dt-mode-island mode="light" class="d-p16">
                   <dt-stack gap="500">
                     <dt-stack gap="400" class="d-jc-space-between">
                       <dt-stack gap="200">
@@ -626,7 +626,7 @@ layout: Blank
                 <dt-button size="sm" kind="muted" importance="outlined"> Hovercard: dark </dt-button>
               </template>
               <template #content>
-                <dt-mode-island mode="dark" class="d-p16 d-bgc-primary">
+                <dt-mode-island mode="dark" class="d-p16">
                   <dt-stack gap="500">
                     <dt-stack gap="400" class="d-jc-space-between">
                       <dt-stack gap="200">
@@ -693,13 +693,13 @@ layout: Blank
         </dt-stack>
       </dt-stack>
     </dt-mode-island>
-    <dt-mode-island mode="dark" class="asdfasdfasdf d-fl1 d-p16 d-ba d-bc-subtle d-bar16 d-bgc-primary"
+    <dt-mode-island mode="dark" class="asdfasdfasdf d-fl1 d-p16 d-ba d-bc-subtle d-bar16"
       @click="$event.currentTarget.classList.toggle('asdfasdfasdf')"
     >
       <dt-stack gap="500">
         <strong class="d-code--md d-fs-400">mode="<strong>dark</strong>"</strong>
         <p>Always dark no matter the root theme</p>
-        <dt-mode-island mode="light" class="d-bgc-primary d-p8 d-bar8">
+        <dt-mode-island mode="light" class="d-p8 d-bar8">
           <strong>Nested light.</strong>
           <div class="d-body--sm d-p8 d-ba d-bc-subtle d-bgc-secondary">d-bgc-secondary</div>
           <div class="d-body--sm d-p8 d-ba d-bc-subtle d-bgc-critical">d-bgc-critical</div>
@@ -773,7 +773,7 @@ layout: Blank
                 <dt-button size="sm" kind="muted" importance="outlined"> Hovercard: default </dt-button>
               </template>
               <template #content>
-                <dt-mode-island class="d-p16 d-bgc-primary">
+                <dt-mode-island class="d-p16">
                   <dt-stack gap="500">
                     <dt-stack gap="400" class="d-jc-space-between">
                       <dt-stack gap="200">
@@ -819,7 +819,7 @@ layout: Blank
                 <dt-button size="sm" kind="muted" importance="outlined"> Hovercard: light </dt-button>
               </template>
               <template #content>
-                <dt-mode-island mode="light" class="d-p16 d-bgc-primary">
+                <dt-mode-island mode="light" class="d-p16">
                   <dt-stack gap="500">
                     <dt-stack gap="400" class="d-jc-space-between">
                       <dt-stack gap="200">
@@ -865,7 +865,7 @@ layout: Blank
                 <dt-button size="sm" kind="muted" importance="outlined"> Hovercard: dark </dt-button>
               </template>
               <template #content>
-                <dt-mode-island mode="dark" class="d-p16 d-bgc-primary">
+                <dt-mode-island mode="dark" class="d-p16">
                   <dt-stack gap="500">
                     <dt-stack gap="400" class="d-jc-space-between">
                       <dt-stack gap="200">
@@ -932,13 +932,13 @@ layout: Blank
         </dt-stack>
       </dt-stack>
     </dt-mode-island>
-    <dt-mode-island mode="light" class="asdfasdfasdf d-fl1 d-p16 d-ba d-bc-subtle d-bar16 d-bgc-primary"
+    <dt-mode-island mode="light" class="asdfasdfasdf d-fl1 d-p16 d-ba d-bc-subtle d-bar16"
       @click="$event.currentTarget.classList.toggle('asdfasdfasdf')"
     >
       <dt-stack gap="500">
         <strong class="d-code--md d-fs-400">mode="<strong>light</strong>"</strong>
         <p>Always light no matter the root theme</p>
-        <dt-mode-island mode="dark" class="d-bgc-primary d-p8 d-bar8">
+        <dt-mode-island mode="dark" class="d-p8 d-bar8">
           <strong>Nested dark.</strong>
           <div class="d-body--sm d-p8 d-ba d-bc-subtle d-bgc-secondary">d-bgc-secondary</div>
           <div class="d-body--sm d-p8 d-ba d-bc-subtle d-bgc-critical">d-bgc-critical</div>
@@ -1012,7 +1012,7 @@ layout: Blank
                 <dt-button size="sm" kind="muted" importance="outlined"> Hovercard: default </dt-button>
               </template>
               <template #content>
-                <dt-mode-island class="d-p16 d-bgc-primary">
+                <dt-mode-island class="d-p16">
                   <dt-stack gap="500">
                     <dt-stack gap="400" class="d-jc-space-between">
                       <dt-stack gap="200">
@@ -1058,7 +1058,7 @@ layout: Blank
                 <dt-button size="sm" kind="muted" importance="outlined"> Hovercard: light </dt-button>
               </template>
               <template #content>
-                <dt-mode-island mode="light" class="d-p16 d-bgc-primary">
+                <dt-mode-island mode="light" class="d-p16">
                   <dt-stack gap="500">
                     <dt-stack gap="400" class="d-jc-space-between">
                       <dt-stack gap="200">
@@ -1104,7 +1104,7 @@ layout: Blank
                 <dt-button size="sm" kind="muted" importance="outlined"> Hovercard: dark </dt-button>
               </template>
               <template #content>
-                <dt-mode-island mode="dark" class="d-p16 d-bgc-primary">
+                <dt-mode-island mode="dark" class="d-p16">
                   <dt-stack gap="500">
                     <dt-stack gap="400" class="d-jc-space-between">
                       <dt-stack gap="200">
@@ -1173,26 +1173,26 @@ layout: Blank
     </dt-mode-island>
   </dt-stack>
   <dt-mode-island
-    class="d-p16 d-ba d-bc-subtle d-bar8 d-bgc-primary asdfasdfasdf"
+    class="d-p16 d-ba d-bc-subtle d-bar8 asdfasdfasdf"
     @click="$event.currentTarget.classList.toggle('asdfasdfasdf')"
     >
     <p class="d-body--md d-mb16">
       This will invert relative to the parent mode.
     </p>
     <dt-mode-island
-      class="d-p16 d-ba d-bc-subtle d-bar8 d-bgc-primary"
+      class="d-p16 d-ba d-bc-subtle d-bar8"
     >
       <p class="d-body--md d-mb16">
         This nested island inverts the parent mode.
       </p>
       <dt-mode-island
-        class="d-p16 d-ba d-bc-subtle d-bar8 d-bgc-primary"
+        class="d-p16 d-ba d-bc-subtle d-bar8"
       >
         <p class="d-body--md d-mb16">
           This deeply nested island inverts again.
         </p>
         <dt-mode-island
-          class="d-p16 d-ba d-bc-subtle d-bar8 d-bgc-primary"
+          class="d-p16 d-ba d-bc-subtle d-bar8"
         >
           <p class="d-body--md">
             And invert again.

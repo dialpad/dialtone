@@ -15,7 +15,7 @@
         <h4 class="d-headline--md">
           Default (Inverted) Mode
         </h4>
-        <dt-mode-island class="d-p16 d-ba d-bc-subtle d-bar8 d-bgc-primary">
+        <dt-mode-island class="d-p16 d-ba d-bc-subtle d-bar8">
           <p class="d-body--md">
             This mode island inverts the current mode. If the root is light, this will be dark, and vice versa.
           </p>
@@ -30,7 +30,7 @@
         </h4>
         <dt-mode-island
           mode="light"
-          class="d-p16 d-ba d-bc-subtle d-bar8 d-bgc-primary"
+          class="d-p16 d-ba d-bc-subtle d-bar8"
         >
           <p class="d-body--md">
             This mode island is always in light mode, regardless of the root theme.
@@ -49,7 +49,7 @@
         </h4>
         <dt-mode-island
           mode="dark"
-          class="d-p16 d-ba d-bc-subtle d-bar8 d-bgc-primary"
+          class="d-p16 d-ba d-bc-subtle d-bar8"
         >
           <p class="d-body--md">
             This mode island is always in dark mode, regardless of the root theme.
@@ -67,27 +67,27 @@
           Nested Mode Islands
         </h4>
         <dt-mode-island
-          class="d-p16 d-ba d-bc-subtle d-bar8 d-bgc-primary"
+          class="d-p16 d-ba d-bc-subtle d-bar8"
         >
           <p class="d-body--md d-mb16">
             This will invert relative to the parent mode.
           </p>
 
           <dt-mode-island
-            class="d-p16 d-ba d-bc-subtle d-bar8 d-bgc-primary"
+            class="d-p16 d-ba d-bc-subtle d-bar8"
           >
             <p class="d-body--md d-mb16">
               This nested island inverts the parent mode.
             </p>
 
             <dt-mode-island
-              class="d-p16 d-ba d-bc-subtle d-bar8 d-bgc-primary"
+              class="d-p16 d-ba d-bc-subtle d-bar8"
             >
               <p class="d-body--md d-mb16">
                 This deeply nested island inverts again.
               </p>
               <dt-mode-island
-                class="d-p16 d-ba d-bc-subtle d-bar8 d-bgc-primary"
+                class="d-p16 d-ba d-bc-subtle d-bar8"
               >
                 <p class="d-body--md">
                   And invert again.
@@ -105,7 +105,7 @@
           gap="500"
         >
           <dt-mode-island
-            class="d-fl1 d-p16 d-ba d-bc-subtle d-bar8 d-bgc-primary"
+            class="d-fl1 d-p16 d-ba d-bc-subtle d-bar8"
           >
             <dt-stack gap="400">
               <p class="d-body--md d-fw-semibold">
@@ -122,7 +122,7 @@
 
           <dt-mode-island
             mode="light"
-            class="d-fl1 d-p16 d-ba d-bc-subtle d-bar8 d-bgc-primary"
+            class="d-fl1 d-p16 d-ba d-bc-subtle d-bar8"
           >
             <dt-stack gap="400">
               <p class="d-body--md d-fw-semibold">
@@ -139,7 +139,7 @@
 
           <dt-mode-island
             mode="dark"
-            class="d-fl1 d-p16 d-ba d-bc-subtle d-bar8 d-bgc-primary"
+            class="d-fl1 d-p16 d-ba d-bc-subtle d-bar8"
           >
             <dt-stack gap="400">
               <p class="d-body--md d-fw-semibold">
@@ -162,7 +162,7 @@
         <dt-mode-island
           as="section"
           mode="inverted"
-          class="d-p16 d-ba d-bc-subtle d-bar8 d-bgc-primary"
+          class="d-p16 d-ba d-bc-subtle d-bar8"
         >
           <p class="d-body--md">
             This mode island is rendered as a <code>&lt;section&gt;</code> element instead of a &lt;div&gt;.

@@ -1,6 +1,7 @@
 <template>
   <component
     :is="as"
+    class="d-mode-island"
     v-bind="$attrs"
     :data-dt-mode="computedMode"
     :data-mode-island-inverted="isInverted ? '' : null"

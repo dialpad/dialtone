@@ -95,7 +95,7 @@ status: beta
       </dt-dropdown>
     </dt-stack>
     <dt-stack :direction="{ 'default': 'column', 'md': 'row' }" gap="500" class="d-w100p">
-      <dt-mode-island class="d-p16 d-bar8 d-bgc-primary d-ba d-fl1">
+      <dt-mode-island class="d-p16 d-bar8 d-ba d-fl1">
         <dt-stack gap="400">
           <dt-stack direction="row" gap="400" class="d-jc-space-between">
             <h3 class="d-headline--md-compact">Inverted <span class="d-fw-normal">(auto)</span></h3>
@@ -115,7 +115,7 @@ status: beta
           </dt-stack>
         </dt-stack>
       </dt-mode-island>
-      <dt-mode-island mode="light" class="d-p16 d-bar8 d-bgc-primary d-ba d-fl1">
+      <dt-mode-island mode="light" class="d-p16 d-bar8 d-ba d-fl1">
         <dt-stack gap="400">
           <dt-stack direction="row" gap="400" class="d-jc-space-between">
             <h3 class="d-headline--md-compact">Explicit light</h3>
@@ -135,7 +135,7 @@ status: beta
           </dt-stack>
         </dt-stack>
       </dt-mode-island>
-      <dt-mode-island mode="dark" class="d-p16 d-bar8 d-bgc-primary d-ba d-fl1">
+      <dt-mode-island mode="dark" class="d-p16 d-bar8 d-ba d-fl1">
         <dt-stack gap="400">
           <dt-stack direction="row" gap="400" class="d-jc-space-between">
             <h3 class="d-headline--md-compact">Explicit dark</h3>
@@ -167,19 +167,17 @@ Mode islands create isolated sections that can display content in a different co
 
 <code-example-tabs
 vueCode='
-<dt-mode-island class="d-bgc-primary">
+<dt-mode-island>
   Inverted
 </dt-mode-island>
-<dt-mode-island mode="light" class="d-bgc-primary">
+<dt-mode-island mode="light">
   Light
 </dt-mode-island>
-<dt-mode-island mode="dark" class="d-bgc-primary">
+<dt-mode-island mode="dark">
   Dark
 </dt-mode-island>
 '
 />
-
-A contrasing color e.g. `d-bgc-primary`, must be applied. Otherwise its background will just be the same as the parent's.
 
 ### Guidance
 
@@ -222,7 +220,7 @@ Contrast is not an option to set to a Mode Island. Contrast theme setting is inh
 The default mode, inverts the container relative to the parent or theme mode. If `mode` attribute is omitted, it defaults to `inverted`.
 
 <code-well-header>
-  <dt-mode-island ref="invertedExample" class="d-p16 d-bar8 d-bgc-primary">
+  <dt-mode-island ref="invertedExample" class="d-p16 d-bar8">
     <p>Inverted mode (opposite of parent)</p>
   </dt-mode-island>
 </code-well-header>
@@ -230,7 +228,7 @@ The default mode, inverts the container relative to the parent or theme mode. If
 <code-example-tabs
 :htmlCode='() => $refs.invertedExample'
 vueCode='
-<dt-mode-island class="d-p16 d-bar8 d-bgc-primary">
+<dt-mode-island class="d-p16 d-bar8">
   <p>Inverted mode (opposite of parent)</p>
 </dt-mode-island>
 '
@@ -241,7 +239,7 @@ showHtmlWarning />
 Always light mode regardless of parent or root mode.
 
 <code-well-header>
-  <dt-mode-island ref="lightExample" mode="light" class="d-p16 d-bar8 d-bgc-primary">
+  <dt-mode-island ref="lightExample" mode="light" class="d-p16 d-bar8">
     <p>Always light mode</p>
   </dt-mode-island>
 </code-well-header>
@@ -249,7 +247,7 @@ Always light mode regardless of parent or root mode.
 <code-example-tabs
 :htmlCode='() => $refs.lightExample'
 vueCode='
-<dt-mode-island mode="light" class="d-p16 d-bar8 d-bgc-primary">
+<dt-mode-island mode="light" class="d-p16 d-bar8">
   <p>Always light mode</p>
 </dt-mode-island>
 '
@@ -260,7 +258,7 @@ showHtmlWarning />
 Always dark mode regardless of parent or root mode.
 
 <code-well-header>
-  <dt-mode-island ref="darkExample" mode="dark" class="d-p16 d-bar8 d-bgc-primary">
+  <dt-mode-island ref="darkExample" mode="dark" class="d-p16 d-bar8">
     <p>Always dark mode</p>
   </dt-mode-island>
 </code-well-header>
@@ -268,7 +266,7 @@ Always dark mode regardless of parent or root mode.
 <code-example-tabs
 :htmlCode='() => $refs.darkExample'
 vueCode='
-<dt-mode-island mode="dark" class="d-p16 d-bar8 d-bgc-primary">
+<dt-mode-island mode="dark" class="d-p16 d-bar8">
   <p>Always dark mode</p>
 </dt-mode-island>
 '
@@ -279,7 +277,7 @@ showHtmlWarning />
 Polymorphic rendering via `as` prop—controls which HTML element wraps content. Ensures proper document structure and semantic markup. Example values: `section` for thematic grouping, `article` for self-contained content. Defaults to `div` where semantics aren't a concern.
 
 <code-well-header>
-  <dt-mode-island ref="sectionExample" as="section" mode="dark" class="d-p16 d-bar8 d-bgc-primary">
+  <dt-mode-island ref="sectionExample" as="section" mode="dark" class="d-p16 d-bar8">
     <p>Rendered as section element</p>
   </dt-mode-island>
 </code-well-header>
@@ -287,7 +285,7 @@ Polymorphic rendering via `as` prop—controls which HTML element wraps content.
 <code-example-tabs
 :htmlCode='() => $refs.sectionExample'
 vueCode='
-<dt-mode-island as="section" mode="dark" class="d-p16 d-bar8 d-bgc-primary">
+<dt-mode-island as="section" mode="dark" class="d-p16 d-bar8">
   <p>Rendered as section element</p>
 </dt-mode-island>
 '
@@ -300,11 +298,11 @@ showHtmlWarning />
 Mode islands may be nested, though should rarely occur.
 
 <code-well-header>
-  <dt-mode-island ref="nestingExample" mode="light" class="d-p16 d-bar8 d-bgc-primary">
+  <dt-mode-island ref="nestingExample" mode="light" class="d-p16 d-bar8">
     <p>Light island</p>
-    <dt-mode-island class="d-p16 d-bar8 d-bgc-primary">
+    <dt-mode-island class="d-p16 d-bar8">
       <p>Inverted → Dark island</p>
-      <dt-mode-island class="d-p16 d-bar4 d-bgc-primary">
+      <dt-mode-island class="d-p16 d-bar4">
         <p>Inverted again → Light island</p>
       </dt-mode-island>
     </dt-mode-island>
@@ -314,11 +312,11 @@ Mode islands may be nested, though should rarely occur.
 <code-example-tabs
 :htmlCode='() => $refs.nestingExample'
 vueCode='
-<dt-mode-island mode="light" class="d-p16 d-bar8 d-bgc-primary">
+<dt-mode-island mode="light" class="d-p16 d-bar8">
   <p>Light island</p>
-  <dt-mode-island class="d-p16 d-bar8 d-bgc-primary">
+  <dt-mode-island class="d-p16 d-bar8">
     <p>Inverted → Dark island</p>
-    <dt-mode-island class="d-p16 d-bar4 d-bgc-primary">
+    <dt-mode-island class="d-p16 d-bar4">
       <p>Inverted again → Light island</p>
     </dt-mode-island>
   </dt-mode-island>
@@ -335,12 +333,11 @@ Positioned components like [Popovers](/components/popover.html), [Dropdowns](/co
 <code-well-header>
   <dt-stack gap="400" direction="row">
     <dt-hovercard ref="hovercardDefault" padding="none" contentClass="d-body--sm" placement="top-start">
-      <!-- dialogClass, contentClass, padding -->
       <template #anchor>
         <dt-button size="sm" kind="muted" importance="outlined">Default </dt-button>
       </template>
       <template #content>
-        <div class="d-p16">
+        <div class="d-p16 d-bgc-secondary">
           <dt-stack gap="500">
             <dt-stack gap="400" class="d-jc-space-between">
               <dt-stack gap="200">
@@ -381,12 +378,11 @@ Positioned components like [Popovers](/components/popover.html), [Dropdowns](/co
       </template>
     </dt-hovercard>
     <dt-hovercard padding="none" contentClass="d-body--sm" placement="top-start">
-      <!-- dialogClass, contentClass, padding -->
       <template #anchor>
         <dt-button size="sm" kind="muted" importance="outlined">Inverted </dt-button>
       </template>
       <template #content>
-        <dt-mode-island class="d-p16 d-bgc-primary">
+        <dt-mode-island class="d-p16 d-bgc-secondary">
           <dt-stack gap="500">
             <dt-stack gap="400" class="d-jc-space-between">
               <dt-stack gap="200">
@@ -427,12 +423,11 @@ Positioned components like [Popovers](/components/popover.html), [Dropdowns](/co
       </template>
     </dt-hovercard>
     <dt-hovercard padding="none" contentClass="d-body--sm" placement="top-start">
-      <!-- dialogClass, contentClass, padding -->
       <template #anchor>
         <dt-button size="sm" kind="muted" importance="outlined">Light </dt-button>
       </template>
       <template #content>
-        <dt-mode-island mode="light" class="d-p16 d-bgc-primary">
+        <dt-mode-island mode="light" class="d-p16 d-bgc-secondary">
           <dt-stack gap="500">
             <dt-stack gap="400" class="d-jc-space-between">
               <dt-stack gap="200">
@@ -473,12 +468,11 @@ Positioned components like [Popovers](/components/popover.html), [Dropdowns](/co
       </template>
     </dt-hovercard>
     <dt-hovercard padding="none" contentClass="d-body--sm" placement="top-start">
-      <!-- dialogClass, contentClass, padding -->
       <template #anchor>
         <dt-button size="sm" kind="muted" importance="outlined">Dark </dt-button>
       </template>
       <template #content>
-        <dt-mode-island mode="dark" class="d-p16 d-bgc-primary">
+        <dt-mode-island mode="dark" class="d-p16 d-bgc-secondary">
           <dt-stack gap="500">
             <dt-stack gap="400" class="d-jc-space-between">
               <dt-stack gap="200">
@@ -529,7 +523,7 @@ vueCode='
     <dt-button size="sm" kind="muted" importance="outlined">Inverted</dt-button>
   </template>
   <template #content>
-    <dt-mode-island class="d-p16 d-bgc-primary">
+    <dt-mode-island class="d-p16 d-bgc-secondary">
       <!-- Content with inverted mode -->
     </dt-mode-island>
   </template>
@@ -728,7 +722,7 @@ showHtmlWarning />
 ### Callbar
 
 <code-well-header>
-  <dt-mode-island ref="callbarExample" class="d-bgc-primary d-ba d-bc-subtle d-p8 d-py4 d-bar32 d-bs-md d-w100p">
+  <dt-mode-island ref="callbarExample" class="d-ba d-bc-subtle d-p8 d-py4 d-bar32 d-bs-md d-w100p">
     <dt-stack direction="row" gap="600">
       <dt-stack gap="400" direction="row">
         <dt-avatar
@@ -780,7 +774,7 @@ showHtmlWarning />
 <code-example-tabs
 :htmlCode='() => $refs.callbarExample'
 vueCode='
-<dt-mode-island class="d-bgc-primary d-ba d-bc-subtle d-p8 d-py4 d-bar32 d-bs-md d-w100p">
+<dt-mode-island class="d-ba d-bc-subtle d-p8 d-py4 d-bar32 d-bs-md d-w100p">
   <dt-stack direction="row" gap="600">
     <dt-stack gap="400" direction="row">
       <dt-avatar full-name="TA" color="700" size="lg" />
