@@ -19,7 +19,7 @@
   <dt-stack direction="row" gap="300">
     <a
       v-dt-tooltip="'Storybook'"
-      class="d-btn d-btn--muted d-btn--icon-only dialtone-shell-btn"
+      class="d-btn d-btn--muted d-btn--icon-only dialtone-shell-btn dialtone-shell-btn"
       href="https://dialtone.dialpad.com/vue"
       target="_blank"
       rel="noreferrer noopener"

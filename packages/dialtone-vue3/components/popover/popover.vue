@@ -7,6 +7,7 @@
     >
       <div
         class="d-modal--transparent"
+        aria-hidden="false"
         @click.prevent.stop
       />
     </Teleport>

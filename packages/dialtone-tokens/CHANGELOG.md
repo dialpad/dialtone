@@ -1,3 +1,18 @@
+# [1.48.0-next.2](https://github.com/dialpad/dialtone/compare/dialtone-tokens/v1.48.0-next.1...dialtone-tokens/v1.48.0-next.2) (2025-10-15)
+
+
+### Features
+
+* **Tokens:** DLT-1977 add high contrast design tokens and theme ([#938](https://github.com/dialpad/dialtone/issues/938)) ([a1c0457](https://github.com/dialpad/dialtone/commit/a1c0457e3b6b445e3f54d76b9ce3b847abc31ac5))
+
+# [1.48.0-next.1](https://github.com/dialpad/dialtone/compare/dialtone-tokens/v1.47.1...dialtone-tokens/v1.48.0-next.1) (2025-10-08)
+
+
+### Features
+
+* **Tokens:** DLT-2767 exploratory shell themes ([#909](https://github.com/dialpad/dialtone/issues/909)) ([3afcf63](https://github.com/dialpad/dialtone/commit/3afcf637d136733ff2f981a9ebbb63a3c4a37c99))
+* **Tokens:** DLT-2781 create color-assistive themes ([#921](https://github.com/dialpad/dialtone/issues/921)) ([a6cc397](https://github.com/dialpad/dialtone/commit/a6cc397bec52987f9ac2c3efca9b16f61c406807))
+
 ## [1.47.1](https://github.com/dialpad/dialtone/compare/dialtone-tokens/v1.47.0...dialtone-tokens/v1.47.1) (2025-10-06)
 
 

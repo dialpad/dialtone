@@ -1,3 +1,4 @@
+/* eslint-disable complexity */
 // Track if core tokens are loaded (for layered system)
 let coreTokensLoaded = false;
 
