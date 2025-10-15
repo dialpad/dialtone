@@ -315,95 +315,14 @@ vueCode='
 Purely visual. No semantic HTML impact. Supports high contrast mode via auto contrast inheritance.
 
 <script setup>
-import { inject, computed, onMounted, onUnmounted } from 'vue';
+import { useThemeManager } from '@composables/useThemeManager';
 
-const currentMode = inject('currentMode');
-const currentTheme = inject('currentTheme');
-const currentContrast = inject('currentContrast');
-const themes = inject('themes');
-const modes = ['system', 'light', 'dark'];
-const prefersDarkMediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
-
-const currentModeIconName = computed(() => {
-  switch (currentMode.value) {
-    case 'dark':
-      return 'moon';
-    case 'light':
-      return 'sun';
-    default:
-      return 'circle-half-filled';
-  }
-});
-
-const setMode = (mode) => {
-  currentMode.value = mode;
-  setCss();
-  localStorage.setItem('preferredMode', mode);
-};
-
-const setContrast = (contrast) => {
-  currentContrast.value = contrast;
-  setCss();
-  localStorage.setItem('preferredContrast', contrast);
-};
-
-const setCss = () => {
-  if (!modes.includes(currentMode.value)) {
-    currentMode.value = 'system';
-    localStorage.setItem('preferredMode', currentMode.value);
-  }
-
-  const mode = currentMode.value === 'system' ? (prefersDarkMediaQuery.matches ? 'dark' : 'light') : currentMode.value;
-  const brandName = currentTheme.value || 'dp';
-  const contrast = currentContrast.value || 'default';
-
-  document.documentElement.setAttribute('data-dt-mode', mode);
-  document.documentElement.setAttribute('data-dt-brand', brandName);
-  document.documentElement.setAttribute('data-dt-contrast', contrast);
-
-  let brandOverrideTag = document.getElementById('dialtone-css-brand-override');
-  if (brandName === 'dp') {
-    if (brandOverrideTag) {
-      brandOverrideTag.remove();
-    }
-  } else {
-    const theme = themes && themes[brandName];
-    if (theme && theme.brand && theme.brand.css) {
-      if (!brandOverrideTag) {
-        brandOverrideTag = document.createElement('style');
-        brandOverrideTag.id = 'dialtone-css-brand-override';
-        brandOverrideTag.type = 'text/css';
-        document.head.appendChild(brandOverrideTag);
-      }
-      brandOverrideTag.innerHTML = theme.brand.css;
-    }
-  }
-
-  let contrastTag = document.getElementById('dialtone-css-contrast');
-  if (contrast === 'high') {
-    const contrastTheme = themes && themes['high-contrast'];
-    if (contrastTheme && contrastTheme.contrast && contrastTheme.contrast.css) {
-      if (!contrastTag) {
-        contrastTag = document.createElement('style');
-        contrastTag.id = 'dialtone-css-contrast';
-        contrastTag.type = 'text/css';
-        document.head.appendChild(contrastTag);
-      }
-      contrastTag.innerHTML = contrastTheme.contrast.css;
-    }
-  } else {
-    if (contrastTag) {
-      contrastTag.remove();
-    }
-  }
-};
-
-onMounted(() => {
-  setCss();
-  prefersDarkMediaQuery.addEventListener('change', setCss);
-});
-
-onUnmounted(() => {
-  prefersDarkMediaQuery.removeEventListener('change', setCss);
-});
+// Use theme manager composable without theme switching (mode + contrast only)
+const {
+  currentMode,
+  currentContrast,
+  currentModeIconName,
+  setMode,
+  setContrast,
+} = useThemeManager({ includeThemes: false });
 </script>

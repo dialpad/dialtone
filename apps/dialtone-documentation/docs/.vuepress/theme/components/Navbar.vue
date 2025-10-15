@@ -333,9 +333,8 @@
 </template>
 
 <script setup>
-/* eslint-disable complexity */
 import { useRoute } from 'vue-router';
-import { onMounted, onUnmounted, inject, computed } from 'vue';
+import { useThemeManager } from '../composables/useThemeManager';
 
 defineProps({
   items: {
@@ -346,59 +345,22 @@ defineProps({
 defineEmits(['search']);
 
 const route = useRoute();
-const currentMode = inject('currentMode');
-const currentTheme = inject('currentTheme');
-const currentContrast = inject('currentContrast');
-const modes = ['system', 'light', 'dark'];
-const themes = inject('themes');
-const layeredTokensEnabled = inject('layeredTokensEnabled', false);
-const excludedThemeNames = ['expressive'];
-const prefersDarkMediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
 
-// For layered system, use ALL 51 themes in a logical order
-const themesKeys = layeredTokensEnabled
-  ? [
-      // Base theme
-      'dp',
-      // Partner themes
-      'tmo',
-      // Color assistive themes
-      'prota-deuter', 'trita',
-      // Named themes (alphabetical)
-      'aegean', 'botany', 'buttercream', 'ceruleo', 'high-desert',
-      'melon', 'plum', 'sunflower', 'verdant-haze',
-      // Numbered themes (not yet named)
-      '101', '102', '103', '104', '105', '106', '107', '108', '109', '110',
-      '111', '112', '113', '114', '115', '116', '117', '118', '119', '120',
-      '121', '122', '123', '124', '125', '126', '127', '128', '129', '130',
-      '131', '132', '133', '134', '135', '136', '137',
-    ]
-  : Array.from(
-      new Set(
-        Object.keys(themes)
-          .filter(key => !excludedThemeNames.some(exclusion => key.startsWith(exclusion)))
-          .filter(key => !key.startsWith('high-contrast'))
-          .map(key => key.replace(/-(dark|light)/, '')),
-      ),
-    );
-
-const currentModeIconName = computed(() => {
-  switch (currentMode.value) {
-    case 'dark':
-      return 'moon';
-    case 'light':
-      return 'sun';
-    default:
-      return 'circle-half-filled';
-  }
-});
+// Use theme manager composable with theme switching enabled
+const {
+  currentMode,
+  currentTheme,
+  currentContrast,
+  currentModeIconName,
+  setMode,
+  setContrast,
+  setTheme,
+} = useThemeManager({ includeThemes: true });
 
 const isActiveLink = (text) => {
   const linkBase = text.toLowerCase();
   return route.path.search(linkBase) !== -1;
 };
-
-// Removed unused toggleTheme - now using dropdown with setTheme()
 
 // Helper arrays for the dropdown menu
 const namedThemes = ['aegean', 'botany', 'buttercream', 'ceruleo', 'high-desert',
@@ -417,100 +379,6 @@ const formatThemeName = (name) => {
     word.charAt(0).toUpperCase() + word.slice(1),
   ).join(' ');
 };
-
-const setTheme = (theme) => {
-  currentTheme.value = theme;
-  setCss();
-  localStorage.setItem('preferredTheme', theme);
-};
-
-const setMode = (mode) => {
-  currentMode.value = mode;
-  setCss();
-  localStorage.setItem('preferredMode', mode);
-};
-
-const setContrast = (contrast) => {
-  currentContrast.value = contrast;
-  setCss();
-  localStorage.setItem('preferredContrast', contrast);
-};
-
-const setCss = () => {
-  if (!modes.includes(currentMode.value)) {
-    currentMode.value = 'system';
-    localStorage.setItem('preferredMode', currentMode.value);
-  }
-
-  const mode = currentMode.value === 'system' ? (prefersDarkMediaQuery.matches ? 'dark' : 'light') : currentMode.value;
-  const brandName = currentTheme.value || 'dp';
-  const contrast = currentContrast.value || 'default';
-
-  // Set HTML attributes (required for CSS selectors to work)
-  document.documentElement.setAttribute('data-dt-mode', mode);
-  document.documentElement.setAttribute('data-dt-brand', brandName);
-  document.documentElement.setAttribute('data-dt-contrast', contrast);
-
-  // Manage brand override style tag
-  let brandOverrideTag = document.getElementById('dialtone-css-brand-override');
-
-  if (brandName === 'dp') {
-    // DP is the base theme - remove override if it exists
-    if (brandOverrideTag) {
-      brandOverrideTag.remove();
-    }
-  } else {
-    // Load theme-specific overrides on top of DP
-    const theme = themes[brandName];
-    if (theme && theme.brand && theme.brand.css) {
-      if (!brandOverrideTag) {
-        brandOverrideTag = document.createElement('style');
-        brandOverrideTag.id = 'dialtone-css-brand-override';
-        brandOverrideTag.type = 'text/css';
-        document.head.appendChild(brandOverrideTag);
-      }
-      brandOverrideTag.innerHTML = theme.brand.css;
-    }
-  }
-
-  // Manage high contrast style tag
-  let contrastTag = document.getElementById('dialtone-css-contrast');
-
-  if (contrast === 'high') {
-    const contrastTheme = themes['high-contrast'];
-    if (contrastTheme && contrastTheme.contrast && contrastTheme.contrast.css) {
-      if (!contrastTag) {
-        contrastTag = document.createElement('style');
-        contrastTag.id = 'dialtone-css-contrast';
-        contrastTag.type = 'text/css';
-        document.head.appendChild(contrastTag);
-      }
-      contrastTag.innerHTML = contrastTheme.contrast.css;
-    }
-  } else {
-    // Remove contrast override when not needed
-    if (contrastTag) {
-      contrastTag.remove();
-    }
-  }
-
-  // Show helpful info about current theme
-  const themeIndex = themesKeys.indexOf(brandName) + 1;
-  const totalThemes = themesKeys.length;
-  console.log(`Theme ${themeIndex}/${totalThemes}: ${brandName}, Mode: ${mode}, Contrast: ${contrast}`);
-};
-
-onMounted(() => {
-  // Initialize the theme on page load
-  setCss();
-
-  // Listen for system theme changes
-  prefersDarkMediaQuery.addEventListener('change', setCss);
-});
-
-onUnmounted(() => {
-  prefersDarkMediaQuery.removeEventListener('change', setCss);
-});
 </script>
 
 <style scoped>
