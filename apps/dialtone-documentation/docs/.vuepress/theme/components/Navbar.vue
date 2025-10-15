@@ -355,29 +355,14 @@ const {
   setMode,
   setContrast,
   setTheme,
+  namedThemes,
+  numberedThemes,
+  formatThemeName,
 } = useThemeManager({ includeThemes: true });
 
 const isActiveLink = (text) => {
   const linkBase = text.toLowerCase();
   return route.path.search(linkBase) !== -1;
-};
-
-// Helper arrays for the dropdown menu
-const namedThemes = ['aegean', 'botany', 'buttercream', 'ceruleo', 'high-desert',
-                     'melon', 'plum', 'sunflower', 'verdant-haze'];
-
-const numberedThemes = [
-  '101', '102', '103', '104', '105', '106', '107', '108', '109', '110',
-  '111', '112', '113', '114', '115', '116', '117', '118', '119', '120',
-  '121', '122', '123', '124', '125', '126', '127', '128', '129', '130',
-  '131', '132', '133', '134', '135', '136', '137',
-];
-
-// Format theme names for display
-const formatThemeName = (name) => {
-  return name.split('-').map(word =>
-    word.charAt(0).toUpperCase() + word.slice(1),
-  ).join(' ');
 };
 </script>
 

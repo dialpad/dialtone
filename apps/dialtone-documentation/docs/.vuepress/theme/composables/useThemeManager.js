@@ -1,4 +1,6 @@
 import { inject, computed, onMounted, onUnmounted } from 'vue';
+import { NAMED_THEMES, NUMBERED_THEMES, ALL_THEME_IDS, STYLE_TAG_IDS } from '../constants/themes.js';
+import { formatThemeName } from '../utils/formatThemeName.js';
 
 /**
  * Composable for managing theme, mode, and contrast settings across the documentation site.
@@ -86,7 +88,7 @@ export function useThemeManager(options = {}) {
    * @param {string} brandName - The brand theme name
    */
   const manageBrandOverride = (brandName) => {
-    const brandOverrideTag = document.getElementById('dialtone-css-brand-override');
+    const brandOverrideTag = document.getElementById(STYLE_TAG_IDS.BRAND_OVERRIDE);
 
     if (brandName === 'dp') {
       // DP is the base theme - remove override if it exists
@@ -96,16 +98,25 @@ export function useThemeManager(options = {}) {
     } else {
       // Load theme-specific overrides on top of DP
       const theme = themes && themes[brandName];
-      if (theme && theme.brand && theme.brand.css) {
-        if (!brandOverrideTag) {
-          const newTag = document.createElement('style');
-          newTag.id = 'dialtone-css-brand-override';
-          newTag.type = 'text/css';
-          newTag.innerHTML = theme.brand.css;
-          document.head.appendChild(newTag);
-        } else {
-          brandOverrideTag.innerHTML = theme.brand.css;
-        }
+
+      if (!theme) {
+        console.warn(`[useThemeManager] Theme "${brandName}" not found in loaded themes`);
+        return;
+      }
+
+      if (!theme.brand?.css) {
+        console.warn(`[useThemeManager] Theme "${brandName}" missing brand.css property`);
+        return;
+      }
+
+      if (!brandOverrideTag) {
+        const newTag = document.createElement('style');
+        newTag.id = STYLE_TAG_IDS.BRAND_OVERRIDE;
+        newTag.type = 'text/css';
+        newTag.innerHTML = theme.brand.css;
+        document.head.appendChild(newTag);
+      } else {
+        brandOverrideTag.innerHTML = theme.brand.css;
       }
     }
   };
@@ -115,20 +126,29 @@ export function useThemeManager(options = {}) {
    * @param {string} contrast - The contrast level (default or high)
    */
   const manageContrastOverride = (contrast) => {
-    const contrastTag = document.getElementById('dialtone-css-contrast');
+    const contrastTag = document.getElementById(STYLE_TAG_IDS.CONTRAST);
 
     if (contrast === 'high') {
       const contrastTheme = themes && themes['high-contrast'];
-      if (contrastTheme && contrastTheme.contrast && contrastTheme.contrast.css) {
-        if (!contrastTag) {
-          const newTag = document.createElement('style');
-          newTag.id = 'dialtone-css-contrast';
-          newTag.type = 'text/css';
-          newTag.innerHTML = contrastTheme.contrast.css;
-          document.head.appendChild(newTag);
-        } else {
-          contrastTag.innerHTML = contrastTheme.contrast.css;
-        }
+
+      if (!contrastTheme) {
+        console.warn('[useThemeManager] High contrast theme not found in loaded themes');
+        return;
+      }
+
+      if (!contrastTheme.contrast?.css) {
+        console.warn('[useThemeManager] High contrast theme missing contrast.css property');
+        return;
+      }
+
+      if (!contrastTag) {
+        const newTag = document.createElement('style');
+        newTag.id = STYLE_TAG_IDS.CONTRAST;
+        newTag.type = 'text/css';
+        newTag.innerHTML = contrastTheme.contrast.css;
+        document.head.appendChild(newTag);
+      } else {
+        contrastTag.innerHTML = contrastTheme.contrast.css;
       }
     } else {
       // Remove contrast override when not needed
@@ -205,6 +225,12 @@ export function useThemeManager(options = {}) {
     setMode,
     setContrast,
     setTheme,
+
+    // Theme utilities (only when includeThemes is enabled)
+    namedThemes: computed(() => NAMED_THEMES),
+    numberedThemes: computed(() => NUMBERED_THEMES),
+    allThemeIds: computed(() => ALL_THEME_IDS),
+    formatThemeName,
 
     // Constants
     modes,
