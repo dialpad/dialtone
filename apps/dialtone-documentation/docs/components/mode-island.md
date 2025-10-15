@@ -334,7 +334,7 @@ Positioned components like [Popovers](/components/popover.html), [Dropdowns](/co
 
 <code-well-header>
   <dt-stack gap="400" direction="row">
-    <dt-hovercard padding="none" contentClass="d-body--sm" placement="top-start">
+    <dt-hovercard ref="hovercardDefault" padding="none" contentClass="d-body--sm" placement="top-start">
       <!-- dialogClass, contentClass, padding -->
       <template #anchor>
         <dt-button size="sm" kind="muted" importance="outlined">Default </dt-button>
@@ -521,11 +521,27 @@ Positioned components like [Popovers](/components/popover.html), [Dropdowns](/co
   </dt-stack>
 </code-well-header>
 
+<code-example-tabs
+:htmlCode='() => $refs.hovercardDefault'
+vueCode='
+<dt-hovercard padding="none" contentClass="d-body--sm" placement="top-start">
+  <template #anchor>
+    <dt-button size="sm" kind="muted" importance="outlined">Inverted</dt-button>
+  </template>
+  <template #content>
+    <dt-mode-island class="d-p16 d-bgc-primary">
+      <!-- Content with inverted mode -->
+    </dt-mode-island>
+  </template>
+</dt-hovercard>
+'
+showHtmlWarning />
+
 ### Popover
 
 <code-well-header>
   <dt-stack gap="400" direction="row">
-    <dt-popover padding="none" placement="top-start" dialogClass="d-w216">
+    <dt-popover ref="popoverDefault" padding="none" placement="top-start" dialogClass="d-w216">
       <template #anchor>
         <dt-button size="sm" kind="muted" importance="outlined"> Default </dt-button>
       </template>
@@ -535,7 +551,7 @@ Positioned components like [Popovers](/components/popover.html), [Dropdowns](/co
         </div>
       </template>
     </dt-popover>
-    <dt-popover padding="none" placement="top-start" dialogClass="d-w216">
+    <dt-popover ref="popoverInverted" padding="none" placement="top-start" dialogClass="d-w216">
       <template #anchor>
         <dt-button size="sm" kind="muted" importance="outlined"> Inverted </dt-button>
       </template>
@@ -568,11 +584,27 @@ Positioned components like [Popovers](/components/popover.html), [Dropdowns](/co
   </dt-stack>
 </code-well-header>
 
+<code-example-tabs
+:htmlCode='() => $refs.popoverInverted'
+vueCode='
+<dt-popover padding="none" placement="top-start" dialogClass="d-w216">
+  <template #anchor>
+    <dt-button size="sm" kind="muted" importance="outlined">Inverted</dt-button>
+  </template>
+  <template #content="{ close }">
+    <dt-mode-island mode="inverted" class="d-p16 d-bgc-secondary">
+      <p>This Popover content is in the <strong>inverted</strong> mode.</p>
+    </dt-mode-island>
+  </template>
+</dt-popover>
+'
+showHtmlWarning />
+
 ### Dropdown
 
 <code-well-header>
   <dt-stack gap="400" direction="row">
-    <dt-dropdown navigation-type="arrow-keys" placement="bottom-start">
+    <dt-dropdown ref="dropdownDefault" navigation-type="arrow-keys" placement="bottom-start">
       <template #anchor="{ attrs }">
         <dt-button v-bind="attrs" size="sm" kind="muted" importance="outlined" icon-position="right">
           Default
@@ -593,7 +625,7 @@ Positioned components like [Popovers](/components/popover.html), [Dropdowns](/co
         </dt-list-item>
       </template>
     </dt-dropdown>
-    <dt-dropdown navigation-type="arrow-keys" placement="bottom-start" listClass="d-m0" padding="small">
+    <dt-dropdown ref="dropdownInverted" navigation-type="arrow-keys" placement="bottom-start" listClass="d-m0" padding="small">
       <template #anchor="{ attrs }">
         <dt-button v-bind="attrs" size="sm" kind="muted" importance="outlined" icon-position="right">
           Inverted
@@ -665,10 +697,38 @@ Positioned components like [Popovers](/components/popover.html), [Dropdowns](/co
   </dt-stack>
 </code-well-header>
 
+<code-example-tabs
+:htmlCode='() => $refs.dropdownInverted'
+vueCode='
+<dt-dropdown navigation-type="arrow-keys" placement="bottom-start" listClass="d-m0" padding="small">
+  <template #anchor="{ attrs }">
+    <dt-button v-bind="attrs" size="sm" kind="muted" importance="outlined" icon-position="right">
+      Inverted
+      <template #icon="{ iconSize }">
+        <dt-icon name="chevron-down" :size="iconSize" />
+      </template>
+    </dt-button>
+  </template>
+  <template #list="{ close }">
+    <dt-mode-island class="d-bgc-secondary d-p4">
+      <dt-list-item
+        v-for="item in items"
+        :key="item.id"
+        role="menuitem"
+        @click="close"
+      >
+        {{ item.name }}
+      </dt-list-item>
+    </dt-mode-island>
+  </template>
+</dt-dropdown>
+'
+showHtmlWarning />
+
 ### Callbar
 
 <code-well-header>
-  <dt-mode-island class="d-bgc-primary d-ba d-bc-subtle d-p8 d-py4 d-bar32 d-bs-md d-w100p">
+  <dt-mode-island ref="callbarExample" class="d-bgc-primary d-ba d-bc-subtle d-p8 d-py4 d-bar32 d-bs-md d-w100p">
     <dt-stack direction="row" gap="600">
       <dt-stack gap="400" direction="row">
         <dt-avatar
@@ -716,6 +776,39 @@ Positioned components like [Popovers](/components/popover.html), [Dropdowns](/co
   </dt-mode-island>
   <p class="d-fc-muted d-mt8">* Not real, still just an example</p>
 </code-well-header>
+
+<code-example-tabs
+:htmlCode='() => $refs.callbarExample'
+vueCode='
+<dt-mode-island class="d-bgc-primary d-ba d-bc-subtle d-p8 d-py4 d-bar32 d-bs-md d-w100p">
+  <dt-stack direction="row" gap="600">
+    <dt-stack gap="400" direction="row">
+      <dt-avatar full-name="TA" color="700" size="lg" />
+      <dt-stack gap="200">
+        <span class="d-label--md-compact">Ted Anderson</span>
+        <dt-stack direction="row" gap="300" class="d-ai-baseline d-helper--sm d-fc-tertiary">
+          <span class="d-fvn-tabular d-ws-nowrap">(913) 555-6745</span>
+          <span class="d-fc-muted">&bull;</span>
+          <span class="d-fvn-tabular">21:18</span>
+        </dt-stack>
+      </dt-stack>
+    </dt-stack>
+    <dt-stack class="d-fl1 d-jc-center" direction="row" gap="200">
+      <dt-button class="d-px8 d-w72" size="sm" kind="danger" icon-position="top">
+        <template #icon><dt-icon name="mic" size="400" /></template>
+        Unmute
+      </dt-button>
+      <!-- Additional buttons... -->
+    </dt-stack>
+    <dt-stack>
+      <dt-button class="d-p12" circle size="lg" kind="danger">
+        <template #icon><dt-icon name="phone-hang-up" size="500" /></template>
+      </dt-button>
+    </dt-stack>
+  </dt-stack>
+</dt-mode-island>
+'
+showHtmlWarning />
 
 ## Vue API
 
