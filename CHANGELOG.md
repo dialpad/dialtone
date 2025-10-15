@@ -1,3 +1,10 @@
+# [9.142.0-next.2](https://github.com/dialpad/dialtone/compare/dialtone/v9.142.0-next.1...dialtone/v9.142.0-next.2) (2025-10-15)
+
+
+### Features
+
+* **Tokens:** DLT-1977 add high contrast design tokens and theme ([#938](https://github.com/dialpad/dialtone/issues/938)) ([a1c0457](https://github.com/dialpad/dialtone/commit/a1c0457e3b6b445e3f54d76b9ce3b847abc31ac5))
+
 # [9.142.0-next.1](https://github.com/dialpad/dialtone/compare/dialtone/v9.141.0...dialtone/v9.142.0-next.1) (2025-10-08)
 
 
