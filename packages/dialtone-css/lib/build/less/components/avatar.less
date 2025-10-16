@@ -250,10 +250,10 @@
     > .d-avatar__overlay {
       mask: radial-gradient(
         circle calc(var(--avatar-presence-mask-size) / 2) at
-          calc(100% - var(--avatar-presence-mask-offset-x))
-          calc(100% - var(--avatar-presence-mask-offset-y)),
+          calc(var(--dt-size-100-percent) - var(--avatar-presence-mask-offset-x))
+          calc(var(--dt-size-100-percent) - var(--avatar-presence-mask-offset-y)),
         transparent 92%, // less than 99% to smooth the edges
-        #fff 100%
+        var(--dt-color-neutral-white) var(--dt-size-100-percent)
       );
     }
 
@@ -273,13 +273,13 @@
         mask: radial-gradient(
           circle calc(var(--avatar-presence-mask-size) / 2) at
             calc(
-              100% - var(--avatar-presence-mask-offset-x) - var(--dt-size-100)
+              var(--dt-size-100-percent) - var(--avatar-presence-mask-offset-x) - var(--dt-size-100)
             )
             calc(
-              100% - var(--avatar-presence-mask-offset-y) - var(--dt-size-100)
+              var(--dt-size-100-percent) - var(--avatar-presence-mask-offset-y) - var(--dt-size-100)
             ),
           transparent 92%, // less than 99% to smooth the edges
-          #fff 100%
+          var(--dt-color-neutral-white) var(--dt-size-100-percent)
         );
       }
     }
@@ -344,10 +344,10 @@
     > .d-avatar__overlay {
       mask: radial-gradient(
         circle calc(var(--avatar-count-mask-size) / 2) at
-          calc(100% - var(--avatar-count-mask-offset-x))
-          calc(100% - var(--avatar-count-mask-offset-y)),
+          calc(var(--dt-size-100-percent) - var(--avatar-count-mask-offset-x))
+          calc(var(--dt-size-100-percent) - var(--avatar-count-mask-offset-y)),
         transparent 92%, // less than 99% to smooth the edges
-        #fff 100%
+        var(--dt-color-neutral-white) var(--dt-size-100-percent)
       );
       will-change: transform;
     }
@@ -367,7 +367,7 @@
               var(--avatar-count-mask-outer-circle-x)
               var(--avatar-count-mask-outer-circle-y),
             #fff 99%,
-            transparent 100%
+            transparent var(--dt-size-100-percent)
           ),
           url('data:image/svg+xml,<svg width="40" height="18" viewBox="0 0 40 18" fill="white" xmlns="http://www.w3.org/2000/svg"><rect width="40" height="18" rx="9" fill="white"/></svg>')
             var(--avatar-count-mask-offset-x)
@@ -395,7 +395,7 @@
               var(--avatar-count-mask-outer-circle-x)
               var(--avatar-count-mask-outer-circle-y),
             #fff 99%,
-            transparent 100%
+            transparent var(--dt-size-100-percent)
           ),
           url('data:image/svg+xml,<svg width="40" height="18" viewBox="0 0 40 18" fill="white" xmlns="http://www.w3.org/2000/svg"><rect width="40" height="18" rx="9" /></svg>')
             var(--avatar-count-mask-offset-x)
