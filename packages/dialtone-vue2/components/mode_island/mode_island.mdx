@@ -1,0 +1,120 @@
+import { Canvas, Story, Controls, Meta } from '@storybook/blocks';
+
+import * as ModeIslandStories from './mode_island.stories';
+
+<Meta of={ModeIslandStories} />
+
+# Mode Island
+
+Creates isolated sections with independent color modes (light/dark). Override root theme for specific UI sections while maintaining contrast inheritance.
+
+## Usage
+
+Use mode islands to:
+
+- Force sections to light or dark mode
+- Invert current theme for emphasis/hierarchy
+- Build components with consistent appearance regardless of user theme
+- Create nested theme contexts
+
+## Basic Example
+
+```vue
+<template>
+  <!-- Always inverts the parent/root mode -->
+  <dt-mode-island>
+    <p>This content uses the inverted mode</p>
+  </dt-mode-island>
+
+  <!-- Always light mode -->
+  <dt-mode-island mode="light">
+    <p>This content is always in light mode</p>
+  </dt-mode-island>
+
+  <!-- Always dark mode -->
+  <dt-mode-island mode="dark">
+    <p>This content is always in dark mode</p>
+  </dt-mode-island>
+</template>
+```
+
+## Props
+
+### `mode`
+
+Controls the color mode of the island.
+
+- **Type**: `String`
+- **Default**: `'inverted'`
+- **Values**:
+  - `'inverted'`: Opposite of the parent mode or root theme
+  - `'light'`: Always light mode
+  - `'dark'`: Always dark mode
+
+### `as`
+
+Specifies the HTML element to render.
+
+- **Type**: `String`
+- **Default**: `'div'`
+- **Common values**: `'div'`, `'section'`, `'article'`, `'nav'`, `'aside'`, `'header'`, `'footer'`, `'main'`
+
+## Features
+
+### Nested Mode Islands
+
+Nest islands to create theme hierarchies. `mode="inverted"` detects parent island and inverts accordingly.
+
+```vue
+<dt-mode-island mode="dark">
+  <!-- dark -->
+  <dt-mode-island mode="inverted">
+    <!-- light (inverted from parent) -->
+    <dt-mode-island mode="inverted">
+      <!-- dark again -->
+    </dt-mode-island>
+  </dt-mode-island>
+</dt-mode-island>
+```
+
+### Reactive Mode Updates
+
+**Inverted islands auto-react to parent/root theme changes.** Component watches root element and parent islands, flipping instantly when themes change—no page refresh needed.
+
+When user switches light ↔ dark, all inverted islands flip to maintain opposite mode.
+
+**Note**: Inverted islands get assigned a `data-mode-island-inverted` boolean attribute to track that it was originally set to `mode="inverted"`, even after system assigns light/dark.
+
+### Contrast Inheritance
+
+Auto-inherits `data-dt-contrast` from root element, updates reactively. High contrast mode works correctly within islands.
+
+### Brand Protection
+
+`data-dt-brand` prohibited on islands to avoid mixing color themes in ways that are not a "shell"-themable part. Set brand at root level only. Attempting to set throws error.
+
+## Accessibility
+
+Purely visual. No semantic HTML impact. Supports high contrast mode via auto contrast inheritance.
+
+## Best Practices
+
+1. **Use sparingly**: Intentional use for specific needs, not general theming
+2. **Respect user preference**: Use explicit, non-changing modes only when functionally necessary
+3. **Test both modes**: Always test in light and dark root themes
+4. **Maintain readability**: Content must remain readable when inverted
+5. **Avoid deep nesting**: Keep hierarchy shallow for maintainability
+
+## Examples
+
+<Canvas>
+  <Story of={ModeIslandStories.Default} />
+</Canvas>
+
+## Interactive Playground
+
+<Canvas>
+  <Story of={ModeIslandStories.Interactive} />
+</Canvas>
+
+<Controls of={ModeIslandStories.Interactive} />

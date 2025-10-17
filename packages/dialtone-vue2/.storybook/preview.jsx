@@ -2,7 +2,58 @@ import '../css/dialtone-globals.less';
 import '@dialpad/dialtone-css/lib/dist/dialtone.css';
 import 'overlayscrollbars/overlayscrollbars.css';
 import { addons } from '@storybook/preview-api';
-import { setTheme } from '@dialpad/dialtone-tokens/themes/config';
+import { setTheme, setMode, setBrand, setContrast, initDialtoneTheme } from '@dialpad/dialtone-tokens/themes/config';
+
+// Check if layered tokens are available
+const layeredTokensEnabled = (() => {
+  try {
+    // Try to import layered CSS files
+    import('@dialpad/dialtone-tokens/dist/css/layered/tokens-core.css');
+    import('@dialpad/dialtone-tokens/dist/css/layered/tokens-base-colors.css');
+    import('@dialpad/dialtone-tokens/dist/css/layered/tokens-dp-colors.css');
+    return true;
+  } catch (e) {
+    console.log('Layered tokens not available, falling back to legacy themes');
+    return false;
+  }
+})();
+
+// Layered theme variables (loaded async)
+let Core, Dp, Tmo, Aegean, Botany, Buttercream, HighDesert, Melon, Plum, Sunflower, VerdantHaze;
+let ProtaDeuter, Trita, Theme101, Theme102, Theme103, Theme137, HighContrast;
+
+// Async load layered themes
+if (layeredTokensEnabled) {
+  (async () => {
+    Core = (await import('@dialpad/dialtone-tokens/themes/core')).default;
+    Dp = (await import('@dialpad/dialtone-tokens/themes/dp')).default;
+    Tmo = (await import('@dialpad/dialtone-tokens/themes/tmo')).default;
+    Aegean = (await import('@dialpad/dialtone-tokens/themes/aegean')).default;
+    Botany = (await import('@dialpad/dialtone-tokens/themes/botany')).default;
+    Buttercream = (await import('@dialpad/dialtone-tokens/themes/buttercream')).default;
+    HighDesert = (await import('@dialpad/dialtone-tokens/themes/high-desert')).default;
+    Melon = (await import('@dialpad/dialtone-tokens/themes/melon')).default;
+    Plum = (await import('@dialpad/dialtone-tokens/themes/plum')).default;
+    Sunflower = (await import('@dialpad/dialtone-tokens/themes/sunflower')).default;
+    VerdantHaze = (await import('@dialpad/dialtone-tokens/themes/verdant-haze')).default;
+    ProtaDeuter = (await import('@dialpad/dialtone-tokens/themes/prota-deuter')).default;
+    Trita = (await import('@dialpad/dialtone-tokens/themes/trita')).default;
+    Theme101 = (await import('@dialpad/dialtone-tokens/themes/101')).default;
+    Theme102 = (await import('@dialpad/dialtone-tokens/themes/102')).default;
+    Theme103 = (await import('@dialpad/dialtone-tokens/themes/103')).default;
+    Theme137 = (await import('@dialpad/dialtone-tokens/themes/137')).default;
+    HighContrast = (await import('@dialpad/dialtone-tokens/themes/high-contrast')).default;
+
+    // Initialize layered theming once themes are loaded
+    if (Core && Dp) {
+      initDialtoneTheme(Core, Dp, 'light', document.documentElement);
+      // Set correct mode after initialization
+      setMode(currentDarkMode ? 'dark' : 'light', document.documentElement);
+    }
+  })();
+}
+
+// Legacy theme imports for fallback
 // Theme imports - keep in sync with:
 // - packages/dialtone-vue3/.storybook/preview.jsx
 // - apps/dialtone-documentation/docs/.vuepress/theme/client.js
@@ -119,7 +170,19 @@ import { DtScrollbarDirective } from '@/directives/scrollbar_directive';
 import { faker } from '@faker-js/faker';
 
 let currentContrast = 'default';
-let currentDarkMode = false;
+// Initialize dark mode from localStorage (storybook-dark-mode stores it there)
+let currentDarkMode = (() => {
+  try {
+    const storedValue = localStorage.getItem('sb-addon-themes-3');
+    if (storedValue) {
+      const parsed = JSON.parse(storedValue);
+      return parsed.current === 'dark';
+    }
+  } catch (e) {
+    // Ignore errors
+  }
+  return false; // Default to light mode
+})();
 let currentBrandTheme = 'dp';
 
 const themeMap = {
@@ -223,17 +286,63 @@ const themeMap = {
   '137-dark': Theme137Dark,
 };
 
-setTheme(DpLight);
+// Initialize with default theme based on layered tokens availability
+if (!layeredTokensEnabled) {
+  setTheme(DpLight);
+}
 
 const channel = addons.getChannel();
+
+// Function to get layered themes (ensures async imports have completed)
+const getLayeredThemes = () => ({
+  'dp': Dp,
+  'tmo': Tmo,
+  'aegean': Aegean,
+  'botany': Botany,
+  'buttercream': Buttercream,
+  'high-desert': HighDesert,
+  'melon': Melon,
+  'plum': Plum,
+  'sunflower': Sunflower,
+  'verdant-haze': VerdantHaze,
+  'prota-deuter': ProtaDeuter,
+  'trita': Trita,
+  '101': Theme101,
+  '102': Theme102,
+  '103': Theme103,
+  '137': Theme137,
+});
 
 const updateTheme = (isDark, isHighContrast, brandTheme = 'dp') => {
   currentDarkMode = isDark;
   currentContrast = isHighContrast ? 'high' : 'default';
   currentBrandTheme = brandTheme;
 
-  const themeKey = `${brandTheme}-${isDark ? 'dark' : 'light'}`;
-  const baseTheme = themeMap[themeKey];
+  if (layeredTokensEnabled) {
+    // Use layered theming system with data-dt-mode
+    setMode(isDark ? 'dark' : 'light', document.documentElement);
+
+    // Get current layered themes
+    const layeredThemes = getLayeredThemes();
+
+    // Wait for layered themes to load
+    if (layeredThemes[brandTheme]) {
+      setBrand(layeredThemes[brandTheme], document.documentElement);
+    } else {
+      // Themes might still be loading, try again
+      setTimeout(() => {
+        const themes = getLayeredThemes();
+        if (themes[brandTheme]) {
+          setBrand(themes[brandTheme], document.documentElement);
+        }
+      }, 100);
+    }
+
+    setContrast(isHighContrast ? HighContrast : null, document.documentElement);
+  } else {
+    // Fallback to legacy theming system
+    const themeKey = `${brandTheme}-${isDark ? 'dark' : 'light'}`;
+    const baseTheme = themeMap[themeKey];
 
   if (!baseTheme) {
     console.warn(`Theme ${themeKey} not found, falling back to dp`);
@@ -243,13 +352,17 @@ const updateTheme = (isDark, isHighContrast, brandTheme = 'dp') => {
     return;
   }
 
-  const contrastTheme = isHighContrast ? (isDark ? HighContrastDark : HighContrastLight) : null;
-  setTheme(baseTheme, document.documentElement, contrastTheme);
+    const contrastTheme = isHighContrast ? (isDark ? HighContrastDark : HighContrastLight) : null;
+    setTheme(baseTheme, document.documentElement, contrastTheme);
+  }
 };
 
 channel.on(DARK_MODE_EVENT_NAME, (isDark) => {
   updateTheme(isDark, currentContrast === 'high', currentBrandTheme);
 });
+
+// Initialize theme on load with current dark mode state
+updateTheme(currentDarkMode, currentContrast === 'high', currentBrandTheme);
 
 setEmojiAssetUrlSmall('https://static.dialpadcdn.com/joypixels/png/unicode/32/', '.png');
 setEmojiAssetUrlLarge('https://static.dialpadcdn.com/joypixels/svg/unicode/', '.svg');
