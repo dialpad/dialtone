@@ -1,6 +1,6 @@
 ---
 title: Mode Island
-description: Create isolated sections with independent color modes.
+description: Create independent sections with their own color modes.
 status: beta
 ---
 
@@ -161,7 +161,7 @@ status: beta
 
 ## Usage
 
-Mode islands create isolated sections that can display content in a different color mode, `light`, `dark`, or `inverted`. Useful for forcing specific themes on UI sections or inverting against the overall theme for visual hierarchy.
+Mode islands create isolated regions that may display in a different color mode, `light`, `dark`, or `inverted`. Useful for forcing a region to a controlled mode for a unique UI purpose.
 
 ### Structure
 
@@ -184,8 +184,8 @@ vueCode='
 <dialtone-usage>
 <template #do>
 
-- Use only to force a region to a controlled theme for a unique purpose
 - Use sparingly for specific needs, not general theming
+- Use only to force a region to a controlled theme for a unique purpose
 - Always test in both light and dark root themes
 - Ensure content remains readable when mode changes
 
@@ -205,19 +205,19 @@ vueCode='
 
 Inverted islands reactively track parent/root mode changes. User switches light ↔ dark → inverted islands flip automatically. Even directly modifying the `mode` attribute will also work.
 
+### Brand Theme Protection
+
+`data-dt-brand` (aka "Theme", e.g. "tmo", "sunflower", etc) can not be set on Mode Islands. Brand theme can only be set at root level and are inherited
+
 ### Contrast Inheritance
 
 Contrast is not an option to set to a Mode Island. Contrast theme setting is inherited from the root element, i.e. `<html>`.
-
-### Brand Theme Protection
-
-`data-dt-brand` (aka "Theme", e.g. "tmo", "sunflower", etc) can not be set on Mode Islands. Brand theme can only be set at root level.
 
 ## Variants
 
 ### Inverted
 
-The default mode, inverts the container relative to the parent or theme mode. If `mode` attribute is omitted, it defaults to `inverted`.
+The default mode, inverts the container relative to the parent or root's mode. When `mode` attribute is omitted, it defaults to `inverted`.
 
 <code-well-header>
   <dt-mode-island ref="invertedExample" class="d-p16 d-bar8">
@@ -236,7 +236,7 @@ showHtmlWarning />
 
 ### Light
 
-Always light mode regardless of parent or root mode.
+Explicitly set to light mode regardless of parent or root mode.
 
 <code-well-header>
   <dt-mode-island ref="lightExample" mode="light" class="d-p16 d-bar8">
@@ -255,7 +255,7 @@ showHtmlWarning />
 
 ### Dark
 
-Always dark mode regardless of parent or root mode.
+Explicitly set to dark mode regardless of parent or root mode.
 
 <code-well-header>
   <dt-mode-island ref="darkExample" mode="dark" class="d-p16 d-bar8">
