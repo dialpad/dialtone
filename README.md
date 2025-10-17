@@ -43,66 +43,209 @@ import "@dialpad/dialtone/css-default-theme";
 
 #### With theming
 
-If you want to use theming, import from the below path. This file does not include design tokens so it is required to also set a theme to apply design tokens to the root element.
+Import Dialtone CSS without design tokens. Tokens are applied separately via the theming system.
 
-- CSS
-
+**CSS:**
 ```css
 @import "@dialpad/dialtone/css";
 ```
 
-- Javascript
-
+**Javascript:**
 ```js
 import "@dialpad/dialtone/css";
 ```
 
-##### Set theme via setTheme() javascript function (preferred)
+---
 
-Import the theme you want to use and set it via the `setTheme` function:
+##### Layered Theming System (Recommended)
+
+The layered system provides instant mode switching, 51 themes, and 95.7% smaller theme files.
+
+###### How it works
+
+Three base layers load once (862KB):
+1. **Core tokens** (50KB) - typography, spacing, sizing, components
+2. **Base colors** (185KB) - fundamental color palette with HSLA
+3. **DP colors** (627KB) - Dialpad brand (light + dark modes)
+
+Additional themes load as small overrides (0.3-5KB each) containing only differences from DP.
+
+###### Initialize on app startup
 
 ```js
-import { setTheme } from '@dialpad/dialtone/themes/config';
-import DpLight from '@dialpad/dialtone/themes/dp-light';
-setTheme(DpLight);
+import { initLayeredTheme } from '@dialpad/dialtone/themes/config';
+import CoreTokens from '@dialpad/dialtone-tokens/dist/css/layered/tokens-core.css';
+import BaseColors from '@dialpad/dialtone-tokens/dist/css/layered/tokens-base-colors.css';
+import DpColors from '@dialpad/dialtone-tokens/dist/css/layered/tokens-dp-colors.css';
+
+// Initialize base layers and DP theme
+initLayeredTheme(
+  { core: CoreTokens, baseColors: BaseColors },
+  { brand: { name: 'dp', css: DpColors } },
+  'light' // initial mode: 'light' or 'dark'
+);
 ```
 
-Possible themes are as follows:
+###### Switch modes instantly (light/dark)
 
-- DpLight - Dialpad Light
-- DpDark - Dialpad Dark
-- TmoLight - T-Mobile Light
-- TmoDark - T-Mobile Dark
+```js
+import { setMode } from '@dialpad/dialtone/themes/config';
 
-There is an optional second parameter to `setTheme` that allows you to set the theme on a specific element. This is useful in the case of a Shadow DOM
-when you want to apply the theme to the root element of the shadow DOM rather than the document root. If you do not set this parameter the theme will be applied to the document root.
+setMode('dark');  // or 'light'
+// Instant switch via data-dt-mode attribute (0ms, no network request)
+```
+
+###### Switch brands (load theme override)
+
+```js
+import { setBrand } from '@dialpad/dialtone/themes/config';
+import TmoColors from '@dialpad/dialtone-tokens/dist/css/layered/themes/tokens-tmo-colors.css';
+
+setBrand({
+  brand: {
+    name: 'tmo',
+    css: TmoColors
+  }
+});
+// Loads only 0.55KB override file
+```
+
+###### Enable high contrast (accessibility)
+
+```js
+import { setContrast } from '@dialpad/dialtone/themes/config';
+import HighContrast from '@dialpad/dialtone-tokens/dist/css/layered/contrast/tokens-high-contrast.css';
+
+setContrast({
+  contrast: {
+    name: 'high',
+    css: HighContrast
+  }
+});
+
+// Disable contrast
+setContrast(null);
+```
+
+###### Available themes (51 total)
+
+**Base & Partner:**
+- `dp` - Dialpad (base, always loaded)
+- `tmo` - T-Mobile
+
+**Accessibility:**
+- `prota-deuter` - Protanopia/Deuteranopia
+- `trita` - Tritanopia
+
+**Named themes:**
+- `aegean`, `botany`, `buttercream`, `high-desert`, `melon`, `plum`, `sunflower`, `verdant-haze`
+
+**Experimental:**
+- `101` through `137` (37 numbered themes)
+
+**Contrast levels:**
+- `default`, `high`
+
+###### HTML structure
+
+The system uses `data-dt-*` attributes on the root element:
+
+```html
+<html
+  lang="en"
+  data-dt-mode="light"
+  data-dt-brand="dp"
+  data-dt-contrast="default"
+>
+</html>
+```
+
+**For nested mode sections:** Use the `DtModeIsland` component:
+
+```vue
+<template>
+  <div>
+    <p>This content uses the page's mode (light)</p>
+
+    <dt-mode-island mode="dark">
+      <p>This content is always dark mode</p>
+    </dt-mode-island>
+  </div>
+</template>
+```
+
+See [Mode Island documentation](https://dialtone.dialpad.com/components/mode-island.html) for details.
+
+**Without Vue (not recommended):** You can manually set `data-dt-mode` on any element, but you lose automatic mode inheritance and contrast management:
+
+```html
+<div>
+  <p>This content uses the page's mode</p>
+
+  <div data-dt-mode="dark" class="d-mode-island">
+    <p>This content is always dark mode</p>
+  </div>
+</div>
+```
+
+###### CSS-only approach
+
+Load CSS files directly and control via HTML attributes:
+
+```css
+/* Base layers (required) */
+@import "@dialpad/dialtone-tokens/dist/css/layered/tokens-core.css";
+@import "@dialpad/dialtone-tokens/dist/css/layered/tokens-base-colors.css";
+@import "@dialpad/dialtone-tokens/dist/css/layered/tokens-dp-colors.css";
+
+/* Theme override (optional, only if not using dp) */
+@import "@dialpad/dialtone-tokens/dist/css/layered/themes/tokens-tmo-colors.css";
+
+/* High contrast (optional) */
+@import "@dialpad/dialtone-tokens/dist/css/layered/contrast/tokens-high-contrast.css";
+```
+
+Then set attributes in HTML:
+
+```html
+<html data-dt-mode="light" data-dt-brand="tmo" data-dt-contrast="default">
+```
+
+###### Shadow DOM support
+
+Pass root element as second parameter:
+
+```js
+import { initLayeredTheme } from '@dialpad/dialtone/themes/config';
+
+const shadowHost = document.querySelector('#my-shadow-root-host');
+initLayeredTheme(coreTheme, brandTheme, 'light', shadowHost);
+```
+
+---
+
+##### Legacy Theming System (Backward Compatible)
+
+The original system remains supported for existing projects.
 
 ```js
 import { setTheme } from '@dialpad/dialtone/themes/config';
 import DpLight from '@dialpad/dialtone/themes/dp-light';
+import DpDark from '@dialpad/dialtone/themes/dp-dark';
+import TmoLight from '@dialpad/dialtone/themes/tmo-light';
+import TmoDark from '@dialpad/dialtone/themes/tmo-dark';
+
+// Set theme (automatically detected as legacy)
+setTheme(DpLight);
+
+// Shadow DOM support
 setTheme(DpLight, document.querySelector('#my-shadow-root-host'));
 ```
 
-##### Set theme manually by importing files
+**Legacy themes available:**
+- `DpLight`, `DpDark`, `TmoLight`, `TmoDark`
 
-You may want to use this method if you are unable to use javascript.
-
-You need to import two tokens files in order to apply a theme. A base tokens files, which is either light or dark, and
-a semantic brand tokens file which is named after a brand and theme 'tokens-dp-light', 'tokens-dp-dark', 'tokens-tmo-light', ...
-
-- CSS
-
-```css
-@import "@dialpad/dialtone/tokens/tokens-base-light.css" // Base light theme
-@import "@dialpad/dialtone/tokens/tokens-dp-light.css" // Dialpad light brand
-```
-
-- Javascript
-
-```js
-import "@dialpad/dialtone/tokens/tokens-base-light.css" // Base light theme
-import "@dialpad/dialtone/tokens/tokens-dp-light.css" // Dialpad light brand
-```
+**Note:** Legacy system loads complete token files (~1256KB per theme). Consider migrating to layered system for better performance.
 
 #### Dialtone icons
 
