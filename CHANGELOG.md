@@ -1,3 +1,11 @@
+## [9.142.1](https://github.com/dialpad/dialtone/compare/dialtone/v9.142.0...dialtone/v9.142.1) (2025-10-17)
+
+
+### Bug Fixes
+
+* NO-JIRA publish mcp server to npm ([#947](https://github.com/dialpad/dialtone/issues/947)) ([f6e9c4f](https://github.com/dialpad/dialtone/commit/f6e9c4f18487e9cc65736b86ba91dea5f069d6b2))
+* **Split Button:** NO-JIRA invert tooltip when button inverted ([#946](https://github.com/dialpad/dialtone/issues/946)) ([c03065a](https://github.com/dialpad/dialtone/commit/c03065abe60471aa8469216ad506ac5a2b406697))
+
 # [9.142.0](https://github.com/dialpad/dialtone/compare/dialtone/v9.141.0...dialtone/v9.142.0) (2025-10-14)
 
 
