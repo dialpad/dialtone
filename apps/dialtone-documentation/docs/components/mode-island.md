@@ -161,7 +161,7 @@ status: beta
 
 ## Usage
 
-Mode islands create isolated sections that can display content in a different color mode. Useful for forcing specific themes on UI sections or inverting against the overall theme for visual hierarchy.
+Mode islands create isolated sections that can display content in a different color mode, `light`, `dark`, or `inverted`. Useful for forcing specific themes on UI sections or inverting against the overall theme for visual hierarchy.
 
 ### Structure
 
