@@ -22,7 +22,10 @@ const config = {
         rollupOptions: {
           external: (id) => {
             // Don't try to bundle CSS files - they're handled separately
-            return id.includes('.css');
+            if (id.includes('.css')) return true;
+            // Don't bundle dialtone-tokens - let it resolve from node_modules via package.json exports
+            if (id.startsWith('@dialpad/dialtone-tokens')) return true;
+            return false;
           },
         },
       },
@@ -30,7 +33,6 @@ const config = {
         devSourcemap: true,
       },
     };
-
 
     return mergeConfig(config, customConfig);
   },
