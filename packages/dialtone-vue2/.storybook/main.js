@@ -36,8 +36,6 @@ const config = {
     if (config.mode === 'production' || process.env.STORYBOOK_ENV === 'production') {
       customConfig.resolve = {
         alias: {
-          '@dialpad/dialtone-tokens/themes': resolve(__dirname, '../../dialtone-tokens/dist/themes'),
-          '@dialpad/dialtone-tokens/dist': resolve(__dirname, '../../dialtone-tokens/dist'),
           '@dialpad/dialtone-tokens': resolve(__dirname, '../../dialtone-tokens'),
         },
       };
