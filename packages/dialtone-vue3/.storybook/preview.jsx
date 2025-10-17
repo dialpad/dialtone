@@ -81,7 +81,7 @@ if (layeredTokensEnabled) {
 
     // Initialize layered theming once themes are loaded
     if (Core && Dp) {
-      initDialtoneTheme(Core, Dp, Dp, 'light', document.documentElement);
+      initDialtoneTheme(Core, Dp, 'light', document.documentElement);
     }
   })();
 }
@@ -99,7 +99,19 @@ import { DtScrollbarDirective } from '@/directives/scrollbar_directive';
 import { faker } from '@faker-js/faker';
 
 let currentContrast = 'default';
-let currentDarkMode = false;
+// Initialize dark mode from localStorage (storybook-dark-mode stores it there)
+let currentDarkMode = (() => {
+  try {
+    const storedValue = localStorage.getItem('sb-addon-themes-3');
+    if (storedValue) {
+      const parsed = JSON.parse(storedValue);
+      return parsed.current === 'dark';
+    }
+  } catch (e) {
+    // Ignore errors
+  }
+  return false; // Default to light mode
+})();
 let currentBrandTheme = 'dp';
 
 const themeMap = {
@@ -210,7 +222,8 @@ if (!layeredTokensEnabled) {
 
 const channel = addons.getChannel();
 
-const layeredThemes = {
+// Function to get layered themes (ensures async imports have completed)
+const getLayeredThemes = () => ({
   'dp': Dp,
   'tmo': Tmo,
   'aegean': Aegean,
@@ -227,7 +240,7 @@ const layeredThemes = {
   '102': Theme102,
   '103': Theme103,
   '137': Theme137,
-};
+});
 
 const updateTheme = (isDark, isHighContrast, brandTheme = 'dp') => {
   currentDarkMode = isDark;
@@ -238,14 +251,18 @@ const updateTheme = (isDark, isHighContrast, brandTheme = 'dp') => {
     // Use layered theming system with data-dt-mode
     setMode(isDark ? 'dark' : 'light', document.documentElement);
 
+    // Get current layered themes
+    const layeredThemes = getLayeredThemes();
+
     // Wait for layered themes to load
     if (layeredThemes[brandTheme]) {
       setBrand(layeredThemes[brandTheme], document.documentElement);
     } else {
       // Themes might still be loading, try again
       setTimeout(() => {
-        if (layeredThemes[brandTheme]) {
-          setBrand(layeredThemes[brandTheme], document.documentElement);
+        const themes = getLayeredThemes();
+        if (themes[brandTheme]) {
+          setBrand(themes[brandTheme], document.documentElement);
         }
       }, 100);
     }
@@ -272,6 +289,9 @@ const updateTheme = (isDark, isHighContrast, brandTheme = 'dp') => {
 channel.on(DARK_MODE_EVENT_NAME, (isDark) => {
   updateTheme(isDark, currentContrast === 'high', currentBrandTheme);
 });
+
+// Initialize theme on load with current dark mode state
+updateTheme(currentDarkMode, currentContrast === 'high', currentBrandTheme);
 
 setEmojiAssetUrlSmall('https://static.dialpadcdn.com/joypixels/png/unicode/32/', '.png');
 setEmojiAssetUrlLarge('https://static.dialpadcdn.com/joypixels/svg/unicode/', '.svg');
