@@ -73,13 +73,13 @@ Additional themes load as small overrides (0.3-5KB each) containing only differe
 ###### Initialize on app startup
 
 ```js
-import { initLayeredTheme } from '@dialpad/dialtone/themes/config';
+import { initDialtoneTheme } from '@dialpad/dialtone/themes/config';
 import CoreTokens from '@dialpad/dialtone-tokens/dist/css/layered/tokens-core.css';
 import BaseColors from '@dialpad/dialtone-tokens/dist/css/layered/tokens-base-colors.css';
 import DpColors from '@dialpad/dialtone-tokens/dist/css/layered/tokens-dp-colors.css';
 
 // Initialize base layers and DP theme
-initLayeredTheme(
+initDialtoneTheme(
   { core: CoreTokens, baseColors: BaseColors },
   { brand: { name: 'dp', css: DpColors } },
   'light' // initial mode: 'light' or 'dark'
@@ -216,10 +216,10 @@ Then set attributes in HTML:
 Pass root element as second parameter:
 
 ```js
-import { initLayeredTheme } from '@dialpad/dialtone/themes/config';
+import { initDialtoneTheme } from '@dialpad/dialtone/themes/config';
 
 const shadowHost = document.querySelector('#my-shadow-root-host');
-initLayeredTheme(coreTheme, brandTheme, 'light', shadowHost);
+initDialtoneTheme(coreTheme, brandTheme, 'light', shadowHost);
 ```
 
 ---

@@ -166,13 +166,13 @@ export function setContrast(contrastTheme, rootNode = document.documentElement) 
 }
 
 /**
- * Initialize layered theme system - call once on app startup
+ * Initialize Dialtone theme system - call once on app startup
  * @param coreTheme theme object with core and baseColors properties
  * @param brandTheme initial brand theme
  * @param mode initial mode ('light' or 'dark')
  * @param rootNode optional root element
  */
-export function initLayeredTheme(coreTheme, brandTheme, mode = 'light', rootNode = document.documentElement) {
+export function initDialtoneTheme(coreTheme, brandTheme, mode = 'light', rootNode = document.documentElement) {
   if (rootNode?.shadowRoot) {
     rootNode = rootNode.shadowRoot;
   }
