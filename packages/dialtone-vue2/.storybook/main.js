@@ -1,5 +1,4 @@
 import { mergeConfig } from 'vite';
-import { resolve } from 'path';
 
 /** @type { import('@storybook/vue-vite').StorybookConfig } */
 const config = {
@@ -32,15 +31,6 @@ const config = {
       },
     };
 
-    // Only add alias for build mode (not dev) to prevent module resolution issues
-    if (config.mode === 'production' || process.env.STORYBOOK_ENV === 'production') {
-      customConfig.resolve = {
-        alias: {
-          '@dialpad/dialtone-tokens': resolve(__dirname, '../../dialtone-tokens/dist'),
-        },
-        extensions: ['.js', '.json'],
-      };
-    }
 
     return mergeConfig(config, customConfig);
   },
