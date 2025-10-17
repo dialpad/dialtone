@@ -6,7 +6,7 @@ import DtChip from '@/components/chip/chip.vue';
 import DtInput from '@/components/input/input.vue';
 import DtNotice from '@/components/notice/notice.vue';
 import DtStack from '@/components/stack/stack.vue';
-import { createTemplateFromVueFile } from '@/common/storybook_utils';
+import { createRenderConfig } from '@/common/storybook_utils';
 import { DT_MODE_ISLAND_TYPES } from './mode_island_constants';
 
 export const argsData = {
@@ -72,7 +72,7 @@ export default {
   excludeStories: /.*Data$/,
 };
 
-const DefaultTemplate = (args, { argTypes }) => createTemplateFromVueFile(args, argTypes, ModeIslandDefaultStory);
+const DefaultTemplate = (args) => createRenderConfig(DtModeIsland, ModeIslandDefaultStory, args);
 
 export const Default = {
   render: DefaultTemplate,
