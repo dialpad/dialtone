@@ -695,15 +695,19 @@ export default {
 - [ ] Create component scaffold (Vue 3)
 - [ ] Implement `kind`, `size`, `strength`, `density`, `as` props (Vue 3)
 - [ ] Map to existing CSS classes (`d-headline--lg-compact`)
-- [ ] Add overrides: `weight`, `color`, `align` (logical values: start/end)
+- [ ] Add overrides: `color`, `align` (render `d-text--align-*` classes with matching CSS in `packages/dialtone-css/lib/build/less/components/text.less`)
 - [ ] Add comprehensive prop validators with clear error messages
 - [ ] Single-line `truncate` (boolean → `d-truncate` class)
 - [ ] Multi-line `maxLines` (number → `d-text__clamp` class + `--dt-text-line-clamp` custom property)
 - [ ] `text` prop (alternative to slot)
+- [ ] `numeric` prop applies new `d-text--numeric` class (replace utility usage with component-local style token)
 - [ ] TypeScript defs via JSDoc (Vue 3)
 - [ ] Unit tests (class composition, truncation, color inheritance, text prop, validators) (Vue 3)
+- [ ] Ensure `d-text__clamp` styles are bundled/imported so multi-line truncation works as expected
 - [x] Storybook stories (Vue 3)
 - [x] Update package exports (`packages/dialtone-vue3/components/text/index.js`, root `packages/dialtone-vue3/index.js`)
+- [ ] Restrict `strength` prop usage to kinds that support it; emit warnings otherwise
+- [ ] Remove `weight` prop from API (avoid redundancy with strength)
 - [ ] Cross-check rendered classes against `@data/type.json` fixture expectations to guarantee parity with documentation tables
 - [ ] Document variant matrices mapping `kind` × `size` × `strength` × `density` to concrete utility classes
 - [ ] Implement prop validation for `color` that warns when the supplied token does not map to known `d-fc-*` utilities; ensure theming coverage (Vue 3)

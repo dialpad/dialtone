@@ -35,7 +35,7 @@ export const TEXT_COLOR_PREFIX = 'd-fc-';
 
 export const TEXT_NUMERIC_CLASS = 'd-fvn-tabular';
 export const TEXT_TRUNCATE_CLASS = 'd-truncate';
-export const TEXT_LINE_CLAMP_CLASS = 'd-text__clamp';
+export const TEXT_LINE_CLAMP_CLASS = 'd-text--clamp';
 
 export default {
   TEXT_KIND_MODIFIERS,
