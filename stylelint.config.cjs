@@ -40,6 +40,7 @@ module.exports = {
 
     // override stylelint-config-standard rules
     'color-function-notation': null,
+    'color-function-alias-notation': null,
     'custom-media-pattern': null,
     'custom-property-pattern': null,
     'media-feature-name-no-vendor-prefix': null,
@@ -56,6 +57,20 @@ module.exports = {
         ignoreShorthands: ['/grid/'],
       },
     ],
+    'block-no-redundant-nested-style-rules': null,
+    'container-name-pattern': null,
+    'layer-name-pattern': null,
+    'lightness-notation': null,
+    'at-rule-descriptor-no-unknown': null,
+    'at-rule-descriptor-value-no-unknown': null,
+    'at-rule-no-deprecated': null,
+    'at-rule-prelude-no-invalid': null,
+    'declaration-property-value-keyword-no-deprecated': null,
+    'media-type-no-deprecated': null,
+    'nesting-selector-no-missing-scoping-root': null,
+    'no-invalid-position-declaration': null,
+    'property-no-deprecated': null,
+    'syntax-string-no-invalid': null,
     'less/color-no-invalid-hex': null,
     'less/no-duplicate-variables': null,
     'meowtec/no-px': [

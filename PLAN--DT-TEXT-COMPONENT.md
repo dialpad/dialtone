@@ -11,6 +11,12 @@
 
 ---
 
+## ✅ Milestone Log
+
+- **2025-10-17** — Completed base CSS (`packages/dialtone-css/lib/build/less/components/text.less`) and shared constants for Vue 2/3. Confirmed typography sources. Observed stylelint warnings about unknown rules on the new LESS file; will revisit once component wiring is complete.
+
+---
+
 ## 🎨 Naming Conventions (Critical)
 
 **API:**
@@ -710,6 +716,7 @@ export default {
 - **Document variant matrices** — Derive explicit `kind` × `size` × `strength` × `density` tables from `@data/type.json` and embed them here plus component docs. Until populated, note that unused combinations may yield no-op (ghost) props.
 - **Define SSR harness** — Specify the Nuxt/Vite SSR test workflow that validates hydration, `<component :is>` output, and attribute merging for `<dt-text>`.
 - **Enumerate color tokens** — Partner with the tokens team to publish a consumable list of supported `d-fc-*` utilities; wire that into prop validation once available.
+- **Next up:** Implement Vue 3 component scaffold, mirror in Vue 2, and add stories/tests per plan.
 
 ---
 

@@ -1,0 +1,26 @@
+//
+//  DIALTONE
+//  COMPONENTS: TEXT
+//
+//  TABLE OF CONTENTS
+//  • BASE STYLE
+//  • LINE CLAMP
+//
+//  ============================================================================
+//  $   BASE STYLE
+//  ----------------------------------------------------------------------------
+.d-text {
+  color: inherit;
+}
+
+//  ============================================================================
+//  $   LINE CLAMP
+//  ----------------------------------------------------------------------------
+
+.d-text__clamp {
+  --dt-text-line-clamp: 1;
+  display: -webkit-box;
+  -webkit-line-clamp: var(--dt-text-line-clamp);
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
