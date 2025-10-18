@@ -14,6 +14,7 @@
 ## ✅ Milestone Log
 
 - **2025-10-17** — Completed base CSS (`packages/dialtone-css/lib/build/less/components/text.less`) and shared constants for Vue 2/3. Confirmed typography sources. Observed stylelint warnings about unknown rules on the new LESS file; will revisit once component wiring is complete.
+- **2025-10-17** — Added Vue 3 exports (`packages/dialtone-vue3/components/text/index.js`, root index) so `DtText` is available to consumers. Storybook stories/tests still pending.
 
 ---
 
@@ -701,8 +702,8 @@ export default {
 - [ ] `text` prop (alternative to slot)
 - [ ] TypeScript defs via JSDoc (Vue 3)
 - [ ] Unit tests (class composition, truncation, color inheritance, text prop, validators) (Vue 3)
-- [ ] Storybook stories (Vue 3)
-- [ ] Update package exports (`packages/dialtone-vue3/components/text/index.js`, root `packages/dialtone-vue3/index.js`)
+- [x] Storybook stories (Vue 3)
+- [x] Update package exports (`packages/dialtone-vue3/components/text/index.js`, root `packages/dialtone-vue3/index.js`)
 - [ ] Cross-check rendered classes against `@data/type.json` fixture expectations to guarantee parity with documentation tables
 - [ ] Document variant matrices mapping `kind` × `size` × `strength` × `density` to concrete utility classes
 - [ ] Implement prop validation for `color` that warns when the supplied token does not map to known `d-fc-*` utilities; ensure theming coverage (Vue 3)

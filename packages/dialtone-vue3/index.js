@@ -68,6 +68,7 @@ export * from './components/skeleton';
 export * from './components/split_button';
 export * from './components/stack';
 export * from './components/tab';
+export * from './components/text';
 export * from './components/toast';
 export * from './components/toggle';
 export * from './components/tooltip';
