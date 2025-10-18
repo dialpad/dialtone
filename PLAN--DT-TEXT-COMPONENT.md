@@ -683,29 +683,31 @@ export default {
 
 ## 📋 Implementation Phases
 
-### Phase 1: MVP ()
+### Phase 1: MVP (Vue 3 First)
 
-**Goal:** Ship functional component mapping to existing tokens
+**Goal:** Ship functional Vue 3 component mapping to existing tokens (Vue 2 begins only after Vue 3 parity achieved)
 
 **Tasks:**
 
 - [ ] Create CSS file: `packages/dialtone-css/lib/build/less/components/text.less`
 - [ ] Implement `.d-text` base class and `.d-text__clamp` with custom property
-- [ ] Create component scaffold (Vue 3 + Vue 2)
-- [ ] Implement `kind`, `size`, `strength`, `density`, `as` props
+- [ ] Create component scaffold (Vue 3)
+- [ ] Implement `kind`, `size`, `strength`, `density`, `as` props (Vue 3)
 - [ ] Map to existing CSS classes (`d-headline--lg-compact`)
 - [ ] Add overrides: `weight`, `color`, `align` (logical values: start/end)
 - [ ] Add comprehensive prop validators with clear error messages
 - [ ] Single-line `truncate` (boolean → `d-truncate` class)
 - [ ] Multi-line `maxLines` (number → `d-text__clamp` class + `--dt-text-line-clamp` custom property)
 - [ ] `text` prop (alternative to slot)
-- [ ] TypeScript defs via JSDoc
-- [ ] Unit tests (class composition, truncation, color inheritance, text prop, validators)
-- [ ] Storybook stories
+- [ ] TypeScript defs via JSDoc (Vue 3)
+- [ ] Unit tests (class composition, truncation, color inheritance, text prop, validators) (Vue 3)
+- [ ] Storybook stories (Vue 3)
+- [ ] Update package exports (`packages/dialtone-vue3/components/text/index.js`, root `packages/dialtone-vue3/index.js`)
 - [ ] Cross-check rendered classes against `@data/type.json` fixture expectations to guarantee parity with documentation tables
 - [ ] Document variant matrices mapping `kind` × `size` × `strength` × `density` to concrete utility classes
-- [ ] Implement prop validation for `color` that warns when the supplied token does not map to known `d-fc-*` utilities; ensure theming coverage
-- [ ] Add SSR/hydration test plan (Nuxt/Vite SSR harness) validating `<component :is>` output and merged `class`/`style` attributes
+- [ ] Implement prop validation for `color` that warns when the supplied token does not map to known `d-fc-*` utilities; ensure theming coverage (Vue 3)
+- [ ] Add SSR/hydration test plan (Nuxt/Vite SSR harness) validating `<component :is>` output and merged `class`/`style` attributes (Vue 3)
+- [ ] After Vue 3 parity, mirror implementation to Vue 2 (component, exports, tests, stories)
 - [ ] **Lint rule alignment** — ESLint warning currently references only utilities. Action: update messaging in Phase 3 to recommend `<dt-text>` when feasible without breaking downstream pipelines.
 - **SSR coverage** — Hydration behavior untested; must add Nuxt/Vite SSR verification before GA. Action: include in MVP QA checklist.
 
