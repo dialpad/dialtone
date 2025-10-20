@@ -81,4 +81,33 @@ describe('DtText', () => {
 
     expect(wrapper.classes()).toContain('d-fc-primary');
   });
+
+  it('warns when strength is not supported for the provided kind and size', () => {
+    const warnSpy = vi.spyOn(console, 'warn').mockImplementation(() => {});
+
+    const wrapper = mountComponent({ kind: 'body', size: 'md', strength: 'soft' });
+
+    expect(warnSpy).toHaveBeenCalledWith(expect.stringContaining('strength="soft"'));
+    expect(wrapper.classes()).toContain('d-body--md');
+    expect(wrapper.classes()).not.toContain('d-body--md-soft');
+  });
+
+  it('warns when density is not supported for the provided kind and size', () => {
+    const warnSpy = vi.spyOn(console, 'warn').mockImplementation(() => {});
+
+    const wrapper = mountComponent({ kind: 'helper', size: 'sm', density: 'compact' });
+
+    expect(warnSpy).toHaveBeenCalledWith(expect.stringContaining('density="compact"'));
+    expect(wrapper.classes()).toContain('d-helper--sm');
+    expect(wrapper.classes()).not.toContain('d-helper--sm-compact');
+  });
+
+  it('warns when tone is not recognized', () => {
+    const warnSpy = vi.spyOn(console, 'warn').mockImplementation(() => {});
+
+    const wrapper = mountComponent({ tone: 'not-real' });
+
+    expect(warnSpy).toHaveBeenCalledWith(expect.stringContaining('Unsupported tone'));
+    expect(wrapper.classes()).not.toContain('d-fc-not-real');
+  });
 });

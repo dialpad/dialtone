@@ -18,8 +18,11 @@ import {
   TEXT_SIZE_MODIFIERS,
   TEXT_STRENGTH_MODIFIERS,
   TEXT_DENSITY_MODIFIERS,
+  TEXT_STRENGTH_BY_KIND_AND_SIZE,
+  TEXT_DENSITY_BY_KIND_AND_SIZE,
   TEXT_ALIGN_MODIFIERS,
   TEXT_TONE_PREFIX,
+  TEXT_TONE_TOKENS,
   TEXT_NUMERIC_CLASS,
   TEXT_TRUNCATE_CLASS,
   TEXT_LINE_CLAMP_CLASS,
@@ -216,18 +219,24 @@ export default {
       let modifier = `${TEXT_KIND_MODIFIERS[this.kind]}--${resolvedSize}`;
 
       if (this.strength) {
-        if (TEXT_STRENGTH_MODIFIERS.includes(this.strength)) {
-          modifier += `-${this.strength}`;
-        } else {
+        const allowedStrengths = TEXT_STRENGTH_BY_KIND_AND_SIZE[this.kind]?.[resolvedSize] || [];
+        if (!TEXT_STRENGTH_MODIFIERS.includes(this.strength)) {
           console.warn(`[DtText] Unsupported strength "${this.strength}".`);
+        } else if (!allowedStrengths.includes(this.strength)) {
+          console.warn(`[DtText] strength="${this.strength}" is not valid for kind="${this.kind}" and size="${resolvedSize}".`);
+        } else {
+          modifier += `-${this.strength}`;
         }
       }
 
       if (this.density) {
-        if (TEXT_DENSITY_MODIFIERS.includes(this.density)) {
-          modifier += `-${this.density}`;
-        } else {
+        const allowedDensities = TEXT_DENSITY_BY_KIND_AND_SIZE[this.kind]?.[resolvedSize] || [];
+        if (!TEXT_DENSITY_MODIFIERS.includes(this.density)) {
           console.warn(`[DtText] Unsupported density "${this.density}".`);
+        } else if (!allowedDensities.includes(this.density)) {
+          console.warn(`[DtText] density="${this.density}" is not valid for kind="${this.kind}" and size="${resolvedSize}".`);
+        } else {
+          modifier += `-${this.density}`;
         }
       }
 
@@ -250,6 +259,11 @@ export default {
 
     getToneClass () {
       if (!this.tone) {
+        return null;
+      }
+
+      if (!TEXT_TONE_TOKENS.includes(this.tone)) {
+        console.warn(`[DtText] Unsupported tone "${this.tone}".`);
         return null;
       }
 
