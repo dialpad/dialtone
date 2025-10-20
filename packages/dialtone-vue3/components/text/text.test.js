@@ -76,8 +76,8 @@ describe('DtText', () => {
     expect(wrapper.text()).toBe('Prop driven text');
   });
 
-  it('applies color modifier class', () => {
-    const wrapper = mountComponent({ color: 'primary' });
+  it('applies tone modifier class', () => {
+    const wrapper = mountComponent({ tone: 'primary' });
 
     expect(wrapper.classes()).toContain('d-fc-primary');
   });

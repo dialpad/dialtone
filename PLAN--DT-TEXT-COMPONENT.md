@@ -695,7 +695,7 @@ export default {
 - [ ] Create component scaffold (Vue 3)
 - [ ] Implement `kind`, `size`, `strength`, `density`, `as` props (Vue 3)
 - [ ] Map to existing CSS classes (`d-headline--lg-compact`)
-- [ ] Add overrides: `color`, `align` (render `d-text--align-*` classes with matching CSS in `packages/dialtone-css/lib/build/less/components/text.less`)
+- [ ] Add overrides: `tone`, `align` (render `d-text--align-*` classes with matching CSS in `packages/dialtone-css/lib/build/less/components/text.less`)
 - [ ] Add comprehensive prop validators with clear error messages
 - [ ] Single-line `truncate` (boolean → `d-truncate` class)
 - [ ] Multi-line `maxLines` (number → `d-text__clamp` class + `--dt-text-line-clamp` custom property)
@@ -710,7 +710,7 @@ export default {
 - [ ] Remove `weight` prop from API (avoid redundancy with strength)
 - [ ] Cross-check rendered classes against `@data/type.json` fixture expectations to guarantee parity with documentation tables
 - [ ] Document variant matrices mapping `kind` × `size` × `strength` × `density` to concrete utility classes
-- [ ] Implement prop validation for `color` that warns when the supplied token does not map to known `d-fc-*` utilities; ensure theming coverage (Vue 3)
+- [ ] Implement prop validation for `tone` that warns when the supplied token does not map to known `d-fc-*` utilities; ensure theming coverage (Vue 3)
 - [ ] Add SSR/hydration test plan (Nuxt/Vite SSR harness) validating `<component :is>` output and merged `class`/`style` attributes (Vue 3)
 - [ ] After Vue 3 parity, mirror implementation to Vue 2 (component, exports, tests, stories)
 - [ ] **Lint rule alignment** — ESLint warning currently references only utilities. Action: update messaging in Phase 3 to recommend `<dt-text>` when feasible without breaking downstream pipelines.

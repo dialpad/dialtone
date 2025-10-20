@@ -20,7 +20,7 @@ import {
   TEXT_DENSITY_MODIFIERS,
   TEXT_WEIGHT_MODIFIERS,
   TEXT_ALIGN_MODIFIERS,
-  TEXT_COLOR_PREFIX,
+  TEXT_TONE_PREFIX,
   TEXT_NUMERIC_CLASS,
   TEXT_TRUNCATE_CLASS,
   TEXT_LINE_CLAMP_CLASS,
@@ -66,7 +66,7 @@ export default {
       default: null,
     },
 
-    color: {
+    tone: {
       type: String,
       default: null,
     },
@@ -122,9 +122,9 @@ export default {
         classes.push(alignClass);
       }
 
-      const colorClass = this.getColorClass();
-      if (colorClass) {
-        classes.push(colorClass);
+      const toneClass = this.getToneClass();
+      if (toneClass) {
+        classes.push(toneClass);
       }
 
       if (this.truncate) {
@@ -229,12 +229,12 @@ export default {
       return alignClass;
     },
 
-    getColorClass () {
-      if (!this.color) {
+    getToneClass () {
+      if (!this.tone) {
         return null;
       }
 
-      return `${TEXT_COLOR_PREFIX}${this.color}`;
+      return `${TEXT_TONE_PREFIX}${this.tone}`;
     },
   },
 };

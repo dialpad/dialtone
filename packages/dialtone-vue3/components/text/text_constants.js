@@ -31,7 +31,7 @@ export const TEXT_ALIGN_MODIFIERS = {
   justify: 'd-ta-justify',
 };
 
-export const TEXT_COLOR_PREFIX = 'd-fc-';
+export const TEXT_TONE_PREFIX = 'd-fc-';
 
 export const TEXT_NUMERIC_CLASS = 'd-fvn-tabular';
 export const TEXT_TRUNCATE_CLASS = 'd-truncate';
@@ -44,7 +44,7 @@ export default {
   TEXT_DENSITY_MODIFIERS,
   TEXT_WEIGHT_MODIFIERS,
   TEXT_ALIGN_MODIFIERS,
-  TEXT_COLOR_PREFIX,
+  TEXT_TONE_PREFIX,
   TEXT_NUMERIC_CLASS,
   TEXT_TRUNCATE_CLASS,
   TEXT_LINE_CLAMP_CLASS,

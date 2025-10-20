@@ -27,7 +27,7 @@ export const argsData = {
   strength: undefined,
   density: undefined,
   weight: undefined,
-  color: undefined,
+  tone: undefined,
   align: undefined,
   truncate: false,
   maxLines: undefined,
@@ -66,7 +66,7 @@ export const argTypesData = {
     options: weightOptions,
     control: { type: 'select' },
   },
-  color: {
+  tone: {
     control: 'text',
   },
   align: {

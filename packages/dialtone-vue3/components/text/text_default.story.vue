@@ -6,7 +6,7 @@
     :strength="$attrs.strength"
     :density="$attrs.density"
     :weight="$attrs.weight"
-    :color="$attrs.color"
+    :tone="$attrs.tone"
     :align="$attrs.align"
     :truncate="$attrs.truncate"
     :max-lines="$attrs.maxLines"
