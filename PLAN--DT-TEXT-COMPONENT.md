@@ -691,34 +691,36 @@ export default {
 
 **Tasks:**
 
-- [ ] Create CSS file: `packages/dialtone-css/lib/build/less/components/text.less`
-- [ ] Implement `.d-text` base class and `.d-text__clamp` with custom property
-- [ ] Create component scaffold (Vue 3)
-- [ ] Implement `kind`, `size`, `strength`, `density`, `as` props (Vue 3)
-- [ ] Map to existing CSS classes (`d-headline--lg-compact`)
-- [ ] Add overrides: `tone`, `align` (render `d-text--align-*` classes with matching CSS in `packages/dialtone-css/lib/build/less/components/text.less`)
-- [ ] Add comprehensive prop validators with clear error messages
-- [ ] Single-line `truncate` (boolean → `d-truncate` class)
-- [ ] Multi-line `maxLines` (number → `d-text__clamp` class + `--dt-text-line-clamp` custom property)
-- [ ] `text` prop (alternative to slot)
-- [ ] `numeric` prop applies new `d-text--numeric` class (replace utility usage with component-local style token)
+- [x] Create CSS file: `packages/dialtone-css/lib/build/less/components/text.less`
+- [x] Implement `.d-text` base class and `.d-text__clamp` with custom property
+- [x] Create component scaffold (Vue 3)
+- [x] Implement `kind`, `size`, `strength`, `density`, `as` props (Vue 3)
+- [x] Map to existing CSS classes (`d-headline--lg-compact`)
+- [x] Add overrides: `tone`, `align` (render `d-text--align-*` classes with matching CSS in `packages/dialtone-css/lib/build/less/components/text.less`)
+- [x] Add comprehensive prop validators with clear error messages
+- [x] Single-line `truncate` (boolean → `d-truncate` class)
+- [x] Multi-line `maxLines` (number → `d-text__clamp` class + `--dt-text-line-clamp` custom property)
+- [x] `text` prop (alternative to slot)
+- [x] `numeric` prop applies new `d-text--numeric` class (replace utility usage with component-local style token)
 - [ ] TypeScript defs via JSDoc (Vue 3)
-- [ ] Unit tests (class composition, truncation, color inheritance, text prop, validators) (Vue 3)
-- [ ] Ensure `d-text__clamp` styles are bundled/imported so multi-line truncation works as expected
+- [x] Unit tests (class composition, truncation, color inheritance, text prop, validators) (Vue 3)
+- [x] Ensure `d-text__clamp` styles are bundled/imported so multi-line truncation works as expected
 - [x] Storybook stories (Vue 3)
 - [x] Update package exports (`packages/dialtone-vue3/components/text/index.js`, root `packages/dialtone-vue3/index.js`)
-- [ ] Restrict `strength` prop usage to kinds that support it; emit warnings otherwise
-- [ ] Remove `weight` prop from API (avoid redundancy with strength)
+- [x] Restrict `strength` prop usage to kinds that support it; emit warnings otherwise
+- [x] Remove `weight` prop from API (avoid redundancy with strength)
+- [x] Implement prop validation for `tone` that warns when the supplied token does not map to known `d-fc-*` utilities; ensure theming coverage (Vue 3)
 - [ ] Cross-check rendered classes against `@data/type.json` fixture expectations to guarantee parity with documentation tables
 - [ ] Document variant matrices mapping `kind` × `size` × `strength` × `density` to concrete utility classes
-- [ ] Implement prop validation for `tone` that warns when the supplied token does not map to known `d-fc-*` utilities; ensure theming coverage (Vue 3)
-- [ ] Add SSR/hydration test plan (Nuxt/Vite SSR harness) validating `<component :is>` output and merged `class`/`style` attributes (Vue 3)
-- [ ] After Vue 3 parity, mirror implementation to Vue 2 (component, exports, tests, stories)
 - [ ] Automate tone token list generation to avoid manual curation (pull from `packages/dialtone-css/lib/dist/dialtone-docs.json` with an exclusion list for base colors like `red-400`)
 - [ ] Author component documentation in `apps/dialtone-documentation/docs/components/` covering usage, props, and design guidance
-- [ ] Investigate truncate accessibility (auto `title` vs ARIA attributes vs consumer guidance) and document recommendation
-- [ ] Implement or document `truncate` UX decision (e.g., add `title` automatically or require consumer opt-in)
+- [ ] Add SSR/hydration test plan (Nuxt/Vite SSR harness) validating `<component :is>` output and merged `class`/`style` attributes (Vue 3)
+- [ ] After Vue 3 parity, mirror implementation to Vue 2 (component, exports, tests, stories)
+- [ ] **Lint rule alignment** — ESLint warning currently references only utilities. Action: update messaging in Phase 3 to recommend `<dt-text>` when feasible without breaking downstream pipelines.
 - **Notes:** Auto-applying `title` works only when using the `text` prop. Slot content is harder to mirror reliably, and screen readers may need explicit tooltip/ARIA strategies. Likely outcome: document guidance for product teams rather than auto behavior.
+- **Deferred:**
+  - Investigate truncate accessibility (auto `title` vs ARIA attributes vs consumer guidance) and document recommendation
+  - Implement or document `truncate` UX decision (e.g., add `title` automatically or require consumer opt-in)
 - [ ] **Lint rule alignment** — ESLint warning currently references only utilities. Action: update messaging in Phase 3 to recommend `<dt-text>` when feasible without breaking downstream pipelines.
 - **SSR coverage** — Hydration behavior untested; must add Nuxt/Vite SSR verification before GA. Action: include in MVP QA checklist.
 
