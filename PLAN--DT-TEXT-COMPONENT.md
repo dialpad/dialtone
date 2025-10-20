@@ -718,6 +718,7 @@ export default {
 - [ ] Author component documentation in `apps/dialtone-documentation/docs/components/` covering usage, props, and design guidance
 - [ ] Investigate truncate accessibility (auto `title` vs ARIA attributes vs consumer guidance) and document recommendation
 - [ ] Implement or document `truncate` UX decision (e.g., add `title` automatically or require consumer opt-in)
+- **Notes:** Auto-applying `title` works only when using the `text` prop. Slot content is harder to mirror reliably, and screen readers may need explicit tooltip/ARIA strategies. Likely outcome: document guidance for product teams rather than auto behavior.
 - [ ] **Lint rule alignment** — ESLint warning currently references only utilities. Action: update messaging in Phase 3 to recommend `<dt-text>` when feasible without breaking downstream pipelines.
 - **SSR coverage** — Hydration behavior untested; must add Nuxt/Vite SSR verification before GA. Action: include in MVP QA checklist.
 
