@@ -8,6 +8,7 @@
 
 - **2025-10-17** — Restructured plan with explicit token alignment guidance, introduced changelog + decision log scaffolding, and recorded research references for typography docs.
 - **2025-10-17** — Added variant coverage requirements, semantic element guidance, SSR/test expectations, lint roadmap alignment, and initial decision log entries after principal review.
+- **2025-10-19** — Implemented Vue 3 validations (strength/density/tone), refactored numeric/align CSS, added prop documentation, test coverage, tone token automation plan, and truncate accessibility follow-ups.
 
 ---
 
@@ -713,6 +714,7 @@ export default {
 - [ ] Implement prop validation for `tone` that warns when the supplied token does not map to known `d-fc-*` utilities; ensure theming coverage (Vue 3)
 - [ ] Add SSR/hydration test plan (Nuxt/Vite SSR harness) validating `<component :is>` output and merged `class`/`style` attributes (Vue 3)
 - [ ] After Vue 3 parity, mirror implementation to Vue 2 (component, exports, tests, stories)
+- [ ] Automate tone token list generation to avoid manual curation (pull from `packages/dialtone-css/lib/dist/dialtone-docs.json` with an exclusion list for base colors like `red-400`)
 - [ ] Author component documentation in `apps/dialtone-documentation/docs/components/` covering usage, props, and design guidance
 - [ ] Investigate truncate accessibility (auto `title` vs ARIA attributes vs consumer guidance) and document recommendation
 - [ ] Implement or document `truncate` UX decision (e.g., add `title` automatically or require consumer opt-in)
