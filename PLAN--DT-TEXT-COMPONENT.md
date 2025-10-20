@@ -89,6 +89,7 @@ Source of truth cross-checked against `apps/dialtone-documentation/docs/_data/ty
 - **Storybook notes:** Add summary of allowable combinations and tone guidance to `packages/dialtone-vue3/components/text/text.stories.js` `parameters.docs` block once content is ready.
 - **API table:** Generate prop tables from source JSDoc, highlighting default slot vs `text` prop behavior.
 - **Usage examples:** Include examples for headline, body, label/helper/code, numeric, truncation, alignment, and tone variations.
+- **Docs navigation:** Update `apps/dialtone-documentation/docs/_data/site-nav.json` with `{ "text": "Text", "link": "/components/text.html" }` so the page appears in the Components sidebar.
 
 #### 🧪 SSR & Testing Strategy (Draft)
 

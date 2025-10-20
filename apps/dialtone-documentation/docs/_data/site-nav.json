@@ -754,6 +754,10 @@
           "link": "/components/tabs.html"
         },
         {
+          "text": "Text",
+          "link": "/components/text.html"
+        },
+        {
           "text": "Toast",
           "link": "/components/toast.html"
         },
