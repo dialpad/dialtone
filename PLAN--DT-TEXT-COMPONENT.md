@@ -62,6 +62,27 @@ Renders as:
 - **Shared source of truth:** Publish the matrices in this plan and ship a mirrored reference within component docs so engineers know exactly which permutations are valid and which intentionally fall back.
 - **Future additions:** Document how new styles (e.g., `headline--xxxl`, additional densities) will flow from tokens → utilities → component props to keep the contract coherent.
 
+#### ✅ Variant Matrix (verified 2025-10-20)
+
+| Kind | Size | Strength | Density | Utility Tokens |
+| --- | --- | --- | --- | --- |
+| headline | eyebrow | – | – | `d-headline--eyebrow` |
+| headline | sm | soft | compact | `d-headline--sm`, `d-headline--sm-soft`, `d-headline--sm-compact`, `d-headline--sm-soft-compact` |
+| headline | md | – | compact | `d-headline--md`, `d-headline--md-compact` |
+| headline | lg | soft | compact | `d-headline--lg`, `d-headline--lg-soft`, `d-headline--lg-compact`, `d-headline--lg-soft-compact` |
+| headline | xl | – | compact | `d-headline--xl`, `d-headline--xl-compact` |
+| headline | xxl | – | compact | `d-headline--xxl`, `d-headline--xxl-compact` |
+| body | sm | – | compact | `d-body--sm`, `d-body--sm-compact` |
+| body | md | – | compact | `d-body--md`, `d-body--md-compact` |
+| label | sm | plain | compact | `d-label--sm`, `d-label--sm-plain`, `d-label--sm-compact`, `d-label--sm-plain-compact` |
+| label | md | plain | compact | `d-label--md`, `d-label--md-plain`, `d-label--md-compact`, `d-label--md-plain-compact` |
+| helper | sm | – | – | `d-helper--sm` |
+| helper | md | – | – | `d-helper--md` |
+| code | sm | – | – | `d-code--sm` |
+| code | md | – | – | `d-code--md` |
+
+Source of truth cross-checked against `apps/dialtone-documentation/docs/_data/type.json`; storybook examples in `packages/dialtone-vue3/components/text/text_variants.story.vue` cover each combination.
+
 ---
 
 ## 📊 Architecture: Single Component

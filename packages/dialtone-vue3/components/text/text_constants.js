@@ -17,36 +17,8 @@ export const TEXT_SIZE_MODIFIERS = {
 export const TEXT_STRENGTH_MODIFIERS = ['soft', 'plain'];
 export const TEXT_DENSITY_MODIFIERS = ['compact'];
 
-export const TEXT_TONE_TOKENS = [
-  'critical',
-  'critical-inverted',
-  'critical-strong',
-  'critical-strong-inverted',
-  'current',
-  'disabled',
-  'disabled-inverted',
-  'muted',
-  'muted-inverted',
-  'neutral-black',
-  'neutral-transparent',
-  'neutral-white',
-  'placeholder',
-  'placeholder-inverted',
-  'primary',
-  'primary-inverted',
-  'secondary',
-  'secondary-inverted',
-  'success',
-  'success-inverted',
-  'success-strong',
-  'success-strong-inverted',
-  'tertiary',
-  'tertiary-inverted',
-  'transparent',
-  'unset',
-  'warning',
-  'warning-inverted',
-];
+import TEXT_TONE_TOKENS from './text_tone_tokens.js';
+export { TEXT_TONE_TOKENS };
 
 export const TEXT_STRENGTH_BY_KIND_AND_SIZE = {
   headline: {
