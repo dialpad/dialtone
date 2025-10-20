@@ -2,6 +2,7 @@
 title: Text
 description: Lorem ipsum dolor sit amet, consectetur adipiscing elit.
 status: beta
+image: assets/images/components/text.png
 ---
 
 <code-well-header>
@@ -34,79 +35,192 @@ status: beta
 </template>
 </dialtone-usage>
 
-## Variant Matrix
+## Variants
 
-Validated against `apps/dialtone-documentation/docs/_data/type.json` and represented in Storybook (`text_variants.story.vue`).
+### Kind
 
-| Kind | Size | Strength | Density | Utility Tokens |
-| --- | --- | --- | --- | --- |
-| headline | eyebrow | – | – | `d-headline--eyebrow` |
-| headline | sm | soft | compact | `d-headline--sm`, `d-headline--sm-soft`, `d-headline--sm-compact`, `d-headline--sm-soft-compact` |
-| headline | md | – | compact | `d-headline--md`, `d-headline--md-compact` |
-| headline | lg | soft | compact | `d-headline--lg`, `d-headline--lg-soft`, `d-headline--lg-compact`, `d-headline--lg-soft-compact` |
-| headline | xl | – | compact | `d-headline--xl`, `d-headline--xl-compact` |
-| headline | xxl | – | compact | `d-headline--xxl`, `d-headline--xxl-compact` |
-| body | sm | – | compact | `d-body--sm`, `d-body--sm-compact` |
-| body | md | – | compact | `d-body--md`, `d-body--md-compact` |
-| label | sm | plain | compact | `d-label--sm`, `d-label--sm-plain`, `d-label--sm-compact`, `d-label--sm-plain-compact` |
-| label | md | plain | compact | `d-label--md`, `d-label--md-plain`, `d-label--md-compact`, `d-label--md-plain-compact` |
-| helper | sm | – | – | `d-helper--sm` |
-| helper | md | – | – | `d-helper--md` |
-| code | sm | – | – | `d-code--sm` |
-| code | md | – | – | `d-code--md` |
+<code-well-header>
+  <dt-stack gap="400" direction="row" class="d-ai-baseline">
+    <dt-text kind="headline">Headline</dt-text>
+    <dt-text kind="body">Body</dt-text>
+    <dt-text kind="label">Label</dt-text>
+    <dt-text kind="helper">Helper</dt-text>
+    <dt-text kind="code">Code</dt-text>
+  </dt-stack>
+</code-well-header>
 
-## Props
+### Size
 
-| Prop | Type | Default | Description |
-| --- | --- | --- | --- |
-| `as` | `string` | `"span"` | HTML tag or component used for rendering. |
-| `kind` | `"headline" \| "body" \| "label" \| "helper" \| "code"` | `undefined` | Typography family that drives token selection. |
-| `size` | `string` | `undefined` | Size within the selected `kind`. When omitted, defaults to `md` internally. |
-| `strength` | `"soft" \| "plain"` | `undefined` | Applies supported strength modifiers for specific `kind`/`size` permutations. |
-| `density` | `"compact"` | `undefined` | Enables compact line-height where supported. |
-| `tone` | `string` | `undefined` | Dialtone foreground color token suffix (e.g., `primary`, `muted`). |
-| `align` | `"start" \| "center" \| "end" \| "justify"` | `undefined` | Adds matching alignment utility classes. |
-| `truncate` | `boolean` | `false` | Applies single-line truncation (`d-truncate`). |
-| `maxLines` | `number` | `undefined` | Uses `d-text--clamp` for multi-line clamping. |
-| `numeric` | `boolean` | `false` | Switches to tabular-number typography. |
-| `text` | `string` | `undefined` | Fallback text when no default slot content is provided. |
+All kinds support `size` prop, but not all sizes are available for each kind.
+
+<code-well-header>
+  <dt-stack class="d-w100p">
+    <dt-text kind="headline" size="lg" class="d-fc-muted">Headline</dt-text>
+    <dt-stack gap="400" direction="row" class="d-ai-baseline">
+      <dt-text kind="headline" size="eyebrow">eyebrow</dt-text>
+      <dt-text kind="headline" size="sm">sm</dt-text>
+      <dt-text kind="headline" size="md">md</dt-text>
+      <dt-text kind="headline" size="lg">lg</dt-text>
+      <dt-text kind="headline" size="xl">xl</dt-text>
+      <dt-text kind="headline" size="xxl">xxl</dt-text>
+    </dt-stack>
+  </dt-stack>
+  <dt-stack class="d-w100p">
+    <dt-text kind="headline" size="lg" class="d-fc-muted">Body</dt-text>
+    <dt-stack gap="400" direction="row" class="d-ai-baseline">
+      <dt-text kind="body" size="sm">sm</dt-text>
+      <dt-text kind="body" size="md">md</dt-text>
+    </dt-stack>
+  </dt-stack>
+  <dt-stack class="d-w100p">
+    <dt-text kind="headline" size="lg" class="d-fc-muted">Label</dt-text>
+    <dt-stack gap="400" direction="row" class="d-ai-baseline">
+      <dt-text kind="label" size="sm">sm</dt-text>
+      <dt-text kind="label" size="md">md</dt-text>
+    </dt-stack>
+  </dt-stack>
+  <dt-stack class="d-w100p">
+    <dt-text kind="headline" size="lg" class="d-fc-muted">Helper</dt-text>
+    <dt-stack gap="400" direction="row" class="d-ai-baseline">
+      <dt-text kind="helper" size="sm">sm</dt-text>
+      <dt-text kind="helper" size="md">md</dt-text>
+    </dt-stack>
+  </dt-stack>
+  <dt-stack class="d-w100p">
+    <dt-text kind="headline" size="lg" class="d-fc-muted">Code</dt-text>
+    <dt-stack gap="400" direction="row" class="d-ai-baseline">
+      <dt-text kind="code" size="sm">sm</dt-text>
+      <dt-text kind="code" size="md">md</dt-text>
+    </dt-stack>
+  </dt-stack>
+</code-well-header>
+
+### Density
+
+Density prop only applies to `headline` and `body` kinds.
+
+<code-well-header>
+  <dt-stack class="d-w100p d-ba d-bar4">
+    <table class="d-w100p d-table">
+      <colgroup>
+        <col>
+        <col class="d-w50p">
+        <col class="d-w50p">
+      </colgroup>
+      <tr>
+        <th></th>
+        <th>
+          <dt-text as="code" kind="code" class="d-docsite-code">density="<strong>default</strong>"</dt-text>
+        </th>
+        <th>
+          <dt-text as="code" kind="code" class="d-docsite-code">density="<strong>compact</strong>"</dt-text>
+        </th>
+      </tr>
+      <tr class="d-va-baseline">
+        <th scope="row">
+          <dt-text as="code" align="end" kind="code">headline</dt-text>
+        </th>
+        <td>
+          <dt-text kind="headline" as="h2" size="lg" tone="primary" density="default" class="d-bgc-moderate-opaque">First in AI. Best in Agentic.</dt-text>
+        </td>
+        <td>
+          <dt-text kind="headline" as="h2" size="lg" tone="primary" density="compact" class="d-bgc-moderate-opaque">First in AI. Best in Agentic.</dt-text>
+        </td>
+      </tr>
+      <tr class="d-va-baseline">
+        <th scope="row">
+          <dt-text as="code" align="end" kind="code">body</dt-text>
+        </th>
+        <td>
+          <dt-text kind="body" as="p" tone="primary" density="default" class="d-bgc-moderate-opaque">Welcome to Dialpad, the most modern, AI-powered business communications platform. </dt-text>
+        </td>
+        <td>
+          <dt-text kind="body" as="p" tone="primary" density="compact" class="d-bgc-moderate-opaque">Welcome to Dialpad, the most modern, AI-powered business communications platform. </dt-text>
+        </td>
+      </tr>
+      <tr class="d-va-baseline">
+        <th scope="row">
+          <dt-text as="code" align="end" kind="code">label</dt-text>
+        </th>
+        <td>
+          <dt-text kind="label" as="p" tone="primary" density="default" class="d-bgc-moderate-opaque">Choose your time zone</dt-text>
+        </td>
+        <td>
+          <dt-text kind="label" as="p" tone="primary" density="compact" class="d-bgc-moderate-opaque">Choose your time zone</dt-text>
+        </td>
+      </tr>
+    </table>
+  </dt-stack>
+</code-well-header>
+
+<code-example-tabs
+vueCode='
+<dt-text density="default" kind="headline|body|label">....</dt-text>
+<dt-text density="compact" kind="headline|body|label">....</dt-text>
+' />
+
+## Strength
+
+The `strength` prop only applies to `headline` and `label` kinds.
+
+<code-well-header>
+  <dt-stack class="d-w100p d-ba d-bar4">
+    (table goes here)
+  </dt-stack>
+</code-well-header>
+
+<code-example-tabs
+vueCode='
+(representative vue code goes here)
+' />
+
+### Tone
+
+<code-well-header>
+  <dt-stack class="d-w100p" gap="500">
+    <div class="d-ba d-bc-subtle d-bas-dashed">
+      <dt-text kind="body" as="p" align="start">Welcome to Dialpad, the most modern, AI-powered business communications platform. We've taken every form of communication that you rely on and unified it into one app. </dt-text>
+    </div>
+    <div class="d-ba d-bc-subtle d-bas-dashed">
+      <dt-text kind="body" as="p" align="center">Welcome to Dialpad, the most modern, AI-powered business communications platform. We've taken every form of communication that you rely on and unified it into one app. </dt-text>
+    </div>
+    <div class="d-ba d-bc-subtle d-bas-dashed">
+      <dt-text kind="body" as="p" align="end">Welcome to Dialpad, the most modern, AI-powered business communications platform. We've taken every form of communication that you rely on and unified it into one app. </dt-text>
+    </div>
+    <div class="d-ba d-bc-subtle d-bas-dashed">
+      <dt-text kind="body" as="p" align="justify">Welcome to Dialpad, the most modern, AI-powered business communications platform. We've taken every form of communication that you rely on and unified it into one app. </dt-text>
+    </div>
+  </dt-stack>
+</code-well-header>
+
+<code-example-tabs
+vueCode='
+<dt-text align="start" kind="body">....</dt-text>
+<dt-text align="center" kind="body">....</dt-text>
+<dt-text align="end" kind="body">....</dt-text>
+<dt-text align="justify" kind="body">....</dt-text>
+' />
+
+### Truncate
+
+Since `DtText`'s default element is a `<span>`, the `truncate` will only work if its element is in block/inline-block context, e.g. `<div>...</div>`.
+
+<code-well-header>
+  <dt-stack class="d-w100p">
+    <dt-text kind="body" as="p" truncate>Welcome to Dialpad, the most modern, AI-powered business communications platform. We've taken every form of communication that you rely on and unified it into one app.</dt-text>
+  </dt-stack>
+</code-well-header>
+
+<code-example-tabs
+vueCode='
+<dt-text kind="body" as="p" truncate>....</dt-text>
+' />
 
 ## Accessibility
 
 - Maintain semantic structure via `as` (e.g., screen readers expect heading levels to be sequential).
 - When using `truncate`, provide another way to access the full content (tooltip, detail view, or explicit `aria-label`). `DtText` does not apply a `title` attribute automatically, so consuming applications should opt in.
 - Allow numeric content to remain readable by enabling the `numeric` prop when aligning tables or counters.
-
-## Examples
-
-### Headings and body copy
-
-<code-well-header>
-  <dt-stack gap="300">
-    <dt-text kind="headline" size="lg" as="h1">Account overview</dt-text>
-    <dt-text kind="body" size="md">Latest activity appears below.</dt-text>
-  </dt-stack>
-</code-well-header>
-
-### Inline status with tone
-
-<code-well-header>
-  <dt-text kind="body" tone="success">All systems operational</dt-text>
-</code-well-header>
-
-### Tabular numbers
-
-<code-well-header>
-  <dt-text kind="code" size="md" numeric>0021 4456 7881</dt-text>
-</code-well-header>
-
-### Multi-line clamp
-
-<code-well-header>
-  <dt-text kind="body" size="md" :max-lines="3">
-    Dialtone typography primitives ensure consistent spacing and hierarchy across pages. Use `maxLines` for controlled truncation while preserving semantic HTML structure.
-  </dt-text>
-</code-well-header>
 
 ## Vue API
 
