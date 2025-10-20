@@ -702,7 +702,7 @@ export default {
 - [x] Multi-line `maxLines` (number → `d-text__clamp` class + `--dt-text-line-clamp` custom property)
 - [x] `text` prop (alternative to slot)
 - [x] `numeric` prop applies new `d-text--numeric` class (replace utility usage with component-local style token)
-- [ ] TypeScript defs via JSDoc (Vue 3)
+- [x] TypeScript defs via JSDoc (Vue 3)
 - [x] Unit tests (class composition, truncation, color inheritance, text prop, validators) (Vue 3)
 - [x] Ensure `d-text__clamp` styles are bundled/imported so multi-line truncation works as expected
 - [x] Storybook stories (Vue 3)
