@@ -110,10 +110,10 @@ Density prop only applies to `headline` and `body` kinds.
       <tr>
         <th></th>
         <th>
-          <dt-text as="code" kind="code" class="d-docsite-code">density="<strong>default</strong>"</dt-text>
+          <dt-text as="code" kind="code">Default</dt-text>
         </th>
         <th>
-          <dt-text as="code" kind="code" class="d-docsite-code">density="<strong>compact</strong>"</dt-text>
+          <dt-text as="code" kind="code">density="<strong>compact</strong>"</dt-text>
         </th>
       </tr>
       <tr class="d-va-baseline">
@@ -159,22 +159,94 @@ vueCode='
 <dt-text density="compact" kind="headline|body|label">....</dt-text>
 ' />
 
-## Strength
+### Strength
 
-The `strength` prop only applies to `headline` and `label` kinds.
+`strength="soft"` only applies to select sizes of `headline` kind, and `strength="plain"` only applies to select sizes of `label` kind.
 
 <code-well-header>
   <dt-stack class="d-w100p d-ba d-bar4">
-    (table goes here)
+    <table class="d-w100p d-table">
+      <tr>
+        <th></th>
+        <th>
+          <dt-text as="code" kind="code">Default</dt-text>
+        </th>
+        <th>
+          <dt-text as="code" kind="code">strength="<strong>soft</strong>"</dt-text>
+        </th>
+        <th>
+          <dt-text as="code" kind="code">strength="<strong>plain</strong>"</dt-text>
+        </th>
+      </tr>
+      <tr class="d-va-baseline">
+        <th scope="row">
+          <dt-text as="code" align="end" kind="code" class="d-ws-nowrap">headline sm</dt-text>
+        </th>
+        <td>
+          <dt-text kind="headline" as="h2" size="sm" tone="primary">First in AI. Best in Agentic.</dt-text>
+        </td>
+        <td>
+          <dt-text kind="headline" as="h2" size="sm" tone="primary" strength="soft">First in AI. Best in Agentic.</dt-text>
+        </td>
+        <td>
+          <dt-text tone="muted" size="sm" title="not available">-</dt-text>
+        </td>
+      </tr>
+      <tr class="d-va-baseline">
+        <th scope="row">
+          <dt-text as="code" align="end" kind="code" class="d-ws-nowrap">headline lg</dt-text>
+        </th>
+        <td>
+          <dt-text kind="headline" as="h2" size="lg" tone="primary">First in AI. Best in Agentic.</dt-text>
+        </td>
+        <td>
+          <dt-text kind="headline" as="h2" size="lg" tone="primary" strength="soft">First in AI. Best in Agentic.</dt-text>
+        </td>
+        <td>
+          <dt-text tone="muted" size="sm" title="not available">-</dt-text>
+        </td>
+      </tr>
+      <tr class="d-va-baseline">
+        <th scope="row">
+          <dt-text as="code" align="end" kind="code" class="d-ws-nowrap">label sm</dt-text>
+        </th>
+        <td>
+          <dt-text kind="label" as="p" tone="primary" size="sm">Choose your time zone</dt-text>
+        </td>
+        <td>
+          <dt-text tone="muted" size="sm" title="not available">-</dt-text>
+        </td>
+        <td>
+          <dt-text kind="label" as="p" tone="primary" strength="plain" size="sm">Choose your time zone</dt-text>
+        </td>
+      </tr>
+      <tr class="d-va-baseline">
+        <th scope="row">
+          <dt-text as="code" align="end" kind="code" class="d-ws-nowrap">label md</dt-text>
+        </th>
+        <td>
+          <dt-text kind="label" as="p" tone="primary" size="md">Choose your time zone</dt-text>
+        </td>
+        <td>
+          <dt-text tone="muted" size="sm" title="not available">-</dt-text>
+        </td>
+        <td>
+          <dt-text kind="label" as="p" tone="primary" strength="plain" size="md">Choose your time zone</dt-text>
+        </td>
+      </tr>
+    </table>
   </dt-stack>
 </code-well-header>
 
 <code-example-tabs
 vueCode='
-(representative vue code goes here)
+<dt-text kind="headline" size="sm|lg" strength="soft">....</dt-text>
+<dt-text kind="label" strength="plain">....</dt-text>
 ' />
 
-### Tone
+### Align
+
+Since `DtText`'s default element is a `<span>`, the `align` prop will only work if its element is in block or inline-block context, e.g. `<div>...</div>`.
 
 <code-well-header>
   <dt-stack class="d-w100p" gap="500">
@@ -203,7 +275,7 @@ vueCode='
 
 ### Truncate
 
-Since `DtText`'s default element is a `<span>`, the `truncate` will only work if its element is in block/inline-block context, e.g. `<div>...</div>`.
+Since `DtText`'s default element is a `<span>`, the `truncate` will only work if its element is in block or inline-block context, e.g. `<div>...</div>`.
 
 <code-well-header>
   <dt-stack class="d-w100p">
