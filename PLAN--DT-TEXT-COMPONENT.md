@@ -83,6 +83,31 @@ Renders as:
 
 Source of truth cross-checked against `apps/dialtone-documentation/docs/_data/type.json`; storybook examples in `packages/dialtone-vue3/components/text/text_variants.story.vue` cover each combination.
 
+#### 📄 Documentation & Content Plan
+
+- **Component page draft:** Create `apps/dialtone-documentation/docs/components/text.md` covering usage, props, accessibility (truncate guidance), and variant tables (reuse matrix above).
+- **Storybook notes:** Add summary of allowable combinations and tone guidance to `packages/dialtone-vue3/components/text/text.stories.js` `parameters.docs` block once content is ready.
+- **API table:** Generate prop tables from source JSDoc, highlighting default slot vs `text` prop behavior.
+- **Usage examples:** Include examples for headline, body, label/helper/code, numeric, truncation, alignment, and tone variations.
+
+#### 🧪 SSR & Testing Strategy (Draft)
+
+- **Nuxt harness:** Spin up minimal Nuxt 3 SSR fixture rendering `DtText` with `component :is=""`, hydrate on client, and assert no mismatch warnings.
+- **Snapshot comparison:** Capture rendered markup to ensure merged `class` / `style` attributes behave identically between server and client.
+- **Vite SSR smoke:** Add Vitest SSR run (using `vitest-ssr`) to render component to string for key prop permutations.
+- **Integration hook:** Document how SSR tests gate future prop additions (update CI when harness lands).
+
+#### 🧹 Lint & Messaging Alignment
+
+- **ESLint warning copy:** Update lint rule messaging to point teams toward `DtText` rather than raw utilities (Phase 3 action item).
+- **Component logs:** Replace `console.warn` usage in `packages/dialtone-vue3/components/text/text.vue` with centralized logger or dev-only warning helper to satisfy lint.
+
+#### 🔁 Vue 2 Parity Prep
+
+- **Component port:** After Vue 3 docs/tests ship, mirror implementation into `packages/dialtone-vue2/components/dt-text/` (component, constants, validators).
+- **Story/Test updates:** Duplicate Storybook stories/tests for Vue 2 using existing patterns (`*.story.vue`, `*.test.js`).
+- **Token sync:** Reuse generated tone tokens by exporting from shared location or packaging as JSON included in both builds.
+
 ---
 
 ## 📊 Architecture: Single Component
