@@ -87,8 +87,14 @@ const props = defineProps({
     required: true,
   },
 });
+const pageData = usePageData();
 const lastUpdated = computed(() => {
-  const date = new Date(usePageData().value.git.updatedTime);
+  const updatedTime = pageData.value?.git?.updatedTime;
+  if (!updatedTime) return 'Not available';
+
+  const date = new Date(updatedTime);
+  if (Number.isNaN(date.valueOf())) return 'Not available';
+
   return new Intl.DateTimeFormat('en-US', { dateStyle: 'full' }).format(date);
 });
 const gridClass = computed(() => {
