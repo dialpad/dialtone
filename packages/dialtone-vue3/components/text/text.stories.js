@@ -8,7 +8,6 @@ import {
   TEXT_SIZE_MODIFIERS,
   TEXT_STRENGTH_MODIFIERS,
   TEXT_DENSITY_MODIFIERS,
-  TEXT_WEIGHT_MODIFIERS,
   TEXT_ALIGN_MODIFIERS,
 } from './text_constants';
 
@@ -16,7 +15,6 @@ const kindOptions = Object.keys(TEXT_KIND_MODIFIERS);
 const sizeOptions = Array.from(new Set(Object.values(TEXT_SIZE_MODIFIERS).flat()));
 const strengthOptions = [undefined, ...TEXT_STRENGTH_MODIFIERS];
 const densityOptions = [undefined, ...TEXT_DENSITY_MODIFIERS];
-const weightOptions = [undefined, ...Object.keys(TEXT_WEIGHT_MODIFIERS)];
 const alignOptions = [undefined, ...Object.keys(TEXT_ALIGN_MODIFIERS)];
 
 export const argsData = {
@@ -26,7 +24,6 @@ export const argsData = {
   size: 'md',
   strength: undefined,
   density: undefined,
-  weight: undefined,
   tone: undefined,
   align: undefined,
   truncate: false,
@@ -60,10 +57,6 @@ export const argTypesData = {
   },
   density: {
     options: densityOptions,
-    control: { type: 'select' },
-  },
-  weight: {
-    options: weightOptions,
     control: { type: 'select' },
   },
   tone: {

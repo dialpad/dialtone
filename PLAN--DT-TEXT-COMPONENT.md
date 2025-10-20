@@ -713,6 +713,7 @@ export default {
 - [ ] Implement prop validation for `tone` that warns when the supplied token does not map to known `d-fc-*` utilities; ensure theming coverage (Vue 3)
 - [ ] Add SSR/hydration test plan (Nuxt/Vite SSR harness) validating `<component :is>` output and merged `class`/`style` attributes (Vue 3)
 - [ ] After Vue 3 parity, mirror implementation to Vue 2 (component, exports, tests, stories)
+- [ ] Author component documentation in `apps/dialtone-documentation/docs/components/` covering usage, props, and design guidance
 - [ ] **Lint rule alignment** — ESLint warning currently references only utilities. Action: update messaging in Phase 3 to recommend `<dt-text>` when feasible without breaking downstream pipelines.
 - **SSR coverage** — Hydration behavior untested; must add Nuxt/Vite SSR verification before GA. Action: include in MVP QA checklist.
 

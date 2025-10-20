@@ -17,23 +17,16 @@ export const TEXT_SIZE_MODIFIERS = {
 export const TEXT_STRENGTH_MODIFIERS = ['soft', 'plain'];
 export const TEXT_DENSITY_MODIFIERS = ['compact'];
 
-export const TEXT_WEIGHT_MODIFIERS = {
-  normal: 'd-fw-normal',
-  medium: 'd-fw-medium',
-  semibold: 'd-fw-semibold',
-  bold: 'd-fw-bold',
-};
-
 export const TEXT_ALIGN_MODIFIERS = {
-  start: 'd-ta-left',
-  center: 'd-ta-center',
-  end: 'd-ta-right',
-  justify: 'd-ta-justify',
+  start: 'd-text--align-start',
+  center: 'd-text--align-center',
+  end: 'd-text--align-end',
+  justify: 'd-text--align-justify',
 };
 
 export const TEXT_TONE_PREFIX = 'd-fc-';
 
-export const TEXT_NUMERIC_CLASS = 'd-fvn-tabular';
+export const TEXT_NUMERIC_CLASS = 'd-text--numeric';
 export const TEXT_TRUNCATE_CLASS = 'd-truncate';
 export const TEXT_LINE_CLAMP_CLASS = 'd-text--clamp';
 
@@ -42,7 +35,6 @@ export default {
   TEXT_SIZE_MODIFIERS,
   TEXT_STRENGTH_MODIFIERS,
   TEXT_DENSITY_MODIFIERS,
-  TEXT_WEIGHT_MODIFIERS,
   TEXT_ALIGN_MODIFIERS,
   TEXT_TONE_PREFIX,
   TEXT_NUMERIC_CLASS,

@@ -18,7 +18,6 @@ import {
   TEXT_SIZE_MODIFIERS,
   TEXT_STRENGTH_MODIFIERS,
   TEXT_DENSITY_MODIFIERS,
-  TEXT_WEIGHT_MODIFIERS,
   TEXT_ALIGN_MODIFIERS,
   TEXT_TONE_PREFIX,
   TEXT_NUMERIC_CLASS,
@@ -28,16 +27,28 @@ import {
 
 const DEFAULT_SIZE = 'md';
 
+/**
+ * Dialtone text primitive that applies typography tokens based on semantic props.
+ * @see https://dialtone.dialpad.com/components/text.html
+ */
 export default {
   compatConfig: { MODE: 3 },
   name: 'DtText',
 
   props: {
+    /**
+     * HTML tag or component used for rendering.
+     * @values span, p, h1, h2, h3, h4, h5, h6, label, div, component
+     */
     as: {
       type: String,
       default: 'span',
     },
 
+    /**
+     * Typography kind mapping to headline/body/label/helper/code token sets.
+     * @values headline, body, label, helper, code
+     */
     kind: {
       type: String,
       default: null,
@@ -46,41 +57,62 @@ export default {
       },
     },
 
+    /**
+     * Size variant within the selected `kind`. Falls back to `md` if unsupported. e.g. `body` doesn't have `lg` variant.
+     * @values eyebrow, sm, md, lg, xl, xxl
+     */
     size: {
       type: String,
       default: null,
     },
 
+    /**
+     * Weight override aligned with type tokens. Does not apply to all kinds. e.g. `body` doesn't have `soft` strength.
+     * @values soft, plain
+     */
     strength: {
       type: String,
       default: null,
     },
 
+    /**
+     * Line-height density modifier for compact typography. Does not apply to all kinds.
+     * @values compact
+     */
     density: {
       type: String,
       default: null,
     },
 
-    weight: {
-      type: String,
-      default: null,
-    },
-
+    /**
+     * Aligns to available foreground color tokens, e.g. `d-fc-tertiary`, `d-fc-critical`, etc.
+     * @values (Dialtone foreground token suffixes, e.g., primary, secondary, success)
+     */
     tone: {
       type: String,
       default: null,
     },
 
+    /**
+     * Logical text alignment. Requires block/inline-block context.
+     * @values start, center, end, justify
+     */
     align: {
       type: String,
       default: null,
     },
 
+    /**
+     * Enables single-line truncation (i.e. ellipsis) when true; requires block/inline-block context.
+     */
     truncate: {
       type: Boolean,
       default: false,
     },
 
+    /**
+     * Applies multi-line truncation (i.e. clamp) when greater than zero; requires block/inline-block context.
+     */
     maxLines: {
       type: Number,
       default: null,
@@ -89,11 +121,17 @@ export default {
       },
     },
 
+    /**
+     * Renders numeric content with tabular figures.
+     */
     numeric: {
       type: Boolean,
       default: false,
     },
 
+    /**
+     * Optional string fallback rendered when default slot is empty.
+     */
     text: {
       type: String,
       default: null,
@@ -110,11 +148,6 @@ export default {
       const variantClass = this.getVariantClass();
       if (variantClass) {
         classes.push(variantClass);
-      }
-
-      const weightClass = this.getWeightClass();
-      if (weightClass) {
-        classes.push(weightClass);
       }
 
       const alignClass = this.getAlignClass();
@@ -199,20 +232,6 @@ export default {
       }
 
       return modifier;
-    },
-
-    getWeightClass () {
-      if (!this.weight) {
-        return null;
-      }
-
-      const weightClass = TEXT_WEIGHT_MODIFIERS[this.weight];
-      if (!weightClass) {
-        console.warn(`[DtText] Unsupported weight "${this.weight}".`);
-        return null;
-      }
-
-      return weightClass;
     },
 
     getAlignClass () {

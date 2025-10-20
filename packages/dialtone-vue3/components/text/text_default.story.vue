@@ -5,7 +5,6 @@
     :size="$attrs.size"
     :strength="$attrs.strength"
     :density="$attrs.density"
-    :weight="$attrs.weight"
     :tone="$attrs.tone"
     :align="$attrs.align"
     :truncate="$attrs.truncate"
