@@ -1,9 +1,15 @@
 <template>
-  <div class="d-stack d-stack--gap-500">
+  <dt-stack class="d-stack d-stack--gap-500">
     <section>
-      <h3 class="d-label--md">
+      <dt-text
+        as="h3"
+        kind="label"
+        size="md"
+        class="d-bb"
+        tone="muted"
+      >
         Headline
-      </h3>
+      </dt-text>
       <div class="d-stack d-stack--gap-300">
         <dt-text
           v-for="size in headlineSizes"
@@ -31,9 +37,15 @@
     </section>
 
     <section>
-      <h3 class="d-label--md">
+      <dt-text
+        as="h3"
+        kind="label"
+        size="md"
+        class="d-bb"
+        tone="muted"
+      >
         Body
-      </h3>
+      </dt-text>
       <div class="d-stack d-stack--gap-300">
         <dt-text
           kind="body"
@@ -56,11 +68,16 @@
         </dt-text>
       </div>
     </section>
-
     <section>
-      <h3 class="d-label--md">
+      <dt-text
+        as="h3"
+        kind="label"
+        size="md"
+        class="d-bb"
+        tone="muted"
+      >
         Label / Helper / Code
-      </h3>
+      </dt-text>
       <div class="d-stack d-stack--gap-300">
         <dt-text
           kind="label"
@@ -90,16 +107,17 @@
         </dt-text>
       </div>
     </section>
-  </div>
+  </dt-stack>
 </template>
 
 <script>
+import { DtStack } from '../stack';
 import { DtText } from './index';
 import { TEXT_SIZE_MODIFIERS } from './text_constants';
 
 export default {
   name: 'DtTextVariants',
-  components: { DtText },
+  components: { DtStack, DtText },
 
   computed: {
     headlineSizes () {
