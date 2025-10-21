@@ -196,6 +196,83 @@
         </dt-text>
       </dt-stack>
     </section>
+    <section>
+      <dt-text
+        as="h3"
+        kind="label"
+        size="md"
+        class="d-bb"
+        tone="muted"
+      >
+        Behavior Examples
+      </dt-text>
+      <dt-stack gap="400">
+        <dt-stack gap="300">
+          <dt-text
+            kind="label"
+            size="sm"
+            tone="muted"
+          >
+            Truncate & Clamp
+          </dt-text>
+          <dt-text
+            v-for="example in truncationExamples"
+            :key="example.key"
+            as="div"
+            v-bind="example.props"
+          >
+            {{ example.copy }}
+          </dt-text>
+        </dt-stack>
+        <dt-stack gap="300">
+          <dt-text
+            kind="label"
+            size="sm"
+            tone="muted"
+          >
+            Tone & Numeric
+          </dt-text>
+          <dt-text
+            v-for="toneExample in toneExamples"
+            :key="toneExample.key"
+            v-bind="toneExample.props"
+          >
+            {{ toneExample.copy }}
+          </dt-text>
+          <dt-stack
+            direction="row"
+            class="d-bgc-primary d-py6 d-px8 d-bar3"
+            gap="300"
+          >
+            <dt-text
+              v-for="tone in invertedToneExamples"
+              :key="tone"
+              :tone="tone"
+            >
+              {{ tone }}
+            </dt-text>
+          </dt-stack>
+        </dt-stack>
+        <dt-stack gap="300">
+          <dt-text
+            kind="label"
+            size="sm"
+            tone="muted"
+          >
+            Alignment
+          </dt-text>
+          <dt-text
+            v-for="alignExample in alignExamples"
+            :key="alignExample.align"
+            as="div"
+            class="d-ba d-bc-subtle d-bas-dashed d-px8 d-py4"
+            :align="alignExample.align"
+          >
+            {{ alignExample.copy }}
+          </dt-text>
+        </dt-stack>
+      </dt-stack>
+    </section>
   </dt-stack>
 </template>
 
@@ -211,6 +288,41 @@ export default {
   computed: {
     headlineSizes () {
       return TEXT_SIZE_MODIFIERS.headline;
+    },
+
+    truncationExamples () {
+      return [
+        {
+          key: 'truncate',
+          props: { truncate: true, class: 'd-w24' },
+          copy: 'Single-line truncate keeps ellipsis within inline-block contexts.',
+        },
+        {
+          key: 'max-lines',
+          props: { maxLines: 3, class: 'd-w48' },
+          copy: 'Clamp multi-line content to three lines for summary views.',
+        },
+      ];
+    },
+
+    toneExamples () {
+      return [
+        { key: 'tone-success', props: { kind: 'body', tone: 'success' }, copy: 'Success tone inherit' },
+        { key: 'numeric-critical', props: { kind: 'body', tone: 'critical', numeric: true }, copy: '00123456789' },
+      ];
+    },
+
+    invertedToneExamples () {
+      return ['primary-inverted', 'muted-inverted', 'critical-strong-inverted'];
+    },
+
+    alignExamples () {
+      return [
+        { align: 'start', copy: 'Start aligned text follows the left edge in LTR contexts.' },
+        { align: 'center', copy: 'Center aligned text works well for callouts.' },
+        { align: 'end', copy: 'End aligned text pairs nicely with numeric values.' },
+        { align: 'justify', copy: 'Justified text distributes words evenly across the width.' },
+      ];
     },
   },
 };

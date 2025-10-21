@@ -110,4 +110,52 @@ describe('DtText', () => {
     expect(warnSpy).toHaveBeenCalledWith(expect.stringContaining('Unsupported tone'));
     expect(wrapper.classes()).not.toContain('d-fc-not-real');
   });
+
+  it('applies align modifier class when align prop is valid', () => {
+    const wrapper = mountComponent({ align: 'center' });
+
+    expect(wrapper.classes()).toContain('d-text--align-center');
+  });
+
+  it('warns when align is not recognized', () => {
+    const warnSpy = vi.spyOn(console, 'warn').mockImplementation(() => {});
+
+    const wrapper = mountComponent({ align: 'diagonal' });
+
+    expect(warnSpy).toHaveBeenCalledWith(expect.stringContaining('Unsupported align "diagonal"'));
+    expect(wrapper.classes()).not.toContain('d-text--align-diagonal');
+  });
+
+  it('stacks tone, numeric, and maxLines modifiers together', () => {
+    const wrapper = mountComponent({ tone: 'success', numeric: true, maxLines: 4 });
+
+    expect(wrapper.classes()).toEqual(expect.arrayContaining(['d-text', 'd-fc-success', TEXT_NUMERIC_CLASS, TEXT_LINE_CLAMP_CLASS]));
+    expect(wrapper.attributes('style')).toContain('--dt-text-line-clamp: 4');
+  });
+
+  it('removes line clamp class and style when maxLines is cleared', async () => {
+    const wrapper = mountComponent({ maxLines: 2 });
+
+    await wrapper.setProps({ maxLines: null });
+
+    expect(wrapper.classes()).not.toContain(TEXT_LINE_CLAMP_CLASS);
+    expect(wrapper.attributes('style')).toBeUndefined();
+  });
+
+  it('maintains expected classes when mounted onto existing DOM (hydration-style)', () => {
+    const mountTarget = document.createElement('div');
+    mountTarget.innerHTML = '<span class="d-text"></span>';
+    document.body.appendChild(mountTarget);
+
+    const wrapper = mount(DtText, {
+      props: { kind: 'headline', size: 'md' },
+      slots: { default: slotContent },
+      attachTo: mountTarget,
+    });
+
+    expect(wrapper.classes()).toEqual(expect.arrayContaining(['d-text', 'd-headline--md']));
+
+    wrapper.unmount();
+    mountTarget.remove();
+  });
 });
