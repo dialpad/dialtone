@@ -94,6 +94,13 @@ export default {
   component: DtText,
   args: argsData,
   argTypes: argTypesData,
+  parameters: {
+    docs: {
+      description: {
+        component: 'Dialtone\'s typography primitive. `DtText` maps semantic props (`kind`, `size`, `strength`, `density`, `tone`, `align`) to token-backed classes and supports structural helpers like `as`, truncation, multi-line clamping, and numeric tabular figures. The Variants story enumerates every supported combination validated against `apps/dialtone-documentation/docs/_data/type.json`.',
+      },
+    },
+  },
   excludeStories: /.*Data$/,
 };
 

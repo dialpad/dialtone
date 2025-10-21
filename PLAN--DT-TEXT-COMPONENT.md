@@ -91,20 +91,26 @@ Source of truth cross-checked against `apps/dialtone-documentation/docs/_data/ty
 - **Usage examples:** Include examples for headline, body, label/helper/code, numeric, truncation, alignment, and tone variations.
 - **Docs navigation:** Update `apps/dialtone-documentation/docs/_data/site-nav.json` with `{ "text": "Text", "link": "/components/text.html" }` so the page appears in the Components sidebar.
 - **Docs runtime fix:** `apps/dialtone-documentation/docs/.vuepress/theme/components/Page.vue` now guards `usePageData().git.updatedTime`; missing metadata returns "Not available" to prevent invalid date errors on new pages like `text.md`.
+- **Truncate accessibility decision:** Keep tooltips/titles opt-in to avoid forcing duplicated content. Document the expectation in the Accessibility section (done) and add follow-up guidance for product teams in `guides/accessibility/` (open action).
+- **Interactive examples:** `text.md` now includes an adjustable `maxLines` demo backed by a reusable reactive state block showing toggle/increment/decrement patterns.
 
-#### 🧪 SSR & Testing Strategy (Draft)
+#### 🧪 Testing Strategy (Updated)
 
-- **Nuxt harness:** Spin up minimal Nuxt 3 SSR fixture rendering `DtText` with `component :is=""`, hydrate on client, and assert no mismatch warnings.
-- **Snapshot comparison:** Capture rendered markup to ensure merged `class` / `style` attributes behave identically between server and client.
-- **Vite SSR smoke:** Add Vitest SSR run (using `vitest-ssr`) to render component to string for key prop permutations.
-- **Integration hook:** Document how SSR tests gate future prop additions (update CI when harness lands).
+- **Unit snapshots:** Expand existing Vitest specs (`packages/dialtone-vue3/components/text/__tests__/`) to snapshot rendered markup for key permutations (kind/size, `truncate`, `maxLines`, `numeric`, `tone`, `as`). Treat snapshot diffs as regressions.
+- **Hydration confidence:** Simulate client mounting with pre-rendered markup in jsdom (`@vue/test-utils` + `mount` w/ `attachTo`) to ensure prop-driven class composition remains stable without a dedicated SSR harness.
+- **Storybook regression:** Ensure `text_variants.story.vue` covers truncation, tones, numeric, and the interactive clamp example so Chromatic/manual review can flag visual mismatches.
+- **Documentation sync:** Keep the doc examples (`text.md`) aligned with test permutations to make it easy for QA to cross-reference behaviors.
 
 #### 🧹 Lint & Messaging Alignment
 
-- **ESLint warning copy:** Update lint rule messaging to point teams toward `DtText` rather than raw utilities (Phase 3 action item).
-- **Component logs:** Replace `console.warn` usage in `packages/dialtone-vue3/components/text/text.vue` with centralized logger or dev-only warning helper to satisfy lint.
+- **ESLint warning copy:** Refresh the typography lint rule to direct developers toward `DtText` (and link to `/components/text.html`). Document the wording here before updating the rule.
+- **Rule coverage:** Ensure the lint rule ignores files that intentionally use utility classes (legacy stories/tests); add configuration notes to the plan once scoped.
 
 #### 🔁 Vue 2 Parity Prep
+
+- **Audit props:** Confirm Vue 2 implementation exposes the same props/defaults; align validators and warnings.
+- **Shared constants:** Reuse `text_constants.js` via build step or shared module to avoid divergence.
+- **Testing:** Replicate unit test coverage in Vue 2 package before release.
 
 - **Component port:** After Vue 3 docs/tests ship, mirror implementation into `packages/dialtone-vue2/components/dt-text/` (component, constants, validators).
 - **Story/Test updates:** Duplicate Storybook stories/tests for Vue 2 using existing patterns (`*.story.vue`, `*.test.js`).
