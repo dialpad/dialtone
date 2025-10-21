@@ -767,7 +767,7 @@ export default {
 - [x] Restrict `strength` prop usage to kinds that support it; emit warnings otherwise
 - [x] Remove `weight` prop from API (avoid redundancy with strength)
 - [x] Implement prop validation for `tone` that warns when the supplied token does not map to known `d-fc-*` utilities; ensure theming coverage (Vue 3)
-- [ ] Cross-check rendered classes against `@data/type.json` fixture expectations to guarantee parity with documentation tables
+- [x] Cross-check rendered classes against `@data/type.json` fixture expectations to guarantee parity with documentation tables
 - [x] Document variant matrices mapping `kind` × `size` × `strength` × `density` to concrete utility classes
 - [ ] Automate tone token list generation to avoid manual curation (pull from `packages/dialtone-css/lib/dist/dialtone-docs.json` with an exclusion list for base colors like `red-400`)
 - [x] Author component documentation in `apps/dialtone-documentation/docs/components/` covering usage, props, and design guidance

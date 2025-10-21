@@ -5,7 +5,16 @@ import {
   TEXT_LINE_CLAMP_CLASS,
   TEXT_NUMERIC_CLASS,
   TEXT_TRUNCATE_CLASS,
+  TEXT_KIND_MODIFIERS,
+  TEXT_SIZE_MODIFIERS,
+  TEXT_STRENGTH_BY_KIND_AND_SIZE,
+  TEXT_DENSITY_BY_KIND_AND_SIZE,
 } from './text_constants';
+import fs from 'fs';
+import path from 'path';
+
+const typeDataPath = path.resolve(__dirname, '../../../../apps/dialtone-documentation/docs/_data/type.json');
+const typeData = JSON.parse(fs.readFileSync(typeDataPath, 'utf8'));
 
 describe('DtText', () => {
   const slotContent = 'Sample text';
@@ -157,5 +166,42 @@ describe('DtText', () => {
 
     wrapper.unmount();
     mountTarget.remove();
+  });
+
+  it('matches documented typography utility classes from type.json', () => {
+    const documentedClasses = new Set(typeData.typographyStyles.map(({ var: className }) => className));
+
+    Object.keys(TEXT_KIND_MODIFIERS).forEach((kind) => {
+      const sizes = TEXT_SIZE_MODIFIERS[kind] || [];
+      const strengthBySize = TEXT_STRENGTH_BY_KIND_AND_SIZE[kind] || {};
+      const densityBySize = TEXT_DENSITY_BY_KIND_AND_SIZE[kind] || {};
+
+      sizes.forEach((size) => {
+        const baseClass = `d-${kind}--${size}`;
+        expect(documentedClasses.has(baseClass)).toBe(true);
+
+        const allowedStrengths = strengthBySize[size] || [];
+        const allowedDensities = densityBySize[size] || [];
+
+        allowedStrengths.forEach((strength) => {
+          const strengthClass = `${baseClass}-${strength}`;
+          expect(documentedClasses.has(strengthClass)).toBe(true);
+        });
+
+        allowedDensities.forEach((density) => {
+          const densityClass = `${baseClass}-${density}`;
+          expect(documentedClasses.has(densityClass)).toBe(true);
+        });
+
+        if (allowedStrengths.length && allowedDensities.length) {
+          allowedStrengths.forEach((strength) => {
+            allowedDensities.forEach((density) => {
+              const combinedClass = `${baseClass}-${strength}-${density}`;
+              expect(documentedClasses.has(combinedClass)).toBe(true);
+            });
+          });
+        }
+      });
+    });
   });
 });
