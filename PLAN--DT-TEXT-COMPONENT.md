@@ -9,6 +9,7 @@
 - **2025-10-17** — Restructured plan with explicit token alignment guidance, introduced changelog + decision log scaffolding, and recorded research references for typography docs.
 - **2025-10-17** — Added variant coverage requirements, semantic element guidance, SSR/test expectations, lint roadmap alignment, and initial decision log entries after principal review.
 - **2025-10-19** — Implemented Vue 3 validations (strength/density/tone), refactored numeric/align CSS, added prop documentation, test coverage, tone token automation plan, and truncate accessibility follow-ups.
+- **2025-10-20** — Expanded Vitest coverage (align, stacked modifiers, clamp clearing, hydration), aligned `text.md` examples, and refreshed Storybook variants to surface truncation, tone, numeric, and alignment states while queuing lint cleanup for later.
 
 ---
 
@@ -16,6 +17,7 @@
 
 - **2025-10-17** — Completed base CSS (`packages/dialtone-css/lib/build/less/components/text.less`) and shared constants for Vue 2/3. Confirmed typography sources. Observed stylelint warnings about unknown rules on the new LESS file; will revisit once component wiring is complete.
 - **2025-10-17** — Added Vue 3 exports (`packages/dialtone-vue3/components/text/index.js`, root index) so `DtText` is available to consumers. Storybook stories/tests still pending.
+- **2025-10-20** — `pnpm --dir packages/dialtone-vue3 test` passing with new assertions; `text_variants.story.vue` now mirrors tested permutations (truncate, clamp, tone, numeric, align). Lint work deferred to final cleanup once story refactors land.
 
 ---
 
@@ -96,15 +98,16 @@ Source of truth cross-checked against `apps/dialtone-documentation/docs/_data/ty
 
 #### 🧪 Testing Strategy (Updated)
 
-- **Unit snapshots:** Expand existing Vitest specs (`packages/dialtone-vue3/components/text/__tests__/`) to snapshot rendered markup for key permutations (kind/size, `truncate`, `maxLines`, `numeric`, `tone`, `as`). Treat snapshot diffs as regressions.
+- **Targeted unit assertions:** Extend Vitest specs (`packages/dialtone-vue3/components/text/text.test.js`) with explicit checks for class/style output across key permutations (kind + size + strength, `truncate`, `maxLines`, `numeric`, `tone`, `align`) instead of brittle HTML snapshots.
 - **Hydration confidence:** Simulate client mounting with pre-rendered markup in jsdom (`@vue/test-utils` + `mount` w/ `attachTo`) to ensure prop-driven class composition remains stable without a dedicated SSR harness.
 - **Storybook regression:** Ensure `text_variants.story.vue` covers truncation, tones, numeric, and the interactive clamp example so Chromatic/manual review can flag visual mismatches.
 - **Documentation sync:** Keep the doc examples (`text.md`) aligned with test permutations to make it easy for QA to cross-reference behaviors.
 
 #### 🧹 Lint & Messaging Alignment
 
-- **ESLint warning copy:** Refresh the typography lint rule to direct developers toward `DtText` (and link to `/components/text.html`). Document the wording here before updating the rule.
-- **Rule coverage:** Ensure the lint rule ignores files that intentionally use utility classes (legacy stories/tests); add configuration notes to the plan once scoped.
+- **Status:** Deferred until final cleanup; current plan is to revisit after Storybook refactors reduce file length below `max-lines` limits.
+- **ESLint warning copy:** Update rule message to `Prefer the DtText component over direct typography utility classes. See https://dialtone.dialpad.com/components/text.html for guidance.` (include as part of lint rule comment).
+- **Rule coverage:** Exclude test fixtures, legacy stories, and Vue docs by pattern (e.g., `/__tests__/`, `*.story.vue`, `apps/dialtone-documentation/**`) to avoid noisy warnings; record the globs prior to editing the ESLint config.
 
 #### 🔁 Vue 2 Parity Prep
 
@@ -765,12 +768,12 @@ export default {
 - [x] Remove `weight` prop from API (avoid redundancy with strength)
 - [x] Implement prop validation for `tone` that warns when the supplied token does not map to known `d-fc-*` utilities; ensure theming coverage (Vue 3)
 - [ ] Cross-check rendered classes against `@data/type.json` fixture expectations to guarantee parity with documentation tables
-- [ ] Document variant matrices mapping `kind` × `size` × `strength` × `density` to concrete utility classes
+- [x] Document variant matrices mapping `kind` × `size` × `strength` × `density` to concrete utility classes
 - [ ] Automate tone token list generation to avoid manual curation (pull from `packages/dialtone-css/lib/dist/dialtone-docs.json` with an exclusion list for base colors like `red-400`)
-- [ ] Author component documentation in `apps/dialtone-documentation/docs/components/` covering usage, props, and design guidance
+- [x] Author component documentation in `apps/dialtone-documentation/docs/components/` covering usage, props, and design guidance
 - [ ] Add SSR/hydration test plan (Nuxt/Vite SSR harness) validating `<component :is>` output and merged `class`/`style` attributes (Vue 3)
 - [ ] After Vue 3 parity, mirror implementation to Vue 2 (component, exports, tests, stories)
-- [ ] **Lint rule alignment** — ESLint warning currently references only utilities. Action: update messaging in Phase 3 to recommend `<dt-text>` when feasible without breaking downstream pipelines.
+- [ ] **Lint rule alignment** — Deferred to Phase 3; revisit messaging once lint cleanup resumes.
 - **Notes:** Auto-applying `title` works only when using the `text` prop. Slot content is harder to mirror reliably, and screen readers may need explicit tooltip/ARIA strategies. Likely outcome: document guidance for product teams rather than auto behavior.
 - **Deferred:**
   - Investigate truncate accessibility (auto `title` vs ARIA attributes vs consumer guidance) and document recommendation
