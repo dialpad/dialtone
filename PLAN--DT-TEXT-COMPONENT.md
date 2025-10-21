@@ -769,7 +769,7 @@ export default {
 - [x] Implement prop validation for `tone` that warns when the supplied token does not map to known `d-fc-*` utilities; ensure theming coverage (Vue 3)
 - [x] Cross-check rendered classes against `@data/type.json` fixture expectations to guarantee parity with documentation tables
 - [x] Document variant matrices mapping `kind` × `size` × `strength` × `density` to concrete utility classes
-- [ ] Automate tone token list generation to avoid manual curation (pull from `packages/dialtone-css/lib/dist/dialtone-docs.json` with an exclusion list for base colors like `red-400`)
+- [x] Automate tone token list generation to avoid manual curation (pull from `packages/dialtone-css/lib/dist/dialtone-docs.json` with an exclusion list for base colors like `red-400`)
 - [x] Author component documentation in `apps/dialtone-documentation/docs/components/` covering usage, props, and design guidance
 - [ ] Add SSR/hydration test plan (Nuxt/Vite SSR harness) validating `<component :is>` output and merged `class`/`style` attributes (Vue 3)
 - [ ] After Vue 3 parity, mirror implementation to Vue 2 (component, exports, tests, stories)
