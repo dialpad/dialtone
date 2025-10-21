@@ -6,7 +6,9 @@ const DOCS_PATH = path.resolve(__dirname, '../../../../dialtone-css/lib/dist/dia
 const OUTPUT_JSON_PATH = path.resolve(__dirname, '../text_tone_tokens.json');
 const OUTPUT_JS_PATH = path.resolve(__dirname, '../text_tone_tokens.js');
 
+// Skip any d-fc-* foreground colors that contain numeric suffixes (raw foreground swatches, e.g. d-fc-black-500)
 const EXCLUDE_REGEX = /\d/;
+// Skip and d-fc-* foreground colors we are manually excluding
 const EXCLUDED_TOKENS = new Set([
   'neutral-transparent',
 ]);
