@@ -1,3 +1,10 @@
+## [2.200.3](https://github.com/dialpad/dialtone/compare/dialtone-vue2/v2.200.2...dialtone-vue2/v2.200.3) (2025-10-21)
+
+
+### Bug Fixes
+
+* **Split Button:** NO-JIRA fix infinite loop ([#948](https://github.com/dialpad/dialtone/issues/948)) ([634952e](https://github.com/dialpad/dialtone/commit/634952e83ce810d1317dec4ba2029af05afcf0d0))
+
 ## [2.200.2](https://github.com/dialpad/dialtone/compare/dialtone-vue2/v2.200.1...dialtone-vue2/v2.200.2) (2025-10-17)
 
 
