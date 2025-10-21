@@ -5,6 +5,20 @@
 
 * **Tokens:** DLT-1977 add high contrast design tokens and theme ([#938](https://github.com/dialpad/dialtone/issues/938)) ([a1c0457](https://github.com/dialpad/dialtone/commit/a1c0457e3b6b445e3f54d76b9ce3b847abc31ac5))
 
+## [3.192.3](https://github.com/dialpad/dialtone/compare/dialtone-vue3/v3.192.2...dialtone-vue3/v3.192.3) (2025-10-21)
+
+
+### Bug Fixes
+
+* **Split Button:** NO-JIRA fix infinite loop ([#948](https://github.com/dialpad/dialtone/issues/948)) ([634952e](https://github.com/dialpad/dialtone/commit/634952e83ce810d1317dec4ba2029af05afcf0d0))
+
+## [3.192.2](https://github.com/dialpad/dialtone/compare/dialtone-vue3/v3.192.1...dialtone-vue3/v3.192.2) (2025-10-17)
+
+
+### Bug Fixes
+
+* **Split Button:** NO-JIRA invert tooltip when button inverted ([#946](https://github.com/dialpad/dialtone/issues/946)) ([c03065a](https://github.com/dialpad/dialtone/commit/c03065abe60471aa8469216ad506ac5a2b406697))
+
 # [3.193.0-next.1](https://github.com/dialpad/dialtone/compare/dialtone-vue3/v3.192.0...dialtone-vue3/v3.193.0-next.1) (2025-10-08)
 
 
@@ -23,6 +37,14 @@
 * **Css Utility:** DLT-2715 add default color for border css utilities ([#874](https://github.com/dialpad/dialtone/issues/874)) ([71310ab](https://github.com/dialpad/dialtone/commit/71310ab483fde976d56c69e0456bce70cb6d372d))
 * **Filter Pill:** DLT-2704 create component ([#473](https://github.com/dialpad/dialtone/issues/473)) ([6267445](https://github.com/dialpad/dialtone/commit/626744501640f18211ca9d41e4a68e099af3b6dd))
 
+## [3.192.1](https://github.com/dialpad/dialtone/compare/dialtone-vue3/v3.192.0...dialtone-vue3/v3.192.1) (2025-10-14)
+
+
+### Bug Fixes
+
+* **Popover:** DLT-2795 add aria-hidden attribute on popover ([#943](https://github.com/dialpad/dialtone/issues/943)) ([dc5bbe7](https://github.com/dialpad/dialtone/commit/dc5bbe7c78efc41e1f94cfed8822742318087564))
+
+# [3.192.0](https://github.com/dialpad/dialtone/compare/dialtone-vue3/v3.191.1...dialtone-vue3/v3.192.0) (2025-10-06)
 # [3.192.0](https://github.com/dialpad/dialtone/compare/dialtone-vue3/v3.191.1...dialtone-vue3/v3.192.0) (2025-10-06)
 
 
@@ -4339,3 +4361,4 @@
 
 * add pass through class and props to tab list ([#181](https://github.com/dialpad/dialtone-vue/issues/181)) ([54dd054](https://github.com/dialpad/dialtone-vue/commit/54dd05418ab80ea1e7aaac16796ae7a785d4891b))
 * automatization for the releasing process ([#180](https://github.com/dialpad/dialtone-vue/issues/180)) ([8b397b9](https://github.com/dialpad/dialtone-vue/commit/8b397b952e8ecfdefd18e400fbcf8c5d27fec2b3))
+

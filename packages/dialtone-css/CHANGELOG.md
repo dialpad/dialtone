@@ -5,6 +5,13 @@
 
 * **Tokens:** DLT-1977 add high contrast design tokens and theme ([#938](https://github.com/dialpad/dialtone/issues/938)) ([a1c0457](https://github.com/dialpad/dialtone/commit/a1c0457e3b6b445e3f54d76b9ce3b847abc31ac5))
 
+# [8.65.0](https://github.com/dialpad/dialtone/compare/dialtone-css/v8.64.4...dialtone-css/v8.65.0) (2025-10-14)
+
+
+### Features
+
+* **Utilities:** NO-JIRA add 384 width-height ([#944](https://github.com/dialpad/dialtone/issues/944)) ([b49c21d](https://github.com/dialpad/dialtone/commit/b49c21d02996dbe8f298e77e4b81fe6137ad1505))
+
 # [8.65.0-next.3](https://github.com/dialpad/dialtone/compare/dialtone-css/v8.65.0-next.2...dialtone-css/v8.65.0-next.3) (2025-10-08)
 
 
@@ -18,6 +25,11 @@
 ### Bug Fixes
 
 * **Checkbox, Radio:** DLT-2772 add pointer cursor to entire checkbox/radio label region ([#913](https://github.com/dialpad/dialtone/issues/913)) ([4bd0859](https://github.com/dialpad/dialtone/commit/4bd08592811f8dbbbfaa43fc79ab84d6209e5854))
+* **Leftbar Row:** DP-157563 call button wrong color on hover ([#919](https://github.com/dialpad/dialtone/issues/919)) ([5b77095](https://github.com/dialpad/dialtone/commit/5b770959a61cfb0772f965dc8dfd7700f8bcaf6d))
+
+## [8.64.4](https://github.com/dialpad/dialtone/compare/dialtone-css/v8.64.3...dialtone-css/v8.64.4) (2025-09-17)
+### Bug Fixes
+
 * **Leftbar Row:** DP-157563 call button wrong color on hover ([#919](https://github.com/dialpad/dialtone/issues/919)) ([5b77095](https://github.com/dialpad/dialtone/commit/5b770959a61cfb0772f965dc8dfd7700f8bcaf6d))
 
 ## [8.64.3](https://github.com/dialpad/dialtone/compare/dialtone-css/v8.64.2...dialtone-css/v8.64.3) (2025-09-16)
@@ -2776,3 +2788,5 @@
 ### Features
 
 * automatization for the releasing process ([#484](https://github.com/dialpad/dialtone/issues/484)) ([a3d5fa5](https://github.com/dialpad/dialtone/commit/a3d5fa52bdf5ab993e23739c02637ceb11919f9e))
+
+
