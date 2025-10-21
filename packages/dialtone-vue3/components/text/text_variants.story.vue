@@ -232,16 +232,22 @@
           >
             Tone & Numeric
           </dt-text>
-          <dt-text
-            v-for="toneExample in toneExamples"
-            :key="toneExample.key"
-            v-bind="toneExample.props"
-          >
-            {{ toneExample.copy }}
-          </dt-text>
           <dt-stack
             direction="row"
-            class="d-bgc-primary d-py6 d-px8 d-bar3"
+            class="d-p4 d-bar4"
+            gap="300"
+          >
+            <dt-text
+              v-for="toneExample in toneExamples"
+              :key="toneExample.key"
+              v-bind="toneExample.props"
+            >
+              {{ toneExample.copy }}
+            </dt-text>
+          </dt-stack>
+          <dt-stack
+            direction="row"
+            class="d-bgc-primary-inverted d-p4 d-bar4"
             gap="300"
           >
             <dt-text
@@ -307,13 +313,13 @@ export default {
 
     toneExamples () {
       return [
-        { key: 'tone-success', props: { kind: 'body', tone: 'success' }, copy: 'Success tone inherit' },
+        { key: 'tone-success', props: { kind: 'body', tone: 'success' }, copy: 'Success tone' },
         { key: 'numeric-critical', props: { kind: 'body', tone: 'critical', numeric: true }, copy: '00123456789' },
       ];
     },
 
     invertedToneExamples () {
-      return ['primary-inverted', 'muted-inverted', 'critical-strong-inverted'];
+      return ['tertiary-inverted', 'muted-inverted', 'critical-inverted'];
     },
 
     alignExamples () {

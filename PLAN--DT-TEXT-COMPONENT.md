@@ -774,12 +774,11 @@ export default {
 - [ ] Add SSR/hydration test plan (Nuxt/Vite SSR harness) validating `<component :is>` output and merged `class`/`style` attributes (Vue 3)
 - [ ] After Vue 3 parity, mirror implementation to Vue 2 (component, exports, tests, stories)
 - [ ] **Lint rule alignment** — Deferred to Phase 3; revisit messaging once lint cleanup resumes.
-- **Notes:** Auto-applying `title` works only when using the `text` prop. Slot content is harder to mirror reliably, and screen readers may need explicit tooltip/ARIA strategies. Likely outcome: document guidance for product teams rather than auto behavior.
 - **Deferred:**
+  - Auto-applying `title` works only when using the `text` prop. Slot content is harder to mirror reliably, and screen readers may need explicit tooltip/ARIA strategies. Likely outcome: document guidance for product teams rather than auto behavior.
   - Investigate truncate accessibility (auto `title` vs ARIA attributes vs consumer guidance) and document recommendation
   - Implement or document `truncate` UX decision (e.g., add `title` automatically or require consumer opt-in)
 - [ ] **Lint rule alignment** — ESLint warning currently references only utilities. Action: update messaging in Phase 3 to recommend `<dt-text>` when feasible without breaking downstream pipelines.
-- **SSR coverage** — Hydration behavior untested; must add Nuxt/Vite SSR verification before GA. Action: include in MVP QA checklist.
 
 ---
 

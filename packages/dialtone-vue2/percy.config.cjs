@@ -43,6 +43,7 @@ module.exports = {
       'Components/Tabs: Tab',
       'Components/Tabs: Tab Panel',
       'Components/Tabs: Default',
+      'Components/Text: Default',
       'Components/Toggle: Default',
       'Components/Tooltip: Default',
       'Components/Tooltip: Flip',
