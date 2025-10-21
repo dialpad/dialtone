@@ -202,7 +202,6 @@ vueCode='
 <dt-text size="{{size}}">....</dt-text>
 ' />
 
-
 ### Density
 
 Density prop only applies to `headline` and `body` kinds.
@@ -516,8 +515,60 @@ vueCode='
 
 <code-example-tabs
 vueCode='
-<dt-text as="p" maxLines="2">....</dt-text>
+<dt-text as="p" :max-lines="maxLines">....</dt-text>
 ' />
+
+<code-well-header>
+  <dt-stack gap="400">
+    <dt-stack direction="row" gap="400" class="d-jc-space-between d-ai-center">
+      <dt-text kind="headline" size="lg">Demo</dt-text>
+      <dt-stack direction="row" gap="400" class="d-ai-center">
+        <dt-button
+          size="sm"
+          importance="outlined"
+          kind="muted"
+          @click="toggleMaxLines"
+        >
+          Toggle
+        </dt-button>
+        <dt-stack direction="row" gap="200" class="d-ai-center">
+          <dt-stack direction="row">
+            <dt-button
+              v-dt-tooltip="`Fewer`"
+              class="d-as-stretch d-g0 d-brr0 d-brw0"
+              size="sm"
+              importance="outlined"
+              kind="muted"
+              :disabled="!canDecreaseMaxLines"
+              @click="decrementMaxLines"
+            >
+              <template #icon>
+                <dt-icon name="dash" size="200" />
+              </template>
+            </dt-button>
+            <dt-button
+              v-dt-tooltip="`More`"
+              class="d-as-stretch d-g0 d-blr0"
+              size="sm"
+              importance="outlined"
+              kind="muted"
+              :disabled="!canIncreaseMaxLines"
+              @click="incrementMaxLines"
+            >
+              <template #icon>
+                <dt-icon name="plus" size="200" />
+              </template>
+            </dt-button>
+          </dt-stack>
+        </dt-stack>
+      </dt-stack>
+    </dt-stack>
+    <dt-stack class="d-w100p d-ai-flex-start" gap="500">
+      <dt-text :max-lines="maxLinesBinding" as="p">Welcome to Dialpad, the most modern, AI-powered business communications platform. We’ve taken every form of communication that you rely on and unified it into one app. Calling a client? Meeting with your team? Texting a colleague? It’s all here, on all your devices. AI is by your side to transform your conversations into something you can see and use, giving you and your team a deeper look into action items and insights. Dialpad AI does the legwork to capture the details that matter most while you make and receive calls, send messages, and join meetings in an instant. Welcome to Dialpad, the most modern, AI-powered business communications platform. We’ve taken every form of communication that you rely on and unified it into one app. Calling a client? Meeting with your team? Texting a colleague? It’s all here, on all your devices. AI is by your side to transform your conversations into something you can see and use, giving you and your team a deeper look into action items and insights. Dialpad AI does the legwork to capture the details that matter most while you make and receive calls, send messages, and join meetings in an instant. Welcome to Dialpad, the most modern, AI-powered business communications platform. We’ve taken every form of communication that you rely on and unified it into one app. Calling a client? Meeting with your team? Texting a colleague? It’s all here, on all your devices. AI is by your side to transform your conversations into something you can see and use, giving you and your team a deeper look into action items and insights. Dialpad AI does the legwork to capture the details that matter most while you make and receive calls, send messages, and join meetings in an instant.</dt-text>
+    </dt-stack>
+  </dt-stack>
+</code-well-header>
+
 
 ## Accessibility
 
@@ -532,3 +583,46 @@ vueCode='
 ## Classes
 
 <component-class-table component-name="text"></component-class-table>
+
+<script setup>
+import { computed, reactive } from 'vue';
+
+const BOUNDS = Object.freeze({ min: 2, max: 10, default: 4 });
+const clampToBounds = (value) => Math.min(Math.max(value ?? BOUNDS.default, BOUNDS.min), BOUNDS.max);
+
+const state = reactive({
+  value: clampToBounds(BOUNDS.default),
+  lastApplied: clampToBounds(BOUNDS.default),
+  isApplied: true,
+});
+
+const maxLinesBinding = computed(() => (state.isApplied ? state.value : undefined));
+
+const canDecreaseMaxLines = computed(() => state.isApplied && state.value > BOUNDS.min);
+const canIncreaseMaxLines = computed(() => state.isApplied && state.value < BOUNDS.max);
+
+const adjustMaxLines = (delta) => {
+  if (!state.isApplied) return;
+  const nextValue = clampToBounds(state.value + delta);
+  if (nextValue === state.value) return;
+
+  state.value = nextValue;
+  state.lastApplied = nextValue;
+};
+
+const decrementMaxLines = () => adjustMaxLines(-1);
+const incrementMaxLines = () => adjustMaxLines(1);
+
+const toggleMaxLines = () => {
+  if (state.isApplied) {
+    state.lastApplied = state.value;
+    state.isApplied = false;
+    return;
+  }
+
+  const restoredValue = clampToBounds(state.lastApplied);
+  state.value = restoredValue;
+  state.lastApplied = restoredValue;
+  state.isApplied = true;
+};
+</script>
