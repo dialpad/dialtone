@@ -17,6 +17,7 @@ image: assets/images/components/text.png
 ## Usage
 
 Use in place of manually applying Text Styles. Examples of manual application you should avoid include:
+
 * Applying Text Styles classes, e.g. `class="d-body--md"`
 * Combinations of CSS Utilities, e.g. `class="d-fs-300 d-fw-semibold d-lh-300"`
 * Custom CSS, e.g. `.foo { font: var(--dt-typography-body-md); }`.
@@ -31,25 +32,25 @@ vueCode='
 
 ### Guidance
 
-- Prefer `DtText` over individual typography utility classes to keep implementations aligned with token updates.
-- Use the default slot for rich content. The `text` prop provides a simple fallback string when no slot content is present.
-- Choose the `as` prop to match the semantic HTML element (e.g., `h1`, `label`, `p`).
-- Match responsive layout needs by combining `DtText` with layout primitives like [`DtStack`](stack.md).
-- All properties are optional, as they layer in on top of each other.
+* Prefer `DtText` over individual typography utility classes to keep implementations aligned with token updates.
+* Use the default slot for rich content. The `text` prop provides a simple fallback string when no slot content is present.
+* Choose the `as` prop to match the semantic HTML element (e.g., `h1`, `label`, `p`).
+* Match responsive layout needs by combining `DtText` with layout primitives like [`DtStack`](stack.md).
+* All properties are optional, as they layer in on top of each other.
 
 <dialtone-usage>
 <template #do>
 
-- Replace multiple `d-` typography classes with a single `dt-text` instance.
-- Pick the smallest `kind`/`size` combination that conveys the desired hierarchy.
-- Use `tone` for semantic color tokens instead of standalone `d-fc-*` classes.
+* Replace multiple `d-` typography classes with a single `dt-text` instance.
+* Pick the smallest `kind`/`size` combination that conveys the desired hierarchy.
+* Use `tone` for semantic color tokens instead of standalone `d-fc-*` classes.
 
 </template>
 <template #dont>
 
-- Mix `DtText` with conflicting typography utilities (e.g., `d-fs-*`, `d-fw-*`, `d-lh-*`).
-- Render headings with non-heading tags (e.g., avoid `as="div"` for top-level titles).
-- Depend on the `text` prop when the content requires inline formatting; slot it instead.
+* Mix `DtText` with conflicting typography utilities (e.g., `d-fs-*`, `d-fw-*`, `d-lh-*`).
+* Render headings with non-heading tags (e.g., avoid `as="div"` for top-level titles).
+* Depend on the `text` prop when the content requires inline formatting; slot it instead.
 
 </template>
 </dialtone-usage>
@@ -569,12 +570,11 @@ vueCode='
   </dt-stack>
 </code-well-header>
 
-
 ## Accessibility
 
-- Maintain semantic structure via `as` (e.g., screen readers expect heading levels to be sequential).
-- When using `truncate`, provide another way to access the full content (tooltip, detail view, or explicit `aria-label`). `DtText` does not apply a `title` attribute automatically, so consuming applications should opt in.
-- Allow numeric content to remain readable by enabling the `numeric` prop when aligning tables or counters.
+* Maintain semantic structure via `as` (e.g., screen readers expect heading levels to be sequential).
+* When using `truncate`, provide another way to access the full content (tooltip, detail view, or explicit `aria-label`). `DtText` does not apply a `title` attribute automatically, so consuming applications should opt in.
+* Allow numeric content to remain readable by enabling the `numeric` prop when aligning tables or counters.
 
 ## Vue API
 
