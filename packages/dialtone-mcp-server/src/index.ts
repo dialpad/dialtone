@@ -11,6 +11,9 @@ import clientRules from '../client-rules.json';
 // SEARCH FUNCTIONS
 // ============================================================================
 
+// Maximum number of results to return (prevents overwhelming responses)
+const MAX_RESULTS = 15;
+
 /**
  * Build a set of all compound properties that exist in the data
  * This is called once when the server starts
@@ -122,7 +125,7 @@ function searchUtilityClasses(query, data, compoundProperties) {
   }
 
   // Debug logging - show results count
-  console.error(`[SEARCH DEBUG] Found ${results.length} matches`);
+  console.error(`[SEARCH DEBUG] Found ${results.length} matches (limiting to ${MAX_RESULTS})`);
   console.error(`[SEARCH DEBUG] First 10 results:`);
   results.slice(0, 10).forEach((r, i) => {
     const prop = r.properties[0];
@@ -130,7 +133,8 @@ function searchUtilityClasses(query, data, compoundProperties) {
   });
   console.error(`\n`);
 
-  return results;
+  // Limit results to prevent overwhelming responses
+  return results.slice(0, MAX_RESULTS);
 }
 
 /**
@@ -154,6 +158,115 @@ function formatResults(results, query) {
 
     // Show usage example
     output += `   Usage: <div class="${result.className}">...</div>\n\n`;
+  });
+
+  return output;
+}
+
+// ============================================================================
+// TOKEN SEARCH FUNCTIONS
+// ============================================================================
+
+/**
+ * Search design tokens by name, value, or description across all theme variants
+ */
+function searchTokens(query, data) {
+  const keywords = extractKeywords(query, new Set()); // Tokens don't have compound properties
+  const results = [];
+
+  console.error(`\n[TOKEN SEARCH DEBUG] Query: "${query}"`);
+  console.error(`[TOKEN SEARCH DEBUG] Words:`, JSON.stringify(keywords.words));
+
+  // Search through all tokens
+  for (const [tokenName, themeVariants] of Object.entries(data)) {
+    const normalizedTokenName = tokenName.toLowerCase();
+    let nameMatch = false;
+    let valueMatch = false;
+    const matchedThemes = [];
+
+    // Check if token name matches any query word
+    nameMatch = keywords.words.some(word => normalizedTokenName.includes(word));
+
+    // Check if any theme variant's value or description matches
+    for (const [themeName, themeData] of Object.entries(themeVariants)) {
+      // Safely convert value to string
+      const valueStr = themeData && themeData.value ? String(themeData.value) : '';
+      const descStr = themeData && themeData.description ? String(themeData.description) : '';
+
+      const value = valueStr.toLowerCase();
+      const description = descStr.toLowerCase();
+
+      const themeMatches = keywords.words.some(word => {
+        // For numeric values with units (8px, 0.8rem, 50%), use exact matching
+        if (word.match(/^\d+(\.\d+)?(px|rem|%|em)$/)) {
+          return value === word || description === word;
+        }
+        // For other keywords (color names, semantic terms), use substring matching
+        return value.includes(word) || description.includes(word);
+      });
+
+      if (themeMatches) {
+        valueMatch = true;
+        matchedThemes.push({
+          theme: themeName,
+          value: themeData.value,
+          description: themeData.description
+        });
+      }
+    }
+
+    // Include if name OR value matched (tokens have semantic names, unlike utility classes)
+    if (nameMatch || valueMatch) {
+      results.push({
+        type: 'design-token',
+        tokenName,
+        allThemes: themeVariants,
+        matchedThemes: matchedThemes.length > 0 ? matchedThemes : null,
+        matchType: nameMatch ? 'name' : 'value'
+      });
+    }
+  }
+
+  console.error(`[TOKEN SEARCH DEBUG] Found ${results.length} token matches (limiting to ${MAX_RESULTS})\n`);
+
+  // Limit results to prevent overwhelming responses
+  return results.slice(0, MAX_RESULTS);
+}
+
+/**
+ * Format token search results with theme variant information
+ */
+function formatTokenResults(results, query) {
+  if (results.length === 0) {
+    return `No token results found for "${query}".\n\nTry searching with:\n- Token category (e.g., "color", "spacing", "border")\n- Specific value (e.g., "#1C1C1C", "0.8rem")\n- Semantic name (e.g., "primary", "success", "danger")`;
+  }
+
+  let output = `Found ${results.length} design token${results.length > 1 ? 's' : ''} for "${query}":\n\n`;
+  output += `ℹ️  **Note:** Design token values change based on the active theme (light/dark mode, brand variant).\n\n`;
+
+  results.forEach((result, index) => {
+    output += `${index + 1}. **${result.tokenName}**\n`;
+
+    // Show theme variants
+    output += `   Theme Variants:\n`;
+    const themes = Object.entries(result.allThemes);
+
+    // Show first few themes as examples
+    const themesToShow = themes.slice(0, 3);
+    themesToShow.forEach(([themeName, themeData]) => {
+      const valueStr = themeData && themeData.value ? String(themeData.value) : 'N/A';
+      const descStr = themeData && themeData.description ? String(themeData.description) : '';
+      const desc = descStr ? ` - ${descStr}` : '';
+      output += `   - ${themeName}: ${valueStr}${desc}\n`;
+    });
+
+    if (themes.length > 3) {
+      output += `   - ... and ${themes.length - 3} more theme variants\n`;
+    }
+
+    // Show usage example
+    output += `   Usage: style="color: var(${result.tokenName})"\n`;
+    output += `   Note: This will automatically use the correct value for the active theme.\n\n`;
   });
 
   return output;
@@ -235,20 +348,36 @@ async function main() {
   // Handle tool discovery - tell clients what tools are available
   server.server.setRequestHandler(ListToolsRequestSchema, async () => {
     return {
-      tools: [{
-        name: "search_dialtone",
-        description: "Search Dialtone design system for utility classes, components, and tokens. Examples: 'right padding 8px', 'button', 'd-flex', 'center text'",
-        inputSchema: {
-          type: "object",
-          properties: {
-            query: {
-              type: "string",
-              description: "Search query for Dialtone - CSS properties, class names, values, or component names"
-            }
-          },
-          required: ["query"]
+      tools: [
+        {
+          name: "search_dialtone",
+          description: "Search Dialtone design system for utility classes, components, and tokens. Examples: 'right padding 8px', 'button', 'd-flex', 'center text'",
+          inputSchema: {
+            type: "object",
+            properties: {
+              query: {
+                type: "string",
+                description: "Search query for Dialtone - CSS properties, class names, values, or component names"
+              }
+            },
+            required: ["query"]
+          }
+        },
+        {
+          name: "search_tokens",
+          description: "Search Dialtone design tokens by name, hex value, or semantic meaning. Tokens are theme-aware CSS variables. Examples: 'primary color', '#1C1C1C', 'spacing 8px', 'border focus'",
+          inputSchema: {
+            type: "object",
+            properties: {
+              query: {
+                type: "string",
+                description: "Search query for design tokens - token names, hex/color values, sizes, or semantic terms"
+              }
+            },
+            required: ["query"]
+          }
         }
-      }]
+      ]
     };
   });
 
@@ -278,12 +407,13 @@ async function main() {
           };
         }
 
-        // Perform search
-        const results = searchUtilityClasses(query, utilityClasses, compoundProperties);
-        console.error('[search_dialtone] Found results:', results.length);
+        // TEMPORARY: Search tokens only (for testing Phase 2)
+        // TODO: Switch back to utility classes or merge both
+        const results = searchTokens(query, tokens);
+        console.error('[search_dialtone] Found token results:', results.length);
 
         // Format and return results
-        const formatted = formatResults(results, query);
+        const formatted = formatTokenResults(results, query);
 
         return {
           content: [{
@@ -297,6 +427,53 @@ async function main() {
           content: [{
             type: "text",
             text: `Error searching Dialtone: ${error instanceof Error ? error.message : String(error)}`
+          }],
+          isError: true
+        };
+      }
+    }
+
+    if (request.params.name === "search_tokens") {
+      try {
+        // Extract query from arguments
+        const args = request.params.arguments || {};
+        console.error('[search_tokens] Raw arguments:', JSON.stringify(args, null, 2));
+
+        const query = args.query;
+
+        console.error('[search_tokens] Extracted query:', query);
+
+        // Validate query
+        if (!query || typeof query !== 'string') {
+          console.error('[search_tokens] Invalid query:', typeof query);
+          return {
+            content: [{
+              type: "text",
+              text: "Error: 'query' parameter is required and must be a string"
+            }],
+            isError: true
+          };
+        }
+
+        // Perform token search
+        const results = searchTokens(query, tokens);
+        console.error('[search_tokens] Found results:', results.length);
+
+        // Format and return results
+        const formatted = formatTokenResults(results, query);
+
+        return {
+          content: [{
+            type: "text",
+            text: formatted
+          }]
+        };
+      } catch (error) {
+        console.error('[search_tokens] Error:', error);
+        return {
+          content: [{
+            type: "text",
+            text: `Error searching tokens: ${error instanceof Error ? error.message : String(error)}`
           }],
           isError: true
         };
