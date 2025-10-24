@@ -18,7 +18,7 @@ figma: planned
 
 **Use Skeleton when:**
 
-- Content takes more than 300ms to load
+- Content is expected to take more than a few hundred milliseconds to load on average
 - You want to show the approximate layout and structure of content being loaded
 - Loading complex lists, cards, or detailed content where users benefit from seeing the expected layout
 - You need to maintain visual hierarchy during loading states
