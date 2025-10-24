@@ -50,6 +50,76 @@ const documentation = {};
 const CSSVarRegex = /var\(([^),]+)\)/g;
 
 /**
+ * Metadata rules for utility classes
+ * Maps patterns to metadata that should be added to the documentation
+ * Based on eslint-plugin-dialtone rules
+ */
+const metadataRules = [
+  // Typography utilities (discouraged per recommend-typography-style.js eslint rule)
+  {
+    pattern: /^d-(fw-|ff-|fs-|lh-)/,
+    metadata: {
+      deprecated: false,
+      discouraged: true,
+      category: 'typography',
+      reason: 'Individual typography utilities are discouraged in favor of composed typography classes',
+      alternatives: ['d-headline-*', 'd-body-*', 'd-label-*', 'd-code-*'],
+      docs: 'https://dialtone.dialpad.com/design/typography/#api',
+    },
+  },
+  // Base colors (deprecated per deprecated-base-color-classes.js eslint rule)
+  {
+    pattern: /^d-(bgc|fc|bc|divide)-\w+-\d{2,4}$/,
+    metadata: {
+      deprecated: true,
+      discouraged: true,
+      category: 'color',
+      reason: 'Base color utilities are deprecated and will be removed in the future',
+      alternatives: [],
+      docs: 'https://dialtone.dialpad.com/utilities/backgrounds/color.html',
+    },
+  },
+  // Flex gap (deprecated per deprecated-flex-gap-classes.js eslint rule)
+  {
+    pattern: /^d-flg\d{1,2}$/,
+    metadata: {
+      deprecated: true,
+      discouraged: true,
+      category: 'flex',
+      reason: 'Flex gap utilities are deprecated and will be removed in the future',
+      alternatives: [],
+      docs: 'https://dialtone.dialpad.com/utilities/flex/gap.html',
+    },
+  },
+  // Grid gap (deprecated per deprecated-grid-gap-classes.js eslint rule)
+  {
+    pattern: /^d-(gg|grg|gcg)\d{1,2}$/,
+    metadata: {
+      deprecated: true,
+      discouraged: true,
+      category: 'grid',
+      reason: 'Grid gap utilities are deprecated and will be removed in the future',
+      alternatives: [],
+      docs: 'https://dialtone.dialpad.com/utilities/grid/gap.html',
+    },
+  },
+];
+
+/**
+ * Get metadata for a utility class based on pattern matching
+ * @param {string} className - The utility class name to check
+ * @returns {object|null} Metadata object if a rule matches, null otherwise
+ */
+function getMetadataForClass (className) {
+  for (const rule of metadataRules) {
+    if (rule.pattern.test(className)) {
+      return rule.metadata;
+    }
+  }
+  return null;
+}
+
+/**
  * Generate dialtone-docs.json
  * @param docs
  * @param {import('postcss').Rule} rule
@@ -75,7 +145,58 @@ function generateUtilityClassDocumentation (docs, rule) {
     return result;
   });
 
-  documentation[className] = { values };
+  const metadata = getMetadataForClass(className);
+
+  documentation[className] = {
+    values,
+    ...(metadata && { metadata }),
+  };
+}
+
+/**
+ * Check if a token should have metadata added
+ * @param {string} tokenName - The token name to check
+ * @returns {object|null} Metadata object if token matches a rule, null otherwise
+ */
+function getMetadataForToken (tokenName) {
+  // Base primitive tokens (--base--*) - not meant for direct use
+  if (tokenName.startsWith('--base--')) {
+    return {
+      deprecated: false,
+      discouraged: true,
+      category: 'internal',
+      reason: 'Base tokens are internal primitive values. Use semantic design tokens or CSS utility classes instead',
+      alternatives: [],
+      docs: 'https://dialtone.dialpad.com/design/tokens/',
+    };
+  }
+
+  // Tokens with -base- in the name (like --dt-action-color-background-base-active)
+  // These are component-level base states, also internal
+  if (tokenName.includes('-base-')) {
+    return {
+      deprecated: false,
+      discouraged: true,
+      category: 'internal',
+      reason: 'Base state tokens are internal values. Use semantic design tokens or CSS utility classes instead',
+      alternatives: [],
+      docs: 'https://dialtone.dialpad.com/design/tokens/',
+    };
+  }
+
+  // Theme tokens (--dt-theme-*) are deprecated in favor of shell tokens
+  if (tokenName.startsWith('--dt-theme-')) {
+    return {
+      deprecated: true,
+      discouraged: true,
+      category: 'deprecated',
+      reason: 'Theme tokens have been replaced by shell tokens',
+      alternatives: ['--dt-shell-*'],
+      docs: 'https://dialtone.dialpad.com/design/tokens/',
+    };
+  }
+
+  return null;
 }
 
 function generateTokensDocumentation (documentation) {
@@ -174,14 +295,19 @@ module.exports = () => {
     async OnceExit () {
       // Iterate over tokens documentation to replace reference variables with primitive values
       const docs = Object.keys(tokensDocs).reduce((tokens, token) => {
-        tokens[token] = Object.keys(tokensDocs[token]).reduce((themes, theme) => {
-          const originalValue = tokensDocs[token][theme].value;
-          themes[theme] = {
-            ...tokensDocs[token][theme],
-            value: replaceVariableValue(tokensDocs, originalValue, theme),
-          };
-          return themes;
-        }, {});
+        const metadata = getMetadataForToken(token);
+
+        tokens[token] = {
+          ...Object.keys(tokensDocs[token]).reduce((themes, theme) => {
+            const originalValue = tokensDocs[token][theme].value;
+            themes[theme] = {
+              ...tokensDocs[token][theme],
+              value: replaceVariableValue(tokensDocs, originalValue, theme),
+            };
+            return themes;
+          }, {}),
+          ...(metadata && { metadata }),
+        };
         return tokens;
       }, {});
 
