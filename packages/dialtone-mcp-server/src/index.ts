@@ -128,30 +128,86 @@ function searchUtilityClasses(query, data, compoundProperties) {
   // Tier 1: Exact compound property match + value match
   if (keywords.compoundProperties.length > 0) {
     const tier1Results = [];
+
+    // Count how many words are consumed by compound properties
+    // Each compound property uses 2 words (e.g., "border-top" from "border" and "top")
+    const wordsConsumedByCompounds = keywords.compoundProperties.length * 2;
+
+    // Count non-value words and value words separately
+    const nonValueWords = keywords.words.filter(word => !isValueKeyword(word));
+    const valueWords = keywords.words.filter(word => isValueKeyword(word));
+
+    // If all non-value words are consumed by compounds AND there are no value words,
+    // we can include without value check. Otherwise, require value match.
+    const allWordsConsumed = nonValueWords.length === wordsConsumedByCompounds && valueWords.length === 0;
+
     for (const [className, classData] of Object.entries(data)) {
       const exactCompoundMatch = classData.values.some(v => {
         const prop = v.prop?.toLowerCase() || '';
         return keywords.compoundProperties.some(compound => prop === compound);
       });
 
-      // Also check if value matches (if we have value keywords)
+      if (!exactCompoundMatch) continue;
+
+      // If all non-value words are consumed by compounds, include without value check
+      if (allWordsConsumed) {
+        tier1Results.push({
+          type: 'utility-class',
+          tier: 1,
+          name: className,
+          details: {
+            properties: classData.values
+          },
+          metadata: classData.metadata || null
+        });
+        continue;
+      }
+
+      // Check for semantic value matching (e.g., "font weight bold" → "d-fw-bold")
+      // If we have remaining non-value words after compounds, check if they appear in className
+      const remainingWords = nonValueWords.filter(word => {
+        // Keep words that are NOT part of any compound property
+        return !keywords.compoundProperties.some(compound => compound.includes(word));
+      });
+
+      if (remainingWords.length > 0) {
+        const classNameLower = className.toLowerCase();
+        const semanticMatch = remainingWords.some(word => classNameLower.includes(word));
+
+        if (semanticMatch) {
+          tier1Results.push({
+            type: 'utility-class',
+            tier: 1,
+            name: className,
+            details: {
+              properties: classData.values
+            },
+            metadata: classData.metadata || null
+          });
+          continue;
+        }
+      }
+
+      // Otherwise, check if remaining value keywords match
       const valueMatch = classData.values.some(v => {
         const value = v.value?.toLowerCase() || '';
         const description = v.description?.toLowerCase() || '';
         return keywords.words.some(word =>
-          valueMatchesKeyword(value, description, word)
+          isValueKeyword(word) && valueMatchesKeyword(value, description, word)
         );
       });
 
-      // Include if compound matches AND (no value keywords OR value matches)
-      const shouldInclude = exactCompoundMatch && (keywords.words.length === keywords.compoundProperties.length || valueMatch);
+      const shouldInclude = valueMatch;
 
       if (shouldInclude) {
         tier1Results.push({
           type: 'utility-class',
-          className,
-          properties: classData.values,
-          tier: 1
+          tier: 1,
+          name: className,
+          details: {
+            properties: classData.values
+          },
+          metadata: classData.metadata || null
         });
       }
     }
@@ -184,9 +240,12 @@ function searchUtilityClasses(query, data, compoundProperties) {
     if (exactPropertyMatch) {
       tier2Results.push({
         type: 'utility-class',
-        className,
-        properties: classData.values,
-        tier: 2
+        tier: 2,
+        name: className,
+        details: {
+          properties: classData.values
+        },
+        metadata: classData.metadata || null
       });
     }
   }
@@ -219,9 +278,12 @@ function searchUtilityClasses(query, data, compoundProperties) {
     if (shouldInclude) {
       tier3Results.push({
         type: 'utility-class',
-        className,
-        properties: classData.values,
-        tier: 3
+        tier: 3,
+        name: className,
+        details: {
+          properties: classData.values
+        },
+        metadata: classData.metadata || null
       });
     }
   }
@@ -229,8 +291,8 @@ function searchUtilityClasses(query, data, compoundProperties) {
   console.error(`[SEARCH DEBUG] Tier 3: Found ${tier3Results.length} partial matches`);
   console.error(`[SEARCH DEBUG] First 10 results:`);
   tier3Results.slice(0, 10).forEach((r, i) => {
-    const prop = r.properties[0];
-    console.error(`  ${i + 1}. ${r.className} - ${prop.prop}: ${prop.description || prop.value}`);
+    const prop = r.details.properties[0];
+    console.error(`  ${i + 1}. ${r.name} - ${prop.prop}: ${prop.description || prop.value}`);
   });
   console.error(`\n`);
 
@@ -248,16 +310,35 @@ function formatResults(results, query) {
   let output = `Found ${results.length} result${results.length > 1 ? 's' : ''} for "${query}":\n\n`;
 
   results.forEach((result, index) => {
-    output += `${index + 1}. **${result.className}**\n`;
+    output += `${index + 1}. **${result.name}**\n`;
+
+    // Show metadata warnings if present
+    if (result.metadata) {
+      if (result.metadata.deprecated) {
+        output += `   ⚠️  **DEPRECATED:** ${result.metadata.reason}\n`;
+      } else if (result.metadata.discouraged) {
+        output += `   ⚠️  **DISCOURAGED:** ${result.metadata.reason}\n`;
+      }
+
+      if (result.metadata.alternatives && result.metadata.alternatives.length > 0) {
+        output += `   📝 **Use instead:** ${result.metadata.alternatives.join(', ')}\n`;
+      }
+
+      if (result.metadata.docs) {
+        output += `   📖 **Docs:** ${result.metadata.docs}\n`;
+      }
+
+      output += `\n`;
+    }
 
     // Show properties
-    result.properties.forEach(prop => {
+    result.details.properties.forEach(prop => {
       const desc = prop.description ? ` (${prop.description})` : '';
       output += `   - ${prop.prop}: ${prop.value}${desc}\n`;
     });
 
     // Show usage example
-    output += `   Usage: <div class="${result.className}">...</div>\n\n`;
+    output += `   Usage: <div class="${result.name}">...</div>\n\n`;
   });
 
   return output;
@@ -282,9 +363,13 @@ function searchTokens(query, data) {
     const normalizedTokenName = tokenName.toLowerCase();
     let nameMatch = false;
     let valueMatch = false;
+    let allWordsMatchName = false;
     const matchedThemes = [];
 
-    // Check if token name matches any query word
+    // Check if ALL query words match the token name (stronger match)
+    allWordsMatchName = keywords.words.every(word => normalizedTokenName.includes(word));
+
+    // Check if ANY query word matches the token name (weaker match)
     nameMatch = keywords.words.some(word => normalizedTokenName.includes(word));
 
     // Check if any theme variant's value or description matches
@@ -321,12 +406,24 @@ function searchTokens(query, data) {
 
     // Include if name OR value matched (tokens have semantic names, unlike utility classes)
     if (nameMatch || valueMatch) {
+      // Check if any theme variant has metadata (they all should have the same metadata)
+      const firstTheme = Object.values(themeVariants)[0];
+      const metadata = firstTheme && firstTheme.metadata ? firstTheme.metadata : null;
+
+      // Tier 1: ALL query words in token name (perfect match)
+      // Tier 2: ANY query word in name OR value match (good match)
+      const tier = allWordsMatchName ? 1 : 2;
+
       results.push({
         type: 'design-token',
-        tokenName,
-        allThemes: themeVariants,
-        matchedThemes: matchedThemes.length > 0 ? matchedThemes : null,
-        matchType: nameMatch ? 'name' : 'value'
+        tier,
+        name: tokenName,
+        details: {
+          allThemes: themeVariants,
+          matchedThemes: matchedThemes.length > 0 ? matchedThemes : null,
+          matchType: nameMatch ? 'name' : 'value'
+        },
+        metadata
       });
     }
   }
@@ -349,11 +446,30 @@ function formatTokenResults(results, query) {
   output += `ℹ️  **Note:** Design token values change based on the active theme (light/dark mode, brand variant).\n\n`;
 
   results.forEach((result, index) => {
-    output += `${index + 1}. **${result.tokenName}**\n`;
+    output += `${index + 1}. **${result.name}**\n`;
+
+    // Show metadata warnings if present
+    if (result.metadata) {
+      if (result.metadata.deprecated) {
+        output += `   ⚠️  **DEPRECATED:** ${result.metadata.reason}\n`;
+      } else if (result.metadata.discouraged) {
+        output += `   ⚠️  **DISCOURAGED:** ${result.metadata.reason}\n`;
+      }
+
+      if (result.metadata.alternatives && result.metadata.alternatives.length > 0) {
+        output += `   📝 **Use instead:** ${result.metadata.alternatives.join(', ')}\n`;
+      }
+
+      if (result.metadata.docs) {
+        output += `   📖 **Docs:** ${result.metadata.docs}\n`;
+      }
+
+      output += `\n`;
+    }
 
     // Show theme variants
     output += `   Theme Variants:\n`;
-    const themes = Object.entries(result.allThemes);
+    const themes = Object.entries(result.details.allThemes);
 
     // Show first few themes as examples
     const themesToShow = themes.slice(0, 3);
@@ -369,7 +485,7 @@ function formatTokenResults(results, query) {
     }
 
     // Show usage example
-    output += `   Usage: style="color: var(${result.tokenName})"\n`;
+    output += `   Usage: style="color: var(${result.name})"\n`;
     output += `   Note: This will automatically use the correct value for the active theme.\n\n`;
   });
 
@@ -393,28 +509,57 @@ function searchComponents(query, components) {
     const displayName = (component.displayName || '').toLowerCase();
     const description = (component.description || '').toLowerCase();
 
-    // Priority 1: Exact name match (with or without "Dt" prefix)
+    // Tier 1: Exact name match (with or without "Dt" prefix)
     if (displayName === normalized || displayName === `dt${normalized}`) {
       console.error(`[COMPONENT SEARCH DEBUG] Exact match: ${component.displayName}`);
       return [{
-        ...component,
-        matchType: 'exact-name'
+        type: 'component',
+        tier: 1,
+        name: component.displayName,
+        details: {
+          description: component.description,
+          props: component.props,
+          matchType: 'exact-name'
+        },
+        metadata: component.metadata || null
       }];
     }
 
-    // Priority 2: Name contains query
+    // Tier 2: Name contains query
     if (displayName.includes(normalized)) {
-      results.push({ ...component, matchType: 'name', priority: 2 });
+      results.push({
+        type: 'component',
+        tier: 2,
+        name: component.displayName,
+        details: {
+          description: component.description,
+          props: component.props,
+          matchType: 'name'
+        },
+        metadata: component.metadata || null,
+        priority: 2
+      });
       continue;
     }
 
-    // Priority 3: Description contains query
+    // Tier 2: Description contains query
     if (description.includes(normalized)) {
-      results.push({ ...component, matchType: 'description', priority: 3 });
+      results.push({
+        type: 'component',
+        tier: 2,
+        name: component.displayName,
+        details: {
+          description: component.description,
+          props: component.props,
+          matchType: 'description'
+        },
+        metadata: component.metadata || null,
+        priority: 3
+      });
       continue;
     }
 
-    // Priority 4: Props match
+    // Tier 2: Props match
     const matchingProps = [];
     for (const prop of component.props || []) {
       const propName = (prop.name || '').toLowerCase();
@@ -426,9 +571,16 @@ function searchComponents(query, components) {
 
     if (matchingProps.length > 0) {
       results.push({
-        ...component,
-        matchType: 'prop',
-        matchedProps: matchingProps,
+        type: 'component',
+        tier: 2,
+        name: component.displayName,
+        details: {
+          description: component.description,
+          props: component.props,
+          matchType: 'prop',
+          matchedProps: matchingProps
+        },
+        metadata: component.metadata || null,
         priority: 4
       });
     }
@@ -452,18 +604,35 @@ function formatComponentResults(results, query) {
 
   let output = `Found ${results.length} component${results.length > 1 ? 's' : ''} for "${query}":\n\n`;
 
-  results.forEach((component, index) => {
-    output += `${index + 1}. **${component.displayName}**\n`;
+  results.forEach((result, index) => {
+    output += `${index + 1}. **${result.name}**\n`;
+
+    // Show metadata warnings if present
+    if (result.metadata) {
+      if (result.metadata.deprecated) {
+        output += `   ⚠️  **DEPRECATED:** ${result.metadata.reason}\n`;
+      }
+
+      if (result.metadata.replacement) {
+        output += `   📝 **Use instead:** ${result.metadata.replacement}\n`;
+      }
+
+      if (result.metadata.docs) {
+        output += `   📖 **Docs:** ${result.metadata.docs}\n`;
+      }
+
+      output += `\n`;
+    }
 
     // Show description
-    if (component.description) {
-      output += `   ${component.description}\n\n`;
+    if (result.details.description) {
+      output += `   ${result.details.description}\n\n`;
     }
 
     // Show key props (up to 5)
-    if (component.props && component.props.length > 0) {
+    if (result.details.props && result.details.props.length > 0) {
       output += `   **Key Props:**\n`;
-      const propsToShow = component.props.slice(0, 5);
+      const propsToShow = result.details.props.slice(0, 5);
       propsToShow.forEach(prop => {
         const typeName = prop.type?.name || 'unknown';
         const values = prop.values ? ` Options: ${prop.values.slice(0, 3).join(', ')}${prop.values.length > 3 ? '...' : ''}` : '';
@@ -473,26 +642,26 @@ function formatComponentResults(results, query) {
         }
       });
 
-      if (component.props.length > 5) {
-        output += `   • ... and ${component.props.length - 5} more props\n`;
+      if (result.details.props.length > 5) {
+        output += `   • ... and ${result.details.props.length - 5} more props\n`;
       }
       output += `\n`;
     }
 
     // Show events if any
-    if (component.events && component.events.length > 0) {
-      output += `   **Events:** ${component.events.map(e => e.name).slice(0, 3).join(', ')}`;
-      if (component.events.length > 3) {
-        output += ` (${component.events.length - 3} more)`;
+    if (result.details.events && result.details.events.length > 0) {
+      output += `   **Events:** ${result.details.events.map(e => e.name).slice(0, 3).join(', ')}`;
+      if (result.details.events.length > 3) {
+        output += ` (${result.details.events.length - 3} more)`;
       }
       output += `\n\n`;
     }
 
     // Show slots if any
-    if (component.slots && component.slots.length > 0) {
-      output += `   **Slots:** ${component.slots.map(s => s.name).slice(0, 3).join(', ')}`;
-      if (component.slots.length > 3) {
-        output += ` (${component.slots.length - 3} more)`;
+    if (result.details.slots && result.details.slots.length > 0) {
+      output += `   **Slots:** ${result.details.slots.map(s => s.name).slice(0, 3).join(', ')}`;
+      if (result.details.slots.length > 3) {
+        output += ` (${result.details.slots.length - 3} more)`;
       }
       output += `\n\n`;
     }
@@ -500,7 +669,7 @@ function formatComponentResults(results, query) {
     // Usage example
     output += `   **Usage:**\n`;
     output += `   \`\`\`vue\n`;
-    output += `   import { ${component.displayName} } from '@dialpad/dialtone-vue'\n`;
+    output += `   import { ${result.name} } from '@dialpad/dialtone-vue'\n`;
     output += `   \`\`\`\n\n`;
   });
 
