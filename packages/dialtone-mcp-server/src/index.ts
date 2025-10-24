@@ -63,10 +63,15 @@ function extractKeywords(query, compoundProperties) {
     if (word1.endsWith('px') || word1.endsWith('rem') || word1.endsWith('%')) continue;
     if (word2.endsWith('px') || word2.endsWith('rem') || word2.endsWith('%')) continue;
 
-    // Check if these two words form a compound property
-    const potential = `${word1}-${word2}`;
-    if (compoundProperties.has(potential)) {
-      compoundProps.push(potential);
+    // Check if these two words form a compound property in EITHER order
+    // e.g., "padding right" could be "padding-right" OR "right-padding"
+    const potential1 = `${word1}-${word2}`;
+    const potential2 = `${word2}-${word1}`;
+
+    if (compoundProperties.has(potential1)) {
+      compoundProps.push(potential1);
+    } else if (compoundProperties.has(potential2)) {
+      compoundProps.push(potential2);
     }
   }
 
@@ -77,64 +82,159 @@ function extractKeywords(query, compoundProperties) {
 }
 
 /**
- * Search utility classes using exact word matching (no scoring)
+ * Check if a keyword is a pure value (not a property name)
+ */
+function isValueKeyword(word) {
+  // Numeric values with units: 8px, 0.8rem, 50%, 1em
+  if (word.match(/^\d+(\.\d+)?(px|rem|%|em)$/)) return true;
+  // Hex colors: #1C1C1C, #fff
+  if (word.match(/^#[0-9a-f]+$/i)) return true;
+  // Numbers without units: 8, 16, 100
+  if (word.match(/^\d+(\.\d+)?$/)) return true;
+  return false;
+}
+
+/**
+ * Helper: Check if a value matches a keyword
+ */
+function valueMatchesKeyword(value, description, word) {
+  // For numeric values with units (8px, 0.8rem, 50%), use token-based matching
+  if (word.match(/^\d+(\.\d+)?(px|rem|%|em)$/)) {
+    const valueTokens = value.split(/\s+/);
+    const descTokens = (description || '').split(/\s+/);
+    return valueTokens.includes(word) || descTokens.includes(word);
+  }
+  // For other keywords, use word boundary matching
+  const escapedWord = word.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+  const wordBoundaryRegex = new RegExp(`\\b${escapedWord}\\b`, 'i');
+  return wordBoundaryRegex.test(value) || wordBoundaryRegex.test(description);
+}
+
+/**
+ * Search utility classes using priority-based filtering
  */
 function searchUtilityClasses(query, data, compoundProperties) {
   const keywords = extractKeywords(query, compoundProperties);
-  const results = [];
 
   // Debug logging
   console.error(`\n[SEARCH DEBUG] Query: "${query}"`);
   console.error(`[SEARCH DEBUG] Words:`, JSON.stringify(keywords.words));
   console.error(`[SEARCH DEBUG] Compound properties detected:`, JSON.stringify(keywords.compoundProperties));
 
-  // Search through all utility classes
-  for (const [className, classData] of Object.entries(data)) {
-    // Check if property matches
-    const propertyMatch = classData.values.some(v => {
-      const prop = v.prop?.toLowerCase() || '';
+  // Detect if query contains only values (no property keywords)
+  const hasPropertyKeywords = keywords.words.some(word => !isValueKeyword(word));
+  console.error(`[SEARCH DEBUG] Has property keywords:`, hasPropertyKeywords);
 
-      // Priority 1: Check if property matches any detected compound property
-      if (keywords.compoundProperties.length > 0) {
-        if (keywords.compoundProperties.some(compound => prop === compound)) {
-          return true;
-        }
+  // Tier 1: Exact compound property match + value match
+  if (keywords.compoundProperties.length > 0) {
+    const tier1Results = [];
+    for (const [className, classData] of Object.entries(data)) {
+      const exactCompoundMatch = classData.values.some(v => {
+        const prop = v.prop?.toLowerCase() || '';
+        return keywords.compoundProperties.some(compound => prop === compound);
+      });
+
+      // Also check if value matches (if we have value keywords)
+      const valueMatch = classData.values.some(v => {
+        const value = v.value?.toLowerCase() || '';
+        const description = v.description?.toLowerCase() || '';
+        return keywords.words.some(word =>
+          valueMatchesKeyword(value, description, word)
+        );
+      });
+
+      // Include if compound matches AND (no value keywords OR value matches)
+      const shouldInclude = exactCompoundMatch && (keywords.words.length === keywords.compoundProperties.length || valueMatch);
+
+      if (shouldInclude) {
+        tier1Results.push({
+          type: 'utility-class',
+          className,
+          properties: classData.values,
+          tier: 1
+        });
       }
+    }
 
-      // Priority 2: Check if property contains any individual word
-      return keywords.words.some(word => prop.includes(word));
-    });
+    if (tier1Results.length > 0) {
+      console.error(`[SEARCH DEBUG] Tier 1: Found ${tier1Results.length} exact compound + value matches`);
+      return tier1Results.slice(0, MAX_RESULTS);
+    }
+  }
 
-    // Check if ANY value/description contains ANY query word
-    const valueMatch = classData.values.some(v => {
+  // Tier 2: Exact property + value match (for queries like "width 100%")
+  const tier2Results = [];
+  for (const [className, classData] of Object.entries(data)) {
+    const exactPropertyMatch = classData.values.some(v => {
+      const prop = v.prop?.toLowerCase() || '';
       const value = v.value?.toLowerCase() || '';
       const description = v.description?.toLowerCase() || '';
-      return keywords.words.some(word =>
-        value.includes(word) || description.includes(word)
+
+      // Check if ANY keyword is an exact property match
+      const propMatchesExactly = keywords.words.some(word => prop === word);
+
+      // Check if value matches
+      const valueMatches = keywords.words.some(word =>
+        valueMatchesKeyword(value, description, word)
       );
+
+      return propMatchesExactly && valueMatches;
     });
 
-    // Include if BOTH property and value matched
-    if (propertyMatch && valueMatch) {
-      results.push({
+    if (exactPropertyMatch) {
+      tier2Results.push({
         type: 'utility-class',
         className,
-        properties: classData.values
+        properties: classData.values,
+        tier: 2
       });
     }
   }
 
-  // Debug logging - show results count
-  console.error(`[SEARCH DEBUG] Found ${results.length} matches (limiting to ${MAX_RESULTS})`);
+  if (tier2Results.length > 0) {
+    console.error(`[SEARCH DEBUG] Tier 2: Found ${tier2Results.length} exact property + value matches`);
+    return tier2Results.slice(0, MAX_RESULTS);
+  }
+
+  // Tier 3: Property contains keyword + value match (original behavior)
+  const tier3Results = [];
+  for (const [className, classData] of Object.entries(data)) {
+    const propertyMatch = classData.values.some(v => {
+      const prop = v.prop?.toLowerCase() || '';
+      return keywords.words.some(word => !isValueKeyword(word) && prop.includes(word));
+    });
+
+    const valueMatch = classData.values.some(v => {
+      const value = v.value?.toLowerCase() || '';
+      const description = v.description?.toLowerCase() || '';
+      return keywords.words.some(word =>
+        valueMatchesKeyword(value, description, word)
+      );
+    });
+
+    const shouldInclude = hasPropertyKeywords
+      ? (propertyMatch && valueMatch)
+      : valueMatch;
+
+    if (shouldInclude) {
+      tier3Results.push({
+        type: 'utility-class',
+        className,
+        properties: classData.values,
+        tier: 3
+      });
+    }
+  }
+
+  console.error(`[SEARCH DEBUG] Tier 3: Found ${tier3Results.length} partial matches`);
   console.error(`[SEARCH DEBUG] First 10 results:`);
-  results.slice(0, 10).forEach((r, i) => {
+  tier3Results.slice(0, 10).forEach((r, i) => {
     const prop = r.properties[0];
     console.error(`  ${i + 1}. ${r.className} - ${prop.prop}: ${prop.description || prop.value}`);
   });
   console.error(`\n`);
 
-  // Limit results to prevent overwhelming responses
-  return results.slice(0, MAX_RESULTS);
+  return tier3Results.slice(0, MAX_RESULTS);
 }
 
 /**
@@ -197,12 +297,16 @@ function searchTokens(query, data) {
       const description = descStr.toLowerCase();
 
       const themeMatches = keywords.words.some(word => {
-        // For numeric values with units (8px, 0.8rem, 50%), use exact matching
+        // For numeric values with units (8px, 0.8rem, 50%), use token-based matching
         if (word.match(/^\d+(\.\d+)?(px|rem|%|em)$/)) {
-          return value === word || description === word;
+          const valueTokens = value.split(/\s+/);
+          const descTokens = (description || '').split(/\s+/);
+          return valueTokens.includes(word) || descTokens.includes(word);
         }
-        // For other keywords (color names, semantic terms), use substring matching
-        return value.includes(word) || description.includes(word);
+        // For other keywords (color names, semantic terms), use word boundary matching
+        const escapedWord = word.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+        const wordBoundaryRegex = new RegExp(`\\b${escapedWord}\\b`, 'i');
+        return wordBoundaryRegex.test(value) || wordBoundaryRegex.test(description);
       });
 
       if (themeMatches) {
@@ -267,6 +371,137 @@ function formatTokenResults(results, query) {
     // Show usage example
     output += `   Usage: style="color: var(${result.tokenName})"\n`;
     output += `   Note: This will automatically use the correct value for the active theme.\n\n`;
+  });
+
+  return output;
+}
+
+// ============================================================================
+// COMPONENT SEARCH FUNCTIONS
+// ============================================================================
+
+/**
+ * Search Vue components by name, description, or props
+ */
+function searchComponents(query, components) {
+  const normalized = query.toLowerCase();
+  const results = [];
+
+  console.error(`\n[COMPONENT SEARCH DEBUG] Query: "${query}"`);
+
+  for (const component of components) {
+    const displayName = (component.displayName || '').toLowerCase();
+    const description = (component.description || '').toLowerCase();
+
+    // Priority 1: Exact name match (with or without "Dt" prefix)
+    if (displayName === normalized || displayName === `dt${normalized}`) {
+      console.error(`[COMPONENT SEARCH DEBUG] Exact match: ${component.displayName}`);
+      return [{
+        ...component,
+        matchType: 'exact-name'
+      }];
+    }
+
+    // Priority 2: Name contains query
+    if (displayName.includes(normalized)) {
+      results.push({ ...component, matchType: 'name', priority: 2 });
+      continue;
+    }
+
+    // Priority 3: Description contains query
+    if (description.includes(normalized)) {
+      results.push({ ...component, matchType: 'description', priority: 3 });
+      continue;
+    }
+
+    // Priority 4: Props match
+    const matchingProps = [];
+    for (const prop of component.props || []) {
+      const propName = (prop.name || '').toLowerCase();
+      const propDesc = (prop.description || '').toLowerCase();
+      if (propName.includes(normalized) || propDesc.includes(normalized)) {
+        matchingProps.push(prop.name);
+      }
+    }
+
+    if (matchingProps.length > 0) {
+      results.push({
+        ...component,
+        matchType: 'prop',
+        matchedProps: matchingProps,
+        priority: 4
+      });
+    }
+  }
+
+  // Sort by priority (lower number = higher priority)
+  results.sort((a, b) => (a.priority || 5) - (b.priority || 5));
+
+  console.error(`[COMPONENT SEARCH DEBUG] Found ${results.length} matches\n`);
+
+  return results.slice(0, MAX_RESULTS);
+}
+
+/**
+ * Format component search results
+ */
+function formatComponentResults(results, query) {
+  if (results.length === 0) {
+    return `No components found for "${query}".\n\nTry searching with:\n- Component name (e.g., "button", "modal", "avatar")\n- Partial name (e.g., "badge", "card")\n- Component feature (e.g., "dropdown", "tooltip")`;
+  }
+
+  let output = `Found ${results.length} component${results.length > 1 ? 's' : ''} for "${query}":\n\n`;
+
+  results.forEach((component, index) => {
+    output += `${index + 1}. **${component.displayName}**\n`;
+
+    // Show description
+    if (component.description) {
+      output += `   ${component.description}\n\n`;
+    }
+
+    // Show key props (up to 5)
+    if (component.props && component.props.length > 0) {
+      output += `   **Key Props:**\n`;
+      const propsToShow = component.props.slice(0, 5);
+      propsToShow.forEach(prop => {
+        const typeName = prop.type?.name || 'unknown';
+        const values = prop.values ? ` Options: ${prop.values.slice(0, 3).join(', ')}${prop.values.length > 3 ? '...' : ''}` : '';
+        output += `   • \`${prop.name}\` (${typeName})${values}\n`;
+        if (prop.description) {
+          output += `     ${prop.description}\n`;
+        }
+      });
+
+      if (component.props.length > 5) {
+        output += `   • ... and ${component.props.length - 5} more props\n`;
+      }
+      output += `\n`;
+    }
+
+    // Show events if any
+    if (component.events && component.events.length > 0) {
+      output += `   **Events:** ${component.events.map(e => e.name).slice(0, 3).join(', ')}`;
+      if (component.events.length > 3) {
+        output += ` (${component.events.length - 3} more)`;
+      }
+      output += `\n\n`;
+    }
+
+    // Show slots if any
+    if (component.slots && component.slots.length > 0) {
+      output += `   **Slots:** ${component.slots.map(s => s.name).slice(0, 3).join(', ')}`;
+      if (component.slots.length > 3) {
+        output += ` (${component.slots.length - 3} more)`;
+      }
+      output += `\n\n`;
+    }
+
+    // Usage example
+    output += `   **Usage:**\n`;
+    output += `   \`\`\`vue\n`;
+    output += `   import { ${component.displayName} } from '@dialpad/dialtone-vue'\n`;
+    output += `   \`\`\`\n\n`;
   });
 
   return output;
@@ -351,27 +586,13 @@ async function main() {
       tools: [
         {
           name: "search_dialtone",
-          description: "Search Dialtone design system for utility classes, components, and tokens. Examples: 'right padding 8px', 'button', 'd-flex', 'center text'",
+          description: "Search Dialtone design system for utility classes, design tokens, and Vue components. Examples: 'right padding 8px', 'primary color', '#1C1C1C', 'd-flex', 'border focus', 'button component', 'modal'",
           inputSchema: {
             type: "object",
             properties: {
               query: {
                 type: "string",
-                description: "Search query for Dialtone - CSS properties, class names, values, or component names"
-              }
-            },
-            required: ["query"]
-          }
-        },
-        {
-          name: "search_tokens",
-          description: "Search Dialtone design tokens by name, hex value, or semantic meaning. Tokens are theme-aware CSS variables. Examples: 'primary color', '#1C1C1C', 'spacing 8px', 'border focus'",
-          inputSchema: {
-            type: "object",
-            properties: {
-              query: {
-                type: "string",
-                description: "Search query for design tokens - token names, hex/color values, sizes, or semantic terms"
+                description: "Search query for Dialtone - CSS properties, class names, values, token names, component names, hex colors, or semantic terms"
               }
             },
             required: ["query"]
@@ -407,13 +628,42 @@ async function main() {
           };
         }
 
-        // TEMPORARY: Search tokens only (for testing Phase 2)
-        // TODO: Switch back to utility classes or merge both
-        const results = searchTokens(query, tokens);
-        console.error('[search_dialtone] Found token results:', results.length);
+        // Search utility classes, tokens, and components
+        const utilityResults = searchUtilityClasses(query, utilityClasses, compoundProperties);
+        const tokenResults = searchTokens(query, tokens);
+        const componentResults = searchComponents(query, components);
 
-        // Format and return results
-        const formatted = formatTokenResults(results, query);
+        console.error('[search_dialtone] Found utility class results:', utilityResults.length);
+        console.error('[search_dialtone] Found token results:', tokenResults.length);
+        console.error('[search_dialtone] Found component results:', componentResults.length);
+
+        // Combine and format results
+        let formatted = '';
+
+        if (utilityResults.length === 0 && tokenResults.length === 0 && componentResults.length === 0) {
+          formatted = `No results found for "${query}".\n\nTry searching with:\n- CSS properties (e.g., "padding", "display", "flex")\n- Values (e.g., "8px", "0.8rem", "100%")\n- Token names (e.g., "color", "spacing", "border")\n- Component names (e.g., "button", "modal", "avatar")\n- Hex colors (e.g., "#1C1C1C")`;
+        } else {
+          // Show utility classes
+          if (utilityResults.length > 0) {
+            formatted += `## Utility Classes\n\n${formatResults(utilityResults, query)}`;
+          }
+
+          // Show tokens
+          if (tokenResults.length > 0) {
+            if (utilityResults.length > 0) {
+              formatted += `\n---\n\n`;
+            }
+            formatted += `## Design Tokens\n\n${formatTokenResults(tokenResults, query)}`;
+          }
+
+          // Show components
+          if (componentResults.length > 0) {
+            if (utilityResults.length > 0 || tokenResults.length > 0) {
+              formatted += `\n---\n\n`;
+            }
+            formatted += `## Vue Components\n\n${formatComponentResults(componentResults, query)}`;
+          }
+        }
 
         return {
           content: [{
@@ -427,53 +677,6 @@ async function main() {
           content: [{
             type: "text",
             text: `Error searching Dialtone: ${error instanceof Error ? error.message : String(error)}`
-          }],
-          isError: true
-        };
-      }
-    }
-
-    if (request.params.name === "search_tokens") {
-      try {
-        // Extract query from arguments
-        const args = request.params.arguments || {};
-        console.error('[search_tokens] Raw arguments:', JSON.stringify(args, null, 2));
-
-        const query = args.query;
-
-        console.error('[search_tokens] Extracted query:', query);
-
-        // Validate query
-        if (!query || typeof query !== 'string') {
-          console.error('[search_tokens] Invalid query:', typeof query);
-          return {
-            content: [{
-              type: "text",
-              text: "Error: 'query' parameter is required and must be a string"
-            }],
-            isError: true
-          };
-        }
-
-        // Perform token search
-        const results = searchTokens(query, tokens);
-        console.error('[search_tokens] Found results:', results.length);
-
-        // Format and return results
-        const formatted = formatTokenResults(results, query);
-
-        return {
-          content: [{
-            type: "text",
-            text: formatted
-          }]
-        };
-      } catch (error) {
-        console.error('[search_tokens] Error:', error);
-        return {
-          content: [{
-            type: "text",
-            text: `Error searching tokens: ${error instanceof Error ? error.message : String(error)}`
           }],
           isError: true
         };
