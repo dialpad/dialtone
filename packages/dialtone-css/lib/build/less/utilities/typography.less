@@ -382,25 +382,25 @@ ul {
 //  ----------------------------------------------------------------------------
 //  Base styles for all line-clamp classes
 [class*="d-lc-"] {
-  --dt-line-clamp: initial;
+  --lc-lines: initial;
 
   display: -webkit-box !important;
   overflow: hidden !important;
   -webkit-box-orient: vertical !important;
-  -webkit-line-clamp: var(--dt-line-clamp) !important;
+  -webkit-line-clamp: var(--lc-lines) !important;
 }
 
 //  Individual line-clamp values
 .d-lc {
-  &-1 { --dt-line-clamp: 1; }
-  &-2 { --dt-line-clamp: 2; }
-  &-3 { --dt-line-clamp: 3; }
-  &-4 { --dt-line-clamp: 4; }
-  &-5 { --dt-line-clamp: 5; }
-  &-6 { --dt-line-clamp: 6; }
-  &-7 { --dt-line-clamp: 7; }
-  &-8 { --dt-line-clamp: 8; }
-  &-9 { --dt-line-clamp: 9; }
+  &-1 { --lc-lines: 1; }
+  &-2 { --lc-lines: 2; }
+  &-3 { --lc-lines: 3; }
+  &-4 { --lc-lines: 4; }
+  &-5 { --lc-lines: 5; }
+  &-6 { --lc-lines: 6; }
+  &-7 { --lc-lines: 7; }
+  &-8 { --lc-lines: 8; }
+  &-9 { --lc-lines: 9; }
 
   //  Reset classes
   &-none,

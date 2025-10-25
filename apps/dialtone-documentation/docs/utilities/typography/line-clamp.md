@@ -62,19 +62,18 @@ Use `d-lc-{n}` to truncate text at a specific number of lines with an ellipsis.
 
 ## Custom
 
-The `d-lc-{n}` utility currently goes up to `9`. Should you need to go beyond, you can do so with the `d-lc-custom` class and locally adjusting the CSS custom property `--dt-line-clamp`.
+The `d-lc-{n}` utility currently goes up to `9`. Should you need to go beyond, you can do so with the `d-lc-custom` class and locally adjusting the CSS custom property `--lc-lines`.
 
 ```html
-<div class="d-lc-custom" style="--dt-line-clamp: 11">
+<div class="d-lc-custom" style="--lc-lines: 11">
   ...
 </div>
 ```
 <code-well-header>
-  <div class="d-lc-custom" style="--dt-line-clamp: 11">
+  <div class="d-lc-custom" style="--lc-lines: 11">
     Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusa qui officia deserunt mollit anim id est laborum. Sed ut per sunt in culpa qui officia deserunt mollit anim id est laborum. Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.ent, sunt in culpa qui officia deserunt mollit anim id est laborum. Sed ut perspiciatis unde omnis iste natumod tempor incididunt ut labore et docat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Sed ut perspiciatis t perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusa qui officia deserunt mollit anim id est laborum. Sed ut perspiciatis unde omnis iste natumod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.ent, sunt in culpa qui officia deserunt mollit anim id est laborum. Sed ut perspiciatis unde omnis iste natumod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Sed ut perspiciatis t perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium.
   </div>
 </code-well-header>
-
 
 ## Classes
 
