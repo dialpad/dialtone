@@ -62,7 +62,7 @@ Use `d-lc-{n}` to truncate text at a specific number of lines with an ellipsis.
 
 ## Custom
 
-The `d-lc-{n}` utility currently goes up to `9`. Should you need to go beyond, you can do so with the `d-lc-custom` class and locally adjusting the CSS custom property `--lc-lines`.
+The `d-lc-{n}` utility currently goes up to `9`. Should you need to go beyond, use the `d-lc-custom` class and locally adjust the CSS custom property `--lc-lines`.
 
 ```html
 <div class="d-lc-custom" style="--lc-lines: 11">
