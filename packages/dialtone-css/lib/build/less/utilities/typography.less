@@ -376,6 +376,42 @@ ul {
 .d-to-clip { text-overflow: clip !important; }
 .d-to-unset { text-overflow: unset !important; }
 
+
+//  ============================================================================
+//  $$  LINE CLAMP
+//  ----------------------------------------------------------------------------
+//  Base styles for all line-clamp classes
+[class*="d-line-clamp-"] {
+  --dt-line-clamp: initial;
+  
+  overflow: hidden !important;
+  display: -webkit-box !important;
+  -webkit-box-orient: vertical !important;
+  -webkit-line-clamp: var(--dt-line-clamp) !important;
+}
+
+//  Individual line-clamp values
+.d-line-clamp {
+  &-1 { --dt-line-clamp: 1; }
+  &-2 { --dt-line-clamp: 2; }
+  &-3 { --dt-line-clamp: 3; }
+  &-4 { --dt-line-clamp: 4; }
+  &-5 { --dt-line-clamp: 5; }
+  &-6 { --dt-line-clamp: 6; }
+  &-7 { --dt-line-clamp: 7; }
+  &-8 { --dt-line-clamp: 8; }
+  &-9 { --dt-line-clamp: 9; }
+  
+  //  Reset classes
+  &-none,
+  &-unset {
+    overflow: visible !important;
+    display: block !important;
+    -webkit-box-orient: horizontal !important;
+    -webkit-line-clamp: unset !important;
+  }
+}
+
 //  $$  OVERFLOW WRAP
 //  ----------------------------------------------------------------------------
 .d-ow-normal { overflow-wrap: normal !important; }
