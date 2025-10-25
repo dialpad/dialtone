@@ -77,22 +77,22 @@ Use `d-line-clamp-{n}` to truncate text at a specific number of lines with an el
 Try adjusting the line clamp value to see how the text truncates at different lengths:
 
 <code-well-header class="d-w100p">
-  <div>
-    <label>
-      Select line clamp value:
+  <dt-stack gap="500">
+    <div class="d-d-flex d-ai-center d-g16">
+      <dt-select-menu
+        v-model="selectedClamp"
+        label="Select line clamp value"
+        :options="clampOptions"
+        class="d-w264"
+      />
       <code class="d-code--sm d-docsite-code">{{ selectedClamp === 'none' ? 'No class applied' : '.d-line-clamp-' + selectedClamp }}</code>
-    </label>
-    <select v-model="selectedClamp">
-      <option v-for="value in ['2', '3', '4', '5', '6', '7', '8', '9', 'none']" :key="value" :value="value">
-        {{ value === 'none' ? 'No clamping' : value + ' line' + (value === '1' ? '' : 's') }}
-      </option>
-    </select>
-  </div>
-  <div class="d-ba d-bc-default d-bar8 d-p16">
-    <p :class="`${selectedClamp === 'none' ? '' : 'd-line-clamp-' + selectedClamp}`">
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.
-    </p>
-  </div>
+    </div>
+    <div class="d-ba d-bc-default d-bar8 d-p16">
+      <p :class="`${selectedClamp === 'none' ? '' : 'd-line-clamp-' + selectedClamp}`">
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.
+      </p>
+    </div>
+  </dt-stack>
 </code-well-header>
 
 ## Classes
@@ -111,8 +111,16 @@ Try adjusting the line clamp value to see how the text truncates at different le
 </utility-class-table>
 
 <script setup>
-  import { ref } from 'vue';
+  import { ref, computed } from 'vue';
   import { lineClamp } from '@data/type.json';
 
   const selectedClamp = ref('3');
+  
+  // Create options for the DtSelectMenu component
+  const clampOptions = computed(() => {
+    return ['1', '2', '3', '4', '5', '6', '7', '8', '9', 'none'].map(value => ({
+      value: value,
+      label: value === 'none' ? 'No clamping' : `${value} line${value === '1' ? '' : 's'}`
+    }));
+  });
 </script>
