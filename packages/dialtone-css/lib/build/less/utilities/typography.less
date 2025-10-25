@@ -381,17 +381,17 @@ ul {
 //  $$  LINE CLAMP
 //  ----------------------------------------------------------------------------
 //  Base styles for all line-clamp classes
-[class*="d-line-clamp-"] {
+[class*="d-lc-"] {
   --dt-line-clamp: initial;
-  
-  overflow: hidden !important;
+
   display: -webkit-box !important;
+  overflow: hidden !important;
   -webkit-box-orient: vertical !important;
   -webkit-line-clamp: var(--dt-line-clamp) !important;
 }
 
 //  Individual line-clamp values
-.d-line-clamp {
+.d-lc {
   &-1 { --dt-line-clamp: 1; }
   &-2 { --dt-line-clamp: 2; }
   &-3 { --dt-line-clamp: 3; }
@@ -401,14 +401,14 @@ ul {
   &-7 { --dt-line-clamp: 7; }
   &-8 { --dt-line-clamp: 8; }
   &-9 { --dt-line-clamp: 9; }
-  
+
   //  Reset classes
   &-none,
   &-unset {
-    overflow: visible !important;
-    display: block !important;
-    -webkit-box-orient: horizontal !important;
-    -webkit-line-clamp: unset !important;
+    display: initial !important;
+    overflow: initial !important;
+    -webkit-box-orient: initial !important;
+    -webkit-line-clamp: initial !important;
   }
 }
 

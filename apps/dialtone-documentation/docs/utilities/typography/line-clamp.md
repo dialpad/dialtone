@@ -5,95 +5,51 @@ description: Utilities for limiting the number of lines displayed for text conte
 
 ## Usage
 
-Use `d-line-clamp-{n}` to truncate text at a specific number of lines with an ellipsis.
+Use `d-lc-{n}` to truncate text at a specific number of lines with an ellipsis.
 
-<code-well-header class="d-w100p">
-  <dt-stack class="d-w100p" gap="500">
-    <dt-stack gap="500" direction="row" class="d-ai-baseline">
-      <p class="d-code--sm d-docsite-code d-ws-nowrap">.d-line-clamp-3</p>
-      <p class="d-line-clamp-3">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
+<code-well-header>
+  <dt-stack gap="500" class="d-w100p d-ai-baseline">
+    <dt-stack gap="400" class="d-fl1 d-jc-space-between">
+      <!-- <code class="d-code--sm d-docsite-code">class="d-lc-<strong>{{ selectedClamp }}</strong>"</code> -->
+      <dt-select-menu
+        :value="selectedClamp"
+        @input="selectedClamp = $event"
+        :options="clampOptions"
+      />
+    </dt-stack>
+    <dt-stack class="" direction="row" gap="400">
+      <p :class="`d-lc-${selectedClamp}`">
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.
+      </p>
+      <dt-stack class="d-as-flex-end d-fc-success">
+        <dt-icon name="arrow-left" size="400" />
+      </dt-stack>
     </dt-stack>
   </dt-stack>
 </code-well-header>
 
 ```html
-<p class="d-line-clamp-3">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
+<p class="d-lc-{n}">Lorem ipsum dolor...</p>
 ```
 
 ### Avoiding Conflicts with Display Utilities
 
 <dt-notice kind="warning" class="d-wmx100p d-mb32" :hideClose="true">
   <template #default>
-    <p>The line-clamp utility sets <code>display: -webkit-box</code> which may conflict with other display utilities. If you need to use line-clamp with flex or grid layouts, consider wrapping the clamped text in a separate element:</p>
+    <p>The line-clamp utility sets <code>display: -webkit-box</code> which will conflict with other display utilities. If you need to use line-clamp with flex or grid layouts, consider wrapping the clamped text in a separate element:</p>
   </template>
 </dt-notice>
 
 ```html
 <!-- This won't work because DtStack is flex-based -->
-<dt-stack class="d-line-clamp-2"> ... </dt-stack>
+<dt-stack class="d-lc-2"> ... </dt-stack>
 
 <!-- This will work -->
 <dt-stack>
-  <p class="d-line-clamp-2"> ... </p>
+  <p class="d-lc-2"> ... </p>
 </dt-stack>
 ```
 
-## Examples
-
-<code-well-header class="d-w100p">
-  <dt-stack class="d-w100p" gap="500">
-    <dt-stack gap="500" direction="row" class="d-ai-baseline">
-      <p class="d-code--sm d-docsite-code d-ws-nowrap">.d-line-clamp-2</p>
-      <p class="d-line-clamp-2">Lorem ipsum dolor sit amet consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore nulla pariatur.</p>
-    </dt-stack>
-    <dt-stack gap="500" direction="row" class="d-ai-baseline">
-      <p class="d-code--sm d-docsite-code d-ws-nowrap">.d-line-clamp-3</p>
-      <p class="d-line-clamp-3">Lorem ipsum dolor sit amet consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore nulla pariatur.</p>
-    </dt-stack>
-    <dt-stack gap="500" direction="row" class="d-ai-baseline">
-      <p class="d-code--sm d-docsite-code d-ws-nowrap">.d-line-clamp-4</p>
-      <p class="d-line-clamp-4">Lorem ipsum dolor sit amet consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore nulla pariatur.</p>
-    </dt-stack>
-    <dt-stack gap="500" direction="row" class="d-ai-baseline">
-      <p class="d-code--sm d-docsite-code d-ws-nowrap">.d-line-clamp-5</p>
-      <p class="d-line-clamp-5">Lorem ipsum dolor sit amet consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore nulla pariatur.</p>
-    </dt-stack>
-    <dt-stack gap="500" direction="row" class="d-ai-baseline">
-      <p class="d-code--sm d-docsite-code d-ws-nowrap">.d-line-clamp-6</p>
-      <p class="d-line-clamp-6">Lorem ipsum dolor sit amet consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore nulla pariatur.</p>
-    </dt-stack>
-  </dt-stack>
-</code-well-header>
-
-```html
-<p class="d-line-clamp-2">Two lines of text lorem ipsum...</p>
-<p class="d-line-clamp-3">Three lines of text lorem ipsum...</p>
-<p class="d-line-clamp-4">Four lines of text lorem ipsum...</p>
-<p class="d-line-clamp-5">Five lines of text lorem ipsum...</p>
-<p class="d-line-clamp-6">Six lines of text lorem ipsum...</p>
-```
-## Interactive Demo
-
-Try adjusting the line clamp value to see how the text truncates at different lengths:
-
-<code-well-header class="d-w100p">
-  <dt-stack gap="500">
-    <div class="d-d-flex d-ai-center d-g16">
-      <dt-select-menu
-        v-model="selectedClamp"
-        label="Select line clamp value"
-        :options="clampOptions"
-        class="d-w264"
-      />
-      <code class="d-code--sm d-docsite-code">{{ selectedClamp === 'none' ? 'No class applied' : '.d-line-clamp-' + selectedClamp }}</code>
-    </div>
-    <div class="d-ba d-bc-default d-bar8 d-p16">
-      <p :class="`${selectedClamp === 'none' ? '' : 'd-line-clamp-' + selectedClamp}`">
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.
-      </p>
-    </div>
-  </dt-stack>
-</code-well-header>
 
 ## Classes
 
@@ -101,7 +57,7 @@ Try adjusting the line clamp value to see how the text truncates at different le
   <template #content>
     <tbody>
       <tr v-for="i in lineClamp" :key="i">
-        <th class="d-code--sm d-docsite-code">.d-line-clamp-{{ i }}</th>
+        <th class="d-code--sm d-docsite-code">.d-lc-{{ i }}</th>
         <td class="d-code--sm">
           {{ i !== 'none' && i !== 'unset' ? `-webkit-line-clamp: ${i} !important;` : '-webkit-line-clamp: unset !important;' }}
         </td>
@@ -115,12 +71,19 @@ Try adjusting the line clamp value to see how the text truncates at different le
   import { lineClamp } from '@data/type.json';
 
   const selectedClamp = ref('3');
-  
+
   // Create options for the DtSelectMenu component
-  const clampOptions = computed(() => {
-    return ['1', '2', '3', '4', '5', '6', '7', '8', '9', 'none'].map(value => ({
-      value: value,
-      label: value === 'none' ? 'No clamping' : `${value} line${value === '1' ? '' : 's'}`
-    }));
-  });
+  const clampOptions = computed(() => [
+    { value: '1', label: '1 line' },
+    { value: '2', label: '2 lines' },
+    { value: '3', label: '3 lines' },
+    { value: '4', label: '4 lines' },
+    { value: '5', label: '5 lines' },
+    { value: '6', label: '6 lines' },
+    { value: '7', label: '7 lines' },
+    { value: '8', label: '8 lines' },
+    { value: '9', label: '9 lines' },
+    { value: 'none', label: 'None' },
+    { value: 'unset', label: 'Unset' }
+  ]);
 </script>
