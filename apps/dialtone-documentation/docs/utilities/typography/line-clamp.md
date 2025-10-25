@@ -127,12 +127,7 @@ Use `d-line-clamp-{n}` to truncate text at a specific number of lines with an el
       <tr v-for="i in lineClamp" :key="i">
         <th class="d-code--sm d-docsite-code">.d-line-clamp-{{ i }}</th>
         <td class="d-code--sm">
-          <span v-if="i !== 'none' && i !== 'unset'">
-            -webkit-line-clamp: {{ i }} !important;
-          </span>
-          <span v-else>
-            -webkit-line-clamp: unset !important;
-          </span>
+          {{ i !== 'none' && i !== 'unset' ? `-webkit-line-clamp: ${i} !important;` : '-webkit-line-clamp: unset !important;' }}
         </td>
       </tr>
     </tbody>
