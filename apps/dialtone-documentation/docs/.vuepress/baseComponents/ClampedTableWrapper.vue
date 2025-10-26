@@ -20,8 +20,8 @@
         @click="handleExpand"
       >
         {{ buttonLabel }}
-        <template #icon>
-          <dt-icon :name="iconName" size="100" />
+        <template #icon="{ iconSize }">
+          <dt-icon :name="iconName" :size="iconSize" />
         </template>
       </dt-button>
     </div>
@@ -55,9 +55,20 @@ const isExpanded = ref(false);
 const isExpandable = ref(false);
 const scrollRef = ref(null);
 let resizeObserver;
+let resizeObserverTimer;
+let windowResizeTimer;
 
 const DEFAULT_MAX_HEIGHT = 464;
 const HEIGHT_FUDGE_PX = 8;
+const RESIZE_DEBOUNCE_MS = 100;
+
+// Memoized base classes for performance
+const BASE_SCROLL_CLASSES = [
+  'dialtone-doc-table-clamped__scroll',
+  'd-bar8',
+  'd-ba',
+  'd-bc-subtle',
+];
 
 // Parse the numeric value from the provided max-height utility class.
 const resolvedMaxHeight = computed(() => {
@@ -79,10 +90,7 @@ const expandThreshold = computed(() => Math.max(resolvedMaxHeight.value - HEIGHT
 const shouldShowButton = computed(() => !isExpanded.value && isExpandable.value);
 
 const scrollClasses = computed(() => [
-  'dialtone-doc-table-clamped__scroll',
-  'd-bar8',
-  'd-ba',
-  'd-bc-subtle',
+  ...BASE_SCROLL_CLASSES,
   {
     [maxHeightClass]: !isExpanded.value,
   },
@@ -107,7 +115,10 @@ const updateExpandable = () => {
 };
 
 const handleResize = () => {
-  updateExpandable();
+  clearTimeout(windowResizeTimer);
+  windowResizeTimer = setTimeout(() => {
+    updateExpandable();
+  }, RESIZE_DEBOUNCE_MS);
 };
 
 onMounted(() => {
@@ -127,8 +138,12 @@ onMounted(() => {
     }
 
     // Keep the expandable state in sync with dynamic slot content changes.
+    // Debounced to avoid excessive recalculation during rapid resizes.
     resizeObserver = new ResizeObserver(() => {
-      updateExpandable();
+      clearTimeout(resizeObserverTimer);
+      resizeObserverTimer = setTimeout(() => {
+        updateExpandable();
+      }, RESIZE_DEBOUNCE_MS);
     });
 
     resizeObserver.observe(wrapper);
@@ -137,6 +152,8 @@ onMounted(() => {
 
 onBeforeUnmount(() => {
   window.removeEventListener('resize', handleResize);
+  clearTimeout(resizeObserverTimer);
+  clearTimeout(windowResizeTimer);
 
   if (resizeObserver) {
     resizeObserver.disconnect();
