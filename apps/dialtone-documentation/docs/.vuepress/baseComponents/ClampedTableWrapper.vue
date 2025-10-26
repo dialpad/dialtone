@@ -228,28 +228,55 @@ const removeHighlights = (element) => {
   element.normalize();
 };
 
-// Perform search filtering on table rows
+// Reset search - clear all filters and highlights
+const resetSearch = () => {
+  showEmptyState.value = false;
+  nextTick(() => {
+    const table = scrollRef.value?.querySelector('table');
+    if (table) {
+      removeHighlights(table);
+      const rows = table.querySelectorAll('tbody tr');
+      rows.forEach(row => {
+        row.classList.remove('d-d-none');
+      });
+    }
+    updateExpandable();
+  });
+};
+
+// Filter table rows based on search term
+const filterTableRows = (rows, searchTerm) => {
+  let visibleCount = 0;
+  
+  rows.forEach(row => {
+    const rowText = row.textContent?.toLowerCase() || '';
+    const isMatch = rowText.includes(searchTerm);
+    row.classList.toggle('d-d-none', !isMatch);
+    if (isMatch) visibleCount++;
+  });
+  
+  return visibleCount;
+};
+
+// Apply highlights to visible rows
+const applySearchHighlights = (rows, searchTerm) => {
+  rows.forEach(row => {
+    // Only highlight visible rows
+    if (!row.classList.contains('d-d-none')) {
+      row.querySelectorAll('td, th').forEach(cell => {
+        highlightMatches(cell, searchTerm);
+      });
+    }
+  });
+};
+
+// Perform search filtering on table rows (simplified orchestrator)
 const performSearch = () => {
   const searchTerm = inputSearchValue.value.toLowerCase().trim();
 
   // If no search term, reset everything
   if (!searchTerm) {
-    showEmptyState.value = false;
-    // Wait for DOM to update, then reset all rows and recalculate
-    nextTick(() => {
-      const table = scrollRef.value?.querySelector('table');
-      if (table) {
-        // Remove any existing highlights from entire table
-        removeHighlights(table);
-        // Reset all rows in all tbody elements
-        const rows = table.querySelectorAll('tbody tr');
-        rows.forEach(row => {
-          row.style.display = '';
-        });
-      }
-      updateExpandable();
-    });
-    return;
+    return resetSearch();
   }
 
   // If we're showing empty state, we need to hide it first to access the table
@@ -263,28 +290,23 @@ const performSearch = () => {
   const table = scrollRef.value?.querySelector('table');
   if (!table) return;
 
-  // First remove any existing highlights from entire table
+  // Clear existing highlights
   removeHighlights(table);
 
-  // Get all rows from all tbody elements
+  // Get all rows and filter them
   const rows = table.querySelectorAll('tbody tr');
+  
+  // NOTE: We must use DOM manipulation here because the table content comes from a slot
+  // and we cannot control it via Vue's template reactivity. Using CSS classes is cleaner
+  // than inline styles and follows Vue best practices as much as possible given the constraint.
+  const visibleCount = filterTableRows(rows, searchTerm);
+  
+  // Apply highlights to visible rows
+  if (visibleCount > 0) {
+    applySearchHighlights(rows, searchTerm);
+  }
 
-  // Filter rows based on text content
-  let visibleCount = 0;
-  rows.forEach(row => {
-    const rowText = row.textContent?.toLowerCase() || '';
-    const isMatch = rowText.includes(searchTerm);
-    row.style.display = isMatch ? '' : 'none';
-    if (isMatch) {
-      visibleCount++;
-      // Highlight matches in visible rows
-      row.querySelectorAll('td, th').forEach(cell => {
-        highlightMatches(cell, searchTerm);
-      });
-    }
-  });
-
-  // Show empty state if no results
+  // Update empty state
   showEmptyState.value = visibleCount === 0 && rows.length > 0;
 
   // Recalculate expandability after filtering
@@ -304,8 +326,7 @@ const handleSearch = () => {
 // Clear search and reset table
 const clearSearch = () => {
   inputSearchValue.value = '';
-  showEmptyState.value = false;
-  performSearch();
+  resetSearch();
 };
 
 // Watch for search input changes
@@ -362,7 +383,7 @@ onBeforeUnmount(() => {
 .dialtone-doc-table-clamped {
   position: relative;
 
-  /deep/ mark {
+  :deep(mark) {
     outline: var(--dt-size-border-100) solid var(--dt-color-surface-warning);
   }
 
