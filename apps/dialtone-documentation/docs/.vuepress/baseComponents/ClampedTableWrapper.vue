@@ -93,6 +93,7 @@ const scrollClasses = computed(() => [
   ...BASE_SCROLL_CLASSES,
   {
     [maxHeightClass]: !isExpanded.value,
+    'd-hmx-auto': isExpanded.value,
   },
 ]);
 
