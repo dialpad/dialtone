@@ -71,7 +71,6 @@ const handleExpand = () => {
   position: relative;
 
   &__more {
-    background-color: var(--dt-color-surface-secondary);
     position: absolute;
     bottom: -16px;
     left: 50%;
@@ -79,7 +78,8 @@ const handleExpand = () => {
   }
 
   &__more-btn {
-    box-shadow: var(--dt-shadow-medium);
+    background-color: var(--dt-color-surface-secondary);
+    box-shadow: var(--dt-shadow-small);
   }
 }
 </style>
