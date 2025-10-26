@@ -1,5 +1,5 @@
 <template>
-  <dt-stack gap="400" class="dialtone-doc-table-clamped" role="region" aria-label="Searchable table">
+  <dt-stack gap="400" class="dialtone-doc-table-clamped d-ps-relative" role="region" aria-label="Searchable table">
     <div role="search">
       <dt-input
         v-model="inputSearchValue"
@@ -51,11 +51,11 @@
     </div>
     <div
       v-if="shouldShowButton"
-      class="dialtone-doc-table-clamped__more"
+      class="dialtone-doc-table-clamped__more d-ps-absolute d-bn16 d-l50p"
       aria-hidden="true"
     >
       <dt-button
-        class="dialtone-doc-table-clamped__more-btn"
+        class="dialtone-doc-table-clamped__more-btn d-bgc-secondary d-bs-sm"
         kind="muted"
         importance="outlined"
         icon-position="right"
@@ -280,6 +280,7 @@ const applySearchHighlights = (rows, searchTerm) => {
 };
 
 // Perform search filtering on table rows (simplified orchestrator)
+// eslint-disable-next-line complexity
 const performSearch = () => {
   const searchTerm = inputSearchValue.value.toLowerCase().trim();
 
@@ -390,6 +391,7 @@ onMounted(() => {
 });
 
 onBeforeUnmount(() => {
+  // eslint-disable-next-line max-lines
   window.removeEventListener('resize', handleResize);
 
   // Clear all timers
@@ -407,22 +409,14 @@ onBeforeUnmount(() => {
 
 <style scoped lang="less">
 .dialtone-doc-table-clamped {
-  position: relative;
 
   :deep(mark) {
-    outline: var(--dt-size-border-100) solid var(--dt-color-surface-warning);
+    outline: var(--dt-size-border-100) solid var(--dt-color-surface-warning); // no outline css utility available
   }
 
   &__more {
-    position: absolute;
-    bottom: var(--dt-space-500-negative);
-    left: var(--dt-size-50-percent);
-    transform: translateX(calc(var(--dt-size-50-percent) * -1));
+    transform: translateX(calc(var(--dt-size-50-percent) * -1)); // Transform kept as custom
   }
 
-  &__more-btn {
-    background-color: var(--dt-color-surface-secondary);
-    box-shadow: var(--dt-shadow-small);
-  }
 }
 </style>
