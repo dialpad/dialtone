@@ -1,5 +1,5 @@
 <template>
-  <div v-dt-scrollbar class="d-hmx464 d-bar8 d-ba d-bc-subtle">
+  <clamped-table-wrapper>
     <div>
       <table class="d-table dialtone-doc-table">
         <thead class="d-bgc-primary d-ps-sticky d-zi-base1 d-t0">
@@ -54,34 +54,28 @@
         </tbody>
       </table>
     </div>
-  </div>
+  </clamped-table-wrapper>
 </template>
 
-<!-- TODO: Refactor ComponentClassTable and ComponentAccessibleTable to avoid code repetition -->
-<script>
-export default {
+<script setup>
+import { onBeforeMount, ref } from 'vue';
+import ClampedTableWrapper from './ClampedTableWrapper.vue';
+
+defineOptions({
   name: 'ComponentClassTable',
-  props: {
-    componentName: {
-      type: String,
-      required: true,
-    },
-  },
+});
 
-  data () {
-    return {
-      classes: null,
-    };
+const { componentName } = defineProps({
+  componentName: {
+    type: String,
+    required: true,
   },
+});
 
-  beforeMount () {
-    import(`../../_data/${this.componentName}.json`).then((module) => {
-      this.classes = module.classes;
-    });
-  },
-};
+const classes = ref(null);
+
+onBeforeMount(async () => {
+  const module = await import(`../../_data/${componentName}.json`);
+  classes.value = module.classes;
+});
 </script>
-
-<style scoped>
-
-</style>

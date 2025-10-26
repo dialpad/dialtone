@@ -1,5 +1,5 @@
 <template>
-  <div v-dt-scrollbar class="d-hmx464 d-bar8 d-ba d-bc-subtle">
+  <clamped-table-wrapper>
     <div>
       <table class="d-table dialtone-doc-table">
         <thead class="d-bgc-primary d-ps-sticky d-zi-base1 d-t0">
@@ -82,11 +82,12 @@
         </tbody>
       </table>
     </div>
-  </div>
+  </clamped-table-wrapper>
 </template>
 
 <script setup>
 import { inject } from 'vue';
+import ClampedTableWrapper from './ClampedTableWrapper.vue';
 import { alphabeticalSorter } from '@utilities';
 
 const tokensDocs = inject('tokensDocs');
