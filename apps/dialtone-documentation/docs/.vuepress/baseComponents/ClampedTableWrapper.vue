@@ -1,32 +1,35 @@
 <template>
-  <dt-stack gap="400" class="dialtone-doc-table-clamped">
-    <dt-input
-      v-model="inputSearchValue"
-      aria-label="Search table"
-      placeholder="Search table"
-      type="search"
-      root-class="d-w332"
-    >
-      <template #leftIcon="{ iconSize }">
-        <dt-icon name="search" :size="iconSize" />
-      </template>
-      <template v-if="inputSearchValue.length !== 0" #rightIcon>
-        <dt-stack class="d-pr1">
-          <dt-button
-            v-dt-tooltip="`Clear`"
-            kind="muted"
-            importance="clear"
-            size="xs"
-            aria-label="Clear search"
-            @click="clearSearch"
-          >
-            <template #icon>
-              <dt-icon name="close" size="100" />
-            </template>
-          </dt-button>
-        </dt-stack>
-      </template>
-    </dt-input>
+  <dt-stack gap="400" class="dialtone-doc-table-clamped" role="region" aria-label="Searchable table">
+    <div role="search">
+      <dt-input
+        v-model="inputSearchValue"
+        aria-label="Search table"
+        placeholder="Search table"
+        type="search"
+        root-class="d-w332"
+        @keydown.escape="handleEscapeKey"
+      >
+        <template #leftIcon="{ iconSize }">
+          <dt-icon name="search" :size="iconSize" />
+        </template>
+        <template v-if="inputSearchValue.length !== 0" #rightIcon>
+          <dt-stack class="d-pr1">
+            <dt-button
+              v-dt-tooltip="`Clear`"
+              kind="muted"
+              importance="clear"
+              size="xs"
+              aria-label="Clear search"
+              @click="clearSearch"
+            >
+              <template #icon>
+                <dt-icon name="close" size="100" />
+              </template>
+            </dt-button>
+          </dt-stack>
+        </template>
+      </dt-input>
+    </div>
     <dt-empty-state
       v-if="showEmptyState"
       size="sm"
@@ -49,6 +52,7 @@
     <div
       v-if="shouldShowButton"
       class="dialtone-doc-table-clamped__more"
+      aria-hidden="true"
     >
       <dt-button
         class="dialtone-doc-table-clamped__more-btn"
@@ -63,6 +67,10 @@
           <dt-icon :name="iconName" :size="iconSize" />
         </template>
       </dt-button>
+    </div>
+    <!-- ARIA live region for search results announcement -->
+    <div class="d-vi-visible-sr" role="status" aria-live="polite" aria-atomic="true">
+      {{ searchResultsAnnouncement }}
     </div>
   </dt-stack>
 </template>
@@ -91,6 +99,7 @@ const { buttonLabel, iconName, maxHeightClass } = defineProps({
 
 const inputSearchValue = ref('');
 const showEmptyState = ref(false);
+const searchResultsAnnouncement = ref('');
 
 // Track clamp state and DOM reference for measuring content height.
 const isExpanded = ref(false);
@@ -247,14 +256,14 @@ const resetSearch = () => {
 // Filter table rows based on search term
 const filterTableRows = (rows, searchTerm) => {
   let visibleCount = 0;
-  
+
   rows.forEach(row => {
     const rowText = row.textContent?.toLowerCase() || '';
     const isMatch = rowText.includes(searchTerm);
     row.classList.toggle('d-d-none', !isMatch);
     if (isMatch) visibleCount++;
   });
-  
+
   return visibleCount;
 };
 
@@ -295,12 +304,12 @@ const performSearch = () => {
 
   // Get all rows and filter them
   const rows = table.querySelectorAll('tbody tr');
-  
+
   // NOTE: We must use DOM manipulation here because the table content comes from a slot
   // and we cannot control it via Vue's template reactivity. Using CSS classes is cleaner
   // than inline styles and follows Vue best practices as much as possible given the constraint.
   const visibleCount = filterTableRows(rows, searchTerm);
-  
+
   // Apply highlights to visible rows
   if (visibleCount > 0) {
     applySearchHighlights(rows, searchTerm);
@@ -308,6 +317,15 @@ const performSearch = () => {
 
   // Update empty state
   showEmptyState.value = visibleCount === 0 && rows.length > 0;
+
+  // Announce search results for screen readers
+  if (showEmptyState.value) {
+    searchResultsAnnouncement.value = `No results found for ${searchTerm}`;
+  } else if (visibleCount === 1) {
+    searchResultsAnnouncement.value = `1 result found for ${searchTerm}`;
+  } else {
+    searchResultsAnnouncement.value = `${visibleCount} results found for ${searchTerm}`;
+  }
 
   // Recalculate expandability after filtering
   if (!showEmptyState.value) {
@@ -327,6 +345,14 @@ const handleSearch = () => {
 const clearSearch = () => {
   inputSearchValue.value = '';
   resetSearch();
+  searchResultsAnnouncement.value = 'Search cleared';
+};
+
+// Handle Escape key to clear search
+const handleEscapeKey = () => {
+  if (inputSearchValue.value) {
+    clearSearch();
+  }
 };
 
 // Watch for search input changes
@@ -365,7 +391,7 @@ onMounted(() => {
 
 onBeforeUnmount(() => {
   window.removeEventListener('resize', handleResize);
-  
+
   // Clear all timers
   clearTimeout(timers.resizeObserver);
   clearTimeout(timers.windowResize);
