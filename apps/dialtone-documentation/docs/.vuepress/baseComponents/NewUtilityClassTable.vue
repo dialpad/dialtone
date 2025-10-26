@@ -2,13 +2,7 @@
   <div class="dialtone-doc-table-clamped">
     <div
       v-dt-scrollbar
-      class="
-        dialtone-doc-table-clamped__scroll
-        d-hmx464
-        d-bar8
-        d-ba
-        d-bc-subtle
-      "
+      :class="scrollClasses"
     >
       <div>
         <table class="d-table dialtone-doc-table d-fc-primary">
@@ -49,13 +43,17 @@
         </table>
       </div>
     </div>
-    <div class="dialtone-doc-table-clamped__more">
+    <div
+      v-if="!isExpanded"
+      class="dialtone-doc-table-clamped__more"
+    >
       <dt-button
         class="dialtone-doc-table-clamped__more-btn"
         kind="muted"
         importance="outlined"
         icon-position="right"
         size="sm"
+        @click="handleExpand"
       >
         Show all
         <template #icon>
@@ -67,6 +65,8 @@
 </template>
 
 <script setup>
+import { computed, ref } from 'vue';
+
 defineOptions({
   name: 'NewUtilityClassTable',
 });
@@ -77,6 +77,22 @@ const { classes } = defineProps({
     required: true,
   },
 });
+
+const isExpanded = ref(false);
+
+const scrollClasses = computed(() => [
+  'dialtone-doc-table-clamped__scroll',
+  'd-bar8',
+  'd-ba',
+  'd-bc-subtle',
+  {
+    'd-hmx464': !isExpanded.value,
+  },
+]);
+
+const handleExpand = () => {
+  isExpanded.value = true;
+};
 </script>
 
 <style scoped lang="less">
