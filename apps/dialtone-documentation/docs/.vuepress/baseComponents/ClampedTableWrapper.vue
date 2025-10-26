@@ -34,6 +34,7 @@
       class="d-w100p d-ba d-bc-subtle d-bar8 d-pt32"
     >
       <template #icon="{ iconSize }">
+        <!-- maybe alt icon? -->
         <dt-icon name="box" :size="iconSize" />
       </template>
     </dt-empty-state>
