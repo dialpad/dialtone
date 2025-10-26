@@ -96,10 +96,14 @@ const showEmptyState = ref(false);
 const isExpanded = ref(false);
 const isExpandable = ref(false);
 const scrollRef = ref(null);
-let resizeObserver;
-let resizeObserverTimer;
-let windowResizeTimer;
-let searchDebounceTimer;
+
+// Move these into component scope to prevent memory leaks
+const resizeObserver = ref(null);
+const timers = {
+  resizeObserver: null,
+  windowResize: null,
+  searchDebounce: null,
+};
 
 const DEFAULT_MAX_HEIGHT = 464;
 const HEIGHT_FUDGE_PX = 8;
@@ -159,8 +163,8 @@ const updateExpandable = () => {
 };
 
 const handleResize = () => {
-  clearTimeout(windowResizeTimer);
-  windowResizeTimer = setTimeout(() => {
+  clearTimeout(timers.windowResize);
+  timers.windowResize = setTimeout(() => {
     updateExpandable();
   }, RESIZE_DEBOUNCE_MS);
 };
@@ -291,8 +295,8 @@ const performSearch = () => {
 
 // Debounced search handler
 const handleSearch = () => {
-  clearTimeout(searchDebounceTimer);
-  searchDebounceTimer = setTimeout(() => {
+  clearTimeout(timers.searchDebounce);
+  timers.searchDebounce = setTimeout(() => {
     performSearch();
   }, 200); // 200ms debounce for search
 };
@@ -327,26 +331,29 @@ onMounted(() => {
 
     // Keep the expandable state in sync with dynamic slot content changes.
     // Debounced to avoid excessive recalculation during rapid resizes.
-    resizeObserver = new ResizeObserver(() => {
-      clearTimeout(resizeObserverTimer);
-      resizeObserverTimer = setTimeout(() => {
+    resizeObserver.value = new ResizeObserver(() => {
+      clearTimeout(timers.resizeObserver);
+      timers.resizeObserver = setTimeout(() => {
         updateExpandable();
       }, RESIZE_DEBOUNCE_MS);
     });
 
-    resizeObserver.observe(wrapper);
+    resizeObserver.value.observe(wrapper);
   });
 });
 
 onBeforeUnmount(() => {
   window.removeEventListener('resize', handleResize);
-  clearTimeout(resizeObserverTimer);
-  clearTimeout(windowResizeTimer);
-  clearTimeout(searchDebounceTimer);
+  
+  // Clear all timers
+  clearTimeout(timers.resizeObserver);
+  clearTimeout(timers.windowResize);
+  clearTimeout(timers.searchDebounce);
 
-  if (resizeObserver) {
-    resizeObserver.disconnect();
-    resizeObserver = undefined;
+  // Disconnect and clean up ResizeObserver
+  if (resizeObserver.value) {
+    resizeObserver.value.disconnect();
+    resizeObserver.value = null;
   }
 });
 </script>
