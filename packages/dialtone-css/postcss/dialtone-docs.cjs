@@ -57,7 +57,7 @@ const CSSVarRegex = /var\(([^),]+)\)/g;
 const metadataRules = [
   // Typography utilities (discouraged per recommend-typography-style.js eslint rule)
   {
-    pattern: /^d-(fw-|ff-|fs-|lh-|helper-)/,
+    pattern: /^d-(fw-|ff-|fs-|lh-)/,
     metadata: {
       deprecated: false,
       discouraged: true,
