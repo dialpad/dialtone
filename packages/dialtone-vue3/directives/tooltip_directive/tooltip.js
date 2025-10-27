@@ -1,6 +1,7 @@
 import { DtTooltip, TOOLTIP_DIRECTIONS } from '@/components/tooltip';
 import { getUniqueString } from '@/common/utils';
 import { createApp, getCurrentInstance, h } from 'vue';
+import deepEqual from 'deep-equal';
 
 export const DtTooltipDirective = {
   name: 'dt-tooltip-directive',
@@ -67,7 +68,8 @@ export const DtTooltipDirective = {
       },
       updated (anchor, binding) {
         // Update tooltip on binding value change
-        if (binding.value !== binding.oldValue) {
+        // Use deep equality check to prevent infinite loops when objects are passed
+        if (!deepEqual(binding.value, binding.oldValue)) {
           setupTooltip(anchor, binding);
         }
       },
