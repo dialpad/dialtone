@@ -57,13 +57,13 @@ const CSSVarRegex = /var\(([^),]+)\)/g;
 const metadataRules = [
   // Typography utilities (discouraged per recommend-typography-style.js eslint rule)
   {
-    pattern: /^d-(fw-|ff-|fs-|lh-)/,
+    pattern: /^d-(fw-|ff-|fs-|lh-|helper-)/,
     metadata: {
       deprecated: false,
       discouraged: true,
       category: 'typography',
       reason: 'Individual typography utilities are discouraged in favor of composed typography classes',
-      alternatives: ['d-headline-*', 'd-body-*', 'd-label-*', 'd-code-*'],
+      alternatives: ['d-headline-*', 'd-body-*', 'd-label-*', 'd-code-*', 'd-helper-*'],
       docs: 'https://dialtone.dialpad.com/design/typography/#api',
     },
   },
@@ -75,7 +75,7 @@ const metadataRules = [
       discouraged: true,
       category: 'color',
       reason: 'Base color utilities are deprecated and will be removed in the future',
-      alternatives: [],
+      alternatives: ['d-fc-primary', 'd-fc-secondary', 'd-fc-tertiary', 'd-bgc-critical', 'd-bgc-success', 'd-bc-default'],
       docs: 'https://dialtone.dialpad.com/utilities/backgrounds/color.html',
     },
   },
@@ -87,7 +87,7 @@ const metadataRules = [
       discouraged: true,
       category: 'flex',
       reason: 'Flex gap utilities are deprecated and will be removed in the future',
-      alternatives: [],
+      alternatives: ['d-g8', 'd-rg8', 'd-cg8'],
       docs: 'https://dialtone.dialpad.com/utilities/flex/gap.html',
     },
   },
@@ -99,7 +99,7 @@ const metadataRules = [
       discouraged: true,
       category: 'grid',
       reason: 'Grid gap utilities are deprecated and will be removed in the future',
-      alternatives: [],
+      alternatives: ['d-g8', 'd-rg8', 'd-cg8'],
       docs: 'https://dialtone.dialpad.com/utilities/grid/gap.html',
     },
   },
@@ -171,14 +171,14 @@ function getMetadataForToken (tokenName) {
     };
   }
 
-  // Tokens with -base- in the name (like --dt-action-color-background-base-active)
-  // These are component-level base states, also internal
-  if (tokenName.includes('-base-')) {
+  // Tokens ending with -base or -root (internal primitive values)
+  // These are not meant for direct use
+  if (tokenName.endsWith('-base') || tokenName.endsWith('-root')) {
     return {
       deprecated: false,
       discouraged: true,
       category: 'internal',
-      reason: 'Base state tokens are internal values. Use semantic design tokens or CSS utility classes instead',
+      reason: 'Base and root tokens are internal primitive values. Use semantic design tokens or CSS utility classes instead',
       alternatives: [],
       docs: 'https://dialtone.dialpad.com/design/tokens/',
     };
