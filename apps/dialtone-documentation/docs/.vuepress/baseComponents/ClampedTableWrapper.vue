@@ -1,6 +1,6 @@
 <template>
   <dt-stack gap="400" class="dialtone-doc-table-clamped d-ps-relative" role="region" aria-label="Searchable table">
-    <div role="search">
+    <div v-if="shouldShowSearch" role="search">
       <dt-input
         v-model="inputSearchValue"
         aria-label="Search table"
@@ -100,6 +100,7 @@ const { buttonLabel, iconName, maxHeightClass } = defineProps({
 const inputSearchValue = ref('');
 const showEmptyState = ref(false);
 const searchResultsAnnouncement = ref('');
+const shouldShowSearch = ref(true); // Hide search if table has fewer than 4 rows
 
 // Track clamp state and DOM reference for measuring content height.
 const isExpanded = ref(false);
@@ -176,6 +177,16 @@ const handleResize = () => {
   timers.windowResize = setTimeout(() => {
     updateExpandable();
   }, RESIZE_DEBOUNCE_MS);
+};
+
+// Check if search should be shown based on table row count
+const checkSearchVisibility = () => {
+  const table = scrollRef.value?.querySelector('table');
+  if (table) {
+    // Gets all data rows from all tbody elements (handles multiple tbody correctly)
+    const rows = table.querySelectorAll('tbody tr');
+    shouldShowSearch.value = rows.length >= 4;
+  }
 };
 
 // Highlight matching text in table cells
@@ -366,6 +377,7 @@ onMounted(() => {
 
   nextTick(() => {
     updateExpandable();
+    checkSearchVisibility(); // Check on initial mount
 
     if (typeof ResizeObserver === 'undefined') {
       return;
@@ -383,6 +395,7 @@ onMounted(() => {
       clearTimeout(timers.resizeObserver);
       timers.resizeObserver = setTimeout(() => {
         updateExpandable();
+        checkSearchVisibility(); // Check when content changes
       }, RESIZE_DEBOUNCE_MS);
     });
 
@@ -391,7 +404,6 @@ onMounted(() => {
 });
 
 onBeforeUnmount(() => {
-  // eslint-disable-next-line max-lines
   window.removeEventListener('resize', handleResize);
 
   // Clear all timers
