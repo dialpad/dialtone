@@ -98,10 +98,14 @@ const { buttonLabel, iconName, maxHeightClass } = defineProps({
   },
 });
 
+// Configuration constants
+const SEARCH_VISIBILITY_THRESHOLD = 4; // Min rows to show search
+const SEARCH_DEBOUNCE_MS = 200; // Debounce delay for search input
+
 const inputSearchValue = ref('');
 const showEmptyState = ref(false);
 const searchResultsAnnouncement = ref('');
-const shouldShowSearch = ref(true); // Hide search if table has fewer than 4 rows
+const shouldShowSearch = ref(true);
 
 // DOM reference for measuring content height
 const scrollRef = ref(null);
@@ -149,7 +153,7 @@ const checkSearchVisibility = () => {
   if (table) {
     // Gets all data rows from all tbody elements (handles multiple tbody correctly)
     const rows = table.querySelectorAll('tbody tr');
-    shouldShowSearch.value = rows.length >= 4;
+    shouldShowSearch.value = rows.length >= SEARCH_VISIBILITY_THRESHOLD;
   }
 };
 
@@ -254,45 +258,29 @@ const applySearchHighlights = (rows, searchTerm) => {
   });
 };
 
-// Perform search filtering on table rows (simplified orchestrator)
-// eslint-disable-next-line complexity
-const performSearch = () => {
-  const searchTerm = inputSearchValue.value.toLowerCase().trim();
-
-  // If no search term, reset everything
-  if (!searchTerm) {
-    return resetSearch();
-  }
-
-  // If we're showing empty state, we need to hide it first to access the table
-  if (showEmptyState.value) {
-    showEmptyState.value = false;
-    // Wait for DOM to update before searching
-    nextTick(() => performSearch());
-    return;
-  }
-
+/**
+ * Prepare search context by validating and retrieving table elements.
+ * @returns {Object|null} Search context with table and rows, or null if unavailable
+ */
+const prepareSearchContext = () => {
   const table = scrollRef.value?.querySelector('table');
-  if (!table) return;
+  if (!table) return null;
 
-  // Clear existing highlights
-  removeHighlights(table);
-
-  // Get all rows and filter them
   const rows = table.querySelectorAll('tbody tr');
+  if (!rows.length) return null;
 
-  // NOTE: We must use DOM manipulation here because the table content comes from a slot
-  // and we cannot control it via Vue's template reactivity. Using CSS classes is cleaner
-  // than inline styles and follows Vue best practices as much as possible given the constraint.
-  const visibleCount = filterTableRows(rows, searchTerm);
+  return { table, rows };
+};
 
-  // Apply highlights to visible rows
-  if (visibleCount > 0) {
-    applySearchHighlights(rows, searchTerm);
-  }
-
+/**
+ * Update UI state based on search results.
+ * @param {number} visibleCount - Number of visible rows after filtering
+ * @param {string} searchTerm - The search term used
+ * @param {number} totalRows - Total number of rows searched
+ */
+const updateSearchResultsUI = (visibleCount, searchTerm, totalRows) => {
   // Update empty state
-  showEmptyState.value = visibleCount === 0 && rows.length > 0;
+  showEmptyState.value = visibleCount === 0 && totalRows > 0;
 
   // Announce search results for screen readers
   if (showEmptyState.value) {
@@ -309,12 +297,60 @@ const performSearch = () => {
   }
 };
 
+/**
+ * Handle deferred search when empty state is currently shown.
+ * Hides empty state and reschedules search after DOM update.
+ */
+const handleDeferredSearch = () => {
+  showEmptyState.value = false;
+  nextTick(() => performSearch());
+};
+
+/**
+ * Orchestrate search operation across table rows.
+ * Delegates to helper functions for each concern.
+ */
+const performSearch = () => {
+  const searchTerm = inputSearchValue.value.toLowerCase().trim();
+
+  // Early returns for simple cases
+  if (!searchTerm) {
+    return resetSearch();
+  }
+
+  if (showEmptyState.value) {
+    return handleDeferredSearch();
+  }
+
+  // Prepare search context
+  const context = prepareSearchContext();
+  if (!context) return;
+
+  const { table, rows } = context;
+
+  // Clear previous search state
+  removeHighlights(table);
+
+  // Execute search and get results
+  // NOTE: DOM manipulation required because table content comes from slots.
+  // We cannot control slot content via Vue's template reactivity.
+  const visibleCount = filterTableRows(rows, searchTerm);
+
+  // Apply visual feedback for matches
+  if (visibleCount > 0) {
+    applySearchHighlights(rows, searchTerm);
+  }
+
+  // Update UI based on results
+  updateSearchResultsUI(visibleCount, searchTerm, rows.length);
+};
+
 // Debounced search handler
 const handleSearch = () => {
   clearTimeout(timers.searchDebounce);
   timers.searchDebounce = setTimeout(() => {
     performSearch();
-  }, 200); // 200ms debounce for search
+  }, SEARCH_DEBOUNCE_MS);
 };
 
 // Clear search and reset table
