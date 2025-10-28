@@ -1,3 +1,15 @@
+# [9.143.0](https://github.com/dialpad/dialtone/compare/dialtone/v9.142.2...dialtone/v9.143.0) (2025-10-28)
+
+
+### Documentation
+
+* **Illustration:** DLT-2801 update docs to use tree shakeable names ([#949](https://github.com/dialpad/dialtone/issues/949)) ([2e813d4](https://github.com/dialpad/dialtone/commit/2e813d4025e846d9e78e9f330f49ad2bd962e9d5))
+
+
+### Features
+
+* **Utilities:** DLT-2811 add line-clamp utility class ([#954](https://github.com/dialpad/dialtone/issues/954)) ([4ca31f7](https://github.com/dialpad/dialtone/commit/4ca31f7cca85aa8eb0c3b78c4eff55d17c470a3c))
+
 ## [9.142.2](https://github.com/dialpad/dialtone/compare/dialtone/v9.142.1...dialtone/v9.142.2) (2025-10-21)
 
 
