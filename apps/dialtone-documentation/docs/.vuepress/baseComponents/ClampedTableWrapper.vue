@@ -77,6 +77,7 @@
 
 <script setup>
 import { computed, nextTick, onBeforeUnmount, onMounted, ref, watch } from 'vue';
+import { useDocExpandable } from '../composables/useDocExpandable.js';
 
 defineOptions({
   name: 'ClampedTableWrapper',
@@ -102,22 +103,18 @@ const showEmptyState = ref(false);
 const searchResultsAnnouncement = ref('');
 const shouldShowSearch = ref(true); // Hide search if table has fewer than 4 rows
 
-// Track clamp state and DOM reference for measuring content height.
-const isExpanded = ref(false);
-const isExpandable = ref(false);
+// DOM reference for measuring content height
 const scrollRef = ref(null);
 
-// Move these into component scope to prevent memory leaks
-const resizeObserver = ref(null);
+// Expandable functionality from composable
+const { isExpanded, shouldShowButton, handleExpand, updateExpandable, initExpandable } = useDocExpandable({
+  maxHeightClass,
+});
+
+// Timer for search debounce
 const timers = {
-  resizeObserver: null,
-  windowResize: null,
   searchDebounce: null,
 };
-
-const DEFAULT_MAX_HEIGHT = 464;
-const HEIGHT_FUDGE_PX = 8;
-const RESIZE_DEBOUNCE_MS = 100;
 
 // Memoized base classes for performance
 const BASE_SCROLL_CLASSES = [
@@ -127,25 +124,6 @@ const BASE_SCROLL_CLASSES = [
   'd-bc-subtle',
 ];
 
-// Parse the numeric value from the provided max-height utility class.
-const resolvedMaxHeight = computed(() => {
-  const match = maxHeightClass.match(/d-hmx(\d+)/);
-
-  if (!match) {
-    return DEFAULT_MAX_HEIGHT;
-  }
-
-  const [, heightString] = match;
-
-  const parsedHeight = Number.parseInt(heightString, 10);
-
-  return Number.isNaN(parsedHeight) ? DEFAULT_MAX_HEIGHT : parsedHeight;
-});
-
-const expandThreshold = computed(() => Math.max(resolvedMaxHeight.value - HEIGHT_FUDGE_PX, 0));
-
-const shouldShowButton = computed(() => !isExpanded.value && isExpandable.value);
-
 const scrollClasses = computed(() => [
   ...BASE_SCROLL_CLASSES,
   {
@@ -154,29 +132,11 @@ const scrollClasses = computed(() => [
   },
 ]);
 
-const handleExpand = () => {
-  isExpanded.value = true;
-};
-
-// Determine whether the content exceeds the max-height threshold.
-const updateExpandable = () => {
-  const wrapper = scrollRef.value;
-
-  if (!wrapper) {
-    isExpandable.value = false;
-    return;
+// Wrapper to update expandable state with current scroll ref
+const updateExpandableState = () => {
+  if (scrollRef.value) {
+    updateExpandable(scrollRef.value);
   }
-
-  const scrollHeight = wrapper.scrollHeight ?? 0;
-
-  isExpandable.value = scrollHeight > expandThreshold.value;
-};
-
-const handleResize = () => {
-  clearTimeout(timers.windowResize);
-  timers.windowResize = setTimeout(() => {
-    updateExpandable();
-  }, RESIZE_DEBOUNCE_MS);
 };
 
 // Check if search should be shown based on table row count
@@ -260,7 +220,7 @@ const resetSearch = () => {
         row.classList.remove('d-d-none');
       });
     }
-    updateExpandable();
+    updateExpandableState();
   });
 };
 
@@ -341,7 +301,7 @@ const performSearch = () => {
 
   // Recalculate expandability after filtering
   if (!showEmptyState.value) {
-    nextTick(() => updateExpandable());
+    nextTick(() => updateExpandableState());
   }
 };
 
@@ -372,50 +332,45 @@ watch(inputSearchValue, () => {
   handleSearch();
 });
 
-onMounted(() => {
-  window.addEventListener('resize', handleResize, { passive: true });
+// Watch for search state changes and update expandable
+watch(showEmptyState, () => {
+  if (!showEmptyState.value) {
+    nextTick(() => updateExpandableState());
+  }
+});
 
+onMounted(() => {
   nextTick(() => {
-    updateExpandable();
     checkSearchVisibility(); // Check on initial mount
 
-    if (typeof ResizeObserver === 'undefined') {
-      return;
+    // Initialize expandable functionality
+    if (scrollRef.value) {
+      initExpandable(scrollRef.value);
     }
 
-    const wrapper = scrollRef.value;
+    // Set up additional observer for search visibility
+    if (typeof ResizeObserver !== 'undefined' && scrollRef.value) {
+      const searchObserver = new ResizeObserver(() => {
+        checkSearchVisibility();
+      });
+      searchObserver.observe(scrollRef.value);
 
-    if (!wrapper) {
-      return;
+      // Store observer for cleanup
+      timers.searchObserver = searchObserver;
     }
-
-    // Keep the expandable state in sync with dynamic slot content changes.
-    // Debounced to avoid excessive recalculation during rapid resizes.
-    resizeObserver.value = new ResizeObserver(() => {
-      clearTimeout(timers.resizeObserver);
-      timers.resizeObserver = setTimeout(() => {
-        updateExpandable();
-        checkSearchVisibility(); // Check when content changes
-      }, RESIZE_DEBOUNCE_MS);
-    });
-
-    resizeObserver.value.observe(wrapper);
   });
 });
 
 onBeforeUnmount(() => {
-  window.removeEventListener('resize', handleResize);
-
-  // Clear all timers
-  clearTimeout(timers.resizeObserver);
-  clearTimeout(timers.windowResize);
+  // Clear search timer
   clearTimeout(timers.searchDebounce);
 
-  // Disconnect and clean up ResizeObserver
-  if (resizeObserver.value) {
-    resizeObserver.value.disconnect();
-    resizeObserver.value = null;
+  // Disconnect search observer
+  if (timers.searchObserver) {
+    timers.searchObserver.disconnect();
   }
+
+  // Composable handles its own cleanup via onBeforeUnmount
 });
 </script>
 
