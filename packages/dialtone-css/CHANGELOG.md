@@ -1,3 +1,10 @@
+# [8.66.0](https://github.com/dialpad/dialtone/compare/dialtone-css/v8.65.0...dialtone-css/v8.66.0) (2025-10-28)
+
+
+### Features
+
+* **Utilities:** DLT-2811 add line-clamp utility class ([#954](https://github.com/dialpad/dialtone/issues/954)) ([4ca31f7](https://github.com/dialpad/dialtone/commit/4ca31f7cca85aa8eb0c3b78c4eff55d17c470a3c))
+
 # [8.65.0](https://github.com/dialpad/dialtone/compare/dialtone-css/v8.64.4...dialtone-css/v8.65.0) (2025-10-14)
 
 
