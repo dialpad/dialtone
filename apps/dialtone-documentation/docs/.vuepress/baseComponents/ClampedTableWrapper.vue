@@ -111,9 +111,13 @@ const { isExpanded, shouldShowButton, handleExpand, updateExpandable, initExpand
   maxHeightClass,
 });
 
-// Timer for search debounce
+// Separate concerns: timers vs observers
 const timers = {
   searchDebounce: null,
+};
+
+const observers = {
+  searchResize: null,
 };
 
 // Memoized base classes for performance
@@ -356,7 +360,7 @@ onMounted(() => {
       searchObserver.observe(scrollRef.value);
 
       // Store observer for cleanup
-      timers.searchObserver = searchObserver;
+      observers.searchResize = searchObserver;
     }
   });
 });
@@ -366,8 +370,8 @@ onBeforeUnmount(() => {
   clearTimeout(timers.searchDebounce);
 
   // Disconnect search observer
-  if (timers.searchObserver) {
-    timers.searchObserver.disconnect();
+  if (observers.searchResize) {
+    observers.searchResize.disconnect();
   }
 
   // Composable handles its own cleanup via onBeforeUnmount

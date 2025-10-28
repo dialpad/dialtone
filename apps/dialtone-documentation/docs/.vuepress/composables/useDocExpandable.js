@@ -22,10 +22,13 @@ export function useDocExpandable({
   // State
   const isExpanded = ref(false);
   const isExpandable = ref(false);
-  const resizeObserver = ref(null);
   const timers = {
-    resizeObserver: null,
-    windowResize: null,
+    debounceResize: null,
+    debounceWindow: null,
+  };
+
+  const observers = {
+    resize: null,
   };
 
   /**
@@ -75,8 +78,8 @@ export function useDocExpandable({
    * @param {HTMLElement} element - The container element to measure
    */
   const handleResize = (element) => {
-    clearTimeout(timers.windowResize);
-    timers.windowResize = setTimeout(() => {
+    clearTimeout(timers.debounceWindow);
+    timers.debounceWindow = setTimeout(() => {
       updateExpandable(element);
     }, debounceMs);
   };
@@ -105,14 +108,14 @@ export function useDocExpandable({
       return;
     }
 
-    resizeObserver.value = new ResizeObserver(() => {
-      clearTimeout(timers.resizeObserver);
-      timers.resizeObserver = setTimeout(() => {
+    observers.resize = new ResizeObserver(() => {
+      clearTimeout(timers.debounceResize);
+      timers.debounceResize = setTimeout(() => {
         updateExpandable(element);
       }, debounceMs);
     });
 
-    resizeObserver.value.observe(element);
+    observers.resize.observe(element);
   };
 
   /**
@@ -134,13 +137,13 @@ export function useDocExpandable({
     }
 
     // Clear all timers
-    clearTimeout(timers.resizeObserver);
-    clearTimeout(timers.windowResize);
+    clearTimeout(timers.debounceResize);
+    clearTimeout(timers.debounceWindow);
 
     // Disconnect and clean up ResizeObserver
-    if (resizeObserver.value) {
-      resizeObserver.value.disconnect();
-      resizeObserver.value = null;
+    if (observers.resize) {
+      observers.resize.disconnect();
+      observers.resize = null;
     }
   };
 
