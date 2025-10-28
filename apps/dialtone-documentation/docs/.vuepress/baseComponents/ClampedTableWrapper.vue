@@ -60,7 +60,7 @@
         importance="outlined"
         icon-position="right"
         size="sm"
-        @click="handleExpand"
+        @click="() => handleExpand(scrollRef)"
       >
         {{ buttonLabel }}
         <template #icon="{ iconSize }">

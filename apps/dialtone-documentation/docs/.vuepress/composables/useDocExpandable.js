@@ -119,11 +119,21 @@ export function useDocExpandable({
   };
 
   /**
-   * Expand the container by setting isExpanded to true.
-   * The component using this composable should handle class removal.
+   * Expand the container by setting isExpanded to true and optionally
+   * removing max-height class from provided element(s).
+   * @param {HTMLElement|HTMLElement[]} elements - Element(s) to remove class from
    */
-  const handleExpand = () => {
+  const handleExpand = (elements = null) => {
     isExpanded.value = true;
+
+    if (elements) {
+      const elementArray = Array.isArray(elements) ? elements : [elements];
+      elementArray.forEach(element => {
+        if (element && element.classList) {
+          element.classList.remove(maxHeightClass);
+        }
+      });
+    }
   };
 
   /**
