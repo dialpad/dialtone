@@ -56,8 +56,8 @@
 </template>
 
 <script setup>
-import { onBeforeMount, ref } from 'vue';
 import ClampedTableWrapper from './ClampedTableWrapper.vue';
+import { useComponentTableData } from '../composables/useComponentTableData.js';
 
 defineOptions({
   name: 'ComponentAccessibleTable',
@@ -70,10 +70,5 @@ const { componentName } = defineProps({
   },
 });
 
-const accessible = ref(null);
-
-onBeforeMount(async () => {
-  const module = await import(`../../_data/${componentName}.json`);
-  accessible.value = module.accessible;
-});
+const { data: accessible } = useComponentTableData(componentName, 'accessible');
 </script>

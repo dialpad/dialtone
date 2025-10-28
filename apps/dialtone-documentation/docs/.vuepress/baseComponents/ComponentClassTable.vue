@@ -58,8 +58,8 @@
 </template>
 
 <script setup>
-import { onBeforeMount, ref } from 'vue';
 import ClampedTableWrapper from './ClampedTableWrapper.vue';
+import { useComponentTableData } from '../composables/useComponentTableData.js';
 
 defineOptions({
   name: 'ComponentClassTable',
@@ -72,10 +72,5 @@ const { componentName } = defineProps({
   },
 });
 
-const classes = ref(null);
-
-onBeforeMount(async () => {
-  const module = await import(`../../_data/${componentName}.json`);
-  classes.value = module.classes;
-});
+const { data: classes } = useComponentTableData(componentName, 'classes');
 </script>
