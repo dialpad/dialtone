@@ -152,7 +152,7 @@ const { shouldShowButton, handleExpand, initExpandable } = useDocExpandable({
  */
 const expandCodeBlocks = () => {
   handleExpand();
-  
+
   // Remove max-height class from both panels
   if (vuePanelRef.value) {
     vuePanelRef.value.classList.remove('d-hmx332');
