@@ -96,11 +96,20 @@ async function runPostCss(file, useOriginalPlugin = false) {
 
 /**
  * Main function to generate optimized theme files
+ *
+ * Process overview:
+ * 1. Generate FULL theme files (~640KB each) using Style Dictionary
+ * 2. Compare each theme to DP base and extract only the differences
+ * 3. Write tiny override files (0.5KB each) to themes/ directory
+ * 4. Delete the full theme files (we only needed them for comparison)
+ *
+ * Why not just output diffs directly? Style Dictionary's architecture makes
+ * this extremely complex. Easier to generate full files, calculate diffs, then clean up.
  */
 async function main() {
   console.log('Step 1: Generating full layered tokens for all themes...\n');
 
-  // First, generate all the layered tokens
+  // Generate all the layered tokens (full files, we'll strip these down later)
   await runLayeredTokens();
 
   console.log('\nStep 1b: Running postcss to generate composite tokens...\n');
@@ -116,11 +125,11 @@ async function main() {
 
   console.log('\nStep 2: Generating optimized override files...\n');
 
-  // Read the base dp theme
+  // Read the base dp theme (this is what we compare against)
   const dpContent = await fs.readFile(`${outputDir}/tokens-dp-colors.css`, 'utf8');
   const dpVars = parseCssVariables(dpContent);
 
-  // Get all theme files
+  // Get all theme files (the full ~640KB files we just generated)
   const files = await fs.readdir(outputDir);
   const themeFiles = files.filter(f =>
     f.startsWith('tokens-') &&
@@ -132,14 +141,15 @@ async function main() {
   let totalOriginalSize = 0;
   let totalOptimizedSize = 0;
 
+  // For each theme: compare to DP base and extract only the differences
   for (const themeFile of themeFiles) {
     const themeName = themeFile.replace('tokens-', '').replace('-colors.css', '');
 
-    // Read theme file
+    // Read the full theme file
     const themeContent = await fs.readFile(`${outputDir}/${themeFile}`, 'utf8');
     const themeVars = parseCssVariables(themeContent);
 
-    // Generate overrides only
+    // Generate CSS with ONLY the tokens that differ from DP base
     const overridesCss = generateOverridesCss(dpVars, themeVars, themeName);
 
     // Write to themes directory
@@ -164,9 +174,11 @@ async function main() {
   console.log(`Optimized total: ${(totalOptimizedSize / 1024).toFixed(2)}KB`);
   console.log(`Savings: ${((totalOriginalSize - totalOptimizedSize) / 1024).toFixed(2)}KB`);
 
-  // Step 3: Clean up redundant full theme files (keep only dp, base, core files)
+  // Step 3: Delete the full theme files (we only needed them to calculate diffs)
   console.log('\nStep 3: Cleaning up redundant full theme files...\n');
 
+  // Keep only the base layers. Delete everything else.
+  // All theme overrides are now in themes/ directory as tiny files.
   let deletedCount = 0;
   const filesToKeep = ['tokens-core.css', 'tokens-base-colors.css', 'tokens-dp-colors.css'];
 
@@ -181,7 +193,7 @@ async function main() {
     }
   }
 
-  console.log(`Removed ${deletedCount} redundant full theme files`);
+  console.log(`Removed ${deletedCount} redundant full theme files (saved ~${(deletedCount * 640).toFixed(0)}KB)`);
 
   // Step 4: Process high contrast files and combine light/dark
   console.log('\nStep 4: Processing high contrast overrides...\n');
