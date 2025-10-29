@@ -9,7 +9,14 @@
     ]"
   >
     <div class="d-pt16">
+      <dt-button @click="showTip = !showTip">
+        toggle tip
+      </dt-button>
+      <dt-button @click="showAnchor = !showAnchor">
+        toggle anchor
+      </dt-button>
       <dt-tooltip
+        v-if="showTip"
         :id="$attrs.id"
         :placement="$attrs.placement"
         :inverted="$attrs.inverted"
@@ -29,10 +36,18 @@
       >
         <template #anchor>
           <dt-button
+            v-if="showAnchor"
             importance="outlined"
             :kind="buttonKind"
           >
             {{ $attrs.anchor }}
+          </dt-button>
+          <dt-button
+            v-else
+            importance="outlined"
+            :kind="buttonKind"
+          >
+            other {{ $attrs.anchor }}
           </dt-button>
         </template>
         <template v-if="defaultSlot">
@@ -55,6 +70,13 @@ export default {
   },
 
   inheritAttrs: false,
+
+  data () {
+    return {
+      showTip: true,
+      showAnchor: true,
+    };
+  },
 
   computed: {
     buttonKind () {
