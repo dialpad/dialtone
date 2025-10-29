@@ -51,6 +51,17 @@ export default defineUserConfig({
       css: {
         devSourcemap: true,
       },
+      server: {
+        watch: {
+          ignored: [
+            '**/packages/dialtone-icons/dist/**',
+            '**/packages/dialtone-vue3/dist/**',
+            '**/packages/dialtone-css/dist/**',
+            '**/packages/dialtone-tokens/dist/**',
+            '**/node_modules/**',
+          ],
+        },
+      },
     },
     vuePluginOptions: {
       template: {
