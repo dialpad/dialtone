@@ -178,15 +178,11 @@ export function initDialtoneTheme(coreTheme, brandTheme, mode = 'light', rootNod
   }
 
   // Load core tokens (once)
-  if (coreTheme.core) {
-    _setStyleTag('dialtone-css-core', coreTheme.core, rootNode);
-    coreTokensLoaded = true;
-  }
+  _setStyleTag('dialtone-css-core', coreTheme.core, rootNode);
+  coreTokensLoaded = true;
 
   // Load base colors (once)
-  if (coreTheme.baseColors) {
-    _setStyleTag('dialtone-css-base-colors', coreTheme.baseColors, rootNode);
-  }
+  _setStyleTag('dialtone-css-base-colors', coreTheme.baseColors, rootNode);
 
   // Set initial mode
   setMode(mode, rootNode);
