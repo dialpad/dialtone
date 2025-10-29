@@ -1,3 +1,42 @@
+# [9.143.0](https://github.com/dialpad/dialtone/compare/dialtone/v9.142.2...dialtone/v9.143.0) (2025-10-28)
+
+
+### Documentation
+
+* **Illustration:** DLT-2801 update docs to use tree shakeable names ([#949](https://github.com/dialpad/dialtone/issues/949)) ([2e813d4](https://github.com/dialpad/dialtone/commit/2e813d4025e846d9e78e9f330f49ad2bd962e9d5))
+
+
+### Features
+
+* **Utilities:** DLT-2811 add line-clamp utility class ([#954](https://github.com/dialpad/dialtone/issues/954)) ([4ca31f7](https://github.com/dialpad/dialtone/commit/4ca31f7cca85aa8eb0c3b78c4eff55d17c470a3c))
+
+## [9.142.2](https://github.com/dialpad/dialtone/compare/dialtone/v9.142.1...dialtone/v9.142.2) (2025-10-21)
+
+
+### Bug Fixes
+
+* **Split Button:** NO-JIRA fix infinite loop ([#948](https://github.com/dialpad/dialtone/issues/948)) ([634952e](https://github.com/dialpad/dialtone/commit/634952e83ce810d1317dec4ba2029af05afcf0d0))
+
+## [9.142.1](https://github.com/dialpad/dialtone/compare/dialtone/v9.142.0...dialtone/v9.142.1) (2025-10-17)
+
+
+### Bug Fixes
+
+* NO-JIRA publish mcp server to npm ([#947](https://github.com/dialpad/dialtone/issues/947)) ([f6e9c4f](https://github.com/dialpad/dialtone/commit/f6e9c4f18487e9cc65736b86ba91dea5f069d6b2))
+* **Split Button:** NO-JIRA invert tooltip when button inverted ([#946](https://github.com/dialpad/dialtone/issues/946)) ([c03065a](https://github.com/dialpad/dialtone/commit/c03065abe60471aa8469216ad506ac5a2b406697))
+
+# [9.142.0](https://github.com/dialpad/dialtone/compare/dialtone/v9.141.0...dialtone/v9.142.0) (2025-10-14)
+
+
+### Bug Fixes
+
+* **Popover:** DLT-2795 add aria-hidden attribute on popover ([#943](https://github.com/dialpad/dialtone/issues/943)) ([dc5bbe7](https://github.com/dialpad/dialtone/commit/dc5bbe7c78efc41e1f94cfed8822742318087564))
+
+
+### Features
+
+* **Utilities:** NO-JIRA add 384 width-height ([#944](https://github.com/dialpad/dialtone/issues/944)) ([b49c21d](https://github.com/dialpad/dialtone/commit/b49c21d02996dbe8f298e77e4b81fe6137ad1505))
+
 # [9.141.0](https://github.com/dialpad/dialtone/compare/dialtone/v9.140.1...dialtone/v9.141.0) (2025-10-06)
 
 

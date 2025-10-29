@@ -1,3 +1,24 @@
+## [2.200.3](https://github.com/dialpad/dialtone/compare/dialtone-vue2/v2.200.2...dialtone-vue2/v2.200.3) (2025-10-21)
+
+
+### Bug Fixes
+
+* **Split Button:** NO-JIRA fix infinite loop ([#948](https://github.com/dialpad/dialtone/issues/948)) ([634952e](https://github.com/dialpad/dialtone/commit/634952e83ce810d1317dec4ba2029af05afcf0d0))
+
+## [2.200.2](https://github.com/dialpad/dialtone/compare/dialtone-vue2/v2.200.1...dialtone-vue2/v2.200.2) (2025-10-17)
+
+
+### Bug Fixes
+
+* **Split Button:** NO-JIRA invert tooltip when button inverted ([#946](https://github.com/dialpad/dialtone/issues/946)) ([c03065a](https://github.com/dialpad/dialtone/commit/c03065abe60471aa8469216ad506ac5a2b406697))
+
+## [2.200.1](https://github.com/dialpad/dialtone/compare/dialtone-vue2/v2.200.0...dialtone-vue2/v2.200.1) (2025-10-14)
+
+
+### Bug Fixes
+
+* **Popover:** DLT-2795 add aria-hidden attribute on popover ([#943](https://github.com/dialpad/dialtone/issues/943)) ([dc5bbe7](https://github.com/dialpad/dialtone/commit/dc5bbe7c78efc41e1f94cfed8822742318087564))
+
 # [2.200.0](https://github.com/dialpad/dialtone/compare/dialtone-vue2/v2.199.1...dialtone-vue2/v2.200.0) (2025-10-06)
 
 

@@ -1,11 +1,14 @@
 {
   "name": "@dialpad/dialtone-mcp-server",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "main": "build/index.js",
   "type": "module",
   "bin": {
     "dialtone-mcp-server": "build/index.js"
   },
+  "files": [
+    "build"
+  ],
   "scripts": {
     "build": "rollup -c",
     "start": "node build/index.js",

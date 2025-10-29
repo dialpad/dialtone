@@ -1,3 +1,10 @@
+## [1.0.2](https://github.com/dialpad/dialtone/compare/dialtone-mcp-server/v1.0.1...dialtone-mcp-server/v1.0.2) (2025-10-17)
+
+
+### Bug Fixes
+
+* NO-JIRA publish mcp server to npm ([#947](https://github.com/dialpad/dialtone/issues/947)) ([f6e9c4f](https://github.com/dialpad/dialtone/commit/f6e9c4f18487e9cc65736b86ba91dea5f069d6b2))
+
 ## [1.0.1](https://github.com/dialpad/dialtone/compare/dialtone-mcp-server/v1.0.0...dialtone-mcp-server/v1.0.1) (2025-09-24)
 
 
