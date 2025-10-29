@@ -50,8 +50,8 @@ export async function generateThemeFiles () {
 async function generateCoreThemeFile() {
   const filePath = path.join(THEMES_OUTPUT_DIR, 'core.js');
 
-  const content = `import CoreTokens from '@dialpad/dialtone-tokens/dist/css/layered/tokens-core.css?inline';
-import BaseColors from '@dialpad/dialtone-tokens/dist/css/layered/tokens-base-colors.css?inline';
+  const content = `import CoreTokens from '@dialpad/dialtone-tokens/layered/tokens-core.css?inline';
+import BaseColors from '@dialpad/dialtone-tokens/layered/tokens-base-colors.css?inline';
 
 export default {
   core: CoreTokens,
@@ -69,7 +69,7 @@ export default {
 async function generateDpThemeFile() {
   const filePath = path.join(THEMES_OUTPUT_DIR, 'dp.js');
 
-  const content = `import DpColors from '@dialpad/dialtone-tokens/dist/css/layered/tokens-dp-colors.css?inline';
+  const content = `import DpColors from '@dialpad/dialtone-tokens/layered/tokens-dp-colors.css?inline';
 
 export default {
   brand: {
@@ -91,7 +91,7 @@ async function generateBrandThemeFile(brandName) {
   const fileName = `${brandName}.js`;
   const filePath = path.join(THEMES_OUTPUT_DIR, fileName);
 
-  const content = `import BrandColors from '@dialpad/dialtone-tokens/dist/css/layered/themes/tokens-${brandName}-colors.css?inline';
+  const content = `import BrandColors from '@dialpad/dialtone-tokens/layered/themes/tokens-${brandName}-colors.css?inline';
 
 export default {
   brand: {
@@ -111,7 +111,7 @@ export default {
 async function generateHighContrastTheme() {
   const filePath = path.join(THEMES_OUTPUT_DIR, 'high-contrast.js');
 
-  const content = `import HighContrast from '@dialpad/dialtone-tokens/dist/css/layered/contrast/tokens-high-contrast.css?inline';
+  const content = `import HighContrast from '@dialpad/dialtone-tokens/layered/contrast/tokens-high-contrast.css?inline';
 
 export default {
   contrast: {

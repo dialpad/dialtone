@@ -12,9 +12,9 @@ import { flushPromises } from '@workspaceRoot/common/utils/client.mjs';
 import '@docsearch/css';
 
 // Layered Theming System - Base layers (always loaded)
-import '@dialpad/dialtone-tokens/dist/css/layered/tokens-core.css';
-import '@dialpad/dialtone-tokens/dist/css/layered/tokens-base-colors.css';
-import '@dialpad/dialtone-tokens/dist/css/layered/tokens-dp-colors.css';
+import '@dialpad/dialtone-tokens/layered/tokens-core.css';
+import '@dialpad/dialtone-tokens/layered/tokens-base-colors.css';
+import '@dialpad/dialtone-tokens/layered/tokens-dp-colors.css';
 
 // Legacy CSS (still needed for components)
 import '@dialpad/dialtone-css/lib/dist/dialtone.css';

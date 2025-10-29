@@ -74,9 +74,9 @@ Additional themes load as small overrides (0.3-5KB each) containing only differe
 
 ```js
 import { initDialtoneTheme } from '@dialpad/dialtone/themes/config';
-import CoreTokens from '@dialpad/dialtone-tokens/dist/css/layered/tokens-core.css';
-import BaseColors from '@dialpad/dialtone-tokens/dist/css/layered/tokens-base-colors.css';
-import DpColors from '@dialpad/dialtone-tokens/dist/css/layered/tokens-dp-colors.css';
+import CoreTokens from '@dialpad/dialtone-tokens/layered/tokens-core.css';
+import BaseColors from '@dialpad/dialtone-tokens/layered/tokens-base-colors.css';
+import DpColors from '@dialpad/dialtone-tokens/layered/tokens-dp-colors.css';
 
 // Initialize base layers and DP theme
 initDialtoneTheme(
@@ -99,7 +99,7 @@ setMode('dark');  // or 'light'
 
 ```js
 import { setBrand } from '@dialpad/dialtone/themes/config';
-import TmoColors from '@dialpad/dialtone-tokens/dist/css/layered/themes/tokens-tmo-colors.css';
+import TmoColors from '@dialpad/dialtone-tokens/layered/themes/tokens-tmo-colors.css';
 
 setBrand({
   brand: {
@@ -114,7 +114,7 @@ setBrand({
 
 ```js
 import { setContrast } from '@dialpad/dialtone/themes/config';
-import HighContrast from '@dialpad/dialtone-tokens/dist/css/layered/contrast/tokens-high-contrast.css';
+import HighContrast from '@dialpad/dialtone-tokens/layered/contrast/tokens-high-contrast.css';
 
 setContrast({
   contrast: {
@@ -194,15 +194,15 @@ Load CSS files directly and control via HTML attributes:
 
 ```css
 /* Base layers (required) */
-@import "@dialpad/dialtone-tokens/dist/css/layered/tokens-core.css";
-@import "@dialpad/dialtone-tokens/dist/css/layered/tokens-base-colors.css";
-@import "@dialpad/dialtone-tokens/dist/css/layered/tokens-dp-colors.css";
+@import "@dialpad/dialtone-tokens/layered/tokens-core.css";
+@import "@dialpad/dialtone-tokens/layered/tokens-base-colors.css";
+@import "@dialpad/dialtone-tokens/layered/tokens-dp-colors.css";
 
 /* Theme override (optional, only if not using dp) */
-@import "@dialpad/dialtone-tokens/dist/css/layered/themes/tokens-tmo-colors.css";
+@import "@dialpad/dialtone-tokens/layered/themes/tokens-tmo-colors.css";
 
 /* High contrast (optional) */
-@import "@dialpad/dialtone-tokens/dist/css/layered/contrast/tokens-high-contrast.css";
+@import "@dialpad/dialtone-tokens/layered/contrast/tokens-high-contrast.css";
 ```
 
 Then set attributes in HTML:

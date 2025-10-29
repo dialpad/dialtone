@@ -8,9 +8,9 @@ import { setTheme, setMode, setBrand, setContrast, initDialtoneTheme } from '@di
 const layeredTokensEnabled = (() => {
   try {
     // Try to import layered CSS files
-    import('@dialpad/dialtone-tokens/dist/css/layered/tokens-core.css');
-    import('@dialpad/dialtone-tokens/dist/css/layered/tokens-base-colors.css');
-    import('@dialpad/dialtone-tokens/dist/css/layered/tokens-dp-colors.css');
+    import('@dialpad/dialtone-tokens/layered/tokens-core.css');
+    import('@dialpad/dialtone-tokens/layered/tokens-base-colors.css');
+    import('@dialpad/dialtone-tokens/layered/tokens-dp-colors.css');
     return true;
   } catch (e) {
     console.log('Layered tokens not available, falling back to legacy themes');
