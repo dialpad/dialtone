@@ -66,7 +66,10 @@ const createAnchor = (anchorWrapper) => {
 };
 
 export const getAnchor = (anchorWrapper) => {
-  const anchor = anchorWrapper?.children[0];
+  if (!anchorWrapper) {
+    return;
+  }
+  const anchor = anchorWrapper.children[0];
   if (!anchor) return createAnchor(anchorWrapper);
   return anchor;
 };
