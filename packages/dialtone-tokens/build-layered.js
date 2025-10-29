@@ -2,8 +2,6 @@
  * Builds layered tokens where themes only contain overrides from the base dp theme
  */
 
-/* eslint-disable complexity */
-
 import { promises as fs, readFileSync, writeFileSync } from 'fs';
 import { runLayeredTokens } from './build-sd-transforms-layered.js';
 import postcss from 'postcss';
@@ -95,18 +93,10 @@ async function runPostCss(file, useOriginalPlugin = false) {
 }
 
 /**
- * Main function to generate optimized theme files
- *
- * Process overview:
- * 1. Generate FULL theme files (~640KB each) using Style Dictionary
- * 2. Compare each theme to DP base and extract only the differences
- * 3. Write tiny override files (0.5KB each) to themes/ directory
- * 4. Delete the full theme files (we only needed them for comparison)
- *
- * Why not just output diffs directly? Style Dictionary's architecture makes
- * this extremely complex. Easier to generate full files, calculate diffs, then clean up.
+ * Step 1: Generate full token files for all themes
+ * These are temporary files used to calculate diffs later.
  */
-async function main() {
+async function generateFullTokens(outputDir) {
   console.log('Step 1: Generating full layered tokens for all themes...\n');
 
   // Generate all the layered tokens (full files, we'll strip these down later)
@@ -114,15 +104,20 @@ async function main() {
 
   console.log('\nStep 1b: Running postcss to generate composite tokens...\n');
 
-  const outputDir = 'dist/css/layered';
-
-  // Run postcss on files - use original plugin for :root, layered plugin for mode-specific
+  // Run postcss on base files
   await runPostCss(`${outputDir}/tokens-core.css`, true); // Original plugin for :root
   await runPostCss(`${outputDir}/tokens-base-colors.css`, false); // Layered plugin for [data-dt-mode]
   await runPostCss(`${outputDir}/tokens-dp-colors.css`, false); // Layered plugin for [data-dt-mode]
 
   console.log('Generated composite tokens (typography, shadows)');
+}
 
+/**
+ * Step 2: Generate optimized theme overrides
+ * Compares each theme to DP base and extracts only differences.
+ * Returns stats for summary display.
+ */
+async function generateThemeOverrides(outputDir) {
   console.log('\nStep 2: Generating optimized override files...\n');
 
   // Read the base dp theme (this is what we compare against)
@@ -174,7 +169,18 @@ async function main() {
   console.log(`Optimized total: ${(totalOptimizedSize / 1024).toFixed(2)}KB`);
   console.log(`Savings: ${((totalOriginalSize - totalOptimizedSize) / 1024).toFixed(2)}KB`);
 
-  // Step 3: Delete the full theme files (we only needed them to calculate diffs)
+  return {
+    totalOriginalSize,
+    totalOptimizedSize,
+    themeCount: themeFiles.length,
+  };
+}
+
+/**
+ * Step 3: Clean up full theme files
+ * Deletes the temporary full files. We only needed them to calculate diffs.
+ */
+async function cleanupFullThemeFiles(outputDir) {
   console.log('\nStep 3: Cleaning up redundant full theme files...\n');
 
   // Keep only the base layers. Delete everything else.
@@ -194,8 +200,14 @@ async function main() {
   }
 
   console.log(`Removed ${deletedCount} redundant full theme files (saved ~${(deletedCount * 640).toFixed(0)}KB)`);
+  return deletedCount;
+}
 
-  // Step 4: Process high contrast files and combine light/dark
+/**
+ * Step 4: Process high contrast files
+ * Combines light and dark high contrast files into a single file with mode selectors.
+ */
+async function processHighContrast(outputDir) {
   console.log('\nStep 4: Processing high contrast overrides...\n');
 
   const contrastDir = `${outputDir}/contrast`;
@@ -246,16 +258,44 @@ ${darkVars}
   } catch {
     console.log('No high contrast files found, skipping...');
   }
+}
 
+/**
+ * Output build summary
+ * Shows final directory structure and file info.
+ */
+function outputBuildSummary(stats) {
   console.log('\n✅ Optimized build complete!');
   console.log('\nFinal structure:');
   console.log('  dist/css/layered/');
   console.log('    ├── tokens-core.css (50KB) ← typography, spacing, components');
   console.log('    ├── tokens-base-colors.css (177KB)');
   console.log('    ├── tokens-dp-colors.css (628KB) ← base theme');
-  console.log('    ├── themes/ (51 override files)');
+  console.log(`    ├── themes/ (${stats.themeCount} override files)`);
   console.log('    └── contrast/');
   console.log('        └── tokens-high-contrast.css ← high contrast overrides');
+}
+
+/**
+ * Main function to generate optimized theme files
+ *
+ * Process overview:
+ * 1. Generate FULL theme files (~640KB each) using Style Dictionary
+ * 2. Compare each theme to DP base and extract only the differences
+ * 3. Write tiny override files (0.5KB each) to themes/ directory
+ * 4. Delete the full theme files (we only needed them for comparison)
+ *
+ * Why not just output diffs directly? Style Dictionary's architecture makes
+ * this extremely complex. Easier to generate full files, calculate diffs, then clean up.
+ */
+async function main() {
+  const outputDir = 'dist/css/layered';
+
+  await generateFullTokens(outputDir);
+  const stats = await generateThemeOverrides(outputDir);
+  await cleanupFullThemeFiles(outputDir);
+  await processHighContrast(outputDir);
+  outputBuildSummary(stats);
 }
 
 // Export for use in build.js
