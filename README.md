@@ -447,6 +447,27 @@ Example:
 nx run dialtone-documentation:build
 ```
 
+##### Clean build artifacts and cache
+
+Use this to clear stale build artifacts and reset the build cache. Common scenarios include switching branches, troubleshooting unexpected build behavior, or recovering from interrupted builds. This is rarely needed because build scripts already clean their own dist folders and Nx cache invalidation handles most staleness automatically.
+
+```bash
+# Clean everything (dist folders and Nx cache)
+pnpm clean
+
+# Clean only dist folders (stale build artifacts)
+pnpm clean:dist
+
+# Clean only Nx cache (confused incremental builds)
+pnpm clean:cache
+```
+
+What gets cleaned:
+
+- `clean:dist` removes `packages/dialtone-tokens/dist` and VuePress cache/temp directories
+- `clean:cache` clears Nx's build cache (`.nx/cache`)
+- `clean` runs both in sequence
+
 ##### Use local package in another project
 
 A way to see local Dialtone changes in a local running frontend is to use a local package.
