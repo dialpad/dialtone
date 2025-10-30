@@ -304,8 +304,11 @@ export default {
         this.avatarClass,
         {
           'd-avatar--group': this.showGroup,
+          'd-avatar--group-digits-2': this.showGroup && this.group > 9 && this.group < 100,
+          'd-avatar--group-digits-3': this.showGroup && this.group > 99,
           [`d-avatar--color-${this.getColor()}`]: !this.isIconType(),
           'd-avatar--clickable': this.clickable,
+          'd-avatar--presence': this.presence && !this.showGroup,
         },
       ];
     },
