@@ -381,7 +381,7 @@ function outputBuildSummary(stats) {
  * Style Dictionary can't easily output only differences. Simpler to generate
  * complete files, calculate diffs, then discard temps.
  */
-async function main() {
+async function buildLayeredTokens() {
   const outputDir = 'dist/css/layered';
 
   await generateFullTokens(outputDir);
@@ -392,9 +392,9 @@ async function main() {
 }
 
 // Export for use in build.js
-export { main as buildLayeredTokens };
+export { buildLayeredTokens };
 
 // Auto-run if executed directly
 if (import.meta.url === `file://${process.argv[1]}`) {
-  main().catch(console.error);
+  buildLayeredTokens().catch(console.error);
 }
