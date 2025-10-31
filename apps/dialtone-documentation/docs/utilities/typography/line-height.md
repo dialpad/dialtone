@@ -62,7 +62,7 @@ Use `d-lh{n}` to fix an element's line-height. This allows you to target a speci
 
 ## CSS Variables
 
-<div v-dt-scrollbar class="d-hmx464 d-bar8 d-ba d-bc-subtle">
+<clamped-table-wrapper>
   <div>
     <table class="d-table dialtone-doc-table">
       <thead class="d-bgc-primary d-ps-sticky d-zi-base1 d-t0">
@@ -87,7 +87,7 @@ Use `d-lh{n}` to fix an element's line-height. This allows you to target a speci
       </tbody>
     </table>
   </div>
-</div>
+</clamped-table-wrapper>
 
 ## Classes
 
@@ -121,5 +121,6 @@ Use `d-lh{n}` to fix an element's line-height. This allows you to target a speci
 
 <script setup>
   import { lineHeight } from '@data/type.json';
+  import ClampedTableWrapper from '@baseComponents/ClampedTableWrapper.vue';
   const { relative, fixed } = lineHeight;
 </script>

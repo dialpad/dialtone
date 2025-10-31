@@ -339,7 +339,7 @@ vueCode='
 
 ### Available gaps
 
-<div v-dt-scrollbar class="d-hmx464 d-bar8 d-ba d-bc-subtle">
+<clamped-table-wrapper>
   <div>
     <table class="d-table dialtone-doc-table">
       <thead class="d-bgc-primary d-ps-sticky d-zi-base1 d-t0">
@@ -572,7 +572,7 @@ vueCode='
       </tbody>
     </table>
   </div>
-</div>
+</clamped-table-wrapper>
 
 ## Responsive
 
@@ -727,6 +727,7 @@ showHtmlWarning />
     DtIconMessage,
     DtIconLock,
   } from '@dialpad/dialtone-icons/vue3';
+  import ClampedTableWrapper from '@baseComponents/ClampedTableWrapper.vue';
 
   const selectedGap = ref('400');
 
