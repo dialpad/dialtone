@@ -4,7 +4,7 @@
     v-text="categoryName"
   />
 
-  <div v-dt-scrollbar class="d-hmx464 d-bar8 d-ba d-bc-subtle">
+  <clamped-table-wrapper>
     <div>
       <table
         class="d-table dialtone-doc-table d-wmn512"
@@ -98,12 +98,13 @@
         </tbody>
       </table>
     </div>
-  </div>
+  </clamped-table-wrapper>
 </template>
 
 <script setup>
 import MarkdownRender from '@baseComponents/MarkdownRender.vue';
 import { computed } from 'vue';
+import ClampedTableWrapper from './ClampedTableWrapper.vue';
 
 const props = defineProps({
   categoryName: {
@@ -128,7 +129,6 @@ const sortedTableDataByName = computed(() => {
 });
 
 const sortDataByKey = (data, nameKey, requiredKey) => {
-  // eslint-disable-next-line complexity
   return data.sort((a, b) => {
     const aIsRequired = !!a[requiredKey];
     const bIsRequired = !!b[requiredKey];
