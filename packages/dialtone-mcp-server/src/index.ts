@@ -8,6 +8,80 @@ import components from '@dialpad/dialtone-vue/component-documentation.json';
 import clientRules from '../client-rules.json';
 
 // ============================================================================
+// TYPE DEFINITIONS
+// ============================================================================
+
+interface ValueObject {
+  prop?: string;
+  value?: string;
+  description?: string;
+}
+
+interface Metadata {
+  deprecated?: boolean;
+  discouraged?: boolean;
+  category?: string;
+  reason?: string;
+  alternatives?: string[];
+  docs?: string;
+  replacement?: string;
+}
+
+interface ClassData {
+  values: ValueObject[];
+  metadata?: Metadata;
+}
+
+interface UtilityClassesData {
+  [className: string]: ClassData;
+}
+
+interface ThemeData {
+  value?: string | number;
+  description?: string;
+}
+
+interface TokenData {
+  [themeName: string]: ThemeData | Metadata;
+}
+
+interface TokensData {
+  [tokenName: string]: TokenData;
+}
+
+interface ComponentProp {
+  name: string;
+  type?: { name: string };
+  values?: string[];
+  description?: string;
+}
+
+interface ComponentEvent {
+  name: string;
+}
+
+interface ComponentSlot {
+  name: string;
+}
+
+interface Component {
+  displayName: string;
+  description?: string;
+  props?: ComponentProp[];
+  events?: ComponentEvent[];
+  slots?: ComponentSlot[];
+  metadata?: Metadata;
+}
+
+interface SearchResult {
+  type: string;
+  name: string;
+  details: any;
+  metadata: Metadata | null;
+  tier?: number;
+}
+
+// ============================================================================
 // SEARCH FUNCTIONS
 // ============================================================================
 
@@ -18,8 +92,8 @@ const MAX_RESULTS = 15;
  * Build a set of all compound properties that exist in the data
  * This is called once when the server starts
  */
-function buildCompoundPropertiesSet(data) {
-  const compoundProps = new Set();
+function buildCompoundPropertiesSet(data: UtilityClassesData): Set<string> {
+  const compoundProps = new Set<string>();
 
   for (const classData of Object.values(data)) {
     for (const valueObj of classData.values) {
@@ -38,12 +112,12 @@ function buildCompoundPropertiesSet(data) {
  * Extract keywords from a search query
  * Detects compound properties (padding-right) from adjacent words (padding right)
  */
-function extractKeywords(query, compoundProperties) {
+function extractKeywords(query: string, compoundProperties: Set<string>): { words: string[]; compoundProperties: string[] } {
   const normalized = query.toLowerCase();
   const words = normalized.split(/\s+/).filter(w => w.length > 0);
 
   // Convert px values to rem for Dialtone's 10-based scale
-  const convertedWords = words.flatMap(word => {
+  const convertedWords = words.flatMap((word: string) => {
     if (word.endsWith('px')) {
       const px = parseFloat(word);
       const rem = `${px / 10}rem`;
@@ -84,7 +158,7 @@ function extractKeywords(query, compoundProperties) {
 /**
  * Check if a keyword is a pure value (not a property name)
  */
-function isValueKeyword(word) {
+function isValueKeyword(word: string): boolean {
   // Numeric values with units: 8px, 0.8rem, 50%, 1em
   if (word.match(/^\d+(\.\d+)?(px|rem|%|em)$/)) return true;
   // Hex colors: #1C1C1C, #fff
@@ -97,7 +171,7 @@ function isValueKeyword(word) {
 /**
  * Helper: Check if a value matches a keyword
  */
-function valueMatchesKeyword(value, description, word) {
+function valueMatchesKeyword(value: string, description: string | undefined, word: string): boolean {
   // For numeric values with units (8px, 0.8rem, 50%), use token-based matching
   if (word.match(/^\d+(\.\d+)?(px|rem|%|em)$/)) {
     const valueTokens = value.split(/\s+/);
@@ -107,7 +181,7 @@ function valueMatchesKeyword(value, description, word) {
   // For other keywords, use word boundary matching
   const escapedWord = word.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
   const wordBoundaryRegex = new RegExp(`\\b${escapedWord}\\b`, 'i');
-  return wordBoundaryRegex.test(value) || wordBoundaryRegex.test(description);
+  return wordBoundaryRegex.test(value) || wordBoundaryRegex.test(description || '');
 }
 
 /**
@@ -116,10 +190,10 @@ function valueMatchesKeyword(value, description, word) {
  * - Discouraged: Show alternatives from metadata with note
  * - Clean: Keep as-is
  */
-function applySmartFilter(results, data) {
-  const filtered = [];
-  const notes = [];
-  const swapped = [];
+function applySmartFilter(results: SearchResult[], data: UtilityClassesData | TokensData | { [key: string]: Component }): { results: SearchResult[]; notes: string[] } {
+  const filtered: SearchResult[] = [];
+  const notes: string[] = [];
+  const swapped: string[] = [];
   let deprecatedCount = 0;
 
   for (const result of results) {
@@ -143,17 +217,20 @@ function applySmartFilter(results, data) {
           // Remove wildcard and find matching items
           const prefix = altPattern.replace(/\*/g, '');
 
-          for (const [name, itemData] of Object.entries(data)) {
+          for (const [name, itemData] of Object.entries(data) as [string, any][]) {
             if (name.startsWith(prefix)) {
               // Don't add if already in results or if it's also discouraged/deprecated
               const alreadyAdded = filtered.some(f => f.name === name) || swapped.includes(name);
               const isProblematic = itemData.metadata?.deprecated || itemData.metadata?.discouraged;
 
               if (!alreadyAdded && !isProblematic) {
+                const details = 'values' in itemData
+                  ? { properties: itemData.values }
+                  : result.details;
                 filtered.push({
                   ...result,
                   name: name,
-                  details: { properties: itemData.values },
+                  details: details,
                   metadata: itemData.metadata || null
                 });
                 swapped.push(name);
@@ -166,15 +243,19 @@ function applySmartFilter(results, data) {
         } else {
           // Exact alternative name
           if (data[altPattern]) {
+            const altData = data[altPattern] as any;
             const alreadyAdded = filtered.some(f => f.name === altPattern) || swapped.includes(altPattern);
-            const isProblematic = data[altPattern].metadata?.deprecated || data[altPattern].metadata?.discouraged;
+            const isProblematic = altData.metadata?.deprecated || altData.metadata?.discouraged;
 
             if (!alreadyAdded && !isProblematic) {
+              const details = 'values' in altData
+                ? { properties: altData.values }
+                : result.details;
               filtered.push({
                 ...result,
                 name: altPattern,
-                details: { properties: data[altPattern].values },
-                metadata: data[altPattern].metadata || null
+                details: details,
+                metadata: altData.metadata || null
               });
               swapped.push(altPattern);
             }
@@ -202,7 +283,7 @@ function applySmartFilter(results, data) {
 /**
  * Search utility classes using simple AND-logic (like Dialtone docs site)
  */
-function searchUtilityClasses(query, data) {
+function searchUtilityClasses(query: string, data: UtilityClassesData): { results: SearchResult[]; notes: string[] } {
   console.error(`\n[CLASS SEARCH DEBUG] Query: "${query}"`);
 
   // Normalize query: lowercase, replace hyphens/slashes with spaces
@@ -210,7 +291,7 @@ function searchUtilityClasses(query, data) {
   const words = normalized.split(/\s+/).filter(w => w.length > 0);
 
   // Create regex for each word (handle px/rem conversion)
-  const regexArray = words.map(word => {
+  const regexArray = words.map((word: string) => {
     // For px values, create regex that matches EITHER px OR rem
     if (word.endsWith('px')) {
       const px = parseFloat(word);
@@ -236,10 +317,10 @@ function searchUtilityClasses(query, data) {
 
   console.error(`[CLASS SEARCH DEBUG] Words:`, words);
 
-  const results = [];
+  const results: SearchResult[] = [];
 
   // Check each class: ALL words must match somewhere
-  for (const [className, classData] of Object.entries(data)) {
+  for (const [className, classData] of Object.entries(data) as [string, ClassData][]) {
     // Gather all searchable text for this class
     const searchableTexts = [className.toLowerCase()];
 
@@ -252,7 +333,7 @@ function searchUtilityClasses(query, data) {
     const combinedText = searchableTexts.join(' ');
 
     // Check if ALL regexes match somewhere in the combined text
-    const allWordsMatch = regexArray.every(regex => regex.test(combinedText));
+    const allWordsMatch = regexArray.every((regex: RegExp) => regex.test(combinedText));
 
     if (allWordsMatch) {
       results.push({
@@ -279,14 +360,14 @@ function searchUtilityClasses(query, data) {
 /**
  * Format search results as readable text
  */
-function formatResults(results, query) {
+function formatResults(results: SearchResult[], query: string): string {
   if (results.length === 0) {
     return `No results found for "${query}".\n\nTry searching with:\n- Property + value (e.g., "padding right 8px", "display flex")\n- Full property name (e.g., "overflow hidden", "position relative")`;
   }
 
   let output = `Found ${results.length} result${results.length > 1 ? 's' : ''} for "${query}":\n\n`;
 
-  results.forEach((result, index) => {
+  results.forEach((result: SearchResult, index: number) => {
     output += `${index + 1}. **${result.name}**\n`;
 
     // Show metadata warnings if present
@@ -309,7 +390,7 @@ function formatResults(results, query) {
     }
 
     // Show properties
-    result.details.properties.forEach(prop => {
+    result.details.properties.forEach((prop: ValueObject) => {
       const desc = prop.description ? ` (${prop.description})` : '';
       output += `   - ${prop.prop}: ${prop.value}${desc}\n`;
     });
@@ -328,7 +409,7 @@ function formatResults(results, query) {
 /**
  * Search design tokens using simple AND-logic (like Dialtone docs site)
  */
-function searchTokens(query, data) {
+function searchTokens(query: string, data: TokensData): { results: SearchResult[]; notes: string[] } {
   console.error(`\n[TOKEN SEARCH DEBUG] Query: "${query}"`);
 
   // Normalize query: lowercase, replace hyphens/slashes with spaces
@@ -336,7 +417,7 @@ function searchTokens(query, data) {
   const words = normalized.split(/\s+/).filter(w => w.length > 0);
 
   // Create regex for each word (handle px/rem conversion)
-  const regexArray = words.map(word => {
+  const regexArray = words.map((word: string) => {
     // For px values, match EITHER px OR rem
     if (word.endsWith('px')) {
       const px = parseFloat(word);
@@ -362,10 +443,10 @@ function searchTokens(query, data) {
 
   console.error(`[TOKEN SEARCH DEBUG] Words:`, words);
 
-  const results = [];
+  const results: SearchResult[] = [];
 
   // Check each token: ALL words must match somewhere
-  for (const [tokenName, themeVariants] of Object.entries(data)) {
+  for (const [tokenName, themeVariants] of Object.entries(data) as [string, TokenData][]) {
     // Skip component-specific tokens (not general design tokens)
     // Only include tokens that start with --dt- or --base-- (like the docs site does)
     if (!tokenName.startsWith('--dt-') && !tokenName.startsWith('--base--')) {
@@ -375,7 +456,7 @@ function searchTokens(query, data) {
     // Gather searchable text: token name + all theme values + descriptions
     const searchableTexts = [tokenName.toLowerCase()];
 
-    for (const [themeName, themeData] of Object.entries(themeVariants)) {
+    for (const [themeName, themeData] of Object.entries(themeVariants) as [string, ThemeData][]) {
       if (themeName === 'metadata') continue;
       if (themeData && themeData.value) {
         searchableTexts.push(String(themeData.value).toLowerCase());
@@ -388,16 +469,17 @@ function searchTokens(query, data) {
     const combinedText = searchableTexts.join(' ');
 
     // Check if ALL regexes match somewhere
-    const allWordsMatch = regexArray.every(regex => regex.test(combinedText));
+    const allWordsMatch = regexArray.every((regex: RegExp) => regex.test(combinedText));
 
     if (allWordsMatch) {
+      const metadata = themeVariants['metadata'] as Metadata | undefined;
       results.push({
         type: 'design-token',
         name: tokenName,
         details: {
           allThemes: themeVariants
         },
-        metadata: themeVariants.metadata || null
+        metadata: metadata || null
       });
     }
   }
@@ -415,7 +497,7 @@ function searchTokens(query, data) {
 /**
  * Format token search results with theme variant information
  */
-function formatTokenResults(results, query) {
+function formatTokenResults(results: SearchResult[], query: string): string {
   if (results.length === 0) {
     return `No token results found for "${query}".\n\nTry searching with:\n- Token category (e.g., "color", "spacing", "border")\n- Specific value (e.g., "#1C1C1C", "0.8rem")\n- Semantic name (e.g., "primary", "success", "danger")`;
   }
@@ -423,7 +505,7 @@ function formatTokenResults(results, query) {
   let output = `Found ${results.length} design token${results.length > 1 ? 's' : ''} for "${query}":\n\n`;
   output += `ℹ️  **Note:** Design token values change based on the active theme (light/dark mode, brand variant).\n\n`;
 
-  results.forEach((result, index) => {
+  results.forEach((result: SearchResult, index: number) => {
     output += `${index + 1}. **${result.name}**\n`;
 
     // Show metadata warnings if present
@@ -447,11 +529,11 @@ function formatTokenResults(results, query) {
 
     // Show theme variants
     output += `   Theme Variants:\n`;
-    const themes = Object.entries(result.details.allThemes);
+    const themes = Object.entries(result.details.allThemes) as [string, ThemeData][];
 
     // Show first few themes as examples
     const themesToShow = themes.slice(0, 3);
-    themesToShow.forEach(([themeName, themeData]) => {
+    themesToShow.forEach(([themeName, themeData]: [string, ThemeData]) => {
       const valueStr = themeData && themeData.value ? String(themeData.value) : 'N/A';
       const descStr = themeData && themeData.description ? String(themeData.description) : '';
       const desc = descStr ? ` - ${descStr}` : '';
@@ -477,7 +559,7 @@ function formatTokenResults(results, query) {
 /**
  * Search Vue components by name, description, or props
  */
-function searchComponents(query, components) {
+function searchComponents(query: string, components: Component[]): { results: SearchResult[]; notes: string[] } {
   console.error(`\n[COMPONENT SEARCH DEBUG] Query: "${query}"`);
 
   // Normalize query: lowercase, replace hyphens/slashes with spaces
@@ -485,14 +567,14 @@ function searchComponents(query, components) {
   const words = normalized.split(/\s+/).filter(w => w.length > 0);
 
   // Create regex for each word
-  const regexArray = words.map(word => {
+  const regexArray = words.map((word: string) => {
     const escaped = word.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
     return new RegExp(escaped, 'i');
   });
 
   console.error(`[COMPONENT SEARCH DEBUG] Words:`, words);
 
-  const results = [];
+  const results: SearchResult[] = [];
 
   // Check each component: ALL words must match somewhere
   for (const component of components) {
@@ -510,7 +592,7 @@ function searchComponents(query, components) {
     const combinedText = searchableTexts.join(' ');
 
     // Check if ALL regexes match somewhere
-    const allWordsMatch = regexArray.every(regex => regex.test(combinedText));
+    const allWordsMatch = regexArray.every((regex: RegExp) => regex.test(combinedText));
 
     if (allWordsMatch) {
       results.push({
@@ -531,8 +613,8 @@ function searchComponents(query, components) {
 
   // Apply smart filter (remove deprecated, swap discouraged with alternatives)
   // Note: Pass components array as data source for potential alternatives
-  const componentsData = {};
-  components.forEach(c => { componentsData[c.displayName] = c; });
+  const componentsData: { [key: string]: Component } = {};
+  components.forEach((c: Component) => { componentsData[c.displayName] = c; });
   const { results: filtered, notes } = applySmartFilter(results, componentsData);
 
   console.error(`[COMPONENT SEARCH DEBUG] After filter: ${filtered.length} results\n`);
@@ -543,14 +625,14 @@ function searchComponents(query, components) {
 /**
  * Format component search results
  */
-function formatComponentResults(results, query) {
+function formatComponentResults(results: SearchResult[], query: string): string {
   if (results.length === 0) {
     return `No components found for "${query}".\n\nTry searching with:\n- Component name (e.g., "button", "modal", "avatar")\n- Partial name (e.g., "badge", "card")\n- Component feature (e.g., "dropdown", "tooltip")`;
   }
 
   let output = `Found ${results.length} component${results.length > 1 ? 's' : ''} for "${query}":\n\n`;
 
-  results.forEach((result, index) => {
+  results.forEach((result: SearchResult, index: number) => {
     output += `${index + 1}. **${result.name}**\n`;
 
     // Show metadata warnings if present
@@ -579,7 +661,7 @@ function formatComponentResults(results, query) {
     if (result.details.props && result.details.props.length > 0) {
       output += `   **Key Props:**\n`;
       const propsToShow = result.details.props.slice(0, 5);
-      propsToShow.forEach(prop => {
+      propsToShow.forEach((prop: ComponentProp) => {
         const typeName = prop.type?.name || 'unknown';
         const values = prop.values ? ` Options: ${prop.values.slice(0, 3).join(', ')}${prop.values.length > 3 ? '...' : ''}` : '';
         output += `   • \`${prop.name}\` (${typeName})${values}\n`;
@@ -596,7 +678,7 @@ function formatComponentResults(results, query) {
 
     // Show events if any
     if (result.details.events && result.details.events.length > 0) {
-      output += `   **Events:** ${result.details.events.map(e => e.name).slice(0, 3).join(', ')}`;
+      output += `   **Events:** ${result.details.events.map((e: ComponentEvent) => e.name).slice(0, 3).join(', ')}`;
       if (result.details.events.length > 3) {
         output += ` (${result.details.events.length - 3} more)`;
       }
@@ -605,7 +687,7 @@ function formatComponentResults(results, query) {
 
     // Show slots if any
     if (result.details.slots && result.details.slots.length > 0) {
-      output += `   **Slots:** ${result.details.slots.map(s => s.name).slice(0, 3).join(', ')}`;
+      output += `   **Slots:** ${result.details.slots.map((s: ComponentSlot) => s.name).slice(0, 3).join(', ')}`;
       if (result.details.slots.length > 3) {
         output += ` (${result.details.slots.length - 3} more)`;
       }
@@ -626,15 +708,15 @@ function formatComponentResults(results, query) {
  * Sort unified results by tier, then metadata status, then name
  * Priority: Tier 1 > Tier 2, Clean > Discouraged > Deprecated
  */
-function sortUnifiedResults(results) {
-  return results.sort((a, b) => {
+function sortUnifiedResults(results: SearchResult[]): SearchResult[] {
+  return results.sort((a: SearchResult, b: SearchResult) => {
     // First sort by tier (1 comes before 2)
-    if (a.tier !== b.tier) {
-      return a.tier - b.tier;
+    if ((a.tier || 0) !== (b.tier || 0)) {
+      return (a.tier || 0) - (b.tier || 0);
     }
 
     // Within same tier, sort by metadata status
-    const getMetadataScore = (result) => {
+    const getMetadataScore = (result: SearchResult): number => {
       if (!result.metadata) return 0; // Clean (no metadata) = highest priority
       if (result.metadata.deprecated) return 2; // Deprecated = lowest priority
       if (result.metadata.discouraged) return 1; // Discouraged = middle priority
@@ -656,7 +738,7 @@ function sortUnifiedResults(results) {
 /**
  * Format unified results (all types in one list, no tiers)
  */
-function formatUnifiedResults(results, query) {
+function formatUnifiedResults(results: SearchResult[], query: string): string {
   if (results.length === 0) {
     return `No results found for "${query}".\n\nTry searching with:\n- CSS properties (e.g., "padding", "display", "flex")\n- Values (e.g., "8px", "0.8rem", "100%")\n- Token names (e.g., "color", "spacing", "border")\n- Component names (e.g., "button", "modal", "avatar")\n- Hex colors (e.g., "#1C1C1C")`;
   }
@@ -664,7 +746,7 @@ function formatUnifiedResults(results, query) {
   let output = `Found ${results.length} result${results.length > 1 ? 's' : ''} for "${query}":\n\n`;
 
   // Format all results in order
-  results.forEach((result, index) => {
+  results.forEach((result: SearchResult, index: number) => {
     output += formatSingleResult(result, index + 1);
   });
 
@@ -674,7 +756,7 @@ function formatUnifiedResults(results, query) {
 /**
  * Format a single result (utility class, token, or component)
  */
-function formatSingleResult(result, index) {
+function formatSingleResult(result: SearchResult, index: number): string {
   let output = `${index}. **${result.name}** _(${result.type})_\n`;
 
   // Show metadata warnings if present
@@ -698,7 +780,7 @@ function formatSingleResult(result, index) {
   if (result.type === 'utility-class') {
     // Show properties
     if (result.details.properties && result.details.properties.length > 0) {
-      result.details.properties.forEach(prop => {
+      result.details.properties.forEach((prop: ValueObject) => {
         output += `   • \`${prop.prop}\`: \`${prop.value}\``;
         if (prop.description) {
           output += ` (${prop.description})`;
@@ -735,7 +817,7 @@ function formatSingleResult(result, index) {
     if (result.details.props && result.details.props.length > 0) {
       output += `   **Key Props:** `;
       const propsToShow = result.details.props.slice(0, 3);
-      output += propsToShow.map(p => `\`${p.name}\``).join(', ');
+      output += propsToShow.map((p: ComponentProp) => `\`${p.name}\``).join(', ');
       if (result.details.props.length > 3) {
         output += ` (+${result.details.props.length - 3} more)`;
       }
@@ -916,7 +998,7 @@ async function main() {
         searchResult = searchUtilityClasses(query, utilityClasses);
         formatterFunction = formatResults;
       } else if (toolName === "search_tokens") {
-        searchResult = searchTokens(query, tokens);
+        searchResult = searchTokens(query, tokens as TokensData);
         formatterFunction = formatTokenResults;
       } else if (toolName === "search_components") {
         searchResult = searchComponents(query, components);
@@ -926,7 +1008,7 @@ async function main() {
       }
 
       // Apply limit
-      const limitedResults = searchResult.results.slice(0, limit);
+      const limitedResults = searchResult.results.slice(0, Number(limit));
 
       console.error(`[${toolName}] Found ${searchResult.results.length} results, limited to ${limitedResults.length}`);
 
