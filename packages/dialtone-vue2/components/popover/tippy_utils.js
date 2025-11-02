@@ -67,6 +67,7 @@ const createAnchor = (anchorWrapper) => {
 
 export const getAnchor = (anchorWrapper) => {
   if (!anchorWrapper) {
+    console.warn('No anchor wrapper provided. This may cause issues with the popover.');
     return;
   }
   const anchor = anchorWrapper.children[0];
