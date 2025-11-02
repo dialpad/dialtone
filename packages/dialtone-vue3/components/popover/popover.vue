@@ -671,10 +671,10 @@ export default {
     isOpen (isOpen, isPrev) {
       if (isOpen) {
         this.initTippyInstance();
-        this.tip.show();
+        this.tip?.show();
       } else if (!isOpen && isPrev !== isOpen) {
         this.removeEventListeners();
-        this.tip.hide();
+        this.tip?.hide();
       }
     },
   },
@@ -690,7 +690,7 @@ export default {
 
     if (this.isOpen) {
       this.initTippyInstance();
-      this.tip.show();
+      this.tip?.show();
     }
 
     // rootMargin here must be greater than the margin of the height we are setting in calculatedMaxHeight which
@@ -769,7 +769,7 @@ export default {
 
       this.isOpen = true;
       await this.$nextTick();
-      this.tip.setProps({
+      this.tip?.setProps({
         placement: 'right-start',
         getReferenceClientRect: () => ({
           width: 0,
@@ -828,7 +828,7 @@ export default {
         if (!element) return;
         if (element.tagName?.toLowerCase() === 'body') {
           disableRootScrolling(this.anchorEl.getRootNode().host);
-          this.tip.setProps({ offset: this.offset });
+          this.tip?.setProps({ offset: this.offset });
         } else {
           element.classList.add('d-zi-popover');
         }
@@ -843,7 +843,7 @@ export default {
       if (!element) return;
       if (element.tagName?.toLowerCase() === 'body') {
         enableRootScrolling(this.anchorEl.getRootNode().host);
-        this.tip.setProps({ offset: this.offset });
+        this.tip?.setProps({ offset: this.offset });
       } else {
         element.classList.remove('d-zi-popover');
       }
