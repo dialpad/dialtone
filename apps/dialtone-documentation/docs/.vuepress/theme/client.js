@@ -302,7 +302,6 @@ async function importDialtoneThemes (app) {
     console.log(`Successfully loaded ${Object.keys(themes).length - 1} themes + high contrast`);
 
     app.provide('themes', themes);
-    app.provide('layeredTokensEnabled', true);
   } catch (error) {
     console.error(`Couldn't import dialtone themes: ${error}`);
   }
