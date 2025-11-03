@@ -8,53 +8,6 @@ storybook: https://dialtone.dialpad.com/vue/?path=/story/components-presence--de
 figma_url: https://www.figma.com/design/W58r5BkO8qTw3vem9YieJd/DT9-Component-Library--Rebrand-2025-?node-id=9628-58458
 ---
 
-<div class="d-ba d-bc-success d-p32 d-bar16">
-  <h2>Nested Mode Support</h2>
-  <dt-stack gap="500" class="d-mb32">
-    <p>This section is in the page's current mode (inherited from html element).</p>
-    <dt-stack direction="row">
-        <div class="d-w24 d-h24" style="background: var(--dt-color-black-50);" title="black-50"></div>
-        <div class="d-w24 d-h24" style="background: var(--dt-color-black-100);" title="black-100"></div>
-        <div class="d-w24 d-h24" style="background: var(--dt-color-black-200);" title="black-200"></div>
-        <div class="d-w24 d-h24" style="background: var(--dt-color-black-300);" title="black-300"></div>
-        <div class="d-w24 d-h24" style="background: var(--dt-color-black-400);" title="black-400"></div>
-        <div class="d-w24 d-h24" style="background: var(--dt-color-black-500);" title="black-500"></div>
-        <div class="d-w24 d-h24" style="background: var(--dt-color-black-600);" title="black-600"></div>
-        <div class="d-w24 d-h24" style="background: var(--dt-color-black-700);" title="black-700"></div>
-        <div class="d-w24 d-h24" style="background: var(--dt-color-black-800);" title="black-800"></div>
-        <div class="d-w24 d-h24" style="background: var(--dt-color-black-900);" title="black-900"></div>
-        <div class="d-w24 d-h24" style="background: var(--dt-color-black-950);" title="black-950"></div>
-        <div class="d-w24 d-h24" style="background: var(--dt-color-black-1000);" title="black-1000"></div>
-    </dt-stack>
-    <dt-stack data-dt-mode="dark" gap="400" class="d-bgc-primary d-ba d-p16">
-        <div>
-          <h3>Always Dark Section</h3>
-          <p>This section always renders in dark mode, even when the page is in light mode.</p>
-        </div>
-        <dt-stack direction="row">
-            <div class="d-w24 d-h24" style="background: var(--dt-color-black-50);" title="black-50"></div>
-            <div class="d-w24 d-h24" style="background: var(--dt-color-black-100);" title="black-100"></div>
-            <div class="d-w24 d-h24" style="background: var(--dt-color-black-200);" title="black-200"></div>
-            <div class="d-w24 d-h24" style="background: var(--dt-color-black-300);" title="black-300"></div>
-            <div class="d-w24 d-h24" style="background: var(--dt-color-black-400);" title="black-400"></div>
-            <div class="d-w24 d-h24" style="background: var(--dt-color-black-500);" title="black-500"></div>
-            <div class="d-w24 d-h24" style="background: var(--dt-color-black-600);" title="black-600"></div>
-            <div class="d-w24 d-h24" style="background: var(--dt-color-black-700);" title="black-700"></div>
-            <div class="d-w24 d-h24" style="background: var(--dt-color-black-800);" title="black-800"></div>
-            <div class="d-w24 d-h24" style="background: var(--dt-color-black-900);" title="black-900"></div>
-            <div class="d-w24 d-h24" style="background: var(--dt-color-black-950);" title="black-950"></div>
-            <div class="d-w24 d-h24" style="background: var(--dt-color-black-1000);" title="black-1000"></div>
-        </dt-stack>
-        <dt-stack data-dt-mode="light" gap="400" class="d-bgc-primary d-ba d-p16">
-            <h4>Nested Light Section</h4>
-            <p>This is a light section nested within the dark section, demonstrating mode inheritance override.</p>
-        </dt-stack>
-    </dt-stack>
-  </dt-stack>
-</div>
-
-<!-- TODO: create a mechanism for a smart "inverted" mode, possibly a Vue "DtMode" component -->
-
 <code-well-header>
   <dt-stack direction="row" gap="500">
     <example-presence presence="active"/>
