@@ -1,6 +1,11 @@
 /* eslint-disable complexity */
-// Track if core tokens are loaded (for layered system)
-let coreTokensLoaded = false;
+// Track if core tokens are loaded per rootNode (for layered system)
+// Using WeakMap prevents memory leaks and allows per-rootNode tracking
+const coreTokensLoadedByRoot = new WeakMap();
+
+// Track initialization state per rootNode for idempotency protection
+// Stores: { brand: string, mode: string, contrast: string }
+const initializationState = new WeakMap();
 
 /**
  * @typedef {'light'|'dark'} Mode
@@ -118,10 +123,10 @@ function _setThemeLayered(theme, rootNode = document.documentElement) {
     rootNode = rootNode.shadowRoot;
   }
 
-  // Load core tokens only once
-  if (theme.core && !coreTokensLoaded) {
+  // Load core tokens only once per rootNode
+  if (theme.core && !coreTokensLoadedByRoot.get(rootNode)) {
     _setStyleTag('dialtone-css-core', theme.core, rootNode);
-    coreTokensLoaded = true;
+    coreTokensLoadedByRoot.set(rootNode, true);
   }
 
   // Load base colors only once
@@ -157,7 +162,11 @@ function _setStyleTag (id, content, rootNode) {
       rootNode?.appendChild(style);
     }
   } else {
-    rootNode.querySelector('#' + id).innerHTML = content;
+    const existingTag = rootNode.querySelector('#' + id);
+    // Only update if content changed (performance optimization)
+    if (existingTag.innerHTML !== content) {
+      existingTag.innerHTML = content;
+    }
   }
 }
 
@@ -364,9 +373,40 @@ export function initDialtoneTheme(coreTheme, brandTheme, mode = 'light', rootNod
     rootNode = rootNode.shadowRoot;
   }
 
-  // Load core tokens (once)
+  // Check for duplicate initialization (idempotency protection with soft warnings)
+  const existing = initializationState.get(rootNode);
+  if (existing) {
+    if (existing.brand === brandTheme.brand.name && existing.mode === mode) {
+      console.warn(
+        `[Dialtone] Theme already initialized for this rootNode with brand '${brandTheme.brand.name}' and mode '${mode}'. ` +
+        'Re-applying the same theme may be unnecessary. ' +
+        'If you need to switch themes dynamically, use setBrand() or setMode() instead of calling initDialtoneTheme() again.',
+      );
+    } else {
+      console.warn(
+        `[Dialtone] Theme already initialized for this rootNode. ` +
+        `Previous: brand='${existing.brand}', mode='${existing.mode}'. ` +
+        `New: brand='${brandTheme.brand.name}', mode='${mode}'. ` +
+        'Re-initializing with different parameters. Consider using setBrand()/setMode() for dynamic switching.',
+      );
+    }
+  }
+
+  // Warn if this looks like an embedded app using the wrong rootNode
+  if (rootNode === document.documentElement && existing) {
+    const hasThemeStyles = document.querySelector('#dialtone-css-core') !== null;
+    if (hasThemeStyles) {
+      console.warn(
+        '[Dialtone] Multiple calls to initDialtoneTheme() detected on document.documentElement. ' +
+        'If you are in an embedded app/micro-frontend, you may need to pass your own container element instead. ' +
+        'Example: initDialtoneTheme(core, brand, mode, myAppContainerElement)',
+      );
+    }
+  }
+
+  // Load core tokens (once per rootNode)
   _setStyleTag('dialtone-css-core', coreTheme.core, rootNode);
-  coreTokensLoaded = true;
+  coreTokensLoadedByRoot.set(rootNode, true);
 
   // Load base colors (once)
   _setStyleTag('dialtone-css-base-colors', coreTheme.baseColors, rootNode);
@@ -379,4 +419,55 @@ export function initDialtoneTheme(coreTheme, brandTheme, mode = 'light', rootNod
 
   // Set default contrast
   rootNode?.setAttribute('data-dt-contrast', 'default');
+
+  // Track initialization state for future idempotency checks
+  initializationState.set(rootNode, {
+    brand: brandTheme.brand.name,
+    mode: mode,
+    contrast: 'default',
+  });
+}
+
+/**
+ * Reset theme for a given rootNode - useful for testing and cleanup
+ *
+ * Removes all theme styles, attributes, and initialization state for the specified rootNode.
+ * This allows re-initialization with a clean slate, which is particularly useful in test
+ * environments or when unmounting micro-frontends.
+ *
+ * @param {ThemeRootNode} [rootNode=document.documentElement] - Root element to reset
+ *
+ * @example
+ * // Reset document theme (test cleanup)
+ * import { resetTheme } from '@dialpad/dialtone/themes/config';
+ * afterEach(() => {
+ *   resetTheme();  // Clean slate for next test
+ * });
+ *
+ * @example
+ * // Reset Shadow DOM theme (component unmount)
+ * class MyWidget extends HTMLElement {
+ *   disconnectedCallback() {
+ *     resetTheme(this);  // Clean up when component removed
+ *   }
+ * }
+ */
+export function resetTheme(rootNode = document.documentElement) {
+  // Access shadowRoot if present
+  const actualRoot = rootNode?.shadowRoot || rootNode;
+
+  // Clear initialization state
+  initializationState.delete(actualRoot);
+  coreTokensLoadedByRoot.delete(actualRoot);
+
+  // Remove all theme style tags
+  _removeStyleTag('dialtone-css-core', actualRoot);
+  _removeStyleTag('dialtone-css-base-colors', actualRoot);
+  _removeStyleTag('dialtone-css-brand-colors', actualRoot);
+  _removeStyleTag('dialtone-css-contrast', actualRoot);
+
+  // Remove theme attributes
+  actualRoot?.removeAttribute('data-dt-mode');
+  actualRoot?.removeAttribute('data-dt-brand');
+  actualRoot?.removeAttribute('data-dt-contrast');
 }
