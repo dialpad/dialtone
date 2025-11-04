@@ -1,3 +1,24 @@
+# [9.144.0](https://github.com/dialpad/dialtone/compare/dialtone/v9.143.0...dialtone/v9.144.0) (2025-11-04)
+
+
+### Bug Fixes
+
+* **Popover:** DP-162957 tippy safe check ([#960](https://github.com/dialpad/dialtone/issues/960)) ([5376d8b](https://github.com/dialpad/dialtone/commit/5376d8b6bddd922c1c47db43566f90a2f1a5b637))
+* **Tooltip:** DP-162944 defensively check for a null anchorWrapper ([#957](https://github.com/dialpad/dialtone/issues/957)) ([82b7951](https://github.com/dialpad/dialtone/commit/82b7951d138f4cfa2f795e9182477a8e7929e196))
+* **Tooltip:** DP-162950 avoid manipulate on null parent ([#961](https://github.com/dialpad/dialtone/issues/961)) ([ede4855](https://github.com/dialpad/dialtone/commit/ede48555afb9820d6fb3c7565b874cbb02d70885))
+* **Tooltip:** NO-JIRA console warn on null anchorWrapper ([#959](https://github.com/dialpad/dialtone/issues/959)) ([21115f5](https://github.com/dialpad/dialtone/commit/21115f5acb52890679cde82448f463d437b5c05c))
+
+
+### Documentation
+
+* DLT-2817 improve doc tables searchability ([#955](https://github.com/dialpad/dialtone/issues/955)) ([a27ef2c](https://github.com/dialpad/dialtone/commit/a27ef2ca33972f6eb03b29d4198a7be8ae461b1c))
+* **Json Docs:** DLT-2798 add metadata to dialtone JSON documentation files ([#953](https://github.com/dialpad/dialtone/issues/953)) ([7ee20b8](https://github.com/dialpad/dialtone/commit/7ee20b80bf50b59250902976e889a7f46dbbae86))
+
+
+### Features
+
+* **Avatar:** DLT-2718 avatar component masking for presence and group ([#902](https://github.com/dialpad/dialtone/issues/902)) ([b7843ab](https://github.com/dialpad/dialtone/commit/b7843ab71983437b18a35aa05d7aa5724b695e35))
+
 # [9.143.0](https://github.com/dialpad/dialtone/compare/dialtone/v9.142.2...dialtone/v9.143.0) (2025-10-28)
 
 
