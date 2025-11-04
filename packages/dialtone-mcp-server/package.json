@@ -14,7 +14,7 @@
     "start": "node build/index.js",
     "dev": "tsx src/index.ts",
     "test": "node test-search.js",
-    "interactive": "node interactive-search.js",
+    "interactive": "tsx interactive-search.ts",
     "inspect": "npx @modelcontextprotocol/inspector npm run start"
   },
   "dependencies": {

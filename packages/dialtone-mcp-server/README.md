@@ -25,9 +25,9 @@ cd packages/dialtone-mcp-server
 pnpm run interactive
 ```
 
-Or use node directly from anywhere:
+Or use tsx directly from anywhere:
 ```bash
-node packages/dialtone-mcp-server/interactive-search.js
+npx tsx packages/dialtone-mcp-server/interactive-search.ts
 ```
 
 **Query Format:** Use keywords only, not questions.

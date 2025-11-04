@@ -13,45 +13,40 @@ import type {
 } from '../types.js';
 
 /**
- * Search Vue components by name, description, or props
+ * Split camelCase/PascalCase into words
+ * "DtButton" → ["Dt", "Button"]
  */
-export function searchComponents(query: string, components: Component[]): { results: SearchResult[]; notes: string[] } {
-  console.error(`\n[COMPONENT SEARCH DEBUG] Query: "${query}"`);
+function splitCamelCase(name: string): string[] {
+  return name.replace(/([A-Z])/g, ' $1').trim().split(' ').map(w => w.toLowerCase());
+}
 
-  // Normalize query: lowercase, replace hyphens/slashes with spaces
-  const normalized = query.toLowerCase().replace(/[/-]/g, ' ');
-  const words = normalized.split(/\s+/).filter(w => w.length > 0);
-
-  // Create regex for each word
-  const regexArray = words.map((word: string) => {
-    const escaped = word.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-    return new RegExp(escaped, 'i');
-  });
-
-  console.error(`[COMPONENT SEARCH DEBUG] Words:`, words);
-
-  const results: SearchResult[] = [];
-
-  // Check each component: ALL words must match somewhere
-  for (const component of components) {
-    // Gather searchable text: name + description + prop names + prop descriptions
-    const searchableTexts = [
-      (component.displayName || '').toLowerCase(),
-      (component.description || '').toLowerCase()
-    ];
-
-    for (const prop of component.props || []) {
-      searchableTexts.push((prop.name || '').toLowerCase());
-      searchableTexts.push((prop.description || '').toLowerCase());
+/**
+ * Remove duplicate components, keeping first occurrence (highest priority)
+ */
+function removeDuplicates(results: SearchResult[]): SearchResult[] {
+  const seen = new Set<string>();
+  return results.filter(result => {
+    if (seen.has(result.name)) {
+      return false;
     }
+    seen.add(result.name);
+    return true;
+  });
+}
 
-    const combinedText = searchableTexts.join(' ');
+/**
+ * Search components by name (with camelCase splitting)
+ */
+function searchByName(regexArray: RegExp[], components: Component[]): SearchResult[] {
+  const matches: SearchResult[] = [];
 
-    // Check if ALL regexes match somewhere
-    const allWordsMatch = regexArray.every((regex: RegExp) => regex.test(combinedText));
+  for (const component of components) {
+    const nameParts = splitCamelCase(component.displayName);
+    const nameText = nameParts.join(' ');
 
-    if (allWordsMatch) {
-      results.push({
+    const allMatch = regexArray.every(regex => regex.test(nameText));
+    if (allMatch) {
+      matches.push({
         type: 'component',
         name: component.displayName,
         details: {
@@ -65,17 +60,192 @@ export function searchComponents(query: string, components: Component[]): { resu
     }
   }
 
-  console.error(`[COMPONENT SEARCH DEBUG] Found ${results.length} raw matches`);
+  return matches;
+}
+
+/**
+ * Search components by description
+ */
+function searchByDescription(regexArray: RegExp[], components: Component[]): SearchResult[] {
+  const matches: SearchResult[] = [];
+
+  for (const component of components) {
+    const description = (component.description || '').toLowerCase();
+
+    const allMatch = regexArray.every(regex => regex.test(description));
+    if (allMatch) {
+      matches.push({
+        type: 'component',
+        name: component.displayName,
+        details: {
+          description: component.description,
+          props: component.props || [],
+          events: component.events || [],
+          slots: component.slots || []
+        },
+        metadata: component.metadata || null
+      });
+    }
+  }
+
+  return matches;
+}
+
+/**
+ * Search components by props
+ */
+function searchByProps(regexArray: RegExp[], components: Component[]): SearchResult[] {
+  const matches: SearchResult[] = [];
+
+  for (const component of components) {
+    const propsText: string[] = [];
+    for (const prop of component.props || []) {
+      propsText.push((prop.name || '').toLowerCase());
+      propsText.push((prop.description || '').toLowerCase());
+    }
+    const combined = propsText.join(' ');
+
+    const allMatch = regexArray.every(regex => regex.test(combined));
+    if (allMatch) {
+      matches.push({
+        type: 'component',
+        name: component.displayName,
+        details: {
+          description: component.description,
+          props: component.props || [],
+          events: component.events || [],
+          slots: component.slots || []
+        },
+        metadata: component.metadata || null
+      });
+    }
+  }
+
+  return matches;
+}
+
+/**
+ * Search components by events
+ */
+function searchByEvents(regexArray: RegExp[], components: Component[]): SearchResult[] {
+  const matches: SearchResult[] = [];
+
+  for (const component of components) {
+    const eventsText: string[] = [];
+    for (const event of component.events || []) {
+      eventsText.push((event.name || '').toLowerCase());
+    }
+    const combined = eventsText.join(' ');
+
+    const allMatch = regexArray.every(regex => regex.test(combined));
+    if (allMatch) {
+      matches.push({
+        type: 'component',
+        name: component.displayName,
+        details: {
+          description: component.description,
+          props: component.props || [],
+          events: component.events || [],
+          slots: component.slots || []
+        },
+        metadata: component.metadata || null
+      });
+    }
+  }
+
+  return matches;
+}
+
+/**
+ * Search components by slots
+ */
+function searchBySlots(regexArray: RegExp[], components: Component[]): SearchResult[] {
+  const matches: SearchResult[] = [];
+
+  for (const component of components) {
+    const slotsText: string[] = [];
+    for (const slot of component.slots || []) {
+      slotsText.push((slot.name || '').toLowerCase());
+    }
+    const combined = slotsText.join(' ');
+
+    const allMatch = regexArray.every(regex => regex.test(combined));
+    if (allMatch) {
+      matches.push({
+        type: 'component',
+        name: component.displayName,
+        details: {
+          description: component.description,
+          props: component.props || [],
+          events: component.events || [],
+          slots: component.slots || []
+        },
+        metadata: component.metadata || null
+      });
+    }
+  }
+
+  return matches;
+}
+
+/**
+ * Search Vue components by name, description, props, events, and slots
+ */
+export function searchComponents(query: string, components: Component[]): { results: SearchResult[]; notes: string[] } {
+  console.error(`\n[COMPONENT SEARCH DEBUG] Query: "${query}"`);
+
+  // Normalize query: lowercase, replace hyphens/slashes with spaces
+  const normalized = query.toLowerCase().replace(/[/-]/g, ' ');
+  const words = normalized.split(/\s+/).filter(w => w.length > 0);
+
+  // Create regex for each word with WORD BOUNDARIES
+  const regexArray = words.map((word: string) => {
+    const escaped = word.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+    return new RegExp(`\\b${escaped}\\b`, 'i');
+  });
+
+  console.error(`[COMPONENT SEARCH DEBUG] Words:`, words);
+
+  // Search in 5 separate buckets
+  const nameMatches = searchByName(regexArray, components);
+  const descriptionMatches = searchByDescription(regexArray, components);
+  const propsMatches = searchByProps(regexArray, components);
+  const eventsMatches = searchByEvents(regexArray, components);
+  const slotsMatches = searchBySlots(regexArray, components);
+
+  console.error(`[COMPONENT SEARCH DEBUG] Bucket results: name=${nameMatches.length}, desc=${descriptionMatches.length}, props=${propsMatches.length}, events=${eventsMatches.length}, slots=${slotsMatches.length}`);
+
+  // Combine in priority order
+  const combined = [
+    ...nameMatches,
+    ...descriptionMatches,
+    ...propsMatches,
+    ...eventsMatches,
+    ...slotsMatches
+  ];
+
+  // Remove duplicates (keep first occurrence)
+  const deduplicated = removeDuplicates(combined);
+
+  console.error(`[COMPONENT SEARCH DEBUG] After deduplication: ${deduplicated.length} results`);
+
+  // Add note if no name matches but other buckets have results
+  const searchNotes: string[] = [];
+  if (nameMatches.length === 0 && deduplicated.length > 0) {
+    searchNotes.push(`No component named '${query}', showing components with matching description/props/events/slots`);
+  }
 
   // Apply smart filter (remove deprecated, swap discouraged with alternatives)
-  // Note: Pass components array as data source for potential alternatives
   const componentsData: { [key: string]: Component } = {};
   components.forEach((c: Component) => { componentsData[c.displayName] = c; });
-  const { results: filtered, notes } = applySmartFilter(results, componentsData);
+  const { results: filtered, notes: filterNotes } = applySmartFilter(deduplicated, componentsData);
 
   console.error(`[COMPONENT SEARCH DEBUG] After filter: ${filtered.length} results\n`);
 
-  return { results: filtered, notes };
+  // Combine notes
+  const allNotes = [...searchNotes, ...filterNotes];
+
+  return { results: filtered, notes: allNotes };
 }
 
 /**

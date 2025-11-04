@@ -1,18 +1,16 @@
-#!/usr/bin/env node
+#!/usr/bin/env tsx
 
 /**
  * Interactive search tool for testing the Dialtone MCP server
- * Run: node interactive-search.js
+ * Run: pnpm run interactive
  */
 
-import { createRequire } from 'module';
 import * as readline from 'readline';
-
-const require = createRequire(import.meta.url);
-
-const utilityClasses = require('@dialpad/dialtone-css/lib/dist/dialtone-docs.json');
-const tokens = require('@dialpad/dialtone-css/lib/dist/tokens-docs.json');
-const components = require('@dialpad/dialtone-vue/component-documentation.json');
+import { searchUtilityClasses } from './src/tools/utility-classes.js';
+import { searchTokens } from './src/tools/tokens.js';
+import { searchComponents } from './src/tools/components.js';
+import { utilityClasses, tokens, components } from './src/data.js';
+import type { UtilityClassesData, TokensData, Component } from './src/types.js';
 
 console.log('='.repeat(80));
 console.log('Dialtone MCP Server - Interactive Search Tool');
@@ -33,106 +31,7 @@ console.log('Type "help" for examples, "quit" to exit');
 console.log('='.repeat(80));
 console.log();
 
-// Simple search implementations (copied from test-search.js)
-function createUnitRegex(word) {
-  if (word.endsWith('px')) {
-    const px = parseFloat(word);
-    const rem = `${px / 10}rem`;
-    return new RegExp(`(${word.replace(/\./g, '\\.')}|${rem.replace(/\./g, '\\.')})`, 'i');
-  }
-  if (word.endsWith('rem')) {
-    const remValue = parseFloat(word);
-    const px = `${remValue * 10}px`;
-    return new RegExp(`(${word.replace(/\./g, '\\.')}|${px.replace(/\./g, '\\.')})`, 'i');
-  }
-  return new RegExp(word.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), 'i');
-}
-
-function buildUtilitySearchText(className, classData) {
-  const searchableTexts = [className.toLowerCase()];
-  for (const valueObj of classData.values) {
-    searchableTexts.push(valueObj.prop?.toLowerCase() || '');
-    searchableTexts.push(valueObj.value?.toLowerCase() || '');
-    searchableTexts.push(valueObj.description?.toLowerCase() || '');
-  }
-  return searchableTexts.join(' ');
-}
-
-function buildTokenSearchText(tokenName, themeVariants) {
-  const searchableTexts = [tokenName.toLowerCase()];
-  for (const [themeName, themeData] of Object.entries(themeVariants)) {
-    if (themeName === 'metadata') continue;
-    if (themeData?.value) searchableTexts.push(String(themeData.value).toLowerCase());
-    if (themeData?.description) searchableTexts.push(String(themeData.description).toLowerCase());
-  }
-  return searchableTexts.join(' ');
-}
-
-function buildComponentSearchText(component) {
-  const searchableTexts = [
-    (component.displayName || '').toLowerCase(),
-    (component.description || '').toLowerCase(),
-  ];
-  for (const prop of component.props || []) {
-    searchableTexts.push((prop.name || '').toLowerCase());
-    searchableTexts.push((prop.description || '').toLowerCase());
-  }
-  return searchableTexts.join(' ');
-}
-
-function searchUtilityClasses(query, data) {
-  const normalized = query.toLowerCase().replace(/[/-]/g, ' ');
-  const words = normalized.split(/\s+/).filter(w => w.length > 0);
-  const regexArray = words.map(createUnitRegex);
-
-  const results = [];
-  for (const [className, classData] of Object.entries(data)) {
-    const searchableText = buildUtilitySearchText(className, classData);
-    if (regexArray.every(r => r.test(searchableText))) {
-      results.push({ name: className, data: classData });
-    }
-  }
-
-  return results.filter(r => !r.data.metadata?.deprecated);
-}
-
-function searchTokens(query, data) {
-  const normalized = query.toLowerCase().replace(/[/-]/g, ' ');
-  const words = normalized.split(/\s+/).filter(w => w.length > 0);
-  const regexArray = words.map(createUnitRegex);
-
-  const results = [];
-  for (const [tokenName, themeVariants] of Object.entries(data)) {
-    if (!tokenName.startsWith('--dt-') && !tokenName.startsWith('--base--')) continue;
-
-    const searchableText = buildTokenSearchText(tokenName, themeVariants);
-    if (regexArray.every(r => r.test(searchableText))) {
-      results.push({ name: tokenName, data: themeVariants });
-    }
-  }
-
-  return results.filter(r => !r.data.metadata?.deprecated);
-}
-
-function searchComponents(query, components) {
-  const normalized = query.toLowerCase().replace(/[/-]/g, ' ');
-  const words = normalized.split(/\s+/).filter(w => w.length > 0);
-  const regexArray = words.map(word => {
-    return new RegExp(word.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), 'i');
-  });
-
-  const results = [];
-  for (const component of components) {
-    const searchableText = buildComponentSearchText(component);
-    if (regexArray.every(r => r.test(searchableText))) {
-      results.push({ name: component.displayName, data: component });
-    }
-  }
-
-  return results.filter(r => !r.data.metadata?.deprecated);
-}
-
-function showHelp() {
+function showHelp(): void {
   console.log('\nExample Queries:\n');
   console.log('Utility Classes:');
   console.log('  "padding 8px"          → d-p8, d-pt8, d-pr8, d-pb8, ...');
@@ -152,7 +51,7 @@ function showHelp() {
   console.log();
 }
 
-function formatResults(results, limit = 15) {
+function formatResults(results: any[], limit: number = 15): string {
   if (results.length === 0) {
     return '  No results found';
   }
@@ -177,9 +76,9 @@ const rl = readline.createInterface({
   prompt: '\n> ',
 });
 
-let currentTool = null;
+let currentTool: string | null = null;
 
-function askForTool() {
+function askForTool(): void {
   console.log('\nSelect a search tool:');
   console.log('  1. Utility Classes');
   console.log('  2. Design Tokens');
@@ -217,7 +116,7 @@ function askForTool() {
   });
 }
 
-function handleSpecialCommand(query) {
+function handleSpecialCommand(query: string): boolean {
   if (query === 'quit' || query === 'exit' || query === 'q') {
     console.log('\nGoodbye!\n');
     rl.close();
@@ -239,7 +138,7 @@ function handleSpecialCommand(query) {
   return false;
 }
 
-function handleLineInput(query) {
+function handleLineInput(query: string): void {
   if (handleSpecialCommand(query)) {
     return;
   }
@@ -258,19 +157,26 @@ function handleLineInput(query) {
   performSearch(query);
 }
 
-function performSearch(query) {
+function performSearch(query: string): void {
   console.log(`\nSearching for: "${query}"\n`);
 
-  let results;
+  let searchResult;
   if (currentTool === 'utility') {
-    results = searchUtilityClasses(query, utilityClasses);
+    searchResult = searchUtilityClasses(query, utilityClasses as UtilityClassesData);
   } else if (currentTool === 'tokens') {
-    results = searchTokens(query, tokens);
+    searchResult = searchTokens(query, tokens as TokensData);
   } else if (currentTool === 'components') {
-    results = searchComponents(query, components);
+    searchResult = searchComponents(query, components as Component[]);
   }
 
-  console.log(formatResults(results));
+  if (searchResult) {
+    console.log(formatResults(searchResult.results));
+    if (searchResult.notes && searchResult.notes.length > 0) {
+      console.log('\nNotes:');
+      searchResult.notes.forEach(note => console.log(`  - ${note}`));
+    }
+  }
+
   console.log('\nTip: Type "switch" to change search tool, "help" for examples, "quit" to exit');
   rl.prompt();
 }
