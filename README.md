@@ -46,11 +46,13 @@ import "@dialpad/dialtone/css-default-theme";
 Import Dialtone CSS without design tokens. Tokens are applied separately via the theming system.
 
 **CSS:**
+
 ```css
 @import "@dialpad/dialtone/css";
 ```
 
 **Javascript:**
+
 ```js
 import "@dialpad/dialtone/css";
 ```
@@ -64,6 +66,7 @@ The layered system provides instant mode switching, 51 themes, and 95.7% smaller
 ###### How it works
 
 Three base layers load once (862KB):
+
 1. **Core tokens** (50KB) - typography, spacing, sizing, components
 2. **Base colors** (185KB) - fundamental color palette with HSLA
 3. **DP colors** (627KB) - Dialpad brand (light + dark modes)
@@ -130,20 +133,25 @@ setContrast(null);
 ###### Available themes (51 total)
 
 **Base & Partner:**
+
 - `dp` - Dialpad (base, always loaded)
 - `tmo` - T-Mobile
 
 **Accessibility:**
+
 - `prota-deuter` - Protanopia/Deuteranopia
 - `trita` - Tritanopia
 
 **Named themes:**
+
 - `aegean`, `botany`, `buttercream`, `high-desert`, `melon`, `plum`, `sunflower`, `verdant-haze`
 
 **Experimental:**
+
 - `101` through `137` (37 numbered themes)
 
 **Contrast levels:**
+
 - `default`, `high`
 
 ###### HTML structure
@@ -198,7 +206,7 @@ Load CSS files directly and control via HTML attributes:
 @import "@dialpad/dialtone-tokens/layered/tokens-base-colors.css";
 @import "@dialpad/dialtone-tokens/layered/tokens-dp-colors.css";
 
-/* Theme override (optional, only if not using dp) */
+/* Theme override (optional, only if explicitly using tmo theme) */
 @import "@dialpad/dialtone-tokens/layered/themes/tokens-tmo-colors.css";
 
 /* High contrast (optional) */
@@ -208,25 +216,58 @@ Load CSS files directly and control via HTML attributes:
 Then set attributes in HTML:
 
 ```html
-<html data-dt-mode="light" data-dt-brand="tmo" data-dt-contrast="default">
+<html data-dt-mode="light|dark" data-dt-brand="dp|tmo" data-dt-contrast="default|high">
 ```
 
 ###### Shadow DOM support
 
-Pass root element as second parameter:
+When using Dialtone in Web Components with Shadow DOM, you must pass the host element so styles inject into the shadow root instead of the document.
+
+⚠️ **Common mistake:** Forgetting to pass `rootNode` in Web Components causes styles to inject into `document.documentElement` instead of your Shadow DOM, making them invisible inside the component.
 
 ```js
+// ❌ WRONG - Styles will NOT appear in Shadow DOM!
+class MyWidget extends HTMLElement {
+  constructor() {
+    super();
+    this.attachShadow({ mode: 'open' });
+    initDialtoneTheme(Core, Dp, 'light'); // BUG: Missing rootNode parameter!
+  }
+}
+```
+
+```js
+// ✅ CORRECT - Pass the host element
 import { initDialtoneTheme } from '@dialpad/dialtone/themes/config';
 
-const shadowHost = document.querySelector('#my-shadow-root-host');
-initDialtoneTheme(coreTheme, brandTheme, 'light', shadowHost);
+class MyWidget extends HTMLElement {
+  constructor() {
+    super();
+    this.attachShadow({ mode: 'open' });
+
+    // Pass 'this' as the host element - function accesses shadowRoot internally
+    initDialtoneTheme(Core, Dp, 'light', this);
+  }
+}
+```
+
+**Why pass the host element?** The theme functions automatically access `.shadowRoot` internally. Passing the host element is the correct approach - do not pass `shadowRoot` directly.
+
+**For non-Shadow DOM usage:** The `rootNode` parameter is optional and defaults to `document.documentElement`:
+
+```js
+// These are equivalent for standard (non-Shadow DOM) usage:
+initDialtoneTheme(Core, Dp, 'light');
+initDialtoneTheme(Core, Dp, 'light', document.documentElement);
 ```
 
 ---
 
 ##### Legacy Theming System (Backward Compatible)
 
-The original system remains supported for existing projects.
+The original theming system remains fully supported for existing projects. New projects should use the layered system above for better performance and smaller bundle sizes.
+
+**Note:** Both systems support Shadow DOM identically - pass the host element as the second parameter.
 
 ```js
 import { setTheme } from '@dialpad/dialtone/themes/config';
@@ -243,6 +284,7 @@ setTheme(DpLight, document.querySelector('#my-shadow-root-host'));
 ```
 
 **Legacy themes available:**
+
 - `DpLight`, `DpDark`, `TmoLight`, `TmoDark`
 
 **Note:** Legacy system loads complete token files (~1256KB per theme). Consider migrating to layered system for better performance.
