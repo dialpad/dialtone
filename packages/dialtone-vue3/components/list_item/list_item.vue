@@ -194,6 +194,10 @@ export default {
 
     listItemListeners () {
       return {
+        click: event => {
+          this.onClick(event);
+        },
+
         keydown: event => {
           if (['enter', 'space'].includes(event.code.toLowerCase())) {
             this.onClick(event);
