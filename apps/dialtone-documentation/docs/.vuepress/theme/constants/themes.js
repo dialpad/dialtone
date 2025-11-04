@@ -5,17 +5,11 @@
  * This file defines the complete list of available themes, their display names, and
  * organizational structure for UI presentation.
  *
+ * Note: Theme management now uses shared functions from @dialpad/dialtone-tokens/themes/config
+ * which handle style tag IDs internally ('dialtone-css-brand-colors', 'dialtone-css-contrast').
+ *
  * @module theme/constants/themes
  */
-
-/**
- * DOM element IDs used for dynamic style tag injection
- * @constant {Object} STYLE_TAG_IDS
- */
-export const STYLE_TAG_IDS = {
-  BRAND_OVERRIDE: 'dialtone-css-brand-override',
-  CONTRAST: 'dialtone-css-contrast',
-};
 
 /**
  * Color assistive themes for accessibility
