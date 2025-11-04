@@ -13,7 +13,8 @@
     "build": "rollup -c",
     "start": "node build/index.js",
     "dev": "tsx src/index.ts",
-    "test": "node test-simple.js",
+    "test": "node test-search.js",
+    "interactive": "node interactive-search.js",
     "inspect": "npx @modelcontextprotocol/inspector npm run start"
   },
   "dependencies": {

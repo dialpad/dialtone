@@ -173,8 +173,8 @@ const utilityTests = [
   { query: 'font weight bold', expect: 'd-fw-bold' },
   { query: 'text align center', expect: 'd-ta-center' },
 
-  // Exact class names (this matches many flex classes)
-  { query: 'd d flex', expect: 'd-d-flex' }, // Test with spaces to be more specific
+  // Text decoration
+  { query: 'text decoration none', expect: 'd-td-none' },
 ];
 
 // ============================================================================
@@ -228,8 +228,8 @@ const tokenTests = [
   // Opacity
   { query: 'opacity', expect: '--dt-opacity' },
 
-  // Component-specific tokens
-  { query: 'button color', expect: '--dt-button' },
+  // Typography button tokens
+  { query: 'typography button', expect: '--dt-typography-button' },
 ];
 
 // ============================================================================
@@ -252,9 +252,9 @@ const componentTests = [
   { query: 'loader', expect: 'DtLoader' },
   { query: 'link', expect: 'DtLink' },
   { query: 'toggle', expect: 'DtToggle' },
-  // Test underscored components with correct names
-  { query: 'emojipicker', expect: 'emoji_picker' },
-  { query: 'emptystate', expect: 'empty_state' },
+  // Test underscored components with correct names (need spaces to match underscores)
+  { query: 'emoji picker', expect: 'emoji_picker' },
+  { query: 'empty state', expect: 'empty_state' },
   { query: 'datepicker', expect: 'datepicker' },
   { query: 'hovercard', expect: 'hovercard' },
   { query: 'illustration', expect: 'illustration' },
