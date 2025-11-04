@@ -14,6 +14,22 @@ figma: planned
   </div>
 </code-well-header>
 
+## Skeleton vs Loader
+
+**Use Skeleton when:**
+
+- Content is expected to take more than a few hundred milliseconds to load on average
+- You want to show the approximate layout and structure of content being loaded
+- Loading complex lists, cards, or detailed content where users benefit from seeing the expected layout
+- You need to maintain visual hierarchy during loading states
+
+**Use [Loader](/components/loader.html) when:**
+
+- You need a simple, generic loading indicator
+- Loading time is short or indeterminate
+- You want to indicate that a process is running without showing layout structure
+- You need a compact loading indicator for buttons, small components, or overlays
+
 ## Usage
 
 <dialtone-usage>
