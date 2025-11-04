@@ -4,7 +4,7 @@
     class="d-mode-island"
     v-bind="$attrs"
     :data-dt-mode="computedMode"
-    :data-mode-island-inverted="isInverted ? '' : null"
+    :data-mode-island-inverted="invertedAttribute"
     :data-dt-contrast="currentContrast"
   >
     <!-- @slot Slot for main content -->
@@ -79,6 +79,10 @@ export default {
   computed: {
     isInverted () {
       return this.mode === DT_MODE_ISLAND_TYPES.INVERTED;
+    },
+
+    invertedAttribute () {
+      return this.isInverted ? '' : null;
     },
 
     computedMode () {
