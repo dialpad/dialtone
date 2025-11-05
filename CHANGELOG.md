@@ -1,3 +1,15 @@
+# [9.145.0](https://github.com/dialpad/dialtone/compare/dialtone/v9.144.0...dialtone/v9.145.0) (2025-11-05)
+
+
+### Documentation
+
+* **Skeleton, Loader:** DLT-2558 add docs to compare both components ([#950](https://github.com/dialpad/dialtone/issues/950)) ([e0c0d2b](https://github.com/dialpad/dialtone/commit/e0c0d2bfea47514ec93bc9376e8567eed8fad21e))
+
+
+### Features
+
+* **Mcp Server:** DLT-2787 implement 3-tool search architecture with smart filtering ([#951](https://github.com/dialpad/dialtone/issues/951)) ([74fe422](https://github.com/dialpad/dialtone/commit/74fe42280994bcce2c07834b6e9ccca98de8764b))
+
 # [9.144.0](https://github.com/dialpad/dialtone/compare/dialtone/v9.143.0...dialtone/v9.144.0) (2025-11-04)
 
 
