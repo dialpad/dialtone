@@ -223,6 +223,19 @@ export function setMode(mode, rootNode = document.documentElement) {
     console.warn(`Invalid mode: ${mode}. Must be 'light' or 'dark'`);
     return;
   }
+
+  // Warn if someone passed shadowRoot directly instead of the host
+  if (rootNode instanceof ShadowRoot) {
+    console.warn(
+      '[Dialtone] You passed a ShadowRoot directly to setMode(). ' +
+      'Please pass the host element instead. The function will access shadowRoot automatically.',
+    );
+  }
+
+  if (rootNode?.shadowRoot) {
+    rootNode = rootNode.shadowRoot;
+  }
+
   rootNode?.setAttribute('data-dt-mode', mode);
 }
 
