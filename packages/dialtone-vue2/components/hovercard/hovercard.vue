@@ -31,7 +31,13 @@
       />
     </template>
     <template #content>
-      <slot name="content" />
+      <div
+        @focusin="onContentFocusIn"
+        @focusout="onContentFocusOut"
+      >
+        <!-- @slot Slot for the content that is displayed in the hovercard. -->
+        <slot name="content" />
+      </div>
     </template>
     <template #headerContent>
       <slot name="headerContent" />
@@ -218,6 +224,8 @@ export default {
       observer: null,
       inTimer: null,
       outTimer: null,
+      contentFocused: false,
+      mouseOverHovercard: false,
     };
   },
 
@@ -272,6 +280,7 @@ export default {
     },
 
     onMouseEnter () {
+      this.mouseOverHovercard = true;
       if (this.open === null) {
         clearTimeout(this.outTimer);
         this.setInTimer();
@@ -279,7 +288,25 @@ export default {
     },
 
     onMouseLeave () {
+      this.mouseOverHovercard = false;
+      if (this.contentFocused) {
+        return;
+      }
       if (this.open === null) {
+        clearTimeout(this.inTimer);
+        this.setOutTimer();
+      }
+    },
+
+    onContentFocusIn () {
+      this.contentFocused = true;
+    },
+
+    onContentFocusOut () {
+      this.contentFocused = false;
+
+      // If mouse is not over the hovercard, close it
+      if (!this.mouseOverHovercard && this.open === null) {
         clearTimeout(this.inTimer);
         this.setOutTimer();
       }
