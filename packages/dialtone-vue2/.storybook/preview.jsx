@@ -9,12 +9,11 @@ import { addons } from '@storybook/preview-api';
 import { setTheme, setMode, setBrand, setContrast, initDialtoneTheme } from '@dialpad/dialtone-tokens/themes/config';
 
 // Layered theme variables (loaded async)
-let Core, Dp, Tmo, Aegean, Botany, Buttercream, HighDesert, Melon, Plum, Sunflower, VerdantHaze;
+let Dp, Tmo, Aegean, Botany, Buttercream, HighDesert, Melon, Plum, Sunflower, VerdantHaze;
 let ProtaDeuter, Trita, Theme101, Theme102, Theme103, Theme137, HighContrast;
 
 // Async load layered themes
 (async () => {
-  Core = (await import('@dialpad/dialtone-tokens/themes/core')).default;
   Dp = (await import('@dialpad/dialtone-tokens/themes/dp')).default;
   Tmo = (await import('@dialpad/dialtone-tokens/themes/tmo')).default;
   Aegean = (await import('@dialpad/dialtone-tokens/themes/aegean')).default;
@@ -34,8 +33,8 @@ let ProtaDeuter, Trita, Theme101, Theme102, Theme103, Theme137, HighContrast;
   HighContrast = (await import('@dialpad/dialtone-tokens/themes/high-contrast')).default;
 
   // Initialize layered theming once themes are loaded
-  if (Core && Dp) {
-    initDialtoneTheme(Core, Dp, 'light', document.documentElement);
+  if (Dp) {
+    initDialtoneTheme(Dp, 'light', document.documentElement);
     // Set correct mode after initialization
     setMode(currentDarkMode ? 'dark' : 'light', document.documentElement);
   }
