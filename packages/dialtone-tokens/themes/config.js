@@ -165,10 +165,7 @@ function _setStyleTag (id, content, rootNode) {
     }
   } else {
     const existingTag = rootNode.querySelector('#' + id);
-    // Only update if content changed (performance optimization)
-    if (existingTag.innerHTML !== content) {
-      existingTag.innerHTML = content;
-    }
+    existingTag.innerHTML = content;
   }
 }
 
@@ -263,6 +260,33 @@ export function setMode(mode, rootNode = document.documentElement) {
  * }
  */
 export function setBrand(brandTheme, rootNode = document.documentElement) {
+  // Validation: brandTheme must be an object
+  if (!brandTheme || typeof brandTheme !== 'object') {
+    throw new TypeError(
+      '[Dialtone] setBrand: brandTheme must be an object. ' +
+      'Import a brand theme like: import Dp from \'@dialpad/dialtone-tokens/themes/dp\';',
+    );
+  }
+
+  // Validation: brandTheme.brand must exist and be properly structured
+  if (!brandTheme.brand || typeof brandTheme.brand !== 'object') {
+    throw new TypeError(
+      '[Dialtone] setBrand: brandTheme.brand must be an object with {name, css} properties.',
+    );
+  }
+
+  if (typeof brandTheme.brand.name !== 'string' || !brandTheme.brand.name) {
+    throw new TypeError(
+      '[Dialtone] setBrand: brandTheme.brand.name must be a non-empty string.',
+    );
+  }
+
+  if (typeof brandTheme.brand.css !== 'string') {
+    throw new TypeError(
+      '[Dialtone] setBrand: brandTheme.brand.css must be a string containing CSS.',
+    );
+  }
+
   // Warn if someone passed shadowRoot directly instead of the host
   if (rootNode instanceof ShadowRoot) {
     console.warn(
@@ -275,10 +299,8 @@ export function setBrand(brandTheme, rootNode = document.documentElement) {
     rootNode = rootNode.shadowRoot;
   }
 
-  if (brandTheme.brand) {
-    _setStyleTag('dialtone-css-brand-colors', brandTheme.brand.css, rootNode);
-    rootNode?.setAttribute('data-dt-brand', brandTheme.brand.name);
-  }
+  _setStyleTag('dialtone-css-brand-colors', brandTheme.brand.css, rootNode);
+  rootNode?.setAttribute('data-dt-brand', brandTheme.brand.name);
 }
 
 /**
@@ -430,6 +452,20 @@ export function initDialtoneTheme(brandTheme, mode = 'light', rootNode = documen
     rootNode = rootNode.shadowRoot;
   }
 
+  // CRITICAL: Detect embedded app trying to use document.documentElement
+  // This check MUST run on first init, before idempotency check
+  if (rootNode === document.documentElement) {
+    const hasThemeStyles = document.querySelector('#dialtone-css-core') !== null;
+    if (hasThemeStyles) {
+      throw new Error(
+        '[Dialtone] Cannot initialize theme on document.documentElement because theme styles already exist. ' +
+        'You are likely in an embedded app/micro-frontend. ' +
+        'You MUST pass your own container element as the rootNode parameter. ' +
+        'Example: initDialtoneTheme(brandTheme, mode, myAppContainerElement)',
+      );
+    }
+  }
+
   // Check for duplicate initialization (idempotency protection with soft warnings)
   const existing = initializationState.get(rootNode);
   if (existing) {
@@ -439,6 +475,7 @@ export function initDialtoneTheme(brandTheme, mode = 'light', rootNode = documen
         'Re-applying the same theme may be unnecessary. ' +
         'If you need to switch themes dynamically, use setBrand() or setMode() instead of calling initDialtoneTheme() again.',
       );
+      return;
     } else {
       console.warn(
         `[Dialtone] Theme already initialized for this rootNode. ` +
@@ -446,18 +483,7 @@ export function initDialtoneTheme(brandTheme, mode = 'light', rootNode = documen
         `New: brand='${brandTheme.brand.name}', mode='${mode}'. ` +
         'Re-initializing with different parameters. Consider using setBrand()/setMode() for dynamic switching.',
       );
-    }
-  }
-
-  // Warn if this looks like an embedded app using the wrong rootNode
-  if (rootNode === document.documentElement && existing) {
-    const hasThemeStyles = document.querySelector('#dialtone-css-core') !== null;
-    if (hasThemeStyles) {
-      console.warn(
-        '[Dialtone] Multiple calls to initDialtoneTheme() detected on document.documentElement. ' +
-        'If you are in an embedded app/micro-frontend, you may need to pass your own container element instead. ' +
-        'Example: initDialtoneTheme(core, brand, mode, myAppContainerElement)',
-      );
+      return;
     }
   }
 
