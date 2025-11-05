@@ -333,25 +333,27 @@ Vue 3 app with theme switching:
 
 ```vue
 <template>
-  <div>
-    <button @click="toggleMode">
+  <dt-stack gap="400">
+    <dt-button @click="toggleMode">
       Switch to {{ isDark ? 'Light' : 'Dark' }} Mode
-    </button>
-    <select @click="changeTheme">
-      <option value="dp">Dialpad</option>
-      <option value="melon">Melon</option>
-      <option value="tmo">T-Mobile</option>
-    </select>
-    <label>
-      <input type="checkbox" v-model="highContrast" @change="toggleContrast">
-      High Contrast
-    </label>
-  </div>
+    </dt-button>
+    <dt-select-menu
+      label="Brand Theme"
+      :options="themeOptions"
+      @change="changeTheme"
+    />
+    <dt-checkbox
+      v-model="highContrast"
+      label="High Contrast"
+      @input="toggleContrast"
+    />
+  </dt-stack>
 </template>
 
 <script setup>
 import { ref, onMounted } from 'vue';
-import { initDialtoneTheme, setMode, setBrand, setContrast } from '@dialpad/dialtone/themes/config';
+import { DtButton, DtSelectMenu, DtCheckbox, DtStack } from '@dialpad/dialtone-vue';
+import { initDialtoneTheme, setMode, setBrand, setContrast } from '@dialpad/dialtone-tokens/themes/config';
 import Dp from '@dialpad/dialtone-tokens/themes/dp';
 import Melon from '@dialpad/dialtone-tokens/themes/melon';
 import Tmo from '@dialpad/dialtone-tokens/themes/tmo';
@@ -360,6 +362,11 @@ import HighContrast from '@dialpad/dialtone-tokens/themes/high-contrast';
 const isDark = ref(false);
 const highContrast = ref(false);
 const themes = { dp: Dp, melon: Melon, tmo: Tmo };
+const themeOptions = [
+  { value: 'dp', label: 'Dialpad' },
+  { value: 'melon', label: 'Melon' },
+  { value: 'tmo', label: 'T-Mobile' }
+];
 
 onMounted(() => {
   initDialtoneTheme(Dp, 'light');
@@ -370,9 +377,8 @@ function toggleMode() {
   setMode(isDark.value ? 'dark' : 'light');
 }
 
-function changeTheme(event) {
-  const themeName = event.target.value;
-  setBrand(themes[themeName]);
+function changeTheme(value) {
+  setBrand(themes[value]);
 }
 
 function toggleContrast() {
