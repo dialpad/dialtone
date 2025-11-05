@@ -1,3 +1,10 @@
+# [1.1.0](https://github.com/dialpad/dialtone/compare/dialtone-mcp-server/v1.0.2...dialtone-mcp-server/v1.1.0) (2025-11-05)
+
+
+### Features
+
+* **Mcp Server:** DLT-2787 implement 3-tool search architecture with smart filtering ([#951](https://github.com/dialpad/dialtone/issues/951)) ([74fe422](https://github.com/dialpad/dialtone/commit/74fe42280994bcce2c07834b6e9ccca98de8764b))
+
 ## [1.0.2](https://github.com/dialpad/dialtone/compare/dialtone-mcp-server/v1.0.1...dialtone-mcp-server/v1.0.2) (2025-10-17)
 
 
