@@ -1,6 +1,7 @@
 import { mount } from '@vue/test-utils';
 import { DtPopover } from '@/components/popover';
 import SrOnlyCloseButtonComponent from '@/common/sr_only_close_button.vue';
+import { nextTick } from 'vue';
 
 const MOCK_DEFAULT_SLOT_MESSAGE = 'Message';
 const MOCK_HEADER_CONTENT = 'Popover Title';
@@ -302,6 +303,60 @@ describe('DtPopover Tests', () => {
       it('should have correct aria attributes on the content window', async () => {
         expect(popoverWindow.attributes('aria-hidden')).toBe('true');
       });
+    });
+  });
+
+  describe('When anchor slot content changes', () => {
+    it('should attach the tippy instance to the new DOM node', async () => {
+      const component = {
+        template: `
+          <dt-popover ref="popover" :open="open">
+            <template #anchor>
+              <div v-if="showAlternateAnchor" class="testanchor">Anchor 1</div>
+              <div v-else class="testanchor">Anchor 2</div>
+            </template>
+            <template #content>
+              <div class="content">Hello</div>
+            </template>
+          </dt-popover>
+        `,
+        components: {
+          DtPopover,
+        },
+        props: ['showAlternateAnchor', 'open'],
+      };
+      const wrapper = mount(component, {
+        props: { showAlternateAnchor: false },
+        global: {
+          stubs: {
+            transition: false,
+          },
+        },
+        attachTo: document.body,
+      })
+
+      let popoverWindow = wrapper.findComponent({ ref: 'popover' }).findComponent({ ref: 'content' });
+      expect(popoverWindow.isVisible()).toBe(false);
+      wrapper.setProps({ open: true});
+      await nextTick();
+      expect(popoverWindow.isVisible()).toBe(true);
+      wrapper.setProps({ open: false});
+      await nextTick();
+      expect(popoverWindow.isVisible()).toBe(false);
+
+      wrapper.setProps({ showAlternateAnchor: true});
+      await nextTick();
+      popoverWindow = wrapper.findComponent({ ref: 'popover' }).findComponent({ ref: 'content' });
+
+      expect(popoverWindow.isVisible()).toBe(false);
+      wrapper.setProps({ open: true});
+      await nextTick();
+      expect(popoverWindow.isVisible()).toBe(true);
+      wrapper.setProps({ open: false});
+      await nextTick();
+      expect(popoverWindow.isVisible()).toBe(false);
+
+      wrapper.unmount();
     });
   });
 });
