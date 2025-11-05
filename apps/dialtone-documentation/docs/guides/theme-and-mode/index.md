@@ -1,6 +1,6 @@
 ---
 title: Theme and Mode
-description: How to use Dialtone's theming system to customize appearance and support light/dark modes.
+description: Dialtone's system to customize appearance and support light/dark modes.
 ---
 
 ## Overview
@@ -8,11 +8,11 @@ description: How to use Dialtone's theming system to customize appearance and su
 Dialtone provides a flexible theming system that allows you to:
 
 - **Switch between light and dark modes** for user preference
-- **Apply different brand themes** (51+ available themes)
+- **Apply different brand themes**
 - **Enable high contrast mode** for accessibility
 - **Support Shadow DOM** for web components and micro-frontends
 
-The system uses a layered architecture that loads core tokens once and applies brand-specific overrides, resulting in better performance and smaller bundle sizes compared to legacy approaches.
+The system uses a layered architecture that loads core tokens once and applies theme-specific overrides, resulting in better performance and a tighter bundle size compared to legacy approaches.
 
 ## Quick Start
 

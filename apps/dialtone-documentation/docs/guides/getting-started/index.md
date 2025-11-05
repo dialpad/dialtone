@@ -25,7 +25,7 @@ If you only need access to Dialtone's variables and customizations to build a fi
 
 ## Theme and Mode
 
-Dialtone includes a powerful theming system for light/dark modes, brand customization, and accessibility. To add theming support to your project:
+Dialtone includes a powerful theming system for light/dark modes, multiple themes, and accessibility. To add theming support to your project:
 
 ```bash
 npm install @dialpad/dialtone @dialpad/dialtone-tokens
@@ -38,7 +38,7 @@ import Dp from '@dialpad/dialtone-tokens/themes/dp';
 initDialtoneTheme(Dp, 'light');
 ```
 
-This gives you access to 51+ themes, automatic light/dark mode switching, high contrast support, and Shadow DOM compatibility for web components.
+This gives you access to multiple themes, light/dark mode switching, high contrast support, and Shadow DOM compatibility for web components.
 
 [Learn more about Theme and Mode →](/guides/theme-and-mode/)
 
