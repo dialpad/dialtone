@@ -63,6 +63,7 @@ import Code from '@tiptap/extension-code';
 import Document from '@tiptap/extension-document';
 import Paragraph from '@tiptap/extension-paragraph';
 import Placeholder from '@tiptap/extension-placeholder';
+import Gapcursor from '@tiptap/extension-gapcursor';
 import HardBreak from '@tiptap/extension-hard-break';
 import Bold from '@tiptap/extension-bold';
 import BulletList from '@tiptap/extension-bullet-list';
@@ -78,6 +79,10 @@ import History from '@tiptap/extension-history';
 import TextStyle from '@tiptap/extension-text-style';
 import Color from '@tiptap/extension-color';
 import FontFamily from '@tiptap/extension-font-family';
+import Table from '@tiptap/extension-table';
+import CustomTableCell from './extensions/table';
+import TableHeader from '@tiptap/extension-table-header';
+import TableRow from '@tiptap/extension-table-row';
 import Emoji from './extensions/emoji';
 import CustomLink from './extensions/custom_link';
 import ConfigurableImage from './extensions/image';
@@ -85,6 +90,8 @@ import DivParagraph from './extensions/div';
 import { MentionPlugin } from './extensions/mentions/mention';
 import { ChannelPlugin } from './extensions/channels/channel';
 import { SlashCommandPlugin } from './extensions/slash_command/slash_command';
+import { headerColumnExists, headerRowExists, getRowLengthFromTableNode, getCellGrid, getColumnLengthFromTableNode } from './utils';
+
 import {
   RICH_TEXT_EDITOR_OUTPUT_FORMATS,
   RICH_TEXT_EDITOR_AUTOFOCUS_TYPES,
@@ -494,7 +501,7 @@ export default {
     // eslint-disable-next-line complexity
     extensions () {
       // These are the default extensions needed just for plain text.
-      const extensions = [Document, Text, History, HardBreak];
+      const extensions = [Document, Text, History, HardBreak, Table, TableRow, TableHeader, CustomTableCell, Gapcursor];
       extensions.push(this.useDivTags ? DivParagraph : Paragraph);
 
       if (this.allowBlockquote) {
@@ -738,6 +745,20 @@ export default {
               return true; // Prevent the default paste behavior
             }
 
+            const pastedContent = event.clipboardData.getData('text/html');
+            console.log(pastedContent);
+            const htmlNode = document.createElement('div');
+            htmlNode.innerHTML = pastedContent;
+            const tableNodes = htmlNode.querySelectorAll('table');
+            if (tableNodes) {
+              console.log(tableNodes);
+              tableNodes.forEach((tableNode) => {
+                this.createTable(tableNode);
+              });
+              // this.editor.chain().focus().insertContent(tableNodes[0].outerHTML).run();
+              return true; // Prevent the default paste behavior
+            }
+
             return false; // Allow the default paste behavior
           },
 
@@ -936,6 +957,36 @@ export default {
 
     focusEditor () {
       this.editor.commands.focus();
+    },
+
+    createTable (tableHTMLNode) {
+      /* // header row exists
+      const headerRow = headerRowExists(tableHTMLNode);
+      // header column exists
+      const headerColumn = headerColumnExists(tableHTMLNode);
+      // get column lenght
+      const columnLength = getColumnLengthFromTableNode(tableHTMLNode);
+      // row length
+      const rowLength = getRowLengthFromTableNode(tableHTMLNode);
+      */
+      // create table
+      const tableGrid = getCellGrid(tableHTMLNode);
+      var tbl = document.createElement('table');
+      var tblBody = document.createElement('tbody');
+      for (let i = 0; i < tableGrid.length; i++) {
+        var row = document.createElement('tr');
+        for (let j = 0; j < tableGrid[i].length; j++) {
+          // let cell = document.createElement('td');
+          // cell.textContent = tableGrid[i][j].text;
+          console.log(tableGrid[i][j]);
+          row.appendChild(tableGrid[i][j].cell);
+        }
+        tblBody.appendChild(row);
+      }
+      tbl.innerHTML = tblBody.outerHTML;
+      this.editor.chain().focus().insertContent(tbl.outerHTML).run();
+      //this.editor.chain().focus().insertTable({ rows: rowLength, cols: columnLength, withHeaderRow: headerRow, withHeaderColumn: headerColumn }).run();
+      // enter cell (x, y)
     },
   },
 };
