@@ -19,7 +19,7 @@ The system uses a layered architecture that loads core tokens once and applies t
 Install the required packages:
 
 ```shell
-npm install @dialpad/dialtone @dialpad/dialtone-tokens
+npm install @dialpad/dialtone
 ```
 
 Initialize theming in your main.js or App.vue:
