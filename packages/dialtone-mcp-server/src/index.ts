@@ -1,12 +1,33 @@
 import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
 import { StdioServerTransport } from "@modelcontextprotocol/sdk/server/stdio.js";
+import { CallToolRequestSchema, ListToolsRequestSchema } from "@modelcontextprotocol/sdk/types.js";
 
-import utilityClasses from '@dialpad/dialtone-css/lib/dist/dialtone-docs.json';
-import tokens from '@dialpad/dialtone-css/lib/dist/tokens-docs.json';
-import components from '@dialpad/dialtone-vue/component-documentation.json';
-import clientRules from '../client-rules.json';
+import { utilityClasses, tokens, components, clientRules } from './data.js';
+import { searchUtilityClasses, formatResults, buildCompoundPropertiesSet } from './tools/utility-classes.js';
+import { searchTokens, formatTokenResults } from './tools/tokens.js';
+import { searchComponents, formatComponentResults } from './tools/components.js';
+
+import type {
+  ValueObject,
+  Metadata,
+  ClassData,
+  UtilityClassesData,
+  ThemeData,
+  TokenData,
+  TokensData,
+  ComponentProp,
+  ComponentEvent,
+  ComponentSlot,
+  Component,
+  SearchResult
+} from './types.js';
+
 
 async function main() {
+  // Build compound properties set from utility classes data (done once at startup)
+  const compoundProperties = buildCompoundPropertiesSet(utilityClasses);
+  console.error(`[INIT] Built compound properties set: ${compoundProperties.size} properties`);
+
   // Create server instance
   const server = new McpServer({
     name: "dialtone-mcp-server",
@@ -75,27 +96,141 @@ async function main() {
     };
   });
 
-  // Add a search tool
-  // This is a placeholder tool, there was an error if not present
-  server.tool("search_dialtone", {
-    description: "Search Dialtone design system documentation",
-    inputSchema: {
-      type: "object",
-      properties: {
-        query: {
-          type: "string",
-          description: "Search query for Dialtone components, utility classes, or design tokens"
-        }
-      },
-      required: ["query"]
-    }
-  }, async (args) => {
+  // Handle tool discovery - tell clients what tools are available
+  server.server.setRequestHandler(ListToolsRequestSchema, async () => {
     return {
-      content: [{
-        type: "text",
-        text: `Search functionality not yet implemented for query: ${args.query}`
-      }]
+      tools: [
+        {
+          name: "search_utility_classes",
+          description: "Search for CSS utility classes to style HTML elements. Use when query mentions CSS properties (padding, margin, display, flex, width, border, color) or CSS values (8px, 100%, center, auto, bold). Returns classes like d-p8, d-d-flex, d-w100p, d-mt-auto.",
+          inputSchema: {
+            type: "object",
+            properties: {
+              query: {
+                type: "string",
+                description: "CSS property and/or value (e.g., 'padding 8px', 'display flex', 'width 100%', 'margin top auto')"
+              },
+              limit: {
+                type: "number",
+                description: "Maximum number of results to return (1-50, default 15)",
+                default: 15,
+                minimum: 1,
+                maximum: 50
+              }
+            },
+            required: ["query"]
+          }
+        },
+        {
+          name: "search_tokens",
+          description: "Search for design tokens (CSS variables) from Dialtone's design system. Use when query mentions token categories (color, space, font, size, shadow) or semantic names (primary, success, critical, foreground, background). Returns tokens like --dt-color-foreground-primary, --dt-space-400.",
+          inputSchema: {
+            type: "object",
+            properties: {
+              query: {
+                type: "string",
+                description: "Token category, name, or value (e.g., 'color primary', 'space 400', 'font family', '#1C1C1C')"
+              },
+              limit: {
+                type: "number",
+                description: "Maximum number of results to return (1-50, default 15)",
+                default: 15,
+                minimum: 1,
+                maximum: 50
+              }
+            },
+            required: ["query"]
+          }
+        },
+        {
+          name: "search_components",
+          description: "Search for Vue components from Dialtone's component library. Use when query mentions UI elements or component names (button, modal, input, dropdown, checkbox, avatar, badge, card, tooltip). Returns components like DtButton, DtModal with props and usage info.",
+          inputSchema: {
+            type: "object",
+            properties: {
+              query: {
+                type: "string",
+                description: "Component name or UI element (e.g., 'button', 'modal', 'checkbox', 'DtDropdown')"
+              },
+              limit: {
+                type: "number",
+                description: "Maximum number of results to return (1-30, default 10)",
+                default: 10,
+                minimum: 1,
+                maximum: 30
+              }
+            },
+            required: ["query"]
+          }
+        }
+      ]
     };
+  });
+
+  // Handle tool execution - route to correct search function
+  server.server.setRequestHandler(CallToolRequestSchema, async (request) => {
+    console.error('[MCP] Tool call received:', request.params.name);
+
+    const toolName = request.params.name;
+    const args = request.params.arguments || {};
+    const query = args.query;
+    const limit = args.limit || 15;
+
+    // Validate query
+    if (!query || typeof query !== 'string') {
+      return {
+        content: [{ type: "text", text: "Error: 'query' parameter is required and must be a string" }],
+        isError: true
+      };
+    }
+
+    try {
+      let searchResult;
+      let formatterFunction;
+
+      // Route to correct search function
+      if (toolName === "search_utility_classes") {
+        searchResult = searchUtilityClasses(query, utilityClasses);
+        formatterFunction = formatResults;
+      } else if (toolName === "search_tokens") {
+        searchResult = searchTokens(query, tokens as TokensData);
+        formatterFunction = formatTokenResults;
+      } else if (toolName === "search_components") {
+        searchResult = searchComponents(query, components);
+        formatterFunction = formatComponentResults;
+      } else {
+        throw new Error(`Unknown tool: ${toolName}`);
+      }
+
+      // Apply limit
+      const limitedResults = searchResult.results.slice(0, Number(limit));
+
+      console.error(`[${toolName}] Found ${searchResult.results.length} results, limited to ${limitedResults.length}`);
+
+      // Format results
+      let formatted = formatterFunction(limitedResults, query);
+
+      // Add notes if any
+      if (searchResult.notes.length > 0) {
+        formatted += `\n\n**Notes:**\n${searchResult.notes.map(n => `- ${n}`).join('\n')}`;
+      }
+
+      return {
+        content: [{
+          type: "text",
+          text: formatted
+        }]
+      };
+    } catch (error) {
+      console.error(`[${toolName}] Error:`, error);
+      return {
+        content: [{
+          type: "text",
+          text: `Error: ${error instanceof Error ? error.message : String(error)}`
+        }],
+        isError: true
+      };
+    }
   });
 
   // Start the server
