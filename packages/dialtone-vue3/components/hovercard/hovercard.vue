@@ -33,8 +33,13 @@
       />
     </template>
     <template #content>
-      <!-- @slot Slot for the content that is displayed in the hovercard. -->
-      <slot name="content" />
+      <div
+        @focusin="onContentFocusIn"
+        @focusout="onContentFocusOut"
+      >
+        <!-- @slot Slot for the content that is displayed in the hovercard. -->
+        <slot name="content" />
+      </div>
     </template>
     <template #headerContent>
       <!-- @slot Slot for hovercard header content -->
@@ -211,6 +216,8 @@ defineEmits([
 ]);
 
 const hovercardOpen = ref(props.open);
+const contentFocused = ref(false);
+const mouseOverHovercard = ref(false);
 const inTimer = ref(null);
 const outTimer = ref(null);
 const anchorEl = ref(null);
@@ -258,6 +265,7 @@ function setOutTimer () {
 }
 
 function onMouseEnter () {
+  mouseOverHovercard.value = true;
   if (props.open === null) {
     clearTimeout(outTimer.value);
     setInTimer();
@@ -265,7 +273,25 @@ function onMouseEnter () {
 }
 
 function onMouseLeave () {
+  mouseOverHovercard.value = false;
+  if (contentFocused.value) {
+    return;
+  }
   if (props.open === null) {
+    clearTimeout(inTimer.value);
+    setOutTimer();
+  }
+}
+
+function onContentFocusIn () {
+  contentFocused.value = true;
+}
+
+function onContentFocusOut () {
+  contentFocused.value = false;
+
+  // If mouse is not over the hovercard, close it
+  if (!mouseOverHovercard.value && props.open === null) {
     clearTimeout(inTimer.value);
     setOutTimer();
   }

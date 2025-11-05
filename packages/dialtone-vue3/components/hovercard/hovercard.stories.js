@@ -2,6 +2,7 @@ import DtHovercard from './hovercard.vue';
 
 import DtHovercardDefaultTemplate from './hovercard_default.story.vue';
 import DtHovercardManyTemplate from './hovercard_many.story.vue';
+import DtHovercardWithInputTemplate from './hovercard_with_input.story.vue';
 import { createTemplateFromVueFile } from '@/common/storybook_utils';
 import { action } from '@storybook/addon-actions';
 import {
@@ -190,6 +191,23 @@ export const Many = {
   render: ManyTemplate,
   decorators: [() => ({
     template: `<div class="d-wmx464"><story />
+    </div>`,
+  })],
+  args: { ...Default.args, offset: [0, 5] },
+};
+
+const InputTemplate = (args, { argTypes }) => createTemplateFromVueFile(
+  args,
+  argTypes,
+  DtHovercardWithInputTemplate,
+);
+export const WithInput = {
+  render: InputTemplate,
+  decorators: [() => ({
+    template: `<div class="d-d-flex d-jc-center d-ai-center d-h464">
+      <div class="d-w164">
+        <story />
+      </div>
     </div>`,
   })],
   args: { ...Default.args, offset: [0, 5] },
