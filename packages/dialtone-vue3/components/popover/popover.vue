@@ -562,6 +562,7 @@ export default {
       POPOVER_PADDING_CLASSES,
       POPOVER_HEADER_FOOTER_PADDING_CLASSES,
       intersectionObserver: null,
+      mutationObserver: null,
       isOutsideViewport: false,
       isOpen: false,
       toAppear: false,
@@ -682,16 +683,11 @@ export default {
   mounted () {
     warnIfUnmounted(returnFirstEl(this.$el), this.$options.name);
 
-    const externalAnchorEl = this.externalAnchor
-      ? this.$refs.anchor.getRootNode().querySelector(`#${this.externalAnchor}`)
-      : null;
-    this.anchorEl = externalAnchorEl ?? this.$refs.anchor.children[0];
     this.popoverContentEl = returnFirstEl(this.$refs.content?.$el);
+    this.updateAnchorEl();
 
-    if (this.isOpen) {
-      this.initTippyInstance();
-      this.tip?.show();
-    }
+    this.mutationObserver = new MutationObserver(this.updateAnchorEl);
+    this.mutationObserver.observe(this.$refs.anchor, {childList: true});
 
     // rootMargin here must be greater than the margin of the height we are setting in calculatedMaxHeight which
     // currently is var(--dt-space-300) (4px). If not the intersectionObserver will continually trigger in an infinite
@@ -704,6 +700,7 @@ export default {
   beforeUnmount () {
     this.tip?.destroy();
     this.intersectionObserver?.disconnect();
+    this.mutationObserver?.disconnect();
     this.removeReferences();
     this.removeEventListeners();
   },
@@ -718,6 +715,26 @@ export default {
       if (!dialog) return;
       const isOut = isOutOfViewPort(dialog);
       this.isOutsideViewport = isOut.bottom || isOut.top;
+    },
+
+    updateAnchorEl () {
+      const externalAnchorEl = this.externalAnchor
+        ? this.$refs.anchor.getRootNode().querySelector(`#${this.externalAnchor}`)
+        : null;
+      this.anchorEl = externalAnchorEl ?? this.$refs.anchor.children[0];
+
+      this.tip?.destroy();
+      delete this.tip;
+
+      if (!this.anchorEl) {
+        console.warn('No anchor found for popover');
+        return;
+      }
+
+      if (this.isOpen) {
+        this.initTippyInstance();
+        this.tip?.show();
+      }
     },
 
     popperOptions () {
@@ -1014,6 +1031,8 @@ export default {
           internalAppendTo = this.appendTo;
           break;
       }
+
+      this.tip?.destroy();
 
       this.tip = createTippyPopover(this.anchorEl, {
         popperOptions: this.popperOptions(),
