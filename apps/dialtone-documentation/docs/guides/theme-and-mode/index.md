@@ -184,20 +184,22 @@ You can create sections with different modes using the [Mode Island component](/
 - Code examples showing both modes
 - Mixed-mode UI sections
 
-### Multiple Root Nodes (Micro-frontends)
+### Micro-frontends (Separate Bundles)
 
-The theme system supports multiple independent root nodes using per-rootNode tracking:
+Each micro-frontend has its own JavaScript bundle with separate config.js instance:
 
 ```js
-// Parent app
-initDialtoneTheme(Dp, 'light', document.documentElement);
+// Parent app (own bundle)
+// Manages document.documentElement
+initDialtoneTheme(Dp, 'light');
 
-// Embedded micro-frontend (different theme/mode)
-const microFrontendContainer = document.querySelector('#micro-frontend');
-initDialtoneTheme(Melon, 'dark', microFrontendContainer);
+// Embedded micro-frontend (separate bundle, separate config.js instance)
+// Manages its own container
+const myContainer = document.querySelector('#my-app-container');
+initDialtoneTheme(Dp, 'dark', myContainer);
 ```
 
-Each root node maintains independent theme state without conflicts.
+Each app bundle manages exactly ONE rootNode. State is isolated by bundle boundaries, not by tracking within a single instance.
 
 ## Migrating from Legacy System
 
@@ -296,7 +298,7 @@ initDialtoneTheme(Dp, 'dark'); // Don't re-init!
 ```js
 // In micro-frontend
 const myContainer = document.querySelector('#my-app');
-initDialtoneTheme(Melon, 'dark', myContainer);
+initDialtoneTheme(Dp, 'dark', myContainer);
 ```
 
 **Why:** Default parameter is `document.documentElement`, which affects the entire page.
@@ -355,7 +357,7 @@ import { ref, onMounted } from 'vue';
 import { DtButton, DtSelectMenu, DtCheckbox, DtStack } from '@dialpad/dialtone-vue';
 import { initDialtoneTheme, setMode, setBrand, setContrast } from '@dialpad/dialtone-tokens/themes/config';
 import Dp from '@dialpad/dialtone-tokens/themes/dp';
-import Melon from '@dialpad/dialtone-tokens/themes/melon';
+import Melon from '@dialpad/dialtone-tokens/themes/melon'; // example theme
 import Tmo from '@dialpad/dialtone-tokens/themes/tmo';
 import HighContrast from '@dialpad/dialtone-tokens/themes/high-contrast';
 

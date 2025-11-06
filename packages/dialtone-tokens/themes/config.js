@@ -1,13 +1,15 @@
 /* eslint-disable complexity */
 import Core from '@/themes/core.js';
 
-// Track if core tokens are loaded per rootNode (for layered system)
-// Using WeakMap prevents memory leaks and allows per-rootNode tracking
-const coreTokensLoadedByRoot = new WeakMap();
+// Track if core tokens are loaded (per JavaScript instance)
+// Note: In micro-frontend architecture, each app has separate bundle with its own
+// config.js instance, so this boolean only tracks state within a single app.
+let coreTokensLoaded = false;
 
-// Track initialization state per rootNode for idempotency protection
-// Stores: { brand: string, mode: string, contrast: string }
-const initializationState = new WeakMap();
+// Track initialization state for idempotency protection
+// Stores: { brand: string, mode: string, contrast: string } or null
+// Note: Only one rootNode per instance (per Brad's architecture)
+let initializationState = null;
 
 /**
  * @typedef {'light'|'dark'} Mode
@@ -125,10 +127,10 @@ function _setThemeLayered(theme, rootNode = document.documentElement) {
     rootNode = rootNode.shadowRoot;
   }
 
-  // Load core tokens only once per rootNode
-  if (theme.core && !coreTokensLoadedByRoot.get(rootNode)) {
+  // Load core tokens only once per JavaScript instance
+  if (theme.core && !coreTokensLoaded) {
     _setStyleTag('dialtone-css-core', theme.core, rootNode);
-    coreTokensLoadedByRoot.set(rootNode, true);
+    coreTokensLoaded = true;
   }
 
   // Load base colors only once
@@ -467,18 +469,18 @@ export function initDialtoneTheme(brandTheme, mode = 'light', rootNode = documen
   }
 
   // Check for duplicate initialization (idempotency protection with soft warnings)
-  const existing = initializationState.get(rootNode);
+  const existing = initializationState;
   if (existing) {
     if (existing.brand === brandTheme.brand.name && existing.mode === mode) {
       console.warn(
-        `[Dialtone] Theme already initialized for this rootNode with brand '${brandTheme.brand.name}' and mode '${mode}'. ` +
+        `[Dialtone] Theme already initialized with brand '${brandTheme.brand.name}' and mode '${mode}'. ` +
         'Re-applying the same theme may be unnecessary. ' +
         'If you need to switch themes dynamically, use setBrand() or setMode() instead of calling initDialtoneTheme() again.',
       );
       return;
     } else {
       console.warn(
-        `[Dialtone] Theme already initialized for this rootNode. ` +
+        `[Dialtone] Theme already initialized. ` +
         `Previous: brand='${existing.brand}', mode='${existing.mode}'. ` +
         `New: brand='${brandTheme.brand.name}', mode='${mode}'. ` +
         'Re-initializing with different parameters. Consider using setBrand()/setMode() for dynamic switching.',
@@ -487,9 +489,9 @@ export function initDialtoneTheme(brandTheme, mode = 'light', rootNode = documen
     }
   }
 
-  // Load core tokens (once per rootNode)
+  // Load core tokens (once per JavaScript instance)
   _setStyleTag('dialtone-css-core', Core.core, rootNode);
-  coreTokensLoadedByRoot.set(rootNode, true);
+  coreTokensLoaded = true;
 
   // Load base colors (once)
   _setStyleTag('dialtone-css-base-colors', Core.baseColors, rootNode);
@@ -504,11 +506,11 @@ export function initDialtoneTheme(brandTheme, mode = 'light', rootNode = documen
   rootNode?.setAttribute('data-dt-contrast', 'default');
 
   // Track initialization state for future idempotency checks
-  initializationState.set(rootNode, {
+  initializationState = {
     brand: brandTheme.brand.name,
     mode: mode,
     contrast: 'default',
-  });
+  };
 }
 
 /**
@@ -517,6 +519,9 @@ export function initDialtoneTheme(brandTheme, mode = 'light', rootNode = documen
  * Removes all theme styles, attributes, and initialization state for the specified rootNode.
  * This allows re-initialization with a clean slate, which is particularly useful in test
  * environments or when unmounting micro-frontends.
+ *
+ * Note: In micro-frontend architectures where each app has its own bundle,
+ * this resets the state for the current JavaScript instance only.
  *
  * @param {ThemeRootNode} [rootNode=document.documentElement] - Root element to reset
  *
@@ -539,9 +544,9 @@ export function resetTheme(rootNode = document.documentElement) {
   // Access shadowRoot if present
   const actualRoot = rootNode?.shadowRoot || rootNode;
 
-  // Clear initialization state
-  initializationState.delete(actualRoot);
-  coreTokensLoadedByRoot.delete(actualRoot);
+  // Clear initialization state (only one instance per app)
+  initializationState = null;
+  coreTokensLoaded = false;
 
   // Remove all theme style tags
   _removeStyleTag('dialtone-css-core', actualRoot);
