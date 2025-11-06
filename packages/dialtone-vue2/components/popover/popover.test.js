@@ -1,7 +1,6 @@
 import { createLocalVue, mount } from '@vue/test-utils';
 import { DtPopover } from '@/components/popover';
 import SrOnlyCloseButtonComponent from '@/common/sr_only_close_button.vue';
-import { nextTick } from 'vue';
 
 const MOCK_TRANSITION_STUB = () => ({
   render: function () {
@@ -363,23 +362,18 @@ describe('DtPopover Tests', () => {
 
       let popoverWindow = wrapper.findComponent({ ref: 'popover' }).findComponent({ ref: 'content' });
       expect(popoverWindow.isVisible()).toBe(false);
-      wrapper.setProps({ open: true});
-      await nextTick();
+      await wrapper.setProps({ open: true});
       expect(popoverWindow.isVisible()).toBe(true);
-      wrapper.setProps({ open: false});
-      await nextTick();
+      await wrapper.setProps({ open: false});
       expect(popoverWindow.isVisible()).toBe(false);
 
-      wrapper.setProps({ showAlternateAnchor: true});
-      await nextTick();
+      await wrapper.setProps({ showAlternateAnchor: true});
       popoverWindow = wrapper.findComponent({ ref: 'popover' }).findComponent({ ref: 'content' });
 
       expect(popoverWindow.isVisible()).toBe(false);
-      wrapper.setProps({ open: true});
-      await nextTick();
+      await wrapper.setProps({ open: true});
       expect(popoverWindow.isVisible()).toBe(true);
-      wrapper.setProps({ open: false});
-      await nextTick();
+      await wrapper.setProps({ open: false});
       expect(popoverWindow.isVisible()).toBe(false);
 
       wrapper.destroy();
