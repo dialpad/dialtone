@@ -186,7 +186,7 @@ export const Many = {
   args: { ...Default.args, offset: [0, 5] },
 };
 
-export const WithInputDefault = {
+export const WithInput = {
   render: (argsData) => createRenderConfig(DtHovercard, DtHovercardWithInputTemplate, argsData),
   decorators: [() => ({
     template: `<div class="d-d-flex d-jc-center d-ai-center d-h464">

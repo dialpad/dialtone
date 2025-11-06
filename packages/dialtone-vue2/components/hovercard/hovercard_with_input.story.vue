@@ -120,8 +120,7 @@
   </dt-hovercard>
 </template>
 
-<script setup>
-// eslint-disable-next-line storybook/default-exports
+<script>
 import DtHovercard from './hovercard.vue';
 import DtRecipeContactRow from '@/recipes/leftbar/contact_row/contact_row.vue';
 import defaultImage from '@/common/assets/avatar2.png';
@@ -130,4 +129,32 @@ import DtIcon from '../icon/icon.vue';
 import DtButton from '../button/button.vue';
 import DtAvatar from '../avatar/avatar.vue';
 import DtInput from '../input/input.vue';
+
+export default {
+  name: 'WithInput',
+
+  components: {
+    DtHovercard,
+    DtRecipeContactRow,
+    DtStack,
+    DtIcon,
+    DtButton,
+    DtAvatar,
+    DtInput,
+  },
+
+  data () {
+    return {
+      inputValue: '',
+      defaultImage,
+    };
+  },
+
+  watch: {
+    value (val) {
+      this.inputValue = val;
+    },
+  },
+
+}
 </script>
