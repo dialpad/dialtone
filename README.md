@@ -601,3 +601,5 @@ These will generate a JSON and HTML report in the `coverage` directory.
 
 The coverage thresholds are defined in the `vitest.config.ts` file.
 When submitting a PR the CI will run the tests with coverage and fail if the coverage is below the thresholds.
+
+<!-- test -->
