@@ -445,12 +445,14 @@
         <dt-button
           v-if="switchAnchor"
           v-bind="attrs"
+          key="anchor1"
         >
           Changing anchor 1
         </dt-button>
         <dt-button
           v-else
           v-bind="attrs"
+          key="anchor2"
         >
           Changing anchor 2
         </dt-button>

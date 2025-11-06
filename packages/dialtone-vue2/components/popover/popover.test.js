@@ -341,8 +341,8 @@ describe('DtPopover Tests', () => {
         template: `
           <dt-popover ref="popover" :open="open">
             <template #anchor>
-              <div v-if="showAlternateAnchor" class="testanchor">Anchor 1</div>
-              <div v-else class="testanchor">Anchor 2</div>
+              <div v-if="showAlternateAnchor" class="testanchor" key="anchor1">Anchor 1</div>
+              <div v-else class="testanchor" key="anchor2">Anchor 2</div>
             </template>
             <template #content>
               <div class="content">Hello</div>
