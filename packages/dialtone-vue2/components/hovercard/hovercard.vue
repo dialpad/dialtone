@@ -268,23 +268,26 @@ export default {
 
   methods: {
     setInTimer () {
-      this.inTimer = setTimeout(() => {
-        this.hovercardOpen = true;
-      }, this.enterDelay);
+      if (this.open === null) {
+        clearTimeout(this.outTimer);
+        this.inTimer = setTimeout(() => {
+          this.hovercardOpen = true;
+        }, this.enterDelay);
+      }
     },
 
     setOutTimer () {
-      this.outTimer = setTimeout(() => {
-        this.hovercardOpen = false;
-      }, this.leaveDelay);
+      if (this.open === null) {
+        clearTimeout(this.inTimer);
+        this.outTimer = setTimeout(() => {
+          this.hovercardOpen = false;
+        }, this.leaveDelay);
+      }
     },
 
     onMouseEnter () {
       this.mouseOverHovercard = true;
-      if (this.open === null) {
-        clearTimeout(this.outTimer);
-        this.setInTimer();
-      }
+      this.setInTimer();
     },
 
     onMouseLeave () {
@@ -300,14 +303,14 @@ export default {
 
     onContentFocusIn () {
       this.contentFocused = true;
+      this.setInTimer();
     },
 
     onContentFocusOut () {
       this.contentFocused = false;
 
       // If mouse is not over the hovercard, close it
-      if (!this.mouseOverHovercard && this.open === null) {
-        clearTimeout(this.inTimer);
+      if (!this.mouseOverHovercard) {
         this.setOutTimer();
       }
     },

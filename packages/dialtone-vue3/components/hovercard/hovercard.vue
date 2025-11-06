@@ -253,23 +253,26 @@ watch(() => props.open, (open) => {
 }, { immediate: true });
 
 function setInTimer () {
-  inTimer.value = setTimeout(() => {
-    hovercardOpen.value = true;
-  }, props.enterDelay);
+  if (props.open === null) {
+    clearTimeout(outTimer.value);
+    inTimer.value = setTimeout(() => {
+      hovercardOpen.value = true;
+    }, props.enterDelay);
+  }
 }
 
 function setOutTimer () {
-  outTimer.value = setTimeout(() => {
-    hovercardOpen.value = false;
-  }, props.leaveDelay);
+  if (props.open === null) {
+    clearTimeout(inTimer.value);
+    outTimer.value = setTimeout(() => {
+      hovercardOpen.value = false;
+    }, props.leaveDelay);
+  }
 }
 
 function onMouseEnter () {
   mouseOverHovercard.value = true;
-  if (props.open === null) {
-    clearTimeout(outTimer.value);
-    setInTimer();
-  }
+  setInTimer();
 }
 
 function onMouseLeave () {
@@ -277,22 +280,19 @@ function onMouseLeave () {
   if (contentFocused.value) {
     return;
   }
-  if (props.open === null) {
-    clearTimeout(inTimer.value);
-    setOutTimer();
-  }
+  setOutTimer();
 }
 
 function onContentFocusIn () {
   contentFocused.value = true;
+  setInTimer();
 }
 
 function onContentFocusOut () {
   contentFocused.value = false;
 
   // If mouse is not over the hovercard, close it
-  if (!mouseOverHovercard.value && props.open === null) {
-    clearTimeout(inTimer.value);
+  if (!mouseOverHovercard.value) {
     setOutTimer();
   }
 }
