@@ -1,3 +1,20 @@
+# [9.143.0-next.1](https://github.com/dialpad/dialtone/compare/dialtone/v9.142.2...dialtone/v9.143.0-next.1) (2025-11-07)
+
+
+### Code Refactoring
+
+* **Css:** DLT-1876 css logical properties ([#872](https://github.com/dialpad/dialtone/issues/872)) ([1acd6c9](https://github.com/dialpad/dialtone/commit/1acd6c900053b0c820309faa4a870ff1dceced04))
+
+
+### Features
+
+* **Css Utility:** DLT-2715 add default color for border css utilities ([#874](https://github.com/dialpad/dialtone/issues/874)) ([71310ab](https://github.com/dialpad/dialtone/commit/71310ab483fde976d56c69e0456bce70cb6d372d))
+* **Filter Pill:** DLT-2704 create component ([#473](https://github.com/dialpad/dialtone/issues/473)) ([6267445](https://github.com/dialpad/dialtone/commit/626744501640f18211ca9d41e4a68e099af3b6dd))
+* **Tokens:** DLT-1977 add high contrast design tokens and theme ([#938](https://github.com/dialpad/dialtone/issues/938)) ([a1c0457](https://github.com/dialpad/dialtone/commit/a1c0457e3b6b445e3f54d76b9ce3b847abc31ac5))
+* **Tokens:** DLT-2767 exploratory shell themes ([#909](https://github.com/dialpad/dialtone/issues/909)) ([3afcf63](https://github.com/dialpad/dialtone/commit/3afcf637d136733ff2f981a9ebbb63a3c4a37c99))
+* **Tokens:** DLT-2781 create color-assistive themes ([#921](https://github.com/dialpad/dialtone/issues/921)) ([a6cc397](https://github.com/dialpad/dialtone/commit/a6cc397bec52987f9ac2c3efca9b16f61c406807))
+* **Tokens:** DLT-2802 DLT-2563 layered theming system and mode island component ([#945](https://github.com/dialpad/dialtone/issues/945)) ([5c72c6c](https://github.com/dialpad/dialtone/commit/5c72c6cab4f08122dcb03e2e2f0cc8a490fe1c9b))
+
 ## [9.142.2](https://github.com/dialpad/dialtone/compare/dialtone/v9.142.1...dialtone/v9.142.2) (2025-10-21)
 
 
@@ -94,4 +111,3 @@
 * **Emoji Row:** DP-168152 add default size to skeletons ([#930](https://github.com/dialpad/dialtone/issues/930)) ([16583e7](https://github.com/dialpad/dialtone/commit/16583e71b9e1851dc2fc83240ec1f12e957eb5b1))
 * **Pagination:** DLT-2765 active page and change page buttons ([#929](https://github.com/dialpad/dialtone/issues/929)) ([59044cd](https://github.com/dialpad/dialtone/commit/59044cd0a4001d1ff032d3b8cb17c15dbcccb4b7))
 * **Postcss Responsive Variations:** NO-JIRA filter empty atRules ([#927](https://github.com/dialpad/dialtone/issues/927)) ([6e89435](https://github.com/dialpad/dialtone/commit/6e89435110971f992afdc24bbd3f8ff48c847eb4))
-
