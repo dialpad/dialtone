@@ -35,4 +35,11 @@ module.exports = {
     const focusVisibleSelector = selector.replaceAll('.', '.fv\\:').concat(':focus-visible');
     return `${selector}, ${hoverSelector}, ${focusSelector}, ${focusWithinSelector}, ${focusVisibleSelector}`;
   },
+
+  /**
+   * Convert camelCase token names to kebab-case with dashes
+   * @param {String} string - Token name in camelCase (e.g. 'dtColorBorderSubtle')
+   * @returns {String} Kebab-case token name (e.g. 'dt-color-border-subtle')
+   */
+  generateTokenName: _generateTokenName,
 };

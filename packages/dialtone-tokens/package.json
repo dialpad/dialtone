@@ -13,10 +13,17 @@
   "exports": {
     "./*.css": "./dist/css/*.css",
     "./*.less": "./dist/less/*.less",
+    "./layered/*.css": "./dist/css/layered/*.css",
+    "./layered/themes/*.css": "./dist/css/layered/themes/*.css",
+    "./layered/contrast/*.css": "./dist/css/layered/contrast/*.css",
     "./postcss/*": {
       "types": "./dist/types/postcss/*.d.ts",
       "import": "./dist/postcss/*.js",
       "require": "./dist/postcss/*.cjs"
+    },
+    "./themes/layered/*": {
+      "import": "./dist/themes/layered/*.js",
+      "require": "./dist/themes/layered/*.cjs"
     },
     "./themes/*": {
       "types": "./dist/types/themes/*.d.ts",

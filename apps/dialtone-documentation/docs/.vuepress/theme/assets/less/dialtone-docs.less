@@ -297,7 +297,7 @@ html body {
   // border-inline-end: var(--dt-size-100) solid var(--dt-shell-color-border-subtle);
 
   &__list {
-    padding: var(--dt-size-550) var(--dt-size-450) var(--dt-size-750);
+    padding: var(--dt-size-550) 0 var(--dt-size-750) var(--dt-size-450);
     inset-block: var(--dt-space-700) 0;
     inline-size: calc(var(--dt-size-300) * 64);
   }
@@ -305,12 +305,13 @@ html body {
 
 .dialtone-content {
   background-color: var(--dt-color-surface-primary);
-  border: var(--dt-size-border-100) solid var(--dt-color-border-subtle);
-  border-radius: var(--dt-size-radius-500);
+  border-block: var(--dt-size-border-100) solid var(--dt-color-border-subtle);
 
   @media (min-width: 980px) {
-    margin-right: var(--dt-space-500);
     margin-bottom: var(--dt-space-500);
+    border: var(--dt-size-border-100) solid var(--dt-color-border-subtle);
+    border-radius: var(--dt-size-radius-500);
+    margin-inline: var(--dt-space-500);
   }
 }
 
@@ -678,11 +679,10 @@ a.header-anchor {
 
 .dialtone-wall {
   display: grid;
-  grid-gap: var(--dt-space-500);
+  gap: var(--dt-space-500);
   margin-block-start: var(--dt-space-500);
 
   @media screen and (min-width: 640px) {
-    grid-gap: var(--dt-space-600);
     grid-template-columns: [full-start] repeat(2, [col-start] var(--col-width, minmax(0, 1fr)) [col-end]) [full-end] !important;
   }
 
@@ -690,14 +690,17 @@ a.header-anchor {
     grid-template-columns: [full-start] repeat(3, [col-start] var(--col-width, minmax(0, 1fr)) [col-end]) [full-end] !important;
   }
 
+  @media screen and (min-width: 1354px) {
+    gap: var(--dt-space-600);
+  }
+
   &__item {
     display: block;
     overflow: hidden;
     text-decoration: none;
-    background-color: var(--dt-color-surface-primary);
-    border: var(--dt-size-100) solid;
-    border-color: var(--dt-color-border-default);
-    border-radius: var(--dt-size-400);
+    background-color: var(--dt-color-surface-secondary);
+    border: var(--dt-size-border-100) solid var(--dt-color-border-subtle);
+    border-radius: var(--dt-size-radius-400);
     opacity: .7;
     transition-timing-function: var(--ttf-in-out);
     transition-duration: var(--td200);
@@ -709,7 +712,7 @@ a.header-anchor {
 
     &:is(a):hover {
       text-decoration: none;
-      border-color: var(--dt-color-border-moderate);
+      border-color: var(--dt-color-border-default);
       box-shadow: var(--dt-shadow-small);
     }
 
@@ -756,9 +759,14 @@ a.header-anchor {
   }
 
   &__description {
-    color: var(--dt-color-foreground-tertiary);
-    font-size: var(--dt-font-size-200);
-    line-height: var(--dt-font-line-height-300);
+    display: none;
+
+    @media screen and (min-width: 768px) {
+      display: block;
+      color: var(--dt-color-foreground-tertiary);
+      font-size: var(--dt-font-size-200);
+      line-height: var(--dt-font-line-height-300);
+    }
   }
 }
 

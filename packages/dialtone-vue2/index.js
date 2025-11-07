@@ -53,6 +53,7 @@ export * from './components/list_item';
 export * from './components/list_item_group';
 export * from './components/loader';
 export * from './components/modal';
+export * from './components/mode_island';
 export * from './components/notice';
 export * from './components/pagination';
 export * from './components/popover';

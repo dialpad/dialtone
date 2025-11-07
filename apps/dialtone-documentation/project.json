@@ -19,7 +19,7 @@
       "outputs": ["{projectRoot}/docs/.vuepress/dist"],
       "options": {
         "cwd": "{projectRoot}",
-        "command": "vuepress build docs"
+        "command": "NODE_OPTIONS='--max-old-space-size=6144' vuepress build docs"
       }
     },
     "start": {

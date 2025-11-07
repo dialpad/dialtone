@@ -48,6 +48,10 @@
           "link": "/guides/getting-started/"
         },
         {
+          "text": "Theme and Mode",
+          "link": "/guides/theme-and-mode/"
+        },
+        {
           "text": "Contributing",
           "link": "/guides/contributing/"
         },
@@ -680,6 +684,10 @@
         {
           "text": "Loader",
           "link": "/components/loader.html"
+        },
+        {
+          "text": "Mode Island",
+          "link": "/components/mode-island.html"
         },
         {
           "text": "Modal",

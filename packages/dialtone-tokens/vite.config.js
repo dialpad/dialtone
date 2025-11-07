@@ -7,6 +7,7 @@ const themeEntries = glob.sync('./themes/*.js').reduce((entries, path) => {
   entries[path.replace('.js', '')] = path;
   return entries;
 }, {});
+
 const postcssEntries = glob.sync('./postcss/*.js').reduce((entries, path) => {
   entries[path.replace('.js', '')] = path;
   return entries;
@@ -24,6 +25,10 @@ export default defineConfig({
       formats: ['es', 'cjs'],
     },
     rollupOptions: {
+      external: (id) => {
+        // Externalize all CSS imports (they're inlined as strings via ?inline, not bundled)
+        return id.includes('.css');
+      },
       output: {
         minifyInternalExports: true,
         chunkFileNames: () => 'themes/chunks/[name]-[hash].js',

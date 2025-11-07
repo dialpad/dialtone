@@ -1,4 +1,4 @@
-<!-- eslint-disable max-len -->
+<!-- eslint-disable max-len, max-lines -->
 <template>
   <dt-stack
     as="nav"
@@ -19,7 +19,7 @@
   <dt-stack direction="row" gap="300">
     <a
       v-dt-tooltip="'Storybook'"
-      class="d-btn d-btn--muted d-btn--icon-only dialtone-shell-btn"
+      class="d-btn d-btn--muted d-btn--icon-only dialtone-shell-btn dialtone-shell-btn"
       href="https://dialtone.dialpad.com/vue"
       target="_blank"
       rel="noreferrer noopener"
@@ -117,6 +117,124 @@
         </svg>
       </span>
     </a>
+    <dt-dropdown
+      id="theme-toggle-dropdown"
+      navigation-type="arrow-keys"
+      placement="bottom-start"
+      class="theme-toggle-dropdown"
+      max-height="33vh"
+    >
+      <template #anchor>
+        <dt-button
+          v-dt-tooltip:bottom="`Theme: ${currentTheme.charAt(0).toUpperCase() + currentTheme.slice(1)} `"
+          class="theme-toggle-button dialtone-shell-btn"
+          importance="clear"
+          kind="muted"
+        >
+          <template #icon>
+            <dt-icon
+              size="400"
+              name="satisfied-filled"
+            />
+          </template>
+        </dt-button>
+      </template>
+      <template #list>
+        <dt-list-item-group
+          heading-class="d-py4 d-px8 d-c-default d-fc-tertiary d-label--sm"
+          heading="Base Theme"
+        >
+          <dt-list-item
+            role="menuitem"
+            navigation-type="arrow-keys"
+            @click="setTheme('dp')"
+          >
+            Dialpad (DP)
+            <template #right>
+              <dt-icon :class="{ 'd-o0': currentTheme !== 'dp' }" name="check" size="200" />
+            </template>
+          </dt-list-item>
+        </dt-list-item-group>
+        <dt-dropdown-separator />
+        <dt-list-item-group
+          heading-class="d-py4 d-px8 d-c-default d-fc-tertiary d-label--sm"
+          heading="Partner Themes"
+        >
+          <dt-list-item
+            role="menuitem"
+            navigation-type="arrow-keys"
+            @click="setTheme('tmo')"
+          >
+            T-Mobile (TMO)
+            <template #right>
+              <dt-icon :class="{ 'd-o0': currentTheme !== 'tmo' }" name="check" size="200" />
+            </template>
+          </dt-list-item>
+        </dt-list-item-group>
+        <dt-dropdown-separator />
+        <dt-list-item-group
+          heading-class="d-py4 d-px8 d-c-default d-fc-tertiary d-label--sm"
+          heading="Accessibility"
+        >
+          <dt-list-item
+            role="menuitem"
+            navigation-type="arrow-keys"
+            @click="setTheme('prota-deuter')"
+          >
+            Prota-Deuter
+            <template #right>
+              <dt-icon :class="{ 'd-o0': currentTheme !== 'prota-deuter' }" name="check" size="200" />
+            </template>
+          </dt-list-item>
+          <dt-list-item
+            role="menuitem"
+            navigation-type="arrow-keys"
+            @click="setTheme('trita')"
+          >
+            Trita
+            <template #right>
+              <dt-icon :class="{ 'd-o0': currentTheme !== 'trita' }" name="check" size="200" />
+            </template>
+          </dt-list-item>
+        </dt-list-item-group>
+        <dt-dropdown-separator />
+        <dt-list-item-group
+          heading-class="d-py4 d-px8 d-c-default d-fc-tertiary d-label--sm"
+          heading="Named Themes"
+        >
+          <dt-list-item
+            v-for="themeName in namedThemes"
+            :key="themeName"
+            role="menuitem"
+            navigation-type="arrow-keys"
+            @click="setTheme(themeName)"
+          >
+            {{ formatThemeName(themeName) }}
+            <template #right>
+              <dt-icon :class="{ 'd-o0': currentTheme !== themeName }" name="check" size="200" />
+            </template>
+          </dt-list-item>
+        </dt-list-item-group>
+        <dt-dropdown-separator />
+        <dt-list-item-group
+          heading-class="d-py4 d-px8 d-c-default d-fc-tertiary d-label--sm"
+          heading="Experimental (37 themes)"
+        >
+          <dt-list-item
+            v-for="themeNum in numberedThemes"
+            :key="themeNum"
+            role="menuitem"
+            navigation-type="arrow-keys"
+            @click="setTheme(themeNum)"
+          >
+            Theme {{ themeNum }}
+            <template #right>
+              <dt-icon :class="{ 'd-o0': currentTheme !== themeNum }" name="check" size="200" />
+            </template>
+          </dt-list-item>
+        </dt-list-item-group>
+      </template>
+    </dt-dropdown>
     <dt-dropdown navigation-type="arrow-keys" placement="bottom-start">
       <template #anchor>
         <dt-button
@@ -124,7 +242,6 @@
           importance="clear"
           kind="muted"
           class="dialtone-shell-btn"
-          @click="toggleHiddenThemeButton"
         >
           <template #icon>
             <dt-icon
@@ -199,22 +316,6 @@
       </template>
     </dt-dropdown>
     <dt-button
-      id="theme-toggle-button"
-      v-dt-tooltip:bottom="`Theme: ${currentTheme.charAt(0).toUpperCase() + currentTheme.slice(1)} `"
-      hidden
-      class="theme-toggle-button dialtone-shell-btn"
-      importance="clear"
-      kind="muted"
-      @click="toggleTheme"
-    >
-      <template #icon>
-        <dt-icon
-          size="400"
-          name="satisfied-filled"
-        />
-      </template>
-    </dt-button>
-    <dt-button
       importance="outlined"
       kind="muted"
       class="d-ml8 d-w164 d-bc-subtle h:d-bc-default h:d-bgc-transparent"
@@ -233,8 +334,7 @@
 
 <script setup>
 import { useRoute } from 'vue-router';
-import { onMounted, onUnmounted, inject, computed } from 'vue';
-import { setTheme } from '@dialpad/dialtone-tokens/themes/config';
+import { useThemeManager } from '../composables/useThemeManager';
 
 defineProps({
   items: {
@@ -245,113 +345,25 @@ defineProps({
 defineEmits(['search']);
 
 const route = useRoute();
-const currentMode = inject('currentMode');
-const currentTheme = inject('currentTheme');
-const currentContrast = inject('currentContrast');
-const modes = ['system', 'light', 'dark'];
-const themes = inject('themes');
-const excludedThemeNames = ['expressive'];
-const prefersDarkMediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
-const themesKeys = Array.from(
-  new Set(
-    Object.keys(themes)
-      .filter(key => !excludedThemeNames.some(exclusion => key.startsWith(exclusion)))
-      .filter(key => !key.startsWith('high-contrast')) // Exclude contrast themes from brand toggle
-      .map(key => key.replace(/-(dark|light)/, '')),
-  ),
-);
 
-const currentModeIconName = computed(() => {
-  switch (currentMode.value) {
-    case 'dark':
-      return 'moon';
-    case 'light':
-      return 'sun';
-    default:
-      return 'circle-half-filled';
-  }
-});
+// Use theme manager composable with theme switching enabled
+const {
+  currentMode,
+  currentTheme,
+  currentContrast,
+  currentModeIconName,
+  setMode,
+  setContrast,
+  setTheme,
+  namedThemes,
+  numberedThemes,
+  formatThemeName,
+} = useThemeManager({ includeThemes: true });
 
 const isActiveLink = (text) => {
   const linkBase = text.toLowerCase();
   return route.path.search(linkBase) !== -1;
 };
-
-const createToggle = (stateRef, optionsArray, storageKey) => {
-  return () => {
-    const currentIndex = optionsArray.indexOf(stateRef.value);
-    const nextIndex = (currentIndex + 1) % optionsArray.length;
-    stateRef.value = optionsArray[nextIndex];
-    setCss();
-    localStorage.setItem(storageKey, stateRef.value);
-  };
-};
-
-const toggleTheme = createToggle(currentTheme, themesKeys, 'preferredTheme');
-
-const setMode = (mode) => {
-  currentMode.value = mode;
-  setCss();
-  localStorage.setItem('preferredMode', mode);
-};
-
-const setContrast = (contrast) => {
-  currentContrast.value = contrast;
-  setCss();
-  localStorage.setItem('preferredContrast', contrast);
-};
-
-const toggleHiddenThemeButton = (event) => {
-  if ((event.metaKey || event.ctrlKey) && event.shiftKey) {
-    const themeButton = document.getElementById('theme-toggle-button');
-    if (themeButton) {
-      if (themeButton.hasAttribute('hidden')) {
-        themeButton.removeAttribute('hidden');
-      } else {
-        themeButton.setAttribute('hidden', '');
-      }
-    }
-  }
-};
-
-const setCss = () => {
-  if (!modes.includes(currentMode.value)) {
-    currentMode.value = 'system';
-    localStorage.setItem('preferredMode', currentMode.value);
-  }
-
-  const mode = currentMode.value === 'system' ? (prefersDarkMediaQuery.matches ? 'dark' : 'light') : currentMode.value
-
-  const preferredTheme = `${currentTheme.value}-${mode}`;
-  let theme = themes[preferredTheme];
-
-  if (!theme) {
-    const defaultTheme = `dp-${mode}`;
-    console.warn(`Theme [${preferredTheme}] does not exists, using default theme [${defaultTheme}]`);
-    theme = themes[defaultTheme];
-  }
-
-  // Final safety check - if still no theme, don't proceed
-  if (!theme) {
-    console.error(`No theme available for mode [${mode}]. Available themes:`, Object.keys(themes));
-    return;
-  }
-
-  // Get mode-specific contrast theme if high contrast is enabled
-  const contrastTheme = currentContrast.value === 'high' ? themes[`high-contrast-${mode}`] : null;
-
-  // Single unified theme application
-  setTheme(theme, document.documentElement, contrastTheme);
-};
-
-onMounted(() => {
-  prefersDarkMediaQuery.addEventListener('change', setCss);
-  setCss();
-});
-
-onUnmounted(() => {
-  prefersDarkMediaQuery.removeEventListener('change', setCss);
-});
 </script>
 
 <style scoped>
