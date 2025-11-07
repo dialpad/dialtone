@@ -1,3 +1,16 @@
+# [2.201.0-next.3](https://github.com/dialpad/dialtone/compare/dialtone-vue2/v2.201.0-next.2...dialtone-vue2/v2.201.0-next.3) (2025-11-07)
+
+
+### Bug Fixes
+
+* **Split Button:** NO-JIRA fix infinite loop ([#948](https://github.com/dialpad/dialtone/issues/948)) ([634952e](https://github.com/dialpad/dialtone/commit/634952e83ce810d1317dec4ba2029af05afcf0d0))
+* **Split Button:** NO-JIRA invert tooltip when button inverted ([#946](https://github.com/dialpad/dialtone/issues/946)) ([c03065a](https://github.com/dialpad/dialtone/commit/c03065abe60471aa8469216ad506ac5a2b406697))
+
+
+### Features
+
+* **Tokens:** DLT-2802 DLT-2563 layered theming system and mode island component ([#945](https://github.com/dialpad/dialtone/issues/945)) ([5c72c6c](https://github.com/dialpad/dialtone/commit/5c72c6cab4f08122dcb03e2e2f0cc8a490fe1c9b))
+
 # [2.201.0-next.2](https://github.com/dialpad/dialtone/compare/dialtone-vue2/v2.201.0-next.1...dialtone-vue2/v2.201.0-next.2) (2025-10-15)
 
 
@@ -4459,4 +4472,3 @@
 
 * add pass through class and props to tab list ([#181](https://github.com/dialpad/dialtone-vue/issues/181)) ([54dd054](https://github.com/dialpad/dialtone-vue/commit/54dd05418ab80ea1e7aaac16796ae7a785d4891b))
 * automatization for the releasing process ([#180](https://github.com/dialpad/dialtone-vue/issues/180)) ([8b397b9](https://github.com/dialpad/dialtone-vue/commit/8b397b952e8ecfdefd18e400fbcf8c5d27fec2b3))
-
