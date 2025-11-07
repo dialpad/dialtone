@@ -1,3 +1,10 @@
+# [1.48.0-next.3](https://github.com/dialpad/dialtone/compare/dialtone-tokens/v1.48.0-next.2...dialtone-tokens/v1.48.0-next.3) (2025-11-07)
+
+
+### Features
+
+* **Tokens:** DLT-2802 DLT-2563 layered theming system and mode island component ([#945](https://github.com/dialpad/dialtone/issues/945)) ([5c72c6c](https://github.com/dialpad/dialtone/commit/5c72c6cab4f08122dcb03e2e2f0cc8a490fe1c9b))
+
 # [1.48.0-next.2](https://github.com/dialpad/dialtone/compare/dialtone-tokens/v1.48.0-next.1...dialtone-tokens/v1.48.0-next.2) (2025-10-15)
 
 
