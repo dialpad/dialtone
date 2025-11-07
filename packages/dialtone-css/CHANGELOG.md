@@ -1,3 +1,18 @@
+# [8.66.0-next.1](https://github.com/dialpad/dialtone/compare/dialtone-css/v8.65.0...dialtone-css/v8.66.0-next.1) (2025-11-07)
+
+
+### Code Refactoring
+
+* **Css:** DLT-1876 css logical properties ([#872](https://github.com/dialpad/dialtone/issues/872)) ([1acd6c9](https://github.com/dialpad/dialtone/commit/1acd6c900053b0c820309faa4a870ff1dceced04))
+
+
+### Features
+
+* **Css Utility:** DLT-2715 add default color for border css utilities ([#874](https://github.com/dialpad/dialtone/issues/874)) ([71310ab](https://github.com/dialpad/dialtone/commit/71310ab483fde976d56c69e0456bce70cb6d372d))
+* **Filter Pill:** DLT-2704 create component ([#473](https://github.com/dialpad/dialtone/issues/473)) ([6267445](https://github.com/dialpad/dialtone/commit/626744501640f18211ca9d41e4a68e099af3b6dd))
+* **Tokens:** DLT-1977 add high contrast design tokens and theme ([#938](https://github.com/dialpad/dialtone/issues/938)) ([a1c0457](https://github.com/dialpad/dialtone/commit/a1c0457e3b6b445e3f54d76b9ce3b847abc31ac5))
+* **Tokens:** DLT-2802 DLT-2563 layered theming system and mode island component ([#945](https://github.com/dialpad/dialtone/issues/945)) ([5c72c6c](https://github.com/dialpad/dialtone/commit/5c72c6cab4f08122dcb03e2e2f0cc8a490fe1c9b))
+
 # [8.65.0-next.4](https://github.com/dialpad/dialtone/compare/dialtone-css/v8.65.0-next.3...dialtone-css/v8.65.0-next.4) (2025-10-15)
 
 
@@ -2788,5 +2803,3 @@
 ### Features
 
 * automatization for the releasing process ([#484](https://github.com/dialpad/dialtone/issues/484)) ([a3d5fa5](https://github.com/dialpad/dialtone/commit/a3d5fa52bdf5ab993e23739c02637ceb11919f9e))
-
-
