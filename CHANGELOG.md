@@ -1,3 +1,10 @@
+# [9.143.0-next.2](https://github.com/dialpad/dialtone/compare/dialtone/v9.143.0-next.1...dialtone/v9.143.0-next.2) (2025-11-10)
+
+
+### Bug Fixes
+
+* **Tokens:** wrap css math expressions with calc() in layered build ([#966](https://github.com/dialpad/dialtone/issues/966)) ([1635f61](https://github.com/dialpad/dialtone/commit/1635f61280c9379355c9a2ea295cbf23a78c888f))
+
 # [9.143.0-next.1](https://github.com/dialpad/dialtone/compare/dialtone/v9.142.2...dialtone/v9.143.0-next.1) (2025-11-07)
 
 
