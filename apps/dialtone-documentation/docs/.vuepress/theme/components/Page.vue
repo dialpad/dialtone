@@ -49,7 +49,10 @@
           </dt-button>
         </router-link>
       </dt-stack>
-      <footer class="d-mt16 d-mb16 d-body--sm d-fc-tertiary">
+      <footer
+        v-if="lastUpdated"
+        class="d-mt16 d-mb16 d-body--sm d-fc-tertiary"
+      >
         <span
           v-if="$frontmatter.title"
           v-text="$frontmatter.title"
@@ -88,7 +91,10 @@ const props = defineProps({
   },
 });
 const lastUpdated = computed(() => {
-  const date = new Date(usePageData().value.git.updatedTime);
+  const updatedTime = usePageData().value.git?.updatedTime;
+  if (!updatedTime) return null;
+  const date = new Date(updatedTime);
+  if (isNaN(date.getTime())) return null;
   return new Intl.DateTimeFormat('en-US', { dateStyle: 'full' }).format(date);
 });
 const gridClass = computed(() => {

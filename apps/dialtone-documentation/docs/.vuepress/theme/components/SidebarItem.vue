@@ -1,5 +1,7 @@
 <template>
+  <!-- Item with children - render as collapsible -->
   <dt-collapsible
+    v-if="subItems.length > 0"
     v-model:open="isOpen"
     element-type="li"
     class="dt-sidebar-item"
@@ -97,6 +99,34 @@
       </dt-stack>
     </template>
   </dt-collapsible>
+
+  <!-- Item without children - render as simple link -->
+  <li
+    v-else
+    class="dt-sidebar-item"
+  >
+    <router-link
+      v-slot="{ navigate, isExactActive }"
+      :to="item.link ?? ''"
+      custom
+    >
+      <dt-button
+        importance="clear"
+        kind="muted"
+        label-class="d-jc-flex-start"
+        :active="isActiveLink(isExactActive, item.link)"
+        :class="[
+          'd-w100p dialtone-shell-btn',
+          {
+            'd-headline--eyebrow d-fw-semibold d-bgc-transparent d-c-default': !item.link,
+          },
+        ]"
+        @click="navigate"
+      >
+        {{ item.text }}
+      </dt-button>
+    </router-link>
+  </li>
 </template>
 
 <script setup>
