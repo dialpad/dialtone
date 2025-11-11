@@ -118,13 +118,24 @@ const route = useRoute();
 const hash = ref(route.hash);
 const isOpen = ref(false);
 
+// Check if any child link matches the current route
+const isChildActive = () => {
+  if (!props.item.children) return false;
+  return props.item.children.some(child => route.path.startsWith(child.link));
+};
+
 watch(route, (newRoute) => {
   hash.value = newRoute.hash;
-  isOpen.value = false;
+  // Keep open if a child is active
+  if (isChildActive()) {
+    isOpen.value = true;
+  } else {
+    isOpen.value = false;
+  }
 }, { flush: 'pre', immediate: true, deep: true });
 
 onMounted(() => {
-  if (route.path === props.item.link) {
+  if (route.path === props.item.link || isChildActive()) {
     isOpen.value = true;
   }
 });

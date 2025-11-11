@@ -55,6 +55,21 @@ export default defineClientConfig({
       await importDocumentation(app);
       await importDialtoneThemes(app);
     }
+
+    // Redirect parent pages to their first child
+    router.beforeEach((to, from, next) => {
+      const redirects = {
+        '/guides/content/': '/guides/content/action-language/',
+        '/design/colors/': '/design/colors/usage/',
+      };
+
+      if (redirects[to.path]) {
+        next(redirects[to.path]);
+      } else {
+        next();
+      }
+    });
+
     router.options.scrollBehavior = async (to) => {
       if (to.hash) {
         const html = document.querySelector('html');
