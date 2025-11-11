@@ -20,7 +20,6 @@
           </dt-stack>
         </router-link>
         <navbar
-          v-if="!$frontmatter.home"
           @search="openSearch"
         />
         <mobile-sidebar
