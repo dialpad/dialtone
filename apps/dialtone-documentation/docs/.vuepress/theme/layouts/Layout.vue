@@ -9,7 +9,16 @@
   >
     <template #header>
       <div class="dialtone-header">
-        <dialtone-logo />
+        <!-- <dialtone-logo /> -->
+        <router-link
+          class="d-pl8"
+          title="Dialtone homepage"
+          to="/"
+        >
+          <dt-stack>
+            <dt-illustration name="dialpad-logo" />
+          </dt-stack>
+        </router-link>
         <navbar
           v-if="!$frontmatter.home"
           @search="openSearch"
@@ -53,7 +62,6 @@ import MobileSidebar from '../components/MobileSidebar.vue';
 import { computed, ref, watch, onMounted } from 'vue';
 import { useRoute } from 'vue-router';
 import { useThemeLocaleData } from '@vuepress/plugin-theme-data/client';
-import DialtoneLogo from '../components/DialtoneLogo.vue';
 import { disableRootScrolling, enableRootScrolling } from '@dialpad/dialtone-vue';
 
 const route = useRoute();
