@@ -7,7 +7,7 @@
     role="navigation"
   >
     <router-link
-      v-for="link in items"
+      v-for="link in navItems"
       :key="link.text"
       :to="link.link"
       class="d-btn d-btn--muted dialtone-shell-btn"
@@ -327,7 +327,7 @@
           size="200"
         />
       </template>
-      <span class="d-fc-placeholder">Search Dialtone</span>
+      <span class="d-fc-placeholder">Search</span>
     </dt-button>
   </dt-stack>
 </template>
@@ -336,15 +336,17 @@
 import { useRoute } from 'vue-router';
 import { useThemeManager } from '../composables/useThemeManager';
 
-defineProps({
-  items: {
-    type: Array,
-    default: () => [],
-  },
-});
 defineEmits(['search']);
 
 const route = useRoute();
+
+// Top-level navigation items
+const navItems = [
+  { text: 'Foundations', link: '/foundations/' },
+  { text: 'Design System', link: '/design-system/' },
+  { text: 'Careers', link: '/careers/' },
+  { text: 'Articles', link: '/articles/' },
+];
 
 // Use theme manager composable with theme switching enabled
 const {

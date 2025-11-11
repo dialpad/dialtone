@@ -108,7 +108,7 @@ export default defineClientConfig({
           apiKey: '6436ebddb959748daeec411eb388a99d',
           indexName: 'dialpad',
           appId: 'Y5HG9UX6KM',
-          placeholder: 'Search Dialtone',
+          placeholder: 'Search',
           container: '#docsearch',
       });
     });

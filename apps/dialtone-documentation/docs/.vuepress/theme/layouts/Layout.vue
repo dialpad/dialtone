@@ -8,12 +8,12 @@
     content-class="d-ol-none dialtone-content"
   >
     <template #header>
-      <top-level-nav
-        v-if="!$frontmatter.home"
-        @search="openSearch"
-      />
       <div class="dialtone-header">
         <dialtone-logo />
+        <navbar
+          v-if="!$frontmatter.home"
+          @search="openSearch"
+        />
         <mobile-sidebar
           v-if="isMobile && route.path !== '/'"
         />
@@ -45,7 +45,7 @@
 </template>
 
 <script setup>
-import TopLevelNav from '../components/TopLevelNav.vue';
+import Navbar from '../components/Navbar.vue';
 import Sidebar from '../components/Sidebar.vue';
 import Home from '../components/Home.vue';
 import Page from '../components/Page.vue';
