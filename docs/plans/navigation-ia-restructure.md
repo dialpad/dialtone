@@ -274,29 +274,130 @@ The navigation was overly complex with "Overview" child pages that duplicated th
 - [x] No console errors (server starts successfully)
 - [ ] Performance acceptable (no lag)
 
-## File Changes
+### Phase 11: Replace TopLevelNav with Navbar & Fix Collapsibles ✅
+**Duration**: 90 minutes
+**Status**: Complete
+
+#### Issue 1: Cache Problems After Commit
+After committing changes, dev server showed stale cached data and all functionality appeared to break.
+
+**Solution**:
+1. Killed all background dev server processes
+2. Cleared VuePress cache directories (`.cache/` and `.temp/`)
+3. Started fresh dev server
+4. Server loaded correctly with all changes intact
+
+#### Issue 2: User Rejected TopLevelNav Component Design
+User wanted to use the original simple Navbar component structure, not the new container/wrapper approach from TopLevelNav.
+
+**Changes Made**:
+1. **Restored Navbar.vue to original structure** (Claude)
+   - Reverted to simple two `dt-stack` layout (nav items left, utilities right)
+   - Removed container/wrapper divs
+   - Changed from `navItems` array with objects to simple `{ text, link }` format
+   - Kept all utility buttons (Storybook, Github, Codepen, Theme, Mode, Search)
+   - Updated to hardcode top-level nav: Foundations | Design System | Careers | Articles
+
+2. **Updated Layout.vue** (User)
+   - Moved Navbar component inside `.dialtone-header` div
+   - Positioned alongside logo and mobile sidebar
+   - Removed Navbar from separate header section
+
+3. **Deleted TopLevelNav.vue** (Claude)
+   - Removed file entirely
+   - No longer needed
+
+4. **Updated config.js** (Claude)
+   - Changed comment to reflect Navbar (not TopLevelNav) handles navigation
+
+**Files Modified**:
+- `docs/.vuepress/theme/components/Navbar.vue` - Restored original structure with new nav items
+- `docs/.vuepress/theme/layouts/Layout.vue` - User moved Navbar inside dialtone-header
+- `docs/.vuepress/theme/components/TopLevelNav.vue` - Deleted
+- `docs/.vuepress/config.js` - Updated comment
+
+#### Issue 3: All Collapsibles Expanding on Page Load
+When navigating to any page, ALL sidebar collapsibles at every level would expand, not just the one containing the current page.
+
+**Root Cause**:
+- Used `ref(false)` for isOpen with complex watch and onMounted logic
+- `watch` with `immediate: true` was running and expanding everything
+- Multiple reactive sources fighting over isOpen state
+- Over-engineered solution with conflicting lifecycle hooks
+
+**User Feedback**: "This seems a little over engineered... Perhaps we need to take a step back and just drastically simplify"
+
+**Solution - Drastically Simplified Approach**:
+1. **Removed all complexity**:
+   - ❌ Deleted `ref(false)` for isOpen
+   - ❌ Deleted `isChildActive()` function with watches
+   - ❌ Deleted `watch` with `immediate: true`
+   - ❌ Deleted `onMounted` lifecycle hook
+   - ❌ Removed line in `isActiveLink()` that set isOpen
+
+2. **Replaced with simple computed property**:
+   ```javascript
+   const isOpen = computed(() => {
+     if (!props.item.children) return false;
+
+     // If current page IS this item, expand to show children
+     if (route.path === props.item.link) return true;
+
+     // Check if current page is inside children
+     const hasActiveChild = (children) => {
+       return children.some(child => {
+         if (route.path === child.link) return true;
+         if (child.children) return hasActiveChild(child.children);
+         return false;
+       });
+     };
+
+     return hasActiveChild(props.item.children);
+   });
+   ```
+
+3. **Added auto-expand feature**:
+   - If you navigate to a collapsible parent page (e.g., `/components/`), it now expands automatically
+   - Shows all children of that parent
+   - Makes navigation more intuitive
+
+**Result**:
+- ✅ Only relevant collapsibles expand
+- ✅ All unrelated collapsibles stay collapsed
+- ✅ Parent pages auto-expand to show their children
+- ✅ Dead simple logic - just Vue's reactive computed property
+- ✅ No lifecycle hooks or complex state management
+
+**Files Modified**:
+- `docs/.vuepress/theme/components/SidebarItem.vue` - Completely simplified isOpen logic
+
+## File Changes Summary
 
 ### Created Files:
-1. `docs/.vuepress/theme/components/TopLevelNav.vue` - New top navigation component
-2. `docs/foundations/index.md` - Placeholder page
-3. `docs/careers/index.md` - Placeholder page
-4. `docs/articles/index.md` - Placeholder page
-5. `docs/design-system/index.md` - Landing page
-6. `docs/plans/navigation-ia-restructure.md` - This plan document
-7. `docs/plans/navigation-ia-error-fixes.md` - Error resolution documentation
+1. `docs/foundations/index.md` - Placeholder page
+2. `docs/careers/index.md` - Placeholder page
+3. `docs/articles/index.md` - Placeholder page
+4. `docs/design-system/index.md` - Landing page
+5. `docs/plans/navigation-ia-restructure.md` - This plan document
+6. `docs/plans/navigation-ia-error-fixes.md` - Error resolution documentation
+
+### Deleted Files:
+1. `docs/.vuepress/theme/components/TopLevelNav.vue` - Created in Phase 1, deleted in Phase 11
 
 ### Modified Files:
-1. `docs/.vuepress/theme/layouts/Layout.vue` - Added TopLevelNav
-2. `docs/_data/site-nav.json` - Complete restructure with top-level groups
+1. `docs/.vuepress/theme/layouts/Layout.vue` - Updated to use Navbar, user moved to correct position
+2. `docs/_data/site-nav.json` - Complete restructure with top-level groups, removed Overview items
 3. `docs/.vuepress/theme/composables/useSidebarItems.js` - Top-level detection logic
-4. `docs/.vuepress/theme/components/SidebarItem.vue` - 3-level depth support
-5. `docs/.vuepress/theme/index.js` - Fixed getChildrenPageNames() for new structure
-5. `docs/.vuepress/theme/client.js` - Route guards
+4. `docs/.vuepress/theme/components/SidebarItem.vue` - Simplified collapsible logic with computed
+5. `docs/.vuepress/theme/components/Sidebar.vue` - Added depth prop
+6. `docs/.vuepress/theme/components/Navbar.vue` - Restored original structure with new nav items
+7. `docs/.vuepress/theme/index.js` - Fixed getChildrenPageNames() for new structure
+8. `docs/.vuepress/theme/client.js` - Route guards, removed unnecessary redirects
+9. `docs/.vuepress/config.js` - Updated comments
 
-### No Changes:
-- `docs/.vuepress/config.js` - Navbar unchanged
+### Preserved:
 - All existing markdown content files - URLs preserved
-- `docs/.vuepress/theme/components/Navbar.vue` - Works as-is
+- No breaking changes to existing routes
 
 ## Data Structure Example
 

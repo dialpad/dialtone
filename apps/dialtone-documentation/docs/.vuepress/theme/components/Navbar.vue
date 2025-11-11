@@ -10,7 +10,7 @@
       v-for="link in navItems"
       :key="link.text"
       :to="link.link"
-      class="d-btn d-btn--muted dialtone-shell-btn"
+      class="d-btn d-btn--muted d-btn--lg dialtone-shell-btn"
       :class="{ 'd-btn--active': isActiveLink(link.text) }"
     >
       <span class="d-btn__label">{{ link.text }}</span>
