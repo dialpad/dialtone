@@ -22,6 +22,30 @@ import '@dialpad/dialtone-combinator/css';
 import './assets/less/dialtone-docs.less';
 import './assets/less/dialtone-syntax.less';
 
+// Import DP theme synchronously so it's available immediately on page load
+import dpTheme from '@dialpad/dialtone-tokens/themes/dp';
+import { setMode } from '@dialpad/dialtone-tokens/themes/config';
+
+// Apply default theme immediately to prevent FOUC (Flash of Unstyled Content)
+if (typeof document !== 'undefined') {
+  // Set default mode (light/dark) based on system preference or localStorage
+  const preferredMode = typeof localStorage !== 'undefined'
+    ? localStorage.getItem('preferredMode') || 'system'
+    : 'system';
+
+  let actualMode = preferredMode;
+  if (preferredMode === 'system') {
+    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    actualMode = prefersDark ? 'dark' : 'light';
+  }
+
+  // Apply mode immediately
+  setMode(actualMode, document.documentElement);
+
+  // Set data attributes immediately
+  document.documentElement.setAttribute('data-dt-brand', 'dp');
+}
+
 // The default scrollbar exists outside of the vue instance on the body so
 // we cannot use the vue directive for our custom scrollbar. Init it manually here.
 const initOverlayScrollbars = () => {
