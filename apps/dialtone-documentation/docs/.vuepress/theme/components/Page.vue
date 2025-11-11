@@ -21,7 +21,7 @@
           custom
         >
           <dt-button
-            class="d-w100p"
+            class="d-wmn50p"
             label-class="d-jc-space-between"
             importance="outlined"
             kind="muted"
@@ -44,7 +44,7 @@
           custom
         >
           <dt-button
-            class="d-w100p"
+            class="d-wmn50p"
             label-class="d-jc-space-between"
             icon-position="right"
             importance="outlined"
