@@ -13,6 +13,6 @@ For example, instead of `class="d-fs-200 d-lh-100"` you would declare `class="d-
   class="d-wmx100p d-mt24"
 >
   <template #default>
-    <p class="d-body--md-compact"> Typography Styles have been moved to <router-link class="d-fw-semibold d-link d-link--muted" to="/design/typography/">Design Language > Typography</router-link>.</p>
+    <p class="d-body--md-compact"> Typography Styles have been moved to <router-link class="d-fw-semibold d-link d-link--muted" to="/foundations/typography/">Design Language > Typography</router-link>.</p>
   </template>
 </dt-notice>

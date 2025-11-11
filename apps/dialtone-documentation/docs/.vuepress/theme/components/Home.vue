@@ -61,7 +61,7 @@
   <section class="links d-bt d-bb d-bc-subtle d-bgc-secondary">
     <div class="d-d-grid d-gg16 d-g-cols12 d-wmx1340 d-mx-auto">
       <dt-stack gap="400" class="link d-body--md d-gc3 d-px32 d-ta-center">
-        <router-link class="d-fc-primary h:d-td-underline d-td-none d-bar8 d-pt4" to="/design/">
+        <router-link class="d-fc-primary h:d-td-underline d-td-none d-bar8 d-pt4" to="/foundations/">
           <dt-stack gap="600">
             <svg-loader class="d-h96" name="home-design-language" />
             <h2 class="d-headline--xl d-ff-marketing">
@@ -73,7 +73,7 @@
           Foundational color, iconography, and spacing guidelines
         </p>
         <dt-stack gap="300">
-          <router-link class="d-link" to="/design/">
+          <router-link class="d-link" to="/foundations/">
             Browse Design Guidelines
           </router-link>
         </dt-stack>

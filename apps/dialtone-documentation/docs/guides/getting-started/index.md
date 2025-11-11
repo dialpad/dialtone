@@ -64,7 +64,7 @@ In the above example, we used:
 - Our [background color utility class](/utilities/backgrounds/color.md) `.d-bgc-contrast`.
 - Our [font color utility class](/utilities/typography/font-color.md) `.d-fc-primary-inverted` to change the font color to the inverted primary text color.
 - Our [border radius](/utilities/borders/radius.md) `.d-bar8` for rounded corners.
-- Our [text style](/design/typography/index.md) `.d-body--sm`.
+- Our [text style](/foundations/typography/index.md) `.d-body--sm`.
 
 Though an atomic CSS approach comes with many advantages, we know it also offers a notable disadvantage: reducing the CSS cascade. This is especially true for repeated UI elements, which can end up creating redundant mark-up. For these instances, Dialtone offers components.
 

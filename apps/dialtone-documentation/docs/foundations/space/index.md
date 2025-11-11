@@ -14,13 +14,13 @@ Spacing design tokens focus on controlling **spatial relationships**; that is, t
 
 ### Size
 
-[Size](/design/size/index.md) design tokens define intrinsic **dimensions** of UI components. Example CSS properties they correspond to: `width`, `height`, `border-radius`, `border-width`, positioning properties, i.e. `top`, `left`, etc.
+[Size](/foundations/size/index.md) design tokens define intrinsic **dimensions** of UI components. Example CSS properties they correspond to: `width`, `height`, `border-radius`, `border-width`, positioning properties, i.e. `top`, `left`, etc.
 
 ## Usage
 
 Use spacing units, when [stacking elements](#stacking) or when adding [padding](#padding) or margin.
 
-When setting the scale of an element, use [Size](/design/size/index.md) units.
+When setting the scale of an element, use [Size](/foundations/size/index.md) units.
 
 ### Setting a Specific Spacing
 

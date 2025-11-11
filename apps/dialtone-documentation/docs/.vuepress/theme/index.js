@@ -39,8 +39,22 @@ function _blogPostsFrontmatter (app) {
 }
 
 function _extractFrontmatter (app, path, options, exceptions = []) {
-  const sortingArr = getChildrenPageNames(path, options.sidebar).map(child => child.text.toLowerCase().replaceAll(' ', '-'));
+  const children = getChildrenPageNames(path, options.sidebar);
+
+  // Defensive check: if getChildrenPageNames returns null/undefined, log warning and use empty array
+  if (!children) {
+    console.warn(`[extractFrontmatter] No children found for path: ${path}. Navigation data may be missing.`);
+    return;
+  }
+
+  const sortingArr = children.map(child => child.text.toLowerCase().replaceAll(' ', '-'));
   const indexPage = app.pages.find(page => page.path === path);
+
+  if (!indexPage) {
+    console.warn(`[extractFrontmatter] No index page found for path: ${path}`);
+    return;
+  }
+
   const regExpPath = new RegExp(`${path}.+`);
 
   indexPage.data.enhancedFrontmatter = app.pages
@@ -90,8 +104,14 @@ function _extractComponentStatus (app) {
 function getChildrenPageNames (path, pages) {
   // Handle new topLevelGroups structure
   if (pages?.topLevelGroups) {
-    // Extract sections from dialtone group (where all current content lives)
-    pages = pages.topLevelGroups['dialtone']?.sections || {};
+    // Search all top-level groups and merge their sections
+    const allSections = {};
+    Object.values(pages.topLevelGroups).forEach(group => {
+      if (group.sections) {
+        Object.assign(allSections, group.sections);
+      }
+    });
+    pages = allSections;
   }
 
   const [, parent, child] = path.split('/');
@@ -148,8 +168,8 @@ export const dialtoneVuepressTheme = (options) => ({
         ]);
       _extractFrontmatter(app, '/guides/content/', options);
       _extractFrontmatter(app, '/components/', options, ['/components/status/']);
-      _extractFrontmatter(app, '/design/', options, ['/design/colors/usage/', '/design/colors/palette/', '/design/colors/themes/', '/design/colors/chart-colors/']);
-      _extractFrontmatter(app, '/design/colors/', options);
+      _extractFrontmatter(app, '/foundations/', options, ['/foundations/colors/usage/', '/foundations/colors/palette/', '/foundations/colors/themes/', '/foundations/colors/chart-colors/']);
+      _extractFrontmatter(app, '/foundations/colors/', options);
       _extractComponentStatus(app);
     },
 
@@ -160,7 +180,7 @@ export const dialtoneVuepressTheme = (options) => ({
           break;
         case '/components/':
         case '/guides/':
-        case '/design/':
+        case '/foundations/':
           page.data.enhancedFrontmatter = [];
           break;
         case '/components/status/':

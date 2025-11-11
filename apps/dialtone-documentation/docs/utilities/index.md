@@ -41,7 +41,7 @@ While an atomic CSS approach comes with many advantages, we recognize it also of
 
 ### Border Color
 
-`d-bc-critical` applies a [critical](/design/colors/index.md#borders) border (`b`) color (`c`).
+`d-bc-critical` applies a [critical](/foundations/colors/usage/#borders) border (`b`) color (`c`).
 
 <code-well-header>
   <div class="d-bt d-btw4 d-bc-critical">Box</div>
@@ -191,7 +191,7 @@ Since the border color inherits the color of the parent's foreground (implicitly
 
 ### 9. How about some icons
 
-Add some [icons](/design/icons/index.md).
+Add some [icons](/foundations/icons/).
 
 <code-well-header>
   <dt-stack direction="row" class="d-bgc-primary-inverted d-fc-primary-inverted d-divide-x d-divide-moderate-inverted">
@@ -275,7 +275,7 @@ Apply a [semantic surface color](/utilities/backgrounds/color.md) to convey some
 
 ### 11. Apply an appropriate text style
 
-Choose a [text style](/design/typography/). Text styles combine multiple text properties, i.e. `font size`, `font-family`, `font-weight`, etc.
+Choose a [text style](/foundations/typography/). Text styles combine multiple text properties, i.e. `font size`, `font-family`, `font-weight`, etc.
 
 <code-well-header>
   <dt-stack direction="row" gap="400" class="d-fc-primary-inverted">

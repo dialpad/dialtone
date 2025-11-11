@@ -12,7 +12,7 @@ figma_url: https://www.figma.com/file/zz40wi0uW9MvaJ5RuhcRZR/DT-Core%3A-Icons-7?
   <dt-icon-user-plus />
 </code-well-header>
 
-Check out our complete icon collection in the [icon catalog](/design/icons/index.md#icon-catalog).
+Check out our complete icon collection in the [icon catalog](/foundations/icons/index.md#icon-catalog).
 
 ## Usage
 

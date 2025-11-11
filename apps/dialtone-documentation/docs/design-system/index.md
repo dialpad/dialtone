@@ -20,9 +20,9 @@ Dialtone includes:
 ## Quick Links
 
 <div class="d-d-grid d-g-cols4 d-gg16 d-mt32">
-  <a href="/design/" class="d-card d-p16 d-ta-center hover:d-bc-primary">
+  <a href="/foundations/" class="d-card d-p16 d-ta-center hover:d-bc-primary">
     <dt-icon name="palette" size="500" class="d-fc-brand" />
-    <h3 class="d-headline--sm d-mt8">Design</h3>
+    <h3 class="d-headline--sm d-mt8">Foundations</h3>
     <p class="d-body--sm d-fc-secondary">Visual language</p>
   </a>
 

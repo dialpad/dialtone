@@ -3,7 +3,62 @@
     "foundations": {
       "title": "Foundations",
       "route": "/foundations/",
-      "sections": {}
+      "sections": {
+        "/foundations/": [
+          {
+            "text": "Foundations",
+            "link": "/foundations/",
+            "children": [
+              {
+                "text": "Overview",
+                "link": "/foundations/overview/"
+              },
+              {
+                "text": "Brand",
+                "link": "/foundations/brand/"
+              },
+              {
+                "text": "Colors",
+                "link": "/foundations/colors/usage/",
+                "children": [
+                  {
+                    "text": "Color Palette",
+                    "link": "/foundations/colors/palette/"
+                  },
+                  {
+                    "text": "Chart Colors",
+                    "link": "/foundations/colors/chart-colors/"
+                  },
+                  {
+                    "text": "Themes",
+                    "link": "/foundations/colors/themes/"
+                  }
+                ]
+              },
+              {
+                "text": "Typography",
+                "link": "/foundations/typography/"
+              },
+              {
+                "text": "Icons",
+                "link": "/foundations/icons/"
+              },
+              {
+                "text": "Illustrations",
+                "link": "/foundations/illustrations/"
+              },
+              {
+                "text": "Space",
+                "link": "/foundations/space/"
+              },
+              {
+                "text": "Size",
+                "link": "/foundations/size/"
+              }
+            ]
+          }
+        ]
+      }
     },
     "dialtone": {
       "title": "Design System",
@@ -25,56 +80,6 @@
               {
                 "text": "Accessibility",
                 "link": "/guides/accessibility/"
-              }
-            ]
-          }
-        ],
-        "/design/": [
-          {
-            "text": "Design",
-            "link": "/design/",
-            "children": [
-              {
-                "text": "Brand",
-                "link": "/design/brand/"
-              },
-              {
-                "text": "Colors",
-                "link": "/design/colors/usage/",
-                "children": [
-                  {
-                    "text": "Color Palette",
-                    "link": "/design/colors/palette/"
-                  },
-                  {
-                    "text": "Chart Colors",
-                    "link": "/design/colors/chart-colors/"
-                  },
-                  {
-                    "text": "Themes",
-                    "link": "/design/colors/themes/"
-                  }
-                ]
-              },
-              {
-                "text": "Typography",
-                "link": "/design/typography/"
-              },
-              {
-                "text": "Icons",
-                "link": "/design/icons/"
-              },
-              {
-                "text": "Illustrations",
-                "link": "/design/illustrations/"
-              },
-              {
-                "text": "Space",
-                "link": "/design/space/"
-              },
-              {
-                "text": "Size",
-                "link": "/design/size/"
               }
             ]
           }

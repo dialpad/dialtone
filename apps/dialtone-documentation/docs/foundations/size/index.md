@@ -14,7 +14,7 @@ Size design tokens define intrinsic **dimensions** of UI components. Example CSS
 
 ### Space
 
-[Space](/design/space/index.md) design tokens focus on controlling **spatial relationships**; that is, the space between and around elements. Example CSS properties they correspond to: `padding`, `margin`, `gap`
+[Space](/foundations/space/index.md) design tokens focus on controlling **spatial relationships**; that is, the space between and around elements. Example CSS properties they correspond to: `padding`, `margin`, `gap`
 
 ## Usage
 
