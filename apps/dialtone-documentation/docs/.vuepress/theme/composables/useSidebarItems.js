@@ -12,7 +12,7 @@ function detectTopLevelGroup(path) {
   const designSystemPaths = ['/design/', '/components/', '/utilities/', '/tokens/', '/guides/', '/about/'];
 
   if (designSystemPaths.some(p => path.includes(p))) {
-    return 'design-system';
+    return 'dialtone';
   }
   if (path.includes('/foundations/')) {
     return 'foundations';
@@ -23,12 +23,12 @@ function detectTopLevelGroup(path) {
   if (path.includes('/articles/')) {
     return 'articles';
   }
-  if (path.includes('/design-system/')) {
-    return 'design-system';
+  if (path.includes('/dialtone/')) {
+    return 'dialtone';
   }
 
-  // Default to design-system for any unknown paths
-  return 'design-system';
+  // Default to dialtone for any unknown paths
+  return 'dialtone';
 }
 
 /*
@@ -46,9 +46,9 @@ export function useSidebarItems (items) {
       const topLevelGroup = detectTopLevelGroup(route.path);
       const sections = items.topLevelGroups[topLevelGroup]?.sections || {};
 
-      // For design-system group, return ALL sections so they all appear in sidebar
+      // For dialtone group, return ALL sections so they all appear in sidebar
       // This shows: Design | Components | Utilities | Tokens | Guides | About
-      if (topLevelGroup === 'design-system') {
+      if (topLevelGroup === 'dialtone') {
         // Flatten all sections into a single array
         // Each section is an array with one parent item containing children
         return Object.values(sections).flat();

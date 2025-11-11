@@ -90,8 +90,8 @@ function _extractComponentStatus (app) {
 function getChildrenPageNames (path, pages) {
   // Handle new topLevelGroups structure
   if (pages?.topLevelGroups) {
-    // Extract sections from design-system group (where all current content lives)
-    pages = pages.topLevelGroups['design-system']?.sections || {};
+    // Extract sections from dialtone group (where all current content lives)
+    pages = pages.topLevelGroups['dialtone']?.sections || {};
   }
 
   const [, parent, child] = path.split('/');

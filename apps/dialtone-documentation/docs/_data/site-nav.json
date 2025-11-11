@@ -5,10 +5,30 @@
       "route": "/foundations/",
       "sections": {}
     },
-    "design-system": {
+    "dialtone": {
       "title": "Design System",
-      "route": "/design-system/",
+      "route": "/dialtone/",
       "sections": {
+        "/guides/": [
+          {
+            "text": "Getting Started",
+            "link": "/guides/getting-started/",
+            "children": [
+              {
+                "text": "Theme and Mode",
+                "link": "/guides/theme-and-mode/"
+              },
+              {
+                "text": "Contributing",
+                "link": "/guides/contributing/"
+              },
+              {
+                "text": "Accessibility",
+                "link": "/guides/accessibility/"
+              }
+            ]
+          }
+        ],
         "/design/": [
           {
             "text": "Design",
@@ -20,12 +40,8 @@
               },
               {
                 "text": "Colors",
-                "link": "/design/colors/",
+                "link": "/design/colors/usage/",
                 "children": [
-                  {
-                    "text": "Usage",
-                    "link": "/design/colors/usage/"
-                  },
                   {
                     "text": "Color Palette",
                     "link": "/design/colors/palette/"
@@ -53,22 +69,12 @@
                 "link": "/design/illustrations/"
               },
               {
-                "text": "Elevation",
-                "link": "/design/elevation/",
-                "planned": true
-              },
-              {
                 "text": "Space",
                 "link": "/design/space/"
               },
               {
                 "text": "Size",
                 "link": "/design/size/"
-              },
-              {
-                "text": "Motion",
-                "link": "/design/motion/",
-                "planned": true
               }
             ]
           }
@@ -685,18 +691,12 @@
             "link": "/tokens/",
             "children": [
               {
-                "text": "All Tokens",
-                "link": "/tokens/"
+                "text": "Designing with Tokens",
+                "link": "/tokens/for-designers/"
               },
               {
-                "text": "For Designers",
-                "link": "/tokens/for-designers/",
-                "planned": true
-              },
-              {
-                "text": "For Developers",
-                "link": "/tokens/for-developers/",
-                "planned": true
+                "text": "Coding with Tokens",
+                "link": "/tokens/for-developers/"
               }
             ]
           }
@@ -704,7 +704,7 @@
         "/content/": [
           {
             "text": "Content",
-            "link": "/guides/content/action-language/",
+            "link": "/guides/content/",
             "children": [
               {
                 "text": "Action Language",
@@ -733,28 +733,10 @@
             ]
           }
         ],
-        "/guides/": [
+        "/functions-and-utilities/": [
           {
-            "text": "Guides",
-            "link": "/guides/getting-started/",
-            "children": [
-              {
-                "text": "Getting Started",
-                "link": "/guides/getting-started/"
-              },
-              {
-                "text": "Theme and Mode",
-                "link": "/guides/theme-and-mode/"
-              },
-              {
-                "text": "Contributing",
-                "link": "/guides/contributing/"
-              },
-              {
-                "text": "Accessibility",
-                "link": "/guides/accessibility/"
-              }
-            ]
+            "text": "Functions and Utilities",
+            "link": "/functions-and-utilities/"
           }
         ],
         "/about/": [
@@ -762,10 +744,6 @@
             "text": "About",
             "link": "/about/dialtone.html",
             "children": [
-              {
-                "text": "About Dialtone",
-                "link": "/about/dialtone.html"
-              },
               {
                 "text": "What's New",
                 "link": "/about/whats-new/"

@@ -6,6 +6,7 @@
     v-if="sidebarItems[0]?.children.length"
     as="ul"
     class="dialtone-sidebar__list"
+    gap="300"
   >
     <sidebar-item
       v-for="item in sidebarItems"

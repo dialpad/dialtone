@@ -343,7 +343,7 @@ const route = useRoute();
 // Top-level navigation items
 const navItems = [
   { text: 'Foundations', link: '/foundations/' },
-  { text: 'Design System', link: '/design-system/' },
+  { text: 'Design System', link: '/dialtone/' },
   { text: 'Careers', link: '/careers/' },
   { text: 'Articles', link: '/articles/' },
 ];
