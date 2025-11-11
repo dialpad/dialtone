@@ -1,3 +1,11 @@
+## [9.145.1](https://github.com/dialpad/dialtone/compare/dialtone/v9.145.0...dialtone/v9.145.1) (2025-11-11)
+
+
+### Bug Fixes
+
+* **Docs:** DLT-2797 fix broken links ([#962](https://github.com/dialpad/dialtone/issues/962)) ([0af5d1b](https://github.com/dialpad/dialtone/commit/0af5d1b552e98ef17c73d4f7d8a4dbfc92e9a921))
+* **Popover:** DP-162957 reinitialize the tippy when the anchor element changes ([#964](https://github.com/dialpad/dialtone/issues/964)) ([fa9a0d9](https://github.com/dialpad/dialtone/commit/fa9a0d92731a5b448abfd4fde991c3b4116af05f))
+
 # [9.145.0](https://github.com/dialpad/dialtone/compare/dialtone/v9.144.0...dialtone/v9.145.0) (2025-11-05)
 
 
