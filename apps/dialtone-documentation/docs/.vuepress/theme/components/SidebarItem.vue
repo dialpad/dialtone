@@ -22,12 +22,12 @@
             kind="muted"
             label-class="d-jc-flex-start"
             icon-position="right"
+            :size="depth === 0 ? 'lg' : undefined"
             :class="[
               'd-w100p dialtone-shell-btn',
               {
                 'd-headline--eyebrow d-fw-semibold d-bgc-transparent d-c-default': !item.link,
                 'd-btn--active': isActiveLink(isExactActive, item.link),
-                'd-fs-300': depth === 0,
               },
             ]"
             @click="handleClick($event, listeners, navigate, item.link)"
@@ -76,7 +76,7 @@
               :class="[
                 'dialtone-shell-btn d-w100p',
                 {
-                  'd-mt2': (index === 0 && nested), // add margin top to first nested item
+                  'd-mt8': (index === 0), // add margin top to first nested item
                 },
               ]"
               @click="navigate"
@@ -115,12 +115,12 @@
         importance="clear"
         kind="muted"
         label-class="d-jc-flex-start"
+        :size="depth === 0 ? 'lg' : undefined"
         :active="isActiveLink(isExactActive, item.link)"
         :class="[
           'd-w100p dialtone-shell-btn',
           {
             'd-headline--eyebrow d-fw-semibold d-bgc-transparent d-c-default': !item.link,
-            'd-fs-300': depth === 0,
           },
         ]"
         @click="navigate"
