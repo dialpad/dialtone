@@ -99,10 +99,58 @@ const { headers } = inject('headers');
 
 const items = useThemeLocaleData().value.sidebar;
 const route = useRoute();
+
+/**
+ * Determine which top-level group the current route belongs to
+ * @param {string} path Current route path
+ * @returns {string} The top-level group key
+ */
+function detectTopLevelGroup(path) {
+  // Map routes to top-level groups
+  const designSystemPaths = ['/design/', '/components/', '/utilities/', '/tokens/', '/guides/', '/about/'];
+
+  if (designSystemPaths.some(p => path.includes(p))) {
+    return 'dialtone';
+  }
+  if (path.includes('/foundations/')) {
+    return 'foundations';
+  }
+  if (path.includes('/careers/')) {
+    return 'careers';
+  }
+  if (path.includes('/articles/')) {
+    return 'articles';
+  }
+  if (path.includes('/dialtone/')) {
+    return 'dialtone';
+  }
+
+  // Default to dialtone for any unknown paths
+  return 'dialtone';
+}
+
 const includeToc = computed(() => {
-  // get the item that matches the current route from site-nav without cosidering the last '/'
-  const key = Object.keys(items).filter(item => route.path.includes(item.replace(/\/$/, '')));
-  if (!items[key] || !Array.isArray(items[key])) return false;
+  // Check if using new top-level groups structure
+  if (items.topLevelGroups) {
+    const topLevelGroup = detectTopLevelGroup(route.path);
+    const sections = items.topLevelGroups[topLevelGroup]?.sections || {};
+
+    // For dialtone group, check if any section has content
+    if (topLevelGroup === 'dialtone') {
+      const hasContent = Object.values(sections).some(section => section && section.length > 0);
+      if (!hasContent) return false;
+    } else {
+      // For other groups, check if specific section exists
+      const sectionKey = Object.keys(sections).find(key =>
+        route.path.includes(key.replace(/\/$/, '')),
+      );
+      if (!sections[sectionKey]) return false;
+    }
+  } else {
+    // Fallback to old flat structure (for backwards compatibility)
+    const key = Object.keys(items).filter(item => route.path.includes(item.replace(/\/$/, '')));
+    if (!items[key] || !Array.isArray(items[key])) return false;
+  }
 
   return headers.value && headers.value.length > 0;
 });
