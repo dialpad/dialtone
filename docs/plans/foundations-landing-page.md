@@ -875,18 +875,145 @@ This fixed the error: `Cannot read properties of undefined (reading 'length')`
 ✅ All other items display at top level  
 ✅ Colors section retains its nested children
 
-### Known Issue
-
-During testing, encountered an unrelated icons build loop issue that prevents stable dev server operation. This is a pre-existing infrastructure problem with the icons build process and `nx watch` configuration, **not caused by these navigation changes**.
-
-The navigation code itself is correct and functional.
-
 ### Files Modified
 
 1. `docs/_data/site-nav.json` - Flattened foundations structure
 2. `docs/.vuepress/theme/index.js` - Added array handling in getChildrenPageNames
 3. `docs/.vuepress/theme/components/Sidebar.vue` - Fixed rendering condition
 4. Removed `docs/foundations/overview/` directory
+
+### Commits Created
+
+1. `6489df870` - "flatten foundations navigation structure"
+2. `66338d820` - "docs: document navigation flattening implementation"
+
+---
+
+## Phase 14: Bug Fixes and Stability Improvements
+
+After completing the navigation flattening, several bugs were discovered and fixed during testing.
+
+### Issue 1: Icons Build Loop ✅
+
+**Problem**: Dev server entered infinite rebuild loop with error:
+```
+Failed to load url /@fs/.../dialtone-icons/dist/icons.js
+ENOTEMPTY: directory not empty, rmdir '.../dist/svg/icons'
+```
+
+**Root Cause**:
+- Multiple `nx watch` processes monitoring packages directory
+- VuePress/Vite watching changes in `packages/dialtone-icons/dist`
+- Creates circular dependency: icons rebuild → Vite reload → icons rebuild
+
+**Solution**: Added Vite watch configuration to ignore packages directory
+
+**File**: `docs/.vuepress/config.js`
+
+```javascript
+server: {
+  watch: {
+    // Ignore packages directory to prevent rebuild loops
+    ignored: ['**/packages/**', '**/node_modules/**']
+  }
+}
+```
+
+### Issue 2: Sidebar Toggle Navigation Error ✅
+
+**Problem**: Clicking on collapsible sidebar items sometimes produced error:
+```
+TypeError: Cannot set properties of null (setting '__vnode')
+```
+
+**Root Cause**: Double toggle issue in `handleClick` function - both calling `listeners.onClick()` AND emitting toggle event, causing race condition during component updates.
+
+**Solution**: Simplified toggle logic to only emit to parent, removed direct listener calls
+
+**File**: `docs/.vuepress/theme/components/SidebarItem.vue`
+
+**Changed**:
+```javascript
+// Before - double toggle
+if (link && route.path === link) {
+  if (listeners && listeners.onClick) {
+    listeners.onClick(event);
+  }
+  emit('toggle', itemKey, !isOpen.value);
+  return;
+}
+
+// After - single source of truth
+if (link && route.path === link) {
+  event.preventDefault();
+  emit('toggle', itemKey, !isOpen.value);
+  return;
+}
+```
+
+### Issue 3: FOUC (Flash of Unstyled Content) on Homepage ✅
+
+**Problem**: When directly loading `http://localhost:4000/`, page rendered without full styles. Hero illustrations missing, buttons unstyled. Styles appeared correctly after navigation from another page.
+
+**Root Cause**: DP theme CSS was being imported asynchronously via `importDialtoneThemes()` in the `enhance` hook. On initial page load, theme wasn't applied before first render.
+
+**Solution**: Import DP theme synchronously and apply immediately
+
+**File**: `docs/.vuepress/theme/client.js`
+
+**Added**:
+```javascript
+// Import DP theme synchronously so it's available immediately on page load
+import dpTheme from '@dialpad/dialtone-tokens/themes/dp';
+import { setMode } from '@dialpad/dialtone-tokens/themes/config';
+
+// Apply default theme immediately to prevent FOUC
+if (typeof document !== 'undefined') {
+  const preferredMode = typeof localStorage !== 'undefined'
+    ? localStorage.getItem('preferredMode') || 'system'
+    : 'system';
+
+  let actualMode = preferredMode;
+  if (preferredMode === 'system') {
+    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    actualMode = prefersDark ? 'dark' : 'light';
+  }
+
+  setMode(actualMode, document.documentElement);
+  document.documentElement.setAttribute('data-dt-brand', 'dp');
+}
+```
+
+### Issue 4: Missing Navbar on Homepage ✅
+
+**Problem**: Homepage was missing the entire navbar (navigation links and utility items) on initial load.
+
+**Root Cause**: Layout component had `v-if="!$frontmatter.home"` on the `<navbar>` component, which hid it on the homepage.
+
+**Solution**: Removed the conditional - navbar should always be visible
+
+**File**: `docs/.vuepress/theme/layouts/Layout.vue`
+
+**Changed**:
+```vue
+<!-- Before -->
+<navbar
+  v-if="!$frontmatter.home"
+  @search="openSearch"
+/>
+
+<!-- After -->
+<navbar
+  @search="openSearch"
+/>
+```
+
+### Files Modified in Phase 14
+
+1. `docs/.vuepress/config.js` - Added Vite watch ignore
+2. `docs/.vuepress/theme/components/SidebarItem.vue` - Fixed toggle logic
+3. `docs/.vuepress/theme/client.js` - Synchronous theme loading
+4. `docs/.vuepress/theme/layouts/Layout.vue` - Always show navbar
 
 ---
 
