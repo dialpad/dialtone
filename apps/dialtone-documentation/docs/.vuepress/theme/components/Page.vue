@@ -12,6 +12,7 @@
         :class="prev ? 'd-jc-space-between' : 'd-jc-flex-end'"
         class="d-pt32 d-ai-center"
         as="nav"
+        gap="600"
       >
         <router-link
           v-if="prev"
@@ -20,14 +21,20 @@
           custom
         >
           <dt-button
-            importance="clear"
+            class="d-w100p"
+            label-class="d-jc-space-between"
+            importance="outlined"
+            kind="muted"
             size="lg"
             @click="navigate"
           >
             <template #icon>
               <dt-icon name="arrow-left" />
             </template>
-            {{ prev.text }}
+            <dt-stack as="span" class="d-ta-left d-p8">
+              <span class="d-body--md-compact d-fc-muted">Previous</span>
+              <span>{{ prev.text }}</span>
+            </dt-stack>
           </dt-button>
         </router-link>
         <router-link
@@ -37,15 +44,21 @@
           custom
         >
           <dt-button
+            class="d-w100p"
+            label-class="d-jc-space-between"
             icon-position="right"
-            importance="clear"
+            importance="outlined"
+            kind="muted"
             size="lg"
             @click="navigate"
           >
             <template #icon>
               <dt-icon name="arrow-right" />
             </template>
-            {{ next.text }}
+            <dt-stack as="span" class="d-ta-left d-p8">
+              <span class="d-body--md-compact d-fc-muted">Next</span>
+              <span>{{ next.text }}</span>
+            </dt-stack>
           </dt-button>
         </router-link>
       </dt-stack>

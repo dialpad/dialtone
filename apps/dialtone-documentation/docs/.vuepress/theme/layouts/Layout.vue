@@ -77,8 +77,96 @@ let observer = null;
 
 const isMobile = ref(false);
 
+/**
+ * Determine which top-level group the current route belongs to
+ * @param {string} path Current route path
+ * @returns {string} The top-level group key
+ */
+function detectTopLevelGroup(path) {
+  // Map routes to top-level groups
+  const designSystemPaths = ['/design/', '/components/', '/utilities/', '/tokens/', '/guides/', '/about/'];
+
+  if (designSystemPaths.some(p => path.includes(p))) {
+    return 'dialtone';
+  }
+  if (path.includes('/foundations/')) {
+    return 'foundations';
+  }
+  if (path.includes('/careers/')) {
+    return 'careers';
+  }
+  if (path.includes('/articles/')) {
+    return 'articles';
+  }
+  if (path.includes('/dialtone/')) {
+    return 'dialtone';
+  }
+
+  // Default to dialtone for any unknown paths
+  return 'dialtone';
+}
+
+/**
+ * Recursively extract all navigable pages from a tree structure
+ * Groups them by their parent category for pagination purposes
+ * Includes both parent pages with children AND leaf nodes
+ */
+function extractLeafNodes(items, planned = false) {
+  const groups = [];
+
+  function traverse(itemsList, currentGroup = []) {
+    itemsList.forEach(item => {
+      if (item.planned && !planned) return;
+
+      // Include this item if it has a link (it's a navigable page)
+      if (item.link) {
+        currentGroup.push(item);
+      }
+
+      // If it has children, recurse deeper
+      if (item.children && item.children.length > 0) {
+        traverse(item.children, currentGroup);
+      }
+    });
+  }
+
+  items.forEach(parentItem => {
+    const group = [];
+
+    // Include parent if it has a link
+    if (parentItem.link && (!parentItem.planned || planned)) {
+      group.push(parentItem);
+    }
+
+    // Also traverse children if they exist
+    if (parentItem.children) {
+      traverse(parentItem.children, group);
+    }
+
+    if (group.length > 0) {
+      groups.push(group);
+    }
+  });
+
+  return groups;
+}
+
 // Remove "planned" items to avoid errors
 const currentItems = computed(() => {
+  // Check if using new top-level groups structure
+  if (items.topLevelGroups) {
+    const topLevelGroup = detectTopLevelGroup(route.path);
+    const sections = items.topLevelGroups[topLevelGroup]?.sections || {};
+
+    // Flatten all sections into a single array
+    const allSections = Object.values(sections).flat();
+    if (!allSections.length) return null;
+
+    // Extract all leaf nodes (actual pages) recursively
+    return extractLeafNodes(allSections);
+  }
+
+  // Fallback to old flat structure (for backwards compatibility)
   const key = Object.keys(items).filter(item => route.path.includes(item));
   if (!Array.isArray(items[key])) return null;
   return items[key].map(item => item.children.filter(child => !child.planned));
