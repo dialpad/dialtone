@@ -27,6 +27,7 @@
               {
                 'd-headline--eyebrow d-fw-semibold d-bgc-transparent d-c-default': !item.link,
                 'd-btn--active': isActiveLink(isExactActive, item.link),
+                'd-fs-300': depth === 0,
               },
             ]"
             @click="handleClick($event, listeners, navigate, item.link)"
@@ -119,6 +120,7 @@
           'd-w100p dialtone-shell-btn',
           {
             'd-headline--eyebrow d-fw-semibold d-bgc-transparent d-c-default': !item.link,
+            'd-fs-300': depth === 0,
           },
         ]"
         @click="navigate"
