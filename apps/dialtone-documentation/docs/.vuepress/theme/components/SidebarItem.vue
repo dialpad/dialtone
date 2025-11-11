@@ -1,11 +1,10 @@
 <template>
   <dt-collapsible
+    v-model:open="isOpen"
     element-type="li"
-    max-width="100%"
-    :open="item.link ? isOpen : true"
     class="dt-sidebar-item"
   >
-    <template #anchor="{ attrs }">
+    <template #anchor="{ attrs, listeners }">
       <dt-stack
         direction="row"
         class="d-ps-relative"
@@ -22,13 +21,13 @@
             label-class="d-jc-flex-start"
             icon-position="right"
             :class="[
-              'd-w100p d-fw-normal',
+              'd-w100p dialtone-shell-btn',
               {
                 'd-headline--eyebrow d-fw-semibold d-bgc-transparent d-c-default': !item.link,
                 'd-btn--active': isActiveLink(isExactActive, item.link),
               },
             ]"
-            @click="handleAnchorClick(navigate, item.link)"
+            @click="handleClick($event, listeners, navigate, item.link)"
           >
             {{ item.text }}
             <template #icon="{ iconSize }">
@@ -45,14 +44,19 @@
     <template #content>
       <dt-stack
         as="ul"
-        :class="{ 'd-pl8': nested }"
+        class="d-pl12"
         gap="200"
       >
         <li
           v-for="(subItem, index) in subItems"
           :key="subItem.text"
         >
-          <sidebar-item v-if="subItem.children" :item="subItem" nested />
+          <sidebar-item
+            v-if="subItem.children"
+            :item="subItem"
+            :depth="depth + 1"
+            nested
+          />
           <router-link
             v-else-if="!subItem.planned"
             v-slot="{ navigate, isExactActive }"
@@ -110,6 +114,10 @@ const props = defineProps({
     type: Boolean,
     default: false,
   },
+  depth: {
+    type: Number,
+    default: 0,
+  },
 });
 const subItems = computed(() => {
   return props.item?.children || [];
@@ -149,10 +157,16 @@ const isActiveLink = (isExactActive, link) => {
   return active;
 };
 
-function handleAnchorClick (navigate, link) {
-  isOpen.value = true;
-  if (!link) return;
-  navigate();
+function handleClick (event, listeners, navigate, link) {
+  // First, call the collapsible's click handler to toggle
+  if (listeners && listeners.onClick) {
+    listeners.onClick(event);
+  }
+
+  // Then, if there's a link, navigate to it
+  if (link) {
+    navigate();
+  }
 }
 </script>
 

@@ -8,18 +8,12 @@
     content-class="d-ol-none dialtone-content"
   >
     <template #header>
+      <top-level-nav
+        v-if="!$frontmatter.home"
+        @search="openSearch"
+      />
       <div class="dialtone-header">
         <dialtone-logo />
-        <navbar
-          v-if="!isMobile"
-          :items="navbarLinks"
-          @search="openSearch"
-        />
-        <mobile-navbar
-          v-else
-          :items="navbarLinks"
-          @search="openSearch"
-        />
         <mobile-sidebar
           v-if="isMobile && route.path !== '/'"
         />
@@ -51,11 +45,10 @@
 </template>
 
 <script setup>
-import Navbar from '../components/Navbar.vue';
+import TopLevelNav from '../components/TopLevelNav.vue';
 import Sidebar from '../components/Sidebar.vue';
 import Home from '../components/Home.vue';
 import Page from '../components/Page.vue';
-import MobileNavbar from '../components/MobileNavbar.vue';
 import MobileSidebar from '../components/MobileSidebar.vue';
 import { computed, ref, watch, onMounted } from 'vue';
 import { useRoute } from 'vue-router';
@@ -64,8 +57,6 @@ import DialtoneLogo from '../components/DialtoneLogo.vue';
 import { disableRootScrolling, enableRootScrolling } from '@dialpad/dialtone-vue';
 
 const route = useRoute();
-
-const navbarLinks = useThemeLocaleData().value.navbar || [];
 const prev = ref(null);
 const next = ref(null);
 const docSearchBtn = ref(null);

@@ -10,15 +10,10 @@ const baseURL = (process.env.VUEPRESS_BASE_URL ?? '/');
 
 const themeConfig = {
   logo: baseURL + 'assets/images/dialpad-logo.svg',
-  navbar: [
-    { text: 'Home', link: '/' },
-    { text: 'Design', link: '/design/' },
-    { text: 'Components', link: '/components/' },
-    { text: 'Utilities', link: '/utilities/' },
-    { text: 'Tokens', link: '/tokens/' },
-    { text: 'Guides', link: '/guides/' },
-    { text: 'About', link: '/about/dialtone' },
-  ],
+  // Navbar removed - now using TopLevelNav component instead
+  // Top-level navigation: Foundations | Design System | Careers | Articles
+  // Old navbar items (Design, Components, etc.) now appear in left sidebar
+  navbar: [],
   sidebar,
   sidebarDepth: 0,
   editLink: false,

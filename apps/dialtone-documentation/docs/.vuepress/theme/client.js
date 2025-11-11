@@ -56,18 +56,15 @@ export default defineClientConfig({
       await importDialtoneThemes(app);
     }
 
-    // Redirect parent pages to their first child
+    // Redirect top-level virtual route
     router.beforeEach((to, from, next) => {
-      const redirects = {
-        '/guides/content/': '/guides/content/action-language/',
-        '/design/colors/': '/design/colors/usage/',
-      };
-
-      if (redirects[to.path]) {
-        next(redirects[to.path]);
-      } else {
-        next();
+      // Top-level virtual route redirects to first section
+      if (to.path === '/design-system/' || to.path === '/design-system') {
+        next('/design/'); // Redirect to first Design System section
+        return;
       }
+
+      next();
     });
 
     router.options.scrollBehavior = async (to) => {

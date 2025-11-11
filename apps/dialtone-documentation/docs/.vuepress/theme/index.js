@@ -88,6 +88,12 @@ function _extractComponentStatus (app) {
 }
 
 function getChildrenPageNames (path, pages) {
+  // Handle new topLevelGroups structure
+  if (pages?.topLevelGroups) {
+    // Extract sections from design-system group (where all current content lives)
+    pages = pages.topLevelGroups['design-system']?.sections || {};
+  }
+
   const [, parent, child] = path.split('/');
   const page = Object.keys(pages).find(pageKey => {
     return pageKey === `/${parent}/` || pages[pageKey]?.link?.endsWith(`${path}/`);

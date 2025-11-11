@@ -5,7 +5,6 @@
   <dt-stack
     v-if="sidebarItems[0]?.children.length"
     as="ul"
-    gap="500"
     class="dialtone-sidebar__list"
   >
     <sidebar-item
@@ -13,6 +12,7 @@
       :key="item.link || item.text"
       :item="item"
       :is-single-page="item.isSinglePage"
+      :depth="0"
     />
   </dt-stack>
 </template>
