@@ -190,11 +190,8 @@ function handleClick (event, listeners, navigate, link) {
 
   // If we're already on this exact page, just toggle the collapsible
   if (link && route.path === link) {
-    // Toggle the collapsible manually
-    if (listeners && listeners.onClick) {
-      listeners.onClick(event);
-    }
-    // Emit toggle to parent
+    event.preventDefault();
+    // Only emit toggle to parent - don't call listeners to avoid double toggle
     emit('toggle', itemKey, !isOpen.value);
     return;
   }
@@ -207,8 +204,8 @@ function handleClick (event, listeners, navigate, link) {
   }
 
   // If no link, just toggle
-  if (!link && listeners && listeners.onClick) {
-    listeners.onClick(event);
+  if (!link) {
+    event.preventDefault();
     emit('toggle', itemKey, !isOpen.value);
   }
 }
