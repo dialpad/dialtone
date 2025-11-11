@@ -55,7 +55,9 @@
             v-if="subItem.children"
             :item="subItem"
             :depth="depth + 1"
+            :open-items="openItems"
             nested
+            @toggle="(itemKey, shouldOpen) => $emit('toggle', itemKey, shouldOpen)"
           />
           <router-link
             v-else-if="!subItem.planned"
@@ -118,32 +120,25 @@ const props = defineProps({
     type: Number,
     default: 0,
   },
+  openItems: {
+    type: Set,
+    required: true,
+  },
 });
+
+const emit = defineEmits(['toggle']);
+
 const subItems = computed(() => {
   return props.item?.children || [];
 });
+
 const route = useRoute();
 const hash = ref(route.hash);
 
-// Simple computed: is the current route inside this collapsible's tree?
+// Controlled component - open state comes from parent via openItems Set
 const isOpen = computed(() => {
-  if (!props.item.children) return false;
-
-  // If current page IS this item's page, expand to show children
-  if (route.path === props.item.link) return true;
-
-  // Check if current page is inside children
-  const hasActiveChild = (children) => {
-    return children.some(child => {
-      // Exact match
-      if (route.path === child.link) return true;
-      // Check nested children
-      if (child.children) return hasActiveChild(child.children);
-      return false;
-    });
-  };
-
-  return hasActiveChild(props.item.children);
+  const key = props.item.link || props.item.text;
+  return props.openItems.has(key);
 });
 
 watch(route, (newRoute) => {
@@ -158,14 +153,30 @@ const isActiveLink = (isExactActive, link) => {
 };
 
 function handleClick (event, listeners, navigate, link) {
-  // First, call the collapsible's click handler to toggle
-  if (listeners && listeners.onClick) {
-    listeners.onClick(event);
+  const itemKey = props.item.link || props.item.text;
+
+  // If we're already on this exact page, just toggle the collapsible
+  if (link && route.path === link) {
+    // Toggle the collapsible manually
+    if (listeners && listeners.onClick) {
+      listeners.onClick(event);
+    }
+    // Emit toggle to parent
+    emit('toggle', itemKey, !isOpen.value);
+    return;
   }
 
-  // Then, if there's a link, navigate to it
-  if (link) {
+  // We're NOT on this page, so navigate
+  if (link && route.path !== link) {
     navigate();
+    // Don't emit toggle - route watcher in Sidebar will handle it
+    return;
+  }
+
+  // If no link, just toggle
+  if (!link && listeners && listeners.onClick) {
+    listeners.onClick(event);
+    emit('toggle', itemKey, !isOpen.value);
   }
 }
 </script>

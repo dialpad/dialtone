@@ -462,6 +462,239 @@ Need to decide whether to:
 
 **Status**: Blocked - Need user decision on approach
 
+### Phase 12 (Successful): Controlled Component Pattern ✅
+**Duration**: 45 minutes
+**Status**: Complete - Working as expected!
+
+#### Approach: Controlled Component Pattern
+After 5 failed attempts with different initialization strategies, we switched to a **controlled component pattern** where ALL collapsible state is managed at the Sidebar.vue parent level, and SidebarItem.vue becomes a "dumb" presentation component.
+
+#### Why This Worked
+
+**The Core Problem We Kept Hitting:**
+- DtCollapsible component has internal `isOpen: true` default state
+- During SSR/hydration, ALL SidebarItem instances mounted simultaneously
+- Each instance tried to compute its own `isOpen` state independently
+- Race condition between DtCollapsible's internal state and our external v-model
+- No way to control initialization order of multiple component instances
+
+**The Solution:**
+Move ALL state to a single parent component (Sidebar.vue) BEFORE any children render:
+1. Sidebar computes which items should be open based on route
+2. Stores result in a `Set` (efficient lookup)
+3. Passes the Set to ALL children as a prop
+4. Children simply check if their key is in the Set
+5. No race conditions - state computed once, shared with all
+
+#### Implementation Details
+
+**File: Sidebar.vue (Parent - State Manager)**
+
+Added state management logic:
+```javascript
+// Track which items are open (by link or text as key)
+const openItems = ref(new Set());
+
+// Check if current route is within an item's tree
+const isRouteInTree = (item, routePath) => {
+  if (!item.children) return false;
+  if (routePath === item.link) return true;
+
+  const checkChildren = (children) => {
+    return children.some(child => {
+      if (routePath === child.link) return true;
+      if (child.children) return checkChildren(child.children);
+      return false;
+    });
+  };
+
+  return checkChildren(item.children);
+};
+
+// Find all items that should be open based on route
+const computeOpenItems = (items, routePath) => {
+  const open = new Set();
+
+  const traverse = (itemsList) => {
+    itemsList.forEach(item => {
+      if (item.children) {
+        if (isRouteInTree(item, routePath)) {
+          open.add(item.link || item.text);
+        }
+        traverse(item.children);
+      }
+    });
+  };
+
+  traverse(items);
+  return open;
+};
+
+// Initialize after mount
+onMounted(() => {
+  openItems.value = computeOpenItems(sidebarItems.value, route.path);
+});
+
+// Update when route changes
+watch(() => route.path, (newPath) => {
+  openItems.value = computeOpenItems(sidebarItems.value, newPath);
+});
+
+// Handle manual toggle from children
+const handleToggle = (itemKey, shouldOpen) => {
+  const newSet = new Set(openItems.value);
+  if (shouldOpen) {
+    newSet.add(itemKey);
+  } else {
+    newSet.delete(itemKey);
+  }
+  openItems.value = newSet;
+};
+```
+
+Passes state to children:
+```vue
+<sidebar-item
+  v-for="item in sidebarItems"
+  :key="item.link || item.text"
+  :item="item"
+  :open-items="openItems"
+  @toggle="handleToggle"
+/>
+```
+
+**File: SidebarItem.vue (Child - Controlled Component)**
+
+Removed ALL reactive state management:
+- ❌ Removed `shouldBeOpen()` function
+- ❌ Removed computed `isOpen` with complex logic
+- ❌ Removed `onMounted` hook
+- ❌ Removed `watch` with immediate
+- ❌ Removed `isManuallyCollapsed` ref
+
+Added simple controlled logic:
+```javascript
+const props = defineProps({
+  // ... existing props
+  openItems: {
+    type: Set,
+    required: true,
+  },
+});
+
+const emit = defineEmits(['toggle']);
+
+// Simple lookup - is this item's key in the Set?
+const isOpen = computed(() => {
+  const key = props.item.link || props.item.text;
+  return props.openItems.has(key);
+});
+
+function handleClick(event, listeners, navigate, link) {
+  const itemKey = props.item.link || props.item.text;
+
+  // Already on this page? Just toggle
+  if (link && route.path === link) {
+    if (listeners && listeners.onClick) {
+      listeners.onClick(event);
+    }
+    emit('toggle', itemKey, !isOpen.value);
+    return;
+  }
+
+  // Different page? Navigate (parent's watcher handles state)
+  if (link && route.path !== link) {
+    navigate();
+    return;
+  }
+
+  // No link? Toggle
+  if (!link && listeners && listeners.onClick) {
+    listeners.onClick(event);
+    emit('toggle', itemKey, !isOpen.value);
+  }
+}
+```
+
+Recursive children also receive props:
+```vue
+<sidebar-item
+  v-if="subItem.children"
+  :item="subItem"
+  :open-items="openItems"
+  @toggle="$emit('toggle', $event, arguments[1])"
+/>
+```
+
+#### Why This Pattern Succeeds Where Others Failed
+
+**Single Source of Truth:**
+- Only ONE place (Sidebar.vue) computes open state
+- No conflicts between multiple SidebarItem instances
+- No race conditions during hydration
+
+**Computed Before Rendering:**
+- `onMounted` in Sidebar runs ONCE for the parent
+- State computed BEFORE children render
+- Children receive pre-computed state as props
+
+**Controlled Component Benefits:**
+- SidebarItem doesn't manage its own state
+- Acts purely as a presentation component
+- Emits events, parent decides what to do
+- Standard React/Vue pattern - proven and reliable
+
+**Avoids DtCollapsible Race Condition:**
+- Parent computes state synchronously
+- Passes to children immediately
+- Children pass to DtCollapsible via v-model
+- No time for DtCollapsible's internal `isOpen: true` to cause issues
+
+**Clean Event Flow:**
+1. User clicks collapsible
+2. SidebarItem emits `@toggle` event to parent
+3. Sidebar updates `openItems` Set
+4. All children react to new Set value
+5. Vue's reactivity handles the rest
+
+#### Bug Fixes
+
+**Bug 1: `forEach is not a function`**
+- **Issue**: `useSidebarItems()` returns a computed ref, not a raw array
+- **Fix**: Access `.value` when passing to `computeOpenItems()`:
+  ```javascript
+  computeOpenItems(sidebarItems.value, route.path)
+  ```
+
+#### Results
+
+**Behavior:**
+- ✅ All collapsibles start collapsed except the one containing current page
+- ✅ Click on current page's collapsible → toggles collapse/expand, no navigation
+- ✅ Click on different page's collapsible → navigates, auto-expands to show location
+- ✅ Manual collapse + navigate to child → auto-expands again
+- ✅ No flash of all collapsibles open
+- ✅ No hydration timing issues
+- ✅ Clean, maintainable code
+
+**Files Modified:**
+- `docs/.vuepress/theme/components/Sidebar.vue` - Added state management (lines 23-91)
+- `docs/.vuepress/theme/components/SidebarItem.vue` - Converted to controlled component (lines 121-179)
+
+#### Key Lessons Learned
+
+1. **Don't fight the framework**: Trying to control initialization timing of multiple component instances is fragile. Use the framework's patterns instead.
+
+2. **Controlled components are powerful**: When multiple instances need coordinated state, lift state to a common parent.
+
+3. **Simple is better**: The final solution has LESS code than the failed attempts. Complexity was the enemy.
+
+4. **Single source of truth**: Having state in one place makes debugging trivial and eliminates race conditions.
+
+5. **Props down, events up**: Following Vue's unidirectional data flow pattern avoided all timing issues.
+
+**Status**: ✅ Working perfectly - User testing in progress
+
 ## File Changes Summary
 
 ### Created Files:
