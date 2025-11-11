@@ -1,0 +1,207 @@
+{
+  "skills": {
+    "skill-developer": {
+      "type": "meta",
+      "enforcement": "manual",
+      "priority": "medium",
+      "description": "Use this skill to create new Claude skills tailored to specific workflows"
+    },
+    "project-planning": {
+      "type": "workflow",
+      "enforcement": "suggest",
+      "priority": "high",
+      "description": "Structured planning for complex multi-phase projects",
+      "promptTriggers": {
+        "keywords": [
+          "plan",
+          "design",
+          "architecture",
+          "refactor",
+          "roadmap",
+          "strategy"
+        ],
+        "intentPatterns": [
+          "plan.*?(feature|component|refactor|migration)",
+          "how should (i|we).*?(implement|approach|design)",
+          "what.*?best way.*?(structure|organize|implement)",
+          "design.*?(system|architecture|approach)"
+        ]
+      }
+    },
+    "step-by-step-execution": {
+      "type": "workflow",
+      "enforcement": "suggest",
+      "priority": "high",
+      "description": "Methodical execution with verification at each step",
+      "promptTriggers": {
+        "keywords": [
+          "implement",
+          "execute",
+          "build",
+          "create carefully",
+          "step by step"
+        ],
+        "intentPatterns": [
+          "implement.*?(plan|design|feature)",
+          "build.*?(component|feature|system)",
+          "execute.*?(plan|implementation)",
+          "follow.*?(plan|steps)"
+        ]
+      }
+    },
+    "dialtone-component-development": {
+      "type": "domain",
+      "enforcement": "suggest",
+      "priority": "high",
+      "description": "Best practices for developing Dialtone components with Vue 2/3 compatibility",
+      "promptTriggers": {
+        "keywords": [
+          "component",
+          "dt-",
+          "vue 2",
+          "vue 3",
+          "dialtone-vue",
+          "props",
+          "emits",
+          "composition api",
+          "options api"
+        ],
+        "intentPatterns": [
+          "(create|add|update|modify).*?(component|vue)",
+          "vue (2|3).*?(compatibility|support|sync)",
+          "(fix|update).*?(dt-|dialtone).*?component",
+          "component.*?(props|emits|slots|api)"
+        ]
+      },
+      "fileTriggers": {
+        "pathPatterns": [
+          "packages/dialtone-vue2/**/*.vue",
+          "packages/dialtone-vue3/**/*.vue",
+          "packages/dialtone-vue2/**/*.ts",
+          "packages/dialtone-vue3/**/*.ts"
+        ]
+      }
+    },
+    "dialtone-css-development": {
+      "type": "domain",
+      "enforcement": "suggest",
+      "priority": "high",
+      "description": "CSS and LESS development with design tokens",
+      "promptTriggers": {
+        "keywords": [
+          "css",
+          "less",
+          "style",
+          "stylesheet",
+          "utility class",
+          "d-",
+          "design token",
+          "dt-color",
+          "dt-size",
+          "dt-space"
+        ],
+        "intentPatterns": [
+          "(create|add|update).*?(css|less|style)",
+          "(utility|helper).*?class",
+          "style.*?(component|element)",
+          "design token.*?(usage|reference)"
+        ]
+      },
+      "fileTriggers": {
+        "pathPatterns": [
+          "packages/dialtone-css/**/*.less",
+          "packages/dialtone-css/**/*.css"
+        ]
+      }
+    },
+    "dialtone-tokens-development": {
+      "type": "domain",
+      "enforcement": "suggest",
+      "priority": "high",
+      "description": "Design token creation and management",
+      "promptTriggers": {
+        "keywords": [
+          "token",
+          "design token",
+          "theme",
+          "color palette",
+          "spacing scale",
+          "typography scale",
+          "semantic token"
+        ],
+        "intentPatterns": [
+          "(create|add|update).*?token",
+          "(create|add|update).*?theme",
+          "token.*?(validation|compilation|generation)",
+          "theme.*?(variant|customization)"
+        ]
+      },
+      "fileTriggers": {
+        "pathPatterns": [
+          "packages/dialtone-tokens/**/*.json",
+          "packages/dialtone-tokens/**/*.js"
+        ]
+      }
+    },
+    "dialtone-storybook": {
+      "type": "domain",
+      "enforcement": "suggest",
+      "priority": "medium",
+      "description": "Storybook story development and configuration",
+      "promptTriggers": {
+        "keywords": [
+          "storybook",
+          "story",
+          "stories",
+          "args",
+          "argTypes",
+          "controls",
+          "actions"
+        ],
+        "intentPatterns": [
+          "(create|add|update).*?stor(y|ies)",
+          "storybook.*?(configuration|setup|story)",
+          "component.*?documentation"
+        ]
+      },
+      "fileTriggers": {
+        "pathPatterns": [
+          "**/*.stories.js",
+          "**/*.stories.ts",
+          ".storybook/**/*"
+        ]
+      }
+    },
+    "dialtone-monorepo": {
+      "type": "domain",
+      "enforcement": "suggest",
+      "priority": "medium",
+      "description": "Monorepo management with Nx and pnpm workspaces",
+      "promptTriggers": {
+        "keywords": [
+          "monorepo",
+          "workspace",
+          "nx",
+          "pnpm",
+          "package dependency",
+          "cross-package",
+          "build order"
+        ],
+        "intentPatterns": [
+          "(add|update|remove).*?package.*?dependency",
+          "nx.*?(build|run|cache)",
+          "workspace.*?(configuration|dependency)",
+          "cross-package.*?(import|reference|dependency)"
+        ]
+      },
+      "fileTriggers": {
+        "pathPatterns": [
+          "package.json",
+          "pnpm-workspace.yaml",
+          "nx.json",
+          "packages/*/package.json"
+        ]
+      }
+    }
+  }
+}
