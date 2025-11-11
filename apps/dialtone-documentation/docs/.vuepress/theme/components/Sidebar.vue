@@ -3,7 +3,7 @@
     Local navigation
   </h2>
   <dt-stack
-    v-if="sidebarItems[0]?.children.length"
+    v-if="sidebarItems.length"
     as="ul"
     class="dialtone-sidebar__list"
     gap="300"

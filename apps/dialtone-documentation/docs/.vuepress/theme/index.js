@@ -114,11 +114,38 @@ function getChildrenPageNames (path, pages) {
     pages = allSections;
   }
 
+  // If pages is not an object (e.g., undefined or null), return empty array
+  if (!pages || typeof pages !== 'object') {
+    return [];
+  }
+
+  // If pages is already an array (from recursive call), search within it
+  if (Array.isArray(pages)) {
+    const item = pages.find(item => {
+      const itemPath = item.link?.replace(/\/$/, '');
+      const searchPath = `/${path}`.replace(/\/$/, '');
+      return itemPath === searchPath;
+    });
+    return item?.children || [];
+  }
+
   const [, parent, child] = path.split('/');
   const page = Object.keys(pages).find(pageKey => {
     return pageKey === `/${parent}/` || pages[pageKey]?.link?.endsWith(`${path}/`);
   });
-  const children = pages?.[page]?.[0]?.children || pages?.[page]?.children;
+
+  // Handle both nested structure (first item has children) and flat structure (array IS the children)
+  let children;
+  if (pages?.[page]) {
+    const pageItems = pages[page];
+    // Check if first item has children property (nested structure)
+    if (pageItems[0]?.children) {
+      children = pageItems[0].children;
+    } else if (Array.isArray(pageItems)) {
+      // Flat structure - the array itself contains the items
+      children = pageItems;
+    }
+  }
 
   if (!child) return children || [];
 

@@ -6,56 +6,50 @@
       "sections": {
         "/foundations/": [
           {
-            "text": "Foundations",
-            "link": "/foundations/",
+            "text": "Overview",
+            "link": "/foundations/"
+          },
+          {
+            "text": "Brand",
+            "link": "/foundations/brand/"
+          },
+          {
+            "text": "Colors",
+            "link": "/foundations/colors/usage/",
             "children": [
               {
-                "text": "Overview",
-                "link": "/foundations/overview/"
+                "text": "Color Palette",
+                "link": "/foundations/colors/palette/"
               },
               {
-                "text": "Brand",
-                "link": "/foundations/brand/"
+                "text": "Chart Colors",
+                "link": "/foundations/colors/chart-colors/"
               },
               {
-                "text": "Colors",
-                "link": "/foundations/colors/usage/",
-                "children": [
-                  {
-                    "text": "Color Palette",
-                    "link": "/foundations/colors/palette/"
-                  },
-                  {
-                    "text": "Chart Colors",
-                    "link": "/foundations/colors/chart-colors/"
-                  },
-                  {
-                    "text": "Themes",
-                    "link": "/foundations/colors/themes/"
-                  }
-                ]
-              },
-              {
-                "text": "Typography",
-                "link": "/foundations/typography/"
-              },
-              {
-                "text": "Icons",
-                "link": "/foundations/icons/"
-              },
-              {
-                "text": "Illustrations",
-                "link": "/foundations/illustrations/"
-              },
-              {
-                "text": "Space",
-                "link": "/foundations/space/"
-              },
-              {
-                "text": "Size",
-                "link": "/foundations/size/"
+                "text": "Themes",
+                "link": "/foundations/colors/themes/"
               }
             ]
+          },
+          {
+            "text": "Typography",
+            "link": "/foundations/typography/"
+          },
+          {
+            "text": "Icons",
+            "link": "/foundations/icons/"
+          },
+          {
+            "text": "Illustrations",
+            "link": "/foundations/illustrations/"
+          },
+          {
+            "text": "Space",
+            "link": "/foundations/space/"
+          },
+          {
+            "text": "Size",
+            "link": "/foundations/size/"
           }
         ]
       }
