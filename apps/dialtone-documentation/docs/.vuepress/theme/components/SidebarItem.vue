@@ -98,7 +98,7 @@
 </template>
 
 <script setup>
-import { computed, onMounted, ref, watch } from 'vue';
+import { computed, ref, watch } from 'vue';
 import { useRoute } from 'vue-router';
 
 const props = defineProps({
@@ -124,37 +124,37 @@ const subItems = computed(() => {
 });
 const route = useRoute();
 const hash = ref(route.hash);
-const isOpen = ref(false);
 
-// Check if any child link matches the current route
-const isChildActive = () => {
+// Simple computed: is the current route inside this collapsible's tree?
+const isOpen = computed(() => {
   if (!props.item.children) return false;
-  return props.item.children.some(child => route.path.startsWith(child.link));
-};
+
+  // If current page IS this item's page, expand to show children
+  if (route.path === props.item.link) return true;
+
+  // Check if current page is inside children
+  const hasActiveChild = (children) => {
+    return children.some(child => {
+      // Exact match
+      if (route.path === child.link) return true;
+      // Check nested children
+      if (child.children) return hasActiveChild(child.children);
+      return false;
+    });
+  };
+
+  return hasActiveChild(props.item.children);
+});
 
 watch(route, (newRoute) => {
   hash.value = newRoute.hash;
-  // Keep open if a child is active
-  if (isChildActive()) {
-    isOpen.value = true;
-  } else {
-    isOpen.value = false;
-  }
-}, { flush: 'pre', immediate: true, deep: true });
-
-onMounted(() => {
-  if (route.path === props.item.link || isChildActive()) {
-    isOpen.value = true;
-  }
 });
 
 // isExactActive from the router-link doesn't work with hashes,
 // that's why we need to check for the hash if it's a single page
 const isActiveLink = (isExactActive, link) => {
   if (!link) return false;
-  const active = props.isSinglePage ? hash.value === link : isExactActive;
-  if (route.path === link) { isOpen.value = active; }
-  return active;
+  return props.isSinglePage ? hash.value === link : isExactActive;
 };
 
 function handleClick (event, listeners, navigate, link) {
