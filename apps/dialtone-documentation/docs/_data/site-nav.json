@@ -307,7 +307,7 @@
         ],
         "/utilities/": [
           {
-            "text": "Utilities",
+            "text": "CSS Utilities",
             "link": "/utilities/",
             "children": [
               {
@@ -681,7 +681,7 @@
         ],
         "/tokens/": [
           {
-            "text": "Tokens",
+            "text": "Design Tokens",
             "link": "/tokens/",
             "children": [
               {
@@ -697,6 +697,38 @@
                 "text": "For Developers",
                 "link": "/tokens/for-developers/",
                 "planned": true
+              }
+            ]
+          }
+        ],
+        "/content/": [
+          {
+            "text": "Content",
+            "link": "/guides/content/action-language/",
+            "children": [
+              {
+                "text": "Action Language",
+                "link": "/guides/content/action-language/"
+              },
+              {
+                "text": "Error Messages",
+                "link": "/guides/content/error-messages/"
+              },
+              {
+                "text": "Grammar and Mechanics",
+                "link": "/guides/content/grammar-and-mechanics/"
+              },
+              {
+                "text": "Help Content",
+                "link": "/guides/content/help-content/"
+              },
+              {
+                "text": "Inclusive Language",
+                "link": "/guides/content/inclusive-language/"
+              },
+              {
+                "text": "Voice and Tone",
+                "link": "/guides/content/voice-and-tone/"
               }
             ]
           }
@@ -719,53 +751,8 @@
                 "link": "/guides/contributing/"
               },
               {
-                "text": "Content",
-                "link": "/guides/content/action-language/",
-                "children": [
-                  {
-                    "text": "Action Language",
-                    "link": "/guides/content/action-language/"
-                  },
-                  {
-                    "text": "Error Messages",
-                    "link": "/guides/content/error-messages/"
-                  },
-                  {
-                    "text": "Grammar and Mechanics",
-                    "link": "/guides/content/grammar-and-mechanics/"
-                  },
-                  {
-                    "text": "Help Content",
-                    "link": "/guides/content/help-content/"
-                  },
-                  {
-                    "text": "Inclusive Language",
-                    "link": "/guides/content/inclusive-language/"
-                  },
-                  {
-                    "text": "Voice and Tone",
-                    "link": "/guides/content/voice-and-tone/"
-                  }
-                ]
-              },
-              {
-                "text": "Design Principles",
-                "link": "/guides/design-principles/",
-                "planned": true
-              },
-              {
                 "text": "Accessibility",
                 "link": "/guides/accessibility/"
-              },
-              {
-                "text": "Brand",
-                "link": "/guides/brand/",
-                "planned": true
-              },
-              {
-                "text": "Design Assets",
-                "link": "/guides/design-assets/",
-                "planned": true
               }
             ]
           }
