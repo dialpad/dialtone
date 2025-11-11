@@ -371,6 +371,97 @@ When navigating to any page, ALL sidebar collapsibles at every level would expan
 **Files Modified**:
 - `docs/.vuepress/theme/components/SidebarItem.vue` - Completely simplified isOpen logic
 
+### Phase 12: Manual Collapse/Expand Feature - FAILED ❌
+**Duration**: 3+ hours
+**Status**: Failed - Multiple attempts, all resulting in same bug
+
+#### Goal
+Allow users to manually collapse an open collapsible by clicking it when already on that page, while maintaining auto-expand behavior when navigating to child pages.
+
+#### Desired Behavior
+1. All collapsibles start collapsed EXCEPT the one containing current page
+2. Click on current page's collapsible → collapse it (no navigation, already there)
+3. Click on different page's collapsible → navigate to that page
+4. Navigate to a child page → auto-expand parent collapsible to show location
+
+#### Failed Attempts
+
+**Attempt 1: Writable ref with watcher (immediate: true)**
+- Changed `isOpen` from computed to `ref(false)`
+- Added watcher with `immediate: true` to auto-expand on route changes
+- **Result**: ALL collapsibles expanded on page load (recreated previous bug)
+- **Reverted immediately**
+
+**Attempt 2: "Temporary override" pattern with computed setter**
+- Added `isManuallyCollapsed` ref to track manual collapse
+- Used computed with getter/setter for `isOpen`
+- Getter returned false if manually collapsed, otherwise followed route
+- Setter detected manual collapse and set flag
+- Route watcher cleared manual flag
+- **Result**: ALL collapsibles expanded on page load
+- **Reason**: Complex computed setter didn't work with v-model timing
+
+**Attempt 3: Simple ref + shouldBeOpen() helper + route watcher (NO immediate)**
+- Changed to simple ref initialized with `shouldBeOpen()`
+- Route watcher without `immediate: true` updated state
+- Updated handleClick to check `route.path === link` before navigating
+- **Result**: ALL collapsibles expanded on page load
+- **Reason**: `ref(shouldBeOpen())` evaluated during component setup for ALL instances simultaneously during SSR/hydration
+
+**Attempt 4: ref(false) + onMounted + route watcher**
+- Started with `ref(false)` - no evaluation during setup
+- Used `onMounted(() => isOpen.value = shouldBeOpen())` to set initial state after mount
+- Route watcher updated on navigation
+- handleClick had conditional navigation logic
+- **Result**: ALL collapsibles expanded on page load
+- **Reason**: onMounted still ran for all components simultaneously during hydration
+
+**Attempt 5: Add :appear="false" to DtCollapsible**
+- Agent discovered DtCollapsible has internal `isOpen: true` default causing race condition
+- Added `:appear="false"` prop to disable initial mount animation
+- **Result**: Didn't fix the issue - ALL collapsibles still expanded
+- **Reason**: Hiding transition doesn't fix the underlying timing/state issue
+
+#### Root Cause Analysis (from Agent)
+The Task agent discovered that `DtCollapsible` component (from dialtone-vue) has these issues:
+1. Internal `data()` sets `isOpen: true` as default (line 218 in DtCollapsible.vue)
+2. Watcher with `immediate: true` syncs external prop to internal state (line 234-243)
+3. Race condition: DtCollapsible mounts with `true`, then syncs to `false`, but ALL instances do this simultaneously
+4. The `appear` prop causes visible transition showing the race condition
+5. Even with `appear="false"`, the underlying state synchronization issue persists
+
+#### The Recurring Pattern
+Every attempt follows the same cycle:
+1. Initialize `isOpen` with some strategy (computed, ref, false, function call, etc.)
+2. All collapsibles expand on page load
+3. Revert changes
+4. Try different initialization strategy
+5. Same bug occurs
+
+The issue is NOT about initialization timing or strategy - it's about how DtCollapsible's internal state management conflicts with external v-model control during hydration.
+
+#### Blockers
+1. **DtCollapsible design**: Component defaults to open internally, creating race condition with v-model
+2. **SSR/Hydration timing**: All SidebarItem components evaluate simultaneously during hydration, not sequentially
+3. **Vue component lifecycle**: No reliable way to control initialization order of multiple component instances
+4. **v-model sync timing**: Two-way binding takes time to sync, during which all instances show wrong state
+
+#### Potential Solutions Not Yet Tried
+1. **Modify DtCollapsible source**: Change default `isOpen` from `true` to `false` or make it respect prop immediately
+2. **Controlled component pattern**: Manage all collapsible state at Sidebar.vue level instead of individual SidebarItem instances
+3. **v-if rendering**: Don't render SidebarItems until state is pre-computed
+4. **CSS-only solution**: Use CSS to hide expanded state until JavaScript fully loads
+5. **Accept current behavior**: Keep collapsibles in computed-only mode (auto-expand based on route, no manual collapse)
+
+#### Decision Required
+Need to decide whether to:
+- Modify DtCollapsible component (risky, affects all uses)
+- Refactor to controlled component pattern (time-consuming)
+- Accept current behavior without manual collapse feature
+- Try CSS workaround (hacky but might work)
+
+**Status**: Blocked - Need user decision on approach
+
 ## File Changes Summary
 
 ### Created Files:
