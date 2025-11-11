@@ -273,7 +273,21 @@ html body {
   --button-color-text: var(--dt-shell-action-color-foreground-secondary-default);
   --button-color-background: var(--dt-shell-action-color-background-secondary-default);
 
-  font-weight: var(--dt-font-weight-normal);
+  font-family: "Season Sans";
+
+  &.d-btn,
+  &.d-btn--md {
+    font-size: 16px;
+  }
+
+  &.d-btn--lg {
+    font-size: 20px;
+  }
+
+  &.d-btn--xs,
+  &.d-btn--sm {
+    font-size: 14px;
+  }
 
   &.d-btn--active:not(.d-btn--disabled) {
     --button-color-text: var(--dt-shell-action-color-foreground-primary-strong);
@@ -329,23 +343,26 @@ a.header-anchor {
 }
 
 .d-docsite--header-2 {
-  margin-block: var(--dt-space-600) var(--dt-space-400);
   font: var(--dt-typography-headline-xl);
+  font-size: 32px;
   font-family: var(--dt-font-family-expressive);
+  margin-block: var(--dt-space-600) var(--dt-space-400);
 }
 
 .d-docsite--header-3 {
-  margin-block: var(--dt-space-500) var(--dt-space-300);
   font-weight: var(--dt-font-weight-semi-bold);
-  font-size: var(--dt-font-size-300);
+  font-size: 24px;
+  font-family: "Season Sans";
   line-height: var(--dt-font-line-height-400);
+  margin-block: var(--dt-space-500) var(--dt-space-300);
 }
 
 .d-docsite--header-4 {
-  margin-block: var(--dt-space-500) var(--dt-space-300);
   font-weight: var(--dt-font-weight-bold);
-  font-size: var(--dt-font-size-200);
+  font-size: 20px;
+  font-family: "Season Sans";
   line-height: var(--dt-font-line-height-400);
+  margin-block: var(--dt-space-500) var(--dt-space-300);
 }
 
 .d-docsite--header-2,
@@ -377,10 +394,11 @@ a.header-anchor {
 }
 
 .d-docsite--paragraph {
+  font-size: 20px;
+  font-family: "Season Sans";
+  line-height: var(--dt-font-line-height-400);
   max-inline-size: 75ch;
   margin-block-end: 1em;
-  font-size: var(--dt-font-size-200);
-  line-height: var(--dt-font-line-height-400);
 
   .d-notice & {
     // OVERRIDE
@@ -391,6 +409,8 @@ a.header-anchor {
 .d-docsite--unordered-list,
 .d-docsite--list-element,
 .d-docsite--ordered-list {
+  font-size: 20px;
+  font-family: "Season Sans";
   list-style: revert;
 }
 
@@ -403,7 +423,7 @@ a.header-anchor {
 .d-docsite--list-element {
   max-inline-size: 75ch;
   margin-block-end: var(--dt-space-300);
-  font-size: var(--dt-font-size-200);
+  font-size: 20px;
   line-height: var(--dt-font-line-height-400);
 
   &:last-child {
@@ -565,11 +585,14 @@ a.header-anchor {
   }
 }
 
+.dialtone-doc-table {
+}
+
 .dialtone-icon-card__title {
-  margin-block: 0 var(--dt-space-300);
   font-weight: var(--dt-font-weight-bold);
   font-size: var(--dt-font-size-200);
   line-height: var(--dt-font-line-height-200);
+  margin-block: 0 var(--dt-space-300);
 }
 
 .dialtone-icon-card__subtitle {
@@ -655,8 +678,10 @@ a.header-anchor {
 //  ----------------------------------------------------------------------------
 
 .dialtone-page-title {
-  margin-block-end: var(--dt-space-400);
   font: var(--dt-typography-headline-xxl);
+  font-size: 48px;
+  font-family: "Season Sans";
+  margin-block-end: var(--dt-space-400)
 }
 
 //  ============================================================================
@@ -665,11 +690,12 @@ a.header-anchor {
 //  ----------------------------------------------------------------------------
 
 .dialtone-intro {
+  color: var(--dt-color-foreground-secondary);
+  font-size: 20px;
+  font-family: "Season Sans";
+  line-height: var(--dt-font-line-height-300);
   max-inline-size: 58ch;
   margin-block-end: var(--dt-space-400);
-  color: var(--dt-color-foreground-secondary);
-  font-size: var(--dt-font-size-300);
-  line-height: var(--dt-font-line-height-300);
 }
 
 //  ============================================================================
@@ -803,6 +829,8 @@ a.header-anchor {
   display: flex;
   flex-direction: column;
   gap: var(--dt-space-500);
+  font-size: 20px;
+  font-family: "Season Sans";
   margin-block: var(--dt-space-500) var(--dt-space-500);
 
   @media screen and (min-width: 640px) {
@@ -816,7 +844,7 @@ a.header-anchor {
     align-self: baseline;
     padding: var(--dt-space-100) var(--dt-space-350);
     color: var(--dt-color-foreground-primary-inverted);
-    font-size: var(--dt-font-size-100);
+    font-size: 14px;
     background-color: var(--usage-item-background-hd);
     border-radius: var(--dt-size-radius-pill);
 
