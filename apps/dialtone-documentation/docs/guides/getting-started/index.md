@@ -1,5 +1,5 @@
 ---
-title: Getting Started
+title: Getting Started with Dialtone
 description: A quick start guide to add Dialtone to your project.
 ---
 

@@ -28,6 +28,7 @@
               {
                 'd-headline--eyebrow d-fw-semibold d-bgc-transparent d-c-default': !item.link,
                 'd-btn--active': isActiveLink(isExactActive, item.link),
+                'd-pr16': depth === 1,
               },
             ]"
             @click="handleClick($event, listeners, navigate, item.link)"
@@ -49,6 +50,9 @@
         as="ul"
         class="d-pl12"
         gap="200"
+        :class="{
+          'd-pt4': depth === 0 || depth === 1,
+        }"
       >
         <li
           v-for="(subItem, index) in subItems"
@@ -75,9 +79,6 @@
               :active="isActiveLink(isExactActive, subItem.link)"
               :class="[
                 'dialtone-shell-btn d-w100p',
-                {
-                  'd-mt8': (index === 0), // add margin top to first nested item
-                },
               ]"
               @click="navigate"
             >
