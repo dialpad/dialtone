@@ -1,3 +1,10 @@
+## [2.201.1](https://github.com/dialpad/dialtone/compare/dialtone-vue2/v2.201.0...dialtone-vue2/v2.201.1) (2025-11-11)
+
+
+### Bug Fixes
+
+* **Popover:** DP-162957 reinitialize the tippy when the anchor element changes ([#964](https://github.com/dialpad/dialtone/issues/964)) ([fa9a0d9](https://github.com/dialpad/dialtone/commit/fa9a0d92731a5b448abfd4fde991c3b4116af05f))
+
 # [2.201.0](https://github.com/dialpad/dialtone/compare/dialtone-vue2/v2.200.3...dialtone-vue2/v2.201.0) (2025-11-04)
 
 
