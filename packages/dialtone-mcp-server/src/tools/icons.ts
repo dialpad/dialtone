@@ -92,15 +92,17 @@ export function formatIconResults(results: SearchResult[], query: string): strin
     output += `\n`;
   });
 
-  // Usage example
+  // Usage example - convert kebab-case icon name to PascalCase component name
+  const firstIconName = results[0].name;
+  const pascalCaseName = firstIconName
+    .split('-')
+    .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+    .join('');
+  const componentName = `DtIcon${pascalCaseName}`;
+
   output += `**Usage:**\n`;
   output += `\`\`\`vue\n`;
-  output += `<template>\n`;
-  output += `  <dt-icon name="${results[0].name}" />\n`;
-  output += `</template>\n\n`;
-  output += `<script>\n`;
-  output += `import { DtIcon } from '@dialpad/dialtone-vue'\n`;
-  output += `</script>\n`;
+  output += `import { ${componentName} } from '@dialpad/dialtone-icons/vue3'\n`;
   output += `\`\`\`\n`;
 
   return output;
