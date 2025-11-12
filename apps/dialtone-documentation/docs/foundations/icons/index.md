@@ -63,20 +63,43 @@ Some icons are linked to specific actions, like the Settings gear <dt-icon name=
 
 ### Sizing
 
-<div class="d-d-grid d-g24 d-g-cols1 md:d-g-cols3">
+<div>
+
+<div>
 
 The icon size is defined based on the context and text size next to it. These are the only available size options and no overrides should be needed to properly size the icons.
-
-<div class="d-gc2">
-<p class="d-body--sm"><dt-icon name="food" size="200" /> 200 when body small</p>
-<p class="d-body--md"><dt-icon name="food" size="300" /> 300 when body base</p>
-<p class="d-headline--lg"><dt-icon name="food" size="400" /> 400 when headline large</p>
-<p class="d-headline--xl"><dt-icon name="food" size="500" /> 500  when headline extra large</p>
-<p class="d-fs-300-tv"><dt-icon name="food" size="600" /> 600 when device 300</p>
-<p class="d-fs-400-tv"><dt-icon name="food" size="700" /> 700 when device 400</p>
-<!-- <p class="d-fs-500-tv"><dt-icon name="food" size="800" /> 800 when device 500</p> -->
-
 </div>
+
+<dt-stack direction="row" gap="500" class="d-gc1 d-bgc-secondary d-p16 d-px32 d-bar16 d-ai-flex-start d-jc-space-between">
+  <dt-stack gap="500" class="d-ai-center">
+    <code>200</code>
+    <dt-icon name="food" size="200" />
+  </dt-stack>
+  <dt-stack gap="500" class="d-ai-center">
+    <code>300</code>
+    <dt-icon name="food" size="300" />
+  </dt-stack>
+  <dt-stack gap="500" class="d-ai-center">
+    <code>400</code>
+    <dt-icon name="food" size="400" />
+  </dt-stack>
+  <dt-stack gap="500" class="d-ai-center">
+    <code>500</code>
+    <dt-icon name="food" size="500" />
+  </dt-stack>
+  <dt-stack gap="500" class="d-ai-center">
+    <code>600</code>
+    <dt-icon name="food" size="600" />
+  </dt-stack>
+  <dt-stack gap="500" class="d-ai-center">
+    <code>700</code>
+    <dt-icon name="food" size="700" />
+  </dt-stack>
+  <dt-stack gap="500" class="d-ai-center">
+    <code>800</code>
+    <dt-icon name="food" size="800" />
+  </dt-stack>
+</dt-stack>
 </div>
 
 ## Crafting an Icon

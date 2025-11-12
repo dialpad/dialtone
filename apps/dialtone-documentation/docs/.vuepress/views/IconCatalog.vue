@@ -66,7 +66,7 @@
   <div
     v-for="(icons, category) in filteredIconsList"
     :key="category"
-    class="d-mb16"
+    class="d-mb16 d-px16"
   >
     <div
       class="d-headline--lg d-tt-capitalize d-mb4"
