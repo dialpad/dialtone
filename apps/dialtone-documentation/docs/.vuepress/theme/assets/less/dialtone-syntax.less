@@ -5,7 +5,7 @@
 
 div[class*="language-"] {
 	margin: var(--dt-space-500) 0;
-	padding: var(--dt-space-400);
+	padding: var(--dt-space-550);
 	background-color: var(--dt-color-surface-secondary);
 	border-radius: var(--dt-size-500);
 
@@ -27,8 +27,9 @@ div[class*="language-"] {
 	}
 
   &::before {
+    color: var(--dt-color-foreground-primary);
     font: var(--dt-typography-body-sm);
-    color: var(--dt-color-foreground-primary)
+		opacity: 0;
   }
 }
 
@@ -43,7 +44,7 @@ code[class*="language-"],
 pre[class*="language-"] {
 	margin: 0;
 	color: var(--dt-color-black-1000);
-	font: var(--dt-typography-code-sm);
+	font: var(--dt-typography-code-md);
 	line-height: var(--dt-font-line-height-400);
 	white-space: pre;
 	text-align: start;

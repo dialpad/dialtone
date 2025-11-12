@@ -354,7 +354,7 @@ a.header-anchor {
   font-size: 24px;
   font-family: "Season Sans";
   line-height: var(--dt-font-line-height-400);
-  margin-block: var(--dt-space-500) var(--dt-space-300);
+  margin-block: var(--dt-space-600) var(--dt-space-300);
 }
 
 .d-docsite--header-4 {
@@ -403,6 +403,17 @@ a.header-anchor {
   .d-notice & {
     // OVERRIDE
     margin: unset; // TODO: make sure this doesn't get inserted into components
+  }
+}
+
+code {
+  .d-docsite--paragraph,
+  .d-docsite--unordered-list,
+  .d-docsite--ordered-list,
+  .d-docsite--list-element,
+  .d-docsite--preview-header,
+  .d-docsite--paragraph & {
+    font-size: 90%;
   }
 }
 
@@ -790,7 +801,7 @@ a.header-anchor {
     font-size: 16px;
 
     @media screen and (min-width: 1024px) {
-      // display: block;
+      display: block;
       color: var(--dt-color-foreground-tertiary);
       font-size: 20px;
       line-height: var(--dt-font-line-height-300);
@@ -830,10 +841,10 @@ a.header-anchor {
 
   display: flex;
   flex-direction: column;
-  gap: var(--dt-space-500);
+  gap: var(--dt-space-600);
   font-size: 20px;
   font-family: "Season Sans";
-  margin-block: var(--dt-space-500) var(--dt-space-500);
+  margin-block: var(--dt-space-550);
 
   @media screen and (min-width: 640px) {
     flex-direction: row;
@@ -868,9 +879,10 @@ a.header-anchor {
     flex: 1;
     flex-direction: column;
     gap: var(--dt-space-500);
-    padding: var(--dt-space-500);
+    padding: var(--dt-space-550);
+    color: var(--dt-color-foreground-secondary);
     border: var(--dt-size-border-100) solid var(--usage-item-color-border);
-    border-radius: var(--dt-size-400);
+    border-radius: var(--dt-size-500);
 
     &--do {
       --usage-item-color-border: var(--dt-color-border-success);

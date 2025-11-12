@@ -21,7 +21,7 @@
           custom
         >
           <dt-button
-            class="d-wmn50p"
+            class="d-wmn40p"
             label-class="d-jc-space-between"
             importance="outlined"
             kind="muted"
@@ -44,7 +44,7 @@
           custom
         >
           <dt-button
-            class="d-wmn50p"
+            class="d-wmn40p"
             label-class="d-jc-space-between"
             icon-position="right"
             importance="outlined"
@@ -64,10 +64,11 @@
       </dt-stack>
       <footer
         v-if="lastUpdated"
-        class="d-mt16 d-mb16 d-body--sm d-fc-tertiary"
+        class="d-my32 d-fc-muted"
       >
         <span
           v-if="$frontmatter.title"
+          class="d-fw-bold"
           v-text="$frontmatter.title"
         />
         documentation last updated {{ lastUpdated }}

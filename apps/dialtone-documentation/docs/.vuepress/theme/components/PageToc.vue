@@ -80,6 +80,6 @@ function isItemActive (item) {
 .dialtone-toc {
   width: var(--dt-size-850);
   height: calc(100vh - var(--dt-size-700));
-  top: var(--dt-space-700);
+  top: 118px;
 }
 </style>

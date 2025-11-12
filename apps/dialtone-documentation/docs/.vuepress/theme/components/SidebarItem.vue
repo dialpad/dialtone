@@ -46,59 +46,61 @@
       </dt-stack>
     </template>
     <template #content>
-      <dt-stack
-        as="ul"
-        class="d-pl12"
-        gap="200"
-        :class="{
-          'd-pt4': depth === 0 || depth === 1,
-        }"
-      >
-        <li
-          v-for="(subItem, index) in subItems"
-          :key="subItem.text"
+      <div v-dt-scrollbar class="d-hmx464">
+        <dt-stack
+          as="ul"
+          class="d-pl12"
+          gap="200"
+          :class="{
+            'd-pt4': depth === 0 || depth === 1,
+          }"
         >
-          <sidebar-item
-            v-if="subItem.children"
-            :item="subItem"
-            :depth="depth + 1"
-            :open-items="openItems"
-            nested
-            @toggle="(itemKey, shouldOpen) => $emit('toggle', itemKey, shouldOpen)"
-          />
-          <router-link
-            v-else-if="!subItem.planned"
-            v-slot="{ navigate, isExactActive }"
-            :to="subItem.link"
-            custom
+          <li
+            v-for="(subItem, index) in subItems"
+            :key="subItem.text"
           >
-            <dt-button
-              importance="clear"
-              kind="muted"
-              label-class="d-jc-flex-start"
-              :active="isActiveLink(isExactActive, subItem.link)"
-              :class="[
-                'dialtone-shell-btn d-w100p',
-              ]"
-              @click="navigate"
+            <sidebar-item
+              v-if="subItem.children"
+              :item="subItem"
+              :depth="depth + 1"
+              :open-items="openItems"
+              nested
+              @toggle="(itemKey, shouldOpen) => $emit('toggle', itemKey, shouldOpen)"
+            />
+            <router-link
+              v-else-if="!subItem.planned"
+              v-slot="{ navigate, isExactActive }"
+              :to="subItem.link"
+              custom
+            >
+              <dt-button
+                importance="clear"
+                kind="muted"
+                label-class="d-jc-flex-start"
+                :active="isActiveLink(isExactActive, subItem.link)"
+                :class="[
+                  'dialtone-shell-btn d-w100p',
+                ]"
+                @click="navigate"
+              >
+                {{ subItem.text }}
+              </dt-button>
+            </router-link>
+            <div
+              v-else
+              class="d-btn d-w100p d-jc-flex-start d-fw-normal d-fc-disabled h:d-bgc-transparent d-c-default"
             >
               {{ subItem.text }}
-            </dt-button>
-          </router-link>
-          <div
-            v-else
-            class="d-btn d-w100p d-jc-flex-start d-fw-normal d-fc-disabled h:d-bgc-transparent d-c-default"
-          >
-            {{ subItem.text }}
-            <dt-badge
-              v-if="subItem.planned"
-              class="d-fw-normal d-ml4"
-            >
-              Planned
-            </dt-badge>
-          </div>
-        </li>
-      </dt-stack>
+              <dt-badge
+                v-if="subItem.planned"
+                class="d-fw-normal d-ml4"
+              >
+                Planned
+              </dt-badge>
+            </div>
+          </li>
+        </dt-stack>
+      </div>
     </template>
   </dt-collapsible>
 
