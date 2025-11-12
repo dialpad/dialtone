@@ -266,7 +266,6 @@ html body {
   padding: var(--dt-space-500);
   color: var(--dt-shell-color-foreground-primary);
   background-color: var(--dt-shell-color-surface-default);
-  block-size: var(--dt-size-700);
 }
 
 .dialtone-shell-btn {
@@ -312,6 +311,7 @@ html body {
 
   &__list {
     padding: var(--dt-size-550) 0 var(--dt-size-750) var(--dt-size-450);
+    padding-block-start: calc(var(--dt-space-600) + var(--dt-space-550));
     inset-block: var(--dt-space-700) 0;
     inline-size: calc(var(--dt-size-300) * 64);
   }
