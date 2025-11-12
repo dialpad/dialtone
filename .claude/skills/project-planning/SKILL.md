@@ -247,7 +247,9 @@ Plans are organized by status in three subdirectories:
 
 ## Creating a Plan Document
 
-Follow this workflow:
+⚠️ **CRITICAL REQUIREMENT**: When you use the ExitPlanMode tool to get user approval for a plan, you MUST ALSO create a corresponding markdown plan document in `/docs/plans/`. The ExitPlanMode tool is for interactive approval only - it does NOT replace the need for a permanent markdown plan file.
+
+**Workflow:**
 
 1. **Confirm scope** - Ensure the request warrants a plan document
 2. **Ask clarifying questions** - Understand goals, constraints, context
@@ -256,6 +258,11 @@ Follow this workflow:
 5. **Review for violations** - Check for code examples, decimal numbering, verbosity
 6. **Save to appropriate subdirectory** - Use `/docs/plans/active/` for new work, `/docs/plans/future/` for planned work, with kebab-case name
 7. **Confirm with user** - Show document location and ask if revisions needed
+
+**Important Notes:**
+- If you used ExitPlanMode for approval, create the plan file immediately after (or before if time permits)
+- The markdown file serves as permanent documentation and reference
+- If work is complete, place the file directly in `/docs/plans/archive/`
 
 ## Updating Existing Plans
 
