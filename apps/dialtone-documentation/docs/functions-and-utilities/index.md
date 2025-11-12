@@ -1,6 +1,6 @@
 ---
-title: Functions & Utilities
-description: Functions and utilities provide reusable JavaScript helper methods ...
+title: Functions and Utilities
+description: Reusable JavaScript helper functions for common development tasks
 ---
 
 <div class="d-ba d-bar16 d-pt32 d-ta-center d-fc-muted d-headline--xxl">

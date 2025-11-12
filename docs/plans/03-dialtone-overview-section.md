@@ -320,6 +320,209 @@ if (link === '/dialtone/whats-new/' && route.path.startsWith('/dialtone/whats-ne
 
 ---
 
+## Phase 21: Add Overview Cards to Dialtone Landing Page
+
+**Note**: This phase was superseded by Phase 22, which replaced the hardcoded pages array with build-time frontmatter injection.
+
+### Goal
+
+Replace the "TBD" placeholder on the `/dialtone/` landing page with overview cards linking to the main Design System sections.
+
+### Problem
+
+The `/dialtone/` landing page showed only a placeholder "TBD" message, providing no navigation to the major Design System sections (Foundations, Components, CSS Utilities, Design Tokens, Content Guidelines).
+
+### Solution
+
+Use the existing `<overview>` component with a custom `pages` array to display cards for each major section.
+
+### Implementation
+
+**File**: `docs/dialtone/index.md`
+
+Replaced the TBD empty state with:
+```vue
+<overview :pages="pages" />
+
+<script setup>
+const pages = [
+  {
+    title: 'Foundations',
+    description: 'The fundamental design principles and elements that form the basis of Dialpad\'s design system.',
+    link: '/foundations/',
+  },
+  {
+    title: 'Components',
+    description: 'Reusable components solving common UI needs, designed and built to be assembled in countless combinations.',
+    link: '/components/',
+  },
+  {
+    title: 'CSS Utilities',
+    description: 'A utility-first CSS framework for building user interfaces.',
+    link: '/utilities/',
+  },
+  {
+    title: 'Design Tokens',
+    description: 'Multi-platform values that make up Dialtone\'s design language',
+    link: '/tokens/',
+  },
+  {
+    title: 'Content Guidelines',
+    shortTitle: 'Content',
+    description: 'Guidelines to unify the way we communicate with our users.',
+    link: '/guides/content/',
+  },
+];
+</script>
+```
+
+### Technical Details
+
+**Two Approaches for Overview Cards:**
+
+1. **Auto-populated** (used on `/foundations/`, `/components/`, etc.):
+   - Uses `<overview :pages="$page.enhancedFrontmatter" />`
+   - Automatically gets child pages from the current section
+   - Configured in `theme/index.js` via `_extractFrontmatter()`
+
+2. **Custom pages array** (used here for `/dialtone/`):
+   - Uses `<overview :pages="pages" />` with manual `pages` array
+   - Allows linking to arbitrary sections (not just children)
+   - Full control over which cards appear, their order, and descriptions
+
+**Why Custom Array for This Page:**
+- `/dialtone/` Overview section has children "What's New", "Getting Started", "Release Notes"
+- We want to display the OTHER top-level sections: Foundations, Components, Utilities, Tokens, Content
+- These are siblings in the navigation, not children, so auto-population wouldn't find them
+
+**Reusable Pattern:**
+This same pattern can be used on any page that needs custom overview cards:
+1. Add `<overview :pages="pages" />` to the markdown
+2. Add `<script setup>` block with `pages` array
+3. Each page object needs: `title`, `description`, `link`
+4. Optional fields: `shortTitle`, `status`, `thumb`, `fileName`
+
+### Files Modified
+1. `docs/dialtone/index.md` - Replaced TBD placeholder with 5 overview cards
+
+### Result
+
+✅ Landing page displays 5 cards for major Design System sections
+✅ Each card shows title, description, and links to the section
+✅ Reusable pattern established for custom overview cards on any page
+✅ No theme changes needed - uses existing `<overview>` component
+
+---
+
+## Phase 22: Use Build-Time Frontmatter Injection for Overview Cards
+
+### Goal
+
+Replace hardcoded page descriptions in overview cards with dynamically fetched frontmatter from destination pages, eliminating duplication and ensuring single source of truth.
+
+### Problem
+
+Phase 21 introduced hardcoded descriptions in the `/dialtone/index.md` file that duplicated the descriptions already defined in each destination page's frontmatter. This created maintenance burden and risk of inconsistency.
+
+### Solution
+
+Implement build-time frontmatter injection using the existing `onInitialized` pattern, matching how `/components/`, `/guides/`, and `/foundations/` already work.
+
+### Implementation
+
+**File**: `docs/.vuepress/theme/index.js`
+
+Added new `_injectOverviewPages()` function (lines 41-64):
+```javascript
+function _injectOverviewPages (app) {
+  const dialtoneIndexPage = app.pages.find(page => page.path === '/dialtone/');
+  if (!dialtoneIndexPage) return;
+
+  const pagePaths = [
+    '/components/',
+    '/utilities/',
+    '/tokens/',
+    '/guides/content/',
+    '/functions-and-utilities/',
+  ];
+
+  dialtoneIndexPage.data.overviewPages = pagePaths.map(path => {
+    const page = app.pages.find(p => p.path === path);
+    if (!page) return null;
+
+    return {
+      title: page.frontmatter.title,
+      shortTitle: page.frontmatter.shortTitle,
+      description: page.frontmatter.description,
+      link: path,
+    };
+  }).filter(Boolean);
+}
+```
+
+Called in `onInitialized` hook (line 209):
+```javascript
+onInitialized (app) {
+  _blogPostsFrontmatter(app);
+  _injectOverviewPages(app);  // Added this line
+  // ... rest of initialization
+}
+```
+
+Added to `extendsPage` (lines 231-233):
+```javascript
+case '/dialtone/':
+  page.data.overviewPages = [];
+  break;
+```
+
+**File**: `docs/dialtone/index.md`
+
+Simplified to use injected data:
+```vue
+---
+title: Dialtone Design System
+description: Dialpad's design system for building consistent, accessible product experiences
+---
+
+<overview :pages="$page.overviewPages" />
+```
+
+### Technical Details
+
+**Build-Time Data Injection Pattern:**
+1. `extendsPage` initializes empty `page.data.overviewPages = []` array
+2. `onInitialized` runs `_injectOverviewPages(app)` which:
+   - Finds the `/dialtone/` page
+   - Queries each destination page by path
+   - Extracts frontmatter (title, description, etc.)
+   - Populates `page.data.overviewPages` array
+3. Markdown template accesses via `$page.overviewPages`
+
+**Why This Is Better:**
+- **Single source of truth**: Descriptions live in destination page frontmatter only
+- **Zero duplication**: No need to maintain descriptions in multiple places
+- **Consistent with codebase**: Uses same pattern as `/components/`, `/guides/`, `/foundations/`
+- **No runtime overhead**: Data computed at build time
+- **Type-safe**: All pages guaranteed to have frontmatter structure
+
+**Note on `/foundations/` Page:**
+The `/foundations/` page already uses `$page.enhancedFrontmatter` which auto-populates from its child pages via `_extractFrontmatter()`. It did not need changes in this phase.
+
+### Files Modified
+1. `docs/.vuepress/theme/index.js` - Added `_injectOverviewPages()` function and calls
+2. `docs/dialtone/index.md` - Removed hardcoded `<script setup>` block, now uses `$page.overviewPages`
+
+### Result
+
+✅ Overview cards now pull descriptions from source pages automatically
+✅ Zero duplication between pages
+✅ Follows existing build-time injection pattern
+✅ Easy to add/remove/reorder cards by changing `pagePaths` array
+✅ Consistent with how `/components/`, `/guides/`, `/foundations/` work
+
+---
+
 ## Final Result (All Phases Complete)
 
 ✅ Release Notes accessible at `/dialtone/release-notes/`
@@ -328,6 +531,10 @@ if (link === '/dialtone/whats-new/' && route.path.startsWith('/dialtone/whats-ne
 ✅ Blog post navigation highlighting working
 ✅ Getting Started integrated into Overview section
 ✅ Collapsible group for Getting Started sub-pages
+✅ Dialtone landing page displays 5 overview cards for major sections
+✅ Overview cards use build-time frontmatter injection (single source of truth)
+✅ Zero duplication between pages
+✅ Reusable pattern for custom overview cards documented
 ✅ All navigation working correctly
 ✅ Navbar highlights correctly
 ✅ Improved information architecture

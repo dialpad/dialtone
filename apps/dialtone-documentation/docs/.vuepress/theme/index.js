@@ -38,6 +38,31 @@ function _blogPostsFrontmatter (app) {
     });
 }
 
+function _injectOverviewPages (app) {
+  const dialtoneIndexPage = app.pages.find(page => page.path === '/dialtone/');
+  if (!dialtoneIndexPage) return;
+
+  const pagePaths = [
+    '/components/',
+    '/utilities/',
+    '/tokens/',
+    '/guides/content/',
+    '/functions-and-utilities/',
+  ];
+
+  dialtoneIndexPage.data.overviewPages = pagePaths.map(path => {
+    const page = app.pages.find(p => p.path === path);
+    if (!page) return null;
+
+    return {
+      title: page.frontmatter.title,
+      shortTitle: page.frontmatter.shortTitle,
+      description: page.frontmatter.description,
+      link: path,
+    };
+  }).filter(Boolean);
+}
+
 function _extractFrontmatter (app, path, options, exceptions = []) {
   const children = getChildrenPageNames(path, options.sidebar);
 
@@ -181,6 +206,7 @@ export const dialtoneVuepressTheme = (options) => ({
 
     onInitialized (app) {
       _blogPostsFrontmatter(app);
+      _injectOverviewPages(app);
       _extractFrontmatter(
         app,
         '/guides/',
@@ -202,6 +228,9 @@ export const dialtoneVuepressTheme = (options) => ({
 
     extendsPage: (page) => {
       switch (page.path) {
+        case '/dialtone/':
+          page.data.overviewPages = [];
+          break;
         case '/dialtone/whats-new/':
           page.data.blogPosts = [];
           break;
