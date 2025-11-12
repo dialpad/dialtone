@@ -4,17 +4,6 @@ description: Guidelines for using the Dialpad logo in different contexts and the
 figma_url: https://www.figma.com/design/W58r5BkO8qTw3vem9YieJd/DT9-Component-Library--Rebrand-2025-?node-id=17330-1170
 ---
 
-<dt-notice
-  kind="info"
-  title="Dialpad logomark"
-  :hideClose="true"
-  class="d-wmx100p"
->
-  <template #default>
-    If you're looking for just the logo without the wordmark, you can find them as an icon in <a class="d-link d-link--muted" :href="$withBase('/foundations/icons/?search=dialpad')">Dialtone's Icon library</a>
-  </template>
-</dt-notice>
-
 <icons illustration kind="brand-logos" size="large"></icons>
 
 ## Choosing Between Dialpad Logo Color Options

@@ -263,7 +263,7 @@ html body {
   display: grid;
   grid-template-columns: 1fr auto 1fr;
   align-items: center;
-  padding: var(--dt-space-500);
+  padding: var(--dt-space-500) var(--dt-space-550) var(--dt-space-500) var(--dt-space-500);
   color: var(--dt-shell-color-foreground-primary);
   background-color: var(--dt-shell-color-surface-default);
 
@@ -322,7 +322,7 @@ html body {
   // border-inline-end: var(--dt-size-100) solid var(--dt-shell-color-border-subtle);
 
   &__list {
-    padding: var(--dt-size-550) 0 var(--dt-size-750) var(--dt-size-450);
+    padding: var(--dt-size-550) 0 var(--dt-size-750) var(--dt-size-500);
     padding-block-start: calc(var(--dt-space-600) + var(--dt-space-550));
     inset-block: var(--dt-space-700) 0;
     inline-size: calc(var(--dt-size-300) * 64);
@@ -813,12 +813,12 @@ code {
     display: none;
     font-size: 16px;
 
-    @media screen and (min-width: 1024px) {
-      display: block;
-      color: var(--dt-color-foreground-tertiary);
-      font-size: 20px;
-      line-height: var(--dt-font-line-height-300);
-    }
+    // @media screen and (min-width: 1024px) {
+    //   display: block;
+    //   color: var(--dt-color-foreground-tertiary);
+    //   font-size: 20px;
+    //   line-height: var(--dt-font-line-height-300);
+    // }
   }
 }
 
