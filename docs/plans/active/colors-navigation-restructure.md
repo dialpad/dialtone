@@ -95,6 +95,8 @@ Restructure the Colors foundation navigation so the parent page at `/foundations
 - Added "Usage" as first child in Colors navigation (lines 38-41)
 - Created custom overview content for `/foundations/colors/index.md`
 - Verified build configuration exceptions are correct in index.js line 232
+- Fixed Foundations overview card sorting bug (post-completion)
+- Fixed Color thumbnail missing image (post-completion)
 
 **Modified:**
 
@@ -103,20 +105,37 @@ Restructure the Colors foundation navigation so the parent page at `/foundations
 - `/apps/dialtone-documentation/docs/foundations/colors/index.md` (entire file)
   - Reason: Replace TBD placeholder with custom overview content
   - Removed `no_preview: true` frontmatter
+- `/apps/dialtone-documentation/docs/.vuepress/theme/index.js` (lines 83-85)
+  - Reason: Fixed card sorting bug - filter out parent "Overview" page from sortingArr
+  - Added line 84: `const childPages = children.filter(child => child.link !== path);`
+  - This prevents the parent page link from being included in sort order, which was causing all cards to sort incorrectly
+- `/apps/dialtone-documentation/docs/foundations/icons/index.md` (line 3)
+  - Reason: Removed `shortTitle: icons` to ensure consistent name generation for sorting
+  - All foundation pages now use title-based fileName for sorting consistency
+
+**Added:**
+
+- `/apps/dialtone-documentation/docs/.vuepress/public/assets/images/color.svg`
+  - Reason: Thumbnail file must match page title "Color" (singular), not "Colors" (plural)
+  - Copied from existing colors.svg file
 
 **Removed:**
 
 - TBD placeholder content from Colors parent page
 - `no_preview: true` frontmatter from Colors parent page
   - Reason: Parent now has actual content to display
+- `shortTitle: icons` from Icons page frontmatter
+  - Reason: Inconsistent with other pages and caused sorting issues
 
 **Deviations from Plan:**
 
-- None
+- Discovered and fixed card sorting bug in overview page generation (affected all overview pages, not just Colors)
+- Fixed thumbnail naming issue discovered during testing
 
 **Blockers/Issues:**
 
-- None
+- Initial issue: Foundations overview cards not displaying in navigation order - RESOLVED
+- Initial issue: Color card missing thumbnail image - RESOLVED
 
 ## Open Questions
 

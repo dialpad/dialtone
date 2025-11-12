@@ -10,7 +10,7 @@
       <dt-stack
         direction="row"
         :class="prev ? 'd-jc-space-between' : 'd-jc-flex-end'"
-        class="d-pt32 d-ai-center"
+        class="d-pt48 d-ai-center"
         as="nav"
         gap="600"
       >

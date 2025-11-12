@@ -80,7 +80,9 @@ function _extractFrontmatter (app, path, options, exceptions = []) {
     return;
   }
 
-  const sortingArr = children.map(child => child.text.toLowerCase().replaceAll(' ', '-'));
+  // Filter out the parent page itself (e.g., "Overview" which links to the index page)
+  const childPages = children.filter(child => child.link !== path);
+  const sortingArr = childPages.map(child => child.text.toLowerCase().replaceAll(' ', '-'));
   const indexPage = app.pages.find(page => page.path === path);
 
   if (!indexPage) {

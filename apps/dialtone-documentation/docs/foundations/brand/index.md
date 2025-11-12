@@ -28,5 +28,4 @@ The visual symbols of the dialpad and Ai are combined to represent the relations
   <figure class="d-bar16 d-of-hidden">
     <img src="/assets/images/logo--sample-03.png" alt="">
   </figure>
-
 </dt-stack>
