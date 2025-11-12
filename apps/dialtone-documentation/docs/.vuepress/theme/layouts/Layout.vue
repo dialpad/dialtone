@@ -25,14 +25,14 @@
         <mobile-sidebar
           v-if="isMobile && route.path !== '/'"
         />
-        <!-- eslint-disable-next-line vue/no-undef-components -->
-        <div
-          id="docsearch"
-          ref="docSearchBtn"
-          class="d-d-none"
-          options=""
-        />
       </div>
+      <!-- eslint-disable-next-line vue/no-undef-components -->
+      <div
+        id="docsearch"
+        ref="docSearchBtn"
+        class="d-d-none"
+        options=""
+      />
     </template>
     <template
       v-if="!$frontmatter.home"

@@ -260,12 +260,24 @@ html body {
 //      appropriate to ship as part of Dialtone.
 //  ----------------------------------------------------------------------------
 .dialtone-header {
-  display: flex;
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
   align-items: center;
-  justify-content: space-between;
   padding: var(--dt-space-500);
   color: var(--dt-shell-color-foreground-primary);
   background-color: var(--dt-shell-color-surface-default);
+
+  > :first-child {
+    justify-self: start;
+  }
+
+  > :nth-child(2) {
+    justify-self: center;
+  }
+
+  > :last-child {
+    justify-self: end;
+  }
 }
 
 .dialtone-shell-btn {
