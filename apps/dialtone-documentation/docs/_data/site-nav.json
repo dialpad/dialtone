@@ -68,6 +68,24 @@
                 "link": "/dialtone/whats-new/"
               },
               {
+                "text": "Getting Started",
+                "link": "/guides/getting-started/",
+                "children": [
+                  {
+                    "text": "Theme and Mode",
+                    "link": "/guides/theme-and-mode/"
+                  },
+                  {
+                    "text": "Contributing",
+                    "link": "/guides/contributing/"
+                  },
+                  {
+                    "text": "Accessibility",
+                    "link": "/guides/accessibility/"
+                  }
+                ]
+              },
+              {
                 "text": "Release Notes",
                 "link": "/dialtone/release-notes/"
               }
@@ -732,26 +750,6 @@
           {
             "text": "Functions and Utilities",
             "link": "/functions-and-utilities/"
-          }
-        ],
-        "/guides/": [
-          {
-            "text": "Getting Started",
-            "link": "/guides/getting-started/",
-            "children": [
-              {
-                "text": "Theme and Mode",
-                "link": "/guides/theme-and-mode/"
-              },
-              {
-                "text": "Contributing",
-                "link": "/guides/contributing/"
-              },
-              {
-                "text": "Accessibility",
-                "link": "/guides/accessibility/"
-              }
-            ]
           }
         ]
       }

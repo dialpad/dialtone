@@ -49,8 +49,8 @@ export default defineUserConfig({
       server: {
         watch: {
           // Ignore packages directory to prevent rebuild loops
-          ignored: ['**/packages/**', '**/node_modules/**']
-        }
+          ignored: ['**/packages/**', '**/node_modules/**'],
+        },
       },
     },
     vuePluginOptions: {

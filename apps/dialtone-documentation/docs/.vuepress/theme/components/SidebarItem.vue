@@ -182,6 +182,12 @@ watch(route, (newRoute) => {
 // that's why we need to check for the hash if it's a single page
 const isActiveLink = (isExactActive, link) => {
   if (!link) return false;
+
+  // Special case: Highlight What's New when viewing blog posts
+  if (link === '/dialtone/whats-new/' && route.path.startsWith('/dialtone/whats-new/posts/')) {
+    return true;
+  }
+
   return props.isSinglePage ? hash.value === link : isExactActive;
 };
 

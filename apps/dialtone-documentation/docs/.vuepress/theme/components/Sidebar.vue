@@ -42,6 +42,12 @@ const isRouteInTree = (item, routePath) => {
   const checkChildren = (children) => {
     return children.some(child => {
       if (routePath === child.link) return true;
+
+      // Special case: Treat blog posts as children of What's New
+      if (child.link === '/dialtone/whats-new/' && routePath.startsWith('/dialtone/whats-new/posts/')) {
+        return true;
+      }
+
       if (child.children) return checkChildren(child.children);
       return false;
     });

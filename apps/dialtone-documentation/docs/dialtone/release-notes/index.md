@@ -3,11 +3,8 @@ title: Release Notes
 description: Dialtone release history and version information.
 ---
 
-## Release Notes
-
-<p>
+<p class="d-mt32">
   <a
-    class="d-d-inline-flex d-pt12"
     href="https://github.com/dialpad/dialtone/"
   >
     <img
@@ -16,9 +13,11 @@ description: Dialtone release history and version information.
     />
   </a>
 </p>
-<dialtone-changelog />
+<div class="d-mb16">
+  <dialtone-changelog />
+</div>
 
-### [All Releases](https://github.com/dialpad/dialtone/releases)
+View [all releases](https://github.com/dialpad/dialtone/releases) on GitHub.
 
 <script setup>
   import DialtoneChangelog from '@views/DialtoneChangelog.vue';

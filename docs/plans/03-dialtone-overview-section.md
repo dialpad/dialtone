@@ -170,7 +170,7 @@ After automated migration, user made improvements:
 10. `docs/utilities/responsive/breakpoints.md` - Updated absolute URL
 11. `.github/workflows/send-blog-communications.yml` - Updated trigger paths
 
-## Final Result
+## Result After Phase 18
 
 ✅ Release Notes accessible at `/dialtone/release-notes/`
 ✅ Blog index accessible at `/dialtone/whats-new/`
@@ -180,6 +180,157 @@ After automated migration, user made improvements:
 ✅ GitHub Actions triggers on new posts
 ✅ Navbar highlights correctly
 ✅ Dialtone Overview section complete with real content
+
+---
+
+## Phase 19: Move Getting Started to Overview Section
+
+### Goal
+
+Move "Getting Started" from the bottom of Design System sections to become a sibling of "What's New" and "Release Notes" inside the Overview section, creating a collapsible group for its sub-pages.
+
+### Problem
+
+Getting Started was located at the bottom of all Design System sections, separate from the Overview section where it logically belongs as introductory content.
+
+### Solution
+
+**Navigation-only change** - Keep files at `/guides/*` paths, only update site-nav.json structure.
+
+### Implementation
+
+**File**: `docs/_data/site-nav.json`
+
+**Added Getting Started as third child under `/dialtone/` Overview section:**
+```json
+"/dialtone/": [
+  {
+    "text": "Overview",
+    "link": "/dialtone/",
+    "children": [
+      {
+        "text": "What's New",
+        "link": "/dialtone/whats-new/"
+      },
+      {
+        "text": "Release Notes",
+        "link": "/dialtone/release-notes/"
+      },
+      {
+        "text": "Getting Started",
+        "link": "/guides/getting-started/",
+        "children": [
+          {
+            "text": "Theme and Mode",
+            "link": "/guides/theme-and-mode/"
+          },
+          {
+            "text": "Contributing",
+            "link": "/guides/contributing/"
+          },
+          {
+            "text": "Accessibility",
+            "link": "/guides/accessibility/"
+          }
+        ]
+      }
+    ]
+  }
+]
+```
+
+**Removed** the separate `/guides/` section entry (lines 737-756) that previously held Getting Started.
+
+### Why This Approach?
+
+- ✅ **Minimal risk**: Only 1 file changes
+- ✅ **No broken links**: All URLs stay the same
+- ✅ **No file moves**: Content stays at `/guides/*` paths
+- ✅ **No theme updates needed**: `/guides/` directory still exists with other content
+- ✅ **Collapsible groups work**: Theme already supports nested children pattern
+
+### Files Modified
+1. `docs/_data/site-nav.json` - Moved Getting Started structure to Overview section
+
+### Result
+
+✅ Getting Started appears under Overview in sidebar
+✅ Creates collapsible group with 3 sub-items (Theme and Mode, Contributing, Accessibility)
+✅ All existing URLs continue to work
+✅ Navigation order: What's New → Release Notes → Getting Started
+✅ Better information architecture with introductory content grouped together
+
+---
+
+## Phase 20: Highlight "What's New" When Viewing Blog Posts
+
+### Goal
+
+When viewing a blog post (e.g., `/dialtone/whats-new/posts/2025-8-22.html`), the "What's New" parent item should be highlighted in the sidebar navigation.
+
+### Problem
+
+Blog posts are dynamically generated and not listed in `site-nav.json`, so the existing navigation logic doesn't recognize them as children of "What's New". When viewing a blog post, no sidebar item is highlighted.
+
+### Solution
+
+Add path-prefix matching in both `Sidebar.vue` and `SidebarItem.vue` to recognize blog post URLs as children of "What's New".
+
+### Implementation
+
+**File**: `apps/dialtone-documentation/docs/.vuepress/theme/components/Sidebar.vue` (lines 46-49)
+
+Added special case in `isRouteInTree()` function within the `checkChildren` helper:
+```javascript
+// Special case: Treat blog posts as children of What's New
+if (child.link === '/dialtone/whats-new/' && routePath.startsWith('/dialtone/whats-new/posts/')) {
+  return true;
+}
+```
+
+**Key Implementation Detail**: The check must be inside the `checkChildren` recursive function to properly detect when a child item ("What's New") should be considered active, which then causes its parent ("Overview") to expand.
+
+**File**: `apps/dialtone-documentation/docs/.vuepress/theme/components/SidebarItem.vue` (lines 186-189)
+
+Added special case in `isActiveLink()` function:
+```javascript
+// Special case: Highlight What's New when viewing blog posts
+if (link === '/dialtone/whats-new/' && route.path.startsWith('/dialtone/whats-new/posts/')) {
+  return true;
+}
+```
+
+### Technical Details
+
+**Why Two Changes?**
+1. **Sidebar.vue** - Controls which navigation sections expand (parent items)
+2. **SidebarItem.vue** - Controls which specific links are highlighted (active state)
+
+**Pattern Used**: Path-prefix matching similar to breadcrumb logic in `Layout.vue:182-184`
+
+### Files Modified
+1. `apps/dialtone-documentation/docs/.vuepress/theme/components/Sidebar.vue` - Added blog post expansion logic
+2. `apps/dialtone-documentation/docs/.vuepress/theme/components/SidebarItem.vue` - Added blog post highlighting
+
+### Result
+
+✅ "What's New" highlights when viewing any blog post at `/dialtone/whats-new/posts/*`
+✅ Overview section automatically expands when on blog post
+✅ Consistent with other navigation behavior patterns
+
+---
+
+## Final Result (All Phases Complete)
+
+✅ Release Notes accessible at `/dialtone/release-notes/`
+✅ Blog index accessible at `/dialtone/whats-new/`
+✅ All 19 blog posts accessible at new paths
+✅ Blog post navigation highlighting working
+✅ Getting Started integrated into Overview section
+✅ Collapsible group for Getting Started sub-pages
+✅ All navigation working correctly
+✅ Navbar highlights correctly
+✅ Improved information architecture
 
 ## Related Plans
 
