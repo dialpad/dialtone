@@ -726,8 +726,8 @@ a.header-anchor {
     font-family: "Season Sans";
     text-decoration: none;
     background-color: var(--dt-color-surface-secondary);
-    border: var(--dt-size-border-100) solid var(--dt-color-border-subtle);
-    border-radius: var(--dt-size-radius-400);
+    border: var(--dt-size-border-100) solid transparent;
+    border-radius: var(--dt-size-radius-500);
     opacity: .7;
     transition-timing-function: var(--ttf-in-out);
     transition-duration: var(--td200);
@@ -739,7 +739,7 @@ a.header-anchor {
 
     &:is(a):hover {
       text-decoration: none;
-      border-color: var(--dt-color-border-default);
+      border-color: var(--dt-color-border-subtle);
       box-shadow: var(--dt-shadow-small);
     }
 

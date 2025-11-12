@@ -11,7 +11,7 @@
       :key="link.text"
       :to="link.link"
       class="d-btn d-btn--muted d-btn--lg dialtone-shell-btn"
-      :class="{ 'd-btn--active': isActiveLink(link.text) }"
+      :class="{ 'd-btn--active': isActiveLink(link.link) }"
     >
       <span class="d-btn__label">{{ link.text }}</span>
     </router-link>
@@ -362,9 +362,14 @@ const {
   formatThemeName,
 } = useThemeManager({ includeThemes: true });
 
-const isActiveLink = (text) => {
-  const linkBase = text.toLowerCase();
-  return route.path.search(linkBase) !== -1;
+const isActiveLink = (link) => {
+  // For Design System, check all related paths (same as useSidebarItems.js)
+  if (link === '/dialtone/') {
+    const designSystemPaths = ['/components/', '/utilities/', '/tokens/', '/guides/', '/about/', '/dialtone/'];
+    return designSystemPaths.some(p => route.path.includes(p));
+  }
+  // For other links, use simple path matching
+  return route.path.startsWith(link);
 };
 </script>
 

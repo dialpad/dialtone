@@ -58,22 +58,18 @@
       "title": "Design System",
       "route": "/dialtone/",
       "sections": {
-        "/guides/": [
+        "/dialtone/": [
           {
-            "text": "Getting Started",
-            "link": "/guides/getting-started/",
+            "text": "Overview",
+            "link": "/dialtone/",
             "children": [
               {
-                "text": "Theme and Mode",
-                "link": "/guides/theme-and-mode/"
+                "text": "Placeholder 1",
+                "link": "/dialtone/placeholder-1/"
               },
               {
-                "text": "Contributing",
-                "link": "/guides/contributing/"
-              },
-              {
-                "text": "Accessibility",
-                "link": "/guides/accessibility/"
+                "text": "Placeholder 2",
+                "link": "/dialtone/placeholder-2/"
               }
             ]
           }
@@ -746,6 +742,26 @@
               {
                 "text": "What's New",
                 "link": "/about/whats-new/"
+              }
+            ]
+          }
+        ],
+        "/guides/": [
+          {
+            "text": "Getting Started",
+            "link": "/guides/getting-started/",
+            "children": [
+              {
+                "text": "Theme and Mode",
+                "link": "/guides/theme-and-mode/"
+              },
+              {
+                "text": "Contributing",
+                "link": "/guides/contributing/"
+              },
+              {
+                "text": "Accessibility",
+                "link": "/guides/accessibility/"
               }
             ]
           }

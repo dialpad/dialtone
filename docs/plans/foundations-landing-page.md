@@ -1108,6 +1108,144 @@ async function toggleSiteNav () {
 
 ---
 
+## Phase 16: Create Dialtone Overview Section in Design System Navigation
+
+User requested adding a new Dialtone overview section to be the first item in the Design System navigation. This section represents the Dialtone design system itself and should appear when clicking "Design System" in the global navbar.
+
+### Requirements
+
+1. Add `/dialtone/` section above Components in site-nav.json
+2. Include parent item with 2 placeholder children
+3. Remove redirect from `/dialtone/` to `/guides/getting-started/`
+4. Getting Started remains at bottom of Design System sections
+
+### Implementation
+
+**File**: `docs/_data/site-nav.json`
+
+**Added** (line 61, before Components section):
+```json
+"/dialtone/": [
+  {
+    "text": "Overview",
+    "link": "/dialtone/",
+    "children": [
+      {
+        "text": "Placeholder 1",
+        "link": "/dialtone/placeholder-1/"
+      },
+      {
+        "text": "Placeholder 2",
+        "link": "/dialtone/placeholder-2/"
+      }
+    ]
+  }
+],
+```
+
+**File**: `docs/.vuepress/theme/client.js`
+
+**Removed** (lines 83-92):
+```javascript
+// Redirect top-level virtual route
+router.beforeEach((to, from, next) => {
+  // Top-level virtual route redirects to first section
+  if (to.path === '/dialtone/' || to.path === '/dialtone') {
+    next('/guides/getting-started/'); // Redirect to first Design System section
+    return;
+  }
+
+  next();
+});
+```
+
+**Replaced with**:
+```javascript
+// Navigation handling
+router.beforeEach((to, from, next) => {
+  next();
+});
+```
+
+### Result
+
+- "Overview" section (labeled as "Overview" in sidebar) is now first section in Design System navigation
+- Clicking "Design System" in navbar navigates to `/dialtone/` page
+- 2 placeholder children ready for future content
+- Getting Started section remains at bottom of Design System list
+
+### Files Modified in Phase 16
+
+1. `docs/_data/site-nav.json` - Added Overview section with placeholder children (text: "Overview", link: "/dialtone/")
+2. `docs/.vuepress/theme/client.js` - Removed redirect, allowing direct navigation to `/dialtone/`
+
+---
+
+## Phase 17: Fix "Design System" Navbar Active State Highlighting
+
+User reported that the "Design System" navbar item wasn't highlighting when navigating to `/dialtone/` or any nested Design System pages (like `/components/`, `/utilities/`, etc.).
+
+### Problem
+
+The navbar active state logic was checking for the link text ("design system") in the route path, which didn't match routes like `/dialtone/` or `/components/`.
+
+**Root Cause**: The `isActiveLink` function in `Navbar.vue`:
+- Converted link text to lowercase ("design system")
+- Searched for this string in the route path
+- Failed because actual paths are `/dialtone/`, `/components/`, `/utilities/`, etc.
+
+### Solution
+
+Update the `isActiveLink` function to:
+1. Check against the actual link path instead of link text
+2. For `/dialtone/`, include all Design System-related paths (matching `useSidebarItems.js` logic)
+3. For other navbar items, use simple `startsWith` matching
+
+### Implementation
+
+**File**: `docs/.vuepress/theme/components/Navbar.vue`
+
+**Changed template** (line 14):
+```vue
+<!-- Before -->
+:class="{ 'd-btn--active': isActiveLink(link.text) }"
+
+<!-- After -->
+:class="{ 'd-btn--active': isActiveLink(link.link) }"
+```
+
+**Updated function** (lines 365-373):
+```javascript
+// Before
+const isActiveLink = (text) => {
+  const linkBase = text.toLowerCase();
+  return route.path.search(linkBase) !== -1;
+};
+
+// After
+const isActiveLink = (link) => {
+  // For Design System, check all related paths (same as useSidebarItems.js)
+  if (link === '/dialtone/') {
+    const designSystemPaths = ['/components/', '/utilities/', '/tokens/', '/guides/', '/about/', '/dialtone/'];
+    return designSystemPaths.some(p => route.path.includes(p));
+  }
+  // For other links, use simple path matching
+  return route.path.startsWith(link);
+};
+```
+
+### Result
+
+- "Design System" navbar item now highlights when on `/dialtone/`
+- Also highlights when on nested Design System pages: `/components/`, `/utilities/`, `/tokens/`, `/guides/`, `/about/`
+- All other navbar items continue to work correctly with simple path matching
+
+### Files Modified in Phase 17
+
+1. `docs/.vuepress/theme/components/Navbar.vue` - Updated `isActiveLink` function and template binding
+
+---
+
 ## Final Status: ✅ Complete and Operational
 
 **All deliverables completed successfully:**
@@ -1121,5 +1259,7 @@ async function toggleSiteNav () {
 7. ✅ Fixed Sidebar.vue to work with flat navigation
 8. ✅ Landing page displays card grid correctly
 9. ✅ All sections accessible and functional
+10. ✅ Created Dialtone overview section in Design System navigation
+11. ✅ Fixed navbar active state highlighting for Design System
 
 **Outstanding**: Unrelated icons build infrastructure issue needs separate debugging.

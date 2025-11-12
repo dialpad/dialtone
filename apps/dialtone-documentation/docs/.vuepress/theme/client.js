@@ -80,14 +80,8 @@ export default defineClientConfig({
       await importDialtoneThemes(app);
     }
 
-    // Redirect top-level virtual route
+    // Navigation handling
     router.beforeEach((to, from, next) => {
-      // Top-level virtual route redirects to first section
-      if (to.path === '/dialtone/' || to.path === '/dialtone') {
-        next('/guides/getting-started/'); // Redirect to first Design System section
-        return;
-      }
-
       next();
     });
 
