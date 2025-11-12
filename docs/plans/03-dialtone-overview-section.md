@@ -615,6 +615,93 @@ All SVGs are copies of existing "home-*" SVGs:
 
 ---
 
+## Phase 24: Add Thumbnail Images to Foundations Overview Cards
+
+### Goal
+
+Add thumbnail images to the 7 overview cards on `/foundations/` page to match the visual style established for the `/dialtone/` page overview cards.
+
+### Problem
+
+The `/foundations/` overview cards displayed only text (title + description) without visual thumbnails, lacking visual consistency with the newly updated `/dialtone/` page overview cards.
+
+### Solution
+
+1. Add `thumb: true` to frontmatter of each foundation child page
+2. Create placeholder SVG files for each foundation section
+3. Leverage existing `_extractFrontmatter()` function (no theme changes needed)
+
+### Implementation
+
+**No theme changes required** - The existing `_extractFrontmatter()` function in `theme/index.js` already extracts all frontmatter properties via the spread operator `...page.frontmatter`, including `thumb` and computed `fileName` properties.
+
+**Files**: Added `thumb: true` to frontmatter of 7 foundation pages:
+1. `docs/foundations/brand/index.md` - Added `thumb: true`
+2. `docs/foundations/colors/index.md` - Added `thumb: true`
+3. `docs/foundations/typography/index.md` - Added `thumb: true`
+4. `docs/foundations/icons/index.md` - Added `thumb: true`
+5. `docs/foundations/illustrations/index.md` - Added `thumb: true`
+6. `docs/foundations/space/index.md` - Added `thumb: true`
+7. `docs/foundations/size/index.md` - Added `thumb: true`
+
+**Files**: Copied SVG placeholders to `docs/.vuepress/public/assets/images/`:
+- `brand.svg` ← copied from `components/placeholder.svg`
+- `colors.svg` ← copied from `components/placeholder.svg`
+- `typography.svg` ← copied from `components/placeholder.svg`
+- `icons.svg` ← copied from `components/placeholder.svg`
+- `illustrations.svg` ← copied from `components/placeholder.svg`
+- `space.svg` ← copied from `components/placeholder.svg`
+- `size.svg` ← copied from `components/placeholder.svg`
+
+### Technical Details
+
+**Why No Theme Changes Needed:**
+
+The `/foundations/` page uses `<overview :pages="$page.enhancedFrontmatter" />` which gets its data from `_extractFrontmatter()` (lines 74-103 in `theme/index.js`). This function already includes:
+
+```javascript
+const fileName = page.frontmatter.title.toLowerCase().replaceAll(' ', '-');
+return {
+  fileName,
+  link: page.path,
+  name: page.frontmatter.shortTitle || fileName,
+  ...page.frontmatter,  // This spreads thumb property automatically
+};
+```
+
+The spread operator ensures all frontmatter properties, including `thumb`, are automatically available to the overview component without any code changes.
+
+**Note on /foundations/colors/:**
+
+Unlike `/components/` (which has its own overview of child components), `/foundations/colors/` still needed `thumb: true` in its frontmatter because it appears as a card on the `/foundations/` parent page.
+
+### Files Modified
+1. `docs/foundations/brand/index.md` - Added `thumb: true`
+2. `docs/foundations/colors/index.md` - Added `thumb: true`
+3. `docs/foundations/typography/index.md` - Added `thumb: true`
+4. `docs/foundations/icons/index.md` - Added `thumb: true`
+5. `docs/foundations/illustrations/index.md` - Added `thumb: true`
+6. `docs/foundations/space/index.md` - Added `thumb: true`
+7. `docs/foundations/size/index.md` - Added `thumb: true`
+
+### Files Created
+1. `docs/.vuepress/public/assets/images/brand.svg`
+2. `docs/.vuepress/public/assets/images/colors.svg`
+3. `docs/.vuepress/public/assets/images/typography.svg`
+4. `docs/.vuepress/public/assets/images/icons.svg`
+5. `docs/.vuepress/public/assets/images/illustrations.svg`
+6. `docs/.vuepress/public/assets/images/space.svg`
+7. `docs/.vuepress/public/assets/images/size.svg`
+
+### Result
+
+✅ All 7 foundation overview cards now display thumbnail images
+✅ Visual consistency across `/dialtone/` and `/foundations/` overview pages
+✅ Zero theme code changes required (leveraged existing infrastructure)
+✅ Easy to replace placeholders with custom icons later
+
+---
+
 ## Final Result (All Phases Complete)
 
 ✅ Release Notes accessible at `/dialtone/release-notes/`
