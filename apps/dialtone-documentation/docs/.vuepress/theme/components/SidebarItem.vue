@@ -20,7 +20,7 @@
             v-bind="attrs"
             importance="clear"
             kind="muted"
-            label-class="d-jc-flex-start"
+            label-class="d-jc-flex-start d-ta-left"
             icon-position="right"
             :size="depth === 0 ? 'lg' : undefined"
             :class="[
@@ -76,7 +76,7 @@
               <dt-button
                 importance="clear"
                 kind="muted"
-                label-class="d-jc-flex-start"
+                label-class="d-jc-flex-start d-ta-left"
                 :active="isActiveLink(isExactActive, subItem.link)"
                 :class="[
                   'dialtone-shell-btn d-w100p',
@@ -88,7 +88,7 @@
             </router-link>
             <div
               v-else
-              class="d-btn d-w100p d-jc-flex-start d-fw-normal d-fc-disabled h:d-bgc-transparent d-c-default"
+              class="d-btn d-w100p d-jc-flex-start d-ta-left d-fw-normal d-fc-disabled h:d-bgc-transparent d-c-default"
             >
               {{ subItem.text }}
               <dt-badge
@@ -117,7 +117,7 @@
       <dt-button
         importance="clear"
         kind="muted"
-        label-class="d-jc-flex-start"
+        label-class="d-jc-flex-start d-ta-left"
         :size="depth === 0 ? 'lg' : undefined"
         :active="isActiveLink(isExactActive, item.link)"
         :class="[

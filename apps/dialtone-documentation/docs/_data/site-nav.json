@@ -11,7 +11,25 @@
           },
           {
             "text": "Logo",
-            "link": "/foundations/brand/"
+            "link": "/foundations/brand/",
+            "children": [
+              {
+                "text": "Using our Logo",
+                "link": "/foundations/brand/using-our-logo/"
+              },
+              {
+                "text": "Our Icon",
+                "link": "/foundations/brand/our-icon/"
+              },
+              {
+                "text": "Sub-brands and Co-branding",
+                "link": "/foundations/brand/sub-brands-and-co-branding/"
+              },
+              {
+                "text": "Samples",
+                "link": "/foundations/brand/samples/"
+              }
+            ]
           },
           {
             "text": "Colors",
