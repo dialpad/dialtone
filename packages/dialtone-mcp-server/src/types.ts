@@ -64,6 +64,20 @@ export interface Component {
   metadata?: Metadata;
 }
 
+export interface Icon {
+  name: string;
+  category: string;
+  keywords: string[];
+}
+
+export interface IconsData {
+  categories: {
+    [categoryName: string]: {
+      [iconName: string]: string[];
+    }
+  }
+}
+
 export interface SearchResult {
   type: string;
   name: string;
