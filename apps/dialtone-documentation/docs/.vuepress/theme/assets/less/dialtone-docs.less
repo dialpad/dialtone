@@ -407,13 +407,14 @@ a.header-anchor {
 }
 
 code {
-  .d-docsite--paragraph,
-  .d-docsite--unordered-list,
-  .d-docsite--ordered-list,
-  .d-docsite--list-element,
-  .d-docsite--preview-header,
+  /* stylelint-disable-next-line no-duplicate-selectors */
+  .d-docsite--paragraph &,
+  .d-docsite--unordered-list &,
+  .d-docsite--ordered-list &,
+  .d-docsite--list-element &,
+  .d-docsite--preview-header &,
   .d-docsite--paragraph & {
-    font-size: 90%;
+    font-size: 95%;
   }
 }
 
