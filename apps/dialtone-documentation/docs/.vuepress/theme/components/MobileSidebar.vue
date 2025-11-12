@@ -43,11 +43,12 @@
 <script setup>
 import SidebarItem from './SidebarItem.vue';
 import { useThemeLocaleData } from '@vuepress/plugin-theme-data/client';
-import { computed, ref } from 'vue';
-import { useRoute } from 'vue-router';
+import { computed, ref, nextTick } from 'vue';
+import { useRoute, useRouter } from 'vue-router';
 import { useSidebarItems } from '../composables/useSidebarItems';
 
 const route = useRoute();
+const router = useRouter();
 const items = useThemeLocaleData().value.sidebar;
 const sidebarItems = useSidebarItems(items);
 
@@ -62,7 +63,12 @@ const breadcrumbs = computed(() => {
     .map(v => ({ label: v[0].toUpperCase() + v.slice(1) }));
 });
 
-function toggleSiteNav () {
+async function toggleSiteNav () {
+  // Wait for any pending route navigation to complete
+  await router.isReady();
+  await nextTick();
+
+  // Then toggle sidebar state
   isSiteNavOpen.value = !isSiteNavOpen.value;
   document.body.classList.toggle('d-of-hidden', !!isSiteNavOpen.value);
 }

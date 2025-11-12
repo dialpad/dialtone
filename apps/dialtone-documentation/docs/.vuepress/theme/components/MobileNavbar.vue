@@ -60,11 +60,12 @@
 </template>
 
 <script setup>
-import { ref } from 'vue';
-import { useRoute } from 'vue-router';
+import { ref, nextTick } from 'vue';
+import { useRoute, useRouter } from 'vue-router';
 
 const isMenuOpen = ref(false);
 const route = useRoute();
+const router = useRouter();
 
 defineProps({
   items: { type: Array, required: true },
@@ -77,10 +78,14 @@ const isActiveLink = (text) => {
   const linkBase = text.toLowerCase();
   return route.path.search(linkBase) !== -1;
 };
+
 const toggleNavbar = async () => {
-  setTimeout(() => {
-    isMenuOpen.value = !isMenuOpen.value;
-    document.body.classList.toggle('d-of-hidden', !!isMenuOpen.value);
-  }, 10);
+  // Wait for any pending route navigation to complete
+  await router.isReady();
+  await nextTick();
+
+  // Then toggle menu state
+  isMenuOpen.value = !isMenuOpen.value;
+  document.body.classList.toggle('d-of-hidden', !!isMenuOpen.value);
 };
 </script>
