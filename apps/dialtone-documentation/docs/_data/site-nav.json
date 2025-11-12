@@ -10,7 +10,7 @@
             "link": "/foundations/"
           },
           {
-            "text": "Brand",
+            "text": "Logo",
             "link": "/foundations/brand/"
           },
           {
@@ -37,7 +37,17 @@
           },
           {
             "text": "Icons",
-            "link": "/foundations/icons/"
+            "link": "/foundations/icons/",
+            "children": [
+              {
+                "text": "Usage",
+                "link": "/foundations/icons/usage/"
+              },
+              {
+                "text": "Crafting an Icon",
+                "link": "/foundations/icons/crafting-an-icon/"
+              }
+            ]
           },
           {
             "text": "Illustrations",

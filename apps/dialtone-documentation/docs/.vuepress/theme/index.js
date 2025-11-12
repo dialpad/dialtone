@@ -95,7 +95,7 @@ function _extractFrontmatter (app, path, options, exceptions = []) {
     .filter(page => page.frontmatter?.title || page.frontmatter?.shortTitle)
     .filter(page => !exceptions.includes(page.path))
     .map(page => {
-      const fileName = page.frontmatter.title.toLowerCase().replaceAll(' ', '-');
+      const fileName = (page.frontmatter.shortTitle || page.frontmatter.title).toLowerCase().replaceAll(' ', '-');
       return {
         fileName,
         link: page.path,
@@ -229,7 +229,7 @@ export const dialtoneVuepressTheme = (options) => ({
         ]);
       _extractFrontmatter(app, '/guides/content/', options);
       _extractFrontmatter(app, '/components/', options, ['/components/status/']);
-      _extractFrontmatter(app, '/foundations/', options, ['/foundations/colors/usage/', '/foundations/colors/palette/', '/foundations/colors/themes/', '/foundations/colors/chart-colors/']);
+      _extractFrontmatter(app, '/foundations/', options, ['/foundations/colors/usage/', '/foundations/colors/palette/', '/foundations/colors/themes/', '/foundations/colors/chart-colors/', '/foundations/icons/usage/', '/foundations/icons/crafting-an-icon/']);
       _extractFrontmatter(app, '/foundations/colors/', options);
       _extractComponentStatus(app);
     },
