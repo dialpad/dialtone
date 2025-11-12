@@ -1,6 +1,6 @@
 <template>
   <aside class="dialtone-toc d-of-auto d-py32 d-ps-fixed d-d-none xl:d-d-block">
-    <h2 class="d-headline--eyebrow d-fw-semibold d-fc-secondary d-px8 d-pb4">
+    <h2 class="dialtone-toc__headline d-fw-semibold d-fc-secondary d-px12 d-pb2">
       On this page
     </h2>
     <nav>
@@ -80,6 +80,11 @@ function isItemActive (item) {
 .dialtone-toc {
   width: var(--dt-size-850);
   height: calc(100vh - var(--dt-size-700));
-  top: 118px;
+  top: 113px;
+
+  &__headline {
+    font-family: "Season Sans";
+    font-size: 16px;
+  }
 }
 </style>
