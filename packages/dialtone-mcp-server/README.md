@@ -6,7 +6,11 @@ Automatically filters deprecated items, swaps discouraged patterns with recommen
 
 ## Installation
 
-Install as a dev dependency in your project:
+There are three ways to install the Dialtone MCP Server. **Project-scoped installation takes priority** over user-scoped when both exist.
+
+### Project-Scoped (Recommended for Teams)
+
+Best for team collaboration - everyone uses the same version via version control.
 
 ```bash
 npm install -D @dialpad/dialtone-mcp-server
@@ -24,19 +28,69 @@ Create or update `.mcp.json` in your project root:
 }
 ```
 
-Restart Claude Code to connect to the server.
+Commit `.mcp.json` to version control. Restart Claude Code to connect.
 
-**Checking your version:** When the server starts, you'll see the current version. If outdated, follow the instructions shown.
+**Priority:** Project-scoped beats user-scoped. The `dialtone-mcp-server` command resolves from `node_modules/.bin/` first.
+
+### User-Scoped (Personal, All Projects)
+
+Available across all your projects. Choose one method:
+
+**Option A: Install locally in your user directory**
+
+```bash
+# Install in a dedicated directory
+mkdir -p ~/.mcp-servers
+cd ~/.mcp-servers
+npm install @dialpad/dialtone-mcp-server
+
+# Add to Claude Code
+claude mcp add dialtone --scope user dialtone-mcp-server
+```
+
+**Option B: Install globally**
+
+```bash
+npm install -g @dialpad/dialtone-mcp-server
+claude mcp add dialtone --scope user dialtone-mcp-server
+```
+
+**Option C: Use npx (no installation)**
+
+```bash
+claude mcp add dialtone --scope user -- npx -y @dialpad/dialtone-mcp-server
+```
+
+This stores configuration in `~/.claude/mcp.json`.
+
+**Version checking:** When the server starts, you'll see the current version. If outdated, follow the instructions shown.
 
 ## Updating
 
-Update the package:
+**Project-scoped:**
 
 ```bash
 npm install -D @dialpad/dialtone-mcp-server@latest
 ```
 
-Then restart your Claude Code conversation to pick up the new version.
+**User-scoped (local directory):**
+
+```bash
+cd ~/.mcp-servers
+npm update @dialpad/dialtone-mcp-server
+```
+
+**User-scoped (global):**
+
+```bash
+npm update -g @dialpad/dialtone-mcp-server
+```
+
+**User-scoped (npx):**
+
+No action needed - npx always uses the latest version.
+
+After updating, restart your Claude Code conversation to pick up the new version.
 
 ## What You Can Search
 
@@ -83,10 +137,22 @@ Find icons from Dialtone's icon library.
 - The server loads once at conversation start
 
 **MCP server not connecting:**
+
+For project-scoped:
 1. Verify `.mcp.json` is in your project root with correct format
 2. Check package is installed: `npm list @dialpad/dialtone-mcp-server`
-3. Restart Claude Code completely
-4. Check Claude Code logs for connection errors
+3. Verify bin command exists: `ls node_modules/.bin/dialtone-mcp-server`
+4. Restart Claude Code completely
+
+For user-scoped:
+1. List configured servers: `claude mcp list`
+2. Check if dialtone is listed and enabled
+3. Test the server: `claude mcp get dialtone`
+4. Check configuration: `cat ~/.claude/mcp.json`
+
+General:
+- Check Claude Code logs for connection errors
+- Remember: Project-scoped configuration overrides user-scoped
 
 ## Resources
 
