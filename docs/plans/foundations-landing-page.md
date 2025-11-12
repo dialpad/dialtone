@@ -1017,6 +1017,97 @@ if (typeof document !== 'undefined') {
 
 ---
 
+## Phase 15: Fix Persistent Navigation Race Conditions
+
+After Phase 14 fixes, users still experienced navigation failures where clicking a link would change the URL but not update page content. Error: `Cannot set properties of null (setting '__vnode')` during route navigation.
+
+### Issue 5: Mobile Navigation Race Conditions ✅
+
+**Problem**: URL changes but page content doesn't update when clicking navigation links. Console shows Vue component patching errors during route transitions.
+
+**Root Cause Analysis**:
+
+1. **MobileNavbar.vue**: Used `setTimeout(..., 10)` - a timing hack that creates race conditions
+   - Timer fires during Vue's route transition patching cycle
+   - State changes interfere with virtual DOM updates
+   - No guarantee navigation completes before state toggle
+
+2. **MobileSidebar.vue**: Synchronously manipulates DOM during navigation
+   - `toggleSiteNav()` immediately changes `document.body.classList`
+   - Runs during SidebarItem click handlers
+   - Conflicts with Vue's component update cycle
+
+**Solution**: Replace timing hacks with proper async navigation handling
+
+**File**: `docs/.vuepress/theme/components/MobileNavbar.vue`
+
+**Changes**:
+```javascript
+// Before - setTimeout hack
+const toggleNavbar = async () => {
+  setTimeout(() => {
+    isMenuOpen.value = !isMenuOpen.value;
+    document.body.classList.toggle('d-of-hidden', !!isMenuOpen.value);
+  }, 10);
+};
+
+// After - proper async handling
+import { ref, nextTick } from 'vue';
+import { useRoute, useRouter } from 'vue-router';
+
+const router = useRouter();
+
+const toggleNavbar = async () => {
+  // Wait for any pending route navigation to complete
+  await router.isReady();
+  await nextTick();
+
+  // Then toggle menu state
+  isMenuOpen.value = !isMenuOpen.value;
+  document.body.classList.toggle('d-of-hidden', !!isMenuOpen.value);
+};
+```
+
+**File**: `docs/.vuepress/theme/components/MobileSidebar.vue`
+
+**Changes**:
+```javascript
+// Before - synchronous DOM manipulation
+function toggleSiteNav () {
+  isSiteNavOpen.value = !isSiteNavOpen.value;
+  document.body.classList.toggle('d-of-hidden', !!isSiteNavOpen.value);
+}
+
+// After - async with navigation guards
+import { computed, ref, nextTick } from 'vue';
+import { useRoute, useRouter } from 'vue-router';
+
+const router = useRouter();
+
+async function toggleSiteNav () {
+  // Wait for any pending route navigation to complete
+  await router.isReady();
+  await nextTick();
+
+  // Then toggle sidebar state
+  isSiteNavOpen.value = !isSiteNavOpen.value;
+  document.body.classList.toggle('d-of-hidden', !!isSiteNavOpen.value);
+}
+```
+
+**Key Improvements**:
+1. **`router.isReady()`** - Ensures router has finished current navigation before state changes
+2. **`nextTick()`** - Waits for Vue's DOM patching cycle to complete
+3. **Async/await pattern** - Proper sequencing prevents race conditions
+4. **No setTimeout** - Eliminates arbitrary timing that could fail under different conditions
+
+### Files Modified in Phase 15
+
+1. `docs/.vuepress/theme/components/MobileNavbar.vue` - Removed setTimeout hack, added proper async handling
+2. `docs/.vuepress/theme/components/MobileSidebar.vue` - Added async navigation guards
+
+---
+
 ## Final Status: ✅ Complete and Operational
 
 **All deliverables completed successfully:**
