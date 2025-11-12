@@ -156,6 +156,25 @@ In `Vue`, we apply `border-box` globally at the `VueView` level, ensuring all ch
 
 In `Backbone` we are not using `border-box` by default. Because Dialtone expects this, anytime we wish to use Dialtone styles in Backbone we must ensure to apply the `border-box` style to all affected elements.
 
+## Components
+
+Components are reusable building blocks that support a specific interaction or UI need. These components can be reused across Dialpad products and projects
+ensuring UI consistency and cohesion while helping teams deliver high-quality features faster.
+
+Dialtone provides two options to use the components: CSS and Vue.
+
+### Vue components (recommended)
+
+Use [Vue components](https://dialtone.dialpad.com/vue3/index.html) in the case your project supports Vue since these components are built conforming to [WCAG AA Accessibility Guidelines](https://www.w3.org/WAI/standards-guidelines/wcag/glance/)
+and with usability and performance in mind.
+
+### CSS components
+
+If Vue isn't supported in your application, you can use the [CSS components](../components/avatar.md) in your project, but you'll be responsible
+for writing the correct markup, managing DOM elements and events, and making it [accessible for all users](../getting-started/accessibility/fundamentals.md).
+
+See more about [components usage](../getting-started/usage.md/#components).
+
 ## Build Dialtone Locally
 
 We're excited you want to install Dialtone locally as this most likely means you'll be contributing soon! Before you get to get started though,  **please make sure you've read our [contributing docs](https://github.com/dialpad/dialtone/blob/master/.github/CONTRIBUTING.md)**.

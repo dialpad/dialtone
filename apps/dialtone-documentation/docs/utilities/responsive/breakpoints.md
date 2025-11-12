@@ -139,7 +139,7 @@ export default {
 };
 ```
 
-For more context on this approach and its benefits, see our [What's New post about mobile-first design principles](https://dialtone.dialpad.com/about/whats-new/posts/2025-5-6.html).
+For more context on this approach and its benefits, see our [What's New post about mobile-first design principles](https://dialtone.dialpad.com/dialtone/whats-new/posts/2025-5-6.html).
 
 ### Examples of Class Patterns
 

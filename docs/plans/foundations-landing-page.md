@@ -1246,6 +1246,114 @@ const isActiveLink = (link) => {
 
 ---
 
+## Phase 18: Migrate About Content to Dialtone Overview Section ✅ COMPLETED
+
+User requested migrating `/about/dialtone.html` (Release Notes) and `/about/whats-new/` (What's New blog) to replace the two placeholder items in the Dialtone Overview section created in Phase 16.
+
+### Goals
+
+1. Create Release Notes page from `/about/dialtone.md` content
+2. Move entire What's New blog from `/about/whats-new/` to `/dialtone/whats-new/`
+3. Update all hardcoded paths throughout the codebase to preserve blog functionality
+4. Update GitHub Actions workflow to trigger on new blog posts in new location
+5. Don't worry about breaking old links - user explicitly stated they don't care about maintaining backwards compatibility
+
+### Implementation
+
+**Step 1: Create Release Notes Page**
+- Created `/docs/dialtone/release-notes.md` with content from `/about/dialtone.md`
+- Preserved all frontmatter, components (`<dialtone-changelog />`), and formatting
+
+**Step 2: Move Blog Directory**
+- Moved `/docs/about/whats-new/` → `/docs/dialtone/whats-new/`
+- Includes `index.md` (blog listing page) and `posts/` directory with 19 blog posts from 2022-2025
+
+**Step 3: Update Navigation Structure**
+- **File**: `docs/_data/site-nav.json` (lines 66-73)
+- Replaced "Placeholder 1" with "Release Notes" (`/dialtone/release-notes/`)
+- Replaced "Placeholder 2" with "What's New" (`/dialtone/whats-new/`)
+
+**Step 4: Update Blog Plugin Paths**
+- **File**: `docs/.vuepress/theme/index.js`
+- Line 29: Changed blog index path from `/about/whats-new/` to `/dialtone/whats-new/`
+- Line 31: Changed posts filter from `/about/whats-new/posts` to `/dialtone/whats-new/posts`
+- Line 205: Changed extendsPage case from `/about/whats-new/` to `/dialtone/whats-new/`
+
+**Step 5: Update Vue Components**
+- **File**: `docs/.vuepress/baseComponents/BlogPostPreview.vue` (line 4)
+  - Changed post link generation from `/about/whats-new/posts/` to `/dialtone/whats-new/posts/`
+- **File**: `docs/.vuepress/baseComponents/IconPopoverContent.vue` (line 95)
+  - Updated hardcoded link from `/about/whats-new/posts/2024-4-15.html` to `/dialtone/whats-new/posts/2024-4-15.html`
+
+**Step 6: Update Layout Navigation**
+- **File**: `docs/.vuepress/theme/layouts/Layout.vue` (lines 182-184)
+- Changed breadcrumb navigation paths from `/about/whats-new/` to `/dialtone/whats-new/`
+
+**Step 7: Update Cross-References**
+- **File**: `docs/dialtone/whats-new/posts/2024-10-3.md` (line 11)
+  - Changed internal link from `/about/whats-new/posts/2024-4-15.md` to `/dialtone/whats-new/posts/2024-4-15.md`
+- **File**: `docs/dialtone/whats-new/posts/2024-5-15.md` (line 23)
+  - Changed absolute URL from `https://dialtone.dialpad.com/about/whats-new/posts/2023-12-28.html` to `/dialtone/whats-new/posts/2023-12-28.html`
+- **File**: `docs/utilities/responsive/breakpoints.md` (line 142)
+  - Changed absolute URL from `https://dialtone.dialpad.com/about/whats-new/posts/2025-5-6.html` to `/dialtone/whats-new/posts/2025-5-6.html`
+
+**Step 8: Update GitHub Actions Workflow**
+- **File**: `.github/workflows/send-blog-communications.yml`
+- Line 7: Changed trigger path to `apps/dialtone-documentation/docs/dialtone/whats-new/posts/*.md`
+- Line 31: Changed files filter to same path
+- Lines 59 & 150: sed commands automatically work (replace `apps/dialtone-documentation/docs/` prefix)
+  - This transforms paths like `apps/dialtone-documentation/docs/dialtone/whats-new/posts/2024-10-3.md` → `https://dialtone.dialpad.com/dialtone/whats-new/posts/2024-10-3.html`
+
+### Blog System Architecture Preserved
+
+The migration maintained all blog functionality:
+- **VuePress Plugin**: Automatically discovers blog posts from markdown files in new location
+- **BlogPostPreview Component**: Generates preview cards with first paragraph and metadata
+- **Date-Based URLs**: Posts accessible at `/dialtone/whats-new/posts/YYYY-M-D.html`
+- **GitHub Actions**: Sends email and SMS notifications when new posts are added to production
+- **Breadcrumb Navigation**: "Back to what's new" link works from individual posts
+
+### Files Modified in Phase 18
+
+1. `docs/dialtone/release-notes.md` - NEW: Release Notes page
+2. `docs/dialtone/whats-new/` - MOVED: Entire blog directory with 19 posts
+3. `docs/_data/site-nav.json` - Updated navigation with Release Notes and What's New
+4. `docs/.vuepress/theme/index.js` - Updated blog plugin paths (3 locations)
+5. `docs/.vuepress/baseComponents/BlogPostPreview.vue` - Updated post link generation
+6. `docs/.vuepress/baseComponents/IconPopoverContent.vue` - Updated hardcoded blog link
+7. `docs/.vuepress/theme/layouts/Layout.vue` - Updated breadcrumb navigation
+8. `docs/dialtone/whats-new/posts/2024-10-3.md` - Updated internal blog cross-reference
+9. `docs/dialtone/whats-new/posts/2024-5-15.md` - Updated absolute URL to blog post
+10. `docs/utilities/responsive/breakpoints.md` - Updated absolute URL to blog post
+11. `.github/workflows/send-blog-communications.yml` - Updated trigger and filter paths
+
+### Result
+
+- ✅ Release Notes accessible at `/dialtone/release-notes/`
+- ✅ Blog index accessible at `/dialtone/whats-new/`
+- ✅ All 19 blog posts accessible at new paths
+- ✅ Blog post previews display correctly with proper links
+- ✅ Breadcrumb navigation works from individual posts
+- ✅ GitHub Actions will trigger on new posts in new location
+- ✅ All cross-references updated
+- ✅ Dialtone Overview section now has real content instead of placeholders
+
+### Additional User Refinements
+
+After the automated migration, the user made additional changes in the spirit of the migration:
+
+1. **Reordered Overview children** in `site-nav.json` (lines 66-73):
+   - Swapped order to show "What's New" first, then "Release Notes"
+   - This improves UX by surfacing the blog (more frequently updated content) before release notes
+
+2. **Additional navigation improvements**:
+   - User made other refinements to maintain consistency with the new structure
+   - Changes were made manually following the same patterns established in the migration
+
+These user refinements demonstrate the flexibility and maintainability of the new structure.
+
+---
+
 ## Final Status: ✅ Complete and Operational
 
 **All deliverables completed successfully:**

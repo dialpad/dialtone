@@ -26,9 +26,9 @@ const _sortAlphabetically = (str1, str2) => {
 };
 
 function _blogPostsFrontmatter (app) {
-  const blogIndex = app.pages.find(page => page.path === '/about/whats-new/');
+  const blogIndex = app.pages.find(page => page.path === '/dialtone/whats-new/');
   blogIndex.data.blogPosts = app.pages
-    .filter(page => page.path.includes('/about/whats-new/posts'))
+    .filter(page => page.path.includes('/dialtone/whats-new/posts'))
     .map(post => {
       delete post.frontmatter.description;
       return {
@@ -202,7 +202,7 @@ export const dialtoneVuepressTheme = (options) => ({
 
     extendsPage: (page) => {
       switch (page.path) {
-        case '/about/whats-new/':
+        case '/dialtone/whats-new/':
           page.data.blogPosts = [];
           break;
         case '/components/':

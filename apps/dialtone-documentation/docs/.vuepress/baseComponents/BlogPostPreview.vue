@@ -1,7 +1,7 @@
 <template>
   <router-link
     v-slot="{ navigate }"
-    :to="`/about/whats-new/posts/${format(posted, 'y-M-d')}`"
+    :to="`/dialtone/whats-new/posts/${format(posted, 'y-M-d')}`"
     custom
   >
     <dt-link

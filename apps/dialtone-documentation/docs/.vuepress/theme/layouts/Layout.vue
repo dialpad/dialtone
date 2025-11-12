@@ -179,8 +179,8 @@ const findCurrent = () => {
   prev.value = null;
   next.value = null;
 
-  if (route.path.includes('/about/whats-new/posts/')) {
-    prev.value = { link: '/about/whats-new/', text: 'Back to what\'s new' };
+  if (route.path.includes('/dialtone/whats-new/posts/')) {
+    prev.value = { link: '/dialtone/whats-new/', text: 'Back to what\'s new' };
     return;
   }
 

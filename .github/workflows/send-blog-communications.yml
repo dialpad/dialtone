@@ -4,7 +4,7 @@ on:
     branches:
       - production
     paths:
-      - 'apps/dialtone-documentation/docs/about/whats-new/posts/*.md'
+      - 'apps/dialtone-documentation/docs/dialtone/whats-new/posts/*.md'
 
 env:
   HUSKY: 0
@@ -28,7 +28,7 @@ jobs:
         id: changed-files
         uses: tj-actions/changed-files@2f7c5bfce28377bc069a65ba478de0a74aa0ca32
         with:
-          files: 'apps/dialtone-documentation/docs/about/whats-new/posts/*.md'
+          files: 'apps/dialtone-documentation/docs/dialtone/whats-new/posts/*.md'
           json: true
           escape_json: false
       - name: List all added posts

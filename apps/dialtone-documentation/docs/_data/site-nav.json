@@ -64,12 +64,12 @@
             "link": "/dialtone/",
             "children": [
               {
-                "text": "Placeholder 1",
-                "link": "/dialtone/placeholder-1/"
+                "text": "What's New",
+                "link": "/dialtone/whats-new/"
               },
               {
-                "text": "Placeholder 2",
-                "link": "/dialtone/placeholder-2/"
+                "text": "Release Notes",
+                "link": "/dialtone/release-notes/"
               }
             ]
           }
@@ -732,18 +732,6 @@
           {
             "text": "Functions and Utilities",
             "link": "/functions-and-utilities/"
-          }
-        ],
-        "/about/": [
-          {
-            "text": "About Dialtone",
-            "link": "/about/dialtone.html",
-            "children": [
-              {
-                "text": "What's New",
-                "link": "/about/whats-new/"
-              }
-            ]
           }
         ],
         "/guides/": [

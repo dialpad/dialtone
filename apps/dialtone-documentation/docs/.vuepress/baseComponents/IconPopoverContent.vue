@@ -92,7 +92,7 @@
             <p>
               This Vue approach does not include tree-shaking.
               Please use the Vue snippet above.
-              <dt-link href="/about/whats-new/posts/2024-4-15.html" target="_blank">
+              <dt-link href="/dialtone/whats-new/posts/2024-4-15.html" target="_blank">
                 About this change.
               </dt-link>
             </p>
