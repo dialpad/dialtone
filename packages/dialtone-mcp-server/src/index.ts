@@ -2,10 +2,11 @@ import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
 import { StdioServerTransport } from "@modelcontextprotocol/sdk/server/stdio.js";
 import { CallToolRequestSchema, ListToolsRequestSchema } from "@modelcontextprotocol/sdk/types.js";
 
-import { utilityClasses, tokens, components, clientRules } from './data.js';
+import { utilityClasses, tokens, components, icons, clientRules } from './data.js';
 import { searchUtilityClasses, formatResults, buildCompoundPropertiesSet } from './tools/utility-classes.js';
 import { searchTokens, formatTokenResults } from './tools/tokens.js';
 import { searchComponents, formatComponentResults } from './tools/components.js';
+import { searchIcons, formatIconResults } from './tools/icons.js';
 
 import type {
   ValueObject,
@@ -19,6 +20,7 @@ import type {
   ComponentEvent,
   ComponentSlot,
   Component,
+  IconsData,
   SearchResult
 } from './types.js';
 
@@ -78,6 +80,20 @@ async function main() {
         uri: "dialtone://components",
         mimeType: "application/json",
         text: JSON.stringify(components, null, 2)
+      }]
+    };
+  });
+
+  server.resource("icons", "dialtone://icons", {
+    name: "Dialtone Icons",
+    description: "Complete documentation of Dialtone icon library",
+    mimeType: "application/json",
+  }, async () => {
+    return {
+      contents: [{
+        uri: "dialtone://icons",
+        mimeType: "application/json",
+        text: JSON.stringify(icons, null, 2)
       }]
     };
   });
@@ -162,6 +178,27 @@ async function main() {
             },
             required: ["query"]
           }
+        },
+        {
+          name: "search_icons",
+          description: "Search for icons from Dialtone's icon library and learn how to use icon components. Use when query mentions icon names (bell, arrow, calendar), categories (alerts, communication, time), visual concepts (notification, warning, email), or when user asks how to use/implement icons. Icons are imported from @dialpad/dialtone-icons/vue3, not @dialpad/dialtone-vue. Returns icon names like 'alert-circle', 'bell-ring', 'calendar-plus' with tree-shakable usage examples.",
+          inputSchema: {
+            type: "object",
+            properties: {
+              query: {
+                type: "string",
+                description: "Icon name, category, or keyword (e.g., 'notification', 'arrow up', 'calendar', 'warning')"
+              },
+              limit: {
+                type: "number",
+                description: "Maximum number of results to return (1-50, default 20)",
+                default: 20,
+                minimum: 1,
+                maximum: 50
+              }
+            },
+            required: ["query"]
+          }
         }
       ]
     };
@@ -198,6 +235,9 @@ async function main() {
       } else if (toolName === "search_components") {
         searchResult = searchComponents(query, components);
         formatterFunction = formatComponentResults;
+      } else if (toolName === "search_icons") {
+        searchResult = searchIcons(query, icons as IconsData);
+        formatterFunction = formatIconResults;
       } else {
         throw new Error(`Unknown tool: ${toolName}`);
       }
