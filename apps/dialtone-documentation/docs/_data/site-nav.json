@@ -32,9 +32,13 @@
             ]
           },
           {
-            "text": "Colors",
-            "link": "/foundations/colors/usage/",
+            "text": "Color",
+            "link": "/foundations/colors/",
             "children": [
+              {
+                "text": "Usage",
+                "link": "/foundations/colors/usage/"
+              },
               {
                 "text": "Color Palette",
                 "link": "/foundations/colors/palette/"
