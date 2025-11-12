@@ -3,7 +3,7 @@
   <dt-empty-state
     size="md"
     header-text="TBD"
-    class="d-w100p d-p128"
+    class="d-w100p d-h100p"
   >
     <template #icon="{ iconSize }">
       <dt-icon name="box" :size="iconSize" class="d-fc-tertiary" />

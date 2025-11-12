@@ -317,18 +317,17 @@
       </template>
     </dt-dropdown>
     <dt-button
-      importance="outlined"
+      v-dt-tooltip:bottom-end="'Search'"
+      importance="clear"
       kind="muted"
-      class="d-ml8 d-w164 d-bc-subtle h:d-bc-default h:d-bgc-transparent"
       @click="$emit('search')"
     >
       <template #icon>
         <dt-icon
           name="search"
-          size="200"
+          size="400"
         />
       </template>
-      <span class="d-fc-placeholder">Search</span>
     </dt-button>
   </dt-stack>
 </template>
