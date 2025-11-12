@@ -44,9 +44,9 @@ async function checkVersion() {
       console.error(`   Current: v${currentVersion}`);
       console.error(`   Latest:  v${latestVersion}`);
       console.error('');
-      console.error('   To update, run:');
-      console.error('   claude mcp remove dialtone');
-      console.error('   claude mcp add --scope user dialtone -- npx -y @dialpad/dialtone-mcp-server@latest');
+      console.error('   To update:');
+      console.error('   1. npm install -D @dialpad/dialtone-mcp-server@latest');
+      console.error('   2. Restart this conversation');
       console.error('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
       console.error('');
     } else {

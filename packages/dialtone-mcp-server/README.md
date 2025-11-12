@@ -1,8 +1,44 @@
 # Dialtone MCP Server
 
-A [Model Context Protocol (MCP)](https://modelcontextprotocol.io) server that provides AI assistants with search access to Dialtone's design system: utility classes, design tokens, and Vue components.
+A [Model Context Protocol (MCP)](https://modelcontextprotocol.io) server that provides AI assistants with search access to Dialtone's design system: utility classes, design tokens, Vue components, and icons.
 
-## Quick Start
+## Installation
+
+Install as a dev dependency in your project:
+
+```bash
+npm install -D @dialpad/dialtone-mcp-server
+```
+
+Create or update `.mcp.json` in your project root:
+
+```json
+{
+  "mcpServers": {
+    "dialtone": {
+      "command": "dialtone-mcp-server"
+    }
+  }
+}
+```
+
+Restart Claude Code to connect to the server.
+
+**Checking your version:** When the server starts, you'll see the current version. If outdated, follow the instructions shown.
+
+## Updating
+
+Update the package:
+
+```bash
+npm install -D @dialpad/dialtone-mcp-server@latest
+```
+
+Then restart your Claude Code conversation to pick up the new version.
+
+## Development Setup
+
+For contributors working in the Dialtone monorepo:
 
 ### 1. Build
 
@@ -112,6 +148,24 @@ Discover Vue components with props, events, and slots.
 - `modal` → DtModal, DtBanner, DtDropdown (6 results)
 - `checkbox` → DtCheckbox, DtCheckboxGroup, DtRadio
 
+### 4. Icons (594 icons)
+Find icons from Dialtone's icon library.
+
+**Example queries:**
+- `notification` → bell, bell-ring, bell-off, bell-plus
+- `arrow up` → arrow-up, arrow-up-down, arrow-up-left
+- `profile` → user
+- `calendar` → calendar, calendar-plus, calendar-event
+
+## What Makes This Special
+
+- **Deprecated filtering**: Automatically removes deprecated items from results
+- **Discouraged swapping**: Replaces discouraged patterns with recommended alternatives
+- **Smart matching**: Understands compound properties (e.g., "padding 8px" finds d-p8, d-pt8, d-pr8, etc.)
+- **AI-optimized formatting**: Results designed for AI consumption
+- **Semantic search**: Finds related tokens/classes based on meaning
+- **Version checking**: Alerts when updates are available
+
 ## Development
 
 ### Project Structure
@@ -156,18 +210,20 @@ pnpm nx run dialtone-mcp-server:build
 
 ## Troubleshooting
 
-**MCP server not connecting:**
-1. Verify `build/index.js` exists
-2. Check the path in config is absolute (not relative)
-3. Restart Claude Desktop completely
-4. Check Claude Desktop logs for errors
+**Version check shows old version:**
+- Restart your Claude Code conversation after updating
+- The server loads once at conversation start
 
-**Test the server manually:**
-```bash
-node build/index.js
-# Should print: "Dialtone MCP Server running on stdio"
-# Press Ctrl+C to exit
-```
+**MCP server not connecting:**
+1. Verify `.mcp.json` is in your project root with correct format
+2. Check package is installed: `npm list @dialpad/dialtone-mcp-server`
+3. Restart Claude Code completely
+4. Check Claude Code logs for connection errors
+
+**For monorepo development:**
+1. Verify `build/index.js` exists: `pnpm nx run dialtone-mcp-server:build`
+2. Check path in `.mcp.json` is absolute
+3. Test manually: `node build/index.js` (should print "Dialtone MCP Server running on stdio")
 
 ## Resources
 
