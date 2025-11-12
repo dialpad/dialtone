@@ -27,7 +27,7 @@
               'd-w100p dialtone-shell-btn',
               {
                 'd-headline--eyebrow d-fw-semibold d-bgc-transparent d-c-default': !item.link,
-                'd-btn--active': isActiveLink(isExactActive, item.link),
+                'd-btn--active': isActiveLink(isExactActive, item.link, true),
                 'd-pr16': depth === 1,
               },
             ]"
@@ -182,8 +182,18 @@ watch(route, (newRoute) => {
 
 // isExactActive from the router-link doesn't work with hashes,
 // that's why we need to check for the hash if it's a single page
-const isActiveLink = (isExactActive, link) => {
+const isActiveLink = (isExactActive, link, isParentButton = false) => {
   if (!link) return false;
+
+  // Check if this is a grouping-only parent (link matches first child)
+  // Only apply this check when evaluating the parent button itself, not child buttons
+  if (isParentButton && props.item.children && props.item.children.length > 0) {
+    const firstChildLink = props.item.children[0].link;
+    if (link === firstChildLink) {
+      // This is a grouping-only parent - don't show as active
+      return false;
+    }
+  }
 
   // Special case: Highlight What's New when viewing blog posts
   if (link === '/dialtone/whats-new/' && route.path.startsWith('/dialtone/whats-new/posts/')) {
