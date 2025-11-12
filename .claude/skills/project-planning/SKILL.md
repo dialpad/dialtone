@@ -1,6 +1,6 @@
 ---
 name: project-planning
-description: Create standardized, structured project plan documents with consistent formatting, appropriate detail levels, and clear implementation steps. Use when creating technical plans, feature specifications, refactoring plans, or any project documentation requiring structured implementation steps. Plans are stored in /docs/ with kebab-case naming and include executive summaries after phase completion.
+description: Create standardized, structured project plan documents with consistent formatting, appropriate detail levels, and clear implementation steps. Use when creating technical plans, feature specifications, refactoring plans, or any project documentation requiring structured implementation steps. Plans are stored in /docs/plans/ organized by status (active/future/archive) with kebab-case naming and include executive summaries after phase completion.
 ---
 
 # Project Planning
@@ -223,18 +223,27 @@ After completing each phase (or major milestone), add an executive summary:
 
 **ALL plan documents MUST:**
 
-- Be stored in `/docs/` directory (create if it doesn't exist)
+- Be stored in `/docs/plans/` directory with appropriate subdirectory
 - Use lowercase kebab-case naming
 - Have `.md` extension
 
+**Subdirectory Organization:**
+
+Plans are organized by status in three subdirectories:
+
+- `/docs/plans/active/` - Plans currently being worked on
+- `/docs/plans/future/` - Planned work not yet started
+- `/docs/plans/archive/` - Completed plans for reference
+
 **Examples:**
 
-- ✅ `/docs/authentication-refactor.md`
-- ✅ `/docs/database-migration-plan.md`
-- ✅ `/docs/api-v2-implementation.md`
-- ❌ `/docs/Authentication_Refactor.md` (wrong case)
-- ❌ `/docs/api_v2_plan.md` (snake_case not kebab-case)
-- ❌ `/authentication-plan.md` (not in /docs/)
+- ✅ `/docs/plans/active/authentication-refactor.md`
+- ✅ `/docs/plans/future/database-migration-plan.md`
+- ✅ `/docs/plans/archive/api-v2-implementation.md`
+- ❌ `/docs/plans/Authentication_Refactor.md` (wrong case)
+- ❌ `/docs/plans/active/api_v2_plan.md` (snake_case not kebab-case)
+- ❌ `/authentication-plan.md` (not in /docs/plans/)
+- ❌ `/docs/authentication-refactor.md` (missing subdirectory)
 
 ## Creating a Plan Document
 
@@ -245,28 +254,31 @@ Follow this workflow:
 3. **Create document structure** - Use the exact template above
 4. **Fill in sections** - Focus on outcomes and guardrails
 5. **Review for violations** - Check for code examples, decimal numbering, verbosity
-6. **Save to `/docs/` with kebab-case name**
+6. **Save to appropriate subdirectory** - Use `/docs/plans/active/` for new work, `/docs/plans/future/` for planned work, with kebab-case name
 7. **Confirm with user** - Show document location and ask if revisions needed
 
 ## Updating Existing Plans
 
 When asked to update a plan:
 
-1. **Read the existing plan** from `/docs/`
+1. **Read the existing plan** from `/docs/plans/` (search across `active/`, `future/`, `archive/` subdirectories if needed)
 2. **Preserve structure** - Keep the same format
 3. **Update relevant sections** - Don't rewrite unnecessarily
 4. **Update "Last Updated" date**
-5. **Save back to same location**
+5. **Update Status field** if plan status has changed
+6. **Move to appropriate subdirectory** if status changed (e.g., move from `active/` to `archive/` when complete)
+7. **Save back to same location** (or new location if moved)
 
 ## Adding Phase Completion Summaries
 
 When a phase is completed:
 
-1. **Read the plan** from `/docs/`
+1. **Read the plan** from `/docs/plans/` (typically in `active/` subdirectory)
 2. **Add new summary** under "Phase Completion Summaries" section
 3. **Follow the exact format** shown above
-4. \*\*Update "Last Updated" date
-5. **Save back to same location**
+4. **Update "Last Updated" date**
+5. **Move to `archive/` if plan is complete**
+6. **Save back to appropriate location**
 
 ## Common Mistakes to Avoid
 
@@ -324,16 +336,17 @@ When a phase is completed:
 
 If a project genuinely requires multiple documents:
 
-- Create a main plan: `/docs/project-name-overview.md`
-- Reference sub-plans: `/docs/project-name-phase-1.md`
+- Create a main plan: `/docs/plans/active/project-name-overview.md`
+- Reference sub-plans: `/docs/plans/active/project-name-phase-1.md`
 - Keep each document focused on one aspect
 - Link between documents in References section
+- Move all related documents together when archiving
 
 ## Quality Checklist
 
 Before finalizing any plan, verify:
 
-- [ ] Document is in `/docs/` directory
+- [ ] Document is in `/docs/plans/` with appropriate subdirectory (`active/`, `future/`, or `archive/`)
 - [ ] Filename is lowercase kebab-case
 - [ ] All required sections present
 - [ ] Steps numbered sequentially (no decimals)
