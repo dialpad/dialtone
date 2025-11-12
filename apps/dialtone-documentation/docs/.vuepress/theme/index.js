@@ -54,10 +54,18 @@ function _injectOverviewPages (app) {
     const page = app.pages.find(p => p.path === path);
     if (!page) return null;
 
+    const fileName = page.frontmatter.title.toLowerCase().replaceAll(' ', '-');
+
+    // For /components/, hardcode thumb since we can't modify its frontmatter
+    // (it uses <overview> for its own children)
+    const thumb = path === '/components/' ? true : page.frontmatter.thumb;
+
     return {
       title: page.frontmatter.title,
       shortTitle: page.frontmatter.shortTitle,
       description: page.frontmatter.description,
+      thumb: thumb,
+      fileName: fileName,
       link: path,
     };
   }).filter(Boolean);

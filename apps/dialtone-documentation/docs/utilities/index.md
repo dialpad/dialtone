@@ -1,6 +1,7 @@
 ---
 title: CSS Utilities
 description: A utility-first CSS framework for building user interfaces.
+thumb: true
 ---
 
 ## Introduction

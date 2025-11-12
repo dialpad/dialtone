@@ -523,6 +523,98 @@ The `/foundations/` page already uses `$page.enhancedFrontmatter` which auto-pop
 
 ---
 
+## Phase 23: Add Thumbnail Images to Dialtone Overview Cards
+
+### Goal
+
+Add thumbnail images to the 5 overview cards on `/dialtone/` page to match the visual style of component overview cards.
+
+### Problem
+
+The overview cards displayed only text (title + description) without visual thumbnails, making them less engaging and harder to scan compared to the component overview cards which include image thumbnails.
+
+### Solution
+
+1. Add `thumb: true` to frontmatter of each destination page
+2. Update `_injectOverviewPages()` to extract `thumb` and compute `fileName` properties
+3. Copy existing "home-*" SVG files as placeholders for each section
+
+### Implementation
+
+**File**: `docs/.vuepress/theme/index.js` (lines 57-65)
+
+Updated `_injectOverviewPages()` to extract thumbnail properties:
+```javascript
+const fileName = page.frontmatter.title.toLowerCase().replaceAll(' ', '-');
+
+return {
+  title: page.frontmatter.title,
+  shortTitle: page.frontmatter.shortTitle,
+  description: page.frontmatter.description,
+  thumb: page.frontmatter.thumb,        // Added
+  fileName: fileName,                    // Added
+  link: path,
+};
+```
+
+**Files**: Added `thumb: true` to frontmatter of 5 pages:
+1. `docs/components/index.md` - Added `thumb: true`
+2. `docs/utilities/index.md` - Added `thumb: true`
+3. `docs/tokens/index.md` - Added `thumb: true`
+4. `docs/guides/content/index.md` - Added `thumb: true`
+5. `docs/functions-and-utilities/index.md` - Added `thumb: true`
+
+**Files**: Copied SVG placeholders to `docs/.vuepress/public/assets/images/`:
+- `components.svg` ← copied from `home-components.svg`
+- `css-utilities.svg` ← copied from `home-utilities.svg`
+- `design-tokens.svg` ← copied from `home-design.svg`
+- `content-guidelines.svg` ← copied from `home-guides.svg`
+- `functions-and-utilities.svg` ← copied from `home-components.svg` (temporary placeholder)
+
+### Technical Details
+
+**How Thumbnail Display Works:**
+1. Page frontmatter has `thumb: true`
+2. `fileName` is computed from title: `"CSS Utilities"` → `"css-utilities"`
+3. Overview component checks `page.thumb` and renders `<svg-loader :name="page.fileName" />`
+4. SvgLoader tries these paths in order:
+   - `assets/images/css-utilities.svg`
+   - `assets/images/components/css-utilities.svg`
+   - `assets/images/favicons/css-utilities.svg`
+
+**Placeholder SVG Files:**
+All SVGs are copies of existing "home-*" SVGs:
+- **Components**: Geometric shapes representing UI components
+- **CSS Utilities**: Globe with wrench icon
+- **Design Tokens**: Abstract design/palette icon
+- **Content Guidelines**: Document with lines icon
+- **Functions and Utilities**: (Same as Components) - can be replaced with custom icon later
+
+### Files Modified
+1. `docs/.vuepress/theme/index.js` - Extract thumb/fileName in `_injectOverviewPages()`
+2. `docs/components/index.md` - Added `thumb: true`
+3. `docs/utilities/index.md` - Added `thumb: true`
+4. `docs/tokens/index.md` - Added `thumb: true`
+5. `docs/guides/content/index.md` - Added `thumb: true`
+6. `docs/functions-and-utilities/index.md` - Added `thumb: true`
+
+### Files Created
+1. `docs/.vuepress/public/assets/images/components.svg`
+2. `docs/.vuepress/public/assets/images/css-utilities.svg`
+3. `docs/.vuepress/public/assets/images/design-tokens.svg`
+4. `docs/.vuepress/public/assets/images/content-guidelines.svg`
+5. `docs/.vuepress/public/assets/images/functions-and-utilities.svg`
+
+### Result
+
+✅ All 5 overview cards now display thumbnail images
+✅ Visual consistency with component overview cards
+✅ Better visual hierarchy and scannability
+✅ Easy to replace placeholders with custom icons later
+✅ Follows existing thumbnail pattern from components
+
+---
+
 ## Final Result (All Phases Complete)
 
 ✅ Release Notes accessible at `/dialtone/release-notes/`
@@ -533,11 +625,13 @@ The `/foundations/` page already uses `$page.enhancedFrontmatter` which auto-pop
 ✅ Collapsible group for Getting Started sub-pages
 ✅ Dialtone landing page displays 5 overview cards for major sections
 ✅ Overview cards use build-time frontmatter injection (single source of truth)
+✅ Overview cards display thumbnail images
 ✅ Zero duplication between pages
 ✅ Reusable pattern for custom overview cards documented
 ✅ All navigation working correctly
 ✅ Navbar highlights correctly
 ✅ Improved information architecture
+✅ Visual consistency across overview pages
 
 ## Related Plans
 

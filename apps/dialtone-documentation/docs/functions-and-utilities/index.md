@@ -1,6 +1,7 @@
 ---
 title: Functions and Utilities
 description: Reusable JavaScript helper functions for common development tasks
+thumb: true
 ---
 
 <div class="d-ba d-bar16 d-pt32 d-ta-center d-fc-muted d-headline--xxl">
