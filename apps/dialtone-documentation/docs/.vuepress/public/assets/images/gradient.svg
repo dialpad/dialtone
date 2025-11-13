@@ -1,0 +1,29 @@
+<svg viewBox="0 0 340 250" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g clip-path="url(#clip0_30_68897)">
+<g filter="url(#filter0_f_30_68897)">
+<ellipse cx="170.5" cy="281.141" rx="218.141" ry="304.5" transform="rotate(90 170.5 281.141)" fill="url(#paint0_radial_30_68897)"/>
+</g>
+</g>
+<defs>
+<filter id="filter0_f_30_68897" x="-220.793" y="-23.7934" width="782.587" height="609.868" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+<feFlood flood-opacity="0" result="BackgroundImageFix"/>
+<feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape"/>
+<feGaussianBlur stdDeviation="43.3967" result="effect1_foregroundBlur_30_68897"/>
+</filter>
+<radialGradient id="paint0_radial_30_68897" cx="0" cy="0" r="1" gradientTransform="matrix(-218.587 246.904 261.277 231.38 215.583 281.316)" gradientUnits="userSpaceOnUse">
+<stop offset="0.0449975" stop-color="#FF9E0E" stop-opacity="0.95"/>
+<stop offset="0.104046" stop-color="#FD6D2D"/>
+<stop offset="0.26345" stop-color="#F64850"/>
+<stop offset="0.341896" stop-color="#EA2F6F"/>
+<stop offset="0.436491" stop-color="#D52C86"/>
+<stop offset="0.540864" stop-color="#C52599" stop-opacity="0.9"/>
+<stop offset="0.633544" stop-color="#9325A5"/>
+<stop offset="0.710384" stop-color="#8223A1"/>
+<stop offset="0.799742" stop-color="#511E76"/>
+<stop offset="1" stop-color="#1D0155"/>
+</radialGradient>
+<clipPath id="clip0_30_68897">
+<rect width="340" height="250" fill="white"/>
+</clipPath>
+</defs>
+</svg>
