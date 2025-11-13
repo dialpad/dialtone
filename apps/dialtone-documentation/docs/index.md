@@ -242,7 +242,7 @@ layout: Blank
     backdrop-filter: blur(8px);
     -webkit-backdrop-filter: blur(8px);
 
-    transition: inset cubic-bezier(0.4, 0, 0.2, 1) 1s;
+    transition: inset cubic-bezier(0.4, 0, 0.2, 1) 0.66s;
     will-change: inset;
   }
   &--off-canvas {
@@ -303,9 +303,12 @@ const openSearch = () => {
   docSearchBtn.value?.children[0]?.click();
 };
 
-// Scroll-driven opacity effect
+// Scroll-driven effects
 onMounted(() => {
   const gradientOverlay = document.querySelector('.gradient-overlay');
+  const header = document.querySelector('.dialtone-header');
+  let lastScrollY = window.scrollY;
+
   if (!gradientOverlay) return;
 
   const handleScroll = () => {
@@ -333,6 +336,27 @@ onMounted(() => {
     gradientOverlay.style.setProperty('--overlay-opacity', overlayOpacity);
     gradientOverlay.style.setProperty('--text-opacity', textOpacity);
     gradientOverlay.style.setProperty('--text-translate-y', `${textTranslateY}px`);
+
+    // Header visibility logic
+    if (header) {
+      const isScrollingUp = scrollY < lastScrollY;
+
+      // Always show header when scrolling up
+      if (isScrollingUp) {
+        header.classList.remove('dialtone-header--off-canvas');
+      } else {
+        // Only hide header when scrolling down AND gradient is out of view
+        const gradientRect = gradientOverlay.getBoundingClientRect();
+        const isGradientInView = gradientRect.bottom > 0;
+
+        if (!isGradientInView) {
+          header.classList.add('dialtone-header--off-canvas');
+        }
+      }
+    }
+
+    // Update last scroll position
+    lastScrollY = scrollY;
   };
 
   // Add scroll event listener
