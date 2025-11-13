@@ -196,20 +196,21 @@ layout: Blank
 }
 
 .gradient-overlay {
-  --grad-position-bottom: 50%;
-  --grad: radial-gradient(circle at var(--grad-position-bottom) 100%, rgb(218, 163, 255) 0%, rgb(230, 170, 250) 10%, rgb(240, 170, 235) 15%, rgb(255, 177, 207) 25%, rgba(255, 195, 210, 0.95) 35%, rgba(255, 210, 212, 0.9) 45%, rgba(255, 218, 215, 0.8) 60%, rgba(250, 230, 220, 0.7) 75%, var(--dt-shell-color-surface-default) 100%);
+  --grad-position-x: 50%;
+  --grad-position-y: 100%;
+  --grad: radial-gradient(circle at var(--grad-position-x) var(--grad-position-y), rgb(218, 163, 255) 0%, rgb(230, 170, 250) 10%, rgb(240, 170, 235) 15%, rgb(255, 177, 207) 25%, rgba(255, 195, 210, 0.95) 35%, rgba(255, 210, 212, 0.9) 45%, rgba(255, 218, 215, 0.8) 60%, rgba(250, 230, 220, 0.7) 75%, var(--dt-shell-color-surface-default) 100%);
   --overlay-color-surface: var(--dt-shell-color-surface-default);
   --overlay-opacity: 0;
 
   position: relative;
-  transition: --grad-position-bottom 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: --grad-position-x 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 
   background-image: var(--grad);
   background-attachment: fixed;
   height: 100vh;
 
   [data-dt-mode="dark"] & {
-    --grad: radial-gradient(circle at var(--grad-position-bottom) 100%, rgb(246, 100, 55) 0%, rgb(223, 38, 110) 30%, rgb(191, 10, 128) 44%, rgb(81, 30, 118) 71%, var(--dt-color-purple-50) 100%);
+    --grad: radial-gradient(circle at var(--grad-position-x) var(--grad-position-y), rgb(246, 100, 55) 0%, rgb(223, 38, 110) 30%, rgb(191, 10, 128) 44%, rgb(81, 30, 118) 71%, var(--dt-color-purple-50) 100%);
     --overlay-color-surface: var(--dt-color-purple-50);
   }
 
@@ -252,19 +253,25 @@ const openSearch = () => {
 
 // Mouse-driven gradient position with smoothing
 onMounted(() => {
-  let currentPosition = 50; // Start at center
-  let targetPosition = 50;
+  let currentPositionX = 50; // Start at center
+  let targetPositionX = 50;
+  let currentPositionY = 100; // Start at bottom
+  let targetPositionY = 100;
   let animationId = null;
 
   const gradientOverlay = document.querySelector('.gradient-overlay');
 
   const animate = () => {
-    // Smooth interpolation
-    currentPosition += (targetPosition - currentPosition) * 0.1; // Adjust 0.1 for more/less smoothing
+    // Smooth interpolation for X
+    currentPositionX += (targetPositionX - currentPositionX) * 0.1;
 
-    // Update CSS variable
+    // Smooth interpolation for Y
+    currentPositionY += (targetPositionY - currentPositionY) * 0.1;
+
+    // Update CSS variables
     if (gradientOverlay) {
-      gradientOverlay.style.setProperty('--grad-position-bottom', `${currentPosition}%`);
+      gradientOverlay.style.setProperty('--grad-position-x', `${currentPositionX}%`);
+      gradientOverlay.style.setProperty('--grad-position-y', `${currentPositionY}%`);
     }
 
     animationId = requestAnimationFrame(animate);
@@ -272,7 +279,13 @@ onMounted(() => {
 
   const handleMouseMove = (e) => {
     // Get mouse X position as percentage of viewport width
-    targetPosition = (e.clientX / window.innerWidth) * 100;
+    targetPositionX = (e.clientX / window.innerWidth) * 100;
+
+    // Calculate distance from center (0 to 1)
+    const distanceFromCenter = Math.abs(targetPositionX - 50) / 50;
+
+    // Map distance to Y position: 100% at center, up to 120% at edges
+    targetPositionY = 100 + (distanceFromCenter * 20);
   };
 
   // Start animation loop
