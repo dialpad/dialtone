@@ -1,3 +1,15 @@
+# [1.2.0](https://github.com/dialpad/dialtone/compare/dialtone-mcp-server/v1.1.0...dialtone-mcp-server/v1.2.0) (2025-11-13)
+
+
+### Bug Fixes
+
+* **Mcp Server:** DLT-2840 correct installation instructions and improve documentation ([#969](https://github.com/dialpad/dialtone/issues/969)) ([04943af](https://github.com/dialpad/dialtone/commit/04943afc6bc9fa0ac6f672d01d2fa26f5713dfb5))
+
+
+### Features
+
+* **Mcp Server:** DLT-2837 add icon search tool ([#967](https://github.com/dialpad/dialtone/issues/967)) ([25d4d7d](https://github.com/dialpad/dialtone/commit/25d4d7dccce543473342cd2b4211cefbb732e486))
+
 # [1.1.0](https://github.com/dialpad/dialtone/compare/dialtone-mcp-server/v1.0.2...dialtone-mcp-server/v1.1.0) (2025-11-05)
 
 
