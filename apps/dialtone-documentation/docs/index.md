@@ -14,7 +14,7 @@ layout: Blank
   <dt-stack gap="550" class="d-py64 d-ai-center d-of-hidden d-w100p">
     <showcase-carousel />
   </dt-stack>
-  <dt-stack gap="550" class="d-px32 d-py64 d-ai-center d-bgc-secondary-opaque">
+  <dt-stack gap="550" class="d-py64 d-px64 d-pb96 d-ai-center">
     <dt-stack style="filter: drop-shadow(rgba(0, 0, 0, 0.25) 0px 25px 30px);" class="d-w114">
       <svg viewBox="0 0 96 36" fill="none" xmlns="http://www.w3.org/2000/svg">
       <rect width="96" height="36" rx="12" fill="white"/>
@@ -32,7 +32,7 @@ layout: Blank
     <h2 class="d-headline--xxl d-ff-expressive d-wmx764" style="font-size: 48px;font-family:var(--dt-font-family-expressive); text-wrap: balance; max-width: 1400px;">Setting the tone.</h2>
     <p class="d-ta-center d-docsite--paragraph d-m0 d-wmx764" style="text-wrap: balance; font-size: 24px; font-weight: 400;">Dialtone is Dialpad’s shared design language—shaping everything from our product interfaces to our marketing. It defines how our brand looks, feels, and behaves across every touchpoint. Built on principles of clarity, consistency, and accessibility, Dialtone keeps our visual identity cohesive and unmistakably Dialpad.</p>
   </dt-stack>
-  <dt-stack gap="700" class="d-px32 d-py64 d-ai-center">
+  <dt-stack gap="700" class="d-py64 d-px64 d-pt96 d-ai-center d-bgc-secondary-opaque">
     <dt-stack style="max-width: 1400px;" direction="row" gap="600" class="d-w100p d-jc-center">
       <router-link to="./foundations/brand/" class="d-d-block">
         <svg-loader class="d-bar16 d-w100p" name="home-foundations-01" />
@@ -62,7 +62,7 @@ layout: Blank
       </p>
     </dt-stack>
   </dt-stack>
-  <dt-stack gap="700" class="d-px32 d-py64 d-ai-center d-bgc-secondary-opaque">
+  <dt-stack gap="700" class="d-py64 d-px64 d-pb96 d-ai-center d-bgc-secondary-opaque">
     <dt-stack style="max-width: 1400px" direction="row" gap="600" class="d-w100p d-jc-center">
       <router-link to="./components/" class="d-d-block">
         <svg-loader class="d-bar16 d-w100p" name="home-system--01" />
@@ -92,7 +92,7 @@ layout: Blank
       </p>
     </dt-stack>
   </dt-stack>
-  <dt-stack gap="700" class="d-px32 d-py64 d-ai-center">
+  <dt-stack gap="700" class="d-py64 d-px64 d-pt96 d-ai-center">
     <dt-stack style="max-width: 1400px" gap="550" class="d-ai-center">
       <h2 class="d-headline--xxl d-ff-expressive" style="font-size: 48px;font-family:var(--dt-font-family-expressive); text-wrap: balance; max-width: 1400px;">What's New</h2>
       <p class="d-ta-center d-docsite--paragraph d-m0 d-wmx764" style="text-wrap: balance; font-size: 24px; font-family:var(--dt-font-family-expressive)">The latest from Dialpad Design.</p>
