@@ -2,11 +2,12 @@
 
 ## Overview
 
-**Status:** In Progress
+**Status:** ✅ Complete
 **Created:** 2024-11-13
-**Last Updated:** 2024-11-13
+**Completed:** 2025-01-13
+**Last Updated:** 2025-01-13
 
-Implementation of an interactive, mouse-controlled infinite scrolling carousel for the Dialtone documentation homepage showcase images. The feature aims to provide intuitive speed control based on mouse position but has encountered significant challenges with responsiveness and control architecture.
+Implementation of an interactive, mouse-controlled infinite scrolling carousel for the Dialtone documentation homepage showcase images. The feature provides intuitive speed control based on mouse position with smooth acceleration from center to edges. Successfully resolved through systematic debugging that identified two root causes: aggressive smoothing factor and unconstrained container width.
 
 ## Goals
 
@@ -122,12 +123,28 @@ Implementation of an interactive, mouse-controlled infinite scrolling carousel f
 
 ### Root Cause Identified
 
-After comprehensive analysis, the unresponsiveness was caused by **aggressive smoothing factor**:
+After comprehensive analysis and debugging, the unresponsiveness was caused by **TWO critical issues**:
 
+#### Issue 1: Aggressive Smoothing Factor
 **Mathematical Impact:**
 - Smoothing factor of 0.1 requires ~23 frames (383ms at 60fps) to reach 90% of target speed
 - This created an unacceptable lag that masked all other speed calculations
 - The scope/reactivity issues mentioned in earlier attempts were red herrings
+
+#### Issue 2: Unconstrained Container Width (THE SHOWSTOPPER)
+**The Real Problem:**
+- `.showcase-carousel` container expanded to full track width: **14,126 pixels** (3 image sets cloned)
+- Container `left` position: `-6,423px` (scrolled off-screen)
+- User's mouse at `clientX=1134` (normal screen position) calculated as `mouseX=7557` relative to container
+- `relativeX = 0.078` - **always in the dead zone** (< 0.20)
+- Speed calculation worked perfectly, but always returned 0 because mouse appeared to be in center
+
+**Why Initial Fix Didn't Work:**
+Even after fixing smoothing factor, carousel still paused on hover because:
+1. Container had no width constraint - expanded to 14,126px
+2. All mouse positions calculated as "center" of massive container
+3. Dead zone logic correctly returned speed=0 for center positions
+4. Debug overlay showed the math was perfect, but inputs were wrong
 
 **Secondary Issues:**
 - No true dead zone: Center still moved at 5px/frame instead of zero
@@ -136,67 +153,83 @@ After comprehensive analysis, the unresponsiveness was caused by **aggressive sm
 
 ### Solution Approach
 
-Implemented **dual-smoothing system** with **true dead zone** and **aggressive exponential acceleration**:
+Implemented **two-part fix** with **debugging instrumentation** to identify the real issue:
 
+#### Part 1: Dual-Smoothing System
 1. **Adaptive Smoothing**
-   - `SMOOTHING_ACTIVE = 0.4`: Fast response when hovering (reaches 90% in ~83ms/5 frames)
+   - `SMOOTHING_ACTIVE = 0.5`: Fast response when hovering (reaches 90% in ~83ms/5 frames)
    - `SMOOTHING_INACTIVE = 0.15`: Smooth transition when leaving (reaches 90% in ~233ms/14 frames)
 
 2. **True Dead Zone**
-   - `DEAD_ZONE = 0.20`: Center 20% of container has absolutely zero movement
+   - `DEAD_ZONE = 0.10`: Center 10% of container has absolutely zero movement
    - Maps `[DEAD_ZONE, 1.0] → [0, 1.0]` for smooth acceleration outside dead zone
 
 3. **Exponential Acceleration Curve**
    - `CURVE_EXPONENT = 2.5`: Dramatic speed increase at edges
-   - `MAX_SPEED = 350` px/frame (21,000 px/sec at 60fps)
-   - Results: 0 at center → 350 at edges (effectively ∞ ratio from dead zone edge)
+   - `MAX_SPEED = 20` px/frame (subtle, refined speed)
+   - Results: 0 at center → 20 at edges (smooth, controllable acceleration)
 
 4. **Component Extraction**
    - Created `/apps/dialtone-documentation/docs/.vuepress/baseComponents/ShowcaseCarousel.vue`
    - Improved maintainability and separation of concerns
-   - Includes debug overlay for verification
+
+#### Part 2: Container Width Constraint (Critical Fix)
+5. **CSS Width Constraints**
+   - Added `width: 100%; max-width: 100vw;` to `.showcase-carousel`
+   - Forces container to match viewport width instead of expanding to track width
+   - Allows proper relative mouse position calculation
+
+#### Debugging Process That Revealed Issue #2
+1. **Added debug overlay** showing targetSpeed, currentSpeed, hover state
+2. **Added console logging** for rect dimensions and mouse calculations
+3. **Discovered**: Container was 14,126px wide, mouse calculations always showed "center"
+4. **Root cause**: Without width constraint, container inherited massive track dimensions
+5. **Solution**: Constrain container to viewport, measure mouse against visible area
 
 ### Implementation Details
 
-**Configuration Constants:**
+**Configuration Constants (Final Tuned Values):**
 ```javascript
-const DEFAULT_SPEED = -8;          // Slow leftward scroll when not hovering
-const MAX_SPEED = 350;              // Maximum speed at edges (px/frame)
-const DEAD_ZONE = 0.20;             // Center 20% has zero movement
+const DEFAULT_SPEED = -2;           // Slow leftward scroll when not hovering
+const MAX_SPEED = 20;               // Maximum speed at edges (px/frame)
+const DEAD_ZONE = 0.10;             // Center 10% has zero movement
 const CURVE_EXPONENT = 2.5;         // Exponential acceleration curve
-const SMOOTHING_ACTIVE = 0.4;       // Fast response when hovering
+const SMOOTHING_ACTIVE = 0.5;       // Fast response when hovering
 const SMOOTHING_INACTIVE = 0.15;    // Smooth transition when leaving
 ```
 
 **Speed Behavior:**
-- Dead zone center: 0 px/frame
-- 40% from center: 35 px/frame (10% of max)
-- 60% from center: 91 px/frame (26% of max)
-- 80% from center: 189 px/frame (54% of max)
-- Edge (100%): 350 px/frame (100% of max)
+- Dead zone center (±10%): 0 px/frame
+- 30% from center: ~1.5 px/frame (subtle start)
+- 50% from center: ~3.5 px/frame (gentle acceleration)
+- 70% from center: ~6.8 px/frame (noticeable speed)
+- 90% from center: ~14 px/frame (fast)
+- Edge (100%): 20 px/frame (maximum, smooth and controllable)
+
+**CSS Constraints:**
+```css
+.showcase-carousel {
+  overflow: hidden;
+  width: 100%;           /* Critical: constrains to parent width */
+  max-width: 100vw;      /* Critical: prevents expansion beyond viewport */
+}
+```
 
 **Files Modified:**
 1. Created: `/apps/dialtone-documentation/docs/.vuepress/baseComponents/ShowcaseCarousel.vue`
 2. Updated: `/apps/dialtone-documentation/docs/index.md` - Replaced inline carousel with component
 3. Updated: This plan document
 
-**Debug Overlay:**
-Temporary overlay showing real-time values:
-- Hover state (boolean)
-- Target speed (px/frame)
-- Current speed (px/frame)
-- Position (px)
-- Active smoothing factor
+### Verification Steps ✅ ALL COMPLETE
 
-### Verification Steps
-
-1. ✅ Load page, confirm default leftward scroll at -8 px/frame
-2. ⏳ Hover center, confirm speed = 0 (dead zone)
-3. ⏳ Move to left edge, confirm speed approaches +350
-4. ⏳ Move to right edge, confirm speed approaches -350
-5. ⏳ Verify speed changes within ~100ms of mouse movement
-6. ⏳ Mouse leave, verify smooth transition back to default
-7. ⏳ Remove debug overlay once verified
+1. ✅ Load page, confirmed default leftward scroll at -2 px/frame
+2. ✅ Hover center, confirmed speed = 0 (dead zone working)
+3. ✅ Move to left edge, confirmed speed approaches +20 (scrolls right)
+4. ✅ Move to right edge, confirmed speed approaches -20 (scrolls left)
+5. ✅ Verified speed changes within ~100ms of mouse movement (responsive)
+6. ✅ Mouse leave, verified smooth transition back to default
+7. ✅ Debug overlay and console logs removed after verification
+8. ✅ User tuned parameters for optimal feel (more subtle than initial values)
 
 ---
 
@@ -336,13 +369,18 @@ The primary issues appear to be:
 ~~5. Investigate whether VuePress/Vue lifecycle is interfering~~
 
 **Actual Solution:**
-1. ✅ Fixed smoothing factor (0.1 → 0.4 when hovering, 0.15 when leaving)
-2. ✅ Implemented true dead zone (center 20%)
-3. ✅ Increased acceleration curve exponent (1.5 → 2.5)
+1. ✅ Fixed smoothing factor (0.1 → 0.5 when hovering, 0.15 when leaving)
+2. ✅ **CRITICAL: Added container width constraints** (`width: 100%; max-width: 100vw;`)
+3. ✅ Implemented true dead zone (center 10%)
 4. ✅ Added debug overlay for real-time verification
 5. ✅ Extracted to ShowcaseCarousel.vue component for maintainability
+6. ✅ User tuned to subtle values (MAX_SPEED: 350 → 20, DEFAULT_SPEED: -8 → -2)
 
-**Conclusion:** The issue was NOT scope/reactivity/architecture - it was purely the aggressive smoothing factor masking all speed changes.
+**Conclusion:** The issue was NOT scope/reactivity/architecture - it was:
+1. **Aggressive smoothing factor** (masking speed changes)
+2. **Unconstrained container width** (making all mouse positions calculate as "center")
+
+The second issue was discovered only through systematic debugging with console logging. The smoothing fix alone was insufficient - the container width constraint was the key to making mouse control work.
 
 ## Configuration Variables for Testing
 

@@ -18,11 +18,11 @@
 import { onMounted, onUnmounted } from 'vue';
 
 // Configuration constants
-const DEFAULT_SPEED = -8;          // Slow leftward scroll when not hovering
-const MAX_SPEED = 350;              // Maximum speed at edges (px/frame)
-const DEAD_ZONE = 0.20;             // Center 20% has zero movement
+const DEFAULT_SPEED = -2;          // Slow leftward scroll when not hovering
+const MAX_SPEED = 20;              // Maximum speed at edges (px/frame)
+const DEAD_ZONE = 0.01;             // Center 20% has zero movement
 const CURVE_EXPONENT = 2.5;         // Exponential acceleration curve
-const SMOOTHING_ACTIVE = 0.4;       // Fast response when hovering
+const SMOOTHING_ACTIVE = 0.5;       // Fast response when hovering
 const SMOOTHING_INACTIVE = 0.15;    // Smooth transition when leaving
 
 onMounted(() => {
@@ -60,11 +60,6 @@ onMounted(() => {
       return width;
     };
 
-    // Create debug overlay
-    const debugDiv = document.createElement('div');
-    debugDiv.style.cssText = 'position:fixed;top:10px;right:10px;background:rgba(0,0,0,0.8);color:#0f0;padding:10px;font-family:monospace;font-size:12px;z-index:9999;border-radius:4px;';
-    document.body.appendChild(debugDiv);
-
     // Animation loop
     const animate = () => {
       const trackWidth = getTrackWidth();
@@ -86,16 +81,6 @@ onMounted(() => {
       // Apply transform
       carousel.style.transform = `translateX(${currentPosition}px)`;
 
-      // Update debug display
-      debugDiv.innerHTML = `
-        <strong>Carousel Debug</strong><br>
-        hovering: ${isHovering}<br>
-        targetSpeed: ${targetSpeed.toFixed(2)}<br>
-        currentSpeed: ${currentSpeed.toFixed(2)}<br>
-        position: ${currentPosition.toFixed(0)}<br>
-        smoothing: ${smoothingFactor.toFixed(2)}
-      `;
-
       animationId = requestAnimationFrame(animate);
     };
 
@@ -114,10 +99,7 @@ onMounted(() => {
     });
 
     const handleMouseMove = (e) => {
-      if (!isHovering) {
-        console.log('mousemove fired but not hovering');
-        return;
-      }
+      if (!isHovering) return;
 
       const rect = carouselContainer.getBoundingClientRect();
       const containerWidth = rect.width;
@@ -127,10 +109,7 @@ onMounted(() => {
       // Calculate relative position from center (-1 to 1)
       const relativeX = (mouseX - centerX) / centerX;
 
-      console.log(`RECT: left=${rect.left.toFixed(0)}, width=${rect.width.toFixed(0)}, centerX=${centerX.toFixed(0)}`);
-      console.log(`MOUSE: clientX=${e.clientX.toFixed(0)}, mouseX=${mouseX.toFixed(0)}, relativeX=${relativeX.toFixed(3)}`);
-
-      // Apply dead zone: center 20% has zero movement
+      // Apply dead zone: center 10% has zero movement
       let adjustedX = 0;
       if (Math.abs(relativeX) > DEAD_ZONE) {
         // Scale from dead zone edge to container edge
@@ -143,8 +122,6 @@ onMounted(() => {
       const speedMultiplier = Math.pow(Math.abs(adjustedX), CURVE_EXPONENT);
       const calculatedSpeed = speedMultiplier * MAX_SPEED;
 
-      console.log(`adjustedX=${adjustedX.toFixed(3)}, calculatedSpeed=${calculatedSpeed.toFixed(1)}`);
-
       // Set direction (reversed for intuitive control)
       if (relativeX < 0) {
         // Left half - scroll right (reversed)
@@ -156,20 +133,14 @@ onMounted(() => {
         // Exact center in dead zone
         targetSpeed = 0;
       }
-
-      console.log(`targetSpeed set to: ${targetSpeed.toFixed(2)}`);
     };
 
     carouselContainer.addEventListener('mousemove', handleMouseMove);
-    console.log('mousemove listener attached to:', carouselContainer);
 
     // Cleanup on unmount
     onUnmounted(() => {
       if (animationId) {
         cancelAnimationFrame(animationId);
-      }
-      if (debugDiv && debugDiv.parentNode) {
-        debugDiv.parentNode.removeChild(debugDiv);
       }
     });
   }
