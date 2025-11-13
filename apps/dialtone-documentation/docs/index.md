@@ -8,21 +8,7 @@ layout: Blank
   options=""
 />
 
-<div class="dialtone-header dialtone-header--home d-bgc-primary d-bgo90 d-m-auto">
-  <!-- <dialtone-logo /> -->
-  <router-link
-    class="d-pl8"
-    title="Dialtone homepage"
-    to="/"
-  >
-    <dt-stack>
-      <dt-illustration name="dialpad-logo" />
-    </dt-stack>
-  </router-link>
-  <navbar
-    @search="openSearch"
-  />
-</div>
+<header-overlay @search="openSearch" />
 <gradient-hero />
 <dt-stack class="d-m-auto">
   <dt-stack gap="550" class="d-py64 d-ai-center d-of-hidden d-w100p">
@@ -202,30 +188,6 @@ layout: Blank
 .dialpad-design-home {
   position: relative;
 }
-.dialtone-header {
-  &--home {
-    --position-top: 16px;
-
-    max-width: 1400px;
-    box-shadow: var(--dt-shadow-card);
-    box-shadow: 0 255.043px 71.487px 0 rgba(0, 0, 0, 0.00), 0 163.131px 65.306px 0 rgba(0, 0, 0, 0.01), 0 91.912px 55.094px 0 rgba(0, 0, 0, 0.03), 0 40.85px 40.85px 0 rgba(0, 0, 0, 0.05), 0 10.212px 22.306px 0 rgba(0, 0, 0, 0.05);
-
-    border-radius: var(--dt-size-radius-450);
-    position: fixed;
-    inset: var(--position-top) 16px;
-    inset-block-end: auto;
-
-    z-index: 1;
-    backdrop-filter: blur(8px);
-    -webkit-backdrop-filter: blur(8px);
-
-    transition: inset cubic-bezier(0.4, 0, 0.2, 1) 0.66s;
-    will-change: inset;
-  }
-  &--off-canvas {
-    --position-top: -105%;
-  }
-}
 
 .gradient-overlay {
   --grad: radial-gradient(circle at bottom center, rgb(218, 163, 255) 0%, rgb(230, 170, 250) 10%, rgb(240, 170, 235) 15%, rgb(255, 177, 207) 25%, rgba(255, 195, 210, 0.95) 35%, rgba(255, 210, 212, 0.9) 45%, rgba(255, 218, 215, 0.8) 60%, rgba(250, 230, 220, 0.7) 75%, var(--dt-shell-color-surface-default) 100%);
@@ -272,9 +234,9 @@ layout: Blank
 
 <script setup>
 import { ref, onMounted, onUnmounted } from 'vue';
-import Navbar from '../../theme/components/Navbar.vue';
 import ShowcaseCarousel from '../../baseComponents/ShowcaseCarousel.vue';
 import GradientHero from '../../baseComponents/GradientHero.vue';
+import HeaderOverlay from '../../baseComponents/HeaderOverlay.vue';
 
 const docSearchBtn = ref(null);
 
