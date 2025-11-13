@@ -25,6 +25,17 @@ layout: Blank
 </div>
 <div class="gradient-overlay" style="--overlay-opacity: 0">
   <div class="gradient-overlay__overlay"></div>
+  <h1
+    class="d-headline--xxl d-h100p d-w100p d-d-grid d-plc-center d-ta-center d-fw-medium"
+    style="
+      font-size: 64px;
+      font-family: var(--dt-font-family-expressive);
+      text-wrap: balance;
+      mix-blend-mode: overlay;
+    "
+  >
+    Making every business, a better business through design.
+  </h1>
 </div>
 <dt-stack class="d-m-auto d-pt64" style="max-width: 1400px">
   <figure class="d-ta-center"><img class="d-bar16 d-wmx912" src="/assets/images/color--sample-01.jpg" alt=""></figure>
@@ -185,22 +196,22 @@ onMounted(() => {
   const handleScroll = () => {
     // Get the height of the gradient overlay (100vh)
     const overlayHeight = gradientOverlay.offsetHeight;
-    
+
     // Get current scroll position
     const scrollY = window.scrollY;
-    
+
     // Calculate opacity based on scroll position
     // When scrollY is 0, opacity is 0
     // When scrollY equals overlayHeight, opacity is 1
     const opacity = Math.min(Math.max(scrollY / overlayHeight, 0), 1);
-    
+
     // Update the CSS variable
     gradientOverlay.style.setProperty('--overlay-opacity', opacity);
   };
 
   // Add scroll event listener
   window.addEventListener('scroll', handleScroll, { passive: true });
-  
+
   // Call once on mount to set initial state
   handleScroll();
 
