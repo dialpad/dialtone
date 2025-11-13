@@ -1,12 +1,20 @@
 <template>
   <template v-if="illustration">
     <template v-for="i in illustrationSVGs" :key="i">
-      <component :is="i" v-if="i" v-bind="$attrs" />
+      <span
+        v-if="i"
+        :data-svg-source="`@dialpad/dialtone-icons/dist/svg/illustrations/${name}.svg`"
+        class="d-svg-wrapper"
+      >
+        <component :is="i" v-bind="$attrs" />
+      </span>
     </template>
   </template>
   <template v-else>
-    <template v-for="svg in svgs" :key="svg">
-      <component :is="svg" v-if="svg" v-bind="$attrs" />
+    <template v-for="(svg, index) in svgs" :key="svg">
+      <span v-if="svg" :data-svg-source="svgPaths[index]" class="d-svg-wrapper">
+        <component :is="svg" v-bind="$attrs" />
+      </span>
     </template>
   </template>
 </template>
@@ -45,6 +53,12 @@ const illustrationSVGs = [
   }),
 ];
 
+const svgPaths = [
+  `assets/images/${props.name}.svg`,
+  `assets/images/components/${props.name}.svg`,
+  `assets/images/favicons/${props.name}.svg`,
+];
+
 const svgs = [
   defineAsyncComponent({
     loader: () => import(`../public/assets/images/${props.name}.svg?component`),
@@ -60,3 +74,9 @@ const svgs = [
   }),
 ];
 </script>
+
+<style scoped>
+.d-svg-wrapper {
+  display: contents;
+}
+</style>
