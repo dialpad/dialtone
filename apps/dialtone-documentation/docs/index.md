@@ -48,18 +48,20 @@ layout: Blank
   </h1>
 </div>
 <dt-stack class="d-m-auto">
-  <dt-stack gap="550" class="d-px32 d-pr0 d-py64 d-ai-center d-of-hidden d-w100p">
-    <dt-stack direction="row" gap="700">
-      <img style="width: 468px;" class="d-bar16 d-d-block" src="/assets/images/home-showcase--01.jpg" alt="">
-      <img style="width: 546px;" class="d-bar16 d-d-block" src="/assets/images/home-showcase--02.jpg" alt="">
-      <img style="width: 352px;" class="d-bar16 d-d-block" src="/assets/images/home-showcase--03.jpg" alt="">
-      <img style="width: 400px;" class="d-bar16 d-d-block" src="/assets/images/home-showcase--04.jpg" alt="">
-      <img style="width: 480px;" class="d-bar16 d-d-block" src="/assets/images/home-showcase--05.jpg" alt="">
-      <img style="width: 628px;" class="d-bar16 d-d-block" src="/assets/images/home-showcase--06.jpg" alt="">
-      <img style="width: 438px;" class="d-bar16 d-d-block" src="/assets/images/home-showcase--07.jpg" alt="">
-      <img style="width: 404px;" class="d-bar16 d-d-block" src="/assets/images/home-showcase--08.jpg" alt="">
-      <img style="width: 438px;" class="d-bar16 d-d-block" src="/assets/images/home-showcase--09.jpg" alt="">
-    </dt-stack>
+  <dt-stack gap="550" class="d-py64 d-ai-center d-of-hidden d-w100p">
+    <div class="showcase-carousel">
+      <dt-stack direction="row" gap="700" class="showcase-carousel__track">
+        <img style="width: 468px;" class="d-bar16 d-d-block" src="/assets/images/home-showcase--01.jpg" alt="">
+        <img style="width: 546px;" class="d-bar16 d-d-block" src="/assets/images/home-showcase--02.jpg" alt="">
+        <img style="width: 352px;" class="d-bar16 d-d-block" src="/assets/images/home-showcase--03.jpg" alt="">
+        <img style="width: 400px;" class="d-bar16 d-d-block" src="/assets/images/home-showcase--04.jpg" alt="">
+        <img style="width: 480px;" class="d-bar16 d-d-block" src="/assets/images/home-showcase--05.jpg" alt="">
+        <img style="width: 628px;" class="d-bar16 d-d-block" src="/assets/images/home-showcase--06.jpg" alt="">
+        <img style="width: 438px;" class="d-bar16 d-d-block" src="/assets/images/home-showcase--07.jpg" alt="">
+        <img style="width: 404px;" class="d-bar16 d-d-block" src="/assets/images/home-showcase--08.jpg" alt="">
+        <img style="width: 438px;" class="d-bar16 d-d-block" src="/assets/images/home-showcase--09.jpg" alt="">
+      </dt-stack>
+    </div>
   </dt-stack>
   <dt-stack gap="550" class="d-px32 d-py64 d-ai-center d-bgc-secondary-opaque">
     <dt-stack style="filter: drop-shadow(rgba(0, 0, 0, 0.25) 0px 25px 30px);" class="d-w114">
@@ -296,6 +298,15 @@ layout: Blank
 .dialtone-home-header {
 }
 
+.showcase-carousel {
+  overflow: hidden;
+}
+
+.showcase-carousel__track {
+  will-change: transform;
+  transition: none;
+}
+
 [data-dt-mode="dark"] .footer-dialpad-design__light,
 [data-dt-mode="light"] .footer-dialpad-design__dark {
   display: none;
@@ -312,6 +323,116 @@ const docSearchBtn = ref(null);
 const openSearch = () => {
   docSearchBtn.value?.children[0]?.click();
 };
+
+// Initialize interactive showcase carousel
+onMounted(() => {
+  const carouselContainer = document.querySelector('.showcase-carousel');
+  const carousel = document.querySelector('.showcase-carousel__track');
+
+  if (carousel && carouselContainer) {
+    // Clone images multiple times for seamless infinite scrolling
+    const images = carousel.querySelectorAll('img');
+    // Clone twice more for smoother infinite scroll
+    for (let i = 0; i < 2; i++) {
+      images.forEach(img => {
+        const clone = img.cloneNode(true);
+        carousel.appendChild(clone);
+      });
+    }
+
+    // Track carousel state
+    let currentPosition = 0;
+    let targetSpeed = 0;
+    let currentSpeed = 0;
+    let animationId = null;
+    let isHovering = false;
+
+    // Get total width of one set of images
+    const getTrackWidth = () => {
+      const allImages = carousel.querySelectorAll('img');
+      const imagesPerSet = allImages.length / 3; // We have 3 sets now
+      let width = 0;
+      for (let i = 0; i < imagesPerSet; i++) {
+        width += allImages[i].offsetWidth;
+      }
+      // Add gaps (700 units from dt-stack)
+      width += (imagesPerSet - 1) * 28; // Assuming 700 units = ~28px
+      return width;
+    };
+
+    // Animation loop
+    const animate = () => {
+      const trackWidth = getTrackWidth();
+
+      // Smooth speed transition
+      currentSpeed += (targetSpeed - currentSpeed) * 0.1;
+
+      // Update position
+      currentPosition += currentSpeed;
+
+      // Reset position for infinite loop
+      if (currentPosition > 0) {
+        currentPosition -= trackWidth;
+      } else if (currentPosition < -trackWidth) {
+        currentPosition += trackWidth;
+      }
+
+      // Apply transform
+      carousel.style.transform = `translateX(${currentPosition}px)`;
+
+      animationId = requestAnimationFrame(animate);
+    };
+
+    // Start default animation (slow leftward scroll)
+    targetSpeed = -5; // 🎯 DEFAULT SPEED: Negative for leftward, positive for rightward
+    animate();
+
+    // Mouse interaction handlers
+    carouselContainer.addEventListener('mouseenter', () => {
+      isHovering = true;
+    });
+
+    carouselContainer.addEventListener('mouseleave', () => {
+      isHovering = false;
+      targetSpeed = -5; // 🎯 DEFAULT SPEED when mouse leaves
+    });
+
+    carouselContainer.addEventListener('mousemove', (e) => {
+      if (!isHovering) return;
+
+      const rect = carouselContainer.getBoundingClientRect();
+      const containerWidth = rect.width;
+      const mouseX = e.clientX - rect.left;
+      const centerX = containerWidth / 2;
+
+      // Calculate relative position from center (-1 to 1)
+      const relativeX = (mouseX - centerX) / centerX;
+
+      // Calculate speed based on distance from center
+      // Use exponential scaling for more dramatic speed increase at edges
+      const maxSpeed = 300;  // 🎯 MAX SPEED at edges (pixels per frame)
+      const minSpeed = 5;   // 🎯 MIN SPEED at center (pixels per frame)
+      const speedMultiplier = Math.pow(Math.abs(relativeX), 1.5); // Exponential scaling
+      const speed = speedMultiplier * (maxSpeed - minSpeed) + minSpeed;
+
+      // Set direction based on which half of container (reversed for intuitive feel)
+      if (relativeX < 0) {
+        // Left half - scroll right (reversed)
+        targetSpeed = speed;
+      } else {
+        // Right half - scroll left (reversed)
+        targetSpeed = -speed;
+      }
+    });
+
+    // Cleanup on unmount
+    onUnmounted(() => {
+      if (animationId) {
+        cancelAnimationFrame(animationId);
+      }
+    });
+  }
+});
 
 // Scroll-driven effects
 onMounted(() => {
