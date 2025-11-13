@@ -90,7 +90,7 @@ function _extractFrontmatter (app, path, options, exceptions = []) {
     return;
   }
 
-  const regExpPath = new RegExp(`${path}.+`);
+  const regExpPath = new RegExp(`^${path}[^/]+/$`);
 
   indexPage.data.enhancedFrontmatter = app.pages
     .filter(page => regExpPath.test(page.path))
