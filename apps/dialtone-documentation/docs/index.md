@@ -8,7 +8,7 @@ layout: Blank
   options=""
 />
 
-<div class="dialtone-header dialtone-header--home d-bgc-primary d-bgo90">
+<div class="dialtone-header dialtone-header--home d-bgc-primary d-bgo90 d-m-auto">
   <!-- <dialtone-logo /> -->
   <router-link
     class="d-pl8"
@@ -26,12 +26,14 @@ layout: Blank
 <div class="gradient-overlay" style="--overlay-opacity: 0; --text-opacity: .6;">
   <div class="gradient-overlay__overlay"></div>
   <h1
-    class="d-headline--xxl d-h100p d-w100p d-d-grid d-plc-center d-ta-center d-fw-medium"
+    class="d-headline--xxl d-h100p d-w100p d-d-grid d-plc-center d-ta-center d-fw-medium d-wmx1024 d-m-auto d-p32"
     style="
       font-size: 64px;
       font-family: var(--dt-font-family-expressive);
       text-wrap: balance;
       opacity: var(--text-opacity);
+      transform: translateY(var(--text-translate-y, 0px));
+      transition: none;
     "
   >
     <div
@@ -145,6 +147,7 @@ layout: Blank
 }
 .dialtone-header {
   &--home {
+    max-width: 1400px;
     box-shadow: var(--dt-shadow-card);
     box-shadow: 0 255.043px 71.487px 0 rgba(0, 0, 0, 0.00), 0 163.131px 65.306px 0 rgba(0, 0, 0, 0.01), 0 91.912px 55.094px 0 rgba(0, 0, 0, 0.03), 0 40.85px 40.85px 0 rgba(0, 0, 0, 0.05), 0 10.212px 22.306px 0 rgba(0, 0, 0, 0.05);
 
@@ -212,14 +215,20 @@ onMounted(() => {
     // When scrollY is 0, opacity is 0
     // When scrollY equals overlayHeight, opacity is 1
     const overlayOpacity = Math.min(Math.max(scrollY / overlayHeight, 0), 1);
-    
+
     // Calculate text opacity - starts at 0.6 and fades to 0 as you scroll
     // Text fades out faster than overlay appears (completes at 50% scroll)
     const textOpacity = Math.max(0.6 - (scrollY / (overlayHeight * 0.5)) * 0.6, 0);
 
+    // Calculate text translation - moves down 0 to 50px as you scroll
+    // Reaches maximum translation when element scrolls out of view
+    const scrollProgress = Math.min(scrollY / overlayHeight, 1);
+    const textTranslateY = scrollProgress * 325;
+
     // Update the CSS variables
     gradientOverlay.style.setProperty('--overlay-opacity', overlayOpacity);
     gradientOverlay.style.setProperty('--text-opacity', textOpacity);
+    gradientOverlay.style.setProperty('--text-translate-y', `${textTranslateY}px`);
   };
 
   // Add scroll event listener
