@@ -1,13 +1,13 @@
 # Bug Fixes and Stability Improvements
 
-**Date**: 2025-01-11
+**Date**: 2025-01-11 (Phases 14-15), 2025-01-13 (Phase 16)
 **Status**: ✅ Completed
 **Related Branch**: `dialpad-design-hub`
-**Part of**: Phases 14-15 following [Navigation Flattening](./02-navigation-flattening.md)
+**Part of**: Phases 14-16 following [Navigation Flattening](./02-navigation-flattening.md)
 
 ## Overview
 
-After completing the navigation flattening, several critical bugs were discovered and fixed during testing. This document covers two phases of bug fixes that addressed build loops, navigation failures, styling issues, and race conditions.
+After completing the navigation flattening, several critical bugs were discovered and fixed during testing. This document covers three phases of bug fixes that addressed build loops, navigation failures, styling issues, race conditions, and overview card rendering bugs.
 
 ## Phase 14: Initial Bug Fixes
 
@@ -87,6 +87,40 @@ const toggleNavbar = async () => {
 3. **Async/await pattern** - Proper sequencing prevents race conditions
 4. **No setTimeout** - Eliminates arbitrary timing
 
+## Phase 16: Overview Card Regex Bug (2025-01-13)
+
+### Issue 6: Component Overview Cards Not Appearing ✅
+
+**Problem**: Overview cards displayed correctly on `/foundations/` but were completely missing on `/components/`
+
+**Root Cause**: The regex pattern in `_extractFrontmatter()` only matched paths ending with `/`, but component pages are generated with `.html` extensions while foundation pages use clean URLs.
+
+**Path Format Difference**:
+- Components: `/components/avatar.html`, `/components/button.html` (single `.md` files)
+- Foundations: `/foundations/brand/`, `/foundations/colors/` (directory-based with `index.md`)
+
+**Original Regex** (line 93 in `theme/index.js`):
+```javascript
+const regExpPath = new RegExp(`^${path}[^/]+/$`);
+// Only matched: /foundations/brand/
+// Missed: /components/avatar.html
+```
+
+**Fixed Regex**:
+```javascript
+const regExpPath = new RegExp(`^${path}[^/]+(\.html|/)$`);
+// Now matches both formats
+```
+
+**Verification**:
+- ✅ `/components/avatar.html` → Matches
+- ✅ `/components/button.html` → Matches
+- ✅ `/foundations/brand/` → Still matches
+- ❌ `/components/` → Correctly excluded (parent)
+- ❌ `/components/status/index.html` → Correctly excluded (grandchild)
+
+**File**: `docs/.vuepress/theme/index.js` (line 93)
+
 ## Files Modified
 
 ### Phase 14
@@ -99,6 +133,9 @@ const toggleNavbar = async () => {
 1. `docs/.vuepress/theme/components/MobileNavbar.vue` - Removed setTimeout, added async guards
 2. `docs/.vuepress/theme/components/MobileSidebar.vue` - Added async navigation guards
 
+### Phase 16
+1. `docs/.vuepress/theme/index.js` - Fixed regex to match both `.html` and `/` path formats
+
 ## Verification
 
 ✅ Dev server builds without loops
@@ -108,6 +145,8 @@ const toggleNavbar = async () => {
 ✅ Navbar visible on all pages
 ✅ Mobile navigation works without race conditions
 ✅ URL and content stay synchronized
+✅ Component overview cards render correctly
+✅ Foundation overview cards still work (no regression)
 
 ## Lessons Learned
 
@@ -116,6 +155,7 @@ const toggleNavbar = async () => {
 3. **Test on initial page load** - FOUC issues only appear on direct navigation
 4. **Router guards prevent race conditions** - Always wait for `router.isReady()` before state changes
 5. **Timing hacks are technical debt** - They work until they don't
+6. **Test regex patterns against all URL formats** - VuePress generates different URL structures (`.html` vs `/`) depending on file organization. Regex patterns must account for both formats
 
 ## Related Plans
 
