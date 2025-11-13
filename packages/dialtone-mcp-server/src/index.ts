@@ -1,6 +1,7 @@
 import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
 import { StdioServerTransport } from "@modelcontextprotocol/sdk/server/stdio.js";
 import { CallToolRequestSchema, ListToolsRequestSchema } from "@modelcontextprotocol/sdk/types.js";
+import pkg from '../package.json' assert { type: 'json' };
 
 import { utilityClasses, tokens, components, icons, clientRules } from './data.js';
 import { searchUtilityClasses, formatResults, buildCompoundPropertiesSet } from './tools/utility-classes.js';
@@ -24,8 +25,44 @@ import type {
   SearchResult
 } from './types.js';
 
+/**
+ * Check if a newer version of the package is available on npm
+ * Logs a warning with update instructions if outdated
+ * Fails silently if offline or registry unavailable
+ */
+async function checkVersion() {
+  try {
+    const packageName = pkg.name;
+    const currentVersion = pkg.version;
+
+    const response = await fetch(`https://registry.npmjs.org/${packageName}/latest`);
+    const data = await response.json();
+    const latestVersion = data.version;
+
+    if (currentVersion !== latestVersion) {
+      console.error('');
+      console.error('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
+      console.error('⚠️  Dialtone MCP Server Update Available');
+      console.error(`   Current: v${currentVersion}`);
+      console.error(`   Latest:  v${latestVersion}`);
+      console.error('');
+      console.error('   To update:');
+      console.error('   1. npm install -D @dialpad/dialtone-mcp-server@latest');
+      console.error('   2. Restart this conversation');
+      console.error('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
+      console.error('');
+    } else {
+      console.error(`✓ Dialtone MCP Server v${currentVersion} (up to date)`);
+    }
+  } catch (error) {
+    // Fail silently if offline or registry unavailable
+    // This ensures the server still starts even without network access
+  }
+}
 
 async function main() {
+  // Check for updates on startup
+  await checkVersion();
   // Build compound properties set from utility classes data (done once at startup)
   const compoundProperties = buildCompoundPropertiesSet(utilityClasses);
   console.error(`[INIT] Built compound properties set: ${compoundProperties.size} properties`);

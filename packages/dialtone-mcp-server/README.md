@@ -1,87 +1,96 @@
 # Dialtone MCP Server
 
-A [Model Context Protocol (MCP)](https://modelcontextprotocol.io) server that provides AI assistants with search access to Dialtone's design system: utility classes, design tokens, and Vue components.
+A [Model Context Protocol (MCP)](https://modelcontextprotocol.io) server that provides AI assistants with search access to Dialtone's design system: utility classes, design tokens, Vue components, and icons.
 
-## Quick Start
+Automatically filters deprecated items, swaps discouraged patterns with recommended alternatives, and provides AI-optimized search results.
 
-### 1. Build
+## Installation
 
-From the monorepo root:
+There are three ways to install the Dialtone MCP Server. **Project-scoped installation takes priority** over user-scoped when both exist.
 
-```bash
-pnpm install
-pnpm nx run dialtone-mcp-server:build
-```
+### Project-Scoped (Recommended for Teams)
 
-### 2. Test Interactively
-
-Try out search queries (must be run from the package directory):
+Best for team collaboration - everyone uses the same version via version control.
 
 ```bash
-# Navigate to the package directory first!
-cd packages/dialtone-mcp-server
-
-# Then run the interactive tool
-pnpm run interactive
+npm install -D @dialpad/dialtone-mcp-server
 ```
 
-Or use tsx directly from anywhere:
-```bash
-npx tsx packages/dialtone-mcp-server/interactive-search.ts
-```
-
-**Query Format:** Use keywords only, not questions.
-- ✓ Good: `padding 8px`, `color primary`, `button`
-- ✗ Bad: `how do I add padding?`, `what button component exists?`
-
-Example session:
-```
-Select a search tool:
-  1. Utility Classes
-  2. Design Tokens
-  3. Components
-
-Enter 1, 2, or 3: 1
-
-> padding 8px
-Found 8 results:
-  1. d-p8
-  2. d-pt8
-  3. d-pr8
-  4. d-pb8
-  ...
-```
-
-Type `help` for more examples, `switch` to change tools, `quit` to exit.
-
-### 3. Configure with Claude Desktop
-
-Add to `~/Library/Application Support/Claude/claude_desktop_config.json` (MacOS) or `%APPDATA%/Claude/claude_desktop_config.json` (Windows):
+Create or update `.mcp.json` in your project root:
 
 ```json
 {
   "mcpServers": {
     "dialtone": {
-      "command": "node",
-      "args": [
-        "/ABSOLUTE/PATH/TO/dialtone/packages/dialtone-mcp-server/build/index.js"
-      ]
+      "command": "dialtone-mcp-server"
     }
   }
 }
 ```
 
-**Important:**
-- Use the absolute path to your dialtone repo
-- Restart Claude Desktop completely after updating the config
-- Look for the 🔌 icon to confirm connection
+Commit `.mcp.json` to version control. Restart Claude Code to connect.
 
-**Finding your absolute path:**
+**Priority:** Project-scoped beats user-scoped. The `dialtone-mcp-server` command resolves from `node_modules/.bin/` first.
+
+### User-Scoped (Personal, All Projects)
+
+Available across all your projects. Choose one method:
+
+**Option A: Install locally in your user directory**
+
 ```bash
-cd /path/to/dialtone
-pwd
-# Use the output + /packages/dialtone-mcp-server/build/index.js
+# Install in a dedicated directory
+mkdir -p ~/.mcp-servers
+cd ~/.mcp-servers
+npm install @dialpad/dialtone-mcp-server
+
+# Add to Claude Code
+claude mcp add dialtone --scope user dialtone-mcp-server
 ```
+
+**Option B: Install globally**
+
+```bash
+npm install -g @dialpad/dialtone-mcp-server
+claude mcp add dialtone --scope user dialtone-mcp-server
+```
+
+**Option C: Use npx (no installation)**
+
+```bash
+claude mcp add dialtone --scope user -- npx -y @dialpad/dialtone-mcp-server
+```
+
+This stores configuration in `~/.claude/mcp.json`.
+
+**Version checking:** When the server starts, you'll see the current version. If outdated, follow the instructions shown.
+
+## Updating
+
+**Project-scoped:**
+
+```bash
+npm install -D @dialpad/dialtone-mcp-server@latest
+```
+
+**User-scoped (local directory):**
+
+```bash
+cd ~/.mcp-servers
+npm update @dialpad/dialtone-mcp-server
+```
+
+**User-scoped (global):**
+
+```bash
+npm update -g @dialpad/dialtone-mcp-server
+```
+
+**User-scoped (npx):**
+
+No action needed - npx always uses the latest version.
+
+After updating, restart your Claude Code conversation to pick up the new version.
 
 ## What You Can Search
 
@@ -112,26 +121,76 @@ Discover Vue components with props, events, and slots.
 - `modal` → DtModal, DtBanner, DtDropdown (6 results)
 - `checkbox` → DtCheckbox, DtCheckboxGroup, DtRadio
 
+### 4. Icons (594 icons)
+Find icons from Dialtone's icon library.
+
+**Example queries:**
+- `notification` → bell, bell-ring, bell-off, bell-plus
+- `arrow up` → arrow-up, arrow-up-down, arrow-up-left
+- `profile` → user
+- `calendar` → calendar, calendar-plus, calendar-event
+
+## Troubleshooting
+
+**Version check shows old version:**
+- Restart your Claude Code conversation after updating
+- The server loads once at conversation start
+
+**MCP server not connecting:**
+
+For project-scoped:
+1. Verify `.mcp.json` is in your project root with correct format
+2. Check package is installed: `npm list @dialpad/dialtone-mcp-server`
+3. Verify bin command exists: `ls node_modules/.bin/dialtone-mcp-server`
+4. Restart Claude Code completely
+
+For user-scoped:
+1. List configured servers: `claude mcp list`
+2. Check if dialtone is listed and enabled
+3. Test the server: `claude mcp get dialtone`
+4. Check configuration: `cat ~/.claude/mcp.json`
+
+General:
+- Check Claude Code logs for connection errors
+- Remember: Project-scoped configuration overrides user-scoped
+
+## Resources
+
+- [MCP Documentation](https://modelcontextprotocol.io)
+- [Dialtone Docs](https://dialtone.dialpad.com)
+
+---
+
 ## Development
 
-### Project Structure
+For contributors working in the Dialtone monorepo.
 
+### Build
+
+From the monorepo root:
+
+```bash
+pnpm install
+pnpm nx run dialtone-mcp-server:build
 ```
-packages/dialtone-mcp-server/
-├── src/
-│   ├── index.ts              # MCP server setup
-│   ├── types.ts              # TypeScript interfaces
-│   ├── data.ts               # Data imports
-│   ├── utils/filters.ts      # Smart filtering
-│   └── tools/                # Search implementations
-│       ├── utility-classes.ts
-│       ├── tokens.ts
-│       └── components.ts
-├── build/                    # Compiled output
-├── test-search.js           # Automated tests
-├── interactive-search.js    # Interactive CLI tool
-└── README.md
+
+### Test Interactively
+
+Try out search queries (must be run from the package directory):
+
+```bash
+cd packages/dialtone-mcp-server
+pnpm run interactive
 ```
+
+Or use tsx directly from anywhere:
+```bash
+npx tsx packages/dialtone-mcp-server/interactive-search.ts
+```
+
+**Query Format:** Use keywords only, not questions.
+- ✓ Good: `padding 8px`, `color primary`, `button`
+- ✗ Bad: `how do I add padding?`, `what button component exists?`
 
 ### Run Tests
 
@@ -148,29 +207,56 @@ node packages/dialtone-mcp-server/test-search.js
 
 Expected: `Overall Success Rate: 100%` (77/77 tests)
 
-### Rebuild After Changes
+### Configure with Claude Desktop (for testing)
 
-```bash
-pnpm nx run dialtone-mcp-server:build
+Add to `~/Library/Application Support/Claude/claude_desktop_config.json` (MacOS) or `%APPDATA%/Claude/claude_desktop_config.json` (Windows):
+
+```json
+{
+  "mcpServers": {
+    "dialtone": {
+      "command": "node",
+      "args": [
+        "/ABSOLUTE/PATH/TO/dialtone/packages/dialtone-mcp-server/build/index.js"
+      ]
+    }
+  }
+}
 ```
 
-## Troubleshooting
+**Important:**
+- Use the absolute path to your dialtone repo
+- Restart Claude Desktop completely after updating the config
+- Look for the 🔌 icon to confirm connection
 
-**MCP server not connecting:**
-1. Verify `build/index.js` exists
-2. Check the path in config is absolute (not relative)
-3. Restart Claude Desktop completely
-4. Check Claude Desktop logs for errors
-
-**Test the server manually:**
+**Finding your absolute path:**
 ```bash
-node build/index.js
-# Should print: "Dialtone MCP Server running on stdio"
-# Press Ctrl+C to exit
+cd /path/to/dialtone
+pwd
+# Use the output + /packages/dialtone-mcp-server/build/index.js
 ```
 
-## Resources
+### Project Structure
 
-- [MCP Documentation](https://modelcontextprotocol.io)
-- [Dialtone Docs](https://dialtone.dialpad.com)
-- [Search Implementation Details](./SEARCH_REFERENCE.md)
+```
+packages/dialtone-mcp-server/
+├── src/
+│   ├── index.ts              # MCP server setup
+│   ├── types.ts              # TypeScript interfaces
+│   ├── data.ts               # Data imports
+│   ├── utils/filters.ts      # Smart filtering
+│   └── tools/                # Search implementations
+│       ├── utility-classes.ts
+│       ├── tokens.ts
+│       ├── components.ts
+│       └── icons.ts
+├── build/                    # Compiled output
+├── test-search.js           # Automated tests
+├── interactive-search.ts    # Interactive CLI tool
+└── README.md
+```
+
+### Additional Documentation
+
+- [Search Implementation Details](./MCP_CONTEXT.md)
+- [Icon Search Summary](./ICON_SEARCH_SUMMARY.md)
