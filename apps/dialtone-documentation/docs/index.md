@@ -112,7 +112,7 @@ layout: Blank
         <p class="d-docsite--paragraph d-m0">
           <dt-link href="#link-to-" class=" d-d-block">
             <dt-stack gap="500">
-              <img class="d-bar16 d-d-block" src="/assets/images/placeholder-home-blog--01.png" alt="">
+              <img class="d-bar16 d-d-block d-w100p" src="/assets/images/placeholder-home-blog--01.png" alt="">
               <span>Replacing Hard-Coded or Base tokens for Chart Tokens</span>
             </dt-stack>
           </dt-link>
@@ -122,7 +122,7 @@ layout: Blank
         <p class="d-docsite--paragraph d-m0">
           <dt-link href="#link-to-" class=" d-d-block">
             <dt-stack gap="500">
-              <img class="d-bar16 d-d-block" src="/assets/images/placeholder-home-blog--02.png" alt="">
+              <img class="d-bar16 d-d-block d-w100p" src="/assets/images/placeholder-home-blog--02.png" alt="">
               <span>Breaking change in postcss-responsive-variations plugin</span>
             </dt-stack>
           </dt-link>
@@ -132,7 +132,7 @@ layout: Blank
         <p class="d-docsite--paragraph d-m0">
           <dt-link href="#link-to-" class=" d-d-block">
             <dt-stack gap="500">
-              <img class="d-bar16 d-d-block" src="/assets/images/placeholder-home-blog--03.png" alt="">
+              <img class="d-bar16 d-d-block d-w100p" src="/assets/images/placeholder-home-blog--03.png" alt="">
               <span>Vue 3 input components v-model breaking change</span>
             </dt-stack>
           </dt-link>
