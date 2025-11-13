@@ -58,6 +58,14 @@
             "link": "/foundations/typography/"
           },
           {
+            "text": "Gradient",
+            "link": "/foundations/gradient/"
+          },
+          {
+            "text": "Motion",
+            "link": "/foundations/motion/"
+          },
+          {
             "text": "Icons",
             "link": "/foundations/icons/",
             "children": [
