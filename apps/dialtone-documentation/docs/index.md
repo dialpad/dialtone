@@ -23,7 +23,7 @@ layout: Blank
     @search="openSearch"
   />
 </div>
-<div class="gradient-overlay" style="--overlay-opacity: 0">
+<div class="gradient-overlay" style="--overlay-opacity: 0; --text-opacity: .6;">
   <div class="gradient-overlay__overlay"></div>
   <h1
     class="d-headline--xxl d-h100p d-w100p d-d-grid d-plc-center d-ta-center d-fw-medium"
@@ -31,10 +31,18 @@ layout: Blank
       font-size: 64px;
       font-family: var(--dt-font-family-expressive);
       text-wrap: balance;
-      mix-blend-mode: overlay;
+      opacity: var(--text-opacity);
     "
   >
-    Making every business, a better business through design.
+    <div
+      style="
+        background: linear-gradient(180deg, var(--dt-color-purple-550), var(--dt-color-purple-1000));
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+      "
+    >
+      Making every business, a better business through design.
+    </div>
   </h1>
 </div>
 <dt-stack class="d-m-auto d-pt64" style="max-width: 1400px">
