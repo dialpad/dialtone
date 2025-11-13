@@ -111,24 +111,30 @@ layout: Blank
       <dt-stack class="d-w100p">
         <p class="d-docsite--paragraph d-m0">
           <dt-link href="#link-to-" class=" d-d-block">
-            <svg-loader class="d-ba d-bar16" name="placeholder" />
-            <span>Replacing Hard-Coded or Base tokens for Chart Tokens</span>
+            <dt-stack gap="500">
+              <img class="d-bar16 d-d-block" src="/assets/images/placeholder-home-blog--01.png" alt="">
+              <span>Replacing Hard-Coded or Base tokens for Chart Tokens</span>
+            </dt-stack>
           </dt-link>
         </p>
       </dt-stack>
       <dt-stack class="d-w100p">
         <p class="d-docsite--paragraph d-m0">
           <dt-link href="#link-to-" class=" d-d-block">
-            <svg-loader class="d-ba d-bar16" name="placeholder" />
-            <span>Breaking change in postcss-responsive-variations plugin</span>
+            <dt-stack gap="500">
+              <img class="d-bar16 d-d-block" src="/assets/images/placeholder-home-blog--02.png" alt="">
+              <span>Breaking change in postcss-responsive-variations plugin</span>
+            </dt-stack>
           </dt-link>
         </p>
       </dt-stack>
       <dt-stack class="d-w100p">
         <p class="d-docsite--paragraph d-m0">
           <dt-link href="#link-to-" class=" d-d-block">
-            <svg-loader class="d-ba d-bar16" name="placeholder" />
-            <span>Vue 3 input components v-model breaking change</span>
+            <dt-stack gap="500">
+              <img class="d-bar16 d-d-block" src="/assets/images/placeholder-home-blog--03.png" alt="">
+              <span>Vue 3 input components v-model breaking change</span>
+            </dt-stack>
           </dt-link>
         </p>
       </dt-stack>
