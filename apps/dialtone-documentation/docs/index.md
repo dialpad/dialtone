@@ -47,11 +47,11 @@ layout: Blank
     </div>
   </h1>
 </div>
-<dt-stack class="d-m-auto" style="max-width: 1400px">
+<dt-stack class="d-m-auto">
   <dt-stack gap="550" class="d-px32 d-py64 d-ai-center">
     <figure class="d-ta-center"><img class="d-bar16 d-wmx912 d-d-block" src="/assets/images/color--sample-01.jpg" alt=""></figure>
   </dt-stack>
-  <dt-stack gap="550" class="d-px32 d-py64 d-ai-center">
+  <dt-stack gap="550" class="d-px32 d-py64 d-ai-center d-bgc-secondary-opaque">
     <dt-stack style="filter: drop-shadow(rgba(0, 0, 0, 0.25) 0px 25px 30px);" class="d-w114">
       <svg viewBox="0 0 96 36" fill="none" xmlns="http://www.w3.org/2000/svg">
       <rect width="96" height="36" rx="12" fill="white"/>
@@ -66,20 +66,20 @@ layout: Blank
       </defs>
       </svg>
     </dt-stack>
-    <h2 class="d-headline--xxl d-ff-expressive" style="font-size: 48px;font-family:var(--dt-font-family-expressive); text-wrap: balance; max-width: 1400px;">Setting the tone.</h2>
-    <p class="d-ta-center d-docsite--paragraph d-m0" style="text-wrap: balance;">Dialtone is Dialpad’s shared design language—shaping everything from our product interfaces to our marketing. It defines how our brand looks, feels, and behaves across every touchpoint. Built on principles of clarity, consistency, and accessibility, Dialtone keeps our visual identity cohesive and unmistakably Dialpad.</p>
+    <h2 class="d-headline--xxl d-ff-expressive d-wmx764" style="font-size: 48px;font-family:var(--dt-font-family-expressive); text-wrap: balance; max-width: 1400px;">Setting the tone.</h2>
+    <p class="d-ta-center d-docsite--paragraph d-m0 d-wmx764" style="text-wrap: balance; font-size: 24px; font-weight: 400;">Dialtone is Dialpad’s shared design language—shaping everything from our product interfaces to our marketing. It defines how our brand looks, feels, and behaves across every touchpoint. Built on principles of clarity, consistency, and accessibility, Dialtone keeps our visual identity cohesive and unmistakably Dialpad.</p>
   </dt-stack>
   <dt-stack gap="700" class="d-px32 d-py64 d-ai-center">
-    <dt-stack direction="row" gap="600" class="d-w100p">
-      <svg-loader class="d-ba d-bar16" name="placeholder" />
-      <svg-loader class="d-ba d-bar16" name="placeholder" />
-      <svg-loader class="d-ba d-bar16" name="placeholder" />
-      <svg-loader class="d-ba d-bar16" name="placeholder" />
+    <dt-stack style="max-width: 1400px" direction="row" gap="600" class="d-w100p">
+      <svg-loader class="d-bar16" name="home-foundations-01" />
+      <svg-loader class="d-bar16" name="home-foundations-02" />
+      <svg-loader class="d-bar16" name="home-foundations-03" />
+      <svg-loader class="d-bar16" name="home-foundations-04" />
     </dt-stack>
-    <dt-stack gap="550" class="d-ai-center">
+    <dt-stack style="max-width: 1400px" gap="550" class="d-ai-center">
       <h2 class="d-headline--xxl d-ff-expressive" style="font-size: 48px;font-family:var(--dt-font-family-expressive); text-wrap: balance; max-width: 1400px;">Foundations</h2>
-      <p class="d-ta-center d-docsite--paragraph d-m0" style="text-wrap: balance;">The building blocks of Dialtone... Color, Type, Icons, and more.</p>
-      <p class="d-ta-center d-docsite--paragraph d-m0">
+      <p class="d-ta-center d-docsite--paragraph d-m0 d-wmx764" style="text-wrap: balance; font-size: 24px; font-family:var(--dt-font-family-expressive)">The building blocks of Dialtone... Color, Type, Icons, and more.</p>
+      <p class="d-ta-center d-docsite--paragraph d-m0 d-wmx764">
         <dt-button size="lg" icon-position="right">
           View Foundations
           <template #icon>
@@ -89,19 +89,19 @@ layout: Blank
       </p>
     </dt-stack>
   </dt-stack>
-  <dt-stack gap="700" class="d-px32 d-py64 d-ai-center">
-    <dt-stack direction="row" gap="600" class="d-w100p">
-      <svg-loader class="d-ba d-bar16" name="placeholder" />
-      <svg-loader class="d-ba d-bar16" name="placeholder" />
-      <svg-loader class="d-ba d-bar16" name="placeholder" />
-      <svg-loader class="d-ba d-bar16" name="placeholder" />
+  <dt-stack gap="700" class="d-px32 d-py64 d-ai-center d-bgc-secondary-opaque">
+    <dt-stack style="max-width: 1400px" direction="row" gap="600" class="d-w100p">
+      <svg-loader class="d-ba d-bar16" name="home-system--01" />
+      <svg-loader class="d-ba d-bar16" name="home-system--02" />
+      <svg-loader class="d-ba d-bar16" name="home-system--03" />
+      <svg-loader class="d-ba d-bar16" name="home-system--04" />
     </dt-stack>
-    <dt-stack gap="550" class="d-ai-center">
+    <dt-stack style="max-width: 1400px" gap="550" class="d-ai-center">
       <h2 class="d-headline--xxl d-ff-expressive" style="font-size: 48px;font-family:var(--dt-font-family-expressive); text-wrap: balance; max-width: 1400px;">Design System</h2>
-      <p class="d-ta-center d-docsite--paragraph d-m0" style="text-wrap: balance;">Build with Dialtone's Components, Design Tokens, CSS Utilities, and more.</p>
-      <p class="d-ta-center d-docsite--paragraph d-m0">
+      <p class="d-ta-center d-docsite--paragraph d-m0 d-wmx764" style="text-wrap: balance;  font-size: 24px; font-family:var(--dt-font-family-expressive)">Build with Dialtone Components, Design Tokens, CSS Utilities, and more.</p>
+      <p class="d-ta-center d-docsite--paragraph d-m0 d-wmx764">
         <dt-button size="lg" icon-position="right">
-          View the system
+          View all Documentation
           <template #icon>
             <dt-icon name="arrow-right" size="300" />
           </template>
@@ -110,10 +110,10 @@ layout: Blank
     </dt-stack>
   </dt-stack>
   <dt-stack gap="700" class="d-px32 d-py64 d-ai-center">
-    <dt-stack gap="550" class="d-ai-center">
+    <dt-stack style="max-width: 1400px" gap="550" class="d-ai-center">
       <h2 class="d-headline--xxl d-ff-expressive" style="font-size: 48px;font-family:var(--dt-font-family-expressive); text-wrap: balance; max-width: 1400px;">What's New</h2>
-      <p class="d-ta-center d-docsite--paragraph d-m0" style="text-wrap: balance;">The latest from Dialpad Design.</p>
-      <p class="d-ta-center d-docsite--paragraph d-m0">
+      <p class="d-ta-center d-docsite--paragraph d-m0 d-wmx764" style="text-wrap: balance; font-size: 24px; font-family:var(--dt-font-family-expressive)">The latest from Dialpad Design.</p>
+      <p class="d-ta-center d-docsite--paragraph d-m0 d-wmx764">
         <dt-button size="lg" icon-position="right">
           View all
           <template #icon>
@@ -122,7 +122,7 @@ layout: Blank
         </dt-button>
       </p>
     </dt-stack>
-    <dt-stack direction="row" gap="600" class="d-w100p d-ai-flex-start">
+    <dt-stack style="max-width: 1400px" direction="row" gap="600" class="d-w100p d-ai-flex-start">
       <dt-stack class="d-w100p">
         <p class="d-docsite--paragraph d-m0" style="font-size: 24px;">
           <dt-link href="#link-to-" class=" d-d-block">
