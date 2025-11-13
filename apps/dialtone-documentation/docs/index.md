@@ -24,7 +24,7 @@ layout: Blank
   />
 </div>
 <div class="billy">
-
+  <div class="billy__overlay"></div>
 </div>
 <dt-stack class="d-m-auto d-pt64" style="max-width: 1400px">
   <figure class="d-ta-center"><img class="d-bar16 d-wmx912" src="/assets/images/color--sample-01.jpg" alt=""></figure>
@@ -123,16 +123,19 @@ layout: Blank
 <style scoped lang="less">
 .dialpad-design-home {
   position: relative;
+  outline:10px solid red;
+  outline-offset: -10px;
 }
 .dialtone-header {
   &--home {
     box-shadow: var(--dt-shadow-card);
-    margin-top: 16px;
-    margin-right: 16px;
-    margin-left: 16px;
-    border-radius: var(--dt-size-radius-400);
-    position: sticky;
-    top: 16px;
+    box-shadow: 0 255.043px 71.487px 0 rgba(0, 0, 0, 0.00), 0 163.131px 65.306px 0 rgba(0, 0, 0, 0.01), 0 91.912px 55.094px 0 rgba(0, 0, 0, 0.03), 0 40.85px 40.85px 0 rgba(0, 0, 0, 0.05), 0 10.212px 22.306px 0 rgba(0, 0, 0, 0.05);
+
+    border-radius: var(--dt-size-radius-450);
+    position: fixed;
+    inset: 16px;
+    inset-block-end: auto;
+
     z-index: 1;
     backdrop-filter: blur(8px);
     -webkit-backdrop-filter: blur(8px);
@@ -140,12 +143,26 @@ layout: Blank
 }
 
 .billy {
+  --grad: radial-gradient(circle at bottom center, rgb(218, 163, 255) 0%, rgb(230, 170, 250) 10%, rgb(240, 170, 235) 15%, rgb(255, 177, 207) 25%, rgba(255, 195, 210, 0.95) 35%, rgba(255, 210, 212, 0.9) 45%, rgba(255, 218, 215, 0.8) 60%, rgba(250, 230, 220, 0.7) 75%, var(--dt-shell-color-surface-default) 100%);
+  --overlay-color-surface: var(--dt-shell-color-surface-default);
+  --overlay-opacity: 0;
+
+  position: relative;
+  background-image: var(--grad);
+  background-attachment: fixed;
   height: 100vh;
-  background: radial-gradient(circle at bottom center,
-    #DAA3FF 0%,
-    #FFB1CF 33%,
-    #FFDAD7 66%,
-    rgba(248, 247, 246, 0) 100%);
+
+  [data-dt-mode="dark"] & {
+    --grad: radial-gradient(circle at bottom center, rgb(246, 100, 55) 0%, rgb(223, 38, 110) 30%, rgb(191, 10, 128) 44%, rgb(81, 30, 118) 71%, var(--dt-color-purple-50) 100%);
+    --overlay-color-surface: var(--dt-color-purple-50);
+  }
+
+  &__overlay {
+    position: absolute;
+    inset: 0;
+    background-color: var(--overlay-color-surface);
+    opacity: var(--overlay-opacity);
+  }
 }
 
 .dialtone-home-header {
