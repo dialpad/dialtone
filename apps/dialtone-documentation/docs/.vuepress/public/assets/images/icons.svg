@@ -1,4 +1,5 @@
 <svg viewBox="0 0 340 250" fill="none" xmlns="http://www.w3.org/2000/svg">
+<rect width="340" height="250" fill="#F9F9F9"/>
 <g clip-path="url(#clip0_32_68988)">
 <mask id="mask0_32_68988" style="mask-type:luminance" maskUnits="userSpaceOnUse" x="122" y="77" width="96" height="96">
 <path d="M122 77H218V173H122V77Z" fill="white"/>
