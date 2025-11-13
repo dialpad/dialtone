@@ -70,7 +70,7 @@ layout: Blank
     <p class="d-ta-center d-docsite--paragraph d-m0 d-wmx764" style="text-wrap: balance; font-size: 24px; font-weight: 400;">Dialtone is Dialpad’s shared design language—shaping everything from our product interfaces to our marketing. It defines how our brand looks, feels, and behaves across every touchpoint. Built on principles of clarity, consistency, and accessibility, Dialtone keeps our visual identity cohesive and unmistakably Dialpad.</p>
   </dt-stack>
   <dt-stack gap="700" class="d-px32 d-py64 d-ai-center">
-    <dt-stack style="max-width: 1400px" direction="row" gap="600" class="d-w100p">
+    <dt-stack style="max-width: 1400px;" direction="row" gap="600" class="d-w100p d-jc-center">
       <router-link to="./foundations/brand/" class="d-d-block">
         <svg-loader class="d-bar16 d-w100p" name="home-foundations-01" />
       </router-link>
@@ -84,7 +84,7 @@ layout: Blank
         <svg-loader class="d-bar16 d-w100p" name="home-foundations-04" />
       </router-link>
     </dt-stack>
-    <dt-stack style="max-width: 1400px" gap="550" class="d-ai-center">
+    <dt-stack style="max-width: 1400px;" gap="550" class="d-ai-center d-jc-center">
       <h2 class="d-headline--xxl d-ff-expressive" style="font-size: 48px;font-family:var(--dt-font-family-expressive); text-wrap: balance; max-width: 1400px;">Foundations</h2>
       <p class="d-ta-center d-docsite--paragraph d-m0 d-wmx764" style="text-wrap: balance; font-size: 24px; font-family:var(--dt-font-family-expressive)">The building blocks of Dialtone... Color, Type, Icons, and more.</p>
       <p class="d-ta-center d-docsite--paragraph d-m0 d-wmx764">
@@ -100,7 +100,7 @@ layout: Blank
     </dt-stack>
   </dt-stack>
   <dt-stack gap="700" class="d-px32 d-py64 d-ai-center d-bgc-secondary-opaque">
-    <dt-stack style="max-width: 1400px" direction="row" gap="600" class="d-w100p">
+    <dt-stack style="max-width: 1400px" direction="row" gap="600" class="d-w100p d-jc-center">
       <router-link to="./components/" class="d-d-block">
         <svg-loader class="d-bar16 d-w100p" name="home-system--01" />
       </router-link>
@@ -114,7 +114,7 @@ layout: Blank
         <svg-loader class="d-bar16 d-w100p" name="home-system--04" />
       </router-link>
     </dt-stack>
-    <dt-stack style="max-width: 1400px" gap="550" class="d-ai-center">
+    <dt-stack style="max-width: 1400px" gap="550" class="d-ai-center d-jc-center">
       <h2 class="d-headline--xxl d-ff-expressive" style="font-size: 48px;font-family:var(--dt-font-family-expressive); text-wrap: balance; max-width: 1400px;">Design System</h2>
       <p class="d-ta-center d-docsite--paragraph d-m0 d-wmx764" style="text-wrap: balance;  font-size: 24px; font-family:var(--dt-font-family-expressive)">Build with Dialtone Components, Design Tokens, CSS Utilities, and more.</p>
       <p class="d-ta-center d-docsite--paragraph d-m0 d-wmx764">
@@ -144,7 +144,7 @@ layout: Blank
         </dt-link>
       </p>
     </dt-stack>
-    <dt-stack style="max-width: 1400px" direction="row" gap="600" class="d-w100p d-ai-flex-start">
+    <dt-stack style="max-width: 1400px" direction="row" gap="600" class="d-w100p d-ai-flex-start d-jc-center">
       <dt-stack class="d-w100p">
         <p class="d-docsite--paragraph d-m0">
           <dt-link href="#link-to-" class=" d-d-block">
@@ -227,18 +227,26 @@ layout: Blank
 }
 .dialtone-header {
   &--home {
+    --position-top: 16px;
+
     max-width: 1400px;
     box-shadow: var(--dt-shadow-card);
     box-shadow: 0 255.043px 71.487px 0 rgba(0, 0, 0, 0.00), 0 163.131px 65.306px 0 rgba(0, 0, 0, 0.01), 0 91.912px 55.094px 0 rgba(0, 0, 0, 0.03), 0 40.85px 40.85px 0 rgba(0, 0, 0, 0.05), 0 10.212px 22.306px 0 rgba(0, 0, 0, 0.05);
 
     border-radius: var(--dt-size-radius-450);
     position: fixed;
-    inset: 16px;
+    inset: var(--position-top) 16px;
     inset-block-end: auto;
 
     z-index: 1;
     backdrop-filter: blur(8px);
     -webkit-backdrop-filter: blur(8px);
+
+    transition: inset cubic-bezier(0.4, 0, 0.2, 1) 1s;
+    will-change: inset;
+  }
+  &--off-canvas {
+    --position-top: -105%;
   }
 }
 
