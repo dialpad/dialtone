@@ -48,8 +48,18 @@ layout: Blank
   </h1>
 </div>
 <dt-stack class="d-m-auto">
-  <dt-stack gap="550" class="d-px32 d-py64 d-ai-center">
-    <figure class="d-ta-center"><img class="d-bar16 d-wmx912 d-d-block" src="/assets/images/color--sample-01.jpg" alt=""></figure>
+  <dt-stack gap="550" class="d-px32 d-pr0 d-py64 d-ai-center d-of-hidden d-w100p">
+    <dt-stack direction="row" gap="700">
+      <img style="width: 468px;" class="d-bar16 d-d-block" src="/assets/images/home-showcase--01.jpg" alt="">
+      <img style="width: 546px;" class="d-bar16 d-d-block" src="/assets/images/home-showcase--02.jpg" alt="">
+      <img style="width: 352px;" class="d-bar16 d-d-block" src="/assets/images/home-showcase--03.jpg" alt="">
+      <img style="width: 400px;" class="d-bar16 d-d-block" src="/assets/images/home-showcase--04.jpg" alt="">
+      <img style="width: 480px;" class="d-bar16 d-d-block" src="/assets/images/home-showcase--05.jpg" alt="">
+      <img style="width: 628px;" class="d-bar16 d-d-block" src="/assets/images/home-showcase--06.jpg" alt="">
+      <img style="width: 438px;" class="d-bar16 d-d-block" src="/assets/images/home-showcase--07.jpg" alt="">
+      <img style="width: 404px;" class="d-bar16 d-d-block" src="/assets/images/home-showcase--08.jpg" alt="">
+      <img style="width: 438px;" class="d-bar16 d-d-block" src="/assets/images/home-showcase--09.jpg" alt="">
+    </dt-stack>
   </dt-stack>
   <dt-stack gap="550" class="d-px32 d-py64 d-ai-center d-bgc-secondary-opaque">
     <dt-stack style="filter: drop-shadow(rgba(0, 0, 0, 0.25) 0px 25px 30px);" class="d-w114">
