@@ -211,10 +211,15 @@ onMounted(() => {
     // Calculate opacity based on scroll position
     // When scrollY is 0, opacity is 0
     // When scrollY equals overlayHeight, opacity is 1
-    const opacity = Math.min(Math.max(scrollY / overlayHeight, 0), 1);
+    const overlayOpacity = Math.min(Math.max(scrollY / overlayHeight, 0), 1);
+    
+    // Calculate text opacity - starts at 0.6 and fades to 0 as you scroll
+    // Text fades out faster than overlay appears (completes at 50% scroll)
+    const textOpacity = Math.max(0.6 - (scrollY / (overlayHeight * 0.5)) * 0.6, 0);
 
-    // Update the CSS variable
-    gradientOverlay.style.setProperty('--overlay-opacity', opacity);
+    // Update the CSS variables
+    gradientOverlay.style.setProperty('--overlay-opacity', overlayOpacity);
+    gradientOverlay.style.setProperty('--text-opacity', textOpacity);
   };
 
   // Add scroll event listener
