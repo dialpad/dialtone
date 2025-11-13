@@ -23,8 +23,8 @@ layout: Blank
     @search="openSearch"
   />
 </div>
-<div class="billy">
-  <div class="billy__overlay"></div>
+<div class="gradient-overlay" style="--overlay-opacity: 0">
+  <div class="gradient-overlay__overlay"></div>
 </div>
 <dt-stack class="d-m-auto d-pt64" style="max-width: 1400px">
   <figure class="d-ta-center"><img class="d-bar16 d-wmx912" src="/assets/images/color--sample-01.jpg" alt=""></figure>
@@ -123,8 +123,6 @@ layout: Blank
 <style scoped lang="less">
 .dialpad-design-home {
   position: relative;
-  outline:10px solid red;
-  outline-offset: -10px;
 }
 .dialtone-header {
   &--home {
@@ -142,7 +140,7 @@ layout: Blank
   }
 }
 
-.billy {
+.gradient-overlay {
   --grad: radial-gradient(circle at bottom center, rgb(218, 163, 255) 0%, rgb(230, 170, 250) 10%, rgb(240, 170, 235) 15%, rgb(255, 177, 207) 25%, rgba(255, 195, 210, 0.95) 35%, rgba(255, 210, 212, 0.9) 45%, rgba(255, 218, 215, 0.8) 60%, rgba(250, 230, 220, 0.7) 75%, var(--dt-shell-color-surface-default) 100%);
   --overlay-color-surface: var(--dt-shell-color-surface-default);
   --overlay-opacity: 0;
@@ -170,7 +168,7 @@ layout: Blank
 </style>
 
 <script setup>
-import { ref } from 'vue';
+import { ref, onMounted, onUnmounted } from 'vue';
 import Navbar from '../../theme/components/Navbar.vue';
 
 const docSearchBtn = ref(null);
@@ -178,4 +176,37 @@ const docSearchBtn = ref(null);
 const openSearch = () => {
   docSearchBtn.value?.children[0]?.click();
 };
+
+// Scroll-driven opacity effect
+onMounted(() => {
+  const gradientOverlay = document.querySelector('.gradient-overlay');
+  if (!gradientOverlay) return;
+
+  const handleScroll = () => {
+    // Get the height of the gradient overlay (100vh)
+    const overlayHeight = gradientOverlay.offsetHeight;
+    
+    // Get current scroll position
+    const scrollY = window.scrollY;
+    
+    // Calculate opacity based on scroll position
+    // When scrollY is 0, opacity is 0
+    // When scrollY equals overlayHeight, opacity is 1
+    const opacity = Math.min(Math.max(scrollY / overlayHeight, 0), 1);
+    
+    // Update the CSS variable
+    gradientOverlay.style.setProperty('--overlay-opacity', opacity);
+  };
+
+  // Add scroll event listener
+  window.addEventListener('scroll', handleScroll, { passive: true });
+  
+  // Call once on mount to set initial state
+  handleScroll();
+
+  // Cleanup on unmount
+  onUnmounted(() => {
+    window.removeEventListener('scroll', handleScroll);
+  });
+});
 </script>
