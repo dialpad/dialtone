@@ -85,91 +85,133 @@ Choose the proper logo variant based on its context and theme.
 
 <icons illustration kind="brand-logos" size="large"></icons>
 
-### Choosing Between Dialpad Logo Color Options
-
-<!-- This is temporary, and should be replaced in a more visual nature — possibly as part of the would-be Brand section. -->
+### Color Options
 
 Logos are available in a fixed set of color options to suit different backgrounds, contexts, and theme needs.
 
-#### Wordmark With Full-Color Logomark
-
-<table class="d-table dialtone-doc-table d-mb16">
-  <thead>
-    <tr>
-      <th class="d-ta-left d-va-top">asdf</th>
-      <th class="d-ta-left d-va-top">asdf</th>
-      <th class="d-ta-left d-va-top">asdf</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>
-        <dt-stack class="d-bgc-transparent d-p16 d-pr24 d-bar8">
-          <dt-illustration name='dialpad-logo' />
-        </dt-stack>
-      </td>
-      <td class="d-ws-nowrap">
-        <code>dialpad-logo</code>
-      </td>
-      <td>
-        Suitable for most cases. Wordmark foreground color responds to Dialtone light and dark themes. For example, the wordmark will be dark in the default theme, and light in the dark theme.
-      </td>
-    </tr>
-    <tr>
-      <td>
-        <dt-stack  class="d-bgc-primary-inverted d-p16 d-pr24 d-bar8">
-          <dt-illustration name='dialpad-logo-inverted' />
-        </dt-stack>
-      </td>
-      <td class="d-ws-nowrap">
-        <code>dialpad-logo-inverted</code>
-      </td>
-      <td>
-        Appropriate for use on a contrasting surface color. For example, in a light theme the wordmark will be light on a dark contrasting surface.
-      </td>
-    </tr>
-    <tr>
-      <td>
-        <dt-stack  class="d-bgc-neutral-white d-p16 d-pr24 d-bar8">
-          <dt-illustration name='dialpad-logo-black' />
-        </dt-stack>
-      </td>
-      <td class="d-ws-nowrap">
-        <code>dialpad-logo-black</code>
-      </td>
-      <td>
-        When the wordmark must remain black regardless of theme or context.
-      </td>
-    </tr>
-    <tr>
-      <td>
-        <dt-stack  class="d-bgc-neutral-black d-p16 d-pr24 d-bar8">
-          <dt-illustration name='dialpad-logo-white' />
-        </dt-stack>
-      </td>
-      <td class="d-ws-nowrap">
-        <code>dialpad-logo-white</code>
-      </td>
-      <td>
-        When the wordmark must remain white regardless of theme or context.
-      </td>
-    </tr>
-  </tbody>
-</table>
-#### Monochrome Wordmark and Logomark
-
-<dt-illustration name='dialpad-mono' />
-`dialpad-mono`
-Single-color wordmark and logomark in Dialtone's primary foreground color. Responds to Dialtone light and dark themes.
-
-<dt-illustration name='dialpad-mono-inverted' />
-`dialpad-mono-inverted`
-Appropriate for use on a contrasting surface color. For example, in a light theme it would be light on a dark contrasting surface.
-
-<dt-illustration name='dialpad-mono-black' />
-`dialpad-mono-black`
-When the entire logo must remain black regardless of theme.
-
-<dt-illustration name='dialpad-mono-white' />
-`dialpad-mono-white`
-When the entire logo must remain white regardless of theme.
+<div class="d-ba d-bar8 d-bc-subtle">
+  <table class="d-table dialtone-doc-table">
+    <thead>
+      <tr>
+        <th>Color</th>
+        <th>Logo</th>
+        <th>Name</th>
+        <th>Usage</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="d-ws-nowrap">Color</td>
+        <td>
+          <dt-stack class="d-bgc-transparent d-p16 d-pr24 d-bar8">
+            <dt-illustration name='dialpad-logo' />
+          </dt-stack>
+        </td>
+        <td class="d-ws-nowrap">
+          <code class="d-code--sm d-docsite-code">dialpad-logo</code>
+        </td>
+        <td>
+          Suitable for most cases. Wordmark foreground color responds to Dialtone light and dark themes. For example, the wordmark will be dark in the default theme, and light in the dark theme.
+        </td>
+      </tr>
+      <tr>
+        <td class="d-ws-nowrap">Monochrome</td>
+        <td>
+          <dt-stack class="d-bgc-transparent d-p16 d-pr24 d-bar8">
+            <dt-illustration name='dialpad-mono' />
+          </dt-stack>
+        </td>
+        <td class="d-ws-nowrap">
+          <code class="d-code--sm d-docsite-code">dialpad-mono</code>
+        </td>
+        <td>
+          Single-color wordmark and logomark in Dialtone's primary foreground color. Responds to Dialtone light and dark themes.
+        </td>
+      </tr>
+      <tr>
+        <td class="d-ws-nowrap">Color</td>
+        <td>
+          <dt-stack  class="d-bgc-primary-inverted d-p16 d-pr24 d-bar8">
+            <dt-illustration name='dialpad-logo-inverted' />
+          </dt-stack>
+        </td>
+        <td class="d-ws-nowrap">
+          <code class="d-code--sm d-docsite-code">dialpad-logo-inverted</code>
+        </td>
+        <td>
+          Appropriate for use on a contrasting surface color. For example, in a light theme the wordmark will be light on a dark contrasting surface.
+        </td>
+      </tr>
+      <tr>
+        <td class="d-ws-nowrap">Monochrome</td>
+        <td>
+          <dt-stack class="d-bgc-primary-inverted d-p16 d-pr24 d-bar8">
+            <dt-illustration name='dialpad-mono-inverted' />
+          </dt-stack>
+        </td>
+        <td class="d-ws-nowrap">
+          <code class="d-code--sm d-docsite-code">dialpad-mono-inverted</code>
+        </td>
+        <td>
+          Appropriate for use on a contrasting surface color. For example, in a light theme it would be light on a dark contrasting surface.
+        </td>
+      </tr>
+      <tr>
+        <td class="d-ws-nowrap">Color</td>
+        <td>
+          <dt-stack  class="d-bgc-neutral-white d-p16 d-pr24 d-bar8">
+            <dt-illustration name='dialpad-logo-black' />
+          </dt-stack>
+        </td>
+        <td class="d-ws-nowrap">
+          <code class="d-code--sm d-docsite-code">dialpad-logo-black</code>
+        </td>
+        <td>
+          When the wordmark must remain black regardless of theme or context.
+        </td>
+      </tr>
+      <tr>
+        <td class="d-ws-nowrap">Monochrome</td>
+        <td>
+          <dt-stack class="d-bgc-neutral-white d-p16 d-pr24 d-bar8">
+            <dt-illustration name='dialpad-mono-black' />
+          </dt-stack>
+        </td>
+        <td class="d-ws-nowrap">
+          <code class="d-code--sm d-docsite-code">dialpad-mono-black</code>
+        </td>
+        <td>
+          When the entire logo must remain black regardless of theme.
+        </td>
+      </tr>
+      <tr>
+        <td class="d-ws-nowrap">Color</td>
+        <td>
+          <dt-stack  class="d-bgc-neutral-black d-p16 d-pr24 d-bar8">
+            <dt-illustration name='dialpad-logo-white' />
+          </dt-stack>
+        </td>
+        <td class="d-ws-nowrap">
+          <code class="d-code--sm d-docsite-code">dialpad-logo-white</code>
+        </td>
+        <td>
+          When the wordmark must remain white regardless of theme or context.
+        </td>
+      </tr>
+      <tr>
+        <td class="d-ws-nowrap">Monochrome</td>
+        <td>
+          <dt-stack class="d-bgc-neutral-black d-p16 d-pr24 d-bar8">
+            <dt-illustration name='dialpad-mono-white' />
+          </dt-stack>
+        </td>
+        <td class="d-ws-nowrap">
+          <code class="d-code--sm d-docsite-code">dialpad-mono-white</code>
+        </td>
+        <td>
+          When the entire logo must remain white regardless of theme.
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
