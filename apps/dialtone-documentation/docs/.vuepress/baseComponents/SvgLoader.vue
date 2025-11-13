@@ -1,20 +1,22 @@
 <template>
   <template v-if="illustration">
     <template v-for="i in illustrationSVGs" :key="i">
-      <span
+      <component
+        :is="i"
         v-if="i"
-        :data-svg-source="`@dialpad/dialtone-icons/dist/svg/illustrations/${name}.svg`"
-        class="d-svg-wrapper"
-      >
-        <component :is="i" v-bind="$attrs" />
-      </span>
+        v-bind="$attrs"
+        :ref="el => setIllustrationRef(el)"
+      />
     </template>
   </template>
   <template v-else>
     <template v-for="(svg, index) in svgs" :key="svg">
-      <span v-if="svg" :data-svg-source="svgPaths[index]" class="d-svg-wrapper">
-        <component :is="svg" v-bind="$attrs" />
-      </span>
+      <component
+        :is="svg"
+        v-if="svg"
+        v-bind="$attrs"
+        :ref="el => setSvgRef(el, index)"
+      />
     </template>
   </template>
 </template>
@@ -73,10 +75,20 @@ const svgs = [
     onError: () => {},
   }),
 ];
-</script>
 
-<style scoped>
-.d-svg-wrapper {
-  display: contents;
-}
-</style>
+// Ref callbacks to add data-svg-source attribute to rendered SVG elements
+const setIllustrationRef = (el) => {
+  if (el?.$el) {
+    el.$el.setAttribute(
+      'data-svg-source',
+      `@dialpad/dialtone-icons/dist/svg/illustrations/${props.name}.svg`,
+    );
+  }
+};
+
+const setSvgRef = (el, index) => {
+  if (el?.$el) {
+    el.$el.setAttribute('data-svg-source', svgPaths[index]);
+  }
+};
+</script>
