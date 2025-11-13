@@ -32,6 +32,10 @@
             "link": "/foundations/colors/",
             "children": [
               {
+                "text": "Color in Marketing",
+                "link": "/foundations/colors/marketing/"
+              },
+              {
                 "text": "Color in Product",
                 "link": "/foundations/colors/usage/"
               },

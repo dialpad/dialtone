@@ -6,12 +6,12 @@ figma_url: https://www.figma.com/design/W58r5BkO8qTw3vem9YieJd/DT9-Component-Lib
 
 <dt-stack gap="650" class="d-mt48">
   <figure class="d-bar16 d-of-hidden">
-    <img src="/assets/images/icon--billboard.svg" alt="">
+    <svg-loader name="icon--billboard" class="d-bar16" />
   </figure>
 
   <div class="d-d-grid d-g48 d-g-cols1 md:d-g-cols3 d-ai-center">
     <div>
-      <h2 class="d-docsite--header-3">Usage</h2>
+      <h2 class="d-docsite--header-3 d-mt0">Usage</h2>
       <p class="d-docsite--paragraph">For limited instances where space is restricted, use the shorthand icon mark.  </p>
       <p class="d-docsite--paragraph"><strong>Sample Use Cases</strong>: App icons, social avatars, favicons.</p>
     </div>
@@ -22,7 +22,7 @@ figma_url: https://www.figma.com/design/W58r5BkO8qTw3vem9YieJd/DT9-Component-Lib
 
   <div class="d-d-grid d-g48 d-g-cols1 md:d-g-cols3 d-ai-center">
     <div>
-      <h2 class="d-docsite--header-3">Versions</h2>
+      <h2 class="d-docsite--header-3 d-mt0">Versions</h2>
       <p class="d-docsite--paragraph">In most instances, the primary full brand gradient version should be used.</p>
       <p class="d-docsite--paragraph">The Meetings app icon should only be used when referencing the meetings app.</p>
       <p class="d-docsite--paragraph"><dt-link href="#">Download icons</dt-link></p>
@@ -34,7 +34,7 @@ figma_url: https://www.figma.com/design/W58r5BkO8qTw3vem9YieJd/DT9-Component-Lib
 
   <div class="d-d-grid d-g48 d-g-cols1 md:d-g-cols3 d-ai-center">
     <div>
-      <h2 class="d-docsite--header-3">In Product</h2>
+      <h2 class="d-docsite--header-3 d-mt0">In Product</h2>
       <p class="d-docsite--paragraph">Use the icon as a logomark to identify the application in headers, as an app icon, or favicon.</p>
       <p class="d-docsite--paragraph"><dt-link href="#">View Dialtone Icon</dt-link></p>
     </div>
