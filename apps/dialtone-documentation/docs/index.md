@@ -70,11 +70,19 @@ layout: Blank
     <p class="d-ta-center d-docsite--paragraph d-m0 d-wmx764" style="text-wrap: balance; font-size: 24px; font-weight: 400;">Dialtone is Dialpad’s shared design language—shaping everything from our product interfaces to our marketing. It defines how our brand looks, feels, and behaves across every touchpoint. Built on principles of clarity, consistency, and accessibility, Dialtone keeps our visual identity cohesive and unmistakably Dialpad.</p>
   </dt-stack>
   <dt-stack gap="700" class="d-px32 d-py64 d-ai-center">
-    <dt-stack outline style="max-width: 1400px" direction="row" gap="600" class="d-w100p">
-      <svg-loader class="d-bar16" name="home-foundations-01" />
-      <svg-loader class="d-bar16" name="home-foundations-02" />
-      <svg-loader class="d-bar16" name="home-foundations-03" />
-      <svg-loader class="d-bar16" name="home-foundations-04" />
+    <dt-stack style="max-width: 1400px" direction="row" gap="600" class="d-w100p">
+      <router-link to="./foundations/brand/" class="d-d-block">
+        <svg-loader class="d-bar16 d-w100p" name="home-foundations-01" />
+      </router-link>
+      <router-link to="./foundations/colors/" class="d-d-block">
+        <svg-loader class="d-bar16 d-w100p" name="home-foundations-02" />
+      </router-link>
+      <router-link to="./foundations/typography/" class="d-d-block">
+        <svg-loader class="d-bar16 d-w100p" name="home-foundations-03" />
+      </router-link>
+      <router-link to="./foundations/motion/" class="d-d-block">
+        <svg-loader class="d-bar16 d-w100p" name="home-foundations-04" />
+      </router-link>
     </dt-stack>
     <dt-stack style="max-width: 1400px" gap="550" class="d-ai-center">
       <h2 class="d-headline--xxl d-ff-expressive" style="font-size: 48px;font-family:var(--dt-font-family-expressive); text-wrap: balance; max-width: 1400px;">Foundations</h2>
@@ -93,16 +101,24 @@ layout: Blank
   </dt-stack>
   <dt-stack gap="700" class="d-px32 d-py64 d-ai-center d-bgc-secondary-opaque">
     <dt-stack style="max-width: 1400px" direction="row" gap="600" class="d-w100p">
-      <svg-loader class="d-ba d-bar16" name="home-system--01" />
-      <svg-loader class="d-ba d-bar16" name="home-system--02" />
-      <svg-loader class="d-ba d-bar16" name="home-system--03" />
-      <svg-loader class="d-ba d-bar16" name="home-system--04" />
+      <router-link to="./components/" class="d-d-block">
+        <svg-loader class="d-bar16 d-w100p" name="home-system--01" />
+      </router-link>
+      <router-link to="./utilities/" class="d-d-block">
+        <svg-loader class="d-bar16 d-w100p" name="home-system--02" />
+      </router-link>
+      <router-link to="./tokens/" class="d-d-block">
+        <svg-loader class="d-bar16 d-w100p" name="home-system--03" />
+      </router-link>
+      <router-link to="./guides/content/" class="d-d-block">
+        <svg-loader class="d-bar16 d-w100p" name="home-system--04" />
+      </router-link>
     </dt-stack>
     <dt-stack style="max-width: 1400px" gap="550" class="d-ai-center">
       <h2 class="d-headline--xxl d-ff-expressive" style="font-size: 48px;font-family:var(--dt-font-family-expressive); text-wrap: balance; max-width: 1400px;">Design System</h2>
       <p class="d-ta-center d-docsite--paragraph d-m0 d-wmx764" style="text-wrap: balance;  font-size: 24px; font-family:var(--dt-font-family-expressive)">Build with Dialtone Components, Design Tokens, CSS Utilities, and more.</p>
       <p class="d-ta-center d-docsite--paragraph d-m0 d-wmx764">
-        <dt-link href="./components/">
+        <dt-link href="./dialtone/">
           <dt-button size="lg" icon-position="right">
             View all Documentation
             <template #icon>
@@ -130,7 +146,7 @@ layout: Blank
     </dt-stack>
     <dt-stack style="max-width: 1400px" direction="row" gap="600" class="d-w100p d-ai-flex-start">
       <dt-stack class="d-w100p">
-        <p class="d-docsite--paragraph d-m0" style="font-size: 24px;">
+        <p class="d-docsite--paragraph d-m0">
           <dt-link href="#link-to-" class=" d-d-block">
             <svg-loader class="d-ba d-bar16" name="placeholder" />
             <span>Replacing Hard-Coded or Base tokens for Chart Tokens</span>
@@ -138,7 +154,7 @@ layout: Blank
         </p>
       </dt-stack>
       <dt-stack class="d-w100p">
-        <p class="d-docsite--paragraph d-m0" style="font-size: 24px;">
+        <p class="d-docsite--paragraph d-m0">
           <dt-link href="#link-to-" class=" d-d-block">
             <svg-loader class="d-ba d-bar16" name="placeholder" />
             <span>Breaking change in postcss-responsive-variations plugin</span>
@@ -146,7 +162,7 @@ layout: Blank
         </p>
       </dt-stack>
       <dt-stack class="d-w100p">
-        <p class="d-docsite--paragraph d-m0" style="font-size: 24px;">
+        <p class="d-docsite--paragraph d-m0">
           <dt-link href="#link-to-" class=" d-d-block">
             <svg-loader class="d-ba d-bar16" name="placeholder" />
             <span>Vue 3 input components v-model breaking change</span>
