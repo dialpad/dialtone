@@ -196,17 +196,20 @@ layout: Blank
 }
 
 .gradient-overlay {
-  --grad: radial-gradient(circle at bottom center, rgb(218, 163, 255) 0%, rgb(230, 170, 250) 10%, rgb(240, 170, 235) 15%, rgb(255, 177, 207) 25%, rgba(255, 195, 210, 0.95) 35%, rgba(255, 210, 212, 0.9) 45%, rgba(255, 218, 215, 0.8) 60%, rgba(250, 230, 220, 0.7) 75%, var(--dt-shell-color-surface-default) 100%);
+  --grad-position-bottom: 50%;
+  --grad: radial-gradient(circle at var(--grad-position-bottom) 100%, rgb(218, 163, 255) 0%, rgb(230, 170, 250) 10%, rgb(240, 170, 235) 15%, rgb(255, 177, 207) 25%, rgba(255, 195, 210, 0.95) 35%, rgba(255, 210, 212, 0.9) 45%, rgba(255, 218, 215, 0.8) 60%, rgba(250, 230, 220, 0.7) 75%, var(--dt-shell-color-surface-default) 100%);
   --overlay-color-surface: var(--dt-shell-color-surface-default);
   --overlay-opacity: 0;
 
   position: relative;
+  transition: --grad-position-bottom 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+
   background-image: var(--grad);
   background-attachment: fixed;
   height: 100vh;
 
   [data-dt-mode="dark"] & {
-    --grad: radial-gradient(circle at bottom center, rgb(246, 100, 55) 0%, rgb(223, 38, 110) 30%, rgb(191, 10, 128) 44%, rgb(81, 30, 118) 71%, var(--dt-color-purple-50) 100%);
+    --grad: radial-gradient(circle at var(--grad-position-bottom) 100%, rgb(246, 100, 55) 0%, rgb(223, 38, 110) 30%, rgb(191, 10, 128) 44%, rgb(81, 30, 118) 71%, var(--dt-color-purple-50) 100%);
     --overlay-color-surface: var(--dt-color-purple-50);
   }
 
@@ -247,10 +250,50 @@ const openSearch = () => {
   docSearchBtn.value?.children[0]?.click();
 };
 
+// Mouse-driven gradient position with smoothing
+onMounted(() => {
+  let currentPosition = 50; // Start at center
+  let targetPosition = 50;
+  let animationId = null;
+
+  const gradientOverlay = document.querySelector('.gradient-overlay');
+
+  const animate = () => {
+    // Smooth interpolation
+    currentPosition += (targetPosition - currentPosition) * 0.1; // Adjust 0.1 for more/less smoothing
+
+    // Update CSS variable
+    if (gradientOverlay) {
+      gradientOverlay.style.setProperty('--grad-position-bottom', `${currentPosition}%`);
+    }
+
+    animationId = requestAnimationFrame(animate);
+  };
+
+  const handleMouseMove = (e) => {
+    // Get mouse X position as percentage of viewport width
+    targetPosition = (e.clientX / window.innerWidth) * 100;
+  };
+
+  // Start animation loop
+  animate();
+
+  // Add mouse move listener
+  window.addEventListener('mousemove', handleMouseMove);
+
+  // Cleanup on unmount
+  onUnmounted(() => {
+    window.removeEventListener('mousemove', handleMouseMove);
+    if (animationId) {
+      cancelAnimationFrame(animationId);
+    }
+  });
+});
+
 // Scroll-driven effects
 onMounted(() => {
   const gradientOverlay = document.querySelector('.gradient-overlay');
-  const header = document.querySelector('.dialtone-header');
+  const header = document.querySelector('.dialtone-header--home');
   let lastScrollY = window.scrollY;
 
   if (!gradientOverlay) return;
