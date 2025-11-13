@@ -1,5 +1,5 @@
 ---
-title: Usage
+title: Color in Product
 description: A systematic and accessible color palette that supports both functional needs and personalized experiences within our products.
 ---
 

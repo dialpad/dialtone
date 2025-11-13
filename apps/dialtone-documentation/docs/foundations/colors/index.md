@@ -51,7 +51,7 @@ Support for multiple themes enables personalized experiences while maintaining c
 <!--
 ## What's Inside
 
-### [Usage](/foundations/colors/usage/)
+### [Color in Product](/foundations/colors/usage/)
 
 Learn how to apply semantic color tokens in your designs and implementations. Understand color roles for text, surfaces, borders, and interactive elements.
 
@@ -69,7 +69,7 @@ Understand how Dialtone's theming system works and how to implement light and da
 
 ## Getting Started
 
-New to Dialtone colors? Start with [Usage](/foundations/colors/usage/) to learn the fundamentals of semantic tokens and how to apply them in your work. If you need to reference specific color values, check out the [Color Palette](/foundations/colors/palette/).
+New to Dialtone colors? Start with [Color in Product](/foundations/colors/usage/) to learn the fundamentals of semantic tokens and how to apply them in your work. If you need to reference specific color values, check out the [Color Palette](/foundations/colors/palette/).
 
 For complete token documentation including CSS variables and design token values, visit our [Tokens documentation](https://dialtone.dialpad.com/tokens/).
 -->
