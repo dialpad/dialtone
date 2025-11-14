@@ -180,7 +180,7 @@ export default {
     this.updateSelected();
   },
 
-  beforeUpdate () {
+  updated () {
     this.updateSelected();
   },
 
@@ -216,6 +216,7 @@ export default {
     },
 
     tabLeft () {
+      // this.tabs = this.getTabChildren();
       const index = this.getFocusedTabIndex();
       if (index === -1) return;
 
@@ -224,6 +225,7 @@ export default {
     },
 
     tabRight () {
+      // this.tabs = this.getTabChildren();
       const index = this.getFocusedTabIndex();
       if (index === -1) return;
 
@@ -237,6 +239,7 @@ export default {
     },
 
     selectTab (event) {
+      // this.tabs = this.getTabChildren();
       if (this.isSameTabClicked()) return;
 
       this.$emit('before-change', event);
@@ -255,22 +258,22 @@ export default {
     },
 
     getFocusedTabIndex () {
-      // Hot fix https://github.com/dialpad/dialtone/pull/849
-      // The main issue is that this.tabs is not being updated at the time this is being triggered.
-
       const index = this.tabs.findIndex((context) =>
         this.focusId ? context.tabId === `${this.focusId}` : context.isSelected,
       );
 
+      // Safe guard if tab is not found
       return index === -1 ? 0 : index;
     },
 
     onHomeButton () {
+      // this.tabs = this.getTabChildren();
       if (this.tabs.length === 0) return;
       this.tabs[0]?.context?.focus();
     },
 
     onEndButton () {
+      // this.tabs = this.getTabChildren();
       if (this.tabs.length === 0) return;
       this.tabs[this.tabs.length - 1]?.context?.focus();
     },
