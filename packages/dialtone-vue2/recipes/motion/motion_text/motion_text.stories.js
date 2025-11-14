@@ -1,10 +1,10 @@
 import { action } from '@storybook/addon-actions';
-import { createTemplateFromVueFile } from '@/common/storybook_utils';
 import DtRecipeMotionText from './motion_text.vue';
 import {
   MOTION_TEXT_ANIMATION_MODES,
   MOTION_TEXT_SPEEDS,
 } from './motion_text_constants';
+import { createRenderConfig } from '@/common/storybook_utils';
 
 import DtRecipeMotionTextDefaultTemplate from './motion_text_default.story.vue';
 import DtRecipeMotionTextModesTemplate from './motion_text_modes.story.vue';
@@ -209,27 +209,8 @@ export default {
   excludeStories: /.*Data$/,
 };
 
-// Templates
-const DefaultTemplate = (args, { argTypes }) => createTemplateFromVueFile(
-  args,
-  argTypes,
-  DtRecipeMotionTextDefaultTemplate,
-);
-
-const ModesTemplate = (args, { argTypes }) => createTemplateFromVueFile(
-  args,
-  argTypes,
-  DtRecipeMotionTextModesTemplate,
-);
-
-const VariantsTemplate = (args, { argTypes }) => createTemplateFromVueFile(
-  args,
-  argTypes,
-  DtRecipeMotionTextVariantsTemplate,
-);
-
 export const Default = {
-  render: DefaultTemplate,
+  render: (argsData) => createRenderConfig(DtRecipeMotionText, DtRecipeMotionTextDefaultTemplate, argsData),
 
   args: {
     text: 'Welcome to Dialtone Motion Text',
@@ -237,7 +218,8 @@ export const Default = {
 };
 
 export const Modes = {
-  render: ModesTemplate,
+  render: (argsData) => createRenderConfig(DtRecipeMotionText, DtRecipeMotionTextModesTemplate, argsData),
+
   args: {},
   parameters: {
     options: { showPanel: false },
@@ -246,7 +228,8 @@ export const Modes = {
 };
 
 export const Variants = {
-  render: VariantsTemplate,
+  render: (argsData) => createRenderConfig(DtRecipeMotionText, DtRecipeMotionTextVariantsTemplate, argsData),
+
   args: {},
   parameters: {
     options: { showPanel: false },
