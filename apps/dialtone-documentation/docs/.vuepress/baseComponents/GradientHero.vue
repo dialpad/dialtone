@@ -30,6 +30,7 @@
 // Animations are controlled by parent page's scroll handler that updates CSS variables
 </script>
 
-<style scoped>
+<style>
 /* Styles are inherited from parent page's .gradient-overlay definitions */
+/* Unscoped to allow parent's dynamic CSS variable updates to work */
 </style>

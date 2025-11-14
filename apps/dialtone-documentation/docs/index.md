@@ -143,7 +143,7 @@ layout: Blank
   </dt-stack>
 </dt-stack>
 
-<style scoped lang="less">
+<style lang="less">
 .dialpad-design-home {
   position: relative;
 }
