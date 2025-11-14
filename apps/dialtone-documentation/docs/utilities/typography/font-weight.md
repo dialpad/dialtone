@@ -39,7 +39,7 @@ Use `d-fw-{n}` to change an element's font-weight.
 
 ## Variables
 
-<div v-dt-scrollbar class="d-hmx464 d-bar8 d-ba d-bc-subtle">
+<clamped-table-wrapper>
   <div>
     <table class="d-table dialtone-doc-table">
       <thead class="d-bgc-primary d-ps-sticky d-zi-base1 d-t0">
@@ -56,7 +56,7 @@ Use `d-fw-{n}` to change an element's font-weight.
       </tbody>
     </table>
   </div>
-</div>
+</clamped-table-wrapper>
 
 ## Classes
 
@@ -77,4 +77,5 @@ Use `d-fw-{n}` to change an element's font-weight.
 
 <script setup>
   import { weight } from '@data/type.json';
+  import ClampedTableWrapper from '@baseComponents/ClampedTableWrapper.vue';
 </script>

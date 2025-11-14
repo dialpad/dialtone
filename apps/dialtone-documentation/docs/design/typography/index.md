@@ -248,31 +248,34 @@ Code snippets, technical commands, or data values rendered as a monospaced font.
   </div>
 </code-well-header>
 
-### API
+## API
 
 Each typography style is expressed through a shorthand `font` property, and its value's design token contains all font styles, e.g. `font-size`, `line-height`, `font-family`, etc,
 
-<div class="d-hmx464 d-of-y-auto d-bb">
-  <table class="d-table dialtone-doc-table">
-    <thead>
-      <tr>
-        <th scope="col" class="d-w40p">Class</th>
-        <th scope="col">Output</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr v-for="{ var: varName, output } in typographyStyles">
-        <td class="d-code--sm d-docsite-code">.{{ varName }}</td>
-        <td class="d-code--sm">{{ output }}</td>
-      </tr>
-    </tbody>
-  </table>
-</div>
+<clamped-table-wrapper>
+  <div>
+    <table class="d-table dialtone-doc-table">
+      <thead class="d-bgc-primary d-ps-sticky d-zi-base1 d-t0">
+        <tr>
+          <th scope="col" class="d-w40p  d-p0 d-bbw0"><div class="d-p16 d-bb d-bc-default d-bbw1">Class</div></th>
+          <th scope="col" class="d-p0 d-bbw0"><div class="d-p16 d-bb d-bc-default d-bbw1">Output</div></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr v-for="{ var: varName, output } in typographyStyles">
+          <td class="d-code--sm d-docsite-code">.{{ varName }}</td>
+          <td class="d-code--sm">{{ output }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</clamped-table-wrapper>
 
 <script setup>
   import { typographyVariants, typographyStyles } from '@data/type.json';
   import CopyButton from '@baseComponents/CopyButton.vue';
   import SvgLoader from '@baseComponents/SvgLoader.vue';
+  import ClampedTableWrapper from '@baseComponents/ClampedTableWrapper.vue';
 
   const typographyStylesHeadlines = typographyStyles.filter(type => type.var.startsWith("d-headline"));
   const typographyStylesBody = typographyStyles.filter(type => type.var.startsWith("d-body"));

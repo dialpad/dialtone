@@ -105,11 +105,12 @@ Use `d-w-auto` have the browser calculate and select a width.
 
 <script setup>
   import { percentage, fixed, other } from '@data/width-height.json';
+  import ClampedTableWrapper from '@baseComponents/ClampedTableWrapper.vue';
 </script>
 
 ## Classes
 
-<div v-dt-scrollbar class="d-hmx464 d-bar8 d-ba d-bc-subtle">
+<clamped-table-wrapper>
   <div>
     <table class="d-table dialtone-doc-table">
       <thead class="d-bgc-primary d-ps-sticky d-zi-base1 d-t0">
@@ -142,4 +143,4 @@ Use `d-w-auto` have the browser calculate and select a width.
       </tbody>
     </table>
   </div>
-</div>
+</clamped-table-wrapper>

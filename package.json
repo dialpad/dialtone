@@ -5,7 +5,10 @@
   "description": "Dialpad's Dialtone design system monorepo",
   "scripts": {
     "prepare": "husky install",
-    "prepack": "nx run dialtone:build"
+    "prepack": "nx run dialtone:build",
+    "clean": "pnpm clean:dist && pnpm clean:cache",
+    "clean:dist": "rm -rf packages/dialtone-tokens/dist apps/dialtone-documentation/docs/.vuepress/.cache apps/dialtone-documentation/docs/.vuepress/.temp",
+    "clean:cache": "pnpm nx reset --onlyCache"
   },
   "pnpm": {
     "peerDependencyRules": {

@@ -1,3 +1,15 @@
+# [8.67.0](https://github.com/dialpad/dialtone/compare/dialtone-css/v8.66.0...dialtone-css/v8.67.0) (2025-11-04)
+
+
+### Documentation
+
+* **Json Docs:** DLT-2798 add metadata to dialtone JSON documentation files ([#953](https://github.com/dialpad/dialtone/issues/953)) ([7ee20b8](https://github.com/dialpad/dialtone/commit/7ee20b80bf50b59250902976e889a7f46dbbae86))
+
+
+### Features
+
+* **Avatar:** DLT-2718 avatar component masking for presence and group ([#902](https://github.com/dialpad/dialtone/issues/902)) ([b7843ab](https://github.com/dialpad/dialtone/commit/b7843ab71983437b18a35aa05d7aa5724b695e35))
+
 # [8.66.0-next.2](https://github.com/dialpad/dialtone/compare/dialtone-css/v8.66.0-next.1...dialtone-css/v8.66.0-next.2) (2025-11-10)
 
 
@@ -19,6 +31,13 @@
 * **Filter Pill:** DLT-2704 create component ([#473](https://github.com/dialpad/dialtone/issues/473)) ([6267445](https://github.com/dialpad/dialtone/commit/626744501640f18211ca9d41e4a68e099af3b6dd))
 * **Tokens:** DLT-1977 add high contrast design tokens and theme ([#938](https://github.com/dialpad/dialtone/issues/938)) ([a1c0457](https://github.com/dialpad/dialtone/commit/a1c0457e3b6b445e3f54d76b9ce3b847abc31ac5))
 * **Tokens:** DLT-2802 DLT-2563 layered theming system and mode island component ([#945](https://github.com/dialpad/dialtone/issues/945)) ([5c72c6c](https://github.com/dialpad/dialtone/commit/5c72c6cab4f08122dcb03e2e2f0cc8a490fe1c9b))
+
+# [8.66.0](https://github.com/dialpad/dialtone/compare/dialtone-css/v8.65.0...dialtone-css/v8.66.0) (2025-10-28)
+
+
+### Features
+
+* **Utilities:** DLT-2811 add line-clamp utility class ([#954](https://github.com/dialpad/dialtone/issues/954)) ([4ca31f7](https://github.com/dialpad/dialtone/commit/4ca31f7cca85aa8eb0c3b78c4eff55d17c470a3c))
 
 # [8.65.0-next.4](https://github.com/dialpad/dialtone/compare/dialtone-css/v8.65.0-next.3...dialtone-css/v8.65.0-next.4) (2025-10-15)
 

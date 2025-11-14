@@ -1,5 +1,5 @@
 <template>
-  <div v-dt-scrollbar class="d-hmx464 d-bar8 d-ba d-bc-subtle">
+  <clamped-table-wrapper>
     <div>
       <table class="d-table dialtone-doc-table">
         <thead class="d-bgc-primary d-ps-sticky d-zi-base1 d-t0">
@@ -52,33 +52,23 @@
         </tbody>
       </table>
     </div>
-  </div>
+  </clamped-table-wrapper>
 </template>
 
-<script>
-export default {
+<script setup>
+import ClampedTableWrapper from './ClampedTableWrapper.vue';
+import { useComponentTableData } from '../composables/useComponentTableData.js';
+
+defineOptions({
   name: 'ComponentAccessibleTable',
-  props: {
-    componentName: {
-      type: String,
-      required: true,
-    },
-  },
+});
 
-  data () {
-    return {
-      accessible: null,
-    };
+const { componentName } = defineProps({
+  componentName: {
+    type: String,
+    required: true,
   },
+});
 
-  beforeMount () {
-    import(`../../_data/${this.componentName}.json`).then((module) => {
-      this.accessible = module.accessible;
-    });
-  },
-};
+const { data: accessible } = useComponentTableData(componentName, 'accessible');
 </script>
-
-<style scoped>
-
-</style>
