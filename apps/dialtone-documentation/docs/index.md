@@ -1,5 +1,6 @@
 ---
 layout: Blank
+pageClass: dialpad-design-home
 ---
 <div
   id="docsearch"
@@ -144,8 +145,8 @@ layout: Blank
 </dt-stack>
 
 <style lang="less">
-.dialpad-design-home {
-  position: relative;
+[data-dt-mode="dark"] .dialpad-design-home {
+  --dt-shell-color-surface-default: var(--dt-color-purple-50);
 }
 
 .gradient-overlay {
@@ -204,6 +205,15 @@ const docSearchBtn = ref(null);
 const openSearch = () => {
   docSearchBtn.value?.children[0]?.click();
 };
+
+// Add page-specific class to body
+onMounted(() => {
+  document.body.classList.add('dialpad-design-home');
+});
+
+onUnmounted(() => {
+  document.body.classList.remove('dialpad-design-home');
+});
 
 // Mouse-driven gradient position with smoothing
 onMounted(() => {
