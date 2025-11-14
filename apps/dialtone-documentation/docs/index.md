@@ -279,10 +279,16 @@ onMounted(() => {
 
   const handleMouseMove = (e) => {
     // Get mouse X position as percentage of viewport width
-    targetPositionX = (e.clientX / window.innerWidth) * 100;
+    const mouseX = (e.clientX / window.innerWidth) * 100;
 
-    // Calculate distance from center (0 to 1)
-    const distanceFromCenter = Math.abs(targetPositionX - 50) / 50;
+    // Parallax effect: gradient moves at 30% of mouse movement from center
+    // This creates a subtle "lagging" effect
+    const parallaxFactor = 0.1; // Adjust this to control how much the gradient follows (0.1 = very subtle, 0.5 = more responsive)
+    const offsetFromCenter = mouseX - 50; // How far mouse is from center
+    targetPositionX = 50 + (offsetFromCenter * parallaxFactor); // Gradient position relative to center
+
+    // Calculate distance from center (0 to 1) based on actual mouse position
+    const distanceFromCenter = Math.abs(mouseX - 50) / 50;
 
     // Map distance to Y position: 100% at center, up to 120% at edges
     targetPositionY = 100 + (distanceFromCenter * 20);
