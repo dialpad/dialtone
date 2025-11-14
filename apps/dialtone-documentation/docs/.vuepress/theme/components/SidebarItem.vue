@@ -30,9 +30,18 @@
                 'd-btn--active': isActiveLink(isExactActive, item.link, true),
                 'd-pr16': depth === 1,
               },
+              {
+                'd-pl48': depth === 1,
+              },
             ]"
             @click="handleClick($event, listeners, navigate, item.link)"
           >
+            <dt-icon
+              v-if="depth === 0 && item.icon"
+              :name="item.icon"
+              size="400"
+              class="d-mr12 d-fc-muted"
+            />
             {{ item.text }}
             <template #icon="{ iconSize }">
               <dt-icon
@@ -49,7 +58,6 @@
       <div v-dt-scrollbar class="d-hmx464">
         <dt-stack
           as="ul"
-          class="d-pl12"
           gap="200"
           :class="{
             'd-pt4': depth === 0 || depth === 1,
@@ -80,6 +88,12 @@
                 :active="isActiveLink(isExactActive, subItem.link)"
                 :class="[
                   'dialtone-shell-btn d-w100p',
+                  {
+                    'd-pl48': depth === 0,
+                  },
+                  {
+                    'd-pl64': depth === 1,
+                  },
                 ]"
                 @click="navigate"
               >
@@ -128,6 +142,12 @@
         ]"
         @click="navigate"
       >
+        <dt-icon
+          v-if="depth === 0 && item.icon"
+          :name="item.icon"
+          size="400"
+          class="d-mr12 d-fc-muted"
+        />
         {{ item.text }}
       </dt-button>
     </router-link>

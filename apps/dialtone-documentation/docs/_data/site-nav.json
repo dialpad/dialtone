@@ -3,15 +3,18 @@
     "foundations": {
       "title": "Foundations",
       "route": "/foundations/",
+      "icon": "toy-brick",
       "sections": {
         "/foundations/": [
           {
             "text": "Overview",
-            "link": "/foundations/"
+            "link": "/foundations/",
+            "icon": "info"
           },
           {
             "text": "Logo",
             "link": "/foundations/brand/",
+            "icon": "dialpad-star-mark",
             "children": [
               {
                 "text": "Using our Logo",
@@ -30,6 +33,7 @@
           {
             "text": "Color",
             "link": "/foundations/colors/",
+            "icon": "baseline",
             "children": [
               {
                 "text": "Color in Marketing",
@@ -55,19 +59,23 @@
           },
           {
             "text": "Typography",
-            "link": "/foundations/typography/"
+            "link": "/foundations/typography/",
+            "icon": "type"
           },
           {
             "text": "Gradient",
-            "link": "/foundations/gradient/"
+            "link": "/foundations/gradient/",
+            "icon": "haze"
           },
           {
             "text": "Motion",
-            "link": "/foundations/motion/"
+            "link": "/foundations/motion/",
+            "icon": "play"
           },
           {
             "text": "Icons",
             "link": "/foundations/icons/",
+            "icon": "sparkle",
             "children": [
               {
                 "text": "Usage",
@@ -81,15 +89,18 @@
           },
           {
             "text": "Illustrations",
-            "link": "/foundations/illustrations/"
+            "link": "/foundations/illustrations/",
+            "icon": "image"
           },
           {
             "text": "Space",
-            "link": "/foundations/space/"
+            "link": "/foundations/space/",
+            "icon": "layout-template"
           },
           {
             "text": "Size",
-            "link": "/foundations/size/"
+            "link": "/foundations/size/",
+            "icon": "signal-high"
           }
         ]
       }
@@ -97,11 +108,13 @@
     "dialtone": {
       "title": "Design System",
       "route": "/dialtone/",
+      "icon": "puzzle",
       "sections": {
         "/dialtone/": [
           {
             "text": "Overview",
             "link": "/dialtone/",
+            "icon": "info",
             "children": [
               {
                 "text": "What's New",
@@ -136,6 +149,7 @@
           {
             "text": "Components",
             "link": "/components/",
+            "icon": "toy-brick",
             "children": [
               {
                 "text": "Component Status",
@@ -368,6 +382,7 @@
           {
             "text": "CSS Utilities",
             "link": "/utilities/",
+            "icon": "tools",
             "children": [
               {
                 "text": "Backgrounds",
@@ -742,6 +757,7 @@
           {
             "text": "Design Tokens",
             "link": "/tokens/",
+            "icon": "token",
             "children": [
               {
                 "text": "Designing with Tokens",
@@ -758,6 +774,7 @@
           {
             "text": "Content",
             "link": "/guides/content/",
+            "icon": "edit",
             "children": [
               {
                 "text": "Action Language",
@@ -789,7 +806,8 @@
         "/functions-and-utilities/": [
           {
             "text": "Functions and Utilities",
-            "link": "/functions-and-utilities/"
+            "link": "/functions-and-utilities/",
+            "icon": "code"
           }
         ]
       }
@@ -797,11 +815,13 @@
     "careers": {
       "title": "Careers",
       "route": "/careers/",
+      "icon": "briefcase",
       "sections": {}
     },
     "articles": {
       "title": "Articles",
       "route": "/articles/",
+      "icon": "newspaper",
       "sections": {}
     }
   }

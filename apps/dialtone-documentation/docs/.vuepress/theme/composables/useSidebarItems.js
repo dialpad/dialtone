@@ -44,14 +44,20 @@ export function useSidebarItems (items) {
     // Check if using new top-level groups structure
     if (items.topLevelGroups) {
       const topLevelGroup = detectTopLevelGroup(route.path);
-      const sections = items.topLevelGroups[topLevelGroup]?.sections || {};
+      const groupData = items.topLevelGroups[topLevelGroup];
+      const sections = groupData?.sections || {};
+      const icon = groupData?.icon;
 
       // For dialtone group, return ALL sections so they all appear in sidebar
       // This shows: Design | Components | Utilities | Tokens | Guides | About
       if (topLevelGroup === 'dialtone') {
         // Flatten all sections into a single array
         // Each section is an array with one parent item containing children
-        return Object.values(sections).flat();
+        // Add icon to first-level items
+        return Object.values(sections).flat().map(item => ({
+          ...item,
+          icon: item.icon || icon,
+        }));
       }
 
       // For other groups (foundations, careers, articles), find the specific matching section
@@ -60,7 +66,11 @@ export function useSidebarItems (items) {
       );
 
       if (!sections[sectionKey]) return [];
-      return sections[sectionKey] || [];
+      // Add icon to first-level items
+      return (sections[sectionKey] || []).map(item => ({
+        ...item,
+        icon: item.icon || icon,
+      }));
     }
 
     // Fallback to old flat structure (for backwards compatibility)
