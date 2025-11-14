@@ -1,0 +1,204 @@
+import { Canvas, Story, Subtitle, Controls, Meta } from '@storybook/blocks';
+
+import * as MotionTextStories from './motion_text.stories';
+
+<Meta of={MotionTextStories}/>
+
+# Motion Text
+
+<Subtitle>
+  A versatile, accessible text animation component with multiple animation modes,
+  full accessibility support, and comprehensive customization options.
+</Subtitle>
+
+## Default
+
+The Motion Text component provides beautiful text animations with zero configuration required.
+
+<Canvas>
+  <Story of={MotionTextStories.Default} />
+</Canvas>
+
+## Animation Modes
+
+The component supports six different animation modes, each with its own unique visual style:
+
+- **gradient-in**: Characters appear with a colorful gradient highlight reveal
+- **fade-in**: Smooth opacity-based character reveal
+- **slide-in**: Characters slide up from below
+- **gradient-sweep**: Static text with an animated gradient sweep (loops automatically)
+- **shimmer**: Static text with an animated shimmer effect (loops automatically)
+- **none**: Instant text display without animation
+
+<Canvas>
+  <Story of={MotionTextStories.Modes} />
+</Canvas>
+
+## Variants
+
+### Speed Control
+
+Use t-shirt sizing (sm, md, lg) to control animation speed:
+
+### Text Sizes
+
+Works seamlessly with any Dialtone text class:
+
+### Looping & Manual Controls
+
+Full programmatic control over animation playback:
+
+<Canvas>
+  <Story of={MotionTextStories.Variants} />
+</Canvas>
+
+## Slots, Props & Events
+
+<Controls />
+
+## Usage
+
+### Import
+
+```jsx
+import { DtRecipeMotionText } from '@dialpad/dialtone-vue';
+```
+
+### Basic Usage
+
+The simplest form - just pass text and let it animate automatically:
+
+```html
+<dt-recipe-motion-text text="Hello world!" />
+```
+
+### With Animation Mode
+
+Choose from multiple animation styles:
+
+```html
+<dt-recipe-motion-text
+  text="Animated text"
+  animation-mode="gradient-in"
+  speed="lg"
+/>
+```
+
+### Manual Control
+
+Take full control of the animation lifecycle:
+
+```html
+<template>
+  <div>
+    <dt-recipe-motion-text
+      ref="textRef"
+      text="Click to animate"
+      :auto-start="false"
+      @complete="onComplete"
+    />
+
+    <dt-button @click="$refs.textRef.start()">Start</dt-button>
+    <dt-button @click="$refs.textRef.pause()">Pause</dt-button>
+    <dt-button @click="$refs.textRef.reset()">Reset</dt-button>
+  </div>
+</template>
+
+<script>
+export default {
+  methods: {
+    onComplete() {
+      console.log('Animation completed!');
+    }
+  }
+}
+</script>
+```
+
+### Looping Animation
+
+Perfect for attention-grabbing headers or hero sections:
+
+```html
+<dt-recipe-motion-text
+  text="Continuous animation"
+  :loop="true"
+  speed="sm"
+/>
+```
+
+### Using Slots
+
+You can also use the default slot instead of the text prop:
+
+```html
+<dt-recipe-motion-text animation-mode="fade-in">
+  <span>Animated </span>
+  <strong>text</strong>
+</dt-recipe-motion-text>
+```
+
+## Accessibility
+
+The Motion Text component is built with accessibility as a core principle:
+
+### Reduced Motion Support
+
+Automatically respects the user's `prefers-reduced-motion` system setting. When enabled, animations are skipped and text appears instantly.
+
+```html
+<dt-recipe-motion-text
+  text="Respects user preferences"
+  :respects-reduced-motion="true"
+/>
+```
+
+### Screen Reader Support
+
+Provide alternative text for screen readers:
+
+```html
+<dt-recipe-motion-text
+  text="🎉 Congratulations!"
+  screen-reader-text="Congratulations"
+/>
+```
+
+### ARIA Attributes
+
+The component automatically includes proper ARIA attributes:
+- `aria-live="polite"` during animation
+- `aria-label` when screen reader text is provided
+- `aria-hidden` for animated content while animating
+
+## Animation Modes Explained
+
+### Character-by-Character Modes
+
+These modes reveal text character by character:
+
+- **gradient-in**: Best for hero sections and important messages. Creates a premium feel with the brand gradient.
+- **fade-in**: Subtle and professional. Great for body text and descriptions.
+- **slide-in**: Dynamic and engaging. Perfect for announcements and CTAs.
+
+### Static Animation Modes
+
+These modes keep text visible but add motion effects:
+
+- **gradient-sweep**: Continuous animated gradient. Ideal for loading states or "magic" moments.
+- **shimmer**: Subtle pulsing effect. Works well for skeleton loaders or placeholders.
+
+## Performance Notes
+
+- The component uses CSS animations and transitions for optimal performance
+- Text is split into words and characters only when necessary (not for static modes)
+- Animations are automatically cleaned up on component unmount
+- Reduced motion support ensures accessibility without performance cost
+
+## Tips & Best Practices
+
+1. **Choose the right speed**: Use `sm` for short text, `lg` for longer passages
+2. **Don't overuse**: Too many animated elements can be distracting
+3. **Consider context**: Hero sections work well with `gradient-in`, while body text might be better with `fade-in`
+4. **Test with reduced motion**: Always ensure your UI works with animations disabled
+5. **Provide screen reader text**: If using emojis or special characters, always include alternative text

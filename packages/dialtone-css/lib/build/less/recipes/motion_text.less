@@ -1,0 +1,278 @@
+//
+//  DIALTONE
+//  RECIPES: MOTION TEXT
+//
+//  TABLE OF CONTENTS
+//  • CSS CUSTOM PROPERTIES
+//  • BASE STYLE
+//  • CHILD ELEMENTS
+//  • ANIMATION KEYFRAMES
+//  • TRANSITION CLASSES - GRADIENT IN
+//  • TRANSITION CLASSES - FADE IN
+//  • TRANSITION CLASSES - SLIDE IN
+//  • GRADIENT SWEEP & SHIMMER
+//  • MODIFIERS
+//  • ACCESSIBILITY
+//
+//  ============================================================================
+//  $   CSS CUSTOM PROPERTIES
+//  ----------------------------------------------------------------------------
+@property --dt-recipe-motion-text-mask-pos {
+  inherits: true;
+  initial-value: 0%;
+  syntax: '<percentage>';
+}
+
+//  ============================================================================
+//  $   BASE STYLE
+//  ----------------------------------------------------------------------------
+.dt-recipe-motion-text {
+  /* Theme variables - can be overridden by design system */
+  --dt-recipe-motion-text-duration: 1000ms;
+  --dt-recipe-motion-text-char-duration: var(--dt-recipe-motion-text-duration);
+  --dt-recipe-motion-text-word-duration: calc(var(--dt-recipe-motion-text-duration) * 2);
+  --dt-recipe-motion-text-highlight-color: linear-gradient(135deg, var(--dt-color-brand-magenta) 10%, var(--dt-color-brand-purple) 80%, var(--dt-color-brand-gold) 100%);
+  --dt-recipe-motion-text-gradient: linear-gradient(
+    90deg,
+    transparent 0%,
+    transparent 20%,
+    black 40%,
+    black 60%,
+    transparent 80%,
+    transparent 100%
+  ) 0% 0% / 500% 100%;
+  --dt-recipe-motion-text-shimmer-gradient: linear-gradient(
+    90deg,
+    black 0%,
+    black 20%,
+    #0005 40%,
+    #0005 60%,
+    black 80%,
+    black 100%
+  ) 0% 0% / 500% 100%;
+
+  position: relative;
+}
+
+//  ============================================================================
+//  $   CHILD ELEMENTS
+//  ----------------------------------------------------------------------------
+.dt-recipe-motion-text__sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  white-space: nowrap;
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+}
+
+.dt-recipe-motion-text__content {
+  display: contents;
+}
+
+.dt-recipe-motion-text__fallback {
+  display: contents;
+}
+
+.dt-recipe-motion-text__char {
+  display: inline-block;
+  white-space: pre;
+}
+
+.dt-recipe-motion-text__word {
+  position: relative;
+  display: inline;
+  white-space: nowrap;
+}
+
+//  ============================================================================
+//  $   ANIMATION KEYFRAMES
+//  ----------------------------------------------------------------------------
+
+// Gradient-in mode animations
+@keyframes dt-recipe-motion-text-gradient-in-char-appear {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes dt-recipe-motion-text-gradient-in-word-reveal {
+  from {
+    --dt-recipe-motion-text-mask-pos: 100%;
+  }
+
+  to {
+    --dt-recipe-motion-text-mask-pos: 0%;
+  }
+}
+
+// Fade-in mode animations
+@keyframes dt-recipe-motion-text-fade-in-char-appear {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes dt-recipe-motion-text-fade-in-word-appear {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+// Slide-in mode animations
+@keyframes dt-recipe-motion-text-slide-in-char-appear {
+  from {
+    transform: translateY(0.3em);
+    opacity: 0;
+  }
+
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes dt-recipe-motion-text-slide-in-word-appear {
+  from {
+    transform: translateY(0.5em);
+    opacity: 0;
+  }
+
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+//  ============================================================================
+//  $   TRANSITION CLASSES - GRADIENT IN
+//  ----------------------------------------------------------------------------
+.dt-recipe-motion-text-char-gradient-in-enter-active {
+  animation: dt-recipe-motion-text-gradient-in-char-appear var(--dt-recipe-motion-text-char-duration) var(--ttf-in-out);
+}
+
+.dt-recipe-motion-text-char-gradient-in-leave-active {
+  animation: dt-recipe-motion-text-gradient-in-char-appear calc(var(--dt-recipe-motion-text-char-duration) * 0.5) var(--ttf-out-quint) reverse;
+}
+
+.dt-recipe-motion-text-word-gradient-in-enter-active {
+  animation: dt-recipe-motion-text-gradient-in-word-reveal calc(var(--dt-recipe-motion-text-word-duration) * 1.5) var(--ttf-out-quint);
+}
+
+.dt-recipe-motion-text-word-gradient-in-leave-active {
+  animation: dt-recipe-motion-text-gradient-in-word-reveal calc(var(--dt-recipe-motion-text-word-duration) * 0.5) var(--ttf-out-quint) reverse;
+}
+
+//  ============================================================================
+//  $   TRANSITION CLASSES - FADE IN
+//  ----------------------------------------------------------------------------
+.dt-recipe-motion-text-char-fade-in-enter-active {
+  animation: dt-recipe-motion-text-fade-in-char-appear var(--dt-recipe-motion-text-char-duration) var(--ttf-out-quint);
+}
+
+.dt-recipe-motion-text-char-fade-in-leave-active {
+  animation: dt-recipe-motion-text-fade-in-char-appear calc(var(--dt-recipe-motion-text-char-duration) * 0.5) var(--ttf-out-quint) reverse;
+}
+
+.dt-recipe-motion-text-word-fade-in-enter-active {
+  animation: dt-recipe-motion-text-fade-in-word-appear var(--dt-recipe-motion-text-word-duration) var(--ttf-out-quint);
+}
+
+.dt-recipe-motion-text-word-fade-in-leave-active {
+  animation: dt-recipe-motion-text-fade-in-word-appear calc(var(--dt-recipe-motion-text-word-duration) * 0.5) var(--ttf-out-quint) reverse;
+}
+
+//  ============================================================================
+//  $   TRANSITION CLASSES - SLIDE IN
+//  ----------------------------------------------------------------------------
+.dt-recipe-motion-text-char-slide-in-enter-active {
+  animation: dt-recipe-motion-text-slide-in-char-appear var(--dt-recipe-motion-text-char-duration) var(--ttf-out-quint);
+}
+
+.dt-recipe-motion-text-char-slide-in-leave-active {
+  animation: dt-recipe-motion-text-slide-in-char-appear calc(var(--dt-recipe-motion-text-char-duration) * 0.5) var(--ttf-out-quint) reverse;
+}
+
+.dt-recipe-motion-text-word-slide-in-enter-active {
+  animation: dt-recipe-motion-text-slide-in-word-appear var(--dt-recipe-motion-text-word-duration) var(--ttf-out-quint);
+}
+
+.dt-recipe-motion-text-word-slide-in-leave-active {
+  animation: dt-recipe-motion-text-slide-in-word-appear calc(var(--dt-recipe-motion-text-word-duration) * 0.5) var(--ttf-out-quint) reverse;
+}
+
+//  ============================================================================
+//  $   GRADIENT SWEEP & SHIMMER
+//  ----------------------------------------------------------------------------
+.dt-recipe-motion-text--gradient-sweep,
+.dt-recipe-motion-text--shimmer {
+  position: relative;
+  display: inline-block;
+  animation: dt-recipe-motion-text-gradient-in-word-reveal calc(var(--dt-recipe-motion-text-word-duration) * 1.5) var(--ttf-in-out) 1;
+}
+
+.dt-recipe-motion-text--gradient-in .dt-recipe-motion-text__word::before,
+.dt-recipe-motion-text--gradient-sweep::before {
+  position: absolute;
+  font-size: inherit;
+  line-height: inherit;
+  letter-spacing: inherit;
+  background: var(--dt-recipe-motion-text-highlight-color);
+  -webkit-background-clip: text;
+  background-clip: text;
+  content: attr(data-text-content);
+  pointer-events: none;
+  -webkit-text-fill-color: transparent;
+  mask: var(--dt-recipe-motion-text-gradient);
+  mask-position: var(--dt-recipe-motion-text-mask-pos) 0%;
+}
+
+.dt-recipe-motion-text--shimmer {
+  content: attr(data-text-content);
+  mask: var(--dt-recipe-motion-text-shimmer-gradient);
+  mask-position: var(--dt-recipe-motion-text-mask-pos) 0%;
+}
+
+//  ============================================================================
+//  $   MODIFIERS
+//  ----------------------------------------------------------------------------
+.dt-recipe-motion-text--none .dt-recipe-motion-text__word,
+.dt-recipe-motion-text--none .dt-recipe-motion-text__char {
+  transform: none;
+  opacity: 1;
+}
+
+.dt-recipe-motion-text--paused {
+  animation-play-state: paused !important;
+}
+
+.dt-recipe-motion-text--looped {
+  animation-iteration-count: infinite !important;
+}
+
+//  ============================================================================
+//  $   ACCESSIBILITY
+//  ----------------------------------------------------------------------------
+@media (prefers-reduced-motion: reduce) {
+  .dt-recipe-motion-text {
+    --dt-recipe-motion-text-duration: 0ms;
+    --dt-recipe-motion-text-char-duration: 0ms;
+    --dt-recipe-motion-text-word-duration: 0ms;
+
+    transition-duration: 0ms !important;
+    animation-duration: 0ms !important;
+  }
+}
