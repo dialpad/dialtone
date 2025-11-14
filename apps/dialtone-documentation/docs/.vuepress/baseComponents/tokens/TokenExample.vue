@@ -195,14 +195,14 @@ const isPercentage = computed(() => props.value.endsWith('%'));
 
 .sizeRectangle {
   height: var(--dt-size-600);
-  background-color: var(--dt-color-purple-400);
+  background-color: var(--dt-color-surface-brand-strong);
   border-radius: var(--dt-size-radius-300);
   width: 0;
 }
 
 .spaceRectangle {
   height: var(--dt-size-600);
-  background-color: var(--dt-color-purple-400);
+  background-color: var(--dt-color-surface-brand-strong);
   width: 0;
 }
 

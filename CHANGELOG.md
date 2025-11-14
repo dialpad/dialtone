@@ -1,3 +1,68 @@
+# [9.146.0](https://github.com/dialpad/dialtone/compare/dialtone/v9.145.1...dialtone/v9.146.0) (2025-11-13)
+
+
+### Bug Fixes
+
+* **Mcp Server:** DLT-2840 correct installation instructions and improve documentation ([#969](https://github.com/dialpad/dialtone/issues/969)) ([04943af](https://github.com/dialpad/dialtone/commit/04943afc6bc9fa0ac6f672d01d2fa26f5713dfb5))
+
+
+### Features
+
+* **Mcp Server:** DLT-2837 add icon search tool ([#967](https://github.com/dialpad/dialtone/issues/967)) ([25d4d7d](https://github.com/dialpad/dialtone/commit/25d4d7dccce543473342cd2b4211cefbb732e486))
+
+## [9.145.1](https://github.com/dialpad/dialtone/compare/dialtone/v9.145.0...dialtone/v9.145.1) (2025-11-11)
+
+
+### Bug Fixes
+
+* **Docs:** DLT-2797 fix broken links ([#962](https://github.com/dialpad/dialtone/issues/962)) ([0af5d1b](https://github.com/dialpad/dialtone/commit/0af5d1b552e98ef17c73d4f7d8a4dbfc92e9a921))
+* **Popover:** DP-162957 reinitialize the tippy when the anchor element changes ([#964](https://github.com/dialpad/dialtone/issues/964)) ([fa9a0d9](https://github.com/dialpad/dialtone/commit/fa9a0d92731a5b448abfd4fde991c3b4116af05f))
+
+# [9.145.0](https://github.com/dialpad/dialtone/compare/dialtone/v9.144.0...dialtone/v9.145.0) (2025-11-05)
+
+
+### Documentation
+
+* **Skeleton, Loader:** DLT-2558 add docs to compare both components ([#950](https://github.com/dialpad/dialtone/issues/950)) ([e0c0d2b](https://github.com/dialpad/dialtone/commit/e0c0d2bfea47514ec93bc9376e8567eed8fad21e))
+
+
+### Features
+
+* **Mcp Server:** DLT-2787 implement 3-tool search architecture with smart filtering ([#951](https://github.com/dialpad/dialtone/issues/951)) ([74fe422](https://github.com/dialpad/dialtone/commit/74fe42280994bcce2c07834b6e9ccca98de8764b))
+
+# [9.144.0](https://github.com/dialpad/dialtone/compare/dialtone/v9.143.0...dialtone/v9.144.0) (2025-11-04)
+
+
+### Bug Fixes
+
+* **Popover:** DP-162957 tippy safe check ([#960](https://github.com/dialpad/dialtone/issues/960)) ([5376d8b](https://github.com/dialpad/dialtone/commit/5376d8b6bddd922c1c47db43566f90a2f1a5b637))
+* **Tooltip:** DP-162944 defensively check for a null anchorWrapper ([#957](https://github.com/dialpad/dialtone/issues/957)) ([82b7951](https://github.com/dialpad/dialtone/commit/82b7951d138f4cfa2f795e9182477a8e7929e196))
+* **Tooltip:** DP-162950 avoid manipulate on null parent ([#961](https://github.com/dialpad/dialtone/issues/961)) ([ede4855](https://github.com/dialpad/dialtone/commit/ede48555afb9820d6fb3c7565b874cbb02d70885))
+* **Tooltip:** NO-JIRA console warn on null anchorWrapper ([#959](https://github.com/dialpad/dialtone/issues/959)) ([21115f5](https://github.com/dialpad/dialtone/commit/21115f5acb52890679cde82448f463d437b5c05c))
+
+
+### Documentation
+
+* DLT-2817 improve doc tables searchability ([#955](https://github.com/dialpad/dialtone/issues/955)) ([a27ef2c](https://github.com/dialpad/dialtone/commit/a27ef2ca33972f6eb03b29d4198a7be8ae461b1c))
+* **Json Docs:** DLT-2798 add metadata to dialtone JSON documentation files ([#953](https://github.com/dialpad/dialtone/issues/953)) ([7ee20b8](https://github.com/dialpad/dialtone/commit/7ee20b80bf50b59250902976e889a7f46dbbae86))
+
+
+### Features
+
+* **Avatar:** DLT-2718 avatar component masking for presence and group ([#902](https://github.com/dialpad/dialtone/issues/902)) ([b7843ab](https://github.com/dialpad/dialtone/commit/b7843ab71983437b18a35aa05d7aa5724b695e35))
+
+# [9.143.0](https://github.com/dialpad/dialtone/compare/dialtone/v9.142.2...dialtone/v9.143.0) (2025-10-28)
+
+
+### Documentation
+
+* **Illustration:** DLT-2801 update docs to use tree shakeable names ([#949](https://github.com/dialpad/dialtone/issues/949)) ([2e813d4](https://github.com/dialpad/dialtone/commit/2e813d4025e846d9e78e9f330f49ad2bd962e9d5))
+
+
+### Features
+
+* **Utilities:** DLT-2811 add line-clamp utility class ([#954](https://github.com/dialpad/dialtone/issues/954)) ([4ca31f7](https://github.com/dialpad/dialtone/commit/4ca31f7cca85aa8eb0c3b78c4eff55d17c470a3c))
+
 ## [9.142.2](https://github.com/dialpad/dialtone/compare/dialtone/v9.142.1...dialtone/v9.142.2) (2025-10-21)
 
 

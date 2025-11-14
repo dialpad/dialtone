@@ -85,12 +85,16 @@
       />
     </div>
   </div>
-  <div v-if="!hasSearchResults" class="d-body d-fc-tertiary d-p16 d-pt0 d-ta-center">
-    <span>No results found for</span>
-    <strong class="d-fw-semibold">
-      &OpenCurlyDoubleQuote;{{ search }}&CloseCurlyDoubleQuote;
-    </strong>
-  </div>
+  <dt-empty-state
+    v-if="!hasSearchResults"
+    size="sm"
+    :header-text="`No results found for &OpenCurlyDoubleQuote;${search}&CloseCurlyDoubleQuote;`"
+    class="d-w100p d-ba d-bc-subtle d-bar8 d-mt16 d-pt32"
+  >
+    <template #icon="{ iconSize }">
+      <dt-icon name="box" :size="iconSize" />
+    </template>
+  </dt-empty-state>
   <dt-modal
     v-if="selectedIcon"
     :show="isModalOpen"

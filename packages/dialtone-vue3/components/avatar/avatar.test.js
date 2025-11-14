@@ -174,11 +174,31 @@ describe('DtAvatar Tests', () => {
         expect(count.exists()).toBe(false);
       });
 
-      it('should render "99+" if group is greater than 99', async () => {
+      it('applies correct digit modifiers at boundaries', async () => {
+        // 9 -> no group shown, no digit modifiers
+        await wrapper.setProps({ group: 9 });
+        expect(wrapper.classes('d-avatar--group')).toBe(true);
+        expect(wrapper.classes('d-avatar--group-digits-2')).toBe(false);
+        expect(wrapper.classes('d-avatar--group-digits-3')).toBe(false);
+
+        // 10 -> base + digits-2
+        await wrapper.setProps({ group: 10 });
+        expect(wrapper.classes('d-avatar--group')).toBe(true);
+        expect(wrapper.classes('d-avatar--group-digits-2')).toBe(true);
+        expect(wrapper.classes('d-avatar--group-digits-3')).toBe(false);
+
+        // 99 -> base + digits-2
+        await wrapper.setProps({ group: 99 });
+        expect(wrapper.classes('d-avatar--group')).toBe(true);
+        expect(wrapper.classes('d-avatar--group-digits-2')).toBe(true);
+        expect(wrapper.classes('d-avatar--group-digits-3')).toBe(false);
+
+        // 100 -> base + digits-3 and count shows 99+
         await wrapper.setProps({ group: 100 });
-
-        count = wrapper.find('[data-qa="dt-avatar-count"]');
-
+        expect(wrapper.classes('d-avatar--group')).toBe(true);
+        expect(wrapper.classes('d-avatar--group-digits-2')).toBe(false);
+        expect(wrapper.classes('d-avatar--group-digits-3')).toBe(true);
+        const count = wrapper.find('[data-qa="dt-avatar-count"]');
         expect(count.text()).toBe('99+');
       });
     });
@@ -214,6 +234,7 @@ describe('DtAvatar Tests', () => {
 
         expect(presence.exists()).toBe(true);
         expect(presence.classes('d-avatar__presence')).toBe(true);
+        expect(wrapper.classes('d-avatar--presence')).toBe(true);
       });
 
       it('should pass through data in presenceProps to the presence component', async () => {
@@ -251,6 +272,15 @@ describe('DtAvatar Tests', () => {
         presence = wrapper.find('[data-qa="dt-presence"]');
 
         expect(presence.classes('d-avatar__presence--lg')).toBe(true);
+      });
+
+      it('should not render presence or presence class when group is shown', async () => {
+        await wrapper.setProps({ presence: 'active', group: 25 });
+
+        presence = wrapper.find('[data-qa="dt-presence"]');
+
+        expect(presence.exists()).toBe(false);
+        expect(wrapper.classes('d-avatar--presence')).toBe(false);
       });
     });
   });

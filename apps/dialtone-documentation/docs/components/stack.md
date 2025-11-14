@@ -262,20 +262,19 @@ vueCode='
 ## Gap
 
 <code-well-header>
-
   <dt-stack class=" d-w100p">
     <h3 class="d-label">Select a gap option</h3>
     <dt-stack
       :direction="{ 'default': 'column', 'md': 'row' }"
       gap="200"
-      class="d-bgc-primary d-p2 d-bar4 d-mb16"
+      class="d-ba d-bc-subtle d-p2 d-bar8 d-mb16"
     >
       <dt-button
         v-for="gap in gaps"
         size="xs"
         kind="muted"
         importance="clear"
-        class="d-fl1"
+        class="d-fl1 d-bar6"
         :key="gap"
         :class="{ 'd-btn--active': gap === selectedGap }"
         @click="setGap(gap)"
@@ -340,7 +339,7 @@ vueCode='
 
 ### Available gaps
 
-<div v-dt-scrollbar class="d-hmx464 d-bar8 d-ba d-bc-subtle">
+<clamped-table-wrapper>
   <div>
     <table class="d-table dialtone-doc-table">
       <thead class="d-bgc-primary d-ps-sticky d-zi-base1 d-t0">
@@ -573,7 +572,7 @@ vueCode='
       </tbody>
     </table>
   </div>
-</div>
+</clamped-table-wrapper>
 
 ## Responsive
 
@@ -728,6 +727,7 @@ showHtmlWarning />
     DtIconMessage,
     DtIconLock,
   } from '@dialpad/dialtone-icons/vue3';
+  import ClampedTableWrapper from '@baseComponents/ClampedTableWrapper.vue';
 
   const selectedGap = ref('400');
 

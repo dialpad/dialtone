@@ -40,7 +40,7 @@
         "cwd": "{projectRoot}",
         "commands": [
           {
-            "command": "nx watch --projects=dialtone-css,dialtone-icons,dialtone-tokens,dialtone-vue3 --includeDependentProjects -- nx run \\$NX_PROJECT_NAME:build"
+            "command": "nx watch --projects=dialtone-css,dialtone-tokens,dialtone-vue3 -- nx run \\$NX_PROJECT_NAME:build"
           },
           {
             "command": "vuepress dev docs"

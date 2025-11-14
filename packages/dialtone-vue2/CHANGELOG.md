@@ -1,3 +1,25 @@
+## [2.201.1](https://github.com/dialpad/dialtone/compare/dialtone-vue2/v2.201.0...dialtone-vue2/v2.201.1) (2025-11-11)
+
+
+### Bug Fixes
+
+* **Popover:** DP-162957 reinitialize the tippy when the anchor element changes ([#964](https://github.com/dialpad/dialtone/issues/964)) ([fa9a0d9](https://github.com/dialpad/dialtone/commit/fa9a0d92731a5b448abfd4fde991c3b4116af05f))
+
+# [2.201.0](https://github.com/dialpad/dialtone/compare/dialtone-vue2/v2.200.3...dialtone-vue2/v2.201.0) (2025-11-04)
+
+
+### Bug Fixes
+
+* **Popover:** DP-162957 tippy safe check ([#960](https://github.com/dialpad/dialtone/issues/960)) ([5376d8b](https://github.com/dialpad/dialtone/commit/5376d8b6bddd922c1c47db43566f90a2f1a5b637))
+* **Tooltip:** DP-162944 defensively check for a null anchorWrapper ([#957](https://github.com/dialpad/dialtone/issues/957)) ([82b7951](https://github.com/dialpad/dialtone/commit/82b7951d138f4cfa2f795e9182477a8e7929e196))
+* **Tooltip:** DP-162950 avoid manipulate on null parent ([#961](https://github.com/dialpad/dialtone/issues/961)) ([ede4855](https://github.com/dialpad/dialtone/commit/ede48555afb9820d6fb3c7565b874cbb02d70885))
+* **Tooltip:** NO-JIRA console warn on null anchorWrapper ([#959](https://github.com/dialpad/dialtone/issues/959)) ([21115f5](https://github.com/dialpad/dialtone/commit/21115f5acb52890679cde82448f463d437b5c05c))
+
+
+### Features
+
+* **Avatar:** DLT-2718 avatar component masking for presence and group ([#902](https://github.com/dialpad/dialtone/issues/902)) ([b7843ab](https://github.com/dialpad/dialtone/commit/b7843ab71983437b18a35aa05d7aa5724b695e35))
+
 ## [2.200.3](https://github.com/dialpad/dialtone/compare/dialtone-vue2/v2.200.2...dialtone-vue2/v2.200.3) (2025-10-21)
 
 

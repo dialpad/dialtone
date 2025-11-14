@@ -33,11 +33,12 @@ Use `d-wmx{n}` to set a fixed minimum width for an element. This can be combined
 
 <script setup>
   import { percentage, fixed, other } from '@data/width-height.json';
+  import ClampedTableWrapper from '@baseComponents/ClampedTableWrapper.vue';
 </script>
 
 ## Classes
 
-<div v-dt-scrollbar class="d-hmx464 d-bar8 d-ba d-bc-subtle">
+<clamped-table-wrapper>
   <div>
     <table class="d-table dialtone-doc-table">
       <thead class="d-bgc-primary d-ps-sticky d-zi-base1 d-t0">
@@ -66,4 +67,4 @@ Use `d-wmx{n}` to set a fixed minimum width for an element. This can be combined
       </tbody>
     </table>
   </div>
-</div>
+</clamped-table-wrapper>

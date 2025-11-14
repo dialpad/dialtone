@@ -333,4 +333,50 @@ describe('DtPopover Tests', () => {
       });
     });
   });
+
+  describe('When anchor slot content changes', () => {
+    it('should attach the tippy instance to the new DOM node', async () => {
+      const component = {
+        template: `
+          <dt-popover ref="popover" :open="open">
+            <template #anchor>
+              <div v-if="showAlternateAnchor" class="testanchor" key="anchor1">Anchor 1</div>
+              <div v-else class="testanchor" key="anchor2">Anchor 2</div>
+            </template>
+            <template #content>
+              <div class="content">Hello</div>
+            </template>
+          </dt-popover>
+        `,
+        components: {
+          DtPopover,
+        },
+        props: ['showAlternateAnchor', 'open'],
+      };
+      const wrapper = mount(component, {
+        propsData: { showAlternateAnchor: false, open: false },
+        stubs: baseStubs,
+        localVue: testContext.localVue,
+        attachTo: document.body,
+      })
+
+      let popoverWindow = wrapper.findComponent({ ref: 'popover' }).findComponent({ ref: 'content' });
+      expect(popoverWindow.isVisible()).toBe(false);
+      await wrapper.setProps({ open: true});
+      expect(popoverWindow.isVisible()).toBe(true);
+      await wrapper.setProps({ open: false});
+      expect(popoverWindow.isVisible()).toBe(false);
+
+      await wrapper.setProps({ showAlternateAnchor: true});
+      popoverWindow = wrapper.findComponent({ ref: 'popover' }).findComponent({ ref: 'content' });
+
+      expect(popoverWindow.isVisible()).toBe(false);
+      await wrapper.setProps({ open: true});
+      expect(popoverWindow.isVisible()).toBe(true);
+      await wrapper.setProps({ open: false});
+      expect(popoverWindow.isVisible()).toBe(false);
+
+      wrapper.destroy();
+    });
+  });
 });

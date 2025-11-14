@@ -24,7 +24,7 @@ control the grow and shrink flex values separately with their own utility classe
 </div>
 ```
 
-<div v-dt-scrollbar class="d-hmx464 d-bar8 d-ba d-bc-subtle d-mb16">
+<clamped-table-wrapper class="d-mb16">
   <div>
     <table class="d-table dialtone-doc-table">
       <thead class="d-bgc-primary d-ps-sticky d-zi-base1 d-t0">
@@ -48,7 +48,7 @@ control the grow and shrink flex values separately with their own utility classe
       </tbody>
     </table>
   </div>
-</div>
+</clamped-table-wrapper>
 
 ## Flex Grow
 
@@ -70,7 +70,7 @@ The `flex-grow` sets the flex container’s grow factor relative to the parent's
 </div>
 ```
 
-<div v-dt-scrollbar class="d-hmx464 d-bar8 d-ba d-bc-subtle d-mb16">
+<clamped-table-wrapper class="d-mb16">
   <div>
     <table class="d-table dialtone-doc-table">
       <thead class="d-bgc-primary d-ps-sticky d-zi-base1 d-t0">
@@ -94,7 +94,7 @@ The `flex-grow` sets the flex container’s grow factor relative to the parent's
       </tbody>
     </table>
   </div>
-</div>
+</clamped-table-wrapper>
 
 ## Flex Shrink
 
@@ -116,7 +116,7 @@ The `flex-shrink` sets the flex container’s shrink factor relative to the pare
 </div>
 ```
 
-<div v-dt-scrollbar class="d-hmx464 d-bar8 d-ba d-bc-subtle d-mb16">
+<clamped-table-wrapper class="d-mb16">
   <div>
     <table class="d-table dialtone-doc-table">
       <thead class="d-bgc-primary d-ps-sticky d-zi-base1 d-t0">
@@ -140,8 +140,9 @@ The `flex-shrink` sets the flex container’s shrink factor relative to the pare
       </tbody>
     </table>
   </div>
-</div>
+</clamped-table-wrapper>
 
 <script setup>
   import { properties } from '@data/flex.json';
+  import ClampedTableWrapper from '@baseComponents/ClampedTableWrapper.vue';
 </script>
