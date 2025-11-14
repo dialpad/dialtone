@@ -168,11 +168,12 @@ layout: Blank
   }
 
   &--footer {
-    --grad: radial-gradient(50% 75% at 50% 100%, #DAA3FF 0%, #FFB1CF 33%, #FFDAD7 66%, rgba(248, 247, 246, 0.00) 100%);
+    --footer-grad-y: 200%;
+    --grad: radial-gradient(50% 75% at 50% var(--footer-grad-y), #DAA3FF 0%, #FFB1CF 33%, #FFDAD7 66%, rgba(248, 247, 246, 0.00) 100%);
     background-attachment: initial;
 
     [data-dt-mode="dark"] & {
-      --grad: radial-gradient(50% 75% at 50% 100%, rgb(246, 100, 55) 0%, rgb(223, 38, 110) 30%, rgb(191, 10, 128) 44%, rgb(81, 30, 118) 71%, transparent 100%);
+      --grad: radial-gradient(50% 75% at 50% var(--footer-grad-y), rgb(246, 100, 55) 0%, rgb(223, 38, 110) 30%, rgb(191, 10, 128) 44%, rgb(81, 30, 118) 71%, transparent 100%);
       --overlay-color-surface: transparent;
     }
   }
@@ -327,6 +328,43 @@ onMounted(() => {
   // Cleanup on unmount
   onUnmounted(() => {
     window.removeEventListener('scroll', handleScroll);
+  });
+});
+
+// Footer gradient parallax effect
+onMounted(() => {
+  const footerGradient = document.querySelector('.gradient-overlay--footer');
+
+  if (!footerGradient) return;
+
+  const handleFooterScroll = () => {
+    const rect = footerGradient.getBoundingClientRect();
+    const windowHeight = window.innerHeight;
+
+    // Calculate how much of the footer is in view
+    // When footer top is at bottom of viewport: progress = 0
+    // When footer is fully in view: progress = 1
+    const elementHeight = rect.height;
+    const visibleTop = Math.max(0, windowHeight - rect.top);
+    const scrollProgress = Math.min(Math.max(visibleTop / elementHeight, 0), 1);
+
+    // Interpolate from 150% to 100%
+    // scrollProgress 0 -> 150%, scrollProgress 1 -> 100%
+    const footerGradY = 150 - (scrollProgress * 50);
+
+    // Update CSS variable
+    footerGradient.style.setProperty('--footer-grad-y', `${footerGradY}%`);
+  };
+
+  // Add scroll event listener
+  window.addEventListener('scroll', handleFooterScroll, { passive: true });
+
+  // Call once on mount to set initial state
+  handleFooterScroll();
+
+  // Cleanup on unmount
+  onUnmounted(() => {
+    window.removeEventListener('scroll', handleFooterScroll);
   });
 });
 </script>
