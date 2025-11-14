@@ -58,9 +58,19 @@
             ]
           },
           {
-            "text": "Typography",
-            "link": "/foundations/typography/",
-            "icon": "type"
+            "text": "Type",
+            "link": "/foundations/type/",
+            "icon": "type",
+            "children": [
+              {
+                "text": "Type in Marketing",
+                "link": "/foundations/typography/marketing.html"
+              },
+              {
+                "text": "Type in Product",
+                "link": "/foundations/typography/"
+              }
+            ]
           },
           {
             "text": "Gradient",
