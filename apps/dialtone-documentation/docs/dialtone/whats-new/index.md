@@ -1,6 +1,7 @@
 ---
 title: What's New
 description: Updates, progress and planning for all things Dialtone.
+keywords: ["changelog","updates","latest","news"]
 ---
 
 <BlogPostPreview v-for="post in $page.blogPosts.sort(sortHandler)" :key="post.posted" :author="post.author" :heading="post.heading" :posted="parse(post.posted, 'y-M-d', new Date())">

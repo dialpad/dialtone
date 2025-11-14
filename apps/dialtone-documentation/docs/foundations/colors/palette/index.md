@@ -3,6 +3,7 @@ title: Color Palette
 shortTitle: palette
 description: A functional, personal, and accessible color palette.
 figma_url: https://www.figma.com/design/VjrRh4vvfONSmBQxnZrL3u/DT9-Design-Tokens--Rebrand-2025-?node-id=7712-1472&t=D8g6K4TrMGXNsvLT-11
+keywords: ["swatches","color tokens","color system"]
 ---
 
 ## Foreground

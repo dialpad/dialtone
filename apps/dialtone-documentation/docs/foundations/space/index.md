@@ -3,6 +3,7 @@ title: Space
 description: Define paddings, gaps, and margins around elements.
 figma_url: https://www.figma.com/design/VjrRh4vvfONSmBQxnZrL3u/DT9-Design-Tokens--Rebrand-2025-?node-id=3746-13427&t=D8g6K4TrMGXNsvLT-11
 thumb: true
+keywords: ["spacing","margin","padding","whitespace","layout"]
 ---
 
 <svg-loader name="space-img" />

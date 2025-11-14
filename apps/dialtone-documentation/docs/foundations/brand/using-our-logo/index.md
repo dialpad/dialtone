@@ -2,6 +2,7 @@
 title: Using our Logo
 description: Guidelines for using the Dialpad logo in different contexts and themes.
 figma_url: https://www.figma.com/design/W58r5BkO8qTw3vem9YieJd/DT9-Component-Library--Rebrand-2025-?node-id=17330-1170
+keywords: ["logo usage","logo guidelines","brand guidelines"]
 ---
 
 ## For Brand

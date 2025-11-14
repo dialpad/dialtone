@@ -1,6 +1,7 @@
 ---
 title: Color in Product
 description: A systematic and accessible color palette that supports both functional needs and personalized experiences within our products.
+keywords: ["ui colors","semantic colors","text color","background color"]
 ---
 
 <div class="d-m32"></div>

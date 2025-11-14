@@ -5,6 +5,7 @@ status: ready
 thumb: true
 image: assets/images/components/checkbox-group.png
 storybook: https://dialtone.dialpad.com/vue/?path=/story/components-checkbox-group--default
+keywords: ["checkboxes","multi select","form fields","d-checkbox-group","DtCheckboxGroup","dt-checkbox-group"]
 ---
 
 Checkbox Groups are typically paired with a legend which identifies the group. If no legend is provided then it is expected that an `aria-label` will be given in order to provide an invisible label to screen readers. Each Checkbox Group should contain one or more Checkboxes which users can make selections from.

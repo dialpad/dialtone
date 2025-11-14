@@ -3,6 +3,7 @@ title: Size
 description: A system to maintain consistent size and scale.
 figma_url: https://www.figma.com/design/VjrRh4vvfONSmBQxnZrL3u/DT9-Design-Tokens--Rebrand-2025-?node-id=3746-13427&t=D8g6K4TrMGXNsvLT-11
 thumb: true
+keywords: ["sizing","dimensions","scale","width","height"]
 ---
 
 <svg-loader name="size-img" />

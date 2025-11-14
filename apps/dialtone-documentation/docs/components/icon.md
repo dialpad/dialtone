@@ -6,6 +6,7 @@ thumb: true
 image: assets/images/components/icon.png
 storybook: https://dialtone.dialpad.com/vue/?path=/story/components-icon--default
 figma_url: https://www.figma.com/file/zz40wi0uW9MvaJ5RuhcRZR/DT-Core%3A-Icons-7?node-id=1473%3A3757&viewport=-168%2C479%2C1&t=OhX4ilCDvb7Tqkx4-11
+keywords: ["svg","glyph","symbol","d-icon","DtIcon","dt-icon"]
 ---
 
 <code-well-header>

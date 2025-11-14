@@ -3,6 +3,7 @@ title: List Item Group
 description: The "List Item Group" component uses a non interactive heading which groups list items.
 status: ready
 storybook: https://dialtone.dialpad.com/vue/?path=/story/components-list-item-group--default
+keywords: ["list group","list items","d-list-item-group","DtListItemGroup","dt-list-item-group"]
 ---
 
 <code-well-header>

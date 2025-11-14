@@ -4,6 +4,7 @@ description: Illustration assets.
 storybook: https://dialtone.dialpad.com/vue/index.html?path=/story/components-illustration--default
 figma_url: https://www.figma.com/design/dzGQjTcbUfviiqGvwsD9VV/DT9-Spot-Illustrations?node-id=1181-1068
 thumb: true
+keywords: ["illustration","artwork","graphics","images"]
 ---
 
 ## Illustrations

@@ -4,6 +4,7 @@ description: Used for grouping buttons that share a relationship or perform simi
 thumb: true
 image: assets/images/components/button-group.png
 storybook: https://dialtone.dialpad.com/vue/?path=/story/components-button-group--default
+keywords: ["button set","btn group","action group","d-btn-group","DtButtonGroup","dt-button-group"]
 ---
 
 <code-well-header class="d-d-block">

@@ -5,6 +5,7 @@ thumb: true
 description: Tabs allow users to navigation between grouped content in different views while within the same page context.
 storybook: https://dialtone.dialpad.com/vue/?path=/story/components-tabs--default
 figma_url: https://www.figma.com/design/W58r5BkO8qTw3vem9YieJd/DT9-Component-Library--Rebrand-2025-?node-id=2129-4760
+keywords: ["tab panel","tab navigation","d-tabs","DtTabs","dt-tabs"]
 ---
 
 <code-well-header>

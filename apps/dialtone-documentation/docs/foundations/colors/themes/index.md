@@ -2,6 +2,7 @@
 title: Themes
 description: Theme options that allow user customization of Dialpad products.
 no_preview: true
+keywords: ["dark mode","light mode","color scheme"]
 ---
 
 <div class="d-m32"></div>

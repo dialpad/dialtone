@@ -3,6 +3,7 @@ title: Type in Product
 description: Clear, legible, and easy-to-read text.
 figma_url: https://www.figma.com/design/VjrRh4vvfONSmBQxnZrL3u/DT9-Design-Tokens--Rebrand-2025-?node-id=3746-13426&t=D8g6K4TrMGXNsvLT-11
 thumb: true
+keywords: ["font family", "font weight", "font size", "line height", "system font", "san francisco", "roboto", "ui font"]
 ---
 
 ## Font Properties

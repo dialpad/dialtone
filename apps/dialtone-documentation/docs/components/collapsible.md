@@ -6,6 +6,7 @@ thumb: true
 image: assets/images/components/collapsible.png
 figma: planned
 storybook: https://dialtone.dialpad.com/vue/?path=/story/components-collapsible--default
+keywords: ["accordion","expand","collapse","toggle content","d-collapsible","DtCollapsible","dt-collapsible"]
 ---
 
 <code-well-header>

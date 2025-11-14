@@ -1,5 +1,5 @@
 ---
-title: Functions and Utilities
+title: Functions
 description: Reusable JavaScript helper functions for common development tasks
 thumb: true
 ---

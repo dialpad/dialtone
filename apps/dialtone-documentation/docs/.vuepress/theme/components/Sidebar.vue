@@ -93,8 +93,11 @@ const filterItems = (items, searchTerm) => {
   const filtered = [];
 
   items.forEach(item => {
-    // Check if current item matches
-    const itemMatches = item.text.toLowerCase().includes(term);
+    // Check if current item matches (text or keywords)
+    const itemMatches = item.text.toLowerCase().includes(term) ||
+      (item.keywords?.some(keyword =>
+        keyword.toLowerCase().includes(term)
+      ) ?? false);
 
     // Recursively filter children if they exist
     const filteredChildren = item.children

@@ -2,6 +2,7 @@
 title: Crafting an Icon
 description: Guidelines for designing and exporting icons in the Dialtone icon system.
 figma_url: https://www.figma.com/file/zz40wi0uW9MvaJ5RuhcRZR/DT-Core%3A-Icons-7?node-id=1473%3A3757&viewport=-168%2C479%2C1&t=OhX4ilCDvb7Tqkx4-11
+keywords: ["create icon","design icon","icon design"]
 ---
 
 Our icons are designed for easy recognition and understanding. They are a visual support, helping people navigate the experience more effectively.

@@ -2,6 +2,7 @@
 title: Icon Usage
 description: Guidance on using icons in Figma and Vue, with best practices for icon selection and sizing.
 figma_url: https://www.figma.com/file/zz40wi0uW9MvaJ5RuhcRZR/DT-Core%3A-Icons-7?node-id=1473%3A3757&viewport=-168%2C479%2C1&t=OhX4ilCDvb7Tqkx4-11
+keywords: ["how to use icons","icon guidelines"]
 ---
 
 ## In Figma

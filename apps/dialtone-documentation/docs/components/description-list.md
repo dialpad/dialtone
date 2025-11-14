@@ -5,6 +5,7 @@ status: ready
 thumb: true
 storybook: https://dialtone.dialpad.com/vue/?path=/story/components-description-list--default
 figma: planned
+keywords: ["definition list","key value","dl","d-description-list","DtDescriptionList","dt-description-list"]
 ---
 
 <code-well-header>

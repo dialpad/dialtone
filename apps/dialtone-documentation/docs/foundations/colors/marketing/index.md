@@ -1,6 +1,7 @@
 ---
 title: Color in Marketing
 description: Guidelines for using Dialpad's color palette in marketing materials and brand communications.
+keywords: ["brand colors","marketing colors","purple"]
 ---
 
 <dt-stack gap="650" class="d-mt48">

@@ -5,6 +5,7 @@ status: ready
 thumb: true
 image: assets/images/components/input.png
 storybook: https://dialtone.dialpad.com/vue/?path=/story/components-input-group--default
+keywords: ["input addon","input prefix","input suffix","d-input-group","DtInputGroup","dt-input-group"]
 ---
 
 <code-well-header>

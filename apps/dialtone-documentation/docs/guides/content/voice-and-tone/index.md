@@ -3,6 +3,7 @@ title: Voice and Tone
 prev: { link: "/guides/content/inclusive-language/", text: "Inclusive Language" }
 next: { link: "/guides/accessibility", text: "Accessibility" }
 description: Learn how to apply Dialpad's voice and choose the right tone, no matter the product, feature, or experience you're building.
+keywords: ["writing style","brand voice","tone"]
 ---
 
 This guide is the comprehensive writing resource for product teams. Reference this guide to ensure accuracy, coherence, and consistency throughout the product. Applying the outlined principles in this guide consistently will maintain high writing quality standards across product teams and throughout the product experience.

@@ -6,6 +6,7 @@ thumb: true
 image: assets/images/components/card.png
 figma: planned
 storybook: https://dialtone.dialpad.com/vue/?path=/story/components-card--default
+keywords: ["panel","container","box","d-card","DtCard","dt-card"]
 ---
 
 <code-well-header>

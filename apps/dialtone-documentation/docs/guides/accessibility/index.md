@@ -3,6 +3,7 @@ title: Accessibility and inclusive design
 shortTitle: accessibility
 prev: { link: "/guides/content/voice-and-tone/", text: "Voice and Tone" }
 description: Guidance on building products for everyone.
+keywords: ["a11y","wcag","aria","screen reader"]
 ---
 
 We are committed to usable experiences and products for everyone. Because “everyone” is a lot of people reflecting a variety of backgrounds, abilities, and circumstances, we believe in applying thoughtful and inclusive design and development practices.

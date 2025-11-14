@@ -1,6 +1,7 @@
 ---
 title: Auto Spacing
 description: Utilities for controlling the space between child elements.
+keywords: ["margin","padding","gap","whitespace"]
 ---
 
 <dt-notice kind="info" class="d-wmx100p d-mt24" hideClose>

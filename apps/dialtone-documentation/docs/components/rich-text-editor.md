@@ -3,6 +3,7 @@ title: Rich Text Editor
 description: A rich text editor is a component that allows users to format text with a variety of styles. It enables also mixing text with custom components built as extensions, such as links and user mentions.
 status: ready
 storybook: https://dialtone.dialpad.com/vue/?path=/story/components-rich-text-editor--default
+keywords: ["rte","wysiwyg","text editor","markdown","d-rte","DtRichTextEditor","dt-rich-text-editor"]
 ---
 
 <code-well-header>

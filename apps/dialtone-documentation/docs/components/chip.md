@@ -6,6 +6,7 @@ thumb: true
 image: assets/images/components/chip.png
 storybook: https://dialtone.dialpad.com/vue/?path=/story/components-chip--default
 figma_url: https://www.figma.com/design/W58r5BkO8qTw3vem9YieJd/DT9-Component-Library--Rebrand-2025-?node-id=9937-64802
+keywords: ["tag","pill","token","badge","d-chip","DtChip","dt-chip"]
 ---
 
 <code-well-header>

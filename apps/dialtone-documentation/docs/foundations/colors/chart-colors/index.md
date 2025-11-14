@@ -1,6 +1,7 @@
 ---
 title: Chart Colors
 description: Chart color guidance to communicate data clearly.
+keywords: ["data visualization","graph colors","chart palette"]
 ---
 
 ## Overview

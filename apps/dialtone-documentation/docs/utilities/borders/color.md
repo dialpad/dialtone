@@ -1,6 +1,7 @@
 ---
 title: Border Colors
 description: Utilities for controlling an element's border color.
+keywords: ["border","outline","border radius","rounded"]
 ---
 
 <dt-notice kind="warning" class="d-wmx100p d-mt24" hideClose>

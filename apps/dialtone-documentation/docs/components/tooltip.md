@@ -6,6 +6,7 @@ image: assets/images/components/tooltip.png
 description: A tooltip is a floating label that briefly explains an action, function, or an element. Its content is exclusively text and shouldn't be vital information for users. If richer media is desired, consider using a popover instead.
 storybook: https://dialtone.dialpad.com/vue/?path=/story/components-tooltip--default
 figma_url: https://www.figma.com/design/W58r5BkO8qTw3vem9YieJd/DT9-Component-Library--Rebrand-2025-?node-id=261-0
+keywords: ["hint","tip","help text","d-tooltip","DtTooltip","dt-tooltip"]
 ---
 
 <code-well-header>

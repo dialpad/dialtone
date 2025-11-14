@@ -1,6 +1,7 @@
 ---
 title: Getting Started with Dialtone
 description: A quick start guide to add Dialtone to your project.
+keywords: ["setup","install","quick start","introduction"]
 ---
 
 ## Adding Dialtone to Your Project

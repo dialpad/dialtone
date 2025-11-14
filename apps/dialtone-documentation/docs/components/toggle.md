@@ -6,6 +6,7 @@ image: assets/images/components/toggle.png
 description: A toggle, or "switch", is a button control element that allows the user to make a binary selection.
 storybook: https://dialtone.dialpad.com/vue/?path=/story/components-toggle--default
 figma_url: https://www.figma.com/design/W58r5BkO8qTw3vem9YieJd/DT9-Component-Library--Rebrand-2025-?node-id=8272-20496
+keywords: ["switch","checkbox","on off","d-toggle","DtToggle","dt-toggle"]
 ---
 <code-well-header>
   <div class="d-toggle-group d-d-flex d-ai-center">

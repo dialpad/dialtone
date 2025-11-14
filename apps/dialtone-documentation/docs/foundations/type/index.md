@@ -3,6 +3,7 @@ title: Type
 description: The brand typeface for Dialpad is Season, in the Sans and Mix versions.
 figma_url: https://www.figma.com/design/VjrRh4vvfONSmBQxnZrL3u/DT9-Design-Tokens--Rebrand-2025-?node-id=3746-13426&t=D8g6K4TrMGXNsvLT-11
 thumb: true
+keywords: ["font", "typography", "typeface", "text", "season"]
 ---
 
 <svg-loader name="type-billboard" class="d-bar16 d-mt48" />

@@ -6,6 +6,7 @@ thumb: true
 image: assets/images/components/empty-state.png
 storybook: https://dialtone.dialpad.com/vue/?path=/story/components-empty-state--default
 figma_url: https://www.figma.com/design/W58r5BkO8qTw3vem9YieJd/DT9-Component-Library--Rebrand-2025-?node-id=17203-203
+keywords: ["no results","blank slate","zero state","d-empty-state","DtEmptyState","dt-empty-state"]
 ---
 
 <code-well-header>

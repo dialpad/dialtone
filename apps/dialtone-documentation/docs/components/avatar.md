@@ -6,6 +6,7 @@ thumb: true
 image: assets/images/components/avatar.png
 storybook: https://dialtone.dialpad.com/vue/?path=/story/components-avatar--default
 figma_url: https://www.figma.com/design/W58r5BkO8qTw3vem9YieJd/DT9-Component-Library--Rebrand-2025-?node-id=5413-13176
+keywords: ["profile picture","user image","profile image","d-avatar","DtAvatar","dt-avatar"]
 ---
 
 <code-well-header>

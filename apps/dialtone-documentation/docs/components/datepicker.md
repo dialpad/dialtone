@@ -6,6 +6,7 @@ description: Datepicker component will provide a calendar to select a date.
 status: beta
 storybook: https://dialtone.dialpad.com/vue/?path=/story/components-datepicker--default
 figma_url: https://www.figma.com/design/W58r5BkO8qTw3vem9YieJd/DT9-Component-Library--Rebrand-2025-?node-id=13998-86
+keywords: ["date picker","calendar","date selector","d-datepicker","DtDatepicker","dt-datepicker"]
 ---
 
 <code-well-header>

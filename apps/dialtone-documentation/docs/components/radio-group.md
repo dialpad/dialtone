@@ -5,6 +5,7 @@ status: ready
 thumb: true
 image: assets/images/components/radio-group.png
 storybook: https://dialtone.dialpad.com/vue/?path=/story/components-radio-group--default
+keywords: ["radio buttons","radio options","form fields","d-radio-group","DtRadioGroup","dt-radio-group"]
 ---
 
 <code-well-header>

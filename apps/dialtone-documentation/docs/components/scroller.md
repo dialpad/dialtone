@@ -5,6 +5,7 @@ status: beta
 thumb: true
 image: assets/images/components/scroller.png
 storybook: https://dialtone.dialpad.com/vue3/?path=/story/components-scroller--default
+keywords: ["scroll container","scrollable","d-scroller","DtScroller","dt-scroller"]
 ---
 
 #### Default Scroller

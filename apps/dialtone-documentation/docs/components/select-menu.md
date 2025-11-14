@@ -6,6 +6,7 @@ thumb: true
 image: assets/images/components/select-menu.png
 storybook: https://dialtone.dialpad.com/vue/?path=/story/components-select-menu--default
 figma_url: https://www.figma.com/design/W58r5BkO8qTw3vem9YieJd/DT9-Component-Library--Rebrand-2025-?node-id=25737-2711
+keywords: ["dropdown","picker","select","d-select-menu","DtSelectMenu","dt-select-menu"]
 ---
 
 <code-well-header class="d-d-block">

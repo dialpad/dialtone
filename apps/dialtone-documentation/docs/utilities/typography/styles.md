@@ -1,6 +1,7 @@
 ---
 title: Typography Styles
 description: Core Typographic Styles for Body Text and Headlines.
+keywords: ["font","text","type","font size","font weight"]
 ---
 
 Typography styles combine multiple typography properties – e.g. `font-family`, `font-size`, `line-height`,`font-weight` into a single class. Rather than declare multiple CSS Utilities for each property.

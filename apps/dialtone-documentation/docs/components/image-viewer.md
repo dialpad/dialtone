@@ -4,6 +4,7 @@ description: Image Viewer lets the user click on an image to see it in a full sc
 status: ready
 thumb: true
 storybook: https://dialtone.dialpad.com/vue/?path=/story/components-image-viewer--default
+keywords: ["lightbox","image modal","photo viewer","d-image-viewer","DtImageViewer","dt-image-viewer"]
 ---
 
 <code-well-header>

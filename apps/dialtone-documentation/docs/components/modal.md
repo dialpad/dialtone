@@ -6,6 +6,7 @@ thumb: true
 image: assets/images/components/modal.png
 storybook: https://dialtone.dialpad.com/vue/?path=/story/components-modal--default
 figma_url: https://www.figma.com/design/W58r5BkO8qTw3vem9YieJd/DT9-Component-Library--Rebrand-2025-?node-id=4454-10944
+keywords: ["dialog","popup","overlay","lightbox","d-modal","DtModal","dt-modal"]
 ---
 <code-well-header>
   <example-modal />

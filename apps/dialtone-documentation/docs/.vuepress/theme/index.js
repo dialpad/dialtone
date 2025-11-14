@@ -136,6 +136,53 @@ function _extractComponentStatus (app) {
     .sort((a, b) => _sortAlphabetically(a.name, b.name));
 }
 
+function _injectKeywordsFromFrontmatter (app, options) {
+  // Create a map of page paths to keywords for faster lookup
+  const pageKeywords = new Map();
+  app.pages.forEach(page => {
+    if (page.frontmatter?.keywords && Array.isArray(page.frontmatter.keywords)) {
+      // Normalize path by removing trailing slash and .html
+      const normalizedPath = page.path.replace(/\/$/, '').replace(/\.html$/, '');
+      pageKeywords.set(normalizedPath, page.frontmatter.keywords);
+      // Also store with original path for exact matches
+      pageKeywords.set(page.path, page.frontmatter.keywords);
+    }
+  });
+
+  // Recursive function to inject keywords into sidebar items
+  const injectKeywords = (items) => {
+    if (!items || !Array.isArray(items)) return;
+
+    items.forEach(item => {
+      if (item.link) {
+        // Try to find keywords for this link (normalize for matching)
+        const normalizedLink = item.link.replace(/\/$/, '').replace(/\.html$/, '');
+        const keywords = pageKeywords.get(normalizedLink) || pageKeywords.get(item.link);
+
+        if (keywords) {
+          item.keywords = keywords;
+        }
+      }
+
+      // Recursively process children
+      if (item.children && Array.isArray(item.children)) {
+        injectKeywords(item.children);
+      }
+    });
+  };
+
+  // Process all sidebar sections
+  if (options.sidebar?.topLevelGroups) {
+    Object.values(options.sidebar.topLevelGroups).forEach(group => {
+      if (group.sections) {
+        Object.values(group.sections).forEach(section => {
+          injectKeywords(section);
+        });
+      }
+    });
+  }
+}
+
 function getChildrenPageNames (path, pages) {
   // Handle new topLevelGroups structure
   if (pages?.topLevelGroups) {
@@ -234,6 +281,7 @@ export const dialtoneVuepressTheme = (options) => ({
       _extractFrontmatter(app, '/foundations/', options, ['/foundations/typography/', '/foundations/typography.html', '/foundations/colors/usage/', '/foundations/colors/palette/', '/foundations/colors/themes/', '/foundations/colors/chart-colors/', '/foundations/icons/usage/', '/foundations/icons/crafting-an-icon/', '/foundations/brand/using-our-logo/', '/foundations/brand/our-icon/', '/foundations/brand/sub-brands-and-co-branding/', '/foundations/brand/samples/']);
       _extractFrontmatter(app, '/foundations/colors/', options);
       _extractComponentStatus(app);
+      _injectKeywordsFromFrontmatter(app, options);
     },
 
     extendsPage: (page) => {

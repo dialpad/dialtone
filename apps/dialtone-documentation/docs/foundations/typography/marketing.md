@@ -3,6 +3,7 @@ title: Type in Marketing
 description: Description
 figma_url: https://www.figma.com/design/VjrRh4vvfONSmBQxnZrL3u/DT9-Design-Tokens--Rebrand-2025-?node-id=3746-13426&t=D8g6K4TrMGXNsvLT-11
 thumb: true
+keywords: ["season sans", "season mix", "brand font", "marketing typeface"]
 ---
 
 <dt-stack gap="650" class="d-mt48">

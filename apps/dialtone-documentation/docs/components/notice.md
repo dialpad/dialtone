@@ -6,6 +6,7 @@ thumb: true
 image: assets/images/components/notice.png
 storybook: https://dialtone.dialpad.com/vue/?path=/story/components-notice--default
 figma_url: https://www.figma.com/design/W58r5BkO8qTw3vem9YieJd/DT9-Component-Library--Rebrand-2025-?node-id=4492-7076
+keywords: ["alert","message","notification","d-notice","DtNotice","dt-notice"]
 ---
 
 <code-well-header bgclass="d-bgc-primary">
