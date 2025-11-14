@@ -34,6 +34,7 @@
                 'd-pl48': depth === 1,
               },
             ]"
+            :data-sidebar-link="item.link"
             @click="handleClick($event, listeners, navigate, item.link)"
           >
             <dt-icon
@@ -95,6 +96,7 @@
                     'd-pl64': depth === 1,
                   },
                 ]"
+                :data-sidebar-link="subItem.link"
                 @click="navigate"
               >
                 {{ subItem.text }}
@@ -140,6 +142,7 @@
             'd-headline--eyebrow d-fw-semibold d-bgc-transparent d-c-default': !item.link,
           },
         ]"
+        :data-sidebar-link="item.link"
         @click="navigate"
       >
         <dt-icon
