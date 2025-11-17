@@ -32,7 +32,8 @@ module.exports = {
     'property-no-unknown': null,
     'function-no-unknown': null,
     'import-notation': null,
-    'no-extra-semicolons': null,
+    'at-rule-prelude-no-invalid': null, // disable for LESS @import syntax
+    'declaration-property-value-no-unknown': null, // disable for LESS escaped strings and calculations
 
     'no-descending-specificity': null, // turn off for now, descending cases could be fixed on the last refactoring
     'function-calc-no-unspaced-operator': null, // otherwise it will be an error during build
@@ -48,7 +49,6 @@ module.exports = {
     'selector-no-vendor-prefix': null,
     'value-keyword-case': null,
     'value-no-vendor-prefix': null,
-    indentation: null,
     'length-zero-no-unit': true,
     'declaration-block-no-redundant-longhand-properties': [
       true,
