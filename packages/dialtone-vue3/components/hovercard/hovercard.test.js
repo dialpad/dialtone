@@ -118,6 +118,32 @@ describe('DtHovercard Tests', () => {
       });
     });
 
+    describe('When content is focused', () => {
+      it('hovercard should remain visible', async () => {
+        vi.useFakeTimers();
+        await anchor.trigger('mouseenter');
+        await vi.runAllTimers();
+
+        content = getHovercardContent();
+        expect(content).not.toBeNull();
+
+        // Focus on the hovercard content wrapper (which has the focusin event handler)
+        const contentWrapper = content.querySelector('div');
+        contentWrapper.tabIndex = -1; // Make it focusable
+        await contentWrapper.focus();
+        await vi.runAllTimers();
+
+        // Leave the hovercard
+        await anchor.trigger('mouseleave');
+        await vi.runAllTimers();
+
+        // Hovercard should still be visible
+        content = getHovercardContent();
+        expect(content).not.toBeNull();
+        expect(content.textContent).toBe(MOCK_DEFAULT_SLOT_MESSAGE);
+      });
+    });
+
     describe('When anchor is removed from DOM', () => {
       it('hovercardOpen is set to false', async () => {
         vi.useFakeTimers();

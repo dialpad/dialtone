@@ -31,7 +31,13 @@
       />
     </template>
     <template #content>
-      <slot name="content" />
+      <div
+        @focusin="onContentFocusIn"
+        @focusout="onContentFocusOut"
+      >
+        <!-- @slot Slot for the content that is displayed in the hovercard. -->
+        <slot name="content" />
+      </div>
     </template>
     <template #headerContent>
       <slot name="headerContent" />
@@ -218,6 +224,8 @@ export default {
       observer: null,
       inTimer: null,
       outTimer: null,
+      contentFocused: false,
+      mouseOverHovercard: false,
     };
   },
 
@@ -260,27 +268,49 @@ export default {
 
   methods: {
     setInTimer () {
-      this.inTimer = setTimeout(() => {
-        this.hovercardOpen = true;
-      }, this.enterDelay);
-    },
-
-    setOutTimer () {
-      this.outTimer = setTimeout(() => {
-        this.hovercardOpen = false;
-      }, this.leaveDelay);
-    },
-
-    onMouseEnter () {
       if (this.open === null) {
         clearTimeout(this.outTimer);
-        this.setInTimer();
+        this.inTimer = setTimeout(() => {
+          this.hovercardOpen = true;
+        }, this.enterDelay);
       }
     },
 
-    onMouseLeave () {
+    setOutTimer () {
       if (this.open === null) {
         clearTimeout(this.inTimer);
+        this.outTimer = setTimeout(() => {
+          this.hovercardOpen = false;
+        }, this.leaveDelay);
+      }
+    },
+
+    onMouseEnter () {
+      this.mouseOverHovercard = true;
+      this.setInTimer();
+    },
+
+    onMouseLeave () {
+      this.mouseOverHovercard = false;
+      if (this.contentFocused) {
+        return;
+      }
+      if (this.open === null) {
+        clearTimeout(this.inTimer);
+        this.setOutTimer();
+      }
+    },
+
+    onContentFocusIn () {
+      this.contentFocused = true;
+      this.setInTimer();
+    },
+
+    onContentFocusOut () {
+      this.contentFocused = false;
+
+      // If mouse is not over the hovercard, close it
+      if (!this.mouseOverHovercard) {
         this.setOutTimer();
       }
     },
