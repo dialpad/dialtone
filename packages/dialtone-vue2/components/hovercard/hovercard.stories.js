@@ -3,6 +3,7 @@ import DtHovercard from './hovercard.vue';
 import DtHovercardDefaultTemplate from './hovercard_default.story.vue';
 import DtHovercardManyTemplate from './hovercard_many.story.vue';
 import { createRenderConfig } from '@/common/storybook_utils';
+import DtHovercardWithInputTemplate from './hovercard_with_input.story.vue';
 import { action } from '@storybook/addon-actions';
 import {
   POPOVER_DIRECTIONS,
@@ -183,4 +184,17 @@ export const Many = {
     </div>`,
   })],
   args: { ...Default.args, offset: [0, 5] },
+};
+
+export const WithInput = {
+  render: (argsData) => createRenderConfig(DtHovercard, DtHovercardWithInputTemplate, argsData),
+  decorators: [() => ({
+    template: `<div class="d-d-flex d-jc-center d-ai-center d-h464">
+      <div class="d-w164">
+        <story />
+      </div>
+    </div>`,
+  })],
+
+  args: {},
 };

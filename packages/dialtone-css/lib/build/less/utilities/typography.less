@@ -45,7 +45,7 @@ h6,
 p,
 ol,
 ul {
-    margin-block: 0 0;
+    margin-block: 0;
 }
 
 //  ============================================================================
@@ -406,7 +406,6 @@ ul {
   &-unset {
     display: initial !important;
     overflow: initial !important;
-    -webkit-box-orient: initial !important;
     -webkit-line-clamp: initial !important;
   }
 }
@@ -460,18 +459,18 @@ ul {
 //  ----------------------------------------------------------------------------
 .d-wb-normal { word-break: normal !important; }
 .d-wb-break-all { word-break: break-all !important; }
-.d-wb-break-word { word-break: break-word !important; }
+.d-wb-break-word { overflow-wrap: break-word !important; }
 .d-wb-keep-all { word-break: keep-all !important; }
 .d-wb-unset { word-break: unset !important; }
 
 //  ============================================================================
 //  $$  WORD WRAP
 //  ----------------------------------------------------------------------------
-.d-ww-normal { word-wrap: normal !important; }
-.d-ww-break-word { word-wrap: break-word !important; }
-.d-ww-anywhere { word-wrap: anywhere !important; }
-.d-ww-initial { word-wrap: initial !important; }
-.d-ww-inherit { word-wrap: inherit !important; }
+.d-ww-normal { overflow-wrap: normal !important; }
+.d-ww-break-word { overflow-wrap: break-word !important; }
+.d-ww-anywhere { overflow-wrap: anywhere !important; }
+.d-ww-initial { overflow-wrap: initial !important; }
+.d-ww-inherit { overflow-wrap: inherit !important; }
 
 
 // Unsure what to do with this

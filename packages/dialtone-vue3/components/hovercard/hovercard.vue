@@ -33,8 +33,13 @@
       />
     </template>
     <template #content>
-      <!-- @slot Slot for the content that is displayed in the hovercard. -->
-      <slot name="content" />
+      <div
+        @focusin="onContentFocusIn"
+        @focusout="onContentFocusOut"
+      >
+        <!-- @slot Slot for the content that is displayed in the hovercard. -->
+        <slot name="content" />
+      </div>
     </template>
     <template #headerContent>
       <!-- @slot Slot for hovercard header content -->
@@ -211,6 +216,8 @@ defineEmits([
 ]);
 
 const hovercardOpen = ref(props.open);
+const contentFocused = ref(false);
+const mouseOverHovercard = ref(false);
 const inTimer = ref(null);
 const outTimer = ref(null);
 const anchorEl = ref(null);
@@ -246,27 +253,46 @@ watch(() => props.open, (open) => {
 }, { immediate: true });
 
 function setInTimer () {
-  inTimer.value = setTimeout(() => {
-    hovercardOpen.value = true;
-  }, props.enterDelay);
-}
-
-function setOutTimer () {
-  outTimer.value = setTimeout(() => {
-    hovercardOpen.value = false;
-  }, props.leaveDelay);
-}
-
-function onMouseEnter () {
   if (props.open === null) {
     clearTimeout(outTimer.value);
-    setInTimer();
+    inTimer.value = setTimeout(() => {
+      hovercardOpen.value = true;
+    }, props.enterDelay);
   }
 }
 
-function onMouseLeave () {
+function setOutTimer () {
   if (props.open === null) {
     clearTimeout(inTimer.value);
+    outTimer.value = setTimeout(() => {
+      hovercardOpen.value = false;
+    }, props.leaveDelay);
+  }
+}
+
+function onMouseEnter () {
+  mouseOverHovercard.value = true;
+  setInTimer();
+}
+
+function onMouseLeave () {
+  mouseOverHovercard.value = false;
+  if (contentFocused.value) {
+    return;
+  }
+  setOutTimer();
+}
+
+function onContentFocusIn () {
+  contentFocused.value = true;
+  setInTimer();
+}
+
+function onContentFocusOut () {
+  contentFocused.value = false;
+
+  // If mouse is not over the hovercard, close it
+  if (!mouseOverHovercard.value) {
     setOutTimer();
   }
 }
