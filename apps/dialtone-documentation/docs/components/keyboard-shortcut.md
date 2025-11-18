@@ -87,7 +87,7 @@ vueCode='
 <code-well-header>
   <dt-keyboard-shortcut
     ref="allShortcuts"
-    shortcut="{cmd}+{win}+{arrow-right}+{arrow-left}+{arrow-up}+{arrow-down}"
+    shortcut="{cmd}+{opt}+{win}+{arrow-right}+{arrow-left}+{arrow-up}+{arrow-down}"
   />
 </code-well-header>
 
@@ -95,7 +95,7 @@ vueCode='
 :htmlCode="() => $refs.allShortcuts"
 vueCode='
 <dt-keyboard-shortcut
-  shortcut="{cmd}+{win}+{arrow-right}+{arrow-left}+{arrow-up}+{arrow-down}"
+  shortcut="{cmd}+{opt}+{win}+{arrow-right}+{arrow-left}+{arrow-up}+{arrow-down}"
 />
 '
 />
@@ -106,7 +106,7 @@ vueCode='
   <div ref="inlineExample">
   Press
   <dt-keyboard-shortcut
-    screen-reader-text="Ctrl and F5"
+    screen-reader-text="Control plus F5"
     shortcut="Ctrl + F5"
   />
   to hard refresh the page.
@@ -118,7 +118,7 @@ vueCode='
 vueCode='
 Press
 <dt-keyboard-shortcut
-  screen-reader-text="Ctrl and F5"
+  screen-reader-text="Control plus F5"
   shortcut="Ctrl + F5"
 />
 to hard refresh the page.
@@ -127,11 +127,23 @@ to hard refresh the page.
 
 ## Accessibility
 
-Keyboard shortcuts should be visible to sighted users and made available to assistive technology. This keyboard shortcut component is purely visual by default, and will not read out to a screen reader.
+Keyboard shortcuts are visible to sighted users and made available to assistive technology. This component automatically generates accessible text in a visually-hidden element that will be announced by screen readers.
 
-[aria-keyshortcuts](https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Attributes/aria-keyshortcuts) should be used on the anchor element of the keyboard shortcut to indicate the existence of it to assistive technology.
+The auto-generated accessible text converts:
 
-If your keyboard shortcut is inline with text, you can set the screenReaderText prop so it is read by AT.
+- **Icon aliases**: (e.g., `{cmd}`) to full names (e.g., "Command")
+- **Key abbreviations**: (e.g., "Ctrl", "Alt") to full names (e.g., "Control", "Alt")
+- **Plus separators**: (`+`) to the word "plus"
+
+For example, `{cmd}+Ctrl+X` will be announced as "Command plus Control plus X".
+
+### Customizing the Screen Reader Text
+
+You can override the auto-generated accessible text by providing the `screenReaderText` prop with custom text.
+
+### Announcing shortcuts independent of DtKeyboardShortcut
+
+If an element (e.g. a `button`) can be triggered by a keyboard shortcut, the [aria-keyshortcuts](https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Attributes/aria-keyshortcuts) attribute should be used to announce the keyboard shortcut to screen readers.
 
 Example:
 
@@ -141,7 +153,7 @@ Example:
 <button aria-keyshortcuts="control+shift+v">Press Me</button>
 ```
 
-Abbreviations / symbols should be read out in full for voiceover / screen readers.
+Abbreviations / symbols should be spelled out in full for voiceover / screen readers, e.g. "Control" instead of "Ctrl".
 
 ## References
 
