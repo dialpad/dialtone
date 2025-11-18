@@ -1,3 +1,16 @@
+# [2.202.0](https://github.com/dialpad/dialtone/compare/dialtone-vue2/v2.201.1...dialtone-vue2/v2.202.0) (2025-11-18)
+
+
+### Bug Fixes
+
+* **Hovercard:** DLT-2827 remain when focused ([#963](https://github.com/dialpad/dialtone/issues/963)) ([ba7c2bf](https://github.com/dialpad/dialtone/commit/ba7c2bfe7776475446d7424725d915108592f11f))
+* **Popover:** DP-165062 dont reinit the tippy if the anchor el didnt actually change ([#973](https://github.com/dialpad/dialtone/issues/973)) ([5b91a84](https://github.com/dialpad/dialtone/commit/5b91a8467cffda88cb8980befdad1b06388cef5b))
+
+
+### Features
+
+* **Motion Text:** DLT-2791 new recipe ([#952](https://github.com/dialpad/dialtone/issues/952)) ([1a8d39e](https://github.com/dialpad/dialtone/commit/1a8d39edee35fb2c49eeb2b74d7488341578644e))
+
 ## [2.201.1](https://github.com/dialpad/dialtone/compare/dialtone-vue2/v2.201.0...dialtone-vue2/v2.201.1) (2025-11-11)
 
 

@@ -156,6 +156,11 @@ import { DtButton } from "@dialpad/dialtone/vue3"
 import { DtButton } from "@dialpad/dialtone/vue3/lib/button"
 ```
 
+#### Dialtine MCP Server
+
+Install the MCP server to use it in your local environment and develop efficiently with Dialtone.
+Follow the instructions in the [MCP Server](https://github.com/dialpad/dialtone/tree/staging/packages/dialtone-mcp-server) folder.
+
 ## About this repo
 
 The @dialpad/dialtone repository is a monorepo composed of Dialtone NPM packages and apps.
@@ -193,21 +198,21 @@ the library.
 
 #### How does our bundling works
 
-To achieve this we needed to create certain configs through the monorepo to be able to handle them even if 
+To achieve this we needed to create certain configs through the monorepo to be able to handle them even if
 they have the same package name e.g: `@dialpad/dialtone-vue`.
 
 1. In root [package.json](package.json):
-   - `pnpm`: 
-     - `peerDependencyRules` include `vue": "^2.6 || ^3.2"` to make sure we don't have warnings related to vue version 
+   - `pnpm`:
+     - `peerDependencyRules` include `vue": "^2.6 || ^3.2"` to make sure we don't have warnings related to vue version
        mismatch.
      - `packageExtensions` tells pnpm which Vue version to use for each package.
-   - `dependencies` doesn't include any specific Vue 2 or Vue 3 dependencies as this causes issues on the client when 
+   - `dependencies` doesn't include any specific Vue 2 or Vue 3 dependencies as this causes issues on the client when
      trying to use exports from `./vue2` or `./vue3`.
 2. On individual packages `package.json` files:
    - Include the specific dependencies in case someone uses the individual package
-   - In `vite.config.js`[Vue 2](packages/dialtone-vue2/vite.config.js), 
-     [Vue 3](packages/dialtone-vue3/vite.config.js) add dependencies to external to make sure they don't cause 
-     issues on product. (This is more specific for the Vue 2 package, as product is depending on Vue 2.6 and any 
+   - In `vite.config.js`[Vue 2](packages/dialtone-vue2/vite.config.js),
+     [Vue 3](packages/dialtone-vue3/vite.config.js) add dependencies to external to make sure they don't cause
+     issues on product. (This is more specific for the Vue 2 package, as product is depending on Vue 2.6 and any
      dependency that needs a newer Vue version will cause issues).
 3. In [project.json](project.json)
    - Include implicit dependencies to make sure NX builds them before trying to copy the files to the mono-package.
@@ -215,6 +220,7 @@ they have the same package name e.g: `@dialpad/dialtone-vue`.
    - Copy the built files into the root `dist` folder.
 
 #### Included packages
+
 - Dialtone CSS
 - Dialtone Tokens
 - Dialtone Vue 2
@@ -222,7 +228,7 @@ they have the same package name e.g: `@dialpad/dialtone-vue`.
 
 ### Tree-shaking
 
-Tree-shaking is a feature that allows you to remove unused code from your bundle, and it is enabled by default in our 
+Tree-shaking is a feature that allows you to remove unused code from your bundle, and it is enabled by default in our
 build process for Dialtone, Dialtone Vue, Dialtone Combinator and Dialtone Icons.
 
 We achieve tree-shaking primarily via three mechanisms across the packages:
@@ -240,14 +246,15 @@ We achieve tree-shaking primarily via three mechanisms across the packages:
 #### Publishing ESM builds (with dual ESM/CJS via exports map)
 
 Packages expose ESM for bundlers to statically analyze and tree-shake, with CJS fallbacks.
-- `@dialpad/dialtone-vue` (vue3): 
+
+- `@dialpad/dialtone-vue` (vue3):
   - `"type"`: `"module"`,
   - `"module"`: `"./dist/dialtone-vue.js"`,
   - `"main"`: `"./dist/dialtone-vue.cjs"`,
 
 #### Deep, per-module entry points to enable fine-grained import paths
 
-Exports maps expose subpath entries so consumers can import only what they need (which aids tree-shaking and avoids 
+Exports maps expose subpath entries so consumers can import only what they need (which aids tree-shaking and avoids
 pulling entire bundles):
 
 - `@dialpad/dialtone` exposes `./vue3/lib/*` and `./vue2/lib/*` map to individual component imports.

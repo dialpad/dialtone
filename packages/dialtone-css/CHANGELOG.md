@@ -1,3 +1,10 @@
+# [8.68.0](https://github.com/dialpad/dialtone/compare/dialtone-css/v8.67.0...dialtone-css/v8.68.0) (2025-11-18)
+
+
+### Features
+
+* **Motion Text:** DLT-2791 new recipe ([#952](https://github.com/dialpad/dialtone/issues/952)) ([1a8d39e](https://github.com/dialpad/dialtone/commit/1a8d39edee35fb2c49eeb2b74d7488341578644e))
+
 # [8.67.0](https://github.com/dialpad/dialtone/compare/dialtone-css/v8.66.0...dialtone-css/v8.67.0) (2025-11-04)
 
 
