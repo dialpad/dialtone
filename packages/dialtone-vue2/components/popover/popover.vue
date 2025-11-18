@@ -692,7 +692,11 @@ export default {
       const externalAnchorEl = this.externalAnchor
         ? this.$refs.anchor.getRootNode().querySelector(`#${this.externalAnchor}`)
         : null;
-      this.anchorEl = externalAnchorEl ?? this.$refs.anchor.children[0];
+      const anchorEl = externalAnchorEl ?? this.$refs.anchor.children[0];
+      if (anchorEl === this.anchorEl) {
+        return;
+      }
+      this.anchorEl = anchorEl;
 
       this.tip?.destroy();
       delete this.tip;
