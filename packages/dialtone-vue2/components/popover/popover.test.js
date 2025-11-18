@@ -342,6 +342,7 @@ describe('DtPopover Tests', () => {
             <template #anchor>
               <div v-if="showAlternateAnchor" class="testanchor" key="anchor1">Anchor 1</div>
               <div v-else class="testanchor" key="anchor2">Anchor 2</div>
+              <div v-if="showExtraneous">will not be the anchor</div>
             </template>
             <template #content>
               <div class="content">Hello</div>
@@ -351,7 +352,7 @@ describe('DtPopover Tests', () => {
         components: {
           DtPopover,
         },
-        props: ['showAlternateAnchor', 'open'],
+        props: ['showAlternateAnchor', 'showExtraneous', 'open'],
       };
       const wrapper = mount(component, {
         propsData: { showAlternateAnchor: false, open: false },
@@ -375,6 +376,12 @@ describe('DtPopover Tests', () => {
       expect(popoverWindow.isVisible()).toBe(true);
       await wrapper.setProps({ open: false});
       expect(popoverWindow.isVisible()).toBe(false);
+
+      await wrapper.setProps({ open: true});
+      const popover = wrapper.findComponent({ ref: 'popover' });
+      vi.spyOn(popover.vm, 'initTippyInstance');
+      await wrapper.setProps({ showExtraneous: true });
+      expect(popover.vm.initTippyInstance).not.toHaveBeenCalled();
 
       wrapper.destroy();
     });
