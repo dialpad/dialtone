@@ -1,5 +1,4 @@
-import { LocaleManager, RawBundleSource, } from '@dialpad/i18n';
-import { getCurrentInstance } from 'vue';
+import { LocaleManager, RawBundleSource } from '@dialpad/i18n';
 
 import enUS from './en-US.ftl?raw';
 import zhCN from './zh-CN.ftl?raw';
@@ -46,8 +45,6 @@ export class DialtoneLocalization {
       return DialtoneLocalization.instance;
     }
 
-    // no good
-    //const app = getCurrentInstance().appContext.app;
     this._locale = locale || DialtoneLocalization.getPreferredLocale();
 
     const bundleSource = new RawBundleSource({
