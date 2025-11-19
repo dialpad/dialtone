@@ -6,11 +6,8 @@
       { 'd-keyboard-shortcut--inverted': inverted },
     ]"
   >
-    <span
-      v-if="screenReaderText"
-      class="d-keyboard-shortcut--sr-only"
-    >
-      {{ screenReaderText }}
+    <span class="d-keyboard-shortcut--sr-only">
+      {{ screenReaderText || generatedScreenReaderText }}
     </span>
     <template
       v-for="(item, i) in formattedShortcutSplit"
@@ -18,7 +15,7 @@
       <component
         :is="icons[item]"
         v-if="icons[item]"
-        :key="`${i}-${item}`"
+        :key="`icon-${i}-${item}`"
         size="100"
         aria-hidden="true"
         :class="[
@@ -27,8 +24,8 @@
         ]"
       />
       <span
-        v-else
-        :key="`${i}-${item}`"
+        v-else-if="item.trim()"
+        :key="`text-${i}-${item}`"
         aria-hidden="true"
         :class="[
           'd-keyboard-shortcut__item',
@@ -48,6 +45,7 @@ import {
   DtIconArrowUp,
   DtIconArrowDown,
   DtIconCommand,
+  DtIconOption,
   DtIconPlus,
 } from '@dialpad/dialtone-icons/vue3';
 
@@ -58,6 +56,32 @@ const SHORTCUTS_ICON_ALIASES = {
   '{arrow-up}': DtIconArrowUp,
   '{arrow-down}': DtIconArrowDown,
   '{cmd}': DtIconCommand,
+  '{opt}': DtIconOption,
+};
+
+// Mapping of icon aliases to readable text for accessibility
+const ICON_ALIAS_TO_TEXT = {
+  '{cmd}': 'Command',
+  '{opt}': 'Option',
+  '{win}': 'Windows',
+  '{arrow-right}': 'Right Arrow',
+  '{arrow-left}': 'Left Arrow',
+  '{arrow-up}': 'Up Arrow',
+  '{arrow-down}': 'Down Arrow',
+  '{plus}': 'plus',
+};
+
+// Mapping of common key abbreviations to full names for accessibility
+const KEY_ABBREVIATIONS = {
+  'ctrl': 'Control',
+  'alt': 'Alt',
+  'esc': 'Escape',
+  'del': 'Delete',
+  'ins': 'Insert',
+  'pgup': 'Page Up',
+  'pgdn': 'Page Down',
+  'num': 'Number',
+  'caps': 'Caps Lock',
 };
 
 /**
@@ -75,6 +99,7 @@ export default {
     DtIconArrowUp,
     DtIconArrowDown,
     DtIconCommand,
+    DtIconOption,
     DtIconPlus,
   },
 
@@ -90,7 +115,7 @@ export default {
 
     /**
      * Include any of these tokens in your string to render the corresponding symbol:
-     * {cmd} {win} {arrow-right} {arrow-left} {arrow-up} {arrow-down}
+     * {cmd} {opt} {win} {arrow-right} {arrow-left} {arrow-up} {arrow-down}
      */
     shortcut: {
       type: String,
@@ -98,7 +123,8 @@ export default {
     },
 
     /**
-     * Text entered here will be read by assistive technology. If null this component will be ignored by AT.
+     * Optional text to override the auto-generated accessible text for assistive technology.
+     * If not provided, accessible text will be automatically generated from the shortcut.
      */
     screenReaderText: {
       type: String,
@@ -141,6 +167,30 @@ export default {
       */
       const regex = new RegExp(`(${iconAliasString})`, 'gi');
       return this.formattedShortcut.split(regex).filter(Boolean);
+    },
+
+    // Generates accessible text for the keyboard shortcut
+    generatedScreenReaderText () {
+      return this.formattedShortcutSplit
+        .map(item => {
+          const trimmedItem = item.trim();
+
+          // Convert icon aliases to readable text
+          if (ICON_ALIAS_TO_TEXT[trimmedItem]) {
+            return ICON_ALIAS_TO_TEXT[trimmedItem];
+          }
+
+          // Convert key abbreviations to full names (case-insensitive)
+          const lowerItem = trimmedItem.toLowerCase();
+          if (KEY_ABBREVIATIONS[lowerItem]) {
+            return KEY_ABBREVIATIONS[lowerItem];
+          }
+
+          // Return the key as-is if it's not an alias or abbreviation
+          return trimmedItem;
+        })
+        .filter(item => item) // Remove empty strings
+        .join(' ');
     },
   },
 };
