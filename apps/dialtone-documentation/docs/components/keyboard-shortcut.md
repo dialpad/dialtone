@@ -17,23 +17,15 @@ figma_url: https://www.figma.com/design/W58r5BkO8qTw3vem9YieJd/DT9-Component-Lib
 Keyboard shortcut outlines a key combination with a border to represent a keyboard shortcut. `+` will be rendered as an icon rather than text. Supported symbol tags can be used in the shortcut prop, see the [Props, Slots & Events](#vue-api) section.
 
 <code-well-header>
-  <dt-keyboard-shortcut shortcut="{cmd}+Ctrl+X"/>
+  <dt-keyboard-shortcut ref="baseExample" shortcut="{cmd}+Ctrl+X"/>
 </code-well-header>
 
 <code-example-tabs
-htmlCode='
-<kbd class="d-keyboard-shortcut">
-  <svg>...</svg>
-  <svg>...</svg>
-  <span aria-hidden="true" class="d-keyboard-shortcut__item">Ctrl</span>
-  <svg>...</svg>
-  <span aria-hidden="true" class="d-keyboard-shortcut__item">X</span>
-</kbd>
-'
+:htmlCode="() => $refs.baseExample"
 vueCode='
 <dt-keyboard-shortcut shortcut="{cmd}+Ctrl+X"/>
 '
-showHtmlWarning />
+/>
 
 ## Usage
 
@@ -47,23 +39,15 @@ showHtmlWarning />
 ### Inverted
 
 <code-well-header bgclass="d-bgc-contrast">
-  <dt-keyboard-shortcut inverted shortcut="{cmd}+Ctrl+X" />
+  <dt-keyboard-shortcut ref="invertedExample" inverted shortcut="{cmd}+Ctrl+X" />
 </code-well-header>
 
 <code-example-tabs
-htmlCode='
-<kbd class="d-keyboard-shortcut d-keyboard-shortcut--inverted">
-  <svg>...</svg>
-  <svg>...</svg>
-  <span aria-hidden="true" class="d-keyboard-shortcut__item d-keyboard-shortcut__item--inverted">Ctrl</span>
-  <svg>...</svg>
-  <span aria-hidden="true" class="d-keyboard-shortcut__item d-keyboard-shortcut__item--inverted">X</span>
-</kbd>
-'
+:htmlCode="() => $refs.invertedExample"
 vueCode='
 <dt-keyboard-shortcut inverted shortcut="{cmd}+Ctrl+X" />
 '
-showHtmlWarning />
+/>
 
 ### Shortcut Size Variation
 
