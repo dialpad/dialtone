@@ -88,4 +88,4 @@ Swift packages are hosted directly from github repositories so we have a separat
 This can be found here: [dialtone-tokens-swift](https://github.com/dialpad/dialtone-tokens-swift)
 
 The deploy process is performed by the github actions workflow `.github/workflows/release.yml` and is triggered whenever we push the production branch.
-For more info on how to release, see [README.md](../../../README.md)
+For more info on how to release, see [README.md](../../../README.md#releasing)

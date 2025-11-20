@@ -257,9 +257,9 @@ directory. See any existing examples of mdx files within that folder for more de
 
 We use ESLint to promote best practices throughout our codebase.
 ESLint will check any of our javascript or vue code for styling or syntax errors.
-The configuration can be found in [.eslintrc.config.js](../.eslint.config.js).
+The configuration can be found in [eslintrc.config.js](../eslint.config.js).
 Any changes code changes you make will be automatically linted upon commit (configuration in
-[lintstagedrc.cjs](../lintstagedrc.cjs)).
+[.lintstagedrc.cjs](../.lintstagedrc.cjs)).
 You can manually run ESLint via `npm run lint`.
 
 ### Yeoman
