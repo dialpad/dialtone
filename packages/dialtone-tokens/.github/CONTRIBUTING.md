@@ -13,7 +13,7 @@ This repo's `tokens` folder contains multiple json files which are the source of
 ## What libraries are used to do this?
 
 - [sd-transforms](https://github.com/tokens-studio/sd-transforms): Converts tokens from Figma to Style Dictionary format.
-- [Style Dictionary](https://amzn.github.io/style-dictionary/#/README): To read our base tokens and output them in different formats.
+- [Style Dictionary](https://github.com/style-dictionary/style-dictionary/blob/main/README.md): To read our base tokens and output them in different formats.
 - [NPM](https://www.npmjs.com/): To install dependencies needed for this repo and deploy our NPM package.
 - [Gradle](https://gradle.org/): To package and deploy our Android tokens.
 - [Swift Package Manager](https://www.swift.org/package-manager): To package iOS tokens for deployment.
@@ -44,11 +44,11 @@ All of these are output to the dist folder when you do `nx run dialtone-tokens:b
 
 ## Style Dictionary Configuration
 
-sd-transforms has a style dictionary configuration. You can find this in `build-sd-transforms.js`. sd-transforms has it's own built in transform group `custom/css/tokens-studio` which we add some custom transforms to. See style dictionary's documentation for more info. <https://amzn.github.io/style-dictionary>
+sd-transforms has a style dictionary configuration. You can find this in `build-sd-transforms.js`. sd-transforms has it's own built in transform group `custom/css/tokens-studio` which we add some custom transforms to. See style dictionary's documentation for more info. <https://styledictionary.com/>
 
 We have to use some custom transformers to get the desired output we want. These are stored in `dialtone-transforms.js` and can be used as needed.
 
-For more details on the above, please read the [Style Dictionary Documentation](https://amzn.github.io/style-dictionary/#/architecture)
+For more details on the above, please read the [Style Dictionary Documentation](https://styledictionary.com/info/architecture/)
 
 ## Deployment
 
@@ -66,7 +66,7 @@ Upon build, the Android source code is output to `dist/android` folder.
 If we are looking to publish the package, this source must be compiled into an Android package.
 This is done via Gradle by running `build:android`.
 The compiled package will contain kotlin as well as resource files for Dialtone's tokens.
-The Android package is served through GitHub Packages and can be found here: [design.dialpad.tokens.dialtone-tokens](https://github.com/dialpad/dialtone-tokens/packages/1646082).
+The Android package is served through GitHub Packages and can be found here: [design.dialpad.tokens.dialtone-tokens](https://github.com/dialpad/dialtone/packages/2068315).
 You do not have to run this command locally unless you are looking to debug something related to the Android package.
 The android package will be built and released on CI via our regular release process.
 
@@ -88,4 +88,4 @@ Swift packages are hosted directly from github repositories so we have a separat
 This can be found here: [dialtone-tokens-swift](https://github.com/dialpad/dialtone-tokens-swift)
 
 The deploy process is performed by the github actions workflow `.github/workflows/release.yml` and is triggered whenever we push the production branch.
-For more info on how to release, see [RELEASING.md](RELEASING.md)
+For more info on how to release, see [README.md](../../../README.md)

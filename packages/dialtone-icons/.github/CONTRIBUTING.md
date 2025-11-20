@@ -38,19 +38,19 @@ or standalone as SVG files.
 ## Icon build process
 
 Because our SVG's come from Figma, it's possible to have duplicated identifiers if we exported the icons as is.
-So we're converting our icons into Vue components and using a common function called `getUniqueString()` from [dialtone common utils](../../../common/utils.js)
+So we're converting our icons into Vue components and using a common function called `getUniqueString()` from [dialtone common utils](../../../common/utils/client.mjs)
 to prefix the identifiers of every icon with `dt-icon`, that way even if we have multiple instances of the same icon, they'll have different identifiers.
 
 Generated Vue icons are output to the `src/icons/` folder when you do `nx run dialtone-icons:build`
 
 ## Important Folders and Files
 
-- `src/icons/svg`: All the source SVG icon files.
-- `src/illustrations/svg`: All the source SVG icon files.
-- `keywords-icons.json`: Contains the categories on which icons are going to be included and the keywords to make the icons more discoverable while searching on [Dialtone icons documentation](https://dialpad.design/components/icon.html).
-- `keywords-illustrations.json`: Contains the categories on which illustrations are going to be included and the keywords to make the illustrations more discoverable.
+- `src/svg/icons`: All the source SVG icon files.
+- `src/svg/illustrations`: All the source SVG icon files.
+- `src/keywords-icons.json`: Contains the categories on which icons are going to be included and the keywords to make the icons more discoverable while searching on [Dialtone icons documentation](https://dialtone.dialpad.com/components/icon.html).
+- `src/keywords-illustrations.json`: Contains the categories on which illustrations are going to be included and the keywords to make the illustrations more discoverable.
 - `icons.js`: This file is auto generated and used to list all the icons in Storybook.
 - `illustrations.js`: This file is auto generated and used to list all the illustrations in Storybook.
 
-[Dialtone-vue icon]: https://vue.dialpad.design/?path=/story/components-icon--default
+[Dialtone-vue icon]: https://dialtone.dialpad.com/vue/index.html?path=/story/components-icon--default
 [Icons Figma file]: https://www.figma.com/file/zz40wi0uW9MvaJ5RuhcRZR/DT9-Icon-Library?type=design&node-id=10023-2864&mode=design&t=MvRnRubYryeiG1az-0
