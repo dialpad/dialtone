@@ -206,6 +206,78 @@ vueCode='
 '
 />
 
+## As
+
+The `as` prop controls which HTML element the Stack component renders as. Defaults to `<div>`, but can be declared as any valid HTML element to ensure semantic and accessible markup.
+
+Declaring as an appropriate HTML element improves accessibility by helping screen readers better understand document structure, and maintainability with clear code intent.
+
+**Common `as` values:** `span`, `ul`, `ol`, `li`, `section`, `nav`, `article`, `main`, `aside`, `header`, `footer`.
+
+### Example: section
+
+Use `as="section"` to create a thematic grouping of content.
+
+<code-well-header>
+  <dt-stack
+    as="section"
+    gap="400"
+    class="d-bgc-moderate-opaque d-bar8"
+    ref="asSectionExample"
+  >
+    <div class="d-bgc-moderate-opaque d-bar8 d-p8">Stack item 1</div>
+    <div class="d-bgc-moderate-opaque d-bar8 d-p8">Stack item 2</div>
+    <div class="d-bgc-moderate-opaque d-bar8 d-p8">Stack item 3</div>
+  </dt-stack>
+</code-well-header>
+
+<code-example-tabs
+:htmlCode="() => $refs.asSectionExample"
+vueCode='
+<dt-stack
+  as="section"
+  gap="400"
+>
+  <div>Stack item 1</div>
+  <div>Stack item 2</div>
+  <div>Stack item 3</div>
+</dt-stack>
+'
+showHtmlWarning />
+
+### Example: span
+
+Use `as="span"` for inline stacks or when you need an inline container.
+
+<code-well-header>
+  <dt-stack
+    as="span"
+    direction="row"
+    gap="300"
+    class="d-bgc-moderate-opaque d-bar8"
+    ref="asSpanExample"
+  >
+    <span class="d-bgc-moderate-opaque d-bar8 d-p8">Inline item 1</span>
+    <span class="d-bgc-moderate-opaque d-bar8 d-p8">Inline item 2</span>
+    <span class="d-bgc-moderate-opaque d-bar8 d-p8">Inline item 3</span>
+  </dt-stack>
+</code-well-header>
+
+<code-example-tabs
+:htmlCode="() => $refs.asSpanExample"
+vueCode='
+<dt-stack
+  as="span"
+  direction="row"
+  gap="300"
+>
+  <span>Inline item 1</span>
+  <span>Inline item 2</span>
+  <span>Inline item 3</span>
+</dt-stack>
+'
+showHtmlWarning />
+
 ## Gap
 
 <code-well-header>
