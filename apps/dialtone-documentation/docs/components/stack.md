@@ -1089,7 +1089,7 @@ Stacks row with gap 500 and stacks in row reverse the nested stack with gap 500.
     <dt-stack class="d-bgc-moderate-opaque d-bar8 d-p8">
       Stack item 1
     </dt-stack>
-    <dt-stack gap="500" class="d-bgc-secondary-opaque">
+    <dt-stack gap="500" class="d-bgc-moderate-opaque">
       <div class="d-bgc-moderate-opaque d-bar8 d-p8">Stack item 2</div>
       <dt-stack
         direction="row-reverse"
