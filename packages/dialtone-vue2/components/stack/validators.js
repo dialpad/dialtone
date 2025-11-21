@@ -1,4 +1,4 @@
-import { DT_STACK_DIRECTION, DT_STACK_GAP } from '@/components/stack/stack_constants';
+import { DT_STACK_DIRECTION, DT_STACK_GAP, DT_STACK_ALIGN, DT_STACK_JUSTIFY } from '@/components/stack/stack_constants';
 import { directionPropType } from './utils';
 
 export function directionValidator (direction) {
@@ -19,5 +19,27 @@ export function gapValidator (gap) {
     const { default: defaultStyle } = gap;
 
     return DT_STACK_GAP.includes(defaultStyle);
+  }
+}
+
+export function alignValidator (align) {
+  if (typeof align === 'string') {
+    return DT_STACK_ALIGN.includes(align);
+  }
+  if (typeof align === 'object') {
+    const { default: defaultStyle } = align;
+
+    return DT_STACK_ALIGN.includes(defaultStyle);
+  }
+}
+
+export function justifyValidator (justify) {
+  if (typeof justify === 'string') {
+    return DT_STACK_JUSTIFY.includes(justify);
+  }
+  if (typeof justify === 'object') {
+    const { default: defaultStyle } = justify;
+
+    return DT_STACK_JUSTIFY.includes(defaultStyle);
   }
 }

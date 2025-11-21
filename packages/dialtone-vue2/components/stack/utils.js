@@ -1,4 +1,4 @@
-import { DT_STACK_DIRECTION, DT_STACK_GAP, DT_STACK_RESPONSIVE_BREAKPOINTS } from '@/components/stack/stack_constants';
+import { DT_STACK_DIRECTION, DT_STACK_GAP, DT_STACK_RESPONSIVE_BREAKPOINTS, DT_STACK_ALIGN, DT_STACK_JUSTIFY } from '@/components/stack/stack_constants';
 
 function _isDefaultDirection (direction) {
   return direction === DT_STACK_DIRECTION.default;
@@ -19,6 +19,22 @@ function _getValidGap (gap) {
     return gap;
   } else if (typeof gap === 'object') {
     return gap.default;
+  } else { return null; }
+}
+
+function _getValidAlign (align) {
+  if (typeof align === 'string') {
+    return align;
+  } else if (typeof align === 'object') {
+    return align.default;
+  } else { return null; }
+}
+
+function _getValidJustify (justify) {
+  if (typeof justify === 'string') {
+    return justify;
+  } else if (typeof justify === 'object') {
+    return justify.default;
   } else { return null; }
 }
 
@@ -54,14 +70,48 @@ function getResposiveGapClasses (gap) {
   } else { return []; }
 }
 
-export function getResponsiveClasses (direction, gap) {
+function getResponsiveAlignClasses (align) {
+  if (typeof align === 'object') {
+    return [
+      ...DT_STACK_RESPONSIVE_BREAKPOINTS.map((breakpoint) => {
+        return DT_STACK_ALIGN.includes(align[breakpoint])
+          ? `d-stack--${breakpoint}-align-${align[breakpoint]}`
+          : null;
+      })];
+  } else { return []; }
+}
+
+function getResponsiveJustifyClasses (justify) {
+  if (typeof justify === 'object') {
+    return [
+      ...DT_STACK_RESPONSIVE_BREAKPOINTS.map((breakpoint) => {
+        return DT_STACK_JUSTIFY.includes(justify[breakpoint])
+          ? `d-stack--${breakpoint}-justify-${justify[breakpoint]}`
+          : null;
+      })];
+  } else { return []; }
+}
+
+export function getResponsiveClasses (direction, gap, align, justify) {
   return [
     ...getResposiveDirectionClasses(direction),
     ...getResposiveGapClasses(gap),
+    ...getResponsiveAlignClasses(align),
+    ...getResponsiveJustifyClasses(justify),
   ];
 }
 
 export function getDefaultGapClass (gap) {
   const validGap = _getValidGap(gap);
   return DT_STACK_GAP.includes(validGap) ? `d-stack--gap-${validGap}` : null;
+}
+
+export function getDefaultAlignClass (align) {
+  const validAlign = _getValidAlign(align);
+  return DT_STACK_ALIGN.includes(validAlign) ? `d-stack--align-${validAlign}` : null;
+}
+
+export function getDefaultJustifyClass (justify) {
+  const validJustify = _getValidJustify(justify);
+  return DT_STACK_JUSTIFY.includes(validJustify) ? `d-stack--justify-${validJustify}` : null;
 }
