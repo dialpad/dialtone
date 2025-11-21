@@ -134,6 +134,306 @@
       "class": "d-stack--gap-600",
       "applies": ".d-stack",
       "description": "Styles stack with gap 600 between elements."
+    },
+    {
+      "class": "d-stack--align-normal",
+      "applies": ".d-stack",
+      "description": "Aligns stack items with browser default behavior along the cross-axis (default)."
+    },
+    {
+      "class": "d-stack--align-start",
+      "applies": ".d-stack",
+      "description": "Aligns stack items to the start along the cross-axis."
+    },
+    {
+      "class": "d-stack--align-center",
+      "applies": ".d-stack",
+      "description": "Aligns stack items to the center along the cross-axis."
+    },
+    {
+      "class": "d-stack--align-end",
+      "applies": ".d-stack",
+      "description": "Aligns stack items to the end along the cross-axis."
+    },
+    {
+      "class": "d-stack--align-stretch",
+      "applies": ".d-stack",
+      "description": "Stretches stack items to fill the cross-axis."
+    },
+    {
+      "class": "d-stack--align-baseline",
+      "applies": ".d-stack",
+      "description": "Aligns stack items along their baselines."
+    },
+    {
+      "class": "d-stack--justify-start",
+      "applies": ".d-stack",
+      "description": "Justifies stack items to the start along the main axis (default)."
+    },
+    {
+      "class": "d-stack--justify-center",
+      "applies": ".d-stack",
+      "description": "Justifies stack items to the center along the main axis."
+    },
+    {
+      "class": "d-stack--justify-end",
+      "applies": ".d-stack",
+      "description": "Justifies stack items to the end along the main axis."
+    },
+    {
+      "class": "d-stack--justify-around",
+      "applies": ".d-stack",
+      "description": "Distributes stack items with equal space around each item."
+    },
+    {
+      "class": "d-stack--justify-between",
+      "applies": ".d-stack",
+      "description": "Distributes stack items with space between them."
+    },
+    {
+      "class": "d-stack--justify-evenly",
+      "applies": ".d-stack",
+      "description": "Distributes stack items with equal space between all items."
+    },
+    {
+      "class": "d-stack--sm--align-normal",
+      "applies": ".d-stack",
+      "description": "Aligns stack items with browser default behavior on small screens and larger."
+    },
+    {
+      "class": "d-stack--sm--align-start",
+      "applies": ".d-stack",
+      "description": "Aligns stack items to the start on small screens and larger."
+    },
+    {
+      "class": "d-stack--sm--align-center",
+      "applies": ".d-stack",
+      "description": "Aligns stack items to the center on small screens and larger."
+    },
+    {
+      "class": "d-stack--sm--align-end",
+      "applies": ".d-stack",
+      "description": "Aligns stack items to the end on small screens and larger."
+    },
+    {
+      "class": "d-stack--sm--align-stretch",
+      "applies": ".d-stack",
+      "description": "Stretches stack items to fill the cross-axis on small screens and larger."
+    },
+    {
+      "class": "d-stack--sm--align-baseline",
+      "applies": ".d-stack",
+      "description": "Aligns stack items along their baselines on small screens and larger."
+    },
+    {
+      "class": "d-stack--sm--justify-start",
+      "applies": ".d-stack",
+      "description": "Justifies stack items to the start on small screens and larger."
+    },
+    {
+      "class": "d-stack--sm--justify-center",
+      "applies": ".d-stack",
+      "description": "Justifies stack items to the center on small screens and larger."
+    },
+    {
+      "class": "d-stack--sm--justify-end",
+      "applies": ".d-stack",
+      "description": "Justifies stack items to the end on small screens and larger."
+    },
+    {
+      "class": "d-stack--sm--justify-around",
+      "applies": ".d-stack",
+      "description": "Distributes stack items with equal space around each item on small screens and larger."
+    },
+    {
+      "class": "d-stack--sm--justify-between",
+      "applies": ".d-stack",
+      "description": "Distributes stack items with space between them on small screens and larger."
+    },
+    {
+      "class": "d-stack--sm--justify-evenly",
+      "applies": ".d-stack",
+      "description": "Distributes stack items with equal space between all items on small screens and larger."
+    },
+    {
+      "class": "d-stack--md--align-normal",
+      "applies": ".d-stack",
+      "description": "Aligns stack items with browser default behavior on medium screens and larger."
+    },
+    {
+      "class": "d-stack--md--align-start",
+      "applies": ".d-stack",
+      "description": "Aligns stack items to the start on medium screens and larger."
+    },
+    {
+      "class": "d-stack--md--align-center",
+      "applies": ".d-stack",
+      "description": "Aligns stack items to the center on medium screens and larger."
+    },
+    {
+      "class": "d-stack--md--align-end",
+      "applies": ".d-stack",
+      "description": "Aligns stack items to the end on medium screens and larger."
+    },
+    {
+      "class": "d-stack--md--align-stretch",
+      "applies": ".d-stack",
+      "description": "Stretches stack items to fill the cross-axis on medium screens and larger."
+    },
+    {
+      "class": "d-stack--md--align-baseline",
+      "applies": ".d-stack",
+      "description": "Aligns stack items along their baselines on medium screens and larger."
+    },
+    {
+      "class": "d-stack--md--justify-start",
+      "applies": ".d-stack",
+      "description": "Justifies stack items to the start on medium screens and larger."
+    },
+    {
+      "class": "d-stack--md--justify-center",
+      "applies": ".d-stack",
+      "description": "Justifies stack items to the center on medium screens and larger."
+    },
+    {
+      "class": "d-stack--md--justify-end",
+      "applies": ".d-stack",
+      "description": "Justifies stack items to the end on medium screens and larger."
+    },
+    {
+      "class": "d-stack--md--justify-around",
+      "applies": ".d-stack",
+      "description": "Distributes stack items with equal space around each item on medium screens and larger."
+    },
+    {
+      "class": "d-stack--md--justify-between",
+      "applies": ".d-stack",
+      "description": "Distributes stack items with space between them on medium screens and larger."
+    },
+    {
+      "class": "d-stack--md--justify-evenly",
+      "applies": ".d-stack",
+      "description": "Distributes stack items with equal space between all items on medium screens and larger."
+    },
+    {
+      "class": "d-stack--lg--align-normal",
+      "applies": ".d-stack",
+      "description": "Aligns stack items with browser default behavior on large screens and larger."
+    },
+    {
+      "class": "d-stack--lg--align-start",
+      "applies": ".d-stack",
+      "description": "Aligns stack items to the start on large screens and larger."
+    },
+    {
+      "class": "d-stack--lg--align-center",
+      "applies": ".d-stack",
+      "description": "Aligns stack items to the center on large screens and larger."
+    },
+    {
+      "class": "d-stack--lg--align-end",
+      "applies": ".d-stack",
+      "description": "Aligns stack items to the end on large screens and larger."
+    },
+    {
+      "class": "d-stack--lg--align-stretch",
+      "applies": ".d-stack",
+      "description": "Stretches stack items to fill the cross-axis on large screens and larger."
+    },
+    {
+      "class": "d-stack--lg--align-baseline",
+      "applies": ".d-stack",
+      "description": "Aligns stack items along their baselines on large screens and larger."
+    },
+    {
+      "class": "d-stack--lg--justify-start",
+      "applies": ".d-stack",
+      "description": "Justifies stack items to the start on large screens and larger."
+    },
+    {
+      "class": "d-stack--lg--justify-center",
+      "applies": ".d-stack",
+      "description": "Justifies stack items to the center on large screens and larger."
+    },
+    {
+      "class": "d-stack--lg--justify-end",
+      "applies": ".d-stack",
+      "description": "Justifies stack items to the end on large screens and larger."
+    },
+    {
+      "class": "d-stack--lg--justify-around",
+      "applies": ".d-stack",
+      "description": "Distributes stack items with equal space around each item on large screens and larger."
+    },
+    {
+      "class": "d-stack--lg--justify-between",
+      "applies": ".d-stack",
+      "description": "Distributes stack items with space between them on large screens and larger."
+    },
+    {
+      "class": "d-stack--lg--justify-evenly",
+      "applies": ".d-stack",
+      "description": "Distributes stack items with equal space between all items on large screens and larger."
+    },
+    {
+      "class": "d-stack--xl--align-normal",
+      "applies": ".d-stack",
+      "description": "Aligns stack items with browser default behavior on extra large screens and larger."
+    },
+    {
+      "class": "d-stack--xl--align-start",
+      "applies": ".d-stack",
+      "description": "Aligns stack items to the start on extra large screens and larger."
+    },
+    {
+      "class": "d-stack--xl--align-center",
+      "applies": ".d-stack",
+      "description": "Aligns stack items to the center on extra large screens and larger."
+    },
+    {
+      "class": "d-stack--xl--align-end",
+      "applies": ".d-stack",
+      "description": "Aligns stack items to the end on extra large screens and larger."
+    },
+    {
+      "class": "d-stack--xl--align-stretch",
+      "applies": ".d-stack",
+      "description": "Stretches stack items to fill the cross-axis on extra large screens and larger."
+    },
+    {
+      "class": "d-stack--xl--align-baseline",
+      "applies": ".d-stack",
+      "description": "Aligns stack items along their baselines on extra large screens and larger."
+    },
+    {
+      "class": "d-stack--xl--justify-start",
+      "applies": ".d-stack",
+      "description": "Justifies stack items to the start on extra large screens and larger."
+    },
+    {
+      "class": "d-stack--xl--justify-center",
+      "applies": ".d-stack",
+      "description": "Justifies stack items to the center on extra large screens and larger."
+    },
+    {
+      "class": "d-stack--xl--justify-end",
+      "applies": ".d-stack",
+      "description": "Justifies stack items to the end on extra large screens and larger."
+    },
+    {
+      "class": "d-stack--xl--justify-around",
+      "applies": ".d-stack",
+      "description": "Distributes stack items with equal space around each item on extra large screens and larger."
+    },
+    {
+      "class": "d-stack--xl--justify-between",
+      "applies": ".d-stack",
+      "description": "Distributes stack items with space between them on extra large screens and larger."
+    },
+    {
+      "class": "d-stack--xl--justify-evenly",
+      "applies": ".d-stack",
+      "description": "Distributes stack items with equal space between all items on extra large screens and larger."
     }
   ]
 }
