@@ -50,6 +50,7 @@
           v-bind="removeClassStyleAttrs($attrs)"
           data-qa="dt-select"
           :disabled="disabled"
+          :value="modelValue"
           v-on="selectListeners"
         >
           <!-- @slot Slot for select menu options, defaults to options prop -->
@@ -227,6 +228,14 @@ export default {
      */
     rootClass: {
       type: [String, Object, Array],
+      default: '',
+    },
+
+    /**
+     * The value of the select menu
+     */
+    modelValue: {
+      type: [String, Number],
       default: '',
     },
   },
