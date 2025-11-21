@@ -10,11 +10,10 @@ export const LogoContainer = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-bottom: 5rem;
+  margin-bottom: 5rem !important;
 `;
 
 export const Logo = styled.img`
   height: auto;
-  margin-left: -2.8rem;
   width: 240px;
 `;
