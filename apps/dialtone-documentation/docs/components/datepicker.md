@@ -380,7 +380,7 @@ The following functions are available for date formatting.
     gap="600"
     class="d-ai-flex-start"
   >
-    <dt-stack class="d-ai-center">
+    <dt-stack align="center">
       <dt-datepicker
         :selected-date="currentSelectedDate"
         @selected-date="currentSelectedDate = $event;"

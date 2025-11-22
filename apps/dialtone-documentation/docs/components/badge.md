@@ -9,7 +9,7 @@ figma_url: https://www.figma.com/design/W58r5BkO8qTw3vem9YieJd/DT9-Component-Lib
 ---
 
 <code-well-header>
-  <dt-stack direction="row" gap="400" class="d-ai-center">
+  <dt-stack direction="row" gap="400" align="center">
     <dt-badge text="Label"></dt-badge>
     <dt-badge kind="count" text="1"></dt-badge>
   </dt-stack>
@@ -303,7 +303,7 @@ showHtmlWarning />
 Decorative badges label and classify items for quick recognition.
 
 <code-well-header bgclass="d-bgc-primary">
-  <dt-stack direction="row" gap="500" class="d-ai-baseline">
+  <dt-stack direction="row" gap="500" align="baseline">
     <dt-stack gap="500">
       <span class="d-label--md-compact">Black</span>
       <dt-badge text="Label" decoration="black-400"></dt-badge>
