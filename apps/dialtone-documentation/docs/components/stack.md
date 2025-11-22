@@ -12,28 +12,28 @@ storybook: https://dialtone.dialpad.com/vue/?path=/story/components-stack--defau
       gap="500"
       class="d-bgc-moderate-opaque d-bar8"
     >
-      <div class="d-bgc-moderate-opaque d-p8 d-bar8">
+      <div class="d-bgc-moderate-opaque d-p16 d-bar8">
         Stack item 1
       </div>
-      <div class="d-bgc-moderate-opaque d-p8 d-bar8">
+      <div class="d-bgc-moderate-opaque d-p16 d-bar8">
         Stack item 2
       </div>
-      <div class="d-bgc-moderate-opaque d-p8 d-bar8">
+      <div class="d-bgc-moderate-opaque d-p16 d-bar8">
         Stack item 3
       </div>
     </dt-stack>
     <dt-stack
       gap="500"
       direction="row"
-      class="d-bgc-moderate-opaque"
+      class="d-bgc-moderate-opaque d-bar8"
     >
-      <div class="d-bgc-moderate-opaque d-p8 d-bar8">
+      <div class="d-bgc-moderate-opaque d-p16 d-bar8">
         Stack item 1
       </div>
-      <div class="d-bgc-moderate-opaque d-p8 d-bar8">
+      <div class="d-bgc-moderate-opaque d-p16 d-bar8">
         Stack item 2
       </div>
-      <div class="d-bgc-moderate-opaque d-p8 d-bar8">
+      <div class="d-bgc-moderate-opaque d-p16 d-bar8">
         Stack item 3
       </div>
     </dt-stack>
@@ -52,13 +52,13 @@ storybook: https://dialtone.dialpad.com/vue/?path=/story/components-stack--defau
     class="d-bgc-moderate-opaque d-bar8"
     ref="columnExample"
   >
-    <div class="d-bgc-moderate-opaque d-p8 d-bar8">
+    <div class="d-bgc-moderate-opaque d-p16 d-bar8">
       Stack item 1
     </div>
-    <div class="d-bgc-moderate-opaque d-p8 d-bar8">
+    <div class="d-bgc-moderate-opaque d-p16 d-bar8">
       Stack item 2
     </div>
-    <div class="d-bgc-moderate-opaque d-p8 d-bar8">
+    <div class="d-bgc-moderate-opaque d-p16 d-bar8">
       Stack item 3
     </div>
   </dt-stack>
@@ -86,13 +86,13 @@ vueCode='
     class="d-bgc-moderate-opaque d-bar8"
     ref="rowExample"
   >
-    <div class="d-bgc-moderate-opaque d-p8 d-bar8">
+    <div class="d-bgc-moderate-opaque d-p16 d-bar8">
       Stack item 1
     </div>
-    <div class="d-bgc-moderate-opaque d-p8 d-bar8">
+    <div class="d-bgc-moderate-opaque d-p16 d-bar8">
       Stack item 2
     </div>
-    <div class="d-bgc-moderate-opaque d-p8 d-bar8">
+    <div class="d-bgc-moderate-opaque d-p16 d-bar8">
       Stack item 3
     </div>
   </dt-stack>
@@ -121,13 +121,13 @@ showHtmlWarning />
     class="d-bgc-moderate-opaque d-bar8"
     ref="rowReverseExample"
   >
-    <div class="d-bgc-moderate-opaque d-p8 d-bar8">
+    <div class="d-bgc-moderate-opaque d-p16 d-bar8">
       Stack item 1
     </div>
-    <div class="d-bgc-moderate-opaque d-p8 d-bar8">
+    <div class="d-bgc-moderate-opaque d-p16 d-bar8">
       Stack item 2
     </div>
-    <div class="d-bgc-moderate-opaque d-p8 d-bar8">
+    <div class="d-bgc-moderate-opaque d-p16 d-bar8">
       Stack item 3
     </div>
   </dt-stack>
@@ -155,13 +155,13 @@ vueCode='
     class="d-bgc-moderate-opaque d-bar8"
     ref="columnReverseExample"
   >
-    <div class="d-bgc-moderate-opaque d-p8 d-bar8">
+    <div class="d-bgc-moderate-opaque d-p16 d-bar8">
       Stack item 1
     </div>
-    <div class="d-bgc-moderate-opaque d-p8 d-bar8">
+    <div class="d-bgc-moderate-opaque d-p16 d-bar8">
       Stack item 2
     </div>
-    <div class="d-bgc-moderate-opaque d-p8 d-bar8">
+    <div class="d-bgc-moderate-opaque d-p16 d-bar8">
       Stack item 3
     </div>
   </dt-stack>
@@ -200,9 +200,9 @@ Use `as="section"` to create a thematic grouping of content.
     class="d-bgc-moderate-opaque d-bar8"
     ref="asSectionExample"
   >
-    <div class="d-bgc-moderate-opaque d-bar8 d-p8">Stack item 1</div>
-    <div class="d-bgc-moderate-opaque d-bar8 d-p8">Stack item 2</div>
-    <div class="d-bgc-moderate-opaque d-bar8 d-p8">Stack item 3</div>
+    <div class="d-bgc-moderate-opaque d-bar8 d-p16">Stack item 1</div>
+    <div class="d-bgc-moderate-opaque d-bar8 d-p16">Stack item 2</div>
+    <div class="d-bgc-moderate-opaque d-bar8 d-p16">Stack item 3</div>
   </dt-stack>
 </code-well-header>
 
@@ -232,9 +232,9 @@ Use `as="span"` when you need an inline container.
     class="d-bgc-moderate-opaque d-bar8"
     ref="asSpanExample"
   >
-    <span class="d-bgc-moderate-opaque d-bar8 d-p8">Inline item 1</span>
-    <span class="d-bgc-moderate-opaque d-bar8 d-p8">Inline item 2</span>
-    <span class="d-bgc-moderate-opaque d-bar8 d-p8">Inline item 3</span>
+    <span class="d-bgc-moderate-opaque d-bar8 d-p16">Inline item 1</span>
+    <span class="d-bgc-moderate-opaque d-bar8 d-p16">Inline item 2</span>
+    <span class="d-bgc-moderate-opaque d-bar8 d-p16">Inline item 3</span>
   </dt-stack>
 </code-well-header>
 
@@ -256,59 +256,59 @@ showHtmlWarning />
 ## Gap
 
 <code-well-header>
-  <dt-stack class=" d-w100p">
-    <h3 class="d-label">Select a gap option</h3>
-    <dt-stack
-      :direction="{ 'default': 'column', 'md': 'row' }"
-      gap="200"
-      class="d-ba d-bc-subtle d-p2 d-bar8 d-mb16"
-    >
-      <dt-button
-        v-for="gap in gaps"
-        size="xs"
-        kind="muted"
-        importance="clear"
-        class="d-fl1 d-bar6"
-        :key="gap"
-        :class="{ 'd-btn--active': gap === selectedGap }"
-        @click="setGap(gap)"
-      >
-        {{ gap }}
-      </dt-button>
-    </dt-stack>
-  </dt-stack>
-  <dt-stack
-    :direction="{ 'default': 'column', 'md': 'row' }"
-    gap="500"
-    class="d-w100p"
-    align="start"
-  >
-    <dt-stack class="d-w100p md:d-w50p">
-      <h3 class="d-headline--md">Column</h3>
+  <dt-stack gap="500" class="d-w100p">
+    <dt-stack gap="200">
+      <h3 class="d-label">Select a gap option</h3>
       <dt-stack
-        :gap="selectedGap"
-        ref="gapExample"
-        class="d-bgc-moderate-opaque d-t d-td300 d-bar8 d-ttf-quint"
+        :direction="{ 'default': 'column', 'md': 'row' }"
+        gap="200"
+        class="d-ba d-bc-subtle d-p2 d-bar8"
       >
-        <div class="d-bgc-moderate-opaque d-bar8 d-p8">Stack item 1</div>
-        <div class="d-bgc-moderate-opaque d-bar8 d-p8">Stack item 2</div>
-        <div class="d-bgc-moderate-opaque d-bar8 d-p8">Stack item 3</div>
+        <dt-button
+          v-for="gap in gaps"
+          size="xs"
+          kind="muted"
+          importance="clear"
+          class="d-fl1 d-bar6"
+          :key="gap"
+          :class="{ 'd-btn--active': gap === selectedGap }"
+          @click="setGap(gap)"
+        >
+          {{ gap }}
+        </dt-button>
       </dt-stack>
     </dt-stack>
-    <dt-stack class="d-w100p md:d-w50p">
-      <h3 class="d-headline--md">Row</h3>
-      <div class="d-d-inline-flex">
+    <dt-stack
+      :direction="{ 'default': 'column', 'md': 'row' }"
+      gap="500"
+      class="d-w100p"
+      align="start"
+    >
+      <dt-stack class="d-w100p md:d-w50p" gap="300">
+        <h3 class="d-headline--md">Column</h3>
+        <dt-stack
+          :gap="selectedGap"
+          ref="gapExample"
+          class="d-bgc-moderate-opaque d-t d-td300 d-bar8 d-ttf-quint"
+        >
+          <div class="d-bgc-moderate-opaque d-bar8 d-p16">Stack item 1</div>
+          <div class="d-bgc-moderate-opaque d-bar8 d-p16">Stack item 2</div>
+          <div class="d-bgc-moderate-opaque d-bar8 d-p16">Stack item 3</div>
+        </dt-stack>
+      </dt-stack>
+      <dt-stack class="d-w100p md:d-w50p" gap="300">
+        <h3 class="d-headline--md">Row</h3>
         <dt-stack
           direction="row"
           :gap="selectedGap"
           ref="gapExample"
           class="d-bgc-moderate-opaque d-t d-td300 d-bar8 d-ttf-quint"
         >
-          <div class="d-bgc-moderate-opaque d-bar8 d-p8">Stack item 1</div>
-          <div class="d-bgc-moderate-opaque d-bar8 d-p8">Stack item 2</div>
-          <div class="d-bgc-moderate-opaque d-bar8 d-p8">Stack item 3</div>
+          <div class="d-bgc-moderate-opaque d-bar8 d-p16 d-fl1">Stack item 1</div>
+          <div class="d-bgc-moderate-opaque d-bar8 d-p16 d-fl1">Stack item 2</div>
+          <div class="d-bgc-moderate-opaque d-bar8 d-p16 d-fl1">Stack item 3</div>
         </dt-stack>
-      </div>
+      </dt-stack>
     </dt-stack>
   </dt-stack>
 </code-well-header>
@@ -827,6 +827,8 @@ showHtmlWarning />
 
 The `justify` prop controls how items are distributed along the main axis (the direction of the stack). For row stacks, this controls horizontal distribution. For column stacks, this controls vertical distribution.
 
+Available `justify` values: `start` (default), `center`, `end`, `around`, `between`, `evenly`.
+
 ### Start
 
 Align items to the start of the main axis (default).
@@ -1025,10 +1027,6 @@ vueCode='
 '
 showHtmlWarning />
 
-Available `justify` values: `start` (default), `center`, `end`, `around`, `between`, `evenly`.
-
-For a comprehensive visual reference of all justification values, see the [Stack Variants Story](https://dialtone.dialpad.com/vue/?path=/story/components-stack--variants).
-
 ## Responsive
 
 ### Example
@@ -1042,13 +1040,13 @@ Stacks column at small screen size and column reverse at large screen
     class="d-bgc-moderate-opaque"
     ref="responsiveDirectionExample"
   >
-    <div class="d-bgc-moderate-opaque d-bar8 d-p8">
+    <div class="d-bgc-moderate-opaque d-bar8 d-p16">
       Stack item 1
     </div>
-    <div class="d-bgc-moderate-opaque d-bar8 d-p8">
+    <div class="d-bgc-moderate-opaque d-bar8 d-p16">
       Stack item 2
     </div>
-    <div class="d-bgc-moderate-opaque d-bar8 d-p8">
+    <div class="d-bgc-moderate-opaque d-bar8 d-p16">
       Stack item 3
     </div>
   </dt-stack>
@@ -1081,13 +1079,13 @@ Set `200` as the default gap, `300` for small and larger, `400` for medium, `500
     class="d-bgc-moderate-opaque"
     ref="responsiveGapExample"
   >
-    <div class="d-bgc-moderate-opaque d-bar8 d-p8">
+    <div class="d-bgc-moderate-opaque d-bar8 d-p16">
       Stack item 1
     </div>
-    <div class="d-bgc-moderate-opaque d-bar8 d-p8">
+    <div class="d-bgc-moderate-opaque d-bar8 d-p16">
       Stack item 2
     </div>
-    <div class="d-bgc-moderate-opaque d-bar8 d-p8">
+    <div class="d-bgc-moderate-opaque d-bar8 d-p16">
       Stack item 3
     </div>
   </dt-stack>
@@ -1116,17 +1114,17 @@ Stacks row with gap 500 and stacks in row reverse the nested stack with gap 500.
     ref="nestedStackExample"
     class="d-bgc-moderate-opaque d-bar8"
   >
-    <dt-stack class="d-bgc-moderate-opaque d-bar8 d-p8">
+    <dt-stack class="d-bgc-moderate-opaque d-bar8 d-p16">
       Stack item 1
     </dt-stack>
     <dt-stack gap="500" class="d-bgc-moderate-opaque">
-      <div class="d-bgc-moderate-opaque d-bar8 d-p8">Stack item 2</div>
+      <div class="d-bgc-moderate-opaque d-bar8 d-p16">Stack item 2</div>
       <dt-stack
         direction="row-reverse"
         gap="500"
       >
-        <div class="d-bgc-moderate-opaque d-bar8 d-p8">Stack item 3<br>with multiple lines</div>
-        <div class="d-bgc-moderate-opaque d-bar8 d-p8">Stack item 4</div>
+        <div class="d-bgc-moderate-opaque d-bar8 d-p16">Stack item 3<br>with multiple lines</div>
+        <div class="d-bgc-moderate-opaque d-bar8 d-p16">Stack item 4</div>
       </dt-stack>
     </dt-stack>
   </dt-stack>
