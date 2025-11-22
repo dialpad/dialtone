@@ -7,7 +7,7 @@ storybook: https://dialtone.dialpad.com/vue/?path=/story/components-stack--defau
 ---
 
 <code-well-header>
-  <dt-stack gap="600" align="center">
+  <dt-stack gap="500" align="center">
     <dt-stack
       gap="500"
       class="d-bgc-moderate-opaque d-bar8"
@@ -42,9 +42,9 @@ storybook: https://dialtone.dialpad.com/vue/?path=/story/components-stack--defau
 
 ## Direction
 
-### Column: Flow Vertically
+### Column
 
-`column` is the default direction and doesn't need to be explictily set.
+`direction="column"` will flow child items vertically, i.e. top to bottom. It is the default direction and doesn't need to be explictily set.
 
 <code-well-header>
   <dt-stack
@@ -77,7 +77,9 @@ vueCode='
 '
 />
 
-### Row: Flow Horizontally
+### Row
+
+`direction="row"` will flow child items horizontally, i.e. left to right.
 
 <code-well-header>
   <dt-stack
@@ -836,7 +838,7 @@ Align items to the start of the main axis (default).
 <code-well-header>
   <dt-stack
     direction="row"
-    gap="0"
+    gap="400"
     justify="start"
     class="d-w100p d-bgc-moderate-opaque d-bar8"
     ref="justifyStartExample"
@@ -852,6 +854,7 @@ Align items to the start of the main axis (default).
 vueCode='
 <dt-stack
   direction="row"
+  gap="400"
   justify="start"
   class="d-w100p"
 >
@@ -869,7 +872,7 @@ Center items along the main axis.
 <code-well-header>
   <dt-stack
     direction="row"
-    gap="0"
+    gap="400"
     justify="center"
     class="d-w100p d-bgc-moderate-opaque d-bar8"
     ref="justifyCenterExample"
@@ -885,6 +888,7 @@ Center items along the main axis.
 vueCode='
 <dt-stack
   direction="row"
+  gap="400"
   justify="center"
   class="d-w100p"
 >
@@ -902,7 +906,7 @@ Align items to the end of the main axis.
 <code-well-header>
   <dt-stack
     direction="row"
-    gap="0"
+    gap="400"
     justify="end"
     class="d-w100p d-bgc-moderate-opaque d-bar8"
     ref="justifyEndExample"
@@ -918,6 +922,7 @@ Align items to the end of the main axis.
 vueCode='
 <dt-stack
   direction="row"
+  gap="400"
   justify="end"
   class="d-w100p"
 >
@@ -935,7 +940,7 @@ Distribute items with equal space around each item.
 <code-well-header>
   <dt-stack
     direction="row"
-    gap="0"
+    gap="400"
     justify="around"
     class="d-w100p d-bgc-moderate-opaque d-bar8"
     ref="justifyAroundExample"
@@ -951,6 +956,7 @@ Distribute items with equal space around each item.
 vueCode='
 <dt-stack
   direction="row"
+  gap="400"
   justify="around"
   class="d-w100p"
 >
@@ -968,7 +974,7 @@ Distribute items with space between them, edges flush to container.
 <code-well-header>
   <dt-stack
     direction="row"
-    gap="0"
+    gap="400"
     justify="between"
     class="d-w100p d-bgc-moderate-opaque d-bar8"
     ref="justifyBetweenExample"
@@ -984,6 +990,7 @@ Distribute items with space between them, edges flush to container.
 vueCode='
 <dt-stack
   direction="row"
+  gap="400"
   justify="between"
   class="d-w100p"
 >
@@ -1001,7 +1008,7 @@ Distribute items with equal space between all items, including edges.
 <code-well-header>
   <dt-stack
     direction="row"
-    gap="0"
+    gap="400"
     justify="evenly"
     class="d-w100p d-bgc-moderate-opaque d-bar8"
     ref="justifyEvenlyExample"
@@ -1017,6 +1024,7 @@ Distribute items with equal space between all items, including edges.
 vueCode='
 <dt-stack
   direction="row"
+  gap="400"
   justify="evenly"
   class="d-w100p"
 >
@@ -1057,6 +1065,7 @@ Stacks column at small screen size and column reverse at large screen
 vueCode='
 <dt-stack
   :direction="{ `default`: `row`, `sm`: `column`, `lg`: `column-reverse` }"
+  gap="500"
 >
   <div>
     Stack item 1
