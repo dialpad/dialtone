@@ -378,7 +378,7 @@ The following functions are available for date formatting.
   <dt-stack
     :direction="{ 'default': 'column', 'md': 'row' }"
     gap="600"
-    class="d-ai-flex-start"
+    align="start"
   >
     <dt-stack align="center">
       <dt-datepicker
