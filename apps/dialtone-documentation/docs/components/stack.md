@@ -1,14 +1,13 @@
 ---
 title: Stack
 description: Stack is a layout component used to group elements together and apply a space between them.
-status: beta
 thumb: true
 image: assets/images/components/stack.png
 storybook: https://dialtone.dialpad.com/vue/?path=/story/components-stack--default
 ---
 
 <code-well-header>
-  <dt-stack direction="row" gap="600" align="center">
+  <dt-stack gap="600" align="center">
     <dt-stack
       gap="500"
       class="d-bgc-moderate-opaque d-bar8"
@@ -71,15 +70,9 @@ vueCode='
 <dt-stack
   gap="500"
 >
-  <div>
-    Stack item 1
-  </div>
-  <div>
-    Stack item 2
-  </div>
-  <div>
-    Stack item 3
-  </div>
+  <div> Stack item 1 </div>
+  <div> Stack item 2 </div>
+  <div> Stack item 3 </div>
 </dt-stack>
 '
 />
@@ -112,15 +105,9 @@ vueCode='
   gap="500"
   direction="row"
 >
-  <div>
-    Stack item 1
-  </div>
-  <div>
-    Stack item 2
-  </div>
-  <div>
-    Stack item 3
-  </div>
+  <div> Stack item 1 </div>
+  <div> Stack item 2 </div>
+  <div> Stack item 3 </div>
 </dt-stack>
 '
 showHtmlWarning />
@@ -153,15 +140,9 @@ vueCode='
   gap="500"
   direction="row-reverse"
 >
-  <div>
-    Stack item 1
-  </div>
-  <div>
-    Stack item 2
-  </div>
-  <div>
-    Stack item 3
-  </div>
+  <div> Stack item 1 </div>
+  <div> Stack item 2 </div>
+  <div> Stack item 3 </div>
 </dt-stack>'
 />
 
@@ -193,15 +174,9 @@ vueCode='
   gap="500"
   direction="column-reverse"
 >
-  <div>
-    Stack item 1
-  </div>
-  <div>
-    Stack item 2
-  </div>
-  <div>
-    Stack item 3
-  </div>
+  <div> Stack item 1 </div>
+  <div> Stack item 2 </div>
+  <div> Stack item 3 </div>
 </dt-stack>
 '
 />
@@ -247,7 +222,7 @@ showHtmlWarning />
 
 ### Example: span
 
-Use `as="span"` for inline stacks or when you need an inline container.
+Use `as="span"` when you need an inline container.
 
 <code-well-header>
   <dt-stack
@@ -344,15 +319,9 @@ vueCode='
 <dt-stack
   gap="400"
 >
-  <div>
-    Stack item 1
-  </div>
-  <div>
-    Stack item 2
-  </div>
-  <div>
-    Stack item 3
-  </div>
+  <div> Stack item 1 </div>
+  <div> Stack item 2 </div>
+  <div> Stack item 3 </div>
 </dt-stack>
 '
 />
@@ -597,6 +566,8 @@ vueCode='
 ## Align
 
 The `align` prop controls how items are aligned along the cross-axis (perpendicular to the stack direction). For row stacks, this controls vertical alignment. For column stacks, this controls horizontal alignment.
+
+Available `align` values: `normal` (default), `start`, `center`, `end`, `stretch`, `baseline`.
 
 ### Normal
 
@@ -852,10 +823,6 @@ vueCode='
 '
 showHtmlWarning />
 
-Available `align` values: `normal` (default), `start`, `center`, `end`, `stretch`, `baseline`.
-
-For a comprehensive visual reference of all alignment values, see the [Stack Variants Story](https://dialtone.dialpad.com/vue/?path=/story/components-stack--variants).
-
 ## Justify
 
 The `justify` prop controls how items are distributed along the main axis (the direction of the stack). For row stacks, this controls horizontal distribution. For column stacks, this controls vertical distribution.
@@ -1069,7 +1036,12 @@ For a comprehensive visual reference of all justification values, see the [Stack
 Stacks column at small screen size and column reverse at large screen
 
 <code-well-header>
-  <div class="d-stack d-stack--row d-stack--sm-column d-stack--lg-column-reverse d-stack--gap-500 d-bgc-moderate-opaque">
+  <dt-stack
+    :direction="{ default: `row`, sm: `column`, lg: `column-reverse` }"
+    gap="500"
+    class="d-bgc-moderate-opaque"
+    ref="responsiveDirectionExample"
+  >
     <div class="d-bgc-moderate-opaque d-bar8 d-p8">
       Stack item 1
     </div>
@@ -1079,17 +1051,11 @@ Stacks column at small screen size and column reverse at large screen
     <div class="d-bgc-moderate-opaque d-bar8 d-p8">
       Stack item 3
     </div>
-  </div>
+  </dt-stack>
 </code-well-header>
 
 <code-example-tabs
-htmlCode='
-<div class="d-stack d-stack--row d-stack--sm-column d-stack--lg-column-reverse d-stack--gap-0">
-  <div>Stack item 1</div>
-  <div>Stack item 2</div>
-  <div>Stack item 3</div>
-</div>
-'
+:htmlCode="() => $refs.responsiveDirectionExample"
 vueCode='
 <dt-stack
   :direction="{ `default`: `row`, `sm`: `column`, `lg`: `column-reverse` }"
@@ -1110,7 +1076,11 @@ showHtmlWarning />
 Set `200` as the default gap, `300` for small and larger, `400` for medium, `500` for large, and `600` for extra large. Learn more about how our breakpoints work in the [Responsive Breakpoints documentation](/utilities/responsive/breakpoints.md).
 
 <code-well-header>
-  <dt-stack :gap="{ default: '200', xl: '600', lg: '500', md: '400', sm: '300' }" class="d-bgc-moderate-opaque">
+  <dt-stack
+    :gap="{ default: '200', xl: '600', lg: '500', md: '400', sm: '300' }"
+    class="d-bgc-moderate-opaque"
+    ref="responsiveGapExample"
+  >
     <div class="d-bgc-moderate-opaque d-bar8 d-p8">
       Stack item 1
     </div>
@@ -1124,24 +1094,12 @@ Set `200` as the default gap, `300` for small and larger, `400` for medium, `500
 </code-well-header>
 
 <code-example-tabs
-htmlCode='
-<div class="d-stack d-stack--gap-300 d-stack--sm-gap-300 d-stack--md-gap-400 d-stack--lg-gap-500 d-stack--xl-gap-600">
-  <div class="d-bgc-moderate-opaque">Stack item 1</div>
-  <div class="d-bgc-moderate-opaque">Stack item 2</div>
-  <div class="d-bgc-moderate-opaque">Stack item 3</div>
-</div>
-'
+:htmlCode="() => $refs.responsiveGapExample"
 vueCode='
 <dt-stack :gap="{ default: `300`, xl: `600`, lg: `500`, md: `400`, sm: `300` }">
-  <div class="d-bgc-moderate-opaque">
-    Stack item 1
-  </div>
-  <div class="d-bgc-moderate-opaque">
-    Stack item 2
-  </div>
-  <div class="d-bgc-moderate-opaque">
-    Stack item 3
-  </div>
+  <div> Stack item 1 </div>
+  <div> Stack item 2 </div>
+  <div> Stack item 3 </div>
 </dt-stack>
 '
 />
