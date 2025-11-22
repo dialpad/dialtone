@@ -1,6 +1,6 @@
 ---
 title: Stack
-description: Foundational layout primitive for grouping elements along a single axis with consistent spacing and alignment.
+description: Foundational layout primitive for elements along a vertical or horizontal axis, with consistent spacing and alignment.
 thumb: true
 image: assets/images/components/stack.png
 storybook: https://dialtone.dialpad.com/vue/?path=/story/components-stack--default
