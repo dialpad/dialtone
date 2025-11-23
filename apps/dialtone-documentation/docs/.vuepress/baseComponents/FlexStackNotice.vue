@@ -9,8 +9,8 @@
     <router-link class="d-link d-link--muted" to="/components/stack">
       DtStack
     </router-link>
-    component for most Flex-based layout implementations.
-    Only resort to using Flex utilities when the Stack component is insufficient for your layout needs.
+    component for most Flex-based layout implementations. Flex CSS Utilities can
+    still be used on the Stack component for properties not available on the Stack component.
   </dt-notice>
 </template>
 
