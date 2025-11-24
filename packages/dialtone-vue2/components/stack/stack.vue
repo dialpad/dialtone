@@ -1,6 +1,7 @@
 <template>
   <component
     :is="as"
+    data-qa="dt-stack"
     :class="[
       'd-stack',
       defaultDirection,
