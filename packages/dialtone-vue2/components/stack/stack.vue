@@ -30,8 +30,8 @@ export default {
      * You can override the default direction with 'default' key.
      * All the undefined breakpoints will have 'default' value.
      * By default, for the column direction it will have `justify-content: flex-start`
-     * and for the row direction `align-items: center`. This can be overriden
-     * by utility classes.
+     * and for the row direction `align-items: center`. This can be overridden
+     * using the `align` and `justify` props.
      */
     direction: {
       type: [String, Object],
