@@ -35,7 +35,7 @@ If you don't care about theming and just want to use Dialtone with the default l
 @import "@dialpad/dialtone/css-default-theme";
 ```
 
-- Javascript
+- JavaScript
 
 ```js
 import "@dialpad/dialtone/css-default-theme";
@@ -51,13 +51,13 @@ If you want to use theming, import from the below path. This file does not inclu
 @import "@dialpad/dialtone/css";
 ```
 
-- Javascript
+- JavaScript
 
 ```js
 import "@dialpad/dialtone/css";
 ```
 
-##### Set theme via setTheme() javascript function (preferred)
+##### Set theme via setTheme() JavaScript function (preferred)
 
 Import the theme you want to use and set it via the `setTheme` function:
 
@@ -78,7 +78,7 @@ Possible themes are as follows:
 - ExpressiveSmLight - Marketing Small Light
 - ExpressiveSmDark - Marketing Small Dark
 
-There is an optional second parameter to `setTheme` that allows you to set the theme on a specific element. This is useful in the case of a Shadow DOM
+There is an optional second parameter to `setTheme` that allows you to set the theme on a specific element. This is useful in the case of a shadow DOM
 when you want to apply the theme to the root element of the shadow DOM rather than the document root. If you do not set this parameter the theme will be applied to the document root.
 
 ```js
@@ -89,7 +89,7 @@ setTheme(DpLight, document.querySelector('#my-shadow-root-host'));
 
 ##### Set theme manually by importing files
 
-You may want to use this method if you are unable to use javascript.
+You may want to use this method if you are unable to use JavaScript.
 
 You need to import two tokens files in order to apply a theme. A base tokens files, which is either light or dark, and
 a semantic brand tokens file which is named after a brand and theme 'tokens-dp-light', 'tokens-dp-dark', 'tokens-tmo-light', ...
@@ -101,7 +101,7 @@ a semantic brand tokens file which is named after a brand and theme 'tokens-dp-l
 @import "@dialpad/dialtone/tokens/tokens-dp-light.css" // Dialpad light brand
 ```
 
-- Javascript
+- JavaScript
 
 ```js
 import "@dialpad/dialtone/tokens/tokens-base-light.css" // Base light theme
@@ -117,7 +117,7 @@ import "@dialpad/dialtone/tokens/tokens-dp-light.css" // Dialpad light brand
 import { DtIconArrowUp } from '@dialpad/dialtone-icons/vue2';
 import { DtIllustrationBlankSpace } from '@dialpad/dialtone-icons/vue2';
 
-// Default import (Prefered if using webpack as it is tree-shakeable by default)
+// Default import (Preferred if using webpack as it is tree-shakeable by default)
 import DtIconArrowUp from '@dialpad/dialtone-icons/vue2/arrow-up';
 import DtIllustrationBlankSpace from '@dialpad/dialtone-icons/vue2/blank-space';
 ```
@@ -129,7 +129,7 @@ import DtIllustrationBlankSpace from '@dialpad/dialtone-icons/vue2/blank-space';
 import { DtIconArrowUp } from '@dialpad/dialtone-icons/vue3';
 import { DtIllustrationBlankSpace } from '@dialpad/dialtone-icons/vue3';
 
-// Default import (Prefered if using webpack as it is tree-shakeable by default)
+// Default import (Preferred if using webpack as it is tree-shakeable by default)
 import DtIconArrowUp from '@dialpad/dialtone-icons/vue3/arrow-up';
 import DtIllustrationBlankSpace from '@dialpad/dialtone-icons/vue3/blank-space';
 ```
@@ -152,7 +152,7 @@ import { DtButton } from "@dialpad/dialtone/vue2/lib/button"
 // Named import
 import { DtButton } from "@dialpad/dialtone/vue3"
 
-// Default import (Prefered if using webpack as it is tree-shakeable by default)
+// Default import (Preferred if using webpack as it is tree-shakeable by default)
 import { DtButton } from "@dialpad/dialtone/vue3/lib/button"
 ```
 
@@ -342,9 +342,9 @@ if they need to run before a specific command.
 - Improve the speed of the command execution by saving its output to cache.
 - Run the command on the [affected](https://nx.dev/nx-api/nx/documents/affected) projects only.
 
-⚠️ You can run the commands with PNPM too, but it's not advisable as You'll lose the advantages that NX provides.
+⚠️ You can run the commands with PNPM too, but it's not advisable as you'll lose the advantages that NX provides.
 
-For more information, check [setup a monorepo with PNPM workspaces and NX](https://blog.nrwl.io/setup-a-monorepo-with-pnpm-workspaces-and-speed-it-up-with-nx-bc5d97258a7e#d69f)
+For more information, check [setup a monorepo with PNPM workspaces and NX](https://nx.dev/blog/setup-a-monorepo-with-pnpm-workspaces-and-speed-it-up-with-nx)
 
 ##### Installation
 

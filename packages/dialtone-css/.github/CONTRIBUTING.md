@@ -63,9 +63,9 @@ Now in variation `d-avatar--sm`, we just set `--avatar--size`. Width and height 
 
 Our code is linted by:
 
-- [stylelint](https://stylelint.io).
-- [eslint](https://eslint.org).
-- [markdownlint](https://github.com/DavidAnson/markdownlint).
+- [stylelint](https://stylelint.io)
+- [eslint](https://eslint.org)
+- [markdownlint](https://github.com/DavidAnson/markdownlint)
 
 Configuration can be found in:
 
