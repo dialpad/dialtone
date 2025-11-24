@@ -50,7 +50,7 @@ describe('DtStack Tests', () => {
     });
 
     describe('non expected string value', () => {
-      it('should do not add inexistent class', async () => {
+      it('should not add non-existent class', async () => {
         await wrapper.setProps({ direction: 'invalid' });
 
         expect(wrapper.classes().includes('d-stack--invalid')).toBe(false);
@@ -86,8 +86,8 @@ describe('DtStack Tests', () => {
     });
 
     describe('non expected object value', () => {
-      describe('When is provided with non expected breakpoint value', () => {
-        it('should do not add inexistent breakpoint class', async () => {
+      describe('When provided with non expected breakpoint value', () => {
+        it('should not add non-existent breakpoint class', async () => {
           await wrapper.setProps({ direction: { invalid: 'column' } });
 
           expect(wrapper.classes().includes('d-stack--invalid-column')).toBe(false);
@@ -95,7 +95,7 @@ describe('DtStack Tests', () => {
       });
 
       describe('When `default` is provided with non expected direction value', () => {
-        it('should do not add inexistent direction class', async () => {
+        it('should not add non-existent direction class', async () => {
           await wrapper.setProps({ direction: { default: 'roww' } });
 
           expect(wrapper.classes().includes('d-stack--roww')).toBe(false);
@@ -158,19 +158,147 @@ describe('DtStack Tests', () => {
     });
 
     describe('non expected object value', () => {
-      describe('When is provided with non expected breakpoint value', () => {
-        it('should do not add inexistent breakpoint class', async () => {
+      describe('When provided with non expected breakpoint value', () => {
+        it('should not add non-existent breakpoint class', async () => {
           await wrapper.setProps({ gap: { invalid: '400' } });
 
           expect(wrapper.classes().includes('d-stack--invalid-gap-400')).toBe(false);
         });
       });
 
-      describe('When `default` is provided with non expected direction value', () => {
-        it('should do not add inexistent direction class', async () => {
+      describe('When `default` is provided with non expected gap value', () => {
+        it('should not add non-existent gap class', async () => {
           await wrapper.setProps({ gap: { default: '900' } });
 
           expect(wrapper.classes().includes('d-stack--gap-900')).toBe(false);
+        });
+      });
+    });
+  });
+
+  describe('When `align` prop is provided with', () => {
+    describe('valid string value', () => {
+      it('should set proper align class', async () => {
+        await wrapper.setProps({ align: 'center' });
+
+        expect(wrapper.classes().includes('d-stack--align-center')).toBe(true);
+      });
+    });
+
+    describe('non valid string value', () => {
+      it('should not set align class', async () => {
+        await wrapper.setProps({ align: 'invalid' });
+
+        expect(wrapper.classes().includes('d-stack--align-invalid')).toBe(false);
+      });
+    });
+
+    describe('expected object value', () => {
+      it('should set proper responsive classes', async () => {
+        await wrapper.setProps({
+          align: {
+            sm: 'center',
+            md: 'end',
+            lg: 'stretch',
+            xl: 'baseline',
+          },
+        });
+
+        expect(wrapper.classes(
+          'd-stack--sm-align-center',
+          'd-stack--md-align-end',
+          'd-stack--lg-align-stretch',
+          'd-stack--xl-align-baseline',
+        )).toBe(true);
+      });
+
+      describe('When `default` is provided', () => {
+        it('should override the default value', async () => {
+          await wrapper.setProps({ align: { default: 'end' } });
+
+          expect(wrapper.classes('d-stack', 'd-stack--align-end')).toBe(true);
+        });
+      });
+    });
+
+    describe('non expected object value', () => {
+      describe('When provided with non expected breakpoint value', () => {
+        it('should not add non-existent breakpoint class', async () => {
+          await wrapper.setProps({ align: { invalid: 'center' } });
+
+          expect(wrapper.classes().includes('d-stack--invalid-align-center')).toBe(false);
+        });
+      });
+
+      describe('When `default` is provided with non expected align value', () => {
+        it('should not add non-existent align class', async () => {
+          await wrapper.setProps({ align: { default: 'invalid' } });
+
+          expect(wrapper.classes().includes('d-stack--align-invalid')).toBe(false);
+        });
+      });
+    });
+  });
+
+  describe('When `justify` prop is provided with', () => {
+    describe('valid string value', () => {
+      it('should set proper justify class', async () => {
+        await wrapper.setProps({ justify: 'center' });
+
+        expect(wrapper.classes().includes('d-stack--justify-center')).toBe(true);
+      });
+    });
+
+    describe('non valid string value', () => {
+      it('should not set justify class', async () => {
+        await wrapper.setProps({ justify: 'invalid' });
+
+        expect(wrapper.classes().includes('d-stack--justify-invalid')).toBe(false);
+      });
+    });
+
+    describe('expected object value', () => {
+      it('should set proper responsive classes', async () => {
+        await wrapper.setProps({
+          justify: {
+            sm: 'center',
+            md: 'end',
+            lg: 'between',
+            xl: 'around',
+          },
+        });
+
+        expect(wrapper.classes(
+          'd-stack--sm-justify-center',
+          'd-stack--md-justify-end',
+          'd-stack--lg-justify-between',
+          'd-stack--xl-justify-around',
+        )).toBe(true);
+      });
+
+      describe('When `default` is provided', () => {
+        it('should override the default value', async () => {
+          await wrapper.setProps({ justify: { default: 'between' } });
+
+          expect(wrapper.classes('d-stack', 'd-stack--justify-between')).toBe(true);
+        });
+      });
+    });
+
+    describe('non expected object value', () => {
+      describe('When provided with non expected breakpoint value', () => {
+        it('should not add non-existent breakpoint class', async () => {
+          await wrapper.setProps({ justify: { invalid: 'center' } });
+
+          expect(wrapper.classes().includes('d-stack--invalid-justify-center')).toBe(false);
+        });
+      });
+
+      describe('When `default` is provided with non expected justify value', () => {
+        it('should not add non-existent justify class', async () => {
+          await wrapper.setProps({ justify: { default: 'invalid' } });
+
+          expect(wrapper.classes().includes('d-stack--justify-invalid')).toBe(false);
         });
       });
     });

@@ -17,6 +17,7 @@ import ComponentCombinator from './baseComponents/ComponentCombinator.vue';
 import CodeExampleTabs from './baseComponents/CodeExampleTabs.vue';
 import SvgLoader from './baseComponents/SvgLoader.vue';
 import DialtoneUsage from './baseComponents/DialtoneUsage.vue';
+import FlexStackNotice from './baseComponents/FlexStackNotice.vue';
 
 export default defineClientConfig({
   enhance ({ app }) {
@@ -36,6 +37,7 @@ export default defineClientConfig({
     app.component('CodeExampleTabs', CodeExampleTabs);
     app.component('SvgLoader', SvgLoader);
     app.component('DialtoneUsage', DialtoneUsage);
+    app.component('FlexStackNotice', FlexStackNotice);
   },
   setup () {
     const headers = shallowRef([]);
