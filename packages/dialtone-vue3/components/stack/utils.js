@@ -16,9 +16,9 @@ function _getDefaultValue (value) {
 }
 
 function _getValidDirection (direction) {
-  if (directionPropType(direction) === 'string') {
+  if (typeof direction === 'string') {
     return !_isDefaultDirection(direction) ? DT_STACK_DIRECTION[direction] : null;
-  } else if (directionPropType(direction) === 'object') {
+  } else if (typeof direction === 'object') {
     const { default: defaultStyle } = direction;
 
     return !_isDefaultDirection(defaultStyle) ? DT_STACK_DIRECTION[defaultStyle] : null;
@@ -52,10 +52,6 @@ function _getResponsiveClasses (propValue, propName, validValues, classPrefix = 
 
     return isValid ? className : null;
   });
-}
-
-export function directionPropType (value) {
-  return typeof value;
 }
 
 export function getDefaultDirectionClass (direction) {
