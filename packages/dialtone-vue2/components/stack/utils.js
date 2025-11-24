@@ -4,6 +4,17 @@ function _isDefaultDirection (direction) {
   return direction === DT_STACK_DIRECTION.default;
 }
 
+/**
+ * Generic helper to extract default value from string or object props
+ * @param {string|Object} value - The prop value
+ * @returns {string|null} The default value or null
+ */
+function _getDefaultValue (value) {
+  if (typeof value === 'string') return value;
+  if (typeof value === 'object' && value !== null) return value.default;
+  return null;
+}
+
 function _getValidDirection (direction) {
   if (directionPropType(direction) === 'string') {
     return !_isDefaultDirection(direction) ? DT_STACK_DIRECTION[direction] : null;
@@ -14,28 +25,33 @@ function _getValidDirection (direction) {
   } else { return null; }
 }
 
-function _getValidGap (gap) {
-  if (typeof gap === 'string') {
-    return gap;
-  } else if (typeof gap === 'object') {
-    return gap.default;
-  } else { return null; }
-}
+/**
+ * Generic helper to generate responsive classes for any prop
+ * @param {Object} propValue - The prop value object with breakpoint keys
+ * @param {string} propName - The name of the prop (e.g., 'gap', 'align')
+ * @param {Array|Object} validValues - Valid values (array or object for direction)
+ * @param {string} classPrefix - CSS class prefix (default: 'd-stack')
+ * @returns {Array} Array of CSS class names
+ */
+function _getResponsiveClasses (propValue, propName, validValues, classPrefix = 'd-stack') {
+  if (typeof propValue !== 'object' || propValue === null) return [];
 
-function _getValidAlign (align) {
-  if (typeof align === 'string') {
-    return align;
-  } else if (typeof align === 'object') {
-    return align.default;
-  } else { return null; }
-}
+  return DT_STACK_RESPONSIVE_BREAKPOINTS.map((breakpoint) => {
+    const value = propValue[breakpoint];
+    if (!value) return null;
 
-function _getValidJustify (justify) {
-  if (typeof justify === 'string') {
-    return justify;
-  } else if (typeof justify === 'object') {
-    return justify.default;
-  } else { return null; }
+    // Handle both array (gap, align, justify) and object (direction) validValues
+    const isValid = Array.isArray(validValues)
+      ? validValues.includes(value)
+      : value in validValues;
+
+    // For direction, we don't need the prop name in the class
+    const className = propName === ''
+      ? `${classPrefix}--${breakpoint}-${value}`
+      : `${classPrefix}--${breakpoint}-${propName}-${value}`;
+
+    return isValid ? className : null;
+  });
 }
 
 export function directionPropType (value) {
@@ -48,70 +64,42 @@ export function getDefaultDirectionClass (direction) {
     : null;
 }
 
-function getResposiveDirectionClasses (direction) {
-  if (directionPropType(direction) === 'object') {
-    return [
-      ...DT_STACK_RESPONSIVE_BREAKPOINTS.map((breakpoint) => {
-        return direction[breakpoint]
-          ? `d-stack--${breakpoint}-${direction[breakpoint]}`
-          : null;
-      })];
-  } else { return []; }
+function getResponsiveDirectionClasses (direction) {
+  return _getResponsiveClasses(direction, '', DT_STACK_DIRECTION);
 }
 
-function getResposiveGapClasses (gap) {
-  if (typeof gap === 'object') {
-    return [
-      ...DT_STACK_RESPONSIVE_BREAKPOINTS.map((breakpoint) => {
-        return DT_STACK_GAP.includes(gap[breakpoint])
-          ? `d-stack--${breakpoint}-gap-${gap[breakpoint]}`
-          : null;
-      })];
-  } else { return []; }
+function getResponsiveGapClasses (gap) {
+  return _getResponsiveClasses(gap, 'gap', DT_STACK_GAP);
 }
 
 function getResponsiveAlignClasses (align) {
-  if (typeof align === 'object') {
-    return [
-      ...DT_STACK_RESPONSIVE_BREAKPOINTS.map((breakpoint) => {
-        return DT_STACK_ALIGN.includes(align[breakpoint])
-          ? `d-stack--${breakpoint}-align-${align[breakpoint]}`
-          : null;
-      })];
-  } else { return []; }
+  return _getResponsiveClasses(align, 'align', DT_STACK_ALIGN);
 }
 
 function getResponsiveJustifyClasses (justify) {
-  if (typeof justify === 'object') {
-    return [
-      ...DT_STACK_RESPONSIVE_BREAKPOINTS.map((breakpoint) => {
-        return DT_STACK_JUSTIFY.includes(justify[breakpoint])
-          ? `d-stack--${breakpoint}-justify-${justify[breakpoint]}`
-          : null;
-      })];
-  } else { return []; }
+  return _getResponsiveClasses(justify, 'justify', DT_STACK_JUSTIFY);
 }
 
 export function getResponsiveClasses (direction, gap, align, justify) {
   return [
-    ...getResposiveDirectionClasses(direction),
-    ...getResposiveGapClasses(gap),
+    ...getResponsiveDirectionClasses(direction),
+    ...getResponsiveGapClasses(gap),
     ...getResponsiveAlignClasses(align),
     ...getResponsiveJustifyClasses(justify),
   ];
 }
 
 export function getDefaultGapClass (gap) {
-  const validGap = _getValidGap(gap);
+  const validGap = _getDefaultValue(gap);
   return DT_STACK_GAP.includes(validGap) ? `d-stack--gap-${validGap}` : null;
 }
 
 export function getDefaultAlignClass (align) {
-  const validAlign = _getValidAlign(align);
+  const validAlign = _getDefaultValue(align);
   return DT_STACK_ALIGN.includes(validAlign) ? `d-stack--align-${validAlign}` : null;
 }
 
 export function getDefaultJustifyClass (justify) {
-  const validJustify = _getValidJustify(justify);
+  const validJustify = _getDefaultValue(justify);
   return DT_STACK_JUSTIFY.includes(validJustify) ? `d-stack--justify-${validJustify}` : null;
 }
