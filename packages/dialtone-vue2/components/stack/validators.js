@@ -7,7 +7,8 @@ export function directionValidator (direction) {
     const { default: defaultStyle } = direction;
 
     return Object.keys(DT_STACK_DIRECTION).includes(defaultStyle);
-  } else { return null; }
+  }
+  return false;
 }
 
 export function gapValidator (gap) {
@@ -19,6 +20,7 @@ export function gapValidator (gap) {
 
     return DT_STACK_GAP.includes(defaultStyle);
   }
+  return false;
 }
 
 export function alignValidator (align) {
@@ -30,6 +32,7 @@ export function alignValidator (align) {
 
     return DT_STACK_ALIGN.includes(defaultStyle);
   }
+  return false;
 }
 
 export function justifyValidator (justify) {
@@ -41,4 +44,5 @@ export function justifyValidator (justify) {
 
     return DT_STACK_JUSTIFY.includes(defaultStyle);
   }
+  return false;
 }
