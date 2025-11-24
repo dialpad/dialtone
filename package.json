@@ -8,7 +8,8 @@
     "prepack": "nx run dialtone:build",
     "clean": "pnpm clean:dist && pnpm clean:cache",
     "clean:dist": "rm -rf packages/dialtone-tokens/dist apps/dialtone-documentation/docs/.vuepress/.cache apps/dialtone-documentation/docs/.vuepress/.temp",
-    "clean:cache": "pnpm nx reset --onlyCache"
+    "clean:cache": "pnpm nx reset --onlyCache",
+    "migrate:flex-to-stack": "node scripts/migrate-flex-to-stack.mjs"
   },
   "pnpm": {
     "peerDependencyRules": {
