@@ -1,3 +1,10 @@
+# [2.203.0](https://github.com/dialpad/dialtone/compare/dialtone-vue2/v2.202.0...dialtone-vue2/v2.203.0) (2025-11-21)
+
+
+### Features
+
+* **Keyboard Shortcut:** NO-JIRA improve a11y labeling and improve spacing ([#974](https://github.com/dialpad/dialtone/issues/974)) ([9053dbc](https://github.com/dialpad/dialtone/commit/9053dbc2134916f02798717636edd330bd6853cb))
+
 # [2.202.0](https://github.com/dialpad/dialtone/compare/dialtone-vue2/v2.201.1...dialtone-vue2/v2.202.0) (2025-11-18)
 
 

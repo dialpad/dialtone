@@ -1,3 +1,15 @@
+# [8.69.0](https://github.com/dialpad/dialtone/compare/dialtone-css/v8.68.0...dialtone-css/v8.69.0) (2025-11-21)
+
+
+### Bug Fixes
+
+* **Avatar:** NO-JIRA update padding and white-space for multi-digit group count ([#975](https://github.com/dialpad/dialtone/issues/975)) ([04ecb13](https://github.com/dialpad/dialtone/commit/04ecb13f9e9d5b4f79e71750e7dae940ed8fa802))
+
+
+### Features
+
+* **Keyboard Shortcut:** NO-JIRA improve a11y labeling and improve spacing ([#974](https://github.com/dialpad/dialtone/issues/974)) ([9053dbc](https://github.com/dialpad/dialtone/commit/9053dbc2134916f02798717636edd330bd6853cb))
+
 # [8.68.0](https://github.com/dialpad/dialtone/compare/dialtone-css/v8.67.0...dialtone-css/v8.68.0) (2025-11-18)
 
 

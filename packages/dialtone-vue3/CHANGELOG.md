@@ -1,3 +1,15 @@
+# [3.195.0](https://github.com/dialpad/dialtone/compare/dialtone-vue3/v3.194.0...dialtone-vue3/v3.195.0) (2025-11-21)
+
+
+### Bug Fixes
+
+* DP-161959 modelValue selects the default option correctly ([#977](https://github.com/dialpad/dialtone/issues/977)) ([517d312](https://github.com/dialpad/dialtone/commit/517d312923b09e68c9299d1e97126c0a1f828c25))
+
+
+### Features
+
+* **Keyboard Shortcut:** NO-JIRA improve a11y labeling and improve spacing ([#974](https://github.com/dialpad/dialtone/issues/974)) ([9053dbc](https://github.com/dialpad/dialtone/commit/9053dbc2134916f02798717636edd330bd6853cb))
+
 # [3.194.0](https://github.com/dialpad/dialtone/compare/dialtone-vue3/v3.193.1...dialtone-vue3/v3.194.0) (2025-11-18)
 
 

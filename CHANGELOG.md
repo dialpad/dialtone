@@ -1,3 +1,16 @@
+# [9.148.0](https://github.com/dialpad/dialtone/compare/dialtone/v9.147.0...dialtone/v9.148.0) (2025-11-21)
+
+
+### Bug Fixes
+
+* **Avatar:** NO-JIRA update padding and white-space for multi-digit group count ([#975](https://github.com/dialpad/dialtone/issues/975)) ([04ecb13](https://github.com/dialpad/dialtone/commit/04ecb13f9e9d5b4f79e71750e7dae940ed8fa802))
+* DP-161959 modelValue selects the default option correctly ([#977](https://github.com/dialpad/dialtone/issues/977)) ([517d312](https://github.com/dialpad/dialtone/commit/517d312923b09e68c9299d1e97126c0a1f828c25))
+
+
+### Features
+
+* **Keyboard Shortcut:** NO-JIRA improve a11y labeling and improve spacing ([#974](https://github.com/dialpad/dialtone/issues/974)) ([9053dbc](https://github.com/dialpad/dialtone/commit/9053dbc2134916f02798717636edd330bd6853cb))
+
 # [9.147.0](https://github.com/dialpad/dialtone/compare/dialtone/v9.146.0...dialtone/v9.147.0) (2025-11-18)
 
 
