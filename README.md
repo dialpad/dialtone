@@ -196,7 +196,7 @@ dialtone/
 Dialtone is a mono-package that includes many packages within it to ease the maintenance of versions of
 the library.
 
-#### How does our bundling works
+#### How our bundling works
 
 To achieve this we needed to create certain configs through the monorepo to be able to handle them even if
 they have the same package name e.g: `@dialpad/dialtone-vue`.
