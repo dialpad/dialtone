@@ -1,7 +1,26 @@
 /**
- * @fileoverview Recommends using align/justify props instead of CSS utilities on Stack component
+ * @fileoverview Recommends using props instead of CSS utilities on Stack component
  */
 "use strict";
+
+//------------------------------------------------------------------------------
+// Constants
+//------------------------------------------------------------------------------
+
+/**
+ * Gap utility classes that have DtStack equivalents.
+ * Maps utility class suffix to DtStack gap prop value.
+ * Gaps > 64px have no equivalent and should not be flagged.
+ */
+const GAP_WITH_EQUIVALENTS = {
+  '0': '0',
+  '8': '400',
+  '16': '500',
+  '24': '550',
+  '32': '600',
+  '48': '650',
+  '64': '700',
+};
 
 //------------------------------------------------------------------------------
 // Rule Definition
@@ -11,7 +30,7 @@ module.exports = {
   meta: {
     type: 'suggestion',
     docs: {
-      description: "Recommend using align/justify props instead of CSS utilities on Stack component",
+      description: "Recommend using props instead of CSS utilities on Stack component",
       recommended: false,
       url: 'https://github.com/dialpad/dialtone/blob/staging/packages/eslint-plugin-dialtone/docs/rules/deprecated-stack-alignment-classes.md',
     },
@@ -20,6 +39,9 @@ module.exports = {
     messages: {
       useAlignProp: 'Use the `align` prop instead of `d-ai-*` utility classes on <dt-stack>. See: https://dialtone.dialpad.com/components/stack.html#align',
       useJustifyProp: 'Use the `justify` prop instead of `d-jc-*` utility classes on <dt-stack>. See: https://dialtone.dialpad.com/components/stack.html#justify',
+      useDirectionProp: 'Use the `direction` prop instead of `d-fd-*` utility classes on <dt-stack>. See: https://dialtone.dialpad.com/components/stack.html#direction',
+      useGapProp: 'Use the `gap` prop instead of `d-g*` utility classes on <dt-stack>. See: https://dialtone.dialpad.com/components/stack.html#gap',
+      removeRedundantFlex: 'Remove `d-d-flex` from <dt-stack> - it is already a flex container.',
     },
   },
 
@@ -51,6 +73,31 @@ module.exports = {
               context.report({
                 node: classAttr,
                 messageId: 'useJustifyProp',
+              });
+            }
+
+            // Check for d-fd-* classes (flex-direction utilities)
+            if (/d-fd-(row|column|row-reverse|column-reverse)/.test(classes)) {
+              context.report({
+                node: classAttr,
+                messageId: 'useDirectionProp',
+              });
+            }
+
+            // Check for d-g* classes (gap utilities) - only those with DtStack equivalents
+            const gapMatch = classes.match(/\bd-g(\d+)\b/);
+            if (gapMatch && GAP_WITH_EQUIVALENTS[gapMatch[1]]) {
+              context.report({
+                node: classAttr,
+                messageId: 'useGapProp',
+              });
+            }
+
+            // Check for d-d-flex (redundant on DtStack)
+            if (/\bd-d-flex\b/.test(classes)) {
+              context.report({
+                node: classAttr,
+                messageId: 'removeRedundantFlex',
               });
             }
           }

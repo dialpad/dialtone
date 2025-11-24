@@ -1,5 +1,5 @@
 /**
- * @fileoverview Recommends using align/justify props instead of CSS utilities on Stack component
+ * @fileoverview Recommends using props instead of CSS utilities on Stack component
  */
 "use strict";
 
@@ -50,6 +50,34 @@ ruleTester.run("deprecated-stack-alignment-classes", rule, {
     // Stack with no classes
     {
       code: "<template><dt-stack>...</dt-stack></template>",
+    },
+    // Stack with direction prop (correct usage)
+    {
+      code: "<template><dt-stack direction=\"row\">...</dt-stack></template>",
+    },
+    // Stack with gap prop (correct usage)
+    {
+      code: "<template><dt-stack gap=\"500\">...</dt-stack></template>",
+    },
+    // Regular div with d-fd-* (not a Stack component)
+    {
+      code: "<template><div class=\"d-fd-row\">...</div></template>",
+    },
+    // Regular div with d-g* (not a Stack component)
+    {
+      code: "<template><div class=\"d-g16\">...</div></template>",
+    },
+    // Regular div with d-d-flex (not a Stack component)
+    {
+      code: "<template><div class=\"d-d-flex\">...</div></template>",
+    },
+    // Stack with gap utility that has no DtStack equivalent (d-g80, d-g96, etc.)
+    {
+      code: "<template><dt-stack class=\"d-g80\">...</dt-stack></template>",
+    },
+    // Stack with gap utility that has no DtStack equivalent (d-g96)
+    {
+      code: "<template><dt-stack class=\"d-g96\">...</dt-stack></template>",
     },
   ],
 
@@ -144,6 +172,124 @@ ruleTester.run("deprecated-stack-alignment-classes", rule, {
   </dt-stack>
 </template>`,
       errors: [{ messageId: 'useAlignProp' }],
+    },
+
+    // ========================================
+    // Direction utilities (d-fd-*)
+    // ========================================
+
+    // Stack with d-fd-row
+    {
+      code: "<template><dt-stack class=\"d-fd-row\">...</dt-stack></template>",
+      errors: [{ messageId: 'useDirectionProp' }],
+    },
+    // Stack with d-fd-column
+    {
+      code: "<template><dt-stack class=\"d-fd-column\">...</dt-stack></template>",
+      errors: [{ messageId: 'useDirectionProp' }],
+    },
+    // Stack with d-fd-row-reverse
+    {
+      code: "<template><dt-stack class=\"d-fd-row-reverse\">...</dt-stack></template>",
+      errors: [{ messageId: 'useDirectionProp' }],
+    },
+    // Stack with d-fd-column-reverse
+    {
+      code: "<template><dt-stack class=\"d-fd-column-reverse\">...</dt-stack></template>",
+      errors: [{ messageId: 'useDirectionProp' }],
+    },
+    // Stack with d-fd-* mixed with other classes
+    {
+      code: "<template><dt-stack class=\"d-p16 d-fd-row d-mb8\">...</dt-stack></template>",
+      errors: [{ messageId: 'useDirectionProp' }],
+    },
+
+    // ========================================
+    // Gap utilities (d-g*) - only with equivalents
+    // ========================================
+
+    // Stack with d-g0
+    {
+      code: "<template><dt-stack class=\"d-g0\">...</dt-stack></template>",
+      errors: [{ messageId: 'useGapProp' }],
+    },
+    // Stack with d-g8
+    {
+      code: "<template><dt-stack class=\"d-g8\">...</dt-stack></template>",
+      errors: [{ messageId: 'useGapProp' }],
+    },
+    // Stack with d-g16
+    {
+      code: "<template><dt-stack class=\"d-g16\">...</dt-stack></template>",
+      errors: [{ messageId: 'useGapProp' }],
+    },
+    // Stack with d-g24
+    {
+      code: "<template><dt-stack class=\"d-g24\">...</dt-stack></template>",
+      errors: [{ messageId: 'useGapProp' }],
+    },
+    // Stack with d-g32
+    {
+      code: "<template><dt-stack class=\"d-g32\">...</dt-stack></template>",
+      errors: [{ messageId: 'useGapProp' }],
+    },
+    // Stack with d-g48
+    {
+      code: "<template><dt-stack class=\"d-g48\">...</dt-stack></template>",
+      errors: [{ messageId: 'useGapProp' }],
+    },
+    // Stack with d-g64
+    {
+      code: "<template><dt-stack class=\"d-g64\">...</dt-stack></template>",
+      errors: [{ messageId: 'useGapProp' }],
+    },
+    // Stack with d-g* mixed with other classes
+    {
+      code: "<template><dt-stack class=\"d-p16 d-g16 d-mb8\">...</dt-stack></template>",
+      errors: [{ messageId: 'useGapProp' }],
+    },
+
+    // ========================================
+    // Redundant d-d-flex
+    // ========================================
+
+    // Stack with d-d-flex (redundant)
+    {
+      code: "<template><dt-stack class=\"d-d-flex\">...</dt-stack></template>",
+      errors: [{ messageId: 'removeRedundantFlex' }],
+    },
+    // Stack with d-d-flex mixed with other classes
+    {
+      code: "<template><dt-stack class=\"d-d-flex d-ai-center\">...</dt-stack></template>",
+      errors: [
+        { messageId: 'useAlignProp' },
+        { messageId: 'removeRedundantFlex' },
+      ],
+    },
+
+    // ========================================
+    // Multiple violations
+    // ========================================
+
+    // Stack with direction, gap, and alignment utilities
+    {
+      code: "<template><dt-stack class=\"d-fd-row d-g16 d-ai-center\">...</dt-stack></template>",
+      errors: [
+        { messageId: 'useAlignProp' },
+        { messageId: 'useDirectionProp' },
+        { messageId: 'useGapProp' },
+      ],
+    },
+    // Stack with all possible violations
+    {
+      code: "<template><dt-stack class=\"d-d-flex d-fd-row d-g16 d-ai-center d-jc-space-between\">...</dt-stack></template>",
+      errors: [
+        { messageId: 'useAlignProp' },
+        { messageId: 'useJustifyProp' },
+        { messageId: 'useDirectionProp' },
+        { messageId: 'useGapProp' },
+        { messageId: 'removeRedundantFlex' },
+      ],
     },
   ],
 });
