@@ -1,6 +1,5 @@
 /**
  * @fileoverview Recommends using align/justify props instead of CSS utilities on Stack component
- * @author Claude Code
  */
 "use strict";
 
