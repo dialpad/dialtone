@@ -5,7 +5,7 @@ description: Utilities for controlling the space between child elements.
 
 <dt-notice kind="error" class="d-wmx100p d-mt24" hideClose>
 
-`d-stack` and `d-flow` utilities are deprecated. Please use the <router-link class="d-link d-link--muted" to="/components/stack/">Stack</router-link> component instead.
+`d-stack` and `d-flow` utilities are deprecated. Please use the <router-link class="d-link d-link--muted" to="/components/stack">Stack</router-link> component instead.
 
 </dt-notice>
 
