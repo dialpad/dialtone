@@ -11,19 +11,19 @@ The `flex` property is a shorthand property for `flex-grow`, `flex-shrink`, and 
 control the grow and shrink flex values separately with their own utility classes.
 
 <code-well-header>
-  <div class="d-d-flex d-w100p d-bar8 d-bgc-moderate">
+  <dt-stack direction="row" class="d-w100p d-bar8 d-bgc-moderate">
     <div class="d-fl-none d-p16 d-ps-relative">Content cannot flex</div>
     <div class="d-fl1 d-p16 d-bgc-moderate-opaque d-ps-relative">Text that will flex</div>
     <div class="d-fl-none d-p16 d-ps-relative">Content cannot flex</div>
-  </div>
+  </dt-stack>
 </code-well-header>
 
 ```html
-<div class="d-d-flex">
+<dt-stack direction="row">
   <div>...</div>
   <div class="d-fl1">...</div>
   <div>...</div>
-</div>
+</dt-stack>
 ```
 
 <clamped-table-wrapper class="d-mb16">
@@ -57,19 +57,19 @@ control the grow and shrink flex values separately with their own utility classe
 The `flex-grow` sets the flex container’s grow factor relative to the parent's main size. The default value is 0.
 
 <code-well-header>
-  <div class="d-d-flex d-w100p d-bar8 d-bgc-moderate">
+  <dt-stack direction="row" class="d-w100p d-bar8 d-bgc-moderate">
     <div class="d-fl-none d-p16">Content cannot flex</div>
     <div class="d-fl-grow1 d-p16 d-bgc-moderate-opaque">Text that will grow</div>
     <div class="d-fl-none d-p16">Content cannot flex</div>
-  </div>
+  </dt-stack>
 </code-well-header>
 
 ```html
-<div class="d-d-flex">
+<dt-stack direction="row">
   <div>...</div>
   <div class="d-fl-grow1">...</div>
   <div>...</div>
-</div>
+</dt-stack>
 ```
 
 <clamped-table-wrapper class="d-mb16">
@@ -103,19 +103,19 @@ The `flex-grow` sets the flex container’s grow factor relative to the parent's
 The `flex-shrink` sets the flex container’s shrink factor relative to the parent's main size. The default value is 1.
 
 <code-well-header>
-  <div class="d-d-flex d-w5 d-bar8 d-bgc-moderate">
+  <dt-stack direction="row" class="d-w5 d-bar8 d-bgc-moderate">
     <div class="d-fl-none d-p16">Longer text that cannot flex</div>
     <div class="d-fl-shrink1 d-p16 d-bgc-moderate-opaque">Text that will shrink even if it causes text to wrap</div>
     <div class="d-fl-none d-p16">Longer text that cannot flex</div>
-  </div>
+  </dt-stack>
 </code-well-header>
 
 ```html
-<div class="d-d-flex">
+<dt-stack direction="row">
   <div>...</div>
   <div class="d-fl-shrink1">...</div>
   <div>...</div>
-</div>
+</dt-stack>
 ```
 
 <clamped-table-wrapper class="d-mb16">

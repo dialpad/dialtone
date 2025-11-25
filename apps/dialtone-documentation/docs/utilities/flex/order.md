@@ -10,19 +10,19 @@ description: Utilities for controlling an element's order within a parent contai
 By default, items are ordered by their position in the DOM. To re-order an element, use `d-order{#}`.
 
 <code-well-header>
-  <div class="d-d-flex d-ai-center d-jc-space-between d-w100p d-bar8 d-bgc-moderate">
+  <dt-stack direction="row" align="center" justify="between" class="d-w100p d-bar8 d-bgc-moderate">
     <div class="d-fl-center d-p16 d-w64 d-h64 d-bgc-moderate-opaque d-bar4">1</div>
     <div class="d-fl-center d-p16 d-w64 d-h64 d-bgc-moderate-opaque d-bar4">2</div>
     <div class="d-fl-center d-p16 d-w64 d-h64 d-bgc-bold-opaque d-bar4 d-order-first">3</div>
-  </div>
+  </dt-stack>
 </code-well-header>
 
 ```html
-<div class="d-d-flex d-ai-center d-jc-space-between">
+<dt-stack align="center" justify="between">
   <div>1</div>
   <div>2</div>
   <div class="d-order-first">3</div>
-</div>
+</dt-stack>
 ```
 
 ## Classes

@@ -7,22 +7,24 @@ description: Utilities for setting how rows are distributed along its cross axis
 
 ## Flex Start
 
-Use `d-ac-flex-start` to pack rows against the start of the element's cross axis. This is the default value.
+Use `d-ac-flex-start` to pack multiple rows against the start of the element's cross axis. This is the default value.
 
 <code-well-header>
   <div class="d-fl-col3 d-g16 d-fw-wrap d-ac-flex-start d-p8 d-w100p d-bar8 d-bgc-moderate d-hmn332">
     <div class="d-fl-center d-p16 d-h64 d-bgc-moderate-opaque d-bar4">1</div>
     <div class="d-fl-center d-p16 d-h64 d-bgc-moderate-opaque d-bar4">2</div>
     <div class="d-fl-center d-p16 d-h64 d-bgc-moderate-opaque d-bar4">3</div>
+    <div class="d-fl-center d-p16 d-h64 d-bgc-moderate-opaque d-bar4">4</div>
+    <div class="d-fl-center d-p16 d-h64 d-bgc-moderate-opaque d-bar4">5</div>
   </div>
 </code-well-header>
 
 ```html
-<div class="d-d-flex d-ac-flex-start">
+<dt-stack class="d-ac-flex-start">
   <div>1</div>
   <div>2</div>
   <div>3</div>
-</div>
+</dt-stack>
 ```
 
 ## Center
@@ -34,15 +36,17 @@ Use `d-ac-center` to pack rows along the center of the element's cross axis.
     <div class="d-fl-center d-p16 d-h64 d-bgc-moderate-opaque d-bar4">1</div>
     <div class="d-fl-center d-p16 d-h64 d-bgc-moderate-opaque d-bar4">2</div>
     <div class="d-fl-center d-p16 d-h64 d-bgc-moderate-opaque d-bar4">3</div>
+    <div class="d-fl-center d-p16 d-h64 d-bgc-moderate-opaque d-bar4">4</div>
+    <div class="d-fl-center d-p16 d-h64 d-bgc-moderate-opaque d-bar4">5</div>
   </div>
 </code-well-header>
 
 ```html
-<div class="d-d-flex d-ac-center">
+<dt-stack class="d-ac-center">
   <div>1</div>
   <div>2</div>
   <div>3</div>
-</div>
+</dt-stack>
 ```
 
 ## Flex End
@@ -54,15 +58,17 @@ Use `d-ac-flex-end` to rack rows against the end of the element's main axis.
     <div class="d-fl-center d-p16 d-h64 d-bgc-moderate-opaque d-bar4">1</div>
     <div class="d-fl-center d-p16 d-h64 d-bgc-moderate-opaque d-bar4">2</div>
     <div class="d-fl-center d-p16 d-h64 d-bgc-moderate-opaque d-bar4">3</div>
+    <div class="d-fl-center d-p16 d-h64 d-bgc-moderate-opaque d-bar4">4</div>
+    <div class="d-fl-center d-p16 d-h64 d-bgc-moderate-opaque d-bar4">5</div>
   </div>
 </code-well-header>
 
 ```html
-<div class="d-d-flex d-ac-flex-end">
+<dt-stack class="d-ac-flex-end">
   <div>1</div>
   <div>2</div>
   <div>3</div>
-</div>
+</dt-stack>
 ```
 
 ## Space Around
@@ -80,13 +86,13 @@ Use `d-ac-space-around` to pack rows along the element's cross axis so that ther
 </code-well-header>
 
 ```html
-<div class="d-d-flex d-ac-space-around">
+<dt-stack class="d-ac-space-around">
   <div>1</div>
   <div>2</div>
   <div>3</div>
   <div>4</div>
   <div>5</div>
-</div>
+</dt-stack>
 ```
 
 ## Space Between
@@ -104,13 +110,13 @@ Use `d-ac-space-between` to distribute rows along the element's cross axis so th
 </code-well-header>
 
 ```html
-<div class="d-d-flex d-ac-space-between">
+<dt-stack class="d-ac-space-between">
   <div>1</div>
   <div>2</div>
   <div>3</div>
   <div>4</div>
   <div>5</div>
-</div>
+</dt-stack>
 ```
 
 ## Space Evenly
@@ -129,7 +135,7 @@ Use `d-ac-space-evenly` to distribute rows along the element's cross axis so tha
 </code-well-header>
 
 ```html
-<div class="d-d-flex d-ac-space-evenly">
+<dt-stack class="d-ac-space-evenly">
   <div>1</div>
   <div>2</div>
   <div>3</div>
@@ -138,7 +144,7 @@ Use `d-ac-space-evenly` to distribute rows along the element's cross axis so tha
   <div>6</div>
   <div>7</div>
   <div>8</div>
-</div>
+</dt-stack>
 ```
 
 <script setup>
