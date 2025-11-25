@@ -8,6 +8,8 @@
 //  TABLE OF CONTENTS
 //  • BASE STYLE
 //  • VISUAL STYLES
+//  • ALIGNMENT
+//  • JUSTIFY
 //  • SIZES
 //  • RESPONSIVE STYLE
 
@@ -17,28 +19,18 @@
 .direction-options() {
   &-column {
     --stack-direction: column;
-
-    justify-content: flex-start;
   }
 
   &-column-reverse {
     --stack-direction: column-reverse;
-
-    justify-content: flex-start;
   }
 
   &-row {
     --stack-direction: row;
-
-    align-items: center;
-    justify-content: normal;
   }
 
   &-row-reverse {
     --stack-direction: row-reverse;
-
-    align-items: center;
-    justify-content: normal;
   }
 }
 
@@ -100,6 +92,58 @@
   }
 }
 
+.align-options() {
+  &-align-normal {
+    align-items: normal;
+  }
+
+  &-align-start {
+    align-items: start;
+  }
+
+  &-align-center {
+    align-items: center;
+  }
+
+  &-align-end {
+    align-items: end;
+  }
+
+  &-align-stretch {
+    align-items: stretch;
+  }
+
+  &-align-baseline {
+    align-items: baseline;
+  }
+}
+
+.justify-options() {
+  &-justify-start {
+    justify-content: start;
+  }
+
+  &-justify-center {
+    justify-content: center;
+  }
+
+  &-justify-end {
+    justify-content: end;
+  }
+
+  &-justify-around {
+    justify-content: space-around;
+  }
+
+  &-justify-between {
+    justify-content: space-between;
+  }
+
+  &-justify-evenly {
+    justify-content: space-evenly;
+  }
+}
+
 .d-stack {
   --stack-gap: 0;
   --stack-direction: column;
@@ -107,7 +151,6 @@
   display: flex;
   flex-direction: var(--stack-direction);
   gap: var(--stack-gap);
-  justify-content: flex-start;
 }
 
 //  ============================================================================
@@ -117,8 +160,6 @@
 //  ----------------------------------------------------------------------------
 .d-stack--column-reverse {
   --stack-direction: column-reverse;
-
-  justify-content: flex-start;
 }
 
 //  ----------------------------------------------------------------------------
@@ -126,9 +167,6 @@
 //  ----------------------------------------------------------------------------
 .d-stack--row {
   --stack-direction: row;
-
-  align-items: center;
-  justify-content: normal;
 }
 
 //  ----------------------------------------------------------------------------
@@ -136,9 +174,62 @@
 //  ----------------------------------------------------------------------------
 .d-stack--row-reverse {
   --stack-direction: row-reverse;
+}
 
+//  ============================================================================
+//  $   ALIGNMENT
+//  ----------------------------------------------------------------------------
+
+.d-stack--align-normal {
+  align-items: normal;
+}
+
+.d-stack--align-start {
+  align-items: start;
+}
+
+.d-stack--align-center {
   align-items: center;
-  justify-content: normal;
+}
+
+.d-stack--align-end {
+  align-items: end;
+}
+
+.d-stack--align-stretch {
+  align-items: stretch;
+}
+
+.d-stack--align-baseline {
+  align-items: baseline;
+}
+
+//  ============================================================================
+//  $   JUSTIFY
+//  ----------------------------------------------------------------------------
+
+.d-stack--justify-start {
+  justify-content: start;
+}
+
+.d-stack--justify-center {
+  justify-content: center;
+}
+
+.d-stack--justify-end {
+  justify-content: end;
+}
+
+.d-stack--justify-around {
+  justify-content: space-around;
+}
+
+.d-stack--justify-between {
+  justify-content: space-between;
+}
+
+.d-stack--justify-evenly {
+  justify-content: space-evenly;
 }
 
 //  ============================================================================
@@ -168,6 +259,8 @@
   @media screen and (min-width: 480px) {
     .direction-options();
     .gap-options();
+    .align-options();
+    .justify-options();
   }
 }
 
@@ -177,6 +270,8 @@
   @media screen and (min-width: 640px) {
     .direction-options();
     .gap-options();
+    .align-options();
+    .justify-options();
   }
 }
 
@@ -186,6 +281,8 @@
   @media screen and (min-width: 980px) {
     .direction-options();
     .gap-options();
+    .align-options();
+    .justify-options();
   }
 }
 
@@ -195,5 +292,7 @@
   @media screen and (min-width: 1264px) {
     .direction-options();
     .gap-options();
+    .align-options();
+    .justify-options();
   }
 }

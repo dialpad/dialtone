@@ -9,8 +9,9 @@
       <content />
       <dt-stack
         direction="row"
-        :class="prev ? 'd-jc-space-between' : 'd-jc-flex-end'"
-        class="d-pt32 d-ai-center"
+        :justify="prev ? 'between' : 'end'"
+        align="center"
+        class="d-pt32"
         as="nav"
       >
         <router-link
