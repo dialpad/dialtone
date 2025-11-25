@@ -157,10 +157,71 @@ function findFlexElements(content) {
       attrsAfter: attrsAfter.trim(),
       selfClosing: selfClosing === '/',
       index: match.index,
+      endIndex: match.index + fullMatch.length,
     });
   }
 
   return matches;
+}
+
+/**
+ * Find the matching closing tag for an element, accounting for nesting
+ * @param {string} content - The file content
+ * @param {number} startPos - Position after the opening tag ends
+ * @param {string} tagName - The tag name to find closing tag for
+ * @returns {object|null} - { index, length } of the closing tag, or null if not found
+ */
+function findMatchingClosingTag(content, startPos, tagName) {
+  let depth = 1;
+  let pos = startPos;
+
+  // Regex patterns for this specific tag
+  // Opening tag: <tagName followed by whitespace, >, or />
+  const openPatternStr = `<${tagName}(?:\\s[^>]*?)?>`;
+  const selfClosePatternStr = `<${tagName}(?:\\s[^>]*?)?/>`;
+  const closePatternStr = `</${tagName}>`;
+
+  while (depth > 0 && pos < content.length) {
+    // Find next opening tag (non-self-closing)
+    const openMatch = content.slice(pos).match(new RegExp(openPatternStr));
+    // Find next self-closing tag (doesn't affect depth)
+    const selfCloseMatch = content.slice(pos).match(new RegExp(selfClosePatternStr));
+    // Find next closing tag
+    const closeMatch = content.slice(pos).match(new RegExp(closePatternStr));
+
+    if (!closeMatch) {
+      // No closing tag found - malformed HTML
+      return null;
+    }
+
+    const closePos = pos + closeMatch.index;
+
+    // Check if there's an opening tag before this closing tag
+    let openPos = openMatch ? pos + openMatch.index : Infinity;
+
+    // If the opening tag is actually a self-closing tag, it doesn't count
+    if (selfCloseMatch && openMatch && selfCloseMatch.index === openMatch.index) {
+      openPos = Infinity; // Treat as no opening tag
+    }
+
+    if (openPos < closePos) {
+      // Found an opening tag before the closing tag - increase depth
+      depth++;
+      pos = openPos + openMatch[0].length;
+    } else {
+      // Found a closing tag
+      depth--;
+      if (depth === 0) {
+        return {
+          index: closePos,
+          length: closeMatch[0].length,
+        };
+      }
+      pos = closePos + closeMatch[0].length;
+    }
+  }
+
+  return null; // No matching closing tag found
 }
 
 //------------------------------------------------------------------------------
@@ -201,6 +262,12 @@ function transformElement(element) {
 
   // Build the new element
   let newElement = '<dt-stack';
+
+  // Add `as` prop for non-div elements to preserve semantic HTML
+  const tagLower = element.tagName.toLowerCase();
+  if (tagLower !== 'div') {
+    newElement += ` as="${element.tagName}"`;
+  }
 
   // Add converted props
   for (const { prop, value } of props) {
@@ -293,11 +360,20 @@ async function processFile(filePath, options) {
 
   let changes = 0;
   let skipped = 0;
-  let newContent = content;
   let applyAll = options.yes || false;
+
+  // Collect all transformations with their positions first
+  // We need to process all elements and find their closing tags BEFORE making any changes
+  const transformations = [];
 
   for (const element of elements) {
     const transformation = transformElement(element);
+
+    // Find the matching closing tag position (in original content)
+    let closingTag = null;
+    if (!element.selfClosing) {
+      closingTag = findMatchingClosingTag(content, element.endIndex, element.tagName);
+    }
 
     // Show before/after
     console.log(log.red('   - ') + transformation.original);
@@ -327,27 +403,56 @@ async function processFile(filePath, options) {
     }
 
     if (shouldApply) {
-      // Replace opening tag
-      newContent = newContent.replace(transformation.original, transformation.transformed);
-
-      // Replace closing tag if not self-closing
-      if (!element.selfClosing) {
-        // Only replace the specific closing tag for this element
-        // This is a simplification - a proper solution would track tag nesting
-        newContent = newContent.replace(
-          new RegExp(`</${element.tagName}>`, 'g'),
-          '</dt-stack>',
-        );
-      }
-
+      transformations.push({
+        // Opening tag replacement
+        openStart: element.index,
+        openEnd: element.endIndex,
+        openReplacement: transformation.transformed,
+        // Closing tag replacement (if not self-closing)
+        closeStart: closingTag ? closingTag.index : null,
+        closeEnd: closingTag ? closingTag.index + closingTag.length : null,
+        closeReplacement: '</dt-stack>',
+        selfClosing: element.selfClosing,
+      });
       changes++;
     } else {
       skipped++;
     }
   }
 
-  // Write changes if not dry-run and there were changes
-  if (!options.dryRun && changes > 0) {
+  // Apply all transformations in reverse order (end to start) to preserve positions
+  if (!options.dryRun && transformations.length > 0) {
+    // Sort by position descending (process from end of file to start)
+    // We need to handle both opening and closing tags, so collect all replacements
+    const allReplacements = [];
+
+    for (const t of transformations) {
+      // Add opening tag replacement
+      allReplacements.push({
+        start: t.openStart,
+        end: t.openEnd,
+        replacement: t.openReplacement,
+      });
+
+      // Add closing tag replacement if not self-closing
+      if (!t.selfClosing && t.closeStart !== null) {
+        allReplacements.push({
+          start: t.closeStart,
+          end: t.closeEnd,
+          replacement: t.closeReplacement,
+        });
+      }
+    }
+
+    // Sort by start position descending
+    allReplacements.sort((a, b) => b.start - a.start);
+
+    // Apply replacements from end to start
+    let newContent = content;
+    for (const r of allReplacements) {
+      newContent = newContent.slice(0, r.start) + r.replacement + newContent.slice(r.end);
+    }
+
     await fs.writeFile(filePath, newContent, 'utf-8');
     console.log(log.green(`   ✓ Saved ${changes} change(s)`));
   }
