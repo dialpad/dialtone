@@ -1,3 +1,10 @@
+# [9.149.0](https://github.com/dialpad/dialtone/compare/dialtone/v9.148.0...dialtone/v9.149.0) (2025-11-25)
+
+
+### Features
+
+* **Stack:** DLT-2847 add align and justify props ([#979](https://github.com/dialpad/dialtone/issues/979)) ([539ff24](https://github.com/dialpad/dialtone/commit/539ff24c61d405a23cf6bb541a17b81d48d38feb))
+
 # [9.148.0](https://github.com/dialpad/dialtone/compare/dialtone/v9.147.0...dialtone/v9.148.0) (2025-11-21)
 
 
