@@ -457,7 +457,6 @@ htmlCode='
     <p class="d-avatar__overlay-text">+3</p>
   </div>
 </div>'
-:htmlCode="() => $refs.columnExample"
 vueCode='
 <dt-avatar size="lg" image-src="/assets/images/person.png" image-alt="avatar user">
   <template #overlayIcon>
