@@ -338,7 +338,7 @@ The [Split Button](split-button.md) is its own component containing multiple but
 
 ## Sizes
 
-The base button font size is 16px and should be used in most cases. Every button style can accept size classes, though we only provide a few possible examples.
+The default button size is `md`, but does not need to be explicitly specified.
 
 <code-well-header>
   <dt-stack
