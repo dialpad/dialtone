@@ -3,6 +3,8 @@
  * https://storybook.js.org/docs/react/configure/theming
  */
 import { create } from '@storybook/theming/create';
+import dialpadLogoWhite from '../common/assets/dialpad-logo-white.svg';
+import dialpadLogoBlack from '../common/assets/dialpad-logo-black.svg';
 
 const _baseThemeVariables = {
   brandTitle: 'Dialpad storybook',
@@ -13,7 +15,7 @@ const _baseThemeVariables = {
 export const dialtoneDarkTheme = create({
   base: 'dark',
   ..._baseThemeVariables,
-  brandImage: 'https://static.dialpadcdn.com/dialtone/dialpad-logo-white.svg',
+  brandImage: dialpadLogoWhite,
   appBg: '#1B1B1B', // --dt-color-surface-secondary
   appContentBg: '#080808', // --dt-color-surface-primary
 
@@ -27,7 +29,7 @@ export const dialtoneDarkTheme = create({
 export const dialtoneLightTheme = create({
   base: 'light',
   ..._baseThemeVariables,
-  brandImage: 'https://static.dialpadcdn.com/dialtone/dialpad-logo-black.svg',
+  brandImage: dialpadLogoBlack,
   appBg: '#F9F9F9', // --dt-color-surface-secondary
   appContentBg: '#FFFFFF', // --dt-color-surface-primary
 
