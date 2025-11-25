@@ -247,12 +247,36 @@ function transformElement(element) {
   const classes = element.classValue.split(/\s+/).filter(Boolean);
   const props = [];
   const retainedClasses = [];
+  const directionClasses = ['d-fd-row', 'd-fd-column', 'd-fd-row-reverse', 'd-fd-column-reverse'];
+
+  // Find ALL direction utilities present
+  const foundDirectionClasses = classes.filter(cls => directionClasses.includes(cls));
+  const directionCount = foundDirectionClasses.length;
 
   for (const cls of classes) {
     // Check if class should be removed
     if (CLASSES_TO_REMOVE.includes(cls)) continue;
 
-    // Check if class converts to a prop
+    // Special handling for direction utilities
+    if (FLEX_TO_PROP[cls] && FLEX_TO_PROP[cls].prop === 'direction') {
+      if (directionCount === 1) {
+        // Single direction utility - safe to convert
+        const { prop, value } = FLEX_TO_PROP[cls];
+
+        // Skip d-fd-column since DtStack defaults to column
+        if (value !== 'column') {
+          props.push({ prop, value });
+        }
+        // Don't add to retainedClasses - it's been converted (or omitted as redundant)
+        continue;
+      } else if (directionCount > 1) {
+        // Multiple direction utilities - retain all, let CSS cascade decide
+        retainedClasses.push(cls);
+        continue;
+      }
+    }
+
+    // Check if class converts to a prop (non-direction)
     if (FLEX_TO_PROP[cls]) {
       const { prop, value } = FLEX_TO_PROP[cls];
       // Avoid duplicate props
@@ -270,6 +294,11 @@ function transformElement(element) {
 
     // Keep other classes (non-flex utilities like d-p16, d-mb8, etc.)
     retainedClasses.push(cls);
+  }
+
+  // Add default direction="row" if no direction utilities found OR multiple found
+  if (directionCount === 0 || directionCount > 1) {
+    props.unshift({ prop: 'direction', value: 'row' });
   }
 
   // Build the new element
