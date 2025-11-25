@@ -589,7 +589,7 @@ The `align` prop is optional. Unless specified, it will default vertical stacks 
     ref="alignDefaultExample"
   >
     <dt-stack
-      class="d-bgc-moderate-opaque d-bar8"
+      class="d-bgc-moderate-opaque d-bar8 axis-outline axis-outline--inline-stretch"
     >
       <div class="d-bgc-moderate-opaque d-p16 d-bar8">
         Short
@@ -604,7 +604,7 @@ The `align` prop is optional. Unless specified, it will default vertical stacks 
     </dt-stack>
     <dt-stack
       direction="row"
-      class="d-bgc-moderate-opaque d-bar8"
+      class="d-bgc-moderate-opaque d-bar8 axis-outline axis-outline--block-center"
     >
       <div class="d-bgc-moderate-opaque d-p16 d-bar8">
         Short
@@ -655,7 +655,7 @@ Align items to the start of the cross-axis.
     <dt-stack
       gap="400"
       align="start"
-      class="d-bgc-moderate-opaque d-bar8"
+      class="d-bgc-moderate-opaque d-bar8 axis-outline axis-outline--inline-start"
     >
       <div class="d-bgc-moderate-opaque d-p16 d-bar8">
         Short
@@ -672,7 +672,7 @@ Align items to the start of the cross-axis.
       direction="row"
       gap="400"
       align="start"
-      class="d-bgc-moderate-opaque d-bar8"
+      class="d-bgc-moderate-opaque d-bar8 axis-outline axis-outline--block-start"
     >
       <div class="d-bgc-moderate-opaque d-p16 d-bar8">
         Short
@@ -730,7 +730,7 @@ Center items along the cross-axis.
     <dt-stack
       gap="400"
       align="center"
-      class="d-bgc-moderate-opaque d-bar8"
+      class="d-bgc-moderate-opaque d-bar8 axis-outline axis-outline--inline-center"
     >
       <div class="d-bgc-moderate-opaque d-p16 d-bar8">
         Short
@@ -747,7 +747,7 @@ Center items along the cross-axis.
       direction="row"
       gap="400"
       align="center"
-      class="d-bgc-moderate-opaque d-bar8"
+      class="d-bgc-moderate-opaque d-bar8 axis-outline axis-outline--block-center"
     >
       <div class="d-bgc-moderate-opaque d-p16 d-bar8">
         Short
@@ -794,7 +794,7 @@ Align items to the end of the cross-axis.
     <dt-stack
       gap="400"
       align="end"
-      class="d-bgc-moderate-opaque d-bar8"
+      class="d-bgc-moderate-opaque d-bar8 axis-outline axis-outline--inline-end"
     >
       <div class="d-bgc-moderate-opaque d-p16 d-bar8">
         Short
@@ -811,7 +811,7 @@ Align items to the end of the cross-axis.
       direction="row"
       gap="400"
       align="end"
-      class="d-bgc-moderate-opaque d-bar8"
+      class="d-bgc-moderate-opaque d-bar8 axis-outline axis-outline--block-end"
     >
       <div class="d-bgc-moderate-opaque d-p16 d-bar8">
         Short
@@ -869,7 +869,7 @@ Stretch items to fill the container height.
     <dt-stack
       gap="400"
       align="stretch"
-      class="d-bgc-moderate-opaque d-bar8"
+      class="d-bgc-moderate-opaque d-bar8 axis-outline axis-outline--inline-stretch"
     >
       <div class="d-bgc-moderate-opaque d-p16 d-bar8">
         Short
@@ -886,7 +886,7 @@ Stretch items to fill the container height.
       direction="row"
       gap="400"
       align="stretch"
-      class="d-bgc-moderate-opaque d-bar8"
+      class="d-bgc-moderate-opaque d-bar8 axis-outline axis-outline--block-stretch"
     >
       <div class="d-bgc-moderate-opaque d-p16 d-bar8">
         Short
@@ -929,7 +929,7 @@ Align items along their text baselines.
     direction="row"
     gap="400"
     align="baseline"
-    class="d-bgc-moderate-opaque d-bar8"
+    class="d-bgc-moderate-opaque d-bar8 axis-outline axis-outline--baseline"
     ref="alignBaselineExample"
   >
     <div class="d-bgc-moderate-opaque d-p16 d-bar8 d-body--sm">
@@ -980,7 +980,7 @@ Align items to the start of the main axis (default).
     <dt-stack
       gap="400"
       justify="start"
-      class="d-w100p d-h332 d-bgc-moderate-opaque d-bar8"
+      class="d-w100p d-h332 d-bgc-moderate-opaque d-bar8 axis-outline axis-outline--block-start"
     >
       <div class="d-bgc-moderate-opaque d-p16 d-bar8">Item 1</div>
       <div class="d-bgc-moderate-opaque d-p16 d-bar8">Item 2</div>
@@ -1026,7 +1026,7 @@ Center items along the main axis.
     <dt-stack
       gap="400"
       justify="center"
-      class="d-w100p d-h332 d-bgc-moderate-opaque d-bar8"
+      class="d-w100p d-h332 d-bgc-moderate-opaque d-bar8 axis-outline axis-outline--block-center"
     >
       <div class="d-bgc-moderate-opaque d-p16 d-bar8">Item 1</div>
       <div class="d-bgc-moderate-opaque d-p16 d-bar8">Item 2</div>
@@ -1036,7 +1036,7 @@ Center items along the main axis.
       direction="row"
       gap="400"
       justify="center"
-      class="d-w100p d-bgc-moderate-opaque d-bar8"
+      class="d-w100p d-bgc-moderate-opaque d-bar8 axis-outline axis-outline--inline-center"
     >
       <div class="d-bgc-moderate-opaque d-p16 d-bar8">Item 1</div>
       <div class="d-bgc-moderate-opaque d-p16 d-bar8">Item 2</div>
@@ -1072,7 +1072,7 @@ Align items to the end of the main axis.
     <dt-stack
       gap="400"
       justify="end"
-      class="d-w100p d-h332 d-bgc-moderate-opaque d-bar8"
+      class="d-w100p d-h332 d-bgc-moderate-opaque d-bar8 axis-outline axis-outline--block-end"
     >
       <div class="d-bgc-moderate-opaque d-p16 d-bar8">Item 1</div>
       <div class="d-bgc-moderate-opaque d-p16 d-bar8">Item 2</div>
@@ -1082,7 +1082,7 @@ Align items to the end of the main axis.
       direction="row"
       gap="400"
       justify="end"
-      class="d-w100p d-bgc-moderate-opaque d-bar8"
+      class="d-w100p d-bgc-moderate-opaque d-bar8 axis-outline axis-outline--inline-end"
     >
       <div class="d-bgc-moderate-opaque d-p16 d-bar8">Item 1</div>
       <div class="d-bgc-moderate-opaque d-p16 d-bar8">Item 2</div>
@@ -1118,7 +1118,7 @@ Distribute items with equal space around each item.
     <dt-stack
       gap="400"
       justify="around"
-      class="d-w100p d-h332 d-bgc-moderate-opaque d-bar8"
+      class="d-w100p d-h332 d-bgc-moderate-opaque d-bar8 axis-outline axis-outline--block-center"
     >
       <div class="d-bgc-moderate-opaque d-p16 d-bar8">Item 1</div>
       <div class="d-bgc-moderate-opaque d-p16 d-bar8">Item 2</div>
@@ -1128,7 +1128,7 @@ Distribute items with equal space around each item.
       direction="row"
       gap="400"
       justify="around"
-      class="d-w100p d-bgc-moderate-opaque d-bar8"
+      class="d-w100p d-bgc-moderate-opaque d-bar8 axis-outline axis-outline--inline-center"
     >
       <div class="d-bgc-moderate-opaque d-p16 d-bar8">Item 1</div>
       <div class="d-bgc-moderate-opaque d-p16 d-bar8">Item 2</div>
@@ -1164,7 +1164,7 @@ Distribute items with space between them, edges flush to container.
     <dt-stack
       gap="400"
       justify="between"
-      class="d-w100p d-h332 d-bgc-moderate-opaque d-bar8"
+      class="d-w100p d-h332 d-bgc-moderate-opaque d-bar8 axis-outline axis-outline--block-center"
     >
       <div class="d-bgc-moderate-opaque d-p16 d-bar8">Item 1</div>
       <div class="d-bgc-moderate-opaque d-p16 d-bar8">Item 2</div>
@@ -1174,7 +1174,7 @@ Distribute items with space between them, edges flush to container.
       direction="row"
       gap="400"
       justify="between"
-      class="d-w100p d-bgc-moderate-opaque d-bar8"
+      class="d-w100p d-bgc-moderate-opaque d-bar8 axis-outline axis-outline--inline-center"
     >
       <div class="d-bgc-moderate-opaque d-p16 d-bar8">Item 1</div>
       <div class="d-bgc-moderate-opaque d-p16 d-bar8">Item 2</div>
@@ -1213,7 +1213,7 @@ Distribute items with equal space between all items, including edges.
     <dt-stack
       gap="400"
       justify="evenly"
-      class="d-w100p d-h332 d-bgc-moderate-opaque d-bar8"
+      class="d-w100p d-h332 d-bgc-moderate-opaque d-bar8 axis-outline axis-outline--block-center"
     >
       <div class="d-bgc-moderate-opaque d-p16 d-bar8">Item 1</div>
       <div class="d-bgc-moderate-opaque d-p16 d-bar8">Item 2</div>
@@ -1223,7 +1223,7 @@ Distribute items with equal space between all items, including edges.
       direction="row"
       gap="400"
       justify="evenly"
-      class="d-w100p d-bgc-moderate-opaque d-bar8"
+      class="d-w100p d-bgc-moderate-opaque d-bar8 axis-outline axis-outline--inline-center"
     >
       <div class="d-bgc-moderate-opaque d-p16 d-bar8">Item 1</div>
       <div class="d-bgc-moderate-opaque d-p16 d-bar8">Item 2</div>
@@ -1546,3 +1546,103 @@ Resize your browser to see the justification change at different breakpoints.
   // Initialize focused index to the selected gap on mount
   focusedGapIndex.value = getSelectedGapIndex();
 </script>
+
+<style scoped lang="less">
+  .axis-outline {
+    position: relative;
+
+    &:before {
+      content: "";
+      position: absolute;
+      z-index: 1;
+      border-radius: var(--dt-size-radius-pill);
+      background-color: var(--dt-color-border-critical);
+      opacity: var(--dt-opacity-600);
+    }
+
+    &:after {
+      content: "";
+      position: absolute;
+      z-index: 1;
+      border-radius: var(--dt-size-radius-pill);
+      background-color: var(--dt-color-border-critical);
+      opacity: var(--dt-opacity-600);
+    }
+
+    &:hover:after,
+    &:hover:before {
+      opacity: var(--dt-opacity-1300);
+    }
+
+    &--inline-start::before {
+      left: var(--dt-space-200-negative);
+      width: var(--dt-size-200);
+      height: 100%;
+      background-color: var(--dt-color-border-critical);
+    }
+
+    &--block-start::before {
+      top: var(--dt-space-200-negative);
+      height: var(--dt-size-200);
+      width: 100%;
+    }
+
+    &--inline-center::before {
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      width: var(--dt-size-200);
+      height: 100%;
+    }
+
+    &--block-center::before {
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      width: 100%;
+      height: var(--dt-size-200);
+    }
+
+    &--inline-end::before {
+      right: var(--dt-space-200-negative);
+      width: var(--dt-size-200);
+      height: 100%;
+    }
+
+    &--block-end::before {
+      bottom: var(--dt-space-200-negative);
+      height: var(--dt-size-200);
+      width: 100%;
+    }
+
+    &--inline-stretch::before {
+      left: var(--dt-space-200-negative);
+      width: var(--dt-size-200);
+      height: 100%;
+    }
+
+    &--inline-stretch::after {
+      right: var(--dt-space-200-negative);
+      width: var(--dt-size-200);
+      height: 100%;
+    }
+
+    &--block-stretch::before {
+      top: var(--dt-space-200-negative);
+      height: var(--dt-size-200);
+      width: 100%;
+    }
+
+    &--block-stretch::after {
+      bottom: var(--dt-space-200-negative);
+      height: var(--dt-size-200);
+      width: 100%;
+    }
+
+    &--baseline::before {
+      bottom: calc(var(--dt-space-500) + var(--dt-space-400));
+      height: var(--dt-size-200);
+      width: 100%;
+    }
+  }
+</style>
