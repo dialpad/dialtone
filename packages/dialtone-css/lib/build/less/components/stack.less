@@ -27,10 +27,14 @@
 
   &-row {
     --stack-direction: row;
+
+    align-items: center;
   }
 
   &-row-reverse {
     --stack-direction: row-reverse;
+
+    align-items: center;
   }
 }
 
@@ -93,10 +97,6 @@
 }
 
 .align-options() {
-  &-align-normal {
-    align-items: normal;
-  }
-
   &-align-start {
     align-items: start;
   }
@@ -167,6 +167,8 @@
 //  ----------------------------------------------------------------------------
 .d-stack--row {
   --stack-direction: row;
+
+  align-items: center;
 }
 
 //  ----------------------------------------------------------------------------
@@ -174,15 +176,13 @@
 //  ----------------------------------------------------------------------------
 .d-stack--row-reverse {
   --stack-direction: row-reverse;
+
+  align-items: center;
 }
 
 //  ============================================================================
 //  $   ALIGNMENT
 //  ----------------------------------------------------------------------------
-
-.d-stack--align-normal {
-  align-items: normal;
-}
 
 .d-stack--align-start {
   align-items: start;
