@@ -990,7 +990,7 @@ Align items to the start of the main axis (default).
       direction="row"
       gap="400"
       justify="start"
-      class="d-w100p d-bgc-moderate-opaque d-bar8"
+      class="d-w100p d-bgc-moderate-opaque d-bar8 axis-outline axis-outline--inline-start"
     >
       <div class="d-bgc-moderate-opaque d-p16 d-bar8">Item 1</div>
       <div class="d-bgc-moderate-opaque d-p16 d-bar8">Item 2</div>
@@ -1549,50 +1549,68 @@ Resize your browser to see the justification change at different breakpoints.
 
 <style scoped lang="less">
   .axis-outline {
+    --axis-size: var(--dt-size-200);
+    --axis-offset: var(--dt-space-200-negative);
+    --axis-color: var(--dt-color-border-critical);
+    --axis-opacity: var(--dt-opacity-600);
+
     position: relative;
 
-    &:before {
-      content: "";
-      position: absolute;
-      z-index: 1;
-      border-radius: var(--dt-size-radius-pill);
-      background-color: var(--dt-color-border-critical);
-      opacity: var(--dt-opacity-600);
-    }
-
+    &:before,
     &:after {
       content: "";
       position: absolute;
       z-index: 1;
       border-radius: var(--dt-size-radius-pill);
-      background-color: var(--dt-color-border-critical);
-      opacity: var(--dt-opacity-600);
+      background-color: var(--axis-color);
+      opacity: var(--axis-opacity);
     }
 
     &:hover:after,
     &:hover:before {
-      opacity: var(--dt-opacity-1300);
+      --axis-opacity: var(--dt-opacity-1300);
     }
 
+    // Inline axis indicators (vertical lines)
     &--inline-start::before {
-      left: var(--dt-space-200-negative);
-      width: var(--dt-size-200);
+      left: var(--axis-offset);
+      width: var(--axis-size);
       height: 100%;
-      background-color: var(--dt-color-border-critical);
-    }
-
-    &--block-start::before {
-      top: var(--dt-space-200-negative);
-      height: var(--dt-size-200);
-      width: 100%;
     }
 
     &--inline-center::before {
       left: 50%;
       top: 50%;
       transform: translate(-50%, -50%);
-      width: var(--dt-size-200);
+      width: var(--axis-size);
       height: 100%;
+    }
+
+    &--inline-end::before {
+      right: var(--axis-offset);
+      width: var(--axis-size);
+      height: 100%;
+    }
+
+    &--inline-stretch {
+      &::before {
+        left: var(--axis-offset);
+        width: var(--axis-size);
+        height: 100%;
+      }
+
+      &::after {
+        right: var(--axis-offset);
+        width: var(--axis-size);
+        height: 100%;
+      }
+    }
+
+    // Block axis indicators (horizontal lines)
+    &--block-start::before {
+      top: var(--axis-offset);
+      height: var(--axis-size);
+      width: 100%;
     }
 
     &--block-center::before {
@@ -1600,48 +1618,33 @@ Resize your browser to see the justification change at different breakpoints.
       top: 50%;
       transform: translate(-50%, -50%);
       width: 100%;
-      height: var(--dt-size-200);
-    }
-
-    &--inline-end::before {
-      right: var(--dt-space-200-negative);
-      width: var(--dt-size-200);
-      height: 100%;
+      height: var(--axis-size);
     }
 
     &--block-end::before {
-      bottom: var(--dt-space-200-negative);
-      height: var(--dt-size-200);
+      bottom: var(--axis-offset);
+      height: var(--axis-size);
       width: 100%;
     }
 
-    &--inline-stretch::before {
-      left: var(--dt-space-200-negative);
-      width: var(--dt-size-200);
-      height: 100%;
+    &--block-stretch {
+      &::before {
+        top: var(--axis-offset);
+        height: var(--axis-size);
+        width: 100%;
+      }
+
+      &::after {
+        bottom: var(--axis-offset);
+        height: var(--axis-size);
+        width: 100%;
+      }
     }
 
-    &--inline-stretch::after {
-      right: var(--dt-space-200-negative);
-      width: var(--dt-size-200);
-      height: 100%;
-    }
-
-    &--block-stretch::before {
-      top: var(--dt-space-200-negative);
-      height: var(--dt-size-200);
-      width: 100%;
-    }
-
-    &--block-stretch::after {
-      bottom: var(--dt-space-200-negative);
-      height: var(--dt-size-200);
-      width: 100%;
-    }
-
+    // Special case for baseline
     &--baseline::before {
       bottom: calc(var(--dt-space-500) + var(--dt-space-400));
-      height: var(--dt-size-200);
+      height: var(--axis-size);
       width: 100%;
     }
   }
