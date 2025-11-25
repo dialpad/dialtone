@@ -105,17 +105,23 @@ const FLEX_TO_PROP = {
 };
 
 // Classes to remove (redundant on dt-stack)
-const CLASSES_TO_REMOVE = ['d-d-flex'];
+const CLASSES_TO_REMOVE = ['d-d-flex', 'd-fl-center'];
 
 // Classes that have no prop equivalent - retain as classes on dt-stack
 const RETAIN_PATTERNS = [
   /^d-fw-/,      // flex-wrap
-  /^d-fl-/,      // flex-grow, flex-shrink
+  /^d-fl-/,      // flex-grow, flex-shrink, flex-basis (Note: d-fl-center handled separately in CLASSES_TO_REMOVE)
   /^d-as-/,      // align-self
   /^d-order/,    // order
   /^d-ac-/,      // align-content
   /^d-flow\d+$/, // flow gap
   /^d-gg?(80|96|112|128|144|160|176|192|208)$/, // large gaps without prop equivalent (d-g* and d-gg*)
+  /^d-flg/,      // deprecated flex gap (custom property based) - retain with info message
+  /^d-ji-/,      // justify-items (grid/flex hybrid)
+  /^d-js-/,      // justify-self (grid/flex hybrid)
+  /^d-plc-/,     // place-content (grid shorthand)
+  /^d-pli-/,     // place-items (grid shorthand)
+  /^d-pls-/,     // place-self (grid shorthand)
 ];
 
 // Native HTML elements that are safe to convert to dt-stack
@@ -133,14 +139,14 @@ const NATIVE_HTML_ELEMENTS = new Set([
 //------------------------------------------------------------------------------
 
 /**
- * Regex to match elements with d-d-flex in class attribute
+ * Regex to match elements with d-d-flex or d-fl-center in class attribute
  * Captures: tag name (including hyphenated), attributes before class, class value, attributes after class, self-closing
  * Uses [\w-]+ to capture hyphenated tag names like 'code-well-header'
  */
-const ELEMENT_REGEX = /<([\w-]+)([^>]*?)\bclass="([^"]*\bd-d-flex\b[^"]*)"([^>]*?)(\/?)>/g;
+const ELEMENT_REGEX = /<([\w-]+)([^>]*?)\bclass="([^"]*\b(?:d-d-flex|d-fl-center)\b[^"]*)"([^>]*?)(\/?)>/g;
 
 /**
- * Find all elements with d-d-flex in a template string
+ * Find all elements with d-d-flex or d-fl-center in a template string
  */
 function findFlexElements(content) {
   const matches = [];
@@ -157,8 +163,9 @@ function findFlexElements(content) {
     if (!NATIVE_HTML_ELEMENTS.has(tagName.toLowerCase())) continue;
 
     // Skip if d-d-flex only appears with responsive prefix (e.g., lg:d-d-flex)
-    // Check if there's a bare d-d-flex (not preceded by breakpoint prefix)
-    const hasBareFlexClass = classValue.split(/\s+/).some(cls => cls === 'd-d-flex');
+    // Check if there's a bare d-d-flex or d-fl-center (not preceded by breakpoint prefix)
+    const classes = classValue.split(/\s+/);
+    const hasBareFlexClass = classes.includes('d-d-flex') || classes.includes('d-fl-center');
     if (!hasBareFlexClass) continue;
 
     matches.push({
@@ -241,13 +248,80 @@ function findMatchingClosingTag(content, startPos, tagName) {
 //------------------------------------------------------------------------------
 
 /**
+ * Check if an element should be skipped (not migrated)
+ * @param {object} element - Element with classValue property
+ * @returns {object|null} - Returns skip info object if should skip, null if should migrate
+ */
+function shouldSkipElement(element) {
+  const classes = element.classValue.split(/\s+/).filter(Boolean);
+
+  // Skip grid containers (not flexbox)
+  if (classes.includes('d-d-grid') || classes.includes('d-d-inline-grid')) {
+    return {
+      reason: 'Grid container detected (not flexbox)',
+      severity: 'info',
+      message: `Skipping <${element.tagName}> - uses CSS Grid (d-d-grid/d-d-inline-grid), not flexbox`,
+    };
+  }
+
+  // Skip inline-flex (DtStack is block-level only)
+  if (classes.includes('d-d-inline-flex')) {
+    return {
+      reason: 'Inline-flex not supported by DtStack',
+      severity: 'info',
+      message: `Skipping <${element.tagName}> - d-d-inline-flex not supported (DtStack is block-level)`,
+    };
+  }
+
+  // Skip d-d-contents (layout tree manipulation)
+  if (classes.includes('d-d-contents')) {
+    return {
+      reason: 'Display: contents detected',
+      severity: 'warning',
+      message: `Skipping <${element.tagName}> - d-d-contents manipulates layout tree, verify layout after migration if converted manually`,
+    };
+  }
+
+  // Skip deprecated flex column system (complex child selectors)
+  if (classes.some(cls => /^d-fl-col\d+$/.test(cls))) {
+    return {
+      reason: 'Deprecated flex column system (d-fl-col*)',
+      severity: 'warning',
+      message: `Skipping <${element.tagName}> - d-fl-col* uses complex child selectors, requires manual migration (utility deprecated, see DLT-1763)`,
+    };
+  }
+
+  // Skip auto-spacing utilities (margin-based, incompatible with gap)
+  const autoSpacingClass = classes.find(cls => /^d-stack\d+$/.test(cls) || /^d-flow\d+$/.test(cls));
+  if (autoSpacingClass) {
+    return {
+      reason: 'Auto-spacing utility (margin-based)',
+      severity: 'warning',
+      message: `Skipping <${element.tagName}> - ${autoSpacingClass} uses margin-based spacing, incompatible with gap-based DtStack`,
+    };
+  }
+
+  return null; // No skip reason, proceed with migration
+}
+
+/**
  * Transform a flex element to dt-stack
+ * @returns {object|null} - Transformation object or null if element should be skipped
  */
 function transformElement(element) {
+  // Check if element should be skipped
+  const skipInfo = shouldSkipElement(element);
+  if (skipInfo) {
+    return { skip: true, ...skipInfo };
+  }
+
   const classes = element.classValue.split(/\s+/).filter(Boolean);
   const props = [];
   const retainedClasses = [];
   const directionClasses = ['d-fd-row', 'd-fd-column', 'd-fd-row-reverse', 'd-fd-column-reverse'];
+
+  // Check for d-fl-center (combination utility - sets display:flex + align:center + justify:center)
+  const hasFlCenter = classes.includes('d-fl-center');
 
   // Find ALL direction utilities present
   const foundDirectionClasses = classes.filter(cls => directionClasses.includes(cls));
@@ -294,6 +368,18 @@ function transformElement(element) {
 
     // Keep other classes (non-flex utilities like d-p16, d-mb8, etc.)
     retainedClasses.push(cls);
+  }
+
+  // Handle d-fl-center: extract align="center" and justify="center" props
+  // d-fl-center sets: display:flex + align-items:center + justify-content:center
+  if (hasFlCenter) {
+    // Only add if not already present (avoid duplicates)
+    if (!props.some(p => p.prop === 'align')) {
+      props.push({ prop: 'align', value: 'center' });
+    }
+    if (!props.some(p => p.prop === 'justify')) {
+      props.push({ prop: 'justify', value: 'center' });
+    }
   }
 
   // Add default direction="row" if no direction utilities found OR multiple found
@@ -402,7 +488,7 @@ async function processFile(filePath, options) {
   // Check for dynamic :class bindings with flex utilities
   const dynamicClassRegex = /:(class|v-bind:class)="([^"]*)"/g;
   let dynamicMatch;
-  const flexUtilityPattern = /d-d-flex|d-ai-|d-jc-|d-fd-|d-gg?\d/;
+  const flexUtilityPattern = /d-d-flex|d-fl-center|d-ai-|d-jc-|d-fd-|d-gg?\d/;
 
   while ((dynamicMatch = dynamicClassRegex.exec(content)) !== null) {
     const bindingContent = dynamicMatch[2];
@@ -424,6 +510,17 @@ async function processFile(filePath, options) {
   for (const element of elements) {
     const transformation = transformElement(element);
 
+    // Handle skipped elements
+    if (transformation.skip) {
+      const icon = transformation.severity === 'warning' ? '⚠' : 'ℹ';
+      const colorFn = transformation.severity === 'warning' ? log.yellow : log.gray;
+      console.log(colorFn(`   ${icon} ${transformation.message}`));
+      console.log(log.gray(`      ${element.fullMatch}`));
+      console.log();
+      skipped++;
+      continue;
+    }
+
     // Find the matching closing tag position (in original content)
     let closingTag = null;
     if (!element.selfClosing) {
@@ -436,6 +533,17 @@ async function processFile(filePath, options) {
 
     if (transformation.retainedClasses.length > 0) {
       console.log(log.yellow(`     ⚠ Retained classes: ${transformation.retainedClasses.join(', ')}`));
+
+      // Add specific info for edge case utilities
+      const hasFlg = transformation.retainedClasses.some(cls => /^d-flg/.test(cls));
+      const hasGridHybrid = transformation.retainedClasses.some(cls => /^d-(ji-|js-|plc-|pli-|pls-)/.test(cls));
+
+      if (hasFlg) {
+        console.log(log.gray(`       ℹ d-flg* is deprecated - consider replacing with d-g* gap utilities`));
+      }
+      if (hasGridHybrid) {
+        console.log(log.gray(`       ℹ Grid/flex hybrid utilities (d-ji-*, d-js-*, d-plc-*, etc.) retained - no DtStack prop equivalent`));
+      }
     }
     console.log();
 
