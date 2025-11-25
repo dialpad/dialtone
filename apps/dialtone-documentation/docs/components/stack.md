@@ -1552,7 +1552,21 @@ Resize your browser to see the justification change at different breakpoints.
     --axis-size: var(--dt-size-200);
     --axis-offset: var(--dt-space-200-negative);
     --axis-color: var(--dt-color-border-critical);
-    --axis-opacity: var(--dt-opacity-600);
+    --axis-opacity: var(--dt-opacity-800);
+    --axis-pattern-vertical: repeating-linear-gradient(
+      to bottom,
+      var(--axis-color) 0,
+      var(--axis-color) calc(var(--axis-size) * 2),
+      transparent calc(var(--axis-size) * 2),
+      transparent calc(var(--axis-size) * 4)
+    );
+    --axis-pattern-horizontal: repeating-linear-gradient(
+      to right,
+      var(--axis-color) 0,
+      var(--axis-color) calc(var(--axis-size) * 2),
+      transparent calc(var(--axis-size) * 2),
+      transparent calc(var(--axis-size) * 4)
+    );
 
     position: relative;
 
@@ -1562,13 +1576,15 @@ Resize your browser to see the justification change at different breakpoints.
       position: absolute;
       z-index: 1;
       border-radius: var(--dt-size-radius-pill);
-      background-color: var(--axis-color);
+      background-image: var(--axis-pattern-vertical); // Default to vertical
       opacity: var(--axis-opacity);
     }
 
-    &:hover:after,
-    &:hover:before {
+    &:hover:before,
+    &:hover:after {
       --axis-opacity: var(--dt-opacity-1300);
+      background-image: none;
+      background-color: var(--axis-color);
     }
 
     // Inline axis indicators (vertical lines)
@@ -1611,6 +1627,7 @@ Resize your browser to see the justification change at different breakpoints.
       top: var(--axis-offset);
       height: var(--axis-size);
       width: 100%;
+      background-image: var(--axis-pattern-horizontal);
     }
 
     &--block-center::before {
@@ -1619,12 +1636,14 @@ Resize your browser to see the justification change at different breakpoints.
       transform: translate(-50%, -50%);
       width: 100%;
       height: var(--axis-size);
+      background-image: var(--axis-pattern-horizontal);
     }
 
     &--block-end::before {
       bottom: var(--axis-offset);
       height: var(--axis-size);
       width: 100%;
+      background-image: var(--axis-pattern-horizontal);
     }
 
     &--block-stretch {
@@ -1632,12 +1651,14 @@ Resize your browser to see the justification change at different breakpoints.
         top: var(--axis-offset);
         height: var(--axis-size);
         width: 100%;
+        background-image: var(--axis-pattern-horizontal);
       }
 
       &::after {
         bottom: var(--axis-offset);
         height: var(--axis-size);
         width: 100%;
+        background-image: var(--axis-pattern-horizontal);
       }
     }
 
@@ -1646,6 +1667,7 @@ Resize your browser to see the justification change at different breakpoints.
       bottom: calc(var(--dt-space-500) + var(--dt-space-400));
       height: var(--axis-size);
       width: 100%;
+      background-image: var(--axis-pattern-horizontal);
     }
   }
 </style>
