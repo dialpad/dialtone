@@ -5,7 +5,7 @@
  * @fileoverview Migration script to convert d-d-flex patterns to <dt-stack> components
  *
  * Usage:
- *   node scripts/migrate-flex-to-stack.mjs [options] [glob patterns]
+ *   npx dialtone-migrate-flex-to-stack [options]
  *
  * Options:
  *   --cwd <path>     Working directory (default: current directory)
@@ -14,10 +14,10 @@
  *   --help           Show help
  *
  * Examples:
- *   node scripts/migrate-flex-to-stack.mjs
- *   node scripts/migrate-flex-to-stack.mjs --dry-run
- *   node scripts/migrate-flex-to-stack.mjs --cwd ./apps/my-app
- *   node scripts/migrate-flex-to-stack.mjs --yes  # Apply all without prompts
+ *   npx dialtone-migrate-flex-to-stack
+ *   npx dialtone-migrate-flex-to-stack --dry-run
+ *   npx dialtone-migrate-flex-to-stack --cwd ./src
+ *   npx dialtone-migrate-flex-to-stack --yes
  */
 
 import fs from 'fs/promises';
@@ -358,7 +358,9 @@ function parseArgs() {
 
     if (arg === '--help' || arg === '-h') {
       console.log(`
-Usage: node scripts/migrate-flex-to-stack.mjs [options] [glob patterns]
+Usage: npx dialtone-migrate-flex-to-stack [options]
+
+Migrates d-d-flex utility patterns to <dt-stack> components.
 
 Options:
   --cwd <path>     Working directory (default: current directory)
@@ -367,10 +369,10 @@ Options:
   --help, -h       Show help
 
 Examples:
-  node scripts/migrate-flex-to-stack.mjs
-  node scripts/migrate-flex-to-stack.mjs --dry-run
-  node scripts/migrate-flex-to-stack.mjs --cwd ./apps/my-app "**/*.vue"
-  node scripts/migrate-flex-to-stack.mjs --yes
+  npx dialtone-migrate-flex-to-stack                  # Interactive mode
+  npx dialtone-migrate-flex-to-stack --dry-run        # Preview changes
+  npx dialtone-migrate-flex-to-stack --cwd ./src      # Target specific directory
+  npx dialtone-migrate-flex-to-stack --yes            # Auto-apply all changes
 `);
       process.exit(0);
     }
