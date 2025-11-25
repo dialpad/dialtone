@@ -275,7 +275,7 @@ Positions the [Presence](/components/presence.md) component at each size and app
 
 <code-well-header>
   <dt-stack gap="400">
-      <dt-stack direction="row" align="center" gap="400" ref="presenceExample">
+      <dt-stack direction="row" align="center" gap="400">
           <dt-avatar size="xs" presence="active" image-src="/assets/images/person.png" image-alt="Person Avatar" />
           <dt-avatar size="sm" presence="away" image-src="/assets/images/person.png" image-alt="Person Avatar" />
           <dt-avatar size="md" presence="busy" image-src="/assets/images/person.png" image-alt="Person Avatar" />
@@ -293,7 +293,127 @@ Positions the [Presence](/components/presence.md) component at each size and app
 </code-well-header>
 
 <code-example-tabs
-:htmlCode="() => $refs.presenceExample"
+htmlCode='
+<!-- First set with images -->
+<div class="d-avatar d-avatar--xs d-avatar--color-100 d-avatar--presence">
+  <div class="d-avatar__canvas">
+    <img
+      class="d-avatar__image"
+      src="/assets/images/person.png"
+      alt="Person Avatar"
+    />
+  </div>
+  <div class="d-presence d-avatar__presence" role="status" aria-live="off">
+    <div class="d-presence__inner d-presence__inner--active"></div>
+  </div>
+</div>
+<div class="d-avatar d-avatar--sm d-avatar--color-1100 d-avatar--presence">
+  <div class="d-avatar__canvas">
+    <img
+      class="d-avatar__image"
+      src="/assets/images/person.png"
+      alt="Person Avatar"
+    />
+  </div>
+  <div class="d-presence d-avatar__presence" role="status" aria-live="off">
+    <div class="d-presence__inner d-presence__inner--away"></div>
+  </div>
+</div>
+<div class="d-avatar d-avatar--md d-avatar--color-1300 d-avatar--presence">
+  <div class="d-avatar__canvas">
+    <img
+      class="d-avatar__image"
+      src="/assets/images/person.png"
+      alt="Person Avatar"
+    />
+  </div>
+  <div
+    class="d-presence d-avatar__presence d-avatar__presence--md"
+    role="status"
+    aria-live="off"
+  >
+    <div class="d-presence__inner d-presence__inner--busy"></div>
+  </div>
+</div>
+<div class="d-avatar d-avatar--lg d-avatar--color-1200 d-avatar--presence">
+  <div class="d-avatar__canvas">
+    <img
+      class="d-avatar__image"
+      src="/assets/images/person.png"
+      alt="Person Avatar"
+    />
+  </div>
+  <div
+    class="d-presence d-avatar__presence d-avatar__presence--lg"
+    role="status"
+    aria-live="off"
+  >
+    <div class="d-presence__inner d-presence__inner--offline"></div>
+  </div>
+</div>
+<div class="d-avatar d-avatar--xl d-avatar--color-900 d-avatar--presence">
+  <div class="d-avatar__canvas">
+    <img
+      class="d-avatar__image"
+      src="/assets/images/person.png"
+      alt="Person Avatar"
+    />
+  </div>
+  <div class="d-presence d-avatar__presence" role="status" aria-live="off">
+    <div class="d-presence__inner d-presence__inner--active"></div>
+  </div>
+</div>
+
+<!-- Second set with initials -->
+<div class="d-avatar d-avatar--xs d-avatar--color-1200 d-avatar--presence">
+  <div class="d-avatar__canvas">
+    <span class="d-avatar__initials"></span>
+  </div>
+  <div class="d-presence d-avatar__presence" role="status" aria-live="off">
+    <div class="d-presence__inner d-presence__inner--active"></div>
+  </div>
+</div>
+<div class="d-avatar d-avatar--sm d-avatar--color-500 d-avatar--presence">
+  <div class="d-avatar__canvas">
+    <span class="d-avatar__initials">W</span>
+  </div>
+  <div class="d-presence d-avatar__presence" role="status" aria-live="off">
+    <div class="d-presence__inner d-presence__inner--away"></div>
+  </div>
+</div>
+<div class="d-avatar d-avatar--md d-avatar--color-800 d-avatar--presence">
+  <div class="d-avatar__canvas">
+    <span class="d-avatar__initials">FR</span>
+  </div>
+  <div
+    class="d-presence d-avatar__presence d-avatar__presence--md"
+    role="status"
+    aria-live="off"
+  >
+    <div class="d-presence__inner d-presence__inner--busy"></div>
+  </div>
+</div>
+<div class="d-avatar d-avatar--lg d-avatar--color-1200 d-avatar--presence">
+  <div class="d-avatar__canvas">
+    <span class="d-avatar__initials">JH</span>
+  </div>
+  <div
+    class="d-presence d-avatar__presence d-avatar__presence--lg"
+    role="status"
+    aria-live="off"
+  >
+    <div class="d-presence__inner d-presence__inner--offline"></div>
+  </div>
+</div>
+<div class="d-avatar d-avatar--xl d-avatar--color-1500 d-avatar--presence">
+  <div class="d-avatar__canvas">
+    <span class="d-avatar__initials">AE</span>
+  </div>
+  <div class="d-presence d-avatar__presence" role="status" aria-live="off">
+    <div class="d-presence__inner d-presence__inner--active"></div>
+  </div>
+</div>
+'
 vueCode='
 <dt-avatar size="xs" presence="active" image-src="/assets/images/person.png" image-alt="Person Avatar" />
 <dt-avatar size="sm" presence="away" image-src="/assets/images/person.png" image-alt="Person Avatar" />
