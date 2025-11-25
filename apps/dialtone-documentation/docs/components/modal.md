@@ -403,6 +403,7 @@ When there is a need of more context information regarding the content of the Mo
       label="Kind of Banner"
       size="md"
       @change="changeBannerKind"
+      v-model="selectedBannerKind"
     >
       <option
         v-for="option in bannerKinds()"
