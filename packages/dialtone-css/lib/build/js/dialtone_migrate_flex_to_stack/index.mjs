@@ -27,7 +27,7 @@ import readline from 'readline';
 /**
  * Simple recursive file finder (replaces glob)
  */
-async function findFiles(dir, pattern, ignore = []) {
+async function findFiles(dir, extensions, ignore = []) {
   const results = [];
 
   async function walk(currentDir) {
@@ -42,8 +42,11 @@ async function findFiles(dir, pattern, ignore = []) {
 
         if (entry.isDirectory()) {
           await walk(fullPath);
-        } else if (entry.isFile() && entry.name.endsWith('.vue')) {
-          results.push(fullPath);
+        } else if (entry.isFile()) {
+          const matchesExtension = extensions.some(ext => entry.name.endsWith(ext));
+          if (matchesExtension) {
+            results.push(fullPath);
+          }
         }
       }
     } catch {
@@ -493,7 +496,9 @@ function parseArgs() {
     cwd: process.cwd(),
     dryRun: false,
     yes: false,
+    extensions: ['.vue'],
     patterns: [],
+    hasExtFlag: false, // Track if --ext was used
   };
 
   for (let i = 0; i < args.length; i++) {
@@ -507,21 +512,34 @@ Migrates d-d-flex utility patterns to <dt-stack> components.
 
 Options:
   --cwd <path>     Working directory (default: current directory)
+  --ext <ext>      File extension to process (default: .vue)
+                   Can be specified multiple times (e.g., --ext .vue --ext .md)
   --dry-run        Show changes without applying them
   --yes, -y        Apply all changes without prompting
   --help, -h       Show help
 
 Examples:
-  npx dialtone-migrate-flex-to-stack                  # Interactive mode
-  npx dialtone-migrate-flex-to-stack --dry-run        # Preview changes
-  npx dialtone-migrate-flex-to-stack --cwd ./src      # Target specific directory
-  npx dialtone-migrate-flex-to-stack --yes            # Auto-apply all changes
+  npx dialtone-migrate-flex-to-stack                          # Process .vue files
+  npx dialtone-migrate-flex-to-stack --ext .md                # Process .md files only
+  npx dialtone-migrate-flex-to-stack --ext .vue --ext .md     # Process both
+  npx dialtone-migrate-flex-to-stack --ext .md --cwd ./docs   # Process .md in docs/
+  npx dialtone-migrate-flex-to-stack --dry-run                # Preview changes
+  npx dialtone-migrate-flex-to-stack --yes                    # Auto-apply all changes
 `);
       process.exit(0);
     }
 
     if (arg === '--cwd' && args[i + 1]) {
       options.cwd = path.resolve(args[++i]);
+    } else if (arg === '--ext' && args[i + 1]) {
+      // First --ext call clears the default
+      if (!options.hasExtFlag) {
+        options.extensions = [];
+        options.hasExtFlag = true;
+      }
+      const ext = args[++i];
+      // Add leading dot if not present
+      options.extensions.push(ext.startsWith('.') ? ext : `.${ext}`);
     } else if (arg === '--dry-run') {
       options.dryRun = true;
     } else if (arg === '--yes' || arg === '-y') {
@@ -547,7 +565,7 @@ async function main() {
 
   log.bold('\n🔄 Flex to Stack Migration Tool\n');
   log.gray(`Working directory: ${options.cwd}`);
-  log.gray(`Patterns: ${options.patterns.join(', ')}`);
+  log.gray(`Extensions: ${options.extensions.join(', ')}`);
   if (options.dryRun) {
     console.log(log.yellow('DRY RUN - no files will be modified'));
   }
@@ -556,7 +574,7 @@ async function main() {
   }
 
   // Find files
-  const files = await findFiles(options.cwd, options.patterns, ['node_modules', 'dist', 'coverage']);
+  const files = await findFiles(options.cwd, options.extensions, ['node_modules', 'dist', 'coverage']);
 
   log.gray(`Found ${files.length} file(s) to scan\n`);
 
