@@ -51,6 +51,14 @@ ruleTester.run("prefer-stack-over-flex", rule, {
     {
       code: "<template><DtStack class=\"d-d-flex d-ai-center\">...</DtStack></template>",
     },
+    // Dynamic class binding without flex utilities
+    {
+      code: "<template><div :class=\"{ 'is-active': active }\">...</div></template>",
+    },
+    // DtStack with dynamic class binding (no flex utilities)
+    {
+      code: "<template><dt-stack :class=\"{ 'custom-class': active }\">...</dt-stack></template>",
+    },
   ],
 
   invalid: [
@@ -124,6 +132,56 @@ ruleTester.run("prefer-stack-over-flex", rule, {
   </div>
 </template>`,
       errors: [{ messageId: 'preferStack' }],
+    },
+
+    // ========================================
+    // Dynamic :class bindings with flex utilities
+    // ========================================
+
+    // Dynamic class binding with d-d-flex (object syntax)
+    {
+      code: "<template><div :class=\"{ 'd-d-flex': active }\">...</div></template>",
+      errors: [{ messageId: 'dynamicFlexBinding' }],
+    },
+    // Dynamic class binding with d-d-flex (array syntax)
+    {
+      code: "<template><div :class=\"['d-d-flex', 'd-ai-center']\">...</div></template>",
+      errors: [{ messageId: 'dynamicFlexBinding' }],
+    },
+    // Dynamic class binding with d-d-flex (ternary)
+    {
+      code: "<template><div :class=\"condition ? 'd-d-flex d-jc-center' : ''\">...</div></template>",
+      errors: [{ messageId: 'dynamicFlexBinding' }],
+    },
+    // v-bind:class with d-d-flex
+    {
+      code: "<template><div v-bind:class=\"{ 'd-d-flex': active }\">...</div></template>",
+      errors: [{ messageId: 'dynamicFlexBinding' }],
+    },
+    // Dynamic class binding with d-ai- utility
+    {
+      code: "<template><div :class=\"{ 'd-ai-center': isActive }\">...</div></template>",
+      errors: [{ messageId: 'dynamicFlexBinding' }],
+    },
+    // Dynamic class binding with d-jc- utility
+    {
+      code: "<template><div :class=\"{ 'd-jc-space-between': isActive }\">...</div></template>",
+      errors: [{ messageId: 'dynamicFlexBinding' }],
+    },
+    // Dynamic class binding with d-fd- utility
+    {
+      code: "<template><div :class=\"{ 'd-fd-column': vertical }\">...</div></template>",
+      errors: [{ messageId: 'dynamicFlexBinding' }],
+    },
+    // Dynamic class binding with d-g utility
+    {
+      code: "<template><div :class=\"{ 'd-g16': hasGap }\">...</div></template>",
+      errors: [{ messageId: 'dynamicFlexBinding' }],
+    },
+    // Dynamic class binding with d-gg utility
+    {
+      code: "<template><div :class=\"{ 'd-gg16': hasGap }\">...</div></template>",
+      errors: [{ messageId: 'dynamicFlexBinding' }],
     },
   ],
 });

@@ -90,6 +90,15 @@ const FLEX_TO_PROP = {
   'd-g32': { prop: 'gap', value: '600' },
   'd-g48': { prop: 'gap', value: '650' },
   'd-g64': { prop: 'gap', value: '700' },
+
+  // Grid-gap mappings (d-gg* → gap prop) - deprecated utilities, same as d-g*
+  'd-gg0': { prop: 'gap', value: '0' },
+  'd-gg8': { prop: 'gap', value: '400' },
+  'd-gg16': { prop: 'gap', value: '500' },
+  'd-gg24': { prop: 'gap', value: '550' },
+  'd-gg32': { prop: 'gap', value: '600' },
+  'd-gg48': { prop: 'gap', value: '650' },
+  'd-gg64': { prop: 'gap', value: '700' },
 };
 
 // Classes to remove (redundant on dt-stack)
@@ -103,7 +112,7 @@ const RETAIN_PATTERNS = [
   /^d-order/,    // order
   /^d-ac-/,      // align-content
   /^d-flow\d+$/, // flow gap
-  /^d-g(80|96|112|128|144|160|176|192|208)$/, // large gaps without prop equivalent
+  /^d-gg?(80|96|112|128|144|160|176|192|208)$/, // large gaps without prop equivalent (d-g* and d-gg*)
 ];
 
 // Native HTML elements that are safe to convert to dt-stack
@@ -357,6 +366,20 @@ async function processFile(filePath, options) {
 
   log.cyan(`\n📄 ${filePath}`);
   log.gray(`   Found ${elements.length} element(s) with d-d-flex\n`);
+
+  // Check for dynamic :class bindings with flex utilities
+  const dynamicClassRegex = /:(class|v-bind:class)="([^"]*)"/g;
+  let dynamicMatch;
+  const flexUtilityPattern = /d-d-flex|d-ai-|d-jc-|d-fd-|d-gg?\d/;
+
+  while ((dynamicMatch = dynamicClassRegex.exec(content)) !== null) {
+    const bindingContent = dynamicMatch[2];
+    if (flexUtilityPattern.test(bindingContent)) {
+      console.log(log.yellow(`   ⚠ Skipped: dynamic :class binding with flex utilities at position ${dynamicMatch.index}`));
+      console.log(log.gray(`     "${bindingContent.length > 60 ? bindingContent.substring(0, 60) + '...' : bindingContent}"`));
+      console.log(log.gray(`     Requires manual review - cannot auto-migrate dynamic bindings\n`));
+    }
+  }
 
   let changes = 0;
   let skipped = 0;

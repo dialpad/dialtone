@@ -84,8 +84,9 @@ module.exports = {
               });
             }
 
-            // Check for d-g* classes (gap utilities) - only those with DtStack equivalents
-            const gapMatch = classes.match(/\bd-g(\d+)\b/);
+            // Check for d-g* and d-gg* classes (gap utilities) - only those with DtStack equivalents
+            // d-gg* uses deprecated grid-gap property but works the same as d-g*
+            const gapMatch = classes.match(/\bd-gg?(\d+)\b/);
             if (gapMatch && GAP_WITH_EQUIVALENTS[gapMatch[1]]) {
               context.report({
                 node: classAttr,

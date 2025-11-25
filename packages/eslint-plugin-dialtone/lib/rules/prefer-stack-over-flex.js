@@ -20,6 +20,7 @@ module.exports = {
     schema: [],
     messages: {
       preferStack: 'Consider using `<dt-stack>` instead of `d-d-flex`. See: https://dialtone.dialpad.com/components/stack.html',
+      dynamicFlexBinding: 'Flex utilities detected in dynamic `:class` binding. Consider using `<dt-stack>` with conditional props instead. Manual migration required.',
     },
   },
 
@@ -44,6 +45,26 @@ module.exports = {
             context.report({
               node: classAttr,
               messageId: 'preferStack',
+            });
+          }
+        }
+      },
+
+      VAttribute(node) {
+        // Check for :class or v-bind:class directives
+        if (node.directive &&
+            node.key.name.name === 'bind' &&
+            node.key.argument?.name === 'class') {
+
+          // Get the raw source of the binding expression
+          const bindingText = sourceCode.getText(node.value);
+
+          // Check if it contains flex utilities (as string literals)
+          // Look for patterns like 'd-d-flex', 'd-ai-', 'd-jc-', 'd-fd-', 'd-g\d', 'd-gg\d'
+          if (/['"]d-d-flex['"]|['"]d-ai-|['"]d-jc-|['"]d-fd-|['"]d-gg?\d/.test(bindingText)) {
+            context.report({
+              node: node,
+              messageId: 'dynamicFlexBinding',
             });
           }
         }

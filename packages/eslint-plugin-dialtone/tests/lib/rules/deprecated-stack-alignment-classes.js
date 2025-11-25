@@ -79,6 +79,14 @@ ruleTester.run("deprecated-stack-alignment-classes", rule, {
     {
       code: "<template><dt-stack class=\"d-g96\">...</dt-stack></template>",
     },
+    // Stack with d-gg utility that has no DtStack equivalent (d-gg80, d-gg96, etc.)
+    {
+      code: "<template><dt-stack class=\"d-gg80\">...</dt-stack></template>",
+    },
+    // Regular div with d-gg* (not a Stack component)
+    {
+      code: "<template><div class=\"d-gg16\">...</div></template>",
+    },
   ],
 
   invalid: [
@@ -246,6 +254,46 @@ ruleTester.run("deprecated-stack-alignment-classes", rule, {
     // Stack with d-g* mixed with other classes
     {
       code: "<template><dt-stack class=\"d-p16 d-g16 d-mb8\">...</dt-stack></template>",
+      errors: [{ messageId: 'useGapProp' }],
+    },
+
+    // ========================================
+    // Grid-gap utilities (d-gg*) - deprecated, but same conversion as d-g*
+    // ========================================
+
+    // Stack with d-gg8
+    {
+      code: "<template><dt-stack class=\"d-gg8\">...</dt-stack></template>",
+      errors: [{ messageId: 'useGapProp' }],
+    },
+    // Stack with d-gg16
+    {
+      code: "<template><dt-stack class=\"d-gg16\">...</dt-stack></template>",
+      errors: [{ messageId: 'useGapProp' }],
+    },
+    // Stack with d-gg24
+    {
+      code: "<template><dt-stack class=\"d-gg24\">...</dt-stack></template>",
+      errors: [{ messageId: 'useGapProp' }],
+    },
+    // Stack with d-gg32
+    {
+      code: "<template><dt-stack class=\"d-gg32\">...</dt-stack></template>",
+      errors: [{ messageId: 'useGapProp' }],
+    },
+    // Stack with d-gg48
+    {
+      code: "<template><dt-stack class=\"d-gg48\">...</dt-stack></template>",
+      errors: [{ messageId: 'useGapProp' }],
+    },
+    // Stack with d-gg64
+    {
+      code: "<template><dt-stack class=\"d-gg64\">...</dt-stack></template>",
+      errors: [{ messageId: 'useGapProp' }],
+    },
+    // Stack with d-gg* mixed with other classes
+    {
+      code: "<template><dt-stack class=\"d-p16 d-gg16 d-mb8\">...</dt-stack></template>",
       errors: [{ messageId: 'useGapProp' }],
     },
 
