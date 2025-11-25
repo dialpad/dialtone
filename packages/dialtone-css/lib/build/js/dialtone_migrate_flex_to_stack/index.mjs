@@ -106,15 +106,26 @@ const RETAIN_PATTERNS = [
   /^d-g(80|96|112|128|144|160|176|192|208)$/, // large gaps without prop equivalent
 ];
 
+// Native HTML elements that are safe to convert to dt-stack
+// Custom Vue components (anything with hyphens or PascalCase) should NOT be converted
+const NATIVE_HTML_ELEMENTS = new Set([
+  'div', 'span', 'section', 'article', 'aside', 'nav', 'main',
+  'header', 'footer', 'ul', 'ol', 'li', 'form', 'fieldset',
+  'label', 'p', 'figure', 'figcaption', 'details', 'summary',
+  'address', 'blockquote', 'dialog', 'menu', 'a', 'button',
+  'table', 'thead', 'tbody', 'tfoot', 'tr', 'td', 'th',
+]);
+
 //------------------------------------------------------------------------------
 // Pattern Detection
 //------------------------------------------------------------------------------
 
 /**
  * Regex to match elements with d-d-flex in class attribute
- * Captures: tag name, attributes before class, class value, attributes after class, self-closing
+ * Captures: tag name (including hyphenated), attributes before class, class value, attributes after class, self-closing
+ * Uses [\w-]+ to capture hyphenated tag names like 'code-well-header'
  */
-const ELEMENT_REGEX = /<(\w+)([^>]*?)\bclass="([^"]*\bd-d-flex\b[^"]*)"([^>]*?)(\/?)>/g;
+const ELEMENT_REGEX = /<([\w-]+)([^>]*?)\bclass="([^"]*\bd-d-flex\b[^"]*)"([^>]*?)(\/?)>/g;
 
 /**
  * Find all elements with d-d-flex in a template string
@@ -128,6 +139,10 @@ function findFlexElements(content) {
 
     // Skip if already dt-stack
     if (tagName === 'dt-stack' || tagName === 'DtStack') continue;
+
+    // Skip custom Vue components - only convert native HTML elements
+    // Custom components have their own behavior and shouldn't be replaced with dt-stack
+    if (!NATIVE_HTML_ELEMENTS.has(tagName.toLowerCase())) continue;
 
     // Skip if d-d-flex only appears with responsive prefix (e.g., lg:d-d-flex)
     // Check if there's a bare d-d-flex (not preceded by breakpoint prefix)
