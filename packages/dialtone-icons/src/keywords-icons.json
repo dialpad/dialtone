@@ -1602,6 +1602,12 @@
         "collection",
         "cluster"
       ],
+      "bracket-left-right": [
+        "brackets",
+        "bracket-left",
+        "bracket-right",
+        "variables"
+      ],
       "breakout-rooms": [
         "rooms",
         "groups"
