@@ -365,7 +365,7 @@ function shouldSkipElement(element) {
  * Transform a flex element to dt-stack
  * @returns {object|null} - Transformation object or null if element should be skipped
  */
-function transformElement(element) {
+function transformElement(element, showOutline = false) {
   // Check if element should be skipped
   const skipInfo = shouldSkipElement(element);
   if (skipInfo) {
@@ -471,6 +471,11 @@ function transformElement(element) {
     newElement += ` ${element.attrsAfter}`;
   }
 
+  // Add outline attribute for visual debugging (if flag is set)
+  if (showOutline) {
+    newElement += ' outline';
+  }
+
   // Close tag
   newElement += element.selfClosing ? ' />' : '>';
 
@@ -565,7 +570,7 @@ async function processFile(filePath, options) {
   const transformations = [];
 
   for (const element of elements) {
-    const transformation = transformElement(element);
+    const transformation = transformElement(element, options.showOutline);
 
     // Handle skipped elements
     if (transformation.skip) {
@@ -694,6 +699,7 @@ function parseArgs() {
     patterns: [],
     hasExtFlag: false, // Track if --ext was used
     files: [], // Explicit file list via --file flag
+    showOutline: false, // Add outline attribute for visual debugging
   };
 
   for (let i = 0; i < args.length; i++) {
@@ -714,6 +720,7 @@ Options:
                    When used, --cwd is ignored for file discovery
   --dry-run        Show changes without applying them
   --yes, -y        Apply all changes without prompting
+  --show-outline   Add outline attribute to transformed elements for visual debugging
   --help, -h       Show help
 
 Examples:
@@ -747,6 +754,8 @@ Examples:
       options.dryRun = true;
     } else if (arg === '--yes' || arg === '-y') {
       options.yes = true;
+    } else if (arg === '--show-outline') {
+      options.showOutline = true;
     } else if (arg === '--file' && args[i + 1]) {
       const filePath = args[++i];
       options.files.push(filePath);
