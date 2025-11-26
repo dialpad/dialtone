@@ -1509,6 +1509,19 @@
         "url",
         "unchain",
         "unchain"
+      ],
+      "braces": [
+        "brackets",
+        "bracket-left",
+        "bracket-right",
+        "brackets",
+        "code",
+        "json",
+        "code",
+        "token",
+        "curly",
+        "data",
+        "variables"
       ]
     },
     "general": {
@@ -1601,19 +1614,6 @@
         "units",
         "collection",
         "cluster"
-      ],
-      "braces": [
-        "brackets",
-        "bracket-left",
-        "bracket-right",
-        "brackets",
-        "code",
-        "json",
-        "code",
-        "token",
-        "curly",
-        "data",
-        "variables"
       ],
       "breakout-rooms": [
         "rooms",
