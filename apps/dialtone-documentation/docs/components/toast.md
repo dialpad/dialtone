@@ -9,9 +9,9 @@ figma_url: https://www.figma.com/design/W58r5BkO8qTw3vem9YieJd/DT9-Component-Lib
 ---
 
 <code-well-header>
-  <div class="d-d-flex d-jc-center">
+  <dt-stack direction="row" justify="center" outline>
     <example-toast show title="Title" class="d-ps-relative d-zi-base d-t0" :fixed="false" />
-  </div>
+  </dt-stack>
 </code-well-header>
 
 <!-- <component-combinator component-name="DtToast" /> -->

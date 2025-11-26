@@ -51,9 +51,9 @@ Adjust the size using the `size` prop. Note that sizes 600, 700, and 800 are exc
 <div class="d-gc2">
 <code-well-header>
   <div class="d-d-grid d-g24 d-g-cols1 md:d-g-cols2 d-w100p">
-    <div class="d-fl-center">
+    <dt-stack direction="row" align="center" justify="center" outline>
       <dt-icon-settings :size="selectedSize" />
-    </div>
+    </dt-stack>
     <dt-select-menu label="Size" :options="sizeValues" @change="changeIconSize" />
   </div>
 </code-well-header>
@@ -74,12 +74,12 @@ The icon's color inherits from the parent's foreground color.
 <div class="d-gc2">
 <code-well-header>
 <div class="d-d-grid d-g24 d-g-cols1 md:d-g-cols2 d-w100p">
-  <div class="d-fl-center">
+  <dt-stack direction="row" align="center" justify="center" outline>
     <dt-stack :class="selectedColor" direction="row" as="div" gap="300">
       <dt-icon-settings size="300" />
       <p>Settings</p>
     </dt-stack>
-  </div>
+  </dt-stack>
   <dt-select-menu label="Color" :options="iconColors" @change="changeIconColor" />
 </div>
 </code-well-header>
@@ -99,7 +99,7 @@ The icon's color inherits from the parent's foreground color.
 When setting the color of an icon take these into considaration:
 
 <div class="d-gc1">
-<div style="background: var(--dt-color-purple-100)" class="d-p16 d-hmn164 d-bar8 d-d-flex d-ai-center">
+<dt-stack direction="row" align="center" class="d-p16 d-hmn164 d-bar8" style="background: var(--dt-color-purple-100)" outline>
 <dt-stack direction="row" as="section" gap="100" class="d-bgc-primary d-bc-default d-bar32 d-py8 d-px16 d-w100p">
 <dt-stack direction="row" as="section" gap="300" class="d-fl1">
 <dt-icon name="headphones" size="300" ariaLabel="Headphones icon" />
@@ -110,7 +110,7 @@ When setting the color of an icon take these into considaration:
 <p class="d-fc-success d-body--sm">Available</p>
 </dt-stack>
 </dt-stack>
-</div>
+</dt-stack>
 
 - Match the icon color with the text color when pairing them.
 - All icons are monochrome.
@@ -118,7 +118,7 @@ When setting the color of an icon take these into considaration:
 </div>
 
 <div class="d-gc1">
-<div class="d-bgc-critical-subtle-opaque d-p16 d-hmn164 d-bar8 d-d-flex d-ai-center">
+<dt-stack direction="row" align="center" class="d-bgc-critical-subtle-opaque d-p16 d-hmn164 d-bar8" outline>
 <dt-stack direction="row" as="section" gap="100" class="d-bgc-primary d-bc-default d-bar32 d-py8 d-px16 d-w100p">
 <dt-stack direction="row" as="section" gap="300" class="d-fl1">
 <dt-icon name="headphones" size="300" ariaLabel="Headphones icon" />
@@ -129,7 +129,7 @@ When setting the color of an icon take these into considaration:
 <p class="d-fc-success d-body--sm">Available</p>
 </dt-stack>
 </dt-stack>
-</div>
+</dt-stack>
 
 - Don’t use different colors for text and icons.
 - Don’t use more than one color within an icon.
@@ -146,12 +146,12 @@ We encourage utilizing the [Stack component](/components/stack.md) for aligning 
 <div class="d-gc2">
 <code-well-header>
   <div class="d-d-grid d-g24 d-g-cols1 md:d-g-cols2 d-w100p">
-    <div class="d-fl-center">
+    <dt-stack direction="row" align="center" justify="center" outline>
       <dt-stack :direction="selectedDirection" class="d-fl-center" gap="300">
       <dt-icon-settings size="300" />
       <p>Settings</p>
       </dt-stack>
-    </div>
+    </dt-stack>
     <dt-select-menu label="Direction" :options="stackDirection" @change="changeDirection" />
   </div>
 </code-well-header>
