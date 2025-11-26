@@ -680,9 +680,16 @@ async function processFile(filePath, options) {
 
     await fs.writeFile(filePath, newContent, 'utf-8');
     console.log(log.green(`   ✓ Saved ${changes} change(s)`));
+
+    // Check if file needs DtStack import
+    const importCheck = detectMissingStackImport(newContent, changes > 0);
+    if (importCheck?.needsImport) {
+      printImportInstructions(filePath, importCheck);
+      return { changes, skipped, needsImport: true };
+    }
   }
 
-  return { changes, skipped };
+  return { changes, skipped, needsImport: false };
 }
 
 /**
@@ -728,6 +735,83 @@ async function cleanupMarkers(filePath, options) {
   return { changes: matches.length, skipped: 0 };
 }
 
+/**
+ * Check if a file needs DtStack import
+ * @param {string} content - Full file content
+ * @param {boolean} usesStack - Whether file has <dt-stack> in template
+ * @returns {object|null} - Detection result with suggested import path, or null if import exists
+ */
+function detectMissingStackImport(content, usesStack) {
+  if (!usesStack) return null;
+
+  // Check if DtStack is already imported
+  const hasImport = /import\s+(?:\{[^}]*\bDtStack\b[^}]*\}|DtStack)\s+from/.test(content);
+  if (hasImport) return null;
+
+  // Analyze existing imports to suggest appropriate path
+  const importPath = detectImportPattern(content);
+
+  return {
+    needsImport: true,
+    suggestedPath: importPath,
+    hasComponentsObject: /components:\s*\{/.test(content),
+  };
+}
+
+/**
+ * Detect import pattern from existing imports in file
+ * @param {string} content - File content
+ * @returns {string} - Suggested import path
+ */
+function detectImportPattern(content) {
+  // Check for @/ alias (absolute from package root)
+  if (content.includes('from \'@/components/')) {
+    return '@/components/stack';
+  }
+
+  // Check for relative barrel imports
+  if (content.includes('from \'./\'')) {
+    return './'; // User should adjust based on context
+  }
+
+  // Check for external package imports
+  if (content.includes('from \'@dialpad/dialtone-vue') || content.includes('from \'@dialpad/dialtone-icons')) {
+    return '@dialpad/dialtone-vue3';
+  }
+
+  // Default suggestion
+  return '@/components/stack';
+}
+
+/**
+ * Print instructions for adding DtStack import and registration
+ * @param {string} filePath - Path to the file
+ * @param {object} importCheck - Result from detectMissingStackImport
+ */
+function printImportInstructions(filePath, importCheck) {
+  console.log(log.yellow('\n⚠️  ACTION REQUIRED: Add DtStack import and registration'));
+  console.log(log.cyan(`   File: ${filePath}`));
+  console.log();
+  console.log(log.gray('   Add this import to your <script> block:'));
+  console.log(log.green(`   import { DtStack } from '${importCheck.suggestedPath}';`));
+  console.log();
+
+  if (importCheck.hasComponentsObject) {
+    console.log(log.gray('   Add to your components object:'));
+    console.log(log.green('   components: {'));
+    console.log(log.green('     // ... existing components'));
+    console.log(log.green('     DtStack,'));
+    console.log(log.green('   },'));
+  } else {
+    console.log(log.gray('   Create or update your components object:'));
+    console.log(log.green('   export default {'));
+    console.log(log.green('     components: { DtStack },'));
+    console.log(log.green('     // ... rest of your component'));
+    console.log(log.green('   };'));
+  }
+  console.log();
+}
+
 //------------------------------------------------------------------------------
 // Argument Parsing (simple, no yargs)
 //------------------------------------------------------------------------------
@@ -755,6 +839,9 @@ Usage: npx dialtone-migrate-flex-to-stack [options]
 
 Migrates d-d-flex utility patterns to <dt-stack> components.
 
+After migration, you'll need to add DtStack imports manually.
+The script will print detailed instructions for each file.
+
 Options:
   --cwd <path>     Working directory (default: current directory)
   --ext <ext>      File extension to process (default: .vue)
@@ -767,6 +854,12 @@ Options:
   --show-outline   Add data-migrate-outline attribute for visual debugging
   --remove-outline Remove data-migrate-outline attributes after review
   --help, -h       Show help
+
+Post-Migration Steps:
+  1. Review template changes with data-migrate-outline markers
+  2. Add DtStack imports as instructed by the script
+  3. Test your application
+  4. Run with --remove-outline to clean up markers
 
 Examples:
   npx dialtone-migrate-flex-to-stack                          # Process .vue files
@@ -871,6 +964,8 @@ async function main() {
   let totalChanges = 0;
   let totalSkipped = 0;
   let filesModified = 0;
+  let filesNeedingImports = 0;
+  const fileList = [];
 
   for (const file of files) {
     let result;
@@ -895,6 +990,12 @@ async function main() {
     totalChanges += result.changes;
     totalSkipped += result.skipped;
     if (result.changes > 0) filesModified++;
+
+    // Track files that need imports
+    if (result.needsImport) {
+      filesNeedingImports++;
+      fileList.push(file);
+    }
   }
 
   // Summary
@@ -907,6 +1008,16 @@ async function main() {
   } else {
     console.log(`   Changes applied: ${totalChanges}`);
     console.log(`   Changes skipped: ${totalSkipped}`);
+  }
+
+  if (filesNeedingImports > 0 && !options.removeOutline && !options.dryRun) {
+    console.log(log.yellow(`\n⚠️  ${filesNeedingImports} file(s) need DtStack import/registration`));
+    console.log(log.gray('   See instructions above for each file.'));
+    console.log();
+    console.log(log.gray('   Quick checklist:'));
+    fileList.forEach(file => {
+      console.log(log.gray(`   [ ] ${file}`));
+    });
   }
 
   if (options.dryRun && totalChanges > 0) {
