@@ -10,11 +10,11 @@ description: Utility classes to change an element’s position type.
     <code class="d-bgc-transparent">Relative Parent</code>
     <div class="d-ps-static d-bgc-moderate-opaque d-p16 d-h464 d-bar8">
       <code class="d-bgc-transparent">Static Parent</code>
-      <dt-stack direction="row" align="center" justify="center" class="d-ps-absolute d-t0 d-r12 d-h128 d-w128 d-p8 d-bar8 d-bgc-moderate-opaque d-code--sm" style="--migrate-outline-color: orangered; outline: 2px solid var(--migrate-outline-color); outline-off-set: -2px">.d-ps-absolute<br>.d-t0<br>.d-r12</dt-stack>
-      <dt-stack direction="row" align="center" justify="center" class="d-ps-absolute d-b0 d-rn12 d-h128 d-w128 d-p8 d-bar8 d-bgc-moderate-opaque d-code--sm" style="--migrate-outline-color: orangered; outline: 2px solid var(--migrate-outline-color); outline-off-set: -2px">.d-ps-absolute<br>.d-b0<br>.d-rn12</dt-stack>
-      <dt-stack direction="row" align="center" justify="center" class="d-ps-sticky d-t0 d-h128 d-w128 d-p8 d-bar8 d-bgc-moderate-opaque d-code--sm" style="--migrate-outline-color: orangered; outline: 2px solid var(--migrate-outline-color); outline-off-set: -2px">.d-ps-sticky<br>.d-t0</dt-stack>
-      <dt-stack direction="row" align="center" justify="center" class="d-ps-relative d-t32 d-l64 d-h128 d-w128 d-p8 d-bar8 d-bgc-moderate-opaque d-code--sm" style="--migrate-outline-color: orangered; outline: 2px solid var(--migrate-outline-color); outline-off-set: -2px">.d-ps-relative<br>.d-t32<br>.d-l64</dt-stack>
-      <dt-stack direction="row" align="center" justify="center" class="d-ps-fixed d-t50p d-l50p d-h128 d-w128 d-p8 d-bar8 d-bgc-moderate-opaque d-code--sm" style="--migrate-outline-color: orangered; outline: 2px solid var(--migrate-outline-color); outline-off-set: -2px">.d-ps-fixed<br>.d-t50p<br>.d-l50p</dt-stack>
+      <dt-stack direction="row" align="center" justify="center" class="d-ps-absolute d-t0 d-r12 d-h128 d-w128 d-p8 d-bar8 d-bgc-moderate-opaque d-code--sm" data-migrate-outline>.d-ps-absolute<br>.d-t0<br>.d-r12</dt-stack>
+      <dt-stack direction="row" align="center" justify="center" class="d-ps-absolute d-b0 d-rn12 d-h128 d-w128 d-p8 d-bar8 d-bgc-moderate-opaque d-code--sm" data-migrate-outline>.d-ps-absolute<br>.d-b0<br>.d-rn12</dt-stack>
+      <dt-stack direction="row" align="center" justify="center" class="d-ps-sticky d-t0 d-h128 d-w128 d-p8 d-bar8 d-bgc-moderate-opaque d-code--sm" data-migrate-outline>.d-ps-sticky<br>.d-t0</dt-stack>
+      <dt-stack direction="row" align="center" justify="center" class="d-ps-relative d-t32 d-l64 d-h128 d-w128 d-p8 d-bar8 d-bgc-moderate-opaque d-code--sm" data-migrate-outline>.d-ps-relative<br>.d-t32<br>.d-l64</dt-stack>
+      <dt-stack direction="row" align="center" justify="center" class="d-ps-fixed d-t50p d-l50p d-h128 d-w128 d-p8 d-bar8 d-bgc-moderate-opaque d-code--sm" data-migrate-outline>.d-ps-fixed<br>.d-t50p<br>.d-l50p</dt-stack>
     </div>
   </div>
 </code-well-header>

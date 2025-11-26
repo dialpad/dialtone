@@ -9,10 +9,10 @@ Use `d-ji-auto` to justify grid items automatically along their inline axis. Thi
 
 <code-well-header>
   <div class="d-d-grid d-g16 d-g-cols2 d-ji-auto d-w100p d-bar8 d-bgc-moderate">
-    <dt-stack direction="row" align="center" justify="center" class="d-p16 d-wmn64 d-bgc-moderate-opaque d-bar4" style="--migrate-outline-color: orangered; outline: 2px solid var(--migrate-outline-color); outline-off-set: -2px">1</dt-stack>
-    <dt-stack direction="row" align="center" justify="center" class="d-p16 d-wmn64 d-bgc-moderate-opaque d-bar4" style="--migrate-outline-color: orangered; outline: 2px solid var(--migrate-outline-color); outline-off-set: -2px">2</dt-stack>
-    <dt-stack direction="row" align="center" justify="center" class="d-p16 d-wmn64 d-bgc-moderate-opaque d-bar4" style="--migrate-outline-color: orangered; outline: 2px solid var(--migrate-outline-color); outline-off-set: -2px">3</dt-stack>
-    <dt-stack direction="row" align="center" justify="center" class="d-p16 d-wmn64 d-bgc-moderate-opaque d-bar4" style="--migrate-outline-color: orangered; outline: 2px solid var(--migrate-outline-color); outline-off-set: -2px">4</dt-stack>
+    <dt-stack direction="row" align="center" justify="center" class="d-p16 d-wmn64 d-bgc-moderate-opaque d-bar4" data-migrate-outline>1</dt-stack>
+    <dt-stack direction="row" align="center" justify="center" class="d-p16 d-wmn64 d-bgc-moderate-opaque d-bar4" data-migrate-outline>2</dt-stack>
+    <dt-stack direction="row" align="center" justify="center" class="d-p16 d-wmn64 d-bgc-moderate-opaque d-bar4" data-migrate-outline>3</dt-stack>
+    <dt-stack direction="row" align="center" justify="center" class="d-p16 d-wmn64 d-bgc-moderate-opaque d-bar4" data-migrate-outline>4</dt-stack>
   </div>
 </code-well-header>
 
@@ -31,10 +31,10 @@ Use `d-ji-start` to justify items against the start of their inline axis. Note t
 
 <code-well-header>
   <div class="d-d-grid d-g16 d-g-cols2 d-ji-start d-w100p d-bar8 d-bgc-moderate">
-    <dt-stack direction="row" align="center" justify="center" class="d-p16 d-wmn64 d-bgc-moderate-opaque d-bar4" style="--migrate-outline-color: orangered; outline: 2px solid var(--migrate-outline-color); outline-off-set: -2px">1</dt-stack>
-    <dt-stack direction="row" align="center" justify="center" class="d-p16 d-wmn64 d-bgc-moderate-opaque d-bar4" style="--migrate-outline-color: orangered; outline: 2px solid var(--migrate-outline-color); outline-off-set: -2px">2</dt-stack>
-    <dt-stack direction="row" align="center" justify="center" class="d-p16 d-wmn64 d-bgc-moderate-opaque d-bar4" style="--migrate-outline-color: orangered; outline: 2px solid var(--migrate-outline-color); outline-off-set: -2px">3</dt-stack>
-    <dt-stack direction="row" align="center" justify="center" class="d-p16 d-wmn64 d-bgc-moderate-opaque d-bar4" style="--migrate-outline-color: orangered; outline: 2px solid var(--migrate-outline-color); outline-off-set: -2px">4</dt-stack>
+    <dt-stack direction="row" align="center" justify="center" class="d-p16 d-wmn64 d-bgc-moderate-opaque d-bar4" data-migrate-outline>1</dt-stack>
+    <dt-stack direction="row" align="center" justify="center" class="d-p16 d-wmn64 d-bgc-moderate-opaque d-bar4" data-migrate-outline>2</dt-stack>
+    <dt-stack direction="row" align="center" justify="center" class="d-p16 d-wmn64 d-bgc-moderate-opaque d-bar4" data-migrate-outline>3</dt-stack>
+    <dt-stack direction="row" align="center" justify="center" class="d-p16 d-wmn64 d-bgc-moderate-opaque d-bar4" data-migrate-outline>4</dt-stack>
   </div>
 </code-well-header>
 
@@ -53,10 +53,10 @@ Use `d-ji-end` to justify items against the end of their inline axis. Note that 
 
 <code-well-header>
   <div class="d-d-grid d-g16 d-g-cols2 d-ji-end d-w100p d-bar8 d-bgc-moderate">
-    <dt-stack direction="row" align="center" justify="center" class="d-p16 d-wmn64 d-bgc-moderate-opaque d-bar4" style="--migrate-outline-color: orangered; outline: 2px solid var(--migrate-outline-color); outline-off-set: -2px">1</dt-stack>
-    <dt-stack direction="row" align="center" justify="center" class="d-p16 d-wmn64 d-bgc-moderate-opaque d-bar4" style="--migrate-outline-color: orangered; outline: 2px solid var(--migrate-outline-color); outline-off-set: -2px">2</dt-stack>
-    <dt-stack direction="row" align="center" justify="center" class="d-p16 d-wmn64 d-bgc-moderate-opaque d-bar4" style="--migrate-outline-color: orangered; outline: 2px solid var(--migrate-outline-color); outline-off-set: -2px">3</dt-stack>
-    <dt-stack direction="row" align="center" justify="center" class="d-p16 d-wmn64 d-bgc-moderate-opaque d-bar4" style="--migrate-outline-color: orangered; outline: 2px solid var(--migrate-outline-color); outline-off-set: -2px">4</dt-stack>
+    <dt-stack direction="row" align="center" justify="center" class="d-p16 d-wmn64 d-bgc-moderate-opaque d-bar4" data-migrate-outline>1</dt-stack>
+    <dt-stack direction="row" align="center" justify="center" class="d-p16 d-wmn64 d-bgc-moderate-opaque d-bar4" data-migrate-outline>2</dt-stack>
+    <dt-stack direction="row" align="center" justify="center" class="d-p16 d-wmn64 d-bgc-moderate-opaque d-bar4" data-migrate-outline>3</dt-stack>
+    <dt-stack direction="row" align="center" justify="center" class="d-p16 d-wmn64 d-bgc-moderate-opaque d-bar4" data-migrate-outline>4</dt-stack>
   </div>
 </code-well-header>
 
@@ -75,10 +75,10 @@ Use `d-ji-center` to justify items to the center of their inline axis.
 
 <code-well-header>
   <div class="d-d-grid d-g16 d-g-cols2 d-ji-center d-w100p d-bar8 d-bgc-moderate">
-    <dt-stack direction="row" align="center" justify="center" class="d-p16 d-wmn64 d-bgc-moderate-opaque d-bar4" style="--migrate-outline-color: orangered; outline: 2px solid var(--migrate-outline-color); outline-off-set: -2px">1</dt-stack>
-    <dt-stack direction="row" align="center" justify="center" class="d-p16 d-wmn64 d-bgc-moderate-opaque d-bar4" style="--migrate-outline-color: orangered; outline: 2px solid var(--migrate-outline-color); outline-off-set: -2px">2</dt-stack>
-    <dt-stack direction="row" align="center" justify="center" class="d-p16 d-wmn64 d-bgc-moderate-opaque d-bar4" style="--migrate-outline-color: orangered; outline: 2px solid var(--migrate-outline-color); outline-off-set: -2px">3</dt-stack>
-    <dt-stack direction="row" align="center" justify="center" class="d-p16 d-wmn64 d-bgc-moderate-opaque d-bar4" style="--migrate-outline-color: orangered; outline: 2px solid var(--migrate-outline-color); outline-off-set: -2px">4</dt-stack>
+    <dt-stack direction="row" align="center" justify="center" class="d-p16 d-wmn64 d-bgc-moderate-opaque d-bar4" data-migrate-outline>1</dt-stack>
+    <dt-stack direction="row" align="center" justify="center" class="d-p16 d-wmn64 d-bgc-moderate-opaque d-bar4" data-migrate-outline>2</dt-stack>
+    <dt-stack direction="row" align="center" justify="center" class="d-p16 d-wmn64 d-bgc-moderate-opaque d-bar4" data-migrate-outline>3</dt-stack>
+    <dt-stack direction="row" align="center" justify="center" class="d-p16 d-wmn64 d-bgc-moderate-opaque d-bar4" data-migrate-outline>4</dt-stack>
   </div>
 </code-well-header>
 

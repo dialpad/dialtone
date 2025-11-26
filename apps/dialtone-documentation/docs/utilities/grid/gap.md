@@ -9,10 +9,10 @@ Use `d-g{#}` to universally change the row and column gap space in grid layouts.
 
 <code-well-header>
   <div class="d-d-grid d-g16 d-g-cols2 d-w100p d-bar8 d-bgc-bold">
-    <dt-stack direction="row" align="center" justify="center" class="d-p16 d-bgc-moderate d-bar4" style="--migrate-outline-color: orangered; outline: 2px solid var(--migrate-outline-color); outline-off-set: -2px">1</dt-stack>
-    <dt-stack direction="row" align="center" justify="center" class="d-p16 d-bgc-moderate d-bar4" style="--migrate-outline-color: orangered; outline: 2px solid var(--migrate-outline-color); outline-off-set: -2px">2</dt-stack>
-    <dt-stack direction="row" align="center" justify="center" class="d-p16 d-bgc-moderate d-bar4" style="--migrate-outline-color: orangered; outline: 2px solid var(--migrate-outline-color); outline-off-set: -2px">3</dt-stack>
-    <dt-stack direction="row" align="center" justify="center" class="d-p16 d-bgc-moderate d-bar4" style="--migrate-outline-color: orangered; outline: 2px solid var(--migrate-outline-color); outline-off-set: -2px">4</dt-stack>
+    <dt-stack direction="row" align="center" justify="center" class="d-p16 d-bgc-moderate d-bar4" data-migrate-outline>1</dt-stack>
+    <dt-stack direction="row" align="center" justify="center" class="d-p16 d-bgc-moderate d-bar4" data-migrate-outline>2</dt-stack>
+    <dt-stack direction="row" align="center" justify="center" class="d-p16 d-bgc-moderate d-bar4" data-migrate-outline>3</dt-stack>
+    <dt-stack direction="row" align="center" justify="center" class="d-p16 d-bgc-moderate d-bar4" data-migrate-outline>4</dt-stack>
   </div>
 </code-well-header>
 
@@ -31,15 +31,15 @@ Use `d-cg{#}` or `d-rg{#}` to independently change the row and column gap space 
 
 <code-well-header>
   <div class="d-d-grid d-cg24 d-rg8 d-g-cols3 d-w100p d-bar8 d-bgc-bold">
-    <dt-stack direction="row" align="center" justify="center" class="d-p16 d-bgc-moderate d-bar4" style="--migrate-outline-color: orangered; outline: 2px solid var(--migrate-outline-color); outline-off-set: -2px">1</dt-stack>
-    <dt-stack direction="row" align="center" justify="center" class="d-p16 d-bgc-moderate d-bar4" style="--migrate-outline-color: orangered; outline: 2px solid var(--migrate-outline-color); outline-off-set: -2px">2</dt-stack>
-    <dt-stack direction="row" align="center" justify="center" class="d-p16 d-bgc-moderate d-bar4" style="--migrate-outline-color: orangered; outline: 2px solid var(--migrate-outline-color); outline-off-set: -2px">3</dt-stack>
-    <dt-stack direction="row" align="center" justify="center" class="d-p16 d-bgc-moderate d-bar4" style="--migrate-outline-color: orangered; outline: 2px solid var(--migrate-outline-color); outline-off-set: -2px">4</dt-stack>
-    <dt-stack direction="row" align="center" justify="center" class="d-p16 d-bgc-moderate d-bar4" style="--migrate-outline-color: orangered; outline: 2px solid var(--migrate-outline-color); outline-off-set: -2px">5</dt-stack>
-    <dt-stack direction="row" align="center" justify="center" class="d-p16 d-bgc-moderate d-bar4" style="--migrate-outline-color: orangered; outline: 2px solid var(--migrate-outline-color); outline-off-set: -2px">6</dt-stack>
-    <dt-stack direction="row" align="center" justify="center" class="d-p16 d-bgc-moderate d-bar4" style="--migrate-outline-color: orangered; outline: 2px solid var(--migrate-outline-color); outline-off-set: -2px">7</dt-stack>
-    <dt-stack direction="row" align="center" justify="center" class="d-p16 d-bgc-moderate d-bar4" style="--migrate-outline-color: orangered; outline: 2px solid var(--migrate-outline-color); outline-off-set: -2px">8</dt-stack>
-    <dt-stack direction="row" align="center" justify="center" class="d-p16 d-bgc-moderate d-bar4" style="--migrate-outline-color: orangered; outline: 2px solid var(--migrate-outline-color); outline-off-set: -2px">9</dt-stack>
+    <dt-stack direction="row" align="center" justify="center" class="d-p16 d-bgc-moderate d-bar4" data-migrate-outline>1</dt-stack>
+    <dt-stack direction="row" align="center" justify="center" class="d-p16 d-bgc-moderate d-bar4" data-migrate-outline>2</dt-stack>
+    <dt-stack direction="row" align="center" justify="center" class="d-p16 d-bgc-moderate d-bar4" data-migrate-outline>3</dt-stack>
+    <dt-stack direction="row" align="center" justify="center" class="d-p16 d-bgc-moderate d-bar4" data-migrate-outline>4</dt-stack>
+    <dt-stack direction="row" align="center" justify="center" class="d-p16 d-bgc-moderate d-bar4" data-migrate-outline>5</dt-stack>
+    <dt-stack direction="row" align="center" justify="center" class="d-p16 d-bgc-moderate d-bar4" data-migrate-outline>6</dt-stack>
+    <dt-stack direction="row" align="center" justify="center" class="d-p16 d-bgc-moderate d-bar4" data-migrate-outline>7</dt-stack>
+    <dt-stack direction="row" align="center" justify="center" class="d-p16 d-bgc-moderate d-bar4" data-migrate-outline>8</dt-stack>
+    <dt-stack direction="row" align="center" justify="center" class="d-p16 d-bgc-moderate d-bar4" data-migrate-outline>9</dt-stack>
   </div>
 </code-well-header>
 

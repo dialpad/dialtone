@@ -9,10 +9,10 @@ Use `d-pli-stretch{-n}` to stretch grid items along their block and inline axis.
 
 <code-well-header>
   <div class="d-d-grid d-g-cols2 d-pli-stretch d-g16 d-w100p d-hmn216 d-bar8 d-bgc-moderate">
-    <dt-stack direction="row" align="center" justify="center" class="d-p16 d-bgc-moderate-opaque d-bar4" style="--migrate-outline-color: orangered; outline: 2px solid var(--migrate-outline-color); outline-off-set: -2px">1</dt-stack>
-    <dt-stack direction="row" align="center" justify="center" class="d-p16 d-bgc-moderate-opaque d-bar4" style="--migrate-outline-color: orangered; outline: 2px solid var(--migrate-outline-color); outline-off-set: -2px">2</dt-stack>
-    <dt-stack direction="row" align="center" justify="center" class="d-p16 d-bgc-moderate-opaque d-bar4" style="--migrate-outline-color: orangered; outline: 2px solid var(--migrate-outline-color); outline-off-set: -2px">3</dt-stack>
-    <dt-stack direction="row" align="center" justify="center" class="d-p16 d-bgc-moderate-opaque d-bar4" style="--migrate-outline-color: orangered; outline: 2px solid var(--migrate-outline-color); outline-off-set: -2px">4</dt-stack>
+    <dt-stack direction="row" align="center" justify="center" class="d-p16 d-bgc-moderate-opaque d-bar4" data-migrate-outline>1</dt-stack>
+    <dt-stack direction="row" align="center" justify="center" class="d-p16 d-bgc-moderate-opaque d-bar4" data-migrate-outline>2</dt-stack>
+    <dt-stack direction="row" align="center" justify="center" class="d-p16 d-bgc-moderate-opaque d-bar4" data-migrate-outline>3</dt-stack>
+    <dt-stack direction="row" align="center" justify="center" class="d-p16 d-bgc-moderate-opaque d-bar4" data-migrate-outline>4</dt-stack>
   </div>
 </code-well-header>
 
@@ -31,10 +31,10 @@ Use `d-pli-start{-n}` to align grid items along the start of their block and/or 
 
 <code-well-header>
   <div class="d-d-grid d-g-cols2 d-pli-start d-g16 d-w100p d-h216 d-bar8 d-bgc-moderate">
-    <dt-stack direction="row" align="center" justify="center" class="d-p16 d-w64 d-h64 d-bgc-moderate-opaque d-bar4" style="--migrate-outline-color: orangered; outline: 2px solid var(--migrate-outline-color); outline-off-set: -2px">1</dt-stack>
-    <dt-stack direction="row" align="center" justify="center" class="d-p16 d-w64 d-h64 d-bgc-moderate-opaque d-bar4" style="--migrate-outline-color: orangered; outline: 2px solid var(--migrate-outline-color); outline-off-set: -2px">2</dt-stack>
-    <dt-stack direction="row" align="center" justify="center" class="d-p16 d-w64 d-h64 d-bgc-moderate-opaque d-bar4" style="--migrate-outline-color: orangered; outline: 2px solid var(--migrate-outline-color); outline-off-set: -2px">3</dt-stack>
-    <dt-stack direction="row" align="center" justify="center" class="d-p16 d-w64 d-h64 d-bgc-moderate-opaque d-bar4" style="--migrate-outline-color: orangered; outline: 2px solid var(--migrate-outline-color); outline-off-set: -2px">4</dt-stack>
+    <dt-stack direction="row" align="center" justify="center" class="d-p16 d-w64 d-h64 d-bgc-moderate-opaque d-bar4" data-migrate-outline>1</dt-stack>
+    <dt-stack direction="row" align="center" justify="center" class="d-p16 d-w64 d-h64 d-bgc-moderate-opaque d-bar4" data-migrate-outline>2</dt-stack>
+    <dt-stack direction="row" align="center" justify="center" class="d-p16 d-w64 d-h64 d-bgc-moderate-opaque d-bar4" data-migrate-outline>3</dt-stack>
+    <dt-stack direction="row" align="center" justify="center" class="d-p16 d-w64 d-h64 d-bgc-moderate-opaque d-bar4" data-migrate-outline>4</dt-stack>
   </div>
 </code-well-header>
 
@@ -53,10 +53,10 @@ Use `d-pli-end{-n}` to align grid items along the end of their block and/or inli
 
 <code-well-header>
   <div class="d-d-grid d-g-cols2 d-pli-end d-g16 d-w100p d-h216 d-bar8 d-bgc-moderate">
-    <dt-stack direction="row" align="center" justify="center" class="d-p16 d-w64 d-h64 d-bgc-moderate-opaque d-bar4" style="--migrate-outline-color: orangered; outline: 2px solid var(--migrate-outline-color); outline-off-set: -2px">1</dt-stack>
-    <dt-stack direction="row" align="center" justify="center" class="d-p16 d-w64 d-h64 d-bgc-moderate-opaque d-bar4" style="--migrate-outline-color: orangered; outline: 2px solid var(--migrate-outline-color); outline-off-set: -2px">2</dt-stack>
-    <dt-stack direction="row" align="center" justify="center" class="d-p16 d-w64 d-h64 d-bgc-moderate-opaque d-bar4" style="--migrate-outline-color: orangered; outline: 2px solid var(--migrate-outline-color); outline-off-set: -2px">3</dt-stack>
-    <dt-stack direction="row" align="center" justify="center" class="d-p16 d-w64 d-h64 d-bgc-moderate-opaque d-bar4" style="--migrate-outline-color: orangered; outline: 2px solid var(--migrate-outline-color); outline-off-set: -2px">4</dt-stack>
+    <dt-stack direction="row" align="center" justify="center" class="d-p16 d-w64 d-h64 d-bgc-moderate-opaque d-bar4" data-migrate-outline>1</dt-stack>
+    <dt-stack direction="row" align="center" justify="center" class="d-p16 d-w64 d-h64 d-bgc-moderate-opaque d-bar4" data-migrate-outline>2</dt-stack>
+    <dt-stack direction="row" align="center" justify="center" class="d-p16 d-w64 d-h64 d-bgc-moderate-opaque d-bar4" data-migrate-outline>3</dt-stack>
+    <dt-stack direction="row" align="center" justify="center" class="d-p16 d-w64 d-h64 d-bgc-moderate-opaque d-bar4" data-migrate-outline>4</dt-stack>
   </div>
 </code-well-header>
 
@@ -75,10 +75,10 @@ Use `d-pli-center{-n}` to align grid items along the center of their block and/o
 
 <code-well-header>
   <div class="d-d-grid d-g-cols2 d-pli-center d-g16 d-w100p d-h216 d-bar8 d-bgc-moderate">
-    <dt-stack direction="row" align="center" justify="center" class="d-p16 d-w64 d-h64 d-bgc-moderate-opaque d-bar4" style="--migrate-outline-color: orangered; outline: 2px solid var(--migrate-outline-color); outline-off-set: -2px">1</dt-stack>
-    <dt-stack direction="row" align="center" justify="center" class="d-p16 d-w64 d-h64 d-bgc-moderate-opaque d-bar4" style="--migrate-outline-color: orangered; outline: 2px solid var(--migrate-outline-color); outline-off-set: -2px">2</dt-stack>
-    <dt-stack direction="row" align="center" justify="center" class="d-p16 d-w64 d-h64 d-bgc-moderate-opaque d-bar4" style="--migrate-outline-color: orangered; outline: 2px solid var(--migrate-outline-color); outline-off-set: -2px">3</dt-stack>
-    <dt-stack direction="row" align="center" justify="center" class="d-p16 d-w64 d-h64 d-bgc-moderate-opaque d-bar4" style="--migrate-outline-color: orangered; outline: 2px solid var(--migrate-outline-color); outline-off-set: -2px">4</dt-stack>
+    <dt-stack direction="row" align="center" justify="center" class="d-p16 d-w64 d-h64 d-bgc-moderate-opaque d-bar4" data-migrate-outline>1</dt-stack>
+    <dt-stack direction="row" align="center" justify="center" class="d-p16 d-w64 d-h64 d-bgc-moderate-opaque d-bar4" data-migrate-outline>2</dt-stack>
+    <dt-stack direction="row" align="center" justify="center" class="d-p16 d-w64 d-h64 d-bgc-moderate-opaque d-bar4" data-migrate-outline>3</dt-stack>
+    <dt-stack direction="row" align="center" justify="center" class="d-p16 d-w64 d-h64 d-bgc-moderate-opaque d-bar4" data-migrate-outline>4</dt-stack>
   </div>
 </code-well-header>
 

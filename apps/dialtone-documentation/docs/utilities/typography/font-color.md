@@ -100,7 +100,7 @@ Use `d-fco{n}` to change an element's text color opacity. You can also change fo
         {'d-bgc-primary': !className.endsWith('inverted')},
         {'d-bgc-contrast': className.endsWith('inverted')},
         className
-      ]" style="--migrate-outline-color: orangered; outline: 2px solid var(--migrate-outline-color); outline-off-set: -2px">
+      ]" data-migrate-outline>
       <span>Aa</span>
     </dt-stack>
   </template>

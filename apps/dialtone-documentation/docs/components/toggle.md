@@ -8,7 +8,7 @@ storybook: https://dialtone.dialpad.com/vue/?path=/story/components-toggle--defa
 figma_url: https://www.figma.com/design/W58r5BkO8qTw3vem9YieJd/DT9-Component-Library--Rebrand-2025-?node-id=8272-20496
 ---
 <code-well-header>
-  <dt-stack direction="row" align="center" class="d-toggle-group" style="--migrate-outline-color: orangered; outline: 2px solid var(--migrate-outline-color); outline-off-set: -2px">
+  <dt-stack direction="row" align="center" class="d-toggle-group" data-migrate-outline>
     <dt-toggle label-class="d-mr6">Label</dt-toggle>
   </dt-stack>
 </code-well-header>

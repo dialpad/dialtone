@@ -8,8 +8,8 @@ description: Utilities to control an element's width.
 Use `d-w{n}p` to set a percentage width for an element.
 
 <code-well-header class="d-d-flex d-fd-column d-p24 d-bgc-secondary d-w100p d-hmx332 d-stack16 d-code--md d-ta-center d-of-y-scroll" v-dt-scrollbar:never custom>
-  <dt-stack direction="row" align="center" justify="center" class="d-ps-relative" v-for="i in percentage" style="--migrate-outline-color: orangered; outline: 2px solid var(--migrate-outline-color); outline-off-set: -2px">
-    <dt-stack as="span" direction="row" align="center" class="d-zi-active d-h64" style="--migrate-outline-color: orangered; outline: 2px solid var(--migrate-outline-color); outline-off-set: -2px">d-w{{i}}p</dt-stack>
+  <dt-stack direction="row" align="center" justify="center" class="d-ps-relative" v-for="i in percentage" data-migrate-outline>
+    <dt-stack as="span" direction="row" align="center" class="d-zi-active d-h64" data-migrate-outline>d-w{{i}}p</dt-stack>
     <div class="d-w100p d-h64 d-ps-absolute d-bgc-moderate">
       <div class="d-h64 d-bgc-moderate-opaque d-bar4" :class="`d-w${i}p`"></div>
     </div>
@@ -36,7 +36,7 @@ Use `d-w{n}p` to set a percentage width for an element.
 Use `d-w{n}` to set a fixed width for an element.
 
 <code-well-header class="d-d-flex d-fd-column d-p24 d-bgc-secondary d-w100p d-hmx332 d-stack16 d-ta-center d-of-scroll" v-dt-scrollbar:never custom>
-  <dt-stack direction="row" align="center" class="d-pls-start" v-for="(i, index) in fixed" style="--migrate-outline-color: orangered; outline: 2px solid var(--migrate-outline-color); outline-off-set: -2px">
+  <dt-stack direction="row" align="center" class="d-pls-start" v-for="(i, index) in fixed" data-migrate-outline>
     <span class="d-w72">d-w{{i}}</span>
     <div class="d-h64 d-bgc-moderate d-bar4" :class="`d-w${i}`"></div>
   </dt-stack>
@@ -84,7 +84,7 @@ Use `d-w{n}` to set a fixed width for an element.
 Use `d-w100vw` to have an element cover the user's viewport.
 
 <code-well-header class="d-ps-relative d-d-flex d-jc-center d-p24 d-bgc-secondary d-w100p d-h3 d-stack16 d-of-y-scroll" custom>
-  <dt-stack direction="row" align="center" justify="center" class="d-py16 d-px8 d-w100vw d-h100vh d-bgc-moderate d-bar4 d-ta-center" style="--migrate-outline-color: orangered; outline: 2px solid var(--migrate-outline-color); outline-off-set: -2px">Viewport</dt-stack>
+  <dt-stack direction="row" align="center" justify="center" class="d-py16 d-px8 d-w100vw d-h100vh d-bgc-moderate d-bar4 d-ta-center" data-migrate-outline>Viewport</dt-stack>
 </code-well-header>
 
 ```html
@@ -96,7 +96,7 @@ Use `d-w100vw` to have an element cover the user's viewport.
 Use `d-w-auto` have the browser calculate and select a width.
 
 <code-well-header class="d-ps-relative d-d-flex d-jc-center d-p24 d-bgc-secondary d-w100p d-hmn102 d-stack16" custom>
-  <dt-stack direction="row" align="center" justify="center" class="d-py16 d-px8 d-h72 d-w-auto d-bgc-moderate d-bar4 d-ta-center" style="--migrate-outline-color: orangered; outline: 2px solid var(--migrate-outline-color); outline-off-set: -2px">Auto</dt-stack>
+  <dt-stack direction="row" align="center" justify="center" class="d-py16 d-px8 d-h72 d-w-auto d-bgc-moderate d-bar4 d-ta-center" data-migrate-outline>Auto</dt-stack>
 </code-well-header>
 
 ```html

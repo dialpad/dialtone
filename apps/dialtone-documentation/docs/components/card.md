@@ -22,7 +22,7 @@ storybook: https://dialtone.dialpad.com/vue/?path=/story/components-card--defaul
       <div>Content slot. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec fermentum molestie semper. Morbi finibus nulla turpis, nec molestie mi rutrum.</div>
     </div>
     <div class="d-card__footer">
-      <dt-stack direction="row" gap="400" style="--migrate-outline-color: orangered; outline: 2px solid var(--migrate-outline-color); outline-off-set: -2px">
+      <dt-stack direction="row" gap="400" data-migrate-outline>
         <button type="button" class="d-btn d-btn--sm d-btn--outlined">Button</button>
       </dt-stack>
     </div>
@@ -167,7 +167,7 @@ showHtmlWarning />
       <div>Content slot. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec fermentum molestie semper. Morbi finibus nulla turpis, nec molestie mi rutrum.</div>
     </div>
     <div class="d-card__footer">
-      <dt-stack direction="row" gap="400" style="--migrate-outline-color: orangered; outline: 2px solid var(--migrate-outline-color); outline-off-set: -2px">
+      <dt-stack direction="row" gap="400" data-migrate-outline>
         <button type="button" class="d-btn d-btn--sm d-btn--outlined">Button</button>
       </dt-stack>
     </div>
@@ -181,7 +181,7 @@ htmlCode='
     <div>Content slot. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec fermentum molestie semper. Morbi finibus nulla turpis, nec molestie mi rutrum.</div>
   </div>
   <div class="d-card__footer">
-    <dt-stack direction="row" gap="400" style="--migrate-outline-color: orangered; outline: 2px solid var(--migrate-outline-color); outline-off-set: -2px">
+    <dt-stack direction="row" gap="400" data-migrate-outline>
       <button type="button" class="d-btn d-btn--sm d-btn--outlined">Button</button>
     </dt-stack>
   </div>
@@ -247,7 +247,7 @@ showHtmlWarning />
       <div>Content slot. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec fermentum molestie semper. Morbi finibus nulla turpis, nec molestie mi rutrum.</div>
     </div>
     <div class="d-card__footer">
-      <dt-stack direction="row" gap="400" style="--migrate-outline-color: orangered; outline: 2px solid var(--migrate-outline-color); outline-off-set: -2px">
+      <dt-stack direction="row" gap="400" data-migrate-outline>
         <button type="button" class="d-btn d-btn--sm d-btn--outlined">Button</button>
       </dt-stack>
     </div>
@@ -269,7 +269,7 @@ htmlCode='
     <div>Content slot. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec fermentum molestie semper. Morbi finibus nulla turpis, nec molestie mi rutrum.</div>
   </div>
   <div class="d-card__footer">
-    <dt-stack direction="row" gap="400" style="--migrate-outline-color: orangered; outline: 2px solid var(--migrate-outline-color); outline-off-set: -2px">
+    <dt-stack direction="row" gap="400" data-migrate-outline>
       <button type="button" class="d-btn d-btn--sm d-btn--outlined">Button</button>
     </dt-stack>
   </div>

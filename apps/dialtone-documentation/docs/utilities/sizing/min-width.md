@@ -8,7 +8,7 @@ description: Utilities to control an element's minimum width.
 Use `d-wmn{n}p` to set a minimum width percentage for an element. This can be combined with `d-w{n}p` and `d-wmx{n}` to have an element fill a certain height range.
 
 <code-well-header class="d-d-flex d-jc-center d-p24 d-bgc-secondary d-w100p d-flow16" custom>
-  <dt-stack direction="row" align="center" justify="center" class="d-py16 d-px8 d-w64 d-wmn50p d-bgc-moderate d-bar4 d-ta-center" style="--migrate-outline-color: orangered; outline: 2px solid var(--migrate-outline-color); outline-off-set: -2px">1</dt-stack>
+  <dt-stack direction="row" align="center" justify="center" class="d-py16 d-px8 d-w64 d-wmn50p d-bgc-moderate d-bar4 d-ta-center" data-migrate-outline>1</dt-stack>
 </code-well-header>
 
 ```html
@@ -20,9 +20,9 @@ Use `d-wmn{n}p` to set a minimum width percentage for an element. This can be co
 Use `d-wmn{n}` to set a fixed minimum width for an element. This can be combined with `d-w{n}p` and `d-wmx{n}` to have an element fill a certain height range.
 
 <code-well-header class="d-d-flex d-jc-center d-p24 d-bgc-secondary d-w100p d-flow16 d-of-x-scroll" custom>
-  <dt-stack direction="row" align="center" justify="center" class="d-py16 d-px8 d-w64 d-h64 d-wmn64 d-bgc-moderate d-bar4" style="--migrate-outline-color: orangered; outline: 2px solid var(--migrate-outline-color); outline-off-set: -2px">1</dt-stack>
-  <dt-stack direction="row" align="center" justify="center" class="d-py16 d-px8 d-w64 d-h64 d-wmn96 d-bgc-moderate d-bar4" style="--migrate-outline-color: orangered; outline: 2px solid var(--migrate-outline-color); outline-off-set: -2px">2</dt-stack>
-  <dt-stack direction="row" align="center" justify="center" class="d-py16 d-px8 d-w64 d-h64 d-wmn332 d-bgc-moderate d-bar4" style="--migrate-outline-color: orangered; outline: 2px solid var(--migrate-outline-color); outline-off-set: -2px">3</dt-stack>
+  <dt-stack direction="row" align="center" justify="center" class="d-py16 d-px8 d-w64 d-h64 d-wmn64 d-bgc-moderate d-bar4" data-migrate-outline>1</dt-stack>
+  <dt-stack direction="row" align="center" justify="center" class="d-py16 d-px8 d-w64 d-h64 d-wmn96 d-bgc-moderate d-bar4" data-migrate-outline>2</dt-stack>
+  <dt-stack direction="row" align="center" justify="center" class="d-py16 d-px8 d-w64 d-h64 d-wmn332 d-bgc-moderate d-bar4" data-migrate-outline>3</dt-stack>
 </code-well-header>
 
 ```html

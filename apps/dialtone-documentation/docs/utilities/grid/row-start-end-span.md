@@ -9,10 +9,10 @@ Use `d-gr{#}` to span an element across multiple rows. This can be combined with
 
 <code-well-header>
   <div class="d-d-grid d-g16 d-g-cols3 d-g-rows3 d-p16 d-w100p d-hmn216 d-bar8 d-bgc-moderate">
-    <dt-stack direction="row" align="center" justify="center" class="d-gc2 d-gr2 d-p16 d-bgc-moderate-opaque d-bar4" style="--migrate-outline-color: orangered; outline: 2px solid var(--migrate-outline-color); outline-off-set: -2px">1</dt-stack>
-    <dt-stack direction="row" align="center" justify="center" class="d-p16 d-bgc-bold-opaque d-bar4" style="--migrate-outline-color: orangered; outline: 2px solid var(--migrate-outline-color); outline-off-set: -2px">2</dt-stack>
-    <dt-stack direction="row" align="center" justify="center" class="d-gr2 d-p16 d-bgc-moderate-opaque d-bar4" style="--migrate-outline-color: orangered; outline: 2px solid var(--migrate-outline-color); outline-off-set: -2px">3</dt-stack>
-    <dt-stack direction="row" align="center" justify="center" class="d-gc2 d-p16 d-bgc-bold-opaque d-bar4" style="--migrate-outline-color: orangered; outline: 2px solid var(--migrate-outline-color); outline-off-set: -2px">4</dt-stack>
+    <dt-stack direction="row" align="center" justify="center" class="d-gc2 d-gr2 d-p16 d-bgc-moderate-opaque d-bar4" data-migrate-outline>1</dt-stack>
+    <dt-stack direction="row" align="center" justify="center" class="d-p16 d-bgc-bold-opaque d-bar4" data-migrate-outline>2</dt-stack>
+    <dt-stack direction="row" align="center" justify="center" class="d-gr2 d-p16 d-bgc-moderate-opaque d-bar4" data-migrate-outline>3</dt-stack>
+    <dt-stack direction="row" align="center" justify="center" class="d-gc2 d-p16 d-bgc-bold-opaque d-bar4" data-migrate-outline>4</dt-stack>
   </div>
 </code-well-header>
 
@@ -33,10 +33,10 @@ Use `d-gre{#}` to set an element's ending point. A reminder that CSS grid rows s
 
 <code-well-header>
   <div class="d-d-grid d-g16 d-g-cols3 d-g-rows4 d-p16 d-w100p d-hmn216 d-bar8 d-bgc-moderate">
-    <dt-stack direction="row" align="center" justify="center" class="d-gc2 d-grs1 d-gre3 d-p16 d-bgc-moderate-opaque d-bar4" style="--migrate-outline-color: orangered; outline: 2px solid var(--migrate-outline-color); outline-off-set: -2px">1</dt-stack>
-    <dt-stack direction="row" align="center" justify="center" class="d-p16 d-bgc-bold-opaque d-bar4" style="--migrate-outline-color: orangered; outline: 2px solid var(--migrate-outline-color); outline-off-set: -2px">2</dt-stack>
-    <dt-stack direction="row" align="center" justify="center" class="d-grs2 d-gre5 d-p16 d-bgc-moderate-opaque d-bar4" style="--migrate-outline-color: orangered; outline: 2px solid var(--migrate-outline-color); outline-off-set: -2px">3</dt-stack>
-    <dt-stack direction="row" align="center" justify="center" class="d-gc2 d-gr2 d-p16 d-bgc-bold-opaque d-bar4" style="--migrate-outline-color: orangered; outline: 2px solid var(--migrate-outline-color); outline-off-set: -2px">4</dt-stack>
+    <dt-stack direction="row" align="center" justify="center" class="d-gc2 d-grs1 d-gre3 d-p16 d-bgc-moderate-opaque d-bar4" data-migrate-outline>1</dt-stack>
+    <dt-stack direction="row" align="center" justify="center" class="d-p16 d-bgc-bold-opaque d-bar4" data-migrate-outline>2</dt-stack>
+    <dt-stack direction="row" align="center" justify="center" class="d-grs2 d-gre5 d-p16 d-bgc-moderate-opaque d-bar4" data-migrate-outline>3</dt-stack>
+    <dt-stack direction="row" align="center" justify="center" class="d-gc2 d-gr2 d-p16 d-bgc-bold-opaque d-bar4" data-migrate-outline>4</dt-stack>
   </div>
 </code-well-header>
 

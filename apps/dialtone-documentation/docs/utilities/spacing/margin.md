@@ -10,7 +10,7 @@ description: Utilities to adjust an element's exterior spacing between other obj
 ## Add Margin to All Sides
 
 <code-well-header>
-  <div class="d-bgc-bold d-of-hidden"><dt-stack direction="row" align="center" justify="center" class="d-p16 d-m24 d-bgc-moderate d-bar4 d-code--md" style="--migrate-outline-color: orangered; outline: 2px solid var(--migrate-outline-color); outline-off-set: -2px">d-m24</dt-stack></div>
+  <div class="d-bgc-bold d-of-hidden"><dt-stack direction="row" align="center" justify="center" class="d-p16 d-m24 d-bgc-moderate d-bar4 d-code--md" data-migrate-outline>d-m24</dt-stack></div>
 </code-well-header>
 
 ```html
@@ -21,10 +21,10 @@ description: Utilities to adjust an element's exterior spacing between other obj
 
 <code-well-header>
   <div class="d-d-flex d-fw-wrap d-ai-start d-jc-center d-bgo50 d-w100p d-flow24">
-    <div class="d-as-center d-bar8 d-bgc-bold d-of-hidden"><dt-stack direction="row" align="center" justify="center" class="d-mt12 d-p16 d-bgc-moderate d-bbr4 d-code--md" style="--migrate-outline-color: orangered; outline: 2px solid var(--migrate-outline-color); outline-off-set: -2px">d-mt12</dt-stack></div>
-    <div class="d-as-center d-bar8 d-bgc-bold d-of-hidden"><dt-stack direction="row" align="center" justify="center" class="d-mr16 d-p16 d-bgc-moderate d-brl4 d-code--md" style="--migrate-outline-color: orangered; outline: 2px solid var(--migrate-outline-color); outline-off-set: -2px">d-mr16</dt-stack></div>
-    <div class="d-as-center d-bar8 d-bgc-bold d-of-hidden"><dt-stack direction="row" align="center" justify="center" class="d-mb24 d-p16 d-bgc-moderate d-btr4 d-code--md" style="--migrate-outline-color: orangered; outline: 2px solid var(--migrate-outline-color); outline-off-set: -2px">d-mb24</dt-stack></div>
-    <div class="d-as-center d-bar8 d-bgc-bold d-of-hidden"><dt-stack direction="row" align="center" justify="center" class="d-ml32 d-p16 d-bgc-moderate d-brr4 d-code--md" style="--migrate-outline-color: orangered; outline: 2px solid var(--migrate-outline-color); outline-off-set: -2px">d-ml32</dt-stack></div>
+    <div class="d-as-center d-bar8 d-bgc-bold d-of-hidden"><dt-stack direction="row" align="center" justify="center" class="d-mt12 d-p16 d-bgc-moderate d-bbr4 d-code--md" data-migrate-outline>d-mt12</dt-stack></div>
+    <div class="d-as-center d-bar8 d-bgc-bold d-of-hidden"><dt-stack direction="row" align="center" justify="center" class="d-mr16 d-p16 d-bgc-moderate d-brl4 d-code--md" data-migrate-outline>d-mr16</dt-stack></div>
+    <div class="d-as-center d-bar8 d-bgc-bold d-of-hidden"><dt-stack direction="row" align="center" justify="center" class="d-mb24 d-p16 d-bgc-moderate d-btr4 d-code--md" data-migrate-outline>d-mb24</dt-stack></div>
+    <div class="d-as-center d-bar8 d-bgc-bold d-of-hidden"><dt-stack direction="row" align="center" justify="center" class="d-ml32 d-p16 d-bgc-moderate d-brr4 d-code--md" data-migrate-outline>d-ml32</dt-stack></div>
   </div>
 </code-well-header>
 
@@ -38,7 +38,7 @@ description: Utilities to adjust an element's exterior spacing between other obj
 ## Add Horizontal Margins
 
 <code-well-header>
-  <div class="d-as-center d-bar8 d-bgc-bold d-of-hidden"><dt-stack direction="row" align="center" justify="center" class="d-mx16 d-p16 d-bgc-moderate d-code--md" style="--migrate-outline-color: orangered; outline: 2px solid var(--migrate-outline-color); outline-off-set: -2px">d-mx16</dt-stack></div>
+  <div class="d-as-center d-bar8 d-bgc-bold d-of-hidden"><dt-stack direction="row" align="center" justify="center" class="d-mx16 d-p16 d-bgc-moderate d-code--md" data-migrate-outline>d-mx16</dt-stack></div>
 </code-well-header>
 
 ```html
@@ -48,7 +48,7 @@ description: Utilities to adjust an element's exterior spacing between other obj
 ## Add Vertical Margins
 
 <code-well-header>
-  <div class="d-as-center d-bar8 d-bgc-bold d-of-hidden"><dt-stack direction="row" align="center" justify="center" class="d-my16 d-p16 d-bgc-moderate d-code--sm" style="--migrate-outline-color: orangered; outline: 2px solid var(--migrate-outline-color); outline-off-set: -2px">d-my16</dt-stack></div>
+  <div class="d-as-center d-bar8 d-bgc-bold d-of-hidden"><dt-stack direction="row" align="center" justify="center" class="d-my16 d-p16 d-bgc-moderate d-code--sm" data-migrate-outline>d-my16</dt-stack></div>
 </code-well-header>
 
 ```html
@@ -61,9 +61,9 @@ Auto margins allow an element to fill a remaining space within an object. This i
 
 <code-well-header>
   <div class="d-w100p d-stack16">
-    <dt-stack direction="row" class="d-bar8 d-bgc-bold d-of-hidden" style="--migrate-outline-color: orangered; outline: 2px solid var(--migrate-outline-color); outline-off-set: -2px"><dt-stack direction="row" align="center" justify="center" class="d-mx-auto d-p16 d-bgc-moderate d-code--md" style="--migrate-outline-color: orangered; outline: 2px solid var(--migrate-outline-color); outline-off-set: -2px">d-mx-auto</dt-stack></dt-stack>
-    <dt-stack direction="row" class="d-bar8 d-bgc-bold d-of-hidden" style="--migrate-outline-color: orangered; outline: 2px solid var(--migrate-outline-color); outline-off-set: -2px"><dt-stack direction="row" align="center" justify="center" class="d-ml-auto d-p16 d-bgc-moderate d-code--md" style="--migrate-outline-color: orangered; outline: 2px solid var(--migrate-outline-color); outline-off-set: -2px">d-ml-auto</dt-stack></dt-stack>
-    <dt-stack direction="row" class="d-bar8 d-bgc-bold d-of-hidden" style="--migrate-outline-color: orangered; outline: 2px solid var(--migrate-outline-color); outline-off-set: -2px"><dt-stack direction="row" align="center" justify="center" class="d-mr-auto d-p16 d-bgc-moderate d-code--md" style="--migrate-outline-color: orangered; outline: 2px solid var(--migrate-outline-color); outline-off-set: -2px">d-mr-auto</dt-stack></dt-stack>
+    <dt-stack direction="row" class="d-bar8 d-bgc-bold d-of-hidden" data-migrate-outline><dt-stack direction="row" align="center" justify="center" class="d-mx-auto d-p16 d-bgc-moderate d-code--md" data-migrate-outline>d-mx-auto</dt-stack></dt-stack>
+    <dt-stack direction="row" class="d-bar8 d-bgc-bold d-of-hidden" data-migrate-outline><dt-stack direction="row" align="center" justify="center" class="d-ml-auto d-p16 d-bgc-moderate d-code--md" data-migrate-outline>d-ml-auto</dt-stack></dt-stack>
+    <dt-stack direction="row" class="d-bar8 d-bgc-bold d-of-hidden" data-migrate-outline><dt-stack direction="row" align="center" justify="center" class="d-mr-auto d-p16 d-bgc-moderate d-code--md" data-migrate-outline>d-mr-auto</dt-stack></dt-stack>
   </div>
 </code-well-header>
 

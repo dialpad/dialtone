@@ -65,7 +65,7 @@ change in other platforms (mobile, tc8, tv).
           <th scope="row">{{ size }}px</th>
           <td class="d-code--sm d-docsite-code">.d-fs-{{ stop }}</td>
           <td>
-            <dt-stack direction="row" justify="between" align="center" style="--migrate-outline-color: orangered; outline: 2px solid var(--migrate-outline-color); outline-off-set: -2px">
+            <dt-stack direction="row" justify="between" align="center" data-migrate-outline>
               <div class="d-fl1 d-code--sm">
                 font-size: {{ output }}rem !important;
               </div>
@@ -97,7 +97,7 @@ change in other platforms (mobile, tc8, tv).
           <th scope="row">{{ size }}px</th>
           <td class="d-code--sm d-docsite-code">.d-fs-{{ stop }}-mobile</td>
           <td>
-            <dt-stack direction="row" justify="between" align="center" style="--migrate-outline-color: orangered; outline: 2px solid var(--migrate-outline-color); outline-off-set: -2px">
+            <dt-stack direction="row" justify="between" align="center" data-migrate-outline>
               <div class="d-fl1 d-code--sm">
                 font-size: {{ output }}rem !important;
               </div>
@@ -129,7 +129,7 @@ change in other platforms (mobile, tc8, tv).
           <th scope="row">{{ size }}px</th>
           <td class="d-code--sm d-docsite-code">.d-fs-{{ stop }}-tc8</td>
           <td>
-            <dt-stack direction="row" justify="between" align="center" style="--migrate-outline-color: orangered; outline: 2px solid var(--migrate-outline-color); outline-off-set: -2px">
+            <dt-stack direction="row" justify="between" align="center" data-migrate-outline>
               <div class="d-fl1 d-code--sm">
                 font-size: {{ output }}rem !important;
               </div>
@@ -161,7 +161,7 @@ change in other platforms (mobile, tc8, tv).
           <th scope="row">{{ size }}px</th>
           <td class="d-code--sm d-docsite-code">.d-fs-{{ stop }}-tv</td>
           <td>
-            <dt-stack direction="row" justify="between" align="center" style="--migrate-outline-color: orangered; outline: 2px solid var(--migrate-outline-color); outline-off-set: -2px">
+            <dt-stack direction="row" justify="between" align="center" data-migrate-outline>
               <div class="d-fl1 d-code--sm">
                 font-size: {{ output }}rem !important;
               </div>

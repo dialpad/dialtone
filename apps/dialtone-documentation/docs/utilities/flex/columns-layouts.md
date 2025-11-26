@@ -14,7 +14,7 @@ Use `d-fl-col{n}` to create uniformly sized children within an element.
     <div v-for="(i, index) in columns" class="d-p8 d-bar8 d-bgc-moderate d-w100p">
       <code class="d-bgc-transparent">.d-fl-col{{i}}</code>
       <div class="d-cg8 d-of-auto" :class="`d-fl-col${i}`">
-        <dt-stack direction="row" align="center" justify="center" class="d-p16 d-bar4 d-bgc-moderate-opaque" v-for="(col) in columns.slice(0, i)" style="--migrate-outline-color: orangered; outline: 2px solid var(--migrate-outline-color); outline-off-set: -2px">{{ col }}</dt-stack>
+        <dt-stack direction="row" align="center" justify="center" class="d-p16 d-bar4 d-bgc-moderate-opaque" v-for="(col) in columns.slice(0, i)" data-migrate-outline>{{ col }}</dt-stack>
       </div>
     </div>
   </dt-stack>
@@ -44,9 +44,9 @@ Use `d-cg{n}` to create uniform gaps between flex columns within an element.
     <dt-stack v-for="i in gaps" gap="400" class="d-p8 d-bar8 d-bgc-moderate d-w100p">
       <code class="d-bgc-transparent">.d-cg{{ i }}</code>
       <div class="d-fl-col3 d-of-auto" :class="`d-cg${i}`">
-        <dt-stack direction="row" align="center" justify="center" class="d-p16 d-bar4 d-bgc-moderate-opaque" style="--migrate-outline-color: orangered; outline: 2px solid var(--migrate-outline-color); outline-off-set: -2px">1</dt-stack>
-        <dt-stack direction="row" align="center" justify="center" class="d-p16 d-bar4 d-bgc-moderate-opaque" style="--migrate-outline-color: orangered; outline: 2px solid var(--migrate-outline-color); outline-off-set: -2px">2</dt-stack>
-        <dt-stack direction="row" align="center" justify="center" class="d-p16 d-bar4 d-bgc-moderate-opaque" style="--migrate-outline-color: orangered; outline: 2px solid var(--migrate-outline-color); outline-off-set: -2px">3</dt-stack>
+        <dt-stack direction="row" align="center" justify="center" class="d-p16 d-bar4 d-bgc-moderate-opaque" data-migrate-outline>1</dt-stack>
+        <dt-stack direction="row" align="center" justify="center" class="d-p16 d-bar4 d-bgc-moderate-opaque" data-migrate-outline>2</dt-stack>
+        <dt-stack direction="row" align="center" justify="center" class="d-p16 d-bar4 d-bgc-moderate-opaque" data-migrate-outline>3</dt-stack>
       </div>
     </dt-stack>
   </dt-stack>
@@ -74,15 +74,15 @@ This used to be accomplished with `d-fl-center`, which is deprecated in favor of
 By default flexed items align to `flex-start` both horizontally and vertically (effectively top, left). Combine Stack's `align` and `justify` utilities to center-center child items within an element.
 
 <code-well-header>
-  <dt-stack direction="row" align="center" justify="center" class="d-w100p d-hmn216 d-bgc-moderate" style="--migrate-outline-color: orangered; outline: 2px solid var(--migrate-outline-color); outline-off-set: -2px">
-    <dt-stack direction="row" align="center" justify="center" class="d-w48 d-h48 d-m8 d-p16 d-bgc-moderate-opaque d-bar4" style="--migrate-outline-color: orangered; outline: 2px solid var(--migrate-outline-color); outline-off-set: -2px">1</dt-stack>
-    <dt-stack direction="row" align="center" justify="center" class="d-w64 d-h64 d-m8 d-p16 d-bgc-moderate-opaque d-bar4" style="--migrate-outline-color: orangered; outline: 2px solid var(--migrate-outline-color); outline-off-set: -2px">2</dt-stack>
-    <dt-stack direction="row" align="center" justify="center" class="d-w48 d-h48 d-m8 d-p16 d-bgc-moderate-opaque d-bar4" style="--migrate-outline-color: orangered; outline: 2px solid var(--migrate-outline-color); outline-off-set: -2px">3</dt-stack>
+  <dt-stack direction="row" align="center" justify="center" class="d-w100p d-hmn216 d-bgc-moderate" data-migrate-outline>
+    <dt-stack direction="row" align="center" justify="center" class="d-w48 d-h48 d-m8 d-p16 d-bgc-moderate-opaque d-bar4" data-migrate-outline>1</dt-stack>
+    <dt-stack direction="row" align="center" justify="center" class="d-w64 d-h64 d-m8 d-p16 d-bgc-moderate-opaque d-bar4" data-migrate-outline>2</dt-stack>
+    <dt-stack direction="row" align="center" justify="center" class="d-w48 d-h48 d-m8 d-p16 d-bgc-moderate-opaque d-bar4" data-migrate-outline>3</dt-stack>
   </dt-stack>
 </code-well-header>
 
 ```html
-<dt-stack direction="row" align="center" justify="center" style="--migrate-outline-color: orangered; outline: 2px solid var(--migrate-outline-color); outline-off-set: -2px">
+<dt-stack direction="row" align="center" justify="center" data-migrate-outline>
   <div>1</div>
   <div>2</div>
   <div>3</div>

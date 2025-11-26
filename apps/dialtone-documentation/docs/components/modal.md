@@ -506,11 +506,11 @@ In addition to the footer, custom elements can be inserted into the header and b
     @update:show="updateShow"
   >
     <template #header>
-      <dt-stack direction="row" align="center" justify="center" class="d-p12 d-bgc-purple-100" style="--migrate-outline-color: orangered; outline: 2px solid var(--migrate-outline-color); outline-off-set: -2px">
+      <dt-stack direction="row" align="center" justify="center" class="d-p12 d-bgc-purple-100" data-migrate-outline>
         <div>Custom header</div>
       </dt-stack>
     </template>
-    <dt-stack direction="row" align="center" justify="center" class="d-p32 d-bgc-gold-200" style="--migrate-outline-color: orangered; outline: 2px solid var(--migrate-outline-color); outline-off-set: -2px">
+    <dt-stack direction="row" align="center" justify="center" class="d-p32 d-bgc-gold-200" data-migrate-outline>
       <h2>Custom content</h2>
     </dt-stack>
   </dt-modal>
@@ -528,11 +528,11 @@ vueCode='
   @update:show="updateShow"
 >
   <template #header>
-    <dt-stack direction="row" align="center" justify="center" class="d-p12 d-bgc-purple-100" style="--migrate-outline-color: orangered; outline: 2px solid var(--migrate-outline-color); outline-off-set: -2px">
+    <dt-stack direction="row" align="center" justify="center" class="d-p12 d-bgc-purple-100" data-migrate-outline>
       <div>Custom header</div>
     </dt-stack>
   </template>
-  <dt-stack direction="row" align="center" justify="center" class="d-p32 d-bgc-gold-200" style="--migrate-outline-color: orangered; outline: 2px solid var(--migrate-outline-color); outline-off-set: -2px">
+  <dt-stack direction="row" align="center" justify="center" class="d-p32 d-bgc-gold-200" data-migrate-outline>
     <h2>Custom content</h2>
   </dt-stack>
 </dt-modal>
