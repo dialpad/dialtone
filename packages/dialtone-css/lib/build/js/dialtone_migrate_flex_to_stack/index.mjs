@@ -550,8 +550,8 @@ async function processFile(filePath, options) {
     const bindingContent = dynamicMatch[2];
     if (flexUtilityPattern.test(bindingContent)) {
       console.log(log.yellow(`   ⚠ Skipped: dynamic :class binding with flex utilities at position ${dynamicMatch.index}`));
-      console.log(log.gray(`     "${bindingContent.length > 60 ? bindingContent.substring(0, 60) + '...' : bindingContent}"`));
-      console.log(log.gray(`     Requires manual review - cannot auto-migrate dynamic bindings\n`));
+      log.gray(`     "${bindingContent.length > 60 ? bindingContent.substring(0, 60) + '...' : bindingContent}"`);
+      log.gray(`     Requires manual review - cannot auto-migrate dynamic bindings\n`);
     }
   }
 
@@ -571,7 +571,7 @@ async function processFile(filePath, options) {
       const icon = transformation.severity === 'warning' ? '⚠' : 'ℹ';
       const colorFn = transformation.severity === 'warning' ? log.yellow : log.gray;
       console.log(colorFn(`   ${icon} ${transformation.message}`));
-      console.log(log.gray(`      ${element.fullMatch}`));
+      log.gray(`      ${element.fullMatch}`);
       console.log();
       skipped++;
       continue;
@@ -595,10 +595,10 @@ async function processFile(filePath, options) {
       const hasGridHybrid = transformation.retainedClasses.some(cls => /^d-(ji-|js-|plc-|pli-|pls-)/.test(cls));
 
       if (hasFlg) {
-        console.log(log.gray(`       ℹ d-flg* is deprecated - consider replacing with d-g* gap utilities`));
+        log.gray(`       ℹ d-flg* is deprecated - consider replacing with d-g* gap utilities`);
       }
       if (hasGridHybrid) {
-        console.log(log.gray(`       ℹ Grid/flex hybrid utilities (d-ji-*, d-js-*, d-plc-*, etc.) retained - no DtStack prop equivalent`));
+        log.gray(`       ℹ Grid/flex hybrid utilities (d-ji-*, d-js-*, d-plc-*, etc.) retained - no DtStack prop equivalent`);
       }
     }
     console.log();
