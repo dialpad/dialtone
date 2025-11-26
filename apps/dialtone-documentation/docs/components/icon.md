@@ -54,7 +54,7 @@ Adjust the size using the `size` prop. Note that sizes 600, 700, and 800 are exc
     <div class="d-fl-center">
       <dt-icon-settings :size="selectedSize" />
     </div>
-    <dt-select-menu label="Size" :options="sizeValues" @change="changeIconSize" />
+    <dt-select-menu label="Size" :options="sizeValues" v-model="selectedSize" @change="changeIconSize" />
   </div>
 </code-well-header>
 
@@ -80,7 +80,7 @@ The icon's color inherits from the parent's foreground color.
       <p>Settings</p>
     </dt-stack>
   </div>
-  <dt-select-menu label="Color" :options="iconColors" @change="changeIconColor" />
+  <dt-select-menu label="Color" :options="iconColors" v-model="selectedColor" @change="changeIconColor" />
 </div>
 </code-well-header>
 
@@ -96,7 +96,7 @@ The icon's color inherits from the parent's foreground color.
 
 <div class="d-d-grid d-g24 d-g-cols1 md:d-g-cols3">
 
-When setting the color of an icon take these into considaration:
+When setting the color of an icon take these into consideration:
 
 <div class="d-gc1">
 <div style="background: var(--dt-color-purple-100)" class="d-p16 d-hmn164 d-bar8 d-d-flex d-ai-center">
@@ -152,7 +152,7 @@ We encourage utilizing the [Stack component](/components/stack.md) for aligning 
       <p>Settings</p>
       </dt-stack>
     </div>
-    <dt-select-menu label="Direction" :options="stackDirection" @change="changeDirection" />
+    <dt-select-menu label="Direction" :options="stackDirection" v-model="selectedDirection" @change="changeDirection" />
   </div>
 </code-well-header>
 
@@ -230,7 +230,7 @@ Dialtone provides eight sizes for icons. Each of the sizes represents the width 
   ];
 
   const selectedIcon = ref('settings');
-  const selectedSize = ref(500);
+  const selectedSize = ref('500');
   const selectedColor = ref('d-fc-success');
   const selectedDirection = ref('row');
 

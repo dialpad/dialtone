@@ -30,7 +30,7 @@ Banners are a type of notice and so you can use the following [Notice](notice.md
 <code-well-header>
     <div class="d-d-flex d-w100p d-flow8 d-ai-flex-end">
         <div class="d-fl-grow1">
-            <dt-select-menu label="Style" :options="bannerOptions" @change="changeKind" />
+            <dt-select-menu label="Style" :options="bannerOptions" v-model="selectedKind" @change="changeKind" />
         </div>
         <dt-checkbox value="important" @input="toggleImportant">Important</dt-checkbox>
         <dt-button @click="toggleBanner('example-kind')">Toggle Example</dt-button>
