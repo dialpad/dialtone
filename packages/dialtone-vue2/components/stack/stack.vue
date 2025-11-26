@@ -67,11 +67,12 @@ export default {
      * All the undefined breakpoints will have the 'default' value.
      * You can override the default align with 'default' key.
      * In case of string, it will be applied to all the breakpoints.
-     * Valid values are 'normal', 'start', 'center', 'end', 'stretch', 'baseline'.
+     * If not specified, alignment uses CSS defaults: stretch for column direction,
+     * center for row/row-reverse directions (set by CSS).
+     * Valid values are 'start', 'center', 'end', 'stretch', 'baseline'.
      */
     align: {
       type: [String, Object],
-      default: 'normal',
       validator: (align) => alignValidator(align),
     },
 
