@@ -378,9 +378,9 @@ The following functions are available for date formatting.
   <dt-stack
     :direction="{ 'default': 'column', 'md': 'row' }"
     gap="600"
-    class="d-ai-flex-start"
+    align="start"
   >
-    <dt-stack class="d-ai-center">
+    <dt-stack align="center">
       <dt-datepicker
         :selected-date="currentSelectedDate"
         @selected-date="currentSelectedDate = $event;"

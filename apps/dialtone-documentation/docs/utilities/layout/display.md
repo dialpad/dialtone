@@ -48,6 +48,47 @@ description: Utilities for controlling the display box type of an element.
 <div class="d-d-unset">…</div>
 ```
 
+## Flex Display
+
+<FlexStackNotice class="d-mb16" />
+
+While `d-d-flex` and `d-d-inline-flex` technically are `display` utilities, use the [DtStack](/components/stack) component instead.
+
+<code-well-header>
+  <dt-stack
+    gap="500"
+    direction="row"
+    class="d-bgc-moderate-opaque d-bar8"
+  >
+    <div class="d-bgc-moderate-opaque d-p16 d-bar8">
+      Stack item 1
+    </div>
+    <div class="d-bgc-moderate-opaque d-p16 d-bar8">
+      Stack item 2
+    </div>
+    <div class="d-bgc-moderate-opaque d-p16 d-bar8">
+      Stack item 3
+    </div>
+  </dt-stack>
+</code-well-header>
+
+```html
+<dt-stack
+  gap="500"
+  direction="row"
+>
+  <div>
+    Stack item 1
+  </div>
+  <div>
+    Stack item 2
+  </div>
+  <div>
+    Stack item 3
+  </div>
+</dt-stack>
+```
+
 ## Classes
 
 <new-utility-class-table :classes="display"></new-utility-class-table>

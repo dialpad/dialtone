@@ -3,6 +3,8 @@ title: Align Items
 description: Utilities for setting how an element's is aligned along an element's cross axis.
 ---
 
+<FlexStackNotice />
+
 ## Stretch
 
 Use `d-ai-stretch` to stretch items across the element's cross axis. This is the default value.

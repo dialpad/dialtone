@@ -3,6 +3,8 @@ title: Justify Content
 description: Utilities for setting how an element's space around and between content is distributed along its main axis.
 ---
 
+<FlexStackNotice />
+
 ## Flex Start
 
 Use `d-jc-flex-start` to justify items against the start of the element's main axis. This is the default value.

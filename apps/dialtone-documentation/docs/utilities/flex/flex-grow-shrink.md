@@ -3,6 +3,8 @@ title: Flex, Grow, & Shrink
 description: Utilities for setting an object's flex, grow, and shrink flex properties.
 ---
 
+<FlexStackNotice />
+
 ## Flex
 
 The `flex` property is a shorthand property for `flex-grow`, `flex-shrink`, and `flex-basis` properties. You can also

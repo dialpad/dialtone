@@ -91,7 +91,7 @@ Examples of non-breaking changes:
 - **Refactoring**: changing the internal code of a component without changing any external behaviour.
 
 Some updates can unintentionally cause breaking changes, or cause changes to a component's output behaviour or functionality without necessary breaking it.
-This is why it is important to evaluate the change carefully and asses its impact on existing usage.
+This is why it is important to evaluate the change carefully and assess its impact on existing usage.
 
 Any new components or updates to existing components require the following:
 

@@ -12,15 +12,18 @@
 //  ----------------------------------------------------------------------------
 .d-keyboard-shortcut {
   display: inline-flex;
+  gap: var(--dt-space-200);
   align-items: center;
   justify-content: center;
   box-sizing: border-box;
-  padding-inline: var(--dt-space-300) var(--dt-space-300);
-  font-size: var(--dt-font-size-100);
-  font-family: var(--dt-font-family-body);
+  padding-inline: var(--dt-space-350);
+  font: var(--dt-typography-body-sm);
+  line-height: var(--dt-font-line-height-400);
+  min-inline-size: 1lh;
   border: var(--dt-size-100) solid;
   border-color: var(--dt-color-border-default);
   border-radius: var(--dt-size-radius-300);
+  font-variant-numeric: tabular-nums;
 
   &--inverted {
     border-color: var(--dt-color-border-moderate-inverted);
@@ -42,8 +45,16 @@
 
   &__icon,
   &__item {
-    margin-inline-end: var(--dt-space-200);
+    min-height: 1lh;
     color: var(--dt-color-foreground-tertiary);
+
+    &.d-icon--plus {
+      color: var(--dt-color-foreground-muted);
+
+      .d-keyboard-shortcut--inverted & {
+        color: var(--dt-color-foreground-muted-inverted);
+      }
+    }
 
     &--inverted {
       color: var(--dt-color-foreground-secondary-inverted);

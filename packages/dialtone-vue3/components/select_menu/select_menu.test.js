@@ -262,6 +262,31 @@ describe('DtSelectMenu Tests', () => {
         expect(wrapper.emitted('change')[0][0]).toBe(MOCK_SELECTED_VALUE.toString());
       });
     });
+
+    describe('When modelValue prop is set', () => {
+      it('should set the select element value', () => {
+        const MOCK_MODEL_VALUE = MOCK_OPTIONS[1].value;
+        mockProps = { modelValue: MOCK_MODEL_VALUE };
+
+        updateWrapper();
+
+        expect(select.element.value).toBe(MOCK_MODEL_VALUE.toString());
+      });
+
+      it('should update when modelValue prop changes', async () => {
+        const INITIAL_VALUE = MOCK_OPTIONS[0].value;
+        const UPDATED_VALUE = MOCK_OPTIONS[2].value;
+
+        mockProps = { modelValue: INITIAL_VALUE };
+        updateWrapper();
+
+        expect(select.element.value).toBe(INITIAL_VALUE.toString());
+
+        await wrapper.setProps({ modelValue: UPDATED_VALUE });
+
+        expect(select.element.value).toBe(UPDATED_VALUE.toString());
+      });
+    });
   });
 
   describe('Validation Tests', () => {

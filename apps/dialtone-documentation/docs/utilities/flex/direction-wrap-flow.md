@@ -3,6 +3,8 @@ title: Direction, Wrap, & Flow
 description: Utilities for setting an object's flex direction, wrap, and flow directions.
 ---
 
+<FlexStackNotice />
+
 ## Flex Direction
 
 The `flex-direction` property declares a flex container’s main axis direction. The default value is row.

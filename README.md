@@ -170,7 +170,7 @@ setTheme(DpLight, document.querySelector('#my-shadow-root-host'));
 import { DtIconArrowUp } from '@dialpad/dialtone-icons/vue2';
 import { DtIllustrationBlankSpace } from '@dialpad/dialtone-icons/vue2';
 
-// Default import (Prefered if using webpack as it is tree-shakeable by default)
+// Default import (Preferred if using webpack as it is tree-shakeable by default)
 import DtIconArrowUp from '@dialpad/dialtone-icons/vue2/arrow-up';
 import DtIllustrationBlankSpace from '@dialpad/dialtone-icons/vue2/blank-space';
 ```
@@ -182,7 +182,7 @@ import DtIllustrationBlankSpace from '@dialpad/dialtone-icons/vue2/blank-space';
 import { DtIconArrowUp } from '@dialpad/dialtone-icons/vue3';
 import { DtIllustrationBlankSpace } from '@dialpad/dialtone-icons/vue3';
 
-// Default import (Prefered if using webpack as it is tree-shakeable by default)
+// Default import (Preferred if using webpack as it is tree-shakeable by default)
 import DtIconArrowUp from '@dialpad/dialtone-icons/vue3/arrow-up';
 import DtIllustrationBlankSpace from '@dialpad/dialtone-icons/vue3/blank-space';
 ```
@@ -205,9 +205,14 @@ import { DtButton } from "@dialpad/dialtone/vue2/lib/button"
 // Named import
 import { DtButton } from "@dialpad/dialtone/vue3"
 
-// Default import (Prefered if using webpack as it is tree-shakeable by default)
+// Default import (Preferred if using webpack as it is tree-shakeable by default)
 import { DtButton } from "@dialpad/dialtone/vue3/lib/button"
 ```
+
+#### Dialtine MCP Server
+
+Install the MCP server to use it in your local environment and develop efficiently with Dialtone.
+Follow the instructions in the [MCP Server](https://github.com/dialpad/dialtone/tree/staging/packages/dialtone-mcp-server) folder.
 
 ## About this repo
 
@@ -244,7 +249,7 @@ dialtone/
 Dialtone is a mono-package that includes many packages within it to ease the maintenance of versions of
 the library.
 
-#### How does our bundling works
+#### How our bundling works
 
 To achieve this we needed to create certain configs through the monorepo to be able to handle them even if
 they have the same package name e.g: `@dialpad/dialtone-vue`.
@@ -390,9 +395,9 @@ if they need to run before a specific command.
 - Improve the speed of the command execution by saving its output to cache.
 - Run the command on the [affected](https://nx.dev/nx-api/nx/documents/affected) projects only.
 
-⚠️ You can run the commands with PNPM too, but it's not advisable as You'll lose the advantages that NX provides.
+⚠️ You can run the commands with PNPM too, but it's not advisable as you'll lose the advantages that NX provides.
 
-For more information, check [setup a monorepo with PNPM workspaces and NX](https://blog.nrwl.io/setup-a-monorepo-with-pnpm-workspaces-and-speed-it-up-with-nx-bc5d97258a7e#d69f)
+For more information, check [setup a monorepo with PNPM workspaces and NX](https://nx.dev/blog/setup-a-monorepo-with-pnpm-workspaces-and-speed-it-up-with-nx)
 
 ##### Installation
 

@@ -3,6 +3,8 @@ title: Gap
 description: Utilities to control the spacing between columns, rows, or both.
 ---
 
+<FlexStackNotice />
+
 ## Adding Universal Row and Column Gaps
 
 Use `d-g{#}` to universally change the row and column gap space.

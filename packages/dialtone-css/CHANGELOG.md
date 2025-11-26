@@ -1,23 +1,35 @@
-# [8.68.0-next.1](https://github.com/dialpad/dialtone/compare/dialtone-css/v8.67.0...dialtone-css/v8.68.0-next.1) (2025-11-14)
+## [8.70.1](https://github.com/dialpad/dialtone/compare/dialtone-css/v8.70.0...dialtone-css/v8.70.1) (2025-11-26)
 
 
 ### Bug Fixes
 
-* **Tokens:** wrap css math expressions with calc() in layered build ([#966](https://github.com/dialpad/dialtone/issues/966)) ([1635f61](https://github.com/dialpad/dialtone/commit/1635f61280c9379355c9a2ea295cbf23a78c888f))
+* **Stack:** NO-JIRA correct stack's default alignment ([#980](https://github.com/dialpad/dialtone/issues/980)) ([4323a26](https://github.com/dialpad/dialtone/commit/4323a26179445eaaae36bb21b72bbf65e7c08d11))
 
-
-### Code Refactoring
-
-* **Css:** DLT-1876 css logical properties ([#872](https://github.com/dialpad/dialtone/issues/872)) ([1acd6c9](https://github.com/dialpad/dialtone/commit/1acd6c900053b0c820309faa4a870ff1dceced04))
+# [8.70.0](https://github.com/dialpad/dialtone/compare/dialtone-css/v8.69.0...dialtone-css/v8.70.0) (2025-11-25)
 
 
 ### Features
 
-* **Css Utility:** DLT-2715 add default color for border css utilities ([#874](https://github.com/dialpad/dialtone/issues/874)) ([71310ab](https://github.com/dialpad/dialtone/commit/71310ab483fde976d56c69e0456bce70cb6d372d))
-* **Filter Pill:** DLT-2704 create component ([#473](https://github.com/dialpad/dialtone/issues/473)) ([6267445](https://github.com/dialpad/dialtone/commit/626744501640f18211ca9d41e4a68e099af3b6dd))
+* **Stack:** DLT-2847 add align and justify props ([#979](https://github.com/dialpad/dialtone/issues/979)) ([539ff24](https://github.com/dialpad/dialtone/commit/539ff24c61d405a23cf6bb541a17b81d48d38feb))
+
+# [8.69.0](https://github.com/dialpad/dialtone/compare/dialtone-css/v8.68.0...dialtone-css/v8.69.0) (2025-11-21)
+
+
+### Bug Fixes
+
+* **Avatar:** NO-JIRA update padding and white-space for multi-digit group count ([#975](https://github.com/dialpad/dialtone/issues/975)) ([04ecb13](https://github.com/dialpad/dialtone/commit/04ecb13f9e9d5b4f79e71750e7dae940ed8fa802))
+
+
+### Features
+
+* **Keyboard Shortcut:** NO-JIRA improve a11y labeling and improve spacing ([#974](https://github.com/dialpad/dialtone/issues/974)) ([9053dbc](https://github.com/dialpad/dialtone/commit/9053dbc2134916f02798717636edd330bd6853cb))
+
+# [8.68.0](https://github.com/dialpad/dialtone/compare/dialtone-css/v8.67.0...dialtone-css/v8.68.0) (2025-11-18)
+
+
+### Features
+
 * **Motion Text:** DLT-2791 new recipe ([#952](https://github.com/dialpad/dialtone/issues/952)) ([1a8d39e](https://github.com/dialpad/dialtone/commit/1a8d39edee35fb2c49eeb2b74d7488341578644e))
-* **Tokens:** DLT-1977 add high contrast design tokens and theme ([#938](https://github.com/dialpad/dialtone/issues/938)) ([a1c0457](https://github.com/dialpad/dialtone/commit/a1c0457e3b6b445e3f54d76b9ce3b847abc31ac5))
-* **Tokens:** DLT-2802 DLT-2563 layered theming system and mode island component ([#945](https://github.com/dialpad/dialtone/issues/945)) ([5c72c6c](https://github.com/dialpad/dialtone/commit/5c72c6cab4f08122dcb03e2e2f0cc8a490fe1c9b))
 
 # [8.67.0](https://github.com/dialpad/dialtone/compare/dialtone-css/v8.66.0...dialtone-css/v8.67.0) (2025-11-04)
 
@@ -31,41 +43,12 @@
 
 * **Avatar:** DLT-2718 avatar component masking for presence and group ([#902](https://github.com/dialpad/dialtone/issues/902)) ([b7843ab](https://github.com/dialpad/dialtone/commit/b7843ab71983437b18a35aa05d7aa5724b695e35))
 
-# [8.66.0-next.2](https://github.com/dialpad/dialtone/compare/dialtone-css/v8.66.0-next.1...dialtone-css/v8.66.0-next.2) (2025-11-10)
-
-
-### Bug Fixes
-
-* **Tokens:** wrap css math expressions with calc() in layered build ([#966](https://github.com/dialpad/dialtone/issues/966)) ([1635f61](https://github.com/dialpad/dialtone/commit/1635f61280c9379355c9a2ea295cbf23a78c888f))
-
-# [8.66.0-next.1](https://github.com/dialpad/dialtone/compare/dialtone-css/v8.65.0...dialtone-css/v8.66.0-next.1) (2025-11-07)
-
-
-### Code Refactoring
-
-* **Css:** DLT-1876 css logical properties ([#872](https://github.com/dialpad/dialtone/issues/872)) ([1acd6c9](https://github.com/dialpad/dialtone/commit/1acd6c900053b0c820309faa4a870ff1dceced04))
-
-
-### Features
-
-* **Css Utility:** DLT-2715 add default color for border css utilities ([#874](https://github.com/dialpad/dialtone/issues/874)) ([71310ab](https://github.com/dialpad/dialtone/commit/71310ab483fde976d56c69e0456bce70cb6d372d))
-* **Filter Pill:** DLT-2704 create component ([#473](https://github.com/dialpad/dialtone/issues/473)) ([6267445](https://github.com/dialpad/dialtone/commit/626744501640f18211ca9d41e4a68e099af3b6dd))
-* **Tokens:** DLT-1977 add high contrast design tokens and theme ([#938](https://github.com/dialpad/dialtone/issues/938)) ([a1c0457](https://github.com/dialpad/dialtone/commit/a1c0457e3b6b445e3f54d76b9ce3b847abc31ac5))
-* **Tokens:** DLT-2802 DLT-2563 layered theming system and mode island component ([#945](https://github.com/dialpad/dialtone/issues/945)) ([5c72c6c](https://github.com/dialpad/dialtone/commit/5c72c6cab4f08122dcb03e2e2f0cc8a490fe1c9b))
-
 # [8.66.0](https://github.com/dialpad/dialtone/compare/dialtone-css/v8.65.0...dialtone-css/v8.66.0) (2025-10-28)
 
 
 ### Features
 
 * **Utilities:** DLT-2811 add line-clamp utility class ([#954](https://github.com/dialpad/dialtone/issues/954)) ([4ca31f7](https://github.com/dialpad/dialtone/commit/4ca31f7cca85aa8eb0c3b78c4eff55d17c470a3c))
-
-# [8.65.0-next.4](https://github.com/dialpad/dialtone/compare/dialtone-css/v8.65.0-next.3...dialtone-css/v8.65.0-next.4) (2025-10-15)
-
-
-### Features
-
-* **Tokens:** DLT-1977 add high contrast design tokens and theme ([#938](https://github.com/dialpad/dialtone/issues/938)) ([a1c0457](https://github.com/dialpad/dialtone/commit/a1c0457e3b6b445e3f54d76b9ce3b847abc31ac5))
 
 # [8.65.0](https://github.com/dialpad/dialtone/compare/dialtone-css/v8.64.4...dialtone-css/v8.65.0) (2025-10-14)
 
@@ -74,22 +57,9 @@
 
 * **Utilities:** NO-JIRA add 384 width-height ([#944](https://github.com/dialpad/dialtone/issues/944)) ([b49c21d](https://github.com/dialpad/dialtone/commit/b49c21d02996dbe8f298e77e4b81fe6137ad1505))
 
-# [8.65.0-next.3](https://github.com/dialpad/dialtone/compare/dialtone-css/v8.65.0-next.2...dialtone-css/v8.65.0-next.3) (2025-10-08)
-
-
-### Features
-
-* **Filter Pill:** DLT-2704 create component ([#473](https://github.com/dialpad/dialtone/issues/473)) ([6267445](https://github.com/dialpad/dialtone/commit/626744501640f18211ca9d41e4a68e099af3b6dd))
-
-# [8.65.0-next.2](https://github.com/dialpad/dialtone/compare/dialtone-css/v8.65.0-next.1...dialtone-css/v8.65.0-next.2) (2025-09-17)
-
-
-### Bug Fixes
-
-* **Checkbox, Radio:** DLT-2772 add pointer cursor to entire checkbox/radio label region ([#913](https://github.com/dialpad/dialtone/issues/913)) ([4bd0859](https://github.com/dialpad/dialtone/commit/4bd08592811f8dbbbfaa43fc79ab84d6209e5854))
-* **Leftbar Row:** DP-157563 call button wrong color on hover ([#919](https://github.com/dialpad/dialtone/issues/919)) ([5b77095](https://github.com/dialpad/dialtone/commit/5b770959a61cfb0772f965dc8dfd7700f8bcaf6d))
-
 ## [8.64.4](https://github.com/dialpad/dialtone/compare/dialtone-css/v8.64.3...dialtone-css/v8.64.4) (2025-09-17)
+
+
 ### Bug Fixes
 
 * **Leftbar Row:** DP-157563 call button wrong color on hover ([#919](https://github.com/dialpad/dialtone/issues/919)) ([5b77095](https://github.com/dialpad/dialtone/commit/5b770959a61cfb0772f965dc8dfd7700f8bcaf6d))

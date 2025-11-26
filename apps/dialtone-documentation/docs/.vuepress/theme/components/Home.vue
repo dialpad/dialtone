@@ -147,7 +147,7 @@
     </div>
   </section>
   <section class="d-py64 d-ta-center">
-    <dt-stack direction="row" gap="500" class="d-fc-secondary d-px48 d-mx-auto d-d-inline-flex d-ai-center">
+    <dt-stack direction="row" gap="500" align="center" class="d-fc-secondary d-px48 d-mx-auto d-d-inline-flex">
       <h2 class="d-headline--lg d-fw-semibold">
         Don't see something? Want to contribute?
       </h2>
