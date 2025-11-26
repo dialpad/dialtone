@@ -58,6 +58,62 @@ async function findFiles(dir, extensions, ignore = []) {
   return results;
 }
 
+/**
+ * Validate and resolve explicitly specified files
+ * @param {string[]} filePaths - Array of file paths (relative or absolute)
+ * @param {string[]} extensions - Expected file extensions
+ * @returns {Promise<string[]>} - Array of validated absolute paths
+ */
+async function validateAndResolveFiles(filePaths, extensions) {
+  const resolvedFiles = [];
+  const errors = [];
+
+  for (const filePath of filePaths) {
+    // Resolve to absolute path
+    const absolutePath = path.isAbsolute(filePath)
+      ? filePath
+      : path.resolve(process.cwd(), filePath);
+
+    // Check if file exists and is a file
+    try {
+      const stat = await fs.stat(absolutePath);
+
+      if (!stat.isFile()) {
+        errors.push(`Not a file: ${filePath}`);
+        continue;
+      }
+
+      // Check extension
+      const hasValidExtension = extensions.some(ext => absolutePath.endsWith(ext));
+      if (!hasValidExtension) {
+        errors.push(`Invalid extension for ${filePath}. Expected: ${extensions.join(', ')}`);
+        continue;
+      }
+
+      resolvedFiles.push(absolutePath);
+    } catch (err) {
+      if (err.code === 'ENOENT') {
+        errors.push(`File not found: ${filePath}`);
+      } else {
+        errors.push(`Error accessing ${filePath}: ${err.message}`);
+      }
+    }
+  }
+
+  // Report errors but continue with valid files
+  if (errors.length > 0) {
+    console.log(log.yellow('\n⚠ File validation issues:'));
+    errors.forEach(err => console.log(log.yellow(`   ${err}`)));
+    console.log();
+  }
+
+  if (resolvedFiles.length === 0 && filePaths.length > 0) {
+    throw new Error('No valid files to process. All specified files had errors.');
+  }
+
+  return resolvedFiles;
+}
+
 //------------------------------------------------------------------------------
 // Conversion Mappings
 //------------------------------------------------------------------------------
@@ -636,6 +692,7 @@ function parseArgs() {
     extensions: ['.vue'],
     patterns: [],
     hasExtFlag: false, // Track if --ext was used
+    files: [], // Explicit file list via --file flag
   };
 
   for (let i = 0; i < args.length; i++) {
@@ -651,6 +708,9 @@ Options:
   --cwd <path>     Working directory (default: current directory)
   --ext <ext>      File extension to process (default: .vue)
                    Can be specified multiple times (e.g., --ext .vue --ext .md)
+  --file <path>    Specific file to process (can be specified multiple times)
+                   Relative or absolute paths supported
+                   When used, --cwd is ignored for file discovery
   --dry-run        Show changes without applying them
   --yes, -y        Apply all changes without prompting
   --help, -h       Show help
@@ -662,6 +722,11 @@ Examples:
   npx dialtone-migrate-flex-to-stack --ext .md --cwd ./docs   # Process .md in docs/
   npx dialtone-migrate-flex-to-stack --dry-run                # Preview changes
   npx dialtone-migrate-flex-to-stack --yes                    # Auto-apply all changes
+
+  # Target specific files:
+  npx dialtone-migrate-flex-to-stack --file src/App.vue --dry-run
+  npx dialtone-migrate-flex-to-stack --file ./component1.vue --file ./component2.vue --yes
+  npx dialtone-migrate-flex-to-stack --file /absolute/path/to/file.vue
 `);
       process.exit(0);
     }
@@ -681,13 +746,12 @@ Examples:
       options.dryRun = true;
     } else if (arg === '--yes' || arg === '-y') {
       options.yes = true;
+    } else if (arg === '--file' && args[i + 1]) {
+      const filePath = args[++i];
+      options.files.push(filePath);
     } else if (!arg.startsWith('-')) {
       options.patterns.push(arg);
     }
-  }
-
-  if (options.patterns.length === 0) {
-    options.patterns = ['**/*.vue'];
   }
 
   return options;
@@ -701,8 +765,16 @@ async function main() {
   const options = parseArgs();
 
   log.bold('\n🔄 Flex to Stack Migration Tool\n');
-  log.gray(`Working directory: ${options.cwd}`);
-  log.gray(`Extensions: ${options.extensions.join(', ')}`);
+
+  // Show mode
+  if (options.files.length > 0) {
+    log.gray(`Mode: Targeted files (${options.files.length} specified)`);
+  } else {
+    log.gray(`Mode: Directory scan`);
+    log.gray(`Working directory: ${options.cwd}`);
+    log.gray(`Extensions: ${options.extensions.join(', ')}`);
+  }
+
   if (options.dryRun) {
     console.log(log.yellow('DRY RUN - no files will be modified'));
   }
@@ -710,8 +782,15 @@ async function main() {
     console.log(log.yellow('AUTO-APPLY - all changes will be applied without prompts'));
   }
 
-  // Find files
-  const files = await findFiles(options.cwd, options.extensions, ['node_modules', 'dist', 'coverage']);
+  // Find files - conditional based on --file flag
+  let files;
+  if (options.files.length > 0) {
+    // Use explicitly specified files
+    files = await validateAndResolveFiles(options.files, options.extensions);
+  } else {
+    // Use directory scanning (current behavior)
+    files = await findFiles(options.cwd, options.extensions, ['node_modules', 'dist', 'coverage']);
+  }
 
   log.gray(`Found ${files.length} file(s) to scan\n`);
 
