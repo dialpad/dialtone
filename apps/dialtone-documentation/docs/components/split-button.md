@@ -86,9 +86,9 @@ htmlCode='
 </span>
 '
 vueCode='
-<dt-split-button omega-tooltip-text="More calling options"> Place Call </dt-button>
-<dt-split-button importance="outlined" omega-tooltip-text="More calling options"> Place Call </dt-button>
-<dt-split-button importance="clear" omega-tooltip-text="More calling options"> Place Call </dt-button>
+<dt-split-button omega-tooltip-text="More calling options"> Place Call </dt-split-button>
+<dt-split-button importance="outlined" omega-tooltip-text="More calling options"> Place Call </dt-split-button>
+<dt-split-button importance="clear" omega-tooltip-text="More calling options"> Place Call </dt-split-button>
 '
 showHtmlWarning />
 
@@ -130,9 +130,9 @@ htmlCode='
 </span>
 '
 vueCode='
-<dt-split-button kind="danger" omega-tooltip-text="More calling options"> Place Call </dt-button>
-<dt-split-button importance="outlined" kind="danger" omega-tooltip-text="More calling options"> Place Call </dt-button>
-<dt-split-button importance="clear" kind="danger" omega-tooltip-text="More calling options"> Place Call </dt-button>
+<dt-split-button kind="danger" omega-tooltip-text="More calling options"> Place Call </dt-split-button>
+<dt-split-button importance="outlined" kind="danger" omega-tooltip-text="More calling options"> Place Call </dt-split-button>
+<dt-split-button importance="clear" kind="danger" omega-tooltip-text="More calling options"> Place Call </dt-split-button>
 '
 showHtmlWarning />
 
@@ -174,9 +174,9 @@ htmlCode='
 </span>
 '
 vueCode='
-<dt-split-button kind="positive" omega-tooltip-text="More calling options"> Place Call </dt-button>
-<dt-split-button kind="positive" importance="outlined" omega-tooltip-text="More calling options"> Place Call </dt-button>
-<dt-split-button kind="positive" importance="clear" omega-tooltip-text="More calling options"> Place Call </dt-button>
+<dt-split-button kind="positive" omega-tooltip-text="More calling options"> Place Call </dt-split-button>
+<dt-split-button kind="positive" importance="outlined" omega-tooltip-text="More calling options"> Place Call </dt-split-button>
+<dt-split-button kind="positive" importance="clear" omega-tooltip-text="More calling options"> Place Call </dt-split-button>
 '
 showHtmlWarning />
 
