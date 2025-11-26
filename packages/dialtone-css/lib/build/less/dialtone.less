@@ -101,15 +101,23 @@
 
 //  --  DEBUG
 [data-migrate-outline] {
-  /* stylelint-disable-next-line meowtec/no-px */
-  outline: 2px solid orangered !important;
-  /* stylelint-disable-next-line meowtec/no-px */
-  outline-offset: -2px;
+  --outline-color: orangered;
+  --outline-size: var(--dt-size-200);
+  --outline-offset: calc(var(--outline-size) * -1);
 
+  /* stylelint-disable-next-line meowtec/no-px */
+  outline: var(--outline-size) solid var(--outline-color) !important;
+  /* stylelint-disable-next-line meowtec/no-px */
+  outline-offset: var(--outline-offset);
+
+  &:hover {
+    --outline-color: transparent;
+  }
+  /* stylelint-disable-next-line meowtec/no-px */
   > * {
     /* stylelint-disable-next-line meowtec/no-px */
-    outline: 2px dotted orangered;
+    outline: var(--outline-size) dotted var(--outline-color);
     /* stylelint-disable-next-line meowtec/no-px */
-    outline-offset: -2px;
+    outline-offset: var(--outline-offset);
   }
 }

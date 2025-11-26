@@ -202,7 +202,9 @@
 </template>
 
 <script>
-import { DtBadge, DtStack } from './';
+import { DtBadge } from './';
+import { DtStack } from '@/components/stack';
+
 import {
   DtIconArrowDown,
   DtIconArrowUp,

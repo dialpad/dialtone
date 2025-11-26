@@ -182,11 +182,6 @@
         </template>
       </dt-dropdown>
     </dt-stack>
-  </div>
-</template>
-
-      </dt-dropdown>
-    </div>
     <dt-stack data-migrate-outline>
       <p class="d-fw-bold d-mb2">
         Context menu
@@ -194,7 +189,10 @@
       <p class="d-mb8">
         Displays the dropdown menu located at the pointer, triggered by a right-click
       </p>
-      <dt-stack direction="row" data-migrate-outline>
+      <dt-stack
+        direction="row"
+        data-migrate-outline
+      >
         <dt-dropdown
           class="d-mr8"
           :padding="$attrs.padding"
