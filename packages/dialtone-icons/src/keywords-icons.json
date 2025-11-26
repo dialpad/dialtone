@@ -1602,7 +1602,7 @@
         "collection",
         "cluster"
       ],
-      "bracket-left-right": [
+      "braces": [
         "brackets",
         "bracket-left",
         "bracket-right",
