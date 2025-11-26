@@ -1,6 +1,10 @@
 <template>
   <div>
-    <div class="d-d-flex d-mb12">
+    <dt-stack
+      direction="row"
+      class="d-mb12"
+      data-migrate-outline
+    >
       <dt-dropdown
         v-for="(variant, i) in variants.placement"
         :key="i"
@@ -177,15 +181,20 @@
           </div>
         </template>
       </dt-dropdown>
+    </dt-stack>
+  </div>
+</template>
+
+      </dt-dropdown>
     </div>
-    <div class="d-d-flex d-fd-column">
+    <dt-stack data-migrate-outline>
       <p class="d-fw-bold d-mb2">
         Context menu
       </p>
       <p class="d-mb8">
         Displays the dropdown menu located at the pointer, triggered by a right-click
       </p>
-      <div class="d-d-flex">
+      <dt-stack direction="row" data-migrate-outline>
         <dt-dropdown
           class="d-mr8"
           :padding="$attrs.padding"
@@ -214,13 +223,14 @@
             </dt-list-item>
           </template>
         </dt-dropdown>
-      </div>
-    </div>
+      </dt-stack>
+    </dt-stack>
   </div>
 </template>
 
 <script>
 import { DtDropdown, DtDropdownSeparator } from '@/components/dropdown';
+import { DtStack } from '@/components/stack';
 import { DtListItemGroup } from '@/components/list_item_group';
 import { DtListItem } from '@/components/list_item';
 import { DtButton } from '@/components/button';
@@ -229,7 +239,7 @@ import { DROPDOWN_STORY_ITEMS } from './dropdown_story_constants';
 export default {
   name: 'DtDropdownVariants',
 
-  components: { DtDropdown, DtListItem, DtButton, DtListItemGroup, DtDropdownSeparator },
+  components: { DtDropdown, DtListItem, DtButton, DtListItemGroup, DtDropdownSeparator, DtStack },
 
   data () {
     return {

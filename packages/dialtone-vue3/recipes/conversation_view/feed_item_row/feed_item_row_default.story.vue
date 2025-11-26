@@ -65,10 +65,15 @@
           direction="row"
           gap="400"
         >
-          <div class="d-fs-100 d-lh200 d-d-flex d-ai-center">
+          <dt-stack
+            direction="row"
+            align="center"
+            class="d-fs-100 d-lh200"
+            data-migrate-outline
+          >
             <a class="d-link d-pr4">3 replies</a>
             <span class="feed-item-row__reply">Last reply an hour ago</span>
-          </div>
+          </dt-stack>
         </dt-stack>
       </dt-stack>
     </template>
@@ -100,9 +105,11 @@
     </template>
     <template #menu>
       <!-- TODO replace this with DT menu -->
-      <div
-        class="d-d-flex d-bgc-primary d-bar-pill d-bc-default d-ba"
+      <dt-stack
+        direction="row"
+        class="d-bgc-primary d-bar-pill d-bc-default d-ba"
         role="group"
+        data-migrate-outline
       >
         <dt-button
           v-for="button of hoverButtons"
@@ -121,7 +128,7 @@
             </slot>
           </template>
         </dt-button>
-      </div>
+      </dt-stack>
     </template>
   </dt-recipe-feed-item-row>
 </template>

@@ -1,5 +1,10 @@
 <template>
-  <div class="d-d-flex d-ai-center d-hmn256 d-p24">
+  <dt-stack
+    direction="row"
+    align="center"
+    class="d-hmn256 d-p24"
+    data-migrate-outline
+  >
     <dt-recipe-motion-text
       ref="motionText"
       :text="text"
@@ -16,16 +21,18 @@
       @pause="onPause"
       @resume="onResume"
     />
-  </div>
+  </dt-stack>
 </template>
 
 <script>
 import { DtRecipeMotionText } from '@/recipes/motion/motion_text';
+import { DtStack } from '@/components/stack';
 
 export default {
   name: 'DtRecipeMotionTextDefaultStory',
   components: {
     DtRecipeMotionText,
+    DtStack,
   },
 
   props: {

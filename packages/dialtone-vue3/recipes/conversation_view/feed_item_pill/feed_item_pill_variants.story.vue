@@ -50,10 +50,14 @@
             <p class="d-fs-100 d-mt12">
               <strong>Actions items</strong>
             </p>
-            <p class="d-d-flex">
+            <dt-stack
+              as="p"
+              direction="row"
+              data-migrate-outline
+            >
               <strong class="d-mr4">1. </strong>
               The agent needs to inform the team to check on Vijay's request or ticket regarding Dialpad CTI.
-            </p>
+            </dt-stack>
           </div>
         </template>
       </dt-recipe-feed-item-pill>
@@ -225,10 +229,14 @@
             <p class="d-fs-100 d-mt12">
               <strong>Actions items</strong>
             </p>
-            <p class="d-d-flex">
+            <dt-stack
+              as="p"
+              direction="row"
+              data-migrate-outline
+            >
               <strong class="d-mr4">1. </strong>
               The agent needs to inform the team to check on Vijay's request or ticket regarding Dialpad CTI.
-            </p>
+            </dt-stack>
           </div>
         </template>
       </dt-recipe-feed-item-pill>
@@ -283,6 +291,8 @@
 import DtRecipeFeedItemPill from './feed_item_pill.vue';
 import { DtIcon } from '@/components/icon';
 import { DtButton } from '@/components/button';
+import { DtStack } from '@/components/stack';
+
 import {
   DtIconPhoneOutgoing,
   DtIconPhoneMissed,
@@ -296,6 +306,7 @@ export default {
   components: {
     DtRecipeFeedItemPill,
     DtButton,
+    DtStack,
     DtIcon,
     DtIconPhoneOutgoing,
     DtIconPhoneMissed,

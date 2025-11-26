@@ -1,17 +1,30 @@
 <template>
-  <div class="d-d-flex d-fd-column d-g32 d-p24">
+  <dt-stack
+    gap="600"
+    class="d-p24"
+    data-migrate-outline
+  >
     <!-- Speed Variants -->
     <section>
       <h2 class="d-headline--lg d-mb16">
         Speed Variants
       </h2>
-      <div class="d-d-flex d-fd-column d-g16">
-        <div
+      <dt-stack
+        gap="500"
+        data-migrate-outline
+      >
+        <dt-stack
           v-for="speed in speeds"
           :key="speed.value"
-          class="d-d-flex d-fd-column d-g8"
+          gap="400"
+          data-migrate-outline
         >
-          <div class="d-d-flex d-ai-center d-jc-space-between">
+          <dt-stack
+            direction="row"
+            align="center"
+            justify="between"
+            data-migrate-outline
+          >
             <h3 class="d-headline--md">
               {{ speed.label }} ({{ speed.value }})
             </h3>
@@ -23,8 +36,13 @@
             >
               Restart
             </dt-button>
-          </div>
-          <div class="d-p16 d-bar8 d-ba d-bc-subtle d-bgc-secondary d-hmn96 d-d-flex d-ai-center">
+          </dt-stack>
+          <dt-stack
+            direction="row"
+            align="center"
+            class="d-p16 d-bar8 d-ba d-bc-subtle d-bgc-secondary d-hmn96"
+            data-migrate-outline
+          >
             <dt-recipe-motion-text
               :ref="el => { if (el) speedRefs[speed.value] = el }"
               text="Quick brown fox jumps"
@@ -33,9 +51,9 @@
               :auto-start="false"
               class="d-body--lg"
             />
-          </div>
-        </div>
-      </div>
+          </dt-stack>
+        </dt-stack>
+      </dt-stack>
     </section>
 
     <!-- Text Size Variants -->
@@ -43,13 +61,22 @@
       <h2 class="d-headline--lg d-mb16">
         Text Size Variants
       </h2>
-      <div class="d-d-flex d-fd-column d-g16">
-        <div
+      <dt-stack
+        gap="500"
+        data-migrate-outline
+      >
+        <dt-stack
           v-for="size in textSizes"
           :key="size.class"
-          class="d-d-flex d-fd-column d-g8"
+          gap="400"
+          data-migrate-outline
         >
-          <div class="d-d-flex d-ai-center d-jc-space-between">
+          <dt-stack
+            direction="row"
+            align="center"
+            justify="between"
+            data-migrate-outline
+          >
             <h3 class="d-headline--md">
               {{ size.label }}
             </h3>
@@ -61,8 +88,13 @@
             >
               Restart
             </dt-button>
-          </div>
-          <div class="d-p16 d-bar8 d-ba d-bc-subtle d-bgc-secondary d-hmn96 d-d-flex d-ai-center">
+          </dt-stack>
+          <dt-stack
+            direction="row"
+            align="center"
+            class="d-p16 d-bar8 d-ba d-bc-subtle d-bgc-secondary d-hmn96"
+            data-migrate-outline
+          >
             <dt-recipe-motion-text
               :ref="el => { if (el) sizeRefs[size.class] = el }"
               text="Animated text"
@@ -71,9 +103,9 @@
               :auto-start="false"
               :class="size.class"
             />
-          </div>
-        </div>
-      </div>
+          </dt-stack>
+        </dt-stack>
+      </dt-stack>
     </section>
 
     <!-- Looping Animation -->
@@ -81,7 +113,12 @@
       <h2 class="d-headline--lg d-mb16">
         Looping Animation
       </h2>
-      <div class="d-p24 d-bar8 d-ba d-bc-subtle d-bgc-secondary d-hmn128 d-d-flex d-ai-center">
+      <dt-stack
+        direction="row"
+        align="center"
+        class="d-p24 d-bar8 d-ba d-bc-subtle d-bgc-secondary d-hmn128"
+        data-migrate-outline
+      >
         <dt-recipe-motion-text
           text="This text loops continuously"
           animation-mode="slide-in"
@@ -90,7 +127,7 @@
           :loop="true"
           class="d-headline--md"
         />
-      </div>
+      </dt-stack>
     </section>
 
     <!-- Manual Controls -->
@@ -98,8 +135,16 @@
       <h2 class="d-headline--lg d-mb16">
         Manual Controls
       </h2>
-      <div class="d-d-flex d-fd-column d-g16">
-        <div class="d-d-flex d-g8 d-fw-wrap">
+      <dt-stack
+        gap="500"
+        data-migrate-outline
+      >
+        <dt-stack
+          direction="row"
+          gap="400"
+          class="d-fw-wrap"
+          data-migrate-outline
+        >
           <dt-button
             size="sm"
             importance="outlined"
@@ -135,8 +180,13 @@
           >
             Skip to End
           </dt-button>
-        </div>
-        <div class="d-p24 d-bar8 d-ba d-bc-subtle d-bgc-secondary d-hmn128 d-d-flex d-ai-center">
+        </dt-stack>
+        <dt-stack
+          direction="row"
+          align="center"
+          class="d-p24 d-bar8 d-ba d-bc-subtle d-bgc-secondary d-hmn128"
+          data-migrate-outline
+        >
           <dt-recipe-motion-text
             ref="manualRef"
             text="Control me with the buttons above"
@@ -145,10 +195,10 @@
             :auto-start="false"
             class="d-headline--md"
           />
-        </div>
-      </div>
+        </dt-stack>
+      </dt-stack>
     </section>
-  </div>
+  </dt-stack>
 </template>
 
 <script>

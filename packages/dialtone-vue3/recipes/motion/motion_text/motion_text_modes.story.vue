@@ -1,11 +1,21 @@
 <template>
-  <div class="d-d-flex d-fd-column d-g24 d-p24">
-    <div
+  <dt-stack
+    gap="550"
+    class="d-p24"
+    data-migrate-outline
+  >
+    <dt-stack
       v-for="mode in animationModes"
       :key="mode.value"
-      class="d-d-flex d-fd-column d-g8"
+      gap="400"
+      data-migrate-outline
     >
-      <div class="d-d-flex d-ai-center d-jc-space-between">
+      <dt-stack
+        direction="row"
+        align="center"
+        justify="between"
+        data-migrate-outline
+      >
         <h3 class="d-headline--md">
           {{ mode.label }} Mode
         </h3>
@@ -18,11 +28,16 @@
         >
           Restart
         </dt-button>
-      </div>
+      </dt-stack>
       <p class="d-body--sm d-fc-tertiary">
         {{ mode.description }}
       </p>
-      <div class="d-p24 d-bar8 d-ba d-bc-subtle d-bgc-secondary d-hmn128 d-d-flex d-ai-center">
+      <dt-stack
+        direction="row"
+        align="center"
+        class="d-p24 d-bar8 d-ba d-bc-subtle d-bgc-secondary d-hmn128"
+        data-migrate-outline
+      >
         <dt-recipe-motion-text
           :ref="el => { if (el) modeRefs[mode.value] = el }"
           :text="exampleText"
@@ -32,20 +47,22 @@
           :loop="isStaticMode(mode.value)"
           class="d-headline--lg"
         />
-      </div>
-    </div>
-  </div>
+      </dt-stack>
+    </dt-stack>
+  </dt-stack>
 </template>
 
 <script>
 import { DtRecipeMotionText, MOTION_TEXT_ANIMATION_MODES } from '@/recipes/motion/motion_text';
 import { DtButton } from '@/components/button';
+import { DtStack } from '@/components/stack';
 
 export default {
   name: 'DtRecipeMotionTextModesStory',
   components: {
     DtRecipeMotionText,
     DtButton,
+    DtStack,
   },
 
   data () {

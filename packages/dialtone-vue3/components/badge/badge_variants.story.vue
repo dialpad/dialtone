@@ -1,8 +1,12 @@
 <template>
   <div class="d-fd-column d-of-auto d-stack8">
-    <div
+    <dt-stack
       id="components-badge--variants-container"
-      class="d-d-flex d-gg8 d-ai-center d-ff-row-wrap"
+      direction="row"
+      gap="400"
+      align="center"
+      class="d-ff-row-wrap"
+      data-migrate-outline
     >
       <dt-badge
         v-for="type in types"
@@ -25,18 +29,19 @@
         type="default"
         kind="label"
       />
-    </div>
+    </dt-stack>
   </div>
 </template>
 
 <script>
 import DtBadge from './badge.vue';
+import { DtStack } from '@/components/stack';
 import { BADGE_TYPE_MODIFIERS, BADGE_DECORATION_MODIFIERS } from './badge_constants';
 
 export default {
   name: 'DtBadgeVariants',
 
-  components: { DtBadge },
+  components: { DtBadge, DtStack },
 
   data () {
     return {

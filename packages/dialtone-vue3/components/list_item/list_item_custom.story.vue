@@ -11,9 +11,12 @@
         v-if="defaultSlot"
         v-html="defaultSlot"
       />
-      <div
+      <dt-stack
         v-else
-        class="custom-list-item d-ps-relative d-py8 d-px12 d-d-flex d-ai-center"
+        direction="row"
+        align="center"
+        class="custom-list-item d-ps-relative d-py8 d-px12"
+        data-migrate-outline
       >
         <time
           class="custom-list-item--time d-fs-100 d-pr12"
@@ -24,7 +27,11 @@
         <span class="d-fs-200">
           Custom List Item Example
         </span>
-        <div class="custom-list-item--actions d-ps-absolute d-p6 d-tn8 d-r12 d-d-flex d-bgc-white d-bar4 d-bs-md">
+        <dt-stack
+          direction="row"
+          class="custom-list-item--actions d-ps-absolute d-p6 d-tn8 d-r12 d-bgc-white d-bar4 d-bs-md"
+          data-migrate-outline
+        >
           <dt-button
             class="d-p4 d-py8"
             importance="clear"
@@ -64,13 +71,14 @@
               />
             </template>
           </dt-button>
-        </div>
-      </div>
+        </dt-stack>
+      </dt-stack>
     </dt-list-item>
   </ul>
 </template>
 
 <script>
+import { DtStack } from '@/components/stack';
 import { DtButton } from '@/components/button';
 import { DtIcon } from '@/components/icon';
 import DtListItem from './list_item.vue';
@@ -83,6 +91,7 @@ export default {
     DtButton,
     DtListItem,
     DtIcon,
+    DtStack,
   },
 
   mixins: [

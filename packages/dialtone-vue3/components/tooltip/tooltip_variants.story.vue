@@ -4,19 +4,28 @@
     id="forms-radio--variants-container"
     class="d-pt128 d-px64"
   >
-    <div class="d-d-flex d-jc-center d-w100p d-mb64 d-mt32">
+    <dt-stack
+      direction="row"
+      justify="center"
+      class="d-w100p d-mb64 d-mt32"
+      data-migrate-outline
+    >
       <dt-button
         id="external-tooltip-anchor"
         importance="outlined"
       >
         External anchor
       </dt-button>
-    </div>
+    </dt-stack>
     <!-- Arrow Description -->
-    <div
+    <dt-stack
       v-for="(rowDirection, i) in TOOLTIP_DIRECTIONS"
       :key="i"
-      class="d-mb128 d-d-flex d-jc-center d-ai-center"
+      direction="row"
+      justify="center"
+      align="center"
+      class="d-mb128"
+      data-migrate-outline
     >
       <div
         v-for="direction in rowDirection"
@@ -40,8 +49,14 @@
           </template>
         </dt-tooltip>
       </div>
-    </div>
-    <div class="d-d-flex d-jc-center d-ai-center d-w100p">
+    </dt-stack>
+    <dt-stack
+      direction="row"
+      justify="center"
+      align="center"
+      class="d-w100p"
+      data-migrate-outline
+    >
       <div id="circle-button-tooltip-label">
         Circle button tooltip
       </div>
@@ -66,8 +81,13 @@
           </dt-button>
         </template>
       </dt-tooltip>
-    </div>
-    <div class="d-d-flex d-jc-center d-w100p">
+    </dt-stack>
+    <dt-stack
+      direction="row"
+      justify="center"
+      class="d-w100p"
+      data-migrate-outline
+    >
       <!-- Text -->
       <dt-tooltip
         class="d-mb64 d-mt64"
@@ -81,8 +101,13 @@
           </dt-button>
         </template>
       </dt-tooltip>
-    </div>
-    <div class="d-d-flex d-jc-center d-w100p">
+    </dt-stack>
+    <dt-stack
+      direction="row"
+      justify="center"
+      class="d-w100p"
+      data-migrate-outline
+    >
       <!-- Open state -->
       <dt-tooltip
         class="d-mb64 d-mt32"
@@ -99,8 +124,13 @@
           </dt-button>
         </template>
       </dt-tooltip>
-    </div>
-    <div class="d-d-flex d-jc-center d-w100p">
+    </dt-stack>
+    <dt-stack
+      direction="row"
+      justify="center"
+      class="d-w100p"
+      data-migrate-outline
+    >
       <!-- Custom Theme -->
       <dt-tooltip
         class="d-mb64 d-mt32"
@@ -117,8 +147,13 @@
           </dt-button>
         </template>
       </dt-tooltip>
-    </div>
-    <div class="d-bgc-purple-600 d-pt64 d-d-flex d-jc-center">
+    </dt-stack>
+    <dt-stack
+      direction="row"
+      justify="center"
+      class="d-bgc-purple-600 d-pt64"
+      data-migrate-outline
+    >
       <div class="d-py64">
         <!-- Inverted state -->
         <dt-tooltip
@@ -137,7 +172,7 @@
           </template>
         </dt-tooltip>
       </div>
-    </div>
+    </dt-stack>
     <dt-tooltip
       :transition="transition"
       external-anchor="#external-tooltip-anchor"
@@ -151,6 +186,7 @@
 
 <script>
 import DtTooltip from './tooltip.vue';
+import { DtStack } from '@/components/stack';
 import { DtButton } from './../button';
 import { DtIcon } from './../icon';
 import { TOOLTIP_DIRECTIONS } from './tooltip_constants';
@@ -166,7 +202,7 @@ function sliceIntoChunks (arr, chunkSize) {
 
 export default {
   name: 'TooltipVariants',
-  components: { DtTooltip, DtIcon, DtButton },
+  components: { DtTooltip, DtIcon, DtButton, DtStack },
   data () {
     return {
       TOOLTIP_DIRECTIONS: sliceIntoChunks(this.$attrs.customDirections || TOOLTIP_DIRECTIONS, 3),
