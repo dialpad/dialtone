@@ -102,7 +102,14 @@
 //  --  DEBUG
 [data-migrate-outline] {
   /* stylelint-disable-next-line meowtec/no-px */
-  outline: 2px solid orangered;
+  outline: 2px solid orangered !important;
   /* stylelint-disable-next-line meowtec/no-px */
   outline-offset: -2px;
+
+  > * {
+    /* stylelint-disable-next-line meowtec/no-px */
+    outline: 2px dotted orangered;
+    /* stylelint-disable-next-line meowtec/no-px */
+    outline-offset: -2px;
+  }
 }

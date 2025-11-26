@@ -32,7 +32,7 @@
       </dt-button>
     </template>
     <template #headerContent>
-      <div class="d-d-flex d-fd-row d-ai-center d-plc-space-between">
+      <dt-stack direction="row" align="center" class="d-plc-space-between" data-migrate-outline>
         <span
           class="d-tt-capitalize d-fc-primary"
           v-text="name"
@@ -42,7 +42,7 @@
           :text="shareIcon"
           aria-label="Copy link"
         />
-      </div>
+      </dt-stack>
     </template>
     <template #content>
       <icon-popover-content

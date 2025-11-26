@@ -1,21 +1,29 @@
 <template>
-  <div
+  <dt-stack
     v-if="category === 'color'"
-    class="d-bar4 d-h32 d-d-flex d-jc-center d-ai-center colorRectangle"
+    direction="row"
+    justify="center"
+    align="center"
+    class="d-bar4 d-h32 colorRectangle"
     :style="getColorStyle"
+    data-migrate-outline
   >
     <div v-if="isForeground || isLink" :class="['d-headline--lg', { 'link-example': isLink }]">
       Aa
     </div>
-  </div>
-  <div
+  </dt-stack>
+  <dt-stack
     v-if="category === 'typography'"
-    class="d-h32 d-d-flex d-jc-center d-ai-center"
+    direction="row"
+    justify="center"
+    align="center"
+    class="d-h32"
+    data-migrate-outline
   >
     <div :style="getTypographyStyle">
       Aa
     </div>
-  </div>
+  </dt-stack>
   <div
     v-if="category === 'shadow'"
     class="d-bar4 d-h32"

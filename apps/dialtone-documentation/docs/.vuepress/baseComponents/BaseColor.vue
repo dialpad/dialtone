@@ -1,12 +1,12 @@
 <template>
-  <aside class="d-d-flex d-fd-column">
-    <header v-if="stops.length" class="d-d-flex d-jc-space-between d-ai-end">
+  <dt-stack as="aside" data-migrate-outline>
+    <dt-stack v-if="stops.length" as="header" direction="row" justify="between" class="d-ai-end" data-migrate-outline>
       <h4
         class="d-docsite--header-3 d-tt-capitalize"
         tabindex="-1"
         v-text="colorName"
       />
-    </header>
+    </dt-stack>
     <div
       v-for="(stop, index) in stops"
       :key="`${colorName}-${index}`"
@@ -24,7 +24,7 @@
         <br>
         <span v-text="stop.value" />
       </div>
-      <div class="d-d-flex d-fd-column d-fs-100 d-lh2 d-fw-bold d-bar-sm d-px4 py2">
+      <dt-stack class="d-fs-100 d-lh2 d-fw-bold d-bar-sm d-px4 py2" data-migrate-outline>
         <span
           v-if="stop.primaryContrast >= minAAContrastRatio"
           :class="fontColorMap[mode].primary"
@@ -35,9 +35,9 @@
           :class="fontColorMap[mode].inverted"
           v-text="formattedContrast(stop.invertedContrast)"
         />
-      </div>
+      </dt-stack>
     </div>
-  </aside>
+  </dt-stack>
 </template>
 
 <script setup>

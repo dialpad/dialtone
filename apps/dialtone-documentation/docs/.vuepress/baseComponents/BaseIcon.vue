@@ -40,12 +40,12 @@
         <template #content>
           <dt-stack gap="500">
             <dt-stack direction="row" gap="300">
-              <div class="d-d-flex d-fd-column d-fl-grow5">
+              <dt-stack class="d-fl-grow5" data-migrate-outline>
                 <span class="d-label d-label--sm">Name</span>
-                <div class="d-d-flex d-jc-space-between">
+                <dt-stack direction="row" justify="between" data-migrate-outline>
                   <span class="d-body--md-compact">{{ name }}</span>
-                </div>
-              </div>
+                </dt-stack>
+              </dt-stack>
               <a
                 class="d-btn d-btn--muted"
                 :href="figmaLink"
@@ -106,15 +106,15 @@
                 <span class="d-btn__label">Figma</span>
               </a>
             </dt-stack>
-            <div class="d-d-flex d-ai-center">
-              <div class="d-d-flex d-fd-column d-fl-grow5">
+            <dt-stack direction="row" align="center" data-migrate-outline>
+              <dt-stack class="d-fl-grow5" data-migrate-outline>
                 <span class="d-label d-label--sm">Description</span>
                 <div class="d-body--md-compact">
                   {{ desc }}
                 </div>
-              </div>
-            </div>
-            <div class="d-d-flex d-ai-flex-end">
+              </dt-stack>
+            </dt-stack>
+            <dt-stack direction="row" align="end" data-migrate-outline>
               <div class="d-fl-grow1">
                 <dt-input
                   class="d-ff-mono"
@@ -130,8 +130,8 @@
                 :text="rawSvg"
                 aria-label="Copy SVG markup"
               />
-            </div>
-            <div class="d-d-flex d-ai-flex-end">
+            </dt-stack>
+            <dt-stack direction="row" align="end" data-migrate-outline>
               <div class="d-fl-grow1">
                 <dt-input
                   class="d-ff-mono"
@@ -147,7 +147,7 @@
                 :text="`<${vue} />`"
                 aria-label="Copy Vue markup"
               />
-            </div>
+            </dt-stack>
           </dt-stack>
         </template>
       </dt-popover>

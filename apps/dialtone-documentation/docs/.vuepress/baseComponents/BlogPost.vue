@@ -16,8 +16,8 @@
           aria-label="Copy post link"
         />
       </component>
-      <div class="d-d-flex d-ai-center">
-        <section class="d-d-flex">
+      <dt-stack direction="row" align="center" data-migrate-outline>
+        <dt-stack as="section" direction="row" data-migrate-outline>
           <dt-avatar
             size="lg"
             :seed="author"
@@ -32,8 +32,8 @@
               {{ format(posted, 'MMMM do, y') }}
             </time>
           </div>
-        </section>
-      </div>
+        </dt-stack>
+      </dt-stack>
       <div class="blog-post-content">
         <slot />
       </div>

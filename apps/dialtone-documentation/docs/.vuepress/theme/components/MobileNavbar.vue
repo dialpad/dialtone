@@ -1,5 +1,5 @@
 <template>
-  <div class="d-ml-auto d-d-flex lg:d-d-none d-ai-center">
+  <dt-stack direction="row" align="center" class="d-ml-auto lg:d-d-none" data-migrate-outline>
     <dt-button
       v-show="!isMenuOpen"
       importance="clear"
@@ -36,14 +36,25 @@
         <dt-icon name="close" />
       </template>
     </dt-button>
-    <nav
+    <dt-stack
+      as="nav"
+      align="baseline"
       class="
-        mobile-header-drop-down-menu d-ps-fixed d-l0 d-w100p
-        d-bgc-secondary d-of-auto d-fs-300 d-d-flex
-        d-fd-column d-ai-baseline d-py24 d-px16
-        d-h100p d-t64 d-zi-navigation-fixed
-      "
+        mobile-header-drop-down-menu
+        d-ps-fixed
+        d-l0
+        d-w100p
+        d-bgc-secondary
+        d-of-auto
+        d-fs-300
+        d-py24
+        d-px16
+        d-h100p
+        d-t64
+        d-zi-navigation-fixed
+        "
       :class="{ 'd-o0 d-d-none': !isMenuOpen }"
+      data-migrate-outline
     >
       <router-link
         v-for="link in items"
@@ -55,8 +66,8 @@
       >
         {{ link.text }}
       </router-link>
-    </nav>
-  </div>
+    </dt-stack>
+  </dt-stack>
 </template>
 
 <script setup>
