@@ -163,10 +163,18 @@ const classes = [
 
 <code-well-header>
   <div class="d-ai-center d-w100p d-m8 d-p16 d-bgc-moderate d-bar4 d-ta-center">Visible on <strong>all</strong> screens</div>
-  <div class="d-fl-center d-w100p d-m8 d-p16 d-bgc-moderate d-bar4 d-ta-center d-d-none xl:d-d-block">Visible only on screens wider than <strong>extra-large</strong> breakpoint</div>
-  <div class="d-fl-center d-w100p d-m8 d-p16 d-bgc-moderate d-bar4 d-ta-center d-d-none lg:d-d-block">Visible only on screens wider than <strong>large</strong> breakpoint</div>
-  <div class="d-fl-center d-w100p d-m8 d-p16 d-bgc-moderate d-bar4 d-ta-center d-d-none md:d-d-block">Visible only on screens wider than <strong>medium</strong> breakpoint</div>
-  <div class="d-fl-center d-w100p d-m8 d-p16 d-bgc-moderate d-bar4 d-ta-center d-d-none sm:d-d-block">Visible only on screens wider than <strong>small</strong> breakpoint</div>
+  <div class="d-d-none xl:d-d-block d-w100p">
+    <dt-stack direction="row" align="center" justify="center" class="d-w100p d-m8 d-p16 d-bgc-moderate d-bar4 d-ta-center" style="--migrate-outline-color: orangered; outline: 2px solid var(--migrate-outline-color); outline-off-set: -2px">Visible only on screens wider than <strong>extra-large</strong> breakpoint</dt-stack>
+  </div>
+  <div class="d-d-none lg:d-d-block d-w100p">
+    <dt-stack direction="row" align="center" justify="center" class="d-w100p d-m8 d-p16 d-bgc-moderate d-bar4 d-ta-center" style="--migrate-outline-color: orangered; outline: 2px solid var(--migrate-outline-color); outline-off-set: -2px">Visible only on screens wider than <strong>large</strong> breakpoint</dt-stack>
+  </div>
+  <div class="d-d-none md:d-d-block d-w100p">
+    <dt-stack direction="row" align="center" justify="center" class="d-w100p d-m8 d-p16 d-bgc-moderate d-bar4 d-ta-center" style="--migrate-outline-color: orangered; outline: 2px solid var(--migrate-outline-color); outline-off-set: -2px">Visible only on screens wider than <strong>medium</strong> breakpoint</dt-stack>
+  </div>
+  <div class="d-d-none sm:d-d-block d-w100p">
+    <dt-stack direction="row" align="center" justify="center" class="d-w100p d-m8 d-p16 d-bgc-moderate d-bar4 d-ta-center" style="--migrate-outline-color: orangered; outline: 2px solid var(--migrate-outline-color); outline-off-set: -2px">Visible only on screens wider than <strong>small</strong> breakpoint</dt-stack>
+  </div>
 </code-well-header>
 
 ```html

@@ -37,11 +37,11 @@ When setting the gap between elements, utilize [Space Tokens](#tokens) for the g
 <div class="d-gc2">
 <code-well-header>
   <div class="d-d-grid d-g24 d-g-cols2 md:d-g-cols1 d-w100p">
-    <dt-stack direction="row" :style="{ gap: selectedSpace }" outline>
-      <dt-stack direction="row" align="center" justify="center" class="d-ba d-bc-default d-w100p" outline>
+    <dt-stack direction="row" :style="{ gap: selectedSpace }" style="--migrate-outline-color: orangered; outline: 2px solid var(--migrate-outline-color); outline-off-set: -2px">
+      <dt-stack direction="row" align="center" justify="center" class="d-ba d-bc-default d-w100p" style="--migrate-outline-color: orangered; outline: 2px solid var(--migrate-outline-color); outline-off-set: -2px">
         Element A
       </dt-stack>
-      <dt-stack direction="row" align="center" justify="center" class="d-ba d-bc-default d-w100p" outline>
+      <dt-stack direction="row" align="center" justify="center" class="d-ba d-bc-default d-w100p" style="--migrate-outline-color: orangered; outline: 2px solid var(--migrate-outline-color); outline-off-set: -2px">
         Element B
       </dt-stack>
     </dt-stack>

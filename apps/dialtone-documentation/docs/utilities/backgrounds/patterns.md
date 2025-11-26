@@ -8,8 +8,8 @@ description: Utilities for adding distinctive background patterns for Department
 Use `d-bgg-pattern-{pattern}-{dark|light}` to apply a pattern.
 
 <code-well-header>
-  <div class="d-d-flex d-ai-center d-w100p d-h32 d-bar4 d-bgg-to-br d-ba d-bc-default d-bgc-moderate d-bgg-pattern d-bgg-pattern-slanted-stripes-dark d-fc-primary">Ted's Call Center</div>
-  <div class="d-d-flex d-ai-center d-w100p d-h32 d-bar4 d-bgg-to-br d-ba d-bc-default d-bgc-moderate d-bgg-pattern d-bgg-pattern-chevrons-dark">Vicky's Department</div>
+  <dt-stack direction="row" align="center" class="d-w100p d-h32 d-bar4 d-bgg-to-br d-ba d-bc-default d-bgc-moderate d-bgg-pattern d-bgg-pattern-slanted-stripes-dark d-fc-primary" style="--migrate-outline-color: orangered; outline: 2px solid var(--migrate-outline-color); outline-off-set: -2px">Ted's Call Center</dt-stack>
+  <dt-stack direction="row" align="center" class="d-w100p d-h32 d-bar4 d-bgg-to-br d-ba d-bc-default d-bgc-moderate d-bgg-pattern d-bgg-pattern-chevrons-dark" style="--migrate-outline-color: orangered; outline: 2px solid var(--migrate-outline-color); outline-off-set: -2px">Vicky's Department</dt-stack>
 </code-well-header>
 
 ```html
@@ -26,7 +26,7 @@ Use `d-bgg-pattern-{pattern}-{dark|light}` to apply a pattern.
       <tr v-for="i in ['blob', 'chevrons', 'crosses', 'crosshatch', 'dot-dash', 'dots-circles', 'horz-stripes', 'slanted-stripes', 'steps', 'stripe']">
         <th scope="row" class="d-code--sm d-docsite-code">.d-bgg-pattern-{{ i }}-{{ c }}</th>
         <td>
-          <div class="d-d-flex d-jc-space-between d-ai-center">
+          <dt-stack direction="row" justify="between" align="center" style="--migrate-outline-color: orangered; outline: 2px solid var(--migrate-outline-color); outline-off-set: -2px">
             <div class="d-fl-grow1 d-code--sm">
               --bgg-pattern: --bgg-pattern-{{ i }}-{{ c }};
             </div>
@@ -39,7 +39,7 @@ Use `d-bgg-pattern-{pattern}-{dark|light}` to apply a pattern.
               ]"
             >
             </div>
-          </div>
+          </dt-stack>
         </td>
       </tr>
     </tbody>

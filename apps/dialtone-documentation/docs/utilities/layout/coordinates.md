@@ -11,16 +11,16 @@ Use the `top|right|bottom|left|x|y|all` utility classes to absolutely position e
 
 <code-well-header>
   <div class="d-w100p d-hmn216 d-d-grid d-g-cols4 d-g16 d-pi-center">
-    <div class="d-ps-relative d-h128 d-bar8 d-bgc-moderate"><div class="d-fl-center d-ps-absolute d-x0 d-t0 d-bgc-moderate-opaque d-bar4 d-h50p">1</div></div>
-    <div class="d-ps-relative d-h128 d-bar8 d-bgc-moderate"><div class="d-fl-center d-ps-absolute d-y0 d-r0 d-bgc-moderate-opaque d-bar4 d-w50p">2</div></div>
-    <div class="d-ps-relative d-h128 d-bar8 d-bgc-moderate"><div class="d-fl-center d-ps-absolute d-x0 d-b0 d-bgc-moderate-opaque d-bar4 d-h50p">3</div></div>
-    <div class="d-ps-relative d-h128 d-bar8 d-bgc-moderate"><div class="d-fl-center d-ps-absolute d-y0 d-l0 d-bgc-moderate-opaque d-bar4 d-w50p">4</div></div>
-    <div class="d-ps-relative d-h128 d-bar8 d-bgc-moderate"><div class="d-fl-center d-ps-absolute d-all0 d-bgc-moderate-opaque d-bar4">5</div></div>
-    <div class="d-ps-relative d-h128 d-bar8 d-bgc-moderate"><div class="d-fl-center d-ps-absolute d-l0 d-t0 d-bgc-moderate-opaque d-bar4 d-w50p d-h50p">6</div></div>
-    <div class="d-ps-relative d-h128 d-bar8 d-bgc-moderate"><div class="d-fl-center d-ps-absolute d-r0 d-t0 d-bgc-moderate-opaque d-bar4 d-w50p d-h50p">7</div></div>
-    <div class="d-ps-relative d-h128 d-bar8 d-bgc-moderate"><div class="d-fl-center d-ps-absolute d-r0 d-b0 d-bgc-moderate-opaque d-bar4 d-w50p d-h50p">8</div></div>
-    <div class="d-ps-relative d-h128 d-bar8 d-bgc-moderate"><div class="d-fl-center d-ps-absolute d-l0 d-b0 d-bgc-moderate-opaque d-bar4 d-w50p d-h50p">9</div></div>
-    <div class="d-ps-relative d-h128 d-bar8 d-bgc-moderate"><div class="d-fl-center d-ps-absolute d-all8 d-bgc-moderate-opaque d-bar4">10</div></div>
+    <div class="d-ps-relative d-h128 d-bar8 d-bgc-moderate"><dt-stack direction="row" align="center" justify="center" class="d-ps-absolute d-x0 d-t0 d-bgc-moderate-opaque d-bar4 d-h50p" style="--migrate-outline-color: orangered; outline: 2px solid var(--migrate-outline-color); outline-off-set: -2px">1</dt-stack></div>
+    <div class="d-ps-relative d-h128 d-bar8 d-bgc-moderate"><dt-stack direction="row" align="center" justify="center" class="d-ps-absolute d-y0 d-r0 d-bgc-moderate-opaque d-bar4 d-w50p" style="--migrate-outline-color: orangered; outline: 2px solid var(--migrate-outline-color); outline-off-set: -2px">2</dt-stack></div>
+    <div class="d-ps-relative d-h128 d-bar8 d-bgc-moderate"><dt-stack direction="row" align="center" justify="center" class="d-ps-absolute d-x0 d-b0 d-bgc-moderate-opaque d-bar4 d-h50p" style="--migrate-outline-color: orangered; outline: 2px solid var(--migrate-outline-color); outline-off-set: -2px">3</dt-stack></div>
+    <div class="d-ps-relative d-h128 d-bar8 d-bgc-moderate"><dt-stack direction="row" align="center" justify="center" class="d-ps-absolute d-y0 d-l0 d-bgc-moderate-opaque d-bar4 d-w50p" style="--migrate-outline-color: orangered; outline: 2px solid var(--migrate-outline-color); outline-off-set: -2px">4</dt-stack></div>
+    <div class="d-ps-relative d-h128 d-bar8 d-bgc-moderate"><dt-stack direction="row" align="center" justify="center" class="d-ps-absolute d-all0 d-bgc-moderate-opaque d-bar4" style="--migrate-outline-color: orangered; outline: 2px solid var(--migrate-outline-color); outline-off-set: -2px">5</dt-stack></div>
+    <div class="d-ps-relative d-h128 d-bar8 d-bgc-moderate"><dt-stack direction="row" align="center" justify="center" class="d-ps-absolute d-l0 d-t0 d-bgc-moderate-opaque d-bar4 d-w50p d-h50p" style="--migrate-outline-color: orangered; outline: 2px solid var(--migrate-outline-color); outline-off-set: -2px">6</dt-stack></div>
+    <div class="d-ps-relative d-h128 d-bar8 d-bgc-moderate"><dt-stack direction="row" align="center" justify="center" class="d-ps-absolute d-r0 d-t0 d-bgc-moderate-opaque d-bar4 d-w50p d-h50p" style="--migrate-outline-color: orangered; outline: 2px solid var(--migrate-outline-color); outline-off-set: -2px">7</dt-stack></div>
+    <div class="d-ps-relative d-h128 d-bar8 d-bgc-moderate"><dt-stack direction="row" align="center" justify="center" class="d-ps-absolute d-r0 d-b0 d-bgc-moderate-opaque d-bar4 d-w50p d-h50p" style="--migrate-outline-color: orangered; outline: 2px solid var(--migrate-outline-color); outline-off-set: -2px">8</dt-stack></div>
+    <div class="d-ps-relative d-h128 d-bar8 d-bgc-moderate"><dt-stack direction="row" align="center" justify="center" class="d-ps-absolute d-l0 d-b0 d-bgc-moderate-opaque d-bar4 d-w50p d-h50p" style="--migrate-outline-color: orangered; outline: 2px solid var(--migrate-outline-color); outline-off-set: -2px">9</dt-stack></div>
+    <div class="d-ps-relative d-h128 d-bar8 d-bgc-moderate"><dt-stack direction="row" align="center" justify="center" class="d-ps-absolute d-all8 d-bgc-moderate-opaque d-bar4" style="--migrate-outline-color: orangered; outline: 2px solid var(--migrate-outline-color); outline-off-set: -2px">10</dt-stack></div>
   </div>
 </code-well-header>
 
@@ -113,15 +113,15 @@ Use the `top|right|bottom|left|x|y|all` utility classes to absolutely position e
 
 <code-well-header>
   <div class="d-w100p d-hmn216 d-d-grid d-g-cols4 d-g16 d-pi-center">
-    <div class="d-ps-relative d-h128 d-bar8 d-bgc-moderate"><div class="d-fl-center d-ps-absolute d-xn2 d-tn2 d-bgc-moderate-opaque d-bar8 d-h50p">1</div></div>
-    <div class="d-ps-relative d-h128 d-bar8 d-bgc-moderate"><div class="d-fl-center d-ps-absolute d-yn2 d-rn2 d-bgc-moderate-opaque d-bar8 d-w50p">2</div></div>
-    <div class="d-ps-relative d-h128 d-bar8 d-bgc-moderate"><div class="d-fl-center d-ps-absolute d-xn2 d-bn2 d-bgc-moderate-opaque d-bar8 d-h50p">3</div></div>
-    <div class="d-ps-relative d-h128 d-bar8 d-bgc-moderate"><div class="d-fl-center d-ps-absolute d-yn2 d-ln2 d-bgc-moderate-opaque d-bar8 d-w50p">4</div></div>
-    <div class="d-ps-relative d-h128 d-bar8 d-bgc-moderate"><div class="d-fl-center d-ps-absolute d-alln2 d-bgc-moderate-opaque d-bar8">5</div></div>
-    <div class="d-ps-relative d-h128 d-bar8 d-bgc-moderate"><div class="d-fl-center d-ps-absolute d-ln4 d-tn4 d-bgc-moderate-opaque d-bar8 d-w50p d-h50p">6</div></div>
-    <div class="d-ps-relative d-h128 d-bar8 d-bgc-moderate"><div class="d-fl-center d-ps-absolute d-rn8 d-tn8 d-bgc-moderate-opaque d-bar8 d-w50p d-h50p">7</div></div>
-    <div class="d-ps-relative d-h128 d-bar8 d-bgc-moderate"><div class="d-fl-center d-ps-absolute d-rn8 d-bn8 d-bgc-moderate-opaque d-bar8 d-w50p d-h50p">8</div></div>
-    <div class="d-ps-relative d-h128 d-bar8 d-bgc-moderate"><div class="d-fl-center d-ps-absolute d-ln4 d-bn4 d-bgc-moderate-opaque d-bar8 d-w50p d-h50p">9</div></div>
+    <div class="d-ps-relative d-h128 d-bar8 d-bgc-moderate"><dt-stack direction="row" align="center" justify="center" class="d-ps-absolute d-xn2 d-tn2 d-bgc-moderate-opaque d-bar8 d-h50p" style="--migrate-outline-color: orangered; outline: 2px solid var(--migrate-outline-color); outline-off-set: -2px">1</dt-stack></div>
+    <div class="d-ps-relative d-h128 d-bar8 d-bgc-moderate"><dt-stack direction="row" align="center" justify="center" class="d-ps-absolute d-yn2 d-rn2 d-bgc-moderate-opaque d-bar8 d-w50p" style="--migrate-outline-color: orangered; outline: 2px solid var(--migrate-outline-color); outline-off-set: -2px">2</dt-stack></div>
+    <div class="d-ps-relative d-h128 d-bar8 d-bgc-moderate"><dt-stack direction="row" align="center" justify="center" class="d-ps-absolute d-xn2 d-bn2 d-bgc-moderate-opaque d-bar8 d-h50p" style="--migrate-outline-color: orangered; outline: 2px solid var(--migrate-outline-color); outline-off-set: -2px">3</dt-stack></div>
+    <div class="d-ps-relative d-h128 d-bar8 d-bgc-moderate"><dt-stack direction="row" align="center" justify="center" class="d-ps-absolute d-yn2 d-ln2 d-bgc-moderate-opaque d-bar8 d-w50p" style="--migrate-outline-color: orangered; outline: 2px solid var(--migrate-outline-color); outline-off-set: -2px">4</dt-stack></div>
+    <div class="d-ps-relative d-h128 d-bar8 d-bgc-moderate"><dt-stack direction="row" align="center" justify="center" class="d-ps-absolute d-alln2 d-bgc-moderate-opaque d-bar8" style="--migrate-outline-color: orangered; outline: 2px solid var(--migrate-outline-color); outline-off-set: -2px">5</dt-stack></div>
+    <div class="d-ps-relative d-h128 d-bar8 d-bgc-moderate"><dt-stack direction="row" align="center" justify="center" class="d-ps-absolute d-ln4 d-tn4 d-bgc-moderate-opaque d-bar8 d-w50p d-h50p" style="--migrate-outline-color: orangered; outline: 2px solid var(--migrate-outline-color); outline-off-set: -2px">6</dt-stack></div>
+    <div class="d-ps-relative d-h128 d-bar8 d-bgc-moderate"><dt-stack direction="row" align="center" justify="center" class="d-ps-absolute d-rn8 d-tn8 d-bgc-moderate-opaque d-bar8 d-w50p d-h50p" style="--migrate-outline-color: orangered; outline: 2px solid var(--migrate-outline-color); outline-off-set: -2px">7</dt-stack></div>
+    <div class="d-ps-relative d-h128 d-bar8 d-bgc-moderate"><dt-stack direction="row" align="center" justify="center" class="d-ps-absolute d-rn8 d-bn8 d-bgc-moderate-opaque d-bar8 d-w50p d-h50p" style="--migrate-outline-color: orangered; outline: 2px solid var(--migrate-outline-color); outline-off-set: -2px">8</dt-stack></div>
+    <div class="d-ps-relative d-h128 d-bar8 d-bgc-moderate"><dt-stack direction="row" align="center" justify="center" class="d-ps-absolute d-ln4 d-bn4 d-bgc-moderate-opaque d-bar8 d-w50p d-h50p" style="--migrate-outline-color: orangered; outline: 2px solid var(--migrate-outline-color); outline-off-set: -2px">9</dt-stack></div>
   </div>
 </code-well-header>
 

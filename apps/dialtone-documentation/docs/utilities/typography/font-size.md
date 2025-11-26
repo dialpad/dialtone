@@ -65,14 +65,14 @@ change in other platforms (mobile, tc8, tv).
           <th scope="row">{{ size }}px</th>
           <td class="d-code--sm d-docsite-code">.d-fs-{{ stop }}</td>
           <td>
-            <div class="d-d-flex d-jc-space-between d-ai-center">
+            <dt-stack direction="row" justify="between" align="center" style="--migrate-outline-color: orangered; outline: 2px solid var(--migrate-outline-color); outline-off-set: -2px">
               <div class="d-fl1 d-code--sm">
                 font-size: {{ output }}rem !important;
               </div>
               <div class="d-fl0 d-lh4" :class="`d-fs-${stop}`">
                 Aa
               </div>
-            </div>
+            </dt-stack>
           </td>
         </tr>
       </tbody>
@@ -97,14 +97,14 @@ change in other platforms (mobile, tc8, tv).
           <th scope="row">{{ size }}px</th>
           <td class="d-code--sm d-docsite-code">.d-fs-{{ stop }}-mobile</td>
           <td>
-            <div class="d-d-flex d-jc-space-between d-ai-center">
+            <dt-stack direction="row" justify="between" align="center" style="--migrate-outline-color: orangered; outline: 2px solid var(--migrate-outline-color); outline-off-set: -2px">
               <div class="d-fl1 d-code--sm">
                 font-size: {{ output }}rem !important;
               </div>
               <div class="d-fl0 d-lh4" :class="`d-fs-${stop}-mobile`">
                 Aa
               </div>
-            </div>
+            </dt-stack>
           </td>
         </tr>
       </tbody>
@@ -129,14 +129,14 @@ change in other platforms (mobile, tc8, tv).
           <th scope="row">{{ size }}px</th>
           <td class="d-code--sm d-docsite-code">.d-fs-{{ stop }}-tc8</td>
           <td>
-            <div class="d-d-flex d-jc-space-between d-ai-center">
+            <dt-stack direction="row" justify="between" align="center" style="--migrate-outline-color: orangered; outline: 2px solid var(--migrate-outline-color); outline-off-set: -2px">
               <div class="d-fl1 d-code--sm">
                 font-size: {{ output }}rem !important;
               </div>
               <div class="d-fl0 d-lh4" :class="`d-fs-${stop}-tc8`">
                 Aa
               </div>
-            </div>
+            </dt-stack>
           </td>
         </tr>
       </tbody>
@@ -161,14 +161,14 @@ change in other platforms (mobile, tc8, tv).
           <th scope="row">{{ size }}px</th>
           <td class="d-code--sm d-docsite-code">.d-fs-{{ stop }}-tv</td>
           <td>
-            <div class="d-d-flex d-jc-space-between d-ai-center">
+            <dt-stack direction="row" justify="between" align="center" style="--migrate-outline-color: orangered; outline: 2px solid var(--migrate-outline-color); outline-off-set: -2px">
               <div class="d-fl1 d-code--sm">
                 font-size: {{ output }}rem !important;
               </div>
               <div class="d-fl0 d-lh4" :class="`d-fs-${stop}-tv`">
                 Aa
               </div>
-            </div>
+            </dt-stack>
           </td>
         </tr>
       </tbody>

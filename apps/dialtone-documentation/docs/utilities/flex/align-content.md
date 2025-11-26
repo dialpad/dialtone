@@ -11,11 +11,11 @@ Use `d-ac-flex-start` to pack multiple rows against the start of the element's c
 
 <code-well-header>
   <div class="d-fl-col3 d-g16 d-fw-wrap d-ac-flex-start d-p8 d-w100p d-bar8 d-bgc-moderate d-hmn332">
-    <div class="d-fl-center d-p16 d-h64 d-bgc-moderate-opaque d-bar4">1</div>
-    <div class="d-fl-center d-p16 d-h64 d-bgc-moderate-opaque d-bar4">2</div>
-    <div class="d-fl-center d-p16 d-h64 d-bgc-moderate-opaque d-bar4">3</div>
-    <div class="d-fl-center d-p16 d-h64 d-bgc-moderate-opaque d-bar4">4</div>
-    <div class="d-fl-center d-p16 d-h64 d-bgc-moderate-opaque d-bar4">5</div>
+    <dt-stack direction="row" align="center" justify="center" class="d-p16 d-h64 d-bgc-moderate-opaque d-bar4" style="--migrate-outline-color: orangered; outline: 2px solid var(--migrate-outline-color); outline-off-set: -2px">1</dt-stack>
+    <dt-stack direction="row" align="center" justify="center" class="d-p16 d-h64 d-bgc-moderate-opaque d-bar4" style="--migrate-outline-color: orangered; outline: 2px solid var(--migrate-outline-color); outline-off-set: -2px">2</dt-stack>
+    <dt-stack direction="row" align="center" justify="center" class="d-p16 d-h64 d-bgc-moderate-opaque d-bar4" style="--migrate-outline-color: orangered; outline: 2px solid var(--migrate-outline-color); outline-off-set: -2px">3</dt-stack>
+    <dt-stack direction="row" align="center" justify="center" class="d-p16 d-h64 d-bgc-moderate-opaque d-bar4" style="--migrate-outline-color: orangered; outline: 2px solid var(--migrate-outline-color); outline-off-set: -2px">4</dt-stack>
+    <dt-stack direction="row" align="center" justify="center" class="d-p16 d-h64 d-bgc-moderate-opaque d-bar4" style="--migrate-outline-color: orangered; outline: 2px solid var(--migrate-outline-color); outline-off-set: -2px">5</dt-stack>
   </div>
 </code-well-header>
 
@@ -33,11 +33,11 @@ Use `d-ac-center` to pack rows along the center of the element's cross axis.
 
 <code-well-header>
   <div class="d-fl-col3 d-g16 d-fw-wrap d-ac-center d-p8 d-w100p d-bar8 d-bgc-moderate d-hmn332">
-    <div class="d-fl-center d-p16 d-h64 d-bgc-moderate-opaque d-bar4">1</div>
-    <div class="d-fl-center d-p16 d-h64 d-bgc-moderate-opaque d-bar4">2</div>
-    <div class="d-fl-center d-p16 d-h64 d-bgc-moderate-opaque d-bar4">3</div>
-    <div class="d-fl-center d-p16 d-h64 d-bgc-moderate-opaque d-bar4">4</div>
-    <div class="d-fl-center d-p16 d-h64 d-bgc-moderate-opaque d-bar4">5</div>
+    <dt-stack direction="row" align="center" justify="center" class="d-p16 d-h64 d-bgc-moderate-opaque d-bar4" style="--migrate-outline-color: orangered; outline: 2px solid var(--migrate-outline-color); outline-off-set: -2px">1</dt-stack>
+    <dt-stack direction="row" align="center" justify="center" class="d-p16 d-h64 d-bgc-moderate-opaque d-bar4" style="--migrate-outline-color: orangered; outline: 2px solid var(--migrate-outline-color); outline-off-set: -2px">2</dt-stack>
+    <dt-stack direction="row" align="center" justify="center" class="d-p16 d-h64 d-bgc-moderate-opaque d-bar4" style="--migrate-outline-color: orangered; outline: 2px solid var(--migrate-outline-color); outline-off-set: -2px">3</dt-stack>
+    <dt-stack direction="row" align="center" justify="center" class="d-p16 d-h64 d-bgc-moderate-opaque d-bar4" style="--migrate-outline-color: orangered; outline: 2px solid var(--migrate-outline-color); outline-off-set: -2px">4</dt-stack>
+    <dt-stack direction="row" align="center" justify="center" class="d-p16 d-h64 d-bgc-moderate-opaque d-bar4" style="--migrate-outline-color: orangered; outline: 2px solid var(--migrate-outline-color); outline-off-set: -2px">5</dt-stack>
   </div>
 </code-well-header>
 
@@ -55,11 +55,11 @@ Use `d-ac-flex-end` to rack rows against the end of the element's main axis.
 
 <code-well-header >
   <div class="d-fl-col3 d-fw-wrap d-g16 d-ac-flex-end d-p8 d-w100p d-bar8 d-bgc-moderate d-hmn332">
-    <div class="d-fl-center d-p16 d-h64 d-bgc-moderate-opaque d-bar4">1</div>
-    <div class="d-fl-center d-p16 d-h64 d-bgc-moderate-opaque d-bar4">2</div>
-    <div class="d-fl-center d-p16 d-h64 d-bgc-moderate-opaque d-bar4">3</div>
-    <div class="d-fl-center d-p16 d-h64 d-bgc-moderate-opaque d-bar4">4</div>
-    <div class="d-fl-center d-p16 d-h64 d-bgc-moderate-opaque d-bar4">5</div>
+    <dt-stack direction="row" align="center" justify="center" class="d-p16 d-h64 d-bgc-moderate-opaque d-bar4" style="--migrate-outline-color: orangered; outline: 2px solid var(--migrate-outline-color); outline-off-set: -2px">1</dt-stack>
+    <dt-stack direction="row" align="center" justify="center" class="d-p16 d-h64 d-bgc-moderate-opaque d-bar4" style="--migrate-outline-color: orangered; outline: 2px solid var(--migrate-outline-color); outline-off-set: -2px">2</dt-stack>
+    <dt-stack direction="row" align="center" justify="center" class="d-p16 d-h64 d-bgc-moderate-opaque d-bar4" style="--migrate-outline-color: orangered; outline: 2px solid var(--migrate-outline-color); outline-off-set: -2px">3</dt-stack>
+    <dt-stack direction="row" align="center" justify="center" class="d-p16 d-h64 d-bgc-moderate-opaque d-bar4" style="--migrate-outline-color: orangered; outline: 2px solid var(--migrate-outline-color); outline-off-set: -2px">4</dt-stack>
+    <dt-stack direction="row" align="center" justify="center" class="d-p16 d-h64 d-bgc-moderate-opaque d-bar4" style="--migrate-outline-color: orangered; outline: 2px solid var(--migrate-outline-color); outline-off-set: -2px">5</dt-stack>
   </div>
 </code-well-header>
 
@@ -77,11 +77,11 @@ Use `d-ac-space-around` to pack rows along the element's cross axis so that ther
 
 <code-well-header>
   <div class="d-fl-col3 d-fw-wrap d-g16 d-ac-space-around d-bgc-red-100 d-p8 d-w100p d-bar8 d-bgc-moderate d-hmn332">
-    <div class="d-fl-center d-p16 d-h64 d-bgc-moderate-opaque d-bar4">1</div>
-    <div class="d-fl-center d-p16 d-h64 d-bgc-moderate-opaque d-bar4">2</div>
-    <div class="d-fl-center d-p16 d-h64 d-bgc-moderate-opaque d-bar4">3</div>
-    <div class="d-fl-center d-p16 d-h64 d-bgc-moderate-opaque d-bar4">4</div>
-    <div class="d-fl-center d-p16 d-h64 d-bgc-moderate-opaque d-bar4">5</div>
+    <dt-stack direction="row" align="center" justify="center" class="d-p16 d-h64 d-bgc-moderate-opaque d-bar4" style="--migrate-outline-color: orangered; outline: 2px solid var(--migrate-outline-color); outline-off-set: -2px">1</dt-stack>
+    <dt-stack direction="row" align="center" justify="center" class="d-p16 d-h64 d-bgc-moderate-opaque d-bar4" style="--migrate-outline-color: orangered; outline: 2px solid var(--migrate-outline-color); outline-off-set: -2px">2</dt-stack>
+    <dt-stack direction="row" align="center" justify="center" class="d-p16 d-h64 d-bgc-moderate-opaque d-bar4" style="--migrate-outline-color: orangered; outline: 2px solid var(--migrate-outline-color); outline-off-set: -2px">3</dt-stack>
+    <dt-stack direction="row" align="center" justify="center" class="d-p16 d-h64 d-bgc-moderate-opaque d-bar4" style="--migrate-outline-color: orangered; outline: 2px solid var(--migrate-outline-color); outline-off-set: -2px">4</dt-stack>
+    <dt-stack direction="row" align="center" justify="center" class="d-p16 d-h64 d-bgc-moderate-opaque d-bar4" style="--migrate-outline-color: orangered; outline: 2px solid var(--migrate-outline-color); outline-off-set: -2px">5</dt-stack>
   </div>
 </code-well-header>
 
@@ -101,11 +101,11 @@ Use `d-ac-space-between` to distribute rows along the element's cross axis so th
 
 <code-well-header>
   <div class="d-fl-col3 d-fw-wrap d-g16 d-ac-space-between d-p8 d-w100p d-bar8 d-bgc-moderate d-hmn332">
-    <div class="d-fl-center d-m8 d-p16 d-h64 d-bgc-moderate-opaque d-bar4">1</div>
-    <div class="d-fl-center d-m8 d-p16 d-h64 d-bgc-moderate-opaque d-bar4">2</div>
-    <div class="d-fl-center d-m8 d-p16 d-h64 d-bgc-moderate-opaque d-bar4">3</div>
-    <div class="d-fl-center d-m8 d-p16 d-h64 d-bgc-moderate-opaque d-bar4">4</div>
-    <div class="d-fl-center d-m8 d-p16 d-h64 d-bgc-moderate-opaque d-bar4">5</div>
+    <dt-stack direction="row" align="center" justify="center" class="d-m8 d-p16 d-h64 d-bgc-moderate-opaque d-bar4" style="--migrate-outline-color: orangered; outline: 2px solid var(--migrate-outline-color); outline-off-set: -2px">1</dt-stack>
+    <dt-stack direction="row" align="center" justify="center" class="d-m8 d-p16 d-h64 d-bgc-moderate-opaque d-bar4" style="--migrate-outline-color: orangered; outline: 2px solid var(--migrate-outline-color); outline-off-set: -2px">2</dt-stack>
+    <dt-stack direction="row" align="center" justify="center" class="d-m8 d-p16 d-h64 d-bgc-moderate-opaque d-bar4" style="--migrate-outline-color: orangered; outline: 2px solid var(--migrate-outline-color); outline-off-set: -2px">3</dt-stack>
+    <dt-stack direction="row" align="center" justify="center" class="d-m8 d-p16 d-h64 d-bgc-moderate-opaque d-bar4" style="--migrate-outline-color: orangered; outline: 2px solid var(--migrate-outline-color); outline-off-set: -2px">4</dt-stack>
+    <dt-stack direction="row" align="center" justify="center" class="d-m8 d-p16 d-h64 d-bgc-moderate-opaque d-bar4" style="--migrate-outline-color: orangered; outline: 2px solid var(--migrate-outline-color); outline-off-set: -2px">5</dt-stack>
   </div>
 </code-well-header>
 
@@ -125,12 +125,12 @@ Use `d-ac-space-evenly` to distribute rows along the element's cross axis so tha
 
 <code-well-header>
   <div class="d-fl-col3 d-fw-wrap d-g16 d-ac-space-evenly d-p8 d-w100p d-bar8 d-bgc-moderate d-hmn332">
-    <div class="d-fl-center d-m8 d-p16 d-h64 d-bgc-moderate-opaque d-bar4">1</div>
-    <div class="d-fl-center d-m8 d-p16 d-h64 d-bgc-moderate-opaque d-bar4">2</div>
-    <div class="d-fl-center d-m8 d-p16 d-h64 d-bgc-moderate-opaque d-bar4">3</div>
-    <div class="d-fl-center d-m8 d-p16 d-h64 d-bgc-moderate-opaque d-bar4">4</div>
-    <div class="d-fl-center d-m8 d-p16 d-h64 d-bgc-moderate-opaque d-bar4">5</div>
-    <div class="d-fl-center d-m8 d-p16 d-h64 d-bgc-moderate-opaque d-bar4">6</div>
+    <dt-stack direction="row" align="center" justify="center" class="d-m8 d-p16 d-h64 d-bgc-moderate-opaque d-bar4" style="--migrate-outline-color: orangered; outline: 2px solid var(--migrate-outline-color); outline-off-set: -2px">1</dt-stack>
+    <dt-stack direction="row" align="center" justify="center" class="d-m8 d-p16 d-h64 d-bgc-moderate-opaque d-bar4" style="--migrate-outline-color: orangered; outline: 2px solid var(--migrate-outline-color); outline-off-set: -2px">2</dt-stack>
+    <dt-stack direction="row" align="center" justify="center" class="d-m8 d-p16 d-h64 d-bgc-moderate-opaque d-bar4" style="--migrate-outline-color: orangered; outline: 2px solid var(--migrate-outline-color); outline-off-set: -2px">3</dt-stack>
+    <dt-stack direction="row" align="center" justify="center" class="d-m8 d-p16 d-h64 d-bgc-moderate-opaque d-bar4" style="--migrate-outline-color: orangered; outline: 2px solid var(--migrate-outline-color); outline-off-set: -2px">4</dt-stack>
+    <dt-stack direction="row" align="center" justify="center" class="d-m8 d-p16 d-h64 d-bgc-moderate-opaque d-bar4" style="--migrate-outline-color: orangered; outline: 2px solid var(--migrate-outline-color); outline-off-set: -2px">5</dt-stack>
+    <dt-stack direction="row" align="center" justify="center" class="d-m8 d-p16 d-h64 d-bgc-moderate-opaque d-bar4" style="--migrate-outline-color: orangered; outline: 2px solid var(--migrate-outline-color); outline-off-set: -2px">6</dt-stack>
   </div>
 </code-well-header>
 
