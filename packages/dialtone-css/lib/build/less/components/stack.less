@@ -19,18 +19,22 @@
 .direction-options() {
   &-column {
     --stack-direction: column;
+    --stack-align: initial;
   }
 
   &-column-reverse {
     --stack-direction: column-reverse;
+    --stack-align: initial;
   }
 
   &-row {
     --stack-direction: row;
+    --stack-align: center;
   }
 
   &-row-reverse {
     --stack-direction: row-reverse;
+    --stack-align: center;
   }
 }
 
@@ -93,10 +97,6 @@
 }
 
 .align-options() {
-  &-align-normal {
-    align-items: normal;
-  }
-
   &-align-start {
     align-items: start;
   }
@@ -147,10 +147,14 @@
 .d-stack {
   --stack-gap: 0;
   --stack-direction: column;
+  --stack-align: initial;
+  --stack-justify: initial;
 
   display: flex;
   flex-direction: var(--stack-direction);
   gap: var(--stack-gap);
+  align-items: var(--stack-align);
+  justify-content: var(--stack-justify);
 }
 
 //  ============================================================================
@@ -160,6 +164,7 @@
 //  ----------------------------------------------------------------------------
 .d-stack--column-reverse {
   --stack-direction: column-reverse;
+  --stack-align: initial;
 }
 
 //  ----------------------------------------------------------------------------
@@ -167,6 +172,7 @@
 //  ----------------------------------------------------------------------------
 .d-stack--row {
   --stack-direction: row;
+  --stack-align: center;
 }
 
 //  ----------------------------------------------------------------------------
@@ -174,34 +180,31 @@
 //  ----------------------------------------------------------------------------
 .d-stack--row-reverse {
   --stack-direction: row-reverse;
+  --stack-align: center;
 }
 
 //  ============================================================================
 //  $   ALIGNMENT
 //  ----------------------------------------------------------------------------
 
-.d-stack--align-normal {
-  align-items: normal;
-}
-
 .d-stack--align-start {
-  align-items: start;
+  --stack-align: start;
 }
 
 .d-stack--align-center {
-  align-items: center;
+  --stack-align: center;
 }
 
 .d-stack--align-end {
-  align-items: end;
+  --stack-align: end;
 }
 
 .d-stack--align-stretch {
-  align-items: stretch;
+  --stack-align: stretch;
 }
 
 .d-stack--align-baseline {
-  align-items: baseline;
+  --stack-align: baseline;
 }
 
 //  ============================================================================
@@ -209,27 +212,27 @@
 //  ----------------------------------------------------------------------------
 
 .d-stack--justify-start {
-  justify-content: start;
+  --stack-justify: start;
 }
 
 .d-stack--justify-center {
-  justify-content: center;
+  --stack-justify: center;
 }
 
 .d-stack--justify-end {
-  justify-content: end;
+  --stack-justify: end;
 }
 
 .d-stack--justify-around {
-  justify-content: space-around;
+  --stack-justify: space-around;
 }
 
 .d-stack--justify-between {
-  justify-content: space-between;
+  --stack-justify: space-between;
 }
 
 .d-stack--justify-evenly {
-  justify-content: space-evenly;
+  --stack-justify: space-evenly;
 }
 
 //  ============================================================================

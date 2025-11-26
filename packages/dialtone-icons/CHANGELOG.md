@@ -1,3 +1,5 @@
+## [4.45.1](https://github.com/dialpad/dialtone/compare/dialtone-icons/v4.45.0...dialtone-icons/v4.45.1) (2025-11-26)
+
 # [4.45.0](https://github.com/dialpad/dialtone/compare/dialtone-icons/v4.44.1...dialtone-icons/v4.45.0) (2025-11-13)
 
 
