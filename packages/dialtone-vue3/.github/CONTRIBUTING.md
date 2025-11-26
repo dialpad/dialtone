@@ -9,8 +9,8 @@ to see if there is already an issue for it and if not, add it.
 
 Dialtone is a design system by Dialpad comprised of CSS components, Vue components, utility classes, visual assets, documentation.
 Dialtone Vue is the Vue component portion of Dialtone and is distributed as a separate package as well as included in the combined package.
-It is recommended that you are familiar with the [Dialtone CSS](https://github.com/dialpad/dialtone/tree/staging/packages/dialtone) package and it's [contribution guide](../../dialtone/.github/CONTRIBUTING.md),
-as well as the general [contribution guide](../../.github/CONTRIBUTING.md) before you contribute to Dialtone Vue.
+It is recommended that you are familiar with the [Dialtone CSS](https://github.com/dialpad/dialtone/tree/staging/packages/dialtone-css) package and it's [contribution guide](../../dialtone-css/.github/CONTRIBUTING.md),
+as well as the general [contribution guide](../../../.github/CONTRIBUTING.md) before you contribute to Dialtone Vue.
 
 Dialtone is a dependency of Dialtone Vue.
 
@@ -197,7 +197,7 @@ export {
 Our unit tests are written with [Vitest](https://vitest.dev/) and can be found alongside any javascript/vue code files existing in Dialtone Vue.
 Tests are suffixed with `.test.js` of the corresponding javascript/vue file. ex: `link.vue` is tested by `link.test.js`.
 All code in Dialtone Vue should have tests written for it.
-You can see more details on writing tests in the following [documentation](https://dialtone.dialpad.com/vue/?path=/story/docs-component-driven-development-unit-tests--page).
+You can see more details on writing tests in the following [documentation](https://dialtone.dialpad.com/vue/?path=/story/docs-component-driven-development-unit-tests--docs).
 
 Before you start to write tests, please follow the [Contributing Guideline - Writing Tests for Dialtone-vue Components](TEST_CONTRIBUTING/TEST_GUIDELINE.md).
 
@@ -240,7 +240,7 @@ We use [Vite](https://vitejs.dev/) to run our local server and bundle our build.
 We use [Storybook](https://storybook.js.org/) for our Dialtone Vue component documentation.
 Storybook allows you to render each component in isolation and change any available properties.
 Our storybook is hosted at <https://dialtone.dialpad.com/vue>, and can also be run locally via `npm start`.
-For more detailed info on how to use storybook in Dialtone Vue, refer to our [storybook documentation](https://dialtone.dialpad.com/vue/?path=/story/docs-storybook-getting-started--page).
+For more detailed info on how to use storybook in Dialtone Vue, refer to our [storybook documentation](https://dialtone.dialpad.com/vue/?path=/story/docs-storybook-getting-started--docs).
 
 #### Function Documentation via TypeDoc
 
@@ -257,9 +257,9 @@ directory. See any existing examples of mdx files within that folder for more de
 
 We use ESLint to promote best practices throughout our codebase.
 ESLint will check any of our javascript or vue code for styling or syntax errors.
-The configuration can be found in [.eslintrc.cjs](../.eslintrc.cjs).
+The configuration can be found in [eslint.config.js](../eslint.config.js).
 Any changes code changes you make will be automatically linted upon commit (configuration in
-[lintstagedrc.cjs](../../../lintstagedrc.cjs)).
+[.lintstagedrc.cjs](../.lintstagedrc.cjs)).
 You can manually run ESLint via `npm run lint`.
 
 ### Yeoman
@@ -267,4 +267,4 @@ You can manually run ESLint via `npm run lint`.
 We use Yeoman as our generator to scaffold new components.
 This means if you are creating a new component you can simply just run `pnpm exec yo @dialpad/dialtone:vue3` and enter the name of your component.
 All files for your component (component, tests, storybook files) will be generated with starter templates and proper naming conventions.
-For more details on how to use yeoman, see [the docs](https://dialtone.dialpad.com/vue/?path=/story/docs-component-driven-development-yeoman-generator--page).
+For more details on how to use yeoman, see [the docs](https://dialtone.dialpad.com/vue/?path=/story/docs-component-driven-development-yeoman-generator--docs).

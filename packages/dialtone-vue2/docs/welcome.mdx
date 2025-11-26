@@ -2,11 +2,13 @@ import { Meta } from '@storybook/blocks';
 import { version } from '../package.json';
 import { useDarkMode } from "storybook-dark-mode";
 import { LogoContainer, Logo } from './components';
+import dialpadLogoBlack from '../common/assets/dialpad-logo-black.svg';
+import dialpadLogoWhite from '../common/assets/dialpad-logo-white.svg';
 
 <Meta title="Welcome" id="welcome" />
 
 <LogoContainer>
-  <Logo className="example-doc__image" src={`https://static.dialpadcdn.com/dialtone/dialpad-logo-${useDarkMode() ? 'white' : 'black'}.svg`} />
+  <Logo className="example-doc__image" src={useDarkMode() ? dialpadLogoWhite : dialpadLogoBlack} />
 </LogoContainer>
 
 # Dialtone Vue 📞
