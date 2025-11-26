@@ -9,6 +9,7 @@
   <div class="d-stack16 d-fc-primary">
     <div class="d-wmx50p">
       <dt-select-menu
+        v-model="selectedSize"
         label="Size"
         size="sm"
         @change="changeIconSize"
