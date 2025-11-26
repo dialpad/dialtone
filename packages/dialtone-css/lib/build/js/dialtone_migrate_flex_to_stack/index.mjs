@@ -818,6 +818,7 @@ async function main() {
     const result = await processFile(file, {
       dryRun: options.dryRun,
       yes: options.yes,
+      showOutline: options.showOutline,
     });
     totalChanges += result.changes;
     totalSkipped += result.skipped;
