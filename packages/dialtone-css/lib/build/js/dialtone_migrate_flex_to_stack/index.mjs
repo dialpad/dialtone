@@ -471,9 +471,9 @@ function transformElement(element, showOutline = false) {
     newElement += ` ${element.attrsAfter}`;
   }
 
-  // Add outline attribute for visual debugging (if flag is set)
+  // Add migration marker for visual debugging (if flag is set)
   if (showOutline) {
-    newElement += ' outline';
+    newElement += ' data-migrate-outline';
   }
 
   // Close tag
@@ -685,6 +685,49 @@ async function processFile(filePath, options) {
   return { changes, skipped };
 }
 
+/**
+ * Remove data-migrate-outline attributes from files
+ * @param {string} filePath - Path to file to clean
+ * @param {object} options - Options object with dryRun, yes flags
+ * @returns {object} - { changes, skipped }
+ */
+async function cleanupMarkers(filePath, options) {
+  const content = await fs.readFile(filePath, 'utf8');
+
+  // Find all data-migrate-outline attributes
+  const markerPattern = /\s+data-migrate-outline(?:="[^"]*")?/g;
+  const matches = [...content.matchAll(markerPattern)];
+
+  if (matches.length === 0) {
+    return { changes: 0, skipped: 0 };
+  }
+
+  // Show what we found
+  console.log(log.cyan(`\n📄 ${filePath}`));
+  console.log(log.gray(`   Found ${matches.length} marker(s)\n`));
+
+  if (options.dryRun) {
+    // Preview only
+    matches.forEach((match, idx) => {
+      const start = Math.max(0, match.index - 50);
+      const end = Math.min(content.length, match.index + match[0].length + 50);
+      const context = content.slice(start, end);
+      console.log(log.yellow(`   ${idx + 1}. ${context.replace(/\n/g, ' ')}`));
+    });
+    return { changes: matches.length, skipped: 0 };
+  }
+
+  // Remove all markers
+  const newContent = content.replace(markerPattern, '');
+
+  // Write back
+  await fs.writeFile(filePath, newContent, 'utf8');
+
+  console.log(log.green(`   ✓ Removed ${matches.length} marker(s)`));
+
+  return { changes: matches.length, skipped: 0 };
+}
+
 //------------------------------------------------------------------------------
 // Argument Parsing (simple, no yargs)
 //------------------------------------------------------------------------------
@@ -699,7 +742,8 @@ function parseArgs() {
     patterns: [],
     hasExtFlag: false, // Track if --ext was used
     files: [], // Explicit file list via --file flag
-    showOutline: false, // Add outline attribute for visual debugging
+    showOutline: false, // Add migration marker for visual debugging
+    removeOutline: false, // Remove migration markers (cleanup mode)
   };
 
   for (let i = 0; i < args.length; i++) {
@@ -720,7 +764,8 @@ Options:
                    When used, --cwd is ignored for file discovery
   --dry-run        Show changes without applying them
   --yes, -y        Apply all changes without prompting
-  --show-outline   Add outline attribute to transformed elements for visual debugging
+  --show-outline   Add data-migrate-outline attribute for visual debugging
+  --remove-outline Remove data-migrate-outline attributes after review
   --help, -h       Show help
 
 Examples:
@@ -756,12 +801,25 @@ Examples:
       options.yes = true;
     } else if (arg === '--show-outline') {
       options.showOutline = true;
+    } else if (arg === '--remove-outline') {
+      options.removeOutline = true;
     } else if (arg === '--file' && args[i + 1]) {
       const filePath = args[++i];
       options.files.push(filePath);
     } else if (!arg.startsWith('-')) {
       options.patterns.push(arg);
     }
+  }
+
+  // Validate mutually exclusive flags - CRITICAL SAFETY CHECK
+  if (options.showOutline && options.removeOutline) {
+    throw new Error('Cannot use --show-outline and --remove-outline together');
+  }
+
+  // Display mode warning for clarity
+  if (options.removeOutline) {
+    console.log(log.yellow('\n⚠️  CLEANUP MODE: Will remove data-migrate-outline attributes only'));
+    console.log(log.yellow('   No flex-to-stack transformations will be performed\n'));
   }
 
   return options;
@@ -815,11 +873,25 @@ async function main() {
   let filesModified = 0;
 
   for (const file of files) {
-    const result = await processFile(file, {
-      dryRun: options.dryRun,
-      yes: options.yes,
-      showOutline: options.showOutline,
-    });
+    let result;
+
+    if (options.removeOutline) {
+      // CLEANUP MODE ONLY - No transformations will happen
+      // Only removes data-migrate-outline attributes
+      result = await cleanupMarkers(file, {
+        dryRun: options.dryRun,
+        yes: options.yes,
+      });
+    } else {
+      // MIGRATION MODE - Normal flex-to-stack transformation
+      // Can optionally add markers with --show-outline
+      result = await processFile(file, {
+        dryRun: options.dryRun,
+        yes: options.yes,
+        showOutline: options.showOutline,
+      });
+    }
+
     totalChanges += result.changes;
     totalSkipped += result.skipped;
     if (result.changes > 0) filesModified++;
@@ -829,8 +901,13 @@ async function main() {
   log.bold('\n📊 Summary\n');
   console.log(`   Files scanned: ${files.length}`);
   console.log(`   Files modified: ${filesModified}`);
-  console.log(`   Changes applied: ${totalChanges}`);
-  console.log(`   Changes skipped: ${totalSkipped}`);
+
+  if (options.removeOutline) {
+    console.log(`   Markers removed: ${totalChanges}`);
+  } else {
+    console.log(`   Changes applied: ${totalChanges}`);
+    console.log(`   Changes skipped: ${totalSkipped}`);
+  }
 
   if (options.dryRun && totalChanges > 0) {
     console.log(log.yellow('\n   Run without --dry-run to apply changes.'));
