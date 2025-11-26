@@ -1,3 +1,10 @@
+## [8.70.1](https://github.com/dialpad/dialtone/compare/dialtone-css/v8.70.0...dialtone-css/v8.70.1) (2025-11-26)
+
+
+### Bug Fixes
+
+* **Stack:** NO-JIRA correct stack's default alignment ([#980](https://github.com/dialpad/dialtone/issues/980)) ([4323a26](https://github.com/dialpad/dialtone/commit/4323a26179445eaaae36bb21b72bbf65e7c08d11))
+
 # [8.70.0](https://github.com/dialpad/dialtone/compare/dialtone-css/v8.69.0...dialtone-css/v8.70.0) (2025-11-25)
 
 
