@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+/* eslint-disable max-lines */
 /* eslint-disable complexity */
 
 /**
@@ -549,7 +550,7 @@ async function processFile(filePath, options) {
   while ((dynamicMatch = dynamicClassRegex.exec(content)) !== null) {
     const bindingContent = dynamicMatch[2];
     if (flexUtilityPattern.test(bindingContent)) {
-      console.log(log.yellow(`   ⚠ Skipped: dynamic :class binding with flex utilities at position ${dynamicMatch.index}`));
+      console.log(log.yellow(`   ⚠ Skipped: dynamic :class binding with flex utilities at position ${dynamicMatch.index}. Consider refactoring to dynamic DtStack props.`));
       log.gray(`     "${bindingContent.length > 60 ? bindingContent.substring(0, 60) + '...' : bindingContent}"`);
       log.gray(`     Requires manual review - cannot auto-migrate dynamic bindings\n`);
     }
@@ -595,7 +596,7 @@ async function processFile(filePath, options) {
       const hasGridHybrid = transformation.retainedClasses.some(cls => /^d-(ji-|js-|plc-|pli-|pls-)/.test(cls));
 
       if (hasFlg) {
-        log.gray(`       ℹ d-flg* is deprecated - consider replacing with d-g* gap utilities`);
+        log.gray(`       ℹ d-flg* is deprecated - consider replacing with DtStack gap prop or at least d-g* gap utilities`);
       }
       if (hasGridHybrid) {
         log.gray(`       ℹ Grid/flex hybrid utilities (d-ji-*, d-js-*, d-plc-*, etc.) retained - no DtStack prop equivalent`);
