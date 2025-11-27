@@ -1,10 +1,5 @@
 import DtModeIsland from './mode_island.vue';
 import ModeIslandDefaultStory from './mode_island_default.story.vue';
-import DtButton from '@/components/button/button.vue';
-import DtBadge from '@/components/badge/badge.vue';
-import DtChip from '@/components/chip/chip.vue';
-import DtInput from '@/components/input/input.vue';
-import DtNotice from '@/components/notice/notice.vue';
 import DtStack from '@/components/stack/stack.vue';
 import { createRenderConfig } from '@/common/storybook_utils';
 import { DT_MODE_ISLAND_TYPES } from './mode_island_constants';
@@ -79,77 +74,6 @@ export const Default = {
   args: {},
 };
 
-export const Interactive = {
-  render: (args) => ({
-    components: { DtModeIsland, DtButton, DtBadge, DtChip, DtStack },
-    setup () {
-      return { args };
-    },
-    template: `
-      <div>
-        <div class="d-mb24">
-          <p class="d-body--md d-fc-tertiary">
-            Toggle the mode toggle button to see how the mode island reacts.
-          </p>
-        </div>
-        <dt-stack direction="row" gap="400">
-          <dt-mode-island v-bind="args" class="d-p16 d-ba d-bc-subtle d-bar8">
-            <h3 class="d-headline--md d-mb8">Inverted</h3>
-            <p class="d-body--md d-mb16">
-              This one will use the parent mode to determine its mode.
-            </p>
-            <dt-stack gap="400" direction="row">
-              <span>
-                <dt-button>Button</dt-button>
-              </span>
-              <span>
-                <dt-badge text="Badge" />
-              </span>
-              <span>
-                <dt-chip>Chip</dt-chip>
-              </span>
-            </dt-stack>
-          </dt-mode-island>
-          <dt-mode-island mode="dark" class="d-p16 d-ba d-bc-subtle d-bar8">
-            <h3 class="d-headline--md d-mb8">Dark</h3>
-            <p class="d-body--md d-mb16">
-              This one will always be dark mode.
-            </p>
-            <dt-stack gap="400" direction="row">
-              <span>
-                <dt-button>Button</dt-button>
-              </span>
-              <span>
-                <dt-badge text="Badge" />
-              </span>
-              <span>
-                <dt-chip>Chip</dt-chip>
-              </span>
-            </dt-stack>
-          </dt-mode-island>
-          <dt-mode-island mode="light" class="d-p16 d-ba d-bc-subtle d-bar8">
-            <h3 class="d-headline--md d-mb8">Light</h3>
-            <p class="d-body--md d-mb16">
-              This one will always be light mode.
-            </p>
-            <dt-stack gap="400" direction="row">
-              <span>
-                <dt-button>Button</dt-button>
-              </span>
-              <span>
-                <dt-badge text="Badge" />
-              </span>
-              <span>
-                <dt-chip>Chip</dt-chip>
-              </span>
-            </dt-stack>
-          </dt-mode-island>
-        </dt-stack>
-      </div>
-    `,
-  }),
-};
-
 export const NestedIslands = {
   render: () => ({
     components: { DtModeIsland, DtStack },
@@ -183,89 +107,6 @@ export const NestedIslands = {
           </dt-mode-island>
         </div>
         </dt-stack>
-    `,
-  }),
-};
-
-export const SideBySide = {
-  render: () => ({
-    components: { DtModeIsland, DtButton, DtInput, DtNotice, DtBadge, DtStack },
-    template: `
-      <div>
-        <h3 class="d-headline--md d-mb16">Side-by-Side Comparison</h3>
-        <div class="d-d-flex d-gg16">
-          <dt-mode-island class="d-fl1 d-p16 d-ba d-bc-subtle d-bar8">
-            <h4 class="d-headline--sm d-mb12">Inverted Mode</h4>
-            <dt-stack gap="400">
-              <span>
-                <dt-button>Primary Button</dt-button>
-              </span>
-              <dt-input label="Input Field" placeholder="Enter text..." />
-              <dt-notice kind="info">
-                This is an info notice is inverted mode
-              </dt-notice>
-              <dt-stack direction="row" gap="400">
-                <span>
-                  <dt-badge text="Badge" />
-                </span>
-                <span>
-                  <dt-badge text="Info" type="info" />
-                </span>
-                <span>
-                  <dt-badge text="Success" type="success" />
-                </span>
-              </dt-stack>
-            </dt-stack>
-          </dt-mode-island>
-          <dt-mode-island mode="dark" class="d-fl1 d-p16 d-ba d-bc-subtle d-bar8">
-            <h4 class="d-headline--sm d-mb12">Explicit Dark Mode</h4>
-            <dt-stack gap="400">
-              <span>
-                <dt-button>Primary Button</dt-button>
-              </span>
-              <dt-input label="Input Field" placeholder="Enter text..." />
-              <dt-notice kind="info">
-                This is an info notice is inverted mode
-              </dt-notice>
-              <dt-stack direction="row" gap="400">
-                <span>
-                  <dt-badge text="Badge" />
-                </span>
-                <span>
-                  <dt-badge text="Info" type="info" />
-                </span>
-                <span>
-                  <dt-badge text="Success" type="success" />
-                </span>
-              </dt-stack>
-            </dt-stack>
-          </dt-mode-island>
-          <dt-mode-island mode="light" class="d-fl1 d-p16 d-ba d-bc-subtle d-bar8 d-bgc-primary">
-            <h4 class="d-headline--sm d-mb12">Explicit Light Mode</h4>
-            <dt-stack gap="400">
-              <span>
-                <dt-button>Primary Button</dt-button>
-              </span>
-              <dt-input label="Input Field" placeholder="Enter text..." />
-              <dt-notice kind="info">
-                This is an info notice is inverted mode
-              </dt-notice>
-              <dt-stack direction="row" gap="400">
-                <span>
-                  <dt-badge text="Badge" />
-                </span>
-                <span>
-                  <dt-badge text="Info" type="info" />
-                </span>
-                <span>
-                  <dt-badge text="Success" type="success" />
-                </span>
-              </dt-stack>
-            </dt-stack>
-          </dt-mode-island>
-
-        </div>
-      </div>
     `,
   }),
 };

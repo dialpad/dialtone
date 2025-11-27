@@ -12,9 +12,9 @@ import { flushPromises } from '@workspaceRoot/common/utils/client.mjs';
 import '@docsearch/css';
 
 // Layered Theming System - Base layers (always loaded)
-import '@dialpad/dialtone-tokens/dist/css/layered/tokens-core.css';
-import '@dialpad/dialtone-tokens/dist/css/layered/tokens-base-colors.css';
-import '@dialpad/dialtone-tokens/dist/css/layered/tokens-dp-colors.css';
+import '@dialpad/dialtone-tokens/layered/tokens-core.css';
+import '@dialpad/dialtone-tokens/layered/tokens-base-colors.css';
+import '@dialpad/dialtone-tokens/layered/tokens-dp-colors.css';
 
 // Legacy CSS (still needed for components)
 import '@dialpad/dialtone-css/lib/dist/dialtone.css';
@@ -302,7 +302,6 @@ async function importDialtoneThemes (app) {
     console.log(`Successfully loaded ${Object.keys(themes).length - 1} themes + high contrast`);
 
     app.provide('themes', themes);
-    app.provide('layeredTokensEnabled', true);
   } catch (error) {
     console.error(`Couldn't import dialtone themes: ${error}`);
   }

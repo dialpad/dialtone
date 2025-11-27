@@ -3,6 +3,8 @@ title: Order
 description: Utilities for controlling an element's order within a parent container.
 ---
 
+<FlexStackNotice />
+
 ## Example
 
 By default, items are ordered by their position in the DOM. To re-order an element, use `d-order{#}`.

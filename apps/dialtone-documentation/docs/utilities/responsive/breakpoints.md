@@ -181,7 +181,7 @@ const classes = [
 
 To help keep prefixes concise, we use abbreviations. This syntax is used consistently across all responsive classes. As the viewport size grows, you can change an elements properties. For example, you can set an element to display normally, but be hidden at smaller sizes: `.d-d-block .sm:d-d-none`.
 
-<div v-dt-scrollbar class="d-hmx464 d-bar8 d-ba d-bc-subtle">
+<clamped-table-wrapper>
   <div>
     <table class="d-table dialtone-doc-table">
       <thead class="d-bgc-primary d-ps-sticky d-zi-base1 d-t0">
@@ -215,4 +215,8 @@ To help keep prefixes concise, we use abbreviations. This syntax is used consist
       </tbody>
     </table>
   </div>
-</div>
+</clamped-table-wrapper>
+
+<script setup>
+  import ClampedTableWrapper from '@baseComponents/ClampedTableWrapper.vue';
+</script>

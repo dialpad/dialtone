@@ -3,6 +3,8 @@ title: Align Self
 description: Utilities for setting how an element's is aligned along a parent's cross axis.
 ---
 
+<FlexStackNotice />
+
 ## Stretch
 
 Use `d-as-stretch` to stretch an item along a parent's cross axis.

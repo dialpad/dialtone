@@ -101,6 +101,7 @@ export * from './recipes/leftbar/contact_row';
 export * from './recipes/leftbar/general_row';
 export * from './recipes/leftbar/group_row';
 export * from './recipes/leftbar/unread_pill';
+export * from './recipes/motion/motion_text';
 export * from './recipes/notices/top_banner_info';
 
 export { DialtoneLocalization } from './localization';

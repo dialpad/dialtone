@@ -8,6 +8,37 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 const version = process.argv[2];
 
+/**
+ * Deprecated components metadata
+ * Based on eslint-plugin-dialtone/lib/rules/deprecated-component.js
+ */
+const deprecatedComponents = {
+  'SelectMenu': {
+    replacement: 'DtComboboxWithPopover',
+    docs: 'https://dialtone.dialpad.com/vue/?path=/story/recipes-comboboxes-combobox-with-popover--default',
+  },
+  'DropdownMenu': {
+    replacement: 'DtSelectMenu',
+    docs: 'https://dialtone.dialpad.com/vue/?path=/story/components-select-menu--default',
+  },
+  'BaseToggle': {
+    replacement: 'DtToggle',
+    docs: 'https://dialtone.dialpad.com/vue/?path=/story/components-toggle--default',
+  },
+  'BaseDatePicker': {
+    replacement: 'DtDatepicker',
+    docs: 'https://dialtone.dialpad.com/vue/?path=/story/components-datepicker--default',
+  },
+  'Checkbox': {
+    replacement: 'DtCheckbox',
+    docs: 'https://dialtone.dialpad.com/vue/?path=/story/components-checkbox--default',
+  },
+  'DtIcon': {
+    replacement: 'Individual tree-shakable icon components from @dialpad/dialtone-icons/vue3 (e.g., DtIconBell, DtIconAlertCircle)',
+    docs: 'https://dialtone.dialpad.com/components/icon.html',
+  },
+};
+
 if (!version) {
   console.info(`Usage: build-dialtone-vue-docs.mjs 2 or build-dialtone-vue-docs.mjs 3`);
   process.exit(-1);
@@ -45,8 +76,24 @@ async function parseDocumentation (fileList) {
   });
 
   try {
-    return Promise.all(parsedDocumentationPromises);
-  } catch (err) {
+    const docs = await Promise.all(parsedDocumentationPromises);
+
+    // Add metadata to deprecated components
+    return docs.map(doc => {
+      const componentName = doc.displayName;
+      if (deprecatedComponents[componentName]) {
+        return {
+          ...doc,
+          metadata: {
+            deprecated: true,
+            reason: 'Replaced by Dialtone Vue component',
+            ...deprecatedComponents[componentName],
+          },
+        };
+      }
+      return doc;
+    });
+  } catch {
     throw new Error('Parsing documentation');
   }
 }

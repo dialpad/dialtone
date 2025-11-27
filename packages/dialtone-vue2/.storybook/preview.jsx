@@ -1,57 +1,44 @@
 import '../css/dialtone-globals.less';
 import '@dialpad/dialtone-css/lib/dist/dialtone.css';
 import 'overlayscrollbars/overlayscrollbars.css';
+// Import layered token CSS files
+import '@dialpad/dialtone-tokens/layered/tokens-core.css';
+import '@dialpad/dialtone-tokens/layered/tokens-base-colors.css';
+import '@dialpad/dialtone-tokens/layered/tokens-dp-colors.css';
 import { addons } from '@storybook/preview-api';
 import { setTheme, setMode, setBrand, setContrast, initDialtoneTheme } from '@dialpad/dialtone-tokens/themes/config';
 
-// Check if layered tokens are available
-const layeredTokensEnabled = (() => {
-  try {
-    // Try to import layered CSS files
-    import('@dialpad/dialtone-tokens/dist/css/layered/tokens-core.css');
-    import('@dialpad/dialtone-tokens/dist/css/layered/tokens-base-colors.css');
-    import('@dialpad/dialtone-tokens/dist/css/layered/tokens-dp-colors.css');
-    return true;
-  } catch (e) {
-    console.log('Layered tokens not available, falling back to legacy themes');
-    return false;
-  }
-})();
-
 // Layered theme variables (loaded async)
-let Core, Dp, Tmo, Aegean, Botany, Buttercream, HighDesert, Melon, Plum, Sunflower, VerdantHaze;
+let Dp, Tmo, Aegean, Botany, Buttercream, HighDesert, Melon, Plum, Sunflower, VerdantHaze;
 let ProtaDeuter, Trita, Theme101, Theme102, Theme103, Theme137, HighContrast;
 
 // Async load layered themes
-if (layeredTokensEnabled) {
-  (async () => {
-    Core = (await import('@dialpad/dialtone-tokens/themes/core')).default;
-    Dp = (await import('@dialpad/dialtone-tokens/themes/dp')).default;
-    Tmo = (await import('@dialpad/dialtone-tokens/themes/tmo')).default;
-    Aegean = (await import('@dialpad/dialtone-tokens/themes/aegean')).default;
-    Botany = (await import('@dialpad/dialtone-tokens/themes/botany')).default;
-    Buttercream = (await import('@dialpad/dialtone-tokens/themes/buttercream')).default;
-    HighDesert = (await import('@dialpad/dialtone-tokens/themes/high-desert')).default;
-    Melon = (await import('@dialpad/dialtone-tokens/themes/melon')).default;
-    Plum = (await import('@dialpad/dialtone-tokens/themes/plum')).default;
-    Sunflower = (await import('@dialpad/dialtone-tokens/themes/sunflower')).default;
-    VerdantHaze = (await import('@dialpad/dialtone-tokens/themes/verdant-haze')).default;
-    ProtaDeuter = (await import('@dialpad/dialtone-tokens/themes/prota-deuter')).default;
-    Trita = (await import('@dialpad/dialtone-tokens/themes/trita')).default;
-    Theme101 = (await import('@dialpad/dialtone-tokens/themes/101')).default;
-    Theme102 = (await import('@dialpad/dialtone-tokens/themes/102')).default;
-    Theme103 = (await import('@dialpad/dialtone-tokens/themes/103')).default;
-    Theme137 = (await import('@dialpad/dialtone-tokens/themes/137')).default;
-    HighContrast = (await import('@dialpad/dialtone-tokens/themes/high-contrast')).default;
+(async () => {
+  Dp = (await import('@dialpad/dialtone-tokens/themes/dp')).default;
+  Tmo = (await import('@dialpad/dialtone-tokens/themes/tmo')).default;
+  Aegean = (await import('@dialpad/dialtone-tokens/themes/aegean')).default;
+  Botany = (await import('@dialpad/dialtone-tokens/themes/botany')).default;
+  Buttercream = (await import('@dialpad/dialtone-tokens/themes/buttercream')).default;
+  HighDesert = (await import('@dialpad/dialtone-tokens/themes/high-desert')).default;
+  Melon = (await import('@dialpad/dialtone-tokens/themes/melon')).default;
+  Plum = (await import('@dialpad/dialtone-tokens/themes/plum')).default;
+  Sunflower = (await import('@dialpad/dialtone-tokens/themes/sunflower')).default;
+  VerdantHaze = (await import('@dialpad/dialtone-tokens/themes/verdant-haze')).default;
+  ProtaDeuter = (await import('@dialpad/dialtone-tokens/themes/prota-deuter')).default;
+  Trita = (await import('@dialpad/dialtone-tokens/themes/trita')).default;
+  Theme101 = (await import('@dialpad/dialtone-tokens/themes/101')).default;
+  Theme102 = (await import('@dialpad/dialtone-tokens/themes/102')).default;
+  Theme103 = (await import('@dialpad/dialtone-tokens/themes/103')).default;
+  Theme137 = (await import('@dialpad/dialtone-tokens/themes/137')).default;
+  HighContrast = (await import('@dialpad/dialtone-tokens/themes/high-contrast')).default;
 
-    // Initialize layered theming once themes are loaded
-    if (Core && Dp) {
-      initDialtoneTheme(Core, Dp, 'light', document.documentElement);
-      // Set correct mode after initialization
-      setMode(currentDarkMode ? 'dark' : 'light', document.documentElement);
-    }
-  })();
-}
+  // Initialize layered theming once themes are loaded
+  if (Dp) {
+    initDialtoneTheme(Dp, 'light', document.documentElement);
+    // Set correct mode after initialization
+    setMode(currentDarkMode ? 'dark' : 'light', document.documentElement);
+  }
+})();
 
 import { MINIMAL_VIEWPORTS } from '@storybook/addon-viewport';
 import { DocsContainer } from '@storybook/addon-docs';

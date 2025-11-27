@@ -1,16 +1,4 @@
-# [3.193.0-next.2](https://github.com/dialpad/dialtone/compare/dialtone-vue3/v3.193.0-next.1...dialtone-vue3/v3.193.0-next.2) (2025-10-15)
-
-
-### Features
-
-* **Tokens:** DLT-1977 add high contrast design tokens and theme ([#938](https://github.com/dialpad/dialtone/issues/938)) ([a1c0457](https://github.com/dialpad/dialtone/commit/a1c0457e3b6b445e3f54d76b9ce3b847abc31ac5))
-
-# [3.193.0-next.1](https://github.com/dialpad/dialtone/compare/dialtone-vue3/v3.192.0...dialtone-vue3/v3.193.0-next.1) (2025-10-08)
-
-
-### Bug Fixes
-
-* **Popover:** DLT-2795 add aria-hidden attribute on popover ([#943](https://github.com/dialpad/dialtone/issues/943)) ([dc5bbe7](https://github.com/dialpad/dialtone/commit/dc5bbe7c78efc41e1f94cfed8822742318087564))
+# [3.197.0-next.1](https://github.com/dialpad/dialtone/compare/dialtone-vue3/v3.196.1...dialtone-vue3/v3.197.0-next.1) (2025-11-26)
 
 
 ### Code Refactoring
@@ -22,6 +10,90 @@
 
 * **Css Utility:** DLT-2715 add default color for border css utilities ([#874](https://github.com/dialpad/dialtone/issues/874)) ([71310ab](https://github.com/dialpad/dialtone/commit/71310ab483fde976d56c69e0456bce70cb6d372d))
 * **Filter Pill:** DLT-2704 create component ([#473](https://github.com/dialpad/dialtone/issues/473)) ([6267445](https://github.com/dialpad/dialtone/commit/626744501640f18211ca9d41e4a68e099af3b6dd))
+* **Tokens:** DLT-1977 add high contrast design tokens and theme ([#938](https://github.com/dialpad/dialtone/issues/938)) ([a1c0457](https://github.com/dialpad/dialtone/commit/a1c0457e3b6b445e3f54d76b9ce3b847abc31ac5))
+* **Tokens:** DLT-2802 DLT-2563 layered theming system and mode island component ([#945](https://github.com/dialpad/dialtone/issues/945)) ([5c72c6c](https://github.com/dialpad/dialtone/commit/5c72c6cab4f08122dcb03e2e2f0cc8a490fe1c9b))
+
+## [3.196.1](https://github.com/dialpad/dialtone/compare/dialtone-vue3/v3.196.0...dialtone-vue3/v3.196.1) (2025-11-26)
+
+
+### Bug Fixes
+
+* **Stack:** NO-JIRA correct stack's default alignment ([#980](https://github.com/dialpad/dialtone/issues/980)) ([4323a26](https://github.com/dialpad/dialtone/commit/4323a26179445eaaae36bb21b72bbf65e7c08d11))
+
+# [3.196.0](https://github.com/dialpad/dialtone/compare/dialtone-vue3/v3.195.0...dialtone-vue3/v3.196.0) (2025-11-25)
+
+
+### Features
+
+* **Stack:** DLT-2847 add align and justify props ([#979](https://github.com/dialpad/dialtone/issues/979)) ([539ff24](https://github.com/dialpad/dialtone/commit/539ff24c61d405a23cf6bb541a17b81d48d38feb))
+
+# [3.195.0](https://github.com/dialpad/dialtone/compare/dialtone-vue3/v3.194.0...dialtone-vue3/v3.195.0) (2025-11-21)
+
+
+### Bug Fixes
+
+* DP-161959 modelValue selects the default option correctly ([#977](https://github.com/dialpad/dialtone/issues/977)) ([517d312](https://github.com/dialpad/dialtone/commit/517d312923b09e68c9299d1e97126c0a1f828c25))
+
+
+### Features
+
+* **Keyboard Shortcut:** NO-JIRA improve a11y labeling and improve spacing ([#974](https://github.com/dialpad/dialtone/issues/974)) ([9053dbc](https://github.com/dialpad/dialtone/commit/9053dbc2134916f02798717636edd330bd6853cb))
+
+# [3.194.0](https://github.com/dialpad/dialtone/compare/dialtone-vue3/v3.193.1...dialtone-vue3/v3.194.0) (2025-11-18)
+
+
+### Bug Fixes
+
+* **Hovercard:** DLT-2827 remain when focused ([#963](https://github.com/dialpad/dialtone/issues/963)) ([ba7c2bf](https://github.com/dialpad/dialtone/commit/ba7c2bfe7776475446d7424725d915108592f11f))
+* **Popover:** DP-165062 dont reinit the tippy if the anchor el didnt actually change ([#973](https://github.com/dialpad/dialtone/issues/973)) ([5b91a84](https://github.com/dialpad/dialtone/commit/5b91a8467cffda88cb8980befdad1b06388cef5b))
+
+
+### Features
+
+* **Motion Text:** DLT-2791 new recipe ([#952](https://github.com/dialpad/dialtone/issues/952)) ([1a8d39e](https://github.com/dialpad/dialtone/commit/1a8d39edee35fb2c49eeb2b74d7488341578644e))
+
+## [3.193.1](https://github.com/dialpad/dialtone/compare/dialtone-vue3/v3.193.0...dialtone-vue3/v3.193.1) (2025-11-11)
+
+
+### Bug Fixes
+
+* **Popover:** DP-162957 reinitialize the tippy when the anchor element changes ([#964](https://github.com/dialpad/dialtone/issues/964)) ([fa9a0d9](https://github.com/dialpad/dialtone/commit/fa9a0d92731a5b448abfd4fde991c3b4116af05f))
+
+# [3.193.0](https://github.com/dialpad/dialtone/compare/dialtone-vue3/v3.192.3...dialtone-vue3/v3.193.0) (2025-11-04)
+
+
+### Bug Fixes
+
+* **Popover:** DP-162957 tippy safe check ([#960](https://github.com/dialpad/dialtone/issues/960)) ([5376d8b](https://github.com/dialpad/dialtone/commit/5376d8b6bddd922c1c47db43566f90a2f1a5b637))
+* **Tooltip:** DP-162944 defensively check for a null anchorWrapper ([#957](https://github.com/dialpad/dialtone/issues/957)) ([82b7951](https://github.com/dialpad/dialtone/commit/82b7951d138f4cfa2f795e9182477a8e7929e196))
+* **Tooltip:** DP-162950 avoid manipulate on null parent ([#961](https://github.com/dialpad/dialtone/issues/961)) ([ede4855](https://github.com/dialpad/dialtone/commit/ede48555afb9820d6fb3c7565b874cbb02d70885))
+* **Tooltip:** NO-JIRA console warn on null anchorWrapper ([#959](https://github.com/dialpad/dialtone/issues/959)) ([21115f5](https://github.com/dialpad/dialtone/commit/21115f5acb52890679cde82448f463d437b5c05c))
+
+
+### Features
+
+* **Avatar:** DLT-2718 avatar component masking for presence and group ([#902](https://github.com/dialpad/dialtone/issues/902)) ([b7843ab](https://github.com/dialpad/dialtone/commit/b7843ab71983437b18a35aa05d7aa5724b695e35))
+
+## [3.192.3](https://github.com/dialpad/dialtone/compare/dialtone-vue3/v3.192.2...dialtone-vue3/v3.192.3) (2025-10-21)
+
+
+### Bug Fixes
+
+* **Split Button:** NO-JIRA fix infinite loop ([#948](https://github.com/dialpad/dialtone/issues/948)) ([634952e](https://github.com/dialpad/dialtone/commit/634952e83ce810d1317dec4ba2029af05afcf0d0))
+
+## [3.192.2](https://github.com/dialpad/dialtone/compare/dialtone-vue3/v3.192.1...dialtone-vue3/v3.192.2) (2025-10-17)
+
+
+### Bug Fixes
+
+* **Split Button:** NO-JIRA invert tooltip when button inverted ([#946](https://github.com/dialpad/dialtone/issues/946)) ([c03065a](https://github.com/dialpad/dialtone/commit/c03065abe60471aa8469216ad506ac5a2b406697))
+
+## [3.192.1](https://github.com/dialpad/dialtone/compare/dialtone-vue3/v3.192.0...dialtone-vue3/v3.192.1) (2025-10-14)
+
+
+### Bug Fixes
+
+* **Popover:** DLT-2795 add aria-hidden attribute on popover ([#943](https://github.com/dialpad/dialtone/issues/943)) ([dc5bbe7](https://github.com/dialpad/dialtone/commit/dc5bbe7c78efc41e1f94cfed8822742318087564))
 
 # [3.192.0](https://github.com/dialpad/dialtone/compare/dialtone-vue3/v3.191.1...dialtone-vue3/v3.192.0) (2025-10-06)
 

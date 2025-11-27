@@ -438,6 +438,32 @@
       </template>
     </dt-popover>
 
+    <dt-popover>
+      <template
+        #anchor="{ attrs }"
+      >
+        <dt-button
+          v-if="switchAnchor"
+          v-bind="attrs"
+          key="anchor1"
+        >
+          Changing anchor 1
+        </dt-button>
+        <dt-button
+          v-else
+          v-bind="attrs"
+          key="anchor2"
+        >
+          Changing anchor 2
+        </dt-button>
+      </template>
+      <template #content>
+        <dt-button @click="switchAnchor = !switchAnchor">
+          switch anchor
+        </dt-button>
+      </template>
+    </dt-popover>
+
     <iframe
       title="iframe popover example"
       :src="withURLprefix('?args=&id=components-popover--iframe-test&viewMode=story')"
@@ -478,6 +504,8 @@ export default {
             maiores mollitia reprehenderit sunt tempore veritatis.
             Aliquam delectus earum ex, expedita ipsam nobis
             obcaecati quibusdam repudiandae.`,
+
+      switchAnchor: true,
     };
   },
 

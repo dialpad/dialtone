@@ -97,8 +97,6 @@ export default defineUserConfig({
     '@mixins': path.resolve(__dirname, './common/mixins/'),
     '@utilities': path.resolve(__dirname, './common/utilities.js'),
     '@composables': path.resolve(__dirname, './theme/composables'),
-    '@theme-constants': path.resolve(__dirname, './theme/constants'),
-    '@theme-utils': path.resolve(__dirname, './theme/utils'),
     '@projectRoot': path.resolve(__dirname, '../../'),
     '@': path.resolve(__dirname, '../'),
     '@workspaceRoot': path.resolve(__dirname, '../../../../'),

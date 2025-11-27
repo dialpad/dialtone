@@ -1,5 +1,5 @@
 <template>
-  <div v-dt-scrollbar class="d-hmx464 d-bar8 d-ba d-bc-subtle">
+  <clamped-table-wrapper>
     <div>
       <table class="d-table dialtone-doc-table d-fc-primary">
         <thead class="d-bgc-primary d-ps-sticky d-zi-base1 d-t0">
@@ -19,11 +19,13 @@
         <slot name="content" />
       </table>
     </div>
-  </div>
+  </clamped-table-wrapper>
 </template>
 
-<script>
-export default {
+<script setup>
+import ClampedTableWrapper from './ClampedTableWrapper.vue';
+
+defineOptions({
   name: 'UtilityClassTable',
-};
+});
 </script>

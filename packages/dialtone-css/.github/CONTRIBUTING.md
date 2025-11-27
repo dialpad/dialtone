@@ -12,7 +12,7 @@ All Dialtone CSS classes available to users are prefixed with `d-`.
 
 ### Tokens
 
-Tokens are the values that make up the design system. Colors, sizing, spacing and typography are valid tokens, and are output as variables in the Dialtone CSS. Tokens are defined in the dialtone-tokens package and are always prefixed with dt. Example: `var(--dt-color-black-100)`. See [Dialtone Tokens](../packages/dialtone-tokens/README.md) for more information.
+Tokens are the values that make up the design system. Colors, sizing, spacing and typography are valid tokens, and are output as variables in the Dialtone CSS. Tokens are defined in the dialtone-tokens package and are always prefixed with dt. Example: `var(--dt-color-black-100)`. See [Dialtone Tokens](../../dialtone-tokens/README.md) for more information.
 
 #### Utility classes
 
@@ -63,15 +63,15 @@ Now in variation `d-avatar--sm`, we just set `--avatar--size`. Width and height 
 
 Our code is linted by:
 
-- [stylelint](https://stylelint.io).
-- [eslint](https://eslint.org).
-- [markdownlint](https://github.com/DavidAnson/markdownlint).
+- [stylelint](https://stylelint.io)
+- [eslint](https://eslint.org)
+- [markdownlint](https://github.com/DavidAnson/markdownlint)
 
 Configuration can be found in:
 
-- [stylelint.config.cjs](../stylelint.config.cjs), [.stylelintignore](../.stylelintignore)
-- [.eslintrc.cjs](../.eslintrc.cjs), [.eslintignore](../.eslintignore)
-- [.markdownlintrc](apps/dialtone-documentation/.markdownlintrc), [.markdownlintignore](apps/dialtone-documentation/.markdownlintignore)
+- [stylelint.config.cjs](../../../stylelint.config.cjs), [.stylelintignore](../../../.stylelintignore)
+- [eslint.config.js](../../../eslint.config.js)
+- [.markdownlint.json](../../../.markdownlint.json), [.markdownlintignore](../../../.markdownlintignore)
 
 Your code will be linted automatically on commit.
 

@@ -8,6 +8,8 @@
 //  TABLE OF CONTENTS
 //  • BASE STYLE
 //  • VISUAL STYLES
+//  • ALIGNMENT
+//  • JUSTIFY
 //  • SIZES
 //  • RESPONSIVE STYLE
 
@@ -17,28 +19,22 @@
 .direction-options() {
   &-column {
     --stack-direction: column;
-
-    justify-content: flex-start;
+    --stack-align: initial;
   }
 
   &-column-reverse {
     --stack-direction: column-reverse;
-
-    justify-content: flex-start;
+    --stack-align: initial;
   }
 
   &-row {
     --stack-direction: row;
-
-    align-items: center;
-    justify-content: normal;
+    --stack-align: center;
   }
 
   &-row-reverse {
     --stack-direction: row-reverse;
-
-    align-items: center;
-    justify-content: normal;
+    --stack-align: center;
   }
 }
 
@@ -100,14 +96,65 @@
   }
 }
 
+.align-options() {
+  &-align-start {
+    align-items: start;
+  }
+
+  &-align-center {
+    align-items: center;
+  }
+
+  &-align-end {
+    align-items: end;
+  }
+
+  &-align-stretch {
+    align-items: stretch;
+  }
+
+  &-align-baseline {
+    align-items: baseline;
+  }
+}
+
+.justify-options() {
+  &-justify-start {
+    justify-content: start;
+  }
+
+  &-justify-center {
+    justify-content: center;
+  }
+
+  &-justify-end {
+    justify-content: end;
+  }
+
+  &-justify-around {
+    justify-content: space-around;
+  }
+
+  &-justify-between {
+    justify-content: space-between;
+  }
+
+  &-justify-evenly {
+    justify-content: space-evenly;
+  }
+}
+
 .d-stack {
   --stack-gap: 0;
   --stack-direction: column;
+  --stack-align: initial;
+  --stack-justify: initial;
 
   display: flex;
   flex-direction: var(--stack-direction);
   gap: var(--stack-gap);
-  justify-content: flex-start;
+  align-items: var(--stack-align);
+  justify-content: var(--stack-justify);
 }
 
 //  ============================================================================
@@ -117,8 +164,7 @@
 //  ----------------------------------------------------------------------------
 .d-stack--column-reverse {
   --stack-direction: column-reverse;
-
-  justify-content: flex-start;
+  --stack-align: initial;
 }
 
 //  ----------------------------------------------------------------------------
@@ -126,9 +172,7 @@
 //  ----------------------------------------------------------------------------
 .d-stack--row {
   --stack-direction: row;
-
-  align-items: center;
-  justify-content: normal;
+  --stack-align: center;
 }
 
 //  ----------------------------------------------------------------------------
@@ -136,9 +180,59 @@
 //  ----------------------------------------------------------------------------
 .d-stack--row-reverse {
   --stack-direction: row-reverse;
+  --stack-align: center;
+}
 
-  align-items: center;
-  justify-content: normal;
+//  ============================================================================
+//  $   ALIGNMENT
+//  ----------------------------------------------------------------------------
+
+.d-stack--align-start {
+  --stack-align: start;
+}
+
+.d-stack--align-center {
+  --stack-align: center;
+}
+
+.d-stack--align-end {
+  --stack-align: end;
+}
+
+.d-stack--align-stretch {
+  --stack-align: stretch;
+}
+
+.d-stack--align-baseline {
+  --stack-align: baseline;
+}
+
+//  ============================================================================
+//  $   JUSTIFY
+//  ----------------------------------------------------------------------------
+
+.d-stack--justify-start {
+  --stack-justify: start;
+}
+
+.d-stack--justify-center {
+  --stack-justify: center;
+}
+
+.d-stack--justify-end {
+  --stack-justify: end;
+}
+
+.d-stack--justify-around {
+  --stack-justify: space-around;
+}
+
+.d-stack--justify-between {
+  --stack-justify: space-between;
+}
+
+.d-stack--justify-evenly {
+  --stack-justify: space-evenly;
 }
 
 //  ============================================================================
@@ -168,6 +262,8 @@
   @media screen and (min-width: 480px) {
     .direction-options();
     .gap-options();
+    .align-options();
+    .justify-options();
   }
 }
 
@@ -177,6 +273,8 @@
   @media screen and (min-width: 640px) {
     .direction-options();
     .gap-options();
+    .align-options();
+    .justify-options();
   }
 }
 
@@ -186,6 +284,8 @@
   @media screen and (min-width: 980px) {
     .direction-options();
     .gap-options();
+    .align-options();
+    .justify-options();
   }
 }
 
@@ -195,5 +295,7 @@
   @media screen and (min-width: 1264px) {
     .direction-options();
     .gap-options();
+    .align-options();
+    .justify-options();
   }
 }

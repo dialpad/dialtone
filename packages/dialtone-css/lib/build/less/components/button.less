@@ -597,7 +597,7 @@
 
   &:hover:not([disabled]),
   &:active:not([disabled]) {
-    --button-color-text: hsla(var(--dt-color-neutral-white-hsl) ~" / " 90%);
+    --button-color-text: hsl(var(--dt-color-neutral-white-hsl) ~" / " 90%);
     --button-color-background: hsl(
       var(--brand-color-h) calc(var(--brand-color-s) + 2.5%)
         calc(var(--brand-color-l) - 5%)
@@ -608,7 +608,7 @@
     box-shadow:
       0 0 0 var(--dt-space-100) var(--dt-color-neutral-white),
       0 0 0 0.25em
-        hsla(
+        hsl(
           var(--brand-color-h) var(--brand-color-s) var(--brand-color-l) ~" / " 90%
         );
   }

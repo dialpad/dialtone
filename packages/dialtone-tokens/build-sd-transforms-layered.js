@@ -286,7 +286,18 @@ async function buildLayeredTokensForBrand(brandName, lightThemeConfig, darkTheme
     // Extract just the CSS variables from each file
     const extractVars = (content) => {
       const match = content.match(/:root\s*{([^}]*)}/s);
-      return match ? match[1].trim() : '';
+      const vars = match ? match[1].trim() : '';
+
+      // Fix any math expressions that don't have calc()
+      // Matches patterns like "var(--dt-size-200) + var(--dt-size-100)"
+      return vars.replace(/:\s*(var\([^)]+\)\s*[+\-*/][^;]+);/g, (match, expression) => {
+        // If it already has calc(), leave it alone
+        if (expression.includes('calc(')) {
+          return match;
+        }
+        // Wrap the expression with calc()
+        return `: calc(${expression});`;
+      });
     };
 
     const lightVars = extractVars(lightContent);

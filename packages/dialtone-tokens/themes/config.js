@@ -1,15 +1,92 @@
 /* eslint-disable complexity */
-// Track if core tokens are loaded (for layered system)
+import Core from '@/themes/core.js';
+
+// Track if core tokens are loaded (per JavaScript instance)
+// Note: In micro-frontend architecture, each app has separate bundle with its own
+// config.js instance, so this boolean only tracks state within a single app.
 let coreTokensLoaded = false;
+
+// Track initialization state for idempotency protection
+// Stores: { brand: string, mode: string, contrast: string } or null
+// Note: Only one rootNode per instance (per Brad's architecture)
+let initializationState = null;
+
+/**
+ * @typedef {'light'|'dark'} Mode
+ * Color mode for the theme
+ */
+
+/**
+ * @typedef {HTMLElement|ShadowRoot} ThemeRootNode
+ * The root element where theme styles will be injected
+ */
+
+/**
+ * @typedef {Object} CoreTheme
+ * Core theme tokens that provide the base styling layer
+ * @property {string} core - Core token CSS
+ * @property {string} baseColors - Base color CSS
+ */
+
+/**
+ * @typedef {Object} BrandTheme
+ * Brand-specific theme overrides
+ * @property {Object} brand - Brand-specific overrides
+ * @property {string} brand.name - Brand identifier (e.g., 'dp', 'tmo')
+ * @property {string} brand.css - Brand override CSS
+ */
+
+/**
+ * @typedef {Object} ContrastTheme
+ * Contrast theme overrides for accessibility
+ * @property {Object} contrast - Contrast-specific overrides
+ * @property {string} contrast.name - Contrast identifier (e.g., 'high')
+ * @property {string} contrast.css - Contrast override CSS
+ */
 
 /**
  * Set the current theme, brand, and optionally contrast - BACKWARD COMPATIBLE
- * Auto-detects legacy vs layered theme format
- * @param theme the theme object (legacy: {base, brand} or layered: {core, brand, contrast})
- * @param rootNode optional, the root node to apply the theme to
- * @param contrastTheme optional contrast theme object (legacy only)
+ *
+ * Auto-detects whether you're using the legacy theme format or the new layered format
+ * and applies the theme accordingly. Maintained for backward compatibility with existing
+ * projects. New projects should use initDialtoneTheme() + individual setters instead.
+ *
+ * @param {Object} theme - Theme object (legacy: {base, brand} or layered: {core, brand, contrast})
+ * @param {ThemeRootNode} [rootNode=document.documentElement] - Root element for style injection
+ * @param {Object|null} [contrastTheme=null] - Optional contrast theme (legacy format only)
+ *
+ * @example
+ * // Legacy format (still supported)
+ * import theme from '@dialpad/dialtone/themes/legacy-theme.json';
+ * setTheme(theme);
+ *
+ * @example
+ * // Layered format
+ * import layeredTheme from '@dialpad/dialtone/themes/layered-theme.json';
+ * setTheme(layeredTheme);
+ *
+ * @example
+ * // Web Components with either format
+ * class MyWidget extends HTMLElement {
+ *   constructor() {
+ *     super();
+ *     this.attachShadow({ mode: 'open' });
+ *     setTheme(theme, this); // Works with both legacy and layered
+ *   }
+ * }
+ *
+ * @note For new projects, prefer using initDialtoneTheme() for initial setup and
+ * setMode(), setBrand(), setContrast() for dynamic switching.
  */
 export function setTheme (theme, rootNode = document.documentElement, contrastTheme = null) {
+  // Warn if someone passed shadowRoot directly instead of the host
+  if (rootNode instanceof ShadowRoot) {
+    console.warn(
+      '[Dialtone] You passed a ShadowRoot directly to setTheme(). ' +
+      'Please pass the host element instead. The function will access shadowRoot automatically.',
+    );
+  }
+
   // Detect format: legacy has 'base', layered has 'core' or is just 'brand'
   if (theme.base) {
     // Legacy format
@@ -50,7 +127,7 @@ function _setThemeLayered(theme, rootNode = document.documentElement) {
     rootNode = rootNode.shadowRoot;
   }
 
-  // Load core tokens only once
+  // Load core tokens only once per JavaScript instance
   if (theme.core && !coreTokensLoaded) {
     _setStyleTag('dialtone-css-core', theme.core, rootNode);
     coreTokensLoaded = true;
@@ -89,7 +166,8 @@ function _setStyleTag (id, content, rootNode) {
       rootNode?.appendChild(style);
     }
   } else {
-    rootNode.querySelector('#' + id).innerHTML = content;
+    const existingTag = rootNode.querySelector('#' + id);
+    existingTag.innerHTML = content;
   }
 }
 
@@ -118,40 +196,151 @@ function _setThemeAttributeOnRoot (theme, brand, rootNode) {
  */
 
 /**
- * Set mode (light/dark) - instant switching with layered system
- * @param mode 'light' or 'dark'
- * @param rootNode optional root element
+ * Set color mode (light/dark) - instant switching with layered system
+ *
+ * Changes the color mode by setting the data-dt-mode attribute. With the layered theming
+ * system, mode switching is instant as it only toggles CSS custom properties.
+ *
+ * @param {Mode} mode - Color mode: 'light' or 'dark'
+ * @param {ThemeRootNode} [rootNode=document.documentElement] - Root element to apply mode to
+ *
+ * @example
+ * // Standard usage
+ * import { setMode } from '@dialpad/dialtone/themes/config';
+ * setMode('dark');
+ *
+ * @example
+ * // In Web Components, pass the host element
+ * class MyWidget extends HTMLElement {
+ *   toggleDarkMode() {
+ *     setMode('dark', this); // Apply to this component's shadowRoot
+ *   }
+ * }
  */
 export function setMode(mode, rootNode = document.documentElement) {
   if (mode !== 'light' && mode !== 'dark') {
     console.warn(`Invalid mode: ${mode}. Must be 'light' or 'dark'`);
     return;
   }
+
+  // Warn if someone passed shadowRoot directly instead of the host
+  if (rootNode instanceof ShadowRoot) {
+    console.warn(
+      '[Dialtone] You passed a ShadowRoot directly to setMode(). ' +
+      'Please pass the host element instead. The function will access shadowRoot automatically.',
+    );
+  }
+
+  if (rootNode?.shadowRoot) {
+    rootNode = rootNode.shadowRoot;
+  }
+
   rootNode?.setAttribute('data-dt-mode', mode);
 }
 
 /**
  * Set brand - loads brand override CSS
- * @param brandTheme theme object with brand property
- * @param rootNode optional root element
+ *
+ * Dynamically switches the brand by injecting brand-specific CSS overrides. Allows runtime
+ * brand switching without reloading core tokens.
+ *
+ * @param {BrandTheme} brandTheme - Theme object with brand property containing CSS and name
+ * @param {ThemeRootNode} [rootNode=document.documentElement] - Root element for style injection
+ *
+ * @example
+ * // Standard brand switching
+ * import { setBrand } from '@dialpad/dialtone/themes/config';
+ * import Tmo from '@dialpad/dialtone/themes/tmo.json';
+ * setBrand(Tmo);
+ *
+ * @example
+ * // In Web Components
+ * class MyWidget extends HTMLElement {
+ *   switchBrand(brandTheme) {
+ *     setBrand(brandTheme, this);
+ *   }
+ * }
  */
 export function setBrand(brandTheme, rootNode = document.documentElement) {
+  // Validation: brandTheme must be an object
+  if (!brandTheme || typeof brandTheme !== 'object') {
+    throw new TypeError(
+      '[Dialtone] setBrand: brandTheme must be an object. ' +
+      'Import a brand theme like: import Dp from \'@dialpad/dialtone-tokens/themes/dp\';',
+    );
+  }
+
+  // Validation: brandTheme.brand must exist and be properly structured
+  if (!brandTheme.brand || typeof brandTheme.brand !== 'object') {
+    throw new TypeError(
+      '[Dialtone] setBrand: brandTheme.brand must be an object with {name, css} properties.',
+    );
+  }
+
+  if (typeof brandTheme.brand.name !== 'string' || !brandTheme.brand.name) {
+    throw new TypeError(
+      '[Dialtone] setBrand: brandTheme.brand.name must be a non-empty string.',
+    );
+  }
+
+  if (typeof brandTheme.brand.css !== 'string') {
+    throw new TypeError(
+      '[Dialtone] setBrand: brandTheme.brand.css must be a string containing CSS.',
+    );
+  }
+
+  // Warn if someone passed shadowRoot directly instead of the host
+  if (rootNode instanceof ShadowRoot) {
+    console.warn(
+      '[Dialtone] You passed a ShadowRoot directly to setBrand(). ' +
+      'Please pass the host element instead. The function will access shadowRoot automatically.',
+    );
+  }
+
   if (rootNode?.shadowRoot) {
     rootNode = rootNode.shadowRoot;
   }
 
-  if (brandTheme.brand) {
-    _setStyleTag('dialtone-css-brand-colors', brandTheme.brand.css, rootNode);
-    rootNode?.setAttribute('data-dt-brand', brandTheme.brand.name);
-  }
+  _setStyleTag('dialtone-css-brand-colors', brandTheme.brand.css, rootNode);
+  rootNode?.setAttribute('data-dt-brand', brandTheme.brand.name);
 }
 
 /**
- * Set contrast level
- * @param contrastTheme theme object with contrast property, or null for default
- * @param rootNode optional root element
+ * Set contrast level for accessibility
+ *
+ * Applies a contrast theme layer for improved accessibility (e.g., high contrast mode).
+ * Pass null to remove contrast overrides and return to default contrast.
+ *
+ * @param {ContrastTheme|null} contrastTheme - Theme object with contrast property, or null for default
+ * @param {ThemeRootNode} [rootNode=document.documentElement] - Root element for style injection
+ *
+ * @example
+ * // Enable high contrast
+ * import { setContrast } from '@dialpad/dialtone/themes/config';
+ * import HighContrast from '@dialpad/dialtone/themes/high-contrast.json';
+ * setContrast(HighContrast);
+ *
+ * @example
+ * // Disable contrast overrides (return to default)
+ * setContrast(null);
+ *
+ * @example
+ * // In Web Components
+ * class MyWidget extends HTMLElement {
+ *   toggleHighContrast(enabled) {
+ *     setContrast(enabled ? HighContrast : null, this);
+ *   }
+ * }
  */
 export function setContrast(contrastTheme, rootNode = document.documentElement) {
+  // Warn if someone passed shadowRoot directly instead of the host
+  if (rootNode instanceof ShadowRoot) {
+    console.warn(
+      '[Dialtone] You passed a ShadowRoot directly to setContrast(). ' +
+      'Please pass the host element instead. The function will access shadowRoot automatically.',
+    );
+  }
+
   if (rootNode?.shadowRoot) {
     rootNode = rootNode.shadowRoot;
   }
@@ -167,26 +356,145 @@ export function setContrast(contrastTheme, rootNode = document.documentElement) 
 
 /**
  * Initialize Dialtone theme system - call once on app startup
- * @param coreTheme theme object with core and baseColors properties
- * @param brandTheme initial brand theme
- * @param mode initial mode ('light' or 'dark')
- * @param rootNode optional root element
+ *
+ * Loads core tokens, base colors, sets initial mode and brand. This function should be called
+ * once during application initialization to set up the theming system.
+ *
+ * Core tokens are loaded automatically - you only need to specify the brand and mode.
+ *
+ * @param {BrandTheme} brandTheme - Initial brand theme to apply
+ * @param {Mode} [mode='light'] - Initial color mode ('light' or 'dark')
+ * @param {ThemeRootNode} [rootNode=document.documentElement] - Root element for style injection
+ *
+ * @example
+ * // Standard usage (non-Shadow DOM)
+ * import { initDialtoneTheme } from '@dialpad/dialtone/themes/config';
+ * import Dp from '@dialpad/dialtone/themes/dp.json';
+ *
+ * initDialtoneTheme(Dp, 'light');
+ *
+ * @example
+ * // Explicit document.documentElement (optional but clear in config files)
+ * initDialtoneTheme(Dp, 'light', document.documentElement);
+ *
+ * @example
+ * // ❌ WRONG - In Web Components, forgetting rootNode causes styles to inject into document!
+ * class MyWidget extends HTMLElement {
+ *   constructor() {
+ *     super();
+ *     this.attachShadow({ mode: 'open' });
+ *     initDialtoneTheme(Dp, 'light'); // BUG: Styles won't appear in Shadow DOM!
+ *   }
+ * }
+ *
+ * @example
+ * // ✅ CORRECT - Pass the host element (function accesses shadowRoot automatically)
+ * class MyWidget extends HTMLElement {
+ *   constructor() {
+ *     super();
+ *     this.attachShadow({ mode: 'open' });
+ *     initDialtoneTheme(Dp, 'light', this); // Styles inject into shadowRoot
+ *   }
+ * }
  */
-export function initDialtoneTheme(coreTheme, brandTheme, mode = 'light', rootNode = document.documentElement) {
+export function initDialtoneTheme(brandTheme, mode = 'light', rootNode = document.documentElement) {
+  // Validation: brandTheme must be an object
+  if (!brandTheme || typeof brandTheme !== 'object') {
+    throw new TypeError(
+      '[Dialtone] initDialtoneTheme: brandTheme must be an object. ' +
+      'Import a brand theme like: import Dp from \'@dialpad/dialtone-tokens/themes/dp\';',
+    );
+  }
+
+  // Validation: brandTheme.brand must exist and be properly structured
+  if (!brandTheme.brand || typeof brandTheme.brand !== 'object') {
+    throw new TypeError(
+      '[Dialtone] initDialtoneTheme: brandTheme.brand must be an object with {name, css} properties. ' +
+      'Ensure you\'re importing a valid brand theme.',
+    );
+  }
+
+  if (typeof brandTheme.brand.name !== 'string' || !brandTheme.brand.name) {
+    throw new TypeError(
+      '[Dialtone] initDialtoneTheme: brandTheme.brand.name must be a non-empty string.',
+    );
+  }
+
+  if (typeof brandTheme.brand.css !== 'string') {
+    throw new TypeError(
+      '[Dialtone] initDialtoneTheme: brandTheme.brand.css must be a string containing CSS.',
+    );
+  }
+
+  // Validation: mode must be valid
+  if (mode !== 'light' && mode !== 'dark') {
+    throw new TypeError(
+      `[Dialtone] initDialtoneTheme: mode must be 'light' or 'dark', got '${mode}'.`,
+    );
+  }
+
+  // Validation: rootNode must be a valid element
+  if (!rootNode || (typeof rootNode !== 'object')) {
+    throw new TypeError(
+      '[Dialtone] initDialtoneTheme: rootNode must be an HTMLElement or host element with shadowRoot.',
+    );
+  }
+
+  // Warn if someone passed shadowRoot directly instead of the host
+  if (rootNode instanceof ShadowRoot) {
+    console.warn(
+      '[Dialtone] You passed a ShadowRoot directly to initDialtoneTheme(). ' +
+      'Please pass the host element instead. The function will access shadowRoot automatically.\n' +
+      'Correct: initDialtoneTheme(brand, mode, hostElement)\n' +
+      'Incorrect: initDialtoneTheme(brand, mode, hostElement.shadowRoot)',
+    );
+  }
+
   if (rootNode?.shadowRoot) {
     rootNode = rootNode.shadowRoot;
   }
 
-  // Load core tokens (once)
-  if (coreTheme.core) {
-    _setStyleTag('dialtone-css-core', coreTheme.core, rootNode);
-    coreTokensLoaded = true;
+  // CRITICAL: Detect embedded app trying to use document.documentElement
+  // This check MUST run on first init, before idempotency check
+  if (rootNode === document.documentElement) {
+    const hasThemeStyles = document.querySelector('#dialtone-css-core') !== null;
+    if (hasThemeStyles) {
+      throw new Error(
+        '[Dialtone] Cannot initialize theme on document.documentElement because theme styles already exist. ' +
+        'You are likely in an embedded app/micro-frontend. ' +
+        'You MUST pass your own container element as the rootNode parameter. ' +
+        'Example: initDialtoneTheme(brandTheme, mode, myAppContainerElement)',
+      );
+    }
   }
 
-  // Load base colors (once)
-  if (coreTheme.baseColors) {
-    _setStyleTag('dialtone-css-base-colors', coreTheme.baseColors, rootNode);
+  // Check for duplicate initialization (idempotency protection with soft warnings)
+  const existing = initializationState;
+  if (existing) {
+    if (existing.brand === brandTheme.brand.name && existing.mode === mode) {
+      console.warn(
+        `[Dialtone] Theme already initialized with brand '${brandTheme.brand.name}' and mode '${mode}'. ` +
+        'Re-applying the same theme may be unnecessary. ' +
+        'If you need to switch themes dynamically, use setBrand() or setMode() instead of calling initDialtoneTheme() again.',
+      );
+      return;
+    } else {
+      console.warn(
+        `[Dialtone] Theme already initialized. ` +
+        `Previous: brand='${existing.brand}', mode='${existing.mode}'. ` +
+        `New: brand='${brandTheme.brand.name}', mode='${mode}'. ` +
+        'Re-initializing with different parameters. Consider using setBrand()/setMode() for dynamic switching.',
+      );
+      return;
+    }
   }
+
+  // Load core tokens (once per JavaScript instance)
+  _setStyleTag('dialtone-css-core', Core.core, rootNode);
+  coreTokensLoaded = true;
+
+  // Load base colors (once)
+  _setStyleTag('dialtone-css-base-colors', Core.baseColors, rootNode);
 
   // Set initial mode
   setMode(mode, rootNode);
@@ -196,4 +504,58 @@ export function initDialtoneTheme(coreTheme, brandTheme, mode = 'light', rootNod
 
   // Set default contrast
   rootNode?.setAttribute('data-dt-contrast', 'default');
+
+  // Track initialization state for future idempotency checks
+  initializationState = {
+    brand: brandTheme.brand.name,
+    mode: mode,
+    contrast: 'default',
+  };
+}
+
+/**
+ * Reset theme for a given rootNode - useful for testing and cleanup
+ *
+ * Removes all theme styles, attributes, and initialization state for the specified rootNode.
+ * This allows re-initialization with a clean slate, which is particularly useful in test
+ * environments or when unmounting micro-frontends.
+ *
+ * Note: In micro-frontend architectures where each app has its own bundle,
+ * this resets the state for the current JavaScript instance only.
+ *
+ * @param {ThemeRootNode} [rootNode=document.documentElement] - Root element to reset
+ *
+ * @example
+ * // Reset document theme (test cleanup)
+ * import { resetTheme } from '@dialpad/dialtone/themes/config';
+ * afterEach(() => {
+ *   resetTheme();  // Clean slate for next test
+ * });
+ *
+ * @example
+ * // Reset Shadow DOM theme (component unmount)
+ * class MyWidget extends HTMLElement {
+ *   disconnectedCallback() {
+ *     resetTheme(this);  // Clean up when component removed
+ *   }
+ * }
+ */
+export function resetTheme(rootNode = document.documentElement) {
+  // Access shadowRoot if present
+  const actualRoot = rootNode?.shadowRoot || rootNode;
+
+  // Clear initialization state (only one instance per app)
+  initializationState = null;
+  coreTokensLoaded = false;
+
+  // Remove all theme style tags
+  _removeStyleTag('dialtone-css-core', actualRoot);
+  _removeStyleTag('dialtone-css-base-colors', actualRoot);
+  _removeStyleTag('dialtone-css-brand-colors', actualRoot);
+  _removeStyleTag('dialtone-css-contrast', actualRoot);
+
+  // Remove theme attributes
+  actualRoot?.removeAttribute('data-dt-mode');
+  actualRoot?.removeAttribute('data-dt-brand');
+  actualRoot?.removeAttribute('data-dt-contrast');
 }

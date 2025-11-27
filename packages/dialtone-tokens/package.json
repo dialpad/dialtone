@@ -1,6 +1,6 @@
 {
   "name": "@dialpad/dialtone-tokens",
-  "version": "1.48.0-next.2",
+  "version": "1.48.0-next.4",
   "description": "Design tokens for Dialtone.",
   "type": "module",
   "scripts": {
@@ -13,9 +13,9 @@
   "exports": {
     "./*.css": "./dist/css/*.css",
     "./*.less": "./dist/less/*.less",
-    "./dist/css/layered/*": "./dist/css/layered/*",
-    "./dist/css/layered/themes/*": "./dist/css/layered/themes/*",
-    "./dist/css/layered/contrast/*": "./dist/css/layered/contrast/*",
+    "./layered/*.css": "./dist/css/layered/*.css",
+    "./layered/themes/*.css": "./dist/css/layered/themes/*.css",
+    "./layered/contrast/*.css": "./dist/css/layered/contrast/*.css",
     "./postcss/*": {
       "types": "./dist/types/postcss/*.d.ts",
       "import": "./dist/postcss/*.js",

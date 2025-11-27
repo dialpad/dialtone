@@ -5,16 +5,21 @@ const baseProps = {};
 const baseSlots = {
   default: '<div data-qa="test-content">Test Content</div>',
 };
+const baseAttrs = {};
+
+let mockProps = {};
+let mockSlots = {};
+let mockAttrs = {};
 
 describe('DtModeIsland Tests', () => {
   let wrapper;
   let defaultContent;
 
-  const updateWrapper = (props = {}, slots = {}, attrs = {}) => {
+  const updateWrapper = () => {
     wrapper = mount(DtModeIsland, {
-      props: { ...baseProps, ...props },
-      slots: { ...baseSlots, ...slots },
-      attrs,
+      propsData: { ...baseProps, ...mockProps },
+      slots: { ...baseSlots, ...mockSlots },
+      attrs: { ...baseAttrs, ...mockAttrs },
     });
     defaultContent = wrapper.find('[data-qa="test-content"]');
   };
@@ -29,6 +34,9 @@ describe('DtModeIsland Tests', () => {
   afterEach(() => {
     document.documentElement.removeAttribute('data-dt-mode');
     document.documentElement.removeAttribute('data-dt-contrast');
+    mockProps = {};
+    mockSlots = {};
+    mockAttrs = {};
   });
 
   describe('Presentation Tests', () => {
@@ -50,15 +58,21 @@ describe('DtModeIsland Tests', () => {
 
   describe('Mode Tests', () => {
     describe('When mode is "light"', () => {
-      it('should set data-dt-mode to light', async () => {
-        await wrapper.setProps({ mode: 'light' });
+      it('should set data-dt-mode to light', () => {
+        mockProps = { mode: 'light' };
+
+        updateWrapper();
+
         expect(wrapper.attributes('data-dt-mode')).toBe('light');
       });
     });
 
     describe('When mode is "dark"', () => {
-      it('should set data-dt-mode to dark', async () => {
-        await wrapper.setProps({ mode: 'dark' });
+      it('should set data-dt-mode to dark', () => {
+        mockProps = { mode: 'dark' };
+
+        updateWrapper();
+
         expect(wrapper.attributes('data-dt-mode')).toBe('dark');
       });
     });
@@ -96,8 +110,11 @@ describe('DtModeIsland Tests', () => {
       expect(wrapper.element.tagName.toLowerCase()).toBe('div');
     });
 
-    it('should render as specified element', async () => {
-      await wrapper.setProps({ as: 'section' });
+    it('should render as specified element', () => {
+      mockProps = { as: 'section' };
+
+      updateWrapper();
+
       expect(wrapper.element.tagName.toLowerCase()).toBe('section');
     });
   });
@@ -159,19 +176,28 @@ describe('DtModeIsland Tests', () => {
   });
 
   describe('Attribute Passthrough Tests', () => {
-    it('should pass through class attribute', async () => {
-      updateWrapper({}, {}, { class: 'd-p16 d-bgc-primary' });
+    it('should pass through class attribute', () => {
+      mockAttrs = { class: 'd-p16 d-bgc-primary' };
+
+      updateWrapper();
+
       expect(wrapper.classes()).toContain('d-p16');
       expect(wrapper.classes()).toContain('d-bgc-primary');
     });
 
-    it('should pass through id attribute', async () => {
-      updateWrapper({}, {}, { id: 'test-island' });
+    it('should pass through id attribute', () => {
+      mockAttrs = { id: 'test-island' };
+
+      updateWrapper();
+
       expect(wrapper.attributes('id')).toBe('test-island');
     });
 
-    it('should pass through data attributes', async () => {
-      updateWrapper({}, {}, { 'data-test': 'value' });
+    it('should pass through data attributes', () => {
+      mockAttrs = { 'data-test': 'value' };
+
+      updateWrapper();
+
       expect(wrapper.attributes('data-test')).toBe('value');
     });
   });

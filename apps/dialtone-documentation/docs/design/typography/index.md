@@ -117,7 +117,7 @@ All product UI text can be characterized as one of **Headline**, **Body**, **Lab
         <h2 class="d-headline--lg">Ai that works for you</h2>
         <div class="d-body--md-compact">Support customers, drive sales, and collaborate with your team—all in one, beautiful Ai-powered app.</div>
       </dt-stack>
-      <dt-stack direction="row" gap="500" class="d-ai-flex-start">
+      <dt-stack direction="row" gap="500" align="start">
         <dt-stack>
           <h3 class="d-headline--md-compact">Ai Contact Center</h3>
           <p class="d-body--sm">The world’s most advanced customer engagement platform</p>
@@ -141,7 +141,7 @@ All product UI text can be characterized as one of **Headline**, **Body**, **Lab
     <h2 class="d-headline--lg">Ai that works for you</h2>
     <div class="d-body--md-compact">Support customers, drive sales, and collaborate with your team—all in one, beautiful Ai-powered app.</div>
   </dt-stack>
-  <dt-stack direction="row" gap="500" class="d-ai-flex-start">
+  <dt-stack direction="row" gap="500" align="start">
     <dt-stack>
       <h3 class="d-headline--md-compact">Ai Contact Center</h3>
       <p class="d-body--sm">The world’s most advanced customer engagement platform</p>
@@ -166,7 +166,7 @@ Titles and headings to establish hierarchy and set the tone of contextual groupi
   <div class="d-d-grid d-g16 d-ai-center" style="grid-template-columns: 52rem 1fr">
     <template v-for="{ var: varName } in typographyStylesHeadlines">
       <div class="d-truncate"><p :class="[varName, 'd-truncate', 'd-bgc-moderate-opaque']">{{ example }}</p></div>
-      <dt-stack direction="row" class="d-jc-space-between dialtone-copy-utility">
+      <dt-stack direction="row" justify="between" class="dialtone-copy-utility">
         <span class="dialtone-copy-utility__utility d-code--sm d-fc-blue-500">{{ varName }}</span>
         <div class="dialtone-copy-utility__btn">
           <copy-button :text="varName" aria-label="Copy" />
@@ -184,7 +184,7 @@ Default text style for longer-form prose content, designed for comfort and clari
   <div class="d-d-grid d-g16 d-ai-center" style="grid-template-columns: 52rem 1fr">
     <template v-for="{ var: varName } in typographyStylesBody">
       <div class="d-truncate"><p :class="[varName, 'd-truncate', 'd-bgc-moderate-opaque']">{{ example }}</p></div>
-      <dt-stack direction="row" class="d-jc-space-between dialtone-copy-utility">
+      <dt-stack direction="row" justify="between" class="dialtone-copy-utility">
         <span class="dialtone-copy-utility__utility d-code--sm d-fc-blue-500">{{ varName }}</span>
         <div class="dialtone-copy-utility__btn">
           <copy-button :text="varName" aria-label="Copy" />
@@ -202,7 +202,7 @@ Shorter-length copy like form fields, buttons, and other UI-labeling elements, e
   <div class="d-d-grid d-g16 d-ai-center" style="grid-template-columns: 52rem 1fr">
     <template v-for="{ var: varName } in typographyStylesLabel">
       <div class="d-truncate"><p :class="[varName, 'd-truncate', 'd-bgc-moderate-opaque']">{{ example }}</p></div>
-      <dt-stack direction="row" class="d-jc-space-between dialtone-copy-utility">
+      <dt-stack direction="row" justify="between" class="dialtone-copy-utility">
         <span class="dialtone-copy-utility__utility d-code--sm d-fc-blue-500">{{ varName }}</span>
         <div class="dialtone-copy-utility__btn">
           <copy-button :text="varName" aria-label="Copy" />
@@ -220,7 +220,7 @@ Complementary information or guidance, such as tooltips and hints, to aid user u
   <div class="d-d-grid d-g16 d-ai-center" style="grid-template-columns: 52rem 1fr">
     <template v-for="{ var: varName } in typographyStylesHelper">
       <div class="d-truncate"><p :class="[varName, 'd-truncate', 'd-bgc-moderate-opaque']">{{ example }}</p></div>
-      <dt-stack direction="row" class="d-jc-space-between dialtone-copy-utility">
+      <dt-stack direction="row" justify="between" class="dialtone-copy-utility">
         <span class="dialtone-copy-utility__utility d-code--sm d-fc-blue-500">{{ varName }}</span>
         <div class="dialtone-copy-utility__btn">
           <copy-button :text="varName" aria-label="Copy" />
@@ -238,7 +238,7 @@ Code snippets, technical commands, or data values rendered as a monospaced font.
   <div class="d-d-grid d-g16 d-ai-center" style="grid-template-columns: 52rem 1fr">
     <template v-for="{ var: varName } in typographyStylesCode">
       <div class="d-truncate"><p :class="[varName, 'd-truncate', 'd-bgc-moderate-opaque']">{{ example }}</p></div>
-      <dt-stack direction="row" class="d-jc-space-between dialtone-copy-utility">
+      <dt-stack direction="row" justify="between" class="dialtone-copy-utility">
         <span class="dialtone-copy-utility__utility d-code--sm d-fc-blue-500">{{ varName }}</span>
         <div class="dialtone-copy-utility__btn">
           <copy-button :text="varName" aria-label="Copy" />
@@ -248,31 +248,34 @@ Code snippets, technical commands, or data values rendered as a monospaced font.
   </div>
 </code-well-header>
 
-### API
+## API
 
 Each typography style is expressed through a shorthand `font` property, and its value's design token contains all font styles, e.g. `font-size`, `line-height`, `font-family`, etc,
 
-<div class="d-hmx464 d-of-y-auto d-bb">
-  <table class="d-table dialtone-doc-table">
-    <thead>
-      <tr>
-        <th scope="col" class="d-w40p">Class</th>
-        <th scope="col">Output</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr v-for="{ var: varName, output } in typographyStyles">
-        <td class="d-code--sm d-docsite-code">.{{ varName }}</td>
-        <td class="d-code--sm">{{ output }}</td>
-      </tr>
-    </tbody>
-  </table>
-</div>
+<clamped-table-wrapper>
+  <div>
+    <table class="d-table dialtone-doc-table">
+      <thead class="d-bgc-primary d-ps-sticky d-zi-base1 d-t0">
+        <tr>
+          <th scope="col" class="d-w40p  d-p0 d-bbw0"><div class="d-p16 d-bb d-bc-default d-bbw1">Class</div></th>
+          <th scope="col" class="d-p0 d-bbw0"><div class="d-p16 d-bb d-bc-default d-bbw1">Output</div></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr v-for="{ var: varName, output } in typographyStyles">
+          <td class="d-code--sm d-docsite-code">.{{ varName }}</td>
+          <td class="d-code--sm">{{ output }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</clamped-table-wrapper>
 
 <script setup>
   import { typographyVariants, typographyStyles } from '@data/type.json';
   import CopyButton from '@baseComponents/CopyButton.vue';
   import SvgLoader from '@baseComponents/SvgLoader.vue';
+  import ClampedTableWrapper from '@baseComponents/ClampedTableWrapper.vue';
 
   const typographyStylesHeadlines = typographyStyles.filter(type => type.var.startsWith("d-headline"));
   const typographyStylesBody = typographyStyles.filter(type => type.var.startsWith("d-body"));

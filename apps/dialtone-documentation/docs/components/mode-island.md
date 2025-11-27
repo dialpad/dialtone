@@ -2,7 +2,6 @@
 title: Mode Island
 description: Create independent sections with their own color modes.
 status: beta
-image: assets/images/components/mode-island.png
 ---
 
 <code-well-header>

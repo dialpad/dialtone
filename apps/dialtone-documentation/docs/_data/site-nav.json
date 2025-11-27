@@ -48,6 +48,10 @@
           "link": "/guides/getting-started/"
         },
         {
+          "text": "Theme and Mode",
+          "link": "/guides/theme-and-mode/"
+        },
+        {
           "text": "Contributing",
           "link": "/guides/contributing/"
         },
@@ -493,6 +497,10 @@
         {
           "text": "Line Height",
           "link": "/utilities/typography/line-height.html"
+        },
+        {
+          "text": "Line Clamp",
+          "link": "/utilities/typography/line-clamp.html"
         },
         {
           "text": "Lists",

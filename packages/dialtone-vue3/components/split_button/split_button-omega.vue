@@ -1,7 +1,7 @@
 <template>
   <dt-button
     :id="id"
-    v-dt-tooltip="tooltipText"
+    v-dt-tooltip="{ message: tooltipText, inverted: kind === 'inverted' }"
     data-qa="dt-split-button-omega"
     :active="active"
     :aria-label="ariaLabel"

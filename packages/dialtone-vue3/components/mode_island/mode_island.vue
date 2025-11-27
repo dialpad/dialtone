@@ -4,7 +4,7 @@
     class="d-mode-island"
     v-bind="$attrs"
     :data-dt-mode="computedMode"
-    :data-mode-island-inverted="isInverted ? '' : null"
+    :data-mode-island-inverted="invertedAttribute"
     :data-dt-contrast="currentContrast"
   >
     <!-- @slot Slot for main content -->
@@ -82,6 +82,10 @@ export default {
       return this.mode === DT_MODE_ISLAND_TYPES.INVERTED;
     },
 
+    invertedAttribute () {
+      return this.isInverted ? '' : null;
+    },
+
     computedMode () {
       // If mode is explicitly light or dark, use it directly
       if (this.mode === DT_MODE_ISLAND_TYPES.LIGHT || this.mode === DT_MODE_ISLAND_TYPES.DARK) {
@@ -156,21 +160,18 @@ export default {
     },
 
     setupContrastObserver () {
-      const config = {
-        attributes: true,
-        attributeFilter: ['data-dt-contrast'],
-      };
-
-      const callback = (mutationsList) => {
+      this.contrastObserver = new MutationObserver((mutationsList) => {
         for (const mutation of mutationsList) {
           if (mutation.type === 'attributes' && mutation.attributeName === 'data-dt-contrast') {
             this.currentContrast = getRootContrast();
           }
         }
-      };
+      });
 
-      this.contrastObserver = new MutationObserver(callback);
-      this.contrastObserver.observe(document.documentElement, config);
+      this.contrastObserver.observe(document.documentElement, {
+        attributes: true,
+        attributeFilter: ['data-dt-contrast'],
+      });
     },
 
     setupModeObserver () {
@@ -180,16 +181,14 @@ export default {
         subtree: false,
       };
 
-      const callback = (mutationsList) => {
+      this.modeObserver = new MutationObserver((mutationsList) => {
         for (const mutation of mutationsList) {
           if (mutation.type === 'attributes' && mutation.attributeName === 'data-dt-mode') {
             // Recalculate and update the reactive data property
             this.calculatedMode = this.calculateInvertedMode();
           }
         }
-      };
-
-      this.modeObserver = new MutationObserver(callback);
+      });
 
       // Observe root element
       this.modeObserver.observe(document.documentElement, config);

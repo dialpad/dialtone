@@ -337,7 +337,7 @@ export default {
     },
 
     internalShow (value) {
-      if (!this.tip) return;
+      if (!this.tip || !this.anchor) return;
 
       if (value) {
         this.setProps();
@@ -463,6 +463,8 @@ export default {
     },
 
     setProps () {
+      if (!this.tip || !this.tip.setProps || !this.anchor) return;
+
       if (this.tip && this.tip.setProps) {
         this.tip.setProps({
           ...this.tippyProps,

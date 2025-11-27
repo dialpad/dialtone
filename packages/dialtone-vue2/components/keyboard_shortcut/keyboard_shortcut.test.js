@@ -39,8 +39,95 @@ describe('DtKeyboardShortcut Tests', () => {
       expect(wrapper.exists()).toBe(true);
     });
 
-    it('should render 11 icons', () => {
-      expect(iconComponents.length === 11).toBe(true);
+    it('should render 13 icons', () => {
+      expect(iconComponents.length === 13).toBe(true);
+    });
+  });
+
+  describe('Accessibility Tests', () => {
+    describe('Auto-generated aria-label', () => {
+      it('should generate aria-label with icon aliases converted to text', () => {
+        mockProps = {
+          shortcut: '{cmd}+X',
+        };
+        updateWrapper();
+
+        const srOnlySpan = wrapper.find('.d-keyboard-shortcut--sr-only');
+        expect(srOnlySpan.text()).toBe('Command plus X');
+      });
+
+      it('should convert key abbreviations to full names', () => {
+        mockProps = {
+          shortcut: 'Ctrl+Alt+Del',
+        };
+        updateWrapper();
+
+        const srOnlySpan = wrapper.find('.d-keyboard-shortcut--sr-only');
+        expect(srOnlySpan.text()).toBe('Control plus Alt plus Delete');
+      });
+
+      it('should handle mixed icon aliases and key abbreviations', () => {
+        mockProps = {
+          shortcut: '{cmd}+Ctrl+X',
+        };
+        updateWrapper();
+
+        const srOnlySpan = wrapper.find('.d-keyboard-shortcut--sr-only');
+        expect(srOnlySpan.text()).toBe('Command plus Control plus X');
+      });
+
+      it('should handle arrow key icons', () => {
+        mockProps = {
+          shortcut: '{arrow-up}+{arrow-down}',
+        };
+        updateWrapper();
+
+        const srOnlySpan = wrapper.find('.d-keyboard-shortcut--sr-only');
+        expect(srOnlySpan.text()).toBe('Up Arrow plus Down Arrow');
+      });
+
+      it('should handle Windows key icon', () => {
+        mockProps = {
+          shortcut: '{win}+D',
+        };
+        updateWrapper();
+
+        const srOnlySpan = wrapper.find('.d-keyboard-shortcut--sr-only');
+        expect(srOnlySpan.text()).toBe('Windows plus D');
+      });
+
+      it('should handle Option key icon', () => {
+        mockProps = {
+          shortcut: '{opt}+C',
+        };
+        updateWrapper();
+
+        const srOnlySpan = wrapper.find('.d-keyboard-shortcut--sr-only');
+        expect(srOnlySpan.text()).toBe('Option plus C');
+      });
+    });
+
+    describe('screenReaderText override', () => {
+      it('should use screenReaderText when provided', () => {
+        mockProps = {
+          shortcut: '{cmd}+X',
+          screenReaderText: 'Custom accessible text',
+        };
+        updateWrapper();
+
+        const srOnlySpan = wrapper.find('.d-keyboard-shortcut--sr-only');
+        expect(srOnlySpan.text()).toBe('Custom accessible text');
+      });
+
+      it('should use auto-generated aria-label when screenReaderText is not provided', () => {
+        mockProps = {
+          shortcut: '{cmd}+X',
+        };
+        updateWrapper();
+
+        const srOnlySpan = wrapper.find('.d-keyboard-shortcut--sr-only');
+        expect(srOnlySpan.text()).toBe('Command plus X');
+      });
     });
   });
 });

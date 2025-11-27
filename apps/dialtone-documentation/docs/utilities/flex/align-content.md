@@ -3,6 +3,8 @@ title: Align Content
 description: Utilities for setting how rows are distributed along its cross axis. This property only works when a parent container has more than one line.
 ---
 
+<FlexStackNotice />
+
 ## Flex Start
 
 Use `d-ac-flex-start` to pack rows against the start of the element's cross axis. This is the default value.

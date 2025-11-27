@@ -22,211 +22,124 @@ npm install @dialpad/dialtone @dialpad/i18n
 
 ```shell
 npm install @dialpad/dialtone @dialpad/i18n-vue2
-
-### Import packages:
-
-#### Without theming
-
-If you don't care about theming and just want to use Dialtone with the default light theme:
-
-- CSS
-
-```css
-@import "@dialpad/dialtone/css-default-theme";
-```
-
-- Javascript
-
-```js
-import "@dialpad/dialtone/css-default-theme";
-```
-
-#### With theming
-
-Import Dialtone CSS without design tokens. Tokens are applied separately via the theming system.
-
-**CSS:**
-```css
-@import "@dialpad/dialtone/css";
-```
-
-**Javascript:**
-```js
-import "@dialpad/dialtone/css";
 ```
 
 ---
 
-##### Layered Theming System (Recommended)
+### Theming
 
-The layered system provides instant mode switching, 51 themes, and 95.7% smaller theme files.
+##### Quick Start
 
-###### How it works
+**Install packages:**
 
-Three base layers load once (862KB):
-1. **Core tokens** (50KB) - typography, spacing, sizing, components
-2. **Base colors** (185KB) - fundamental color palette with HSLA
-3. **DP colors** (627KB) - Dialpad brand (light + dark modes)
+```shell
+npm install @dialpad/dialtone @dialpad/dialtone-tokens
+```
 
-Additional themes load as small overrides (0.3-5KB each) containing only differences from DP.
-
-###### Initialize on app startup
+**Initialize (main.js or App.vue):**
 
 ```js
 import { initDialtoneTheme } from '@dialpad/dialtone/themes/config';
-import CoreTokens from '@dialpad/dialtone-tokens/dist/css/layered/tokens-core.css';
-import BaseColors from '@dialpad/dialtone-tokens/dist/css/layered/tokens-base-colors.css';
-import DpColors from '@dialpad/dialtone-tokens/dist/css/layered/tokens-dp-colors.css';
+import Dp from '@dialpad/dialtone-tokens/themes/dp';
 
-// Initialize base layers and DP theme
-initDialtoneTheme(
-  { core: CoreTokens, baseColors: BaseColors },
-  { brand: { name: 'dp', css: DpColors } },
-  'light' // initial mode: 'light' or 'dark'
-);
+initDialtoneTheme(Dp, 'light');
 ```
 
-###### Switch modes instantly (light/dark)
+Done. Your app now has theming.
+
+---
+
+##### Basic Usage
+
+**Toggle light/dark mode:**
 
 ```js
 import { setMode } from '@dialpad/dialtone/themes/config';
-
-setMode('dark');  // or 'light'
-// Instant switch via data-dt-mode attribute (0ms, no network request)
+setMode('dark');
 ```
 
-###### Switch brands (load theme override)
+**Use different theme at startup:**
+
+```js
+import Melon from '@dialpad/dialtone-tokens/themes/melon';
+initDialtoneTheme(Melon, 'light');
+```
+
+**Switch themes dynamically:**
 
 ```js
 import { setBrand } from '@dialpad/dialtone/themes/config';
-import TmoColors from '@dialpad/dialtone-tokens/dist/css/layered/themes/tokens-tmo-colors.css';
-
-setBrand({
-  brand: {
-    name: 'tmo',
-    css: TmoColors
-  }
-});
-// Loads only 0.55KB override file
+import Tmo from '@dialpad/dialtone-tokens/themes/tmo';
+setBrand(Tmo);
 ```
 
-###### Enable high contrast (accessibility)
+**Enable high contrast:**
 
 ```js
 import { setContrast } from '@dialpad/dialtone/themes/config';
-import HighContrast from '@dialpad/dialtone-tokens/dist/css/layered/contrast/tokens-high-contrast.css';
+import HighContrast from '@dialpad/dialtone-tokens/themes/high-contrast';
 
-setContrast({
-  contrast: {
-    name: 'high',
-    css: HighContrast
-  }
-});
-
-// Disable contrast
-setContrast(null);
+setContrast(HighContrast);
+setContrast(null);  // disable
 ```
 
-###### Available themes (51 total)
+---
 
-**Base & Partner:**
-- `dp` - Dialpad (base, always loaded)
-- `tmo` - T-Mobile
+##### Available Themes
 
-**Accessibility:**
-- `prota-deuter` - Protanopia/Deuteranopia
-- `trita` - Tritanopia
+51 themes total. Use any with `initDialtoneTheme()` or `setBrand()`.
 
-**Named themes:**
-- `aegean`, `botany`, `buttercream`, `high-desert`, `melon`, `plum`, `sunflower`, `verdant-haze`
+**Standard:** dp, tmo, aegean, botany, buttercream, high-desert, melon, plum, sunflower, verdant-haze
 
-**Experimental:**
-- `101` through `137` (37 numbered themes)
+**Accessibility:** prota-deuter, trita
 
-**Contrast levels:**
-- `default`, `high`
+**Experimental:** 101 through 137
 
-###### HTML structure
+**Contrast:** high-contrast
 
-The system uses `data-dt-*` attributes on the root element:
-
-```html
-<html
-  lang="en"
-  data-dt-mode="light"
-  data-dt-brand="dp"
-  data-dt-contrast="default"
->
-</html>
-```
-
-**For nested mode sections:** Use the `DtModeIsland` component:
-
-```vue
-<template>
-  <div>
-    <p>This content uses the page's mode (light)</p>
-
-    <dt-mode-island mode="dark">
-      <p>This content is always dark mode</p>
-    </dt-mode-island>
-  </div>
-</template>
-```
-
-See [Mode Island documentation](https://dialtone.dialpad.com/components/mode-island.html) for details.
-
-**Without Vue (not recommended):** You can manually set `data-dt-mode` on any element, but you lose automatic mode inheritance and contrast management:
-
-```html
-<div>
-  <p>This content uses the page's mode</p>
-
-  <div data-dt-mode="dark" class="d-mode-island">
-    <p>This content is always dark mode</p>
-  </div>
-</div>
-```
-
-###### CSS-only approach
-
-Load CSS files directly and control via HTML attributes:
-
-```css
-/* Base layers (required) */
-@import "@dialpad/dialtone-tokens/dist/css/layered/tokens-core.css";
-@import "@dialpad/dialtone-tokens/dist/css/layered/tokens-base-colors.css";
-@import "@dialpad/dialtone-tokens/dist/css/layered/tokens-dp-colors.css";
-
-/* Theme override (optional, only if not using dp) */
-@import "@dialpad/dialtone-tokens/dist/css/layered/themes/tokens-tmo-colors.css";
-
-/* High contrast (optional) */
-@import "@dialpad/dialtone-tokens/dist/css/layered/contrast/tokens-high-contrast.css";
-```
-
-Then set attributes in HTML:
-
-```html
-<html data-dt-mode="light" data-dt-brand="tmo" data-dt-contrast="default">
-```
-
-###### Shadow DOM support
-
-Pass root element as second parameter:
+**Import pattern:**
 
 ```js
-import { initDialtoneTheme } from '@dialpad/dialtone/themes/config';
-
-const shadowHost = document.querySelector('#my-shadow-root-host');
-initDialtoneTheme(coreTheme, brandTheme, 'light', shadowHost);
+import ThemeName from '@dialpad/dialtone-tokens/themes/theme-name';
 ```
+
+---
+
+##### Advanced
+
+**Shadow DOM (Web Components):**
+
+Pass host element as third parameter.
+
+```js
+initDialtoneTheme(Dp, 'light', this);
+```
+
+**CSS only (no JS):**
+
+```css
+@import "@dialpad/dialtone-tokens/layered/tokens-core.css";
+@import "@dialpad/dialtone-tokens/layered/tokens-base-colors.css";
+@import "@dialpad/dialtone-tokens/layered/tokens-dp-colors.css";
+```
+
+Then set attributes:
+
+```html
+<html data-dt-mode="light" data-dt-brand="dp" data-dt-contrast="default">
+```
+
+**Mode sections:**
+
+See [Mode Island component](https://dialtone.dialpad.com/components/mode-island.html) docs.
 
 ---
 
 ##### Legacy Theming System (Backward Compatible)
 
-The original system remains supported for existing projects.
+The original theming system remains fully supported for existing projects. New projects should use the layered system above for better performance and smaller bundle sizes.
+
+**Note:** Both systems support Shadow DOM identically - pass the host element as the second parameter.
 
 ```js
 import { setTheme } from '@dialpad/dialtone/themes/config';
@@ -243,6 +156,7 @@ setTheme(DpLight, document.querySelector('#my-shadow-root-host'));
 ```
 
 **Legacy themes available:**
+
 - `DpLight`, `DpDark`, `TmoLight`, `TmoDark`
 
 **Note:** Legacy system loads complete token files (~1256KB per theme). Consider migrating to layered system for better performance.
@@ -256,7 +170,7 @@ setTheme(DpLight, document.querySelector('#my-shadow-root-host'));
 import { DtIconArrowUp } from '@dialpad/dialtone-icons/vue2';
 import { DtIllustrationBlankSpace } from '@dialpad/dialtone-icons/vue2';
 
-// Default import (Prefered if using webpack as it is tree-shakeable by default)
+// Default import (Preferred if using webpack as it is tree-shakeable by default)
 import DtIconArrowUp from '@dialpad/dialtone-icons/vue2/arrow-up';
 import DtIllustrationBlankSpace from '@dialpad/dialtone-icons/vue2/blank-space';
 ```
@@ -268,7 +182,7 @@ import DtIllustrationBlankSpace from '@dialpad/dialtone-icons/vue2/blank-space';
 import { DtIconArrowUp } from '@dialpad/dialtone-icons/vue3';
 import { DtIllustrationBlankSpace } from '@dialpad/dialtone-icons/vue3';
 
-// Default import (Prefered if using webpack as it is tree-shakeable by default)
+// Default import (Preferred if using webpack as it is tree-shakeable by default)
 import DtIconArrowUp from '@dialpad/dialtone-icons/vue3/arrow-up';
 import DtIllustrationBlankSpace from '@dialpad/dialtone-icons/vue3/blank-space';
 ```
@@ -291,9 +205,14 @@ import { DtButton } from "@dialpad/dialtone/vue2/lib/button"
 // Named import
 import { DtButton } from "@dialpad/dialtone/vue3"
 
-// Default import (Prefered if using webpack as it is tree-shakeable by default)
+// Default import (Preferred if using webpack as it is tree-shakeable by default)
 import { DtButton } from "@dialpad/dialtone/vue3/lib/button"
 ```
+
+#### Dialtine MCP Server
+
+Install the MCP server to use it in your local environment and develop efficiently with Dialtone.
+Follow the instructions in the [MCP Server](https://github.com/dialpad/dialtone/tree/staging/packages/dialtone-mcp-server) folder.
 
 ## About this repo
 
@@ -330,7 +249,7 @@ dialtone/
 Dialtone is a mono-package that includes many packages within it to ease the maintenance of versions of
 the library.
 
-#### How does our bundling works
+#### How our bundling works
 
 To achieve this we needed to create certain configs through the monorepo to be able to handle them even if
 they have the same package name e.g: `@dialpad/dialtone-vue`.
@@ -476,9 +395,9 @@ if they need to run before a specific command.
 - Improve the speed of the command execution by saving its output to cache.
 - Run the command on the [affected](https://nx.dev/nx-api/nx/documents/affected) projects only.
 
-⚠️ You can run the commands with PNPM too, but it's not advisable as You'll lose the advantages that NX provides.
+⚠️ You can run the commands with PNPM too, but it's not advisable as you'll lose the advantages that NX provides.
 
-For more information, check [setup a monorepo with PNPM workspaces and NX](https://blog.nrwl.io/setup-a-monorepo-with-pnpm-workspaces-and-speed-it-up-with-nx-bc5d97258a7e#d69f)
+For more information, check [setup a monorepo with PNPM workspaces and NX](https://nx.dev/blog/setup-a-monorepo-with-pnpm-workspaces-and-speed-it-up-with-nx)
 
 ##### Installation
 
@@ -588,6 +507,27 @@ Example:
 nx run dialtone-documentation:build
 ```
 
+##### Clean build artifacts and cache
+
+Use this to clear stale build artifacts and reset the build cache. Common scenarios include switching branches, troubleshooting unexpected build behavior, or recovering from interrupted builds. This is rarely needed because build scripts already clean their own dist folders and Nx cache invalidation handles most staleness automatically.
+
+```bash
+# Clean everything (dist folders and Nx cache)
+pnpm clean
+
+# Clean only dist folders (stale build artifacts)
+pnpm clean:dist
+
+# Clean only Nx cache (confused incremental builds)
+pnpm clean:cache
+```
+
+What gets cleaned:
+
+- `clean:dist` removes `packages/dialtone-tokens/dist` and VuePress cache/temp directories
+- `clean:cache` clears Nx's build cache (`.nx/cache`)
+- `clean` runs both in sequence
+
 ##### Use local package in another project
 
 A way to see local Dialtone changes in a local running frontend is to use a local package.
@@ -687,3 +627,5 @@ These will generate a JSON and HTML report in the `coverage` directory.
 
 The coverage thresholds are defined in the `vitest.config.ts` file.
 When submitting a PR the CI will run the tests with coverage and fail if the coverage is below the thresholds.
+
+<!-- test -->

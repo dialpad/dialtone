@@ -5,4 +5,5 @@ export const SHORTCUTS_ALIASES_LIST = [
   '{arrow-up}',
   '{arrow-down}',
   '{cmd}',
+  '{opt}',
 ];

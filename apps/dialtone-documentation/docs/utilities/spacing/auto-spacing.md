@@ -45,13 +45,14 @@ description: Utilities for controlling the space between child elements.
 
 <script setup>
   import { values } from '@data/auto-spacing.json';
+  import ClampedTableWrapper from '@baseComponents/ClampedTableWrapper.vue';
 </script>
 
 ## Classes
 
 The Stack and Flow layouts work by using the adjacent sibling combinator (`+`) to apply a top or left margin to sibling elements. This means it will only work when there are more than two sibling items. To allow for differing nesting spacing values, these margins are scoped to apply **only** to direct children of the parent (e.g. `.d-stack[#] > * + *`).
 
-<div v-dt-scrollbar class="d-hmx464 d-bar8 d-ba d-bc-subtle">
+<clamped-table-wrapper>
   <div>
     <table class="d-table dialtone-doc-table">
       <thead class="d-bgc-primary d-ps-sticky d-zi-base1 d-t0">
@@ -70,4 +71,4 @@ The Stack and Flow layouts work by using the adjacent sibling combinator (`+`) t
       </tbody>
     </table>
   </div>
-</div>
+</clamped-table-wrapper>

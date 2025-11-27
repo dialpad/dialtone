@@ -27,8 +27,8 @@ div[class*="language-"] {
 	}
 
   &::before {
-    font: var(--dt-typography-body-sm);
-    color: var(--dt-color-foreground-primary)
+    color: var(--dt-color-foreground-primary);
+    font: var(--dt-typography-body-sm)
   }
 }
 
@@ -37,6 +37,7 @@ code:not(.d-code--md, .d-code--sm) {
 	color: var(--dt-color-blue-500);
 	background-color: var(--dt-color-surface-info);
 	border-radius: var(--dt-size-100);
+	user-select: all;
 }
 
 code[class*="language-"],
@@ -50,9 +51,11 @@ pre[class*="language-"] {
 	word-wrap: normal;
 	word-break: normal;
 	word-spacing: normal;
+	overflow-wrap: normal;
 	tab-size: 4;
 	hyphens: none;
 	border-radius: var(--dt-size-radius-400);
+	user-select: initial;
 }
 
 @media print {

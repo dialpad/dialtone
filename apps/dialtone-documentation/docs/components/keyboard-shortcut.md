@@ -17,23 +17,15 @@ figma_url: https://www.figma.com/design/W58r5BkO8qTw3vem9YieJd/DT9-Component-Lib
 Keyboard shortcut outlines a key combination with a border to represent a keyboard shortcut. `+` will be rendered as an icon rather than text. Supported symbol tags can be used in the shortcut prop, see the [Props, Slots & Events](#vue-api) section.
 
 <code-well-header>
-  <dt-keyboard-shortcut shortcut="{cmd}+Ctrl+X"/>
+  <dt-keyboard-shortcut ref="baseExample" shortcut="{cmd}+Ctrl+X"/>
 </code-well-header>
 
 <code-example-tabs
-htmlCode='
-<kbd class="d-keyboard-shortcut">
-  <svg>...</svg>
-  <svg>...</svg>
-  <span aria-hidden="true" class="d-keyboard-shortcut__item">Ctrl</span>
-  <svg>...</svg>
-  <span aria-hidden="true" class="d-keyboard-shortcut__item">X</span>
-</kbd>
-'
+:htmlCode="() => $refs.baseExample"
 vueCode='
 <dt-keyboard-shortcut shortcut="{cmd}+Ctrl+X"/>
 '
-showHtmlWarning />
+/>
 
 ## Usage
 
@@ -47,23 +39,15 @@ showHtmlWarning />
 ### Inverted
 
 <code-well-header bgclass="d-bgc-contrast">
-  <dt-keyboard-shortcut inverted shortcut="{cmd}+Ctrl+X" />
+  <dt-keyboard-shortcut ref="invertedExample" inverted shortcut="{cmd}+Ctrl+X" />
 </code-well-header>
 
 <code-example-tabs
-htmlCode='
-<kbd class="d-keyboard-shortcut d-keyboard-shortcut--inverted">
-  <svg>...</svg>
-  <svg>...</svg>
-  <span aria-hidden="true" class="d-keyboard-shortcut__item d-keyboard-shortcut__item--inverted">Ctrl</span>
-  <svg>...</svg>
-  <span aria-hidden="true" class="d-keyboard-shortcut__item d-keyboard-shortcut__item--inverted">X</span>
-</kbd>
-'
+:htmlCode="() => $refs.invertedExample"
 vueCode='
 <dt-keyboard-shortcut inverted shortcut="{cmd}+Ctrl+X" />
 '
-showHtmlWarning />
+/>
 
 ### Shortcut Size Variation
 
@@ -87,7 +71,7 @@ vueCode='
 <code-well-header>
   <dt-keyboard-shortcut
     ref="allShortcuts"
-    shortcut="{cmd}+{win}+{arrow-right}+{arrow-left}+{arrow-up}+{arrow-down}"
+    shortcut="{cmd}+{opt}+{win}+{arrow-right}+{arrow-left}+{arrow-up}+{arrow-down}"
   />
 </code-well-header>
 
@@ -95,7 +79,7 @@ vueCode='
 :htmlCode="() => $refs.allShortcuts"
 vueCode='
 <dt-keyboard-shortcut
-  shortcut="{cmd}+{win}+{arrow-right}+{arrow-left}+{arrow-up}+{arrow-down}"
+  shortcut="{cmd}+{opt}+{win}+{arrow-right}+{arrow-left}+{arrow-up}+{arrow-down}"
 />
 '
 />
@@ -106,7 +90,7 @@ vueCode='
   <div ref="inlineExample">
   Press
   <dt-keyboard-shortcut
-    screen-reader-text="Ctrl and F5"
+    screen-reader-text="Control plus F5"
     shortcut="Ctrl + F5"
   />
   to hard refresh the page.
@@ -118,7 +102,7 @@ vueCode='
 vueCode='
 Press
 <dt-keyboard-shortcut
-  screen-reader-text="Ctrl and F5"
+  screen-reader-text="Control plus F5"
   shortcut="Ctrl + F5"
 />
 to hard refresh the page.
@@ -127,11 +111,23 @@ to hard refresh the page.
 
 ## Accessibility
 
-Keyboard shortcuts should be visible to sighted users and made available to assistive technology. This keyboard shortcut component is purely visual by default, and will not read out to a screen reader.
+Keyboard shortcuts are visible to sighted users and made available to assistive technology. This component automatically generates accessible text in a visually-hidden element that will be announced by screen readers.
 
-[aria-keyshortcuts](https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Attributes/aria-keyshortcuts) should be used on the anchor element of the keyboard shortcut to indicate the existence of it to assistive technology.
+The auto-generated accessible text converts:
 
-If your keyboard shortcut is inline with text, you can set the screenReaderText prop so it is read by AT.
+- **Icon aliases**: (e.g., `{cmd}`) to full names (e.g., "Command")
+- **Key abbreviations**: (e.g., "Ctrl", "Alt") to full names (e.g., "Control", "Alt")
+- **Plus separators**: (`+`) to the word "plus"
+
+For example, `{cmd}+Ctrl+X` will be announced as "Command plus Control plus X".
+
+### Customizing the Screen Reader Text
+
+You can override the auto-generated accessible text by providing the `screenReaderText` prop with custom text.
+
+### Announcing shortcuts independent of DtKeyboardShortcut
+
+If an element (e.g. a `button`) can be triggered by a keyboard shortcut, the [aria-keyshortcuts](https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Attributes/aria-keyshortcuts) attribute should be used to announce the keyboard shortcut to screen readers.
 
 Example:
 
@@ -141,7 +137,7 @@ Example:
 <button aria-keyshortcuts="control+shift+v">Press Me</button>
 ```
 
-Abbreviations / symbols should be read out in full for voiceover / screen readers.
+Abbreviations / symbols should be spelled out in full for voiceover / screen readers, e.g. "Control" instead of "Ctrl".
 
 ## References
 

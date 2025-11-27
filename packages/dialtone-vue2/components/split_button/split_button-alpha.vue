@@ -1,6 +1,6 @@
 <template>
   <dt-button
-    v-dt-tooltip="tooltipText"
+    v-dt-tooltip="tooltipConfig"
     data-qa="dt-split-button-alpha"
     :active="active"
     :aria-label="ariaLabel"
@@ -129,6 +129,15 @@ export default {
     return {
       BUTTON_ICON_SIZES,
     };
+  },
+
+  computed: {
+    tooltipConfig () {
+      return {
+        message: this.tooltipText,
+        inverted: this.kind === 'inverted',
+      };
+    },
   },
 };
 </script>

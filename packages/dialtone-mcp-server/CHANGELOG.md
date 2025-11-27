@@ -1,3 +1,29 @@
+# [1.2.0](https://github.com/dialpad/dialtone/compare/dialtone-mcp-server/v1.1.0...dialtone-mcp-server/v1.2.0) (2025-11-13)
+
+
+### Bug Fixes
+
+* **Mcp Server:** DLT-2840 correct installation instructions and improve documentation ([#969](https://github.com/dialpad/dialtone/issues/969)) ([04943af](https://github.com/dialpad/dialtone/commit/04943afc6bc9fa0ac6f672d01d2fa26f5713dfb5))
+
+
+### Features
+
+* **Mcp Server:** DLT-2837 add icon search tool ([#967](https://github.com/dialpad/dialtone/issues/967)) ([25d4d7d](https://github.com/dialpad/dialtone/commit/25d4d7dccce543473342cd2b4211cefbb732e486))
+
+# [1.1.0](https://github.com/dialpad/dialtone/compare/dialtone-mcp-server/v1.0.2...dialtone-mcp-server/v1.1.0) (2025-11-05)
+
+
+### Features
+
+* **Mcp Server:** DLT-2787 implement 3-tool search architecture with smart filtering ([#951](https://github.com/dialpad/dialtone/issues/951)) ([74fe422](https://github.com/dialpad/dialtone/commit/74fe42280994bcce2c07834b6e9ccca98de8764b))
+
+## [1.0.2](https://github.com/dialpad/dialtone/compare/dialtone-mcp-server/v1.0.1...dialtone-mcp-server/v1.0.2) (2025-10-17)
+
+
+### Bug Fixes
+
+* NO-JIRA publish mcp server to npm ([#947](https://github.com/dialpad/dialtone/issues/947)) ([f6e9c4f](https://github.com/dialpad/dialtone/commit/f6e9c4f18487e9cc65736b86ba91dea5f069d6b2))
+
 ## [1.0.1](https://github.com/dialpad/dialtone/compare/dialtone-mcp-server/v1.0.0...dialtone-mcp-server/v1.0.1) (2025-09-24)
 
 

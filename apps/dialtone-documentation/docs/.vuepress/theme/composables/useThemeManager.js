@@ -1,10 +1,19 @@
 import { inject, computed, onMounted, onUnmounted } from 'vue';
-import { NAMED_THEMES, NUMBERED_THEMES, ALL_THEME_IDS, STYLE_TAG_IDS } from '../constants/themes.js';
+import { NAMED_THEMES, NUMBERED_THEMES, ALL_THEME_IDS } from '../constants/themes.js';
 import { formatThemeName } from '../utils/formatThemeName.js';
+import {
+  setMode as setModeConfig,
+  setBrand,
+  setContrast as setContrastConfig,
+} from '@dialpad/dialtone-tokens/themes/config';
 
 /**
  * Composable for managing theme, mode, and contrast settings across the documentation site.
  * Provides centralized theme management logic that can be used in Navbar, markdown pages, and components.
+ *
+ * This composable wraps the shared theme management functions from @dialpad/dialtone-tokens/themes/config
+ * and adds documentation-site-specific features like system mode detection, localStorage persistence,
+ * and Vue reactive state management.
  *
  * @param {Object} options - Configuration options
  * @param {boolean} [options.includeThemes=false] - Whether to enable theme switching functionality
@@ -84,19 +93,14 @@ export function useThemeManager(options = {}) {
   };
 
   /**
-   * Manages brand override style tag injection
+   * Applies brand theme using shared config.js function
    * @param {string} brandName - The brand theme name
    */
-  const manageBrandOverride = (brandName) => {
-    const brandOverrideTag = document.getElementById(STYLE_TAG_IDS.BRAND_OVERRIDE);
-
-    if (brandName === 'dp') {
-      // DP is the base theme - remove override if it exists
-      if (brandOverrideTag) {
-        brandOverrideTag.remove();
-      }
-    } else {
-      // Load theme-specific overrides on top of DP
+  const applyBrandTheme = (brandName) => {
+    // DP is the base theme - for docs site, we don't need to apply brand overrides for DP
+    // since the base DP theme CSS is already loaded in the HTML
+    // For non-DP brands, we apply the brand override using the shared setBrand function
+    if (brandName !== 'dp') {
       const theme = themes && themes[brandName];
 
       if (!theme) {
@@ -109,25 +113,17 @@ export function useThemeManager(options = {}) {
         return;
       }
 
-      if (!brandOverrideTag) {
-        const newTag = document.createElement('style');
-        newTag.id = STYLE_TAG_IDS.BRAND_OVERRIDE;
-        newTag.type = 'text/css';
-        newTag.innerHTML = theme.brand.css;
-        document.head.appendChild(newTag);
-      } else {
-        brandOverrideTag.innerHTML = theme.brand.css;
-      }
+      // Use shared setBrand function from config.js
+      setBrand(theme, document.documentElement);
     }
+    // Note: The shared setBrand function handles style tag creation, updates, and cleanup
   };
 
   /**
-   * Manages contrast override style tag injection
+   * Applies contrast theme using shared config.js function
    * @param {string} contrast - The contrast level (default or high)
    */
-  const manageContrastOverride = (contrast) => {
-    const contrastTag = document.getElementById(STYLE_TAG_IDS.CONTRAST);
-
+  const applyContrastTheme = (contrast) => {
     if (contrast === 'high') {
       const contrastTheme = themes && themes['high-contrast'];
 
@@ -141,26 +137,17 @@ export function useThemeManager(options = {}) {
         return;
       }
 
-      if (!contrastTag) {
-        const newTag = document.createElement('style');
-        newTag.id = STYLE_TAG_IDS.CONTRAST;
-        newTag.type = 'text/css';
-        newTag.innerHTML = contrastTheme.contrast.css;
-        document.head.appendChild(newTag);
-      } else {
-        contrastTag.innerHTML = contrastTheme.contrast.css;
-      }
+      // Use shared setContrast function from config.js
+      setContrastConfig(contrastTheme, document.documentElement);
     } else {
-      // Remove contrast override when not needed
-      if (contrastTag) {
-        contrastTag.remove();
-      }
+      // Remove contrast by passing null (shared function handles cleanup)
+      setContrastConfig(null, document.documentElement);
     }
   };
 
   /**
    * Applies current theme/mode/contrast settings to the DOM
-   * Manages CSS injection for brand overrides and high contrast
+   * Uses shared config.js functions for theme management
    */
   // eslint-disable-next-line complexity
   const setCss = () => {
@@ -183,14 +170,15 @@ export function useThemeManager(options = {}) {
     const brandName = currentTheme.value || 'dp';
     const contrast = currentContrast.value || 'default';
 
-    // Set HTML attributes (required for CSS selectors)
-    document.documentElement.setAttribute('data-dt-mode', mode);
-    document.documentElement.setAttribute('data-dt-brand', brandName);
-    document.documentElement.setAttribute('data-dt-contrast', contrast);
+    // Use shared setMode function from config.js (handles attribute setting)
+    setModeConfig(mode, document.documentElement);
 
-    // Manage style tag injections
-    manageBrandOverride(brandName);
-    manageContrastOverride(contrast);
+    // Set brand attribute manually (setBrand will handle the style injection)
+    document.documentElement.setAttribute('data-dt-brand', brandName);
+
+    // Apply brand and contrast themes using shared functions
+    applyBrandTheme(brandName);
+    applyContrastTheme(contrast);
   };
 
   // Lifecycle: Initialize and listen for system theme changes

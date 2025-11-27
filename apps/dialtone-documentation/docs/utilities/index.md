@@ -65,7 +65,7 @@ A basic example styling a container by combining Dialtone's CSS utilities. Follo
 <div>Box</div>
 ```
 
-### 2. Apply a Dark Background Color
+### 2. Apply an Inverted Background Color
 
 Apply a [**Primary Inverted** Surface Color](/utilities/backgrounds/color/index.md#classes).
 

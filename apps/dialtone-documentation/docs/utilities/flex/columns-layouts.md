@@ -3,6 +3,8 @@ title: Columns & Layouts
 description: Utilities for flex columns and common flex layouts.
 ---
 
+<FlexStackNotice />
+
 ## Creating Flex Columns
 
 Use `d-fl-col{n}` to create uniformly sized children within an element.
