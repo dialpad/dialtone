@@ -1512,9 +1512,6 @@
       ],
       "braces": [
         "brackets",
-        "bracket-left",
-        "bracket-right",
-        "brackets",
         "code",
         "json",
         "code",
