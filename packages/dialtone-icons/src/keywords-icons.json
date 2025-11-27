@@ -1509,6 +1509,16 @@
         "url",
         "unchain",
         "unchain"
+      ],
+      "braces": [
+        "brackets",
+        "code",
+        "json",
+        "code",
+        "token",
+        "curly",
+        "data",
+        "variables"
       ]
     },
     "general": {
