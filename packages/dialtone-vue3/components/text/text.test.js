@@ -9,6 +9,8 @@ import {
   TEXT_SIZE_MODIFIERS,
   TEXT_STRENGTH_BY_KIND_AND_SIZE,
   TEXT_DENSITY_BY_KIND_AND_SIZE,
+  TEXT_WRAP_MODIFIERS,
+  TEXT_TRIM_MODIFIERS,
 } from './text_constants';
 import fs from 'fs';
 import path from 'path';
@@ -166,6 +168,72 @@ describe('DtText', () => {
 
     wrapper.unmount();
     mountTarget.remove();
+  });
+
+  it('applies wrap modifier class when wrap prop is valid', () => {
+    const wrapper = mountComponent({ wrap: 'balance' });
+
+    expect(wrapper.classes()).toContain(TEXT_WRAP_MODIFIERS.balance);
+  });
+
+  it('applies all wrap modifier classes correctly', () => {
+    Object.entries(TEXT_WRAP_MODIFIERS).forEach(([wrapValue, expectedClass]) => {
+      const wrapper = mountComponent({ wrap: wrapValue });
+      expect(wrapper.classes()).toContain(expectedClass);
+    });
+  });
+
+  it('warns when wrap is not recognized', () => {
+    const warnSpy = vi.spyOn(console, 'warn').mockImplementation(() => {});
+
+    const wrapper = mountComponent({ wrap: 'invalid-wrap' });
+
+    expect(warnSpy).toHaveBeenCalledWith(expect.stringContaining('Unsupported wrap "invalid-wrap"'));
+    expect(wrapper.classes()).not.toContain('d-text--wrap-invalid-wrap');
+  });
+
+  it('applies trim modifier class when trim prop is valid', () => {
+    const wrapper = mountComponent({ trim: 'both' });
+
+    expect(wrapper.classes()).toContain(TEXT_TRIM_MODIFIERS.both);
+  });
+
+  it('applies all trim modifier classes correctly', () => {
+    Object.entries(TEXT_TRIM_MODIFIERS).forEach(([trimValue, expectedClass]) => {
+      const wrapper = mountComponent({ trim: trimValue });
+      expect(wrapper.classes()).toContain(expectedClass);
+    });
+  });
+
+  it('warns when trim is not recognized', () => {
+    const warnSpy = vi.spyOn(console, 'warn').mockImplementation(() => {});
+
+    const wrapper = mountComponent({ trim: 'invalid-trim' });
+
+    expect(warnSpy).toHaveBeenCalledWith(expect.stringContaining('Unsupported trim "invalid-trim"'));
+    expect(wrapper.classes()).not.toContain('d-text--trim-invalid-trim');
+  });
+
+  it('stacks wrap and trim modifiers with other modifiers', () => {
+    const wrapper = mountComponent({
+      kind: 'headline',
+      size: 'lg',
+      wrap: 'balance',
+      trim: 'both',
+    });
+
+    expect(wrapper.classes()).toEqual(expect.arrayContaining([
+      'd-text',
+      'd-headline--lg',
+      TEXT_WRAP_MODIFIERS.balance,
+      TEXT_TRIM_MODIFIERS.both,
+    ]));
+  });
+
+  it('has data-qa attribute', () => {
+    const wrapper = mountComponent();
+
+    expect(wrapper.attributes('data-qa')).toBe('dt-text');
   });
 
   it('matches documented typography utility classes from type.json', () => {

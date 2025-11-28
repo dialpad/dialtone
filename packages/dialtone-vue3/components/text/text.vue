@@ -1,6 +1,7 @@
 <template>
   <component
     :is="as"
+    data-qa="dt-text"
     :class="textClasses"
     :style="textStyles"
   >
@@ -26,6 +27,8 @@ import {
   TEXT_NUMERIC_CLASS,
   TEXT_TRUNCATE_CLASS,
   TEXT_LINE_CLAMP_CLASS,
+  TEXT_WRAP_MODIFIERS,
+  TEXT_TRIM_MODIFIERS,
 } from './text_constants';
 
 const DEFAULT_SIZE = 'md';
@@ -139,6 +142,30 @@ export default {
       type: String,
       default: null,
     },
+
+    /**
+     * Controls text wrapping behavior.
+     * @values wrap, nowrap, balance, pretty
+     */
+    wrap: {
+      type: String,
+      default: null,
+      validator: (value) => {
+        return value === null || Object.prototype.hasOwnProperty.call(TEXT_WRAP_MODIFIERS, value);
+      },
+    },
+
+    /**
+     * Controls leading space trimming. Useful for tight component layouts.
+     * @values start, end, both
+     */
+    trim: {
+      type: String,
+      default: null,
+      validator: (value) => {
+        return value === null || Object.prototype.hasOwnProperty.call(TEXT_TRIM_MODIFIERS, value);
+      },
+    },
   },
 
   computed: {
@@ -173,6 +200,16 @@ export default {
 
       if (this.maxLines) {
         classes.push(TEXT_LINE_CLAMP_CLASS);
+      }
+
+      const wrapClass = this.getWrapClass();
+      if (wrapClass) {
+        classes.push(wrapClass);
+      }
+
+      const trimClass = this.getTrimClass();
+      if (trimClass) {
+        classes.push(trimClass);
       }
 
       return classes;
@@ -268,6 +305,34 @@ export default {
       }
 
       return `${TEXT_TONE_PREFIX}${this.tone}`;
+    },
+
+    getWrapClass () {
+      if (!this.wrap) {
+        return null;
+      }
+
+      const wrapClass = TEXT_WRAP_MODIFIERS[this.wrap];
+      if (!wrapClass) {
+        console.warn(`[DtText] Unsupported wrap "${this.wrap}".`);
+        return null;
+      }
+
+      return wrapClass;
+    },
+
+    getTrimClass () {
+      if (!this.trim) {
+        return null;
+      }
+
+      const trimClass = TEXT_TRIM_MODIFIERS[this.trim];
+      if (!trimClass) {
+        console.warn(`[DtText] Unsupported trim "${this.trim}".`);
+        return null;
+      }
+
+      return trimClass;
     },
   },
 };

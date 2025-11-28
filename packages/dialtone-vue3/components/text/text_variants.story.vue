@@ -277,6 +277,77 @@
             {{ alignExample.copy }}
           </dt-text>
         </dt-stack>
+        <dt-stack gap="300">
+          <dt-text
+            kind="label"
+            size="sm"
+            tone="muted"
+          >
+            Wrap
+          </dt-text>
+          <dt-stack
+            direction="row"
+            gap="400"
+            class="d-fw-wrap"
+          >
+            <div
+              v-for="wrapExample in wrapExamples"
+              :key="wrapExample.wrap"
+              class="d-w128 d-ba d-bc-subtle d-bas-dashed d-p8"
+            >
+              <dt-text
+                kind="headline"
+                size="md"
+                :wrap="wrapExample.wrap"
+              >
+                {{ wrapExample.copy }}
+              </dt-text>
+              <dt-text
+                kind="helper"
+                size="sm"
+                tone="muted"
+              >
+                wrap="{{ wrapExample.wrap }}"
+              </dt-text>
+            </div>
+          </dt-stack>
+        </dt-stack>
+        <dt-stack gap="300">
+          <dt-text
+            kind="label"
+            size="sm"
+            tone="muted"
+          >
+            Trim
+          </dt-text>
+          <dt-stack
+            direction="row"
+            gap="400"
+          >
+            <div
+              v-for="trimExample in trimExamples"
+              :key="trimExample.trim"
+              class="d-ba d-bc-subtle d-bas-dashed"
+            >
+              <dt-text
+                kind="headline"
+                size="lg"
+                :trim="trimExample.trim"
+                class="d-bgc-gold-200"
+              >
+                {{ trimExample.copy }}
+              </dt-text>
+              <dt-text
+                kind="helper"
+                size="sm"
+                tone="muted"
+                class="d-px8"
+              >
+                trim="{{ trimExample.trim }}"
+              </dt-text>
+            </div>
+          </dt-stack>
+        </dt-stack>
       </dt-stack>
     </section>
   </dt-stack>
@@ -328,6 +399,23 @@ export default {
         { align: 'center', copy: 'Center aligned text works well for callouts.' },
         { align: 'end', copy: 'End aligned text pairs nicely with numeric values.' },
         { align: 'justify', copy: 'Justified text distributes words evenly across the width.' },
+      ];
+    },
+
+    wrapExamples () {
+      return [
+        { wrap: 'wrap', copy: 'Default wrapping behavior for text content' },
+        { wrap: 'nowrap', copy: 'No wrapping allowed here' },
+        { wrap: 'balance', copy: 'Balanced lines for better visual appeal' },
+        { wrap: 'pretty', copy: 'Pretty wrap avoids orphans and widows' },
+      ];
+    },
+
+    trimExamples () {
+      return [
+        { trim: 'start', copy: 'Trim Start' },
+        { trim: 'end', copy: 'Trim End' },
+        { trim: 'both', copy: 'Trim Both' },
       ];
     },
   },

@@ -16,26 +16,23 @@ image: assets/images/components/text.png
 
 ## Usage
 
-Use in place of manually applying Text Styles. Examples of manual application you should avoid include:
-
-* Applying Text Styles classes, e.g. `class="d-body--md"`
-* Combinations of CSS Utilities, e.g. `class="d-fs-300 d-fw-semibold d-lh-300"`
-* Custom CSS, e.g. `.foo { font: var(--dt-typography-body-md); }`.
-
-### Structure
-
 <code-example-tabs
 vueCode='
 <dt-text {{props}}> ... </dt-text>
 '
 />
 
+Use in place of manually applying Text Styles. Examples of manual application you should avoid include:
+
+* Applying Text Styles classes, e.g. `class="d-body--md"`
+* Combinations of CSS Utilities, e.g. `class="d-fs-300 d-fw-semibold d-lh-300"`
+* Custom CSS, e.g. `.foo { font: var(--dt-typography-body-md); }`.
+
 ### Guidance
 
 * Prefer `DtText` over individual typography utility classes to keep implementations aligned with token updates.
 * Use the default slot for rich content. The `text` prop provides a simple fallback string when no slot content is present.
 * Choose the `as` prop to match the semantic HTML element (e.g., `h1`, `label`, `p`).
-* Match responsive layout needs by combining `DtText` with layout primitives like [`DtStack`](stack.md).
 * All properties are optional, as they layer in on top of each other.
 
 <dialtone-usage>
@@ -205,7 +202,7 @@ vueCode='
 
 ### Density
 
-Density prop only applies to `headline` and `body` kinds.
+The `density` prop maps to the `line-height` style property, and only applies to `headline` and `body` kinds.
 
 <code-well-header>
   <dt-stack class="d-w100p d-ba d-bar4">
@@ -268,6 +265,8 @@ vueCode='
 ' />
 
 ### Strength
+
+The `strength` prop maps to the `font-weight` style property.
 
 `strength="soft"` only applies to select sizes of `headline` kind, and `strength="plain"` only applies to select sizes of `label` kind.
 
@@ -354,6 +353,8 @@ vueCode='
 
 ### Numeric
 
+The `numeric` prop applies styles that ensure that each number is set with consistent width, making them align properly when displayed together. Ideal for displaying aligned data such as phone numbers or numbers in a table.
+
 <code-well-header>
   <dt-stack direction="row" gap="500">
     <dt-stack gap="500" class="d-jc-space-between d-ai-baseline">
@@ -383,7 +384,7 @@ vueCode='
 
 ## Tone
 
-Use `tone` to declare the text tone, as a foreground color. By default, the tone is inherited from its parent.
+Use `tone` to declare the text's tone, which will map to a foreground color. By default, the tone is inherited from its parent.
 
 <code-well-header>
   <dt-stack gap="500" direction="row">
@@ -423,7 +424,7 @@ vueCode='
 
 ## As
 
-Use `as` to declare and render the underlying HTML tag or component, independent of the visual styling. Defaults to `span`.
+Use `as` to declare the underlying HTML tag that the component should render, independent of the visual styling. Defaults to `span`.
 
 <code-well-header>
   <dt-stack class="d-w100p" gap="500">
@@ -462,10 +463,10 @@ vueCode='
 
 ## Align
 
-Since `DtText`'s default element is a `<span>`, the `align` prop will only work if its element is in block or inline-block context, e.g. `<div>...</div>`.
+Since `DtText`'s default element is a `<span>`, which is inline by default, the `align` prop will only work if its element is styled in a block context.
 
 <code-well-header>
-  <dt-stack class="d-w100p" gap="500">
+  <dt-stack class="d-w100p" gap="600">
     <div class="d-ba d-bc-subtle d-bas-dashed">
       <dt-text as="p" align="start">Welcome to Dialpad, the most modern, AI-powered business communications platform. We've taken every form of communication that you rely on and unified it into one app. </dt-text>
     </div>
@@ -570,11 +571,80 @@ vueCode='
   </dt-stack>
 </code-well-header>
 
+## Wrap
+
+Control text wrapping behavior. Particularly useful for headlines where balanced line lengths improve readability.
+
+<code-well-header>
+  <dt-stack class="d-w100p" gap="500">
+    <dt-stack gap="600" align="start">
+      <dt-text as="p"><strong>Default</strong>. Lorem ipsum dolor sit amet consectetur adipisicing consequatur deleniti non doloremque autem adipisci in omnis voluptatibus aut aperiam magnam ea nihil dolores officia quos, dolore praesentium expedita</dt-text>
+      <dt-text as="p" wrap="balance"><strong>Balance</strong>. Lorem ipsum dolor sit amet consectetur adipisicing consequatur deleniti non doloremque autem adipisci in omnis voluptatibus aut aperiam magnam ea nihil dolores officia quos, dolore praesentium expedita</dt-text>
+      <dt-text as="p" wrap="pretty"><strong>Pretty</strong>. Lorem ipsum dolor sit amet consectetur adipisicing consequatur deleniti non doloremque autem adipisci in omnis voluptatibus aut aperiam magnam ea nihil dolores officia quos, dolore praesentium expedita</dt-text>
+      <dt-text as="p" wrap="nowrap"><strong>No Wrap</strong>. Lorem ipsum dolor sit amet consectetur adipisicing consequatur deleniti non doloremque autem adipisci in omnis voluptatibus aut aperiam magnam ea nihil dolores officia quos, dolore praesentium expedita</dt-text>
+    </dt-stack>
+  </dt-stack>
+</code-well-header>
+
+<code-example-tabs
+vueCode='
+<dt-text>....</dt-text>
+<dt-text wrap="balance">....</dt-text>
+<dt-text wrap="pretty">....</dt-text>
+<dt-text wrap="nowrap">....</dt-text>
+' />
+
+## Trim
+
+Remove extra leading space above and/or below text. Useful for tight component layouts where text needs to align precisely with adjacent elements.
+
+Trim will only effect block-level elements, and has no effect on elements that have a inline-level styled context.
+
+<dt-notice
+  kind="warning"
+  class="d-wmx100p d-my24"
+  hide-close
+>
+
+  Trim requires modern browser support for `text-box-trim`, Chrome 133+, Edge 132+, Safari 18.2+ as of November 2025. Otherwise, it will gracefully fallback to default rendering with half-leading above and below.
+</dt-notice>
+
+<code-well-header>
+  <dt-stack gap="500" direction="row">
+    <dt-text as="p" class="d-bgc-moderate-opaque"><strong>No trim:</strong> lorem ipsum dolor sit amet</dt-text>
+    <dt-text as="p" trim="start" class="d-bgc-moderate-opaque"><strong>Trim start:</strong> lorem ipsum dolor sit amet</dt-text>
+    <dt-text as="p" trim="end" class="d-bgc-moderate-opaque"><strong>Trim end:</strong> lorem ipsum dolor sit amet</dt-text>
+    <dt-text as="p" trim="both" class="d-bgc-moderate-opaque"><strong>Trim both:</strong> lorem ipsum dolor sit amet</dt-text>
+  </dt-stack>
+</code-well-header>
+
+<code-example-tabs
+vueCode='
+<dt-text as="p" trim="start">....</dt-text>
+<dt-text as="p" trim="end">....</dt-text>
+<dt-text as="p" trim="both">....</dt-text>
+' />
+
+<dialtone-usage>
+<template #do>
+
+* Use `trim="both"` when text needs to align flush with container's top and/or bottom edges.
+* Combine with `density="compact"` for maximum space efficiency.
+
+</template>
+<template #dont>
+
+* Apply trim to body copy that benefits from natural line spacing.
+* Use trim as a substitute for proper layout spacing.
+
+</template>
+</dialtone-usage>
+
 ## Accessibility
 
 * Maintain semantic structure via `as` (e.g., screen readers expect heading levels to be sequential).
-* When using `truncate`, provide another way to access the full content (tooltip, detail view, or explicit `aria-label`). `DtText` does not apply a `title` attribute automatically, so consuming applications should opt in.
-* Allow numeric content to remain readable by enabling the `numeric` prop when aligning tables or counters.
+* When using `truncate`, provide another way to access the full content (tooltip, detail view, or explicit `aria-label`). `DtText` does not apply alternative access to the full string, so consuming applications should opt in.
+* Allow numeric content to remain readable by enabling the `numeric` prop when aligning tables or numbers that dynamically update.
 
 ## Vue API
 

@@ -3,15 +3,17 @@
 //
 //  TABLE OF CONTENTS
 //  • BASE STYLE
+//  • ALIGNMENT
+//  • NUMERIC
 //  • LINE CLAMP
+//  • WRAP
+//  • TRIM
 //
 .d-text {
   //  ============================================================================
   //  $   BASE STYLE
   //  ----------------------------------------------------------------------------
-  & {
-    color: inherit;
-  }
+  color: inherit;
 
   //  ============================================================================
   //  $   ALIGNMENT
@@ -40,14 +42,6 @@
   //  ----------------------------------------------------------------------------
 
   &--numeric {
-    font-variant-numeric: tabular-nums;
-  }
-
-  //  ============================================================================
-  //  $   NUMERIC
-  //  ----------------------------------------------------------------------------
-
-  &--numeric {
     &.d-text { // tick up specificity to overcome `font` property of `d-body-[variant]`, `d-header-[variant]`, etc.
       font-variant-numeric: tabular-nums;
     }
@@ -64,5 +58,50 @@
     -webkit-line-clamp: var(--dt-text-line-clamp);
     -webkit-box-orient: vertical;
     overflow: hidden;
+  }
+
+  //  ============================================================================
+  //  $   WRAP
+  //  ----------------------------------------------------------------------------
+
+  &--wrap {
+    &-wrap {
+      text-wrap: wrap;
+    }
+
+    &-nowrap {
+      text-wrap: nowrap;
+    }
+
+    &-balance {
+      text-wrap: balance;
+    }
+
+    &-pretty {
+      text-wrap: pretty;
+    }
+  }
+
+  //  ============================================================================
+  //  $   TRIM (Leading Space Control)
+  //  ----------------------------------------------------------------------------
+  //  Uses native CSS text-box-trim with cap/alphabetic metrics.
+  //  @see https://developer.mozilla.org/en-US/docs/Web/CSS/text-box-trim
+
+  &--trim {
+    &-start {
+      text-box-trim: trim-start;
+      text-box-edge: cap alphabetic;
+    }
+
+    &-end {
+      text-box-trim: trim-end;
+      text-box-edge: cap alphabetic;
+    }
+
+    &-both {
+      text-box-trim: trim-both;
+      text-box-edge: cap alphabetic;
+    }
   }
 }
