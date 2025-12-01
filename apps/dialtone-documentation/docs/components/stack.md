@@ -1452,7 +1452,7 @@ Resize your browser to see the justification change at different breakpoints.
 
 ## Migrating from Flex CSS Utilities
 
-View the [Migrating from Flex CSS Utilities to DtStack](/about/whats-new/posts/2025-11-24) for more details.
+View the [Migrating from Flex CSS Utilities to DtStack](/about/whats-new/posts/2025-12-02) for more details.
 
 ## Vue API
 

@@ -10,7 +10,7 @@
       DtStack
     </router-link>
     component for most Flex-based layout implementations. View
-    <router-link class="d-link d-link--muted" to="/about/whats-new/posts/2025-11-24">
+    <router-link class="d-link d-link--muted" to="/about/whats-new/posts/2025-12-02">
       Migrating from Flex CSS Utilities to DtStack
     </router-link>
     for more details.
