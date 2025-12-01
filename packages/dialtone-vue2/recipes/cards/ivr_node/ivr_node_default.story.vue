@@ -45,7 +45,11 @@
         </dt-button>
       </div>
       <div v-if="transfer">
-        <div class="d-d-flex d-ai-center d-gg8">
+        <dt-stack
+          direction="row"
+          align="center"
+          gap="400"
+        >
           <dt-avatar
             full-name="Person Avatar"
             :image-src="$attrs.defaultImage"
@@ -53,7 +57,7 @@
             seed="seed"
           />
           <p>Carolina Garcia Rodriguez</p>
-        </div>
+        </dt-stack>
       </div>
       <div v-if="hangup || branch || goTo || assign || customerData">
         <p class="d-fw-bold">
@@ -144,6 +148,7 @@ import { DtButton } from '@/components/button';
 import { DtAvatar } from '@/components/avatar';
 import { DtListItem } from '@/components/list_item';
 import { DtKeyboardShortcut } from '@/components/keyboard_shortcut';
+import { DtStack } from '@/components/stack';
 
 export default {
   name: 'DtRecipeIvrNodeDefault',
@@ -154,6 +159,7 @@ export default {
     DtAvatar,
     DtListItem,
     DtKeyboardShortcut,
+    DtStack,
   },
 
   computed: {
