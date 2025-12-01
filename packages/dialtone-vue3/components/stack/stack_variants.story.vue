@@ -210,13 +210,12 @@
         <dt-stack gap="500">
           <div>
             <h4 class="d-headline--lg d-mb8">
-              Normal (default)
+              Default (no align specified - uses CSS implicit: center for row)
             </h4>
             <div class="d-ba d-bc-default d-p16 d-bar8">
               <dt-stack
                 direction="row"
                 gap="400"
-                align="normal"
               >
                 <dt-stack class="d-bgc-moderate-opaque d-bar8 d-p8">
                   Stack item 1

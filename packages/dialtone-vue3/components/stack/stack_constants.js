@@ -30,7 +30,7 @@ export const DT_STACK_GAP = ['0', '50', '100', '200', '300', '350', '400', '450'
  * Uses array format - simpler structure for newer props.
  * @type {string[]}
  */
-export const DT_STACK_ALIGN = ['normal', 'start', 'center', 'end', 'stretch', 'baseline'];
+export const DT_STACK_ALIGN = ['start', 'center', 'end', 'stretch', 'baseline'];
 
 /**
  * Justify values for the stack component (main-axis distribution).

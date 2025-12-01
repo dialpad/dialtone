@@ -24,6 +24,7 @@ export function gapValidator (gap) {
 }
 
 export function alignValidator (align) {
+  if (align === undefined) return true;
   if (typeof align === 'string') {
     return DT_STACK_ALIGN.includes(align);
   }

@@ -15,7 +15,7 @@ export const argsData = {
   direction: { default: 'column' },
   as: 'div',
   gap: { default: '400' },
-  align: { default: 'normal' },
+  // align is optional, no default value
   justify: { default: 'start' },
 };
 
@@ -74,7 +74,8 @@ Object: { "default": "400", "sm": "200", "lg": "450" }`,
         Align Values: "${DT_STACK_ALIGN}"
 Breakpoints: "${DT_STACK_RESPONSIVE_BREAKPOINTS}"
 String: "center"
-Object: { "default": "normal", "sm": "center", "lg": "end" }`,
+Object: { "default": "start", "sm": "center", "lg": "end" }
+Note: If not specified, alignment uses CSS implicit behavior (stretch for column, center for row).`,
       },
     },
   },

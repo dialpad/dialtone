@@ -1,3 +1,11 @@
+## [9.149.1](https://github.com/dialpad/dialtone/compare/dialtone/v9.149.0...dialtone/v9.149.1) (2025-11-26)
+
+
+### Bug Fixes
+
+* **Docs:** NO-JIRA docs cleanup for avatar, split button, modal, svg colors ([#981](https://github.com/dialpad/dialtone/issues/981)) ([be83389](https://github.com/dialpad/dialtone/commit/be83389ed1d364713c3a8704ef7487f797e0d3f7))
+* **Stack:** NO-JIRA correct stack's default alignment ([#980](https://github.com/dialpad/dialtone/issues/980)) ([4323a26](https://github.com/dialpad/dialtone/commit/4323a26179445eaaae36bb21b72bbf65e7c08d11))
+
 # [9.149.0](https://github.com/dialpad/dialtone/compare/dialtone/v9.148.0...dialtone/v9.149.0) (2025-11-25)
 
 
