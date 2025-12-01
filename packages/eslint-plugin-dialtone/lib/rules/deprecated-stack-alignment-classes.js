@@ -1,7 +1,7 @@
 /**
  * @fileoverview Recommends using props instead of CSS utilities on Stack component
  */
-"use strict";
+'use strict';
 
 //------------------------------------------------------------------------------
 // Constants
@@ -30,7 +30,7 @@ module.exports = {
   meta: {
     type: 'suggestion',
     docs: {
-      description: "Recommend using props instead of CSS utilities on Stack component",
+      description: 'Recommend using props instead of CSS utilities on Stack component',
       recommended: false,
       url: 'https://github.com/dialpad/dialtone/blob/staging/packages/eslint-plugin-dialtone/docs/rules/deprecated-stack-alignment-classes.md',
     },
@@ -48,13 +48,14 @@ module.exports = {
   create(context) {
     const sourceCode = context.sourceCode ?? context.getSourceCode();
     return sourceCode.parserServices.defineTemplateBodyVisitor({
+       
       VElement(node) {
         // Check if element is dt-stack or DtStack
         const elementName = node.name || node.rawName;
         if (elementName === 'dt-stack' || elementName === 'DtStack') {
           // Find class attribute
           const classAttr = node.startTag.attributes.find(
-            attr => attr.key && attr.key.name === 'class'
+            attr => attr.key && attr.key.name === 'class',
           );
 
           if (classAttr && classAttr.value && classAttr.value.value) {
@@ -103,7 +104,7 @@ module.exports = {
             }
           }
         }
-      }
+      },
     });
-  }
+  },
 };

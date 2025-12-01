@@ -1,7 +1,7 @@
 /**
  * @fileoverview Prefer DtStack component over flex utility classes
  */
-"use strict";
+'use strict';
 
 //------------------------------------------------------------------------------
 // Rule Definition
@@ -12,7 +12,7 @@ module.exports = {
   meta: {
     type: 'suggestion',
     docs: {
-      description: "Prefer DtStack component over flex utility classes",
+      description: 'Prefer DtStack component over flex utility classes',
       recommended: false,
       url: 'https://github.com/dialpad/dialtone/blob/staging/packages/eslint-plugin-dialtone/docs/rules/prefer-stack-over-flex.md',
     },
@@ -34,7 +34,7 @@ module.exports = {
 
         // Find class attribute
         const classAttr = node.startTag.attributes.find(
-          attr => attr.key && attr.key.name === 'class'
+          attr => attr.key && attr.key.name === 'class',
         );
 
         if (classAttr && classAttr.value && classAttr.value.value) {
@@ -68,7 +68,7 @@ module.exports = {
             });
           }
         }
-      }
+      },
     });
-  }
+  },
 };
