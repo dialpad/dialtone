@@ -1,7 +1,7 @@
 <template>
   <dt-tab-group class="code-example-tab-group" @change="selectedPanelId = $event.selected">
     <template #tabs>
-      <dt-stack direction="row" justify="between" align="start" class="d-w100p" data-migrate-outline>
+      <dt-stack direction="row" justify="between" align="start" class="d-w100p">
         <div>
           <dt-tab
             :id="vueTabId"

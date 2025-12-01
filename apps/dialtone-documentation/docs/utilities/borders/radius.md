@@ -88,7 +88,7 @@ Use `d-b{a|t|r|b|l}r-circle` to change the border radius of your element to a ci
     gap="400"
     :direction="{ 'default': 'column', 'md': 'row' }"
    >
-    <dt-stack direction="row" align="center" justify="center" class="d-p16 d-h128 d-w128 d-ba d-baw2 d-bc-default d-bgc-primary d-ws-nowrap d-bar-circle" data-migrate-outline>
+    <dt-stack direction="row" align="center" justify="center" class="d-p16 d-h128 d-w128 d-ba d-baw2 d-bc-default d-bgc-primary d-ws-nowrap d-bar-circle">
       d-bar-circle
     </dt-stack>
   </dt-stack>
@@ -112,7 +112,7 @@ Use `d-b{a|t|r|b|l}r-circle` to change the border radius of your element to a ci
       <tr v-for="(val, token) in {'--dt-size-radius-0': '0', '--dt-size-radius-100': '1', '--dt-size-radius-200': '2', '--dt-size-radius-300': '4', '--dt-size-radius-400': '8', '--dt-size-radius-450': '12', '--dt-size-radius-500': '16', '--dt-size-550': '24', '--dt-size-radius-600': '32', '--dt-size-radius-circle': '-circle', '--dt-size-radius-pill': '-pill'}">
         <th scope="row" class="d-code--sm d-docsite-code">.d-b{{ i }}r{{ val }}</th>
         <td>
-          <dt-stack direction="row" justify="between" align="center" data-migrate-outline>
+          <dt-stack direction="row" justify="between" align="center">
             <div class="d-fl-grow1 d-code--sm">
               <span v-if="i === 'a'">border-radius: var({{ token }}) !important;</span>
               <span v-else-if="i === 't'">

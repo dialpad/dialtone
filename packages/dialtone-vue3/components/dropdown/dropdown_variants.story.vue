@@ -3,7 +3,6 @@
     <dt-stack
       direction="row"
       class="d-mb12"
-      data-migrate-outline
     >
       <dt-dropdown
         v-for="(variant, i) in variants.placement"
@@ -182,7 +181,7 @@
         </template>
       </dt-dropdown>
     </dt-stack>
-    <dt-stack data-migrate-outline>
+    <dt-stack>
       <p class="d-fw-bold d-mb2">
         Context menu
       </p>
@@ -191,7 +190,6 @@
       </p>
       <dt-stack
         direction="row"
-        data-migrate-outline
       >
         <dt-dropdown
           class="d-mr8"

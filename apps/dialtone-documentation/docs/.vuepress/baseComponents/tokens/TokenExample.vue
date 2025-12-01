@@ -6,7 +6,6 @@
     align="center"
     class="d-bar4 d-h32 colorRectangle"
     :style="getColorStyle"
-    data-migrate-outline
   >
     <div v-if="isForeground || isLink" :class="['d-headline--lg', { 'link-example': isLink }]">
       Aa
@@ -18,7 +17,6 @@
     justify="center"
     align="center"
     class="d-h32"
-    data-migrate-outline
   >
     <div :style="getTypographyStyle">
       Aa

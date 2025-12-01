@@ -1,6 +1,6 @@
 <template>
-  <dt-stack as="aside" data-migrate-outline>
-    <dt-stack v-if="stops.length" as="header" direction="row" justify="between" class="d-ai-end" data-migrate-outline>
+  <dt-stack as="aside">
+    <dt-stack v-if="stops.length" as="header" direction="row" justify="between" class="d-ai-end">
       <h4
         class="d-docsite--header-3 d-tt-capitalize"
         tabindex="-1"
@@ -24,7 +24,7 @@
         <br>
         <span v-text="stop.value" />
       </div>
-      <dt-stack class="d-fs-100 d-lh2 d-fw-bold d-bar-sm d-px4 py2" data-migrate-outline>
+      <dt-stack class="d-fs-100 d-lh2 d-fw-bold d-bar-sm d-px4 py2">
         <span
           v-if="stop.primaryContrast >= minAAContrastRatio"
           :class="fontColorMap[mode].primary"

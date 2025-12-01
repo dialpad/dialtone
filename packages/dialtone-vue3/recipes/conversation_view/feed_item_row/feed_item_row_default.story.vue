@@ -69,7 +69,6 @@
             direction="row"
             align="center"
             class="d-fs-100 d-lh200"
-            data-migrate-outline
           >
             <a class="d-link d-pr4">3 replies</a>
             <span class="feed-item-row__reply">Last reply an hour ago</span>
@@ -109,7 +108,6 @@
         direction="row"
         class="d-bgc-primary d-bar-pill d-bc-default d-ba"
         role="group"
-        data-migrate-outline
       >
         <dt-button
           v-for="button of hoverButtons"

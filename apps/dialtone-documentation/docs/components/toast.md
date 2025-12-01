@@ -9,7 +9,7 @@ figma_url: https://www.figma.com/design/W58r5BkO8qTw3vem9YieJd/DT9-Component-Lib
 ---
 
 <code-well-header>
-  <dt-stack direction="row" justify="center" data-migrate-outline>
+  <dt-stack direction="row" justify="center">
     <example-toast show title="Title" class="d-ps-relative d-zi-base d-t0" :fixed="false" />
   </dt-stack>
 </code-well-header>

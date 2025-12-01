@@ -2,19 +2,16 @@
   <dt-stack
     gap="550"
     class="d-p24"
-    data-migrate-outline
   >
     <dt-stack
       v-for="mode in animationModes"
       :key="mode.value"
       gap="400"
-      data-migrate-outline
     >
       <dt-stack
         direction="row"
         align="center"
         justify="between"
-        data-migrate-outline
       >
         <h3 class="d-headline--md">
           {{ mode.label }} Mode
@@ -36,7 +33,6 @@
         direction="row"
         align="center"
         class="d-p24 d-bar8 d-ba d-bc-subtle d-bgc-secondary d-hmn128"
-        data-migrate-outline
       >
         <dt-recipe-motion-text
           :ref="el => { if (el) modeRefs[mode.value] = el }"

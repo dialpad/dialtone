@@ -8,7 +8,6 @@
       direction="row"
       justify="center"
       class="d-w100p d-mb64 d-mt32"
-      data-migrate-outline
     >
       <dt-button
         id="external-tooltip-anchor"
@@ -25,7 +24,6 @@
       justify="center"
       align="center"
       class="d-mb128"
-      data-migrate-outline
     >
       <div
         v-for="direction in rowDirection"
@@ -55,7 +53,6 @@
       justify="center"
       align="center"
       class="d-w100p"
-      data-migrate-outline
     >
       <div id="circle-button-tooltip-label">
         Circle button tooltip
@@ -86,7 +83,6 @@
       direction="row"
       justify="center"
       class="d-w100p"
-      data-migrate-outline
     >
       <!-- Text -->
       <dt-tooltip
@@ -106,7 +102,6 @@
       direction="row"
       justify="center"
       class="d-w100p"
-      data-migrate-outline
     >
       <!-- Open state -->
       <dt-tooltip
@@ -129,7 +124,6 @@
       direction="row"
       justify="center"
       class="d-w100p"
-      data-migrate-outline
     >
       <!-- Custom Theme -->
       <dt-tooltip
@@ -152,7 +146,6 @@
       direction="row"
       justify="center"
       class="d-bgc-purple-600 d-pt64"
-      data-migrate-outline
     >
       <div class="d-py64">
         <!-- Inverted state -->

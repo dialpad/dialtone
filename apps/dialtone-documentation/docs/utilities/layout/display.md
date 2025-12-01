@@ -8,31 +8,31 @@ description: Utilities for controlling the display box type of an element.
 <code-well-header>
   <dt-stack gap="500" class="d-w100p">
     <div class="d-p8 d-ba d-baw4 d-bar4 d-bc-default d-bgc-moderate d-d-block">
-      <dt-stack direction="row" align="center" justify="center" class="d-fl1 d-as-stretch d-p8 d-bgc-moderate-opaque d-bar2 d-code--sm" data-migrate-outline>d-d-block</dt-stack>
+      <dt-stack direction="row" align="center" justify="center" class="d-fl1 d-as-stretch d-p8 d-bgc-moderate-opaque d-bar2 d-code--sm">d-d-block</dt-stack>
     </div>
     <div class="d-d-contents">
-      <dt-stack direction="row" align="center" justify="center" class="d-fl1 d-as-stretch d-p8 d-bgc-moderate-opaque d-bar2 d-code--sm" data-migrate-outline>d-d-contents</dt-stack>
+      <dt-stack direction="row" align="center" justify="center" class="d-fl1 d-as-stretch d-p8 d-bgc-moderate-opaque d-bar2 d-code--sm">d-d-contents</dt-stack>
     </div>
     <dt-stack direction="row" gap="400" class="d-p8 d-ba d-baw4 d-bar4 d-bc-default d-bgc-moderate">
       <div>
-        <dt-stack direction="row" align="center" justify="center" class="d-fl1 d-as-stretch d-p8 d-bgc-moderate-opaque d-bar2 d-code--sm d-d-inline-block" data-migrate-outline>d-d-inline-block</dt-stack>
+        <dt-stack direction="row" align="center" justify="center" class="d-fl1 d-as-stretch d-p8 d-bgc-moderate-opaque d-bar2 d-code--sm d-d-inline-block">d-d-inline-block</dt-stack>
       </div>
       <div>
-        <dt-stack direction="row" align="center" justify="center" class="d-fl1 d-as-stretch d-p8 d-bgc-moderate-opaque d-bar2 d-code--sm d-d-inline-block" data-migrate-outline>d-d-inline-block</dt-stack>
+        <dt-stack direction="row" align="center" justify="center" class="d-fl1 d-as-stretch d-p8 d-bgc-moderate-opaque d-bar2 d-code--sm d-d-inline-block">d-d-inline-block</dt-stack>
       </div>
       <div>
-        <dt-stack direction="row" align="center" justify="center" class="d-fl1 d-as-stretch d-p8 d-bgc-moderate-opaque d-bar2 d-code--sm d-d-inline-block" data-migrate-outline>d-d-inline-block</dt-stack>
+        <dt-stack direction="row" align="center" justify="center" class="d-fl1 d-as-stretch d-p8 d-bgc-moderate-opaque d-bar2 d-code--sm d-d-inline-block">d-d-inline-block</dt-stack>
       </div>
     </dt-stack>
     <dt-stack direction="row" gap="400" class="d-p8 d-ba d-baw4 d-bar4 d-bc-default d-bgc-moderate">
       <div>
-        <dt-stack direction="row" align="center" justify="center" class="d-fl1 d-as-stretch d-p4 d-bgc-moderate-opaque d-bar2 d-code--sm d-d-inline" data-migrate-outline>d-d-inline</dt-stack>
+        <dt-stack direction="row" align="center" justify="center" class="d-fl1 d-as-stretch d-p4 d-bgc-moderate-opaque d-bar2 d-code--sm d-d-inline">d-d-inline</dt-stack>
       </div>
       <div>
-        <dt-stack direction="row" align="center" justify="center" class="d-fl1 d-as-stretch d-p4 d-bgc-moderate-opaque d-bar2 d-code--sm d-d-inline" data-migrate-outline>d-d-inline</dt-stack>
+        <dt-stack direction="row" align="center" justify="center" class="d-fl1 d-as-stretch d-p4 d-bgc-moderate-opaque d-bar2 d-code--sm d-d-inline">d-d-inline</dt-stack>
       </div>
       <div>
-        <dt-stack direction="row" align="center" justify="center" class="d-fl1 d-as-stretch d-p4 d-bgc-moderate-opaque d-bar2 d-code--sm d-d-inline" data-migrate-outline>d-d-inline</dt-stack>
+        <dt-stack direction="row" align="center" justify="center" class="d-fl1 d-as-stretch d-p4 d-bgc-moderate-opaque d-bar2 d-code--sm d-d-inline">d-d-inline</dt-stack>
       </div>
     </dt-stack>
   </dt-stack>

@@ -16,7 +16,6 @@
         d-t64
         lg:d-d-none
       "
-      data-migrate-outline
     >
       <dt-breadcrumbs :breadcrumbs="breadcrumbs" />
       <dt-button
@@ -44,7 +43,6 @@
         d-px16
       "
       :class="{ 'd-o0 d-d-none': !isSiteNavOpen }"
-      data-migrate-outline
     >
       <sidebar-item
         v-for="item in sidebarItems"

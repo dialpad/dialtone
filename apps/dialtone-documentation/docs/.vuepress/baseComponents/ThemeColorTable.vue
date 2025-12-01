@@ -40,7 +40,6 @@
                 align="center"
                 justify="center"
                 title="Sample icon"
-                data-migrate-outline
               >
                 <dt-icon name="info" :style="{ color: `var(--${color.variable})` }" />
               </dt-stack>
@@ -49,7 +48,6 @@
                 direction="row"
                 align="center"
                 justify="center"
-                data-migrate-outline
               >
                 <dt-stack
                   direction="row"
@@ -60,7 +58,6 @@
                     color: `var(${color.variable})`,
                     'background-color': `var(--dt-shell-mention-color-background)`,
                   }"
-                  data-migrate-outline
                 >
                   Aa
                 </dt-stack>
@@ -70,7 +67,6 @@
                 direction="row"
                 align="center"
                 justify="center"
-                data-migrate-outline
               >
                 <div
                   :style="{ backgroundColor: `var(${color.variable})` }"

@@ -4,7 +4,6 @@
       direction="row"
       align="center"
       class="d-p8"
-      data-migrate-outline
     >
       <h1 class="d-fs-200 d-mx4">
         Active
@@ -18,7 +17,6 @@
       direction="row"
       align="center"
       class="d-p8"
-      data-migrate-outline
     >
       <h1 class="d-fs-200 d-mx4">
         Away
@@ -32,7 +30,6 @@
       direction="row"
       align="center"
       class="d-p8"
-      data-migrate-outline
     >
       <h1 class="d-fs-200 d-mx4">
         Busy
@@ -46,7 +43,6 @@
       direction="row"
       align="center"
       class="d-p8"
-      data-migrate-outline
     >
       <h1 class="d-fs-200 d-mx4">
         Offline

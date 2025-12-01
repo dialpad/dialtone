@@ -68,15 +68,15 @@ Use `fv:d-bgg-{from|to}-{color}` to change an element's background gradient star
 Use `d-bgg-(from|to)-o{n}` to change the opacity values of each gradient color stop. You can also change the opacity values of each gradient color stop on `:hover`, `:focus`, `:focus-visible` by using the respective `h:d-bgg-(from|to)-o{n}`, `f:d-bgg-(from|to)-o{n}`, `fv:d-bgg-(from|to)-o{n}` prefixes.
 
 <code-well-header>
-  <dt-stack direction="row" justify="between" align="center" class="d-p8 d-w100p d-h48 d-bar8 d-bgg-to-r d-bgg-from-purple-300 d-bgg-to-magenta-100 d-bgg-to-o0 d-fs-300 d-fw-bold" data-migrate-outline><span>100%</span><span>0%</span></dt-stack>
-  <dt-stack direction="row" justify="between" align="center" class="d-p8 d-w100p d-h48 d-bar8 d-bgg-to-r d-bgg-from-purple-300 d-bgg-from-o99 d-bgg-to-magenta-100 d-bgg-to-o10 d-fs-300 d-fw-bold" data-migrate-outline><span>99%</span><span>10%</span></dt-stack>
-  <dt-stack direction="row" justify="between" align="center" class="d-p8 d-w100p d-h48 d-bar8 d-bgg-to-r d-bgg-from-purple-300 d-bgg-from-o95 d-bgg-to-magenta-100 d-bgg-to-o25 d-fs-300 d-fw-bold" data-migrate-outline><span>95%</span><span>25%</span></dt-stack>
-  <dt-stack direction="row" justify="between" align="center" class="d-p8 d-w100p d-h48 d-bar8 d-bgg-to-r d-bgg-from-purple-300 d-bgg-from-o90 d-bgg-to-magenta-100 d-bgg-to-o50 d-fs-300 d-fw-bold" data-migrate-outline><span>90%</span><span>50%</span></dt-stack>
-  <dt-stack direction="row" justify="between" align="center" class="d-p8 d-w100p d-h48 d-bar8 d-bgg-to-r d-bgg-from-purple-300 d-bgg-from-o75 d-bgg-to-magenta-100 d-bgg-to-o75 d-fs-300 d-fw-bold" data-migrate-outline><span>75%</span><span>75%</span></dt-stack>
-  <dt-stack direction="row" justify="between" align="center" class="d-p8 d-w100p d-h48 d-bar8 d-bgg-to-r d-bgg-from-purple-300 d-bgg-from-o50 d-bgg-to-magenta-100 d-bgg-to-o90 d-fs-300 d-fw-bold" data-migrate-outline><span>50%</span><span>90%</span></dt-stack>
-  <dt-stack direction="row" justify="between" align="center" class="d-p8 d-w100p d-h48 d-bar8 d-bgg-to-r d-bgg-from-purple-300 d-bgg-from-o25 d-bgg-to-magenta-100 d-bgg-to-o95 d-fs-300 d-fw-bold" data-migrate-outline><span>25%</span><span>95%</span></dt-stack>
-  <dt-stack direction="row" justify="between" align="center" class="d-p8 d-w100p d-h48 d-bar8 d-bgg-to-r d-bgg-from-purple-300 d-bgg-from-o10 d-bgg-to-magenta-100 d-bgg-to-o99 d-fs-300 d-fw-bold" data-migrate-outline><span>10%</span><span>99%</span></dt-stack>
-  <dt-stack direction="row" justify="between" align="center" class="d-p8 d-w100p d-h48 d-bar8 d-bgg-to-r d-bgg-from-purple-300 d-bgg-from-o0 d-bgg-to-magenta-100 d-fs-300 d-fw-bold" data-migrate-outline><span>0%</span><span>100%</span></dt-stack>
+  <dt-stack direction="row" justify="between" align="center" class="d-p8 d-w100p d-h48 d-bar8 d-bgg-to-r d-bgg-from-purple-300 d-bgg-to-magenta-100 d-bgg-to-o0 d-fs-300 d-fw-bold"><span>100%</span><span>0%</span></dt-stack>
+  <dt-stack direction="row" justify="between" align="center" class="d-p8 d-w100p d-h48 d-bar8 d-bgg-to-r d-bgg-from-purple-300 d-bgg-from-o99 d-bgg-to-magenta-100 d-bgg-to-o10 d-fs-300 d-fw-bold"><span>99%</span><span>10%</span></dt-stack>
+  <dt-stack direction="row" justify="between" align="center" class="d-p8 d-w100p d-h48 d-bar8 d-bgg-to-r d-bgg-from-purple-300 d-bgg-from-o95 d-bgg-to-magenta-100 d-bgg-to-o25 d-fs-300 d-fw-bold"><span>95%</span><span>25%</span></dt-stack>
+  <dt-stack direction="row" justify="between" align="center" class="d-p8 d-w100p d-h48 d-bar8 d-bgg-to-r d-bgg-from-purple-300 d-bgg-from-o90 d-bgg-to-magenta-100 d-bgg-to-o50 d-fs-300 d-fw-bold"><span>90%</span><span>50%</span></dt-stack>
+  <dt-stack direction="row" justify="between" align="center" class="d-p8 d-w100p d-h48 d-bar8 d-bgg-to-r d-bgg-from-purple-300 d-bgg-from-o75 d-bgg-to-magenta-100 d-bgg-to-o75 d-fs-300 d-fw-bold"><span>75%</span><span>75%</span></dt-stack>
+  <dt-stack direction="row" justify="between" align="center" class="d-p8 d-w100p d-h48 d-bar8 d-bgg-to-r d-bgg-from-purple-300 d-bgg-from-o50 d-bgg-to-magenta-100 d-bgg-to-o90 d-fs-300 d-fw-bold"><span>50%</span><span>90%</span></dt-stack>
+  <dt-stack direction="row" justify="between" align="center" class="d-p8 d-w100p d-h48 d-bar8 d-bgg-to-r d-bgg-from-purple-300 d-bgg-from-o25 d-bgg-to-magenta-100 d-bgg-to-o95 d-fs-300 d-fw-bold"><span>25%</span><span>95%</span></dt-stack>
+  <dt-stack direction="row" justify="between" align="center" class="d-p8 d-w100p d-h48 d-bar8 d-bgg-to-r d-bgg-from-purple-300 d-bgg-from-o10 d-bgg-to-magenta-100 d-bgg-to-o99 d-fs-300 d-fw-bold"><span>10%</span><span>99%</span></dt-stack>
+  <dt-stack direction="row" justify="between" align="center" class="d-p8 d-w100p d-h48 d-bar8 d-bgg-to-r d-bgg-from-purple-300 d-bgg-from-o0 d-bgg-to-magenta-100 d-fs-300 d-fw-bold"><span>0%</span><span>100%</span></dt-stack>
 </code-well-header>
 
 ```html
@@ -121,7 +121,7 @@ The starting stop (`d-bgg-from-{color}`) should be declared. Optionally an endin
              <tr v-for="{ stop } in stops">
                  <th scope="row" class="d-code--sm d-docsite-code">.d-bgg-{{ direction }}-{{ color }}-{{ stop }}</th>
                  <td>
-                     <dt-stack direction="row" justify="between" align="center" data-migrate-outline>
+                     <dt-stack direction="row" justify="between" align="center">
                          <div class="d-fl-grow1 d-code--sm">
                              <span v-if="direction === 'from'">
                                --bgg-from-opacity: 100%;<br/>

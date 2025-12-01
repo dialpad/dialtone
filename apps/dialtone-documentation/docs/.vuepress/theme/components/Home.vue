@@ -6,9 +6,8 @@
       justify="between"
       align="center"
       class="hero__inner-wrapper d-mx-auto d-wmx1340 d-pl24 d-pr32"
-      data-migrate-outline
     >
-      <dt-stack justify="center" class="hero__content" data-migrate-outline>
+      <dt-stack justify="center" class="hero__content">
         <h1 class="d-headline--xxl d-mb12 d-ff-marketing">
           Improve your UI's reception with Dialtone
         </h1>
@@ -16,7 +15,7 @@
           Documented styles, components, and utility classes to help you quickly design and build unified experiences
           across Dialpad experiences.
         </p>
-        <dt-stack direction="row" justify="start" class="d-mb32" data-migrate-outline>
+        <dt-stack direction="row" justify="start" class="d-mb32">
           <a
             class="d-td-unset d-d-inline-flex"
             href="https://github.com/dialpad/dialtone"

@@ -40,9 +40,9 @@
         <template #content>
           <dt-stack gap="500">
             <dt-stack direction="row" gap="300">
-              <dt-stack class="d-fl-grow5" data-migrate-outline>
+              <dt-stack class="d-fl-grow5">
                 <span class="d-label d-label--sm">Name</span>
-                <dt-stack direction="row" justify="between" data-migrate-outline>
+                <dt-stack direction="row" justify="between">
                   <span class="d-body--md-compact">{{ name }}</span>
                 </dt-stack>
               </dt-stack>
@@ -106,15 +106,15 @@
                 <span class="d-btn__label">Figma</span>
               </a>
             </dt-stack>
-            <dt-stack direction="row" align="center" data-migrate-outline>
-              <dt-stack class="d-fl-grow5" data-migrate-outline>
+            <dt-stack direction="row" align="center">
+              <dt-stack class="d-fl-grow5">
                 <span class="d-label d-label--sm">Description</span>
                 <div class="d-body--md-compact">
                   {{ desc }}
                 </div>
               </dt-stack>
             </dt-stack>
-            <dt-stack direction="row" align="end" data-migrate-outline>
+            <dt-stack direction="row" align="end">
               <div class="d-fl-grow1">
                 <dt-input
                   class="d-ff-mono"
@@ -131,7 +131,7 @@
                 aria-label="Copy SVG markup"
               />
             </dt-stack>
-            <dt-stack direction="row" align="end" data-migrate-outline>
+            <dt-stack direction="row" align="end">
               <div class="d-fl-grow1">
                 <dt-input
                   class="d-ff-mono"

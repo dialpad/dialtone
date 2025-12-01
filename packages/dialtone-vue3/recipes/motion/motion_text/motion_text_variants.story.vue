@@ -2,7 +2,6 @@
   <dt-stack
     gap="600"
     class="d-p24"
-    data-migrate-outline
   >
     <!-- Speed Variants -->
     <section>
@@ -11,19 +10,16 @@
       </h2>
       <dt-stack
         gap="500"
-        data-migrate-outline
       >
         <dt-stack
           v-for="speed in speeds"
           :key="speed.value"
           gap="400"
-          data-migrate-outline
         >
           <dt-stack
             direction="row"
             align="center"
             justify="between"
-            data-migrate-outline
           >
             <h3 class="d-headline--md">
               {{ speed.label }} ({{ speed.value }})
@@ -41,7 +37,6 @@
             direction="row"
             align="center"
             class="d-p16 d-bar8 d-ba d-bc-subtle d-bgc-secondary d-hmn96"
-            data-migrate-outline
           >
             <dt-recipe-motion-text
               :ref="el => { if (el) speedRefs[speed.value] = el }"
@@ -63,19 +58,16 @@
       </h2>
       <dt-stack
         gap="500"
-        data-migrate-outline
       >
         <dt-stack
           v-for="size in textSizes"
           :key="size.class"
           gap="400"
-          data-migrate-outline
         >
           <dt-stack
             direction="row"
             align="center"
             justify="between"
-            data-migrate-outline
           >
             <h3 class="d-headline--md">
               {{ size.label }}
@@ -93,7 +85,6 @@
             direction="row"
             align="center"
             class="d-p16 d-bar8 d-ba d-bc-subtle d-bgc-secondary d-hmn96"
-            data-migrate-outline
           >
             <dt-recipe-motion-text
               :ref="el => { if (el) sizeRefs[size.class] = el }"
@@ -117,7 +108,6 @@
         direction="row"
         align="center"
         class="d-p24 d-bar8 d-ba d-bc-subtle d-bgc-secondary d-hmn128"
-        data-migrate-outline
       >
         <dt-recipe-motion-text
           text="This text loops continuously"
@@ -137,13 +127,11 @@
       </h2>
       <dt-stack
         gap="500"
-        data-migrate-outline
       >
         <dt-stack
           direction="row"
           gap="400"
           class="d-fw-wrap"
-          data-migrate-outline
         >
           <dt-button
             size="sm"
@@ -185,7 +173,6 @@
           direction="row"
           align="center"
           class="d-p24 d-bar8 d-ba d-bc-subtle d-bgc-secondary d-hmn128"
-          data-migrate-outline
         >
           <dt-recipe-motion-text
             ref="manualRef"
@@ -204,12 +191,14 @@
 <script>
 import { DtRecipeMotionText, MOTION_TEXT_SPEEDS } from '@/recipes/motion/motion_text';
 import { DtButton } from '@/components/button';
+import { DtStack } from '@/components/stack';
 
 export default {
   name: 'DtRecipeMotionTextVariantsStory',
   components: {
     DtRecipeMotionText,
     DtButton,
+    DtStack,
   },
 
   data () {

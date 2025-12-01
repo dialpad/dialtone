@@ -6,7 +6,6 @@
       gap="400"
       align="center"
       class="d-ff-row-wrap"
-      data-migrate-outline
     >
       <dt-badge
         v-for="type in types"

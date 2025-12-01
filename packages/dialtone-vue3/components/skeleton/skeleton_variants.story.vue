@@ -7,7 +7,6 @@
       as="section"
       direction="row"
       class="d-mb64"
-      data-migrate-outline
     >
       <div class="d-p4 d-fl1 d-w25p">
         <h3>Avatars</h3>
@@ -116,7 +115,6 @@
       as="section"
       direction="row"
       class="d-mb64"
-      data-migrate-outline
     >
       <div class="d-p4 d-fl1 d-w50p">
         <h3>Text List</h3>

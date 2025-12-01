@@ -3,7 +3,6 @@
     direction="row"
     align="center"
     class="d-hmn256 d-p24"
-    data-migrate-outline
   >
     <dt-recipe-motion-text
       ref="motionText"

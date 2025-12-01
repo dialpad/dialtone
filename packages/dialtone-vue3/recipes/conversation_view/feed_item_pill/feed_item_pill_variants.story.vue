@@ -53,7 +53,6 @@
             <dt-stack
               as="p"
               direction="row"
-              data-migrate-outline
             >
               <strong class="d-mr4">1. </strong>
               The agent needs to inform the team to check on Vijay's request or ticket regarding Dialpad CTI.
@@ -232,7 +231,6 @@
             <dt-stack
               as="p"
               direction="row"
-              data-migrate-outline
             >
               <strong class="d-mr4">1. </strong>
               The agent needs to inform the team to check on Vijay's request or ticket regarding Dialpad CTI.

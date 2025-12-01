@@ -1,5 +1,5 @@
 <template>
-  <dt-stack direction="row" align="center" class="d-ml-auto lg:d-d-none" data-migrate-outline>
+  <dt-stack direction="row" align="center" class="d-ml-auto lg:d-d-none">
     <dt-button
       v-show="!isMenuOpen"
       importance="clear"
@@ -54,7 +54,6 @@
         d-zi-navigation-fixed
         "
       :class="{ 'd-o0 d-d-none': !isMenuOpen }"
-      data-migrate-outline
     >
       <router-link
         v-for="link in items"

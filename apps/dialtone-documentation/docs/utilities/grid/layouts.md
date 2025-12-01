@@ -31,10 +31,10 @@ Use `.d-gl-sidebar` to create a simple 2-column layout with a sidebar and main c
 ### Example
 
 <aside class="d-bar8 d-of-hidden d-bgc-secondary">
-  <dt-stack as="header" align="center" justify="center" class="d-p16 d-w100p d-hmn216" data-migrate-outline>
+  <dt-stack as="header" align="center" justify="center" class="d-p16 d-w100p d-hmn216">
     <div class="d-d-grid d-gl-sidebar d-g16 d-w100p d-hmn216 d-bar8 d-of-auto d-bgc-moderate" style="--sidebar-width: minmax(10rem, 20rem);">
-      <dt-stack direction="row" align="center" justify="center" class="d-ga-sidebar d-p16 d-bgc-moderate-opaque d-bar4" data-migrate-outline>Sidebar</dt-stack>
-      <dt-stack direction="row" align="center" justify="center" class="d-ga-content d-p16 d-bgc-moderate-opaque d-bar4" data-migrate-outline>Content</dt-stack>
+      <dt-stack direction="row" align="center" justify="center" class="d-ga-sidebar d-p16 d-bgc-moderate-opaque d-bar4">Sidebar</dt-stack>
+      <dt-stack direction="row" align="center" justify="center" class="d-ga-content d-p16 d-bgc-moderate-opaque d-bar4">Content</dt-stack>
     </div>
   </dt-stack>
 </aside>
@@ -74,12 +74,12 @@ Use `.d-gl-header` to create a simple 2-row layout with a header area and main c
 ### Example
 
 <aside class="d-bar8 d-of-hidden d-bgc-secondary">
-  <dt-stack as="header" align="center" justify="center" class="d-p16 d-w100p d-hmn216 d-of-auto" data-migrate-outline>
+  <dt-stack as="header" align="center" justify="center" class="d-p16 d-w100p d-hmn216 d-of-auto">
     <div class="d-d-grid d-gl-sidebar d-g16 d-w100p d-hmn216 d-bar8 d-bgc-moderate" style="--sidebar-width: minmax(10rem, 20rem);">
-      <dt-stack direction="row" align="center" justify="center" class="d-ga-sidebar d-p16 d-bgc-moderate-opaque d-bar4" data-migrate-outline>Sidebar</dt-stack>
+      <dt-stack direction="row" align="center" justify="center" class="d-ga-sidebar d-p16 d-bgc-moderate-opaque d-bar4">Sidebar</dt-stack>
       <div class="d-ga-content d-d-grid d-gl-header d-g16 d-p16 d-bgc-moderate-opaque d-bar4" style="--content-height: minmax(24rem, max-content);">
-        <dt-stack direction="row" align="center" justify="center" class="d-ga-header d-p16 d-bgc-moderate-opaque d-bar4" data-migrate-outline>Header</dt-stack>
-        <dt-stack direction="row" align="center" justify="center" class="d-ga-content d-p16 d-bgc-moderate-opaque d-bar4" data-migrate-outline>Content</dt-stack>
+        <dt-stack direction="row" align="center" justify="center" class="d-ga-header d-p16 d-bgc-moderate-opaque d-bar4">Header</dt-stack>
+        <dt-stack direction="row" align="center" justify="center" class="d-ga-content d-p16 d-bgc-moderate-opaque d-bar4">Content</dt-stack>
       </div>
     </div>
   </dt-stack>
@@ -117,16 +117,16 @@ Use `.d-g-cols{n}` to create a multi-column layout.
 ### Example
 
 <aside class="d-bar8 d-of-hidden d-bgc-secondary d-p16">
-  <dt-stack as="header" align="center" justify="center" class="d-w100p d-hmn216" data-migrate-outline>
+  <dt-stack as="header" align="center" justify="center" class="d-w100p d-hmn216">
     <div class="d-d-grid d-g-cols4 d-g16 d-w100p d-hmn216 d-bar8 d-bgc-moderate">
-      <dt-stack direction="row" align="center" justify="center" class="d-p16 d-bgc-moderate-opaque d-bar4" data-migrate-outline>1</dt-stack>
-      <dt-stack direction="row" align="center" justify="center" class="d-p16 d-bgc-moderate-opaque d-bar4" data-migrate-outline>2</dt-stack>
-      <dt-stack direction="row" align="center" justify="center" class="d-p16 d-bgc-moderate-opaque d-bar4" data-migrate-outline>3</dt-stack>
-      <dt-stack direction="row" align="center" justify="center" class="d-p16 d-bgc-moderate-opaque d-bar4" data-migrate-outline>4</dt-stack>
-      <dt-stack direction="row" align="center" justify="center" class="d-p16 d-bgc-moderate-opaque d-bar4" data-migrate-outline>5</dt-stack>
-      <dt-stack direction="row" align="center" justify="center" class="d-p16 d-bgc-moderate-opaque d-bar4" data-migrate-outline>6</dt-stack>
-      <dt-stack direction="row" align="center" justify="center" class="d-p16 d-bgc-moderate-opaque d-bar4" data-migrate-outline>7</dt-stack>
-      <dt-stack direction="row" align="center" justify="center" class="d-p16 d-bgc-moderate-opaque d-bar4" data-migrate-outline>8</dt-stack>
+      <dt-stack direction="row" align="center" justify="center" class="d-p16 d-bgc-moderate-opaque d-bar4">1</dt-stack>
+      <dt-stack direction="row" align="center" justify="center" class="d-p16 d-bgc-moderate-opaque d-bar4">2</dt-stack>
+      <dt-stack direction="row" align="center" justify="center" class="d-p16 d-bgc-moderate-opaque d-bar4">3</dt-stack>
+      <dt-stack direction="row" align="center" justify="center" class="d-p16 d-bgc-moderate-opaque d-bar4">4</dt-stack>
+      <dt-stack direction="row" align="center" justify="center" class="d-p16 d-bgc-moderate-opaque d-bar4">5</dt-stack>
+      <dt-stack direction="row" align="center" justify="center" class="d-p16 d-bgc-moderate-opaque d-bar4">6</dt-stack>
+      <dt-stack direction="row" align="center" justify="center" class="d-p16 d-bgc-moderate-opaque d-bar4">7</dt-stack>
+      <dt-stack direction="row" align="center" justify="center" class="d-p16 d-bgc-moderate-opaque d-bar4">8</dt-stack>
     </div>
   </dt-stack>
 </aside>
@@ -150,10 +150,10 @@ Unlike some CSS, CSS grid does not cascade beyond the parent and its direct chil
 
 <code-well-header>
   <div class="d-d-grid d-g-cols2 d-g16 d-w100p d-hmn216 d-bar8 d-bgc-moderate">
-    <dt-stack direction="row" align="center" justify="center" class="d-p16 d-bgc-moderate-opaque d-bar4" data-migrate-outline>1</dt-stack>
+    <dt-stack direction="row" align="center" justify="center" class="d-p16 d-bgc-moderate-opaque d-bar4">1</dt-stack>
     <div class="d-d-grid d-g-cols2 d-g16 d-p16 d-bgc-moderate-opaque d-bar4">
-      <dt-stack direction="row" align="center" justify="center" class="d-p16 d-bgc-moderate-opaque d-bar4" data-migrate-outline>3</dt-stack>
-      <dt-stack direction="row" align="center" justify="center" class="d-p16 d-bgc-moderate-opaque d-bar4" data-migrate-outline>4</dt-stack>
+      <dt-stack direction="row" align="center" justify="center" class="d-p16 d-bgc-moderate-opaque d-bar4">3</dt-stack>
+      <dt-stack direction="row" align="center" justify="center" class="d-p16 d-bgc-moderate-opaque d-bar4">4</dt-stack>
     </div>
   </div>
 </code-well-header>

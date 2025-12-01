@@ -31,7 +31,7 @@ For detailed instructions on using the icons, check the [Icon component](/compon
 <div class="d-gc2">
 <code-well-header>
   <div class="d-d-grid d-g24 d-g-cols1 md:d-g-cols3 d-w100p">
-    <dt-stack direction="row" align="center" justify="center" data-migrate-outline>
+    <dt-stack direction="row" align="center" justify="center">
       <dt-icon :name="selectedIcon" :size="selectedSize" />
     </dt-stack>
     <dt-select-menu label="Name" :options="iconListOptions" @change="changeIcon" />

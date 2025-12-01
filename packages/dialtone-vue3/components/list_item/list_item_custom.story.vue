@@ -16,7 +16,6 @@
         direction="row"
         align="center"
         class="custom-list-item d-ps-relative d-py8 d-px12"
-        data-migrate-outline
       >
         <time
           class="custom-list-item--time d-fs-100 d-pr12"
@@ -30,7 +29,6 @@
         <dt-stack
           direction="row"
           class="custom-list-item--actions d-ps-absolute d-p6 d-tn8 d-r12 d-bgc-white d-bar4 d-bs-md"
-          data-migrate-outline
         >
           <dt-button
             class="d-p4 d-py8"

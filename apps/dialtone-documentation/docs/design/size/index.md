@@ -34,7 +34,7 @@ When assigning a size to an element, utilize [Size Tokens](#tokens) for the valu
 <div class="d-gc2">
 <code-well-header>
   <div class="d-d-grid d-g24 d-g-cols2 md:d-g-cols1 d-w100p">
-    <dt-stack direction="row" align="center" justify="center" class="d-ba d-bc-default d-js-center" :style="{ width: 'fit-content', minWidth: selectedSize }" data-migrate-outline>
+    <dt-stack direction="row" align="center" justify="center" class="d-ba d-bc-default d-js-center" :style="{ width: 'fit-content', minWidth: selectedSize }">
       Box
     </dt-stack>
     <dt-select-menu label="min-width" :options="sizeValues" @change="changeBoxSize" />

@@ -38,7 +38,6 @@
         justify="between"
         align="center"
         class="d-p8"
-        data-migrate-outline
       >
         <div class="d-headline--xl">
           01:15

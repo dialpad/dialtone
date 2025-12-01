@@ -1,5 +1,5 @@
 <template>
-  <dt-stack direction="row" align="center" justify="center" class="d-h64 d-mb16 d-fc-primary" data-migrate-outline>
+  <dt-stack direction="row" align="center" justify="center" class="d-h64 d-mb16 d-fc-primary">
     <dt-icon
       ref="iconPreview"
       :name="iconName"
@@ -22,8 +22,8 @@
         />
       </dt-select-menu>
     </div>
-    <dt-stack direction="row" align="center" data-migrate-outline>
-      <dt-stack class="d-fl-grow5" data-migrate-outline>
+    <dt-stack direction="row" align="center">
+      <dt-stack class="d-fl-grow5">
         <span class="d-label d-label--sm">Name</span>
         <span class="d-body--md-compact">{{ iconName }}</span>
       </dt-stack>
@@ -33,18 +33,18 @@
         aria-label="Copy icon name"
       />
     </dt-stack>
-    <dt-stack data-migrate-outline>
+    <dt-stack>
       <span class="d-label d-label--sm">Category</span>
       <span
         class="d-tt-capitalize d-body--md-compact"
         v-text="category"
       />
     </dt-stack>
-    <dt-stack data-migrate-outline>
+    <dt-stack>
       <span class="d-label d-label--sm">Keywords</span>
       <span class="d-body--md-compact">{{ keywords.join(', ') || '-' }}</span>
     </dt-stack>
-    <dt-stack direction="row" align="end" data-migrate-outline>
+    <dt-stack direction="row" align="end">
       <div class="d-fl-grow1">
         <dt-input
           class="d-ff-mono"
@@ -61,7 +61,7 @@
         aria-label="Copy SVG markup"
       />
     </dt-stack>
-    <dt-stack direction="row" align="end" class="d-bb d-bc-default d-pb16" data-migrate-outline>
+    <dt-stack direction="row" align="end" class="d-bb d-bc-default d-pb16">
       <div class="d-fl-grow1">
         <dt-input
           class="d-ff-mono"
@@ -78,7 +78,7 @@
         aria-label="Copy Vue markup"
       />
     </dt-stack>
-    <dt-stack direction="row" align="end" data-migrate-outline>
+    <dt-stack direction="row" align="end">
       <div class="d-fl-grow1">
         <dt-input
           class="d-ff-mono"

@@ -32,7 +32,7 @@
       </dt-button>
     </template>
     <template #headerContent>
-      <dt-stack direction="row" align="center" class="d-plc-space-between" data-migrate-outline>
+      <dt-stack direction="row" align="center" class="d-plc-space-between">
         <span
           class="d-tt-capitalize d-fc-primary"
           v-text="name"

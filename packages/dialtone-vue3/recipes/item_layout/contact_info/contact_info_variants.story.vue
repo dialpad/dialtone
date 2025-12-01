@@ -21,7 +21,6 @@
             direction="row"
             align="center"
             class="d-mb2"
-            data-migrate-outline
           >
             <div
               id="contact-number1"
@@ -61,7 +60,6 @@
             direction="row"
             align="center"
             class="d-mb2"
-            data-migrate-outline
           >
             <div
               id="contact-number2"
@@ -109,7 +107,6 @@
               direction="row"
               align="center"
               class="d-mb2"
-              data-migrate-outline
             >
               <div
                 id="contact-name1"
@@ -123,7 +120,6 @@
             <dt-stack
               direction="row"
               align="center"
-              data-migrate-outline
             >
               <div class="d-fs-100 d-mt2 d-mr4">
                 +1 (415) 123-4567
@@ -140,7 +136,6 @@
               direction="row"
               align="center"
               class="d-mtn6"
-              data-migrate-outline
             >
               <div class="d-w8 d-h8 d-mr4 d-bgc-magenta-200">
                 &nbsp;
@@ -174,7 +169,6 @@
             direction="row"
             align="center"
             class="d-mb2"
-            data-migrate-outline
           >
             <div
               id="contact-name2"
@@ -188,7 +182,6 @@
           <dt-stack
             direction="row"
             align="center"
-            data-migrate-outline
           >
             <div class="d-fs-100 d-mt2 d-mr4">
               +1 (415) 123-4567
@@ -205,7 +198,6 @@
             direction="row"
             align="center"
             class="d-mtn6"
-            data-migrate-outline
           >
             <div class="d-w8 d-h8 d-mr4 d-bgc-magenta-200">
               &nbsp;
@@ -233,7 +225,6 @@
             direction="row"
             align="center"
             class="d-mb2"
-            data-migrate-outline
           >
             <div
               id="contact-names1"
@@ -250,7 +241,6 @@
           <dt-stack
             direction="row"
             align="center"
-            data-migrate-outline
           >
             <div class="d-fs-100 d-mr4">
               +1 (415) 123-4567
@@ -267,7 +257,6 @@
             direction="row"
             align="center"
             class="d-mtn4"
-            data-migrate-outline
           >
             <div class="d-w8 d-h8 d-mr4 d-bgc-magenta-200">
               &nbsp;
@@ -304,7 +293,6 @@
             direction="row"
             align="center"
             class="d-m8"
-            data-migrate-outline
           >
             <dt-button
               size="xs"
@@ -361,7 +349,6 @@
             direction="row"
             align="center"
             class="d-mb2"
-            data-migrate-outline
           >
             <div
               id="group-name"
@@ -375,7 +362,6 @@
           <dt-stack
             direction="row"
             align="center"
-            data-migrate-outline
           >
             <div class="d-fs-100 d-mr4">
               Manage participants
@@ -397,7 +383,6 @@
             direction="row"
             align="center"
             class="d-mb2"
-            data-migrate-outline
           >
             <div
               id="group-name"
@@ -414,7 +399,6 @@
           <dt-stack
             direction="row"
             align="center"
-            data-migrate-outline
           >
             <div class="d-fs-100 d-mr4">
               Manage participants

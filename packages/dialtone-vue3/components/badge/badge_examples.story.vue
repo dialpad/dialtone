@@ -5,7 +5,6 @@
       direction="row"
       gap="400"
       align="center"
-      data-migrate-outline
     >
       <dt-badge
         text="Co-host"
@@ -32,7 +31,6 @@
       direction="row"
       gap="400"
       align="center"
-      data-migrate-outline
     >
       <dt-badge
         text="Label"
@@ -51,7 +49,6 @@
       direction="row"
       gap="400"
       align="center"
-      data-migrate-outline
     >
       <dt-badge
         text="In progress"
@@ -70,7 +67,6 @@
       direction="row"
       gap="400"
       align="center"
-      data-migrate-outline
     >
       <dt-badge
         text="Overdue"
@@ -81,7 +77,6 @@
       direction="row"
       gap="400"
       align="center"
-      data-migrate-outline
     >
       <dt-badge
         text="Resolved"
@@ -92,7 +87,6 @@
       direction="row"
       gap="400"
       align="center"
-      data-migrate-outline
     >
       <dt-badge
         text="Recording"
@@ -107,7 +101,6 @@
       direction="row"
       gap="400"
       align="center"
-      data-migrate-outline
     >
       <dt-badge
         text="Live"
@@ -122,7 +115,6 @@
       direction="row"
       gap="400"
       align="center"
-      data-migrate-outline
     >
       <dt-badge
         text="Ai Notes"
@@ -148,7 +140,6 @@
       direction="row"
       gap="400"
       align="center"
-      data-migrate-outline
     >
       <dt-badge
         text="5%"
@@ -164,7 +155,6 @@
       direction="row"
       gap="400"
       align="center"
-      data-migrate-outline
     >
       <dt-badge
         text="-12%"
@@ -180,7 +170,6 @@
       direction="row"
       gap="400"
       align="center"
-      data-migrate-outline
     >
       <dt-badge
         text="1"

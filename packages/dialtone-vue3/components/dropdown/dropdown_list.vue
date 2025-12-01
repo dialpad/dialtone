@@ -6,7 +6,6 @@
       direction="row"
       align="center"
       class="dt-dropdown-list--header d-fs12 d-fc-black-400 d-fw-bold d-lh4 d-py4 d-px12"
-      data-migrate-outline
     >
       <span>{{ heading }}</span>
     </dt-stack>

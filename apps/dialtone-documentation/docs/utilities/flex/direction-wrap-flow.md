@@ -11,14 +11,14 @@ The `flex-direction` property declares a flex container’s main axis direction.
 
 <code-well-header>
   <dt-stack class="d-fd-row-reverse d-w100p d-bar8 d-bgc-moderate">
-    <dt-stack direction="row" align="center" justify="center" class="d-m8 d-p16 d-w64 d-h64 d-bgc-moderate-opaque d-bar4" data-migrate-outline>1</dt-stack>
-    <dt-stack direction="row" align="center" justify="center" class="d-m8 d-p16 d-w64 d-h64 d-bgc-moderate-opaque d-bar4" data-migrate-outline>2</dt-stack>
-    <dt-stack direction="row" align="center" justify="center" class="d-m8 d-p16 d-w64 d-h64 d-bgc-moderate-opaque d-bar4" data-migrate-outline>3</dt-stack>
+    <dt-stack direction="row" align="center" justify="center" class="d-m8 d-p16 d-w64 d-h64 d-bgc-moderate-opaque d-bar4">1</dt-stack>
+    <dt-stack direction="row" align="center" justify="center" class="d-m8 d-p16 d-w64 d-h64 d-bgc-moderate-opaque d-bar4">2</dt-stack>
+    <dt-stack direction="row" align="center" justify="center" class="d-m8 d-p16 d-w64 d-h64 d-bgc-moderate-opaque d-bar4">3</dt-stack>
   </dt-stack>
   <dt-stack class="d-fd-row d-w100p d-mt16 d-bar8 d-bgc-moderate">
-    <dt-stack direction="row" align="center" justify="center" class="d-m8 d-p16 d-w64 d-h64 d-bgc-moderate-opaque d-bar4" data-migrate-outline>1</dt-stack>
-    <dt-stack direction="row" align="center" justify="center" class="d-m8 d-p16 d-w64 d-h64 d-bgc-moderate-opaque d-bar4" data-migrate-outline>2</dt-stack>
-    <dt-stack direction="row" align="center" justify="center" class="d-m8 d-p16 d-w64 d-h64 d-bgc-moderate-opaque d-bar4" data-migrate-outline>3</dt-stack>
+    <dt-stack direction="row" align="center" justify="center" class="d-m8 d-p16 d-w64 d-h64 d-bgc-moderate-opaque d-bar4">1</dt-stack>
+    <dt-stack direction="row" align="center" justify="center" class="d-m8 d-p16 d-w64 d-h64 d-bgc-moderate-opaque d-bar4">2</dt-stack>
+    <dt-stack direction="row" align="center" justify="center" class="d-m8 d-p16 d-w64 d-h64 d-bgc-moderate-opaque d-bar4">3</dt-stack>
   </dt-stack>
 </code-well-header>
 
@@ -64,9 +64,9 @@ The `flex-wrap` property declares a flex container’s wrapping status. The defa
 
 <code-well-header>
   <dt-stack direction="row" class="d-fw-wrap d-w100p d-bar8 d-bgc-moderate">
-    <dt-stack direction="row" align="center" justify="center" class="d-m8 d-p16 d-w25p d-h64 d-bgc-moderate-opaque d-bar4" data-migrate-outline>1</dt-stack>
-    <dt-stack direction="row" align="center" justify="center" class="d-m8 d-p16 d-w50p d-h64 d-bgc-moderate-opaque d-bar4" data-migrate-outline>2</dt-stack>
-    <dt-stack direction="row" align="center" justify="center" class="d-m8 d-p16 d-w75p d-h64 d-bgc-moderate-opaque d-bar4" data-migrate-outline>3</dt-stack>
+    <dt-stack direction="row" align="center" justify="center" class="d-m8 d-p16 d-w25p d-h64 d-bgc-moderate-opaque d-bar4">1</dt-stack>
+    <dt-stack direction="row" align="center" justify="center" class="d-m8 d-p16 d-w50p d-h64 d-bgc-moderate-opaque d-bar4">2</dt-stack>
+    <dt-stack direction="row" align="center" justify="center" class="d-m8 d-p16 d-w75p d-h64 d-bgc-moderate-opaque d-bar4">3</dt-stack>
   </dt-stack>
 </code-well-header>
 
@@ -107,9 +107,9 @@ The `flex-flow` property is a shorthand property that sets allows you to quickly
 
 <code-well-header>
   <dt-stack class="d-ff-row-reverse-wrap d-w100p d-bar8 d-bgc-moderate">
-    <dt-stack direction="row" align="center" justify="center" class="d-m8 d-p16 d-w25p d-h64 d-bgc-moderate-opaque d-bar4" data-migrate-outline>1</dt-stack>
-    <dt-stack direction="row" align="center" justify="center" class="d-m8 d-p16 d-w50p d-h64 d-bgc-moderate-opaque d-bar4" data-migrate-outline>2</dt-stack>
-    <dt-stack direction="row" align="center" justify="center" class="d-m8 d-p16 d-w75p d-h64 d-bgc-moderate-opaque d-bar4" data-migrate-outline>3</dt-stack>
+    <dt-stack direction="row" align="center" justify="center" class="d-m8 d-p16 d-w25p d-h64 d-bgc-moderate-opaque d-bar4">1</dt-stack>
+    <dt-stack direction="row" align="center" justify="center" class="d-m8 d-p16 d-w50p d-h64 d-bgc-moderate-opaque d-bar4">2</dt-stack>
+    <dt-stack direction="row" align="center" justify="center" class="d-m8 d-p16 d-w75p d-h64 d-bgc-moderate-opaque d-bar4">3</dt-stack>
   </dt-stack>
 </code-well-header>
 

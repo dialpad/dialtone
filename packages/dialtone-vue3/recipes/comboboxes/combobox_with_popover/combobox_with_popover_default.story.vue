@@ -72,7 +72,6 @@
         direction="row"
         align="center"
         class="d-px12"
-        data-migrate-outline
       >
         <dt-checkbox label="Apply primary number to assigned Contact Centers" />
       </dt-stack>

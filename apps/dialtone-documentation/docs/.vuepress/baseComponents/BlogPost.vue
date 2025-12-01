@@ -16,8 +16,8 @@
           aria-label="Copy post link"
         />
       </component>
-      <dt-stack direction="row" align="center" data-migrate-outline>
-        <dt-stack as="section" direction="row" data-migrate-outline>
+      <dt-stack direction="row" align="center">
+        <dt-stack as="section" direction="row">
           <dt-avatar
             size="lg"
             :seed="author"

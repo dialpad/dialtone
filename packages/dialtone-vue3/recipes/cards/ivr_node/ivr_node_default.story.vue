@@ -49,7 +49,6 @@
           direction="row"
           align="center"
           gap="400"
-          data-migrate-outline
         >
           <dt-avatar
             full-name="Person Avatar"
