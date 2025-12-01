@@ -21,7 +21,7 @@ figma_url: https://www.figma.com/design/W58r5BkO8qTw3vem9YieJd/DT9-Component-Lib
 <code-well-header>
     <div class="d-d-flex d-w100p d-flow8 d-ai-flex-end">
         <div class="d-fl-grow1">
-            <dt-select-menu label="Style" :options="toastOptions" v-model="selectedKind" @change="changeKind" />
+            <dt-select-menu label="Style" :options="toastOptions" v-model="selectedKind" />
         </div>
         <dt-checkbox value="important" @input="toggleImportant">Important</dt-checkbox>
         <dt-button @click="toggleToast">Toggle Example</dt-button>
@@ -207,8 +207,5 @@ function toggleImportant () {
 }
 function togglePinned () {
   pinned.value = !pinned.value;
-}
-function changeKind (kind) {
-  selectedKind.value = kind;
 }
 </script>

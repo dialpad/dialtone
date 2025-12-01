@@ -34,8 +34,8 @@ For detailed instructions on using the icons, check the [Icon component](/compon
     <div class="d-fl-center">
       <dt-icon :name="selectedIcon" :size="selectedSize" />
     </div>
-    <dt-select-menu label="Name" :options="iconListOptions" v-model="selectedIcon" @change="changeIcon" />
-    <dt-select-menu label="Size" :options="sizeValues" v-model="selectedSize" @change="changeIconSize" />
+    <dt-select-menu label="Name" :options="iconListOptions" v-model="selectedIcon" />
+    <dt-select-menu label="Size" :options="sizeValues" v-model="selectedSize" />
   </div>
 </code-well-header>
 
@@ -127,13 +127,5 @@ const iconListOptions = [
 
 const selectedIcon = ref('user-plus');
 const selectedSize = ref('500');
-
-const changeIcon = (newIcon) => {
-  selectedIcon.value = newIcon;
-};
-
-const changeIconSize = (newSize) => {
-  selectedSize.value = newSize;
-};
 
 </script>

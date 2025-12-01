@@ -37,7 +37,7 @@ When assigning a size to an element, utilize [Size Tokens](#tokens) for the valu
     <div class="d-fl-center d-ba d-bc-default d-js-center" :style="{ width: 'fit-content', minWidth: selectedSize }">
       Box
     </div>
-    <dt-select-menu label="min-width" :options="sizeValues" v-model="selectedSize" @change="changeBoxSize" />
+    <dt-select-menu label="min-width" :options="sizeValues" v-model="selectedSize" />
   </div>
 </code-well-header>
 
@@ -154,8 +154,4 @@ const tokens = Object.keys(tokensJson[theme] ?? {}).reduce((acc, curr) => {
   ];
 
   const selectedSize = ref('var(--dt-size-720)');
-
-  const changeBoxSize = (newSize) => {
-    selectedSize.value = newSize;
-  };
 </script>
