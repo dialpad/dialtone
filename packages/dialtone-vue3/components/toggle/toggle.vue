@@ -200,8 +200,8 @@ export default {
   methods: {
     addClassStyleAttrs,
     toggleCheckedValue () {
-      this.$emit('change', !this.internalChecked);
       this.$emit('update:modelValue', !this.internalChecked);
+      this.$emit('change', !this.internalChecked);
 
       if (this.toggleOnClick) {
         this.internalChecked = !this.internalChecked;
