@@ -28,7 +28,7 @@
             >
           </a>
         </dt-stack>
-        <div class="d-d-flex d-jc-center d-flow16">
+        <dt-stack direction="row" justify="center" gap="500">
           <router-link
             v-slot="{ navigate }"
             to="/guides/getting-started/"
@@ -58,7 +58,7 @@
               What's New?
             </dt-button>
           </router-link>
-        </div>
+        </dt-stack>
       </dt-stack>
       <svg-loader class="hero__image d-w50p" name="home-billboard" />
     </dt-stack>

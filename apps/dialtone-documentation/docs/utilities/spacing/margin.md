@@ -20,12 +20,12 @@ description: Utilities to adjust an element's exterior spacing between other obj
 ## Add Margin to a Single Side
 
 <code-well-header>
-  <div class="d-d-flex d-fw-wrap d-jc-center d-bgo50 d-w100p d-g24">
+  <dt-stack direction="row" justify="center" gap="550" class="d-w100p">
     <div class="d-as-center d-bar8 d-bgc-bold d-of-hidden"><dt-stack direction="row" align="center" justify="center" class="d-mt12 d-p16 d-bgc-moderate d-bbr4 d-code--md">d-mt12</dt-stack></div>
     <div class="d-as-center d-bar8 d-bgc-bold d-of-hidden"><dt-stack direction="row" align="center" justify="center" class="d-mr16 d-p16 d-bgc-moderate d-brl4 d-code--md">d-mr16</dt-stack></div>
     <div class="d-as-center d-bar8 d-bgc-bold d-of-hidden"><dt-stack direction="row" align="center" justify="center" class="d-mb24 d-p16 d-bgc-moderate d-btr4 d-code--md">d-mb24</dt-stack></div>
     <div class="d-as-center d-bar8 d-bgc-bold d-of-hidden"><dt-stack direction="row" align="center" justify="center" class="d-ml32 d-p16 d-bgc-moderate d-brr4 d-code--md">d-ml32</dt-stack></div>
-  </div>
+  </dt-stack>
 </code-well-header>
 
 ```html
@@ -60,11 +60,11 @@ description: Utilities to adjust an element's exterior spacing between other obj
 Auto margins allow an element to fill a remaining space within an object. This is especially useful in flex layouts.
 
 <code-well-header>
-  <div class="d-w100p d-stack16">
+  <dt-stack gap="500" class="d-w100p">
     <dt-stack direction="row" class="d-bar8 d-bgc-bold d-of-hidden"><dt-stack direction="row" align="center" justify="center" class="d-mx-auto d-p16 d-bgc-moderate d-code--md">d-mx-auto</dt-stack></dt-stack>
     <dt-stack direction="row" class="d-bar8 d-bgc-bold d-of-hidden"><dt-stack direction="row" align="center" justify="center" class="d-ml-auto d-p16 d-bgc-moderate d-code--md">d-ml-auto</dt-stack></dt-stack>
     <dt-stack direction="row" class="d-bar8 d-bgc-bold d-of-hidden"><dt-stack direction="row" align="center" justify="center" class="d-mr-auto d-p16 d-bgc-moderate d-code--md">d-mr-auto</dt-stack></dt-stack>
-  </div>
+  </dt-stack>
 </code-well-header>
 
 ```html

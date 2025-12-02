@@ -19,13 +19,13 @@ figma_url: https://www.figma.com/design/W58r5BkO8qTw3vem9YieJd/DT9-Component-Lib
 ## Variants and Examples
 
 <code-well-header>
-    <div class="d-d-flex d-w100p d-flow8 d-ai-flex-end">
+    <dt-stack direction="row" gap="400" align="end" class="d-w100p">
         <div class="d-fl-grow1">
             <dt-select-menu label="Style" :options="toastOptions" @change="changeKind" />
         </div>
         <dt-checkbox value="important" @input="toggleImportant">Important</dt-checkbox>
         <dt-button @click="toggleToast">Toggle Example</dt-button>
-    </div>
+    </dt-stack>
 </code-well-header>
 
 <example-toast

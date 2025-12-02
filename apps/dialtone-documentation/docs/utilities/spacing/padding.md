@@ -20,12 +20,12 @@ description: Utilities for setting an element's interior spacing between child e
 ## Add Padding to a Single Side
 
 <code-well-header>
-  <div class="d-d-flex d-fw-wrap d-jc-center d-w100p d-g24">
+  <dt-stack direction="row" justify="center" gap="550" class="d-fw-wrap d-w100p">
     <div class="d-as-center d-pt12 d-bar8 d-bgc-bold d-of-hidden"><dt-stack direction="row" align="center" justify="center" class="d-p16 d-bgc-moderate d-bbr4 d-code--md">d-pt12</dt-stack></div>
     <div class="d-as-center d-pr16 d-bar8 d-bgc-bold d-of-hidden"><dt-stack direction="row" align="center" justify="center" class="d-p16 d-bgc-moderate d-brl4 d-code--md">d-pr16</dt-stack></div>
     <div class="d-as-center d-pb24 d-bar8 d-bgc-bold d-of-hidden"><dt-stack direction="row" align="center" justify="center" class="d-p16 d-bgc-moderate d-btr4 d-code--md">d-pb24</dt-stack></div>
     <div class="d-as-center d-pl32 d-bar8 d-bgc-bold d-of-hidden"><dt-stack direction="row" align="center" justify="center" class="d-p16 d-bgc-moderate d-brr4 d-code--md">d-pl32</dt-stack></div>
-  </div>
+  </dt-stack>
 </code-well-header>
 
 ```html
