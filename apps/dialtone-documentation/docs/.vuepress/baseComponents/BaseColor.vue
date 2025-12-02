@@ -1,6 +1,6 @@
 <template>
   <dt-stack as="aside">
-    <dt-stack v-if="stops.length" as="header" direction="row" justify="between" class="d-ai-end">
+    <dt-stack v-if="stops.length" as="header" direction="row" justify="between">
       <h4
         class="d-docsite--header-3 d-tt-capitalize"
         tabindex="-1"
