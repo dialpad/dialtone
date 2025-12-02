@@ -1,3 +1,15 @@
+# [9.150.0](https://github.com/dialpad/dialtone/compare/dialtone/v9.149.1...dialtone/v9.150.0) (2025-12-02)
+
+
+### Bug Fixes
+
+* **Split Button:** NO-JIRA fix split button inline size for importance="clear" variants ([#985](https://github.com/dialpad/dialtone/issues/985)) ([8de1668](https://github.com/dialpad/dialtone/commit/8de1668ce242f206fc978f0401f1c8ed3c82d9cf))
+
+
+### Features
+
+* **Icon:** DP-166633 add bracket left right icon ([#982](https://github.com/dialpad/dialtone/issues/982)) ([278c2a4](https://github.com/dialpad/dialtone/commit/278c2a440fa60f58c47371442aa21edbc1e739ce))
+
 ## [9.149.1](https://github.com/dialpad/dialtone/compare/dialtone/v9.149.0...dialtone/v9.149.1) (2025-11-26)
 
 
