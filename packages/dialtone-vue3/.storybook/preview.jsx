@@ -16,6 +16,7 @@ import customEmojiJson from '@/common/custom-emoji.json';
 import { dialtoneDarkTheme, dialtoneLightTheme } from './dialtone-themes.js';
 import { DtTooltipDirective } from '@/directives/tooltip_directive';
 import { DtScrollbarDirective } from '@/directives/scrollbar_directive';
+import { DtStack } from '@/components/stack';
 import { faker } from '@faker-js/faker';
 
 setTheme(DpLight);
@@ -35,6 +36,7 @@ setup((app) => {
   app.use(fixDefaultSlot);
   app.use(DtTooltipDirective);
   app.use(DtScrollbarDirective);
+  app.component('DtStack', DtStack);
   // global seed, to make sure results are reproducible on percy and don't change on every reload too.
   faker.seed(6687422389464139);
 });
