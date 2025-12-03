@@ -1,3 +1,10 @@
+# [8.71.0-next.2](https://github.com/dialpad/dialtone/compare/dialtone-css/v8.71.0-next.1...dialtone-css/v8.71.0-next.2) (2025-12-03)
+
+
+### Bug Fixes
+
+* **Split Button:** NO-JIRA fix split button inline size for importance="clear" variants ([#985](https://github.com/dialpad/dialtone/issues/985)) ([8de1668](https://github.com/dialpad/dialtone/commit/8de1668ce242f206fc978f0401f1c8ed3c82d9cf))
+
 ## [8.70.2](https://github.com/dialpad/dialtone/compare/dialtone-css/v8.70.1...dialtone-css/v8.70.2) (2025-12-02)
 
 
