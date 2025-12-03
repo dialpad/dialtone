@@ -685,6 +685,64 @@ function validateTransformations(transformations, content) {
 }
 
 //------------------------------------------------------------------------------
+// Skip Summary Tracking
+//------------------------------------------------------------------------------
+
+/**
+ * Track skipped elements by reason for grouped summary
+ * @type {Map<string, Array<{file: string, line: number, element: string}>>}
+ */
+const skippedByReason = new Map();
+
+/**
+ * Add a skipped element to the tracking map
+ * @param {string} reason - The skip reason category
+ * @param {string} file - File path
+ * @param {number} line - Line number
+ * @param {string} element - Element snippet
+ */
+function trackSkippedElement(reason, file, line, element) {
+  if (!skippedByReason.has(reason)) {
+    skippedByReason.set(reason, []);
+  }
+  skippedByReason.get(reason).push({ file, line, element });
+}
+
+/**
+ * Print grouped summary of all skipped elements at end of migration
+ */
+function printSkippedSummary() {
+  if (skippedByReason.size === 0) return;
+
+  console.log(`\n${colors.bold}⚠️  Elements Requiring Manual Review${colors.reset}\n`);
+
+  for (const [reason, elements] of skippedByReason) {
+    // Header with count
+    console.log(`${colors.yellow}${reason} (${elements.length} element${elements.length === 1 ? '' : 's'})${colors.reset}`);
+
+    // Show first 3 examples
+    const examples = elements.slice(0, 3);
+    for (const { file, line, element } of examples) {
+      console.log(`${colors.gray}   ${file}:${line}${colors.reset}`);
+      // Truncate element preview to 70 chars
+      const preview = element.length > 70 ? element.substring(0, 70) + '...' : element;
+      console.log(`${colors.gray}   ${preview}${colors.reset}`);
+    }
+
+    // Show count of remaining if more than 3
+    if (elements.length > 3) {
+      console.log(`${colors.gray}   ... and ${elements.length - 3} more${colors.reset}`);
+    }
+    console.log();
+  }
+
+  // Provide helpful guidance
+  console.log(`${colors.cyan}📚 Manual Migration Guide:${colors.reset}`);
+  console.log(`${colors.cyan}   https://dialtone.dialpad.com/about/whats-new/posts/2025-12-2.html#manual-migration${colors.reset}`);
+  console.log();
+}
+
+//------------------------------------------------------------------------------
 // Console Helpers (replace chalk)
 //------------------------------------------------------------------------------
 
@@ -743,7 +801,8 @@ async function processFile(filePath, options) {
   log.cyan(`\n📄 ${filePath}`);
   log.gray(`   Found ${elements.length} element(s) with d-d-flex\n`);
 
-  // Check for dynamic :class bindings with flex utilities
+  // Check for dynamic :class bindings with flex utilities (standalone, not on flex elements)
+  // Note: Dynamic bindings ON flex elements are handled by shouldSkipElement()
   const dynamicClassRegex = /:(class|v-bind:class)="([^"]*)"/g;
   let dynamicMatch;
   const flexUtilityPattern = /d-d-flex|d-fl-center|d-ai-|d-jc-|d-fd-|d-gg?\d/;
@@ -751,9 +810,13 @@ async function processFile(filePath, options) {
   while ((dynamicMatch = dynamicClassRegex.exec(content)) !== null) {
     const bindingContent = dynamicMatch[2];
     if (flexUtilityPattern.test(bindingContent)) {
-      console.log(log.yellow(`   ⚠ Skipped: dynamic :class binding with flex utilities at position ${dynamicMatch.index}. Consider refactoring to dynamic DtStack props.`));
-      log.gray(`     "${bindingContent.length > 60 ? bindingContent.substring(0, 60) + '...' : bindingContent}"`);
-      log.gray(`     Requires manual review - cannot auto-migrate dynamic bindings\n`);
+      const lineNum = getLineNumber(content, dynamicMatch.index);
+      trackSkippedElement(
+        'Dynamic :class with flex utilities',
+        filePath,
+        lineNum,
+        `:class="${bindingContent.length > 50 ? bindingContent.substring(0, 50) + '...' : bindingContent}"`,
+      );
     }
   }
 
@@ -768,13 +831,15 @@ async function processFile(filePath, options) {
   for (const element of elements) {
     const transformation = transformElement(element, options.showOutline, content);
 
-    // Handle skipped elements
+    // Handle skipped elements - track for grouped summary instead of inline output
     if (transformation.skip) {
-      const icon = transformation.severity === 'warning' ? '⚠' : 'ℹ';
-      const colorFn = transformation.severity === 'warning' ? log.yellow : log.gray;
-      console.log(colorFn(`   ${icon} ${transformation.message}`));
-      log.gray(`      ${element.fullMatch}`);
-      console.log();
+      const lineNum = getLineNumber(content, element.index);
+      trackSkippedElement(
+        transformation.reason,
+        filePath,
+        lineNum,
+        element.fullMatch,
+      );
       skipped++;
       continue;
     }
@@ -1281,6 +1346,11 @@ async function main() {
 
   if (options.dryRun && totalChanges > 0) {
     console.log(log.yellow('\n   Run without --dry-run to apply changes.'));
+  }
+
+  // Print grouped summary of all skipped elements
+  if (!options.removeOutline) {
+    printSkippedSummary();
   }
 
   console.log();
