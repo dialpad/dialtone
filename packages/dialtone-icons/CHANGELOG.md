@@ -1,3 +1,10 @@
+## [4.46.1](https://github.com/dialpad/dialtone/compare/dialtone-icons/v4.46.0...dialtone-icons/v4.46.1) (2025-12-03)
+
+
+### Bug Fixes
+
+* **Docs:** DLT-2849 fix dt-select-menu values in documentation pages ([#984](https://github.com/dialpad/dialtone/issues/984)) ([a60aa76](https://github.com/dialpad/dialtone/commit/a60aa760e578d822cb23eb737942fe3f8c62dd2a))
+
 # [4.46.0](https://github.com/dialpad/dialtone/compare/dialtone-icons/v4.45.1...dialtone-icons/v4.46.0) (2025-12-02)
 
 
