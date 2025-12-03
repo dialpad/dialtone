@@ -11,7 +11,10 @@
         v-for="(item, index) in value"
         :key="getId(index)"
       >
-        <div class="d-d-flex d-my1">
+        <dt-stack
+          direction="row"
+          class="d-my1"
+        >
           <div class="d-fl-grow1">
             <dt-list-item
               class="d-p6 d-pl0"
@@ -36,7 +39,7 @@
               <dt-icon-close />
             </dt-button>
           </div>
-        </div>
+        </dt-stack>
       </template>
       <div>
         <dt-button

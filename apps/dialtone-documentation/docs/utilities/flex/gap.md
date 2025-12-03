@@ -10,21 +10,21 @@ description: Utilities to control the spacing between columns, rows, or both.
 Use `d-g{#}` to universally change the row and column gap space.
 
 <code-well-header>
-  <div class="d-fl-col2 d-fw-wrap d-g16 d-bar8 d-w100p d-bgc-bold">
-    <div class="d-fl-center d-p16 d-bgc-moderate d-bar4">1</div>
-    <div class="d-fl-center d-p16 d-bgc-moderate d-bar4">2</div>
-    <div class="d-fl-center d-p16 d-bgc-moderate d-bar4">3</div>
-    <div class="d-fl-center d-p16 d-bgc-moderate d-bar4">4</div>
-  </div>
+  <dt-stack direction="row" class="d-fl-col2 d-fw-wrap d-g16 d-bar8 d-w100p d-bgc-bold">
+    <dt-stack direction="row" align="center" justify="center" class="d-p16 d-bgc-moderate d-bar4">1</dt-stack>
+    <dt-stack direction="row" align="center" justify="center" class="d-p16 d-bgc-moderate d-bar4">2</dt-stack>
+    <dt-stack direction="row" align="center" justify="center" class="d-p16 d-bgc-moderate d-bar4">3</dt-stack>
+    <dt-stack direction="row" align="center" justify="center" class="d-p16 d-bgc-moderate d-bar4">4</dt-stack>
+  </dt-stack>
 </code-well-header>
 
 ```html
-<div class="d-fl-col2 d-fw-wrap d-g16">
+<dt-stack direction="row" class="d-fl-col2 d-fw-wrap d-g16">
   <div>1</div>
   <div>2</div>
   <div>3</div>
   <div>4</div>
-</div>
+</dt-stack>
 ```
 
 ## Row Gap
@@ -32,21 +32,21 @@ Use `d-g{#}` to universally change the row and column gap space.
 Use `d-rg{#}` to change the row gap space.
 
 <code-well-header>
-  <div class="d-d-flex d-fd-column d-rg16 d-bar8 d-w100p d-bgc-bold">
-    <div class="d-fl-center d-p16 d-bgc-moderate d-bar4">1</div>
-    <div class="d-fl-center d-p16 d-bgc-moderate d-bar4">2</div>
-    <div class="d-fl-center d-p16 d-bgc-moderate d-bar4">3</div>
-    <div class="d-fl-center d-p16 d-bgc-moderate d-bar4">4</div>
-  </div>
+  <dt-stack class="d-rg16 d-bar8 d-w100p d-bgc-bold">
+    <dt-stack direction="row" align="center" justify="center" class="d-p16 d-bgc-moderate d-bar4">1</dt-stack>
+    <dt-stack direction="row" align="center" justify="center" class="d-p16 d-bgc-moderate d-bar4">2</dt-stack>
+    <dt-stack direction="row" align="center" justify="center" class="d-p16 d-bgc-moderate d-bar4">3</dt-stack>
+    <dt-stack direction="row" align="center" justify="center" class="d-p16 d-bgc-moderate d-bar4">4</dt-stack>
+  </dt-stack>
 </code-well-header>
 
 ```html
-<div class="d-d-flex d-fd-column d-rg16">
+<dt-stack class="d-rg16">
   <div>1</div>
   <div>2</div>
   <div>3</div>
   <div>4</div>
-</div>
+</dt-stack>
 ```
 
 ## Column Gap
@@ -54,41 +54,41 @@ Use `d-rg{#}` to change the row gap space.
 Use `d-cg{#}` to change the column gap space.
 
 <code-well-header>
-  <div class="d-fl-col4 d-cg16 d-bar8 d-w100p d-bgc-bold">
-    <div class="d-fl-center d-p16 d-bgc-moderate d-bar4">1</div>
-    <div class="d-fl-center d-p16 d-bgc-moderate d-bar4">2</div>
-    <div class="d-fl-center d-p16 d-bgc-moderate d-bar4">3</div>
-    <div class="d-fl-center d-p16 d-bgc-moderate d-bar4">4</div>
-  </div>
+  <dt-stack direction="row" class="d-fl-col4 d-cg16 d-bar8 d-w100p d-bgc-bold">
+    <dt-stack direction="row" align="center" justify="center" class="d-p16 d-bgc-moderate d-bar4">1</dt-stack>
+    <dt-stack direction="row" align="center" justify="center" class="d-p16 d-bgc-moderate d-bar4">2</dt-stack>
+    <dt-stack direction="row" align="center" justify="center" class="d-p16 d-bgc-moderate d-bar4">3</dt-stack>
+    <dt-stack direction="row" align="center" justify="center" class="d-p16 d-bgc-moderate d-bar4">4</dt-stack>
+  </dt-stack>
 </code-well-header>
 
 ```html
-<div class="d-fl-col4 d-cg16">
+<dt-stack direction="row" class="d-fl-col4 d-cg16">
   <div>1</div>
   <div>2</div>
   <div>3</div>
   <div>4</div>
-</div>
+</dt-stack>
 ```
 
 ## Independently Changing Row and Column Gaps
 
 <code-well-header>
-  <div class="d-fl-col2 d-fw-wrap d-rg16 d-cg8 d-bar8 d-w100p d-bgc-bold">
-    <div class="d-fl-center d-p16 d-bgc-moderate d-bar4">1</div>
-    <div class="d-fl-center d-p16 d-bgc-moderate d-bar4">2</div>
-    <div class="d-fl-center d-p16 d-bgc-moderate d-bar4">3</div>
-    <div class="d-fl-center d-p16 d-bgc-moderate d-bar4">4</div>
-  </div>
+  <dt-stack direction="row" class="d-fl-col2 d-fw-wrap d-rg32 d-cg8 d-bar8 d-w100p d-bgc-bold">
+    <dt-stack direction="row" align="center" justify="center" class="d-p16 d-bgc-moderate d-bar4">1</dt-stack>
+    <dt-stack direction="row" align="center" justify="center" class="d-p16 d-bgc-moderate d-bar4">2</dt-stack>
+    <dt-stack direction="row" align="center" justify="center" class="d-p16 d-bgc-moderate d-bar4">3</dt-stack>
+    <dt-stack direction="row" align="center" justify="center" class="d-p16 d-bgc-moderate d-bar4">4</dt-stack>
+  </dt-stack>
 </code-well-header>
 
 ```html
-<div class="d-d-flex d-fd-column d-rg16 d-cg8">
+<dt-stack direction="row" class="d-rg32 d-cg8">
   <div>1</div>
   <div>2</div>
   <div>3</div>
   <div>4</div>
-</div>
+</dt-stack>
 ```
 
 <script setup>

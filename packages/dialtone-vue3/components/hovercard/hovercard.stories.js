@@ -172,11 +172,11 @@ const DefaultTemplate = (args, { argTypes }) => createTemplateFromVueFile(
 export const Default = {
   render: DefaultTemplate,
   decorators: [() => ({
-    template: `<div class="d-d-flex d-jc-center d-ai-center d-h464">
+    template: `<dt-stack direction="row" justify="center" align="center" class="d-h464">
       <div class="d-w164">
         <story />
       </div>
-    </div>`,
+    </dt-stack>`,
   })],
 
   args: {},
@@ -204,11 +204,11 @@ const InputTemplate = (args, { argTypes }) => createTemplateFromVueFile(
 export const WithInput = {
   render: InputTemplate,
   decorators: [() => ({
-    template: `<div class="d-d-flex d-jc-center d-ai-center d-h464">
+    template: `<dt-stack direction="row" justify="center" align="center" class="d-h464">
       <div class="d-w164">
         <story />
       </div>
-    </div>`,
+    </dt-stack>`,
   })],
   args: { ...Default.args, offset: [0, 5] },
 };

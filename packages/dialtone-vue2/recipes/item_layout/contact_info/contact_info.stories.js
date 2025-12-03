@@ -156,14 +156,14 @@ export const Default = {
     presence: 'active',
     header: `<div class="d-fs-200 d-fw-bold" id="contact-name"> Joseph Lumaban </div>`,
     subtitle: `<div class="d-fs-100 d-mt2"> +1 (415) 123-4567 </div>`,
-    bottom: `<div class="d-d-flex d-ai-center d-mtn6">
+    bottom: `<dt-stack direction="row" align="center" class="d-mtn6">
     <div class="d-w8 d-h8 d-mr4 d-bgc-magenta-200">
       &nbsp;
     </div>
     <div class="d-fs-100 d-mr4">
       Aerolabs Support
     </div>
-  </div>`,
+  </dt-stack>`,
   },
 
   parameters: {
@@ -184,10 +184,10 @@ export const Default = {
       <div class="d-fs-100 d-mt2">+1 (415) 123-4567</div>
     </template>
     <template #bottom>
-      <div class="d-d-flex d-ai-center d-mtn6">
+      <dt-stack direction="row" align="center" class="d-mtn6">
         <div class="d-w8 d-h8 d-mr4 d-bgc-magenta-200">&nbsp;</div>
         <div class="d-fs-100 d-mr4">Aerolabs Support</div>
-      </div>
+      </dt-stack>
     </template>
   </dt-recipe-contact-info>
         `,
@@ -230,10 +230,10 @@ export const Variants = {
       <p class="d-my16 d-fs-200 d-fw-bold">Unknown contact (phone number only) with attestation</p>
       <dt-recipe-contact-info>
         <template #header>
-          <div class="d-d-flex d-ai-center d-mb2">
+          <dt-stack direction="row" align="center" class="d-mb2">
             <div class="d-fs-200 d-fw-bold d-mr4">+1 (415) 123-4567</div>
             <dt-icon name="check-circle" size="200" class="d-fc-tertiary" />
-          </div>
+          </dt-stack>
         </template>
         <template #subtitle>San Francisco, California</template>
       </dt-recipe-contact-info>
@@ -242,9 +242,9 @@ export const Variants = {
       <p class="d-my16 d-fs-200 d-fw-bold">Unknown contact with "marked as spam" button</p>
       <dt-recipe-contact-info>
         <template #header>
-          <div class="d-d-flex d-ai-center d-mb2">
+          <dt-stack direction="row" align="center" class="d-mb2">
             <div class="d-fs-200 d-fw-bold d-mr4">+1 (415) 123-4567</div>
-          </div>
+          </dt-stack>
         </template>
         <template #subtitle>
           <dt-link kind="danger" @click.stop="onMarkAsSpam">Mark as spam</dt-link>
@@ -263,16 +263,16 @@ export const Variants = {
             <div class="d-fs-200 d-fw-bold d-mr4">Joseph Lumaban</div>
           </template>
           <template #subtitle>
-            <div class="d-d-flex d-ai-center">
+            <dt-stack direction="row" align="center">
               <div class="d-fs-100 d-mt2">+1 (415) 123-4567</div>
               <dt-icon name="check-circle" size="200" class="d-fc-tertiary d-va-text-bottom" />
-            </div>
+            </dt-stack>
           </template>
           <template #bottom>
-            <div class="d-d-flex d-ai-center d-mtn6">
+            <dt-stack direction="row" align="center" class="d-mtn6">
               <div class="d-w8 d-h8 d-mr4 d-bgc-magenta-200">&nbsp;</div>
               <div class="d-fs-100 d-mr4">Aerolabs Support</div>
-            </div>
+            </dt-stack>
           </template>
         </dt-recipe-contact-info>
       </dt-button>
@@ -282,17 +282,17 @@ export const Variants = {
       <dt-recipe-contact-info>
         <template #header><div class="d-fs-200 d-fw-bold d-mr4">Joseph Lumaban</div></template>
         <template #subtitle>
-          <div class="d-d-flex d-ai-center">
+          <dt-stack direction="row" align="center">
             <div class="d-fs-100 d-mt2">+1 (415) 123-4567</div>
             <dt-icon name="check-circle" size="200" class="d-fc-tertiary d-va-text-bottom" />
-          </div>
+          </dt-stack>
         </template>
         <template #bottom>
-          <div class="d-d-flex d-ai-center d-mtn6">
+          <dt-stack direction="row" align="center" class="d-mtn6">
             <div class="d-w8 d-h8 d-mr4 d-bgc-magenta-200">&nbsp;</div>
             <div class="d-fs-100 d-mr4">Aerolabs Support</div>
             <div class="d-fw-bold d-fs-100">• Transfer from Billing Support</div>
-          </div>
+          </dt-stack>
         </template>
       </dt-recipe-contact-info>
     </div>
@@ -300,22 +300,22 @@ export const Variants = {
       <p class="d-my16 d-fs-200 d-fw-bold">Admin view / listening in</p>
       <dt-recipe-contact-info>
         <template #header>
-          <div class="d-d-flex d-ai-center d-mb2">
+          <dt-stack direction="row" align="center" class="d-mb2">
             <div class="d-fw-bold d-fs-200">Joseph Lumaban & Justin H.</div>
             <div class="d-fs-200">(Agent)</div>
-          </div>
+          </dt-stack>
         </template>
         <template #subtitle>
-          <div class="d-d-flex d-ai-center">
+          <dt-stack direction="row" align="center">
             <div class="d-fs-100 d-mt2">+1 (415) 123-4567</div>
             <dt-icon name="check-circle" size="200" class="d-fc-tertiary d-va-text-bottom" />
-          </div>
+          </dt-stack>
         </template>
         <template #bottom>
-          <div class="d-d-flex d-ai-center d-mtn6">
+          <dt-stack direction="row" align="center" class="d-mtn6">
             <div class="d-w8 d-h8 d-mr4 d-bgc-magenta-200">&nbsp;</div>
             <div class="d-fs-100 d-mr4">Aerolabs Support</div>
-          </div>
+          </dt-stack>
         </template>
       </dt-recipe-contact-info>
     </div>
@@ -328,7 +328,7 @@ export const Variants = {
         <template #header><div class="d-fw-bold d-fs-200">Natalie Woods</div></template>
         <template #subtitle>+1 (415) 123-4567</template>
         <template #right>
-          <div class="d-d-flex d-ai-center d-m8">
+          <dt-stack direction="row" align="center" class="d-m8">
             <dt-button size="xs" :circle="true" importance="clear" aria-label="chat">
               <template #icon>
                 <dt-icon size="400" name="webchat" />
@@ -340,7 +340,7 @@ export const Variants = {
               </template>
             </dt-button>
             <div class="d-m4">0:32</div>
-          </div>
+          </dt-stack>
         </template>
         <template #bottom>
           2 matches found.

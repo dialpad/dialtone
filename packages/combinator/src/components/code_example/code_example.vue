@@ -4,7 +4,12 @@
     @change="selectedPanelId = $event.selected"
   >
     <template #tabs>
-      <div class="d-d-flex d-jc-space-between d-ai-flex-start d-w100p">
+      <dt-stack
+        direction="row"
+        justify="between"
+        align="start"
+        class="d-w100p"
+      >
         <div>
           <dt-tab
             :id="vueTabId"
@@ -30,7 +35,7 @@
         >
           Copy Code
         </copy-button>
-      </div>
+      </dt-stack>
     </template>
     <dt-tab-panel
       :id="vuePanelId"

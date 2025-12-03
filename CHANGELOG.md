@@ -1,8 +1,9 @@
-# [9.150.0-next.1](https://github.com/dialpad/dialtone/compare/dialtone/v9.149.1...dialtone/v9.150.0-next.1) (2025-11-26)
+# [9.150.0](https://github.com/dialpad/dialtone/compare/dialtone/v9.149.1...dialtone/v9.150.0) (2025-12-02)
 
 
 ### Bug Fixes
 
+* **Split Button:** NO-JIRA fix split button inline size for importance="clear" variants ([#985](https://github.com/dialpad/dialtone/issues/985)) ([8de1668](https://github.com/dialpad/dialtone/commit/8de1668ce242f206fc978f0401f1c8ed3c82d9cf))
 * **Tokens:** wrap css math expressions with calc() in layered build ([#966](https://github.com/dialpad/dialtone/issues/966)) ([1635f61](https://github.com/dialpad/dialtone/commit/1635f61280c9379355c9a2ea295cbf23a78c888f))
 
 
@@ -15,6 +16,7 @@
 
 * **Css Utility:** DLT-2715 add default color for border css utilities ([#874](https://github.com/dialpad/dialtone/issues/874)) ([71310ab](https://github.com/dialpad/dialtone/commit/71310ab483fde976d56c69e0456bce70cb6d372d))
 * **Filter Pill:** DLT-2704 create component ([#473](https://github.com/dialpad/dialtone/issues/473)) ([6267445](https://github.com/dialpad/dialtone/commit/626744501640f18211ca9d41e4a68e099af3b6dd))
+* **Icon:** DP-166633 add bracket left right icon ([#982](https://github.com/dialpad/dialtone/issues/982)) ([278c2a4](https://github.com/dialpad/dialtone/commit/278c2a440fa60f58c47371442aa21edbc1e739ce))
 * **Tokens:** DLT-1977 add high contrast design tokens and theme ([#938](https://github.com/dialpad/dialtone/issues/938)) ([a1c0457](https://github.com/dialpad/dialtone/commit/a1c0457e3b6b445e3f54d76b9ce3b847abc31ac5))
 * **Tokens:** DLT-2767 exploratory shell themes ([#909](https://github.com/dialpad/dialtone/issues/909)) ([3afcf63](https://github.com/dialpad/dialtone/commit/3afcf637d136733ff2f981a9ebbb63a3c4a37c99))
 * **Tokens:** DLT-2781 create color-assistive themes ([#921](https://github.com/dialpad/dialtone/issues/921)) ([a6cc397](https://github.com/dialpad/dialtone/commit/a6cc397bec52987f9ac2c3efca9b16f61c406807))

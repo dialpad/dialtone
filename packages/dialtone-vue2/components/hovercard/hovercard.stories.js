@@ -167,11 +167,11 @@ export default {
 export const Default = {
   render: (argsData) => createRenderConfig(DtHovercard, DtHovercardDefaultTemplate, argsData),
   decorators: [() => ({
-    template: `<div class="d-d-flex d-jc-center d-ai-center d-h464">
+    template: `<dt-stack direction="row" justify="center" align="center" class="d-h464">
       <div class="d-w164">
         <story />
       </div>
-    </div>`,
+    </dt-stack>`,
   })],
 
   args: {},
@@ -189,11 +189,11 @@ export const Many = {
 export const WithInput = {
   render: (argsData) => createRenderConfig(DtHovercard, DtHovercardWithInputTemplate, argsData),
   decorators: [() => ({
-    template: `<div class="d-d-flex d-jc-center d-ai-center d-h464">
+    template: `<dt-stack direction="row" justify="center" align="center" class="d-h464">
       <div class="d-w164">
         <story />
       </div>
-    </div>`,
+    </dt-stack>`,
   })],
 
   args: {},

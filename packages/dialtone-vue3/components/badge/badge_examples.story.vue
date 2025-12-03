@@ -1,8 +1,10 @@
 <template>
   <div class="d-fd-column d-p24 d-w100p d-of-auto d-stack8">
     <h2>Kind: Label</h2>
-    <div
-      class="d-d-flex d-gg8 d-ai-center"
+    <dt-stack
+      direction="row"
+      gap="400"
+      align="center"
     >
       <dt-badge
         text="Co-host"
@@ -24,9 +26,11 @@
           <dt-icon-message :size="iconSize" />
         </template>
       </dt-badge>
-    </div>
-    <div
-      class="d-d-flex d-gg8 d-ai-center"
+    </dt-stack>
+    <dt-stack
+      direction="row"
+      gap="400"
+      align="center"
     >
       <dt-badge
         text="Label"
@@ -40,9 +44,11 @@
         text="Complaint"
         decoration="red-400"
       />
-    </div>
-    <div
-      class="d-d-flex d-gg8 d-ai-center"
+    </dt-stack>
+    <dt-stack
+      direction="row"
+      gap="400"
+      align="center"
     >
       <dt-badge
         text="In progress"
@@ -56,25 +62,31 @@
         text="Draft"
         type="info"
       />
-    </div>
-    <div
-      class="d-d-flex d-gg8 d-ai-center"
+    </dt-stack>
+    <dt-stack
+      direction="row"
+      gap="400"
+      align="center"
     >
       <dt-badge
         text="Overdue"
         type="warning"
       />
-    </div>
-    <div
-      class="d-d-flex d-gg8 d-ai-center"
+    </dt-stack>
+    <dt-stack
+      direction="row"
+      gap="400"
+      align="center"
     >
       <dt-badge
         text="Resolved"
         type="success"
       />
-    </div>
-    <div
-      class="d-d-flex d-gg8 d-ai-center"
+    </dt-stack>
+    <dt-stack
+      direction="row"
+      gap="400"
+      align="center"
     >
       <dt-badge
         text="Recording"
@@ -84,9 +96,11 @@
           <dt-icon-record-filled :size="iconSize" />
         </template>
       </dt-badge>
-    </div>
-    <div
-      class="d-d-flex d-gg8 d-ai-center"
+    </dt-stack>
+    <dt-stack
+      direction="row"
+      gap="400"
+      align="center"
     >
       <dt-badge
         text="Live"
@@ -96,9 +110,11 @@
         text="Presenter"
         type="bulletin"
       />
-    </div>
-    <div
-      class="d-d-flex d-gg8 d-ai-center"
+    </dt-stack>
+    <dt-stack
+      direction="row"
+      gap="400"
+      align="center"
     >
       <dt-badge
         text="Ai Notes"
@@ -116,12 +132,14 @@
         text="Ai Transcript"
         type="ai"
       />
-    </div>
+    </dt-stack>
     <h2 class="d-mt32">
       Kind: Count
     </h2>
-    <div
-      class="d-d-flex d-gg8 d-ai-center"
+    <dt-stack
+      direction="row"
+      gap="400"
+      align="center"
     >
       <dt-badge
         text="5%"
@@ -132,9 +150,11 @@
           <dt-icon-arrow-up :size="iconSize" />
         </template>
       </dt-badge>
-    </div>
-    <div
-      class="d-d-flex d-gg8 d-ai-center"
+    </dt-stack>
+    <dt-stack
+      direction="row"
+      gap="400"
+      align="center"
     >
       <dt-badge
         text="-12%"
@@ -145,9 +165,11 @@
           <dt-icon-arrow-down :size="iconSize" />
         </template>
       </dt-badge>
-    </div>
-    <div
-      class="d-d-flex d-gg8 d-ai-center"
+    </dt-stack>
+    <dt-stack
+      direction="row"
+      gap="400"
+      align="center"
     >
       <dt-badge
         text="1"
@@ -164,12 +186,14 @@
         kind="count"
         type="bulletin"
       />
-    </div>
+    </dt-stack>
   </div>
 </template>
 
 <script>
 import { DtBadge } from './';
+import { DtStack } from '@/components/stack';
+
 import {
   DtIconArrowDown,
   DtIconArrowUp,
@@ -183,6 +207,7 @@ export default {
 
   components: {
     DtBadge,
+    DtStack,
     DtIconArrowDown,
     DtIconArrowUp,
     DtIconLock,

@@ -8,7 +8,7 @@ description: Utilities to control an element's maximum width.
 Use `d-wmx{n}p` to set a minimum width percentage for an element. This can be combined with `d-w{n}p` and `d-wmn{n}` to have an element fill a certain height range.
 
 <code-well-header class="d-d-flex d-jc-center d-p24 d-bgc-secondary d-w100p d-flow16" custom>
-  <div class="d-fl-center d-py16 d-px8 d-w100p d-wmx50p d-bgc-moderate d-bar4 d-ta-center">1</div>
+  <dt-stack direction="row" align="center" justify="center" class="d-py16 d-px8 d-w100p d-wmx50p d-bgc-moderate d-bar4 d-ta-center">1</dt-stack>
 </code-well-header>
 
 ```html
@@ -20,9 +20,9 @@ Use `d-wmx{n}p` to set a minimum width percentage for an element. This can be co
 Use `d-wmx{n}` to set a fixed minimum width for an element. This can be combined with `d-w{n}p` and `d-wmn{n}` to have an element fill a certain height range.
 
 <code-well-header class="d-d-flex d-jc-center d-p24 d-bgc-secondary d-w100p d-flow16 d-of-y-scroll" custom>
-  <div class="d-fl-center d-py16 d-px8 d-w100p d-h64 d-wmx64 d-bgc-moderate d-bar4 d-ta-center">1</div>
-  <div class="d-fl-center d-py16 d-px8 d-w100p d-h64 d-wmx96 d-bgc-moderate d-bar4 d-ta-center">2</div>
-  <div class="d-fl-center d-py16 d-px8 d-w100p d-h64 d-wmx332 d-bgc-moderate d-bar4 d-ta-center">3</div>
+  <dt-stack direction="row" align="center" justify="center" class="d-py16 d-px8 d-w100p d-h64 d-wmx64 d-bgc-moderate d-bar4 d-ta-center">1</dt-stack>
+  <dt-stack direction="row" align="center" justify="center" class="d-py16 d-px8 d-w100p d-h64 d-wmx96 d-bgc-moderate d-bar4 d-ta-center">2</dt-stack>
+  <dt-stack direction="row" align="center" justify="center" class="d-py16 d-px8 d-w100p d-h64 d-wmx332 d-bgc-moderate d-bar4 d-ta-center">3</dt-stack>
 </code-well-header>
 
 ```html

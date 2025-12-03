@@ -1,8 +1,10 @@
 <template>
-  <div class="d-d-flex">
+  <dt-stack
+    direction="row"
+  >
     <span v-html="html" />
     <slot />
-  </div>
+  </dt-stack>
 </template>
 
 <script setup>

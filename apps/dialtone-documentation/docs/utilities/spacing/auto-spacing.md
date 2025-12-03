@@ -3,8 +3,10 @@ title: Auto Spacing
 description: Utilities for controlling the space between child elements.
 ---
 
-<dt-notice kind="info" class="d-wmx100p d-mt24" hideClose>
-  We recommend using the <router-link class="d-link d-link--muted" to="/components/stack/">Stack</router-link> component. It can still be combined with flex utilities to create more complex layouts.
+<dt-notice kind="error" class="d-wmx100p d-mt24" hideClose>
+
+`d-stack` and `d-flow` utilities are deprecated. Please use the <router-link class="d-link d-link--muted" to="/components/stack">Stack</router-link> component instead.
+
 </dt-notice>
 
 ## Adding Space Vertically

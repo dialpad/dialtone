@@ -211,13 +211,13 @@ export const WithCustomHeaderAndContent = {
 
   args: {
     header: `
-      <div class="d-fl-center d-p12 d-bgc-purple-100">
+      <dt-stack direction="row" align="center" justify="center" class="d-p12 d-bgc-purple-100">
         <div>[custom header]</div>
-      </div>`,
+      </dt-stack>`,
     default: `
-      <div class="d-fl-center d-p32 d-bgc-gold-200">
+      <dt-stack direction="row" align="center" justify="center" class="d-p32 d-bgc-gold-200">
         <h2>[custom body]</h2>
-      </div>`,
+      </dt-stack>`,
   },
 
   parameters: { ...Default.parameters },
