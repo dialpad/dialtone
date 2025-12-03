@@ -153,8 +153,177 @@
   <div class="d-d-flex d-flg8 d-ji-center d-ai-center d-p16">
     <span>Multiple edge cases</span>
   </div>
+
+  <!-- ============================================ -->
+  <!-- NEW TESTS: REF ATTRIBUTE SKIP DETECTION -->
+  <!-- ============================================ -->
+
+  <!-- TEST 28: Ref with DOM API (addEventListener) - Should be SKIPPED -->
+  <div ref="containerRef" class="d-d-flex d-ai-center d-g8">
+    <span>Element with ref used for DOM manipulation</span>
+  </div>
+
+  <!-- TEST 29: Ref with DOM API (focus) - Should be SKIPPED -->
+  <nav ref="navElement" class="d-d-flex d-fd-row d-jc-between">
+    <a href="#">Link 1</a>
+    <a href="#">Link 2</a>
+  </nav>
+
+  <!-- TEST 30: Ref without DOM API usage - Should be CONVERTED (ref alone doesn't trigger skip) -->
+  <div ref="simpleRef" class="d-d-flex d-ai-center">
+    <span>Ref but no DOM API usage in script</span>
+  </div>
+
+  <!-- ============================================ -->
+  <!-- NEW TESTS: DYNAMIC CLASS BINDING SKIP -->
+  <!-- ============================================ -->
+
+  <!-- TEST 31: Dynamic :class with flex utilities - Should be SKIPPED -->
+  <div :class="['d-d-flex d-ai-center', { 'd-jc-between': isActive }]">
+    <span>Dynamic binding with flex utilities</span>
+  </div>
+
+  <!-- TEST 32: Dynamic :class array with flex utilities - Should be SKIPPED -->
+  <div :class="[flexClass, 'd-d-flex', alignmentClass]">
+    <span>Dynamic array binding with flex</span>
+  </div>
+
+  <!-- TEST 33: Dynamic :class object with flex utilities - Should be SKIPPED -->
+  <div :class="{ 'd-d-flex d-ai-center': isVisible, 'd-jc-end': alignEnd }">
+    <span>Dynamic object binding with flex</span>
+  </div>
+
+  <!-- TEST 34: Dynamic :class without flex utilities - Should be CONVERTED -->
+  <div class="d-d-flex d-ai-center" :class="{ 'd-p16': hasPadding }">
+    <span>Dynamic binding but NO flex utilities in binding</span>
+  </div>
+
+  <!-- ============================================ -->
+  <!-- NEW TESTS: MORE SEMANTIC HTML ELEMENTS -->
+  <!-- ============================================ -->
+
+  <!-- TEST 35: span as flex container - Should use as="span" -->
+  <span class="d-d-flex d-ai-center d-g4">
+    <span>Inner span</span>
+  </span>
+
+  <!-- TEST 36: header as flex container - Should use as="header" -->
+  <header class="d-d-flex d-jc-between d-ai-center d-p16">
+    <span>Logo</span>
+    <nav>Navigation</nav>
+  </header>
+
+  <!-- TEST 37: footer as flex container - Should use as="footer" -->
+  <footer class="d-d-flex d-fd-column d-g16 d-p24">
+    <span>Footer content</span>
+  </footer>
+
+  <!-- TEST 38: aside as flex container - Should use as="aside" -->
+  <aside class="d-d-flex d-fd-column d-g8">
+    <span>Sidebar item 1</span>
+    <span>Sidebar item 2</span>
+  </aside>
+
+  <!-- TEST 39: article as flex container - Should use as="article" -->
+  <article class="d-d-flex d-fd-column d-g16">
+    <h3>Article title</h3>
+    <p>Article content</p>
+  </article>
+
+  <!-- TEST 40: main as flex container - Should use as="main" -->
+  <main class="d-d-flex d-fd-column d-g24">
+    <section>Section 1</section>
+    <section>Section 2</section>
+  </main>
+
+  <!-- TEST 41: nav as flex container - Should use as="nav" -->
+  <nav class="d-d-flex d-ai-center d-g16">
+    <a href="#">Home</a>
+    <a href="#">About</a>
+    <a href="#">Contact</a>
+  </nav>
+
+  <!-- ============================================ -->
+  <!-- NEW TESTS: NESTED SAME-TAG ELEMENTS -->
+  <!-- ============================================ -->
+
+  <!-- TEST 42: Nested divs at depth 2 - closing tags must match correctly -->
+  <div class="d-d-flex d-fd-column d-g8">
+    <div class="d-d-flex d-ai-center d-g4">
+      <span>Nested depth 2</span>
+    </div>
+  </div>
+
+  <!-- TEST 43: Nested divs at depth 3 - closing tags must match correctly -->
+  <div class="d-d-flex d-fd-column d-g16">
+    <div class="d-d-flex d-ai-center d-g8">
+      <div class="d-d-flex d-jc-center">
+        <span>Nested depth 3</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- TEST 44: Nested spans - closing tags with as="span" must match -->
+  <span class="d-d-flex d-ai-center">
+    <span class="d-d-flex d-g4">
+      <span>Inner content</span>
+    </span>
+  </span>
+
+  <!-- TEST 45: Mixed nesting - different tag types -->
+  <section class="d-d-flex d-fd-column d-g24">
+    <header class="d-d-flex d-jc-between">
+      <span>Title</span>
+    </header>
+    <div class="d-d-flex d-ai-center d-g8">
+      <span>Content</span>
+    </div>
+    <footer class="d-d-flex d-jc-end">
+      <span>Footer</span>
+    </footer>
+  </section>
+
+  <!-- ============================================ -->
+  <!-- NEW TESTS: SELF-CLOSING AND EMPTY ELEMENTS -->
+  <!-- ============================================ -->
+
+  <!-- TEST 46: Self-closing with flex - Should NOT convert (no content to wrap) -->
+  <div class="d-d-flex d-ai-center" />
+
+  <!-- TEST 47: Empty element with flex - Should convert -->
+  <div class="d-d-flex d-fd-column"></div>
 </template>
 
 <script setup>
 // Test file for edge case validation
+
+// Refs for DOM manipulation tests (TEST 28, 29)
+import { ref, onMounted } from 'vue';
+
+const containerRef = ref(null);
+const navElement = ref(null);
+const simpleRef = ref(null);
+
+// This triggers skip for containerRef (TEST 28)
+onMounted(() => {
+  containerRef.value.addEventListener('click', () => {});
+});
+
+// This triggers skip for navElement (TEST 29)
+function focusNav() {
+  navElement.value.focus();
+}
+
+// simpleRef is used but NOT for DOM APIs, so it should NOT trigger skip (TEST 30)
+function getRefValue() {
+  return simpleRef.value;
+}
+
+// Dynamic class variables for tests
+const isActive = ref(false);
+const flexClass = ref('d-d-flex');
+const alignmentClass = ref('d-ai-center');
+const isVisible = ref(true);
+const alignEnd = ref(false);
+const hasPadding = ref(true);
 </script>
