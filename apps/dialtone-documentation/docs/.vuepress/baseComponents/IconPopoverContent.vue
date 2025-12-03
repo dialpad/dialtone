@@ -9,9 +9,9 @@
   <div class="d-stack16 d-fc-primary">
     <div class="d-wmx50p">
       <dt-select-menu
+        v-model="selectedSize"
         label="Size"
         size="sm"
-        @change="changeIconSize"
       >
         <option
           v-for="option in sizeOptions"
@@ -132,9 +132,6 @@ const vueExample = computed(() => {
 const vueExampleDeprecated = computed(() => {
   return `<dt-icon name="${props.iconName}" size="${selectedSize.value}" />`;
 });
-const changeIconSize = (size) => {
-  selectedSize.value = size;
-};
 
 watch([iconPreview, selectedSize], async () => {
   await nextTick();

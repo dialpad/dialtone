@@ -45,7 +45,7 @@ When setting the gap between elements, utilize [Space Tokens](#tokens) for the g
         Element B
       </dt-stack>
     </dt-stack>
-    <dt-select-menu label="Gap" :options="spaceValues" @change="changeSpace" />
+    <dt-select-menu label="Gap" :options="spaceValues" v-model="selectedSpace" />
   </div>
 </code-well-header>
 
@@ -205,9 +205,5 @@ const spaceValues = [
   { value: 'var(--dt-space-600)', label: 'var(--dt-space-600)' },
 ];
 
-const selectedSpace = ref('var(--dt-space-200)');
-
-const changeSpace = (newSpace) => {
-  selectedSpace.value = newSpace;
-};
+const selectedSpace = ref('var(--dt-space-400)');
 </script>
