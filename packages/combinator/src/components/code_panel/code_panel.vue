@@ -29,11 +29,16 @@
       </div>
     </template>
     <template #overlay>
-      <div class="d-d-flex d-ai-flex-end d-jc-flex-end d-h100p">
+      <dt-stack
+        direction="row"
+        align="end"
+        justify="end"
+        class="d-h100p"
+      >
         <div class="d-pr32 d-pb16 d-pe-auto">
           <slot name="overlay" />
         </div>
-      </div>
+      </dt-stack>
     </template>
   </dtc-overlay>
 </template>

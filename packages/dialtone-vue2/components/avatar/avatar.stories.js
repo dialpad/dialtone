@@ -113,7 +113,7 @@ export const Default = {
   render: (argsData) => createRenderConfig(DtAvatar, DtAvatarDefaultTemplate, argsData),
   decorators: [
     () => ({
-      template: `<div class="d-d-flex"><story /></div>`,
+      template: `<dt-stack direction="row"><story /></dt-stack>`,
     }),
   ],
 };

@@ -40,7 +40,8 @@
   ],
   "bin": {
     "dialtone-health-check": "./lib/dist/js/dialtone_health_check/index.cjs",
-    "dialtone-migration-helper": "./lib/dist/js/dialtone_migration_helper/index.mjs"
+    "dialtone-migration-helper": "./lib/dist/js/dialtone_migration_helper/index.mjs",
+    "dialtone-migrate-flex-to-stack": "./lib/dist/js/dialtone_migrate_flex_to_stack/index.mjs"
   },
   "type": "module",
   "scripts": {

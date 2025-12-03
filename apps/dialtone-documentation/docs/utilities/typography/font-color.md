@@ -96,16 +96,13 @@ Use `d-fco{n}` to change an element's text color opacity. You can also change fo
 
 <new-utility-class-table :classes="fontColors">
   <template #example="{ className }">
-    <div
-      class="d-fl-shrink0 d-h42 d-w42 d-bar-circle d-ba d-bc-moderate d-d-flex d-ai-center d-jc-center"
-      :class="[
+    <dt-stack direction="row" align="center" justify="center" class="d-fl-shrink0 d-h42 d-w42 d-bar-circle d-ba d-bc-moderate" :class="[
         {'d-bgc-primary': !className.endsWith('inverted')},
         {'d-bgc-contrast': className.endsWith('inverted')},
         className
-      ]"
-    >
+      ]">
       <span>Aa</span>
-    </div>
+    </dt-stack>
   </template>
 </new-utility-class-table>
 

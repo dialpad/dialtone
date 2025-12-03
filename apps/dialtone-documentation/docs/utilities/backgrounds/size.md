@@ -8,16 +8,13 @@ description: Utilities for controlling an element's background size.
 Use `d-bgs-{n}` to control the size of element's background image.
 
 <code-well-header class="d-fl-col5 d-fw-wrap d-g16 d-p16 d-bgc-secondary" custom>
-  <div class="d-d-flex d-fd-column d-ai-center d-stack4" v-for="i in sizes">
-      <div
-        class="d-fl-center d-w128 d-h128 d-bgc-moderate d-bar8 d-of-hidden d-bgr-none"
-        style="background-image: url('/assets/images/puffin.jpg');"
+  <dt-stack align="center" class="d-g4" v-for="i in sizes">
+      <dt-stack direction="row" align="center" justify="center" class="d-w128 d-h128 d-bgc-moderate d-bar8 d-of-hidden d-bgr-none" style="background-image: url('/assets/images/puffin.jpg');"
         :style="i === 'var' ? '--bgg-size: 65% 65%;' : ''"
-        :class="[{'d-bgp-center': i === 'auto'}, `d-bgs-${i}`]"
-      >
-      </div>
+        :class="[{'d-bgp-center': i === 'auto'}, `d-bgs-${i}`]">
+      </dt-stack>
       <code class="d-code--sm d-bgc-transparent">.d-bgs-{{ i }}</code>
-  </div>
+  </dt-stack>
 </code-well-header>
 
 ```html

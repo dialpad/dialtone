@@ -9,7 +9,7 @@ figma_url: https://www.figma.com/design/W58r5BkO8qTw3vem9YieJd/DT9-Component-Lib
 ---
 
 <code-well-header>
-  <div class="d-d-flex d-ai-center d-flow16">
+  <dt-stack direction="row" align="center" gap="500">
     <dt-avatar size="lg">
       <template #icon="{ iconSize }">
         <dt-icon-user :size="iconSize" />
@@ -17,7 +17,7 @@ figma_url: https://www.figma.com/design/W58r5BkO8qTw3vem9YieJd/DT9-Component-Lib
     </dt-avatar>
     <dt-avatar size="lg" full-name="dp" color="1000" presence="busy" />
     <dt-avatar size="lg" image-src="/assets/images/person.png" image-alt="avatar user" presence="active" />
-  </div>
+  </dt-stack>
 </code-well-header>
 
 <!-- <component-combinator component-name="DtAvatar" /> -->
@@ -163,13 +163,13 @@ vueCode='
 ### Sizes
 
 <code-well-header>
-    <div class="d-d-inline-flex d-ai-center d-flow8">
+    <dt-stack direction="row" align="center" gap="500">
         <dt-avatar v-for="size in sizes" :size="size">
           <template #icon="{ iconSize }">
             <dt-icon-user :size="iconSize" />
           </template>
         </dt-avatar>
-    </div>
+    </dt-stack>
 </code-well-header>
 
 <code-example-tabs
@@ -234,11 +234,11 @@ vueCode='
 Adds a count badge and CSS mask to the avatar based on the number of digits (1, 2, or 3). Currently available only with the `xs` avatar size.
 
 <code-well-header>
-    <div class="d-d-inline-flex d-ai-center d-flow8">
+    <dt-stack direction="row" align="center" gap="500">
         <dt-avatar :group="100" image-src="/assets/images/person.png" image-alt="Person Avatar" />
         <dt-avatar :group="11" image-src="/assets/images/person.png" image-alt="Person Avatar" />
         <dt-avatar :group="3" image-src="/assets/images/person.png" image-alt="Person Avatar" />
-    </div>
+    </dt-stack>
 </code-well-header>
 
 <code-example-tabs
@@ -431,14 +431,14 @@ vueCode='
 ### Overlay
 
 <code-well-header>
-  <div class="d-d-flex d-ai-center d-flow16">
+  <dt-stack direction="row" align="center" gap="500">
     <dt-avatar size="lg" image-src="/assets/images/person.png" image-alt="avatar user">
       <template #overlayIcon>
         <dt-icon-hear />
       </template>
     </dt-avatar>
     <dt-avatar size="lg" image-src="/assets/images/person.png" image-alt="avatar user" overlay-text="+3" />
-  </div>
+  </dt-stack>
 </code-well-header>
 
 <code-example-tabs
@@ -472,13 +472,13 @@ vueCode='
 If you need to create a clickable avatar you can set the clickable prop. This will make the avatar a clickable component, set some styling and will be navigable by keyboard. In order for the clickable avatar to be fully accessible, you need to either set `full-name`, `image-alt` or `icon-aria-label` attributes.
 
 <code-well-header>
-  <div class="d-d-flex d-ai-center d-flow16">
+  <dt-stack direction="row" align="center" gap="500">
     <dt-avatar clickable icon-aria-label="user" ref="example-clickable">
       <template #icon="{ iconSize }">
         <dt-icon-user :size="iconSize" />
       </template>
     </dt-avatar>
-  </div>
+  </dt-stack>
 </code-well-header>
 
 <code-example-tabs
@@ -497,9 +497,9 @@ vueCode='
 You may use a seed to make the randomly generated color be the same every time for that seed. This is useful if you want users to always have the same color, just pass in their unique user ID as the seed.
 
 <code-well-header>
-  <div class="d-d-flex d-ai-center d-flow16">
+  <dt-stack direction="row" align="center" gap="500">
     <dt-avatar full-name="Jaqueline Nackos" seed="X5G3D7D3DS3WL7" ref="example-seeded" />
-  </div>
+  </dt-stack>
 </code-well-header>
 
 <code-example-tabs
