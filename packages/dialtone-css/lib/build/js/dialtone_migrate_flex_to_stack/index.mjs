@@ -226,6 +226,14 @@ const REF_DOM_PATTERNS = [
   /\.closest\(/,
 ];
 
+// Thresholds and limits used throughout the script
+const THRESHOLDS = {
+  MAX_TAG_GAP_BYTES: 10000,        // Beyond this suggests wrong tag match (~10KB)
+  REF_USAGE_CONTEXT_LENGTH: 100,   // Chars to check after ref usage for DOM APIs
+  ELEMENT_PREVIEW_LENGTH: 70,      // Chars to show in skip summary
+  DEFAULT_CONTEXT_LINES: 2,        // Lines before/after for error context
+};
+
 //------------------------------------------------------------------------------
 // Pattern Detection
 //------------------------------------------------------------------------------
@@ -286,19 +294,21 @@ function findMatchingClosingTag(content, startPos, tagName) {
   let depth = 1;
   let pos = startPos;
 
-  // Regex patterns for this specific tag
+  // Compile regex patterns once (performance optimization)
   // Opening tag: <tagName followed by whitespace, >, or />
-  const openPatternStr = `<${tagName}(?:\\s[^>]*?)?>`;
-  const selfClosePatternStr = `<${tagName}(?:\\s[^>]*?)?/>`;
-  const closePatternStr = `</${tagName}>`;
+  const openPattern = new RegExp(`<${tagName}(?:\\s[^>]*?)?>`);
+  const selfClosePattern = new RegExp(`<${tagName}(?:\\s[^>]*?)?/>`);
+  const closePattern = new RegExp(`</${tagName}>`);
 
   while (depth > 0 && pos < content.length) {
+    const slice = content.slice(pos);
+
     // Find next opening tag (non-self-closing)
-    const openMatch = content.slice(pos).match(new RegExp(openPatternStr));
+    const openMatch = slice.match(openPattern);
     // Find next self-closing tag (doesn't affect depth)
-    const selfCloseMatch = content.slice(pos).match(new RegExp(selfClosePatternStr));
+    const selfCloseMatch = slice.match(selfClosePattern);
     // Find next closing tag
-    const closeMatch = content.slice(pos).match(new RegExp(closePatternStr));
+    const closeMatch = slice.match(closePattern);
 
     if (!closeMatch) {
       // No closing tag found - malformed HTML
@@ -416,7 +426,7 @@ function shouldSkipElement(element, fileContent = '') {
         // Found ref usage, now check if it's used with DOM APIs
         const usageContext = fileContent.slice(
           Math.max(0, refUsageMatch.index),
-          Math.min(fileContent.length, refUsageMatch.index + 100),
+          Math.min(fileContent.length, refUsageMatch.index + THRESHOLDS.REF_USAGE_CONTEXT_LENGTH),
         );
 
         for (const domPattern of REF_DOM_PATTERNS) {
@@ -603,7 +613,7 @@ function getLineNumber(content, position) {
  * @param {number} contextLines - Number of lines before and after
  * @returns {string} - Context with line numbers
  */
-function getContext(content, position, contextLines = 2) {
+function getContext(content, position, contextLines = THRESHOLDS.DEFAULT_CONTEXT_LINES) {
   const lines = content.split('\n');
   const lineNum = getLineNumber(content, position);
   const startLine = Math.max(0, lineNum - contextLines - 1);
@@ -651,7 +661,7 @@ function validateTransformations(transformations, content) {
     // Warning: Very large gap between opening and closing tags (might indicate wrong match)
     if (!t.selfClosing && t.closeStart !== null) {
       const gap = t.closeStart - t.openEnd;
-      if (gap > 10000) { // More than ~10KB between tags
+      if (gap > THRESHOLDS.MAX_TAG_GAP_BYTES) {
         warnings.push({
           line: getLineNumber(content, t.openStart),
           message: `Large gap (${gap} chars) between opening and closing tags - verify correct match`,
@@ -725,7 +735,9 @@ function printSkippedSummary() {
     for (const { file, line, element } of examples) {
       console.log(`${colors.gray}   ${file}:${line}${colors.reset}`);
       // Truncate element preview to 70 chars
-      const preview = element.length > 70 ? element.substring(0, 70) + '...' : element;
+      const preview = element.length > THRESHOLDS.ELEMENT_PREVIEW_LENGTH
+        ? element.substring(0, THRESHOLDS.ELEMENT_PREVIEW_LENGTH) + '...'
+        : element;
       console.log(`${colors.gray}   ${preview}${colors.reset}`);
     }
 
@@ -1226,6 +1238,9 @@ Examples:
 //------------------------------------------------------------------------------
 
 async function main() {
+  // Reset global state for fresh run (important for testing)
+  skippedByReason.clear();
+
   const options = parseArgs();
 
   log.bold('\n🔄 Flex to Stack Migration Tool\n');
