@@ -17,7 +17,11 @@
           />
         </template>
         <template #header>
-          <div class="d-d-flex d-ai-center d-mb2">
+          <dt-stack
+            direction="row"
+            align="center"
+            class="d-mb2"
+          >
             <div
               id="contact-number1"
               class="d-fs-200 d-fw-bold d-mr4"
@@ -28,7 +32,7 @@
               name="check-circle"
               size="200"
             />
-          </div>
+          </dt-stack>
         </template>
         <template #subtitle>
           San Francisco, California
@@ -52,14 +56,18 @@
           />
         </template>
         <template #header>
-          <div class="d-d-flex d-ai-center d-mb2">
+          <dt-stack
+            direction="row"
+            align="center"
+            class="d-mb2"
+          >
             <div
               id="contact-number2"
               class="d-fs-200 d-fw-bold d-mr4"
             >
               +1 (415) 123-4567
             </div>
-          </div>
+          </dt-stack>
         </template>
         <template #subtitle>
           <!-- eslint-disable-next-line vuejs-accessibility/click-events-have-key-events -->
@@ -95,17 +103,24 @@
             />
           </template>
           <template #header>
-            <div class="d-d-flex d-ai-center d-mb2">
+            <dt-stack
+              direction="row"
+              align="center"
+              class="d-mb2"
+            >
               <div
                 id="contact-name1"
                 class="d-fs-200 d-fw-bold d-mr4"
               >
                 Joseph Lumaban
               </div>
-            </div>
+            </dt-stack>
           </template>
           <template #subtitle>
-            <div class="d-d-flex d-ai-center">
+            <dt-stack
+              direction="row"
+              align="center"
+            >
               <div class="d-fs-100 d-mt2 d-mr4">
                 +1 (415) 123-4567
               </div>
@@ -114,17 +129,21 @@
                 size="200"
                 class="d-va-text-bottom"
               />
-            </div>
+            </dt-stack>
           </template>
           <template #bottom>
-            <div class="d-d-flex d-ai-center d-mtn6">
+            <dt-stack
+              direction="row"
+              align="center"
+              class="d-mtn6"
+            >
               <div class="d-w8 d-h8 d-mr4 d-bgc-magenta-200">
                 &nbsp;
               </div>
               <div class="d-fs-100 d-mr4">
                 Aerolabs Support
               </div>
-            </div>
+            </dt-stack>
           </template>
         </dt-recipe-contact-info>
       </dt-button>
@@ -146,17 +165,24 @@
           />
         </template>
         <template #header>
-          <div class="d-d-flex d-ai-center d-mb2">
+          <dt-stack
+            direction="row"
+            align="center"
+            class="d-mb2"
+          >
             <div
               id="contact-name2"
               class="d-fs-200 d-fw-bold d-mr4"
             >
               Joseph Lumaban
             </div>
-          </div>
+          </dt-stack>
         </template>
         <template #subtitle>
-          <div class="d-d-flex d-ai-center">
+          <dt-stack
+            direction="row"
+            align="center"
+          >
             <div class="d-fs-100 d-mt2 d-mr4">
               +1 (415) 123-4567
             </div>
@@ -165,10 +191,14 @@
               size="200"
               class="d-va-text-bottom"
             />
-          </div>
+          </dt-stack>
         </template>
         <template #bottom>
-          <div class="d-d-flex d-ai-center d-mtn6">
+          <dt-stack
+            direction="row"
+            align="center"
+            class="d-mtn6"
+          >
             <div class="d-w8 d-h8 d-mr4 d-bgc-magenta-200">
               &nbsp;
             </div>
@@ -178,7 +208,7 @@
             <div class="d-fw-bold d-fs-100">
               • Transfer from Billing Support
             </div>
-          </div>
+          </dt-stack>
         </template>
       </dt-recipe-contact-info>
     </div>
@@ -191,7 +221,11 @@
         :avatar-list="adminListenInAvatars"
       >
         <template #header>
-          <div class="d-d-flex d-ai-center d-mb2">
+          <dt-stack
+            direction="row"
+            align="center"
+            class="d-mb2"
+          >
             <div
               id="contact-names1"
               class="d-fw-bold d-fs-200"
@@ -201,10 +235,13 @@
             <div class="d-fs-200">
               (Agent)
             </div>
-          </div>
+          </dt-stack>
         </template>
         <template #subtitle>
-          <div class="d-d-flex d-ai-center">
+          <dt-stack
+            direction="row"
+            align="center"
+          >
             <div class="d-fs-100 d-mr4">
               +1 (415) 123-4567
             </div>
@@ -213,17 +250,21 @@
               size="200"
               class="d-va-text-bottom"
             />
-          </div>
+          </dt-stack>
         </template>
         <template #bottom>
-          <div class="d-d-flex d-ai-center d-mtn4">
+          <dt-stack
+            direction="row"
+            align="center"
+            class="d-mtn4"
+          >
             <div class="d-w8 d-h8 d-mr4 d-bgc-magenta-200">
               &nbsp;
             </div>
             <div class="d-fs-100 d-mr4">
               Aerolabs Support
             </div>
-          </div>
+          </dt-stack>
         </template>
       </dt-recipe-contact-info>
     </div>
@@ -248,7 +289,11 @@
           +1 (415) 123-4567
         </template>
         <template #right>
-          <div class="d-d-flex d-ai-center d-m8">
+          <dt-stack
+            direction="row"
+            align="center"
+            class="d-m8"
+          >
             <dt-button
               size="xs"
               :circle="true"
@@ -278,7 +323,7 @@
             <div class="d-m4">
               0:32
             </div>
-          </div>
+          </dt-stack>
         </template>
         <template #bottom>
           2 matches found.
@@ -300,21 +345,28 @@
         :avatar-list="groupCallAvatars"
       >
         <template #header>
-          <div class="d-d-flex d-ai-center d-mb2">
+          <dt-stack
+            direction="row"
+            align="center"
+            class="d-mb2"
+          >
             <div
               id="group-name"
               class="d-fw-bold d-fs-200"
             >
               Group Call
             </div>
-          </div>
+          </dt-stack>
         </template>
         <template #subtitle>
-          <div class="d-d-flex d-ai-center">
+          <dt-stack
+            direction="row"
+            align="center"
+          >
             <div class="d-fs-100 d-mr4">
               Manage participants
             </div>
-          </div>
+          </dt-stack>
         </template>
       </dt-recipe-contact-info>
     </div>
@@ -327,24 +379,31 @@
         :avatar-list="groupCallAvatars"
       >
         <template #header>
-          <div class="d-d-flex d-ai-center d-mb2">
+          <dt-stack
+            direction="row"
+            align="center"
+            class="d-mb2"
+          >
             <div
               id="group-name"
               class="d-fw-bold d-fs-200"
             >
               Group Call
             </div>
-          </div>
+          </dt-stack>
         </template>
         <template #avatarIcon="{ iconSize }">
           <dt-icon-user :size="iconSize" />
         </template>
         <template #subtitle>
-          <div class="d-d-flex d-ai-center">
+          <dt-stack
+            direction="row"
+            align="center"
+          >
             <div class="d-fs-100 d-mr4">
               Manage participants
             </div>
-          </div>
+          </dt-stack>
         </template>
       </dt-recipe-contact-info>
     </div>
@@ -352,7 +411,6 @@
 </template>
 
 <script>
-/* eslint-disable max-lines */
 import DtRecipeContactInfo from './contact_info.vue';
 import { DtButton } from '@/components/button';
 import { DtIcon } from '@/components/icon';
@@ -361,10 +419,11 @@ import { DtLink } from '@/components/link';
 import avatar1 from '@/common/assets/avatar1.png?url';
 import avatar2 from '@/common/assets/avatar2.png?url';
 import { DtIconHear, DtIconUser } from '@dialpad/dialtone-icons/vue2';
+import { DtStack } from '@/components/stack';
 
 export default {
   name: 'DtRecipeContactInfoVariants',
-  components: { DtButton, DtRecipeContactInfo, DtIcon, DtLink, DtIconUser },
+  components: { DtButton, DtRecipeContactInfo, DtIcon, DtLink, DtIconUser, DtStack },
 
   data () {
     return {

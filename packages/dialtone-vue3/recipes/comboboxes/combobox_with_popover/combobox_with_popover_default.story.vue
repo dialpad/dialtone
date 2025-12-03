@@ -68,9 +68,13 @@
       v-else-if="!emptyList"
       #footer
     >
-      <div class="d-d-flex d-ai-center d-px12">
+      <dt-stack
+        direction="row"
+        align="center"
+        class="d-px12"
+      >
         <dt-checkbox label="Apply primary number to assigned Contact Centers" />
-      </div>
+      </dt-stack>
     </template>
   </dt-recipe-combobox-with-popover>
 </template>
@@ -80,6 +84,7 @@ import DtRecipeComboboxWithPopover from './combobox_with_popover.vue';
 import DtInput from '@/components/input/input.vue';
 import DtListItem from '@/components/list_item/list_item.vue';
 import DtCheckbox from '@/components/checkbox/checkbox.vue';
+import { DtStack } from '@/components/stack';
 
 export default {
   name: 'DtRecipeComboboxWithPopoverDefault',
@@ -88,6 +93,7 @@ export default {
     DtInput,
     DtListItem,
     DtCheckbox,
+    DtStack,
   },
 
   data () {

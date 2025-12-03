@@ -22,9 +22,9 @@ storybook: https://dialtone.dialpad.com/vue/?path=/story/components-card--defaul
       <div>Content slot. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec fermentum molestie semper. Morbi finibus nulla turpis, nec molestie mi rutrum.</div>
     </div>
     <div class="d-card__footer">
-      <div class="d-d-flex d-g8">
+      <dt-stack direction="row" gap="400">
         <button type="button" class="d-btn d-btn--sm d-btn--outlined">Button</button>
-      </div>
+      </dt-stack>
     </div>
   </div>
 </code-well-header>
@@ -167,9 +167,9 @@ showHtmlWarning />
       <div>Content slot. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec fermentum molestie semper. Morbi finibus nulla turpis, nec molestie mi rutrum.</div>
     </div>
     <div class="d-card__footer">
-      <div class="d-d-flex d-g8">
+      <dt-stack direction="row" gap="400">
         <button type="button" class="d-btn d-btn--sm d-btn--outlined">Button</button>
-      </div>
+      </dt-stack>
     </div>
   </div>
 </code-well-header>
@@ -181,9 +181,9 @@ htmlCode='
     <div>Content slot. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec fermentum molestie semper. Morbi finibus nulla turpis, nec molestie mi rutrum.</div>
   </div>
   <div class="d-card__footer">
-    <div class="d-d-flex d-g8">
+    <dt-stack direction="row" gap="400">
       <button type="button" class="d-btn d-btn--sm d-btn--outlined">Button</button>
-    </div>
+    </dt-stack>
   </div>
 </div>
 '
@@ -247,9 +247,9 @@ showHtmlWarning />
       <div>Content slot. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec fermentum molestie semper. Morbi finibus nulla turpis, nec molestie mi rutrum.</div>
     </div>
     <div class="d-card__footer">
-      <div class="d-d-flex d-g8">
+      <dt-stack direction="row" gap="400">
         <button type="button" class="d-btn d-btn--sm d-btn--outlined">Button</button>
-      </div>
+      </dt-stack>
     </div>
   </div>
 </code-well-header>
@@ -269,9 +269,9 @@ htmlCode='
     <div>Content slot. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec fermentum molestie semper. Morbi finibus nulla turpis, nec molestie mi rutrum.</div>
   </div>
   <div class="d-card__footer">
-    <div class="d-d-flex d-g8">
+    <dt-stack direction="row" gap="400">
       <button type="button" class="d-btn d-btn--sm d-btn--outlined">Button</button>
-    </div>
+    </dt-stack>
   </div>
 </div>
 '

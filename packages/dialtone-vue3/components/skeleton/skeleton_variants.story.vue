@@ -3,7 +3,11 @@
     <h2 class="d-mb32">
       Prefabricated shapes
     </h2>
-    <section class="d-mb64 d-d-flex">
+    <dt-stack
+      as="section"
+      direction="row"
+      class="d-mb64"
+    >
       <div class="d-p4 d-fl1 d-w25p">
         <h3>Avatars</h3>
         <p class="d-mb24">
@@ -103,11 +107,15 @@
           :aria-label="$attrs.ariaLabel"
         />
       </div>
-    </section>
+    </dt-stack>
     <h2 class="d-mb32">
       Prefabricated combinations
     </h2>
-    <section class="d-mb64 d-d-flex">
+    <dt-stack
+      as="section"
+      direction="row"
+      class="d-mb64"
+    >
       <div class="d-p4 d-fl1 d-w50p">
         <h3>Text List</h3>
         <p class="d-mb24" />
@@ -216,18 +224,19 @@
           :offset="0.5"
         />
       </div>
-    </section>
+    </dt-stack>
   </div>
 </template>
 
 <script>
 import DtSkeleton from './skeleton.vue';
+import { DtStack } from '@/components/stack';
 
 import { SKELETON_HEADING_HEIGHTS } from './skeleton_constants';
 
 export default {
   name: 'DtSkeletonVariants',
-  components: { DtSkeleton },
+  components: { DtSkeleton, DtStack },
   data () {
     return {
       headingSize: Object.keys(SKELETON_HEADING_HEIGHTS),

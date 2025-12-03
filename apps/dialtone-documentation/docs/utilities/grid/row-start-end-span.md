@@ -9,10 +9,10 @@ Use `d-gr{#}` to span an element across multiple rows. This can be combined with
 
 <code-well-header>
   <div class="d-d-grid d-g16 d-g-cols3 d-g-rows3 d-p16 d-w100p d-hmn216 d-bar8 d-bgc-moderate">
-    <div class="d-gc2 d-gr2 d-fl-center d-p16 d-bgc-moderate-opaque d-bar4">1</div>
-    <div class="d-fl-center d-p16 d-bgc-bold-opaque d-bar4">2</div>
-    <div class="d-gr2 d-fl-center d-p16 d-bgc-moderate-opaque d-bar4">3</div>
-    <div class="d-gc2 d-fl-center d-p16 d-bgc-bold-opaque d-bar4">4</div>
+    <dt-stack direction="row" align="center" justify="center" class="d-gc2 d-gr2 d-p16 d-bgc-moderate-opaque d-bar4">1</dt-stack>
+    <dt-stack direction="row" align="center" justify="center" class="d-p16 d-bgc-bold-opaque d-bar4">2</dt-stack>
+    <dt-stack direction="row" align="center" justify="center" class="d-gr2 d-p16 d-bgc-moderate-opaque d-bar4">3</dt-stack>
+    <dt-stack direction="row" align="center" justify="center" class="d-gc2 d-p16 d-bgc-bold-opaque d-bar4">4</dt-stack>
   </div>
 </code-well-header>
 
@@ -33,10 +33,10 @@ Use `d-gre{#}` to set an element's ending point. A reminder that CSS grid rows s
 
 <code-well-header>
   <div class="d-d-grid d-g16 d-g-cols3 d-g-rows4 d-p16 d-w100p d-hmn216 d-bar8 d-bgc-moderate">
-    <div class="d-gc2 d-grs1 d-gre3 d-fl-center d-p16 d-bgc-moderate-opaque d-bar4">1</div>
-    <div class="d-fl-center d-p16 d-bgc-bold-opaque d-bar4">2</div>
-    <div class="d-grs2 d-gre5 d-fl-center d-p16 d-bgc-moderate-opaque d-bar4">3</div>
-    <div class="d-gc2 d-gr2 d-fl-center d-p16 d-bgc-bold-opaque d-bar4">4</div>
+    <dt-stack direction="row" align="center" justify="center" class="d-gc2 d-grs1 d-gre3 d-p16 d-bgc-moderate-opaque d-bar4">1</dt-stack>
+    <dt-stack direction="row" align="center" justify="center" class="d-p16 d-bgc-bold-opaque d-bar4">2</dt-stack>
+    <dt-stack direction="row" align="center" justify="center" class="d-grs2 d-gre5 d-p16 d-bgc-moderate-opaque d-bar4">3</dt-stack>
+    <dt-stack direction="row" align="center" justify="center" class="d-gc2 d-gr2 d-p16 d-bgc-bold-opaque d-bar4">4</dt-stack>
   </div>
 </code-well-header>
 

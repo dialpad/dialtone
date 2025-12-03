@@ -8,9 +8,9 @@ storybook: https://dialtone.dialpad.com/vue/?path=/story/components-toggle--defa
 figma_url: https://www.figma.com/design/W58r5BkO8qTw3vem9YieJd/DT9-Component-Library--Rebrand-2025-?node-id=8272-20496
 ---
 <code-well-header>
-  <div class="d-toggle-group d-d-flex d-ai-center">
+  <dt-stack direction="row" align="center" class="d-toggle-group">
     <dt-toggle label-class="d-mr6">Label</dt-toggle>
-  </div>
+  </dt-stack>
 </code-well-header>
 
 <!-- <component-combinator component-name="DtToggle" /> -->

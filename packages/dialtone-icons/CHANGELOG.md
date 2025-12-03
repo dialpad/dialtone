@@ -1,3 +1,10 @@
+# [4.46.0](https://github.com/dialpad/dialtone/compare/dialtone-icons/v4.45.1...dialtone-icons/v4.46.0) (2025-12-02)
+
+
+### Features
+
+* **Icon:** DP-166633 add bracket left right icon ([#982](https://github.com/dialpad/dialtone/issues/982)) ([278c2a4](https://github.com/dialpad/dialtone/commit/278c2a440fa60f58c47371442aa21edbc1e739ce))
+
 ## [4.45.1](https://github.com/dialpad/dialtone/compare/dialtone-icons/v4.45.0...dialtone-icons/v4.45.1) (2025-11-26)
 
 # [4.45.0](https://github.com/dialpad/dialtone/compare/dialtone-icons/v4.44.1...dialtone-icons/v4.45.0) (2025-11-13)

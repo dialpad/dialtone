@@ -28,13 +28,13 @@ Banners are a type of notice and so you can use the following [Notice](notice.md
 ### Kind
 
 <code-well-header>
-    <div class="d-d-flex d-w100p d-flow8 d-ai-flex-end">
+    <dt-stack direction="row" gap="400" align="end" class="d-w100p">
         <div class="d-fl-grow1">
             <dt-select-menu label="Style" :options="bannerOptions" v-model="selectedKind" />
         </div>
         <dt-checkbox value="important" @input="toggleImportant">Important</dt-checkbox>
         <dt-button @click="toggleBanner('example-kind')">Toggle Example</dt-button>
-    </div>
+    </dt-stack>
 </code-well-header>
 
 <dt-banner
@@ -82,9 +82,9 @@ vueCode='
 Pins the banner to the top of the window.
 
 <code-well-header>
-    <div class="d-d-flex d-w100p d-flow8 d-ai-flex-end">
+    <dt-stack direction="row">
         <dt-button @click="toggleBanner('example-pinned')">Toggle Example</dt-button>
-    </div>
+    </dt-stack>
 </code-well-header>
 
 <dt-banner
