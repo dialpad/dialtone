@@ -63,11 +63,10 @@ html body {
   --docsearch-footer-height: var(--dt-size-650);
   --docsearch-footer-background: var(--dt-color-surface-primary);
   /* stylelint-disable-next-line meowtec/no-px */
-  --docsearch-footer-shadow: 0 -1px 0 0 var(--dt-color-border-subtle),0 -1px 3px 0 rgba(0,0,0,.2);
+  --docsearch-footer-shadow: 0 -1px 0 0 var(--dt-color-border-subtle),0 -1px 3px 0 rgb(0,0,0,.2);
 
   .DocSearch-Modal {
     margin-top: 15vh;
-    background-clip: padding-box;
     border: var(--dt-size-100) solid var(--dt-color-border-subtle);
     border-radius: var(--dt-size-radius-500);
     box-shadow: var(--dt-shadow-large);
@@ -657,12 +656,12 @@ a.header-anchor {
 
 .dialtone-wall {
   display: grid;
-  grid-gap: var(--dt-space-500);
+  gap: var(--dt-space-500);
   margin-top: var(--dt-space-500);
 
   @media screen and (min-width: 640px) {
-    grid-gap: var(--dt-space-600);
     grid-template-columns: [full-start] repeat(2, [col-start] var(--col-width, minmax(0, 1fr)) [col-end]) [full-end] !important;
+    gap: var(--dt-space-600);
   }
 
   @media screen and (min-width: 768px) {
