@@ -67,6 +67,9 @@
   "files": [
     "dist"
   ],
+  "bin": {
+    "dialtone-migrate-flex-to-stack": "./dist/js/dialtone_migrate_flex_to_stack/index.mjs"
+  },
   "exports": {
     "./CHANGELOG.json": "./CHANGELOG.json",
     "./css": "./dist/css/dialtone.min.css",

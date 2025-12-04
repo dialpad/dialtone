@@ -30,6 +30,7 @@ const paths = {
       '!./packages/dialtone-css/lib/dist/svg/**',
       '!./packages/dialtone-css/lib/dist/tokens/**',
     ],
+    js: './packages/dialtone-css/lib/dist/js/**',
     tokens: [
       './packages/dialtone-tokens/dist/**',
       '!./packages/dialtone-tokens/dist/less/**',
@@ -41,6 +42,7 @@ const paths = {
   },
   output: {
     css: './dist/css',
+    js: './dist/js',
     tokens: './dist/tokens',
     vue2: './dist/vue2',
     vue3: './dist/vue3',
