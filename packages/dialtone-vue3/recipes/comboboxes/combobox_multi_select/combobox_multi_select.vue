@@ -32,10 +32,14 @@
             :label-class="['d-chip__label']"
             :class="[
               'd-recipe-combobox-multi-select__chip',
-              { 'd-recipe-combobox-multi-select__chip--truncate': !!chipMaxWidth },
+              {
+                'd-recipe-combobox-multi-select__chip--truncate': !!chipMaxWidth,
+                'd-recipe-combobox-multi-select__chip--disabled': disabled, 
+              },
             ]"
             :style="{ maxWidth: chipMaxWidth }"
             :size="CHIP_SIZES[size]"
+            :disabled="disabled"
             v-on="chipListeners"
             @keydown.backspace="onChipRemove(item)"
             @close="onChipRemove(item)"
