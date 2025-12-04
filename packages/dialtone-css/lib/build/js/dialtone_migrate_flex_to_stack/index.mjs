@@ -191,6 +191,49 @@ const NATIVE_HTML_ELEMENTS = new Set([
   'table', 'thead', 'tbody', 'tfoot', 'tr', 'td', 'th',
 ]);
 
+// DOM API patterns that indicate ref is used for direct DOM manipulation
+// If a ref is used with these patterns, the element should NOT be converted to a component
+const REF_DOM_PATTERNS = [
+  /\.addEventListener\(/,
+  /\.removeEventListener\(/,
+  /\.querySelector\(/,
+  /\.querySelectorAll\(/,
+  /\.getBoundingClientRect\(/,
+  /\.focus\(/,
+  /\.blur\(/,
+  /\.click\(/,
+  /\.scrollIntoView\(/,
+  /\.scrollTo\(/,
+  /\.classList\./,
+  /\.setAttribute\(/,
+  /\.removeAttribute\(/,
+  /\.getAttribute\(/,
+  /\.style\./,
+  /\.offsetWidth/,
+  /\.offsetHeight/,
+  /\.clientWidth/,
+  /\.clientHeight/,
+  /\.scrollWidth/,
+  /\.scrollHeight/,
+  /\.parentNode/,
+  /\.parentElement/,
+  /\.children/,
+  /\.firstChild/,
+  /\.lastChild/,
+  /\.nextSibling/,
+  /\.previousSibling/,
+  /\.contains\(/,
+  /\.closest\(/,
+];
+
+// Thresholds and limits used throughout the script
+const THRESHOLDS = {
+  MAX_TAG_GAP_BYTES: 10000,        // Beyond this suggests wrong tag match (~10KB)
+  REF_USAGE_CONTEXT_LENGTH: 100,   // Chars to check after ref usage for DOM APIs
+  ELEMENT_PREVIEW_LENGTH: 70,      // Chars to show in skip summary
+  DEFAULT_CONTEXT_LINES: 2,        // Lines before/after for error context
+};
+
 //------------------------------------------------------------------------------
 // Pattern Detection
 //------------------------------------------------------------------------------
@@ -251,19 +294,21 @@ function findMatchingClosingTag(content, startPos, tagName) {
   let depth = 1;
   let pos = startPos;
 
-  // Regex patterns for this specific tag
+  // Compile regex patterns once (performance optimization)
   // Opening tag: <tagName followed by whitespace, >, or />
-  const openPatternStr = `<${tagName}(?:\\s[^>]*?)?>`;
-  const selfClosePatternStr = `<${tagName}(?:\\s[^>]*?)?/>`;
-  const closePatternStr = `</${tagName}>`;
+  const openPattern = new RegExp(`<${tagName}(?:\\s[^>]*?)?>`);
+  const selfClosePattern = new RegExp(`<${tagName}(?:\\s[^>]*?)?/>`);
+  const closePattern = new RegExp(`</${tagName}>`);
 
   while (depth > 0 && pos < content.length) {
+    const slice = content.slice(pos);
+
     // Find next opening tag (non-self-closing)
-    const openMatch = content.slice(pos).match(new RegExp(openPatternStr));
+    const openMatch = slice.match(openPattern);
     // Find next self-closing tag (doesn't affect depth)
-    const selfCloseMatch = content.slice(pos).match(new RegExp(selfClosePatternStr));
+    const selfCloseMatch = slice.match(selfClosePattern);
     // Find next closing tag
-    const closeMatch = content.slice(pos).match(new RegExp(closePatternStr));
+    const closeMatch = slice.match(closePattern);
 
     if (!closeMatch) {
       // No closing tag found - malformed HTML
@@ -306,10 +351,11 @@ function findMatchingClosingTag(content, startPos, tagName) {
 
 /**
  * Check if an element should be skipped (not migrated)
- * @param {object} element - Element with classValue property
+ * @param {object} element - Element with classValue and fullMatch properties
+ * @param {string} fileContent - Full file content for ref usage analysis
  * @returns {object|null} - Returns skip info object if should skip, null if should migrate
  */
-function shouldSkipElement(element) {
+function shouldSkipElement(element, fileContent = '') {
   const classes = element.classValue.split(/\s+/).filter(Boolean);
 
   // Skip grid containers (not flexbox)
@@ -358,16 +404,73 @@ function shouldSkipElement(element) {
     };
   }
 
+  // Skip elements with ref attributes used for DOM manipulation
+  // When converted to a component, refs return component instances instead of DOM elements
+  const refMatch = element.fullMatch.match(/\bref="([^"]+)"/);
+  if (refMatch && fileContent) {
+    const refName = refMatch[1];
+    // Check for DOM API usage patterns with this ref
+    // Common patterns: refName.value.addEventListener, refName.value?.focus(), etc.
+    const refUsagePatterns = [
+      new RegExp(`${refName}\\.value\\.`),           // refName.value.something
+      new RegExp(`${refName}\\.value\\?\\.`),        // refName.value?.something (optional chaining)
+      new RegExp(`\\$refs\\.${refName}\\.`),         // this.$refs.refName.something (Options API)
+      new RegExp(`\\$refs\\['${refName}'\\]\\.`),    // this.$refs['refName'].something
+      new RegExp(`\\$refs\\["${refName}"\\]\\.`),    // this.$refs["refName"].something
+    ];
+
+    // Check if any ref usage pattern matches a DOM API pattern
+    for (const refPattern of refUsagePatterns) {
+      const refUsageMatch = fileContent.match(refPattern);
+      if (refUsageMatch) {
+        // Found ref usage, now check if it's used with DOM APIs
+        const usageContext = fileContent.slice(
+          Math.max(0, refUsageMatch.index),
+          Math.min(fileContent.length, refUsageMatch.index + THRESHOLDS.REF_USAGE_CONTEXT_LENGTH),
+        );
+
+        for (const domPattern of REF_DOM_PATTERNS) {
+          if (domPattern.test(usageContext)) {
+            return {
+              reason: 'Ref used for DOM manipulation',
+              severity: 'warning',
+              message: `Skipping <${element.tagName}> - ref="${refName}" is used for DOM API calls. Converting to component would break this. Use .$el accessor or keep as native element.`,
+            };
+          }
+        }
+      }
+    }
+  }
+
+  // Skip elements with dynamic :class bindings containing flex utilities
+  // These bindings would be corrupted by the transformation
+  const dynamicClassMatch = element.fullMatch.match(/:class="([^"]+)"/);
+  if (dynamicClassMatch) {
+    const bindingContent = dynamicClassMatch[1];
+    const flexUtilityPattern = /d-d-flex|d-fl-center|d-ai-|d-jc-|d-fd-|d-gg?\d/;
+
+    if (flexUtilityPattern.test(bindingContent)) {
+      return {
+        reason: 'Dynamic :class with flex utilities',
+        severity: 'warning',
+        message: `Skipping <${element.tagName}> - dynamic :class binding contains flex utilities. Convert to dynamic DtStack props instead.`,
+      };
+    }
+  }
+
   return null; // No skip reason, proceed with migration
 }
 
 /**
  * Transform a flex element to dt-stack
+ * @param {object} element - Element to transform
+ * @param {boolean} showOutline - Whether to add migration markers
+ * @param {string} fileContent - Full file content for ref usage analysis
  * @returns {object|null} - Transformation object or null if element should be skipped
  */
-function transformElement(element, showOutline = false) {
+function transformElement(element, showOutline = false, fileContent = '') {
   // Check if element should be skipped
-  const skipInfo = shouldSkipElement(element);
+  const skipInfo = shouldSkipElement(element, fileContent);
   if (skipInfo) {
     return { skip: true, ...skipInfo };
   }
@@ -489,6 +592,169 @@ function transformElement(element, showOutline = false) {
 }
 
 //------------------------------------------------------------------------------
+// Validation Helpers
+//------------------------------------------------------------------------------
+
+/**
+ * Get line number for a character position in content
+ * @param {string} content - File content
+ * @param {number} position - Character position
+ * @returns {number} - Line number (1-indexed)
+ */
+function getLineNumber(content, position) {
+  const lines = content.slice(0, position).split('\n');
+  return lines.length;
+}
+
+/**
+ * Get context lines around a position
+ * @param {string} content - File content
+ * @param {number} position - Character position
+ * @param {number} contextLines - Number of lines before and after
+ * @returns {string} - Context with line numbers
+ */
+function getContext(content, position, contextLines = THRESHOLDS.DEFAULT_CONTEXT_LINES) {
+  const lines = content.split('\n');
+  const lineNum = getLineNumber(content, position);
+  const startLine = Math.max(0, lineNum - contextLines - 1);
+  const endLine = Math.min(lines.length, lineNum + contextLines);
+
+  let result = '';
+  for (let i = startLine; i < endLine; i++) {
+    const prefix = i === lineNum - 1 ? '>' : ' ';
+    result += `${prefix} ${String(i + 1).padStart(4)}: ${lines[i]}\n`;
+  }
+  return result;
+}
+
+/**
+ * Validate transformations before applying
+ * @param {object[]} transformations - Array of transformation objects
+ * @param {string} content - Original file content
+ * @returns {object} - { valid: boolean, errors: array, warnings: array }
+ */
+function validateTransformations(transformations, content) {
+  const errors = [];
+  const warnings = [];
+
+  for (const t of transformations) {
+    // Check: Non-self-closing elements must have a matching closing tag
+    if (!t.selfClosing && t.closeStart === null) {
+      errors.push({
+        line: getLineNumber(content, t.openStart),
+        message: `No matching closing tag found for transformed element`,
+        context: getContext(content, t.openStart),
+        severity: 'error',
+      });
+    }
+
+    // Check: Closing tag position must be after opening tag
+    if (!t.selfClosing && t.closeStart !== null && t.closeStart <= t.openEnd) {
+      errors.push({
+        line: getLineNumber(content, t.openStart),
+        message: `Closing tag position (${t.closeStart}) is before or at opening tag end (${t.openEnd})`,
+        context: getContext(content, t.openStart),
+        severity: 'error',
+      });
+    }
+
+    // Warning: Very large gap between opening and closing tags (might indicate wrong match)
+    if (!t.selfClosing && t.closeStart !== null) {
+      const gap = t.closeStart - t.openEnd;
+      if (gap > THRESHOLDS.MAX_TAG_GAP_BYTES) {
+        warnings.push({
+          line: getLineNumber(content, t.openStart),
+          message: `Large gap (${gap} chars) between opening and closing tags - verify correct match`,
+          severity: 'warning',
+        });
+      }
+    }
+  }
+
+  // Check for overlapping transformations
+  const sortedByStart = [...transformations].sort((a, b) => a.openStart - b.openStart);
+  for (let i = 0; i < sortedByStart.length - 1; i++) {
+    const current = sortedByStart[i];
+    const next = sortedByStart[i + 1];
+
+    // Check if opening tags overlap
+    if (current.openEnd > next.openStart) {
+      errors.push({
+        line: getLineNumber(content, current.openStart),
+        message: `Overlapping transformations detected`,
+        severity: 'error',
+      });
+    }
+  }
+
+  return {
+    valid: errors.length === 0,
+    errors,
+    warnings,
+  };
+}
+
+//------------------------------------------------------------------------------
+// Skip Summary Tracking
+//------------------------------------------------------------------------------
+
+/**
+ * Track skipped elements by reason for grouped summary
+ * @type {Map<string, Array<{file: string, line: number, element: string}>>}
+ */
+const skippedByReason = new Map();
+
+/**
+ * Add a skipped element to the tracking map
+ * @param {string} reason - The skip reason category
+ * @param {string} file - File path
+ * @param {number} line - Line number
+ * @param {string} element - Element snippet
+ */
+function trackSkippedElement(reason, file, line, element) {
+  if (!skippedByReason.has(reason)) {
+    skippedByReason.set(reason, []);
+  }
+  skippedByReason.get(reason).push({ file, line, element });
+}
+
+/**
+ * Print grouped summary of all skipped elements at end of migration
+ */
+function printSkippedSummary() {
+  if (skippedByReason.size === 0) return;
+
+  console.log(`\n${colors.bold}⚠️  Elements Requiring Manual Review${colors.reset}\n`);
+
+  for (const [reason, elements] of skippedByReason) {
+    // Header with count
+    console.log(`${colors.yellow}${reason} (${elements.length} element${elements.length === 1 ? '' : 's'})${colors.reset}`);
+
+    // Show first 3 examples
+    const examples = elements.slice(0, 3);
+    for (const { file, line, element } of examples) {
+      console.log(`${colors.gray}   ${file}:${line}${colors.reset}`);
+      // Truncate element preview to 70 chars
+      const preview = element.length > THRESHOLDS.ELEMENT_PREVIEW_LENGTH
+        ? element.substring(0, THRESHOLDS.ELEMENT_PREVIEW_LENGTH) + '...'
+        : element;
+      console.log(`${colors.gray}   ${preview}${colors.reset}`);
+    }
+
+    // Show count of remaining if more than 3
+    if (elements.length > 3) {
+      console.log(`${colors.gray}   ... and ${elements.length - 3} more${colors.reset}`);
+    }
+    console.log();
+  }
+
+  // Provide helpful guidance
+  console.log(`${colors.cyan}📚 Manual Migration Guide:${colors.reset}`);
+  console.log(`${colors.cyan}   https://dialtone.dialpad.com/about/whats-new/posts/2025-12-2.html#manual-migration${colors.reset}`);
+  console.log();
+}
+
+//------------------------------------------------------------------------------
 // Console Helpers (replace chalk)
 //------------------------------------------------------------------------------
 
@@ -547,7 +813,8 @@ async function processFile(filePath, options) {
   log.cyan(`\n📄 ${filePath}`);
   log.gray(`   Found ${elements.length} element(s) with d-d-flex\n`);
 
-  // Check for dynamic :class bindings with flex utilities
+  // Check for dynamic :class bindings with flex utilities (standalone, not on flex elements)
+  // Note: Dynamic bindings ON flex elements are handled by shouldSkipElement()
   const dynamicClassRegex = /:(class|v-bind:class)="([^"]*)"/g;
   let dynamicMatch;
   const flexUtilityPattern = /d-d-flex|d-fl-center|d-ai-|d-jc-|d-fd-|d-gg?\d/;
@@ -555,9 +822,13 @@ async function processFile(filePath, options) {
   while ((dynamicMatch = dynamicClassRegex.exec(content)) !== null) {
     const bindingContent = dynamicMatch[2];
     if (flexUtilityPattern.test(bindingContent)) {
-      console.log(log.yellow(`   ⚠ Skipped: dynamic :class binding with flex utilities at position ${dynamicMatch.index}. Consider refactoring to dynamic DtStack props.`));
-      log.gray(`     "${bindingContent.length > 60 ? bindingContent.substring(0, 60) + '...' : bindingContent}"`);
-      log.gray(`     Requires manual review - cannot auto-migrate dynamic bindings\n`);
+      const lineNum = getLineNumber(content, dynamicMatch.index);
+      trackSkippedElement(
+        'Dynamic :class with flex utilities',
+        filePath,
+        lineNum,
+        `:class="${bindingContent.length > 50 ? bindingContent.substring(0, 50) + '...' : bindingContent}"`,
+      );
     }
   }
 
@@ -570,15 +841,17 @@ async function processFile(filePath, options) {
   const transformations = [];
 
   for (const element of elements) {
-    const transformation = transformElement(element, options.showOutline);
+    const transformation = transformElement(element, options.showOutline, content);
 
-    // Handle skipped elements
+    // Handle skipped elements - track for grouped summary instead of inline output
     if (transformation.skip) {
-      const icon = transformation.severity === 'warning' ? '⚠' : 'ℹ';
-      const colorFn = transformation.severity === 'warning' ? log.yellow : log.gray;
-      console.log(colorFn(`   ${icon} ${transformation.message}`));
-      log.gray(`      ${element.fullMatch}`);
-      console.log();
+      const lineNum = getLineNumber(content, element.index);
+      trackSkippedElement(
+        transformation.reason,
+        filePath,
+        lineNum,
+        element.fullMatch,
+      );
       skipped++;
       continue;
     }
@@ -643,6 +916,42 @@ async function processFile(filePath, options) {
     } else {
       skipped++;
     }
+  }
+
+  // Run validation if --validate flag is set
+  if (options.validate && transformations.length > 0) {
+    const validation = validateTransformations(transformations, content);
+
+    if (validation.errors.length > 0) {
+      console.log(log.red(`\n   ❌ Validation FAILED: ${validation.errors.length} error(s) found`));
+      for (const err of validation.errors) {
+        console.log(log.red(`\n   Line ${err.line}: ${err.message}`));
+        if (err.context) {
+          console.log(log.gray(err.context));
+        }
+      }
+    }
+
+    if (validation.warnings.length > 0) {
+      console.log(log.yellow(`\n   ⚠ ${validation.warnings.length} warning(s):`));
+      for (const warn of validation.warnings) {
+        console.log(log.yellow(`   Line ${warn.line}: ${warn.message}`));
+      }
+    }
+
+    if (validation.valid && validation.warnings.length === 0) {
+      console.log(log.green(`   ✓ Validation passed - ${transformations.length} transformation(s) look safe`));
+    } else if (validation.valid) {
+      console.log(log.yellow(`   ⚠ Validation passed with warnings - review before applying`));
+    }
+
+    return {
+      changes,
+      skipped,
+      needsImport: false,
+      validationErrors: validation.errors.length,
+      validationWarnings: validation.warnings.length,
+    };
   }
 
   // Apply all transformations in reverse order (end to start) to preserve positions
@@ -822,6 +1131,7 @@ function parseArgs() {
     cwd: process.cwd(),
     dryRun: false,
     yes: false,
+    validate: false, // Validation mode - check for issues without modifying
     extensions: ['.vue'],
     patterns: [],
     hasExtFlag: false, // Track if --ext was used
@@ -850,6 +1160,8 @@ Options:
                    Relative or absolute paths supported
                    When used, --cwd is ignored for file discovery
   --dry-run        Show changes without applying them
+  --validate       Validate transformations and report potential issues
+                   (like --dry-run but with additional validation checks)
   --yes, -y        Apply all changes without prompting
   --show-outline   Add data-migrate-outline attribute for visual debugging
   --remove-outline Remove data-migrate-outline attributes after review
@@ -890,6 +1202,9 @@ Examples:
       options.extensions.push(ext.startsWith('.') ? ext : `.${ext}`);
     } else if (arg === '--dry-run') {
       options.dryRun = true;
+    } else if (arg === '--validate') {
+      options.validate = true;
+      options.dryRun = true; // Validate mode implies dry-run (no file modifications)
     } else if (arg === '--yes' || arg === '-y') {
       options.yes = true;
     } else if (arg === '--show-outline') {
@@ -923,6 +1238,9 @@ Examples:
 //------------------------------------------------------------------------------
 
 async function main() {
+  // Reset global state for fresh run (important for testing)
+  skippedByReason.clear();
+
   const options = parseArgs();
 
   log.bold('\n🔄 Flex to Stack Migration Tool\n');
@@ -936,7 +1254,9 @@ async function main() {
     log.gray(`Extensions: ${options.extensions.join(', ')}`);
   }
 
-  if (options.dryRun) {
+  if (options.validate) {
+    console.log(log.yellow('VALIDATE MODE - checking for potential issues'));
+  } else if (options.dryRun) {
     console.log(log.yellow('DRY RUN - no files will be modified'));
   }
   if (options.yes) {
@@ -965,6 +1285,8 @@ async function main() {
   let totalSkipped = 0;
   let filesModified = 0;
   let filesNeedingImports = 0;
+  let totalValidationErrors = 0;
+  let totalValidationWarnings = 0;
   const fileList = [];
 
   for (const file of files) {
@@ -984,6 +1306,7 @@ async function main() {
         dryRun: options.dryRun,
         yes: options.yes,
         showOutline: options.showOutline,
+        validate: options.validate,
       });
     }
 
@@ -996,6 +1319,10 @@ async function main() {
       filesNeedingImports++;
       fileList.push(file);
     }
+
+    // Track validation results
+    if (result.validationErrors) totalValidationErrors += result.validationErrors;
+    if (result.validationWarnings) totalValidationWarnings += result.validationWarnings;
   }
 
   // Summary
@@ -1005,6 +1332,18 @@ async function main() {
 
   if (options.removeOutline) {
     console.log(`   Markers removed: ${totalChanges}`);
+  } else if (options.validate) {
+    console.log(`   Transformations checked: ${totalChanges}`);
+    console.log(`   Elements skipped: ${totalSkipped}`);
+    if (totalValidationErrors > 0) {
+      console.log(log.red(`   Validation errors: ${totalValidationErrors}`));
+    }
+    if (totalValidationWarnings > 0) {
+      console.log(log.yellow(`   Validation warnings: ${totalValidationWarnings}`));
+    }
+    if (totalValidationErrors === 0 && totalValidationWarnings === 0 && totalChanges > 0) {
+      console.log(log.green(`   ✓ All transformations validated successfully`));
+    }
   } else {
     console.log(`   Changes applied: ${totalChanges}`);
     console.log(`   Changes skipped: ${totalSkipped}`);
@@ -1022,6 +1361,11 @@ async function main() {
 
   if (options.dryRun && totalChanges > 0) {
     console.log(log.yellow('\n   Run without --dry-run to apply changes.'));
+  }
+
+  // Print grouped summary of all skipped elements
+  if (!options.removeOutline) {
+    printSkippedSummary();
   }
 
   console.log();
