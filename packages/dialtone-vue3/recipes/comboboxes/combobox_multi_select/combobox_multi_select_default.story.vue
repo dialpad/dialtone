@@ -29,6 +29,7 @@
     @remove="onComboboxRemove"
     @max-selected="$attrs.onMaxSelected"
     @combobox-highlight="$attrs.onComboboxHighlight"
+    @focus="$attrs.onFocus"
   >
     <template
       v-if="$attrs.header"
