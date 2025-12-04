@@ -24,6 +24,7 @@ export const argsData = {
   onRemove: action('remove'),
   onMaxSelected: action('maxSelected'),
   onComboboxHighlight: action('comboboxHighlight'),
+  onFocus: action('focus'),
 };
 
 export const argTypesData = {

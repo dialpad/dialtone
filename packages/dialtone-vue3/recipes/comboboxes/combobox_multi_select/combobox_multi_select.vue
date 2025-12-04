@@ -60,7 +60,7 @@
           :show-messages="showInputMessages"
           :messages="inputMessages"
           :size="size"
-          v-on="inputListeners"
+          v-bind="inputListeners"
           @input="onInput"
         />
 
@@ -120,7 +120,7 @@ import DtInput from '@/components/input/input.vue';
 import DtChip from '@/components/chip/chip.vue';
 import DtValidationMessages from '@/components/validation_messages/validation_messages.vue';
 import { validationMessageValidator } from '@/common/validators';
-import { hasSlotContent, returnFirstEl } from '@/common/utils';
+import { extractVueListeners, hasSlotContent, returnFirstEl } from '@/common/utils';
 import {
   POPOVER_APPEND_TO_VALUES,
 } from '@/components/popover/popover_constants';
@@ -450,22 +450,23 @@ export default {
 
     inputListeners () {
       return {
-        input: event => {
+        ...extractVueListeners(this.$attrs),
+        onInput: event => {
           this.$emit('input', event);
           if (this.hasSuggestionList) {
             this.showComboboxList();
           }
         },
 
-        keydown: event => {
+        onKeydown: event => {
           this.onInputKeyDown(event);
         },
 
-        keyup: event => {
+        onKeyup: event => {
           this.$emit('keyup', event);
         },
 
-        click: () => {
+        onClick: () => {
           if (this.hasSuggestionList) {
             this.showComboboxList();
           }
