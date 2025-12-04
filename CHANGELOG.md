@@ -1,3 +1,11 @@
+## [9.150.2](https://github.com/dialpad/dialtone/compare/dialtone/v9.150.1...dialtone/v9.150.2) (2025-12-04)
+
+
+### Bug Fixes
+
+* **Combobox Multi Select:** DP-162879 fix event listeners ([#990](https://github.com/dialpad/dialtone/issues/990)) ([ac3ee1e](https://github.com/dialpad/dialtone/commit/ac3ee1ef7bc2d755171ec34e410ba8408f04811d))
+* **Combobox Multi Select:** DP-162879 follow up fix for inheritAttrs ([#991](https://github.com/dialpad/dialtone/issues/991)) ([42fa4bd](https://github.com/dialpad/dialtone/commit/42fa4bdbfd2f2d83e3d19ea226592971cdddf537))
+
 ## [9.150.1](https://github.com/dialpad/dialtone/compare/dialtone/v9.150.0...dialtone/v9.150.1) (2025-12-03)
 
 
