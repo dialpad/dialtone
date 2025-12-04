@@ -19,6 +19,7 @@ export const argsData = {
   hasSuggestionList: true,
   appendTo: 'body',
   showList: null,
+  disabled: false,
   onInput: action('input'),
   onSelect: action('select'),
   onRemove: action('remove'),
@@ -68,6 +69,11 @@ export const argTypesData = {
   description: {
     control: {
       type: 'text',
+    },
+  },
+  disabled: {
+    control: {
+      type: 'boolean',
     },
   },
   appendTo: {
