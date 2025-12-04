@@ -1,3 +1,10 @@
+# [9.151.0-next.2](https://github.com/dialpad/dialtone/compare/dialtone/v9.151.0-next.1...dialtone/v9.151.0-next.2) (2025-12-04)
+
+
+### Bug Fixes
+
+* **Docs:** DLT-2849 fix dt-select-menu values in documentation pages ([#984](https://github.com/dialpad/dialtone/issues/984)) ([a60aa76](https://github.com/dialpad/dialtone/commit/a60aa760e578d822cb23eb737942fe3f8c62dd2a))
+
 # [9.151.0-next.1](https://github.com/dialpad/dialtone/compare/dialtone/v9.150.0...dialtone/v9.151.0-next.1) (2025-12-03)
 
 
