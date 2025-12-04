@@ -11,6 +11,7 @@
     content-width="anchor"
     :append-to="appendTo"
     :transition="transition"
+    v-bind="extractNonListeners($attrs)"
     @select="onComboboxSelect"
     @highlight="comboboxHighlight"
   >
@@ -120,7 +121,7 @@ import DtInput from '@/components/input/input.vue';
 import DtChip from '@/components/chip/chip.vue';
 import DtValidationMessages from '@/components/validation_messages/validation_messages.vue';
 import { validationMessageValidator } from '@/common/validators';
-import { extractVueListeners, hasSlotContent, returnFirstEl } from '@/common/utils';
+import { extractVueListeners, extractNonListeners, hasSlotContent, returnFirstEl } from '@/common/utils';
 import {
   POPOVER_APPEND_TO_VALUES,
 } from '@/components/popover/popover_constants';
@@ -140,6 +141,8 @@ export default {
     DtChip,
     DtValidationMessages,
   },
+
+  inheritAttrs: false,
 
   props: {
     /**
@@ -536,6 +539,7 @@ export default {
   },
 
   methods: {
+    extractNonListeners,
     comboboxHighlight (highlightIndex) {
       this.$emit('combobox-highlight', highlightIndex);
     },

@@ -163,7 +163,7 @@ export const flushPromises = () => {
 export function hasSlotContent (slot, slotProps = {}) {
   if (!slot) return false;
 
-  // eslint-disable-next-line complexity
+   
   return slot(slotProps).some((vnode) => {
     if (vnode.type === Comment) return false;
 
@@ -199,10 +199,26 @@ export const pascalCaseToKebabCase = (string) => {
     .replace(/^-/, '');
 };
 
+/**
+ * Extracts Vue event listeners from attributes object
+ * @param {Object} attrs - The attributes object to extract listeners from
+ * @returns {Object} Object containing only Vue event listeners (keys matching on[A-Z])
+ */
 export const extractVueListeners = (attrs) => {
   const listeners = Object.entries(attrs)
     .filter(([key]) => key.match(/on[A-Z]/));
   return Object.fromEntries(listeners);
+};
+
+/**
+ * Extracts non-listener attributes from attributes object
+ * @param {Object} attrs - The attributes object to extract non-listeners from
+ * @returns {Object} Object containing only non-listener attributes (keys not matching on[A-Z])
+ */
+export const extractNonListeners = (attrs) => {
+  const nonListeners = Object.entries(attrs)
+    .filter(([key]) => !key.match(/on[A-Z]/));
+  return Object.fromEntries(nonListeners);
 };
 
 /**
@@ -451,7 +467,7 @@ export function capitalizeFirstLetter (str, locale = 'en-US') {
  * @param {HTMLElement} componentRef - the component reference
  * @param {string} componentName - the component name
  */
-// eslint-disable-next-line complexity
+ 
 export function warnIfUnmounted (componentRef, componentName) {
   if (typeof process === 'undefined') return;
   if (process.env.NODE_ENV !== 'test') return;
