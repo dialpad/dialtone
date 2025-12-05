@@ -163,7 +163,7 @@ export const flushPromises = () => {
 export function hasSlotContent (slot, slotProps = {}) {
   if (!slot) return false;
 
-   
+
   return slot(slotProps).some((vnode) => {
     if (vnode.type === Comment) return false;
 
@@ -467,7 +467,7 @@ export function capitalizeFirstLetter (str, locale = 'en-US') {
  * @param {HTMLElement} componentRef - the component reference
  * @param {string} componentName - the component name
  */
- 
+
 export function warnIfUnmounted (componentRef, componentName) {
   if (typeof process === 'undefined') return;
   if (process.env.NODE_ENV !== 'test') return;
@@ -538,6 +538,7 @@ export default {
   flushPromises,
   kebabCaseToPascalCase,
   extractVueListeners,
+  extractNonListeners,
   removeClassStyleAttrs,
   addClassStyleAttrs,
   returnFirstEl,
