@@ -1,3 +1,10 @@
+## [8.70.3](https://github.com/dialpad/dialtone/compare/dialtone-css/v8.70.2...dialtone-css/v8.70.3) (2025-12-06)
+
+
+### Bug Fixes
+
+* **Modal, Popover:** NO-JIRA remove bg clip ([#992](https://github.com/dialpad/dialtone/issues/992)) ([28eea59](https://github.com/dialpad/dialtone/commit/28eea597a7a1d63540fa435848819c34cfd5ea0d))
+
 ## [8.70.2](https://github.com/dialpad/dialtone/compare/dialtone-css/v8.70.1...dialtone-css/v8.70.2) (2025-12-02)
 
 
