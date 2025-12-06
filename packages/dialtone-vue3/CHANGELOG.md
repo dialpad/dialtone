@@ -1,3 +1,11 @@
+## [3.196.3](https://github.com/dialpad/dialtone/compare/dialtone-vue3/v3.196.2...dialtone-vue3/v3.196.3) (2025-12-06)
+
+
+### Bug Fixes
+
+* NO-JIRA export extractNonListeners ([0ae99ef](https://github.com/dialpad/dialtone/commit/0ae99ef09bfee9cb33a010f1774d17d964905807))
+* **Toggle:** NO-JIRA emit modelValue before change ([#986](https://github.com/dialpad/dialtone/issues/986)) ([08e3e6a](https://github.com/dialpad/dialtone/commit/08e3e6a49e98a084f552d3e2989bb1d9c65d6413))
+
 ## [3.196.2](https://github.com/dialpad/dialtone/compare/dialtone-vue3/v3.196.1...dialtone-vue3/v3.196.2) (2025-12-04)
 
 
