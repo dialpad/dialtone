@@ -1,3 +1,12 @@
+## [9.150.3](https://github.com/dialpad/dialtone/compare/dialtone/v9.150.2...dialtone/v9.150.3) (2025-12-06)
+
+
+### Bug Fixes
+
+* **Modal, Popover:** NO-JIRA remove bg clip ([#992](https://github.com/dialpad/dialtone/issues/992)) ([28eea59](https://github.com/dialpad/dialtone/commit/28eea597a7a1d63540fa435848819c34cfd5ea0d))
+* NO-JIRA export extractNonListeners ([0ae99ef](https://github.com/dialpad/dialtone/commit/0ae99ef09bfee9cb33a010f1774d17d964905807))
+* **Toggle:** NO-JIRA emit modelValue before change ([#986](https://github.com/dialpad/dialtone/issues/986)) ([08e3e6a](https://github.com/dialpad/dialtone/commit/08e3e6a49e98a084f552d3e2989bb1d9c65d6413))
+
 ## [9.150.2](https://github.com/dialpad/dialtone/compare/dialtone/v9.150.1...dialtone/v9.150.2) (2025-12-04)
 
 
