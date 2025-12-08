@@ -33,7 +33,12 @@
       </dt-button>
     </template>
     <template #timer>
-      <div class="d-d-flex d-jc-space-between d-ai-center d-p8">
+      <dt-stack
+        direction="row"
+        justify="between"
+        align="center"
+        class="d-p8"
+      >
         <div class="d-headline--xl">
           01:15
         </div>
@@ -44,13 +49,14 @@
         >
           I'm back
         </dt-button>
-      </div>
+      </dt-stack>
     </template>
   </dt-recipe-contact-centers-row>
 </template>
 
 <script>
 import { DtButton } from '@/components/button';
+import { DtStack } from '@/components/stack';
 import DtIconBellRing from '@dialpad/dialtone-icons/vue2/bell-ring';
 import DtRecipeContactCentersRow from './contact_centers_row.vue';
 
@@ -59,6 +65,7 @@ export default {
 
   components: {
     DtButton,
+    DtStack,
     DtRecipeContactCentersRow,
     DtIconBellRing,
   },

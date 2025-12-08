@@ -506,13 +506,13 @@ In addition to the footer, custom elements can be inserted into the header and b
     @update:show="updateShow"
   >
     <template #header>
-      <div class="d-fl-center d-p12 d-bgc-purple-100">
+      <dt-stack direction="row" align="center" justify="center" class="d-p12 d-bgc-purple-100">
         <div>Custom header</div>
-      </div>
+      </dt-stack>
     </template>
-    <div class="d-fl-center d-p32 d-bgc-gold-200">
+    <dt-stack direction="row" align="center" justify="center" class="d-p32 d-bgc-gold-200">
       <h2>Custom content</h2>
-    </div>
+    </dt-stack>
   </dt-modal>
   <dt-button
     @click="openModal"
@@ -528,13 +528,13 @@ vueCode='
   @update:show="updateShow"
 >
   <template #header>
-    <div class="d-fl-center d-p12 d-bgc-purple-100">
+    <dt-stack direction="row" align="center" justify="center" class="d-p12 d-bgc-purple-100">
       <div>Custom header</div>
-    </div>
+    </dt-stack>
   </template>
-  <div class="d-fl-center d-p32 d-bgc-gold-200">
+  <dt-stack direction="row" align="center" justify="center" class="d-p32 d-bgc-gold-200">
     <h2>Custom content</h2>
-  </div>
+  </dt-stack>
 </dt-modal>
 '
 />

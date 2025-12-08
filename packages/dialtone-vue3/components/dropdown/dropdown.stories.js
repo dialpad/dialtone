@@ -175,7 +175,7 @@ export const Default = {
 
   decorators: [
     () => ({
-      template: `<div class="d-d-flex d-jc-center d-ai-center d-h164"><story /></div>`,
+      template: `<dt-stack direction="row" justify="center" align="center" class="d-h164"><story /></dt-stack>`,
     }),
   ],
 };
@@ -202,7 +202,7 @@ export const Variants = {
 
   decorators: [
     () => ({
-      template: `<div class="d-d-flex d-jc-center d-ai-center"><story /></div>`,
+      template: `<dt-stack direction="row" justify="center" align="center"><story /></dt-stack>`,
     }),
   ],
 };

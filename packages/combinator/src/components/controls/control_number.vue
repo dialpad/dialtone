@@ -1,5 +1,8 @@
 <template>
-  <div class="d-d-flex d-ai-flex-end">
+  <dt-stack
+    direction="row"
+    align="end"
+  >
     <div class="d-fl-grow1">
       <dt-input
         :value="inputValue"
@@ -23,7 +26,7 @@
         @input="toggleNaN"
       />
     </div>
-  </div>
+  </dt-stack>
 </template>
 
 <script setup>

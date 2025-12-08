@@ -1450,6 +1450,10 @@ vueCode='
 
 Resize your browser to see the justification change at different breakpoints.
 
+## Migrating from Flex CSS Utilities
+
+View the [Migrating from Flex CSS Utilities to DtStack](/about/whats-new/posts/2025-12-2) for more details.
+
 ## Vue API
 
 <component-vue-api component-name="stack" />

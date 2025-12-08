@@ -14,7 +14,7 @@ Use `d-fl-col{n}` to create uniformly sized children within an element.
     <div v-for="(i, index) in columns" class="d-p8 d-bar8 d-bgc-moderate d-w100p">
       <code class="d-bgc-transparent">.d-fl-col{{i}}</code>
       <div class="d-cg8 d-of-auto" :class="`d-fl-col${i}`">
-        <div v-for="(col) in columns.slice(0, i)" class="d-fl-center d-p16 d-bar4 d-bgc-moderate-opaque">{{ col }}</div>
+        <dt-stack direction="row" align="center" justify="center" class="d-p16 d-bar4 d-bgc-moderate-opaque" v-for="(col) in columns.slice(0, i)">{{ col }}</dt-stack>
       </div>
     </div>
   </dt-stack>
@@ -44,9 +44,9 @@ Use `d-cg{n}` to create uniform gaps between flex columns within an element.
     <dt-stack v-for="i in gaps" gap="400" class="d-p8 d-bar8 d-bgc-moderate d-w100p">
       <code class="d-bgc-transparent">.d-cg{{ i }}</code>
       <div class="d-fl-col3 d-of-auto" :class="`d-cg${i}`">
-        <div class="d-fl-center d-p16 d-bar4 d-bgc-moderate-opaque">1</div>
-        <div class="d-fl-center d-p16 d-bar4 d-bgc-moderate-opaque">2</div>
-        <div class="d-fl-center d-p16 d-bar4 d-bgc-moderate-opaque">3</div>
+        <dt-stack direction="row" align="center" justify="center" class="d-p16 d-bar4 d-bgc-moderate-opaque">1</dt-stack>
+        <dt-stack direction="row" align="center" justify="center" class="d-p16 d-bar4 d-bgc-moderate-opaque">2</dt-stack>
+        <dt-stack direction="row" align="center" justify="center" class="d-p16 d-bar4 d-bgc-moderate-opaque">3</dt-stack>
       </div>
     </dt-stack>
   </dt-stack>
@@ -69,22 +69,24 @@ Use `d-cg{n}` to create uniform gaps between flex columns within an element.
 
 ## Centering Objects
 
-By default flexed items align to `flex-start` both horizontally and vertically (effectively top, left). Use `d-fl-center` to center-center child items within an element.
+This used to be accomplished with `d-fl-center`, which is deprecated in favor of using [Stack](/utilities/stack).
+
+By default flexed items align to `flex-start` both horizontally and vertically (effectively top, left). Combine Stack's `align` and `justify` utilities to center-center child items within an element.
 
 <code-well-header>
-  <div class="d-fl-center d-w100p d-hmn216 d-bgc-moderate">
-    <div class="d-fl-center d-w48 d-h48 d-m8 d-p16 d-bgc-moderate-opaque d-bar4">1</div>
-    <div class="d-fl-center d-w64 d-h64 d-m8 d-p16 d-bgc-moderate-opaque d-bar4">2</div>
-    <div class="d-fl-center d-w48 d-h48 d-m8 d-p16 d-bgc-moderate-opaque d-bar4">3</div>
-  </div>
+  <dt-stack direction="row" align="center" justify="center" class="d-w100p d-hmn216 d-bgc-moderate">
+    <dt-stack direction="row" align="center" justify="center" class="d-w48 d-h48 d-m8 d-p16 d-bgc-moderate-opaque d-bar4">1</dt-stack>
+    <dt-stack direction="row" align="center" justify="center" class="d-w64 d-h64 d-m8 d-p16 d-bgc-moderate-opaque d-bar4">2</dt-stack>
+    <dt-stack direction="row" align="center" justify="center" class="d-w48 d-h48 d-m8 d-p16 d-bgc-moderate-opaque d-bar4">3</dt-stack>
+  </dt-stack>
 </code-well-header>
 
 ```html
-<div class="d-fl-center">
+<dt-stack direction="row" align="center" justify="center">
   <div>1</div>
   <div>2</div>
   <div>3</div>
-</div>
+</dt-stack>
 ```
 
 <script setup>

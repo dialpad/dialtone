@@ -1,6 +1,6 @@
 {
   "name": "@dialpad/dialtone",
-  "version": "9.150.0-next.1",
+  "version": "9.151.0-next.2",
   "packageManager": "pnpm@9.9.0",
   "description": "Dialpad's Dialtone design system monorepo",
   "scripts": {
@@ -67,6 +67,9 @@
   "files": [
     "dist"
   ],
+  "bin": {
+    "dialtone-migrate-flex-to-stack": "./dist/js/dialtone_migrate_flex_to_stack/index.mjs"
+  },
   "exports": {
     "./CHANGELOG.json": "./CHANGELOG.json",
     "./css": "./dist/css/dialtone.min.css",

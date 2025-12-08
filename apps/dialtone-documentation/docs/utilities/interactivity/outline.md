@@ -9,15 +9,15 @@ Use `d-ol-{focusring|focusring-inset|none}` to change an elements' outline.
 
 <code-well-header>
   <dt-stack direction="row" gap="500">
-    <div class="d-fl-center d-p16 d-bgc-moderate d-code--sm d-ol-focusring">
+    <dt-stack direction="row" align="center" justify="center" class="d-p16 d-bgc-moderate d-code--sm d-ol-focusring">
       .d-ol-focusring
-    </div>
-    <div class="d-fl-center d-p16 d-bgc-moderate d-code--sm d-ol-focusring-inset">
+    </dt-stack>
+    <dt-stack direction="row" align="center" justify="center" class="d-p16 d-bgc-moderate d-code--sm d-ol-focusring-inset">
       .d-ol-focusring-inset
-    </div>
-    <div class="d-fl-center d-p16 d-bgc-moderate d-code--sm d-ol-none">
+    </dt-stack>
+    <dt-stack direction="row" align="center" justify="center" class="d-p16 d-bgc-moderate d-code--sm d-ol-none">
       .d-ol-none
-    </div>
+    </dt-stack>
   </dt-stack>
 </code-well-header>
 

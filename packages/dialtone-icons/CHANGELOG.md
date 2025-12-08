@@ -1,3 +1,21 @@
+## [4.46.2-next.1](https://github.com/dialpad/dialtone/compare/dialtone-icons/v4.46.1...dialtone-icons/v4.46.2-next.1) (2025-12-04)
+
+## [4.46.1-next.1](https://github.com/dialpad/dialtone/compare/dialtone-icons/v4.46.0...dialtone-icons/v4.46.1-next.1) (2025-12-03)
+
+## [4.46.1](https://github.com/dialpad/dialtone/compare/dialtone-icons/v4.46.0...dialtone-icons/v4.46.1) (2025-12-03)
+
+
+### Bug Fixes
+
+* **Docs:** DLT-2849 fix dt-select-menu values in documentation pages ([#984](https://github.com/dialpad/dialtone/issues/984)) ([a60aa76](https://github.com/dialpad/dialtone/commit/a60aa760e578d822cb23eb737942fe3f8c62dd2a))
+
+# [4.46.0](https://github.com/dialpad/dialtone/compare/dialtone-icons/v4.45.1...dialtone-icons/v4.46.0) (2025-12-02)
+
+
+### Features
+
+* **Icon:** DP-166633 add bracket left right icon ([#982](https://github.com/dialpad/dialtone/issues/982)) ([278c2a4](https://github.com/dialpad/dialtone/commit/278c2a440fa60f58c47371442aa21edbc1e739ce))
+
 ## [4.45.1](https://github.com/dialpad/dialtone/compare/dialtone-icons/v4.45.0...dialtone-icons/v4.45.1) (2025-11-26)
 
 # [4.45.0](https://github.com/dialpad/dialtone/compare/dialtone-icons/v4.44.1...dialtone-icons/v4.45.0) (2025-11-13)

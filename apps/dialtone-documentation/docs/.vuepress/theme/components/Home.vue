@@ -1,8 +1,13 @@
 <!-- eslint-disable max-len -->
 <template>
   <section class="hero">
-    <div class="hero__inner-wrapper d-d-flex d-jc-space-between d-mx-auto d-wmx1340 d-pl24 d-pr32 d-ai-center">
-      <div class="hero__content d-d-flex d-fd-column d-jc-center">
+    <dt-stack
+      direction="row"
+      justify="between"
+      align="center"
+      class="hero__inner-wrapper d-mx-auto d-wmx1340 d-pl24 d-pr32"
+    >
+      <dt-stack justify="center" class="hero__content">
         <h1 class="d-headline--xxl d-mb12 d-ff-marketing">
           Improve your UI's reception with Dialtone
         </h1>
@@ -10,7 +15,7 @@
           Documented styles, components, and utility classes to help you quickly design and build unified experiences
           across Dialpad experiences.
         </p>
-        <div class="d-mb32 d-d-flex d-jc-flex-start">
+        <dt-stack direction="row" justify="start" class="d-mb32">
           <a
             class="d-td-unset d-d-inline-flex"
             href="https://github.com/dialpad/dialtone"
@@ -22,8 +27,8 @@
               src="https://img.shields.io/npm/v/@dialpad/dialtone?color=F5F0FF&label=Dialtone"
             >
           </a>
-        </div>
-        <div class="d-d-flex d-jc-center d-flow16">
+        </dt-stack>
+        <dt-stack direction="row" justify="center" gap="500">
           <router-link
             v-slot="{ navigate }"
             to="/guides/getting-started/"
@@ -53,10 +58,10 @@
               What's New?
             </dt-button>
           </router-link>
-        </div>
-      </div>
+        </dt-stack>
+      </dt-stack>
       <svg-loader class="hero__image d-w50p" name="home-billboard" />
-    </div>
+    </dt-stack>
   </section>
   <section class="links d-bt d-bb d-bc-subtle d-bgc-secondary">
     <div class="d-d-grid d-gg16 d-g-cols12 d-wmx1340 d-mx-auto">

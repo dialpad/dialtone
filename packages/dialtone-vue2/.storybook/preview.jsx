@@ -50,6 +50,7 @@ import customEmojiJson from '@/common/custom-emoji.json';
 import { dialtoneDarkTheme, dialtoneLightTheme } from './dialtone-themes.js';
 import { DtTooltipDirective } from '@/directives/tooltip_directive';
 import { DtScrollbarDirective } from '@/directives/scrollbar_directive';
+import { DtStack } from '@/components/stack';
 import { faker } from '@faker-js/faker';
 
 let currentContrast = 'default';
@@ -132,6 +133,7 @@ setCustomEmojiJson(customEmojiJson);
 
 Vue.use(DtTooltipDirective);
 Vue.use(DtScrollbarDirective);
+Vue.component('DtStack', DtStack);
 
 // Fixes method "toJSON" is not defined on click event in Sb 6.5.11
 // See https://github.com/storybookjs/storybook/issues/14933#issuecomment-920578274

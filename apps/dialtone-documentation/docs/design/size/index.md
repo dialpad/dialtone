@@ -34,10 +34,10 @@ When assigning a size to an element, utilize [Size Tokens](#tokens) for the valu
 <div class="d-gc2">
 <code-well-header>
   <div class="d-d-grid d-g24 d-g-cols2 md:d-g-cols1 d-w100p">
-    <div class="d-fl-center d-ba d-js-center" :style="{ width: 'fit-content', minWidth: selectedSize }">
+    <dt-stack direction="row" align="center" justify="center" class="d-ba d-bc-default d-js-center" :style="{ width: 'fit-content', minWidth: selectedSize }">
       Box
-    </div>
-    <dt-select-menu label="min-width" :options="sizeValues" @change="changeBoxSize" />
+    </dt-stack>
+    <dt-select-menu label="min-width" :options="sizeValues" v-model="selectedSize" />
   </div>
 </code-well-header>
 
@@ -154,8 +154,4 @@ const tokens = Object.keys(tokensJson[theme] ?? {}).reduce((acc, curr) => {
   ];
 
   const selectedSize = ref('var(--dt-size-720)');
-
-  const changeBoxSize = (newSize) => {
-    selectedSize.value = newSize;
-  };
 </script>

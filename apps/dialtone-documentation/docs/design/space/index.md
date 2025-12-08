@@ -37,15 +37,15 @@ When setting the gap between elements, utilize [Space Tokens](#tokens) for the g
 <div class="d-gc2">
 <code-well-header>
   <div class="d-d-grid d-g24 d-g-cols2 md:d-g-cols1 d-w100p">
-    <div class="d-d-flex d-fd-row" :style="{ gap: selectedSpace }">
-      <div class="d-fl-center d-ba d-w100p">
+    <dt-stack direction="row" :style="{ gap: selectedSpace }">
+      <dt-stack direction="row" align="center" justify="center" class="d-ba d-bc-default d-w100p">
         Element A
-      </div>
-      <div class="d-fl-center d-ba d-w100p">
+      </dt-stack>
+      <dt-stack direction="row" align="center" justify="center" class="d-ba d-bc-default d-w100p">
         Element B
-      </div>
-    </div>
-    <dt-select-menu label="Gap" :options="spaceValues" @change="changeSpace" />
+      </dt-stack>
+    </dt-stack>
+    <dt-select-menu label="Gap" :options="spaceValues" v-model="selectedSpace" />
   </div>
 </code-well-header>
 
@@ -205,9 +205,5 @@ const spaceValues = [
   { value: 'var(--dt-space-600)', label: 'var(--dt-space-600)' },
 ];
 
-const selectedSpace = ref('var(--dt-space-200)');
-
-const changeSpace = (newSpace) => {
-  selectedSpace.value = newSpace;
-};
+const selectedSpace = ref('var(--dt-space-400)');
 </script>

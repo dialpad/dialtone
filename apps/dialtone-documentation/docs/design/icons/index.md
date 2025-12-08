@@ -31,11 +31,11 @@ For detailed instructions on using the icons, check the [Icon component](/compon
 <div class="d-gc2">
 <code-well-header>
   <div class="d-d-grid d-g24 d-g-cols1 md:d-g-cols3 d-w100p">
-    <div class="d-fl-center">
+    <dt-stack direction="row" align="center" justify="center">
       <dt-icon :name="selectedIcon" :size="selectedSize" />
-    </div>
-    <dt-select-menu label="Name" :options="iconListOptions" @change="changeIcon" />
-    <dt-select-menu label="Size" :options="sizeValues" @change="changeIconSize" />
+    </dt-stack>
+    <dt-select-menu label="Name" :options="iconListOptions" v-model="selectedIcon" />
+    <dt-select-menu label="Size" :options="sizeValues" v-model="selectedSize" />
   </div>
 </code-well-header>
 
@@ -125,15 +125,7 @@ const iconListOptions = [
   { value: 'credit-card', label: 'Credit Card' }
 ];
 
-const selectedIcon = ref('settings');
+const selectedIcon = ref('user-plus');
 const selectedSize = ref('500');
-
-const changeIcon = (newIcon) => {
-  selectedIcon.value = newIcon;
-};
-
-const changeIconSize = (newSize) => {
-  selectedSize.value = newSize;
-};
 
 </script>
