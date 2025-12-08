@@ -779,27 +779,55 @@
       "100": {
         "value": "{font.size.root} * 1.2",
         "type": "fontSizes",
-        "description": "small"
+        "description": "sm / small"
+      },
+      "125": {
+        "value": "{font.size.root} * 1.3",
+        "type": "fontSizes"
+      },
+      "150": {
+        "value": "{font.size.root} * 1.4",
+        "type": "fontSizes",
+        "description": "smd / small-medium / smedium"
       },
       "200": {
-        "value": "{font.size.root} * 1.5",
+        "value": "{font.size.root} * 1.6",
         "type": "fontSizes",
-        "description": "medium / base"
+        "description": "md / medium / base"
+      },
+      "250": {
+        "value": "{font.size.root} * 1.8",
+        "type": "fontSizes"
       },
       "300": {
-        "value": "{font.size.root} * 1.9",
+        "value": "{font.size.root} * 2",
         "type": "fontSizes",
-        "description": "large"
+        "description": "lg / large"
+      },
+      "350": {
+        "value": "{font.size.root} * 2.4",
+        "type": "fontSizes",
+        "description": "mlg / medium-large / milge / marge"
       },
       "400": {
-        "value": "{font.size.root} * 2.7",
+        "value": "{font.size.root} * 2.8",
         "type": "fontSizes",
-        "description": "extra large / xl"
+        "description": "xl / extra large"
       },
       "500": {
-        "value": "{font.size.root} * 3.8",
+        "value": "{font.size.root} * 3.2",
         "type": "fontSizes",
-        "description": "extra large / xxl"
+        "description": "xxl / extra large"
+      },
+      "050": {
+        "value": "{font.size.root} * 1",
+        "type": "fontSizes",
+        "description": "xxs / extra extra small"
+      },
+      "075": {
+        "value": "{font.size.root} * 1.1",
+        "type": "fontSizes",
+        "description": "xs / extra small"
       }
     },
     "lineHeight": {
