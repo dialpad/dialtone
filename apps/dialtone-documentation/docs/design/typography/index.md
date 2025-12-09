@@ -4,6 +4,48 @@ description: Clear, legible, and easy-to-read text.
 figma_url: https://www.figma.com/design/VjrRh4vvfONSmBQxnZrL3u/DT9-Design-Tokens--Rebrand-2025-?node-id=3746-13426&t=D8g6K4TrMGXNsvLT-11
 ---
 
+<dt-stack gap="500" align="start">
+  <dt-stack>
+    <strong class="d-text-label--xs">Headlines</strong>
+    <dt-stack gap="400">
+      <p class="d-bgc-secondary-opaque h:d-bgc-moderate-opaque d-text-headline--xxxl">The quick brown fox jumps over the lazy dog.</p>
+      <p class="d-bgc-secondary-opaque h:d-bgc-moderate-opaque d-text-headline--xxl">The quick brown fox jumps over the lazy dog.</p>
+      <p class="d-bgc-secondary-opaque h:d-bgc-moderate-opaque d-text-headline--xl">The quick brown fox jumps over the lazy dog.</p>
+      <p class="d-bgc-secondary-opaque h:d-bgc-moderate-opaque d-text-headline--lg">The quick brown fox jumps over the lazy dog.</p>
+      <p class="d-bgc-secondary-opaque h:d-bgc-moderate-opaque d-text-headline--md">The quick brown fox jumps over the lazy dog.</p>
+      <p class="d-bgc-secondary-opaque h:d-bgc-moderate-opaque d-text-headline--sm">The quick brown fox jumps over the lazy dog.</p>
+      <p class="d-bgc-secondary-opaque h:d-bgc-moderate-opaque d-text-headline--xs">The quick brown fox jumps over the lazy dog.</p>
+    </dt-stack>
+  </dt-stack>
+  <dt-stack>
+    <strong class="d-text-label--xs">Body</strong>
+    <dt-stack gap="400">
+      <p class="d-bgc-secondary-opaque h:d-bgc-moderate-opaque d-text-body--lg">The quick brown fox jumps over the lazy dog.</p>
+      <p class="d-bgc-secondary-opaque h:d-bgc-moderate-opaque d-text-body--md">The quick brown fox jumps over the lazy dog.</p>
+      <p class="d-bgc-secondary-opaque h:d-bgc-moderate-opaque d-text-body--sm">The quick brown fox jumps over the lazy dog.</p>
+      <p class="d-bgc-secondary-opaque h:d-bgc-moderate-opaque d-text-body--xs">The quick brown fox jumps over the lazy dog.</p>
+    </dt-stack>
+  </dt-stack>
+  <dt-stack>
+    <strong class="d-text-label--xs">Code</strong>
+    <dt-stack gap="400">
+      <p class="d-bgc-secondary-opaque h:d-bgc-moderate-opaque d-text-code--lg">The quick brown fox jumps over the lazy dog.</p>
+      <p class="d-bgc-secondary-opaque h:d-bgc-moderate-opaque d-text-code--md">The quick brown fox jumps over the lazy dog.</p>
+      <p class="d-bgc-secondary-opaque h:d-bgc-moderate-opaque d-text-code--sm">The quick brown fox jumps over the lazy dog.</p>
+      <p class="d-bgc-secondary-opaque h:d-bgc-moderate-opaque d-text-code--xs">The quick brown fox jumps over the lazy dog.</p>
+    </dt-stack>
+  </dt-stack>
+  <dt-stack>
+    <strong class="d-text-label--xs">Label</strong>
+    <dt-stack gap="400">
+      <p class="d-bgc-secondary-opaque h:d-bgc-moderate-opaque d-text-label--lg">The quick brown fox jumps over the lazy dog.</p>
+      <p class="d-bgc-secondary-opaque h:d-bgc-moderate-opaque d-text-label--md">The quick brown fox jumps over the lazy dog.</p>
+      <p class="d-bgc-secondary-opaque h:d-bgc-moderate-opaque d-text-label--sm">The quick brown fox jumps over the lazy dog.</p>
+      <p class="d-bgc-secondary-opaque h:d-bgc-moderate-opaque d-text-label--xs">The quick brown fox jumps over the lazy dog.</p>
+    </dt-stack>
+  </dt-stack>
+</dt-stack>
+
 ## Font Properties
 
 ### Font Family
