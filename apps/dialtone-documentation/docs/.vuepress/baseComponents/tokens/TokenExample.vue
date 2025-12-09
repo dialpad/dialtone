@@ -8,7 +8,7 @@
     :style="getColorStyle"
   >
     <div v-if="isForeground || isLink" :class="['d-headline--lg', { 'link-example': isLink }]">
-      Aa
+      Ag
     </div>
   </dt-stack>
   <dt-stack
@@ -19,7 +19,7 @@
     class="d-h32"
   >
     <div :style="getTypographyStyle">
-      Aa
+      Ag
     </div>
   </dt-stack>
   <div

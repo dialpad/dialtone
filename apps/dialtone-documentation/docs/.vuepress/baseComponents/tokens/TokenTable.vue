@@ -59,6 +59,7 @@
               />
             </td>
             <th scope="row">
+              <dt-badge v-if="deprecated" type="critical" kind="label" text="Deprecated" />
               <dt-stack
                 direction="row"
                 gap="300"
@@ -85,9 +86,6 @@
                 :token-value="valueToString(tokenValue)"
                 :tokens="tokens"
               />
-              <span v-if="deprecated" class="d-label--xs d-fc-critical">
-                Deprecated
-              </span>
             </th>
             <td v-if="!isSmallDevice && showValue" class="d-code--sm  d-fc-blue-500 d-ta-right d-wmx164">
               <token-value :token-value="valueToString(tokenValue)" :tokens="tokens" />

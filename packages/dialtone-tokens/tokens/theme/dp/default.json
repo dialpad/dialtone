@@ -3230,7 +3230,7 @@
         "value": {
           "fontFamily": "{font.family.mono}",
           "fontWeight": "{font.weight.normal}",
-          "fontSize": "{font.size.150}",
+          "fontSize": "{font.size.200}",
           "lineHeight": "{font.lineHeight.200}"
         },
         "type": "typography"
@@ -3239,7 +3239,7 @@
         "value": {
           "fontFamily": "{font.family.mono}",
           "fontWeight": "{font.weight.normal}",
-          "fontSize": "{font.size.100}",
+          "fontSize": "{font.size.150}",
           "lineHeight": "{font.lineHeight.200}"
         },
         "type": "typography"
@@ -3248,7 +3248,7 @@
         "value": {
           "fontFamily": "{font.family.mono}",
           "fontWeight": "{font.weight.normal}",
-          "fontSize": "{font.size.075}",
+          "fontSize": "{font.size.100}",
           "lineHeight": "{font.lineHeight.200}"
         },
         "type": "typography"

@@ -25,8 +25,8 @@ export const addTokensToStructure = (structure) => {
           addTokensToCategories(token, format, structure[format][themeKey]);
         });
 
-        // Sort font style tokens: text first, then typography, each by type then size
-        structure[format][themeKey].typography['font style']._children.sort(sortFontStyleTokens);
+        // Sort text style tokens: text first, then typography, each by type then size
+        structure[format][themeKey].typography['text style']._children.sort(sortFontStyleTokens);
       }
     }
   });
@@ -45,7 +45,7 @@ const splitCompositionTokenIntoArray = (value) => {
 };
 
 /**
- * Sort font style tokens: text tokens first, then typography tokens,
+ * Sort text style tokens: text tokens first, then typography tokens,
  * each sorted by type (headline, body, label, code, etc.) then by size (xxxl -> xs)
  */
 const TYPE_ORDER = ['headline', 'body', 'label', 'code', 'helper', 'button', 'inputs'];
@@ -121,7 +121,7 @@ const addTokensToCategories = (token, format, structure) => {
 
   // TYPOGRAPHY
   if (key.startsWith('typography')) {
-    structure.typography['font style']._children.push({ ...displayToken, hidden: !isCompositionToken });
+    structure.typography['text style']._children.push({ ...displayToken, hidden: !isCompositionToken });
     return;
   }
 
@@ -149,7 +149,7 @@ const addTokensToCategories = (token, format, structure) => {
 
   // TEXT (display alongside typography in Font Style)
   if (key.startsWith('text')) {
-    structure.typography['font style']._children.push({ ...displayToken, hidden: !isCompositionToken });
+    structure.typography['text style']._children.push({ ...displayToken, hidden: !isCompositionToken });
     return;
   }
 

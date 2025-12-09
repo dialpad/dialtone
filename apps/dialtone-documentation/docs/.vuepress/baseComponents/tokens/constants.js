@@ -81,7 +81,7 @@ export const getTokensStructure = () => ({
     },
   },
   typography: {
-    'font style': {
+    'text style': {
       _children: [],
     },
     'font family': {
