@@ -8,6 +8,7 @@
     :placeholder="$attrs.placeholder"
     :input-messages="$attrs.inputMessages"
     :input-class="$attrs.inputClass"
+    :disabled="$attrs.disabled"
     :input-wrapper-class="$attrs.inputWrapperClass"
     :show-input-messages="$attrs.showInputMessages"
     :loading="$attrs.loading"
