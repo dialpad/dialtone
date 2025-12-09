@@ -32,14 +32,18 @@ Four weights for clear hierarchy and visual contrast among different elements.
 
 Dictates the scale of text, enhancing readability and defining information hierarchy across content.
 
-<span class="d-fc-critical ">REDO</span>
-
-<dt-stack direction="row" gap="500" class="d-wmx764" style="outline: 10px solid red;">
-  <svg-loader name="fs-100" />
-  <svg-loader name="fs-200" />
-  <svg-loader name="fs-300" />
-  <svg-loader name="fs-400" />
-  <svg-loader name="fs-500" />
+<dt-stack gap="500">
+  <dt-stack direction="row" gap="500">
+    <svg-loader name="fs12" style="max-width: 140px" /> <!--lazy inline style until we redesign this whole page -->
+    <svg-loader name="fs14" style="max-width: 140px" />
+    <svg-loader name="fs16" style="max-width: 140px" />
+    <svg-loader name="fs18" style="max-width: 140px" />
+    <svg-loader name="fs20" style="max-width: 140px" />
+  </dt-stack>
+  <dt-stack direction="row" gap="500">
+    <svg-loader name="fs28" style="max-width: 140px" />
+    <svg-loader name="fs32" style="max-width: 140px" />
+  </dt-stack>
 </dt-stack>
 
 ### Line Height
@@ -76,7 +80,13 @@ Titles and headings to establish hierarchy and set the tone of contextual groupi
     <template v-for="({ var: varName }, index) in typographyStylesHeadlines" :key="varName">
       <div class="d-truncate"><p :class="[varName, 'd-truncate', 'd-bgc-secondary-opaque', 'h:d-bgc-moderate-opaque']">{{ example }}</p></div>
       <dt-stack direction="row" justify="between" class="dialtone-copy-utility">
-        <code class="d-text-code--sm d-bgc-transparent d-ta-center" v-dt-tooltip="`Font Size / Line Height`">{{ getStyles('headlines', index) }}</code>
+        <dt-stack direction="row" as="code" gap="300" class="d-text-code--sm d-bgc-transparent d-ta-center d-ws-nowrap">
+          <span v-dt-tooltip="`Font Size`">{{ getStyles('headlines', index).fontSize }}</span>
+          /
+          <span v-dt-tooltip="`Line Height`">{{ getStyles('headlines', index).lineHeight }}</span>
+          /
+          <span v-dt-tooltip="`Font Weight`">{{ getStyles('headlines', index).fontWeightName }}</span>
+        </dt-stack>
         <code class="dialtone-copy-utility__utility d-bgc-transparent d-text-code--sm">{{ varName }}</code>
         <div class="dialtone-copy-utility__btn">
           <copy-button :text="varName" aria-label="Copy" />
@@ -95,7 +105,13 @@ Default text style for longer-form prose content, designed for comfort and clari
     <template v-for="({ var: varName }, index) in typographyStylesBody" :key="varName">
       <div class="d-truncate"><p :class="[varName, 'd-truncate', 'd-bgc-secondary-opaque', 'h:d-bgc-moderate-opaque']">{{ example }}</p></div>
       <dt-stack direction="row" justify="between" class="dialtone-copy-utility">
-        <code class="d-text-code--sm d-bgc-transparent d-ta-center" v-dt-tooltip="`Font Size / Line Height`">{{ getStyles('body', index) }}</code>
+        <dt-stack direction="row" as="code" gap="300" class="d-text-code--sm d-bgc-transparent d-ta-center d-ws-nowrap">
+          <span v-dt-tooltip="`Font Size`">{{ getStyles('body', index).fontSize }}</span>
+          /
+          <span v-dt-tooltip="`Line Height`">{{ getStyles('body', index).lineHeight }}</span>
+          /
+          <span v-dt-tooltip="`Font Weight`">{{ getStyles('body', index).fontWeightName }}</span>
+        </dt-stack>
         <code class="dialtone-copy-utility__utility d-bgc-transparent d-text-code--sm">{{ varName }}</code>
         <div class="dialtone-copy-utility__btn">
           <copy-button :text="varName" aria-label="Copy" />
@@ -114,7 +130,13 @@ Shorter-length copy like form fields, buttons, and other UI-labeling elements, e
     <template v-for="({ var: varName }, index) in typographyStylesLabel" :key="varName">
       <div class="d-truncate"><p :class="[varName, 'd-truncate', 'd-bgc-secondary-opaque', 'h:d-bgc-moderate-opaque']">{{ example }}</p></div>
       <dt-stack direction="row" justify="between" class="dialtone-copy-utility">
-        <code class="d-text-code--sm d-bgc-transparent d-ta-center" v-dt-tooltip="`Font Size / Line Height`">{{ getStyles('label', index) }}</code>
+        <dt-stack direction="row" as="code" gap="300" class="d-text-code--sm d-bgc-transparent d-ta-center d-ws-nowrap">
+          <span v-dt-tooltip="`Font Size`">{{ getStyles('label', index).fontSize }}</span>
+          /
+          <span v-dt-tooltip="`Line Height`">{{ getStyles('label', index).lineHeight }}</span>
+          /
+          <span v-dt-tooltip="`Font Weight`">{{ getStyles('label', index).fontWeightName }}</span>
+        </dt-stack>
         <code class="dialtone-copy-utility__utility d-bgc-transparent d-text-code--sm">{{ varName }}</code>
         <div class="dialtone-copy-utility__btn">
           <copy-button :text="varName" aria-label="Copy" />
@@ -133,7 +155,13 @@ Code snippets, technical commands, or data values rendered as a monospaced font.
     <template v-for="({ var: varName }, index) in typographyStylesCode" :key="varName">
       <div class="d-truncate"><p :class="[varName, 'd-truncate', 'd-bgc-secondary-opaque', 'h:d-bgc-moderate-opaque']">{{ example }}</p></div>
       <dt-stack direction="row" justify="between" class="dialtone-copy-utility">
-        <code class="d-text-code--sm d-bgc-transparent d-ta-center" v-dt-tooltip="`Font Size / Line Height`">{{ getStyles('code', index) }}</code>
+        <dt-stack direction="row" as="code" gap="300" class="d-text-code--sm d-bgc-transparent d-ta-center d-ws-nowrap">
+          <span v-dt-tooltip="`Font Size`">{{ getStyles('code', index).fontSize }}</span>
+          /
+          <span v-dt-tooltip="`Line Height`">{{ getStyles('code', index).lineHeight }}</span>
+          /
+          <span v-dt-tooltip="`Font Weight`">{{ getStyles('code', index).fontWeightName }}</span>
+        </dt-stack>
         <code class="dialtone-copy-utility__utility d-bgc-transparent d-text-code--sm">{{ varName }}</code>
         <div class="dialtone-copy-utility__btn">
           <copy-button :text="varName" aria-label="Copy" />
@@ -215,7 +243,7 @@ Each typography style is expressed through a shorthand `font` property, and its 
 </clamped-table-wrapper>
 
 <script setup>
-  import { typographyVariants, typographyStyles } from '@data/type.json';
+  import { typographyVariants, typographyStyles, weight } from '@data/type.json';
   import CopyButton from '@baseComponents/CopyButton.vue';
   import SvgLoader from '@baseComponents/SvgLoader.vue';
   import ClampedTableWrapper from '@baseComponents/ClampedTableWrapper.vue';
@@ -227,11 +255,17 @@ Each typography style is expressed through a shorthand `font` property, and its 
 
   const example = "The quick brown fox jumps over the lazy dog.";
 
+  // Map numeric font-weight to its name (e.g., "700" → "bold")
+  const getWeightName = (numericWeight) => {
+    const match = weight.find(w => w.output === numericWeight);
+    return match ? match.name : numericWeight;
+  };
+
   // Function to get styles directly from CSS variables
   const getStyles = (category, index) => {
     const arrays = { headlines: typographyStylesHeadlines, body: typographyStylesBody, label: typographyStylesLabel, code: typographyStylesCode };
     const item = arrays[category]?.[index];
-    if (!item) return '';
+    if (!item) return { fontSize: '', lineHeight: '', fontWeight: '', fontWeightName: '' };
 
     // Convert class name to CSS variable prefix
     // d-text-headline--xxxl → --dt-text-headline-xxxl
@@ -243,6 +277,7 @@ Each typography style is expressed through a shorthand `font` property, and its 
     // Read the CSS variable values directly
     const fontSize = computedStyle.getPropertyValue(cssVarPrefix + '-font-size').trim();
     const lineHeight = computedStyle.getPropertyValue(cssVarPrefix + '-line-height').trim();
+    const fontWeight = computedStyle.getPropertyValue(cssVarPrefix + '-font-weight').trim();
 
     // Parse font-size: extract multiplier from calc(1rem * X) and convert to px
     let formattedFontSize = fontSize;
@@ -253,7 +288,7 @@ Each typography style is expressed through a shorthand `font` property, and its 
       formattedFontSize = Math.round(parseFloat(fontSize));
     }
 
-    return `${formattedFontSize} / ${lineHeight}`;
+    return { fontSize: formattedFontSize, lineHeight, fontWeight, fontWeightName: getWeightName(fontWeight) };
   };
 </script>
 
