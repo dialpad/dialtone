@@ -2841,7 +2841,7 @@
       "xl": {
         "value": {
           "fontFamily": "{font.family.body}",
-          "fontWeight": "{font.weight.medium}",
+          "fontWeight": "{font.weight.bold}",
           "lineHeight": "{font.lineHeight.200}",
           "fontSize": "{font.size.400}",
           "textCase": "{font.text-case.none}"
@@ -2852,7 +2852,7 @@
       "xl-compact": {
         "value": {
           "fontFamily": "{font.family.body}",
-          "fontWeight": "{font.weight.medium}",
+          "fontWeight": "{font.weight.bold}",
           "lineHeight": "{font.lineHeight.100}",
           "fontSize": "{font.size.400}",
           "textCase": "{font.text-case.none}"
@@ -2863,7 +2863,7 @@
       "xxl": {
         "value": {
           "fontFamily": "{font.family.body}",
-          "fontWeight": "{font.weight.medium}",
+          "fontWeight": "{font.weight.bold}",
           "lineHeight": "{font.lineHeight.200}",
           "fontSize": "{font.size.500}",
           "textCase": "{font.text-case.none}"
@@ -2874,8 +2874,8 @@
       "xxl-compact": {
         "value": {
           "fontFamily": "{font.family.body}",
-          "fontWeight": "{font.weight.medium}",
-          "lineHeight": "{font.lineHeight.100}",
+          "fontWeight": "{font.weight.bold}",
+          "lineHeight": "{font.lineHeight.200}",
           "fontSize": "{font.size.500}",
           "textCase": "{font.text-case.none}"
         },
