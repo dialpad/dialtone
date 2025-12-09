@@ -1,3 +1,10 @@
+# [2.205.0](https://github.com/dialpad/dialtone/compare/dialtone-vue2/v2.204.1...dialtone-vue2/v2.205.0) (2025-12-09)
+
+
+### Features
+
+* **Combobox Multi Select:** DLT-2850 add disabled prop ([#989](https://github.com/dialpad/dialtone/issues/989)) ([06a975f](https://github.com/dialpad/dialtone/commit/06a975f2ecf2425583a1cc90be3bbea909e90c67))
+
 ## [2.204.1](https://github.com/dialpad/dialtone/compare/dialtone-vue2/v2.204.0...dialtone-vue2/v2.204.1) (2025-11-26)
 
 
