@@ -24,6 +24,9 @@ export const addTokensToStructure = (structure) => {
         Object.entries(combined).forEach((token) => {
           addTokensToCategories(token, format, structure[format][themeKey]);
         });
+
+        // Sort font style tokens: text first, then typography, each by type then size
+        structure[format][themeKey].typography['font style']._children.sort(sortFontStyleTokens);
       }
     }
   });
@@ -39,6 +42,33 @@ const splitCompositionTokenIntoArray = (value) => {
     return matches;
   }
   return value;
+};
+
+/**
+ * Sort font style tokens: text tokens first, then typography tokens,
+ * each sorted by type (headline, body, label, code, etc.) then by size (xxxl -> xs)
+ */
+const TYPE_ORDER = ['headline', 'body', 'label', 'code', 'helper', 'button', 'inputs'];
+const SIZE_ORDER = ['xxxl', 'xxl', 'xl', 'lg', 'md', 'sm', 'xs'];
+
+const sortFontStyleTokens = (a, b) => {
+  const aName = a.name || a.exampleName || '';
+  const bName = b.name || b.exampleName || '';
+
+  // Text tokens before typography tokens
+  const aIsText = aName.includes('--dt-text');
+  const bIsText = bName.includes('--dt-text');
+  if (aIsText !== bIsText) return aIsText ? -1 : 1;
+
+  // Sort by type
+  const aType = TYPE_ORDER.findIndex(t => aName.includes(t));
+  const bType = TYPE_ORDER.findIndex(t => bName.includes(t));
+  if (aType !== bType) return aType - bType;
+
+  // Sort by size
+  const aSize = SIZE_ORDER.findIndex(s => aName.includes(`-${s})`));
+  const bSize = SIZE_ORDER.findIndex(s => bName.includes(`-${s})`));
+  return aSize - bSize;
 };
 
 // eslint-disable-next-line complexity
