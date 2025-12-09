@@ -329,9 +329,10 @@ a.header-anchor {
 }
 
 .d-docsite--header-2 {
-  margin-block: var(--dt-space-600) var(--dt-space-400);
   font: var(--dt-typography-headline-xl);
+  font-weight: var(--dt-font-weight-normal);
   font-family: var(--dt-font-family-expressive);
+  margin-block: var(--dt-space-600) var(--dt-space-400);
 }
 
 .d-docsite--header-3 {
@@ -603,7 +604,7 @@ a.header-anchor {
   background-color: var(--dt-color-surface-primary);
 
   &__inner-wrapper {
-    padding-block: calc(var(--dt-space-300) * 32) calc(var(--dt-space-300) * 32);
+    padding-block: calc(var(--dt-space-300) * 32);
     text-wrap: balance;
 
     @media (max-width: 640px) {
