@@ -3003,7 +3003,7 @@
           "fontFamily": "{font.family.mono}",
           "fontWeight": "{font.weight.normal}",
           "lineHeight": "{font.lineHeight.200}",
-          "fontSize": "{font.size.200}",
+          "fontSize": "{font.size.150}",
           "textCase": "{font.text-case.none}"
         },
         "type": "typography",
@@ -3014,7 +3014,7 @@
           "fontFamily": "{font.family.mono}",
           "fontWeight": "{font.weight.normal}",
           "lineHeight": "{font.lineHeight.200}",
-          "fontSize": "{font.size.100}",
+          "fontSize": "{font.size.075}",
           "textCase": "{font.text-case.none}"
         },
         "type": "typography",
