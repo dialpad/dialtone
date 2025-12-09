@@ -1,3 +1,10 @@
+# [8.71.0](https://github.com/dialpad/dialtone/compare/dialtone-css/v8.70.3...dialtone-css/v8.71.0) (2025-12-09)
+
+
+### Features
+
+* **Combobox Multi Select:** DLT-2850 add disabled prop ([#989](https://github.com/dialpad/dialtone/issues/989)) ([06a975f](https://github.com/dialpad/dialtone/commit/06a975f2ecf2425583a1cc90be3bbea909e90c67))
+
 ## [8.70.3](https://github.com/dialpad/dialtone/compare/dialtone-css/v8.70.2...dialtone-css/v8.70.3) (2025-12-06)
 
 
