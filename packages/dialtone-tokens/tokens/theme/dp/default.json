@@ -4654,6 +4654,44 @@
         },
         "type": "typography"
       }
+    },
+    "code": {
+      "lg": {
+        "value": {
+          "fontFamily": "{font.family.mono}",
+          "fontWeight": "{font.weight.normal}",
+          "fontSize": "{font.size.250}",
+          "lineHeight": "{font.lineHeight.200}"
+        },
+        "type": "typography"
+      },
+      "md": {
+        "value": {
+          "fontFamily": "{font.family.mono}",
+          "fontWeight": "{font.weight.normal}",
+          "fontSize": "{font.size.150}",
+          "lineHeight": "{font.lineHeight.200}"
+        },
+        "type": "typography"
+      },
+      "sm": {
+        "value": {
+          "fontFamily": "{font.family.mono}",
+          "fontWeight": "{font.weight.normal}",
+          "fontSize": "{font.size.100}",
+          "lineHeight": "{font.lineHeight.200}"
+        },
+        "type": "typography"
+      },
+      "xs": {
+        "value": {
+          "fontFamily": "{font.family.mono}",
+          "fontWeight": "{font.weight.normal}",
+          "fontSize": "{font.size.075}",
+          "lineHeight": "{font.lineHeight.200}"
+        },
+        "type": "typography"
+      }
     }
   }
 }
