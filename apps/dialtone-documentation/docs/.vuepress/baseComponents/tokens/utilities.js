@@ -116,6 +116,15 @@ const addTokensToCategories = (token, format, structure) => {
     return;
   }
 
+  // TEXT
+  if (key.startsWith('text')) {
+    const textType = splitKeys[1]; // headline, body, label, code
+    if (structure.text[textType]) {
+      structure.text[textType]._children.push({ ...displayToken, hidden: !isCompositionToken });
+    }
+    return;
+  }
+
   // SHADOW
   if (key.startsWith('shadow')) {
     structure.shadow._children.push({ ...displayToken, hidden: !isCompositionToken });

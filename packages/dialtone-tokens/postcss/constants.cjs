@@ -14,6 +14,7 @@ module.exports = {
   IS_THEME_COLOR_REGEX: /(--dt-theme-).*-(color).*/,
   IS_SHADOW_REGEX: /--dt.*-shadow/,
   IS_TYPOGRAPHY_REGEX: /--dt.*-typography/,
+  IS_TEXT_REGEX: /--dt-text-/,
   REGEX_OPTIONS: {
     SHADOW_VARIABLES: [
       'small',
@@ -49,6 +50,21 @@ module.exports = {
       'lg',
       'xl',
       'xxl',
+    ].join('|'),
+    TEXT_TYPE: [
+      'headline',
+      'body',
+      'label',
+      'code',
+    ].join('|'),
+    TEXT_SIZES: [
+      'xxxl',
+      'xxl',
+      'xl',
+      'lg',
+      'md',
+      'sm',
+      'xs',
     ].join('|'),
   },
   PLATFORM_FONT_SIZES: {
