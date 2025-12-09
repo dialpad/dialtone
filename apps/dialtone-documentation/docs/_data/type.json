@@ -3,214 +3,127 @@
     {
       "category": "headline",
       "size": [
-        "eyebrow",
-        "sm",
-        "md",
-        "lg",
+        "xxxl",
+        "xxl",
         "xl",
-        "xxl"
-      ],
-      "strength": [
-        "-",
-        "soft",
-        "-",
-        "soft",
-        "-",
-        "-"
-      ],
-      "density": [
-        "-",
-        "compact",
-        "compact",
-        "compact",
-        "compact",
-        "compact"
+        "lg",
+        "md",
+        "sm"
       ]
     },
     {
       "category": "body",
       "size": [
+        "lg",
+        "md",
         "sm",
-        "md"
-      ],
-      "strength": [
-        "-",
-        "-"
-      ],
-      "density": [
-        "compact",
-        "compact"
+        "xs"
       ]
     },
     {
       "category": "label",
       "size": [
+        "lg",
+        "md",
         "sm",
-        "md"
-      ],
-      "strength": [
-        "plain",
-        "plain"
-      ],
-      "density": [
-        "compact",
-        "compact"
-      ]
-    },
-    {
-      "category": "helper",
-      "size": [
-        "sm",
-        "md"
-      ],
-      "strength": [
-        "-",
-        "-"
-      ],
-      "density": [
-        "-"
+        "xs"
       ]
     },
     {
       "category": "code",
       "size": [
+        "lg",
+        "md",
         "sm",
-        "md"
-      ],
-      "strength": [
-        "-",
-        "-"
-      ],
-      "density": [
-        "-",
-        "-"
+        "xs"
+      ]
+    },
+    {
+      "category": "code",
+      "size": [
+        "lg",
+        "md",
+        "sm",
+        "xs"
       ]
     }
   ],
   "typographyStyles": [
     {
-      "var": "d-headline--eyebrow",
-      "output": "font: var(--dt-typography-headline-eyebrow); text-transform: var(--dt-typography-headline-eyebrow-text-case);"
+      "var": "d-text-headline--xxxl",
+      "output": "font: var(--dt-text-headline-xxxl)"
     },
     {
-      "var": "d-headline--sm",
-      "output": "font: var(--dt-typography-headline-sm)"
+      "var": "d-text-headline--xxl",
+      "output": "font: var(--dt-text-headline-xxl)"
     },
     {
-      "var": "d-headline--sm-soft",
-      "output": "font: var(--dt-typography-headline-sm-soft)"
+      "var": "d-text-headline--xl",
+      "output": "font: var(--dt-text-headline-xl)"
     },
     {
-      "var": "d-headline--sm-compact",
-      "output": "font: var(--dt-typography-headline-sm-compact)"
+      "var": "d-text-headline--lg",
+      "output": "font: var(--dt-text-headline-lg)"
     },
     {
-      "var": "d-headline--sm-soft-compact",
-      "output": "font: var(--dt-typography-headline-sm-soft-compact)"
+      "var": "d-text-headline--md",
+      "output": "font: var(--dt-text-headline-md)"
     },
     {
-      "var": "d-headline--md",
-      "output": "font: var(--dt-typography-headline-md)"
+      "var": "d-text-headline--sm",
+      "output": "font: var(--dt-text-headline-sm)"
     },
     {
-      "var": "d-headline--md-compact",
-      "output": "font: var(--dt-typography-headline-md-compact)"
+      "var": "d-text-headline--xs",
+      "output": "font: var(--dt-text-headline-xs)"
     },
     {
-      "var": "d-headline--lg",
-      "output": "font: var(--dt-typography-headline-lg)"
+      "var": "d-text-body--lg",
+      "output": "font: var(--dt-text-body-lg)"
     },
     {
-      "var": "d-headline--lg-soft",
-      "output": "font: var(--dt-typography-headline-lg-soft)"
+      "var": "d-text-body--md",
+      "output": "font: var(--dt-text-body-md)"
     },
     {
-      "var": "d-headline--lg-compact",
-      "output": "font: var(--dt-typography-headline-lg-compact)"
+      "var": "d-text-body--sm",
+      "output": "font: var(--dt-text-body-sm)"
     },
     {
-      "var": "d-headline--lg-soft-compact",
-      "output": "font: var(--dt-typography-headline-lg-soft-compact)"
+      "var": "d-text-body--xs",
+      "output": "font: var(--dt-text-body-xs)"
     },
     {
-      "var": "d-headline--xl",
-      "output": "font: var(--dt-typography-headline-xl)"
+      "var": "d-text-code--lg",
+      "output": "font: var(--dt-text-code-lg)"
     },
     {
-      "var": "d-headline--xl-compact",
-      "output": "font: var(--dt-typography-headline-xl-compact)"
+      "var": "d-text-code--md",
+      "output": "font: var(--dt-text-code-md)"
     },
     {
-      "var": "d-headline--xxl",
-      "output": "font: var(--dt-typography-headline-xxl)"
+      "var": "d-text-code--sm",
+      "output": "font: var(--dt-text-code-sm)"
     },
     {
-      "var": "d-headline--xxl-compact",
-      "output": "font: var(--dt-typography-headline-xxl-compact)"
+      "var": "d-text-code--xs",
+      "output": "font: var(--dt-text-code-xs)"
     },
     {
-      "var": "d-body--md",
-      "output": "font: var(--dt-typography-body-md)"
+      "var": "d-text-label--lg",
+      "output": "font: var(--dt-text-label-lg)"
     },
     {
-      "var": "d-body--md-compact",
-      "output": "font: var(--dt-typography-body-md-compact)"
+      "var": "d-text-label--md",
+      "output": "font: var(--dt-text-label-md)"
     },
     {
-      "var": "d-body--sm",
-      "output": "font: var(--dt-typography-body-sm)"
+      "var": "d-text-label--sm",
+      "output": "font: var(--dt-text-label-sm)"
     },
     {
-      "var": "d-body--sm-compact",
-      "output": "font: var(--dt-typography-body-sm-compact)"
-    },
-    {
-      "var": "d-label--md",
-      "output": "font: var(--dt-typography-label-md)"
-    },
-    {
-      "var": "d-label--md-compact",
-      "output": "font: var(--dt-typography-label-md-compact)"
-    },
-    {
-      "var": "d-label--sm",
-      "output": "font: var(--dt-typography-label-sm)"
-    },
-    {
-      "var": "d-label--md-plain",
-      "output": "font: var(--dt-typography-label-md-plain)"
-    },
-    {
-      "var": "d-label--md-plain-compact",
-      "output": "font: var(--dt-typography-label-md-plain-compact)"
-    },
-    {
-      "var": "d-label--sm-compact",
-      "output": "font: var(--dt-typography-label-sm-compact)"
-    },
-    {
-      "var": "d-label--sm-plain",
-      "output": "font: var(--dt-typography-label-sm-plain)"
-    },
-    {
-      "var": "d-label--sm-plain-compact",
-      "output": "font: var(--dt-typography-label-sm-plain-compact)"
-    },
-    {
-      "var": "d-helper--md",
-      "output": "font: var(--dt-typography-helper-md)"
-    },
-    {
-      "var": "d-helper--sm",
-      "output": "font: var(--dt-typography-helper-sm)"
-    },
-    {
-      "var": "d-code--md",
-      "output": "font: var(--dt-typography-code-md)"
-    },
-    {
-      "var": "d-code--sm",
-      "output": "font: var(--dt-typography-code-sm)"
+      "var": "d-text-label--xs",
+      "output": "font: var(--dt-text-label-xs)"
     }
   ],
   "fontFamily": [
@@ -320,15 +233,39 @@
   "fontSize": {
     "product": [
       {
+        "stop": "050",
+        "size": "10",
+        "output": "1",
+        "headline": "no"
+      },
+      {
+        "stop": "075",
+        "size": "11",
+        "output": "1.1",
+        "headline": "no"
+      },
+      {
         "stop": "100",
         "size": "12",
         "output": "1.2",
         "headline": "no"
       },
       {
+        "stop": "125",
+        "size": "13",
+        "output": "1.3",
+        "headline": "no"
+      },
+      {
         "stop": "200",
-        "size": "15",
-        "output": "1.5",
+        "size": "16",
+        "output": "1.6",
+        "headline": "no"
+      },
+      {
+        "stop": "250",
+        "size": "18",
+        "output": "1.8",
         "headline": "no"
       },
       {
@@ -338,15 +275,21 @@
         "headline": "no"
       },
       {
+        "stop": "350",
+        "size": "20",
+        "output": "2.0",
+        "headline": "no"
+      },
+      {
         "stop": "400",
-        "size": "27",
-        "output": "2.7",
+        "size": "28",
+        "output": "2.8",
         "headline": "no"
       },
       {
         "stop": "500",
-        "size": "38",
-        "output": "3.8",
+        "size": "32",
+        "output": "3.2",
         "headline": "no"
       }
     ],

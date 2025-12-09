@@ -4,48 +4,6 @@ description: Clear, legible, and easy-to-read text.
 figma_url: https://www.figma.com/design/VjrRh4vvfONSmBQxnZrL3u/DT9-Design-Tokens--Rebrand-2025-?node-id=3746-13426&t=D8g6K4TrMGXNsvLT-11
 ---
 
-<dt-stack gap="500" align="start">
-  <dt-stack>
-    <strong class="d-text-label--xs">Headlines</strong>
-    <dt-stack gap="400">
-      <p class="d-bgc-secondary-opaque h:d-bgc-moderate-opaque d-text-headline--xxxl">The quick brown fox jumps over the lazy dog.</p>
-      <p class="d-bgc-secondary-opaque h:d-bgc-moderate-opaque d-text-headline--xxl">The quick brown fox jumps over the lazy dog.</p>
-      <p class="d-bgc-secondary-opaque h:d-bgc-moderate-opaque d-text-headline--xl">The quick brown fox jumps over the lazy dog.</p>
-      <p class="d-bgc-secondary-opaque h:d-bgc-moderate-opaque d-text-headline--lg">The quick brown fox jumps over the lazy dog.</p>
-      <p class="d-bgc-secondary-opaque h:d-bgc-moderate-opaque d-text-headline--md">The quick brown fox jumps over the lazy dog.</p>
-      <p class="d-bgc-secondary-opaque h:d-bgc-moderate-opaque d-text-headline--sm">The quick brown fox jumps over the lazy dog.</p>
-      <p class="d-bgc-secondary-opaque h:d-bgc-moderate-opaque d-text-headline--xs">The quick brown fox jumps over the lazy dog.</p>
-    </dt-stack>
-  </dt-stack>
-  <dt-stack>
-    <strong class="d-text-label--xs">Body</strong>
-    <dt-stack gap="400">
-      <p class="d-bgc-secondary-opaque h:d-bgc-moderate-opaque d-text-body--lg">The quick brown fox jumps over the lazy dog.</p>
-      <p class="d-bgc-secondary-opaque h:d-bgc-moderate-opaque d-text-body--md">The quick brown fox jumps over the lazy dog.</p>
-      <p class="d-bgc-secondary-opaque h:d-bgc-moderate-opaque d-text-body--sm">The quick brown fox jumps over the lazy dog.</p>
-      <p class="d-bgc-secondary-opaque h:d-bgc-moderate-opaque d-text-body--xs">The quick brown fox jumps over the lazy dog.</p>
-    </dt-stack>
-  </dt-stack>
-  <dt-stack>
-    <strong class="d-text-label--xs">Code</strong>
-    <dt-stack gap="400">
-      <p class="d-bgc-secondary-opaque h:d-bgc-moderate-opaque d-text-code--lg">The quick brown fox jumps over the lazy dog.</p>
-      <p class="d-bgc-secondary-opaque h:d-bgc-moderate-opaque d-text-code--md">The quick brown fox jumps over the lazy dog.</p>
-      <p class="d-bgc-secondary-opaque h:d-bgc-moderate-opaque d-text-code--sm">The quick brown fox jumps over the lazy dog.</p>
-      <p class="d-bgc-secondary-opaque h:d-bgc-moderate-opaque d-text-code--xs">The quick brown fox jumps over the lazy dog.</p>
-    </dt-stack>
-  </dt-stack>
-  <dt-stack>
-    <strong class="d-text-label--xs">Label</strong>
-    <dt-stack gap="400">
-      <p class="d-bgc-secondary-opaque h:d-bgc-moderate-opaque d-text-label--lg">The quick brown fox jumps over the lazy dog.</p>
-      <p class="d-bgc-secondary-opaque h:d-bgc-moderate-opaque d-text-label--md">The quick brown fox jumps over the lazy dog.</p>
-      <p class="d-bgc-secondary-opaque h:d-bgc-moderate-opaque d-text-label--sm">The quick brown fox jumps over the lazy dog.</p>
-      <p class="d-bgc-secondary-opaque h:d-bgc-moderate-opaque d-text-label--xs">The quick brown fox jumps over the lazy dog.</p>
-    </dt-stack>
-  </dt-stack>
-</dt-stack>
-
 ## Font Properties
 
 ### Font Family
@@ -74,7 +32,9 @@ Four weights for clear hierarchy and visual contrast among different elements.
 
 Dictates the scale of text, enhancing readability and defining information hierarchy across content.
 
-<dt-stack direction="row" gap="500" class="d-wmx764">
+<span class="d-fc-critical ">REDO</span>
+
+<dt-stack direction="row" gap="500" class="d-wmx764" style="outline: 10px solid red;">
   <svg-loader name="fs-100" />
   <svg-loader name="fs-200" />
   <svg-loader name="fs-300" />
@@ -101,103 +61,10 @@ Adjusts vertical spacing between lines of text, optimizing legibility and text f
 
 ## Styles
 
-### Usage
-
-All product UI text can be characterized as one of **Headline**, **Body**, **Label**, **Helper**, or **Code**. These styles are effectively **composition** CSS Utilities, combining multiple properties like `font-size`, `font-family`, `font-weight`, and `line-height`.
+All product UI text can be characterized as one of **Headline**, **Body**, **Label**, or **Code**. These styles are effectively **composition** CSS Utilities, combining multiple properties like `font-size`, `font-family`, `font-weight`, and `line-height`.
 
 ```html
-<el class="d-{category}--{size}-{strength}-{density}">...</el>
-```
-
-<div class="d-bb">
-  <table class="d-table">
-    <thead>
-      <tr>
-        <th>Category</th>
-        <th>Size</th>
-        <th>Strength <span class="d-label--sm-plain-compact d-tt-none">(optional)</span></th>
-        <th>Density <span class="d-label--sm-plain-compact d-tt-none">(optional)</span></th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr class="d-va-top" v-for="item in typographyVariants" :key="item.category">
-        <td>
-          <code class="d-code--sm">{{ item.category }}</code>
-        </td>
-        <td>
-          <dt-stack gap="300">
-            <div v-for="(size, index) in item.size" :key="index" :class="{'d-fc-transparent': size === '-'}">
-              <code class="d-code--sm">{{ size }}</code>
-            </div>
-          </dt-stack>
-        </td>
-        <td>
-          <dt-stack gap="300">
-            <div v-for="(strength, index) in item.strength" :key="index" :class="{'d-fc-transparent': strength === '-'}">
-              <code class="d-code--sm">{{ strength }}</code>
-            </div>
-          </dt-stack>
-        </td>
-        <td>
-          <dt-stack gap="300">
-            <div v-for="(density, index) in item.density" :key="index" :class="{'d-fc-transparent': density === '-'}">
-              <code class="d-code--sm">{{ density }}</code>
-            </div>
-          </dt-stack>
-        </td>
-      </tr>
-    </tbody>
-  </table>
-</div>
-
-### Examples
-
-<code-well-header class="d-pb32">
-  <div class="d-w100p">
-    <dt-stack gap="400">
-      <dt-stack>
-        <h2 class="d-headline--lg">Ai that works for you</h2>
-        <div class="d-body--md-compact">Support customers, drive sales, and collaborate with your team—all in one, beautiful Ai-powered app.</div>
-      </dt-stack>
-      <dt-stack direction="row" gap="500" align="start">
-        <dt-stack>
-          <h3 class="d-headline--md-compact">Ai Contact Center</h3>
-          <p class="d-body--sm">The world’s most advanced customer engagement platform</p>
-        </dt-stack>
-        <dt-stack>
-          <h3 class="d-headline--md-compact">Ai Voice</h3>
-          <p class="d-body--sm">Say hello to the world’s smartest business phone</p>
-        </dt-stack>
-        <dt-stack>
-          <h3 class="d-headline--md-compact">Ai Meetings</h3>
-          <p class="d-body--sm">Ai-powered video meetings with built-in transcriptions</p>
-        </dt-stack>
-      </dt-stack>
-    </dt-stack>
-  </div>
-</code-well-header>
-
-```html
-<dt-stack gap="400">
-  <dt-stack>
-    <h2 class="d-headline--lg">Ai that works for you</h2>
-    <div class="d-body--md-compact">Support customers, drive sales, and collaborate with your team—all in one, beautiful Ai-powered app.</div>
-  </dt-stack>
-  <dt-stack direction="row" gap="500" align="start">
-    <dt-stack>
-      <h3 class="d-headline--md-compact">Ai Contact Center</h3>
-      <p class="d-body--sm">The world’s most advanced customer engagement platform</p>
-    </dt-stack>
-    <dt-stack>
-      <h3 class="d-headline--md-compact">Ai Voice</h3>
-      <p class="d-body--sm">Say hello to the world’s smartest business phone</p>
-    </dt-stack>
-    <dt-stack>
-      <h3 class="d-headline--md-compact">Ai Meetings</h3>
-      <p class="d-body--sm">Ai-powered video meetings with built-in transcriptions</p>
-    </dt-stack>
-  </dt-stack>
-</dt-stack>
+<el class="d-text-{category}--{size}">...</el>
 ```
 
 ### Headlines
@@ -205,11 +72,12 @@ All product UI text can be characterized as one of **Headline**, **Body**, **Lab
 Titles and headings to establish hierarchy and set the tone of contextual groupings.
 
 <code-well-header class="d-d-flex d-jc-center d-fd-column d-p24 d-bgc-secondary d-w100p d-hmn102" custom>
-  <div class="d-d-grid d-g16 d-ai-center" style="grid-template-columns: 52rem 1fr">
-    <template v-for="{ var: varName } in typographyStylesHeadlines">
-      <div class="d-truncate"><p :class="[varName, 'd-truncate', 'd-bgc-moderate-opaque']">{{ example }}</p></div>
+  <div class="d-d-grid d-g16 d-ai-center" style="grid-template-columns: 42rem 1fr">
+    <template v-for="({ var: varName }, index) in typographyStylesHeadlines" :key="varName">
+      <div class="d-truncate"><p :class="[varName, 'd-truncate', 'd-bgc-secondary-opaque', 'h:d-bgc-moderate-opaque']">{{ example }}</p></div>
       <dt-stack direction="row" justify="between" class="dialtone-copy-utility">
-        <span class="dialtone-copy-utility__utility d-code--sm d-fc-blue-500">{{ varName }}</span>
+        <code class="d-text-code--sm d-bgc-transparent d-ta-center" v-dt-tooltip="`Font Size / Line Height`">{{ getStyles('headlines', index) }}</code>
+        <code class="dialtone-copy-utility__utility d-bgc-transparent d-text-code--sm">{{ varName }}</code>
         <div class="dialtone-copy-utility__btn">
           <copy-button :text="varName" aria-label="Copy" />
         </div>
@@ -223,11 +91,12 @@ Titles and headings to establish hierarchy and set the tone of contextual groupi
 Default text style for longer-form prose content, designed for comfort and clarity in reading varying lengths.
 
 <code-well-header class="d-d-flex d-jc-center d-fd-column d-p24 d-bgc-secondary d-w100p d-hmn102" custom>
-  <div class="d-d-grid d-g16 d-ai-center" style="grid-template-columns: 52rem 1fr">
-    <template v-for="{ var: varName } in typographyStylesBody">
-      <div class="d-truncate"><p :class="[varName, 'd-truncate', 'd-bgc-moderate-opaque']">{{ example }}</p></div>
+  <div class="d-d-grid d-g16 d-ai-center" style="grid-template-columns: 42rem 1fr">
+    <template v-for="({ var: varName }, index) in typographyStylesBody" :key="varName">
+      <div class="d-truncate"><p :class="[varName, 'd-truncate', 'd-bgc-secondary-opaque', 'h:d-bgc-moderate-opaque']">{{ example }}</p></div>
       <dt-stack direction="row" justify="between" class="dialtone-copy-utility">
-        <span class="dialtone-copy-utility__utility d-code--sm d-fc-blue-500">{{ varName }}</span>
+        <code class="d-text-code--sm d-bgc-transparent d-ta-center" v-dt-tooltip="`Font Size / Line Height`">{{ getStyles('body', index) }}</code>
+        <code class="dialtone-copy-utility__utility d-bgc-transparent d-text-code--sm">{{ varName }}</code>
         <div class="dialtone-copy-utility__btn">
           <copy-button :text="varName" aria-label="Copy" />
         </div>
@@ -241,29 +110,12 @@ Default text style for longer-form prose content, designed for comfort and clari
 Shorter-length copy like form fields, buttons, and other UI-labeling elements, ensuring clear navigation and interaction.
 
 <code-well-header class="d-d-flex d-jc-center d-fd-column d-p24 d-bgc-secondary d-w100p d-hmn102" custom>
-  <div class="d-d-grid d-g16 d-ai-center" style="grid-template-columns: 52rem 1fr">
-    <template v-for="{ var: varName } in typographyStylesLabel">
-      <div class="d-truncate"><p :class="[varName, 'd-truncate', 'd-bgc-moderate-opaque']">{{ example }}</p></div>
+  <div class="d-d-grid d-g16 d-ai-center" style="grid-template-columns: 42rem 1fr">
+    <template v-for="({ var: varName }, index) in typographyStylesLabel" :key="varName">
+      <div class="d-truncate"><p :class="[varName, 'd-truncate', 'd-bgc-secondary-opaque', 'h:d-bgc-moderate-opaque']">{{ example }}</p></div>
       <dt-stack direction="row" justify="between" class="dialtone-copy-utility">
-        <span class="dialtone-copy-utility__utility d-code--sm d-fc-blue-500">{{ varName }}</span>
-        <div class="dialtone-copy-utility__btn">
-          <copy-button :text="varName" aria-label="Copy" />
-        </div>
-      </dt-stack>
-    </template>
-  </div>
-</code-well-header>
-
-### Helper
-
-Complementary information or guidance, such as tooltips and hints, to aid user understanding without overwhelming.
-
-<code-well-header class="d-d-flex d-jc-center d-fd-column d-p24 d-bgc-secondary d-w100p d-hmn102" custom>
-  <div class="d-d-grid d-g16 d-ai-center" style="grid-template-columns: 52rem 1fr">
-    <template v-for="{ var: varName } in typographyStylesHelper">
-      <div class="d-truncate"><p :class="[varName, 'd-truncate', 'd-bgc-moderate-opaque']">{{ example }}</p></div>
-      <dt-stack direction="row" justify="between" class="dialtone-copy-utility">
-        <span class="dialtone-copy-utility__utility d-code--sm d-fc-blue-500">{{ varName }}</span>
+        <code class="d-text-code--sm d-bgc-transparent d-ta-center" v-dt-tooltip="`Font Size / Line Height`">{{ getStyles('label', index) }}</code>
+        <code class="dialtone-copy-utility__utility d-bgc-transparent d-text-code--sm">{{ varName }}</code>
         <div class="dialtone-copy-utility__btn">
           <copy-button :text="varName" aria-label="Copy" />
         </div>
@@ -277,11 +129,12 @@ Complementary information or guidance, such as tooltips and hints, to aid user u
 Code snippets, technical commands, or data values rendered as a monospaced font.
 
 <code-well-header class="d-d-flex d-jc-center d-fd-column d-p24 d-bgc-secondary d-w100p d-hmn102" custom>
-  <div class="d-d-grid d-g16 d-ai-center" style="grid-template-columns: 52rem 1fr">
-    <template v-for="{ var: varName } in typographyStylesCode">
-      <div class="d-truncate"><p :class="[varName, 'd-truncate', 'd-bgc-moderate-opaque']">{{ example }}</p></div>
+  <div class="d-d-grid d-g16 d-ai-center" style="grid-template-columns: 42rem 1fr">
+    <template v-for="({ var: varName }, index) in typographyStylesCode" :key="varName">
+      <div class="d-truncate"><p :class="[varName, 'd-truncate', 'd-bgc-secondary-opaque', 'h:d-bgc-moderate-opaque']">{{ example }}</p></div>
       <dt-stack direction="row" justify="between" class="dialtone-copy-utility">
-        <span class="dialtone-copy-utility__utility d-code--sm d-fc-blue-500">{{ varName }}</span>
+        <code class="d-text-code--sm d-bgc-transparent d-ta-center" v-dt-tooltip="`Font Size / Line Height`">{{ getStyles('code', index) }}</code>
+        <code class="dialtone-copy-utility__utility d-bgc-transparent d-text-code--sm">{{ varName }}</code>
         <div class="dialtone-copy-utility__btn">
           <copy-button :text="varName" aria-label="Copy" />
         </div>
@@ -289,6 +142,54 @@ Code snippets, technical commands, or data values rendered as a monospaced font.
     </template>
   </div>
 </code-well-header>
+
+## Examples
+
+<code-well-header class="d-pb32">
+  <dt-stack gap="500">
+    <dt-stack>
+      <h2 class="d-text-headline--xxl">Ai that works for you</h2>
+      <div class="d-text-body--lg">Support customers, drive sales, and collaborate with your team—all in one, beautiful Ai-powered app.</div>
+    </dt-stack>
+    <dt-stack direction="row" gap="500" align="start">
+      <dt-stack>
+        <h3 class="d-text-headline--xl">Ai Contact Center</h3>
+        <p class="d-text-body--md">The world’s most advanced customer engagement platform</p>
+      </dt-stack>
+      <dt-stack>
+        <h3 class="d-text-headline--xl">Ai Voice</h3>
+        <p class="d-text-body--md">Say hello to the world’s smartest business phone</p>
+      </dt-stack>
+      <dt-stack>
+        <h3 class="d-text-headline--xl">Ai Meetings</h3>
+        <p class="d-text-body--md">Ai-powered video meetings with built-in transcriptions</p>
+      </dt-stack>
+    </dt-stack>
+  </dt-stack>
+</code-well-header>
+
+```html
+<dt-stack gap="500">
+  <dt-stack>
+    <h2 class="d-text-headline--xxl">Ai that works for you</h2>
+    <div class="d-text-body--lg">Support customers, drive sales, and collaborate with your team—all in one, beautiful Ai-powered app.</div>
+  </dt-stack>
+  <dt-stack direction="row" gap="500" align="start">
+    <dt-stack>
+      <h3 class="d-text-headline--xl">Ai Contact Center</h3>
+      <p class="d-text-body--md">The world’s most advanced customer engagement platform</p>
+    </dt-stack>
+    <dt-stack>
+      <h3 class="d-text-headline--xl">Ai Voice</h3>
+      <p class="d-text-body--md">Say hello to the world’s smartest business phone</p>
+    </dt-stack>
+    <dt-stack>
+      <h3 class="d-text-headline--xl">Ai Meetings</h3>
+      <p class="d-text-body--md">Ai-powered video meetings with built-in transcriptions</p>
+    </dt-stack>
+  </dt-stack>
+</dt-stack>
+```
 
 ## API
 
@@ -319,13 +220,41 @@ Each typography style is expressed through a shorthand `font` property, and its 
   import SvgLoader from '@baseComponents/SvgLoader.vue';
   import ClampedTableWrapper from '@baseComponents/ClampedTableWrapper.vue';
 
-  const typographyStylesHeadlines = typographyStyles.filter(type => type.var.startsWith("d-headline"));
-  const typographyStylesBody = typographyStyles.filter(type => type.var.startsWith("d-body"));
-  const typographyStylesLabel = typographyStyles.filter(type => type.var.startsWith("d-label"));
-  const typographyStylesHelper = typographyStyles.filter(type => type.var.startsWith("d-helper"));
-  const typographyStylesCode = typographyStyles.filter(type => type.var.startsWith("d-code"));
+  const typographyStylesHeadlines = typographyStyles.filter(type => type.var.startsWith("d-text-headline"));
+  const typographyStylesBody = typographyStyles.filter(type => type.var.startsWith("d-text-body"));
+  const typographyStylesLabel = typographyStyles.filter(type => type.var.startsWith("d-text-label"));
+  const typographyStylesCode = typographyStyles.filter(type => type.var.startsWith("d-text-code"));
 
   const example = "The quick brown fox jumps over the lazy dog.";
+
+  // Function to get styles directly from CSS variables
+  const getStyles = (category, index) => {
+    const arrays = { headlines: typographyStylesHeadlines, body: typographyStylesBody, label: typographyStylesLabel, code: typographyStylesCode };
+    const item = arrays[category]?.[index];
+    if (!item) return '';
+
+    // Convert class name to CSS variable prefix
+    // d-text-headline--xxxl → --dt-text-headline-xxxl
+    const cssVarPrefix = '--dt-' + item.var.slice(2).replace('--', '-');
+
+    const root = document.documentElement;
+    const computedStyle = getComputedStyle(root);
+
+    // Read the CSS variable values directly
+    const fontSize = computedStyle.getPropertyValue(cssVarPrefix + '-font-size').trim();
+    const lineHeight = computedStyle.getPropertyValue(cssVarPrefix + '-line-height').trim();
+
+    // Parse font-size: extract multiplier from calc(1rem * X) and convert to px
+    let formattedFontSize = fontSize;
+    const calcMatch = fontSize.match(/calc\(1rem \* ([\d.]+)\)/);
+    if (calcMatch) {
+      formattedFontSize = Math.round(parseFloat(calcMatch[1]) * 10);
+    } else if (fontSize.endsWith('px')) {
+      formattedFontSize = Math.round(parseFloat(fontSize));
+    }
+
+    return `${formattedFontSize} / ${lineHeight}`;
+  };
 </script>
 
 <style lang="less" scoped>
