@@ -116,12 +116,9 @@ const addTokensToCategories = (token, format, structure) => {
     return;
   }
 
-  // TEXT
+  // TEXT (display alongside typography in Font Style)
   if (key.startsWith('text')) {
-    const textType = splitKeys[1]; // headline, body, label, code
-    if (structure.text[textType]) {
-      structure.text[textType]._children.push({ ...displayToken, hidden: !isCompositionToken });
-    }
+    structure.typography['font style']._children.push({ ...displayToken, hidden: !isCompositionToken });
     return;
   }
 
