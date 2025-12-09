@@ -231,6 +231,7 @@ export default {
         this.$attrs['grouped-chip'] ? 'd-chip' : 'd-chip__label',
         CHIP_SIZE_MODIFIERS[this.size],
         this.labelClass,
+        this.disabled && 'd-chip--disabled',
       ];
     },
 
@@ -238,6 +239,7 @@ export default {
       return [
         'd-chip__close',
         CHIP_CLOSE_BUTTON_SIZE_MODIFIERS[this.size],
+        this.disabled && 'd-chip__close--disabled',
       ];
     },
 

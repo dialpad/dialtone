@@ -49,6 +49,11 @@ export const argTypesData = {
   },
 
   // Props
+  disabled: {
+    control: {
+      type: 'boolean',
+    },
+  },
   hideClose: {
     control: 'boolean',
   },
