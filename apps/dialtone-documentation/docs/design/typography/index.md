@@ -208,6 +208,47 @@ Code snippets, technical commands, or data values rendered as a monospaced font.
 
 ## Examples
 
+<code-well-header>
+  <dt-stack gap="400" class="d-w100p">
+    <h2 class="d-text-headline--lg">Saturday, May 24, 2025</h2>
+    <dt-stack direction="row" gap="450" class="d-w100p">
+      <dt-avatar full-name="Ashanti Trevor" />
+      <dt-stack class="d-fl1">
+        <div class="d-text-body--sm d-fw-bold">Ashanti Trevor</div>
+        <dt-stack direction="row" gap="300">
+          <dt-stack direction="row" gap="400">
+            <dt-icon name="phone-outgoing" size="200" class="d-fc-tertiary" />
+            <span class="d-text-body--xs d-fc-tertiary">Outgoing call</span>
+          </dt-stack>
+          <span class="d-text-body--xs d-fc-tertiary">&bull;</span>
+          <span class="d-text-body--xs d-fc-tertiary">2 minutes 10 seconds</span>
+        </dt-stack>
+      </dt-stack>
+      <span class="d-text-body--sm d-fc-tertiary">3:23 pm</span>
+      <dt-badge kind="count" type="bulletin" text="6" />
+    </dt-stack>
+  </dt-stack>
+</code-well-header>
+
+```html
+<h2 class="d-text-headline--lg">Saturday, May 24, 2025</h2>
+<dt-stack direction="row" gap="450" class="d-w100p">
+  <dt-avatar full-name="Ashanti Trevor" />
+  <dt-stack class="d-fl1">
+    <div class="d-text-body--sm d-fw-bold">Ashanti Trevor</div>
+    <dt-stack direction="row" gap="300">
+      <dt-stack direction="row" gap="400">
+        <dt-icon name="phone-outgoing" size="200" class="d-fc-tertiary" />
+        <span class="d-text-body--xs d-fc-tertiary">Outgoing call</span>
+      </dt-stack>
+      <span class="d-text-body--xs d-fc-tertiary">&bull;</span>
+      <span class="d-text-body--xs d-fc-tertiary">2 minutes 10 seconds</span>
+    </dt-stack>
+  </dt-stack>
+  <span class="d-text-body--sm d-fc-tertiary">3:23 pm</span>
+  <dt-badge kind="count" type="bulletin" text="6" />
+</dt-stack>
+```
 <code-well-header class="d-pb32">
   <dt-stack gap="500">
     <dt-stack>
