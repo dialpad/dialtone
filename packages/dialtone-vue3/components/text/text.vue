@@ -1,0 +1,339 @@
+<template>
+  <component
+    :is="as"
+    data-qa="dt-text"
+    :class="textClasses"
+    :style="textStyles"
+  >
+    <slot v-if="hasDefaultSlot" />
+    <template v-else-if="text !== null && text !== undefined">
+      {{ text }}
+    </template>
+  </component>
+</template>
+
+<script>
+import { hasSlotContent } from '@/common/utils';
+import {
+  TEXT_KIND_MODIFIERS,
+  TEXT_SIZE_MODIFIERS,
+  TEXT_STRENGTH_MODIFIERS,
+  TEXT_DENSITY_MODIFIERS,
+  TEXT_STRENGTH_BY_KIND_AND_SIZE,
+  TEXT_DENSITY_BY_KIND_AND_SIZE,
+  TEXT_ALIGN_MODIFIERS,
+  TEXT_TONE_PREFIX,
+  TEXT_TONE_TOKENS,
+  TEXT_NUMERIC_CLASS,
+  TEXT_TRUNCATE_CLASS,
+  TEXT_LINE_CLAMP_CLASS,
+  TEXT_WRAP_MODIFIERS,
+  TEXT_TRIM_MODIFIERS,
+} from './text_constants';
+
+const DEFAULT_SIZE = 'md';
+
+/**
+ * Dialtone text primitive that applies typography tokens based on semantic props.
+ * @see https://dialtone.dialpad.com/components/text.html
+ */
+export default {
+  compatConfig: { MODE: 3 },
+  name: 'DtText',
+
+  props: {
+    /**
+     * HTML tag or component used for rendering.
+     * @values span, p, h1, h2, h3, h4, h5, h6, label, div, component
+     */
+    as: {
+      type: String,
+      default: 'span',
+    },
+
+    /**
+     * Typography kind mapping to headline/body/label/helper/code token sets.
+     * @values headline, body, label, helper, code
+     */
+    kind: {
+      type: String,
+      default: null,
+      validator: (value) => {
+        return value === null || Object.prototype.hasOwnProperty.call(TEXT_KIND_MODIFIERS, value);
+      },
+    },
+
+    /**
+     * Size variant within the selected `kind`. Falls back to `md` if unsupported. e.g. `body` doesn't have `lg` variant.
+     * @values eyebrow, sm, md, lg, xl, xxl
+     */
+    size: {
+      type: String,
+      default: null,
+    },
+
+    /**
+     * Weight override aligned with type tokens. Does not apply to all kinds. e.g. `body` doesn't have `soft` strength.
+     * @values soft, plain
+     */
+    strength: {
+      type: String,
+      default: null,
+    },
+
+    /**
+     * Line-height density modifier for compact typography. Does not apply to all kinds.
+     * @values compact
+     */
+    density: {
+      type: String,
+      default: null,
+    },
+
+    /**
+     * Aligns to available foreground color tokens, e.g. `d-fc-tertiary`, `d-fc-critical`, etc.
+     * @values (Dialtone foreground token suffixes, e.g., primary, secondary, success)
+     */
+    tone: {
+      type: String,
+      default: null,
+    },
+
+    /**
+     * Logical text alignment. Requires block/inline-block context.
+     * @values start, center, end, justify
+     */
+    align: {
+      type: String,
+      default: null,
+    },
+
+    /**
+     * Enables single-line truncation (i.e. ellipsis) when true; requires block/inline-block context.
+     */
+    truncate: {
+      type: Boolean,
+      default: false,
+    },
+
+    /**
+     * Applies multi-line truncation (i.e. clamp) when greater than zero; requires block/inline-block context.
+     */
+    maxLines: {
+      type: Number,
+      default: null,
+      validator: (value) => {
+        return value === null || (Number.isInteger(value) && value > 0);
+      },
+    },
+
+    /**
+     * Renders numeric content with tabular figures.
+     */
+    numeric: {
+      type: Boolean,
+      default: false,
+    },
+
+    /**
+     * Optional string fallback rendered when default slot is empty.
+     */
+    text: {
+      type: String,
+      default: null,
+    },
+
+    /**
+     * Controls text wrapping behavior.
+     * @values wrap, nowrap, balance, pretty
+     */
+    wrap: {
+      type: String,
+      default: null,
+      validator: (value) => {
+        return value === null || Object.prototype.hasOwnProperty.call(TEXT_WRAP_MODIFIERS, value);
+      },
+    },
+
+    /**
+     * Controls leading space trimming. Useful for tight component layouts.
+     * @values start, end, both
+     */
+    trim: {
+      type: String,
+      default: null,
+      validator: (value) => {
+        return value === null || Object.prototype.hasOwnProperty.call(TEXT_TRIM_MODIFIERS, value);
+      },
+    },
+  },
+
+  computed: {
+    hasDefaultSlot () {
+      return hasSlotContent(this.$slots.default);
+    },
+
+    textClasses () {
+      const classes = ['d-text'];
+      const variantClass = this.getVariantClass();
+      if (variantClass) {
+        classes.push(variantClass);
+      }
+
+      const alignClass = this.getAlignClass();
+      if (alignClass) {
+        classes.push(alignClass);
+      }
+
+      const toneClass = this.getToneClass();
+      if (toneClass) {
+        classes.push(toneClass);
+      }
+
+      if (this.truncate) {
+        classes.push(TEXT_TRUNCATE_CLASS);
+      }
+
+      if (this.numeric) {
+        classes.push(TEXT_NUMERIC_CLASS);
+      }
+
+      if (this.maxLines) {
+        classes.push(TEXT_LINE_CLAMP_CLASS);
+      }
+
+      const wrapClass = this.getWrapClass();
+      if (wrapClass) {
+        classes.push(wrapClass);
+      }
+
+      const trimClass = this.getTrimClass();
+      if (trimClass) {
+        classes.push(trimClass);
+      }
+
+      return classes;
+    },
+
+    textStyles () {
+      if (!this.maxLines) {
+        return undefined;
+      }
+
+      return {
+        '--dt-text-line-clamp': this.maxLines,
+      };
+    },
+  },
+
+  methods: {
+    getVariantClass () {
+      if (!this.kind) {
+        return null;
+      }
+
+      if (!Object.prototype.hasOwnProperty.call(TEXT_KIND_MODIFIERS, this.kind)) {
+        console.warn(`[DtText] Unsupported kind "${this.kind}".`);
+        return null;
+      }
+
+      const allowedSizes = TEXT_SIZE_MODIFIERS[this.kind] || [];
+      const requestedSize = this.size || DEFAULT_SIZE;
+      let resolvedSize = requestedSize;
+
+      if (!allowedSizes.includes(requestedSize)) {
+        const fallbackSize = allowedSizes.includes(DEFAULT_SIZE) ? DEFAULT_SIZE : allowedSizes[0];
+        if (fallbackSize) {
+          resolvedSize = fallbackSize;
+        }
+        console.warn(`[DtText] size="${requestedSize}" is not valid for kind="${this.kind}". Using "${resolvedSize}" instead.`);
+      }
+
+      if (!resolvedSize) {
+        return null;
+      }
+
+      let modifier = `${TEXT_KIND_MODIFIERS[this.kind]}--${resolvedSize}`;
+
+      if (this.strength) {
+        const allowedStrengths = TEXT_STRENGTH_BY_KIND_AND_SIZE[this.kind]?.[resolvedSize] || [];
+        if (!TEXT_STRENGTH_MODIFIERS.includes(this.strength)) {
+          console.warn(`[DtText] Unsupported strength "${this.strength}".`);
+        } else if (!allowedStrengths.includes(this.strength)) {
+          console.warn(`[DtText] strength="${this.strength}" is not valid for kind="${this.kind}" and size="${resolvedSize}".`);
+        } else {
+          modifier += `-${this.strength}`;
+        }
+      }
+
+      if (this.density) {
+        const allowedDensities = TEXT_DENSITY_BY_KIND_AND_SIZE[this.kind]?.[resolvedSize] || [];
+        if (!TEXT_DENSITY_MODIFIERS.includes(this.density)) {
+          console.warn(`[DtText] Unsupported density "${this.density}".`);
+        } else if (!allowedDensities.includes(this.density)) {
+          console.warn(`[DtText] density="${this.density}" is not valid for kind="${this.kind}" and size="${resolvedSize}".`);
+        } else {
+          modifier += `-${this.density}`;
+        }
+      }
+
+      return modifier;
+    },
+
+    getAlignClass () {
+      if (!this.align) {
+        return null;
+      }
+
+      const alignClass = TEXT_ALIGN_MODIFIERS[this.align];
+      if (!alignClass) {
+        console.warn(`[DtText] Unsupported align "${this.align}".`);
+        return null;
+      }
+
+      return alignClass;
+    },
+
+    getToneClass () {
+      if (!this.tone) {
+        return null;
+      }
+
+      if (!TEXT_TONE_TOKENS.includes(this.tone)) {
+        console.warn(`[DtText] Unsupported tone "${this.tone}".`);
+        return null;
+      }
+
+      return `${TEXT_TONE_PREFIX}${this.tone}`;
+    },
+
+    getWrapClass () {
+      if (!this.wrap) {
+        return null;
+      }
+
+      const wrapClass = TEXT_WRAP_MODIFIERS[this.wrap];
+      if (!wrapClass) {
+        console.warn(`[DtText] Unsupported wrap "${this.wrap}".`);
+        return null;
+      }
+
+      return wrapClass;
+    },
+
+    getTrimClass () {
+      if (!this.trim) {
+        return null;
+      }
+
+      const trimClass = TEXT_TRIM_MODIFIERS[this.trim];
+      if (!trimClass) {
+        console.warn(`[DtText] Unsupported trim "${this.trim}".`);
+        return null;
+      }
+
+      return trimClass;
+    },
+  },
+};
+</script>

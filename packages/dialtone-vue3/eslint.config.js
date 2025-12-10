@@ -185,7 +185,7 @@ export default [
         nonwords: false,
       }],
       'vue/template-curly-spacing': ['error', 'never'],
-      'vue/no-restricted-class': ['error', `/^d-(?!(recipe|${componentsNames.join('|')})).*/`],
+      'vue/no-restricted-class': ['error', '^d-text', `/^d-(?!(recipe|${componentsNames.join('|')})).*/`],
     },
   },
   {
@@ -207,6 +207,7 @@ export default [
     rules: {
       'max-lines': 'off',
       'no-console': 'off',
+      'vue/no-restricted-class': 'off',
     },
   },
   {
