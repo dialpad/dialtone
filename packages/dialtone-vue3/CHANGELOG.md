@@ -1,3 +1,10 @@
+## [3.197.1](https://github.com/dialpad/dialtone/compare/dialtone-vue3/v3.197.0...dialtone-vue3/v3.197.1) (2025-12-10)
+
+
+### Bug Fixes
+
+* **Tab:** DLT-2685 tabs update ([#970](https://github.com/dialpad/dialtone/issues/970)) ([7e39339](https://github.com/dialpad/dialtone/commit/7e39339ea5608156bdb900cb51004327727d55f3))
+
 # [3.197.0](https://github.com/dialpad/dialtone/compare/dialtone-vue3/v3.196.3...dialtone-vue3/v3.197.0) (2025-12-09)
 
 
