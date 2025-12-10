@@ -9,9 +9,17 @@ figma_url: https://www.figma.com/design/W58r5BkO8qTw3vem9YieJd/DT9-Component-Lib
 ---
 
 <code-well-header class="d-p0">
-    <dt-banner title="Example banner" kind="info" class="d-ps-relative d-zi-base">
-        Message body with a <dt-link kind="muted">Link</dt-link>
-    </dt-banner>
+    <dt-stack gap="500" class="d-w100p" align="center">
+      <dt-banner title="Example banner" kind="info" class="d-ps-relative d-zi-base">
+          Message body with a <dt-link kind="muted">Link</dt-link>
+          <template #action>
+            <dt-button size="sm" kind="muted" importance="outlined">Action</dt-button>
+          </template>
+      </dt-banner>
+      <dt-stack direction="row">
+          <dt-button @click="toggleBanner('example-pinned')">Pin to top</dt-button>
+      </dt-stack>
+    </dt-stack>
 </code-well-header>
 
 ## Usage
@@ -93,7 +101,10 @@ Pins the banner to the top of the window.
   v-show="shownBanner === 'example-pinned'"
   @close="closeBanner"
 >
-  Message body
+  Detailed description goes here.
+  <template #action>
+    <dt-button size="sm" kind="muted" importance="outlined">Action</dt-button>
+  </template>
 </dt-banner>
 
 <code-example-tabs
@@ -101,7 +112,15 @@ htmlCode='
 <aside class="d-banner d-banner--base d-banner--pinned" role="alert" aria-hidden="false">...</aside>
 '
 vueCode='
-<dt-banner kind="base" title="Optional banner title" :pinned="true"> Message body </dt-banner>
+<dt-banner
+  :pinned="true"
+  title="Optional banner title"
+>
+  Detailed description goes here.
+  <template #action>
+    <dt-button size="sm" kind="muted" importance="outlined">Action</dt-button>
+  </template>
+</dt-banner>
 '
 />
 
