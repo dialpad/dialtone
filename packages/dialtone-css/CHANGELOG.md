@@ -1,3 +1,10 @@
+## [8.71.1](https://github.com/dialpad/dialtone/compare/dialtone-css/v8.71.0...dialtone-css/v8.71.1) (2025-12-10)
+
+
+### Bug Fixes
+
+* **Banner:** NO-JIRA remove max-width ([#993](https://github.com/dialpad/dialtone/issues/993)) ([39321ee](https://github.com/dialpad/dialtone/commit/39321ee76b8f9d9d4f77eebe9e4669780cc9ce59))
+
 # [8.71.0](https://github.com/dialpad/dialtone/compare/dialtone-css/v8.70.3...dialtone-css/v8.71.0) (2025-12-09)
 
 
