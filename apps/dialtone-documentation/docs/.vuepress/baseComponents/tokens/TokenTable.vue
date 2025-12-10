@@ -87,7 +87,7 @@
                 :tokens="tokens"
               />
             </th>
-            <td v-if="!isSmallDevice && showValue" class="d-code--sm  d-fc-blue-500 d-ta-right d-wmx164">
+            <td v-if="!isSmallDevice && showValue" class="d-code--sm d-fc-blue-500 d-ta-right d-wmx164">
               <token-value :token-value="valueToString(tokenValue)" :tokens="tokens" />
             </td>
             <td
