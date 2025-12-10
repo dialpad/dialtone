@@ -1,3 +1,10 @@
+## [2.205.1](https://github.com/dialpad/dialtone/compare/dialtone-vue2/v2.205.0...dialtone-vue2/v2.205.1) (2025-12-10)
+
+
+### Bug Fixes
+
+* **Tab:** DLT-2685 tabs update ([#970](https://github.com/dialpad/dialtone/issues/970)) ([7e39339](https://github.com/dialpad/dialtone/commit/7e39339ea5608156bdb900cb51004327727d55f3))
+
 # [2.205.0](https://github.com/dialpad/dialtone/compare/dialtone-vue2/v2.204.1...dialtone-vue2/v2.205.0) (2025-12-09)
 
 
