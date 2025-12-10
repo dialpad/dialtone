@@ -216,7 +216,6 @@ export default {
     },
 
     tabLeft () {
-      // this.tabs = this.getTabChildren();
       const index = this.getFocusedTabIndex();
       if (index === -1) return;
 
@@ -225,7 +224,6 @@ export default {
     },
 
     tabRight () {
-      // this.tabs = this.getTabChildren();
       const index = this.getFocusedTabIndex();
       if (index === -1) return;
 
@@ -239,7 +237,6 @@ export default {
     },
 
     selectTab (event) {
-      // this.tabs = this.getTabChildren();
       if (this.isSameTabClicked()) return;
 
       this.$emit('before-change', event);
@@ -267,13 +264,11 @@ export default {
     },
 
     onHomeButton () {
-      // this.tabs = this.getTabChildren();
       if (this.tabs.length === 0) return;
       this.tabs[0]?.context?.focus();
     },
 
     onEndButton () {
-      // this.tabs = this.getTabChildren();
       if (this.tabs.length === 0) return;
       this.tabs[this.tabs.length - 1]?.context?.focus();
     },

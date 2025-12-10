@@ -34,7 +34,6 @@
 </template>
 
 <script>
-import { nextTick } from 'vue';
 import {
   TAB_LIST_SIZES,
   TAB_LIST_KIND_MODIFIERS,
@@ -183,10 +182,8 @@ export default {
     this.updateSelected();
   },
 
-  beforeUpdate () {
-    nextTick(() => {
-      this.updateSelected();
-    });
+  updated () {
+    this.updateSelected();
   },
 
   methods: {
