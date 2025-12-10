@@ -1,3 +1,11 @@
+## [9.151.1](https://github.com/dialpad/dialtone/compare/dialtone/v9.151.0...dialtone/v9.151.1) (2025-12-10)
+
+
+### Bug Fixes
+
+* **Banner:** NO-JIRA remove max-width ([#993](https://github.com/dialpad/dialtone/issues/993)) ([39321ee](https://github.com/dialpad/dialtone/commit/39321ee76b8f9d9d4f77eebe9e4669780cc9ce59))
+* **Tab:** DLT-2685 tabs update ([#970](https://github.com/dialpad/dialtone/issues/970)) ([7e39339](https://github.com/dialpad/dialtone/commit/7e39339ea5608156bdb900cb51004327727d55f3))
+
 # [9.151.0](https://github.com/dialpad/dialtone/compare/dialtone/v9.150.3...dialtone/v9.151.0) (2025-12-09)
 
 
