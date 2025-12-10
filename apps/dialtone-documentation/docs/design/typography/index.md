@@ -75,100 +75,135 @@ All product UI text can be characterized as one of **Headline**, **Body**, **Lab
 
 Titles and headings to establish hierarchy and set the tone of contextual groupings.
 
-<code-well-header class="d-d-flex d-jc-center d-fd-column d-p24 d-bgc-secondary d-w100p d-hmn102" custom>
-  <div class="d-d-grid d-g16 d-ai-center" style="grid-template-columns: 42rem 1fr">
-    <template v-for="({ var: varName }, index) in typographyStylesHeadlines" :key="varName">
-      <div class="d-truncate"><p :class="[varName, 'd-truncate', 'd-bgc-secondary-opaque', 'h:d-bgc-moderate-opaque']">{{ example }}</p></div>
-      <dt-stack direction="row" justify="between" class="dialtone-copy-utility">
-        <dt-stack direction="row" as="code" gap="300" class="d-text-code--sm d-bgc-transparent d-ta-center d-ws-nowrap">
-          <span v-dt-tooltip="`Font Size`">{{ getStyles('headlines', index).fontSize }}</span>
-          /
-          <span v-dt-tooltip="`Line Height`">{{ getStyles('headlines', index).lineHeight }}</span>
-          /
-          <span v-dt-tooltip="`Font Weight`">{{ getStyles('headlines', index).fontWeightName }}</span>
-        </dt-stack>
-        <code class="dialtone-copy-utility__utility d-bgc-transparent d-text-code--sm">{{ varName }}</code>
-        <div class="dialtone-copy-utility__btn">
-          <copy-button :text="varName" aria-label="Copy" />
-        </div>
-      </dt-stack>
-    </template>
-  </div>
+<code-well-header class="d-p16 d-bgc-secondary" custom>
+  <table class="d-w100p">
+    <tbody>
+      <template v-for="({ var: varName }, index) in typographyStylesHeadlines" :key="varName">
+        <tr>
+          <td class="d-p4 d-lc-1">
+            <div :class="[varName]">{{ example }}</div>
+          </td>
+          <td class="d-p4 d-ws-nowrap">
+            <dt-stack direction="row" as="code" gap="300" class="d-text-code--sm d-bgc-transparent d-ta-center d-c-default">
+              <span v-dt-tooltip="`Font Size`">{{ getStyles('headlines', index).fontSize }}</span>
+              /
+              <span v-dt-tooltip="`Line Height`">{{ getStyles('headlines', index).lineHeight }}</span>
+              /
+              <span v-dt-tooltip="`Font Weight`">{{ getStyles('headlines', index).fontWeightName }}</span>
+            </dt-stack>
+          </td>
+          <td class="d-p4 d-ws-nowrap">
+            <dt-stack direction="row" justify="between" class="dialtone-copy-utility">
+              <code class="dialtone-copy-utility__utility d-bgc-transparent d-text-code--sm">{{ varName }}</code>
+              <div class="dialtone-copy-utility__btn">
+                <copy-button :text="varName" aria-label="Copy" />
+              </div>
+            </dt-stack>
+          </td>
+        </tr>
+      </template>
+    </tbody>
+  </table>
 </code-well-header>
 
 ### Body
 
 Default text style for longer-form prose content, designed for comfort and clarity in reading varying lengths.
 
-<code-well-header class="d-d-flex d-jc-center d-fd-column d-p24 d-bgc-secondary d-w100p d-hmn102" custom>
-  <div class="d-d-grid d-g16 d-ai-center" style="grid-template-columns: 42rem 1fr">
-    <template v-for="({ var: varName }, index) in typographyStylesBody" :key="varName">
-      <div class="d-truncate"><p :class="[varName, 'd-truncate', 'd-bgc-secondary-opaque', 'h:d-bgc-moderate-opaque']">{{ example }}</p></div>
-      <dt-stack direction="row" justify="between" class="dialtone-copy-utility">
-        <dt-stack direction="row" as="code" gap="300" class="d-text-code--sm d-bgc-transparent d-ta-center d-ws-nowrap">
-          <span v-dt-tooltip="`Font Size`">{{ getStyles('body', index).fontSize }}</span>
-          /
-          <span v-dt-tooltip="`Line Height`">{{ getStyles('body', index).lineHeight }}</span>
-          /
-          <span v-dt-tooltip="`Font Weight`">{{ getStyles('body', index).fontWeightName }}</span>
-        </dt-stack>
-        <code class="dialtone-copy-utility__utility d-bgc-transparent d-text-code--sm">{{ varName }}</code>
-        <div class="dialtone-copy-utility__btn">
-          <copy-button :text="varName" aria-label="Copy" />
-        </div>
-      </dt-stack>
-    </template>
-  </div>
+<code-well-header class="d-p16 d-bgc-secondary" custom>
+  <table class="d-w100p">
+    <tbody>
+      <tr v-for="({ var: varName }, index) in typographyStylesBody" :key="varName">
+        <td class="d-p4 d-lc-1">
+          <div :class="[varName]">{{ example }}</div>
+        </td>
+        <td class="d-p4 d-ws-nowrap">
+          <dt-stack direction="row" as="code" gap="300" class="d-text-code--sm d-bgc-transparent d-ta-center d-c-default">
+            <span v-dt-tooltip="`Font Size`">{{ getStyles('body', index).fontSize }}</span>
+            /
+            <span v-dt-tooltip="`Line Height`">{{ getStyles('body', index).lineHeight }}</span>
+            /
+            <span v-dt-tooltip="`Font Weight`">{{ getStyles('body', index).fontWeightName }}</span>
+          </dt-stack>
+        </td>
+        <td class="d-p4 d-ws-nowrap">
+          <dt-stack direction="row" justify="between" class="dialtone-copy-utility">
+            <code class="dialtone-copy-utility__utility d-bgc-transparent d-text-code--sm">{{ varName }}</code>
+            <div class="dialtone-copy-utility__btn">
+              <copy-button :text="varName" aria-label="Copy" />
+            </div>
+          </dt-stack>
+        </td>
+      </tr>
+    </tbody>
+  </table>
 </code-well-header>
 
 ### Label
 
-Shorter-length copy like form fields, buttons, and other UI-labeling elements, ensuring clear navigation and interaction.
+Shorter-length copy like form fields, buttons, and other UI-labeling elements, ensuring clear navigation and
+interaction.
 
-<code-well-header class="d-d-flex d-jc-center d-fd-column d-p24 d-bgc-secondary d-w100p d-hmn102" custom>
-  <div class="d-d-grid d-g16 d-ai-center" style="grid-template-columns: 42rem 1fr">
-    <template v-for="({ var: varName }, index) in typographyStylesLabel" :key="varName">
-      <div class="d-truncate"><p :class="[varName, 'd-truncate', 'd-bgc-secondary-opaque', 'h:d-bgc-moderate-opaque']">{{ example }}</p></div>
-      <dt-stack direction="row" justify="between" class="dialtone-copy-utility">
-        <dt-stack direction="row" as="code" gap="300" class="d-text-code--sm d-bgc-transparent d-ta-center d-ws-nowrap">
-          <span v-dt-tooltip="`Font Size`">{{ getStyles('label', index).fontSize }}</span>
-          /
-          <span v-dt-tooltip="`Line Height`">{{ getStyles('label', index).lineHeight }}</span>
-          /
-          <span v-dt-tooltip="`Font Weight`">{{ getStyles('label', index).fontWeightName }}</span>
-        </dt-stack>
-        <code class="dialtone-copy-utility__utility d-bgc-transparent d-text-code--sm">{{ varName }}</code>
-        <div class="dialtone-copy-utility__btn">
-          <copy-button :text="varName" aria-label="Copy" />
-        </div>
-      </dt-stack>
-    </template>
-  </div>
+<code-well-header class="d-p16 d-bgc-secondary" custom>
+  <table class="d-w100p">
+    <tbody>
+      <tr v-for="({ var: varName }, index) in typographyStylesLabel" :key="varName">
+        <td class="d-p4 d-lc-1">
+          <div :class="[varName]">{{ example }}</div>
+        </td>
+        <td class="d-p4 d-ws-nowrap">
+          <dt-stack direction="row" as="code" gap="300" class="d-text-code--sm d-bgc-transparent d-ta-center d-c-default">
+            <span v-dt-tooltip="`Font Size`">{{ getStyles('label', index).fontSize }}</span>
+            /
+            <span v-dt-tooltip="`Line Height`">{{ getStyles('label', index).lineHeight }}</span>
+            /
+            <span v-dt-tooltip="`Font Weight`">{{ getStyles('label', index).fontWeightName }}</span>
+          </dt-stack>
+        </td>
+        <td class="d-p4 d-ws-nowrap">
+          <dt-stack direction="row" justify="between" class="dialtone-copy-utility">
+            <code class="dialtone-copy-utility__utility d-bgc-transparent d-text-code--sm">{{ varName }}</code>
+            <div class="dialtone-copy-utility__btn">
+              <copy-button :text="varName" aria-label="Copy" />
+            </div>
+          </dt-stack>
+        </td>
+      </tr>
+    </tbody>
+  </table>
 </code-well-header>
 
 ### Code
 
 Code snippets, technical commands, or data values rendered as a monospaced font.
 
-<code-well-header class="d-d-flex d-jc-center d-fd-column d-p24 d-bgc-secondary d-w100p d-hmn102" custom>
-  <div class="d-d-grid d-g16 d-ai-center" style="grid-template-columns: 42rem 1fr">
-    <template v-for="({ var: varName }, index) in typographyStylesCode" :key="varName">
-      <div class="d-truncate"><p :class="[varName, 'd-truncate', 'd-bgc-secondary-opaque', 'h:d-bgc-moderate-opaque']">{{ example }}</p></div>
-      <dt-stack direction="row" justify="between" class="dialtone-copy-utility">
-        <dt-stack direction="row" as="code" gap="300" class="d-text-code--sm d-bgc-transparent d-ta-center d-ws-nowrap">
-          <span v-dt-tooltip="`Font Size`">{{ getStyles('code', index).fontSize }}</span>
-          /
-          <span v-dt-tooltip="`Line Height`">{{ getStyles('code', index).lineHeight }}</span>
-          /
-          <span v-dt-tooltip="`Font Weight`">{{ getStyles('code', index).fontWeightName }}</span>
-        </dt-stack>
-        <code class="dialtone-copy-utility__utility d-bgc-transparent d-text-code--sm">{{ varName }}</code>
-        <div class="dialtone-copy-utility__btn">
-          <copy-button :text="varName" aria-label="Copy" />
-        </div>
-      </dt-stack>
-    </template>
-  </div>
+<code-well-header class="d-p16 d-bgc-secondary" custom>
+  <table class=d-w100p>
+    <tbody>
+      <tr v-for="({ var: varName }, index) in typographyStylesCode" :key="varName">
+        <td class="d-p4 d-lc-1">
+          <div :class="[varName]">{{ example }}</div>
+        </td>
+        <td class="d-p4 d-ws-nowrap">
+          <dt-stack direction="row" as="code" gap="300" class="d-text-code--sm d-bgc-transparent d-ta-center d-c-default">
+            <span v-dt-tooltip="`Font Size`">{{ getStyles('code', index).fontSize }}</span>
+            /
+            <span v-dt-tooltip="`Line Height`">{{ getStyles('code', index).lineHeight }}</span>
+            /
+            <span v-dt-tooltip="`Font Weight`">{{ getStyles('code', index).fontWeightName }}</span>
+          </dt-stack>
+        </td>
+        <td class="d-p4 d-ws-nowrap">
+          <dt-stack direction="row" justify="between" class="dialtone-copy-utility">
+            <code class="dialtone-copy-utility__utility d-bgc-transparent d-text-code--sm">{{ varName }}</code>
+            <div class="dialtone-copy-utility__btn">
+              <copy-button :text="varName" aria-label="Copy" />
+            </div>
+          </dt-stack>
+        </td>
+      </tr>
+    </tbody>
+  </table>
 </code-well-header>
 
 ## Examples
