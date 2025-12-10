@@ -182,7 +182,7 @@ export default {
     this.updateSelected();
   },
 
-  beforeUpdate () {
+  updated () {
     this.updateSelected();
   },
 
