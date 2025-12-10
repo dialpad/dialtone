@@ -598,16 +598,7 @@ vueCode='
 
 Remove extra leading space above and/or below text. Useful for tight component layouts where text needs to align precisely with adjacent elements.
 
-Trim will only effect block-level elements, and has no effect on elements that have a inline-level styled context.
-
-<dt-notice
-  kind="warning"
-  class="d-wmx100p d-my24"
-  hide-close
->
-
-  Trim requires modern browser support for `text-box-trim`, Chrome 133+, Edge 132+, Safari 18.2+ as of November 2025. Otherwise, it will gracefully fallback to default rendering with half-leading above and below.
-</dt-notice>
+Trim will only effect elements with block- or inline-blockstyled context. It may have no effect on elements with inline or flex-context.
 
 <code-well-header>
   <dt-stack gap="500" direction="row">
@@ -639,6 +630,15 @@ vueCode='
 
 </template>
 </dialtone-usage>
+
+<dt-notice
+  kind="info"
+  class="d-wmx100p d-my24"
+  hide-close
+  title="Browser Support"
+>
+  Trim requires modern browser support for <code class="d-bgc-transparent">text-box-trim</code>. Chrome 133+, Edge 132+, Safari 18.2+ as of November 2025. Otherwise, it will gracefully fallback to default rendering with half-leading above and below.
+</dt-notice>
 
 ## Accessibility
 
