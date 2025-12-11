@@ -17,10 +17,6 @@ import { hasSlotContent } from '@/common/utils';
 import {
   TEXT_KIND_MODIFIERS,
   TEXT_SIZE_MODIFIERS,
-  TEXT_STRENGTH_MODIFIERS,
-  TEXT_DENSITY_MODIFIERS,
-  TEXT_STRENGTH_BY_KIND_AND_SIZE,
-  TEXT_DENSITY_BY_KIND_AND_SIZE,
   TEXT_ALIGN_MODIFIERS,
   TEXT_TONE_PREFIX,
   TEXT_TONE_TOKENS,
@@ -68,24 +64,6 @@ export default {
      * @values eyebrow, sm, md, lg, xl, xxl
      */
     size: {
-      type: String,
-      default: null,
-    },
-
-    /**
-     * Weight override aligned with type tokens. Does not apply to all kinds. e.g. `body` doesn't have `soft` strength.
-     * @values soft, plain
-     */
-    strength: {
-      type: String,
-      default: null,
-    },
-
-    /**
-     * Line-height density modifier for compact typography. Does not apply to all kinds.
-     * @values compact
-     */
-    density: {
       type: String,
       default: null,
     },
@@ -253,31 +231,7 @@ export default {
         return null;
       }
 
-      let modifier = `${TEXT_KIND_MODIFIERS[this.kind]}--${resolvedSize}`;
-
-      if (this.strength) {
-        const allowedStrengths = TEXT_STRENGTH_BY_KIND_AND_SIZE[this.kind]?.[resolvedSize] || [];
-        if (!TEXT_STRENGTH_MODIFIERS.includes(this.strength)) {
-          console.warn(`[DtText] Unsupported strength "${this.strength}".`);
-        } else if (!allowedStrengths.includes(this.strength)) {
-          console.warn(`[DtText] strength="${this.strength}" is not valid for kind="${this.kind}" and size="${resolvedSize}".`);
-        } else {
-          modifier += `-${this.strength}`;
-        }
-      }
-
-      if (this.density) {
-        const allowedDensities = TEXT_DENSITY_BY_KIND_AND_SIZE[this.kind]?.[resolvedSize] || [];
-        if (!TEXT_DENSITY_MODIFIERS.includes(this.density)) {
-          console.warn(`[DtText] Unsupported density "${this.density}".`);
-        } else if (!allowedDensities.includes(this.density)) {
-          console.warn(`[DtText] density="${this.density}" is not valid for kind="${this.kind}" and size="${resolvedSize}".`);
-        } else {
-          modifier += `-${this.density}`;
-        }
-      }
-
-      return modifier;
+      return `${TEXT_KIND_MODIFIERS[this.kind]}--${resolvedSize}`;
     },
 
     getAlignClass () {

@@ -5,18 +5,9 @@ import {
   TEXT_LINE_CLAMP_CLASS,
   TEXT_NUMERIC_CLASS,
   TEXT_TRUNCATE_CLASS,
-  TEXT_KIND_MODIFIERS,
-  TEXT_SIZE_MODIFIERS,
-  TEXT_STRENGTH_BY_KIND_AND_SIZE,
-  TEXT_DENSITY_BY_KIND_AND_SIZE,
   TEXT_WRAP_MODIFIERS,
   TEXT_TRIM_MODIFIERS,
 } from './text_constants';
-import fs from 'fs';
-import path from 'path';
-
-const typeDataPath = path.resolve(__dirname, '../../../../apps/dialtone-documentation/docs/_data/type.json');
-const typeData = JSON.parse(fs.readFileSync(typeDataPath, 'utf8'));
 
 describe('DtText', () => {
   const slotContent = 'Sample text';
@@ -91,26 +82,6 @@ describe('DtText', () => {
     const wrapper = mountComponent({ tone: 'primary' });
 
     expect(wrapper.classes()).toContain('d-fc-primary');
-  });
-
-  it('warns when strength is not supported for the provided kind and size', () => {
-    const warnSpy = vi.spyOn(console, 'warn').mockImplementation(() => {});
-
-    const wrapper = mountComponent({ kind: 'body', size: 'md', strength: 'soft' });
-
-    expect(warnSpy).toHaveBeenCalledWith(expect.stringContaining('strength="soft"'));
-    expect(wrapper.classes()).toContain('d-body--md');
-    expect(wrapper.classes()).not.toContain('d-body--md-soft');
-  });
-
-  it('warns when density is not supported for the provided kind and size', () => {
-    const warnSpy = vi.spyOn(console, 'warn').mockImplementation(() => {});
-
-    const wrapper = mountComponent({ kind: 'helper', size: 'sm', density: 'compact' });
-
-    expect(warnSpy).toHaveBeenCalledWith(expect.stringContaining('density="compact"'));
-    expect(wrapper.classes()).toContain('d-helper--sm');
-    expect(wrapper.classes()).not.toContain('d-helper--sm-compact');
   });
 
   it('warns when tone is not recognized', () => {
@@ -234,42 +205,5 @@ describe('DtText', () => {
     const wrapper = mountComponent();
 
     expect(wrapper.attributes('data-qa')).toBe('dt-text');
-  });
-
-  it('matches documented typography utility classes from type.json', () => {
-    const documentedClasses = new Set(typeData.typographyStyles.map(({ var: className }) => className));
-
-    Object.keys(TEXT_KIND_MODIFIERS).forEach((kind) => {
-      const sizes = TEXT_SIZE_MODIFIERS[kind] || [];
-      const strengthBySize = TEXT_STRENGTH_BY_KIND_AND_SIZE[kind] || {};
-      const densityBySize = TEXT_DENSITY_BY_KIND_AND_SIZE[kind] || {};
-
-      sizes.forEach((size) => {
-        const baseClass = `d-${kind}--${size}`;
-        expect(documentedClasses.has(baseClass)).toBe(true);
-
-        const allowedStrengths = strengthBySize[size] || [];
-        const allowedDensities = densityBySize[size] || [];
-
-        allowedStrengths.forEach((strength) => {
-          const strengthClass = `${baseClass}-${strength}`;
-          expect(documentedClasses.has(strengthClass)).toBe(true);
-        });
-
-        allowedDensities.forEach((density) => {
-          const densityClass = `${baseClass}-${density}`;
-          expect(documentedClasses.has(densityClass)).toBe(true);
-        });
-
-        if (allowedStrengths.length && allowedDensities.length) {
-          allowedStrengths.forEach((strength) => {
-            allowedDensities.forEach((density) => {
-              const combinedClass = `${baseClass}-${strength}-${density}`;
-              expect(documentedClasses.has(combinedClass)).toBe(true);
-            });
-          });
-        }
-      });
-    });
   });
 });

@@ -200,157 +200,6 @@ vueCode='
 <dt-text size="{{size}}">....</dt-text>
 ' />
 
-### Density
-
-The `density` prop maps to the `line-height` style property, and only applies to `headline` and `body` kinds.
-
-<code-well-header>
-  <dt-stack class="d-w100p d-ba d-bar4">
-    <table class="d-w100p d-table">
-      <colgroup>
-        <col>
-        <col class="d-w50p">
-        <col class="d-w50p">
-      </colgroup>
-      <tr>
-        <th></th>
-        <th>
-          <dt-text as="code" kind="code">Default</dt-text>
-        </th>
-        <th>
-          <dt-text as="code" kind="code">density="<strong>compact</strong>"</dt-text>
-        </th>
-      </tr>
-      <tr class="d-va-baseline">
-        <th scope="row">
-          <dt-text as="code" align="end" kind="code">headline</dt-text>
-        </th>
-        <td>
-          <dt-text kind="headline" as="h2" size="lg" tone="primary" density="default" class="d-bgc-moderate-opaque">First in AI. Best in Agentic.</dt-text>
-        </td>
-        <td>
-          <dt-text kind="headline" as="h2" size="lg" tone="primary" density="compact" class="d-bgc-moderate-opaque">First in AI. Best in Agentic.</dt-text>
-        </td>
-      </tr>
-      <tr class="d-va-baseline">
-        <th scope="row">
-          <dt-text as="code" align="end" kind="code">body</dt-text>
-        </th>
-        <td>
-          <dt-text kind="body" as="p" tone="primary" density="default" class="d-bgc-moderate-opaque">Welcome to Dialpad, the most modern, AI-powered business communications platform. </dt-text>
-        </td>
-        <td>
-          <dt-text kind="body" as="p" tone="primary" density="compact" class="d-bgc-moderate-opaque">Welcome to Dialpad, the most modern, AI-powered business communications platform. </dt-text>
-        </td>
-      </tr>
-      <tr class="d-va-baseline">
-        <th scope="row">
-          <dt-text as="code" align="end" kind="code">label</dt-text>
-        </th>
-        <td>
-          <dt-text kind="label" as="p" tone="primary" density="default" class="d-bgc-moderate-opaque">Choose your time zone</dt-text>
-        </td>
-        <td>
-          <dt-text kind="label" as="p" tone="primary" density="compact" class="d-bgc-moderate-opaque">Choose your time zone</dt-text>
-        </td>
-      </tr>
-    </table>
-  </dt-stack>
-</code-well-header>
-
-<code-example-tabs
-vueCode='
-<dt-text density="default" kind="headline|body|label">....</dt-text>
-<dt-text density="compact" kind="headline|body|label">....</dt-text>
-' />
-
-### Strength
-
-The `strength` prop maps to the `font-weight` style property.
-
-`strength="soft"` only applies to select sizes of `headline` kind, and `strength="plain"` only applies to select sizes of `label` kind.
-
-<code-well-header>
-  <dt-stack class="d-w100p d-ba d-bar4">
-    <table class="d-w100p d-table">
-      <tr>
-        <th></th>
-        <th>
-          <dt-text as="code" kind="code">Default</dt-text>
-        </th>
-        <th>
-          <dt-text as="code" kind="code">strength="<strong>soft</strong>"</dt-text>
-        </th>
-        <th>
-          <dt-text as="code" kind="code">strength="<strong>plain</strong>"</dt-text>
-        </th>
-      </tr>
-      <tr class="d-va-baseline">
-        <th scope="row">
-          <dt-text as="code" align="end" kind="code" class="d-ws-nowrap">headline sm</dt-text>
-        </th>
-        <td>
-          <dt-text kind="headline" as="h2" size="sm" tone="primary">First in AI. Best in Agentic.</dt-text>
-        </td>
-        <td>
-          <dt-text kind="headline" as="h2" size="sm" tone="primary" strength="soft">First in AI. Best in Agentic.</dt-text>
-        </td>
-        <td>
-          <dt-text tone="muted" size="sm" title="not available">-</dt-text>
-        </td>
-      </tr>
-      <tr class="d-va-baseline">
-        <th scope="row">
-          <dt-text as="code" align="end" kind="code" class="d-ws-nowrap">headline lg</dt-text>
-        </th>
-        <td>
-          <dt-text kind="headline" as="h2" size="lg" tone="primary">First in AI. Best in Agentic.</dt-text>
-        </td>
-        <td>
-          <dt-text kind="headline" as="h2" size="lg" tone="primary" strength="soft">First in AI. Best in Agentic.</dt-text>
-        </td>
-        <td>
-          <dt-text tone="muted" size="sm" title="not available">-</dt-text>
-        </td>
-      </tr>
-      <tr class="d-va-baseline">
-        <th scope="row">
-          <dt-text as="code" align="end" kind="code" class="d-ws-nowrap">label sm</dt-text>
-        </th>
-        <td>
-          <dt-text kind="label" as="p" tone="primary" size="sm">Choose your time zone</dt-text>
-        </td>
-        <td>
-          <dt-text tone="muted" size="sm" title="not available">-</dt-text>
-        </td>
-        <td>
-          <dt-text kind="label" as="p" tone="primary" strength="plain" size="sm">Choose your time zone</dt-text>
-        </td>
-      </tr>
-      <tr class="d-va-baseline">
-        <th scope="row">
-          <dt-text as="code" align="end" kind="code" class="d-ws-nowrap">label md</dt-text>
-        </th>
-        <td>
-          <dt-text kind="label" as="p" tone="primary">Choose your time zone</dt-text>
-        </td>
-        <td>
-          <dt-text tone="muted" size="sm" title="not available">-</dt-text>
-        </td>
-        <td>
-          <dt-text kind="label" as="p" tone="primary" strength="plain">Choose your time zone</dt-text>
-        </td>
-      </tr>
-    </table>
-  </dt-stack>
-</code-well-header>
-
-<code-example-tabs
-vueCode='
-<dt-text kind="headline" size="sm|lg" strength="soft">....</dt-text>
-<dt-text kind="label" strength="plain">....</dt-text>
-' />
-
 ### Numeric
 
 The `numeric` prop applies styles that ensure that each number is set with consistent width, making them align properly when displayed together. Ideal for displaying aligned data such as phone numbers or numbers in a table.
@@ -429,20 +278,20 @@ Use `as` to declare the underlying HTML tag that the component should render, in
 <code-well-header>
   <dt-stack class="d-w100p" gap="500">
     <dt-stack gap="400">
-      <dt-text kind="headline" as="h1" size="xl" density="compact">The Complete Agentic AI Platform</dt-text>
+      <dt-text kind="headline" as="h1" size="xl">The Complete Agentic AI Platform</dt-text>
       <dt-text kind="body" as="p">Our AI Agents come equipped with the core skills businesses need to deliver seamless customer experiences.</dt-text>
     </dt-stack>
     <dt-stack direction="row" gap="500" class="d-ai-flex-start">
       <dt-stack gap="400">
-        <dt-text kind="headline" as="h2" size="lg" density="compact">Try before you AI</dt-text>
+        <dt-text kind="headline" as="h2" size="lg">Try before you AI</dt-text>
         <dt-text kind="body" as="p">Build, run and optimize your agents - no code, just your expertise and our built-in intelligence.</dt-text>
       </dt-stack>
       <dt-stack gap="400">
-        <dt-text kind="headline" as="h2" size="lg" density="compact">Great minds sync alike</dt-text>
+        <dt-text kind="headline" as="h2" size="lg">Great minds sync alike</dt-text>
         <dt-text kind="body" as="p">Our AI learns and balances speed with quality using one data plane that keeps customers coming back.</dt-text>
       </dt-stack>
       <dt-stack gap="400">
-        <dt-text kind="headline" as="h2" size="lg" density="compact">History repeats itself. Customers shouldn’t.</dt-text>
+        <dt-text kind="headline" as="h2" size="lg">History repeats itself. Customers shouldn't.</dt-text>
         <dt-text kind="body" as="p">Whatever your customer types or says, our AI and your human agents stay in sync.</dt-text>
       </dt-stack>
     </dt-stack>
@@ -451,13 +300,13 @@ Use `as` to declare the underlying HTML tag that the component should render, in
 
 <code-example-tabs
 vueCode='
-<dt-text kind="headline" as="h1" size="xl" density="compact">...</dt-text>
+<dt-text kind="headline" as="h1" size="xl">...</dt-text>
 <dt-text kind="body" as="p">...</dt-text>
-<dt-text kind="headline" as="h2" size="lg" density="compact">...</dt-text>
+<dt-text kind="headline" as="h2" size="lg">...</dt-text>
 <dt-text kind="body" as="p">...</dt-text>
-<dt-text kind="headline" as="h2" size="lg" density="compact">...</dt-text>
+<dt-text kind="headline" as="h2" size="lg">...</dt-text>
 <dt-text kind="body" as="p">...</dt-text>
-<dt-text kind="headline" as="h2" size="lg" density="compact">...</dt-text>
+<dt-text kind="headline" as="h2" size="lg">...</dt-text>
 <dt-text kind="body" as="p">...</dt-text>
 ' />
 
@@ -620,7 +469,6 @@ vueCode='
 <template #do>
 
 * Use `trim="both"` when text needs to align flush with container's top and/or bottom edges.
-* Combine with `density="compact"` for maximum space efficiency.
 
 </template>
 <template #dont>

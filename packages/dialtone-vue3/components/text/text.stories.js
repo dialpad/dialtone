@@ -6,15 +6,11 @@ import DtTextVariants from './text_variants.story.vue';
 import {
   TEXT_KIND_MODIFIERS,
   TEXT_SIZE_MODIFIERS,
-  TEXT_STRENGTH_MODIFIERS,
-  TEXT_DENSITY_MODIFIERS,
   TEXT_ALIGN_MODIFIERS,
 } from './text_constants';
 
 const kindOptions = Object.keys(TEXT_KIND_MODIFIERS);
 const sizeOptions = Array.from(new Set(Object.values(TEXT_SIZE_MODIFIERS).flat()));
-const strengthOptions = [undefined, ...TEXT_STRENGTH_MODIFIERS];
-const densityOptions = [undefined, ...TEXT_DENSITY_MODIFIERS];
 const alignOptions = [undefined, ...Object.keys(TEXT_ALIGN_MODIFIERS)];
 
 export const argsData = {
@@ -22,8 +18,6 @@ export const argsData = {
   as: 'span',
   kind: 'body',
   size: 'md',
-  strength: undefined,
-  density: undefined,
   tone: undefined,
   align: undefined,
   truncate: false,
@@ -49,14 +43,6 @@ export const argTypesData = {
   },
   size: {
     options: sizeOptions,
-    control: { type: 'select' },
-  },
-  strength: {
-    options: strengthOptions,
-    control: { type: 'select' },
-  },
-  density: {
-    options: densityOptions,
     control: { type: 'select' },
   },
   tone: {
@@ -97,7 +83,7 @@ export default {
   parameters: {
     docs: {
       description: {
-        component: 'Dialtone\'s typography primitive. `DtText` maps semantic props (`kind`, `size`, `strength`, `density`, `tone`, `align`) to token-backed classes and supports structural helpers like `as`, truncation, multi-line clamping, and numeric tabular figures. The Variants story enumerates every supported combination validated against `apps/dialtone-documentation/docs/_data/type.json`.',
+        component: 'Dialtone\'s typography primitive. `DtText` maps semantic props (`kind`, `size`, `tone`, `align`) to token-backed classes and supports structural helpers like `as`, truncation, multi-line clamping, and numeric tabular figures. The Variants story enumerates every supported combination validated against `apps/dialtone-documentation/docs/_data/type.json`.',
       },
     },
   },

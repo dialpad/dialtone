@@ -10,6 +10,7 @@
 - **2025-10-17** — Added variant coverage requirements, semantic element guidance, SSR/test expectations, lint roadmap alignment, and initial decision log entries after principal review.
 - **2025-10-19** — Implemented Vue 3 validations (strength/density/tone), refactored numeric/align CSS, added prop documentation, test coverage, tone token automation plan, and truncate accessibility follow-ups.
 - **2025-10-20** — Expanded Vitest coverage (align, stacked modifiers, clamp clearing, hydration), aligned `text.md` examples, and refreshed Storybook variants to surface truncation, tone, numeric, and alignment states while queuing lint cleanup for later.
+- **2025-12-10** — **API Simplification**: Removing `density` and `strength` props to establish clean baseline before typography redesign. Will reintroduce in refined form later.
 
 ---
 
@@ -18,6 +19,58 @@
 - **2025-10-17** — Completed base CSS (`packages/dialtone-css/lib/build/less/components/text.less`) and shared constants for Vue 2/3. Confirmed typography sources. Observed stylelint warnings about unknown rules on the new LESS file; will revisit once component wiring is complete.
 - **2025-10-17** — Added Vue 3 exports (`packages/dialtone-vue3/components/text/index.js`, root index) so `DtText` is available to consumers. Storybook stories/tests still pending.
 - **2025-10-20** — `pnpm --dir packages/dialtone-vue3 test` passing with new assertions; `text_variants.story.vue` now mirrors tested permutations (truncate, clamp, tone, numeric, align). Lint work deferred to final cleanup once story refactors land.
+- **2025-12-10** — Completed API simplification: removed `density` and `strength` props from Vue 3 implementation. Removed 4 constants, simplified `getVariantClass()` method, updated tests (22 passing), stories, and documentation.
+
+---
+
+## 🔄 Current Work: API Simplification (2025-12-10)
+
+**Objective:** Strip down `density` and `strength` props to establish a clean baseline before typography system redesign.
+
+**Rationale:** These props introduced significant conditional logic complexity (validation matrices, kind×size×strength×density combinations). Removing them simplifies the component API and class generation logic.
+
+**Scope:** Vue 3 component files only. LESS/CSS and design tokens handled separately. **Vue 2 changes deferred** — focus on Vue 3 first, mirror to Vue 2 later.
+
+### Files to Modify
+
+| File | Changes |
+|------|---------|
+| `packages/dialtone-vue3/components/text/text.vue` | Remove `strength` prop (lines 76-82), `density` prop (lines 85-91), validation logic in `getVariantClass()` (lines 258-278) |
+| `packages/dialtone-vue3/components/text/text_constants.js` | Remove `TEXT_STRENGTH_MODIFIERS`, `TEXT_DENSITY_MODIFIERS`, `TEXT_STRENGTH_BY_KIND_AND_SIZE`, `TEXT_DENSITY_BY_KIND_AND_SIZE` constants and exports |
+| `packages/dialtone-vue3/components/text/text.test.js` | Remove tests for strength/density validation warnings and combination tests |
+| `packages/dialtone-vue3/components/text/text.stories.js` | Remove strength/density from imports, argTypes, and default args |
+| `packages/dialtone-vue3/components/text/text_default.story.vue` | Remove `:strength` and `:density` bindings |
+| `packages/dialtone-vue3/components/text/text_variants.story.vue` | Remove all `strength` and `density` prop usages from examples |
+| `apps/dialtone-documentation/docs/components/text.md` | Remove Density and Strength documentation sections |
+
+### Tasks
+
+- [x] Remove `strength` and `density` props from `text.vue`
+- [x] Simplify `getVariantClass()` method (remove strength/density logic)
+- [x] Remove related constants from `text_constants.js`
+- [x] Update imports in `text.vue` to remove unused constants
+- [x] Remove strength/density tests from `text.test.js`
+- [x] Update `text.stories.js` (remove controls/args)
+- [x] Update `text_default.story.vue` (remove bindings)
+- [x] Update `text_variants.story.vue` (remove usages)
+- [x] Update `text.md` documentation (remove sections)
+- [x] Run tests to verify nothing breaks (22 tests passing)
+- [ ] Verify Storybook still renders correctly
+
+### Simplified API After Changes
+
+Props remaining:
+- `as` — HTML tag/component
+- `kind` — headline, body, label, helper, code
+- `size` — eyebrow, sm, md, lg, xl, xxl (contextual to kind)
+- `tone` — foreground color token
+- `align` — start, center, end, justify
+- `truncate` — single-line ellipsis
+- `maxLines` — multi-line clamp
+- `numeric` — tabular figures
+- `text` — string fallback for slot
+- `wrap` — wrap, nowrap, balance, pretty
+- `trim` — start, end, both
 
 ---
 

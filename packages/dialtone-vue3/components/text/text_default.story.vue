@@ -3,8 +3,6 @@
     :as="$attrs.as"
     :kind="$attrs.kind"
     :size="$attrs.size"
-    :strength="$attrs.strength"
-    :density="$attrs.density"
     :tone="$attrs.tone"
     :align="$attrs.align"
     :truncate="$attrs.truncate"

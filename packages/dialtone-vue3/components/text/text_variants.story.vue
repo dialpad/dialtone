@@ -19,38 +19,6 @@
         >
           {{ `Headline ${size}` }}
         </dt-text>
-        <dt-text
-          v-for="size in headlineSizes"
-          :key="`headline-${size}`"
-          kind="headline"
-          :size="size"
-          density="compact"
-          strength="soft"
-        >
-          {{ `Headline ${size}` }} compact soft
-        </dt-text>
-        <dt-text
-          kind="headline"
-          size="lg"
-          strength="soft"
-        >
-          Headline soft
-        </dt-text>
-        <dt-text
-          kind="headline"
-          size="lg"
-          density="compact"
-        >
-          Headline compact
-        </dt-text>
-        <dt-text
-          kind="headline"
-          size="lg"
-          density="compact"
-          strength="soft"
-        >
-          Headline compact soft
-        </dt-text>
       </dt-stack>
     </section>
     <section>
@@ -72,23 +40,9 @@
         </dt-text>
         <dt-text
           kind="body"
-          size="sm"
-          density="compact"
-        >
-          Body sm compact
-        </dt-text>
-        <dt-text
-          kind="body"
           size="md"
         >
           Body md
-        </dt-text>
-        <dt-text
-          kind="body"
-          size="md"
-          density="compact"
-        >
-          Body md compact
         </dt-text>
       </dt-stack>
     </section>
@@ -105,13 +59,6 @@
       <dt-stack gap="300">
         <dt-text
           kind="label"
-          size="md"
-          strength="plain"
-        >
-          Label md plain
-        </dt-text>
-        <dt-text
-          kind="label"
           size="sm"
         >
           Label sm
@@ -119,16 +66,8 @@
         <dt-text
           kind="label"
           size="md"
-          density="compact"
         >
-          Label md compact
-        </dt-text>
-        <dt-text
-          kind="label"
-          size="sm"
-          density="compact"
-        >
-          Label sm compact
+          Label md
         </dt-text>
       </dt-stack>
     </section>
@@ -154,20 +93,6 @@
           size="md"
         >
           Helper md
-        </dt-text>
-        <dt-text
-          kind="helper"
-          size="sm"
-          density="compact"
-        >
-          Helper sm compact
-        </dt-text>
-        <dt-text
-          kind="helper"
-          size="md"
-          density="compact"
-        >
-          Helper md compact
         </dt-text>
       </dt-stack>
     </section>
