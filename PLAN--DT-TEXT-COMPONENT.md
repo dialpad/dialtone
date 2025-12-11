@@ -82,6 +82,101 @@
 
 ---
 
+## 🔄 Current Work: Typography Documentation Page Migration
+
+**File:** `apps/dialtone-documentation/docs/design/typography/index.md`
+
+**Objective:** Migrate typography documentation examples to use `<dt-text>` component as the primary approach, with CSS utility classes shown as FYI/fallback.
+
+**Key Principle:** `<dt-text>` is the **primary, recommended** way to apply text styles. CSS utilities (`d-text-headline--lg`, etc.) are **last resort** for non-Vue contexts (emails, static HTML, legacy code).
+
+**Complexity:** HIGH — This page serves dual purposes:
+1. Documents CSS utility classes (keep for reference)
+2. Shows example usage patterns (migrate to component-first)
+
+### Areas Identified
+
+#### 1. Style Demonstration Tables (lines 78-207) — DO NOT MIGRATE
+
+These tables use dynamic `:class="[varName]"` to showcase CSS utilities:
+
+```html
+<div :class="[varName]">{{ example }}</div>
+```
+
+**Rationale:** These are specifically demonstrating the CSS classes themselves. Keep as-is.
+
+#### 2. Examples Section (lines 209-296) — MIGRATE WITH CARE
+
+Current:
+```html
+<h2 class="d-text-headline--lg">Saturday, May 24, 2025</h2>
+<div class="d-text-body--sm d-fw-bold">Ashanti Trevor</div>
+<span class="d-text-body--xs d-fc-tertiary">Outgoing call</span>
+```
+
+Should become:
+```html
+<dt-text as="h2" kind="headline" size="lg">Saturday, May 24, 2025</dt-text>
+<dt-text kind="body" size="sm" strength="bold">Ashanti Trevor</dt-text>
+<dt-text kind="body" size="xs" tone="tertiary">Outgoing call</dt-text>
+```
+
+#### 3. Code Snippets (lines 233-251, 275-296) — COMPONENT-FIRST
+
+Currently shows CSS class approach only. Should show component as primary, CSS as fallback:
+
+```html
+<!-- Recommended: DtText component -->
+<dt-text as="h2" kind="headline" size="lg">Title</dt-text>
+
+<!-- Fallback: CSS utilities (for non-Vue contexts) -->
+<h2 class="d-text-headline--lg">Title</h2>
+```
+
+#### 4. Inline Code Formatting — CONSIDER MIGRATING
+
+Classes like `d-text-code--sm` used for code display styling could become:
+```html
+<dt-text kind="code" size="sm">...</dt-text>
+```
+
+### Migration Strategy
+
+1. **Live examples** (code-well-header content): Migrate to `<dt-text>` component
+2. **Code snippets** (html blocks): Show component FIRST as recommended, CSS as fallback
+3. **Style demo tables**: Keep using dynamic CSS classes (they document the utilities)
+4. **Add guidance note**: `<dt-text>` is primary/recommended; CSS utilities are last resort for non-Vue contexts
+
+### Specific Transformations Needed
+
+| Current | Component Equivalent |
+|---------|---------------------|
+| `class="d-text-headline--lg"` | `<dt-text kind="headline" size="lg">` |
+| `class="d-text-body--sm d-fw-bold"` | `<dt-text kind="body" size="sm" strength="bold">` |
+| `class="d-text-body--xs d-fc-tertiary"` | `<dt-text kind="body" size="xs" tone="tertiary">` |
+| `class="d-text-headline--xxl"` | `<dt-text kind="headline" size="xxl">` |
+| `class="d-text-body--lg"` | `<dt-text kind="body" size="lg">` |
+| `class="d-text-code--sm"` | `<dt-text kind="code" size="sm">` |
+
+### Tasks
+
+- [ ] Review page structure and identify all migration points
+- [ ] Update Examples section live demos to use `<dt-text>`
+- [ ] Update code snippets to show both CSS and component approaches
+- [ ] Add documentation note about CSS vs component usage
+- [ ] Test all examples render correctly
+- [ ] Verify code snippets are accurate and copyable
+- [ ] Update plan with completion
+
+### Risks
+
+- **Copy-paste breakage**: Users copying code snippets expect working examples
+- **Dual-format confusion**: Need clear labeling for CSS vs component examples
+- **Dynamic class demos**: Style tables must continue using CSS classes
+
+---
+
 ## ✅ Completed: Test Refactoring for Single-Purpose Clarity (2025-12-10)
 
 **Objective:** Refactor tests to follow single-purpose testing principles — each test should verify one behavior with a clear, descriptive name.
