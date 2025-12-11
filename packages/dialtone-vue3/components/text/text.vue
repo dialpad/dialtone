@@ -48,8 +48,8 @@ export default {
     },
 
     /**
-     * Typography kind mapping to headline/body/label/helper/code token sets.
-     * @values headline, body, label, helper, code
+     * Typography kind mapping to headline/body/label/code token sets.
+     * @values headline, body, label, code
      */
     kind: {
       type: String,

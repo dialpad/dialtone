@@ -63,7 +63,6 @@ Declare the role of the content. Default will inherit text styles from the paren
     <dt-text kind="headline">Headline</dt-text>
     <dt-text kind="body">Body</dt-text>
     <dt-text kind="label">Label</dt-text>
-    <dt-text kind="helper">Helper</dt-text>
     <dt-text kind="code">Code</dt-text>
     <dt-text>Default (inherits)</dt-text>
   </dt-stack>
@@ -74,7 +73,6 @@ vueCode='
 <dt-text kind="headline">Headline</dt-text>
 <dt-text kind="body">Body</dt-text>
 <dt-text kind="label">Label</dt-text>
-<dt-text kind="helper">Helper</dt-text>
 <dt-text kind="code">Code</dt-text>
 <dt-text>Default (inherits)</dt-text>
 '
@@ -156,21 +154,6 @@ All kinds support `size` prop, but not all sizes are available for each kind. De
         </td>
         <td>
           <dt-text kind="label" as="p" tone="primary">Text</dt-text>
-        </td>
-        <td><dt-text tone="muted" size="sm" title="not available">-</dt-text></td>
-        <td><dt-text tone="muted" size="sm" title="not available">-</dt-text></td>
-        <td><dt-text tone="muted" size="sm" title="not available">-</dt-text></td>
-      </tr>
-      <tr class="d-va-baseline">
-        <th scope="row">
-          <dt-text as="code" align="end" kind="code">helper</dt-text>
-        </th>
-        <td><dt-text tone="muted" size="sm" title="not available">-</dt-text></td>
-        <td>
-          <dt-text kind="helper" as="p" size="sm" tone="primary">Text</dt-text>
-        </td>
-        <td>
-          <dt-text kind="helper" as="p" tone="primary">Text</dt-text>
         </td>
         <td><dt-text tone="muted" size="sm" title="not available">-</dt-text></td>
         <td><dt-text tone="muted" size="sm" title="not available">-</dt-text></td>

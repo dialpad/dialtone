@@ -79,31 +79,6 @@
         class="d-bb"
         tone="muted"
       >
-        Helper
-      </dt-text>
-      <dt-stack gap="300">
-        <dt-text
-          kind="helper"
-          size="sm"
-        >
-          Helper sm
-        </dt-text>
-        <dt-text
-          kind="helper"
-          size="md"
-        >
-          Helper md
-        </dt-text>
-      </dt-stack>
-    </section>
-    <section>
-      <dt-text
-        as="h3"
-        kind="label"
-        size="md"
-        class="d-bb"
-        tone="muted"
-      >
         Code
       </dt-text>
       <dt-stack gap="300">
@@ -228,7 +203,7 @@
                 {{ wrapExample.copy }}
               </dt-text>
               <dt-text
-                kind="helper"
+                kind="label"
                 size="sm"
                 tone="muted"
               >
@@ -263,7 +238,7 @@
                 {{ trimExample.copy }}
               </dt-text>
               <dt-text
-                kind="helper"
+                kind="label"
                 size="sm"
                 tone="muted"
                 class="d-px8"

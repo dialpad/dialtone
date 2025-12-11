@@ -2,7 +2,6 @@ export const TEXT_KIND_MODIFIERS = {
   headline: 'd-headline',
   body: 'd-body',
   label: 'd-label',
-  helper: 'd-helper',
   code: 'd-code',
 };
 
@@ -10,7 +9,6 @@ export const TEXT_SIZE_MODIFIERS = {
   headline: ['eyebrow', 'sm', 'md', 'lg', 'xl', 'xxl'],
   body: ['sm', 'md'],
   label: ['sm', 'md'],
-  helper: ['sm', 'md'],
   code: ['sm', 'md'],
 };
 
