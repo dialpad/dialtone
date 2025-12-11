@@ -46,7 +46,7 @@ Use in place of manually applying Text Styles. Examples of manual application yo
 </template>
 <template #dont>
 
-* Mix `DtText` with conflicting typography utilities (e.g., `d-fs-*`, `d-fw-*`, `d-lh-*`).
+* Mix `DtText` with conflicting typography utilities (e.g., `d-fs-*`).
 * Render headings with non-heading tags (e.g., avoid `as="div"` for top-level titles).
 * Depend on the `text` prop when the content requires inline formatting; slot it instead.
 
@@ -81,7 +81,7 @@ vueCode='
 
 ### Size
 
-All kinds support `size` prop, but not all sizes are available for each kind. Default size is `md`.
+All kinds support `size` prop, but not all sizes are available for each kind. When `kind` is set, size defaults to `md` if not specified.
 
 - **headline**: xxxl, xxl, xl, lg, md, sm, xs
 - **body, label, code**: lg, md, sm, xs
@@ -205,7 +205,7 @@ All kinds support `size` prop, but not all sizes are available for each kind. De
 
 <code-example-tabs
 vueCode='
-<dt-text size="{{size}}">....</dt-text>
+<dt-text kind="{{kind}}" size="{{size}}">....</dt-text>
 ' />
 
 ### Numeric

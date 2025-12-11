@@ -269,6 +269,9 @@ export default {
   methods: {
     getVariantClass () {
       if (!this.kind) {
+        if (this.size) {
+          console.warn('[DtText] size prop has no effect without kind. Set kind="headline|body|label|code".');
+        }
         return null;
       }
 

@@ -51,6 +51,16 @@ describe('DtText', () => {
     expect(warnSpy).toHaveBeenCalledWith(expect.stringContaining('size="unknown"'));
   });
 
+  it('warns when size is set without kind', () => {
+    const warnSpy = vi.spyOn(console, 'warn').mockImplementation(() => {});
+
+    mountComponent({ size: 'lg' });
+
+    expect(warnSpy).toHaveBeenCalledWith(
+      '[DtText] size prop has no effect without kind. Set kind="headline|body|label|code".',
+    );
+  });
+
   it('throws error when headline-only size used with incompatible kind', () => {
     expect(() => mountComponent({ kind: 'body', size: 'xxxl' }))
       .toThrow('[DtText] size="xxxl" is only valid for kind="headline"');
