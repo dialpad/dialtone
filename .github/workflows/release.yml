@@ -64,7 +64,6 @@ jobs:
     env:
       RELEASE_TAG: ${{ needs.get-branch-name.outputs.current_branch == 'staging' && 'latest' || needs.get-branch-name.outputs.current_branch }}
       DIALTONE_VUE3_RELEASE_TAG: ${{ needs.get-branch-name.outputs.current_branch == 'staging' && 'vue3' || needs.get-branch-name.outputs.current_branch }}
-      NPM_TOKEN: ${{ secrets.DIALTONE_NPM_TOKEN }}
       GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     steps:
       - name: Checkout
