@@ -79,10 +79,12 @@
 - **2025-12-10** — **Size without kind warning**: Added `console.warn` when `size` is set without `kind`. Added 1 new test (41 total).
 - **2025-12-10** — **Test Refactoring**: Refactored tests for single-purpose clarity, then optimized to match project norms. Removed exhaustive `it.each()` testing in favor of representative samples. Consolidated warning + class-absence tests. Final count: 36 tests (down from 41, via 67 intermediate).
 - **2025-12-11** — **Storybook Restructure**: Restructured `text_variants.story.vue` to match `stack_variants.story.vue` pattern. Added outer padding, proper section hierarchy, bordered example containers, and separated examples by prop category. Migrated all raw `d-headline--*` and `d-body--*` classes to use `<dt-text>` component (dogfooding).
+- **2025-12-11** — **Typography Documentation Migration**: Migrated `apps/dialtone-documentation/docs/design/typography/index.md` to use `<dt-text>` component as primary approach. Updated Examples section live demos and code snippets. Added guidance section clarifying component-first approach (CSS utilities as last resort). Added new "Vue Component" and "CSS Utility" subsections under Styles.
+- **2025-12-11** — **CSS Utilities Index Migration**: Migrated `apps/dialtone-documentation/docs/utilities/index.md` Steps 11-13 to use `<dt-text kind="label" size="sm">` instead of outdated `d-label--sm` class. Updated Step 11 description to reference DtText component. Fixed typo in Step 12 ("adusting" → "adjusting").
 
 ---
 
-## 🔄 Current Work: Typography Documentation Page Migration
+## ✅ Completed: Typography Documentation Page Migration (2025-12-11)
 
 **File:** `apps/dialtone-documentation/docs/design/typography/index.md`
 
@@ -161,19 +163,135 @@ Classes like `d-text-code--sm` used for code display styling could become:
 
 ### Tasks
 
-- [ ] Review page structure and identify all migration points
-- [ ] Update Examples section live demos to use `<dt-text>`
-- [ ] Update code snippets to show both CSS and component approaches
-- [ ] Add documentation note about CSS vs component usage
-- [ ] Test all examples render correctly
-- [ ] Verify code snippets are accurate and copyable
-- [ ] Update plan with completion
+- [x] Review page structure and identify all migration points
+- [x] Update Examples section live demos to use `<dt-text>`
+- [x] Update code snippets to component-first approach
+- [x] Add documentation note about CSS vs component usage (new "Vue Component" and "CSS Utility" sections)
+- [x] Test all examples render correctly (user validated)
+- [x] Verify code snippets are accurate and copyable
+- [x] Update plan with completion
 
 ### Risks
 
 - **Copy-paste breakage**: Users copying code snippets expect working examples
 - **Dual-format confusion**: Need clear labeling for CSS vs component examples
 - **Dynamic class demos**: Style tables must continue using CSS classes
+
+---
+
+## ✅ Completed: CSS Utilities Index Page Migration (2025-12-11)
+
+**File:** `apps/dialtone-documentation/docs/utilities/index.md`
+
+**Objective:** Update the CSS Utilities tutorial page to use `<dt-text>` for text styling while still teaching CSS utilities for non-text concerns (borders, backgrounds, spacing, etc.).
+
+**Key Principle:** This page teaches CSS utilities, but text styling should use `<dt-text>` component. CSS utilities remain appropriate for:
+- Borders (`d-bt`, `d-btw4`, `d-bc-critical`)
+- Backgrounds (`d-bgc-primary-inverted`, `d-bgc-critical-strong`)
+- Spacing (`d-p8`, `d-py4`, `d-px8`)
+- Layout (`d-bar4`, `d-divide-x`)
+
+**Complexity:** MEDIUM — The page is a step-by-step tutorial building up a UI element. Text styling appears in steps 3, 5-13.
+
+### Page Analysis
+
+#### Introduction & Border Examples (lines 1-52) — KEEP AS-IS
+These demonstrate border utilities with plain "Box" text. No typography styling applied.
+
+#### Tutorial Steps 1-4 (lines 54-102) — MINIMAL CHANGES
+- Step 3 uses `d-fc-primary-inverted` for **foreground color** on a container
+- This is acceptable: `d-fc-*` on containers for inheritance is a valid pattern
+- The "Box" text has no explicit typography styling
+
+#### Tutorial Steps 5-10 (lines 104-274) — KEEP AS-IS
+- Uses `d-fc-primary-inverted` on parent container for color inheritance
+- Text content is simple labels ("Box 1", "Critical", etc.)
+- No explicit typography classes applied yet
+
+#### Tutorial Step 11 (lines 276-312) — **MIGRATE**
+**Current:** Uses old `d-label--sm` class directly on `dt-stack`:
+```html
+<dt-stack direction="row" gap="400" class="d-label--sm d-bgc-critical-strong d-p8">
+  <dt-icon name="alert-triangle" size="200" />
+  Critical
+</dt-stack>
+```
+
+**Problem:**
+1. `d-label--sm` is OLD naming (should be `d-text-label--sm`)
+2. Text styling should use `<dt-text>` component
+
+**Should become:**
+```html
+<dt-stack direction="row" gap="400" class="d-bgc-critical-strong d-p8">
+  <dt-icon name="alert-triangle" size="200" />
+  <dt-text kind="label" size="sm">Critical</dt-text>
+</dt-stack>
+```
+
+#### Tutorial Steps 12-13 (lines 314-388) — **MIGRATE**
+Same issue as Step 11 — uses `d-label--sm` class.
+
+### Migration Strategy
+
+1. **Keep non-text CSS utilities**: The tutorial's value is teaching borders, backgrounds, spacing, layout
+2. **Migrate text styling to `<dt-text>`**: Steps 11-13 should wrap text in `<dt-text kind="label" size="sm">`
+3. **Update step description**: Step 11 currently says "Choose a text style" — update to mention `<dt-text>` component
+4. **Fix outdated class name**: `d-label--sm` → component-based approach
+5. **Preserve inherited color**: Keep `d-fc-primary-inverted` on parent — `<dt-text>` will inherit via CSS cascade
+
+### Specific Transformations Needed
+
+| Step | Current | Target |
+|------|---------|--------|
+| 11 | `class="d-label--sm d-bgc-critical-strong d-p8"` on dt-stack | Remove `d-label--sm`, wrap text in `<dt-text kind="label" size="sm">` |
+| 12 | Same pattern | Same fix |
+| 13 | Same pattern | Same fix |
+
+### Tasks
+
+- [x] Update Step 11 description to reference `<dt-text>` component
+- [x] Migrate Step 11 live demo and code snippet
+- [x] Migrate Step 12 live demo and code snippet
+- [x] Migrate Step 13 live demo and code snippet
+- [x] Update link in Step 11 from typography design page to DtText component page
+- [x] Verify `d-fc-primary-inverted` on parent still provides correct color inheritance
+- [x] Test all examples render correctly
+- [x] Update plan with completion
+
+### Example Migration (Step 11)
+
+**Current:**
+```html
+<dt-stack direction="row" gap="400" class="d-fc-primary-inverted">
+  <dt-stack direction="row" gap="400" class="d-label--sm d-bgc-critical-strong d-p8">
+    <dt-icon name="alert-triangle" size="200" />
+    Critical
+  </dt-stack>
+  ...
+</dt-stack>
+```
+
+**Target:**
+```html
+<dt-stack direction="row" gap="400" class="d-fc-primary-inverted">
+  <dt-stack direction="row" gap="400" class="d-bgc-critical-strong d-p8">
+    <dt-icon name="alert-triangle" size="200" />
+    <dt-text kind="label" size="sm">Critical</dt-text>
+  </dt-stack>
+  ...
+</dt-stack>
+```
+
+### Considerations
+
+1. **Inheritance pattern**: The tutorial uses `d-fc-primary-inverted` on parent for color inheritance. `<dt-text>` without a `tone` prop will inherit this naturally — good!
+
+2. **Keeping tutorial focused**: The page teaches CSS utilities. Adding `<dt-text>` for text demonstrates the component-first principle while keeping other utilities for their appropriate use cases (spacing, borders, backgrounds).
+
+3. **Step description update**: Step 11 heading is "Apply an appropriate text style" — consider updating to "Apply a text style with DtText" or similar.
+
+4. **Old class naming**: The page uses `d-label--sm` (old) not `d-text-label--sm` (new). Migrating to component avoids needing to fix the class name.
 
 ---
 
