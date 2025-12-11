@@ -33,16 +33,12 @@
       </dt-text>
       <dt-stack gap="300">
         <dt-text
+          v-for="size in bodySizes"
+          :key="`body-${size}`"
           kind="body"
-          size="sm"
+          :size="size"
         >
-          Body sm
-        </dt-text>
-        <dt-text
-          kind="body"
-          size="md"
-        >
-          Body md
+          {{ `Body ${size}` }}
         </dt-text>
       </dt-stack>
     </section>
@@ -58,16 +54,12 @@
       </dt-text>
       <dt-stack gap="300">
         <dt-text
+          v-for="size in labelSizes"
+          :key="`label-${size}`"
           kind="label"
-          size="sm"
+          :size="size"
         >
-          Label sm
-        </dt-text>
-        <dt-text
-          kind="label"
-          size="md"
-        >
-          Label md
+          {{ `Label ${size}` }}
         </dt-text>
       </dt-stack>
     </section>
@@ -83,16 +75,12 @@
       </dt-text>
       <dt-stack gap="300">
         <dt-text
+          v-for="size in codeSizes"
+          :key="`code-${size}`"
           kind="code"
-          size="sm"
+          :size="size"
         >
-          Code sm
-        </dt-text>
-        <dt-text
-          kind="code"
-          size="md"
-        >
-          Code md
+          {{ `Code ${size}` }}
         </dt-text>
       </dt-stack>
     </section>
@@ -265,6 +253,18 @@ export default {
   computed: {
     headlineSizes () {
       return TEXT_SIZE_MODIFIERS.headline;
+    },
+
+    bodySizes () {
+      return TEXT_SIZE_MODIFIERS.body;
+    },
+
+    labelSizes () {
+      return TEXT_SIZE_MODIFIERS.label;
+    },
+
+    codeSizes () {
+      return TEXT_SIZE_MODIFIERS.code;
     },
 
     truncationExamples () {

@@ -24,7 +24,7 @@ vueCode='
 
 Use in place of manually applying Text Styles. Examples of manual application you should avoid include:
 
-* Applying Text Styles classes, e.g. `class="d-body--md"`
+* Applying Text Styles classes, e.g. `class="d-text-body--md"`
 * Combinations of CSS Utilities, e.g. `class="d-fs-300 d-fw-semibold d-lh-300"`
 * Custom CSS, e.g. `.foo { font: var(--dt-typography-body-md); }`.
 
@@ -82,11 +82,17 @@ vueCode='
 
 All kinds support `size` prop, but not all sizes are available for each kind. Default size is `md`.
 
+- **headline**: xxxl, xxl, xl, lg, md, sm, xs
+- **body, label, code**: lg, md, sm, xs
+
 <code-well-header>
   <dt-stack class="d-w100p d-ba d-bar4">
     <table class="d-w100p d-table">
       <tr>
         <th></th>
+        <th>
+          <dt-text as="code" kind="code">xs</dt-text>
+        </th>
         <th>
           <dt-text as="code" kind="code">sm</dt-text>
         </th>
@@ -102,11 +108,17 @@ All kinds support `size` prop, but not all sizes are available for each kind. De
         <th>
           <dt-text as="code" kind="code">xxl</dt-text>
         </th>
+        <th>
+          <dt-text as="code" kind="code">xxxl</dt-text>
+        </th>
       </tr>
       <tr class="d-va-baseline">
         <th scope="row">
           <dt-text as="code" align="end" kind="code">headline</dt-text>
         </th>
+        <td>
+          <dt-text kind="headline" as="h2" size="xs" tone="primary">Text</dt-text>
+        </td>
         <td>
           <dt-text kind="headline" as="h2" size="sm" tone="primary">Text</dt-text>
         </td>
@@ -122,16 +134,25 @@ All kinds support `size` prop, but not all sizes are available for each kind. De
         <td>
           <dt-text kind="headline" as="h2" size="xxl" tone="primary">Text</dt-text>
         </td>
+        <td>
+          <dt-text kind="headline" as="h2" size="xxxl" tone="primary">Text</dt-text>
+        </td>
       </tr>
       <tr class="d-va-baseline">
         <th scope="row">
           <dt-text as="code" align="end" kind="code">body</dt-text>
         </th>
         <td>
+          <dt-text kind="body" as="p" size="xs" tone="primary">Text</dt-text>
+        </td>
+        <td>
           <dt-text kind="body" as="p" size="sm" tone="primary">Text</dt-text>
         </td>
         <td>
           <dt-text kind="body" as="p" tone="primary">Text</dt-text>
+        </td>
+        <td>
+          <dt-text kind="body" as="p" size="lg" tone="primary">Text</dt-text>
         </td>
         <td><dt-text tone="muted" size="sm" title="not available">-</dt-text></td>
         <td><dt-text tone="muted" size="sm" title="not available">-</dt-text></td>
@@ -142,10 +163,16 @@ All kinds support `size` prop, but not all sizes are available for each kind. De
           <dt-text as="code" align="end" kind="code">label</dt-text>
         </th>
         <td>
+          <dt-text kind="label" as="p" size="xs" tone="primary">Text</dt-text>
+        </td>
+        <td>
           <dt-text kind="label" as="p" size="sm" tone="primary">Text</dt-text>
         </td>
         <td>
           <dt-text kind="label" as="p" tone="primary">Text</dt-text>
+        </td>
+        <td>
+          <dt-text kind="label" as="p" size="lg" tone="primary">Text</dt-text>
         </td>
         <td><dt-text tone="muted" size="sm" title="not available">-</dt-text></td>
         <td><dt-text tone="muted" size="sm" title="not available">-</dt-text></td>
@@ -156,10 +183,16 @@ All kinds support `size` prop, but not all sizes are available for each kind. De
           <dt-text as="code" align="end" kind="code">code</dt-text>
         </th>
         <td>
+          <dt-text kind="code" as="code" size="xs" tone="primary">Text</dt-text>
+        </td>
+        <td>
           <dt-text kind="code" as="code" size="sm" tone="primary">Text</dt-text>
         </td>
         <td>
           <dt-text kind="code" as="code" tone="primary">Text</dt-text>
+        </td>
+        <td>
+          <dt-text kind="code" as="code" size="lg" tone="primary">Text</dt-text>
         </td>
         <td><dt-text tone="muted" size="sm" title="not available">-</dt-text></td>
         <td><dt-text tone="muted" size="sm" title="not available">-</dt-text></td>

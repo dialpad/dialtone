@@ -60,8 +60,9 @@ export default {
     },
 
     /**
-     * Size variant within the selected `kind`. Falls back to `md` if unsupported. e.g. `body` doesn't have `lg` variant.
-     * @values sm, md, lg, xl, xxl
+     * Size variant within the selected `kind`. Falls back to `md` if unsupported.
+     * Headline supports all sizes; body/label/code support lg, md, sm, xs.
+     * @values xxxl, xxl, xl, lg, md, sm, xs
      */
     size: {
       type: String,

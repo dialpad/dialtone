@@ -1,15 +1,15 @@
 export const TEXT_KIND_MODIFIERS = {
-  headline: 'd-headline',
-  body: 'd-body',
-  label: 'd-label',
-  code: 'd-code',
+  headline: 'd-text-headline',
+  body: 'd-text-body',
+  label: 'd-text-label',
+  code: 'd-text-code',
 };
 
 export const TEXT_SIZE_MODIFIERS = {
-  headline: ['sm', 'md', 'lg', 'xl', 'xxl'],
-  body: ['sm', 'md'],
-  label: ['sm', 'md'],
-  code: ['sm', 'md'],
+  headline: ['xxxl', 'xxl', 'xl', 'lg', 'md', 'sm', 'xs'],
+  body: ['lg', 'md', 'sm', 'xs'],
+  label: ['lg', 'md', 'sm', 'xs'],
+  code: ['lg', 'md', 'sm', 'xs'],
 };
 
 import TEXT_TONE_TOKENS from './text_tone_tokens.js';

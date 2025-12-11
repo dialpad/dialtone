@@ -4,6 +4,41 @@
 
 ---
 
+## 📊 Current State (2025-12-10)
+
+**Status:** Vue 3 implementation complete with new typography system.
+
+**Component API:**
+```html
+<dt-text kind="headline" size="lg" as="h2">Title</dt-text>
+<!-- Renders: <h2 class="d-text d-text-headline--lg">Title</h2> -->
+```
+
+**Props:**
+| Prop | Values | Default |
+|------|--------|---------|
+| `as` | Any HTML tag | `span` |
+| `kind` | headline, body, label, code | `null` |
+| `size` | xxxl, xxl, xl, lg, md, sm, xs (contextual) | `md` |
+| `tone` | Dialtone foreground tokens | `null` |
+| `align` | start, center, end, justify | `null` |
+| `truncate` | boolean | `false` |
+| `maxLines` | number | `null` |
+| `numeric` | boolean | `false` |
+| `wrap` | wrap, nowrap, balance, pretty | `null` |
+| `trim` | start, end, both | `null` |
+| `text` | string | `null` |
+
+**Size Availability:**
+| Kind | Sizes |
+|------|-------|
+| headline | xxxl, xxl, xl, lg, md, sm, xs |
+| body, label, code | lg, md, sm, xs |
+
+**Next:** Vue 2 implementation (deferred).
+
+---
+
 ## 📌 Changelog
 
 - **2025-10-17** — Restructured plan with explicit token alignment guidance, introduced changelog + decision log scaffolding, and recorded research references for typography docs.
@@ -22,10 +57,92 @@
 - **2025-12-10** — Completed API simplification: removed `density` and `strength` props from Vue 3 implementation. Removed 4 constants, simplified `getVariantClass()` method, updated tests (22 passing), stories, and documentation.
 - **2025-12-10** — Removed `helper` as a valid `kind` value. Updated constants, stories, and documentation.
 - **2025-12-10** — Removed `eyebrow` as a valid `size` value. Updated constants, JSDoc, and documentation.
+- **2025-12-10** — **Typography System Refactor**: Completed alignment with redesigned typography token system. Class prefix changed from `d-{kind}` to `d-text-{kind}`, new size scale (xxxl→xs). Updated constants, tests (22 passing), stories, and documentation.
 
 ---
 
-## 🔄 Current Work: API Simplification (2025-12-10)
+## ✅ Completed: Typography System Refactor (2025-12-10)
+
+**Objective:** Align DtText component with the redesigned typography token system.
+
+**Rationale:** The typography system has been redesigned with:
+1. New class naming convention: `d-text-{kind}--{size}` (was `d-{kind}--{size}`)
+2. New size scale with expanded options and consistent availability across kinds
+
+**Scope:** Vue 3 component files only. LESS/CSS and design tokens handled separately by user. **Vue 2 changes deferred** — focus on Vue 3 first, mirror to Vue 2 later.
+
+### Key Changes
+
+#### Class Prefix Change
+```
+OLD: d-headline--lg, d-body--md, d-label--sm, d-code--md
+NEW: d-text-headline--lg, d-text-body--md, d-text-label--sm, d-text-code--md
+```
+
+#### Size Scale Change
+| Kind | Old Sizes | New Sizes |
+|------|-----------|-----------|
+| headline | sm, md, lg, xl, xxl | xxxl, xxl, xl, lg, md, sm, xs |
+| body | sm, md | lg, md, sm, xs |
+| label | sm, md | lg, md, sm, xs |
+| code | sm, md | lg, md, sm, xs |
+
+### Files Modified
+
+| File | Changes |
+|------|---------|
+| `packages/dialtone-vue3/components/text/text_constants.js` | Updated `TEXT_KIND_MODIFIERS` prefixes (`d-headline` → `d-text-headline`), updated `TEXT_SIZE_MODIFIERS` arrays |
+| `packages/dialtone-vue3/components/text/text.vue` | Updated JSDoc `@values` for `size` prop |
+| `packages/dialtone-vue3/components/text/text.test.js` | Updated all class name assertions (`d-headline--lg` → `d-text-headline--lg`) |
+| `packages/dialtone-vue3/components/text/text_variants.story.vue` | Updated size arrays, added computed properties for body/label/code sizes |
+| `apps/dialtone-documentation/docs/components/text.md` | Updated Size table with new columns (xs, xxxl), updated class example |
+
+### Tasks
+
+- [x] Update `TEXT_KIND_MODIFIERS` in `text_constants.js`:
+  - `headline: 'd-headline'` → `headline: 'd-text-headline'`
+  - `body: 'd-body'` → `body: 'd-text-body'`
+  - `label: 'd-label'` → `label: 'd-text-label'`
+  - `code: 'd-code'` → `code: 'd-text-code'`
+- [x] Update `TEXT_SIZE_MODIFIERS` in `text_constants.js`:
+  - `headline: ['sm', 'md', 'lg', 'xl', 'xxl']` → `headline: ['xxxl', 'xxl', 'xl', 'lg', 'md', 'sm', 'xs']`
+  - `body: ['sm', 'md']` → `body: ['lg', 'md', 'sm', 'xs']`
+  - `label: ['sm', 'md']` → `label: ['lg', 'md', 'sm', 'xs']`
+  - `code: ['sm', 'md']` → `code: ['lg', 'md', 'sm', 'xs']`
+- [x] Update JSDoc `@values` for `size` prop in `text.vue`
+- [x] Update all class assertions in `text.test.js`
+- [x] Update `text_variants.story.vue` with new sizes
+- [x] Update `text.md` documentation
+- [x] Run tests to verify (22 tests passing)
+- [x] Double-check for any missed references (grep verified no old class names remain)
+
+### New Variant Matrix (2025-12-10)
+
+| Kind | Sizes | CSS Classes |
+|------|-------|-------------|
+| headline | xxxl, xxl, xl, lg, md, sm, xs | `d-text-headline--xxxl`, `d-text-headline--xxl`, `d-text-headline--xl`, `d-text-headline--lg`, `d-text-headline--md`, `d-text-headline--sm`, `d-text-headline--xs` |
+| body | lg, md, sm, xs | `d-text-body--lg`, `d-text-body--md`, `d-text-body--sm`, `d-text-body--xs` |
+| label | lg, md, sm, xs | `d-text-label--lg`, `d-text-label--md`, `d-text-label--sm`, `d-text-label--xs` |
+| code | lg, md, sm, xs | `d-text-code--lg`, `d-text-code--md`, `d-text-code--sm`, `d-text-code--xs` |
+
+### API After Refactor
+
+Props:
+- `as` — HTML tag/component (default: `span`)
+- `kind` — headline, body, label, code (default: `null`)
+- `size` — xxxl, xxl, xl, lg, md, sm, xs (contextual to kind, default: `md`)
+- `tone` — foreground color token
+- `align` — start, center, end, justify
+- `truncate` — single-line ellipsis
+- `maxLines` — multi-line clamp
+- `numeric` — tabular figures
+- `text` — string fallback for slot
+- `wrap` — wrap, nowrap, balance, pretty
+- `trim` — start, end, both
+
+---
+
+## ✅ Completed: API Simplification (2025-12-10)
 
 **Objective:** Strip down `density` and `strength` props to establish a clean baseline before typography system redesign.
 
@@ -33,17 +150,17 @@
 
 **Scope:** Vue 3 component files only. LESS/CSS and design tokens handled separately. **Vue 2 changes deferred** — focus on Vue 3 first, mirror to Vue 2 later.
 
-### Files to Modify
+### Files Modified
 
 | File | Changes |
 |------|---------|
-| `packages/dialtone-vue3/components/text/text.vue` | Remove `strength` prop (lines 76-82), `density` prop (lines 85-91), validation logic in `getVariantClass()` (lines 258-278) |
-| `packages/dialtone-vue3/components/text/text_constants.js` | Remove `TEXT_STRENGTH_MODIFIERS`, `TEXT_DENSITY_MODIFIERS`, `TEXT_STRENGTH_BY_KIND_AND_SIZE`, `TEXT_DENSITY_BY_KIND_AND_SIZE` constants and exports |
-| `packages/dialtone-vue3/components/text/text.test.js` | Remove tests for strength/density validation warnings and combination tests |
-| `packages/dialtone-vue3/components/text/text.stories.js` | Remove strength/density from imports, argTypes, and default args |
-| `packages/dialtone-vue3/components/text/text_default.story.vue` | Remove `:strength` and `:density` bindings |
-| `packages/dialtone-vue3/components/text/text_variants.story.vue` | Remove all `strength` and `density` prop usages from examples |
-| `apps/dialtone-documentation/docs/components/text.md` | Remove Density and Strength documentation sections |
+| `packages/dialtone-vue3/components/text/text.vue` | Removed `strength` and `density` props, simplified `getVariantClass()` |
+| `packages/dialtone-vue3/components/text/text_constants.js` | Removed `TEXT_STRENGTH_MODIFIERS`, `TEXT_DENSITY_MODIFIERS`, `TEXT_STRENGTH_BY_KIND_AND_SIZE`, `TEXT_DENSITY_BY_KIND_AND_SIZE` |
+| `packages/dialtone-vue3/components/text/text.test.js` | Removed strength/density tests |
+| `packages/dialtone-vue3/components/text/text.stories.js` | Removed strength/density controls |
+| `packages/dialtone-vue3/components/text/text_default.story.vue` | Removed bindings |
+| `packages/dialtone-vue3/components/text/text_variants.story.vue` | Removed usages |
+| `apps/dialtone-documentation/docs/components/text.md` | Removed documentation sections |
 
 ### Tasks
 
@@ -57,22 +174,6 @@
 - [x] Update `text_variants.story.vue` (remove usages)
 - [x] Update `text.md` documentation (remove sections)
 - [x] Run tests to verify nothing breaks (22 tests passing)
-- [ ] Verify Storybook still renders correctly
-
-### Simplified API After Changes
-
-Props remaining:
-- `as` — HTML tag/component
-- `kind` — headline, body, label, code
-- `size` — sm, md, lg, xl, xxl (contextual to kind)
-- `tone` — foreground color token
-- `align` — start, center, end, justify
-- `truncate` — single-line ellipsis
-- `maxLines` — multi-line clamp
-- `numeric` — tabular figures
-- `text` — string fallback for slot
-- `wrap` — wrap, nowrap, balance, pretty
-- `trim` — start, end, both
 
 ---
 
@@ -139,14 +240,14 @@ Props remaining:
 Renders as:
 
 ```html
-<h2 class="d-text d-headline--lg">Text</h2>
+<h2 class="d-text d-text-headline--lg">Text</h2>
 ```
 
 ---
 
 ## 🎯 The Problem
 
-1. Devs bypass text styles (`d-headline--lg`) for utilities (`d-fs-300 d-fw-semibold`)
+1. Devs bypass text styles (`d-text-headline--lg`) for utilities (`d-fs-300 d-fw-semibold`)
 2. Inconsistent rendering across product
 3. Industry standard → components over raw utilities (8/8 major design systems)
 4. Solution → component enforces tokens, allows controlled overrides
@@ -169,26 +270,18 @@ Renders as:
 - **Shared source of truth:** Publish the matrices in this plan and ship a mirrored reference within component docs so engineers know exactly which permutations are valid and which intentionally fall back.
 - **Future additions:** Document how new styles (e.g., `headline--xxxl`, additional densities) will flow from tokens → utilities → component props to keep the contract coherent.
 
-#### ✅ Variant Matrix (verified 2025-10-20)
+#### ✅ Variant Matrix (updated 2025-12-10)
 
-| Kind | Size | Strength | Density | Utility Tokens |
-| --- | --- | --- | --- | --- |
-| headline | eyebrow | – | – | `d-headline--eyebrow` |
-| headline | sm | soft | compact | `d-headline--sm`, `d-headline--sm-soft`, `d-headline--sm-compact`, `d-headline--sm-soft-compact` |
-| headline | md | – | compact | `d-headline--md`, `d-headline--md-compact` |
-| headline | lg | soft | compact | `d-headline--lg`, `d-headline--lg-soft`, `d-headline--lg-compact`, `d-headline--lg-soft-compact` |
-| headline | xl | – | compact | `d-headline--xl`, `d-headline--xl-compact` |
-| headline | xxl | – | compact | `d-headline--xxl`, `d-headline--xxl-compact` |
-| body | sm | – | compact | `d-body--sm`, `d-body--sm-compact` |
-| body | md | – | compact | `d-body--md`, `d-body--md-compact` |
-| label | sm | plain | compact | `d-label--sm`, `d-label--sm-plain`, `d-label--sm-compact`, `d-label--sm-plain-compact` |
-| label | md | plain | compact | `d-label--md`, `d-label--md-plain`, `d-label--md-compact`, `d-label--md-plain-compact` |
-| helper | sm | – | – | `d-helper--sm` |
-| helper | md | – | – | `d-helper--md` |
-| code | sm | – | – | `d-code--sm` |
-| code | md | – | – | `d-code--md` |
+> **Note:** Typography system redesigned. See "Current Work: Typography System Refactor" section above for the new variant matrix.
 
-Source of truth cross-checked against `apps/dialtone-documentation/docs/_data/type.json`; storybook examples in `packages/dialtone-vue3/components/text/text_variants.story.vue` cover each combination.
+| Kind | Sizes | CSS Classes |
+|------|-------|-------------|
+| headline | xxxl, xxl, xl, lg, md, sm, xs | `d-text-headline--{size}` |
+| body | lg, md, sm, xs | `d-text-body--{size}` |
+| label | lg, md, sm, xs | `d-text-label--{size}` |
+| code | lg, md, sm, xs | `d-text-code--{size}` |
+
+Source of truth: `apps/dialtone-documentation/docs/_data/type.json` and `apps/dialtone-documentation/docs/design/typography/index.md`.
 
 #### 📄 Documentation & Content Plan
 
@@ -239,14 +332,14 @@ Source of truth cross-checked against `apps/dialtone-documentation/docs/_data/ty
 Renders as:
 
 ```html
-<h2 class="d-text d-headline--lg">Page Title</h2>
-<div class="d-text d-body--md">Body text</div>
-<span class="d-text d-label--sm">Label text</span>
+<h2 class="d-text d-text-headline--lg">Page Title</h2>
+<div class="d-text d-text-body--md">Body text</div>
+<span class="d-text d-text-label--sm">Label text</span>
 ```
 
 **Why:**
 
-- Dialtone already unified → `d-headline--lg`, `d-body--md`, `d-label--sm` all = "text styles"
+- Dialtone already unified → `d-text-headline--lg`, `d-text-body--md`, `d-text-label--sm` all = "text styles"
 - Single import, one mental model
 - Easier migration from utilities → one component target
 - Simpler for designers learning code
@@ -261,16 +354,11 @@ interface DtTextProps {
   as?: string  // Any HTML element (no validator — follows Stack pattern)
 
   // Typography scale (optional — no classes if omitted)
-  kind?: 'headline' | 'body' | 'label' | 'helper' | 'code'
-  size?: KindSize  // Defaults to 'md' if kind is set, contextual: eyebrow/sm/md/lg/xl/xxl
-
-  // Dialtone modifiers (optional — no classes if omitted)
-  strength?: 'soft' | 'plain'  // headline-soft, label-plain
-  density?: 'compact'           // tighter line-height
+  kind?: 'headline' | 'body' | 'label' | 'code'
+  size?: KindSize  // Defaults to 'md' if kind is set, contextual: xxxl/xxl/xl/lg/md/sm/xs
 
   // Overrides (optional — inherits if nested)
-  weight?: 'normal' | 'medium' | 'semibold' | 'bold'
-  color?: string  // CSS color or token — no default, inherits naturally
+  tone?: string   // Foreground color token (maps to d-fc-{tone})
   align?: 'start' | 'center' | 'end' | 'justify'  // Logical values (RTL-friendly)
 
   // Features
@@ -278,6 +366,8 @@ interface DtTextProps {
   maxLines?: number    // multi-line truncation via line-clamp (a11y: content still announced)
   numeric?: boolean    // tabular-nums for data
   text?: string        // Alternative to slot — both work
+  wrap?: 'wrap' | 'nowrap' | 'balance' | 'pretty'  // Text wrapping behavior
+  trim?: 'start' | 'end' | 'both'  // Leading space trimming
 
   // Escape hatch
   class?: string
@@ -292,31 +382,23 @@ interface DtTextProps {
 <dt-text>Hello</dt-text>
 <!-- Renders: <span class="d-text">Hello</span> -->
 
-<!-- 2. Kind with default size → d-text d-headline--md -->
+<!-- 2. Kind with default size → d-text d-text-headline--md -->
 <dt-text kind="headline">Title</dt-text>
-<!-- Renders: <span class="d-text d-headline--md">Title</span> -->
+<!-- Renders: <span class="d-text d-text-headline--md">Title</span> -->
 
-<!-- 3. Kind + size → d-text d-headline--lg -->
+<!-- 3. Kind + size → d-text d-text-headline--lg -->
 <dt-text kind="headline" size="lg">Title</dt-text>
-<!-- Renders: <span class="d-text d-headline--lg">Title</span> -->
+<!-- Renders: <span class="d-text d-text-headline--lg">Title</span> -->
 
-<!-- 4. Modifiers → d-text d-headline--lg-compact -->
-<dt-text kind="headline" size="lg" density="compact">Compact Title</dt-text>
-<!-- Renders: <span class="d-text d-headline--lg-compact">Compact Title</span> -->
-
-<!-- 5. Overrides → d-text d-headline--lg-compact d-fw-bold -->
-<dt-text kind="headline" size="lg" density="compact" weight="bold">Bold Title</dt-text>
-<!-- Renders: <span class="d-text d-headline--lg-compact d-fw-bold">Bold Title</span> -->
-
-<!-- 6. Features → d-text d-truncate d-fvn-tabular -->
+<!-- 4. Features → d-text d-truncate d-text--numeric -->
 <dt-text truncate numeric>123.456</dt-text>
-<!-- Renders: <span class="d-text d-truncate d-fvn-tabular">123.456</span> -->
+<!-- Renders: <span class="d-text d-truncate d-text--numeric">123.456</span> -->
 
-<!-- 7. Multi-line truncation → class + custom property -->
+<!-- 5. Multi-line truncation → class + custom property -->
 <dt-text :max-lines="3">Long content...</dt-text>
-<!-- Renders: <span class="d-text d-text__clamp" style="--dt-text-line-clamp: 3">Long content...</span> -->
+<!-- Renders: <span class="d-text d-text--clamp" style="--dt-text-line-clamp: 3">Long content...</span> -->
 
-<!-- 8. Text prop → alternative to slot -->
+<!-- 6. Text prop → alternative to slot -->
 <dt-text text="Hello" />
 <!-- Renders: <span class="d-text">Hello</span> -->
 <!-- Same as: <dt-text>Hello</dt-text> -->
@@ -368,18 +450,18 @@ interface DtTextProps {
 
 ```html
 <!-- ✅ OLD: Still works, always will -->
-<div class="d-headline--lg">Title</div>
+<div class="d-text-headline--lg">Title</div>
 
 <!-- ✅ NEW: Opt-in alternative -->
 <dt-text kind="headline" size="lg">Title</dt-text>
-<!-- Renders: <span class="d-text d-headline--lg">Title</span> -->
+<!-- Renders: <span class="d-text d-text-headline--lg">Title</span> -->
 
 <!-- ✅ BOTH: Can coexist -->
 <dt-text kind="headline" size="lg">New</dt-text>
-<p class="d-body--md">Legacy</p>
+<p class="d-text-body--md">Legacy</p>
 <!-- Renders:
-<span class="d-text d-headline--lg">New</span>
-<p class="d-body--md">Legacy</p>
+<span class="d-text d-text-headline--lg">New</span>
+<p class="d-text-body--md">Legacy</p>
 -->
 ```
 
@@ -451,7 +533,7 @@ Writing NEW code?
 ```html
 <!-- Chakra pattern — object syntax -->
 <dt-text kind="headline" :size="{ mobile: 'sm', desktop: 'lg' }">Responsive</dt-text>
-<!-- Renders: <span class="d-text d-headline--sm d-headline--lg@desktop">Responsive</span> -->
+<!-- Renders: <span class="d-text d-text-headline--sm d-text-headline--lg@desktop">Responsive</span> -->
 
 <!-- NOT array syntax -->
 <dt-text :size="['sm', 'md', 'lg']" />
@@ -901,17 +983,17 @@ export default {
 ```html
 <!-- Basic usage -->
 <dt-text kind="headline" size="lg" as="h2">Page Title</dt-text>
-<!-- Renders: <h2 class="d-text d-headline--lg">Page Title</h2> -->
+<!-- Renders: <h2 class="d-text d-text-headline--lg">Page Title</h2> -->
 
 <!-- Text prop (alternative to slot) -->
 <dt-text kind="headline" size="lg" as="h2" text="Page Title" />
-<!-- Renders: <h2 class="d-text d-headline--lg">Page Title</h2> -->
+<!-- Renders: <h2 class="d-text d-text-headline--lg">Page Title</h2> -->
 
-<!-- With overrides -->
-<dt-text kind="body" size="md" weight="bold" color="critical">
+<!-- With tone -->
+<dt-text kind="body" size="md" tone="critical">
   Error message
 </dt-text>
-<!-- Renders: <span class="d-text d-body--md d-fw-bold d-fc-critical">Error message</span> -->
+<!-- Renders: <span class="d-text d-text-body--md d-fc-critical">Error message</span> -->
 
 <!-- Single-line truncation -->
 <dt-text truncate>Long text that truncates with ellipsis...</dt-text>
@@ -922,17 +1004,17 @@ export default {
   Very long text that will be truncated after three lines with ellipsis.
   Screen readers still announce the full content.
 </dt-text>
-<!-- Renders: <span class="d-text d-text__clamp" style="--dt-text-line-clamp: 3">Very long text...</span> -->
+<!-- Renders: <span class="d-text d-text--clamp" style="--dt-text-line-clamp: 3">Very long text...</span> -->
 
 <!-- Logical alignment (RTL-friendly) -->
 <dt-text align="start">Aligns to start (left in LTR, right in RTL)</dt-text>
-<!-- Renders: <span class="d-text d-ta-left">Aligns to start (left in LTR, right in RTL)</span> -->
+<!-- Renders: <span class="d-text d-text--align-start">Aligns to start (left in LTR, right in RTL)</span> -->
 
 <dt-text align="end">Aligns to end (right in LTR, left in RTL)</dt-text>
-<!-- Renders: <span class="d-text d-ta-right">Aligns to end (right in LTR, left in RTL)</span> -->
+<!-- Renders: <span class="d-text d-text--align-end">Aligns to end (right in LTR, left in RTL)</span> -->
 
-<!-- Color inheritance -->
-<dt-text color="success">
+<!-- Tone inheritance -->
+<dt-text tone="success">
   Green parent
   <dt-text>Green child (inherits naturally)</dt-text>
 </dt-text>

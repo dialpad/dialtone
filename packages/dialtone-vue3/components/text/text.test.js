@@ -37,7 +37,7 @@ describe('DtText', () => {
   it('applies typography modifier class for kind and size', () => {
     const wrapper = mountComponent({ kind: 'headline', size: 'lg' });
 
-    expect(wrapper.classes()).toContain('d-headline--lg');
+    expect(wrapper.classes()).toContain('d-text-headline--lg');
   });
 
   it('falls back to default size when invalid size provided', () => {
@@ -45,7 +45,7 @@ describe('DtText', () => {
 
     const wrapper = mountComponent({ kind: 'headline', size: 'unknown' });
 
-    expect(wrapper.classes()).toContain('d-headline--md');
+    expect(wrapper.classes()).toContain('d-text-headline--md');
     expect(warnSpy).toHaveBeenCalledWith(expect.stringContaining('size="unknown"'));
   });
 
@@ -135,7 +135,7 @@ describe('DtText', () => {
       attachTo: mountTarget,
     });
 
-    expect(wrapper.classes()).toEqual(expect.arrayContaining(['d-text', 'd-headline--md']));
+    expect(wrapper.classes()).toEqual(expect.arrayContaining(['d-text', 'd-text-headline--md']));
 
     wrapper.unmount();
     mountTarget.remove();
@@ -195,7 +195,7 @@ describe('DtText', () => {
 
     expect(wrapper.classes()).toEqual(expect.arrayContaining([
       'd-text',
-      'd-headline--lg',
+      'd-text-headline--lg',
       TEXT_WRAP_MODIFIERS.balance,
       TEXT_TRIM_MODIFIERS.both,
     ]));
