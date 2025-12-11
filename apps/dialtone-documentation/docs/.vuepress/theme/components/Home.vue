@@ -11,7 +11,7 @@
         <dt-text as="h1" kind="headline" size="xxxl" strength="normal" class="d-mb12 d-ff-marketing">
           Improve your UI's reception with Dialtone
         </dt-text>
-        <dt-text as="p" kind="body" size="lg" tone="secondary" class="d-mb16">
+        <dt-text kind="body" size="lg" tone="secondary" class="d-mb16">
           Documented styles, components, and utility classes to help you quickly design and build unified experiences across Dialpad experiences.
         </dt-text>
         <dt-stack direction="row" justify="start" class="d-mb32">
@@ -68,12 +68,12 @@
         <router-link class="d-fc-primary h:d-td-underline d-td-none d-bar8 d-pt4" to="/design/">
           <dt-stack gap="600">
             <svg-loader class="d-h96" name="home-design-language" />
-            <dt-text as="h2" kind="headline" size="xxl" strength="normal" class="d-ff-marketing">
+            <dt-text kind="headline" size="xxl" strength="normal" class="d-ff-marketing">
               Design Language
             </dt-text>
           </dt-stack>
         </router-link>
-        <dt-text as="p" tone="secondary">
+        <dt-text kind="body" tone="secondary">
           Foundational color, iconography, and spacing guidelines
         </dt-text>
         <dt-stack gap="300">
@@ -86,7 +86,7 @@
         <router-link class="d-fc-primary h:d-td-underline d-td-none d-bar8 d-pt4" to="/components/">
           <dt-stack gap="600">
             <svg-loader class="d-h96" name="home-components" />
-            <dt-text as="h2" kind="headline" size="xxl" strength="normal" class="d-ff-marketing">
+            <dt-text kind="headline" size="xxl" strength="normal" class="d-ff-marketing">
               Component
             </dt-text>
           </dt-stack>
