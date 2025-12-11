@@ -341,16 +341,16 @@ Positioned components like [Popovers](/components/popover.html), [Dropdowns](/co
           <dt-stack gap="500">
             <dt-stack gap="400" class="d-jc-space-between">
               <dt-stack gap="200">
-                <h2 class="d-headline--xl-compact">Katie Rodriguez</h2>
+                <dt-text as="h2" kind="headline" size="xl" density="200">Katie Rodriguez</dt-text>
                 <dt-stack direction="row" gap="350">
                   <span class="d-fc-success">Available</span>
                   <span>&bull;</span>
                   <span class="d-fc-tertiary">Working from coffee shop</span>
                 </dt-stack>
               </dt-stack>
-              <dt-stack class="d-body--md-compact">
-                <span class="d-fw-semibold d-fc-tertiary">Chief Customer Success Officer</span>
-                <span><strong class="d-fw-semibold">6:19 am</strong> local time</span>
+              <dt-stack>
+                <dt-text kind="body" size="md" density="200" strength="semibold" tone="tertiary">Chief Customer Success Officer</dt-text>
+                <dt-text kind="body" size="md" density="200"><dt-text strength="semibold">6:19 am</dt-text> local time</dt-text>
               </dt-stack>
             </dt-stack>
             <dt-stack gap="400" direction="row" class="d-jc-space-between">
@@ -386,16 +386,16 @@ Positioned components like [Popovers](/components/popover.html), [Dropdowns](/co
           <dt-stack gap="500">
             <dt-stack gap="400" class="d-jc-space-between">
               <dt-stack gap="200">
-                <h2 class="d-headline--xl-compact">Katie Rodriguez</h2>
+                <dt-text as="h2" kind="headline" size="xl" density="200">Katie Rodriguez</dt-text>
                 <dt-stack direction="row" gap="350">
                   <span class="d-fc-success">Available</span>
                   <span>&bull;</span>
                   <span class="d-fc-tertiary">Working from coffee shop</span>
                 </dt-stack>
               </dt-stack>
-              <dt-stack class="d-body--md-compact">
-                <span class="d-fw-semibold d-fc-tertiary">Chief Customer Success Officer</span>
-                <span><strong class="d-fw-semibold">6:19 am</strong> local time</span>
+              <dt-stack>
+                <dt-text kind="body" size="md" density="200" strength="semibold" tone="tertiary">Chief Customer Success Officer</dt-text>
+                <dt-text kind="body" size="md" density="200"><dt-text strength="semibold">6:19 am</dt-text> local time</dt-text>
               </dt-stack>
             </dt-stack>
             <dt-stack gap="400" direction="row" class="d-jc-space-between">
@@ -431,16 +431,16 @@ Positioned components like [Popovers](/components/popover.html), [Dropdowns](/co
           <dt-stack gap="500">
             <dt-stack gap="400" class="d-jc-space-between">
               <dt-stack gap="200">
-                <h2 class="d-headline--xl-compact">Katie Rodriguez</h2>
+                <dt-text as="h2" kind="headline" size="xl" density="200">Katie Rodriguez</dt-text>
                 <dt-stack direction="row" gap="350">
                   <span class="d-fc-success">Available</span>
                   <span>&bull;</span>
                   <span class="d-fc-tertiary">Working from coffee shop</span>
                 </dt-stack>
               </dt-stack>
-              <dt-stack class="d-body--md-compact">
-                <span class="d-fw-semibold d-fc-tertiary">Chief Customer Success Officer</span>
-                <span><strong class="d-fw-semibold">6:19 am</strong> local time</span>
+              <dt-stack>
+                <dt-text kind="body" size="md" density="200" strength="semibold" tone="tertiary">Chief Customer Success Officer</dt-text>
+                <dt-text kind="body" size="md" density="200"><dt-text strength="semibold">6:19 am</dt-text> local time</dt-text>
               </dt-stack>
             </dt-stack>
             <dt-stack gap="400" direction="row" class="d-jc-space-between">
@@ -476,16 +476,16 @@ Positioned components like [Popovers](/components/popover.html), [Dropdowns](/co
           <dt-stack gap="500">
             <dt-stack gap="400" class="d-jc-space-between">
               <dt-stack gap="200">
-                <h2 class="d-headline--xl-compact">Katie Rodriguez</h2>
+                <dt-text as="h2" kind="headline" size="xl" density="200">Katie Rodriguez</dt-text>
                 <dt-stack direction="row" gap="350">
                   <span class="d-fc-success">Available</span>
                   <span>&bull;</span>
                   <span class="d-fc-tertiary">Working from coffee shop</span>
                 </dt-stack>
               </dt-stack>
-              <dt-stack class="d-body--md-compact">
-                <span class="d-fw-semibold d-fc-tertiary">Chief Customer Success Officer</span>
-                <span><strong class="d-fw-semibold">6:19 am</strong> local time</span>
+              <dt-stack>
+                <dt-text kind="body" size="md" density="200" strength="semibold" tone="tertiary">Chief Customer Success Officer</dt-text>
+                <dt-text kind="body" size="md" density="200"><dt-text strength="semibold">6:19 am</dt-text> local time</dt-text>
               </dt-stack>
             </dt-stack>
             <dt-stack gap="400" direction="row" class="d-jc-space-between">
@@ -731,11 +731,11 @@ showHtmlWarning />
           size="lg"
         />
         <dt-stack gap="200">
-          <span class="d-label--md-compact">Ted Anderson</span>
-          <dt-stack direction="row" gap="300" class="d-ai-baseline d-helper--sm d-fc-tertiary">
-            <span class="d-fvn-tabular d-ws-nowrap" >(913) 555-6745</span>
-            <span class="d-fc-muted">&bull;</span>
-            <span class="d-fvn-tabular">21:18</span>
+          <dt-text kind="label" size="md" density="200">Ted Anderson</dt-text>
+          <dt-stack direction="row" gap="300" class="d-ai-baseline">
+            <dt-text kind="body" size="xs" tone="tertiary" class="d-fvn-tabular d-ws-nowrap">(913) 555-6745</dt-text>
+            <dt-text kind="body" size="xs" tone="muted">&bull;</dt-text>
+            <dt-text kind="body" size="xs" tone="tertiary" class="d-fvn-tabular">21:18</dt-text>
           </dt-stack>
         </dt-stack>
       </dt-stack>
@@ -768,7 +768,7 @@ showHtmlWarning />
       </dt-stack>
     </dt-stack>
   </dt-mode-island>
-  <p class="d-fc-muted d-mt8">* Not real, still just an example</p>
+  <dt-text as="p" tone="muted" class="d-mt8">* Not real, still just an example</dt-text>
 </code-well-header>
 
 <code-example-tabs
@@ -779,11 +779,11 @@ vueCode='
     <dt-stack gap="400" direction="row">
       <dt-avatar full-name="TA" color="700" size="lg" />
       <dt-stack gap="200">
-        <span class="d-label--md-compact">Ted Anderson</span>
-        <dt-stack direction="row" gap="300" class="d-ai-baseline d-helper--sm d-fc-tertiary">
-          <span class="d-fvn-tabular d-ws-nowrap">(913) 555-6745</span>
-          <span class="d-fc-muted">&bull;</span>
-          <span class="d-fvn-tabular">21:18</span>
+        <dt-text kind="label" size="md" density="200">Ted Anderson</dt-text>
+        <dt-stack direction="row" gap="300" class="d-ai-baseline">
+          <dt-text kind="helper" size="sm" tone="tertiary" class="d-fvn-tabular d-ws-nowrap">(913) 555-6745</dt-text>
+          <dt-text kind="helper" size="sm" tone="muted">&bull;</dt-text>
+          <dt-text kind="helper" size="sm" tone="tertiary" class="d-fvn-tabular">21:18</dt-text>
         </dt-stack>
       </dt-stack>
     </dt-stack>
