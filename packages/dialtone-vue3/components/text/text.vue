@@ -160,7 +160,7 @@ export default {
 
     /**
      * Overrides font-weight. Applies to any kind/size combination.
-     * @values bold, semibold, medium, regular
+     * @values bold, semibold, medium, normal
      */
     strength: {
       type: String,

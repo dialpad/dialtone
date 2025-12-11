@@ -20,6 +20,8 @@
 | `as` | Any HTML tag | `span` |
 | `kind` | headline, body, label, code | `null` |
 | `size` | xxxl, xxl, xl, lg, md, sm, xs (contextual) | `md` |
+| `strength` | bold, semibold, medium, normal | `null` |
+| `density` | 100, 200, 300, 400, 500, 600 | `null` |
 | `tone` | Dialtone foreground tokens | `null` |
 | `align` | start, center, end, justify | `null` |
 | `truncate` | boolean | `false` |
@@ -41,7 +43,7 @@
 - **Invalid kind**: Console warning, no variant class applied
 - **Semantic heading suggestion**: `console.info()` (once per session) when `kind="headline"` used without `as="h1|h2|h3|h4|h5|h6"`
 
-**Tests:** 28 passing
+**Tests:** 40 passing
 
 **Next:** Vue 2 implementation (deferred).
 
@@ -69,6 +71,92 @@
 - **2025-12-10** — **Strict Size Validation**: Headline-only sizes (xxxl, xxl, xl) now throw an error when used with incompatible kinds (body, label, code). Universal sizes (lg, md, sm, xs) still fall back gracefully with a warning. Added 2 new tests (24 total).
 - **2025-12-10** — **Semantic Heading Info**: Added `console.info()` suggestion (once per session) when `kind="headline"` is used without a semantic heading element (`h1`-`h6`). Added 4 new tests (28 total).
 - **2025-12-10** — **Documentation Improvements**: Added storybook link to frontmatter, added `text` prop section, fixed hero example to include `kind="body"`, fixed typo in Trim section.
+- **2025-12-10** — **Strength & Density Props (v2)**: Implemented as simple independent modifiers. No validation matrices — applies to all kind/size combinations. Added 12 new tests (40 total).
+- **2025-12-10** — **Strength value rename**: Changed `regular` to `normal` to match CSS `--fw-normal` class naming.
+
+---
+
+## ✅ Completed: Re-add Strength & Density Props (2025-12-10)
+
+**Objective:** Re-introduce `strength` and `density` props as simple, independent modifiers that work with any kind/size combination.
+
+**Rationale:** The previous implementation had complex validation matrices (kind×size×strength×density). The new approach is much simpler — these are optional override modifiers that append utility classes.
+
+**Scope:** Vue 3 only. Vue 2 deferred.
+
+### New Design
+
+#### `strength` prop
+Controls font-weight override. No default — omitting adds no class.
+
+| Value | Class Added |
+|-------|-------------|
+| `bold` | `d-text--fw-bold` |
+| `semibold` | `d-text--fw-semibold` |
+| `medium` | `d-text--fw-medium` |
+| `normal` | `d-text--fw-normal` |
+
+#### `density` prop
+Controls line-height override. No default — omitting adds no class.
+
+| Value | Class Added |
+|-------|-------------|
+| `100` | `d-text--lh-100` |
+| `200` | `d-text--lh-200` |
+| `300` | `d-text--lh-300` |
+| `400` | `d-text--lh-400` |
+| `500` | `d-text--lh-500` |
+| `600` | `d-text--lh-600` |
+
+### Example Usage
+
+```html
+<!-- Default headline (inherits font-weight/line-height from token) -->
+<dt-text kind="headline" size="lg">Title</dt-text>
+<!-- class="d-text d-text-headline--lg" -->
+
+<!-- Headline with strength override -->
+<dt-text kind="headline" size="lg" strength="medium">Title</dt-text>
+<!-- class="d-text d-text-headline--lg d-text--fw-medium" -->
+
+<!-- Body with density override -->
+<dt-text kind="body" density="300">Tight body text</dt-text>
+<!-- class="d-text d-text-body--md d-text--lh-300" -->
+
+<!-- Both overrides -->
+<dt-text kind="label" strength="bold" density="200">Dense bold label</dt-text>
+<!-- class="d-text d-text-label--md d-text--fw-bold d-text--lh-200" -->
+```
+
+### Files Modified
+
+| File | Changes |
+|------|---------|
+| `text_constants.js` | Added `TEXT_STRENGTH_MODIFIERS`, `TEXT_DENSITY_MODIFIERS` |
+| `text.vue` | Added `strength` and `density` props with validators, `getStrengthClass()` and `getDensityClass()` methods |
+| `text.test.js` | Added 12 tests for strength/density (40 total) |
+| `text.stories.js` | Added strength/density controls and options |
+| `text_default.story.vue` | Added strength/density prop bindings |
+| `text_variants.story.vue` | Added Strength and Density example sections |
+| `text.md` | Added Strength and Density documentation sections with examples |
+
+### Tasks
+
+- [x] Add `TEXT_STRENGTH_MODIFIERS` constant to `text_constants.js`
+- [x] Add `TEXT_DENSITY_MODIFIERS` constant to `text_constants.js`
+- [x] Add `strength` prop to `text.vue` with validator
+- [x] Add `density` prop to `text.vue` with validator
+- [x] Add `getStrengthClass()` method
+- [x] Add `getDensityClass()` method
+- [x] Update `textClasses` computed to include strength/density classes
+- [x] Add tests for strength prop (5 tests)
+- [x] Add tests for density prop (6 tests)
+- [x] Add combined test for strength + density (1 test)
+- [x] Add controls to `text.stories.js`
+- [x] Add examples to `text_variants.story.vue`
+- [x] Add documentation sections to `text.md`
+- [x] Run tests to verify (40 tests passing)
+- [x] Update plan with completion
 
 ---
 

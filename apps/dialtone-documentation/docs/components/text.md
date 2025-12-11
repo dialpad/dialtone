@@ -248,7 +248,7 @@ Override the font-weight of the text. Applies to any kind/size combination. If o
     <dt-text strength="bold">Bold</dt-text>
     <dt-text strength="semibold">Semibold</dt-text>
     <dt-text strength="medium">Medium</dt-text>
-    <dt-text strength="regular">Regular</dt-text>
+    <dt-text strength="normal">Normal</dt-text>
   </dt-stack>
 </code-well-header>
 
@@ -257,7 +257,7 @@ vueCode='
 <dt-text strength="bold">Bold</dt-text>
 <dt-text strength="semibold">Semibold</dt-text>
 <dt-text strength="medium">Medium</dt-text>
-<dt-text strength="regular">Regular</dt-text>
+<dt-text strength="normal">Normal</dt-text>
 '
 />
 

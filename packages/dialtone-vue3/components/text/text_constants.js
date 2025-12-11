@@ -48,7 +48,7 @@ export const TEXT_STRENGTH_MODIFIERS = {
   bold: 'd-text--fw-bold',
   semibold: 'd-text--fw-semibold',
   medium: 'd-text--fw-medium',
-  regular: 'd-text--fw-regular',
+  normal: 'd-text--fw-normal',
 };
 
 export const TEXT_DENSITY_MODIFIERS = {

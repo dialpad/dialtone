@@ -367,7 +367,7 @@ export default {
         { strength: 'bold', copy: 'Bold strength' },
         { strength: 'semibold', copy: 'Semibold strength' },
         { strength: 'medium', copy: 'Medium strength' },
-        { strength: 'regular', copy: 'Regular strength' },
+        { strength: 'normal', copy: 'Normal strength' },
       ];
     },
 
