@@ -102,13 +102,13 @@ status: beta
             <dt-icon name="circle-half-filled" size="300" class="d-fc-success" />
           </dt-stack>
           <dt-stack gap="400" direction="row" class="d-py2 d-px8 d-bgc-moderate d-bar4 d-ba">
-            <p>Primary</p>
-            <p class="d-fc-tertiary">Tertiary</p>
-            <p class="d-fc-critical">Critical</p>
+            <dt-text as="p">Primary</dt-text>
+            <dt-text as="p" tone="tertiary">Tertiary</dt-text>
+            <dt-text as="p" tone="critical">Critical</dt-text>
           </dt-stack>
-          <p>
+          <dt-text as="p">
             <dt-link>Text link</dt-link>
-          </p>
+          </dt-text>
           <dt-stack direction="row" gap="400" class="d-100p">
             <dt-button class="d-fl1">Button</dt-button>
             <dt-button class="d-fl1" kind="danger">Button</dt-button>
@@ -122,13 +122,13 @@ status: beta
             <dt-icon name="sun" size="300" class="d-fc-success" />
           </dt-stack>
           <dt-stack gap="400" direction="row" class="d-py2 d-px8 d-bgc-moderate d-bar4 d-ba">
-            <p>Primary</p>
-            <p class="d-fc-tertiary">Tertiary</p>
-            <p class="d-fc-critical">Critical</p>
+            <dt-text as="p">Primary</dt-text>
+            <dt-text as="p" tone="tertiary">Tertiary</dt-text>
+            <dt-text as="p" tone="critical">Critical</dt-text>
           </dt-stack>
-          <p>
+          <dt-text as="p">
             <dt-link>Text link</dt-link>
-          </p>
+          </dt-text>
           <dt-stack direction="row" gap="400" class="d-100p">
             <dt-button class="d-fl1">Button</dt-button>
             <dt-button class="d-fl1" kind="danger">Button</dt-button>
@@ -142,13 +142,13 @@ status: beta
             <dt-icon name="moon" size="300" class="d-fc-success" />
           </dt-stack>
           <dt-stack gap="400" direction="row" class="d-py2 d-px8 d-bgc-moderate d-bar4 d-ba">
-            <p>Primary</p>
-            <p class="d-fc-tertiary">Tertiary</p>
-            <p class="d-fc-critical">Critical</p>
+            <dt-text as="p">Primary</dt-text>
+            <dt-text as="p" tone="tertiary">Tertiary</dt-text>
+            <dt-text as="p" tone="critical">Critical</dt-text>
           </dt-stack>
-          <p>
+          <dt-text as="p">
             <dt-link>Text link</dt-link>
-          </p>
+          </dt-text>
           <dt-stack direction="row" gap="400" class="d-100p">
             <dt-button class="d-fl1">Button</dt-button>
             <dt-button class="d-fl1" kind="danger">Button</dt-button>
@@ -221,7 +221,7 @@ The default mode, inverts the container relative to the parent or root's mode. W
 
 <code-well-header>
   <dt-mode-island ref="invertedExample" class="d-p16 d-bar8">
-    <p>Inverted mode (opposite of parent)</p>
+    <dt-text as="p">Inverted mode (opposite of parent)</dt-text>
   </dt-mode-island>
 </code-well-header>
 
@@ -229,7 +229,7 @@ The default mode, inverts the container relative to the parent or root's mode. W
 :htmlCode='() => $refs.invertedExample'
 vueCode='
 <dt-mode-island class="d-p16 d-bar8">
-  <p>Inverted mode (opposite of parent)</p>
+  <dt-text as="p">Inverted mode (opposite of parent)</dt-text>
 </dt-mode-island>
 '
 showHtmlWarning />
@@ -240,7 +240,7 @@ Explicitly set to light mode regardless of parent or root mode.
 
 <code-well-header>
   <dt-mode-island ref="lightExample" mode="light" class="d-p16 d-bar8">
-    <p>Always light mode</p>
+    <dt-text as="p">Always light mode</dt-text>
   </dt-mode-island>
 </code-well-header>
 
@@ -248,7 +248,7 @@ Explicitly set to light mode regardless of parent or root mode.
 :htmlCode='() => $refs.lightExample'
 vueCode='
 <dt-mode-island mode="light" class="d-p16 d-bar8">
-  <p>Always light mode</p>
+  <dt-text as="p">Always light mode</dt-text>
 </dt-mode-island>
 '
 showHtmlWarning />
@@ -259,7 +259,7 @@ Explicitly set to dark mode regardless of parent or root mode.
 
 <code-well-header>
   <dt-mode-island ref="darkExample" mode="dark" class="d-p16 d-bar8">
-    <p>Always dark mode</p>
+    <dt-text as="p">Always dark mode</dt-text>
   </dt-mode-island>
 </code-well-header>
 
@@ -267,7 +267,7 @@ Explicitly set to dark mode regardless of parent or root mode.
 :htmlCode='() => $refs.darkExample'
 vueCode='
 <dt-mode-island mode="dark" class="d-p16 d-bar8">
-  <p>Always dark mode</p>
+  <dt-text as="p">Always dark mode</dt-text>
 </dt-mode-island>
 '
 showHtmlWarning />
@@ -278,7 +278,7 @@ Polymorphic rendering via `as` prop—controls which HTML element wraps content.
 
 <code-well-header>
   <dt-mode-island ref="sectionExample" as="section" mode="dark" class="d-p16 d-bar8">
-    <p>Rendered as section element</p>
+    <dt-text as="p">Rendered as section element</dt-text>
   </dt-mode-island>
 </code-well-header>
 
@@ -286,7 +286,7 @@ Polymorphic rendering via `as` prop—controls which HTML element wraps content.
 :htmlCode='() => $refs.sectionExample'
 vueCode='
 <dt-mode-island as="section" mode="dark" class="d-p16 d-bar8">
-  <p>Rendered as section element</p>
+  <dt-text as="p">Rendered as section element</dt-text>
 </dt-mode-island>
 '
 showHtmlWarning />
@@ -299,11 +299,11 @@ Mode islands may be nested, though should rarely occur.
 
 <code-well-header>
   <dt-mode-island ref="nestingExample" mode="light" class="d-p16 d-bar8">
-    <p>Light island</p>
+    <dt-text as="p">Light island</dt-text>
     <dt-mode-island class="d-p16 d-bar8">
-      <p>Inverted → Dark island</p>
+      <dt-text as="p">Inverted → Dark island</dt-text>
       <dt-mode-island class="d-p16 d-bar4">
-        <p>Inverted again → Light island</p>
+        <dt-text as="p">Inverted again → Light island</dt-text>
       </dt-mode-island>
     </dt-mode-island>
   </dt-mode-island>
@@ -313,11 +313,11 @@ Mode islands may be nested, though should rarely occur.
 :htmlCode='() => $refs.nestingExample'
 vueCode='
 <dt-mode-island mode="light" class="d-p16 d-bar8">
-  <p>Light island</p>
+  <dt-text as="p">Light island</dt-text>
   <dt-mode-island class="d-p16 d-bar8">
-    <p>Inverted → Dark island</p>
+    <dt-text as="p">Inverted → Dark island</dt-text>
     <dt-mode-island class="d-p16 d-bar4">
-      <p>Inverted again → Light island</p>
+      <dt-text as="p">Inverted again → Light island</dt-text>
     </dt-mode-island>
   </dt-mode-island>
 </dt-mode-island>
@@ -541,7 +541,7 @@ showHtmlWarning />
       </template>
       <template #content="{ close }">
         <div class="d-p16">
-          <p>This is just a default Popover, and does not use Mode Island.</p>
+          <dt-text as="p">This is just a default Popover, and does not use Mode Island.</dt-text>
         </div>
       </template>
     </dt-popover>
@@ -551,7 +551,7 @@ showHtmlWarning />
       </template>
       <template #content="{ close }">
         <dt-mode-island mode="inverted" class="d-p16 d-bgc-secondary">
-          <p>This Popover's content is in the <strong>inverted</strong> mode.</p>
+          <dt-text as="p">This Popover's content is in the <dt-text strength="strong">inverted</dt-text> mode.</dt-text>
         </dt-mode-island>
       </template>
     </dt-popover>
@@ -561,7 +561,7 @@ showHtmlWarning />
       </template>
       <template #content="{ close }">
         <dt-mode-island mode="light" class="d-p16 d-bgc-secondary">
-          <p>This Popover's content is in explicit <strong>light</strong> mode.</p>
+          <dt-text as="p">This Popover's content is in explicit <dt-text strength="strong">light</dt-text> mode.</dt-text>
         </dt-mode-island>
       </template>
     </dt-popover>
@@ -571,7 +571,7 @@ showHtmlWarning />
       </template>
       <template #content="{ close }">
         <dt-mode-island mode="dark" class="d-p16 d-bgc-secondary">
-          <p>This Popover's content is in explicit <strong>dark</strong> mode.</p>
+          <dt-text as="p">This Popover's content is in explicit <dt-text strength="strong">dark</dt-text> mode.</dt-text>
         </dt-mode-island>
       </template>
     </dt-popover>
@@ -587,7 +587,7 @@ vueCode='
   </template>
   <template #content="{ close }">
     <dt-mode-island mode="inverted" class="d-p16 d-bgc-secondary">
-      <p>This Popover content is in the <strong>inverted</strong> mode.</p>
+      <dt-text as="p">This Popover content is in the <dt-text strength="strong">inverted</dt-text> mode.</dt-text>
     </dt-mode-island>
   </template>
 </dt-popover>
