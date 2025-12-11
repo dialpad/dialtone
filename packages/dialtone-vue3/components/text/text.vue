@@ -29,6 +29,15 @@ import {
 } from './text_constants';
 
 const DEFAULT_SIZE = 'md';
+const SEMANTIC_HEADING_ELEMENTS = ['h1', 'h2', 'h3', 'h4', 'h5', 'h6'];
+
+// Module-level flag to emit info only once per session
+let hasEmittedHeadlineSemanticInfo = false;
+
+// Exported for testing purposes only
+export const resetHeadlineSemanticInfoFlag = () => {
+  hasEmittedHeadlineSemanticInfo = false;
+};
 
 /**
  * Dialtone text primitive that applies typography tokens based on semantic props.
@@ -204,6 +213,22 @@ export default {
         '--dt-text-line-clamp': this.maxLines,
       };
     },
+  },
+
+  mounted () {
+    // Emit info once per session when headline is used without semantic heading element
+    if (
+      !hasEmittedHeadlineSemanticInfo &&
+      this.kind === 'headline' &&
+      !SEMANTIC_HEADING_ELEMENTS.includes(this.as)
+    ) {
+       
+      console.info(
+        '[DtText] kind="headline" is used without a semantic heading element. ' +
+        'Consider using as="h1|h2|h3|h4|h5|h6" for better accessibility.',
+      );
+      hasEmittedHeadlineSemanticInfo = true;
+    }
   },
 
   methods: {

@@ -39,8 +39,9 @@
 - **Headline-only sizes (xxxl, xxl, xl)**: Throw an error if used with body/label/code
 - **Universal sizes (lg, md, sm, xs)**: Fall back to `md` with a console warning if invalid
 - **Invalid kind**: Console warning, no variant class applied
+- **Semantic heading suggestion**: `console.info()` (once per session) when `kind="headline"` used without `as="h1|h2|h3|h4|h5|h6"`
 
-**Tests:** 24 passing
+**Tests:** 28 passing
 
 **Next:** Vue 2 implementation (deferred).
 
@@ -66,6 +67,7 @@
 - **2025-12-10** — Removed `eyebrow` as a valid `size` value. Updated constants, JSDoc, and documentation.
 - **2025-12-10** — **Typography System Refactor**: Completed alignment with redesigned typography token system. Class prefix changed from `d-{kind}` to `d-text-{kind}`, new size scale (xxxl→xs). Updated constants, tests (22 passing), stories, and documentation.
 - **2025-12-10** — **Strict Size Validation**: Headline-only sizes (xxxl, xxl, xl) now throw an error when used with incompatible kinds (body, label, code). Universal sizes (lg, md, sm, xs) still fall back gracefully with a warning. Added 2 new tests (24 total).
+- **2025-12-10** — **Semantic Heading Info**: Added `console.info()` suggestion (once per session) when `kind="headline"` is used without a semantic heading element (`h1`-`h6`). Added 4 new tests (28 total).
 
 ---
 
@@ -121,9 +123,10 @@ NEW: d-text-headline--lg, d-text-body--md, d-text-label--sm, d-text-code--md
 - [x] Update all class assertions in `text.test.js`
 - [x] Update `text_variants.story.vue` with new sizes
 - [x] Update `text.md` documentation
-- [x] Run tests to verify (24 tests passing)
+- [x] Run tests to verify (28 tests passing)
 - [x] Double-check for any missed references (grep verified no old class names remain)
 - [x] Add strict validation for headline-only sizes (xxxl, xxl, xl) — throws error when used with incompatible kinds
+- [x] Add semantic heading suggestion via `console.info()` when `kind="headline"` used without `h1`-`h6`
 
 ### New Variant Matrix (2025-12-10)
 
@@ -153,6 +156,8 @@ Props:
 - Headline-only sizes (xxxl, xxl, xl) **throw an error** when used with body/label/code
 - Universal sizes (lg, md, sm, xs) fall back to `md` with a warning if invalid for the kind
 - New constant `TEXT_HEADLINE_ONLY_SIZES` exported from `text_constants.js`
+- Semantic heading suggestion via `console.info()` (once per session) when `kind="headline"` used without `as="h1|h2|h3|h4|h5|h6"`
+- `resetHeadlineSemanticInfoFlag()` exported for testing purposes
 
 ---
 

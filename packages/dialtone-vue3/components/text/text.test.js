@@ -1,6 +1,6 @@
 import { mount } from '@vue/test-utils';
 import { vi } from 'vitest';
-import DtText from './text.vue';
+import DtText, { resetHeadlineSemanticInfoFlag } from './text.vue';
 import {
   TEXT_LINE_CLAMP_CLASS,
   TEXT_NUMERIC_CLASS,
@@ -226,5 +226,49 @@ describe('DtText', () => {
     const wrapper = mountComponent();
 
     expect(wrapper.attributes('data-qa')).toBe('dt-text');
+  });
+
+  describe('semantic heading info', () => {
+    beforeEach(() => {
+      resetHeadlineSemanticInfoFlag();
+    });
+
+    it('emits info when headline kind used without semantic heading element', () => {
+      const infoSpy = vi.spyOn(console, 'info').mockImplementation(() => {});
+
+      mountComponent({ kind: 'headline', as: 'span' });
+
+      expect(infoSpy).toHaveBeenCalledWith(
+        expect.stringContaining('Consider using as="h1|h2|h3|h4|h5|h6"'),
+      );
+    });
+
+    it('does not emit info when headline kind used with semantic heading element', () => {
+      const infoSpy = vi.spyOn(console, 'info').mockImplementation(() => {});
+
+      mountComponent({ kind: 'headline', as: 'h2' });
+
+      expect(infoSpy).not.toHaveBeenCalled();
+    });
+
+    it('emits info only once per session', () => {
+      const infoSpy = vi.spyOn(console, 'info').mockImplementation(() => {});
+
+      mountComponent({ kind: 'headline', as: 'div' });
+      mountComponent({ kind: 'headline', as: 'span' });
+      mountComponent({ kind: 'headline', as: 'p' });
+
+      expect(infoSpy).toHaveBeenCalledTimes(1);
+    });
+
+    it('does not emit info for non-headline kinds', () => {
+      const infoSpy = vi.spyOn(console, 'info').mockImplementation(() => {});
+
+      mountComponent({ kind: 'body' });
+      mountComponent({ kind: 'label' });
+      mountComponent({ kind: 'code' });
+
+      expect(infoSpy).not.toHaveBeenCalled();
+    });
   });
 });
