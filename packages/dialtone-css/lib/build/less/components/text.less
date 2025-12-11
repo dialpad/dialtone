@@ -4,12 +4,12 @@
 //  TABLE OF CONTENTS
 //  • BASE STYLE
 //  • TEXT STYLES
-//  • FONT STYLE MODIFIERS
 //  • ALIGNMENT
 //  • NUMERIC
 //  • LINE CLAMP
 //  • WRAP
 //  • TRIM
+//  • FONT STYLE MODIFIERS
 //
 .d-text {
   //  ============================================================================
@@ -51,22 +51,6 @@
       &--sm { font: var(--dt-text-code-sm); }
       &--xs { font: var(--dt-text-code-xs); }
   }
-
-  //  ============================================================================
-  //  $   FONT STYLE MODIFIERS
-  //  ----------------------------------------------------------------------------
-
-  &--fw-bold { font-weight: var(--dt-font-weight-bold); }
-  &--fw-semibold { font-weight: var(--dt-font-weight-semi-bold); }
-  &--fw-medium { font-weight: var(--dt-font-weight-medium); }
-  &--fw-regular { font-weight: var(--dt-font-weight-regular); }
-
-  &---lh-100 { line-height: var(--dt-line-height-100); }
-  &---lh-200 { line-height: var(--dt-line-height-200); }
-  &---lh-300 { line-height: var(--dt-line-height-300); }
-  &---lh-400 { line-height: var(--dt-line-height-400); }
-  &---lh-500 { line-height: var(--dt-line-height-500); }
-  &---lh-600 { line-height: var(--dt-line-height-600); }
 
   //  ============================================================================
   //  $   ALIGNMENT
@@ -157,4 +141,20 @@
       text-box-edge: cap alphabetic;
     }
   }
+
+  //  ============================================================================
+  //  $   FONT STYLE MODIFIERS
+  //  ----------------------------------------------------------------------------
+
+  &--fw-bold { font-weight: var(--dt-font-weight-bold); }
+  &--fw-semibold { font-weight: var(--dt-font-weight-semi-bold); }
+  &--fw-medium { font-weight: var(--dt-font-weight-medium); }
+  &--fw-regular { font-weight: var(--dt-font-weight-regular); }
+
+  &---lh-100 { line-height: var(--dt-line-height-100); }
+  &---lh-200 { line-height: var(--dt-line-height-200); }
+  &---lh-300 { line-height: var(--dt-line-height-300); }
+  &---lh-400 { line-height: var(--dt-line-height-400); }
+  &---lh-500 { line-height: var(--dt-line-height-500); }
+  &---lh-600 { line-height: var(--dt-line-height-600); }
 }
