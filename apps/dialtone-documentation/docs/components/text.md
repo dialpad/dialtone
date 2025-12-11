@@ -2,13 +2,14 @@
 title: Text
 description: Consistent typography styling through semantic text kinds and sizes.
 status: beta
+storybook: https://dialtone.dialpad.com/vue/?path=/story/components-text--default
 image: assets/images/components/text.png
 ---
 
 <code-well-header>
   <dt-stack>
     <dt-text kind="headline" size="lg" as="h2">Large headline</dt-text>
-    <dt-text size="md" as="p">Medium Body</dt-text>
+    <dt-text kind="body" size="md" as="p">Medium body</dt-text>
   </dt-stack>
 </code-well-header>
 
@@ -454,7 +455,7 @@ vueCode='
 
 Remove extra leading space above and/or below text. Useful for tight component layouts where text needs to align precisely with adjacent elements.
 
-Trim will only effect elements with block- or inline-blockstyled context. It may have no effect on elements with inline or flex-context.
+Trim will only affect elements with block or inline-block styled context. It may have no effect on elements with inline or flex context.
 
 <code-well-header>
   <dt-stack gap="500" direction="row">
@@ -494,6 +495,30 @@ vueCode='
 >
   Trim requires modern browser support for <code class="d-bgc-transparent">text-box-trim</code>. Chrome 133+, Edge 132+, Safari 18.2+ as of November 2025. Otherwise, it will gracefully fallback to default rendering with half-leading above and below.
 </dt-notice>
+
+## Text Prop
+
+Use the `text` prop as an alternative to the default slot for simple string content. The slot takes precedence when both are provided.
+
+<code-well-header>
+  <dt-stack gap="400">
+    <dt-text kind="body" text="Content via text prop" />
+    <dt-text kind="body">Content via slot</dt-text>
+  </dt-stack>
+</code-well-header>
+
+<code-example-tabs
+vueCode='
+<!-- Using text prop -->
+<dt-text text="Hello, world!" />
+
+<!-- Using slot (equivalent) -->
+<dt-text>Hello, world!</dt-text>
+
+<!-- Slot takes precedence -->
+<dt-text text="Ignored" >Slot content wins</dt-text>
+'
+/>
 
 ## Accessibility
 

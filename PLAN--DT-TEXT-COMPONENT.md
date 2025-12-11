@@ -68,6 +68,7 @@
 - **2025-12-10** — **Typography System Refactor**: Completed alignment with redesigned typography token system. Class prefix changed from `d-{kind}` to `d-text-{kind}`, new size scale (xxxl→xs). Updated constants, tests (22 passing), stories, and documentation.
 - **2025-12-10** — **Strict Size Validation**: Headline-only sizes (xxxl, xxl, xl) now throw an error when used with incompatible kinds (body, label, code). Universal sizes (lg, md, sm, xs) still fall back gracefully with a warning. Added 2 new tests (24 total).
 - **2025-12-10** — **Semantic Heading Info**: Added `console.info()` suggestion (once per session) when `kind="headline"` is used without a semantic heading element (`h1`-`h6`). Added 4 new tests (28 total).
+- **2025-12-10** — **Documentation Improvements**: Added storybook link to frontmatter, added `text` prop section, fixed hero example to include `kind="body"`, fixed typo in Trim section.
 
 ---
 
