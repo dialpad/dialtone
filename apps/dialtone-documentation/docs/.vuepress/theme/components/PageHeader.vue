@@ -114,6 +114,7 @@
         kind="body"
         size="lg"
         tone="secondary"
+        wrap="pretty"
       >
         {{ $frontmatter.description }}
       </dt-text>
