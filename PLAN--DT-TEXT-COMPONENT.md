@@ -78,6 +78,7 @@
 - **2025-12-10** — **Documentation fixes**: Removed conflicting `d-fw-*`/`d-lh-*` guidance from Don't section (now we have strength/density props). Fixed size code example to include kind. Clarified default size only applies when kind is set.
 - **2025-12-10** — **Size without kind warning**: Added `console.warn` when `size` is set without `kind`. Added 1 new test (41 total).
 - **2025-12-10** — **Test Refactoring**: Refactored tests for single-purpose clarity, then optimized to match project norms. Removed exhaustive `it.each()` testing in favor of representative samples. Consolidated warning + class-absence tests. Final count: 36 tests (down from 41, via 67 intermediate).
+- **2025-12-11** — **Storybook Restructure**: Restructured `text_variants.story.vue` to match `stack_variants.story.vue` pattern. Added outer padding, proper section hierarchy, bordered example containers, and separated examples by prop category. Migrated all raw `d-headline--*` and `d-body--*` classes to use `<dt-text>` component (dogfooding).
 
 ---
 
