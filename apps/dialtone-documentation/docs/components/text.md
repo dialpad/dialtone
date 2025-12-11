@@ -563,6 +563,96 @@ vueCode='
 </dt-text>
 '/>
 
+## Examples
+
+<code-well-header>
+  <dt-stack gap="400" class="d-w100p">
+    <dt-text as="h2" kind="headline" size="lg">Saturday, May 24, 2025</dt-text>
+    <dt-stack direction="row" gap="450" class="d-w100p">
+      <dt-avatar full-name="Ashanti Trevor" />
+      <dt-stack class="d-fl1">
+        <dt-text kind="body" size="sm" strength="bold">Ashanti Trevor</dt-text>
+        <dt-stack direction="row" gap="300">
+          <dt-stack direction="row" gap="400">
+            <dt-icon name="phone-outgoing" size="200" class="d-fc-tertiary" />
+            <dt-text kind="body" size="xs" tone="tertiary">Outgoing call</dt-text>
+          </dt-stack>
+          <dt-text kind="body" size="xs" tone="tertiary">&bull;</dt-text>
+          <dt-text kind="body" size="xs" tone="tertiary">2 minutes 10 seconds</dt-text>
+        </dt-stack>
+      </dt-stack>
+      <dt-text kind="body" size="sm" tone="tertiary">3:23 pm</dt-text>
+      <dt-badge kind="count" type="bulletin" text="6" />
+    </dt-stack>
+  </dt-stack>
+</code-well-header>
+
+```html
+<dt-text as="h2" kind="headline" size="lg">Saturday, May 24, 2025</dt-text>
+<dt-stack direction="row" gap="450" class="d-w100p">
+  <dt-avatar full-name="Ashanti Trevor" />
+  <dt-stack class="d-fl1">
+    <dt-text kind="body" size="sm" strength="bold">Ashanti Trevor</dt-text>
+    <dt-stack direction="row" gap="300">
+      <dt-stack direction="row" gap="400">
+        <dt-icon name="phone-outgoing" size="200" class="d-fc-tertiary" />
+        <dt-text kind="body" size="xs" tone="tertiary">Outgoing call</dt-text>
+      </dt-stack>
+      <dt-text kind="body" size="xs" tone="tertiary">&bull;</dt-text>
+      <dt-text kind="body" size="xs" tone="tertiary">2 minutes 10 seconds</dt-text>
+    </dt-stack>
+  </dt-stack>
+  <dt-text kind="body" size="sm" tone="tertiary">3:23 pm</dt-text>
+  <dt-badge kind="count" type="bulletin" text="6" />
+</dt-stack>
+```
+
+<code-well-header class="d-pb32">
+  <dt-stack gap="500">
+    <dt-stack>
+      <dt-text as="h2" kind="headline" size="xxl">Ai that works for you</dt-text>
+      <dt-text kind="body" size="lg">Support customers, drive sales, and collaborate with your team—all in one, beautiful Ai-powered app.</dt-text>
+    </dt-stack>
+    <dt-stack direction="row" gap="500" align="start">
+      <dt-stack>
+        <dt-text as="h3" kind="headline" size="xl">Ai Contact Center</dt-text>
+        <dt-text as="p" kind="body" size="md">The world's most advanced customer engagement platform</dt-text>
+      </dt-stack>
+      <dt-stack>
+        <dt-text as="h3" kind="headline" size="xl">Ai Voice</dt-text>
+        <dt-text as="p" kind="body" size="md">Say hello to the world's smartest business phone</dt-text>
+      </dt-stack>
+      <dt-stack>
+        <dt-text as="h3" kind="headline" size="xl">Ai Meetings</dt-text>
+        <dt-text as="p" kind="body" size="md">Ai-powered video meetings with built-in transcriptions</dt-text>
+      </dt-stack>
+    </dt-stack>
+  </dt-stack>
+</code-well-header>
+
+```html
+<dt-stack gap="500">
+  <dt-stack>
+    <dt-text as="h2" kind="headline" size="xxl">Ai that works for you</dt-text>
+    <dt-text kind="body" size="lg">Support customers, drive sales, and collaborate with your team—all in one, beautiful Ai-powered app.</dt-text>
+  </dt-stack>
+  <dt-stack direction="row" gap="500" align="start">
+    <dt-stack>
+      <dt-text as="h3" kind="headline" size="xl">Ai Contact Center</dt-text>
+      <dt-text as="p" kind="body" size="md">The world's most advanced customer engagement platform</dt-text>
+    </dt-stack>
+    <dt-stack>
+      <dt-text as="h3" kind="headline" size="xl">Ai Voice</dt-text>
+      <dt-text as="p" kind="body" size="md">Say hello to the world's smartest business phone</dt-text>
+    </dt-stack>
+    <dt-stack>
+      <dt-text as="h3" kind="headline" size="xl">Ai Meetings</dt-text>
+      <dt-text as="p" kind="body" size="md">Ai-powered video meetings with built-in transcriptions</dt-text>
+    </dt-stack>
+  </dt-stack>
+</dt-stack>
+```
+
 ## Accessibility
 
 * Maintain semantic structure via `as` (e.g., screen readers expect heading levels to be sequential).
