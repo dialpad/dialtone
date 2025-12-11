@@ -24,7 +24,11 @@
               Headline
             </dt-text>
             <div class="d-ba d-bc-default d-p16 d-bar8">
-              <dt-stack gap="300">
+              <dt-stack
+                gap="400"
+                direction="row"
+                align="baseline"
+              >
                 <dt-text
                   v-for="size in headlineSizes"
                   :key="`headline-${size}`"
@@ -46,7 +50,11 @@
               Body
             </dt-text>
             <div class="d-ba d-bc-default d-p16 d-bar8">
-              <dt-stack gap="300">
+              <dt-stack
+                gap="400"
+                direction="row"
+                align="baseline"
+              >
                 <dt-text
                   v-for="size in bodySizes"
                   :key="`body-${size}`"
@@ -68,7 +76,11 @@
               Label
             </dt-text>
             <div class="d-ba d-bc-default d-p16 d-bar8">
-              <dt-stack gap="300">
+              <dt-stack
+                gap="400"
+                direction="row"
+                align="baseline"
+              >
                 <dt-text
                   v-for="size in labelSizes"
                   :key="`label-${size}`"
@@ -90,7 +102,11 @@
               Code
             </dt-text>
             <div class="d-ba d-bc-default d-p16 d-bar8">
-              <dt-stack gap="300">
+              <dt-stack
+                gap="400"
+                direction="row"
+                align="baseline"
+              >
                 <dt-text
                   v-for="size in codeSizes"
                   :key="`code-${size}`"
@@ -127,12 +143,13 @@
               <dt-stack
                 direction="row"
                 gap="500"
-                class="d-fw-wrap"
+                align="baseline"
               >
                 <dt-text
                   v-for="item in strengthExamples"
                   :key="item.strength"
-                  kind="body"
+                  kind="headline"
+                  size="xxl"
                   :strength="item.strength"
                 >
                   {{ item.copy }}
@@ -162,15 +179,21 @@
               Line Height Modifiers
             </dt-text>
             <div class="d-ba d-bc-default d-p16 d-bar8">
-              <dt-stack gap="200">
+              <dt-stack
+                gap="400"
+                direction="row"
+                align="baseline"
+              >
                 <dt-text
                   v-for="item in densityExamples"
                   :key="item.density"
                   kind="body"
                   as="p"
                   :density="item.density"
+                  class="d-bgc-moderate-opaque"
+                  truncate
                 >
-                  density="{{ item.density }}" — {{ item.copy }}
+                  {{ item.density }} — {{ item.copy }}
                 </dt-text>
               </dt-stack>
             </div>
@@ -490,21 +513,21 @@ export default {
 
     strengthExamples () {
       return [
-        { strength: 'bold', copy: 'Bold strength' },
-        { strength: 'semibold', copy: 'Semibold strength' },
-        { strength: 'medium', copy: 'Medium strength' },
-        { strength: 'normal', copy: 'Normal strength' },
+        { strength: 'bold', copy: 'Bold' },
+        { strength: 'semibold', copy: 'Semibold' },
+        { strength: 'medium', copy: 'Medium' },
+        { strength: 'normal', copy: 'Normal' },
       ];
     },
 
     densityExamples () {
       return [
-        { density: 100, copy: 'Tightest line-height for compact UI' },
-        { density: 200, copy: 'Tight line-height for dense content' },
-        { density: 300, copy: 'Slightly compact line-height' },
-        { density: 400, copy: 'Default-ish line-height' },
-        { density: 500, copy: 'Relaxed line-height for readability' },
-        { density: 600, copy: 'Most spacious line-height' },
+        { density: 100, copy: 'Lorem ipsume dolor sit amet gemino quis consectuar.' },
+        { density: 200, copy: 'Lorem ipsume dolor sit amet gemino quis consectuar.' },
+        { density: 300, copy: 'Lorem ipsume dolor sit amet gemino quis consectuar.' },
+        { density: 400, copy: 'Lorem ipsume dolor sit amet gemino quis consectuar.' },
+        { density: 500, copy: 'Lorem ipsume dolor sit amet gemino quis consectuar.' },
+        { density: 600, copy: 'Lorem ipsume dolor sit amet gemino quis consectuar.' },
       ];
     },
 
