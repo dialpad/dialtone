@@ -40,10 +40,11 @@
 **Validation Behavior:**
 - **Headline-only sizes (xxxl, xxl, xl)**: Throw an error if used with body/label/code
 - **Universal sizes (lg, md, sm, xs)**: Fall back to `md` with a console warning if invalid
+- **Size without kind**: Console warning that size has no effect
 - **Invalid kind**: Console warning, no variant class applied
 - **Semantic heading suggestion**: `console.info()` (once per session) when `kind="headline"` used without `as="h1|h2|h3|h4|h5|h6"`
 
-**Tests:** 40 passing
+**Tests:** 67 passing
 
 **Next:** Vue 2 implementation (deferred).
 
@@ -73,7 +74,172 @@
 - **2025-12-10** — **Documentation Improvements**: Added storybook link to frontmatter, added `text` prop section, fixed hero example to include `kind="body"`, fixed typo in Trim section.
 - **2025-12-10** — **Strength & Density Props (v2)**: Implemented as simple independent modifiers. No validation matrices — applies to all kind/size combinations. Added 12 new tests (40 total).
 - **2025-12-10** — **Strength value rename**: Changed `regular` to `normal` to match CSS `--fw-normal` class naming.
-- **2025-12-10** — **Storybook controls fix**: Added select dropdowns for `wrap` and `trim` props (were text inputs). Added missing bindings to default story.
+- **2025-12-10** — **Storybook controls fix**: Added select dropdowns for `wrap` and `trim` props (were text inputs). Added missing bindings to default story. Added helpful descriptions for wrap/trim options.
+- **2025-12-10** — **Documentation fixes**: Removed conflicting `d-fw-*`/`d-lh-*` guidance from Don't section (now we have strength/density props). Fixed size code example to include kind. Clarified default size only applies when kind is set.
+- **2025-12-10** — **Size without kind warning**: Added `console.warn` when `size` is set without `kind`. Added 1 new test (41 total).
+- **2025-12-10** — **Test Refactoring**: Refactored tests for single-purpose clarity. Converted 4 loop-based tests to `it.each()`, converted 2 multi-scenario tests to `it.each()`, split multi-assertion tests, consolidated 5 stacking tests into 1 comprehensive integration test. Tests increased from 41 to 67.
+
+---
+
+## ✅ Completed: Test Refactoring for Single-Purpose Clarity (2025-12-10)
+
+**Objective:** Refactor tests to follow single-purpose testing principles — each test should verify one behavior with a clear, descriptive name.
+
+**Rationale:** Peer review feedback indicates tests that combine multiple dimensions are harder to debug. When a multi-scenario test fails, the test name doesn't indicate which specific case failed. Using `it.each()` and splitting multi-assertion tests improves:
+- Failure diagnostics (know exactly which case failed)
+- Test documentation (test names describe specific behaviors)
+- Maintainability (easier to update individual cases)
+
+**Scope:** Vue 3 only. `packages/dialtone-vue3/components/text/text.test.js`
+
+### Issues Identified
+
+#### 1. Loop-based tests hide individual failures
+**Current pattern:**
+```javascript
+it('applies all wrap modifier classes correctly', () => {
+  Object.entries(TEXT_WRAP_MODIFIERS).forEach(([wrapValue, expectedClass]) => {
+    const wrapper = mountComponent({ wrap: wrapValue });
+    expect(wrapper.classes()).toContain(expectedClass);
+  });
+});
+```
+**Problem:** When one iteration fails, test output shows "applies all wrap modifier classes correctly" without indicating which `wrapValue` failed.
+
+**Affected tests:**
+- `applies all wrap modifier classes correctly` (line 183)
+- `applies all trim modifier classes correctly` (line 205)
+- `applies all strength modifier classes correctly` (line 294)
+- `applies all density modifier classes correctly` (line 340)
+
+**Solution:** Convert to `it.each()`:
+```javascript
+it.each(Object.entries(TEXT_WRAP_MODIFIERS))(
+  'applies wrap="%s" → class "%s"',
+  (wrapValue, expectedClass) => {
+    const wrapper = mountComponent({ wrap: wrapValue });
+    expect(wrapper.classes()).toContain(expectedClass);
+  }
+);
+```
+
+#### 2. Multi-scenario error tests
+**Current pattern:**
+```javascript
+it('throws error when headline-only size used with incompatible kind', () => {
+  expect(() => mountComponent({ kind: 'body', size: 'xxxl' })).toThrow(...);
+  expect(() => mountComponent({ kind: 'label', size: 'xxl' })).toThrow(...);
+  expect(() => mountComponent({ kind: 'code', size: 'xl' })).toThrow(...);
+});
+```
+**Problem:** Tests 3 kinds × 3 sizes in one test. Failure doesn't indicate which combination.
+
+**Affected tests:**
+- `throws error when headline-only size used with incompatible kind` (line 64)
+- `allows headline-only sizes with headline kind` (line 75)
+
+**Solution:** Use `it.each()` with descriptive test names:
+```javascript
+it.each([
+  ['body', 'xxxl'],
+  ['body', 'xxl'],
+  ['body', 'xl'],
+  ['label', 'xxxl'],
+  // ... etc
+])('throws error for kind="%s" with headline-only size="%s"', (kind, size) => {
+  expect(() => mountComponent({ kind, size }))
+    .toThrow(`[DtText] size="${size}" is only valid for kind="headline"`);
+});
+```
+
+#### 3. Multi-assertion tests testing different behaviors
+**Current pattern:**
+```javascript
+it('renders the component root', () => {
+  expect(wrapper.exists()).toBe(true);        // tests existence
+  expect(wrapper.classes()).toContain('d-text'); // tests base class
+  expect(wrapper.text()).toBe(slotContent);   // tests slot content
+});
+```
+**Problem:** Three unrelated behaviors in one test.
+
+**Affected tests:**
+- `renders the component root` (line 31) — tests existence + base class + slot
+- `warns when tone is not recognized` (line 120) — tests warning + class absence
+- `warns when align is not recognized` (line 135) — tests warning + class absence
+
+**Solution:** Split into focused tests:
+```javascript
+it('renders with d-text base class', () => {
+  const wrapper = mountComponent();
+  expect(wrapper.classes()).toContain('d-text');
+});
+
+it('renders slot content', () => {
+  const wrapper = mountComponent();
+  expect(wrapper.text()).toBe(slotContent);
+});
+```
+
+#### 4. Redundant "stacking" integration tests
+**Current pattern:** Multiple tests verify that props stack together:
+- `stacks tone, numeric, and maxLines modifiers together` (line 144)
+- `stacks wrap and trim modifiers with other modifiers` (line 221)
+- `stacks strength with kind/size modifiers` (line 318)
+- `stacks density with kind/size modifiers` (line 372)
+- `stacks strength and density with other modifiers` (line 388)
+
+**Problem:** These all test the same concept (class composition is additive). One comprehensive integration test is sufficient.
+
+**Solution:** Keep one integration test that verifies class composition is additive, remove redundant variations:
+```javascript
+it('composes all modifier classes additively', () => {
+  const wrapper = mountComponent({
+    kind: 'headline',
+    size: 'lg',
+    strength: 'semibold',
+    density: 300,
+    tone: 'primary',
+    align: 'center',
+    truncate: true,
+    numeric: true,
+  });
+
+  expect(wrapper.classes()).toEqual(expect.arrayContaining([
+    'd-text',
+    'd-text-headline--lg',
+    TEXT_STRENGTH_MODIFIERS.semibold,
+    TEXT_DENSITY_MODIFIERS[300],
+    'd-fc-primary',
+    'd-text--align-center',
+    TEXT_TRUNCATE_CLASS,
+    TEXT_NUMERIC_CLASS,
+  ]));
+});
+```
+
+### Tasks
+
+- [x] Convert `applies all wrap modifier classes correctly` to `it.each()`
+- [x] Convert `applies all trim modifier classes correctly` to `it.each()`
+- [x] Convert `applies all strength modifier classes correctly` to `it.each()`
+- [x] Convert `applies all density modifier classes correctly` to `it.each()`
+- [x] Convert `throws error when headline-only size used with incompatible kind` to `it.each()`
+- [x] Convert `allows headline-only sizes with headline kind` to `it.each()`
+- [x] Split `renders the component root` into focused tests
+- [x] Split warning tests (tone, align, wrap, trim, strength, density) to separate warning assertion from class absence assertion
+- [x] Consolidate stacking tests into one comprehensive integration test
+- [x] Run tests to verify refactoring preserves coverage (67 tests passing)
+
+### Results
+
+| Metric | Before | After |
+|--------|--------|-------|
+| Test count | 41 | 67 |
+| Loop-based tests | 4 | 0 |
+| Multi-scenario tests | 2 | 0 |
+| Stacking integration tests | 5 | 1 |
+| `it.each()` usage | 0 | 6 |
 
 ---
 

@@ -28,11 +28,15 @@ describe('DtText', () => {
     vi.restoreAllMocks();
   });
 
-  it('renders the component root', () => {
+  it('renders with d-text base class', () => {
     const wrapper = mountComponent();
 
-    expect(wrapper.exists()).toBe(true);
     expect(wrapper.classes()).toContain('d-text');
+  });
+
+  it('renders slot content', () => {
+    const wrapper = mountComponent();
+
     expect(wrapper.text()).toBe(slotContent);
   });
 
@@ -61,25 +65,29 @@ describe('DtText', () => {
     );
   });
 
-  it('throws error when headline-only size used with incompatible kind', () => {
-    expect(() => mountComponent({ kind: 'body', size: 'xxxl' }))
-      .toThrow('[DtText] size="xxxl" is only valid for kind="headline"');
-
-    expect(() => mountComponent({ kind: 'label', size: 'xxl' }))
-      .toThrow('[DtText] size="xxl" is only valid for kind="headline"');
-
-    expect(() => mountComponent({ kind: 'code', size: 'xl' }))
-      .toThrow('[DtText] size="xl" is only valid for kind="headline"');
+  it.each([
+    ['body', 'xxxl'],
+    ['body', 'xxl'],
+    ['body', 'xl'],
+    ['label', 'xxxl'],
+    ['label', 'xxl'],
+    ['label', 'xl'],
+    ['code', 'xxxl'],
+    ['code', 'xxl'],
+    ['code', 'xl'],
+  ])('throws error for kind="%s" with headline-only size="%s"', (kind, size) => {
+    expect(() => mountComponent({ kind, size }))
+      .toThrow(`[DtText] size="${size}" is only valid for kind="headline"`);
   });
 
-  it('allows headline-only sizes with headline kind', () => {
-    const wrapper1 = mountComponent({ kind: 'headline', size: 'xxxl' });
-    const wrapper2 = mountComponent({ kind: 'headline', size: 'xxl' });
-    const wrapper3 = mountComponent({ kind: 'headline', size: 'xl' });
+  it.each([
+    ['xxxl', 'd-text-headline--xxxl'],
+    ['xxl', 'd-text-headline--xxl'],
+    ['xl', 'd-text-headline--xl'],
+  ])('allows headline size="%s" → class "%s"', (size, expectedClass) => {
+    const wrapper = mountComponent({ kind: 'headline', size });
 
-    expect(wrapper1.classes()).toContain('d-text-headline--xxxl');
-    expect(wrapper2.classes()).toContain('d-text-headline--xxl');
-    expect(wrapper3.classes()).toContain('d-text-headline--xl');
+    expect(wrapper.classes()).toContain(expectedClass);
   });
 
   it('applies truncate class when truncate prop is true', () => {
@@ -120,9 +128,16 @@ describe('DtText', () => {
   it('warns when tone is not recognized', () => {
     const warnSpy = vi.spyOn(console, 'warn').mockImplementation(() => {});
 
-    const wrapper = mountComponent({ tone: 'not-real' });
+    mountComponent({ tone: 'not-real' });
 
     expect(warnSpy).toHaveBeenCalledWith(expect.stringContaining('Unsupported tone'));
+  });
+
+  it('does not apply class for unrecognized tone', () => {
+    vi.spyOn(console, 'warn').mockImplementation(() => {});
+
+    const wrapper = mountComponent({ tone: 'not-real' });
+
     expect(wrapper.classes()).not.toContain('d-fc-not-real');
   });
 
@@ -135,17 +150,48 @@ describe('DtText', () => {
   it('warns when align is not recognized', () => {
     const warnSpy = vi.spyOn(console, 'warn').mockImplementation(() => {});
 
-    const wrapper = mountComponent({ align: 'diagonal' });
+    mountComponent({ align: 'diagonal' });
 
     expect(warnSpy).toHaveBeenCalledWith(expect.stringContaining('Unsupported align "diagonal"'));
+  });
+
+  it('does not apply class for unrecognized align', () => {
+    vi.spyOn(console, 'warn').mockImplementation(() => {});
+
+    const wrapper = mountComponent({ align: 'diagonal' });
+
     expect(wrapper.classes()).not.toContain('d-text--align-diagonal');
   });
 
-  it('stacks tone, numeric, and maxLines modifiers together', () => {
-    const wrapper = mountComponent({ tone: 'success', numeric: true, maxLines: 4 });
+  it('composes all modifier classes additively', () => {
+    const wrapper = mountComponent({
+      kind: 'headline',
+      size: 'lg',
+      strength: 'semibold',
+      density: 300,
+      tone: 'primary',
+      align: 'center',
+      wrap: 'balance',
+      trim: 'both',
+      truncate: true,
+      numeric: true,
+      maxLines: 3,
+    });
 
-    expect(wrapper.classes()).toEqual(expect.arrayContaining(['d-text', 'd-fc-success', TEXT_NUMERIC_CLASS, TEXT_LINE_CLAMP_CLASS]));
-    expect(wrapper.attributes('style')).toContain('--dt-text-line-clamp: 4');
+    expect(wrapper.classes()).toEqual(expect.arrayContaining([
+      'd-text',
+      'd-text-headline--lg',
+      TEXT_STRENGTH_MODIFIERS.semibold,
+      TEXT_DENSITY_MODIFIERS[300],
+      'd-fc-primary',
+      'd-text--align-center',
+      TEXT_WRAP_MODIFIERS.balance,
+      TEXT_TRIM_MODIFIERS.both,
+      TEXT_TRUNCATE_CLASS,
+      TEXT_NUMERIC_CLASS,
+      TEXT_LINE_CLAMP_CLASS,
+    ]));
+    expect(wrapper.attributes('style')).toContain('--dt-text-line-clamp: 3');
   });
 
   it('removes line clamp class and style when maxLines is cleared', async () => {
@@ -180,19 +226,28 @@ describe('DtText', () => {
     expect(wrapper.classes()).toContain(TEXT_WRAP_MODIFIERS.balance);
   });
 
-  it('applies all wrap modifier classes correctly', () => {
-    Object.entries(TEXT_WRAP_MODIFIERS).forEach(([wrapValue, expectedClass]) => {
+  it.each(Object.entries(TEXT_WRAP_MODIFIERS))(
+    'applies wrap="%s" → class "%s"',
+    (wrapValue, expectedClass) => {
       const wrapper = mountComponent({ wrap: wrapValue });
+
       expect(wrapper.classes()).toContain(expectedClass);
-    });
-  });
+    },
+  );
 
   it('warns when wrap is not recognized', () => {
     const warnSpy = vi.spyOn(console, 'warn').mockImplementation(() => {});
 
-    const wrapper = mountComponent({ wrap: 'invalid-wrap' });
+    mountComponent({ wrap: 'invalid-wrap' });
 
     expect(warnSpy).toHaveBeenCalledWith(expect.stringContaining('Unsupported wrap "invalid-wrap"'));
+  });
+
+  it('does not apply class for unrecognized wrap', () => {
+    vi.spyOn(console, 'warn').mockImplementation(() => {});
+
+    const wrapper = mountComponent({ wrap: 'invalid-wrap' });
+
     expect(wrapper.classes()).not.toContain('d-text--wrap-invalid-wrap');
   });
 
@@ -202,36 +257,29 @@ describe('DtText', () => {
     expect(wrapper.classes()).toContain(TEXT_TRIM_MODIFIERS.both);
   });
 
-  it('applies all trim modifier classes correctly', () => {
-    Object.entries(TEXT_TRIM_MODIFIERS).forEach(([trimValue, expectedClass]) => {
+  it.each(Object.entries(TEXT_TRIM_MODIFIERS))(
+    'applies trim="%s" → class "%s"',
+    (trimValue, expectedClass) => {
       const wrapper = mountComponent({ trim: trimValue });
+
       expect(wrapper.classes()).toContain(expectedClass);
-    });
-  });
+    },
+  );
 
   it('warns when trim is not recognized', () => {
     const warnSpy = vi.spyOn(console, 'warn').mockImplementation(() => {});
 
-    const wrapper = mountComponent({ trim: 'invalid-trim' });
+    mountComponent({ trim: 'invalid-trim' });
 
     expect(warnSpy).toHaveBeenCalledWith(expect.stringContaining('Unsupported trim "invalid-trim"'));
-    expect(wrapper.classes()).not.toContain('d-text--trim-invalid-trim');
   });
 
-  it('stacks wrap and trim modifiers with other modifiers', () => {
-    const wrapper = mountComponent({
-      kind: 'headline',
-      size: 'lg',
-      wrap: 'balance',
-      trim: 'both',
-    });
+  it('does not apply class for unrecognized trim', () => {
+    vi.spyOn(console, 'warn').mockImplementation(() => {});
 
-    expect(wrapper.classes()).toEqual(expect.arrayContaining([
-      'd-text',
-      'd-text-headline--lg',
-      TEXT_WRAP_MODIFIERS.balance,
-      TEXT_TRIM_MODIFIERS.both,
-    ]));
+    const wrapper = mountComponent({ trim: 'invalid-trim' });
+
+    expect(wrapper.classes()).not.toContain('d-text--trim-invalid-trim');
   });
 
   it('has data-qa attribute', () => {
@@ -291,20 +339,28 @@ describe('DtText', () => {
       expect(wrapper.classes()).toContain(TEXT_STRENGTH_MODIFIERS.bold);
     });
 
-    it('applies all strength modifier classes correctly', () => {
-      Object.entries(TEXT_STRENGTH_MODIFIERS).forEach(([strength, expectedClass]) => {
+    it.each(Object.entries(TEXT_STRENGTH_MODIFIERS))(
+      'applies strength="%s" → class "%s"',
+      (strength, expectedClass) => {
         const wrapper = mountComponent({ strength });
 
         expect(wrapper.classes()).toContain(expectedClass);
-      });
-    });
+      },
+    );
 
     it('warns when strength is not recognized', () => {
       const warnSpy = vi.spyOn(console, 'warn').mockImplementation(() => {});
 
-      const wrapper = mountComponent({ strength: 'invalid-strength' });
+      mountComponent({ strength: 'invalid-strength' });
 
       expect(warnSpy).toHaveBeenCalledWith(expect.stringContaining('Unsupported strength "invalid-strength"'));
+    });
+
+    it('does not apply class for unrecognized strength', () => {
+      vi.spyOn(console, 'warn').mockImplementation(() => {});
+
+      const wrapper = mountComponent({ strength: 'invalid-strength' });
+
       expect(wrapper.classes()).not.toContain('d-text--fw-invalid-strength');
     });
 
@@ -313,20 +369,6 @@ describe('DtText', () => {
 
       const hasStrengthClass = wrapper.classes().some(c => c.includes('--fw-'));
       expect(hasStrengthClass).toBe(false);
-    });
-
-    it('stacks strength with kind/size modifiers', () => {
-      const wrapper = mountComponent({
-        kind: 'headline',
-        size: 'lg',
-        strength: 'medium',
-      });
-
-      expect(wrapper.classes()).toEqual(expect.arrayContaining([
-        'd-text',
-        'd-text-headline--lg',
-        TEXT_STRENGTH_MODIFIERS.medium,
-      ]));
     });
   });
 
@@ -337,13 +379,14 @@ describe('DtText', () => {
       expect(wrapper.classes()).toContain(TEXT_DENSITY_MODIFIERS[300]);
     });
 
-    it('applies all density modifier classes correctly', () => {
-      Object.entries(TEXT_DENSITY_MODIFIERS).forEach(([density, expectedClass]) => {
+    it.each(Object.entries(TEXT_DENSITY_MODIFIERS))(
+      'applies density="%s" → class "%s"',
+      (density, expectedClass) => {
         const wrapper = mountComponent({ density });
 
         expect(wrapper.classes()).toContain(expectedClass);
-      });
-    });
+      },
+    );
 
     it('accepts density as string or number', () => {
       const wrapperNumber = mountComponent({ density: 400 });
@@ -356,9 +399,16 @@ describe('DtText', () => {
     it('warns when density is not recognized', () => {
       const warnSpy = vi.spyOn(console, 'warn').mockImplementation(() => {});
 
-      const wrapper = mountComponent({ density: 999 });
+      mountComponent({ density: 999 });
 
       expect(warnSpy).toHaveBeenCalledWith(expect.stringContaining('Unsupported density "999"'));
+    });
+
+    it('does not apply class for unrecognized density', () => {
+      vi.spyOn(console, 'warn').mockImplementation(() => {});
+
+      const wrapper = mountComponent({ density: 999 });
+
       expect(wrapper.classes()).not.toContain('d-text--lh-999');
     });
 
@@ -367,38 +417,6 @@ describe('DtText', () => {
 
       const hasDensityClass = wrapper.classes().some(c => c.includes('--lh-'));
       expect(hasDensityClass).toBe(false);
-    });
-
-    it('stacks density with kind/size modifiers', () => {
-      const wrapper = mountComponent({
-        kind: 'body',
-        size: 'md',
-        density: 200,
-      });
-
-      expect(wrapper.classes()).toEqual(expect.arrayContaining([
-        'd-text',
-        'd-text-body--md',
-        TEXT_DENSITY_MODIFIERS[200],
-      ]));
-    });
-  });
-
-  describe('strength and density combined', () => {
-    it('stacks strength and density with other modifiers', () => {
-      const wrapper = mountComponent({
-        kind: 'label',
-        size: 'sm',
-        strength: 'semibold',
-        density: 300,
-      });
-
-      expect(wrapper.classes()).toEqual(expect.arrayContaining([
-        'd-text',
-        'd-text-label--sm',
-        TEXT_STRENGTH_MODIFIERS.semibold,
-        TEXT_DENSITY_MODIFIERS[300],
-      ]));
     });
   });
 });
