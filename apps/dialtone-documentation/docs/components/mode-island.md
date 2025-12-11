@@ -18,8 +18,8 @@ status: beta
             kind="muted"
           >
             <dt-stack gap="400" direction="row">
-              <span><strong>Mode:</strong> {{ currentMode.charAt(0).toUpperCase() + currentMode.slice(1) }}</span>
-              <span><strong>Contrast:</strong> {{ currentContrast.charAt(0).toUpperCase() + currentContrast.slice(1) }}</span>
+              <dt-text><dt-text strength="strong">Mode:</dt-text> {{ currentMode.charAt(0).toUpperCase() + currentMode.slice(1) }}</dt-text>
+              <dt-text><dt-text strength="strong">Contrast:</dt-text> {{ currentContrast.charAt(0).toUpperCase() + currentContrast.slice(1) }}</dt-text>
             </dt-stack>
             <template #icon>
               <dt-icon
@@ -343,9 +343,9 @@ Positioned components like [Popovers](/components/popover.html), [Dropdowns](/co
               <dt-stack gap="200">
                 <dt-text as="h2" kind="headline" size="xl" density="200">Katie Rodriguez</dt-text>
                 <dt-stack direction="row" gap="350">
-                  <span class="d-fc-success">Available</span>
-                  <span>&bull;</span>
-                  <span class="d-fc-tertiary">Working from coffee shop</span>
+                  <dt-text tone="success">Available</dt-text>
+                  <dt-text>&bull;</dt-text>
+                  <dt-text tone="tertiary">Working from coffee shop</dt-text>
                 </dt-stack>
               </dt-stack>
               <dt-stack>
@@ -388,9 +388,9 @@ Positioned components like [Popovers](/components/popover.html), [Dropdowns](/co
               <dt-stack gap="200">
                 <dt-text as="h2" kind="headline" size="xl" density="200">Katie Rodriguez</dt-text>
                 <dt-stack direction="row" gap="350">
-                  <span class="d-fc-success">Available</span>
-                  <span>&bull;</span>
-                  <span class="d-fc-tertiary">Working from coffee shop</span>
+                  <dt-text tone="success">Available</dt-text>
+                  <dt-text>&bull;</dt-text>
+                  <dt-text tone="tertiary">Working from coffee shop</dt-text>
                 </dt-stack>
               </dt-stack>
               <dt-stack>
@@ -433,9 +433,9 @@ Positioned components like [Popovers](/components/popover.html), [Dropdowns](/co
               <dt-stack gap="200">
                 <dt-text as="h2" kind="headline" size="xl" density="200">Katie Rodriguez</dt-text>
                 <dt-stack direction="row" gap="350">
-                  <span class="d-fc-success">Available</span>
-                  <span>&bull;</span>
-                  <span class="d-fc-tertiary">Working from coffee shop</span>
+                  <dt-text tone="success">Available</dt-text>
+                  <dt-text>&bull;</dt-text>
+                  <dt-text tone="tertiary">Working from coffee shop</dt-text>
                 </dt-stack>
               </dt-stack>
               <dt-stack>
@@ -478,9 +478,9 @@ Positioned components like [Popovers](/components/popover.html), [Dropdowns](/co
               <dt-stack gap="200">
                 <dt-text as="h2" kind="headline" size="xl" density="200">Katie Rodriguez</dt-text>
                 <dt-stack direction="row" gap="350">
-                  <span class="d-fc-success">Available</span>
-                  <span>&bull;</span>
-                  <span class="d-fc-tertiary">Working from coffee shop</span>
+                  <dt-text tone="success">Available</dt-text>
+                  <dt-text>&bull;</dt-text>
+                  <dt-text tone="tertiary">Working from coffee shop</dt-text>
                 </dt-stack>
               </dt-stack>
               <dt-stack>
