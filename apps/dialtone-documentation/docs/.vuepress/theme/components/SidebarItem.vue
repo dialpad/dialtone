@@ -24,7 +24,7 @@
             :class="[
               'd-w100p d-fw-normal',
               {
-                'd-headline--eyebrow d-fw-semibold d-bgc-transparent d-c-default': !item.link,
+                'd-fs-100 d-fw-semibold d-tt-uppercase d-bgc-transparent d-c-default': !item.link,
                 'd-btn--active': isActiveLink(isExactActive, item.link),
               },
             ]"
