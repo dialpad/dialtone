@@ -82,8 +82,7 @@ export default {
     },
 
     /**
-     * Aligns to available foreground color tokens, e.g. `d-fc-tertiary`, `d-fc-critical`, etc.
-     * @values (Dialtone foreground token suffixes, e.g., primary, secondary, success)
+     * Aligns to available foreground color tokens, e.g. `tertiary`, `critical`, etc.
      */
     tone: {
       type: String,
@@ -258,7 +257,7 @@ export default {
       this.kind === 'headline' &&
       !SEMANTIC_HEADING_ELEMENTS.includes(this.as)
     ) {
-       
+
       console.info(
         '[DtText] kind="headline" is used without a semantic heading element. ' +
         'Consider using as="h1|h2|h3|h4|h5|h6" for better accessibility.',

@@ -9,6 +9,8 @@ import {
   TEXT_ALIGN_MODIFIERS,
   TEXT_STRENGTH_MODIFIERS,
   TEXT_DENSITY_MODIFIERS,
+  TEXT_WRAP_MODIFIERS,
+  TEXT_TRIM_MODIFIERS,
 } from './text_constants';
 
 const kindOptions = Object.keys(TEXT_KIND_MODIFIERS);
@@ -16,6 +18,8 @@ const sizeOptions = Array.from(new Set(Object.values(TEXT_SIZE_MODIFIERS).flat()
 const alignOptions = [undefined, ...Object.keys(TEXT_ALIGN_MODIFIERS)];
 const strengthOptions = [undefined, ...Object.keys(TEXT_STRENGTH_MODIFIERS)];
 const densityOptions = [undefined, ...Object.keys(TEXT_DENSITY_MODIFIERS)];
+const wrapOptions = [undefined, ...Object.keys(TEXT_WRAP_MODIFIERS)];
+const trimOptions = [undefined, ...Object.keys(TEXT_TRIM_MODIFIERS)];
 
 export const argsData = {
   default: 'The quick brown fox jumps over the lazy dog.',
@@ -74,6 +78,16 @@ export const argTypesData = {
   },
   numeric: {
     control: 'boolean',
+  },
+  wrap: {
+    options: wrapOptions,
+    control: { type: 'select' },
+    description: 'wrap: default | nowrap: prevent wrapping | balance: even line lengths | pretty: avoid orphans/widows',
+  },
+  trim: {
+    options: trimOptions,
+    control: { type: 'select' },
+    description: 'start: trim above | end: trim below | both: trim above and below. Removes extra leading space.',
   },
   textProp: {
     control: 'text',

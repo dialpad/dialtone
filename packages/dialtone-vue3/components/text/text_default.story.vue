@@ -10,6 +10,8 @@
     :truncate="$attrs.truncate"
     :max-lines="$attrs.maxLines"
     :numeric="$attrs.numeric"
+    :wrap="$attrs.wrap"
+    :trim="$attrs.trim"
     :text="$attrs.textProp"
   >
     <template v-if="defaultSlot">

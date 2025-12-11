@@ -73,6 +73,7 @@
 - **2025-12-10** — **Documentation Improvements**: Added storybook link to frontmatter, added `text` prop section, fixed hero example to include `kind="body"`, fixed typo in Trim section.
 - **2025-12-10** — **Strength & Density Props (v2)**: Implemented as simple independent modifiers. No validation matrices — applies to all kind/size combinations. Added 12 new tests (40 total).
 - **2025-12-10** — **Strength value rename**: Changed `regular` to `normal` to match CSS `--fw-normal` class naming.
+- **2025-12-10** — **Storybook controls fix**: Added select dropdowns for `wrap` and `trim` props (were text inputs). Added missing bindings to default story.
 
 ---
 
