@@ -11,15 +11,15 @@ storybook: https://dialtone.dialpad.com/vue/?path=/story/components-card--defaul
 <code-well-header>
   <div class="d-card d-w264">
     <div class="d-card__header">
-      <div class="d-headline--md">
+      <dt-text kind="headline" size="md">
         Lorem ipsum
-      </div>
+      </dt-text>
       <button type="button" class="d-btn d-btn--xs d-btn--circle">
         <dt-icon name="more-vertical" size="200" />
       </button>
     </div>
     <div class="d-card__content">
-      <div>Content slot. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec fermentum molestie semper. Morbi finibus nulla turpis, nec molestie mi rutrum.</div>
+      Content slot. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec fermentum molestie semper. Morbi finibus nulla turpis, nec molestie mi rutrum.
     </div>
     <div class="d-card__footer">
       <dt-stack direction="row" gap="400">
@@ -106,20 +106,20 @@ showHtmlWarning />
 <code-well-header>
   <div class="d-card d-w264">
     <div class="d-card__header">
-      <div class="d-headline--md">
+      <dt-text kind="headline" size="md">
         Lorem ipsum
-      </div>
+      </dt-text>
       <button type="button" class="d-btn d-btn--xs d-btn--circle">
         <dt-icon name="more-vertical" size="200" />
       </button>
     </div>
     <div class="d-card__content">
-      <div>Content slot. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec fermentum molestie semper. Morbi finibus nulla turpis, nec molestie mi rutrum.</div>
+      Content slot. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec fermentum molestie semper. Morbi finibus nulla turpis, nec molestie mi rutrum.
     </div>
   </div>
 </code-well-header>
 
-<code-example-tabs
+<dt-text
 htmlCode='
 <div class="d-card d-w264">
   <div class="d-card__header">
@@ -131,7 +131,7 @@ htmlCode='
     </button>
   </div>
   <div class="d-card__content">
-    <div>Content slot. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec fermentum molestie semper. Morbi finibus nulla turpis, nec molestie mi rutrum.</div>
+    Content slot. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec fermentum molestie semper. Morbi finibus nulla turpis, nec molestie mi rutrum.
   </div>
 </div>
 '
@@ -164,7 +164,7 @@ showHtmlWarning />
 <code-well-header>
   <div class="d-card d-w264">
     <div class="d-card__content">
-      <div>Content slot. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec fermentum molestie semper. Morbi finibus nulla turpis, nec molestie mi rutrum.</div>
+      Content slot. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec fermentum molestie semper. Morbi finibus nulla turpis, nec molestie mi rutrum.
     </div>
     <div class="d-card__footer">
       <dt-stack direction="row" gap="400">
@@ -178,7 +178,7 @@ showHtmlWarning />
 htmlCode='
 <div class="d-card d-w264">
   <div class="d-card__content">
-    <div>Content slot. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec fermentum molestie semper. Morbi finibus nulla turpis, nec molestie mi rutrum.</div>
+    Content slot. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec fermentum molestie semper. Morbi finibus nulla turpis, nec molestie mi rutrum.
   </div>
   <div class="d-card__footer">
     <dt-stack direction="row" gap="400">
@@ -209,7 +209,7 @@ showHtmlWarning />
 <code-well-header>
   <div class="d-card d-w264">
     <div class="d-card__content">
-      <div>Content slot. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec fermentum molestie semper. Morbi finibus nulla turpis, nec molestie mi rutrum.</div>
+      Content slot. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec fermentum molestie semper. Morbi finibus nulla turpis, nec molestie mi rutrum.
     </div>
   </div>
 </code-well-header>
@@ -218,7 +218,7 @@ showHtmlWarning />
 htmlCode='
 <div class="d-card d-w264">
   <div class="d-card__content">
-    <div>Content slot. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec fermentum molestie semper. Morbi finibus nulla turpis, nec molestie mi rutrum.</div>
+    Content slot. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec fermentum molestie semper. Morbi finibus nulla turpis, nec molestie mi rutrum.
   </div>
 </div>
 '
@@ -236,15 +236,15 @@ showHtmlWarning />
 <code-well-header>
   <div class="d-card d-w264">
     <div class="d-card__header">
-      <div class="d-headline--md">
+      <dt-text kind="headline" size="md">
         Lorem ipsum
-      </div>
+      </dt-text>
       <button type="button" class="d-btn d-btn--xs d-btn--circle">
         <dt-icon name="more-vertical" size="200" />
       </button>
     </div>
     <div class="d-card__content d-h72">
-      <div>Content slot. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec fermentum molestie semper. Morbi finibus nulla turpis, nec molestie mi rutrum.</div>
+      Content slot. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec fermentum molestie semper. Morbi finibus nulla turpis, nec molestie mi rutrum.
     </div>
     <div class="d-card__footer">
       <dt-stack direction="row" gap="400">
@@ -254,7 +254,7 @@ showHtmlWarning />
   </div>
 </code-well-header>
 
-<code-example-tabs
+<dt-text
 htmlCode='
 <div class="d-card d-w264">
   <div class="d-card__header">
@@ -266,7 +266,7 @@ htmlCode='
     </button>
   </div>
   <div class="d-card__content d-h84">
-    <div>Content slot. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec fermentum molestie semper. Morbi finibus nulla turpis, nec molestie mi rutrum.</div>
+    Content slot. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec fermentum molestie semper. Morbi finibus nulla turpis, nec molestie mi rutrum.
   </div>
   <div class="d-card__footer">
     <dt-stack direction="row" gap="400">

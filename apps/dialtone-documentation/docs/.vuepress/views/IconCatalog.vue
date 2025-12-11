@@ -68,10 +68,14 @@
     :key="category"
     class="d-mb16"
   >
-    <div
-      class="d-headline--lg d-tt-capitalize d-mb4"
-      v-text="category"
-    />
+    <dt-text
+      as="h2"
+      kind="headline"
+      size="xl"
+      class="d-tt-capitalize d-mb4"
+    >
+      {{ category }}
+    </dt-text>
     <div class="d-gl-docsite-icons">
       <icon-popover
         v-for="(keywords, name) in icons"

@@ -66,17 +66,77 @@ Some icons are linked to specific actions, like the Settings gear <dt-icon name=
 
 The icon size is defined based on the context and text size next to it. These are the only available size options and no overrides should be needed to properly size the icons.
 
-<div class="d-gc2">
-<p class="d-body--sm"><dt-icon name="food" size="200" /> 200 when body small</p>
-<p class="d-body--md"><dt-icon name="food" size="300" /> 300 when body base</p>
-<p class="d-headline--lg"><dt-icon name="food" size="400" /> 400 when headline large</p>
-<p class="d-headline--xl"><dt-icon name="food" size="500" /> 500  when headline extra large</p>
-<p class="d-fs-300-tv"><dt-icon name="food" size="600" /> 600 when device 300</p>
-<p class="d-fs-400-tv"><dt-icon name="food" size="700" /> 700 when device 400</p>
-<!-- <p class="d-fs-500-tv"><dt-icon name="food" size="800" /> 800 when device 500</p> -->
+<dt-stack direction="row" justify="between" gap="400" class="d-gc2 d-bgc-secondary d-p24 d-bar16">
+  <dt-stack gap="400" align="center">
+    <dt-icon name="food" size="100" />
+    <dt-text as="code" kind="code" size="sm">100</dt-text>
+  </dt-stack>
+  <dt-stack gap="400" align="center">
+    <dt-icon name="food" size="200" />
+    <dt-text as="code" kind="code" size="sm">200</dt-text>
+  </dt-stack>
+  <dt-stack gap="400" align="center">
+    <dt-icon name="food" size="300" />
+    <dt-text as="code" kind="code" size="sm">300</dt-text>
+  </dt-stack>
+  <dt-stack gap="400" align="center">
+    <dt-icon name="food" size="400" />
+    <dt-text as="code" kind="code" size="sm">400</dt-text>
+  </dt-stack>
+  <dt-stack gap="400" align="center">
+    <dt-icon name="food" size="500" />
+    <dt-text as="code" kind="code" size="sm">500</dt-text>
+  </dt-stack>
+  <dt-stack gap="400" align="center">
+    <dt-icon name="food" size="600" />
+    <dt-text as="code" kind="code" size="sm">600</dt-text>
+  </dt-stack>
+  <dt-stack gap="400" align="center">
+    <dt-icon name="food" size="700" />
+    <dt-text as="code" kind="code" size="sm">700</dt-text>
+  </dt-stack>
+  <dt-stack gap="400" align="center">
+    <dt-icon name="food" size="800" />
+    <dt-text as="code" kind="code" size="sm">800</dt-text>
+  </dt-stack>
+</dt-stack>
+</div>
 
-</div>
-</div>
+#### Sample Pairings
+
+<dt-stack align="center" class="d-gc2 d-bgc-secondary d-p24 d-bar16">
+  <dt-stack gap="400">
+    <dt-stack direction="row" gap="300" align="center">
+      <dt-icon name="food" size="100" />
+      <dt-text kind="body" size="xs">100 with XS body</dt-text>
+    </dt-stack>
+    <dt-stack direction="row" gap="300" align="center">
+      <dt-icon name="food" size="200" />
+      <dt-text kind="body" size="sm">200 with SM body</dt-text>
+    </dt-stack>
+    <dt-stack direction="row" gap="300" align="center">
+      <dt-icon name="food" size="300" />
+      <dt-text kind="body" size="md">300 with MD body</dt-text>
+    </dt-stack>
+    <dt-stack direction="row" gap="300" align="center">
+      <dt-icon name="food" size="400" />
+      <dt-text kind="headline" size="lg">400 with LG headline</dt-text>
+    </dt-stack>
+    <dt-stack direction="row" gap="300" align="center">
+      <dt-icon name="food" size="500" />
+      <dt-text kind="headline" size="xl">500 with XL headline</dt-text>
+    </dt-stack>
+    <dt-stack direction="row" gap="300" align="center">
+      <dt-icon name="food" size="600" />
+      <dt-text kind="headline" size="xxl">600 with XXL headline</dt-text>
+    </dt-stack>
+    <dt-stack direction="row" gap="300" align="center">
+      <dt-icon name="food" size="700" />
+      <dt-text kind="headline" size="xxxl">700 with XXXL headline</dt-text>
+    </dt-stack>
+  </dt-stack>
+</dt-stack>
+
 
 ## Crafting an Icon
 

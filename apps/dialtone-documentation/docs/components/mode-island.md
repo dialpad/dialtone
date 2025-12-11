@@ -7,7 +7,7 @@ status: beta
 <code-well-header>
   <dt-stack gap="500" class="d-ai-flex-start d-w100p">
     <dt-stack direction="row" gap="500" class="d-jc-space-between d-w100p">
-      <h4 class="d-headline--lg">Demo</h4>
+      <dt-text as="h4" kind="headline" size="xl">Demo</dt-text>
       <dt-dropdown
         navigation-type="arrow-keys"
         placement="bottom-end"
@@ -98,7 +98,7 @@ status: beta
       <dt-mode-island class="d-p16 d-bar8 d-ba d-fl1">
         <dt-stack gap="400">
           <dt-stack direction="row" gap="400" class="d-jc-space-between">
-            <h3 class="d-headline--md-compact">Inverted <span class="d-fw-normal">(auto)</span></h3>
+            <dt-text as="h3" kind="headline" size="md" density="200">Inverted <dt-text strength="normal">(auto)</dt-text></dt-text>
             <dt-icon name="circle-half-filled" size="300" class="d-fc-success" />
           </dt-stack>
           <dt-stack gap="400" direction="row" class="d-py2 d-px8 d-bgc-moderate d-bar4 d-ba">
@@ -118,7 +118,7 @@ status: beta
       <dt-mode-island mode="light" class="d-p16 d-bar8 d-ba d-fl1">
         <dt-stack gap="400">
           <dt-stack direction="row" gap="400" class="d-jc-space-between">
-            <h3 class="d-headline--md-compact">Explicit light</h3>
+            <dt-text as="h3" kind="headline" size="md" density="200">Explicit light</dt-text>
             <dt-icon name="sun" size="300" class="d-fc-success" />
           </dt-stack>
           <dt-stack gap="400" direction="row" class="d-py2 d-px8 d-bgc-moderate d-bar4 d-ba">
@@ -138,7 +138,7 @@ status: beta
       <dt-mode-island mode="dark" class="d-p16 d-bar8 d-ba d-fl1">
         <dt-stack gap="400">
           <dt-stack direction="row" gap="400" class="d-jc-space-between">
-            <h3 class="d-headline--md-compact">Explicit dark</h3>
+            <dt-text as="h3" kind="headline" size="md" density="200">Explicit dark</dt-text>
             <dt-icon name="moon" size="300" class="d-fc-success" />
           </dt-stack>
           <dt-stack gap="400" direction="row" class="d-py2 d-px8 d-bgc-moderate d-bar4 d-ba">
