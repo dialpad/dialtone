@@ -26,6 +26,8 @@ import {
   TEXT_LINE_CLAMP_CLASS,
   TEXT_WRAP_MODIFIERS,
   TEXT_TRIM_MODIFIERS,
+  TEXT_STRENGTH_MODIFIERS,
+  TEXT_DENSITY_MODIFIERS,
 } from './text_constants';
 
 const DEFAULT_SIZE = 'md';
@@ -155,6 +157,30 @@ export default {
         return value === null || Object.prototype.hasOwnProperty.call(TEXT_TRIM_MODIFIERS, value);
       },
     },
+
+    /**
+     * Overrides font-weight. Applies to any kind/size combination.
+     * @values bold, semibold, medium, regular
+     */
+    strength: {
+      type: String,
+      default: null,
+      validator: (value) => {
+        return value === null || Object.prototype.hasOwnProperty.call(TEXT_STRENGTH_MODIFIERS, value);
+      },
+    },
+
+    /**
+     * Overrides line-height. Applies to any kind/size combination.
+     * @values 100, 200, 300, 400, 500, 600
+     */
+    density: {
+      type: [String, Number],
+      default: null,
+      validator: (value) => {
+        return value === null || Object.prototype.hasOwnProperty.call(TEXT_DENSITY_MODIFIERS, value);
+      },
+    },
   },
 
   computed: {
@@ -199,6 +225,16 @@ export default {
       const trimClass = this.getTrimClass();
       if (trimClass) {
         classes.push(trimClass);
+      }
+
+      const strengthClass = this.getStrengthClass();
+      if (strengthClass) {
+        classes.push(strengthClass);
+      }
+
+      const densityClass = this.getDensityClass();
+      if (densityClass) {
+        classes.push(densityClass);
       }
 
       return classes;
@@ -323,6 +359,34 @@ export default {
       }
 
       return trimClass;
+    },
+
+    getStrengthClass () {
+      if (!this.strength) {
+        return null;
+      }
+
+      const strengthClass = TEXT_STRENGTH_MODIFIERS[this.strength];
+      if (!strengthClass) {
+        console.warn(`[DtText] Unsupported strength "${this.strength}".`);
+        return null;
+      }
+
+      return strengthClass;
+    },
+
+    getDensityClass () {
+      if (this.density === null || this.density === undefined) {
+        return null;
+      }
+
+      const densityClass = TEXT_DENSITY_MODIFIERS[this.density];
+      if (!densityClass) {
+        console.warn(`[DtText] Unsupported density "${this.density}".`);
+        return null;
+      }
+
+      return densityClass;
     },
   },
 };

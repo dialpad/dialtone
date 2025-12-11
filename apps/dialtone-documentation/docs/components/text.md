@@ -239,6 +239,51 @@ vueCode='
 '
 />
 
+### Strength
+
+Override the font-weight of the text. Applies to any kind/size combination. If omitted, the default weight from the typography token is used.
+
+<code-well-header>
+  <dt-stack direction="row" gap="500" class="d-fw-wrap">
+    <dt-text strength="bold">Bold</dt-text>
+    <dt-text strength="semibold">Semibold</dt-text>
+    <dt-text strength="medium">Medium</dt-text>
+    <dt-text strength="regular">Regular</dt-text>
+  </dt-stack>
+</code-well-header>
+
+<code-example-tabs
+vueCode='
+<dt-text strength="bold">Bold</dt-text>
+<dt-text strength="semibold">Semibold</dt-text>
+<dt-text strength="medium">Medium</dt-text>
+<dt-text strength="regular">Regular</dt-text>
+'
+/>
+
+### Density
+
+Override the line-height of the text. Applies to any kind/size combination. If omitted, the default line-height from the typography token is used.
+
+<code-well-header>
+  <dt-stack gap="300">
+    <dt-text kind="body" as="p" density="100">Density 100 — Tightest line-height for compact UI elements.</dt-text>
+    <dt-text kind="body" as="p" density="200">Density 200 — Tight line-height for dense content areas.</dt-text>
+    <dt-text kind="body" as="p" density="300">Density 300 — Slightly compact line-height.</dt-text>
+    <dt-text kind="body" as="p" density="400">Density 400 — Standard line-height.</dt-text>
+    <dt-text kind="body" as="p" density="500">Density 500 — Relaxed line-height for better readability.</dt-text>
+    <dt-text kind="body" as="p" density="600">Density 600 — Most spacious line-height.</dt-text>
+  </dt-stack>
+</code-well-header>
+
+<code-example-tabs
+vueCode='
+<dt-text density="100">Tight</dt-text>
+<dt-text density="300">Medium</dt-text>
+<dt-text density="600">Spacious</dt-text>
+'
+/>
+
 ## Tone
 
 Use `tone` to declare the text's tone, which will map to a foreground color. By default, the tone is inherited from its parent.

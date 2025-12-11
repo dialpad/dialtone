@@ -7,6 +7,8 @@ import {
   TEXT_TRUNCATE_CLASS,
   TEXT_WRAP_MODIFIERS,
   TEXT_TRIM_MODIFIERS,
+  TEXT_STRENGTH_MODIFIERS,
+  TEXT_DENSITY_MODIFIERS,
 } from './text_constants';
 
 describe('DtText', () => {
@@ -269,6 +271,124 @@ describe('DtText', () => {
       mountComponent({ kind: 'code' });
 
       expect(infoSpy).not.toHaveBeenCalled();
+    });
+  });
+
+  describe('strength prop', () => {
+    it('applies strength modifier class when strength prop is valid', () => {
+      const wrapper = mountComponent({ strength: 'bold' });
+
+      expect(wrapper.classes()).toContain(TEXT_STRENGTH_MODIFIERS.bold);
+    });
+
+    it('applies all strength modifier classes correctly', () => {
+      Object.entries(TEXT_STRENGTH_MODIFIERS).forEach(([strength, expectedClass]) => {
+        const wrapper = mountComponent({ strength });
+
+        expect(wrapper.classes()).toContain(expectedClass);
+      });
+    });
+
+    it('warns when strength is not recognized', () => {
+      const warnSpy = vi.spyOn(console, 'warn').mockImplementation(() => {});
+
+      const wrapper = mountComponent({ strength: 'invalid-strength' });
+
+      expect(warnSpy).toHaveBeenCalledWith(expect.stringContaining('Unsupported strength "invalid-strength"'));
+      expect(wrapper.classes()).not.toContain('d-text--fw-invalid-strength');
+    });
+
+    it('does not add strength class when prop is omitted', () => {
+      const wrapper = mountComponent({});
+
+      const hasStrengthClass = wrapper.classes().some(c => c.includes('--fw-'));
+      expect(hasStrengthClass).toBe(false);
+    });
+
+    it('stacks strength with kind/size modifiers', () => {
+      const wrapper = mountComponent({
+        kind: 'headline',
+        size: 'lg',
+        strength: 'medium',
+      });
+
+      expect(wrapper.classes()).toEqual(expect.arrayContaining([
+        'd-text',
+        'd-text-headline--lg',
+        TEXT_STRENGTH_MODIFIERS.medium,
+      ]));
+    });
+  });
+
+  describe('density prop', () => {
+    it('applies density modifier class when density prop is valid', () => {
+      const wrapper = mountComponent({ density: 300 });
+
+      expect(wrapper.classes()).toContain(TEXT_DENSITY_MODIFIERS[300]);
+    });
+
+    it('applies all density modifier classes correctly', () => {
+      Object.entries(TEXT_DENSITY_MODIFIERS).forEach(([density, expectedClass]) => {
+        const wrapper = mountComponent({ density });
+
+        expect(wrapper.classes()).toContain(expectedClass);
+      });
+    });
+
+    it('accepts density as string or number', () => {
+      const wrapperNumber = mountComponent({ density: 400 });
+      const wrapperString = mountComponent({ density: '400' });
+
+      expect(wrapperNumber.classes()).toContain(TEXT_DENSITY_MODIFIERS[400]);
+      expect(wrapperString.classes()).toContain(TEXT_DENSITY_MODIFIERS[400]);
+    });
+
+    it('warns when density is not recognized', () => {
+      const warnSpy = vi.spyOn(console, 'warn').mockImplementation(() => {});
+
+      const wrapper = mountComponent({ density: 999 });
+
+      expect(warnSpy).toHaveBeenCalledWith(expect.stringContaining('Unsupported density "999"'));
+      expect(wrapper.classes()).not.toContain('d-text--lh-999');
+    });
+
+    it('does not add density class when prop is omitted', () => {
+      const wrapper = mountComponent({});
+
+      const hasDensityClass = wrapper.classes().some(c => c.includes('--lh-'));
+      expect(hasDensityClass).toBe(false);
+    });
+
+    it('stacks density with kind/size modifiers', () => {
+      const wrapper = mountComponent({
+        kind: 'body',
+        size: 'md',
+        density: 200,
+      });
+
+      expect(wrapper.classes()).toEqual(expect.arrayContaining([
+        'd-text',
+        'd-text-body--md',
+        TEXT_DENSITY_MODIFIERS[200],
+      ]));
+    });
+  });
+
+  describe('strength and density combined', () => {
+    it('stacks strength and density with other modifiers', () => {
+      const wrapper = mountComponent({
+        kind: 'label',
+        size: 'sm',
+        strength: 'semibold',
+        density: 300,
+      });
+
+      expect(wrapper.classes()).toEqual(expect.arrayContaining([
+        'd-text',
+        'd-text-label--sm',
+        TEXT_STRENGTH_MODIFIERS.semibold,
+        TEXT_DENSITY_MODIFIERS[300],
+      ]));
     });
   });
 });

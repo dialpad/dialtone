@@ -44,6 +44,22 @@ export const TEXT_TRIM_MODIFIERS = {
   both: 'd-text--trim-both',
 };
 
+export const TEXT_STRENGTH_MODIFIERS = {
+  bold: 'd-text--fw-bold',
+  semibold: 'd-text--fw-semibold',
+  medium: 'd-text--fw-medium',
+  regular: 'd-text--fw-regular',
+};
+
+export const TEXT_DENSITY_MODIFIERS = {
+  100: 'd-text--lh-100',
+  200: 'd-text--lh-200',
+  300: 'd-text--lh-300',
+  400: 'd-text--lh-400',
+  500: 'd-text--lh-500',
+  600: 'd-text--lh-600',
+};
+
 export default {
   TEXT_KIND_MODIFIERS,
   TEXT_SIZE_MODIFIERS,
@@ -56,4 +72,6 @@ export default {
   TEXT_LINE_CLAMP_CLASS,
   TEXT_WRAP_MODIFIERS,
   TEXT_TRIM_MODIFIERS,
+  TEXT_STRENGTH_MODIFIERS,
+  TEXT_DENSITY_MODIFIERS,
 };

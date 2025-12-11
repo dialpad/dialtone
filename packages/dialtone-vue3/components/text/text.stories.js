@@ -7,17 +7,23 @@ import {
   TEXT_KIND_MODIFIERS,
   TEXT_SIZE_MODIFIERS,
   TEXT_ALIGN_MODIFIERS,
+  TEXT_STRENGTH_MODIFIERS,
+  TEXT_DENSITY_MODIFIERS,
 } from './text_constants';
 
 const kindOptions = Object.keys(TEXT_KIND_MODIFIERS);
 const sizeOptions = Array.from(new Set(Object.values(TEXT_SIZE_MODIFIERS).flat()));
 const alignOptions = [undefined, ...Object.keys(TEXT_ALIGN_MODIFIERS)];
+const strengthOptions = [undefined, ...Object.keys(TEXT_STRENGTH_MODIFIERS)];
+const densityOptions = [undefined, ...Object.keys(TEXT_DENSITY_MODIFIERS)];
 
 export const argsData = {
   default: 'The quick brown fox jumps over the lazy dog.',
   as: 'span',
   kind: 'body',
   size: 'md',
+  strength: undefined,
+  density: undefined,
   tone: undefined,
   align: undefined,
   truncate: false,
@@ -43,6 +49,14 @@ export const argTypesData = {
   },
   size: {
     options: sizeOptions,
+    control: { type: 'select' },
+  },
+  strength: {
+    options: strengthOptions,
+    control: { type: 'select' },
+  },
+  density: {
+    options: densityOptions,
     control: { type: 'select' },
   },
   tone: {

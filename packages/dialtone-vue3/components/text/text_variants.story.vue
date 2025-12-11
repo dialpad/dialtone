@@ -236,6 +236,49 @@
             </div>
           </dt-stack>
         </dt-stack>
+        <dt-stack gap="300">
+          <dt-text
+            kind="label"
+            size="sm"
+            tone="muted"
+          >
+            Strength
+          </dt-text>
+          <dt-stack
+            direction="row"
+            gap="400"
+            class="d-fw-wrap"
+          >
+            <dt-text
+              v-for="strengthExample in strengthExamples"
+              :key="strengthExample.strength"
+              kind="body"
+              :strength="strengthExample.strength"
+            >
+              {{ strengthExample.copy }}
+            </dt-text>
+          </dt-stack>
+        </dt-stack>
+        <dt-stack gap="300">
+          <dt-text
+            kind="label"
+            size="sm"
+            tone="muted"
+          >
+            Density
+          </dt-text>
+          <dt-stack gap="200">
+            <dt-text
+              v-for="densityExample in densityExamples"
+              :key="densityExample.density"
+              kind="body"
+              as="p"
+              :density="densityExample.density"
+            >
+              density="{{ densityExample.density }}" — {{ densityExample.copy }}
+            </dt-text>
+          </dt-stack>
+        </dt-stack>
       </dt-stack>
     </section>
   </dt-stack>
@@ -316,6 +359,26 @@ export default {
         { trim: 'start', copy: 'Trim Start' },
         { trim: 'end', copy: 'Trim End' },
         { trim: 'both', copy: 'Trim Both' },
+      ];
+    },
+
+    strengthExamples () {
+      return [
+        { strength: 'bold', copy: 'Bold strength' },
+        { strength: 'semibold', copy: 'Semibold strength' },
+        { strength: 'medium', copy: 'Medium strength' },
+        { strength: 'regular', copy: 'Regular strength' },
+      ];
+    },
+
+    densityExamples () {
+      return [
+        { density: 100, copy: 'Tightest line-height for compact UI' },
+        { density: 200, copy: 'Tight line-height for dense content' },
+        { density: 300, copy: 'Slightly compact line-height' },
+        { density: 400, copy: 'Default-ish line-height' },
+        { density: 500, copy: 'Relaxed line-height for readability' },
+        { density: 600, copy: 'Most spacious line-height' },
       ];
     },
   },
