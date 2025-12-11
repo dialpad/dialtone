@@ -7,9 +7,11 @@ image: assets/images/components/text.png
 ---
 
 <code-well-header>
-  <dt-stack>
+  <dt-stack direction="row" gap="500" align="baseline">
     <dt-text kind="headline" size="lg" as="h2">Large headline</dt-text>
     <dt-text kind="body" size="md" as="p">Medium body</dt-text>
+    <dt-text kind="label" size="md" as="p">Medium label</dt-text>
+    <dt-text kind="code" size="md" as="p">Medium code</dt-text>
   </dt-stack>
 </code-well-header>
 
@@ -20,10 +22,9 @@ image: assets/images/components/text.png
 <code-example-tabs
 vueCode='
 <dt-text {{props}}> ... </dt-text>
-'
-/>
+'/>
 
-Use in place of manually applying Text Styles. Examples of manual application you should avoid include:
+Use in place of manually applying Text Styles. Examples of manual application **you should avoid** include:
 
 * Applying Text Styles classes, e.g. `class="d-text-body--md"`
 * Combinations of CSS Utilities, e.g. `class="d-fs-300 d-fw-semibold d-lh-300"`
@@ -57,7 +58,7 @@ Use in place of manually applying Text Styles. Examples of manual application yo
 
 ### Kind
 
-Declare the role of the content. Default will inherit text styles from the parent.
+Declare the role of the content. Default will inherit styles from the parent.
 
 <code-well-header>
   <dt-stack gap="400" direction="row" class="d-ai-baseline">
@@ -76,128 +77,127 @@ vueCode='
 <dt-text kind="label">Label</dt-text>
 <dt-text kind="code">Code</dt-text>
 <dt-text>Default (inherits)</dt-text>
-'
-/>
+'/>
 
 ### Size
 
 All kinds support `size` prop, but not all sizes are available for each kind. When `kind` is set, size defaults to `md` if not specified.
 
-- **headline**: xxxl, xxl, xl, lg, md, sm, xs
-- **body, label, code**: lg, md, sm, xs
+* **headline**: `xxxl`, `xxl`, `xl`, `lg`, `md`, `sm`, `xs`
+* **body, label, code**: `lg`, `md`, `sm`, `xs`
 
 <code-well-header>
   <dt-stack class="d-w100p d-ba d-bar4">
     <table class="d-w100p d-table">
-      <tr>
+      <tr class="d-va-baseline">
         <th></th>
-        <th>
-          <dt-text as="code" kind="code">xs</dt-text>
+        <th class="d-ta-center">
+          <dt-text as="code" kind="code" class="d-bgc-transparent">xs</dt-text>
         </th>
-        <th>
-          <dt-text as="code" kind="code">sm</dt-text>
+        <th class="d-ta-center">
+          <dt-text as="code" kind="code" class="d-bgc-transparent">sm</dt-text>
         </th>
-        <th>
-          <dt-text as="code" kind="code">md</dt-text>
+        <th class="d-ta-center">
+          <dt-text as="code" kind="code" class="d-bgc-transparent">md</dt-text>
         </th>
-        <th>
-          <dt-text as="code" kind="code">lg</dt-text>
+        <th class="d-ta-center">
+          <dt-text as="code" kind="code" class="d-bgc-transparent">lg</dt-text>
         </th>
-        <th>
-          <dt-text as="code" kind="code">xl</dt-text>
+        <th class="d-ta-center">
+          <dt-text as="code" kind="code" class="d-bgc-transparent">xl</dt-text>
         </th>
-        <th>
-          <dt-text as="code" kind="code">xxl</dt-text>
+        <th class="d-ta-center">
+          <dt-text as="code" kind="code" class="d-bgc-transparent">xxl</dt-text>
         </th>
-        <th>
-          <dt-text as="code" kind="code">xxxl</dt-text>
+        <th class="d-ta-center">
+          <dt-text as="code" kind="code" class="d-bgc-transparent">xxxl</dt-text>
         </th>
       </tr>
       <tr class="d-va-baseline">
         <th scope="row">
-          <dt-text as="code" align="end" kind="code">headline</dt-text>
+          <dt-text as="code" align="end" kind="code" class="d-bgc-transparent ">headline</dt-text>
         </th>
-        <td>
-          <dt-text kind="headline" as="h2" size="xs" tone="primary">Text</dt-text>
+        <td class="d-ta-center">
+          <dt-text kind="headline" as="h2" size="xs">Text</dt-text>
         </td>
-        <td>
-          <dt-text kind="headline" as="h2" size="sm" tone="primary">Text</dt-text>
+        <td class="d-ta-center">
+          <dt-text kind="headline" as="h2" size="sm">Text</dt-text>
         </td>
-        <td>
-          <dt-text kind="headline" as="h2" tone="primary">Text</dt-text>
+        <td class="d-ta-center">
+          <dt-text kind="headline" as="h2">Text</dt-text>
         </td>
-        <td>
-          <dt-text kind="headline" as="h2" size="lg" tone="primary">Text</dt-text>
+        <td class="d-ta-center">
+          <dt-text kind="headline" as="h2" size="lg">Text</dt-text>
         </td>
-        <td>
-          <dt-text kind="headline" as="h2" size="xl" tone="primary">Text</dt-text>
+        <td class="d-ta-center">
+          <dt-text kind="headline" as="h2" size="xl">Text</dt-text>
         </td>
-        <td>
-          <dt-text kind="headline" as="h2" size="xxl" tone="primary">Text</dt-text>
+        <td class="d-ta-center">
+          <dt-text kind="headline" as="h2" size="xxl">Text</dt-text>
         </td>
-        <td>
-          <dt-text kind="headline" as="h2" size="xxxl" tone="primary">Text</dt-text>
+        <td class="d-ta-center">
+          <dt-text kind="headline" as="h2" size="xxxl">Text</dt-text>
         </td>
       </tr>
       <tr class="d-va-baseline">
         <th scope="row">
-          <dt-text as="code" align="end" kind="code">body</dt-text>
+          <dt-text as="code" align="end" kind="code" class="d-bgc-transparent">body</dt-text>
         </th>
-        <td>
-          <dt-text kind="body" as="p" size="xs" tone="primary">Text</dt-text>
+        <td class="d-ta-center">
+          <dt-text kind="body" as="p" size="xs">Text</dt-text>
         </td>
-        <td>
-          <dt-text kind="body" as="p" size="sm" tone="primary">Text</dt-text>
+        <td class="d-ta-center">
+          <dt-text kind="body" as="p" size="sm">Text</dt-text>
         </td>
-        <td>
-          <dt-text kind="body" as="p" tone="primary">Text</dt-text>
+        <td class="d-ta-center">
+          <dt-text kind="body" as="p">Text</dt-text>
         </td>
-        <td>
-          <dt-text kind="body" as="p" size="lg" tone="primary">Text</dt-text>
+        <td class="d-ta-center">
+          <dt-text kind="body" as="p" size="lg">Text</dt-text>
         </td>
-        <td><dt-text tone="muted" size="sm" title="not available">-</dt-text></td>
-        <td><dt-text tone="muted" size="sm" title="not available">-</dt-text></td>
-        <td><dt-text tone="muted" size="sm" title="not available">-</dt-text></td>
+        <td class="d-ta-center"><dt-text tone="muted" size="sm" title="not available">-</dt-text></td>
+        <td class="d-ta-center"><dt-text tone="muted" size="sm" title="not available">-</dt-text></td>
+        <td class="d-ta-center"><dt-text tone="muted" size="sm" title="not available">-</dt-text></td>
       </tr>
       <tr class="d-va-baseline">
         <th scope="row">
-          <dt-text as="code" align="end" kind="code">label</dt-text>
+          <dt-text as="code" align="end" kind="code" class="d-bgc-transparent">label</dt-text>
         </th>
-        <td>
-          <dt-text kind="label" as="p" size="xs" tone="primary">Text</dt-text>
+        <td class="d-ta-center">
+          <dt-text kind="label" as="p" size="xs">Text</dt-text>
         </td>
-        <td>
-          <dt-text kind="label" as="p" size="sm" tone="primary">Text</dt-text>
+        <td class="d-ta-center">
+          <dt-text kind="label" as="p" size="sm">Text</dt-text>
         </td>
-        <td>
-          <dt-text kind="label" as="p" tone="primary">Text</dt-text>
+        <td class="d-ta-center">
+          <dt-text kind="label" as="p">Text</dt-text>
         </td>
-        <td>
-          <dt-text kind="label" as="p" size="lg" tone="primary">Text</dt-text>
+        <td class="d-ta-center">
+          <dt-text kind="label" as="p" size="lg">Text</dt-text>
         </td>
-        <td><dt-text tone="muted" size="sm" title="not available">-</dt-text></td>
-        <td><dt-text tone="muted" size="sm" title="not available">-</dt-text></td>
-        <td><dt-text tone="muted" size="sm" title="not available">-</dt-text></td>
+        <td class="d-ta-center"><dt-text tone="muted" size="sm" title="not available">-</dt-text></td>
+        <td class="d-ta-center"><dt-text tone="muted" size="sm" title="not available">-</dt-text></td>
+        <td class="d-ta-center"><dt-text tone="muted" size="sm" title="not available">-</dt-text></td>
       </tr>
       <tr class="d-va-baseline">
         <th scope="row">
-          <dt-text as="code" align="end" kind="code">code</dt-text>
+          <dt-text as="code" align="end" kind="code" class="d-bgc-transparent">code</dt-text>
         </th>
-        <td>
-          <dt-text kind="code" as="code" size="xs" tone="primary">Text</dt-text>
+        <td class="d-ta-center">
+          <dt-text kind="code" as="code" size="xs" class="d-bgc-transparent" tone="secondary">Text</dt-text>
         </td>
-        <td>
-          <dt-text kind="code" as="code" size="sm" tone="primary">Text</dt-text>
+        <td class="d-ta-center">
+          <dt-text kind="code" as="code" size="sm" class="d-bgc-transparent" tone="secondary">Text</dt-text>
         </td>
-        <td>
-          <dt-text kind="code" as="code" tone="primary">Text</dt-text>
+        <td class="d-ta-center">
+          <dt-text kind="code" as="code" class="d-bgc-transparent" tone="secondary">Text</dt-text>
         </td>
-        <td>
-          <dt-text kind="code" as="code" size="lg" tone="primary">Text</dt-text>
+        <td class="d-ta-center">
+          <dt-text kind="code" as="code" size="lg" class="d-bgc-transparent" tone="secondary">Text</dt-text>
         </td>
-        <td><dt-text tone="muted" size="sm" title="not available">-</dt-text></td>
-        <td><dt-text tone="muted" size="sm" title="not available">-</dt-text></td>
-        <td><dt-text tone="muted" size="sm" title="not available">-</dt-text></td>
+        <td class="d-ta-center"><dt-text tone="muted" size="sm" title="not available">-</dt-text></td>
+        <td class="d-ta-center"><dt-text tone="muted" size="sm" title="not available">-</dt-text></td>
+        <td class="d-ta-center"><dt-text tone="muted" size="sm" title="not available">-</dt-text></td>
       </tr>
     </table>
   </dt-stack>
@@ -206,7 +206,7 @@ All kinds support `size` prop, but not all sizes are available for each kind. Wh
 <code-example-tabs
 vueCode='
 <dt-text kind="{{kind}}" size="{{size}}">....</dt-text>
-' />
+'/>
 
 ### Numeric
 
@@ -236,8 +236,7 @@ The `numeric` prop applies styles that ensure that each number is set with consi
 <code-example-tabs
 vueCode='
 <dt-text numeric>(913) 555-3170</dt-text>
-'
-/>
+'/>
 
 ### Strength
 
@@ -254,35 +253,28 @@ Override the font-weight of the text. Applies to any kind/size combination. If o
 
 <code-example-tabs
 vueCode='
-<dt-text strength="bold">Bold</dt-text>
-<dt-text strength="semibold">Semibold</dt-text>
-<dt-text strength="medium">Medium</dt-text>
-<dt-text strength="normal">Normal</dt-text>
-'
-/>
+<dt-text strength="{{strength}}">...</dt-text>
+'/>
 
 ### Density
 
 Override the line-height of the text. Applies to any kind/size combination. If omitted, the default line-height from the typography token is used.
 
 <code-well-header>
-  <dt-stack gap="300">
-    <dt-text kind="body" as="p" density="100">Density 100 — Tightest line-height for compact UI elements.</dt-text>
-    <dt-text kind="body" as="p" density="200">Density 200 — Tight line-height for dense content areas.</dt-text>
-    <dt-text kind="body" as="p" density="300">Density 300 — Slightly compact line-height.</dt-text>
-    <dt-text kind="body" as="p" density="400">Density 400 — Standard line-height.</dt-text>
-    <dt-text kind="body" as="p" density="500">Density 500 — Relaxed line-height for better readability.</dt-text>
-    <dt-text kind="body" as="p" density="600">Density 600 — Most spacious line-height.</dt-text>
+  <dt-stack gap="400">
+    <dt-text kind="body" as="p" density="100" class="d-bgc-moderate-opaque"><dt-text kind="code" as="code" size="sm" class="d-bgc-transparent">100</dt-text> The quick brown fox jumped over the lazy dog.</dt-text>
+    <dt-text kind="body" as="p" density="200" class="d-bgc-moderate-opaque"><dt-text kind="code" as="code" size="sm" class="d-bgc-transparent">200</dt-text> The quick brown fox jumped over the lazy dog.</dt-text>
+    <dt-text kind="body" as="p" density="300" class="d-bgc-moderate-opaque"><dt-text kind="code" as="code" size="sm" class="d-bgc-transparent">300</dt-text> The quick brown fox jumped over the lazy dog.</dt-text>
+    <dt-text kind="body" as="p" density="400" class="d-bgc-moderate-opaque"><dt-text kind="code" as="code" size="sm" class="d-bgc-transparent">400</dt-text> The quick brown fox jumped over the lazy dog.</dt-text>
+    <dt-text kind="body" as="p" density="500" class="d-bgc-moderate-opaque"><dt-text kind="code" as="code" size="sm" class="d-bgc-transparent">500</dt-text> The quick brown fox jumped over the lazy dog.</dt-text>
+    <dt-text kind="body" as="p" density="600" class="d-bgc-moderate-opaque"><dt-text kind="code" as="code" size="sm" class="d-bgc-transparent">600</dt-text> The quick brown fox jumped over the lazy dog.</dt-text>
   </dt-stack>
 </code-well-header>
 
 <code-example-tabs
 vueCode='
-<dt-text density="100">Tight</dt-text>
-<dt-text density="300">Medium</dt-text>
-<dt-text density="600">Spacious</dt-text>
-'
-/>
+<dt-text density="{{density}}">...</dt-text>
+'/>
 
 ## Tone
 
@@ -291,7 +283,7 @@ Use `tone` to declare the text's tone, which will map to a foreground color. By 
 <code-well-header>
   <dt-stack gap="500" direction="row">
     <dt-stack gap="300" class="d-py8 d-px16 d-bgc-primary d-bar4">
-      <dt-text tone="primary">primary</dt-text>
+      <dt-text>primary</dt-text>
       <dt-text tone="secondary">secondary</dt-text>
       <dt-text tone="tertiary">tertiary</dt-text>
       <dt-text tone="muted">muted</dt-text>
@@ -322,7 +314,7 @@ Use `tone` to declare the text's tone, which will map to a foreground color. By 
 <code-example-tabs
 vueCode='
 <dt-text tone="{{tone}}">...</dt-text>
-' />
+'/>
 
 ## As
 
@@ -331,20 +323,20 @@ Use `as` to declare the underlying HTML tag that the component should render, in
 <code-well-header>
   <dt-stack class="d-w100p" gap="500">
     <dt-stack gap="400">
-      <dt-text kind="headline" as="h1" size="xl">The Complete Agentic AI Platform</dt-text>
-      <dt-text kind="body" as="p">Our AI Agents come equipped with the core skills businesses need to deliver seamless customer experiences.</dt-text>
+      <dt-text kind="headline" as="h1" size="xxl">The Complete Agentic AI Platform</dt-text>
+      <dt-text kind="body" as="p" size="lg">Our AI Agents come equipped with the core skills businesses need to deliver seamless customer experiences.</dt-text>
     </dt-stack>
     <dt-stack direction="row" gap="500" class="d-ai-flex-start">
       <dt-stack gap="400">
-        <dt-text kind="headline" as="h2" size="lg">Try before you AI</dt-text>
+        <dt-text kind="headline" as="h2" size="xl">Try before you AI</dt-text>
         <dt-text kind="body" as="p">Build, run and optimize your agents - no code, just your expertise and our built-in intelligence.</dt-text>
       </dt-stack>
       <dt-stack gap="400">
-        <dt-text kind="headline" as="h2" size="lg">Great minds sync alike</dt-text>
+        <dt-text kind="headline" as="h2" size="xl">Great minds sync alike</dt-text>
         <dt-text kind="body" as="p">Our AI learns and balances speed with quality using one data plane that keeps customers coming back.</dt-text>
       </dt-stack>
       <dt-stack gap="400">
-        <dt-text kind="headline" as="h2" size="lg">History repeats itself. Customers shouldn't.</dt-text>
+        <dt-text kind="headline" as="h2" size="xl">History repeats itself. Customers shouldn't.</dt-text>
         <dt-text kind="body" as="p">Whatever your customer types or says, our AI and your human agents stay in sync.</dt-text>
       </dt-stack>
     </dt-stack>
@@ -353,15 +345,15 @@ Use `as` to declare the underlying HTML tag that the component should render, in
 
 <code-example-tabs
 vueCode='
-<dt-text kind="headline" as="h1" size="xl">...</dt-text>
+<dt-text kind="headline" as="h1" size="xxl">...</dt-text>
+<dt-text kind="body" as="p" size="lg">...</dt-text>
+<dt-text kind="headline" as="h2" size="xl">...</dt-text>
 <dt-text kind="body" as="p">...</dt-text>
-<dt-text kind="headline" as="h2" size="lg">...</dt-text>
+<dt-text kind="headline" as="h2" size="xl">...</dt-text>
 <dt-text kind="body" as="p">...</dt-text>
-<dt-text kind="headline" as="h2" size="lg">...</dt-text>
+<dt-text kind="headline" as="h2" size="xl">...</dt-text>
 <dt-text kind="body" as="p">...</dt-text>
-<dt-text kind="headline" as="h2" size="lg">...</dt-text>
-<dt-text kind="body" as="p">...</dt-text>
-' />
+'/>
 
 ## Align
 
@@ -369,16 +361,16 @@ Since `DtText`'s default element is a `<span>`, which is inline by default, the 
 
 <code-well-header>
   <dt-stack class="d-w100p" gap="600">
-    <div class="d-ba d-bc-subtle d-bas-dashed">
+    <div class="d-bgc-moderate-opaque">
       <dt-text as="p" align="start">Welcome to Dialpad, the most modern, AI-powered business communications platform. We've taken every form of communication that you rely on and unified it into one app. </dt-text>
     </div>
-    <div class="d-ba d-bc-subtle d-bas-dashed">
+    <div class="d-bgc-moderate-opaque">
       <dt-text as="p" align="center">Welcome to Dialpad, the most modern, AI-powered business communications platform. We've taken every form of communication that you rely on and unified it into one app. </dt-text>
     </div>
-    <div class="d-ba d-bc-subtle d-bas-dashed">
+    <div class="d-bgc-moderate-opaque">
       <dt-text as="p" align="end">Welcome to Dialpad, the most modern, AI-powered business communications platform. We've taken every form of communication that you rely on and unified it into one app. </dt-text>
     </div>
-    <div class="d-ba d-bc-subtle d-bas-dashed">
+    <div class="d-bgc-moderate-opaque">
       <dt-text as="p" align="justify">Welcome to Dialpad, the most modern, AI-powered business communications platform. We've taken every form of communication that you rely on and unified it into one app. </dt-text>
     </div>
   </dt-stack>
@@ -390,7 +382,7 @@ vueCode='
 <dt-text align="center">....</dt-text>
 <dt-text align="end">....</dt-text>
 <dt-text align="justify">....</dt-text>
-' />
+'/>
 
 ## Truncate
 
@@ -405,7 +397,7 @@ Since `DtText`'s default element is a `<span>`, the `truncate` will only work if
 <code-example-tabs
 vueCode='
 <dt-text as="p" truncate>....</dt-text>
-' />
+'/>
 
 ## Max Lines
 
@@ -420,7 +412,7 @@ vueCode='
 <code-example-tabs
 vueCode='
 <dt-text as="p" :max-lines="maxLines">....</dt-text>
-' />
+'/>
 
 <code-well-header>
   <dt-stack gap="400">
@@ -480,10 +472,10 @@ Control text wrapping behavior. Particularly useful for headlines where balanced
 <code-well-header>
   <dt-stack class="d-w100p" gap="500">
     <dt-stack gap="600" align="start">
-      <dt-text as="p"><strong>Default</strong>. Lorem ipsum dolor sit amet consectetur adipisicing consequatur deleniti non doloremque autem adipisci in omnis voluptatibus aut aperiam magnam ea nihil dolores officia quos, dolore praesentium expedita</dt-text>
-      <dt-text as="p" wrap="balance"><strong>Balance</strong>. Lorem ipsum dolor sit amet consectetur adipisicing consequatur deleniti non doloremque autem adipisci in omnis voluptatibus aut aperiam magnam ea nihil dolores officia quos, dolore praesentium expedita</dt-text>
-      <dt-text as="p" wrap="pretty"><strong>Pretty</strong>. Lorem ipsum dolor sit amet consectetur adipisicing consequatur deleniti non doloremque autem adipisci in omnis voluptatibus aut aperiam magnam ea nihil dolores officia quos, dolore praesentium expedita</dt-text>
-      <dt-text as="p" wrap="nowrap"><strong>No Wrap</strong>. Lorem ipsum dolor sit amet consectetur adipisicing consequatur deleniti non doloremque autem adipisci in omnis voluptatibus aut aperiam magnam ea nihil dolores officia quos, dolore praesentium expedita</dt-text>
+      <dt-text as="p"><strong>Default</strong>. Lorem ipsum dolor sit amet consectetur adipisicing consequatur deleniti non doloremque autem adipisci in omnis voluptatibus </dt-text>
+      <dt-text as="p" wrap="balance"><strong>Balance</strong>. Lorem ipsum dolor sit amet consectetur adipisicing consequatur deleniti non doloremque autem adipisci in omnis voluptatibus </dt-text>
+      <dt-text as="p" wrap="pretty"><strong>Pretty</strong>. Lorem ipsum dolor sit amet consectetur adipisicing consequatur deleniti non doloremque autem adipisci in omnis voluptatibus </dt-text>
+      <dt-text as="p" wrap="nowrap"><strong>No Wrap</strong>. Lorem ipsum dolor sit amet consectetur adipisicing consequatur deleniti non doloremque autem adipisci in omnis voluptatibus </dt-text>
     </dt-stack>
   </dt-stack>
 </code-well-header>
@@ -494,7 +486,7 @@ vueCode='
 <dt-text wrap="balance">....</dt-text>
 <dt-text wrap="pretty">....</dt-text>
 <dt-text wrap="nowrap">....</dt-text>
-' />
+'/>
 
 ## Trim
 
@@ -516,7 +508,7 @@ vueCode='
 <dt-text as="p" trim="start">....</dt-text>
 <dt-text as="p" trim="end">....</dt-text>
 <dt-text as="p" trim="both">....</dt-text>
-' />
+'/>
 
 <dialtone-usage>
 <template #do>
@@ -548,22 +540,28 @@ Use the `text` prop as an alternative to the default slot for simple string cont
 <code-well-header>
   <dt-stack gap="400">
     <dt-text kind="body" text="Content via text prop" />
-    <dt-text kind="body">Content via slot</dt-text>
+    <dt-text kind="body">
+      Content via slot
+    </dt-text>
+    <dt-text text="Ignored">
+      Slot content wins
+    </dt-text>
   </dt-stack>
 </code-well-header>
 
 <code-example-tabs
 vueCode='
 <!-- Using text prop -->
-<dt-text text="Hello, world!" />
-
+<dt-text kind="body" text="Content via text prop" />
 <!-- Using slot (equivalent) -->
-<dt-text>Hello, world!</dt-text>
-
+<dt-text kind="body">
+  Content via slot
+</dt-text>
 <!-- Slot takes precedence -->
-<dt-text text="Ignored" >Slot content wins</dt-text>
-'
-/>
+<dt-text text="Ignored">
+  Slot content wins
+</dt-text>
+'/>
 
 ## Accessibility
 

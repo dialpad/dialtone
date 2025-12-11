@@ -8,7 +8,7 @@
       class="hero__inner-wrapper d-mx-auto d-wmx1340 d-pl24 d-pr32"
     >
       <dt-stack justify="center" class="hero__content">
-        <h1 class="d-headline--xxl d-mb12 d-ff-marketing">
+        <h1 class="d-headline--xxl d-mb12 d-ff-marketing d-fw-normal">
           Improve your UI's reception with Dialtone
         </h1>
         <p class="d-fs-300 d-lh-400 d-mb16 d-fc-secondary">
@@ -69,7 +69,7 @@
         <router-link class="d-fc-primary h:d-td-underline d-td-none d-bar8 d-pt4" to="/design/">
           <dt-stack gap="600">
             <svg-loader class="d-h96" name="home-design-language" />
-            <h2 class="d-headline--xl d-ff-marketing">
+            <h2 class="d-headline--xl d-ff-marketing d-fw-normal">
               Design Language
             </h2>
           </dt-stack>
@@ -87,7 +87,7 @@
         <router-link class="d-fc-primary h:d-td-underline d-td-none d-bar8 d-pt4" to="/components/">
           <dt-stack gap="600">
             <svg-loader class="d-h96" name="home-components" />
-            <h2 class="d-headline--xl d-ff-marketing">
+            <h2 class="d-headline--xl d-ff-marketing d-fw-normal">
               Components
             </h2>
           </dt-stack>
@@ -111,7 +111,7 @@
         <router-link class="d-fc-primary h:d-td-underline d-td-none d-bar8 d-pt4" to="/utilities/">
           <dt-stack gap="600">
             <svg-loader class="d-h96" name="home-utilities" />
-            <h2 class="d-headline--xl d-ff-marketing">
+            <h2 class="d-headline--xl d-ff-marketing d-fw-normal">
               Utilities
             </h2>
           </dt-stack>
@@ -129,7 +129,7 @@
         <router-link class="d-fc-primary h:d-td-underline d-td-none d-bar8 d-pt4" to="/guides/">
           <dt-stack gap="600">
             <svg-loader class="d-h96" name="home-guides" />
-            <h2 class="d-headline--xl d-ff-marketing">
+            <h2 class="d-headline--xl d-ff-marketing d-fw-normal">
               Guides
             </h2>
           </dt-stack>
