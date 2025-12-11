@@ -88,9 +88,6 @@ All kinds support `size` prop, but not all sizes are available for each kind. De
       <tr>
         <th></th>
         <th>
-          <dt-text as="code" kind="code">eyebrow</dt-text>
-        </th>
-        <th>
           <dt-text as="code" kind="code">sm</dt-text>
         </th>
         <th>
@@ -111,9 +108,6 @@ All kinds support `size` prop, but not all sizes are available for each kind. De
           <dt-text as="code" align="end" kind="code">headline</dt-text>
         </th>
         <td>
-          <dt-text kind="headline" as="h2" size="eyebrow" tone="primary">Text</dt-text>
-        </td>
-        <td>
           <dt-text kind="headline" as="h2" size="sm" tone="primary">Text</dt-text>
         </td>
         <td>
@@ -133,7 +127,6 @@ All kinds support `size` prop, but not all sizes are available for each kind. De
         <th scope="row">
           <dt-text as="code" align="end" kind="code">body</dt-text>
         </th>
-        <td><dt-text tone="muted" size="sm" title="not available">-</dt-text></td>
         <td>
           <dt-text kind="body" as="p" size="sm" tone="primary">Text</dt-text>
         </td>
@@ -148,7 +141,6 @@ All kinds support `size` prop, but not all sizes are available for each kind. De
         <th scope="row">
           <dt-text as="code" align="end" kind="code">label</dt-text>
         </th>
-        <td><dt-text tone="muted" size="sm" title="not available">-</dt-text></td>
         <td>
           <dt-text kind="label" as="p" size="sm" tone="primary">Text</dt-text>
         </td>
@@ -163,7 +155,6 @@ All kinds support `size` prop, but not all sizes are available for each kind. De
         <th scope="row">
           <dt-text as="code" align="end" kind="code">code</dt-text>
         </th>
-        <td><dt-text tone="muted" size="sm" title="not available">-</dt-text></td>
         <td>
           <dt-text kind="code" as="code" size="sm" tone="primary">Text</dt-text>
         </td>

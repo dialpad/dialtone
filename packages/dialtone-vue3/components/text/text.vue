@@ -61,7 +61,7 @@ export default {
 
     /**
      * Size variant within the selected `kind`. Falls back to `md` if unsupported. e.g. `body` doesn't have `lg` variant.
-     * @values eyebrow, sm, md, lg, xl, xxl
+     * @values sm, md, lg, xl, xxl
      */
     size: {
       type: String,

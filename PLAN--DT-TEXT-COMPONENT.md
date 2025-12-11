@@ -20,6 +20,8 @@
 - **2025-10-17** — Added Vue 3 exports (`packages/dialtone-vue3/components/text/index.js`, root index) so `DtText` is available to consumers. Storybook stories/tests still pending.
 - **2025-10-20** — `pnpm --dir packages/dialtone-vue3 test` passing with new assertions; `text_variants.story.vue` now mirrors tested permutations (truncate, clamp, tone, numeric, align). Lint work deferred to final cleanup once story refactors land.
 - **2025-12-10** — Completed API simplification: removed `density` and `strength` props from Vue 3 implementation. Removed 4 constants, simplified `getVariantClass()` method, updated tests (22 passing), stories, and documentation.
+- **2025-12-10** — Removed `helper` as a valid `kind` value. Updated constants, stories, and documentation.
+- **2025-12-10** — Removed `eyebrow` as a valid `size` value. Updated constants, JSDoc, and documentation.
 
 ---
 
@@ -61,8 +63,8 @@
 
 Props remaining:
 - `as` — HTML tag/component
-- `kind` — headline, body, label, helper, code
-- `size` — eyebrow, sm, md, lg, xl, xxl (contextual to kind)
+- `kind` — headline, body, label, code
+- `size` — sm, md, lg, xl, xxl (contextual to kind)
 - `tone` — foreground color token
 - `align` — start, center, end, justify
 - `truncate` — single-line ellipsis
@@ -71,6 +73,56 @@ Props remaining:
 - `text` — string fallback for slot
 - `wrap` — wrap, nowrap, balance, pretty
 - `trim` — start, end, both
+
+---
+
+## ✅ Completed: Remove `eyebrow` size (2025-12-10)
+
+**Objective:** Remove `eyebrow` as a valid `size` value from the DtText component API.
+
+**Scope:** Vue 3 only. Vue 2 deferred.
+
+### Files Modified
+
+| File | Changes |
+|------|---------|
+| `packages/dialtone-vue3/components/text/text_constants.js` | Removed `eyebrow` from `TEXT_SIZE_MODIFIERS.headline` array |
+| `packages/dialtone-vue3/components/text/text.vue` | Updated JSDoc `@values` for `size` prop |
+| `apps/dialtone-documentation/docs/components/text.md` | Removed `eyebrow` column from Size table |
+
+### Tasks
+
+- [x] Remove `eyebrow` from `TEXT_SIZE_MODIFIERS.headline` in `text_constants.js`
+- [x] Update JSDoc `@values` for `size` prop in `text.vue`
+- [x] Remove `eyebrow` column and example from Size table in `text.md`
+- [x] Run tests to verify (22 tests passing)
+
+---
+
+## ✅ Completed: Remove `helper` kind (2025-12-10)
+
+**Objective:** Remove `helper` as a valid `kind` value from the DtText component API.
+
+**Scope:** Vue 3 only. Vue 2 deferred.
+
+### Files Modified
+
+| File | Changes |
+|------|---------|
+| `packages/dialtone-vue3/components/text/text_constants.js` | Removed `helper` from `TEXT_KIND_MODIFIERS` and `TEXT_SIZE_MODIFIERS` |
+| `packages/dialtone-vue3/components/text/text.vue` | Updated JSDoc `@values` for `kind` prop |
+| `packages/dialtone-vue3/components/text/text_variants.story.vue` | Removed Helper section, replaced `kind="helper"` with `kind="label"` |
+| `apps/dialtone-documentation/docs/components/text.md` | Removed `helper` from Kind examples and Size table |
+
+### Tasks
+
+- [x] Remove `helper` from `TEXT_KIND_MODIFIERS` in `text_constants.js`
+- [x] Remove `helper` from `TEXT_SIZE_MODIFIERS` in `text_constants.js`
+- [x] Remove Helper section from `text_variants.story.vue`
+- [x] Replace `kind="helper"` with `kind="label"` in Wrap/Trim examples
+- [x] Remove `helper` references from `text.md` documentation
+- [x] Update JSDoc `@values` in `text.vue`
+- [x] Run tests to verify (22 tests passing)
 
 ---
 
