@@ -1,287 +1,465 @@
+<!-- eslint-disable max-lines -->
 <template>
-  <dt-stack gap="500">
-    <section>
-      <dt-text
-        as="h3"
-        kind="label"
-        size="md"
-        class="d-bb"
-        tone="muted"
-      >
-        Headline
-      </dt-text>
-      <dt-stack gap="300">
+  <div>
+    <dt-stack
+      gap="700"
+      class="d-p32"
+    >
+      <!-- Kind Examples -->
+      <section>
         <dt-text
-          v-for="size in headlineSizes"
-          :key="`headline-${size}`"
+          as="h2"
           kind="headline"
-          :size="size"
+          size="xxl"
         >
-          {{ `Headline ${size}` }}
+          Kind Examples
         </dt-text>
-      </dt-stack>
-    </section>
-    <section>
-      <dt-text
-        as="h3"
-        kind="label"
-        size="md"
-        class="d-bb"
-        tone="muted"
-      >
-        Body
-      </dt-text>
-      <dt-stack gap="300">
-        <dt-text
-          v-for="size in bodySizes"
-          :key="`body-${size}`"
-          kind="body"
-          :size="size"
-        >
-          {{ `Body ${size}` }}
-        </dt-text>
-      </dt-stack>
-    </section>
-    <section>
-      <dt-text
-        as="h3"
-        kind="label"
-        size="md"
-        class="d-bb"
-        tone="muted"
-      >
-        Label
-      </dt-text>
-      <dt-stack gap="300">
-        <dt-text
-          v-for="size in labelSizes"
-          :key="`label-${size}`"
-          kind="label"
-          :size="size"
-        >
-          {{ `Label ${size}` }}
-        </dt-text>
-      </dt-stack>
-    </section>
-    <section>
-      <dt-text
-        as="h3"
-        kind="label"
-        size="md"
-        class="d-bb"
-        tone="muted"
-      >
-        Code
-      </dt-text>
-      <dt-stack gap="300">
-        <dt-text
-          v-for="size in codeSizes"
-          :key="`code-${size}`"
-          kind="code"
-          :size="size"
-        >
-          {{ `Code ${size}` }}
-        </dt-text>
-      </dt-stack>
-    </section>
-    <section>
-      <dt-text
-        as="h3"
-        kind="label"
-        size="md"
-        class="d-bb"
-        tone="muted"
-      >
-        Behavior Examples
-      </dt-text>
-      <dt-stack gap="400">
-        <dt-stack gap="300">
-          <dt-text
-            kind="label"
-            size="sm"
-            tone="muted"
-          >
-            Truncate & Clamp
-          </dt-text>
-          <dt-text
-            v-for="example in truncationExamples"
-            :key="example.key"
-            as="div"
-            v-bind="example.props"
-          >
-            {{ example.copy }}
-          </dt-text>
+        <dt-stack gap="500">
+          <div>
+            <dt-text
+              as="h3"
+              kind="headline"
+              size="xl"
+            >
+              Headline
+            </dt-text>
+            <div class="d-ba d-bc-default d-p16 d-bar8">
+              <dt-stack gap="300">
+                <dt-text
+                  v-for="size in headlineSizes"
+                  :key="`headline-${size}`"
+                  kind="headline"
+                  :size="size"
+                >
+                  Headline {{ size }}
+                </dt-text>
+              </dt-stack>
+            </div>
+          </div>
+
+          <div>
+            <dt-text
+              as="h3"
+              kind="headline"
+              size="xl"
+            >
+              Body
+            </dt-text>
+            <div class="d-ba d-bc-default d-p16 d-bar8">
+              <dt-stack gap="300">
+                <dt-text
+                  v-for="size in bodySizes"
+                  :key="`body-${size}`"
+                  kind="body"
+                  :size="size"
+                >
+                  Body {{ size }}
+                </dt-text>
+              </dt-stack>
+            </div>
+          </div>
+
+          <div>
+            <dt-text
+              as="h3"
+              kind="headline"
+              size="xl"
+            >
+              Label
+            </dt-text>
+            <div class="d-ba d-bc-default d-p16 d-bar8">
+              <dt-stack gap="300">
+                <dt-text
+                  v-for="size in labelSizes"
+                  :key="`label-${size}`"
+                  kind="label"
+                  :size="size"
+                >
+                  Label {{ size }}
+                </dt-text>
+              </dt-stack>
+            </div>
+          </div>
+
+          <div>
+            <dt-text
+              as="h3"
+              kind="headline"
+              size="xl"
+            >
+              Code
+            </dt-text>
+            <div class="d-ba d-bc-default d-p16 d-bar8">
+              <dt-stack gap="300">
+                <dt-text
+                  v-for="size in codeSizes"
+                  :key="`code-${size}`"
+                  kind="code"
+                  :size="size"
+                >
+                  Code {{ size }}
+                </dt-text>
+              </dt-stack>
+            </div>
+          </div>
         </dt-stack>
-        <dt-stack gap="300">
-          <dt-text
-            kind="label"
-            size="sm"
-            tone="muted"
-          >
-            Tone & Numeric
-          </dt-text>
-          <dt-stack
-            direction="row"
-            class="d-p4 d-bar4"
-            gap="300"
+      </section>
+
+      <!-- Strength Examples -->
+      <section>
+        <dt-text
+          as="h2"
+          kind="headline"
+          size="xxl"
+        >
+          Strength Examples
+        </dt-text>
+        <dt-stack gap="500">
+          <div>
+            <dt-text
+              as="h3"
+              kind="headline"
+              size="xl"
+            >
+              Font Weight Modifiers
+            </dt-text>
+            <div class="d-ba d-bc-default d-p16 d-bar8">
+              <dt-stack
+                direction="row"
+                gap="500"
+                class="d-fw-wrap"
+              >
+                <dt-text
+                  v-for="item in strengthExamples"
+                  :key="item.strength"
+                  kind="body"
+                  :strength="item.strength"
+                >
+                  {{ item.copy }}
+                </dt-text>
+              </dt-stack>
+            </div>
+          </div>
+        </dt-stack>
+      </section>
+
+      <!-- Density Examples -->
+      <section>
+        <dt-text
+          as="h2"
+          kind="headline"
+          size="xxl"
+        >
+          Density Examples
+        </dt-text>
+        <dt-stack gap="500">
+          <div>
+            <dt-text
+              as="h3"
+              kind="headline"
+              size="xl"
+            >
+              Line Height Modifiers
+            </dt-text>
+            <div class="d-ba d-bc-default d-p16 d-bar8">
+              <dt-stack gap="200">
+                <dt-text
+                  v-for="item in densityExamples"
+                  :key="item.density"
+                  kind="body"
+                  as="p"
+                  :density="item.density"
+                >
+                  density="{{ item.density }}" — {{ item.copy }}
+                </dt-text>
+              </dt-stack>
+            </div>
+          </div>
+        </dt-stack>
+      </section>
+
+      <!-- Tone Examples -->
+      <section>
+        <dt-text
+          as="h2"
+          kind="headline"
+          size="xxl"
+        >
+          Tone Examples
+        </dt-text>
+        <dt-stack gap="500">
+          <div>
+            <div class="d-ba d-bc-default d-p16 d-bar8">
+              <dt-stack
+                direction="row"
+                gap="400"
+                class="d-fw-wrap"
+              >
+                <dt-text
+                  v-for="item in toneExamples"
+                  :key="item.key"
+                  v-bind="item.props"
+                >
+                  {{ item.copy }}
+                </dt-text>
+              </dt-stack>
+            </div>
+          </div>
+
+          <div>
+            <div class="d-ba d-bc-default d-p16 d-bar8 d-bgc-primary-inverted">
+              <dt-stack
+                direction="row"
+                gap="400"
+                class="d-fw-wrap"
+              >
+                <dt-text
+                  v-for="tone in invertedToneExamples"
+                  :key="tone"
+                  :tone="tone"
+                >
+                  {{ tone }}
+                </dt-text>
+              </dt-stack>
+            </div>
+          </div>
+        </dt-stack>
+      </section>
+
+      <!-- Alignment Examples -->
+      <section>
+        <dt-text
+          as="h2"
+          kind="headline"
+          size="xxl"
+        >
+          Alignment Examples
+        </dt-text>
+        <dt-stack gap="500">
+          <div
+            v-for="item in alignExamples"
+            :key="item.align"
           >
             <dt-text
-              v-for="toneExample in toneExamples"
-              :key="toneExample.key"
-              v-bind="toneExample.props"
+              as="h4"
+              kind="headline"
+              size="lg"
             >
-              {{ toneExample.copy }}
+              {{ item.align.charAt(0).toUpperCase() + item.align.slice(1) }}
             </dt-text>
-          </dt-stack>
-          <dt-stack
-            direction="row"
-            class="d-bgc-primary-inverted d-p4 d-bar4"
-            gap="300"
+            <div class="d-ba d-bc-default d-p16 d-bar8">
+              <dt-text
+                as="div"
+                :align="item.align"
+              >
+                {{ item.copy }}
+              </dt-text>
+            </div>
+          </div>
+        </dt-stack>
+      </section>
+
+      <!-- Truncation Examples -->
+      <section>
+        <dt-text
+          as="h2"
+          kind="headline"
+          size="xxl"
+        >
+          Truncation Examples
+        </dt-text>
+        <dt-stack gap="500">
+          <div>
+            <dt-text
+              as="h3"
+              kind="headline"
+              size="xl"
+            >
+              Single Line (truncate)
+            </dt-text>
+            <div class="d-ba d-bc-default d-p16 d-bar8">
+              <dt-text
+                as="p"
+                truncate
+              >
+                Single-line truncate keeps ellipsis within inline-block contexts.
+                Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                Tenetur dolore placeat deleniti, corporis in expedita!
+                Sapiente voluptatem ad expedita, deserunt quisquam quasi, est
+                perferendis impedit fuga nobis ducimus odio in! Animi eaque ex
+                aliquam adipisci aspernatur cum nemo? Placeat asperiores, ex
+                labore similique porro alias cum unde perferendis repudiandae.
+                Sit aut qui alias necessitatibus?
+              </dt-text>
+            </div>
+          </div>
+
+          <div>
+            <dt-text
+              as="h3"
+              kind="headline"
+              size="xl"
+            >
+              Multi Line (maxLines)
+            </dt-text>
+            <dt-stack
+              class="d-ba d-bc-default d-p16 d-bar8"
+              gap="500"
+            >
+              <dt-text
+                as="div"
+                :max-lines="4"
+                class="d-w256"
+              >
+                <strong>4 lines:</strong> Clamp multi-line content to three lines for summary views.
+                This text will be truncated after three lines with an ellipsis
+                indicating there is more content available. Lorem ipsum dolor
+                sit amet consectetur adipisicing elit. Tenetur dolore placeat
+                deleniti, corporis in expedita! Sapiente voluptatem ad expedita,
+                deserunt quisquam quasi, est perferendis impedit fuga nobis ducimus
+                odio in! Animi eaque ex aliquam adipisci aspernatur cum nemo?
+                Placeat asperiores, ex labore similique porro alias cum unde
+                perferendis repudiandae. Sit aut qui alias necessitatibus?
+              </dt-text>
+              <dt-text
+                as="div"
+                :max-lines="3"
+                class="d-w256"
+              >
+                <strong>3 lines:</strong> Clamp multi-line content to three lines for summary views.
+                This text will be truncated after three lines with an ellipsis
+                indicating there is more content available. Lorem ipsum dolor
+                sit amet consectetur adipisicing elit. Tenetur dolore placeat
+                deleniti, corporis in expedita! Sapiente voluptatem ad expedita,
+                deserunt quisquam quasi, est perferendis impedit fuga nobis ducimus
+                odio in! Animi eaque ex aliquam adipisci aspernatur cum nemo?
+                Placeat asperiores, ex labore similique porro alias cum unde
+                perferendis repudiandae. Sit aut qui alias necessitatibus?
+              </dt-text>
+              <dt-text
+                as="div"
+                :max-lines="2"
+                class="d-w256"
+              >
+                <strong>2 lines:</strong> Clamp multi-line content to three lines for summary views.
+                This text will be truncated after three lines with an ellipsis
+                indicating there is more content available. Lorem ipsum dolor
+                sit amet consectetur adipisicing elit. Tenetur dolore placeat
+                deleniti, corporis in expedita! Sapiente voluptatem ad expedita,
+                deserunt quisquam quasi, est perferendis impedit fuga nobis ducimus
+                odio in! Animi eaque ex aliquam adipisci aspernatur cum nemo?
+                Placeat asperiores, ex labore similique porro alias cum unde
+                perferendis repudiandae. Sit aut qui alias necessitatibus?
+              </dt-text>
+            </dt-stack>
+          </div>
+        </dt-stack>
+      </section>
+
+      <!-- Wrap Examples -->
+      <section>
+        <dt-text
+          as="h2"
+          kind="headline"
+          size="xxl"
+        >
+          Wrap Examples
+        </dt-text>
+        <dt-stack gap="500">
+          <div
+            v-for="item in wrapExamples"
+            :key="item.wrap"
           >
             <dt-text
-              v-for="tone in invertedToneExamples"
-              :key="tone"
-              :tone="tone"
+              as="h4"
+              kind="headline"
+              size="lg"
             >
-              {{ tone }}
+              {{ item.wrap.charAt(0).toUpperCase() + item.wrap.slice(1) }}
             </dt-text>
-          </dt-stack>
-        </dt-stack>
-        <dt-stack gap="300">
-          <dt-text
-            kind="label"
-            size="sm"
-            tone="muted"
-          >
-            Alignment
-          </dt-text>
-          <dt-text
-            v-for="alignExample in alignExamples"
-            :key="alignExample.align"
-            as="div"
-            class="d-ba d-bc-subtle d-bas-dashed d-px8 d-py4"
-            :align="alignExample.align"
-          >
-            {{ alignExample.copy }}
-          </dt-text>
-        </dt-stack>
-        <dt-stack gap="300">
-          <dt-text
-            kind="label"
-            size="sm"
-            tone="muted"
-          >
-            Wrap
-          </dt-text>
-          <dt-stack
-            direction="row"
-            gap="400"
-            class="d-fw-wrap"
-          >
-            <div
-              v-for="wrapExample in wrapExamples"
-              :key="wrapExample.wrap"
-              class="d-w128 d-ba d-bc-subtle d-bas-dashed d-p8"
-            >
+            <div class="d-ba d-bc-default d-of-hidden d-p16 d-bar8 d-w192">
               <dt-text
                 kind="headline"
                 size="md"
-                :wrap="wrapExample.wrap"
+                :wrap="item.wrap"
               >
-                {{ wrapExample.copy }}
-              </dt-text>
-              <dt-text
-                kind="label"
-                size="sm"
-                tone="muted"
-              >
-                wrap="{{ wrapExample.wrap }}"
+                {{ item.copy }}
               </dt-text>
             </div>
-          </dt-stack>
+          </div>
         </dt-stack>
-        <dt-stack gap="300">
-          <dt-text
-            kind="label"
-            size="sm"
-            tone="muted"
+      </section>
+
+      <!-- Trim Examples -->
+      <section>
+        <dt-text
+          as="h2"
+          kind="headline"
+          size="xxl"
+        >
+          Trim Examples
+        </dt-text>
+        <dt-text
+          as="p"
+          kind="body"
+          tone="muted"
+        >
+          Leading text trim removes extra space above/below text for tighter layouts
+        </dt-text>
+        <dt-stack
+          gap="500"
+          direction="row"
+          class="d-ba d-bc-default d-p16 d-bar8"
+        >
+          <template
+            v-for="item in trimExamples"
+            :key="item.trim"
           >
-            Trim
-          </dt-text>
-          <dt-stack
-            direction="row"
-            gap="400"
-          >
-            <div
-              v-for="trimExample in trimExamples"
-              :key="trimExample.trim"
-              class="d-ba d-bc-subtle d-bas-dashed"
+            <dt-text
+              kind="headline"
+              size="xxxl"
+              :trim="item.trim"
+              class="d-bgc-moderate-opaque"
             >
-              <dt-text
-                kind="headline"
-                size="lg"
-                :trim="trimExample.trim"
-                class="d-bgc-gold-200"
-              >
-                {{ trimExample.copy }}
-              </dt-text>
-              <dt-text
-                kind="label"
-                size="sm"
-                tone="muted"
-                class="d-px8"
-              >
-                trim="{{ trimExample.trim }}"
-              </dt-text>
+              {{ item.copy }}
+            </dt-text>
+          </template>
+        </dt-stack>
+      </section>
+
+      <!-- Numeric Examples -->
+      <section>
+        <dt-text
+          as="h2"
+          kind="headline"
+          size="xxl"
+        >
+          Numeric Examples
+        </dt-text>
+        <dt-stack gap="500">
+          <div>
+            <dt-text
+              as="h3"
+              kind="headline"
+              size="xl"
+            >
+              Tabular Figures
+            </dt-text>
+            <div class="d-ba d-bc-default d-p16 d-bar8">
+              <dt-stack gap="200">
+                <dt-text numeric>
+                  00123456789 (numeric)
+                </dt-text>
+                <dt-text>
+                  00123456789 (default)
+                </dt-text>
+              </dt-stack>
             </div>
-          </dt-stack>
+          </div>
         </dt-stack>
-        <dt-stack gap="300">
-          <dt-text
-            kind="label"
-            size="sm"
-            tone="muted"
-          >
-            Strength
-          </dt-text>
-          <dt-stack
-            direction="row"
-            gap="400"
-            class="d-fw-wrap"
-          >
-            <dt-text
-              v-for="strengthExample in strengthExamples"
-              :key="strengthExample.strength"
-              kind="body"
-              :strength="strengthExample.strength"
-            >
-              {{ strengthExample.copy }}
-            </dt-text>
-          </dt-stack>
-        </dt-stack>
-        <dt-stack gap="300">
-          <dt-text
-            kind="label"
-            size="sm"
-            tone="muted"
-          >
-            Density
-          </dt-text>
-          <dt-stack gap="200">
-            <dt-text
-              v-for="densityExample in densityExamples"
-              :key="densityExample.density"
-              kind="body"
-              as="p"
-              :density="densityExample.density"
-            >
-              density="{{ densityExample.density }}" — {{ densityExample.copy }}
-            </dt-text>
-          </dt-stack>
-        </dt-stack>
-      </dt-stack>
-    </section>
-  </dt-stack>
+      </section>
+    </dt-stack>
+  </div>
 </template>
 
 <script>
@@ -310,58 +488,6 @@ export default {
       return TEXT_SIZE_MODIFIERS.code;
     },
 
-    truncationExamples () {
-      return [
-        {
-          key: 'truncate',
-          props: { truncate: true, class: 'd-w24' },
-          copy: 'Single-line truncate keeps ellipsis within inline-block contexts.',
-        },
-        {
-          key: 'max-lines',
-          props: { maxLines: 3, class: 'd-w48' },
-          copy: 'Clamp multi-line content to three lines for summary views.',
-        },
-      ];
-    },
-
-    toneExamples () {
-      return [
-        { key: 'tone-success', props: { kind: 'body', tone: 'success' }, copy: 'Success tone' },
-        { key: 'numeric-critical', props: { kind: 'body', tone: 'critical', numeric: true }, copy: '00123456789' },
-      ];
-    },
-
-    invertedToneExamples () {
-      return ['tertiary-inverted', 'muted-inverted', 'critical-inverted'];
-    },
-
-    alignExamples () {
-      return [
-        { align: 'start', copy: 'Start aligned text follows the left edge in LTR contexts.' },
-        { align: 'center', copy: 'Center aligned text works well for callouts.' },
-        { align: 'end', copy: 'End aligned text pairs nicely with numeric values.' },
-        { align: 'justify', copy: 'Justified text distributes words evenly across the width.' },
-      ];
-    },
-
-    wrapExamples () {
-      return [
-        { wrap: 'wrap', copy: 'Default wrapping behavior for text content' },
-        { wrap: 'nowrap', copy: 'No wrapping allowed here' },
-        { wrap: 'balance', copy: 'Balanced lines for better visual appeal' },
-        { wrap: 'pretty', copy: 'Pretty wrap avoids orphans and widows' },
-      ];
-    },
-
-    trimExamples () {
-      return [
-        { trim: 'start', copy: 'Trim Start' },
-        { trim: 'end', copy: 'Trim End' },
-        { trim: 'both', copy: 'Trim Both' },
-      ];
-    },
-
     strengthExamples () {
       return [
         { strength: 'bold', copy: 'Bold strength' },
@@ -379,6 +505,46 @@ export default {
         { density: 400, copy: 'Default-ish line-height' },
         { density: 500, copy: 'Relaxed line-height for readability' },
         { density: 600, copy: 'Most spacious line-height' },
+      ];
+    },
+
+    toneExamples () {
+      return [
+        { key: 'default', props: { kind: 'body' }, copy: 'Default tone' },
+        { key: 'muted', props: { kind: 'body', tone: 'muted' }, copy: 'Muted tone' },
+        { key: 'success', props: { kind: 'body', tone: 'success' }, copy: 'Success tone' },
+        { key: 'warning', props: { kind: 'body', tone: 'warning' }, copy: 'Warning tone' },
+        { key: 'critical', props: { kind: 'body', tone: 'critical' }, copy: 'Critical tone' },
+      ];
+    },
+
+    invertedToneExamples () {
+      return ['tertiary-inverted', 'muted-inverted', 'critical-inverted'];
+    },
+
+    alignExamples () {
+      return [
+        { align: 'start', copy: 'Start aligned text follows the left edge in LTR contexts.' },
+        { align: 'center', copy: 'Center aligned text works well for callouts.' },
+        { align: 'end', copy: 'End aligned text pairs nicely with numeric values.' },
+        { align: 'justify', copy: 'Justified text distributes words evenly across the full width of the container.' },
+      ];
+    },
+
+    wrapExamples () {
+      return [
+        { wrap: 'wrap', copy: 'Default wrapping behavior for text content. Lorem ipsum dolor sit amet consectetur adipisicing elit. Tenetur dolore placeat deleniti, corporis in expedita! Sapiente voluptatem ad expedita, deserunt quisquam quasi, est perferendis impedit fuga nobis ducimus odio in! Animi eaque ex aliquam adipisci aspernatur cum nemo? Placeat asperiores, ex labore similique porro alias cum unde perferendis repudiandae. Sit aut qui alias necessitatibus? Ex voluptates corrupti adipisci unde eos? Quos id cupiditate enim ducimus nihil quidem corporis molestiae! Quod accusamus eveniet dolores ut possimus fugit, doloribus ipsam officiis?' },
+        { wrap: 'nowrap', copy: 'No wrapping allowed here. Lorem ipsum dolor sit amet consectetur adipisicing elit. Tenetur dolore placeat deleniti, corporis in expedita! Sapiente voluptatem ad expedita, deserunt quisquam quasi, est perferendis impedit fuga nobis ducimus odio in! Animi eaque ex aliquam adipisci aspernatur cum nemo? Placeat asperiores, ex labore similique porro alias cum unde perferendis repudiandae. Sit aut qui alias necessitatibus? Ex voluptates corrupti adipisci unde eos? Quos id cupiditate enim ducimus nihil quidem corporis molestiae! Quod accusamus eveniet dolores ut possimus fugit, doloribus ipsam officiis?' },
+        { wrap: 'balance', copy: 'Balanced lines for better visual appeal. Lorem ipsum dolor sit amet consectetur adipisicing elit. Tenetur dolore placeat deleniti, corporis in expedita! Sapiente voluptatem ad expedita, deserunt quisquam quasi, est perferendis impedit fuga nobis ducimus odio in! Animi eaque ex aliquam adipisci aspernatur cum nemo? Placeat asperiores, ex labore similique porro alias cum unde perferendis repudiandae. Sit aut qui alias necessitatibus? Ex voluptates corrupti adipisci unde eos? Quos id cupiditate enim ducimus nihil quidem corporis molestiae! Quod accusamus eveniet dolores ut possimus fugit, doloribus ipsam officiis?' },
+        { wrap: 'pretty', copy: 'Pretty wrap avoids orphans and widows. Lorem ipsum dolor sit amet consectetur adipisicing elit. Tenetur dolore placeat deleniti, corporis in expedita! Sapiente voluptatem ad expedita, deserunt quisquam quasi, est perferendis impedit fuga nobis ducimus odio in! Animi eaque ex aliquam adipisci aspernatur cum nemo? Placeat asperiores, ex labore similique porro alias cum unde perferendis repudiandae. Sit aut qui alias necessitatibus? Ex voluptates corrupti adipisci unde eos? Quos id cupiditate enim ducimus nihil quidem corporis molestiae! Quod accusamus eveniet dolores ut possimus fugit, doloribus ipsam officiis?' },
+      ];
+    },
+
+    trimExamples () {
+      return [
+        { trim: 'start', copy: 'Trim Start' },
+        { trim: 'end', copy: 'Trim End' },
+        { trim: 'both', copy: 'Trim Both' },
       ];
     },
   },
