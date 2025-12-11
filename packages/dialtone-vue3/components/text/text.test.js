@@ -40,13 +40,34 @@ describe('DtText', () => {
     expect(wrapper.classes()).toContain('d-text-headline--lg');
   });
 
-  it('falls back to default size when invalid size provided', () => {
+  it('falls back to default size when invalid universal size provided', () => {
     const warnSpy = vi.spyOn(console, 'warn').mockImplementation(() => {});
 
     const wrapper = mountComponent({ kind: 'headline', size: 'unknown' });
 
     expect(wrapper.classes()).toContain('d-text-headline--md');
     expect(warnSpy).toHaveBeenCalledWith(expect.stringContaining('size="unknown"'));
+  });
+
+  it('throws error when headline-only size used with incompatible kind', () => {
+    expect(() => mountComponent({ kind: 'body', size: 'xxxl' }))
+      .toThrow('[DtText] size="xxxl" is only valid for kind="headline"');
+
+    expect(() => mountComponent({ kind: 'label', size: 'xxl' }))
+      .toThrow('[DtText] size="xxl" is only valid for kind="headline"');
+
+    expect(() => mountComponent({ kind: 'code', size: 'xl' }))
+      .toThrow('[DtText] size="xl" is only valid for kind="headline"');
+  });
+
+  it('allows headline-only sizes with headline kind', () => {
+    const wrapper1 = mountComponent({ kind: 'headline', size: 'xxxl' });
+    const wrapper2 = mountComponent({ kind: 'headline', size: 'xxl' });
+    const wrapper3 = mountComponent({ kind: 'headline', size: 'xl' });
+
+    expect(wrapper1.classes()).toContain('d-text-headline--xxxl');
+    expect(wrapper2.classes()).toContain('d-text-headline--xxl');
+    expect(wrapper3.classes()).toContain('d-text-headline--xl');
   });
 
   it('applies truncate class when truncate prop is true', () => {

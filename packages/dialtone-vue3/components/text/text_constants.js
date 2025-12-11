@@ -12,6 +12,9 @@ export const TEXT_SIZE_MODIFIERS = {
   code: ['lg', 'md', 'sm', 'xs'],
 };
 
+// Sizes that are only valid for headline kind - using these with other kinds throws an error
+export const TEXT_HEADLINE_ONLY_SIZES = ['xxxl', 'xxl', 'xl'];
+
 import TEXT_TONE_TOKENS from './text_tone_tokens.js';
 export { TEXT_TONE_TOKENS };
 
@@ -44,6 +47,7 @@ export const TEXT_TRIM_MODIFIERS = {
 export default {
   TEXT_KIND_MODIFIERS,
   TEXT_SIZE_MODIFIERS,
+  TEXT_HEADLINE_ONLY_SIZES,
   TEXT_TONE_TOKENS,
   TEXT_ALIGN_MODIFIERS,
   TEXT_TONE_PREFIX,

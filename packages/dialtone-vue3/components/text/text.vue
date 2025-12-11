@@ -17,6 +17,7 @@ import { hasSlotContent } from '@/common/utils';
 import {
   TEXT_KIND_MODIFIERS,
   TEXT_SIZE_MODIFIERS,
+  TEXT_HEADLINE_ONLY_SIZES,
   TEXT_ALIGN_MODIFIERS,
   TEXT_TONE_PREFIX,
   TEXT_TONE_TOKENS,
@@ -221,6 +222,15 @@ export default {
       let resolvedSize = requestedSize;
 
       if (!allowedSizes.includes(requestedSize)) {
+        // Headline-only sizes (xxxl, xxl, xl) throw an error when used with incompatible kinds
+        if (TEXT_HEADLINE_ONLY_SIZES.includes(requestedSize)) {
+          throw new Error(
+            `[DtText] size="${requestedSize}" is only valid for kind="headline". ` +
+            `Cannot use with kind="${this.kind}".`,
+          );
+        }
+
+        // Universal sizes (lg, md, sm, xs) fall back gracefully with a warning
         const fallbackSize = allowedSizes.includes(DEFAULT_SIZE) ? DEFAULT_SIZE : allowedSizes[0];
         if (fallbackSize) {
           resolvedSize = fallbackSize;

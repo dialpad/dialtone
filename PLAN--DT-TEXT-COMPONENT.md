@@ -35,6 +35,13 @@
 | headline | xxxl, xxl, xl, lg, md, sm, xs |
 | body, label, code | lg, md, sm, xs |
 
+**Validation Behavior:**
+- **Headline-only sizes (xxxl, xxl, xl)**: Throw an error if used with body/label/code
+- **Universal sizes (lg, md, sm, xs)**: Fall back to `md` with a console warning if invalid
+- **Invalid kind**: Console warning, no variant class applied
+
+**Tests:** 24 passing
+
 **Next:** Vue 2 implementation (deferred).
 
 ---
@@ -58,6 +65,7 @@
 - **2025-12-10** — Removed `helper` as a valid `kind` value. Updated constants, stories, and documentation.
 - **2025-12-10** — Removed `eyebrow` as a valid `size` value. Updated constants, JSDoc, and documentation.
 - **2025-12-10** — **Typography System Refactor**: Completed alignment with redesigned typography token system. Class prefix changed from `d-{kind}` to `d-text-{kind}`, new size scale (xxxl→xs). Updated constants, tests (22 passing), stories, and documentation.
+- **2025-12-10** — **Strict Size Validation**: Headline-only sizes (xxxl, xxl, xl) now throw an error when used with incompatible kinds (body, label, code). Universal sizes (lg, md, sm, xs) still fall back gracefully with a warning. Added 2 new tests (24 total).
 
 ---
 
@@ -113,8 +121,9 @@ NEW: d-text-headline--lg, d-text-body--md, d-text-label--sm, d-text-code--md
 - [x] Update all class assertions in `text.test.js`
 - [x] Update `text_variants.story.vue` with new sizes
 - [x] Update `text.md` documentation
-- [x] Run tests to verify (22 tests passing)
+- [x] Run tests to verify (24 tests passing)
 - [x] Double-check for any missed references (grep verified no old class names remain)
+- [x] Add strict validation for headline-only sizes (xxxl, xxl, xl) — throws error when used with incompatible kinds
 
 ### New Variant Matrix (2025-12-10)
 
@@ -139,6 +148,11 @@ Props:
 - `text` — string fallback for slot
 - `wrap` — wrap, nowrap, balance, pretty
 - `trim` — start, end, both
+
+**Validation:**
+- Headline-only sizes (xxxl, xxl, xl) **throw an error** when used with body/label/code
+- Universal sizes (lg, md, sm, xs) fall back to `md` with a warning if invalid for the kind
+- New constant `TEXT_HEADLINE_ONLY_SIZES` exported from `text_constants.js`
 
 ---
 
