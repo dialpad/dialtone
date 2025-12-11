@@ -328,6 +328,10 @@ vueCode='
 
 Positioned components like [Popovers](/components/popover.html), [Dropdowns](/components/dropdown.html), and [Hovercards](/components/hovercard.html) are typically rendered at the root element of the DOM tree, and thus inherit the page's mode by default. They can be forced to a specific mode using Mode Islands.
 
+<code-well-header>
+
+</code-well-header>
+
 ### Hovercard
 
 <code-well-header>
@@ -340,17 +344,17 @@ Positioned components like [Popovers](/components/popover.html), [Dropdowns](/co
         <div class="d-p16 d-bgc-secondary">
           <dt-stack gap="500">
             <dt-stack gap="400" class="d-jc-space-between">
-              <dt-stack gap="200">
-                <dt-text as="h2" kind="headline" size="xl" density="200">Katie Rodriguez</dt-text>
+              <dt-stack>
+                <dt-text as="h2" kind="headline" size="xl" strength="medium" density="200" class="d-fs-400">Katie Rodriguez</dt-text>
                 <dt-stack direction="row" gap="350">
                   <dt-text tone="success">Available</dt-text>
                   <dt-text>&bull;</dt-text>
                   <dt-text tone="tertiary">Working from coffee shop</dt-text>
                 </dt-stack>
               </dt-stack>
-              <dt-stack>
+              <dt-stack gap="200">
                 <dt-text kind="body" size="md" density="200" strength="semibold" tone="tertiary">Chief Customer Success Officer</dt-text>
-                <dt-text kind="body" size="md" density="200"><dt-text strength="semibold">6:19 am</dt-text> local time</dt-text>
+                <dt-text kind="body" size="sm" density="200"><dt-text strength="semibold">6:19 am</dt-text> local time</dt-text>
               </dt-stack>
             </dt-stack>
             <dt-stack gap="400" direction="row" class="d-jc-space-between">
@@ -385,17 +389,17 @@ Positioned components like [Popovers](/components/popover.html), [Dropdowns](/co
         <dt-mode-island class="d-p16 d-bgc-secondary">
           <dt-stack gap="500">
             <dt-stack gap="400" class="d-jc-space-between">
-              <dt-stack gap="200">
-                <dt-text as="h2" kind="headline" size="xl" density="200">Katie Rodriguez</dt-text>
+              <dt-stack>
+                <dt-text as="h2" kind="headline" size="xl" strength="medium" density="200" class="d-fs-400">Katie Rodriguez</dt-text>
                 <dt-stack direction="row" gap="350">
                   <dt-text tone="success">Available</dt-text>
                   <dt-text>&bull;</dt-text>
                   <dt-text tone="tertiary">Working from coffee shop</dt-text>
                 </dt-stack>
               </dt-stack>
-              <dt-stack>
+              <dt-stack gap="200">
                 <dt-text kind="body" size="md" density="200" strength="semibold" tone="tertiary">Chief Customer Success Officer</dt-text>
-                <dt-text kind="body" size="md" density="200"><dt-text strength="semibold">6:19 am</dt-text> local time</dt-text>
+                <dt-text kind="body" size="sm" density="200"><dt-text strength="semibold">6:19 am</dt-text> local time</dt-text>
               </dt-stack>
             </dt-stack>
             <dt-stack gap="400" direction="row" class="d-jc-space-between">
@@ -430,17 +434,17 @@ Positioned components like [Popovers](/components/popover.html), [Dropdowns](/co
         <dt-mode-island mode="light" class="d-p16 d-bgc-secondary">
           <dt-stack gap="500">
             <dt-stack gap="400" class="d-jc-space-between">
-              <dt-stack gap="200">
-                <dt-text as="h2" kind="headline" size="xl" density="200">Katie Rodriguez</dt-text>
+              <dt-stack>
+                <dt-text as="h2" kind="headline" size="xl" strength="medium" density="200" class="d-fs-400">Katie Rodriguez</dt-text>
                 <dt-stack direction="row" gap="350">
                   <dt-text tone="success">Available</dt-text>
                   <dt-text>&bull;</dt-text>
                   <dt-text tone="tertiary">Working from coffee shop</dt-text>
                 </dt-stack>
               </dt-stack>
-              <dt-stack>
+              <dt-stack gap="200">
                 <dt-text kind="body" size="md" density="200" strength="semibold" tone="tertiary">Chief Customer Success Officer</dt-text>
-                <dt-text kind="body" size="md" density="200"><dt-text strength="semibold">6:19 am</dt-text> local time</dt-text>
+                <dt-text kind="body" size="sm" density="200"><dt-text strength="semibold">6:19 am</dt-text> local time</dt-text>
               </dt-stack>
             </dt-stack>
             <dt-stack gap="400" direction="row" class="d-jc-space-between">
@@ -475,17 +479,17 @@ Positioned components like [Popovers](/components/popover.html), [Dropdowns](/co
         <dt-mode-island mode="dark" class="d-p16 d-bgc-secondary">
           <dt-stack gap="500">
             <dt-stack gap="400" class="d-jc-space-between">
-              <dt-stack gap="200">
-                <dt-text as="h2" kind="headline" size="xl" density="200">Katie Rodriguez</dt-text>
+              <dt-stack>
+                <dt-text as="h2" kind="headline" size="xl" strength="medium" density="200" class="d-fs-400">Katie Rodriguez</dt-text>
                 <dt-stack direction="row" gap="350">
                   <dt-text tone="success">Available</dt-text>
                   <dt-text>&bull;</dt-text>
                   <dt-text tone="tertiary">Working from coffee shop</dt-text>
                 </dt-stack>
               </dt-stack>
-              <dt-stack>
+              <dt-stack gap="200">
                 <dt-text kind="body" size="md" density="200" strength="semibold" tone="tertiary">Chief Customer Success Officer</dt-text>
-                <dt-text kind="body" size="md" density="200"><dt-text strength="semibold">6:19 am</dt-text> local time</dt-text>
+                <dt-text kind="body" size="sm" density="200"><dt-text strength="semibold">6:19 am</dt-text> local time</dt-text>
               </dt-stack>
             </dt-stack>
             <dt-stack gap="400" direction="row" class="d-jc-space-between">
