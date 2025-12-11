@@ -44,7 +44,7 @@
 - **Invalid kind**: Console warning, no variant class applied
 - **Semantic heading suggestion**: `console.info()` (once per session) when `kind="headline"` used without `as="h1|h2|h3|h4|h5|h6"`
 
-**Tests:** 67 passing
+**Tests:** 36 passing
 
 **Next:** Vue 2 implementation (deferred).
 
@@ -77,7 +77,7 @@
 - **2025-12-10** — **Storybook controls fix**: Added select dropdowns for `wrap` and `trim` props (were text inputs). Added missing bindings to default story. Added helpful descriptions for wrap/trim options.
 - **2025-12-10** — **Documentation fixes**: Removed conflicting `d-fw-*`/`d-lh-*` guidance from Don't section (now we have strength/density props). Fixed size code example to include kind. Clarified default size only applies when kind is set.
 - **2025-12-10** — **Size without kind warning**: Added `console.warn` when `size` is set without `kind`. Added 1 new test (41 total).
-- **2025-12-10** — **Test Refactoring**: Refactored tests for single-purpose clarity. Converted 4 loop-based tests to `it.each()`, converted 2 multi-scenario tests to `it.each()`, split multi-assertion tests, consolidated 5 stacking tests into 1 comprehensive integration test. Tests increased from 41 to 67.
+- **2025-12-10** — **Test Refactoring**: Refactored tests for single-purpose clarity, then optimized to match project norms. Removed exhaustive `it.each()` testing in favor of representative samples. Consolidated warning + class-absence tests. Final count: 36 tests (down from 41, via 67 intermediate).
 
 ---
 
@@ -220,26 +220,30 @@ it('composes all modifier classes additively', () => {
 
 ### Tasks
 
-- [x] Convert `applies all wrap modifier classes correctly` to `it.each()`
-- [x] Convert `applies all trim modifier classes correctly` to `it.each()`
-- [x] Convert `applies all strength modifier classes correctly` to `it.each()`
-- [x] Convert `applies all density modifier classes correctly` to `it.each()`
-- [x] Convert `throws error when headline-only size used with incompatible kind` to `it.each()`
-- [x] Convert `allows headline-only sizes with headline kind` to `it.each()`
 - [x] Split `renders the component root` into focused tests
-- [x] Split warning tests (tone, align, wrap, trim, strength, density) to separate warning assertion from class absence assertion
 - [x] Consolidate stacking tests into one comprehensive integration test
-- [x] Run tests to verify refactoring preserves coverage (67 tests passing)
+- [x] Reduce headline-only error tests to representative samples (9 → 3)
+- [x] Replace exhaustive `it.each()` with single representative tests for wrap/trim/strength/density
+- [x] Merge warning + class-absence tests back together (related behaviors)
+- [x] Run tests to verify (36 tests passing)
 
 ### Results
 
-| Metric | Before | After |
-|--------|--------|-------|
-| Test count | 41 | 67 |
-| Loop-based tests | 4 | 0 |
-| Multi-scenario tests | 2 | 0 |
-| Stacking integration tests | 5 | 1 |
-| `it.each()` usage | 0 | 6 |
+| Metric | Before | After | Notes |
+|--------|--------|-------|-------|
+| Test count | 41 | 36 | Optimized, not just refactored |
+| Stacking integration tests | 5 | 1 | One comprehensive test |
+| Exhaustive `it.each()` | 4 | 1 | Only for error validation |
+| Test style | Mixed | Representative samples | Matches project norms |
+
+### Comparison with Similar Components
+
+| Component | Tests | Complexity |
+|-----------|-------|------------|
+| button | 35 | Interactive element |
+| **text** | **36** | Text + modifiers |
+| radio | 35 | Form control |
+| avatar | 40 | Visual element |
 
 ---
 
