@@ -156,14 +156,14 @@ export const Default = {
     presence: 'active',
     header: `<div class="d-fs-200 d-fw-bold" id="contact-name"> Joseph Lumaban </div>`,
     subtitle: `<div class="d-fs-100 d-mt2"> +1 (415) 123-4567 </div>`,
-    bottom: `<dt-stack direction="row" align="center" class="d-mtn6">
+    bottom: `<div data-qa="dt-stack" class="d-mtn6 d-stack d-stack--row d-stack--gap-0 d-stack--align-center d-stack--justify-start">
     <div class="d-w8 d-h8 d-mr4 d-bgc-magenta-200">
       &nbsp;
     </div>
     <div class="d-fs-100 d-mr4">
       Aerolabs Support
     </div>
-  </dt-stack>`,
+  </div>`,
   },
 
   parameters: {
