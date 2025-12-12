@@ -567,26 +567,39 @@ vueCode='
 
 ## Examples
 
+### Profile Card
+
 <code-well-header>
   <ExampleProfileCard />
 </code-well-header>
 
 <code-example-tabs
-outline
 vueCode='
 <dt-stack gap="500">
   <dt-stack gap="400" class="d-jc-space-between">
     <dt-stack>
-      <dt-text as="h2" kind="headline" size="xl" strength="medium" density="200" class="d-fs-400">Katie Rodriguez</dt-text>
+      <dt-text as="h2" kind="headline" size="xl" strength="medium" density="200" class="d-fs-400">
+        Katie Rodriguez
+      </dt-text>
       <dt-stack direction="row" gap="350">
-        <dt-text tone="success">Available</dt-text>
+        <dt-text tone="success">
+          Available
+        </dt-text>
         <dt-text>&bull;</dt-text>
-        <dt-text tone="tertiary">Working from coffee shop</dt-text>
+        <dt-text tone="tertiary">
+          Working from coffee shop
+        </dt-text>
       </dt-stack>
     </dt-stack>
     <dt-stack gap="200">
-      <dt-text kind="body" size="md" density="200" strength="semibold" tone="tertiary">Chief Customer Success Officer</dt-text>
-      <dt-text kind="body" size="sm" density="200"><dt-text strength="semibold">6:19 am</dt-text> local time</dt-text>
+      <dt-text kind="body" size="md" density="200" strength="semibold" tone="tertiary">
+        Chief Customer Success Officer
+      </dt-text>
+      <dt-text kind="body" size="sm" density="200">
+        <dt-text strength="semibold">
+          6:19 am
+        </dt-text> local time
+      </dt-text>
     </dt-stack>
   </dt-stack>
   <dt-stack gap="400" direction="row" class="d-jc-space-between">
@@ -613,6 +626,8 @@ vueCode='
 '
 />
 
+### Call Log
+
 <code-well-header>
   <dt-stack gap="400" class="d-w100p">
     <dt-text as="h2" kind="headline" size="lg">Saturday, May 24, 2025</dt-text>
@@ -635,7 +650,8 @@ vueCode='
   </dt-stack>
 </code-well-header>
 
-```html
+<code-example-tabs
+vueCode='
 <dt-text as="h2" kind="headline" size="lg">Saturday, May 24, 2025</dt-text>
 <dt-stack direction="row" gap="450" class="d-w100p">
   <dt-avatar full-name="Ashanti Trevor" />
@@ -653,7 +669,10 @@ vueCode='
   <dt-text kind="body" size="sm" tone="tertiary">3:23 pm</dt-text>
   <dt-badge kind="count" type="bulletin" text="6" />
 </dt-stack>
-```
+'
+/>
+
+### Hero
 
 <code-well-header class="d-pb32">
   <dt-stack gap="500">
@@ -664,11 +683,11 @@ vueCode='
     <dt-stack direction="row" gap="500" align="start">
       <dt-stack>
         <dt-text as="h3" kind="headline" size="xl">Ai Contact Center</dt-text>
-        <dt-text as="p" kind="body" size="md">The world's most advanced customer engagement platform</dt-text>
+        <dt-text as="p" kind="body" size="md">The world’s most advanced customer engagement platform</dt-text>
       </dt-stack>
       <dt-stack>
         <dt-text as="h3" kind="headline" size="xl">Ai Voice</dt-text>
-        <dt-text as="p" kind="body" size="md">Say hello to the world's smartest business phone</dt-text>
+        <dt-text as="p" kind="body" size="md">Say hello to the world’s smartest business phone</dt-text>
       </dt-stack>
       <dt-stack>
         <dt-text as="h3" kind="headline" size="xl">Ai Meetings</dt-text>
@@ -678,7 +697,8 @@ vueCode='
   </dt-stack>
 </code-well-header>
 
-```html
+<code-example-tabs
+vueCode='
 <dt-stack gap="500">
   <dt-stack>
     <dt-text as="h2" kind="headline" size="xxl">Ai that works for you</dt-text>
@@ -687,11 +707,11 @@ vueCode='
   <dt-stack direction="row" gap="500" align="start">
     <dt-stack>
       <dt-text as="h3" kind="headline" size="xl">Ai Contact Center</dt-text>
-      <dt-text as="p" kind="body" size="md">The world's most advanced customer engagement platform</dt-text>
+      <dt-text as="p" kind="body" size="md">The world’s most advanced customer engagement platform</dt-text>
     </dt-stack>
     <dt-stack>
       <dt-text as="h3" kind="headline" size="xl">Ai Voice</dt-text>
-      <dt-text as="p" kind="body" size="md">Say hello to the world's smartest business phone</dt-text>
+      <dt-text as="p" kind="body" size="md">Say hello to the world’s smartest business phone</dt-text>
     </dt-stack>
     <dt-stack>
       <dt-text as="h3" kind="headline" size="xl">Ai Meetings</dt-text>
@@ -699,7 +719,8 @@ vueCode='
     </dt-stack>
   </dt-stack>
 </dt-stack>
-```
+'
+/>
 
 ## Accessibility
 
