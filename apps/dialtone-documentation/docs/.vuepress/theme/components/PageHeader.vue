@@ -115,6 +115,7 @@
         size="lg"
         tone="secondary"
         wrap="pretty"
+        class="d-mb16"
       >
         {{ $frontmatter.description }}
       </dt-text>

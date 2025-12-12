@@ -30,6 +30,7 @@ description: Utilities to change an element's font-size.
 <script setup>
   import { fontSize } from '@data/type.json';
   import ClampedTableWrapper from '@baseComponents/ClampedTableWrapper.vue';
+  import FontUtilitiesNotice from '@baseComponents/FontUtilitiesNotice.vue';
 </script>
 
 ## Classes by Platform

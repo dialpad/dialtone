@@ -114,5 +114,6 @@ Use `d-lh{n}` to fix an element's line-height. This allows you to target a speci
 <script setup>
   import { lineHeight } from '@data/type.json';
   import ClampedTableWrapper from '@baseComponents/ClampedTableWrapper.vue';
+  import FontUtilitiesNotice from '@baseComponents/FontUtilitiesNotice.vue';
   const { relative, fixed } = lineHeight;
 </script>

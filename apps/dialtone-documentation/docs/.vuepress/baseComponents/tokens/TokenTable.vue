@@ -65,9 +65,9 @@
                 gap="300"
                 class="d-ai-center token-name"
               >
-                <span class="d-label--md-compact">
+                <dt-text as="p" kind="label" size="md">
                   {{ name }}
-                </span>
+                </dt-text>
                 <div class="d-w32">
                   <dt-lazy-show :show="showCopyButton(name)">
                     <copy-button
@@ -78,9 +78,9 @@
                   </dt-lazy-show>
                 </div>
               </dt-stack>
-              <div class="d-body--sm">
+              <dt-text kind="body" size="sm" tone="tertiary">
                 {{ description }}
-              </div>
+              </dt-text>
               <token-value
                 v-if="isSmallDevice && showValue"
                 :token-value="valueToString(tokenValue)"

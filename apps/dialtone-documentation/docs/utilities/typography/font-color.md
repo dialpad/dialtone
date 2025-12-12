@@ -3,14 +3,12 @@ title: Font Color
 description: Utilities to change an element's font-color.
 ---
 
+<FontUtilitiesNotice />
+
 All font colors pass the WCAG 2.1 Level AA contrast ratio requirements (ratio >= 4.5:1) and most pass WCAG 2.1 Level AAA
 requirements (ratio >= 7:1).
 The contrast ratio value is noted with the colors below.
 Please use **only** these colors or variations of these colors which pass WCAG 2.1 Level AA contrast ratio requirements.
-
-<dt-notice kind="warning" class="d-wmx100p d-mt24" hideClose>
-  Before using a Color utility, consider <router-link class="d-link d-link--muted" to="/design/colors/palette/#foreground">semantic colors</router-link>.
-</dt-notice>
 
 ## Usage
 
@@ -109,6 +107,7 @@ Use `d-fco{n}` to change an element's text color opacity. You can also change fo
 <script setup>
   import { inject } from 'vue';
   import { extractUtilityClasses } from '@utilities';
+  import FontUtilitiesNotice from '@baseComponents/FontUtilitiesNotice.vue';
 
   const utilityClassDocs = inject('utilityClassDocs');
   const fontColors = extractUtilityClasses(utilityClassDocs, 'd-fc-');

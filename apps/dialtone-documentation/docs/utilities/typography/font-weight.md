@@ -70,4 +70,5 @@ Use `d-fw-{n}` to change an element's font-weight.
 <script setup>
   import { weight } from '@data/type.json';
   import ClampedTableWrapper from '@baseComponents/ClampedTableWrapper.vue';
+  import FontUtilitiesNotice from '@baseComponents/FontUtilitiesNotice.vue';
 </script>
