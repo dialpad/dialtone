@@ -1454,6 +1454,113 @@ Resize your browser to see the justification change at different breakpoints.
 
 View the [Migrating from Flex CSS Utilities to DtStack](/about/whats-new/posts/2025-12-2) for more details.
 
+## Examples
+
+### Profile Card
+
+<code-well-header>
+  <ExampleProfileCard />
+</code-well-header>
+
+<code-example-tabs
+vueCode='
+<dt-stack gap="500">
+  <dt-stack gap="400" class="d-jc-space-between">
+    <dt-stack>
+      <dt-text as="h2" kind="headline" size="xl" strength="medium" density="200" class="d-fs-400">
+        Katie Rodriguez
+      </dt-text>
+      <dt-stack direction="row" gap="350">
+        <dt-text tone="success">
+          Available
+        </dt-text>
+        <dt-text>&bull;</dt-text>
+        <dt-text tone="tertiary">
+          Working from coffee shop
+        </dt-text>
+      </dt-stack>
+    </dt-stack>
+    <dt-stack gap="200">
+      <dt-text kind="body" size="md" density="200" strength="semibold" tone="tertiary">
+        Chief Customer Success Officer
+      </dt-text>
+      <dt-text kind="body" size="sm" density="200">
+        <dt-text strength="semibold">
+          6:19 am
+        </dt-text> local time
+      </dt-text>
+    </dt-stack>
+  </dt-stack>
+  <dt-stack gap="400" direction="row" class="d-jc-space-between">
+    <dt-button class="d-fl1" kind="muted" importance="outlined">
+      <template #icon="{ iconSize }">
+        <dt-icon-phone :size="iconSize" />
+      </template>
+      Call
+    </dt-button>
+    <dt-button class="d-fl1" kind="muted" importance="outlined">
+      <template #icon="{ iconSize }">
+        <dt-icon-quick-reply :size="iconSize" />
+      </template>
+      Message
+    </dt-button>
+    <dt-button class="d-fl1" kind="muted" importance="outlined">
+      <template #icon="{ iconSize }">
+        <dt-icon-video :size="iconSize" />
+      </template>
+      Meet
+    </dt-button>
+  </dt-stack>
+</dt-stack>
+'
+/>
+
+### Call Log
+
+<code-well-header>
+  <dt-stack gap="400" class="d-w100p">
+    <dt-text as="h2" kind="headline" size="lg">Saturday, May 24, 2025</dt-text>
+    <dt-stack direction="row" gap="450" class="d-w100p">
+      <dt-avatar full-name="Ashanti Trevor" />
+      <dt-stack class="d-fl1">
+        <dt-text kind="body" size="sm" strength="bold">Ashanti Trevor</dt-text>
+        <dt-stack direction="row" gap="300">
+          <dt-stack direction="row" gap="400">
+            <dt-icon name="phone-outgoing" size="200" class="d-fc-tertiary" />
+            <dt-text kind="body" size="xs" tone="tertiary">Outgoing call</dt-text>
+          </dt-stack>
+          <dt-text kind="body" size="xs" tone="tertiary">&bull;</dt-text>
+          <dt-text kind="body" size="xs" tone="tertiary">2 minutes 10 seconds</dt-text>
+        </dt-stack>
+      </dt-stack>
+      <dt-text kind="body" size="sm" tone="tertiary">3:23 pm</dt-text>
+      <dt-badge kind="count" type="bulletin" text="6" />
+    </dt-stack>
+  </dt-stack>
+</code-well-header>
+
+<code-example-tabs
+vueCode='
+<dt-text as="h2" kind="headline" size="lg">Saturday, May 24, 2025</dt-text>
+<dt-stack direction="row" gap="450" class="d-w100p">
+  <dt-avatar full-name="Ashanti Trevor" />
+  <dt-stack class="d-fl1">
+    <dt-text kind="body" size="sm" strength="bold">Ashanti Trevor</dt-text>
+    <dt-stack direction="row" gap="300">
+      <dt-stack direction="row" gap="400">
+        <dt-icon name="phone-outgoing" size="200" class="d-fc-tertiary" />
+        <dt-text kind="body" size="xs" tone="tertiary">Outgoing call</dt-text>
+      </dt-stack>
+      <dt-text kind="body" size="xs" tone="tertiary">&bull;</dt-text>
+      <dt-text kind="body" size="xs" tone="tertiary">2 minutes 10 seconds</dt-text>
+    </dt-stack>
+  </dt-stack>
+  <dt-text kind="body" size="sm" tone="tertiary">3:23 pm</dt-text>
+  <dt-badge kind="count" type="bulletin" text="6" />
+</dt-stack>
+'
+/>
+
 ## Vue API
 
 <component-vue-api component-name="stack" />
@@ -1469,6 +1576,7 @@ View the [Migrating from Flex CSS Utilities to DtStack](/about/whats-new/posts/2
     DtIconLock,
   } from '@dialpad/dialtone-icons/vue3';
   import ClampedTableWrapper from '@baseComponents/ClampedTableWrapper.vue';
+  import ExampleProfileCard from '@exampleComponents/ExampleProfileCard.vue';
 
   const selectedGap = ref('400');
   const focusedGapIndex = ref(0);

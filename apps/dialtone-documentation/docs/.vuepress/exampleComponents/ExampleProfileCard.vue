@@ -48,3 +48,7 @@
     </dt-stack>
   </dt-stack>
 </template>
+
+<script setup>
+import { DtIconPhone, DtIconQuickReply, DtIconVideo } from '@dialpad/dialtone-icons/vue3';
+</script>
