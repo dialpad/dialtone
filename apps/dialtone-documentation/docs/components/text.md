@@ -469,6 +469,8 @@ vueCode='
 
 Control text wrapping behavior. Particularly useful for headlines where balanced line lengths improve readability.
 
+Since `DtText`'s default element is a `<span>`, which is inline by default, the `wrap` prop will only work if its element is styled in a block context.
+
 <code-well-header>
   <dt-stack class="d-w100p" gap="500">
     <dt-stack gap="600" align="start">

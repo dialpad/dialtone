@@ -3,15 +3,7 @@ title: Font Family
 description: Utilities to change an element's font-family.
 ---
 
-<dt-notice
-  kind="warning"
-  :hideClose="true"
-  class="d-wmx100p"
->
-  <template #default>
-    <p class="d-body--md-compact">Before applying a typography utility, first consider using <router-link class="d-fw-semibold d-link d-link--muted" to="/design/typography/">Dialtone's text styles</router-link> that bundles Font family, Font weight, Font size, and Line height together.</p>
-  </template>
-</dt-notice>
+<FontUtilitiesNotice />
 
 ## Sans-Serif
 
@@ -52,6 +44,7 @@ Dialtone supports select marketing fonts and weights. Use the following combinat
 <script setup>
   import { fontFamily } from '@data/type.json';
   import ClampedTableWrapper from '@baseComponents/ClampedTableWrapper.vue';
+  import FontUtilitiesNotice from '@baseComponents/FontUtilitiesNotice.vue';
 </script>
 
 ## CSS Variables
