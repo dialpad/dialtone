@@ -4,19 +4,25 @@
     direction="row"
     justify="center"
     align="center"
-    class="d-bar4 d-h32 colorRectangle"
+    class="d-bar4 d-hmn32 colorRectangle"
     :style="getColorStyle"
   >
-    <div v-if="isForeground || isLink" :class="['d-headline--lg', { 'link-example': isLink }]">
+    <dt-text
+      v-if="isForeground || isLink"
+      as="p"
+      kind="headline"
+      size="xl"
+      :class="{ 'link-example': isLink }"
+    >
       Ag
-    </div>
+    </dt-text>
   </dt-stack>
   <dt-stack
     v-if="category === 'typography' || category === 'text'"
     direction="row"
     justify="center"
     align="center"
-    class="d-h32"
+    class="d-hmn32"
   >
     <div :style="getTypographyStyle">
       Ag
@@ -24,7 +30,7 @@
   </dt-stack>
   <div
     v-if="category === 'shadow'"
-    class="d-bar4 d-h32"
+    class="d-bar4 d-hmn32"
     :style="getShadowStyle"
   />
   <div

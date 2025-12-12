@@ -1,6 +1,6 @@
 <template>
   <div v-dt-scrollbar:never class="d-hmx464 d-bar8 d-ba d-bc-subtle">
-    <div>
+    <dt-mode-island :mode="mode">
       <table class="d-table dialtone-doc-table">
         <thead class="d-bgc-primary d-ps-sticky d-zi-base1 d-t0">
           <tr>
@@ -63,7 +63,8 @@
               <dt-stack
                 direction="row"
                 gap="300"
-                class="d-ai-center token-name"
+                align="center"
+                class="token-name"
               >
                 <dt-text as="p" kind="label" size="md">
                   {{ name }}
@@ -101,7 +102,7 @@
           </tr>
         </tbody>
       </table>
-    </div>
+    </dt-mode-island>
   </div>
 </template>
 
