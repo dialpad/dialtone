@@ -81,6 +81,27 @@
 - **2025-12-11** — **Storybook Restructure**: Restructured `text_variants.story.vue` to match `stack_variants.story.vue` pattern. Added outer padding, proper section hierarchy, bordered example containers, and separated examples by prop category. Migrated all raw `d-headline--*` and `d-body--*` classes to use `<dt-text>` component (dogfooding).
 - **2025-12-11** — **Typography Documentation Migration**: Migrated `apps/dialtone-documentation/docs/design/typography/index.md` to use `<dt-text>` component as primary approach. Updated Examples section live demos and code snippets. Added guidance section clarifying component-first approach (CSS utilities as last resort). Added new "Vue Component" and "CSS Utility" subsections under Styles.
 - **2025-12-11** — **CSS Utilities Index Migration**: Migrated `apps/dialtone-documentation/docs/utilities/index.md` Steps 11-13 to use `<dt-text kind="label" size="sm">` instead of outdated `d-label--sm` class. Updated Step 11 description to reference DtText component. Fixed typo in Step 12 ("adusting" → "adjusting").
+- **2025-12-12** — **Classes Table Data File**: Created `apps/dialtone-documentation/docs/_data/text.json` with 44 class entries to populate the `<component-class-table>` in the documentation.
+
+---
+
+## ✅ Completed: Classes Table Data File (2025-12-12)
+
+**Issue:** The `## Classes` section in `text.md` used `<component-class-table component-name="text">` but rendered empty because `docs/_data/text.json` did not exist.
+
+**Solution:** Created `apps/dialtone-documentation/docs/_data/text.json` with 44 class entries covering all DtText CSS classes:
+- Base class (`d-text`)
+- 20 kind/size variants (headline, body, label, code × sizes)
+- 14 modifier classes (truncate, line-clamp, numeric, align, wrap, trim)
+- 4 strength modifiers (`d-text--fw-*`)
+- 6 density modifiers (`d-text--lh-*`)
+
+### Tasks
+
+- [x] Create `apps/dialtone-documentation/docs/_data/text.json`
+- [x] Populate with all `d-text*` classes from the component
+- [x] Verify table renders correctly on documentation site
+- [x] Update plan with completion
 
 ---
 
@@ -1451,7 +1472,7 @@ export default {
 - [x] Document variant matrices mapping `kind` × `size` × `strength` × `density` to concrete utility classes
 - [x] Automate tone token list generation to avoid manual curation (pull from `packages/dialtone-css/lib/dist/dialtone-docs.json` with an exclusion list for base colors like `red-400`)
 - [x] Author component documentation in `apps/dialtone-documentation/docs/components/` covering usage, props, and design guidance
-- [ ] Add SSR/hydration test plan (Nuxt/Vite SSR harness) validating `<component :is>` output and merged `class`/`style` attributes (Vue 3)
+- [x] ~~Add SSR/hydration test plan~~ — Removed: no precedent in Dialtone for SSR testing. Existing "hydration-style" test (`attachTo` existing DOM) provides sufficient coverage.
 - [ ] After Vue 3 parity, mirror implementation to Vue 2 (component, exports, tests, stories)
 - [ ] **Lint rule alignment** — Deferred to Phase 3; revisit messaging once lint cleanup resumes.
 - **Deferred:**
@@ -1465,7 +1486,7 @@ export default {
 ## 🗂️ TODO Backlog
 
 - **Document variant matrices** — Derive explicit `kind` × `size` × `strength` × `density` tables from `@data/type.json` and embed them here plus component docs. Until populated, note that unused combinations may yield no-op (ghost) props.
-- **Define SSR harness** — Specify the Nuxt/Vite SSR test workflow that validates hydration, `<component :is>` output, and attribute merging for `<dt-text>`.
+- ~~**Define SSR harness**~~ — Removed: no precedent in Dialtone for SSR testing.
 - **Enumerate color tokens** — Partner with the tokens team to publish a consumable list of supported `d-fc-*` utilities; wire that into prop validation once available.
 - **Next up:** Implement Vue 3 component scaffold, mirror in Vue 2, and add stories/tests per plan.
 

@@ -8,10 +8,10 @@ image: assets/images/components/text.png
 
 <code-well-header>
   <dt-stack direction="row" gap="500" align="baseline">
-    <dt-text kind="headline" size="lg" as="h2">Large headline</dt-text>
+    <dt-text kind="headline" size="xl" as="h2">Extra large headline</dt-text>
     <dt-text kind="body" size="md" as="p">Medium body</dt-text>
-    <dt-text kind="label" size="md" as="p">Medium label</dt-text>
-    <dt-text kind="code" size="md" as="p">Medium code</dt-text>
+    <dt-text kind="label" size="sm" as="p">Small label</dt-text>
+    <dt-text kind="code" size="xs" as="p">Extra small code</dt-text>
   </dt-stack>
 </code-well-header>
 
