@@ -34,9 +34,9 @@ const kindDescriptions = {
           <div class="d-mb4">
             {{ importance }}
           </div>
-          <div class="d-tt-none d-body--md-compact">
+          <dt-text kind="body" size="sm" density="200" class="d-tt-none">
             {{ importanceDescriptions[importance] }}
-          </div>
+          </dt-text>
         </th>
       </tr>
     </thead>
@@ -46,9 +46,9 @@ const kindDescriptions = {
           <a class="d-link d-fs-100 d-fw-medium d-d-block d-mb4 d-tt-uppercase" :href="`#${kind}`">
             <strong>{{ kind }}</strong>
           </a>
-          <div class="d-body--md-compact">
+          <dt-text kind="body" size="sm" density="200">
             {{ kindDescriptions[kind] }}
-          </div>
+          </dt-text>
         </th>
         <td
           v-for="importance in importanceModifiers"

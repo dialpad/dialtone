@@ -82,15 +82,15 @@ When adding space between elements, both vertically and horizontally, we can use
  <dt-stack direction="column" gap="500">
   <iframe class="d-bgc-contrast" style="border: 0px; border-radius: 8px" width="100%" height="320" src="https://www.figma.com/embed?embed_host=share&url=https%3A%2F%2Fwww.figma.com%2Fproto%2FQe6cz41vPBozP4PhgGqFin/Docs-Protos?page-id=0%3A1&type=design&node-id=5-15958&viewport=702%2C117%2C0.97&t=LxszUdOGsEU9l3I5-8&scaling=min-zoom&starting-point-node-id=5%3A15958&hotspot-hints=0&hide-ui=1"></iframe>
 <div>
-<p class="d-fw-bold">Vertical stacking</p>
-<p class="d-body--md d-fc-tertiary">Set the space-between/gap groups vertically.</p>
+<strong>Vertical stacking</strong>
+<dt-text as="p" kind="body" tone="tertiary">Set the space-between/gap groups vertically.</dt-text>
 </div>
   </dt-stack>
   <dt-stack direction="column" gap="500">
   <iframe class="d-bgc-contrast" style="border: 0px; border-radius: 8px" width="100%" height="320" src="https://www.figma.com/embed?embed_host=share&url=https%3A%2F%2Fwww.figma.com%2Fproto%2FQe6cz41vPBozP4PhgGqFin/Docs-Protos?page-id=0%3A1&type=design&node-id=5-15997&viewport=702%2C117%2C0.97&t=LxszUdOGsEU9l3I5-8&scaling=min-zoom&starting-point-node-id=5%3A15997&hotspot-hints=0&hide-ui=1"></iframe>
   <div>
-  <p class="d-fw-bold">Horizontal stacking</p>
-  <p class="d-body--md d-fc-tertiary">Set the space-between/gap groups horizontally.</p>
+  <strong>Horizontal stacking</strong>
+  <dt-text as="p" kind="body" tone="tertiary">Set the space-between/gap groups horizontally.</dt-text>
   </div>
   </dt-stack>
 </div>
@@ -109,7 +109,7 @@ Avoid using `margin`, which adds space outside the element and can affect the la
 
  <iframe class="d-bgc-contrast" style="border: 0px; border-radius: 8px" width="100%" height="320" src="https://www.figma.com/embed?embed_host=share&url=https%3A%2F%2Fwww.figma.com%2Fproto%2FQe6cz41vPBozP4PhgGqFin/Docs-Protos?page-id=0%3A1&type=design&node-id=5-16168&viewport=702%2C117%2C0.97&t=LxszUdOGsEU9l3I5-8&scaling=min-zoom&starting-point-node-id=5%3A16168&hotspot-hints=0&hide-ui=1"></iframe>
 <div>
-<p class="d-body--md d-fc-tertiary">Padding can be measured vertically and horizontally.</p>
+<dt-text as="p" kind="body" tone="tertiary">Padding can be measured vertically and horizontally.</dt-text>
 </div>
 </dt-stack>
 </div>
@@ -122,14 +122,14 @@ Avoid using `margin`, which adds space outside the element and can affect the la
   <div>
 <dt-stack direction="column" gap="400">
 <p>Group and adjust the distance between elements to guide users understanding of their relationships. Closer elements appear more connected, while larger gaps indicate less association.</p>
-<p class="d-body--md">Consistent and intentional spacing decisions across pages create a predictable layout, reducing cognitive load and allowing users to focus on the content rather than the layout.</p>
+<dt-text as="p" kind="body">Consistent and intentional spacing decisions across pages create a predictable layout, reducing cognitive load and allowing users to focus on the content rather than the layout.</dt-text>
     </dt-stack>
   </div>
   <dt-stack class="d-gc2" direction="column" gap="500">
     <iframe class="d-bgc-contrast" style="border: 0px; border-radius: 8px" width="100%" height="320" src="https://www.figma.com/embed?embed_host=share&url=https%3A%2F%2Fwww.figma.com%2Fproto%2FQe6cz41vPBozP4PhgGqFin/Docs-Protos?page-id=0%3A1&type=design&node-id=5-16175&viewport=702%2C117%2C0.97&t=LxszUdOGsEU9l3I5-8&scaling=min-zoom&starting-point-node-id=5%3A16175&hotspot-hints=0&hide-ui=1"></iframe>
-    <p class="d-body--md d-fc-tertiary">
-    <strong>Proximity groups</strong> are formed by placing elements close together. <strong>Delimited groups,</strong> on the other hand, are defined by clear visual boundaries, such as borders.
-    </p>
+    <dt-text as="p" kind="body" tone="tertiary">
+    <dt-text strength="strong">Proximity groups</dt-text> are formed by placing elements close together. <dt-text strength="strong">Delimited groups,</dt-text> on the other hand, are defined by clear visual boundaries, such as borders.
+    </dt-text>
     </dt-stack>
 </div>
 
@@ -143,7 +143,7 @@ Avoid using `margin`, which adds space outside the element and can affect the la
       </p>
       </div>
       <div>
-        <p class="d-body--md">The empty areas around elements provide visual breathing room, enhancing readability and contrast.</p>
+        <dt-text as="p" kind="body">The empty areas around elements provide visual breathing room, enhancing readability and contrast.</dt-text>
       </div>
     </dt-stack>
   </div>

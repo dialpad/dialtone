@@ -6,7 +6,7 @@
           <tr>
             <th
               scope="col"
-              class="d-p0 d-bbw0 d-label--sm-compact d-tt-none"
+              class="d-p0 d-bbw0 d-tt-none"
             >
               <div class="d-p16 d-bb d-bbw1">
                 Preview
@@ -14,7 +14,7 @@
             </th>
             <th
               scope="col"
-              class="d-p0 d-bbw0 d-label--sm-compact d-tt-none"
+              class="d-p0 d-bbw0 d-tt-none"
             >
               <div class="d-p16 d-bb d-bbw1">
                 Token Name
@@ -23,7 +23,7 @@
             <th
               v-if="showValue"
               scope="col"
-              class="d-p0 d-bbw0 d-label--sm-compact d-tt-none d-ta-right"
+              class="d-p0 d-bbw0 d-tt-none d-ta-right"
             >
               <div class="d-p16 d-bb d-bbw1">
                 {{ tokenList ? "REM" : "Value" }}
@@ -32,7 +32,7 @@
             <th
               v-show="!!tokenList"
               scope="col"
-              class="d-p0 d-bbw0 d-label--sm-compact"
+              class="d-p0 d-bbw0"
             >
               <div class="d-p16 d-bb d-bbw1">
                 PX
@@ -88,12 +88,12 @@
                 :tokens="tokens"
               />
             </th>
-            <td v-if="!isSmallDevice && showValue" class="d-code--sm d-fc-blue-500 d-ta-right d-wmx164">
+            <td v-if="!isSmallDevice && showValue" class="d-text-code--md d-fc-blue-500 d-ta-right d-wmx164">
               <token-value :token-value="valueToString(tokenValue)" :tokens="tokens" />
             </td>
             <td
               v-if="!!tokenList"
-              class="d-code--sm d-docsite-code"
+              class="d-text-code--md d-docsite-code"
             >
               <div class="d-wmx264">
                 {{ remToPixels(tokenValue) }}

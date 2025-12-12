@@ -24,8 +24,12 @@
     </div>
     <dt-stack direction="row" align="center">
       <dt-stack class="d-fl-grow5">
-        <span class="d-label d-label--sm">Name</span>
-        <span class="d-body--md-compact">{{ iconName }}</span>
+        <dt-text kind="label" size="sm">
+          Name
+        </dt-text>
+        <dt-text kind="body" size="md" density="200">
+          {{ iconName }}
+        </dt-text>
       </dt-stack>
       <copy-button
         class="d-ml8"
@@ -34,15 +38,20 @@
       />
     </dt-stack>
     <dt-stack>
-      <span class="d-label d-label--sm">Category</span>
-      <span
-        class="d-tt-capitalize d-body--md-compact"
-        v-text="category"
-      />
+      <dt-text kind="label" size="sm">
+        Category
+      </dt-text>
+      <dt-text kind="body" size="md" density="200" class="d-tt-capitalize">
+        {{ category }}
+      </dt-text>
     </dt-stack>
     <dt-stack>
-      <span class="d-label d-label--sm">Keywords</span>
-      <span class="d-body--md-compact">{{ keywords.join(', ') || '-' }}</span>
+      <dt-text kind="label" size="sm">
+        Keywords
+      </dt-text>
+      <dt-text kind="body" size="md" density="200">
+        {{ keywords.join(', ') || '-' }}
+      </dt-text>
     </dt-stack>
     <dt-stack direction="row" align="end">
       <div class="d-fl-grow1">
@@ -89,13 +98,11 @@
           :value="vueExampleDeprecated"
         >
           <template #description>
-            <p>
-              This Vue approach does not include tree-shaking.
-              Please use the Vue snippet above.
-              <dt-link href="/about/whats-new/posts/2024-4-15.html" target="_blank">
-                About this change.
-              </dt-link>
-            </p>
+            This Vue approach does not include tree-shaking.
+            Please use the Vue snippet above.
+            <dt-link href="/about/whats-new/posts/2024-4-15.html" target="_blank">
+              About this change.
+            </dt-link>
           </template>
         </dt-input>
       </div>

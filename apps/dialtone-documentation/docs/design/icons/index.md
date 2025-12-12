@@ -18,7 +18,9 @@ Find a list of available icons in [DT Core: Icons](https://www.figma.com/file/zz
 
 <dt-stack class="d-gc2" direction="column" gap="500">
 <img alt="Figma Search Icon" src="/assets/images/figma-search-icon.gif" style="border-radius: var(--dt-size-radius-400)">
-<p class="d-body--md d-fc-tertiary">Swap instances in Figma by holding ⌘ + ⌥ on Mac, or Ctrl + Alt on Windows.</p>
+
+<dt-text kind="body" tone="tertiary">Swap instances in Figma by holding ⌘ + ⌥ on Mac, or Ctrl + Alt on Windows.</dt-text>
+
 </dt-stack>
 </div>
 
@@ -136,7 +138,6 @@ The icon size is defined based on the context and text size next to it. These ar
     </dt-stack>
   </dt-stack>
 </dt-stack>
-
 
 ## Crafting an Icon
 

@@ -32,18 +32,21 @@
           </dt-button>
         </template>
         <template #headerContent>
-          <span
-            class="d-tt-capitalize d-fc-primary"
-            v-text="name"
-          />
+          <dt-text class="d-tt-capitalize">
+            {{ name }}
+          </dt-text>
         </template>
         <template #content>
           <dt-stack gap="500">
             <dt-stack direction="row" gap="300">
               <dt-stack class="d-fl-grow5">
-                <span class="d-label d-label--sm">Name</span>
+                <dt-text kind="label" size="sm">
+                  Name
+                </dt-text>
                 <dt-stack direction="row" justify="between">
-                  <span class="d-body--md-compact">{{ name }}</span>
+                  <dt-text kind="body" size="md" density="200">
+                    {{ name }}
+                  </dt-text>
                 </dt-stack>
               </dt-stack>
               <a
@@ -108,10 +111,12 @@
             </dt-stack>
             <dt-stack direction="row" align="center">
               <dt-stack class="d-fl-grow5">
-                <span class="d-label d-label--sm">Description</span>
-                <div class="d-body--md-compact">
+                <dt-text kind="label" size="sm">
+                  Description
+                </dt-text>
+                <dt-text kind="body" size="md" density="200">
                   {{ desc }}
-                </div>
+                </dt-text>
               </dt-stack>
             </dt-stack>
             <dt-stack direction="row" align="end">

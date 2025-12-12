@@ -261,7 +261,7 @@ showHtmlWarning />
 <code-well-header>
   <dt-stack gap="500" class="d-w100p">
     <dt-stack gap="200">
-      <h3 class="d-label" id="interactive-gap-label">Select a gap option</h3>
+      <dt-text as="h3" kind="label" size="md" id="interactive-gap-label">Select a gap option</dt-text>
       <dt-stack
         :direction="{ 'default': 'column', 'md': 'row' }"
         gap="200"
@@ -294,7 +294,7 @@ showHtmlWarning />
       align="start"
     >
       <dt-stack class="d-w100p md:d-w50p" gap="300">
-        <h3 class="d-headline--md">Column</h3>
+        <dt-text as="h3" kind="headline" size="md">Column</dt-text>
         <dt-stack
           :gap="selectedGap"
           ref="gapExample"
@@ -306,7 +306,7 @@ showHtmlWarning />
         </dt-stack>
       </dt-stack>
       <dt-stack class="d-w100p md:d-w50p" gap="300">
-        <h3 class="d-headline--md">Row</h3>
+        <dt-text as="h3" kind="headline" size="md">Row</dt-text>
         <dt-stack
           direction="row"
           :gap="selectedGap"
@@ -932,14 +932,14 @@ Align items along their text baselines.
     class="d-bgc-moderate-opaque d-bar8 axis-outline axis-outline--baseline"
     ref="alignBaselineExample"
   >
-    <div class="d-bgc-moderate-opaque d-p16 d-bar8 d-body--sm">
-      Small body
+    <div class="d-bgc-moderate-opaque d-p16 d-bar8">
+      <dt-text kind="body" size="xs">Small body</dt-text>
     </div>
-    <div class="d-bgc-moderate-opaque d-p16 d-bar8 d-body--md">
-      Medium body
+    <div class="d-bgc-moderate-opaque d-p16 d-bar8">
+      <dt-text kind="body" size="md">Medium body</dt-text>
     </div>
-    <div class="d-bgc-moderate-opaque d-p16 d-bar8 d-headline--xxl">
-      Large headline
+    <div class="d-bgc-moderate-opaque d-p16 d-bar8">
+      <dt-text kind="headline" size="xxl">Large headline</dt-text>
     </div>
   </dt-stack>
 </code-well-header>
@@ -952,9 +952,9 @@ vueCode='
   gap="400"
   align="baseline"
 >
-  <div class="d-body--sm">Small text</div>
-  <div class="d-body--md">Medium text</div>
-  <div class="d-headline--md">Large text</div>
+  <dt-text kind="body" size="xs">Small body</dt-text>
+  <dt-text kind="body" size="md">Medium body</dt-text>
+  <dt-text kind="headline" size="xxl">Large headline</dt-text>
 </dt-stack>
 '
 showHtmlWarning />

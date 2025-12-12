@@ -11,7 +11,7 @@ storybook: https://dialtone.dialpad.com/vue/?path=/story/components-card--defaul
 <code-well-header>
   <div class="d-card d-w264">
     <div class="d-card__header">
-      <dt-text kind="headline" size="md">
+      <dt-text as="p" kind="headline" size="md">
         Lorem ipsum
       </dt-text>
       <button type="button" class="d-btn d-btn--xs d-btn--circle">
@@ -106,7 +106,7 @@ showHtmlWarning />
 <code-well-header>
   <div class="d-card d-w264">
     <div class="d-card__header">
-      <dt-text kind="headline" size="md">
+      <dt-text as="p" kind="headline" size="md">
         Lorem ipsum
       </dt-text>
       <button type="button" class="d-btn d-btn--xs d-btn--circle">
@@ -119,13 +119,13 @@ showHtmlWarning />
   </div>
 </code-well-header>
 
-<dt-text
+<code-example-tabs
 htmlCode='
 <div class="d-card d-w264">
   <div class="d-card__header">
-    <div class="d-headline--md">
+    <dt-text as="p" kind="headline" size="md">
       Lorem ipsum
-    </div>
+    </dt-text>
     <button type="button" class="d-btn d-btn--xs d-btn--circle">
       <dt-icon name="more-vertical" size="200" />
     </button>
@@ -138,19 +138,19 @@ htmlCode='
 vueCode='
 <dt-card class="d-w264">
   <template #header>
-    <p class="d-headline-medium">Lorem ipsum</p>
-      <dt-button
-        size="xs"
-        importance="clear"
-        aria-label="Menu button"
-      >
-        <template #icon>
-          <dt-icon
-            name="more-vertical"
-            size="100"
-          />
-        </template>
-      </dt-button>
+    <dt-text as="p" kind="headline" size="md">Lorem ipsum</dt-text>
+    <dt-button
+      size="xs"
+      importance="clear"
+      aria-label="Menu button"
+    >
+      <template #icon>
+        <dt-icon
+          name="more-vertical"
+          size="100"
+        />
+      </template>
+    </dt-button>
   </template>
   <template #content>
     Content slot. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec fermentum molestie semper. Morbi finibus nulla turpis, nec molestie mi rutrum.
@@ -236,7 +236,7 @@ showHtmlWarning />
 <code-well-header>
   <div class="d-card d-w264">
     <div class="d-card__header">
-      <dt-text kind="headline" size="md">
+      <dt-text as="p" kind="headline" size="md">
         Lorem ipsum
       </dt-text>
       <button type="button" class="d-btn d-btn--xs d-btn--circle">
@@ -254,13 +254,13 @@ showHtmlWarning />
   </div>
 </code-well-header>
 
-<dt-text
+<code-example-tabs
 htmlCode='
 <div class="d-card d-w264">
   <div class="d-card__header">
-    <div class="d-headline--md">
+    <dt-text as="p" kind="headline" size="md">
       Lorem ipsum
-    </div>
+    </dt-text>
     <button type="button" class="d-btn d-btn--xs d-btn--circle">
       <dt-icon name="more-vertical" size="200" />
     </button>
@@ -278,19 +278,19 @@ htmlCode='
 vueCode='
 <dt-card max-height="50px" class="d-w264">
   <template #header>
-    <p class="d-headline-medium">Lorem ipsum</p>
-      <dt-button
-        size="xs"
-        importance="clear"
-        aria-label="Menu button"
-      >
-        <template #icon>
-          <dt-icon
-            name="more-vertical"
-            size="100"
-          />
-        </template>
-      </dt-button>
+    <dt-text as="p" kind="headline" size="md">Lorem ipsum</dt-text>
+    <dt-button
+      size="xs"
+      importance="clear"
+      aria-label="Menu button"
+    >
+      <template #icon>
+        <dt-icon
+          name="more-vertical"
+          size="100"
+        />
+      </template>
+    </dt-button>
   </template>
   <template #content>
     Content slot. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec fermentum molestie semper. Morbi finibus nulla turpis, nec molestie mi rutrum.

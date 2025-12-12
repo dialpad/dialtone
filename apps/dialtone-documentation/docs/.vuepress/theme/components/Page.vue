@@ -50,12 +50,14 @@
           </dt-button>
         </router-link>
       </dt-stack>
-      <footer class="d-mt16 d-mb16 d-body--sm d-fc-tertiary">
-        <span
-          v-if="$frontmatter.title"
-          v-text="$frontmatter.title"
-        />
-        documentation last updated {{ lastUpdated }}
+      <footer class="d-mt16 d-mb16">
+        <dt-text as="p" kind="body" size="sm" tone="muted">
+          <dt-text v-if="$frontmatter.title">
+            {{ $frontmatter.title }}
+          </dt-text>
+          documentation last updated
+          <dt-text>{{ lastUpdated }}</dt-text>
+        </dt-text>
       </footer>
     </div>
     <div class="d-ps-relative d-ga-toc">

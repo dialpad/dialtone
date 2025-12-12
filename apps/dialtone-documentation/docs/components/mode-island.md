@@ -336,7 +336,7 @@ Positioned components like [Popovers](/components/popover.html), [Dropdowns](/co
 
 <code-well-header>
   <dt-stack gap="400" direction="row">
-    <dt-hovercard ref="hovercardDefault" padding="none" contentClass="d-body--sm" placement="top-start">
+    <dt-hovercard ref="hovercardDefault" padding="none" placement="top-start">
       <template #anchor>
         <dt-button size="sm" kind="muted" importance="outlined">Default </dt-button>
       </template>
@@ -347,9 +347,9 @@ Positioned components like [Popovers](/components/popover.html), [Dropdowns](/co
               <dt-stack>
                 <dt-text as="h2" kind="headline" size="xl" strength="medium" density="200" class="d-fs-400">Katie Rodriguez</dt-text>
                 <dt-stack direction="row" gap="350">
-                  <dt-text tone="success">Available</dt-text>
-                  <dt-text>&bull;</dt-text>
-                  <dt-text tone="tertiary">Working from coffee shop</dt-text>
+                  <dt-text kind="body" size="sm" tone="success">Available</dt-text>
+                  <dt-text kind="body" size="sm">&bull;</dt-text>
+                  <dt-text kind="body" size="sm" tone="tertiary">Working from coffee shop</dt-text>
                 </dt-stack>
               </dt-stack>
               <dt-stack gap="200">
@@ -381,7 +381,7 @@ Positioned components like [Popovers](/components/popover.html), [Dropdowns](/co
         </div>
       </template>
     </dt-hovercard>
-    <dt-hovercard padding="none" contentClass="d-body--sm" placement="top-start">
+    <dt-hovercard padding="none" placement="top-start">
       <template #anchor>
         <dt-button size="sm" kind="muted" importance="outlined">Inverted </dt-button>
       </template>
@@ -392,9 +392,9 @@ Positioned components like [Popovers](/components/popover.html), [Dropdowns](/co
               <dt-stack>
                 <dt-text as="h2" kind="headline" size="xl" strength="medium" density="200" class="d-fs-400">Katie Rodriguez</dt-text>
                 <dt-stack direction="row" gap="350">
-                  <dt-text tone="success">Available</dt-text>
-                  <dt-text>&bull;</dt-text>
-                  <dt-text tone="tertiary">Working from coffee shop</dt-text>
+                  <dt-text kind="body" size="sm" tone="success">Available</dt-text>
+                  <dt-text kind="body" size="sm">&bull;</dt-text>
+                  <dt-text kind="body" size="sm" tone="tertiary">Working from coffee shop</dt-text>
                 </dt-stack>
               </dt-stack>
               <dt-stack gap="200">
@@ -426,7 +426,7 @@ Positioned components like [Popovers](/components/popover.html), [Dropdowns](/co
         </dt-mode-island>
       </template>
     </dt-hovercard>
-    <dt-hovercard padding="none" contentClass="d-body--sm" placement="top-start">
+    <dt-hovercard padding="none" placement="top-start">
       <template #anchor>
         <dt-button size="sm" kind="muted" importance="outlined">Light </dt-button>
       </template>
@@ -437,9 +437,9 @@ Positioned components like [Popovers](/components/popover.html), [Dropdowns](/co
               <dt-stack>
                 <dt-text as="h2" kind="headline" size="xl" strength="medium" density="200" class="d-fs-400">Katie Rodriguez</dt-text>
                 <dt-stack direction="row" gap="350">
-                  <dt-text tone="success">Available</dt-text>
-                  <dt-text>&bull;</dt-text>
-                  <dt-text tone="tertiary">Working from coffee shop</dt-text>
+                  <dt-text kind="body" size="sm" tone="success">Available</dt-text>
+                  <dt-text kind="body" size="sm">&bull;</dt-text>
+                  <dt-text kind="body" size="sm" tone="tertiary">Working from coffee shop</dt-text>
                 </dt-stack>
               </dt-stack>
               <dt-stack gap="200">
@@ -471,7 +471,7 @@ Positioned components like [Popovers](/components/popover.html), [Dropdowns](/co
         </dt-mode-island>
       </template>
     </dt-hovercard>
-    <dt-hovercard padding="none" contentClass="d-body--sm" placement="top-start">
+    <dt-hovercard padding="none" placement="top-start">
       <template #anchor>
         <dt-button size="sm" kind="muted" importance="outlined">Dark </dt-button>
       </template>
@@ -482,9 +482,9 @@ Positioned components like [Popovers](/components/popover.html), [Dropdowns](/co
               <dt-stack>
                 <dt-text as="h2" kind="headline" size="xl" strength="medium" density="200" class="d-fs-400">Katie Rodriguez</dt-text>
                 <dt-stack direction="row" gap="350">
-                  <dt-text tone="success">Available</dt-text>
-                  <dt-text>&bull;</dt-text>
-                  <dt-text tone="tertiary">Working from coffee shop</dt-text>
+                  <dt-text kind="body" size="sm" tone="success">Available</dt-text>
+                  <dt-text kind="body" size="sm">&bull;</dt-text>
+                  <dt-text kind="body" size="sm" tone="tertiary">Working from coffee shop</dt-text>
                 </dt-stack>
               </dt-stack>
               <dt-stack gap="200">
@@ -522,7 +522,7 @@ Positioned components like [Popovers](/components/popover.html), [Dropdowns](/co
 <code-example-tabs
 :htmlCode='() => $refs.hovercardDefault'
 vueCode='
-<dt-hovercard padding="none" contentClass="d-body--sm" placement="top-start">
+<dt-hovercard padding="none" placement="top-start">
   <template #anchor>
     <dt-button size="sm" kind="muted" importance="outlined">Inverted</dt-button>
   </template>
