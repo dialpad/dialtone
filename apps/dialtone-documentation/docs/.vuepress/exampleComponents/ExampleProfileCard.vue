@@ -20,7 +20,7 @@
           Chief Customer Success Officer
         </dt-text>
         <dt-text kind="body" size="sm" density="200">
-          <dt-text strength="semibold">
+          <dt-text strength="medium">
             6:19 am
           </dt-text> local time
         </dt-text>

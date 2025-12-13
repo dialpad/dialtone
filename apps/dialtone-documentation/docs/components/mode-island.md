@@ -326,403 +326,6 @@ vueCode='
 
 ## Examples
 
-Positioned components like [Popovers](/components/popover.html), [Dropdowns](/components/dropdown.html), and [Hovercards](/components/hovercard.html) are typically rendered at the root element of the DOM tree, and thus inherit the page's mode by default. They can be forced to a specific mode using Mode Islands.
-
-<code-well-header>
-
-</code-well-header>
-
-### Hovercard
-
-<code-well-header>
-  <dt-stack gap="400" direction="row">
-    <dt-hovercard ref="hovercardDefault" padding="none" placement="top-start">
-      <template #anchor>
-        <dt-button size="sm" kind="muted" importance="outlined">Default </dt-button>
-      </template>
-      <template #content>
-        <div class="d-p16 d-bgc-secondary">
-          <dt-stack gap="500">
-            <dt-stack gap="400" class="d-jc-space-between">
-              <dt-stack>
-                <dt-text as="h2" kind="headline" size="xl" strength="medium" density="200" class="d-fs-400">Katie Rodriguez</dt-text>
-                <dt-stack direction="row" gap="350">
-                  <dt-text kind="body" size="sm" tone="success">Available</dt-text>
-                  <dt-text kind="body" size="sm">&bull;</dt-text>
-                  <dt-text kind="body" size="sm" tone="tertiary">Working from coffee shop</dt-text>
-                </dt-stack>
-              </dt-stack>
-              <dt-stack gap="200">
-                <dt-text kind="body" size="md" density="200" strength="semibold" tone="tertiary">Chief Customer Success Officer</dt-text>
-                <dt-text kind="body" size="sm" density="200"><dt-text strength="semibold">6:19 am</dt-text> local time</dt-text>
-              </dt-stack>
-            </dt-stack>
-            <dt-stack gap="400" direction="row" class="d-jc-space-between">
-              <dt-button class="d-fl1" kind="muted" importance="outlined">
-                <template #icon="{ iconSize }">
-                  <dt-icon-phone :size="iconSize" />
-                </template>
-                Call
-              </dt-button>
-              <dt-button class="d-fl1" kind="muted" importance="outlined">
-                <template #icon="{ iconSize }">
-                  <dt-icon-quick-reply :size="iconSize" />
-                </template>
-                Message
-              </dt-button>
-              <dt-button class="d-fl1" kind="muted" importance="outlined">
-                <template #icon="{ iconSize }">
-                  <dt-icon-video :size="iconSize" />
-                </template>
-                Meet
-              </dt-button>
-            </dt-stack>
-          </dt-stack>
-        </div>
-      </template>
-    </dt-hovercard>
-    <dt-hovercard padding="none" placement="top-start">
-      <template #anchor>
-        <dt-button size="sm" kind="muted" importance="outlined">Inverted </dt-button>
-      </template>
-      <template #content>
-        <dt-mode-island class="d-p16 d-bgc-secondary">
-          <dt-stack gap="500">
-            <dt-stack gap="400" class="d-jc-space-between">
-              <dt-stack>
-                <dt-text as="h2" kind="headline" size="xl" strength="medium" density="200" class="d-fs-400">Katie Rodriguez</dt-text>
-                <dt-stack direction="row" gap="350">
-                  <dt-text kind="body" size="sm" tone="success">Available</dt-text>
-                  <dt-text kind="body" size="sm">&bull;</dt-text>
-                  <dt-text kind="body" size="sm" tone="tertiary">Working from coffee shop</dt-text>
-                </dt-stack>
-              </dt-stack>
-              <dt-stack gap="200">
-                <dt-text kind="body" size="md" density="200" strength="semibold" tone="tertiary">Chief Customer Success Officer</dt-text>
-                <dt-text kind="body" size="sm" density="200"><dt-text strength="semibold">6:19 am</dt-text> local time</dt-text>
-              </dt-stack>
-            </dt-stack>
-            <dt-stack gap="400" direction="row" class="d-jc-space-between">
-              <dt-button class="d-fl1" kind="muted" importance="outlined">
-                <template #icon="{ iconSize }">
-                  <dt-icon-phone :size="iconSize" />
-                </template>
-                Call
-              </dt-button>
-              <dt-button class="d-fl1" kind="muted" importance="outlined">
-                <template #icon="{ iconSize }">
-                  <dt-icon-quick-reply :size="iconSize" />
-                </template>
-                Message
-              </dt-button>
-              <dt-button class="d-fl1" kind="muted" importance="outlined">
-                <template #icon="{ iconSize }">
-                  <dt-icon-video :size="iconSize" />
-                </template>
-                Meet
-              </dt-button>
-            </dt-stack>
-          </dt-stack>
-        </dt-mode-island>
-      </template>
-    </dt-hovercard>
-    <dt-hovercard padding="none" placement="top-start">
-      <template #anchor>
-        <dt-button size="sm" kind="muted" importance="outlined">Light </dt-button>
-      </template>
-      <template #content>
-        <dt-mode-island mode="light" class="d-p16 d-bgc-secondary">
-          <dt-stack gap="500">
-            <dt-stack gap="400" class="d-jc-space-between">
-              <dt-stack>
-                <dt-text as="h2" kind="headline" size="xl" strength="medium" density="200" class="d-fs-400">Katie Rodriguez</dt-text>
-                <dt-stack direction="row" gap="350">
-                  <dt-text kind="body" size="sm" tone="success">Available</dt-text>
-                  <dt-text kind="body" size="sm">&bull;</dt-text>
-                  <dt-text kind="body" size="sm" tone="tertiary">Working from coffee shop</dt-text>
-                </dt-stack>
-              </dt-stack>
-              <dt-stack gap="200">
-                <dt-text kind="body" size="md" density="200" strength="semibold" tone="tertiary">Chief Customer Success Officer</dt-text>
-                <dt-text kind="body" size="sm" density="200"><dt-text strength="semibold">6:19 am</dt-text> local time</dt-text>
-              </dt-stack>
-            </dt-stack>
-            <dt-stack gap="400" direction="row" class="d-jc-space-between">
-              <dt-button class="d-fl1" kind="muted" importance="outlined">
-                <template #icon="{ iconSize }">
-                  <dt-icon-phone :size="iconSize" />
-                </template>
-                Call
-              </dt-button>
-              <dt-button class="d-fl1" kind="muted" importance="outlined">
-                <template #icon="{ iconSize }">
-                  <dt-icon-quick-reply :size="iconSize" />
-                </template>
-                Message
-              </dt-button>
-              <dt-button class="d-fl1" kind="muted" importance="outlined">
-                <template #icon="{ iconSize }">
-                  <dt-icon-video :size="iconSize" />
-                </template>
-                Meet
-              </dt-button>
-            </dt-stack>
-          </dt-stack>
-        </dt-mode-island>
-      </template>
-    </dt-hovercard>
-    <dt-hovercard padding="none" placement="top-start">
-      <template #anchor>
-        <dt-button size="sm" kind="muted" importance="outlined">Dark </dt-button>
-      </template>
-      <template #content>
-        <dt-mode-island mode="dark" class="d-p16 d-bgc-secondary">
-          <dt-stack gap="500">
-            <dt-stack gap="400" class="d-jc-space-between">
-              <dt-stack>
-                <dt-text as="h2" kind="headline" size="xl" strength="medium" density="200" class="d-fs-400">Katie Rodriguez</dt-text>
-                <dt-stack direction="row" gap="350">
-                  <dt-text kind="body" size="sm" tone="success">Available</dt-text>
-                  <dt-text kind="body" size="sm">&bull;</dt-text>
-                  <dt-text kind="body" size="sm" tone="tertiary">Working from coffee shop</dt-text>
-                </dt-stack>
-              </dt-stack>
-              <dt-stack gap="200">
-                <dt-text kind="body" size="md" density="200" strength="semibold" tone="tertiary">Chief Customer Success Officer</dt-text>
-                <dt-text kind="body" size="sm" density="200"><dt-text strength="semibold">6:19 am</dt-text> local time</dt-text>
-              </dt-stack>
-            </dt-stack>
-            <dt-stack gap="400" direction="row" class="d-jc-space-between">
-              <dt-button class="d-fl1" kind="muted" importance="outlined">
-                <template #icon="{ iconSize }">
-                  <dt-icon-phone :size="iconSize" />
-                </template>
-                Call
-              </dt-button>
-              <dt-button class="d-fl1" kind="muted" importance="outlined">
-                <template #icon="{ iconSize }">
-                  <dt-icon-quick-reply :size="iconSize" />
-                </template>
-                Message
-              </dt-button>
-              <dt-button class="d-fl1" kind="muted" importance="outlined">
-                <template #icon="{ iconSize }">
-                  <dt-icon-video :size="iconSize" />
-                </template>
-                Meet
-              </dt-button>
-            </dt-stack>
-          </dt-stack>
-        </dt-mode-island>
-      </template>
-    </dt-hovercard>
-  </dt-stack>
-</code-well-header>
-
-<code-example-tabs
-:htmlCode='() => $refs.hovercardDefault'
-vueCode='
-<dt-hovercard padding="none" placement="top-start">
-  <template #anchor>
-    <dt-button size="sm" kind="muted" importance="outlined">Inverted</dt-button>
-  </template>
-  <template #content>
-    <dt-mode-island class="d-p16 d-bgc-secondary">
-      <!-- Content with inverted mode -->
-    </dt-mode-island>
-  </template>
-</dt-hovercard>
-'
-showHtmlWarning />
-
-### Popover
-
-<code-well-header>
-  <dt-stack gap="400" direction="row">
-    <dt-popover ref="popoverDefault" padding="none" placement="top-start" dialogClass="d-w216">
-      <template #anchor>
-        <dt-button size="sm" kind="muted" importance="outlined"> Default </dt-button>
-      </template>
-      <template #content="{ close }">
-        <div class="d-p16">
-          <dt-text as="p">This is just a default Popover, and does not use Mode Island.</dt-text>
-        </div>
-      </template>
-    </dt-popover>
-    <dt-popover ref="popoverInverted" padding="none" placement="top-start" dialogClass="d-w216">
-      <template #anchor>
-        <dt-button size="sm" kind="muted" importance="outlined"> Inverted </dt-button>
-      </template>
-      <template #content="{ close }">
-        <dt-mode-island mode="inverted" class="d-p16 d-bgc-secondary">
-          <dt-text as="p">This Popover's content is in the <dt-text strength="strong">inverted</dt-text> mode.</dt-text>
-        </dt-mode-island>
-      </template>
-    </dt-popover>
-    <dt-popover padding="none" placement="top-start" dialogClass="d-w216">
-      <template #anchor>
-        <dt-button size="sm" kind="muted" importance="outlined"> Light </dt-button>
-      </template>
-      <template #content="{ close }">
-        <dt-mode-island mode="light" class="d-p16 d-bgc-secondary">
-          <dt-text as="p">This Popover's content is in explicit <dt-text strength="strong">light</dt-text> mode.</dt-text>
-        </dt-mode-island>
-      </template>
-    </dt-popover>
-    <dt-popover padding="none" placement="top-start" dialogClass="d-w216">
-      <template #anchor>
-        <dt-button size="sm" kind="muted" importance="outlined"> Dark </dt-button>
-      </template>
-      <template #content="{ close }">
-        <dt-mode-island mode="dark" class="d-p16 d-bgc-secondary">
-          <dt-text as="p">This Popover's content is in explicit <dt-text strength="strong">dark</dt-text> mode.</dt-text>
-        </dt-mode-island>
-      </template>
-    </dt-popover>
-  </dt-stack>
-</code-well-header>
-
-<code-example-tabs
-:htmlCode='() => $refs.popoverInverted'
-vueCode='
-<dt-popover padding="none" placement="top-start" dialogClass="d-w216">
-  <template #anchor>
-    <dt-button size="sm" kind="muted" importance="outlined">Inverted</dt-button>
-  </template>
-  <template #content="{ close }">
-    <dt-mode-island mode="inverted" class="d-p16 d-bgc-secondary">
-      <dt-text as="p">This Popover content is in the <dt-text strength="strong">inverted</dt-text> mode.</dt-text>
-    </dt-mode-island>
-  </template>
-</dt-popover>
-'
-showHtmlWarning />
-
-### Dropdown
-
-<code-well-header>
-  <dt-stack gap="400" direction="row">
-    <dt-dropdown ref="dropdownDefault" navigation-type="arrow-keys" placement="bottom-start">
-      <template #anchor="{ attrs }">
-        <dt-button v-bind="attrs" size="sm" kind="muted" importance="outlined" icon-position="right">
-          Default
-          <template #icon="{ iconSize }">
-            <dt-icon name="chevron-down" :size="iconSize" />
-          </template>
-        </dt-button>
-      </template>
-      <template #list="{ close }">
-        <dt-list-item
-          v-for="item in items"
-          :key="item.id"
-          role="menuitem"
-          :navigation-type="arrow - keys"
-          @click="close"
-        >
-          {{ item.name }}
-        </dt-list-item>
-      </template>
-    </dt-dropdown>
-    <dt-dropdown ref="dropdownInverted" navigation-type="arrow-keys" placement="bottom-start" listClass="d-m0" padding="small">
-      <template #anchor="{ attrs }">
-        <dt-button v-bind="attrs" size="sm" kind="muted" importance="outlined" icon-position="right">
-          Inverted
-          <template #icon="{ iconSize }">
-            <dt-icon name="chevron-down" :size="iconSize" />
-          </template>
-        </dt-button>
-      </template>
-      <template #list="{ close }">
-        <dt-mode-island class="d-bgc-secondary d-p4">
-          <dt-list-item
-            v-for="item in items"
-            :key="item.id"
-            role="menuitem"
-            :navigation-type="arrow - keys"
-            @click="close"
-          >
-            {{ item.name }}
-          </dt-list-item>
-        </dt-mode-island>
-      </template>
-    </dt-dropdown>
-    <dt-dropdown navigation-type="arrow-keys" placement="bottom-start" listClass="d-m0" padding="small">
-      <template #anchor="{ attrs }">
-        <dt-button v-bind="attrs" size="sm" kind="muted" importance="outlined" icon-position="right">
-          Light
-          <template #icon="{ iconSize }">
-            <dt-icon name="chevron-down" :size="iconSize" />
-          </template>
-        </dt-button>
-      </template>
-      <template #list="{ close }">
-        <dt-mode-island mode="light" class="d-bgc-secondary d-p4">
-          <dt-list-item
-            v-for="item in items"
-            :key="item.id"
-            role="menuitem"
-            :navigation-type="arrow - keys"
-            @click="close"
-          >
-            {{ item.name }}
-          </dt-list-item>
-        </dt-mode-island>
-      </template>
-    </dt-dropdown>
-    <dt-dropdown navigation-type="arrow-keys" placement="bottom-start" listClass="d-m0" padding="small">
-      <template #anchor="{ attrs }">
-        <dt-button v-bind="attrs" size="sm" kind="muted" importance="outlined" icon-position="right">
-          Dark
-          <template #icon="{ iconSize }">
-            <dt-icon name="chevron-down" :size="iconSize" />
-          </template>
-        </dt-button>
-      </template>
-      <template #list="{ close }">
-        <dt-mode-island mode="dark" class="d-bgc-secondary d-p4">
-          <dt-list-item
-            v-for="item in items"
-            :key="item.id"
-            role="menuitem"
-            :navigation-type="arrow - keys"
-            @click="close"
-          >
-            {{ item.name }}
-          </dt-list-item>
-        </dt-mode-island>
-      </template>
-    </dt-dropdown>
-  </dt-stack>
-</code-well-header>
-
-<code-example-tabs
-:htmlCode='() => $refs.dropdownInverted'
-vueCode='
-<dt-dropdown navigation-type="arrow-keys" placement="bottom-start" listClass="d-m0" padding="small">
-  <template #anchor="{ attrs }">
-    <dt-button v-bind="attrs" size="sm" kind="muted" importance="outlined" icon-position="right">
-      Inverted
-      <template #icon="{ iconSize }">
-        <dt-icon name="chevron-down" :size="iconSize" />
-      </template>
-    </dt-button>
-  </template>
-  <template #list="{ close }">
-    <dt-mode-island class="d-bgc-secondary d-p4">
-      <dt-list-item
-        v-for="item in items"
-        :key="item.id"
-        role="menuitem"
-        @click="close"
-      >
-        {{ item.name }}
-      </dt-list-item>
-    </dt-mode-island>
-  </template>
-</dt-dropdown>
-'
-showHtmlWarning />
-
 ### Callbar
 
 <code-well-header>
@@ -808,6 +411,256 @@ vueCode='
 '
 showHtmlWarning />
 
+
+### Positioned Components
+
+[Popovers](/components/popover.html), [Dropdowns](/components/dropdown.html), and [Hovercards](/components/hovercard.html) are typically rendered at the root element of the DOM tree, and thus inherit the page's mode by default. They can be forced to a specific mode by assigning a Mode Island to its content slot.
+
+<code-well-header>
+  <dt-stack gap="500">
+    <dt-stack gap="200">
+      <dt-text as="p" kind="headline" size="md">Hovercard</dt-text>
+      <dt-stack gap="400" direction="row">
+        <dt-hovercard ref="hovercardDefault" padding="none" placement="top-start">
+          <template #anchor>
+            <dt-button size="sm" kind="muted" importance="outlined">Default </dt-button>
+          </template>
+          <template #content>
+            <div class="d-p16 d-bgc-secondary">
+              <ExampleProfileCard />
+            </div>
+          </template>
+        </dt-hovercard>
+        <dt-hovercard padding="none" placement="top-start">
+          <template #anchor>
+            <dt-button size="sm" kind="muted" importance="outlined">Inverted </dt-button>
+          </template>
+          <template #content>
+            <dt-mode-island class="d-p16 d-bgc-secondary">
+              <ExampleProfileCard />
+            </dt-mode-island>
+          </template>
+        </dt-hovercard>
+        <dt-hovercard padding="none" placement="top-start">
+          <template #anchor>
+            <dt-button size="sm" kind="muted" importance="outlined">Light </dt-button>
+          </template>
+          <template #content>
+            <dt-mode-island mode="light" class="d-p16 d-bgc-secondary">
+              <ExampleProfileCard />
+            </dt-mode-island>
+          </template>
+        </dt-hovercard>
+        <dt-hovercard padding="none" placement="top-start">
+          <template #anchor>
+            <dt-button size="sm" kind="muted" importance="outlined">Dark </dt-button>
+          </template>
+          <template #content>
+            <dt-mode-island mode="dark" class="d-p16 d-bgc-secondary">
+              <ExampleProfileCard />
+            </dt-mode-island>
+          </template>
+        </dt-hovercard>
+      </dt-stack>
+    </dt-stack>
+    <dt-stack gap="200">
+      <dt-text as="p" kind="headline" size="md">Popover</dt-text>
+      <dt-stack gap="400" direction="row">
+        <dt-popover ref="popoverDefault" padding="none" placement="top-start" dialogClass="d-w216">
+          <template #anchor>
+            <dt-button size="sm" kind="muted" importance="outlined"> Default </dt-button>
+          </template>
+          <template #content="{ close }">
+            <div class="d-p16">
+              <dt-text as="p">This is just a default Popover, and does not use Mode Island.</dt-text>
+            </div>
+          </template>
+        </dt-popover>
+        <dt-popover ref="popoverInverted" padding="none" placement="top-start" dialogClass="d-w216">
+          <template #anchor>
+            <dt-button size="sm" kind="muted" importance="outlined"> Inverted </dt-button>
+          </template>
+          <template #content="{ close }">
+            <dt-mode-island mode="inverted" class="d-p16 d-bgc-secondary">
+              <dt-text as="p">This Popover's content is in the <dt-text strength="strong">inverted</dt-text> mode.</dt-text>
+            </dt-mode-island>
+          </template>
+        </dt-popover>
+        <dt-popover padding="none" placement="top-start" dialogClass="d-w216">
+          <template #anchor>
+            <dt-button size="sm" kind="muted" importance="outlined"> Light </dt-button>
+          </template>
+          <template #content="{ close }">
+            <dt-mode-island mode="light" class="d-p16 d-bgc-secondary">
+              <dt-text as="p">This Popover's content is in explicit <dt-text strength="strong">light</dt-text> mode.</dt-text>
+            </dt-mode-island>
+          </template>
+        </dt-popover>
+        <dt-popover padding="none" placement="top-start" dialogClass="d-w216">
+          <template #anchor>
+            <dt-button size="sm" kind="muted" importance="outlined"> Dark </dt-button>
+          </template>
+          <template #content="{ close }">
+            <dt-mode-island mode="dark" class="d-p16 d-bgc-secondary">
+              <dt-text as="p">This Popover's content is in explicit <dt-text strength="strong">dark</dt-text> mode.</dt-text>
+            </dt-mode-island>
+          </template>
+        </dt-popover>
+      </dt-stack>
+    </dt-stack>
+    <dt-stack gap="200">
+      <dt-text as="p" kind="headline" size="md">Dropdown</dt-text>
+      <dt-stack gap="400" direction="row">
+        <dt-dropdown ref="dropdownDefault" navigation-type="arrow-keys" placement="bottom-start">
+          <template #anchor="{ attrs }">
+            <dt-button v-bind="attrs" size="sm" kind="muted" importance="outlined" icon-position="right">
+              Default
+              <template #icon="{ iconSize }">
+                <dt-icon name="chevron-down" :size="iconSize" />
+              </template>
+            </dt-button>
+          </template>
+          <template #list="{ close }">
+            <dt-list-item
+              v-for="item in items"
+              :key="item.id"
+              role="menuitem"
+              :navigation-type="arrow - keys"
+              @click="close"
+            >
+              {{ item.name }}
+            </dt-list-item>
+          </template>
+        </dt-dropdown>
+        <dt-dropdown ref="dropdownInverted" navigation-type="arrow-keys" placement="bottom-start" listClass="d-m0" padding="small">
+          <template #anchor="{ attrs }">
+            <dt-button v-bind="attrs" size="sm" kind="muted" importance="outlined" icon-position="right">
+              Inverted
+              <template #icon="{ iconSize }">
+                <dt-icon name="chevron-down" :size="iconSize" />
+              </template>
+            </dt-button>
+          </template>
+          <template #list="{ close }">
+            <dt-mode-island class="d-bgc-secondary d-p4">
+              <dt-list-item
+                v-for="item in items"
+                :key="item.id"
+                role="menuitem"
+                :navigation-type="arrow - keys"
+                @click="close"
+              >
+                {{ item.name }}
+              </dt-list-item>
+            </dt-mode-island>
+          </template>
+        </dt-dropdown>
+        <dt-dropdown navigation-type="arrow-keys" placement="bottom-start" listClass="d-m0" padding="small">
+          <template #anchor="{ attrs }">
+            <dt-button v-bind="attrs" size="sm" kind="muted" importance="outlined" icon-position="right">
+              Light
+              <template #icon="{ iconSize }">
+                <dt-icon name="chevron-down" :size="iconSize" />
+              </template>
+            </dt-button>
+          </template>
+          <template #list="{ close }">
+            <dt-mode-island mode="light" class="d-bgc-secondary d-p4">
+              <dt-list-item
+                v-for="item in items"
+                :key="item.id"
+                role="menuitem"
+                :navigation-type="arrow - keys"
+                @click="close"
+              >
+                {{ item.name }}
+              </dt-list-item>
+            </dt-mode-island>
+          </template>
+        </dt-dropdown>
+        <dt-dropdown navigation-type="arrow-keys" placement="bottom-start" listClass="d-m0" padding="small">
+          <template #anchor="{ attrs }">
+            <dt-button v-bind="attrs" size="sm" kind="muted" importance="outlined" icon-position="right">
+              Dark
+              <template #icon="{ iconSize }">
+                <dt-icon name="chevron-down" :size="iconSize" />
+              </template>
+            </dt-button>
+          </template>
+          <template #list="{ close }">
+            <dt-mode-island mode="dark" class="d-bgc-secondary d-p4">
+              <dt-list-item
+                v-for="item in items"
+                :key="item.id"
+                role="menuitem"
+                :navigation-type="arrow - keys"
+                @click="close"
+              >
+                {{ item.name }}
+              </dt-list-item>
+            </dt-mode-island>
+          </template>
+        </dt-dropdown>
+      </dt-stack>
+    </dt-stack>
+  </dt-stack>
+</code-well-header>
+
+<code-example-tabs
+vueCode='
+<dt-hovercard padding="none" placement="top-start">
+  <template #anchor>
+    <dt-button size="sm" kind="muted" importance="outlined">Inverted</dt-button>
+  </template>
+  <template #content>
+    <dt-mode-island class="d-p16 d-bgc-secondary">
+      <ExampleProfileCard />
+    </dt-mode-island>
+  </template>
+</dt-hovercard>
+'
+showHtmlWarning />
+<code-example-tabs
+vueCode='
+<dt-popover padding="none" placement="top-start" dialogClass="d-w216">
+  <template #anchor>
+    <dt-button size="sm" kind="muted" importance="outlined">Inverted</dt-button>
+  </template>
+  <template #content="{ close }">
+    <dt-mode-island mode="inverted" class="d-p16 d-bgc-secondary">
+      <dt-text as="p">This Popover content is in the <dt-text strength="strong">inverted</dt-text> mode.</dt-text>
+    </dt-mode-island>
+  </template>
+</dt-popover>
+'
+showHtmlWarning />
+<code-example-tabs
+vueCode='
+<dt-dropdown navigation-type="arrow-keys" placement="bottom-start" listClass="d-m0" padding="small">
+  <template #anchor="{ attrs }">
+    <dt-button v-bind="attrs" size="sm" kind="muted" importance="outlined" icon-position="right">
+      Inverted
+      <template #icon="{ iconSize }">
+        <dt-icon name="chevron-down" :size="iconSize" />
+      </template>
+    </dt-button>
+  </template>
+  <template #list="{ close }">
+    <dt-mode-island class="d-bgc-secondary d-p4">
+      <dt-list-item
+        v-for="item in items"
+        :key="item.id"
+        role="menuitem"
+        @click="close"
+      >
+        {{ item.name }}
+      </dt-list-item>
+    </dt-mode-island>
+  </template>
+</dt-dropdown>
+'
+showHtmlWarning />
+
 ## Vue API
 
 <component-vue-api component-name="modeisland" />
@@ -818,6 +671,7 @@ Purely visual. No semantic HTML impact. Supports high contrast mode via auto con
 
 <script setup>
 import { DtIconPhone, DtIconQuickReply, DtIconVideo } from '@dialpad/dialtone-icons/vue3';
+import ExampleProfileCard from '@exampleComponents/ExampleProfileCard.vue';
 import { useThemeManager } from '@composables/useThemeManager';
 import { ref } from 'vue';
 // Use theme manager composable without theme switching (mode + contrast only)
