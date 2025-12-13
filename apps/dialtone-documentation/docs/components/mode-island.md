@@ -339,10 +339,10 @@ vueCode='
         />
         <dt-stack gap="200">
           <dt-text kind="label" size="md" density="200">Ted Anderson</dt-text>
-          <dt-stack direction="row" gap="300" class="d-ai-baseline">
-            <dt-text kind="body" size="xs" tone="tertiary" class="d-fvn-tabular d-ws-nowrap">(913) 555-6745</dt-text>
+          <dt-stack direction="row" gap="300" align="baseline">
+            <dt-text kind="body" size="xs" tone="tertiary" wrap="nowrap" numeric>(913) 555-6745</dt-text>
             <dt-text kind="body" size="xs" tone="muted">&bull;</dt-text>
-            <dt-text kind="body" size="xs" tone="tertiary" class="d-fvn-tabular">21:18</dt-text>
+            <dt-text kind="body" size="xs" tone="tertiary" numeric>21:18</dt-text>
           </dt-stack>
         </dt-stack>
       </dt-stack>
@@ -387,10 +387,10 @@ vueCode='
       <dt-avatar full-name="TA" color="700" size="lg" />
       <dt-stack gap="200">
         <dt-text kind="label" size="md" density="200">Ted Anderson</dt-text>
-        <dt-stack direction="row" gap="300" class="d-ai-baseline">
-          <dt-text kind="helper" size="sm" tone="tertiary" class="d-fvn-tabular d-ws-nowrap">(913) 555-6745</dt-text>
+        <dt-stack direction="row" gap="300" align="baseline">
+          <dt-text kind="helper" size="sm" tone="tertiary" wrap="nowrap" numeric>(913) 555-6745</dt-text>
           <dt-text kind="helper" size="sm" tone="muted">&bull;</dt-text>
-          <dt-text kind="helper" size="sm" tone="tertiary" class="d-fvn-tabular">21:18</dt-text>
+          <dt-text kind="helper" size="sm" tone="tertiary" numeric>21:18</dt-text>
         </dt-stack>
       </dt-stack>
     </dt-stack>
@@ -608,6 +608,7 @@ showHtmlWarning />
 
 <code-example-tabs
 vueCode='
+<!-- Hovercard -->
 <dt-hovercard padding="none" placement="top-start">
   <template #anchor>
     <dt-button size="sm" kind="muted" importance="outlined">Inverted</dt-button>
@@ -618,10 +619,7 @@ vueCode='
     </dt-mode-island>
   </template>
 </dt-hovercard>
-'
-showHtmlWarning />
-<code-example-tabs
-vueCode='
+<!-- Popover -->
 <dt-popover padding="none" placement="top-start" dialogClass="d-w216">
   <template #anchor>
     <dt-button size="sm" kind="muted" importance="outlined">Inverted</dt-button>
@@ -632,10 +630,7 @@ vueCode='
     </dt-mode-island>
   </template>
 </dt-popover>
-'
-showHtmlWarning />
-<code-example-tabs
-vueCode='
+<!-- Dropdown -->
 <dt-dropdown navigation-type="arrow-keys" placement="bottom-start" listClass="d-m0" padding="small">
   <template #anchor="{ attrs }">
     <dt-button v-bind="attrs" size="sm" kind="muted" importance="outlined" icon-position="right">
@@ -659,7 +654,7 @@ vueCode='
   </template>
 </dt-dropdown>
 '
-showHtmlWarning />
+/>
 
 ## Vue API
 

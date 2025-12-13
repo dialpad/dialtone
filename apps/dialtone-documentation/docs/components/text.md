@@ -83,9 +83,6 @@ vueCode='
 
 All kinds support `size` prop, but not all sizes are available for each kind. When `kind` is set, size defaults to `md` if not specified.
 
-* **headline**: `xxxl`, `xxl`, `xl`, `lg`, `md`, `sm`, `xs`
-* **body, label, code**: `lg`, `md`, `sm`, `xs`
-
 <code-well-header>
   <dt-stack class="d-w100p d-ba d-bar4">
     <table class="d-w100p d-table">
@@ -402,7 +399,7 @@ vueCode='
 ## Max Lines
 
 <code-well-header>
-  <dt-stack class="d-w100p d-ai-flex-start" gap="500" direction="row">
+  <dt-stack class="d-w100p" align="start" gap="500" direction="row">
     <dt-text as="p" maxLines="2">Welcome to Dialpad, the most modern, AI-powered business communications platform. We’ve taken every form of communication that you rely on and unified it into one app. Calling a client? Meeting with your team? Texting a colleague? It’s all here, on all your devices. AI is by your side to transform your conversations into something you can see and use, giving you and your team a deeper look into action items and insights. Dialpad AI does the legwork to capture the details that matter most while you make and receive calls, send messages, and join meetings in an instant.</dt-text>
     <dt-text as="p" maxLines="4">Welcome to Dialpad, the most modern, AI-powered business communications platform. We’ve taken every form of communication that you rely on and unified it into one app. Calling a client? Meeting with your team? Texting a colleague? It’s all here, on all your devices. AI is by your side to transform your conversations into something you can see and use, giving you and your team a deeper look into action items and insights. Dialpad AI does the legwork to capture the details that matter most while you make and receive calls, send messages, and join meetings in an instant.</dt-text>
     <dt-text as="p" maxLines="6">Welcome to Dialpad, the most modern, AI-powered business communications platform. We’ve taken every form of communication that you rely on and unified it into one app. Calling a client? Meeting with your team? Texting a colleague? It’s all here, on all your devices. AI is by your side to transform your conversations into something you can see and use, giving you and your team a deeper look into action items and insights. Dialpad AI does the legwork to capture the details that matter most while you make and receive calls, send messages, and join meetings in an instant.</dt-text>
