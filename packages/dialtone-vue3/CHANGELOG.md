@@ -1,3 +1,10 @@
+## [3.197.2](https://github.com/dialpad/dialtone/compare/dialtone-vue3/v3.197.1...dialtone-vue3/v3.197.2) (2025-12-14)
+
+
+### Bug Fixes
+
+* **Tooltip:** DP-162955 call removeTooltip on root component instance ([#998](https://github.com/dialpad/dialtone/issues/998)) ([a96b99a](https://github.com/dialpad/dialtone/commit/a96b99a4096dddcedf6c192f60178fd2dfda06e1))
+
 ## [3.197.1](https://github.com/dialpad/dialtone/compare/dialtone-vue3/v3.197.0...dialtone-vue3/v3.197.1) (2025-12-10)
 
 
