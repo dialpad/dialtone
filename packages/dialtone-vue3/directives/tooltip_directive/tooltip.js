@@ -82,7 +82,7 @@ export const DtTooltipDirective = {
       if (binding.value === null || binding.value === undefined) {
         const tooltipId = anchor.getAttribute('data-dt-tooltip-id');
         if (tooltipId) {
-          DtTooltipDirectiveApp.removeTooltip(tooltipId);
+          tooltipInstance.ctx.removeTooltip(tooltipId);
         }
         return;
       }

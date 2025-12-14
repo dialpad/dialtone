@@ -15,7 +15,8 @@ const WrapperComponent = {
   template: `
     <div>
       <button :key="id" data-qa="dt-tooltip-placement" v-dt-tooltip:[placement]="MOCK_TOOLTIP_TEXT">{{MOCK_ANCHOR_TEXT}}</button>
-      <button :key="id + '-object'" data-qa="dt-tooltip-object" v-dt-tooltip="MOCK_TOOLTIP_PROPS">{{MOCK_ANCHOR_TEXT}}</button>
+      <button :key="id + 'object'" data-qa="dt-tooltip-object" v-dt-tooltip="MOCK_TOOLTIP_PROPS">{{MOCK_ANCHOR_TEXT}}</button>
+      <button :key="id + 'changing'" data-qa="dt-tooltip-changing" v-dt-tooltip:[placement]="tooltipText">{{MOCK_ANCHOR_TEXT}}</button>
     </div>
   `,
 
@@ -32,6 +33,7 @@ const WrapperComponent = {
       MOCK_ANCHOR_TEXT,
       MOCK_TOOLTIP_TEXT,
       MOCK_TOOLTIP_PROPS,
+      tooltipText: 'foo',
     };
   },
 };
@@ -46,6 +48,7 @@ describe('DtTooltipDirective Tests', () => {
   let wrapper;
   let anchorButtonPlacement;
   let anchorButtonObject;
+  let anchorButtonChanging;
 
   const updateWrapper = () => {
     wrapper = mount(WrapperComponent, {
@@ -56,6 +59,7 @@ describe('DtTooltipDirective Tests', () => {
 
     anchorButtonPlacement = wrapper.find('[data-qa="dt-tooltip-placement"]');
     anchorButtonObject = wrapper.find('[data-qa="dt-tooltip-object"]');
+    anchorButtonChanging = wrapper.find('[data-qa="dt-tooltip-changing"]')
   };
 
   afterEach(() => {
@@ -124,6 +128,26 @@ describe('DtTooltipDirective Tests', () => {
 
       it('should render the message', () => {
         expect(document.body.querySelector('[data-qa="dt-tooltip"]').textContent.trim()).toBe(MOCK_TOOLTIP_TEXT);
+      });
+    });
+
+    describe('when tooltip with dynamic argument is open', () => {
+      beforeEach(async () => {
+        await updateWrapper();
+        await flushPromises();
+        await anchorButtonChanging.trigger('mouseenter');
+      });
+
+      it('should update the message when the argument updates', async () => {
+        expect(document.body.querySelector('[data-qa="dt-tooltip"]').textContent.trim()).toBe('foo');
+        await wrapper.setData({ tooltipText: 'bar' });
+        expect(document.body.querySelector('[data-qa="dt-tooltip"]').textContent.trim()).toBe('bar');
+      });
+
+      it('should remove the tooltip when the argument becomes nullish', async () => {
+        expect(document.body.querySelector('[data-qa="dt-tooltip"]').textContent.trim()).toBe('foo');
+        await wrapper.setData({ tooltipText: null });
+        expect(document.body.querySelector('[data-qa="dt-tooltip"]')).toBeNull();
       });
     });
   });
