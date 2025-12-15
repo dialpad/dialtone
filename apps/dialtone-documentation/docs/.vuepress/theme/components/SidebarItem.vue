@@ -16,11 +16,13 @@
           custom
         >
           <dt-button
+            :id="labelId"
             v-bind="attrs"
             importance="clear"
             kind="muted"
             label-class="d-jc-flex-start"
             icon-position="right"
+            :tabindex="!item.link ? -1 : undefined"
             :class="[
               'd-w100p d-fw-normal',
               {
@@ -45,6 +47,7 @@
     <template #content>
       <dt-stack
         as="ul"
+        :aria-labelledby="labelId"
         :class="{ 'd-pl8': nested }"
         gap="200"
       >
@@ -113,6 +116,9 @@ const props = defineProps({
 });
 const subItems = computed(() => {
   return props.item?.children || [];
+});
+const labelId = computed(() => {
+  return `sidebar-label-${props.item?.text?.toLowerCase().replace(/\s+/g, '-')}`;
 });
 const route = useRoute();
 const hash = ref(route.hash);
