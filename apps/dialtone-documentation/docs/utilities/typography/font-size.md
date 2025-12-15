@@ -17,8 +17,8 @@ description: Utilities to change an element's font-size.
 
 <code-well-header>
   <div class="d-d-grid d-g16 d-ai-center" style="grid-template-columns: 10rem 1fr">
-    <div class="d-code--sm d-docsite-code">d-fs-050</div><div><p class="d-lc-1 d-fs-050">The quick brown fox jumps over the lazy dog.</p></div>
-    <div class="d-code--sm d-docsite-code">d-fs-075</div><div><p class="d-lc-1 d-fs-075">The quick brown fox jumps over the lazy dog.</p></div>
+    <div class="d-code--sm d-docsite-code">d-fs-50</div><div><p class="d-lc-1 d-fs-50">The quick brown fox jumps over the lazy dog.</p></div>
+    <div class="d-code--sm d-docsite-code">d-fs-75</div><div><p class="d-lc-1 d-fs-75">The quick brown fox jumps over the lazy dog.</p></div>
     <div class="d-code--sm d-docsite-code">d-fs-100</div><div><p class="d-lc-1 d-fs-100">The quick brown fox jumps over the lazy dog.</p></div>
     <div class="d-code--sm d-docsite-code">d-fs-125</div><div><p class="d-lc-1 d-fs-125">The quick brown fox jumps over the lazy dog.</p></div>
     <div class="d-code--sm d-docsite-code">d-fs-150</div><div><p class="d-lc-1 d-fs-150">The quick brown fox jumps over the lazy dog.</p></div>
