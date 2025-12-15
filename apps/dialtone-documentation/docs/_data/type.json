@@ -233,13 +233,13 @@
   "fontSize": {
     "product": [
       {
-        "stop": "050",
+        "stop": "50",
         "size": "10",
         "output": "1",
         "headline": "no"
       },
       {
-        "stop": "075",
+        "stop": "75",
         "size": "11",
         "output": "1.1",
         "headline": "no"

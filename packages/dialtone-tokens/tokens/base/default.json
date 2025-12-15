@@ -776,6 +776,16 @@
       }
     },
     "size": {
+      "50": {
+        "value": "{font.size.root} * 1",
+        "type": "fontSizes",
+        "description": "xxs / extra extra small"
+      },
+      "75": {
+        "value": "{font.size.root} * 1.1",
+        "type": "fontSizes",
+        "description": "xs / extra small"
+      },
       "100": {
         "value": "{font.size.root} * 1.2",
         "type": "fontSizes",
@@ -818,16 +828,6 @@
         "value": "{font.size.root} * 3.2",
         "type": "fontSizes",
         "description": "xxl / extra large"
-      },
-      "050": {
-        "value": "{font.size.root} * 1",
-        "type": "fontSizes",
-        "description": "xxs / extra extra small"
-      },
-      "075": {
-        "value": "{font.size.root} * 1.1",
-        "type": "fontSizes",
-        "description": "xs / extra small"
       }
     },
     "lineHeight": {
