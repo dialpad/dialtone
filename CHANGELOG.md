@@ -1,3 +1,10 @@
+## [9.151.3](https://github.com/dialpad/dialtone/compare/dialtone/v9.151.2...dialtone/v9.151.3) (2025-12-16)
+
+
+### Bug Fixes
+
+* **Card:** DLT-2868 add border ([#999](https://github.com/dialpad/dialtone/issues/999)) ([e91a342](https://github.com/dialpad/dialtone/commit/e91a3429534fd7164fa891434a8147990bcbf6a9))
+
 ## [9.151.2](https://github.com/dialpad/dialtone/compare/dialtone/v9.151.1...dialtone/v9.151.2) (2025-12-14)
 
 
