@@ -22,7 +22,7 @@
             kind="muted"
             label-class="d-jc-flex-start"
             icon-position="right"
-            :tabindex="!item.link ? -1 : undefined"
+            :tabindex="actionableTabIndex"
             :class="[
               'd-w100p d-fw-normal',
               {
@@ -119,6 +119,10 @@ const subItems = computed(() => {
 });
 const labelId = computed(() => {
   return `sidebar-label-${props.item?.text?.toLowerCase().replace(/\s+/g, '-')}`;
+});
+const actionableTabIndex = computed(() => {
+  // Items without links are not actionable and should be removed from tab order
+  return props.item.link ? undefined : -1;
 });
 const route = useRoute();
 const hash = ref(route.hash);
