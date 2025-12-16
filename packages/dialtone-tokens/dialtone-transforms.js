@@ -73,8 +73,9 @@ export function registerDialtoneTransforms (styleDictionary) {
     },
     transform: (token) => {
       // replace unmathable characters with empty string
-      const mathString = token.value.replace(/dp|sp|em|px|%/g, '');
-      // eslint-disable-next-line no-eval
+      // second replace handles 'x' suffix from number-type tokens (e.g., density multiplier)
+      const mathString = token.value.replace(/dp|sp|em|px|%/g, '').replace(/(\d)x\b/g, '$1');
+       
       const result = eval(mathString).toFixed(2);
       return `${result}dp`;
     },
@@ -214,12 +215,13 @@ export function registerDialtoneTransforms (styleDictionary) {
     },
     transform: (token) => {
       // replace unmathable characters with empty string
+      // second replace handles 'x' suffix from number-type tokens (e.g., density multiplier)
       let unit;
       if (token.value.includes('.dp')) unit = 'dp';
       if (token.value.includes('.sp')) unit = 'sp';
       if (token.value.includes('.em')) unit = 'em';
-      const mathString = token.value.replace(/\.dp|\.sp|\.em|px|%/g, '');
-      // eslint-disable-next-line no-eval
+      const mathString = token.value.replace(/\.dp|\.sp|\.em|px|%/g, '').replace(/(\d)x\b/g, '$1');
+
       const result = eval(mathString);
       return `${result}.${unit}`;
     },
