@@ -93,7 +93,7 @@ export default {
       const descriptions = {
         'gradient-in': 'Characters appear one by one with a gradient highlight reveal effect',
         'fade-in': 'Characters fade in smoothly with opacity transitions',
-        'slide-in': 'Characters slide up from below with smooth vertical movement',
+        'slide-in': 'Words slide up from below with smooth vertical movement',
         'gradient-sweep': 'Text is static while a gradient sweeps across continuously',
         'shimmer': 'Text is static while a black and white gradient pulses continuously',
         'none': 'All text appears instantly without animation',
