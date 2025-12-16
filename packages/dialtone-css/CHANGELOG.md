@@ -1,3 +1,10 @@
+## [8.71.2](https://github.com/dialpad/dialtone/compare/dialtone-css/v8.71.1...dialtone-css/v8.71.2) (2025-12-16)
+
+
+### Bug Fixes
+
+* **Card:** DLT-2868 add border ([#999](https://github.com/dialpad/dialtone/issues/999)) ([e91a342](https://github.com/dialpad/dialtone/commit/e91a3429534fd7164fa891434a8147990bcbf6a9))
+
 ## [8.71.1](https://github.com/dialpad/dialtone/compare/dialtone-css/v8.71.0...dialtone-css/v8.71.1) (2025-12-10)
 
 
