@@ -22,5 +22,11 @@
       "value": "1",
       "type": "number"
     }
+  },
+  "line-height": {
+    "density": {
+      "value": "0%",
+      "type": "lineHeights"
+    }
   }
 }

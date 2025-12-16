@@ -804,27 +804,27 @@
     },
     "lineHeight": {
       "100": {
-        "value": "100%",
+        "value": "100% + {line-height.density}",
         "type": "lineHeights"
       },
       "200": {
-        "value": "120%",
+        "value": "120% + {line-height.density}",
         "type": "lineHeights"
       },
       "300": {
-        "value": "140%",
+        "value": "140% + {line-height.density}",
         "type": "lineHeights"
       },
       "400": {
-        "value": "160%",
+        "value": "160% + {line-height.density}",
         "type": "lineHeights"
       },
       "500": {
-        "value": "180%",
+        "value": "180% + {line-height.density}",
         "type": "lineHeights"
       },
       "600": {
-        "value": "200%",
+        "value": "200% + {line-height.density}",
         "type": "lineHeights"
       }
     },
