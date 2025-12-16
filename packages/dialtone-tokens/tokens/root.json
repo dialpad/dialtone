@@ -20,7 +20,7 @@
     },
     "density": {
       "value": "1",
-      "type": "spacing"
+      "type": "number"
     }
   }
 }
