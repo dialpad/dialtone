@@ -17,6 +17,10 @@
     "base": {
       "value": "{size.base}",
       "type": "spacing"
+    },
+    "density": {
+      "value": "1",
+      "type": "spacing"
     }
   }
 }
