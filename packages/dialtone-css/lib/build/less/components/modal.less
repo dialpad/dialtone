@@ -83,7 +83,6 @@
   font-size: var(--dt-font-size-200);
   line-height: var(--dt-font-line-height-400);
   background-color: var(--modal-dialog-color-background);
-  background-clip: padding-box;
   border: var(--dt-size-100) solid var(--modal-dialog-color-border);
   border-radius: var(--dt-size-500);
   box-shadow: var(--modal-dialog-shadow);
@@ -92,6 +91,11 @@
   visibility: hidden;
   opacity: 0;
   will-change: visibility, z-index, opacity, transform;
+
+  // unique non-compliant case where a modal is nested within another
+  &:has(.d-modal) {
+    background-clip: padding-box;
+  }
 }
 
 //  $$   MAKE THEM APPEAR
