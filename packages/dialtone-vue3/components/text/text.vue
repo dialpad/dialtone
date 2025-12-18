@@ -5,6 +5,7 @@
     :class="textClasses"
     :style="textStyles"
   >
+    <!-- @slot Default slot for text content -->
     <slot v-if="hasDefaultSlot" />
     <template v-else-if="text !== null && text !== undefined">
       {{ text }}
