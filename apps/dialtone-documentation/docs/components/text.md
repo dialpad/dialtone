@@ -7,7 +7,7 @@ image: assets/images/components/text.png
 ---
 
 <code-well-header>
-  <dt-stack direction="row" gap="500" align="baseline">
+  <dt-stack :direction="{ 'default': 'column', 'md': 'row' }" gap="500" align="baseline">
     <dt-text kind="headline" size="xl" as="h2">Extra large headline</dt-text>
     <dt-text kind="body" size="md" as="p">Medium body</dt-text>
     <dt-text kind="label" size="sm" as="p">Small label</dt-text>
@@ -61,7 +61,7 @@ Use in place of manually applying Text Styles. Examples of manual application **
 Declare the role of the content. Default will inherit styles from the parent.
 
 <code-well-header>
-  <dt-stack gap="400" direction="row" class="d-ai-baseline">
+  <dt-stack gap="400" :direction="{ 'default': 'column', 'md': 'row' }" align="baseline">
     <dt-text kind="headline">Headline</dt-text>
     <dt-text kind="body">Body</dt-text>
     <dt-text kind="label">Label</dt-text>
@@ -240,7 +240,7 @@ vueCode='
 Override the font-weight of the text. Applies to any kind/size combination. If omitted, the default weight from the typography token is used.
 
 <code-well-header>
-  <dt-stack direction="row" gap="500" class="d-fw-wrap">
+  <dt-stack :direction="{ 'default': 'column', 'md': 'row' }" gap="500" class="d-fw-wrap">
     <dt-text strength="bold">Bold</dt-text>
     <dt-text strength="semibold">Semibold</dt-text>
     <dt-text strength="medium">Medium</dt-text>
@@ -323,7 +323,7 @@ Use `as` to declare the underlying HTML tag that the component should render, in
       <dt-text kind="headline" as="h1" size="xxl">The Complete Agentic AI Platform</dt-text>
       <dt-text kind="body" as="p" size="lg">Our AI Agents come equipped with the core skills businesses need to deliver seamless customer experiences.</dt-text>
     </dt-stack>
-    <dt-stack direction="row" gap="500" class="d-ai-flex-start">
+    <dt-stack :direction="{ 'default': 'column', 'md': 'row' }" gap="500" class="d-ai-flex-start">
       <dt-stack gap="400">
         <dt-text kind="headline" as="h2" size="xl">Try before you AI</dt-text>
         <dt-text kind="body" as="p">Build, run and optimize your agents - no code, just your expertise and our built-in intelligence.</dt-text>
@@ -399,7 +399,7 @@ vueCode='
 ## Max Lines
 
 <code-well-header>
-  <dt-stack class="d-w100p" align="start" gap="500" direction="row">
+  <dt-stack class="d-w100p" align="start" gap="500" :direction="{ 'default': 'column', 'md': 'row' }">
     <dt-text as="p" maxLines="2">Welcome to Dialpad, the most modern, AI-powered business communications platform. We’ve taken every form of communication that you rely on and unified it into one app. Calling a client? Meeting with your team? Texting a colleague? It’s all here, on all your devices. AI is by your side to transform your conversations into something you can see and use, giving you and your team a deeper look into action items and insights. Dialpad AI does the legwork to capture the details that matter most while you make and receive calls, send messages, and join meetings in an instant.</dt-text>
     <dt-text as="p" maxLines="4">Welcome to Dialpad, the most modern, AI-powered business communications platform. We’ve taken every form of communication that you rely on and unified it into one app. Calling a client? Meeting with your team? Texting a colleague? It’s all here, on all your devices. AI is by your side to transform your conversations into something you can see and use, giving you and your team a deeper look into action items and insights. Dialpad AI does the legwork to capture the details that matter most while you make and receive calls, send messages, and join meetings in an instant.</dt-text>
     <dt-text as="p" maxLines="6">Welcome to Dialpad, the most modern, AI-powered business communications platform. We’ve taken every form of communication that you rely on and unified it into one app. Calling a client? Meeting with your team? Texting a colleague? It’s all here, on all your devices. AI is by your side to transform your conversations into something you can see and use, giving you and your team a deeper look into action items and insights. Dialpad AI does the legwork to capture the details that matter most while you make and receive calls, send messages, and join meetings in an instant.</dt-text>
@@ -498,7 +498,7 @@ Remove extra leading space above and/or below text. Useful for tight component l
 Trim will only affect elements with block or inline-block styled context. It may have no effect on elements with inline or flex context.
 
 <code-well-header>
-  <dt-stack gap="500" direction="row">
+  <dt-stack gap="500" :direction="{ 'default': 'column', 'md': 'row' }">
     <dt-text as="p" class="d-bgc-moderate-opaque"><strong>No trim:</strong> lorem ipsum dolor sit amet</dt-text>
     <dt-text as="p" trim="start" class="d-bgc-moderate-opaque"><strong>Trim start:</strong> lorem ipsum dolor sit amet</dt-text>
     <dt-text as="p" trim="end" class="d-bgc-moderate-opaque"><strong>Trim end:</strong> lorem ipsum dolor sit amet</dt-text>
@@ -669,56 +669,6 @@ vueCode='
   </dt-stack>
   <dt-text kind="body" size="sm" tone="tertiary">3:23 pm</dt-text>
   <dt-badge kind="count" type="bulletin" text="6" />
-</dt-stack>
-'
-/>
-
-### Hero
-
-<code-well-header class="d-pb32">
-  <dt-stack gap="500">
-    <dt-stack>
-      <dt-text as="h2" kind="headline" size="xxl">Ai that works for you</dt-text>
-      <dt-text kind="body" size="lg">Support customers, drive sales, and collaborate with your team—all in one, beautiful Ai-powered app.</dt-text>
-    </dt-stack>
-    <dt-stack direction="row" gap="500" align="start">
-      <dt-stack>
-        <dt-text as="h3" kind="headline" size="xl">Ai Contact Center</dt-text>
-        <dt-text as="p" kind="body" size="md">The world’s most advanced customer engagement platform</dt-text>
-      </dt-stack>
-      <dt-stack>
-        <dt-text as="h3" kind="headline" size="xl">Ai Voice</dt-text>
-        <dt-text as="p" kind="body" size="md">Say hello to the world’s smartest business phone</dt-text>
-      </dt-stack>
-      <dt-stack>
-        <dt-text as="h3" kind="headline" size="xl">Ai Meetings</dt-text>
-        <dt-text as="p" kind="body" size="md">Ai-powered video meetings with built-in transcriptions</dt-text>
-      </dt-stack>
-    </dt-stack>
-  </dt-stack>
-</code-well-header>
-
-<code-example-tabs
-vueCode='
-<dt-stack gap="500">
-  <dt-stack>
-    <dt-text as="h2" kind="headline" size="xxl">Ai that works for you</dt-text>
-    <dt-text kind="body" size="lg">Support customers, drive sales, and collaborate with your team—all in one, beautiful Ai-powered app.</dt-text>
-  </dt-stack>
-  <dt-stack direction="row" gap="500" align="start">
-    <dt-stack>
-      <dt-text as="h3" kind="headline" size="xl">Ai Contact Center</dt-text>
-      <dt-text as="p" kind="body" size="md">The world’s most advanced customer engagement platform</dt-text>
-    </dt-stack>
-    <dt-stack>
-      <dt-text as="h3" kind="headline" size="xl">Ai Voice</dt-text>
-      <dt-text as="p" kind="body" size="md">Say hello to the world’s smartest business phone</dt-text>
-    </dt-stack>
-    <dt-stack>
-      <dt-text as="h3" kind="headline" size="xl">Ai Meetings</dt-text>
-      <dt-text as="p" kind="body" size="md">Ai-powered video meetings with built-in transcriptions</dt-text>
-    </dt-stack>
-  </dt-stack>
 </dt-stack>
 '
 />
