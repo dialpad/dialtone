@@ -44,6 +44,18 @@ Dictates the scale of text, enhancing readability and defining information hiera
     <svg-loader name="fs28" style="max-width: 140px" />
     <svg-loader name="fs32" style="max-width: 140px" />
   </dt-stack>
+<dt-stack gap="500">
+  <dt-stack direction="row" gap="500">
+    <svg-loader name="fs12" style="max-width: 140px" /> <!--lazy inline style until we redesign this whole page -->
+    <svg-loader name="fs14" style="max-width: 140px" />
+    <svg-loader name="fs16" style="max-width: 140px" />
+    <svg-loader name="fs18" style="max-width: 140px" />
+    <svg-loader name="fs20" style="max-width: 140px" />
+  </dt-stack>
+  <dt-stack direction="row" gap="500">
+    <svg-loader name="fs28" style="max-width: 140px" />
+    <svg-loader name="fs32" style="max-width: 140px" />
+  </dt-stack>
 </dt-stack>
 
 ### Line Height
@@ -281,6 +293,48 @@ vueCode='
 
 ### Hero
 
+<code-well-header>
+  <dt-stack gap="400" class="d-w100p">
+    <h2 class="d-text-headline--lg">Saturday, May 24, 2025</h2>
+    <dt-stack direction="row" gap="450" class="d-w100p">
+      <dt-avatar full-name="Ashanti Trevor" />
+      <dt-stack class="d-fl1">
+        <div class="d-text-body--sm d-fw-bold">Ashanti Trevor</div>
+        <dt-stack direction="row" gap="300">
+          <dt-stack direction="row" gap="400">
+            <dt-icon name="phone-outgoing" size="200" class="d-fc-tertiary" />
+            <span class="d-text-body--xs d-fc-tertiary">Outgoing call</span>
+          </dt-stack>
+          <span class="d-text-body--xs d-fc-tertiary">&bull;</span>
+          <span class="d-text-body--xs d-fc-tertiary">2 minutes 10 seconds</span>
+        </dt-stack>
+      </dt-stack>
+      <span class="d-text-body--sm d-fc-tertiary">3:23 pm</span>
+      <dt-badge kind="count" type="bulletin" text="6" />
+    </dt-stack>
+  </dt-stack>
+</code-well-header>
+
+```html
+<h2 class="d-text-headline--lg">Saturday, May 24, 2025</h2>
+<dt-stack direction="row" gap="450" class="d-w100p">
+  <dt-avatar full-name="Ashanti Trevor" />
+  <dt-stack class="d-fl1">
+    <div class="d-text-body--sm d-fw-bold">Ashanti Trevor</div>
+    <dt-stack direction="row" gap="300">
+      <dt-stack direction="row" gap="400">
+        <dt-icon name="phone-outgoing" size="200" class="d-fc-tertiary" />
+        <span class="d-text-body--xs d-fc-tertiary">Outgoing call</span>
+      </dt-stack>
+      <span class="d-text-body--xs d-fc-tertiary">&bull;</span>
+      <span class="d-text-body--xs d-fc-tertiary">2 minutes 10 seconds</span>
+    </dt-stack>
+  </dt-stack>
+  <span class="d-text-body--sm d-fc-tertiary">3:23 pm</span>
+  <dt-badge kind="count" type="bulletin" text="6" />
+</dt-stack>
+```
+
 <code-well-header class="d-pb32">
   <dt-stack gap="500">
     <dt-stack>
@@ -301,6 +355,7 @@ vueCode='
         <dt-text as="p" kind="body" size="md">Ai-powered video meetings with built-in transcriptions</dt-text>
       </dt-stack>
     </dt-stack>
+  </dt-stack>
   </dt-stack>
 </code-well-header>
 
@@ -365,6 +420,42 @@ Each typography style is expressed through a shorthand `font` property, and its 
   const typographyStylesCode = typographyStyles.filter(type => type.var.startsWith("d-text-code"));
 
   const example = "The quick brown fox jumps over the lazy dog.";
+
+  // Map numeric font-weight to its name (e.g., "700" → "bold")
+  const getWeightName = (numericWeight) => {
+    const match = weight.find(w => w.output === numericWeight);
+    return match ? match.name : numericWeight;
+  };
+
+  // Function to get styles directly from CSS variables
+  const getStyles = (category, index) => {
+    const arrays = { headlines: typographyStylesHeadlines, body: typographyStylesBody, label: typographyStylesLabel, code: typographyStylesCode };
+    const item = arrays[category]?.[index];
+    if (!item) return { fontSize: '', lineHeight: '', fontWeight: '', fontWeightName: '' };
+
+    // Convert class name to CSS variable prefix
+    // d-text-headline--xxxl → --dt-text-headline-xxxl
+    const cssVarPrefix = '--dt-' + item.var.slice(2).replace('--', '-');
+
+    const root = document.documentElement;
+    const computedStyle = getComputedStyle(root);
+
+    // Read the CSS variable values directly
+    const fontSize = computedStyle.getPropertyValue(cssVarPrefix + '-font-size').trim();
+    const lineHeight = computedStyle.getPropertyValue(cssVarPrefix + '-line-height').trim();
+    const fontWeight = computedStyle.getPropertyValue(cssVarPrefix + '-font-weight').trim();
+
+    // Parse font-size: extract multiplier from calc(1rem * X) and convert to px
+    let formattedFontSize = fontSize;
+    const calcMatch = fontSize.match(/calc\(1rem \* ([\d.]+)\)/);
+    if (calcMatch) {
+      formattedFontSize = Math.round(parseFloat(calcMatch[1]) * 10);
+    } else if (fontSize.endsWith('px')) {
+      formattedFontSize = Math.round(parseFloat(fontSize));
+    }
+
+    return { fontSize: formattedFontSize, lineHeight, fontWeight, fontWeightName: getWeightName(fontWeight) };
+  };
 
   // Map numeric font-weight to its name (e.g., "700" → "bold")
   const getWeightName = (numericWeight) => {
