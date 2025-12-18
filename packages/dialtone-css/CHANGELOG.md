@@ -1,3 +1,10 @@
+## [8.71.3](https://github.com/dialpad/dialtone/compare/dialtone-css/v8.71.2...dialtone-css/v8.71.3) (2025-12-18)
+
+
+### Bug Fixes
+
+* **Modal:** DP-169147 nested modal style ([#1002](https://github.com/dialpad/dialtone/issues/1002)) ([4210b21](https://github.com/dialpad/dialtone/commit/4210b21584d01e72aeca00b76c2bcab3fe557cda))
+
 ## [8.71.2](https://github.com/dialpad/dialtone/compare/dialtone-css/v8.71.1...dialtone-css/v8.71.2) (2025-12-16)
 
 
