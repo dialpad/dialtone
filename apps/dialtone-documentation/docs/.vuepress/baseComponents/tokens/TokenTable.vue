@@ -42,7 +42,7 @@
         </thead>
         <tbody>
           <tr
-            v-for="({ exampleValue, exampleName, name, tokenValue, description }) in shownTokens"
+            v-for="({ exampleValue, exampleName, name, tokenValue, description, deprecated }) in shownTokens"
             :key="name"
             tabindex="0"
             @mouseenter="onEnterRow(name)"
@@ -59,6 +59,7 @@
               />
             </td>
             <th scope="row">
+              <dt-badge v-if="deprecated" type="critical" kind="label" text="Deprecated" />
               <dt-stack
                 direction="row"
                 gap="300"
@@ -86,7 +87,7 @@
                 :tokens="tokens"
               />
             </th>
-            <td v-if="!isSmallDevice && showValue" class="d-code--sm  d-fc-blue-500 d-ta-right d-wmx164">
+            <td v-if="!isSmallDevice && showValue" class="d-code--sm d-fc-blue-500 d-ta-right d-wmx164">
               <token-value :token-value="valueToString(tokenValue)" :tokens="tokens" />
             </td>
             <td

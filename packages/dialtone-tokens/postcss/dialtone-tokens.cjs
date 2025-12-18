@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-var-requires */
 const Color = require('colorjs.io').default;
 const {
   PLATFORM_FONT_SIZES,
@@ -7,6 +6,7 @@ const {
   IS_THEME_COLOR_REGEX,
   IS_SHADOW_REGEX,
   IS_TYPOGRAPHY_REGEX,
+  IS_TEXT_REGEX,
   REGEX_OPTIONS,
   HSLA_EXCLUDED_COLORS,
 } = require('./constants.cjs');
@@ -37,6 +37,34 @@ function typography (typographyDeclarations, Declaration) {
       const composedVar = `--dt-typography-${typographyName}`;
       const value = `var(${composedVar}-font-weight) var(${composedVar}-font-size)/var(${composedVar}-line-height) var(${composedVar}-font-family)`;
       typographyDeclarations.at(-1).after(new Declaration({ prop: composedVar, value }));
+      newDocEntries[composedVar] = formatCompositionTokenForDocs(composedVar, value);
+    });
+}
+
+/**
+ * Compose text tokens
+ * @param { Declaration } declaration
+ */
+function text (textDeclarations, Declaration) {
+  const textSegmentsRegex = new RegExp(`--dt-text-(${REGEX_OPTIONS.TEXT_TYPE})-(${REGEX_OPTIONS.TEXT_SIZES})-(.+)`);
+  const textMap = textDeclarations.map(m => m.prop).filter(prop => !prop.endsWith('-font-family'))
+    .reduce((texts, text) => {
+      const matches = text
+        .split(textSegmentsRegex)
+        .filter(chunk => !!chunk);
+
+      matches.pop();
+
+      texts.add(matches.join('-'));
+
+      return texts;
+    }, new Set());
+
+  textMap
+    .forEach(textName => {
+      const composedVar = `--dt-text-${textName}`;
+      const value = `var(${composedVar}-font-weight) var(${composedVar}-font-size)/var(${composedVar}-line-height) var(${composedVar}-font-family)`;
+      textDeclarations.at(-1).after(new Declaration({ prop: composedVar, value }));
       newDocEntries[composedVar] = formatCompositionTokenForDocs(composedVar, value);
     });
 }
@@ -243,6 +271,8 @@ module.exports = () => {
       boxShadows(shadows, Declaration);
       const typographies = rootSelector.nodes.filter(node => node.type === 'decl' && IS_TYPOGRAPHY_REGEX.test(node.prop));
       typography(typographies, Declaration);
+      const texts = rootSelector.nodes.filter(node => node.type === 'decl' && IS_TEXT_REGEX.test(node.prop));
+      text(texts, Declaration);
 
       // add the new entries to the documentation object
       buildDocs(platformName, theme, newDocEntries);

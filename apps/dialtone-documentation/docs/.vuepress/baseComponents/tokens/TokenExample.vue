@@ -8,18 +8,18 @@
     :style="getColorStyle"
   >
     <div v-if="isForeground || isLink" :class="['d-headline--lg', { 'link-example': isLink }]">
-      Aa
+      Ag
     </div>
   </dt-stack>
   <dt-stack
-    v-if="category === 'typography'"
+    v-if="category === 'typography' || category === 'text'"
     direction="row"
     justify="center"
     align="center"
     class="d-h32"
   >
     <div :style="getTypographyStyle">
-      Aa
+      Ag
     </div>
   </dt-stack>
   <div
@@ -65,6 +65,7 @@ const TYPOGRAPHY_KEY_MAP = {
 const SHADOW_COMPOSITION_TOKENS = ['small', 'medium', 'large', 'extra-large', 'card', 'focus', 'focus-inset'];
 
 const isTypography = (name, key) => name.includes('--dt-typography') && name.includes(key);
+const isText = (name, key) => name.includes('--dt-text') && name.includes(key);
 const isFont = (name, key) => name.includes(`--dt-font-${key}`);
 const getRectSizeStyle = (value) => {
   if (value.endsWith('%')) return { 'inline-size': value };
@@ -142,11 +143,11 @@ const foregroundBackgroundColor = computed(() => {
 
 const getTypographyStyle = computed(() => {
   for (const key in TYPOGRAPHY_KEY_MAP) {
-    if (isFont(props.name, key) || isTypography(props.name, key)) {
+    if (isFont(props.name, key) || isTypography(props.name, key) || isText(props.name, key)) {
       return { [TYPOGRAPHY_KEY_MAP[key]]: props.value };
     }
   }
-  if (props.name.startsWith('var(--dt-typography')) {
+  if (props.name.startsWith('var(--dt-typography') || props.name.startsWith('var(--dt-text')) {
     return `font: ${props.value}`;
   }
   return null;

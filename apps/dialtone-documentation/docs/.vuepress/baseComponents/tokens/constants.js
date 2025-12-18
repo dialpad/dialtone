@@ -26,7 +26,7 @@ export const THEMES = [
 
 export const CATEGORY_MAP = {
   color: ['color', 'opacity', 'shell'],
-  typography: ['typography', 'font'],
+  typography: ['typography', 'font', 'text'],
   size: ['size'],
   space: ['space'],
   shadow: ['shadow'],
@@ -38,6 +38,14 @@ export const SUBCATEGORY_MAP = {
   font: ['family', 'weight', 'size'],
   size: ['radius', 'border'],
 };
+
+export const DEPRECATED_PATTERNS = [
+  'typography-headline-',
+  'typography-body-',
+  'typography-label-',
+  'typography-helper-',
+  'typography-code-',
+];
 
 export const getTokensStructure = () => ({
   color: {
@@ -73,7 +81,7 @@ export const getTokensStructure = () => ({
     },
   },
   typography: {
-    'font style': {
+    'text style': {
       _children: [],
     },
     'font family': {

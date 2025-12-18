@@ -59,7 +59,7 @@
                     'background-color': `var(--dt-shell-mention-color-background)`,
                   }"
                 >
-                  Aa
+                  Ag
                 </dt-stack>
               </dt-stack>
               <dt-stack
@@ -78,7 +78,7 @@
                 :style="{ color: `var(${color.variable})` }"
                 class="d-fs-300 d-p6 d-ta-center d-fw-medium"
               >
-                Aa
+                Ag
               </div>
               <div
                 v-else-if="color.property === 'border-color'"
