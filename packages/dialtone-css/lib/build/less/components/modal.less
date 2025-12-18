@@ -91,6 +91,11 @@
   visibility: hidden;
   opacity: 0;
   will-change: visibility, z-index, opacity, transform;
+
+  // unique non-compliant case where a modal is nested within another
+  &:has(.d-modal) {
+    background-clip: padding-box;
+  }
 }
 
 //  $$   MAKE THEM APPEAR
