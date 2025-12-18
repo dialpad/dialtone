@@ -415,32 +415,36 @@ vueCode='
   <dt-stack gap="400">
     <dt-stack direction="row" gap="400" class="d-jc-space-between d-ai-center">
       <dt-text kind="headline" size="lg">Demo</dt-text>
-      <dt-stack direction="row" gap="400" class="d-ai-center">
-        <dt-button
-          size="sm"
-          importance="outlined"
-          kind="muted"
-          @click="toggleMaxLines"
-        >
-          Toggle
-        </dt-button>
-        <dt-stack direction="row" gap="200" class="d-ai-center">
+      <dt-stack direction="row" gap="400" align="center">
+        <dt-text v-if="state.isApplied" as="code" kind="code" size="xs">
+          max-lines="<strong>{{ state.value }}</strong>"
+        </dt-text>
+        <dt-stack direction="row" gap="200" align="center">
           <dt-stack direction="row">
             <dt-button
-              v-dt-tooltip="`Fewer`"
-              class="d-as-stretch d-g0 d-brr0 d-brw0"
+              class="d-as-stretch d-brr0 d-brw0"
+              size="sm"
+              importance="outlined"
+              kind="muted"
+              @click="toggleMaxLines"
+            >
+              Toggle
+            </dt-button>
+            <dt-button
+              v-dt-tooltip="`Decrement`"
+              class="d-as-stretch d-g0 d-blr0 d-brr0 d-brw0"
               size="sm"
               importance="outlined"
               kind="muted"
               :disabled="!canDecreaseMaxLines"
               @click="decrementMaxLines"
             >
-              <template #icon>
-                <dt-icon name="dash" size="200" />
+              <template #icon="{ iconSize }">
+                <dt-icon name="dash" :size="iconSize" />
               </template>
             </dt-button>
             <dt-button
-              v-dt-tooltip="`More`"
+              v-dt-tooltip="`Increment`"
               class="d-as-stretch d-g0 d-blr0"
               size="sm"
               importance="outlined"
@@ -448,8 +452,8 @@ vueCode='
               :disabled="!canIncreaseMaxLines"
               @click="incrementMaxLines"
             >
-              <template #icon>
-                <dt-icon name="plus" size="200" />
+              <template #icon="{ iconSize }">
+                <dt-icon name="plus" :size="iconSize" />
               </template>
             </dt-button>
           </dt-stack>
