@@ -1,3 +1,10 @@
+## [9.151.4](https://github.com/dialpad/dialtone/compare/dialtone/v9.151.3...dialtone/v9.151.4) (2025-12-18)
+
+
+### Bug Fixes
+
+* **Modal:** DP-169147 nested modal style ([#1002](https://github.com/dialpad/dialtone/issues/1002)) ([4210b21](https://github.com/dialpad/dialtone/commit/4210b21584d01e72aeca00b76c2bcab3fe557cda))
+
 ## [9.151.3](https://github.com/dialpad/dialtone/compare/dialtone/v9.151.2...dialtone/v9.151.3) (2025-12-16)
 
 
