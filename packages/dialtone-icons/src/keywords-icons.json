@@ -1484,8 +1484,56 @@
         "todo",
         "done"
       ],
+      "list-chevrons-down-up": [
+        "density",
+        "spacing",
+        "options",
+        "collapse",
+        "expand",
+        "disclosure",
+        "show",
+        "hide",
+        "accordion",
+        "more",
+        "less",
+        "fold",
+        "unfold"
+      ],
+      "list-chevrons-up-down": [
+        "density",
+        "spacing",
+        "options",
+        "collapse",
+        "expand",
+        "disclosure",
+        "show",
+        "hide",
+        "accordion",
+        "more",
+        "less",
+        "fold",
+        "unfold"
+      ],
       "list-ordered": [
         "sort"
+      ],
+      "list-spacing-compact": [
+        "line",
+        "density",
+        "spacing",
+        "tight"
+      ],
+      "list-spacing-expanded": [
+        "line",
+        "density",
+        "spacing",
+        "comfortable"
+      ],
+      "list-spacing-regular": [
+        "line",
+        "density",
+        "spacing",
+        "default"
       ],
       "paperclip": [
         "attachment",
