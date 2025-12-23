@@ -1,3 +1,11 @@
+# [9.151.0-next.3](https://github.com/dialpad/dialtone/compare/dialtone/v9.151.0-next.2...dialtone/v9.151.0-next.3) (2025-12-23)
+
+
+### Features
+
+* **Text:** new vue component DLT-2864 DLT-2863 DLT-2862 ([#995](https://github.com/dialpad/dialtone/issues/995)) ([196ef8a](https://github.com/dialpad/dialtone/commit/196ef8aadbcf2e13c09073b544552ef05b095e8a))
+* **Typography, Tokens:** DLT-2856 DLT-2857 next typography system ([#994](https://github.com/dialpad/dialtone/issues/994)) ([d744e97](https://github.com/dialpad/dialtone/commit/d744e97e86796a4de2153e43fa521384da8e8848))
+
 # [9.151.0-next.2](https://github.com/dialpad/dialtone/compare/dialtone/v9.151.0-next.1...dialtone/v9.151.0-next.2) (2025-12-04)
 
 
