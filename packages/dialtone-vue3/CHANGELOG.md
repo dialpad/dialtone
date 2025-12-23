@@ -1,3 +1,10 @@
+# [3.197.0-next.2](https://github.com/dialpad/dialtone/compare/dialtone-vue3/v3.197.0-next.1...dialtone-vue3/v3.197.0-next.2) (2025-12-23)
+
+
+### Features
+
+* **Text:** new vue component DLT-2864 DLT-2863 DLT-2862 ([#995](https://github.com/dialpad/dialtone/issues/995)) ([196ef8a](https://github.com/dialpad/dialtone/commit/196ef8aadbcf2e13c09073b544552ef05b095e8a))
+
 # [3.197.0-next.1](https://github.com/dialpad/dialtone/compare/dialtone-vue3/v3.196.1...dialtone-vue3/v3.197.0-next.1) (2025-11-26)
 
 
