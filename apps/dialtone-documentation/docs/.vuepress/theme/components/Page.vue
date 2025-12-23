@@ -50,12 +50,14 @@
           </dt-button>
         </router-link>
       </dt-stack>
-      <footer class="d-mt16 d-mb16 d-body--sm d-fc-tertiary">
-        <span
-          v-if="$frontmatter.title"
-          v-text="$frontmatter.title"
-        />
-        documentation last updated {{ lastUpdated }}
+      <footer class="d-mt16 d-mb16">
+        <dt-text as="p" kind="body" size="sm" tone="muted">
+          <dt-text v-if="$frontmatter.title">
+            {{ $frontmatter.title }}
+          </dt-text>
+          documentation last updated
+          <dt-text>{{ lastUpdated }}</dt-text>
+        </dt-text>
       </footer>
     </div>
     <div class="d-ps-relative d-ga-toc">
@@ -88,8 +90,14 @@ const props = defineProps({
     required: true,
   },
 });
+const pageData = usePageData();
 const lastUpdated = computed(() => {
-  const date = new Date(usePageData().value.git.updatedTime);
+  const updatedTime = pageData.value?.git?.updatedTime;
+  if (!updatedTime) return 'Not available';
+
+  const date = new Date(updatedTime);
+  if (Number.isNaN(date.valueOf())) return 'Not available';
+
   return new Intl.DateTimeFormat('en-US', { dateStyle: 'full' }).format(date);
 });
 const gridClass = computed(() => {

@@ -65,7 +65,19 @@ Adjusts vertical spacing between lines of text, optimizing legibility and text f
 
 ## Styles
 
-All product UI text can be characterized as one of **Headline**, **Body**, **Label**, or **Code**. These styles are effectively **composition** CSS Utilities, combining multiple properties like `font-size`, `font-family`, `font-weight`, and `line-height`.
+Product UI text can be characterized as one of **Headline**, **Body**, **Label**, or **Code**.
+
+### Vue Component
+
+Use the [DtText](/components/text.html) component as the primary way to apply typography styles. The component provides a semantic, prop-driven API that's easier to maintain and ensures consistent usage across your application.
+
+```html
+<dt-text kind="headline|body|label|code" size="{size}" {{props}}>...</dt-text>
+```
+
+### CSS Utility
+
+Text Style CSS utilities should be considered a last resort or as a fallback for non-Vue contexts.
 
 ```html
 <el class="d-text-{category}--{size}">...</el>
@@ -208,92 +220,114 @@ Code snippets, technical commands, or data values rendered as a monospaced font.
 
 ## Examples
 
+### Profile Card
+
 <code-well-header>
-  <dt-stack gap="400" class="d-w100p">
-    <h2 class="d-text-headline--lg">Saturday, May 24, 2025</h2>
-    <dt-stack direction="row" gap="450" class="d-w100p">
-      <dt-avatar full-name="Ashanti Trevor" />
-      <dt-stack class="d-fl1">
-        <div class="d-text-body--sm d-fw-bold">Ashanti Trevor</div>
-        <dt-stack direction="row" gap="300">
-          <dt-stack direction="row" gap="400">
-            <dt-icon name="phone-outgoing" size="200" class="d-fc-tertiary" />
-            <span class="d-text-body--xs d-fc-tertiary">Outgoing call</span>
-          </dt-stack>
-          <span class="d-text-body--xs d-fc-tertiary">&bull;</span>
-          <span class="d-text-body--xs d-fc-tertiary">2 minutes 10 seconds</span>
-        </dt-stack>
-      </dt-stack>
-      <span class="d-text-body--sm d-fc-tertiary">3:23 pm</span>
-      <dt-badge kind="count" type="bulletin" text="6" />
-    </dt-stack>
-  </dt-stack>
+  <ExampleProfileCard />
 </code-well-header>
 
-```html
-<h2 class="d-text-headline--lg">Saturday, May 24, 2025</h2>
-<dt-stack direction="row" gap="450" class="d-w100p">
-  <dt-avatar full-name="Ashanti Trevor" />
-  <dt-stack class="d-fl1">
-    <div class="d-text-body--sm d-fw-bold">Ashanti Trevor</div>
-    <dt-stack direction="row" gap="300">
-      <dt-stack direction="row" gap="400">
-        <dt-icon name="phone-outgoing" size="200" class="d-fc-tertiary" />
-        <span class="d-text-body--xs d-fc-tertiary">Outgoing call</span>
+<code-example-tabs
+vueCode='
+<dt-stack gap="500">
+  <dt-stack gap="400" class="d-jc-space-between">
+    <dt-stack>
+      <dt-text as="h2" kind="headline" size="xl" strength="medium" density="200" class="d-fs-400">
+        Katie Rodriguez
+      </dt-text>
+      <dt-stack direction="row" gap="350">
+        <dt-text tone="success">
+          Available
+        </dt-text>
+        <dt-text>&bull;</dt-text>
+        <dt-text tone="tertiary">
+          Working from coffee shop
+        </dt-text>
       </dt-stack>
-      <span class="d-text-body--xs d-fc-tertiary">&bull;</span>
-      <span class="d-text-body--xs d-fc-tertiary">2 minutes 10 seconds</span>
+    </dt-stack>
+    <dt-stack gap="200">
+      <dt-text kind="body" size="md" density="200" strength="semibold" tone="tertiary">
+        Chief Customer Success Officer
+      </dt-text>
+      <dt-text kind="body" size="sm" density="200">
+        <dt-text strength="semibold">
+          6:19 am
+        </dt-text> local time
+      </dt-text>
     </dt-stack>
   </dt-stack>
-  <span class="d-text-body--sm d-fc-tertiary">3:23 pm</span>
-  <dt-badge kind="count" type="bulletin" text="6" />
+  <dt-stack gap="400" direction="row" class="d-jc-space-between">
+    <dt-button class="d-fl1" kind="muted" importance="outlined">
+      <template #icon="{ iconSize }">
+        <dt-icon-phone :size="iconSize" />
+      </template>
+      Call
+    </dt-button>
+    <dt-button class="d-fl1" kind="muted" importance="outlined">
+      <template #icon="{ iconSize }">
+        <dt-icon-quick-reply :size="iconSize" />
+      </template>
+      Message
+    </dt-button>
+    <dt-button class="d-fl1" kind="muted" importance="outlined">
+      <template #icon="{ iconSize }">
+        <dt-icon-video :size="iconSize" />
+      </template>
+      Meet
+    </dt-button>
+  </dt-stack>
 </dt-stack>
-```
+'
+/>
+
+### Hero
+
 <code-well-header class="d-pb32">
   <dt-stack gap="500">
     <dt-stack>
-      <h2 class="d-text-headline--xxl">Ai that works for you</h2>
-      <div class="d-text-body--lg">Support customers, drive sales, and collaborate with your team—all in one, beautiful Ai-powered app.</div>
+      <dt-text as="h2" kind="headline" size="xxl">AI that works for you</dt-text>
+      <dt-text kind="body" size="lg">Support customers, drive sales, and collaborate with your team—all in one, beautiful AI-powered app.</dt-text>
     </dt-stack>
-    <dt-stack direction="row" gap="500" align="start">
+    <dt-stack :direction="{ 'default': 'column', 'md': 'row' }" gap="500" align="start">
       <dt-stack>
-        <h3 class="d-text-headline--xl">Ai Contact Center</h3>
-        <p class="d-text-body--md">The world’s most advanced customer engagement platform</p>
+        <dt-text as="h3" kind="headline" size="xl">AI Contact Center</dt-text>
+        <dt-text as="p" kind="body" size="md">The world’s most advanced customer engagement platform</dt-text>
       </dt-stack>
       <dt-stack>
-        <h3 class="d-text-headline--xl">Ai Voice</h3>
-        <p class="d-text-body--md">Say hello to the world’s smartest business phone</p>
+        <dt-text as="h3" kind="headline" size="xl">AI Voice</dt-text>
+        <dt-text as="p" kind="body" size="md">Say hello to the world’s smartest business phone</dt-text>
       </dt-stack>
       <dt-stack>
-        <h3 class="d-text-headline--xl">Ai Meetings</h3>
-        <p class="d-text-body--md">Ai-powered video meetings with built-in transcriptions</p>
+        <dt-text as="h3" kind="headline" size="xl">AI Meetings</dt-text>
+        <dt-text as="p" kind="body" size="md">I-powered video meetings with built-in transcriptions</dt-text>
       </dt-stack>
     </dt-stack>
   </dt-stack>
 </code-well-header>
 
-```html
+<code-example-tabs
+vueCode='
 <dt-stack gap="500">
   <dt-stack>
-    <h2 class="d-text-headline--xxl">Ai that works for you</h2>
-    <div class="d-text-body--lg">Support customers, drive sales, and collaborate with your team—all in one, beautiful Ai-powered app.</div>
+    <dt-text as="h2" kind="headline" size="xxl">AI that works for you</dt-text>
+    <dt-text kind="body" size="lg">Support customers, drive sales, and collaborate with your team—all in one, beautiful AI-powered app.</dt-text>
   </dt-stack>
   <dt-stack direction="row" gap="500" align="start">
     <dt-stack>
-      <h3 class="d-text-headline--xl">Ai Contact Center</h3>
-      <p class="d-text-body--md">The world’s most advanced customer engagement platform</p>
+      <dt-text as="h3" kind="headline" size="xl">AI Contact Center</dt-text>
+      <dt-text as="p" kind="body" size="md">The world’s most advanced customer engagement platform</dt-text>
     </dt-stack>
     <dt-stack>
-      <h3 class="d-text-headline--xl">Ai Voice</h3>
-      <p class="d-text-body--md">Say hello to the world’s smartest business phone</p>
+      <dt-text as="h3" kind="headline" size="xl">AI Voice</dt-text>
+      <dt-text as="p" kind="body" size="md">Say hello to the world’s smartest business phone</dt-text>
     </dt-stack>
     <dt-stack>
-      <h3 class="d-text-headline--xl">Ai Meetings</h3>
-      <p class="d-text-body--md">Ai-powered video meetings with built-in transcriptions</p>
+      <dt-text as="h3" kind="headline" size="xl">AI Meetings</dt-text>
+      <dt-text as="p" kind="body" size="md">AI-powered video meetings with built-in transcriptions</dt-text>
     </dt-stack>
   </dt-stack>
 </dt-stack>
-```
+'
+/>
 
 ## API
 
@@ -323,6 +357,7 @@ Each typography style is expressed through a shorthand `font` property, and its 
   import CopyButton from '@baseComponents/CopyButton.vue';
   import SvgLoader from '@baseComponents/SvgLoader.vue';
   import ClampedTableWrapper from '@baseComponents/ClampedTableWrapper.vue';
+  import ExampleProfileCard from '@exampleComponents/ExampleProfileCard.vue';
 
   const typographyStylesHeadlines = typographyStyles.filter(type => type.var.startsWith("d-text-headline"));
   const typographyStylesBody = typographyStyles.filter(type => type.var.startsWith("d-text-body"));

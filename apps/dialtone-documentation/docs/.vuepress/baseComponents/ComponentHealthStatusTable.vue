@@ -1,12 +1,14 @@
 <template>
-  <dt-stack gap="500" direction="row" class="d-bgc-secondary d-p16 d-bar4 d-ba d-bc-subtle d-my16">
+  <dt-stack gap="500" direction="row" class="d-bgc-secondary d-p16 d-py8 d-bar8 d-ba d-bc-subtle d-my16">
     <dt-stack direction="row" gap="400">
       <dt-icon
         class="d-fc-success"
         name="check-circle"
         size="300"
       />
-      <span class="d-label--md-plain-base">Ready</span>
+      <dt-text kind="label" strength="medium">
+        Ready
+      </dt-text>
     </dt-stack>
     <dt-stack direction="row" gap="400">
       <dt-icon
@@ -14,7 +16,9 @@
         name="tools"
         size="300"
       />
-      <span class="d-label--md-plain-base">In progress</span>
+      <dt-text kind="label" strength="medium">
+        In progress
+      </dt-text>
     </dt-stack>
     <dt-stack direction="row" gap="400">
       <dt-icon
@@ -22,7 +26,9 @@
         name="box-select"
         size="300"
       />
-      <span class="d-label--md-plain-base">Planned</span>
+      <dt-text kind="label" strength="medium">
+        Planned
+      </dt-text>
     </dt-stack>
     <dt-stack direction="row" gap="400">
       <dt-icon
@@ -30,7 +36,9 @@
         name="box"
         size="300"
       />
-      <span class="d-label--md-plain-base">N/A</span>
+      <dt-text kind="label" strength="medium">
+        N/A
+      </dt-text>
     </dt-stack>
   </dt-stack>
   <table class="d-table">

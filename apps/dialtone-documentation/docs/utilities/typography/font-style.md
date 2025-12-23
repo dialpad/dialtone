@@ -3,6 +3,8 @@ title: Font Style
 description: Utilities to change an element's font styles.
 ---
 
+<FontUtilitiesNotice />
+
 ## Normal
 
 Use `d-fs-normal` to change an element's font-style.
@@ -41,6 +43,7 @@ Use `d-fs-none` to remove an element's font-style.
 
 <script setup>
   import { style } from '@data/type.json';
+  import FontUtilitiesNotice from '@baseComponents/FontUtilitiesNotice.vue';
 </script>
 
 ## Classes

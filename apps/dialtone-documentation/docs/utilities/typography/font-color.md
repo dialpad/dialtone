@@ -3,14 +3,47 @@ title: Font Color
 description: Utilities to change an element's font-color.
 ---
 
-All font colors pass the WCAG 2.1 Level AA contrast ratio requirements (ratio >= 4.5:1) and most pass WCAG 2.1 Level AAA
-requirements (ratio >= 7:1).
-The contrast ratio value is noted with the colors below.
-Please use **only** these colors or variations of these colors which pass WCAG 2.1 Level AA contrast ratio requirements.
+<FontUtilitiesNotice />
 
-<dt-notice kind="warning" class="d-wmx100p d-mt24" hideClose>
-  Before using a Color utility, consider <router-link class="d-link d-link--muted" to="/design/colors/palette/#foreground">semantic colors</router-link>.
-</dt-notice>
+## Use DtText's `tone` prop
+
+Use [DtText's](/components/text.html#tone) `tone` prop to declare the text's tone, which will map to a foreground color. By default, the tone is inherited from its parent.
+
+<code-well-header>
+  <dt-stack gap="500" direction="row">
+    <dt-stack gap="300" class="d-py8 d-px16 d-bgc-primary d-bar4">
+      <dt-text>primary</dt-text>
+      <dt-text tone="secondary">secondary</dt-text>
+      <dt-text tone="tertiary">tertiary</dt-text>
+      <dt-text tone="muted">muted</dt-text>
+      <dt-text tone="disabled">disabled</dt-text>
+      <dt-text tone="placeholder">placeholder</dt-text>
+      <dt-text tone="success">success</dt-text>
+      <dt-text tone="success-strong">success-strong</dt-text>
+      <dt-text tone="warning">warning</dt-text>
+      <dt-text tone="critical">critical</dt-text>
+      <dt-text tone="critical-strong">critical-strong</dt-text>
+    </dt-stack>
+    <dt-stack gap="300" class="d-py8 d-px16 d-bgc-primary-inverted d-bar4">
+      <dt-text tone="primary-inverted">primary-inverted</dt-text>
+      <dt-text tone="secondary-inverted">secondary-inverted</dt-text>
+      <dt-text tone="tertiary-inverted">tertiary-inverted</dt-text>
+      <dt-text tone="muted-inverted">muted-inverted</dt-text>
+      <dt-text tone="disabled-inverted">disabled-inverted</dt-text>
+      <dt-text tone="placeholder-inverted">placeholder-inverted</dt-text>
+      <dt-text tone="success-inverted">success-inverted</dt-text>
+      <dt-text tone="success-strong-inverted">success-strong-inverted</dt-text>
+      <dt-text tone="warning-inverted">warning-inverted</dt-text>
+      <dt-text tone="critical-inverted">critical-inverted</dt-text>
+      <dt-text tone="critical-strong-inverted">critical-strong-inverted</dt-text>
+    </dt-stack>
+  </dt-stack>
+</code-well-header>
+
+<code-example-tabs
+vueCode='
+<dt-text tone="{{tone}}">...</dt-text>
+'/>
 
 ## Usage
 
@@ -109,6 +142,7 @@ Use `d-fco{n}` to change an element's text color opacity. You can also change fo
 <script setup>
   import { inject } from 'vue';
   import { extractUtilityClasses } from '@utilities';
+  import FontUtilitiesNotice from '@baseComponents/FontUtilitiesNotice.vue';
 
   const utilityClassDocs = inject('utilityClassDocs');
   const fontColors = extractUtilityClasses(utilityClassDocs, 'd-fc-');

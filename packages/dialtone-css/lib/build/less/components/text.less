@@ -1,0 +1,160 @@
+//  DIALTONE
+//  COMPONENTS: TEXT
+//
+//  TABLE OF CONTENTS
+//  • BASE STYLE
+//  • TEXT STYLES
+//  • ALIGNMENT
+//  • NUMERIC
+//  • LINE CLAMP
+//  • WRAP
+//  • TRIM
+//  • FONT STYLE MODIFIERS
+//
+.d-text {
+  //  ============================================================================
+  //  $   BASE STYLE
+  //  ----------------------------------------------------------------------------
+  color: inherit;
+
+  //  ============================================================================
+  //  $   TEXT STYLES
+  //  ----------------------------------------------------------------------------
+
+  &-headline {
+      &--xxxl { font: var(--dt-text-headline-xxxl); }
+      &--xxl  { font: var(--dt-text-headline-xxl); }
+      &--xl   { font: var(--dt-text-headline-xl); }
+      &--lg   { font: var(--dt-text-headline-lg); }
+      &--md   { font: var(--dt-text-headline-md); }
+      &--sm   { font: var(--dt-text-headline-sm); }
+      &--xs   { font: var(--dt-text-headline-xs); }
+  }
+
+  &-body {
+      &--lg { font: var(--dt-text-body-lg); }
+      &--md { font: var(--dt-text-body-md); }
+      &--sm { font: var(--dt-text-body-sm); }
+      &--xs { font: var(--dt-text-body-xs); }
+  }
+
+  &-label {
+      &--lg { font: var(--dt-text-label-lg); }
+      &--md { font: var(--dt-text-label-md); }
+      &--sm { font: var(--dt-text-label-sm); }
+      &--xs { font: var(--dt-text-label-xs); }
+  }
+
+  &-code {
+      &--lg { font: var(--dt-text-code-lg); }
+      &--md { font: var(--dt-text-code-md); }
+      &--sm { font: var(--dt-text-code-sm); }
+      &--xs { font: var(--dt-text-code-xs); }
+  }
+
+  //  ============================================================================
+  //  $   ALIGNMENT
+  //  ----------------------------------------------------------------------------
+
+  &--align {
+    &-start {
+      text-align: start;
+    }
+
+    &-center {
+      text-align: center;
+    }
+
+    &-end {
+      text-align: end;
+    }
+
+    &-justify {
+      text-align: justify;
+    }
+  }
+
+  //  ============================================================================
+  //  $   NUMERIC
+  //  ----------------------------------------------------------------------------
+
+  &--numeric {
+    &.d-text { // tick up specificity to overcome `font` property of `d-body-[variant]`, `d-header-[variant]`, etc.
+      font-variant-numeric: tabular-nums;
+    }
+  }
+
+  //  ============================================================================
+  //  $   LINE CLAMP
+  //  ----------------------------------------------------------------------------
+
+  &--clamp {
+    --dt-text-line-clamp: 1;
+
+    display: -webkit-box;
+    -webkit-line-clamp: var(--dt-text-line-clamp);
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  //  ============================================================================
+  //  $   WRAP
+  //  ----------------------------------------------------------------------------
+
+  &--wrap {
+    &-wrap {
+      text-wrap: wrap;
+    }
+
+    &-nowrap {
+      text-wrap: nowrap;
+    }
+
+    &-balance {
+      text-wrap: balance;
+    }
+
+    &-pretty {
+      text-wrap: pretty;
+    }
+  }
+
+  //  ============================================================================
+  //  $   TRIM (Leading Space Control)
+  //  ----------------------------------------------------------------------------
+  //  Uses native CSS text-box-trim with cap/alphabetic metrics.
+  //  @see https://developer.mozilla.org/en-US/docs/Web/CSS/text-box-trim
+
+  &--trim {
+    &-start {
+      text-box-trim: trim-start;
+      text-box-edge: cap alphabetic;
+    }
+
+    &-end {
+      text-box-trim: trim-end;
+      text-box-edge: cap alphabetic;
+    }
+
+    &-both {
+      text-box-trim: trim-both;
+      text-box-edge: cap alphabetic;
+    }
+  }
+
+  //  ============================================================================
+  //  $   FONT STYLE MODIFIERS
+  //  ----------------------------------------------------------------------------
+
+  &--fw-bold { font-weight: var(--dt-font-weight-bold); }
+  &--fw-semibold { font-weight: var(--dt-font-weight-semi-bold); }
+  &--fw-medium { font-weight: var(--dt-font-weight-medium); }
+  &--fw-normal { font-weight: var(--dt-font-weight-normal); }
+
+  &--lh-100 { line-height: var(--dt-font-line-height-100); }
+  &--lh-200 { line-height: var(--dt-font-line-height-200); }
+  &--lh-300 { line-height: var(--dt-font-line-height-300); }
+  &--lh-400 { line-height: var(--dt-font-line-height-400); }
+  &--lh-500 { line-height: var(--dt-font-line-height-500); }
+  &--lh-600 { line-height: var(--dt-font-line-height-600); }
+}

@@ -50,6 +50,7 @@ module.exports = [
   'tab.vue',
   'tab_group.vue',
   'tab_panel.vue',
+  'text.vue',
   'toast.vue',
   'toggle.vue',
   'tooltip.vue',

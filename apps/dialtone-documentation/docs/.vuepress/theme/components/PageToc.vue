@@ -1,8 +1,8 @@
 <template>
   <aside class="dialtone-toc d-of-auto d-py32 d-ps-fixed d-d-none xl:d-d-block">
-    <h2 class="d-headline--eyebrow d-fw-semibold d-fc-secondary d-px8 d-pb4">
+    <dt-text as="h2" kind="headline" size="xs" strength="semibold" tone="secondary" class="d-tt-uppercase d-px8 d-pb4">
       On this page
-    </h2>
+    </dt-text>
     <nav>
       <ul
         v-for="header in headers"
