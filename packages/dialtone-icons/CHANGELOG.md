@@ -1,3 +1,15 @@
+# [4.47.0](https://github.com/dialpad/dialtone/compare/dialtone-icons/v4.46.1...dialtone-icons/v4.47.0) (2025-12-23)
+
+
+### Bug Fixes
+
+* **Icons:** optical alignment NO-JIRA ([#1003](https://github.com/dialpad/dialtone/issues/1003)) ([ac9cba6](https://github.com/dialpad/dialtone/commit/ac9cba68f77cbd2807e47d68bc3ff7b2fd9d0448))
+
+
+### Features
+
+* **Icons:** new density line spacing icons DLT-2874 ([#1004](https://github.com/dialpad/dialtone/issues/1004)) ([5767ede](https://github.com/dialpad/dialtone/commit/5767ede12c8fc7ee6c3c735c23d62181c0e57154))
+
 ## [4.46.1](https://github.com/dialpad/dialtone/compare/dialtone-icons/v4.46.0...dialtone-icons/v4.46.1) (2025-12-03)
 
 
