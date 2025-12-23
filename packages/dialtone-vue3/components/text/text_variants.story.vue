@@ -427,7 +427,7 @@
           kind="body"
           tone="muted"
         >
-          Leading text trim removes extra space above/below text for tighter layouts
+          Text box trim removes extra space above/below text for tighter layouts
         </dt-text>
         <dt-stack
           gap="500"
@@ -435,13 +435,13 @@
           class="d-ba d-bc-default d-p16 d-bar8"
         >
           <template
-            v-for="item in trimExamples"
-            :key="item.trim"
+            v-for="item in textBoxTrimExamples"
+            :key="item.textBoxTrim"
           >
             <dt-text
               kind="headline"
               size="xxxl"
-              :trim="item.trim"
+              :text-box-trim="item.textBoxTrim"
               class="d-bgc-moderate-opaque"
             >
               {{ item.copy }}
@@ -563,11 +563,11 @@ export default {
       ];
     },
 
-    trimExamples () {
+    textBoxTrimExamples () {
       return [
-        { trim: 'start', copy: 'Trim Start' },
-        { trim: 'end', copy: 'Trim End' },
-        { trim: 'both', copy: 'Trim Both' },
+        { textBoxTrim: 'start', copy: 'Trim Start' },
+        { textBoxTrim: 'end', copy: 'Trim End' },
+        { textBoxTrim: 'both', copy: 'Trim Both' },
       ];
     },
   },

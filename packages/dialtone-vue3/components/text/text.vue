@@ -6,15 +6,11 @@
     :style="textStyles"
   >
     <!-- @slot Default slot for text content -->
-    <slot v-if="hasDefaultSlot" />
-    <template v-else-if="text !== null && text !== undefined">
-      {{ text }}
-    </template>
+    <slot />
   </component>
 </template>
 
 <script>
-import { hasSlotContent } from '@/common/utils';
 import {
   TEXT_KIND_MODIFIERS,
   TEXT_SIZE_MODIFIERS,
@@ -26,7 +22,7 @@ import {
   TEXT_TRUNCATE_CLASS,
   TEXT_LINE_CLAMP_CLASS,
   TEXT_WRAP_MODIFIERS,
-  TEXT_TRIM_MODIFIERS,
+  TEXT_BOX_TRIM_MODIFIERS,
   TEXT_STRENGTH_MODIFIERS,
   TEXT_DENSITY_MODIFIERS,
 } from './text_constants';
@@ -127,14 +123,6 @@ export default {
     },
 
     /**
-     * Optional string fallback rendered when default slot is empty.
-     */
-    text: {
-      type: String,
-      default: null,
-    },
-
-    /**
      * Controls text wrapping behavior.
      * @values wrap, nowrap, balance, pretty
      */
@@ -147,14 +135,14 @@ export default {
     },
 
     /**
-     * Controls leading space trimming. Useful for tight component layouts.
+     * Controls text-box-trim (leading space above/below text). Useful for tight component layouts.
      * @values start, end, both
      */
-    trim: {
+    textBoxTrim: {
       type: String,
       default: null,
       validator: (value) => {
-        return value === null || Object.prototype.hasOwnProperty.call(TEXT_TRIM_MODIFIERS, value);
+        return value === null || Object.prototype.hasOwnProperty.call(TEXT_BOX_TRIM_MODIFIERS, value);
       },
     },
 
@@ -184,10 +172,6 @@ export default {
   },
 
   computed: {
-    hasDefaultSlot () {
-      return hasSlotContent(this.$slots.default);
-    },
-
     textClasses () {
       const classes = ['d-text'];
       const variantClass = this.getVariantClass();
@@ -222,9 +206,9 @@ export default {
         classes.push(wrapClass);
       }
 
-      const trimClass = this.getTrimClass();
-      if (trimClass) {
-        classes.push(trimClass);
+      const textBoxTrimClass = this.getTextBoxTrimClass();
+      if (textBoxTrimClass) {
+        classes.push(textBoxTrimClass);
       }
 
       const strengthClass = this.getStrengthClass();
@@ -309,18 +293,22 @@ export default {
       return `${TEXT_KIND_MODIFIERS[this.kind]}--${resolvedSize}`;
     },
 
+    getModifierClass (value, modifiers, propName) {
+      if (value === null || value === undefined) {
+        return null;
+      }
+
+      const className = modifiers[value];
+      if (!className) {
+        console.warn(`[DtText] Unsupported ${propName} "${value}".`);
+        return null;
+      }
+
+      return className;
+    },
+
     getAlignClass () {
-      if (!this.align) {
-        return null;
-      }
-
-      const alignClass = TEXT_ALIGN_MODIFIERS[this.align];
-      if (!alignClass) {
-        console.warn(`[DtText] Unsupported align "${this.align}".`);
-        return null;
-      }
-
-      return alignClass;
+      return this.getModifierClass(this.align, TEXT_ALIGN_MODIFIERS, 'align');
     },
 
     getToneClass () {
@@ -337,59 +325,19 @@ export default {
     },
 
     getWrapClass () {
-      if (!this.wrap) {
-        return null;
-      }
-
-      const wrapClass = TEXT_WRAP_MODIFIERS[this.wrap];
-      if (!wrapClass) {
-        console.warn(`[DtText] Unsupported wrap "${this.wrap}".`);
-        return null;
-      }
-
-      return wrapClass;
+      return this.getModifierClass(this.wrap, TEXT_WRAP_MODIFIERS, 'wrap');
     },
 
-    getTrimClass () {
-      if (!this.trim) {
-        return null;
-      }
-
-      const trimClass = TEXT_TRIM_MODIFIERS[this.trim];
-      if (!trimClass) {
-        console.warn(`[DtText] Unsupported trim "${this.trim}".`);
-        return null;
-      }
-
-      return trimClass;
+    getTextBoxTrimClass () {
+      return this.getModifierClass(this.textBoxTrim, TEXT_BOX_TRIM_MODIFIERS, 'textBoxTrim');
     },
 
     getStrengthClass () {
-      if (!this.strength) {
-        return null;
-      }
-
-      const strengthClass = TEXT_STRENGTH_MODIFIERS[this.strength];
-      if (!strengthClass) {
-        console.warn(`[DtText] Unsupported strength "${this.strength}".`);
-        return null;
-      }
-
-      return strengthClass;
+      return this.getModifierClass(this.strength, TEXT_STRENGTH_MODIFIERS, 'strength');
     },
 
     getDensityClass () {
-      if (this.density === null || this.density === undefined) {
-        return null;
-      }
-
-      const densityClass = TEXT_DENSITY_MODIFIERS[this.density];
-      if (!densityClass) {
-        console.warn(`[DtText] Unsupported density "${this.density}".`);
-        return null;
-      }
-
-      return densityClass;
+      return this.getModifierClass(this.density, TEXT_DENSITY_MODIFIERS, 'density');
     },
   },
 };

@@ -11,8 +11,7 @@
     :max-lines="$attrs.maxLines"
     :numeric="$attrs.numeric"
     :wrap="$attrs.wrap"
-    :trim="$attrs.trim"
-    :text="$attrs.textProp"
+    :text-box-trim="$attrs.textBoxTrim"
   >
     <template v-if="defaultSlot">
       {{ defaultSlot }}

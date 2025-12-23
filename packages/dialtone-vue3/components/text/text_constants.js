@@ -38,7 +38,7 @@ export const TEXT_WRAP_MODIFIERS = {
   pretty: 'd-text--wrap-pretty',
 };
 
-export const TEXT_TRIM_MODIFIERS = {
+export const TEXT_BOX_TRIM_MODIFIERS = {
   start: 'd-text--trim-start',
   end: 'd-text--trim-end',
   both: 'd-text--trim-both',
@@ -71,7 +71,7 @@ export default {
   TEXT_TRUNCATE_CLASS,
   TEXT_LINE_CLAMP_CLASS,
   TEXT_WRAP_MODIFIERS,
-  TEXT_TRIM_MODIFIERS,
+  TEXT_BOX_TRIM_MODIFIERS,
   TEXT_STRENGTH_MODIFIERS,
   TEXT_DENSITY_MODIFIERS,
 };

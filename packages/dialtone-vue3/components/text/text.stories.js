@@ -10,7 +10,7 @@ import {
   TEXT_STRENGTH_MODIFIERS,
   TEXT_DENSITY_MODIFIERS,
   TEXT_WRAP_MODIFIERS,
-  TEXT_TRIM_MODIFIERS,
+  TEXT_BOX_TRIM_MODIFIERS,
 } from './text_constants';
 
 const kindOptions = Object.keys(TEXT_KIND_MODIFIERS);
@@ -19,7 +19,7 @@ const alignOptions = [undefined, ...Object.keys(TEXT_ALIGN_MODIFIERS)];
 const strengthOptions = [undefined, ...Object.keys(TEXT_STRENGTH_MODIFIERS)];
 const densityOptions = [undefined, ...Object.keys(TEXT_DENSITY_MODIFIERS)];
 const wrapOptions = [undefined, ...Object.keys(TEXT_WRAP_MODIFIERS)];
-const trimOptions = [undefined, ...Object.keys(TEXT_TRIM_MODIFIERS)];
+const textBoxTrimOptions = [undefined, ...Object.keys(TEXT_BOX_TRIM_MODIFIERS)];
 
 export const argsData = {
   default: 'The quick brown fox jumps over the lazy dog.',
@@ -33,7 +33,6 @@ export const argsData = {
   truncate: false,
   maxLines: undefined,
   numeric: false,
-  textProp: undefined,
   onClick: action('click'),
 };
 
@@ -84,17 +83,10 @@ export const argTypesData = {
     control: { type: 'select' },
     description: 'wrap: default | nowrap: prevent wrapping | balance: even line lengths | pretty: avoid orphans/widows',
   },
-  trim: {
-    options: trimOptions,
+  textBoxTrim: {
+    options: textBoxTrimOptions,
     control: { type: 'select' },
-    description: 'start: trim above | end: trim below | both: trim above and below. Removes extra leading space.',
-  },
-  textProp: {
-    control: 'text',
-    table: {
-      category: 'props',
-      summary: 'string',
-    },
+    description: 'start: trim above | end: trim below | both: trim above and below. CSS text-box-trim for tighter layouts.',
   },
   onClick: {
     table: {

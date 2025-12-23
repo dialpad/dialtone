@@ -491,38 +491,38 @@ vueCode='
 <dt-text wrap="nowrap">....</dt-text>
 '/>
 
-## Trim
+## Text Box Trim
 
 Remove extra leading space above and/or below text. Useful for tight component layouts where text needs to align precisely with adjacent elements.
 
-Trim will only affect elements with block or inline-block styled context. It may have no effect on elements with inline or flex context.
+Text box trim will only affect elements with block or inline-block styled context. It may have no effect on elements with inline or flex context.
 
 <code-well-header>
   <dt-stack gap="500" :direction="{ 'default': 'column', 'md': 'row' }">
     <dt-text as="p" class="d-bgc-moderate-opaque"><strong>No trim:</strong> lorem ipsum dolor sit amet</dt-text>
-    <dt-text as="p" trim="start" class="d-bgc-moderate-opaque"><strong>Trim start:</strong> lorem ipsum dolor sit amet</dt-text>
-    <dt-text as="p" trim="end" class="d-bgc-moderate-opaque"><strong>Trim end:</strong> lorem ipsum dolor sit amet</dt-text>
-    <dt-text as="p" trim="both" class="d-bgc-moderate-opaque"><strong>Trim both:</strong> lorem ipsum dolor sit amet</dt-text>
+    <dt-text as="p" text-box-trim="start" class="d-bgc-moderate-opaque"><strong>Trim start:</strong> lorem ipsum dolor sit amet</dt-text>
+    <dt-text as="p" text-box-trim="end" class="d-bgc-moderate-opaque"><strong>Trim end:</strong> lorem ipsum dolor sit amet</dt-text>
+    <dt-text as="p" text-box-trim="both" class="d-bgc-moderate-opaque"><strong>Trim both:</strong> lorem ipsum dolor sit amet</dt-text>
   </dt-stack>
 </code-well-header>
 
 <code-example-tabs
 vueCode='
-<dt-text as="p" trim="start">....</dt-text>
-<dt-text as="p" trim="end">....</dt-text>
-<dt-text as="p" trim="both">....</dt-text>
+<dt-text as="p" text-box-trim="start">....</dt-text>
+<dt-text as="p" text-box-trim="end">....</dt-text>
+<dt-text as="p" text-box-trim="both">....</dt-text>
 '/>
 
 <dialtone-usage>
 <template #do>
 
-* Use `trim="both"` when text needs to align flush with container's top and/or bottom edges.
+* Use `text-box-trim="both"` when text needs to align flush with container's top and/or bottom edges.
 
 </template>
 <template #dont>
 
-* Apply trim to body copy that benefits from natural line spacing.
-* Use trim as a substitute for proper layout spacing.
+* Apply text-box-trim to body copy that benefits from natural line spacing.
+* Use text-box-trim as a substitute for proper layout spacing.
 
 </template>
 </dialtone-usage>
@@ -533,38 +533,8 @@ vueCode='
   hide-close
   title="Browser Support"
 >
-  Trim requires modern browser support for <code class="d-bgc-transparent">text-box-trim</code>. Chrome 133+, Edge 132+, Safari 18.2+ as of November 2025. Otherwise, it will gracefully fallback to default rendering with half-leading above and below.
+  Text box trim requires modern browser support for <code class="d-bgc-transparent">text-box-trim</code>. Chrome 133+, Edge 132+, Safari 18.2+ as of November 2025. Otherwise, it will gracefully fallback to default rendering with half-leading above and below.
 </dt-notice>
-
-## Text Prop
-
-Use the `text` prop as an alternative to the default slot for simple string content. The slot takes precedence when both are provided.
-
-<code-well-header>
-  <dt-stack gap="400">
-    <dt-text kind="body" text="Content via text prop" />
-    <dt-text kind="body">
-      Content via slot
-    </dt-text>
-    <dt-text text="Ignored">
-      Slot content wins
-    </dt-text>
-  </dt-stack>
-</code-well-header>
-
-<code-example-tabs
-vueCode='
-<!-- Using text prop -->
-<dt-text kind="body" text="Content via text prop" />
-<!-- Using slot (equivalent) -->
-<dt-text kind="body">
-  Content via slot
-</dt-text>
-<!-- Slot takes precedence -->
-<dt-text text="Ignored">
-  Slot content wins
-</dt-text>
-'/>
 
 ## Examples
 

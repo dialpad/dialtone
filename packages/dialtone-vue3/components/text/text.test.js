@@ -6,7 +6,7 @@ import {
   TEXT_NUMERIC_CLASS,
   TEXT_TRUNCATE_CLASS,
   TEXT_WRAP_MODIFIERS,
-  TEXT_TRIM_MODIFIERS,
+  TEXT_BOX_TRIM_MODIFIERS,
   TEXT_STRENGTH_MODIFIERS,
   TEXT_DENSITY_MODIFIERS,
 } from './text_constants';
@@ -99,16 +99,6 @@ describe('DtText', () => {
     expect(wrapper.attributes('style')).toContain('--dt-text-line-clamp: 3');
   });
 
-  it('renders text prop when slot is not provided', () => {
-    const wrapper = mount(DtText, {
-      props: {
-        text: 'Prop driven text',
-      },
-    });
-
-    expect(wrapper.text()).toBe('Prop driven text');
-  });
-
   it('applies tone modifier class', () => {
     const wrapper = mountComponent({ tone: 'primary' });
 
@@ -148,7 +138,7 @@ describe('DtText', () => {
       tone: 'primary',
       align: 'center',
       wrap: 'balance',
-      trim: 'both',
+      textBoxTrim: 'both',
       truncate: true,
       numeric: true,
       maxLines: 3,
@@ -162,7 +152,7 @@ describe('DtText', () => {
       'd-fc-primary',
       'd-text--align-center',
       TEXT_WRAP_MODIFIERS.balance,
-      TEXT_TRIM_MODIFIERS.both,
+      TEXT_BOX_TRIM_MODIFIERS.both,
       TEXT_TRUNCATE_CLASS,
       TEXT_NUMERIC_CLASS,
       TEXT_LINE_CLAMP_CLASS,
@@ -211,19 +201,19 @@ describe('DtText', () => {
     expect(wrapper.classes()).not.toContain('d-text--wrap-invalid-wrap');
   });
 
-  it('applies trim modifier class', () => {
-    const wrapper = mountComponent({ trim: 'both' });
+  it('applies textBoxTrim modifier class', () => {
+    const wrapper = mountComponent({ textBoxTrim: 'both' });
 
-    expect(wrapper.classes()).toContain(TEXT_TRIM_MODIFIERS.both);
+    expect(wrapper.classes()).toContain(TEXT_BOX_TRIM_MODIFIERS.both);
   });
 
-  it('warns and does not apply class for unrecognized trim', () => {
+  it('warns and does not apply class for unrecognized textBoxTrim', () => {
     const warnSpy = vi.spyOn(console, 'warn').mockImplementation(() => {});
 
-    const wrapper = mountComponent({ trim: 'invalid-trim' });
+    const wrapper = mountComponent({ textBoxTrim: 'invalid' });
 
-    expect(warnSpy).toHaveBeenCalledWith(expect.stringContaining('Unsupported trim "invalid-trim"'));
-    expect(wrapper.classes()).not.toContain('d-text--trim-invalid-trim');
+    expect(warnSpy).toHaveBeenCalledWith(expect.stringContaining('Unsupported textBoxTrim "invalid"'));
+    expect(wrapper.classes()).not.toContain('d-text--trim-invalid');
   });
 
   it('has data-qa attribute', () => {
