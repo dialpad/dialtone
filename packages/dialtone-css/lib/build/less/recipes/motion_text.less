@@ -81,7 +81,7 @@
 
 .dt-recipe-motion-text__word {
   position: relative;
-  display: inline-block;
+  display: inline;
   white-space: nowrap;
 }
 
@@ -226,6 +226,7 @@
 .dt-recipe-motion-text--gradient-in .dt-recipe-motion-text__word::before,
 .dt-recipe-motion-text--gradient-sweep::before {
   position: absolute;
+  display:inline;
   font-size: inherit;
   line-height: inherit;
   letter-spacing: inherit;
@@ -237,6 +238,19 @@
   -webkit-text-fill-color: transparent;
   mask: var(--dt-recipe-motion-text-gradient);
   mask-position: var(--dt-recipe-motion-text-mask-pos) 0%;
+}
+
+// vue 2: invisible spacer to maintain alignment during animation
+.dt-recipe-motion-text--gradient-in::after {
+   font-size: 0;
+   line-height: 0;
+   visibility: hidden;
+   content: '\200B';
+}
+
+// slide-in variant needs inline-block to use transform
+.dt-recipe-motion-text--slide-in .dt-recipe-motion-text__word {
+  display: inline-block;
 }
 
 .dt-recipe-motion-text--shimmer {

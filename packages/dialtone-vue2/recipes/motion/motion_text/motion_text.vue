@@ -460,7 +460,9 @@ export default {
         this.animationTimeouts.push(timeout);
       };
 
-      revealChar();
+      // Add initial delay for first character
+      const timeout = setTimeout(revealChar, this.timing.characterDelay);
+      this.animationTimeouts.push(timeout);
     },
 
     /**
