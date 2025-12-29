@@ -460,8 +460,12 @@ export default {
         this.animationTimeouts.push(timeout);
       };
 
-      // Add initial delay for first character
-      const timeout = setTimeout(revealChar, this.timing.characterDelay);
+      // Use initialDelay for first character of each word
+      const delay = (this.visibleCharsPerWord[wordIdx] === 0)
+        ? this.timing.initialDelay
+        : this.timing.characterDelay;
+
+      const timeout = setTimeout(revealChar, delay);
       this.animationTimeouts.push(timeout);
     },
 

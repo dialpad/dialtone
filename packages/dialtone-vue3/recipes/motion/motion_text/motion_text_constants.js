@@ -17,16 +17,19 @@ export const MOTION_TEXT_TIMING_PRESETS = {
     characterDelay: 20,
     wordDelay: 30,
     duration: 600,
+    initialDelay: 0,
   },
   md: {
     characterDelay: 30,
     wordDelay: 50,
     duration: 1000,
+    initialDelay: 0,
   },
   lg: {
     characterDelay: 50,
     wordDelay: 100,
     duration: 1500,
+    initialDelay: 0,
   },
 };
 
