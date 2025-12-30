@@ -237,13 +237,14 @@
   animation: dt-recipe-motion-text-gradient-in-word-reveal calc(var(--dt-recipe-motion-text-word-duration) * 1.5) var(--ttf-in-out) 1;
 }
 
-// Gradient-in: Make text transparent and add black background revealed by gradient
+// Gradient-in: Three-layer text structure
 .dt-recipe-motion-text--gradient-in .dt-recipe-motion-text__word {
   position: relative;
   display: inline-block;
 }
 
-.dt-recipe-motion-text--gradient-in .dt-recipe-motion-text__word-base {
+// Placeholder layer - transparent, establishes character layout
+.dt-recipe-motion-text--gradient-in .dt-recipe-motion-text__word-placeholder {
   position: relative;
   display: inline;
   white-space: nowrap;
@@ -254,8 +255,8 @@
   color: transparent;
 }
 
-// Inherited color text layer
-.dt-recipe-motion-text--gradient-in .dt-recipe-motion-text__word-inherited {
+// Base text layer - inherited color (final visible text)
+.dt-recipe-motion-text--gradient-in .dt-recipe-motion-text__word-base {
   position: absolute;
   top: 0;
   left: 0;
@@ -271,7 +272,7 @@
   pointer-events: none;
 }
 
-.dt-recipe-motion-text--gradient-in .dt-recipe-motion-text__char-solid {
+.dt-recipe-motion-text--gradient-in .dt-recipe-motion-text__char-base {
   display: inline;
   white-space: pre;
 }

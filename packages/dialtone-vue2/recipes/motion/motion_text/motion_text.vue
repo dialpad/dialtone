@@ -41,8 +41,8 @@
             :data-text-content="word.text"
             :style="{ '--word-index': wordIdx }"
           >
-            <!-- Base character layer (transparent, establishes layout) -->
-            <span class="dt-recipe-motion-text__word-base">
+            <!-- Placeholder layer (transparent, establishes character layout) -->
+            <span class="dt-recipe-motion-text__word-placeholder">
               <Transition
                 v-for="(char, charIdx) in word.chars"
                 :key="`${animationKey}-${wordIdx}-${charIdx}`"
@@ -59,10 +59,10 @@
               </Transition>
             </span>
 
-            <!-- Inherited color text layer (gradient-in mode only) -->
+            <!-- Base text layer (inherited color, final visible text) -->
             <span
               v-if="animationMode === 'gradient-in'"
-              class="dt-recipe-motion-text__word-inherited"
+              class="dt-recipe-motion-text__word-base"
               aria-hidden="true"
             >
               <template
@@ -70,8 +70,8 @@
               >
                 <span
                   v-if="charIdx < visibleCharsPerWord[wordIdx]"
-                  :key="`${animationKey}-${wordIdx}-${charIdx}-inherited`"
-                  class="dt-recipe-motion-text__char-solid"
+                  :key="`${animationKey}-${wordIdx}-${charIdx}-base`"
+                  class="dt-recipe-motion-text__char-base"
                 >{{ char }}</span>
               </template>
             </span>
