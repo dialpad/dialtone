@@ -240,14 +240,6 @@
   mask-position: var(--dt-recipe-motion-text-mask-pos) 0%;
 }
 
-// vue 2: invisible spacer to maintain alignment during animation
-.dt-recipe-motion-text--gradient-in::after {
-   font-size: 0;
-   line-height: 0;
-   visibility: hidden;
-   content: '\200B';
-}
-
 // slide-in variant needs inline-block to use transform
 .dt-recipe-motion-text--slide-in .dt-recipe-motion-text__word {
   display: inline-block;
