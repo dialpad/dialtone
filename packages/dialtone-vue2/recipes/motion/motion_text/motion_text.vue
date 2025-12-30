@@ -41,12 +41,12 @@
             :data-text-content="word.text"
             :style="{ '--word-index': wordIdx }"
           >
-            <template
-              v-for="(char, charIdx) in word.chars"
-            >
+            <!-- Base character layer (transparent, establishes layout) -->
+            <span class="dt-recipe-motion-text__word-base">
               <Transition
+                v-for="(char, charIdx) in word.chars"
                 :key="`${animationKey}-${wordIdx}-${charIdx}`"
-                :name="`dt-recipe-motion-text-char-${animationMode}`"
+                :name="animationMode === 'gradient-in' ? '' : `dt-recipe-motion-text-char-${animationMode}`"
               >
                 <span
                   v-if="charIdx < visibleCharsPerWord[wordIdx]"
@@ -57,7 +57,41 @@
                   }"
                 >{{ char }}</span>
               </Transition>
-            </template>
+            </span>
+
+            <!-- Inherited color text layer (gradient-in mode only) -->
+            <span
+              v-if="animationMode === 'gradient-in'"
+              class="dt-recipe-motion-text__word-inherited"
+              aria-hidden="true"
+            >
+              <template
+                v-for="(char, charIdx) in word.chars"
+              >
+                <span
+                  v-if="charIdx < visibleCharsPerWord[wordIdx]"
+                  :key="`${animationKey}-${wordIdx}-${charIdx}-inherited`"
+                  class="dt-recipe-motion-text__char-solid"
+                >{{ char }}</span>
+              </template>
+            </span>
+
+            <!-- Gradient layer (gradient-in mode only) -->
+            <span
+              v-if="animationMode === 'gradient-in'"
+              class="dt-recipe-motion-text__word-gradient"
+              aria-hidden="true"
+            >
+              <template
+                v-for="(char, charIdx) in word.chars"
+              >
+                <span
+                  v-if="charIdx < visibleCharsPerWord[wordIdx]"
+                  :key="`${animationKey}-${wordIdx}-${charIdx}-gradient`"
+                  class="dt-recipe-motion-text__char-gradient"
+                >{{ char }}</span>
+              </template>
+            </span>
           </span>
         </Transition>
       </template>
@@ -444,7 +478,7 @@ export default {
     animateCharsForWord (wordIdx) {
       if (this.isPaused || wordIdx >= this.words.length) return;
 
-      this.visibleCharsPerWord[wordIdx] = 0;
+      this.$set(this.visibleCharsPerWord, wordIdx, 0);
       const chars = this.words[wordIdx].chars.length;
 
       const revealChar = () => {
@@ -455,7 +489,7 @@ export default {
           return;
         }
 
-        this.visibleCharsPerWord[wordIdx]++;
+        this.$set(this.visibleCharsPerWord, wordIdx, this.visibleCharsPerWord[wordIdx] + 1);
         const timeout = setTimeout(revealChar, this.timing.characterDelay);
         this.animationTimeouts.push(timeout);
       };

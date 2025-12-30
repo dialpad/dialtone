@@ -55,7 +55,10 @@ describe('DtRecipeMotionText Tests', () => {
         // Skip to end to make all text visible
         wrapper.vm.skipToEnd();
         await wrapper.vm.$nextTick();
-        expect(wrapper.text()).toContain('Test text content');
+        // Query only the base layers, excluding aria-hidden overlay layers
+        const baseLayers = wrapper.findAll('.dt-recipe-motion-text__word-base');
+        const baseText = baseLayers.wrappers.map(w => w.text()).join(' ');
+        expect(baseText).toContain('Test text content');
       });
 
       it('should have base class', () => {

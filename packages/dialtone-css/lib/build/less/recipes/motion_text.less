@@ -110,6 +110,20 @@
   }
 }
 
+@keyframes dt-recipe-motion-text-gradient-in-layer-reveal {
+  0%, 10% {
+    opacity: 0;
+  }
+
+  50% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
 // Fade-in mode animations
 @keyframes dt-recipe-motion-text-fade-in-char-appear {
   from {
@@ -223,10 +237,75 @@
   animation: dt-recipe-motion-text-gradient-in-word-reveal calc(var(--dt-recipe-motion-text-word-duration) * 1.5) var(--ttf-in-out) 1;
 }
 
-.dt-recipe-motion-text--gradient-in .dt-recipe-motion-text__word::before,
+// Gradient-in: Make text transparent and add black background revealed by gradient
+.dt-recipe-motion-text--gradient-in .dt-recipe-motion-text__word {
+  position: relative;
+  display: inline-block;
+}
+
+.dt-recipe-motion-text--gradient-in .dt-recipe-motion-text__word-base {
+  position: relative;
+  display: inline;
+  white-space: nowrap;
+}
+
+.dt-recipe-motion-text--gradient-in .dt-recipe-motion-text__char {
+  position: relative;
+  color: transparent;
+}
+
+// Inherited color text layer
+.dt-recipe-motion-text--gradient-in .dt-recipe-motion-text__word-inherited {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1;
+  display: inline;
+  color: inherit;
+  font-size: inherit;
+  line-height: inherit;
+  letter-spacing: inherit;
+  white-space: nowrap;
+  opacity: 0;
+  animation: dt-recipe-motion-text-gradient-in-layer-reveal calc(var(--dt-recipe-motion-text-word-duration) * 1.5) var(--ttf-out-quint) forwards;
+  pointer-events: none;
+}
+
+.dt-recipe-motion-text--gradient-in .dt-recipe-motion-text__char-solid {
+  display: inline;
+  white-space: pre;
+}
+
+// Gradient layer
+.dt-recipe-motion-text--gradient-in .dt-recipe-motion-text__word-gradient {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 2;
+  display: inline;
+  font-size: inherit;
+  line-height: inherit;
+  letter-spacing: inherit;
+  white-space: nowrap;
+  background: var(--dt-recipe-motion-text-highlight-color);
+  -webkit-background-clip: text;
+  background-clip: text;
+  animation: dt-recipe-motion-text-gradient-in-word-reveal calc(var(--dt-recipe-motion-text-word-duration) * 1.5) var(--ttf-out-quint);
+  pointer-events: none;
+  -webkit-text-fill-color: transparent;
+  mask: var(--dt-recipe-motion-text-gradient);
+  mask-position: var(--dt-recipe-motion-text-mask-pos) 0%;
+}
+
+.dt-recipe-motion-text--gradient-in .dt-recipe-motion-text__char-gradient {
+  display: inline;
+  white-space: pre;
+}
+
+// Gradient-sweep uses ::before with gradient
 .dt-recipe-motion-text--gradient-sweep::before {
   position: absolute;
-  display:inline;
+  display: inline;
   font-size: inherit;
   line-height: inherit;
   letter-spacing: inherit;
