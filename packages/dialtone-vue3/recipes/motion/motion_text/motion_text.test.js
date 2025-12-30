@@ -55,10 +55,10 @@ describe('DtRecipeMotionText Tests', () => {
         // Skip to end to make all text visible
         wrapper.vm.skipToEnd();
         await wrapper.vm.$nextTick();
-        // Query only the placeholder layers (structural layer with actual text)
-        const placeholderLayers = wrapper.findAll('.dt-recipe-motion-text__word-placeholder');
-        const placeholderText = placeholderLayers.map(w => w.text()).join(' ');
-        expect(placeholderText).toContain('Test text content');
+        // Query the word elements (contain characters directly)
+        const wordElements = wrapper.findAll('.dt-recipe-motion-text__word');
+        const wordText = wordElements.map(w => w.text()).join(' ');
+        expect(wordText).toContain('Test text content');
       });
 
       it('should have base class', () => {
@@ -353,6 +353,10 @@ describe('DtRecipeMotionText Tests', () => {
     it('should emit complete event', async () => {
       wrapper.vm.completeAnimation();
       await wrapper.vm.$nextTick();
+
+      // Wait for gradient sweep duration timeout (3000ms for md speed gradient-in mode)
+      await new Promise(resolve => setTimeout(resolve, 3100));
+
       expect(wrapper.emitted('complete')).toBeTruthy();
     });
 

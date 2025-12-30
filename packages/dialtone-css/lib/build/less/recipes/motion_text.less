@@ -112,15 +112,15 @@
 
 @keyframes dt-recipe-motion-text-gradient-in-layer-reveal {
   0%, 10% {
-    opacity: 0;
+    color: transparent;
   }
 
   50% {
-    opacity: 1;
+    color: inherit;
   }
 
   100% {
-    opacity: 1;
+    color: inherit;
   }
 }
 
@@ -237,48 +237,30 @@
   animation: dt-recipe-motion-text-gradient-in-word-reveal calc(var(--dt-recipe-motion-text-word-duration) * 1.5) var(--ttf-in-out) 1;
 }
 
-// Gradient-in: Three-layer text structure
+// Gradient-in: Layered text structure
 .dt-recipe-motion-text--gradient-in .dt-recipe-motion-text__word {
   position: relative;
   display: inline-block;
 }
 
-// Placeholder layer - transparent, establishes character layout
-.dt-recipe-motion-text--gradient-in .dt-recipe-motion-text__word-placeholder {
-  position: relative;
-  display: inline;
-  white-space: nowrap;
-}
-
+// Character styling
 .dt-recipe-motion-text--gradient-in .dt-recipe-motion-text__char {
-  position: relative;
-  color: transparent;
-}
-
-// Base text layer - inherited color (final visible text)
-.dt-recipe-motion-text--gradient-in .dt-recipe-motion-text__word-base {
-  position: absolute;
-  top: 0;
-  left: 0;
-  z-index: 1;
-  display: inline;
-  color: inherit;
-  font-size: inherit;
-  line-height: inherit;
-  letter-spacing: inherit;
-  white-space: nowrap;
-  opacity: 0;
-  animation: dt-recipe-motion-text-gradient-in-layer-reveal calc(var(--dt-recipe-motion-text-word-duration) * 1.5) var(--ttf-out-quint) forwards;
-  pointer-events: none;
-}
-
-.dt-recipe-motion-text--gradient-in .dt-recipe-motion-text__char-base {
   display: inline;
   white-space: pre;
 }
 
+// Word characters transition from transparent to visible during animation
+.dt-recipe-motion-text--gradient-in .dt-recipe-motion-text__word[data-animating="true"] > .dt-recipe-motion-text__char {
+  color: transparent;
+  animation: dt-recipe-motion-text-gradient-in-layer-reveal calc(var(--dt-recipe-motion-text-word-duration) * 1.5) var(--ttf-out-quint) forwards;
+}
+
+.dt-recipe-motion-text--gradient-in .dt-recipe-motion-text__word[data-animating="false"] > .dt-recipe-motion-text__char {
+  color: inherit;
+}
+
 // Gradient layer
-.dt-recipe-motion-text--gradient-in .dt-recipe-motion-text__word-gradient {
+.dt-recipe-motion-text--gradient-in .dt-recipe-motion-text__gradient {
   position: absolute;
   top: 0;
   left: 0;
@@ -296,11 +278,6 @@
   -webkit-text-fill-color: transparent;
   mask: var(--dt-recipe-motion-text-gradient);
   mask-position: var(--dt-recipe-motion-text-mask-pos) 0%;
-}
-
-.dt-recipe-motion-text--gradient-in .dt-recipe-motion-text__char-gradient {
-  display: inline;
-  white-space: pre;
 }
 
 // Gradient-sweep uses ::before with gradient

@@ -39,47 +39,29 @@
             v-if="wordIdx < visibleWordCount"
             class="dt-recipe-motion-text__word"
             :data-text-content="word.text"
+            :data-animating="!animationComplete"
             :style="{ '--word-index': wordIdx }"
           >
-            <!-- Placeholder layer (transparent, establishes character layout) -->
-            <span class="dt-recipe-motion-text__word-placeholder">
-              <Transition
-                v-for="(char, charIdx) in word.chars"
-                :key="`${animationKey}-${wordIdx}-${charIdx}`"
-                :name="animationMode === 'gradient-in' ? '' : `dt-recipe-motion-text-char-${animationMode}`"
-              >
-                <span
-                  v-if="charIdx < visibleCharsPerWord[wordIdx]"
-                  class="dt-recipe-motion-text__char"
-                  :style="{
-                    '--char-index': charIdx,
-                    '--char-delay': `${charIdx * timing.characterDelay}ms`,
-                  }"
-                >{{ char }}</span>
-              </Transition>
-            </span>
-
-            <!-- Base text layer (inherited color, final visible text) -->
-            <span
-              v-if="animationMode === 'gradient-in'"
-              class="dt-recipe-motion-text__word-base"
-              aria-hidden="true"
+            <!-- Direct character rendering -->
+            <Transition
+              v-for="(char, charIdx) in word.chars"
+              :key="`${animationKey}-${wordIdx}-${charIdx}`"
+              :name="animationMode === 'gradient-in' ? '' : `dt-recipe-motion-text-char-${animationMode}`"
             >
-              <template
-                v-for="(char, charIdx) in word.chars"
-              >
-                <span
-                  v-if="charIdx < visibleCharsPerWord[wordIdx]"
-                  :key="`${animationKey}-${wordIdx}-${charIdx}-base`"
-                  class="dt-recipe-motion-text__char-base"
-                >{{ char }}</span>
-              </template>
-            </span>
+              <span
+                v-if="charIdx < visibleCharsPerWord[wordIdx]"
+                class="dt-recipe-motion-text__char"
+                :style="{
+                  '--char-index': charIdx,
+                  '--char-delay': `${charIdx * timing.characterDelay}ms`,
+                }"
+              >{{ char }}</span>
+            </Transition>
 
             <!-- Gradient layer (gradient-in mode only) -->
             <span
-              v-if="animationMode === 'gradient-in'"
-              class="dt-recipe-motion-text__word-gradient"
+              v-if="animationMode === 'gradient-in' && !animationComplete"
+              class="dt-recipe-motion-text__gradient"
               aria-hidden="true"
             >
               <template
@@ -88,7 +70,7 @@
                 <span
                   v-if="charIdx < visibleCharsPerWord[wordIdx]"
                   :key="`${animationKey}-${wordIdx}-${charIdx}-gradient`"
-                  class="dt-recipe-motion-text__char-gradient"
+                  class="dt-recipe-motion-text__char"
                 >{{ char }}</span>
               </template>
             </span>
@@ -228,6 +210,7 @@ export default {
       animationTimeouts: [],
       prefersReducedMotion: false,
       animationKey: 0,
+      animationComplete: false,
     };
   },
 
@@ -424,6 +407,7 @@ export default {
       this.isPaused = false;
       this.visibleWordCount = 0;
       this.visibleCharsPerWord = Array(this.words.length).fill(0);
+      this.animationComplete = false;
       this.animationKey++;
     },
 
@@ -441,6 +425,7 @@ export default {
     showAllContent () {
       this.visibleWordCount = this.words.length;
       this.visibleCharsPerWord = this.words.map(word => word.chars.length);
+      this.animationComplete = true;
       setTimeout(() => {
         this.isAnimating = false;
         this.$emit('complete');
@@ -502,9 +487,22 @@ export default {
      * Complete the animation
      */
     completeAnimation () {
+      // For gradient-in mode, wait for the gradient sweep to finish before cleanup
+      if (this.animationMode === 'gradient-in' && !this.loop) {
+        // Gradient sweep takes 1.5x word duration (3000ms for 'md')
+        const gradientSweepDuration = this.timing.duration * 2 * 1.5;
+        const timeout = setTimeout(() => {
+          this.animationComplete = true;
+          this.isAnimating = false;
+          this.$emit('complete');
+        }, gradientSweepDuration);
+
+        this.animationTimeouts.push(timeout);
+        return;
+      }
+
       this.isAnimating = false;
       this.clearTimeouts();
-
       this.$emit('complete');
 
       if (this.loop) {
