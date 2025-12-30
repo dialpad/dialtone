@@ -1,3 +1,10 @@
+## [3.197.3](https://github.com/dialpad/dialtone/compare/dialtone-vue3/v3.197.2...dialtone-vue3/v3.197.3) (2025-12-30)
+
+
+### Bug Fixes
+
+* **Radio:** NO-JIRA remove click from emits ([#1005](https://github.com/dialpad/dialtone/issues/1005)) ([bb35ed6](https://github.com/dialpad/dialtone/commit/bb35ed6de59e4087acb6251737d845c13206b891))
+
 ## [3.197.2](https://github.com/dialpad/dialtone/compare/dialtone-vue3/v3.197.1...dialtone-vue3/v3.197.2) (2025-12-14)
 
 
