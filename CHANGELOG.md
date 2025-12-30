@@ -1,3 +1,10 @@
+## [9.152.1](https://github.com/dialpad/dialtone/compare/dialtone/v9.152.0...dialtone/v9.152.1) (2025-12-30)
+
+
+### Bug Fixes
+
+* **Radio:** NO-JIRA remove click from emits ([#1005](https://github.com/dialpad/dialtone/issues/1005)) ([bb35ed6](https://github.com/dialpad/dialtone/commit/bb35ed6de59e4087acb6251737d845c13206b891))
+
 # [9.152.0](https://github.com/dialpad/dialtone/compare/dialtone/v9.151.4...dialtone/v9.152.0) (2025-12-23)
 
 
