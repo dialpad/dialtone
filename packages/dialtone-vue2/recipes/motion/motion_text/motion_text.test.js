@@ -351,29 +351,40 @@ describe('DtRecipeMotionText Tests', () => {
     });
 
     it('should emit complete event', async () => {
+      vi.useFakeTimers();
+
       wrapper.vm.completeAnimation();
       await wrapper.vm.$nextTick();
 
-      // Wait for gradient sweep duration timeout (3000ms for md speed gradient-in mode)
-      await new Promise(resolve => setTimeout(resolve, 3100));
+      // Advance timers to complete gradient sweep (3000ms for md speed gradient-in mode)
+      vi.runAllTimers();
+      await wrapper.vm.$nextTick();
 
       expect(wrapper.emitted('complete')).toBeTruthy();
+
+      vi.useRealTimers();
     });
 
     it('should emit progress event with correct data', async () => {
+      vi.useFakeTimers();
+
       wrapper.vm.start();
       await wrapper.vm.$nextTick();
 
-      // Wait for at least one progress event
-      await new Promise(resolve => setTimeout(resolve, 100));
+      // Advance timers to trigger progress events
+      vi.runAllTimers();
+      await wrapper.vm.$nextTick();
 
       const progressEvents = wrapper.emitted('progress');
-      if (progressEvents && progressEvents.length > 0) {
-        const eventData = progressEvents[0][0];
-        expect(eventData).toHaveProperty('wordsComplete');
-        expect(eventData).toHaveProperty('totalWords');
-        expect(eventData).toHaveProperty('progress');
-      }
+      expect(progressEvents).toBeTruthy();
+      expect(progressEvents.length).toBeGreaterThan(0);
+
+      const eventData = progressEvents[0][0];
+      expect(eventData).toHaveProperty('wordsComplete');
+      expect(eventData).toHaveProperty('totalWords');
+      expect(eventData).toHaveProperty('progress');
+
+      vi.useRealTimers();
     });
   });
 });
