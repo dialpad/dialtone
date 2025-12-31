@@ -39,7 +39,7 @@
             v-if="wordIdx < visibleWordCount"
             class="dt-recipe-motion-text__word"
             :data-text-content="word.text"
-            :data-animating="!animationComplete"
+            :data-animating="animationMode === 'gradient-in' && !animationComplete ? true : undefined"
             :style="{ '--word-index': wordIdx }"
           >
             <!-- Direct character rendering -->

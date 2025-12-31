@@ -246,6 +246,7 @@
 // Character styling
 .dt-recipe-motion-text--gradient-in .dt-recipe-motion-text__char {
   display: inline;
+  color: inherit;
   white-space: pre;
 }
 
@@ -255,16 +256,12 @@
   animation: dt-recipe-motion-text-gradient-in-layer-reveal calc(var(--dt-recipe-motion-text-word-duration) * 1.5) var(--ttf-out-quint) forwards;
 }
 
-.dt-recipe-motion-text--gradient-in .dt-recipe-motion-text__word[data-animating="false"] > .dt-recipe-motion-text__char {
-  color: inherit;
-}
-
 // Gradient layer
 .dt-recipe-motion-text--gradient-in .dt-recipe-motion-text__gradient {
   position: absolute;
   top: 0;
   left: 0;
-  z-index: 2;
+  z-index: 1;
   display: inline;
   font-size: inherit;
   line-height: inherit;
