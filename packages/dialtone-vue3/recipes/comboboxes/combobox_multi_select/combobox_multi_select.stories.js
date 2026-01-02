@@ -3,6 +3,7 @@ import { createTemplateFromVueFile } from '@/common/storybook_utils';
 import DtRecipeComboboxMultiSelect from './combobox_multi_select.vue';
 
 import DtRecipeComboboxMultiSelectDefaultTemplate from './combobox_multi_select_default.story.vue';
+import DtRecipeComboboxMultiSelectLanguageSelectionTemplate from './combobox_multi_select_language_selection.story.vue';
 import { MULTI_SELECT_SIZES } from './combobox_multi_select_constants';
 import { ITEMS_LIST_DATA } from './combobox_multi_select_story_constants';
 
@@ -214,5 +215,28 @@ export const WithStyledInput = {
   args: {
     selectedItems: ['item12', 'item13', 'item14'],
     inputWrapperClass: ['d-ba-none', 'd-bgc-primary'],
+  },
+};
+
+const LanguageSelectionTemplate = (args, { argTypes }) => createTemplateFromVueFile(
+  args,
+  argTypes,
+  DtRecipeComboboxMultiSelectLanguageSelectionTemplate,
+);
+
+export const LanguageSelection = {
+  render: LanguageSelectionTemplate,
+
+  args: {
+    label: 'Language',
+    description: 'Select languages for keyword detection. Global selects all languages.',
+  },
+
+  parameters: {
+    docs: {
+      description: {
+        story: 'Language selection example showing Global option behavior. When Global is selected, all languages are selected and only "Global" chip is displayed. Other languages are disabled when Global is active.',
+      },
+    },
   },
 };
