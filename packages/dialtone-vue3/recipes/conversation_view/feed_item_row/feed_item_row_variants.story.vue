@@ -285,7 +285,7 @@
   </dt-stack>
 </template>
 
-<script>
+<script setup>
 import DtRecipeFeedItemRow from './feed_item_row.vue';
 
 import { DtRecipeEmojiRow } from '../emoji_row';
@@ -296,36 +296,13 @@ import { DtAvatar } from '@/components/avatar';
 import { DtIcon } from '@/components/icon';
 import { DtImageViewer } from '@/components/image_viewer';
 import { DtButton } from '@/components/button';
-import { sharedEmojiReactionsData } from '@/recipes/conversation_view/emoji_row/emoji_row.stories.js';
-
+import { useMockReactions } from '@/recipes/conversation_view/emoji_row/composables/useMockReactions.js';
 import fryImage from '@/common/assets/fry.gif';
 
-export default {
-  name: 'DtRecipeFeedItemRowVariants',
-
-  components: {
-    DtEmojiTextWrapper,
-    DtRecipeEmojiRow,
-    DtRecipeFeedItemRow,
-    DtRecipeFeedItemPill,
-    DtStack,
-    DtAvatar,
-    DtIcon,
-    DtImageViewer,
-    DtButton,
-  },
-
-  data () {
-    return {
-      fadeState: 'SEARCHED',
-      mockReactions: sharedEmojiReactionsData,
-
-      hoverButtons: ['bell', 'living-thing', 'map-pin'],
-      persons: ['Jim Halpert', 'Michael Scott', 'Pam'],
-      fryImage,
-    };
-  },
-};
+const fadeState = 'SEARCHED';
+const hoverButtons = ['bell', 'living-thing', 'map-pin'];
+const persons = ['Jim Halpert', 'Michael Scott', 'Pam'];
+const { mockReactions } = useMockReactions();
 </script>
 
 <style lang="less" scoped>

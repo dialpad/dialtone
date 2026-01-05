@@ -1,16 +1,14 @@
 <template>
   <dt-recipe-emoji-row
-    :reactions="$attrs.reactions"
+    :reactions="emojiReactionsData"
     @emoji-clicked="$attrs.onEmojiClicked"
     @emoji-hovered="$attrs.onEmojiHovered"
   />
 </template>
 
-<script>
+<script setup>
 import DtRecipeEmojiRow from './emoji_row.vue';
+import { useMockReactions } from '@/recipes/conversation_view/emoji_row/composables/useMockReactions.js';
 
-export default {
-  name: 'DtRecipeEmojiRowDefault',
-  components: { DtRecipeEmojiRow },
-};
+const { mockReactions: emojiReactionsData } = useMockReactions();
 </script>
