@@ -70,7 +70,6 @@ export class DialtoneLocalization {
       namespaces: [dialtoneNamespace],
     });
 
-    //localeManager.install(dialtoneNamespace);
     this.i18n = localeManager.useI18N(dialtoneNamespace);
 
     DialtoneLocalization.instance = this;
@@ -123,7 +122,6 @@ export class DialtoneLocalization {
    * https://github.com/dialpad/goblin-client-tools/tree/main/packages/i18n#t
    */
   $t (...args) {
-    //return useI18N(dialtoneNamespace).$t(...args);
     return this.i18n.$t(...args);
   }
 
@@ -134,7 +132,6 @@ export class DialtoneLocalization {
    * https://github.com/dialpad/goblin-client-tools/tree/main/packages/i18n#ta
    */
   $ta (...args) {
-    //return useI18N(dialtoneNamespace).$ta(...args);
     return this.i18n.$ta(...args);
   }
 

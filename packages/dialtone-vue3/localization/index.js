@@ -62,10 +62,6 @@ export class DialtoneLocalization {
       ]),
     });
 
-    // ehhh im pretty sure we want there to be one of these already?? so rather
-    // than instatiate it directly, there should be a createLocaleManager(),
-    // which uses the global version (while also adding necessary options!) or
-    // creates a new one like this:
     const localeManager = new LocaleManager({
       bundleSource,
       allowedLocales: Object.values(allowedLocales),
@@ -125,7 +121,6 @@ export class DialtoneLocalization {
    * https://github.com/dialpad/goblin-client-tools/tree/main/packages/i18n#t
    */
   $t (...args) {
-    //return useI18N(dialtoneNamespace).$t(...args);
     return this.i18n.$t(...args);
   }
 
@@ -136,7 +131,6 @@ export class DialtoneLocalization {
    * https://github.com/dialpad/goblin-client-tools/tree/main/packages/i18n#ta
    */
   $ta (...args) {
-    //return useI18N(dialtoneNamespace).$ta(...args);
     return this.i18n.$ta(...args);
   }
 
