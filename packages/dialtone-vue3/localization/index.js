@@ -1,5 +1,4 @@
-import { LocaleManager, RawBundleSource, useI18N } from '@dialpad/i18n';
-import { getCurrentInstance } from 'vue';
+import { LocaleManager, RawBundleSource } from '@dialpad/i18n';
 
 import enUS from './en-US.ftl?raw';
 import zhCN from './zh-CN.ftl?raw';
@@ -37,12 +36,15 @@ const localeManagerStorageKey = 'user-locale';
  * https://github.com/dialpad/goblin-client-tools/tree/main/packages/i18n#i18n-vue-3-compatible
  */
 export class DialtoneLocalization {
+  /**
+   * @prop {import('@dialpad/i18n').UseI18N} i18n
+   * @private
+   */
   constructor (locale = null) {
     if (typeof DialtoneLocalization.instance === 'object') {
       return DialtoneLocalization.instance;
     }
 
-    const app = getCurrentInstance().appContext.app;
     this._locale = locale || DialtoneLocalization.getPreferredLocale();
 
     const bundleSource = new RawBundleSource({
@@ -68,9 +70,8 @@ export class DialtoneLocalization {
       namespaces: [dialtoneNamespace],
     });
 
-    localeManager.install(app, dialtoneNamespace);
-
     DialtoneLocalization.instance = this;
+    this.i18n = localeManager.useI18N(dialtoneNamespace);
 
     if (typeof window !== 'undefined') {
       /**
@@ -120,7 +121,7 @@ export class DialtoneLocalization {
    * https://github.com/dialpad/goblin-client-tools/tree/main/packages/i18n#t
    */
   $t (...args) {
-    return useI18N(dialtoneNamespace).$t(...args);
+    return this.i18n.$t(...args);
   }
 
   /**
@@ -130,7 +131,7 @@ export class DialtoneLocalization {
    * https://github.com/dialpad/goblin-client-tools/tree/main/packages/i18n#ta
    */
   $ta (...args) {
-    return useI18N(dialtoneNamespace).$ta(...args);
+    return this.i18n.$ta(...args);
   }
 
   get currentLocale () {
@@ -144,6 +145,6 @@ export class DialtoneLocalization {
     }
 
     this._locale = newLocale;
-    useI18N(dialtoneNamespace).setI18N({ preferredLocale: newLocale }, dialtoneNamespace);
+    this.i18n.setI18N({ preferredLocale: newLocale }, dialtoneNamespace);
   }
 }
