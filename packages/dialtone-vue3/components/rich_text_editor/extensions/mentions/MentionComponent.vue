@@ -5,7 +5,7 @@
   >
     <dt-link
       kind="mention"
-      @click="handleClick"
+      @click.prevent="handleClick"
     >
       {{ text }}
     </dt-link>
@@ -34,8 +34,7 @@ export default {
   },
 
   methods: {
-    handleClick (event) {
-      event.preventDefault();
+    handleClick () {
       const mentionData = {
         name: this.$props.node.attrs.name,
         id: this.$props.node.attrs.id,
