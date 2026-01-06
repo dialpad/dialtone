@@ -604,6 +604,34 @@ describe('DtRichTextEditor tests', () => {
   });
 
   describe('Interactivity Tests', () => {
+    describe('Mention click functionality', () => {
+      describe('When a mention is clicked', () => {
+        it('should emit mention-click event with mention data', async () => {
+          const mentionData = {
+            id: 'john.doe',
+            name: 'John Doe',
+            avatarSrc: 'avatar.jpg',
+            contactKey: 'contact-123',
+          };
+
+          await wrapper.setProps({
+            mentionSuggestion: { items: vi.fn(() => [mentionData]) },
+          });
+
+          const editorInstance = wrapper.vm.editor;
+          const mentionNode = editorInstance.schema.nodes.mention.create(mentionData);
+          editorInstance.view.dispatch(editorInstance.state.tr.insert(0, mentionNode));
+          await wrapper.vm.$nextTick();
+
+          const mentionLink = wrapper.find('a.d-link');
+          expect(mentionLink.text()).toBe('@John Doe');
+
+          await mentionLink.trigger('click');
+          expect(wrapper.emitted('mention-click')[0][0]).toEqual(mentionData);
+        });
+      });
+    });
+
     describe('Link keyboard shortcut functionality', () => {
       describe('When Mod+K is pressed and link is enabled', () => {
         it('should emit edit-link event', async () => {

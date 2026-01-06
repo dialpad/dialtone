@@ -29,6 +29,7 @@ export const argsData = {
   onMarkdownInput: action('markdown-input'),
   onEditLink: action('edit-link'),
   onSelectedCommand: action('selected-command'),
+  onMentionClick: action('mention-click'),
 };
 
 export const argTypesData = {
@@ -119,6 +120,11 @@ export const argTypesData = {
     },
   },
   onSelectedCommand: {
+    table: {
+      disable: true,
+    },
+  },
+  onMentionClick: {
     table: {
       disable: true,
     },
