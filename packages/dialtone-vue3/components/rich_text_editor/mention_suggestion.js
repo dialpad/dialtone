@@ -1,10 +1,11 @@
 import defaultImage from '@/common/assets/avatar2.png';
 
-/* eslint-disable max-len */
+
 const CONTACT_LIST = [
   {
     id: 'test.person',
     name: 'Test Person',
+    contactKey: '123',
     avatarSrc: defaultImage,
     showDetails: true,
     presence: 'active',
@@ -14,6 +15,7 @@ const CONTACT_LIST = [
   {
     id: 'test.person2',
     name: 'Test Person 2',
+    contactKey: '1234',
     avatarSrc: defaultImage,
     showDetails: true,
     presence: 'busy',
@@ -23,6 +25,7 @@ const CONTACT_LIST = [
   {
     id: 'test.person3',
     name: 'Test Person 3',
+    contactKey: '12345',
     avatarSrc: defaultImage,
     showDetails: true,
     presence: 'busy',
@@ -32,6 +35,7 @@ const CONTACT_LIST = [
   {
     id: 'brad.paugh',
     name: 'Brad Paugh',
+    contactKey: '123456',
     avatarSrc: defaultImage,
     showDetails: true,
     presence: 'offline',
@@ -40,6 +44,7 @@ const CONTACT_LIST = [
   {
     id: 'bradley.hawkins',
     name: 'Bradley Hawkins',
+    contactKey: '1234567',
     avatarSrc: defaultImage,
     showDetails: true,
     presence: 'away',
@@ -50,27 +55,32 @@ const CONTACT_LIST = [
   {
     id: 'julio.ortega',
     name: 'Tico Ortega',
+    contactKey: '12345678',
     avatarSrc: defaultImage,
   },
   {
     id: 'ignacio.ropolo',
     name: 'Ignacio Ropolo',
+    contactKey: '123456789',
     avatarSrc: defaultImage,
   },
   {
     id: 'nina.repetto',
     name: 'Nina Repetto',
+    contactKey: '123456789',
     avatarSrc: defaultImage,
   },
   {
     id: 'long.name',
     name: 'LongnameLongnameLongnameLongnameLongnameLongnameLongnameLongnameLongnameLongnameLongnameLongnameLongnameLongnameLongname',
     avatarSrc: defaultImage,
+    contactKey: '1234567890',
   },
   {
     id: 'long.name.with.spaces',
     name: 'Long Name Long Name Long Name Long NameLong Name Long Name Long Name Long NameLong Name Long Name Long Name Long NameLong Name Long Name Long Name Long NameLong Name Long Name Long Name Long Name ',
     avatarSrc: defaultImage,
+    contactKey: '12345678901',
   },
 ];
 
