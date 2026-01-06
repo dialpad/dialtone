@@ -1,3 +1,10 @@
+## [2.205.3](https://github.com/dialpad/dialtone/compare/dialtone-vue2/v2.205.2...dialtone-vue2/v2.205.3) (2026-01-06)
+
+
+### Bug Fixes
+
+* **I18n:** NO-JIRA initialization tweaks ([#965](https://github.com/dialpad/dialtone/issues/965)) ([50bb929](https://github.com/dialpad/dialtone/commit/50bb929eb147a80ffa9bc381875f665bfe4dec8a))
+
 ## [2.205.2](https://github.com/dialpad/dialtone/compare/dialtone-vue2/v2.205.1...dialtone-vue2/v2.205.2) (2025-12-14)
 
 
