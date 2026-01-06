@@ -1,3 +1,16 @@
+# [9.153.0](https://github.com/dialpad/dialtone/compare/dialtone/v9.152.1...dialtone/v9.153.0) (2026-01-06)
+
+
+### Bug Fixes
+
+* DLT-2878 stories using emoji row ([#1007](https://github.com/dialpad/dialtone/issues/1007)) ([9f2b25f](https://github.com/dialpad/dialtone/commit/9f2b25f6296e6be070803b8493240e268cc62648))
+* **I18n:** NO-JIRA initialization tweaks ([#965](https://github.com/dialpad/dialtone/issues/965)) ([50bb929](https://github.com/dialpad/dialtone/commit/50bb929eb147a80ffa9bc381875f665bfe4dec8a))
+
+
+### Features
+
+* **Rich Text Editor:** NO-JIRA add mention click handling ([#1009](https://github.com/dialpad/dialtone/issues/1009)) ([6e2334f](https://github.com/dialpad/dialtone/commit/6e2334f440e1be542d60ec7018ad6b346993cc87))
+
 ## [9.152.1](https://github.com/dialpad/dialtone/compare/dialtone/v9.152.0...dialtone/v9.152.1) (2025-12-30)
 
 
