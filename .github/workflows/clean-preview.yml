@@ -12,8 +12,7 @@ jobs:
       id-token: 'write'
     env:
       DIALTONE_BUCKET_DIRECTORY: dialtone.dialpad.com/deploy-previews/pr-${{ github.event.pull_request.number }}/
-      DIALTONE_VUE_2_BUCKET_DIRECTORY: dialtone.dialpad.com/vue/deploy-previews/pr-${{ github.event.pull_request.number }}/
-      DIALTONE_VUE_3_BUCKET_DIRECTORY: dialtone.dialpad.com/vue3/deploy-previews/pr-${{ github.event.pull_request.number }}/
+      DIALTONE_VUE_3_BUCKET_DIRECTORY: dialtone.dialpad.com/vue/deploy-previews/pr-${{ github.event.pull_request.number }}/
     steps:
       - uses: actions/checkout@v4
 
@@ -33,11 +32,6 @@ jobs:
           gcloud storage rm --recursive ${{ format('gs://{0}', env.DIALTONE_BUCKET_DIRECTORY) }}
 
       - name: Clean up dialtone-vue preview
-        continue-on-error: true
-        run: |
-          gcloud storage rm --recursive ${{ format('gs://{0}', env.DIALTONE_VUE_2_BUCKET_DIRECTORY) }}
-
-      - name: Clean up dialtone-vue3 preview
         continue-on-error: true
         run: |
           gcloud storage rm --recursive ${{ format('gs://{0}', env.DIALTONE_VUE_3_BUCKET_DIRECTORY) }}

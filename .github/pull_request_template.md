@@ -74,7 +74,7 @@ If new component:
 
 - I am exporting any new components or constants:
   - [ ] from the index.js in the component directory.
-  - [ ] from the index.js in the root (either `packages/dialtone-vue2` or `packages/dialtone-vue3`).
+  - [ ] from the index.js in the root (like`packages/dialtone-vue3`).
 - [ ] I have added the styles for the new component to the `packages/dialtone-css` package.
 - [ ] I have created a page for the new component on the documentation site in `apps/dialtone-documentation`.
 - [ ] I have added the new component to `common/components_list.js`

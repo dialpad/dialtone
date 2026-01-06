@@ -18,15 +18,7 @@ Check out our complete icon collection in the [icon catalog](/design/icons/index
 
 Here is an example that demonstrates how you can use the icon component in your project:
 
-### Vue 2
-
-```js
-import { DtIconUserPlus } from '@dialpad/dialtone-icons/vue2';
-
-<dt-icon-user-plus size="500" />
-```
-
-### Vue 3
+### With Tree Shaking (Preferred)
 
 ```js
 import { DtIconUserPlus } from '@dialpad/dialtone-icons/vue3';
