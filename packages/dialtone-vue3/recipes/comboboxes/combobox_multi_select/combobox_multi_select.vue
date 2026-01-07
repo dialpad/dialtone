@@ -498,13 +498,13 @@ export default {
     selectedItems: {
       deep: true,
       handler: async function () {
-        this.initSelectedItems();
+        await this.initSelectedItems();
       },
     },
 
     chipMaxWidth: {
       async handler () {
-        this.initSelectedItems();
+        await this.initSelectedItems();
       },
     },
 
@@ -532,7 +532,7 @@ export default {
     },
   },
 
-  mounted () {
+  async mounted () {
     this.setInitialInputHeight();
     // Recalculate chip position and input padding when resizing window
     this.resizeWindowObserver = new ResizeObserver(async () => {
@@ -541,7 +541,7 @@ export default {
     });
     this.resizeWindowObserver.observe(document.body);
 
-    this.initSelectedItems();
+    await this.initSelectedItems();
   },
 
   beforeUnmount () {
@@ -583,24 +583,37 @@ export default {
       this.$refs.comboboxWithPopover?.closeComboboxList();
     },
 
-    getChipButtons () {
-      return this.$refs.chips && this.$refs.chips.map(chip => returnFirstEl(chip.$el).querySelector('button'));
+    getChips () {
+      if (!this.selectedItems.length || !this.$refs.chips) return null;
+
+      // use the order from selectedItems to not rely on DOM order which may be stale
+      const chips = this.selectedItems.map(item => {
+        return this.$refs.chips.find(chip => {
+          const chipLabel = returnFirstEl(chip.$el)?.querySelector('.d-chip__label')?.textContent?.trim();
+          return chipLabel === item;
+        });
+      });
+      return chips.filter(Boolean).map(chip => returnFirstEl(chip.$el));
     },
 
-    getChips () {
-      return this.$refs.chips && this.$refs.chips.map(chip => returnFirstEl(chip.$el));
+    getChipButtons () {
+      const chips = this.getChips();
+      return chips && chips.map(chip => returnFirstEl(chip).querySelector('button'));
     },
 
     getLastChipButton () {
-      return this.$refs.chips && this.getChipButtons()[this.getChipButtons().length - 1];
+      const chipButtons = this.getChipButtons();
+      return chipButtons && chipButtons[chipButtons.length - 1];
     },
 
     getLastChip () {
-      return this.$refs.chips && this.getChips()[this.getChips().length - 1];
+      const chips = this.getChips();
+      return chips && chips[chips.length - 1];
     },
 
     getFirstChip () {
-      return this.$refs.chips && this.getChips()[0];
+      const chips = this.getChips();
+      return chips && chips[0];
     },
 
     getInput () {
