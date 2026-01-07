@@ -1,3 +1,15 @@
+## [9.153.1](https://github.com/dialpad/dialtone/compare/dialtone/v9.153.0...dialtone/v9.153.1) (2026-01-07)
+
+
+### Bug Fixes
+
+* **Combobox Multi Select:** DP-169872 set padding when many chips are updated ([#1006](https://github.com/dialpad/dialtone/issues/1006)) ([05ae323](https://github.com/dialpad/dialtone/commit/05ae3237f2ad3668ad3e3e76975f346cb1d60eb5))
+
+
+### Documentation
+
+* DLT-2880 remove user facing vue 2 docs ([#1010](https://github.com/dialpad/dialtone/issues/1010)) ([a34f38f](https://github.com/dialpad/dialtone/commit/a34f38fc1a30b73de606c60d31dd7db2a13ad8c1))
+
 # [9.153.0](https://github.com/dialpad/dialtone/compare/dialtone/v9.152.1...dialtone/v9.153.0) (2026-01-06)
 
 
