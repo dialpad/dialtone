@@ -1,3 +1,10 @@
+## [9.153.3](https://github.com/dialpad/dialtone/compare/dialtone/v9.153.2...dialtone/v9.153.3) (2026-01-07)
+
+
+### Bug Fixes
+
+* NO-JIRA add https ([bdd7bf9](https://github.com/dialpad/dialtone/commit/bdd7bf99ceb521a151504f7fb605d89106d7001d))
+
 ## [9.153.2](https://github.com/dialpad/dialtone/compare/dialtone/v9.153.1...dialtone/v9.153.2) (2026-01-07)
 
 
