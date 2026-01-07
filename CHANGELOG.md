@@ -1,3 +1,10 @@
+## [9.153.2](https://github.com/dialpad/dialtone/compare/dialtone/v9.153.1...dialtone/v9.153.2) (2026-01-07)
+
+
+### Bug Fixes
+
+* NO-JIRA add config file registry options back ([b43cd82](https://github.com/dialpad/dialtone/commit/b43cd8253c3b880745d2967bf721203dd620b9a9))
+
 ## [9.153.1](https://github.com/dialpad/dialtone/compare/dialtone/v9.153.0...dialtone/v9.153.1) (2026-01-07)
 
 
