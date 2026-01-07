@@ -589,7 +589,7 @@ export default {
       // use the order from selectedItems to not rely on DOM order which may be stale
       const chips = this.selectedItems.map(item => {
         return this.$refs.chips.find(chip => {
-          const chipLabel = chip.$el?.querySelector('.d-chip__label')?.textContent?.trim();
+          const chipLabel = returnFirstEl(chip.$el)?.querySelector('.d-chip__label')?.textContent?.trim();
           return chipLabel === item;
         });
       });
