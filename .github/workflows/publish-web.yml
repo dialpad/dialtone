@@ -124,7 +124,8 @@ jobs:
       - name: Setup Environment
         uses: ./.github/actions/setup-environment
 
-      - name: Setup registry authentication
+      - name: Set npm registry URL
+        if: matrix.registry == 'npm'
         uses: actions/setup-node@v4
         with:
           registry-url: 'https:${{ matrix.registry_url }}'
