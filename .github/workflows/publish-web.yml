@@ -127,8 +127,8 @@ jobs:
       - name: Configure registry for publishing
         if: matrix.registry == 'npm'
         run: |
-          pnpm config set registry '${{ matrix.registry_url }}'
           pnpm config delete @dialpad:registry
+          pnpm config set registry 'https:${{ matrix.registry_url }}'
 
       - name: Set npm registry URL
         if: matrix.registry == 'npm'
