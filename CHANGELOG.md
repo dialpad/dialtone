@@ -1,3 +1,10 @@
+## [9.153.4](https://github.com/dialpad/dialtone/compare/dialtone/v9.153.3...dialtone/v9.153.4) (2026-01-07)
+
+
+### Bug Fixes
+
+* NO-JIRA remove setup-node ([3489a43](https://github.com/dialpad/dialtone/commit/3489a43cd119e89e1b7af3eae2bc91a72d141ca5))
+
 ## [9.153.3](https://github.com/dialpad/dialtone/compare/dialtone/v9.153.2...dialtone/v9.153.3) (2026-01-07)
 
 
