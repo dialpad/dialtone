@@ -72,22 +72,8 @@ jobs:
           fetch-depth: 0
           token: ${{ secrets.DIALTONE_CI_TOKEN }}
 
-      - name: Use pnpm
-        uses: pnpm/action-setup@v3
-
-      - name: Use Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version-file: ".nvmrc"
-          cache: "pnpm"
-          registry-url: "https://npm.pkg.github.com"
-          scope: "dialpad"
-        env:
-          NODE_AUTH_TOKEN: ${{ github.token }}
-
-      - name: Install dependencies
-        shell: bash
-        run: pnpm install --frozen-lockfile
+      - name: Setup Environment
+        uses: ./.github/actions/setup-environment
 
       # Release to GitHub
       - name: Release Dialtone Combinator ${{ env.RELEASE_TAG }}
