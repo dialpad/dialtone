@@ -130,12 +130,6 @@ jobs:
           pnpm config delete @dialpad:registry
           pnpm config set registry 'https:${{ matrix.registry_url }}'
 
-      - name: Set npm registry URL
-        if: matrix.registry == 'npm'
-        uses: actions/setup-node@v4
-        with:
-          registry-url: 'https:${{ matrix.registry_url }}'
-
       - name: Delay job to avoid npm rate limits
         if: matrix.package == 'dialtone-vue3'
         run: sleep 15s
