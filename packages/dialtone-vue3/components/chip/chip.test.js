@@ -109,6 +109,28 @@ describe('DtChip Tests', () => {
       });
     });
 
+    describe('When disabled', () => {
+      beforeEach(() => {
+        mockProps = { disabled: true };
+
+        updateWrapper();
+      });
+
+      it('should apply disabled styles to chip', () => {
+        expect(chip.classes()).toContain('d-chip--disabled');
+      });
+
+      it('should set aria-disabled and tabindex on chip', () => {
+        expect(chip.attributes('aria-disabled')).toBe('true');
+        expect(chip.attributes('tabindex')).toBe('-1');
+      });
+
+      it('should set aria-disabled and tabindex on close button', () => {
+        expect(remove.attributes('aria-disabled')).toBe('true');
+        expect(remove.attributes('tabindex')).toBe('-1');
+      });
+    });
+
     describe('When show avatar', () => {
       it('should render avatar', () => {
         mockSlots = { avatar: EmptyComponentFixture };

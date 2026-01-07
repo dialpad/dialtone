@@ -5,9 +5,11 @@
       :id="id"
       :aria-label="ariaLabel"
       :aria-labelledby="ariaLabel ? undefined : `${id}-content`"
+      :aria-disabled="disabled"
       :class="chipClasses()"
       :type="interactive && 'button'"
       data-qa="dt-chip"
+      :tabindex="disabled ? -1 : null"
       v-on="chipListeners"
     >
       <span
@@ -40,7 +42,9 @@
       :class="chipCloseButtonClasses()"
       data-qa="dt-chip-close"
       :aria-label="closeButtonTitle"
+      :aria-disabled="disabled"
       :title="closeButtonTitle"
+      :tabindex="disabled ? -1 : null"
       @click="$emit('close')"
     >
       <template #icon>
@@ -79,6 +83,15 @@ export default {
   },
 
   props: {
+    /**
+     * Whether the chip is disabled
+     * @values true, false
+     */
+    disabled: {
+      type: Boolean,
+      default: false,
+    },
+
     /**
      * Hides the close button on the chip
      * @values true, false
@@ -219,6 +232,7 @@ export default {
         this.$attrs['grouped-chip'] ? 'd-chip' : 'd-chip__label',
         CHIP_SIZE_MODIFIERS[this.size],
         this.labelClass,
+        this.disabled && 'd-chip--disabled',
       ];
     },
 
@@ -226,6 +240,7 @@ export default {
       return [
         'd-chip__close',
         CHIP_CLOSE_BUTTON_SIZE_MODIFIERS[this.size],
+        this.disabled && 'd-chip__close--disabled',
       ];
     },
 

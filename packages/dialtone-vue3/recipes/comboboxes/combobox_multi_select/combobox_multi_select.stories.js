@@ -19,11 +19,13 @@ export const argsData = {
   hasSuggestionList: true,
   appendTo: 'body',
   showList: null,
+  disabled: false,
   onInput: action('input'),
   onSelect: action('select'),
   onRemove: action('remove'),
   onMaxSelected: action('maxSelected'),
   onComboboxHighlight: action('comboboxHighlight'),
+  onFocus: action('focus'),
 };
 
 export const argTypesData = {
@@ -68,6 +70,11 @@ export const argTypesData = {
   description: {
     control: {
       type: 'text',
+    },
+  },
+  disabled: {
+    control: {
+      type: 'boolean',
     },
   },
   appendTo: {

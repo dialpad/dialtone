@@ -105,6 +105,18 @@ describe('DtRecipeComboboxMultiSelect Tests', () => {
       });
     });
 
+    describe('When disabled prop is used', () => {
+      it('should have input enabled by default', () => {
+        expect(input.attributes('disabled')).toBeUndefined();
+      });
+
+      it('should disable the input when disabled is true', async () => {
+        await wrapper.setProps({ disabled: true });
+        _setChildWrappers();
+        expect(input.attributes('disabled')).toBeDefined();
+      });
+    });
+
     describe('When labelVisible prop is false', () => {
       beforeEach(async () => {
         await wrapper.setProps({ labelVisible: false });

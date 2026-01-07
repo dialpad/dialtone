@@ -58,7 +58,6 @@ For all PRs:
 For all Vue changes:
 
 - [ ] I have added / updated unit tests.
-- [ ] I have made my changes in Vue 2 and Vue 3. Note: you may sync your changes from Vue 2 to Vue 3 (or vice versa) using the `./scripts/dialtone-vue-sync.sh` script. Read docs here: [Dialtone Vue Sync Script](../packages/dialtone-vue3/.github/CONTRIBUTING.md#dialtone-vue-sync-script)
 - [ ] I have validated components with a screen reader.
 - [ ] I have validated components keyboard navigation.
 
@@ -75,7 +74,7 @@ If new component:
 
 - I am exporting any new components or constants:
   - [ ] from the index.js in the component directory.
-  - [ ] from the index.js in the root (either `packages/dialtone-vue2` or `packages/dialtone-vue3`).
+  - [ ] from the index.js in the root (like `packages/dialtone-vue3`).
 - [ ] I have added the styles for the new component to the `packages/dialtone-css` package.
 - [ ] I have created a page for the new component on the documentation site in `apps/dialtone-documentation`.
 - [ ] I have added the new component to `common/components_list.js`

@@ -11,6 +11,7 @@
     content-width="anchor"
     :append-to="appendTo"
     :transition="transition"
+    v-bind="extractNonListeners($attrs)"
     @select="onComboboxSelect"
     @highlight="comboboxHighlight"
   >
@@ -36,6 +37,7 @@
             ]"
             :style="{ maxWidth: chipMaxWidth }"
             :size="CHIP_SIZES[size]"
+            :disabled="disabled"
             v-on="chipListeners"
             @keydown.backspace="onChipRemove(item)"
             @close="onChipRemove(item)"
@@ -53,6 +55,7 @@
               'd-recipe-combobox-multi-select__input--hidden': hideInputText,
             }]"
           :input-wrapper-class="inputWrapperClass"
+          :disabled="disabled"
           :aria-label="label"
           :label="labelVisible ? label : ''"
           :description="description"
@@ -60,7 +63,7 @@
           :show-messages="showInputMessages"
           :messages="inputMessages"
           :size="size"
-          v-on="inputListeners"
+          v-bind="inputListeners"
           @input="onInput"
         />
 
@@ -120,7 +123,7 @@ import DtInput from '@/components/input/input.vue';
 import DtChip from '@/components/chip/chip.vue';
 import DtValidationMessages from '@/components/validation_messages/validation_messages.vue';
 import { validationMessageValidator } from '@/common/validators';
-import { hasSlotContent, returnFirstEl } from '@/common/utils';
+import { extractVueListeners, extractNonListeners, hasSlotContent, returnFirstEl } from '@/common/utils';
 import {
   POPOVER_APPEND_TO_VALUES,
 } from '@/components/popover/popover_constants';
@@ -140,6 +143,8 @@ export default {
     DtChip,
     DtValidationMessages,
   },
+
+  inheritAttrs: false,
 
   props: {
     /**
@@ -360,6 +365,14 @@ export default {
       type: [String, Object, Array],
       default: '',
     },
+
+    /**
+     * When true, disables the underlying input.
+     */
+    disabled: {
+      type: Boolean,
+      default: false,
+    },
   },
 
   emits: [
@@ -450,22 +463,23 @@ export default {
 
     inputListeners () {
       return {
-        input: event => {
+        ...extractVueListeners(this.$attrs),
+        onInput: event => {
           this.$emit('input', event);
           if (this.hasSuggestionList) {
             this.showComboboxList();
           }
         },
 
-        keydown: event => {
+        onKeydown: event => {
           this.onInputKeyDown(event);
         },
 
-        keyup: event => {
+        onKeyup: event => {
           this.$emit('keyup', event);
         },
 
-        click: () => {
+        onClick: () => {
           if (this.hasSuggestionList) {
             this.showComboboxList();
           }
@@ -484,13 +498,13 @@ export default {
     selectedItems: {
       deep: true,
       handler: async function () {
-        this.initSelectedItems();
+        await this.initSelectedItems();
       },
     },
 
     chipMaxWidth: {
       async handler () {
-        this.initSelectedItems();
+        await this.initSelectedItems();
       },
     },
 
@@ -518,7 +532,7 @@ export default {
     },
   },
 
-  mounted () {
+  async mounted () {
     this.setInitialInputHeight();
     // Recalculate chip position and input padding when resizing window
     this.resizeWindowObserver = new ResizeObserver(async () => {
@@ -527,7 +541,7 @@ export default {
     });
     this.resizeWindowObserver.observe(document.body);
 
-    this.initSelectedItems();
+    await this.initSelectedItems();
   },
 
   beforeUnmount () {
@@ -535,6 +549,7 @@ export default {
   },
 
   methods: {
+    extractNonListeners,
     comboboxHighlight (highlightIndex) {
       this.$emit('combobox-highlight', highlightIndex);
     },
@@ -568,24 +583,37 @@ export default {
       this.$refs.comboboxWithPopover?.closeComboboxList();
     },
 
-    getChipButtons () {
-      return this.$refs.chips && this.$refs.chips.map(chip => returnFirstEl(chip.$el).querySelector('button'));
+    getChips () {
+      if (!this.selectedItems.length || !this.$refs.chips) return null;
+
+      // use the order from selectedItems to not rely on DOM order which may be stale
+      const chips = this.selectedItems.map(item => {
+        return this.$refs.chips.find(chip => {
+          const chipLabel = returnFirstEl(chip.$el)?.querySelector('.d-chip__label')?.textContent?.trim();
+          return chipLabel === item;
+        });
+      });
+      return chips.filter(Boolean).map(chip => returnFirstEl(chip.$el));
     },
 
-    getChips () {
-      return this.$refs.chips && this.$refs.chips.map(chip => returnFirstEl(chip.$el));
+    getChipButtons () {
+      const chips = this.getChips();
+      return chips && chips.map(chip => returnFirstEl(chip).querySelector('button'));
     },
 
     getLastChipButton () {
-      return this.$refs.chips && this.getChipButtons()[this.getChipButtons().length - 1];
+      const chipButtons = this.getChipButtons();
+      return chipButtons && chipButtons[chipButtons.length - 1];
     },
 
     getLastChip () {
-      return this.$refs.chips && this.getChips()[this.getChips().length - 1];
+      const chips = this.getChips();
+      return chips && chips[chips.length - 1];
     },
 
     getFirstChip () {
-      return this.$refs.chips && this.getChips()[0];
+      const chips = this.getChips();
+      return chips && chips[0];
     },
 
     getInput () {

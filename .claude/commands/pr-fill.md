@@ -90,7 +90,6 @@ For all PRs:
 For all Vue changes:
 
 - [x] I have added / updated unit tests.
-- [ ] I have made my changes in Vue 2 and Vue 3. Note: you may sync your changes from Vue 2 to Vue 3 (or vice versa) using the `./scripts/dialtone-vue-sync.sh` script. Read docs here: [Dialtone Vue Sync Script](../packages/dialtone-vue3/.github/CONTRIBUTING.md#dialtone-vue-sync-script)
 - [ ] I have validated components with a screen reader.
 - [ ] I have validated components keyboard navigation.
 

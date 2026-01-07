@@ -12,23 +12,15 @@ The below usage instructions are for the combined package.
 
 ### Install it via NPM:
 
-#### Using Vue@3
-
 ```shell
 npm install @dialpad/dialtone @dialpad/i18n
-```
-
-#### Using Vue@2
-
-```shell
-npm install @dialpad/dialtone @dialpad/i18n-vue2
 ```
 
 ---
 
 ### Theming
 
-##### Quick Start
+#### Quick Start
 
 **Install packages:**
 
@@ -163,20 +155,6 @@ setTheme(DpLight, document.querySelector('#my-shadow-root-host'));
 
 #### Dialtone icons
 
-- Vue 2:
-
-```js
-// Named import
-import { DtIconArrowUp } from '@dialpad/dialtone-icons/vue2';
-import { DtIllustrationBlankSpace } from '@dialpad/dialtone-icons/vue2';
-
-// Default import (Preferred if using webpack as it is tree-shakeable by default)
-import DtIconArrowUp from '@dialpad/dialtone-icons/vue2/arrow-up';
-import DtIllustrationBlankSpace from '@dialpad/dialtone-icons/vue2/blank-space';
-```
-
-- Vue 3:
-
 ```js
 // Named import
 import { DtIconArrowUp } from '@dialpad/dialtone-icons/vue3';
@@ -189,18 +167,6 @@ import DtIllustrationBlankSpace from '@dialpad/dialtone-icons/vue3/blank-space';
 
 #### Dialtone Vue components
 
-- Vue 2
-
-```js
-// Named import
-import { DtButton } from "@dialpad/dialtone/vue2"
-
-// Default import (Preferred if using webpack as it is tree-shakeable by default)
-import { DtButton } from "@dialpad/dialtone/vue2/lib/button"
-```
-
-- Vue 3
-
 ```js
 // Named import
 import { DtButton } from "@dialpad/dialtone/vue3"
@@ -209,7 +175,7 @@ import { DtButton } from "@dialpad/dialtone/vue3"
 import { DtButton } from "@dialpad/dialtone/vue3/lib/button"
 ```
 
-#### Dialtine MCP Server
+#### Dialtone MCP Server
 
 Install the MCP server to use it in your local environment and develop efficiently with Dialtone.
 Follow the instructions in the [MCP Server](https://github.com/dialpad/dialtone/tree/staging/packages/dialtone-mcp-server) folder.

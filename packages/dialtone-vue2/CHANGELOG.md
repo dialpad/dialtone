@@ -1,24 +1,30 @@
-# [2.205.0-next.2](https://github.com/dialpad/dialtone/compare/dialtone-vue2/v2.205.0-next.1...dialtone-vue2/v2.205.0-next.2) (2025-12-23)
+## [2.205.3](https://github.com/dialpad/dialtone/compare/dialtone-vue2/v2.205.2...dialtone-vue2/v2.205.3) (2026-01-06)
+
+
+### Bug Fixes
+
+* **I18n:** NO-JIRA initialization tweaks ([#965](https://github.com/dialpad/dialtone/issues/965)) ([50bb929](https://github.com/dialpad/dialtone/commit/50bb929eb147a80ffa9bc381875f665bfe4dec8a))
+
+## [2.205.2](https://github.com/dialpad/dialtone/compare/dialtone-vue2/v2.205.1...dialtone-vue2/v2.205.2) (2025-12-14)
+
+
+### Bug Fixes
+
+* **Tooltip:** DP-162955 call removeTooltip on root component instance ([#998](https://github.com/dialpad/dialtone/issues/998)) ([a96b99a](https://github.com/dialpad/dialtone/commit/a96b99a4096dddcedf6c192f60178fd2dfda06e1))
+
+## [2.205.1](https://github.com/dialpad/dialtone/compare/dialtone-vue2/v2.205.0...dialtone-vue2/v2.205.1) (2025-12-10)
+
+
+### Bug Fixes
+
+* **Tab:** DLT-2685 tabs update ([#970](https://github.com/dialpad/dialtone/issues/970)) ([7e39339](https://github.com/dialpad/dialtone/commit/7e39339ea5608156bdb900cb51004327727d55f3))
+
+# [2.205.0](https://github.com/dialpad/dialtone/compare/dialtone-vue2/v2.204.1...dialtone-vue2/v2.205.0) (2025-12-09)
 
 
 ### Features
 
-* **Text:** new vue component DLT-2864 DLT-2863 DLT-2862 ([#995](https://github.com/dialpad/dialtone/issues/995)) ([196ef8a](https://github.com/dialpad/dialtone/commit/196ef8aadbcf2e13c09073b544552ef05b095e8a))
-
-# [2.205.0-next.1](https://github.com/dialpad/dialtone/compare/dialtone-vue2/v2.204.1...dialtone-vue2/v2.205.0-next.1) (2025-11-26)
-
-
-### Code Refactoring
-
-* **Css:** DLT-1876 css logical properties ([#872](https://github.com/dialpad/dialtone/issues/872)) ([1acd6c9](https://github.com/dialpad/dialtone/commit/1acd6c900053b0c820309faa4a870ff1dceced04))
-
-
-### Features
-
-* **Css Utility:** DLT-2715 add default color for border css utilities ([#874](https://github.com/dialpad/dialtone/issues/874)) ([71310ab](https://github.com/dialpad/dialtone/commit/71310ab483fde976d56c69e0456bce70cb6d372d))
-* **Filter Pill:** DLT-2704 create component ([#473](https://github.com/dialpad/dialtone/issues/473)) ([6267445](https://github.com/dialpad/dialtone/commit/626744501640f18211ca9d41e4a68e099af3b6dd))
-* **Tokens:** DLT-1977 add high contrast design tokens and theme ([#938](https://github.com/dialpad/dialtone/issues/938)) ([a1c0457](https://github.com/dialpad/dialtone/commit/a1c0457e3b6b445e3f54d76b9ce3b847abc31ac5))
-* **Tokens:** DLT-2802 DLT-2563 layered theming system and mode island component ([#945](https://github.com/dialpad/dialtone/issues/945)) ([5c72c6c](https://github.com/dialpad/dialtone/commit/5c72c6cab4f08122dcb03e2e2f0cc8a490fe1c9b))
+* **Combobox Multi Select:** DLT-2850 add disabled prop ([#989](https://github.com/dialpad/dialtone/issues/989)) ([06a975f](https://github.com/dialpad/dialtone/commit/06a975f2ecf2425583a1cc90be3bbea909e90c67))
 
 ## [2.204.1](https://github.com/dialpad/dialtone/compare/dialtone-vue2/v2.204.0...dialtone-vue2/v2.204.1) (2025-11-26)
 

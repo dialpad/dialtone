@@ -494,6 +494,13 @@ export default {
      * @type {String}
      */
     'selected-command',
+
+    /**
+     * Event fired when a mention is clicked
+     * @event mention-click
+     * @type {Object}
+     */
+    'mention-click',
   ],
 
   data () {
@@ -1188,9 +1195,14 @@ export default {
         this.$emit('focus', event);
       });
 
-      // The editor isn’t focused anymore.
+      // The editor isn't focused anymore.
       this.editor.on('blur', ({ event }) => {
         this.$emit('blur', event);
+      });
+
+      // Mention is clicked
+      this.editor.on('mention-click', (mentionData) => {
+        this.$emit('mention-click', mentionData);
       });
     },
 

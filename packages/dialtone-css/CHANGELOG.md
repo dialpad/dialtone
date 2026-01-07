@@ -1,17 +1,37 @@
-# [8.71.0-next.3](https://github.com/dialpad/dialtone/compare/dialtone-css/v8.71.0-next.2...dialtone-css/v8.71.0-next.3) (2025-12-23)
-
-
-### Features
-
-* **Text:** new vue component DLT-2864 DLT-2863 DLT-2862 ([#995](https://github.com/dialpad/dialtone/issues/995)) ([196ef8a](https://github.com/dialpad/dialtone/commit/196ef8aadbcf2e13c09073b544552ef05b095e8a))
-* **Typography, Tokens:** DLT-2856 DLT-2857 next typography system ([#994](https://github.com/dialpad/dialtone/issues/994)) ([d744e97](https://github.com/dialpad/dialtone/commit/d744e97e86796a4de2153e43fa521384da8e8848))
-
-# [8.71.0-next.2](https://github.com/dialpad/dialtone/compare/dialtone-css/v8.71.0-next.1...dialtone-css/v8.71.0-next.2) (2025-12-03)
+## [8.71.3](https://github.com/dialpad/dialtone/compare/dialtone-css/v8.71.2...dialtone-css/v8.71.3) (2025-12-18)
 
 
 ### Bug Fixes
 
-* **Split Button:** NO-JIRA fix split button inline size for importance="clear" variants ([#985](https://github.com/dialpad/dialtone/issues/985)) ([8de1668](https://github.com/dialpad/dialtone/commit/8de1668ce242f206fc978f0401f1c8ed3c82d9cf))
+* **Modal:** DP-169147 nested modal style ([#1002](https://github.com/dialpad/dialtone/issues/1002)) ([4210b21](https://github.com/dialpad/dialtone/commit/4210b21584d01e72aeca00b76c2bcab3fe557cda))
+
+## [8.71.2](https://github.com/dialpad/dialtone/compare/dialtone-css/v8.71.1...dialtone-css/v8.71.2) (2025-12-16)
+
+
+### Bug Fixes
+
+* **Card:** DLT-2868 add border ([#999](https://github.com/dialpad/dialtone/issues/999)) ([e91a342](https://github.com/dialpad/dialtone/commit/e91a3429534fd7164fa891434a8147990bcbf6a9))
+
+## [8.71.1](https://github.com/dialpad/dialtone/compare/dialtone-css/v8.71.0...dialtone-css/v8.71.1) (2025-12-10)
+
+
+### Bug Fixes
+
+* **Banner:** NO-JIRA remove max-width ([#993](https://github.com/dialpad/dialtone/issues/993)) ([39321ee](https://github.com/dialpad/dialtone/commit/39321ee76b8f9d9d4f77eebe9e4669780cc9ce59))
+
+# [8.71.0](https://github.com/dialpad/dialtone/compare/dialtone-css/v8.70.3...dialtone-css/v8.71.0) (2025-12-09)
+
+
+### Features
+
+* **Combobox Multi Select:** DLT-2850 add disabled prop ([#989](https://github.com/dialpad/dialtone/issues/989)) ([06a975f](https://github.com/dialpad/dialtone/commit/06a975f2ecf2425583a1cc90be3bbea909e90c67))
+
+## [8.70.3](https://github.com/dialpad/dialtone/compare/dialtone-css/v8.70.2...dialtone-css/v8.70.3) (2025-12-06)
+
+
+### Bug Fixes
+
+* **Modal, Popover:** NO-JIRA remove bg clip ([#992](https://github.com/dialpad/dialtone/issues/992)) ([28eea59](https://github.com/dialpad/dialtone/commit/28eea597a7a1d63540fa435848819c34cfd5ea0d))
 
 ## [8.70.2](https://github.com/dialpad/dialtone/compare/dialtone-css/v8.70.1...dialtone-css/v8.70.2) (2025-12-02)
 
@@ -19,20 +39,6 @@
 ### Bug Fixes
 
 * **Split Button:** NO-JIRA fix split button inline size for importance="clear" variants ([#985](https://github.com/dialpad/dialtone/issues/985)) ([8de1668](https://github.com/dialpad/dialtone/commit/8de1668ce242f206fc978f0401f1c8ed3c82d9cf))
-* **Tokens:** wrap css math expressions with calc() in layered build ([#966](https://github.com/dialpad/dialtone/issues/966)) ([1635f61](https://github.com/dialpad/dialtone/commit/1635f61280c9379355c9a2ea295cbf23a78c888f))
-
-
-### Code Refactoring
-
-* **Css:** DLT-1876 css logical properties ([#872](https://github.com/dialpad/dialtone/issues/872)) ([1acd6c9](https://github.com/dialpad/dialtone/commit/1acd6c900053b0c820309faa4a870ff1dceced04))
-
-
-### Features
-
-* **Css Utility:** DLT-2715 add default color for border css utilities ([#874](https://github.com/dialpad/dialtone/issues/874)) ([71310ab](https://github.com/dialpad/dialtone/commit/71310ab483fde976d56c69e0456bce70cb6d372d))
-* **Filter Pill:** DLT-2704 create component ([#473](https://github.com/dialpad/dialtone/issues/473)) ([6267445](https://github.com/dialpad/dialtone/commit/626744501640f18211ca9d41e4a68e099af3b6dd))
-* **Tokens:** DLT-1977 add high contrast design tokens and theme ([#938](https://github.com/dialpad/dialtone/issues/938)) ([a1c0457](https://github.com/dialpad/dialtone/commit/a1c0457e3b6b445e3f54d76b9ce3b847abc31ac5))
-* **Tokens:** DLT-2802 DLT-2563 layered theming system and mode island component ([#945](https://github.com/dialpad/dialtone/issues/945)) ([5c72c6c](https://github.com/dialpad/dialtone/commit/5c72c6cab4f08122dcb03e2e2f0cc8a490fe1c9b))
 
 ## [8.70.1](https://github.com/dialpad/dialtone/compare/dialtone-css/v8.70.0...dialtone-css/v8.70.1) (2025-11-26)
 

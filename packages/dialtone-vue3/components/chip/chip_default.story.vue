@@ -2,6 +2,7 @@
 <template>
   <dt-chip
     :id="$attrs.id"
+    :disabled="$attrs.disabled"
     :hide-close="$attrs.hideClose"
     :interactive="$attrs.interactive"
     :size="$attrs.size"

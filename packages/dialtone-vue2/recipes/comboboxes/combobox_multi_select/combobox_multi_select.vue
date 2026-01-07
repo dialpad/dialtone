@@ -36,6 +36,7 @@
             ]"
             :style="{ maxWidth: chipMaxWidth }"
             :size="CHIP_SIZES[size]"
+            :disabled="disabled"
             v-on="chipListeners"
             @keydown.backspace="onChipRemove(item)"
             @close="onChipRemove(item)"
@@ -53,6 +54,7 @@
               'd-recipe-combobox-multi-select__input--hidden': hideInputText,
             }]"
           :input-wrapper-class="inputWrapperClass"
+          :disabled="disabled"
           :aria-label="label"
           :label="labelVisible ? label : ''"
           :description="description"
@@ -359,6 +361,14 @@ export default {
     inputWrapperClass: {
       type: [String, Object, Array],
       default: '',
+    },
+
+    /**
+     * When true, disables the underlying input.
+     */
+    disabled: {
+      type: Boolean,
+      default: false,
     },
   },
 

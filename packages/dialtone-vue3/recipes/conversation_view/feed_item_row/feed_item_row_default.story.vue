@@ -131,7 +131,7 @@
   </dt-recipe-feed-item-row>
 </template>
 
-<script>
+<script setup>
 import DtRecipeFeedItemRow from './feed_item_row.vue';
 import { DtRecipeEmojiRow } from '../emoji_row';
 import { DtEmojiTextWrapper } from '@/components/emoji_text_wrapper';
@@ -139,28 +139,11 @@ import { DtAvatar } from '@/components/avatar';
 import { DtIcon } from '@/components/icon';
 import { DtButton } from '@/components/button';
 import { DtStack } from '@/components/stack';
-import { sharedEmojiReactionsData } from '@/recipes/conversation_view/emoji_row/emoji_row.stories.js';
+import { useMockReactions } from '@/recipes/conversation_view/emoji_row/composables/useMockReactions.js';
 
-export default {
-  name: 'DtRecipeFeedItemRowDefault',
-  components: {
-    DtAvatar,
-    DtRecipeFeedItemRow,
-    DtRecipeEmojiRow,
-    DtEmojiTextWrapper,
-    DtIcon,
-    DtButton,
-    DtStack,
-  },
+const hoverButtons = ['bell', 'living-thing', 'map-pin'];
 
-  data () {
-    return {
-      mockReactions: sharedEmojiReactionsData,
+const persons = ['Jim Halpert', 'Michael Scott', 'Pam'];
 
-      hoverButtons: ['bell', 'living-thing', 'map-pin'],
-
-      persons: ['Jim Halpert', 'Michael Scott', 'Pam'],
-    };
-  },
-};
+const { mockReactions } = useMockReactions();
 </script>

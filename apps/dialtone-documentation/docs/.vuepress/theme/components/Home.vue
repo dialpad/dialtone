@@ -99,10 +99,7 @@
             Browse CSS Components
           </router-link>
           <a class="d-link" href="https://dialtone.dialpad.com/vue/index.html?path=/docs/welcome--docs" target="_blank" rel="noopener noreferrer">
-            Browse Vue 2 Components
-          </a>
-          <a class="d-link" href="https://dialtone.dialpad.com/vue3/index.html?path=/docs/welcome--docs" target="_blank" rel="noopener noreferrer">
-            Browse Vue 3 Components
+            Browse Vue Components
           </a>
         </dt-stack>
       </dt-stack>

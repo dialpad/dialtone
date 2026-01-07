@@ -61,10 +61,6 @@ vueCode='
 Import the directive and styling from dialtone
 
 ```javascript
-// For Vue 2
-import { DtScrollbarDirective } from "@dialpad/dialtone/vue2";
-
-// For Vue 3+
 import { DtScrollbarDirective } from "@dialpad/dialtone/vue3";
 
 // Import styling
@@ -74,10 +70,6 @@ import 'overlayscrollbars/overlayscrollbars.css';
 Install the directive into vue instance
 
 ```javascript
-// For Vue 2
-Vue.use(DtScrollbarDirective);
-
-// For Vue 3+
 app.use(DtScrollbarDirective);
 ```
 

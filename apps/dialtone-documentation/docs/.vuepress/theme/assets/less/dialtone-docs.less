@@ -67,7 +67,7 @@ html body {
   --docsearch-footer-height: var(--dt-size-650);
   --docsearch-footer-background: var(--dt-color-surface-primary);
   /* stylelint-disable-next-line meowtec/no-px */
-  --docsearch-footer-shadow: 0 -1px 0 0 var(--dt-color-border-subtle),0 -1px 3px 0 rgba(0,0,0,.2);
+  --docsearch-footer-shadow: 0 -1px 0 0 var(--dt-color-border-subtle),0 -1px 3px 0 rgb(0,0,0,.2);
 
   .DocSearch-Modal {
     margin-block-start: 15vh;
@@ -682,6 +682,7 @@ a.header-anchor {
 
   @media screen and (min-width: 640px) {
     grid-template-columns: [full-start] repeat(2, [col-start] var(--col-width, minmax(0, 1fr)) [col-end]) [full-end] !important;
+    gap: var(--dt-space-600);
   }
 
   @media screen and (min-width: 768px) {

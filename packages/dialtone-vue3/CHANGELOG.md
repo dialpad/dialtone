@@ -1,24 +1,71 @@
-# [3.197.0-next.2](https://github.com/dialpad/dialtone/compare/dialtone-vue3/v3.197.0-next.1...dialtone-vue3/v3.197.0-next.2) (2025-12-23)
+## [3.198.1](https://github.com/dialpad/dialtone/compare/dialtone-vue3/v3.198.0...dialtone-vue3/v3.198.1) (2026-01-07)
+
+
+### Bug Fixes
+
+* **Combobox Multi Select:** DP-169872 set padding when many chips are updated ([#1006](https://github.com/dialpad/dialtone/issues/1006)) ([05ae323](https://github.com/dialpad/dialtone/commit/05ae3237f2ad3668ad3e3e76975f346cb1d60eb5))
+
+
+### Documentation
+
+* DLT-2880 remove user facing vue 2 docs ([#1010](https://github.com/dialpad/dialtone/issues/1010)) ([a34f38f](https://github.com/dialpad/dialtone/commit/a34f38fc1a30b73de606c60d31dd7db2a13ad8c1))
+
+# [3.198.0](https://github.com/dialpad/dialtone/compare/dialtone-vue3/v3.197.3...dialtone-vue3/v3.198.0) (2026-01-06)
+
+
+### Bug Fixes
+
+* DLT-2878 stories using emoji row ([#1007](https://github.com/dialpad/dialtone/issues/1007)) ([9f2b25f](https://github.com/dialpad/dialtone/commit/9f2b25f6296e6be070803b8493240e268cc62648))
+* **I18n:** NO-JIRA initialization tweaks ([#965](https://github.com/dialpad/dialtone/issues/965)) ([50bb929](https://github.com/dialpad/dialtone/commit/50bb929eb147a80ffa9bc381875f665bfe4dec8a))
 
 
 ### Features
 
-* **Text:** new vue component DLT-2864 DLT-2863 DLT-2862 ([#995](https://github.com/dialpad/dialtone/issues/995)) ([196ef8a](https://github.com/dialpad/dialtone/commit/196ef8aadbcf2e13c09073b544552ef05b095e8a))
+* **Rich Text Editor:** NO-JIRA add mention click handling ([#1009](https://github.com/dialpad/dialtone/issues/1009)) ([6e2334f](https://github.com/dialpad/dialtone/commit/6e2334f440e1be542d60ec7018ad6b346993cc87))
 
-# [3.197.0-next.1](https://github.com/dialpad/dialtone/compare/dialtone-vue3/v3.196.1...dialtone-vue3/v3.197.0-next.1) (2025-11-26)
+## [3.197.3](https://github.com/dialpad/dialtone/compare/dialtone-vue3/v3.197.2...dialtone-vue3/v3.197.3) (2025-12-30)
 
 
-### Code Refactoring
+### Bug Fixes
 
-* **Css:** DLT-1876 css logical properties ([#872](https://github.com/dialpad/dialtone/issues/872)) ([1acd6c9](https://github.com/dialpad/dialtone/commit/1acd6c900053b0c820309faa4a870ff1dceced04))
+* **Radio:** NO-JIRA remove click from emits ([#1005](https://github.com/dialpad/dialtone/issues/1005)) ([bb35ed6](https://github.com/dialpad/dialtone/commit/bb35ed6de59e4087acb6251737d845c13206b891))
+
+## [3.197.2](https://github.com/dialpad/dialtone/compare/dialtone-vue3/v3.197.1...dialtone-vue3/v3.197.2) (2025-12-14)
+
+
+### Bug Fixes
+
+* **Tooltip:** DP-162955 call removeTooltip on root component instance ([#998](https://github.com/dialpad/dialtone/issues/998)) ([a96b99a](https://github.com/dialpad/dialtone/commit/a96b99a4096dddcedf6c192f60178fd2dfda06e1))
+
+## [3.197.1](https://github.com/dialpad/dialtone/compare/dialtone-vue3/v3.197.0...dialtone-vue3/v3.197.1) (2025-12-10)
+
+
+### Bug Fixes
+
+* **Tab:** DLT-2685 tabs update ([#970](https://github.com/dialpad/dialtone/issues/970)) ([7e39339](https://github.com/dialpad/dialtone/commit/7e39339ea5608156bdb900cb51004327727d55f3))
+
+# [3.197.0](https://github.com/dialpad/dialtone/compare/dialtone-vue3/v3.196.3...dialtone-vue3/v3.197.0) (2025-12-09)
 
 
 ### Features
 
-* **Css Utility:** DLT-2715 add default color for border css utilities ([#874](https://github.com/dialpad/dialtone/issues/874)) ([71310ab](https://github.com/dialpad/dialtone/commit/71310ab483fde976d56c69e0456bce70cb6d372d))
-* **Filter Pill:** DLT-2704 create component ([#473](https://github.com/dialpad/dialtone/issues/473)) ([6267445](https://github.com/dialpad/dialtone/commit/626744501640f18211ca9d41e4a68e099af3b6dd))
-* **Tokens:** DLT-1977 add high contrast design tokens and theme ([#938](https://github.com/dialpad/dialtone/issues/938)) ([a1c0457](https://github.com/dialpad/dialtone/commit/a1c0457e3b6b445e3f54d76b9ce3b847abc31ac5))
-* **Tokens:** DLT-2802 DLT-2563 layered theming system and mode island component ([#945](https://github.com/dialpad/dialtone/issues/945)) ([5c72c6c](https://github.com/dialpad/dialtone/commit/5c72c6cab4f08122dcb03e2e2f0cc8a490fe1c9b))
+* **Combobox Multi Select:** DLT-2850 add disabled prop ([#989](https://github.com/dialpad/dialtone/issues/989)) ([06a975f](https://github.com/dialpad/dialtone/commit/06a975f2ecf2425583a1cc90be3bbea909e90c67))
+
+## [3.196.3](https://github.com/dialpad/dialtone/compare/dialtone-vue3/v3.196.2...dialtone-vue3/v3.196.3) (2025-12-06)
+
+
+### Bug Fixes
+
+* NO-JIRA export extractNonListeners ([0ae99ef](https://github.com/dialpad/dialtone/commit/0ae99ef09bfee9cb33a010f1774d17d964905807))
+* **Toggle:** NO-JIRA emit modelValue before change ([#986](https://github.com/dialpad/dialtone/issues/986)) ([08e3e6a](https://github.com/dialpad/dialtone/commit/08e3e6a49e98a084f552d3e2989bb1d9c65d6413))
+
+## [3.196.2](https://github.com/dialpad/dialtone/compare/dialtone-vue3/v3.196.1...dialtone-vue3/v3.196.2) (2025-12-04)
+
+
+### Bug Fixes
+
+* **Combobox Multi Select:** DP-162879 fix event listeners ([#990](https://github.com/dialpad/dialtone/issues/990)) ([ac3ee1e](https://github.com/dialpad/dialtone/commit/ac3ee1ef7bc2d755171ec34e410ba8408f04811d))
+* **Combobox Multi Select:** DP-162879 follow up fix for inheritAttrs ([#991](https://github.com/dialpad/dialtone/issues/991)) ([42fa4bd](https://github.com/dialpad/dialtone/commit/42fa4bdbfd2f2d83e3d19ea226592971cdddf537))
 
 ## [3.196.1](https://github.com/dialpad/dialtone/compare/dialtone-vue3/v3.196.0...dialtone-vue3/v3.196.1) (2025-11-26)
 

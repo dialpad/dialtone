@@ -127,14 +127,6 @@ export default {
      * @property {FocusEvent}
      */
     'focusout',
-
-    /**
-     * Native click event
-     *
-     * @event click
-     * @type {PointerEvent | KeyboardEvent}
-     */
-    'click',
   ],
 
   data () {

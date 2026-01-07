@@ -2,14 +2,10 @@
 
 Dialtone Vue is a library of Vue components for [Dialtone][dt]. The goal is to simplify and standardize the use of common UI patterns and behaviour across all Dialpad projects.
 
-Dialtone Vue is available in Vue 2 as well as Vue 3:
-
-- **[Component Documentation Site (Vue 2) ↗️][dialtone-vue]**
-- **[Component Documentation Site (Vue 3) ↗️][dialtone-vue3]**
+- **[Component Documentation Site ↗️][dialtone-vue]**
 
 [dt]: https://dialtone.dialpad.com
 [dialtone-vue]: https://dialtone.dialpad.com/vue
-[dialtone-vue3]: https://dialtone.dialpad.com/vue3
 
 ## Installation
 
