@@ -127,8 +127,9 @@ jobs:
       - name: Configure registry for publishing
         if: matrix.registry == 'npm'
         run: |
-          pnpm config delete @dialpad:registry
-          pnpm config set registry 'https:${{ matrix.registry_url }}'
+          # Remove existing .npmrc to clear GitHub Packages auth config
+          rm -f ~/.npmrc .npmrc
+          # Configure npm registry
 
       - name: Delay job to avoid npm rate limits
         if: matrix.package == 'dialtone-vue3'
