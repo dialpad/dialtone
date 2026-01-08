@@ -131,6 +131,12 @@ jobs:
           node-version-file: ".nvmrc"
           registry-url: "https://registry.npmjs.org"
 
+      - name: Remove @dialpad scope configuration for npm
+        if: matrix.registry == 'npm'
+        run: |
+          # Remove @dialpad scope configuration to use default npm registry instead of GitHub Packages
+          npm config delete @dialpad:registry || true
+
       - name: Delay job to avoid npm rate limits
         if: matrix.package == 'dialtone-vue3'
         run: sleep 15s
