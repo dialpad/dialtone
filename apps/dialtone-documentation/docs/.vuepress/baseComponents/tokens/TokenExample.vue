@@ -233,7 +233,7 @@ const isPercentage = computed(() => props.value.endsWith('%'));
   justify-content: center;
   font: var(--dt-typography-body-sm);
   color: var(--dt-color-foreground-muted);
-  padding: var(--dt-space-400) var(--dt-space-200);
+  padding: var(--dt-size-400) var(--dt-size-200);
   border-start-end-radius: var(--dt-size-radius-300);
   border-end-end-radius: var(--dt-size-radius-300);
   &.spaceBefore {

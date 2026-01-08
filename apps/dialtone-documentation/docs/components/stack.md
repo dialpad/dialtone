@@ -362,7 +362,7 @@ vueCode='
               0
           </th>
           <td>
-            <strong>var(--dt-space-0)</strong>
+            <strong>var(--dt-size-0)</strong>
           </td>
           <td class="d-code--sm d-docsite-code d-ta-right">
             0.0rem
@@ -376,7 +376,7 @@ vueCode='
              50
           </th>
           <td>
-            <strong>var(--dt-space-50)</strong>
+            <strong>var(--dt-size-50)</strong>
           </td>
           <td class="d-code--sm d-docsite-code d-ta-right">
             0.05rem
@@ -390,7 +390,7 @@ vueCode='
             100
           </th>
           <td>
-            <strong>var(--dt-space-100)</strong>
+            <strong>var(--dt-size-100)</strong>
           </td>
           <td class="d-code--sm d-docsite-code d-ta-right">
             0.1rem
@@ -404,7 +404,7 @@ vueCode='
             200
           </th>
           <td>
-            <strong>var(--dt-space-200)</strong>
+            <strong>var(--dt-size-200)</strong>
           </td>
           <td class="d-code--sm d-docsite-code d-ta-right">
             0.2rem
@@ -418,7 +418,7 @@ vueCode='
             300
           </th>
           <td>
-            <strong>var(--dt-space-300)</strong>
+            <strong>var(--dt-size-300)</strong>
           </td>
           <td class="d-code--sm d-docsite-code d-ta-right">
             0.4rem
@@ -432,7 +432,7 @@ vueCode='
             350
           </th>
           <td>
-            <strong>var(--dt-space-350)</strong>
+            <strong>var(--dt-size-350)</strong>
           </td>
           <td class="d-code--sm d-docsite-code d-ta-right">
             0.6rem
@@ -446,7 +446,7 @@ vueCode='
             400
           </th>
           <td>
-            <strong>var(--dt-space-400)</strong>
+            <strong>var(--dt-size-400)</strong>
           </td>
           <td class="d-code--sm d-docsite-code d-ta-right">
             0.8rem
@@ -460,7 +460,7 @@ vueCode='
             450
           </th>
           <td>
-            <strong>var(--dt-space-450)</strong>
+            <strong>var(--dt-size-450)</strong>
           </td>
           <td class="d-code--sm d-docsite-code d-ta-right">
             1.2rem
@@ -474,7 +474,7 @@ vueCode='
             500
           </th>
           <td>
-            <strong>var(--dt-space-500)</strong>
+            <strong>var(--dt-size-500)</strong>
           </td>
           <td class="d-code--sm d-docsite-code d-ta-right">
             1.6rem
@@ -488,7 +488,7 @@ vueCode='
             525
           </th>
           <td>
-            <strong>var(--dt-space-525)</strong>
+            <strong>var(--dt-size-525)</strong>
           </td>
           <td class="d-code--sm d-docsite-code d-ta-right">
             2.0rem
@@ -502,7 +502,7 @@ vueCode='
             550
           </th>
           <td>
-            <strong>var(--dt-space-550)</strong>
+            <strong>var(--dt-size-550)</strong>
           </td>
           <td class="d-code--sm d-docsite-code d-ta-right">
             2.4rem
@@ -516,7 +516,7 @@ vueCode='
             600
           </th>
           <td>
-            <strong>var(--dt-space-600)</strong>
+            <strong>var(--dt-size-600)</strong>
           </td>
           <td class="d-code--sm d-docsite-code d-ta-right">
             3.2rem
@@ -530,7 +530,7 @@ vueCode='
             625
           </th>
           <td>
-            <strong>var(--dt-space-625)</strong>
+            <strong>var(--dt-size-625)</strong>
           </td>
           <td class="d-code--sm d-docsite-code d-ta-right">
             4.2rem
@@ -544,7 +544,7 @@ vueCode='
             650
           </th>
           <td>
-            <strong>var(--dt-space-650)</strong>
+            <strong>var(--dt-size-650)</strong>
           </td>
           <td class="d-code--sm d-docsite-code d-ta-right">
             4.8rem
@@ -558,7 +558,7 @@ vueCode='
             700
           </th>
           <td>
-            <strong>var(--dt-space-700)</strong>
+            <strong>var(--dt-size-700)</strong>
           </td>
           <td class="d-code--sm d-docsite-code d-ta-right">
             6.4rem
@@ -1662,7 +1662,7 @@ vueCode='
 <style scoped lang="less">
   .axis-outline {
     --axis-size: var(--dt-size-200);
-    --axis-offset: var(--dt-space-200-negative);
+    --axis-offset: var(--dt-size-200-negative);
     --axis-color: var(--dt-color-border-critical);
     --axis-opacity: var(--dt-opacity-800);
     --axis-pattern-vertical: repeating-linear-gradient(
@@ -1776,7 +1776,7 @@ vueCode='
 
     // Special case for baseline
     &--baseline::before {
-      bottom: calc(var(--dt-space-500) + var(--dt-space-400));
+      bottom: calc(var(--dt-size-500) + var(--dt-size-400));
       height: var(--axis-size);
       width: 100%;
       background-image: var(--axis-pattern-horizontal);

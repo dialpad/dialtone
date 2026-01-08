@@ -31,7 +31,7 @@
   justify-content: center;
   box-sizing: border-box;
   max-inline-size: var(--dt-size-100-percent);
-  padding: var(--dt-space-300) var(--dt-space-400);
+  padding: var(--dt-size-300) var(--dt-size-400);
   color: var(--chip-color-text);
   font-size: var(--dt-font-size-200);
   font-family: inherit;
@@ -79,7 +79,7 @@
   .d-avatar {
     --avatar-size-shape: var(--dt-size-550);
 
-    margin: var(--dt-space-200-negative) var(--dt-space-350) var(--dt-space-200-negative) var(--dt-space-350-negative);
+    margin: var(--dt-size-200-negative) var(--dt-size-350) var(--dt-size-200-negative) var(--dt-size-350-negative);
   }
 }
 
@@ -88,8 +88,8 @@
   .d-btn--circle();
 
   position: absolute;
-  inset-inline-end: var(--dt-space-200);
-  padding: calc(var(--dt-space-200) + var(--dt-space-100));
+  inset-inline-end: var(--dt-size-200);
+  padding: calc(var(--dt-size-200) + var(--dt-size-100));
   border-width: 0;
 
   &::before {
@@ -111,7 +111,7 @@
 }
 
 .d-chip__icon {
-  padding-inline-end: var(--dt-space-350);
+  padding-inline-end: var(--dt-size-350);
   line-height: 1;
 }
 
@@ -137,7 +137,7 @@
 //  $$  EXTRA SMALL
 //  ----------------------------------------------------------------------------
 .d-chip__label--xs {
-  padding: var(--dt-space-200) var(--dt-space-350);
+  padding: var(--dt-size-200) var(--dt-size-350);
   font-size: var(--dt-font-size-100);
 
   // reserves space within the chip for the close button, since the close button is
@@ -152,12 +152,12 @@
   .d-avatar {
     --avatar-size-shape: var(--dt-size-500);
 
-    margin-inline: var(--dt-space-300-negative) var(--dt-space-350);
+    margin-inline: var(--dt-size-300-negative) var(--dt-size-350);
   }
 }
 
 .d-chip__close--xs {
-  padding: var(--dt-space-100);
+  padding: var(--dt-size-100);
 
   // Clickable area for the close button.
   &::before {
@@ -169,7 +169,7 @@
 //  $$ SMALL
 //  ----------------------------------------------------------------------------
 .d-chip__label--sm {
-  padding: var(--dt-space-200) var(--dt-space-400);
+  padding: var(--dt-size-200) var(--dt-size-400);
   font-size: var(--dt-font-size-200);
 
   // reserves space within the chip for the close button, since the close button is
@@ -184,12 +184,12 @@
   .d-avatar {
     --avatar-size-shape: calc(var(--dt-size-500) + var(--dt-size-300)); // 20
 
-    margin-inline-end: var(--dt-space-300);
+    margin-inline-end: var(--dt-size-300);
   }
 }
 
 .d-chip__close--sm {
-  padding: var(--dt-space-200);
+  padding: var(--dt-size-200);
 
   &::before {
     inline-size: var(--dt-size-550);

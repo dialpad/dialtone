@@ -24,8 +24,8 @@
   --avatar-size-shape: var(--dt-size-600);
   --avatar-size-image: var(--dt-size-100-percent);
   --avatar-size-text: var(--dt-font-size-200);
-  --avatar-presence-position-right: var(--dt-space-200-negative);
-  --avatar-presence-position-bottom: var(--dt-space-200-negative);
+  --avatar-presence-position-right: var(--dt-size-200-negative);
+  --avatar-presence-position-bottom: var(--dt-size-200-negative);
   --avatar-count-color-shadow: var(--dt-shell-color-surface-default);
   --avatar-presence-mask-size: calc(var(--dt-size-450) + var(--dt-size-50));
 
@@ -105,15 +105,15 @@
 
   &__count {
     position: absolute;
-    inset-inline-end: var(--dt-space-0);
-    inset-block-end: var(--dt-space-0);
+    inset-inline-end: var(--dt-size-0);
+    inset-block-end: var(--dt-size-0);
     z-index: var(--zi-base);
     display: inline-flex;
     align-items: center;
     justify-content: center;
     box-sizing: border-box;
     min-inline-size: calc(var(--dt-size-300) * 3.5);
-    padding: var(--dt-space-200) calc(var(--dt-space-200) + var(--dt-space-100));
+    padding: var(--dt-size-200) calc(var(--dt-size-200) + var(--dt-size-100));
     color: var(--dt-color-foreground-primary-inverted);
     font-weight: var(--dt-font-weight-bold);
     font-size: calc(var(--dt-font-size-100) - var(--dt-size-200));
@@ -189,57 +189,57 @@
 
   &--xs {
     --avatar-size-shape: calc(var(--dt-size-500) + var(--dt-size-200));
-    --avatar-presence-position-right: var(--dt-space-300-negative);
-    --avatar-presence-position-bottom: var(--dt-space-300-negative);
-    --avatar-presence-mask-offset-x: var(--dt-space-200);
-    --avatar-presence-mask-offset-y: var(--dt-space-200);
+    --avatar-presence-position-right: var(--dt-size-300-negative);
+    --avatar-presence-position-bottom: var(--dt-size-300-negative);
+    --avatar-presence-mask-offset-x: var(--dt-size-200);
+    --avatar-presence-mask-offset-y: var(--dt-size-200);
   }
 
   &--sm {
     --avatar-size-shape: var(--dt-size-550);
     --avatar-size-text: var(--dt-font-size-100);
-    --avatar-presence-position-right: var(--dt-space-200-negative);
-    --avatar-presence-position-bottom: var(--dt-space-200-negative);
-    --avatar-presence-mask-offset-x: var(--dt-space-300);
-    --avatar-presence-mask-offset-y: var(--dt-space-300);
+    --avatar-presence-position-right: var(--dt-size-200-negative);
+    --avatar-presence-position-bottom: var(--dt-size-200-negative);
+    --avatar-presence-mask-offset-x: var(--dt-size-300);
+    --avatar-presence-mask-offset-y: var(--dt-size-300);
   }
 
   &--md {
     --avatar-size-shape: var(--dt-size-600);
     --avatar-size-text: var(--dt-font-size-200);
-    --avatar-presence-position-right: var(--dt-space-100-negative);
-    --avatar-presence-position-bottom: var(--dt-space-100-negative);
+    --avatar-presence-position-right: var(--dt-size-100-negative);
+    --avatar-presence-position-bottom: var(--dt-size-100-negative);
     --avatar-presence-mask-offset-x: calc(
-      var(--dt-space-350) - var(--dt-space-100)
+      var(--dt-size-350) - var(--dt-size-100)
     );
     --avatar-presence-mask-offset-y: calc(
-      var(--dt-space-350) - var(--dt-space-100)
+      var(--dt-size-350) - var(--dt-size-100)
     );
   }
 
   &--lg {
     --avatar-size-shape: var(--dt-size-650);
     --avatar-size-text: var(--dt-font-size-300);
-    --avatar-presence-position-right: var(--dt-space-100);
-    --avatar-presence-position-bottom: var(--dt-space-100);
+    --avatar-presence-position-right: var(--dt-size-100);
+    --avatar-presence-position-bottom: var(--dt-size-100);
     --avatar-presence-mask-offset-x: calc(
-      var(--dt-space-400) - var(--dt-space-100)
+      var(--dt-size-400) - var(--dt-size-100)
     );
     --avatar-presence-mask-offset-y: calc(
-      var(--dt-space-400) - var(--dt-space-100)
+      var(--dt-size-400) - var(--dt-size-100)
     );
   }
 
   &--xl {
     --avatar-size-shape: var(--dt-size-700);
     --avatar-size-text: var(--dt-font-size-400);
-    --avatar-presence-position-right: var(--dt-space-300);
-    --avatar-presence-position-bottom: var(--dt-space-300);
+    --avatar-presence-position-right: var(--dt-size-300);
+    --avatar-presence-position-bottom: var(--dt-size-300);
     --avatar-presence-mask-offset-x: calc(
-      var(--dt-space-450) - var(--dt-space-200)
+      var(--dt-size-450) - var(--dt-size-200)
     );
     --avatar-presence-mask-offset-y: calc(
-      var(--dt-space-450) - var(--dt-space-200)
+      var(--dt-size-450) - var(--dt-size-200)
     );
   }
 
@@ -270,7 +270,7 @@
         border: var(--dt-size-border-100) solid var(--avatar-color-border);
         border-radius: var(--dt-size-radius-circle);
         content: "";
-        inset: calc(var(--dt-space-100) * -1);
+        inset: calc(var(--dt-size-100) * -1);
         mask: radial-gradient(
           circle calc(var(--avatar-presence-mask-size) / 2) at
             calc(
@@ -324,8 +324,8 @@
     --avatar-count-mask-outer-circle-y: calc(
       var(--dt-size-400) + var(--dt-size-100)
     );
-    --avatar-count-mask-offset-x: var(--dt-space-100);
-    --avatar-count-mask-offset-y: var(--dt-space-100);
+    --avatar-count-mask-offset-x: var(--dt-size-100);
+    --avatar-count-mask-offset-y: var(--dt-size-100);
     --avatar-count-mask-svg-w: calc(var(--dt-size-625) - var(--dt-size-200));
     --avatar-count-mask-svg-h: calc(var(--dt-size-500) + var(--dt-size-200));
     --avatar-count-color-shadow: var(--dt-color-neutral-transparent);
@@ -350,8 +350,8 @@
     // Example: <div class="d-avatar d-avatar--group d-avatar--group-digits-2">
 
     &-digits-2 {
-      --avatar-count-mask-offset-x: var(--dt-space-300);
-      --avatar-count-mask-offset-y: var(--dt-space-400);
+      --avatar-count-mask-offset-x: var(--dt-size-300);
+      --avatar-count-mask-offset-y: var(--dt-size-400);
 
       > .d-avatar__canvas,
       > .d-avatar__overlay {
@@ -373,14 +373,14 @@
       }
 
       > .d-avatar__count {
-        padding-inline: var(--dt-space-0);
+        padding-inline: var(--dt-size-0);
         inline-size: calc(var(--dt-size-500) + var(--dt-size-200));
       }
     }
 
     &-digits-3 {
-      --avatar-count-mask-offset-x: var(--dt-space-300-negative);
-      --avatar-count-mask-offset-y: var(--dt-space-400);
+      --avatar-count-mask-offset-x: var(--dt-size-300-negative);
+      --avatar-count-mask-offset-y: var(--dt-size-400);
 
       > .d-avatar__canvas,
       > .d-avatar__overlay {
@@ -402,7 +402,7 @@
       }
 
       > .d-avatar__count {
-        padding-inline: var(--dt-space-0);
+        padding-inline: var(--dt-size-0);
         inline-size: calc(var(--dt-size-550) + var(--dt-size-200));
       }
     }

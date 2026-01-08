@@ -20,13 +20,13 @@
     --tab-color-text: var(--dt-action-color-foreground-muted-default);
     --tab-font-style: var(--dt-typography-button-md);
     --tab-border-radius: var(--dt-button-size-radius-md);
-    --tab-padding-x: calc(var(--dt-space-450) - var(--dt-size-border-100));
-    --tab-padding-y: calc(var(--dt-space-400) - var(--dt-size-border-100));
+    --tab-padding-x: calc(var(--dt-size-450) - var(--dt-size-border-100));
+    --tab-padding-y: calc(var(--dt-size-400) - var(--dt-size-border-100));
 
     position: relative;
     display: flex;
     flex-wrap: wrap;
-    gap: var(--dt-space-300);
+    gap: var(--dt-size-300);
     align-items: baseline;
 
     &:focus {
@@ -51,7 +51,7 @@
 .d-tab {
     position: relative;
     display: inline-flex;
-    gap: var(--dt-space-400);
+    gap: var(--dt-size-400);
     align-items: center;
     justify-content: center;
     box-sizing: border-box;
@@ -122,7 +122,7 @@
     //  $   SIZES
     //  ----------------------------------------------------------------------------
     .d-tablist--sm & {
-        --tab-padding-x: calc(var(--dt-space-400) - var(--dt-size-border-100));
+        --tab-padding-x: calc(var(--dt-size-400) - var(--dt-size-border-100));
         --tab-border-radius: var(--dt-button-size-radius-xs);
         --tab-font-style: var(--dt-typography-button-xs);
 

@@ -108,7 +108,7 @@ function toggleSiteNav () {
   }
 
   .mobile-header-drop-down-navigation {
-    inset-block-start: var(--dt-space-800);
+    inset-block-start: var(--dt-size-800);
     block-size: 100%;
     padding-block-end: 15.2rem;
 
