@@ -1,3 +1,10 @@
+## [1.2.1](https://github.com/dialpad/dialtone/compare/dialtone-mcp-server/v1.2.0...dialtone-mcp-server/v1.2.1) (2026-01-08)
+
+
+### Bug Fixes
+
+* NO-JIRA node 24 issues ([1abd97c](https://github.com/dialpad/dialtone/commit/1abd97cc4b7ad582a6d67bd97ca7ae11c65cada1))
+
 # [1.2.0](https://github.com/dialpad/dialtone/compare/dialtone-mcp-server/v1.1.0...dialtone-mcp-server/v1.2.0) (2025-11-13)
 
 
