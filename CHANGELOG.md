@@ -1,3 +1,10 @@
+## [9.153.8](https://github.com/dialpad/dialtone/compare/dialtone/v9.153.7...dialtone/v9.153.8) (2026-01-08)
+
+
+### Bug Fixes
+
+* NO-JIRA remove npmrc deletion ([dc57b60](https://github.com/dialpad/dialtone/commit/dc57b60db24bc37356508d7f6fa533f78febf859))
+
 ## [9.153.7](https://github.com/dialpad/dialtone/compare/dialtone/v9.153.6...dialtone/v9.153.7) (2026-01-08)
 
 
