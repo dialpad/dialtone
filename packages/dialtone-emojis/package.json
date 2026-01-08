@@ -8,6 +8,11 @@
     "Emojis"
   ],
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/dialpad/dialtone.git",
+    "directory": "packages/dialtone-emojis"
+  },
   "contributors": [
     {
       "name": "Brad Paugh",
