@@ -23,6 +23,7 @@
   },
   "devDependencies": {
     "@dialpad/dialtone-css": "workspace:*",
+    "@dialpad/dialtone-icons": "workspace:*",
     "@dialpad/dialtone-vue": "workspace:^3",
     "@modelcontextprotocol/inspector": "0.16.7",
     "@rollup/plugin-json": "^6.0.0",
