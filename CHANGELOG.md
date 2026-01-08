@@ -1,3 +1,11 @@
+## [9.153.7](https://github.com/dialpad/dialtone/compare/dialtone/v9.153.6...dialtone/v9.153.7) (2026-01-08)
+
+
+### Bug Fixes
+
+* NO-JIRA revert pnpm-lock.yaml to restore GitHub Packages tarball URLs ([4047c63](https://github.com/dialpad/dialtone/commit/4047c635c960dd36f2b64a32983b29663389ccda))
+* NO-JIRA use lockfile with correct overrides and GitHub Packages tarball URLs ([4aca7c8](https://github.com/dialpad/dialtone/commit/4aca7c8dab63e7c7342c0789a24eaf337aee087c))
+
 ## [9.153.6](https://github.com/dialpad/dialtone/compare/dialtone/v9.153.5...dialtone/v9.153.6) (2026-01-08)
 
 
