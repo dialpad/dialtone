@@ -14,12 +14,10 @@ Dialtone uses a unified set of **size tokens** (`--dt-size-*`) for all dimension
 
 Size tokens can be used with any CSS property that accepts a dimensional value:
 
-| Property Type | Examples |
-|--------------|----------|
-| **Dimensions** | `width`, `height`, `min-width`, `max-height` |
-| **Spacing** | `padding`, `margin`, `gap` |
-| **Positioning** | `top`, `left`, `right`, `bottom` |
-| **Borders** | `border-width`, `border-radius` |
+- **Dimensions**: `width`, `height`, `min-width`, `max-height`
+- **Spacing**: `padding`, `margin`, `gap`
+- **Positioning**: `top`, `left`, `right`, `bottom`
+- **Borders**: `border-width`, `border-radius`
 
 ## Usage
 
@@ -257,7 +255,7 @@ To ensure clickable and interactive areas are easily accessible, we recommend a 
 
 Here are some frequently used tokens. For a complete list, visit the [Size Tokens](/tokens/index.md#size) section.
 
-<token-table category="size" :tokenList="true" :tokens="tokens" theme="light" />
+<token-table category="size" :tokenList="true" :tokens="tokens" :mode="resolvedMode" />
 
 ## Key Takeaways
 
@@ -271,6 +269,9 @@ Here are some frequently used tokens. For a complete list, visit the [Size Token
 <script setup>
 import { ref } from 'vue';
 import tokensJson from '@dialpad/dialtone-tokens/dist/doc.json';
+import { useThemeManager } from '@composables/useThemeManager';
+
+const { resolvedMode } = useThemeManager();
 
 const sizes = ["size/300", "size/400", "size/450", "size/500", "size/550", "size/600", "size/650", "size/700"];
 const theme = "base-light";

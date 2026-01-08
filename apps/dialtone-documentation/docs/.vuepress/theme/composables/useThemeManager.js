@@ -1,4 +1,4 @@
-import { inject, computed, onMounted, onUnmounted } from 'vue';
+import { inject, computed, onMounted, onUnmounted, ref } from 'vue';
 import { NAMED_THEMES, NUMBERED_THEMES, ALL_THEME_IDS } from '../constants/themes.js';
 import { formatThemeName } from '../utils/formatThemeName.js';
 import {
@@ -36,6 +36,9 @@ export function useThemeManager(options = {}) {
   // SSR-safe: Initialize media query in onMounted
   let prefersDarkMediaQuery = null;
 
+  // Reactive ref for system preference (for resolvedMode)
+  const systemPrefersDark = ref(false);
+
   /**
    * Computed icon name based on current mode
    * @returns {string} Icon name for current mode
@@ -49,6 +52,18 @@ export function useThemeManager(options = {}) {
       default:
         return 'circle-half-filled';
     }
+  });
+
+  /**
+   * Computed resolved mode that converts 'system' to actual 'light' or 'dark'
+   * Reactively updates when system preference changes
+   * @returns {string} 'light' or 'dark'
+   */
+  const resolvedMode = computed(() => {
+    if (currentMode.value === 'system') {
+      return systemPrefersDark.value ? 'dark' : 'light';
+    }
+    return currentMode.value;
   });
 
   /**
@@ -181,12 +196,19 @@ export function useThemeManager(options = {}) {
     applyContrastTheme(contrast);
   };
 
+  // Handler to update both CSS and reactive ref when system preference changes
+  const handleSystemPreferenceChange = () => {
+    systemPrefersDark.value = prefersDarkMediaQuery?.matches ?? false;
+    setCss();
+  };
+
   // Lifecycle: Initialize and listen for system theme changes
   onMounted(() => {
     // Initialize media query listener (client-side only)
     if (typeof window !== 'undefined') {
       prefersDarkMediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
-      prefersDarkMediaQuery.addEventListener('change', setCss);
+      systemPrefersDark.value = prefersDarkMediaQuery.matches;
+      prefersDarkMediaQuery.addEventListener('change', handleSystemPreferenceChange);
     }
     setCss();
   });
@@ -194,7 +216,7 @@ export function useThemeManager(options = {}) {
   onUnmounted(() => {
     // Clean up media query listener
     if (prefersDarkMediaQuery) {
-      prefersDarkMediaQuery.removeEventListener('change', setCss);
+      prefersDarkMediaQuery.removeEventListener('change', handleSystemPreferenceChange);
     }
   });
 
@@ -208,6 +230,7 @@ export function useThemeManager(options = {}) {
 
     // Computed
     currentModeIconName,
+    resolvedMode,
 
     // Methods
     setMode,
