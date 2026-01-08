@@ -1,3 +1,10 @@
+## [9.153.9](https://github.com/dialpad/dialtone/compare/dialtone/v9.153.8...dialtone/v9.153.9) (2026-01-08)
+
+
+### Bug Fixes
+
+* NO-JIRA configure npm registry without GitHub Packages scope override ([c559455](https://github.com/dialpad/dialtone/commit/c559455e8464b06b75fce3c4d6c972617ba4f5e7))
+
 ## [9.153.8](https://github.com/dialpad/dialtone/compare/dialtone/v9.153.7...dialtone/v9.153.8) (2026-01-08)
 
 
