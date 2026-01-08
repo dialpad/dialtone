@@ -5,6 +5,7 @@
   >
     <dt-link
       kind="mention"
+      @click.prevent="handleClick"
     >
       <dt-stack
         direction="row"
@@ -45,6 +46,17 @@ export default {
         return this.$props.node.attrs.name;
       }
       return '#' + this.$props.node.attrs.name;
+    },
+  },
+
+  methods: {
+    handleClick () {
+      const channelData = {
+        name: this.$props.node.attrs.name,
+        id: this.$props.node.attrs.id,
+        locked: this.$props.node.attrs.locked,
+      };
+      this.$props.editor.emit('channel-click', channelData);
     },
   },
 };

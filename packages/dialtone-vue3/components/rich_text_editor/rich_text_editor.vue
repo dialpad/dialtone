@@ -501,6 +501,13 @@ export default {
      * @type {Object}
      */
     'mention-click',
+
+    /**
+     * Event fired when a channel is clicked
+     * @event channel-click
+     * @type {Object}
+     */
+    'channel-click',
   ],
 
   data () {
@@ -1203,6 +1210,11 @@ export default {
       // Mention is clicked
       this.editor.on('mention-click', (mentionData) => {
         this.$emit('mention-click', mentionData);
+      });
+
+      // Channel is clicked
+      this.editor.on('channel-click', (channelData) => {
+        this.$emit('channel-click', channelData);
       });
     },
 

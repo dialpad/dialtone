@@ -632,6 +632,33 @@ describe('DtRichTextEditor tests', () => {
       });
     });
 
+    describe('Channel click functionality', () => {
+      describe('When a channel is clicked', () => {
+        it('should emit channel-click event with channel data', async () => {
+          const channelData = {
+            id: 'general',
+            name: 'general',
+            locked: false,
+          };
+
+          await wrapper.setProps({
+            channelSuggestion: { items: vi.fn(() => [channelData]) },
+          });
+
+          const editorInstance = wrapper.vm.editor;
+          const channelNode = editorInstance.schema.nodes.channel.create(channelData);
+          editorInstance.view.dispatch(editorInstance.state.tr.insert(0, channelNode));
+          await wrapper.vm.$nextTick();
+
+          const channelLink = wrapper.find('a.d-link');
+          expect(channelLink.text()).toBe('#general');
+
+          await channelLink.trigger('click');
+          expect(wrapper.emitted('channel-click')[0][0]).toEqual(channelData);
+        });
+      });
+    });
+
     describe('Link keyboard shortcut functionality', () => {
       describe('When Mod+K is pressed and link is enabled', () => {
         it('should emit edit-link event', async () => {
