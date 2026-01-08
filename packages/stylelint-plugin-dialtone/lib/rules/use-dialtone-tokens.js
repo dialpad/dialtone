@@ -1,4 +1,4 @@
-const stylelint = require("stylelint");
+const stylelint = require('stylelint');
 
 const {
   createPlugin,
@@ -20,7 +20,7 @@ const pxToRem = (value) => {
 }
 
 const meta = {
-  url: "https://github.com/dialpad/dialtone/blob/staging/packages/stylelint-plugin-dialtone/docs/rules/use-dialtone-tokens.md",
+  url: 'https://github.com/dialpad/dialtone/blob/staging/packages/stylelint-plugin-dialtone/docs/rules/use-dialtone-tokens.md',
 };
 
 /** @type {import('stylelint').Rule} */

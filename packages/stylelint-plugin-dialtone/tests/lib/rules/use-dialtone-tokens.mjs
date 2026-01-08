@@ -28,8 +28,8 @@ testRule({
       }`,
       description: 'setting padding using px',
       warnings: [
-        { message: messages.useDialtoneTokens("12px") },
-        { message: messages.useRemInsteadOfPx("12px") },
+        { message: messages.useDialtoneTokens('12px') },
+        { message: messages.useRemInsteadOfPx('12px') },
       ],
     },
     {
@@ -37,7 +37,7 @@ testRule({
         padding: 1.2rem;
       }`,
       description: 'setting padding using rem',
-      message: messages.useDialtoneTokens("1.2rem"),
+      message: messages.useDialtoneTokens('1.2rem'),
     },
   ],
 });

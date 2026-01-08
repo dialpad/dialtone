@@ -1,4 +1,4 @@
-/* eslint-disable no-template-curly-in-string */
+ 
 const name = 'stylelint-plugin-dialtone';
 const srcRoot = `packages/${name}`;
 

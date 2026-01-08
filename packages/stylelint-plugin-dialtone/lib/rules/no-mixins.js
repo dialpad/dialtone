@@ -1,4 +1,4 @@
-const stylelint = require("stylelint");
+const stylelint = require('stylelint');
 
 const {
   createPlugin,
@@ -12,7 +12,7 @@ const messages = ruleMessages(ruleName, {
 });
 
 const meta = {
-  url: "https://github.com/dialpad/dialtone/blob/staging/packages/stylelint-plugin-dialtone/docs/rules/no-mixins.md",
+  url: 'https://github.com/dialpad/dialtone/blob/staging/packages/stylelint-plugin-dialtone/docs/rules/no-mixins.md',
 };
 
 /** @type {import('stylelint').Rule} */
