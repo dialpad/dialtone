@@ -124,12 +124,12 @@ jobs:
       - name: Setup Environment
         uses: ./.github/actions/setup-environment
 
-      - name: Configure registry for publishing
+      - name: Configure npm registry for publishing
         if: matrix.registry == 'npm'
-        run: |
-          # Remove existing .npmrc to clear GitHub Packages auth config
-          rm -f ~/.npmrc .npmrc
-          # Configure npm registry
+        uses: actions/setup-node@v4
+        with:
+          node-version-file: ".nvmrc"
+          registry-url: "https://registry.npmjs.org"
 
       - name: Delay job to avoid npm rate limits
         if: matrix.package == 'dialtone-vue3'
