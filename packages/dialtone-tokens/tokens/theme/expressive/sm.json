@@ -3,32 +3,32 @@
     "size": {
       "100": {
         "value": "{font.size.root} * 1.2",
-        "type": "fontSizes",
+        "type": "dimension",
         "description": "small"
       },
       "200": {
         "value": "{font.size.root} * 1.6",
-        "type": "fontSizes",
+        "type": "dimension",
         "description": "medium / base"
       },
       "300": {
         "value": "{font.size.root} * 2.0",
-        "type": "fontSizes",
+        "type": "dimension",
         "description": "large"
       },
       "400": {
         "value": "{font.size.root} * 2.8",
-        "type": "fontSizes",
+        "type": "dimension",
         "description": "extra large / xl"
       },
       "500": {
         "value": "{font.size.root} * 4.1",
-        "type": "fontSizes",
+        "type": "dimension",
         "description": "extra large / xxl"
       },
       "600": {
         "value": "{font.size.root} * 5.1",
-        "type": "fontSizes"
+        "type": "dimension"
       }
     }
   }

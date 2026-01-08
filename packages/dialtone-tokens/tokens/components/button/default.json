@@ -4,54 +4,54 @@
       "size": {
         "xs": {
           "value": "{font.size.100}",
-          "type": "fontSizes",
+          "type": "dimension",
           "description": "Extra small Button text size"
         },
         "sm": {
           "value": "{font.size.100}",
-          "type": "fontSizes",
+          "type": "dimension",
           "description": "Small Button text size"
         },
         "md": {
           "value": "{font.size.200}",
-          "type": "fontSizes",
+          "type": "dimension",
           "description": "Medium Button text size"
         },
         "lg": {
           "value": "{font.size.300}",
-          "type": "fontSizes",
+          "type": "dimension",
           "description": "Large Button text size"
         },
         "xl": {
           "value": "{font.size.400}",
-          "type": "fontSizes",
+          "type": "dimension",
           "description": "Extra large Button text size"
         }
       },
       "weight": {
         "xs": {
           "value": "{font.weight.semiBold}",
-          "type": "fontWeights",
+          "type": "fontWeight",
           "description": "Font weight for XS button"
         },
         "sm": {
           "value": "{font.weight.semiBold}",
-          "type": "fontWeights",
+          "type": "fontWeight",
           "description": "Font weight for SM button"
         },
         "md": {
           "value": "{font.weight.semiBold}",
-          "type": "fontWeights",
+          "type": "fontWeight",
           "description": "Font weight for MD button"
         },
         "lg": {
           "value": "{font.weight.medium}",
-          "type": "fontWeights",
+          "type": "fontWeight",
           "description": "Font weight for LG button"
         },
         "xl": {
           "value": "{font.weight.normal}",
-          "type": "fontWeights",
+          "type": "fontWeight",
           "description": "Font weight for XL button"
         }
       }
@@ -59,27 +59,27 @@
     "lineHeight": {
       "xs": {
         "value": "{font.lineHeight.200}",
-        "type": "lineHeights",
+        "type": "dimension",
         "description": "Line-height for XS button"
       },
       "sm": {
         "value": "{font.lineHeight.200}",
-        "type": "lineHeights",
+        "type": "dimension",
         "description": "Line-height for SM button"
       },
       "md": {
         "value": "{font.lineHeight.200}",
-        "type": "lineHeights",
+        "type": "dimension",
         "description": "Line-height for MD button"
       },
       "lg": {
         "value": "{font.lineHeight.200}",
-        "type": "lineHeights",
+        "type": "dimension",
         "description": "Line-height for LG button"
       },
       "xl": {
         "value": "{font.lineHeight.200}",
-        "type": "lineHeights",
+        "type": "dimension",
         "description": "Line-height for XL button"
       }
     },
@@ -87,27 +87,27 @@
       "radius": {
         "xs": {
           "value": "{size.radius.300}",
-          "type": "borderRadius",
+          "type": "dimension",
           "description": "Border radius for extra small button"
         },
         "sm": {
           "value": "{size.radius.400}",
-          "type": "borderRadius",
+          "type": "dimension",
           "description": "Border radius for small button"
         },
         "md": {
           "value": "{size.radius.400}",
-          "type": "borderRadius",
+          "type": "dimension",
           "description": "Border radius for medium button."
         },
         "lg": {
           "value": "{size.radius.450}",
-          "type": "borderRadius",
+          "type": "dimension",
           "description": "Border radius for large button."
         },
         "xl": {
           "value": "{size.radius.500}",
-          "type": "borderRadius",
+          "type": "dimension",
           "description": "Border radius for extra large button."
         }
       }
