@@ -1,3 +1,10 @@
+## [9.153.5](https://github.com/dialpad/dialtone/compare/dialtone/v9.153.4...dialtone/v9.153.5) (2026-01-08)
+
+
+### Bug Fixes
+
+* NO-JIRA update to node 24 ([e825521](https://github.com/dialpad/dialtone/commit/e8255214fa60e4bd84fb6801f6aac6503944ce4d))
+
 ## [9.153.4](https://github.com/dialpad/dialtone/compare/dialtone/v9.153.3...dialtone/v9.153.4) (2026-01-07)
 
 
