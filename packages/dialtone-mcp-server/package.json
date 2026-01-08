@@ -1,6 +1,6 @@
 {
   "name": "@dialpad/dialtone-mcp-server",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "main": "build/index.js",
   "type": "module",
   "bin": {
@@ -24,6 +24,7 @@
   "devDependencies": {
     "@dialpad/dialtone-css": "workspace:*",
     "@dialpad/dialtone-vue": "workspace:vue3-next",
+    "@dialpad/dialtone-icons": "workspace:*",
     "@modelcontextprotocol/inspector": "0.16.7",
     "@rollup/plugin-json": "^6.0.0",
     "@rollup/plugin-node-resolve": "^15.2.0",

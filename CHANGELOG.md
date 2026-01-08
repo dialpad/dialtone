@@ -1,4 +1,5 @@
 # [9.154.0-next.1](https://github.com/dialpad/dialtone/compare/dialtone/v9.153.4...dialtone/v9.154.0-next.1) (2026-01-08)
+## [9.153.9](https://github.com/dialpad/dialtone/compare/dialtone/v9.153.8...dialtone/v9.153.9) (2026-01-08)
 
 
 ### Bug Fixes
@@ -22,6 +23,37 @@
 * **Tokens:** DLT-2781 create color-assistive themes ([#921](https://github.com/dialpad/dialtone/issues/921)) ([a6cc397](https://github.com/dialpad/dialtone/commit/a6cc397bec52987f9ac2c3efca9b16f61c406807))
 * **Tokens:** DLT-2802 DLT-2563 layered theming system and mode island component ([#945](https://github.com/dialpad/dialtone/issues/945)) ([5c72c6c](https://github.com/dialpad/dialtone/commit/5c72c6cab4f08122dcb03e2e2f0cc8a490fe1c9b))
 * **Typography, Tokens:** DLT-2856 DLT-2857 next typography system ([#994](https://github.com/dialpad/dialtone/issues/994)) ([d744e97](https://github.com/dialpad/dialtone/commit/d744e97e86796a4de2153e43fa521384da8e8848))
+* NO-JIRA configure npm registry without GitHub Packages scope override ([c559455](https://github.com/dialpad/dialtone/commit/c559455e8464b06b75fce3c4d6c972617ba4f5e7))
+
+## [9.153.8](https://github.com/dialpad/dialtone/compare/dialtone/v9.153.7...dialtone/v9.153.8) (2026-01-08)
+
+
+### Bug Fixes
+
+* NO-JIRA remove npmrc deletion ([dc57b60](https://github.com/dialpad/dialtone/commit/dc57b60db24bc37356508d7f6fa533f78febf859))
+
+## [9.153.7](https://github.com/dialpad/dialtone/compare/dialtone/v9.153.6...dialtone/v9.153.7) (2026-01-08)
+
+
+### Bug Fixes
+
+* NO-JIRA revert pnpm-lock.yaml to restore GitHub Packages tarball URLs ([4047c63](https://github.com/dialpad/dialtone/commit/4047c635c960dd36f2b64a32983b29663389ccda))
+* NO-JIRA use lockfile with correct overrides and GitHub Packages tarball URLs ([4aca7c8](https://github.com/dialpad/dialtone/commit/4aca7c8dab63e7c7342c0789a24eaf337aee087c))
+
+## [9.153.6](https://github.com/dialpad/dialtone/compare/dialtone/v9.153.5...dialtone/v9.153.6) (2026-01-08)
+
+
+### Bug Fixes
+
+* NO-JIRA node 24 issues ([1abd97c](https://github.com/dialpad/dialtone/commit/1abd97cc4b7ad582a6d67bd97ca7ae11c65cada1))
+* NO-JIRA revert lockfile ([5ffe793](https://github.com/dialpad/dialtone/commit/5ffe793346c3534ebef012a76ed9f363cda3ab7b))
+
+## [9.153.5](https://github.com/dialpad/dialtone/compare/dialtone/v9.153.4...dialtone/v9.153.5) (2026-01-08)
+
+
+### Bug Fixes
+
+* NO-JIRA update to node 24 ([e825521](https://github.com/dialpad/dialtone/commit/e8255214fa60e4bd84fb6801f6aac6503944ce4d))
 
 ## [9.153.4](https://github.com/dialpad/dialtone/compare/dialtone/v9.153.3...dialtone/v9.153.4) (2026-01-07)
 
