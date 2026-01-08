@@ -1,3 +1,11 @@
+## [9.153.6](https://github.com/dialpad/dialtone/compare/dialtone/v9.153.5...dialtone/v9.153.6) (2026-01-08)
+
+
+### Bug Fixes
+
+* NO-JIRA node 24 issues ([1abd97c](https://github.com/dialpad/dialtone/commit/1abd97cc4b7ad582a6d67bd97ca7ae11c65cada1))
+* NO-JIRA revert lockfile ([5ffe793](https://github.com/dialpad/dialtone/commit/5ffe793346c3534ebef012a76ed9f363cda3ab7b))
+
 ## [9.153.5](https://github.com/dialpad/dialtone/compare/dialtone/v9.153.4...dialtone/v9.153.5) (2026-01-08)
 
 
