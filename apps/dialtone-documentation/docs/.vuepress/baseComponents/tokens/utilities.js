@@ -199,20 +199,8 @@ const addTokensToCategories = (token, format, structure) => {
     return;
   }
 
-  // SPACE
-  if (key.startsWith('space') && key.endsWith('negative')) {
-    structure.space.negative._children.push(displayToken);
-    return;
-  }
-
-  if (key.startsWith('space') && key.endsWith('percent')) {
-    structure.space.percentage._children.push(displayToken);
-    return;
-  }
-
-  if (key.startsWith('space')) {
-    structure.space.base._children.push(displayToken);
-  }
+  // SPACE tokens are deprecated - they now alias to SIZE tokens
+  // Suppress them from the tokens page display
 };
 
 const addTokenToSubcategory = (token, category, subcategory, structure) => {
