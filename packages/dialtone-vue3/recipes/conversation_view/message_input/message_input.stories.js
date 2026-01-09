@@ -257,6 +257,8 @@ export const argsData = {
   onTextInput: action('text-input'),
   onMarkdownInput: action('markdown-input'),
   onAddEmoji: action('add-emoji'),
+  onMentionClick: action('mention-click'),
+  onChannelClick: action('channel-click'),
   onSelectMedia: action('select-media'),
   onSelectedEmoji: action('selected-emoji'),
   onSelectedCommand: action('selected-command'),
