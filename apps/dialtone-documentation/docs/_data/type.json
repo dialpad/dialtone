@@ -257,6 +257,12 @@
         "headline": "no"
       },
       {
+        "stop": "150",
+        "size": "14",
+        "output": "1.4",
+        "headline": "no"
+      },
+      {
         "stop": "200",
         "size": "16",
         "output": "1.6",
@@ -270,14 +276,14 @@
       },
       {
         "stop": "300",
-        "size": "19",
-        "output": "1.9",
+        "size": "20",
+        "output": "2.0",
         "headline": "no"
       },
       {
         "stop": "350",
-        "size": "20",
-        "output": "2.0",
+        "size": "24",
+        "output": "2.4",
         "headline": "no"
       },
       {
