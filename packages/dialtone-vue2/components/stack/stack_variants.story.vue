@@ -433,13 +433,13 @@
 
           <div>
             <h4 class="d-headline--lg d-mb8">
-              Around
+              space-around
             </h4>
             <div class="d-ba d-bc-default d-p16 d-bar8">
               <dt-stack
                 direction="row"
                 gap="400"
-                justify="around"
+                justify="space-around"
               >
                 <dt-stack class="d-bgc-moderate-opaque d-bar8 d-p8">
                   Stack item 1
@@ -457,13 +457,13 @@
 
           <div>
             <h4 class="d-headline--lg d-mb8">
-              Between
+              space-between
             </h4>
             <div class="d-ba d-bc-default d-p16 d-bar8">
               <dt-stack
                 direction="row"
                 gap="400"
-                justify="between"
+                justify="space-between"
               >
                 <dt-stack class="d-bgc-moderate-opaque d-bar8 d-p8">
                   Stack item 1
@@ -481,13 +481,13 @@
 
           <div>
             <h4 class="d-headline--lg d-mb8">
-              Evenly
+              space-evenly
             </h4>
             <div class="d-ba d-bc-default d-p16 d-bar8">
               <dt-stack
                 direction="row"
                 gap="400"
-                justify="evenly"
+                justify="space-evenly"
               >
                 <dt-stack class="d-bgc-moderate-opaque d-bar8 d-p8">
                   Stack item 1
@@ -586,13 +586,13 @@
 
           <div>
             <h4 class="d-headline--lg d-mb8">
-              Responsive Justify (start → center @md → between @lg)
+              Responsive Justify (start → center @md → space-between @lg)
             </h4>
             <div class="d-ba d-bc-default d-p16 d-bar8">
               <dt-stack
                 direction="row"
                 gap="400"
-                :justify="{ default: 'start', md: 'center', lg: 'between' }"
+                :justify="{ default: 'start', md: 'center', lg: 'space-between' }"
               >
                 <dt-stack class="d-bgc-moderate-opaque d-bar8 d-p8">
                   Stack item 1

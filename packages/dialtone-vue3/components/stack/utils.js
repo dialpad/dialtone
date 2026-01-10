@@ -73,7 +73,17 @@ function getResponsiveAlignClasses (align) {
 }
 
 function getResponsiveJustifyClasses (justify) {
-  return _getResponsiveClasses(justify, 'justify', DT_STACK_JUSTIFY);
+  if (typeof justify !== 'object' || justify === null) return [];
+
+  return DT_STACK_RESPONSIVE_BREAKPOINTS.map((breakpoint) => {
+    const value = justify[breakpoint];
+    if (!value) return null;
+
+    const isValid = DT_STACK_JUSTIFY.includes(value);
+    const normalizedValue = _normalizeJustifyForClass(value);
+
+    return isValid ? `d-stack--${breakpoint}-justify-${normalizedValue}` : null;
+  });
 }
 
 export function getResponsiveClasses (direction, gap, align, justify) {
@@ -95,7 +105,24 @@ export function getDefaultAlignClass (align) {
   return DT_STACK_ALIGN.includes(validAlign) ? `d-stack--align-${validAlign}` : null;
 }
 
+/**
+ * Normalizes justify value to CSS class suffix.
+ * Maps CSS-aligned values (space-around, space-between, space-evenly) to shorthand
+ * (around, between, evenly) for CSS class generation.
+ * @param {string} value - The justify value
+ * @returns {string} The normalized value for CSS class
+ */
+function _normalizeJustifyForClass (value) {
+  const normalizeMap = {
+    'space-around': 'around',
+    'space-between': 'between',
+    'space-evenly': 'evenly',
+  };
+  return normalizeMap[value] || value;
+}
+
 export function getDefaultJustifyClass (justify) {
   const validJustify = _getDefaultValue(justify);
-  return DT_STACK_JUSTIFY.includes(validJustify) ? `d-stack--justify-${validJustify}` : null;
+  const normalizedJustify = _normalizeJustifyForClass(validJustify);
+  return DT_STACK_JUSTIFY.includes(validJustify) ? `d-stack--justify-${normalizedJustify}` : null;
 }
