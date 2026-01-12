@@ -55,7 +55,10 @@ describe('DtRecipeMotionText Tests', () => {
         // Skip to end to make all text visible
         wrapper.vm.skipToEnd();
         await wrapper.vm.$nextTick();
-        expect(wrapper.text()).toContain('Test text content');
+        // Query the word elements (contain characters directly)
+        const wordElements = wrapper.findAll('.dt-recipe-motion-text__word');
+        const wordText = wordElements.map(w => w.text()).join(' ');
+        expect(wordText).toContain('Test text content');
       });
 
       it('should have base class', () => {
@@ -348,25 +351,49 @@ describe('DtRecipeMotionText Tests', () => {
     });
 
     it('should emit complete event', async () => {
-      wrapper.vm.completeAnimation();
-      await wrapper.vm.$nextTick();
-      expect(wrapper.emitted('complete')).toBeTruthy();
-    });
+      vi.useFakeTimers();
 
-    it('should emit progress event with correct data', async () => {
+      // Start the animation to render the gradient layer
       wrapper.vm.start();
       await wrapper.vm.$nextTick();
 
-      // Wait for at least one progress event
-      await new Promise(resolve => setTimeout(resolve, 100));
+      // Advance timers to reveal at least one character (so gradient layer renders)
+      vi.advanceTimersByTime(100);
+      await wrapper.vm.$nextTick();
+
+      // Find the gradient layer element
+      const gradientLayer = wrapper.find('.dt-recipe-motion-text__gradient');
+      expect(gradientLayer.exists()).toBe(true);
+
+      // Manually trigger the animationend event (simulating CSS animation completion)
+      gradientLayer.element.dispatchEvent(new Event('animationend'));
+      await wrapper.vm.$nextTick();
+
+      expect(wrapper.emitted('complete')).toBeTruthy();
+
+      vi.useRealTimers();
+    });
+
+    it('should emit progress event with correct data', async () => {
+      vi.useFakeTimers();
+
+      wrapper.vm.start();
+      await wrapper.vm.$nextTick();
+
+      // Advance timers to trigger progress events
+      vi.runAllTimers();
+      await wrapper.vm.$nextTick();
 
       const progressEvents = wrapper.emitted('progress');
-      if (progressEvents && progressEvents.length > 0) {
-        const eventData = progressEvents[0][0];
-        expect(eventData).toHaveProperty('wordsComplete');
-        expect(eventData).toHaveProperty('totalWords');
-        expect(eventData).toHaveProperty('progress');
-      }
+      expect(progressEvents).toBeTruthy();
+      expect(progressEvents.length).toBeGreaterThan(0);
+
+      const eventData = progressEvents[0][0];
+      expect(eventData).toHaveProperty('wordsComplete');
+      expect(eventData).toHaveProperty('totalWords');
+      expect(eventData).toHaveProperty('progress');
+
+      vi.useRealTimers();
     });
   });
 });

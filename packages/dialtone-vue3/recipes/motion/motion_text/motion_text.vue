@@ -39,8 +39,10 @@
             v-if="wordIdx < visibleWordCount"
             class="dt-recipe-motion-text__word"
             :data-text-content="word.text"
+            :data-animating="!animationComplete"
             :style="{ '--word-index': wordIdx }"
           >
+            <!-- Direct character rendering -->
             <template
               v-for="(char, charIdx) in word.chars"
               :key="`${animationKey}-${wordIdx}-${charIdx}`"
@@ -58,6 +60,24 @@
                 >{{ char }}</span>
               </Transition>
             </template>
+
+            <!-- Gradient layer (gradient-in mode only) -->
+            <span
+              v-if="animationMode === 'gradient-in' && !animationComplete"
+              class="dt-recipe-motion-text__gradient"
+              aria-hidden="true"
+              @animationend="onGradientAnimationEnd"
+            >
+              <template
+                v-for="(char, charIdx) in word.chars"
+                :key="`${animationKey}-${wordIdx}-${charIdx}-gradient`"
+              >
+                <span
+                  v-if="charIdx < visibleCharsPerWord[wordIdx]"
+                  class="dt-recipe-motion-text__char"
+                >{{ char }}</span>
+              </template>
+            </span>
           </span>
         </Transition>
       </template>
@@ -193,6 +213,7 @@ export default {
       isLooped: false,
       animationTimeouts: [],
       prefersReducedMotion: false,
+      animationComplete: false,
       animationKey: 0,
     };
   },
@@ -390,6 +411,7 @@ export default {
       this.isPaused = false;
       this.visibleWordCount = 0;
       this.visibleCharsPerWord = Array(this.words.length).fill(0);
+      this.animationComplete = false;
       this.animationKey++;
     },
 
@@ -407,6 +429,7 @@ export default {
     showAllContent () {
       this.visibleWordCount = this.words.length;
       this.visibleCharsPerWord = this.words.map(word => word.chars.length);
+      this.animationComplete = true;
       setTimeout(() => {
         this.isAnimating = false;
         this.$emit('complete');
@@ -464,9 +487,41 @@ export default {
     },
 
     /**
+     * Handle gradient animation end event
+     * This is the primary mechanism for detecting when the gradient-in animation completes
+     */
+    onGradientAnimationEnd () {
+      if (this.animationMode !== 'gradient-in' || this.animationComplete) {
+        return;
+      }
+
+      this.animationComplete = true;
+      this.isAnimating = false;
+      this.$emit('complete');
+
+      // Handle loop mode
+      if (this.loop) {
+        const timeout = setTimeout(() => {
+          this.reset();
+          this.$nextTick(() => {
+            this.start();
+          });
+        }, 500);
+
+        this.animationTimeouts.push(timeout);
+      }
+    },
+
+    /**
      * Complete the animation
      */
     completeAnimation () {
+      // For gradient-in mode, completion is handled by the onGradientAnimationEnd
+      // listener responding to the animationend event, so we don't need to do anything here
+      if (this.animationMode === 'gradient-in' && !this.loop) {
+        return;
+      }
+
       this.isAnimating = false;
       this.clearTimeouts();
 

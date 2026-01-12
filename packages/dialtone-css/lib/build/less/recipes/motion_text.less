@@ -85,6 +85,37 @@
   white-space: nowrap;
 }
 
+// Word characters transition from transparent to visible during animation
+.dt-recipe-motion-text--gradient-in .dt-recipe-motion-text__word[data-animating="true"] > .dt-recipe-motion-text__char {
+  color: transparent;
+  animation: dt-recipe-motion-text-gradient-in-layer-reveal calc(var(--dt-recipe-motion-text-word-duration) * 1.5) var(--ttf-out-quint) forwards;
+}
+
+.dt-recipe-motion-text--gradient-in .dt-recipe-motion-text__word[data-animating="false"] > .dt-recipe-motion-text__char {
+  color: inherit;
+}
+
+// Gradient layer
+.dt-recipe-motion-text--gradient-in .dt-recipe-motion-text__gradient {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 2;
+  display: inline;
+  font-size: inherit;
+  line-height: inherit;
+  letter-spacing: inherit;
+  white-space: nowrap;
+  background: var(--dt-recipe-motion-text-highlight-color);
+  -webkit-background-clip: text;
+  background-clip: text;
+  animation: dt-recipe-motion-text-gradient-in-word-reveal calc(var(--dt-recipe-motion-text-word-duration) * 1.5) var(--ttf-out-quint);
+  pointer-events: none;
+  -webkit-text-fill-color: transparent;
+  mask: var(--dt-recipe-motion-text-gradient);
+  mask-position: var(--dt-recipe-motion-text-mask-pos) 0%;
+}
+
 //  ============================================================================
 //  $   ANIMATION KEYFRAMES
 //  ----------------------------------------------------------------------------
@@ -107,6 +138,20 @@
 
   to {
     --dt-recipe-motion-text-mask-pos: 0%;
+  }
+}
+
+@keyframes dt-recipe-motion-text-gradient-in-layer-reveal {
+  0%, 10% {
+    color: transparent;
+  }
+
+  50% {
+    color: inherit;
+  }
+
+  100% {
+    color: inherit;
   }
 }
 
@@ -159,14 +204,6 @@
 //  ============================================================================
 //  $   TRANSITION CLASSES - GRADIENT IN
 //  ----------------------------------------------------------------------------
-.dt-recipe-motion-text-char-gradient-in-enter-active {
-  animation: dt-recipe-motion-text-gradient-in-char-appear var(--dt-recipe-motion-text-char-duration) var(--ttf-in-out);
-}
-
-.dt-recipe-motion-text-char-gradient-in-leave-active {
-  animation: dt-recipe-motion-text-gradient-in-char-appear calc(var(--dt-recipe-motion-text-char-duration) * 0.5) var(--ttf-out-quint) reverse;
-}
-
 .dt-recipe-motion-text-word-gradient-in-enter-active {
   animation: dt-recipe-motion-text-gradient-in-word-reveal calc(var(--dt-recipe-motion-text-word-duration) * 1.5) var(--ttf-out-quint);
 }
@@ -223,7 +260,6 @@
   animation: dt-recipe-motion-text-gradient-in-word-reveal calc(var(--dt-recipe-motion-text-word-duration) * 1.5) var(--ttf-in-out) 1;
 }
 
-.dt-recipe-motion-text--gradient-in .dt-recipe-motion-text__word::before,
 .dt-recipe-motion-text--gradient-sweep::before {
   position: absolute;
   font-size: inherit;
