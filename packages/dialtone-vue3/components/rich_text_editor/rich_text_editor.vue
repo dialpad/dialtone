@@ -1047,28 +1047,26 @@ export default {
     },
 
     insertPlainTextWithHardBreaks (view, textData) {
-      const { tr } = view.state;
-      const { from, to } = view.state.selection;
+     // Remove trailing newlines to avoid inserting empty lines at the end
+      const trimmedData = textData.replace(/[\r\n]+$/, '');
 
-      // Delete selected content
-      tr.deleteRange(from, to);
+      // Split text by line breaks
+      const lines = trimmedData.split(/\r?\n/);
 
-      // Split text by line breaks and insert with hard breaks
-      const lines = textData.split(/\r?\n/);
-      let pos = from;
-
+      // Build content array with text nodes and hard breaks
+      const content = [];
       for (let i = 0; i < lines.length; i++) {
         if (i > 0) {
-          // Insert hard break for line breaks (except before first line)
-          tr.insert(pos, view.state.schema.nodes.hardBreak.create());
-          pos++;
+          // Add hard break between lines
+          content.push({ type: 'hardBreak' });
         }
-        // Insert text content (including empty strings for blank lines)
-        tr.insertText(lines[i], pos);
-        pos += lines[i].length;
+        if (lines[i]) {
+          content.push({ type: 'text', text: lines[i] });
+        }
       }
 
-      view.dispatch(tr);
+      // Use the editor's insertContent command which handles selection replacement correctly
+      this.editor.chain().focus().insertContent(content).run();
     },
 
     shouldPreserveLineBreaks (textData, htmlData) {
