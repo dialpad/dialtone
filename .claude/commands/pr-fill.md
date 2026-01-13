@@ -1,41 +1,53 @@
-# /pr-fill - Generate Dialtone PR Description
+# /pr-fill - Generate and Update Dialtone PR Description
 
 ## Usage
 
 ```
-/pr-fill
+/pr-fill [PR_NUMBER or PR_URL] [DESCRIPTION]
 ```
 
 ## Description
 
-Generates a filled PR description based on the Dialtone PR template (.github/pull_request_template.md), analyzing git diff and commit messages to auto-populate relevant sections. Section that cannot be completed are left as placeholders for manual completion (e.g. "Screenshots / GIFs" and "Sources"). Sections that are not relevant to the change should be removed, for example if there were no CSS changes, the CSS checklist should be removed.
+Generates a filled PR description based on the Dialtone PR template (.github/pull_request_template.md) and uses the `gh` CLI to update the actual PR. If no PR number is provided, it assumes the current branch has an open PR. If no description is provided, it analyzes git diff and commit messages to auto-populate relevant sections.
+
+Sections that cannot be completed are left as placeholders for manual completion (e.g. "Screenshots / GIFs" and "Sources"). Sections that are not relevant to the change should be removed, for example if there were no CSS changes, the CSS checklist should be removed.
 
 ## Implementation
 
 When this command is used, Claude should:
 
-1. **Analyze the current git state:**
-   - Get current branch name
-   - Get recent commit messages
+1. **Extract PR information:**
+   - If PR URL provided: Extract PR number from URL
+   - If PR number provided: Use it directly
+   - If no argument provided: Find PR for current branch using `gh pr view --json number`
+
+2. **Fetch PR details (if updating existing PR):**
+   - Get PR diff: `gh pr diff <PR_NUMBER>`
+   - Get PR commits: `gh pr view <PR_NUMBER> --json commits`
+   - Get changed files and their contents
+
+3. **Analyze the changes:**
+   - Get commit messages
    - Get list of changed files
    - Get git diff summary
 
-2. **Auto-detect change type from:**
+4. **Auto-detect change type from:**
    - Commit message prefixes (feat:, fix:, docs:, etc.)
    - File patterns (Vue components, CSS, documentation)
    - New vs modified files
 
-3. **Generate template with smart defaults:**
-   - Use oldest commit message as PR title
+5. **Generate template with smart defaults:**
+   - Use oldest commit message as PR title (preserve existing if present)
    - Auto-check appropriate change type boxes
    - Include relevant checklist sections based on file changes
    - Pre-populate sections where possible
    - Extract Jira ticket URL from oldest commit message
    - In the description section, describe the changes in a summarized way, no need to list every file changed
 
-4. **Output format:**
-   - Complete markdown ready to copy/paste into GitHub PR
-   - Follow exact Dialtone PR template structure
+6. **Update the PR:**
+   - Use `gh pr edit <PR_NUMBER> --body "<DESCRIPTION>"` to update
+   - Confirm update: `gh pr view <PR_NUMBER> --json title,body,url`
+   - Display success message with PR URL
 
 ## File Pattern Detection
 
