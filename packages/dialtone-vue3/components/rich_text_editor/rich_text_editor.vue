@@ -1047,25 +1047,23 @@ export default {
     },
 
     insertPlainTextWithHardBreaks (view, textData) {
-     // Remove trailing newlines to avoid inserting empty lines at the end
-      const trimmedData = textData.replace(/[\r\n]+$/, '');
+      // If we convert both newlines into hardBreak, we create a blank line.
+      // Collapsing avoids the extra hardBreak while preserving single line breaks.
+      const normalizedData = this.pasteRichText
+        ? textData
+        : textData.replace(/\r\n/g, '\n').replace(/\n\n/g, '\n');
 
-      // Split text by line breaks
+      // Remove trailing newlines to avoid inserting empty lines at the end
+      const trimmedData = normalizedData.replace(/[\r\n]+$/, '');
+
       const lines = trimmedData.split(/\r?\n/);
 
-      // Build content array with text nodes and hard breaks
       const content = [];
       for (let i = 0; i < lines.length; i++) {
-        if (i > 0) {
-          // Add hard break between lines
-          content.push({ type: 'hardBreak' });
-        }
-        if (lines[i]) {
-          content.push({ type: 'text', text: lines[i] });
-        }
+        if (i > 0) content.push({ type: 'hardBreak' });
+        if (lines[i]) content.push({ type: 'text', text: lines[i] });
       }
 
-      // Use the editor's insertContent command which handles selection replacement correctly
       this.editor.chain().focus().insertContent(content).run();
     },
 
