@@ -1,3 +1,15 @@
+## [2.205.4](https://github.com/dialpad/dialtone/compare/dialtone-vue2/v2.205.3...dialtone-vue2/v2.205.4) (2026-01-13)
+
+
+### Bug Fixes
+
+* **Motion Text:** DLT-2804 motion-text recipe letter-spacing fixes ([#1012](https://github.com/dialpad/dialtone/issues/1012)) ([5a3bad1](https://github.com/dialpad/dialtone/commit/5a3bad19f391c6ff8b4d8cf071c063cde7f48815))
+
+
+### Code Refactoring
+
+* **Stack:** DLT-2886 update justify prop values ([#1016](https://github.com/dialpad/dialtone/issues/1016)) ([c01db3d](https://github.com/dialpad/dialtone/commit/c01db3dacc74bc82224726b070312494458aaf2b))
+
 ## [2.205.3](https://github.com/dialpad/dialtone/compare/dialtone-vue2/v2.205.2...dialtone-vue2/v2.205.3) (2026-01-06)
 
 
