@@ -14,6 +14,7 @@ Examples of **incorrect** code for this rule:
   font-size: var(--dt-text-body-md-font-size);
   line-height: var(--dt-text-body-md-line-height);
   font-weight: var(--dt-text-body-md-font-weight) ;
+}
 ```
 
 Examples of **correct** code for this rule:
