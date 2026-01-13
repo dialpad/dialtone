@@ -3,15 +3,15 @@
     "size": {
       "width": {
         "value": "{size.500}",
-        "type": "sizing"
+        "type": "dimension"
       },
       "height": {
         "value": "{checkbox.size.width}",
-        "type": "sizing"
+        "type": "dimension"
       },
       "radius": {
         "value": "{inputs.size.radius.xs}",
-        "type": "borderRadius"
+        "type": "dimension"
       }
     },
     "color": {

@@ -26,7 +26,7 @@
     //  Component CSS Vars
     //  ------------------------------------------------------------------------
     --modal-backdrop-color-background: var(--dt-color-surface-backdrop);
-    --modal-dialog-padding: var(--dt-space-600);
+    --modal-dialog-padding: var(--dt-size-600);
     --modal-dialog-color-background: var(--dt-color-surface-primary);
     --modal-dialog-color-border: var(--dt-color-border-subtle);
     --modal-dialog-color-text: var(--dt-color-foreground-primary);
@@ -42,7 +42,7 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    padding: var(--dt-space-600); // 32
+    padding: var(--dt-size-600); // 32
     background-color: var(--modal-backdrop-color-background);
     backface-visibility: hidden;
     visibility: hidden;
@@ -72,7 +72,7 @@
   z-index: var(--zi-hide);
   display: flex;
   flex-direction: column;
-  gap: var(--dt-space-500); //
+  gap: var(--dt-size-500); //
   box-sizing: border-box;
   inline-size: 100%;
   max-inline-size: var(--dt-size-1020); // 628
@@ -115,11 +115,11 @@
 //  $   MODAL AREAS
 //  ----------------------------------------------------------------------------
 .d-modal__footer {
-  --modal-footer-padding: var(--dt-space-550); // 24
+  --modal-footer-padding: var(--dt-size-550); // 24
 
   display: flex;
   flex-direction: row-reverse;
-  gap: var(--dt-space-400);
+  gap: var(--dt-size-400);
   align-items: center;
 }
 
@@ -130,7 +130,7 @@
 //  $$  HEADER
 //  ----------------------------------------------------------------------------
 .d-modal__header {
-  --modal-header-padding: var(--dt-space-550); // 24
+  --modal-header-padding: var(--dt-size-550); // 24
 
   margin: 0 !important;
   padding-inline-end: var(--modal-header-padding);
@@ -152,8 +152,8 @@
 //  ----------------------------------------------------------------------------
 .d-modal__close {
   position: absolute;
-  inset-block-start: var(--dt-space-400);
-  inset-inline-end: var(--dt-space-400);
+  inset-block-start: var(--dt-size-400);
+  inset-inline-end: var(--dt-size-400);
   margin: 0 !important;
 }
 
@@ -162,8 +162,8 @@
 //  $   BANNERS
 //  ----------------------------------------------------------------------------
 .d-modal__banner {
-  --modal-banner-padding-y: var(--dt-space-500);
-  --modal-banner-padding-x: var(--dt-space-600);
+  --modal-banner-padding-y: var(--dt-size-500);
+  --modal-banner-padding-x: var(--dt-size-600);
   --modal-banner-color-background: var(--dt-color-surface-warning);
 
   position: relative;
@@ -203,7 +203,7 @@
   &::before {
     // 🤦 don't ask. or do, i'm not even sorry.
     position: absolute;
-    inset-inline: 0 0;
+    inset-inline: 0;
     inset-block-end: 0;
     z-index: var(--zi-modal-element);
     block-size: var(--modal-banner-padding-y);
@@ -241,21 +241,21 @@
   }
 
   .d-modal__header {
-    padding: var(--dt-space-600) var(--dt-space-600) 0; // 32
+    padding: var(--dt-size-600) var(--dt-size-600) 0; // 32
   }
 
   .d-modal__content {
-    padding-inline: var(--dt-space-600) 0; // 32
+    padding-inline: var(--dt-size-600) 0; // 32
   }
 
   .d-modal__footer {
     margin-block-start: auto !important;
-    padding: 0 var(--dt-space-550) var(--dt-space-600) var(--dt-space-600); // 0 24 32 32
+    padding: 0 var(--dt-size-550) var(--dt-size-600) var(--dt-size-600); // 0 24 32 32
   }
 
   .d-modal__banner {
     max-inline-size: unset;
-    padding: var(--dt-space-450) var(--dt-space-600); // 12 32
+    padding: var(--dt-size-450) var(--dt-size-600); // 12 32
     border-radius: 0;
   }
 }

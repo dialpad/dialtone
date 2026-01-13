@@ -18,7 +18,7 @@ Examples of **correct** code for this rule:
 
 ```css
 .a {
-  padding: var(--dt-space-450);
+  padding: var(--dt-size-450);
 }
 ```
 

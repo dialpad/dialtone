@@ -39,7 +39,7 @@ All of our utility classes are set to `!important`. This is because they are des
 
 ### CSS vars
 
-We use CSS vars, also known as [CSS Custom Properties](https://developer.mozilla.org/en-US/docs/Web/CSS/--*) in our CSS component classes for better reusability. We should use tokens to apply values to properties within our CSS classes unless a relevant token does not exist. For example, we should use `var(--dt-color-black-100)` instead of `#000000` or `var(--dt-space-400)` instead of `0.8rem`.
+We use CSS vars, also known as [CSS Custom Properties](https://developer.mozilla.org/en-US/docs/Web/CSS/--*) in our CSS component classes for better reusability. We should use tokens to apply values to properties within our CSS classes unless a relevant token does not exist. For example, we should use `var(--dt-color-black-100)` instead of `#000000` or `var(--dt-size-400)` instead of `0.8rem`.
 
 Here we set the `--avatar--size` CSS var to the `--dt-size-450` token, and set both the width and the height to reference this variable.
 

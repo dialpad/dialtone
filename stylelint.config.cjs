@@ -18,6 +18,7 @@ module.exports = {
   plugins: [
     'stylelint-less',
     'stylelint-no-px',
+    '@dialpad/stylelint-plugin-dialtone',
   ],
   fix: true,
   customSyntax: 'postcss-less',
@@ -75,9 +76,12 @@ module.exports = {
     'meowtec/no-px': [
       true,
       {
-        message: 'Use dialtone variables such as line-height: var(--lh-200) or width: var(--size-600) or ' +
-        'padding: var(--space-400) rather than directly setting px. See the lib/build/less/variables folder.',
+        message: 'Use dialtone tokens such as line-height: var(--dt-size-200) or width: var(--dt-size-600) or ' +
+        'padding: var(--dt-size-400) rather than directly setting px. See https://dialtone.dialpad.com/tokens/',
       },
     ],
+
+    // dialtone plugin rules
+    '@dialpad/stylelint-plugin-dialtone/no-deprecated-space-tokens': [true, { severity: 'warning' }],
   },
 };

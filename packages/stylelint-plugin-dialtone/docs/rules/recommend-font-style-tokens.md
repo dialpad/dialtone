@@ -10,17 +10,16 @@ Examples of **incorrect** code for this rule:
 
 ```css
 .a {
-  font-family: var(--dt-font-family-mono);
-  font-size: var(--dt-font-size-200);
-  line-height: var(--dt-font-line-height-300);
-  font-weight: var(--dt-font-weight-medium);
-}
+  font-family: var(--dt-text-body-md-font-family);
+  font-size: var(--dt-text-body-md-font-size);
+  line-height: var(--dt-text-body-md-line-height);
+  font-weight: var(--dt-text-body-md-font-weight) ;
 ```
 
 Examples of **correct** code for this rule:
 
 ```css
 .a {
-  font: var(--dt-typography-body-md-compact);
+  font: var(--dt-text-body-md);
 }
 ```

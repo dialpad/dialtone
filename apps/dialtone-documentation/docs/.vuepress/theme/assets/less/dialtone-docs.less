@@ -41,7 +41,7 @@ body {
 html body {
   --docsearch-primary-color: var(--dt-color-brand-purple);
   --docsearch-text-color: var(--dt-color-foreground-primary);
-  --docsearch-spacing: var(--dt-space-550);
+  --docsearch-spacing: var(--dt-size-550);
   // --docsearch-icon-stroke-width
   --docsearch-highlight-color: var(--docsearch-primary-color);
   --docsearch-muted-color: var(--dt-color-foreground-tertiary);
@@ -93,7 +93,7 @@ html body {
     border: none;
     border-radius: var(--dt-size-radius-400);
     box-shadow: var(--docsearch-searchbox-shadow);
-    padding-inline: var(--dt-space-450) var(--dt-space-450);
+    padding-inline: var(--dt-size-450) var(--dt-size-450);
   }
 
   .DocSearch-MagnifierLabel svg,
@@ -103,7 +103,7 @@ html body {
 
   .DocSearch-Input {
     font-size: var(--dt-font-size-300);
-    padding-inline-start: var(--dt-space-400);
+    padding-inline-start: var(--dt-size-400);
 
     &:focus-visible {
       box-shadow: none;
@@ -142,7 +142,7 @@ html body {
   }
 
   .DocSearch-Hit-source {
-    padding: var(--dt-space-400) var(--dt-space-300) 0;
+    padding: var(--dt-size-400) var(--dt-size-300) 0;
     color: var(--dt-color-foreground-primary);
     font-weight: var(--dt-font-weight-bold);
     font-size: var(--dt-font-size-200);
@@ -162,17 +162,17 @@ html body {
   }
 
   .DocSearch-Hit {
-    padding-block-end: var(--dt-space-400);
+    padding-block-end: var(--dt-size-400);
   }
 
   .DocSearch-Hits mark {
-    padding: var(--dt-space-200);
+    padding: var(--dt-size-200);
     color: var(--dt-color-foreground-primary);
     background: var(--dt-color-surface-warning);
   }
 
   .DocSearch-Hit a {
-    padding-inline: var(--dt-space-450) var(--dt-space-450);
+    padding-inline: var(--dt-size-450) var(--dt-size-450);
     border-radius: var(--dt-size-radius-300);
   }
 
@@ -183,7 +183,7 @@ html body {
   }
 
   .DocSearch-Hit-content-wrapper {
-    margin: 0 var(--dt-space-200);
+    margin: 0 var(--dt-size-200);
     font-weight: var(--dt-font-weight-normal);
     line-height: var(--dt-font-line-height-200);
   }
@@ -235,13 +235,13 @@ html body {
   }
 
   .DocSearch-Help {
-    margin-block-start: var(--dt-space-400);
+    margin-block-start: var(--dt-size-400);
     color: var(--dt-color-foreground-secondary);
     font-size: var(--dt-font-size-100);
   }
 
   .DocSearch-NoResults {
-    padding: var(--dt-space-600) 0;
+    padding: var(--dt-size-600) 0;
     font-size: var(--dt-font-size-200);
   }
 
@@ -263,7 +263,7 @@ html body {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: var(--dt-space-500) var(--dt-space-500) var(--dt-space-500) var(--dt-space-400);
+  padding: var(--dt-size-500) var(--dt-size-500) var(--dt-size-500) var(--dt-size-400);
   color: var(--dt-shell-color-foreground-primary);
   background-color: var(--dt-shell-color-surface-default);
   block-size: var(--dt-size-700);
@@ -293,12 +293,12 @@ html body {
   color: var(--dt-shell-color-foreground-primary);
   inset-block-start: var(--dt-size-700);
   // TODO: redo 😜
-  block-size: calc(100vh - var(--dt-space-700));
+  block-size: calc(100vh - var(--dt-size-700));
   // border-inline-end: var(--dt-size-100) solid var(--dt-shell-color-border-subtle);
 
   &__list {
     padding: var(--dt-size-550) 0 var(--dt-size-750) var(--dt-size-450);
-    inset-block: var(--dt-space-700) 0;
+    inset-block: var(--dt-size-700) 0;
     inline-size: calc(var(--dt-size-300) * 64);
   }
 }
@@ -308,10 +308,10 @@ html body {
   border-block: var(--dt-size-border-100) solid var(--dt-color-border-subtle);
 
   @media (min-width: 980px) {
-    margin-bottom: var(--dt-space-500);
+    margin-bottom: var(--dt-size-500);
     border: var(--dt-size-border-100) solid var(--dt-color-border-subtle);
     border-radius: var(--dt-size-radius-500);
-    margin-inline: var(--dt-space-500);
+    margin-inline: var(--dt-size-500);
   }
 }
 
@@ -331,17 +331,17 @@ a.header-anchor {
 .d-docsite--header-2 {
   font: var(--dt-text-headline-xxl);
   font-weight: var(--dt-font-weight-medium);
-  margin-block: var(--dt-space-600) var(--dt-space-400);
+  margin-block: var(--dt-size-600) var(--dt-size-400);
 }
 
 .d-docsite--header-3 {
   font: var(--dt-text-headline-xl);
-  margin-block: var(--dt-space-500) var(--dt-space-300);
+  margin-block: var(--dt-size-500) var(--dt-size-300);
 }
 
 .d-docsite--header-4 {
   font: var(--dt-text-headline-lg);
-  margin-block: var(--dt-space-500) var(--dt-space-300);
+  margin-block: var(--dt-size-500) var(--dt-size-300);
 }
 
 .d-docsite--header-2,
@@ -393,13 +393,13 @@ a.header-anchor {
 
 .d-docsite--unordered-list,
 .d-docsite--ordered-list {
-  margin: var(--dt-space-400) 0;
-  padding-inline-start: var(--dt-space-500);
+  margin: var(--dt-size-400) 0;
+  padding-inline-start: var(--dt-size-500);
 }
 
 .d-docsite--list-element {
   max-inline-size: 75ch;
-  margin-block-end: var(--dt-space-300);
+  margin-block-end: var(--dt-size-300);
   font-size: var(--dt-font-size-200);
   line-height: var(--dt-font-line-height-400);
 
@@ -409,7 +409,7 @@ a.header-anchor {
 }
 
 .d-docsite--preview-header {
-  margin-block: var(--dt-space-600) var(--dt-space-300);
+  margin-block: var(--dt-size-600) var(--dt-size-300);
 }
 
 .d-docsite-code {
@@ -428,7 +428,7 @@ a.header-anchor {
 
   display: grid;
   grid-template-columns: repeat(var(--icon-grid-columns), [col] var(--icon-card-width));
-  gap: var(--dt-space-400);
+  gap: var(--dt-size-400);
 
   @media screen and (min-width: 375px) {
     --icon-grid-columns: 3;
@@ -546,7 +546,7 @@ a.header-anchor {
 .dialtone-icon-card__icon {
   inline-size: var(--dt-size-650);
   block-size: var(--dt-size-650);
-  margin-block-end: var(--dt-space-300);
+  margin-block-end: var(--dt-size-300);
 
   svg {
     inline-size: 100%;
@@ -555,7 +555,7 @@ a.header-anchor {
 }
 
 .dialtone-icon-card__icon--autosize {
-  margin-block-end: var(--dt-space-300);
+  margin-block-end: var(--dt-size-300);
 
   svg {
     inline-size: 100%;
@@ -564,7 +564,7 @@ a.header-anchor {
 }
 
 .dialtone-icon-card__title {
-  margin-block: 0 var(--dt-space-300);
+  margin-block: 0 var(--dt-size-300);
   font-weight: var(--dt-font-weight-bold);
   font-size: var(--dt-font-size-200);
   line-height: var(--dt-font-line-height-200);
@@ -581,7 +581,7 @@ a.header-anchor {
 
 .dialtone-icon-card__name {
   position: absolute;
-  inset-block-end: var(--dt-space-400);
+  inset-block-end: var(--dt-size-400);
   color: var(--dt-color-foreground-primary);
   font: var(--dt-typography-code-sm);
 }
@@ -600,7 +600,7 @@ a.header-anchor {
   background-color: var(--dt-color-surface-primary);
 
   &__inner-wrapper {
-    padding-block: calc(var(--dt-space-300) * 32);
+    padding-block: calc(var(--dt-size-300) * 32);
     text-wrap: balance;
 
     @media (max-width: 640px) {
@@ -626,12 +626,12 @@ a.header-anchor {
   }
 
   @media (max-width: 640px) {
-    padding-inline: var(--dt-space-400) var(--dt-space-500);
+    padding-inline: var(--dt-size-400) var(--dt-size-500);
   }
 }
 
 .links {
-  padding-block: var(--dt-space-650) var(--dt-space-650);
+  padding-block: var(--dt-size-650) var(--dt-size-650);
   text-wrap: balance;
 
   @media (max-width: 640px) {
@@ -643,7 +643,7 @@ a.header-anchor {
   @media (max-width: 640px) {
     display: block;
     grid-column: 1 / -1 !important;
-    margin-block-end: calc(var(--dt-space-300) * 18);
+    margin-block-end: calc(var(--dt-size-300) * 18);
   }
 }
 
@@ -653,7 +653,7 @@ a.header-anchor {
 //  ----------------------------------------------------------------------------
 
 .dialtone-page-title {
-  margin-block-end: var(--dt-space-400);
+  margin-block-end: var(--dt-size-400);
   font: var(--dt-text-headline-xxxl);
 }
 
@@ -664,7 +664,7 @@ a.header-anchor {
 
 .dialtone-intro {
   max-inline-size: 58ch;
-  margin-block-end: var(--dt-space-400);
+  margin-block-end: var(--dt-size-400);
   color: var(--dt-color-foreground-secondary);
   font-size: var(--dt-font-size-300);
   line-height: var(--dt-font-line-height-300);
@@ -677,12 +677,12 @@ a.header-anchor {
 
 .dialtone-wall {
   display: grid;
-  gap: var(--dt-space-500);
-  margin-block-start: var(--dt-space-500);
+  gap: var(--dt-size-500);
+  margin-block-start: var(--dt-size-500);
 
   @media screen and (min-width: 640px) {
     grid-template-columns: [full-start] repeat(2, [col-start] var(--col-width, minmax(0, 1fr)) [col-end]) [full-end] !important;
-    gap: var(--dt-space-600);
+    gap: var(--dt-size-600);
   }
 
   @media screen and (min-width: 768px) {
@@ -690,7 +690,7 @@ a.header-anchor {
   }
 
   @media screen and (min-width: 1354px) {
-    gap: var(--dt-space-600);
+    gap: var(--dt-size-600);
   }
 
   &__item {
@@ -739,13 +739,13 @@ a.header-anchor {
   &__details {
     display: flex;
     flex-direction: column;
-    gap: var(--dt-space-300);
-    padding: var(--dt-space-500);
+    gap: var(--dt-size-300);
+    padding: var(--dt-size-500);
   }
 
   &__title {
     display: flex;
-    gap: var(--dt-space-400);
+    gap: var(--dt-size-400);
     align-items: center;
     color: var(--dt-color-foreground-secondary);
     font-weight: var(--dt-font-weight-semi-bold);
@@ -776,7 +776,7 @@ a.header-anchor {
 
 .dialtone-definition {
   > dt {
-    margin-block-start: var(--dt-space-500);
+    margin-block-start: var(--dt-size-500);
     font-weight: var(--dt-font-weight-bold);
   }
 
@@ -801,8 +801,8 @@ a.header-anchor {
 
   display: flex;
   flex-direction: column;
-  gap: var(--dt-space-500);
-  margin-block: var(--dt-space-500) var(--dt-space-500);
+  gap: var(--dt-size-500);
+  margin-block: var(--dt-size-500) var(--dt-size-500);
 
   @media screen and (min-width: 640px) {
     flex-direction: row;
@@ -810,10 +810,10 @@ a.header-anchor {
 
   &__hd {
     display: flex;
-    gap: var(--dt-space-100);
+    gap: var(--dt-size-100);
     align-items: center;
     align-self: baseline;
-    padding: var(--dt-space-100) var(--dt-space-350);
+    padding: var(--dt-size-100) var(--dt-size-350);
     color: var(--dt-color-foreground-primary-inverted);
     font-size: var(--dt-font-size-100);
     background-color: var(--usage-item-background-hd);
@@ -829,15 +829,15 @@ a.header-anchor {
   }
 
   &__label {
-    padding-inline: var(--dt-space-200);
+    padding-inline: var(--dt-size-200);
   }
 
   &__item {
     display: flex;
     flex: 1;
     flex-direction: column;
-    gap: var(--dt-space-500);
-    padding: var(--dt-space-500);
+    gap: var(--dt-size-500);
+    padding: var(--dt-size-500);
     border: var(--dt-size-border-100) solid var(--usage-item-color-border);
     border-radius: var(--dt-size-400);
 

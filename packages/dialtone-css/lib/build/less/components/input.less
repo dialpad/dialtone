@@ -33,8 +33,8 @@
     --input-color-text: var(--dt-inputs-color-foreground-default);
     --input-border-width: var(--dt-size-border-100);
     --input-border-radius: var(--dt-inputs-size-radius-md);
-    --input-padding-y: calc(var(--dt-space-400) - var(--input-border-width));
-    --input-padding-x: calc((var(--dt-space-500) - var(--dt-space-300)) - var(--input-border-width));
+    --input-padding-y: calc(var(--dt-size-400) - var(--input-border-width));
+    --input-padding-x: calc((var(--dt-size-500) - var(--dt-size-300)) - var(--input-border-width));
     --input-typography: var(--dt-typography-inputs-md);
 
     position: relative;
@@ -154,7 +154,7 @@
 }
 
 .d-input__length-description {
-    margin-block-end: var(--dt-space-200);
+    margin-block-end: var(--dt-size-200);
 }
 
 .d-input--hidden {
@@ -169,7 +169,7 @@
 
     .d-textarea + .d-input-icon--right {
       position: absolute;
-      inset-inline-end: var(--dt-space-450);
+      inset-inline-end: var(--dt-size-450);
     }
 
     .d-input-icon--left:has(+ .d-textarea) {
@@ -178,35 +178,35 @@
 
     .d-input-icon:has(+ .d-textarea),
     .d-textarea+.d-input-icon {
-        padding-block-start: calc(var(--input-padding-y) + var(--dt-space-200));
+        padding-block-start: calc(var(--input-padding-y) + var(--dt-size-200));
     }
 
     .d-input-icon:has(+ .d-textarea--xs),
     .d-textarea--xs + .d-input-icon {
         #d-internal__input-and-select-xs();
 
-        padding-block-start: calc(var(--input-padding-y) + var(--dt-space-100));
+        padding-block-start: calc(var(--input-padding-y) + var(--dt-size-100));
     }
 
     .d-input-icon:has(+ .d-textarea--sm),
     .d-textarea--sm+.d-input-icon {
         #d-internal__input-and-select-sm();
 
-        padding-block-start: calc(var(--input-padding-y) + var(--dt-space-100));
+        padding-block-start: calc(var(--input-padding-y) + var(--dt-size-100));
     }
 
     .d-input-icon:has(+ .d-textarea--lg),
     .d-textarea--lg+.d-input-icon {
         #d-internal__input-and-select-lg();
 
-        padding-block-start: calc(var(--input-padding-y) + var(--dt-space-100));
+        padding-block-start: calc(var(--input-padding-y) + var(--dt-size-100));
     }
 
     .d-input-icon:has(+ .d-textarea--xl),
     .d-textarea--xl+.d-input-icon {
         #d-internal__input-and-select-xl();
 
-        padding-block-start: calc(var(--input-padding-y) + (var(--dt-space-350) - var(--dt-space-100)));
+        padding-block-start: calc(var(--input-padding-y) + (var(--dt-size-350) - var(--dt-size-100)));
     }
 
     .d-input,
@@ -304,14 +304,14 @@
     }
 
     &--right:not(:empty) {
-        margin-inline-end: var(--dt-space-400);
+        margin-inline-end: var(--dt-size-400);
 
         .d-btn {
-            margin-inline-end: var(--dt-space-350-negative);
+            margin-inline-end: var(--dt-size-350-negative);
         }
     }
 
     &--left:not(:empty) {
-        margin-inline-start: var(--dt-space-400);
+        margin-inline-start: var(--dt-size-400);
     }
 }

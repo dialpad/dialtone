@@ -3259,7 +3259,7 @@
     "border": {
       "focus": {
         "value": "{size.border.200} + {size.border.100}",
-        "type": "borderWidth"
+        "type": "dimension"
       }
     }
   },
@@ -3268,60 +3268,60 @@
       "border": {
         "default": {
           "value": "{size.border.150}",
-          "type": "borderWidth"
+          "type": "dimension"
         },
         "status": {
           "value": "{size.border.200}",
-          "type": "borderWidth"
+          "type": "dimension"
         }
       },
       "radius": {
         "xs": {
           "value": "{size.radius.300}",
-          "type": "borderRadius"
+          "type": "dimension"
         },
         "sm": {
           "value": "{size.radius.400}",
-          "type": "borderRadius"
+          "type": "dimension"
         },
         "md": {
           "value": "{size.radius.400}",
-          "type": "borderRadius"
+          "type": "dimension"
         },
         "lg": {
           "value": "{size.radius.450}",
-          "type": "borderRadius"
+          "type": "dimension"
         },
         "xl": {
           "value": "{size.radius.500}",
-          "type": "borderRadius"
+          "type": "dimension"
         }
       }
     },
     "lineHeight": {
       "xs": {
         "value": "{font.lineHeight.200}",
-        "type": "lineHeights",
+        "type": "dimension",
         "description": "Line height for extra small inputs (e.g. input and textarea)"
       },
       "sm": {
         "value": "{font.lineHeight.200}",
-        "type": "lineHeights",
+        "type": "dimension",
         "description": "Line height for small inputs (e.g. input and textarea)"
       },
       "md": {
         "value": "{font.lineHeight.200}",
-        "type": "lineHeights",
+        "type": "dimension",
         "description": "Line height for medium inputs (e.g. input and textarea)"
       },
       "lg": {
         "value": "{font.lineHeight.200}",
-        "type": "lineHeights",
+        "type": "dimension",
         "description": "Line height for large inputs (e.g. input and textarea)"
       },
       "xl": {
         "value": "{font.lineHeight.200}",
-        "type": "lineHeights",
+        "type": "dimension",
         "description": "Line height for extra large inputs (e.g. input and textarea)"
       }
     },
@@ -3329,54 +3329,54 @@
       "size": {
         "xs": {
           "value": "{font.size.100}",
-          "type": "fontSizes",
+          "type": "dimension",
           "description": "Font size for extra small inputs (e.g. input and textarea)"
         },
         "sm": {
           "value": "{font.size.100}",
-          "type": "fontSizes",
+          "type": "dimension",
           "description": "Font size for small inputs (e.g. input and textarea)"
         },
         "md": {
           "value": "{font.size.200}",
-          "type": "fontSizes",
+          "type": "dimension",
           "description": "Font size for medium inputs (e.g. input and textarea)"
         },
         "lg": {
           "value": "{font.size.300}",
-          "type": "fontSizes",
+          "type": "dimension",
           "description": "Font size for large inputs (e.g. input and textarea)"
         },
         "xl": {
           "value": "{font.size.400}",
-          "type": "fontSizes",
+          "type": "dimension",
           "description": "Font size for extra large inputs (e.g. input and textarea)"
         }
       },
       "weight": {
         "xs": {
           "value": "{font.weight.normal}",
-          "type": "fontWeights",
+          "type": "fontWeight",
           "description": "Font weight for extra small inputs (e.g. input and textarea)"
         },
         "sm": {
           "value": "{font.weight.normal}",
-          "type": "fontWeights",
+          "type": "fontWeight",
           "description": "Font weight for small inputs (e.g. input and textarea)"
         },
         "md": {
           "value": "{font.weight.normal}",
-          "type": "fontWeights",
+          "type": "fontWeight",
           "description": "Font weight for medium inputs (e.g. input and textarea)"
         },
         "lg": {
           "value": "{font.weight.normal}",
-          "type": "fontWeights",
+          "type": "fontWeight",
           "description": "Font weight for large inputs (e.g. input and textarea)"
         },
         "xl": {
           "value": "{font.weight.normal}",
-          "type": "fontWeights",
+          "type": "fontWeight",
           "description": "Font weight for extra large inputs (e.g. input and textarea)"
         }
       }

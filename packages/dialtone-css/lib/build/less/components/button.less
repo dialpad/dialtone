@@ -28,43 +28,43 @@
   --button-border-width: var(--dt-size-border-100);
   --button-typography: var(--dt-typography-button-md);
   --button-padding-y-xs: calc(
-    calc(var(--dt-space-400) - var(--dt-space-100)) - var(--button-border-width)
+    calc(var(--dt-size-400) - var(--dt-size-100)) - var(--button-border-width)
   ); // ((8 - 1) - border-width)
 
   --button-padding-x-xs: calc(
-    var(--dt-space-400) - var(--button-border-width)
+    var(--dt-size-400) - var(--button-border-width)
   ); // 8 minus border-width
 
   --button-padding-y-sm: calc(
-    var(--dt-space-400) - var(--button-border-width)
+    var(--dt-size-400) - var(--button-border-width)
   ); // 8 minus border-width
 
   --button-padding-x-sm: calc(
-    var(--dt-space-450) - var(--button-border-width)
+    var(--dt-size-450) - var(--button-border-width)
   ); // 12 minus border-width
 
   --button-padding-y-md: calc(
-    var(--dt-space-400) - var(--button-border-width)
+    var(--dt-size-400) - var(--button-border-width)
   ); // 8 minus border-width
 
   --button-padding-x-md: calc(
-    var(--dt-space-450) - var(--button-border-width)
+    var(--dt-size-450) - var(--button-border-width)
   ); // 12 minus border-width
 
   --button-padding-y-lg: calc(
-    (var(--dt-space-400) + var(--dt-space-200)) - var(--button-border-width)
+    (var(--dt-size-400) + var(--dt-size-200)) - var(--button-border-width)
   ); // 10 minus border-width
 
   --button-padding-x-lg: calc(
-    var(--dt-space-500) - var(--button-border-width)
+    var(--dt-size-500) - var(--button-border-width)
   ); // 16 minus border-width
 
   --button-padding-y-xl: calc(
-    var(--dt-space-450) - var(--button-border-width)
+    var(--dt-size-450) - var(--button-border-width)
   ); // 12 minus border-width
 
   --button-padding-x-xl: calc(
-    var(--dt-space-500) - var(--button-border-width)
+    var(--dt-size-500) - var(--button-border-width)
   ); // 16 minus border-width
 
   --button-padding-y: var(--button-padding-y-md);
@@ -228,11 +228,11 @@
 }
 
 .d-btn__icon--left:not(:only-child) {
-  margin-inline-start: var(--dt-space-200-negative);
+  margin-inline-start: var(--dt-size-200-negative);
 }
 
 .d-btn__icon--right:not(:only-child) {
-  margin-inline-end: var(--dt-space-200-negative);
+  margin-inline-end: var(--dt-size-200-negative);
 }
 
 //  ============================================================================
@@ -287,13 +287,13 @@
   }
 
   &.d-btn--lg {
-    --button-padding-x: calc(var(--button-padding-y-lg) + var(--dt-space-100));
-    --button-padding-y: calc(var(--button-padding-y-lg) + var(--dt-space-100));
+    --button-padding-x: calc(var(--button-padding-y-lg) + var(--dt-size-100));
+    --button-padding-y: calc(var(--button-padding-y-lg) + var(--dt-size-100));
   }
 
   &.d-btn--xl {
-    --button-padding-x: calc(var(--button-padding-y-xl) + var(--dt-space-300));
-    --button-padding-y: calc(var(--button-padding-y-xl) + var(--dt-space-300));
+    --button-padding-x: calc(var(--button-padding-y-xl) + var(--dt-size-300));
+    --button-padding-y: calc(var(--button-padding-y-xl) + var(--dt-size-300));
   }
 }
 
@@ -553,13 +553,13 @@
   }
 
   &.d-btn--lg {
-    --button-padding-x: calc(var(--button-padding-y-lg) + var(--dt-space-100));
-    --button-padding-y: calc(var(--button-padding-y-lg) + var(--dt-space-100));
+    --button-padding-x: calc(var(--button-padding-y-lg) + var(--dt-size-100));
+    --button-padding-y: calc(var(--button-padding-y-lg) + var(--dt-size-100));
   }
 
   &.d-btn--xl {
-    --button-padding-x: calc(var(--button-padding-y-xl) + var(--dt-space-300));
-    --button-padding-y: calc(var(--button-padding-y-xl) + var(--dt-space-300));
+    --button-padding-x: calc(var(--button-padding-y-xl) + var(--dt-size-300));
+    --button-padding-y: calc(var(--button-padding-y-xl) + var(--dt-size-300));
   }
 }
 
@@ -606,7 +606,7 @@
 
   &:focus-visible {
     box-shadow:
-      0 0 0 var(--dt-space-100) var(--dt-color-neutral-white),
+      0 0 0 var(--dt-size-100) var(--dt-color-neutral-white),
       0 0 0 0.25em
         hsl(
           var(--brand-color-h) var(--brand-color-s) var(--brand-color-l) ~" / " 90%
@@ -625,7 +625,7 @@
     justify-content: center;
     inline-size: 2em;
     block-size: 2em;
-    margin-inline: var(--dt-space-300-negative) var(--dt-space-400);
+    margin-inline: var(--dt-size-300-negative) var(--dt-size-400);
     background-color: var(--dt-color-neutral-white);
     border-radius: var(--dt-size-radius-200);
   }
@@ -690,7 +690,7 @@
 
 .d-split-btn {
   display: inline-flex;
-  gap: var(--dt-space-0);
+  gap: var(--dt-size-0);
   align-items: stretch;
   justify-content: center;
 
@@ -785,23 +785,23 @@
 
   // adjust x-padding for icon-only button at each size
   &__omega--xs.d-btn--icon-only {
-    --button-padding-x: var(--dt-space-300);
+    --button-padding-x: var(--dt-size-300);
   }
 
   &__omega--sm.d-btn--icon-only {
-    --button-padding-x: var(--dt-space-300);
+    --button-padding-x: var(--dt-size-300);
   }
 
   &__omega--md.d-btn--icon-only {
-    --button-padding-x: var(--dt-space-350);
+    --button-padding-x: var(--dt-size-350);
   }
 
   &__omega--lg.d-btn--icon-only {
-    --button-padding-x: var(--dt-space-400);
+    --button-padding-x: var(--dt-size-400);
   }
 
   &__omega--xl.d-btn--icon-only {
-    --button-padding-x: var(--dt-space-450);
+    --button-padding-x: var(--dt-size-450);
   }
 }
 
