@@ -75,7 +75,7 @@
         <slot />
       </span>
       <div
-        v-if="$slots.attachment"
+        v-if="hasAttachmentContent"
         data-qa="dt-recipe-feed-item-row--attachment"
         class="d-recipe-feed-item-row__attachment"
       >
@@ -130,6 +130,7 @@ import { DtListItem } from '@/components/list_item';
 import { DtBadge } from '@/components/badge';
 import Modal from '@/common/mixins/modal';
 import { DtIconUser } from '@dialpad/dialtone-icons/vue3';
+import { hasSlotContent } from '@/common/utils';
 
 export default {
   compatConfig: { MODE: 3 },
@@ -292,6 +293,10 @@ export default {
         FEED_ROW_STATE_BACKGROUND_COLOR[this.state],
 
       ];
+    },
+
+    hasAttachmentContent () {
+      return hasSlotContent(this.$slots.attachment);
     },
   },
 
