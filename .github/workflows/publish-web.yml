@@ -14,7 +14,6 @@ on:
           - dialtone-emojis
           - dialtone-icons
           - dialtone-tokens
-          - dialtone-vue2
           - dialtone-vue3
           - eslint-plugin-dialtone
           - stylelint-plugin-dialtone
@@ -70,8 +69,6 @@ jobs:
               - 'packages/dialtone-icons/package.json'
             dialtone-tokens:
               - 'packages/dialtone-tokens/package.json'
-            dialtone-vue2:
-              - 'packages/dialtone-vue2/package.json'
             dialtone-vue3:
               - 'packages/dialtone-vue3/package.json'
             eslint-plugin-dialtone:
