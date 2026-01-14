@@ -15,9 +15,9 @@ on:
       - 'packages/dialtone-tokens/themes/**'
       - 'packages/dialtone-tokens/tokens/**'
       - 'packages/dialtone-tokens/gulpfile.cjs'
-      - 'packages/dialtone-vue2/**/*.vue'
-      - 'packages/dialtone-vue2/**/*.stories.js'
-      - 'packages/dialtone-vue2/percy.config.js'
+      - 'packages/dialtone-vue3/**/*.vue'
+      - 'packages/dialtone-vue3/**/*.stories.js'
+      - 'packages/dialtone-vue3/percy.config.{js,cjs}'
       - '!**/*.test.*js'
   pull_request:
     types: [ unlabeled, labeled, synchronize, opened ]
@@ -33,9 +33,9 @@ on:
       - 'packages/dialtone-tokens/themes/**'
       - 'packages/dialtone-tokens/tokens/**'
       - 'packages/dialtone-tokens/gulpfile.cjs'
-      - 'packages/dialtone-vue2/**/*.vue'
-      - 'packages/dialtone-vue2/**/*.stories.js'
-      - 'packages/dialtone-vue2/percy.config.js'
+      - 'packages/dialtone-vue3/**/*.vue'
+      - 'packages/dialtone-vue3/**/*.stories.js'
+      - 'packages/dialtone-vue3/percy.config.{js,cjs}'
       - '!**/*.test.*js'
 
 env:
@@ -64,7 +64,7 @@ jobs:
           message-id: 'missing-visual-test-label'
           refresh-message-position: true
 
-  dialtone-vue-2:
+  dialtone-vue-3:
     if: ${{ github.event_name == 'push' || (github.event_name == 'pull_request' && contains(github.event.pull_request.labels.*.name, 'visual-test-ready')) }}
     runs-on: ubuntu-latest
     permissions:
@@ -76,8 +76,8 @@ jobs:
       - name: Setup Environment
         uses: ./.github/actions/setup-environment
 
-      - name: Run Dialtone-vue 2 Visual Tests
+      - name: Run Dialtone-vue 3 Visual Tests
         env:
           PERCY_TOKEN: ${{ secrets.PERCY_TOKEN }}
           PERCY_TARGET_BRANCH: ${{ github.base_ref }}
-        run: pnpm nx run --verbose dialtone-vue2:test:visual
+        run: pnpm nx run --verbose dialtone-vue3:test:visual

@@ -16,7 +16,6 @@ on:
           - icons
           - language-server
           - tokens
-          - vue2
           - vue3
           - eslint-plugin
           - stylelint-plugin
@@ -99,10 +98,6 @@ jobs:
       - name: Release Dialtone Tokens ${{ env.RELEASE_TAG }}
         if: ${{ github.event_name == 'schedule' || github.event.inputs.package == 'all' || github.event.inputs.package == 'tokens' }}
         run: pnpm nx run dialtone-tokens:release
-
-      - name: Release Dialtone Vue@${{ env.RELEASE_TAG }}
-        if: ${{ github.event_name == 'schedule' || github.event.inputs.package == 'all' || github.event.inputs.package == 'vue2' }}
-        run: pnpm nx run dialtone-vue2:release
 
       - name: Release Dialtone Vue@${{ env.DIALTONE_VUE3_RELEASE_TAG }}
         if: ${{ github.event_name == 'schedule' || github.event.inputs.package == 'all' || github.event.inputs.package == 'vue3' }}
