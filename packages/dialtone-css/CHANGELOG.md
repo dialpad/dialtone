@@ -1,3 +1,10 @@
+# [8.72.0-next.2](https://github.com/dialpad/dialtone/compare/dialtone-css/v8.72.0-next.1...dialtone-css/v8.72.0-next.2) (2026-01-14)
+
+
+### Code Refactoring
+
+* **Tokens:** DLT-2884 deprecate space tokens in favor of size tokens ([#1013](https://github.com/dialpad/dialtone/issues/1013)) ([63f6d2f](https://github.com/dialpad/dialtone/commit/63f6d2f67ede34d10358d1903f281400015fd426))
+
 # [8.72.0-next.1](https://github.com/dialpad/dialtone/compare/dialtone-css/v8.71.3...dialtone-css/v8.72.0-next.1) (2026-01-08)
 
 ## [8.71.4](https://github.com/dialpad/dialtone/compare/dialtone-css/v8.71.3...dialtone-css/v8.71.4) (2026-01-13)
