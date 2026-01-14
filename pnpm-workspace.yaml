@@ -3,6 +3,7 @@ packages:
   - 'apps/*'
   # npm publishable packages
   - 'packages/*'
+  - '!packages/dialtone-vue2'
   - 'packages/dialtone-icons/*'
   - 'packages/language-server/*'
   # yeoman generator

@@ -134,6 +134,14 @@ jobs:
           # Remove @dialpad scope configuration to use default npm registry instead of GitHub Packages
           npm config delete @dialpad:registry || true
 
+      - name: Configure GitHub Packages for publishing
+        if: matrix.registry == 'GitHub'
+        uses: actions/setup-node@v4
+        with:
+          node-version-file: ".nvmrc"
+          registry-url: "https://npm.pkg.github.com"
+          scope: "@dialpad"
+
       - name: Delay job to avoid npm rate limits
         if: matrix.package == 'dialtone-vue3'
         run: sleep 15s
@@ -143,6 +151,7 @@ jobs:
       - name: Publish ${{ matrix.package }}@${{ env.RELEASE_TAG }}
         env:
           RELEASE_TAG: ${{ matrix.package == 'dialtone-vue3' && needs.variables-setup.outputs.dialtone_vue3_release_tag || needs.variables-setup.outputs.release_tag }}
+          NODE_AUTH_TOKEN: ${{ matrix.registry == 'GitHub' && secrets.GITHUB_TOKEN || '' }}
         run: >
           pnpm nx run ${{ matrix.package }}:publish
           --publish-branch=${{ needs.variables-setup.outputs.current_branch }}
