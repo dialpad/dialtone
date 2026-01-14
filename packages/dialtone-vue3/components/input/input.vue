@@ -68,7 +68,6 @@
         <textarea
           v-if="isTextarea"
           ref="input"
-          :value="modelValue"
           :name="name"
           :disabled="disabled"
           :autocomplete="$attrs.autocomplete ?? 'off'"
@@ -533,6 +532,11 @@ export default {
         if (this.currentLength == null) {
           this.$emit('update:length', this.calculateLength(newValue));
         }
+
+        // Set textarea value programmatically to avoid attribute binding
+        if (this.isTextarea && this.$refs.input && this.$refs.input.value !== newValue) {
+          this.$refs.input.value = newValue;
+        }
       },
     },
   },
@@ -540,6 +544,13 @@ export default {
   beforeMount () {
     this.descriptionSizeClasses = DESCRIPTION_SIZE_CLASSES;
     this.labelSizeClasses = LABEL_SIZE_CLASSES;
+  },
+
+  mounted () {
+    // Set initial textarea value programmatically
+    if (this.isTextarea && this.$refs.input) {
+      this.$refs.input.value = this.modelValue;
+    }
   },
 
   methods: {
