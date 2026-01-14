@@ -23,7 +23,7 @@
       "executor": "nx:run-commands",
       "options": {
         "cwd": "{projectRoot}",
-        "command": "nx run-many --target=build --projects=dialtone-icons-vue2,dialtone-icons-vue3 --parallel=2 --output-style=stream"
+        "command": "nx run dialtone-icons-vue3:build --output-style=stream"
       },
       "inputs": [
         "{projectRoot}/src/**/*",
@@ -31,7 +31,6 @@
         "{projectRoot}/gulpfile.cjs"
       ],
       "outputs": [
-        "{projectRoot}/vue2/dist",
         "{projectRoot}/vue3/dist"
       ]
     },
