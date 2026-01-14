@@ -1,3 +1,22 @@
+# [9.154.0-next.2](https://github.com/dialpad/dialtone/compare/dialtone/v9.154.0-next.1...dialtone/v9.154.0-next.2) (2026-01-14)
+
+
+### Bug Fixes
+
+* **Doc:** NO-JIRA correct font size utility json ([#1015](https://github.com/dialpad/dialtone/issues/1015)) ([76cf0fa](https://github.com/dialpad/dialtone/commit/76cf0faa38f9980756346514ac7e8b4873389c8d))
+* NO-JIRA configure npm registry without GitHub Packages scope override ([c559455](https://github.com/dialpad/dialtone/commit/c559455e8464b06b75fce3c4d6c972617ba4f5e7))
+* NO-JIRA node 24 issues ([1abd97c](https://github.com/dialpad/dialtone/commit/1abd97cc4b7ad582a6d67bd97ca7ae11c65cada1))
+* NO-JIRA remove npmrc deletion ([dc57b60](https://github.com/dialpad/dialtone/commit/dc57b60db24bc37356508d7f6fa533f78febf859))
+* NO-JIRA revert lockfile ([5ffe793](https://github.com/dialpad/dialtone/commit/5ffe793346c3534ebef012a76ed9f363cda3ab7b))
+* NO-JIRA revert pnpm-lock.yaml to restore GitHub Packages tarball URLs ([4047c63](https://github.com/dialpad/dialtone/commit/4047c635c960dd36f2b64a32983b29663389ccda))
+* NO-JIRA update to node 24 ([e825521](https://github.com/dialpad/dialtone/commit/e8255214fa60e4bd84fb6801f6aac6503944ce4d))
+* NO-JIRA use lockfile with correct overrides and GitHub Packages tarball URLs ([4aca7c8](https://github.com/dialpad/dialtone/commit/4aca7c8dab63e7c7342c0789a24eaf337aee087c))
+
+
+### Code Refactoring
+
+* **Tokens:** DLT-2884 deprecate space tokens in favor of size tokens ([#1013](https://github.com/dialpad/dialtone/issues/1013)) ([63f6d2f](https://github.com/dialpad/dialtone/commit/63f6d2f67ede34d10358d1903f281400015fd426))
+
 # [9.154.0-next.1](https://github.com/dialpad/dialtone/compare/dialtone/v9.153.4...dialtone/v9.154.0-next.1) (2026-01-08)
 # [9.154.0](https://github.com/dialpad/dialtone/compare/dialtone/v9.153.9...dialtone/v9.154.0) (2026-01-13)
 
