@@ -159,8 +159,8 @@ importers:
         specifier: ^1.1.1
         version: 1.1.1
       '@dialpad/i18n-services':
-        specifier: 1.5.0
-        version: 1.5.0(@vue/composition-api@1.7.2(vue@3.5.21(typescript@5.8.3)))(vue@3.5.21(typescript@5.8.3))
+        specifier: 1.11.0
+        version: 1.11.0(@vue/composition-api@1.7.2(vue@3.5.21(typescript@5.8.3)))(vue@3.5.21(typescript@5.8.3))
       '@dialpad/semantic-release-changelog-json':
         specifier: ^1.0.0
         version: 1.0.0(semantic-release@21.1.2(typescript@5.8.3))
@@ -693,166 +693,6 @@ importers:
         specifier: ^4.19.0
         version: 4.19.0
 
-  packages/dialtone-vue2:
-    dependencies:
-      '@dialpad/dialtone-emojis':
-        specifier: workspace:*
-        version: link:../dialtone-emojis
-      '@dialpad/dialtone-icons':
-        specifier: workspace:*
-        version: link:../dialtone-icons
-      '@dialpad/i18n-vue2':
-        specifier: 1.7.1
-        version: 1.7.1(@fluent/bundle@0.17.1)(vue@2.7.16)
-      '@linusborg/vue-simple-portal':
-        specifier: 0.1.5
-        version: 0.1.5(vue@2.7.16)
-      '@tiptap/core':
-        specifier: 2.12.0
-        version: 2.12.0(@tiptap/pm@2.12.0)
-      '@tiptap/extension-blockquote':
-        specifier: 2.12.0
-        version: 2.12.0(@tiptap/core@2.12.0(@tiptap/pm@2.12.0))
-      '@tiptap/extension-bold':
-        specifier: 2.12.0
-        version: 2.12.0(@tiptap/core@2.12.0(@tiptap/pm@2.12.0))
-      '@tiptap/extension-bubble-menu':
-        specifier: 2.12.0
-        version: 2.12.0(@tiptap/core@2.12.0(@tiptap/pm@2.12.0))(@tiptap/pm@2.12.0)
-      '@tiptap/extension-bullet-list':
-        specifier: 2.12.0
-        version: 2.12.0(@tiptap/core@2.12.0(@tiptap/pm@2.12.0))
-      '@tiptap/extension-code':
-        specifier: 2.12.0
-        version: 2.12.0(@tiptap/core@2.12.0(@tiptap/pm@2.12.0))
-      '@tiptap/extension-code-block':
-        specifier: 2.12.0
-        version: 2.12.0(@tiptap/core@2.12.0(@tiptap/pm@2.12.0))(@tiptap/pm@2.12.0)
-      '@tiptap/extension-color':
-        specifier: 2.12.0
-        version: 2.12.0(@tiptap/core@2.12.0(@tiptap/pm@2.12.0))(@tiptap/extension-text-style@2.12.0(@tiptap/core@2.12.0(@tiptap/pm@2.12.0)))
-      '@tiptap/extension-document':
-        specifier: 2.12.0
-        version: 2.12.0(@tiptap/core@2.12.0(@tiptap/pm@2.12.0))
-      '@tiptap/extension-floating-menu':
-        specifier: 2.12.0
-        version: 2.12.0(@tiptap/core@2.12.0(@tiptap/pm@2.12.0))(@tiptap/pm@2.12.0)
-      '@tiptap/extension-font-family':
-        specifier: 2.12.0
-        version: 2.12.0(@tiptap/core@2.12.0(@tiptap/pm@2.12.0))(@tiptap/extension-text-style@2.12.0(@tiptap/core@2.12.0(@tiptap/pm@2.12.0)))
-      '@tiptap/extension-hard-break':
-        specifier: 2.12.0
-        version: 2.12.0(@tiptap/core@2.12.0(@tiptap/pm@2.12.0))
-      '@tiptap/extension-history':
-        specifier: 2.12.0
-        version: 2.12.0(@tiptap/core@2.12.0(@tiptap/pm@2.12.0))(@tiptap/pm@2.12.0)
-      '@tiptap/extension-image':
-        specifier: 2.12.0
-        version: 2.12.0(@tiptap/core@2.12.0(@tiptap/pm@2.12.0))
-      '@tiptap/extension-italic':
-        specifier: 2.12.0
-        version: 2.12.0(@tiptap/core@2.12.0(@tiptap/pm@2.12.0))
-      '@tiptap/extension-link':
-        specifier: 2.12.0
-        version: 2.12.0(@tiptap/core@2.12.0(@tiptap/pm@2.12.0))(@tiptap/pm@2.12.0)
-      '@tiptap/extension-list-item':
-        specifier: 2.12.0
-        version: 2.12.0(@tiptap/core@2.12.0(@tiptap/pm@2.12.0))
-      '@tiptap/extension-mention':
-        specifier: 2.12.0
-        version: 2.12.0(@tiptap/core@2.12.0(@tiptap/pm@2.12.0))(@tiptap/pm@2.12.0)(@tiptap/suggestion@2.12.0(@tiptap/core@2.12.0(@tiptap/pm@2.12.0))(@tiptap/pm@2.12.0))
-      '@tiptap/extension-ordered-list':
-        specifier: 2.12.0
-        version: 2.12.0(@tiptap/core@2.12.0(@tiptap/pm@2.12.0))
-      '@tiptap/extension-paragraph':
-        specifier: 2.12.0
-        version: 2.12.0(@tiptap/core@2.12.0(@tiptap/pm@2.12.0))
-      '@tiptap/extension-placeholder':
-        specifier: 2.12.0
-        version: 2.12.0(@tiptap/core@2.12.0(@tiptap/pm@2.12.0))(@tiptap/pm@2.12.0)
-      '@tiptap/extension-strike':
-        specifier: 2.12.0
-        version: 2.12.0(@tiptap/core@2.12.0(@tiptap/pm@2.12.0))
-      '@tiptap/extension-text':
-        specifier: 2.12.0
-        version: 2.12.0(@tiptap/core@2.12.0(@tiptap/pm@2.12.0))
-      '@tiptap/extension-text-align':
-        specifier: 2.12.0
-        version: 2.12.0(@tiptap/core@2.12.0(@tiptap/pm@2.12.0))
-      '@tiptap/extension-text-style':
-        specifier: 2.12.0
-        version: 2.12.0(@tiptap/core@2.12.0(@tiptap/pm@2.12.0))
-      '@tiptap/extension-underline':
-        specifier: 2.12.0
-        version: 2.12.0(@tiptap/core@2.12.0(@tiptap/pm@2.12.0))
-      '@tiptap/pm':
-        specifier: 2.12.0
-        version: 2.12.0
-      '@tiptap/suggestion':
-        specifier: 2.12.0
-        version: 2.12.0(@tiptap/core@2.12.0(@tiptap/pm@2.12.0))(@tiptap/pm@2.12.0)
-      '@tiptap/vue-2':
-        specifier: ^2.12.0
-        version: 2.12.0(@tiptap/core@2.12.0(@tiptap/pm@2.12.0))(@tiptap/pm@2.12.0)(vue@2.7.16)
-      date-fns:
-        specifier: 4.1.0
-        version: 4.1.0
-      deep-equal:
-        specifier: 2.2.3
-        version: 2.2.3
-      emoji-toolkit:
-        specifier: 9.0.1
-        version: 9.0.1
-      linkifyjs:
-        specifier: 4.3.2
-        version: 4.3.2
-      overlayscrollbars:
-        specifier: 2.10.0
-        version: 2.10.0
-      regex-combined-emojis:
-        specifier: 1.6.0
-        version: 1.6.0
-      tippy.js:
-        specifier: 6.3.7
-        version: 6.3.7
-      turndown:
-        specifier: 7.2.0
-        version: 7.2.0
-    devDependencies:
-      '@dialpad/dialtone-css':
-        specifier: workspace:*
-        version: link:../dialtone-css
-      '@dialpad/generator-dialtone':
-        specifier: workspace:*
-        version: link:../../generator-dialtone
-      '@storybook/addon-a11y':
-        specifier: 7.6.20
-        version: 7.6.20
-      '@storybook/addon-essentials':
-        specifier: 7.6.20
-        version: 7.6.20(@types/react-dom@17.0.25)(@types/react@18.2.37)(encoding@0.1.13)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
-      '@storybook/addon-links':
-        specifier: 7.6.20
-        version: 7.6.20(react@18.3.1)
-      '@storybook/vue':
-        specifier: 7.6.20
-        version: 7.6.20(@babel/core@7.28.0)(css-loader@6.11.0(webpack@5.95.0(@swc/core@1.13.2)(esbuild@0.18.20)))(encoding@0.1.13)(vue@2.7.16)
-      '@storybook/vue-vite':
-        specifier: 7.6.20
-        version: 7.6.20(@babel/core@7.28.0)(css-loader@6.11.0(webpack@5.95.0(@swc/core@1.13.2)(esbuild@0.18.20)))(encoding@0.1.13)(typescript@5.8.3)(vite@7.0.7(@types/node@25.0.3)(jiti@1.21.7)(less@4.2.0)(sugarss@5.0.1(postcss@8.4.39))(terser@5.44.1)(tsx@4.19.0)(yaml@2.8.0))(vue@2.7.16)
-      '@vue/test-utils':
-        specifier: '1.3'
-        version: 1.3.6(vue-template-compiler@2.7.16)(vue@2.7.16)
-      react:
-        specifier: ^18.3.1
-        version: 18.3.1
-      storybook-dark-mode:
-        specifier: ^3.0.3
-        version: 3.0.3(@types/react-dom@17.0.25)(@types/react@18.2.37)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
-      vue:
-        specifier: ^2.7.15
-        version: 2.7.16
-
   packages/dialtone-vue3:
     dependencies:
       '@dialpad/dialtone-emojis':
@@ -863,7 +703,7 @@ importers:
         version: link:../dialtone-icons
       '@dialpad/i18n':
         specifier: 1.22.1
-        version: 1.22.1(@vue/composition-api@1.7.2(vue@3.4.15(typescript@5.8.3)))(vue@3.4.15(typescript@5.8.3))
+        version: 1.22.1(@vue/composition-api@1.7.2(vue@3.5.21(typescript@5.8.3)))(vue@3.4.15(typescript@5.8.3))
       '@tiptap/core':
         specifier: 2.12.0
         version: 2.12.0(@tiptap/pm@2.12.0)
@@ -1908,18 +1748,6 @@ packages:
     peerDependenciesMeta:
       '@vue/composition-api':
         optional: true
-
-  '@dialpad/i18n-services@1.5.0':
-    resolution: {integrity: sha512-roHr0G1+C/3VeDureM5NRqK1rgt2xdF/MK1bT8khEYWW8KwQ3BuPpbvS3sz/V0kOqzQKzPaGX0ePYXpNnddzmw==, tarball: https://npm.pkg.github.com/download/@dialpad/i18n-services/1.5.0/410424f9243242ab8ebfe80116c2ddc3df54ddb6}
-    hasBin: true
-    peerDependencies:
-      '@vue/composition-api': 1.7.2
-      vue: ^2.0.0 || >=3.0.0
-
-  '@dialpad/i18n-vue2@1.7.1':
-    resolution: {integrity: sha512-OW6Qh4QvW/zONrERcDUBog3eU10j0uVXi+Kgjkh2GAkqWICjZ+M02FFJ9AS7cdmxqGHqZ0AnnWgOFXIByHELWg==, tarball: https://npm.pkg.github.com/download/@dialpad/i18n-vue2/1.7.1/ff2bf370c2cf46e57eaf6f8603df11a05bb40eb8}
-    peerDependencies:
-      vue: 2.6.14
 
   '@dialpad/i18n@1.22.1':
     resolution: {integrity: sha512-OMu86aeVtKU3ipoRw5ui0VPv4XHM+MCN/3W2DEopJMylnlAmYKKg+JL7pwcMyWF/rnccpCKY1rAQFGXucL92Tw==, tarball: https://npm.pkg.github.com/download/@dialpad/i18n/1.22.1/5e0d08b533b68069caab8a89fa1bbb1bbb955e69}
@@ -3150,11 +2978,6 @@ packages:
 
   '@leichtgewicht/ip-codec@2.0.5':
     resolution: {integrity: sha512-Vo+PSpZG2/fmgmiNzYK9qWRh8h/CHrwD0mo1h1DzL4yzHNSfWYujGTYsWGreD000gcgmZ7K4Ys6Tx9TxtsKdDw==}
-
-  '@linusborg/vue-simple-portal@0.1.5':
-    resolution: {integrity: sha512-dq+oubEVW4UabBoQxmH97GiDa+F6sTomw4KcXFHnXEpw69rdkXFCxo1WzwuvWjoLiUVYJTyN1dtlUvTa50VcXg==}
-    peerDependencies:
-      vue: ^2.6.6
 
   '@ljharb/through@2.3.11':
     resolution: {integrity: sha512-ccfcIDlogiXNq5KcbAwbaO7lMh3Tm1i3khMPYpxlK8hH/W53zN81KM9coerRLOnTGu3nfXIniAmQbRI9OxbC0w==}
@@ -4998,13 +4821,6 @@ packages:
   '@storybook/types@7.6.20':
     resolution: {integrity: sha512-GncdY3x0LpbhmUAAJwXYtJDUQEwfF175gsjH0/fxPkxPoV7Sef9TM41jQLJW/5+6TnZoCZP/+aJZTJtq3ni23Q==}
 
-  '@storybook/vue-vite@7.6.20':
-    resolution: {integrity: sha512-GyaMvBIY8yAP3SEt/fK0O9Guq2btgCTGA3Bjk8yZ4FRWx0l1eJr94HUPsvZyrL0SRWokSmAenbMsj4WK1g542Q==}
-    engines: {node: '>=16.0.0'}
-    peerDependencies:
-      vite: ^3.0.0 || ^4.0.0 || ^5.0.0
-      vue: ^2.7.0
-
   '@storybook/vue3-vite@7.6.20':
     resolution: {integrity: sha512-uWqgOExT70CTCFPr+MPZmqdi7saETFxrGUfhORqXW/mjIw9uLccGgIQuwUbIl0YXg3LhVSBvHYKRZgPbI9jkVw==}
     engines: {node: ^14.18 || >=16}
@@ -5016,18 +4832,6 @@ packages:
     engines: {node: '>=16.0.0'}
     peerDependencies:
       vue: ^3.0.0
-
-  '@storybook/vue@7.6.20':
-    resolution: {integrity: sha512-Q0/ce9lNoq6IrDb6uemyNRXiF2O7sUnVpjNKV5ZqIjUybZ6MU2huiE1RnUbM9bW2c+XxpQMuHwMRNVOrb4THpA==}
-    engines: {node: '>=16.0.0'}
-    peerDependencies:
-      '@babel/core': '*'
-      babel-loader: ^7.0.0 || ^8.0.0 || ^9.0.0
-      css-loader: '*'
-      vue: ^2.6.8
-    peerDependenciesMeta:
-      babel-loader:
-        optional: true
 
   '@swc/core-darwin-arm64@1.13.2':
     resolution: {integrity: sha512-44p7ivuLSGFJ15Vly4ivLJjg3ARo4879LtEBAabcHhSZygpmkP8eyjyWxrH3OxkY1eRZSIJe8yRZPFw4kPXFPw==}
@@ -5266,13 +5070,6 @@ packages:
     peerDependencies:
       '@tiptap/core': ^2.7.0
       '@tiptap/pm': ^2.7.0
-
-  '@tiptap/vue-2@2.12.0':
-    resolution: {integrity: sha512-vWtLP+935G65NxDGwCBJ3Uog2aJ49ax4aetrY21qnfAWb+v8d6LW3e1ZwhwGXWHamJl2oysWJHWFyPKQTMeAjA==}
-    peerDependencies:
-      '@tiptap/core': ^2.7.0
-      '@tiptap/pm': ^2.7.0
-      vue: ^2.6.0
 
   '@tiptap/vue-3@2.12.0':
     resolution: {integrity: sha512-NXvxIwBSYDhEiL6MwRnoUc5+KizAnokp4/BA3n4S5+hbmpuJCygebYdq8Tap0KU9caAh53qqiMlSonuLHny5vA==}
@@ -5952,12 +5749,6 @@ packages:
 
   '@vue/shared@3.5.21':
     resolution: {integrity: sha512-+2k1EQpnYuVuu3N7atWyG3/xoFWIVJZq4Mz8XNOdScFI0etES75fbny/oU4lKWk/577P1zmg0ioYvpGEDZ3DLw==}
-
-  '@vue/test-utils@1.3.6':
-    resolution: {integrity: sha512-udMmmF1ts3zwxUJEIAj5ziioR900reDrt6C9H3XpWPsLBx2lpHKoA4BTdd9HNIYbkGltWw+JjWJ+5O6QBwiyEw==}
-    peerDependencies:
-      vue: 2.x
-      vue-template-compiler: ^2.x
 
   '@vue/test-utils@2.4.2':
     resolution: {integrity: sha512-07lLjpG1o9tEBoWQfVOFhDT7+WFCdDeECoeSdzOuVgIi6nxb2JDLGNNOV6+3crPpyg/jMlIocj96UROcgomiGg==}
@@ -7536,10 +7327,6 @@ packages:
     engines: {node: '>=18'}
     hasBin: true
 
-  condense-newlines@0.2.1:
-    resolution: {integrity: sha512-P7X+QL9Hb9B/c8HI5BFFKmjgBu2XpQuF98WZ9XkO+dBGgk5XgwiQz7o1SmpglNWId3581UcS0SFAWfoIhMHPfg==}
-    engines: {node: '>=0.10.0'}
-
   confbox@0.1.8:
     resolution: {integrity: sha512-RMtmw0iFkeR4YV+fUOSucriAQNb9g8zFR52MWCtl+cCZOFRNL6zeB395vPzFhEjjn4fMxXudmELnl/KF/WrK6w==}
 
@@ -8455,9 +8242,6 @@ packages:
 
   dom-converter@0.2.0:
     resolution: {integrity: sha512-gd3ypIPfOMr9h5jIKq8E3sHOTCjeirnl0WK5ZdS1AW0Odt0b1PaWaHdJ4Qk4klv+YB9aJBS7mESXjFoDQPu6DA==}
-
-  dom-event-types@1.1.0:
-    resolution: {integrity: sha512-jNCX+uNJ3v38BKvPbpki6j5ItVlnSqVV6vDWGS6rExzCMjsc39frLjm1n91o6YaKK6AZl0wLloItW6C6mr61BQ==}
 
   dom-serializer@0.2.2:
     resolution: {integrity: sha512-2/xPb3ORsQ42nHYiSunXkDjPLBaEj/xTwUO4B7XCZQTRk7EBtTOPaygh10YAAh2OI1Qrp6NWfpAhzswj0ydt9g==}
@@ -9516,16 +9300,6 @@ packages:
   flow-parser@0.277.1:
     resolution: {integrity: sha512-86F5PGl+OrFvCzyK04id9Yf9rxFB8485GPs5sexB4cVLOXmpHbSi1/dYiaemI53I85CpImBu/qHVmZnGQflgmw==}
     engines: {node: '>=0.4.0'}
-
-  fluent-vue@3.6.0:
-    resolution: {integrity: sha512-3G/nEqdTfAcJbn2FlfXFTSI8ONf3xNnp3IPHQAm2mRfY6Zj5hz4BeMehQF5ojteFHwyYV9bNeRyNsKtlYHHUYA==}
-    peerDependencies:
-      '@fluent/bundle': '>=0.17.0'
-      '@vue/composition-api': '>=1.0.0-rc.1'
-      vue: ^2.6.11 || >=3.0.0
-    peerDependenciesMeta:
-      '@vue/composition-api':
-        optional: true
 
   fluent-vue@3.7.2:
     resolution: {integrity: sha512-gzKBdTQBqvhGQksL+iXDJrw6xA+1mc0oXCMe4Cg25Y2ynFQZCfAJQNM5i5JwStcYEWImWcmAqqb12W27TMZwlQ==}
@@ -10908,10 +10682,6 @@ packages:
   is-what@4.1.16:
     resolution: {integrity: sha512-ZhMwEosbFJkA0YhFnNDgTM4ZxDRsS6HqTo7qsZM08fehyRYIYa0yHu5R6mgo1n/8MgaPBXiPimPD77baVFYg+A==}
     engines: {node: '>=12.13'}
-
-  is-whitespace@0.3.0:
-    resolution: {integrity: sha512-RydPhl4S6JwAyj0JJjshWJEFG6hNye3pZFBRZaTUfZFwGHxzppNaNOVgQuS/E/SlhrApuMXrpnK1EEIXfdo3Dg==}
-    engines: {node: '>=0.10.0'}
 
   is-windows@0.2.0:
     resolution: {integrity: sha512-n67eJYmXbniZB7RF4I/FTjK1s6RPOCTxhYrVYLRaCt3lF0mpWZPKr3T2LSZAqyjQsxR2qMmGYXXzK0YWwcPM1Q==}
@@ -14047,10 +13817,6 @@ packages:
     resolution: {integrity: sha512-66hKPCr+72mlfiSjlEB1+45IjXSqvVAIy6mocupoww4tBFE9R9IhwwUGoI4G++Tc9Aq+2rxOt0RFU6gPcrte0A==}
     engines: {node: '>= 0.8'}
 
-  pretty@2.0.0:
-    resolution: {integrity: sha512-G9xUchgTEiNpormdYBl+Pha50gOUovT18IvAe7EYMZ1/f9W/WWMPRn+xI68yXNMUk3QXHDwo/1wV/4NejVNe1w==}
-    engines: {node: '>=0.10.0'}
-
   prismjs@1.30.0:
     resolution: {integrity: sha512-DEvV2ZF2r2/63V+tK8hQvrR2ZGn10srHbXviTlcv7Kpzw8jWiNTqbVgjO3IY8RxrrOUF8VPMQQFysYYYv0YZxw==}
     engines: {node: '>=6'}
@@ -16813,11 +16579,6 @@ packages:
   vue-template-es2015-compiler@1.9.1:
     resolution: {integrity: sha512-4gDntzrifFnCEvyoO8PqyJDmguXgVPxKiIxrBKjIowvL9l+N66196+72XVYR8BBf1Uv1Fgt3bGevJ+sEmxfZzw==}
 
-  vue-ts-types@1.6.2:
-    resolution: {integrity: sha512-iOBe4oMoTeISs+Wxlt5E6q3W6lEX6UtkwWCPu6727IoweBE3O3Vp/2/BtO+Kf5pISQU7WpX71hXTeMGqHsmecA==}
-    peerDependencies:
-      vue: ^2.6 || ^3.2
-
   vue@2.7.16:
     resolution: {integrity: sha512-4gCtFXaAA3zYZdTp5s4Hl2sozuySsgz4jy1EnpBHNfpMa9dK1ZCG7viqBPCwXtmgc8nHqUsAu3G4gtmXkkY3Sw==}
     deprecated: Vue 2 has reached EOL and is no longer actively maintained. See https://v2.vuejs.org/eol/ for more details.
@@ -18423,50 +18184,31 @@ snapshots:
       compare-func: 2.0.0
       q: 1.5.1
 
-  '@dialpad/i18n-services@1.11.0(@vue/composition-api@1.7.2(vue@2.7.16))(vue@2.7.16)':
+  '@dialpad/i18n-services@1.11.0(@vue/composition-api@1.7.2(vue@3.5.21(typescript@5.8.3)))(vue@3.4.15(typescript@5.8.3))':
     dependencies:
       '@fluent/bundle': 0.17.1
       '@fluent/syntax': 0.19.0
       csv-parse: 5.5.6
-      fluent-vue: 3.7.2(@fluent/bundle@0.17.1)(@vue/composition-api@1.7.2(vue@2.7.16))(vue@2.7.16)
-      vue: 2.7.16
-      vue-demi: 0.14.10(@vue/composition-api@1.7.2(vue@2.7.16))(vue@2.7.16)
-    optionalDependencies:
-      '@vue/composition-api': 1.7.2(vue@2.7.16)
-
-  '@dialpad/i18n-services@1.11.0(@vue/composition-api@1.7.2(vue@3.4.15(typescript@5.8.3)))(vue@3.4.15(typescript@5.8.3))':
-    dependencies:
-      '@fluent/bundle': 0.17.1
-      '@fluent/syntax': 0.19.0
-      csv-parse: 5.5.6
-      fluent-vue: 3.7.2(@fluent/bundle@0.17.1)(@vue/composition-api@1.7.2(vue@3.4.15(typescript@5.8.3)))(vue@3.4.15(typescript@5.8.3))
+      fluent-vue: 3.7.2(@fluent/bundle@0.17.1)(@vue/composition-api@1.7.2(vue@3.5.21(typescript@5.8.3)))(vue@3.4.15(typescript@5.8.3))
       vue: 3.4.15(typescript@5.8.3)
-      vue-demi: 0.14.10(@vue/composition-api@1.7.2(vue@3.4.15(typescript@5.8.3)))(vue@3.4.15(typescript@5.8.3))
+      vue-demi: 0.14.10(@vue/composition-api@1.7.2(vue@3.5.21(typescript@5.8.3)))(vue@3.4.15(typescript@5.8.3))
     optionalDependencies:
-      '@vue/composition-api': 1.7.2(vue@3.4.15(typescript@5.8.3))
+      '@vue/composition-api': 1.7.2(vue@3.5.21(typescript@5.8.3))
 
-  '@dialpad/i18n-services@1.5.0(@vue/composition-api@1.7.2(vue@3.5.21(typescript@5.8.3)))(vue@3.5.21(typescript@5.8.3))':
+  '@dialpad/i18n-services@1.11.0(@vue/composition-api@1.7.2(vue@3.5.21(typescript@5.8.3)))(vue@3.5.21(typescript@5.8.3))':
     dependencies:
       '@fluent/bundle': 0.17.1
       '@fluent/syntax': 0.19.0
-      '@vue/composition-api': 1.7.2(vue@3.5.21(typescript@5.8.3))
       csv-parse: 5.5.6
-      fluent-vue: 3.6.0(@fluent/bundle@0.17.1)(@vue/composition-api@1.7.2(vue@3.5.21(typescript@5.8.3)))(vue@3.5.21(typescript@5.8.3))
+      fluent-vue: 3.7.2(@fluent/bundle@0.17.1)(@vue/composition-api@1.7.2(vue@3.5.21(typescript@5.8.3)))(vue@3.5.21(typescript@5.8.3))
       vue: 3.5.21(typescript@5.8.3)
       vue-demi: 0.14.10(@vue/composition-api@1.7.2(vue@3.5.21(typescript@5.8.3)))(vue@3.5.21(typescript@5.8.3))
+    optionalDependencies:
+      '@vue/composition-api': 1.7.2(vue@3.5.21(typescript@5.8.3))
 
-  '@dialpad/i18n-vue2@1.7.1(@fluent/bundle@0.17.1)(vue@2.7.16)':
+  '@dialpad/i18n@1.22.1(@vue/composition-api@1.7.2(vue@3.5.21(typescript@5.8.3)))(vue@3.4.15(typescript@5.8.3))':
     dependencies:
-      '@dialpad/i18n-services': 1.11.0(@vue/composition-api@1.7.2(vue@2.7.16))(vue@2.7.16)
-      '@vue/composition-api': 1.7.2(vue@2.7.16)
-      fluent-vue: 3.7.2(@fluent/bundle@0.17.1)(@vue/composition-api@1.7.2(vue@2.7.16))(vue@2.7.16)
-      vue: 2.7.16
-    transitivePeerDependencies:
-      - '@fluent/bundle'
-
-  '@dialpad/i18n@1.22.1(@vue/composition-api@1.7.2(vue@3.4.15(typescript@5.8.3)))(vue@3.4.15(typescript@5.8.3))':
-    dependencies:
-      '@dialpad/i18n-services': 1.11.0(@vue/composition-api@1.7.2(vue@3.4.15(typescript@5.8.3)))(vue@3.4.15(typescript@5.8.3))
+      '@dialpad/i18n-services': 1.11.0(@vue/composition-api@1.7.2(vue@3.5.21(typescript@5.8.3)))(vue@3.4.15(typescript@5.8.3))
       vue: 3.4.15(typescript@5.8.3)
     transitivePeerDependencies:
       - '@vue/composition-api'
@@ -19526,11 +19268,6 @@ snapshots:
   '@keyv/serialize@1.1.1': {}
 
   '@leichtgewicht/ip-codec@2.0.5': {}
-
-  '@linusborg/vue-simple-portal@0.1.5(vue@2.7.16)':
-    dependencies:
-      nanoid: 3.3.11
-      vue: 2.7.16
 
   '@ljharb/through@2.3.11':
     dependencies:
@@ -21875,31 +21612,6 @@ snapshots:
       - encoding
       - supports-color
 
-  '@storybook/builder-vite@7.6.20(encoding@0.1.13)(typescript@5.8.3)(vite@7.0.7(@types/node@25.0.3)(jiti@1.21.7)(less@4.2.0)(sugarss@5.0.1(postcss@8.4.39))(terser@5.44.1)(tsx@4.19.0)(yaml@2.8.0))':
-    dependencies:
-      '@storybook/channels': 7.6.20
-      '@storybook/client-logger': 7.6.20
-      '@storybook/core-common': 7.6.20(encoding@0.1.13)
-      '@storybook/csf-plugin': 7.6.20
-      '@storybook/node-logger': 7.6.20
-      '@storybook/preview': 7.6.20
-      '@storybook/preview-api': 7.6.20
-      '@storybook/types': 7.6.20
-      '@types/find-cache-dir': 3.2.1
-      browser-assert: 1.2.1
-      es-module-lexer: 0.9.3
-      express: 4.21.2
-      find-cache-dir: 3.3.2
-      fs-extra: 11.3.0
-      magic-string: 0.30.19
-      rollup: 3.29.5
-      vite: 7.0.7(@types/node@25.0.3)(jiti@1.21.7)(less@4.2.0)(sugarss@5.0.1(postcss@8.4.39))(terser@5.44.1)(tsx@4.19.0)(yaml@2.8.0)
-    optionalDependencies:
-      typescript: 5.8.3
-    transitivePeerDependencies:
-      - encoding
-      - supports-color
-
   '@storybook/builder-vite@7.6.20(encoding@0.1.13)(typescript@5.8.3)(vite@7.0.7(@types/node@25.0.3)(jiti@1.21.7)(less@4.2.0)(sugarss@5.0.1(postcss@8.5.6))(terser@5.44.1)(tsx@4.19.0)(yaml@2.8.0))':
     dependencies:
       '@storybook/channels': 7.6.20
@@ -22356,28 +22068,6 @@ snapshots:
       '@types/express': 4.17.23
       file-system-cache: 2.3.0
 
-  '@storybook/vue-vite@7.6.20(@babel/core@7.28.0)(css-loader@6.11.0(webpack@5.95.0(@swc/core@1.13.2)(esbuild@0.18.20)))(encoding@0.1.13)(typescript@5.8.3)(vite@7.0.7(@types/node@25.0.3)(jiti@1.21.7)(less@4.2.0)(sugarss@5.0.1(postcss@8.4.39))(terser@5.44.1)(tsx@4.19.0)(yaml@2.8.0))(vue@2.7.16)':
-    dependencies:
-      '@storybook/builder-vite': 7.6.20(encoding@0.1.13)(typescript@5.8.3)(vite@7.0.7(@types/node@25.0.3)(jiti@1.21.7)(less@4.2.0)(sugarss@5.0.1(postcss@8.4.39))(terser@5.44.1)(tsx@4.19.0)(yaml@2.8.0))
-      '@storybook/core-common': 7.6.20(encoding@0.1.13)
-      '@storybook/core-server': 7.6.20(encoding@0.1.13)
-      '@storybook/vue': 7.6.20(@babel/core@7.28.0)(css-loader@6.11.0(webpack@5.95.0(@swc/core@1.13.2)(esbuild@0.18.20)))(encoding@0.1.13)(vue@2.7.16)
-      magic-string: 0.30.19
-      vite: 7.0.7(@types/node@25.0.3)(jiti@1.21.7)(less@4.2.0)(sugarss@5.0.1(postcss@8.4.39))(terser@5.44.1)(tsx@4.19.0)(yaml@2.8.0)
-      vue: 2.7.16
-      vue-docgen-api: 4.79.2(vue@2.7.16)
-    transitivePeerDependencies:
-      - '@babel/core'
-      - '@preact/preset-vite'
-      - babel-loader
-      - bufferutil
-      - css-loader
-      - encoding
-      - supports-color
-      - typescript
-      - utf-8-validate
-      - vite-plugin-glimmerx
-
   '@storybook/vue3-vite@7.6.20(encoding@0.1.13)(typescript@5.8.3)(vite@7.0.7(@types/node@25.0.3)(jiti@1.21.7)(less@4.2.0)(sugarss@5.0.1(postcss@8.5.6))(terser@5.44.1)(tsx@4.19.0)(yaml@2.8.0))(vue@3.4.15(typescript@5.8.3))':
     dependencies:
       '@storybook/builder-vite': 7.6.20(encoding@0.1.13)(typescript@5.8.3)(vite@7.0.7(@types/node@25.0.3)(jiti@1.21.7)(less@4.2.0)(sugarss@5.0.1(postcss@8.5.6))(terser@5.44.1)(tsx@4.19.0)(yaml@2.8.0))
@@ -22410,23 +22100,6 @@ snapshots:
       type-fest: 2.19.0
       vue: 3.4.15(typescript@5.8.3)
       vue-component-type-helpers: 3.2.2
-    transitivePeerDependencies:
-      - encoding
-      - supports-color
-
-  '@storybook/vue@7.6.20(@babel/core@7.28.0)(css-loader@6.11.0(webpack@5.95.0(@swc/core@1.13.2)(esbuild@0.18.20)))(encoding@0.1.13)(vue@2.7.16)':
-    dependencies:
-      '@babel/core': 7.28.0
-      '@storybook/client-logger': 7.6.20
-      '@storybook/core-client': 7.6.20
-      '@storybook/docs-tools': 7.6.20(encoding@0.1.13)
-      '@storybook/global': 5.0.0
-      '@storybook/preview-api': 7.6.20
-      '@storybook/types': 7.6.20
-      css-loader: 6.11.0(webpack@5.95.0(@swc/core@1.13.2)(esbuild@0.18.20))
-      ts-dedent: 2.2.0
-      type-fest: 2.19.0
-      vue: 2.7.16
     transitivePeerDependencies:
       - encoding
       - supports-color
@@ -22640,15 +22313,6 @@ snapshots:
     dependencies:
       '@tiptap/core': 2.12.0(@tiptap/pm@2.12.0)
       '@tiptap/pm': 2.12.0
-
-  '@tiptap/vue-2@2.12.0(@tiptap/core@2.12.0(@tiptap/pm@2.12.0))(@tiptap/pm@2.12.0)(vue@2.7.16)':
-    dependencies:
-      '@tiptap/core': 2.12.0(@tiptap/pm@2.12.0)
-      '@tiptap/extension-bubble-menu': 2.12.0(@tiptap/core@2.12.0(@tiptap/pm@2.12.0))(@tiptap/pm@2.12.0)
-      '@tiptap/extension-floating-menu': 2.12.0(@tiptap/core@2.12.0(@tiptap/pm@2.12.0))(@tiptap/pm@2.12.0)
-      '@tiptap/pm': 2.12.0
-      vue: 2.7.16
-      vue-ts-types: 1.6.2(vue@2.7.16)
 
   '@tiptap/vue-3@2.12.0(@tiptap/core@2.12.0(@tiptap/pm@2.12.0))(@tiptap/pm@2.12.0)(vue@3.4.15(typescript@5.8.3))':
     dependencies:
@@ -23710,18 +23374,10 @@ snapshots:
       - walrus
       - whiskers
 
-  '@vue/composition-api@1.7.2(vue@2.7.16)':
-    dependencies:
-      vue: 2.7.16
-
-  '@vue/composition-api@1.7.2(vue@3.4.15(typescript@5.8.3))':
-    dependencies:
-      vue: 3.4.15(typescript@5.8.3)
-    optional: true
-
   '@vue/composition-api@1.7.2(vue@3.5.21(typescript@5.8.3))':
     dependencies:
       vue: 3.5.21(typescript@5.8.3)
+    optional: true
 
   '@vue/devtools-api@6.6.4': {}
 
@@ -23811,14 +23467,6 @@ snapshots:
   '@vue/shared@3.5.18': {}
 
   '@vue/shared@3.5.21': {}
-
-  '@vue/test-utils@1.3.6(vue-template-compiler@2.7.16)(vue@2.7.16)':
-    dependencies:
-      dom-event-types: 1.1.0
-      lodash: 4.17.21
-      pretty: 2.0.0
-      vue: 2.7.16
-      vue-template-compiler: 2.7.16
 
   '@vue/test-utils@2.4.2(@vue/server-renderer@3.5.21(vue@3.4.15(typescript@5.8.3)))(vue@3.4.15(typescript@5.8.3))':
     dependencies:
@@ -25725,12 +25373,6 @@ snapshots:
       tree-kill: 1.2.2
       yargs: 17.7.2
 
-  condense-newlines@0.2.1:
-    dependencies:
-      extend-shallow: 2.0.1
-      is-whitespace: 0.3.0
-      kind-of: 3.2.2
-
   confbox@0.1.8: {}
 
   confbox@0.2.2: {}
@@ -25992,19 +25634,6 @@ snapshots:
       postcss: 8.5.6
 
   css-functions-list@3.2.3: {}
-
-  css-loader@6.11.0(webpack@5.95.0(@swc/core@1.13.2)(esbuild@0.18.20)):
-    dependencies:
-      icss-utils: 5.1.0(postcss@8.4.39)
-      postcss: 8.4.39
-      postcss-modules-extract-imports: 3.1.0(postcss@8.4.39)
-      postcss-modules-local-by-default: 4.2.0(postcss@8.4.39)
-      postcss-modules-scope: 3.2.1(postcss@8.4.39)
-      postcss-modules-values: 4.0.0(postcss@8.4.39)
-      postcss-value-parser: 4.2.0
-      semver: 7.7.3
-    optionalDependencies:
-      webpack: 5.95.0(@swc/core@1.13.2)(esbuild@0.18.20)
 
   css-loader@6.11.0(webpack@5.95.0(@swc/core@1.13.2)):
     dependencies:
@@ -26528,8 +26157,6 @@ snapshots:
   dom-converter@0.2.0:
     dependencies:
       utila: 0.4.0
-
-  dom-event-types@1.1.0: {}
 
   dom-serializer@0.2.2:
     dependencies:
@@ -27974,37 +27601,27 @@ snapshots:
 
   flow-parser@0.277.1: {}
 
-  fluent-vue@3.6.0(@fluent/bundle@0.17.1)(@vue/composition-api@1.7.2(vue@3.5.21(typescript@5.8.3)))(vue@3.5.21(typescript@5.8.3)):
-    dependencies:
-      '@fluent/bundle': 0.17.1
-      '@fluent/sequence': 0.8.0(@fluent/bundle@0.17.1)
-      cached-iterable: 0.3.0
-      vue: 3.5.21(typescript@5.8.3)
-      vue-demi: 0.14.10(@vue/composition-api@1.7.2(vue@3.5.21(typescript@5.8.3)))(vue@3.5.21(typescript@5.8.3))
-    optionalDependencies:
-      '@vue/composition-api': 1.7.2(vue@3.5.21(typescript@5.8.3))
-
-  fluent-vue@3.7.2(@fluent/bundle@0.17.1)(@vue/composition-api@1.7.2(vue@2.7.16))(vue@2.7.16):
-    dependencies:
-      '@fluent/bundle': 0.17.1
-      '@fluent/sequence': 0.8.0(@fluent/bundle@0.17.1)
-      '@vue/devtools-api': 7.7.7
-      cached-iterable: 0.3.0
-      vue: 2.7.16
-      vue-demi: 0.14.10(@vue/composition-api@1.7.2(vue@2.7.16))(vue@2.7.16)
-    optionalDependencies:
-      '@vue/composition-api': 1.7.2(vue@2.7.16)
-
-  fluent-vue@3.7.2(@fluent/bundle@0.17.1)(@vue/composition-api@1.7.2(vue@3.4.15(typescript@5.8.3)))(vue@3.4.15(typescript@5.8.3)):
+  fluent-vue@3.7.2(@fluent/bundle@0.17.1)(@vue/composition-api@1.7.2(vue@3.5.21(typescript@5.8.3)))(vue@3.4.15(typescript@5.8.3)):
     dependencies:
       '@fluent/bundle': 0.17.1
       '@fluent/sequence': 0.8.0(@fluent/bundle@0.17.1)
       '@vue/devtools-api': 7.7.7
       cached-iterable: 0.3.0
       vue: 3.4.15(typescript@5.8.3)
-      vue-demi: 0.14.10(@vue/composition-api@1.7.2(vue@3.4.15(typescript@5.8.3)))(vue@3.4.15(typescript@5.8.3))
+      vue-demi: 0.14.10(@vue/composition-api@1.7.2(vue@3.5.21(typescript@5.8.3)))(vue@3.4.15(typescript@5.8.3))
     optionalDependencies:
-      '@vue/composition-api': 1.7.2(vue@3.4.15(typescript@5.8.3))
+      '@vue/composition-api': 1.7.2(vue@3.5.21(typescript@5.8.3))
+
+  fluent-vue@3.7.2(@fluent/bundle@0.17.1)(@vue/composition-api@1.7.2(vue@3.5.21(typescript@5.8.3)))(vue@3.5.21(typescript@5.8.3)):
+    dependencies:
+      '@fluent/bundle': 0.17.1
+      '@fluent/sequence': 0.8.0(@fluent/bundle@0.17.1)
+      '@vue/devtools-api': 7.7.7
+      cached-iterable: 0.3.0
+      vue: 3.5.21(typescript@5.8.3)
+      vue-demi: 0.14.10(@vue/composition-api@1.7.2(vue@3.5.21(typescript@5.8.3)))(vue@3.5.21(typescript@5.8.3))
+    optionalDependencies:
+      '@vue/composition-api': 1.7.2(vue@3.5.21(typescript@5.8.3))
 
   flush-write-stream@1.1.1:
     dependencies:
@@ -29600,8 +29217,6 @@ snapshots:
   is-what@3.14.1: {}
 
   is-what@4.1.16: {}
-
-  is-whitespace@0.3.0: {}
 
   is-windows@0.2.0: {}
 
@@ -33314,12 +32929,6 @@ snapshots:
 
   pretty-hrtime@1.0.3: {}
 
-  pretty@2.0.0:
-    dependencies:
-      condense-newlines: 0.2.1
-      extend-shallow: 2.0.1
-      js-beautify: 1.14.11
-
   prismjs@1.30.0: {}
 
   proc-log@3.0.0: {}
@@ -35324,11 +34933,6 @@ snapshots:
       is-docker: 1.1.0
       is-root: 1.0.0
 
-  sugarss@5.0.1(postcss@8.4.39):
-    dependencies:
-      postcss: 8.4.39
-    optional: true
-
   sugarss@5.0.1(postcss@8.5.6):
     dependencies:
       postcss: 8.5.6
@@ -35502,19 +35106,6 @@ snapshots:
       temp-dir: 3.0.0
       type-fest: 2.19.0
       unique-string: 3.0.0
-
-  terser-webpack-plugin@5.3.16(@swc/core@1.13.2)(esbuild@0.18.20)(webpack@5.95.0(@swc/core@1.13.2)(esbuild@0.18.20)):
-    dependencies:
-      '@jridgewell/trace-mapping': 0.3.31
-      jest-worker: 27.5.1
-      schema-utils: 4.3.3
-      serialize-javascript: 6.0.2
-      terser: 5.44.1
-      webpack: 5.95.0(@swc/core@1.13.2)(esbuild@0.18.20)
-    optionalDependencies:
-      '@swc/core': 1.13.2
-      esbuild: 0.18.20
-    optional: true
 
   terser-webpack-plugin@5.3.16(@swc/core@1.13.2)(webpack@5.95.0(@swc/core@1.13.2)):
     dependencies:
@@ -36450,24 +36041,6 @@ snapshots:
       sugarss: 5.0.1(postcss@8.5.6)
       terser: 5.44.1
 
-  vite@7.0.7(@types/node@25.0.3)(jiti@1.21.7)(less@4.2.0)(sugarss@5.0.1(postcss@8.4.39))(terser@5.44.1)(tsx@4.19.0)(yaml@2.8.0):
-    dependencies:
-      esbuild: 0.25.10
-      fdir: 6.5.0(picomatch@4.0.3)
-      picomatch: 4.0.3
-      postcss: 8.5.6
-      rollup: 4.45.1
-      tinyglobby: 0.2.15
-    optionalDependencies:
-      '@types/node': 25.0.3
-      fsevents: 2.3.3
-      jiti: 1.21.7
-      less: 4.2.0
-      sugarss: 5.0.1(postcss@8.4.39)
-      terser: 5.44.1
-      tsx: 4.19.0
-      yaml: 2.8.0
-
   vite@7.0.7(@types/node@25.0.3)(jiti@1.21.7)(less@4.2.0)(sugarss@5.0.1(postcss@8.5.6))(terser@5.44.1)(tsx@4.19.0)(yaml@2.8.0):
     dependencies:
       esbuild: 0.25.10
@@ -36594,39 +36167,17 @@ snapshots:
 
   vue-component-type-helpers@3.2.2: {}
 
-  vue-demi@0.14.10(@vue/composition-api@1.7.2(vue@2.7.16))(vue@2.7.16):
-    dependencies:
-      vue: 2.7.16
-    optionalDependencies:
-      '@vue/composition-api': 1.7.2(vue@2.7.16)
-
-  vue-demi@0.14.10(@vue/composition-api@1.7.2(vue@3.4.15(typescript@5.8.3)))(vue@3.4.15(typescript@5.8.3)):
+  vue-demi@0.14.10(@vue/composition-api@1.7.2(vue@3.5.21(typescript@5.8.3)))(vue@3.4.15(typescript@5.8.3)):
     dependencies:
       vue: 3.4.15(typescript@5.8.3)
     optionalDependencies:
-      '@vue/composition-api': 1.7.2(vue@3.4.15(typescript@5.8.3))
+      '@vue/composition-api': 1.7.2(vue@3.5.21(typescript@5.8.3))
 
   vue-demi@0.14.10(@vue/composition-api@1.7.2(vue@3.5.21(typescript@5.8.3)))(vue@3.5.21(typescript@5.8.3)):
     dependencies:
       vue: 3.5.21(typescript@5.8.3)
     optionalDependencies:
       '@vue/composition-api': 1.7.2(vue@3.5.21(typescript@5.8.3))
-
-  vue-docgen-api@4.79.2(vue@2.7.16):
-    dependencies:
-      '@babel/parser': 7.28.0
-      '@babel/types': 7.28.2
-      '@vue/compiler-dom': 3.5.18
-      '@vue/compiler-sfc': 3.5.18
-      ast-types: 0.16.1
-      esm-resolve: 1.0.11
-      hash-sum: 2.0.0
-      lru-cache: 8.0.5
-      pug: 3.0.3
-      recast: 0.23.11
-      ts-map: 1.0.3
-      vue: 2.7.16
-      vue-inbrowser-compiler-independent-utils: 4.71.1(vue@2.7.16)
 
   vue-docgen-api@4.79.2(vue@3.4.15(typescript@5.8.3)):
     dependencies:
@@ -36686,10 +36237,6 @@ snapshots:
       - supports-color
 
   vue-hot-reload-api@2.3.4: {}
-
-  vue-inbrowser-compiler-independent-utils@4.71.1(vue@2.7.16):
-    dependencies:
-      vue: 2.7.16
 
   vue-inbrowser-compiler-independent-utils@4.71.1(vue@3.4.15(typescript@5.8.3)):
     dependencies:
@@ -36793,10 +36340,6 @@ snapshots:
       he: 1.2.0
 
   vue-template-es2015-compiler@1.9.1: {}
-
-  vue-ts-types@1.6.2(vue@2.7.16):
-    dependencies:
-      vue: 2.7.16
 
   vue@2.7.16:
     dependencies:
@@ -37043,37 +36586,6 @@ snapshots:
       - '@swc/core'
       - esbuild
       - uglify-js
-
-  webpack@5.95.0(@swc/core@1.13.2)(esbuild@0.18.20):
-    dependencies:
-      '@types/estree': 1.0.8
-      '@webassemblyjs/ast': 1.14.1
-      '@webassemblyjs/wasm-edit': 1.14.1
-      '@webassemblyjs/wasm-parser': 1.14.1
-      acorn: 8.15.0
-      acorn-import-attributes: 1.9.5(acorn@8.15.0)
-      browserslist: 4.28.1
-      chrome-trace-event: 1.0.4
-      enhanced-resolve: 5.18.4
-      es-module-lexer: 1.7.0
-      eslint-scope: 5.1.1
-      events: 3.3.0
-      glob-to-regexp: 0.4.1
-      graceful-fs: 4.2.11
-      json-parse-even-better-errors: 2.3.1
-      loader-runner: 4.3.1
-      mime-types: 2.1.35
-      neo-async: 2.6.2
-      schema-utils: 3.3.0
-      tapable: 2.3.0
-      terser-webpack-plugin: 5.3.16(@swc/core@1.13.2)(esbuild@0.18.20)(webpack@5.95.0(@swc/core@1.13.2)(esbuild@0.18.20))
-      watchpack: 2.5.0
-      webpack-sources: 3.3.3
-    transitivePeerDependencies:
-      - '@swc/core'
-      - esbuild
-      - uglify-js
-    optional: true
 
   websocket-driver@0.7.4:
     dependencies:
