@@ -17,7 +17,7 @@ on:
       - 'packages/dialtone-tokens/gulpfile.cjs'
       - 'packages/dialtone-vue3/**/*.vue'
       - 'packages/dialtone-vue3/**/*.stories.js'
-      - 'packages/dialtone-vue3/percy.config.js'
+      - 'packages/dialtone-vue3/percy.config.{js,cjs}'
       - '!**/*.test.*js'
   pull_request:
     types: [ unlabeled, labeled, synchronize, opened ]
@@ -35,7 +35,7 @@ on:
       - 'packages/dialtone-tokens/gulpfile.cjs'
       - 'packages/dialtone-vue3/**/*.vue'
       - 'packages/dialtone-vue3/**/*.stories.js'
-      - 'packages/dialtone-vue3/percy.config.js'
+      - 'packages/dialtone-vue3/percy.config.{js,cjs}'
       - '!**/*.test.*js'
 
 env:
