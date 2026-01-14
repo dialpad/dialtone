@@ -1,3 +1,10 @@
+# [2.206.0-next.2](https://github.com/dialpad/dialtone/compare/dialtone-vue2/v2.206.0-next.1...dialtone-vue2/v2.206.0-next.2) (2026-01-14)
+
+
+### Code Refactoring
+
+* **Tokens:** DLT-2884 deprecate space tokens in favor of size tokens ([#1013](https://github.com/dialpad/dialtone/issues/1013)) ([63f6d2f](https://github.com/dialpad/dialtone/commit/63f6d2f67ede34d10358d1903f281400015fd426))
+
 # [2.206.0-next.1](https://github.com/dialpad/dialtone/compare/dialtone-vue2/v2.205.3...dialtone-vue2/v2.206.0-next.1) (2026-01-08)
 
 ## [2.205.4](https://github.com/dialpad/dialtone/compare/dialtone-vue2/v2.205.3...dialtone-vue2/v2.205.4) (2026-01-13)
