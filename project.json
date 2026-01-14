@@ -3,7 +3,6 @@
   "implicitDependencies": [
     "dialtone-css",
     "dialtone-tokens",
-    "dialtone-vue2",
     "dialtone-vue3"
   ],
   "targets": {
@@ -19,14 +18,12 @@
       "inputs": [
         "{workspaceRoot}/packages/dialtone-css/dist",
         "{workspaceRoot}/packages/dialtone-tokens/dist",
-        "{workspaceRoot}/packages/dialtone-vue2/dist",
         "{workspaceRoot}/packages/dialtone-vue3/dist",
         "{workspaceRoot}/gulpfile.cjs"
       ],
       "outputs": [
         "{workspaceRoot}/dist/css",
         "{workspaceRoot}/dist/tokens",
-        "{workspaceRoot}/dist/vue2",
         "{workspaceRoot}/dist/vue3"
       ]
     },
@@ -51,13 +48,13 @@
     "test:all": {
       "executor": "nx:run-commands",
       "options": {
-        "command": "nx run-many --target=test --output-style=stream"
+        "command": "nx run-many --target=test --exclude=dialtone-vue2 --output-style=stream"
       }
     },
     "lint:all": {
       "executor": "nx:run-commands",
       "options": {
-        "command": "nx run-many --target=lint --output-style=compact"
+        "command": "nx run-many --target=lint --exclude=dialtone-vue2 --output-style=compact"
       }
     }
   }

@@ -18,40 +18,11 @@
         "react": "^18.3.1",
         "typescript": "^5.2",
         "vite": "^5.0.0 || ^7.0.7",
-        "vue": "^2.6 || ^3.2",
+        "vue": "^3.2",
         "vuepress": "^2.0.0-rc.24"
       }
     },
-    "packageExtensions": {
-      "@linusborg/vue-simple-portal": {
-        "peerDependencies": {
-          "vue": "^2.6.6"
-        }
-      },
-      "@tiptap/vue-2": {
-        "peerDependencies": {
-          "vue": "^2.6.0"
-        }
-      },
-      "@tiptap/vue-3": {
-        "peerDependencies": {
-          "vue": "^3.3.4"
-        }
-      },
-      "typedoc": {
-        "peerDependencies": {
-          "typescript": "^5.2"
-        }
-      },
-      "vue-template-compiler": {
-        "peerDependencies": {
-          "vue": "^2.7.15"
-        }
-      }
-    },
     "overrides": {
-      "@dialpad/i18n>@dialpad/i18n-services": "1.5.0",
-      "@dialpad/i18n-vue2>@dialpad/i18n-services": "1.5.0",
       "@typescript-eslint/utils": "^8.44.1",
       "braces": ">=3.0.3",
       "cross-spawn": ">=7.0.5",
@@ -81,16 +52,6 @@
       "types": "./dist/tokens/types/postcss/*.d.ts",
       "import": "./dist/tokens/postcss/*.js",
       "require": "./dist/tokens/postcss/*.cjs"
-    },
-    "./vue2": {
-      "types": "./dist/vue2/types/index.d.ts",
-      "import": "./dist/vue2/dialtone-vue.js",
-      "require": "./dist/vue2/dialtone-vue.cjs"
-    },
-    "./vue2/lib/*": {
-      "types": "./dist/vue2/types/index.d.ts",
-      "import": "./dist/vue2/lib/*/index.js",
-      "require": "./dist/vue2/lib/*/index.cjs"
     },
     "./vue3": {
       "types": "./dist/vue3/types/index.d.ts",
@@ -175,7 +136,6 @@
     "@storybook/theming": "7.6.20",
     "@types/node": "^20.4.5",
     "@vitejs/plugin-vue": "^5.2.3",
-    "@vitejs/plugin-vue2": "^2.3.3",
     "@vitest/coverage-v8": "^1.0.0",
     "@vue/tsconfig": "^0.4.0",
     "axe-core": "^4.7.2",
@@ -231,7 +191,7 @@
     "yo": "^5.0.0"
   },
   "peerDependencies": {
-    "vue": "^2 || ^3"
+    "vue": "^3"
   },
   "homepage": "https://dialtone.dialpad.com",
   "keywords": [
