@@ -218,7 +218,7 @@ jobs:
         with:
           message: |
             ✔️ Deploy previews ready!
-            ${{ contains(needs.filter-actions.outputs.packages, 'dialtone-documentation') && format('😎 Dialtone documentation preview: https://{0}/{1}', env.DIALTONE_BUCKET_DIRECTORY, env.BASE_URL) }}
+            ${{ contains(needs.filter-actions.outputs.packages, 'dialtone-documentation') && format('😎 Dialtone documentation preview: https://{0}/{1}', env.DIALTONE_BUCKET_DIRECTORY, env.BASE_URL) || '' }}
             ${{ contains(needs.filter-actions.outputs.packages, 'dialtone-vue3') && format('😎 Dialtone-vue preview: https://{0}/{1}', env.DIALTONE_VUE_3_BUCKET_DIRECTORY, env.BASE_URL) || '' }}
           message-id: 'deploy-preview-message'
           refresh-message-position: true
