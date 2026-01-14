@@ -149,7 +149,7 @@ jobs:
       # Publish npm/GitHub
       - name: Publish ${{ matrix.package }}@${{ env.RELEASE_TAG }}
         env:
-          RELEASE_TAG: ${{ matrix.package == 'dialtone-vue3' && needs.variables-setup.outputs.dialtone_vue3_release_tag || needs.variables-setup.outputs.release_tag }}
+          RELEASE_TAG: ${{ needs.variables-setup.outputs.release_tag }}
           NODE_AUTH_TOKEN: ${{ matrix.registry == 'GitHub' && secrets.GITHUB_TOKEN || '' }}
         run: >
           pnpm nx run ${{ matrix.package }}:publish
