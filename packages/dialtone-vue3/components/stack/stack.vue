@@ -83,7 +83,7 @@ export default {
      * All the undefined breakpoints will have the 'default' value.
      * You can override the default justify with 'default' key.
      * In case of string, it will be applied to all the breakpoints.
-     * Valid values are 'start', 'center', 'end', 'around', 'between', 'evenly'.
+     * Valid values are 'start', 'center', 'end', 'space-around', 'space-between', 'space-evenly'.
      */
     justify: {
       type: [String, Object],

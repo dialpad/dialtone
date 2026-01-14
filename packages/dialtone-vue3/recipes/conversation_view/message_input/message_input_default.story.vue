@@ -45,6 +45,8 @@
       @text-input="$attrs.onTextInput"
       @markdown-input="$attrs.onMarkdownInput"
       @add-emoji="$attrs.onAddEmoji"
+      @mention-click="$attrs.onMentionClick"
+      @channel-click="$attrs.onChannelClick"
       @select-media="$attrs.onSelectMedia"
       @selected-emoji="$attrs.onSelectedEmoji"
       @selected-command="$attrs.onSelectedCommand"

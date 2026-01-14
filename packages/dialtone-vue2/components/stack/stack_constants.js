@@ -35,9 +35,10 @@ export const DT_STACK_ALIGN = ['start', 'center', 'end', 'stretch', 'baseline'];
 /**
  * Justify values for the stack component (main-axis distribution).
  * Uses array format - simpler structure for newer props.
+ * Primary values align with CSS justify-content values.
  * @type {string[]}
  */
-export const DT_STACK_JUSTIFY = ['start', 'center', 'end', 'around', 'between', 'evenly'];
+export const DT_STACK_JUSTIFY = ['start', 'center', 'end', 'space-around', 'space-between', 'space-evenly', 'around', 'between', 'evenly'];
 
 export default {
   DT_STACK_DIRECTION,

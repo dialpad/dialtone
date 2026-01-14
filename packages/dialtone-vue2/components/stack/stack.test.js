@@ -269,8 +269,8 @@ describe('DtStack Tests', () => {
           justify: {
             sm: 'center',
             md: 'end',
-            lg: 'between',
-            xl: 'around',
+            lg: 'space-between',
+            xl: 'space-around',
           },
         });
 
@@ -284,9 +284,22 @@ describe('DtStack Tests', () => {
 
       describe('When `default` is provided', () => {
         it('should override the default value', async () => {
-          await wrapper.setProps({ justify: { default: 'between' } });
+          await wrapper.setProps({ justify: { default: 'space-between' } });
 
           expect(wrapper.classes('d-stack', 'd-stack--justify-between')).toBe(true);
+        });
+      });
+
+      describe('When legacy alias values are used', () => {
+        it('should support legacy alias values for backwards compatibility', async () => {
+          await wrapper.setProps({ justify: 'between' });
+          expect(wrapper.classes()).toContain('d-stack--justify-between');
+
+          await wrapper.setProps({ justify: 'around' });
+          expect(wrapper.classes()).toContain('d-stack--justify-around');
+
+          await wrapper.setProps({ justify: 'evenly' });
+          expect(wrapper.classes()).toContain('d-stack--justify-evenly');
         });
       });
     });

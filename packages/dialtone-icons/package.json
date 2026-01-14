@@ -1,6 +1,6 @@
 {
   "name": "@dialpad/dialtone-icons",
-  "version": "4.47.0",
+  "version": "4.47.1",
   "description": "Dialtone icon library",
   "files": [
     "dist",
@@ -89,6 +89,11 @@
     "Icon Library"
   ],
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/dialpad/dialtone.git",
+    "directory": "packages/dialtone-icons"
+  },
   "type": "module",
   "sideEffects": false
 }

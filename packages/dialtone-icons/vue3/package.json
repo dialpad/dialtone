@@ -4,6 +4,11 @@
     "@vue/compiler-sfc": "^3.4.15",
     "vue": "^3.4.15"
   },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/dialpad/dialtone.git",
+    "directory": "packages/dialtone-icons/vue3"
+  },
   "type": "module",
   "main": "./dist/dialtone-icons.cjs",
   "module": "./dist/dialtone-icons.js",
