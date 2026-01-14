@@ -8,7 +8,7 @@ overrides:
   '@typescript-eslint/utils': ^8.44.1
   braces: '>=3.0.3'
   cross-spawn: '>=7.0.5'
-  minimatch: '>=3.0.5'
+  minimatch: ^9.0.5
   nanoid: '>=3.3.8'
   sass: ^1.70.0
   sugarss: ^5.0.0
@@ -2761,14 +2761,6 @@ packages:
   '@inquirer/figures@1.0.15':
     resolution: {integrity: sha512-t2IEY+unGHOzAaVM5Xx6DEWKeXlDDcNPeDyUpsRc6CUhBfU3VQOEl+Vssh7VNp1dR8MdUJBWhuObjXCsVpjN5g==}
     engines: {node: '>=18'}
-
-  '@isaacs/balanced-match@4.0.1':
-    resolution: {integrity: sha512-yzMTt9lEb8Gv7zRioUilSglI0c0smZ9k5D65677DLWLtWJaXIS3CqcGyUFByYKlnUj6TkjLVs54fBl6+TiGQDQ==}
-    engines: {node: 20 || >=22}
-
-  '@isaacs/brace-expansion@5.0.0':
-    resolution: {integrity: sha512-ZT55BDLV0yv0RBm2czMiZ+SqCGO7AvmOM3G/w2xhVPH+te0aKgFjmBvGlL1dH+ql2tgGO3MVrbb3jCKyvpgnxA==}
-    engines: {node: 20 || >=22}
 
   '@isaacs/cliui@8.0.2':
     resolution: {integrity: sha512-O8jcjabXaleOG9DQ0+ARXWZBTfnP4WNAqzuiJK7ll44AmxGKv/J2M4TPjxjY3znBCfvBXFzucm1twdyFybFqEA==}
@@ -6632,6 +6624,9 @@ packages:
   bail@2.0.2:
     resolution: {integrity: sha512-0xO6mYd7JB2YesxDKplafRpsiOzPt9V02ddPCLbY1xYGPOX24NTyN50qnUxgCPcSoYMhKpAuBTjQoRZCAkUDRw==}
 
+  balanced-match@1.0.2:
+    resolution: {integrity: sha512-3oSeUO0TMV67hN1AmbXsK4yaqU7tjiHlbxRDZOpH0KW9+CeX4bRAaX0Anxt0tx2MrpRpWwQaPwIlISEJhYU5Pw==}
+
   balanced-match@2.0.0:
     resolution: {integrity: sha512-1ugUSr8BHXRnK23KfuYS+gVMC3LB8QGH9W1iGtDPsNWoQbgtXSExkBu2aDR4epiGWZOjZsj6lDl/N/AqqTC3UA==}
 
@@ -6784,6 +6779,9 @@ packages:
   bplist-parser@0.2.0:
     resolution: {integrity: sha512-z0M+byMThzQmD9NILRniCUXYsYpjwnlO8N5uCFaCqIOpqRsJCrQL9NK3JsD67CN5a08nF5oIL2bD6loTdHOuKw==}
     engines: {node: '>= 5.10.0'}
+
+  brace-expansion@2.0.2:
+    resolution: {integrity: sha512-Jt0vHyM+jmUBqojB7E1NIYadt0vI0Qxjxd2TErW94wDz+E2LAm5vKMXXwg6ZZBTHPuUlDgQHKXvjGBdfcF1ZDQ==}
 
   braces@3.0.3:
     resolution: {integrity: sha512-yQbXgO/OSZVD2IsiLlro+7Hf6Q18EJrKSEsdoMzKePKXct3gvD8oLcOQdIzGupr5Fj+EDe8gO/lxc1BzfMpxvA==}
@@ -11883,9 +11881,9 @@ packages:
   minimalistic-assert@1.0.1:
     resolution: {integrity: sha512-UtJcAD4yEaGtjPezWuO9wC4nwUnVH/8/Im3yEHQP4b67cXlD/Qr9hdITCU1xDbSEXg2XKNaP8jsReV7vQd00/A==}
 
-  minimatch@10.1.1:
-    resolution: {integrity: sha512-enIvLvRAFZYXJzkCYG5RKmPfrFArdLv+R+lbQ53BmIMLIry74bjKzX6iHAm8WYamJkhSSEabrWN5D97XnKObjQ==}
-    engines: {node: 20 || >=22}
+  minimatch@9.0.5:
+    resolution: {integrity: sha512-G6T0ZX48xgozx7587koeX9Ys2NYy6Gmv//P89sEte9V9whIapMNF4idKxnW2QtCcLiTWlb/wfCabAtAFWhhBow==}
+    engines: {node: '>=16 || 14 >=14.17'}
 
   minimist-options@3.0.2:
     resolution: {integrity: sha512-FyBrT/d0d4+uiZRbqznPXqw3IpZZG3gl3wKWiX784FycUKVwBt0uLBFkQrtE4tZOrgo78nZp2jnKz3L65T5LdQ==}
@@ -18487,7 +18485,7 @@ snapshots:
     dependencies:
       '@eslint/object-schema': 2.1.7
       debug: 4.4.3(supports-color@8.1.1)
-      minimatch: 10.1.1
+      minimatch: 9.0.5
     transitivePeerDependencies:
       - supports-color
 
@@ -18508,7 +18506,7 @@ snapshots:
       ignore: 5.3.2
       import-fresh: 3.3.1
       js-yaml: 4.1.1
-      minimatch: 10.1.1
+      minimatch: 9.0.5
       strip-json-comments: 3.1.1
     transitivePeerDependencies:
       - supports-color
@@ -18606,12 +18604,6 @@ snapshots:
       '@types/node': 24.3.1
 
   '@inquirer/figures@1.0.15': {}
-
-  '@isaacs/balanced-match@4.0.1': {}
-
-  '@isaacs/brace-expansion@5.0.0':
-    dependencies:
-      '@isaacs/balanced-match': 4.0.1
 
   '@isaacs/cliui@8.0.2':
     dependencies:
@@ -19217,7 +19209,7 @@ snapshots:
       '@rushstack/ts-command-line': 5.1.5(@types/node@20.19.29)
       diff: 8.0.3
       lodash: 4.17.21
-      minimatch: 10.1.1
+      minimatch: 9.0.5
       resolve: 1.22.11
       semver: 7.5.4
       source-map: 0.6.1
@@ -19392,7 +19384,7 @@ snapshots:
       json-parse-even-better-errors: 3.0.2
       json-stringify-nice: 1.1.4
       lru-cache: 10.4.3
-      minimatch: 10.1.1
+      minimatch: 9.0.5
       nopt: 7.2.1
       npm-install-checks: 6.3.0
       npm-package-arg: 11.0.3
@@ -19458,7 +19450,7 @@ snapshots:
     dependencies:
       '@npmcli/name-from-folder': 2.0.0
       glob: 10.5.0
-      minimatch: 10.1.1
+      minimatch: 9.0.5
       read-package-json-fast: 3.0.2
 
   '@npmcli/metavuln-calculator@7.1.1':
@@ -22230,12 +22222,12 @@ snapshots:
   '@tufjs/models@1.0.4':
     dependencies:
       '@tufjs/canonical-json': 1.0.0
-      minimatch: 10.1.1
+      minimatch: 9.0.5
 
   '@tufjs/models@2.0.1':
     dependencies:
       '@tufjs/canonical-json': 2.0.0
-      minimatch: 10.1.1
+      minimatch: 9.0.5
 
   '@tybys/wasm-util@0.9.0':
     dependencies:
@@ -22430,7 +22422,7 @@ snapshots:
 
   '@types/minimatch@6.0.0':
     dependencies:
-      minimatch: 10.1.1
+      minimatch: 9.0.5
 
   '@types/minimist@1.2.5': {}
 
@@ -22627,7 +22619,7 @@ snapshots:
       '@typescript-eslint/types': 8.53.0
       '@typescript-eslint/visitor-keys': 8.53.0
       debug: 4.4.3(supports-color@8.1.1)
-      minimatch: 10.1.1
+      minimatch: 9.0.5
       semver: 7.7.3
       tinyglobby: 0.2.15
       ts-api-utils: 2.4.0(typescript@5.9.3)
@@ -23073,7 +23065,7 @@ snapshots:
       '@vue/compiler-vue2': 2.7.16
       '@vue/shared': 3.5.26
       alien-signals: 0.4.14
-      minimatch: 10.1.1
+      minimatch: 9.0.5
       muggle-string: 0.4.1
       path-browserify: 1.0.1
     optionalDependencies:
@@ -23454,7 +23446,7 @@ snapshots:
       isbinaryfile: 5.0.7
       mem-fs: 4.1.3
       mem-fs-editor: 11.1.4(mem-fs@4.1.3)
-      minimatch: 10.1.1
+      minimatch: 9.0.5
       p-transform: 4.1.6
       pretty-bytes: 6.1.1
       slash: 5.1.0
@@ -23468,7 +23460,7 @@ snapshots:
   '@yeoman/transform@1.2.0':
     dependencies:
       '@types/node': 16.18.126
-      minimatch: 10.1.1
+      minimatch: 9.0.5
       readable-stream: 4.7.0
 
   '@yeoman/types@1.9.1(@types/node@20.19.29)(@yeoman/adapter@1.6.0(@types/node@20.19.29))(mem-fs-editor@11.1.4(mem-fs@4.1.3))(mem-fs@4.1.3)':
@@ -24036,6 +24028,8 @@ snapshots:
 
   bail@2.0.2: {}
 
+  balanced-match@1.0.2: {}
+
   balanced-match@2.0.0: {}
 
   bare-events@2.8.2: {}
@@ -24210,6 +24204,10 @@ snapshots:
   bplist-parser@0.2.0:
     dependencies:
       big-integer: 1.6.52
+
+  brace-expansion@2.0.2:
+    dependencies:
+      balanced-match: 1.0.2
 
   braces@3.0.3:
     dependencies:
@@ -25810,7 +25808,7 @@ snapshots:
     dependencies:
       '@one-ini/wasm': 0.1.1
       commander: 10.0.1
-      minimatch: 10.1.1
+      minimatch: 9.0.5
       semver: 7.7.3
 
   ee-first@1.1.1: {}
@@ -26456,7 +26454,7 @@ snapshots:
       is-glob: 4.0.3
       json-stable-stringify-without-jsonify: 1.0.1
       lodash.merge: 4.6.2
-      minimatch: 10.1.1
+      minimatch: 9.0.5
       natural-compare: 1.4.0
       optionator: 0.9.4
     optionalDependencies:
@@ -26855,7 +26853,7 @@ snapshots:
 
   filelist@1.0.4:
     dependencies:
-      minimatch: 10.1.1
+      minimatch: 9.0.5
 
   fill-range@7.1.1:
     dependencies:
@@ -27352,7 +27350,7 @@ snapshots:
     dependencies:
       foreground-child: 3.3.1
       jackspeak: 3.4.3
-      minimatch: 10.1.1
+      minimatch: 9.0.5
       minipass: 7.1.2
       package-json-from-dist: 1.0.1
       path-scurry: 1.11.1
@@ -27361,7 +27359,7 @@ snapshots:
     dependencies:
       foreground-child: 3.3.1
       jackspeak: 4.1.1
-      minimatch: 10.1.1
+      minimatch: 9.0.5
       minipass: 7.1.2
       package-json-from-dist: 1.0.1
       path-scurry: 2.0.1
@@ -27370,7 +27368,7 @@ snapshots:
     dependencies:
       foreground-child: 3.3.1
       jackspeak: 4.1.1
-      minimatch: 10.1.1
+      minimatch: 9.0.5
       minipass: 7.1.2
       package-json-from-dist: 1.0.1
       path-scurry: 2.0.1
@@ -27380,7 +27378,7 @@ snapshots:
       fs.realpath: 1.0.0
       inflight: 1.0.6
       inherits: 2.0.4
-      minimatch: 10.1.1
+      minimatch: 9.0.5
       once: 1.4.0
       path-is-absolute: 1.0.1
 
@@ -27389,7 +27387,7 @@ snapshots:
       fs.realpath: 1.0.0
       inflight: 1.0.6
       inherits: 2.0.4
-      minimatch: 10.1.1
+      minimatch: 9.0.5
       once: 1.4.0
       path-is-absolute: 1.0.1
 
@@ -27398,7 +27396,7 @@ snapshots:
       fs.realpath: 1.0.0
       inflight: 1.0.6
       inherits: 2.0.4
-      minimatch: 10.1.1
+      minimatch: 9.0.5
       once: 1.4.0
 
   global-agent@2.2.0:
@@ -28093,7 +28091,7 @@ snapshots:
 
   ignore-walk@6.0.5:
     dependencies:
-      minimatch: 10.1.1
+      minimatch: 9.0.5
 
   ignore@5.3.2: {}
 
@@ -29869,7 +29867,7 @@ snapshots:
       jsonpointer: 5.0.1
       markdown-it: 14.1.0
       markdownlint: 0.38.0
-      minimatch: 10.1.1
+      minimatch: 9.0.5
       run-con: 1.3.2
       smol-toml: 1.3.4
     transitivePeerDependencies:
@@ -29978,7 +29976,7 @@ snapshots:
       globby: 14.1.0
       isbinaryfile: 5.0.3
       mem-fs: 4.1.3
-      minimatch: 10.1.1
+      minimatch: 9.0.5
       multimatch: 7.0.0
       normalize-path: 3.0.0
       textextensions: 6.11.0
@@ -29995,7 +29993,7 @@ snapshots:
       ejs: 3.1.10
       globby: 11.1.0
       isbinaryfile: 5.0.7
-      minimatch: 10.1.1
+      minimatch: 9.0.5
       multimatch: 5.0.0
       normalize-path: 3.0.0
       textextensions: 5.16.0
@@ -30344,9 +30342,9 @@ snapshots:
 
   minimalistic-assert@1.0.1: {}
 
-  minimatch@10.1.1:
+  minimatch@9.0.5:
     dependencies:
-      '@isaacs/brace-expansion': 5.0.0
+      brace-expansion: 2.0.2
 
   minimist-options@3.0.2:
     dependencies:
@@ -30450,7 +30448,7 @@ snapshots:
       he: 1.2.0
       js-yaml: 4.1.1
       log-symbols: 4.1.0
-      minimatch: 10.1.1
+      minimatch: 9.0.5
       ms: 2.1.3
       serialize-javascript: 6.0.2
       strip-json-comments: 3.1.1
@@ -30475,7 +30473,7 @@ snapshots:
       he: 1.2.0
       js-yaml: 4.0.0
       log-symbols: 4.0.0
-      minimatch: 10.1.1
+      minimatch: 9.0.5
       ms: 2.1.3
       nanoid: 5.1.6
       serialize-javascript: 5.0.1
@@ -30500,7 +30498,7 @@ snapshots:
       loader-utils: 1.4.2
       lodash: 4.17.21
       memory-fs: 0.4.1
-      minimatch: 10.1.1
+      minimatch: 9.0.5
       mocha: 8.4.0
       nodent-runtime: 3.2.1
       normalize-path: 3.0.0
@@ -30535,13 +30533,13 @@ snapshots:
       array-differ: 3.0.0
       array-union: 2.1.0
       arrify: 2.0.1
-      minimatch: 10.1.1
+      minimatch: 9.0.5
 
   multimatch@7.0.0:
     dependencies:
       array-differ: 4.0.0
       array-union: 3.0.1
-      minimatch: 10.1.1
+      minimatch: 9.0.5
 
   mustache@4.2.0: {}
 
@@ -30617,7 +30615,7 @@ snapshots:
 
   node-dir@0.1.17:
     dependencies:
-      minimatch: 10.1.1
+      minimatch: 9.0.5
 
   node-emoji@1.11.0:
     dependencies:
@@ -30815,7 +30813,7 @@ snapshots:
       chalk: 2.4.2
       cross-spawn: 7.0.6
       memorystream: 0.3.1
-      minimatch: 10.1.1
+      minimatch: 9.0.5
       pidtree: 0.3.1
       read-pkg: 3.0.0
       shell-quote: 1.8.3
@@ -30881,7 +30879,7 @@ snapshots:
       jest-diff: 29.7.0
       jsonc-parser: 3.2.0
       lines-and-columns: 2.0.3
-      minimatch: 10.1.1
+      minimatch: 9.0.5
       node-machine-id: 1.1.12
       npm-run-path: 4.0.1
       open: 8.4.2
@@ -33305,7 +33303,7 @@ snapshots:
       bytes: 3.0.0
       content-disposition: 0.5.2
       mime-types: 2.1.18
-      minimatch: 10.1.1
+      minimatch: 9.0.5
       path-is-inside: 1.0.2
       path-to-regexp: 3.3.0
       range-parser: 1.2.0
@@ -34281,7 +34279,7 @@ snapshots:
     dependencies:
       '@istanbuljs/schema': 0.1.3
       glob: 7.2.3
-      minimatch: 10.1.1
+      minimatch: 9.0.5
 
   text-decoder@1.2.3:
     dependencies:
@@ -34568,7 +34566,7 @@ snapshots:
     dependencies:
       '@babel/runtime': 7.28.6
       locutus: 2.0.37
-      minimatch: 10.1.1
+      minimatch: 9.0.5
       walk: 2.3.15
 
   type-check@0.4.0:
@@ -34670,7 +34668,7 @@ snapshots:
       '@gerrit0/mini-shiki': 3.21.0
       lunr: 2.3.9
       markdown-it: 14.1.0
-      minimatch: 10.1.1
+      minimatch: 9.0.5
       typescript: 5.9.3
       yaml: 2.8.2
 
@@ -35199,7 +35197,7 @@ snapshots:
       leven: 3.1.0
       markdown-it: 12.3.2
       mime: 1.6.0
-      minimatch: 10.1.1
+      minimatch: 9.0.5
       parse-semver: 1.1.1
       read: 1.0.7
       semver: 5.7.2
@@ -35233,7 +35231,7 @@ snapshots:
 
   vscode-languageclient@9.0.1:
     dependencies:
-      minimatch: 10.1.1
+      minimatch: 9.0.5
       semver: 7.7.3
       vscode-languageserver-protocol: 3.17.5
 
