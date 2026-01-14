@@ -30,6 +30,7 @@ export const argsData = {
   onEditLink: action('edit-link'),
   onSelectedCommand: action('selected-command'),
   onMentionClick: action('mention-click'),
+  onChannelClick: action('channel-click'),
 };
 
 export const argTypesData = {
@@ -125,6 +126,11 @@ export const argTypesData = {
     },
   },
   onMentionClick: {
+    table: {
+      disable: true,
+    },
+  },
+  onChannelClick: {
     table: {
       disable: true,
     },

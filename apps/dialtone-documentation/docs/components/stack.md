@@ -963,7 +963,7 @@ showHtmlWarning />
 
 The `justify` prop controls how items are distributed along the main axis (the direction of the stack). For row stacks, this controls horizontal distribution. For column stacks, this controls vertical distribution.
 
-Available `justify` values: `start` (default), `center`, `end`, `around`, `between`, `evenly`.
+Available `justify` values: `start` (default), `center`, `end`, `space-around`, `space-between`, `space-evenly`.
 
 ### Start
 
@@ -1104,7 +1104,7 @@ vueCode='
 '
 showHtmlWarning />
 
-### Around
+### Space Around
 
 Distribute items with equal space around each item.
 
@@ -1117,7 +1117,7 @@ Distribute items with equal space around each item.
   >
     <dt-stack
       gap="400"
-      justify="around"
+      justify="space-around"
       class="d-w100p d-h332 d-bgc-moderate-opaque d-bar8 axis-outline axis-outline--block-center"
     >
       <div class="d-bgc-moderate-opaque d-p16 d-bar8">Item 1</div>
@@ -1127,7 +1127,7 @@ Distribute items with equal space around each item.
     <dt-stack
       direction="row"
       gap="400"
-      justify="around"
+      justify="space-around"
       class="d-w100p d-bgc-moderate-opaque d-bar8 axis-outline axis-outline--inline-center"
     >
       <div class="d-bgc-moderate-opaque d-p16 d-bar8">Item 1</div>
@@ -1141,7 +1141,7 @@ Distribute items with equal space around each item.
 :htmlCode="() => $refs.justifyAroundExample"
 vueCode='
 <dt-stack
-  justify="around"
+  justify="space-around"
 >
   <div>Item 1</div>
   <div>Item 2</div>
@@ -1150,7 +1150,7 @@ vueCode='
 '
 showHtmlWarning />
 
-### Between
+### Space Between
 
 Distribute items with space between them, edges flush to container.
 
@@ -1163,7 +1163,7 @@ Distribute items with space between them, edges flush to container.
   >
     <dt-stack
       gap="400"
-      justify="between"
+      justify="space-between"
       class="d-w100p d-h332 d-bgc-moderate-opaque d-bar8 axis-outline axis-outline--block-center"
     >
       <div class="d-bgc-moderate-opaque d-p16 d-bar8">Item 1</div>
@@ -1173,7 +1173,7 @@ Distribute items with space between them, edges flush to container.
     <dt-stack
       direction="row"
       gap="400"
-      justify="between"
+      justify="space-between"
       class="d-w100p d-bgc-moderate-opaque d-bar8 axis-outline axis-outline--inline-center"
     >
       <div class="d-bgc-moderate-opaque d-p16 d-bar8">Item 1</div>
@@ -1189,7 +1189,7 @@ vueCode='
 <dt-stack
   direction="row"
   gap="400"
-  justify="between"
+  justify="space-between"
   class="d-w100p"
 >
   <div>Item 1</div>
@@ -1199,7 +1199,7 @@ vueCode='
 '
 showHtmlWarning />
 
-### Evenly
+### Space Evenly
 
 Distribute items with equal space between all items, including edges.
 
@@ -1212,7 +1212,7 @@ Distribute items with equal space between all items, including edges.
   >
     <dt-stack
       gap="400"
-      justify="evenly"
+      justify="space-evenly"
       class="d-w100p d-h332 d-bgc-moderate-opaque d-bar8 axis-outline axis-outline--block-center"
     >
       <div class="d-bgc-moderate-opaque d-p16 d-bar8">Item 1</div>
@@ -1222,7 +1222,7 @@ Distribute items with equal space between all items, including edges.
     <dt-stack
       direction="row"
       gap="400"
-      justify="evenly"
+      justify="space-evenly"
       class="d-w100p d-bgc-moderate-opaque d-bar8 axis-outline axis-outline--inline-center"
     >
       <div class="d-bgc-moderate-opaque d-p16 d-bar8">Item 1</div>
@@ -1236,7 +1236,7 @@ Distribute items with equal space between all items, including edges.
 :htmlCode="() => $refs.justifyEvenlyExample"
 vueCode='
 <dt-stack
-  justify="evenly"
+  justify="space-evenly"
 >
   <div>Item 1</div>
   <div>Item 2</div>
@@ -1423,7 +1423,7 @@ Resize your browser to see the alignment change at different breakpoints.
   <dt-stack
     direction="row"
     gap="0"
-    :justify="{ default: 'start', md: 'center', lg: 'between' }"
+    :justify="{ default: 'start', md: 'center', lg: 'space-between' }"
     class="d-w100p d-bgc-moderate-opaque d-bar8"
     ref="responsiveJustifyExample"
   >
@@ -1438,7 +1438,7 @@ Resize your browser to see the alignment change at different breakpoints.
 vueCode='
 <dt-stack
   direction="row"
-  :justify="{ default: `start`, md: `center`, lg: `between` }"
+  :justify="{ default: `start`, md: `center`, lg: `space-between` }"
   class="d-w100p"
 >
   <div>Item 1</div>

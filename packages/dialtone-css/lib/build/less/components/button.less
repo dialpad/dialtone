@@ -711,6 +711,7 @@
 
   &__alpha {
     flex-grow: 1;
+    padding-inline-end: calc(var(--button-padding-x) + var(--dt-size-200));
   }
 
   &__omega {
@@ -772,6 +773,12 @@
 
   &__omega:not(.d-btn--outlined) {
     border-inline-start: 0;
+  }
+
+  &__omega:not(.d-btn--outlined, .d-btn--primary) > * {
+    // yes, I'm pushing a half-pixel over just for this variant
+    // to ensure icon is centered
+    transform: translateX(var(--dt-size-50));
   }
 
   &__omega:disabled:not(.d-btn--outlined),
