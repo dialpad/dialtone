@@ -37,7 +37,6 @@ jobs:
     outputs:
       current_branch: ${{ steps.branch-name.outputs.current_branch }}
       release_tag: ${{ steps.branch-name.outputs.current_branch == 'production' && 'latest' || steps.branch-name.outputs.current_branch }}
-      dialtone_vue3_release_tag: ${{ steps.branch-name.outputs.current_branch == 'production' && 'vue3' || format('vue3-{0}', steps.branch-name.outputs.current_branch) }}
     steps:
       - name: Get branch name
         id: branch-name
