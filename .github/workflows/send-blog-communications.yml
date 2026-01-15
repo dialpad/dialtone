@@ -1,5 +1,11 @@
 name: Send blog communications
 on:
+  workflow_dispatch:
+    inputs:
+      file_path:
+        description: 'Path to the blog post markdown file (e.g., apps/dialtone-documentation/docs/about/whats-new/posts/2026-1-14.md)'
+        required: true
+        type: string
   workflow_run:
     workflows: ["Deploy"]
     types:
@@ -18,16 +24,18 @@ jobs:
   added-posts:
     name: Get added posts
     runs-on: ubuntu-latest
-    if: ${{ github.event.workflow_run.conclusion == 'success' }}
+    if: ${{ github.event_name == 'workflow_dispatch' || github.event.workflow_run.conclusion == 'success' }}
     outputs:
-      added_posts: ${{ steps.changed-files.outputs.added_files }}
+      added_posts: ${{ steps.set-posts.outputs.posts }}
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
         with:
-          ref: ${{ github.event.workflow_run.head_sha }}
+          ref: ${{ github.event_name == 'workflow_dispatch' && github.ref || github.event.workflow_run.head_sha }}
           fetch-depth: 0
-      - name: Get changed files
+
+      - name: Get changed files (automatic)
+        if: ${{ github.event_name == 'workflow_run' }}
         id: changed-files
         uses: tj-actions/changed-files@2f7c5bfce28377bc069a65ba478de0a74aa0ca32
         with:
@@ -35,8 +43,18 @@ jobs:
           json: true
           escape_json: false
           sha: ${{ github.event.workflow_run.head_sha }}
+
+      - name: Set posts output
+        id: set-posts
+        run: |
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+            echo "posts=[\"${{ github.event.inputs.file_path }}\"]" >> $GITHUB_OUTPUT
+          else
+            echo "posts=${{ steps.changed-files.outputs.added_files }}" >> $GITHUB_OUTPUT
+          fi
+
       - name: List all added posts
-        run: echo '${{ steps.changed-files.outputs.added_files }}'
+        run: echo '${{ steps.set-posts.outputs.posts }}'
 
   send-email:
     name: Send email
@@ -56,7 +74,7 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
         with:
-          ref: ${{ github.event.workflow_run.head_sha }}
+          ref: ${{ github.event_name == 'workflow_dispatch' && github.ref || github.event.workflow_run.head_sha }}
 
       - name: Get link from file name
         id: get-post-url
@@ -141,7 +159,7 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
         with:
-          ref: ${{ github.event.workflow_run.head_sha }}
+          ref: ${{ github.event_name == 'workflow_dispatch' && github.ref || github.event.workflow_run.head_sha }}
 
       - name: Get link from file name
         id: get-post-url
