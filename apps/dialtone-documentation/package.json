@@ -48,6 +48,7 @@
     "@dialpad/dialtone-vue": "workspace:vue3-next",
     "@dialpad/i18n": "1.20.1",
     "@dialpad/postcss-responsive-variations": "workspace:*",
+    "@dialpad/postcss-container-variations": "workspace:*",
     "@docsearch/js": "^4.0.1",
     "@docsearch/css": "^4.0.1",
     "@originjs/vite-plugin-commonjs": "^1.0.3",

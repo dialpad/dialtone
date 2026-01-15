@@ -9,6 +9,13 @@
 // @TODO: Move HSLA_EXCLUDED_COLORS to common/utils to share and sync it with dialtone-tokens/postcss/common.js
 module.exports = {
   HSLA_EXCLUDED_COLORS: ['--dt-color-surface-ai', '--dt-color-gradient-gold-red-magenta-purple', '--dt-color-gradient-magenta-purple', '--dt-badge-color-background-ai', '--dt-color-border-ai'],
+  CONTAINER_BREAKPOINTS: {
+    xs: '320',
+    sm: '480',
+    md: '640',
+    lg: '960',
+    xl: '1264',
+  },
   OPACITIES: [
     100,
     99,

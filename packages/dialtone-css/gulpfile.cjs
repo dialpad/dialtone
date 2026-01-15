@@ -185,7 +185,10 @@ const libStyles = function (done) {
   return src(paths.styles.inputLib)
     .pipe(less({ paths: ['./node_modules'] })) // compile less to css
     .pipe(replace('../fonts/', './fonts/'))
-    .pipe(postCSS([postCSSDialtoneGenerator, autoprefixer()]))
+    .pipe(postCSS([
+      postCSSDialtoneGenerator,
+      autoprefixer(),
+    ]))
     .pipe(dest(paths.styles.outputLib))
     .pipe(postCSS([postCSSNano]))
     .pipe(rename({ suffix: '.min' }))
@@ -200,7 +203,10 @@ const libStylesDev = function (done) {
   return src(paths.styles.inputLib)
     .pipe(sourcemaps.init())
     .pipe(less({ paths: ['./node_modules'] })) // compile less to css
-    .pipe(postCSS([postCSSDialtoneGenerator, autoprefixer()]))
+    .pipe(postCSS([
+      postCSSDialtoneGenerator,
+      autoprefixer(),
+    ]))
     .pipe(sourcemaps.mapSources(function (sourcePath) {
       if (sourcePath === '<no source>') return sourcePath;
       return '../../build/less/' + sourcePath;

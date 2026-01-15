@@ -414,6 +414,10 @@
         {
           "text": "Breakpoints",
           "link": "/utilities/responsive/breakpoints.html"
+        },
+        {
+          "text": "Container Queries",
+          "link": "/utilities/responsive/container-queries.html"
         }
       ]
     },
