@@ -1,3 +1,10 @@
+## [8.71.5](https://github.com/dialpad/dialtone/compare/dialtone-css/v8.71.4...dialtone-css/v8.71.5) (2026-01-15)
+
+
+### Bug Fixes
+
+* **Split Button:** NO-JIRA fix label padding ([#1019](https://github.com/dialpad/dialtone/issues/1019)) ([ba54d8f](https://github.com/dialpad/dialtone/commit/ba54d8f08db4a28dd629dff438a6125a76013dda))
+
 ## [8.71.4](https://github.com/dialpad/dialtone/compare/dialtone-css/v8.71.3...dialtone-css/v8.71.4) (2026-01-13)
 
 
