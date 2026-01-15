@@ -129,6 +129,18 @@ export default {
     },
 
     /**
+     * HTML button disabled attribute for alpha button only
+     * <a class="d-link" href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/button#disabled" target="_blank">
+     *  (Reference)
+     * </a>
+     * @values true, false
+     */
+    alphaDisabled: {
+      type: Boolean,
+      default: false,
+    },
+
+    /**
      * Whether the alpha button should display a loading animation or not.
      * @values true, false
      */
@@ -158,7 +170,8 @@ export default {
     },
 
     /**
-     * HTML button disabled attribute
+     * HTML button disabled attribute for both buttons.
+     * Use alphaDisabled or omegaDisabled to disable buttons individually.
      * <a class="d-link" href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/button#disabled" target="_blank">
      *  (Reference)
      * </a>
@@ -213,6 +226,18 @@ export default {
     omegaAriaLabel: {
       type: String,
       default: null,
+    },
+
+    /**
+     * HTML button disabled attribute for omega button only
+     * <a class="d-link" href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/button#disabled" target="_blank">
+     *  (Reference)
+     * </a>
+     * @values true, false
+     */
+    omegaDisabled: {
+      type: Boolean,
+      default: false,
     },
 
     /**
@@ -296,7 +321,7 @@ export default {
         active: this.alphaActive,
         ariaLabel: this.alphaAriaLabel,
         assertiveOnFocus: this.assertiveOnFocus,
-        disabled: this.disabled,
+        disabled: this.disabled || this.alphaDisabled,
         iconPosition: this.alphaIconPosition,
         labelClass: this.alphaLabelClass,
         loading: this.alphaLoading,
@@ -314,7 +339,7 @@ export default {
         id: this.omegaId,
         active: this.omegaActive,
         ariaLabel: this.omegaAriaLabel,
-        disabled: this.disabled,
+        disabled: this.disabled || this.omegaDisabled,
         importance: this.importance,
         kind: this.kind,
         size: this.size,

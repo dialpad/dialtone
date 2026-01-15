@@ -127,6 +127,39 @@ describe('DtSplitButton Tests', function () {
       });
     });
 
+    describe('When alpha-disabled is set to true', () => {
+      it('Should disable only the alpha button', async () => {
+        mockProps = { alphaDisabled: true };
+
+        updateWrapper();
+
+        expect(alphaButton.attributes('disabled')).toBeDefined();
+        expect(omegaButton.attributes('disabled')).toBeUndefined();
+      });
+    });
+
+    describe('When omega-disabled is set to true', () => {
+      it('Should disable only the omega button', async () => {
+        mockProps = { omegaDisabled: true };
+
+        updateWrapper();
+
+        expect(alphaButton.attributes('disabled')).toBeUndefined();
+        expect(omegaButton.attributes('disabled')).toBeDefined();
+      });
+    });
+
+    describe('When disabled is set to true', () => {
+      it('Should disable both buttons', async () => {
+        mockProps = { disabled: true };
+
+        updateWrapper();
+
+        expect(alphaButton.attributes('disabled')).toBeDefined();
+        expect(omegaButton.attributes('disabled')).toBeDefined();
+      });
+    });
+
     describe('When alpha-active is set to true', () => {
       it('Should have active class', async () => {
         mockProps = { alphaActive: true };

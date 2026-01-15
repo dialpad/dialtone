@@ -99,6 +99,10 @@ export const argTypesData = {
     control: 'boolean',
   },
 
+  alphaDisabled: {
+    control: 'boolean',
+  },
+
   alphaIconPosition: {
     control: 'select',
     options: Object.keys(ICON_POSITION_MODIFIERS),
@@ -109,6 +113,10 @@ export const argTypesData = {
   },
 
   omegaActive: {
+    control: 'boolean',
+  },
+
+  omegaDisabled: {
     control: 'boolean',
   },
 

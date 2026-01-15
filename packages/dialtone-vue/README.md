@@ -69,19 +69,20 @@ const emojiData = getEmojiData();
 
 ## Localization (i18n)
 
-Dialtone Vue has localization capabilities built-in. 
+Dialtone Vue has localization capabilities built-in.
 It is implemented using [goblin-client-tools/i18n](https://github.com/dialpad/goblin-client-tools/tree/main/packages/i18n)
 We use [SmartLing](https://dashboard.smartling.com/) for our translation process.
 
 All the localization related files are located at [localization](./localization) folder.
 
 Important folder contents:
-- `index.js`: Contains the main logic of the Localization. 
-- `sync-icons.js`: Syncs the icons list to the `en-US.ftl` localization strings (currently unused due to large 
+
+- `index.js`: Contains the main logic of the Localization.
+- `sync-icons.js`: Syncs the icons list to the `en-US.ftl` localization strings (currently unused due to large
   number of icons).
 - `en-US.ftl`: List of strings to translate, written with [FTL syntax](https://projectfluent.org/fluent/guide/).
-- `*.ftl`: The rest of the FTL files are the translations for the strings in `en-US.ftl`, they got updated once the 
-  translation is ready in Smartling. 
+- `*.ftl`: The rest of the FTL files are the translations for the strings in `en-US.ftl`, they got updated once the
+  translation is ready in Smartling.
 
 ### Translation process
 
@@ -93,7 +94,7 @@ The translation process is as follows:
 2. If the component doesn't already use i18n, create an instance with `i18n = new DialtoneLocalization()`
 3. Use the string to get the translation like so `i18n.$t('STRING_NAME')`
 4. Create a PR with your changes.
-5. Once merged to staging, the new strings are sent to Smartling for translation using 
+5. Once merged to staging, the new strings are sent to Smartling for translation using
 [push translations workflow](/.github/workflows/push-translations.yml)
 6. A [translation request job](https://dashboard.smartling.com/app/accounts/3a311a57/account-jobs-automation/edit-rule/2701e7c80:eaf59e9b-aaf1-45c3-834d-c9a6d4a2eee4) is run daily on Smartling.
 7. [pull translations workflow](/.github/workflows/pull-translations.yml) runs on a daily basis.
