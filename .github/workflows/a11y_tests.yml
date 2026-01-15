@@ -7,7 +7,7 @@ on:
       - production
 
     paths:
-      - 'packages/dialtone-vue3/**'
+      - 'packages/dialtone-vue/**'
 
   pull_request:
     types:
@@ -15,7 +15,7 @@ on:
       - synchronize
 
     paths:
-      - 'packages/dialtone-vue3/**'
+      - 'packages/dialtone-vue/**'
 
 env:
   HUSKY: 0
@@ -40,4 +40,4 @@ jobs:
         run: pnpm exec playwright install --with-deps
 
       - name: Run a11y tests
-        run: pnpm nx run dialtone-vue3:test:a11y
+        run: pnpm nx run dialtone-vue:test:a11y

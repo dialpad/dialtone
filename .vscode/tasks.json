@@ -13,7 +13,7 @@
     {
       "label": "start: dialtone vue 3 storybook",
       "type": "shell",
-      "command": "pnpm nx run dialtone-vue3:start",
+      "command": "pnpm nx run dialtone-vue:start",
       "problemMatcher": [
         "$vite"
       ],

@@ -151,7 +151,7 @@ dialtone/
   |--- dialtone-icons                   # SVG and Vue icons library compatible with vue@2 and vue@3
   |--- dialtone-mcp-server              # MCP Server
   |--- dialtone-tokens                  # CSS Tokens library
-  |--- dialtone-vue3                    # Vue component library compatible with vue@3
+  |--- dialtone-vue                    # Vue component library compatible with vue@3
   |--- eslint-plugin-dialtone           # Custom ESLint rules for Dialtone users
   |--- language-server                  # Language tools based on Volar Framework
   |--- postcss-responsive-variations    # PostCSS plugin to generate responsive classes
@@ -176,7 +176,7 @@ they have the same package name e.g: `@dialpad/dialtone-vue`.
      - `packageExtensions` tells pnpm which Vue version to use for each package.
 2. On individual packages `package.json` files:
    - Include the specific dependencies in case someone uses the individual package
-   - In `vite.config.js` [Vue 3](packages/dialtone-vue3/vite.config.js) add dependencies to external to make sure they don't cause issues on product.
+   - In `vite.config.js` [Vue 3](packages/dialtone-vue/vite.config.js) add dependencies to external to make sure they don't cause issues on product.
 3. In [project.json](project.json)
    - Include implicit dependencies to make sure NX builds them before trying to copy the files to the mono-package.
 4. In `gulpfile.cjs`
@@ -200,7 +200,7 @@ We achieve tree-shaking primarily via three mechanisms across the packages:
 `sideEffects: false` is set so bundlers can drop unused imports.
 
 - `@dialpad/dialtone` → [package.json](package.json) line 242
-- `@dialpad/dialtone-vue` (vue3) → [package.json](packages/dialtone-vue3/package.json) line 145
+- `@dialpad/dialtone-vue` (vue3) → [package.json](packages/dialtone-vue/package.json) line 145
 - `@dialpad/dialtone-combinator` → [package.json](packages/combinator/package.json) line 56
 - `@dialpad/dialtone-icons` → [package.json](packages/dialtone-icons/package.json) line 98
 
@@ -231,7 +231,7 @@ pulling entire bundles):
 | [Dialtone emojis](packages/dialtone-emojis/README.md)            | Emoji assets                                                                                                                                       | ![NPM Version](https://img.shields.io/npm/v/%40dialpad%2Fdialtone-emojis?logo=npm&color=7C52FF)           |
 | [Dialtone icons](packages/dialtone-icons/README.md)              | Resources needed to implement icons on your application that conform to Dialpad’s design principles and best practices                             | ![NPM Version](https://img.shields.io/npm/v/%40dialpad%2Fdialtone-icons?logo=npm&color=7C52FF)            |
 | [Dialtone tokens](packages/dialtone-tokens/README.md)            | Design tokens for Dialpad's design system Dialtone and everything related to building and publishing them                                          | ![NPM Version](https://img.shields.io/npm/v/%40dialpad%2Fdialtone-tokens?logo=npm&color=7C52FF)           |
-| [Dialtone vue 3](packages/dialtone-vue3/README.md)               | Vue components library to simplify and standardize the use of common UI patterns and behaviour across all Dialpad projects (compatible with Vue 3) | ![NPM Version](https://img.shields.io/npm/v/%40dialpad%2Fdialtone-vue?logo=npm&color=7C52FF)         |
+| [Dialtone vue](packages/dialtone-vue/README.md)               | Vue components library to simplify and standardize the use of common UI patterns and behaviour across all Dialpad projects (compatible with Vue 3) | ![NPM Version](https://img.shields.io/npm/v/%40dialpad%2Fdialtone-vue?logo=npm&color=7C52FF)         |
 | [ESlint plugin](packages/eslint-plugin-dialtone/README.md)       | ESLint plugin containing rules to help developers maintain dialtone recommended practices                                                          | ![NPM Version](https://img.shields.io/npm/v/%40dialpad%2Feslint-plugin-dialtone?logo=npm&color=7C52FF)    |
 | [Stylelint plugin](packages/stylelint-plugin-dialtone/README.md) | StyleLint plugin containing rules to help developers maintain dialtone recommended practices for CSS                                               | ![NPM Version](https://img.shields.io/npm/v/%40dialpad%2Fstylelint-plugin-dialtone?logo=npm&color=7C52FF) |
 
@@ -352,7 +352,7 @@ Access the local server at `http://localhost:4000`
 ##### Dialtone Vue 3 storybook
 
 ```bash
-nx run dialtone-vue3:start
+nx run dialtone-vue:start
 ```
 
 Access the local storybook server for Dialtone Vue 3 via `http://localhost:9011/`
@@ -493,13 +493,13 @@ This will trigger the [release action](.github/workflows/release.yml), release c
 #### Run Vue tests
 
 ```bash
-nx run dialtone-vue3:test
+nx run dialtone-vue:test
 ```
 
 #### Run Vue unit tests with coverage
 
 ```bash
-nx run dialtone-vue3:test:coverage
+nx run dialtone-vue:test:coverage
 ```
 
 These will generate a JSON and HTML report in the `coverage` directory.

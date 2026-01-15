@@ -100,7 +100,7 @@ jobs:
 
       - name: Release Dialtone Vue ${{ env.RELEASE_TAG }}
         if: ${{ github.event_name == 'schedule' || github.event.inputs.package == 'all' || github.event.inputs.package == 'vue3' }}
-        run: pnpm nx run dialtone-vue3:release
+        run: pnpm nx run dialtone-vue:release
 
       - name: Release Dialtone ESLint Plugin ${{ env.RELEASE_TAG }}
         if: ${{ github.event_name == 'schedule' || github.event.inputs.package == 'all' || github.event.inputs.package == 'eslint-plugin' }}

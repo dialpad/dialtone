@@ -32,7 +32,7 @@ function getValidFileList (folder) {
  * @returns {RegExp} Regular expression to match excluding class names
  */
 function generateExclusionRegex () {
-  const dialtoneVue3ComponentsPath = path.resolve(__dirname, '../../dialtone-vue3/components');
+  const dialtoneVue3ComponentsPath = path.resolve(__dirname, '../../dialtone-vue/components');
   const customList = ['recipe', 'btn', 'zoom', 'select', 'validation-message', 'label', 'description', 'split-btn', 'mention-suggestion', 'suggestion-list', 'context-menu', 'textarea', 'list-group', 'scrollbar']; // Includes special or wrong naming conventions
 
   const componentList = getValidFileList(dialtoneVue3ComponentsPath);
