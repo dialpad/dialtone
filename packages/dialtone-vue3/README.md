@@ -9,10 +9,13 @@ Dialtone Vue is a library of Vue components for [Dialtone][dt]. The goal is to s
 
 ## Installation
 
-You can install the Dialtone Vue library into your project via the following commands:
+You can install the Dialtone Vue library into your project via the following command:
 
-- Vue 2: `npm install @dialpad/dialtone-css @dialpad/dialtone-vue`
-- Vue 3: `npm install @dialpad/dialtone-css @dialpad/dialtone-vue@vue3`
+```bash
+npm install @dialpad/dialtone-css @dialpad/dialtone-vue
+```
+
+> **Note:** Dialtone Vue 2 has been deprecated. Please use Dialtone Vue 3.
 
 ## Usage
 
@@ -72,9 +75,6 @@ We use [SmartLing](https://dashboard.smartling.com/) for our translation process
 
 All the localization related files are located at [localization](./localization) folder.
 
-The original translation strings are located on `packages/dialtone-vue2/localization/*.ftl`, and symlinked to
-`packages/dialtone-vue3/localization/*.ftl` to avoid having to translate all the strings twice.
-
 Important folder contents:
 - `index.js`: Contains the main logic of the Localization. 
 - `sync-icons.js`: Syncs the icons list to the `en-US.ftl` localization strings (currently unused due to large 
@@ -105,8 +105,8 @@ If you would like to contribute to Dialtone Vue the first step is to get the pro
 
 1. Clone the monorepo `git clone git@github.com:dialpad/dialtone.git`
 2. Install dependencies `pnpm install`
-3. Run local dev server `pnpm start:dialtone-vue2` or `pnpm start:dialtone-vue3`
-4. Visit local dev server at vue2: <http://localhost:9010/> vue3: <http://localhost:9011/>
+3. Run local dev server `nx run dialtone-vue3:start`
+4. Visit local dev server at <http://localhost:9011/>
 
 Next read the more detailed contributor documentation in [CONTRIBUTING.md](.github/CONTRIBUTING.md).
 

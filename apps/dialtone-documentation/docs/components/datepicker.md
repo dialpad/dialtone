@@ -422,7 +422,7 @@ The following functions are available for date formatting.
   </dt-stack>
 </div>
 
-<!-- TODO: Autogenerate the docs from JSDocs in packages/dialtone-vue2/components/datepicker/formatUtils.js -->
+<!-- TODO: Autogenerate the docs from JSDocs in packages/dialtone-vue3/components/datepicker/formatUtils.js -->
 ### formatLong
 
 **formatLong**(`date`, `locale`): `string`

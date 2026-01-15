@@ -101,13 +101,10 @@ Any new components or updates to existing components require the following:
   - Navigable by keyboard.
   - Read by a screen reader.
   - Minimum contrast ratio.
-- Changes must be made for Vue 2 as well as Vue 3, `dialtone-vue2` and `dialtone-vue3` package folders respectively
-
 - Unit tests are passing locally.
   - Test all projects
     - `nx run dialtone:test:all`
   - Test individual project
-    - `nx run dialtone-vue2:test`
     - `nx run dialtone-vue3:test`
     - `nx run eslint-plugin-dialtone:test`
     - `nx run stylelint-plugin-dialtone:test`
@@ -118,7 +115,6 @@ Any new components or updates to existing components require the following:
   - Lint individual project
     - `nx run dialtone-css:lint`
     - `nx run dialtone-documentation:lint`
-    - `nx run dialtone-vue2:lint`
     - `nx run dialtone-vue3:lint`
     - `nx run eslint-plugin-dialtone:lint`
     - `nx run stylelint-plugin-dialtone:lint`
@@ -130,11 +126,9 @@ Any new components or updates to existing components require the following:
     - `nx run dialtone-css:build`
     - `nx run dialtone-icons:build`
     - `nx run dialtone-tokens:build`
-    - `nx run dialtone-vue2:build`
     - `nx run dialtone-vue3:build`
 
 - Documentation builds locally.
-  - `nx run dialtone-vue2:build-storybook`
   - `nx run dialtone-vue3:build-storybook`
   - `nx run dialtone-documentation:build`
 
@@ -153,8 +147,7 @@ After you have discussed your change with the Dialtone team, follow these steps 
    - 'visual-test-ready' if your PR includes visual UI changes.
    - 'no-visual-test' if no UI changes.
 
-8. If it's a Vue change, you need to update both dialtone-vue2 and dialtone-vue3 packages. You may sync your changes from Vue 2 to Vue 3 (or vice versa) using the `./scripts/dialtone-vue-sync.sh` script. Please see the section in the Dialtone Vue contributing guide: [Dialtone Vue Sync Script](../packages/dialtone-vue3/.github/CONTRIBUTING.md#dialtone-vue-sync-script) for details on usage of the script.
-9. Once your changes have been approved, you may squash your branch into staging.
+8. Once your changes have been approved, you may squash your branch into staging.
 
 Once your change is in `staging` it will go live with the next Dialtone Vue release.
 Releases are done on demand by the Dialtone team, and are done fairly regularly.
