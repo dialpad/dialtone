@@ -48,13 +48,13 @@
     "test:all": {
       "executor": "nx:run-commands",
       "options": {
-        "command": "nx run-many --target=test --exclude=dialtone-vue2 --output-style=stream"
+        "command": "nx run-many --target=test --output-style=stream"
       }
     },
     "lint:all": {
       "executor": "nx:run-commands",
       "options": {
-        "command": "nx run-many --target=lint --exclude=dialtone-vue2 --output-style=compact"
+        "command": "nx run-many --target=lint --output-style=compact"
       }
     }
   }

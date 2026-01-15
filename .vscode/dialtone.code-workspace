@@ -24,10 +24,6 @@
       "name": "Tokens",
       "path": "../packages/dialtone-tokens"
     },
-    {
-      "name": "Vue 2",
-      "path": "../packages/dialtone-vue2"
-    },
 		{
       "name": "Vue 3",
       "path": "../packages/dialtone-vue3"

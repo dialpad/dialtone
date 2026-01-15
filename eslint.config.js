@@ -51,7 +51,6 @@ export default [
       'dist',
       'node_modules',
       '**/common/emoji/index.js',
-      'packages/dialtone-vue2/index.js',
       'packages/dialtone-vue3/index.js',
       '**/common/storybook_utils.js',
       '**/components/emoji/emoji.test.js',
