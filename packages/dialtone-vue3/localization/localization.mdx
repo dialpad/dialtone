@@ -145,7 +145,7 @@ use set it there
 
 To add new localized strings to the library, follow these steps:
 
-1. Add the new strings to `/packages/dialtone-vue2/localization/en-US.ftl` (yes, dialtone-vue2, a symbolic link is already in place to avoid duplication). All strings must be prefixed with `DIALTONE_`.
+1. Add the new strings to `/packages/dialtone-vue3/localization/en-US.ftl`. All strings must be prefixed with `DIALTONE_`.
 2. In the component that needs the strings, import the `DialtoneLocalization` class with `import { DialtoneLocalization } from '@/localization';`.
 3. Initialize the `DialtoneLocalization` instance in the component data so it is reactive with:
     - Options API:
