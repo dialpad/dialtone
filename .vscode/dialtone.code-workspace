@@ -26,7 +26,7 @@
     },
 		{
       "name": "Vue 3",
-      "path": "../packages/dialtone-vue3"
+      "path": "../packages/dialtone-vue"
     },
 		{
       "name": "ESLint Plugin",

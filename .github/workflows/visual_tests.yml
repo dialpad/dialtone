@@ -15,9 +15,9 @@ on:
       - 'packages/dialtone-tokens/themes/**'
       - 'packages/dialtone-tokens/tokens/**'
       - 'packages/dialtone-tokens/gulpfile.cjs'
-      - 'packages/dialtone-vue3/**/*.vue'
-      - 'packages/dialtone-vue3/**/*.stories.js'
-      - 'packages/dialtone-vue3/percy.config.{js,cjs}'
+      - 'packages/dialtone-vue/**/*.vue'
+      - 'packages/dialtone-vue/**/*.stories.js'
+      - 'packages/dialtone-vue/percy.config.{js,cjs}'
       - '!**/*.test.*js'
   pull_request:
     types: [ unlabeled, labeled, synchronize, opened ]
@@ -33,9 +33,9 @@ on:
       - 'packages/dialtone-tokens/themes/**'
       - 'packages/dialtone-tokens/tokens/**'
       - 'packages/dialtone-tokens/gulpfile.cjs'
-      - 'packages/dialtone-vue3/**/*.vue'
-      - 'packages/dialtone-vue3/**/*.stories.js'
-      - 'packages/dialtone-vue3/percy.config.{js,cjs}'
+      - 'packages/dialtone-vue/**/*.vue'
+      - 'packages/dialtone-vue/**/*.stories.js'
+      - 'packages/dialtone-vue/percy.config.{js,cjs}'
       - '!**/*.test.*js'
 
 env:
@@ -80,4 +80,4 @@ jobs:
         env:
           PERCY_TOKEN: ${{ secrets.PERCY_TOKEN }}
           PERCY_TARGET_BRANCH: ${{ github.base_ref }}
-        run: pnpm nx run --verbose dialtone-vue3:test:visual
+        run: pnpm nx run --verbose dialtone-vue:test:visual

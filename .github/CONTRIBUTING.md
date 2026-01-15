@@ -16,7 +16,7 @@ This contributing guide contains guidelines and processes that apply to all pack
 
 ## Dialtone Vue
 
-[CONTRIBUTING.md](../packages/dialtone-vue3/.github/CONTRIBUTING.md)
+[CONTRIBUTING.md](../packages/dialtone-vue/.github/CONTRIBUTING.md)
 
 ## Dialtone Icons
 
@@ -105,7 +105,7 @@ Any new components or updates to existing components require the following:
   - Test all projects
     - `nx run dialtone:test:all`
   - Test individual project
-    - `nx run dialtone-vue3:test`
+    - `nx run dialtone-vue:test`
     - `nx run eslint-plugin-dialtone:test`
     - `nx run stylelint-plugin-dialtone:test`
 
@@ -115,7 +115,7 @@ Any new components or updates to existing components require the following:
   - Lint individual project
     - `nx run dialtone-css:lint`
     - `nx run dialtone-documentation:lint`
-    - `nx run dialtone-vue3:lint`
+    - `nx run dialtone-vue:lint`
     - `nx run eslint-plugin-dialtone:lint`
     - `nx run stylelint-plugin-dialtone:lint`
 
@@ -126,10 +126,10 @@ Any new components or updates to existing components require the following:
     - `nx run dialtone-css:build`
     - `nx run dialtone-icons:build`
     - `nx run dialtone-tokens:build`
-    - `nx run dialtone-vue3:build`
+    - `nx run dialtone-vue:build`
 
 - Documentation builds locally.
-  - `nx run dialtone-vue3:build-storybook`
+  - `nx run dialtone-vue:build-storybook`
   - `nx run dialtone-documentation:build`
 
 ### How to Submit

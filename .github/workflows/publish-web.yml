@@ -14,7 +14,7 @@ on:
           - dialtone-emojis
           - dialtone-icons
           - dialtone-tokens
-          - dialtone-vue3
+          - dialtone-vue
           - eslint-plugin-dialtone
           - stylelint-plugin-dialtone
           - postcss-responsive-variations
@@ -68,8 +68,8 @@ jobs:
               - 'packages/dialtone-icons/package.json'
             dialtone-tokens:
               - 'packages/dialtone-tokens/package.json'
-            dialtone-vue3:
-              - 'packages/dialtone-vue3/package.json'
+            dialtone-vue:
+              - 'packages/dialtone-vue/package.json'
             eslint-plugin-dialtone:
               - 'packages/eslint-plugin-dialtone/package.json'
             stylelint-plugin-dialtone:
@@ -142,7 +142,7 @@ jobs:
           scope: "@dialpad"
 
       - name: Delay job to avoid npm rate limits
-        if: matrix.package == 'dialtone-vue3'
+        if: matrix.package == 'dialtone-vue'
         run: sleep 15s
         shell: bash
 
