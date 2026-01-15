@@ -1,10 +1,11 @@
 name: Send blog communications
 on:
-  push:
+  workflow_run:
+    workflows: ["Deploy"]
+    types:
+      - completed
     branches:
       - production
-    paths:
-      - 'apps/dialtone-documentation/docs/about/whats-new/posts/*.md'
 
 env:
   HUSKY: 0
@@ -17,12 +18,14 @@ jobs:
   added-posts:
     name: Get added posts
     runs-on: ubuntu-latest
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
     outputs:
       added_posts: ${{ steps.changed-files.outputs.added_files }}
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
         with:
+          ref: ${{ github.event.workflow_run.head_sha }}
           fetch-depth: 0
       - name: Get changed files
         id: changed-files
@@ -31,6 +34,7 @@ jobs:
           files: 'apps/dialtone-documentation/docs/about/whats-new/posts/*.md'
           json: true
           escape_json: false
+          sha: ${{ github.event.workflow_run.head_sha }}
       - name: List all added posts
         run: echo '${{ steps.changed-files.outputs.added_files }}'
 
@@ -51,6 +55,8 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.workflow_run.head_sha }}
 
       - name: Get link from file name
         id: get-post-url
@@ -98,14 +104,6 @@ jobs:
             echo EOF
           } >> $GITHUB_ENV;
 
-      - name: Wait for deployment to succeed
-        uses: lewagon/wait-on-check-action@v1.3.4
-        with:
-          ref: ${{ github.ref }}
-          check-name: 'Deploy sites'
-          repo-token: ${{ secrets.GITHUB_TOKEN }}
-          wait-interval: 10
-
       - id: auth
         name: Authenticate to Google Cloud
         uses: google-github-actions/auth@v2
@@ -142,6 +140,8 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.workflow_run.head_sha }}
 
       - name: Get link from file name
         id: get-post-url
@@ -153,14 +153,6 @@ jobs:
         id: get-heading
         run: |
           echo "BLOG_POST_HEADING=$(sed -n 's/^heading: *//p' $FILE_PATH)" >> $GITHUB_ENV
-
-      - name: Wait for deployment to succeed
-        uses: lewagon/wait-on-check-action@v1.3.4
-        with:
-          ref: ${{ github.ref }}
-          check-name: 'Deploy sites'
-          repo-token: ${{ secrets.GITHUB_TOKEN }}
-          wait-interval: 10
 
       - id: auth
         name: Authenticate to Google Cloud

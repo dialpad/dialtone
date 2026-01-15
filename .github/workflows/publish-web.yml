@@ -141,6 +141,12 @@ jobs:
           registry-url: "https://npm.pkg.github.com"
           scope: "@dialpad"
 
+      - name: Configure @dialpad scope for GitHub Packages
+        if: matrix.registry == 'GitHub'
+        run: |
+          # Set @dialpad scope to use GitHub Packages instead of npm
+          npm config set @dialpad:registry https://npm.pkg.github.com/
+
       - name: Delay job to avoid npm rate limits
         if: matrix.package == 'dialtone-vue'
         run: sleep 15s
