@@ -113,7 +113,7 @@ jobs:
           -e 's/$/\\n/g' \
           -e 's_(\[.*\])\(([^)]+)\)_\1(https://dialtone.dialpad.com\2)_g' \
           $FILE_PATH;
-          sed -i 10q $FILE_PATH;
+          sed -i -e '10q' $FILE_PATH;
           echo -e "... Read the full article: $POST_URL" >> $FILE_PATH;
           {
             echo 'MESSAGE_BODY<<EOF'
