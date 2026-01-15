@@ -6,6 +6,10 @@ on:
         description: 'Path to the blog post markdown file (e.g., apps/dialtone-documentation/docs/about/whats-new/posts/2026-1-14.md)'
         required: true
         type: string
+      test_email:
+        description: 'Optional: Send to this email address instead of the production list (for testing)'
+        required: false
+        type: string
   workflow_run:
     workflows: ["Deploy"]
     types:
@@ -67,7 +71,7 @@ jobs:
       matrix:
         files: ${{ fromJSON(needs.added-posts.outputs.added_posts) }}
     env:
-      TO_MAIL: dialtone-users@dialpad.com
+      TO_MAIL: ${{ github.event.inputs.test_email || 'dialtone-users@dialpad.com' }}
       FILE_PATH: ${{ matrix.files }}
       API_URL: https://us-central1-dp-dialtone-design-system.cloudfunctions.net/send-email
     steps:
@@ -93,13 +97,10 @@ jobs:
       # - Remove blog post component.
       # - Remove comments.
       # - Remove empty lines at the beginning of the file.
-      # - Escape quotes
-      # - Escape double quotes
-      # - Add new line escaped character at the end of every line
       # - Replace links paths for their absolute paths (prefixed by https://dialtone.dialpad.com).
       # - Ellipsis the article to the first 10 lines.
       # - Append the URL of the article at the end of the article.
-      # - Print the result to MESSAGE_BODY env variable removing the new lines to avoid issues with JSON
+      # - Store the result in MESSAGE_BODY env variable (jq will handle JSON escaping)
       - name: Process Markdown file
         run: |
           sed -i -E \
@@ -108,16 +109,13 @@ jobs:
           -e '/^<\/*BlogPost.*$/d' \
           -e '/^<!--.*$/d' \
           -e '/./,$!d' \
-          -e "s/'/'\\\''/g" \
-          -e 's/"/\\"/g' \
-          -e 's/$/\\n/g' \
           -e 's_(\[.*\])\(([^)]+)\)_\1(https://dialtone.dialpad.com\2)_g' \
           $FILE_PATH;
           sed -i -e '10q' $FILE_PATH;
-          echo -e "... Read the full article: $POST_URL" >> $FILE_PATH;
+          echo -e "\n... Read the full article: $POST_URL" >> $FILE_PATH;
           {
             echo 'MESSAGE_BODY<<EOF'
-            cat $FILE_PATH | tr -d '\n'
+            cat $FILE_PATH
             echo
             echo EOF
           } >> $GITHUB_ENV;
@@ -146,6 +144,7 @@ jobs:
   send-sms:
     name: Send SMS
     runs-on: ubuntu-latest
+    if: ${{ github.event.inputs.test_email == '' || github.event_name != 'workflow_dispatch' }}
     permissions:
       contents: read
       id-token: write
