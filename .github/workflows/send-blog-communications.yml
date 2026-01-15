@@ -133,14 +133,15 @@ jobs:
 
       - name: Send email
         run: |
+          jq -n \
+            --arg to "${{ env.TO_MAIL }}" \
+            --arg subject "[dialtone] New blog post: ${{ env.BLOG_POST_HEADING }}" \
+            --arg message "${{ env.MESSAGE_BODY }}" \
+            '{to: $to, subject: $subject, message: $message}' | \
           curl -m 70 -X POST ${{ env.API_URL }} \
-          -H "Authorization: bearer ${{ steps.auth.outputs.id_token }}" \
-          -H "Content-Type: application/json" \
-          -d '{
-            "to": "${{ env.TO_MAIL }}",
-            "subject": "[dialtone] New blog post: \"${{ env.BLOG_POST_HEADING }}\"",
-            "message": "${{ env.MESSAGE_BODY }}"
-          }'
+            -H "Authorization: bearer ${{ steps.auth.outputs.id_token }}" \
+            -H "Content-Type: application/json" \
+            -d @-
 
   send-sms:
     name: Send SMS
@@ -183,9 +184,10 @@ jobs:
 
       - name: Send sms
         run: |
+          jq -n \
+            --arg message "New blog post: ${{ env.BLOG_POST_HEADING }}. Read full article: ${{ env.POST_URL }}" \
+            '{message: $message}' | \
           curl -m 70 -X POST ${{ env.API_URL }} \
-          -H "Authorization: bearer ${{ steps.auth.outputs.id_token }}" \
-          -H "Content-Type: application/json" \
-          -d '{
-            "message": "New blog post: \"${{ env.BLOG_POST_HEADING }}\". Read full article: ${{ env.POST_URL }}"
-          }'
+            -H "Authorization: bearer ${{ steps.auth.outputs.id_token }}" \
+            -H "Content-Type: application/json" \
+            -d @-
