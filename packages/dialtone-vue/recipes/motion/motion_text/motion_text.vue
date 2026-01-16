@@ -486,8 +486,8 @@ export default {
     },
 
     /**
-     * Handle gradient animation end event
-     * This is the primary mechanism for detecting when the gradient-in animation completes
+     * Detect when gradient-in animation completes to enable removing extra DOM layer (span)
+     * The timing differs from completeAnimation() and this prevents the gradient from being removed too early
      */
     onGradientAnimationEnd () {
       if (this.animationMode !== 'gradient-in' || this.animationComplete) {
