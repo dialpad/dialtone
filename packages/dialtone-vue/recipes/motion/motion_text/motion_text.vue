@@ -65,7 +65,7 @@
               v-if="animationMode === 'gradient-in' && !animationComplete"
               class="dt-recipe-motion-text__gradient"
               aria-hidden="true"
-              @animationend="onGradientAnimationEnd"
+              @animationend="onGradientAnimationEnd(wordIdx)"
             >
               <template
                 v-for="(char, charIdx) in word.chars"
@@ -489,8 +489,14 @@ export default {
      * Detect when gradient-in animation completes to enable removing extra DOM layer (span)
      * The timing differs from completeAnimation() and this prevents the gradient from being removed too early
      */
-    onGradientAnimationEnd () {
+    onGradientAnimationEnd (wordIdx) {
       if (this.animationMode !== 'gradient-in' || this.animationComplete) {
+        return;
+      }
+
+      // Only mark as complete when the last word's gradient animation ends
+      const isLastWord = wordIdx === this.words.length - 1;
+      if (!isLastWord) {
         return;
       }
 

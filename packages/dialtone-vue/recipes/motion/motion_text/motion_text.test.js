@@ -354,16 +354,18 @@ describe('DtRecipeMotionText Tests', () => {
       wrapper.vm.start();
       await wrapper.vm.$nextTick();
 
-      // Advance timers to reveal at least one character (so gradient layer renders)
-      vi.advanceTimersByTime(100);
+      // Advance timers to reveal all words (so all gradient layers render)
+      vi.advanceTimersByTime(10000);
       await wrapper.vm.$nextTick();
 
-      // Find the gradient layer element
-      const gradientLayer = wrapper.find('.dt-recipe-motion-text__gradient');
-      expect(gradientLayer.exists()).toBe(true);
+      // Find all gradient layer elements
+      const gradientLayerWords = wrapper.findAll('.dt-recipe-motion-text__gradient');
+      expect(gradientLayerWords.length).toBeGreaterThan(0);
 
-      // Manually trigger the animationend event (simulating CSS animation completion)
-      gradientLayer.element.dispatchEvent(new Event('animationend'));
+      // Manually trigger the animationend event on the last gradient layer
+      // (simulating CSS animation completion - only last word triggers complete)
+      const lastGradientLayer = gradientLayerWords[gradientLayerWords.length - 1];
+      lastGradientLayer.element.dispatchEvent(new Event('animationend'));
       await wrapper.vm.$nextTick();
 
       expect(wrapper.emitted('complete')).toBeTruthy();
