@@ -11,18 +11,9 @@
       "isBackground": true
     },
     {
-      "label": "start: dialtone vue 2 storybook",
-      "type": "shell",
-      "command": "pnpm nx run dialtone-vue2:start",
-      "problemMatcher": [
-        "$vite"
-      ],
-      "isBackground": true
-    },
-    {
       "label": "start: dialtone vue 3 storybook",
       "type": "shell",
-      "command": "pnpm nx run dialtone-vue3:start",
+      "command": "pnpm nx run dialtone-vue:start",
       "problemMatcher": [
         "$vite"
       ],

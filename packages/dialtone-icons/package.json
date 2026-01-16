@@ -1,32 +1,12 @@
 {
   "name": "@dialpad/dialtone-icons",
-  "version": "4.47.0",
+  "version": "4.47.2",
   "description": "Dialtone icon library",
   "files": [
     "dist",
-    "vue2/dist",
     "vue3/dist"
   ],
   "exports": {
-    "./vue2": {
-      "types": "./vue2/dist/types/index.d.ts",
-      "import": "./vue2/dist/dialtone-icons.js",
-      "require": "./vue2/dist/dialtone-icons.cjs"
-    },
-    "./vue2/*": {
-      "types": [
-        "./vue2/dist/types/src/icons/*.vue.d.ts",
-        "./vue2/dist/types/src/illustrations/*.vue.d.ts"
-      ],
-      "import": [
-        "./vue2/dist/components/icons/*.js",
-        "./vue2/dist/components/illustrations/*.js"
-      ],
-      "require": [
-        "./vue2/dist/components/icons/*.cjs",
-        "./vue2/dist/components/illustrations/*.cjs"
-      ]
-    },
     "./vue3": {
       "types": "./vue3/dist/types/index.d.ts",
       "import": "./vue3/dist/dialtone-icons.js",

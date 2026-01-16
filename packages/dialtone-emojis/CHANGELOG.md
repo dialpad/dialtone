@@ -1,3 +1,5 @@
+## [1.2.4](https://github.com/dialpad/dialtone/compare/dialtone-emojis/v1.2.3...dialtone-emojis/v1.2.4) (2026-01-13)
+
 ## [1.2.3](https://github.com/dialpad/dialtone/compare/dialtone-emojis/v1.2.2...dialtone-emojis/v1.2.3) (2025-10-06)
 
 ## [1.2.2](https://github.com/dialpad/dialtone/compare/dialtone-emojis/v1.2.1...dialtone-emojis/v1.2.2) (2025-08-12)

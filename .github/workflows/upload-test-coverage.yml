@@ -27,7 +27,7 @@ jobs:
         uses: ./.github/actions/setup-environment
 
       - name: Run test coverage for Vue3
-        run: pnpm nx run dialtone-vue3:test:coverage
+        run: pnpm nx run dialtone-vue:test:coverage
 
       - id: auth
         name: Authenticate to Google Cloud

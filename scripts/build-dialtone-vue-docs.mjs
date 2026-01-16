@@ -6,7 +6,6 @@ import { getValidFileList } from '../common/utils/server.mjs';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
-const version = process.argv[2];
 
 /**
  * Deprecated components metadata
@@ -39,13 +38,8 @@ const deprecatedComponents = {
   },
 };
 
-if (!version) {
-  console.info(`Usage: build-dialtone-vue-docs.mjs 2 or build-dialtone-vue-docs.mjs 3`);
-  process.exit(-1);
-}
-
-const distPath = join(__dirname, `../packages/dialtone-vue${version}/dist`);
-const dialtoneVueRootFolder = join(__dirname, `../packages/dialtone-vue${version}`);
+const distPath = join(__dirname, `../packages/dialtone-vue/dist`);
+const dialtoneVueRootFolder = join(__dirname, `../packages/dialtone-vue`);
 const outputPath = `${distPath}/component-documentation.json`;
 const fileList = [
   ...getValidFileList(dialtoneVueRootFolder + '/components'),
@@ -67,7 +61,7 @@ function writeDocumentationFile (data) {
 
 async function parseDocumentation (fileList) {
   const config = {
-    alias: { '@': join(__dirname, `../packages/dialtone-vue${version}/`) },
+    alias: { '@': join(__dirname, `../packages/dialtone-vue/`) },
   };
   const parsedDocumentationPromises = [];
 

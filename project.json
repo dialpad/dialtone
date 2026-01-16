@@ -3,8 +3,7 @@
   "implicitDependencies": [
     "dialtone-css",
     "dialtone-tokens",
-    "dialtone-vue2",
-    "dialtone-vue3"
+    "dialtone-vue"
   ],
   "targets": {
     "build": {
@@ -19,14 +18,12 @@
       "inputs": [
         "{workspaceRoot}/packages/dialtone-css/dist",
         "{workspaceRoot}/packages/dialtone-tokens/dist",
-        "{workspaceRoot}/packages/dialtone-vue2/dist",
-        "{workspaceRoot}/packages/dialtone-vue3/dist",
+        "{workspaceRoot}/packages/dialtone-vue/dist",
         "{workspaceRoot}/gulpfile.cjs"
       ],
       "outputs": [
         "{workspaceRoot}/dist/css",
         "{workspaceRoot}/dist/tokens",
-        "{workspaceRoot}/dist/vue2",
         "{workspaceRoot}/dist/vue3"
       ]
     },

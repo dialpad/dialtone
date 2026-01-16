@@ -1,3 +1,39 @@
+# [9.155.0](https://github.com/dialpad/dialtone/compare/dialtone/v9.154.0...dialtone/v9.155.0) (2026-01-15)
+
+
+### Bug Fixes
+
+* **Feed Item Row:** DLT-2810 avoid rendering attanchment if slot is empty ([#1021](https://github.com/dialpad/dialtone/issues/1021)) ([5e6dffb](https://github.com/dialpad/dialtone/commit/5e6dffb2525f412992aa0005bdb1a8df32f690b8))
+* **Rich Text Editor:** DLT-2770 spacing issue on copy ([#1017](https://github.com/dialpad/dialtone/issues/1017)) ([a62233b](https://github.com/dialpad/dialtone/commit/a62233b35bbbb7e45bb09b34695d64d8a44488ee))
+* **Split Button:** NO-JIRA fix label padding ([#1019](https://github.com/dialpad/dialtone/issues/1019)) ([ba54d8f](https://github.com/dialpad/dialtone/commit/ba54d8f08db4a28dd629dff438a6125a76013dda))
+
+
+### Documentation
+
+* DLT-2893 make vue3 latest, update docs ([#1026](https://github.com/dialpad/dialtone/issues/1026)) ([52bce55](https://github.com/dialpad/dialtone/commit/52bce555012eddb5a4c64faddf5ca906659ea1f6))
+
+
+### Features
+
+* **Split Button:** DLT-2869 add alpha and omega disabled attributes ([#1025](https://github.com/dialpad/dialtone/issues/1025)) ([9a27fa9](https://github.com/dialpad/dialtone/commit/9a27fa96c8af603434a1029e5b7c5ee531a2fa8d))
+
+# [9.154.0](https://github.com/dialpad/dialtone/compare/dialtone/v9.153.9...dialtone/v9.154.0) (2026-01-13)
+
+
+### Bug Fixes
+
+* **Motion Text:** DLT-2804 motion-text recipe letter-spacing fixes ([#1012](https://github.com/dialpad/dialtone/issues/1012)) ([5a3bad1](https://github.com/dialpad/dialtone/commit/5a3bad19f391c6ff8b4d8cf071c063cde7f48815))
+
+
+### Code Refactoring
+
+* **Stack:** DLT-2886 update justify prop values ([#1016](https://github.com/dialpad/dialtone/issues/1016)) ([c01db3d](https://github.com/dialpad/dialtone/commit/c01db3dacc74bc82224726b070312494458aaf2b))
+
+
+### Features
+
+* **Rich Text Editor:** DP-171112 emit event for channel click ([#1014](https://github.com/dialpad/dialtone/issues/1014)) ([978666f](https://github.com/dialpad/dialtone/commit/978666fc9fa1f08a86361ba58a9a3e73b450708e))
+
 ## [9.153.9](https://github.com/dialpad/dialtone/compare/dialtone/v9.153.8...dialtone/v9.153.9) (2026-01-08)
 
 
