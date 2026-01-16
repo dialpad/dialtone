@@ -292,6 +292,13 @@
 
 .dt-recipe-motion-text--paused {
   animation-play-state: paused !important;
+
+  // Apply paused state to all child elements with animations
+  .dt-recipe-motion-text__gradient,
+  .dt-recipe-motion-text__char,
+  .dt-recipe-motion-text__word {
+    animation-play-state: paused !important;
+  }
 }
 
 .dt-recipe-motion-text--looped {
