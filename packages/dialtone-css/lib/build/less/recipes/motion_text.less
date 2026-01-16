@@ -116,16 +116,6 @@
 //  ----------------------------------------------------------------------------
 
 // Gradient-in mode animations
-@keyframes dt-recipe-motion-text-gradient-in-word-reveal {
-  from {
-    --dt-recipe-motion-text-mask-pos: 100%;
-  }
-
-  to {
-    --dt-recipe-motion-text-mask-pos: 0%;
-  }
-}
-
 @keyframes dt-recipe-motion-text-gradient-in-base-reveal {
   from {
     color: var(--dt-color-neutral-transparent);
@@ -133,6 +123,16 @@
 
   to {
     color: inherit;
+  }
+}
+
+@keyframes dt-recipe-motion-text-gradient-in-word-reveal {
+  from {
+    --dt-recipe-motion-text-mask-pos: 100%;
+  }
+
+  to {
+    --dt-recipe-motion-text-mask-pos: 0%;
   }
 }
 
@@ -186,13 +186,11 @@
 //  $   TRANSITION CLASSES - GRADIENT IN
 //  ----------------------------------------------------------------------------
 
-// Character animation during gradient-in
 .dt-recipe-motion-text--gradient-in.dt-recipe-motion-text--animating .dt-recipe-motion-text__char {
   color: var(--dt-color-neutral-transparent);
   animation: dt-recipe-motion-text-gradient-in-base-reveal calc(var(--dt-recipe-motion-text-word-duration) * 1.5) var(--ttf-out-quint) forwards;
 }
 
-// Word-level Vue Transition classes
 .dt-recipe-motion-text-word-gradient-in-enter-active {
   animation: dt-recipe-motion-text-gradient-in-word-reveal calc(var(--dt-recipe-motion-text-word-duration) * 1.5) var(--ttf-out-quint);
 }
