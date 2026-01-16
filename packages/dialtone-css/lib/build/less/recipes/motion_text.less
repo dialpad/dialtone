@@ -87,8 +87,8 @@
 
 // Word characters transition from transparent to visible during animation
 .dt-recipe-motion-text--gradient-in .dt-recipe-motion-text__word[data-animating="true"] > .dt-recipe-motion-text__char {
-  color: transparent;
-  animation: dt-recipe-motion-text-gradient-in-layer-reveal calc(var(--dt-recipe-motion-text-word-duration) * 1.5) var(--ttf-out-quint) forwards;
+  color: var(--dt-color-neutral-transparent);
+  animation: dt-recipe-motion-text-gradient-in-base-reveal calc(var(--dt-recipe-motion-text-word-duration) * 1.5) var(--ttf-out-quint) forwards;
 }
 
 .dt-recipe-motion-text--gradient-in .dt-recipe-motion-text__word[data-animating="false"] > .dt-recipe-motion-text__char {
@@ -100,7 +100,7 @@
   position: absolute;
   top: 0;
   left: 0;
-  z-index: 2;
+  z-index: var(--zi-base1);
   display: inline;
   font-size: inherit;
   line-height: inherit;
@@ -113,7 +113,7 @@
   pointer-events: none;
   -webkit-text-fill-color: transparent;
   mask: var(--dt-recipe-motion-text-gradient);
-  mask-position: var(--dt-recipe-motion-text-mask-pos) 0%;
+  mask-position: var(--dt-recipe-motion-text-mask-pos) var(--dt-size-0-percent);
 }
 
 //  ============================================================================
@@ -121,16 +121,6 @@
 //  ----------------------------------------------------------------------------
 
 // Gradient-in mode animations
-@keyframes dt-recipe-motion-text-gradient-in-char-appear {
-  from {
-    opacity: 0;
-  }
-
-  to {
-    opacity: 1;
-  }
-}
-
 @keyframes dt-recipe-motion-text-gradient-in-word-reveal {
   from {
     --dt-recipe-motion-text-mask-pos: 100%;
@@ -141,16 +131,12 @@
   }
 }
 
-@keyframes dt-recipe-motion-text-gradient-in-layer-reveal {
-  0%, 10% {
-    color: transparent;
+@keyframes dt-recipe-motion-text-gradient-in-base-reveal {
+  from {
+    color: var(--dt-color-neutral-transparent);
   }
 
-  50% {
-    color: inherit;
-  }
-
-  100% {
+  to {
     color: inherit;
   }
 }
