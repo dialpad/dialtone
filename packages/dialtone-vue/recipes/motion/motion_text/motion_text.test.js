@@ -55,10 +55,7 @@ describe('DtRecipeMotionText Tests', () => {
         // Skip to end to make all text visible
         wrapper.vm.skipToEnd();
         await wrapper.vm.$nextTick();
-        // Query the word elements (contain characters directly)
-        const wordElements = wrapper.findAll('.dt-recipe-motion-text__word');
-        const wordText = wordElements.map(w => w.text()).join(' ');
-        expect(wordText).toContain('Test text content');
+        expect(wrapper.text()).toContain('Test text content');
       });
 
       it('should have base class', () => {
