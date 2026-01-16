@@ -85,21 +85,16 @@
   white-space: nowrap;
 }
 
-// Word characters transition from transparent to visible during animation
-.dt-recipe-motion-text--gradient-in .dt-recipe-motion-text__word[data-animating="true"] > .dt-recipe-motion-text__char {
-  color: var(--dt-color-neutral-transparent);
-  animation: dt-recipe-motion-text-gradient-in-base-reveal calc(var(--dt-recipe-motion-text-word-duration) * 1.5) var(--ttf-out-quint) forwards;
-}
-
-.dt-recipe-motion-text--gradient-in .dt-recipe-motion-text__word[data-animating="false"] > .dt-recipe-motion-text__char {
+// Gradient-in mode: Character color when not animating
+.dt-recipe-motion-text--gradient-in:not(.dt-recipe-motion-text--animating) .dt-recipe-motion-text__char {
   color: inherit;
 }
 
 // Gradient layer
 .dt-recipe-motion-text--gradient-in .dt-recipe-motion-text__gradient {
   position: absolute;
-  top: 0;
-  left: 0;
+  top: var(--dt-size-0);
+  left: var(--dt-size-0);
   z-index: var(--zi-base1);
   display: inline;
   font-size: inherit;
@@ -111,7 +106,7 @@
   background-clip: text;
   animation: dt-recipe-motion-text-gradient-in-word-reveal calc(var(--dt-recipe-motion-text-word-duration) * 1.5) var(--ttf-out-quint);
   pointer-events: none;
-  -webkit-text-fill-color: transparent;
+  -webkit-text-fill-color: var(--dt-color-neutral-transparent);
   mask: var(--dt-recipe-motion-text-gradient);
   mask-position: var(--dt-recipe-motion-text-mask-pos) var(--dt-size-0-percent);
 }
@@ -190,6 +185,14 @@
 //  ============================================================================
 //  $   TRANSITION CLASSES - GRADIENT IN
 //  ----------------------------------------------------------------------------
+
+// Character animation during gradient-in
+.dt-recipe-motion-text--gradient-in.dt-recipe-motion-text--animating .dt-recipe-motion-text__char {
+  color: var(--dt-color-neutral-transparent);
+  animation: dt-recipe-motion-text-gradient-in-base-reveal calc(var(--dt-recipe-motion-text-word-duration) * 1.5) var(--ttf-out-quint) forwards;
+}
+
+// Word-level Vue Transition classes
 .dt-recipe-motion-text-word-gradient-in-enter-active {
   animation: dt-recipe-motion-text-gradient-in-word-reveal calc(var(--dt-recipe-motion-text-word-duration) * 1.5) var(--ttf-out-quint);
 }
