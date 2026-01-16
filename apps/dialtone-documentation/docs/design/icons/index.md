@@ -121,11 +121,11 @@ The icon size is defined based on the context and text size next to it. These ar
     </dt-stack>
     <dt-stack direction="row" gap="300" align="center">
       <dt-icon name="food" size="600" />
-      <dt-text kind="headline" size="xxl">600 with XXL headline</dt-text>
+      <dt-text kind="headline" size="2xl">600 with 2XL headline</dt-text>
     </dt-stack>
     <dt-stack direction="row" gap="300" align="center">
       <dt-icon name="food" size="700" />
-      <dt-text kind="headline" size="xxxl">700 with XXXL headline</dt-text>
+      <dt-text kind="headline" size="3xl">700 with 3XL headline</dt-text>
     </dt-stack>
   </dt-stack>
 </dt-stack>

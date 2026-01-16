@@ -46,10 +46,10 @@ const splitCompositionTokenIntoArray = (value) => {
 
 /**
  * Sort text style tokens: text tokens first, then typography tokens,
- * each sorted by type (headline, body, label, code, etc.) then by size (xxxl -> xs)
+ * each sorted by type (headline, body, label, code, etc.) then by size (3xl -> xs)
  */
 const TYPE_ORDER = ['headline', 'body', 'label', 'code', 'helper', 'button', 'inputs'];
-const SIZE_ORDER = ['xxxl', 'xxl', 'xl', 'lg', 'md', 'sm', 'xs'];
+const SIZE_ORDER = ['3xl', '2xl', 'xl', 'lg', 'md', 'sm', 'xs'];
 
 const sortFontStyleTokens = (a, b) => {
   const aName = a.name || a.exampleName || '';

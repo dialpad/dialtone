@@ -8,7 +8,7 @@
       class="hero__inner-wrapper d-mx-auto d-wmx1340 d-pl24 d-pr32"
     >
       <dt-stack justify="center" class="hero__content">
-        <dt-text as="h1" kind="headline" size="xxxl" strength="normal" class="d-mb12">
+        <dt-text as="h1" kind="headline" size="3xl" strength="normal" class="d-mb12">
           Improve your UI's reception with Dialtone
         </dt-text>
         <dt-text as="p" kind="body" size="lg" tone="secondary" class="d-mb16">
@@ -68,7 +68,7 @@
         <router-link class="d-fc-primary h:d-td-underline d-td-none d-bar8 d-pt4" to="/design/">
           <dt-stack gap="600">
             <svg-loader class="d-h96" name="home-design-language" />
-            <dt-text as="h2" kind="headline" size="xxl" strength="normal">
+            <dt-text as="h2" kind="headline" size="2xl" strength="normal">
               Design Language
             </dt-text>
           </dt-stack>
@@ -86,7 +86,7 @@
         <router-link class="d-fc-primary h:d-td-underline d-td-none d-bar8 d-pt4" to="/components/">
           <dt-stack gap="600">
             <svg-loader class="d-h96" name="home-components" />
-            <dt-text as="h2" kind="headline" size="xxl" strength="normal">
+            <dt-text as="h2" kind="headline" size="2xl" strength="normal">
               Component
             </dt-text>
           </dt-stack>
@@ -107,7 +107,7 @@
         <router-link class="d-fc-primary h:d-td-underline d-td-none d-bar8 d-pt4" to="/utilities/">
           <dt-stack gap="600">
             <svg-loader class="d-h96" name="home-utilities" />
-            <dt-text as="h2" kind="headline" size="xxl" strength="normal">
+            <dt-text as="h2" kind="headline" size="2xl" strength="normal">
               Utilities
             </dt-text>
           </dt-stack>
@@ -125,7 +125,7 @@
         <router-link class="d-fc-primary h:d-td-underline d-td-none d-bar8 d-pt4" to="/guides/">
           <dt-stack gap="600">
             <svg-loader class="d-h96" name="home-guides" />
-            <dt-text as="h2" kind="headline" size="xxl" strength="normal">
+            <dt-text as="h2" kind="headline" size="2xl" strength="normal">
               Guides
             </dt-text>
           </dt-stack>

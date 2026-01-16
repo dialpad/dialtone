@@ -3,8 +3,8 @@
     {
       "category": "headline",
       "size": [
-        "xxxl",
-        "xxl",
+        "3xl",
+        "2xl",
         "xl",
         "lg",
         "md",
@@ -50,12 +50,12 @@
   ],
   "typographyStyles": [
     {
-      "var": "d-text-headline--xxxl",
-      "output": "font: var(--dt-text-headline-xxxl)"
+      "var": "d-text-headline--3xl",
+      "output": "font: var(--dt-text-headline-3xl)"
     },
     {
-      "var": "d-text-headline--xxl",
-      "output": "font: var(--dt-text-headline-xxl)"
+      "var": "d-text-headline--2xl",
+      "output": "font: var(--dt-text-headline-2xl)"
     },
     {
       "var": "d-text-headline--xl",

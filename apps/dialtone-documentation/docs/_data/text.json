@@ -6,14 +6,14 @@
       "description": "Text component base class."
     },
     {
-      "class": "d-text-headline--xxxl",
+      "class": "d-text-headline--3xl",
       "applies": ".d-text",
-      "description": "Headline style, size xxxl."
+      "description": "Headline style, size 3xl."
     },
     {
-      "class": "d-text-headline--xxl",
+      "class": "d-text-headline--2xl",
       "applies": ".d-text",
-      "description": "Headline style, size xxl."
+      "description": "Headline style, size 2xl."
     },
     {
       "class": "d-text-headline--xl",

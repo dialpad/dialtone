@@ -104,10 +104,10 @@ All kinds support `size` prop, but not all sizes are available for each kind. Wh
           <dt-text as="code" kind="code" class="d-bgc-transparent">xl</dt-text>
         </th>
         <th class="d-ta-center">
-          <dt-text as="code" kind="code" class="d-bgc-transparent">xxl</dt-text>
+          <dt-text as="code" kind="code" class="d-bgc-transparent">2xl</dt-text>
         </th>
         <th class="d-ta-center">
-          <dt-text as="code" kind="code" class="d-bgc-transparent">xxxl</dt-text>
+          <dt-text as="code" kind="code" class="d-bgc-transparent">3xl</dt-text>
         </th>
       </tr>
       <tr class="d-va-baseline">
@@ -130,10 +130,10 @@ All kinds support `size` prop, but not all sizes are available for each kind. Wh
           <dt-text kind="headline" as="h2" size="xl">Text</dt-text>
         </td>
         <td class="d-ta-center">
-          <dt-text kind="headline" as="h2" size="xxl">Text</dt-text>
+          <dt-text kind="headline" as="h2" size="2xl">Text</dt-text>
         </td>
         <td class="d-ta-center">
-          <dt-text kind="headline" as="h2" size="xxxl">Text</dt-text>
+          <dt-text kind="headline" as="h2" size="3xl">Text</dt-text>
         </td>
       </tr>
       <tr class="d-va-baseline">
@@ -320,7 +320,7 @@ Use `as` to declare the underlying HTML tag that the component should render, in
 <code-well-header>
   <dt-stack class="d-w100p" gap="500">
     <dt-stack gap="400">
-      <dt-text kind="headline" as="h1" size="xxl">The Complete Agentic AI Platform</dt-text>
+      <dt-text kind="headline" as="h1" size="2xl">The Complete Agentic AI Platform</dt-text>
       <dt-text kind="body" as="p" size="lg">Our AI Agents come equipped with the core skills businesses need to deliver seamless customer experiences.</dt-text>
     </dt-stack>
     <dt-stack :direction="{ 'default': 'column', 'md': 'row' }" gap="500" class="d-ai-flex-start">
@@ -342,7 +342,7 @@ Use `as` to declare the underlying HTML tag that the component should render, in
 
 <code-example-tabs
 vueCode='
-<dt-text kind="headline" as="h1" size="xxl">...</dt-text>
+<dt-text kind="headline" as="h1" size="2xl">...</dt-text>
 <dt-text kind="body" as="p" size="lg">...</dt-text>
 <dt-text kind="headline" as="h2" size="xl">...</dt-text>
 <dt-text kind="body" as="p">...</dt-text>
