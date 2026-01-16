@@ -71,7 +71,7 @@ export default {
     /**
      * Size variant within the selected `kind`. Falls back to `md` if unsupported.
      * Headline supports all sizes; body/label/code support lg, md, sm, xs.
-     * @values xxxl, xxl, xl, lg, md, sm, xs
+     * @values 3xl, 2xl, xl, lg, md, sm, xs
      */
     size: {
       type: String,
@@ -270,7 +270,7 @@ export default {
       let resolvedSize = requestedSize;
 
       if (!allowedSizes.includes(requestedSize)) {
-        // Headline-only sizes (xxxl, xxl, xl) throw an error when used with incompatible kinds
+        // Headline-only sizes (3xl, 2xl, xl) throw an error when used with incompatible kinds
         if (TEXT_HEADLINE_ONLY_SIZES.includes(requestedSize)) {
           throw new Error(
             `[DtText] size="${requestedSize}" is only valid for kind="headline". ` +

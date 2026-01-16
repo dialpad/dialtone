@@ -6,14 +6,14 @@ export const TEXT_KIND_MODIFIERS = {
 };
 
 export const TEXT_SIZE_MODIFIERS = {
-  headline: ['xxxl', 'xxl', 'xl', 'lg', 'md', 'sm', 'xs'],
+  headline: ['3xl', '2xl', 'xl', 'lg', 'md', 'sm', 'xs'],
   body: ['lg', 'md', 'sm', 'xs'],
   label: ['lg', 'md', 'sm', 'xs'],
   code: ['lg', 'md', 'sm', 'xs'],
 };
 
 // Sizes that are only valid for headline kind - using these with other kinds throws an error
-export const TEXT_HEADLINE_ONLY_SIZES = ['xxxl', 'xxl', 'xl'];
+export const TEXT_HEADLINE_ONLY_SIZES = ['3xl', '2xl', 'xl'];
 
 import TEXT_TONE_TOKENS from './text_tone_tokens.js';
 export { TEXT_TONE_TOKENS };
