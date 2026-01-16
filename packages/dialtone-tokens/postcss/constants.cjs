@@ -58,8 +58,8 @@ module.exports = {
       'code',
     ].join('|'),
     TEXT_SIZES: [
-      'xxxl',
-      'xxl',
+      '3xl',
+      '2xl',
       'xl',
       'lg',
       'md',

@@ -3076,7 +3076,7 @@
   },
   "text": {
     "headline": {
-      "xxxl": {
+      "3xl": {
         "value": {
           "fontFamily": "{font.family.body}",
           "fontWeight": "{font.weight.bold}",
@@ -3085,7 +3085,7 @@
         },
         "type": "typography"
       },
-      "xxl": {
+      "2xl": {
         "value": {
           "fontFamily": "{font.family.body}",
           "fontWeight": "{font.weight.bold}",
